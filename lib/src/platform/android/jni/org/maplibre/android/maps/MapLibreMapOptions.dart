@@ -1266,6 +1266,139 @@ class MapLibreMapOptions extends jni$_.JObject {
     ).object<MapLibreMapOptions>(const $MapLibreMapOptions$Type());
   }
 
+  static final _id_actionJournalEnabled = _class.instanceMethodId(
+    r'actionJournalEnabled',
+    r'(Z)Lorg/maplibre/android/maps/MapLibreMapOptions;',
+  );
+
+  static final _actionJournalEnabled =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
+
+  /// from: `public org.maplibre.android.maps.MapLibreMapOptions actionJournalEnabled(boolean z)`
+  /// The returned object must be released after use, by calling the [release] method.
+  MapLibreMapOptions actionJournalEnabled(bool z) {
+    return _actionJournalEnabled(
+      reference.pointer,
+      _id_actionJournalEnabled as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).object<MapLibreMapOptions>(const $MapLibreMapOptions$Type());
+  }
+
+  static final _id_actionJournalPath = _class.instanceMethodId(
+    r'actionJournalPath',
+    r'(Ljava/lang/String;)Lorg/maplibre/android/maps/MapLibreMapOptions;',
+  );
+
+  static final _actionJournalPath =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public org.maplibre.android.maps.MapLibreMapOptions actionJournalPath(java.lang.String string)`
+  /// The returned object must be released after use, by calling the [release] method.
+  MapLibreMapOptions actionJournalPath(jni$_.JString string) {
+    final _$string = string.reference;
+    return _actionJournalPath(
+      reference.pointer,
+      _id_actionJournalPath as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).object<MapLibreMapOptions>(const $MapLibreMapOptions$Type());
+  }
+
+  static final _id_actionJournalLogFileSize = _class.instanceMethodId(
+    r'actionJournalLogFileSize',
+    r'(J)Lorg/maplibre/android/maps/MapLibreMapOptions;',
+  );
+
+  static final _actionJournalLogFileSize =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int64,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
+
+  /// from: `public org.maplibre.android.maps.MapLibreMapOptions actionJournalLogFileSize(long j)`
+  /// The returned object must be released after use, by calling the [release] method.
+  MapLibreMapOptions actionJournalLogFileSize(int j) {
+    return _actionJournalLogFileSize(
+      reference.pointer,
+      _id_actionJournalLogFileSize as jni$_.JMethodIDPtr,
+      j,
+    ).object<MapLibreMapOptions>(const $MapLibreMapOptions$Type());
+  }
+
+  static final _id_actionJournalLogFileCount = _class.instanceMethodId(
+    r'actionJournalLogFileCount',
+    r'(J)Lorg/maplibre/android/maps/MapLibreMapOptions;',
+  );
+
+  static final _actionJournalLogFileCount =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int64,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
+
+  /// from: `public org.maplibre.android.maps.MapLibreMapOptions actionJournalLogFileCount(long j)`
+  /// The returned object must be released after use, by calling the [release] method.
+  MapLibreMapOptions actionJournalLogFileCount(int j) {
+    return _actionJournalLogFileCount(
+      reference.pointer,
+      _id_actionJournalLogFileCount as jni$_.JMethodIDPtr,
+      j,
+    ).object<MapLibreMapOptions>(const $MapLibreMapOptions$Type());
+  }
+
   static final _id_localIdeographFontFamilyEnabled = _class.instanceMethodId(
     r'localIdeographFontFamilyEnabled',
     r'(Z)Lorg/maplibre/android/maps/MapLibreMapOptions;',
@@ -1487,6 +1620,123 @@ class MapLibreMapOptions extends jni$_.JObject {
       reference.pointer,
       _id_getCrossSourceCollisions as jni$_.JMethodIDPtr,
     ).boolean;
+  }
+
+  static final _id_getActionJournalEnabled = _class.instanceMethodId(
+    r'getActionJournalEnabled',
+    r'()Z',
+  );
+
+  static final _getActionJournalEnabled =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public boolean getActionJournalEnabled()`
+  bool getActionJournalEnabled() {
+    return _getActionJournalEnabled(
+      reference.pointer,
+      _id_getActionJournalEnabled as jni$_.JMethodIDPtr,
+    ).boolean;
+  }
+
+  static final _id_getActionJournalPath = _class.instanceMethodId(
+    r'getActionJournalPath',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getActionJournalPath =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public java.lang.String getActionJournalPath()`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JString? getActionJournalPath() {
+    return _getActionJournalPath(
+      reference.pointer,
+      _id_getActionJournalPath as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
+  }
+
+  static final _id_getActionJournalLogFileSize = _class.instanceMethodId(
+    r'getActionJournalLogFileSize',
+    r'()J',
+  );
+
+  static final _getActionJournalLogFileSize =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallLongMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public long getActionJournalLogFileSize()`
+  int getActionJournalLogFileSize() {
+    return _getActionJournalLogFileSize(
+      reference.pointer,
+      _id_getActionJournalLogFileSize as jni$_.JMethodIDPtr,
+    ).long;
+  }
+
+  static final _id_getActionJournalLogFileCount = _class.instanceMethodId(
+    r'getActionJournalLogFileCount',
+    r'()J',
+  );
+
+  static final _getActionJournalLogFileCount =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallLongMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public long getActionJournalLogFileCount()`
+  int getActionJournalLogFileCount() {
+    return _getActionJournalLogFileCount(
+      reference.pointer,
+      _id_getActionJournalLogFileCount as jni$_.JMethodIDPtr,
+    ).long;
   }
 
   static final _id_renderSurfaceOnTop = _class.instanceMethodId(

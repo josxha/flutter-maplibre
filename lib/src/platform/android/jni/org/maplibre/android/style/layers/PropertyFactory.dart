@@ -10464,6 +10464,86 @@ class PropertyFactory extends jni$_.JObject {
     );
   }
 
+  static final _id_symbolScreenSpace = _class.staticMethodId(
+    r'symbolScreenSpace',
+    r'(Ljava/lang/Boolean;)Lorg/maplibre/android/style/layers/PropertyValue;',
+  );
+
+  static final _symbolScreenSpace =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `static public org.maplibre.android.style.layers.PropertyValue<java.lang.Boolean> symbolScreenSpace(java.lang.Boolean boolean)`
+  /// The returned object must be released after use, by calling the [release] method.
+  static propertyvalue$_.PropertyValue<jni$_.JBoolean?>? symbolScreenSpace(
+    jni$_.JBoolean? boolean,
+  ) {
+    final _$boolean = boolean?.reference ?? jni$_.jNullReference;
+    return _symbolScreenSpace(
+      _class.reference.pointer,
+      _id_symbolScreenSpace as jni$_.JMethodIDPtr,
+      _$boolean.pointer,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JBoolean?>?>(
+      const propertyvalue$_.$PropertyValue$NullableType<jni$_.JBoolean?>(
+        jni$_.JBooleanNullableType(),
+      ),
+    );
+  }
+
+  static final _id_symbolScreenSpace$1 = _class.staticMethodId(
+    r'symbolScreenSpace',
+    r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
+  );
+
+  static final _symbolScreenSpace$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `static public org.maplibre.android.style.layers.PropertyValue<org.maplibre.android.style.expressions.Expression> symbolScreenSpace(org.maplibre.android.style.expressions.Expression expression)`
+  /// The returned object must be released after use, by calling the [release] method.
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? symbolScreenSpace$1(
+    jni$_.JObject? expression,
+  ) {
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _symbolScreenSpace$1(
+      _class.reference.pointer,
+      _id_symbolScreenSpace$1 as jni$_.JMethodIDPtr,
+      _$expression.pointer,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+      const propertyvalue$_.$PropertyValue$NullableType<jni$_.JObject?>(
+        jni$_.JObjectNullableType(),
+      ),
+    );
+  }
+
   static final _id_circleSortKey = _class.staticMethodId(
     r'circleSortKey',
     r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',

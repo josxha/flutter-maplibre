@@ -5901,6 +5901,67 @@ class MapLibreMap extends jni$_.JObject {
     ).check();
   }
 
+  static final _id_isRenderingStatsViewEnabled = _class.instanceMethodId(
+    r'isRenderingStatsViewEnabled',
+    r'()Z',
+  );
+
+  static final _isRenderingStatsViewEnabled =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public boolean isRenderingStatsViewEnabled()`
+  bool isRenderingStatsViewEnabled() {
+    return _isRenderingStatsViewEnabled(
+      reference.pointer,
+      _id_isRenderingStatsViewEnabled as jni$_.JMethodIDPtr,
+    ).boolean;
+  }
+
+  static final _id_enableRenderingStatsView = _class.instanceMethodId(
+    r'enableRenderingStatsView',
+    r'(Z)V',
+  );
+
+  static final _enableRenderingStatsView =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
+
+  /// from: `public void enableRenderingStatsView(boolean z)`
+  void enableRenderingStatsView(bool z) {
+    _enableRenderingStatsView(
+      reference.pointer,
+      _id_enableRenderingStatsView as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).check();
+  }
+
   static final _id_setSwapBehaviorFlush = _class.instanceMethodId(
     r'setSwapBehaviorFlush',
     r'(Z)V',
@@ -6177,6 +6238,250 @@ class MapLibreMap extends jni$_.JObject {
       reference.pointer,
       _id_getTileCacheEnabled as jni$_.JMethodIDPtr,
     ).boolean;
+  }
+
+  static final _id_setTileLodMinRadius = _class.instanceMethodId(
+    r'setTileLodMinRadius',
+    r'(D)V',
+  );
+
+  static final _setTileLodMinRadius =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
+
+  /// from: `public void setTileLodMinRadius(double d)`
+  void setTileLodMinRadius(double d) {
+    _setTileLodMinRadius(
+      reference.pointer,
+      _id_setTileLodMinRadius as jni$_.JMethodIDPtr,
+      d,
+    ).check();
+  }
+
+  static final _id_getTileLodMinRadius = _class.instanceMethodId(
+    r'getTileLodMinRadius',
+    r'()D',
+  );
+
+  static final _getTileLodMinRadius =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallDoubleMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public double getTileLodMinRadius()`
+  double getTileLodMinRadius() {
+    return _getTileLodMinRadius(
+      reference.pointer,
+      _id_getTileLodMinRadius as jni$_.JMethodIDPtr,
+    ).doubleFloat;
+  }
+
+  static final _id_setTileLodScale = _class.instanceMethodId(
+    r'setTileLodScale',
+    r'(D)V',
+  );
+
+  static final _setTileLodScale =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
+
+  /// from: `public void setTileLodScale(double d)`
+  void setTileLodScale(double d) {
+    _setTileLodScale(
+      reference.pointer,
+      _id_setTileLodScale as jni$_.JMethodIDPtr,
+      d,
+    ).check();
+  }
+
+  static final _id_getTileLodScale = _class.instanceMethodId(
+    r'getTileLodScale',
+    r'()D',
+  );
+
+  static final _getTileLodScale =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallDoubleMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public double getTileLodScale()`
+  double getTileLodScale() {
+    return _getTileLodScale(
+      reference.pointer,
+      _id_getTileLodScale as jni$_.JMethodIDPtr,
+    ).doubleFloat;
+  }
+
+  static final _id_setTileLodPitchThreshold = _class.instanceMethodId(
+    r'setTileLodPitchThreshold',
+    r'(D)V',
+  );
+
+  static final _setTileLodPitchThreshold =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
+
+  /// from: `public void setTileLodPitchThreshold(double d)`
+  void setTileLodPitchThreshold(double d) {
+    _setTileLodPitchThreshold(
+      reference.pointer,
+      _id_setTileLodPitchThreshold as jni$_.JMethodIDPtr,
+      d,
+    ).check();
+  }
+
+  static final _id_getTileLodPitchThreshold = _class.instanceMethodId(
+    r'getTileLodPitchThreshold',
+    r'()D',
+  );
+
+  static final _getTileLodPitchThreshold =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallDoubleMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public double getTileLodPitchThreshold()`
+  double getTileLodPitchThreshold() {
+    return _getTileLodPitchThreshold(
+      reference.pointer,
+      _id_getTileLodPitchThreshold as jni$_.JMethodIDPtr,
+    ).doubleFloat;
+  }
+
+  static final _id_setTileLodZoomShift = _class.instanceMethodId(
+    r'setTileLodZoomShift',
+    r'(D)V',
+  );
+
+  static final _setTileLodZoomShift =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
+
+  /// from: `public void setTileLodZoomShift(double d)`
+  void setTileLodZoomShift(double d) {
+    _setTileLodZoomShift(
+      reference.pointer,
+      _id_setTileLodZoomShift as jni$_.JMethodIDPtr,
+      d,
+    ).check();
+  }
+
+  static final _id_getTileLodZoomShift = _class.instanceMethodId(
+    r'getTileLodZoomShift',
+    r'()D',
+  );
+
+  static final _getTileLodZoomShift =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallDoubleMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public double getTileLodZoomShift()`
+  double getTileLodZoomShift() {
+    return _getTileLodZoomShift(
+      reference.pointer,
+      _id_getTileLodZoomShift as jni$_.JMethodIDPtr,
+    ).doubleFloat;
   }
 
   static final _id_setMinZoomPreference = _class.instanceMethodId(
@@ -7472,6 +7777,103 @@ class MapLibreMap extends jni$_.JObject {
     _cycleDebugOptions(
       reference.pointer,
       _id_cycleDebugOptions as jni$_.JMethodIDPtr,
+    ).check();
+  }
+
+  static final _id_getActionJournalLogFiles = _class.instanceMethodId(
+    r'getActionJournalLogFiles',
+    r'()[Ljava/lang/String;',
+  );
+
+  static final _getActionJournalLogFiles =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public java.lang.String[] getActionJournalLogFiles()`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JArray<jni$_.JString?>? getActionJournalLogFiles() {
+    return _getActionJournalLogFiles(
+      reference.pointer,
+      _id_getActionJournalLogFiles as jni$_.JMethodIDPtr,
+    ).object<jni$_.JArray<jni$_.JString?>?>(
+      const jni$_.JArrayNullableType<jni$_.JString?>(
+        jni$_.JStringNullableType(),
+      ),
+    );
+  }
+
+  static final _id_getActionJournalLog = _class.instanceMethodId(
+    r'getActionJournalLog',
+    r'()[Ljava/lang/String;',
+  );
+
+  static final _getActionJournalLog =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public java.lang.String[] getActionJournalLog()`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JArray<jni$_.JString?>? getActionJournalLog() {
+    return _getActionJournalLog(
+      reference.pointer,
+      _id_getActionJournalLog as jni$_.JMethodIDPtr,
+    ).object<jni$_.JArray<jni$_.JString?>?>(
+      const jni$_.JArrayNullableType<jni$_.JString?>(
+        jni$_.JStringNullableType(),
+      ),
+    );
+  }
+
+  static final _id_clearActionJournalLog = _class.instanceMethodId(
+    r'clearActionJournalLog',
+    r'()V',
+  );
+
+  static final _clearActionJournalLog =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public void clearActionJournalLog()`
+  void clearActionJournalLog() {
+    _clearActionJournalLog(
+      reference.pointer,
+      _id_clearActionJournalLog as jni$_.JMethodIDPtr,
     ).check();
   }
 

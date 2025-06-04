@@ -1796,6 +1796,40 @@ class SymbolLayer extends layer$_.Layer {
     );
   }
 
+  static final _id_getSymbolScreenSpace = _class.instanceMethodId(
+    r'getSymbolScreenSpace',
+    r'()Lorg/maplibre/android/style/layers/PropertyValue;',
+  );
+
+  static final _getSymbolScreenSpace =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public org.maplibre.android.style.layers.PropertyValue<java.lang.Boolean> getSymbolScreenSpace()`
+  /// The returned object must be released after use, by calling the [release] method.
+  propertyvalue$_.PropertyValue<jni$_.JBoolean?> getSymbolScreenSpace() {
+    return _getSymbolScreenSpace(
+      reference.pointer,
+      _id_getSymbolScreenSpace as jni$_.JMethodIDPtr,
+    ).object<propertyvalue$_.PropertyValue<jni$_.JBoolean?>>(
+      const propertyvalue$_.$PropertyValue$Type<jni$_.JBoolean?>(
+        jni$_.JBooleanNullableType(),
+      ),
+    );
+  }
+
   static final _id_getIconOpacity = _class.instanceMethodId(
     r'getIconOpacity',
     r'()Lorg/maplibre/android/style/layers/PropertyValue;',
