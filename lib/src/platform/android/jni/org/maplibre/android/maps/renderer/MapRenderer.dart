@@ -169,8 +169,8 @@ final class $MapRenderer$RenderingRefreshMode$NullableType
   @core$_.override
   MapRenderer$RenderingRefreshMode? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : MapRenderer$RenderingRefreshMode.fromReference(reference);
+      ? null
+      : MapRenderer$RenderingRefreshMode.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

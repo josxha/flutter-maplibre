@@ -216,10 +216,9 @@ final class $PluginRegistry$ActivityResultListener$NullableType
   @core$_.override
   PluginRegistry$ActivityResultListener? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : PluginRegistry$ActivityResultListener.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : PluginRegistry$ActivityResultListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -444,8 +443,8 @@ final class $PluginRegistry$NewIntentListener$NullableType
   @core$_.override
   PluginRegistry$NewIntentListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : PluginRegistry$NewIntentListener.fromReference(reference);
+      ? null
+      : PluginRegistry$NewIntentListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -715,12 +714,11 @@ final class $PluginRegistry$RequestPermissionsResultListener$NullableType
   @core$_.override
   PluginRegistry$RequestPermissionsResultListener? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : PluginRegistry$RequestPermissionsResultListener.fromReference(
-            reference,
-          );
+  ) => reference.isNull
+      ? null
+      : PluginRegistry$RequestPermissionsResultListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -948,10 +946,9 @@ final class $PluginRegistry$UserLeaveHintListener$NullableType
   @core$_.override
   PluginRegistry$UserLeaveHintListener? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : PluginRegistry$UserLeaveHintListener.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : PluginRegistry$UserLeaveHintListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1184,10 +1181,9 @@ final class $PluginRegistry$WindowFocusChangedListener$NullableType
   @core$_.override
   PluginRegistry$WindowFocusChangedListener? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : PluginRegistry$WindowFocusChangedListener.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : PluginRegistry$WindowFocusChangedListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

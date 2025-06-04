@@ -210,10 +210,9 @@ final class $MapView$OnCameraDidChangeListener$NullableType
   @core$_.override
   MapView$OnCameraDidChangeListener? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : MapView$OnCameraDidChangeListener.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : MapView$OnCameraDidChangeListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -436,10 +435,9 @@ final class $MapView$OnCameraIsChangingListener$NullableType
   @core$_.override
   MapView$OnCameraIsChangingListener? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : MapView$OnCameraIsChangingListener.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : MapView$OnCameraIsChangingListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -670,10 +668,9 @@ final class $MapView$OnCameraWillChangeListener$NullableType
   @core$_.override
   MapView$OnCameraWillChangeListener? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : MapView$OnCameraWillChangeListener.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : MapView$OnCameraWillChangeListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -900,12 +897,9 @@ final class $MapView$OnCanRemoveUnusedStyleImageListener$NullableType
   @core$_.override
   MapView$OnCanRemoveUnusedStyleImageListener? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : MapView$OnCanRemoveUnusedStyleImageListener.fromReference(
-            reference,
-          );
+  ) => reference.isNull
+      ? null
+      : MapView$OnCanRemoveUnusedStyleImageListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1131,8 +1125,8 @@ final class $MapView$OnDidBecomeIdleListener$NullableType
   @core$_.override
   MapView$OnDidBecomeIdleListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : MapView$OnDidBecomeIdleListener.fromReference(reference);
+      ? null
+      : MapView$OnDidBecomeIdleListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1363,10 +1357,9 @@ final class $MapView$OnDidFailLoadingMapListener$NullableType
   @core$_.override
   MapView$OnDidFailLoadingMapListener? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : MapView$OnDidFailLoadingMapListener.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : MapView$OnDidFailLoadingMapListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1591,10 +1584,9 @@ final class $MapView$OnDidFinishLoadingMapListener$NullableType
   @core$_.override
   MapView$OnDidFinishLoadingMapListener? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : MapView$OnDidFinishLoadingMapListener.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : MapView$OnDidFinishLoadingMapListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1820,10 +1812,9 @@ final class $MapView$OnDidFinishLoadingStyleListener$NullableType
   @core$_.override
   MapView$OnDidFinishLoadingStyleListener? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : MapView$OnDidFinishLoadingStyleListener.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : MapView$OnDidFinishLoadingStyleListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2072,10 +2063,9 @@ final class $MapView$OnDidFinishRenderingFrameListener$NullableType
   @core$_.override
   MapView$OnDidFinishRenderingFrameListener? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : MapView$OnDidFinishRenderingFrameListener.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : MapView$OnDidFinishRenderingFrameListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2310,10 +2300,9 @@ final class $MapView$OnDidFinishRenderingMapListener$NullableType
   @core$_.override
   MapView$OnDidFinishRenderingMapListener? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : MapView$OnDidFinishRenderingMapListener.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : MapView$OnDidFinishRenderingMapListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2559,8 +2548,8 @@ final class $MapView$OnGlyphsErrorListener$NullableType
   @core$_.override
   MapView$OnGlyphsErrorListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : MapView$OnGlyphsErrorListener.fromReference(reference);
+      ? null
+      : MapView$OnGlyphsErrorListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2806,8 +2795,8 @@ final class $MapView$OnGlyphsLoadedListener$NullableType
   @core$_.override
   MapView$OnGlyphsLoadedListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : MapView$OnGlyphsLoadedListener.fromReference(reference);
+      ? null
+      : MapView$OnGlyphsLoadedListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3054,10 +3043,9 @@ final class $MapView$OnGlyphsRequestedListener$NullableType
   @core$_.override
   MapView$OnGlyphsRequestedListener? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : MapView$OnGlyphsRequestedListener.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : MapView$OnGlyphsRequestedListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3304,10 +3292,9 @@ final class $MapView$OnPostCompileShaderListener$NullableType
   @core$_.override
   MapView$OnPostCompileShaderListener? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : MapView$OnPostCompileShaderListener.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : MapView$OnPostCompileShaderListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3554,10 +3541,9 @@ final class $MapView$OnPreCompileShaderListener$NullableType
   @core$_.override
   MapView$OnPreCompileShaderListener? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : MapView$OnPreCompileShaderListener.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : MapView$OnPreCompileShaderListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3806,10 +3792,9 @@ final class $MapView$OnShaderCompileFailedListener$NullableType
   @core$_.override
   MapView$OnShaderCompileFailedListener? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : MapView$OnShaderCompileFailedListener.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : MapView$OnShaderCompileFailedListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4041,8 +4026,8 @@ final class $MapView$OnSourceChangedListener$NullableType
   @core$_.override
   MapView$OnSourceChangedListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : MapView$OnSourceChangedListener.fromReference(reference);
+      ? null
+      : MapView$OnSourceChangedListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4278,8 +4263,8 @@ final class $MapView$OnSpriteErrorListener$NullableType
   @core$_.override
   MapView$OnSpriteErrorListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : MapView$OnSpriteErrorListener.fromReference(reference);
+      ? null
+      : MapView$OnSpriteErrorListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4516,8 +4501,8 @@ final class $MapView$OnSpriteLoadedListener$NullableType
   @core$_.override
   MapView$OnSpriteLoadedListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : MapView$OnSpriteLoadedListener.fromReference(reference);
+      ? null
+      : MapView$OnSpriteLoadedListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4755,10 +4740,9 @@ final class $MapView$OnSpriteRequestedListener$NullableType
   @core$_.override
   MapView$OnSpriteRequestedListener? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : MapView$OnSpriteRequestedListener.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : MapView$OnSpriteRequestedListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4990,10 +4974,9 @@ final class $MapView$OnStyleImageMissingListener$NullableType
   @core$_.override
   MapView$OnStyleImageMissingListener? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : MapView$OnStyleImageMissingListener.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : MapView$OnStyleImageMissingListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -5312,8 +5295,8 @@ final class $MapView$OnTileActionListener$NullableType
   @core$_.override
   MapView$OnTileActionListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : MapView$OnTileActionListener.fromReference(reference);
+      ? null
+      : MapView$OnTileActionListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -5535,10 +5518,9 @@ final class $MapView$OnWillStartLoadingMapListener$NullableType
   @core$_.override
   MapView$OnWillStartLoadingMapListener? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : MapView$OnWillStartLoadingMapListener.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : MapView$OnWillStartLoadingMapListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -5767,10 +5749,9 @@ final class $MapView$OnWillStartRenderingFrameListener$NullableType
   @core$_.override
   MapView$OnWillStartRenderingFrameListener? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : MapView$OnWillStartRenderingFrameListener.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : MapView$OnWillStartRenderingFrameListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -5998,10 +5979,9 @@ final class $MapView$OnWillStartRenderingMapListener$NullableType
   @core$_.override
   MapView$OnWillStartRenderingMapListener? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : MapView$OnWillStartRenderingMapListener.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : MapView$OnWillStartRenderingMapListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

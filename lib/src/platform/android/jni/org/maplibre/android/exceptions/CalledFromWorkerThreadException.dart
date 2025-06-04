@@ -104,8 +104,8 @@ final class $CalledFromWorkerThreadException$NullableType
   @core$_.override
   CalledFromWorkerThreadException? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : CalledFromWorkerThreadException.fromReference(reference);
+      ? null
+      : CalledFromWorkerThreadException.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

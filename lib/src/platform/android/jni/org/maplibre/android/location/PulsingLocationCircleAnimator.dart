@@ -117,8 +117,8 @@ final class $PulsingLocationCircleAnimator$NullableType
   @core$_.override
   PulsingLocationCircleAnimator? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : PulsingLocationCircleAnimator.fromReference(reference);
+      ? null
+      : PulsingLocationCircleAnimator.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

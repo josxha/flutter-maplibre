@@ -1570,8 +1570,8 @@ final class $LocationComponentOptions$Builder$NullableType
   @core$_.override
   LocationComponentOptions$Builder? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : LocationComponentOptions$Builder.fromReference(reference);
+      ? null
+      : LocationComponentOptions$Builder.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3355,8 +3355,8 @@ final class $LocationComponentOptions$NullableType
   @core$_.override
   LocationComponentOptions? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : LocationComponentOptions.fromReference(reference);
+      ? null
+      : LocationComponentOptions.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

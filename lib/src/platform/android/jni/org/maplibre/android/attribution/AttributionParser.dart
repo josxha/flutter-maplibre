@@ -279,8 +279,8 @@ final class $AttributionParser$Options$NullableType
   @core$_.override
   AttributionParser$Options? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : AttributionParser$Options.fromReference(reference);
+      ? null
+      : AttributionParser$Options.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

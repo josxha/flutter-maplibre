@@ -112,10 +112,9 @@ final class $FileUtils$CheckFileReadPermissionTask$NullableType
   @core$_.override
   FileUtils$CheckFileReadPermissionTask? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : FileUtils$CheckFileReadPermissionTask.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : FileUtils$CheckFileReadPermissionTask.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -253,10 +252,9 @@ final class $FileUtils$CheckFileWritePermissionTask$NullableType
   @core$_.override
   FileUtils$CheckFileWritePermissionTask? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : FileUtils$CheckFileWritePermissionTask.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : FileUtils$CheckFileWritePermissionTask.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -526,12 +524,9 @@ final class $FileUtils$OnCheckFileReadPermissionListener$NullableType
   @core$_.override
   FileUtils$OnCheckFileReadPermissionListener? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : FileUtils$OnCheckFileReadPermissionListener.fromReference(
-            reference,
-          );
+  ) => reference.isNull
+      ? null
+      : FileUtils$OnCheckFileReadPermissionListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -804,12 +799,9 @@ final class $FileUtils$OnCheckFileWritePermissionListener$NullableType
   @core$_.override
   FileUtils$OnCheckFileWritePermissionListener? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : FileUtils$OnCheckFileWritePermissionListener.fromReference(
-            reference,
-          );
+  ) => reference.isNull
+      ? null
+      : FileUtils$OnCheckFileWritePermissionListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

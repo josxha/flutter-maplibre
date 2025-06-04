@@ -254,8 +254,8 @@ final class $OnCameraTrackingChangedListener$NullableType
   @core$_.override
   OnCameraTrackingChangedListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : OnCameraTrackingChangedListener.fromReference(reference);
+      ? null
+      : OnCameraTrackingChangedListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

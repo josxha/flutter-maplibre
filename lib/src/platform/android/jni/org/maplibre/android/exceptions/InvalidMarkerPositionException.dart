@@ -97,8 +97,8 @@ final class $InvalidMarkerPositionException$NullableType
   @core$_.override
   InvalidMarkerPositionException? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : InvalidMarkerPositionException.fromReference(reference);
+      ? null
+      : InvalidMarkerPositionException.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

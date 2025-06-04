@@ -111,8 +111,8 @@ final class $VisibleRegion$Companion$NullableType
   @core$_.override
   VisibleRegion$Companion? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : VisibleRegion$Companion.fromReference(reference);
+      ? null
+      : VisibleRegion$Companion.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();

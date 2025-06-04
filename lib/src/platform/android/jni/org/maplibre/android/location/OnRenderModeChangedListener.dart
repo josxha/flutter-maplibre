@@ -201,8 +201,8 @@ final class $OnRenderModeChangedListener$NullableType
   @core$_.override
   OnRenderModeChangedListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : OnRenderModeChangedListener.fromReference(reference);
+      ? null
+      : OnRenderModeChangedListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

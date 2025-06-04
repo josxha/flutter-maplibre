@@ -104,8 +104,8 @@ final class $CannotAddSourceException$NullableType
   @core$_.override
   CannotAddSourceException? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : CannotAddSourceException.fromReference(reference);
+      ? null
+      : CannotAddSourceException.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();

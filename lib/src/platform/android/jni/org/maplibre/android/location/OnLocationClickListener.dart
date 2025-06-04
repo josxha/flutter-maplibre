@@ -195,8 +195,8 @@ final class $OnLocationClickListener$NullableType
   @core$_.override
   OnLocationClickListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : OnLocationClickListener.fromReference(reference);
+      ? null
+      : OnLocationClickListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

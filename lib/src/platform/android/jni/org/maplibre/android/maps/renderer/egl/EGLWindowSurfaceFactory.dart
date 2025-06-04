@@ -201,8 +201,8 @@ final class $EGLWindowSurfaceFactory$NullableType
   @core$_.override
   EGLWindowSurfaceFactory? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : EGLWindowSurfaceFactory.fromReference(reference);
+      ? null
+      : EGLWindowSurfaceFactory.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

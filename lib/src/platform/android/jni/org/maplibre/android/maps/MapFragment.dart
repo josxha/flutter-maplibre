@@ -216,10 +216,9 @@ final class $MapFragment$OnMapViewReadyCallback$NullableType
   @core$_.override
   MapFragment$OnMapViewReadyCallback? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : MapFragment$OnMapViewReadyCallback.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : MapFragment$OnMapViewReadyCallback.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

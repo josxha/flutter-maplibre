@@ -900,8 +900,8 @@ final class $CustomGeometrySourceOptions$NullableType
   @core$_.override
   CustomGeometrySourceOptions? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : CustomGeometrySourceOptions.fromReference(reference);
+      ? null
+      : CustomGeometrySourceOptions.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();

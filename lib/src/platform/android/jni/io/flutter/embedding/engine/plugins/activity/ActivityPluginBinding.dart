@@ -268,12 +268,11 @@ final class $ActivityPluginBinding$OnSaveInstanceStateListener$NullableType
   @core$_.override
   ActivityPluginBinding$OnSaveInstanceStateListener? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : ActivityPluginBinding$OnSaveInstanceStateListener.fromReference(
-            reference,
-          );
+  ) => reference.isNull
+      ? null
+      : ActivityPluginBinding$OnSaveInstanceStateListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

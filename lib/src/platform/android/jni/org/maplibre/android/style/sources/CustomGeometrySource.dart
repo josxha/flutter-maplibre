@@ -119,8 +119,8 @@ final class $CustomGeometrySource$Companion$NullableType
   @core$_.override
   CustomGeometrySource$Companion? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : CustomGeometrySource$Companion.fromReference(reference);
+      ? null
+      : CustomGeometrySource$Companion.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -344,10 +344,9 @@ final class $CustomGeometrySource$GeometryTileRequest$NullableType
   @core$_.override
   CustomGeometrySource$GeometryTileRequest? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : CustomGeometrySource$GeometryTileRequest.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : CustomGeometrySource$GeometryTileRequest.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -684,8 +683,8 @@ final class $CustomGeometrySource$TileID$NullableType
   @core$_.override
   CustomGeometrySource$TileID? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : CustomGeometrySource$TileID.fromReference(reference);
+      ? null
+      : CustomGeometrySource$TileID.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();

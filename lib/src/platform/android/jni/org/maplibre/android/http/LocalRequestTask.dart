@@ -203,8 +203,8 @@ final class $JObject$OnLocalRequestResponse$NullableType
   @core$_.override
   JObject$OnLocalRequestResponse? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : JObject$OnLocalRequestResponse.fromReference(reference);
+      ? null
+      : JObject$OnLocalRequestResponse.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

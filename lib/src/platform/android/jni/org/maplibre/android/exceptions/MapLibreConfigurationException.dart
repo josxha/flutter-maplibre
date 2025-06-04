@@ -130,8 +130,8 @@ final class $MapLibreConfigurationException$NullableType
   @core$_.override
   MapLibreConfigurationException? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : MapLibreConfigurationException.fromReference(reference);
+      ? null
+      : MapLibreConfigurationException.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

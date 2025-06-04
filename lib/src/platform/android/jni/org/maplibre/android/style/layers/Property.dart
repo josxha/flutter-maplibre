@@ -314,8 +314,8 @@ final class $Property$CIRCLE_PITCH_ALIGNMENT$NullableType
   @core$_.override
   Property$CIRCLE_PITCH_ALIGNMENT? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : Property$CIRCLE_PITCH_ALIGNMENT.fromReference(reference);
+      ? null
+      : Property$CIRCLE_PITCH_ALIGNMENT.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -484,8 +484,8 @@ final class $Property$CIRCLE_PITCH_SCALE$NullableType
   @core$_.override
   Property$CIRCLE_PITCH_SCALE? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : Property$CIRCLE_PITCH_SCALE.fromReference(reference);
+      ? null
+      : Property$CIRCLE_PITCH_SCALE.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -657,8 +657,8 @@ final class $Property$CIRCLE_TRANSLATE_ANCHOR$NullableType
   @core$_.override
   Property$CIRCLE_TRANSLATE_ANCHOR? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : Property$CIRCLE_TRANSLATE_ANCHOR.fromReference(reference);
+      ? null
+      : Property$CIRCLE_TRANSLATE_ANCHOR.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -834,10 +834,9 @@ final class $Property$FILL_EXTRUSION_TRANSLATE_ANCHOR$NullableType
   @core$_.override
   Property$FILL_EXTRUSION_TRANSLATE_ANCHOR? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : Property$FILL_EXTRUSION_TRANSLATE_ANCHOR.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : Property$FILL_EXTRUSION_TRANSLATE_ANCHOR.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1013,8 +1012,8 @@ final class $Property$FILL_TRANSLATE_ANCHOR$NullableType
   @core$_.override
   Property$FILL_TRANSLATE_ANCHOR? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : Property$FILL_TRANSLATE_ANCHOR.fromReference(reference);
+      ? null
+      : Property$FILL_TRANSLATE_ANCHOR.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1190,10 +1189,9 @@ final class $Property$HILLSHADE_ILLUMINATION_ANCHOR$NullableType
   @core$_.override
   Property$HILLSHADE_ILLUMINATION_ANCHOR? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : Property$HILLSHADE_ILLUMINATION_ANCHOR.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : Property$HILLSHADE_ILLUMINATION_ANCHOR.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1532,8 +1530,8 @@ final class $Property$ICON_PITCH_ALIGNMENT$NullableType
   @core$_.override
   Property$ICON_PITCH_ALIGNMENT? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : Property$ICON_PITCH_ALIGNMENT.fromReference(reference);
+      ? null
+      : Property$ICON_PITCH_ALIGNMENT.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1705,8 +1703,8 @@ final class $Property$ICON_ROTATION_ALIGNMENT$NullableType
   @core$_.override
   Property$ICON_ROTATION_ALIGNMENT? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : Property$ICON_ROTATION_ALIGNMENT.fromReference(reference);
+      ? null
+      : Property$ICON_ROTATION_ALIGNMENT.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2043,8 +2041,8 @@ final class $Property$ICON_TRANSLATE_ANCHOR$NullableType
   @core$_.override
   Property$ICON_TRANSLATE_ANCHOR? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : Property$ICON_TRANSLATE_ANCHOR.fromReference(reference);
+      ? null
+      : Property$ICON_TRANSLATE_ANCHOR.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2545,8 +2543,8 @@ final class $Property$LINE_TRANSLATE_ANCHOR$NullableType
   @core$_.override
   Property$LINE_TRANSLATE_ANCHOR? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : Property$LINE_TRANSLATE_ANCHOR.fromReference(reference);
+      ? null
+      : Property$LINE_TRANSLATE_ANCHOR.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2715,8 +2713,8 @@ final class $Property$RASTER_RESAMPLING$NullableType
   @core$_.override
   Property$RASTER_RESAMPLING? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : Property$RASTER_RESAMPLING.fromReference(reference);
+      ? null
+      : Property$RASTER_RESAMPLING.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2884,8 +2882,8 @@ final class $Property$SYMBOL_PLACEMENT$NullableType
   @core$_.override
   Property$SYMBOL_PLACEMENT? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : Property$SYMBOL_PLACEMENT.fromReference(reference);
+      ? null
+      : Property$SYMBOL_PLACEMENT.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3051,8 +3049,8 @@ final class $Property$SYMBOL_Z_ORDER$NullableType
   @core$_.override
   Property$SYMBOL_Z_ORDER? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : Property$SYMBOL_Z_ORDER.fromReference(reference);
+      ? null
+      : Property$SYMBOL_Z_ORDER.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3551,8 +3549,8 @@ final class $Property$TEXT_PITCH_ALIGNMENT$NullableType
   @core$_.override
   Property$TEXT_PITCH_ALIGNMENT? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : Property$TEXT_PITCH_ALIGNMENT.fromReference(reference);
+      ? null
+      : Property$TEXT_PITCH_ALIGNMENT.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3724,8 +3722,8 @@ final class $Property$TEXT_ROTATION_ALIGNMENT$NullableType
   @core$_.override
   Property$TEXT_ROTATION_ALIGNMENT? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : Property$TEXT_ROTATION_ALIGNMENT.fromReference(reference);
+      ? null
+      : Property$TEXT_ROTATION_ALIGNMENT.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3892,8 +3890,8 @@ final class $Property$TEXT_TRANSFORM$NullableType
   @core$_.override
   Property$TEXT_TRANSFORM? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : Property$TEXT_TRANSFORM.fromReference(reference);
+      ? null
+      : Property$TEXT_TRANSFORM.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4064,8 +4062,8 @@ final class $Property$TEXT_TRANSLATE_ANCHOR$NullableType
   @core$_.override
   Property$TEXT_TRANSLATE_ANCHOR? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : Property$TEXT_TRANSLATE_ANCHOR.fromReference(reference);
+      ? null
+      : Property$TEXT_TRANSLATE_ANCHOR.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4234,8 +4232,8 @@ final class $Property$TEXT_WRITING_MODE$NullableType
   @core$_.override
   Property$TEXT_WRITING_MODE? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : Property$TEXT_WRITING_MODE.fromReference(reference);
+      ? null
+      : Property$TEXT_WRITING_MODE.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

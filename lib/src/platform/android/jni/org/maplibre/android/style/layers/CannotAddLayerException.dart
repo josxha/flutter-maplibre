@@ -104,8 +104,8 @@ final class $CannotAddLayerException$NullableType
   @core$_.override
   CannotAddLayerException? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : CannotAddLayerException.fromReference(reference);
+      ? null
+      : CannotAddLayerException.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

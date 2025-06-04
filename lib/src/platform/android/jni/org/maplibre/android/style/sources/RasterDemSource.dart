@@ -115,8 +115,8 @@ final class $RasterDemSource$Companion$NullableType
   @core$_.override
   RasterDemSource$Companion? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : RasterDemSource$Companion.fromReference(reference);
+      ? null
+      : RasterDemSource$Companion.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();

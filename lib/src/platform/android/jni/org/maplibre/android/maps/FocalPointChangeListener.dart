@@ -203,8 +203,8 @@ final class $FocalPointChangeListener$NullableType
   @core$_.override
   FocalPointChangeListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : FocalPointChangeListener.fromReference(reference);
+      ? null
+      : FocalPointChangeListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

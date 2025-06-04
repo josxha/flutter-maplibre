@@ -113,8 +113,8 @@ final class $OfflineRegion$Companion$NullableType
   @core$_.override
   OfflineRegion$Companion? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : OfflineRegion$Companion.fromReference(reference);
+      ? null
+      : OfflineRegion$Companion.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -282,8 +282,8 @@ final class $OfflineRegion$DownloadState$NullableType
   @core$_.override
   OfflineRegion$DownloadState? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : OfflineRegion$DownloadState.fromReference(reference);
+      ? null
+      : OfflineRegion$DownloadState.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -554,10 +554,9 @@ final class $OfflineRegion$OfflineRegionDeleteCallback$NullableType
   @core$_.override
   OfflineRegion$OfflineRegionDeleteCallback? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : OfflineRegion$OfflineRegionDeleteCallback.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : OfflineRegion$OfflineRegionDeleteCallback.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -840,12 +839,9 @@ final class $OfflineRegion$OfflineRegionInvalidateCallback$NullableType
   @core$_.override
   OfflineRegion$OfflineRegionInvalidateCallback? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : OfflineRegion$OfflineRegionInvalidateCallback.fromReference(
-            reference,
-          );
+  ) => reference.isNull
+      ? null
+      : OfflineRegion$OfflineRegionInvalidateCallback.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -1223,10 +1219,9 @@ final class $OfflineRegion$OfflineRegionObserver$NullableType
   @core$_.override
   OfflineRegion$OfflineRegionObserver? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : OfflineRegion$OfflineRegionObserver.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : OfflineRegion$OfflineRegionObserver.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -1531,10 +1526,9 @@ final class $OfflineRegion$OfflineRegionStatusCallback$NullableType
   @core$_.override
   OfflineRegion$OfflineRegionStatusCallback? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : OfflineRegion$OfflineRegionStatusCallback.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : OfflineRegion$OfflineRegionStatusCallback.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -1823,12 +1817,11 @@ final class $OfflineRegion$OfflineRegionUpdateMetadataCallback$NullableType
   @core$_.override
   OfflineRegion$OfflineRegionUpdateMetadataCallback? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : OfflineRegion$OfflineRegionUpdateMetadataCallback.fromReference(
-            reference,
-          );
+  ) => reference.isNull
+      ? null
+      : OfflineRegion$OfflineRegionUpdateMetadataCallback.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();

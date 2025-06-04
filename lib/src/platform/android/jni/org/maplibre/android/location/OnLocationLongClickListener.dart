@@ -197,8 +197,8 @@ final class $OnLocationLongClickListener$NullableType
   @core$_.override
   OnLocationLongClickListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : OnLocationLongClickListener.fromReference(reference);
+      ? null
+      : OnLocationLongClickListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

@@ -177,8 +177,8 @@ final class $MapLibreAnimatorListener$NullableType
   @core$_.override
   MapLibreAnimatorListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : MapLibreAnimatorListener.fromReference(reference);
+      ? null
+      : MapLibreAnimatorListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();

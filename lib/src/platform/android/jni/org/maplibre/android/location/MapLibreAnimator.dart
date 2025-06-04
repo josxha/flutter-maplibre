@@ -147,8 +147,8 @@ final class $MapLibreAnimator$NullableType<$K extends jni$_.JObject?>
   @core$_.override
   MapLibreAnimator<$K>? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : MapLibreAnimator<$K>.fromReference(K, reference);
+      ? null
+      : MapLibreAnimator<$K>.fromReference(K, reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

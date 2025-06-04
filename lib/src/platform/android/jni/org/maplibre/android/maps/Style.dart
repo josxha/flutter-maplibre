@@ -491,8 +491,8 @@ final class $Style$Builder$ImageWrapper$NullableType
   @core$_.override
   Style$Builder$ImageWrapper? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : Style$Builder$ImageWrapper.fromReference(reference);
+      ? null
+      : Style$Builder$ImageWrapper.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -615,8 +615,8 @@ final class $Style$Builder$LayerAboveWrapper$NullableType
   @core$_.override
   Style$Builder$LayerAboveWrapper? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : Style$Builder$LayerAboveWrapper.fromReference(reference);
+      ? null
+      : Style$Builder$LayerAboveWrapper.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>
@@ -738,8 +738,8 @@ final class $Style$Builder$LayerAtWrapper$NullableType
   @core$_.override
   Style$Builder$LayerAtWrapper? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : Style$Builder$LayerAtWrapper.fromReference(reference);
+      ? null
+      : Style$Builder$LayerAtWrapper.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>
@@ -864,8 +864,8 @@ final class $Style$Builder$LayerBelowWrapper$NullableType
   @core$_.override
   Style$Builder$LayerBelowWrapper? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : Style$Builder$LayerBelowWrapper.fromReference(reference);
+      ? null
+      : Style$Builder$LayerBelowWrapper.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>
@@ -991,8 +991,8 @@ final class $Style$Builder$LayerWrapper$NullableType
   @core$_.override
   Style$Builder$LayerWrapper? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : Style$Builder$LayerWrapper.fromReference(reference);
+      ? null
+      : Style$Builder$LayerWrapper.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

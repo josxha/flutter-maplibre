@@ -159,8 +159,8 @@ final class $MapLibrePaddingAnimator$NullableType
   @core$_.override
   MapLibrePaddingAnimator? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : MapLibrePaddingAnimator.fromReference(reference);
+      ? null
+      : MapLibrePaddingAnimator.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>

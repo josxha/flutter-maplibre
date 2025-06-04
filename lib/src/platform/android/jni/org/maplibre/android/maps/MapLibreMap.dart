@@ -256,8 +256,8 @@ final class $MapLibreMap$CancelableCallback$NullableType
   @core$_.override
   MapLibreMap$CancelableCallback? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : MapLibreMap$CancelableCallback.fromReference(reference);
+      ? null
+      : MapLibreMap$CancelableCallback.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -483,8 +483,8 @@ final class $MapLibreMap$InfoWindowAdapter$NullableType
   @core$_.override
   MapLibreMap$InfoWindowAdapter? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : MapLibreMap$InfoWindowAdapter.fromReference(reference);
+      ? null
+      : MapLibreMap$InfoWindowAdapter.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -703,8 +703,8 @@ final class $MapLibreMap$OnCameraIdleListener$NullableType
   @core$_.override
   MapLibreMap$OnCameraIdleListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : MapLibreMap$OnCameraIdleListener.fromReference(reference);
+      ? null
+      : MapLibreMap$OnCameraIdleListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -927,10 +927,9 @@ final class $MapLibreMap$OnCameraMoveCanceledListener$NullableType
   @core$_.override
   MapLibreMap$OnCameraMoveCanceledListener? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : MapLibreMap$OnCameraMoveCanceledListener.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : MapLibreMap$OnCameraMoveCanceledListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1154,8 +1153,8 @@ final class $MapLibreMap$OnCameraMoveListener$NullableType
   @core$_.override
   MapLibreMap$OnCameraMoveListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : MapLibreMap$OnCameraMoveListener.fromReference(reference);
+      ? null
+      : MapLibreMap$OnCameraMoveListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1394,10 +1393,9 @@ final class $MapLibreMap$OnCameraMoveStartedListener$NullableType
   @core$_.override
   MapLibreMap$OnCameraMoveStartedListener? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : MapLibreMap$OnCameraMoveStartedListener.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : MapLibreMap$OnCameraMoveStartedListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1674,10 +1672,9 @@ final class $MapLibreMap$OnCompassAnimationListener$NullableType
   @core$_.override
   MapLibreMap$OnCompassAnimationListener? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : MapLibreMap$OnCompassAnimationListener.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : MapLibreMap$OnCompassAnimationListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1907,10 +1904,9 @@ final class $MapLibreMap$OnDeveloperAnimationListener$NullableType
   @core$_.override
   MapLibreMap$OnDeveloperAnimationListener? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : MapLibreMap$OnDeveloperAnimationListener.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : MapLibreMap$OnDeveloperAnimationListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2125,8 +2121,8 @@ final class $MapLibreMap$OnFlingListener$NullableType
   @core$_.override
   MapLibreMap$OnFlingListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : MapLibreMap$OnFlingListener.fromReference(reference);
+      ? null
+      : MapLibreMap$OnFlingListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2352,8 +2348,8 @@ final class $MapLibreMap$OnFpsChangedListener$NullableType
   @core$_.override
   MapLibreMap$OnFpsChangedListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : MapLibreMap$OnFpsChangedListener.fromReference(reference);
+      ? null
+      : MapLibreMap$OnFpsChangedListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2579,10 +2575,9 @@ final class $MapLibreMap$OnInfoWindowClickListener$NullableType
   @core$_.override
   MapLibreMap$OnInfoWindowClickListener? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : MapLibreMap$OnInfoWindowClickListener.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : MapLibreMap$OnInfoWindowClickListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2818,10 +2813,9 @@ final class $MapLibreMap$OnInfoWindowCloseListener$NullableType
   @core$_.override
   MapLibreMap$OnInfoWindowCloseListener? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : MapLibreMap$OnInfoWindowCloseListener.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : MapLibreMap$OnInfoWindowCloseListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3057,10 +3051,9 @@ final class $MapLibreMap$OnInfoWindowLongClickListener$NullableType
   @core$_.override
   MapLibreMap$OnInfoWindowLongClickListener? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : MapLibreMap$OnInfoWindowLongClickListener.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : MapLibreMap$OnInfoWindowLongClickListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3287,8 +3280,8 @@ final class $MapLibreMap$OnMapClickListener$NullableType
   @core$_.override
   MapLibreMap$OnMapClickListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : MapLibreMap$OnMapClickListener.fromReference(reference);
+      ? null
+      : MapLibreMap$OnMapClickListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3512,10 +3505,9 @@ final class $MapLibreMap$OnMapLongClickListener$NullableType
   @core$_.override
   MapLibreMap$OnMapLongClickListener? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : MapLibreMap$OnMapLongClickListener.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : MapLibreMap$OnMapLongClickListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3739,10 +3731,9 @@ final class $MapLibreMap$OnMarkerClickListener$NullableType
   @core$_.override
   MapLibreMap$OnMarkerClickListener? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : MapLibreMap$OnMarkerClickListener.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : MapLibreMap$OnMarkerClickListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4080,8 +4071,8 @@ final class $MapLibreMap$OnMoveListener$NullableType
   @core$_.override
   MapLibreMap$OnMoveListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : MapLibreMap$OnMoveListener.fromReference(reference);
+      ? null
+      : MapLibreMap$OnMoveListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4312,10 +4303,9 @@ final class $MapLibreMap$OnPolygonClickListener$NullableType
   @core$_.override
   MapLibreMap$OnPolygonClickListener? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : MapLibreMap$OnPolygonClickListener.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : MapLibreMap$OnPolygonClickListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4549,10 +4539,9 @@ final class $MapLibreMap$OnPolylineClickListener$NullableType
   @core$_.override
   MapLibreMap$OnPolylineClickListener? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : MapLibreMap$OnPolylineClickListener.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : MapLibreMap$OnPolylineClickListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4891,8 +4880,8 @@ final class $MapLibreMap$OnRotateListener$NullableType
   @core$_.override
   MapLibreMap$OnRotateListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : MapLibreMap$OnRotateListener.fromReference(reference);
+      ? null
+      : MapLibreMap$OnRotateListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -5235,8 +5224,8 @@ final class $MapLibreMap$OnScaleListener$NullableType
   @core$_.override
   MapLibreMap$OnScaleListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : MapLibreMap$OnScaleListener.fromReference(reference);
+      ? null
+      : MapLibreMap$OnScaleListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -5572,8 +5561,8 @@ final class $MapLibreMap$OnShoveListener$NullableType
   @core$_.override
   MapLibreMap$OnShoveListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : MapLibreMap$OnShoveListener.fromReference(reference);
+      ? null
+      : MapLibreMap$OnShoveListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -5801,10 +5790,9 @@ final class $MapLibreMap$SnapshotReadyCallback$NullableType
   @core$_.override
   MapLibreMap$SnapshotReadyCallback? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : MapLibreMap$SnapshotReadyCallback.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : MapLibreMap$SnapshotReadyCallback.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

@@ -279,8 +279,8 @@ final class $LocationEngineCallback$NullableType<$T extends jni$_.JObject?>
   @core$_.override
   LocationEngineCallback<$T>? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : LocationEngineCallback<$T>.fromReference(T, reference);
+      ? null
+      : LocationEngineCallback<$T>.fromReference(T, reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

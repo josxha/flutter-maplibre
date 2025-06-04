@@ -134,8 +134,8 @@ final class $PaintPropertyValue$NullableType<$T extends jni$_.JObject?>
   @core$_.override
   PaintPropertyValue<$T>? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : PaintPropertyValue<$T>.fromReference(T, reference);
+      ? null
+      : PaintPropertyValue<$T>.fromReference(T, reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>

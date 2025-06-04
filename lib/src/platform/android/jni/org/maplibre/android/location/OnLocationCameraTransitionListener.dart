@@ -264,10 +264,9 @@ final class $OnLocationCameraTransitionListener$NullableType
   @core$_.override
   OnLocationCameraTransitionListener? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : OnLocationCameraTransitionListener.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : OnLocationCameraTransitionListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

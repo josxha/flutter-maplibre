@@ -139,8 +139,8 @@ final class $GLTextureViewRenderThread$NullableType
   @core$_.override
   GLTextureViewRenderThread? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : GLTextureViewRenderThread.fromReference(reference);
+      ? null
+      : GLTextureViewRenderThread.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

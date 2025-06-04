@@ -208,8 +208,8 @@ final class $AttributionDialogManager$NullableType
   @core$_.override
   AttributionDialogManager? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : AttributionDialogManager.fromReference(reference);
+      ? null
+      : AttributionDialogManager.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

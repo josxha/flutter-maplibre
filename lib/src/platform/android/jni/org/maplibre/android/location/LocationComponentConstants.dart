@@ -141,8 +141,8 @@ final class $LocationComponentConstants$NullableType
   @core$_.override
   LocationComponentConstants? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : LocationComponentConstants.fromReference(reference);
+      ? null
+      : LocationComponentConstants.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

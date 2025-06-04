@@ -213,10 +213,9 @@ final class $FileSource$ResourceTransformCallback$NullableType
   @core$_.override
   FileSource$ResourceTransformCallback? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : FileSource$ResourceTransformCallback.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : FileSource$ResourceTransformCallback.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -503,12 +502,9 @@ final class $FileSource$ResourcesCachePathChangeCallback$NullableType
   @core$_.override
   FileSource$ResourcesCachePathChangeCallback? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : FileSource$ResourcesCachePathChangeCallback.fromReference(
-            reference,
-          );
+  ) => reference.isNull
+      ? null
+      : FileSource$ResourcesCachePathChangeCallback.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

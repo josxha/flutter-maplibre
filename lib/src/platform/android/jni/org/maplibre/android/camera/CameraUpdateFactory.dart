@@ -392,10 +392,9 @@ final class $CameraUpdateFactory$CameraBoundsUpdate$NullableType
   @core$_.override
   CameraUpdateFactory$CameraBoundsUpdate? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : CameraUpdateFactory$CameraBoundsUpdate.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : CameraUpdateFactory$CameraBoundsUpdate.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -815,10 +814,9 @@ final class $CameraUpdateFactory$CameraPositionUpdate$NullableType
   @core$_.override
   CameraUpdateFactory$CameraPositionUpdate? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : CameraUpdateFactory$CameraPositionUpdate.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : CameraUpdateFactory$CameraPositionUpdate.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -956,10 +954,9 @@ final class $CameraUpdateFactory$ZoomUpdate$Companion$NullableType
   @core$_.override
   CameraUpdateFactory$ZoomUpdate$Companion? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : CameraUpdateFactory$ZoomUpdate$Companion.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : CameraUpdateFactory$ZoomUpdate$Companion.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -1128,10 +1125,9 @@ final class $CameraUpdateFactory$ZoomUpdate$Type$NullableType
   @core$_.override
   CameraUpdateFactory$ZoomUpdate$Type? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : CameraUpdateFactory$ZoomUpdate$Type.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : CameraUpdateFactory$ZoomUpdate$Type.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1578,8 +1574,8 @@ final class $CameraUpdateFactory$ZoomUpdate$NullableType
   @core$_.override
   CameraUpdateFactory$ZoomUpdate? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : CameraUpdateFactory$ZoomUpdate.fromReference(reference);
+      ? null
+      : CameraUpdateFactory$ZoomUpdate.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

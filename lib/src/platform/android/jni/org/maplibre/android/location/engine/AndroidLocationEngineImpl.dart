@@ -344,8 +344,8 @@ final class $AndroidLocationEngineImpl$NullableType
   @core$_.override
   AndroidLocationEngineImpl? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : AndroidLocationEngineImpl.fromReference(reference);
+      ? null
+      : AndroidLocationEngineImpl.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

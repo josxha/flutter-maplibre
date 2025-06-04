@@ -109,8 +109,8 @@ final class $OfflineRegionError$Companion$NullableType
   @core$_.override
   OfflineRegionError$Companion? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : OfflineRegionError$Companion.fromReference(reference);
+      ? null
+      : OfflineRegionError$Companion.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -281,8 +281,8 @@ final class $OfflineRegionError$ErrorReason$NullableType
   @core$_.override
   OfflineRegionError$ErrorReason? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : OfflineRegionError$ErrorReason.fromReference(reference);
+      ? null
+      : OfflineRegionError$ErrorReason.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

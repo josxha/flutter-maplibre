@@ -134,8 +134,8 @@ final class $LayoutPropertyValue$NullableType<$T extends jni$_.JObject?>
   @core$_.override
   LayoutPropertyValue<$T>? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : LayoutPropertyValue<$T>.fromReference(T, reference);
+      ? null
+      : LayoutPropertyValue<$T>.fromReference(T, reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>

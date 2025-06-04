@@ -97,8 +97,8 @@ final class $IconBitmapChangedException$NullableType
   @core$_.override
   IconBitmapChangedException? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : IconBitmapChangedException.fromReference(reference);
+      ? null
+      : IconBitmapChangedException.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

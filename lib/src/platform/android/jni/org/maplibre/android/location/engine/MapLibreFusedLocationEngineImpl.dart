@@ -281,8 +281,8 @@ final class $MapLibreFusedLocationEngineImpl$NullableType
   @core$_.override
   MapLibreFusedLocationEngineImpl? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : MapLibreFusedLocationEngineImpl.fromReference(reference);
+      ? null
+      : MapLibreFusedLocationEngineImpl.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>

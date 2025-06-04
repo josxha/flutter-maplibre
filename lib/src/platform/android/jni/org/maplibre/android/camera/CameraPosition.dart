@@ -613,8 +613,8 @@ final class $CameraPosition$Companion$NullableType
   @core$_.override
   CameraPosition$Companion? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : CameraPosition$Companion.fromReference(reference);
+      ? null
+      : CameraPosition$Companion.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();

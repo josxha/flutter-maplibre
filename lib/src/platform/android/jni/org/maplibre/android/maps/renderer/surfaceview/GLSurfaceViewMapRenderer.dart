@@ -127,8 +127,8 @@ final class $GLSurfaceViewMapRenderer$NullableType
   @core$_.override
   GLSurfaceViewMapRenderer? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : GLSurfaceViewMapRenderer.fromReference(reference);
+      ? null
+      : GLSurfaceViewMapRenderer.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>

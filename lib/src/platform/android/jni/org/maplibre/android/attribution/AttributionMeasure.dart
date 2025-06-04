@@ -344,8 +344,8 @@ final class $AttributionMeasure$Builder$NullableType
   @core$_.override
   AttributionMeasure$Builder? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : AttributionMeasure$Builder.fromReference(reference);
+      ? null
+      : AttributionMeasure$Builder.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -587,8 +587,8 @@ final class $AttributionMeasure$Command$NullableType
   @core$_.override
   AttributionMeasure$Command? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : AttributionMeasure$Command.fromReference(reference);
+      ? null
+      : AttributionMeasure$Command.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

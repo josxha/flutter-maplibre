@@ -113,10 +113,9 @@ final class $OfflineGeometryRegionDefinition$Companion$NullableType
   @core$_.override
   OfflineGeometryRegionDefinition$Companion? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : OfflineGeometryRegionDefinition$Companion.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : OfflineGeometryRegionDefinition$Companion.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -687,8 +686,8 @@ final class $OfflineGeometryRegionDefinition$NullableType
   @core$_.override
   OfflineGeometryRegionDefinition? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : OfflineGeometryRegionDefinition.fromReference(reference);
+      ? null
+      : OfflineGeometryRegionDefinition.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

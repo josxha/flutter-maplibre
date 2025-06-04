@@ -145,8 +145,8 @@ final class $OfflineManager$Companion$NullableType
   @core$_.override
   OfflineManager$Companion? fromReference(jni$_.JReference reference) =>
       reference.isNull
-          ? null
-          : OfflineManager$Companion.fromReference(reference);
+      ? null
+      : OfflineManager$Companion.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -435,10 +435,9 @@ final class $OfflineManager$CreateOfflineRegionCallback$NullableType
   @core$_.override
   OfflineManager$CreateOfflineRegionCallback? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : OfflineManager$CreateOfflineRegionCallback.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : OfflineManager$CreateOfflineRegionCallback.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -713,10 +712,9 @@ final class $OfflineManager$FileSourceCallback$NullableType
   @core$_.override
   OfflineManager$FileSourceCallback? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : OfflineManager$FileSourceCallback.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : OfflineManager$FileSourceCallback.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -1054,10 +1052,9 @@ final class $OfflineManager$GetOfflineRegionCallback$NullableType
   @core$_.override
   OfflineManager$GetOfflineRegionCallback? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : OfflineManager$GetOfflineRegionCallback.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : OfflineManager$GetOfflineRegionCallback.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -1360,10 +1357,9 @@ final class $OfflineManager$ListOfflineRegionsCallback$NullableType
   @core$_.override
   OfflineManager$ListOfflineRegionsCallback? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : OfflineManager$ListOfflineRegionsCallback.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : OfflineManager$ListOfflineRegionsCallback.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -1667,10 +1663,9 @@ final class $OfflineManager$MergeOfflineRegionsCallback$NullableType
   @core$_.override
   OfflineManager$MergeOfflineRegionsCallback? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : OfflineManager$MergeOfflineRegionsCallback.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : OfflineManager$MergeOfflineRegionsCallback.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();

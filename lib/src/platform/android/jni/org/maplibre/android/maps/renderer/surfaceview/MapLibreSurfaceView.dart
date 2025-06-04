@@ -207,12 +207,11 @@ final class $MapLibreSurfaceView$OnSurfaceViewDetachedListener$NullableType
   @core$_.override
   MapLibreSurfaceView$OnSurfaceViewDetachedListener? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : MapLibreSurfaceView$OnSurfaceViewDetachedListener.fromReference(
-            reference,
-          );
+  ) => reference.isNull
+      ? null
+      : MapLibreSurfaceView$OnSurfaceViewDetachedListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

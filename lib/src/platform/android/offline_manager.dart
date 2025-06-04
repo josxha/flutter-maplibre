@@ -46,10 +46,9 @@ class OfflineManagerAndroid implements OfflineManager {
             );
             completer.complete(regions);
           },
-          onError:
-              (error) => completer.completeError(
-                error.toDartString(releaseOriginal: true),
-              ),
+          onError: (error) => completer.completeError(
+            error.toDartString(releaseOriginal: true),
+          ),
           onError$async: true,
           onMerge$async: true,
         ),
@@ -247,8 +246,8 @@ class OfflineManagerAndroid implements OfflineManager {
                         loadedBytes: status.getCompletedResourceSize(),
                         loadedTiles: status.getCompletedResourceCount(),
                         totalTiles: status.getRequiredResourceCount(),
-                        totalTilesEstimated:
-                            !status.isRequiredResourceCountPrecise(),
+                        totalTilesEstimated: !status
+                            .isRequiredResourceCountPrecise(),
                         region: region,
                         downloadCompleted: status.isComplete(),
                       ),

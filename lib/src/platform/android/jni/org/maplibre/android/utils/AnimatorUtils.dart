@@ -199,10 +199,9 @@ final class $AnimatorUtils$OnAnimationEndListener$NullableType
   @core$_.override
   AnimatorUtils$OnAnimationEndListener? fromReference(
     jni$_.JReference reference,
-  ) =>
-      reference.isNull
-          ? null
-          : AnimatorUtils$OnAnimationEndListener.fromReference(reference);
+  ) => reference.isNull
+      ? null
+      : AnimatorUtils$OnAnimationEndListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
