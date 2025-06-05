@@ -99,22 +99,21 @@ class _ControllerPageState extends State<ControllerPage> {
                     if (context.mounted) {
                       await showDialog<void>(
                         context: context,
-                        builder:
-                            (context) => AlertDialog(
-                              title: const Text('MapCenter'),
-                              content: Text('''
+                        builder: (context) => AlertDialog(
+                          title: const Text('MapCenter'),
+                          content: Text('''
 center.lng: ${camera.center.lng}
 center.lat: ${camera.center.lat}
 zoom: ${camera.zoom}
 bearing: ${camera.bearing}
 pitch: ${camera.pitch}'''),
-                              actions: [
-                                TextButton(
-                                  onPressed: () => Navigator.of(context).pop(),
-                                  child: const Text('OK'),
-                                ),
-                              ],
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.of(context).pop(),
+                              child: const Text('OK'),
                             ),
+                          ],
+                        ),
                       );
                     }
                   },

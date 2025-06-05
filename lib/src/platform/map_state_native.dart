@@ -29,13 +29,12 @@ abstract class MapLibreMapStateNative extends MapLibreMapState
     bearing: options.initBearing,
     zoom: options.initZoom,
     pitch: options.initPitch,
-    center:
-        options.initCenter == null
-            ? null
-            : pigeon.LngLat(
-              lng: options.initCenter!.lng.toDouble(),
-              lat: options.initCenter!.lat.toDouble(),
-            ),
+    center: options.initCenter == null
+        ? null
+        : pigeon.LngLat(
+            lng: options.initCenter!.lng.toDouble(),
+            lat: options.initCenter!.lat.toDouble(),
+          ),
     minZoom: options.minZoom,
     maxZoom: options.maxZoom,
     minPitch: options.minPitch,

@@ -9,7 +9,7 @@ import 'package:jni/jni.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/layer/layer_manager.dart';
 import 'package:maplibre/src/platform/android/extensions.dart';
-import 'package:maplibre/src/platform/android/jni/jni.dart' as jni;
+import 'package:maplibre/src/platform/android/jni.dart' as jni;
 import 'package:maplibre/src/platform/map_state_native.dart';
 import 'package:maplibre/src/platform/pigeon.g.dart' as pigeon;
 
@@ -217,8 +217,8 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
       cameraUpdate,
       jni.MapLibreMap$CancelableCallback.implement(
         jni.$MapLibreMap$CancelableCallback(
-          onCancel:
-              () => completer.completeError(Exception('Animation cancelled.')),
+          onCancel: () =>
+              completer.completeError(Exception('Animation cancelled.')),
           onFinish: completer.complete,
           onCancel$async: true,
           onFinish$async: true,
@@ -257,8 +257,8 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
       nativeDuration.inMilliseconds,
       jni.MapLibreMap$CancelableCallback.implement(
         jni.$MapLibreMap$CancelableCallback(
-          onCancel:
-              () => completer.completeError(Exception('Animation cancelled.')),
+          onCancel: () =>
+              completer.completeError(Exception('Animation cancelled.')),
           onFinish: completer.complete,
           onFinish$async: true,
           onCancel$async: true,
@@ -302,8 +302,8 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
       nativeDuration.inMilliseconds,
       jni.MapLibreMap$CancelableCallback.implement(
         jni.$MapLibreMap$CancelableCallback(
-          onCancel:
-              () => completer.completeError(Exception('Animation cancelled.')),
+          onCancel: () =>
+              completer.completeError(Exception('Animation cancelled.')),
           onFinish: completer.complete,
           onCancel$async: true,
           onFinish$async: true,
@@ -436,12 +436,11 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
       BearingRenderMode.gps => jni.RenderMode.GPS,
     };
     final jniContext = jni.MapLibreRegistry.INSTANCE.getContext()!;
-    final locOptionsBuilder =
-        jni.LocationComponentOptions.builder(jniContext)
-            .pulseFadeEnabled(pulseFade)!
-            .accuracyAnimationEnabled(accuracyAnimation)!
-            .compassAnimationEnabled(compassAnimation.toJBoolean())!
-            .pulseEnabled(pulse)!;
+    final locOptionsBuilder = jni.LocationComponentOptions.builder(jniContext)
+        .pulseFadeEnabled(pulseFade)!
+        .accuracyAnimationEnabled(accuracyAnimation)!
+        .compassAnimationEnabled(compassAnimation.toJBoolean())!
+        .pulseEnabled(pulse)!;
     final locOptions = locOptionsBuilder.build();
     final locationEngineRequestBuilder =
         jni.LocationEngineRequest$Builder(750) // TODO integrate as parameter
@@ -481,20 +480,20 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
       BearingTrackMode.none =>
         trackLocation
             ? jni
-                .CameraMode
-                .TRACKING // only location
+                  .CameraMode
+                  .TRACKING // only location
             : jni.CameraMode.NONE, // neither location nor bearing
       BearingTrackMode.compass =>
         trackLocation
             ? jni
-                .CameraMode
-                .TRACKING_COMPASS // location with compass bearing
+                  .CameraMode
+                  .TRACKING_COMPASS // location with compass bearing
             : jni.CameraMode.NONE_COMPASS, // only compass bearing
       BearingTrackMode.gps =>
         trackLocation
             ? jni
-                .CameraMode
-                .TRACKING_GPS // location with gps bearing
+                  .CameraMode
+                  .TRACKING_GPS // location with gps bearing
             : jni.CameraMode.NONE_GPS, // only gps bearing
     };
     _locationComponent.setCameraMode(mode);

@@ -31,10 +31,9 @@ class WidgetLayer extends StatelessWidget {
     if (controller == null || camera == null) return const SizedBox.shrink();
 
     // Only Android returns screen pixel, other platforms return logical pixels.
-    final pixelRatio =
-        (!kIsWeb && Platform.isAndroid)
-            ? MediaQuery.devicePixelRatioOf(context)
-            : 1.0;
+    final pixelRatio = (!kIsWeb && Platform.isAndroid)
+        ? MediaQuery.devicePixelRatioOf(context)
+        : 1.0;
 
     Widget buildChild(List<Offset> offsets) => Stack(
       // TODO: filter markers that are completely outside of the visible screen.
