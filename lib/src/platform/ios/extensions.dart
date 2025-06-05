@@ -39,14 +39,12 @@ extension LngLatBoundsExt on LngLatBounds {
   /// Convert a [LngLatBounds] to a [CGPoint].
   MLNCoordinateBounds toMLNCoordinateBounds() {
     final bounds = Struct.create<MLNCoordinateBounds>();
-    bounds.sw =
-        Struct.create<CLLocationCoordinate2D>()
-          ..longitude = longitudeWest
-          ..latitude = latitudeSouth;
-    bounds.ne =
-        Struct.create<CLLocationCoordinate2D>()
-          ..longitude = longitudeEast
-          ..latitude = latitudeNorth;
+    bounds.sw = Struct.create<CLLocationCoordinate2D>()
+      ..longitude = longitudeWest
+      ..latitude = latitudeSouth;
+    bounds.ne = Struct.create<CLLocationCoordinate2D>()
+      ..longitude = longitudeEast
+      ..latitude = latitudeNorth;
     return bounds;
   }
 }
@@ -78,14 +76,13 @@ extension StringExt on String {
       toNSString().dataUsingEncoding_(nsUTF8StringEncoding);
 
   /// Convert a dashed separated name to camel case.
-  String dashedToCamelCase() =>
-      split('-').indexed.map((entry) {
-        final index = entry.$1;
-        final word = entry.$2;
-        // Keep the first word in lowercase
-        if (index == 0) return word;
-        return word[0].toUpperCase() + word.substring(1);
-      }).join();
+  String dashedToCamelCase() => split('-').indexed.map((entry) {
+    final index = entry.$1;
+    final word = entry.$2;
+    // Keep the first word in lowercase
+    if (index == 0) return word;
+    return word[0].toUpperCase() + word.substring(1);
+  }).join();
 }
 
 /// Convert a raw String to a [NSExpression].

@@ -28,12 +28,11 @@ class StyleControllerIos implements StyleController {
     MLNStyleLayer? ffiStyleLayer;
     switch (layer) {
       case BackgroundStyleLayer():
-        ffiStyleLayer =
-            MLNBackgroundStyleLayer.new$()
-              ..initWithIdentifier_(layer.id.toNSString())
-              ..backgroundColor = NSExpression.expressionWithFormat_(
-                layer.color.toHexString(alpha: false).toNSString(),
-              );
+        ffiStyleLayer = MLNBackgroundStyleLayer.new$()
+          ..initWithIdentifier_(layer.id.toNSString())
+          ..backgroundColor = NSExpression.expressionWithFormat_(
+            layer.color.toHexString(alpha: false).toNSString(),
+          );
       case StyleLayerWithSource():
         final ffiSource = _ffiStyle.sourceWithIdentifier_(
           layer.sourceId.toNSString(),
@@ -43,53 +42,29 @@ class StyleControllerIos implements StyleController {
         }
         switch (layer) {
           case FillStyleLayer():
-            ffiStyleLayer =
-                MLNFillStyleLayer.new$()..initWithIdentifier_source_(
-                  layer.id.toNSString(),
-                  ffiSource,
-                );
+            ffiStyleLayer = MLNFillStyleLayer.new$()
+              ..initWithIdentifier_source_(layer.id.toNSString(), ffiSource);
           case CircleStyleLayer():
-            ffiStyleLayer =
-                MLNCircleStyleLayer.new$()..initWithIdentifier_source_(
-                  layer.id.toNSString(),
-                  ffiSource,
-                );
+            ffiStyleLayer = MLNCircleStyleLayer.new$()
+              ..initWithIdentifier_source_(layer.id.toNSString(), ffiSource);
           case FillExtrusionStyleLayer():
-            ffiStyleLayer =
-                MLNFillExtrusionStyleLayer.new$()..initWithIdentifier_source_(
-                  layer.id.toNSString(),
-                  ffiSource,
-                );
+            ffiStyleLayer = MLNFillExtrusionStyleLayer.new$()
+              ..initWithIdentifier_source_(layer.id.toNSString(), ffiSource);
           case HeatmapStyleLayer():
-            ffiStyleLayer =
-                MLNHeatmapStyleLayer.new$()..initWithIdentifier_source_(
-                  layer.id.toNSString(),
-                  ffiSource,
-                );
+            ffiStyleLayer = MLNHeatmapStyleLayer.new$()
+              ..initWithIdentifier_source_(layer.id.toNSString(), ffiSource);
           case HillshadeStyleLayer():
-            ffiStyleLayer =
-                MLNHillshadeStyleLayer.new$()..initWithIdentifier_source_(
-                  layer.id.toNSString(),
-                  ffiSource,
-                );
+            ffiStyleLayer = MLNHillshadeStyleLayer.new$()
+              ..initWithIdentifier_source_(layer.id.toNSString(), ffiSource);
           case LineStyleLayer():
-            ffiStyleLayer =
-                MLNLineStyleLayer.new$()..initWithIdentifier_source_(
-                  layer.id.toNSString(),
-                  ffiSource,
-                );
+            ffiStyleLayer = MLNLineStyleLayer.new$()
+              ..initWithIdentifier_source_(layer.id.toNSString(), ffiSource);
           case RasterStyleLayer():
-            ffiStyleLayer =
-                MLNRasterStyleLayer.new$()..initWithIdentifier_source_(
-                  layer.id.toNSString(),
-                  ffiSource,
-                );
+            ffiStyleLayer = MLNRasterStyleLayer.new$()
+              ..initWithIdentifier_source_(layer.id.toNSString(), ffiSource);
           case SymbolStyleLayer():
-            ffiStyleLayer =
-                MLNSymbolStyleLayer.new$()..initWithIdentifier_source_(
-                  layer.id.toNSString(),
-                  ffiSource,
-                );
+            ffiStyleLayer = MLNSymbolStyleLayer.new$()
+              ..initWithIdentifier_source_(layer.id.toNSString(), ffiSource);
         }
     }
 
@@ -190,15 +165,13 @@ class StyleControllerIos implements StyleController {
           );
         }
       case ImageSource():
-        final coordinates =
-            Struct.create<MLNCoordinateQuad>()
-              ..bottomLeft =
-                  source.coordinates.bottomLeft.toCLLocationCoordinate2D()
-              ..bottomRight =
-                  source.coordinates.bottomRight.toCLLocationCoordinate2D()
-              ..topLeft = source.coordinates.topLeft.toCLLocationCoordinate2D()
-              ..topRight =
-                  source.coordinates.topRight.toCLLocationCoordinate2D();
+        final coordinates = Struct.create<MLNCoordinateQuad>()
+          ..bottomLeft = source.coordinates.bottomLeft
+              .toCLLocationCoordinate2D()
+          ..bottomRight = source.coordinates.bottomRight
+              .toCLLocationCoordinate2D()
+          ..topLeft = source.coordinates.topLeft.toCLLocationCoordinate2D()
+          ..topRight = source.coordinates.topRight.toCLLocationCoordinate2D();
         final imageSource = ffiSource = MLNImageSource.new$();
         imageSource.initWithIdentifier_coordinateQuad_URL_(
           source.id.toNSString(),

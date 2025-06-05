@@ -349,30 +349,29 @@ late final _sel_stringEncodingForData_encodingOptions_convertedString_usedLossyC
     objc.registerName(
       "stringEncodingForData:encodingOptions:convertedString:usedLossyConversion:",
     );
-final _objc_msgSend_1q2ox4r =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.UnsignedLong Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
-              ffi.Pointer<ffi.Bool>,
-            )
-          >
-        >()
-        .asFunction<
-          int Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
-            ffi.Pointer<ffi.Bool>,
-          )
-        >();
+final _objc_msgSend_1q2ox4r = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.UnsignedLong Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
+          ffi.Pointer<ffi.Bool>,
+        )
+      >
+    >()
+    .asFunction<
+      int Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
+        ffi.Pointer<ffi.Bool>,
+      )
+    >();
 
 /// NSStringEncodingDetection
 extension NSStringEncodingDetection on objc.NSString {
@@ -403,22 +402,21 @@ extension NSStringEncodingDetection on objc.NSString {
 late final _sel_readableTypeIdentifiersForItemProvider = objc.registerName(
   "readableTypeIdentifiersForItemProvider",
 );
-final _objc_msgSend_151sglz =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
+final _objc_msgSend_151sglz = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+      )
+    >();
 ffi.Pointer<objc.ObjCObject> _ObjCBlock_NSArray_ffiVoid_fnPtrTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<ffi.Void> arg0,
@@ -428,28 +426,31 @@ ffi.Pointer<objc.ObjCObject> _ObjCBlock_NSArray_ffiVoid_fnPtrTrampoline(
         ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void> arg0)
       >
     >()
-    .asFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void>)>()(
-  arg0,
-);
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void>)
+    >()(arg0);
 ffi.Pointer<ffi.Void> _ObjCBlock_NSArray_ffiVoid_fnPtrCallable =
     ffi.Pointer.fromFunction<
-      ffi.Pointer<objc.ObjCObject> Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<ffi.Void>,
-      )
-    >(_ObjCBlock_NSArray_ffiVoid_fnPtrTrampoline).cast();
+          ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<ffi.Void>,
+          )
+        >(_ObjCBlock_NSArray_ffiVoid_fnPtrTrampoline)
+        .cast();
 ffi.Pointer<objc.ObjCObject> _ObjCBlock_NSArray_ffiVoid_closureTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<ffi.Void> arg0,
-) => (objc.getBlockClosure(block)
-    as ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void>))(arg0);
+) =>
+    (objc.getBlockClosure(block)
+        as ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void>))(arg0);
 ffi.Pointer<ffi.Void> _ObjCBlock_NSArray_ffiVoid_closureCallable =
     ffi.Pointer.fromFunction<
-      ffi.Pointer<objc.ObjCObject> Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<ffi.Void>,
-      )
-    >(_ObjCBlock_NSArray_ffiVoid_closureTrampoline).cast();
+          ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<ffi.Void>,
+          )
+        >(_ObjCBlock_NSArray_ffiVoid_closureTrampoline)
+        .cast();
 
 /// Construction methods for `objc.ObjCBlock<objc.NSArray Function(ffi.Pointer<ffi.Void>)>`.
 abstract final class ObjCBlock_NSArray_ffiVoid {
@@ -535,28 +536,27 @@ typedef instancetype = ffi.Pointer<objc.ObjCObject>;
 typedef Dartinstancetype = objc.ObjCObjectBase;
 late final _sel_objectWithItemProviderData_typeIdentifier_error_ = objc
     .registerName("objectWithItemProviderData:typeIdentifier:error:");
-final _objc_msgSend_1pnyuds =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
-          )
-        >();
+final _objc_msgSend_1pnyuds = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
+      )
+    >();
 instancetype
 _ObjCBlock_instancetype_ffiVoid_NSData_NSString_NSError_fnPtrTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
@@ -586,16 +586,15 @@ _ObjCBlock_instancetype_ffiVoid_NSData_NSString_NSError_fnPtrTrampoline(
 ffi.Pointer<ffi.Void>
 _ObjCBlock_instancetype_ffiVoid_NSData_NSString_NSError_fnPtrCallable =
     ffi.Pointer.fromFunction<
-      instancetype Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<ffi.Void>,
-        ffi.Pointer<objc.ObjCObject>,
-        ffi.Pointer<objc.ObjCObject>,
-        ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
-      )
-    >(
-      _ObjCBlock_instancetype_ffiVoid_NSData_NSString_NSError_fnPtrTrampoline,
-    ).cast();
+          instancetype Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<ffi.Void>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
+          )
+        >(_ObjCBlock_instancetype_ffiVoid_NSData_NSString_NSError_fnPtrTrampoline)
+        .cast();
 instancetype
 _ObjCBlock_instancetype_ffiVoid_NSData_NSString_NSError_closureTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
@@ -603,26 +602,26 @@ _ObjCBlock_instancetype_ffiVoid_NSData_NSString_NSError_closureTrampoline(
   ffi.Pointer<objc.ObjCObject> arg1,
   ffi.Pointer<objc.ObjCObject> arg2,
   ffi.Pointer<ffi.Pointer<objc.ObjCObject>> arg3,
-) => (objc.getBlockClosure(block)
-    as instancetype Function(
-      ffi.Pointer<ffi.Void>,
-      ffi.Pointer<objc.ObjCObject>,
-      ffi.Pointer<objc.ObjCObject>,
-      ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
-    ))(arg0, arg1, arg2, arg3);
+) =>
+    (objc.getBlockClosure(block)
+        as instancetype Function(
+          ffi.Pointer<ffi.Void>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
+        ))(arg0, arg1, arg2, arg3);
 ffi.Pointer<ffi.Void>
 _ObjCBlock_instancetype_ffiVoid_NSData_NSString_NSError_closureCallable =
     ffi.Pointer.fromFunction<
-      instancetype Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<ffi.Void>,
-        ffi.Pointer<objc.ObjCObject>,
-        ffi.Pointer<objc.ObjCObject>,
-        ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
-      )
-    >(
-      _ObjCBlock_instancetype_ffiVoid_NSData_NSString_NSError_closureTrampoline,
-    ).cast();
+          instancetype Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<ffi.Void>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
+          )
+        >(_ObjCBlock_instancetype_ffiVoid_NSData_NSString_NSError_closureTrampoline)
+        .cast();
 
 /// Construction methods for `objc.ObjCBlock<ffi.Pointer<objc.ObjCObject>? Function(ffi.Pointer<ffi.Void>, objc.NSData, objc.NSString, ffi.Pointer<ffi.Pointer<objc.ObjCObject>>)>`.
 abstract final class ObjCBlock_instancetype_ffiVoid_NSData_NSString_NSError {
@@ -639,14 +638,15 @@ abstract final class ObjCBlock_instancetype_ffiVoid_NSData_NSString_NSError {
     ffi.Pointer<objc.ObjCBlockImpl> pointer, {
     bool retain = false,
     bool release = false,
-  }) => objc.ObjCBlock<
-    ffi.Pointer<objc.ObjCObject>? Function(
-      ffi.Pointer<ffi.Void>,
-      objc.NSData,
-      objc.NSString,
-      ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
-    )
-  >(pointer, retain: retain, release: release);
+  }) =>
+      objc.ObjCBlock<
+        ffi.Pointer<objc.ObjCObject>? Function(
+          ffi.Pointer<ffi.Void>,
+          objc.NSData,
+          objc.NSString,
+          ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
+        )
+      >(pointer, retain: retain, release: release);
 
   /// Creates a block from a C function pointer.
   ///
@@ -673,21 +673,22 @@ abstract final class ObjCBlock_instancetype_ffiVoid_NSData_NSString_NSError {
       >
     >
     ptr,
-  ) => objc.ObjCBlock<
-    ffi.Pointer<objc.ObjCObject>? Function(
-      ffi.Pointer<ffi.Void>,
-      objc.NSData,
-      objc.NSString,
-      ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
-    )
-  >(
-    objc.newPointerBlock(
-      _ObjCBlock_instancetype_ffiVoid_NSData_NSString_NSError_fnPtrCallable,
-      ptr.cast(),
-    ),
-    retain: false,
-    release: true,
-  );
+  ) =>
+      objc.ObjCBlock<
+        ffi.Pointer<objc.ObjCObject>? Function(
+          ffi.Pointer<ffi.Void>,
+          objc.NSData,
+          objc.NSString,
+          ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
+        )
+      >(
+        objc.newPointerBlock(
+          _ObjCBlock_instancetype_ffiVoid_NSData_NSString_NSError_fnPtrCallable,
+          ptr.cast(),
+        ),
+        retain: false,
+        release: true,
+      );
 
   /// Creates a block from a Dart function.
   ///
@@ -714,34 +715,39 @@ abstract final class ObjCBlock_instancetype_ffiVoid_NSData_NSString_NSError {
     )
     fn, {
     bool keepIsolateAlive = true,
-  }) => objc.ObjCBlock<
-    ffi.Pointer<objc.ObjCObject>? Function(
-      ffi.Pointer<ffi.Void>,
-      objc.NSData,
-      objc.NSString,
-      ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
-    )
-  >(
-    objc.newClosureBlock(
-      _ObjCBlock_instancetype_ffiVoid_NSData_NSString_NSError_closureCallable,
-      (
-        ffi.Pointer<ffi.Void> arg0,
-        ffi.Pointer<objc.ObjCObject> arg1,
-        ffi.Pointer<objc.ObjCObject> arg2,
-        ffi.Pointer<ffi.Pointer<objc.ObjCObject>> arg3,
-      ) =>
-          fn(
-            arg0,
-            objc.NSData.castFromPointer(arg1, retain: true, release: true),
-            objc.NSString.castFromPointer(arg2, retain: true, release: true),
-            arg3,
-          )?.ref.retainAndAutorelease() ??
-          ffi.nullptr,
-      keepIsolateAlive,
-    ),
-    retain: false,
-    release: true,
-  );
+  }) =>
+      objc.ObjCBlock<
+        ffi.Pointer<objc.ObjCObject>? Function(
+          ffi.Pointer<ffi.Void>,
+          objc.NSData,
+          objc.NSString,
+          ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
+        )
+      >(
+        objc.newClosureBlock(
+          _ObjCBlock_instancetype_ffiVoid_NSData_NSString_NSError_closureCallable,
+          (
+            ffi.Pointer<ffi.Void> arg0,
+            ffi.Pointer<objc.ObjCObject> arg1,
+            ffi.Pointer<objc.ObjCObject> arg2,
+            ffi.Pointer<ffi.Pointer<objc.ObjCObject>> arg3,
+          ) =>
+              fn(
+                arg0,
+                objc.NSData.castFromPointer(arg1, retain: true, release: true),
+                objc.NSString.castFromPointer(
+                  arg2,
+                  retain: true,
+                  release: true,
+                ),
+                arg3,
+              )?.ref.retainAndAutorelease() ??
+              ffi.nullptr,
+          keepIsolateAlive,
+        ),
+        retain: false,
+        release: true,
+      );
 }
 
 /// Call operator for `objc.ObjCBlock<ffi.Pointer<objc.ObjCObject>? Function(ffi.Pointer<ffi.Void>, objc.NSData, objc.NSString, ffi.Pointer<ffi.Pointer<objc.ObjCObject>>)>`.
@@ -762,66 +768,54 @@ extension ObjCBlock_instancetype_ffiVoid_NSData_NSString_NSError_CallExtension
     ffi.Pointer<ffi.Pointer<objc.ObjCObject>> arg3,
   ) =>
       ref.pointer.ref.invoke
-                  .cast<
-                    ffi.NativeFunction<
-                      instancetype Function(
-                        ffi.Pointer<objc.ObjCBlockImpl> block,
-                        ffi.Pointer<ffi.Void> arg0,
-                        ffi.Pointer<objc.ObjCObject> arg1,
-                        ffi.Pointer<objc.ObjCObject> arg2,
-                        ffi.Pointer<ffi.Pointer<objc.ObjCObject>> arg3,
-                      )
-                    >
-                  >()
-                  .asFunction<
-                    instancetype Function(
-                      ffi.Pointer<objc.ObjCBlockImpl>,
-                      ffi.Pointer<ffi.Void>,
-                      ffi.Pointer<objc.ObjCObject>,
-                      ffi.Pointer<objc.ObjCObject>,
-                      ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
-                    )
-                  >()(
-                    ref.pointer,
-                    arg0,
-                    arg1.ref.pointer,
-                    arg2.ref.pointer,
-                    arg3,
-                  )
-                  .address ==
-              0
-          ? null
-          : objc.ObjCObjectBase(
-            ref.pointer.ref.invoke
-                .cast<
-                  ffi.NativeFunction<
-                    instancetype Function(
-                      ffi.Pointer<objc.ObjCBlockImpl> block,
-                      ffi.Pointer<ffi.Void> arg0,
-                      ffi.Pointer<objc.ObjCObject> arg1,
-                      ffi.Pointer<objc.ObjCObject> arg2,
-                      ffi.Pointer<ffi.Pointer<objc.ObjCObject>> arg3,
-                    )
-                  >
-                >()
-                .asFunction<
+              .cast<
+                ffi.NativeFunction<
                   instancetype Function(
-                    ffi.Pointer<objc.ObjCBlockImpl>,
-                    ffi.Pointer<ffi.Void>,
-                    ffi.Pointer<objc.ObjCObject>,
-                    ffi.Pointer<objc.ObjCObject>,
-                    ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
+                    ffi.Pointer<objc.ObjCBlockImpl> block,
+                    ffi.Pointer<ffi.Void> arg0,
+                    ffi.Pointer<objc.ObjCObject> arg1,
+                    ffi.Pointer<objc.ObjCObject> arg2,
+                    ffi.Pointer<ffi.Pointer<objc.ObjCObject>> arg3,
                   )
-                >()(
-              ref.pointer,
-              arg0,
-              arg1.ref.pointer,
-              arg2.ref.pointer,
-              arg3,
-            ),
-            retain: true,
-            release: true,
-          );
+                >
+              >()
+              .asFunction<
+                instancetype Function(
+                  ffi.Pointer<objc.ObjCBlockImpl>,
+                  ffi.Pointer<ffi.Void>,
+                  ffi.Pointer<objc.ObjCObject>,
+                  ffi.Pointer<objc.ObjCObject>,
+                  ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
+                )
+              >()(ref.pointer, arg0, arg1.ref.pointer, arg2.ref.pointer, arg3)
+              .address ==
+          0
+      ? null
+      : objc.ObjCObjectBase(
+          ref.pointer.ref.invoke
+              .cast<
+                ffi.NativeFunction<
+                  instancetype Function(
+                    ffi.Pointer<objc.ObjCBlockImpl> block,
+                    ffi.Pointer<ffi.Void> arg0,
+                    ffi.Pointer<objc.ObjCObject> arg1,
+                    ffi.Pointer<objc.ObjCObject> arg2,
+                    ffi.Pointer<ffi.Pointer<objc.ObjCObject>> arg3,
+                  )
+                >
+              >()
+              .asFunction<
+                instancetype Function(
+                  ffi.Pointer<objc.ObjCBlockImpl>,
+                  ffi.Pointer<ffi.Void>,
+                  ffi.Pointer<objc.ObjCObject>,
+                  ffi.Pointer<objc.ObjCObject>,
+                  ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
+                )
+              >()(ref.pointer, arg0, arg1.ref.pointer, arg2.ref.pointer, arg3),
+          retain: true,
+          release: true,
+        );
 }
 
 late final _sel_writableTypeIdentifiersForItemProvider = objc.registerName(
@@ -831,24 +825,23 @@ late final _sel_itemProviderVisibilityForRepresentationWithTypeIdentifier_ =
     objc.registerName(
       "itemProviderVisibilityForRepresentationWithTypeIdentifier:",
     );
-final _objc_msgSend_16fy0up =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Long Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          int Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_16fy0up = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Long Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      int Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 int
 _ObjCBlock_NSItemProviderRepresentationVisibility_ffiVoid_NSString_fnPtrTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
@@ -869,37 +862,40 @@ _ObjCBlock_NSItemProviderRepresentationVisibility_ffiVoid_NSString_fnPtrTrampoli
 ffi.Pointer<ffi.Void>
 _ObjCBlock_NSItemProviderRepresentationVisibility_ffiVoid_NSString_fnPtrCallable =
     ffi.Pointer.fromFunction<
-      ffi.Long Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<ffi.Void>,
-        ffi.Pointer<objc.ObjCObject>,
-      )
-    >(
-      _ObjCBlock_NSItemProviderRepresentationVisibility_ffiVoid_NSString_fnPtrTrampoline,
-      0,
-    ).cast();
+          ffi.Long Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<ffi.Void>,
+            ffi.Pointer<objc.ObjCObject>,
+          )
+        >(
+          _ObjCBlock_NSItemProviderRepresentationVisibility_ffiVoid_NSString_fnPtrTrampoline,
+          0,
+        )
+        .cast();
 int
 _ObjCBlock_NSItemProviderRepresentationVisibility_ffiVoid_NSString_closureTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<ffi.Void> arg0,
   ffi.Pointer<objc.ObjCObject> arg1,
-) => (objc.getBlockClosure(block)
-    as int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<objc.ObjCObject>))(
-  arg0,
-  arg1,
-);
+) =>
+    (objc.getBlockClosure(block)
+        as int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<objc.ObjCObject>))(
+      arg0,
+      arg1,
+    );
 ffi.Pointer<ffi.Void>
 _ObjCBlock_NSItemProviderRepresentationVisibility_ffiVoid_NSString_closureCallable =
     ffi.Pointer.fromFunction<
-      ffi.Long Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<ffi.Void>,
-        ffi.Pointer<objc.ObjCObject>,
-      )
-    >(
-      _ObjCBlock_NSItemProviderRepresentationVisibility_ffiVoid_NSString_closureTrampoline,
-      0,
-    ).cast();
+          ffi.Long Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<ffi.Void>,
+            ffi.Pointer<objc.ObjCObject>,
+          )
+        >(
+          _ObjCBlock_NSItemProviderRepresentationVisibility_ffiVoid_NSString_closureTrampoline,
+          0,
+        )
+        .cast();
 
 /// Construction methods for `objc.ObjCBlock<ffi.Long Function(ffi.Pointer<ffi.Void>, objc.NSString)>`.
 abstract final class ObjCBlock_NSItemProviderRepresentationVisibility_ffiVoid_NSString {
@@ -959,11 +955,10 @@ abstract final class ObjCBlock_NSItemProviderRepresentationVisibility_ffiVoid_NS
   }) => objc.ObjCBlock<ffi.Long Function(ffi.Pointer<ffi.Void>, objc.NSString)>(
     objc.newClosureBlock(
       _ObjCBlock_NSItemProviderRepresentationVisibility_ffiVoid_NSString_closureCallable,
-      (ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObject> arg1) =>
-          fn(
-            arg0,
-            objc.NSString.castFromPointer(arg1, retain: true, release: true),
-          ).value,
+      (ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObject> arg1) => fn(
+        arg0,
+        objc.NSString.castFromPointer(arg1, retain: true, release: true),
+      ).value,
       keepIsolateAlive,
     ),
     retain: false,
@@ -1045,29 +1040,32 @@ void _ObjCBlock_ffiVoid_NSData_NSError_fnPtrTrampoline(
     >()(arg0, arg1);
 ffi.Pointer<ffi.Void> _ObjCBlock_ffiVoid_NSData_NSError_fnPtrCallable =
     ffi.Pointer.fromFunction<
-      ffi.Void Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<objc.ObjCObject>,
-        ffi.Pointer<objc.ObjCObject>,
-      )
-    >(_ObjCBlock_ffiVoid_NSData_NSError_fnPtrTrampoline).cast();
+          ffi.Void Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>,
+          )
+        >(_ObjCBlock_ffiVoid_NSData_NSError_fnPtrTrampoline)
+        .cast();
 void _ObjCBlock_ffiVoid_NSData_NSError_closureTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<objc.ObjCObject> arg0,
   ffi.Pointer<objc.ObjCObject> arg1,
-) => (objc.getBlockClosure(block)
-    as void Function(
-      ffi.Pointer<objc.ObjCObject>,
-      ffi.Pointer<objc.ObjCObject>,
-    ))(arg0, arg1);
+) =>
+    (objc.getBlockClosure(block)
+        as void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+        ))(arg0, arg1);
 ffi.Pointer<ffi.Void> _ObjCBlock_ffiVoid_NSData_NSError_closureCallable =
     ffi.Pointer.fromFunction<
-      ffi.Void Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<objc.ObjCObject>,
-        ffi.Pointer<objc.ObjCObject>,
-      )
-    >(_ObjCBlock_ffiVoid_NSData_NSError_closureTrampoline).cast();
+          ffi.Void Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>,
+          )
+        >(_ObjCBlock_ffiVoid_NSData_NSError_closureTrampoline)
+        .cast();
 void _ObjCBlock_ffiVoid_NSData_NSError_listenerTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<objc.ObjCObject> arg0,
@@ -1088,14 +1086,15 @@ ffi.NativeCallable<
     ffi.Pointer<objc.ObjCObject>,
   )
 >
-_ObjCBlock_ffiVoid_NSData_NSError_listenerCallable = ffi.NativeCallable<
-    ffi.Void Function(
-      ffi.Pointer<objc.ObjCBlockImpl>,
-      ffi.Pointer<objc.ObjCObject>,
-      ffi.Pointer<objc.ObjCObject>,
-    )
-  >.listener(_ObjCBlock_ffiVoid_NSData_NSError_listenerTrampoline)
-  ..keepIsolateAlive = false;
+_ObjCBlock_ffiVoid_NSData_NSError_listenerCallable =
+    ffi.NativeCallable<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCBlockImpl>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >.listener(_ObjCBlock_ffiVoid_NSData_NSError_listenerTrampoline)
+      ..keepIsolateAlive = false;
 void _ObjCBlock_ffiVoid_NSData_NSError_blockingTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<ffi.Void> waiter,
@@ -1123,15 +1122,16 @@ ffi.NativeCallable<
     ffi.Pointer<objc.ObjCObject>,
   )
 >
-_ObjCBlock_ffiVoid_NSData_NSError_blockingCallable = ffi.NativeCallable<
-    ffi.Void Function(
-      ffi.Pointer<objc.ObjCBlockImpl>,
-      ffi.Pointer<ffi.Void>,
-      ffi.Pointer<objc.ObjCObject>,
-      ffi.Pointer<objc.ObjCObject>,
-    )
-  >.isolateLocal(_ObjCBlock_ffiVoid_NSData_NSError_blockingTrampoline)
-  ..keepIsolateAlive = false;
+_ObjCBlock_ffiVoid_NSData_NSError_blockingCallable =
+    ffi.NativeCallable<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCBlockImpl>,
+          ffi.Pointer<ffi.Void>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >.isolateLocal(_ObjCBlock_ffiVoid_NSData_NSError_blockingTrampoline)
+      ..keepIsolateAlive = false;
 ffi.NativeCallable<
   ffi.Void Function(
     ffi.Pointer<objc.ObjCBlockImpl>,
@@ -1140,15 +1140,16 @@ ffi.NativeCallable<
     ffi.Pointer<objc.ObjCObject>,
   )
 >
-_ObjCBlock_ffiVoid_NSData_NSError_blockingListenerCallable = ffi.NativeCallable<
-    ffi.Void Function(
-      ffi.Pointer<objc.ObjCBlockImpl>,
-      ffi.Pointer<ffi.Void>,
-      ffi.Pointer<objc.ObjCObject>,
-      ffi.Pointer<objc.ObjCObject>,
-    )
-  >.listener(_ObjCBlock_ffiVoid_NSData_NSError_blockingTrampoline)
-  ..keepIsolateAlive = false;
+_ObjCBlock_ffiVoid_NSData_NSError_blockingListenerCallable =
+    ffi.NativeCallable<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCBlockImpl>,
+          ffi.Pointer<ffi.Void>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >.listener(_ObjCBlock_ffiVoid_NSData_NSError_blockingTrampoline)
+      ..keepIsolateAlive = false;
 
 /// Construction methods for `objc.ObjCBlock<ffi.Void Function(objc.NSData?, objc.NSError?)>`.
 abstract final class ObjCBlock_ffiVoid_NSData_NSError {
@@ -1323,53 +1324,53 @@ abstract final class ObjCBlock_ffiVoid_NSData_NSError {
 /// Call operator for `objc.ObjCBlock<ffi.Void Function(objc.NSData?, objc.NSError?)>`.
 extension ObjCBlock_ffiVoid_NSData_NSError_CallExtension
     on objc.ObjCBlock<ffi.Void Function(objc.NSData?, objc.NSError?)> {
-  void call(objc.NSData? arg0, objc.NSError? arg1) => ref.pointer.ref.invoke
-      .cast<
-        ffi.NativeFunction<
-          ffi.Void Function(
-            ffi.Pointer<objc.ObjCBlockImpl> block,
-            ffi.Pointer<objc.ObjCObject> arg0,
-            ffi.Pointer<objc.ObjCObject> arg1,
-          )
-        >
-      >()
-      .asFunction<
-        void Function(
-          ffi.Pointer<objc.ObjCBlockImpl>,
-          ffi.Pointer<objc.ObjCObject>,
-          ffi.Pointer<objc.ObjCObject>,
-        )
-      >()(
-    ref.pointer,
-    arg0?.ref.pointer ?? ffi.nullptr,
-    arg1?.ref.pointer ?? ffi.nullptr,
-  );
+  void call(objc.NSData? arg0, objc.NSError? arg1) =>
+      ref.pointer.ref.invoke
+          .cast<
+            ffi.NativeFunction<
+              ffi.Void Function(
+                ffi.Pointer<objc.ObjCBlockImpl> block,
+                ffi.Pointer<objc.ObjCObject> arg0,
+                ffi.Pointer<objc.ObjCObject> arg1,
+              )
+            >
+          >()
+          .asFunction<
+            void Function(
+              ffi.Pointer<objc.ObjCBlockImpl>,
+              ffi.Pointer<objc.ObjCObject>,
+              ffi.Pointer<objc.ObjCObject>,
+            )
+          >()(
+        ref.pointer,
+        arg0?.ref.pointer ?? ffi.nullptr,
+        arg1?.ref.pointer ?? ffi.nullptr,
+      );
 }
 
 late final _sel_loadDataWithTypeIdentifier_forItemProviderCompletionHandler_ =
     objc.registerName(
       "loadDataWithTypeIdentifier:forItemProviderCompletionHandler:",
     );
-final _objc_msgSend_r0bo0s =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCBlockImpl>,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCBlockImpl>,
-          )
-        >();
+final _objc_msgSend_r0bo0s = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCBlockImpl>,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCBlockImpl>,
+      )
+    >();
 ffi.Pointer<objc.ObjCObject>
 _ObjCBlock_NSProgress_ffiVoid_NSString_ffiVoidNSDataNSError_fnPtrTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
@@ -1396,39 +1397,38 @@ _ObjCBlock_NSProgress_ffiVoid_NSString_ffiVoidNSDataNSError_fnPtrTrampoline(
 ffi.Pointer<ffi.Void>
 _ObjCBlock_NSProgress_ffiVoid_NSString_ffiVoidNSDataNSError_fnPtrCallable =
     ffi.Pointer.fromFunction<
-      ffi.Pointer<objc.ObjCObject> Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<ffi.Void>,
-        ffi.Pointer<objc.ObjCObject>,
-        ffi.Pointer<objc.ObjCBlockImpl>,
-      )
-    >(
-      _ObjCBlock_NSProgress_ffiVoid_NSString_ffiVoidNSDataNSError_fnPtrTrampoline,
-    ).cast();
+          ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<ffi.Void>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCBlockImpl>,
+          )
+        >(_ObjCBlock_NSProgress_ffiVoid_NSString_ffiVoidNSDataNSError_fnPtrTrampoline)
+        .cast();
 ffi.Pointer<objc.ObjCObject>
 _ObjCBlock_NSProgress_ffiVoid_NSString_ffiVoidNSDataNSError_closureTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<ffi.Void> arg0,
   ffi.Pointer<objc.ObjCObject> arg1,
   ffi.Pointer<objc.ObjCBlockImpl> arg2,
-) => (objc.getBlockClosure(block)
-    as ffi.Pointer<objc.ObjCObject> Function(
-      ffi.Pointer<ffi.Void>,
-      ffi.Pointer<objc.ObjCObject>,
-      ffi.Pointer<objc.ObjCBlockImpl>,
-    ))(arg0, arg1, arg2);
+) =>
+    (objc.getBlockClosure(block)
+        as ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<ffi.Void>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCBlockImpl>,
+        ))(arg0, arg1, arg2);
 ffi.Pointer<ffi.Void>
 _ObjCBlock_NSProgress_ffiVoid_NSString_ffiVoidNSDataNSError_closureCallable =
     ffi.Pointer.fromFunction<
-      ffi.Pointer<objc.ObjCObject> Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<ffi.Void>,
-        ffi.Pointer<objc.ObjCObject>,
-        ffi.Pointer<objc.ObjCBlockImpl>,
-      )
-    >(
-      _ObjCBlock_NSProgress_ffiVoid_NSString_ffiVoidNSDataNSError_closureTrampoline,
-    ).cast();
+          ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<ffi.Void>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCBlockImpl>,
+          )
+        >(_ObjCBlock_NSProgress_ffiVoid_NSString_ffiVoidNSDataNSError_closureTrampoline)
+        .cast();
 
 /// Construction methods for `objc.ObjCBlock<NSProgress? Function(ffi.Pointer<ffi.Void>, objc.NSString, objc.ObjCBlock<ffi.Void Function(objc.NSData?, objc.NSError?)>)>`.
 abstract final class ObjCBlock_NSProgress_ffiVoid_NSString_ffiVoidNSDataNSError {
@@ -1444,13 +1444,14 @@ abstract final class ObjCBlock_NSProgress_ffiVoid_NSString_ffiVoidNSDataNSError 
     ffi.Pointer<objc.ObjCBlockImpl> pointer, {
     bool retain = false,
     bool release = false,
-  }) => objc.ObjCBlock<
-    NSProgress? Function(
-      ffi.Pointer<ffi.Void>,
-      objc.NSString,
-      objc.ObjCBlock<ffi.Void Function(objc.NSData?, objc.NSError?)>,
-    )
-  >(pointer, retain: retain, release: release);
+  }) =>
+      objc.ObjCBlock<
+        NSProgress? Function(
+          ffi.Pointer<ffi.Void>,
+          objc.NSString,
+          objc.ObjCBlock<ffi.Void Function(objc.NSData?, objc.NSError?)>,
+        )
+      >(pointer, retain: retain, release: release);
 
   /// Creates a block from a C function pointer.
   ///
@@ -1475,20 +1476,21 @@ abstract final class ObjCBlock_NSProgress_ffiVoid_NSString_ffiVoidNSDataNSError 
       >
     >
     ptr,
-  ) => objc.ObjCBlock<
-    NSProgress? Function(
-      ffi.Pointer<ffi.Void>,
-      objc.NSString,
-      objc.ObjCBlock<ffi.Void Function(objc.NSData?, objc.NSError?)>,
-    )
-  >(
-    objc.newPointerBlock(
-      _ObjCBlock_NSProgress_ffiVoid_NSString_ffiVoidNSDataNSError_fnPtrCallable,
-      ptr.cast(),
-    ),
-    retain: false,
-    release: true,
-  );
+  ) =>
+      objc.ObjCBlock<
+        NSProgress? Function(
+          ffi.Pointer<ffi.Void>,
+          objc.NSString,
+          objc.ObjCBlock<ffi.Void Function(objc.NSData?, objc.NSError?)>,
+        )
+      >(
+        objc.newPointerBlock(
+          _ObjCBlock_NSProgress_ffiVoid_NSString_ffiVoidNSDataNSError_fnPtrCallable,
+          ptr.cast(),
+        ),
+        retain: false,
+        release: true,
+      );
 
   /// Creates a block from a Dart function.
   ///
@@ -1513,35 +1515,40 @@ abstract final class ObjCBlock_NSProgress_ffiVoid_NSString_ffiVoidNSDataNSError 
     )
     fn, {
     bool keepIsolateAlive = true,
-  }) => objc.ObjCBlock<
-    NSProgress? Function(
-      ffi.Pointer<ffi.Void>,
-      objc.NSString,
-      objc.ObjCBlock<ffi.Void Function(objc.NSData?, objc.NSError?)>,
-    )
-  >(
-    objc.newClosureBlock(
-      _ObjCBlock_NSProgress_ffiVoid_NSString_ffiVoidNSDataNSError_closureCallable,
-      (
-        ffi.Pointer<ffi.Void> arg0,
-        ffi.Pointer<objc.ObjCObject> arg1,
-        ffi.Pointer<objc.ObjCBlockImpl> arg2,
-      ) =>
-          fn(
-            arg0,
-            objc.NSString.castFromPointer(arg1, retain: true, release: true),
-            ObjCBlock_ffiVoid_NSData_NSError.castFromPointer(
-              arg2,
-              retain: true,
-              release: true,
-            ),
-          )?.ref.retainAndAutorelease() ??
-          ffi.nullptr,
-      keepIsolateAlive,
-    ),
-    retain: false,
-    release: true,
-  );
+  }) =>
+      objc.ObjCBlock<
+        NSProgress? Function(
+          ffi.Pointer<ffi.Void>,
+          objc.NSString,
+          objc.ObjCBlock<ffi.Void Function(objc.NSData?, objc.NSError?)>,
+        )
+      >(
+        objc.newClosureBlock(
+          _ObjCBlock_NSProgress_ffiVoid_NSString_ffiVoidNSDataNSError_closureCallable,
+          (
+            ffi.Pointer<ffi.Void> arg0,
+            ffi.Pointer<objc.ObjCObject> arg1,
+            ffi.Pointer<objc.ObjCBlockImpl> arg2,
+          ) =>
+              fn(
+                arg0,
+                objc.NSString.castFromPointer(
+                  arg1,
+                  retain: true,
+                  release: true,
+                ),
+                ObjCBlock_ffiVoid_NSData_NSError.castFromPointer(
+                  arg2,
+                  retain: true,
+                  release: true,
+                ),
+              )?.ref.retainAndAutorelease() ??
+              ffi.nullptr,
+          keepIsolateAlive,
+        ),
+        retain: false,
+        release: true,
+      );
 }
 
 /// Call operator for `objc.ObjCBlock<NSProgress? Function(ffi.Pointer<ffi.Void>, objc.NSString, objc.ObjCBlock<ffi.Void Function(objc.NSData?, objc.NSError?)>)>`.
@@ -1560,50 +1567,50 @@ extension ObjCBlock_NSProgress_ffiVoid_NSString_ffiVoidNSDataNSError_CallExtensi
     objc.ObjCBlock<ffi.Void Function(objc.NSData?, objc.NSError?)> arg2,
   ) =>
       ref.pointer.ref.invoke
-                  .cast<
-                    ffi.NativeFunction<
-                      ffi.Pointer<objc.ObjCObject> Function(
-                        ffi.Pointer<objc.ObjCBlockImpl> block,
-                        ffi.Pointer<ffi.Void> arg0,
-                        ffi.Pointer<objc.ObjCObject> arg1,
-                        ffi.Pointer<objc.ObjCBlockImpl> arg2,
-                      )
-                    >
-                  >()
-                  .asFunction<
-                    ffi.Pointer<objc.ObjCObject> Function(
-                      ffi.Pointer<objc.ObjCBlockImpl>,
-                      ffi.Pointer<ffi.Void>,
-                      ffi.Pointer<objc.ObjCObject>,
-                      ffi.Pointer<objc.ObjCBlockImpl>,
-                    )
-                  >()(ref.pointer, arg0, arg1.ref.pointer, arg2.ref.pointer)
-                  .address ==
-              0
-          ? null
-          : NSProgress.castFromPointer(
-            ref.pointer.ref.invoke
-                .cast<
-                  ffi.NativeFunction<
-                    ffi.Pointer<objc.ObjCObject> Function(
-                      ffi.Pointer<objc.ObjCBlockImpl> block,
-                      ffi.Pointer<ffi.Void> arg0,
-                      ffi.Pointer<objc.ObjCObject> arg1,
-                      ffi.Pointer<objc.ObjCBlockImpl> arg2,
-                    )
-                  >
-                >()
-                .asFunction<
+              .cast<
+                ffi.NativeFunction<
                   ffi.Pointer<objc.ObjCObject> Function(
-                    ffi.Pointer<objc.ObjCBlockImpl>,
-                    ffi.Pointer<ffi.Void>,
-                    ffi.Pointer<objc.ObjCObject>,
-                    ffi.Pointer<objc.ObjCBlockImpl>,
+                    ffi.Pointer<objc.ObjCBlockImpl> block,
+                    ffi.Pointer<ffi.Void> arg0,
+                    ffi.Pointer<objc.ObjCObject> arg1,
+                    ffi.Pointer<objc.ObjCBlockImpl> arg2,
                   )
-                >()(ref.pointer, arg0, arg1.ref.pointer, arg2.ref.pointer),
-            retain: true,
-            release: true,
-          );
+                >
+              >()
+              .asFunction<
+                ffi.Pointer<objc.ObjCObject> Function(
+                  ffi.Pointer<objc.ObjCBlockImpl>,
+                  ffi.Pointer<ffi.Void>,
+                  ffi.Pointer<objc.ObjCObject>,
+                  ffi.Pointer<objc.ObjCBlockImpl>,
+                )
+              >()(ref.pointer, arg0, arg1.ref.pointer, arg2.ref.pointer)
+              .address ==
+          0
+      ? null
+      : NSProgress.castFromPointer(
+          ref.pointer.ref.invoke
+              .cast<
+                ffi.NativeFunction<
+                  ffi.Pointer<objc.ObjCObject> Function(
+                    ffi.Pointer<objc.ObjCBlockImpl> block,
+                    ffi.Pointer<ffi.Void> arg0,
+                    ffi.Pointer<objc.ObjCObject> arg1,
+                    ffi.Pointer<objc.ObjCBlockImpl> arg2,
+                  )
+                >
+              >()
+              .asFunction<
+                ffi.Pointer<objc.ObjCObject> Function(
+                  ffi.Pointer<objc.ObjCBlockImpl>,
+                  ffi.Pointer<ffi.Void>,
+                  ffi.Pointer<objc.ObjCObject>,
+                  ffi.Pointer<objc.ObjCBlockImpl>,
+                )
+              >()(ref.pointer, arg0, arg1.ref.pointer, arg2.ref.pointer),
+          retain: true,
+          release: true,
+        );
 }
 
 /// NSItemProvider
@@ -1785,156 +1792,146 @@ extension NSExtendedStringPropertyListParsing on objc.NSString {
 }
 
 late final _sel_cString = objc.registerName("cString");
-final _objc_msgSend_1fuqfwb =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<ffi.Char> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
+final _objc_msgSend_1fuqfwb = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<ffi.Char> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<ffi.Char> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+      )
+    >();
 late final _sel_lossyCString = objc.registerName("lossyCString");
 late final _sel_cStringLength = objc.registerName("cStringLength");
-final _objc_msgSend_xw2lbc =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.UnsignedLong Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          int Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
+final _objc_msgSend_xw2lbc = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.UnsignedLong Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      int Function(ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)
+    >();
 late final _sel_getCString_ = objc.registerName("getCString:");
-final _objc_msgSend_1r7ue5f =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<ffi.Char>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<ffi.Char>,
-          )
-        >();
+final _objc_msgSend_1r7ue5f = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<ffi.Char>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<ffi.Char>,
+      )
+    >();
 late final _sel_getCString_maxLength_ = objc.registerName(
   "getCString:maxLength:",
 );
-final _objc_msgSend_1h3mito =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<ffi.Char>,
-              ffi.UnsignedLong,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<ffi.Char>,
-            int,
-          )
-        >();
+final _objc_msgSend_1h3mito = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<ffi.Char>,
+          ffi.UnsignedLong,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<ffi.Char>,
+        int,
+      )
+    >();
 late final _sel_getCString_maxLength_range_remainingRange_ = objc.registerName(
   "getCString:maxLength:range:remainingRange:",
 );
-final _objc_msgSend_3gpdva =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<ffi.Char>,
-              ffi.UnsignedLong,
-              objc.NSRange,
-              ffi.Pointer<objc.NSRange>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<ffi.Char>,
-            int,
-            objc.NSRange,
-            ffi.Pointer<objc.NSRange>,
-          )
-        >();
+final _objc_msgSend_3gpdva = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<ffi.Char>,
+          ffi.UnsignedLong,
+          objc.NSRange,
+          ffi.Pointer<objc.NSRange>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<ffi.Char>,
+        int,
+        objc.NSRange,
+        ffi.Pointer<objc.NSRange>,
+      )
+    >();
 late final _sel_writeToFile_atomically_ = objc.registerName(
   "writeToFile:atomically:",
 );
-final _objc_msgSend_1iyq28l =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Bool Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Bool,
-            )
-          >
-        >()
-        .asFunction<
-          bool Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            bool,
-          )
-        >();
+final _objc_msgSend_1iyq28l = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Bool Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Bool,
+        )
+      >
+    >()
+    .asFunction<
+      bool Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        bool,
+      )
+    >();
 late final _sel_writeToURL_atomically_ = objc.registerName(
   "writeToURL:atomically:",
 );
 late final _sel_initWithContentsOfFile_ = objc.registerName(
   "initWithContentsOfFile:",
 );
-final _objc_msgSend_1sotr3r =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_1sotr3r = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 late final _sel_initWithContentsOfURL_ = objc.registerName(
   "initWithContentsOfURL:",
 );
@@ -1947,93 +1944,89 @@ late final _sel_stringWithContentsOfURL_ = objc.registerName(
 late final _sel_initWithCStringNoCopy_length_freeWhenDone_ = objc.registerName(
   "initWithCStringNoCopy:length:freeWhenDone:",
 );
-final _objc_msgSend_1ojrli4 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<ffi.Char>,
-              ffi.UnsignedLong,
-              ffi.Bool,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<ffi.Char>,
-            int,
-            bool,
-          )
-        >();
+final _objc_msgSend_1ojrli4 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<ffi.Char>,
+          ffi.UnsignedLong,
+          ffi.Bool,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<ffi.Char>,
+        int,
+        bool,
+      )
+    >();
 late final _sel_initWithCString_length_ = objc.registerName(
   "initWithCString:length:",
 );
-final _objc_msgSend_erqryg =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<ffi.Char>,
-              ffi.UnsignedLong,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<ffi.Char>,
-            int,
-          )
-        >();
+final _objc_msgSend_erqryg = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<ffi.Char>,
+          ffi.UnsignedLong,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<ffi.Char>,
+        int,
+      )
+    >();
 late final _sel_initWithCString_ = objc.registerName("initWithCString:");
-final _objc_msgSend_56zxyn =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<ffi.Char>,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<ffi.Char>,
-          )
-        >();
+final _objc_msgSend_56zxyn = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<ffi.Char>,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<ffi.Char>,
+      )
+    >();
 late final _sel_stringWithCString_length_ = objc.registerName(
   "stringWithCString:length:",
 );
 late final _sel_stringWithCString_ = objc.registerName("stringWithCString:");
 late final _sel_getCharacters_ = objc.registerName("getCharacters:");
-final _objc_msgSend_g3kdhc =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<ffi.UnsignedShort>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<ffi.UnsignedShort>,
-          )
-        >();
+final _objc_msgSend_g3kdhc = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<ffi.UnsignedShort>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<ffi.UnsignedShort>,
+      )
+    >();
 
 /// NSStringDeprecated
 extension NSStringDeprecated on objc.NSString {
@@ -2319,21 +2312,22 @@ extension NSStringDeprecated on objc.NSString {
 
 void _ObjCBlock_ffiVoid_fnPtrTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
-) =>
-    block.ref.target
-        .cast<ffi.NativeFunction<ffi.Void Function()>>()
-        .asFunction<void Function()>()();
+) => block.ref.target
+    .cast<ffi.NativeFunction<ffi.Void Function()>>()
+    .asFunction<void Function()>()();
 ffi.Pointer<ffi.Void> _ObjCBlock_ffiVoid_fnPtrCallable =
     ffi.Pointer.fromFunction<
-      ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>)
-    >(_ObjCBlock_ffiVoid_fnPtrTrampoline).cast();
+          ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>)
+        >(_ObjCBlock_ffiVoid_fnPtrTrampoline)
+        .cast();
 void _ObjCBlock_ffiVoid_closureTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
 ) => (objc.getBlockClosure(block) as void Function())();
 ffi.Pointer<ffi.Void> _ObjCBlock_ffiVoid_closureCallable =
     ffi.Pointer.fromFunction<
-      ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>)
-    >(_ObjCBlock_ffiVoid_closureTrampoline).cast();
+          ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>)
+        >(_ObjCBlock_ffiVoid_closureTrampoline)
+        .cast();
 void _ObjCBlock_ffiVoid_listenerTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
 ) {
@@ -2342,9 +2336,11 @@ void _ObjCBlock_ffiVoid_listenerTrampoline(
 }
 
 ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>)>
-_ObjCBlock_ffiVoid_listenerCallable = ffi.NativeCallable<
-  ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>)
->.listener(_ObjCBlock_ffiVoid_listenerTrampoline)..keepIsolateAlive = false;
+_ObjCBlock_ffiVoid_listenerCallable =
+    ffi.NativeCallable<
+        ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>)
+      >.listener(_ObjCBlock_ffiVoid_listenerTrampoline)
+      ..keepIsolateAlive = false;
 void _ObjCBlock_ffiVoid_blockingTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<ffi.Void> waiter,
@@ -2361,15 +2357,25 @@ void _ObjCBlock_ffiVoid_blockingTrampoline(
 ffi.NativeCallable<
   ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>, ffi.Pointer<ffi.Void>)
 >
-_ObjCBlock_ffiVoid_blockingCallable = ffi.NativeCallable<
-  ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>, ffi.Pointer<ffi.Void>)
->.isolateLocal(_ObjCBlock_ffiVoid_blockingTrampoline)..keepIsolateAlive = false;
+_ObjCBlock_ffiVoid_blockingCallable =
+    ffi.NativeCallable<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCBlockImpl>,
+          ffi.Pointer<ffi.Void>,
+        )
+      >.isolateLocal(_ObjCBlock_ffiVoid_blockingTrampoline)
+      ..keepIsolateAlive = false;
 ffi.NativeCallable<
   ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>, ffi.Pointer<ffi.Void>)
 >
-_ObjCBlock_ffiVoid_blockingListenerCallable = ffi.NativeCallable<
-  ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl>, ffi.Pointer<ffi.Void>)
->.listener(_ObjCBlock_ffiVoid_blockingTrampoline)..keepIsolateAlive = false;
+_ObjCBlock_ffiVoid_blockingListenerCallable =
+    ffi.NativeCallable<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCBlockImpl>,
+          ffi.Pointer<ffi.Void>,
+        )
+      >.listener(_ObjCBlock_ffiVoid_blockingTrampoline)
+      ..keepIsolateAlive = false;
 
 /// Construction methods for `objc.ObjCBlock<ffi.Void Function()>`.
 abstract final class ObjCBlock_ffiVoid {
@@ -2487,15 +2493,16 @@ abstract final class ObjCBlock_ffiVoid {
 /// Call operator for `objc.ObjCBlock<ffi.Void Function()>`.
 extension ObjCBlock_ffiVoid_CallExtension
     on objc.ObjCBlock<ffi.Void Function()> {
-  void call() => ref.pointer.ref.invoke
-      .cast<
-        ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> block)
-        >
-      >()
-      .asFunction<void Function(ffi.Pointer<objc.ObjCBlockImpl>)>()(
-    ref.pointer,
-  );
+  void call() =>
+      ref.pointer.ref.invoke
+          .cast<
+            ffi.NativeFunction<
+              ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> block)
+            >
+          >()
+          .asFunction<void Function(ffi.Pointer<objc.ObjCBlockImpl>)>()(
+        ref.pointer,
+      );
 }
 
 ffi.Pointer<objc.ObjCBlockImpl>
@@ -2516,31 +2523,30 @@ _ObjCBlock_NSProgressUnpublishingHandler_NSProgress_fnPtrTrampoline(
 ffi.Pointer<ffi.Void>
 _ObjCBlock_NSProgressUnpublishingHandler_NSProgress_fnPtrCallable =
     ffi.Pointer.fromFunction<
-      ffi.Pointer<objc.ObjCBlockImpl> Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<objc.ObjCObject>,
-      )
-    >(
-      _ObjCBlock_NSProgressUnpublishingHandler_NSProgress_fnPtrTrampoline,
-    ).cast();
+          ffi.Pointer<objc.ObjCBlockImpl> Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<objc.ObjCObject>,
+          )
+        >(_ObjCBlock_NSProgressUnpublishingHandler_NSProgress_fnPtrTrampoline)
+        .cast();
 ffi.Pointer<objc.ObjCBlockImpl>
 _ObjCBlock_NSProgressUnpublishingHandler_NSProgress_closureTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<objc.ObjCObject> arg0,
-) => (objc.getBlockClosure(block)
-    as ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCObject>))(
-  arg0,
-);
+) =>
+    (objc.getBlockClosure(block)
+        as ffi.Pointer<objc.ObjCBlockImpl> Function(
+          ffi.Pointer<objc.ObjCObject>,
+        ))(arg0);
 ffi.Pointer<ffi.Void>
 _ObjCBlock_NSProgressUnpublishingHandler_NSProgress_closureCallable =
     ffi.Pointer.fromFunction<
-      ffi.Pointer<objc.ObjCBlockImpl> Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<objc.ObjCObject>,
-      )
-    >(
-      _ObjCBlock_NSProgressUnpublishingHandler_NSProgress_closureTrampoline,
-    ).cast();
+          ffi.Pointer<objc.ObjCBlockImpl> Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<objc.ObjCObject>,
+          )
+        >(_ObjCBlock_NSProgressUnpublishingHandler_NSProgress_closureTrampoline)
+        .cast();
 
 /// Construction methods for `objc.ObjCBlock<objc.ObjCBlock<ffi.Void Function()>? Function(NSProgress)>`.
 abstract final class ObjCBlock_NSProgressUnpublishingHandler_NSProgress {
@@ -2624,42 +2630,42 @@ extension ObjCBlock_NSProgressUnpublishingHandler_NSProgress_CallExtension
         > {
   objc.ObjCBlock<ffi.Void Function()>? call(NSProgress arg0) =>
       ref.pointer.ref.invoke
-                  .cast<
-                    ffi.NativeFunction<
-                      ffi.Pointer<objc.ObjCBlockImpl> Function(
-                        ffi.Pointer<objc.ObjCBlockImpl> block,
-                        ffi.Pointer<objc.ObjCObject> arg0,
-                      )
-                    >
-                  >()
-                  .asFunction<
-                    ffi.Pointer<objc.ObjCBlockImpl> Function(
-                      ffi.Pointer<objc.ObjCBlockImpl>,
-                      ffi.Pointer<objc.ObjCObject>,
-                    )
-                  >()(ref.pointer, arg0.ref.pointer)
-                  .address ==
-              0
-          ? null
-          : ObjCBlock_ffiVoid.castFromPointer(
-            ref.pointer.ref.invoke
-                .cast<
-                  ffi.NativeFunction<
-                    ffi.Pointer<objc.ObjCBlockImpl> Function(
-                      ffi.Pointer<objc.ObjCBlockImpl> block,
-                      ffi.Pointer<objc.ObjCObject> arg0,
-                    )
-                  >
-                >()
-                .asFunction<
+              .cast<
+                ffi.NativeFunction<
                   ffi.Pointer<objc.ObjCBlockImpl> Function(
-                    ffi.Pointer<objc.ObjCBlockImpl>,
-                    ffi.Pointer<objc.ObjCObject>,
+                    ffi.Pointer<objc.ObjCBlockImpl> block,
+                    ffi.Pointer<objc.ObjCObject> arg0,
                   )
-                >()(ref.pointer, arg0.ref.pointer),
-            retain: true,
-            release: true,
-          );
+                >
+              >()
+              .asFunction<
+                ffi.Pointer<objc.ObjCBlockImpl> Function(
+                  ffi.Pointer<objc.ObjCBlockImpl>,
+                  ffi.Pointer<objc.ObjCObject>,
+                )
+              >()(ref.pointer, arg0.ref.pointer)
+              .address ==
+          0
+      ? null
+      : ObjCBlock_ffiVoid.castFromPointer(
+          ref.pointer.ref.invoke
+              .cast<
+                ffi.NativeFunction<
+                  ffi.Pointer<objc.ObjCBlockImpl> Function(
+                    ffi.Pointer<objc.ObjCBlockImpl> block,
+                    ffi.Pointer<objc.ObjCObject> arg0,
+                  )
+                >
+              >()
+              .asFunction<
+                ffi.Pointer<objc.ObjCBlockImpl> Function(
+                  ffi.Pointer<objc.ObjCBlockImpl>,
+                  ffi.Pointer<objc.ObjCObject>,
+                )
+              >()(ref.pointer, arg0.ref.pointer),
+          retain: true,
+          release: true,
+        );
 }
 
 /// WARNING: NSBundle is a stub. To generate bindings for this class, include
@@ -2688,24 +2694,23 @@ class NSBundle extends objc.NSObject {
 late final _sel_variantFittingPresentationWidth_ = objc.registerName(
   "variantFittingPresentationWidth:",
 );
-final _objc_msgSend_qugqlf =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Long,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            int,
-          )
-        >();
+final _objc_msgSend_qugqlf = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Long,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        int,
+      )
+    >();
 
 /// NSBundleExtensionMethods
 extension NSBundleExtensionMethods on objc.NSString {
@@ -2727,121 +2732,116 @@ extension NSBundleExtensionMethods on objc.NSString {
 
 late final _class_NSAttributedString = objc.getClass("NSAttributedString");
 late final _sel_isKindOfClass_ = objc.registerName("isKindOfClass:");
-final _objc_msgSend_19nvye5 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Bool Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          bool Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_19nvye5 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Bool Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      bool Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 late final _sel_length = objc.registerName("length");
 late final _sel_attribute_atIndex_effectiveRange_ = objc.registerName(
   "attribute:atIndex:effectiveRange:",
 );
-final _objc_msgSend_7km9vu =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.UnsignedLong,
-              ffi.Pointer<objc.NSRange>,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            int,
-            ffi.Pointer<objc.NSRange>,
-          )
-        >();
+final _objc_msgSend_7km9vu = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.UnsignedLong,
+          ffi.Pointer<objc.NSRange>,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        int,
+        ffi.Pointer<objc.NSRange>,
+      )
+    >();
 late final _sel_attributedSubstringFromRange_ = objc.registerName(
   "attributedSubstringFromRange:",
 );
-final _objc_msgSend_1k1o1s7 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              objc.NSRange,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            objc.NSRange,
-          )
-        >();
+final _objc_msgSend_1k1o1s7 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          objc.NSRange,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        objc.NSRange,
+      )
+    >();
 late final _sel_attributesAtIndex_longestEffectiveRange_inRange_ = objc
     .registerName("attributesAtIndex:longestEffectiveRange:inRange:");
-final _objc_msgSend_1pp2gs8 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.UnsignedLong,
-              ffi.Pointer<objc.NSRange>,
-              objc.NSRange,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            int,
-            ffi.Pointer<objc.NSRange>,
-            objc.NSRange,
-          )
-        >();
+final _objc_msgSend_1pp2gs8 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.UnsignedLong,
+          ffi.Pointer<objc.NSRange>,
+          objc.NSRange,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        int,
+        ffi.Pointer<objc.NSRange>,
+        objc.NSRange,
+      )
+    >();
 late final _sel_attribute_atIndex_longestEffectiveRange_inRange_ = objc
     .registerName("attribute:atIndex:longestEffectiveRange:inRange:");
-final _objc_msgSend_1k1akuq =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.UnsignedLong,
-              ffi.Pointer<objc.NSRange>,
-              objc.NSRange,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            int,
-            ffi.Pointer<objc.NSRange>,
-            objc.NSRange,
-          )
-        >();
+final _objc_msgSend_1k1akuq = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.UnsignedLong,
+          ffi.Pointer<objc.NSRange>,
+          objc.NSRange,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        int,
+        ffi.Pointer<objc.NSRange>,
+        objc.NSRange,
+      )
+    >();
 late final _sel_isEqualToAttributedString_ = objc.registerName(
   "isEqualToAttributedString:",
 );
@@ -2853,16 +2853,15 @@ enum NSAttributedStringEnumerationOptions {
   final int value;
   const NSAttributedStringEnumerationOptions(this.value);
 
-  static NSAttributedStringEnumerationOptions fromValue(
-    int value,
-  ) => switch (value) {
-    2 => NSAttributedStringEnumerationReverse,
-    1048576 => NSAttributedStringEnumerationLongestEffectiveRangeNotRequired,
-    _ =>
-      throw ArgumentError(
-        'Unknown value for NSAttributedStringEnumerationOptions: $value',
-      ),
-  };
+  static NSAttributedStringEnumerationOptions fromValue(int value) =>
+      switch (value) {
+        2 => NSAttributedStringEnumerationReverse,
+        1048576 =>
+          NSAttributedStringEnumerationLongestEffectiveRangeNotRequired,
+        _ => throw ArgumentError(
+          'Unknown value for NSAttributedStringEnumerationOptions: $value',
+        ),
+      };
 }
 
 void _ObjCBlock_ffiVoid_NSDictionary_NSRange_bool_fnPtrTrampoline(
@@ -2890,34 +2889,37 @@ void _ObjCBlock_ffiVoid_NSDictionary_NSRange_bool_fnPtrTrampoline(
 ffi.Pointer<ffi.Void>
 _ObjCBlock_ffiVoid_NSDictionary_NSRange_bool_fnPtrCallable =
     ffi.Pointer.fromFunction<
-      ffi.Void Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<objc.ObjCObject>,
-        objc.NSRange,
-        ffi.Pointer<ffi.Bool>,
-      )
-    >(_ObjCBlock_ffiVoid_NSDictionary_NSRange_bool_fnPtrTrampoline).cast();
+          ffi.Void Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<objc.ObjCObject>,
+            objc.NSRange,
+            ffi.Pointer<ffi.Bool>,
+          )
+        >(_ObjCBlock_ffiVoid_NSDictionary_NSRange_bool_fnPtrTrampoline)
+        .cast();
 void _ObjCBlock_ffiVoid_NSDictionary_NSRange_bool_closureTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<objc.ObjCObject> arg0,
   objc.NSRange arg1,
   ffi.Pointer<ffi.Bool> arg2,
-) => (objc.getBlockClosure(block)
-    as void Function(
-      ffi.Pointer<objc.ObjCObject>,
-      objc.NSRange,
-      ffi.Pointer<ffi.Bool>,
-    ))(arg0, arg1, arg2);
+) =>
+    (objc.getBlockClosure(block)
+        as void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          objc.NSRange,
+          ffi.Pointer<ffi.Bool>,
+        ))(arg0, arg1, arg2);
 ffi.Pointer<ffi.Void>
 _ObjCBlock_ffiVoid_NSDictionary_NSRange_bool_closureCallable =
     ffi.Pointer.fromFunction<
-      ffi.Void Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<objc.ObjCObject>,
-        objc.NSRange,
-        ffi.Pointer<ffi.Bool>,
-      )
-    >(_ObjCBlock_ffiVoid_NSDictionary_NSRange_bool_closureTrampoline).cast();
+          ffi.Void Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<objc.ObjCObject>,
+            objc.NSRange,
+            ffi.Pointer<ffi.Bool>,
+          )
+        >(_ObjCBlock_ffiVoid_NSDictionary_NSRange_bool_closureTrampoline)
+        .cast();
 void _ObjCBlock_ffiVoid_NSDictionary_NSRange_bool_listenerTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<objc.ObjCObject> arg0,
@@ -2943,15 +2945,16 @@ ffi.NativeCallable<
 >
 _ObjCBlock_ffiVoid_NSDictionary_NSRange_bool_listenerCallable =
     ffi.NativeCallable<
-      ffi.Void Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<objc.ObjCObject>,
-        objc.NSRange,
-        ffi.Pointer<ffi.Bool>,
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCBlockImpl>,
+          ffi.Pointer<objc.ObjCObject>,
+          objc.NSRange,
+          ffi.Pointer<ffi.Bool>,
+        )
+      >.listener(
+        _ObjCBlock_ffiVoid_NSDictionary_NSRange_bool_listenerTrampoline,
       )
-    >.listener(
-      _ObjCBlock_ffiVoid_NSDictionary_NSRange_bool_listenerTrampoline,
-    )..keepIsolateAlive = false;
+      ..keepIsolateAlive = false;
 void _ObjCBlock_ffiVoid_NSDictionary_NSRange_bool_blockingTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<ffi.Void> waiter,
@@ -2984,16 +2987,17 @@ ffi.NativeCallable<
 >
 _ObjCBlock_ffiVoid_NSDictionary_NSRange_bool_blockingCallable =
     ffi.NativeCallable<
-      ffi.Void Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<ffi.Void>,
-        ffi.Pointer<objc.ObjCObject>,
-        objc.NSRange,
-        ffi.Pointer<ffi.Bool>,
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCBlockImpl>,
+          ffi.Pointer<ffi.Void>,
+          ffi.Pointer<objc.ObjCObject>,
+          objc.NSRange,
+          ffi.Pointer<ffi.Bool>,
+        )
+      >.isolateLocal(
+        _ObjCBlock_ffiVoid_NSDictionary_NSRange_bool_blockingTrampoline,
       )
-    >.isolateLocal(
-      _ObjCBlock_ffiVoid_NSDictionary_NSRange_bool_blockingTrampoline,
-    )..keepIsolateAlive = false;
+      ..keepIsolateAlive = false;
 ffi.NativeCallable<
   ffi.Void Function(
     ffi.Pointer<objc.ObjCBlockImpl>,
@@ -3005,16 +3009,17 @@ ffi.NativeCallable<
 >
 _ObjCBlock_ffiVoid_NSDictionary_NSRange_bool_blockingListenerCallable =
     ffi.NativeCallable<
-      ffi.Void Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<ffi.Void>,
-        ffi.Pointer<objc.ObjCObject>,
-        objc.NSRange,
-        ffi.Pointer<ffi.Bool>,
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCBlockImpl>,
+          ffi.Pointer<ffi.Void>,
+          ffi.Pointer<objc.ObjCObject>,
+          objc.NSRange,
+          ffi.Pointer<ffi.Bool>,
+        )
+      >.listener(
+        _ObjCBlock_ffiVoid_NSDictionary_NSRange_bool_blockingTrampoline,
       )
-    >.listener(
-      _ObjCBlock_ffiVoid_NSDictionary_NSRange_bool_blockingTrampoline,
-    )..keepIsolateAlive = false;
+      ..keepIsolateAlive = false;
 
 /// Construction methods for `objc.ObjCBlock<ffi.Void Function(objc.NSDictionary, objc.NSRange, ffi.Pointer<ffi.Bool>)>`.
 abstract final class ObjCBlock_ffiVoid_NSDictionary_NSRange_bool {
@@ -3026,9 +3031,14 @@ abstract final class ObjCBlock_ffiVoid_NSDictionary_NSRange_bool {
     ffi.Pointer<objc.ObjCBlockImpl> pointer, {
     bool retain = false,
     bool release = false,
-  }) => objc.ObjCBlock<
-    ffi.Void Function(objc.NSDictionary, objc.NSRange, ffi.Pointer<ffi.Bool>)
-  >(pointer, retain: retain, release: release);
+  }) =>
+      objc.ObjCBlock<
+        ffi.Void Function(
+          objc.NSDictionary,
+          objc.NSRange,
+          ffi.Pointer<ffi.Bool>,
+        )
+      >(pointer, retain: retain, release: release);
 
   /// Creates a block from a C function pointer.
   ///
@@ -3049,16 +3059,21 @@ abstract final class ObjCBlock_ffiVoid_NSDictionary_NSRange_bool {
       >
     >
     ptr,
-  ) => objc.ObjCBlock<
-    ffi.Void Function(objc.NSDictionary, objc.NSRange, ffi.Pointer<ffi.Bool>)
-  >(
-    objc.newPointerBlock(
-      _ObjCBlock_ffiVoid_NSDictionary_NSRange_bool_fnPtrCallable,
-      ptr.cast(),
-    ),
-    retain: false,
-    release: true,
-  );
+  ) =>
+      objc.ObjCBlock<
+        ffi.Void Function(
+          objc.NSDictionary,
+          objc.NSRange,
+          ffi.Pointer<ffi.Bool>,
+        )
+      >(
+        objc.newPointerBlock(
+          _ObjCBlock_ffiVoid_NSDictionary_NSRange_bool_fnPtrCallable,
+          ptr.cast(),
+        ),
+        retain: false,
+        release: true,
+      );
 
   /// Creates a block from a Dart function.
   ///
@@ -3074,25 +3089,34 @@ abstract final class ObjCBlock_ffiVoid_NSDictionary_NSRange_bool {
   fromFunction(
     void Function(objc.NSDictionary, objc.NSRange, ffi.Pointer<ffi.Bool>) fn, {
     bool keepIsolateAlive = true,
-  }) => objc.ObjCBlock<
-    ffi.Void Function(objc.NSDictionary, objc.NSRange, ffi.Pointer<ffi.Bool>)
-  >(
-    objc.newClosureBlock(
-      _ObjCBlock_ffiVoid_NSDictionary_NSRange_bool_closureCallable,
-      (
-        ffi.Pointer<objc.ObjCObject> arg0,
-        objc.NSRange arg1,
-        ffi.Pointer<ffi.Bool> arg2,
-      ) => fn(
-        objc.NSDictionary.castFromPointer(arg0, retain: true, release: true),
-        arg1,
-        arg2,
-      ),
-      keepIsolateAlive,
-    ),
-    retain: false,
-    release: true,
-  );
+  }) =>
+      objc.ObjCBlock<
+        ffi.Void Function(
+          objc.NSDictionary,
+          objc.NSRange,
+          ffi.Pointer<ffi.Bool>,
+        )
+      >(
+        objc.newClosureBlock(
+          _ObjCBlock_ffiVoid_NSDictionary_NSRange_bool_closureCallable,
+          (
+            ffi.Pointer<objc.ObjCObject> arg0,
+            objc.NSRange arg1,
+            ffi.Pointer<ffi.Bool> arg2,
+          ) => fn(
+            objc.NSDictionary.castFromPointer(
+              arg0,
+              retain: true,
+              release: true,
+            ),
+            arg1,
+            arg2,
+          ),
+          keepIsolateAlive,
+        ),
+        retain: false,
+        release: true,
+      );
 
   /// Creates a listener block from a Dart function.
   ///
@@ -3229,28 +3253,27 @@ extension ObjCBlock_ffiVoid_NSDictionary_NSRange_bool_CallExtension
 
 late final _sel_enumerateAttributesInRange_options_usingBlock_ = objc
     .registerName("enumerateAttributesInRange:options:usingBlock:");
-final _objc_msgSend_1kok4b =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              objc.NSRange,
-              ffi.UnsignedLong,
-              ffi.Pointer<objc.ObjCBlockImpl>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            objc.NSRange,
-            int,
-            ffi.Pointer<objc.ObjCBlockImpl>,
-          )
-        >();
+final _objc_msgSend_1kok4b = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          objc.NSRange,
+          ffi.UnsignedLong,
+          ffi.Pointer<objc.ObjCBlockImpl>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        objc.NSRange,
+        int,
+        ffi.Pointer<objc.ObjCBlockImpl>,
+      )
+    >();
 void _ObjCBlock_ffiVoid_objcObjCObject_NSRange_bool_fnPtrTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<objc.ObjCObject> arg0,
@@ -3276,34 +3299,37 @@ void _ObjCBlock_ffiVoid_objcObjCObject_NSRange_bool_fnPtrTrampoline(
 ffi.Pointer<ffi.Void>
 _ObjCBlock_ffiVoid_objcObjCObject_NSRange_bool_fnPtrCallable =
     ffi.Pointer.fromFunction<
-      ffi.Void Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<objc.ObjCObject>,
-        objc.NSRange,
-        ffi.Pointer<ffi.Bool>,
-      )
-    >(_ObjCBlock_ffiVoid_objcObjCObject_NSRange_bool_fnPtrTrampoline).cast();
+          ffi.Void Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<objc.ObjCObject>,
+            objc.NSRange,
+            ffi.Pointer<ffi.Bool>,
+          )
+        >(_ObjCBlock_ffiVoid_objcObjCObject_NSRange_bool_fnPtrTrampoline)
+        .cast();
 void _ObjCBlock_ffiVoid_objcObjCObject_NSRange_bool_closureTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<objc.ObjCObject> arg0,
   objc.NSRange arg1,
   ffi.Pointer<ffi.Bool> arg2,
-) => (objc.getBlockClosure(block)
-    as void Function(
-      ffi.Pointer<objc.ObjCObject>,
-      objc.NSRange,
-      ffi.Pointer<ffi.Bool>,
-    ))(arg0, arg1, arg2);
+) =>
+    (objc.getBlockClosure(block)
+        as void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          objc.NSRange,
+          ffi.Pointer<ffi.Bool>,
+        ))(arg0, arg1, arg2);
 ffi.Pointer<ffi.Void>
 _ObjCBlock_ffiVoid_objcObjCObject_NSRange_bool_closureCallable =
     ffi.Pointer.fromFunction<
-      ffi.Void Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<objc.ObjCObject>,
-        objc.NSRange,
-        ffi.Pointer<ffi.Bool>,
-      )
-    >(_ObjCBlock_ffiVoid_objcObjCObject_NSRange_bool_closureTrampoline).cast();
+          ffi.Void Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<objc.ObjCObject>,
+            objc.NSRange,
+            ffi.Pointer<ffi.Bool>,
+          )
+        >(_ObjCBlock_ffiVoid_objcObjCObject_NSRange_bool_closureTrampoline)
+        .cast();
 void _ObjCBlock_ffiVoid_objcObjCObject_NSRange_bool_listenerTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<objc.ObjCObject> arg0,
@@ -3329,15 +3355,16 @@ ffi.NativeCallable<
 >
 _ObjCBlock_ffiVoid_objcObjCObject_NSRange_bool_listenerCallable =
     ffi.NativeCallable<
-      ffi.Void Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<objc.ObjCObject>,
-        objc.NSRange,
-        ffi.Pointer<ffi.Bool>,
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCBlockImpl>,
+          ffi.Pointer<objc.ObjCObject>,
+          objc.NSRange,
+          ffi.Pointer<ffi.Bool>,
+        )
+      >.listener(
+        _ObjCBlock_ffiVoid_objcObjCObject_NSRange_bool_listenerTrampoline,
       )
-    >.listener(
-      _ObjCBlock_ffiVoid_objcObjCObject_NSRange_bool_listenerTrampoline,
-    )..keepIsolateAlive = false;
+      ..keepIsolateAlive = false;
 void _ObjCBlock_ffiVoid_objcObjCObject_NSRange_bool_blockingTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<ffi.Void> waiter,
@@ -3370,16 +3397,17 @@ ffi.NativeCallable<
 >
 _ObjCBlock_ffiVoid_objcObjCObject_NSRange_bool_blockingCallable =
     ffi.NativeCallable<
-      ffi.Void Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<ffi.Void>,
-        ffi.Pointer<objc.ObjCObject>,
-        objc.NSRange,
-        ffi.Pointer<ffi.Bool>,
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCBlockImpl>,
+          ffi.Pointer<ffi.Void>,
+          ffi.Pointer<objc.ObjCObject>,
+          objc.NSRange,
+          ffi.Pointer<ffi.Bool>,
+        )
+      >.isolateLocal(
+        _ObjCBlock_ffiVoid_objcObjCObject_NSRange_bool_blockingTrampoline,
       )
-    >.isolateLocal(
-      _ObjCBlock_ffiVoid_objcObjCObject_NSRange_bool_blockingTrampoline,
-    )..keepIsolateAlive = false;
+      ..keepIsolateAlive = false;
 ffi.NativeCallable<
   ffi.Void Function(
     ffi.Pointer<objc.ObjCBlockImpl>,
@@ -3391,16 +3419,17 @@ ffi.NativeCallable<
 >
 _ObjCBlock_ffiVoid_objcObjCObject_NSRange_bool_blockingListenerCallable =
     ffi.NativeCallable<
-      ffi.Void Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<ffi.Void>,
-        ffi.Pointer<objc.ObjCObject>,
-        objc.NSRange,
-        ffi.Pointer<ffi.Bool>,
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCBlockImpl>,
+          ffi.Pointer<ffi.Void>,
+          ffi.Pointer<objc.ObjCObject>,
+          objc.NSRange,
+          ffi.Pointer<ffi.Bool>,
+        )
+      >.listener(
+        _ObjCBlock_ffiVoid_objcObjCObject_NSRange_bool_blockingTrampoline,
       )
-    >.listener(
-      _ObjCBlock_ffiVoid_objcObjCObject_NSRange_bool_blockingTrampoline,
-    )..keepIsolateAlive = false;
+      ..keepIsolateAlive = false;
 
 /// Construction methods for `objc.ObjCBlock<ffi.Void Function(ffi.Pointer<objc.ObjCObject>?, objc.NSRange, ffi.Pointer<ffi.Bool>)>`.
 abstract final class ObjCBlock_ffiVoid_objcObjCObject_NSRange_bool {
@@ -3416,13 +3445,14 @@ abstract final class ObjCBlock_ffiVoid_objcObjCObject_NSRange_bool {
     ffi.Pointer<objc.ObjCBlockImpl> pointer, {
     bool retain = false,
     bool release = false,
-  }) => objc.ObjCBlock<
-    ffi.Void Function(
-      ffi.Pointer<objc.ObjCObject>?,
-      objc.NSRange,
-      ffi.Pointer<ffi.Bool>,
-    )
-  >(pointer, retain: retain, release: release);
+  }) =>
+      objc.ObjCBlock<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>?,
+          objc.NSRange,
+          ffi.Pointer<ffi.Bool>,
+        )
+      >(pointer, retain: retain, release: release);
 
   /// Creates a block from a C function pointer.
   ///
@@ -3447,20 +3477,21 @@ abstract final class ObjCBlock_ffiVoid_objcObjCObject_NSRange_bool {
       >
     >
     ptr,
-  ) => objc.ObjCBlock<
-    ffi.Void Function(
-      ffi.Pointer<objc.ObjCObject>?,
-      objc.NSRange,
-      ffi.Pointer<ffi.Bool>,
-    )
-  >(
-    objc.newPointerBlock(
-      _ObjCBlock_ffiVoid_objcObjCObject_NSRange_bool_fnPtrCallable,
-      ptr.cast(),
-    ),
-    retain: false,
-    release: true,
-  );
+  ) =>
+      objc.ObjCBlock<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>?,
+          objc.NSRange,
+          ffi.Pointer<ffi.Bool>,
+        )
+      >(
+        objc.newPointerBlock(
+          _ObjCBlock_ffiVoid_objcObjCObject_NSRange_bool_fnPtrCallable,
+          ptr.cast(),
+        ),
+        retain: false,
+        release: true,
+      );
 
   /// Creates a block from a Dart function.
   ///
@@ -3481,31 +3512,32 @@ abstract final class ObjCBlock_ffiVoid_objcObjCObject_NSRange_bool {
     void Function(objc.ObjCObjectBase?, objc.NSRange, ffi.Pointer<ffi.Bool>)
     fn, {
     bool keepIsolateAlive = true,
-  }) => objc.ObjCBlock<
-    ffi.Void Function(
-      ffi.Pointer<objc.ObjCObject>?,
-      objc.NSRange,
-      ffi.Pointer<ffi.Bool>,
-    )
-  >(
-    objc.newClosureBlock(
-      _ObjCBlock_ffiVoid_objcObjCObject_NSRange_bool_closureCallable,
-      (
-        ffi.Pointer<objc.ObjCObject> arg0,
-        objc.NSRange arg1,
-        ffi.Pointer<ffi.Bool> arg2,
-      ) => fn(
-        arg0.address == 0
-            ? null
-            : objc.ObjCObjectBase(arg0, retain: true, release: true),
-        arg1,
-        arg2,
-      ),
-      keepIsolateAlive,
-    ),
-    retain: false,
-    release: true,
-  );
+  }) =>
+      objc.ObjCBlock<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>?,
+          objc.NSRange,
+          ffi.Pointer<ffi.Bool>,
+        )
+      >(
+        objc.newClosureBlock(
+          _ObjCBlock_ffiVoid_objcObjCObject_NSRange_bool_closureCallable,
+          (
+            ffi.Pointer<objc.ObjCObject> arg0,
+            objc.NSRange arg1,
+            ffi.Pointer<ffi.Bool> arg2,
+          ) => fn(
+            arg0.address == 0
+                ? null
+                : objc.ObjCObjectBase(arg0, retain: true, release: true),
+            arg1,
+            arg2,
+          ),
+          keepIsolateAlive,
+        ),
+        retain: false,
+        release: true,
+      );
 
   /// Creates a listener block from a Dart function.
   ///
@@ -3666,30 +3698,29 @@ extension ObjCBlock_ffiVoid_objcObjCObject_NSRange_bool_CallExtension
 
 late final _sel_enumerateAttribute_inRange_options_usingBlock_ = objc
     .registerName("enumerateAttribute:inRange:options:usingBlock:");
-final _objc_msgSend_ipgwfh =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              objc.NSRange,
-              ffi.UnsignedLong,
-              ffi.Pointer<objc.ObjCBlockImpl>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            objc.NSRange,
-            int,
-            ffi.Pointer<objc.ObjCBlockImpl>,
-          )
-        >();
+final _objc_msgSend_ipgwfh = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          objc.NSRange,
+          ffi.UnsignedLong,
+          ffi.Pointer<objc.ObjCBlockImpl>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        objc.NSRange,
+        int,
+        ffi.Pointer<objc.ObjCBlockImpl>,
+      )
+    >();
 
 /// NSExtendedAttributedString
 extension NSExtendedAttributedString on NSAttributedString {
@@ -3892,28 +3923,27 @@ extension NSMorphology on NSAttributedString {
 late final _sel_dataFromRange_documentAttributes_error_ = objc.registerName(
   "dataFromRange:documentAttributes:error:",
 );
-final _objc_msgSend_193219c =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              objc.NSRange,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            objc.NSRange,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
-          )
-        >();
+final _objc_msgSend_193219c = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          objc.NSRange,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        objc.NSRange,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
+      )
+    >();
 
 /// WARNING: NSFileWrapper is a stub. To generate bindings for this class, include
 /// NSFileWrapper in your config's objc-interfaces list.
@@ -3999,24 +4029,23 @@ extension NSAttributedStringDocumentFormats on NSAttributedString {
 late final _sel_containsAttachmentsInRange_ = objc.registerName(
   "containsAttachmentsInRange:",
 );
-final _objc_msgSend_p4nurx =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Bool Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              objc.NSRange,
-            )
-          >
-        >()
-        .asFunction<
-          bool Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            objc.NSRange,
-          )
-        >();
+final _objc_msgSend_p4nurx = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Bool Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          objc.NSRange,
+        )
+      >
+    >()
+    .asFunction<
+      bool Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        objc.NSRange,
+      )
+    >();
 late final _sel_prefersRTFDInRange_ = objc.registerName("prefersRTFDInRange:");
 
 /// NSAttributedStringKitAdditions
@@ -4053,26 +4082,25 @@ extension NSAttributedStringKitAdditions on NSAttributedString {
 late final _sel_RTFFromRange_documentAttributes_ = objc.registerName(
   "RTFFromRange:documentAttributes:",
 );
-final _objc_msgSend_bstjp9 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              objc.NSRange,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            objc.NSRange,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_bstjp9 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          objc.NSRange,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        objc.NSRange,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 late final _sel_RTFDFromRange_documentAttributes_ = objc.registerName(
   "RTFDFromRange:documentAttributes:",
 );
@@ -4178,90 +4206,86 @@ late final _sel_rulerAttributesInRange_ = objc.registerName(
 late final _sel_lineBreakBeforeIndex_withinRange_ = objc.registerName(
   "lineBreakBeforeIndex:withinRange:",
 );
-final _objc_msgSend_1ih9idr =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.UnsignedLong Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.UnsignedLong,
-              objc.NSRange,
-            )
-          >
-        >()
-        .asFunction<
-          int Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            int,
-            objc.NSRange,
-          )
-        >();
+final _objc_msgSend_1ih9idr = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.UnsignedLong Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.UnsignedLong,
+          objc.NSRange,
+        )
+      >
+    >()
+    .asFunction<
+      int Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        int,
+        objc.NSRange,
+      )
+    >();
 late final _sel_lineBreakByHyphenatingBeforeIndex_withinRange_ = objc
     .registerName("lineBreakByHyphenatingBeforeIndex:withinRange:");
 late final _sel_doubleClickAtIndex_ = objc.registerName("doubleClickAtIndex:");
-final _objc_msgSend_d3i1uy =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            objc.NSRange Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.UnsignedLong,
-            )
-          >
-        >()
-        .asFunction<
-          objc.NSRange Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            int,
-          )
-        >();
-final _objc_msgSend_d3i1uyStret =
-    objc.msgSendStretPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.NSRange>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.UnsignedLong,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.NSRange>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            int,
-          )
-        >();
+final _objc_msgSend_d3i1uy = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        objc.NSRange Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.UnsignedLong,
+        )
+      >
+    >()
+    .asFunction<
+      objc.NSRange Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        int,
+      )
+    >();
+final _objc_msgSend_d3i1uyStret = objc.msgSendStretPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.NSRange>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.UnsignedLong,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.NSRange>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        int,
+      )
+    >();
 late final _sel_nextWordFromIndex_forward_ = objc.registerName(
   "nextWordFromIndex:forward:",
 );
-final _objc_msgSend_pdufzl =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.UnsignedLong Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.UnsignedLong,
-              ffi.Bool,
-            )
-          >
-        >()
-        .asFunction<
-          int Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            int,
-            bool,
-          )
-        >();
+final _objc_msgSend_pdufzl = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.UnsignedLong Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.UnsignedLong,
+          ffi.Bool,
+        )
+      >
+    >()
+    .asFunction<
+      int Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        int,
+        bool,
+      )
+    >();
 
 /// WARNING: NSTextBlock is a stub. To generate bindings for this class, include
 /// NSTextBlock in your config's objc-interfaces list.
@@ -4290,48 +4314,46 @@ class NSTextBlock extends objc.NSObject
 late final _sel_rangeOfTextBlock_atIndex_ = objc.registerName(
   "rangeOfTextBlock:atIndex:",
 );
-final _objc_msgSend_1y9i18g =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            objc.NSRange Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.UnsignedLong,
-            )
-          >
-        >()
-        .asFunction<
-          objc.NSRange Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            int,
-          )
-        >();
-final _objc_msgSend_1y9i18gStret =
-    objc.msgSendStretPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.NSRange>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.UnsignedLong,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.NSRange>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            int,
-          )
-        >();
+final _objc_msgSend_1y9i18g = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        objc.NSRange Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.UnsignedLong,
+        )
+      >
+    >()
+    .asFunction<
+      objc.NSRange Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        int,
+      )
+    >();
+final _objc_msgSend_1y9i18gStret = objc.msgSendStretPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.NSRange>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.UnsignedLong,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.NSRange>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        int,
+      )
+    >();
 
 /// WARNING: NSTextTable is a stub. To generate bindings for this class, include
 /// NSTextTable in your config's objc-interfaces list.
@@ -4396,26 +4418,25 @@ late final _sel_rangeOfTextList_atIndex_ = objc.registerName(
 late final _sel_itemNumberInTextList_atIndex_ = objc.registerName(
   "itemNumberInTextList:atIndex:",
 );
-final _objc_msgSend_o870ko =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Long Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.UnsignedLong,
-            )
-          >
-        >()
-        .asFunction<
-          int Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            int,
-          )
-        >();
+final _objc_msgSend_o870ko = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Long Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.UnsignedLong,
+        )
+      >
+    >()
+    .asFunction<
+      int Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        int,
+      )
+    >();
 
 /// NSAttributedStringAppKitAdditions
 extension NSAttributedStringAppKitAdditions on NSAttributedString {
@@ -4492,16 +4513,16 @@ extension NSAttributedStringAppKitAdditions on NSAttributedString {
     final _ptr = pkg_ffi.calloc<objc.NSRange>();
     objc.useMsgSendVariants
         ? _objc_msgSend_d3i1uyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_doubleClickAtIndex_,
-          location,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_doubleClickAtIndex_,
+            location,
+          )
         : _ptr.ref = _objc_msgSend_d3i1uy(
-          this.ref.pointer,
-          _sel_doubleClickAtIndex_,
-          location,
-        );
+            this.ref.pointer,
+            _sel_doubleClickAtIndex_,
+            location,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<objc.NSRange>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -4534,18 +4555,18 @@ extension NSAttributedStringAppKitAdditions on NSAttributedString {
     final _ptr = pkg_ffi.calloc<objc.NSRange>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1y9i18gStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_rangeOfTextBlock_atIndex_,
-          block.ref.pointer,
-          location,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_rangeOfTextBlock_atIndex_,
+            block.ref.pointer,
+            location,
+          )
         : _ptr.ref = _objc_msgSend_1y9i18g(
-          this.ref.pointer,
-          _sel_rangeOfTextBlock_atIndex_,
-          block.ref.pointer,
-          location,
-        );
+            this.ref.pointer,
+            _sel_rangeOfTextBlock_atIndex_,
+            block.ref.pointer,
+            location,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<objc.NSRange>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -4563,18 +4584,18 @@ extension NSAttributedStringAppKitAdditions on NSAttributedString {
     final _ptr = pkg_ffi.calloc<objc.NSRange>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1y9i18gStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_rangeOfTextTable_atIndex_,
-          table.ref.pointer,
-          location,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_rangeOfTextTable_atIndex_,
+            table.ref.pointer,
+            location,
+          )
         : _ptr.ref = _objc_msgSend_1y9i18g(
-          this.ref.pointer,
-          _sel_rangeOfTextTable_atIndex_,
-          table.ref.pointer,
-          location,
-        );
+            this.ref.pointer,
+            _sel_rangeOfTextTable_atIndex_,
+            table.ref.pointer,
+            location,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<objc.NSRange>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -4592,18 +4613,18 @@ extension NSAttributedStringAppKitAdditions on NSAttributedString {
     final _ptr = pkg_ffi.calloc<objc.NSRange>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1y9i18gStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_rangeOfTextList_atIndex_,
-          list.ref.pointer,
-          location,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_rangeOfTextList_atIndex_,
+            list.ref.pointer,
+            location,
+          )
         : _ptr.ref = _objc_msgSend_1y9i18g(
-          this.ref.pointer,
-          _sel_rangeOfTextList_atIndex_,
-          list.ref.pointer,
-          location,
-        );
+            this.ref.pointer,
+            _sel_rangeOfTextList_atIndex_,
+            list.ref.pointer,
+            location,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<objc.NSRange>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -4728,30 +4749,33 @@ _ObjCBlock_NSArray_ffiVoid_NSPasteboard_fnPtrTrampoline(
     >()(arg0, arg1);
 ffi.Pointer<ffi.Void> _ObjCBlock_NSArray_ffiVoid_NSPasteboard_fnPtrCallable =
     ffi.Pointer.fromFunction<
-      ffi.Pointer<objc.ObjCObject> Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<ffi.Void>,
-        ffi.Pointer<objc.ObjCObject>,
-      )
-    >(_ObjCBlock_NSArray_ffiVoid_NSPasteboard_fnPtrTrampoline).cast();
+          ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<ffi.Void>,
+            ffi.Pointer<objc.ObjCObject>,
+          )
+        >(_ObjCBlock_NSArray_ffiVoid_NSPasteboard_fnPtrTrampoline)
+        .cast();
 ffi.Pointer<objc.ObjCObject>
 _ObjCBlock_NSArray_ffiVoid_NSPasteboard_closureTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<ffi.Void> arg0,
   ffi.Pointer<objc.ObjCObject> arg1,
-) => (objc.getBlockClosure(block)
-    as ffi.Pointer<objc.ObjCObject> Function(
-      ffi.Pointer<ffi.Void>,
-      ffi.Pointer<objc.ObjCObject>,
-    ))(arg0, arg1);
+) =>
+    (objc.getBlockClosure(block)
+        as ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<ffi.Void>,
+          ffi.Pointer<objc.ObjCObject>,
+        ))(arg0, arg1);
 ffi.Pointer<ffi.Void> _ObjCBlock_NSArray_ffiVoid_NSPasteboard_closureCallable =
     ffi.Pointer.fromFunction<
-      ffi.Pointer<objc.ObjCObject> Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<ffi.Void>,
-        ffi.Pointer<objc.ObjCObject>,
-      )
-    >(_ObjCBlock_NSArray_ffiVoid_NSPasteboard_closureTrampoline).cast();
+          ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<ffi.Void>,
+            ffi.Pointer<objc.ObjCObject>,
+          )
+        >(_ObjCBlock_NSArray_ffiVoid_NSPasteboard_closureTrampoline)
+        .cast();
 
 /// Construction methods for `objc.ObjCBlock<objc.NSArray Function(ffi.Pointer<ffi.Void>, NSPasteboard)>`.
 abstract final class ObjCBlock_NSArray_ffiVoid_NSPasteboard {
@@ -4763,9 +4787,10 @@ abstract final class ObjCBlock_NSArray_ffiVoid_NSPasteboard {
     ffi.Pointer<objc.ObjCBlockImpl> pointer, {
     bool retain = false,
     bool release = false,
-  }) => objc.ObjCBlock<
-    objc.NSArray Function(ffi.Pointer<ffi.Void>, NSPasteboard)
-  >(pointer, retain: retain, release: release);
+  }) =>
+      objc.ObjCBlock<
+        objc.NSArray Function(ffi.Pointer<ffi.Void>, NSPasteboard)
+      >(pointer, retain: retain, release: release);
 
   /// Creates a block from a C function pointer.
   ///
@@ -4785,16 +4810,17 @@ abstract final class ObjCBlock_NSArray_ffiVoid_NSPasteboard {
       >
     >
     ptr,
-  ) => objc.ObjCBlock<
-    objc.NSArray Function(ffi.Pointer<ffi.Void>, NSPasteboard)
-  >(
-    objc.newPointerBlock(
-      _ObjCBlock_NSArray_ffiVoid_NSPasteboard_fnPtrCallable,
-      ptr.cast(),
-    ),
-    retain: false,
-    release: true,
-  );
+  ) =>
+      objc.ObjCBlock<
+        objc.NSArray Function(ffi.Pointer<ffi.Void>, NSPasteboard)
+      >(
+        objc.newPointerBlock(
+          _ObjCBlock_NSArray_ffiVoid_NSPasteboard_fnPtrCallable,
+          ptr.cast(),
+        ),
+        retain: false,
+        release: true,
+      );
 
   /// Creates a block from a Dart function.
   ///
@@ -4810,21 +4836,21 @@ abstract final class ObjCBlock_NSArray_ffiVoid_NSPasteboard {
   fromFunction(
     objc.NSArray Function(ffi.Pointer<ffi.Void>, NSPasteboard) fn, {
     bool keepIsolateAlive = true,
-  }) => objc.ObjCBlock<
-    objc.NSArray Function(ffi.Pointer<ffi.Void>, NSPasteboard)
-  >(
-    objc.newClosureBlock(
-      _ObjCBlock_NSArray_ffiVoid_NSPasteboard_closureCallable,
-      (ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObject> arg1) =>
-          fn(
+  }) =>
+      objc.ObjCBlock<
+        objc.NSArray Function(ffi.Pointer<ffi.Void>, NSPasteboard)
+      >(
+        objc.newClosureBlock(
+          _ObjCBlock_NSArray_ffiVoid_NSPasteboard_closureCallable,
+          (ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObject> arg1) => fn(
             arg0,
             NSPasteboard.castFromPointer(arg1, retain: true, release: true),
           ).ref.retainAndAutorelease(),
-      keepIsolateAlive,
-    ),
-    retain: false,
-    release: true,
-  );
+          keepIsolateAlive,
+        ),
+        retain: false,
+        release: true,
+      );
 }
 
 /// Call operator for `objc.ObjCBlock<objc.NSArray Function(ffi.Pointer<ffi.Void>, NSPasteboard)>`.
@@ -4871,36 +4897,34 @@ enum NSPasteboardReadingOptions {
     1 => NSPasteboardReadingAsString,
     2 => NSPasteboardReadingAsPropertyList,
     4 => NSPasteboardReadingAsKeyedArchive,
-    _ =>
-      throw ArgumentError(
-        'Unknown value for NSPasteboardReadingOptions: $value',
-      ),
+    _ => throw ArgumentError(
+      'Unknown value for NSPasteboardReadingOptions: $value',
+    ),
   };
 }
 
 late final _sel_readingOptionsForType_pasteboard_ = objc.registerName(
   "readingOptionsForType:pasteboard:",
 );
-final _objc_msgSend_9e06sb =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.UnsignedLong Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          int Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_9e06sb = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.UnsignedLong Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      int Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 int
 _ObjCBlock_NSPasteboardReadingOptions_ffiVoid_NSPasteboardType_NSPasteboard_fnPtrTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
@@ -4927,41 +4951,44 @@ _ObjCBlock_NSPasteboardReadingOptions_ffiVoid_NSPasteboardType_NSPasteboard_fnPt
 ffi.Pointer<ffi.Void>
 _ObjCBlock_NSPasteboardReadingOptions_ffiVoid_NSPasteboardType_NSPasteboard_fnPtrCallable =
     ffi.Pointer.fromFunction<
-      ffi.UnsignedLong Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<ffi.Void>,
-        ffi.Pointer<objc.ObjCObject>,
-        ffi.Pointer<objc.ObjCObject>,
-      )
-    >(
-      _ObjCBlock_NSPasteboardReadingOptions_ffiVoid_NSPasteboardType_NSPasteboard_fnPtrTrampoline,
-      0,
-    ).cast();
+          ffi.UnsignedLong Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<ffi.Void>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>,
+          )
+        >(
+          _ObjCBlock_NSPasteboardReadingOptions_ffiVoid_NSPasteboardType_NSPasteboard_fnPtrTrampoline,
+          0,
+        )
+        .cast();
 int
 _ObjCBlock_NSPasteboardReadingOptions_ffiVoid_NSPasteboardType_NSPasteboard_closureTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<ffi.Void> arg0,
   ffi.Pointer<objc.ObjCObject> arg1,
   ffi.Pointer<objc.ObjCObject> arg2,
-) => (objc.getBlockClosure(block)
-    as int Function(
-      ffi.Pointer<ffi.Void>,
-      ffi.Pointer<objc.ObjCObject>,
-      ffi.Pointer<objc.ObjCObject>,
-    ))(arg0, arg1, arg2);
+) =>
+    (objc.getBlockClosure(block)
+        as int Function(
+          ffi.Pointer<ffi.Void>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+        ))(arg0, arg1, arg2);
 ffi.Pointer<ffi.Void>
 _ObjCBlock_NSPasteboardReadingOptions_ffiVoid_NSPasteboardType_NSPasteboard_closureCallable =
     ffi.Pointer.fromFunction<
-      ffi.UnsignedLong Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<ffi.Void>,
-        ffi.Pointer<objc.ObjCObject>,
-        ffi.Pointer<objc.ObjCObject>,
-      )
-    >(
-      _ObjCBlock_NSPasteboardReadingOptions_ffiVoid_NSPasteboardType_NSPasteboard_closureTrampoline,
-      0,
-    ).cast();
+          ffi.UnsignedLong Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<ffi.Void>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>,
+          )
+        >(
+          _ObjCBlock_NSPasteboardReadingOptions_ffiVoid_NSPasteboardType_NSPasteboard_closureTrampoline,
+          0,
+        )
+        .cast();
 
 /// Construction methods for `objc.ObjCBlock<ffi.UnsignedLong Function(ffi.Pointer<ffi.Void>, objc.NSString, NSPasteboard)>`.
 abstract final class ObjCBlock_NSPasteboardReadingOptions_ffiVoid_NSPasteboardType_NSPasteboard {
@@ -4977,13 +5004,14 @@ abstract final class ObjCBlock_NSPasteboardReadingOptions_ffiVoid_NSPasteboardTy
     ffi.Pointer<objc.ObjCBlockImpl> pointer, {
     bool retain = false,
     bool release = false,
-  }) => objc.ObjCBlock<
-    ffi.UnsignedLong Function(
-      ffi.Pointer<ffi.Void>,
-      objc.NSString,
-      NSPasteboard,
-    )
-  >(pointer, retain: retain, release: release);
+  }) =>
+      objc.ObjCBlock<
+        ffi.UnsignedLong Function(
+          ffi.Pointer<ffi.Void>,
+          objc.NSString,
+          NSPasteboard,
+        )
+      >(pointer, retain: retain, release: release);
 
   /// Creates a block from a C function pointer.
   ///
@@ -5008,20 +5036,21 @@ abstract final class ObjCBlock_NSPasteboardReadingOptions_ffiVoid_NSPasteboardTy
       >
     >
     ptr,
-  ) => objc.ObjCBlock<
-    ffi.UnsignedLong Function(
-      ffi.Pointer<ffi.Void>,
-      objc.NSString,
-      NSPasteboard,
-    )
-  >(
-    objc.newPointerBlock(
-      _ObjCBlock_NSPasteboardReadingOptions_ffiVoid_NSPasteboardType_NSPasteboard_fnPtrCallable,
-      ptr.cast(),
-    ),
-    retain: false,
-    release: true,
-  );
+  ) =>
+      objc.ObjCBlock<
+        ffi.UnsignedLong Function(
+          ffi.Pointer<ffi.Void>,
+          objc.NSString,
+          NSPasteboard,
+        )
+      >(
+        objc.newPointerBlock(
+          _ObjCBlock_NSPasteboardReadingOptions_ffiVoid_NSPasteboardType_NSPasteboard_fnPtrCallable,
+          ptr.cast(),
+        ),
+        retain: false,
+        release: true,
+      );
 
   /// Creates a block from a Dart function.
   ///
@@ -5046,30 +5075,30 @@ abstract final class ObjCBlock_NSPasteboardReadingOptions_ffiVoid_NSPasteboardTy
     )
     fn, {
     bool keepIsolateAlive = true,
-  }) => objc.ObjCBlock<
-    ffi.UnsignedLong Function(
-      ffi.Pointer<ffi.Void>,
-      objc.NSString,
-      NSPasteboard,
-    )
-  >(
-    objc.newClosureBlock(
-      _ObjCBlock_NSPasteboardReadingOptions_ffiVoid_NSPasteboardType_NSPasteboard_closureCallable,
-      (
-        ffi.Pointer<ffi.Void> arg0,
-        ffi.Pointer<objc.ObjCObject> arg1,
-        ffi.Pointer<objc.ObjCObject> arg2,
-      ) =>
-          fn(
+  }) =>
+      objc.ObjCBlock<
+        ffi.UnsignedLong Function(
+          ffi.Pointer<ffi.Void>,
+          objc.NSString,
+          NSPasteboard,
+        )
+      >(
+        objc.newClosureBlock(
+          _ObjCBlock_NSPasteboardReadingOptions_ffiVoid_NSPasteboardType_NSPasteboard_closureCallable,
+          (
+            ffi.Pointer<ffi.Void> arg0,
+            ffi.Pointer<objc.ObjCObject> arg1,
+            ffi.Pointer<objc.ObjCObject> arg2,
+          ) => fn(
             arg0,
             objc.NSString.castFromPointer(arg1, retain: true, release: true),
             NSPasteboard.castFromPointer(arg2, retain: true, release: true),
           ).value,
-      keepIsolateAlive,
-    ),
-    retain: false,
-    release: true,
-  );
+          keepIsolateAlive,
+        ),
+        retain: false,
+        release: true,
+      );
 }
 
 /// Call operator for `objc.ObjCBlock<ffi.UnsignedLong Function(ffi.Pointer<ffi.Void>, objc.NSString, NSPasteboard)>`.
@@ -5112,26 +5141,25 @@ extension ObjCBlock_NSPasteboardReadingOptions_ffiVoid_NSPasteboardType_NSPasteb
 late final _sel_initWithPasteboardPropertyList_ofType_ = objc.registerName(
   "initWithPasteboardPropertyList:ofType:",
 );
-final _objc_msgSend_15qeuct =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_15qeuct = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 ffi.Pointer<objc.ObjCObject>
 _ObjCBlock_objcObjCObject_ffiVoid_objcObjCObject_NSPasteboardType_fnPtrTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
@@ -5158,39 +5186,42 @@ _ObjCBlock_objcObjCObject_ffiVoid_objcObjCObject_NSPasteboardType_fnPtrTrampolin
 ffi.Pointer<ffi.Void>
 _ObjCBlock_objcObjCObject_ffiVoid_objcObjCObject_NSPasteboardType_fnPtrCallable =
     ffi.Pointer.fromFunction<
-      ffi.Pointer<objc.ObjCObject> Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<ffi.Void>,
-        ffi.Pointer<objc.ObjCObject>,
-        ffi.Pointer<objc.ObjCObject>,
-      )
-    >(
-      _ObjCBlock_objcObjCObject_ffiVoid_objcObjCObject_NSPasteboardType_fnPtrTrampoline,
-    ).cast();
+          ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<ffi.Void>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>,
+          )
+        >(
+          _ObjCBlock_objcObjCObject_ffiVoid_objcObjCObject_NSPasteboardType_fnPtrTrampoline,
+        )
+        .cast();
 ffi.Pointer<objc.ObjCObject>
 _ObjCBlock_objcObjCObject_ffiVoid_objcObjCObject_NSPasteboardType_closureTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<ffi.Void> arg0,
   ffi.Pointer<objc.ObjCObject> arg1,
   ffi.Pointer<objc.ObjCObject> arg2,
-) => (objc.getBlockClosure(block)
-    as ffi.Pointer<objc.ObjCObject> Function(
-      ffi.Pointer<ffi.Void>,
-      ffi.Pointer<objc.ObjCObject>,
-      ffi.Pointer<objc.ObjCObject>,
-    ))(arg0, arg1, arg2);
+) =>
+    (objc.getBlockClosure(block)
+        as ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<ffi.Void>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+        ))(arg0, arg1, arg2);
 ffi.Pointer<ffi.Void>
 _ObjCBlock_objcObjCObject_ffiVoid_objcObjCObject_NSPasteboardType_closureCallable =
     ffi.Pointer.fromFunction<
-      ffi.Pointer<objc.ObjCObject> Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<ffi.Void>,
-        ffi.Pointer<objc.ObjCObject>,
-        ffi.Pointer<objc.ObjCObject>,
-      )
-    >(
-      _ObjCBlock_objcObjCObject_ffiVoid_objcObjCObject_NSPasteboardType_closureTrampoline,
-    ).cast();
+          ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<ffi.Void>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>,
+          )
+        >(
+          _ObjCBlock_objcObjCObject_ffiVoid_objcObjCObject_NSPasteboardType_closureTrampoline,
+        )
+        .cast();
 
 /// Construction methods for `objc.ObjCBlock<objc.Retained<ffi.Pointer<objc.ObjCObject>?> Function(ffi.Pointer<ffi.Void>, ffi.Pointer<objc.ObjCObject>, objc.NSString)>`.
 abstract final class ObjCBlock_objcObjCObject_ffiVoid_objcObjCObject_NSPasteboardType {
@@ -5206,13 +5237,14 @@ abstract final class ObjCBlock_objcObjCObject_ffiVoid_objcObjCObject_NSPasteboar
     ffi.Pointer<objc.ObjCBlockImpl> pointer, {
     bool retain = false,
     bool release = false,
-  }) => objc.ObjCBlock<
-    objc.Retained<ffi.Pointer<objc.ObjCObject>?> Function(
-      ffi.Pointer<ffi.Void>,
-      ffi.Pointer<objc.ObjCObject>,
-      objc.NSString,
-    )
-  >(pointer, retain: retain, release: release);
+  }) =>
+      objc.ObjCBlock<
+        objc.Retained<ffi.Pointer<objc.ObjCObject>?> Function(
+          ffi.Pointer<ffi.Void>,
+          ffi.Pointer<objc.ObjCObject>,
+          objc.NSString,
+        )
+      >(pointer, retain: retain, release: release);
 
   /// Creates a block from a C function pointer.
   ///
@@ -5237,20 +5269,21 @@ abstract final class ObjCBlock_objcObjCObject_ffiVoid_objcObjCObject_NSPasteboar
       >
     >
     ptr,
-  ) => objc.ObjCBlock<
-    objc.Retained<ffi.Pointer<objc.ObjCObject>?> Function(
-      ffi.Pointer<ffi.Void>,
-      ffi.Pointer<objc.ObjCObject>,
-      objc.NSString,
-    )
-  >(
-    objc.newPointerBlock(
-      _ObjCBlock_objcObjCObject_ffiVoid_objcObjCObject_NSPasteboardType_fnPtrCallable,
-      ptr.cast(),
-    ),
-    retain: false,
-    release: true,
-  );
+  ) =>
+      objc.ObjCBlock<
+        objc.Retained<ffi.Pointer<objc.ObjCObject>?> Function(
+          ffi.Pointer<ffi.Void>,
+          ffi.Pointer<objc.ObjCObject>,
+          objc.NSString,
+        )
+      >(
+        objc.newPointerBlock(
+          _ObjCBlock_objcObjCObject_ffiVoid_objcObjCObject_NSPasteboardType_fnPtrCallable,
+          ptr.cast(),
+        ),
+        retain: false,
+        release: true,
+      );
 
   /// Creates a block from a Dart function.
   ///
@@ -5275,31 +5308,36 @@ abstract final class ObjCBlock_objcObjCObject_ffiVoid_objcObjCObject_NSPasteboar
     )
     fn, {
     bool keepIsolateAlive = true,
-  }) => objc.ObjCBlock<
-    objc.Retained<ffi.Pointer<objc.ObjCObject>?> Function(
-      ffi.Pointer<ffi.Void>,
-      ffi.Pointer<objc.ObjCObject>,
-      objc.NSString,
-    )
-  >(
-    objc.newClosureBlock(
-      _ObjCBlock_objcObjCObject_ffiVoid_objcObjCObject_NSPasteboardType_closureCallable,
-      (
-        ffi.Pointer<ffi.Void> arg0,
-        ffi.Pointer<objc.ObjCObject> arg1,
-        ffi.Pointer<objc.ObjCObject> arg2,
-      ) =>
-          fn(
-            arg0,
-            objc.ObjCObjectBase(arg1, retain: true, release: true),
-            objc.NSString.castFromPointer(arg2, retain: true, release: true),
-          )?.ref.retainAndReturnPointer() ??
-          ffi.nullptr,
-      keepIsolateAlive,
-    ),
-    retain: false,
-    release: true,
-  );
+  }) =>
+      objc.ObjCBlock<
+        objc.Retained<ffi.Pointer<objc.ObjCObject>?> Function(
+          ffi.Pointer<ffi.Void>,
+          ffi.Pointer<objc.ObjCObject>,
+          objc.NSString,
+        )
+      >(
+        objc.newClosureBlock(
+          _ObjCBlock_objcObjCObject_ffiVoid_objcObjCObject_NSPasteboardType_closureCallable,
+          (
+            ffi.Pointer<ffi.Void> arg0,
+            ffi.Pointer<objc.ObjCObject> arg1,
+            ffi.Pointer<objc.ObjCObject> arg2,
+          ) =>
+              fn(
+                arg0,
+                objc.ObjCObjectBase(arg1, retain: true, release: true),
+                objc.NSString.castFromPointer(
+                  arg2,
+                  retain: true,
+                  release: true,
+                ),
+              )?.ref.retainAndReturnPointer() ??
+              ffi.nullptr,
+          keepIsolateAlive,
+        ),
+        retain: false,
+        release: true,
+      );
 }
 
 /// Call operator for `objc.ObjCBlock<objc.Retained<ffi.Pointer<objc.ObjCObject>?> Function(ffi.Pointer<ffi.Void>, ffi.Pointer<objc.ObjCObject>, objc.NSString)>`.
@@ -5318,50 +5356,50 @@ extension ObjCBlock_objcObjCObject_ffiVoid_objcObjCObject_NSPasteboardType_CallE
     objc.NSString arg2,
   ) =>
       ref.pointer.ref.invoke
-                  .cast<
-                    ffi.NativeFunction<
-                      ffi.Pointer<objc.ObjCObject> Function(
-                        ffi.Pointer<objc.ObjCBlockImpl> block,
-                        ffi.Pointer<ffi.Void> arg0,
-                        ffi.Pointer<objc.ObjCObject> arg1,
-                        ffi.Pointer<objc.ObjCObject> arg2,
-                      )
-                    >
-                  >()
-                  .asFunction<
-                    ffi.Pointer<objc.ObjCObject> Function(
-                      ffi.Pointer<objc.ObjCBlockImpl>,
-                      ffi.Pointer<ffi.Void>,
-                      ffi.Pointer<objc.ObjCObject>,
-                      ffi.Pointer<objc.ObjCObject>,
-                    )
-                  >()(ref.pointer, arg0, arg1.ref.pointer, arg2.ref.pointer)
-                  .address ==
-              0
-          ? null
-          : objc.ObjCObjectBase(
-            ref.pointer.ref.invoke
-                .cast<
-                  ffi.NativeFunction<
-                    ffi.Pointer<objc.ObjCObject> Function(
-                      ffi.Pointer<objc.ObjCBlockImpl> block,
-                      ffi.Pointer<ffi.Void> arg0,
-                      ffi.Pointer<objc.ObjCObject> arg1,
-                      ffi.Pointer<objc.ObjCObject> arg2,
-                    )
-                  >
-                >()
-                .asFunction<
+              .cast<
+                ffi.NativeFunction<
                   ffi.Pointer<objc.ObjCObject> Function(
-                    ffi.Pointer<objc.ObjCBlockImpl>,
-                    ffi.Pointer<ffi.Void>,
-                    ffi.Pointer<objc.ObjCObject>,
-                    ffi.Pointer<objc.ObjCObject>,
+                    ffi.Pointer<objc.ObjCBlockImpl> block,
+                    ffi.Pointer<ffi.Void> arg0,
+                    ffi.Pointer<objc.ObjCObject> arg1,
+                    ffi.Pointer<objc.ObjCObject> arg2,
                   )
-                >()(ref.pointer, arg0, arg1.ref.pointer, arg2.ref.pointer),
-            retain: false,
-            release: true,
-          );
+                >
+              >()
+              .asFunction<
+                ffi.Pointer<objc.ObjCObject> Function(
+                  ffi.Pointer<objc.ObjCBlockImpl>,
+                  ffi.Pointer<ffi.Void>,
+                  ffi.Pointer<objc.ObjCObject>,
+                  ffi.Pointer<objc.ObjCObject>,
+                )
+              >()(ref.pointer, arg0, arg1.ref.pointer, arg2.ref.pointer)
+              .address ==
+          0
+      ? null
+      : objc.ObjCObjectBase(
+          ref.pointer.ref.invoke
+              .cast<
+                ffi.NativeFunction<
+                  ffi.Pointer<objc.ObjCObject> Function(
+                    ffi.Pointer<objc.ObjCBlockImpl> block,
+                    ffi.Pointer<ffi.Void> arg0,
+                    ffi.Pointer<objc.ObjCObject> arg1,
+                    ffi.Pointer<objc.ObjCObject> arg2,
+                  )
+                >
+              >()
+              .asFunction<
+                ffi.Pointer<objc.ObjCObject> Function(
+                  ffi.Pointer<objc.ObjCBlockImpl>,
+                  ffi.Pointer<ffi.Void>,
+                  ffi.Pointer<objc.ObjCObject>,
+                  ffi.Pointer<objc.ObjCObject>,
+                )
+              >()(ref.pointer, arg0, arg1.ref.pointer, arg2.ref.pointer),
+          retain: false,
+          release: true,
+        );
 }
 
 late final _sel_writableTypesForPasteboard_ = objc.registerName(
@@ -5376,36 +5414,34 @@ enum NSPasteboardWritingOptions {
 
   static NSPasteboardWritingOptions fromValue(int value) => switch (value) {
     512 => NSPasteboardWritingPromised,
-    _ =>
-      throw ArgumentError(
-        'Unknown value for NSPasteboardWritingOptions: $value',
-      ),
+    _ => throw ArgumentError(
+      'Unknown value for NSPasteboardWritingOptions: $value',
+    ),
   };
 }
 
 late final _sel_writingOptionsForType_pasteboard_ = objc.registerName(
   "writingOptionsForType:pasteboard:",
 );
-final _objc_msgSend_1r3sx4b =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.UnsignedLong Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          int Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_1r3sx4b = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.UnsignedLong Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      int Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 int
 _ObjCBlock_NSPasteboardWritingOptions_ffiVoid_NSPasteboardType_NSPasteboard_fnPtrTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
@@ -5432,41 +5468,44 @@ _ObjCBlock_NSPasteboardWritingOptions_ffiVoid_NSPasteboardType_NSPasteboard_fnPt
 ffi.Pointer<ffi.Void>
 _ObjCBlock_NSPasteboardWritingOptions_ffiVoid_NSPasteboardType_NSPasteboard_fnPtrCallable =
     ffi.Pointer.fromFunction<
-      ffi.UnsignedLong Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<ffi.Void>,
-        ffi.Pointer<objc.ObjCObject>,
-        ffi.Pointer<objc.ObjCObject>,
-      )
-    >(
-      _ObjCBlock_NSPasteboardWritingOptions_ffiVoid_NSPasteboardType_NSPasteboard_fnPtrTrampoline,
-      0,
-    ).cast();
+          ffi.UnsignedLong Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<ffi.Void>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>,
+          )
+        >(
+          _ObjCBlock_NSPasteboardWritingOptions_ffiVoid_NSPasteboardType_NSPasteboard_fnPtrTrampoline,
+          0,
+        )
+        .cast();
 int
 _ObjCBlock_NSPasteboardWritingOptions_ffiVoid_NSPasteboardType_NSPasteboard_closureTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<ffi.Void> arg0,
   ffi.Pointer<objc.ObjCObject> arg1,
   ffi.Pointer<objc.ObjCObject> arg2,
-) => (objc.getBlockClosure(block)
-    as int Function(
-      ffi.Pointer<ffi.Void>,
-      ffi.Pointer<objc.ObjCObject>,
-      ffi.Pointer<objc.ObjCObject>,
-    ))(arg0, arg1, arg2);
+) =>
+    (objc.getBlockClosure(block)
+        as int Function(
+          ffi.Pointer<ffi.Void>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+        ))(arg0, arg1, arg2);
 ffi.Pointer<ffi.Void>
 _ObjCBlock_NSPasteboardWritingOptions_ffiVoid_NSPasteboardType_NSPasteboard_closureCallable =
     ffi.Pointer.fromFunction<
-      ffi.UnsignedLong Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<ffi.Void>,
-        ffi.Pointer<objc.ObjCObject>,
-        ffi.Pointer<objc.ObjCObject>,
-      )
-    >(
-      _ObjCBlock_NSPasteboardWritingOptions_ffiVoid_NSPasteboardType_NSPasteboard_closureTrampoline,
-      0,
-    ).cast();
+          ffi.UnsignedLong Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<ffi.Void>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>,
+          )
+        >(
+          _ObjCBlock_NSPasteboardWritingOptions_ffiVoid_NSPasteboardType_NSPasteboard_closureTrampoline,
+          0,
+        )
+        .cast();
 
 /// Construction methods for `objc.ObjCBlock<ffi.UnsignedLong Function(ffi.Pointer<ffi.Void>, objc.NSString, NSPasteboard)>`.
 abstract final class ObjCBlock_NSPasteboardWritingOptions_ffiVoid_NSPasteboardType_NSPasteboard {
@@ -5482,13 +5521,14 @@ abstract final class ObjCBlock_NSPasteboardWritingOptions_ffiVoid_NSPasteboardTy
     ffi.Pointer<objc.ObjCBlockImpl> pointer, {
     bool retain = false,
     bool release = false,
-  }) => objc.ObjCBlock<
-    ffi.UnsignedLong Function(
-      ffi.Pointer<ffi.Void>,
-      objc.NSString,
-      NSPasteboard,
-    )
-  >(pointer, retain: retain, release: release);
+  }) =>
+      objc.ObjCBlock<
+        ffi.UnsignedLong Function(
+          ffi.Pointer<ffi.Void>,
+          objc.NSString,
+          NSPasteboard,
+        )
+      >(pointer, retain: retain, release: release);
 
   /// Creates a block from a C function pointer.
   ///
@@ -5513,20 +5553,21 @@ abstract final class ObjCBlock_NSPasteboardWritingOptions_ffiVoid_NSPasteboardTy
       >
     >
     ptr,
-  ) => objc.ObjCBlock<
-    ffi.UnsignedLong Function(
-      ffi.Pointer<ffi.Void>,
-      objc.NSString,
-      NSPasteboard,
-    )
-  >(
-    objc.newPointerBlock(
-      _ObjCBlock_NSPasteboardWritingOptions_ffiVoid_NSPasteboardType_NSPasteboard_fnPtrCallable,
-      ptr.cast(),
-    ),
-    retain: false,
-    release: true,
-  );
+  ) =>
+      objc.ObjCBlock<
+        ffi.UnsignedLong Function(
+          ffi.Pointer<ffi.Void>,
+          objc.NSString,
+          NSPasteboard,
+        )
+      >(
+        objc.newPointerBlock(
+          _ObjCBlock_NSPasteboardWritingOptions_ffiVoid_NSPasteboardType_NSPasteboard_fnPtrCallable,
+          ptr.cast(),
+        ),
+        retain: false,
+        release: true,
+      );
 
   /// Creates a block from a Dart function.
   ///
@@ -5551,30 +5592,30 @@ abstract final class ObjCBlock_NSPasteboardWritingOptions_ffiVoid_NSPasteboardTy
     )
     fn, {
     bool keepIsolateAlive = true,
-  }) => objc.ObjCBlock<
-    ffi.UnsignedLong Function(
-      ffi.Pointer<ffi.Void>,
-      objc.NSString,
-      NSPasteboard,
-    )
-  >(
-    objc.newClosureBlock(
-      _ObjCBlock_NSPasteboardWritingOptions_ffiVoid_NSPasteboardType_NSPasteboard_closureCallable,
-      (
-        ffi.Pointer<ffi.Void> arg0,
-        ffi.Pointer<objc.ObjCObject> arg1,
-        ffi.Pointer<objc.ObjCObject> arg2,
-      ) =>
-          fn(
+  }) =>
+      objc.ObjCBlock<
+        ffi.UnsignedLong Function(
+          ffi.Pointer<ffi.Void>,
+          objc.NSString,
+          NSPasteboard,
+        )
+      >(
+        objc.newClosureBlock(
+          _ObjCBlock_NSPasteboardWritingOptions_ffiVoid_NSPasteboardType_NSPasteboard_closureCallable,
+          (
+            ffi.Pointer<ffi.Void> arg0,
+            ffi.Pointer<objc.ObjCObject> arg1,
+            ffi.Pointer<objc.ObjCObject> arg2,
+          ) => fn(
             arg0,
             objc.NSString.castFromPointer(arg1, retain: true, release: true),
             NSPasteboard.castFromPointer(arg2, retain: true, release: true),
           ).value,
-      keepIsolateAlive,
-    ),
-    retain: false,
-    release: true,
-  );
+          keepIsolateAlive,
+        ),
+        retain: false,
+        release: true,
+      );
 }
 
 /// Call operator for `objc.ObjCBlock<ffi.UnsignedLong Function(ffi.Pointer<ffi.Void>, objc.NSString, NSPasteboard)>`.
@@ -5640,35 +5681,34 @@ _ObjCBlock_objcObjCObject_ffiVoid_NSAnimatablePropertyKey_fnPtrTrampoline(
 ffi.Pointer<ffi.Void>
 _ObjCBlock_objcObjCObject_ffiVoid_NSAnimatablePropertyKey_fnPtrCallable =
     ffi.Pointer.fromFunction<
-      ffi.Pointer<objc.ObjCObject> Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<ffi.Void>,
-        ffi.Pointer<objc.ObjCObject>,
-      )
-    >(
-      _ObjCBlock_objcObjCObject_ffiVoid_NSAnimatablePropertyKey_fnPtrTrampoline,
-    ).cast();
+          ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<ffi.Void>,
+            ffi.Pointer<objc.ObjCObject>,
+          )
+        >(_ObjCBlock_objcObjCObject_ffiVoid_NSAnimatablePropertyKey_fnPtrTrampoline)
+        .cast();
 ffi.Pointer<objc.ObjCObject>
 _ObjCBlock_objcObjCObject_ffiVoid_NSAnimatablePropertyKey_closureTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<ffi.Void> arg0,
   ffi.Pointer<objc.ObjCObject> arg1,
-) => (objc.getBlockClosure(block)
-    as ffi.Pointer<objc.ObjCObject> Function(
-      ffi.Pointer<ffi.Void>,
-      ffi.Pointer<objc.ObjCObject>,
-    ))(arg0, arg1);
+) =>
+    (objc.getBlockClosure(block)
+        as ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<ffi.Void>,
+          ffi.Pointer<objc.ObjCObject>,
+        ))(arg0, arg1);
 ffi.Pointer<ffi.Void>
 _ObjCBlock_objcObjCObject_ffiVoid_NSAnimatablePropertyKey_closureCallable =
     ffi.Pointer.fromFunction<
-      ffi.Pointer<objc.ObjCObject> Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<ffi.Void>,
-        ffi.Pointer<objc.ObjCObject>,
-      )
-    >(
-      _ObjCBlock_objcObjCObject_ffiVoid_NSAnimatablePropertyKey_closureTrampoline,
-    ).cast();
+          ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<ffi.Void>,
+            ffi.Pointer<objc.ObjCObject>,
+          )
+        >(_ObjCBlock_objcObjCObject_ffiVoid_NSAnimatablePropertyKey_closureTrampoline)
+        .cast();
 
 /// Construction methods for `objc.ObjCBlock<ffi.Pointer<objc.ObjCObject>? Function(ffi.Pointer<ffi.Void>, objc.NSString)>`.
 abstract final class ObjCBlock_objcObjCObject_ffiVoid_NSAnimatablePropertyKey {
@@ -5680,9 +5720,13 @@ abstract final class ObjCBlock_objcObjCObject_ffiVoid_NSAnimatablePropertyKey {
     ffi.Pointer<objc.ObjCBlockImpl> pointer, {
     bool retain = false,
     bool release = false,
-  }) => objc.ObjCBlock<
-    ffi.Pointer<objc.ObjCObject>? Function(ffi.Pointer<ffi.Void>, objc.NSString)
-  >(pointer, retain: retain, release: release);
+  }) =>
+      objc.ObjCBlock<
+        ffi.Pointer<objc.ObjCObject>? Function(
+          ffi.Pointer<ffi.Void>,
+          objc.NSString,
+        )
+      >(pointer, retain: retain, release: release);
 
   /// Creates a block from a C function pointer.
   ///
@@ -5702,16 +5746,20 @@ abstract final class ObjCBlock_objcObjCObject_ffiVoid_NSAnimatablePropertyKey {
       >
     >
     ptr,
-  ) => objc.ObjCBlock<
-    ffi.Pointer<objc.ObjCObject>? Function(ffi.Pointer<ffi.Void>, objc.NSString)
-  >(
-    objc.newPointerBlock(
-      _ObjCBlock_objcObjCObject_ffiVoid_NSAnimatablePropertyKey_fnPtrCallable,
-      ptr.cast(),
-    ),
-    retain: false,
-    release: true,
-  );
+  ) =>
+      objc.ObjCBlock<
+        ffi.Pointer<objc.ObjCObject>? Function(
+          ffi.Pointer<ffi.Void>,
+          objc.NSString,
+        )
+      >(
+        objc.newPointerBlock(
+          _ObjCBlock_objcObjCObject_ffiVoid_NSAnimatablePropertyKey_fnPtrCallable,
+          ptr.cast(),
+        ),
+        retain: false,
+        release: true,
+      );
 
   /// Creates a block from a Dart function.
   ///
@@ -5727,22 +5775,30 @@ abstract final class ObjCBlock_objcObjCObject_ffiVoid_NSAnimatablePropertyKey {
   fromFunction(
     objc.ObjCObjectBase? Function(ffi.Pointer<ffi.Void>, objc.NSString) fn, {
     bool keepIsolateAlive = true,
-  }) => objc.ObjCBlock<
-    ffi.Pointer<objc.ObjCObject>? Function(ffi.Pointer<ffi.Void>, objc.NSString)
-  >(
-    objc.newClosureBlock(
-      _ObjCBlock_objcObjCObject_ffiVoid_NSAnimatablePropertyKey_closureCallable,
-      (ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObject> arg1) =>
-          fn(
-            arg0,
-            objc.NSString.castFromPointer(arg1, retain: true, release: true),
-          )?.ref.retainAndAutorelease() ??
-          ffi.nullptr,
-      keepIsolateAlive,
-    ),
-    retain: false,
-    release: true,
-  );
+  }) =>
+      objc.ObjCBlock<
+        ffi.Pointer<objc.ObjCObject>? Function(
+          ffi.Pointer<ffi.Void>,
+          objc.NSString,
+        )
+      >(
+        objc.newClosureBlock(
+          _ObjCBlock_objcObjCObject_ffiVoid_NSAnimatablePropertyKey_closureCallable,
+          (ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObject> arg1) =>
+              fn(
+                arg0,
+                objc.NSString.castFromPointer(
+                  arg1,
+                  retain: true,
+                  release: true,
+                ),
+              )?.ref.retainAndAutorelease() ??
+              ffi.nullptr,
+          keepIsolateAlive,
+        ),
+        retain: false,
+        release: true,
+      );
 }
 
 /// Call operator for `objc.ObjCBlock<ffi.Pointer<objc.ObjCObject>? Function(ffi.Pointer<ffi.Void>, objc.NSString)>`.
@@ -5756,46 +5812,46 @@ extension ObjCBlock_objcObjCObject_ffiVoid_NSAnimatablePropertyKey_CallExtension
         > {
   objc.ObjCObjectBase? call(ffi.Pointer<ffi.Void> arg0, objc.NSString arg1) =>
       ref.pointer.ref.invoke
-                  .cast<
-                    ffi.NativeFunction<
-                      ffi.Pointer<objc.ObjCObject> Function(
-                        ffi.Pointer<objc.ObjCBlockImpl> block,
-                        ffi.Pointer<ffi.Void> arg0,
-                        ffi.Pointer<objc.ObjCObject> arg1,
-                      )
-                    >
-                  >()
-                  .asFunction<
-                    ffi.Pointer<objc.ObjCObject> Function(
-                      ffi.Pointer<objc.ObjCBlockImpl>,
-                      ffi.Pointer<ffi.Void>,
-                      ffi.Pointer<objc.ObjCObject>,
-                    )
-                  >()(ref.pointer, arg0, arg1.ref.pointer)
-                  .address ==
-              0
-          ? null
-          : objc.ObjCObjectBase(
-            ref.pointer.ref.invoke
-                .cast<
-                  ffi.NativeFunction<
-                    ffi.Pointer<objc.ObjCObject> Function(
-                      ffi.Pointer<objc.ObjCBlockImpl> block,
-                      ffi.Pointer<ffi.Void> arg0,
-                      ffi.Pointer<objc.ObjCObject> arg1,
-                    )
-                  >
-                >()
-                .asFunction<
+              .cast<
+                ffi.NativeFunction<
                   ffi.Pointer<objc.ObjCObject> Function(
-                    ffi.Pointer<objc.ObjCBlockImpl>,
-                    ffi.Pointer<ffi.Void>,
-                    ffi.Pointer<objc.ObjCObject>,
+                    ffi.Pointer<objc.ObjCBlockImpl> block,
+                    ffi.Pointer<ffi.Void> arg0,
+                    ffi.Pointer<objc.ObjCObject> arg1,
                   )
-                >()(ref.pointer, arg0, arg1.ref.pointer),
-            retain: true,
-            release: true,
-          );
+                >
+              >()
+              .asFunction<
+                ffi.Pointer<objc.ObjCObject> Function(
+                  ffi.Pointer<objc.ObjCBlockImpl>,
+                  ffi.Pointer<ffi.Void>,
+                  ffi.Pointer<objc.ObjCObject>,
+                )
+              >()(ref.pointer, arg0, arg1.ref.pointer)
+              .address ==
+          0
+      ? null
+      : objc.ObjCObjectBase(
+          ref.pointer.ref.invoke
+              .cast<
+                ffi.NativeFunction<
+                  ffi.Pointer<objc.ObjCObject> Function(
+                    ffi.Pointer<objc.ObjCBlockImpl> block,
+                    ffi.Pointer<ffi.Void> arg0,
+                    ffi.Pointer<objc.ObjCObject> arg1,
+                  )
+                >
+              >()
+              .asFunction<
+                ffi.Pointer<objc.ObjCObject> Function(
+                  ffi.Pointer<objc.ObjCBlockImpl>,
+                  ffi.Pointer<ffi.Void>,
+                  ffi.Pointer<objc.ObjCObject>,
+                )
+              >()(ref.pointer, arg0, arg1.ref.pointer),
+          retain: true,
+          release: true,
+        );
 }
 
 /// NSAttributedStringPasteboardAdditions
@@ -5955,22 +6011,21 @@ extension NSAttributedStringPasteboardAdditions on NSAttributedString {
 }
 
 late final _sel_containsAttachments = objc.registerName("containsAttachments");
-final _objc_msgSend_91o635 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Bool Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          bool Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
+final _objc_msgSend_91o635 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Bool Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      bool Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+      )
+    >();
 late final _sel_textFileTypes = objc.registerName("textFileTypes");
 late final _sel_textPasteboardTypes = objc.registerName("textPasteboardTypes");
 late final _sel_textUnfilteredFileTypes = objc.registerName(
@@ -5982,26 +6037,25 @@ late final _sel_textUnfilteredPasteboardTypes = objc.registerName(
 late final _sel_URLAtIndex_effectiveRange_ = objc.registerName(
   "URLAtIndex:effectiveRange:",
 );
-final _objc_msgSend_1776v9k =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.UnsignedLong,
-              ffi.Pointer<objc.NSRange>,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            int,
-            ffi.Pointer<objc.NSRange>,
-          )
-        >();
+final _objc_msgSend_1776v9k = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.UnsignedLong,
+          ffi.Pointer<objc.NSRange>,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        int,
+        ffi.Pointer<objc.NSRange>,
+      )
+    >();
 
 /// NSDeprecatedKitAdditions
 extension NSDeprecatedKitAdditions on NSAttributedString {
@@ -6147,78 +6201,74 @@ extension NSAttributedStringAttachmentConveniences on NSAttributedString {
 }
 
 late final _sel_size = objc.registerName("size");
-final _objc_msgSend_1vdfken =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            CGSize Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          CGSize Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
-final _objc_msgSend_1vdfkenStret =
-    objc.msgSendStretPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<CGSize>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<CGSize>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
+final _objc_msgSend_1vdfken = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        CGSize Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      CGSize Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+      )
+    >();
+final _objc_msgSend_1vdfkenStret = objc.msgSendStretPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<CGSize>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<CGSize>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+      )
+    >();
 late final _sel_drawAtPoint_ = objc.registerName("drawAtPoint:");
-final _objc_msgSend_iy8iz6 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CGPoint,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CGPoint,
-          )
-        >();
+final _objc_msgSend_iy8iz6 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CGPoint,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CGPoint,
+      )
+    >();
 late final _sel_drawInRect_ = objc.registerName("drawInRect:");
-final _objc_msgSend_1okkq16 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CGRect,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CGRect,
-          )
-        >();
+final _objc_msgSend_1okkq16 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CGRect,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CGRect,
+      )
+    >();
 
 /// NSStringDrawing
 extension NSStringDrawing on NSAttributedString {
@@ -6279,8 +6329,9 @@ enum NSStringDrawingOptions {
     32 => NSStringDrawingTruncatesLastVisibleLine,
     4 => NSStringDrawingDisableScreenFontSubstitution,
     16 => NSStringDrawingOneShot,
-    _ =>
-      throw ArgumentError('Unknown value for NSStringDrawingOptions: $value'),
+    _ => throw ArgumentError(
+      'Unknown value for NSStringDrawingOptions: $value',
+    ),
   };
 }
 
@@ -6316,77 +6367,74 @@ class NSStringDrawingContext extends objc.NSObject {
 late final _sel_drawWithRect_options_context_ = objc.registerName(
   "drawWithRect:options:context:",
 );
-final _objc_msgSend_g5bnri =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CGRect,
-              ffi.Long,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CGRect,
-            int,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_g5bnri = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CGRect,
+          ffi.Long,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CGRect,
+        int,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 late final _sel_boundingRectWithSize_options_context_ = objc.registerName(
   "boundingRectWithSize:options:context:",
 );
-final _objc_msgSend_1y1y0ic =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            CGRect Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CGSize,
-              ffi.Long,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          CGRect Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CGSize,
-            int,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
-final _objc_msgSend_1y1y0icStret =
-    objc.msgSendStretPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<CGRect>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CGSize,
-              ffi.Long,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<CGRect>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CGSize,
-            int,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_1y1y0ic = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        CGRect Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CGSize,
+          ffi.Long,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      CGRect Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CGSize,
+        int,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
+final _objc_msgSend_1y1y0icStret = objc.msgSendStretPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<CGRect>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CGSize,
+          ffi.Long,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<CGRect>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CGSize,
+        int,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 
 /// NSExtendedStringDrawing
 extension NSExtendedStringDrawing on NSAttributedString {
@@ -6424,20 +6472,20 @@ extension NSExtendedStringDrawing on NSAttributedString {
     final _ptr = pkg_ffi.calloc<CGRect>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1y1y0icStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_boundingRectWithSize_options_context_,
-          size,
-          options.value,
-          context?.ref.pointer ?? ffi.nullptr,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_boundingRectWithSize_options_context_,
+            size,
+            options.value,
+            context?.ref.pointer ?? ffi.nullptr,
+          )
         : _ptr.ref = _objc_msgSend_1y1y0ic(
-          this.ref.pointer,
-          _sel_boundingRectWithSize_options_context_,
-          size,
-          options.value,
-          context?.ref.pointer ?? ffi.nullptr,
-        );
+            this.ref.pointer,
+            _sel_boundingRectWithSize_options_context_,
+            size,
+            options.value,
+            context?.ref.pointer ?? ffi.nullptr,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<CGRect>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -6449,71 +6497,68 @@ extension NSExtendedStringDrawing on NSAttributedString {
 late final _sel_drawWithRect_options_ = objc.registerName(
   "drawWithRect:options:",
 );
-final _objc_msgSend_1rmtpco =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CGRect,
-              ffi.Long,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CGRect,
-            int,
-          )
-        >();
+final _objc_msgSend_1rmtpco = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CGRect,
+          ffi.Long,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CGRect,
+        int,
+      )
+    >();
 late final _sel_boundingRectWithSize_options_ = objc.registerName(
   "boundingRectWithSize:options:",
 );
-final _objc_msgSend_fh0lba =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            CGRect Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CGSize,
-              ffi.Long,
-            )
-          >
-        >()
-        .asFunction<
-          CGRect Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CGSize,
-            int,
-          )
-        >();
-final _objc_msgSend_fh0lbaStret =
-    objc.msgSendStretPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<CGRect>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CGSize,
-              ffi.Long,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<CGRect>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CGSize,
-            int,
-          )
-        >();
+final _objc_msgSend_fh0lba = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        CGRect Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CGSize,
+          ffi.Long,
+        )
+      >
+    >()
+    .asFunction<
+      CGRect Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CGSize,
+        int,
+      )
+    >();
+final _objc_msgSend_fh0lbaStret = objc.msgSendStretPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<CGRect>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CGSize,
+          ffi.Long,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<CGRect>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CGSize,
+        int,
+      )
+    >();
 
 /// NSStringDrawingDeprecated
 extension NSStringDrawingDeprecated on NSAttributedString {
@@ -6545,18 +6590,18 @@ extension NSStringDrawingDeprecated on NSAttributedString {
     final _ptr = pkg_ffi.calloc<CGRect>();
     objc.useMsgSendVariants
         ? _objc_msgSend_fh0lbaStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_boundingRectWithSize_options_,
-          size,
-          options.value,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_boundingRectWithSize_options_,
+            size,
+            options.value,
+          )
         : _ptr.ref = _objc_msgSend_fh0lba(
-          this.ref.pointer,
-          _sel_boundingRectWithSize_options_,
-          size,
-          options.value,
-        );
+            this.ref.pointer,
+            _sel_boundingRectWithSize_options_,
+            size,
+            options.value,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<CGRect>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -6576,24 +6621,23 @@ late final _sel_attributesAtIndex_effectiveRange_ = objc.registerName(
 late final _sel_init = objc.registerName("init");
 late final _sel_new = objc.registerName("new");
 late final _sel_allocWithZone_ = objc.registerName("allocWithZone:");
-final _objc_msgSend_1cwp428 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.NSZone>,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.NSZone>,
-          )
-        >();
+final _objc_msgSend_1cwp428 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.NSZone>,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.NSZone>,
+      )
+    >();
 late final _sel_alloc = objc.registerName("alloc");
 late final _sel_supportsSecureCoding = objc.registerName(
   "supportsSecureCoding",
@@ -6606,8 +6650,12 @@ bool _ObjCBlock_bool_ffiVoid_fnPtrTrampoline(
     .asFunction<bool Function(ffi.Pointer<ffi.Void>)>()(arg0);
 ffi.Pointer<ffi.Void> _ObjCBlock_bool_ffiVoid_fnPtrCallable =
     ffi.Pointer.fromFunction<
-      ffi.Bool Function(ffi.Pointer<objc.ObjCBlockImpl>, ffi.Pointer<ffi.Void>)
-    >(_ObjCBlock_bool_ffiVoid_fnPtrTrampoline, false).cast();
+          ffi.Bool Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<ffi.Void>,
+          )
+        >(_ObjCBlock_bool_ffiVoid_fnPtrTrampoline, false)
+        .cast();
 bool _ObjCBlock_bool_ffiVoid_closureTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<ffi.Void> arg0,
@@ -6615,8 +6663,12 @@ bool _ObjCBlock_bool_ffiVoid_closureTrampoline(
     (objc.getBlockClosure(block) as bool Function(ffi.Pointer<ffi.Void>))(arg0);
 ffi.Pointer<ffi.Void> _ObjCBlock_bool_ffiVoid_closureCallable =
     ffi.Pointer.fromFunction<
-      ffi.Bool Function(ffi.Pointer<objc.ObjCBlockImpl>, ffi.Pointer<ffi.Void>)
-    >(_ObjCBlock_bool_ffiVoid_closureTrampoline, false).cast();
+          ffi.Bool Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<ffi.Void>,
+          )
+        >(_ObjCBlock_bool_ffiVoid_closureTrampoline, false)
+        .cast();
 
 /// Construction methods for `objc.ObjCBlock<ffi.Bool Function(ffi.Pointer<ffi.Void>)>`.
 abstract final class ObjCBlock_bool_ffiVoid {
@@ -6689,24 +6741,23 @@ extension ObjCBlock_bool_ffiVoid_CallExtension
 }
 
 late final _sel_encodeWithCoder_ = objc.registerName("encodeWithCoder:");
-final _objc_msgSend_xtuoz7 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_xtuoz7 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 void _ObjCBlock_ffiVoid_ffiVoid_NSCoder_fnPtrTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<ffi.Void> arg0,
@@ -6725,29 +6776,32 @@ void _ObjCBlock_ffiVoid_ffiVoid_NSCoder_fnPtrTrampoline(
     >()(arg0, arg1);
 ffi.Pointer<ffi.Void> _ObjCBlock_ffiVoid_ffiVoid_NSCoder_fnPtrCallable =
     ffi.Pointer.fromFunction<
-      ffi.Void Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<ffi.Void>,
-        ffi.Pointer<objc.ObjCObject>,
-      )
-    >(_ObjCBlock_ffiVoid_ffiVoid_NSCoder_fnPtrTrampoline).cast();
+          ffi.Void Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<ffi.Void>,
+            ffi.Pointer<objc.ObjCObject>,
+          )
+        >(_ObjCBlock_ffiVoid_ffiVoid_NSCoder_fnPtrTrampoline)
+        .cast();
 void _ObjCBlock_ffiVoid_ffiVoid_NSCoder_closureTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<ffi.Void> arg0,
   ffi.Pointer<objc.ObjCObject> arg1,
-) => (objc.getBlockClosure(block)
-    as void Function(ffi.Pointer<ffi.Void>, ffi.Pointer<objc.ObjCObject>))(
-  arg0,
-  arg1,
-);
+) =>
+    (objc.getBlockClosure(block)
+        as void Function(ffi.Pointer<ffi.Void>, ffi.Pointer<objc.ObjCObject>))(
+      arg0,
+      arg1,
+    );
 ffi.Pointer<ffi.Void> _ObjCBlock_ffiVoid_ffiVoid_NSCoder_closureCallable =
     ffi.Pointer.fromFunction<
-      ffi.Void Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<ffi.Void>,
-        ffi.Pointer<objc.ObjCObject>,
-      )
-    >(_ObjCBlock_ffiVoid_ffiVoid_NSCoder_closureTrampoline).cast();
+          ffi.Void Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<ffi.Void>,
+            ffi.Pointer<objc.ObjCObject>,
+          )
+        >(_ObjCBlock_ffiVoid_ffiVoid_NSCoder_closureTrampoline)
+        .cast();
 void _ObjCBlock_ffiVoid_ffiVoid_NSCoder_listenerTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<ffi.Void> arg0,
@@ -6768,14 +6822,15 @@ ffi.NativeCallable<
     ffi.Pointer<objc.ObjCObject>,
   )
 >
-_ObjCBlock_ffiVoid_ffiVoid_NSCoder_listenerCallable = ffi.NativeCallable<
-    ffi.Void Function(
-      ffi.Pointer<objc.ObjCBlockImpl>,
-      ffi.Pointer<ffi.Void>,
-      ffi.Pointer<objc.ObjCObject>,
-    )
-  >.listener(_ObjCBlock_ffiVoid_ffiVoid_NSCoder_listenerTrampoline)
-  ..keepIsolateAlive = false;
+_ObjCBlock_ffiVoid_ffiVoid_NSCoder_listenerCallable =
+    ffi.NativeCallable<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCBlockImpl>,
+          ffi.Pointer<ffi.Void>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >.listener(_ObjCBlock_ffiVoid_ffiVoid_NSCoder_listenerTrampoline)
+      ..keepIsolateAlive = false;
 void _ObjCBlock_ffiVoid_ffiVoid_NSCoder_blockingTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<ffi.Void> waiter,
@@ -6803,15 +6858,16 @@ ffi.NativeCallable<
     ffi.Pointer<objc.ObjCObject>,
   )
 >
-_ObjCBlock_ffiVoid_ffiVoid_NSCoder_blockingCallable = ffi.NativeCallable<
-    ffi.Void Function(
-      ffi.Pointer<objc.ObjCBlockImpl>,
-      ffi.Pointer<ffi.Void>,
-      ffi.Pointer<ffi.Void>,
-      ffi.Pointer<objc.ObjCObject>,
-    )
-  >.isolateLocal(_ObjCBlock_ffiVoid_ffiVoid_NSCoder_blockingTrampoline)
-  ..keepIsolateAlive = false;
+_ObjCBlock_ffiVoid_ffiVoid_NSCoder_blockingCallable =
+    ffi.NativeCallable<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCBlockImpl>,
+          ffi.Pointer<ffi.Void>,
+          ffi.Pointer<ffi.Void>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >.isolateLocal(_ObjCBlock_ffiVoid_ffiVoid_NSCoder_blockingTrampoline)
+      ..keepIsolateAlive = false;
 ffi.NativeCallable<
   ffi.Void Function(
     ffi.Pointer<objc.ObjCBlockImpl>,
@@ -7013,29 +7069,32 @@ instancetype _ObjCBlock_instancetype_ffiVoid_NSCoder_fnPtrTrampoline(
     >()(arg0, arg1);
 ffi.Pointer<ffi.Void> _ObjCBlock_instancetype_ffiVoid_NSCoder_fnPtrCallable =
     ffi.Pointer.fromFunction<
-      instancetype Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<ffi.Void>,
-        ffi.Pointer<objc.ObjCObject>,
-      )
-    >(_ObjCBlock_instancetype_ffiVoid_NSCoder_fnPtrTrampoline).cast();
+          instancetype Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<ffi.Void>,
+            ffi.Pointer<objc.ObjCObject>,
+          )
+        >(_ObjCBlock_instancetype_ffiVoid_NSCoder_fnPtrTrampoline)
+        .cast();
 instancetype _ObjCBlock_instancetype_ffiVoid_NSCoder_closureTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<ffi.Void> arg0,
   ffi.Pointer<objc.ObjCObject> arg1,
-) => (objc.getBlockClosure(block)
-    as instancetype Function(
-      ffi.Pointer<ffi.Void>,
-      ffi.Pointer<objc.ObjCObject>,
-    ))(arg0, arg1);
+) =>
+    (objc.getBlockClosure(block)
+        as instancetype Function(
+          ffi.Pointer<ffi.Void>,
+          ffi.Pointer<objc.ObjCObject>,
+        ))(arg0, arg1);
 ffi.Pointer<ffi.Void> _ObjCBlock_instancetype_ffiVoid_NSCoder_closureCallable =
     ffi.Pointer.fromFunction<
-      instancetype Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<ffi.Void>,
-        ffi.Pointer<objc.ObjCObject>,
-      )
-    >(_ObjCBlock_instancetype_ffiVoid_NSCoder_closureTrampoline).cast();
+          instancetype Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<ffi.Void>,
+            ffi.Pointer<objc.ObjCObject>,
+          )
+        >(_ObjCBlock_instancetype_ffiVoid_NSCoder_closureTrampoline)
+        .cast();
 
 /// Construction methods for `objc.ObjCBlock<objc.Retained<ffi.Pointer<objc.ObjCObject>?> Function(ffi.Pointer<ffi.Void>, objc.NSCoder)>`.
 abstract final class ObjCBlock_instancetype_ffiVoid_NSCoder {
@@ -7050,12 +7109,13 @@ abstract final class ObjCBlock_instancetype_ffiVoid_NSCoder {
     ffi.Pointer<objc.ObjCBlockImpl> pointer, {
     bool retain = false,
     bool release = false,
-  }) => objc.ObjCBlock<
-    objc.Retained<ffi.Pointer<objc.ObjCObject>?> Function(
-      ffi.Pointer<ffi.Void>,
-      objc.NSCoder,
-    )
-  >(pointer, retain: retain, release: release);
+  }) =>
+      objc.ObjCBlock<
+        objc.Retained<ffi.Pointer<objc.ObjCObject>?> Function(
+          ffi.Pointer<ffi.Void>,
+          objc.NSCoder,
+        )
+      >(pointer, retain: retain, release: release);
 
   /// Creates a block from a C function pointer.
   ///
@@ -7078,19 +7138,20 @@ abstract final class ObjCBlock_instancetype_ffiVoid_NSCoder {
       >
     >
     ptr,
-  ) => objc.ObjCBlock<
-    objc.Retained<ffi.Pointer<objc.ObjCObject>?> Function(
-      ffi.Pointer<ffi.Void>,
-      objc.NSCoder,
-    )
-  >(
-    objc.newPointerBlock(
-      _ObjCBlock_instancetype_ffiVoid_NSCoder_fnPtrCallable,
-      ptr.cast(),
-    ),
-    retain: false,
-    release: true,
-  );
+  ) =>
+      objc.ObjCBlock<
+        objc.Retained<ffi.Pointer<objc.ObjCObject>?> Function(
+          ffi.Pointer<ffi.Void>,
+          objc.NSCoder,
+        )
+      >(
+        objc.newPointerBlock(
+          _ObjCBlock_instancetype_ffiVoid_NSCoder_fnPtrCallable,
+          ptr.cast(),
+        ),
+        retain: false,
+        release: true,
+      );
 
   /// Creates a block from a Dart function.
   ///
@@ -7109,25 +7170,26 @@ abstract final class ObjCBlock_instancetype_ffiVoid_NSCoder {
   fromFunction(
     Dartinstancetype? Function(ffi.Pointer<ffi.Void>, objc.NSCoder) fn, {
     bool keepIsolateAlive = true,
-  }) => objc.ObjCBlock<
-    objc.Retained<ffi.Pointer<objc.ObjCObject>?> Function(
-      ffi.Pointer<ffi.Void>,
-      objc.NSCoder,
-    )
-  >(
-    objc.newClosureBlock(
-      _ObjCBlock_instancetype_ffiVoid_NSCoder_closureCallable,
-      (ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObject> arg1) =>
-          fn(
-            arg0,
-            objc.NSCoder.castFromPointer(arg1, retain: true, release: true),
-          )?.ref.retainAndReturnPointer() ??
-          ffi.nullptr,
-      keepIsolateAlive,
-    ),
-    retain: false,
-    release: true,
-  );
+  }) =>
+      objc.ObjCBlock<
+        objc.Retained<ffi.Pointer<objc.ObjCObject>?> Function(
+          ffi.Pointer<ffi.Void>,
+          objc.NSCoder,
+        )
+      >(
+        objc.newClosureBlock(
+          _ObjCBlock_instancetype_ffiVoid_NSCoder_closureCallable,
+          (ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObject> arg1) =>
+              fn(
+                arg0,
+                objc.NSCoder.castFromPointer(arg1, retain: true, release: true),
+              )?.ref.retainAndReturnPointer() ??
+              ffi.nullptr,
+          keepIsolateAlive,
+        ),
+        retain: false,
+        release: true,
+      );
 }
 
 /// Call operator for `objc.ObjCBlock<objc.Retained<ffi.Pointer<objc.ObjCObject>?> Function(ffi.Pointer<ffi.Void>, objc.NSCoder)>`.
@@ -7141,46 +7203,46 @@ extension ObjCBlock_instancetype_ffiVoid_NSCoder_CallExtension
         > {
   Dartinstancetype? call(ffi.Pointer<ffi.Void> arg0, objc.NSCoder arg1) =>
       ref.pointer.ref.invoke
-                  .cast<
-                    ffi.NativeFunction<
-                      instancetype Function(
-                        ffi.Pointer<objc.ObjCBlockImpl> block,
-                        ffi.Pointer<ffi.Void> arg0,
-                        ffi.Pointer<objc.ObjCObject> arg1,
-                      )
-                    >
-                  >()
-                  .asFunction<
-                    instancetype Function(
-                      ffi.Pointer<objc.ObjCBlockImpl>,
-                      ffi.Pointer<ffi.Void>,
-                      ffi.Pointer<objc.ObjCObject>,
-                    )
-                  >()(ref.pointer, arg0, arg1.ref.pointer)
-                  .address ==
-              0
-          ? null
-          : objc.ObjCObjectBase(
-            ref.pointer.ref.invoke
-                .cast<
-                  ffi.NativeFunction<
-                    instancetype Function(
-                      ffi.Pointer<objc.ObjCBlockImpl> block,
-                      ffi.Pointer<ffi.Void> arg0,
-                      ffi.Pointer<objc.ObjCObject> arg1,
-                    )
-                  >
-                >()
-                .asFunction<
+              .cast<
+                ffi.NativeFunction<
                   instancetype Function(
-                    ffi.Pointer<objc.ObjCBlockImpl>,
-                    ffi.Pointer<ffi.Void>,
-                    ffi.Pointer<objc.ObjCObject>,
+                    ffi.Pointer<objc.ObjCBlockImpl> block,
+                    ffi.Pointer<ffi.Void> arg0,
+                    ffi.Pointer<objc.ObjCObject> arg1,
                   )
-                >()(ref.pointer, arg0, arg1.ref.pointer),
-            retain: false,
-            release: true,
-          );
+                >
+              >()
+              .asFunction<
+                instancetype Function(
+                  ffi.Pointer<objc.ObjCBlockImpl>,
+                  ffi.Pointer<ffi.Void>,
+                  ffi.Pointer<objc.ObjCObject>,
+                )
+              >()(ref.pointer, arg0, arg1.ref.pointer)
+              .address ==
+          0
+      ? null
+      : objc.ObjCObjectBase(
+          ref.pointer.ref.invoke
+              .cast<
+                ffi.NativeFunction<
+                  instancetype Function(
+                    ffi.Pointer<objc.ObjCBlockImpl> block,
+                    ffi.Pointer<ffi.Void> arg0,
+                    ffi.Pointer<objc.ObjCObject> arg1,
+                  )
+                >
+              >()
+              .asFunction<
+                instancetype Function(
+                  ffi.Pointer<objc.ObjCBlockImpl>,
+                  ffi.Pointer<ffi.Void>,
+                  ffi.Pointer<objc.ObjCObject>,
+                )
+              >()(ref.pointer, arg0, arg1.ref.pointer),
+          retain: false,
+          release: true,
+        );
 }
 
 late final _sel_initWithString_ = objc.registerName("initWithString:");
@@ -7225,30 +7287,29 @@ late final _sel_initWithContentsOfMarkdownFileAtURL_options_baseURL_error_ =
     objc.registerName(
       "initWithContentsOfMarkdownFileAtURL:options:baseURL:error:",
     );
-final _objc_msgSend_1k0ezzm =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
-          )
-        >();
+final _objc_msgSend_1k0ezzm = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
+      )
+    >();
 late final _sel_initWithMarkdown_options_baseURL_error_ = objc.registerName(
   "initWithMarkdown:options:baseURL:error:",
 );
@@ -7266,145 +7327,139 @@ enum NSAttributedStringFormattingOptions {
       switch (value) {
         1 => NSAttributedStringFormattingInsertArgumentAttributesWithoutMerging,
         2 => NSAttributedStringFormattingApplyReplacementIndexAttribute,
-        _ =>
-          throw ArgumentError(
-            'Unknown value for NSAttributedStringFormattingOptions: $value',
-          ),
+        _ => throw ArgumentError(
+          'Unknown value for NSAttributedStringFormattingOptions: $value',
+        ),
       };
 }
 
 late final _sel_initWithFormat_options_locale_ = objc.registerName(
   "initWithFormat:options:locale:",
 );
-final _objc_msgSend_187k8ck =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.UnsignedLong,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            int,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_187k8ck = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.UnsignedLong,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        int,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 late final _sel_localizedAttributedStringWithFormat_ = objc.registerName(
   "localizedAttributedStringWithFormat:",
 );
 late final _sel_localizedAttributedStringWithFormat_options_ = objc
     .registerName("localizedAttributedStringWithFormat:options:");
-final _objc_msgSend_s058d2 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.UnsignedLong,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            int,
-          )
-        >();
+final _objc_msgSend_s058d2 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.UnsignedLong,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        int,
+      )
+    >();
 late final _sel_initWithFormat_options_locale_context_ = objc.registerName(
   "initWithFormat:options:locale:context:",
 );
-final _objc_msgSend_3fn4ca =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.UnsignedLong,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            int,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_3fn4ca = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.UnsignedLong,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        int,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 late final _sel_localizedAttributedStringWithFormat_context_ = objc
     .registerName("localizedAttributedStringWithFormat:context:");
 late final _sel_localizedAttributedStringWithFormat_options_context_ = objc
     .registerName("localizedAttributedStringWithFormat:options:context:");
 late final _sel_initWithURL_options_documentAttributes_error_ = objc
     .registerName("initWithURL:options:documentAttributes:error:");
-final _objc_msgSend_of3pfd =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
-              ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
-            ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
-          )
-        >();
+final _objc_msgSend_of3pfd = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
+          ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
+        ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
+      )
+    >();
 late final _sel_initWithData_options_documentAttributes_error_ = objc
     .registerName("initWithData:options:documentAttributes:error:");
 late final _sel_initWithRTF_documentAttributes_ = objc.registerName(
   "initWithRTF:documentAttributes:",
 );
-final _objc_msgSend_1lhpu4m =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
-          )
-        >();
+final _objc_msgSend_1lhpu4m = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
+      )
+    >();
 late final _sel_initWithRTFD_documentAttributes_ = objc.registerName(
   "initWithRTFD:documentAttributes:",
 );
@@ -7610,10 +7665,10 @@ class NSAttributedString extends objc.NSObject
     return _ret.address == 0
         ? null
         : NSAttributedString.castFromPointer(
-          _ret,
-          retain: false,
-          release: true,
-        );
+            _ret,
+            retain: false,
+            release: true,
+          );
   }
 
   /// initWithString:
@@ -7701,10 +7756,10 @@ class NSAttributedString extends objc.NSObject
     return _ret.address == 0
         ? null
         : NSAttributedString.castFromPointer(
-          _ret,
-          retain: false,
-          release: true,
-        );
+            _ret,
+            retain: false,
+            release: true,
+          );
   }
 
   /// initWithMarkdown:options:baseURL:error:
@@ -7730,10 +7785,10 @@ class NSAttributedString extends objc.NSObject
     return _ret.address == 0
         ? null
         : NSAttributedString.castFromPointer(
-          _ret,
-          retain: false,
-          release: true,
-        );
+            _ret,
+            retain: false,
+            release: true,
+          );
   }
 
   /// initWithMarkdownString:options:baseURL:error:
@@ -7759,10 +7814,10 @@ class NSAttributedString extends objc.NSObject
     return _ret.address == 0
         ? null
         : NSAttributedString.castFromPointer(
-          _ret,
-          retain: false,
-          release: true,
-        );
+            _ret,
+            retain: false,
+            release: true,
+          );
   }
 
   /// initWithFormat:options:locale:
@@ -7933,10 +7988,10 @@ class NSAttributedString extends objc.NSObject
     return _ret.address == 0
         ? null
         : NSAttributedString.castFromPointer(
-          _ret,
-          retain: false,
-          release: true,
-        );
+            _ret,
+            retain: false,
+            release: true,
+          );
   }
 
   /// initWithData:options:documentAttributes:error:
@@ -7962,10 +8017,10 @@ class NSAttributedString extends objc.NSObject
     return _ret.address == 0
         ? null
         : NSAttributedString.castFromPointer(
-          _ret,
-          retain: false,
-          release: true,
-        );
+            _ret,
+            retain: false,
+            release: true,
+          );
   }
 
   /// initWithRTF:documentAttributes:
@@ -7987,10 +8042,10 @@ class NSAttributedString extends objc.NSObject
     return _ret.address == 0
         ? null
         : NSAttributedString.castFromPointer(
-          _ret,
-          retain: false,
-          release: true,
-        );
+            _ret,
+            retain: false,
+            release: true,
+          );
   }
 
   /// initWithRTFD:documentAttributes:
@@ -8012,10 +8067,10 @@ class NSAttributedString extends objc.NSObject
     return _ret.address == 0
         ? null
         : NSAttributedString.castFromPointer(
-          _ret,
-          retain: false,
-          release: true,
-        );
+            _ret,
+            retain: false,
+            release: true,
+          );
   }
 
   /// initWithHTML:documentAttributes:
@@ -8037,10 +8092,10 @@ class NSAttributedString extends objc.NSObject
     return _ret.address == 0
         ? null
         : NSAttributedString.castFromPointer(
-          _ret,
-          retain: false,
-          release: true,
-        );
+            _ret,
+            retain: false,
+            release: true,
+          );
   }
 
   /// initWithHTML:baseURL:documentAttributes:
@@ -8064,10 +8119,10 @@ class NSAttributedString extends objc.NSObject
     return _ret.address == 0
         ? null
         : NSAttributedString.castFromPointer(
-          _ret,
-          retain: false,
-          release: true,
-        );
+            _ret,
+            retain: false,
+            release: true,
+          );
   }
 
   /// initWithDocFormat:documentAttributes:
@@ -8089,10 +8144,10 @@ class NSAttributedString extends objc.NSObject
     return _ret.address == 0
         ? null
         : NSAttributedString.castFromPointer(
-          _ret,
-          retain: false,
-          release: true,
-        );
+            _ret,
+            retain: false,
+            release: true,
+          );
   }
 
   /// initWithHTML:options:documentAttributes:
@@ -8116,10 +8171,10 @@ class NSAttributedString extends objc.NSObject
     return _ret.address == 0
         ? null
         : NSAttributedString.castFromPointer(
-          _ret,
-          retain: false,
-          release: true,
-        );
+            _ret,
+            retain: false,
+            release: true,
+          );
   }
 
   /// initWithRTFDFileWrapper:documentAttributes:
@@ -8141,10 +8196,10 @@ class NSAttributedString extends objc.NSObject
     return _ret.address == 0
         ? null
         : NSAttributedString.castFromPointer(
-          _ret,
-          retain: false,
-          release: true,
-        );
+            _ret,
+            retain: false,
+            release: true,
+          );
   }
 
   /// initWithURL:documentAttributes:
@@ -8165,10 +8220,10 @@ class NSAttributedString extends objc.NSObject
     return _ret.address == 0
         ? null
         : NSAttributedString.castFromPointer(
-          _ret,
-          retain: false,
-          release: true,
-        );
+            _ret,
+            retain: false,
+            release: true,
+          );
   }
 
   /// initWithPath:documentAttributes:
@@ -8189,10 +8244,10 @@ class NSAttributedString extends objc.NSObject
     return _ret.address == 0
         ? null
         : NSAttributedString.castFromPointer(
-          _ret,
-          retain: false,
-          release: true,
-        );
+            _ret,
+            retain: false,
+            release: true,
+          );
   }
 
   /// attributedStringWithAttachment:attributes:
@@ -8258,10 +8313,9 @@ enum NSAttributedStringMarkdownParsingFailurePolicy {
     0 => NSAttributedStringMarkdownParsingFailureReturnError,
     1 =>
       NSAttributedStringMarkdownParsingFailureReturnPartiallyParsedIfPossible,
-    _ =>
-      throw ArgumentError(
-        'Unknown value for NSAttributedStringMarkdownParsingFailurePolicy: $value',
-      ),
+    _ => throw ArgumentError(
+      'Unknown value for NSAttributedStringMarkdownParsingFailurePolicy: $value',
+    ),
   };
 }
 
@@ -8280,10 +8334,9 @@ enum NSAttributedStringMarkdownInterpretedSyntax {
     1 => NSAttributedStringMarkdownInterpretedSyntaxInlineOnly,
     2 =>
       NSAttributedStringMarkdownInterpretedSyntaxInlineOnlyPreservingWhitespace,
-    _ =>
-      throw ArgumentError(
-        'Unknown value for NSAttributedStringMarkdownInterpretedSyntax: $value',
-      ),
+    _ => throw ArgumentError(
+      'Unknown value for NSAttributedStringMarkdownInterpretedSyntax: $value',
+    ),
   };
 }
 
@@ -8323,56 +8376,54 @@ late final _sel_completePathIntoString_caseSensitive_matchesIntoArray_filterType
     objc.registerName(
       "completePathIntoString:caseSensitive:matchesIntoArray:filterTypes:",
     );
-final _objc_msgSend_8mvqcu =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.UnsignedLong Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
-              ffi.Bool,
-              ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          int Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
-            bool,
-            ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_8mvqcu = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.UnsignedLong Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
+          ffi.Bool,
+          ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      int Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
+        bool,
+        ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 late final _sel_fileSystemRepresentation = objc.registerName(
   "fileSystemRepresentation",
 );
 late final _sel_getFileSystemRepresentation_maxLength_ = objc.registerName(
   "getFileSystemRepresentation:maxLength:",
 );
-final _objc_msgSend_8cymbm =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Bool Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<ffi.Char>,
-              ffi.UnsignedLong,
-            )
-          >
-        >()
-        .asFunction<
-          bool Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<ffi.Char>,
-            int,
-          )
-        >();
+final _objc_msgSend_8cymbm = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Bool Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<ffi.Char>,
+          ffi.UnsignedLong,
+        )
+      >
+    >()
+    .asFunction<
+      bool Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<ffi.Char>,
+        int,
+      )
+    >();
 
 /// NSStringPathExtensions
 extension NSStringPathExtensions on objc.NSString {
@@ -8545,24 +8596,23 @@ late final _sel_stringByRemovingPercentEncoding = objc.registerName(
 late final _sel_stringByAddingPercentEscapesUsingEncoding_ = objc.registerName(
   "stringByAddingPercentEscapesUsingEncoding:",
 );
-final _objc_msgSend_14hpxwa =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.UnsignedLong,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            int,
-          )
-        >();
+final _objc_msgSend_14hpxwa = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.UnsignedLong,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        int,
+      )
+    >();
 late final _sel_stringByReplacingPercentEscapesUsingEncoding_ = objc
     .registerName("stringByReplacingPercentEscapesUsingEncoding:");
 
@@ -8760,8 +8810,9 @@ enum NSOperationQueuePriority {
     0 => NSOperationQueuePriorityNormal,
     4 => NSOperationQueuePriorityHigh,
     8 => NSOperationQueuePriorityVeryHigh,
-    _ =>
-      throw ArgumentError('Unknown value for NSOperationQueuePriority: $value'),
+    _ => throw ArgumentError(
+      'Unknown value for NSOperationQueuePriority: $value',
+    ),
   };
 }
 
@@ -9125,28 +9176,27 @@ late final _sel_expressionForMinusSet_with_ = objc.registerName(
 );
 late final _sel_expressionForSubquery_usingIteratorVariable_predicate_ = objc
     .registerName("expressionForSubquery:usingIteratorVariable:predicate:");
-final _objc_msgSend_11spmsz =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_11spmsz = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 late final _sel_expressionForFunction_selectorName_arguments_ = objc
     .registerName("expressionForFunction:selectorName:arguments:");
 late final _sel_expressionForAnyKey = objc.registerName("expressionForAnyKey");
@@ -9176,39 +9226,42 @@ _ObjCBlock_objcObjCObject_objcObjCObject_NSArray_NSMutableDictionary_fnPtrTrampo
 ffi.Pointer<ffi.Void>
 _ObjCBlock_objcObjCObject_objcObjCObject_NSArray_NSMutableDictionary_fnPtrCallable =
     ffi.Pointer.fromFunction<
-      ffi.Pointer<objc.ObjCObject> Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<objc.ObjCObject>,
-        ffi.Pointer<objc.ObjCObject>,
-        ffi.Pointer<objc.ObjCObject>,
-      )
-    >(
-      _ObjCBlock_objcObjCObject_objcObjCObject_NSArray_NSMutableDictionary_fnPtrTrampoline,
-    ).cast();
+          ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>,
+          )
+        >(
+          _ObjCBlock_objcObjCObject_objcObjCObject_NSArray_NSMutableDictionary_fnPtrTrampoline,
+        )
+        .cast();
 ffi.Pointer<objc.ObjCObject>
 _ObjCBlock_objcObjCObject_objcObjCObject_NSArray_NSMutableDictionary_closureTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<objc.ObjCObject> arg0,
   ffi.Pointer<objc.ObjCObject> arg1,
   ffi.Pointer<objc.ObjCObject> arg2,
-) => (objc.getBlockClosure(block)
-    as ffi.Pointer<objc.ObjCObject> Function(
-      ffi.Pointer<objc.ObjCObject>,
-      ffi.Pointer<objc.ObjCObject>,
-      ffi.Pointer<objc.ObjCObject>,
-    ))(arg0, arg1, arg2);
+) =>
+    (objc.getBlockClosure(block)
+        as ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+        ))(arg0, arg1, arg2);
 ffi.Pointer<ffi.Void>
 _ObjCBlock_objcObjCObject_objcObjCObject_NSArray_NSMutableDictionary_closureCallable =
     ffi.Pointer.fromFunction<
-      ffi.Pointer<objc.ObjCObject> Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<objc.ObjCObject>,
-        ffi.Pointer<objc.ObjCObject>,
-        ffi.Pointer<objc.ObjCObject>,
-      )
-    >(
-      _ObjCBlock_objcObjCObject_objcObjCObject_NSArray_NSMutableDictionary_closureTrampoline,
-    ).cast();
+          ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>,
+          )
+        >(
+          _ObjCBlock_objcObjCObject_objcObjCObject_NSArray_NSMutableDictionary_closureTrampoline,
+        )
+        .cast();
 
 /// Construction methods for `objc.ObjCBlock<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject>?, objc.NSArray, objc.NSMutableDictionary?)>`.
 abstract final class ObjCBlock_objcObjCObject_objcObjCObject_NSArray_NSMutableDictionary {
@@ -9224,13 +9277,14 @@ abstract final class ObjCBlock_objcObjCObject_objcObjCObject_NSArray_NSMutableDi
     ffi.Pointer<objc.ObjCBlockImpl> pointer, {
     bool retain = false,
     bool release = false,
-  }) => objc.ObjCBlock<
-    ffi.Pointer<objc.ObjCObject> Function(
-      ffi.Pointer<objc.ObjCObject>?,
-      objc.NSArray,
-      objc.NSMutableDictionary?,
-    )
-  >(pointer, retain: retain, release: release);
+  }) =>
+      objc.ObjCBlock<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>?,
+          objc.NSArray,
+          objc.NSMutableDictionary?,
+        )
+      >(pointer, retain: retain, release: release);
 
   /// Creates a block from a C function pointer.
   ///
@@ -9255,20 +9309,21 @@ abstract final class ObjCBlock_objcObjCObject_objcObjCObject_NSArray_NSMutableDi
       >
     >
     ptr,
-  ) => objc.ObjCBlock<
-    ffi.Pointer<objc.ObjCObject> Function(
-      ffi.Pointer<objc.ObjCObject>?,
-      objc.NSArray,
-      objc.NSMutableDictionary?,
-    )
-  >(
-    objc.newPointerBlock(
-      _ObjCBlock_objcObjCObject_objcObjCObject_NSArray_NSMutableDictionary_fnPtrCallable,
-      ptr.cast(),
-    ),
-    retain: false,
-    release: true,
-  );
+  ) =>
+      objc.ObjCBlock<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>?,
+          objc.NSArray,
+          objc.NSMutableDictionary?,
+        )
+      >(
+        objc.newPointerBlock(
+          _ObjCBlock_objcObjCObject_objcObjCObject_NSArray_NSMutableDictionary_fnPtrCallable,
+          ptr.cast(),
+        ),
+        retain: false,
+        release: true,
+      );
 
   /// Creates a block from a Dart function.
   ///
@@ -9293,21 +9348,21 @@ abstract final class ObjCBlock_objcObjCObject_objcObjCObject_NSArray_NSMutableDi
     )
     fn, {
     bool keepIsolateAlive = true,
-  }) => objc.ObjCBlock<
-    ffi.Pointer<objc.ObjCObject> Function(
-      ffi.Pointer<objc.ObjCObject>?,
-      objc.NSArray,
-      objc.NSMutableDictionary?,
-    )
-  >(
-    objc.newClosureBlock(
-      _ObjCBlock_objcObjCObject_objcObjCObject_NSArray_NSMutableDictionary_closureCallable,
-      (
-        ffi.Pointer<objc.ObjCObject> arg0,
-        ffi.Pointer<objc.ObjCObject> arg1,
-        ffi.Pointer<objc.ObjCObject> arg2,
-      ) =>
-          fn(
+  }) =>
+      objc.ObjCBlock<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>?,
+          objc.NSArray,
+          objc.NSMutableDictionary?,
+        )
+      >(
+        objc.newClosureBlock(
+          _ObjCBlock_objcObjCObject_objcObjCObject_NSArray_NSMutableDictionary_closureCallable,
+          (
+            ffi.Pointer<objc.ObjCObject> arg0,
+            ffi.Pointer<objc.ObjCObject> arg1,
+            ffi.Pointer<objc.ObjCObject> arg2,
+          ) => fn(
             arg0.address == 0
                 ? null
                 : objc.ObjCObjectBase(arg0, retain: true, release: true),
@@ -9315,16 +9370,16 @@ abstract final class ObjCBlock_objcObjCObject_objcObjCObject_NSArray_NSMutableDi
             arg2.address == 0
                 ? null
                 : objc.NSMutableDictionary.castFromPointer(
-                  arg2,
-                  retain: true,
-                  release: true,
-                ),
+                    arg2,
+                    retain: true,
+                    release: true,
+                  ),
           ).ref.retainAndAutorelease(),
-      keepIsolateAlive,
-    ),
-    retain: false,
-    release: true,
-  );
+          keepIsolateAlive,
+        ),
+        retain: false,
+        release: true,
+      );
 }
 
 /// Call operator for `objc.ObjCBlock<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject>?, objc.NSArray, objc.NSMutableDictionary?)>`.
@@ -9374,66 +9429,60 @@ extension ObjCBlock_objcObjCObject_objcObjCObject_NSArray_NSMutableDictionary_Ca
 late final _sel_expressionForBlock_arguments_ = objc.registerName(
   "expressionForBlock:arguments:",
 );
-final _objc_msgSend_27lb7c =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCBlockImpl>,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCBlockImpl>,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_27lb7c = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCBlockImpl>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCBlockImpl>,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 late final _sel_expressionForConditional_trueExpression_falseExpression_ = objc
     .registerName("expressionForConditional:trueExpression:falseExpression:");
 late final _sel_initWithExpressionType_ = objc.registerName(
   "initWithExpressionType:",
 );
-final _objc_msgSend_1rz5npq =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.UnsignedLong,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            int,
-          )
-        >();
+final _objc_msgSend_1rz5npq = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.UnsignedLong,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        int,
+      )
+    >();
 late final _sel_expressionType = objc.registerName("expressionType");
-final _objc_msgSend_1ts4niw =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.UnsignedLong Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          int Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
+final _objc_msgSend_1ts4niw = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.UnsignedLong Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      int Function(ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)
+    >();
 late final _sel_constantValue = objc.registerName("constantValue");
 late final _sel_keyPath = objc.registerName("keyPath");
 late final _sel_function = objc.registerName("function");
@@ -9447,42 +9496,40 @@ late final _sel_rightExpression = objc.registerName("rightExpression");
 late final _sel_trueExpression = objc.registerName("trueExpression");
 late final _sel_falseExpression = objc.registerName("falseExpression");
 late final _sel_expressionBlock = objc.registerName("expressionBlock");
-final _objc_msgSend_uwvaik =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCBlockImpl> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCBlockImpl> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
+final _objc_msgSend_uwvaik = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCBlockImpl> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCBlockImpl> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+      )
+    >();
 late final _sel_expressionValueWithObject_context_ = objc.registerName(
   "expressionValueWithObject:context:",
 );
 late final _sel_allowEvaluation = objc.registerName("allowEvaluation");
-final _objc_msgSend_1pl9qdv =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
+final _objc_msgSend_1pl9qdv = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+      )
+    >();
 late final _sel_self = objc.registerName("self");
 instancetype _ObjCBlock_instancetype_ffiVoid_fnPtrTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
@@ -9494,23 +9541,26 @@ instancetype _ObjCBlock_instancetype_ffiVoid_fnPtrTrampoline(
     .asFunction<instancetype Function(ffi.Pointer<ffi.Void>)>()(arg0);
 ffi.Pointer<ffi.Void> _ObjCBlock_instancetype_ffiVoid_fnPtrCallable =
     ffi.Pointer.fromFunction<
-      instancetype Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<ffi.Void>,
-      )
-    >(_ObjCBlock_instancetype_ffiVoid_fnPtrTrampoline).cast();
+          instancetype Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<ffi.Void>,
+          )
+        >(_ObjCBlock_instancetype_ffiVoid_fnPtrTrampoline)
+        .cast();
 instancetype _ObjCBlock_instancetype_ffiVoid_closureTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<ffi.Void> arg0,
-) => (objc.getBlockClosure(block)
-    as instancetype Function(ffi.Pointer<ffi.Void>))(arg0);
+) =>
+    (objc.getBlockClosure(block)
+        as instancetype Function(ffi.Pointer<ffi.Void>))(arg0);
 ffi.Pointer<ffi.Void> _ObjCBlock_instancetype_ffiVoid_closureCallable =
     ffi.Pointer.fromFunction<
-      instancetype Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<ffi.Void>,
-      )
-    >(_ObjCBlock_instancetype_ffiVoid_closureTrampoline).cast();
+          instancetype Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<ffi.Void>,
+          )
+        >(_ObjCBlock_instancetype_ffiVoid_closureTrampoline)
+        .cast();
 
 /// Construction methods for `objc.ObjCBlock<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void>)>`.
 abstract final class ObjCBlock_instancetype_ffiVoid {
@@ -9522,9 +9572,10 @@ abstract final class ObjCBlock_instancetype_ffiVoid {
     ffi.Pointer<objc.ObjCBlockImpl> pointer, {
     bool retain = false,
     bool release = false,
-  }) => objc.ObjCBlock<
-    ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void>)
-  >(pointer, retain: retain, release: release);
+  }) =>
+      objc.ObjCBlock<
+        ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void>)
+      >(pointer, retain: retain, release: release);
 
   /// Creates a block from a C function pointer.
   ///
@@ -9539,16 +9590,17 @@ abstract final class ObjCBlock_instancetype_ffiVoid {
       ffi.NativeFunction<instancetype Function(ffi.Pointer<ffi.Void> arg0)>
     >
     ptr,
-  ) => objc.ObjCBlock<
-    ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void>)
-  >(
-    objc.newPointerBlock(
-      _ObjCBlock_instancetype_ffiVoid_fnPtrCallable,
-      ptr.cast(),
-    ),
-    retain: false,
-    release: true,
-  );
+  ) =>
+      objc.ObjCBlock<
+        ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void>)
+      >(
+        objc.newPointerBlock(
+          _ObjCBlock_instancetype_ffiVoid_fnPtrCallable,
+          ptr.cast(),
+        ),
+        retain: false,
+        release: true,
+      );
 
   /// Creates a block from a Dart function.
   ///
@@ -9564,17 +9616,18 @@ abstract final class ObjCBlock_instancetype_ffiVoid {
   fromFunction(
     Dartinstancetype Function(ffi.Pointer<ffi.Void>) fn, {
     bool keepIsolateAlive = true,
-  }) => objc.ObjCBlock<
-    ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void>)
-  >(
-    objc.newClosureBlock(
-      _ObjCBlock_instancetype_ffiVoid_closureCallable,
-      (ffi.Pointer<ffi.Void> arg0) => fn(arg0).ref.retainAndAutorelease(),
-      keepIsolateAlive,
-    ),
-    retain: false,
-    release: true,
-  );
+  }) =>
+      objc.ObjCBlock<
+        ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void>)
+      >(
+        objc.newClosureBlock(
+          _ObjCBlock_instancetype_ffiVoid_closureCallable,
+          (ffi.Pointer<ffi.Void> arg0) => fn(arg0).ref.retainAndAutorelease(),
+          keepIsolateAlive,
+        ),
+        retain: false,
+        release: true,
+      );
 }
 
 /// Call operator for `objc.ObjCBlock<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void>)>`.
@@ -9616,30 +9669,29 @@ late final _sel_mgl_expressionForInterpolatingExpression_withCurveType_parameter
     objc.registerName(
       "mgl_expressionForInterpolatingExpression:withCurveType:parameters:stops:",
     );
-final _objc_msgSend_s92gih =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_s92gih = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 late final _sel_mgl_expressionForMatchingExpression_inDictionary_defaultExpression_ =
     objc.registerName(
       "mgl_expressionForMatchingExpression:inDictionary:defaultExpression:",
@@ -10475,10 +10527,9 @@ enum NSFileWrapperReadingOptions {
   static NSFileWrapperReadingOptions fromValue(int value) => switch (value) {
     1 => NSFileWrapperReadingImmediate,
     2 => NSFileWrapperReadingWithoutMapping,
-    _ =>
-      throw ArgumentError(
-        'Unknown value for NSFileWrapperReadingOptions: $value',
-      ),
+    _ => throw ArgumentError(
+      'Unknown value for NSFileWrapperReadingOptions: $value',
+    ),
   };
 }
 
@@ -10492,10 +10543,9 @@ enum NSFileWrapperWritingOptions {
   static NSFileWrapperWritingOptions fromValue(int value) => switch (value) {
     1 => NSFileWrapperWritingAtomic,
     2 => NSFileWrapperWritingWithNameUpdating,
-    _ =>
-      throw ArgumentError(
-        'Unknown value for NSFileWrapperWritingOptions: $value',
-      ),
+    _ => throw ArgumentError(
+      'Unknown value for NSFileWrapperWritingOptions: $value',
+    ),
   };
 }
 
@@ -10515,10 +10565,9 @@ enum NSLinguisticTaggerOptions {
     4 => NSLinguisticTaggerOmitWhitespace,
     8 => NSLinguisticTaggerOmitOther,
     16 => NSLinguisticTaggerJoinNames,
-    _ =>
-      throw ArgumentError(
-        'Unknown value for NSLinguisticTaggerOptions: $value',
-      ),
+    _ => throw ArgumentError(
+      'Unknown value for NSLinguisticTaggerOptions: $value',
+    ),
   };
 }
 
@@ -10526,32 +10575,31 @@ late final _sel_linguisticTagsInRange_scheme_options_orthography_tokenRanges_ =
     objc.registerName(
       "linguisticTagsInRange:scheme:options:orthography:tokenRanges:",
     );
-final _objc_msgSend_1l09uru =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              objc.NSRange,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.UnsignedLong,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            objc.NSRange,
-            ffi.Pointer<objc.ObjCObject>,
-            int,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
-          )
-        >();
+final _objc_msgSend_1l09uru = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          objc.NSRange,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.UnsignedLong,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        objc.NSRange,
+        ffi.Pointer<objc.ObjCObject>,
+        int,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
+      )
+    >();
 void _ObjCBlock_ffiVoid_NSString_NSRange_NSRange_bool_fnPtrTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<objc.ObjCObject> arg0,
@@ -10580,40 +10628,41 @@ void _ObjCBlock_ffiVoid_NSString_NSRange_NSRange_bool_fnPtrTrampoline(
 ffi.Pointer<ffi.Void>
 _ObjCBlock_ffiVoid_NSString_NSRange_NSRange_bool_fnPtrCallable =
     ffi.Pointer.fromFunction<
-      ffi.Void Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<objc.ObjCObject>,
-        objc.NSRange,
-        objc.NSRange,
-        ffi.Pointer<ffi.Bool>,
-      )
-    >(_ObjCBlock_ffiVoid_NSString_NSRange_NSRange_bool_fnPtrTrampoline).cast();
+          ffi.Void Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<objc.ObjCObject>,
+            objc.NSRange,
+            objc.NSRange,
+            ffi.Pointer<ffi.Bool>,
+          )
+        >(_ObjCBlock_ffiVoid_NSString_NSRange_NSRange_bool_fnPtrTrampoline)
+        .cast();
 void _ObjCBlock_ffiVoid_NSString_NSRange_NSRange_bool_closureTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<objc.ObjCObject> arg0,
   objc.NSRange arg1,
   objc.NSRange arg2,
   ffi.Pointer<ffi.Bool> arg3,
-) => (objc.getBlockClosure(block)
-    as void Function(
-      ffi.Pointer<objc.ObjCObject>,
-      objc.NSRange,
-      objc.NSRange,
-      ffi.Pointer<ffi.Bool>,
-    ))(arg0, arg1, arg2, arg3);
+) =>
+    (objc.getBlockClosure(block)
+        as void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          objc.NSRange,
+          objc.NSRange,
+          ffi.Pointer<ffi.Bool>,
+        ))(arg0, arg1, arg2, arg3);
 ffi.Pointer<ffi.Void>
 _ObjCBlock_ffiVoid_NSString_NSRange_NSRange_bool_closureCallable =
     ffi.Pointer.fromFunction<
-      ffi.Void Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<objc.ObjCObject>,
-        objc.NSRange,
-        objc.NSRange,
-        ffi.Pointer<ffi.Bool>,
-      )
-    >(
-      _ObjCBlock_ffiVoid_NSString_NSRange_NSRange_bool_closureTrampoline,
-    ).cast();
+          ffi.Void Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<objc.ObjCObject>,
+            objc.NSRange,
+            objc.NSRange,
+            ffi.Pointer<ffi.Bool>,
+          )
+        >(_ObjCBlock_ffiVoid_NSString_NSRange_NSRange_bool_closureTrampoline)
+        .cast();
 void _ObjCBlock_ffiVoid_NSString_NSRange_NSRange_bool_listenerTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<objc.ObjCObject> arg0,
@@ -10642,16 +10691,17 @@ ffi.NativeCallable<
 >
 _ObjCBlock_ffiVoid_NSString_NSRange_NSRange_bool_listenerCallable =
     ffi.NativeCallable<
-      ffi.Void Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<objc.ObjCObject>,
-        objc.NSRange,
-        objc.NSRange,
-        ffi.Pointer<ffi.Bool>,
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCBlockImpl>,
+          ffi.Pointer<objc.ObjCObject>,
+          objc.NSRange,
+          objc.NSRange,
+          ffi.Pointer<ffi.Bool>,
+        )
+      >.listener(
+        _ObjCBlock_ffiVoid_NSString_NSRange_NSRange_bool_listenerTrampoline,
       )
-    >.listener(
-      _ObjCBlock_ffiVoid_NSString_NSRange_NSRange_bool_listenerTrampoline,
-    )..keepIsolateAlive = false;
+      ..keepIsolateAlive = false;
 void _ObjCBlock_ffiVoid_NSString_NSRange_NSRange_bool_blockingTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<ffi.Void> waiter,
@@ -10687,17 +10737,18 @@ ffi.NativeCallable<
 >
 _ObjCBlock_ffiVoid_NSString_NSRange_NSRange_bool_blockingCallable =
     ffi.NativeCallable<
-      ffi.Void Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<ffi.Void>,
-        ffi.Pointer<objc.ObjCObject>,
-        objc.NSRange,
-        objc.NSRange,
-        ffi.Pointer<ffi.Bool>,
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCBlockImpl>,
+          ffi.Pointer<ffi.Void>,
+          ffi.Pointer<objc.ObjCObject>,
+          objc.NSRange,
+          objc.NSRange,
+          ffi.Pointer<ffi.Bool>,
+        )
+      >.isolateLocal(
+        _ObjCBlock_ffiVoid_NSString_NSRange_NSRange_bool_blockingTrampoline,
       )
-    >.isolateLocal(
-      _ObjCBlock_ffiVoid_NSString_NSRange_NSRange_bool_blockingTrampoline,
-    )..keepIsolateAlive = false;
+      ..keepIsolateAlive = false;
 ffi.NativeCallable<
   ffi.Void Function(
     ffi.Pointer<objc.ObjCBlockImpl>,
@@ -10710,17 +10761,18 @@ ffi.NativeCallable<
 >
 _ObjCBlock_ffiVoid_NSString_NSRange_NSRange_bool_blockingListenerCallable =
     ffi.NativeCallable<
-      ffi.Void Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<ffi.Void>,
-        ffi.Pointer<objc.ObjCObject>,
-        objc.NSRange,
-        objc.NSRange,
-        ffi.Pointer<ffi.Bool>,
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCBlockImpl>,
+          ffi.Pointer<ffi.Void>,
+          ffi.Pointer<objc.ObjCObject>,
+          objc.NSRange,
+          objc.NSRange,
+          ffi.Pointer<ffi.Bool>,
+        )
+      >.listener(
+        _ObjCBlock_ffiVoid_NSString_NSRange_NSRange_bool_blockingTrampoline,
       )
-    >.listener(
-      _ObjCBlock_ffiVoid_NSString_NSRange_NSRange_bool_blockingTrampoline,
-    )..keepIsolateAlive = false;
+      ..keepIsolateAlive = false;
 
 /// Construction methods for `objc.ObjCBlock<ffi.Void Function(objc.NSString?, objc.NSRange, objc.NSRange, ffi.Pointer<ffi.Bool>)>`.
 abstract final class ObjCBlock_ffiVoid_NSString_NSRange_NSRange_bool {
@@ -10737,14 +10789,15 @@ abstract final class ObjCBlock_ffiVoid_NSString_NSRange_NSRange_bool {
     ffi.Pointer<objc.ObjCBlockImpl> pointer, {
     bool retain = false,
     bool release = false,
-  }) => objc.ObjCBlock<
-    ffi.Void Function(
-      objc.NSString?,
-      objc.NSRange,
-      objc.NSRange,
-      ffi.Pointer<ffi.Bool>,
-    )
-  >(pointer, retain: retain, release: release);
+  }) =>
+      objc.ObjCBlock<
+        ffi.Void Function(
+          objc.NSString?,
+          objc.NSRange,
+          objc.NSRange,
+          ffi.Pointer<ffi.Bool>,
+        )
+      >(pointer, retain: retain, release: release);
 
   /// Creates a block from a C function pointer.
   ///
@@ -10771,21 +10824,22 @@ abstract final class ObjCBlock_ffiVoid_NSString_NSRange_NSRange_bool {
       >
     >
     ptr,
-  ) => objc.ObjCBlock<
-    ffi.Void Function(
-      objc.NSString?,
-      objc.NSRange,
-      objc.NSRange,
-      ffi.Pointer<ffi.Bool>,
-    )
-  >(
-    objc.newPointerBlock(
-      _ObjCBlock_ffiVoid_NSString_NSRange_NSRange_bool_fnPtrCallable,
-      ptr.cast(),
-    ),
-    retain: false,
-    release: true,
-  );
+  ) =>
+      objc.ObjCBlock<
+        ffi.Void Function(
+          objc.NSString?,
+          objc.NSRange,
+          objc.NSRange,
+          ffi.Pointer<ffi.Bool>,
+        )
+      >(
+        objc.newPointerBlock(
+          _ObjCBlock_ffiVoid_NSString_NSRange_NSRange_bool_fnPtrCallable,
+          ptr.cast(),
+        ),
+        retain: false,
+        release: true,
+      );
 
   /// Creates a block from a Dart function.
   ///
@@ -10812,34 +10866,39 @@ abstract final class ObjCBlock_ffiVoid_NSString_NSRange_NSRange_bool {
     )
     fn, {
     bool keepIsolateAlive = true,
-  }) => objc.ObjCBlock<
-    ffi.Void Function(
-      objc.NSString?,
-      objc.NSRange,
-      objc.NSRange,
-      ffi.Pointer<ffi.Bool>,
-    )
-  >(
-    objc.newClosureBlock(
-      _ObjCBlock_ffiVoid_NSString_NSRange_NSRange_bool_closureCallable,
-      (
-        ffi.Pointer<objc.ObjCObject> arg0,
-        objc.NSRange arg1,
-        objc.NSRange arg2,
-        ffi.Pointer<ffi.Bool> arg3,
-      ) => fn(
-        arg0.address == 0
-            ? null
-            : objc.NSString.castFromPointer(arg0, retain: true, release: true),
-        arg1,
-        arg2,
-        arg3,
-      ),
-      keepIsolateAlive,
-    ),
-    retain: false,
-    release: true,
-  );
+  }) =>
+      objc.ObjCBlock<
+        ffi.Void Function(
+          objc.NSString?,
+          objc.NSRange,
+          objc.NSRange,
+          ffi.Pointer<ffi.Bool>,
+        )
+      >(
+        objc.newClosureBlock(
+          _ObjCBlock_ffiVoid_NSString_NSRange_NSRange_bool_closureCallable,
+          (
+            ffi.Pointer<objc.ObjCObject> arg0,
+            objc.NSRange arg1,
+            objc.NSRange arg2,
+            ffi.Pointer<ffi.Bool> arg3,
+          ) => fn(
+            arg0.address == 0
+                ? null
+                : objc.NSString.castFromPointer(
+                    arg0,
+                    retain: true,
+                    release: true,
+                  ),
+            arg1,
+            arg2,
+            arg3,
+          ),
+          keepIsolateAlive,
+        ),
+        retain: false,
+        release: true,
+      );
 
   /// Creates a listener block from a Dart function.
   ///
@@ -11026,32 +11085,31 @@ late final _sel_enumerateLinguisticTagsInRange_scheme_options_orthography_usingB
     objc.registerName(
       "enumerateLinguisticTagsInRange:scheme:options:orthography:usingBlock:",
     );
-final _objc_msgSend_vij4rw =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              objc.NSRange,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.UnsignedLong,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCBlockImpl>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            objc.NSRange,
-            ffi.Pointer<objc.ObjCObject>,
-            int,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCBlockImpl>,
-          )
-        >();
+final _objc_msgSend_vij4rw = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          objc.NSRange,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.UnsignedLong,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCBlockImpl>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        objc.NSRange,
+        ffi.Pointer<objc.ObjCObject>,
+        int,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCBlockImpl>,
+      )
+    >();
 
 /// NSLinguisticAnalysis
 extension NSLinguisticAnalysis on objc.NSString {
@@ -11161,8 +11219,9 @@ enum NSAppleEventSendOptions {
     8192 => NSAppleEventSendDontExecute,
     65536 => NSAppleEventSendDontAnnotate,
     35 => NSAppleEventSendDefaultOptions,
-    _ =>
-      throw ArgumentError('Unknown value for NSAppleEventSendOptions: $value'),
+    _ => throw ArgumentError(
+      'Unknown value for NSAppleEventSendOptions: $value',
+    ),
   };
 }
 
@@ -11186,28 +11245,27 @@ late final _class_Helpers = objc.getClass("maplibre_ios.Helpers");
 late final _sel_setExpressionWithTarget_field_expression_ = objc.registerName(
   "setExpressionWithTarget:field:expression:",
 );
-final _objc_msgSend_r8gdi7 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_r8gdi7 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 late final _sel_parseExpressionWithPropertyName_expression_ = objc.registerName(
   "parseExpressionWithPropertyName:expression:",
 );
@@ -11333,24 +11391,23 @@ late final _class_MapLibreRegistry = objc.getClass(
   "maplibre_ios.MapLibreRegistry",
 );
 late final _sel_getMapWithViewId_ = objc.registerName("getMapWithViewId:");
-final _objc_msgSend_1ya1kjn =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Int64,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            int,
-          )
-        >();
+final _objc_msgSend_1ya1kjn = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Int64,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        int,
+      )
+    >();
 late final _sel_activity = objc.registerName("activity");
 late final _sel_setActivity_ = objc.registerName("setActivity:");
 late final _sel_context = objc.registerName("context");
@@ -11565,8 +11622,9 @@ enum MLNMapDebugMaskOptions {
     32 => MLNMapDebugOverdrawVisualizationMask,
     64 => MLNMapDebugStencilBufferMask,
     128 => MLNMapDebugDepthBufferMask,
-    _ =>
-      throw ArgumentError('Unknown value for MLNMapDebugMaskOptions: $value'),
+    _ => throw ArgumentError(
+      'Unknown value for MLNMapDebugMaskOptions: $value',
+    ),
   };
 }
 
@@ -11663,113 +11721,107 @@ final class MLNCoordinateQuad extends ffi.Struct {
 
 late final _class_MLNMapCamera = objc.getClass("MapLibre.MLNMapCamera");
 late final _sel_centerCoordinate = objc.registerName("centerCoordinate");
-final _objc_msgSend_18o5nok =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            CLLocationCoordinate2D Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          CLLocationCoordinate2D Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
-final _objc_msgSend_18o5nokStret =
-    objc.msgSendStretPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<CLLocationCoordinate2D>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<CLLocationCoordinate2D>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
+final _objc_msgSend_18o5nok = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        CLLocationCoordinate2D Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      CLLocationCoordinate2D Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+      )
+    >();
+final _objc_msgSend_18o5nokStret = objc.msgSendStretPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<CLLocationCoordinate2D>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<CLLocationCoordinate2D>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+      )
+    >();
 late final _sel_setCenterCoordinate_ = objc.registerName(
   "setCenterCoordinate:",
 );
-final _objc_msgSend_1zv0am =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CLLocationCoordinate2D,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CLLocationCoordinate2D,
-          )
-        >();
+final _objc_msgSend_1zv0am = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CLLocationCoordinate2D,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CLLocationCoordinate2D,
+      )
+    >();
 late final _sel_heading = objc.registerName("heading");
-final _objc_msgSend_1ukqyt8 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Double Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          double Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
-final _objc_msgSend_1ukqyt8Fpret =
-    objc.msgSendFpretPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Double Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          double Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
+final _objc_msgSend_1ukqyt8 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Double Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      double Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+      )
+    >();
+final _objc_msgSend_1ukqyt8Fpret = objc.msgSendFpretPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Double Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      double Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+      )
+    >();
 late final _sel_setHeading_ = objc.registerName("setHeading:");
-final _objc_msgSend_hwm8nu =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Double,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            double,
-          )
-        >();
+final _objc_msgSend_hwm8nu = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Double,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        double,
+      )
+    >();
 late final _sel_pitch = objc.registerName("pitch");
 late final _sel_setPitch_ = objc.registerName("setPitch:");
 late final _sel_altitude = objc.registerName("altitude");
@@ -11781,56 +11833,54 @@ late final _sel_cameraLookingAtCenterCoordinate_fromEyeCoordinate_eyeAltitude_ =
     objc.registerName(
       "cameraLookingAtCenterCoordinate:fromEyeCoordinate:eyeAltitude:",
     );
-final _objc_msgSend_2d68z4 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CLLocationCoordinate2D,
-              CLLocationCoordinate2D,
-              ffi.Double,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CLLocationCoordinate2D,
-            CLLocationCoordinate2D,
-            double,
-          )
-        >();
+final _objc_msgSend_2d68z4 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CLLocationCoordinate2D,
+          CLLocationCoordinate2D,
+          ffi.Double,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CLLocationCoordinate2D,
+        CLLocationCoordinate2D,
+        double,
+      )
+    >();
 late final _sel_cameraLookingAtCenterCoordinate_acrossDistance_pitch_heading_ =
     objc.registerName(
       "cameraLookingAtCenterCoordinate:acrossDistance:pitch:heading:",
     );
-final _objc_msgSend_x3m0f9 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CLLocationCoordinate2D,
-              ffi.Double,
-              ffi.Double,
-              ffi.Double,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CLLocationCoordinate2D,
-            double,
-            double,
-            double,
-          )
-        >();
+final _objc_msgSend_x3m0f9 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CLLocationCoordinate2D,
+          ffi.Double,
+          ffi.Double,
+          ffi.Double,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CLLocationCoordinate2D,
+        double,
+        double,
+        double,
+      )
+    >();
 late final _sel_cameraLookingAtCenterCoordinate_altitude_pitch_heading_ = objc
     .registerName("cameraLookingAtCenterCoordinate:altitude:pitch:heading:");
 late final _sel_cameraLookingAtCenterCoordinate_fromDistance_pitch_heading_ =
@@ -11881,14 +11931,14 @@ class MLNMapCamera extends objc.NSObject
     final _ptr = pkg_ffi.calloc<CLLocationCoordinate2D>();
     objc.useMsgSendVariants
         ? _objc_msgSend_18o5nokStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_centerCoordinate,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_centerCoordinate,
+          )
         : _ptr.ref = _objc_msgSend_18o5nok(
-          this.ref.pointer,
-          _sel_centerCoordinate,
-        );
+            this.ref.pointer,
+            _sel_centerCoordinate,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<CLLocationCoordinate2D>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -12201,78 +12251,74 @@ late final _class_MLNStyleLayer = objc.getClass("MLNStyleLayer");
 late final _sel_identifier = objc.registerName("identifier");
 late final _sel_isVisible = objc.registerName("isVisible");
 late final _sel_setVisible_ = objc.registerName("setVisible:");
-final _objc_msgSend_1s56lr9 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Bool,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            bool,
-          )
-        >();
+final _objc_msgSend_1s56lr9 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Bool,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        bool,
+      )
+    >();
 late final _sel_maximumZoomLevel = objc.registerName("maximumZoomLevel");
-final _objc_msgSend_2cgrxl =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Float Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          double Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
-final _objc_msgSend_2cgrxlFpret =
-    objc.msgSendFpretPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Float Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          double Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
+final _objc_msgSend_2cgrxl = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Float Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      double Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+      )
+    >();
+final _objc_msgSend_2cgrxlFpret = objc.msgSendFpretPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Float Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      double Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+      )
+    >();
 late final _sel_setMaximumZoomLevel_ = objc.registerName(
   "setMaximumZoomLevel:",
 );
-final _objc_msgSend_v5hmet =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Float,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            double,
-          )
-        >();
+final _objc_msgSend_v5hmet = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Float,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        double,
+      )
+    >();
 late final _sel_minimumZoomLevel = objc.registerName("minimumZoomLevel");
 late final _sel_setMinimumZoomLevel_ = objc.registerName(
   "setMinimumZoomLevel:",
@@ -12463,59 +12509,56 @@ late final _sel_name = objc.registerName("name");
 late final _sel_sources = objc.registerName("sources");
 late final _sel_setSources_ = objc.registerName("setSources:");
 late final _sel_transition = objc.registerName("transition");
-final _objc_msgSend_1i0p3hy =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            MLNTransition Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          MLNTransition Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
-final _objc_msgSend_1i0p3hyStret =
-    objc.msgSendStretPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<MLNTransition>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<MLNTransition>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
+final _objc_msgSend_1i0p3hy = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        MLNTransition Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      MLNTransition Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+      )
+    >();
+final _objc_msgSend_1i0p3hyStret = objc.msgSendStretPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<MLNTransition>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<MLNTransition>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+      )
+    >();
 late final _sel_setTransition_ = objc.registerName("setTransition:");
-final _objc_msgSend_z7lywk =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              MLNTransition,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            MLNTransition,
-          )
-        >();
+final _objc_msgSend_z7lywk = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          MLNTransition,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        MLNTransition,
+      )
+    >();
 late final _sel_performsPlacementTransitions = objc.registerName(
   "performsPlacementTransitions",
 );
@@ -12650,26 +12693,25 @@ late final _sel_sourceWithIdentifier_ = objc.registerName(
 late final _sel_addSource_ = objc.registerName("addSource:");
 late final _sel_removeSource_ = objc.registerName("removeSource:");
 late final _sel_removeSource_error_ = objc.registerName("removeSource:error:");
-final _objc_msgSend_l9p60w =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Bool Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
-            )
-          >
-        >()
-        .asFunction<
-          bool Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
-          )
-        >();
+final _objc_msgSend_l9p60w = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Bool Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
+        )
+      >
+    >()
+    .asFunction<
+      bool Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
+      )
+    >();
 late final _sel_layers = objc.registerName("layers");
 late final _sel_setLayers_ = objc.registerName("setLayers:");
 late final _sel_layerWithIdentifier_ = objc.registerName(
@@ -12679,49 +12721,47 @@ late final _sel_addLayer_ = objc.registerName("addLayer:");
 late final _sel_insertLayer_atIndex_ = objc.registerName(
   "insertLayer:atIndex:",
 );
-final _objc_msgSend_djsa9o =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.UnsignedLong,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            int,
-          )
-        >();
+final _objc_msgSend_djsa9o = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.UnsignedLong,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        int,
+      )
+    >();
 late final _sel_insertLayer_belowLayer_ = objc.registerName(
   "insertLayer:belowLayer:",
 );
-final _objc_msgSend_pfv6jd =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_pfv6jd = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 late final _sel_insertLayer_aboveLayer_ = objc.registerName(
   "insertLayer:aboveLayer:",
 );
@@ -12798,51 +12838,49 @@ late final _sel_cacheDepthMatchesImageDepth = objc.registerName(
 late final _sel_dissolveToPoint_fraction_ = objc.registerName(
   "dissolveToPoint:fraction:",
 );
-final _objc_msgSend_1lkz44l =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CGPoint,
-              ffi.Double,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CGPoint,
-            double,
-          )
-        >();
+final _objc_msgSend_1lkz44l = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CGPoint,
+          ffi.Double,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CGPoint,
+        double,
+      )
+    >();
 late final _sel_dissolveToPoint_fromRect_fraction_ = objc.registerName(
   "dissolveToPoint:fromRect:fraction:",
 );
-final _objc_msgSend_93gyx4 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CGPoint,
-              CGRect,
-              ffi.Double,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CGPoint,
-            CGRect,
-            double,
-          )
-        >();
+final _objc_msgSend_93gyx4 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CGPoint,
+          CGRect,
+          ffi.Double,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CGPoint,
+        CGRect,
+        double,
+      )
+    >();
 
 enum NSCompositingOperation {
   NSCompositingOperationClear(0),
@@ -12908,110 +12946,107 @@ enum NSCompositingOperation {
     26 => NSCompositingOperationSaturation,
     27 => NSCompositingOperationColor,
     28 => NSCompositingOperationLuminosity,
-    _ =>
-      throw ArgumentError('Unknown value for NSCompositingOperation: $value'),
+    _ => throw ArgumentError(
+      'Unknown value for NSCompositingOperation: $value',
+    ),
   };
 }
 
 late final _sel_compositeToPoint_operation_ = objc.registerName(
   "compositeToPoint:operation:",
 );
-final _objc_msgSend_tutwec =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CGPoint,
-              ffi.UnsignedLong,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CGPoint,
-            int,
-          )
-        >();
+final _objc_msgSend_tutwec = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CGPoint,
+          ffi.UnsignedLong,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CGPoint,
+        int,
+      )
+    >();
 late final _sel_compositeToPoint_fromRect_operation_ = objc.registerName(
   "compositeToPoint:fromRect:operation:",
 );
-final _objc_msgSend_bjle81 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CGPoint,
-              CGRect,
-              ffi.UnsignedLong,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CGPoint,
-            CGRect,
-            int,
-          )
-        >();
+final _objc_msgSend_bjle81 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CGPoint,
+          CGRect,
+          ffi.UnsignedLong,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CGPoint,
+        CGRect,
+        int,
+      )
+    >();
 late final _sel_compositeToPoint_operation_fraction_ = objc.registerName(
   "compositeToPoint:operation:fraction:",
 );
-final _objc_msgSend_16t8gcf =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CGPoint,
-              ffi.UnsignedLong,
-              ffi.Double,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CGPoint,
-            int,
-            double,
-          )
-        >();
+final _objc_msgSend_16t8gcf = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CGPoint,
+          ffi.UnsignedLong,
+          ffi.Double,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CGPoint,
+        int,
+        double,
+      )
+    >();
 late final _sel_compositeToPoint_fromRect_operation_fraction_ = objc
     .registerName("compositeToPoint:fromRect:operation:fraction:");
-final _objc_msgSend_1xnlu4e =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CGPoint,
-              CGRect,
-              ffi.UnsignedLong,
-              ffi.Double,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CGPoint,
-            CGRect,
-            int,
-            double,
-          )
-        >();
+final _objc_msgSend_1xnlu4e = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CGPoint,
+          CGRect,
+          ffi.UnsignedLong,
+          ffi.Double,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CGPoint,
+        CGRect,
+        int,
+        double,
+      )
+    >();
 late final _sel_lockFocusOnRepresentation_ = objc.registerName(
   "lockFocusOnRepresentation:",
 );
@@ -13373,95 +13408,91 @@ late final _sel_imageWithSystemSymbolName_variableValue_accessibilityDescription
     objc.registerName(
       "imageWithSystemSymbolName:variableValue:accessibilityDescription:",
     );
-final _objc_msgSend_17i4wqy =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Double,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            double,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_17i4wqy = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Double,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        double,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 late final _sel_imageWithSymbolName_variableValue_ = objc.registerName(
   "imageWithSymbolName:variableValue:",
 );
-final _objc_msgSend_6plvbo =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Double,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            double,
-          )
-        >();
+final _objc_msgSend_6plvbo = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Double,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        double,
+      )
+    >();
 late final _sel_imageWithSymbolName_bundle_variableValue_ = objc.registerName(
   "imageWithSymbolName:bundle:variableValue:",
 );
-final _objc_msgSend_hzzkpm =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Double,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCObject>,
-            double,
-          )
-        >();
+final _objc_msgSend_hzzkpm = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Double,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>,
+        double,
+      )
+    >();
 late final _sel_initWithSize_ = objc.registerName("initWithSize:");
-final _objc_msgSend_1c2zpn3 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CGSize,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CGSize,
-          )
-        >();
+final _objc_msgSend_1c2zpn3 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CGSize,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CGSize,
+      )
+    >();
 late final _sel_initWithData_ = objc.registerName("initWithData:");
 late final _sel_initByReferencingFile_ = objc.registerName(
   "initByReferencingFile:",
@@ -13481,16 +13512,18 @@ bool _ObjCBlock_bool_NSRect_fnPtrTrampoline(
     .asFunction<bool Function(CGRect)>()(arg0);
 ffi.Pointer<ffi.Void> _ObjCBlock_bool_NSRect_fnPtrCallable =
     ffi.Pointer.fromFunction<
-      ffi.Bool Function(ffi.Pointer<objc.ObjCBlockImpl>, CGRect)
-    >(_ObjCBlock_bool_NSRect_fnPtrTrampoline, false).cast();
+          ffi.Bool Function(ffi.Pointer<objc.ObjCBlockImpl>, CGRect)
+        >(_ObjCBlock_bool_NSRect_fnPtrTrampoline, false)
+        .cast();
 bool _ObjCBlock_bool_NSRect_closureTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   CGRect arg0,
 ) => (objc.getBlockClosure(block) as bool Function(CGRect))(arg0);
 ffi.Pointer<ffi.Void> _ObjCBlock_bool_NSRect_closureCallable =
     ffi.Pointer.fromFunction<
-      ffi.Bool Function(ffi.Pointer<objc.ObjCBlockImpl>, CGRect)
-    >(_ObjCBlock_bool_NSRect_closureTrampoline, false).cast();
+          ffi.Bool Function(ffi.Pointer<objc.ObjCBlockImpl>, CGRect)
+        >(_ObjCBlock_bool_NSRect_closureTrampoline, false)
+        .cast();
 
 /// Construction methods for `objc.ObjCBlock<ffi.Bool Function(CGRect)>`.
 abstract final class ObjCBlock_bool_NSRect {
@@ -13543,62 +13576,64 @@ abstract final class ObjCBlock_bool_NSRect {
 /// Call operator for `objc.ObjCBlock<ffi.Bool Function(CGRect)>`.
 extension ObjCBlock_bool_NSRect_CallExtension
     on objc.ObjCBlock<ffi.Bool Function(CGRect)> {
-  bool call(CGRect arg0) => ref.pointer.ref.invoke
-      .cast<
-        ffi.NativeFunction<
-          ffi.Bool Function(ffi.Pointer<objc.ObjCBlockImpl> block, CGRect arg0)
-        >
-      >()
-      .asFunction<bool Function(ffi.Pointer<objc.ObjCBlockImpl>, CGRect)>()(
-    ref.pointer,
-    arg0,
-  );
+  bool call(CGRect arg0) =>
+      ref.pointer.ref.invoke
+          .cast<
+            ffi.NativeFunction<
+              ffi.Bool Function(
+                ffi.Pointer<objc.ObjCBlockImpl> block,
+                CGRect arg0,
+              )
+            >
+          >()
+          .asFunction<bool Function(ffi.Pointer<objc.ObjCBlockImpl>, CGRect)>()(
+        ref.pointer,
+        arg0,
+      );
 }
 
 late final _sel_imageWithSize_flipped_drawingHandler_ = objc.registerName(
   "imageWithSize:flipped:drawingHandler:",
 );
-final _objc_msgSend_ap2ayg =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CGSize,
-              ffi.Bool,
-              ffi.Pointer<objc.ObjCBlockImpl>,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CGSize,
-            bool,
-            ffi.Pointer<objc.ObjCBlockImpl>,
-          )
-        >();
+final _objc_msgSend_ap2ayg = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CGSize,
+          ffi.Bool,
+          ffi.Pointer<objc.ObjCBlockImpl>,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CGSize,
+        bool,
+        ffi.Pointer<objc.ObjCBlockImpl>,
+      )
+    >();
 late final _sel_setSize_ = objc.registerName("setSize:");
-final _objc_msgSend_13lgpwz =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CGSize,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CGSize,
-          )
-        >();
+final _objc_msgSend_13lgpwz = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CGSize,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CGSize,
+      )
+    >();
 late final _sel_setName_ = objc.registerName("setName:");
 
 /// WARNING: NSColor is a stub. To generate bindings for this class, include
@@ -13661,85 +13696,82 @@ late final _sel_drawAtPoint_fromRect_operation_fraction_ = objc.registerName(
 late final _sel_drawInRect_fromRect_operation_fraction_ = objc.registerName(
   "drawInRect:fromRect:operation:fraction:",
 );
-final _objc_msgSend_bfgdl2 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CGRect,
-              CGRect,
-              ffi.UnsignedLong,
-              ffi.Double,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CGRect,
-            CGRect,
-            int,
-            double,
-          )
-        >();
+final _objc_msgSend_bfgdl2 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CGRect,
+          CGRect,
+          ffi.UnsignedLong,
+          ffi.Double,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CGRect,
+        CGRect,
+        int,
+        double,
+      )
+    >();
 late final _sel_drawInRect_fromRect_operation_fraction_respectFlipped_hints_ =
     objc.registerName(
       "drawInRect:fromRect:operation:fraction:respectFlipped:hints:",
     );
-final _objc_msgSend_1qus490 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CGRect,
-              CGRect,
-              ffi.UnsignedLong,
-              ffi.Double,
-              ffi.Bool,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CGRect,
-            CGRect,
-            int,
-            double,
-            bool,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_1qus490 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CGRect,
+          CGRect,
+          ffi.UnsignedLong,
+          ffi.Double,
+          ffi.Bool,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CGRect,
+        CGRect,
+        int,
+        double,
+        bool,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 late final _sel_drawRepresentation_inRect_ = objc.registerName(
   "drawRepresentation:inRect:",
 );
-final _objc_msgSend_x4xkoq =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Bool Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              CGRect,
-            )
-          >
-        >()
-        .asFunction<
-          bool Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            CGRect,
-          )
-        >();
+final _objc_msgSend_x4xkoq = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Bool Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          CGRect,
+        )
+      >
+    >()
+    .asFunction<
+      bool Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        CGRect,
+      )
+    >();
 late final _sel_recache = objc.registerName("recache");
 late final _sel_TIFFRepresentation = objc.registerName("TIFFRepresentation");
 
@@ -13772,26 +13804,25 @@ enum NSTIFFCompression {
 late final _sel_TIFFRepresentationUsingCompression_factor_ = objc.registerName(
   "TIFFRepresentationUsingCompression:factor:",
 );
-final _objc_msgSend_gs5ux1 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.UnsignedLong,
-              ffi.Float,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            int,
-            double,
-          )
-        >();
+final _objc_msgSend_gs5ux1 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.UnsignedLong,
+          ffi.Float,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        int,
+        double,
+      )
+    >();
 late final _sel_representations = objc.registerName("representations");
 late final _sel_addRepresentations_ = objc.registerName("addRepresentations:");
 late final _sel_addRepresentation_ = objc.registerName("addRepresentation:");
@@ -13853,76 +13884,69 @@ enum NSImageCacheMode {
 }
 
 late final _sel_cacheMode = objc.registerName("cacheMode");
-final _objc_msgSend_1d4tuvg =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.UnsignedLong Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          int Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
+final _objc_msgSend_1d4tuvg = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.UnsignedLong Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      int Function(ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)
+    >();
 late final _sel_setCacheMode_ = objc.registerName("setCacheMode:");
-final _objc_msgSend_14xnhaq =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.UnsignedLong,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            int,
-          )
-        >();
+final _objc_msgSend_14xnhaq = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.UnsignedLong,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        int,
+      )
+    >();
 late final _sel_alignmentRect = objc.registerName("alignmentRect");
-final _objc_msgSend_bu1hbw =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            CGRect Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          CGRect Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
-final _objc_msgSend_bu1hbwStret =
-    objc.msgSendStretPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<CGRect>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<CGRect>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
+final _objc_msgSend_bu1hbw = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        CGRect Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      CGRect Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+      )
+    >();
+final _objc_msgSend_bu1hbwStret = objc.msgSendStretPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<CGRect>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<CGRect>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+      )
+    >();
 late final _sel_setAlignmentRect_ = objc.registerName("setAlignmentRect:");
 late final _sel_isTemplate = objc.registerName("isTemplate");
 late final _sel_setTemplate_ = objc.registerName("setTemplate:");
@@ -13935,26 +13959,25 @@ late final _sel_setAccessibilityDescription_ = objc.registerName(
 late final _sel_initWithCGImage_size_ = objc.registerName(
   "initWithCGImage:size:",
 );
-final _objc_msgSend_lvz2zr =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<CGImage>,
-              CGSize,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<CGImage>,
-            CGSize,
-          )
-        >();
+final _objc_msgSend_lvz2zr = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<CGImage>,
+          CGSize,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<CGImage>,
+        CGSize,
+      )
+    >();
 
 /// WARNING: NSGraphicsContext is a stub. To generate bindings for this class, include
 /// NSGraphicsContext in your config's objc-interfaces list.
@@ -13984,197 +14007,188 @@ class NSGraphicsContext extends objc.NSObject {
 late final _sel_CGImageForProposedRect_context_hints_ = objc.registerName(
   "CGImageForProposedRect:context:hints:",
 );
-final _objc_msgSend_1lfy6m2 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<CGImage> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<CGRect>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<CGImage> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<CGRect>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_1lfy6m2 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<CGImage> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<CGRect>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<CGImage> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<CGRect>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 late final _sel_bestRepresentationForRect_context_hints_ = objc.registerName(
   "bestRepresentationForRect:context:hints:",
 );
-final _objc_msgSend_1o8sa9u =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CGRect,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CGRect,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_1o8sa9u = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CGRect,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CGRect,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 late final _sel_hitTestRect_withImageDestinationRect_context_hints_flipped_ =
     objc.registerName(
       "hitTestRect:withImageDestinationRect:context:hints:flipped:",
     );
-final _objc_msgSend_h03lrd =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Bool Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CGRect,
-              CGRect,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Bool,
-            )
-          >
-        >()
-        .asFunction<
-          bool Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CGRect,
-            CGRect,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCObject>,
-            bool,
-          )
-        >();
+final _objc_msgSend_h03lrd = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Bool Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CGRect,
+          CGRect,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Bool,
+        )
+      >
+    >()
+    .asFunction<
+      bool Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CGRect,
+        CGRect,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>,
+        bool,
+      )
+    >();
 late final _sel_recommendedLayerContentsScale_ = objc.registerName(
   "recommendedLayerContentsScale:",
 );
-final _objc_msgSend_1tczmpv =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Double Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Double,
-            )
-          >
-        >()
-        .asFunction<
-          double Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            double,
-          )
-        >();
-final _objc_msgSend_1tczmpvFpret =
-    objc.msgSendFpretPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Double Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Double,
-            )
-          >
-        >()
-        .asFunction<
-          double Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            double,
-          )
-        >();
+final _objc_msgSend_1tczmpv = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Double Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Double,
+        )
+      >
+    >()
+    .asFunction<
+      double Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        double,
+      )
+    >();
+final _objc_msgSend_1tczmpvFpret = objc.msgSendFpretPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Double Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Double,
+        )
+      >
+    >()
+    .asFunction<
+      double Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        double,
+      )
+    >();
 late final _sel_layerContentsForContentsScale_ = objc.registerName(
   "layerContentsForContentsScale:",
 );
-final _objc_msgSend_oa8mke =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Double,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            double,
-          )
-        >();
+final _objc_msgSend_oa8mke = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Double,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        double,
+      )
+    >();
 late final _sel_capInsets = objc.registerName("capInsets");
-final _objc_msgSend_sl0cgw =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            NSEdgeInsets Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          NSEdgeInsets Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
-final _objc_msgSend_sl0cgwStret =
-    objc.msgSendStretPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<NSEdgeInsets>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<NSEdgeInsets>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
+final _objc_msgSend_sl0cgw = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        NSEdgeInsets Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      NSEdgeInsets Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+      )
+    >();
+final _objc_msgSend_sl0cgwStret = objc.msgSendStretPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<NSEdgeInsets>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<NSEdgeInsets>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+      )
+    >();
 late final _sel_setCapInsets_ = objc.registerName("setCapInsets:");
-final _objc_msgSend_1ug163q =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              NSEdgeInsets,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            NSEdgeInsets,
-          )
-        >();
+final _objc_msgSend_1ug163q = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          NSEdgeInsets,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        NSEdgeInsets,
+      )
+    >();
 
 enum NSImageResizingMode {
   NSImageResizingModeTile(0),
@@ -14191,41 +14205,36 @@ enum NSImageResizingMode {
 }
 
 late final _sel_resizingMode = objc.registerName("resizingMode");
-final _objc_msgSend_q65rpn =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Long Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          int Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
+final _objc_msgSend_q65rpn = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Long Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      int Function(ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)
+    >();
 late final _sel_setResizingMode_ = objc.registerName("setResizingMode:");
-final _objc_msgSend_197i80f =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Long,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            int,
-          )
-        >();
+final _objc_msgSend_197i80f = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Long,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        int,
+      )
+    >();
 
 /// WARNING: NSImageSymbolConfiguration is a stub. To generate bindings for this class, include
 /// NSImageSymbolConfiguration in your config's objc-interfaces list.
@@ -14264,24 +14273,23 @@ late final _sel_symbolConfiguration = objc.registerName("symbolConfiguration");
 late final _sel_imageWithLocale_ = objc.registerName("imageWithLocale:");
 late final _sel_locale = objc.registerName("locale");
 late final _sel_initWithIconRef_ = objc.registerName("initWithIconRef:");
-final _objc_msgSend_1o4xiu1 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<OpaqueIconRef>,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<OpaqueIconRef>,
-          )
-        >();
+final _objc_msgSend_1o4xiu1 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<OpaqueIconRef>,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<OpaqueIconRef>,
+      )
+    >();
 
 /// NSImage
 class NSImage extends objc.NSObject {
@@ -15141,15 +15149,15 @@ class NSImage extends objc.NSObject {
     );
     return objc.useMsgSendVariants
         ? _objc_msgSend_1tczmpvFpret(
-          this.ref.pointer,
-          _sel_recommendedLayerContentsScale_,
-          preferredContentsScale,
-        )
+            this.ref.pointer,
+            _sel_recommendedLayerContentsScale_,
+            preferredContentsScale,
+          )
         : _objc_msgSend_1tczmpv(
-          this.ref.pointer,
-          _sel_recommendedLayerContentsScale_,
-          preferredContentsScale,
-        );
+            this.ref.pointer,
+            _sel_recommendedLayerContentsScale_,
+            preferredContentsScale,
+          );
   }
 
   /// layerContentsForContentsScale:
@@ -16167,10 +16175,9 @@ enum MLNAnnotationVerticalAlignment {
     0 => MLNAnnotationVerticalAlignmentCenter,
     1 => MLNAnnotationVerticalAlignmentTop,
     2 => MLNAnnotationVerticalAlignmentBottom,
-    _ =>
-      throw ArgumentError(
-        'Unknown value for MLNAnnotationVerticalAlignment: $value',
-      ),
+    _ => throw ArgumentError(
+      'Unknown value for MLNAnnotationVerticalAlignment: $value',
+    ),
   };
 }
 
@@ -16273,47 +16280,45 @@ enum MLNPanScrollingMode {
 
 late final _class_MLNMapView = objc.getClass("MapLibre.MLNMapView");
 late final _sel_initWithFrame_ = objc.registerName("initWithFrame:");
-final _objc_msgSend_15yz4e6 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CGRect,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CGRect,
-          )
-        >();
+final _objc_msgSend_15yz4e6 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CGRect,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CGRect,
+      )
+    >();
 late final _sel_initWithFrame_styleURL_ = objc.registerName(
   "initWithFrame:styleURL:",
 );
-final _objc_msgSend_gxusyk =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CGRect,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CGRect,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_gxusyk = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CGRect,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CGRect,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 
 /// WARNING: MLNMapViewDelegate is a stub. To generate bindings for this class, include
 /// MLNMapViewDelegate in your config's objc-protocols list.
@@ -16348,28 +16353,31 @@ ffi.Pointer<objc.ObjCObject> _ObjCBlock_MLNStyle_ffiVoid_fnPtrTrampoline(
         ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void> arg0)
       >
     >()
-    .asFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void>)>()(
-  arg0,
-);
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void>)
+    >()(arg0);
 ffi.Pointer<ffi.Void> _ObjCBlock_MLNStyle_ffiVoid_fnPtrCallable =
     ffi.Pointer.fromFunction<
-      ffi.Pointer<objc.ObjCObject> Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<ffi.Void>,
-      )
-    >(_ObjCBlock_MLNStyle_ffiVoid_fnPtrTrampoline).cast();
+          ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<ffi.Void>,
+          )
+        >(_ObjCBlock_MLNStyle_ffiVoid_fnPtrTrampoline)
+        .cast();
 ffi.Pointer<objc.ObjCObject> _ObjCBlock_MLNStyle_ffiVoid_closureTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<ffi.Void> arg0,
-) => (objc.getBlockClosure(block)
-    as ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void>))(arg0);
+) =>
+    (objc.getBlockClosure(block)
+        as ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void>))(arg0);
 ffi.Pointer<ffi.Void> _ObjCBlock_MLNStyle_ffiVoid_closureCallable =
     ffi.Pointer.fromFunction<
-      ffi.Pointer<objc.ObjCObject> Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<ffi.Void>,
-      )
-    >(_ObjCBlock_MLNStyle_ffiVoid_closureTrampoline).cast();
+          ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<ffi.Void>,
+          )
+        >(_ObjCBlock_MLNStyle_ffiVoid_closureTrampoline)
+        .cast();
 
 /// Construction methods for `objc.ObjCBlock<MLNStyle? Function(ffi.Pointer<ffi.Void>)>`.
 abstract final class ObjCBlock_MLNStyle_ffiVoid {
@@ -16432,42 +16440,42 @@ extension ObjCBlock_MLNStyle_ffiVoid_CallExtension
     on objc.ObjCBlock<MLNStyle? Function(ffi.Pointer<ffi.Void>)> {
   MLNStyle? call(ffi.Pointer<ffi.Void> arg0) =>
       ref.pointer.ref.invoke
-                  .cast<
-                    ffi.NativeFunction<
-                      ffi.Pointer<objc.ObjCObject> Function(
-                        ffi.Pointer<objc.ObjCBlockImpl> block,
-                        ffi.Pointer<ffi.Void> arg0,
-                      )
-                    >
-                  >()
-                  .asFunction<
-                    ffi.Pointer<objc.ObjCObject> Function(
-                      ffi.Pointer<objc.ObjCBlockImpl>,
-                      ffi.Pointer<ffi.Void>,
-                    )
-                  >()(ref.pointer, arg0)
-                  .address ==
-              0
-          ? null
-          : MLNStyle.castFromPointer(
-            ref.pointer.ref.invoke
-                .cast<
-                  ffi.NativeFunction<
-                    ffi.Pointer<objc.ObjCObject> Function(
-                      ffi.Pointer<objc.ObjCBlockImpl> block,
-                      ffi.Pointer<ffi.Void> arg0,
-                    )
-                  >
-                >()
-                .asFunction<
+              .cast<
+                ffi.NativeFunction<
                   ffi.Pointer<objc.ObjCObject> Function(
-                    ffi.Pointer<objc.ObjCBlockImpl>,
-                    ffi.Pointer<ffi.Void>,
+                    ffi.Pointer<objc.ObjCBlockImpl> block,
+                    ffi.Pointer<ffi.Void> arg0,
                   )
-                >()(ref.pointer, arg0),
-            retain: true,
-            release: true,
-          );
+                >
+              >()
+              .asFunction<
+                ffi.Pointer<objc.ObjCObject> Function(
+                  ffi.Pointer<objc.ObjCBlockImpl>,
+                  ffi.Pointer<ffi.Void>,
+                )
+              >()(ref.pointer, arg0)
+              .address ==
+          0
+      ? null
+      : MLNStyle.castFromPointer(
+          ref.pointer.ref.invoke
+              .cast<
+                ffi.NativeFunction<
+                  ffi.Pointer<objc.ObjCObject> Function(
+                    ffi.Pointer<objc.ObjCBlockImpl> block,
+                    ffi.Pointer<ffi.Void> arg0,
+                  )
+                >
+              >()
+              .asFunction<
+                ffi.Pointer<objc.ObjCObject> Function(
+                  ffi.Pointer<objc.ObjCBlockImpl>,
+                  ffi.Pointer<ffi.Void>,
+                )
+              >()(ref.pointer, arg0),
+          retain: true,
+          release: true,
+        );
 }
 
 late final _sel_styleURL = objc.registerName("styleURL");
@@ -16519,78 +16527,71 @@ late final _sel_setScaleBarUsesMetricSystem_ = objc.registerName(
   "setScaleBarUsesMetricSystem:",
 );
 late final _sel_scaleBarPosition = objc.registerName("scaleBarPosition");
-final _objc_msgSend_1c31cvt =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.UnsignedLong Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          int Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
+final _objc_msgSend_1c31cvt = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.UnsignedLong Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      int Function(ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)
+    >();
 late final _sel_setScaleBarPosition_ = objc.registerName(
   "setScaleBarPosition:",
 );
-final _objc_msgSend_8fd115 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.UnsignedLong,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            int,
-          )
-        >();
+final _objc_msgSend_8fd115 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.UnsignedLong,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        int,
+      )
+    >();
 late final _sel_scaleBarMargins = objc.registerName("scaleBarMargins");
-final _objc_msgSend_1uwdhlk =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            CGPoint Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          CGPoint Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
-final _objc_msgSend_1uwdhlkStret =
-    objc.msgSendStretPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<CGPoint>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<CGPoint>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
+final _objc_msgSend_1uwdhlk = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        CGPoint Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      CGPoint Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+      )
+    >();
+final _objc_msgSend_1uwdhlkStret = objc.msgSendStretPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<CGPoint>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<CGPoint>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+      )
+    >();
 late final _sel_setScaleBarMargins_ = objc.registerName("setScaleBarMargins:");
 late final _sel_compassView = objc.registerName("compassView");
 late final _sel_compassViewPosition = objc.registerName("compassViewPosition");
@@ -16602,22 +16603,21 @@ late final _sel_setCompassViewMargins_ = objc.registerName(
   "setCompassViewMargins:",
 );
 late final _sel_logoView = objc.registerName("logoView");
-final _objc_msgSend_1p5sbp0 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<ffi.Int> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<ffi.Int> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
+final _objc_msgSend_1p5sbp0 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<ffi.Int> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<ffi.Int> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+      )
+    >();
 late final _sel_logoViewPosition = objc.registerName("logoViewPosition");
 late final _sel_setLogoViewPosition_ = objc.registerName(
   "setLogoViewPosition:",
@@ -16641,43 +16641,38 @@ late final _sel_showAttribution_ = objc.registerName("showAttribution:");
 late final _sel_preferredFramesPerSecond = objc.registerName(
   "preferredFramesPerSecond",
 );
-final _objc_msgSend_1hz7y9r =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Long Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          int Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
+final _objc_msgSend_1hz7y9r = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Long Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      int Function(ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)
+    >();
 late final _sel_setPreferredFramesPerSecond_ = objc.registerName(
   "setPreferredFramesPerSecond:",
 );
-final _objc_msgSend_4sp4xj =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Long,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            int,
-          )
-        >();
+final _objc_msgSend_4sp4xj = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Long,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        int,
+      )
+    >();
 late final _sel_prefetchesTiles = objc.registerName("prefetchesTiles");
 late final _sel_setPrefetchesTiles_ = objc.registerName("setPrefetchesTiles:");
 late final _sel_tileCacheEnabled = objc.registerName("tileCacheEnabled");
@@ -16747,153 +16742,140 @@ class MLNUserLocation extends objc.ObjCObjectBase {
 
 late final _sel_userLocation = objc.registerName("userLocation");
 late final _sel_userTrackingMode = objc.registerName("userTrackingMode");
-final _objc_msgSend_1swtepj =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.UnsignedLong Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          int Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
+final _objc_msgSend_1swtepj = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.UnsignedLong Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      int Function(ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)
+    >();
 late final _sel_setUserTrackingMode_ = objc.registerName(
   "setUserTrackingMode:",
 );
-final _objc_msgSend_xoapar =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.UnsignedLong,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            int,
-          )
-        >();
+final _objc_msgSend_xoapar = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.UnsignedLong,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        int,
+      )
+    >();
 late final _sel_setUserTrackingMode_animated_ = objc.registerName(
   "setUserTrackingMode:animated:",
 );
-final _objc_msgSend_7oa3sf =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.UnsignedLong,
-              ffi.Bool,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            int,
-            bool,
-          )
-        >();
+final _objc_msgSend_7oa3sf = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.UnsignedLong,
+          ffi.Bool,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        int,
+        bool,
+      )
+    >();
 late final _sel_setUserTrackingMode_animated_completionHandler_ = objc
     .registerName("setUserTrackingMode:animated:completionHandler:");
-final _objc_msgSend_1iu40ms =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.UnsignedLong,
-              ffi.Bool,
-              ffi.Pointer<objc.ObjCBlockImpl>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            int,
-            bool,
-            ffi.Pointer<objc.ObjCBlockImpl>,
-          )
-        >();
+final _objc_msgSend_1iu40ms = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.UnsignedLong,
+          ffi.Bool,
+          ffi.Pointer<objc.ObjCBlockImpl>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        int,
+        bool,
+        ffi.Pointer<objc.ObjCBlockImpl>,
+      )
+    >();
 late final _sel_userLocationVerticalAlignment = objc.registerName(
   "userLocationVerticalAlignment",
 );
-final _objc_msgSend_1m9zum6 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.UnsignedLong Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          int Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
+final _objc_msgSend_1m9zum6 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.UnsignedLong Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      int Function(ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)
+    >();
 late final _sel_setUserLocationVerticalAlignment_ = objc.registerName(
   "setUserLocationVerticalAlignment:",
 );
-final _objc_msgSend_47doj4 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.UnsignedLong,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            int,
-          )
-        >();
+final _objc_msgSend_47doj4 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.UnsignedLong,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        int,
+      )
+    >();
 late final _sel_setUserLocationVerticalAlignment_animated_ = objc.registerName(
   "setUserLocationVerticalAlignment:animated:",
 );
-final _objc_msgSend_1qddrus =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.UnsignedLong,
-              ffi.Bool,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            int,
-            bool,
-          )
-        >();
+final _objc_msgSend_1qddrus = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.UnsignedLong,
+          ffi.Bool,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        int,
+        bool,
+      )
+    >();
 late final _sel_updateUserLocationAnnotationView = objc.registerName(
   "updateUserLocationAnnotationView",
 );
@@ -16918,92 +16900,85 @@ late final _sel_setTargetCoordinate_ = objc.registerName(
 late final _sel_setTargetCoordinate_animated_ = objc.registerName(
   "setTargetCoordinate:animated:",
 );
-final _objc_msgSend_o7hjv2 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CLLocationCoordinate2D,
-              ffi.Bool,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CLLocationCoordinate2D,
-            bool,
-          )
-        >();
+final _objc_msgSend_o7hjv2 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CLLocationCoordinate2D,
+          ffi.Bool,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CLLocationCoordinate2D,
+        bool,
+      )
+    >();
 late final _sel_setTargetCoordinate_animated_completionHandler_ = objc
     .registerName("setTargetCoordinate:animated:completionHandler:");
-final _objc_msgSend_1pbhom5 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CLLocationCoordinate2D,
-              ffi.Bool,
-              ffi.Pointer<objc.ObjCBlockImpl>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CLLocationCoordinate2D,
-            bool,
-            ffi.Pointer<objc.ObjCBlockImpl>,
-          )
-        >();
+final _objc_msgSend_1pbhom5 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CLLocationCoordinate2D,
+          ffi.Bool,
+          ffi.Pointer<objc.ObjCBlockImpl>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CLLocationCoordinate2D,
+        bool,
+        ffi.Pointer<objc.ObjCBlockImpl>,
+      )
+    >();
 late final _sel_isZoomEnabled = objc.registerName("isZoomEnabled");
 late final _sel_setZoomEnabled_ = objc.registerName("setZoomEnabled:");
 late final _sel_isScrollEnabled = objc.registerName("isScrollEnabled");
 late final _sel_setScrollEnabled_ = objc.registerName("setScrollEnabled:");
 late final _sel_panScrollingMode = objc.registerName("panScrollingMode");
-final _objc_msgSend_1vb5jwj =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.UnsignedLong Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          int Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
+final _objc_msgSend_1vb5jwj = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.UnsignedLong Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      int Function(ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)
+    >();
 late final _sel_setPanScrollingMode_ = objc.registerName(
   "setPanScrollingMode:",
 );
-final _objc_msgSend_k7jknj =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.UnsignedLong,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            int,
-          )
-        >();
+final _objc_msgSend_k7jknj = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.UnsignedLong,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        int,
+      )
+    >();
 late final _sel_isRotateEnabled = objc.registerName("isRotateEnabled");
 late final _sel_setRotateEnabled_ = objc.registerName("setRotateEnabled:");
 late final _sel_isPitchEnabled = objc.registerName("isPitchEnabled");
@@ -17028,165 +17003,158 @@ late final _sel_setCenterCoordinate_animated_ = objc.registerName(
 late final _sel_setCenterCoordinate_zoomLevel_animated_ = objc.registerName(
   "setCenterCoordinate:zoomLevel:animated:",
 );
-final _objc_msgSend_sbs4d5 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CLLocationCoordinate2D,
-              ffi.Double,
-              ffi.Bool,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CLLocationCoordinate2D,
-            double,
-            bool,
-          )
-        >();
+final _objc_msgSend_sbs4d5 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CLLocationCoordinate2D,
+          ffi.Double,
+          ffi.Bool,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CLLocationCoordinate2D,
+        double,
+        bool,
+      )
+    >();
 late final _sel_setCenterCoordinate_zoomLevel_direction_animated_ = objc
     .registerName("setCenterCoordinate:zoomLevel:direction:animated:");
-final _objc_msgSend_3zczym =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CLLocationCoordinate2D,
-              ffi.Double,
-              ffi.Double,
-              ffi.Bool,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CLLocationCoordinate2D,
-            double,
-            double,
-            bool,
-          )
-        >();
+final _objc_msgSend_3zczym = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CLLocationCoordinate2D,
+          ffi.Double,
+          ffi.Double,
+          ffi.Bool,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CLLocationCoordinate2D,
+        double,
+        double,
+        bool,
+      )
+    >();
 late final _sel_setCenterCoordinate_zoomLevel_direction_animated_completionHandler_ =
     objc.registerName(
       "setCenterCoordinate:zoomLevel:direction:animated:completionHandler:",
     );
-final _objc_msgSend_d9pvdp =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CLLocationCoordinate2D,
-              ffi.Double,
-              ffi.Double,
-              ffi.Bool,
-              ffi.Pointer<objc.ObjCBlockImpl>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CLLocationCoordinate2D,
-            double,
-            double,
-            bool,
-            ffi.Pointer<objc.ObjCBlockImpl>,
-          )
-        >();
+final _objc_msgSend_d9pvdp = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CLLocationCoordinate2D,
+          ffi.Double,
+          ffi.Double,
+          ffi.Bool,
+          ffi.Pointer<objc.ObjCBlockImpl>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CLLocationCoordinate2D,
+        double,
+        double,
+        bool,
+        ffi.Pointer<objc.ObjCBlockImpl>,
+      )
+    >();
 late final _sel_zoomLevel = objc.registerName("zoomLevel");
 late final _sel_setZoomLevel_ = objc.registerName("setZoomLevel:");
 late final _sel_setZoomLevel_animated_ = objc.registerName(
   "setZoomLevel:animated:",
 );
-final _objc_msgSend_ghxo7e =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Double,
-              ffi.Bool,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            double,
-            bool,
-          )
-        >();
+final _objc_msgSend_ghxo7e = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Double,
+          ffi.Bool,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        double,
+        bool,
+      )
+    >();
 late final _sel_maximumScreenBounds = objc.registerName("maximumScreenBounds");
-final _objc_msgSend_ygoa6a =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            MLNCoordinateBounds Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          MLNCoordinateBounds Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
-final _objc_msgSend_ygoa6aStret =
-    objc.msgSendStretPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<MLNCoordinateBounds>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<MLNCoordinateBounds>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
+final _objc_msgSend_ygoa6a = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        MLNCoordinateBounds Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      MLNCoordinateBounds Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+      )
+    >();
+final _objc_msgSend_ygoa6aStret = objc.msgSendStretPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<MLNCoordinateBounds>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<MLNCoordinateBounds>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+      )
+    >();
 late final _sel_setMaximumScreenBounds_ = objc.registerName(
   "setMaximumScreenBounds:",
 );
-final _objc_msgSend_9ay59k =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              MLNCoordinateBounds,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            MLNCoordinateBounds,
-          )
-        >();
+final _objc_msgSend_9ay59k = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          MLNCoordinateBounds,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        MLNCoordinateBounds,
+      )
+    >();
 late final _sel_direction = objc.registerName("direction");
 late final _sel_setDirection_ = objc.registerName("setDirection:");
 late final _sel_setDirection_animated_ = objc.registerName(
@@ -17207,465 +17175,447 @@ late final _sel_setVisibleCoordinateBounds_ = objc.registerName(
 late final _sel_setVisibleCoordinateBounds_animated_ = objc.registerName(
   "setVisibleCoordinateBounds:animated:",
 );
-final _objc_msgSend_148tmbg =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              MLNCoordinateBounds,
-              ffi.Bool,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            MLNCoordinateBounds,
-            bool,
-          )
-        >();
+final _objc_msgSend_148tmbg = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          MLNCoordinateBounds,
+          ffi.Bool,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        MLNCoordinateBounds,
+        bool,
+      )
+    >();
 late final _sel_setVisibleCoordinateBounds_edgePadding_animated_ = objc
     .registerName("setVisibleCoordinateBounds:edgePadding:animated:");
-final _objc_msgSend_77m626 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              MLNCoordinateBounds,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Bool,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            MLNCoordinateBounds,
-            ffi.Pointer<objc.ObjCObject>,
-            bool,
-          )
-        >();
+final _objc_msgSend_77m626 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          MLNCoordinateBounds,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Bool,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        MLNCoordinateBounds,
+        ffi.Pointer<objc.ObjCObject>,
+        bool,
+      )
+    >();
 late final _sel_setVisibleCoordinateBounds_edgePadding_animated_completionHandler_ =
     objc.registerName(
       "setVisibleCoordinateBounds:edgePadding:animated:completionHandler:",
     );
-final _objc_msgSend_1a8k3st =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              MLNCoordinateBounds,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Bool,
-              ffi.Pointer<objc.ObjCBlockImpl>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            MLNCoordinateBounds,
-            ffi.Pointer<objc.ObjCObject>,
-            bool,
-            ffi.Pointer<objc.ObjCBlockImpl>,
-          )
-        >();
+final _objc_msgSend_1a8k3st = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          MLNCoordinateBounds,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Bool,
+          ffi.Pointer<objc.ObjCBlockImpl>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        MLNCoordinateBounds,
+        ffi.Pointer<objc.ObjCObject>,
+        bool,
+        ffi.Pointer<objc.ObjCBlockImpl>,
+      )
+    >();
 late final _sel_setVisibleCoordinates_count_edgePadding_animated_ = objc
     .registerName("setVisibleCoordinates:count:edgePadding:animated:");
-final _objc_msgSend_4v7863 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<CLLocationCoordinate2D>,
-              ffi.UnsignedLong,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Bool,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<CLLocationCoordinate2D>,
-            int,
-            ffi.Pointer<objc.ObjCObject>,
-            bool,
-          )
-        >();
+final _objc_msgSend_4v7863 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<CLLocationCoordinate2D>,
+          ffi.UnsignedLong,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Bool,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<CLLocationCoordinate2D>,
+        int,
+        ffi.Pointer<objc.ObjCObject>,
+        bool,
+      )
+    >();
 late final _sel_setVisibleCoordinates_count_edgePadding_direction_duration_animationTimingFunction_completionHandler_ =
     objc.registerName(
       "setVisibleCoordinates:count:edgePadding:direction:duration:animationTimingFunction:completionHandler:",
     );
-final _objc_msgSend_1rtoh8u =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<CLLocationCoordinate2D>,
-              ffi.UnsignedLong,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Double,
-              ffi.Double,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCBlockImpl>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<CLLocationCoordinate2D>,
-            int,
-            ffi.Pointer<objc.ObjCObject>,
-            double,
-            double,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCBlockImpl>,
-          )
-        >();
+final _objc_msgSend_1rtoh8u = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<CLLocationCoordinate2D>,
+          ffi.UnsignedLong,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Double,
+          ffi.Double,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCBlockImpl>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<CLLocationCoordinate2D>,
+        int,
+        ffi.Pointer<objc.ObjCObject>,
+        double,
+        double,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCBlockImpl>,
+      )
+    >();
 late final _sel_showAnnotations_animated_ = objc.registerName(
   "showAnnotations:animated:",
 );
-final _objc_msgSend_6p7ndb =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Bool,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            bool,
-          )
-        >();
+final _objc_msgSend_6p7ndb = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Bool,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        bool,
+      )
+    >();
 late final _sel_showAnnotations_edgePadding_animated_ = objc.registerName(
   "showAnnotations:edgePadding:animated:",
 );
-final _objc_msgSend_1lhy15d =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Bool,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCObject>,
-            bool,
-          )
-        >();
+final _objc_msgSend_1lhy15d = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Bool,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>,
+        bool,
+      )
+    >();
 late final _sel_showAnnotations_edgePadding_animated_completionHandler_ = objc
     .registerName("showAnnotations:edgePadding:animated:completionHandler:");
-final _objc_msgSend_1imhooq =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Bool,
-              ffi.Pointer<objc.ObjCBlockImpl>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCObject>,
-            bool,
-            ffi.Pointer<objc.ObjCBlockImpl>,
-          )
-        >();
+final _objc_msgSend_1imhooq = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Bool,
+          ffi.Pointer<objc.ObjCBlockImpl>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>,
+        bool,
+        ffi.Pointer<objc.ObjCBlockImpl>,
+      )
+    >();
 late final _sel_setCamera_ = objc.registerName("setCamera:");
 late final _sel_setCamera_animated_ = objc.registerName("setCamera:animated:");
 late final _sel_setCamera_withDuration_animationTimingFunction_ = objc
     .registerName("setCamera:withDuration:animationTimingFunction:");
-final _objc_msgSend_r1s65y =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Double,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            double,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_r1s65y = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Double,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        double,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 late final _sel_setCamera_withDuration_animationTimingFunction_completionHandler_ =
     objc.registerName(
       "setCamera:withDuration:animationTimingFunction:completionHandler:",
     );
-final _objc_msgSend_1s40ged =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Double,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCBlockImpl>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            double,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCBlockImpl>,
-          )
-        >();
+final _objc_msgSend_1s40ged = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Double,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCBlockImpl>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        double,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCBlockImpl>,
+      )
+    >();
 late final _sel_setCamera_withDuration_animationTimingFunction_edgePadding_completionHandler_ =
     objc.registerName(
       "setCamera:withDuration:animationTimingFunction:edgePadding:completionHandler:",
     );
-final _objc_msgSend_1aa3qa7 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Double,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCBlockImpl>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            double,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCBlockImpl>,
-          )
-        >();
+final _objc_msgSend_1aa3qa7 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Double,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCBlockImpl>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        double,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCBlockImpl>,
+      )
+    >();
 late final _sel_flyToCamera_completionHandler_ = objc.registerName(
   "flyToCamera:completionHandler:",
 );
-final _objc_msgSend_o762yo =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCBlockImpl>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCBlockImpl>,
-          )
-        >();
+final _objc_msgSend_o762yo = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCBlockImpl>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCBlockImpl>,
+      )
+    >();
 late final _sel_flyToCamera_withDuration_completionHandler_ = objc.registerName(
   "flyToCamera:withDuration:completionHandler:",
 );
-final _objc_msgSend_a85mgj =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Double,
-              ffi.Pointer<objc.ObjCBlockImpl>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            double,
-            ffi.Pointer<objc.ObjCBlockImpl>,
-          )
-        >();
+final _objc_msgSend_a85mgj = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Double,
+          ffi.Pointer<objc.ObjCBlockImpl>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        double,
+        ffi.Pointer<objc.ObjCBlockImpl>,
+      )
+    >();
 late final _sel_flyToCamera_withDuration_peakAltitude_completionHandler_ = objc
     .registerName("flyToCamera:withDuration:peakAltitude:completionHandler:");
-final _objc_msgSend_b0p9a0 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Double,
-              ffi.Double,
-              ffi.Pointer<objc.ObjCBlockImpl>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            double,
-            double,
-            ffi.Pointer<objc.ObjCBlockImpl>,
-          )
-        >();
+final _objc_msgSend_b0p9a0 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Double,
+          ffi.Double,
+          ffi.Pointer<objc.ObjCBlockImpl>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        double,
+        double,
+        ffi.Pointer<objc.ObjCBlockImpl>,
+      )
+    >();
 late final _sel_flyToCamera_edgePadding_withDuration_completionHandler_ = objc
     .registerName("flyToCamera:edgePadding:withDuration:completionHandler:");
-final _objc_msgSend_3hfsut =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Double,
-              ffi.Pointer<objc.ObjCBlockImpl>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCObject>,
-            double,
-            ffi.Pointer<objc.ObjCBlockImpl>,
-          )
-        >();
+final _objc_msgSend_3hfsut = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Double,
+          ffi.Pointer<objc.ObjCBlockImpl>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>,
+        double,
+        ffi.Pointer<objc.ObjCBlockImpl>,
+      )
+    >();
 late final _sel_cameraThatFitsCoordinateBounds_ = objc.registerName(
   "cameraThatFitsCoordinateBounds:",
 );
-final _objc_msgSend_5pnf8k =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              MLNCoordinateBounds,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            MLNCoordinateBounds,
-          )
-        >();
+final _objc_msgSend_5pnf8k = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          MLNCoordinateBounds,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        MLNCoordinateBounds,
+      )
+    >();
 late final _sel_cameraThatFitsCoordinateBounds_edgePadding_ = objc.registerName(
   "cameraThatFitsCoordinateBounds:edgePadding:",
 );
-final _objc_msgSend_xpc6je =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              MLNCoordinateBounds,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            MLNCoordinateBounds,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_xpc6je = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          MLNCoordinateBounds,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        MLNCoordinateBounds,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 late final _sel_camera_fittingCoordinateBounds_edgePadding_ = objc.registerName(
   "camera:fittingCoordinateBounds:edgePadding:",
 );
-final _objc_msgSend_jcjgzg =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              MLNCoordinateBounds,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            MLNCoordinateBounds,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_jcjgzg = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          MLNCoordinateBounds,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        MLNCoordinateBounds,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 late final _class_MLNShape = objc.getClass("MLNShape");
 
 /// WARNING: MLNAnnotation is a stub. To generate bindings for this class, include
@@ -17694,28 +17644,27 @@ interface class MLNAnnotation extends objc.ObjCProtocolBase {
 late final _sel_shapeWithData_encoding_error_ = objc.registerName(
   "shapeWithData:encoding:error:",
 );
-final _objc_msgSend_1nomli1 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.UnsignedLong,
-              ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            int,
-            ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
-          )
-        >();
+final _objc_msgSend_1nomli1 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.UnsignedLong,
+          ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        int,
+        ffi.Pointer<ffi.Pointer<objc.ObjCObject>>,
+      )
+    >();
 late final _sel_title = objc.registerName("title");
 late final _sel_setTitle_ = objc.registerName("setTitle:");
 late final _sel_subtitle = objc.registerName("subtitle");
@@ -17985,80 +17934,73 @@ late final _sel_cameraThatFitsShape_direction_edgePadding_ = objc.registerName(
 late final _sel_anchorPointForGesture_ = objc.registerName(
   "anchorPointForGesture:",
 );
-final _objc_msgSend_1mpyy6y =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            CGPoint Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          CGPoint Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
-final _objc_msgSend_1mpyy6yStret =
-    objc.msgSendStretPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<CGPoint>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<CGPoint>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_1mpyy6y = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        CGPoint Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      CGPoint Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
+final _objc_msgSend_1mpyy6yStret = objc.msgSendStretPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<CGPoint>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<CGPoint>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 late final _sel_contentInset = objc.registerName("contentInset");
-final _objc_msgSend_13yqbb6 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Int Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          int Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
+final _objc_msgSend_13yqbb6 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Int Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      int Function(ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)
+    >();
 late final _sel_setContentInset_ = objc.registerName("setContentInset:");
-final _objc_msgSend_9o8504 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Int,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            int,
-          )
-        >();
+final _objc_msgSend_9o8504 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Int,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        int,
+      )
+    >();
 late final _sel_cameraEdgeInsets = objc.registerName("cameraEdgeInsets");
 late final _sel_setContentInset_animated_ = objc.registerName(
   "setContentInset:animated:",
@@ -18066,208 +18008,199 @@ late final _sel_setContentInset_animated_ = objc.registerName(
 late final _sel_setContentInset_animated_completionHandler_ = objc.registerName(
   "setContentInset:animated:completionHandler:",
 );
-final _objc_msgSend_na2nx0 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Bool,
-              ffi.Pointer<objc.ObjCBlockImpl>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            bool,
-            ffi.Pointer<objc.ObjCBlockImpl>,
-          )
-        >();
+final _objc_msgSend_na2nx0 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Bool,
+          ffi.Pointer<objc.ObjCBlockImpl>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        bool,
+        ffi.Pointer<objc.ObjCBlockImpl>,
+      )
+    >();
 late final _sel_convertPoint_toCoordinateFromView_ = objc.registerName(
   "convertPoint:toCoordinateFromView:",
 );
-final _objc_msgSend_4xp05x =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            CLLocationCoordinate2D Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CGPoint,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          CLLocationCoordinate2D Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CGPoint,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
-final _objc_msgSend_4xp05xStret =
-    objc.msgSendStretPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<CLLocationCoordinate2D>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CGPoint,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<CLLocationCoordinate2D>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CGPoint,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_4xp05x = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        CLLocationCoordinate2D Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CGPoint,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      CLLocationCoordinate2D Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CGPoint,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
+final _objc_msgSend_4xp05xStret = objc.msgSendStretPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<CLLocationCoordinate2D>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CGPoint,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<CLLocationCoordinate2D>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CGPoint,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 late final _sel_convertCoordinate_toPointToView_ = objc.registerName(
   "convertCoordinate:toPointToView:",
 );
-final _objc_msgSend_mus1wv =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            CGPoint Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CLLocationCoordinate2D,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          CGPoint Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CLLocationCoordinate2D,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
-final _objc_msgSend_mus1wvStret =
-    objc.msgSendStretPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<CGPoint>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CLLocationCoordinate2D,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<CGPoint>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CLLocationCoordinate2D,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_mus1wv = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        CGPoint Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CLLocationCoordinate2D,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      CGPoint Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CLLocationCoordinate2D,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
+final _objc_msgSend_mus1wvStret = objc.msgSendStretPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<CGPoint>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CLLocationCoordinate2D,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<CGPoint>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CLLocationCoordinate2D,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 late final _sel_convertRect_toCoordinateBoundsFromView_ = objc.registerName(
   "convertRect:toCoordinateBoundsFromView:",
 );
-final _objc_msgSend_1f65wix =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            MLNCoordinateBounds Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CGRect,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          MLNCoordinateBounds Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CGRect,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
-final _objc_msgSend_1f65wixStret =
-    objc.msgSendStretPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<MLNCoordinateBounds>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CGRect,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<MLNCoordinateBounds>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CGRect,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_1f65wix = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        MLNCoordinateBounds Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CGRect,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      MLNCoordinateBounds Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CGRect,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
+final _objc_msgSend_1f65wixStret = objc.msgSendStretPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<MLNCoordinateBounds>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CGRect,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<MLNCoordinateBounds>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CGRect,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 late final _sel_convertCoordinateBounds_toRectToView_ = objc.registerName(
   "convertCoordinateBounds:toRectToView:",
 );
-final _objc_msgSend_18hv5gj =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            CGRect Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              MLNCoordinateBounds,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          CGRect Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            MLNCoordinateBounds,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
-final _objc_msgSend_18hv5gjStret =
-    objc.msgSendStretPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<CGRect>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              MLNCoordinateBounds,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<CGRect>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            MLNCoordinateBounds,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_18hv5gj = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        CGRect Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          MLNCoordinateBounds,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      CGRect Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        MLNCoordinateBounds,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
+final _objc_msgSend_18hv5gjStret = objc.msgSendStretPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<CGRect>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          MLNCoordinateBounds,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<CGRect>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        MLNCoordinateBounds,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 late final _sel_metersPerPointAtLatitude_ = objc.registerName(
   "metersPerPointAtLatitude:",
 );
@@ -18279,104 +18212,99 @@ late final _sel_setCamera_withEdgeInsets_ = objc.registerName(
 late final _sel_setVisibleCoordinateBounds_edgePadding_ = objc.registerName(
   "setVisibleCoordinateBounds:edgePadding:",
 );
-final _objc_msgSend_1oilq1q =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              MLNCoordinateBounds,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            MLNCoordinateBounds,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_1oilq1q = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          MLNCoordinateBounds,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        MLNCoordinateBounds,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 late final _sel_convertPoint_ = objc.registerName("convertPoint:");
-final _objc_msgSend_zdqa7 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            CLLocationCoordinate2D Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CGPoint,
-            )
-          >
-        >()
-        .asFunction<
-          CLLocationCoordinate2D Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CGPoint,
-          )
-        >();
-final _objc_msgSend_zdqa7Stret =
-    objc.msgSendStretPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<CLLocationCoordinate2D>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CGPoint,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<CLLocationCoordinate2D>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CGPoint,
-          )
-        >();
+final _objc_msgSend_zdqa7 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        CLLocationCoordinate2D Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CGPoint,
+        )
+      >
+    >()
+    .asFunction<
+      CLLocationCoordinate2D Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CGPoint,
+      )
+    >();
+final _objc_msgSend_zdqa7Stret = objc.msgSendStretPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<CLLocationCoordinate2D>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CGPoint,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<CLLocationCoordinate2D>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CGPoint,
+      )
+    >();
 late final _sel_convertCoordinate_ = objc.registerName("convertCoordinate:");
-final _objc_msgSend_p1qkdl =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            CGPoint Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CLLocationCoordinate2D,
-            )
-          >
-        >()
-        .asFunction<
-          CGPoint Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CLLocationCoordinate2D,
-          )
-        >();
-final _objc_msgSend_p1qkdlStret =
-    objc.msgSendStretPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<CGPoint>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CLLocationCoordinate2D,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<CGPoint>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CLLocationCoordinate2D,
-          )
-        >();
+final _objc_msgSend_p1qkdl = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        CGPoint Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CLLocationCoordinate2D,
+        )
+      >
+    >()
+    .asFunction<
+      CGPoint Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CLLocationCoordinate2D,
+      )
+    >();
+final _objc_msgSend_p1qkdlStret = objc.msgSendStretPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<CGPoint>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CLLocationCoordinate2D,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<CGPoint>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CLLocationCoordinate2D,
+      )
+    >();
 late final _sel_metersPerPoint = objc.registerName("metersPerPoint");
 
 /// MLNMapProjection
@@ -18474,16 +18402,16 @@ class MLNMapProjection extends objc.NSObject {
     final _ptr = pkg_ffi.calloc<CLLocationCoordinate2D>();
     objc.useMsgSendVariants
         ? _objc_msgSend_zdqa7Stret(
-          _ptr,
-          this.ref.pointer,
-          _sel_convertPoint_,
-          point,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_convertPoint_,
+            point,
+          )
         : _ptr.ref = _objc_msgSend_zdqa7(
-          this.ref.pointer,
-          _sel_convertPoint_,
-          point,
-        );
+            this.ref.pointer,
+            _sel_convertPoint_,
+            point,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<CLLocationCoordinate2D>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -18500,16 +18428,16 @@ class MLNMapProjection extends objc.NSObject {
     final _ptr = pkg_ffi.calloc<CGPoint>();
     objc.useMsgSendVariants
         ? _objc_msgSend_p1qkdlStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_convertCoordinate_,
-          coordinate,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_convertCoordinate_,
+            coordinate,
+          )
         : _ptr.ref = _objc_msgSend_p1qkdl(
-          this.ref.pointer,
-          _sel_convertCoordinate_,
-          coordinate,
-        );
+            this.ref.pointer,
+            _sel_convertCoordinate_,
+            coordinate,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<CGPoint>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -18658,30 +18586,29 @@ late final _sel_selectAnnotation_moveIntoView_animateSelection_completionHandler
     objc.registerName(
       "selectAnnotation:moveIntoView:animateSelection:completionHandler:",
     );
-final _objc_msgSend_2nhnqw =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Bool,
-              ffi.Bool,
-              ffi.Pointer<objc.ObjCBlockImpl>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            bool,
-            bool,
-            ffi.Pointer<objc.ObjCBlockImpl>,
-          )
-        >();
+final _objc_msgSend_2nhnqw = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Bool,
+          ffi.Bool,
+          ffi.Pointer<objc.ObjCBlockImpl>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        bool,
+        bool,
+        ffi.Pointer<objc.ObjCBlockImpl>,
+      )
+    >();
 late final _sel_deselectAnnotation_animated_ = objc.registerName(
   "deselectAnnotation:animated:",
 );
@@ -18717,72 +18644,69 @@ late final _sel_removeOverlays_ = objc.registerName("removeOverlays:");
 late final _sel_visibleFeaturesAtPoint_ = objc.registerName(
   "visibleFeaturesAtPoint:",
 );
-final _objc_msgSend_wgkxx2 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CGPoint,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CGPoint,
-          )
-        >();
+final _objc_msgSend_wgkxx2 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CGPoint,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CGPoint,
+      )
+    >();
 late final _sel_visibleFeaturesAtPoint_inStyleLayersWithIdentifiers_ = objc
     .registerName("visibleFeaturesAtPoint:inStyleLayersWithIdentifiers:");
-final _objc_msgSend_u7nfz8 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CGPoint,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CGPoint,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_u7nfz8 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CGPoint,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CGPoint,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 late final _sel_visibleFeaturesAtPoint_inStyleLayersWithIdentifiers_predicate_ =
     objc.registerName(
       "visibleFeaturesAtPoint:inStyleLayersWithIdentifiers:predicate:",
     );
-final _objc_msgSend_19l1l5m =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CGPoint,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CGPoint,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_19l1l5m = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CGPoint,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CGPoint,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 late final _sel_visibleFeaturesInRect_ = objc.registerName(
   "visibleFeaturesInRect:",
 );
@@ -18793,41 +18717,36 @@ late final _sel_visibleFeaturesInRect_inStyleLayersWithIdentifiers_predicate_ =
       "visibleFeaturesInRect:inStyleLayersWithIdentifiers:predicate:",
     );
 late final _sel_debugMask = objc.registerName("debugMask");
-final _objc_msgSend_1kwkjor =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.UnsignedLong Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          int Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
+final _objc_msgSend_1kwkjor = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.UnsignedLong Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      int Function(ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)
+    >();
 late final _sel_setDebugMask_ = objc.registerName("setDebugMask:");
-final _objc_msgSend_pisvbv =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.UnsignedLong,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            int,
-          )
-        >();
+final _objc_msgSend_pisvbv = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.UnsignedLong,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        int,
+      )
+    >();
 late final _sel_backendResource = objc.registerName("backendResource");
 late final _sel_triggerRepaint = objc.registerName("triggerRepaint");
 
@@ -19143,14 +19062,14 @@ class MLNMapView extends objc.ObjCObjectBase implements MLNStylable {
     final _ptr = pkg_ffi.calloc<CGPoint>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1uwdhlkStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_scaleBarMargins,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_scaleBarMargins,
+          )
         : _ptr.ref = _objc_msgSend_1uwdhlk(
-          this.ref.pointer,
-          _sel_scaleBarMargins,
-        );
+            this.ref.pointer,
+            _sel_scaleBarMargins,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<CGPoint>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -19195,14 +19114,14 @@ class MLNMapView extends objc.ObjCObjectBase implements MLNStylable {
     final _ptr = pkg_ffi.calloc<CGPoint>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1uwdhlkStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_compassViewMargins,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_compassViewMargins,
+          )
         : _ptr.ref = _objc_msgSend_1uwdhlk(
-          this.ref.pointer,
-          _sel_compassViewMargins,
-        );
+            this.ref.pointer,
+            _sel_compassViewMargins,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<CGPoint>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -19243,14 +19162,14 @@ class MLNMapView extends objc.ObjCObjectBase implements MLNStylable {
     final _ptr = pkg_ffi.calloc<CGPoint>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1uwdhlkStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_logoViewMargins,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_logoViewMargins,
+          )
         : _ptr.ref = _objc_msgSend_1uwdhlk(
-          this.ref.pointer,
-          _sel_logoViewMargins,
-        );
+            this.ref.pointer,
+            _sel_logoViewMargins,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<CGPoint>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -19302,14 +19221,14 @@ class MLNMapView extends objc.ObjCObjectBase implements MLNStylable {
     final _ptr = pkg_ffi.calloc<CGPoint>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1uwdhlkStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_attributionButtonMargins,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_attributionButtonMargins,
+          )
         : _ptr.ref = _objc_msgSend_1uwdhlk(
-          this.ref.pointer,
-          _sel_attributionButtonMargins,
-        );
+            this.ref.pointer,
+            _sel_attributionButtonMargins,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<CGPoint>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -19777,14 +19696,14 @@ class MLNMapView extends objc.ObjCObjectBase implements MLNStylable {
     final _ptr = pkg_ffi.calloc<CLLocationCoordinate2D>();
     objc.useMsgSendVariants
         ? _objc_msgSend_18o5nokStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_targetCoordinate,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_targetCoordinate,
+          )
         : _ptr.ref = _objc_msgSend_18o5nok(
-          this.ref.pointer,
-          _sel_targetCoordinate,
-        );
+            this.ref.pointer,
+            _sel_targetCoordinate,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<CLLocationCoordinate2D>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -20103,14 +20022,14 @@ class MLNMapView extends objc.ObjCObjectBase implements MLNStylable {
     final _ptr = pkg_ffi.calloc<CLLocationCoordinate2D>();
     objc.useMsgSendVariants
         ? _objc_msgSend_18o5nokStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_centerCoordinate,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_centerCoordinate,
+          )
         : _ptr.ref = _objc_msgSend_18o5nok(
-          this.ref.pointer,
-          _sel_centerCoordinate,
-        );
+            this.ref.pointer,
+            _sel_centerCoordinate,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<CLLocationCoordinate2D>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -20353,14 +20272,14 @@ class MLNMapView extends objc.ObjCObjectBase implements MLNStylable {
     final _ptr = pkg_ffi.calloc<MLNCoordinateBounds>();
     objc.useMsgSendVariants
         ? _objc_msgSend_ygoa6aStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_maximumScreenBounds,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_maximumScreenBounds,
+          )
         : _ptr.ref = _objc_msgSend_ygoa6a(
-          this.ref.pointer,
-          _sel_maximumScreenBounds,
-        );
+            this.ref.pointer,
+            _sel_maximumScreenBounds,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNCoordinateBounds>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -20497,14 +20416,14 @@ class MLNMapView extends objc.ObjCObjectBase implements MLNStylable {
     final _ptr = pkg_ffi.calloc<MLNCoordinateBounds>();
     objc.useMsgSendVariants
         ? _objc_msgSend_ygoa6aStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_visibleCoordinateBounds,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_visibleCoordinateBounds,
+          )
         : _ptr.ref = _objc_msgSend_ygoa6a(
-          this.ref.pointer,
-          _sel_visibleCoordinateBounds,
-        );
+            this.ref.pointer,
+            _sel_visibleCoordinateBounds,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNCoordinateBounds>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -21151,16 +21070,16 @@ class MLNMapView extends objc.ObjCObjectBase implements MLNStylable {
     final _ptr = pkg_ffi.calloc<CGPoint>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1mpyy6yStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_anchorPointForGesture_,
-          gesture.ref.pointer,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_anchorPointForGesture_,
+            gesture.ref.pointer,
+          )
         : _ptr.ref = _objc_msgSend_1mpyy6y(
-          this.ref.pointer,
-          _sel_anchorPointForGesture_,
-          gesture.ref.pointer,
-        );
+            this.ref.pointer,
+            _sel_anchorPointForGesture_,
+            gesture.ref.pointer,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<CGPoint>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -21314,18 +21233,18 @@ class MLNMapView extends objc.ObjCObjectBase implements MLNStylable {
     final _ptr = pkg_ffi.calloc<CLLocationCoordinate2D>();
     objc.useMsgSendVariants
         ? _objc_msgSend_4xp05xStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_convertPoint_toCoordinateFromView_,
-          point,
-          view.ref.pointer,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_convertPoint_toCoordinateFromView_,
+            point,
+            view.ref.pointer,
+          )
         : _ptr.ref = _objc_msgSend_4xp05x(
-          this.ref.pointer,
-          _sel_convertPoint_toCoordinateFromView_,
-          point,
-          view.ref.pointer,
-        );
+            this.ref.pointer,
+            _sel_convertPoint_toCoordinateFromView_,
+            point,
+            view.ref.pointer,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<CLLocationCoordinate2D>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -21353,18 +21272,18 @@ class MLNMapView extends objc.ObjCObjectBase implements MLNStylable {
     final _ptr = pkg_ffi.calloc<CGPoint>();
     objc.useMsgSendVariants
         ? _objc_msgSend_mus1wvStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_convertCoordinate_toPointToView_,
-          coordinate,
-          view.ref.pointer,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_convertCoordinate_toPointToView_,
+            coordinate,
+            view.ref.pointer,
+          )
         : _ptr.ref = _objc_msgSend_mus1wv(
-          this.ref.pointer,
-          _sel_convertCoordinate_toPointToView_,
-          coordinate,
-          view.ref.pointer,
-        );
+            this.ref.pointer,
+            _sel_convertCoordinate_toPointToView_,
+            coordinate,
+            view.ref.pointer,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<CGPoint>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -21389,18 +21308,18 @@ class MLNMapView extends objc.ObjCObjectBase implements MLNStylable {
     final _ptr = pkg_ffi.calloc<MLNCoordinateBounds>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1f65wixStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_convertRect_toCoordinateBoundsFromView_,
-          rect,
-          view.ref.pointer,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_convertRect_toCoordinateBoundsFromView_,
+            rect,
+            view.ref.pointer,
+          )
         : _ptr.ref = _objc_msgSend_1f65wix(
-          this.ref.pointer,
-          _sel_convertRect_toCoordinateBoundsFromView_,
-          rect,
-          view.ref.pointer,
-        );
+            this.ref.pointer,
+            _sel_convertRect_toCoordinateBoundsFromView_,
+            rect,
+            view.ref.pointer,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNCoordinateBounds>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -21428,18 +21347,18 @@ class MLNMapView extends objc.ObjCObjectBase implements MLNStylable {
     final _ptr = pkg_ffi.calloc<CGRect>();
     objc.useMsgSendVariants
         ? _objc_msgSend_18hv5gjStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_convertCoordinateBounds_toRectToView_,
-          bounds,
-          view.ref.pointer,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_convertCoordinateBounds_toRectToView_,
+            bounds,
+            view.ref.pointer,
+          )
         : _ptr.ref = _objc_msgSend_18hv5gj(
-          this.ref.pointer,
-          _sel_convertCoordinateBounds_toRectToView_,
-          bounds,
-          view.ref.pointer,
-        );
+            this.ref.pointer,
+            _sel_convertCoordinateBounds_toRectToView_,
+            bounds,
+            view.ref.pointer,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<CGRect>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -21460,15 +21379,15 @@ class MLNMapView extends objc.ObjCObjectBase implements MLNStylable {
   double metersPerPointAtLatitude_(double latitude) {
     return objc.useMsgSendVariants
         ? _objc_msgSend_1tczmpvFpret(
-          this.ref.pointer,
-          _sel_metersPerPointAtLatitude_,
-          latitude,
-        )
+            this.ref.pointer,
+            _sel_metersPerPointAtLatitude_,
+            latitude,
+          )
         : _objc_msgSend_1tczmpv(
-          this.ref.pointer,
-          _sel_metersPerPointAtLatitude_,
-          latitude,
-        );
+            this.ref.pointer,
+            _sel_metersPerPointAtLatitude_,
+            latitude,
+          );
   }
 
   /// Returns the new map projection instance initialized with the map view,
@@ -22880,68 +22799,65 @@ late final _sel_featuresMatchingPredicate_ = objc.registerName(
 late final _sel_leavesOfCluster_offset_limit_ = objc.registerName(
   "leavesOfCluster:offset:limit:",
 );
-final _objc_msgSend_17wuhyd =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.UnsignedLong,
-              ffi.UnsignedLong,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            int,
-            int,
-          )
-        >();
+final _objc_msgSend_17wuhyd = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.UnsignedLong,
+          ffi.UnsignedLong,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        int,
+        int,
+      )
+    >();
 late final _sel_childrenOfCluster_ = objc.registerName("childrenOfCluster:");
 late final _sel_zoomLevelForExpandingCluster_ = objc.registerName(
   "zoomLevelForExpandingCluster:",
 );
-final _objc_msgSend_mabicu =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Double Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          double Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
-final _objc_msgSend_mabicuFpret =
-    objc.msgSendFpretPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Double Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          double Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_mabicu = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Double Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      double Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
+final _objc_msgSend_mabicuFpret = objc.msgSendFpretPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Double Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      double Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 
 /// ``MLNShapeSource`` is a map content source that supplies vector shapes to be
 /// shown on the map. The shapes may be instances of ``MLNShape`` or ``MLNShape``,
@@ -23315,15 +23231,15 @@ class MLNShapeSource extends MLNSource {
   double zoomLevelForExpandingCluster_(MLNPointFeatureCluster cluster) {
     return objc.useMsgSendVariants
         ? _objc_msgSend_mabicuFpret(
-          this.ref.pointer,
-          _sel_zoomLevelForExpandingCluster_,
-          cluster.ref.pointer,
-        )
+            this.ref.pointer,
+            _sel_zoomLevelForExpandingCluster_,
+            cluster.ref.pointer,
+          )
         : _objc_msgSend_mabicu(
-          this.ref.pointer,
-          _sel_zoomLevelForExpandingCluster_,
-          cluster.ref.pointer,
-        );
+            this.ref.pointer,
+            _sel_zoomLevelForExpandingCluster_,
+            cluster.ref.pointer,
+          );
   }
 
   /// init
@@ -23405,87 +23321,83 @@ late final _class_MLNImageSource = objc.getClass("MLNImageSource");
 late final _sel_initWithIdentifier_coordinateQuad_URL_ = objc.registerName(
   "initWithIdentifier:coordinateQuad:URL:",
 );
-final _objc_msgSend_judg3a =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              MLNCoordinateQuad,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            MLNCoordinateQuad,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_judg3a = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          MLNCoordinateQuad,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        MLNCoordinateQuad,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 late final _sel_initWithIdentifier_coordinateQuad_image_ = objc.registerName(
   "initWithIdentifier:coordinateQuad:image:",
 );
 late final _sel_image = objc.registerName("image");
 late final _sel_setImage_ = objc.registerName("setImage:");
 late final _sel_coordinates = objc.registerName("coordinates");
-final _objc_msgSend_1ua371c =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            MLNCoordinateQuad Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          MLNCoordinateQuad Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
-final _objc_msgSend_1ua371cStret =
-    objc.msgSendStretPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<MLNCoordinateQuad>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<MLNCoordinateQuad>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
+final _objc_msgSend_1ua371c = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        MLNCoordinateQuad Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      MLNCoordinateQuad Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+      )
+    >();
+final _objc_msgSend_1ua371cStret = objc.msgSendStretPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<MLNCoordinateQuad>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<MLNCoordinateQuad>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+      )
+    >();
 late final _sel_setCoordinates_ = objc.registerName("setCoordinates:");
-final _objc_msgSend_1wvd2xm =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              MLNCoordinateQuad,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            MLNCoordinateQuad,
-          )
-        >();
+final _objc_msgSend_1wvd2xm = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          MLNCoordinateQuad,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        MLNCoordinateQuad,
+      )
+    >();
 
 /// ``MLNImageSource`` is a content source that is used for a georeferenced raster
 /// image to be shown on the map. The georeferenced image scales and rotates as the
@@ -24443,14 +24355,14 @@ class MLNBackgroundStyleLayer extends MLNStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_backgroundColorTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_backgroundColorTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_backgroundColorTransition,
-        );
+            this.ref.pointer,
+            _sel_backgroundColorTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -24522,14 +24434,14 @@ class MLNBackgroundStyleLayer extends MLNStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_backgroundOpacityTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_backgroundOpacityTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_backgroundOpacityTransition,
-        );
+            this.ref.pointer,
+            _sel_backgroundOpacityTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -24601,14 +24513,14 @@ class MLNBackgroundStyleLayer extends MLNStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_backgroundPatternTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_backgroundPatternTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_backgroundPatternTransition,
-        );
+            this.ref.pointer,
+            _sel_backgroundPatternTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -25353,14 +25265,14 @@ class MLNCircleStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_circleBlurTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_circleBlurTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_circleBlurTransition,
-        );
+            this.ref.pointer,
+            _sel_circleBlurTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -25427,14 +25339,14 @@ class MLNCircleStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_circleColorTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_circleColorTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_circleColorTransition,
-        );
+            this.ref.pointer,
+            _sel_circleColorTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -25499,14 +25411,14 @@ class MLNCircleStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_circleOpacityTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_circleOpacityTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_circleOpacityTransition,
-        );
+            this.ref.pointer,
+            _sel_circleOpacityTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -25629,14 +25541,14 @@ class MLNCircleStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_circleRadiusTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_circleRadiusTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_circleRadiusTransition,
-        );
+            this.ref.pointer,
+            _sel_circleRadiusTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -25785,14 +25697,14 @@ class MLNCircleStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_circleStrokeColorTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_circleStrokeColorTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_circleStrokeColorTransition,
-        );
+            this.ref.pointer,
+            _sel_circleStrokeColorTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -25860,14 +25772,14 @@ class MLNCircleStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_circleStrokeOpacityTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_circleStrokeOpacityTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_circleStrokeOpacityTransition,
-        );
+            this.ref.pointer,
+            _sel_circleStrokeOpacityTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -25941,14 +25853,14 @@ class MLNCircleStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_circleStrokeWidthTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_circleStrokeWidthTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_circleStrokeWidthTransition,
-        );
+            this.ref.pointer,
+            _sel_circleStrokeWidthTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -26034,14 +25946,14 @@ class MLNCircleStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_circleTranslationTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_circleTranslationTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_circleTranslationTransition,
-        );
+            this.ref.pointer,
+            _sel_circleTranslationTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -26487,14 +26399,14 @@ class MLNFillExtrusionStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_fillExtrusionBaseTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_fillExtrusionBaseTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_fillExtrusionBaseTransition,
-        );
+            this.ref.pointer,
+            _sel_fillExtrusionBaseTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -26576,14 +26488,14 @@ class MLNFillExtrusionStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_fillExtrusionColorTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_fillExtrusionColorTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_fillExtrusionColorTransition,
-        );
+            this.ref.pointer,
+            _sel_fillExtrusionColorTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -26731,14 +26643,14 @@ class MLNFillExtrusionStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_fillExtrusionHeightTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_fillExtrusionHeightTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_fillExtrusionHeightTransition,
-        );
+            this.ref.pointer,
+            _sel_fillExtrusionHeightTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -26812,14 +26724,14 @@ class MLNFillExtrusionStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_fillExtrusionOpacityTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_fillExtrusionOpacityTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_fillExtrusionOpacityTransition,
-        );
+            this.ref.pointer,
+            _sel_fillExtrusionOpacityTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -26885,14 +26797,14 @@ class MLNFillExtrusionStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_fillExtrusionPatternTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_fillExtrusionPatternTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_fillExtrusionPatternTransition,
-        );
+            this.ref.pointer,
+            _sel_fillExtrusionPatternTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -26978,14 +26890,14 @@ class MLNFillExtrusionStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_fillExtrusionTranslationTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_fillExtrusionTranslationTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_fillExtrusionTranslationTransition,
-        );
+            this.ref.pointer,
+            _sel_fillExtrusionTranslationTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -27505,14 +27417,14 @@ class MLNFillStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_fillColorTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_fillColorTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_fillColorTransition,
-        );
+            this.ref.pointer,
+            _sel_fillColorTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -27575,14 +27487,14 @@ class MLNFillStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_fillOpacityTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_fillOpacityTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_fillOpacityTransition,
-        );
+            this.ref.pointer,
+            _sel_fillOpacityTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -27649,14 +27561,14 @@ class MLNFillStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_fillOutlineColorTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_fillOutlineColorTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_fillOutlineColorTransition,
-        );
+            this.ref.pointer,
+            _sel_fillOutlineColorTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -27719,14 +27631,14 @@ class MLNFillStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_fillPatternTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_fillPatternTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_fillPatternTransition,
-        );
+            this.ref.pointer,
+            _sel_fillPatternTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -27809,14 +27721,14 @@ class MLNFillStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_fillTranslationTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_fillTranslationTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_fillTranslationTransition,
-        );
+            this.ref.pointer,
+            _sel_fillTranslationTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -28232,14 +28144,14 @@ class MLNHeatmapStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_heatmapIntensityTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_heatmapIntensityTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_heatmapIntensityTransition,
-        );
+            this.ref.pointer,
+            _sel_heatmapIntensityTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -28308,14 +28220,14 @@ class MLNHeatmapStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_heatmapOpacityTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_heatmapOpacityTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_heatmapOpacityTransition,
-        );
+            this.ref.pointer,
+            _sel_heatmapOpacityTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -28386,14 +28298,14 @@ class MLNHeatmapStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_heatmapRadiusTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_heatmapRadiusTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_heatmapRadiusTransition,
-        );
+            this.ref.pointer,
+            _sel_heatmapRadiusTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -28742,14 +28654,14 @@ class MLNHillshadeStyleLayer extends MLNForegroundStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_hillshadeAccentColorTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_hillshadeAccentColorTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_hillshadeAccentColorTransition,
-        );
+            this.ref.pointer,
+            _sel_hillshadeAccentColorTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -28821,14 +28733,14 @@ class MLNHillshadeStyleLayer extends MLNForegroundStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_hillshadeExaggerationTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_hillshadeExaggerationTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_hillshadeExaggerationTransition,
-        );
+            this.ref.pointer,
+            _sel_hillshadeExaggerationTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -28902,14 +28814,14 @@ class MLNHillshadeStyleLayer extends MLNForegroundStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_hillshadeHighlightColorTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_hillshadeHighlightColorTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_hillshadeHighlightColorTransition,
-        );
+            this.ref.pointer,
+            _sel_hillshadeHighlightColorTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -29091,14 +29003,14 @@ class MLNHillshadeStyleLayer extends MLNForegroundStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_hillshadeShadowColorTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_hillshadeShadowColorTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_hillshadeShadowColorTransition,
-        );
+            this.ref.pointer,
+            _sel_hillshadeShadowColorTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -29678,14 +29590,14 @@ class MLNLineStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_lineBlurTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_lineBlurTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_lineBlurTransition,
-        );
+            this.ref.pointer,
+            _sel_lineBlurTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -29754,14 +29666,14 @@ class MLNLineStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_lineColorTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_lineColorTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_lineColorTransition,
-        );
+            this.ref.pointer,
+            _sel_lineColorTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -29850,14 +29762,14 @@ class MLNLineStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_lineDashPatternTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_lineDashPatternTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_lineDashPatternTransition,
-        );
+            this.ref.pointer,
+            _sel_lineDashPatternTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -29943,14 +29855,14 @@ class MLNLineStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_lineGapWidthTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_lineGapWidthTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_lineGapWidthTransition,
-        );
+            this.ref.pointer,
+            _sel_lineGapWidthTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -30074,14 +29986,14 @@ class MLNLineStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_lineOffsetTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_lineOffsetTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_lineOffsetTransition,
-        );
+            this.ref.pointer,
+            _sel_lineOffsetTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -30146,14 +30058,14 @@ class MLNLineStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_lineOpacityTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_lineOpacityTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_lineOpacityTransition,
-        );
+            this.ref.pointer,
+            _sel_lineOpacityTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -30214,14 +30126,14 @@ class MLNLineStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_linePatternTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_linePatternTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_linePatternTransition,
-        );
+            this.ref.pointer,
+            _sel_linePatternTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -30304,14 +30216,14 @@ class MLNLineStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_lineTranslationTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_lineTranslationTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_lineTranslationTransition,
-        );
+            this.ref.pointer,
+            _sel_lineTranslationTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -30481,14 +30393,14 @@ class MLNLineStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_lineWidthTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_lineWidthTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_lineWidthTransition,
-        );
+            this.ref.pointer,
+            _sel_lineWidthTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -30815,14 +30727,14 @@ class MLNRasterStyleLayer extends MLNForegroundStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_maximumRasterBrightnessTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_maximumRasterBrightnessTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_maximumRasterBrightnessTransition,
-        );
+            this.ref.pointer,
+            _sel_maximumRasterBrightnessTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -30922,14 +30834,14 @@ class MLNRasterStyleLayer extends MLNForegroundStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_minimumRasterBrightnessTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_minimumRasterBrightnessTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_minimumRasterBrightnessTransition,
-        );
+            this.ref.pointer,
+            _sel_minimumRasterBrightnessTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -31016,14 +30928,14 @@ class MLNRasterStyleLayer extends MLNForegroundStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_rasterContrastTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_rasterContrastTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_rasterContrastTransition,
-        );
+            this.ref.pointer,
+            _sel_rasterContrastTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -31159,14 +31071,14 @@ class MLNRasterStyleLayer extends MLNForegroundStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_rasterHueRotationTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_rasterHueRotationTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_rasterHueRotationTransition,
-        );
+            this.ref.pointer,
+            _sel_rasterHueRotationTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -31250,14 +31162,14 @@ class MLNRasterStyleLayer extends MLNForegroundStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_rasterOpacityTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_rasterOpacityTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_rasterOpacityTransition,
-        );
+            this.ref.pointer,
+            _sel_rasterOpacityTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -31413,14 +31325,14 @@ class MLNRasterStyleLayer extends MLNForegroundStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_rasterSaturationTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_rasterSaturationTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_rasterSaturationTransition,
-        );
+            this.ref.pointer,
+            _sel_rasterSaturationTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -34878,14 +34790,14 @@ class MLNSymbolStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_iconColorTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_iconColorTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_iconColorTransition,
-        );
+            this.ref.pointer,
+            _sel_iconColorTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -34956,14 +34868,14 @@ class MLNSymbolStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_iconHaloBlurTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_iconHaloBlurTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_iconHaloBlurTransition,
-        );
+            this.ref.pointer,
+            _sel_iconHaloBlurTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -35038,14 +34950,14 @@ class MLNSymbolStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_iconHaloColorTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_iconHaloColorTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_iconHaloColorTransition,
-        );
+            this.ref.pointer,
+            _sel_iconHaloColorTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -35126,14 +35038,14 @@ class MLNSymbolStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_iconHaloWidthTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_iconHaloWidthTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_iconHaloWidthTransition,
-        );
+            this.ref.pointer,
+            _sel_iconHaloWidthTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -35204,14 +35116,14 @@ class MLNSymbolStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_iconOpacityTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_iconOpacityTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_iconOpacityTransition,
-        );
+            this.ref.pointer,
+            _sel_iconOpacityTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -35300,14 +35212,14 @@ class MLNSymbolStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_iconTranslationTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_iconTranslationTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_iconTranslationTransition,
-        );
+            this.ref.pointer,
+            _sel_iconTranslationTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -35481,14 +35393,14 @@ class MLNSymbolStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_textColorTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_textColorTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_textColorTransition,
-        );
+            this.ref.pointer,
+            _sel_textColorTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -35559,14 +35471,14 @@ class MLNSymbolStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_textHaloBlurTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_textHaloBlurTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_textHaloBlurTransition,
-        );
+            this.ref.pointer,
+            _sel_textHaloBlurTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -35639,14 +35551,14 @@ class MLNSymbolStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_textHaloColorTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_textHaloColorTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_textHaloColorTransition,
-        );
+            this.ref.pointer,
+            _sel_textHaloColorTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -35723,14 +35635,14 @@ class MLNSymbolStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_textHaloWidthTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_textHaloWidthTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_textHaloWidthTransition,
-        );
+            this.ref.pointer,
+            _sel_textHaloWidthTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -35801,14 +35713,14 @@ class MLNSymbolStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_textOpacityTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_textOpacityTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_textOpacityTransition,
-        );
+            this.ref.pointer,
+            _sel_textOpacityTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -35897,14 +35809,14 @@ class MLNSymbolStyleLayer extends MLNVectorStyleLayer {
     final _ptr = pkg_ffi.calloc<MLNTransition>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1i0p3hyStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_textTranslationTransition,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_textTranslationTransition,
+          )
         : _ptr.ref = _objc_msgSend_1i0p3hy(
-          this.ref.pointer,
-          _sel_textTranslationTransition,
-        );
+            this.ref.pointer,
+            _sel_textTranslationTransition,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<MLNTransition>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -36128,8 +36040,9 @@ enum MLNAttributionInfoStyle {
     1 => MLNAttributionInfoStyleShort,
     2 => MLNAttributionInfoStyleMedium,
     3 => MLNAttributionInfoStyleLong,
-    _ =>
-      throw ArgumentError('Unknown value for MLNAttributionInfoStyle: $value'),
+    _ => throw ArgumentError(
+      'Unknown value for MLNAttributionInfoStyle: $value',
+    ),
   };
 }
 
@@ -36138,24 +36051,23 @@ late final _sel_initWithTitle_URL_ = objc.registerName("initWithTitle:URL:");
 late final _sel_isFeedbackLink = objc.registerName("isFeedbackLink");
 late final _sel_setFeedbackLink_ = objc.registerName("setFeedbackLink:");
 late final _sel_titleWithStyle_ = objc.registerName("titleWithStyle:");
-final _objc_msgSend_1sadrrm =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.UnsignedLong,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            int,
-          )
-        >();
+final _objc_msgSend_1sadrrm = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.UnsignedLong,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        int,
+      )
+    >();
 
 /// Information about an attribution statement, usually a copyright or trademark
 /// statement, associated with a map content source.
@@ -36437,8 +36349,9 @@ enum NSColorRenderingIntent {
     2 => NSColorRenderingIntentRelativeColorimetric,
     3 => NSColorRenderingIntentPerceptual,
     4 => NSColorRenderingIntentSaturation,
-    _ =>
-      throw ArgumentError('Unknown value for NSColorRenderingIntent: $value'),
+    _ => throw ArgumentError(
+      'Unknown value for NSColorRenderingIntent: $value',
+    ),
   };
 }
 
@@ -36504,10 +36417,9 @@ enum NSAccessibilityOrientation {
     0 => NSAccessibilityOrientationUnknown,
     1 => NSAccessibilityOrientationVertical,
     2 => NSAccessibilityOrientationHorizontal,
-    _ =>
-      throw ArgumentError(
-        'Unknown value for NSAccessibilityOrientation: $value',
-      ),
+    _ => throw ArgumentError(
+      'Unknown value for NSAccessibilityOrientation: $value',
+    ),
   };
 }
 
@@ -36523,10 +36435,9 @@ enum NSAccessibilitySortDirection {
     0 => NSAccessibilitySortDirectionUnknown,
     1 => NSAccessibilitySortDirectionAscending,
     2 => NSAccessibilitySortDirectionDescending,
-    _ =>
-      throw ArgumentError(
-        'Unknown value for NSAccessibilitySortDirection: $value',
-      ),
+    _ => throw ArgumentError(
+      'Unknown value for NSAccessibilitySortDirection: $value',
+    ),
   };
 }
 
@@ -36552,10 +36463,9 @@ enum NSAccessibilityRulerMarkerType {
     5 => NSAccessibilityRulerMarkerTypeIndentHead,
     6 => NSAccessibilityRulerMarkerTypeIndentTail,
     7 => NSAccessibilityRulerMarkerTypeIndentFirstLine,
-    _ =>
-      throw ArgumentError(
-        'Unknown value for NSAccessibilityRulerMarkerType: $value',
-      ),
+    _ => throw ArgumentError(
+      'Unknown value for NSAccessibilityRulerMarkerType: $value',
+    ),
   };
 }
 
@@ -36678,10 +36588,9 @@ enum CGImagePropertyOrientation {
     6 => kCGImagePropertyOrientationRight,
     7 => kCGImagePropertyOrientationRightMirrored,
     8 => kCGImagePropertyOrientationLeft,
-    _ =>
-      throw ArgumentError(
-        'Unknown value for CGImagePropertyOrientation: $value',
-      ),
+    _ => throw ArgumentError(
+      'Unknown value for CGImagePropertyOrientation: $value',
+    ),
   };
 }
 
@@ -36953,10 +36862,9 @@ enum NSEventSwipeTrackingOptions {
   static NSEventSwipeTrackingOptions fromValue(int value) => switch (value) {
     1 => NSEventSwipeTrackingLockDirection,
     2 => NSEventSwipeTrackingClampGestureAmount,
-    _ =>
-      throw ArgumentError(
-        'Unknown value for NSEventSwipeTrackingOptions: $value',
-      ),
+    _ => throw ArgumentError(
+      'Unknown value for NSEventSwipeTrackingOptions: $value',
+    ),
   };
 }
 
@@ -37031,10 +36939,9 @@ enum NSPasteboardContentsOptions {
 
   static NSPasteboardContentsOptions fromValue(int value) => switch (value) {
     1 => NSPasteboardContentsCurrentHostOnly,
-    _ =>
-      throw ArgumentError(
-        'Unknown value for NSPasteboardContentsOptions: $value',
-      ),
+    _ => throw ArgumentError(
+      'Unknown value for NSPasteboardContentsOptions: $value',
+    ),
   };
 }
 
@@ -37198,8 +37105,9 @@ enum NSAnimationBlockingMode {
     0 => NSAnimationBlocking,
     1 => NSAnimationNonblocking,
     2 => NSAnimationNonblockingThreaded,
-    _ =>
-      throw ArgumentError('Unknown value for NSAnimationBlockingMode: $value'),
+    _ => throw ArgumentError(
+      'Unknown value for NSAnimationBlockingMode: $value',
+    ),
   };
 }
 
@@ -37285,10 +37193,9 @@ enum NSDraggingItemEnumerationOptions {
       switch (value) {
         1 => NSDraggingItemEnumerationConcurrent,
         65536 => NSDraggingItemEnumerationClearNonenumeratedImages,
-        _ =>
-          throw ArgumentError(
-            'Unknown value for NSDraggingItemEnumerationOptions: $value',
-          ),
+        _ => throw ArgumentError(
+          'Unknown value for NSDraggingItemEnumerationOptions: $value',
+        ),
       };
 }
 
@@ -37304,8 +37211,9 @@ enum NSSpringLoadingHighlight {
     0 => NSSpringLoadingHighlightNone,
     1 => NSSpringLoadingHighlightStandard,
     2 => NSSpringLoadingHighlightEmphasized,
-    _ =>
-      throw ArgumentError('Unknown value for NSSpringLoadingHighlight: $value'),
+    _ => throw ArgumentError(
+      'Unknown value for NSSpringLoadingHighlight: $value',
+    ),
   };
 }
 
@@ -37319,10 +37227,9 @@ enum NSUserInterfaceLayoutDirection {
   static NSUserInterfaceLayoutDirection fromValue(int value) => switch (value) {
     0 => NSUserInterfaceLayoutDirectionLeftToRight,
     1 => NSUserInterfaceLayoutDirectionRightToLeft,
-    _ =>
-      throw ArgumentError(
-        'Unknown value for NSUserInterfaceLayoutDirection: $value',
-      ),
+    _ => throw ArgumentError(
+      'Unknown value for NSUserInterfaceLayoutDirection: $value',
+    ),
   };
 }
 
@@ -37346,10 +37253,9 @@ enum NSAutoresizingMaskOptions {
     8 => NSViewMinYMargin,
     16 => NSViewHeightSizable,
     32 => NSViewMaxYMargin,
-    _ =>
-      throw ArgumentError(
-        'Unknown value for NSAutoresizingMaskOptions: $value',
-      ),
+    _ => throw ArgumentError(
+      'Unknown value for NSAutoresizingMaskOptions: $value',
+    ),
   };
 }
 
@@ -37388,10 +37294,9 @@ enum NSViewLayerContentsRedrawPolicy {
         2 => NSViewLayerContentsRedrawDuringViewResize,
         3 => NSViewLayerContentsRedrawBeforeViewResize,
         4 => NSViewLayerContentsRedrawCrossfade,
-        _ =>
-          throw ArgumentError(
-            'Unknown value for NSViewLayerContentsRedrawPolicy: $value',
-          ),
+        _ => throw ArgumentError(
+          'Unknown value for NSViewLayerContentsRedrawPolicy: $value',
+        ),
       };
 }
 
@@ -37425,10 +37330,9 @@ enum NSViewLayerContentsPlacement {
     9 => NSViewLayerContentsPlacementBottomLeft,
     10 => NSViewLayerContentsPlacementLeft,
     11 => NSViewLayerContentsPlacementTopLeft,
-    _ =>
-      throw ArgumentError(
-        'Unknown value for NSViewLayerContentsPlacement: $value',
-      ),
+    _ => throw ArgumentError(
+      'Unknown value for NSViewLayerContentsPlacement: $value',
+    ),
   };
 }
 
@@ -37749,8 +37653,9 @@ enum NSMenuPresentationStyle {
   static NSMenuPresentationStyle fromValue(int value) => switch (value) {
     0 => NSMenuPresentationStyleRegular,
     1 => NSMenuPresentationStylePalette,
-    _ =>
-      throw ArgumentError('Unknown value for NSMenuPresentationStyle: $value'),
+    _ => throw ArgumentError(
+      'Unknown value for NSMenuPresentationStyle: $value',
+    ),
   };
 }
 
@@ -37827,10 +37732,9 @@ enum NSApplicationPresentationOptions {
         1024 => NSApplicationPresentationFullScreen,
         2048 => NSApplicationPresentationAutoHideToolbar,
         4096 => NSApplicationPresentationDisableCursorLocationAssistance,
-        _ =>
-          throw ArgumentError(
-            'Unknown value for NSApplicationPresentationOptions: $value',
-          ),
+        _ => throw ArgumentError(
+          'Unknown value for NSApplicationPresentationOptions: $value',
+        ),
       };
 }
 
@@ -38015,26 +37919,29 @@ ffi.Pointer<objc.ObjCObject> _ObjCBlock_objcObjCObject_NSCoder_fnPtrTrampoline(
     >()(arg0);
 ffi.Pointer<ffi.Void> _ObjCBlock_objcObjCObject_NSCoder_fnPtrCallable =
     ffi.Pointer.fromFunction<
-      ffi.Pointer<objc.ObjCObject> Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<objc.ObjCObject>,
-      )
-    >(_ObjCBlock_objcObjCObject_NSCoder_fnPtrTrampoline).cast();
+          ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<objc.ObjCObject>,
+          )
+        >(_ObjCBlock_objcObjCObject_NSCoder_fnPtrTrampoline)
+        .cast();
 ffi.Pointer<objc.ObjCObject>
 _ObjCBlock_objcObjCObject_NSCoder_closureTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<objc.ObjCObject> arg0,
-) => (objc.getBlockClosure(block)
-    as ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject>))(
-  arg0,
-);
+) =>
+    (objc.getBlockClosure(block)
+        as ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject>))(
+      arg0,
+    );
 ffi.Pointer<ffi.Void> _ObjCBlock_objcObjCObject_NSCoder_closureCallable =
     ffi.Pointer.fromFunction<
-      ffi.Pointer<objc.ObjCObject> Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<objc.ObjCObject>,
-      )
-    >(_ObjCBlock_objcObjCObject_NSCoder_closureTrampoline).cast();
+          ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<objc.ObjCObject>,
+          )
+        >(_ObjCBlock_objcObjCObject_NSCoder_closureTrampoline)
+        .cast();
 
 /// Construction methods for `objc.ObjCBlock<ffi.Pointer<objc.ObjCObject>? Function(objc.NSCoder)>`.
 abstract final class ObjCBlock_objcObjCObject_NSCoder {
@@ -38104,42 +38011,42 @@ extension ObjCBlock_objcObjCObject_NSCoder_CallExtension
     on objc.ObjCBlock<ffi.Pointer<objc.ObjCObject>? Function(objc.NSCoder)> {
   objc.ObjCObjectBase? call(objc.NSCoder arg0) =>
       ref.pointer.ref.invoke
-                  .cast<
-                    ffi.NativeFunction<
-                      ffi.Pointer<objc.ObjCObject> Function(
-                        ffi.Pointer<objc.ObjCBlockImpl> block,
-                        ffi.Pointer<objc.ObjCObject> arg0,
-                      )
-                    >
-                  >()
-                  .asFunction<
-                    ffi.Pointer<objc.ObjCObject> Function(
-                      ffi.Pointer<objc.ObjCBlockImpl>,
-                      ffi.Pointer<objc.ObjCObject>,
-                    )
-                  >()(ref.pointer, arg0.ref.pointer)
-                  .address ==
-              0
-          ? null
-          : objc.ObjCObjectBase(
-            ref.pointer.ref.invoke
-                .cast<
-                  ffi.NativeFunction<
-                    ffi.Pointer<objc.ObjCObject> Function(
-                      ffi.Pointer<objc.ObjCBlockImpl> block,
-                      ffi.Pointer<objc.ObjCObject> arg0,
-                    )
-                  >
-                >()
-                .asFunction<
+              .cast<
+                ffi.NativeFunction<
                   ffi.Pointer<objc.ObjCObject> Function(
-                    ffi.Pointer<objc.ObjCBlockImpl>,
-                    ffi.Pointer<objc.ObjCObject>,
+                    ffi.Pointer<objc.ObjCBlockImpl> block,
+                    ffi.Pointer<objc.ObjCObject> arg0,
                   )
-                >()(ref.pointer, arg0.ref.pointer),
-            retain: true,
-            release: true,
-          );
+                >
+              >()
+              .asFunction<
+                ffi.Pointer<objc.ObjCObject> Function(
+                  ffi.Pointer<objc.ObjCBlockImpl>,
+                  ffi.Pointer<objc.ObjCObject>,
+                )
+              >()(ref.pointer, arg0.ref.pointer)
+              .address ==
+          0
+      ? null
+      : objc.ObjCObjectBase(
+          ref.pointer.ref.invoke
+              .cast<
+                ffi.NativeFunction<
+                  ffi.Pointer<objc.ObjCObject> Function(
+                    ffi.Pointer<objc.ObjCBlockImpl> block,
+                    ffi.Pointer<objc.ObjCObject> arg0,
+                  )
+                >
+              >()
+              .asFunction<
+                ffi.Pointer<objc.ObjCObject> Function(
+                  ffi.Pointer<objc.ObjCBlockImpl>,
+                  ffi.Pointer<objc.ObjCObject>,
+                )
+              >()(ref.pointer, arg0.ref.pointer),
+          retain: true,
+          release: true,
+        );
 }
 
 enum NSViewControllerTransitionOptions {
@@ -38167,10 +38074,9 @@ enum NSViewControllerTransitionOptions {
         320 => NSViewControllerTransitionSlideForward,
         384 => NSViewControllerTransitionSlideBackward,
         4096 => NSViewControllerTransitionAllowUserInteraction,
-        _ =>
-          throw ArgumentError(
-            'Unknown value for NSViewControllerTransitionOptions: $value',
-          ),
+        _ => throw ArgumentError(
+          'Unknown value for NSViewControllerTransitionOptions: $value',
+        ),
       };
 }
 
@@ -38186,8 +38092,9 @@ enum NSHorizontalDirections {
     1 => NSHorizontalDirectionsLeft,
     2 => NSHorizontalDirectionsRight,
     3 => NSHorizontalDirectionsAll,
-    _ =>
-      throw ArgumentError('Unknown value for NSHorizontalDirections: $value'),
+    _ => throw ArgumentError(
+      'Unknown value for NSHorizontalDirections: $value',
+    ),
   };
 }
 
@@ -38257,10 +38164,9 @@ enum NSFontDescriptorSymbolicTraits {
     -1879048192 => NSFontDescriptorClassOrnamentals,
     -1610612736 => NSFontDescriptorClassScripts,
     -1073741824 => NSFontDescriptorClassSymbolic,
-    _ =>
-      throw ArgumentError(
-        'Unknown value for NSFontDescriptorSymbolicTraits: $value',
-      ),
+    _ => throw ArgumentError(
+      'Unknown value for NSFontDescriptorSymbolicTraits: $value',
+    ),
   };
 
   @override
@@ -38411,10 +38317,9 @@ enum NSWindowCollectionBehavior {
     65536 => NSWindowCollectionBehaviorPrimary,
     131072 => NSWindowCollectionBehaviorAuxiliary,
     262144 => NSWindowCollectionBehaviorCanJoinAllApplications,
-    _ =>
-      throw ArgumentError(
-        'Unknown value for NSWindowCollectionBehavior: $value',
-      ),
+    _ => throw ArgumentError(
+      'Unknown value for NSWindowCollectionBehavior: $value',
+    ),
   };
 }
 
@@ -38434,10 +38339,9 @@ enum NSWindowAnimationBehavior {
     3 => NSWindowAnimationBehaviorDocumentWindow,
     4 => NSWindowAnimationBehaviorUtilityWindow,
     5 => NSWindowAnimationBehaviorAlertPanel,
-    _ =>
-      throw ArgumentError(
-        'Unknown value for NSWindowAnimationBehavior: $value',
-      ),
+    _ => throw ArgumentError(
+      'Unknown value for NSWindowAnimationBehavior: $value',
+    ),
   };
 }
 
@@ -38451,10 +38355,9 @@ enum NSWindowNumberListOptions {
   static NSWindowNumberListOptions fromValue(int value) => switch (value) {
     1 => NSWindowNumberListAllApplications,
     16 => NSWindowNumberListAllSpaces,
-    _ =>
-      throw ArgumentError(
-        'Unknown value for NSWindowNumberListOptions: $value',
-      ),
+    _ => throw ArgumentError(
+      'Unknown value for NSWindowNumberListOptions: $value',
+    ),
   };
 }
 
@@ -38466,8 +38369,9 @@ enum NSWindowOcclusionState {
 
   static NSWindowOcclusionState fromValue(int value) => switch (value) {
     2 => NSWindowOcclusionStateVisible,
-    _ =>
-      throw ArgumentError('Unknown value for NSWindowOcclusionState: $value'),
+    _ => throw ArgumentError(
+      'Unknown value for NSWindowOcclusionState: $value',
+    ),
   };
 }
 
@@ -38519,8 +38423,9 @@ enum NSWindowTitleVisibility {
   static NSWindowTitleVisibility fromValue(int value) => switch (value) {
     0 => NSWindowTitleVisible,
     1 => NSWindowTitleHidden,
-    _ =>
-      throw ArgumentError('Unknown value for NSWindowTitleVisibility: $value'),
+    _ => throw ArgumentError(
+      'Unknown value for NSWindowTitleVisibility: $value',
+    ),
   };
 }
 
@@ -38556,10 +38461,9 @@ enum NSWindowUserTabbingPreference {
     0 => NSWindowUserTabbingPreferenceManual,
     1 => NSWindowUserTabbingPreferenceAlways,
     2 => NSWindowUserTabbingPreferenceInFullScreen,
-    _ =>
-      throw ArgumentError(
-        'Unknown value for NSWindowUserTabbingPreference: $value',
-      ),
+    _ => throw ArgumentError(
+      'Unknown value for NSWindowUserTabbingPreference: $value',
+    ),
   };
 }
 
@@ -38593,8 +38497,9 @@ enum NSTitlebarSeparatorStyle {
     1 => NSTitlebarSeparatorStyleNone,
     2 => NSTitlebarSeparatorStyleLine,
     3 => NSTitlebarSeparatorStyleShadow,
-    _ =>
-      throw ArgumentError('Unknown value for NSTitlebarSeparatorStyle: $value'),
+    _ => throw ArgumentError(
+      'Unknown value for NSTitlebarSeparatorStyle: $value',
+    ),
   };
 }
 
@@ -38610,8 +38515,9 @@ enum NSWindowBackingLocation {
     0 => NSWindowBackingLocationDefault,
     1 => NSWindowBackingLocationVideoMemory,
     2 => NSWindowBackingLocationMainMemory,
-    _ =>
-      throw ArgumentError('Unknown value for NSWindowBackingLocation: $value'),
+    _ => throw ArgumentError(
+      'Unknown value for NSWindowBackingLocation: $value',
+    ),
   };
 }
 
@@ -38671,8 +38577,9 @@ enum NSImageLayoutDirection {
     -1 => NSImageLayoutDirectionUnspecified,
     2 => NSImageLayoutDirectionLeftToRight,
     3 => NSImageLayoutDirectionRightToLeft,
-    _ =>
-      throw ArgumentError('Unknown value for NSImageLayoutDirection: $value'),
+    _ => throw ArgumentError(
+      'Unknown value for NSImageLayoutDirection: $value',
+    ),
   };
 }
 
@@ -38802,10 +38709,9 @@ enum NSCursorFrameResizePosition {
     9 => NSCursorFrameResizePositionTopRight,
     6 => NSCursorFrameResizePositionBottomLeft,
     12 => NSCursorFrameResizePositionBottomRight,
-    _ =>
-      throw ArgumentError(
-        'Unknown value for NSCursorFrameResizePosition: $value',
-      ),
+    _ => throw ArgumentError(
+      'Unknown value for NSCursorFrameResizePosition: $value',
+    ),
   };
 }
 
@@ -38821,10 +38727,9 @@ enum NSCursorFrameResizeDirections {
     1 => NSCursorFrameResizeDirectionsInward,
     2 => NSCursorFrameResizeDirectionsOutward,
     3 => NSCursorFrameResizeDirectionsAll,
-    _ =>
-      throw ArgumentError(
-        'Unknown value for NSCursorFrameResizeDirections: $value',
-      ),
+    _ => throw ArgumentError(
+      'Unknown value for NSCursorFrameResizeDirections: $value',
+    ),
   };
 }
 
@@ -38849,8 +38754,9 @@ enum NSGestureRecognizerState {
     3 => NSGestureRecognizerStateEnded,
     4 => NSGestureRecognizerStateCancelled,
     5 => NSGestureRecognizerStateFailed,
-    _ =>
-      throw ArgumentError('Unknown value for NSGestureRecognizerState: $value'),
+    _ => throw ArgumentError(
+      'Unknown value for NSGestureRecognizerState: $value',
+    ),
   };
 
   @override
@@ -38871,10 +38777,9 @@ enum NSLayoutConstraintOrientation {
   static NSLayoutConstraintOrientation fromValue(int value) => switch (value) {
     0 => NSLayoutConstraintOrientationHorizontal,
     1 => NSLayoutConstraintOrientationVertical,
-    _ =>
-      throw ArgumentError(
-        'Unknown value for NSLayoutConstraintOrientation: $value',
-      ),
+    _ => throw ArgumentError(
+      'Unknown value for NSLayoutConstraintOrientation: $value',
+    ),
   };
 }
 
@@ -39178,10 +39083,9 @@ enum NSScrollViewFindBarPosition {
     0 => NSScrollViewFindBarPositionAboveHorizontalRuler,
     1 => NSScrollViewFindBarPositionAboveContent,
     2 => NSScrollViewFindBarPositionBelowContent,
-    _ =>
-      throw ArgumentError(
-        'Unknown value for NSScrollViewFindBarPosition: $value',
-      ),
+    _ => throw ArgumentError(
+      'Unknown value for NSScrollViewFindBarPosition: $value',
+    ),
   };
 }
 
@@ -39209,10 +39113,9 @@ enum NSTextCursorAccessoryPlacement {
     6 => NSTextCursorAccessoryPlacementOffscreenTop,
     7 => NSTextCursorAccessoryPlacementOffscreenRight,
     8 => NSTextCursorAccessoryPlacementOffscreenBottom,
-    _ =>
-      throw ArgumentError(
-        'Unknown value for NSTextCursorAccessoryPlacement: $value',
-      ),
+    _ => throw ArgumentError(
+      'Unknown value for NSTextCursorAccessoryPlacement: $value',
+    ),
   };
 }
 
@@ -39246,8 +39149,9 @@ enum NSWritingToolsBehavior {
     0 => NSWritingToolsBehaviorDefault,
     1 => NSWritingToolsBehaviorComplete,
     2 => NSWritingToolsBehaviorLimited,
-    _ =>
-      throw ArgumentError('Unknown value for NSWritingToolsBehavior: $value'),
+    _ => throw ArgumentError(
+      'Unknown value for NSWritingToolsBehavior: $value',
+    ),
   };
 }
 
@@ -39267,10 +39171,9 @@ enum NSWritingToolsResultOptions {
     2 => NSWritingToolsResultRichText,
     4 => NSWritingToolsResultList,
     8 => NSWritingToolsResultTable,
-    _ =>
-      throw ArgumentError(
-        'Unknown value for NSWritingToolsResultOptions: $value',
-      ),
+    _ => throw ArgumentError(
+      'Unknown value for NSWritingToolsResultOptions: $value',
+    ),
   };
 }
 
@@ -39321,8 +39224,9 @@ enum NSTextStorageEditActions {
   static NSTextStorageEditActions fromValue(int value) => switch (value) {
     1 => NSTextStorageEditedAttributes,
     2 => NSTextStorageEditedCharacters,
-    _ =>
-      throw ArgumentError('Unknown value for NSTextStorageEditActions: $value'),
+    _ => throw ArgumentError(
+      'Unknown value for NSTextStorageEditActions: $value',
+    ),
   };
 }
 
@@ -39336,8 +39240,9 @@ enum NSTextLayoutOrientation {
   static NSTextLayoutOrientation fromValue(int value) => switch (value) {
     0 => NSTextLayoutOrientationHorizontal,
     1 => NSTextLayoutOrientationVertical,
-    _ =>
-      throw ArgumentError('Unknown value for NSTextLayoutOrientation: $value'),
+    _ => throw ArgumentError(
+      'Unknown value for NSTextLayoutOrientation: $value',
+    ),
   };
 }
 
@@ -39377,8 +39282,9 @@ enum NSControlCharacterAction {
     8 => NSControlCharacterActionLineBreak,
     16 => NSControlCharacterActionParagraphBreak,
     32 => NSControlCharacterActionContainerBreak,
-    _ =>
-      throw ArgumentError('Unknown value for NSControlCharacterAction: $value'),
+    _ => throw ArgumentError(
+      'Unknown value for NSControlCharacterAction: $value',
+    ),
   };
 }
 
@@ -39458,8 +39364,9 @@ enum NSLineMovementDirection {
     2 => NSLineMovesRight,
     3 => NSLineMovesDown,
     4 => NSLineMovesUp,
-    _ =>
-      throw ArgumentError('Unknown value for NSLineMovementDirection: $value'),
+    _ => throw ArgumentError(
+      'Unknown value for NSLineMovementDirection: $value',
+    ),
   };
 }
 
@@ -39563,8 +39470,9 @@ enum NSSelectionGranularity {
     0 => NSSelectByCharacter,
     1 => NSSelectByWord,
     2 => NSSelectByParagraph,
-    _ =>
-      throw ArgumentError('Unknown value for NSSelectionGranularity: $value'),
+    _ => throw ArgumentError(
+      'Unknown value for NSSelectionGranularity: $value',
+    ),
   };
 }
 
@@ -39583,90 +39491,86 @@ enum NSSelectionAffinity {
 }
 
 late final _sel_sizeWithAttributes_ = objc.registerName("sizeWithAttributes:");
-final _objc_msgSend_18r320v =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            CGSize Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          CGSize Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
-final _objc_msgSend_18r320vStret =
-    objc.msgSendStretPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<CGSize>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<CGSize>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_18r320v = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        CGSize Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      CGSize Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
+final _objc_msgSend_18r320vStret = objc.msgSendStretPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<CGSize>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<CGSize>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 late final _sel_drawAtPoint_withAttributes_ = objc.registerName(
   "drawAtPoint:withAttributes:",
 );
-final _objc_msgSend_bkebbk =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CGPoint,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CGPoint,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_bkebbk = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CGPoint,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CGPoint,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 late final _sel_drawInRect_withAttributes_ = objc.registerName(
   "drawInRect:withAttributes:",
 );
-final _objc_msgSend_f227js =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CGRect,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CGRect,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_f227js = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CGRect,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CGRect,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 
 /// NSStringDrawing
 extension NSStringDrawing$1 on objc.NSString {
@@ -39680,16 +39584,16 @@ extension NSStringDrawing$1 on objc.NSString {
     final _ptr = pkg_ffi.calloc<CGSize>();
     objc.useMsgSendVariants
         ? _objc_msgSend_18r320vStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_sizeWithAttributes_,
-          attrs?.ref.pointer ?? ffi.nullptr,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_sizeWithAttributes_,
+            attrs?.ref.pointer ?? ffi.nullptr,
+          )
         : _ptr.ref = _objc_msgSend_18r320v(
-          this.ref.pointer,
-          _sel_sizeWithAttributes_,
-          attrs?.ref.pointer ?? ffi.nullptr,
-        );
+            this.ref.pointer,
+            _sel_sizeWithAttributes_,
+            attrs?.ref.pointer ?? ffi.nullptr,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<CGSize>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -39731,82 +39635,79 @@ extension NSStringDrawing$1 on objc.NSString {
 late final _sel_drawWithRect_options_attributes_context_ = objc.registerName(
   "drawWithRect:options:attributes:context:",
 );
-final _objc_msgSend_1dr66uk =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CGRect,
-              ffi.Long,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CGRect,
-            int,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_1dr66uk = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CGRect,
+          ffi.Long,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CGRect,
+        int,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 late final _sel_boundingRectWithSize_options_attributes_context_ = objc
     .registerName("boundingRectWithSize:options:attributes:context:");
-final _objc_msgSend_k8g3u =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            CGRect Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CGSize,
-              ffi.Long,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          CGRect Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CGSize,
-            int,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
-final _objc_msgSend_k8g3uStret =
-    objc.msgSendStretPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<CGRect>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              CGSize,
-              ffi.Long,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCObject>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<CGRect>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CGSize,
-            int,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCObject>,
-          )
-        >();
+final _objc_msgSend_k8g3u = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        CGRect Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CGSize,
+          ffi.Long,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      CGRect Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CGSize,
+        int,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
+final _objc_msgSend_k8g3uStret = objc.msgSendStretPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<CGRect>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          CGSize,
+          ffi.Long,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<CGRect>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        CGSize,
+        int,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>,
+      )
+    >();
 
 /// NSExtendedStringDrawing
 extension NSExtendedStringDrawing$1 on objc.NSString {
@@ -39847,22 +39748,22 @@ extension NSExtendedStringDrawing$1 on objc.NSString {
     final _ptr = pkg_ffi.calloc<CGRect>();
     objc.useMsgSendVariants
         ? _objc_msgSend_k8g3uStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_boundingRectWithSize_options_attributes_context_,
-          size,
-          options.value,
-          attributes?.ref.pointer ?? ffi.nullptr,
-          context?.ref.pointer ?? ffi.nullptr,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_boundingRectWithSize_options_attributes_context_,
+            size,
+            options.value,
+            attributes?.ref.pointer ?? ffi.nullptr,
+            context?.ref.pointer ?? ffi.nullptr,
+          )
         : _ptr.ref = _objc_msgSend_k8g3u(
-          this.ref.pointer,
-          _sel_boundingRectWithSize_options_attributes_context_,
-          size,
-          options.value,
-          attributes?.ref.pointer ?? ffi.nullptr,
-          context?.ref.pointer ?? ffi.nullptr,
-        );
+            this.ref.pointer,
+            _sel_boundingRectWithSize_options_attributes_context_,
+            size,
+            options.value,
+            attributes?.ref.pointer ?? ffi.nullptr,
+            context?.ref.pointer ?? ffi.nullptr,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<CGRect>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -39904,20 +39805,20 @@ extension NSStringDrawingDeprecated$1 on objc.NSString {
     final _ptr = pkg_ffi.calloc<CGRect>();
     objc.useMsgSendVariants
         ? _objc_msgSend_1y1y0icStret(
-          _ptr,
-          this.ref.pointer,
-          _sel_boundingRectWithSize_options_attributes_,
-          size,
-          options.value,
-          attributes?.ref.pointer ?? ffi.nullptr,
-        )
+            _ptr,
+            this.ref.pointer,
+            _sel_boundingRectWithSize_options_attributes_,
+            size,
+            options.value,
+            attributes?.ref.pointer ?? ffi.nullptr,
+          )
         : _ptr.ref = _objc_msgSend_1y1y0ic(
-          this.ref.pointer,
-          _sel_boundingRectWithSize_options_attributes_,
-          size,
-          options.value,
-          attributes?.ref.pointer ?? ffi.nullptr,
-        );
+            this.ref.pointer,
+            _sel_boundingRectWithSize_options_attributes_,
+            size,
+            options.value,
+            attributes?.ref.pointer ?? ffi.nullptr,
+          );
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
       ffi.sizeOf<CGRect>(),
       finalizer: pkg_ffi.calloc.nativeFree,
@@ -40103,8 +40004,9 @@ enum CAEdgeAntialiasingMask {
     2 => kCALayerRightEdge,
     4 => kCALayerBottomEdge,
     8 => kCALayerTopEdge,
-    _ =>
-      throw ArgumentError('Unknown value for CAEdgeAntialiasingMask: $value'),
+    _ => throw ArgumentError(
+      'Unknown value for CAEdgeAntialiasingMask: $value',
+    ),
   };
 }
 
@@ -40145,10 +40047,9 @@ enum NSTypesetterControlCharacterAction {
         8 => NSTypesetterLineBreakAction,
         16 => NSTypesetterParagraphBreakAction,
         32 => NSTypesetterContainerBreakAction,
-        _ =>
-          throw ArgumentError(
-            'Unknown value for NSTypesetterControlCharacterAction: $value',
-          ),
+        _ => throw ArgumentError(
+          'Unknown value for NSTypesetterControlCharacterAction: $value',
+        ),
       };
 }
 
@@ -40230,10 +40131,9 @@ enum NSTextBlockVerticalAlignment {
     1 => NSTextBlockMiddleAlignment,
     2 => NSTextBlockBottomAlignment,
     3 => NSTextBlockBaselineAlignment,
-    _ =>
-      throw ArgumentError(
-        'Unknown value for NSTextBlockVerticalAlignment: $value',
-      ),
+    _ => throw ArgumentError(
+      'Unknown value for NSTextBlockVerticalAlignment: $value',
+    ),
   };
 }
 
@@ -40247,10 +40147,9 @@ enum NSTextTableLayoutAlgorithm {
   static NSTextTableLayoutAlgorithm fromValue(int value) => switch (value) {
     0 => NSTextTableAutomaticLayoutAlgorithm,
     1 => NSTextTableFixedLayoutAlgorithm,
-    _ =>
-      throw ArgumentError(
-        'Unknown value for NSTextTableLayoutAlgorithm: $value',
-      ),
+    _ => throw ArgumentError(
+      'Unknown value for NSTextTableLayoutAlgorithm: $value',
+    ),
   };
 }
 
@@ -40270,10 +40169,9 @@ enum NSTextSelectionGranularity {
     2 => NSTextSelectionGranularityParagraph,
     3 => NSTextSelectionGranularityLine,
     4 => NSTextSelectionGranularitySentence,
-    _ =>
-      throw ArgumentError(
-        'Unknown value for NSTextSelectionGranularity: $value',
-      ),
+    _ => throw ArgumentError(
+      'Unknown value for NSTextSelectionGranularity: $value',
+    ),
   };
 }
 
@@ -40287,8 +40185,9 @@ enum NSTextSelectionAffinity {
   static NSTextSelectionAffinity fromValue(int value) => switch (value) {
     0 => NSTextSelectionAffinityUpstream,
     1 => NSTextSelectionAffinityDownstream,
-    _ =>
-      throw ArgumentError('Unknown value for NSTextSelectionAffinity: $value'),
+    _ => throw ArgumentError(
+      'Unknown value for NSTextSelectionAffinity: $value',
+    ),
   };
 }
 
@@ -40311,10 +40210,9 @@ enum NSTextSelectionNavigationDirection {
         3 => NSTextSelectionNavigationDirectionLeft,
         4 => NSTextSelectionNavigationDirectionUp,
         5 => NSTextSelectionNavigationDirectionDown,
-        _ =>
-          throw ArgumentError(
-            'Unknown value for NSTextSelectionNavigationDirection: $value',
-          ),
+        _ => throw ArgumentError(
+          'Unknown value for NSTextSelectionNavigationDirection: $value',
+        ),
       };
 }
 
@@ -40339,10 +40237,9 @@ enum NSTextSelectionNavigationDestination {
         4 => NSTextSelectionNavigationDestinationParagraph,
         5 => NSTextSelectionNavigationDestinationContainer,
         6 => NSTextSelectionNavigationDestinationDocument,
-        _ =>
-          throw ArgumentError(
-            'Unknown value for NSTextSelectionNavigationDestination: $value',
-          ),
+        _ => throw ArgumentError(
+          'Unknown value for NSTextSelectionNavigationDestination: $value',
+        ),
       };
 }
 
@@ -40359,10 +40256,9 @@ enum NSTextSelectionNavigationModifier {
         1 => NSTextSelectionNavigationModifierExtend,
         2 => NSTextSelectionNavigationModifierVisual,
         4 => NSTextSelectionNavigationModifierMultiple,
-        _ =>
-          throw ArgumentError(
-            'Unknown value for NSTextSelectionNavigationModifier: $value',
-          ),
+        _ => throw ArgumentError(
+          'Unknown value for NSTextSelectionNavigationModifier: $value',
+        ),
       };
 }
 
@@ -40373,16 +40269,14 @@ enum NSTextSelectionNavigationWritingDirection {
   final int value;
   const NSTextSelectionNavigationWritingDirection(this.value);
 
-  static NSTextSelectionNavigationWritingDirection fromValue(
-    int value,
-  ) => switch (value) {
-    0 => NSTextSelectionNavigationWritingDirectionLeftToRight,
-    1 => NSTextSelectionNavigationWritingDirectionRightToLeft,
-    _ =>
-      throw ArgumentError(
-        'Unknown value for NSTextSelectionNavigationWritingDirection: $value',
-      ),
-  };
+  static NSTextSelectionNavigationWritingDirection fromValue(int value) =>
+      switch (value) {
+        0 => NSTextSelectionNavigationWritingDirectionLeftToRight,
+        1 => NSTextSelectionNavigationWritingDirectionRightToLeft,
+        _ => throw ArgumentError(
+          'Unknown value for NSTextSelectionNavigationWritingDirection: $value',
+        ),
+      };
 }
 
 enum NSTextSelectionNavigationLayoutOrientation {
@@ -40397,10 +40291,9 @@ enum NSTextSelectionNavigationLayoutOrientation {
   ) => switch (value) {
     0 => NSTextSelectionNavigationLayoutOrientationHorizontal,
     1 => NSTextSelectionNavigationLayoutOrientationVertical,
-    _ =>
-      throw ArgumentError(
-        'Unknown value for NSTextSelectionNavigationLayoutOrientation: $value',
-      ),
+    _ => throw ArgumentError(
+      'Unknown value for NSTextSelectionNavigationLayoutOrientation: $value',
+    ),
   };
 }
 
@@ -40415,10 +40308,9 @@ enum NSTextContentManagerEnumerationOptions {
       switch (value) {
         0 => NSTextContentManagerEnumerationOptionsNone,
         1 => NSTextContentManagerEnumerationOptionsReverse,
-        _ =>
-          throw ArgumentError(
-            'Unknown value for NSTextContentManagerEnumerationOptions: $value',
-          ),
+        _ => throw ArgumentError(
+          'Unknown value for NSTextContentManagerEnumerationOptions: $value',
+        ),
       };
 }
 
@@ -40439,10 +40331,9 @@ enum NSTextLayoutFragmentEnumerationOptions {
         2 => NSTextLayoutFragmentEnumerationOptionsEstimatesSize,
         4 => NSTextLayoutFragmentEnumerationOptionsEnsuresLayout,
         8 => NSTextLayoutFragmentEnumerationOptionsEnsuresExtraLineFragment,
-        _ =>
-          throw ArgumentError(
-            'Unknown value for NSTextLayoutFragmentEnumerationOptions: $value',
-          ),
+        _ => throw ArgumentError(
+          'Unknown value for NSTextLayoutFragmentEnumerationOptions: $value',
+        ),
       };
 }
 
@@ -40460,10 +40351,9 @@ enum NSTextLayoutFragmentState {
     1 => NSTextLayoutFragmentStateEstimatedUsageBounds,
     2 => NSTextLayoutFragmentStateCalculatedUsageBounds,
     3 => NSTextLayoutFragmentStateLayoutAvailable,
-    _ =>
-      throw ArgumentError(
-        'Unknown value for NSTextLayoutFragmentState: $value',
-      ),
+    _ => throw ArgumentError(
+      'Unknown value for NSTextLayoutFragmentState: $value',
+    ),
   };
 }
 
@@ -40479,10 +40369,9 @@ enum NSTextLayoutManagerSegmentType {
     0 => NSTextLayoutManagerSegmentTypeStandard,
     1 => NSTextLayoutManagerSegmentTypeSelection,
     2 => NSTextLayoutManagerSegmentTypeHighlight,
-    _ =>
-      throw ArgumentError(
-        'Unknown value for NSTextLayoutManagerSegmentType: $value',
-      ),
+    _ => throw ArgumentError(
+      'Unknown value for NSTextLayoutManagerSegmentType: $value',
+    ),
   };
 }
 
@@ -40505,10 +40394,9 @@ enum NSTextLayoutManagerSegmentOptions {
         4 => NSTextLayoutManagerSegmentOptionsHeadSegmentExtended,
         8 => NSTextLayoutManagerSegmentOptionsTailSegmentExtended,
         16 => NSTextLayoutManagerSegmentOptionsUpstreamAffinity,
-        _ =>
-          throw ArgumentError(
-            'Unknown value for NSTextLayoutManagerSegmentOptions: $value',
-          ),
+        _ => throw ArgumentError(
+          'Unknown value for NSTextLayoutManagerSegmentOptions: $value',
+        ),
       };
 }
 
@@ -40519,16 +40407,14 @@ enum NSWritingToolsCoordinatorTextUpdateReason {
   final int value;
   const NSWritingToolsCoordinatorTextUpdateReason(this.value);
 
-  static NSWritingToolsCoordinatorTextUpdateReason fromValue(
-    int value,
-  ) => switch (value) {
-    0 => NSWritingToolsCoordinatorTextUpdateReasonTyping,
-    1 => NSWritingToolsCoordinatorTextUpdateReasonUndoRedo,
-    _ =>
-      throw ArgumentError(
-        'Unknown value for NSWritingToolsCoordinatorTextUpdateReason: $value',
-      ),
-  };
+  static NSWritingToolsCoordinatorTextUpdateReason fromValue(int value) =>
+      switch (value) {
+        0 => NSWritingToolsCoordinatorTextUpdateReasonTyping,
+        1 => NSWritingToolsCoordinatorTextUpdateReasonUndoRedo,
+        _ => throw ArgumentError(
+          'Unknown value for NSWritingToolsCoordinatorTextUpdateReason: $value',
+        ),
+      };
 }
 
 enum NSWritingToolsCoordinatorState {
@@ -40545,10 +40431,9 @@ enum NSWritingToolsCoordinatorState {
     1 => NSWritingToolsCoordinatorStateNoninteractive,
     2 => NSWritingToolsCoordinatorStateInteractiveResting,
     3 => NSWritingToolsCoordinatorStateInteractiveStreaming,
-    _ =>
-      throw ArgumentError(
-        'Unknown value for NSWritingToolsCoordinatorState: $value',
-      ),
+    _ => throw ArgumentError(
+      'Unknown value for NSWritingToolsCoordinatorState: $value',
+    ),
   };
 }
 
@@ -40564,10 +40449,9 @@ enum NSWritingToolsCoordinatorTextReplacementReason {
   ) => switch (value) {
     0 => NSWritingToolsCoordinatorTextReplacementReasonInteractive,
     1 => NSWritingToolsCoordinatorTextReplacementReasonNoninteractive,
-    _ =>
-      throw ArgumentError(
-        'Unknown value for NSWritingToolsCoordinatorTextReplacementReason: $value',
-      ),
+    _ => throw ArgumentError(
+      'Unknown value for NSWritingToolsCoordinatorTextReplacementReason: $value',
+    ),
   };
 }
 
@@ -40584,10 +40468,9 @@ enum NSWritingToolsCoordinatorContextScope {
         0 => NSWritingToolsCoordinatorContextScopeUserSelection,
         1 => NSWritingToolsCoordinatorContextScopeFullDocument,
         2 => NSWritingToolsCoordinatorContextScopeVisibleArea,
-        _ =>
-          throw ArgumentError(
-            'Unknown value for NSWritingToolsCoordinatorContextScope: $value',
-          ),
+        _ => throw ArgumentError(
+          'Unknown value for NSWritingToolsCoordinatorContextScope: $value',
+        ),
       };
 }
 
@@ -40608,10 +40491,9 @@ enum NSWritingToolsCoordinatorTextAnimation {
         2 => NSWritingToolsCoordinatorTextAnimationInsert,
         8 => NSWritingToolsCoordinatorTextAnimationAnticipateInactive,
         9 => NSWritingToolsCoordinatorTextAnimationTranslate,
-        _ =>
-          throw ArgumentError(
-            'Unknown value for NSWritingToolsCoordinatorTextAnimation: $value',
-          ),
+        _ => throw ArgumentError(
+          'Unknown value for NSWritingToolsCoordinatorTextAnimation: $value',
+        ),
       };
 }
 
@@ -40678,23 +40560,26 @@ void _ObjCBlock_ffiVoid_NSError_fnPtrTrampoline(
     .asFunction<void Function(ffi.Pointer<objc.ObjCObject>)>()(arg0);
 ffi.Pointer<ffi.Void> _ObjCBlock_ffiVoid_NSError_fnPtrCallable =
     ffi.Pointer.fromFunction<
-      ffi.Void Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<objc.ObjCObject>,
-      )
-    >(_ObjCBlock_ffiVoid_NSError_fnPtrTrampoline).cast();
+          ffi.Void Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<objc.ObjCObject>,
+          )
+        >(_ObjCBlock_ffiVoid_NSError_fnPtrTrampoline)
+        .cast();
 void _ObjCBlock_ffiVoid_NSError_closureTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<objc.ObjCObject> arg0,
-) => (objc.getBlockClosure(block)
-    as void Function(ffi.Pointer<objc.ObjCObject>))(arg0);
+) =>
+    (objc.getBlockClosure(block)
+        as void Function(ffi.Pointer<objc.ObjCObject>))(arg0);
 ffi.Pointer<ffi.Void> _ObjCBlock_ffiVoid_NSError_closureCallable =
     ffi.Pointer.fromFunction<
-      ffi.Void Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<objc.ObjCObject>,
-      )
-    >(_ObjCBlock_ffiVoid_NSError_closureTrampoline).cast();
+          ffi.Void Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<objc.ObjCObject>,
+          )
+        >(_ObjCBlock_ffiVoid_NSError_closureTrampoline)
+        .cast();
 void _ObjCBlock_ffiVoid_NSError_listenerTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<objc.ObjCObject> arg0,
@@ -40711,13 +40596,14 @@ ffi.NativeCallable<
     ffi.Pointer<objc.ObjCObject>,
   )
 >
-_ObjCBlock_ffiVoid_NSError_listenerCallable = ffi.NativeCallable<
-    ffi.Void Function(
-      ffi.Pointer<objc.ObjCBlockImpl>,
-      ffi.Pointer<objc.ObjCObject>,
-    )
-  >.listener(_ObjCBlock_ffiVoid_NSError_listenerTrampoline)
-  ..keepIsolateAlive = false;
+_ObjCBlock_ffiVoid_NSError_listenerCallable =
+    ffi.NativeCallable<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCBlockImpl>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >.listener(_ObjCBlock_ffiVoid_NSError_listenerTrampoline)
+      ..keepIsolateAlive = false;
 void _ObjCBlock_ffiVoid_NSError_blockingTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<ffi.Void> waiter,
@@ -40740,14 +40626,15 @@ ffi.NativeCallable<
     ffi.Pointer<objc.ObjCObject>,
   )
 >
-_ObjCBlock_ffiVoid_NSError_blockingCallable = ffi.NativeCallable<
-    ffi.Void Function(
-      ffi.Pointer<objc.ObjCBlockImpl>,
-      ffi.Pointer<ffi.Void>,
-      ffi.Pointer<objc.ObjCObject>,
-    )
-  >.isolateLocal(_ObjCBlock_ffiVoid_NSError_blockingTrampoline)
-  ..keepIsolateAlive = false;
+_ObjCBlock_ffiVoid_NSError_blockingCallable =
+    ffi.NativeCallable<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCBlockImpl>,
+          ffi.Pointer<ffi.Void>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >.isolateLocal(_ObjCBlock_ffiVoid_NSError_blockingTrampoline)
+      ..keepIsolateAlive = false;
 ffi.NativeCallable<
   ffi.Void Function(
     ffi.Pointer<objc.ObjCBlockImpl>,
@@ -40755,14 +40642,15 @@ ffi.NativeCallable<
     ffi.Pointer<objc.ObjCObject>,
   )
 >
-_ObjCBlock_ffiVoid_NSError_blockingListenerCallable = ffi.NativeCallable<
-    ffi.Void Function(
-      ffi.Pointer<objc.ObjCBlockImpl>,
-      ffi.Pointer<ffi.Void>,
-      ffi.Pointer<objc.ObjCObject>,
-    )
-  >.listener(_ObjCBlock_ffiVoid_NSError_blockingTrampoline)
-  ..keepIsolateAlive = false;
+_ObjCBlock_ffiVoid_NSError_blockingListenerCallable =
+    ffi.NativeCallable<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCBlockImpl>,
+          ffi.Pointer<ffi.Void>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >.listener(_ObjCBlock_ffiVoid_NSError_blockingTrampoline)
+      ..keepIsolateAlive = false;
 
 /// Construction methods for `objc.ObjCBlock<ffi.Void Function(objc.NSError?)>`.
 abstract final class ObjCBlock_ffiVoid_NSError {
@@ -40970,22 +40858,18 @@ enum MLNOfflinePackState {
 }
 
 late final _sel_state = objc.registerName("state");
-final _objc_msgSend_6gfr3p =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Long Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          int Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
+final _objc_msgSend_6gfr3p = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Long Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      int Function(ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)
+    >();
 
 /// A structure containing information about an offline pack’s current download
 /// progress.
@@ -41028,40 +40912,38 @@ final class MLNOfflinePackProgress extends ffi.Struct {
 }
 
 late final _sel_progress = objc.registerName("progress");
-final _objc_msgSend_oftva =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            MLNOfflinePackProgress Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          MLNOfflinePackProgress Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
-final _objc_msgSend_oftvaStret =
-    objc.msgSendStretPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<MLNOfflinePackProgress>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<MLNOfflinePackProgress>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
+final _objc_msgSend_oftva = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        MLNOfflinePackProgress Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      MLNOfflinePackProgress Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+      )
+    >();
+final _objc_msgSend_oftvaStret = objc.msgSendStretPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<MLNOfflinePackProgress>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<MLNOfflinePackProgress>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+      )
+    >();
 late final _sel_resume = objc.registerName("resume");
 late final _sel_suspend = objc.registerName("suspend");
 late final _sel_requestProgress = objc.registerName("requestProgress");
@@ -41286,30 +41168,33 @@ void _ObjCBlock_ffiVoid_MLNOfflinePack_NSError_fnPtrTrampoline(
     >()(arg0, arg1);
 ffi.Pointer<ffi.Void> _ObjCBlock_ffiVoid_MLNOfflinePack_NSError_fnPtrCallable =
     ffi.Pointer.fromFunction<
-      ffi.Void Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<objc.ObjCObject>,
-        ffi.Pointer<objc.ObjCObject>,
-      )
-    >(_ObjCBlock_ffiVoid_MLNOfflinePack_NSError_fnPtrTrampoline).cast();
+          ffi.Void Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>,
+          )
+        >(_ObjCBlock_ffiVoid_MLNOfflinePack_NSError_fnPtrTrampoline)
+        .cast();
 void _ObjCBlock_ffiVoid_MLNOfflinePack_NSError_closureTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<objc.ObjCObject> arg0,
   ffi.Pointer<objc.ObjCObject> arg1,
-) => (objc.getBlockClosure(block)
-    as void Function(
-      ffi.Pointer<objc.ObjCObject>,
-      ffi.Pointer<objc.ObjCObject>,
-    ))(arg0, arg1);
+) =>
+    (objc.getBlockClosure(block)
+        as void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+        ))(arg0, arg1);
 ffi.Pointer<ffi.Void>
 _ObjCBlock_ffiVoid_MLNOfflinePack_NSError_closureCallable =
     ffi.Pointer.fromFunction<
-      ffi.Void Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<objc.ObjCObject>,
-        ffi.Pointer<objc.ObjCObject>,
-      )
-    >(_ObjCBlock_ffiVoid_MLNOfflinePack_NSError_closureTrampoline).cast();
+          ffi.Void Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>,
+          )
+        >(_ObjCBlock_ffiVoid_MLNOfflinePack_NSError_closureTrampoline)
+        .cast();
 void _ObjCBlock_ffiVoid_MLNOfflinePack_NSError_listenerTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<objc.ObjCObject> arg0,
@@ -41330,14 +41215,15 @@ ffi.NativeCallable<
     ffi.Pointer<objc.ObjCObject>,
   )
 >
-_ObjCBlock_ffiVoid_MLNOfflinePack_NSError_listenerCallable = ffi.NativeCallable<
-    ffi.Void Function(
-      ffi.Pointer<objc.ObjCBlockImpl>,
-      ffi.Pointer<objc.ObjCObject>,
-      ffi.Pointer<objc.ObjCObject>,
-    )
-  >.listener(_ObjCBlock_ffiVoid_MLNOfflinePack_NSError_listenerTrampoline)
-  ..keepIsolateAlive = false;
+_ObjCBlock_ffiVoid_MLNOfflinePack_NSError_listenerCallable =
+    ffi.NativeCallable<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCBlockImpl>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >.listener(_ObjCBlock_ffiVoid_MLNOfflinePack_NSError_listenerTrampoline)
+      ..keepIsolateAlive = false;
 void _ObjCBlock_ffiVoid_MLNOfflinePack_NSError_blockingTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<ffi.Void> waiter,
@@ -41365,15 +41251,18 @@ ffi.NativeCallable<
     ffi.Pointer<objc.ObjCObject>,
   )
 >
-_ObjCBlock_ffiVoid_MLNOfflinePack_NSError_blockingCallable = ffi.NativeCallable<
-    ffi.Void Function(
-      ffi.Pointer<objc.ObjCBlockImpl>,
-      ffi.Pointer<ffi.Void>,
-      ffi.Pointer<objc.ObjCObject>,
-      ffi.Pointer<objc.ObjCObject>,
-    )
-  >.isolateLocal(_ObjCBlock_ffiVoid_MLNOfflinePack_NSError_blockingTrampoline)
-  ..keepIsolateAlive = false;
+_ObjCBlock_ffiVoid_MLNOfflinePack_NSError_blockingCallable =
+    ffi.NativeCallable<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCBlockImpl>,
+          ffi.Pointer<ffi.Void>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >.isolateLocal(
+        _ObjCBlock_ffiVoid_MLNOfflinePack_NSError_blockingTrampoline,
+      )
+      ..keepIsolateAlive = false;
 ffi.NativeCallable<
   ffi.Void Function(
     ffi.Pointer<objc.ObjCBlockImpl>,
@@ -41486,17 +41375,17 @@ abstract final class ObjCBlock_ffiVoid_MLNOfflinePack_NSError {
             arg0.address == 0
                 ? null
                 : MLNOfflinePack.castFromPointer(
-                  arg0,
-                  retain: false,
-                  release: true,
-                ),
+                    arg0,
+                    retain: false,
+                    release: true,
+                  ),
             arg1.address == 0
                 ? null
                 : objc.NSError.castFromPointer(
-                  arg1,
-                  retain: false,
-                  release: true,
-                ),
+                    arg1,
+                    retain: false,
+                    release: true,
+                  ),
           ),
       keepIsolateAlive,
     );
@@ -41532,17 +41421,17 @@ abstract final class ObjCBlock_ffiVoid_MLNOfflinePack_NSError {
             arg0.address == 0
                 ? null
                 : MLNOfflinePack.castFromPointer(
-                  arg0,
-                  retain: false,
-                  release: true,
-                ),
+                    arg0,
+                    retain: false,
+                    release: true,
+                  ),
             arg1.address == 0
                 ? null
                 : objc.NSError.castFromPointer(
-                  arg1,
-                  retain: false,
-                  release: true,
-                ),
+                    arg1,
+                    retain: false,
+                    release: true,
+                  ),
           ),
       keepIsolateAlive,
     );
@@ -41555,17 +41444,17 @@ abstract final class ObjCBlock_ffiVoid_MLNOfflinePack_NSError {
             arg0.address == 0
                 ? null
                 : MLNOfflinePack.castFromPointer(
-                  arg0,
-                  retain: false,
-                  release: true,
-                ),
+                    arg0,
+                    retain: false,
+                    release: true,
+                  ),
             arg1.address == 0
                 ? null
                 : objc.NSError.castFromPointer(
-                  arg1,
-                  retain: false,
-                  release: true,
-                ),
+                    arg1,
+                    retain: false,
+                    release: true,
+                  ),
           ),
       keepIsolateAlive,
     );
@@ -41587,27 +41476,28 @@ abstract final class ObjCBlock_ffiVoid_MLNOfflinePack_NSError {
 /// Call operator for `objc.ObjCBlock<ffi.Void Function(MLNOfflinePack?, objc.NSError?)>`.
 extension ObjCBlock_ffiVoid_MLNOfflinePack_NSError_CallExtension
     on objc.ObjCBlock<ffi.Void Function(MLNOfflinePack?, objc.NSError?)> {
-  void call(MLNOfflinePack? arg0, objc.NSError? arg1) => ref.pointer.ref.invoke
-      .cast<
-        ffi.NativeFunction<
-          ffi.Void Function(
-            ffi.Pointer<objc.ObjCBlockImpl> block,
-            ffi.Pointer<objc.ObjCObject> arg0,
-            ffi.Pointer<objc.ObjCObject> arg1,
-          )
-        >
-      >()
-      .asFunction<
-        void Function(
-          ffi.Pointer<objc.ObjCBlockImpl>,
-          ffi.Pointer<objc.ObjCObject>,
-          ffi.Pointer<objc.ObjCObject>,
-        )
-      >()(
-    ref.pointer,
-    arg0?.ref.pointer ?? ffi.nullptr,
-    arg1?.ref.pointer ?? ffi.nullptr,
-  );
+  void call(MLNOfflinePack? arg0, objc.NSError? arg1) =>
+      ref.pointer.ref.invoke
+          .cast<
+            ffi.NativeFunction<
+              ffi.Void Function(
+                ffi.Pointer<objc.ObjCBlockImpl> block,
+                ffi.Pointer<objc.ObjCObject> arg0,
+                ffi.Pointer<objc.ObjCObject> arg1,
+              )
+            >
+          >()
+          .asFunction<
+            void Function(
+              ffi.Pointer<objc.ObjCBlockImpl>,
+              ffi.Pointer<objc.ObjCObject>,
+              ffi.Pointer<objc.ObjCObject>,
+            )
+          >()(
+        ref.pointer,
+        arg0?.ref.pointer ?? ffi.nullptr,
+        arg1?.ref.pointer ?? ffi.nullptr,
+      );
 }
 
 void _ObjCBlock_ffiVoid_NSURL_NSArray_NSError_fnPtrTrampoline(
@@ -41634,33 +41524,36 @@ void _ObjCBlock_ffiVoid_NSURL_NSArray_NSError_fnPtrTrampoline(
     >()(arg0, arg1, arg2);
 ffi.Pointer<ffi.Void> _ObjCBlock_ffiVoid_NSURL_NSArray_NSError_fnPtrCallable =
     ffi.Pointer.fromFunction<
-      ffi.Void Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<objc.ObjCObject>,
-        ffi.Pointer<objc.ObjCObject>,
-        ffi.Pointer<objc.ObjCObject>,
-      )
-    >(_ObjCBlock_ffiVoid_NSURL_NSArray_NSError_fnPtrTrampoline).cast();
+          ffi.Void Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>,
+          )
+        >(_ObjCBlock_ffiVoid_NSURL_NSArray_NSError_fnPtrTrampoline)
+        .cast();
 void _ObjCBlock_ffiVoid_NSURL_NSArray_NSError_closureTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<objc.ObjCObject> arg0,
   ffi.Pointer<objc.ObjCObject> arg1,
   ffi.Pointer<objc.ObjCObject> arg2,
-) => (objc.getBlockClosure(block)
-    as void Function(
-      ffi.Pointer<objc.ObjCObject>,
-      ffi.Pointer<objc.ObjCObject>,
-      ffi.Pointer<objc.ObjCObject>,
-    ))(arg0, arg1, arg2);
+) =>
+    (objc.getBlockClosure(block)
+        as void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+        ))(arg0, arg1, arg2);
 ffi.Pointer<ffi.Void> _ObjCBlock_ffiVoid_NSURL_NSArray_NSError_closureCallable =
     ffi.Pointer.fromFunction<
-      ffi.Void Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<objc.ObjCObject>,
-        ffi.Pointer<objc.ObjCObject>,
-        ffi.Pointer<objc.ObjCObject>,
-      )
-    >(_ObjCBlock_ffiVoid_NSURL_NSArray_NSError_closureTrampoline).cast();
+          ffi.Void Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>,
+          )
+        >(_ObjCBlock_ffiVoid_NSURL_NSArray_NSError_closureTrampoline)
+        .cast();
 void _ObjCBlock_ffiVoid_NSURL_NSArray_NSError_listenerTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<objc.ObjCObject> arg0,
@@ -41684,15 +41577,16 @@ ffi.NativeCallable<
     ffi.Pointer<objc.ObjCObject>,
   )
 >
-_ObjCBlock_ffiVoid_NSURL_NSArray_NSError_listenerCallable = ffi.NativeCallable<
-    ffi.Void Function(
-      ffi.Pointer<objc.ObjCBlockImpl>,
-      ffi.Pointer<objc.ObjCObject>,
-      ffi.Pointer<objc.ObjCObject>,
-      ffi.Pointer<objc.ObjCObject>,
-    )
-  >.listener(_ObjCBlock_ffiVoid_NSURL_NSArray_NSError_listenerTrampoline)
-  ..keepIsolateAlive = false;
+_ObjCBlock_ffiVoid_NSURL_NSArray_NSError_listenerCallable =
+    ffi.NativeCallable<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCBlockImpl>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >.listener(_ObjCBlock_ffiVoid_NSURL_NSArray_NSError_listenerTrampoline)
+      ..keepIsolateAlive = false;
 void _ObjCBlock_ffiVoid_NSURL_NSArray_NSError_blockingTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<ffi.Void> waiter,
@@ -41723,16 +41617,19 @@ ffi.NativeCallable<
     ffi.Pointer<objc.ObjCObject>,
   )
 >
-_ObjCBlock_ffiVoid_NSURL_NSArray_NSError_blockingCallable = ffi.NativeCallable<
-    ffi.Void Function(
-      ffi.Pointer<objc.ObjCBlockImpl>,
-      ffi.Pointer<ffi.Void>,
-      ffi.Pointer<objc.ObjCObject>,
-      ffi.Pointer<objc.ObjCObject>,
-      ffi.Pointer<objc.ObjCObject>,
-    )
-  >.isolateLocal(_ObjCBlock_ffiVoid_NSURL_NSArray_NSError_blockingTrampoline)
-  ..keepIsolateAlive = false;
+_ObjCBlock_ffiVoid_NSURL_NSArray_NSError_blockingCallable =
+    ffi.NativeCallable<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCBlockImpl>,
+          ffi.Pointer<ffi.Void>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >.isolateLocal(
+        _ObjCBlock_ffiVoid_NSURL_NSArray_NSError_blockingTrampoline,
+      )
+      ..keepIsolateAlive = false;
 ffi.NativeCallable<
   ffi.Void Function(
     ffi.Pointer<objc.ObjCBlockImpl>,
@@ -41764,9 +41661,10 @@ abstract final class ObjCBlock_ffiVoid_NSURL_NSArray_NSError {
     ffi.Pointer<objc.ObjCBlockImpl> pointer, {
     bool retain = false,
     bool release = false,
-  }) => objc.ObjCBlock<
-    ffi.Void Function(objc.NSURL, objc.NSArray?, objc.NSError?)
-  >(pointer, retain: retain, release: release);
+  }) =>
+      objc.ObjCBlock<
+        ffi.Void Function(objc.NSURL, objc.NSArray?, objc.NSError?)
+      >(pointer, retain: retain, release: release);
 
   /// Creates a block from a C function pointer.
   ///
@@ -41787,16 +41685,17 @@ abstract final class ObjCBlock_ffiVoid_NSURL_NSArray_NSError {
       >
     >
     ptr,
-  ) => objc.ObjCBlock<
-    ffi.Void Function(objc.NSURL, objc.NSArray?, objc.NSError?)
-  >(
-    objc.newPointerBlock(
-      _ObjCBlock_ffiVoid_NSURL_NSArray_NSError_fnPtrCallable,
-      ptr.cast(),
-    ),
-    retain: false,
-    release: true,
-  );
+  ) =>
+      objc.ObjCBlock<
+        ffi.Void Function(objc.NSURL, objc.NSArray?, objc.NSError?)
+      >(
+        objc.newPointerBlock(
+          _ObjCBlock_ffiVoid_NSURL_NSArray_NSError_fnPtrCallable,
+          ptr.cast(),
+        ),
+        retain: false,
+        release: true,
+      );
 
   /// Creates a block from a Dart function.
   ///
@@ -41812,29 +41711,38 @@ abstract final class ObjCBlock_ffiVoid_NSURL_NSArray_NSError {
   fromFunction(
     void Function(objc.NSURL, objc.NSArray?, objc.NSError?) fn, {
     bool keepIsolateAlive = true,
-  }) => objc.ObjCBlock<
-    ffi.Void Function(objc.NSURL, objc.NSArray?, objc.NSError?)
-  >(
-    objc.newClosureBlock(
-      _ObjCBlock_ffiVoid_NSURL_NSArray_NSError_closureCallable,
-      (
-        ffi.Pointer<objc.ObjCObject> arg0,
-        ffi.Pointer<objc.ObjCObject> arg1,
-        ffi.Pointer<objc.ObjCObject> arg2,
-      ) => fn(
-        objc.NSURL.castFromPointer(arg0, retain: true, release: true),
-        arg1.address == 0
-            ? null
-            : objc.NSArray.castFromPointer(arg1, retain: true, release: true),
-        arg2.address == 0
-            ? null
-            : objc.NSError.castFromPointer(arg2, retain: true, release: true),
-      ),
-      keepIsolateAlive,
-    ),
-    retain: false,
-    release: true,
-  );
+  }) =>
+      objc.ObjCBlock<
+        ffi.Void Function(objc.NSURL, objc.NSArray?, objc.NSError?)
+      >(
+        objc.newClosureBlock(
+          _ObjCBlock_ffiVoid_NSURL_NSArray_NSError_closureCallable,
+          (
+            ffi.Pointer<objc.ObjCObject> arg0,
+            ffi.Pointer<objc.ObjCObject> arg1,
+            ffi.Pointer<objc.ObjCObject> arg2,
+          ) => fn(
+            objc.NSURL.castFromPointer(arg0, retain: true, release: true),
+            arg1.address == 0
+                ? null
+                : objc.NSArray.castFromPointer(
+                    arg1,
+                    retain: true,
+                    release: true,
+                  ),
+            arg2.address == 0
+                ? null
+                : objc.NSError.castFromPointer(
+                    arg2,
+                    retain: true,
+                    release: true,
+                  ),
+          ),
+          keepIsolateAlive,
+        ),
+        retain: false,
+        release: true,
+      );
 
   /// Creates a listener block from a Dart function.
   ///
@@ -41950,33 +41858,31 @@ extension ObjCBlock_ffiVoid_NSURL_NSArray_NSError_CallExtension
         objc.ObjCBlock<
           ffi.Void Function(objc.NSURL, objc.NSArray?, objc.NSError?)
         > {
-  void call(objc.NSURL arg0, objc.NSArray? arg1, objc.NSError? arg2) => ref
-      .pointer
-      .ref
-      .invoke
-      .cast<
-        ffi.NativeFunction<
-          ffi.Void Function(
-            ffi.Pointer<objc.ObjCBlockImpl> block,
-            ffi.Pointer<objc.ObjCObject> arg0,
-            ffi.Pointer<objc.ObjCObject> arg1,
-            ffi.Pointer<objc.ObjCObject> arg2,
-          )
-        >
-      >()
-      .asFunction<
-        void Function(
-          ffi.Pointer<objc.ObjCBlockImpl>,
-          ffi.Pointer<objc.ObjCObject>,
-          ffi.Pointer<objc.ObjCObject>,
-          ffi.Pointer<objc.ObjCObject>,
-        )
-      >()(
-    ref.pointer,
-    arg0.ref.pointer,
-    arg1?.ref.pointer ?? ffi.nullptr,
-    arg2?.ref.pointer ?? ffi.nullptr,
-  );
+  void call(objc.NSURL arg0, objc.NSArray? arg1, objc.NSError? arg2) =>
+      ref.pointer.ref.invoke
+          .cast<
+            ffi.NativeFunction<
+              ffi.Void Function(
+                ffi.Pointer<objc.ObjCBlockImpl> block,
+                ffi.Pointer<objc.ObjCObject> arg0,
+                ffi.Pointer<objc.ObjCObject> arg1,
+                ffi.Pointer<objc.ObjCObject> arg2,
+              )
+            >
+          >()
+          .asFunction<
+            void Function(
+              ffi.Pointer<objc.ObjCBlockImpl>,
+              ffi.Pointer<objc.ObjCObject>,
+              ffi.Pointer<objc.ObjCObject>,
+              ffi.Pointer<objc.ObjCObject>,
+            )
+          >()(
+        ref.pointer,
+        arg0.ref.pointer,
+        arg1?.ref.pointer ?? ffi.nullptr,
+        arg2?.ref.pointer ?? ffi.nullptr,
+      );
 }
 
 void _ObjCBlock_ffiVoid_NSURL_NSError_fnPtrTrampoline(
@@ -41997,29 +41903,32 @@ void _ObjCBlock_ffiVoid_NSURL_NSError_fnPtrTrampoline(
     >()(arg0, arg1);
 ffi.Pointer<ffi.Void> _ObjCBlock_ffiVoid_NSURL_NSError_fnPtrCallable =
     ffi.Pointer.fromFunction<
-      ffi.Void Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<objc.ObjCObject>,
-        ffi.Pointer<objc.ObjCObject>,
-      )
-    >(_ObjCBlock_ffiVoid_NSURL_NSError_fnPtrTrampoline).cast();
+          ffi.Void Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>,
+          )
+        >(_ObjCBlock_ffiVoid_NSURL_NSError_fnPtrTrampoline)
+        .cast();
 void _ObjCBlock_ffiVoid_NSURL_NSError_closureTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<objc.ObjCObject> arg0,
   ffi.Pointer<objc.ObjCObject> arg1,
-) => (objc.getBlockClosure(block)
-    as void Function(
-      ffi.Pointer<objc.ObjCObject>,
-      ffi.Pointer<objc.ObjCObject>,
-    ))(arg0, arg1);
+) =>
+    (objc.getBlockClosure(block)
+        as void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+        ))(arg0, arg1);
 ffi.Pointer<ffi.Void> _ObjCBlock_ffiVoid_NSURL_NSError_closureCallable =
     ffi.Pointer.fromFunction<
-      ffi.Void Function(
-        ffi.Pointer<objc.ObjCBlockImpl>,
-        ffi.Pointer<objc.ObjCObject>,
-        ffi.Pointer<objc.ObjCObject>,
-      )
-    >(_ObjCBlock_ffiVoid_NSURL_NSError_closureTrampoline).cast();
+          ffi.Void Function(
+            ffi.Pointer<objc.ObjCBlockImpl>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>,
+          )
+        >(_ObjCBlock_ffiVoid_NSURL_NSError_closureTrampoline)
+        .cast();
 void _ObjCBlock_ffiVoid_NSURL_NSError_listenerTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<objc.ObjCObject> arg0,
@@ -42040,14 +41949,15 @@ ffi.NativeCallable<
     ffi.Pointer<objc.ObjCObject>,
   )
 >
-_ObjCBlock_ffiVoid_NSURL_NSError_listenerCallable = ffi.NativeCallable<
-    ffi.Void Function(
-      ffi.Pointer<objc.ObjCBlockImpl>,
-      ffi.Pointer<objc.ObjCObject>,
-      ffi.Pointer<objc.ObjCObject>,
-    )
-  >.listener(_ObjCBlock_ffiVoid_NSURL_NSError_listenerTrampoline)
-  ..keepIsolateAlive = false;
+_ObjCBlock_ffiVoid_NSURL_NSError_listenerCallable =
+    ffi.NativeCallable<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCBlockImpl>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >.listener(_ObjCBlock_ffiVoid_NSURL_NSError_listenerTrampoline)
+      ..keepIsolateAlive = false;
 void _ObjCBlock_ffiVoid_NSURL_NSError_blockingTrampoline(
   ffi.Pointer<objc.ObjCBlockImpl> block,
   ffi.Pointer<ffi.Void> waiter,
@@ -42075,15 +41985,16 @@ ffi.NativeCallable<
     ffi.Pointer<objc.ObjCObject>,
   )
 >
-_ObjCBlock_ffiVoid_NSURL_NSError_blockingCallable = ffi.NativeCallable<
-    ffi.Void Function(
-      ffi.Pointer<objc.ObjCBlockImpl>,
-      ffi.Pointer<ffi.Void>,
-      ffi.Pointer<objc.ObjCObject>,
-      ffi.Pointer<objc.ObjCObject>,
-    )
-  >.isolateLocal(_ObjCBlock_ffiVoid_NSURL_NSError_blockingTrampoline)
-  ..keepIsolateAlive = false;
+_ObjCBlock_ffiVoid_NSURL_NSError_blockingCallable =
+    ffi.NativeCallable<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCBlockImpl>,
+          ffi.Pointer<ffi.Void>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >.isolateLocal(_ObjCBlock_ffiVoid_NSURL_NSError_blockingTrampoline)
+      ..keepIsolateAlive = false;
 ffi.NativeCallable<
   ffi.Void Function(
     ffi.Pointer<objc.ObjCBlockImpl>,
@@ -42092,15 +42003,16 @@ ffi.NativeCallable<
     ffi.Pointer<objc.ObjCObject>,
   )
 >
-_ObjCBlock_ffiVoid_NSURL_NSError_blockingListenerCallable = ffi.NativeCallable<
-    ffi.Void Function(
-      ffi.Pointer<objc.ObjCBlockImpl>,
-      ffi.Pointer<ffi.Void>,
-      ffi.Pointer<objc.ObjCObject>,
-      ffi.Pointer<objc.ObjCObject>,
-    )
-  >.listener(_ObjCBlock_ffiVoid_NSURL_NSError_blockingTrampoline)
-  ..keepIsolateAlive = false;
+_ObjCBlock_ffiVoid_NSURL_NSError_blockingListenerCallable =
+    ffi.NativeCallable<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCBlockImpl>,
+          ffi.Pointer<ffi.Void>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+        )
+      >.listener(_ObjCBlock_ffiVoid_NSURL_NSError_blockingTrampoline)
+      ..keepIsolateAlive = false;
 
 /// Construction methods for `objc.ObjCBlock<ffi.Void Function(objc.NSURL, objc.NSError?)>`.
 abstract final class ObjCBlock_ffiVoid_NSURL_NSError {
@@ -42162,10 +42074,10 @@ abstract final class ObjCBlock_ffiVoid_NSURL_NSError {
             arg1.address == 0
                 ? null
                 : objc.NSError.castFromPointer(
-                  arg1,
-                  retain: true,
-                  release: true,
-                ),
+                    arg1,
+                    retain: true,
+                    release: true,
+                  ),
           ),
       keepIsolateAlive,
     ),
@@ -42194,10 +42106,10 @@ abstract final class ObjCBlock_ffiVoid_NSURL_NSError {
             arg1.address == 0
                 ? null
                 : objc.NSError.castFromPointer(
-                  arg1,
-                  retain: false,
-                  release: true,
-                ),
+                    arg1,
+                    retain: false,
+                    release: true,
+                  ),
           ),
       keepIsolateAlive,
     );
@@ -42232,10 +42144,10 @@ abstract final class ObjCBlock_ffiVoid_NSURL_NSError {
             arg1.address == 0
                 ? null
                 : objc.NSError.castFromPointer(
-                  arg1,
-                  retain: false,
-                  release: true,
-                ),
+                    arg1,
+                    retain: false,
+                    release: true,
+                  ),
           ),
       keepIsolateAlive,
     );
@@ -42248,10 +42160,10 @@ abstract final class ObjCBlock_ffiVoid_NSURL_NSError {
             arg1.address == 0
                 ? null
                 : objc.NSError.castFromPointer(
-                  arg1,
-                  retain: false,
-                  release: true,
-                ),
+                    arg1,
+                    retain: false,
+                    release: true,
+                  ),
           ),
       keepIsolateAlive,
     );
@@ -42380,28 +42292,27 @@ late final _sel_addContentsOfURL_withCompletionHandler_ = objc.registerName(
 late final _sel_packs = objc.registerName("packs");
 late final _sel_addPackForRegion_withContext_completionHandler_ = objc
     .registerName("addPackForRegion:withContext:completionHandler:");
-final _objc_msgSend_18qun1e =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCBlockImpl>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCBlockImpl>,
-          )
-        >();
+final _objc_msgSend_18qun1e = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCBlockImpl>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCBlockImpl>,
+      )
+    >();
 late final _sel_removePack_withCompletionHandler_ = objc.registerName(
   "removePack:withCompletionHandler:",
 );
@@ -42412,85 +42323,78 @@ late final _sel_reloadPacks = objc.registerName("reloadPacks");
 late final _sel_setMaximumAllowedMapboxTiles_ = objc.registerName(
   "setMaximumAllowedMapboxTiles:",
 );
-final _objc_msgSend_1xsl7ae =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Uint64,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            int,
-          )
-        >();
+final _objc_msgSend_1xsl7ae = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Uint64,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        int,
+      )
+    >();
 late final _sel_countOfBytesCompleted = objc.registerName(
   "countOfBytesCompleted",
 );
-final _objc_msgSend_1p4gbjy =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.UnsignedLongLong Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-            )
-          >
-        >()
-        .asFunction<
-          int Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-          )
-        >();
+final _objc_msgSend_1p4gbjy = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.UnsignedLongLong Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+        )
+      >
+    >()
+    .asFunction<
+      int Function(ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)
+    >();
 late final _sel_setMaximumAmbientCacheSize_withCompletionHandler_ = objc
     .registerName("setMaximumAmbientCacheSize:withCompletionHandler:");
-final _objc_msgSend_1sq2aut =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.UnsignedLong,
-              ffi.Pointer<objc.ObjCBlockImpl>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            int,
-            ffi.Pointer<objc.ObjCBlockImpl>,
-          )
-        >();
+final _objc_msgSend_1sq2aut = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.UnsignedLong,
+          ffi.Pointer<objc.ObjCBlockImpl>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        int,
+        ffi.Pointer<objc.ObjCBlockImpl>,
+      )
+    >();
 late final _sel_invalidateAmbientCacheWithCompletionHandler_ = objc
     .registerName("invalidateAmbientCacheWithCompletionHandler:");
-final _objc_msgSend_f167m6 =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCBlockImpl>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCBlockImpl>,
-          )
-        >();
+final _objc_msgSend_f167m6 = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCBlockImpl>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCBlockImpl>,
+      )
+    >();
 late final _sel_clearAmbientCacheWithCompletionHandler_ = objc.registerName(
   "clearAmbientCacheWithCompletionHandler:",
 );
@@ -42501,34 +42405,33 @@ late final _sel_preloadData_forURL_modificationDate_expirationDate_eTag_mustReva
     objc.registerName(
       "preloadData:forURL:modificationDate:expirationDate:eTag:mustRevalidate:",
     );
-final _objc_msgSend_1xt2lpz =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Bool,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCObject>,
-            bool,
-          )
-        >();
+final _objc_msgSend_1xt2lpz = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Bool,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>,
+        bool,
+      )
+    >();
 late final _sel_putResourceWithUrl_data_modified_expires_etag_mustRevalidate_ =
     objc.registerName(
       "putResourceWithUrl:data:modified:expires:etag:mustRevalidate:",
@@ -42537,36 +42440,35 @@ late final _sel_preloadData_forURL_modificationDate_expirationDate_eTag_mustReva
     objc.registerName(
       "preloadData:forURL:modificationDate:expirationDate:eTag:mustRevalidate:completionHandler:",
     );
-final _objc_msgSend_899qho =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Void Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Bool,
-              ffi.Pointer<objc.ObjCBlockImpl>,
-            )
-          >
-        >()
-        .asFunction<
-          void Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCObject>,
-            bool,
-            ffi.Pointer<objc.ObjCBlockImpl>,
-          )
-        >();
+final _objc_msgSend_899qho = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Bool,
+          ffi.Pointer<objc.ObjCBlockImpl>,
+        )
+      >
+    >()
+    .asFunction<
+      void Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>,
+        bool,
+        ffi.Pointer<objc.ObjCBlockImpl>,
+      )
+    >();
 
 /// MLNOfflineStorage implements a singleton (shared object) that manages offline
 /// packs and ambient caching. All of this class’s instance methods are asynchronous,
@@ -42628,10 +42530,10 @@ class MLNOfflineStorage extends objc.NSObject {
     return _ret.address == 0
         ? null
         : MLNOfflineStorageDelegate.castFromPointer(
-          _ret,
-          retain: true,
-          release: true,
-        );
+            _ret,
+            retain: true,
+            release: true,
+          );
   }
 
   /// The receiver’s delegate.
@@ -43140,30 +43042,29 @@ late final _class_MLNTilePyramidOfflineRegion = objc.getClass(
 late final _sel_bounds = objc.registerName("bounds");
 late final _sel_initWithStyleURL_bounds_fromZoomLevel_toZoomLevel_ = objc
     .registerName("initWithStyleURL:bounds:fromZoomLevel:toZoomLevel:");
-final _objc_msgSend_s3spq =
-    objc.msgSendPointer
-        .cast<
-          ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-              ffi.Pointer<objc.ObjCObject>,
-              ffi.Pointer<objc.ObjCSelector>,
-              ffi.Pointer<objc.ObjCObject>,
-              MLNCoordinateBounds,
-              ffi.Double,
-              ffi.Double,
-            )
-          >
-        >()
-        .asFunction<
-          ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            ffi.Pointer<objc.ObjCObject>,
-            MLNCoordinateBounds,
-            double,
-            double,
-          )
-        >();
+final _objc_msgSend_s3spq = objc.msgSendPointer
+    .cast<
+      ffi.NativeFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCSelector>,
+          ffi.Pointer<objc.ObjCObject>,
+          MLNCoordinateBounds,
+          ffi.Double,
+          ffi.Double,
+        )
+      >
+    >()
+    .asFunction<
+      ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCSelector>,
+        ffi.Pointer<objc.ObjCObject>,
+        MLNCoordinateBounds,
+        double,
+        double,
+      )
+    >();
 
 /// An offline region defined by a style URL, geographic coordinate bounds, and
 /// range of zoom levels.
@@ -43409,10 +43310,10 @@ class MLNTilePyramidOfflineRegion extends objc.NSObject
     return _ret.address == 0
         ? null
         : MLNTilePyramidOfflineRegion.castFromPointer(
-          _ret,
-          retain: false,
-          release: true,
-        );
+            _ret,
+            retain: false,
+            release: true,
+          );
   }
 
   /// Returns a new instance of MLNTilePyramidOfflineRegion constructed with the default `new` method.
