@@ -80,7 +80,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.29.0', '' ]
+        sdk: [ '3.32.0', '' ]
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
@@ -187,7 +187,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.29.0', '' ]
+        sdk: [ '3.32.0', '' ]
     steps:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
@@ -219,7 +219,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.29.0', '' ]
+        sdk: [ '3.32.0', '' ]
     steps:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
@@ -246,7 +246,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.29.0', '' ]
+        sdk: [ '3.32.0', '' ]
     steps:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
@@ -266,7 +266,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.29.0', '' ]
+        sdk: [ '3.32.0', '' ]
     steps:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2

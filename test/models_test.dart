@@ -64,6 +64,52 @@ void main() {
       expect(oString, contains(o.longitudeEast.toString()));
       expect(oString, contains(o.longitudeWest.toString()));
     });
+    test('LngLatBounds.fromPoints', () {
+      // Test multiple points
+      final o = [
+        Position(10, 20), // lng: 10, lat: 20
+        Position(-5, 30), // lng: -5, lat: 30
+        Position(15, 10), // lng: 15, lat: 10
+        Position(0, 0), // lng: 0,  lat: 0
+      ];
+      final b = LngLatBounds.fromPoints(o);
+      expect(b.longitudeWest, -5.0);
+      expect(b.longitudeEast, 15.0);
+      expect(b.latitudeSouth, 0.0);
+      expect(b.latitudeNorth, 30.0);
+
+      // Test a single point
+      final o2 = [Position(5.5, -5.5)]; // lng: 5.5, lat: -5.5
+      final b2 = LngLatBounds.fromPoints(o2);
+      expect(b2.longitudeWest, 5.5);
+      expect(b2.longitudeEast, 5.5);
+      expect(b2.latitudeSouth, -5.5);
+      expect(b2.latitudeNorth, -5.5);
+
+      // Test points at same latitude
+      final o3 = [
+        Position(0, 10), // lng: 0, lat: 10
+        Position(5, 10), // lng: 5, lat: 10
+        Position(-5, 10), // lng: -5, lat: 10
+      ];
+      final b3 = LngLatBounds.fromPoints(o3);
+      expect(b3.longitudeWest, -5.0);
+      expect(b3.longitudeEast, 5.0);
+      expect(b3.latitudeSouth, 10.0);
+      expect(b3.latitudeNorth, 10.0);
+
+      // Test points at same longitude
+      final o4 = [
+        Position(10, 0), // lng: 10, lat: 0
+        Position(10, 5), // lng: 10, lat: 5
+        Position(10, -5), // lng: 10, lat: -5
+      ];
+      final b4 = LngLatBounds.fromPoints(o4);
+      expect(b4.longitudeWest, 10.0);
+      expect(b4.longitudeEast, 10.0);
+      expect(b4.latitudeSouth, -5.0);
+      expect(b4.latitudeNorth, 5.0);
+    });
     test('MapCamera', () {
       final o = MapCamera(
         pitch: 12,

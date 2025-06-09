@@ -22,10 +22,9 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   late final int _viewId;
   MLNMapView? _cachedMapView;
 
-  MLNMapView get _mapView =>
-      _cachedMapView ??= MLNMapView.castFrom(
-        MapLibreRegistry.getMapWithViewId_(_viewId)!,
-      );
+  MLNMapView get _mapView => _cachedMapView ??= MLNMapView.castFrom(
+    MapLibreRegistry.getMapWithViewId_(_viewId)!,
+  );
 
   @override
   StyleControllerIos? style;
@@ -100,18 +99,15 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     bool webLinear = false,
     EdgeInsets padding = EdgeInsets.zero,
   }) async {
-    final sw =
-        Struct.create<CLLocationCoordinate2D>()
-          ..longitude = bounds.longitudeWest
-          ..latitude = bounds.latitudeSouth;
-    final ne =
-        Struct.create<CLLocationCoordinate2D>()
-          ..longitude = bounds.longitudeEast
-          ..latitude = bounds.latitudeNorth;
-    final ffiBounds =
-        Struct.create<MLNCoordinateBounds>()
-          ..sw = sw
-          ..ne = ne;
+    final sw = Struct.create<CLLocationCoordinate2D>()
+      ..longitude = bounds.longitudeWest
+      ..latitude = bounds.latitudeSouth;
+    final ne = Struct.create<CLLocationCoordinate2D>()
+      ..longitude = bounds.longitudeEast
+      ..latitude = bounds.latitudeNorth;
+    final ffiBounds = Struct.create<MLNCoordinateBounds>()
+      ..sw = sw
+      ..ne = ne;
     // TODO support padding with Struct UIEdgeInsets
     _mapView.setVisibleCoordinateBounds_animated_(ffiBounds, true);
   }
@@ -289,26 +285,21 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   }
 
   @override
-  Position toLngLatSync(Offset screenLocation) =>
-      _mapView
-          .convertPoint_toCoordinateFromView_(
-            screenLocation.toCGPoint(),
-            _mapView,
-          )
-          .toPosition();
+  Position toLngLatSync(Offset screenLocation) => _mapView
+      .convertPoint_toCoordinateFromView_(screenLocation.toCGPoint(), _mapView)
+      .toPosition();
 
   @override
   List<Position> toLngLatsSync(List<Offset> screenLocations) =>
       screenLocations.map(toLngLatSync).toList(growable: false);
 
   @override
-  Offset toScreenLocationSync(Position lngLat) =>
-      _mapView
-          .convertCoordinate_toPointToView_(
-            lngLat.toCLLocationCoordinate2D(),
-            _mapView,
-          )
-          .toOffset();
+  Offset toScreenLocationSync(Position lngLat) => _mapView
+      .convertCoordinate_toPointToView_(
+        lngLat.toCLLocationCoordinate2D(),
+        _mapView,
+      )
+      .toOffset();
 
   @override
   List<Offset> toScreenLocationsSync(List<Position> lngLats) =>

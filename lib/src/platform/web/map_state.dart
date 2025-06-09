@@ -36,12 +36,11 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       int viewId, [
       dynamic params,
     ]) {
-      _htmlElement =
-          HTMLDivElement()
-            ..style.padding = '0'
-            ..style.margin = '0'
-            ..style.height = '100%'
-            ..style.width = '100%';
+      _htmlElement = HTMLDivElement()
+        ..style.padding = '0'
+        ..style.margin = '0'
+        ..style.height = '100%'
+        ..style.width = '100%';
 
       _map = interop.JsMap(
         interop.MapOptions(
