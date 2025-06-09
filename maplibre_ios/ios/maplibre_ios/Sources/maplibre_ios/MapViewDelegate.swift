@@ -130,9 +130,10 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
   // MLNMapViewDelegate method called when map has finished loading
   func mapView(_ mapView: MLNMapView, didFinishLoading _: MLNStyle) {
     // setCamera() can only be used after the map did finish loading
-    var camera = _mapView.camera
-    camera.pitch = _mapOptions!.pitch
-    _mapView.setCamera(camera, animated: false)
+      let altitude = MLNAltitudeForZoomLevel(self._mapOptions!.zoom, self._mapOptions!.pitch, self._mapOptions!.center!.lat, self._mapView.intrinsicContentSize)
+      let camera = MLNMapCamera(lookingAtCenter: self._mapView.centerCoordinate, altitude: altitude, pitch: self._mapOptions!.pitch, heading: self._mapOptions!.bearing)
+      print("###### altitude: \(altitude) camera: \(camera) ##########")
+    mapView.setCamera(camera, animated: false)
 
     _mapView = mapView
     print("mapView didFinishLoading, call onStyleLoaded")

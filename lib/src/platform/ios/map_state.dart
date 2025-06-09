@@ -148,6 +148,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     if (center != null) {
       ffiCamera.centerCoordinate = center.toCLLocationCoordinate2D();
     }
+    // https://github.com/maplibre/maplibre-native/blob/2ee04c397cdf79f6d491a0a93e374b1f5bb4677f/platform/ios/src/MLNMapProjection.mm#L45
     _mapView.setCamera_animated_(ffiCamera, false);
   }
 
