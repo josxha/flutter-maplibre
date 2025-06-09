@@ -3,7 +3,6 @@
 #import <objc/message.h>
 #import "../ios/maplibre_ios/Sources/maplibre_ios/MapLibreRegistry.h"
 #import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNMapView.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNGeometry.h"
 #import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNMapProjection.h"
 #import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNStyle.h"
 #import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNSource.h"
