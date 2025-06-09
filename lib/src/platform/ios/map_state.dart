@@ -9,8 +9,8 @@ import 'package:maplibre/src/layer/layer_manager.dart';
 import 'package:maplibre/src/platform/ios/extensions.dart';
 import 'package:maplibre/src/platform/map_state_native.dart';
 import 'package:maplibre/src/platform/pigeon.g.dart' as pigeon;
-import 'package:maplibre_ios/maplibre_ffi.dart';
-import 'package:objective_c/objective_c.dart';
+import 'package:maplibre_ios/maplibre_ffi.dart' hide CGPoint;
+import 'package:objective_c/objective_c.dart' hide CGPoint;
 
 part 'style_controller.dart';
 
@@ -218,11 +218,11 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     final point = screenLocation.toCGPoint();
     final queriedLayers = <QueriedLayer>[];
     for (var i = layers.count - 1; i >= 0; i--) {
-      final layer = layers.objectAtIndex_(i);
+      final layer = layers[i];
       final features = _mapView
           .visibleFeaturesAtPoint_inStyleLayersWithIdentifiers_(
             point,
-            NSSet.setWithObject_(layer), // TODO use layer.id
+            NSSet.setWithObject(layer), // TODO use layer.id
           );
       if (features.count == 0) continue;
       /* TODO final queriedLayer = QueriedLayer(

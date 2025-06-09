@@ -113,4 +113,4 @@ ffigen:
     #include-directives:
       #- '~/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers'
   preamble: |
-    // ignore_for_file: type=lint
+    // ignore_for_file: type=lint, unused_element, unused_field

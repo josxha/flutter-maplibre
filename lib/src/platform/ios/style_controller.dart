@@ -119,7 +119,7 @@ class StyleControllerIos implements StyleController {
         } else {
           final ffiUrls = NSMutableArray.new$();
           for (final url in source.tiles ?? <String>[]) {
-            ffiUrls.addObject_(url.toNSString());
+            ffiUrls.add(url.toNSString());
           }
           demSource.initWithIdentifier_tileURLTemplates_options_(
             source.id.toNSString(),
@@ -138,7 +138,7 @@ class StyleControllerIos implements StyleController {
         } else {
           final ffiUrls = NSMutableArray.new$()..init();
           for (final url in source.tiles ?? <String>[]) {
-            ffiUrls.addObject_(url.toNSString());
+            ffiUrls.add(url.toNSString());
           }
           rasterSource.initWithIdentifier_tileURLTemplates_options_(
             source.id.toNSString(),
@@ -156,7 +156,7 @@ class StyleControllerIos implements StyleController {
         } else {
           final ffiUrls = NSMutableArray.new$()..init();
           for (final url in source.tiles ?? <String>[]) {
-            ffiUrls.addObject_(url.toNSString());
+            ffiUrls.add(url.toNSString());
           }
           vectorSource.initWithIdentifier_tileURLTemplates_options_(
             source.id.toNSString(),
@@ -245,12 +245,12 @@ class StyleControllerIos implements StyleController {
     final attributions = <String>[];
     final sources = _ffiStyle.sources.allObjects;
     for (var i = 0; i < sources.count; i++) {
-      final source = sources.objectAtIndex_(i);
+      final source = sources[i];
       if (!MLNTileSource.isInstance(source)) continue;
       final tileSource = MLNTileSource.castFrom(source);
       final attrInfos = tileSource.attributionInfos;
       for (var j = 0; j < attrInfos.count; j++) {
-        final attr = MLNAttributionInfo.castFrom(attrInfos.objectAtIndex_(j));
+        final attr = MLNAttributionInfo.castFrom(attrInfos[j]);
         attributions.add(
           '<a href="${attr.URL?.absoluteString?.toDartString()}">${attr.title.string.toDartString()}</a>',
         );

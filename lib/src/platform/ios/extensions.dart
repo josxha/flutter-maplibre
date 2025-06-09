@@ -4,7 +4,7 @@ import 'dart:ffi';
 import 'package:flutter/cupertino.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre_ios/maplibre_ffi.dart';
-import 'package:objective_c/objective_c.dart';
+import 'package:objective_c/objective_c.dart' hide CGPoint;
 
 /// Internal extensions on [CLLocationCoordinate2D].
 extension CLLocationCoordinate2DExt on CLLocationCoordinate2D {
@@ -69,11 +69,11 @@ extension CGPointExt on CGPoint {
 /// Internal extensions on [String].
 extension StringExt on String {
   /// Convert to a [NSURL].
-  NSURL? toNSURL() => NSURL.URLWithString_(toNSString());
+  NSURL? toNSURL() => NSURL.URLWithString(toNSString());
 
   /// Convert to a [NSURL].
   NSData? toNSDataUTF8() =>
-      toNSString().dataUsingEncoding_(nsUTF8StringEncoding);
+      toNSString().dataUsingEncoding(nsUTF8StringEncoding);
 
   /// Convert a dashed separated name to camel case.
   String dashedToCamelCase() => split('-').indexed.map((entry) {
