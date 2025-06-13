@@ -28,6 +28,7 @@ class _LayersMarkerPageState extends State<LayersMarkerPage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Marker Layers')),
       body: MapLibreMap(
+        acceptLicense: true,
         options: MapOptions(initZoom: 7, initCenter: Position(9.17, 47.68)),
         onEvent: (event) async {
           switch (event) {
