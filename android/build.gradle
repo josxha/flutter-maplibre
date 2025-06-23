@@ -2,7 +2,7 @@ group = "com.github.josxha.maplibre"
 version = "1.0-SNAPSHOT"
 
 buildscript {
-    ext.kotlin_version = "2.1.21"
+    ext.kotlin_version = "2.2.0"
     repositories {
         google()
         mavenCentral()
