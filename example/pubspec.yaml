@@ -13,7 +13,7 @@ dependencies:
   flutter_web_plugins:
     sdk: flutter
   geotypes: ^0.0.2
-  go_router: ^15.1.2
+  go_router: ^16.0.0
   http: ^1.2.2
   maplibre:
     path: ../
