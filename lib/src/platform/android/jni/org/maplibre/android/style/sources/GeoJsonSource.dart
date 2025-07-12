@@ -828,6 +828,106 @@ class GeoJsonSource extends source$_.Source {
     ).check();
   }
 
+  static final _id_setGeoJsonSync = _class.instanceMethodId(
+    r'setGeoJsonSync',
+    r'(Lorg/maplibre/geojson/Feature;)V',
+  );
+
+  static final _setGeoJsonSync =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public final void setGeoJsonSync(org.maplibre.geojson.Feature feature)`
+  void setGeoJsonSync(feature$_.Feature? feature) {
+    final _$feature = feature?.reference ?? jni$_.jNullReference;
+    _setGeoJsonSync(
+      reference.pointer,
+      _id_setGeoJsonSync as jni$_.JMethodIDPtr,
+      _$feature.pointer,
+    ).check();
+  }
+
+  static final _id_setGeoJsonSync$1 = _class.instanceMethodId(
+    r'setGeoJsonSync',
+    r'(Lorg/maplibre/geojson/Geometry;)V',
+  );
+
+  static final _setGeoJsonSync$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public final void setGeoJsonSync(org.maplibre.geojson.Geometry geometry)`
+  void setGeoJsonSync$1(jni$_.JObject? geometry) {
+    final _$geometry = geometry?.reference ?? jni$_.jNullReference;
+    _setGeoJsonSync$1(
+      reference.pointer,
+      _id_setGeoJsonSync$1 as jni$_.JMethodIDPtr,
+      _$geometry.pointer,
+    ).check();
+  }
+
+  static final _id_setGeoJsonSync$2 = _class.instanceMethodId(
+    r'setGeoJsonSync',
+    r'(Lorg/maplibre/geojson/FeatureCollection;)V',
+  );
+
+  static final _setGeoJsonSync$2 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public final void setGeoJsonSync(org.maplibre.geojson.FeatureCollection featureCollection)`
+  void setGeoJsonSync$2(jni$_.JObject? featureCollection) {
+    final _$featureCollection =
+        featureCollection?.reference ?? jni$_.jNullReference;
+    _setGeoJsonSync$2(
+      reference.pointer,
+      _id_setGeoJsonSync$2 as jni$_.JMethodIDPtr,
+      _$featureCollection.pointer,
+    ).check();
+  }
+
   static final _id_setGeoJson$3 = _class.instanceMethodId(
     r'setGeoJson',
     r'(Ljava/lang/String;)V',
@@ -857,6 +957,39 @@ class GeoJsonSource extends source$_.Source {
     _setGeoJson$3(
       reference.pointer,
       _id_setGeoJson$3 as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
+  }
+
+  static final _id_setGeoJsonSync$3 = _class.instanceMethodId(
+    r'setGeoJsonSync',
+    r'(Ljava/lang/String;)V',
+  );
+
+  static final _setGeoJsonSync$3 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public final void setGeoJsonSync(java.lang.String string)`
+  void setGeoJsonSync$3(jni$_.JString string) {
+    final _$string = string.reference;
+    _setGeoJsonSync$3(
+      reference.pointer,
+      _id_setGeoJsonSync$3 as jni$_.JMethodIDPtr,
       _$string.pointer,
     ).check();
   }

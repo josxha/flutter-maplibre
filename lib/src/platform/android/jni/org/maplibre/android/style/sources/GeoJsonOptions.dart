@@ -346,6 +346,39 @@ class GeoJsonOptions extends jni$_.JObject {
     ).object<GeoJsonOptions>(const $GeoJsonOptions$Type());
   }
 
+  static final _id_withClusterMinPoints = _class.instanceMethodId(
+    r'withClusterMinPoints',
+    r'(I)Lorg/maplibre/android/style/sources/GeoJsonOptions;',
+  );
+
+  static final _withClusterMinPoints =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
+
+  /// from: `public final org.maplibre.android.style.sources.GeoJsonOptions withClusterMinPoints(int i)`
+  /// The returned object must be released after use, by calling the [release] method.
+  GeoJsonOptions withClusterMinPoints(int i) {
+    return _withClusterMinPoints(
+      reference.pointer,
+      _id_withClusterMinPoints as jni$_.JMethodIDPtr,
+      i,
+    ).object<GeoJsonOptions>(const $GeoJsonOptions$Type());
+  }
+
   static final _id_withClusterProperty = _class.instanceMethodId(
     r'withClusterProperty',
     r'(Ljava/lang/String;Lorg/maplibre/android/style/expressions/Expression;Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/sources/GeoJsonOptions;',

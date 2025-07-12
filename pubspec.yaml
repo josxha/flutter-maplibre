@@ -1,6 +1,6 @@
 name: maplibre
 description: "Permissive and performant mapping library that supports Mapbox Vector Tiles (MVT) powered by MapLibre SDKs."
-version: 0.2.1
+version: 0.2.2
 repository: https://github.com/josxha/flutter-maplibre
 issue_tracker: https://github.com/josxha/flutter-maplibre/issues
 homepage: https://flutter-maplibre.pages.dev
@@ -45,7 +45,7 @@ dev_dependencies:
   jnigen: ^0.14.2
   mocktail: ^1.0.4
   pigeon: ^25.0.0
-  very_good_analysis: ^8.0.0
+  very_good_analysis: ">=8.0.0 <10.0.0"
 
 screenshots:
   - description: 'MapLibre Logo'
