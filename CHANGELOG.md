@@ -1,3 +1,21 @@
+## 0.2.2
+
+Maintenance release and some new functionality. 
+Thanks for your contribution in this release @jt274!
+
+## New Features
+
+- Migrate `requestLocationPermissions()` and `addLayer()` to use JNI
+- Update `jni` and `jnigen` to v0.14
+- Update `pigeon` to v25
+- Migrate gradle DSL to Kotlin
+- Add `LngLatBounds.fromPoints()` constructor.
+
+...and numerous other dependencies updated in this release.
+
+Full
+Changelog: [v0.2.1...v0.2.2](https://github.com/josxha/flutter-maplibre/compare/v0.2.1...v0.2.2)
+
 ## 0.2.1
 
 This release builds upon the long anticipated merged threads in Flutter 3.29.0
@@ -40,6 +58,9 @@ Thanks for your contributions for this release, @felix-larsen and @pamtbaau!
   to [3.7.0](https://discord.com/channels/951867686378409984/951879268227485707/1339719747981545485).
 - Use the new code formatting.
 - Upgrade pigeon to 24.
+
+Full
+Changelog: [v0.2.0...v0.2.1](https://github.com/josxha/flutter-maplibre/compare/v0.2.0...v0.2.1)
 
 ## 0.2.0
 
