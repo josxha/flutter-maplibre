@@ -33,7 +33,7 @@ dependencies:
   jni: ^0.14.2
   maplibre_ios:
     path: maplibre_ios
-  objective_c: ^7.0.0
+  objective_c: ^8.0.0
   pointer_interceptor: ^0.10.1+2
   url_launcher: ^6.3.0
   web: ^1.0.0
@@ -45,7 +45,7 @@ dev_dependencies:
   jnigen: ^0.14.2
   mocktail: ^1.0.4
   pigeon: ^25.0.0
-  very_good_analysis: ">=8.0.0 <10.0.0"
+  very_good_analysis: ^9.0.0
 
 screenshots:
   - description: 'MapLibre Logo'
