@@ -23,7 +23,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   MLNMapView? _cachedMapView;
 
   MLNMapView get _mapView => _cachedMapView ??= MLNMapView.castFrom(
-    MapLibreRegistry.getMapWithViewId_(_viewId)!,
+    MapLibreRegistry.getMapWithViewId(_viewId)!,
   );
 
   @override
@@ -67,10 +67,9 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     if (center != null) {
       ffiCamera.centerCoordinate = center.toCLLocationCoordinate2D();
     }
-    _mapView.flyToCamera_withDuration_completionHandler_(
+    _mapView.flyToCamera$1(
       ffiCamera,
-      nativeDuration.inMicroseconds / 1000000,
-      null,
+      withDuration: nativeDuration.inMicroseconds / 1000000,
     );
   }
 
@@ -109,7 +108,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
       ..sw = sw
       ..ne = ne;
     // TODO support padding with Struct UIEdgeInsets
-    _mapView.setVisibleCoordinateBounds_animated_(ffiBounds, true);
+    _mapView.setVisibleCoordinateBounds(ffiBounds, animated: true);
   }
 
   @override
@@ -144,7 +143,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     if (center != null) {
       ffiCamera.centerCoordinate = center.toCLLocationCoordinate2D();
     }
-    _mapView.setCamera_animated_(ffiCamera, false);
+    _mapView.setCamera(ffiCamera, animated: false);
   }
 
   @override
@@ -219,9 +218,9 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     for (var i = layers.count - 1; i >= 0; i--) {
       final layer = layers[i];
       final features = _mapView
-          .visibleFeaturesAtPoint_inStyleLayersWithIdentifiers_(
+          .visibleFeaturesAtPoint$1(
             point,
-            NSSet.setWithObject(layer), // TODO use layer.id
+        inStyleLayersWithIdentifiers: NSSet.setWithObject(layer), // TODO use layer.id
           );
       if (features.count == 0) continue;
       /* TODO final queriedLayer = QueriedLayer(
@@ -270,7 +269,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
 
   @override
   double getMetersPerPixelAtLatitudeSync(double latitude) =>
-      _mapView.metersPerPointAtLatitude_(latitude);
+      _mapView.metersPerPointAtLatitude(latitude);
 
   @override
   LngLatBounds getVisibleRegionSync() {
@@ -285,7 +284,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
 
   @override
   Position toLngLatSync(Offset screenLocation) => _mapView
-      .convertPoint_toCoordinateFromView_(screenLocation.toCGPoint(), _mapView)
+      .convertPoint(screenLocation.toCGPoint(), toCoordinateFromView: _mapView)
       .toPosition();
 
   @override
@@ -294,9 +293,9 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
 
   @override
   Offset toScreenLocationSync(Position lngLat) => _mapView
-      .convertCoordinate_toPointToView_(
+      .convertCoordinate(
         lngLat.toCLLocationCoordinate2D(),
-        _mapView,
+        toPointToView: _mapView,
       )
       .toOffset();
 

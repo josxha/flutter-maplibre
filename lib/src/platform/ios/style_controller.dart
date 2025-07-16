@@ -29,12 +29,12 @@ class StyleControllerIos implements StyleController {
     switch (layer) {
       case BackgroundStyleLayer():
         ffiStyleLayer = MLNBackgroundStyleLayer.new$()
-          ..initWithIdentifier_(layer.id.toNSString())
-          ..backgroundColor = NSExpression.expressionWithFormat_(
+          ..initWithIdentifier(layer.id.toNSString())
+          ..backgroundColor = NSExpression.expressionWithFormat$1(
             layer.color.toHexString(alpha: false).toNSString(),
           );
       case StyleLayerWithSource():
-        final ffiSource = _ffiStyle.sourceWithIdentifier_(
+        final ffiSource = _ffiStyle.sourceWithIdentifier(
           layer.sourceId.toNSString(),
         );
         if (ffiSource == null) {
@@ -43,28 +43,28 @@ class StyleControllerIos implements StyleController {
         switch (layer) {
           case FillStyleLayer():
             ffiStyleLayer = MLNFillStyleLayer.new$()
-              ..initWithIdentifier_source_(layer.id.toNSString(), ffiSource);
+              ..initWithIdentifier(layer.id.toNSString(), source: ffiSource);
           case CircleStyleLayer():
             ffiStyleLayer = MLNCircleStyleLayer.new$()
-              ..initWithIdentifier_source_(layer.id.toNSString(), ffiSource);
+              ..initWithIdentifier(layer.id.toNSString(), source: ffiSource);
           case FillExtrusionStyleLayer():
             ffiStyleLayer = MLNFillExtrusionStyleLayer.new$()
-              ..initWithIdentifier_source_(layer.id.toNSString(), ffiSource);
+              ..initWithIdentifier(layer.id.toNSString(), source: ffiSource);
           case HeatmapStyleLayer():
             ffiStyleLayer = MLNHeatmapStyleLayer.new$()
-              ..initWithIdentifier_source_(layer.id.toNSString(), ffiSource);
+              ..initWithIdentifier(layer.id.toNSString(), source: ffiSource);
           case HillshadeStyleLayer():
             ffiStyleLayer = MLNHillshadeStyleLayer.new$()
-              ..initWithIdentifier_source_(layer.id.toNSString(), ffiSource);
+              ..initWithIdentifier(layer.id.toNSString(), source: ffiSource);
           case LineStyleLayer():
             ffiStyleLayer = MLNLineStyleLayer.new$()
-              ..initWithIdentifier_source_(layer.id.toNSString(), ffiSource);
+              ..initWithIdentifier(layer.id.toNSString(), source: ffiSource);
           case RasterStyleLayer():
             ffiStyleLayer = MLNRasterStyleLayer.new$()
-              ..initWithIdentifier_source_(layer.id.toNSString(), ffiSource);
+              ..initWithIdentifier(layer.id.toNSString(), source: ffiSource);
           case SymbolStyleLayer():
             ffiStyleLayer = MLNSymbolStyleLayer.new$()
-              ..initWithIdentifier_source_(layer.id.toNSString(), ffiSource);
+              ..initWithIdentifier(layer.id.toNSString(), source: ffiSource);
         }
     }
 
@@ -81,7 +81,7 @@ class StyleControllerIos implements StyleController {
     if (layer.maxZoom case final double maxZoom) {
       ffiStyleLayer.maximumZoomLevel = maxZoom;
     }
-    _ffiStyle.addLayer_(ffiStyleLayer);
+    _ffiStyle.addLayer(ffiStyleLayer);
   }
 
   @override
@@ -91,17 +91,17 @@ class StyleControllerIos implements StyleController {
       case GeoJsonSource():
         final shapeSource = MLNShapeSource.new$();
         if (source.data.startsWith('{')) {
-          shapeSource.initWithIdentifier_shape_options_(
+          shapeSource.initWithIdentifier$1(
             source.id.toNSString(),
-            MLNShape.shapeWithData_encoding_error_(
+            shape: MLNShape.shapeWithData(
               source.data.toNSDataUTF8()!,
-              nsUTF8StringEncoding,
-              nullptr,
+              encoding: nsUTF8StringEncoding,
+              error: nullptr,
             ),
-            NSDictionary.new$(),
+            options: NSDictionary.new$(),
           );
         } else {
-          shapeSource.initWithIdentifier_URL_options_(
+          shapeSource.initWithIdentifier(
             source.id.toNSString(),
             source.data.toNSURL()!,
             NSDictionary.new$(),
@@ -111,57 +111,57 @@ class StyleControllerIos implements StyleController {
       case RasterDemSource():
         final demSource = ffiSource = MLNRasterDEMSource.new$();
         if (source.url case final String url) {
-          demSource.initWithIdentifier_configurationURL_tileSize_(
+          demSource.initWithIdentifier$1(
             source.id.toNSString(),
-            url.toNSURL()!,
-            source.tileSize.toDouble(),
+            configurationURL: url.toNSURL()!,
+            tileSize: source.tileSize.toDouble(),
           );
         } else {
           final ffiUrls = NSMutableArray.new$();
           for (final url in source.tiles ?? <String>[]) {
             ffiUrls.addObject(url.toNSString());
           }
-          demSource.initWithIdentifier_tileURLTemplates_options_(
+          demSource.initWithIdentifier$2(
             source.id.toNSString(),
-            ffiUrls,
-            NSDictionary.new$(),
+            tileURLTemplates: ffiUrls,
+            options: NSDictionary.new$(),
           );
         }
       case RasterSource():
         final rasterSource = ffiSource = MLNRasterTileSource.new$();
         if (source.url case final String url) {
-          rasterSource.initWithIdentifier_configurationURL_tileSize_(
+          rasterSource.initWithIdentifier$1(
             source.id.toNSString(),
-            url.toNSURL()!,
-            source.tileSize.toDouble(),
+            configurationURL: url.toNSURL()!,
+            tileSize: source.tileSize.toDouble(),
           );
         } else {
           final ffiUrls = NSMutableArray.new$()..init();
           for (final url in source.tiles ?? <String>[]) {
             ffiUrls.addObject(url.toNSString());
           }
-          rasterSource.initWithIdentifier_tileURLTemplates_options_(
+          rasterSource.initWithIdentifier$2(
             source.id.toNSString(),
-            ffiUrls,
-            NSDictionary.new$(),
+            tileURLTemplates: ffiUrls,
+            options: NSDictionary.new$(),
           );
         }
       case VectorSource():
         final vectorSource = ffiSource = MLNVectorTileSource.new$();
         if (source.url case final String url) {
-          vectorSource.initWithIdentifier_configurationURLString_(
+          vectorSource.initWithIdentifier$1(
             source.id.toNSString(),
-            url.toNSString(),
+            configurationURLString: url.toNSString(),
           );
         } else {
           final ffiUrls = NSMutableArray.new$()..init();
           for (final url in source.tiles ?? <String>[]) {
             ffiUrls.addObject(url.toNSString());
           }
-          vectorSource.initWithIdentifier_tileURLTemplates_options_(
+          vectorSource.initWithIdentifier$2(
             source.id.toNSString(),
-            ffiUrls,
-            NSDictionary.new$(),
+            tileURLTemplates: ffiUrls,
+            options: NSDictionary.new$(),
           );
         }
       case ImageSource():
@@ -173,10 +173,10 @@ class StyleControllerIos implements StyleController {
           ..topLeft = source.coordinates.topLeft.toCLLocationCoordinate2D()
           ..topRight = source.coordinates.topRight.toCLLocationCoordinate2D();
         final imageSource = ffiSource = MLNImageSource.new$();
-        imageSource.initWithIdentifier_coordinateQuad_URL_(
+        imageSource.initWithIdentifier$1(
           source.id.toNSString(),
-          coordinates,
-          source.url.toNSURL()!,
+          coordinateQuad: coordinates,
+          image: source.url.toNSURL()!,
         );
       case VideoSource():
         throw UnimplementedError('Video source is only supported on web.');
@@ -185,7 +185,7 @@ class StyleControllerIos implements StyleController {
           'The Source is not supported: ${source.runtimeType}',
         );
     }
-    _ffiStyle.addSource_(ffiSource);
+    _ffiStyle.addSource(ffiSource);
   }
 
   @override
@@ -197,25 +197,25 @@ class StyleControllerIos implements StyleController {
   @override
   Future<void> removeImage(String id) async {
     final ffiId = id.toNSString();
-    _ffiStyle.removeImageForName_(ffiId);
+    _ffiStyle.removeImageForName(ffiId);
     ffiId.release();
   }
 
   @override
   Future<void> removeLayer(String id) async {
     final ffiId = id.toNSString();
-    final ffiLayer = _ffiStyle.layerWithIdentifier_(ffiId);
+    final ffiLayer = _ffiStyle.layerWithIdentifier(ffiId);
     if (ffiLayer == null) return;
-    _ffiStyle.removeLayer_(ffiLayer);
+    _ffiStyle.removeLayer(ffiLayer);
     ffiId.release();
   }
 
   @override
   Future<void> removeSource(String id) async {
     final ffiId = id.toNSString();
-    final ffiSource = _ffiStyle.sourceWithIdentifier_(ffiId);
+    final ffiSource = _ffiStyle.sourceWithIdentifier(ffiId);
     if (ffiSource == null) return;
-    _ffiStyle.removeSource_(ffiSource);
+    _ffiStyle.removeSource(ffiSource);
     ffiId.release();
   }
 
@@ -224,12 +224,12 @@ class StyleControllerIos implements StyleController {
     required String id,
     required String data,
   }) async {
-    final source = _ffiStyle.sourceWithIdentifier_(id.toNSString())!;
+    final source = _ffiStyle.sourceWithIdentifier(id.toNSString())!;
     final shapeSource = MLNShapeSource.castFrom(source);
-    shapeSource.shape = MLNShape.shapeWithData_encoding_error_(
+    shapeSource.shape = MLNShape.shapeWithData(
       data.toNSDataUTF8()!,
-      4, // utf-8
-      nullptr,
+      encoding: 4, // utf-8
+      error: nullptr,
     );
   }
 

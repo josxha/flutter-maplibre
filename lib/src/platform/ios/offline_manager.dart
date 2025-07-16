@@ -152,5 +152,5 @@ class OfflineManagerIos extends OfflineManagerNative {
 
   @override
   void setOfflineTileCountLimit({required int amount}) =>
-      _storage.setMaximumAllowedMapboxTiles_(amount);
+      _storage.setMaximumAllowedMapboxTiles(amount);
 }

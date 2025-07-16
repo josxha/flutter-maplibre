@@ -4,7 +4,7 @@ import 'dart:ffi';
 import 'package:flutter/cupertino.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre_ios/maplibre_ffi.dart';
-import 'package:objective_c/objective_c.dart' hide CGPoint;
+import 'package:objective_c/objective_c.dart';
 
 /// Internal extensions on [CLLocationCoordinate2D].
 extension CLLocationCoordinate2DExt on CLLocationCoordinate2D {
@@ -87,9 +87,9 @@ extension StringExt on String {
 
 /// Convert a raw String to a [NSExpression].
 NSExpression? parseNSExpression(String propertyName, String json) =>
-    Helpers.parseExpressionWithPropertyName_expression_(
+    Helpers.parseExpressionWithPropertyName(
       propertyName.toNSString(),
-      json.toNSString(),
+      expression: json.toNSString(),
     );
 
 /// Internal extensions on [MLNStyleLayer].
@@ -217,10 +217,10 @@ extension MLNStyleLayerExt on MLNStyleLayer {
       case 'text-translate-anchor':
         (this as MLNSymbolStyleLayer).textTranslationAnchor = expression;
       default:
-        Helpers.setExpressionWithTarget_field_expression_(
+        Helpers.setExpressionWithTarget(
           this,
-          key.dashedToCamelCase().toNSString(),
-          expression,
+          field: key.dashedToCamelCase().toNSString(),
+          expression: expression,
         );
     }
   }
