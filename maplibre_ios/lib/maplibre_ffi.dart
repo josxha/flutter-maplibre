@@ -22486,7 +22486,7 @@ class MLNVectorTileSource extends MLNTileSource {
   /// @param configurationURL A URL to a TileJSON configuration file describing the
   /// source’s contents and other metadata.
   /// @return An initialized vector tile source.
-  MLNVectorTileSource initWithIdentifier(
+  MLNVectorTileSource initWithIdentifier$10(
     objc.NSString identifier, {
     required objc.NSURL configurationURL,
   }) {
@@ -22648,7 +22648,7 @@ class MLNVectorTileSource extends MLNTileSource {
   /// @param identifier A string that uniquely identifies the source in the style to
   /// which it is added.
   /// @return An initialized source.
-  MLNVectorTileSource initWithIdentifier(objc.NSString identifier) {
+  MLNVectorTileSource initWithIdentifier$11(objc.NSString identifier) {
     final _ret = _objc_msgSend_1sotr3r(
       this.ref.retainAndReturnPointer(),
       _sel_initWithIdentifier_,
@@ -22902,7 +22902,7 @@ class MLNShapeSource extends MLNSource {
   /// #### Related examples
   /// TODO: Add live data, learn how to add live data to your map by
   /// updating the an ``MLNShapeSource`` object's `URL` property.
-  MLNShapeSource initWithIdentifier(
+  MLNShapeSource initWithIdentifier$10(
     objc.NSString identifier, {
     required objc.NSURL URL,
     objc.NSDictionary? options,
@@ -23430,7 +23430,7 @@ class MLNImageSource extends MLNSource {
   /// @param url An HTTP(S) URL, absolute file URL, or local file URL relative to the
   /// current application’s resource bundle.
   /// @return An initialized shape source.
-  MLNImageSource initWithIdentifier(
+  MLNImageSource initWithIdentifier$10(
     objc.NSString identifier, {
     required MLNCoordinateQuad coordinateQuad,
     required objc.NSURL URL,
@@ -23692,7 +23692,7 @@ class MLNRasterTileSource extends MLNTileSource {
   /// @param configurationURL A URL to a TileJSON configuration file describing the
   /// source’s contents and other metadata.
   /// @return An initialized raster tile source.
-  MLNRasterTileSource initWithIdentifier(
+  MLNRasterTileSource initWithIdentifier$10(
     objc.NSString identifier, {
     required objc.NSURL configurationURL,
   }) {
@@ -23969,7 +23969,7 @@ class MLNRasterDEMSource extends MLNRasterTileSource {
   /// @param configurationURL A URL to a TileJSON configuration file describing the
   /// source’s contents and other metadata.
   /// @return An initialized raster tile source.
-  MLNRasterDEMSource initWithIdentifier(
+  MLNRasterDEMSource initWithIdentifier$10(
     objc.NSString identifier, {
     required objc.NSURL configurationURL,
   }) {
@@ -24086,7 +24086,7 @@ class MLNRasterDEMSource extends MLNRasterTileSource {
   /// @param identifier A string that uniquely identifies the source in the style to
   /// which it is added.
   /// @return An initialized source.
-  MLNRasterDEMSource initWithIdentifier(objc.NSString identifier) {
+  MLNRasterDEMSource initWithIdentifier$11(objc.NSString identifier) {
     final _ret = _objc_msgSend_1sotr3r(
       this.ref.retainAndReturnPointer(),
       _sel_initWithIdentifier_,

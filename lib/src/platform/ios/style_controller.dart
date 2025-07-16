@@ -101,10 +101,10 @@ class StyleControllerIos implements StyleController {
             options: NSDictionary.new$(),
           );
         } else {
-          shapeSource.initWithIdentifier(
+          shapeSource.initWithIdentifier$10(
             source.id.toNSString(),
-            source.data.toNSURL()!,
-            NSDictionary.new$(),
+            URL: source.data.toNSURL()!,
+            options: NSDictionary.new$(),
           );
         }
         ffiSource = shapeSource;
@@ -173,10 +173,10 @@ class StyleControllerIos implements StyleController {
           ..topLeft = source.coordinates.topLeft.toCLLocationCoordinate2D()
           ..topRight = source.coordinates.topRight.toCLLocationCoordinate2D();
         final imageSource = ffiSource = MLNImageSource.new$();
-        imageSource.initWithIdentifier$1(
+        imageSource.initWithIdentifier$10(
           source.id.toNSString(),
           coordinateQuad: coordinates,
-          image: source.url.toNSURL()!,
+          URL: source.url.toNSURL()!,
         );
       case VideoSource():
         throw UnimplementedError('Video source is only supported on web.');
