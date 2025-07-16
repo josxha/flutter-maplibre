@@ -217,11 +217,11 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     final queriedLayers = <QueriedLayer>[];
     for (var i = layers.count - 1; i >= 0; i--) {
       final layer = layers[i];
-      final features = _mapView
-          .visibleFeaturesAtPoint$1(
-            point,
-        inStyleLayersWithIdentifiers: NSSet.setWithObject(layer), // TODO use layer.id
-          );
+      final features = _mapView.visibleFeaturesAtPoint$1(
+        point,
+        // TODO use layer.id
+        inStyleLayersWithIdentifiers: NSSet.setWithObject(layer),
+      );
       if (features.count == 0) continue;
       /* TODO final queriedLayer = QueriedLayer(
         layerId: jLayerId.toDartString(releaseOriginal: true),
