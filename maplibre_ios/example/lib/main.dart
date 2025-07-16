@@ -53,7 +53,7 @@ class _MyAppState extends State<MyApp> {
             OutlinedButton(
               onPressed: () {
                 final store = MLNOfflineStorage.getSharedOfflineStorage();
-                store.invalidateAmbientCacheWithCompletionHandler_(
+                store.invalidateAmbientCacheWithCompletionHandler(
                   ObjCBlock_ffiVoid_NSError.listener((error) {
                     debugPrint('invalidate ambient cache finished, $error');
                   }),

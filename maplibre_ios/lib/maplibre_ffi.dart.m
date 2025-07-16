@@ -2,35 +2,38 @@
 #import <Foundation/Foundation.h>
 #import <objc/message.h>
 #import "../ios/maplibre_ios/Sources/maplibre_ios/MapLibreRegistry.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNMapView.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNMapProjection.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNStyle.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNSource.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNVectorTileSource.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNComputedShapeSource.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNImageSource.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNRasterTileSource.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNRasterDEMSource.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNBackgroundStyleLayer.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNCircleStyleLayer.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNFillExtrusionStyleLayer.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNFillStyleLayer.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNHeatmapStyleLayer.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNHillshadeStyleLayer.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNLineStyleLayer.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNRasterStyleLayer.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNSymbolStyleLayer.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNVectorStyleLayer.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNAttributionInfo.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/NSExpression+MLNAdditions.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNOfflineStorage.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNOfflinePack.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNOfflineRegion.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.12.1-32f68/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNTilePyramidOfflineRegion.h"
+#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNMapView.h"
+#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNMapProjection.h"
+#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNStyle.h"
+#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNSource.h"
+#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNVectorTileSource.h"
+#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNComputedShapeSource.h"
+#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNImageSource.h"
+#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNRasterTileSource.h"
+#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNRasterDEMSource.h"
+#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNBackgroundStyleLayer.h"
+#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNCircleStyleLayer.h"
+#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNFillExtrusionStyleLayer.h"
+#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNFillStyleLayer.h"
+#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNHeatmapStyleLayer.h"
+#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNHillshadeStyleLayer.h"
+#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNLineStyleLayer.h"
+#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNRasterStyleLayer.h"
+#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNSymbolStyleLayer.h"
+#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNVectorStyleLayer.h"
+#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNAttributionInfo.h"
+#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/NSExpression+MLNAdditions.h"
+#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNOfflineStorage.h"
+#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNOfflinePack.h"
+#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNOfflineRegion.h"
+#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNTilePyramidOfflineRegion.h"
 
 #if !__has_feature(objc_arc)
 #error "This file must be compiled with ARC enabled"
 #endif
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
 
 typedef struct {
   int64_t version;
@@ -322,3 +325,5 @@ ListenerTrampoline_6 _MapLibreFFi_wrapBlockingBlock_r8gdi7(
 
 Protocol* _MapLibreFFi_MLNOfflineStorageDelegate(void) { return @protocol(MLNOfflineStorageDelegate); }
 #undef BLOCKING_BLOCK_IMPL
+
+#pragma clang diagnostic pop

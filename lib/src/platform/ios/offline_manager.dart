@@ -75,7 +75,7 @@ class OfflineManagerIos extends OfflineManagerNative {
   Future<OfflineRegion> getOfflineRegion({required int regionId}) async {
     final packs = _storage.packs;
     for (var i = 0; i < packs!.count; i++) {
-      final ffiPack = MLNOfflinePack.castFrom(packs.objectAtIndex_(i));
+      final ffiPack = MLNOfflinePack.castFrom(packs[i]);
       final jsonBytes = ffiPack.context.toList();
       final json = jsonDecode(utf8.decode(jsonBytes)) as Map<String, Object?>;
       // print(json);
@@ -111,7 +111,7 @@ class OfflineManagerIos extends OfflineManagerNative {
   Future<List<OfflineRegion>> listOfflineRegions() async {
     final packs = _storage.packs;
     return List<OfflineRegion>.generate(packs!.count, (i) {
-      final ffiPack = MLNOfflinePack.castFrom(packs.objectAtIndex_(i));
+      final ffiPack = MLNOfflinePack.castFrom(packs[i]);
       final ffiRegion = MLNTilePyramidOfflineRegion.castFrom(ffiPack.region);
       final jsonBytes = ffiPack.context.toList();
       final json = jsonDecode(utf8.decode(jsonBytes)) as Map<String, Object?>;
@@ -152,5 +152,5 @@ class OfflineManagerIos extends OfflineManagerNative {
 
   @override
   void setOfflineTileCountLimit({required int amount}) =>
-      _storage.setMaximumAllowedMapboxTiles_(amount);
+      _storage.setMaximumAllowedMapboxTiles(amount);
 }

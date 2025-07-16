@@ -69,11 +69,11 @@ extension CGPointExt on CGPoint {
 /// Internal extensions on [String].
 extension StringExt on String {
   /// Convert to a [NSURL].
-  NSURL? toNSURL() => NSURL.URLWithString_(toNSString());
+  NSURL? toNSURL() => NSURL.URLWithString(toNSString());
 
   /// Convert to a [NSURL].
   NSData? toNSDataUTF8() =>
-      toNSString().dataUsingEncoding_(nsUTF8StringEncoding);
+      toNSString().dataUsingEncoding(nsUTF8StringEncoding);
 
   /// Convert a dashed separated name to camel case.
   String dashedToCamelCase() => split('-').indexed.map((entry) {
@@ -87,9 +87,9 @@ extension StringExt on String {
 
 /// Convert a raw String to a [NSExpression].
 NSExpression? parseNSExpression(String propertyName, String json) =>
-    Helpers.parseExpressionWithPropertyName_expression_(
+    Helpers.parseExpressionWithPropertyName(
       propertyName.toNSString(),
-      json.toNSString(),
+      expression: json.toNSString(),
     );
 
 /// Internal extensions on [MLNStyleLayer].
@@ -217,10 +217,10 @@ extension MLNStyleLayerExt on MLNStyleLayer {
       case 'text-translate-anchor':
         (this as MLNSymbolStyleLayer).textTranslationAnchor = expression;
       default:
-        Helpers.setExpressionWithTarget_field_expression_(
+        Helpers.setExpressionWithTarget(
           this,
-          key.dashedToCamelCase().toNSString(),
-          expression,
+          field: key.dashedToCamelCase().toNSString(),
+          expression: expression,
         );
     }
   }
