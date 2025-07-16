@@ -248,13 +248,9 @@ class StyleControllerIos implements StyleController {
       final source = sources[i];
       if (!MLNTileSource.isInstance(source)) continue;
       final tileSource = MLNTileSource.castFrom(source);
-      final attrInfos = tileSource.attributionInfos;
-      for (var j = 0; j < attrInfos.count; j++) {
-        final attr = MLNAttributionInfo.castFrom(attrInfos[j]);
-        attributions.add(
-          '<a href="${attr.URL?.absoluteString?.toDartString()}">${attr.title.string.toDartString()}</a>',
-        );
-      }
+      final html = tileSource.attributionHTMLString;
+      if (html == null) continue;
+      attributions.add(html.toDartString());
     }
     return attributions;
   }
