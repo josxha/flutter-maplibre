@@ -1,52 +1,21 @@
 PODS:
   - Flutter (1.0.0)
-  - integration_test (0.0.1):
-    - Flutter
-  - MapLibre (6.17.1)
-  - maplibre_ios (0.0.1):
-    - Flutter
-    - MapLibre (~> 6.17)
   - objective_c (0.0.1):
-    - Flutter
-  - pointer_interceptor_ios (0.0.1):
-    - Flutter
-  - url_launcher_ios (0.0.1):
     - Flutter
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
-  - integration_test (from `.symlinks/plugins/integration_test/ios`)
-  - maplibre_ios (from `.symlinks/plugins/maplibre_ios/ios`)
   - objective_c (from `.symlinks/plugins/objective_c/ios`)
-  - pointer_interceptor_ios (from `.symlinks/plugins/pointer_interceptor_ios/ios`)
-  - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
-
-SPEC REPOS:
-  trunk:
-    - MapLibre
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
-  integration_test:
-    :path: ".symlinks/plugins/integration_test/ios"
-  maplibre_ios:
-    :path: ".symlinks/plugins/maplibre_ios/ios"
   objective_c:
     :path: ".symlinks/plugins/objective_c/ios"
-  pointer_interceptor_ios:
-    :path: ".symlinks/plugins/pointer_interceptor_ios/ios"
-  url_launcher_ios:
-    :path: ".symlinks/plugins/url_launcher_ios/ios"
 
 SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  integration_test: 4a889634ef21a45d28d50d622cf412dc6d9f586e
-  MapLibre: 4602773419937bfa96189c53b90d1055b8ef4f29
-  maplibre_ios: 76cc0946c5036d459a07e8427f33a0c52f995b95
   objective_c: 89e720c30d716b036faf9c9684022048eee1eee2
-  pointer_interceptor_ios: ec847ef8b0915778bed2b2cef636f4d177fa8eed
-  url_launcher_ios: 694010445543906933d732453a59da0a173ae33d
 
 PODFILE CHECKSUM: 4305caec6b40dde0ae97be1573c53de1882a07e5
 
