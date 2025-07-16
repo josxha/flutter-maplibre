@@ -1,0 +1,21 @@
+name: maplibre_ios_example
+description: "Demonstrates how to use the maplibre_ios plugin."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  flutter: ^3.29.0
+  sdk: ^3.7.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  maplibre_ios:
+    path: ../
+
+dev_dependencies:
+  very_good_analysis: ^7.0.0
+
+flutter:
+  uses-material-design: true
