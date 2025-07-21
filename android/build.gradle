@@ -2,7 +2,7 @@ group = "com.github.josxha.maplibre"
 version = "1.0-SNAPSHOT"
 
 buildscript {
-    ext.kotlin_version = "2.1.20"
+    ext.kotlin_version = "2.2.0"
     repositories {
         google()
         mavenCentral()
@@ -12,10 +12,10 @@ buildscript {
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:8.9.1")
+        classpath("com.android.tools.build:gradle:8.11.1")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
         // noinspection GradleDynamicVersion
-        classpath("org.jlleitschuh.gradle:ktlint-gradle:12.2.+")
+        classpath("org.jlleitschuh.gradle:ktlint-gradle:13.0.+")
     }
 }
 
@@ -74,11 +74,11 @@ android {
 // JNIGEN        implementation 'org.maplibre.gl:android-sdk-turf:6.0.1'
 // JNIGEN        implementation 'com.jakewharton.timber:timber:5.0.1'
 // JNIGEN        implementation 'androidx.annotation:annotation:1.9.0'
-        implementation 'org.maplibre.gl:android-sdk:11.8.+' // JNIGEN
+        implementation 'org.maplibre.gl:android-sdk:11.12.+' // JNIGEN
 //        implementation 'org.maplibre.gl:android-plugin-offline-v9:3.0.2'
 // JNIGEN        implementation 'com.squareup.okhttp3:okhttp:4.12.0'
         testImplementation("org.jetbrains.kotlin:kotlin-test")
-        testImplementation("org.mockito:mockito-core:5.17.0")
+        testImplementation("org.mockito:mockito-core:5.18.0")
     }
 
     testOptions {

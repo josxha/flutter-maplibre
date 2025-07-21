@@ -212,7 +212,10 @@ class ItemCard extends StatelessWidget {
         onTap: () => Navigator.of(context).pushNamed(location),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [Icon(iconData), Text(label, textAlign: TextAlign.center)],
+          children: [
+            Icon(iconData),
+            Text(label, textAlign: TextAlign.center),
+          ],
         ),
       ),
     );

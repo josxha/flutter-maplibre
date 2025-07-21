@@ -15,7 +15,7 @@ class WidgetLayerInteractivePage extends StatefulWidget {
 
 class _WidgetLayerPageState extends State<WidgetLayerInteractivePage> {
   late final MapController _controller;
-  final _mapKey = GlobalKey();
+  final GlobalKey _mapKey = GlobalKey();
 
   final _markerPositions = [
     Position(-10, 0),
@@ -68,11 +68,11 @@ class _WidgetLayerPageState extends State<WidgetLayerInteractivePage> {
                       point: _markerPositions[index],
                       child: GestureDetector(
                         onTap: () => _onTap(index),
-                        onLongPressStart:
-                            (details) => _onLongPress(index, details),
+                        onLongPressStart: (details) =>
+                            _onLongPress(index, details),
                         onPanStart: (details) => _onPanStart(details, index),
-                        onPanUpdate:
-                            (details) async => _onPanUpdate(details, index),
+                        onPanUpdate: (details) async =>
+                            _onPanUpdate(details, index),
                         onPanEnd: (details) async => _onPanEnd(details, index),
                         child: const Icon(
                           Icons.location_on,
@@ -99,10 +99,9 @@ class _WidgetLayerPageState extends State<WidgetLayerInteractivePage> {
 
   Future<Position> _toLngLat(Offset eventOffset) async {
     // Only Android returns screen pixel, other platforms return logical pixels.
-    final pixelRatio =
-        (!kIsWeb && Platform.isAndroid)
-            ? MediaQuery.devicePixelRatioOf(context)
-            : 1.0;
+    final pixelRatio = (!kIsWeb && Platform.isAndroid)
+        ? MediaQuery.devicePixelRatioOf(context)
+        : 1.0;
 
     final mapRenderBox =
         _mapKey.currentContext?.findRenderObject() as RenderBox?;
@@ -189,30 +188,29 @@ class _WidgetLayerPageState extends State<WidgetLayerInteractivePage> {
   Future<bool> _showConfirmationDialogDelete(int index) async {
     final isConfirmed = await showDialog<bool>(
       context: context,
-      builder:
-          (context) => AlertDialog(
-            title: Text('Delete marker [$index]?'),
-            actions: <Widget>[
-              TextButton(
-                style: TextButton.styleFrom(
-                  textStyle: Theme.of(context).textTheme.labelLarge,
-                ),
-                child: const Text('Cancel'),
-                onPressed: () {
-                  Navigator.of(context).pop(false);
-                },
-              ),
-              TextButton(
-                style: TextButton.styleFrom(
-                  textStyle: Theme.of(context).textTheme.labelLarge,
-                ),
-                child: const Text('Delete'),
-                onPressed: () {
-                  Navigator.of(context).pop(true);
-                },
-              ),
-            ],
+      builder: (context) => AlertDialog(
+        title: Text('Delete marker [$index]?'),
+        actions: <Widget>[
+          TextButton(
+            style: TextButton.styleFrom(
+              textStyle: Theme.of(context).textTheme.labelLarge,
+            ),
+            child: const Text('Cancel'),
+            onPressed: () {
+              Navigator.of(context).pop(false);
+            },
           ),
+          TextButton(
+            style: TextButton.styleFrom(
+              textStyle: Theme.of(context).textTheme.labelLarge,
+            ),
+            child: const Text('Delete'),
+            onPressed: () {
+              Navigator.of(context).pop(true);
+            },
+          ),
+        ],
+      ),
     );
 
     return isConfirmed ?? false;
@@ -221,30 +219,29 @@ class _WidgetLayerPageState extends State<WidgetLayerInteractivePage> {
   Future<bool> _showConfirmationDialogMove() async {
     final isConfirmed = await showDialog<bool>(
       context: context,
-      builder:
-          (context) => AlertDialog(
-            title: const Text('Accept new position?'),
-            actions: <Widget>[
-              TextButton(
-                style: TextButton.styleFrom(
-                  textStyle: Theme.of(context).textTheme.labelLarge,
-                ),
-                child: const Text('Discard'),
-                onPressed: () {
-                  Navigator.of(context).pop(false);
-                },
-              ),
-              TextButton(
-                style: TextButton.styleFrom(
-                  textStyle: Theme.of(context).textTheme.labelLarge,
-                ),
-                child: const Text('Accept'),
-                onPressed: () {
-                  Navigator.of(context).pop(true);
-                },
-              ),
-            ],
+      builder: (context) => AlertDialog(
+        title: const Text('Accept new position?'),
+        actions: <Widget>[
+          TextButton(
+            style: TextButton.styleFrom(
+              textStyle: Theme.of(context).textTheme.labelLarge,
+            ),
+            child: const Text('Discard'),
+            onPressed: () {
+              Navigator.of(context).pop(false);
+            },
           ),
+          TextButton(
+            style: TextButton.styleFrom(
+              textStyle: Theme.of(context).textTheme.labelLarge,
+            ),
+            child: const Text('Accept'),
+            onPressed: () {
+              Navigator.of(context).pop(true);
+            },
+          ),
+        ],
+      ),
     );
 
     return isConfirmed ?? false;
@@ -253,22 +250,21 @@ class _WidgetLayerPageState extends State<WidgetLayerInteractivePage> {
   Future<void> _showMarkerDetails(int index) async {
     await showDialog<void>(
       context: context,
-      builder:
-          (context) => AlertDialog(
-            title: Text('Details marker with index: $index'),
-            content: Text('Show here the details of Marker with index $index'),
-            actions: <Widget>[
-              TextButton(
-                style: TextButton.styleFrom(
-                  textStyle: Theme.of(context).textTheme.labelLarge,
-                ),
-                child: const Text('Cancel'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
+      builder: (context) => AlertDialog(
+        title: Text('Details marker with index: $index'),
+        content: Text('Show here the details of Marker with index $index'),
+        actions: <Widget>[
+          TextButton(
+            style: TextButton.styleFrom(
+              textStyle: Theme.of(context).textTheme.labelLarge,
+            ),
+            child: const Text('Cancel'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
           ),
+        ],
+      ),
     );
 
     return;

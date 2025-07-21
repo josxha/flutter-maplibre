@@ -38,219 +38,31 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
-/// from: `org.maplibre.android.style.layers.TransitionOptions`
-class TransitionOptions extends jni$_.JObject {
+import 'MapLibreMapOptions.dart' as maplibremapoptions$_;
+
+/// from: `org.maplibre.android.maps.NativeMapOptions`
+class NativeMapOptions extends jni$_.JObject {
   @jni$_.internal
   @core$_.override
-  final jni$_.JObjType<TransitionOptions> $type;
+  final jni$_.JObjType<NativeMapOptions> $type;
 
   @jni$_.internal
-  TransitionOptions.fromReference(jni$_.JReference reference)
+  NativeMapOptions.fromReference(jni$_.JReference reference)
     : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
-    r'org/maplibre/android/style/layers/TransitionOptions',
+    r'org/maplibre/android/maps/NativeMapOptions',
   );
 
   /// The type which includes information such as the signature of this class.
-  static const nullableType = $TransitionOptions$NullableType();
-  static const type = $TransitionOptions$Type();
-  static final _id_new$ = _class.constructorId(r'(JJ)V');
+  static const nullableType = $NativeMapOptions$NullableType();
+  static const type = $NativeMapOptions$Type();
+  static final _id_new$ = _class.constructorId(
+    r'(Lorg/maplibre/android/maps/MapLibreMapOptions;)V',
+  );
 
   static final _new$ =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Int64, jni$_.Int64)>,
-              )
-            >
-          >('globalEnv_NewObject')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-              int,
-            )
-          >();
-
-  /// from: `public void <init>(long j, long j1)`
-  /// The returned object must be released after use, by calling the [release] method.
-  factory TransitionOptions(int j, int j1) {
-    return TransitionOptions.fromReference(
-      _new$(
-        _class.reference.pointer,
-        _id_new$ as jni$_.JMethodIDPtr,
-        j,
-        j1,
-      ).reference,
-    );
-  }
-
-  static final _id_new$1 = _class.constructorId(r'(JJZ)V');
-
-  static final _new$1 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Int64, jni$_.Int64, jni$_.Int32)>,
-              )
-            >
-          >('globalEnv_NewObject')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-              int,
-              int,
-            )
-          >();
-
-  /// from: `public void <init>(long j, long j1, boolean z)`
-  /// The returned object must be released after use, by calling the [release] method.
-  factory TransitionOptions.new$1(int j, int j1, bool z) {
-    return TransitionOptions.fromReference(
-      _new$1(
-        _class.reference.pointer,
-        _id_new$1 as jni$_.JMethodIDPtr,
-        j,
-        j1,
-        z ? 1 : 0,
-      ).reference,
-    );
-  }
-
-  static final _id_fromTransitionOptions = _class.staticMethodId(
-    r'fromTransitionOptions',
-    r'(JJ)Lorg/maplibre/android/style/layers/TransitionOptions;',
-  );
-
-  static final _fromTransitionOptions =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Int64, jni$_.Int64)>,
-              )
-            >
-          >('globalEnv_CallStaticObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-              int,
-            )
-          >();
-
-  /// from: `static public org.maplibre.android.style.layers.TransitionOptions fromTransitionOptions(long j, long j1)`
-  /// The returned object must be released after use, by calling the [release] method.
-  static TransitionOptions? fromTransitionOptions(int j, int j1) {
-    return _fromTransitionOptions(
-      _class.reference.pointer,
-      _id_fromTransitionOptions as jni$_.JMethodIDPtr,
-      j,
-      j1,
-    ).object<TransitionOptions?>(const $TransitionOptions$NullableType());
-  }
-
-  static final _id_getDuration = _class.instanceMethodId(
-    r'getDuration',
-    r'()J',
-  );
-
-  static final _getDuration =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallLongMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public long getDuration()`
-  int getDuration() {
-    return _getDuration(
-      reference.pointer,
-      _id_getDuration as jni$_.JMethodIDPtr,
-    ).long;
-  }
-
-  static final _id_getDelay = _class.instanceMethodId(r'getDelay', r'()J');
-
-  static final _getDelay =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallLongMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public long getDelay()`
-  int getDelay() {
-    return _getDelay(
-      reference.pointer,
-      _id_getDelay as jni$_.JMethodIDPtr,
-    ).long;
-  }
-
-  static final _id_isEnablePlacementTransitions = _class.instanceMethodId(
-    r'isEnablePlacementTransitions',
-    r'()Z',
-  );
-
-  static final _isEnablePlacementTransitions =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public boolean isEnablePlacementTransitions()`
-  bool isEnablePlacementTransitions() {
-    return _isEnablePlacementTransitions(
-      reference.pointer,
-      _id_isEnablePlacementTransitions as jni$_.JMethodIDPtr,
-    ).boolean;
-  }
-
-  static final _id_equals = _class.instanceMethodId(
-    r'equals',
-    r'(Ljava/lang/Object;)Z',
-  );
-
-  static final _equals =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
@@ -259,7 +71,7 @@ class TransitionOptions extends jni$_.JObject {
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
               )
             >
-          >('globalEnv_CallBooleanMethod')
+          >('globalEnv_NewObject')
           .asFunction<
             jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
@@ -268,19 +80,59 @@ class TransitionOptions extends jni$_.JObject {
             )
           >();
 
-  /// from: `public boolean equals(java.lang.Object object)`
-  bool equals(jni$_.JObject? object) {
-    final _$object = object?.reference ?? jni$_.jNullReference;
-    return _equals(
-      reference.pointer,
-      _id_equals as jni$_.JMethodIDPtr,
-      _$object.pointer,
-    ).boolean;
+  /// from: `public void <init>(org.maplibre.android.maps.MapLibreMapOptions mapLibreMapOptions)`
+  /// The returned object must be released after use, by calling the [release] method.
+  factory NativeMapOptions(
+    maplibremapoptions$_.MapLibreMapOptions? mapLibreMapOptions,
+  ) {
+    final _$mapLibreMapOptions =
+        mapLibreMapOptions?.reference ?? jni$_.jNullReference;
+    return NativeMapOptions.fromReference(
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        _$mapLibreMapOptions.pointer,
+      ).reference,
+    );
   }
 
-  static final _id_hashCode$1 = _class.instanceMethodId(r'hashCode', r'()I');
+  static final _id_new$1 = _class.constructorId(r'(FZ)V');
 
-  static final _hashCode$1 =
+  static final _new$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double, jni$_.Int32)>,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+              int,
+            )
+          >();
+
+  /// from: `public void <init>(float f, boolean z)`
+  /// The returned object must be released after use, by calling the [release] method.
+  factory NativeMapOptions.new$1(double f, bool z) {
+    return NativeMapOptions.fromReference(
+      _new$1(
+        _class.reference.pointer,
+        _id_new$1 as jni$_.JMethodIDPtr,
+        f,
+        z ? 1 : 0,
+      ).reference,
+    );
+  }
+
+  static final _id_pixelRatio = _class.instanceMethodId(r'pixelRatio', r'()F');
+
+  static final _pixelRatio =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
@@ -288,7 +140,7 @@ class TransitionOptions extends jni$_.JObject {
                 jni$_.JMethodIDPtr,
               )
             >
-          >('globalEnv_CallIntMethod')
+          >('globalEnv_CallFloatMethod')
           .asFunction<
             jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
@@ -296,20 +148,78 @@ class TransitionOptions extends jni$_.JObject {
             )
           >();
 
-  /// from: `public int hashCode()`
-  int hashCode$1() {
-    return _hashCode$1(
+  /// from: `public float pixelRatio()`
+  double pixelRatio() {
+    return _pixelRatio(
       reference.pointer,
-      _id_hashCode$1 as jni$_.JMethodIDPtr,
-    ).integer;
+      _id_pixelRatio as jni$_.JMethodIDPtr,
+    ).float;
   }
 
-  static final _id_toString$1 = _class.instanceMethodId(
-    r'toString',
+  static final _id_crossSourceCollisions = _class.instanceMethodId(
+    r'crossSourceCollisions',
+    r'()Z',
+  );
+
+  static final _crossSourceCollisions =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public boolean crossSourceCollisions()`
+  bool crossSourceCollisions() {
+    return _crossSourceCollisions(
+      reference.pointer,
+      _id_crossSourceCollisions as jni$_.JMethodIDPtr,
+    ).boolean;
+  }
+
+  static final _id_actionJournalEnabled = _class.instanceMethodId(
+    r'actionJournalEnabled',
+    r'()Z',
+  );
+
+  static final _actionJournalEnabled =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public boolean actionJournalEnabled()`
+  bool actionJournalEnabled() {
+    return _actionJournalEnabled(
+      reference.pointer,
+      _id_actionJournalEnabled as jni$_.JMethodIDPtr,
+    ).boolean;
+  }
+
+  static final _id_actionJournalPath = _class.instanceMethodId(
+    r'actionJournalPath',
     r'()Ljava/lang/String;',
   );
 
-  static final _toString$1 =
+  static final _actionJournalPath =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
@@ -325,84 +235,140 @@ class TransitionOptions extends jni$_.JObject {
             )
           >();
 
-  /// from: `public java.lang.String toString()`
+  /// from: `public java.lang.String actionJournalPath()`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JString? toString$1() {
-    return _toString$1(
+  jni$_.JString? actionJournalPath() {
+    return _actionJournalPath(
       reference.pointer,
-      _id_toString$1 as jni$_.JMethodIDPtr,
+      _id_actionJournalPath as jni$_.JMethodIDPtr,
     ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
-}
 
-final class $TransitionOptions$NullableType
-    extends jni$_.JObjType<TransitionOptions?> {
-  @jni$_.internal
-  const $TransitionOptions$NullableType();
+  static final _id_actionJournalLogFileSize = _class.instanceMethodId(
+    r'actionJournalLogFileSize',
+    r'()J',
+  );
 
-  @jni$_.internal
-  @core$_.override
-  String get signature =>
-      r'Lorg/maplibre/android/style/layers/TransitionOptions;';
+  static final _actionJournalLogFileSize =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallLongMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
-  @jni$_.internal
-  @core$_.override
-  TransitionOptions? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : TransitionOptions.fromReference(reference);
-  @jni$_.internal
-  @core$_.override
-  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+  /// from: `public long actionJournalLogFileSize()`
+  int actionJournalLogFileSize() {
+    return _actionJournalLogFileSize(
+      reference.pointer,
+      _id_actionJournalLogFileSize as jni$_.JMethodIDPtr,
+    ).long;
+  }
 
-  @jni$_.internal
-  @core$_.override
-  jni$_.JObjType<TransitionOptions?> get nullableType => this;
+  static final _id_actionJournalLogFileCount = _class.instanceMethodId(
+    r'actionJournalLogFileCount',
+    r'()J',
+  );
 
-  @jni$_.internal
-  @core$_.override
-  final superCount = 1;
+  static final _actionJournalLogFileCount =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallLongMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
 
-  @core$_.override
-  int get hashCode => ($TransitionOptions$NullableType).hashCode;
-
-  @core$_.override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($TransitionOptions$NullableType) &&
-        other is $TransitionOptions$NullableType;
+  /// from: `public long actionJournalLogFileCount()`
+  int actionJournalLogFileCount() {
+    return _actionJournalLogFileCount(
+      reference.pointer,
+      _id_actionJournalLogFileCount as jni$_.JMethodIDPtr,
+    ).long;
   }
 }
 
-final class $TransitionOptions$Type extends jni$_.JObjType<TransitionOptions> {
+final class $NativeMapOptions$NullableType
+    extends jni$_.JObjType<NativeMapOptions?> {
   @jni$_.internal
-  const $TransitionOptions$Type();
+  const $NativeMapOptions$NullableType();
 
   @jni$_.internal
   @core$_.override
-  String get signature =>
-      r'Lorg/maplibre/android/style/layers/TransitionOptions;';
+  String get signature => r'Lorg/maplibre/android/maps/NativeMapOptions;';
 
   @jni$_.internal
   @core$_.override
-  TransitionOptions fromReference(jni$_.JReference reference) =>
-      TransitionOptions.fromReference(reference);
+  NativeMapOptions? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : NativeMapOptions.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
   @jni$_.internal
   @core$_.override
-  jni$_.JObjType<TransitionOptions?> get nullableType =>
-      const $TransitionOptions$NullableType();
+  jni$_.JObjType<NativeMapOptions?> get nullableType => this;
 
   @jni$_.internal
   @core$_.override
   final superCount = 1;
 
   @core$_.override
-  int get hashCode => ($TransitionOptions$Type).hashCode;
+  int get hashCode => ($NativeMapOptions$NullableType).hashCode;
 
   @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($TransitionOptions$Type) &&
-        other is $TransitionOptions$Type;
+    return other.runtimeType == ($NativeMapOptions$NullableType) &&
+        other is $NativeMapOptions$NullableType;
+  }
+}
+
+final class $NativeMapOptions$Type extends jni$_.JObjType<NativeMapOptions> {
+  @jni$_.internal
+  const $NativeMapOptions$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lorg/maplibre/android/maps/NativeMapOptions;';
+
+  @jni$_.internal
+  @core$_.override
+  NativeMapOptions fromReference(jni$_.JReference reference) =>
+      NativeMapOptions.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<NativeMapOptions?> get nullableType =>
+      const $NativeMapOptions$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($NativeMapOptions$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($NativeMapOptions$Type) &&
+        other is $NativeMapOptions$Type;
   }
 }

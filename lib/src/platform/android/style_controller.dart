@@ -44,10 +44,9 @@ class StyleControllerAndroid implements StyleController {
             layer.id.toJString(),
             layer.sourceId.toJString(),
           ),
-          _ =>
-            throw UnimplementedError(
-              'The Layer is not supported: ${layer.runtimeType}',
-            ),
+          _ => throw UnimplementedError(
+            'The Layer is not supported: ${layer.runtimeType}',
+          ),
         };
 
         // paint and layout properties
@@ -168,8 +167,8 @@ class StyleControllerAndroid implements StyleController {
 
   @override
   Future<void> addImage(String id, Uint8List bytes) =>
-  // TODO: use JNI for this method
-  _hostApi.addImage(id, bytes);
+      // TODO: use JNI for this method
+      _hostApi.addImage(id, bytes);
 
   @override
   Future<void> removeImage(String id) async =>
@@ -180,8 +179,10 @@ class StyleControllerAndroid implements StyleController {
     required String id,
     required String data,
   }) async {
-    final source =
-        _jniStyle.getSourceAs(id.toJString(), T: jni.GeoJsonSource.type)!;
+    final source = _jniStyle.getSourceAs(
+      id.toJString(),
+      T: jni.GeoJsonSource.type,
+    )!;
     source.setGeoJson$3(data.toJString());
   }
 
