@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'package:flutter/foundation.dart';
 import 'package:maplibre/src/map_state.dart';
 import 'package:maplibre/src/offline/offline_manager.dart';
 import 'package:maplibre/src/permission_manager.dart';
@@ -12,19 +11,25 @@ import 'package:maplibre/src/platform_interface.dart';
 final class PlatformImpl extends PlatformInterface {
   @override
   MapLibreMapState createWidgetState() {
-    if (Platform.isAndroid) return MapLibreMapStateAndroid();
+    if (defaultTargetPlatform == TargetPlatform.android) {
+      return MapLibreMapStateAndroid();
+    }
     throw UnimplementedError('Unsupported platform');
   }
 
   @override
   Future<OfflineManager> createOfflineManager() async {
-    if (Platform.isAndroid) return OfflineManagerAndroid.createInstance();
+    if (defaultTargetPlatform == TargetPlatform.android){
+      return OfflineManagerAndroid.createInstance();
+    }
     throw UnimplementedError('Unsupported platform');
   }
 
   @override
   PermissionManager createPermissionManager() {
-    if (Platform.isAndroid) return PermissionManagerAndroid();
+    if (defaultTargetPlatform == TargetPlatform.android) {
+      return PermissionManagerAndroid();
+    }
     throw UnimplementedError('Unsupported platform');
   }
 }
