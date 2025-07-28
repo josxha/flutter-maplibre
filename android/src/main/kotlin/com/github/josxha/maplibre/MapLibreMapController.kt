@@ -10,10 +10,12 @@ import MapLibreHostApi
 import MapOptions
 import android.content.Context
 import android.graphics.BitmapFactory
+import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
 import androidx.lifecycle.DefaultLifecycleObserver
 import com.google.gson.Gson
+import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.platform.PlatformView
 import org.maplibre.android.MapLibre
@@ -48,6 +50,7 @@ class MapLibreMapController(
     private val context: Context,
     private val lifecycleProvider: LifecycleProvider,
     binaryMessenger: BinaryMessenger,
+    private val flutterAssets: FlutterPlugin.FlutterAssets,
 ) : PlatformView,
     DefaultLifecycleObserver,
     OnMapReadyCallback,
@@ -139,7 +142,8 @@ class MapLibreMapController(
                 }
             if (changeReason != null) flutterApi.onStartMoveCamera(changeReason) { }
         }
-        val style = Style.Builder().fromUri(mapOptions.style)
+        
+        val style = getStyle(mapOptions.style)
         mapLibreMap.setStyle(style) { loadedStyle ->
             this.style = loadedStyle
             flutterApi.onStyleLoaded { }
@@ -149,6 +153,30 @@ class MapLibreMapController(
 
     override fun dispose() {
         // free any resources
+    }
+
+    private fun getStyle(styleString: String): Style.Builder? {
+        val style = styleString.trim();
+
+        // Check if json, uri, absolute path or asset path:
+        if (style == null || style.isEmpty()) {
+            Log.e("MapLibreMapController", "getStyle - string empty or null");
+        } else if (style.startsWith("{") || style.startsWith("[")) {
+            return Style.Builder().fromJson(style);
+        } else if (style.startsWith("/")) {
+            // Absolute path.
+            return Style.Builder().fromUri("file://" + style);
+        } else if (!style.startsWith("http://")
+            && !style.startsWith("https://")
+            && !style.startsWith("mapbox://")) {
+            // We are assuming that the style will be loaded from an asset here.
+            val key = flutterAssets.getAssetFilePathByName(style);
+            return Style.Builder().fromUri("asset://" + key);
+        } else {
+            return Style.Builder().fromUri(style);
+        }
+        
+        return null;
     }
 
     private val gson = Gson()
