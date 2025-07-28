@@ -158,24 +158,33 @@ class MapLibreMapController(
     private fun getStyle(styleString: String): Style.Builder? {
         val style = styleString.trim();
 
-        // Check if json, uri, absolute path or asset path:
-        if (style == null || style.isEmpty()) {
+        // Check if style is null or empty.
+        if (style.isEmpty()) {
             Log.e("MapLibreMapController", "getStyle - string empty or null");
-        } else if (style.startsWith("{") || style.startsWith("[")) {
-            return Style.Builder().fromJson(style);
-        } else if (style.startsWith("/")) {
-            // Absolute path.
-            return Style.Builder().fromUri("file://" + style);
-        } else if (!style.startsWith("http://")
-            && !style.startsWith("https://")
-            && !style.startsWith("mapbox://")) {
-            // We are assuming that the style will be loaded from an asset here.
-            val key = flutterAssets.getAssetFilePathByName(style);
-            return Style.Builder().fromUri("asset://" + key);
-        } else {
-            return Style.Builder().fromUri(style);
+            return null;
         }
         
+        // Returns the Style based on its type.
+        return when {
+            // JSON style objects
+            style.startsWith("{") || style.startsWith("[") -> 
+                Style.Builder().fromJson(style)
+                
+            // Absolute file paths
+            style.startsWith("/") -> 
+                Style.Builder().fromUri("file://" + style)
+                
+            // Asset files (non-URL, non-Mapbox)
+            !style.startsWith("http://") && 
+            !style.startsWith("https://") && 
+            !style.startsWith("mapbox://") -> 
+                Style.Builder().fromUri("asset://" + flutterAssets.getAssetFilePathByName(style))
+                
+            // Remote URIs (HTTP/HTTPS/Mapbox)
+            else -> Style.Builder().fromUri(style)
+        }
+        
+        Log.e("MapLibreMapController", "getStyle - unable to obtain style")
         return null;
     }
 
