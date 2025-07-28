@@ -19,7 +19,7 @@ final class PlatformImpl extends PlatformInterface {
 
   @override
   Future<OfflineManager> createOfflineManager() async {
-    if (defaultTargetPlatform == TargetPlatform.android){
+    if (defaultTargetPlatform == TargetPlatform.android) {
       return OfflineManagerAndroid.createInstance();
     }
     throw UnimplementedError('Unsupported platform');
