@@ -29,7 +29,8 @@ class WidgetLayer extends StatelessWidget {
     if (controller == null || camera == null) return const SizedBox.shrink();
 
     // Only Android returns screen pixel, other platforms return logical pixels.
-    final pixelRatio = (!kIsWeb && defaultTargetPlatform == TargetPlatform.android)
+    final pixelRatio =
+        (!kIsWeb && defaultTargetPlatform == TargetPlatform.android)
         ? MediaQuery.devicePixelRatioOf(context)
         : 1.0;
 
