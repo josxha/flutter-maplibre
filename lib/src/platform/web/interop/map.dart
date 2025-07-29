@@ -11,7 +11,7 @@ extension type JsMap._(Camera _) implements Camera {
   /// https://github.com/maplibre/maplibre-gl-js/blob/76410880f81de2582be073bc2d730b3f4b8f254d/src/ui/map.ts#L1383
   external void on(String type, JSExportedDartFunction listener);
 
-  /// Register an once time callback.
+  /// Register a one-time callback.
   ///
   /// https://github.com/maplibre/maplibre-gl-js/blob/02103f820a524ed359d94a81015e2d8e966f2c2a/src/ui/map.ts#L1593
   external void once(String type, JSExportedDartFunction listener);
