@@ -10,6 +10,7 @@ abstract class MapStyles {
       'https://api.maptiler.com/maps/streets-v2/style.json?key=$_maptilerKey';
   static const protomapsLightPmTiles =
       'assets/style/protomaps-light.json';
+  static const translucentAsset = 'assets/styles/translucent_style.json';
 
   static const _maptilerKey = 'OPCgnZ51sHETbEQ4wnkd';
   static const _protomapsKey = 'a6f9aebb3965458c';
