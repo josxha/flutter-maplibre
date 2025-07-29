@@ -47,7 +47,6 @@ class _StyledMapPageState extends State<StyledMapPage> {
         ),
       ),
       body: MapLibreMap(
-        acceptLicense: true,
         options: MapOptions(
           initCenter: Position(9.17, 47.68),
           initZoom: 2,

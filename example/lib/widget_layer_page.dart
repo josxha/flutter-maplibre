@@ -17,7 +17,6 @@ class _WidgetLayerPageState extends State<WidgetLayerPage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Widget Layer')),
       body: MapLibreMap(
-        acceptLicense: true,
         options: MapOptions(initZoom: 3, initCenter: Position(0, 0)),
         children: [
           WidgetLayer(

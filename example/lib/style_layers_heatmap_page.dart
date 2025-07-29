@@ -20,7 +20,6 @@ class _StyleLayersHeatmapPageState extends State<StyleLayersHeatmapPage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Heatmap Style Layer')),
       body: MapLibreMap(
-        acceptLicense: true,
         options: MapOptions(initCenter: Position(-120, 50), initZoom: 2),
         onStyleLoaded: _onStyleLoaded,
       ),

@@ -20,16 +20,18 @@ final class PlatformImpl extends PlatformInterface {
   };
 
   @override
-  Future<OfflineManager> createOfflineManager() async => switch (defaultTargetPlatform) {
-    TargetPlatform.android => OfflineManagerAndroid.createInstance(),
-    TargetPlatform.iOS => OfflineManagerIos.createInstance(),
-    _ => throw UnimplementedError('Unsupported platform'),
-  };
+  Future<OfflineManager> createOfflineManager() async =>
+      switch (defaultTargetPlatform) {
+        TargetPlatform.android => OfflineManagerAndroid.createInstance(),
+        TargetPlatform.iOS => OfflineManagerIos.createInstance(),
+        _ => throw UnimplementedError('Unsupported platform'),
+      };
 
   @override
-  PermissionManager createPermissionManager() => switch (defaultTargetPlatform) {
-    TargetPlatform.android => PermissionManagerAndroid(),
-    TargetPlatform.iOS => const PermissionManagerIos(),
-    _ => throw UnimplementedError('Unsupported platform'),
-  };
+  PermissionManager createPermissionManager() =>
+      switch (defaultTargetPlatform) {
+        TargetPlatform.android => PermissionManagerAndroid(),
+        TargetPlatform.iOS => const PermissionManagerIos(),
+        _ => throw UnimplementedError('Unsupported platform'),
+      };
 }

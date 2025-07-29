@@ -205,7 +205,6 @@ pitch: ${camera.pitch}'''),
           ),
           Expanded(
             child: MapLibreMap(
-              acceptLicense: true,
               options: MapOptions(
                 initCenter: Position(9.17, 47.68),
                 initZoom: 3,

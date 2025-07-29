@@ -24,7 +24,6 @@ class _TwoMapsPageState extends State<TwoMapsPage> {
           _ButtonsWidget(controller: _controller1),
           Expanded(
             child: MapLibreMap(
-              acceptLicense: true,
               options: MapOptions(initCenter: Position(9.17, 47.68)),
               onMapCreated: (controller) {
                 WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -36,7 +35,6 @@ class _TwoMapsPageState extends State<TwoMapsPage> {
           _ButtonsWidget(controller: _controller2),
           Expanded(
             child: MapLibreMap(
-              acceptLicense: true,
               options: MapOptions(initCenter: Position(9.17, 47.68)),
               onMapCreated: (controller) {
                 WidgetsBinding.instance.addPostFrameCallback((_) {

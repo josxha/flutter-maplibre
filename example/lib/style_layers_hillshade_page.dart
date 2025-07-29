@@ -21,7 +21,6 @@ class _StyleLayersHillshadePageState extends State<StyleLayersHillshadePage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Hillshade Style Layer')),
       body: MapLibreMap(
-        acceptLicense: true,
         options: MapOptions(
           initCenter: Position(11.39085, 47.27574),
           initZoom: 10,

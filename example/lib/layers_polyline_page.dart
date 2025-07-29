@@ -23,7 +23,6 @@ class _LayersPolylinePageState extends State<LayersPolylinePage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Polyline Layers')),
       body: MapLibreMap(
-        acceptLicense: true,
         options: MapOptions(initZoom: 7, initCenter: Position(9.17, 47.68)),
         onEvent: (event) {
           if (event case MapEventClick()) {

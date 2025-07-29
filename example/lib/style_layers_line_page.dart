@@ -18,7 +18,6 @@ class _StyleLayersLinePageState extends State<StyleLayersLinePage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Line Style Layer')),
       body: MapLibreMap(
-        acceptLicense: true,
         options: MapOptions(initZoom: 7, initCenter: Position(9.17, 47.68)),
         onStyleLoaded: _onStyleLoaded,
       ),

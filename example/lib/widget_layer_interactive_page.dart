@@ -43,7 +43,6 @@ class _WidgetLayerPageState extends State<WidgetLayerInteractivePage> {
           ),
           Expanded(
             child: MapLibreMap(
-              acceptLicense: true,
               key: _mapKey,
               options: MapOptions(
                 initZoom: 3,
