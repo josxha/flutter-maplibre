@@ -16,6 +16,8 @@ your `web/index.html` file:
     <script src='https://unpkg.com/maplibre-gl@^5.0/dist/maplibre-gl.js'></script>
     <link href='https://unpkg.com/maplibre-gl@^5.0/dist/maplibre-gl.css'
           rel='stylesheet'/>
+    <!-- Next line only required if you want to use PMTiles as source. -->
+    <script src='https://unpkg.com/pmtiles@^4.0/dist/pmtiles.js'></script>
     <!-- highlight-end -->
 </head>
 </html>
