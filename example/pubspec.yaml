@@ -32,7 +32,6 @@ flutter:
   assets:
     - assets/styles/
     - assets/geojson/
-    - assets/style/
 
 flutter_launcher_icons:
   android: "ic_launcher"
