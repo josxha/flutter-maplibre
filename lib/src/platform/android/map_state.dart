@@ -479,22 +479,24 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     final mode = switch (trackBearing) {
       BearingTrackMode.none =>
         trackLocation
-            ? jni
-                  .CameraMode
-                  .TRACKING // only location
-            : jni.CameraMode.NONE, // neither location nor bearing
+            // only location
+            ? jni.CameraMode.TRACKING
+            // neither location nor bearing
+            : jni.CameraMode.NONE,
+
       BearingTrackMode.compass =>
         trackLocation
-            ? jni
-                  .CameraMode
-                  .TRACKING_COMPASS // location with compass bearing
-            : jni.CameraMode.NONE_COMPASS, // only compass bearing
+            // location with compass bearing
+            ? jni.CameraMode.TRACKING_COMPASS
+            // only compass bearing
+            : jni.CameraMode.NONE_COMPASS,
+
       BearingTrackMode.gps =>
         trackLocation
-            ? jni
-                  .CameraMode
-                  .TRACKING_GPS // location with gps bearing
-            : jni.CameraMode.NONE_GPS, // only gps bearing
+            // location with gps bearing
+            ? jni.CameraMode.TRACKING_GPS
+            // only gps bearing
+            : jni.CameraMode.NONE_GPS,
     };
     _locationComponent.setCameraMode(mode);
   }
