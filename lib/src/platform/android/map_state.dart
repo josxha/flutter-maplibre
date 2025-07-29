@@ -537,8 +537,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     if (trimmed.startsWith('{')) {
       // Raw JSON
       builder.fromJson(trimmed.toJString());
-    }
-    if (trimmed.startsWith('/')) {
+    } else if (trimmed.startsWith('/')) {
       builder.fromUri('file://$trimmed'.toJString());
     } else if (!trimmed.startsWith('http://') &&
         !trimmed.startsWith('https://') &&
