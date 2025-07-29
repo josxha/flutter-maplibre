@@ -16,13 +16,6 @@
 	"glyphs": "https://orangemug.github.io/font-glyphs/glyphs/{fontstack}/{range}.pbf",
 	"layers": [
 		{
-			"id": "background",
-			"type": "background",
-			"paint": {
-				"background-color": "rgba(255, 255, 255, 0)"
-			}
-		},
-		{
 			"id": "countries",
 			"type": "line",
 			"source": "demotiles",
