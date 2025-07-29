@@ -172,7 +172,7 @@ class MapLibreMapController(
 
             // Absolute file paths
             style.startsWith("/") ->
-                Style.Builder().fromUri("file://" + style)
+                Style.Builder().fromUri("file://$style")
 
             // Asset files (non-URL, non-Mapbox)
             !style.startsWith("http://") &&
