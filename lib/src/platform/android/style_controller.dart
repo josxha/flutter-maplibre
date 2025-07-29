@@ -207,7 +207,6 @@ class StyleControllerAndroid implements StyleController {
       // void error during setStyle()
       return const [];
     }
-
   }
 
   @override
