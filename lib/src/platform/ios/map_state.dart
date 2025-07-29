@@ -81,8 +81,10 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     bool accuracyAnimation = true,
     bool compassAnimation = true,
     bool pulse = true,
+    BearingRenderMode bearingRenderMode = BearingRenderMode.gps,
   }) async {
     _mapView.showsUserLocation = true;
+    // TODO: apply bearingRenderMode
   }
 
   @override
