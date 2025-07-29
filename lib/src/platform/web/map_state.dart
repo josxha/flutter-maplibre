@@ -405,6 +405,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     bool accuracyAnimation = true,
     bool compassAnimation = true,
     bool pulse = true,
+    BearingRenderMode bearingRenderMode = BearingRenderMode.gps,
   }) async {
     debugPrint("Can't enable the user location on web programmatically.");
   }

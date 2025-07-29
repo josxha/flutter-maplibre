@@ -127,6 +127,7 @@ abstract interface class MapController {
     bool accuracyAnimation = true,
     bool compassAnimation = true,
     bool pulse = true,
+    BearingRenderMode bearingRenderMode = BearingRenderMode.gps,
   });
 
   /// Track the user location on the map
