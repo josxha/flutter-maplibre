@@ -147,37 +147,37 @@ class MenuPage extends StatelessWidget {
               maxCrossAxisExtent: 150,
               childAspectRatio: 1.5,
               children: const [
-                const ItemCard(
+                ItemCard(
                   label: 'Mixed Layers',
                   iconData: Icons.control_point_duplicate_outlined,
                   location: LayersMixedPage.location,
                 ),
-                const ItemCard(
+                ItemCard(
                   label: 'Widgets',
                   iconData: Icons.location_on,
                   location: WidgetLayerPage.location,
                 ),
-                const ItemCard(
+                ItemCard(
                   label: 'Interactive Widgets',
                   iconData: Icons.location_on,
                   location: WidgetLayerInteractivePage.location,
                 ),
-                const ItemCard(
+                ItemCard(
                   label: 'Circles',
                   iconData: Icons.circle,
                   location: LayersCirclePage.location,
                 ),
-                const ItemCard(
+                ItemCard(
                   label: 'Markers',
                   iconData: Icons.location_on,
                   location: LayersMarkerPage.location,
                 ),
-                const ItemCard(
+                ItemCard(
                   label: 'Polygons',
                   iconData: Icons.format_shapes,
                   location: LayersPolygonPage.location,
                 ),
-                const ItemCard(
+                ItemCard(
                   label: 'Polylines',
                   iconData: Icons.polyline,
                   location: LayersPolylinePage.location,
@@ -189,42 +189,42 @@ class MenuPage extends StatelessWidget {
               maxCrossAxisExtent: 150,
               childAspectRatio: 1.5,
               children: const [
-                const ItemCard(
+                ItemCard(
                   label: 'Circle',
                   iconData: Icons.circle,
                   location: StyleLayersCirclePage.location,
                 ),
-                const ItemCard(
+                ItemCard(
                   label: 'Fill',
                   iconData: Icons.format_shapes,
                   location: StyleLayersFillPage.location,
                 ),
-                const ItemCard(
+                ItemCard(
                   label: 'Fill Extrusion',
                   iconData: Icons.house,
                   location: StyleLayersFillExtrusionPage.location,
                 ),
-                const ItemCard(
+                ItemCard(
                   label: 'Heatmap',
                   iconData: Icons.thermostat,
                   location: StyleLayersHeatmapPage.location,
                 ),
-                const ItemCard(
+                ItemCard(
                   label: 'Hillshade',
                   iconData: Icons.landscape,
                   location: StyleLayersHillshadePage.location,
                 ),
-                const ItemCard(
+                ItemCard(
                   label: 'Line',
                   iconData: Icons.polyline,
                   location: StyleLayersLinePage.location,
                 ),
-                const ItemCard(
+                ItemCard(
                   label: 'Raster',
                   iconData: Icons.grid_on,
                   location: StyleLayersRasterPage.location,
                 ),
-                const ItemCard(
+                ItemCard(
                   label: 'Symbol',
                   iconData: Icons.emoji_emotions,
                   location: StyleLayersSymbolPage.location,
