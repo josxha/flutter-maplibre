@@ -163,23 +163,6 @@ class _OfflinePageState extends State<OfflinePage> {
                         )
                       : Text(_downloadProgressBregenz!),
                 ),
-                if (!Platform.isIOS)
-                  ListTile(
-                    title: const Text('Merge Offline Regions'),
-                    onTap: () async {
-                      try {
-                        final regions = await manager.mergeOfflineRegions(
-                          path: 'region.mbtiles',
-                        );
-                        _print(
-                          'offline regions merged:\n${regions.join('\n')}',
-                        );
-                      } on Exception catch (error, stacktrace) {
-                        _print(error.toString());
-                        debugPrintStack(stackTrace: stacktrace);
-                      }
-                    },
-                  ),
                 ListTile(
                   title: const Text('Get Offline Region'),
                   onTap: () async {

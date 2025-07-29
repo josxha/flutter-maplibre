@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:maplibre_example/animation_page.dart';
@@ -13,6 +14,7 @@ import 'package:maplibre_example/layers_polyline_page.dart';
 import 'package:maplibre_example/offline_page.dart';
 import 'package:maplibre_example/parameters_page.dart';
 import 'package:maplibre_example/permissions_page.dart';
+import 'package:maplibre_example/pmtiles_page.dart';
 import 'package:maplibre_example/style_layers_circle_page.dart';
 import 'package:maplibre_example/style_layers_fill_extrusion_page.dart';
 import 'package:maplibre_example/style_layers_fill_page.dart';
@@ -49,6 +51,47 @@ class MenuPage extends StatelessWidget {
                   iconData: Icons.map,
                   location: StyledMapPage.location,
                 ),
+                const ItemCard(
+                  label: 'PMTiles Source',
+                  iconData: Icons.file_open,
+                  location: PmTilesPage.location,
+                ),
+                const ItemCard(
+                  label: 'Parameters',
+                  iconData: Icons.build,
+                  location: ParametersPage.location,
+                ),
+                const ItemCard(
+                  label: 'Gestures',
+                  iconData: Icons.back_hand,
+                  location: GesturesPage.location,
+                ),
+                const ItemCard(
+                  label: 'Events',
+                  iconData: Icons.notifications,
+                  location: EventsPage.location,
+                ),
+                const ItemCard(
+                  label: 'Controller',
+                  iconData: Icons.api,
+                  location: ControllerPage.location,
+                ),
+                const ItemCard(
+                  label: 'Two Maps',
+                  iconData: Icons.looks_two,
+                  location: TwoMapsPage.location,
+                ),
+                const ItemCard(
+                  label: 'Animation',
+                  iconData: Icons.animation,
+                  location: AnimationPage.location,
+                ),
+                if (!kIsWeb)
+                  const ItemCard(
+                    label: 'User Location',
+                    iconData: Icons.gps_fixed,
+                    location: UserLocationPage.location,
+                  ),
                 const ItemCard(
                   label: 'Parameters',
                   iconData: Icons.build,
@@ -104,37 +147,37 @@ class MenuPage extends StatelessWidget {
               maxCrossAxisExtent: 150,
               childAspectRatio: 1.5,
               children: const [
-                ItemCard(
+                const ItemCard(
                   label: 'Mixed Layers',
                   iconData: Icons.control_point_duplicate_outlined,
                   location: LayersMixedPage.location,
                 ),
-                ItemCard(
+                const ItemCard(
                   label: 'Widgets',
                   iconData: Icons.location_on,
                   location: WidgetLayerPage.location,
                 ),
-                ItemCard(
+                const ItemCard(
                   label: 'Interactive Widgets',
                   iconData: Icons.location_on,
                   location: WidgetLayerInteractivePage.location,
                 ),
-                ItemCard(
+                const ItemCard(
                   label: 'Circles',
                   iconData: Icons.circle,
                   location: LayersCirclePage.location,
                 ),
-                ItemCard(
+                const ItemCard(
                   label: 'Markers',
                   iconData: Icons.location_on,
                   location: LayersMarkerPage.location,
                 ),
-                ItemCard(
+                const ItemCard(
                   label: 'Polygons',
                   iconData: Icons.format_shapes,
                   location: LayersPolygonPage.location,
                 ),
-                ItemCard(
+                const ItemCard(
                   label: 'Polylines',
                   iconData: Icons.polyline,
                   location: LayersPolylinePage.location,
@@ -146,42 +189,42 @@ class MenuPage extends StatelessWidget {
               maxCrossAxisExtent: 150,
               childAspectRatio: 1.5,
               children: const [
-                ItemCard(
+                const ItemCard(
                   label: 'Circle',
                   iconData: Icons.circle,
                   location: StyleLayersCirclePage.location,
                 ),
-                ItemCard(
+                const ItemCard(
                   label: 'Fill',
                   iconData: Icons.format_shapes,
                   location: StyleLayersFillPage.location,
                 ),
-                ItemCard(
+                const ItemCard(
                   label: 'Fill Extrusion',
                   iconData: Icons.house,
                   location: StyleLayersFillExtrusionPage.location,
                 ),
-                ItemCard(
+                const ItemCard(
                   label: 'Heatmap',
                   iconData: Icons.thermostat,
                   location: StyleLayersHeatmapPage.location,
                 ),
-                ItemCard(
+                const ItemCard(
                   label: 'Hillshade',
                   iconData: Icons.landscape,
                   location: StyleLayersHillshadePage.location,
                 ),
-                ItemCard(
+                const ItemCard(
                   label: 'Line',
                   iconData: Icons.polyline,
                   location: StyleLayersLinePage.location,
                 ),
-                ItemCard(
+                const ItemCard(
                   label: 'Raster',
                   iconData: Icons.grid_on,
                   location: StyleLayersRasterPage.location,
                 ),
-                ItemCard(
+                const ItemCard(
                   label: 'Symbol',
                   iconData: Icons.emoji_emotions,
                   location: StyleLayersSymbolPage.location,

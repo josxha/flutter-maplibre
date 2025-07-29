@@ -11,8 +11,8 @@ part 'events.dart';
 part 'gesture_handlers.dart';
 part 'map.dart';
 part 'map_geojson_feature.dart';
-part 'style_specification.dart';
 part 'marker.dart';
+part 'style_specification.dart';
 
 /// A simple x/y [Point] class for JavaScript.
 @anonymous
@@ -61,3 +61,7 @@ extension type LngLatBounds._(JSObject _) implements JSObject {
   /// Returns the north edge of the bounding box.
   external num getNorth();
 }
+
+/// https://github.com/maplibre/maplibre-gl-js/blob/1a8ef7ff9848105e49a29e3f5e59a52c14b9fbe2/src/source/protocol_crud.ts#L33
+@JS()
+external void addProtocol(String customProtocol, JSAny loadFn);

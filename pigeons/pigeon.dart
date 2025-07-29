@@ -7,13 +7,13 @@ import 'package:pigeon/pigeon.dart';
     dartPackageName: 'maplibre',
     copyrightHeader: 'pigeons/header.txt',
     // linux
-    gobjectHeaderOut: 'linux/pigeon.g.h',
-    gobjectSourceOut: 'linux/pigeon.g.cc',
-    gobjectOptions: GObjectOptions(),
+    // gobjectHeaderOut: 'linux/pigeon.g.h',
+    // gobjectSourceOut: 'linux/pigeon.g.cc',
+    // gobjectOptions: GObjectOptions(),
     // windows
-    cppOptions: CppOptions(namespace: 'pigeon_maplibre'),
-    cppHeaderOut: 'windows/runner/pigeon.g.h',
-    cppSourceOut: 'windows/runner/pigeon.g.cpp',
+    // cppOptions: CppOptions(namespace: 'pigeon_maplibre'),
+    // cppHeaderOut: 'windows/runner/pigeon.g.h',
+    // cppSourceOut: 'windows/runner/pigeon.g.cpp',
     // android
     kotlinOut: 'android/src/main/kotlin/com/github/josxha/maplibre/Pigeon.g.kt',
     kotlinOptions: KotlinOptions(),
