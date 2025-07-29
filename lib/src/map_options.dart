@@ -39,6 +39,9 @@ class MapOptions {
 
   /// The style URL that should get used. If not set, the default MapLibre style
   /// is used (https://demotiles.maplibre.org/style.json).
+  ///
+  /// If you need to change to a different map style later on,
+  /// use [MapController.setStyle].
   final String initStyle;
 
   /// The initial zoom level.

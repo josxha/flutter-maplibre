@@ -140,6 +140,12 @@ abstract interface class MapController {
     bool trackLocation = true,
     BearingTrackMode trackBearing = BearingTrackMode.gps,
   });
+
+  /// Set a new map style.
+  ///
+  /// All temporary layers will get removed as well. You can apply them again in
+  /// the [MapLibreMap.onStyleLoaded] callback.
+  Future<void> setStyle(String style);
 }
 
 /// The mode how the bearing should get tracked on the map.

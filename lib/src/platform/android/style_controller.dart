@@ -191,17 +191,23 @@ class StyleControllerAndroid implements StyleController {
 
   @override
   List<String> getAttributionsSync() {
-    final jSources = _jniStyle.getSources();
-    final attributions = <String>[];
-    for (final jSource in jSources) {
-      final jniAttribution = jSource?.getAttribution();
-      if (jniAttribution == null) continue;
-      final attribution = jniAttribution.toDartString(releaseOriginal: true);
-      if (attribution.trim().isEmpty) continue;
-      attributions.add(attribution);
+    try {
+      final jSources = _jniStyle.getSources();
+      final attributions = <String>[];
+      for (final jSource in jSources) {
+        final jniAttribution = jSource?.getAttribution();
+        if (jniAttribution == null) continue;
+        final attribution = jniAttribution.toDartString(releaseOriginal: true);
+        if (attribution.trim().isEmpty) continue;
+        attributions.add(attribution);
+      }
+      jSources.release();
+      return attributions;
+    } catch (e) {
+      // void error during setStyle()
+      return const [];
     }
-    jSources.release();
-    return attributions;
+
   }
 
   @override
