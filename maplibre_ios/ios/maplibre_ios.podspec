@@ -1,20 +1,22 @@
 #
 # To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html.
-# Run `pod lib lint maplibre.podspec` to validate before publishing.
+# Run `pod lib lint maplibre_ios.podspec` to validate before publishing.
 #
 Pod::Spec.new do |s|
-  s.name             = 'maplibre'
+  s.name             = 'maplibre_ios'
   s.version          = '0.0.1'
-  s.summary          = 'A new Flutter plugin project.'
+  s.summary          = 'Helper package for maplibre that provides iOS FFI bindings'
   s.description      = <<-DESC
-A new Flutter plugin project.
+Helper package for maplibre that provides iOS FFI bindings
                        DESC
-  s.homepage         = 'http://example.com'
+  s.homepage         = 'https://github.com/josxha/flutter-maplibre'
   s.license          = { :file => '../LICENSE' }
-  s.author           = { 'Your Company' => 'email@example.com' }
+  s.author           = { 'Joscha Eckert' => 'info@joscha-eckert.de' }
   s.source           = { :path => '.' }
-  s.source_files = 'maplibre/Sources/maplibre/**/*'
+  s.source_files = 'maplibre_ios/Sources/maplibre_ios/**/*'
   s.dependency 'Flutter'
+  # Needs to be the same version as in maplibre_ios/Package.swift
+  s.dependency 'MapLibre', '~> 6.17'
   s.platform = :ios, '12.0'
 
   # Flutter.framework does not contain a i386 slice.
@@ -25,5 +27,5 @@ A new Flutter plugin project.
   # required reason APIs, update the PrivacyInfo.xcprivacy file to describe your
   # plugin's privacy impact, and then uncomment this line. For more information,
   # see https://developer.apple.com/documentation/bundleresources/privacy_manifest_files
-  # s.resource_bundles = {'maplibre_privacy' => ['maplibre/Sources/maplibre/PrivacyInfo.xcprivacy']}
+  # s.resource_bundles = {'maplibre_ios_privacy' => ['maplibre_ios/Sources/maplibre_ios/PrivacyInfo.xcprivacy']}
 end

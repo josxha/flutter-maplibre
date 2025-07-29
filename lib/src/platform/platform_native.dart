@@ -5,31 +5,33 @@ import 'package:maplibre/src/permission_manager.dart';
 import 'package:maplibre/src/platform/android/map_state.dart';
 import 'package:maplibre/src/platform/android/offline_manager.dart';
 import 'package:maplibre/src/platform/android/permission_manager.dart';
+import 'package:maplibre/src/platform/ios/map_state.dart';
+import 'package:maplibre/src/platform/ios/offline_manager.dart';
+import 'package:maplibre/src/platform/ios/permission_manager.dart';
 import 'package:maplibre/src/platform_interface.dart';
 
 /// An implementation of [PlatformInterface] that uses method channels and ffi.
 final class PlatformImpl extends PlatformInterface {
   @override
-  MapLibreMapState createWidgetState() {
-    if (defaultTargetPlatform == TargetPlatform.android) {
-      return MapLibreMapStateAndroid();
-    }
-    throw UnimplementedError('Unsupported platform');
-  }
+  MapLibreMapState createWidgetState() => switch (defaultTargetPlatform) {
+    TargetPlatform.android => MapLibreMapStateAndroid(),
+    TargetPlatform.iOS => MapLibreMapStateIos(),
+    _ => throw UnimplementedError('Unsupported platform'),
+  };
 
   @override
-  Future<OfflineManager> createOfflineManager() async {
-    if (defaultTargetPlatform == TargetPlatform.android) {
-      return OfflineManagerAndroid.createInstance();
-    }
-    throw UnimplementedError('Unsupported platform');
-  }
+  Future<OfflineManager> createOfflineManager() async =>
+      switch (defaultTargetPlatform) {
+        TargetPlatform.android => OfflineManagerAndroid.createInstance(),
+        TargetPlatform.iOS => OfflineManagerIos.createInstance(),
+        _ => throw UnimplementedError('Unsupported platform'),
+      };
 
   @override
-  PermissionManager createPermissionManager() {
-    if (defaultTargetPlatform == TargetPlatform.android) {
-      return PermissionManagerAndroid();
-    }
-    throw UnimplementedError('Unsupported platform');
-  }
+  PermissionManager createPermissionManager() =>
+      switch (defaultTargetPlatform) {
+        TargetPlatform.android => PermissionManagerAndroid(),
+        TargetPlatform.iOS => const PermissionManagerIos(),
+        _ => throw UnimplementedError('Unsupported platform'),
+      };
 }
