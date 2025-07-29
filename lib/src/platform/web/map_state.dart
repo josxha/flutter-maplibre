@@ -57,7 +57,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       document.body?.appendChild(_htmlElement);
       // Invoke the onMapCreated callback async to avoid getting it called
       // during the widget build.
-      Future.delayed(Duration.zero, () {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
         widget.onEvent?.call(MapEventMapCreated(mapController: this));
         widget.onMapCreated?.call(this);
         setState(() => isInitialized = true);
@@ -76,14 +76,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       _map.on(
         interop.MapEventType.load,
         (interop.MapMouseEvent event) {
-          style?.dispose();
-          final styleCtrl = StyleControllerWeb(_map);
-          style = styleCtrl;
-          widget.onEvent?.call(MapEventStyleLoaded(styleCtrl));
-          widget.onStyleLoaded?.call(styleCtrl);
-          _layerManager = LayerManager(styleCtrl, widget.layers);
-          // setState is needed to refresh the flutter widgets used in MapLibreMap.children.
-          setState(() {});
+          _onStyleLoaded();
         }.toJS,
       );
       _map.on(
@@ -412,6 +405,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     bool accuracyAnimation = true,
     bool compassAnimation = true,
     bool pulse = true,
+    BearingRenderMode bearingRenderMode = BearingRenderMode.gps,
   }) async {
     debugPrint("Can't enable the user location on web programmatically.");
   }
@@ -439,5 +433,27 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
           ),
         )
         .toList(growable: false);
+  }
+
+  @override
+  Future<void> setStyle(String style) async {
+    _map.once(
+      interop.MapEventType.styleLoad,
+      (JSAny _) {
+        _onStyleLoaded();
+      }.toJS,
+    );
+    _map.setStyle(style);
+  }
+
+  void _onStyleLoaded() {
+    style?.dispose();
+    final styleCtrl = StyleControllerWeb(_map);
+    style = styleCtrl;
+    widget.onEvent?.call(MapEventStyleLoaded(styleCtrl));
+    widget.onStyleLoaded?.call(styleCtrl);
+    _layerManager = LayerManager(styleCtrl, widget.layers);
+    // setState is needed to refresh the flutter widgets used in MapLibreMap.children.
+    setState(() {});
   }
 }

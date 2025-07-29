@@ -55,4 +55,7 @@ abstract class MapEventType {
   // All currently requested tiles have loaded
   // All fade/transition animations have completed
   static const idle = 'idle';
+
+  /// Called once the style has loaded.
+  static const styleLoad = 'style.load';
 }

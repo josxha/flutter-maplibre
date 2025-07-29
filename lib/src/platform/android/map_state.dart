@@ -479,22 +479,24 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     final mode = switch (trackBearing) {
       BearingTrackMode.none =>
         trackLocation
-            ? jni
-                  .CameraMode
-                  .TRACKING // only location
-            : jni.CameraMode.NONE, // neither location nor bearing
+            // only location
+            ? jni.CameraMode.TRACKING
+            // neither location nor bearing
+            : jni.CameraMode.NONE,
+
       BearingTrackMode.compass =>
         trackLocation
-            ? jni
-                  .CameraMode
-                  .TRACKING_COMPASS // location with compass bearing
-            : jni.CameraMode.NONE_COMPASS, // only compass bearing
+            // location with compass bearing
+            ? jni.CameraMode.TRACKING_COMPASS
+            // only compass bearing
+            : jni.CameraMode.NONE_COMPASS,
+
       BearingTrackMode.gps =>
         trackLocation
-            ? jni
-                  .CameraMode
-                  .TRACKING_GPS // location with gps bearing
-            : jni.CameraMode.NONE_GPS, // only gps bearing
+            // location with gps bearing
+            ? jni.CameraMode.TRACKING_GPS
+            // only gps bearing
+            : jni.CameraMode.NONE_GPS,
     };
     _locationComponent.setCameraMode(mode);
   }
@@ -528,5 +530,35 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     region.release();
     final bounds = jniBounds.toLngLatBounds(releaseOriginal: true);
     return bounds;
+  }
+
+  @override
+  Future<void> setStyle(String style) async {
+    final trimmed = style.trim();
+    final builder = jni.Style$Builder();
+    if (trimmed.startsWith('{')) {
+      // Raw JSON
+      builder.fromJson(trimmed.toJString());
+    } else if (trimmed.startsWith('/')) {
+      builder.fromUri('file://$trimmed'.toJString());
+    } else if (!trimmed.startsWith('http://') &&
+        !trimmed.startsWith('https://') &&
+        !trimmed.startsWith('mapbox://')) {
+      // flutter asset
+      final content = await rootBundle.loadString(trimmed);
+      builder.fromJson(content.toJString());
+    } else {
+      // URI
+      builder.fromUri(trimmed.toJString());
+    }
+    _jniMapLibreMap?.setStyle$3(
+      builder,
+      jni.Style$OnStyleLoaded.implement(
+        jni.$Style$OnStyleLoaded(
+          onStyleLoaded: (style) => onStyleLoaded(),
+        ),
+      ),
+    );
+    builder.release();
   }
 }
