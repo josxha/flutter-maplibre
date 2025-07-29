@@ -11,6 +11,7 @@ import 'package:maplibre/src/map_state.dart';
 import 'package:maplibre/src/platform/web/extensions.dart';
 import 'package:maplibre/src/platform/web/interop/interop.dart' as interop;
 import 'package:maplibre/src/platform/web/interop/json.dart';
+import 'package:maplibre/src/platform/web/interop/pmtiles.dart' as pmtiles;
 import 'package:web/web.dart';
 
 part 'style_controller.dart';
@@ -41,6 +42,14 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         ..style.margin = '0'
         ..style.height = '100%'
         ..style.width = '100%';
+
+      // add pmtiles support
+      try {
+        final pmtilesProtocol = pmtiles.Protocol();
+        interop.addProtocol('pmtiles', pmtilesProtocol.tile);
+      } catch (e) {
+        debugPrint('[MapLibre] PMTiles support could not be loaded. $e');
+      }
 
       _map = interop.JsMap(
         interop.MapOptions(
