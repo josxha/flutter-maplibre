@@ -204,7 +204,7 @@ class StyleControllerAndroid implements StyleController {
       jSources.release();
       return attributions;
     } catch (e) {
-      // void error during setStyle()
+      // hide error during setStyle()
       return const [];
     }
   }
