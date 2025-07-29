@@ -33,9 +33,15 @@ class _PmTilesPageState extends State<PmTilesPage> {
           appBar: AppBar(title: const Text('PMTiles')),
           body: MapLibreMap(
             options: MapOptions(
-              initCenter: Position(9.17, 47.68),
-              initZoom: 2,
-              initStyle: snapshot.data!,
+              initCenter: Position(11.254343,43.767213),
+              maxBounds: const LngLatBounds(
+                longitudeWest: 11.221144,
+                longitudeEast: 11.287543,
+                latitudeSouth: 43.745121,
+                latitudeNorth: 43.789306,
+              ),
+              initZoom: 10,
+              initStyle: MapStyles.protomapsLightPmTiles,
             ),
             children: const [
               MapScalebar(),
