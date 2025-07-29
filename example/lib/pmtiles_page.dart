@@ -33,7 +33,7 @@ class _PmTilesPageState extends State<PmTilesPage> {
           appBar: AppBar(title: const Text('PMTiles')),
           body: MapLibreMap(
             options: MapOptions(
-              initCenter: Position(11.254343,43.767213),
+              initCenter: Position(11.254343, 43.767213),
               maxBounds: const LngLatBounds(
                 longitudeWest: 11.221144,
                 longitudeEast: 11.287543,
