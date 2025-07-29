@@ -144,9 +144,13 @@ class MapLibreMapController(
         }
 
         val style = getStyle(mapOptions.style)
-        mapLibreMap.setStyle(style) { loadedStyle ->
-            this.style = loadedStyle
-            flutterApi.onStyleLoaded { }
+        try {
+            mapLibreMap.setStyle(style) { loadedStyle ->
+                this.style = loadedStyle
+                flutterApi.onStyleLoaded { }
+            }
+        } catch (e: Exception) {
+            Log.e("MapLibreMapController", "setStyle - error: ${e.message}")
         }
         flutterApi.onMapReady { }
     }
@@ -183,9 +187,6 @@ class MapLibreMapController(
             // Remote URIs (HTTP/HTTPS/Mapbox)
             else -> Style.Builder().fromUri(style)
         }
-
-        Log.e("MapLibreMapController", "getStyle - unable to obtain style")
-        return null
     }
 
     private val gson = Gson()
