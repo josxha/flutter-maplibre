@@ -167,7 +167,7 @@ class MapLibreMapController(
         // Returns the Style based on its type.
         return when {
             // JSON style objects
-            style.startsWith("{") || style.startsWith("[") ->
+            style.startsWith("{") ->
                 Style.Builder().fromJson(style)
 
             // Absolute file paths
