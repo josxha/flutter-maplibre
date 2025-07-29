@@ -87,6 +87,7 @@ useful for managing or displaying region-specific data.
 
 ### Merging Regions
 
-Merge an offline region from an MBTiles database into the MapLibre tile cache by
-using `manager.mergeOfflineRegions(path: 'path/to/mbtiles')`. Ensure that the
-app has permission to read the directory.
+Use `manager.mergeOfflineRegions(path: 'path/to/database')` to merge offline
+regions from a secondary MapLibre Native database into the main offline database.
+This is typically used when you have multiple MapLibre offline databases that you
+want to consolidate.
