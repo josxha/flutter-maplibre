@@ -13,4 +13,4 @@ dart run pigeon --input pigeons/pigeon.dart
 dart format .
 
 # Copy file from ios to macos directory
-Copy-Item ios/Classes/Pigeon.g.swift -Destination macos/Classes/Pigeon.g.swift
+#Copy-Item ios/Classes/Pigeon.g.swift -Destination macos/Classes/Pigeon.g.swift
