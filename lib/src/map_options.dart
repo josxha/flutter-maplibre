@@ -98,8 +98,8 @@ class MapOptions {
   /// This enables textureMode and comes at a significant performance penalty.
   ///
   /// **NOTE**! This may cause **buffer management issues** on some Android devices, so [AndroidPlatformViewMode.hc] use is recommended.
-  final bool translucentTextureSurface;
+  final bool androidTranslucentTextureSurface;
 
   /// The MapView foreground color that is used when the map surface is being created.
-  final Color foregroundLoadColor;
+  final Color androidForegroundLoadColor;
 }
