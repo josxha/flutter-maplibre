@@ -379,12 +379,12 @@ class MapLibreMapController(
         callback(Result.success(Unit))
     }
 
-    // Adds a layer to the style. 
+    // Adds a layer to the style.
     // Priority is given to belowLayerId if both belowLayerId and aboveLayerId are provided.
     private fun addLayerToStyle(
         layer: org.maplibre.android.style.layers.Layer,
         belowLayerId: String?,
-        aboveLayerId: String?
+        aboveLayerId: String?,
     ) {
         Log.d(
             "MapLibreMapController",
