@@ -8,80 +8,85 @@ class StyleControllerAndroid implements StyleController {
   final pigeon.MapLibreHostApi _hostApi;
 
   @override
-  Future<void> addLayer(StyleLayer layer, {String? belowLayerId}) async =>
-      using((arena) {
-        final jLayer = switch (layer) {
-          FillStyleLayer() => jni.FillLayer(
-            layer.id.toJString(),
-            layer.sourceId.toJString(),
-          ),
-          CircleStyleLayer() => jni.CircleLayer(
-            layer.id.toJString(),
-            layer.sourceId.toJString(),
-          ),
-          BackgroundStyleLayer() => jni.BackgroundLayer(layer.id.toJString()),
-          FillExtrusionStyleLayer() => jni.FillExtrusionLayer(
-            layer.id.toJString(),
-            layer.sourceId.toJString(),
-          ),
-          HeatmapStyleLayer() => jni.HeatmapLayer(
-            layer.id.toJString(),
-            layer.sourceId.toJString(),
-          ),
-          HillshadeStyleLayer() => jni.HillshadeLayer(
-            layer.id.toJString(),
-            layer.sourceId.toJString(),
-          ),
-          LineStyleLayer() => jni.LineLayer(
-            layer.id.toJString(),
-            layer.sourceId.toJString(),
-          ),
-          RasterStyleLayer() => jni.RasterLayer(
-            layer.id.toJString(),
-            layer.sourceId.toJString(),
-          ),
-          SymbolStyleLayer() => jni.SymbolLayer(
-            layer.id.toJString(),
-            layer.sourceId.toJString(),
-          ),
-          _ => throw UnimplementedError(
-            'The Layer is not supported: ${layer.runtimeType}',
-          ),
-        };
+  Future<void> addLayer(
+    StyleLayer layer, {
+    String? belowLayerId,
+    String? aboveLayerId,
+  }) async => using((arena) {
+    final jLayer = switch (layer) {
+      FillStyleLayer() => jni.FillLayer(
+        layer.id.toJString(),
+        layer.sourceId.toJString(),
+      ),
+      CircleStyleLayer() => jni.CircleLayer(
+        layer.id.toJString(),
+        layer.sourceId.toJString(),
+      ),
+      BackgroundStyleLayer() => jni.BackgroundLayer(layer.id.toJString()),
+      FillExtrusionStyleLayer() => jni.FillExtrusionLayer(
+        layer.id.toJString(),
+        layer.sourceId.toJString(),
+      ),
+      HeatmapStyleLayer() => jni.HeatmapLayer(
+        layer.id.toJString(),
+        layer.sourceId.toJString(),
+      ),
+      HillshadeStyleLayer() => jni.HillshadeLayer(
+        layer.id.toJString(),
+        layer.sourceId.toJString(),
+      ),
+      LineStyleLayer() => jni.LineLayer(
+        layer.id.toJString(),
+        layer.sourceId.toJString(),
+      ),
+      RasterStyleLayer() => jni.RasterLayer(
+        layer.id.toJString(),
+        layer.sourceId.toJString(),
+      ),
+      SymbolStyleLayer() => jni.SymbolLayer(
+        layer.id.toJString(),
+        layer.sourceId.toJString(),
+      ),
+      _ => throw UnimplementedError(
+        'The Layer is not supported: ${layer.runtimeType}',
+      ),
+    };
 
-        // paint and layout properties
-        final layoutEntries = layer.layout.entries.toList(growable: false);
-        final paintEntries = layer.paint.entries.toList(growable: false);
-        final props = JArray(
-          jni.PropertyValue.nullableType(JObject.nullableType),
-          layoutEntries.length + paintEntries.length,
-        )..releasedBy(arena);
-        for (var i = 0; i < paintEntries.length; i++) {
-          final entry = paintEntries[i];
-          props[i] = jni.PaintPropertyValue(
-            entry.key.toJString(),
-            entry.value.toJObject(arena),
-            T: JObject.type,
-          );
-        }
-        for (var i = 0; i < layoutEntries.length; i++) {
-          final entry = layoutEntries[i];
-          props[paintEntries.length + i] = jni.LayoutPropertyValue(
-            entry.key.toJString(),
-            entry.value.toJObject(arena),
-            T: JObject.type,
-          );
-        }
-        jLayer.releasedBy(arena);
-        jLayer.setProperties(props);
+    // paint and layout properties
+    final layoutEntries = layer.layout.entries.toList(growable: false);
+    final paintEntries = layer.paint.entries.toList(growable: false);
+    final props = JArray(
+      jni.PropertyValue.nullableType(JObject.nullableType),
+      layoutEntries.length + paintEntries.length,
+    )..releasedBy(arena);
+    for (var i = 0; i < paintEntries.length; i++) {
+      final entry = paintEntries[i];
+      props[i] = jni.PaintPropertyValue(
+        entry.key.toJString(),
+        entry.value.toJObject(arena),
+        T: JObject.type,
+      );
+    }
+    for (var i = 0; i < layoutEntries.length; i++) {
+      final entry = layoutEntries[i];
+      props[paintEntries.length + i] = jni.LayoutPropertyValue(
+        entry.key.toJString(),
+        entry.value.toJObject(arena),
+        T: JObject.type,
+      );
+    }
+    jLayer.releasedBy(arena);
+    jLayer.setProperties(props);
 
-        // add to style
-        if (belowLayerId == null) {
-          _jniStyle.addLayer(jLayer);
-        } else {
-          _jniStyle.addLayerBelow(jLayer, belowLayerId.toJString());
-        }
-      });
+    // add to style
+    if (belowLayerId != null) {
+      _jniStyle.addLayerBelow(jLayer, belowLayerId.toJString());
+    } else if (aboveLayerId != null) {
+      _jniStyle.addLayerAbove(jLayer, aboveLayerId.toJString());
+    } else {
+      _jniStyle.addLayer(jLayer);
+    }
+  });
 
   @override
   Future<void> addSource(Source source) async {
@@ -169,6 +174,11 @@ class StyleControllerAndroid implements StyleController {
   Future<void> addImage(String id, Uint8List bytes) =>
       // TODO: use JNI for this method
       _hostApi.addImage(id, bytes);
+
+  @override
+  Future<void> addImages(Map<String, Uint8List> images) =>
+      // TODO: use JNI for this method
+      _hostApi.addImages(images);
 
   @override
   Future<void> removeImage(String id) async =>

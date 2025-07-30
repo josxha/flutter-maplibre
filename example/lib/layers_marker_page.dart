@@ -37,7 +37,7 @@ class _LayersMarkerPageState extends State<LayersMarkerPage> {
                 Uri.parse(StyleLayersSymbolPage.imageUrl),
               );
               final bytes = response.bodyBytes;
-              await event.style.addImage('marker', bytes);
+              await event.style.addImages({'marker': bytes});
               setState(() {
                 _imageLoaded = true;
               });

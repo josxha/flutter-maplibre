@@ -213,15 +213,12 @@ class MapLibreMapController(
         layout: Map<String, Any>,
         paint: Map<String, Any>,
         belowLayerId: String?,
+        aboveLayerId: String?,
         callback: (Result<Unit>) -> Unit,
     ) {
         val layer = FillLayer(id, sourceId)
         layer.setProperties(*parsePaintProperties(paint), *parseLayoutProperties(layout))
-        if (belowLayerId == null) {
-            mapLibreMap.style?.addLayer(layer)
-        } else {
-            mapLibreMap.style?.addLayerBelow(layer, belowLayerId)
-        }
+        addLayerToStyle(layer, belowLayerId, aboveLayerId)
         callback(Result.success(Unit))
     }
 
@@ -231,15 +228,12 @@ class MapLibreMapController(
         layout: Map<String, Any>,
         paint: Map<String, Any>,
         belowLayerId: String?,
+        aboveLayerId: String?,
         callback: (Result<Unit>) -> Unit,
     ) {
         val layer = CircleLayer(id, sourceId)
         layer.setProperties(*parsePaintProperties(paint), *parseLayoutProperties(layout))
-        if (belowLayerId == null) {
-            mapLibreMap.style?.addLayer(layer)
-        } else {
-            mapLibreMap.style?.addLayerBelow(layer, belowLayerId)
-        }
+        addLayerToStyle(layer, belowLayerId, aboveLayerId)
         callback(Result.success(Unit))
     }
 
@@ -248,15 +242,12 @@ class MapLibreMapController(
         layout: Map<String, Any>,
         paint: Map<String, Any>,
         belowLayerId: String?,
+        aboveLayerId: String?,
         callback: (Result<Unit>) -> Unit,
     ) {
         val layer = BackgroundLayer(id)
         layer.setProperties(*parsePaintProperties(paint), *parseLayoutProperties(layout))
-        if (belowLayerId == null) {
-            mapLibreMap.style?.addLayer(layer)
-        } else {
-            mapLibreMap.style?.addLayerBelow(layer, belowLayerId)
-        }
+        addLayerToStyle(layer, belowLayerId, aboveLayerId)
         callback(Result.success(Unit))
     }
 
@@ -266,15 +257,12 @@ class MapLibreMapController(
         layout: Map<String, Any>,
         paint: Map<String, Any>,
         belowLayerId: String?,
+        aboveLayerId: String?,
         callback: (Result<Unit>) -> Unit,
     ) {
         val layer = FillExtrusionLayer(id, sourceId)
         layer.setProperties(*parsePaintProperties(paint), *parseLayoutProperties(layout))
-        if (belowLayerId == null) {
-            mapLibreMap.style?.addLayer(layer)
-        } else {
-            mapLibreMap.style?.addLayerBelow(layer, belowLayerId)
-        }
+        addLayerToStyle(layer, belowLayerId, aboveLayerId)
         callback(Result.success(Unit))
     }
 
@@ -284,15 +272,12 @@ class MapLibreMapController(
         layout: Map<String, Any>,
         paint: Map<String, Any>,
         belowLayerId: String?,
+        aboveLayerId: String?,
         callback: (Result<Unit>) -> Unit,
     ) {
         val layer = HeatmapLayer(id, sourceId)
         layer.setProperties(*parsePaintProperties(paint), *parseLayoutProperties(layout))
-        if (belowLayerId == null) {
-            mapLibreMap.style?.addLayer(layer)
-        } else {
-            mapLibreMap.style?.addLayerBelow(layer, belowLayerId)
-        }
+        addLayerToStyle(layer, belowLayerId, aboveLayerId)
         callback(Result.success(Unit))
     }
 
@@ -302,15 +287,12 @@ class MapLibreMapController(
         layout: Map<String, Any>,
         paint: Map<String, Any>,
         belowLayerId: String?,
+        aboveLayerId: String?,
         callback: (Result<Unit>) -> Unit,
     ) {
         val layer = HillshadeLayer(id, sourceId)
         layer.setProperties(*parsePaintProperties(paint), *parseLayoutProperties(layout))
-        if (belowLayerId == null) {
-            mapLibreMap.style?.addLayer(layer)
-        } else {
-            mapLibreMap.style?.addLayerBelow(layer, belowLayerId)
-        }
+        addLayerToStyle(layer, belowLayerId, aboveLayerId)
         callback(Result.success(Unit))
     }
 
@@ -320,15 +302,12 @@ class MapLibreMapController(
         layout: Map<String, Any>,
         paint: Map<String, Any>,
         belowLayerId: String?,
+        aboveLayerId: String?,
         callback: (Result<Unit>) -> Unit,
     ) {
         val layer = LineLayer(id, sourceId)
         layer.setProperties(*parsePaintProperties(paint), *parseLayoutProperties(layout))
-        if (belowLayerId == null) {
-            mapLibreMap.style?.addLayer(layer)
-        } else {
-            mapLibreMap.style?.addLayerBelow(layer, belowLayerId)
-        }
+        addLayerToStyle(layer, belowLayerId, aboveLayerId)
         callback(Result.success(Unit))
     }
 
@@ -338,15 +317,12 @@ class MapLibreMapController(
         layout: Map<String, Any>,
         paint: Map<String, Any>,
         belowLayerId: String?,
+        aboveLayerId: String?,
         callback: (Result<Unit>) -> Unit,
     ) {
         val layer = RasterLayer(id, sourceId)
 //        layer.setProperties(*parseProperties(paint), *parseProperties(layout))
-        if (belowLayerId == null) {
-            mapLibreMap.style?.addLayer(layer)
-        } else {
-            mapLibreMap.style?.addLayerBelow(layer, belowLayerId)
-        }
+        addLayerToStyle(layer, belowLayerId, aboveLayerId)
         callback(Result.success(Unit))
     }
 
@@ -356,16 +332,32 @@ class MapLibreMapController(
         layout: Map<String, Any>,
         paint: Map<String, Any>,
         belowLayerId: String?,
+        aboveLayerId: String?,
         callback: (Result<Unit>) -> Unit,
     ) {
         val layer = SymbolLayer(id, sourceId)
         layer.setProperties(*parsePaintProperties(paint), *parseLayoutProperties(layout))
-        if (belowLayerId == null) {
-            mapLibreMap.style?.addLayer(layer)
-        } else {
-            mapLibreMap.style?.addLayerBelow(layer, belowLayerId)
-        }
+        addLayerToStyle(layer, belowLayerId, aboveLayerId)
         callback(Result.success(Unit))
+    }
+
+    // Adds a layer to the style. 
+    // Priority is given to belowLayerId if both belowLayerId and aboveLayerId are provided.
+    private fun addLayerToStyle(
+        layer: org.maplibre.android.style.layers.Layer,
+        belowLayerId: String?,
+        aboveLayerId: String?
+    ) {
+        Log.d(
+            "MapLibreMapController",
+            "Adding layer: ${layer.id}, below: $belowLayerId, above: $aboveLayerId",
+        )
+        val style = mapLibreMap.style ?: return
+        when {
+            belowLayerId != null -> style.addLayerBelow(layer, belowLayerId)
+            aboveLayerId != null -> style.addLayerAbove(layer, aboveLayerId)
+            else -> style.addLayer(layer)
+        }
     }
 
     override fun loadImage(
@@ -387,6 +379,15 @@ class MapLibreMapController(
     ) {
         val bitmap = BitmapFactory.decodeStream(bytes.inputStream())
         mapLibreMap.style?.addImage(id, bitmap)
+        callback(Result.success(Unit))
+    }
+
+    override fun addImages(
+        images: Map<String, ByteArray>,
+        callback: (Result<Unit>) -> Unit,
+    ) {
+        val bitmapMap = HashMap(images.mapValues { BitmapFactory.decodeStream(it.value.inputStream()) })
+        mapLibreMap.style?.addImages(bitmapMap)
         callback(Result.success(Unit))
     }
 }

@@ -29,7 +29,7 @@ class _StyleLayersSymbolPageState extends State<StyleLayersSymbolPage> {
           final bytes = response.bodyBytes;
 
           // add the image to the map
-          await style.addImage('marker', bytes);
+          await style.addImages({'marker': bytes});
 
           // add some points as GeoJSON source to the map
           await style.addSource(

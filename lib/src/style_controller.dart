@@ -13,11 +13,22 @@ abstract interface class StyleController {
   /// Add a new layer to the map. The source must be added before adding it to
   /// the map.
   ///
-  /// `belowLayerId` The ID of an existing layer to insert the new layer before,
+  /// - `belowLayerId` The ID of an existing layer to insert the new layer before,
   /// resulting in the new layer appearing visually beneath the existing layer.
+  /// - `aboveLayerId` The ID of an existing layer to insert the new layer after,
+  /// resulting in the new layer appearing visually above the existing layer.
+  /// Only available on Android.
+  ///
+  /// If both `belowLayerId` and `aboveLayerId` are specified, the `belowLayerId`
+  /// will have priority and the layer will be inserted before the specified.
+  ///
   /// If this argument is not specified, the layer will be appended to the end
   /// of the layers array and appear visually above all other layers.
-  Future<void> addLayer(StyleLayer layer, {String? belowLayerId});
+  Future<void> addLayer(
+    StyleLayer layer, {
+    String? belowLayerId,
+    String? aboveLayerId,
+  });
 
   /// Update the data of a GeoJSON source.
   Future<void> updateGeoJsonSource({required String id, required String data});
@@ -36,6 +47,9 @@ abstract interface class StyleController {
 
   /// Add an image to the map.
   Future<void> addImage(String id, Uint8List bytes);
+
+  /// Add multiple images to the map.
+  Future<void> addImages(Map<String, Uint8List> images);
 
   /// Removes an image from the map
   Future<void> removeImage(String id);
