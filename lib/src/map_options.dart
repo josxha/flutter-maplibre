@@ -24,8 +24,8 @@ class MapOptions {
     this.gestures = const MapGestures.all(),
     this.androidTextureMode = true,
     this.androidMode = AndroidPlatformViewMode.tlhc_vd,
-    this.translucentTextureSurface = false,
-    this.foregroundLoadColor = Colors.transparent,
+    this.androidTranslucentTextureSurface = false,
+    this.androidForegroundLoadColor = Colors.transparent,
   }) : initPitch = pitch ?? initPitch;
 
   /// Find the [MapOptions] of the closest [MapLibreMap] in the widget tree.

@@ -190,9 +190,9 @@ struct MapOptions: Hashable {
   /// Toggle the texture mode on android.
   var androidTextureMode: Bool
   /// Toggle the translucent texture surface mode on Android.
-  var translucentTextureSurface: Bool
+  var androidTranslucentTextureSurface: Bool
   /// The MapView foreground color that is used when the map surface is being created.
-  var foregroundLoadColor: Int64
+  var androidForegroundLoadColor: Int64
 
 
   // swift-format-ignore: AlwaysUseLowerCamelCase
@@ -209,8 +209,8 @@ struct MapOptions: Hashable {
     let maxPitch = pigeonVar_list[9] as! Double
     let gestures = pigeonVar_list[10] as! MapGestures
     let androidTextureMode = pigeonVar_list[11] as! Bool
-    let translucentTextureSurface = pigeonVar_list[12] as! Bool
-    let foregroundLoadColor = pigeonVar_list[13] as! Int64
+    let androidTranslucentTextureSurface = pigeonVar_list[12] as! Bool
+    let androidForegroundLoadColor = pigeonVar_list[13] as! Int64
 
     return MapOptions(
       style: style,
@@ -225,8 +225,8 @@ struct MapOptions: Hashable {
       maxPitch: maxPitch,
       gestures: gestures,
       androidTextureMode: androidTextureMode,
-      translucentTextureSurface: translucentTextureSurface,
-      foregroundLoadColor: foregroundLoadColor
+      androidTranslucentTextureSurface: androidTranslucentTextureSurface,
+      androidForegroundLoadColor: androidForegroundLoadColor
     )
   }
   func toList() -> [Any?] {
@@ -243,8 +243,8 @@ struct MapOptions: Hashable {
       maxPitch,
       gestures,
       androidTextureMode,
-      translucentTextureSurface,
-      foregroundLoadColor,
+      androidTranslucentTextureSurface,
+      androidForegroundLoadColor,
     ]
   }
   static func == (lhs: MapOptions, rhs: MapOptions) -> Bool {

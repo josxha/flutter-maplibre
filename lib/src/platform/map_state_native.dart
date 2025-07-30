@@ -47,8 +47,8 @@ abstract class MapLibreMapStateNative extends MapLibreMapState
       tilt: options.gestures.pitch,
     ),
     androidTextureMode: options.androidTextureMode,
-    translucentTextureSurface: options.translucentTextureSurface,
-    foregroundLoadColor: options.foregroundLoadColor.toARGB32(),
+    androidTranslucentTextureSurface: options.androidTranslucentTextureSurface,
+    androidForegroundLoadColor: options.androidForegroundLoadColor.toARGB32(),
   );
 
   @override

@@ -160,9 +160,9 @@ data class MapOptions (
   /** Toggle the texture mode on android. */
   val androidTextureMode: Boolean,
   /** Toggle the translucent texture surface mode on Android. */
-  val translucentTextureSurface: Boolean,
+  val androidTranslucentTextureSurface: Boolean,
   /** The MapView foreground color that is used when the map surface is being created. */
-  val foregroundLoadColor: Long
+  val androidForegroundLoadColor: Long
 )
  {
   companion object {
@@ -179,9 +179,9 @@ data class MapOptions (
       val maxPitch = pigeonVar_list[9] as Double
       val gestures = pigeonVar_list[10] as MapGestures
       val androidTextureMode = pigeonVar_list[11] as Boolean
-      val translucentTextureSurface = pigeonVar_list[12] as Boolean
-      val foregroundLoadColor = pigeonVar_list[13] as Long
-      return MapOptions(style, zoom, pitch, bearing, center, maxBounds, minZoom, maxZoom, minPitch, maxPitch, gestures, androidTextureMode, translucentTextureSurface, foregroundLoadColor)
+      val androidTranslucentTextureSurface = pigeonVar_list[12] as Boolean
+      val androidForegroundLoadColor = pigeonVar_list[13] as Long
+      return MapOptions(style, zoom, pitch, bearing, center, maxBounds, minZoom, maxZoom, minPitch, maxPitch, gestures, androidTextureMode, androidTranslucentTextureSurface, androidForegroundLoadColor)
     }
   }
   fun toList(): List<Any?> {
@@ -198,8 +198,8 @@ data class MapOptions (
       maxPitch,
       gestures,
       androidTextureMode,
-      translucentTextureSurface,
-      foregroundLoadColor,
+      androidTranslucentTextureSurface,
+      androidForegroundLoadColor,
     )
   }
   override fun equals(other: Any?): Boolean {

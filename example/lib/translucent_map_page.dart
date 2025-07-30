@@ -35,8 +35,8 @@ class _TranslucentMapPageState extends State<TranslucentMapPage> {
           MapLibreMap(
             options: MapOptions(
               androidMode: AndroidPlatformViewMode.hc,
-              translucentTextureSurface: true,
-              foregroundLoadColor: Colors.blue,
+              androidTranslucentTextureSurface: true,
+              androidForegroundLoadColor: Colors.blue,
               initCenter: Position(9.17, 47.68),
               initStyle: MapStyles.translucentAsset,
               initZoom: 2,
