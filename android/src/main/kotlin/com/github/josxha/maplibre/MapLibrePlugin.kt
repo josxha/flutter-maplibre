@@ -28,7 +28,6 @@ class MapLibrePlugin :
     override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
         MapLibreRegistry.context = binding.applicationContext
         PermissionManagerHostApi.setUp(binding.binaryMessenger, this)
-        flutterAssets = binding.flutterAssets
         binding
             .platformViewRegistry
             .registerViewFactory(
@@ -38,6 +37,7 @@ class MapLibrePlugin :
                         override fun getLifecycle(): Lifecycle? = lifecycle
                     },
                     binaryMessenger = binding.binaryMessenger,
+                    flutterAssets = binding.flutterAssets,
                 ),
             )
     }
@@ -118,6 +118,7 @@ object FlutterLifecycleAdapter {
 class MapLibreMapFactory(
     private val lifecycleProvider: LifecycleProvider,
     private val binaryMessenger: BinaryMessenger,
+    private val flutterAssets: FlutterPlugin.FlutterAssets,
 ) : PlatformViewFactory(StandardMessageCodec.INSTANCE) {
     override fun create(
         context: Context,
@@ -129,6 +130,7 @@ class MapLibreMapFactory(
             context,
             lifecycleProvider,
             binaryMessenger,
+            flutterAssets,
         )
 }
 
