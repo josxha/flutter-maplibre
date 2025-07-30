@@ -89,8 +89,8 @@ class MapLibreMapController(
                     .logoEnabled(false)
                     // TODO: textureMode comes at a significant performance penalty, https://maplibre.org/maplibre-native/android/api/-map-libre%20-native%20-android/org.maplibre.android.maps/-map-libre-map-options/texture-mode.html
                     .textureMode(mapOptions.androidTextureMode)
-                    .foregroundLoadColor(mapOptions.foregroundLoadColor.toInt())
-                    .translucentTextureSurface(mapOptions.translucentTextureSurface)
+                    .foregroundLoadColor(mapOptions.androidForegroundLoadColor.toInt())
+                    .translucentTextureSurface(mapOptions.androidTranslucentTextureSurface)
                     .compassEnabled(false)
                     .minZoomPreference(mapOptions.minZoom)
                     .maxZoomPreference(mapOptions.maxZoom)
