@@ -386,10 +386,6 @@ class MapLibreMapController(
         belowLayerId: String?,
         aboveLayerId: String?,
     ) {
-        Log.d(
-            "MapLibreMapController",
-            "Adding layer: ${layer.id}, below: $belowLayerId, above: $aboveLayerId",
-        )
         val style = mapLibreMap.style ?: return
         when {
             belowLayerId != null -> style.addLayerBelow(layer, belowLayerId)
