@@ -38,6 +38,8 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
+import '../../../../android/graphics/Bitmap.dart' as bitmap$_;
+
 import '../../../../android/graphics/PointF.dart' as pointf$_;
 
 /// from: `org.maplibre.android.attribution.AttributionLayout`
@@ -47,8 +49,9 @@ class AttributionLayout extends jni$_.JObject {
   final jni$_.JObjType<AttributionLayout> $type;
 
   @jni$_.internal
-  AttributionLayout.fromReference(jni$_.JReference reference)
-    : $type = type,
+  AttributionLayout.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -91,7 +94,7 @@ class AttributionLayout extends jni$_.JObject {
   /// from: `public void <init>(android.graphics.Bitmap bitmap, android.graphics.PointF pointF, boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
   factory AttributionLayout(
-    jni$_.JObject? bitmap,
+    bitmap$_.Bitmap? bitmap,
     pointf$_.PointF? pointF,
     bool z,
   ) {
@@ -131,11 +134,11 @@ class AttributionLayout extends jni$_.JObject {
 
   /// from: `public android.graphics.Bitmap getLogo()`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? getLogo() {
+  bitmap$_.Bitmap? getLogo() {
     return _getLogo(
       reference.pointer,
       _id_getLogo as jni$_.JMethodIDPtr,
-    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+    ).object<bitmap$_.Bitmap?>(const bitmap$_.$Bitmap$NullableType());
   }
 
   static final _id_getAnchorPoint = _class.instanceMethodId(
@@ -221,7 +224,9 @@ class AttributionLayout extends jni$_.JObject {
           >();
 
   /// from: `public boolean equals(java.lang.Object object)`
-  bool equals(jni$_.JObject? object) {
+  bool equals(
+    jni$_.JObject? object,
+  ) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     return _equals(
       reference.pointer,
@@ -230,7 +235,10 @@ class AttributionLayout extends jni$_.JObject {
     ).boolean;
   }
 
-  static final _id_hashCode$1 = _class.instanceMethodId(r'hashCode', r'()I');
+  static final _id_hashCode$1 = _class.instanceMethodId(
+    r'hashCode',
+    r'()I',
+  );
 
   static final _hashCode$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -300,7 +308,11 @@ final class $AttributionLayout$NullableType
   @jni$_.internal
   @core$_.override
   AttributionLayout? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : AttributionLayout.fromReference(reference);
+      reference.isNull
+      ? null
+      : AttributionLayout.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -335,7 +347,9 @@ final class $AttributionLayout$Type extends jni$_.JObjType<AttributionLayout> {
   @jni$_.internal
   @core$_.override
   AttributionLayout fromReference(jni$_.JReference reference) =>
-      AttributionLayout.fromReference(reference);
+      AttributionLayout.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

@@ -15,6 +15,8 @@ source_path:
   - 'android/src/main'
 classes:
 # https://github.com/maplibre/maplibre-native/tree/main/platform/android/MapLibreAndroid/src/main/java/org/maplibre/android
+  - 'android.graphics.Bitmap'
+  - 'android.graphics.BitmapFactory'
   - 'android.graphics.PointF'
   - 'android.location.Location'
   - 'com.github.josxha.maplibre.Helpers'

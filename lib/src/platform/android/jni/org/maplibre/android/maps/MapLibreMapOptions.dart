@@ -47,8 +47,9 @@ class MapLibreMapOptions extends jni$_.JObject {
   final jni$_.JObjType<MapLibreMapOptions> $type;
 
   @jni$_.internal
-  MapLibreMapOptions.fromReference(jni$_.JReference reference)
-    : $type = type,
+  MapLibreMapOptions.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -68,7 +69,9 @@ class MapLibreMapOptions extends jni$_.JObject {
   static jni$_.JObject? get CREATOR =>
       _id_CREATOR.get(_class, const jni$_.JObjectNullableType());
 
-  static final _id_new$ = _class.constructorId(r'()V');
+  static final _id_new$ = _class.constructorId(
+    r'()V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -119,7 +122,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `static public org.maplibre.android.maps.MapLibreMapOptions createFromAttributes(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
-  static MapLibreMapOptions createFromAttributes(jni$_.JObject context) {
+  static MapLibreMapOptions createFromAttributes(
+    jni$_.JObject context,
+  ) {
     final _$context = context.reference;
     return _createFromAttributes(
       _class.reference.pointer,
@@ -195,7 +200,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions apiBaseUrl(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions apiBaseUrl(jni$_.JString? string) {
+  MapLibreMapOptions apiBaseUrl(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return _apiBaseUrl(
       reference.pointer,
@@ -229,7 +236,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions apiBaseUri(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions apiBaseUri(jni$_.JString? string) {
+  MapLibreMapOptions apiBaseUri(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return _apiBaseUri(
       reference.pointer,
@@ -263,7 +272,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions camera(org.maplibre.android.camera.CameraPosition cameraPosition)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions camera(cameraposition$_.CameraPosition? cameraPosition) {
+  MapLibreMapOptions camera(
+    cameraposition$_.CameraPosition? cameraPosition,
+  ) {
     final _$cameraPosition = cameraPosition?.reference ?? jni$_.jNullReference;
     return _camera(
       reference.pointer,
@@ -297,7 +308,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions debugActive(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions debugActive(bool z) {
+  MapLibreMapOptions debugActive(
+    bool z,
+  ) {
     return _debugActive(
       reference.pointer,
       _id_debugActive as jni$_.JMethodIDPtr,
@@ -330,7 +343,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions minZoomPreference(double d)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions minZoomPreference(double d) {
+  MapLibreMapOptions minZoomPreference(
+    double d,
+  ) {
     return _minZoomPreference(
       reference.pointer,
       _id_minZoomPreference as jni$_.JMethodIDPtr,
@@ -363,7 +378,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions maxZoomPreference(double d)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions maxZoomPreference(double d) {
+  MapLibreMapOptions maxZoomPreference(
+    double d,
+  ) {
     return _maxZoomPreference(
       reference.pointer,
       _id_maxZoomPreference as jni$_.JMethodIDPtr,
@@ -396,7 +413,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions minPitchPreference(double d)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions minPitchPreference(double d) {
+  MapLibreMapOptions minPitchPreference(
+    double d,
+  ) {
     return _minPitchPreference(
       reference.pointer,
       _id_minPitchPreference as jni$_.JMethodIDPtr,
@@ -429,7 +448,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions maxPitchPreference(double d)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions maxPitchPreference(double d) {
+  MapLibreMapOptions maxPitchPreference(
+    double d,
+  ) {
     return _maxPitchPreference(
       reference.pointer,
       _id_maxPitchPreference as jni$_.JMethodIDPtr,
@@ -462,7 +483,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions compassEnabled(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions compassEnabled(bool z) {
+  MapLibreMapOptions compassEnabled(
+    bool z,
+  ) {
     return _compassEnabled(
       reference.pointer,
       _id_compassEnabled as jni$_.JMethodIDPtr,
@@ -495,7 +518,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions compassGravity(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions compassGravity(int i) {
+  MapLibreMapOptions compassGravity(
+    int i,
+  ) {
     return _compassGravity(
       reference.pointer,
       _id_compassGravity as jni$_.JMethodIDPtr,
@@ -528,7 +553,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions compassMargins(int[] is)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions compassMargins(jni$_.JIntArray? is$) {
+  MapLibreMapOptions compassMargins(
+    jni$_.JIntArray? is$,
+  ) {
     final _$is$ = is$?.reference ?? jni$_.jNullReference;
     return _compassMargins(
       reference.pointer,
@@ -562,7 +589,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions compassFadesWhenFacingNorth(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions compassFadesWhenFacingNorth(bool z) {
+  MapLibreMapOptions compassFadesWhenFacingNorth(
+    bool z,
+  ) {
     return _compassFadesWhenFacingNorth(
       reference.pointer,
       _id_compassFadesWhenFacingNorth as jni$_.JMethodIDPtr,
@@ -595,7 +624,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions compassImage(android.graphics.drawable.Drawable drawable)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions compassImage(jni$_.JObject? drawable) {
+  MapLibreMapOptions compassImage(
+    jni$_.JObject? drawable,
+  ) {
     final _$drawable = drawable?.reference ?? jni$_.jNullReference;
     return _compassImage(
       reference.pointer,
@@ -629,7 +660,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions logoEnabled(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions logoEnabled(bool z) {
+  MapLibreMapOptions logoEnabled(
+    bool z,
+  ) {
     return _logoEnabled(
       reference.pointer,
       _id_logoEnabled as jni$_.JMethodIDPtr,
@@ -662,7 +695,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions logoGravity(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions logoGravity(int i) {
+  MapLibreMapOptions logoGravity(
+    int i,
+  ) {
     return _logoGravity(
       reference.pointer,
       _id_logoGravity as jni$_.JMethodIDPtr,
@@ -695,7 +730,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions logoMargins(int[] is)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions logoMargins(jni$_.JIntArray? is$) {
+  MapLibreMapOptions logoMargins(
+    jni$_.JIntArray? is$,
+  ) {
     final _$is$ = is$?.reference ?? jni$_.jNullReference;
     return _logoMargins(
       reference.pointer,
@@ -729,7 +766,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions attributionEnabled(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions attributionEnabled(bool z) {
+  MapLibreMapOptions attributionEnabled(
+    bool z,
+  ) {
     return _attributionEnabled(
       reference.pointer,
       _id_attributionEnabled as jni$_.JMethodIDPtr,
@@ -762,7 +801,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions attributionGravity(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions attributionGravity(int i) {
+  MapLibreMapOptions attributionGravity(
+    int i,
+  ) {
     return _attributionGravity(
       reference.pointer,
       _id_attributionGravity as jni$_.JMethodIDPtr,
@@ -795,7 +836,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions attributionMargins(int[] is)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions attributionMargins(jni$_.JIntArray? is$) {
+  MapLibreMapOptions attributionMargins(
+    jni$_.JIntArray? is$,
+  ) {
     final _$is$ = is$?.reference ?? jni$_.jNullReference;
     return _attributionMargins(
       reference.pointer,
@@ -829,7 +872,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions attributionTintColor(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions attributionTintColor(int i) {
+  MapLibreMapOptions attributionTintColor(
+    int i,
+  ) {
     return _attributionTintColor(
       reference.pointer,
       _id_attributionTintColor as jni$_.JMethodIDPtr,
@@ -862,7 +907,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions rotateGesturesEnabled(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions rotateGesturesEnabled(bool z) {
+  MapLibreMapOptions rotateGesturesEnabled(
+    bool z,
+  ) {
     return _rotateGesturesEnabled(
       reference.pointer,
       _id_rotateGesturesEnabled as jni$_.JMethodIDPtr,
@@ -895,7 +942,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions scrollGesturesEnabled(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions scrollGesturesEnabled(bool z) {
+  MapLibreMapOptions scrollGesturesEnabled(
+    bool z,
+  ) {
     return _scrollGesturesEnabled(
       reference.pointer,
       _id_scrollGesturesEnabled as jni$_.JMethodIDPtr,
@@ -928,7 +977,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions horizontalScrollGesturesEnabled(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions horizontalScrollGesturesEnabled(bool z) {
+  MapLibreMapOptions horizontalScrollGesturesEnabled(
+    bool z,
+  ) {
     return _horizontalScrollGesturesEnabled(
       reference.pointer,
       _id_horizontalScrollGesturesEnabled as jni$_.JMethodIDPtr,
@@ -961,7 +1012,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions tiltGesturesEnabled(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions tiltGesturesEnabled(bool z) {
+  MapLibreMapOptions tiltGesturesEnabled(
+    bool z,
+  ) {
     return _tiltGesturesEnabled(
       reference.pointer,
       _id_tiltGesturesEnabled as jni$_.JMethodIDPtr,
@@ -994,7 +1047,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions zoomGesturesEnabled(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions zoomGesturesEnabled(bool z) {
+  MapLibreMapOptions zoomGesturesEnabled(
+    bool z,
+  ) {
     return _zoomGesturesEnabled(
       reference.pointer,
       _id_zoomGesturesEnabled as jni$_.JMethodIDPtr,
@@ -1027,7 +1082,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions doubleTapGesturesEnabled(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions doubleTapGesturesEnabled(bool z) {
+  MapLibreMapOptions doubleTapGesturesEnabled(
+    bool z,
+  ) {
     return _doubleTapGesturesEnabled(
       reference.pointer,
       _id_doubleTapGesturesEnabled as jni$_.JMethodIDPtr,
@@ -1060,7 +1117,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions quickZoomGesturesEnabled(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions quickZoomGesturesEnabled(bool z) {
+  MapLibreMapOptions quickZoomGesturesEnabled(
+    bool z,
+  ) {
     return _quickZoomGesturesEnabled(
       reference.pointer,
       _id_quickZoomGesturesEnabled as jni$_.JMethodIDPtr,
@@ -1093,7 +1152,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions textureMode(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions textureMode(bool z) {
+  MapLibreMapOptions textureMode(
+    bool z,
+  ) {
     return _textureMode(
       reference.pointer,
       _id_textureMode as jni$_.JMethodIDPtr,
@@ -1126,7 +1187,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions translucentTextureSurface(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions translucentTextureSurface(bool z) {
+  MapLibreMapOptions translucentTextureSurface(
+    bool z,
+  ) {
     return _translucentTextureSurface(
       reference.pointer,
       _id_translucentTextureSurface as jni$_.JMethodIDPtr,
@@ -1159,7 +1222,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions foregroundLoadColor(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions foregroundLoadColor(int i) {
+  MapLibreMapOptions foregroundLoadColor(
+    int i,
+  ) {
     return _foregroundLoadColor(
       reference.pointer,
       _id_foregroundLoadColor as jni$_.JMethodIDPtr,
@@ -1192,7 +1257,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions setPrefetchesTiles(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions setPrefetchesTiles(bool z) {
+  MapLibreMapOptions setPrefetchesTiles(
+    bool z,
+  ) {
     return _setPrefetchesTiles(
       reference.pointer,
       _id_setPrefetchesTiles as jni$_.JMethodIDPtr,
@@ -1225,7 +1292,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions setPrefetchZoomDelta(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions setPrefetchZoomDelta(int i) {
+  MapLibreMapOptions setPrefetchZoomDelta(
+    int i,
+  ) {
     return _setPrefetchZoomDelta(
       reference.pointer,
       _id_setPrefetchZoomDelta as jni$_.JMethodIDPtr,
@@ -1258,7 +1327,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions crossSourceCollisions(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions crossSourceCollisions(bool z) {
+  MapLibreMapOptions crossSourceCollisions(
+    bool z,
+  ) {
     return _crossSourceCollisions(
       reference.pointer,
       _id_crossSourceCollisions as jni$_.JMethodIDPtr,
@@ -1291,7 +1362,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions actionJournalEnabled(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions actionJournalEnabled(bool z) {
+  MapLibreMapOptions actionJournalEnabled(
+    bool z,
+  ) {
     return _actionJournalEnabled(
       reference.pointer,
       _id_actionJournalEnabled as jni$_.JMethodIDPtr,
@@ -1324,7 +1397,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions actionJournalPath(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions actionJournalPath(jni$_.JString string) {
+  MapLibreMapOptions actionJournalPath(
+    jni$_.JString string,
+  ) {
     final _$string = string.reference;
     return _actionJournalPath(
       reference.pointer,
@@ -1358,7 +1433,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions actionJournalLogFileSize(long j)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions actionJournalLogFileSize(int j) {
+  MapLibreMapOptions actionJournalLogFileSize(
+    int j,
+  ) {
     return _actionJournalLogFileSize(
       reference.pointer,
       _id_actionJournalLogFileSize as jni$_.JMethodIDPtr,
@@ -1391,7 +1468,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions actionJournalLogFileCount(long j)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions actionJournalLogFileCount(int j) {
+  MapLibreMapOptions actionJournalLogFileCount(
+    int j,
+  ) {
     return _actionJournalLogFileCount(
       reference.pointer,
       _id_actionJournalLogFileCount as jni$_.JMethodIDPtr,
@@ -1424,7 +1503,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions localIdeographFontFamilyEnabled(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions localIdeographFontFamilyEnabled(bool z) {
+  MapLibreMapOptions localIdeographFontFamilyEnabled(
+    bool z,
+  ) {
     return _localIdeographFontFamilyEnabled(
       reference.pointer,
       _id_localIdeographFontFamilyEnabled as jni$_.JMethodIDPtr,
@@ -1457,7 +1538,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions localIdeographFontFamily(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions localIdeographFontFamily(jni$_.JString? string) {
+  MapLibreMapOptions localIdeographFontFamily(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return _localIdeographFontFamily(
       reference.pointer,
@@ -1527,7 +1610,9 @@ class MapLibreMapOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions pixelRatio(float f)`
   /// The returned object must be released after use, by calling the [release] method.
-  MapLibreMapOptions pixelRatio(double f) {
+  MapLibreMapOptions pixelRatio(
+    double f,
+  ) {
     return _pixelRatio(
       reference.pointer,
       _id_pixelRatio as jni$_.JMethodIDPtr,
@@ -1763,7 +1848,9 @@ class MapLibreMapOptions extends jni$_.JObject {
           >();
 
   /// from: `public void renderSurfaceOnTop(boolean z)`
-  void renderSurfaceOnTop(bool z) {
+  void renderSurfaceOnTop(
+    bool z,
+  ) {
     _renderSurfaceOnTop(
       reference.pointer,
       _id_renderSurfaceOnTop as jni$_.JMethodIDPtr,
@@ -2821,7 +2908,10 @@ class MapLibreMapOptions extends jni$_.JObject {
           >();
 
   /// from: `public void writeToParcel(android.os.Parcel parcel, int i)`
-  void writeToParcel(jni$_.JObject parcel, int i) {
+  void writeToParcel(
+    jni$_.JObject parcel,
+    int i,
+  ) {
     final _$parcel = parcel.reference;
     _writeToParcel(
       reference.pointer,
@@ -2855,7 +2945,9 @@ class MapLibreMapOptions extends jni$_.JObject {
           >();
 
   /// from: `public boolean equals(java.lang.Object object)`
-  bool equals(jni$_.JObject? object) {
+  bool equals(
+    jni$_.JObject? object,
+  ) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     return _equals(
       reference.pointer,
@@ -2864,7 +2956,10 @@ class MapLibreMapOptions extends jni$_.JObject {
     ).boolean;
   }
 
-  static final _id_hashCode$1 = _class.instanceMethodId(r'hashCode', r'()I');
+  static final _id_hashCode$1 = _class.instanceMethodId(
+    r'hashCode',
+    r'()I',
+  );
 
   static final _hashCode$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -2903,7 +2998,11 @@ final class $MapLibreMapOptions$NullableType
   @jni$_.internal
   @core$_.override
   MapLibreMapOptions? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : MapLibreMapOptions.fromReference(reference);
+      reference.isNull
+      ? null
+      : MapLibreMapOptions.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2938,7 +3037,9 @@ final class $MapLibreMapOptions$Type
   @jni$_.internal
   @core$_.override
   MapLibreMapOptions fromReference(jni$_.JReference reference) =>
-      MapLibreMapOptions.fromReference(reference);
+      MapLibreMapOptions.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

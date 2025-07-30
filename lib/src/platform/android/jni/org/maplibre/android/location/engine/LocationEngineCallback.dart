@@ -48,8 +48,10 @@ class LocationEngineCallback<$T extends jni$_.JObject?> extends jni$_.JObject {
   final jni$_.JObjType<$T> T;
 
   @jni$_.internal
-  LocationEngineCallback.fromReference(this.T, jni$_.JReference reference)
-    : $type = type<$T>(T),
+  LocationEngineCallback.fromReference(
+    this.T,
+    jni$_.JReference reference,
+  ) : $type = type<$T>(T),
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -58,14 +60,20 @@ class LocationEngineCallback<$T extends jni$_.JObject?> extends jni$_.JObject {
 
   /// The type which includes information such as the signature of this class.
   static $LocationEngineCallback$NullableType<$T>
-  nullableType<$T extends jni$_.JObject?>(jni$_.JObjType<$T> T) {
-    return $LocationEngineCallback$NullableType<$T>(T);
+  nullableType<$T extends jni$_.JObject?>(
+    jni$_.JObjType<$T> T,
+  ) {
+    return $LocationEngineCallback$NullableType<$T>(
+      T,
+    );
   }
 
   static $LocationEngineCallback$Type<$T> type<$T extends jni$_.JObject?>(
     jni$_.JObjType<$T> T,
   ) {
-    return $LocationEngineCallback$Type<$T>(T);
+    return $LocationEngineCallback$Type<$T>(
+      T,
+    );
   }
 
   static final _id_onSuccess = _class.instanceMethodId(
@@ -92,7 +100,9 @@ class LocationEngineCallback<$T extends jni$_.JObject?> extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onSuccess(T object)`
-  void onSuccess($T? object) {
+  void onSuccess(
+    $T? object,
+  ) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     _onSuccess(
       reference.pointer,
@@ -125,7 +135,9 @@ class LocationEngineCallback<$T extends jni$_.JObject?> extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onFailure(java.lang.Exception exception)`
-  void onFailure(jni$_.JObject exception) {
+  void onFailure(
+    jni$_.JObject exception,
+  ) {
     final _$exception = exception.reference;
     _onFailure(
       reference.pointer,
@@ -143,7 +155,11 @@ class LocationEngineCallback<$T extends jni$_.JObject?> extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -207,7 +223,9 @@ class LocationEngineCallback<$T extends jni$_.JObject?> extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory LocationEngineCallback.implement($LocationEngineCallback<$T> $impl) {
+  factory LocationEngineCallback.implement(
+    $LocationEngineCallback<$T> $impl,
+  ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
     return LocationEngineCallback<$T>.fromReference(
@@ -268,7 +286,9 @@ final class $LocationEngineCallback$NullableType<$T extends jni$_.JObject?>
   final jni$_.JObjType<$T> T;
 
   @jni$_.internal
-  const $LocationEngineCallback$NullableType(this.T);
+  const $LocationEngineCallback$NullableType(
+    this.T,
+  );
 
   @jni$_.internal
   @core$_.override
@@ -280,7 +300,10 @@ final class $LocationEngineCallback$NullableType<$T extends jni$_.JObject?>
   LocationEngineCallback<$T>? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : LocationEngineCallback<$T>.fromReference(T, reference);
+      : LocationEngineCallback<$T>.fromReference(
+          T,
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -310,7 +333,9 @@ final class $LocationEngineCallback$Type<$T extends jni$_.JObject?>
   final jni$_.JObjType<$T> T;
 
   @jni$_.internal
-  const $LocationEngineCallback$Type(this.T);
+  const $LocationEngineCallback$Type(
+    this.T,
+  );
 
   @jni$_.internal
   @core$_.override
@@ -320,7 +345,10 @@ final class $LocationEngineCallback$Type<$T extends jni$_.JObject?>
   @jni$_.internal
   @core$_.override
   LocationEngineCallback<$T> fromReference(jni$_.JReference reference) =>
-      LocationEngineCallback<$T>.fromReference(T, reference);
+      LocationEngineCallback<$T>.fromReference(
+        T,
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

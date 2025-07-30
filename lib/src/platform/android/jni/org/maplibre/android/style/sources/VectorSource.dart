@@ -53,8 +53,9 @@ class VectorSource extends source$_.Source {
   final jni$_.JObjType<VectorSource> $type;
 
   @jni$_.internal
-  VectorSource.fromReference(jni$_.JReference reference)
-    : $type = type,
+  VectorSource.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -64,7 +65,9 @@ class VectorSource extends source$_.Source {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $VectorSource$NullableType();
   static const type = $VectorSource$Type();
-  static final _id_new$ = _class.constructorId(r'(J)V');
+  static final _id_new$ = _class.constructorId(
+    r'(J)V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -86,7 +89,9 @@ class VectorSource extends source$_.Source {
 
   /// from: `public void <init>(long j)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory VectorSource(int j) {
+  factory VectorSource(
+    int j,
+  ) {
     return VectorSource.fromReference(
       _new$(
         _class.reference.pointer,
@@ -123,7 +128,10 @@ class VectorSource extends source$_.Source {
 
   /// from: `public void <init>(java.lang.String string, java.net.URL uRL)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory VectorSource.new$1(jni$_.JString? string, url$_.URL uRL) {
+  factory VectorSource.new$1(
+    jni$_.JString? string,
+    url$_.URL uRL,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$uRL = uRL.reference;
     return VectorSource.fromReference(
@@ -163,7 +171,10 @@ class VectorSource extends source$_.Source {
 
   /// from: `public void <init>(java.lang.String string, android.net.Uri uri)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory VectorSource.new$2(jni$_.JString? string, jni$_.JObject uri) {
+  factory VectorSource.new$2(
+    jni$_.JString? string,
+    jni$_.JObject uri,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$uri = uri.reference;
     return VectorSource.fromReference(
@@ -203,7 +214,10 @@ class VectorSource extends source$_.Source {
 
   /// from: `public void <init>(java.lang.String string, java.lang.String string1)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory VectorSource.new$3(jni$_.JString? string, jni$_.JString? string1) {
+  factory VectorSource.new$3(
+    jni$_.JString? string,
+    jni$_.JString? string1,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
     return VectorSource.fromReference(
@@ -243,7 +257,10 @@ class VectorSource extends source$_.Source {
 
   /// from: `public void <init>(java.lang.String string, org.maplibre.android.style.sources.TileSet tileSet)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory VectorSource.new$4(jni$_.JString? string, tileset$_.TileSet tileSet) {
+  factory VectorSource.new$4(
+    jni$_.JString? string,
+    tileset$_.TileSet tileSet,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$tileSet = tileSet.reference;
     return VectorSource.fromReference(
@@ -371,8 +388,11 @@ final class $VectorSource$NullableType extends jni$_.JObjType<VectorSource?> {
 
   @jni$_.internal
   @core$_.override
-  VectorSource? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : VectorSource.fromReference(reference);
+  VectorSource? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : VectorSource.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const source$_.$Source$Type();
@@ -406,7 +426,9 @@ final class $VectorSource$Type extends jni$_.JObjType<VectorSource> {
   @jni$_.internal
   @core$_.override
   VectorSource fromReference(jni$_.JReference reference) =>
-      VectorSource.fromReference(reference);
+      VectorSource.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const source$_.$Source$Type();

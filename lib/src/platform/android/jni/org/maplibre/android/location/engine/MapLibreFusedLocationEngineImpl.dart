@@ -54,8 +54,9 @@ class MapLibreFusedLocationEngineImpl
   final jni$_.JObjType<MapLibreFusedLocationEngineImpl> $type;
 
   @jni$_.internal
-  MapLibreFusedLocationEngineImpl.fromReference(jni$_.JReference reference)
-    : $type = type,
+  MapLibreFusedLocationEngineImpl.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -65,7 +66,9 @@ class MapLibreFusedLocationEngineImpl
   /// The type which includes information such as the signature of this class.
   static const nullableType = $MapLibreFusedLocationEngineImpl$NullableType();
   static const type = $MapLibreFusedLocationEngineImpl$Type();
-  static final _id_new$ = _class.constructorId(r'(Landroid/content/Context;)V');
+  static final _id_new$ = _class.constructorId(
+    r'(Landroid/content/Context;)V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -87,7 +90,9 @@ class MapLibreFusedLocationEngineImpl
 
   /// from: `public void <init>(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory MapLibreFusedLocationEngineImpl(jni$_.JObject context) {
+  factory MapLibreFusedLocationEngineImpl(
+    jni$_.JObject context,
+  ) {
     final _$context = context.reference;
     return MapLibreFusedLocationEngineImpl.fromReference(
       _new$(
@@ -282,7 +287,9 @@ final class $MapLibreFusedLocationEngineImpl$NullableType
   MapLibreFusedLocationEngineImpl? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : MapLibreFusedLocationEngineImpl.fromReference(reference);
+      : MapLibreFusedLocationEngineImpl.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>
@@ -320,7 +327,9 @@ final class $MapLibreFusedLocationEngineImpl$Type
   @jni$_.internal
   @core$_.override
   MapLibreFusedLocationEngineImpl fromReference(jni$_.JReference reference) =>
-      MapLibreFusedLocationEngineImpl.fromReference(reference);
+      MapLibreFusedLocationEngineImpl.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>

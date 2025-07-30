@@ -47,8 +47,9 @@ class URL extends jni$_.JObject {
   final jni$_.JObjType<URL> $type;
 
   @jni$_.internal
-  URL.fromReference(jni$_.JReference reference)
-    : $type = type,
+  URL.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(r'java/net/URL');
@@ -223,7 +224,9 @@ class URL extends jni$_.JObject {
     );
   }
 
-  static final _id_new$3 = _class.constructorId(r'(Ljava/lang/String;)V');
+  static final _id_new$3 = _class.constructorId(
+    r'(Ljava/lang/String;)V',
+  );
 
   static final _new$3 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -245,7 +248,9 @@ class URL extends jni$_.JObject {
 
   /// from: `public void <init>(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory URL.new$3(jni$_.JString? string) {
+  factory URL.new$3(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return URL.fromReference(
       _new$3(
@@ -283,7 +288,10 @@ class URL extends jni$_.JObject {
 
   /// from: `public void <init>(java.net.URL uRL, java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory URL.new$4(URL? uRL, jni$_.JString? string) {
+  factory URL.new$4(
+    URL? uRL,
+    jni$_.JString? string,
+  ) {
     final _$uRL = uRL?.reference ?? jni$_.jNullReference;
     final _$string = string?.reference ?? jni$_.jNullReference;
     return URL.fromReference(
@@ -468,7 +476,10 @@ class URL extends jni$_.JObject {
     ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
-  static final _id_getPort = _class.instanceMethodId(r'getPort', r'()I');
+  static final _id_getPort = _class.instanceMethodId(
+    r'getPort',
+    r'()I',
+  );
 
   static final _getPort =
       jni$_.ProtectedJniExtensions.lookup<
@@ -667,7 +678,9 @@ class URL extends jni$_.JObject {
           >();
 
   /// from: `public boolean equals(java.lang.Object object)`
-  bool equals(jni$_.JObject? object) {
+  bool equals(
+    jni$_.JObject? object,
+  ) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     return _equals(
       reference.pointer,
@@ -676,7 +689,10 @@ class URL extends jni$_.JObject {
     ).boolean;
   }
 
-  static final _id_hashCode$1 = _class.instanceMethodId(r'hashCode', r'()I');
+  static final _id_hashCode$1 = _class.instanceMethodId(
+    r'hashCode',
+    r'()I',
+  );
 
   static final _hashCode$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -726,7 +742,9 @@ class URL extends jni$_.JObject {
           >();
 
   /// from: `public boolean sameFile(java.net.URL uRL)`
-  bool sameFile(URL? uRL) {
+  bool sameFile(
+    URL? uRL,
+  ) {
     final _$uRL = uRL?.reference ?? jni$_.jNullReference;
     return _sameFile(
       reference.pointer,
@@ -880,7 +898,9 @@ class URL extends jni$_.JObject {
 
   /// from: `public java.net.URLConnection openConnection(java.net.Proxy proxy)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? openConnection$1(jni$_.JObject? proxy) {
+  jni$_.JObject? openConnection$1(
+    jni$_.JObject? proxy,
+  ) {
     final _$proxy = proxy?.reference ?? jni$_.jNullReference;
     return _openConnection$1(
       reference.pointer,
@@ -974,7 +994,9 @@ class URL extends jni$_.JObject {
 
   /// from: `public java.lang.Object getContent(java.lang.Class[] classs)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? getContent$1(jni$_.JArray<jni$_.JObject?>? classs) {
+  jni$_.JObject? getContent$1(
+    jni$_.JArray<jni$_.JObject?>? classs,
+  ) {
     final _$classs = classs?.reference ?? jni$_.jNullReference;
     return _getContent$1(
       reference.pointer,
@@ -1030,8 +1052,11 @@ final class $URL$NullableType extends jni$_.JObjType<URL?> {
 
   @jni$_.internal
   @core$_.override
-  URL? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : URL.fromReference(reference);
+  URL? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : URL.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1064,7 +1089,9 @@ final class $URL$Type extends jni$_.JObjType<URL> {
 
   @jni$_.internal
   @core$_.override
-  URL fromReference(jni$_.JReference reference) => URL.fromReference(reference);
+  URL fromReference(jni$_.JReference reference) => URL.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

@@ -104,7 +104,11 @@ class MapLibreSurfaceView$OnSurfaceViewDetachedListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -151,7 +155,9 @@ class MapLibreSurfaceView$OnSurfaceViewDetachedListener extends jni$_.JObject {
       r'org.maplibre.android.maps.renderer.surfaceview.MapLibreSurfaceView$OnSurfaceViewDetachedListener',
       $p,
       _$invokePointer,
-      [if ($impl.onSurfaceViewDetached$async) r'onSurfaceViewDetached()V'],
+      [
+        if ($impl.onSurfaceViewDetached$async) r'onSurfaceViewDetached()V',
+      ],
     );
     final $a = $p.sendPort.nativePort;
     _$impls[$a] = $impl;
@@ -289,8 +295,9 @@ class MapLibreSurfaceView extends jni$_.JObject {
   final jni$_.JObjType<MapLibreSurfaceView> $type;
 
   @jni$_.internal
-  MapLibreSurfaceView.fromReference(jni$_.JReference reference)
-    : $type = type,
+  MapLibreSurfaceView.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -494,7 +501,9 @@ class MapLibreSurfaceView extends jni$_.JObject {
           >();
 
   /// from: `public void surfaceCreated(android.view.SurfaceHolder surfaceHolder)`
-  void surfaceCreated(jni$_.JObject? surfaceHolder) {
+  void surfaceCreated(
+    jni$_.JObject? surfaceHolder,
+  ) {
     final _$surfaceHolder = surfaceHolder?.reference ?? jni$_.jNullReference;
     _surfaceCreated(
       reference.pointer,
@@ -527,7 +536,9 @@ class MapLibreSurfaceView extends jni$_.JObject {
           >();
 
   /// from: `public void surfaceDestroyed(android.view.SurfaceHolder surfaceHolder)`
-  void surfaceDestroyed(jni$_.JObject? surfaceHolder) {
+  void surfaceDestroyed(
+    jni$_.JObject? surfaceHolder,
+  ) {
     final _$surfaceHolder = surfaceHolder?.reference ?? jni$_.jNullReference;
     _surfaceDestroyed(
       reference.pointer,
@@ -570,7 +581,12 @@ class MapLibreSurfaceView extends jni$_.JObject {
           >();
 
   /// from: `public void surfaceChanged(android.view.SurfaceHolder surfaceHolder, int i, int i1, int i2)`
-  void surfaceChanged(jni$_.JObject? surfaceHolder, int i, int i1, int i2) {
+  void surfaceChanged(
+    jni$_.JObject? surfaceHolder,
+    int i,
+    int i1,
+    int i2,
+  ) {
     final _$surfaceHolder = surfaceHolder?.reference ?? jni$_.jNullReference;
     _surfaceChanged(
       reference.pointer,
@@ -647,7 +663,9 @@ class MapLibreSurfaceView extends jni$_.JObject {
           >();
 
   /// from: `public void surfaceRedrawNeeded(android.view.SurfaceHolder surfaceHolder)`
-  void surfaceRedrawNeeded(jni$_.JObject? surfaceHolder) {
+  void surfaceRedrawNeeded(
+    jni$_.JObject? surfaceHolder,
+  ) {
     final _$surfaceHolder = surfaceHolder?.reference ?? jni$_.jNullReference;
     _surfaceRedrawNeeded(
       reference.pointer,
@@ -656,7 +674,10 @@ class MapLibreSurfaceView extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_onPause = _class.instanceMethodId(r'onPause', r'()V');
+  static final _id_onPause = _class.instanceMethodId(
+    r'onPause',
+    r'()V',
+  );
 
   static final _onPause =
       jni$_.ProtectedJniExtensions.lookup<
@@ -679,7 +700,10 @@ class MapLibreSurfaceView extends jni$_.JObject {
     _onPause(reference.pointer, _id_onPause as jni$_.JMethodIDPtr).check();
   }
 
-  static final _id_onResume = _class.instanceMethodId(r'onResume', r'()V');
+  static final _id_onResume = _class.instanceMethodId(
+    r'onResume',
+    r'()V',
+  );
 
   static final _onResume =
       jni$_.ProtectedJniExtensions.lookup<
@@ -726,7 +750,9 @@ class MapLibreSurfaceView extends jni$_.JObject {
           >();
 
   /// from: `public void queueEvent(java.lang.Runnable runnable)`
-  void queueEvent(jni$_.JObject? runnable) {
+  void queueEvent(
+    jni$_.JObject? runnable,
+  ) {
     final _$runnable = runnable?.reference ?? jni$_.jNullReference;
     _queueEvent(
       reference.pointer,
@@ -778,7 +804,11 @@ final class $MapLibreSurfaceView$NullableType
   @jni$_.internal
   @core$_.override
   MapLibreSurfaceView? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : MapLibreSurfaceView.fromReference(reference);
+      reference.isNull
+      ? null
+      : MapLibreSurfaceView.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -814,7 +844,9 @@ final class $MapLibreSurfaceView$Type
   @jni$_.internal
   @core$_.override
   MapLibreSurfaceView fromReference(jni$_.JReference reference) =>
-      MapLibreSurfaceView.fromReference(reference);
+      MapLibreSurfaceView.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

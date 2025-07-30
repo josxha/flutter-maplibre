@@ -47,8 +47,9 @@ class URI extends jni$_.JObject {
   final jni$_.JObjType<URI> $type;
 
   @jni$_.internal
-  URI.fromReference(jni$_.JReference reference)
-    : $type = type,
+  URI.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(r'java/net/URI');
@@ -56,7 +57,9 @@ class URI extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $URI$NullableType();
   static const type = $URI$Type();
-  static final _id_new$ = _class.constructorId(r'(Ljava/lang/String;)V');
+  static final _id_new$ = _class.constructorId(
+    r'(Ljava/lang/String;)V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -78,7 +81,9 @@ class URI extends jni$_.JObject {
 
   /// from: `public void <init>(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory URI(jni$_.JString? string) {
+  factory URI(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return URI.fromReference(
       _new$(
@@ -352,7 +357,9 @@ class URI extends jni$_.JObject {
 
   /// from: `static public java.net.URI create(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static URI? create(jni$_.JString? string) {
+  static URI? create(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return _create(
       _class.reference.pointer,
@@ -446,7 +453,9 @@ class URI extends jni$_.JObject {
 
   /// from: `public java.net.URI resolve(java.net.URI uRI)`
   /// The returned object must be released after use, by calling the [release] method.
-  URI? resolve(URI? uRI) {
+  URI? resolve(
+    URI? uRI,
+  ) {
     final _$uRI = uRI?.reference ?? jni$_.jNullReference;
     return _resolve(
       reference.pointer,
@@ -480,7 +489,9 @@ class URI extends jni$_.JObject {
 
   /// from: `public java.net.URI resolve(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  URI? resolve$1(jni$_.JString? string) {
+  URI? resolve$1(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return _resolve$1(
       reference.pointer,
@@ -514,7 +525,9 @@ class URI extends jni$_.JObject {
 
   /// from: `public java.net.URI relativize(java.net.URI uRI)`
   /// The returned object must be released after use, by calling the [release] method.
-  URI? relativize(URI? uRI) {
+  URI? relativize(
+    URI? uRI,
+  ) {
     final _$uRI = uRI?.reference ?? jni$_.jNullReference;
     return _relativize(
       reference.pointer,
@@ -583,7 +596,10 @@ class URI extends jni$_.JObject {
     ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
-  static final _id_isAbsolute = _class.instanceMethodId(r'isAbsolute', r'()Z');
+  static final _id_isAbsolute = _class.instanceMethodId(
+    r'isAbsolute',
+    r'()Z',
+  );
 
   static final _isAbsolute =
       jni$_.ProtectedJniExtensions.lookup<
@@ -609,7 +625,10 @@ class URI extends jni$_.JObject {
     ).boolean;
   }
 
-  static final _id_isOpaque = _class.instanceMethodId(r'isOpaque', r'()Z');
+  static final _id_isOpaque = _class.instanceMethodId(
+    r'isOpaque',
+    r'()Z',
+  );
 
   static final _isOpaque =
       jni$_.ProtectedJniExtensions.lookup<
@@ -845,7 +864,10 @@ class URI extends jni$_.JObject {
     ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
-  static final _id_getPort = _class.instanceMethodId(r'getPort', r'()I');
+  static final _id_getPort = _class.instanceMethodId(
+    r'getPort',
+    r'()I',
+  );
 
   static final _getPort =
       jni$_.ProtectedJniExtensions.lookup<
@@ -1075,7 +1097,9 @@ class URI extends jni$_.JObject {
           >();
 
   /// from: `public boolean equals(java.lang.Object object)`
-  bool equals(jni$_.JObject? object) {
+  bool equals(
+    jni$_.JObject? object,
+  ) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     return _equals(
       reference.pointer,
@@ -1084,7 +1108,10 @@ class URI extends jni$_.JObject {
     ).boolean;
   }
 
-  static final _id_hashCode$1 = _class.instanceMethodId(r'hashCode', r'()I');
+  static final _id_hashCode$1 = _class.instanceMethodId(
+    r'hashCode',
+    r'()I',
+  );
 
   static final _hashCode$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -1134,7 +1161,9 @@ class URI extends jni$_.JObject {
           >();
 
   /// from: `public int compareTo(java.net.URI uRI)`
-  int compareTo(URI? uRI) {
+  int compareTo(
+    URI? uRI,
+  ) {
     final _$uRI = uRI?.reference ?? jni$_.jNullReference;
     return _compareTo(
       reference.pointer,
@@ -1230,8 +1259,11 @@ final class $URI$NullableType extends jni$_.JObjType<URI?> {
 
   @jni$_.internal
   @core$_.override
-  URI? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : URI.fromReference(reference);
+  URI? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : URI.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1264,7 +1296,9 @@ final class $URI$Type extends jni$_.JObjType<URI> {
 
   @jni$_.internal
   @core$_.override
-  URI fromReference(jni$_.JReference reference) => URI.fromReference(reference);
+  URI fromReference(jni$_.JReference reference) => URI.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

@@ -45,8 +45,9 @@ class OnLocationStaleListener extends jni$_.JObject {
   final jni$_.JObjType<OnLocationStaleListener> $type;
 
   @jni$_.internal
-  OnLocationStaleListener.fromReference(jni$_.JReference reference)
-    : $type = type,
+  OnLocationStaleListener.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -80,7 +81,9 @@ class OnLocationStaleListener extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onStaleStateChange(boolean z)`
-  void onStaleStateChange(bool z) {
+  void onStaleStateChange(
+    bool z,
+  ) {
     _onStaleStateChange(
       reference.pointer,
       _id_onStaleStateChange as jni$_.JMethodIDPtr,
@@ -97,7 +100,11 @@ class OnLocationStaleListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -148,16 +155,22 @@ class OnLocationStaleListener extends jni$_.JObject {
       r'org.maplibre.android.location.OnLocationStaleListener',
       $p,
       _$invokePointer,
-      [if ($impl.onStaleStateChange$async) r'onStaleStateChange(Z)V'],
+      [
+        if ($impl.onStaleStateChange$async) r'onStaleStateChange(Z)V',
+      ],
     );
     final $a = $p.sendPort.nativePort;
     _$impls[$a] = $impl;
   }
 
-  factory OnLocationStaleListener.implement($OnLocationStaleListener $impl) {
+  factory OnLocationStaleListener.implement(
+    $OnLocationStaleListener $impl,
+  ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return OnLocationStaleListener.fromReference($i.implementReference());
+    return OnLocationStaleListener.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -200,7 +213,9 @@ final class $OnLocationStaleListener$NullableType
   OnLocationStaleListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : OnLocationStaleListener.fromReference(reference);
+      : OnLocationStaleListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -236,7 +251,9 @@ final class $OnLocationStaleListener$Type
   @jni$_.internal
   @core$_.override
   OnLocationStaleListener fromReference(jni$_.JReference reference) =>
-      OnLocationStaleListener.fromReference(reference);
+      OnLocationStaleListener.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
