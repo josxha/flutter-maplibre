@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:maplibre/maplibre.dart';
@@ -7,8 +9,10 @@ class StyleLayersSymbolPage extends StatefulWidget {
   const StyleLayersSymbolPage({super.key});
 
   static const location = '/style-layers/symbol';
-  static const imageUrl =
+  static const redPinImageUrl =
       'https://upload.wikimedia.org/wikipedia/commons/f/f2/678111-map-marker-512.png';
+  static const blackPinImageUrl =
+      'https://upload.wikimedia.org/wikipedia/commons/3/3b/Blackicon.png';
 
   @override
   State<StyleLayersSymbolPage> createState() => _StyleLayersSymbolPageState();
@@ -22,14 +26,18 @@ class _StyleLayersSymbolPageState extends State<StyleLayersSymbolPage> {
       body: MapLibreMap(
         options: MapOptions(initZoom: 3, initCenter: Position(9.17, 47.68)),
         onStyleLoaded: (style) async {
-          // load the image data
-          final response = await http.get(
-            Uri.parse(StyleLayersSymbolPage.imageUrl),
-          );
-          final bytes = response.bodyBytes;
+          // load the symbols images data
+          final images = <String, Uint8List>{
+            'red_pin': await http.readBytes(
+              Uri.parse(StyleLayersSymbolPage.redPinImageUrl),
+            ),
+            'black_pin': await http.readBytes(
+              Uri.parse(StyleLayersSymbolPage.blackPinImageUrl),
+            ),
+          };
 
-          // add the image to the map
-          await style.addImages({'marker': bytes});
+          // add the images to the map
+          await style.addImages(images);
 
           // add some points as GeoJSON source to the map
           await style.addSource(
@@ -43,7 +51,17 @@ class _StyleLayersSymbolPageState extends State<StyleLayersSymbolPage> {
               sourceId: 'points',
               layout: {
                 // see https://maplibre.org/maplibre-style-spec/layers/#symbol
-                'icon-image': 'marker',
+                // Takes the icon-image to display from the GeoJSON 'icon' property.
+                'icon-image': [
+                  'case',
+                  [
+                    '==',
+                    ['get', 'icon'],
+                    'red_pin',
+                  ],
+                  'red_pin',
+                  'black_pin',
+                ],
                 'icon-size': 0.08,
                 'icon-allow-overlap': true,
                 'icon-anchor': 'bottom',
@@ -62,7 +80,9 @@ const _geoJsonString = '''
   "features": [
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "icon": "red_pin"
+      },
       "geometry": {
         "coordinates": [
           8.532443386754125,
@@ -73,7 +93,9 @@ const _geoJsonString = '''
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "icon": "black_pin"
+      },
       "geometry": {
         "coordinates": [
           -0.11027386926130589,
@@ -84,7 +106,9 @@ const _geoJsonString = '''
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "icon": "red_pin"
+      },
       "geometry": {
         "coordinates": [
           13.352826080643723,
@@ -95,7 +119,9 @@ const _geoJsonString = '''
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "icon": "black_pin"
+      },
       "geometry": {
         "coordinates": [
           12.483543026945483,

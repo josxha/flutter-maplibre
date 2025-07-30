@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:maplibre/maplibre.dart';
@@ -32,12 +34,17 @@ class _LayersMarkerPageState extends State<LayersMarkerPage> {
         onEvent: (event) async {
           switch (event) {
             case MapEventStyleLoaded():
-              // add marker image to map
-              final response = await http.get(
-                Uri.parse(StyleLayersSymbolPage.imageUrl),
-              );
-              final bytes = response.bodyBytes;
-              await event.style.addImages({'marker': bytes});
+              // add markers images to map
+              final images = <String, Uint8List>{
+                'red_pin': await http.readBytes(
+                  Uri.parse(StyleLayersSymbolPage.redPinImageUrl),
+                ),
+                'black_pin': await http.readBytes(
+                  Uri.parse(StyleLayersSymbolPage.blackPinImageUrl),
+                ),
+              };
+
+              await event.style.addImages(images);
               setState(() {
                 _imageLoaded = true;
               });
@@ -52,14 +59,26 @@ class _LayersMarkerPageState extends State<LayersMarkerPage> {
           }
         },
         layers: [
-          MarkerLayer(
-            points: _points,
-            textField: 'Marker',
-            textAllowOverlap: true,
-            iconImage: _imageLoaded ? 'marker' : null,
-            iconSize: 0.08,
-            iconAnchor: IconAnchor.bottom,
-            textOffset: const [0, 1],
+          // Each point is displayed as a layer of markers due to the
+          // randomly generated 'iconImage' property.
+          // Do not follow this approach, as it is not efficient.
+          // Instead, use a single 'MarkerLayer' with a list of points.
+          ..._points.indexed.map(
+            (p) {
+              return MarkerLayer(
+                points: [p.$2],
+                textField: 'Marker',
+                textAllowOverlap: true,
+                iconImage: _imageLoaded
+                    ? p.$1.isEven
+                          ? 'red_pin'
+                          : 'black_pin'
+                    : null,
+                iconSize: 0.08,
+                iconAnchor: IconAnchor.bottom,
+                textOffset: const [0, 1],
+              );
+            },
           ),
         ],
       ),

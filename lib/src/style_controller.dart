@@ -16,13 +16,15 @@ abstract interface class StyleController {
   /// - `belowLayerId` The ID of an existing layer to insert the new layer before,
   /// resulting in the new layer appearing visually beneath the existing layer.
   /// - `aboveLayerId` The ID of an existing layer to insert the new layer after,
-  /// resulting in the new layer appearing visually above the existing layer.
-  /// Only available on Android.
+  /// resulting in the new layer appearing visually above the existing layer.\
+  /// **Note:** `aboveLayerId` is only supported on Android platforms.
+  /// On other platforms, this parameter will be ignored.
   ///
-  /// If both `belowLayerId` and `aboveLayerId` are specified, the `belowLayerId`
-  /// will have priority and the layer will be inserted before the specified.
+  /// If both `belowLayerId` and `aboveLayerId` are specified on Android,
+  /// the `belowLayerId` will have priority and the layer will be inserted before
+  /// the specified layer.
   ///
-  /// If this argument is not specified, the layer will be appended to the end
+  /// If neither argument is specified, the layer will be appended to the end
   /// of the layers array and appear visually above all other layers.
   Future<void> addLayer(
     StyleLayer layer, {
