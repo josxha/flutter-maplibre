@@ -171,14 +171,42 @@ class StyleControllerAndroid implements StyleController {
       _jniStyle.removeSource(id.toJString());
 
   @override
-  Future<void> addImage(String id, Uint8List bytes) =>
-      // TODO: use JNI for this method
-      _hostApi.addImage(id, bytes);
+  Future<void> addImage(String id, Uint8List bytes) async {
+    final byteArray = JByteArray.from(bytes);
+    final bitmap = jni.BitmapFactory.decodeByteArray$1(
+      byteArray,
+      0,
+      byteArray.length,
+    );
+    if (bitmap == null) {
+      byteArray.release();
+      throw Exception('Failed to decode image bytes into Bitmap.');
+    }
+
+    _jniStyle.addImage(id.toJString(), bitmap);
+    byteArray.release();
+    bitmap.release();
+  }
 
   @override
-  Future<void> addImages(Map<String, Uint8List> images) =>
-      // TODO: use JNI for this method
-      _hostApi.addImages(images);
+  Future<void> addImages(Map<String, Uint8List> images) async {
+    final jniImages = JMap.hash(JString.type, Bitmap.type);
+
+    for (final entry in images.entries) {
+      final byteArray = JByteArray.from(entry.value);
+      final bitmap = jni.BitmapFactory.decodeByteArray$1(
+        byteArray,
+        0,
+        byteArray.length,
+      );
+      if (bitmap != null) {
+        jniImages[entry.key.toJString()] = bitmap;
+      }
+      byteArray.release();
+    }
+    _jniStyle.addImages(jniImages);
+    jniImages.release();
+  }
 
   @override
   Future<void> removeImage(String id) async =>
