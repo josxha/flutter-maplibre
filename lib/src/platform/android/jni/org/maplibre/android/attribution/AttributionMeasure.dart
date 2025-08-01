@@ -38,6 +38,8 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
+import '../../../../android/graphics/Bitmap.dart' as bitmap$_;
+
 import 'AttributionLayout.dart' as attributionlayout$_;
 
 /// from: `org.maplibre.android.attribution.AttributionMeasure$Builder`
@@ -47,8 +49,9 @@ class AttributionMeasure$Builder extends jni$_.JObject {
   final jni$_.JObjType<AttributionMeasure$Builder> $type;
 
   @jni$_.internal
-  AttributionMeasure$Builder.fromReference(jni$_.JReference reference)
-    : $type = type,
+  AttributionMeasure$Builder.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -58,7 +61,9 @@ class AttributionMeasure$Builder extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $AttributionMeasure$Builder$NullableType();
   static const type = $AttributionMeasure$Builder$Type();
-  static final _id_new$ = _class.constructorId(r'()V');
+  static final _id_new$ = _class.constructorId(
+    r'()V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -109,7 +114,9 @@ class AttributionMeasure$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.attribution.AttributionMeasure$Builder setSnapshot(android.graphics.Bitmap bitmap)`
   /// The returned object must be released after use, by calling the [release] method.
-  AttributionMeasure$Builder setSnapshot(jni$_.JObject? bitmap) {
+  AttributionMeasure$Builder setSnapshot(
+    bitmap$_.Bitmap? bitmap,
+  ) {
     final _$bitmap = bitmap?.reference ?? jni$_.jNullReference;
     return _setSnapshot(
       reference.pointer,
@@ -145,7 +152,9 @@ class AttributionMeasure$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.attribution.AttributionMeasure$Builder setLogo(android.graphics.Bitmap bitmap)`
   /// The returned object must be released after use, by calling the [release] method.
-  AttributionMeasure$Builder setLogo(jni$_.JObject? bitmap) {
+  AttributionMeasure$Builder setLogo(
+    bitmap$_.Bitmap? bitmap,
+  ) {
     final _$bitmap = bitmap?.reference ?? jni$_.jNullReference;
     return _setLogo(
       reference.pointer,
@@ -181,7 +190,9 @@ class AttributionMeasure$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.attribution.AttributionMeasure$Builder setLogoSmall(android.graphics.Bitmap bitmap)`
   /// The returned object must be released after use, by calling the [release] method.
-  AttributionMeasure$Builder setLogoSmall(jni$_.JObject? bitmap) {
+  AttributionMeasure$Builder setLogoSmall(
+    bitmap$_.Bitmap? bitmap,
+  ) {
     final _$bitmap = bitmap?.reference ?? jni$_.jNullReference;
     return _setLogoSmall(
       reference.pointer,
@@ -217,7 +228,9 @@ class AttributionMeasure$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.attribution.AttributionMeasure$Builder setTextView(android.widget.TextView textView)`
   /// The returned object must be released after use, by calling the [release] method.
-  AttributionMeasure$Builder setTextView(jni$_.JObject? textView) {
+  AttributionMeasure$Builder setTextView(
+    jni$_.JObject? textView,
+  ) {
     final _$textView = textView?.reference ?? jni$_.jNullReference;
     return _setTextView(
       reference.pointer,
@@ -253,7 +266,9 @@ class AttributionMeasure$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.attribution.AttributionMeasure$Builder setTextViewShort(android.widget.TextView textView)`
   /// The returned object must be released after use, by calling the [release] method.
-  AttributionMeasure$Builder setTextViewShort(jni$_.JObject? textView) {
+  AttributionMeasure$Builder setTextViewShort(
+    jni$_.JObject? textView,
+  ) {
     final _$textView = textView?.reference ?? jni$_.jNullReference;
     return _setTextViewShort(
       reference.pointer,
@@ -289,7 +304,9 @@ class AttributionMeasure$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.attribution.AttributionMeasure$Builder setMarginPadding(float f)`
   /// The returned object must be released after use, by calling the [release] method.
-  AttributionMeasure$Builder setMarginPadding(double f) {
+  AttributionMeasure$Builder setMarginPadding(
+    double f,
+  ) {
     return _setMarginPadding(
       reference.pointer,
       _id_setMarginPadding as jni$_.JMethodIDPtr,
@@ -345,7 +362,9 @@ final class $AttributionMeasure$Builder$NullableType
   AttributionMeasure$Builder? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : AttributionMeasure$Builder.fromReference(reference);
+      : AttributionMeasure$Builder.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -381,7 +400,9 @@ final class $AttributionMeasure$Builder$Type
   @jni$_.internal
   @core$_.override
   AttributionMeasure$Builder fromReference(jni$_.JReference reference) =>
-      AttributionMeasure$Builder.fromReference(reference);
+      AttributionMeasure$Builder.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -412,8 +433,9 @@ class AttributionMeasure$Command extends jni$_.JObject {
   final jni$_.JObjType<AttributionMeasure$Command> $type;
 
   @jni$_.internal
-  AttributionMeasure$Command.fromReference(jni$_.JReference reference)
-    : $type = type,
+  AttributionMeasure$Command.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -471,7 +493,11 @@ class AttributionMeasure$Command extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -536,7 +562,9 @@ class AttributionMeasure$Command extends jni$_.JObject {
   ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return AttributionMeasure$Command.fromReference($i.implementReference());
+    return AttributionMeasure$Command.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -588,7 +616,9 @@ final class $AttributionMeasure$Command$NullableType
   AttributionMeasure$Command? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : AttributionMeasure$Command.fromReference(reference);
+      : AttributionMeasure$Command.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -624,7 +654,9 @@ final class $AttributionMeasure$Command$Type
   @jni$_.internal
   @core$_.override
   AttributionMeasure$Command fromReference(jni$_.JReference reference) =>
-      AttributionMeasure$Command.fromReference(reference);
+      AttributionMeasure$Command.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -655,8 +687,9 @@ class AttributionMeasure extends jni$_.JObject {
   final jni$_.JObjType<AttributionMeasure> $type;
 
   @jni$_.internal
-  AttributionMeasure.fromReference(jni$_.JReference reference)
-    : $type = type,
+  AttributionMeasure.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -742,7 +775,11 @@ final class $AttributionMeasure$NullableType
   @jni$_.internal
   @core$_.override
   AttributionMeasure? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : AttributionMeasure.fromReference(reference);
+      reference.isNull
+      ? null
+      : AttributionMeasure.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -778,7 +815,9 @@ final class $AttributionMeasure$Type
   @jni$_.internal
   @core$_.override
   AttributionMeasure fromReference(jni$_.JReference reference) =>
-      AttributionMeasure.fromReference(reference);
+      AttributionMeasure.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

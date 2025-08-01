@@ -45,8 +45,9 @@ class CompassListener extends jni$_.JObject {
   final jni$_.JObjType<CompassListener> $type;
 
   @jni$_.internal
-  CompassListener.fromReference(jni$_.JReference reference)
-    : $type = type,
+  CompassListener.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -80,7 +81,9 @@ class CompassListener extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onCompassChanged(float f)`
-  void onCompassChanged(double f) {
+  void onCompassChanged(
+    double f,
+  ) {
     _onCompassChanged(
       reference.pointer,
       _id_onCompassChanged as jni$_.JMethodIDPtr,
@@ -112,7 +115,9 @@ class CompassListener extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onCompassAccuracyChange(int i)`
-  void onCompassAccuracyChange(int i) {
+  void onCompassAccuracyChange(
+    int i,
+  ) {
     _onCompassAccuracyChange(
       reference.pointer,
       _id_onCompassAccuracyChange as jni$_.JMethodIDPtr,
@@ -129,7 +134,11 @@ class CompassListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -197,10 +206,14 @@ class CompassListener extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory CompassListener.implement($CompassListener $impl) {
+  factory CompassListener.implement(
+    $CompassListener $impl,
+  ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return CompassListener.fromReference($i.implementReference());
+    return CompassListener.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -252,8 +265,11 @@ final class $CompassListener$NullableType
 
   @jni$_.internal
   @core$_.override
-  CompassListener? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : CompassListener.fromReference(reference);
+  CompassListener? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : CompassListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -287,7 +303,9 @@ final class $CompassListener$Type extends jni$_.JObjType<CompassListener> {
   @jni$_.internal
   @core$_.override
   CompassListener fromReference(jni$_.JReference reference) =>
-      CompassListener.fromReference(reference);
+      CompassListener.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

@@ -22,6 +22,11 @@ class StyleControllerWeb implements StyleController {
   }
 
   @override
+  Future<void> addImages(Map<String, Uint8List> images) async {
+    throw UnimplementedError('addImages method is not implemented for web.');
+  }
+
+  @override
   Future<void> removeImage(String id) async => _map.removeImage(id);
 
   @override
@@ -60,7 +65,16 @@ class StyleControllerWeb implements StyleController {
   }
 
   @override
-  Future<void> addLayer(StyleLayer layer, {String? belowLayerId}) async {
+  Future<void> addLayer(
+    StyleLayer layer, {
+    String? belowLayerId,
+    String? aboveLayerId,
+  }) async {
+    if (aboveLayerId != null) {
+      throw ArgumentError(
+        'aboveLayerID is not supported on web. Try using belowLayerId instead.',
+      );
+    }
     switch (layer) {
       case FillStyleLayer():
         _map.addLayer(

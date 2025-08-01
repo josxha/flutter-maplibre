@@ -55,8 +55,9 @@ class GeoJsonSource extends source$_.Source {
   final jni$_.JObjType<GeoJsonSource> $type;
 
   @jni$_.internal
-  GeoJsonSource.fromReference(jni$_.JReference reference)
-    : $type = type,
+  GeoJsonSource.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -66,7 +67,9 @@ class GeoJsonSource extends source$_.Source {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $GeoJsonSource$NullableType();
   static const type = $GeoJsonSource$Type();
-  static final _id_new$ = _class.constructorId(r'(J)V');
+  static final _id_new$ = _class.constructorId(
+    r'(J)V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -88,7 +91,9 @@ class GeoJsonSource extends source$_.Source {
 
   /// from: `public void <init>(long j)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory GeoJsonSource(int j) {
+  factory GeoJsonSource(
+    int j,
+  ) {
     return GeoJsonSource.fromReference(
       _new$(
         _class.reference.pointer,
@@ -98,7 +103,9 @@ class GeoJsonSource extends source$_.Source {
     );
   }
 
-  static final _id_new$1 = _class.constructorId(r'(Ljava/lang/String;)V');
+  static final _id_new$1 = _class.constructorId(
+    r'(Ljava/lang/String;)V',
+  );
 
   static final _new$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -120,7 +127,9 @@ class GeoJsonSource extends source$_.Source {
 
   /// from: `public void <init>(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory GeoJsonSource.new$1(jni$_.JString? string) {
+  factory GeoJsonSource.new$1(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return GeoJsonSource.fromReference(
       _new$1(
@@ -201,7 +210,10 @@ class GeoJsonSource extends source$_.Source {
 
   /// from: `public void <init>(java.lang.String string, java.lang.String string1)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory GeoJsonSource.new$3(jni$_.JString? string, jni$_.JString? string1) {
+  factory GeoJsonSource.new$3(
+    jni$_.JString? string,
+    jni$_.JString? string1,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
     return GeoJsonSource.fromReference(
@@ -292,7 +304,10 @@ class GeoJsonSource extends source$_.Source {
 
   /// from: `public void <init>(java.lang.String string, java.net.URL uRL)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory GeoJsonSource.new$5(jni$_.JString? string, url$_.URL uRL) {
+  factory GeoJsonSource.new$5(
+    jni$_.JString? string,
+    url$_.URL uRL,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$uRL = uRL.reference;
     return GeoJsonSource.fromReference(
@@ -383,7 +398,10 @@ class GeoJsonSource extends source$_.Source {
 
   /// from: `public void <init>(java.lang.String string, java.net.URI uRI)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory GeoJsonSource.new$7(jni$_.JString? string, uri$_.URI uRI) {
+  factory GeoJsonSource.new$7(
+    jni$_.JString? string,
+    uri$_.URI uRI,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$uRI = uRI.reference;
     return GeoJsonSource.fromReference(
@@ -664,7 +682,10 @@ class GeoJsonSource extends source$_.Source {
 
   /// from: `public void <init>(java.lang.String string, org.maplibre.geojson.Geometry geometry)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory GeoJsonSource.new$13(jni$_.JString? string, jni$_.JObject? geometry) {
+  factory GeoJsonSource.new$13(
+    jni$_.JString? string,
+    jni$_.JObject? geometry,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$geometry = geometry?.reference ?? jni$_.jNullReference;
     return GeoJsonSource.fromReference(
@@ -752,7 +773,9 @@ class GeoJsonSource extends source$_.Source {
           >();
 
   /// from: `public final void setGeoJson(org.maplibre.geojson.Feature feature)`
-  void setGeoJson(feature$_.Feature? feature) {
+  void setGeoJson(
+    feature$_.Feature? feature,
+  ) {
     final _$feature = feature?.reference ?? jni$_.jNullReference;
     _setGeoJson(
       reference.pointer,
@@ -785,7 +808,9 @@ class GeoJsonSource extends source$_.Source {
           >();
 
   /// from: `public final void setGeoJson(org.maplibre.geojson.Geometry geometry)`
-  void setGeoJson$1(jni$_.JObject? geometry) {
+  void setGeoJson$1(
+    jni$_.JObject? geometry,
+  ) {
     final _$geometry = geometry?.reference ?? jni$_.jNullReference;
     _setGeoJson$1(
       reference.pointer,
@@ -818,7 +843,9 @@ class GeoJsonSource extends source$_.Source {
           >();
 
   /// from: `public final void setGeoJson(org.maplibre.geojson.FeatureCollection featureCollection)`
-  void setGeoJson$2(jni$_.JObject? featureCollection) {
+  void setGeoJson$2(
+    jni$_.JObject? featureCollection,
+  ) {
     final _$featureCollection =
         featureCollection?.reference ?? jni$_.jNullReference;
     _setGeoJson$2(
@@ -852,7 +879,9 @@ class GeoJsonSource extends source$_.Source {
           >();
 
   /// from: `public final void setGeoJsonSync(org.maplibre.geojson.Feature feature)`
-  void setGeoJsonSync(feature$_.Feature? feature) {
+  void setGeoJsonSync(
+    feature$_.Feature? feature,
+  ) {
     final _$feature = feature?.reference ?? jni$_.jNullReference;
     _setGeoJsonSync(
       reference.pointer,
@@ -885,7 +914,9 @@ class GeoJsonSource extends source$_.Source {
           >();
 
   /// from: `public final void setGeoJsonSync(org.maplibre.geojson.Geometry geometry)`
-  void setGeoJsonSync$1(jni$_.JObject? geometry) {
+  void setGeoJsonSync$1(
+    jni$_.JObject? geometry,
+  ) {
     final _$geometry = geometry?.reference ?? jni$_.jNullReference;
     _setGeoJsonSync$1(
       reference.pointer,
@@ -918,7 +949,9 @@ class GeoJsonSource extends source$_.Source {
           >();
 
   /// from: `public final void setGeoJsonSync(org.maplibre.geojson.FeatureCollection featureCollection)`
-  void setGeoJsonSync$2(jni$_.JObject? featureCollection) {
+  void setGeoJsonSync$2(
+    jni$_.JObject? featureCollection,
+  ) {
     final _$featureCollection =
         featureCollection?.reference ?? jni$_.jNullReference;
     _setGeoJsonSync$2(
@@ -952,7 +985,9 @@ class GeoJsonSource extends source$_.Source {
           >();
 
   /// from: `public final void setGeoJson(java.lang.String string)`
-  void setGeoJson$3(jni$_.JString string) {
+  void setGeoJson$3(
+    jni$_.JString string,
+  ) {
     final _$string = string.reference;
     _setGeoJson$3(
       reference.pointer,
@@ -985,7 +1020,9 @@ class GeoJsonSource extends source$_.Source {
           >();
 
   /// from: `public final void setGeoJsonSync(java.lang.String string)`
-  void setGeoJsonSync$3(jni$_.JString string) {
+  void setGeoJsonSync$3(
+    jni$_.JString string,
+  ) {
     final _$string = string.reference;
     _setGeoJsonSync$3(
       reference.pointer,
@@ -1018,7 +1055,9 @@ class GeoJsonSource extends source$_.Source {
           >();
 
   /// from: `public final void setUrl(java.net.URL uRL)`
-  void setUrl(url$_.URL uRL) {
+  void setUrl(
+    url$_.URL uRL,
+  ) {
     final _$uRL = uRL.reference;
     _setUrl(
       reference.pointer,
@@ -1051,7 +1090,9 @@ class GeoJsonSource extends source$_.Source {
           >();
 
   /// from: `public final void setUri(java.net.URI uRI)`
-  void setUri(uri$_.URI uRI) {
+  void setUri(
+    uri$_.URI uRI,
+  ) {
     final _$uRI = uRI.reference;
     _setUri(
       reference.pointer,
@@ -1084,7 +1125,9 @@ class GeoJsonSource extends source$_.Source {
           >();
 
   /// from: `public final void setUri(java.lang.String string)`
-  void setUri$1(jni$_.JString? string) {
+  void setUri$1(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setUri$1(
       reference.pointer,
@@ -1147,7 +1190,9 @@ class GeoJsonSource extends source$_.Source {
           >();
 
   /// from: `public final void setUrl(java.lang.String string)`
-  void setUrl$1(jni$_.JString? string) {
+  void setUrl$1(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setUrl$1(
       reference.pointer,
@@ -1249,7 +1294,9 @@ class GeoJsonSource extends source$_.Source {
 
   /// from: `public final org.maplibre.geojson.FeatureCollection getClusterChildren(org.maplibre.geojson.Feature feature)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject getClusterChildren(feature$_.Feature feature) {
+  jni$_.JObject getClusterChildren(
+    feature$_.Feature feature,
+  ) {
     final _$feature = feature.reference;
     return _getClusterChildren(
       reference.pointer,
@@ -1287,7 +1334,11 @@ class GeoJsonSource extends source$_.Source {
 
   /// from: `public final org.maplibre.geojson.FeatureCollection getClusterLeaves(org.maplibre.geojson.Feature feature, long j, long j1)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject getClusterLeaves(feature$_.Feature feature, int j, int j1) {
+  jni$_.JObject getClusterLeaves(
+    feature$_.Feature feature,
+    int j,
+    int j1,
+  ) {
     final _$feature = feature.reference;
     return _getClusterLeaves(
       reference.pointer,
@@ -1322,7 +1373,9 @@ class GeoJsonSource extends source$_.Source {
           >();
 
   /// from: `public final int getClusterExpansionZoom(org.maplibre.geojson.Feature feature)`
-  int getClusterExpansionZoom(feature$_.Feature feature) {
+  int getClusterExpansionZoom(
+    feature$_.Feature feature,
+  ) {
     final _$feature = feature.reference;
     return _getClusterExpansionZoom(
       reference.pointer,
@@ -1342,8 +1395,11 @@ final class $GeoJsonSource$NullableType extends jni$_.JObjType<GeoJsonSource?> {
 
   @jni$_.internal
   @core$_.override
-  GeoJsonSource? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : GeoJsonSource.fromReference(reference);
+  GeoJsonSource? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : GeoJsonSource.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const source$_.$Source$Type();
@@ -1377,7 +1433,9 @@ final class $GeoJsonSource$Type extends jni$_.JObjType<GeoJsonSource> {
   @jni$_.internal
   @core$_.override
   GeoJsonSource fromReference(jni$_.JReference reference) =>
-      GeoJsonSource.fromReference(reference);
+      GeoJsonSource.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const source$_.$Source$Type();

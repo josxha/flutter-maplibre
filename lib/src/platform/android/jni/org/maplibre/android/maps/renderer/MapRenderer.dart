@@ -49,8 +49,9 @@ class MapRenderer$RenderingRefreshMode extends jni$_.JObject {
   final jni$_.JObjType<MapRenderer$RenderingRefreshMode> $type;
 
   @jni$_.internal
-  MapRenderer$RenderingRefreshMode.fromReference(jni$_.JReference reference)
-    : $type = type,
+  MapRenderer$RenderingRefreshMode.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -143,7 +144,9 @@ class MapRenderer$RenderingRefreshMode extends jni$_.JObject {
 
   /// from: `static public org.maplibre.android.maps.renderer.MapRenderer$RenderingRefreshMode valueOf(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static MapRenderer$RenderingRefreshMode? valueOf(jni$_.JString? string) {
+  static MapRenderer$RenderingRefreshMode? valueOf(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return _valueOf(
       _class.reference.pointer,
@@ -170,7 +173,9 @@ final class $MapRenderer$RenderingRefreshMode$NullableType
   MapRenderer$RenderingRefreshMode? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : MapRenderer$RenderingRefreshMode.fromReference(reference);
+      : MapRenderer$RenderingRefreshMode.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -207,7 +212,9 @@ final class $MapRenderer$RenderingRefreshMode$Type
   @jni$_.internal
   @core$_.override
   MapRenderer$RenderingRefreshMode fromReference(jni$_.JReference reference) =>
-      MapRenderer$RenderingRefreshMode.fromReference(reference);
+      MapRenderer$RenderingRefreshMode.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -238,8 +245,9 @@ class MapRenderer extends jni$_.JObject {
   final jni$_.JObjType<MapRenderer> $type;
 
   @jni$_.internal
-  MapRenderer.fromReference(jni$_.JReference reference)
-    : $type = type,
+  MapRenderer.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -330,7 +338,10 @@ class MapRenderer extends jni$_.JObject {
     ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
-  static final _id_onStart = _class.instanceMethodId(r'onStart', r'()V');
+  static final _id_onStart = _class.instanceMethodId(
+    r'onStart',
+    r'()V',
+  );
 
   static final _onStart =
       jni$_.ProtectedJniExtensions.lookup<
@@ -353,7 +364,10 @@ class MapRenderer extends jni$_.JObject {
     _onStart(reference.pointer, _id_onStart as jni$_.JMethodIDPtr).check();
   }
 
-  static final _id_onPause = _class.instanceMethodId(r'onPause', r'()V');
+  static final _id_onPause = _class.instanceMethodId(
+    r'onPause',
+    r'()V',
+  );
 
   static final _onPause =
       jni$_.ProtectedJniExtensions.lookup<
@@ -376,7 +390,10 @@ class MapRenderer extends jni$_.JObject {
     _onPause(reference.pointer, _id_onPause as jni$_.JMethodIDPtr).check();
   }
 
-  static final _id_onResume = _class.instanceMethodId(r'onResume', r'()V');
+  static final _id_onResume = _class.instanceMethodId(
+    r'onResume',
+    r'()V',
+  );
 
   static final _onResume =
       jni$_.ProtectedJniExtensions.lookup<
@@ -399,7 +416,10 @@ class MapRenderer extends jni$_.JObject {
     _onResume(reference.pointer, _id_onResume as jni$_.JMethodIDPtr).check();
   }
 
-  static final _id_onStop = _class.instanceMethodId(r'onStop', r'()V');
+  static final _id_onStop = _class.instanceMethodId(
+    r'onStop',
+    r'()V',
+  );
 
   static final _onStop =
       jni$_.ProtectedJniExtensions.lookup<
@@ -422,7 +442,10 @@ class MapRenderer extends jni$_.JObject {
     _onStop(reference.pointer, _id_onStop as jni$_.JMethodIDPtr).check();
   }
 
-  static final _id_onDestroy = _class.instanceMethodId(r'onDestroy', r'()V');
+  static final _id_onDestroy = _class.instanceMethodId(
+    r'onDestroy',
+    r'()V',
+  );
 
   static final _onDestroy =
       jni$_.ProtectedJniExtensions.lookup<
@@ -573,7 +596,9 @@ class MapRenderer extends jni$_.JObject {
           >();
 
   /// from: `public void setSwapBehaviorFlush(boolean z)`
-  void setSwapBehaviorFlush(bool z) {
+  void setSwapBehaviorFlush(
+    bool z,
+  ) {
     _setSwapBehaviorFlush(
       reference.pointer,
       _id_setSwapBehaviorFlush as jni$_.JMethodIDPtr,
@@ -605,7 +630,9 @@ class MapRenderer extends jni$_.JObject {
           >();
 
   /// from: `public void setMaximumFps(int i)`
-  void setMaximumFps(int i) {
+  void setMaximumFps(
+    int i,
+  ) {
     _setMaximumFps(
       reference.pointer,
       _id_setMaximumFps as jni$_.JMethodIDPtr,
@@ -666,7 +693,9 @@ class MapRenderer extends jni$_.JObject {
           >();
 
   /// from: `public abstract void queueEvent(java.lang.Runnable runnable)`
-  void queueEvent(jni$_.JObject? runnable) {
+  void queueEvent(
+    jni$_.JObject? runnable,
+  ) {
     final _$runnable = runnable?.reference ?? jni$_.jNullReference;
     _queueEvent(
       reference.pointer,
@@ -715,8 +744,11 @@ final class $MapRenderer$NullableType extends jni$_.JObjType<MapRenderer?> {
 
   @jni$_.internal
   @core$_.override
-  MapRenderer? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : MapRenderer.fromReference(reference);
+  MapRenderer? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : MapRenderer.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -750,7 +782,9 @@ final class $MapRenderer$Type extends jni$_.JObjType<MapRenderer> {
   @jni$_.internal
   @core$_.override
   MapRenderer fromReference(jni$_.JReference reference) =>
-      MapRenderer.fromReference(reference);
+      MapRenderer.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

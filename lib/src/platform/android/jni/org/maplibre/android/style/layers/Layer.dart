@@ -47,8 +47,9 @@ class Layer extends jni$_.JObject {
   final jni$_.JObjType<Layer> $type;
 
   @jni$_.internal
-  Layer.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Layer.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -157,7 +158,10 @@ class Layer extends jni$_.JObject {
     );
   }
 
-  static final _id_getMinZoom = _class.instanceMethodId(r'getMinZoom', r'()F');
+  static final _id_getMinZoom = _class.instanceMethodId(
+    r'getMinZoom',
+    r'()F',
+  );
 
   static final _getMinZoom =
       jni$_.ProtectedJniExtensions.lookup<
@@ -183,7 +187,10 @@ class Layer extends jni$_.JObject {
     ).float;
   }
 
-  static final _id_getMaxZoom = _class.instanceMethodId(r'getMaxZoom', r'()F');
+  static final _id_getMaxZoom = _class.instanceMethodId(
+    r'getMaxZoom',
+    r'()F',
+  );
 
   static final _getMaxZoom =
       jni$_.ProtectedJniExtensions.lookup<
@@ -209,7 +216,10 @@ class Layer extends jni$_.JObject {
     ).float;
   }
 
-  static final _id_setMinZoom = _class.instanceMethodId(r'setMinZoom', r'(F)V');
+  static final _id_setMinZoom = _class.instanceMethodId(
+    r'setMinZoom',
+    r'(F)V',
+  );
 
   static final _setMinZoom =
       jni$_.ProtectedJniExtensions.lookup<
@@ -230,7 +240,9 @@ class Layer extends jni$_.JObject {
           >();
 
   /// from: `public void setMinZoom(float f)`
-  void setMinZoom(double f) {
+  void setMinZoom(
+    double f,
+  ) {
     _setMinZoom(
       reference.pointer,
       _id_setMinZoom as jni$_.JMethodIDPtr,
@@ -238,7 +250,10 @@ class Layer extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_setMaxZoom = _class.instanceMethodId(r'setMaxZoom', r'(F)V');
+  static final _id_setMaxZoom = _class.instanceMethodId(
+    r'setMaxZoom',
+    r'(F)V',
+  );
 
   static final _setMaxZoom =
       jni$_.ProtectedJniExtensions.lookup<
@@ -259,7 +274,9 @@ class Layer extends jni$_.JObject {
           >();
 
   /// from: `public void setMaxZoom(float f)`
-  void setMaxZoom(double f) {
+  void setMaxZoom(
+    double f,
+  ) {
     _setMaxZoom(
       reference.pointer,
       _id_setMaxZoom as jni$_.JMethodIDPtr,
@@ -325,7 +342,10 @@ class Layer extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_isDetached = _class.instanceMethodId(r'isDetached', r'()Z');
+  static final _id_isDetached = _class.instanceMethodId(
+    r'isDetached',
+    r'()Z',
+  );
 
   static final _isDetached =
       jni$_.ProtectedJniExtensions.lookup<
@@ -362,8 +382,11 @@ final class $Layer$NullableType extends jni$_.JObjType<Layer?> {
 
   @jni$_.internal
   @core$_.override
-  Layer? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : Layer.fromReference(reference);
+  Layer? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : Layer.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -396,8 +419,9 @@ final class $Layer$Type extends jni$_.JObjType<Layer> {
 
   @jni$_.internal
   @core$_.override
-  Layer fromReference(jni$_.JReference reference) =>
-      Layer.fromReference(reference);
+  Layer fromReference(jni$_.JReference reference) => Layer.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

@@ -47,8 +47,9 @@ class CustomLayer extends layer$_.Layer {
   final jni$_.JObjType<CustomLayer> $type;
 
   @jni$_.internal
-  CustomLayer.fromReference(jni$_.JReference reference)
-    : $type = type,
+  CustomLayer.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -58,7 +59,9 @@ class CustomLayer extends layer$_.Layer {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $CustomLayer$NullableType();
   static const type = $CustomLayer$Type();
-  static final _id_new$ = _class.constructorId(r'(Ljava/lang/String;J)V');
+  static final _id_new$ = _class.constructorId(
+    r'(Ljava/lang/String;J)V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -81,7 +84,10 @@ class CustomLayer extends layer$_.Layer {
 
   /// from: `public void <init>(java.lang.String string, long j)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory CustomLayer(jni$_.JString? string, int j) {
+  factory CustomLayer(
+    jni$_.JString? string,
+    int j,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return CustomLayer.fromReference(
       _new$(
@@ -93,7 +99,10 @@ class CustomLayer extends layer$_.Layer {
     );
   }
 
-  static final _id_update = _class.instanceMethodId(r'update', r'()V');
+  static final _id_update = _class.instanceMethodId(
+    r'update',
+    r'()V',
+  );
 
   static final _update =
       jni$_.ProtectedJniExtensions.lookup<
@@ -127,8 +136,11 @@ final class $CustomLayer$NullableType extends jni$_.JObjType<CustomLayer?> {
 
   @jni$_.internal
   @core$_.override
-  CustomLayer? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : CustomLayer.fromReference(reference);
+  CustomLayer? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : CustomLayer.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const layer$_.$Layer$NullableType();
@@ -162,7 +174,9 @@ final class $CustomLayer$Type extends jni$_.JObjType<CustomLayer> {
   @jni$_.internal
   @core$_.override
   CustomLayer fromReference(jni$_.JReference reference) =>
-      CustomLayer.fromReference(reference);
+      CustomLayer.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const layer$_.$Layer$NullableType();

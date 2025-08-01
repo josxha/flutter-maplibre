@@ -49,8 +49,9 @@ class MapRendererFactory extends jni$_.JObject {
   final jni$_.JObjType<MapRendererFactory> $type;
 
   @jni$_.internal
-  MapRendererFactory.fromReference(jni$_.JReference reference)
-    : $type = type,
+  MapRendererFactory.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -60,7 +61,9 @@ class MapRendererFactory extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $MapRendererFactory$NullableType();
   static const type = $MapRendererFactory$Type();
-  static final _id_new$ = _class.constructorId(r'()V');
+  static final _id_new$ = _class.constructorId(
+    r'()V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -219,7 +222,11 @@ final class $MapRendererFactory$NullableType
   @jni$_.internal
   @core$_.override
   MapRendererFactory? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : MapRendererFactory.fromReference(reference);
+      reference.isNull
+      ? null
+      : MapRendererFactory.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -255,7 +262,9 @@ final class $MapRendererFactory$Type
   @jni$_.internal
   @core$_.override
   MapRendererFactory fromReference(jni$_.JReference reference) =>
-      MapRendererFactory.fromReference(reference);
+      MapRendererFactory.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

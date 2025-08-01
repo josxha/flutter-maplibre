@@ -45,8 +45,9 @@ class RenderingStats extends jni$_.JObject {
   final jni$_.JObjType<RenderingStats> $type;
 
   @jni$_.internal
-  RenderingStats.fromReference(jni$_.JReference reference)
-    : $type = type,
+  RenderingStats.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -56,7 +57,10 @@ class RenderingStats extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $RenderingStats$NullableType();
   static const type = $RenderingStats$Type();
-  static final _id_encodingTime = _class.instanceFieldId(r'encodingTime', r'D');
+  static final _id_encodingTime = _class.instanceFieldId(
+    r'encodingTime',
+    r'D',
+  );
 
   /// from: `public double encodingTime`
   double get encodingTime =>
@@ -79,7 +83,10 @@ class RenderingStats extends jni$_.JObject {
   set renderingTime(double value) =>
       _id_renderingTime.set(this, const jni$_.jdoubleType(), value);
 
-  static final _id_numFrames = _class.instanceFieldId(r'numFrames', r'I');
+  static final _id_numFrames = _class.instanceFieldId(
+    r'numFrames',
+    r'I',
+  );
 
   /// from: `public int numFrames`
   int get numFrames => _id_numFrames.get(this, const jni$_.jintType());
@@ -88,7 +95,10 @@ class RenderingStats extends jni$_.JObject {
   set numFrames(int value) =>
       _id_numFrames.set(this, const jni$_.jintType(), value);
 
-  static final _id_numDrawCalls = _class.instanceFieldId(r'numDrawCalls', r'I');
+  static final _id_numDrawCalls = _class.instanceFieldId(
+    r'numDrawCalls',
+    r'I',
+  );
 
   /// from: `public int numDrawCalls`
   int get numDrawCalls => _id_numDrawCalls.get(this, const jni$_.jintType());
@@ -175,7 +185,10 @@ class RenderingStats extends jni$_.JObject {
   set textureUpdateBytes(int value) =>
       _id_textureUpdateBytes.set(this, const jni$_.jlongType(), value);
 
-  static final _id_totalBuffers = _class.instanceFieldId(r'totalBuffers', r'J');
+  static final _id_totalBuffers = _class.instanceFieldId(
+    r'totalBuffers',
+    r'J',
+  );
 
   /// from: `public long totalBuffers`
   int get totalBuffers => _id_totalBuffers.get(this, const jni$_.jlongType());
@@ -235,7 +248,10 @@ class RenderingStats extends jni$_.JObject {
   set bufferUpdateBytes(int value) =>
       _id_bufferUpdateBytes.set(this, const jni$_.jlongType(), value);
 
-  static final _id_numBuffers = _class.instanceFieldId(r'numBuffers', r'I');
+  static final _id_numBuffers = _class.instanceFieldId(
+    r'numBuffers',
+    r'I',
+  );
 
   /// from: `public int numBuffers`
   int get numBuffers => _id_numBuffers.get(this, const jni$_.jintType());
@@ -348,7 +364,10 @@ class RenderingStats extends jni$_.JObject {
   set uniformUpdateBytes(int value) =>
       _id_uniformUpdateBytes.set(this, const jni$_.jlongType(), value);
 
-  static final _id_memTextures = _class.instanceFieldId(r'memTextures', r'I');
+  static final _id_memTextures = _class.instanceFieldId(
+    r'memTextures',
+    r'I',
+  );
 
   /// from: `public int memTextures`
   int get memTextures => _id_memTextures.get(this, const jni$_.jintType());
@@ -357,7 +376,10 @@ class RenderingStats extends jni$_.JObject {
   set memTextures(int value) =>
       _id_memTextures.set(this, const jni$_.jintType(), value);
 
-  static final _id_memBuffers = _class.instanceFieldId(r'memBuffers', r'I');
+  static final _id_memBuffers = _class.instanceFieldId(
+    r'memBuffers',
+    r'I',
+  );
 
   /// from: `public int memBuffers`
   int get memBuffers => _id_memBuffers.get(this, const jni$_.jintType());
@@ -430,7 +452,9 @@ class RenderingStats extends jni$_.JObject {
   set stencilUpdates(int value) =>
       _id_stencilUpdates.set(this, const jni$_.jintType(), value);
 
-  static final _id_new$ = _class.constructorId(r'()V');
+  static final _id_new$ = _class.constructorId(
+    r'()V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -468,8 +492,11 @@ final class $RenderingStats$NullableType
 
   @jni$_.internal
   @core$_.override
-  RenderingStats? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : RenderingStats.fromReference(reference);
+  RenderingStats? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : RenderingStats.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -503,7 +530,9 @@ final class $RenderingStats$Type extends jni$_.JObjType<RenderingStats> {
   @jni$_.internal
   @core$_.override
   RenderingStats fromReference(jni$_.JReference reference) =>
-      RenderingStats.fromReference(reference);
+      RenderingStats.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

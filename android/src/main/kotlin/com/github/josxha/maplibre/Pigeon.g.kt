@@ -554,23 +554,23 @@ private open class PigeonPigeonCodec : StandardMessageCodec() {
 /** Generated interface from Pigeon that represents a handler of messages from Flutter. */
 interface MapLibreHostApi {
   /** Add a fill layer to the map style. */
-  fun addFillLayer(id: String, sourceId: String, layout: Map<String, Any>, paint: Map<String, Any>, belowLayerId: String?, callback: (Result<Unit>) -> Unit)
+  fun addFillLayer(id: String, sourceId: String, layout: Map<String, Any>, paint: Map<String, Any>, belowLayerId: String?, aboveLayerId: String?, callback: (Result<Unit>) -> Unit)
   /** Add a circle layer to the map style. */
-  fun addCircleLayer(id: String, sourceId: String, layout: Map<String, Any>, paint: Map<String, Any>, belowLayerId: String?, callback: (Result<Unit>) -> Unit)
+  fun addCircleLayer(id: String, sourceId: String, layout: Map<String, Any>, paint: Map<String, Any>, belowLayerId: String?, aboveLayerId: String?, callback: (Result<Unit>) -> Unit)
   /** Add a background layer to the map style. */
-  fun addBackgroundLayer(id: String, layout: Map<String, Any>, paint: Map<String, Any>, belowLayerId: String?, callback: (Result<Unit>) -> Unit)
+  fun addBackgroundLayer(id: String, layout: Map<String, Any>, paint: Map<String, Any>, belowLayerId: String?, aboveLayerId: String?, callback: (Result<Unit>) -> Unit)
   /** Add a fill extrusion layer to the map style. */
-  fun addFillExtrusionLayer(id: String, sourceId: String, layout: Map<String, Any>, paint: Map<String, Any>, belowLayerId: String?, callback: (Result<Unit>) -> Unit)
+  fun addFillExtrusionLayer(id: String, sourceId: String, layout: Map<String, Any>, paint: Map<String, Any>, belowLayerId: String?, aboveLayerId: String?, callback: (Result<Unit>) -> Unit)
   /** Add a heatmap layer to the map style. */
-  fun addHeatmapLayer(id: String, sourceId: String, layout: Map<String, Any>, paint: Map<String, Any>, belowLayerId: String?, callback: (Result<Unit>) -> Unit)
+  fun addHeatmapLayer(id: String, sourceId: String, layout: Map<String, Any>, paint: Map<String, Any>, belowLayerId: String?, aboveLayerId: String?, callback: (Result<Unit>) -> Unit)
   /** Add a hillshade layer to the map style. */
-  fun addHillshadeLayer(id: String, sourceId: String, layout: Map<String, Any>, paint: Map<String, Any>, belowLayerId: String?, callback: (Result<Unit>) -> Unit)
+  fun addHillshadeLayer(id: String, sourceId: String, layout: Map<String, Any>, paint: Map<String, Any>, belowLayerId: String?, aboveLayerId: String?, callback: (Result<Unit>) -> Unit)
   /** Add a line layer to the map style. */
-  fun addLineLayer(id: String, sourceId: String, layout: Map<String, Any>, paint: Map<String, Any>, belowLayerId: String?, callback: (Result<Unit>) -> Unit)
+  fun addLineLayer(id: String, sourceId: String, layout: Map<String, Any>, paint: Map<String, Any>, belowLayerId: String?, aboveLayerId: String?, callback: (Result<Unit>) -> Unit)
   /** Add a raster layer to the map style. */
-  fun addRasterLayer(id: String, sourceId: String, layout: Map<String, Any>, paint: Map<String, Any>, belowLayerId: String?, callback: (Result<Unit>) -> Unit)
+  fun addRasterLayer(id: String, sourceId: String, layout: Map<String, Any>, paint: Map<String, Any>, belowLayerId: String?, aboveLayerId: String?, callback: (Result<Unit>) -> Unit)
   /** Add a symbol layer to the map style. */
-  fun addSymbolLayer(id: String, sourceId: String, layout: Map<String, Any>, paint: Map<String, Any>, belowLayerId: String?, callback: (Result<Unit>) -> Unit)
+  fun addSymbolLayer(id: String, sourceId: String, layout: Map<String, Any>, paint: Map<String, Any>, belowLayerId: String?, aboveLayerId: String?, callback: (Result<Unit>) -> Unit)
   /**
    * Loads an image to the map. An image needs to be loaded before it can
    * get used.
@@ -578,6 +578,8 @@ interface MapLibreHostApi {
   fun loadImage(url: String, callback: (Result<ByteArray>) -> Unit)
   /** Add an image to the map. */
   fun addImage(id: String, bytes: ByteArray, callback: (Result<Unit>) -> Unit)
+  /** Add multiple images to the map. */
+  fun addImages(images: Map<String, ByteArray>, callback: (Result<Unit>) -> Unit)
 
   companion object {
     /** The codec used by MapLibreHostApi. */
@@ -598,7 +600,8 @@ interface MapLibreHostApi {
             val layoutArg = args[2] as Map<String, Any>
             val paintArg = args[3] as Map<String, Any>
             val belowLayerIdArg = args[4] as String?
-            api.addFillLayer(idArg, sourceIdArg, layoutArg, paintArg, belowLayerIdArg) { result: Result<Unit> ->
+            val aboveLayerIdArg = args[5] as String?
+            api.addFillLayer(idArg, sourceIdArg, layoutArg, paintArg, belowLayerIdArg, aboveLayerIdArg) { result: Result<Unit> ->
               val error = result.exceptionOrNull()
               if (error != null) {
                 reply.reply(PigeonPigeonUtils.wrapError(error))
@@ -621,7 +624,8 @@ interface MapLibreHostApi {
             val layoutArg = args[2] as Map<String, Any>
             val paintArg = args[3] as Map<String, Any>
             val belowLayerIdArg = args[4] as String?
-            api.addCircleLayer(idArg, sourceIdArg, layoutArg, paintArg, belowLayerIdArg) { result: Result<Unit> ->
+            val aboveLayerIdArg = args[5] as String?
+            api.addCircleLayer(idArg, sourceIdArg, layoutArg, paintArg, belowLayerIdArg, aboveLayerIdArg) { result: Result<Unit> ->
               val error = result.exceptionOrNull()
               if (error != null) {
                 reply.reply(PigeonPigeonUtils.wrapError(error))
@@ -643,7 +647,8 @@ interface MapLibreHostApi {
             val layoutArg = args[1] as Map<String, Any>
             val paintArg = args[2] as Map<String, Any>
             val belowLayerIdArg = args[3] as String?
-            api.addBackgroundLayer(idArg, layoutArg, paintArg, belowLayerIdArg) { result: Result<Unit> ->
+            val aboveLayerIdArg = args[4] as String?
+            api.addBackgroundLayer(idArg, layoutArg, paintArg, belowLayerIdArg, aboveLayerIdArg) { result: Result<Unit> ->
               val error = result.exceptionOrNull()
               if (error != null) {
                 reply.reply(PigeonPigeonUtils.wrapError(error))
@@ -666,7 +671,8 @@ interface MapLibreHostApi {
             val layoutArg = args[2] as Map<String, Any>
             val paintArg = args[3] as Map<String, Any>
             val belowLayerIdArg = args[4] as String?
-            api.addFillExtrusionLayer(idArg, sourceIdArg, layoutArg, paintArg, belowLayerIdArg) { result: Result<Unit> ->
+            val aboveLayerIdArg = args[5] as String?
+            api.addFillExtrusionLayer(idArg, sourceIdArg, layoutArg, paintArg, belowLayerIdArg, aboveLayerIdArg) { result: Result<Unit> ->
               val error = result.exceptionOrNull()
               if (error != null) {
                 reply.reply(PigeonPigeonUtils.wrapError(error))
@@ -689,7 +695,8 @@ interface MapLibreHostApi {
             val layoutArg = args[2] as Map<String, Any>
             val paintArg = args[3] as Map<String, Any>
             val belowLayerIdArg = args[4] as String?
-            api.addHeatmapLayer(idArg, sourceIdArg, layoutArg, paintArg, belowLayerIdArg) { result: Result<Unit> ->
+            val aboveLayerIdArg = args[5] as String?
+            api.addHeatmapLayer(idArg, sourceIdArg, layoutArg, paintArg, belowLayerIdArg, aboveLayerIdArg) { result: Result<Unit> ->
               val error = result.exceptionOrNull()
               if (error != null) {
                 reply.reply(PigeonPigeonUtils.wrapError(error))
@@ -712,7 +719,8 @@ interface MapLibreHostApi {
             val layoutArg = args[2] as Map<String, Any>
             val paintArg = args[3] as Map<String, Any>
             val belowLayerIdArg = args[4] as String?
-            api.addHillshadeLayer(idArg, sourceIdArg, layoutArg, paintArg, belowLayerIdArg) { result: Result<Unit> ->
+            val aboveLayerIdArg = args[5] as String?
+            api.addHillshadeLayer(idArg, sourceIdArg, layoutArg, paintArg, belowLayerIdArg, aboveLayerIdArg) { result: Result<Unit> ->
               val error = result.exceptionOrNull()
               if (error != null) {
                 reply.reply(PigeonPigeonUtils.wrapError(error))
@@ -735,7 +743,8 @@ interface MapLibreHostApi {
             val layoutArg = args[2] as Map<String, Any>
             val paintArg = args[3] as Map<String, Any>
             val belowLayerIdArg = args[4] as String?
-            api.addLineLayer(idArg, sourceIdArg, layoutArg, paintArg, belowLayerIdArg) { result: Result<Unit> ->
+            val aboveLayerIdArg = args[5] as String?
+            api.addLineLayer(idArg, sourceIdArg, layoutArg, paintArg, belowLayerIdArg, aboveLayerIdArg) { result: Result<Unit> ->
               val error = result.exceptionOrNull()
               if (error != null) {
                 reply.reply(PigeonPigeonUtils.wrapError(error))
@@ -758,7 +767,8 @@ interface MapLibreHostApi {
             val layoutArg = args[2] as Map<String, Any>
             val paintArg = args[3] as Map<String, Any>
             val belowLayerIdArg = args[4] as String?
-            api.addRasterLayer(idArg, sourceIdArg, layoutArg, paintArg, belowLayerIdArg) { result: Result<Unit> ->
+            val aboveLayerIdArg = args[5] as String?
+            api.addRasterLayer(idArg, sourceIdArg, layoutArg, paintArg, belowLayerIdArg, aboveLayerIdArg) { result: Result<Unit> ->
               val error = result.exceptionOrNull()
               if (error != null) {
                 reply.reply(PigeonPigeonUtils.wrapError(error))
@@ -781,7 +791,8 @@ interface MapLibreHostApi {
             val layoutArg = args[2] as Map<String, Any>
             val paintArg = args[3] as Map<String, Any>
             val belowLayerIdArg = args[4] as String?
-            api.addSymbolLayer(idArg, sourceIdArg, layoutArg, paintArg, belowLayerIdArg) { result: Result<Unit> ->
+            val aboveLayerIdArg = args[5] as String?
+            api.addSymbolLayer(idArg, sourceIdArg, layoutArg, paintArg, belowLayerIdArg, aboveLayerIdArg) { result: Result<Unit> ->
               val error = result.exceptionOrNull()
               if (error != null) {
                 reply.reply(PigeonPigeonUtils.wrapError(error))
@@ -822,6 +833,25 @@ interface MapLibreHostApi {
             val idArg = args[0] as String
             val bytesArg = args[1] as ByteArray
             api.addImage(idArg, bytesArg) { result: Result<Unit> ->
+              val error = result.exceptionOrNull()
+              if (error != null) {
+                reply.reply(PigeonPigeonUtils.wrapError(error))
+              } else {
+                reply.reply(PigeonPigeonUtils.wrapResult(null))
+              }
+            }
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.maplibre.MapLibreHostApi.addImages$separatedMessageChannelSuffix", codec)
+        if (api != null) {
+          channel.setMessageHandler { message, reply ->
+            val args = message as List<Any?>
+            val imagesArg = args[0] as Map<String, ByteArray>
+            api.addImages(imagesArg) { result: Result<Unit> ->
               val error = result.exceptionOrNull()
               if (error != null) {
                 reply.reply(PigeonPigeonUtils.wrapError(error))

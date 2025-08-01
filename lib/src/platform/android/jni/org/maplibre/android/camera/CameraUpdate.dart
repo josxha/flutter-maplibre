@@ -49,8 +49,9 @@ class CameraUpdate extends jni$_.JObject {
   final jni$_.JObjType<CameraUpdate> $type;
 
   @jni$_.internal
-  CameraUpdate.fromReference(jni$_.JReference reference)
-    : $type = type,
+  CameraUpdate.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -107,7 +108,11 @@ class CameraUpdate extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -145,7 +150,10 @@ class CameraUpdate extends jni$_.JObject {
     return jni$_.nullptr;
   }
 
-  static void implementIn(jni$_.JImplementer implementer, $CameraUpdate $impl) {
+  static void implementIn(
+    jni$_.JImplementer implementer,
+    $CameraUpdate $impl,
+  ) {
     late final jni$_.RawReceivePort $p;
     $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
@@ -167,10 +175,14 @@ class CameraUpdate extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory CameraUpdate.implement($CameraUpdate $impl) {
+  factory CameraUpdate.implement(
+    $CameraUpdate $impl,
+  ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return CameraUpdate.fromReference($i.implementReference());
+    return CameraUpdate.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -217,8 +229,11 @@ final class $CameraUpdate$NullableType extends jni$_.JObjType<CameraUpdate?> {
 
   @jni$_.internal
   @core$_.override
-  CameraUpdate? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : CameraUpdate.fromReference(reference);
+  CameraUpdate? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : CameraUpdate.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -252,7 +267,9 @@ final class $CameraUpdate$Type extends jni$_.JObjType<CameraUpdate> {
   @jni$_.internal
   @core$_.override
   CameraUpdate fromReference(jni$_.JReference reference) =>
-      CameraUpdate.fromReference(reference);
+      CameraUpdate.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();

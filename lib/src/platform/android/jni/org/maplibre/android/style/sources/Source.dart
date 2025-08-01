@@ -45,8 +45,9 @@ class Source extends jni$_.JObject {
   final jni$_.JObjType<Source> $type;
 
   @jni$_.internal
-  Source.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Source.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -170,7 +171,9 @@ class Source extends jni$_.JObject {
           >();
 
   /// from: `public void setPrefetchZoomDelta(java.lang.Integer integer)`
-  void setPrefetchZoomDelta(jni$_.JInteger? integer) {
+  void setPrefetchZoomDelta(
+    jni$_.JInteger? integer,
+  ) {
     final _$integer = integer?.reference ?? jni$_.jNullReference;
     _setPrefetchZoomDelta(
       reference.pointer,
@@ -204,7 +207,9 @@ class Source extends jni$_.JObject {
           >();
 
   /// from: `public void setMaxOverscaleFactorForParentTiles(java.lang.Integer integer)`
-  void setMaxOverscaleFactorForParentTiles(jni$_.JInteger? integer) {
+  void setMaxOverscaleFactorForParentTiles(
+    jni$_.JInteger? integer,
+  ) {
     final _$integer = integer?.reference ?? jni$_.jNullReference;
     _setMaxOverscaleFactorForParentTiles(
       reference.pointer,
@@ -298,7 +303,9 @@ class Source extends jni$_.JObject {
           >();
 
   /// from: `public void setVolatile(java.lang.Boolean boolean)`
-  void setVolatile(jni$_.JBoolean? boolean) {
+  void setVolatile(
+    jni$_.JBoolean? boolean,
+  ) {
     final _$boolean = boolean?.reference ?? jni$_.jNullReference;
     _setVolatile(
       reference.pointer,
@@ -331,7 +338,9 @@ class Source extends jni$_.JObject {
           >();
 
   /// from: `public void setMinimumTileUpdateInterval(java.lang.Long long)`
-  void setMinimumTileUpdateInterval(jni$_.JLong? long) {
+  void setMinimumTileUpdateInterval(
+    jni$_.JLong? long,
+  ) {
     final _$long = long?.reference ?? jni$_.jNullReference;
     _setMinimumTileUpdateInterval(
       reference.pointer,
@@ -439,8 +448,11 @@ final class $Source$NullableType extends jni$_.JObjType<Source?> {
 
   @jni$_.internal
   @core$_.override
-  Source? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : Source.fromReference(reference);
+  Source? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : Source.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -473,8 +485,9 @@ final class $Source$Type extends jni$_.JObjType<Source> {
 
   @jni$_.internal
   @core$_.override
-  Source fromReference(jni$_.JReference reference) =>
-      Source.fromReference(reference);
+  Source fromReference(jni$_.JReference reference) => Source.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

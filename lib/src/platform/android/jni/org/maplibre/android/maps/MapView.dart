@@ -38,6 +38,8 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
+import '../../../../android/graphics/Bitmap.dart' as bitmap$_;
+
 import 'MapLibreMapOptions.dart' as maplibremapoptions$_;
 
 import 'OnMapReadyCallback.dart' as onmapreadycallback$_;
@@ -53,8 +55,9 @@ class MapView$OnCameraDidChangeListener extends jni$_.JObject {
   final jni$_.JObjType<MapView$OnCameraDidChangeListener> $type;
 
   @jni$_.internal
-  MapView$OnCameraDidChangeListener.fromReference(jni$_.JReference reference)
-    : $type = type,
+  MapView$OnCameraDidChangeListener.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -88,7 +91,9 @@ class MapView$OnCameraDidChangeListener extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onCameraDidChange(boolean z)`
-  void onCameraDidChange(bool z) {
+  void onCameraDidChange(
+    bool z,
+  ) {
     _onCameraDidChange(
       reference.pointer,
       _id_onCameraDidChange as jni$_.JMethodIDPtr,
@@ -105,7 +110,11 @@ class MapView$OnCameraDidChangeListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -156,7 +165,9 @@ class MapView$OnCameraDidChangeListener extends jni$_.JObject {
       r'org.maplibre.android.maps.MapView$OnCameraDidChangeListener',
       $p,
       _$invokePointer,
-      [if ($impl.onCameraDidChange$async) r'onCameraDidChange(Z)V'],
+      [
+        if ($impl.onCameraDidChange$async) r'onCameraDidChange(Z)V',
+      ],
     );
     final $a = $p.sendPort.nativePort;
     _$impls[$a] = $impl;
@@ -214,7 +225,9 @@ final class $MapView$OnCameraDidChangeListener$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : MapView$OnCameraDidChangeListener.fromReference(reference);
+      : MapView$OnCameraDidChangeListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -252,7 +265,9 @@ final class $MapView$OnCameraDidChangeListener$Type
   @jni$_.internal
   @core$_.override
   MapView$OnCameraDidChangeListener fromReference(jni$_.JReference reference) =>
-      MapView$OnCameraDidChangeListener.fromReference(reference);
+      MapView$OnCameraDidChangeListener.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -283,8 +298,9 @@ class MapView$OnCameraIsChangingListener extends jni$_.JObject {
   final jni$_.JObjType<MapView$OnCameraIsChangingListener> $type;
 
   @jni$_.internal
-  MapView$OnCameraIsChangingListener.fromReference(jni$_.JReference reference)
-    : $type = type,
+  MapView$OnCameraIsChangingListener.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -334,7 +350,11 @@ class MapView$OnCameraIsChangingListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -381,7 +401,9 @@ class MapView$OnCameraIsChangingListener extends jni$_.JObject {
       r'org.maplibre.android.maps.MapView$OnCameraIsChangingListener',
       $p,
       _$invokePointer,
-      [if ($impl.onCameraIsChanging$async) r'onCameraIsChanging()V'],
+      [
+        if ($impl.onCameraIsChanging$async) r'onCameraIsChanging()V',
+      ],
     );
     final $a = $p.sendPort.nativePort;
     _$impls[$a] = $impl;
@@ -439,7 +461,9 @@ final class $MapView$OnCameraIsChangingListener$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : MapView$OnCameraIsChangingListener.fromReference(reference);
+      : MapView$OnCameraIsChangingListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -478,7 +502,9 @@ final class $MapView$OnCameraIsChangingListener$Type
   @core$_.override
   MapView$OnCameraIsChangingListener fromReference(
     jni$_.JReference reference,
-  ) => MapView$OnCameraIsChangingListener.fromReference(reference);
+  ) => MapView$OnCameraIsChangingListener.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -509,8 +535,9 @@ class MapView$OnCameraWillChangeListener extends jni$_.JObject {
   final jni$_.JObjType<MapView$OnCameraWillChangeListener> $type;
 
   @jni$_.internal
-  MapView$OnCameraWillChangeListener.fromReference(jni$_.JReference reference)
-    : $type = type,
+  MapView$OnCameraWillChangeListener.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -545,7 +572,9 @@ class MapView$OnCameraWillChangeListener extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onCameraWillChange(boolean z)`
-  void onCameraWillChange(bool z) {
+  void onCameraWillChange(
+    bool z,
+  ) {
     _onCameraWillChange(
       reference.pointer,
       _id_onCameraWillChange as jni$_.JMethodIDPtr,
@@ -563,7 +592,11 @@ class MapView$OnCameraWillChangeListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -614,7 +647,9 @@ class MapView$OnCameraWillChangeListener extends jni$_.JObject {
       r'org.maplibre.android.maps.MapView$OnCameraWillChangeListener',
       $p,
       _$invokePointer,
-      [if ($impl.onCameraWillChange$async) r'onCameraWillChange(Z)V'],
+      [
+        if ($impl.onCameraWillChange$async) r'onCameraWillChange(Z)V',
+      ],
     );
     final $a = $p.sendPort.nativePort;
     _$impls[$a] = $impl;
@@ -672,7 +707,9 @@ final class $MapView$OnCameraWillChangeListener$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : MapView$OnCameraWillChangeListener.fromReference(reference);
+      : MapView$OnCameraWillChangeListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -711,7 +748,9 @@ final class $MapView$OnCameraWillChangeListener$Type
   @core$_.override
   MapView$OnCameraWillChangeListener fromReference(
     jni$_.JReference reference,
-  ) => MapView$OnCameraWillChangeListener.fromReference(reference);
+  ) => MapView$OnCameraWillChangeListener.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -779,7 +818,9 @@ class MapView$OnCanRemoveUnusedStyleImageListener extends jni$_.JObject {
           >();
 
   /// from: `public abstract boolean onCanRemoveUnusedStyleImage(java.lang.String string)`
-  bool onCanRemoveUnusedStyleImage(jni$_.JString string) {
+  bool onCanRemoveUnusedStyleImage(
+    jni$_.JString string,
+  ) {
     final _$string = string.reference;
     return _onCanRemoveUnusedStyleImage(
       reference.pointer,
@@ -798,7 +839,11 @@ class MapView$OnCanRemoveUnusedStyleImageListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -901,7 +946,9 @@ final class $MapView$OnCanRemoveUnusedStyleImageListener$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : MapView$OnCanRemoveUnusedStyleImageListener.fromReference(reference);
+      : MapView$OnCanRemoveUnusedStyleImageListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -941,7 +988,9 @@ final class $MapView$OnCanRemoveUnusedStyleImageListener$Type
   @core$_.override
   MapView$OnCanRemoveUnusedStyleImageListener fromReference(
     jni$_.JReference reference,
-  ) => MapView$OnCanRemoveUnusedStyleImageListener.fromReference(reference);
+  ) => MapView$OnCanRemoveUnusedStyleImageListener.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -975,8 +1024,9 @@ class MapView$OnDidBecomeIdleListener extends jni$_.JObject {
   final jni$_.JObjType<MapView$OnDidBecomeIdleListener> $type;
 
   @jni$_.internal
-  MapView$OnDidBecomeIdleListener.fromReference(jni$_.JReference reference)
-    : $type = type,
+  MapView$OnDidBecomeIdleListener.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -1024,7 +1074,11 @@ class MapView$OnDidBecomeIdleListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -1071,7 +1125,9 @@ class MapView$OnDidBecomeIdleListener extends jni$_.JObject {
       r'org.maplibre.android.maps.MapView$OnDidBecomeIdleListener',
       $p,
       _$invokePointer,
-      [if ($impl.onDidBecomeIdle$async) r'onDidBecomeIdle()V'],
+      [
+        if ($impl.onDidBecomeIdle$async) r'onDidBecomeIdle()V',
+      ],
     );
     final $a = $p.sendPort.nativePort;
     _$impls[$a] = $impl;
@@ -1128,7 +1184,9 @@ final class $MapView$OnDidBecomeIdleListener$NullableType
   MapView$OnDidBecomeIdleListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : MapView$OnDidBecomeIdleListener.fromReference(reference);
+      : MapView$OnDidBecomeIdleListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1165,7 +1223,9 @@ final class $MapView$OnDidBecomeIdleListener$Type
   @jni$_.internal
   @core$_.override
   MapView$OnDidBecomeIdleListener fromReference(jni$_.JReference reference) =>
-      MapView$OnDidBecomeIdleListener.fromReference(reference);
+      MapView$OnDidBecomeIdleListener.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1196,8 +1256,9 @@ class MapView$OnDidFailLoadingMapListener extends jni$_.JObject {
   final jni$_.JObjType<MapView$OnDidFailLoadingMapListener> $type;
 
   @jni$_.internal
-  MapView$OnDidFailLoadingMapListener.fromReference(jni$_.JReference reference)
-    : $type = type,
+  MapView$OnDidFailLoadingMapListener.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -1232,7 +1293,9 @@ class MapView$OnDidFailLoadingMapListener extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onDidFailLoadingMap(java.lang.String string)`
-  void onDidFailLoadingMap(jni$_.JString? string) {
+  void onDidFailLoadingMap(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _onDidFailLoadingMap(
       reference.pointer,
@@ -1251,7 +1314,11 @@ class MapView$OnDidFailLoadingMapListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -1361,7 +1428,9 @@ final class $MapView$OnDidFailLoadingMapListener$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : MapView$OnDidFailLoadingMapListener.fromReference(reference);
+      : MapView$OnDidFailLoadingMapListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1400,7 +1469,9 @@ final class $MapView$OnDidFailLoadingMapListener$Type
   @core$_.override
   MapView$OnDidFailLoadingMapListener fromReference(
     jni$_.JReference reference,
-  ) => MapView$OnDidFailLoadingMapListener.fromReference(reference);
+  ) => MapView$OnDidFailLoadingMapListener.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1483,7 +1554,11 @@ class MapView$OnDidFinishLoadingMapListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -1530,7 +1605,9 @@ class MapView$OnDidFinishLoadingMapListener extends jni$_.JObject {
       r'org.maplibre.android.maps.MapView$OnDidFinishLoadingMapListener',
       $p,
       _$invokePointer,
-      [if ($impl.onDidFinishLoadingMap$async) r'onDidFinishLoadingMap()V'],
+      [
+        if ($impl.onDidFinishLoadingMap$async) r'onDidFinishLoadingMap()V',
+      ],
     );
     final $a = $p.sendPort.nativePort;
     _$impls[$a] = $impl;
@@ -1588,7 +1665,9 @@ final class $MapView$OnDidFinishLoadingMapListener$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : MapView$OnDidFinishLoadingMapListener.fromReference(reference);
+      : MapView$OnDidFinishLoadingMapListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1628,7 +1707,9 @@ final class $MapView$OnDidFinishLoadingMapListener$Type
   @core$_.override
   MapView$OnDidFinishLoadingMapListener fromReference(
     jni$_.JReference reference,
-  ) => MapView$OnDidFinishLoadingMapListener.fromReference(reference);
+  ) => MapView$OnDidFinishLoadingMapListener.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1711,7 +1792,11 @@ class MapView$OnDidFinishLoadingStyleListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -1758,7 +1843,9 @@ class MapView$OnDidFinishLoadingStyleListener extends jni$_.JObject {
       r'org.maplibre.android.maps.MapView$OnDidFinishLoadingStyleListener',
       $p,
       _$invokePointer,
-      [if ($impl.onDidFinishLoadingStyle$async) r'onDidFinishLoadingStyle()V'],
+      [
+        if ($impl.onDidFinishLoadingStyle$async) r'onDidFinishLoadingStyle()V',
+      ],
     );
     final $a = $p.sendPort.nativePort;
     _$impls[$a] = $impl;
@@ -1816,7 +1903,9 @@ final class $MapView$OnDidFinishLoadingStyleListener$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : MapView$OnDidFinishLoadingStyleListener.fromReference(reference);
+      : MapView$OnDidFinishLoadingStyleListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1856,7 +1945,9 @@ final class $MapView$OnDidFinishLoadingStyleListener$Type
   @core$_.override
   MapView$OnDidFinishLoadingStyleListener fromReference(
     jni$_.JReference reference,
-  ) => MapView$OnDidFinishLoadingStyleListener.fromReference(reference);
+  ) => MapView$OnDidFinishLoadingStyleListener.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1927,7 +2018,11 @@ class MapView$OnDidFinishRenderingFrameListener extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onDidFinishRenderingFrame(boolean z, double d, double d1)`
-  void onDidFinishRenderingFrame(bool z, double d, double d1) {
+  void onDidFinishRenderingFrame(
+    bool z,
+    double d,
+    double d1,
+  ) {
     _onDidFinishRenderingFrame(
       reference.pointer,
       _id_onDidFinishRenderingFrame as jni$_.JMethodIDPtr,
@@ -1947,7 +2042,11 @@ class MapView$OnDidFinishRenderingFrameListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -2067,7 +2166,9 @@ final class $MapView$OnDidFinishRenderingFrameListener$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : MapView$OnDidFinishRenderingFrameListener.fromReference(reference);
+      : MapView$OnDidFinishRenderingFrameListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2107,7 +2208,9 @@ final class $MapView$OnDidFinishRenderingFrameListener$Type
   @core$_.override
   MapView$OnDidFinishRenderingFrameListener fromReference(
     jni$_.JReference reference,
-  ) => MapView$OnDidFinishRenderingFrameListener.fromReference(reference);
+  ) => MapView$OnDidFinishRenderingFrameListener.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2206,7 +2309,11 @@ class MapView$OnDidFinishRenderingFrameWithStatsListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -2456,7 +2563,9 @@ class MapView$OnDidFinishRenderingMapListener extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onDidFinishRenderingMap(boolean z)`
-  void onDidFinishRenderingMap(bool z) {
+  void onDidFinishRenderingMap(
+    bool z,
+  ) {
     _onDidFinishRenderingMap(
       reference.pointer,
       _id_onDidFinishRenderingMap as jni$_.JMethodIDPtr,
@@ -2474,7 +2583,11 @@ class MapView$OnDidFinishRenderingMapListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -2525,7 +2638,9 @@ class MapView$OnDidFinishRenderingMapListener extends jni$_.JObject {
       r'org.maplibre.android.maps.MapView$OnDidFinishRenderingMapListener',
       $p,
       _$invokePointer,
-      [if ($impl.onDidFinishRenderingMap$async) r'onDidFinishRenderingMap(Z)V'],
+      [
+        if ($impl.onDidFinishRenderingMap$async) r'onDidFinishRenderingMap(Z)V',
+      ],
     );
     final $a = $p.sendPort.nativePort;
     _$impls[$a] = $impl;
@@ -2583,7 +2698,9 @@ final class $MapView$OnDidFinishRenderingMapListener$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : MapView$OnDidFinishRenderingMapListener.fromReference(reference);
+      : MapView$OnDidFinishRenderingMapListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2623,7 +2740,9 @@ final class $MapView$OnDidFinishRenderingMapListener$Type
   @core$_.override
   MapView$OnDidFinishRenderingMapListener fromReference(
     jni$_.JReference reference,
-  ) => MapView$OnDidFinishRenderingMapListener.fromReference(reference);
+  ) => MapView$OnDidFinishRenderingMapListener.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2655,8 +2774,9 @@ class MapView$OnGlyphsErrorListener extends jni$_.JObject {
   final jni$_.JObjType<MapView$OnGlyphsErrorListener> $type;
 
   @jni$_.internal
-  MapView$OnGlyphsErrorListener.fromReference(jni$_.JReference reference)
-    : $type = type,
+  MapView$OnGlyphsErrorListener.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -2694,7 +2814,11 @@ class MapView$OnGlyphsErrorListener extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onGlyphsError(java.lang.String[] strings, int i, int i1)`
-  void onGlyphsError(jni$_.JArray<jni$_.JString?> strings, int i, int i1) {
+  void onGlyphsError(
+    jni$_.JArray<jni$_.JString?> strings,
+    int i,
+    int i1,
+  ) {
     final _$strings = strings.reference;
     _onGlyphsError(
       reference.pointer,
@@ -2714,7 +2838,11 @@ class MapView$OnGlyphsErrorListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -2772,7 +2900,9 @@ class MapView$OnGlyphsErrorListener extends jni$_.JObject {
       r'org.maplibre.android.maps.MapView$OnGlyphsErrorListener',
       $p,
       _$invokePointer,
-      [if ($impl.onGlyphsError$async) r'onGlyphsError([Ljava/lang/String;II)V'],
+      [
+        if ($impl.onGlyphsError$async) r'onGlyphsError([Ljava/lang/String;II)V',
+      ],
     );
     final $a = $p.sendPort.nativePort;
     _$impls[$a] = $impl;
@@ -2783,7 +2913,9 @@ class MapView$OnGlyphsErrorListener extends jni$_.JObject {
   ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return MapView$OnGlyphsErrorListener.fromReference($i.implementReference());
+    return MapView$OnGlyphsErrorListener.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -2830,7 +2962,9 @@ final class $MapView$OnGlyphsErrorListener$NullableType
   MapView$OnGlyphsErrorListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : MapView$OnGlyphsErrorListener.fromReference(reference);
+      : MapView$OnGlyphsErrorListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2866,7 +3000,9 @@ final class $MapView$OnGlyphsErrorListener$Type
   @jni$_.internal
   @core$_.override
   MapView$OnGlyphsErrorListener fromReference(jni$_.JReference reference) =>
-      MapView$OnGlyphsErrorListener.fromReference(reference);
+      MapView$OnGlyphsErrorListener.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2897,8 +3033,9 @@ class MapView$OnGlyphsLoadedListener extends jni$_.JObject {
   final jni$_.JObjType<MapView$OnGlyphsLoadedListener> $type;
 
   @jni$_.internal
-  MapView$OnGlyphsLoadedListener.fromReference(jni$_.JReference reference)
-    : $type = type,
+  MapView$OnGlyphsLoadedListener.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -2936,7 +3073,11 @@ class MapView$OnGlyphsLoadedListener extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onGlyphsLoaded(java.lang.String[] strings, int i, int i1)`
-  void onGlyphsLoaded(jni$_.JArray<jni$_.JString?> strings, int i, int i1) {
+  void onGlyphsLoaded(
+    jni$_.JArray<jni$_.JString?> strings,
+    int i,
+    int i1,
+  ) {
     final _$strings = strings.reference;
     _onGlyphsLoaded(
       reference.pointer,
@@ -2956,7 +3097,11 @@ class MapView$OnGlyphsLoadedListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -3077,7 +3222,9 @@ final class $MapView$OnGlyphsLoadedListener$NullableType
   MapView$OnGlyphsLoadedListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : MapView$OnGlyphsLoadedListener.fromReference(reference);
+      : MapView$OnGlyphsLoadedListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3114,7 +3261,9 @@ final class $MapView$OnGlyphsLoadedListener$Type
   @jni$_.internal
   @core$_.override
   MapView$OnGlyphsLoadedListener fromReference(jni$_.JReference reference) =>
-      MapView$OnGlyphsLoadedListener.fromReference(reference);
+      MapView$OnGlyphsLoadedListener.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3145,8 +3294,9 @@ class MapView$OnGlyphsRequestedListener extends jni$_.JObject {
   final jni$_.JObjType<MapView$OnGlyphsRequestedListener> $type;
 
   @jni$_.internal
-  MapView$OnGlyphsRequestedListener.fromReference(jni$_.JReference reference)
-    : $type = type,
+  MapView$OnGlyphsRequestedListener.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -3184,7 +3334,11 @@ class MapView$OnGlyphsRequestedListener extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onGlyphsRequested(java.lang.String[] strings, int i, int i1)`
-  void onGlyphsRequested(jni$_.JArray<jni$_.JString?> strings, int i, int i1) {
+  void onGlyphsRequested(
+    jni$_.JArray<jni$_.JString?> strings,
+    int i,
+    int i1,
+  ) {
     final _$strings = strings.reference;
     _onGlyphsRequested(
       reference.pointer,
@@ -3204,7 +3358,11 @@ class MapView$OnGlyphsRequestedListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -3326,7 +3484,9 @@ final class $MapView$OnGlyphsRequestedListener$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : MapView$OnGlyphsRequestedListener.fromReference(reference);
+      : MapView$OnGlyphsRequestedListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3364,7 +3524,9 @@ final class $MapView$OnGlyphsRequestedListener$Type
   @jni$_.internal
   @core$_.override
   MapView$OnGlyphsRequestedListener fromReference(jni$_.JReference reference) =>
-      MapView$OnGlyphsRequestedListener.fromReference(reference);
+      MapView$OnGlyphsRequestedListener.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3395,8 +3557,9 @@ class MapView$OnPostCompileShaderListener extends jni$_.JObject {
   final jni$_.JObjType<MapView$OnPostCompileShaderListener> $type;
 
   @jni$_.internal
-  MapView$OnPostCompileShaderListener.fromReference(jni$_.JReference reference)
-    : $type = type,
+  MapView$OnPostCompileShaderListener.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -3435,7 +3598,11 @@ class MapView$OnPostCompileShaderListener extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onPostCompileShader(int i, int i1, java.lang.String string)`
-  void onPostCompileShader(int i, int i1, jni$_.JString? string) {
+  void onPostCompileShader(
+    int i,
+    int i1,
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _onPostCompileShader(
       reference.pointer,
@@ -3456,7 +3623,11 @@ class MapView$OnPostCompileShaderListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -3575,7 +3746,9 @@ final class $MapView$OnPostCompileShaderListener$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : MapView$OnPostCompileShaderListener.fromReference(reference);
+      : MapView$OnPostCompileShaderListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3614,7 +3787,9 @@ final class $MapView$OnPostCompileShaderListener$Type
   @core$_.override
   MapView$OnPostCompileShaderListener fromReference(
     jni$_.JReference reference,
-  ) => MapView$OnPostCompileShaderListener.fromReference(reference);
+  ) => MapView$OnPostCompileShaderListener.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3645,8 +3820,9 @@ class MapView$OnPreCompileShaderListener extends jni$_.JObject {
   final jni$_.JObjType<MapView$OnPreCompileShaderListener> $type;
 
   @jni$_.internal
-  MapView$OnPreCompileShaderListener.fromReference(jni$_.JReference reference)
-    : $type = type,
+  MapView$OnPreCompileShaderListener.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -3685,7 +3861,11 @@ class MapView$OnPreCompileShaderListener extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onPreCompileShader(int i, int i1, java.lang.String string)`
-  void onPreCompileShader(int i, int i1, jni$_.JString? string) {
+  void onPreCompileShader(
+    int i,
+    int i1,
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _onPreCompileShader(
       reference.pointer,
@@ -3706,7 +3886,11 @@ class MapView$OnPreCompileShaderListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -3824,7 +4008,9 @@ final class $MapView$OnPreCompileShaderListener$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : MapView$OnPreCompileShaderListener.fromReference(reference);
+      : MapView$OnPreCompileShaderListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3863,7 +4049,9 @@ final class $MapView$OnPreCompileShaderListener$Type
   @core$_.override
   MapView$OnPreCompileShaderListener fromReference(
     jni$_.JReference reference,
-  ) => MapView$OnPreCompileShaderListener.fromReference(reference);
+  ) => MapView$OnPreCompileShaderListener.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3935,7 +4123,11 @@ class MapView$OnShaderCompileFailedListener extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onShaderCompileFailed(int i, int i1, java.lang.String string)`
-  void onShaderCompileFailed(int i, int i1, jni$_.JString? string) {
+  void onShaderCompileFailed(
+    int i,
+    int i1,
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _onShaderCompileFailed(
       reference.pointer,
@@ -3956,7 +4148,11 @@ class MapView$OnShaderCompileFailedListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -4075,7 +4271,9 @@ final class $MapView$OnShaderCompileFailedListener$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : MapView$OnShaderCompileFailedListener.fromReference(reference);
+      : MapView$OnShaderCompileFailedListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4115,7 +4313,9 @@ final class $MapView$OnShaderCompileFailedListener$Type
   @core$_.override
   MapView$OnShaderCompileFailedListener fromReference(
     jni$_.JReference reference,
-  ) => MapView$OnShaderCompileFailedListener.fromReference(reference);
+  ) => MapView$OnShaderCompileFailedListener.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4146,8 +4346,9 @@ class MapView$OnSourceChangedListener extends jni$_.JObject {
   final jni$_.JObjType<MapView$OnSourceChangedListener> $type;
 
   @jni$_.internal
-  MapView$OnSourceChangedListener.fromReference(jni$_.JReference reference)
-    : $type = type,
+  MapView$OnSourceChangedListener.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -4181,7 +4382,9 @@ class MapView$OnSourceChangedListener extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onSourceChangedListener(java.lang.String string)`
-  void onSourceChangedListener(jni$_.JString? string) {
+  void onSourceChangedListener(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _onSourceChangedListener(
       reference.pointer,
@@ -4199,7 +4402,11 @@ class MapView$OnSourceChangedListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -4308,7 +4515,9 @@ final class $MapView$OnSourceChangedListener$NullableType
   MapView$OnSourceChangedListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : MapView$OnSourceChangedListener.fromReference(reference);
+      : MapView$OnSourceChangedListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4345,7 +4554,9 @@ final class $MapView$OnSourceChangedListener$Type
   @jni$_.internal
   @core$_.override
   MapView$OnSourceChangedListener fromReference(jni$_.JReference reference) =>
-      MapView$OnSourceChangedListener.fromReference(reference);
+      MapView$OnSourceChangedListener.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4376,8 +4587,9 @@ class MapView$OnSpriteErrorListener extends jni$_.JObject {
   final jni$_.JObjType<MapView$OnSpriteErrorListener> $type;
 
   @jni$_.internal
-  MapView$OnSpriteErrorListener.fromReference(jni$_.JReference reference)
-    : $type = type,
+  MapView$OnSpriteErrorListener.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -4414,7 +4626,10 @@ class MapView$OnSpriteErrorListener extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onSpriteError(java.lang.String string, java.lang.String string1)`
-  void onSpriteError(jni$_.JString string, jni$_.JString string1) {
+  void onSpriteError(
+    jni$_.JString string,
+    jni$_.JString string1,
+  ) {
     final _$string = string.reference;
     final _$string1 = string1.reference;
     _onSpriteError(
@@ -4434,7 +4649,11 @@ class MapView$OnSpriteErrorListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -4498,7 +4717,9 @@ class MapView$OnSpriteErrorListener extends jni$_.JObject {
   ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return MapView$OnSpriteErrorListener.fromReference($i.implementReference());
+    return MapView$OnSpriteErrorListener.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -4545,7 +4766,9 @@ final class $MapView$OnSpriteErrorListener$NullableType
   MapView$OnSpriteErrorListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : MapView$OnSpriteErrorListener.fromReference(reference);
+      : MapView$OnSpriteErrorListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4581,7 +4804,9 @@ final class $MapView$OnSpriteErrorListener$Type
   @jni$_.internal
   @core$_.override
   MapView$OnSpriteErrorListener fromReference(jni$_.JReference reference) =>
-      MapView$OnSpriteErrorListener.fromReference(reference);
+      MapView$OnSpriteErrorListener.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4612,8 +4837,9 @@ class MapView$OnSpriteLoadedListener extends jni$_.JObject {
   final jni$_.JObjType<MapView$OnSpriteLoadedListener> $type;
 
   @jni$_.internal
-  MapView$OnSpriteLoadedListener.fromReference(jni$_.JReference reference)
-    : $type = type,
+  MapView$OnSpriteLoadedListener.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -4650,7 +4876,10 @@ class MapView$OnSpriteLoadedListener extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onSpriteLoaded(java.lang.String string, java.lang.String string1)`
-  void onSpriteLoaded(jni$_.JString string, jni$_.JString string1) {
+  void onSpriteLoaded(
+    jni$_.JString string,
+    jni$_.JString string1,
+  ) {
     final _$string = string.reference;
     final _$string1 = string1.reference;
     _onSpriteLoaded(
@@ -4670,7 +4899,11 @@ class MapView$OnSpriteLoadedListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -4783,7 +5016,9 @@ final class $MapView$OnSpriteLoadedListener$NullableType
   MapView$OnSpriteLoadedListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : MapView$OnSpriteLoadedListener.fromReference(reference);
+      : MapView$OnSpriteLoadedListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4820,7 +5055,9 @@ final class $MapView$OnSpriteLoadedListener$Type
   @jni$_.internal
   @core$_.override
   MapView$OnSpriteLoadedListener fromReference(jni$_.JReference reference) =>
-      MapView$OnSpriteLoadedListener.fromReference(reference);
+      MapView$OnSpriteLoadedListener.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4851,8 +5088,9 @@ class MapView$OnSpriteRequestedListener extends jni$_.JObject {
   final jni$_.JObjType<MapView$OnSpriteRequestedListener> $type;
 
   @jni$_.internal
-  MapView$OnSpriteRequestedListener.fromReference(jni$_.JReference reference)
-    : $type = type,
+  MapView$OnSpriteRequestedListener.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -4889,7 +5127,10 @@ class MapView$OnSpriteRequestedListener extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onSpriteRequested(java.lang.String string, java.lang.String string1)`
-  void onSpriteRequested(jni$_.JString string, jni$_.JString string1) {
+  void onSpriteRequested(
+    jni$_.JString string,
+    jni$_.JString string1,
+  ) {
     final _$string = string.reference;
     final _$string1 = string1.reference;
     _onSpriteRequested(
@@ -4909,7 +5150,11 @@ class MapView$OnSpriteRequestedListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -5023,7 +5268,9 @@ final class $MapView$OnSpriteRequestedListener$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : MapView$OnSpriteRequestedListener.fromReference(reference);
+      : MapView$OnSpriteRequestedListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -5061,7 +5308,9 @@ final class $MapView$OnSpriteRequestedListener$Type
   @jni$_.internal
   @core$_.override
   MapView$OnSpriteRequestedListener fromReference(jni$_.JReference reference) =>
-      MapView$OnSpriteRequestedListener.fromReference(reference);
+      MapView$OnSpriteRequestedListener.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -5092,8 +5341,9 @@ class MapView$OnStyleImageMissingListener extends jni$_.JObject {
   final jni$_.JObjType<MapView$OnStyleImageMissingListener> $type;
 
   @jni$_.internal
-  MapView$OnStyleImageMissingListener.fromReference(jni$_.JReference reference)
-    : $type = type,
+  MapView$OnStyleImageMissingListener.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -5128,7 +5378,9 @@ class MapView$OnStyleImageMissingListener extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onStyleImageMissing(java.lang.String string)`
-  void onStyleImageMissing(jni$_.JString string) {
+  void onStyleImageMissing(
+    jni$_.JString string,
+  ) {
     final _$string = string.reference;
     _onStyleImageMissing(
       reference.pointer,
@@ -5147,7 +5399,11 @@ class MapView$OnStyleImageMissingListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -5257,7 +5513,9 @@ final class $MapView$OnStyleImageMissingListener$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : MapView$OnStyleImageMissingListener.fromReference(reference);
+      : MapView$OnStyleImageMissingListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -5296,7 +5554,9 @@ final class $MapView$OnStyleImageMissingListener$Type
   @core$_.override
   MapView$OnStyleImageMissingListener fromReference(
     jni$_.JReference reference,
-  ) => MapView$OnStyleImageMissingListener.fromReference(reference);
+  ) => MapView$OnStyleImageMissingListener.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -5327,8 +5587,9 @@ class MapView$OnTileActionListener extends jni$_.JObject {
   final jni$_.JObjType<MapView$OnTileActionListener> $type;
 
   @jni$_.internal
-  MapView$OnTileActionListener.fromReference(jni$_.JReference reference)
-    : $type = type,
+  MapView$OnTileActionListener.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -5411,7 +5672,11 @@ class MapView$OnTileActionListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -5491,7 +5756,9 @@ class MapView$OnTileActionListener extends jni$_.JObject {
   ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return MapView$OnTileActionListener.fromReference($i.implementReference());
+    return MapView$OnTileActionListener.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -5577,7 +5844,9 @@ final class $MapView$OnTileActionListener$NullableType
   MapView$OnTileActionListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : MapView$OnTileActionListener.fromReference(reference);
+      : MapView$OnTileActionListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -5613,7 +5882,9 @@ final class $MapView$OnTileActionListener$Type
   @jni$_.internal
   @core$_.override
   MapView$OnTileActionListener fromReference(jni$_.JReference reference) =>
-      MapView$OnTileActionListener.fromReference(reference);
+      MapView$OnTileActionListener.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -5696,7 +5967,11 @@ class MapView$OnWillStartLoadingMapListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -5743,7 +6018,9 @@ class MapView$OnWillStartLoadingMapListener extends jni$_.JObject {
       r'org.maplibre.android.maps.MapView$OnWillStartLoadingMapListener',
       $p,
       _$invokePointer,
-      [if ($impl.onWillStartLoadingMap$async) r'onWillStartLoadingMap()V'],
+      [
+        if ($impl.onWillStartLoadingMap$async) r'onWillStartLoadingMap()V',
+      ],
     );
     final $a = $p.sendPort.nativePort;
     _$impls[$a] = $impl;
@@ -5801,7 +6078,9 @@ final class $MapView$OnWillStartLoadingMapListener$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : MapView$OnWillStartLoadingMapListener.fromReference(reference);
+      : MapView$OnWillStartLoadingMapListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -5841,7 +6120,9 @@ final class $MapView$OnWillStartLoadingMapListener$Type
   @core$_.override
   MapView$OnWillStartLoadingMapListener fromReference(
     jni$_.JReference reference,
-  ) => MapView$OnWillStartLoadingMapListener.fromReference(reference);
+  ) => MapView$OnWillStartLoadingMapListener.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -5924,7 +6205,11 @@ class MapView$OnWillStartRenderingFrameListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -6032,7 +6317,9 @@ final class $MapView$OnWillStartRenderingFrameListener$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : MapView$OnWillStartRenderingFrameListener.fromReference(reference);
+      : MapView$OnWillStartRenderingFrameListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -6072,7 +6359,9 @@ final class $MapView$OnWillStartRenderingFrameListener$Type
   @core$_.override
   MapView$OnWillStartRenderingFrameListener fromReference(
     jni$_.JReference reference,
-  ) => MapView$OnWillStartRenderingFrameListener.fromReference(reference);
+  ) => MapView$OnWillStartRenderingFrameListener.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -6157,7 +6446,11 @@ class MapView$OnWillStartRenderingMapListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -6204,7 +6497,9 @@ class MapView$OnWillStartRenderingMapListener extends jni$_.JObject {
       r'org.maplibre.android.maps.MapView$OnWillStartRenderingMapListener',
       $p,
       _$invokePointer,
-      [if ($impl.onWillStartRenderingMap$async) r'onWillStartRenderingMap()V'],
+      [
+        if ($impl.onWillStartRenderingMap$async) r'onWillStartRenderingMap()V',
+      ],
     );
     final $a = $p.sendPort.nativePort;
     _$impls[$a] = $impl;
@@ -6262,7 +6557,9 @@ final class $MapView$OnWillStartRenderingMapListener$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : MapView$OnWillStartRenderingMapListener.fromReference(reference);
+      : MapView$OnWillStartRenderingMapListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -6302,7 +6599,9 @@ final class $MapView$OnWillStartRenderingMapListener$Type
   @core$_.override
   MapView$OnWillStartRenderingMapListener fromReference(
     jni$_.JReference reference,
-  ) => MapView$OnWillStartRenderingMapListener.fromReference(reference);
+  ) => MapView$OnWillStartRenderingMapListener.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -6334,8 +6633,9 @@ class MapView extends jni$_.JObject {
   final jni$_.JObjType<MapView> $type;
 
   @jni$_.internal
-  MapView.fromReference(jni$_.JReference reference)
-    : $type = type,
+  MapView.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -6345,7 +6645,9 @@ class MapView extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $MapView$NullableType();
   static const type = $MapView$Type();
-  static final _id_new$ = _class.constructorId(r'(Landroid/content/Context;)V');
+  static final _id_new$ = _class.constructorId(
+    r'(Landroid/content/Context;)V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -6367,7 +6669,9 @@ class MapView extends jni$_.JObject {
 
   /// from: `public void <init>(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory MapView(jni$_.JObject context) {
+  factory MapView(
+    jni$_.JObject context,
+  ) {
     final _$context = context.reference;
     return MapView.fromReference(
       _new$(
@@ -6405,7 +6709,10 @@ class MapView extends jni$_.JObject {
 
   /// from: `public void <init>(android.content.Context context, android.util.AttributeSet attributeSet)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory MapView.new$1(jni$_.JObject context, jni$_.JObject? attributeSet) {
+  factory MapView.new$1(
+    jni$_.JObject context,
+    jni$_.JObject? attributeSet,
+  ) {
     final _$context = context.reference;
     final _$attributeSet = attributeSet?.reference ?? jni$_.jNullReference;
     return MapView.fromReference(
@@ -6536,7 +6843,9 @@ class MapView extends jni$_.JObject {
           >();
 
   /// from: `public void onCreate(android.os.Bundle bundle)`
-  void onCreate(jni$_.JObject? bundle) {
+  void onCreate(
+    jni$_.JObject? bundle,
+  ) {
     final _$bundle = bundle?.reference ?? jni$_.jNullReference;
     _onCreate(
       reference.pointer,
@@ -6569,7 +6878,9 @@ class MapView extends jni$_.JObject {
           >();
 
   /// from: `public void onSaveInstanceState(android.os.Bundle bundle)`
-  void onSaveInstanceState(jni$_.JObject bundle) {
+  void onSaveInstanceState(
+    jni$_.JObject bundle,
+  ) {
     final _$bundle = bundle.reference;
     _onSaveInstanceState(
       reference.pointer,
@@ -6578,7 +6889,10 @@ class MapView extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_onStart = _class.instanceMethodId(r'onStart', r'()V');
+  static final _id_onStart = _class.instanceMethodId(
+    r'onStart',
+    r'()V',
+  );
 
   static final _onStart =
       jni$_.ProtectedJniExtensions.lookup<
@@ -6601,7 +6915,10 @@ class MapView extends jni$_.JObject {
     _onStart(reference.pointer, _id_onStart as jni$_.JMethodIDPtr).check();
   }
 
-  static final _id_onResume = _class.instanceMethodId(r'onResume', r'()V');
+  static final _id_onResume = _class.instanceMethodId(
+    r'onResume',
+    r'()V',
+  );
 
   static final _onResume =
       jni$_.ProtectedJniExtensions.lookup<
@@ -6624,7 +6941,10 @@ class MapView extends jni$_.JObject {
     _onResume(reference.pointer, _id_onResume as jni$_.JMethodIDPtr).check();
   }
 
-  static final _id_onPause = _class.instanceMethodId(r'onPause', r'()V');
+  static final _id_onPause = _class.instanceMethodId(
+    r'onPause',
+    r'()V',
+  );
 
   static final _onPause =
       jni$_.ProtectedJniExtensions.lookup<
@@ -6647,7 +6967,10 @@ class MapView extends jni$_.JObject {
     _onPause(reference.pointer, _id_onPause as jni$_.JMethodIDPtr).check();
   }
 
-  static final _id_onStop = _class.instanceMethodId(r'onStop', r'()V');
+  static final _id_onStop = _class.instanceMethodId(
+    r'onStop',
+    r'()V',
+  );
 
   static final _onStop =
       jni$_.ProtectedJniExtensions.lookup<
@@ -6670,7 +6993,10 @@ class MapView extends jni$_.JObject {
     _onStop(reference.pointer, _id_onStop as jni$_.JMethodIDPtr).check();
   }
 
-  static final _id_onDestroy = _class.instanceMethodId(r'onDestroy', r'()V');
+  static final _id_onDestroy = _class.instanceMethodId(
+    r'onDestroy',
+    r'()V',
+  );
 
   static final _onDestroy =
       jni$_.ProtectedJniExtensions.lookup<
@@ -6717,7 +7043,9 @@ class MapView extends jni$_.JObject {
           >();
 
   /// from: `public void queueEvent(java.lang.Runnable runnable)`
-  void queueEvent(jni$_.JObject runnable) {
+  void queueEvent(
+    jni$_.JObject runnable,
+  ) {
     final _$runnable = runnable.reference;
     _queueEvent(
       reference.pointer,
@@ -6750,7 +7078,9 @@ class MapView extends jni$_.JObject {
           >();
 
   /// from: `public void setMaximumFps(int i)`
-  void setMaximumFps(int i) {
+  void setMaximumFps(
+    int i,
+  ) {
     _setMaximumFps(
       reference.pointer,
       _id_setMaximumFps as jni$_.JMethodIDPtr,
@@ -6909,7 +7239,9 @@ class MapView extends jni$_.JObject {
           >();
 
   /// from: `public boolean onTouchEvent(android.view.MotionEvent motionEvent)`
-  bool onTouchEvent(jni$_.JObject? motionEvent) {
+  bool onTouchEvent(
+    jni$_.JObject? motionEvent,
+  ) {
     final _$motionEvent = motionEvent?.reference ?? jni$_.jNullReference;
     return _onTouchEvent(
       reference.pointer,
@@ -6943,7 +7275,10 @@ class MapView extends jni$_.JObject {
           >();
 
   /// from: `public boolean onKeyDown(int i, android.view.KeyEvent keyEvent)`
-  bool onKeyDown(int i, jni$_.JObject keyEvent) {
+  bool onKeyDown(
+    int i,
+    jni$_.JObject keyEvent,
+  ) {
     final _$keyEvent = keyEvent.reference;
     return _onKeyDown(
       reference.pointer,
@@ -6978,7 +7313,10 @@ class MapView extends jni$_.JObject {
           >();
 
   /// from: `public boolean onKeyLongPress(int i, android.view.KeyEvent keyEvent)`
-  bool onKeyLongPress(int i, jni$_.JObject? keyEvent) {
+  bool onKeyLongPress(
+    int i,
+    jni$_.JObject? keyEvent,
+  ) {
     final _$keyEvent = keyEvent?.reference ?? jni$_.jNullReference;
     return _onKeyLongPress(
       reference.pointer,
@@ -7013,7 +7351,10 @@ class MapView extends jni$_.JObject {
           >();
 
   /// from: `public boolean onKeyUp(int i, android.view.KeyEvent keyEvent)`
-  bool onKeyUp(int i, jni$_.JObject keyEvent) {
+  bool onKeyUp(
+    int i,
+    jni$_.JObject keyEvent,
+  ) {
     final _$keyEvent = keyEvent.reference;
     return _onKeyUp(
       reference.pointer,
@@ -7047,7 +7388,9 @@ class MapView extends jni$_.JObject {
           >();
 
   /// from: `public boolean onTrackballEvent(android.view.MotionEvent motionEvent)`
-  bool onTrackballEvent(jni$_.JObject motionEvent) {
+  bool onTrackballEvent(
+    jni$_.JObject motionEvent,
+  ) {
     final _$motionEvent = motionEvent.reference;
     return _onTrackballEvent(
       reference.pointer,
@@ -7080,7 +7423,9 @@ class MapView extends jni$_.JObject {
           >();
 
   /// from: `public boolean onGenericMotionEvent(android.view.MotionEvent motionEvent)`
-  bool onGenericMotionEvent(jni$_.JObject motionEvent) {
+  bool onGenericMotionEvent(
+    jni$_.JObject motionEvent,
+  ) {
     final _$motionEvent = motionEvent.reference;
     return _onGenericMotionEvent(
       reference.pointer,
@@ -7170,11 +7515,11 @@ class MapView extends jni$_.JObject {
 
   /// from: `public android.graphics.Bitmap getViewContent()`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? getViewContent() {
+  bitmap$_.Bitmap? getViewContent() {
     return _getViewContent(
       reference.pointer,
       _id_getViewContent as jni$_.JMethodIDPtr,
-    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+    ).object<bitmap$_.Bitmap?>(const bitmap$_.$Bitmap$NullableType());
   }
 
   static final _id_addOnCameraWillChangeListener = _class.instanceMethodId(
@@ -9073,7 +9418,9 @@ class MapView extends jni$_.JObject {
           >();
 
   /// from: `public void getMapAsync(org.maplibre.android.maps.OnMapReadyCallback onMapReadyCallback)`
-  void getMapAsync(onmapreadycallback$_.OnMapReadyCallback onMapReadyCallback) {
+  void getMapAsync(
+    onmapreadycallback$_.OnMapReadyCallback onMapReadyCallback,
+  ) {
     final _$onMapReadyCallback = onMapReadyCallback.reference;
     _getMapAsync(
       reference.pointer,
@@ -9106,7 +9453,9 @@ class MapView extends jni$_.JObject {
           >();
 
   /// from: `static public void setMapStrictModeEnabled(boolean z)`
-  static void setMapStrictModeEnabled(bool z) {
+  static void setMapStrictModeEnabled(
+    bool z,
+  ) {
     _setMapStrictModeEnabled(
       _class.reference.pointer,
       _id_setMapStrictModeEnabled as jni$_.JMethodIDPtr,
@@ -9125,8 +9474,11 @@ final class $MapView$NullableType extends jni$_.JObjType<MapView?> {
 
   @jni$_.internal
   @core$_.override
-  MapView? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : MapView.fromReference(reference);
+  MapView? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : MapView.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -9159,8 +9511,9 @@ final class $MapView$Type extends jni$_.JObjType<MapView> {
 
   @jni$_.internal
   @core$_.override
-  MapView fromReference(jni$_.JReference reference) =>
-      MapView.fromReference(reference);
+  MapView fromReference(jni$_.JReference reference) => MapView.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

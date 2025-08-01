@@ -48,8 +48,10 @@ class MapLibreAnimator<$K extends jni$_.JObject?> extends jni$_.JObject {
   final jni$_.JObjType<$K> K;
 
   @jni$_.internal
-  MapLibreAnimator.fromReference(this.K, jni$_.JReference reference)
-    : $type = type<$K>(K),
+  MapLibreAnimator.fromReference(
+    this.K,
+    jni$_.JReference reference,
+  ) : $type = type<$K>(K),
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -58,14 +60,20 @@ class MapLibreAnimator<$K extends jni$_.JObject?> extends jni$_.JObject {
 
   /// The type which includes information such as the signature of this class.
   static $MapLibreAnimator$NullableType<$K>
-  nullableType<$K extends jni$_.JObject?>(jni$_.JObjType<$K> K) {
-    return $MapLibreAnimator$NullableType<$K>(K);
+  nullableType<$K extends jni$_.JObject?>(
+    jni$_.JObjType<$K> K,
+  ) {
+    return $MapLibreAnimator$NullableType<$K>(
+      K,
+    );
   }
 
   static $MapLibreAnimator$Type<$K> type<$K extends jni$_.JObject?>(
     jni$_.JObjType<$K> K,
   ) {
-    return $MapLibreAnimator$Type<$K>(K);
+    return $MapLibreAnimator$Type<$K>(
+      K,
+    );
   }
 
   static final _id_onAnimationUpdate = _class.instanceMethodId(
@@ -92,7 +100,9 @@ class MapLibreAnimator<$K extends jni$_.JObject?> extends jni$_.JObject {
           >();
 
   /// from: `public void onAnimationUpdate(android.animation.ValueAnimator valueAnimator)`
-  void onAnimationUpdate(jni$_.JObject? valueAnimator) {
+  void onAnimationUpdate(
+    jni$_.JObject? valueAnimator,
+  ) {
     final _$valueAnimator = valueAnimator?.reference ?? jni$_.jNullReference;
     _onAnimationUpdate(
       reference.pointer,
@@ -137,7 +147,9 @@ final class $MapLibreAnimator$NullableType<$K extends jni$_.JObject?>
   final jni$_.JObjType<$K> K;
 
   @jni$_.internal
-  const $MapLibreAnimator$NullableType(this.K);
+  const $MapLibreAnimator$NullableType(
+    this.K,
+  );
 
   @jni$_.internal
   @core$_.override
@@ -148,7 +160,10 @@ final class $MapLibreAnimator$NullableType<$K extends jni$_.JObject?>
   MapLibreAnimator<$K>? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : MapLibreAnimator<$K>.fromReference(K, reference);
+      : MapLibreAnimator<$K>.fromReference(
+          K,
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -178,7 +193,9 @@ final class $MapLibreAnimator$Type<$K extends jni$_.JObject?>
   final jni$_.JObjType<$K> K;
 
   @jni$_.internal
-  const $MapLibreAnimator$Type(this.K);
+  const $MapLibreAnimator$Type(
+    this.K,
+  );
 
   @jni$_.internal
   @core$_.override
@@ -187,7 +204,10 @@ final class $MapLibreAnimator$Type<$K extends jni$_.JObject?>
   @jni$_.internal
   @core$_.override
   MapLibreAnimator<$K> fromReference(jni$_.JReference reference) =>
-      MapLibreAnimator<$K>.fromReference(K, reference);
+      MapLibreAnimator<$K>.fromReference(
+        K,
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

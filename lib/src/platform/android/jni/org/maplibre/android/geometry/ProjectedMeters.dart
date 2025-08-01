@@ -45,8 +45,9 @@ class ProjectedMeters$Companion extends jni$_.JObject {
   final jni$_.JObjType<ProjectedMeters$Companion> $type;
 
   @jni$_.internal
-  ProjectedMeters$Companion.fromReference(jni$_.JReference reference)
-    : $type = type,
+  ProjectedMeters$Companion.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -80,7 +81,9 @@ class ProjectedMeters$Companion extends jni$_.JObject {
 
   /// from: `synthetic public void <init>(kotlin.jvm.internal.DefaultConstructorMarker defaultConstructorMarker)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory ProjectedMeters$Companion(jni$_.JObject? defaultConstructorMarker) {
+  factory ProjectedMeters$Companion(
+    jni$_.JObject? defaultConstructorMarker,
+  ) {
     final _$defaultConstructorMarker =
         defaultConstructorMarker?.reference ?? jni$_.jNullReference;
     return ProjectedMeters$Companion.fromReference(
@@ -108,7 +111,9 @@ final class $ProjectedMeters$Companion$NullableType
   ProjectedMeters$Companion? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : ProjectedMeters$Companion.fromReference(reference);
+      : ProjectedMeters$Companion.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -144,7 +149,9 @@ final class $ProjectedMeters$Companion$Type
   @jni$_.internal
   @core$_.override
   ProjectedMeters$Companion fromReference(jni$_.JReference reference) =>
-      ProjectedMeters$Companion.fromReference(reference);
+      ProjectedMeters$Companion.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -175,8 +182,9 @@ class ProjectedMeters extends jni$_.JObject {
   final jni$_.JObjType<ProjectedMeters> $type;
 
   @jni$_.internal
-  ProjectedMeters.fromReference(jni$_.JReference reference)
-    : $type = type,
+  ProjectedMeters.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -235,7 +243,10 @@ class ProjectedMeters extends jni$_.JObject {
     ).doubleFloat;
   }
 
-  static final _id_getEasting = _class.instanceMethodId(r'getEasting', r'()D');
+  static final _id_getEasting = _class.instanceMethodId(
+    r'getEasting',
+    r'()D',
+  );
 
   static final _getEasting =
       jni$_.ProtectedJniExtensions.lookup<
@@ -261,7 +272,9 @@ class ProjectedMeters extends jni$_.JObject {
     ).doubleFloat;
   }
 
-  static final _id_new$ = _class.constructorId(r'(DD)V');
+  static final _id_new$ = _class.constructorId(
+    r'(DD)V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -284,7 +297,10 @@ class ProjectedMeters extends jni$_.JObject {
 
   /// from: `public void <init>(double d, double d1)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory ProjectedMeters(double d, double d1) {
+  factory ProjectedMeters(
+    double d,
+    double d1,
+  ) {
     return ProjectedMeters.fromReference(
       _new$(
         _class.reference.pointer,
@@ -319,7 +335,9 @@ class ProjectedMeters extends jni$_.JObject {
 
   /// from: `public void <init>(org.maplibre.android.geometry.ProjectedMeters projectedMeters)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory ProjectedMeters.new$1(ProjectedMeters projectedMeters) {
+  factory ProjectedMeters.new$1(
+    ProjectedMeters projectedMeters,
+  ) {
     final _$projectedMeters = projectedMeters.reference;
     return ProjectedMeters.fromReference(
       _new$1(
@@ -354,7 +372,9 @@ class ProjectedMeters extends jni$_.JObject {
           >();
 
   /// from: `public boolean equals(java.lang.Object object)`
-  bool equals(jni$_.JObject? object) {
+  bool equals(
+    jni$_.JObject? object,
+  ) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     return _equals(
       reference.pointer,
@@ -363,7 +383,10 @@ class ProjectedMeters extends jni$_.JObject {
     ).boolean;
   }
 
-  static final _id_hashCode$1 = _class.instanceMethodId(r'hashCode', r'()I');
+  static final _id_hashCode$1 = _class.instanceMethodId(
+    r'hashCode',
+    r'()I',
+  );
 
   static final _hashCode$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -473,7 +496,10 @@ class ProjectedMeters extends jni$_.JObject {
           >();
 
   /// from: `public void writeToParcel(android.os.Parcel parcel, int i)`
-  void writeToParcel(jni$_.JObject parcel, int i) {
+  void writeToParcel(
+    jni$_.JObject parcel,
+    int i,
+  ) {
     final _$parcel = parcel.reference;
     _writeToParcel(
       reference.pointer,
@@ -539,8 +565,11 @@ final class $ProjectedMeters$NullableType
 
   @jni$_.internal
   @core$_.override
-  ProjectedMeters? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : ProjectedMeters.fromReference(reference);
+  ProjectedMeters? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : ProjectedMeters.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -574,7 +603,9 @@ final class $ProjectedMeters$Type extends jni$_.JObjType<ProjectedMeters> {
   @jni$_.internal
   @core$_.override
   ProjectedMeters fromReference(jni$_.JReference reference) =>
-      ProjectedMeters.fromReference(reference);
+      ProjectedMeters.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

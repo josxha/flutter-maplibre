@@ -38,6 +38,8 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
+import '../../../../../android/graphics/Bitmap.dart' as bitmap$_;
+
 import '../../../../../java/net/URI.dart' as uri$_;
 
 import '../../../../../java/net/URL.dart' as url$_;
@@ -53,8 +55,9 @@ class ImageSource extends source$_.Source {
   final jni$_.JObjType<ImageSource> $type;
 
   @jni$_.internal
-  ImageSource.fromReference(jni$_.JReference reference)
-    : $type = type,
+  ImageSource.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -64,7 +67,9 @@ class ImageSource extends source$_.Source {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $ImageSource$NullableType();
   static const type = $ImageSource$Type();
-  static final _id_new$ = _class.constructorId(r'(J)V');
+  static final _id_new$ = _class.constructorId(
+    r'(J)V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -86,7 +91,9 @@ class ImageSource extends source$_.Source {
 
   /// from: `public void <init>(long j)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory ImageSource(int j) {
+  factory ImageSource(
+    int j,
+  ) {
     return ImageSource.fromReference(
       _new$(
         _class.reference.pointer,
@@ -233,7 +240,7 @@ class ImageSource extends source$_.Source {
   factory ImageSource.new$3(
     jni$_.JString? string,
     latlngquad$_.LatLngQuad? latLngQuad,
-    jni$_.JObject bitmap,
+    bitmap$_.Bitmap bitmap,
   ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$latLngQuad = latLngQuad?.reference ?? jni$_.jNullReference;
@@ -323,7 +330,9 @@ class ImageSource extends source$_.Source {
           >();
 
   /// from: `public final void setUrl(java.net.URL uRL)`
-  void setUrl(url$_.URL uRL) {
+  void setUrl(
+    url$_.URL uRL,
+  ) {
     final _$uRL = uRL.reference;
     _setUrl(
       reference.pointer,
@@ -356,7 +365,9 @@ class ImageSource extends source$_.Source {
           >();
 
   /// from: `public final void setUrl(java.lang.String string)`
-  void setUrl$1(jni$_.JString? string) {
+  void setUrl$1(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setUrl$1(
       reference.pointer,
@@ -389,7 +400,9 @@ class ImageSource extends source$_.Source {
           >();
 
   /// from: `public final void setUri(java.net.URI uRI)`
-  void setUri(uri$_.URI uRI) {
+  void setUri(
+    uri$_.URI uRI,
+  ) {
     final _$uRI = uRI.reference;
     _setUri(
       reference.pointer,
@@ -422,7 +435,9 @@ class ImageSource extends source$_.Source {
           >();
 
   /// from: `public final void setUri(java.lang.String string)`
-  void setUri$1(jni$_.JString? string) {
+  void setUri$1(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setUri$1(
       reference.pointer,
@@ -455,7 +470,9 @@ class ImageSource extends source$_.Source {
           >();
 
   /// from: `public final void setImage(android.graphics.Bitmap bitmap)`
-  void setImage(jni$_.JObject bitmap) {
+  void setImage(
+    bitmap$_.Bitmap bitmap,
+  ) {
     final _$bitmap = bitmap.reference;
     _setImage(
       reference.pointer,
@@ -464,7 +481,10 @@ class ImageSource extends source$_.Source {
     ).check();
   }
 
-  static final _id_setImage$1 = _class.instanceMethodId(r'setImage', r'(I)V');
+  static final _id_setImage$1 = _class.instanceMethodId(
+    r'setImage',
+    r'(I)V',
+  );
 
   static final _setImage$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -485,7 +505,9 @@ class ImageSource extends source$_.Source {
           >();
 
   /// from: `public final void setImage(int i)`
-  void setImage$1(int i) {
+  void setImage$1(
+    int i,
+  ) {
     _setImage$1(
       reference.pointer,
       _id_setImage$1 as jni$_.JMethodIDPtr,
@@ -577,7 +599,9 @@ class ImageSource extends source$_.Source {
           >();
 
   /// from: `public final void setCoordinates(org.maplibre.android.geometry.LatLngQuad latLngQuad)`
-  void setCoordinates(latlngquad$_.LatLngQuad? latLngQuad) {
+  void setCoordinates(
+    latlngquad$_.LatLngQuad? latLngQuad,
+  ) {
     final _$latLngQuad = latLngQuad?.reference ?? jni$_.jNullReference;
     _setCoordinates(
       reference.pointer,
@@ -597,8 +621,11 @@ final class $ImageSource$NullableType extends jni$_.JObjType<ImageSource?> {
 
   @jni$_.internal
   @core$_.override
-  ImageSource? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : ImageSource.fromReference(reference);
+  ImageSource? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : ImageSource.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const source$_.$Source$Type();
@@ -632,7 +659,9 @@ final class $ImageSource$Type extends jni$_.JObjType<ImageSource> {
   @jni$_.internal
   @core$_.override
   ImageSource fromReference(jni$_.JReference reference) =>
-      ImageSource.fromReference(reference);
+      ImageSource.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const source$_.$Source$Type();

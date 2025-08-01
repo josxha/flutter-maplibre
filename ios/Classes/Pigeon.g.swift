@@ -567,28 +567,30 @@ class PigeonPigeonCodec: FlutterStandardMessageCodec, @unchecked Sendable {
 /// Generated protocol from Pigeon that represents a handler of messages from Flutter.
 protocol MapLibreHostApi {
   /// Add a fill layer to the map style.
-  func addFillLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
+  func addFillLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, aboveLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
   /// Add a circle layer to the map style.
-  func addCircleLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
+  func addCircleLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, aboveLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
   /// Add a background layer to the map style.
-  func addBackgroundLayer(id: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
+  func addBackgroundLayer(id: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, aboveLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
   /// Add a fill extrusion layer to the map style.
-  func addFillExtrusionLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
+  func addFillExtrusionLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, aboveLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
   /// Add a heatmap layer to the map style.
-  func addHeatmapLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
+  func addHeatmapLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, aboveLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
   /// Add a hillshade layer to the map style.
-  func addHillshadeLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
+  func addHillshadeLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, aboveLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
   /// Add a line layer to the map style.
-  func addLineLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
+  func addLineLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, aboveLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
   /// Add a raster layer to the map style.
-  func addRasterLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
+  func addRasterLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, aboveLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
   /// Add a symbol layer to the map style.
-  func addSymbolLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
+  func addSymbolLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, aboveLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
   /// Loads an image to the map. An image needs to be loaded before it can
   /// get used.
   func loadImage(url: String, completion: @escaping (Result<FlutterStandardTypedData, Error>) -> Void)
   /// Add an image to the map.
   func addImage(id: String, bytes: FlutterStandardTypedData, completion: @escaping (Result<Void, Error>) -> Void)
+  /// Add multiple images to the map.
+  func addImages(images: [String: FlutterStandardTypedData], completion: @escaping (Result<Void, Error>) -> Void)
 }
 
 /// Generated setup class from Pigeon to handle messages through the `binaryMessenger`.
@@ -607,7 +609,8 @@ class MapLibreHostApiSetup {
         let layoutArg = args[2] as! [String: Any]
         let paintArg = args[3] as! [String: Any]
         let belowLayerIdArg: String? = nilOrValue(args[4])
-        api.addFillLayer(id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg, belowLayerId: belowLayerIdArg) { result in
+        let aboveLayerIdArg: String? = nilOrValue(args[5])
+        api.addFillLayer(id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg, belowLayerId: belowLayerIdArg, aboveLayerId: aboveLayerIdArg) { result in
           switch result {
           case .success:
             reply(wrapResult(nil))
@@ -629,7 +632,8 @@ class MapLibreHostApiSetup {
         let layoutArg = args[2] as! [String: Any]
         let paintArg = args[3] as! [String: Any]
         let belowLayerIdArg: String? = nilOrValue(args[4])
-        api.addCircleLayer(id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg, belowLayerId: belowLayerIdArg) { result in
+        let aboveLayerIdArg: String? = nilOrValue(args[5])
+        api.addCircleLayer(id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg, belowLayerId: belowLayerIdArg, aboveLayerId: aboveLayerIdArg) { result in
           switch result {
           case .success:
             reply(wrapResult(nil))
@@ -650,7 +654,8 @@ class MapLibreHostApiSetup {
         let layoutArg = args[1] as! [String: Any]
         let paintArg = args[2] as! [String: Any]
         let belowLayerIdArg: String? = nilOrValue(args[3])
-        api.addBackgroundLayer(id: idArg, layout: layoutArg, paint: paintArg, belowLayerId: belowLayerIdArg) { result in
+        let aboveLayerIdArg: String? = nilOrValue(args[4])
+        api.addBackgroundLayer(id: idArg, layout: layoutArg, paint: paintArg, belowLayerId: belowLayerIdArg, aboveLayerId: aboveLayerIdArg) { result in
           switch result {
           case .success:
             reply(wrapResult(nil))
@@ -672,7 +677,8 @@ class MapLibreHostApiSetup {
         let layoutArg = args[2] as! [String: Any]
         let paintArg = args[3] as! [String: Any]
         let belowLayerIdArg: String? = nilOrValue(args[4])
-        api.addFillExtrusionLayer(id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg, belowLayerId: belowLayerIdArg) { result in
+        let aboveLayerIdArg: String? = nilOrValue(args[5])
+        api.addFillExtrusionLayer(id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg, belowLayerId: belowLayerIdArg, aboveLayerId: aboveLayerIdArg) { result in
           switch result {
           case .success:
             reply(wrapResult(nil))
@@ -694,7 +700,8 @@ class MapLibreHostApiSetup {
         let layoutArg = args[2] as! [String: Any]
         let paintArg = args[3] as! [String: Any]
         let belowLayerIdArg: String? = nilOrValue(args[4])
-        api.addHeatmapLayer(id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg, belowLayerId: belowLayerIdArg) { result in
+        let aboveLayerIdArg: String? = nilOrValue(args[5])
+        api.addHeatmapLayer(id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg, belowLayerId: belowLayerIdArg, aboveLayerId: aboveLayerIdArg) { result in
           switch result {
           case .success:
             reply(wrapResult(nil))
@@ -716,7 +723,8 @@ class MapLibreHostApiSetup {
         let layoutArg = args[2] as! [String: Any]
         let paintArg = args[3] as! [String: Any]
         let belowLayerIdArg: String? = nilOrValue(args[4])
-        api.addHillshadeLayer(id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg, belowLayerId: belowLayerIdArg) { result in
+        let aboveLayerIdArg: String? = nilOrValue(args[5])
+        api.addHillshadeLayer(id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg, belowLayerId: belowLayerIdArg, aboveLayerId: aboveLayerIdArg) { result in
           switch result {
           case .success:
             reply(wrapResult(nil))
@@ -738,7 +746,8 @@ class MapLibreHostApiSetup {
         let layoutArg = args[2] as! [String: Any]
         let paintArg = args[3] as! [String: Any]
         let belowLayerIdArg: String? = nilOrValue(args[4])
-        api.addLineLayer(id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg, belowLayerId: belowLayerIdArg) { result in
+        let aboveLayerIdArg: String? = nilOrValue(args[5])
+        api.addLineLayer(id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg, belowLayerId: belowLayerIdArg, aboveLayerId: aboveLayerIdArg) { result in
           switch result {
           case .success:
             reply(wrapResult(nil))
@@ -760,7 +769,8 @@ class MapLibreHostApiSetup {
         let layoutArg = args[2] as! [String: Any]
         let paintArg = args[3] as! [String: Any]
         let belowLayerIdArg: String? = nilOrValue(args[4])
-        api.addRasterLayer(id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg, belowLayerId: belowLayerIdArg) { result in
+        let aboveLayerIdArg: String? = nilOrValue(args[5])
+        api.addRasterLayer(id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg, belowLayerId: belowLayerIdArg, aboveLayerId: aboveLayerIdArg) { result in
           switch result {
           case .success:
             reply(wrapResult(nil))
@@ -782,7 +792,8 @@ class MapLibreHostApiSetup {
         let layoutArg = args[2] as! [String: Any]
         let paintArg = args[3] as! [String: Any]
         let belowLayerIdArg: String? = nilOrValue(args[4])
-        api.addSymbolLayer(id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg, belowLayerId: belowLayerIdArg) { result in
+        let aboveLayerIdArg: String? = nilOrValue(args[5])
+        api.addSymbolLayer(id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg, belowLayerId: belowLayerIdArg, aboveLayerId: aboveLayerIdArg) { result in
           switch result {
           case .success:
             reply(wrapResult(nil))
@@ -831,6 +842,24 @@ class MapLibreHostApiSetup {
       }
     } else {
       addImageChannel.setMessageHandler(nil)
+    }
+    /// Add multiple images to the map.
+    let addImagesChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addImages\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      addImagesChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let imagesArg = args[0] as! [String: FlutterStandardTypedData]
+        api.addImages(images: imagesArg) { result in
+          switch result {
+          case .success:
+            reply(wrapResult(nil))
+          case .failure(let error):
+            reply(wrapError(error))
+          }
+        }
+      }
+    } else {
+      addImagesChannel.setMessageHandler(nil)
     }
   }
 }
