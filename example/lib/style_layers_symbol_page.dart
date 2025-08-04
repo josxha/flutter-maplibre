@@ -22,34 +22,39 @@ class _StyleLayersSymbolPageState extends State<StyleLayersSymbolPage> {
       body: MapLibreMap(
         options: MapOptions(initZoom: 3, initCenter: Position(9.17, 47.68)),
         onStyleLoaded: (style) async {
-          // load the image data
-          final response = await http.get(
-            Uri.parse(StyleLayersSymbolPage.imageUrl),
-          );
-          final bytes = response.bodyBytes;
+          try {
+            // load the image data
+            final response = await http.get(
+              Uri.parse(StyleLayersSymbolPage.imageUrl),
+            );
+            final bytes = response.bodyBytes;
 
-          // add the image to the map
-          await style.addImage('marker', bytes);
+            // add the image to the map
+            await style.addImage('marker', bytes);
 
-          // add some points as GeoJSON source to the map
-          await style.addSource(
-            const GeoJsonSource(id: 'points', data: _geoJsonString),
-          );
+            // add some points as GeoJSON source to the map
+            await style.addSource(
+              const GeoJsonSource(id: 'points', data: _geoJsonString),
+            );
 
-          // display the image on the map
-          await style.addLayer(
-            const SymbolStyleLayer(
-              id: 'images',
-              sourceId: 'points',
-              layout: {
-                // see https://maplibre.org/maplibre-style-spec/layers/#symbol
-                'icon-image': 'marker',
-                'icon-size': 0.08,
-                'icon-allow-overlap': true,
-                'icon-anchor': 'bottom',
-              },
-            ),
-          );
+            // display the image on the map
+            await style.addLayer(
+              const SymbolStyleLayer(
+                id: 'images',
+                sourceId: 'points',
+                layout: {
+                  // see https://maplibre.org/maplibre-style-spec/layers/#symbol
+                  'icon-image': 'marker',
+                  'icon-size': 0.08,
+                  'icon-allow-overlap': true,
+                  'icon-anchor': 'bottom',
+                },
+              ),
+            );
+          } on Exception catch (error, stacktrace) {
+            debugPrint(error.toString());
+            debugPrintStack(stackTrace: stacktrace);
+          }
         },
       ),
     );
