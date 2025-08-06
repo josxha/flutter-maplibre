@@ -54,7 +54,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       _map = interop.JsMap(
         interop.MapOptions(
           container: _htmlElement,
-          style: options.initStyle,
+          style: _convertAssetPathForWeb(options.initStyle),
           zoom: options.initZoom,
           center: options.initCenter?.toLngLat(),
           bearing: options.initBearing,
@@ -452,7 +452,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         _onStyleLoaded();
       }.toJS,
     );
-    _map.setStyle(style);
+    _map.setStyle(_convertAssetPathForWeb(style));
   }
 
   void _onStyleLoaded() {
@@ -464,5 +464,19 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     _layerManager = LayerManager(styleCtrl, widget.layers);
     // setState is needed to refresh the flutter widgets used in MapLibreMap.children.
     setState(() {});
+  }
+
+  /// Converts Flutter asset paths to web-compatible paths.
+  /// 
+  /// In Flutter web, assets are served from the '/assets/' base path.
+  /// When a style URL starts with 'assets/', it needs to be prefixed
+  /// with 'assets/' to create the correct web asset URL.
+  /// 
+  /// Example: 'assets/styles/style.json' -> 'assets/assets/styles/style.json'
+  String _convertAssetPathForWeb(String style) {
+    if (style.startsWith('assets/')) {
+      return 'assets/$style';
+    }
+    return style;
   }
 }
