@@ -46,8 +46,8 @@ class PulsingLocationCircleAnimator extends jni$_.JObject {
 
   @jni$_.internal
   PulsingLocationCircleAnimator.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/location/PulsingLocationCircleAnimator',
@@ -60,27 +60,22 @@ class PulsingLocationCircleAnimator extends jni$_.JObject {
     r'(Lorg/maplibre/android/location/MapLibreAnimator$AnimationsValueChangeListener;IF)V',
   );
 
-  static final _new$ =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<
-                  (jni$_.Pointer<jni$_.Void>, jni$_.Int32, jni$_.Double)
-                >,
-              )
-            >
-          >('globalEnv_NewObject')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              int,
-              double,
-            )
-          >();
+                    (jni$_.Pointer<jni$_.Void>, jni$_.Int32, jni$_.Double)>,
+              )>>('globalEnv_NewObject')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+            int,
+            double,
+          )>();
 
   /// from: `public void <init>(org.maplibre.android.location.MapLibreAnimator$AnimationsValueChangeListener animationsValueChangeListener, int i, float f)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -117,8 +112,8 @@ final class $PulsingLocationCircleAnimator$NullableType
   @core$_.override
   PulsingLocationCircleAnimator? fromReference(jni$_.JReference reference) =>
       reference.isNull
-      ? null
-      : PulsingLocationCircleAnimator.fromReference(reference);
+          ? null
+          : PulsingLocationCircleAnimator.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

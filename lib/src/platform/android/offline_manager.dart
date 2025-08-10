@@ -217,14 +217,14 @@ class OfflineManagerAndroid implements OfflineManager {
       maxZoom,
       pixelDensity,
     );*/
-    final jDefinition = jni.Helpers.INSTANCE
-        .createOfflineTilePyramidRegionDefinition(
-          jMapStyleUrl,
-          jBounds,
-          minZoom,
-          maxZoom,
-          pixelDensity,
-        );
+    final jDefinition =
+        jni.Helpers.INSTANCE.createOfflineTilePyramidRegionDefinition(
+      jMapStyleUrl,
+      jBounds,
+      minZoom,
+      maxZoom,
+      pixelDensity,
+    );
 
     // convert the Map to a Java byte Array
     final metadataJson = jsonEncode(metadata);
@@ -246,8 +246,8 @@ class OfflineManagerAndroid implements OfflineManager {
                         loadedBytes: status.getCompletedResourceSize(),
                         loadedTiles: status.getCompletedResourceCount(),
                         totalTiles: status.getRequiredResourceCount(),
-                        totalTilesEstimated: !status
-                            .isRequiredResourceCountPrecise(),
+                        totalTilesEstimated:
+                            !status.isRequiredResourceCountPrecise(),
                         region: region,
                         downloadCompleted: status.isComplete(),
                       ),

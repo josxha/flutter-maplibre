@@ -25,29 +25,29 @@ abstract class MapLibreMapStateNative extends MapLibreMapState
 
   @override
   pigeon.MapOptions getOptions() => pigeon.MapOptions(
-    style: options.initStyle,
-    bearing: options.initBearing,
-    zoom: options.initZoom,
-    pitch: options.initPitch,
-    center: options.initCenter == null
-        ? null
-        : pigeon.LngLat(
-            lng: options.initCenter!.lng.toDouble(),
-            lat: options.initCenter!.lat.toDouble(),
-          ),
-    minZoom: options.minZoom,
-    maxZoom: options.maxZoom,
-    minPitch: options.minPitch,
-    maxPitch: options.maxPitch,
-    maxBounds: options.maxBounds?.toLngLatBounds(),
-    gestures: pigeon.MapGestures(
-      rotate: options.gestures.rotate,
-      pan: options.gestures.pan,
-      zoom: options.gestures.zoom,
-      tilt: options.gestures.pitch,
-    ),
-    androidTextureMode: options.androidTextureMode,
-  );
+        style: options.initStyle,
+        bearing: options.initBearing,
+        zoom: options.initZoom,
+        pitch: options.initPitch,
+        center: options.initCenter == null
+            ? null
+            : pigeon.LngLat(
+                lng: options.initCenter!.lng.toDouble(),
+                lat: options.initCenter!.lat.toDouble(),
+              ),
+        minZoom: options.minZoom,
+        maxZoom: options.maxZoom,
+        minPitch: options.minPitch,
+        maxPitch: options.maxPitch,
+        maxBounds: options.maxBounds?.toLngLatBounds(),
+        gestures: pigeon.MapGestures(
+          rotate: options.gestures.rotate,
+          pan: options.gestures.pan,
+          zoom: options.gestures.zoom,
+          tilt: options.gestures.pitch,
+        ),
+        androidTextureMode: options.androidTextureMode,
+      );
 
   @override
   void onMoveCamera(pigeon.MapCamera camera) {

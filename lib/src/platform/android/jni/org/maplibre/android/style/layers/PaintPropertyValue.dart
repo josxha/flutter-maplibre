@@ -52,8 +52,8 @@ class PaintPropertyValue<$T extends jni$_.JObject?>
 
   @jni$_.internal
   PaintPropertyValue.fromReference(this.T, jni$_.JReference reference)
-    : $type = type<$T>(T),
-      super.fromReference(T.nullableType, reference);
+      : $type = type<$T>(T),
+        super.fromReference(T.nullableType, reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/style/layers/PaintPropertyValue',
@@ -61,7 +61,7 @@ class PaintPropertyValue<$T extends jni$_.JObject?>
 
   /// The type which includes information such as the signature of this class.
   static $PaintPropertyValue$NullableType<$T>
-  nullableType<$T extends jni$_.JObject?>(jni$_.JObjType<$T> T) {
+      nullableType<$T extends jni$_.JObject?>(jni$_.JObjType<$T> T) {
     return $PaintPropertyValue$NullableType<$T>(T);
   }
 
@@ -75,26 +75,21 @@ class PaintPropertyValue<$T extends jni$_.JObject?>
     r'(Ljava/lang/String;Ljava/lang/Object;)V',
   );
 
-  static final _new$ =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<
-                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
-                >,
-              )
-            >
-          >('globalEnv_NewObject')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                    (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)>,
+              )>>('globalEnv_NewObject')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public void <init>(java.lang.String string, T object)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -134,8 +129,8 @@ final class $PaintPropertyValue$NullableType<$T extends jni$_.JObject?>
   @core$_.override
   PaintPropertyValue<$T>? fromReference(jni$_.JReference reference) =>
       reference.isNull
-      ? null
-      : PaintPropertyValue<$T>.fromReference(T, reference);
+          ? null
+          : PaintPropertyValue<$T>.fromReference(T, reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>

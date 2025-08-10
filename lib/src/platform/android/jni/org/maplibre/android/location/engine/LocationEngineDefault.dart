@@ -48,8 +48,8 @@ class LocationEngineDefault extends jni$_.JObject {
 
   @jni$_.internal
   LocationEngineDefault.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/location/engine/LocationEngineDefault',
@@ -73,23 +73,19 @@ class LocationEngineDefault extends jni$_.JObject {
     r'(Landroid/content/Context;)Lorg/maplibre/android/location/engine/LocationEngine;',
   );
 
-  static final _getDefaultLocationEngine =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _getDefaultLocationEngine = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public final org.maplibre.android.location.engine.LocationEngine getDefaultLocationEngine(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.

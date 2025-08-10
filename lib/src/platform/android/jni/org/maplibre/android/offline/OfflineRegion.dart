@@ -52,8 +52,8 @@ class OfflineRegion$Companion extends jni$_.JObject {
 
   @jni$_.internal
   OfflineRegion$Companion.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/offline/OfflineRegion$Companion',
@@ -66,23 +66,19 @@ class OfflineRegion$Companion extends jni$_.JObject {
     r'(Lkotlin/jvm/internal/DefaultConstructorMarker;)V',
   );
 
-  static final _new$ =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_NewObject')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_NewObject')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `synthetic public void <init>(kotlin.jvm.internal.DefaultConstructorMarker defaultConstructorMarker)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -113,8 +109,8 @@ final class $OfflineRegion$Companion$NullableType
   @core$_.override
   OfflineRegion$Companion? fromReference(jni$_.JReference reference) =>
       reference.isNull
-      ? null
-      : OfflineRegion$Companion.fromReference(reference);
+          ? null
+          : OfflineRegion$Companion.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -182,8 +178,8 @@ class OfflineRegion$DownloadState extends jni$_.JObject {
 
   @jni$_.internal
   OfflineRegion$DownloadState.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/offline/OfflineRegion$DownloadState',
@@ -207,11 +203,10 @@ class OfflineRegion$DownloadState extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -282,8 +277,8 @@ final class $OfflineRegion$DownloadState$NullableType
   @core$_.override
   OfflineRegion$DownloadState? fromReference(jni$_.JReference reference) =>
       reference.isNull
-      ? null
-      : OfflineRegion$DownloadState.fromReference(reference);
+          ? null
+          : OfflineRegion$DownloadState.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -352,8 +347,8 @@ class OfflineRegion$OfflineRegionDeleteCallback extends jni$_.JObject {
   @jni$_.internal
   OfflineRegion$OfflineRegionDeleteCallback.fromReference(
     jni$_.JReference reference,
-  ) : $type = type,
-      super.fromReference(reference);
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/offline/OfflineRegion$OfflineRegionDeleteCallback',
@@ -365,21 +360,17 @@ class OfflineRegion$OfflineRegionDeleteCallback extends jni$_.JObject {
   static const type = $OfflineRegion$OfflineRegionDeleteCallback$Type();
   static final _id_onDelete = _class.instanceMethodId(r'onDelete', r'()V');
 
-  static final _onDelete =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onDelete = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
 
   /// from: `public abstract void onDelete()`
   void onDelete() {
@@ -391,23 +382,19 @@ class OfflineRegion$OfflineRegionDeleteCallback extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _onError =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onError = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public abstract void onError(java.lang.String string)`
   void onError(jni$_.JString string) {
@@ -421,7 +408,7 @@ class OfflineRegion$OfflineRegionDeleteCallback extends jni$_.JObject {
 
   /// Maps a specific port to the implemented interface.
   static final core$_.Map<int, $OfflineRegion$OfflineRegionDeleteCallback>
-  _$impls = {};
+      _$impls = {};
   static jni$_.JObjectPtr _$invoke(
     int port,
     jni$_.JObjectPtr descriptor,
@@ -434,11 +421,10 @@ class OfflineRegion$OfflineRegionDeleteCallback extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -523,8 +509,8 @@ final class _$OfflineRegion$OfflineRegionDeleteCallback
     this.onDelete$async = false,
     required void Function(jni$_.JString string) onError,
     this.onError$async = false,
-  }) : _onDelete = onDelete,
-       _onError = onError;
+  })  : _onDelete = onDelete,
+        _onError = onError;
 
   final void Function() _onDelete;
   final bool onDelete$async;
@@ -554,9 +540,10 @@ final class $OfflineRegion$OfflineRegionDeleteCallback$NullableType
   @core$_.override
   OfflineRegion$OfflineRegionDeleteCallback? fromReference(
     jni$_.JReference reference,
-  ) => reference.isNull
-      ? null
-      : OfflineRegion$OfflineRegionDeleteCallback.fromReference(reference);
+  ) =>
+      reference.isNull
+          ? null
+          : OfflineRegion$OfflineRegionDeleteCallback.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -596,7 +583,8 @@ final class $OfflineRegion$OfflineRegionDeleteCallback$Type
   @core$_.override
   OfflineRegion$OfflineRegionDeleteCallback fromReference(
     jni$_.JReference reference,
-  ) => OfflineRegion$OfflineRegionDeleteCallback.fromReference(reference);
+  ) =>
+      OfflineRegion$OfflineRegionDeleteCallback.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -631,8 +619,8 @@ class OfflineRegion$OfflineRegionInvalidateCallback extends jni$_.JObject {
   @jni$_.internal
   OfflineRegion$OfflineRegionInvalidateCallback.fromReference(
     jni$_.JReference reference,
-  ) : $type = type,
-      super.fromReference(reference);
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/offline/OfflineRegion$OfflineRegionInvalidateCallback',
@@ -647,21 +635,17 @@ class OfflineRegion$OfflineRegionInvalidateCallback extends jni$_.JObject {
     r'()V',
   );
 
-  static final _onInvalidate =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onInvalidate = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
 
   /// from: `public abstract void onInvalidate()`
   void onInvalidate() {
@@ -676,23 +660,19 @@ class OfflineRegion$OfflineRegionInvalidateCallback extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _onError =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onError = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public abstract void onError(java.lang.String string)`
   void onError(jni$_.JString string) {
@@ -706,7 +686,7 @@ class OfflineRegion$OfflineRegionInvalidateCallback extends jni$_.JObject {
 
   /// Maps a specific port to the implemented interface.
   static final core$_.Map<int, $OfflineRegion$OfflineRegionInvalidateCallback>
-  _$impls = {};
+      _$impls = {};
   static jni$_.JObjectPtr _$invoke(
     int port,
     jni$_.JObjectPtr descriptor,
@@ -719,11 +699,10 @@ class OfflineRegion$OfflineRegionInvalidateCallback extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -808,8 +787,8 @@ final class _$OfflineRegion$OfflineRegionInvalidateCallback
     this.onInvalidate$async = false,
     required void Function(jni$_.JString string) onError,
     this.onError$async = false,
-  }) : _onInvalidate = onInvalidate,
-       _onError = onError;
+  })  : _onInvalidate = onInvalidate,
+        _onError = onError;
 
   final void Function() _onInvalidate;
   final bool onInvalidate$async;
@@ -839,9 +818,11 @@ final class $OfflineRegion$OfflineRegionInvalidateCallback$NullableType
   @core$_.override
   OfflineRegion$OfflineRegionInvalidateCallback? fromReference(
     jni$_.JReference reference,
-  ) => reference.isNull
-      ? null
-      : OfflineRegion$OfflineRegionInvalidateCallback.fromReference(reference);
+  ) =>
+      reference.isNull
+          ? null
+          : OfflineRegion$OfflineRegionInvalidateCallback.fromReference(
+              reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -849,7 +830,7 @@ final class $OfflineRegion$OfflineRegionInvalidateCallback$NullableType
   @jni$_.internal
   @core$_.override
   jni$_.JObjType<OfflineRegion$OfflineRegionInvalidateCallback?>
-  get nullableType => this;
+      get nullableType => this;
 
   @jni$_.internal
   @core$_.override
@@ -881,7 +862,8 @@ final class $OfflineRegion$OfflineRegionInvalidateCallback$Type
   @core$_.override
   OfflineRegion$OfflineRegionInvalidateCallback fromReference(
     jni$_.JReference reference,
-  ) => OfflineRegion$OfflineRegionInvalidateCallback.fromReference(reference);
+  ) =>
+      OfflineRegion$OfflineRegionInvalidateCallback.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -889,8 +871,8 @@ final class $OfflineRegion$OfflineRegionInvalidateCallback$Type
   @jni$_.internal
   @core$_.override
   jni$_.JObjType<OfflineRegion$OfflineRegionInvalidateCallback?>
-  get nullableType =>
-      const $OfflineRegion$OfflineRegionInvalidateCallback$NullableType();
+      get nullableType =>
+          const $OfflineRegion$OfflineRegionInvalidateCallback$NullableType();
 
   @jni$_.internal
   @core$_.override
@@ -916,8 +898,8 @@ class OfflineRegion$OfflineRegionObserver extends jni$_.JObject {
 
   @jni$_.internal
   OfflineRegion$OfflineRegionObserver.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/offline/OfflineRegion$OfflineRegionObserver',
@@ -932,23 +914,19 @@ class OfflineRegion$OfflineRegionObserver extends jni$_.JObject {
     r'(Lorg/maplibre/android/offline/OfflineRegionStatus;)V',
   );
 
-  static final _onStatusChanged =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onStatusChanged = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public abstract void onStatusChanged(org.maplibre.android.offline.OfflineRegionStatus offlineRegionStatus)`
   void onStatusChanged(
@@ -967,23 +945,19 @@ class OfflineRegion$OfflineRegionObserver extends jni$_.JObject {
     r'(Lorg/maplibre/android/offline/OfflineRegionError;)V',
   );
 
-  static final _onError =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onError = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public abstract void onError(org.maplibre.android.offline.OfflineRegionError offlineRegionError)`
   void onError(offlineregionerror$_.OfflineRegionError offlineRegionError) {
@@ -1002,21 +976,18 @@ class OfflineRegion$OfflineRegionObserver extends jni$_.JObject {
 
   static final _mapboxTileCountLimitExceeded =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Int64,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Int64,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-            )
-          >();
+                int,
+              )>();
 
   /// from: `public abstract void mapboxTileCountLimitExceeded(long j)`
   void mapboxTileCountLimitExceeded(int j) {
@@ -1042,11 +1013,10 @@ class OfflineRegion$OfflineRegionObserver extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -1136,13 +1106,11 @@ abstract base mixin class $OfflineRegion$OfflineRegionObserver {
   factory $OfflineRegion$OfflineRegionObserver({
     required void Function(
       offlineregionstatus$_.OfflineRegionStatus offlineRegionStatus,
-    )
-    onStatusChanged,
+    ) onStatusChanged,
     bool onStatusChanged$async,
     required void Function(
       offlineregionerror$_.OfflineRegionError offlineRegionError,
-    )
-    onError,
+    ) onError,
     bool onError$async,
     required void Function(int j) mapboxTileCountLimitExceeded,
     bool mapboxTileCountLimitExceeded$async,
@@ -1163,29 +1131,25 @@ final class _$OfflineRegion$OfflineRegionObserver
   _$OfflineRegion$OfflineRegionObserver({
     required void Function(
       offlineregionstatus$_.OfflineRegionStatus offlineRegionStatus,
-    )
-    onStatusChanged,
+    ) onStatusChanged,
     this.onStatusChanged$async = false,
     required void Function(
       offlineregionerror$_.OfflineRegionError offlineRegionError,
-    )
-    onError,
+    ) onError,
     this.onError$async = false,
     required void Function(int j) mapboxTileCountLimitExceeded,
     this.mapboxTileCountLimitExceeded$async = false,
-  }) : _onStatusChanged = onStatusChanged,
-       _onError = onError,
-       _mapboxTileCountLimitExceeded = mapboxTileCountLimitExceeded;
+  })  : _onStatusChanged = onStatusChanged,
+        _onError = onError,
+        _mapboxTileCountLimitExceeded = mapboxTileCountLimitExceeded;
 
   final void Function(
     offlineregionstatus$_.OfflineRegionStatus offlineRegionStatus,
-  )
-  _onStatusChanged;
+  ) _onStatusChanged;
   final bool onStatusChanged$async;
   final void Function(
     offlineregionerror$_.OfflineRegionError offlineRegionError,
-  )
-  _onError;
+  ) _onError;
   final bool onError$async;
   final void Function(int j) _mapboxTileCountLimitExceeded;
   final bool mapboxTileCountLimitExceeded$async;
@@ -1219,9 +1183,10 @@ final class $OfflineRegion$OfflineRegionObserver$NullableType
   @core$_.override
   OfflineRegion$OfflineRegionObserver? fromReference(
     jni$_.JReference reference,
-  ) => reference.isNull
-      ? null
-      : OfflineRegion$OfflineRegionObserver.fromReference(reference);
+  ) =>
+      reference.isNull
+          ? null
+          : OfflineRegion$OfflineRegionObserver.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -1260,7 +1225,8 @@ final class $OfflineRegion$OfflineRegionObserver$Type
   @core$_.override
   OfflineRegion$OfflineRegionObserver fromReference(
     jni$_.JReference reference,
-  ) => OfflineRegion$OfflineRegionObserver.fromReference(reference);
+  ) =>
+      OfflineRegion$OfflineRegionObserver.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -1293,8 +1259,8 @@ class OfflineRegion$OfflineRegionStatusCallback extends jni$_.JObject {
   @jni$_.internal
   OfflineRegion$OfflineRegionStatusCallback.fromReference(
     jni$_.JReference reference,
-  ) : $type = type,
-      super.fromReference(reference);
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/offline/OfflineRegion$OfflineRegionStatusCallback',
@@ -1309,23 +1275,19 @@ class OfflineRegion$OfflineRegionStatusCallback extends jni$_.JObject {
     r'(Lorg/maplibre/android/offline/OfflineRegionStatus;)V',
   );
 
-  static final _onStatus =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onStatus = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public abstract void onStatus(org.maplibre.android.offline.OfflineRegionStatus offlineRegionStatus)`
   void onStatus(
@@ -1345,23 +1307,19 @@ class OfflineRegion$OfflineRegionStatusCallback extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _onError =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onError = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public abstract void onError(java.lang.String string)`
   void onError(jni$_.JString? string) {
@@ -1375,7 +1333,7 @@ class OfflineRegion$OfflineRegionStatusCallback extends jni$_.JObject {
 
   /// Maps a specific port to the implemented interface.
   static final core$_.Map<int, $OfflineRegion$OfflineRegionStatusCallback>
-  _$impls = {};
+      _$impls = {};
   static jni$_.JObjectPtr _$invoke(
     int port,
     jni$_.JObjectPtr descriptor,
@@ -1388,11 +1346,10 @@ class OfflineRegion$OfflineRegionStatusCallback extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -1467,8 +1424,7 @@ abstract base mixin class $OfflineRegion$OfflineRegionStatusCallback {
   factory $OfflineRegion$OfflineRegionStatusCallback({
     required void Function(
       offlineregionstatus$_.OfflineRegionStatus? offlineRegionStatus,
-    )
-    onStatus,
+    ) onStatus,
     bool onStatus$async,
     required void Function(jni$_.JString? string) onError,
     bool onError$async,
@@ -1485,18 +1441,16 @@ final class _$OfflineRegion$OfflineRegionStatusCallback
   _$OfflineRegion$OfflineRegionStatusCallback({
     required void Function(
       offlineregionstatus$_.OfflineRegionStatus? offlineRegionStatus,
-    )
-    onStatus,
+    ) onStatus,
     this.onStatus$async = false,
     required void Function(jni$_.JString? string) onError,
     this.onError$async = false,
-  }) : _onStatus = onStatus,
-       _onError = onError;
+  })  : _onStatus = onStatus,
+        _onError = onError;
 
   final void Function(
     offlineregionstatus$_.OfflineRegionStatus? offlineRegionStatus,
-  )
-  _onStatus;
+  ) _onStatus;
   final bool onStatus$async;
   final void Function(jni$_.JString? string) _onError;
   final bool onError$async;
@@ -1526,9 +1480,10 @@ final class $OfflineRegion$OfflineRegionStatusCallback$NullableType
   @core$_.override
   OfflineRegion$OfflineRegionStatusCallback? fromReference(
     jni$_.JReference reference,
-  ) => reference.isNull
-      ? null
-      : OfflineRegion$OfflineRegionStatusCallback.fromReference(reference);
+  ) =>
+      reference.isNull
+          ? null
+          : OfflineRegion$OfflineRegionStatusCallback.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -1568,7 +1523,8 @@ final class $OfflineRegion$OfflineRegionStatusCallback$Type
   @core$_.override
   OfflineRegion$OfflineRegionStatusCallback fromReference(
     jni$_.JReference reference,
-  ) => OfflineRegion$OfflineRegionStatusCallback.fromReference(reference);
+  ) =>
+      OfflineRegion$OfflineRegionStatusCallback.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -1603,8 +1559,8 @@ class OfflineRegion$OfflineRegionUpdateMetadataCallback extends jni$_.JObject {
   @jni$_.internal
   OfflineRegion$OfflineRegionUpdateMetadataCallback.fromReference(
     jni$_.JReference reference,
-  ) : $type = type,
-      super.fromReference(reference);
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/offline/OfflineRegion$OfflineRegionUpdateMetadataCallback',
@@ -1616,23 +1572,19 @@ class OfflineRegion$OfflineRegionUpdateMetadataCallback extends jni$_.JObject {
   static const type = $OfflineRegion$OfflineRegionUpdateMetadataCallback$Type();
   static final _id_onUpdate = _class.instanceMethodId(r'onUpdate', r'([B)V');
 
-  static final _onUpdate =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onUpdate = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public abstract void onUpdate(byte[] bs)`
   void onUpdate(jni$_.JByteArray bs) {
@@ -1649,23 +1601,19 @@ class OfflineRegion$OfflineRegionUpdateMetadataCallback extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _onError =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onError = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public abstract void onError(java.lang.String string)`
   void onError(jni$_.JString string) {
@@ -1678,11 +1626,9 @@ class OfflineRegion$OfflineRegionUpdateMetadataCallback extends jni$_.JObject {
   }
 
   /// Maps a specific port to the implemented interface.
-  static final core$_.Map<
-    int,
-    $OfflineRegion$OfflineRegionUpdateMetadataCallback
-  >
-  _$impls = {};
+  static final core$_
+      .Map<int, $OfflineRegion$OfflineRegionUpdateMetadataCallback>
+      _$impls = {};
   static jni$_.JObjectPtr _$invoke(
     int port,
     jni$_.JObjectPtr descriptor,
@@ -1695,11 +1641,10 @@ class OfflineRegion$OfflineRegionUpdateMetadataCallback extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -1786,8 +1731,8 @@ final class _$OfflineRegion$OfflineRegionUpdateMetadataCallback
     this.onUpdate$async = false,
     required void Function(jni$_.JString string) onError,
     this.onError$async = false,
-  }) : _onUpdate = onUpdate,
-       _onError = onError;
+  })  : _onUpdate = onUpdate,
+        _onError = onError;
 
   final void Function(jni$_.JByteArray bs) _onUpdate;
   final bool onUpdate$async;
@@ -1817,11 +1762,12 @@ final class $OfflineRegion$OfflineRegionUpdateMetadataCallback$NullableType
   @core$_.override
   OfflineRegion$OfflineRegionUpdateMetadataCallback? fromReference(
     jni$_.JReference reference,
-  ) => reference.isNull
-      ? null
-      : OfflineRegion$OfflineRegionUpdateMetadataCallback.fromReference(
-          reference,
-        );
+  ) =>
+      reference.isNull
+          ? null
+          : OfflineRegion$OfflineRegionUpdateMetadataCallback.fromReference(
+              reference,
+            );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -1829,7 +1775,7 @@ final class $OfflineRegion$OfflineRegionUpdateMetadataCallback$NullableType
   @jni$_.internal
   @core$_.override
   jni$_.JObjType<OfflineRegion$OfflineRegionUpdateMetadataCallback?>
-  get nullableType => this;
+      get nullableType => this;
 
   @jni$_.internal
   @core$_.override
@@ -1863,9 +1809,10 @@ final class $OfflineRegion$OfflineRegionUpdateMetadataCallback$Type
   @core$_.override
   OfflineRegion$OfflineRegionUpdateMetadataCallback fromReference(
     jni$_.JReference reference,
-  ) => OfflineRegion$OfflineRegionUpdateMetadataCallback.fromReference(
-    reference,
-  );
+  ) =>
+      OfflineRegion$OfflineRegionUpdateMetadataCallback.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -1873,8 +1820,8 @@ final class $OfflineRegion$OfflineRegionUpdateMetadataCallback$Type
   @jni$_.internal
   @core$_.override
   jni$_.JObjType<OfflineRegion$OfflineRegionUpdateMetadataCallback?>
-  get nullableType =>
-      const $OfflineRegion$OfflineRegionUpdateMetadataCallback$NullableType();
+      get nullableType =>
+          const $OfflineRegion$OfflineRegionUpdateMetadataCallback$NullableType();
 
   @jni$_.internal
   @core$_.override
@@ -1900,8 +1847,8 @@ class OfflineRegion extends jni$_.JObject {
 
   @jni$_.internal
   OfflineRegion.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/offline/OfflineRegion',
@@ -1927,21 +1874,17 @@ class OfflineRegion extends jni$_.JObject {
   static const STATE_ACTIVE = 1;
   static final _id_getId = _class.instanceMethodId(r'getId', r'()J');
 
-  static final _getId =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _getId = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallLongMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>>('globalEnv_CallLongMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
 
   /// from: `public final long getId()`
   int getId() {
@@ -1953,21 +1896,17 @@ class OfflineRegion extends jni$_.JObject {
     r'()Lorg/maplibre/android/offline/OfflineRegionDefinition;',
   );
 
-  static final _getDefinition =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _getDefinition = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
 
   /// from: `public final org.maplibre.android.offline.OfflineRegionDefinition getDefinition()`
   /// The returned object must be released after use, by calling the [release] method.
@@ -1985,21 +1924,17 @@ class OfflineRegion extends jni$_.JObject {
     r'()[B',
   );
 
-  static final _getMetadata =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _getMetadata = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
 
   /// from: `public final byte[] getMetadata()`
   /// The returned object must be released after use, by calling the [release] method.
@@ -2017,19 +1952,16 @@ class OfflineRegion extends jni$_.JObject {
 
   static final _isDeliveringInactiveMessages =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                  )>>('globalEnv_CallBooleanMethod')
+          .asFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>();
 
   /// from: `public final boolean isDeliveringInactiveMessages()`
   bool isDeliveringInactiveMessages() {
@@ -2046,21 +1978,18 @@ class OfflineRegion extends jni$_.JObject {
 
   static final _setDeliverInactiveMessages =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Int32,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Int32,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-            )
-          >();
+                int,
+              )>();
 
   /// from: `public final void setDeliverInactiveMessages(boolean z)`
   void setDeliverInactiveMessages(bool z) {
@@ -2076,23 +2005,19 @@ class OfflineRegion extends jni$_.JObject {
     r'(Lorg/maplibre/android/offline/OfflineRegion$OfflineRegionObserver;)V',
   );
 
-  static final _setObserver =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _setObserver = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public final void setObserver(org.maplibre.android.offline.OfflineRegion$OfflineRegionObserver offlineRegionObserver)`
   void setObserver(OfflineRegion$OfflineRegionObserver? offlineRegionObserver) {
@@ -2110,23 +2035,19 @@ class OfflineRegion extends jni$_.JObject {
     r'(I)V',
   );
 
-  static final _setDownloadState =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _setDownloadState = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Int32,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            int,
+          )>();
 
   /// from: `public final void setDownloadState(int i)`
   void setDownloadState(int i) {
@@ -2142,23 +2063,19 @@ class OfflineRegion extends jni$_.JObject {
     r'(Lorg/maplibre/android/offline/OfflineRegion$OfflineRegionStatusCallback;)V',
   );
 
-  static final _getStatus =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _getStatus = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public final void getStatus(org.maplibre.android.offline.OfflineRegion$OfflineRegionStatusCallback offlineRegionStatusCallback)`
   void getStatus(
@@ -2177,23 +2094,19 @@ class OfflineRegion extends jni$_.JObject {
     r'(Lorg/maplibre/android/offline/OfflineRegion$OfflineRegionDeleteCallback;)V',
   );
 
-  static final _delete =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _delete = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public final void delete(org.maplibre.android.offline.OfflineRegion$OfflineRegionDeleteCallback offlineRegionDeleteCallback)`
   void delete(
@@ -2212,28 +2125,24 @@ class OfflineRegion extends jni$_.JObject {
     r'(Lorg/maplibre/android/offline/OfflineRegion$OfflineRegionInvalidateCallback;)V',
   );
 
-  static final _invalidate =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _invalidate = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public final void invalidate(org.maplibre.android.offline.OfflineRegion$OfflineRegionInvalidateCallback offlineRegionInvalidateCallback)`
   void invalidate(
     OfflineRegion$OfflineRegionInvalidateCallback?
-    offlineRegionInvalidateCallback,
+        offlineRegionInvalidateCallback,
   ) {
     final _$offlineRegionInvalidateCallback =
         offlineRegionInvalidateCallback?.reference ?? jni$_.jNullReference;
@@ -2249,32 +2158,27 @@ class OfflineRegion extends jni$_.JObject {
     r'([BLorg/maplibre/android/offline/OfflineRegion$OfflineRegionUpdateMetadataCallback;)V',
   );
 
-  static final _updateMetadata =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _updateMetadata = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<
-                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
-                >,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                    (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)>,
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public final void updateMetadata(byte[] bs, org.maplibre.android.offline.OfflineRegion$OfflineRegionUpdateMetadataCallback offlineRegionUpdateMetadataCallback)`
   void updateMetadata(
     jni$_.JByteArray bs,
     OfflineRegion$OfflineRegionUpdateMetadataCallback
-    offlineRegionUpdateMetadataCallback,
+        offlineRegionUpdateMetadataCallback,
   ) {
     final _$bs = bs.reference;
     final _$offlineRegionUpdateMetadataCallback =

@@ -48,8 +48,8 @@ class HttpRequest extends jni$_.JObject {
 
   @jni$_.internal
   HttpRequest.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/http/HttpRequest',
@@ -72,39 +72,34 @@ class HttpRequest extends jni$_.JObject {
     r'(Lorg/maplibre/android/http/HttpResponder;JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Z)V',
   );
 
-  static final _executeRequest =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _executeRequest = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<
-                  (
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.Int64,
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.Int32,
-                  )
-                >,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              int,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-              int,
-            )
-          >();
+                    (
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.Int64,
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.Int32,
+                    )>,
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+            int,
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.Pointer<jni$_.Void>,
+            int,
+          )>();
 
   /// from: `public abstract void executeRequest(org.maplibre.android.http.HttpResponder httpResponder, long j, java.lang.String string, java.lang.String string1, java.lang.String string2, java.lang.String string3, boolean z)`
   void executeRequest(
@@ -139,21 +134,17 @@ class HttpRequest extends jni$_.JObject {
     r'()V',
   );
 
-  static final _cancelRequest =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _cancelRequest = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
 
   /// from: `public abstract void cancelRequest()`
   void cancelRequest() {
@@ -177,11 +168,10 @@ class HttpRequest extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -263,8 +253,7 @@ abstract base mixin class $HttpRequest {
       jni$_.JString? string2,
       jni$_.JString? string3,
       bool z,
-    )
-    executeRequest,
+    ) executeRequest,
     bool executeRequest$async,
     required void Function() cancelRequest,
     bool cancelRequest$async,
@@ -294,13 +283,12 @@ final class _$HttpRequest with $HttpRequest {
       jni$_.JString? string2,
       jni$_.JString? string3,
       bool z,
-    )
-    executeRequest,
+    ) executeRequest,
     this.executeRequest$async = false,
     required void Function() cancelRequest,
     this.cancelRequest$async = false,
-  }) : _executeRequest = executeRequest,
-       _cancelRequest = cancelRequest;
+  })  : _executeRequest = executeRequest,
+        _cancelRequest = cancelRequest;
 
   final void Function(
     httpresponder$_.HttpResponder? httpResponder,
@@ -310,8 +298,7 @@ final class _$HttpRequest with $HttpRequest {
     jni$_.JString? string2,
     jni$_.JString? string3,
     bool z,
-  )
-  _executeRequest;
+  ) _executeRequest;
   final bool executeRequest$async;
   final void Function() _cancelRequest;
   final bool cancelRequest$async;

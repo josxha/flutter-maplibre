@@ -336,11 +336,11 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
 
   @override
   MapCamera getCamera() => MapCamera(
-    center: _map.getCenter().toPosition(),
-    zoom: _map.getZoom().toDouble(),
-    pitch: _map.getPitch().toDouble(),
-    bearing: _map.getBearing().toDouble(),
-  );
+        center: _map.getCenter().toPosition(),
+        zoom: _map.getZoom().toDouble(),
+        pitch: _map.getPitch().toDouble(),
+        bearing: _map.getBearing().toDouble(),
+      );
 
   /// https://wiki.openstreetmap.org/wiki/Zoom_levels
   @override
@@ -467,11 +467,11 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   }
 
   /// Converts Flutter asset paths to web-compatible paths.
-  /// 
+  ///
   /// In Flutter web, assets are served from the '/assets/' base path.
   /// When a style URL starts with 'assets/', it needs to be prefixed
   /// with 'assets/' to create the correct web asset URL.
-  /// 
+  ///
   /// Example: 'assets/styles/style.json' -> 'assets/assets/styles/style.json'
   String _convertAssetPathForWeb(String style) {
     if (style.startsWith('assets/')) {

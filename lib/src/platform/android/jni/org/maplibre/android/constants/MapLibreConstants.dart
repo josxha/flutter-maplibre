@@ -46,8 +46,8 @@ class MapLibreConstants extends jni$_.JObject {
 
   @jni$_.internal
   MapLibreConstants.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/constants/MapLibreConstants',
@@ -94,11 +94,11 @@ class MapLibreConstants extends jni$_.JObject {
 
   /// from: `static public final boolean DEFAULT_SET_STORAGE_EXTERNAL`
   static const DEFAULT_SET_STORAGE_EXTERNAL = 0;
-  static final _id_KEY_META_DATA_MEASURE_TILE_DOWNLOAD_ON = _class
-      .staticFieldId(
-        r'KEY_META_DATA_MEASURE_TILE_DOWNLOAD_ON',
-        r'Ljava/lang/String;',
-      );
+  static final _id_KEY_META_DATA_MEASURE_TILE_DOWNLOAD_ON =
+      _class.staticFieldId(
+    r'KEY_META_DATA_MEASURE_TILE_DOWNLOAD_ON',
+    r'Ljava/lang/String;',
+  );
 
   /// from: `static public final java.lang.String KEY_META_DATA_MEASURE_TILE_DOWNLOAD_ON`
   /// The returned object must be released after use, by calling the [release] method.
@@ -687,21 +687,17 @@ class MapLibreConstants extends jni$_.JObject {
 
   static final _id_new$ = _class.constructorId(r'()V');
 
-  static final _new$ =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_NewObject')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>>('globalEnv_NewObject')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
 
   /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.

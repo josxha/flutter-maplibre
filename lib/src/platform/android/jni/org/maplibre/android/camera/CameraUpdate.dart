@@ -50,8 +50,8 @@ class CameraUpdate extends jni$_.JObject {
 
   @jni$_.internal
   CameraUpdate.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/camera/CameraUpdate',
@@ -65,23 +65,19 @@ class CameraUpdate extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/MapLibreMap;)Lorg/maplibre/android/camera/CameraPosition;',
   );
 
-  static final _getCameraPosition =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _getCameraPosition = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public abstract org.maplibre.android.camera.CameraPosition getCameraPosition(org.maplibre.android.maps.MapLibreMap mapLibreMap)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -112,11 +108,10 @@ class CameraUpdate extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -178,8 +173,7 @@ abstract base mixin class $CameraUpdate {
   factory $CameraUpdate({
     required cameraposition$_.CameraPosition? Function(
       maplibremap$_.MapLibreMap mapLibreMap,
-    )
-    getCameraPosition,
+    ) getCameraPosition,
   }) = _$CameraUpdate;
 
   cameraposition$_.CameraPosition? getCameraPosition(
@@ -191,14 +185,12 @@ final class _$CameraUpdate with $CameraUpdate {
   _$CameraUpdate({
     required cameraposition$_.CameraPosition? Function(
       maplibremap$_.MapLibreMap mapLibreMap,
-    )
-    getCameraPosition,
+    ) getCameraPosition,
   }) : _getCameraPosition = getCameraPosition;
 
   final cameraposition$_.CameraPosition? Function(
     maplibremap$_.MapLibreMap mapLibreMap,
-  )
-  _getCameraPosition;
+  ) _getCameraPosition;
 
   cameraposition$_.CameraPosition? getCameraPosition(
     maplibremap$_.MapLibreMap mapLibreMap,

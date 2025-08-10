@@ -54,8 +54,8 @@ class MapView$OnCameraDidChangeListener extends jni$_.JObject {
 
   @jni$_.internal
   MapView$OnCameraDidChangeListener.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/maps/MapView$OnCameraDidChangeListener',
@@ -69,23 +69,19 @@ class MapView$OnCameraDidChangeListener extends jni$_.JObject {
     r'(Z)V',
   );
 
-  static final _onCameraDidChange =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onCameraDidChange = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Int32,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            int,
+          )>();
 
   /// from: `public abstract void onCameraDidChange(boolean z)`
   void onCameraDidChange(bool z) {
@@ -110,11 +106,10 @@ class MapView$OnCameraDidChangeListener extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -212,9 +207,10 @@ final class $MapView$OnCameraDidChangeListener$NullableType
   @core$_.override
   MapView$OnCameraDidChangeListener? fromReference(
     jni$_.JReference reference,
-  ) => reference.isNull
-      ? null
-      : MapView$OnCameraDidChangeListener.fromReference(reference);
+  ) =>
+      reference.isNull
+          ? null
+          : MapView$OnCameraDidChangeListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -284,8 +280,8 @@ class MapView$OnCameraIsChangingListener extends jni$_.JObject {
 
   @jni$_.internal
   MapView$OnCameraIsChangingListener.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/maps/MapView$OnCameraIsChangingListener',
@@ -300,21 +296,17 @@ class MapView$OnCameraIsChangingListener extends jni$_.JObject {
     r'()V',
   );
 
-  static final _onCameraIsChanging =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onCameraIsChanging = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
 
   /// from: `public abstract void onCameraIsChanging()`
   void onCameraIsChanging() {
@@ -339,11 +331,10 @@ class MapView$OnCameraIsChangingListener extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -437,9 +428,10 @@ final class $MapView$OnCameraIsChangingListener$NullableType
   @core$_.override
   MapView$OnCameraIsChangingListener? fromReference(
     jni$_.JReference reference,
-  ) => reference.isNull
-      ? null
-      : MapView$OnCameraIsChangingListener.fromReference(reference);
+  ) =>
+      reference.isNull
+          ? null
+          : MapView$OnCameraIsChangingListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -478,7 +470,8 @@ final class $MapView$OnCameraIsChangingListener$Type
   @core$_.override
   MapView$OnCameraIsChangingListener fromReference(
     jni$_.JReference reference,
-  ) => MapView$OnCameraIsChangingListener.fromReference(reference);
+  ) =>
+      MapView$OnCameraIsChangingListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -510,8 +503,8 @@ class MapView$OnCameraWillChangeListener extends jni$_.JObject {
 
   @jni$_.internal
   MapView$OnCameraWillChangeListener.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/maps/MapView$OnCameraWillChangeListener',
@@ -526,23 +519,19 @@ class MapView$OnCameraWillChangeListener extends jni$_.JObject {
     r'(Z)V',
   );
 
-  static final _onCameraWillChange =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onCameraWillChange = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Int32,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            int,
+          )>();
 
   /// from: `public abstract void onCameraWillChange(boolean z)`
   void onCameraWillChange(bool z) {
@@ -568,11 +557,10 @@ class MapView$OnCameraWillChangeListener extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -670,9 +658,10 @@ final class $MapView$OnCameraWillChangeListener$NullableType
   @core$_.override
   MapView$OnCameraWillChangeListener? fromReference(
     jni$_.JReference reference,
-  ) => reference.isNull
-      ? null
-      : MapView$OnCameraWillChangeListener.fromReference(reference);
+  ) =>
+      reference.isNull
+          ? null
+          : MapView$OnCameraWillChangeListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -711,7 +700,8 @@ final class $MapView$OnCameraWillChangeListener$Type
   @core$_.override
   MapView$OnCameraWillChangeListener fromReference(
     jni$_.JReference reference,
-  ) => MapView$OnCameraWillChangeListener.fromReference(reference);
+  ) =>
+      MapView$OnCameraWillChangeListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -744,8 +734,8 @@ class MapView$OnCanRemoveUnusedStyleImageListener extends jni$_.JObject {
   @jni$_.internal
   MapView$OnCanRemoveUnusedStyleImageListener.fromReference(
     jni$_.JReference reference,
-  ) : $type = type,
-      super.fromReference(reference);
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/maps/MapView$OnCanRemoveUnusedStyleImageListener',
@@ -762,21 +752,18 @@ class MapView$OnCanRemoveUnusedStyleImageListener extends jni$_.JObject {
 
   static final _onCanRemoveUnusedStyleImage =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallBooleanMethod')
+          .asFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public abstract boolean onCanRemoveUnusedStyleImage(java.lang.String string)`
   bool onCanRemoveUnusedStyleImage(jni$_.JString string) {
@@ -790,7 +777,7 @@ class MapView$OnCanRemoveUnusedStyleImageListener extends jni$_.JObject {
 
   /// Maps a specific port to the implemented interface.
   static final core$_.Map<int, $MapView$OnCanRemoveUnusedStyleImageListener>
-  _$impls = {};
+      _$impls = {};
   static jni$_.JObjectPtr _$invoke(
     int port,
     jni$_.JObjectPtr descriptor,
@@ -803,11 +790,10 @@ class MapView$OnCanRemoveUnusedStyleImageListener extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -899,9 +885,11 @@ final class $MapView$OnCanRemoveUnusedStyleImageListener$NullableType
   @core$_.override
   MapView$OnCanRemoveUnusedStyleImageListener? fromReference(
     jni$_.JReference reference,
-  ) => reference.isNull
-      ? null
-      : MapView$OnCanRemoveUnusedStyleImageListener.fromReference(reference);
+  ) =>
+      reference.isNull
+          ? null
+          : MapView$OnCanRemoveUnusedStyleImageListener.fromReference(
+              reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -909,7 +897,7 @@ final class $MapView$OnCanRemoveUnusedStyleImageListener$NullableType
   @jni$_.internal
   @core$_.override
   jni$_.JObjType<MapView$OnCanRemoveUnusedStyleImageListener?>
-  get nullableType => this;
+      get nullableType => this;
 
   @jni$_.internal
   @core$_.override
@@ -941,7 +929,8 @@ final class $MapView$OnCanRemoveUnusedStyleImageListener$Type
   @core$_.override
   MapView$OnCanRemoveUnusedStyleImageListener fromReference(
     jni$_.JReference reference,
-  ) => MapView$OnCanRemoveUnusedStyleImageListener.fromReference(reference);
+  ) =>
+      MapView$OnCanRemoveUnusedStyleImageListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -949,8 +938,8 @@ final class $MapView$OnCanRemoveUnusedStyleImageListener$Type
   @jni$_.internal
   @core$_.override
   jni$_.JObjType<MapView$OnCanRemoveUnusedStyleImageListener?>
-  get nullableType =>
-      const $MapView$OnCanRemoveUnusedStyleImageListener$NullableType();
+      get nullableType =>
+          const $MapView$OnCanRemoveUnusedStyleImageListener$NullableType();
 
   @jni$_.internal
   @core$_.override
@@ -976,8 +965,8 @@ class MapView$OnDidBecomeIdleListener extends jni$_.JObject {
 
   @jni$_.internal
   MapView$OnDidBecomeIdleListener.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/maps/MapView$OnDidBecomeIdleListener',
@@ -991,21 +980,17 @@ class MapView$OnDidBecomeIdleListener extends jni$_.JObject {
     r'()V',
   );
 
-  static final _onDidBecomeIdle =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onDidBecomeIdle = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
 
   /// from: `public abstract void onDidBecomeIdle()`
   void onDidBecomeIdle() {
@@ -1029,11 +1014,10 @@ class MapView$OnDidBecomeIdleListener extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -1127,8 +1111,8 @@ final class $MapView$OnDidBecomeIdleListener$NullableType
   @core$_.override
   MapView$OnDidBecomeIdleListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
-      ? null
-      : MapView$OnDidBecomeIdleListener.fromReference(reference);
+          ? null
+          : MapView$OnDidBecomeIdleListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1197,8 +1181,8 @@ class MapView$OnDidFailLoadingMapListener extends jni$_.JObject {
 
   @jni$_.internal
   MapView$OnDidFailLoadingMapListener.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/maps/MapView$OnDidFailLoadingMapListener',
@@ -1213,23 +1197,19 @@ class MapView$OnDidFailLoadingMapListener extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _onDidFailLoadingMap =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onDidFailLoadingMap = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public abstract void onDidFailLoadingMap(java.lang.String string)`
   void onDidFailLoadingMap(jni$_.JString? string) {
@@ -1256,11 +1236,10 @@ class MapView$OnDidFailLoadingMapListener extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -1359,9 +1338,10 @@ final class $MapView$OnDidFailLoadingMapListener$NullableType
   @core$_.override
   MapView$OnDidFailLoadingMapListener? fromReference(
     jni$_.JReference reference,
-  ) => reference.isNull
-      ? null
-      : MapView$OnDidFailLoadingMapListener.fromReference(reference);
+  ) =>
+      reference.isNull
+          ? null
+          : MapView$OnDidFailLoadingMapListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1400,7 +1380,8 @@ final class $MapView$OnDidFailLoadingMapListener$Type
   @core$_.override
   MapView$OnDidFailLoadingMapListener fromReference(
     jni$_.JReference reference,
-  ) => MapView$OnDidFailLoadingMapListener.fromReference(reference);
+  ) =>
+      MapView$OnDidFailLoadingMapListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1433,8 +1414,8 @@ class MapView$OnDidFinishLoadingMapListener extends jni$_.JObject {
   @jni$_.internal
   MapView$OnDidFinishLoadingMapListener.fromReference(
     jni$_.JReference reference,
-  ) : $type = type,
-      super.fromReference(reference);
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/maps/MapView$OnDidFinishLoadingMapListener',
@@ -1449,21 +1430,17 @@ class MapView$OnDidFinishLoadingMapListener extends jni$_.JObject {
     r'()V',
   );
 
-  static final _onDidFinishLoadingMap =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onDidFinishLoadingMap = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
 
   /// from: `public abstract void onDidFinishLoadingMap()`
   void onDidFinishLoadingMap() {
@@ -1488,11 +1465,10 @@ class MapView$OnDidFinishLoadingMapListener extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -1586,9 +1562,10 @@ final class $MapView$OnDidFinishLoadingMapListener$NullableType
   @core$_.override
   MapView$OnDidFinishLoadingMapListener? fromReference(
     jni$_.JReference reference,
-  ) => reference.isNull
-      ? null
-      : MapView$OnDidFinishLoadingMapListener.fromReference(reference);
+  ) =>
+      reference.isNull
+          ? null
+          : MapView$OnDidFinishLoadingMapListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1628,7 +1605,8 @@ final class $MapView$OnDidFinishLoadingMapListener$Type
   @core$_.override
   MapView$OnDidFinishLoadingMapListener fromReference(
     jni$_.JReference reference,
-  ) => MapView$OnDidFinishLoadingMapListener.fromReference(reference);
+  ) =>
+      MapView$OnDidFinishLoadingMapListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1661,8 +1639,8 @@ class MapView$OnDidFinishLoadingStyleListener extends jni$_.JObject {
   @jni$_.internal
   MapView$OnDidFinishLoadingStyleListener.fromReference(
     jni$_.JReference reference,
-  ) : $type = type,
-      super.fromReference(reference);
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/maps/MapView$OnDidFinishLoadingStyleListener',
@@ -1677,21 +1655,17 @@ class MapView$OnDidFinishLoadingStyleListener extends jni$_.JObject {
     r'()V',
   );
 
-  static final _onDidFinishLoadingStyle =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onDidFinishLoadingStyle = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
 
   /// from: `public abstract void onDidFinishLoadingStyle()`
   void onDidFinishLoadingStyle() {
@@ -1703,7 +1677,7 @@ class MapView$OnDidFinishLoadingStyleListener extends jni$_.JObject {
 
   /// Maps a specific port to the implemented interface.
   static final core$_.Map<int, $MapView$OnDidFinishLoadingStyleListener>
-  _$impls = {};
+      _$impls = {};
   static jni$_.JObjectPtr _$invoke(
     int port,
     jni$_.JObjectPtr descriptor,
@@ -1716,11 +1690,10 @@ class MapView$OnDidFinishLoadingStyleListener extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -1814,9 +1787,10 @@ final class $MapView$OnDidFinishLoadingStyleListener$NullableType
   @core$_.override
   MapView$OnDidFinishLoadingStyleListener? fromReference(
     jni$_.JReference reference,
-  ) => reference.isNull
-      ? null
-      : MapView$OnDidFinishLoadingStyleListener.fromReference(reference);
+  ) =>
+      reference.isNull
+          ? null
+          : MapView$OnDidFinishLoadingStyleListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1856,7 +1830,8 @@ final class $MapView$OnDidFinishLoadingStyleListener$Type
   @core$_.override
   MapView$OnDidFinishLoadingStyleListener fromReference(
     jni$_.JReference reference,
-  ) => MapView$OnDidFinishLoadingStyleListener.fromReference(reference);
+  ) =>
+      MapView$OnDidFinishLoadingStyleListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1890,8 +1865,8 @@ class MapView$OnDidFinishRenderingFrameListener extends jni$_.JObject {
   @jni$_.internal
   MapView$OnDidFinishRenderingFrameListener.fromReference(
     jni$_.JReference reference,
-  ) : $type = type,
-      super.fromReference(reference);
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/maps/MapView$OnDidFinishRenderingFrameListener',
@@ -1906,25 +1881,21 @@ class MapView$OnDidFinishRenderingFrameListener extends jni$_.JObject {
     r'(ZDD)V',
   );
 
-  static final _onDidFinishRenderingFrame =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onDidFinishRenderingFrame = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Int32, jni$_.Double, jni$_.Double)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-              double,
-              double,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            int,
+            double,
+            double,
+          )>();
 
   /// from: `public abstract void onDidFinishRenderingFrame(boolean z, double d, double d1)`
   void onDidFinishRenderingFrame(bool z, double d, double d1) {
@@ -1939,7 +1910,7 @@ class MapView$OnDidFinishRenderingFrameListener extends jni$_.JObject {
 
   /// Maps a specific port to the implemented interface.
   static final core$_.Map<int, $MapView$OnDidFinishRenderingFrameListener>
-  _$impls = {};
+      _$impls = {};
   static jni$_.JObjectPtr _$invoke(
     int port,
     jni$_.JObjectPtr descriptor,
@@ -1952,11 +1923,10 @@ class MapView$OnDidFinishRenderingFrameListener extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -2027,7 +1997,7 @@ class MapView$OnDidFinishRenderingFrameListener extends jni$_.JObject {
 abstract base mixin class $MapView$OnDidFinishRenderingFrameListener {
   factory $MapView$OnDidFinishRenderingFrameListener({
     required void Function(bool z, double d, double d1)
-    onDidFinishRenderingFrame,
+        onDidFinishRenderingFrame,
     bool onDidFinishRenderingFrame$async,
   }) = _$MapView$OnDidFinishRenderingFrameListener;
 
@@ -2039,7 +2009,7 @@ final class _$MapView$OnDidFinishRenderingFrameListener
     with $MapView$OnDidFinishRenderingFrameListener {
   _$MapView$OnDidFinishRenderingFrameListener({
     required void Function(bool z, double d, double d1)
-    onDidFinishRenderingFrame,
+        onDidFinishRenderingFrame,
     this.onDidFinishRenderingFrame$async = false,
   }) : _onDidFinishRenderingFrame = onDidFinishRenderingFrame;
 
@@ -2065,9 +2035,10 @@ final class $MapView$OnDidFinishRenderingFrameListener$NullableType
   @core$_.override
   MapView$OnDidFinishRenderingFrameListener? fromReference(
     jni$_.JReference reference,
-  ) => reference.isNull
-      ? null
-      : MapView$OnDidFinishRenderingFrameListener.fromReference(reference);
+  ) =>
+      reference.isNull
+          ? null
+          : MapView$OnDidFinishRenderingFrameListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2107,7 +2078,8 @@ final class $MapView$OnDidFinishRenderingFrameListener$Type
   @core$_.override
   MapView$OnDidFinishRenderingFrameListener fromReference(
     jni$_.JReference reference,
-  ) => MapView$OnDidFinishRenderingFrameListener.fromReference(reference);
+  ) =>
+      MapView$OnDidFinishRenderingFrameListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2138,13 +2110,13 @@ class MapView$OnDidFinishRenderingFrameWithStatsListener extends jni$_.JObject {
   @jni$_.internal
   @core$_.override
   final jni$_.JObjType<MapView$OnDidFinishRenderingFrameWithStatsListener>
-  $type;
+      $type;
 
   @jni$_.internal
   MapView$OnDidFinishRenderingFrameWithStatsListener.fromReference(
     jni$_.JReference reference,
-  ) : $type = type,
-      super.fromReference(reference);
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/maps/MapView$OnDidFinishRenderingFrameWithStatsListener',
@@ -2160,24 +2132,20 @@ class MapView$OnDidFinishRenderingFrameWithStatsListener extends jni$_.JObject {
     r'(ZLorg/maplibre/android/maps/RenderingStats;)V',
   );
 
-  static final _onDidFinishRenderingFrame =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onDidFinishRenderingFrame = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Int32, jni$_.Pointer<jni$_.Void>)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            int,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public abstract void onDidFinishRenderingFrame(boolean z, org.maplibre.android.maps.RenderingStats renderingStats)`
   void onDidFinishRenderingFrame(
@@ -2194,11 +2162,9 @@ class MapView$OnDidFinishRenderingFrameWithStatsListener extends jni$_.JObject {
   }
 
   /// Maps a specific port to the implemented interface.
-  static final core$_.Map<
-    int,
-    $MapView$OnDidFinishRenderingFrameWithStatsListener
-  >
-  _$impls = {};
+  static final core$_
+      .Map<int, $MapView$OnDidFinishRenderingFrameWithStatsListener>
+      _$impls = {};
   static jni$_.JObjectPtr _$invoke(
     int port,
     jni$_.JObjectPtr descriptor,
@@ -2211,11 +2177,10 @@ class MapView$OnDidFinishRenderingFrameWithStatsListener extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -2287,8 +2252,7 @@ abstract base mixin class $MapView$OnDidFinishRenderingFrameWithStatsListener {
     required void Function(
       bool z,
       renderingstats$_.RenderingStats? renderingStats,
-    )
-    onDidFinishRenderingFrame,
+    ) onDidFinishRenderingFrame,
     bool onDidFinishRenderingFrame$async,
   }) = _$MapView$OnDidFinishRenderingFrameWithStatsListener;
 
@@ -2305,13 +2269,12 @@ final class _$MapView$OnDidFinishRenderingFrameWithStatsListener
     required void Function(
       bool z,
       renderingstats$_.RenderingStats? renderingStats,
-    )
-    onDidFinishRenderingFrame,
+    ) onDidFinishRenderingFrame,
     this.onDidFinishRenderingFrame$async = false,
   }) : _onDidFinishRenderingFrame = onDidFinishRenderingFrame;
 
   final void Function(bool z, renderingstats$_.RenderingStats? renderingStats)
-  _onDidFinishRenderingFrame;
+      _onDidFinishRenderingFrame;
   final bool onDidFinishRenderingFrame$async;
 
   void onDidFinishRenderingFrame(
@@ -2323,8 +2286,8 @@ final class _$MapView$OnDidFinishRenderingFrameWithStatsListener
 }
 
 final class $MapView$OnDidFinishRenderingFrameWithStatsListener$NullableType
-    extends
-        jni$_.JObjType<MapView$OnDidFinishRenderingFrameWithStatsListener?> {
+    extends jni$_
+    .JObjType<MapView$OnDidFinishRenderingFrameWithStatsListener?> {
   @jni$_.internal
   const $MapView$OnDidFinishRenderingFrameWithStatsListener$NullableType();
 
@@ -2337,11 +2300,12 @@ final class $MapView$OnDidFinishRenderingFrameWithStatsListener$NullableType
   @core$_.override
   MapView$OnDidFinishRenderingFrameWithStatsListener? fromReference(
     jni$_.JReference reference,
-  ) => reference.isNull
-      ? null
-      : MapView$OnDidFinishRenderingFrameWithStatsListener.fromReference(
-          reference,
-        );
+  ) =>
+      reference.isNull
+          ? null
+          : MapView$OnDidFinishRenderingFrameWithStatsListener.fromReference(
+              reference,
+            );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2349,7 +2313,7 @@ final class $MapView$OnDidFinishRenderingFrameWithStatsListener$NullableType
   @jni$_.internal
   @core$_.override
   jni$_.JObjType<MapView$OnDidFinishRenderingFrameWithStatsListener?>
-  get nullableType => this;
+      get nullableType => this;
 
   @jni$_.internal
   @core$_.override
@@ -2383,9 +2347,10 @@ final class $MapView$OnDidFinishRenderingFrameWithStatsListener$Type
   @core$_.override
   MapView$OnDidFinishRenderingFrameWithStatsListener fromReference(
     jni$_.JReference reference,
-  ) => MapView$OnDidFinishRenderingFrameWithStatsListener.fromReference(
-    reference,
-  );
+  ) =>
+      MapView$OnDidFinishRenderingFrameWithStatsListener.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2393,8 +2358,8 @@ final class $MapView$OnDidFinishRenderingFrameWithStatsListener$Type
   @jni$_.internal
   @core$_.override
   jni$_.JObjType<MapView$OnDidFinishRenderingFrameWithStatsListener?>
-  get nullableType =>
-      const $MapView$OnDidFinishRenderingFrameWithStatsListener$NullableType();
+      get nullableType =>
+          const $MapView$OnDidFinishRenderingFrameWithStatsListener$NullableType();
 
   @jni$_.internal
   @core$_.override
@@ -2421,8 +2386,8 @@ class MapView$OnDidFinishRenderingMapListener extends jni$_.JObject {
   @jni$_.internal
   MapView$OnDidFinishRenderingMapListener.fromReference(
     jni$_.JReference reference,
-  ) : $type = type,
-      super.fromReference(reference);
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/maps/MapView$OnDidFinishRenderingMapListener',
@@ -2437,23 +2402,19 @@ class MapView$OnDidFinishRenderingMapListener extends jni$_.JObject {
     r'(Z)V',
   );
 
-  static final _onDidFinishRenderingMap =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onDidFinishRenderingMap = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Int32,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            int,
+          )>();
 
   /// from: `public abstract void onDidFinishRenderingMap(boolean z)`
   void onDidFinishRenderingMap(bool z) {
@@ -2466,7 +2427,7 @@ class MapView$OnDidFinishRenderingMapListener extends jni$_.JObject {
 
   /// Maps a specific port to the implemented interface.
   static final core$_.Map<int, $MapView$OnDidFinishRenderingMapListener>
-  _$impls = {};
+      _$impls = {};
   static jni$_.JObjectPtr _$invoke(
     int port,
     jni$_.JObjectPtr descriptor,
@@ -2479,11 +2440,10 @@ class MapView$OnDidFinishRenderingMapListener extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -2581,9 +2541,10 @@ final class $MapView$OnDidFinishRenderingMapListener$NullableType
   @core$_.override
   MapView$OnDidFinishRenderingMapListener? fromReference(
     jni$_.JReference reference,
-  ) => reference.isNull
-      ? null
-      : MapView$OnDidFinishRenderingMapListener.fromReference(reference);
+  ) =>
+      reference.isNull
+          ? null
+          : MapView$OnDidFinishRenderingMapListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2623,7 +2584,8 @@ final class $MapView$OnDidFinishRenderingMapListener$Type
   @core$_.override
   MapView$OnDidFinishRenderingMapListener fromReference(
     jni$_.JReference reference,
-  ) => MapView$OnDidFinishRenderingMapListener.fromReference(reference);
+  ) =>
+      MapView$OnDidFinishRenderingMapListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2656,8 +2618,8 @@ class MapView$OnGlyphsErrorListener extends jni$_.JObject {
 
   @jni$_.internal
   MapView$OnGlyphsErrorListener.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/maps/MapView$OnGlyphsErrorListener',
@@ -2671,27 +2633,22 @@ class MapView$OnGlyphsErrorListener extends jni$_.JObject {
     r'([Ljava/lang/String;II)V',
   );
 
-  static final _onGlyphsError =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onGlyphsError = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<
-                  (jni$_.Pointer<jni$_.Void>, jni$_.Int32, jni$_.Int32)
-                >,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              int,
-              int,
-            )
-          >();
+                    (jni$_.Pointer<jni$_.Void>, jni$_.Int32, jni$_.Int32)>,
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+            int,
+            int,
+          )>();
 
   /// from: `public abstract void onGlyphsError(java.lang.String[] strings, int i, int i1)`
   void onGlyphsError(jni$_.JArray<jni$_.JString?> strings, int i, int i1) {
@@ -2719,11 +2676,10 @@ class MapView$OnGlyphsErrorListener extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -2790,7 +2746,7 @@ class MapView$OnGlyphsErrorListener extends jni$_.JObject {
 abstract base mixin class $MapView$OnGlyphsErrorListener {
   factory $MapView$OnGlyphsErrorListener({
     required void Function(jni$_.JArray<jni$_.JString?> strings, int i, int i1)
-    onGlyphsError,
+        onGlyphsError,
     bool onGlyphsError$async,
   }) = _$MapView$OnGlyphsErrorListener;
 
@@ -2802,12 +2758,12 @@ final class _$MapView$OnGlyphsErrorListener
     with $MapView$OnGlyphsErrorListener {
   _$MapView$OnGlyphsErrorListener({
     required void Function(jni$_.JArray<jni$_.JString?> strings, int i, int i1)
-    onGlyphsError,
+        onGlyphsError,
     this.onGlyphsError$async = false,
   }) : _onGlyphsError = onGlyphsError;
 
   final void Function(jni$_.JArray<jni$_.JString?> strings, int i, int i1)
-  _onGlyphsError;
+      _onGlyphsError;
   final bool onGlyphsError$async;
 
   void onGlyphsError(jni$_.JArray<jni$_.JString?> strings, int i, int i1) {
@@ -2829,8 +2785,8 @@ final class $MapView$OnGlyphsErrorListener$NullableType
   @core$_.override
   MapView$OnGlyphsErrorListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
-      ? null
-      : MapView$OnGlyphsErrorListener.fromReference(reference);
+          ? null
+          : MapView$OnGlyphsErrorListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2898,8 +2854,8 @@ class MapView$OnGlyphsLoadedListener extends jni$_.JObject {
 
   @jni$_.internal
   MapView$OnGlyphsLoadedListener.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/maps/MapView$OnGlyphsLoadedListener',
@@ -2913,27 +2869,22 @@ class MapView$OnGlyphsLoadedListener extends jni$_.JObject {
     r'([Ljava/lang/String;II)V',
   );
 
-  static final _onGlyphsLoaded =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onGlyphsLoaded = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<
-                  (jni$_.Pointer<jni$_.Void>, jni$_.Int32, jni$_.Int32)
-                >,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              int,
-              int,
-            )
-          >();
+                    (jni$_.Pointer<jni$_.Void>, jni$_.Int32, jni$_.Int32)>,
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+            int,
+            int,
+          )>();
 
   /// from: `public abstract void onGlyphsLoaded(java.lang.String[] strings, int i, int i1)`
   void onGlyphsLoaded(jni$_.JArray<jni$_.JString?> strings, int i, int i1) {
@@ -2961,11 +2912,10 @@ class MapView$OnGlyphsLoadedListener extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -3037,7 +2987,7 @@ class MapView$OnGlyphsLoadedListener extends jni$_.JObject {
 abstract base mixin class $MapView$OnGlyphsLoadedListener {
   factory $MapView$OnGlyphsLoadedListener({
     required void Function(jni$_.JArray<jni$_.JString?> strings, int i, int i1)
-    onGlyphsLoaded,
+        onGlyphsLoaded,
     bool onGlyphsLoaded$async,
   }) = _$MapView$OnGlyphsLoadedListener;
 
@@ -3049,12 +2999,12 @@ final class _$MapView$OnGlyphsLoadedListener
     with $MapView$OnGlyphsLoadedListener {
   _$MapView$OnGlyphsLoadedListener({
     required void Function(jni$_.JArray<jni$_.JString?> strings, int i, int i1)
-    onGlyphsLoaded,
+        onGlyphsLoaded,
     this.onGlyphsLoaded$async = false,
   }) : _onGlyphsLoaded = onGlyphsLoaded;
 
   final void Function(jni$_.JArray<jni$_.JString?> strings, int i, int i1)
-  _onGlyphsLoaded;
+      _onGlyphsLoaded;
   final bool onGlyphsLoaded$async;
 
   void onGlyphsLoaded(jni$_.JArray<jni$_.JString?> strings, int i, int i1) {
@@ -3076,8 +3026,8 @@ final class $MapView$OnGlyphsLoadedListener$NullableType
   @core$_.override
   MapView$OnGlyphsLoadedListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
-      ? null
-      : MapView$OnGlyphsLoadedListener.fromReference(reference);
+          ? null
+          : MapView$OnGlyphsLoadedListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3146,8 +3096,8 @@ class MapView$OnGlyphsRequestedListener extends jni$_.JObject {
 
   @jni$_.internal
   MapView$OnGlyphsRequestedListener.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/maps/MapView$OnGlyphsRequestedListener',
@@ -3161,27 +3111,22 @@ class MapView$OnGlyphsRequestedListener extends jni$_.JObject {
     r'([Ljava/lang/String;II)V',
   );
 
-  static final _onGlyphsRequested =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onGlyphsRequested = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<
-                  (jni$_.Pointer<jni$_.Void>, jni$_.Int32, jni$_.Int32)
-                >,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              int,
-              int,
-            )
-          >();
+                    (jni$_.Pointer<jni$_.Void>, jni$_.Int32, jni$_.Int32)>,
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+            int,
+            int,
+          )>();
 
   /// from: `public abstract void onGlyphsRequested(java.lang.String[] strings, int i, int i1)`
   void onGlyphsRequested(jni$_.JArray<jni$_.JString?> strings, int i, int i1) {
@@ -3209,11 +3154,10 @@ class MapView$OnGlyphsRequestedListener extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -3285,7 +3229,7 @@ class MapView$OnGlyphsRequestedListener extends jni$_.JObject {
 abstract base mixin class $MapView$OnGlyphsRequestedListener {
   factory $MapView$OnGlyphsRequestedListener({
     required void Function(jni$_.JArray<jni$_.JString?> strings, int i, int i1)
-    onGlyphsRequested,
+        onGlyphsRequested,
     bool onGlyphsRequested$async,
   }) = _$MapView$OnGlyphsRequestedListener;
 
@@ -3297,12 +3241,12 @@ final class _$MapView$OnGlyphsRequestedListener
     with $MapView$OnGlyphsRequestedListener {
   _$MapView$OnGlyphsRequestedListener({
     required void Function(jni$_.JArray<jni$_.JString?> strings, int i, int i1)
-    onGlyphsRequested,
+        onGlyphsRequested,
     this.onGlyphsRequested$async = false,
   }) : _onGlyphsRequested = onGlyphsRequested;
 
   final void Function(jni$_.JArray<jni$_.JString?> strings, int i, int i1)
-  _onGlyphsRequested;
+      _onGlyphsRequested;
   final bool onGlyphsRequested$async;
 
   void onGlyphsRequested(jni$_.JArray<jni$_.JString?> strings, int i, int i1) {
@@ -3324,9 +3268,10 @@ final class $MapView$OnGlyphsRequestedListener$NullableType
   @core$_.override
   MapView$OnGlyphsRequestedListener? fromReference(
     jni$_.JReference reference,
-  ) => reference.isNull
-      ? null
-      : MapView$OnGlyphsRequestedListener.fromReference(reference);
+  ) =>
+      reference.isNull
+          ? null
+          : MapView$OnGlyphsRequestedListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3396,8 +3341,8 @@ class MapView$OnPostCompileShaderListener extends jni$_.JObject {
 
   @jni$_.internal
   MapView$OnPostCompileShaderListener.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/maps/MapView$OnPostCompileShaderListener',
@@ -3412,27 +3357,22 @@ class MapView$OnPostCompileShaderListener extends jni$_.JObject {
     r'(IILjava/lang/String;)V',
   );
 
-  static final _onPostCompileShader =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onPostCompileShader = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<
-                  (jni$_.Int32, jni$_.Int32, jni$_.Pointer<jni$_.Void>)
-                >,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-              int,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                    (jni$_.Int32, jni$_.Int32, jni$_.Pointer<jni$_.Void>)>,
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            int,
+            int,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public abstract void onPostCompileShader(int i, int i1, java.lang.String string)`
   void onPostCompileShader(int i, int i1, jni$_.JString? string) {
@@ -3461,11 +3401,10 @@ class MapView$OnPostCompileShaderListener extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -3534,7 +3473,7 @@ class MapView$OnPostCompileShaderListener extends jni$_.JObject {
 abstract base mixin class $MapView$OnPostCompileShaderListener {
   factory $MapView$OnPostCompileShaderListener({
     required void Function(int i, int i1, jni$_.JString? string)
-    onPostCompileShader,
+        onPostCompileShader,
     bool onPostCompileShader$async,
   }) = _$MapView$OnPostCompileShaderListener;
 
@@ -3546,12 +3485,12 @@ final class _$MapView$OnPostCompileShaderListener
     with $MapView$OnPostCompileShaderListener {
   _$MapView$OnPostCompileShaderListener({
     required void Function(int i, int i1, jni$_.JString? string)
-    onPostCompileShader,
+        onPostCompileShader,
     this.onPostCompileShader$async = false,
   }) : _onPostCompileShader = onPostCompileShader;
 
   final void Function(int i, int i1, jni$_.JString? string)
-  _onPostCompileShader;
+      _onPostCompileShader;
   final bool onPostCompileShader$async;
 
   void onPostCompileShader(int i, int i1, jni$_.JString? string) {
@@ -3573,9 +3512,10 @@ final class $MapView$OnPostCompileShaderListener$NullableType
   @core$_.override
   MapView$OnPostCompileShaderListener? fromReference(
     jni$_.JReference reference,
-  ) => reference.isNull
-      ? null
-      : MapView$OnPostCompileShaderListener.fromReference(reference);
+  ) =>
+      reference.isNull
+          ? null
+          : MapView$OnPostCompileShaderListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3614,7 +3554,8 @@ final class $MapView$OnPostCompileShaderListener$Type
   @core$_.override
   MapView$OnPostCompileShaderListener fromReference(
     jni$_.JReference reference,
-  ) => MapView$OnPostCompileShaderListener.fromReference(reference);
+  ) =>
+      MapView$OnPostCompileShaderListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3646,8 +3587,8 @@ class MapView$OnPreCompileShaderListener extends jni$_.JObject {
 
   @jni$_.internal
   MapView$OnPreCompileShaderListener.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/maps/MapView$OnPreCompileShaderListener',
@@ -3662,27 +3603,22 @@ class MapView$OnPreCompileShaderListener extends jni$_.JObject {
     r'(IILjava/lang/String;)V',
   );
 
-  static final _onPreCompileShader =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onPreCompileShader = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<
-                  (jni$_.Int32, jni$_.Int32, jni$_.Pointer<jni$_.Void>)
-                >,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-              int,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                    (jni$_.Int32, jni$_.Int32, jni$_.Pointer<jni$_.Void>)>,
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            int,
+            int,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public abstract void onPreCompileShader(int i, int i1, java.lang.String string)`
   void onPreCompileShader(int i, int i1, jni$_.JString? string) {
@@ -3711,11 +3647,10 @@ class MapView$OnPreCompileShaderListener extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -3784,7 +3719,7 @@ class MapView$OnPreCompileShaderListener extends jni$_.JObject {
 abstract base mixin class $MapView$OnPreCompileShaderListener {
   factory $MapView$OnPreCompileShaderListener({
     required void Function(int i, int i1, jni$_.JString? string)
-    onPreCompileShader,
+        onPreCompileShader,
     bool onPreCompileShader$async,
   }) = _$MapView$OnPreCompileShaderListener;
 
@@ -3796,7 +3731,7 @@ final class _$MapView$OnPreCompileShaderListener
     with $MapView$OnPreCompileShaderListener {
   _$MapView$OnPreCompileShaderListener({
     required void Function(int i, int i1, jni$_.JString? string)
-    onPreCompileShader,
+        onPreCompileShader,
     this.onPreCompileShader$async = false,
   }) : _onPreCompileShader = onPreCompileShader;
 
@@ -3822,9 +3757,10 @@ final class $MapView$OnPreCompileShaderListener$NullableType
   @core$_.override
   MapView$OnPreCompileShaderListener? fromReference(
     jni$_.JReference reference,
-  ) => reference.isNull
-      ? null
-      : MapView$OnPreCompileShaderListener.fromReference(reference);
+  ) =>
+      reference.isNull
+          ? null
+          : MapView$OnPreCompileShaderListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3863,7 +3799,8 @@ final class $MapView$OnPreCompileShaderListener$Type
   @core$_.override
   MapView$OnPreCompileShaderListener fromReference(
     jni$_.JReference reference,
-  ) => MapView$OnPreCompileShaderListener.fromReference(reference);
+  ) =>
+      MapView$OnPreCompileShaderListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3896,8 +3833,8 @@ class MapView$OnShaderCompileFailedListener extends jni$_.JObject {
   @jni$_.internal
   MapView$OnShaderCompileFailedListener.fromReference(
     jni$_.JReference reference,
-  ) : $type = type,
-      super.fromReference(reference);
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/maps/MapView$OnShaderCompileFailedListener',
@@ -3912,27 +3849,22 @@ class MapView$OnShaderCompileFailedListener extends jni$_.JObject {
     r'(IILjava/lang/String;)V',
   );
 
-  static final _onShaderCompileFailed =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onShaderCompileFailed = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<
-                  (jni$_.Int32, jni$_.Int32, jni$_.Pointer<jni$_.Void>)
-                >,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-              int,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                    (jni$_.Int32, jni$_.Int32, jni$_.Pointer<jni$_.Void>)>,
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            int,
+            int,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public abstract void onShaderCompileFailed(int i, int i1, java.lang.String string)`
   void onShaderCompileFailed(int i, int i1, jni$_.JString? string) {
@@ -3961,11 +3893,10 @@ class MapView$OnShaderCompileFailedListener extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -4034,7 +3965,7 @@ class MapView$OnShaderCompileFailedListener extends jni$_.JObject {
 abstract base mixin class $MapView$OnShaderCompileFailedListener {
   factory $MapView$OnShaderCompileFailedListener({
     required void Function(int i, int i1, jni$_.JString? string)
-    onShaderCompileFailed,
+        onShaderCompileFailed,
     bool onShaderCompileFailed$async,
   }) = _$MapView$OnShaderCompileFailedListener;
 
@@ -4046,12 +3977,12 @@ final class _$MapView$OnShaderCompileFailedListener
     with $MapView$OnShaderCompileFailedListener {
   _$MapView$OnShaderCompileFailedListener({
     required void Function(int i, int i1, jni$_.JString? string)
-    onShaderCompileFailed,
+        onShaderCompileFailed,
     this.onShaderCompileFailed$async = false,
   }) : _onShaderCompileFailed = onShaderCompileFailed;
 
   final void Function(int i, int i1, jni$_.JString? string)
-  _onShaderCompileFailed;
+      _onShaderCompileFailed;
   final bool onShaderCompileFailed$async;
 
   void onShaderCompileFailed(int i, int i1, jni$_.JString? string) {
@@ -4073,9 +4004,10 @@ final class $MapView$OnShaderCompileFailedListener$NullableType
   @core$_.override
   MapView$OnShaderCompileFailedListener? fromReference(
     jni$_.JReference reference,
-  ) => reference.isNull
-      ? null
-      : MapView$OnShaderCompileFailedListener.fromReference(reference);
+  ) =>
+      reference.isNull
+          ? null
+          : MapView$OnShaderCompileFailedListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4115,7 +4047,8 @@ final class $MapView$OnShaderCompileFailedListener$Type
   @core$_.override
   MapView$OnShaderCompileFailedListener fromReference(
     jni$_.JReference reference,
-  ) => MapView$OnShaderCompileFailedListener.fromReference(reference);
+  ) =>
+      MapView$OnShaderCompileFailedListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4147,8 +4080,8 @@ class MapView$OnSourceChangedListener extends jni$_.JObject {
 
   @jni$_.internal
   MapView$OnSourceChangedListener.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/maps/MapView$OnSourceChangedListener',
@@ -4162,23 +4095,19 @@ class MapView$OnSourceChangedListener extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _onSourceChangedListener =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onSourceChangedListener = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public abstract void onSourceChangedListener(java.lang.String string)`
   void onSourceChangedListener(jni$_.JString? string) {
@@ -4204,11 +4133,10 @@ class MapView$OnSourceChangedListener extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -4307,8 +4235,8 @@ final class $MapView$OnSourceChangedListener$NullableType
   @core$_.override
   MapView$OnSourceChangedListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
-      ? null
-      : MapView$OnSourceChangedListener.fromReference(reference);
+          ? null
+          : MapView$OnSourceChangedListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4377,8 +4305,8 @@ class MapView$OnSpriteErrorListener extends jni$_.JObject {
 
   @jni$_.internal
   MapView$OnSpriteErrorListener.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/maps/MapView$OnSpriteErrorListener',
@@ -4392,26 +4320,21 @@ class MapView$OnSpriteErrorListener extends jni$_.JObject {
     r'(Ljava/lang/String;Ljava/lang/String;)V',
   );
 
-  static final _onSpriteError =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onSpriteError = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<
-                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
-                >,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                    (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)>,
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public abstract void onSpriteError(java.lang.String string, java.lang.String string1)`
   void onSpriteError(jni$_.JString string, jni$_.JString string1) {
@@ -4439,11 +4362,10 @@ class MapView$OnSpriteErrorListener extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -4505,7 +4427,7 @@ class MapView$OnSpriteErrorListener extends jni$_.JObject {
 abstract base mixin class $MapView$OnSpriteErrorListener {
   factory $MapView$OnSpriteErrorListener({
     required void Function(jni$_.JString string, jni$_.JString string1)
-    onSpriteError,
+        onSpriteError,
     bool onSpriteError$async,
   }) = _$MapView$OnSpriteErrorListener;
 
@@ -4517,12 +4439,12 @@ final class _$MapView$OnSpriteErrorListener
     with $MapView$OnSpriteErrorListener {
   _$MapView$OnSpriteErrorListener({
     required void Function(jni$_.JString string, jni$_.JString string1)
-    onSpriteError,
+        onSpriteError,
     this.onSpriteError$async = false,
   }) : _onSpriteError = onSpriteError;
 
   final void Function(jni$_.JString string, jni$_.JString string1)
-  _onSpriteError;
+      _onSpriteError;
   final bool onSpriteError$async;
 
   void onSpriteError(jni$_.JString string, jni$_.JString string1) {
@@ -4544,8 +4466,8 @@ final class $MapView$OnSpriteErrorListener$NullableType
   @core$_.override
   MapView$OnSpriteErrorListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
-      ? null
-      : MapView$OnSpriteErrorListener.fromReference(reference);
+          ? null
+          : MapView$OnSpriteErrorListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4613,8 +4535,8 @@ class MapView$OnSpriteLoadedListener extends jni$_.JObject {
 
   @jni$_.internal
   MapView$OnSpriteLoadedListener.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/maps/MapView$OnSpriteLoadedListener',
@@ -4628,26 +4550,21 @@ class MapView$OnSpriteLoadedListener extends jni$_.JObject {
     r'(Ljava/lang/String;Ljava/lang/String;)V',
   );
 
-  static final _onSpriteLoaded =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onSpriteLoaded = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<
-                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
-                >,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                    (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)>,
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public abstract void onSpriteLoaded(java.lang.String string, java.lang.String string1)`
   void onSpriteLoaded(jni$_.JString string, jni$_.JString string1) {
@@ -4675,11 +4592,10 @@ class MapView$OnSpriteLoadedListener extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -4743,7 +4659,7 @@ class MapView$OnSpriteLoadedListener extends jni$_.JObject {
 abstract base mixin class $MapView$OnSpriteLoadedListener {
   factory $MapView$OnSpriteLoadedListener({
     required void Function(jni$_.JString string, jni$_.JString string1)
-    onSpriteLoaded,
+        onSpriteLoaded,
     bool onSpriteLoaded$async,
   }) = _$MapView$OnSpriteLoadedListener;
 
@@ -4755,12 +4671,12 @@ final class _$MapView$OnSpriteLoadedListener
     with $MapView$OnSpriteLoadedListener {
   _$MapView$OnSpriteLoadedListener({
     required void Function(jni$_.JString string, jni$_.JString string1)
-    onSpriteLoaded,
+        onSpriteLoaded,
     this.onSpriteLoaded$async = false,
   }) : _onSpriteLoaded = onSpriteLoaded;
 
   final void Function(jni$_.JString string, jni$_.JString string1)
-  _onSpriteLoaded;
+      _onSpriteLoaded;
   final bool onSpriteLoaded$async;
 
   void onSpriteLoaded(jni$_.JString string, jni$_.JString string1) {
@@ -4782,8 +4698,8 @@ final class $MapView$OnSpriteLoadedListener$NullableType
   @core$_.override
   MapView$OnSpriteLoadedListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
-      ? null
-      : MapView$OnSpriteLoadedListener.fromReference(reference);
+          ? null
+          : MapView$OnSpriteLoadedListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4852,8 +4768,8 @@ class MapView$OnSpriteRequestedListener extends jni$_.JObject {
 
   @jni$_.internal
   MapView$OnSpriteRequestedListener.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/maps/MapView$OnSpriteRequestedListener',
@@ -4867,26 +4783,21 @@ class MapView$OnSpriteRequestedListener extends jni$_.JObject {
     r'(Ljava/lang/String;Ljava/lang/String;)V',
   );
 
-  static final _onSpriteRequested =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onSpriteRequested = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<
-                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
-                >,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                    (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)>,
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public abstract void onSpriteRequested(java.lang.String string, java.lang.String string1)`
   void onSpriteRequested(jni$_.JString string, jni$_.JString string1) {
@@ -4914,11 +4825,10 @@ class MapView$OnSpriteRequestedListener extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -4982,7 +4892,7 @@ class MapView$OnSpriteRequestedListener extends jni$_.JObject {
 abstract base mixin class $MapView$OnSpriteRequestedListener {
   factory $MapView$OnSpriteRequestedListener({
     required void Function(jni$_.JString string, jni$_.JString string1)
-    onSpriteRequested,
+        onSpriteRequested,
     bool onSpriteRequested$async,
   }) = _$MapView$OnSpriteRequestedListener;
 
@@ -4994,12 +4904,12 @@ final class _$MapView$OnSpriteRequestedListener
     with $MapView$OnSpriteRequestedListener {
   _$MapView$OnSpriteRequestedListener({
     required void Function(jni$_.JString string, jni$_.JString string1)
-    onSpriteRequested,
+        onSpriteRequested,
     this.onSpriteRequested$async = false,
   }) : _onSpriteRequested = onSpriteRequested;
 
   final void Function(jni$_.JString string, jni$_.JString string1)
-  _onSpriteRequested;
+      _onSpriteRequested;
   final bool onSpriteRequested$async;
 
   void onSpriteRequested(jni$_.JString string, jni$_.JString string1) {
@@ -5021,9 +4931,10 @@ final class $MapView$OnSpriteRequestedListener$NullableType
   @core$_.override
   MapView$OnSpriteRequestedListener? fromReference(
     jni$_.JReference reference,
-  ) => reference.isNull
-      ? null
-      : MapView$OnSpriteRequestedListener.fromReference(reference);
+  ) =>
+      reference.isNull
+          ? null
+          : MapView$OnSpriteRequestedListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -5093,8 +5004,8 @@ class MapView$OnStyleImageMissingListener extends jni$_.JObject {
 
   @jni$_.internal
   MapView$OnStyleImageMissingListener.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/maps/MapView$OnStyleImageMissingListener',
@@ -5109,23 +5020,19 @@ class MapView$OnStyleImageMissingListener extends jni$_.JObject {
     r'(Ljava/lang/String;)V',
   );
 
-  static final _onStyleImageMissing =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onStyleImageMissing = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public abstract void onStyleImageMissing(java.lang.String string)`
   void onStyleImageMissing(jni$_.JString string) {
@@ -5152,11 +5059,10 @@ class MapView$OnStyleImageMissingListener extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -5255,9 +5161,10 @@ final class $MapView$OnStyleImageMissingListener$NullableType
   @core$_.override
   MapView$OnStyleImageMissingListener? fromReference(
     jni$_.JReference reference,
-  ) => reference.isNull
-      ? null
-      : MapView$OnStyleImageMissingListener.fromReference(reference);
+  ) =>
+      reference.isNull
+          ? null
+          : MapView$OnStyleImageMissingListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -5296,7 +5203,8 @@ final class $MapView$OnStyleImageMissingListener$Type
   @core$_.override
   MapView$OnStyleImageMissingListener fromReference(
     jni$_.JReference reference,
-  ) => MapView$OnStyleImageMissingListener.fromReference(reference);
+  ) =>
+      MapView$OnStyleImageMissingListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -5328,8 +5236,8 @@ class MapView$OnTileActionListener extends jni$_.JObject {
 
   @jni$_.internal
   MapView$OnTileActionListener.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/maps/MapView$OnTileActionListener',
@@ -5343,39 +5251,34 @@ class MapView$OnTileActionListener extends jni$_.JObject {
     r'(Lorg/maplibre/android/tile/TileOperation;IIIIILjava/lang/String;)V',
   );
 
-  static final _onTileAction =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onTileAction = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<
-                  (
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.Int32,
-                    jni$_.Int32,
-                    jni$_.Int32,
-                    jni$_.Int32,
-                    jni$_.Int32,
-                    jni$_.Pointer<jni$_.Void>,
-                  )
-                >,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              int,
-              int,
-              int,
-              int,
-              int,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                    (
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.Int32,
+                      jni$_.Int32,
+                      jni$_.Int32,
+                      jni$_.Int32,
+                      jni$_.Int32,
+                      jni$_.Pointer<jni$_.Void>,
+                    )>,
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+            int,
+            int,
+            int,
+            int,
+            int,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public abstract void onTileAction(org.maplibre.android.tile.TileOperation tileOperation, int i, int i1, int i2, int i3, int i4, java.lang.String string)`
   void onTileAction(
@@ -5416,11 +5319,10 @@ class MapView$OnTileActionListener extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -5505,8 +5407,7 @@ abstract base mixin class $MapView$OnTileActionListener {
       int i3,
       int i4,
       jni$_.JString? string,
-    )
-    onTileAction,
+    ) onTileAction,
     bool onTileAction$async,
   }) = _$MapView$OnTileActionListener;
 
@@ -5532,8 +5433,7 @@ final class _$MapView$OnTileActionListener with $MapView$OnTileActionListener {
       int i3,
       int i4,
       jni$_.JString? string,
-    )
-    onTileAction,
+    ) onTileAction,
     this.onTileAction$async = false,
   }) : _onTileAction = onTileAction;
 
@@ -5545,8 +5445,7 @@ final class _$MapView$OnTileActionListener with $MapView$OnTileActionListener {
     int i3,
     int i4,
     jni$_.JString? string,
-  )
-  _onTileAction;
+  ) _onTileAction;
   final bool onTileAction$async;
 
   void onTileAction(
@@ -5576,8 +5475,8 @@ final class $MapView$OnTileActionListener$NullableType
   @core$_.override
   MapView$OnTileActionListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
-      ? null
-      : MapView$OnTileActionListener.fromReference(reference);
+          ? null
+          : MapView$OnTileActionListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -5646,8 +5545,8 @@ class MapView$OnWillStartLoadingMapListener extends jni$_.JObject {
   @jni$_.internal
   MapView$OnWillStartLoadingMapListener.fromReference(
     jni$_.JReference reference,
-  ) : $type = type,
-      super.fromReference(reference);
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/maps/MapView$OnWillStartLoadingMapListener',
@@ -5662,21 +5561,17 @@ class MapView$OnWillStartLoadingMapListener extends jni$_.JObject {
     r'()V',
   );
 
-  static final _onWillStartLoadingMap =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onWillStartLoadingMap = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
 
   /// from: `public abstract void onWillStartLoadingMap()`
   void onWillStartLoadingMap() {
@@ -5701,11 +5596,10 @@ class MapView$OnWillStartLoadingMapListener extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -5799,9 +5693,10 @@ final class $MapView$OnWillStartLoadingMapListener$NullableType
   @core$_.override
   MapView$OnWillStartLoadingMapListener? fromReference(
     jni$_.JReference reference,
-  ) => reference.isNull
-      ? null
-      : MapView$OnWillStartLoadingMapListener.fromReference(reference);
+  ) =>
+      reference.isNull
+          ? null
+          : MapView$OnWillStartLoadingMapListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -5841,7 +5736,8 @@ final class $MapView$OnWillStartLoadingMapListener$Type
   @core$_.override
   MapView$OnWillStartLoadingMapListener fromReference(
     jni$_.JReference reference,
-  ) => MapView$OnWillStartLoadingMapListener.fromReference(reference);
+  ) =>
+      MapView$OnWillStartLoadingMapListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -5874,8 +5770,8 @@ class MapView$OnWillStartRenderingFrameListener extends jni$_.JObject {
   @jni$_.internal
   MapView$OnWillStartRenderingFrameListener.fromReference(
     jni$_.JReference reference,
-  ) : $type = type,
-      super.fromReference(reference);
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/maps/MapView$OnWillStartRenderingFrameListener',
@@ -5890,21 +5786,17 @@ class MapView$OnWillStartRenderingFrameListener extends jni$_.JObject {
     r'()V',
   );
 
-  static final _onWillStartRenderingFrame =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onWillStartRenderingFrame = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
 
   /// from: `public abstract void onWillStartRenderingFrame()`
   void onWillStartRenderingFrame() {
@@ -5916,7 +5808,7 @@ class MapView$OnWillStartRenderingFrameListener extends jni$_.JObject {
 
   /// Maps a specific port to the implemented interface.
   static final core$_.Map<int, $MapView$OnWillStartRenderingFrameListener>
-  _$impls = {};
+      _$impls = {};
   static jni$_.JObjectPtr _$invoke(
     int port,
     jni$_.JObjectPtr descriptor,
@@ -5929,11 +5821,10 @@ class MapView$OnWillStartRenderingFrameListener extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -6030,9 +5921,10 @@ final class $MapView$OnWillStartRenderingFrameListener$NullableType
   @core$_.override
   MapView$OnWillStartRenderingFrameListener? fromReference(
     jni$_.JReference reference,
-  ) => reference.isNull
-      ? null
-      : MapView$OnWillStartRenderingFrameListener.fromReference(reference);
+  ) =>
+      reference.isNull
+          ? null
+          : MapView$OnWillStartRenderingFrameListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -6072,7 +5964,8 @@ final class $MapView$OnWillStartRenderingFrameListener$Type
   @core$_.override
   MapView$OnWillStartRenderingFrameListener fromReference(
     jni$_.JReference reference,
-  ) => MapView$OnWillStartRenderingFrameListener.fromReference(reference);
+  ) =>
+      MapView$OnWillStartRenderingFrameListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -6107,8 +6000,8 @@ class MapView$OnWillStartRenderingMapListener extends jni$_.JObject {
   @jni$_.internal
   MapView$OnWillStartRenderingMapListener.fromReference(
     jni$_.JReference reference,
-  ) : $type = type,
-      super.fromReference(reference);
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/maps/MapView$OnWillStartRenderingMapListener',
@@ -6123,21 +6016,17 @@ class MapView$OnWillStartRenderingMapListener extends jni$_.JObject {
     r'()V',
   );
 
-  static final _onWillStartRenderingMap =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onWillStartRenderingMap = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
 
   /// from: `public abstract void onWillStartRenderingMap()`
   void onWillStartRenderingMap() {
@@ -6149,7 +6038,7 @@ class MapView$OnWillStartRenderingMapListener extends jni$_.JObject {
 
   /// Maps a specific port to the implemented interface.
   static final core$_.Map<int, $MapView$OnWillStartRenderingMapListener>
-  _$impls = {};
+      _$impls = {};
   static jni$_.JObjectPtr _$invoke(
     int port,
     jni$_.JObjectPtr descriptor,
@@ -6162,11 +6051,10 @@ class MapView$OnWillStartRenderingMapListener extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -6260,9 +6148,10 @@ final class $MapView$OnWillStartRenderingMapListener$NullableType
   @core$_.override
   MapView$OnWillStartRenderingMapListener? fromReference(
     jni$_.JReference reference,
-  ) => reference.isNull
-      ? null
-      : MapView$OnWillStartRenderingMapListener.fromReference(reference);
+  ) =>
+      reference.isNull
+          ? null
+          : MapView$OnWillStartRenderingMapListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -6302,7 +6191,8 @@ final class $MapView$OnWillStartRenderingMapListener$Type
   @core$_.override
   MapView$OnWillStartRenderingMapListener fromReference(
     jni$_.JReference reference,
-  ) => MapView$OnWillStartRenderingMapListener.fromReference(reference);
+  ) =>
+      MapView$OnWillStartRenderingMapListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -6335,8 +6225,8 @@ class MapView extends jni$_.JObject {
 
   @jni$_.internal
   MapView.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/maps/MapView',
@@ -6347,23 +6237,19 @@ class MapView extends jni$_.JObject {
   static const type = $MapView$Type();
   static final _id_new$ = _class.constructorId(r'(Landroid/content/Context;)V');
 
-  static final _new$ =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_NewObject')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_NewObject')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public void <init>(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -6382,26 +6268,21 @@ class MapView extends jni$_.JObject {
     r'(Landroid/content/Context;Landroid/util/AttributeSet;)V',
   );
 
-  static final _new$1 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _new$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<
-                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
-                >,
-              )
-            >
-          >('globalEnv_NewObject')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                    (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)>,
+              )>>('globalEnv_NewObject')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public void <init>(android.content.Context context, android.util.AttributeSet attributeSet)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -6422,31 +6303,26 @@ class MapView extends jni$_.JObject {
     r'(Landroid/content/Context;Landroid/util/AttributeSet;I)V',
   );
 
-  static final _new$2 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _new$2 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<
-                  (
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.Int32,
-                  )
-                >,
-              )
-            >
-          >('globalEnv_NewObject')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-              int,
-            )
-          >();
+                    (
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.Int32,
+                    )>,
+              )>>('globalEnv_NewObject')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.Pointer<jni$_.Void>,
+            int,
+          )>();
 
   /// from: `public void <init>(android.content.Context context, android.util.AttributeSet attributeSet, int i)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -6472,26 +6348,21 @@ class MapView extends jni$_.JObject {
     r'(Landroid/content/Context;Lorg/maplibre/android/maps/MapLibreMapOptions;)V',
   );
 
-  static final _new$3 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _new$3 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<
-                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
-                >,
-              )
-            >
-          >('globalEnv_NewObject')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                    (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)>,
+              )>>('globalEnv_NewObject')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public void <init>(android.content.Context context, org.maplibre.android.maps.MapLibreMapOptions mapLibreMapOptions)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -6517,23 +6388,19 @@ class MapView extends jni$_.JObject {
     r'(Landroid/os/Bundle;)V',
   );
 
-  static final _onCreate =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onCreate = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public void onCreate(android.os.Bundle bundle)`
   void onCreate(jni$_.JObject? bundle) {
@@ -6550,23 +6417,19 @@ class MapView extends jni$_.JObject {
     r'(Landroid/os/Bundle;)V',
   );
 
-  static final _onSaveInstanceState =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onSaveInstanceState = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public void onSaveInstanceState(android.os.Bundle bundle)`
   void onSaveInstanceState(jni$_.JObject bundle) {
@@ -6580,21 +6443,17 @@ class MapView extends jni$_.JObject {
 
   static final _id_onStart = _class.instanceMethodId(r'onStart', r'()V');
 
-  static final _onStart =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onStart = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
 
   /// from: `public void onStart()`
   void onStart() {
@@ -6603,21 +6462,17 @@ class MapView extends jni$_.JObject {
 
   static final _id_onResume = _class.instanceMethodId(r'onResume', r'()V');
 
-  static final _onResume =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onResume = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
 
   /// from: `public void onResume()`
   void onResume() {
@@ -6626,21 +6481,17 @@ class MapView extends jni$_.JObject {
 
   static final _id_onPause = _class.instanceMethodId(r'onPause', r'()V');
 
-  static final _onPause =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onPause = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
 
   /// from: `public void onPause()`
   void onPause() {
@@ -6649,21 +6500,17 @@ class MapView extends jni$_.JObject {
 
   static final _id_onStop = _class.instanceMethodId(r'onStop', r'()V');
 
-  static final _onStop =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onStop = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
 
   /// from: `public void onStop()`
   void onStop() {
@@ -6672,21 +6519,17 @@ class MapView extends jni$_.JObject {
 
   static final _id_onDestroy = _class.instanceMethodId(r'onDestroy', r'()V');
 
-  static final _onDestroy =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onDestroy = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
 
   /// from: `public void onDestroy()`
   void onDestroy() {
@@ -6698,23 +6541,19 @@ class MapView extends jni$_.JObject {
     r'(Ljava/lang/Runnable;)V',
   );
 
-  static final _queueEvent =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _queueEvent = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public void queueEvent(java.lang.Runnable runnable)`
   void queueEvent(jni$_.JObject runnable) {
@@ -6731,23 +6570,19 @@ class MapView extends jni$_.JObject {
     r'(I)V',
   );
 
-  static final _setMaximumFps =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _setMaximumFps = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Int32,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            int,
+          )>();
 
   /// from: `public void setMaximumFps(int i)`
   void setMaximumFps(int i) {
@@ -6763,23 +6598,19 @@ class MapView extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/renderer/MapRenderer$RenderingRefreshMode;)V',
   );
 
-  static final _setRenderingRefreshMode =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _setRenderingRefreshMode = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public void setRenderingRefreshMode(org.maplibre.android.maps.renderer.MapRenderer$RenderingRefreshMode renderingRefreshMode)`
   void setRenderingRefreshMode(
@@ -6799,21 +6630,17 @@ class MapView extends jni$_.JObject {
     r'()Lorg/maplibre/android/maps/renderer/MapRenderer$RenderingRefreshMode;',
   );
 
-  static final _getRenderingRefreshMode =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _getRenderingRefreshMode = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
 
   /// from: `public org.maplibre.android.maps.renderer.MapRenderer$RenderingRefreshMode getRenderingRefreshMode()`
   /// The returned object must be released after use, by calling the [release] method.
@@ -6831,21 +6658,17 @@ class MapView extends jni$_.JObject {
     r'()Z',
   );
 
-  static final _isDestroyed =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _isDestroyed = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>>('globalEnv_CallBooleanMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
 
   /// from: `public boolean isDestroyed()`
   bool isDestroyed() {
@@ -6860,21 +6683,17 @@ class MapView extends jni$_.JObject {
     r'()Landroid/view/View;',
   );
 
-  static final _getRenderView =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _getRenderView = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
 
   /// from: `public android.view.View getRenderView()`
   /// The returned object must be released after use, by calling the [release] method.
@@ -6890,23 +6709,19 @@ class MapView extends jni$_.JObject {
     r'(Landroid/view/MotionEvent;)Z',
   );
 
-  static final _onTouchEvent =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onTouchEvent = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallBooleanMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public boolean onTouchEvent(android.view.MotionEvent motionEvent)`
   bool onTouchEvent(jni$_.JObject? motionEvent) {
@@ -6923,24 +6738,20 @@ class MapView extends jni$_.JObject {
     r'(ILandroid/view/KeyEvent;)Z',
   );
 
-  static final _onKeyDown =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onKeyDown = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Int32, jni$_.Pointer<jni$_.Void>)>,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallBooleanMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            int,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public boolean onKeyDown(int i, android.view.KeyEvent keyEvent)`
   bool onKeyDown(int i, jni$_.JObject keyEvent) {
@@ -6958,24 +6769,20 @@ class MapView extends jni$_.JObject {
     r'(ILandroid/view/KeyEvent;)Z',
   );
 
-  static final _onKeyLongPress =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onKeyLongPress = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Int32, jni$_.Pointer<jni$_.Void>)>,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallBooleanMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            int,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public boolean onKeyLongPress(int i, android.view.KeyEvent keyEvent)`
   bool onKeyLongPress(int i, jni$_.JObject? keyEvent) {
@@ -6993,24 +6800,20 @@ class MapView extends jni$_.JObject {
     r'(ILandroid/view/KeyEvent;)Z',
   );
 
-  static final _onKeyUp =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onKeyUp = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Int32, jni$_.Pointer<jni$_.Void>)>,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallBooleanMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            int,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public boolean onKeyUp(int i, android.view.KeyEvent keyEvent)`
   bool onKeyUp(int i, jni$_.JObject keyEvent) {
@@ -7028,23 +6831,19 @@ class MapView extends jni$_.JObject {
     r'(Landroid/view/MotionEvent;)Z',
   );
 
-  static final _onTrackballEvent =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onTrackballEvent = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallBooleanMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public boolean onTrackballEvent(android.view.MotionEvent motionEvent)`
   bool onTrackballEvent(jni$_.JObject motionEvent) {
@@ -7061,23 +6860,19 @@ class MapView extends jni$_.JObject {
     r'(Landroid/view/MotionEvent;)Z',
   );
 
-  static final _onGenericMotionEvent =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onGenericMotionEvent = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallBooleanMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public boolean onGenericMotionEvent(android.view.MotionEvent motionEvent)`
   bool onGenericMotionEvent(jni$_.JObject motionEvent) {
@@ -7094,21 +6889,17 @@ class MapView extends jni$_.JObject {
     r'()V',
   );
 
-  static final _onLowMemory =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onLowMemory = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
 
   /// from: `public void onLowMemory()`
   void onLowMemory() {
@@ -7123,21 +6914,17 @@ class MapView extends jni$_.JObject {
     r'()F',
   );
 
-  static final _getPixelRatio =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _getPixelRatio = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallFloatMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>>('globalEnv_CallFloatMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
 
   /// from: `public float getPixelRatio()`
   double getPixelRatio() {
@@ -7152,21 +6939,17 @@ class MapView extends jni$_.JObject {
     r'()Landroid/graphics/Bitmap;',
   );
 
-  static final _getViewContent =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _getViewContent = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
 
   /// from: `public android.graphics.Bitmap getViewContent()`
   /// The returned object must be released after use, by calling the [release] method.
@@ -7184,21 +6967,18 @@ class MapView extends jni$_.JObject {
 
   static final _addOnCameraWillChangeListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void addOnCameraWillChangeListener(org.maplibre.android.maps.MapView$OnCameraWillChangeListener onCameraWillChangeListener)`
   void addOnCameraWillChangeListener(
@@ -7219,21 +6999,18 @@ class MapView extends jni$_.JObject {
 
   static final _removeOnCameraWillChangeListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void removeOnCameraWillChangeListener(org.maplibre.android.maps.MapView$OnCameraWillChangeListener onCameraWillChangeListener)`
   void removeOnCameraWillChangeListener(
@@ -7254,21 +7031,18 @@ class MapView extends jni$_.JObject {
 
   static final _addOnCameraIsChangingListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void addOnCameraIsChangingListener(org.maplibre.android.maps.MapView$OnCameraIsChangingListener onCameraIsChangingListener)`
   void addOnCameraIsChangingListener(
@@ -7289,21 +7063,18 @@ class MapView extends jni$_.JObject {
 
   static final _removeOnCameraIsChangingListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void removeOnCameraIsChangingListener(org.maplibre.android.maps.MapView$OnCameraIsChangingListener onCameraIsChangingListener)`
   void removeOnCameraIsChangingListener(
@@ -7324,21 +7095,18 @@ class MapView extends jni$_.JObject {
 
   static final _addOnCameraDidChangeListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void addOnCameraDidChangeListener(org.maplibre.android.maps.MapView$OnCameraDidChangeListener onCameraDidChangeListener)`
   void addOnCameraDidChangeListener(
@@ -7359,21 +7127,18 @@ class MapView extends jni$_.JObject {
 
   static final _removeOnCameraDidChangeListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void removeOnCameraDidChangeListener(org.maplibre.android.maps.MapView$OnCameraDidChangeListener onCameraDidChangeListener)`
   void removeOnCameraDidChangeListener(
@@ -7394,21 +7159,18 @@ class MapView extends jni$_.JObject {
 
   static final _addOnWillStartLoadingMapListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void addOnWillStartLoadingMapListener(org.maplibre.android.maps.MapView$OnWillStartLoadingMapListener onWillStartLoadingMapListener)`
   void addOnWillStartLoadingMapListener(
@@ -7423,29 +7185,26 @@ class MapView extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_removeOnWillStartLoadingMapListener = _class
-      .instanceMethodId(
-        r'removeOnWillStartLoadingMapListener',
-        r'(Lorg/maplibre/android/maps/MapView$OnWillStartLoadingMapListener;)V',
-      );
+  static final _id_removeOnWillStartLoadingMapListener =
+      _class.instanceMethodId(
+    r'removeOnWillStartLoadingMapListener',
+    r'(Lorg/maplibre/android/maps/MapView$OnWillStartLoadingMapListener;)V',
+  );
 
   static final _removeOnWillStartLoadingMapListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void removeOnWillStartLoadingMapListener(org.maplibre.android.maps.MapView$OnWillStartLoadingMapListener onWillStartLoadingMapListener)`
   void removeOnWillStartLoadingMapListener(
@@ -7467,21 +7226,18 @@ class MapView extends jni$_.JObject {
 
   static final _addOnDidFinishLoadingMapListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void addOnDidFinishLoadingMapListener(org.maplibre.android.maps.MapView$OnDidFinishLoadingMapListener onDidFinishLoadingMapListener)`
   void addOnDidFinishLoadingMapListener(
@@ -7496,29 +7252,26 @@ class MapView extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_removeOnDidFinishLoadingMapListener = _class
-      .instanceMethodId(
-        r'removeOnDidFinishLoadingMapListener',
-        r'(Lorg/maplibre/android/maps/MapView$OnDidFinishLoadingMapListener;)V',
-      );
+  static final _id_removeOnDidFinishLoadingMapListener =
+      _class.instanceMethodId(
+    r'removeOnDidFinishLoadingMapListener',
+    r'(Lorg/maplibre/android/maps/MapView$OnDidFinishLoadingMapListener;)V',
+  );
 
   static final _removeOnDidFinishLoadingMapListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void removeOnDidFinishLoadingMapListener(org.maplibre.android.maps.MapView$OnDidFinishLoadingMapListener onDidFinishLoadingMapListener)`
   void removeOnDidFinishLoadingMapListener(
@@ -7540,21 +7293,18 @@ class MapView extends jni$_.JObject {
 
   static final _addOnDidFailLoadingMapListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void addOnDidFailLoadingMapListener(org.maplibre.android.maps.MapView$OnDidFailLoadingMapListener onDidFailLoadingMapListener)`
   void addOnDidFailLoadingMapListener(
@@ -7575,21 +7325,18 @@ class MapView extends jni$_.JObject {
 
   static final _removeOnDidFailLoadingMapListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void removeOnDidFailLoadingMapListener(org.maplibre.android.maps.MapView$OnDidFailLoadingMapListener onDidFailLoadingMapListener)`
   void removeOnDidFailLoadingMapListener(
@@ -7603,28 +7350,26 @@ class MapView extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_addOnWillStartRenderingFrameListener = _class.instanceMethodId(
+  static final _id_addOnWillStartRenderingFrameListener =
+      _class.instanceMethodId(
     r'addOnWillStartRenderingFrameListener',
     r'(Lorg/maplibre/android/maps/MapView$OnWillStartRenderingFrameListener;)V',
   );
 
   static final _addOnWillStartRenderingFrameListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void addOnWillStartRenderingFrameListener(org.maplibre.android.maps.MapView$OnWillStartRenderingFrameListener onWillStartRenderingFrameListener)`
   void addOnWillStartRenderingFrameListener(
@@ -7639,29 +7384,26 @@ class MapView extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_removeOnWillStartRenderingFrameListener = _class
-      .instanceMethodId(
-        r'removeOnWillStartRenderingFrameListener',
-        r'(Lorg/maplibre/android/maps/MapView$OnWillStartRenderingFrameListener;)V',
-      );
+  static final _id_removeOnWillStartRenderingFrameListener =
+      _class.instanceMethodId(
+    r'removeOnWillStartRenderingFrameListener',
+    r'(Lorg/maplibre/android/maps/MapView$OnWillStartRenderingFrameListener;)V',
+  );
 
   static final _removeOnWillStartRenderingFrameListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void removeOnWillStartRenderingFrameListener(org.maplibre.android.maps.MapView$OnWillStartRenderingFrameListener onWillStartRenderingFrameListener)`
   void removeOnWillStartRenderingFrameListener(
@@ -7676,28 +7418,26 @@ class MapView extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_addOnDidFinishRenderingFrameListener = _class.instanceMethodId(
+  static final _id_addOnDidFinishRenderingFrameListener =
+      _class.instanceMethodId(
     r'addOnDidFinishRenderingFrameListener',
     r'(Lorg/maplibre/android/maps/MapView$OnDidFinishRenderingFrameListener;)V',
   );
 
   static final _addOnDidFinishRenderingFrameListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void addOnDidFinishRenderingFrameListener(org.maplibre.android.maps.MapView$OnDidFinishRenderingFrameListener onDidFinishRenderingFrameListener)`
   void addOnDidFinishRenderingFrameListener(
@@ -7712,29 +7452,26 @@ class MapView extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_removeOnDidFinishRenderingFrameListener = _class
-      .instanceMethodId(
-        r'removeOnDidFinishRenderingFrameListener',
-        r'(Lorg/maplibre/android/maps/MapView$OnDidFinishRenderingFrameListener;)V',
-      );
+  static final _id_removeOnDidFinishRenderingFrameListener =
+      _class.instanceMethodId(
+    r'removeOnDidFinishRenderingFrameListener',
+    r'(Lorg/maplibre/android/maps/MapView$OnDidFinishRenderingFrameListener;)V',
+  );
 
   static final _removeOnDidFinishRenderingFrameListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void removeOnDidFinishRenderingFrameListener(org.maplibre.android.maps.MapView$OnDidFinishRenderingFrameListener onDidFinishRenderingFrameListener)`
   void removeOnDidFinishRenderingFrameListener(
@@ -7749,33 +7486,31 @@ class MapView extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_addOnDidFinishRenderingFrameListener$1 = _class.instanceMethodId(
+  static final _id_addOnDidFinishRenderingFrameListener$1 =
+      _class.instanceMethodId(
     r'addOnDidFinishRenderingFrameListener',
     r'(Lorg/maplibre/android/maps/MapView$OnDidFinishRenderingFrameWithStatsListener;)V',
   );
 
   static final _addOnDidFinishRenderingFrameListener$1 =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void addOnDidFinishRenderingFrameListener(org.maplibre.android.maps.MapView$OnDidFinishRenderingFrameWithStatsListener onDidFinishRenderingFrameWithStatsListener)`
   void addOnDidFinishRenderingFrameListener$1(
     MapView$OnDidFinishRenderingFrameWithStatsListener
-    onDidFinishRenderingFrameWithStatsListener,
+        onDidFinishRenderingFrameWithStatsListener,
   ) {
     final _$onDidFinishRenderingFrameWithStatsListener =
         onDidFinishRenderingFrameWithStatsListener.reference;
@@ -7786,34 +7521,31 @@ class MapView extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_removeOnDidFinishRenderingFrameListener$1 = _class
-      .instanceMethodId(
-        r'removeOnDidFinishRenderingFrameListener',
-        r'(Lorg/maplibre/android/maps/MapView$OnDidFinishRenderingFrameWithStatsListener;)V',
-      );
+  static final _id_removeOnDidFinishRenderingFrameListener$1 =
+      _class.instanceMethodId(
+    r'removeOnDidFinishRenderingFrameListener',
+    r'(Lorg/maplibre/android/maps/MapView$OnDidFinishRenderingFrameWithStatsListener;)V',
+  );
 
   static final _removeOnDidFinishRenderingFrameListener$1 =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void removeOnDidFinishRenderingFrameListener(org.maplibre.android.maps.MapView$OnDidFinishRenderingFrameWithStatsListener onDidFinishRenderingFrameWithStatsListener)`
   void removeOnDidFinishRenderingFrameListener$1(
     MapView$OnDidFinishRenderingFrameWithStatsListener
-    onDidFinishRenderingFrameWithStatsListener,
+        onDidFinishRenderingFrameWithStatsListener,
   ) {
     final _$onDidFinishRenderingFrameWithStatsListener =
         onDidFinishRenderingFrameWithStatsListener.reference;
@@ -7831,21 +7563,18 @@ class MapView extends jni$_.JObject {
 
   static final _addOnWillStartRenderingMapListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void addOnWillStartRenderingMapListener(org.maplibre.android.maps.MapView$OnWillStartRenderingMapListener onWillStartRenderingMapListener)`
   void addOnWillStartRenderingMapListener(
@@ -7860,29 +7589,26 @@ class MapView extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_removeOnWillStartRenderingMapListener = _class
-      .instanceMethodId(
-        r'removeOnWillStartRenderingMapListener',
-        r'(Lorg/maplibre/android/maps/MapView$OnWillStartRenderingMapListener;)V',
-      );
+  static final _id_removeOnWillStartRenderingMapListener =
+      _class.instanceMethodId(
+    r'removeOnWillStartRenderingMapListener',
+    r'(Lorg/maplibre/android/maps/MapView$OnWillStartRenderingMapListener;)V',
+  );
 
   static final _removeOnWillStartRenderingMapListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void removeOnWillStartRenderingMapListener(org.maplibre.android.maps.MapView$OnWillStartRenderingMapListener onWillStartRenderingMapListener)`
   void removeOnWillStartRenderingMapListener(
@@ -7904,21 +7630,18 @@ class MapView extends jni$_.JObject {
 
   static final _addOnDidFinishRenderingMapListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void addOnDidFinishRenderingMapListener(org.maplibre.android.maps.MapView$OnDidFinishRenderingMapListener onDidFinishRenderingMapListener)`
   void addOnDidFinishRenderingMapListener(
@@ -7933,29 +7656,26 @@ class MapView extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_removeOnDidFinishRenderingMapListener = _class
-      .instanceMethodId(
-        r'removeOnDidFinishRenderingMapListener',
-        r'(Lorg/maplibre/android/maps/MapView$OnDidFinishRenderingMapListener;)V',
-      );
+  static final _id_removeOnDidFinishRenderingMapListener =
+      _class.instanceMethodId(
+    r'removeOnDidFinishRenderingMapListener',
+    r'(Lorg/maplibre/android/maps/MapView$OnDidFinishRenderingMapListener;)V',
+  );
 
   static final _removeOnDidFinishRenderingMapListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void removeOnDidFinishRenderingMapListener(org.maplibre.android.maps.MapView$OnDidFinishRenderingMapListener onDidFinishRenderingMapListener)`
   void removeOnDidFinishRenderingMapListener(
@@ -7977,21 +7697,18 @@ class MapView extends jni$_.JObject {
 
   static final _addOnDidBecomeIdleListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void addOnDidBecomeIdleListener(org.maplibre.android.maps.MapView$OnDidBecomeIdleListener onDidBecomeIdleListener)`
   void addOnDidBecomeIdleListener(
@@ -8012,21 +7729,18 @@ class MapView extends jni$_.JObject {
 
   static final _removeOnDidBecomeIdleListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void removeOnDidBecomeIdleListener(org.maplibre.android.maps.MapView$OnDidBecomeIdleListener onDidBecomeIdleListener)`
   void removeOnDidBecomeIdleListener(
@@ -8047,21 +7761,18 @@ class MapView extends jni$_.JObject {
 
   static final _addOnDidFinishLoadingStyleListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void addOnDidFinishLoadingStyleListener(org.maplibre.android.maps.MapView$OnDidFinishLoadingStyleListener onDidFinishLoadingStyleListener)`
   void addOnDidFinishLoadingStyleListener(
@@ -8076,29 +7787,26 @@ class MapView extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_removeOnDidFinishLoadingStyleListener = _class
-      .instanceMethodId(
-        r'removeOnDidFinishLoadingStyleListener',
-        r'(Lorg/maplibre/android/maps/MapView$OnDidFinishLoadingStyleListener;)V',
-      );
+  static final _id_removeOnDidFinishLoadingStyleListener =
+      _class.instanceMethodId(
+    r'removeOnDidFinishLoadingStyleListener',
+    r'(Lorg/maplibre/android/maps/MapView$OnDidFinishLoadingStyleListener;)V',
+  );
 
   static final _removeOnDidFinishLoadingStyleListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void removeOnDidFinishLoadingStyleListener(org.maplibre.android.maps.MapView$OnDidFinishLoadingStyleListener onDidFinishLoadingStyleListener)`
   void removeOnDidFinishLoadingStyleListener(
@@ -8120,21 +7828,18 @@ class MapView extends jni$_.JObject {
 
   static final _addOnSourceChangedListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void addOnSourceChangedListener(org.maplibre.android.maps.MapView$OnSourceChangedListener onSourceChangedListener)`
   void addOnSourceChangedListener(
@@ -8155,21 +7860,18 @@ class MapView extends jni$_.JObject {
 
   static final _removeOnSourceChangedListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void removeOnSourceChangedListener(org.maplibre.android.maps.MapView$OnSourceChangedListener onSourceChangedListener)`
   void removeOnSourceChangedListener(
@@ -8190,21 +7892,18 @@ class MapView extends jni$_.JObject {
 
   static final _addOnStyleImageMissingListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void addOnStyleImageMissingListener(org.maplibre.android.maps.MapView$OnStyleImageMissingListener onStyleImageMissingListener)`
   void addOnStyleImageMissingListener(
@@ -8225,21 +7924,18 @@ class MapView extends jni$_.JObject {
 
   static final _removeOnStyleImageMissingListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void removeOnStyleImageMissingListener(org.maplibre.android.maps.MapView$OnStyleImageMissingListener onStyleImageMissingListener)`
   void removeOnStyleImageMissingListener(
@@ -8253,33 +7949,31 @@ class MapView extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_addOnCanRemoveUnusedStyleImageListener = _class.instanceMethodId(
+  static final _id_addOnCanRemoveUnusedStyleImageListener =
+      _class.instanceMethodId(
     r'addOnCanRemoveUnusedStyleImageListener',
     r'(Lorg/maplibre/android/maps/MapView$OnCanRemoveUnusedStyleImageListener;)V',
   );
 
   static final _addOnCanRemoveUnusedStyleImageListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void addOnCanRemoveUnusedStyleImageListener(org.maplibre.android.maps.MapView$OnCanRemoveUnusedStyleImageListener onCanRemoveUnusedStyleImageListener)`
   void addOnCanRemoveUnusedStyleImageListener(
     MapView$OnCanRemoveUnusedStyleImageListener
-    onCanRemoveUnusedStyleImageListener,
+        onCanRemoveUnusedStyleImageListener,
   ) {
     final _$onCanRemoveUnusedStyleImageListener =
         onCanRemoveUnusedStyleImageListener.reference;
@@ -8290,34 +7984,31 @@ class MapView extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_removeOnCanRemoveUnusedStyleImageListener = _class
-      .instanceMethodId(
-        r'removeOnCanRemoveUnusedStyleImageListener',
-        r'(Lorg/maplibre/android/maps/MapView$OnCanRemoveUnusedStyleImageListener;)V',
-      );
+  static final _id_removeOnCanRemoveUnusedStyleImageListener =
+      _class.instanceMethodId(
+    r'removeOnCanRemoveUnusedStyleImageListener',
+    r'(Lorg/maplibre/android/maps/MapView$OnCanRemoveUnusedStyleImageListener;)V',
+  );
 
   static final _removeOnCanRemoveUnusedStyleImageListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void removeOnCanRemoveUnusedStyleImageListener(org.maplibre.android.maps.MapView$OnCanRemoveUnusedStyleImageListener onCanRemoveUnusedStyleImageListener)`
   void removeOnCanRemoveUnusedStyleImageListener(
     MapView$OnCanRemoveUnusedStyleImageListener
-    onCanRemoveUnusedStyleImageListener,
+        onCanRemoveUnusedStyleImageListener,
   ) {
     final _$onCanRemoveUnusedStyleImageListener =
         onCanRemoveUnusedStyleImageListener.reference;
@@ -8335,21 +8026,18 @@ class MapView extends jni$_.JObject {
 
   static final _addOnPreCompileShaderListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void addOnPreCompileShaderListener(org.maplibre.android.maps.MapView$OnPreCompileShaderListener onPreCompileShaderListener)`
   void addOnPreCompileShaderListener(
@@ -8371,21 +8059,18 @@ class MapView extends jni$_.JObject {
 
   static final _removeOnPreCompileShaderListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void removeOnPreCompileShaderListener(org.maplibre.android.maps.MapView$OnPreCompileShaderListener onPreCompileShaderListener)`
   void removeOnPreCompileShaderListener(
@@ -8407,21 +8092,18 @@ class MapView extends jni$_.JObject {
 
   static final _addOnPostCompileShaderListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void addOnPostCompileShaderListener(org.maplibre.android.maps.MapView$OnPostCompileShaderListener onPostCompileShaderListener)`
   void addOnPostCompileShaderListener(
@@ -8443,21 +8125,18 @@ class MapView extends jni$_.JObject {
 
   static final _removeOnPostCompileShaderListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void removeOnPostCompileShaderListener(org.maplibre.android.maps.MapView$OnPostCompileShaderListener onPostCompileShaderListener)`
   void removeOnPostCompileShaderListener(
@@ -8479,21 +8158,18 @@ class MapView extends jni$_.JObject {
 
   static final _addOnShaderCompileFailedListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void addOnShaderCompileFailedListener(org.maplibre.android.maps.MapView$OnShaderCompileFailedListener onShaderCompileFailedListener)`
   void addOnShaderCompileFailedListener(
@@ -8508,29 +8184,26 @@ class MapView extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_removeOnShaderCompileFailedListener = _class
-      .instanceMethodId(
-        r'removeOnShaderCompileFailedListener',
-        r'(Lorg/maplibre/android/maps/MapView$OnShaderCompileFailedListener;)V',
-      );
+  static final _id_removeOnShaderCompileFailedListener =
+      _class.instanceMethodId(
+    r'removeOnShaderCompileFailedListener',
+    r'(Lorg/maplibre/android/maps/MapView$OnShaderCompileFailedListener;)V',
+  );
 
   static final _removeOnShaderCompileFailedListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void removeOnShaderCompileFailedListener(org.maplibre.android.maps.MapView$OnShaderCompileFailedListener onShaderCompileFailedListener)`
   void removeOnShaderCompileFailedListener(
@@ -8550,23 +8223,19 @@ class MapView extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/MapView$OnGlyphsLoadedListener;)V',
   );
 
-  static final _addOnGlyphsLoadedListener =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _addOnGlyphsLoadedListener = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public void addOnGlyphsLoadedListener(org.maplibre.android.maps.MapView$OnGlyphsLoadedListener onGlyphsLoadedListener)`
   void addOnGlyphsLoadedListener(
@@ -8588,21 +8257,18 @@ class MapView extends jni$_.JObject {
 
   static final _removeOnGlyphsLoadedListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void removeOnGlyphsLoadedListener(org.maplibre.android.maps.MapView$OnGlyphsLoadedListener onGlyphsLoadedListener)`
   void removeOnGlyphsLoadedListener(
@@ -8622,23 +8288,19 @@ class MapView extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/MapView$OnGlyphsErrorListener;)V',
   );
 
-  static final _addOnGlyphsErrorListener =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _addOnGlyphsErrorListener = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public void addOnGlyphsErrorListener(org.maplibre.android.maps.MapView$OnGlyphsErrorListener onGlyphsErrorListener)`
   void addOnGlyphsErrorListener(
@@ -8660,21 +8322,18 @@ class MapView extends jni$_.JObject {
 
   static final _removeOnGlyphsErrorListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void removeOnGlyphsErrorListener(org.maplibre.android.maps.MapView$OnGlyphsErrorListener onGlyphsErrorListener)`
   void removeOnGlyphsErrorListener(
@@ -8696,21 +8355,18 @@ class MapView extends jni$_.JObject {
 
   static final _addOnGlyphsRequestedListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void addOnGlyphsRequestedListener(org.maplibre.android.maps.MapView$OnGlyphsRequestedListener onGlyphsRequestedListener)`
   void addOnGlyphsRequestedListener(
@@ -8732,21 +8388,18 @@ class MapView extends jni$_.JObject {
 
   static final _removeOnGlyphsRequestedListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void removeOnGlyphsRequestedListener(org.maplibre.android.maps.MapView$OnGlyphsRequestedListener onGlyphsRequestedListener)`
   void removeOnGlyphsRequestedListener(
@@ -8766,23 +8419,19 @@ class MapView extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/MapView$OnTileActionListener;)V',
   );
 
-  static final _addOnTileActionListener =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _addOnTileActionListener = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public void addOnTileActionListener(org.maplibre.android.maps.MapView$OnTileActionListener onTileActionListener)`
   void addOnTileActionListener(
@@ -8804,21 +8453,18 @@ class MapView extends jni$_.JObject {
 
   static final _removeOnTileActionListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void removeOnTileActionListener(org.maplibre.android.maps.MapView$OnTileActionListener onTileActionListener)`
   void removeOnTileActionListener(
@@ -8838,23 +8484,19 @@ class MapView extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/MapView$OnSpriteLoadedListener;)V',
   );
 
-  static final _addOnSpriteLoadedListener =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _addOnSpriteLoadedListener = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public void addOnSpriteLoadedListener(org.maplibre.android.maps.MapView$OnSpriteLoadedListener onSpriteLoadedListener)`
   void addOnSpriteLoadedListener(
@@ -8876,21 +8518,18 @@ class MapView extends jni$_.JObject {
 
   static final _removeOnSpriteLoadedListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void removeOnSpriteLoadedListener(org.maplibre.android.maps.MapView$OnSpriteLoadedListener onSpriteLoadedListener)`
   void removeOnSpriteLoadedListener(
@@ -8910,23 +8549,19 @@ class MapView extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/MapView$OnSpriteErrorListener;)V',
   );
 
-  static final _addOnSpriteErrorListener =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _addOnSpriteErrorListener = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public void addOnSpriteErrorListener(org.maplibre.android.maps.MapView$OnSpriteErrorListener onSpriteErrorListener)`
   void addOnSpriteErrorListener(
@@ -8948,21 +8583,18 @@ class MapView extends jni$_.JObject {
 
   static final _removeOnSpriteErrorListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void removeOnSpriteErrorListener(org.maplibre.android.maps.MapView$OnSpriteErrorListener onSpriteErrorListener)`
   void removeOnSpriteErrorListener(
@@ -8984,21 +8616,18 @@ class MapView extends jni$_.JObject {
 
   static final _addOnSpriteRequestedListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void addOnSpriteRequestedListener(org.maplibre.android.maps.MapView$OnSpriteRequestedListener onSpriteRequestedListener)`
   void addOnSpriteRequestedListener(
@@ -9020,21 +8649,18 @@ class MapView extends jni$_.JObject {
 
   static final _removeOnSpriteRequestedListener =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                  )>>('globalEnv_CallVoidMethod')
+          .asFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public void removeOnSpriteRequestedListener(org.maplibre.android.maps.MapView$OnSpriteRequestedListener onSpriteRequestedListener)`
   void removeOnSpriteRequestedListener(
@@ -9054,23 +8680,19 @@ class MapView extends jni$_.JObject {
     r'(Lorg/maplibre/android/maps/OnMapReadyCallback;)V',
   );
 
-  static final _getMapAsync =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _getMapAsync = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public void getMapAsync(org.maplibre.android.maps.OnMapReadyCallback onMapReadyCallback)`
   void getMapAsync(onmapreadycallback$_.OnMapReadyCallback onMapReadyCallback) {
@@ -9087,23 +8709,19 @@ class MapView extends jni$_.JObject {
     r'(Z)V',
   );
 
-  static final _setMapStrictModeEnabled =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _setMapStrictModeEnabled = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Int32,)>,
-              )
-            >
-          >('globalEnv_CallStaticVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-            )
-          >();
+              )>>('globalEnv_CallStaticVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            int,
+          )>();
 
   /// from: `static public void setMapStrictModeEnabled(boolean z)`
   static void setMapStrictModeEnabled(bool z) {

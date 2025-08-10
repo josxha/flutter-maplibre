@@ -52,8 +52,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
       surfaceFactory: (context, controller) {
         return AndroidViewSurface(
           controller: controller as AndroidViewController,
-          gestureRecognizers:
-              widget.gestureRecognizers ??
+          gestureRecognizers: widget.gestureRecognizers ??
               const <Factory<OneSequenceGestureRecognizer>>{},
           hitTestBehavior: PlatformViewHitTestBehavior.opaque,
         );
@@ -89,11 +88,11 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
             ),
           // https://github.com/flutter/flutter/blob/master/docs/platforms/android/Virtual-Display.md
           AndroidPlatformViewMode.vd => PlatformViewsService.initAndroidView(
-            id: params.id,
-            viewType: viewType,
-            layoutDirection: TextDirection.ltr,
-            onFocus: () => params.onFocusChanged(true),
-          ),
+              id: params.id,
+              viewType: viewType,
+              layoutDirection: TextDirection.ltr,
+              onFocus: () => params.onFocusChanged(true),
+            ),
         };
         return viewController
           ..addOnPlatformViewCreatedListener((id) {
@@ -450,9 +449,9 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     final locationEngineRequest = locationEngineRequestBuilder.build();
     final activationOptionsBuilder =
         jni.LocationComponentActivationOptions.builder(
-              jniContext,
-              style._jniStyle,
-            )
+      jniContext,
+      style._jniStyle,
+    )
             .locationComponentOptions(locOptions)!
             .useDefaultLocationEngine(true)!
             .locationEngineRequest(locationEngineRequest)!;
@@ -477,26 +476,21 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     BearingTrackMode trackBearing = BearingTrackMode.gps,
   }) async {
     final mode = switch (trackBearing) {
-      BearingTrackMode.none =>
-        trackLocation
-            // only location
-            ? jni.CameraMode.TRACKING
-            // neither location nor bearing
-            : jni.CameraMode.NONE,
-
-      BearingTrackMode.compass =>
-        trackLocation
-            // location with compass bearing
-            ? jni.CameraMode.TRACKING_COMPASS
-            // only compass bearing
-            : jni.CameraMode.NONE_COMPASS,
-
-      BearingTrackMode.gps =>
-        trackLocation
-            // location with gps bearing
-            ? jni.CameraMode.TRACKING_GPS
-            // only gps bearing
-            : jni.CameraMode.NONE_GPS,
+      BearingTrackMode.none => trackLocation
+          // only location
+          ? jni.CameraMode.TRACKING
+          // neither location nor bearing
+          : jni.CameraMode.NONE,
+      BearingTrackMode.compass => trackLocation
+          // location with compass bearing
+          ? jni.CameraMode.TRACKING_COMPASS
+          // only compass bearing
+          : jni.CameraMode.NONE_COMPASS,
+      BearingTrackMode.gps => trackLocation
+          // location with gps bearing
+          ? jni.CameraMode.TRACKING_GPS
+          // only gps bearing
+          : jni.CameraMode.NONE_GPS,
     };
     _locationComponent.setCameraMode(mode);
   }

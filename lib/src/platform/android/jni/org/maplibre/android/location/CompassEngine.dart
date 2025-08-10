@@ -48,8 +48,8 @@ class CompassEngine extends jni$_.JObject {
 
   @jni$_.internal
   CompassEngine.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/location/CompassEngine',
@@ -63,23 +63,19 @@ class CompassEngine extends jni$_.JObject {
     r'(Lorg/maplibre/android/location/CompassListener;)V',
   );
 
-  static final _addCompassListener =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _addCompassListener = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public abstract void addCompassListener(org.maplibre.android.location.CompassListener compassListener)`
   void addCompassListener(compasslistener$_.CompassListener compassListener) {
@@ -96,23 +92,19 @@ class CompassEngine extends jni$_.JObject {
     r'(Lorg/maplibre/android/location/CompassListener;)V',
   );
 
-  static final _removeCompassListener =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _removeCompassListener = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public abstract void removeCompassListener(org.maplibre.android.location.CompassListener compassListener)`
   void removeCompassListener(
@@ -131,21 +123,17 @@ class CompassEngine extends jni$_.JObject {
     r'()F',
   );
 
-  static final _getLastHeading =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _getLastHeading = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallFloatMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>>('globalEnv_CallFloatMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
 
   /// from: `public abstract float getLastHeading()`
   double getLastHeading() {
@@ -162,19 +150,16 @@ class CompassEngine extends jni$_.JObject {
 
   static final _getLastAccuracySensorStatus =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                  )>>('globalEnv_CallIntMethod')
+          .asFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallIntMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>();
 
   /// from: `public abstract int getLastAccuracySensorStatus()`
   int getLastAccuracySensorStatus() {
@@ -198,11 +183,10 @@ class CompassEngine extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -285,10 +269,10 @@ class CompassEngine extends jni$_.JObject {
 abstract base mixin class $CompassEngine {
   factory $CompassEngine({
     required void Function(compasslistener$_.CompassListener compassListener)
-    addCompassListener,
+        addCompassListener,
     bool addCompassListener$async,
     required void Function(compasslistener$_.CompassListener compassListener)
-    removeCompassListener,
+        removeCompassListener,
     bool removeCompassListener$async,
     required double Function() getLastHeading,
     required int Function() getLastAccuracySensorStatus,
@@ -305,23 +289,23 @@ abstract base mixin class $CompassEngine {
 final class _$CompassEngine with $CompassEngine {
   _$CompassEngine({
     required void Function(compasslistener$_.CompassListener compassListener)
-    addCompassListener,
+        addCompassListener,
     this.addCompassListener$async = false,
     required void Function(compasslistener$_.CompassListener compassListener)
-    removeCompassListener,
+        removeCompassListener,
     this.removeCompassListener$async = false,
     required double Function() getLastHeading,
     required int Function() getLastAccuracySensorStatus,
-  }) : _addCompassListener = addCompassListener,
-       _removeCompassListener = removeCompassListener,
-       _getLastHeading = getLastHeading,
-       _getLastAccuracySensorStatus = getLastAccuracySensorStatus;
+  })  : _addCompassListener = addCompassListener,
+        _removeCompassListener = removeCompassListener,
+        _getLastHeading = getLastHeading,
+        _getLastAccuracySensorStatus = getLastAccuracySensorStatus;
 
   final void Function(compasslistener$_.CompassListener compassListener)
-  _addCompassListener;
+      _addCompassListener;
   final bool addCompassListener$async;
   final void Function(compasslistener$_.CompassListener compassListener)
-  _removeCompassListener;
+      _removeCompassListener;
   final bool removeCompassListener$async;
   final double Function() _getLastHeading;
   final int Function() _getLastAccuracySensorStatus;

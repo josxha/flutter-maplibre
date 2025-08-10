@@ -31,24 +31,21 @@ class WidgetLayer extends StatelessWidget {
     // Only Android returns screen pixel, other platforms return logical pixels.
     final pixelRatio =
         (!kIsWeb && defaultTargetPlatform == TargetPlatform.android)
-        ? MediaQuery.devicePixelRatioOf(context)
-        : 1.0;
+            ? MediaQuery.devicePixelRatioOf(context)
+            : 1.0;
 
     Widget buildChild(List<Offset> offsets) => Stack(
-      // TODO: filter markers that are completely outside of the visible screen.
-      children: markers.indexed
-          .map((e) {
+          // TODO: filter markers that are completely outside of the visible screen.
+          children: markers.indexed.map((e) {
             final offset = offsets[e.$1];
             final m = e.$2;
             final matrix = Matrix4.identity();
             if (m.flat) matrix.rotateX(camera.pitch * degree2Radian);
             if (m.rotate) matrix.rotateZ(-camera.bearing * degree2Radian);
             return Positioned(
-              left:
-                  offset.dx / pixelRatio -
+              left: offset.dx / pixelRatio -
                   m.size.width / 2 * (m.alignment.x + 1),
-              top:
-                  offset.dy / pixelRatio -
+              top: offset.dy / pixelRatio -
                   m.size.height / 2 * (m.alignment.y + 1),
               height: m.size.height,
               width: m.size.width,
@@ -58,9 +55,8 @@ class WidgetLayer extends StatelessWidget {
                 child: m.child,
               ),
             );
-          })
-          .toList(growable: false),
-    );
+          }).toList(growable: false),
+        );
 
     final points = markers.map((m) => m.point).toList(growable: false);
 

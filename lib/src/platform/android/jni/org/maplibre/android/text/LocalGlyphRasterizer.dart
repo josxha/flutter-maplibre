@@ -46,8 +46,8 @@ class LocalGlyphRasterizer extends jni$_.JObject {
 
   @jni$_.internal
   LocalGlyphRasterizer.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/text/LocalGlyphRasterizer',

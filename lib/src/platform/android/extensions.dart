@@ -53,19 +53,19 @@ extension OffsetExt on Offset {
 extension LngLatBoundsExt on LngLatBounds {
   /// Convert an [LngLatBounds] to an internal [pigeon.LngLatBounds].
   pigeon.LngLatBounds toLngLatBounds() => pigeon.LngLatBounds(
-    longitudeEast: longitudeEast,
-    longitudeWest: longitudeWest,
-    latitudeNorth: latitudeNorth,
-    latitudeSouth: latitudeSouth,
-  );
+        longitudeEast: longitudeEast,
+        longitudeWest: longitudeWest,
+        latitudeNorth: latitudeNorth,
+        latitudeSouth: latitudeSouth,
+      );
 
   /// Convert an [LngLatBounds] to an internal [jni.LatLngBounds].
   jni.LatLngBounds toLatLngBounds() => jni.LatLngBounds.from(
-    latitudeNorth,
-    longitudeEast,
-    latitudeSouth,
-    longitudeWest,
-  );
+        latitudeNorth,
+        longitudeEast,
+        latitudeSouth,
+        longitudeWest,
+      );
 }
 
 /// Extension methods for the [jni.LatLngBounds] class. Not exported publicly.
@@ -87,11 +87,11 @@ extension LatLngBounds on jni.LatLngBounds {
 extension EdgeInsetsExt on EdgeInsets {
   /// Convert an [EdgeInsets] to an internal [pigeon.Padding].
   pigeon.Padding toPadding() => pigeon.Padding(
-    top: top.toInt(),
-    bottom: bottom.toInt(),
-    left: left.toInt(),
-    right: right.toInt(),
-  );
+        top: top.toInt(),
+        bottom: bottom.toInt(),
+        left: left.toInt(),
+        right: right.toInt(),
+      );
 }
 
 /// Extension methods for the [EdgeInsets] class. Not exported publicly.
@@ -119,9 +119,9 @@ extension ObjectExt on Object {
   JObject toJObject(Arena arena) {
     return switch (this) {
       final List<Object?> value => JArray.of(
-        JObject.nullableType,
-        value.map((e) => e?.toJObject(arena)).toList(growable: false),
-      )..releasedBy(arena),
+          JObject.nullableType,
+          value.map((e) => e?.toJObject(arena)).toList(growable: false),
+        )..releasedBy(arena),
       final String value => value.toJString()..releasedBy(arena),
       final double value => value.toJDouble()..releasedBy(arena),
       // a dart int equals a java long

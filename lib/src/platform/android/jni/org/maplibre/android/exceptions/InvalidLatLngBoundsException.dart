@@ -46,8 +46,8 @@ class InvalidLatLngBoundsException extends jni$_.JObject {
 
   @jni$_.internal
   InvalidLatLngBoundsException.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/exceptions/InvalidLatLngBoundsException',
@@ -58,23 +58,19 @@ class InvalidLatLngBoundsException extends jni$_.JObject {
   static const type = $InvalidLatLngBoundsException$Type();
   static final _id_new$ = _class.constructorId(r'(I)V');
 
-  static final _new$ =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Int32,)>,
-              )
-            >
-          >('globalEnv_NewObject')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-            )
-          >();
+              )>>('globalEnv_NewObject')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            int,
+          )>();
 
   /// from: `public void <init>(int i)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -103,8 +99,8 @@ final class $InvalidLatLngBoundsException$NullableType
   @core$_.override
   InvalidLatLngBoundsException? fromReference(jni$_.JReference reference) =>
       reference.isNull
-      ? null
-      : InvalidLatLngBoundsException.fromReference(reference);
+          ? null
+          : InvalidLatLngBoundsException.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
