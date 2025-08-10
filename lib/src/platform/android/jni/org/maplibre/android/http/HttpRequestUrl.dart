@@ -46,8 +46,8 @@ class HttpRequestUrl extends jni$_.JObject {
 
   @jni$_.internal
   HttpRequestUrl.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/http/HttpRequestUrl',
@@ -61,33 +61,28 @@ class HttpRequestUrl extends jni$_.JObject {
     r'(Ljava/lang/String;Ljava/lang/String;IZ)Ljava/lang/String;',
   );
 
-  static final _buildResourceUrl =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _buildResourceUrl = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<
-                  (
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.Int32,
-                    jni$_.Int32,
-                  )
-                >,
-              )
-            >
-          >('globalEnv_CallStaticObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-              int,
-              int,
-            )
-          >();
+                    (
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.Int32,
+                      jni$_.Int32,
+                    )>,
+              )>>('globalEnv_CallStaticObjectMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.Pointer<jni$_.Void>,
+            int,
+            int,
+          )>();
 
   /// from: `static public java.lang.String buildResourceUrl(java.lang.String string, java.lang.String string1, int i, boolean z)`
   /// The returned object must be released after use, by calling the [release] method.

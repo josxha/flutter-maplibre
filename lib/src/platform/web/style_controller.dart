@@ -249,6 +249,6 @@ class StyleControllerWeb implements StyleController {
 
   @override
   void setProjection(MapProjection projection) => _map.setProjection(
-    interop.ProjectionSpecification(type: projection.name),
-  );
+        interop.ProjectionSpecification(type: projection.name),
+      );
 }

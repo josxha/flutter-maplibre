@@ -46,8 +46,8 @@ class HttpLogger extends jni$_.JObject {
 
   @jni$_.internal
   HttpLogger.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/http/HttpLogger',
@@ -81,31 +81,26 @@ class HttpLogger extends jni$_.JObject {
     r'(ILjava/lang/String;Ljava/lang/String;)V',
   );
 
-  static final _logFailure =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _logFailure = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<
-                  (
-                    jni$_.Int32,
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.Pointer<jni$_.Void>,
-                  )
-                >,
-              )
-            >
-          >('globalEnv_CallStaticVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                    (
+                      jni$_.Int32,
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.Pointer<jni$_.Void>,
+                    )>,
+              )>>('globalEnv_CallStaticVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            int,
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `static public void logFailure(int i, java.lang.String string, java.lang.String string1)`
   static void logFailure(int i, jni$_.JString? string, jni$_.JString? string1) {
@@ -125,24 +120,20 @@ class HttpLogger extends jni$_.JObject {
     r'(ILjava/lang/String;)V',
   );
 
-  static final _log =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _log = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Int32, jni$_.Pointer<jni$_.Void>)>,
-              )
-            >
-          >('globalEnv_CallStaticVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallStaticVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            int,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `static public void log(int i, java.lang.String string)`
   static void log(int i, jni$_.JString? string) {

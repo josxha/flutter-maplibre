@@ -46,8 +46,8 @@ class Resource$Kind extends jni$_.JObject {
 
   @jni$_.internal
   Resource$Kind.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/storage/Resource$Kind',
@@ -71,11 +71,10 @@ class Resource$Kind extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -207,8 +206,8 @@ class Resource extends jni$_.JObject {
 
   @jni$_.internal
   Resource.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/storage/Resource',
@@ -240,21 +239,17 @@ class Resource extends jni$_.JObject {
   static const SPRITE_JSON = 6;
   static final _id_new$ = _class.constructorId(r'()V');
 
-  static final _new$ =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_NewObject')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>>('globalEnv_NewObject')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
 
   /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.

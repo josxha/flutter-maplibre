@@ -23,21 +23,21 @@ class PolygonLayer extends Layer<Polygon> {
 
   @override
   Map<String, Object> getPaint() => {
-    'fill-color': color.toHexString(alpha: false),
-    'fill-opacity': opacity,
-    'fill-outline-color': outlineColor.toHexString(alpha: false),
-  };
+        'fill-color': color.toHexString(alpha: false),
+        'fill-opacity': opacity,
+        'fill-outline-color': outlineColor.toHexString(alpha: false),
+      };
 
   @override
   Map<String, Object> getLayout() => {};
 
   @override
   StyleLayer createStyleLayer(int index) => FillStyleLayer(
-    id: getLayerId(index),
-    sourceId: getSourceId(index),
-    paint: getPaint(),
-    layout: getLayout(),
-  );
+        id: getLayerId(index),
+        sourceId: getSourceId(index),
+        paint: getPaint(),
+        layout: getLayout(),
+      );
 
   @override
   bool operator ==(Object other) =>

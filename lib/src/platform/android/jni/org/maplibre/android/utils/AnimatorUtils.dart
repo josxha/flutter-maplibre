@@ -46,8 +46,8 @@ class AnimatorUtils$OnAnimationEndListener extends jni$_.JObject {
 
   @jni$_.internal
   AnimatorUtils$OnAnimationEndListener.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/utils/AnimatorUtils$OnAnimationEndListener',
@@ -62,21 +62,17 @@ class AnimatorUtils$OnAnimationEndListener extends jni$_.JObject {
     r'()V',
   );
 
-  static final _onAnimationEnd =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onAnimationEnd = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
 
   /// from: `public abstract void onAnimationEnd()`
   void onAnimationEnd() {
@@ -101,11 +97,10 @@ class AnimatorUtils$OnAnimationEndListener extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -199,9 +194,10 @@ final class $AnimatorUtils$OnAnimationEndListener$NullableType
   @core$_.override
   AnimatorUtils$OnAnimationEndListener? fromReference(
     jni$_.JReference reference,
-  ) => reference.isNull
-      ? null
-      : AnimatorUtils$OnAnimationEndListener.fromReference(reference);
+  ) =>
+      reference.isNull
+          ? null
+          : AnimatorUtils$OnAnimationEndListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -241,7 +237,8 @@ final class $AnimatorUtils$OnAnimationEndListener$Type
   @core$_.override
   AnimatorUtils$OnAnimationEndListener fromReference(
     jni$_.JReference reference,
-  ) => AnimatorUtils$OnAnimationEndListener.fromReference(reference);
+  ) =>
+      AnimatorUtils$OnAnimationEndListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -273,8 +270,8 @@ class AnimatorUtils extends jni$_.JObject {
 
   @jni$_.internal
   AnimatorUtils.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/utils/AnimatorUtils',
@@ -285,21 +282,17 @@ class AnimatorUtils extends jni$_.JObject {
   static const type = $AnimatorUtils$Type();
   static final _id_new$ = _class.constructorId(r'()V');
 
-  static final _new$ =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_NewObject')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>>('globalEnv_NewObject')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
 
   /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
@@ -314,31 +307,26 @@ class AnimatorUtils extends jni$_.JObject {
     r'(Landroid/view/View;ILorg/maplibre/android/utils/AnimatorUtils$OnAnimationEndListener;)V',
   );
 
-  static final _animate =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _animate = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<
-                  (
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.Int32,
-                    jni$_.Pointer<jni$_.Void>,
-                  )
-                >,
-              )
-            >
-          >('globalEnv_CallStaticVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              int,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                    (
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.Int32,
+                      jni$_.Pointer<jni$_.Void>,
+                    )>,
+              )>>('globalEnv_CallStaticVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+            int,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `static public void animate(android.view.View view, int i, org.maplibre.android.utils.AnimatorUtils$OnAnimationEndListener onAnimationEndListener)`
   static void animate(
@@ -363,33 +351,28 @@ class AnimatorUtils extends jni$_.JObject {
     r'(Landroid/view/View;IILorg/maplibre/android/utils/AnimatorUtils$OnAnimationEndListener;)V',
   );
 
-  static final _animate$1 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _animate$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<
-                  (
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.Int32,
-                    jni$_.Int32,
-                    jni$_.Pointer<jni$_.Void>,
-                  )
-                >,
-              )
-            >
-          >('globalEnv_CallStaticVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              int,
-              int,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                    (
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.Int32,
+                      jni$_.Int32,
+                      jni$_.Pointer<jni$_.Void>,
+                    )>,
+              )>>('globalEnv_CallStaticVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+            int,
+            int,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `static public void animate(android.view.View view, int i, int i1, org.maplibre.android.utils.AnimatorUtils$OnAnimationEndListener onAnimationEndListener)`
   static void animate$1(
@@ -416,24 +399,20 @@ class AnimatorUtils extends jni$_.JObject {
     r'(Landroid/view/View;I)V',
   );
 
-  static final _animate$2 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _animate$2 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>,
-              )
-            >
-          >('globalEnv_CallStaticVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              int,
-            )
-          >();
+              )>>('globalEnv_CallStaticVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+            int,
+          )>();
 
   /// from: `static public void animate(android.view.View view, int i)`
   static void animate$2(jni$_.JObject view, int i) {
@@ -451,27 +430,22 @@ class AnimatorUtils extends jni$_.JObject {
     r'(Landroid/view/View;II)V',
   );
 
-  static final _animate$3 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _animate$3 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<
-                  (jni$_.Pointer<jni$_.Void>, jni$_.Int32, jni$_.Int32)
-                >,
-              )
-            >
-          >('globalEnv_CallStaticVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              int,
-              int,
-            )
-          >();
+                    (jni$_.Pointer<jni$_.Void>, jni$_.Int32, jni$_.Int32)>,
+              )>>('globalEnv_CallStaticVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+            int,
+            int,
+          )>();
 
   /// from: `static public void animate(android.view.View view, int i, int i1)`
   static void animate$3(jni$_.JObject view, int i, int i1) {
@@ -490,24 +464,20 @@ class AnimatorUtils extends jni$_.JObject {
     r'(Landroid/view/View;F)V',
   );
 
-  static final _rotate =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _rotate = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Double)>,
-              )
-            >
-          >('globalEnv_CallStaticVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              double,
-            )
-          >();
+              )>>('globalEnv_CallStaticVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+            double,
+          )>();
 
   /// from: `static public void rotate(android.view.View view, float f)`
   static void rotate(jni$_.JObject view, double f) {
@@ -525,24 +495,20 @@ class AnimatorUtils extends jni$_.JObject {
     r'(Landroid/view/View;F)V',
   );
 
-  static final _rotateBy =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _rotateBy = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Double)>,
-              )
-            >
-          >('globalEnv_CallStaticVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              double,
-            )
-          >();
+              )>>('globalEnv_CallStaticVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+            double,
+          )>();
 
   /// from: `static public void rotateBy(android.view.View view, float f)`
   static void rotateBy(jni$_.JObject view, double f) {
@@ -560,31 +526,26 @@ class AnimatorUtils extends jni$_.JObject {
     r'(Landroid/view/View;FLorg/maplibre/android/utils/AnimatorUtils$OnAnimationEndListener;)V',
   );
 
-  static final _alpha =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _alpha = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<
-                  (
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.Double,
-                    jni$_.Pointer<jni$_.Void>,
-                  )
-                >,
-              )
-            >
-          >('globalEnv_CallStaticVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              double,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                    (
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.Double,
+                      jni$_.Pointer<jni$_.Void>,
+                    )>,
+              )>>('globalEnv_CallStaticVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+            double,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `static public void alpha(android.view.View view, float f, org.maplibre.android.utils.AnimatorUtils$OnAnimationEndListener onAnimationEndListener)`
   static void alpha(
@@ -609,24 +570,20 @@ class AnimatorUtils extends jni$_.JObject {
     r'(Landroid/view/View;F)V',
   );
 
-  static final _alpha$1 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _alpha$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Double)>,
-              )
-            >
-          >('globalEnv_CallStaticVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              double,
-            )
-          >();
+              )>>('globalEnv_CallStaticVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+            double,
+          )>();
 
   /// from: `static public void alpha(android.view.View view, float f)`
   static void alpha$1(jni$_.JObject view, double f) {

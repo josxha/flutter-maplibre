@@ -46,8 +46,8 @@ class RenderMode$Mode extends jni$_.JObject {
 
   @jni$_.internal
   RenderMode$Mode.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/location/modes/RenderMode$Mode',
@@ -71,11 +71,10 @@ class RenderMode$Mode extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -210,8 +209,8 @@ class RenderMode extends jni$_.JObject {
 
   @jni$_.internal
   RenderMode.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/location/modes/RenderMode',

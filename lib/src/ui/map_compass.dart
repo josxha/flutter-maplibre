@@ -91,8 +91,7 @@ class MapCompass extends StatelessWidget {
         child: PointerInterceptor(
           child: InkWell(
             onTap: () => _onTap(controller),
-            child:
-                child ??
+            child: child ??
                 CustomPaint(
                   painter: _CompassPainter(radius: radius),
                   child: SizedBox.square(dimension: radius * 2),

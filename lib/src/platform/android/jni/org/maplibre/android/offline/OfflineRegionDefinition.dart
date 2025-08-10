@@ -48,8 +48,8 @@ class OfflineRegionDefinition extends jni$_.JObject {
 
   @jni$_.internal
   OfflineRegionDefinition.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/offline/OfflineRegionDefinition',
@@ -63,21 +63,17 @@ class OfflineRegionDefinition extends jni$_.JObject {
     r'()Lorg/maplibre/android/geometry/LatLngBounds;',
   );
 
-  static final _getBounds =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _getBounds = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
 
   /// from: `public abstract org.maplibre.android.geometry.LatLngBounds getBounds()`
   /// The returned object must be released after use, by calling the [release] method.
@@ -95,21 +91,17 @@ class OfflineRegionDefinition extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getStyleURL =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _getStyleURL = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
 
   /// from: `public abstract java.lang.String getStyleURL()`
   /// The returned object must be released after use, by calling the [release] method.
@@ -122,21 +114,17 @@ class OfflineRegionDefinition extends jni$_.JObject {
 
   static final _id_getMinZoom = _class.instanceMethodId(r'getMinZoom', r'()D');
 
-  static final _getMinZoom =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _getMinZoom = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallDoubleMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>>('globalEnv_CallDoubleMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
 
   /// from: `public abstract double getMinZoom()`
   double getMinZoom() {
@@ -148,21 +136,17 @@ class OfflineRegionDefinition extends jni$_.JObject {
 
   static final _id_getMaxZoom = _class.instanceMethodId(r'getMaxZoom', r'()D');
 
-  static final _getMaxZoom =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _getMaxZoom = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallDoubleMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>>('globalEnv_CallDoubleMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
 
   /// from: `public abstract double getMaxZoom()`
   double getMaxZoom() {
@@ -177,21 +161,17 @@ class OfflineRegionDefinition extends jni$_.JObject {
     r'()F',
   );
 
-  static final _getPixelRatio =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _getPixelRatio = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallFloatMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>>('globalEnv_CallFloatMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
 
   /// from: `public abstract float getPixelRatio()`
   double getPixelRatio() {
@@ -206,21 +186,17 @@ class OfflineRegionDefinition extends jni$_.JObject {
     r'()Z',
   );
 
-  static final _getIncludeIdeographs =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _getIncludeIdeographs = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>>('globalEnv_CallBooleanMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
 
   /// from: `public abstract boolean getIncludeIdeographs()`
   bool getIncludeIdeographs() {
@@ -235,21 +211,17 @@ class OfflineRegionDefinition extends jni$_.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getType =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _getType = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
 
   /// from: `public abstract java.lang.String getType()`
   /// The returned object must be released after use, by calling the [release] method.
@@ -274,11 +246,10 @@ class OfflineRegionDefinition extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -394,13 +365,13 @@ final class _$OfflineRegionDefinition with $OfflineRegionDefinition {
     required double Function() getPixelRatio,
     required bool Function() getIncludeIdeographs,
     required jni$_.JString Function() getType,
-  }) : _getBounds = getBounds,
-       _getStyleURL = getStyleURL,
-       _getMinZoom = getMinZoom,
-       _getMaxZoom = getMaxZoom,
-       _getPixelRatio = getPixelRatio,
-       _getIncludeIdeographs = getIncludeIdeographs,
-       _getType = getType;
+  })  : _getBounds = getBounds,
+        _getStyleURL = getStyleURL,
+        _getMinZoom = getMinZoom,
+        _getMaxZoom = getMaxZoom,
+        _getPixelRatio = getPixelRatio,
+        _getIncludeIdeographs = getIncludeIdeographs,
+        _getType = getType;
 
   final latlngbounds$_.LatLngBounds? Function() _getBounds;
   final jni$_.JString? Function() _getStyleURL;
@@ -453,8 +424,8 @@ final class $OfflineRegionDefinition$NullableType
   @core$_.override
   OfflineRegionDefinition? fromReference(jni$_.JReference reference) =>
       reference.isNull
-      ? null
-      : OfflineRegionDefinition.fromReference(reference);
+          ? null
+          : OfflineRegionDefinition.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

@@ -12,41 +12,41 @@ class StyleControllerAndroid implements StyleController {
       using((arena) {
         final jLayer = switch (layer) {
           FillStyleLayer() => jni.FillLayer(
-            layer.id.toJString(),
-            layer.sourceId.toJString(),
-          ),
+              layer.id.toJString(),
+              layer.sourceId.toJString(),
+            ),
           CircleStyleLayer() => jni.CircleLayer(
-            layer.id.toJString(),
-            layer.sourceId.toJString(),
-          ),
+              layer.id.toJString(),
+              layer.sourceId.toJString(),
+            ),
           BackgroundStyleLayer() => jni.BackgroundLayer(layer.id.toJString()),
           FillExtrusionStyleLayer() => jni.FillExtrusionLayer(
-            layer.id.toJString(),
-            layer.sourceId.toJString(),
-          ),
+              layer.id.toJString(),
+              layer.sourceId.toJString(),
+            ),
           HeatmapStyleLayer() => jni.HeatmapLayer(
-            layer.id.toJString(),
-            layer.sourceId.toJString(),
-          ),
+              layer.id.toJString(),
+              layer.sourceId.toJString(),
+            ),
           HillshadeStyleLayer() => jni.HillshadeLayer(
-            layer.id.toJString(),
-            layer.sourceId.toJString(),
-          ),
+              layer.id.toJString(),
+              layer.sourceId.toJString(),
+            ),
           LineStyleLayer() => jni.LineLayer(
-            layer.id.toJString(),
-            layer.sourceId.toJString(),
-          ),
+              layer.id.toJString(),
+              layer.sourceId.toJString(),
+            ),
           RasterStyleLayer() => jni.RasterLayer(
-            layer.id.toJString(),
-            layer.sourceId.toJString(),
-          ),
+              layer.id.toJString(),
+              layer.sourceId.toJString(),
+            ),
           SymbolStyleLayer() => jni.SymbolLayer(
-            layer.id.toJString(),
-            layer.sourceId.toJString(),
-          ),
+              layer.id.toJString(),
+              layer.sourceId.toJString(),
+            ),
           _ => throw UnimplementedError(
-            'The Layer is not supported: ${layer.runtimeType}',
-          ),
+              'The Layer is not supported: ${layer.runtimeType}',
+            ),
         };
 
         // paint and layout properties
@@ -117,13 +117,12 @@ class StyleControllerAndroid implements StyleController {
         } else {
           final tiles = source.tiles!.map((e) => e.toJString());
           final tilesArray = JArray.of(JString.nullableType, tiles);
-          final tileSet =
-              jni.TileSet(
-                  '{}'.toJString(),
-                  tilesArray.as(JArray.type(JString.type)),
-                )
-                ..setMaxZoom(source.maxZoom)
-                ..setMinZoom(source.minZoom);
+          final tileSet = jni.TileSet(
+            '{}'.toJString(),
+            tilesArray.as(JArray.type(JString.type)),
+          )
+            ..setMaxZoom(source.maxZoom)
+            ..setMinZoom(source.minZoom);
           jniSource = jni.RasterSource.new$6(jniId, tileSet, source.tileSize);
           tilesArray.release();
           tileSet.release();

@@ -49,8 +49,8 @@ class Helpers extends jni$_.JObject {
 
   @jni$_.internal
   Helpers.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'com/github/josxha/maplibre/Helpers',
@@ -69,41 +69,37 @@ class Helpers extends jni$_.JObject {
   static Helpers get INSTANCE =>
       _id_INSTANCE.get(_class, const $Helpers$Type());
 
-  static final _id_createOfflineTilePyramidRegionDefinition = _class
-      .instanceMethodId(
-        r'createOfflineTilePyramidRegionDefinition',
-        r'(Ljava/lang/String;Lorg/maplibre/android/geometry/LatLngBounds;DDF)Lorg/maplibre/android/offline/OfflineTilePyramidRegionDefinition;',
-      );
+  static final _id_createOfflineTilePyramidRegionDefinition =
+      _class.instanceMethodId(
+    r'createOfflineTilePyramidRegionDefinition',
+    r'(Ljava/lang/String;Lorg/maplibre/android/geometry/LatLngBounds;DDF)Lorg/maplibre/android/offline/OfflineTilePyramidRegionDefinition;',
+  );
 
   static final _createOfflineTilePyramidRegionDefinition =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<
+                        (
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.Double,
+                          jni$_.Double,
+                          jni$_.Double,
+                        )>,
+                  )>>('globalEnv_CallObjectMethod')
+          .asFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<
-                  (
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.Double,
-                    jni$_.Double,
-                    jni$_.Double,
-                  )
-                >,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-              double,
-              double,
-              double,
-            )
-          >();
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.Pointer<jni$_.Void>,
+                double,
+                double,
+                double,
+              )>();
 
   /// from: `public final org.maplibre.android.offline.OfflineTilePyramidRegionDefinition createOfflineTilePyramidRegionDefinition(java.lang.String string, org.maplibre.android.geometry.LatLngBounds latLngBounds, double d, double d1, float f)`
   /// The returned object must be released after use, by calling the [release] method.

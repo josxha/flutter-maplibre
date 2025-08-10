@@ -74,7 +74,7 @@ class _PermissionsPageState extends State<PermissionsPage> {
 
 extension BoolExt on bool {
   Widget toIcon() => Icon(
-    this ? Icons.check_box : Icons.cancel,
-    color: this ? Colors.green : Colors.red,
-  );
+        this ? Icons.check_box : Icons.cancel,
+        color: this ? Colors.green : Colors.red,
+      );
 }

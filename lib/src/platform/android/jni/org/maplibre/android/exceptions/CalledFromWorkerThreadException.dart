@@ -46,8 +46,8 @@ class CalledFromWorkerThreadException extends jni$_.JObject {
 
   @jni$_.internal
   CalledFromWorkerThreadException.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/exceptions/CalledFromWorkerThreadException',
@@ -58,23 +58,19 @@ class CalledFromWorkerThreadException extends jni$_.JObject {
   static const type = $CalledFromWorkerThreadException$Type();
   static final _id_new$ = _class.constructorId(r'(Ljava/lang/String;)V');
 
-  static final _new$ =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_NewObject')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_NewObject')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public void <init>(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -104,8 +100,8 @@ final class $CalledFromWorkerThreadException$NullableType
   @core$_.override
   CalledFromWorkerThreadException? fromReference(jni$_.JReference reference) =>
       reference.isNull
-      ? null
-      : CalledFromWorkerThreadException.fromReference(reference);
+          ? null
+          : CalledFromWorkerThreadException.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

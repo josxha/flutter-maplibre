@@ -46,8 +46,8 @@ class Utils extends jni$_.JObject {
 
   @jni$_.internal
   Utils.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/location/Utils',
@@ -61,24 +61,20 @@ class Utils extends jni$_.JObject {
     r'(FF)F',
   );
 
-  static final _shortestRotation =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _shortestRotation = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Double, jni$_.Double)>,
-              )
-            >
-          >('globalEnv_CallStaticFloatMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              double,
-              double,
-            )
-          >();
+              )>>('globalEnv_CallStaticFloatMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            double,
+            double,
+          )>();
 
   /// from: `static public float shortestRotation(float f, float f1)`
   static double shortestRotation(double f, double f1) {
@@ -92,23 +88,19 @@ class Utils extends jni$_.JObject {
 
   static final _id_normalize = _class.staticMethodId(r'normalize', r'(F)F');
 
-  static final _normalize =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _normalize = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Double,)>,
-              )
-            >
-          >('globalEnv_CallStaticFloatMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              double,
-            )
-          >();
+              )>>('globalEnv_CallStaticFloatMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            double,
+          )>();
 
   /// from: `static public float normalize(float f)`
   static double normalize(double f) {

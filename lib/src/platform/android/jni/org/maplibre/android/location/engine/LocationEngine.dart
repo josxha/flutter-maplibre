@@ -52,8 +52,8 @@ class LocationEngine extends jni$_.JObject {
 
   @jni$_.internal
   LocationEngine.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/location/engine/LocationEngine',
@@ -67,30 +67,25 @@ class LocationEngine extends jni$_.JObject {
     r'(Lorg/maplibre/android/location/engine/LocationEngineCallback;)V',
   );
 
-  static final _getLastLocation =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _getLastLocation = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public abstract void getLastLocation(org.maplibre.android.location.engine.LocationEngineCallback<org.maplibre.android.location.engine.LocationEngineResult> locationEngineCallback)`
   void getLastLocation(
-    locationenginecallback$_.LocationEngineCallback<
-      locationengineresult$_.LocationEngineResult?
-    >
-    locationEngineCallback,
+    locationenginecallback$_
+        .LocationEngineCallback<locationengineresult$_.LocationEngineResult?>
+        locationEngineCallback,
   ) {
     final _$locationEngineCallback = locationEngineCallback.reference;
     _getLastLocation(
@@ -105,39 +100,33 @@ class LocationEngine extends jni$_.JObject {
     r'(Lorg/maplibre/android/location/engine/LocationEngineRequest;Lorg/maplibre/android/location/engine/LocationEngineCallback;Landroid/os/Looper;)V',
   );
 
-  static final _requestLocationUpdates =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _requestLocationUpdates = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<
-                  (
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.Pointer<jni$_.Void>,
-                  )
-                >,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                    (
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.Pointer<jni$_.Void>,
+                    )>,
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public abstract void requestLocationUpdates(org.maplibre.android.location.engine.LocationEngineRequest locationEngineRequest, org.maplibre.android.location.engine.LocationEngineCallback<org.maplibre.android.location.engine.LocationEngineResult> locationEngineCallback, android.os.Looper looper)`
   void requestLocationUpdates(
     locationenginerequest$_.LocationEngineRequest locationEngineRequest,
-    locationenginecallback$_.LocationEngineCallback<
-      locationengineresult$_.LocationEngineResult?
-    >
-    locationEngineCallback,
+    locationenginecallback$_
+        .LocationEngineCallback<locationengineresult$_.LocationEngineResult?>
+        locationEngineCallback,
     jni$_.JObject? looper,
   ) {
     final _$locationEngineRequest = locationEngineRequest.reference;
@@ -157,26 +146,21 @@ class LocationEngine extends jni$_.JObject {
     r'(Lorg/maplibre/android/location/engine/LocationEngineRequest;Landroid/app/PendingIntent;)V',
   );
 
-  static final _requestLocationUpdates$1 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _requestLocationUpdates$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<
-                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
-                >,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                    (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)>,
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public abstract void requestLocationUpdates(org.maplibre.android.location.engine.LocationEngineRequest locationEngineRequest, android.app.PendingIntent pendingIntent)`
   void requestLocationUpdates$1(
@@ -198,30 +182,25 @@ class LocationEngine extends jni$_.JObject {
     r'(Lorg/maplibre/android/location/engine/LocationEngineCallback;)V',
   );
 
-  static final _removeLocationUpdates =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _removeLocationUpdates = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public abstract void removeLocationUpdates(org.maplibre.android.location.engine.LocationEngineCallback<org.maplibre.android.location.engine.LocationEngineResult> locationEngineCallback)`
   void removeLocationUpdates(
-    locationenginecallback$_.LocationEngineCallback<
-      locationengineresult$_.LocationEngineResult?
-    >
-    locationEngineCallback,
+    locationenginecallback$_
+        .LocationEngineCallback<locationengineresult$_.LocationEngineResult?>
+        locationEngineCallback,
   ) {
     final _$locationEngineCallback = locationEngineCallback.reference;
     _removeLocationUpdates(
@@ -236,23 +215,19 @@ class LocationEngine extends jni$_.JObject {
     r'(Landroid/app/PendingIntent;)V',
   );
 
-  static final _removeLocationUpdates$1 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _removeLocationUpdates$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public abstract void removeLocationUpdates(android.app.PendingIntent pendingIntent)`
   void removeLocationUpdates$1(jni$_.JObject? pendingIntent) {
@@ -278,11 +253,10 @@ class LocationEngine extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -296,8 +270,8 @@ class LocationEngine extends jni$_.JObject {
         _$impls[$p]!.getLastLocation(
           $a![0]!.as(
             const locationenginecallback$_.$LocationEngineCallback$Type<
-              locationengineresult$_.LocationEngineResult?
-            >(locationengineresult$_.$LocationEngineResult$NullableType()),
+                    locationengineresult$_.LocationEngineResult?>(
+                locationengineresult$_.$LocationEngineResult$NullableType()),
             releaseOriginal: true,
           ),
         );
@@ -312,8 +286,8 @@ class LocationEngine extends jni$_.JObject {
           ),
           $a![1]!.as(
             const locationenginecallback$_.$LocationEngineCallback$Type<
-              locationengineresult$_.LocationEngineResult?
-            >(locationengineresult$_.$LocationEngineResult$NullableType()),
+                    locationengineresult$_.LocationEngineResult?>(
+                locationengineresult$_.$LocationEngineResult$NullableType()),
             releaseOriginal: true,
           ),
           $a![2]?.as(const jni$_.JObjectType(), releaseOriginal: true),
@@ -336,8 +310,8 @@ class LocationEngine extends jni$_.JObject {
         _$impls[$p]!.removeLocationUpdates(
           $a![0]!.as(
             const locationenginecallback$_.$LocationEngineCallback$Type<
-              locationengineresult$_.LocationEngineResult?
-            >(locationengineresult$_.$LocationEngineResult$NullableType()),
+                    locationengineresult$_.LocationEngineResult?>(
+                locationengineresult$_.$LocationEngineResult$NullableType()),
             releaseOriginal: true,
           ),
         );
@@ -401,55 +375,46 @@ class LocationEngine extends jni$_.JObject {
 abstract base mixin class $LocationEngine {
   factory $LocationEngine({
     required void Function(
-      locationenginecallback$_.LocationEngineCallback<
-        locationengineresult$_.LocationEngineResult?
-      >
-      locationEngineCallback,
-    )
-    getLastLocation,
+      locationenginecallback$_
+          .LocationEngineCallback<locationengineresult$_.LocationEngineResult?>
+          locationEngineCallback,
+    ) getLastLocation,
     bool getLastLocation$async,
     required void Function(
       locationenginerequest$_.LocationEngineRequest locationEngineRequest,
-      locationenginecallback$_.LocationEngineCallback<
-        locationengineresult$_.LocationEngineResult?
-      >
-      locationEngineCallback,
+      locationenginecallback$_
+          .LocationEngineCallback<locationengineresult$_.LocationEngineResult?>
+          locationEngineCallback,
       jni$_.JObject? looper,
-    )
-    requestLocationUpdates,
+    ) requestLocationUpdates,
     bool requestLocationUpdates$async,
     required void Function(
       locationenginerequest$_.LocationEngineRequest locationEngineRequest,
       jni$_.JObject? pendingIntent,
-    )
-    requestLocationUpdates$1,
+    ) requestLocationUpdates$1,
     bool requestLocationUpdates$1$async,
     required void Function(
-      locationenginecallback$_.LocationEngineCallback<
-        locationengineresult$_.LocationEngineResult?
-      >
-      locationEngineCallback,
-    )
-    removeLocationUpdates,
+      locationenginecallback$_
+          .LocationEngineCallback<locationengineresult$_.LocationEngineResult?>
+          locationEngineCallback,
+    ) removeLocationUpdates,
     bool removeLocationUpdates$async,
     required void Function(jni$_.JObject? pendingIntent)
-    removeLocationUpdates$1,
+        removeLocationUpdates$1,
     bool removeLocationUpdates$1$async,
   }) = _$LocationEngine;
 
   void getLastLocation(
-    locationenginecallback$_.LocationEngineCallback<
-      locationengineresult$_.LocationEngineResult?
-    >
-    locationEngineCallback,
+    locationenginecallback$_
+        .LocationEngineCallback<locationengineresult$_.LocationEngineResult?>
+        locationEngineCallback,
   );
   bool get getLastLocation$async => false;
   void requestLocationUpdates(
     locationenginerequest$_.LocationEngineRequest locationEngineRequest,
-    locationenginecallback$_.LocationEngineCallback<
-      locationengineresult$_.LocationEngineResult?
-    >
-    locationEngineCallback,
+    locationenginecallback$_
+        .LocationEngineCallback<locationengineresult$_.LocationEngineResult?>
+        locationEngineCallback,
     jni$_.JObject? looper,
   );
   bool get requestLocationUpdates$async => false;
@@ -459,10 +424,9 @@ abstract base mixin class $LocationEngine {
   );
   bool get requestLocationUpdates$1$async => false;
   void removeLocationUpdates(
-    locationenginecallback$_.LocationEngineCallback<
-      locationengineresult$_.LocationEngineResult?
-    >
-    locationEngineCallback,
+    locationenginecallback$_
+        .LocationEngineCallback<locationengineresult$_.LocationEngineResult?>
+        locationEngineCallback,
   );
   bool get removeLocationUpdates$async => false;
   void removeLocationUpdates$1(jni$_.JObject? pendingIntent);
@@ -472,96 +436,80 @@ abstract base mixin class $LocationEngine {
 final class _$LocationEngine with $LocationEngine {
   _$LocationEngine({
     required void Function(
-      locationenginecallback$_.LocationEngineCallback<
-        locationengineresult$_.LocationEngineResult?
-      >
-      locationEngineCallback,
-    )
-    getLastLocation,
+      locationenginecallback$_
+          .LocationEngineCallback<locationengineresult$_.LocationEngineResult?>
+          locationEngineCallback,
+    ) getLastLocation,
     this.getLastLocation$async = false,
     required void Function(
       locationenginerequest$_.LocationEngineRequest locationEngineRequest,
-      locationenginecallback$_.LocationEngineCallback<
-        locationengineresult$_.LocationEngineResult?
-      >
-      locationEngineCallback,
+      locationenginecallback$_
+          .LocationEngineCallback<locationengineresult$_.LocationEngineResult?>
+          locationEngineCallback,
       jni$_.JObject? looper,
-    )
-    requestLocationUpdates,
+    ) requestLocationUpdates,
     this.requestLocationUpdates$async = false,
     required void Function(
       locationenginerequest$_.LocationEngineRequest locationEngineRequest,
       jni$_.JObject? pendingIntent,
-    )
-    requestLocationUpdates$1,
+    ) requestLocationUpdates$1,
     this.requestLocationUpdates$1$async = false,
     required void Function(
-      locationenginecallback$_.LocationEngineCallback<
-        locationengineresult$_.LocationEngineResult?
-      >
-      locationEngineCallback,
-    )
-    removeLocationUpdates,
+      locationenginecallback$_
+          .LocationEngineCallback<locationengineresult$_.LocationEngineResult?>
+          locationEngineCallback,
+    ) removeLocationUpdates,
     this.removeLocationUpdates$async = false,
     required void Function(jni$_.JObject? pendingIntent)
-    removeLocationUpdates$1,
+        removeLocationUpdates$1,
     this.removeLocationUpdates$1$async = false,
-  }) : _getLastLocation = getLastLocation,
-       _requestLocationUpdates = requestLocationUpdates,
-       _requestLocationUpdates$1 = requestLocationUpdates$1,
-       _removeLocationUpdates = removeLocationUpdates,
-       _removeLocationUpdates$1 = removeLocationUpdates$1;
+  })  : _getLastLocation = getLastLocation,
+        _requestLocationUpdates = requestLocationUpdates,
+        _requestLocationUpdates$1 = requestLocationUpdates$1,
+        _removeLocationUpdates = removeLocationUpdates,
+        _removeLocationUpdates$1 = removeLocationUpdates$1;
 
   final void Function(
-    locationenginecallback$_.LocationEngineCallback<
-      locationengineresult$_.LocationEngineResult?
-    >
-    locationEngineCallback,
-  )
-  _getLastLocation;
+    locationenginecallback$_
+        .LocationEngineCallback<locationengineresult$_.LocationEngineResult?>
+        locationEngineCallback,
+  ) _getLastLocation;
   final bool getLastLocation$async;
   final void Function(
     locationenginerequest$_.LocationEngineRequest locationEngineRequest,
-    locationenginecallback$_.LocationEngineCallback<
-      locationengineresult$_.LocationEngineResult?
-    >
-    locationEngineCallback,
+    locationenginecallback$_
+        .LocationEngineCallback<locationengineresult$_.LocationEngineResult?>
+        locationEngineCallback,
     jni$_.JObject? looper,
-  )
-  _requestLocationUpdates;
+  ) _requestLocationUpdates;
   final bool requestLocationUpdates$async;
   final void Function(
     locationenginerequest$_.LocationEngineRequest locationEngineRequest,
     jni$_.JObject? pendingIntent,
-  )
-  _requestLocationUpdates$1;
+  ) _requestLocationUpdates$1;
   final bool requestLocationUpdates$1$async;
   final void Function(
-    locationenginecallback$_.LocationEngineCallback<
-      locationengineresult$_.LocationEngineResult?
-    >
-    locationEngineCallback,
-  )
-  _removeLocationUpdates;
+    locationenginecallback$_
+        .LocationEngineCallback<locationengineresult$_.LocationEngineResult?>
+        locationEngineCallback,
+  ) _removeLocationUpdates;
   final bool removeLocationUpdates$async;
   final void Function(jni$_.JObject? pendingIntent) _removeLocationUpdates$1;
   final bool removeLocationUpdates$1$async;
 
   void getLastLocation(
-    locationenginecallback$_.LocationEngineCallback<
-      locationengineresult$_.LocationEngineResult?
-    >
-    locationEngineCallback,
+    locationenginecallback$_
+        .LocationEngineCallback<locationengineresult$_.LocationEngineResult?>
+        locationEngineCallback,
   ) {
     return _getLastLocation(locationEngineCallback);
   }
 
   void requestLocationUpdates(
     locationenginerequest$_.LocationEngineRequest locationEngineRequest,
-    locationenginecallback$_.LocationEngineCallback<
-      locationengineresult$_.LocationEngineResult?
-    >
-    locationEngineCallback,
+    locationenginecallback$_
+        .LocationEngineCallback<locationengineresult$_.LocationEngineResult?>
+        locationEngineCallback,
     jni$_.JObject? looper,
   ) {
     return _requestLocationUpdates(
@@ -579,10 +527,9 @@ final class _$LocationEngine with $LocationEngine {
   }
 
   void removeLocationUpdates(
-    locationenginecallback$_.LocationEngineCallback<
-      locationengineresult$_.LocationEngineResult?
-    >
-    locationEngineCallback,
+    locationenginecallback$_
+        .LocationEngineCallback<locationengineresult$_.LocationEngineResult?>
+        locationEngineCallback,
   ) {
     return _removeLocationUpdates(locationEngineCallback);
   }

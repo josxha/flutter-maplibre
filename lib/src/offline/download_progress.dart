@@ -64,17 +64,16 @@ class DownloadProgress {
 
   @override
   int get hashCode => Object.hash(
-    loadedBytes,
-    loadedTiles,
-    totalTiles,
-    totalTilesEstimated,
-    region,
-    downloadCompleted,
-  );
+        loadedBytes,
+        loadedTiles,
+        totalTiles,
+        totalTilesEstimated,
+        region,
+        downloadCompleted,
+      );
 
   @override
-  String toString() =>
-      'DownloadProgress('
+  String toString() => 'DownloadProgress('
       'loadedBytes: $loadedBytes, '
       'loadedTiles: $loadedTiles, '
       'totalTiles: $totalTiles, '

@@ -46,8 +46,8 @@ class CompassListener extends jni$_.JObject {
 
   @jni$_.internal
   CompassListener.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/location/CompassListener',
@@ -61,23 +61,19 @@ class CompassListener extends jni$_.JObject {
     r'(F)V',
   );
 
-  static final _onCompassChanged =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onCompassChanged = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Double,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              double,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            double,
+          )>();
 
   /// from: `public abstract void onCompassChanged(float f)`
   void onCompassChanged(double f) {
@@ -93,23 +89,19 @@ class CompassListener extends jni$_.JObject {
     r'(I)V',
   );
 
-  static final _onCompassAccuracyChange =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onCompassAccuracyChange = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Int32,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            int,
+          )>();
 
   /// from: `public abstract void onCompassAccuracyChange(int i)`
   void onCompassAccuracyChange(int i) {
@@ -134,11 +126,10 @@ class CompassListener extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -224,8 +215,8 @@ final class _$CompassListener with $CompassListener {
     this.onCompassChanged$async = false,
     required void Function(int i) onCompassAccuracyChange,
     this.onCompassAccuracyChange$async = false,
-  }) : _onCompassChanged = onCompassChanged,
-       _onCompassAccuracyChange = onCompassAccuracyChange;
+  })  : _onCompassChanged = onCompassChanged,
+        _onCompassAccuracyChange = onCompassAccuracyChange;
 
   final void Function(double f) _onCompassChanged;
   final bool onCompassChanged$async;

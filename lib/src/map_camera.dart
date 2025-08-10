@@ -39,8 +39,7 @@ class MapCamera {
       (throw StateError('Unable to find an instance of MapCamera'));
 
   @override
-  String toString() =>
-      'MapCamera('
+  String toString() => 'MapCamera('
       'center: Position(lng: ${center.lng}, lat: ${center.lat}), '
       'zoom: $zoom, bearing: $bearing, pitch: $pitch)';
 

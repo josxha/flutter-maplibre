@@ -48,8 +48,8 @@ class GeometryTileProvider extends jni$_.JObject {
 
   @jni$_.internal
   GeometryTileProvider.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/style/sources/GeometryTileProvider',
@@ -63,24 +63,20 @@ class GeometryTileProvider extends jni$_.JObject {
     r'(Lorg/maplibre/android/geometry/LatLngBounds;I)Lorg/maplibre/geojson/FeatureCollection;',
   );
 
-  static final _getFeaturesForBounds =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _getFeaturesForBounds = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              int,
-            )
-          >();
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+            int,
+          )>();
 
   /// from: `public abstract org.maplibre.geojson.FeatureCollection getFeaturesForBounds(org.maplibre.android.geometry.LatLngBounds latLngBounds, int i)`
   /// The returned object must be released after use, by calling the [release] method.
@@ -111,11 +107,10 @@ class GeometryTileProvider extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -184,8 +179,7 @@ abstract base mixin class $GeometryTileProvider {
     required jni$_.JObject Function(
       latlngbounds$_.LatLngBounds latLngBounds,
       int i,
-    )
-    getFeaturesForBounds,
+    ) getFeaturesForBounds,
   }) = _$GeometryTileProvider;
 
   jni$_.JObject getFeaturesForBounds(
@@ -199,12 +193,11 @@ final class _$GeometryTileProvider with $GeometryTileProvider {
     required jni$_.JObject Function(
       latlngbounds$_.LatLngBounds latLngBounds,
       int i,
-    )
-    getFeaturesForBounds,
+    ) getFeaturesForBounds,
   }) : _getFeaturesForBounds = getFeaturesForBounds;
 
   final jni$_.JObject Function(latlngbounds$_.LatLngBounds latLngBounds, int i)
-  _getFeaturesForBounds;
+      _getFeaturesForBounds;
 
   jni$_.JObject getFeaturesForBounds(
     latlngbounds$_.LatLngBounds latLngBounds,

@@ -46,8 +46,8 @@ class JObject$ViewCallback extends jni$_.JObject {
 
   @jni$_.internal
   JObject$ViewCallback.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/maps/NativeMapView$ViewCallback',
@@ -61,21 +61,17 @@ class JObject$ViewCallback extends jni$_.JObject {
     r'()Landroid/graphics/Bitmap;',
   );
 
-  static final _getViewContent =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _getViewContent = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
 
   /// from: `public abstract android.graphics.Bitmap getViewContent()`
   /// The returned object must be released after use, by calling the [release] method.
@@ -100,11 +96,10 @@ class JObject$ViewCallback extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -169,7 +164,7 @@ abstract base mixin class $JObject$ViewCallback {
 
 final class _$JObject$ViewCallback with $JObject$ViewCallback {
   _$JObject$ViewCallback({required jni$_.JObject? Function() getViewContent})
-    : _getViewContent = getViewContent;
+      : _getViewContent = getViewContent;
 
   final jni$_.JObject? Function() _getViewContent;
 

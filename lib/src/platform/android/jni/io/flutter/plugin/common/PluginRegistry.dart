@@ -47,8 +47,8 @@ class PluginRegistry$ActivityResultListener extends jni$_.JObject {
   @jni$_.internal
   PluginRegistry$ActivityResultListener.fromReference(
     jni$_.JReference reference,
-  ) : $type = type,
-      super.fromReference(reference);
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'io/flutter/plugin/common/PluginRegistry$ActivityResultListener',
@@ -63,27 +63,22 @@ class PluginRegistry$ActivityResultListener extends jni$_.JObject {
     r'(IILandroid/content/Intent;)Z',
   );
 
-  static final _onActivityResult =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onActivityResult = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<
-                  (jni$_.Int32, jni$_.Int32, jni$_.Pointer<jni$_.Void>)
-                >,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-              int,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                    (jni$_.Int32, jni$_.Int32, jni$_.Pointer<jni$_.Void>)>,
+              )>>('globalEnv_CallBooleanMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            int,
+            int,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public abstract boolean onActivityResult(int i, int i1, android.content.Intent intent)`
   bool onActivityResult(int i, int i1, jni$_.JObject? intent) {
@@ -112,11 +107,10 @@ class PluginRegistry$ActivityResultListener extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -182,7 +176,7 @@ class PluginRegistry$ActivityResultListener extends jni$_.JObject {
 abstract base mixin class $PluginRegistry$ActivityResultListener {
   factory $PluginRegistry$ActivityResultListener({
     required bool Function(int i, int i1, jni$_.JObject? intent)
-    onActivityResult,
+        onActivityResult,
   }) = _$PluginRegistry$ActivityResultListener;
 
   bool onActivityResult(int i, int i1, jni$_.JObject? intent);
@@ -192,7 +186,7 @@ final class _$PluginRegistry$ActivityResultListener
     with $PluginRegistry$ActivityResultListener {
   _$PluginRegistry$ActivityResultListener({
     required bool Function(int i, int i1, jni$_.JObject? intent)
-    onActivityResult,
+        onActivityResult,
   }) : _onActivityResult = onActivityResult;
 
   final bool Function(int i, int i1, jni$_.JObject? intent) _onActivityResult;
@@ -216,9 +210,10 @@ final class $PluginRegistry$ActivityResultListener$NullableType
   @core$_.override
   PluginRegistry$ActivityResultListener? fromReference(
     jni$_.JReference reference,
-  ) => reference.isNull
-      ? null
-      : PluginRegistry$ActivityResultListener.fromReference(reference);
+  ) =>
+      reference.isNull
+          ? null
+          : PluginRegistry$ActivityResultListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -258,7 +253,8 @@ final class $PluginRegistry$ActivityResultListener$Type
   @core$_.override
   PluginRegistry$ActivityResultListener fromReference(
     jni$_.JReference reference,
-  ) => PluginRegistry$ActivityResultListener.fromReference(reference);
+  ) =>
+      PluginRegistry$ActivityResultListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -290,8 +286,8 @@ class PluginRegistry$NewIntentListener extends jni$_.JObject {
 
   @jni$_.internal
   PluginRegistry$NewIntentListener.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'io/flutter/plugin/common/PluginRegistry$NewIntentListener',
@@ -305,23 +301,19 @@ class PluginRegistry$NewIntentListener extends jni$_.JObject {
     r'(Landroid/content/Intent;)Z',
   );
 
-  static final _onNewIntent =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onNewIntent = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+              )>>('globalEnv_CallBooleanMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            jni$_.Pointer<jni$_.Void>,
+          )>();
 
   /// from: `public abstract boolean onNewIntent(android.content.Intent intent)`
   bool onNewIntent(jni$_.JObject intent) {
@@ -347,11 +339,10 @@ class PluginRegistry$NewIntentListener extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -443,8 +434,8 @@ final class $PluginRegistry$NewIntentListener$NullableType
   @core$_.override
   PluginRegistry$NewIntentListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
-      ? null
-      : PluginRegistry$NewIntentListener.fromReference(reference);
+          ? null
+          : PluginRegistry$NewIntentListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -514,8 +505,8 @@ class PluginRegistry$RequestPermissionsResultListener extends jni$_.JObject {
   @jni$_.internal
   PluginRegistry$RequestPermissionsResultListener.fromReference(
     jni$_.JReference reference,
-  ) : $type = type,
-      super.fromReference(reference);
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'io/flutter/plugin/common/PluginRegistry$RequestPermissionsResultListener',
@@ -532,29 +523,25 @@ class PluginRegistry$RequestPermissionsResultListener extends jni$_.JObject {
 
   static final _onRequestPermissionsResult =
       jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.JMethodIDPtr,
+                    jni$_.VarArgs<
+                        (
+                          jni$_.Int32,
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.Pointer<jni$_.Void>,
+                        )>,
+                  )>>('globalEnv_CallBooleanMethod')
+          .asFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<
-                  (
-                    jni$_.Int32,
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.Pointer<jni$_.Void>,
-                  )
-                >,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
+                int,
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.Pointer<jni$_.Void>,
+              )>();
 
   /// from: `public abstract boolean onRequestPermissionsResult(int i, java.lang.String[] strings, int[] is)`
   bool onRequestPermissionsResult(
@@ -575,7 +562,7 @@ class PluginRegistry$RequestPermissionsResultListener extends jni$_.JObject {
 
   /// Maps a specific port to the implemented interface.
   static final core$_.Map<int, $PluginRegistry$RequestPermissionsResultListener>
-  _$impls = {};
+      _$impls = {};
   static jni$_.JObjectPtr _$invoke(
     int port,
     jni$_.JObjectPtr descriptor,
@@ -588,11 +575,10 @@ class PluginRegistry$RequestPermissionsResultListener extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -662,8 +648,7 @@ abstract base mixin class $PluginRegistry$RequestPermissionsResultListener {
       int i,
       jni$_.JArray<jni$_.JString?> strings,
       jni$_.JIntArray is$,
-    )
-    onRequestPermissionsResult,
+    ) onRequestPermissionsResult,
   }) = _$PluginRegistry$RequestPermissionsResultListener;
 
   bool onRequestPermissionsResult(
@@ -680,16 +665,14 @@ final class _$PluginRegistry$RequestPermissionsResultListener
       int i,
       jni$_.JArray<jni$_.JString?> strings,
       jni$_.JIntArray is$,
-    )
-    onRequestPermissionsResult,
+    ) onRequestPermissionsResult,
   }) : _onRequestPermissionsResult = onRequestPermissionsResult;
 
   final bool Function(
     int i,
     jni$_.JArray<jni$_.JString?> strings,
     jni$_.JIntArray is$,
-  )
-  _onRequestPermissionsResult;
+  ) _onRequestPermissionsResult;
 
   bool onRequestPermissionsResult(
     int i,
@@ -714,11 +697,12 @@ final class $PluginRegistry$RequestPermissionsResultListener$NullableType
   @core$_.override
   PluginRegistry$RequestPermissionsResultListener? fromReference(
     jni$_.JReference reference,
-  ) => reference.isNull
-      ? null
-      : PluginRegistry$RequestPermissionsResultListener.fromReference(
-          reference,
-        );
+  ) =>
+      reference.isNull
+          ? null
+          : PluginRegistry$RequestPermissionsResultListener.fromReference(
+              reference,
+            );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -726,7 +710,7 @@ final class $PluginRegistry$RequestPermissionsResultListener$NullableType
   @jni$_.internal
   @core$_.override
   jni$_.JObjType<PluginRegistry$RequestPermissionsResultListener?>
-  get nullableType => this;
+      get nullableType => this;
 
   @jni$_.internal
   @core$_.override
@@ -758,7 +742,8 @@ final class $PluginRegistry$RequestPermissionsResultListener$Type
   @core$_.override
   PluginRegistry$RequestPermissionsResultListener fromReference(
     jni$_.JReference reference,
-  ) => PluginRegistry$RequestPermissionsResultListener.fromReference(reference);
+  ) =>
+      PluginRegistry$RequestPermissionsResultListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -766,8 +751,8 @@ final class $PluginRegistry$RequestPermissionsResultListener$Type
   @jni$_.internal
   @core$_.override
   jni$_.JObjType<PluginRegistry$RequestPermissionsResultListener?>
-  get nullableType =>
-      const $PluginRegistry$RequestPermissionsResultListener$NullableType();
+      get nullableType =>
+          const $PluginRegistry$RequestPermissionsResultListener$NullableType();
 
   @jni$_.internal
   @core$_.override
@@ -793,8 +778,8 @@ class PluginRegistry$UserLeaveHintListener extends jni$_.JObject {
 
   @jni$_.internal
   PluginRegistry$UserLeaveHintListener.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'io/flutter/plugin/common/PluginRegistry$UserLeaveHintListener',
@@ -809,21 +794,17 @@ class PluginRegistry$UserLeaveHintListener extends jni$_.JObject {
     r'()V',
   );
 
-  static final _onUserLeaveHint =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onUserLeaveHint = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
 
   /// from: `public abstract void onUserLeaveHint()`
   void onUserLeaveHint() {
@@ -848,11 +829,10 @@ class PluginRegistry$UserLeaveHintListener extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -946,9 +926,10 @@ final class $PluginRegistry$UserLeaveHintListener$NullableType
   @core$_.override
   PluginRegistry$UserLeaveHintListener? fromReference(
     jni$_.JReference reference,
-  ) => reference.isNull
-      ? null
-      : PluginRegistry$UserLeaveHintListener.fromReference(reference);
+  ) =>
+      reference.isNull
+          ? null
+          : PluginRegistry$UserLeaveHintListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -988,7 +969,8 @@ final class $PluginRegistry$UserLeaveHintListener$Type
   @core$_.override
   PluginRegistry$UserLeaveHintListener fromReference(
     jni$_.JReference reference,
-  ) => PluginRegistry$UserLeaveHintListener.fromReference(reference);
+  ) =>
+      PluginRegistry$UserLeaveHintListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1021,8 +1003,8 @@ class PluginRegistry$WindowFocusChangedListener extends jni$_.JObject {
   @jni$_.internal
   PluginRegistry$WindowFocusChangedListener.fromReference(
     jni$_.JReference reference,
-  ) : $type = type,
-      super.fromReference(reference);
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'io/flutter/plugin/common/PluginRegistry$WindowFocusChangedListener',
@@ -1037,23 +1019,19 @@ class PluginRegistry$WindowFocusChangedListener extends jni$_.JObject {
     r'(Z)V',
   );
 
-  static final _onWindowFocusChanged =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _onWindowFocusChanged = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<(jni$_.Int32,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-            )
-          >();
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+            int,
+          )>();
 
   /// from: `public abstract void onWindowFocusChanged(boolean z)`
   void onWindowFocusChanged(bool z) {
@@ -1066,7 +1044,7 @@ class PluginRegistry$WindowFocusChangedListener extends jni$_.JObject {
 
   /// Maps a specific port to the implemented interface.
   static final core$_.Map<int, $PluginRegistry$WindowFocusChangedListener>
-  _$impls = {};
+      _$impls = {};
   static jni$_.JObjectPtr _$invoke(
     int port,
     jni$_.JObjectPtr descriptor,
@@ -1079,11 +1057,10 @@ class PluginRegistry$WindowFocusChangedListener extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
@@ -1181,9 +1158,10 @@ final class $PluginRegistry$WindowFocusChangedListener$NullableType
   @core$_.override
   PluginRegistry$WindowFocusChangedListener? fromReference(
     jni$_.JReference reference,
-  ) => reference.isNull
-      ? null
-      : PluginRegistry$WindowFocusChangedListener.fromReference(reference);
+  ) =>
+      reference.isNull
+          ? null
+          : PluginRegistry$WindowFocusChangedListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1223,7 +1201,8 @@ final class $PluginRegistry$WindowFocusChangedListener$Type
   @core$_.override
   PluginRegistry$WindowFocusChangedListener fromReference(
     jni$_.JReference reference,
-  ) => PluginRegistry$WindowFocusChangedListener.fromReference(reference);
+  ) =>
+      PluginRegistry$WindowFocusChangedListener.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1257,8 +1236,8 @@ class PluginRegistry extends jni$_.JObject {
 
   @jni$_.internal
   PluginRegistry.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'io/flutter/plugin/common/PluginRegistry',
@@ -1282,11 +1261,10 @@ class PluginRegistry extends jni$_.JObject {
   }
 
   static final jni$_.Pointer<
-    jni$_.NativeFunction<
-      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
-    >
-  >
-  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
   static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,

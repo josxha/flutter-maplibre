@@ -40,30 +40,30 @@ class _EventsPageState extends State<EventsPage> {
   }
 
   void _onEvent(MapEvent event) => switch (event) {
-    MapEventMapCreated() => _print('map created'),
-    MapEventStyleLoaded() => _print('style loaded'),
-    MapEventMoveCamera() => _print(
-      'move camera: center ${_formatPosition(event.camera.center)}, '
-      'zoom ${event.camera.zoom.toStringAsFixed(2)}, '
-      'pitch ${event.camera.pitch.toStringAsFixed(2)}, '
-      'bearing ${event.camera.bearing.toStringAsFixed(2)}',
-    ),
-    MapEventStartMoveCamera() => _print(
-      'start move camera, reason: ${event.reason.name}',
-    ),
-    MapEventClick() => _print('clicked: ${_formatPosition(event.point)}'),
-    MapEventDoubleClick() => _print(
-      'double clicked: ${_formatPosition(event.point)}',
-    ),
-    MapEventLongClick() => _print(
-      'long clicked: ${_formatPosition(event.point)}',
-    ),
-    MapEventSecondaryClick() => _print(
-      'secondary clicked: ${_formatPosition(event.point)}',
-    ),
-    MapEventIdle() => _print('idle'),
-    MapEventCameraIdle() => _print('camera idle'),
-  };
+        MapEventMapCreated() => _print('map created'),
+        MapEventStyleLoaded() => _print('style loaded'),
+        MapEventMoveCamera() => _print(
+            'move camera: center ${_formatPosition(event.camera.center)}, '
+            'zoom ${event.camera.zoom.toStringAsFixed(2)}, '
+            'pitch ${event.camera.pitch.toStringAsFixed(2)}, '
+            'bearing ${event.camera.bearing.toStringAsFixed(2)}',
+          ),
+        MapEventStartMoveCamera() => _print(
+            'start move camera, reason: ${event.reason.name}',
+          ),
+        MapEventClick() => _print('clicked: ${_formatPosition(event.point)}'),
+        MapEventDoubleClick() => _print(
+            'double clicked: ${_formatPosition(event.point)}',
+          ),
+        MapEventLongClick() => _print(
+            'long clicked: ${_formatPosition(event.point)}',
+          ),
+        MapEventSecondaryClick() => _print(
+            'secondary clicked: ${_formatPosition(event.point)}',
+          ),
+        MapEventIdle() => _print('idle'),
+        MapEventCameraIdle() => _print('camera idle'),
+      };
 
   void _print(String message) {
     debugPrint('[MapLibreMap] $message');

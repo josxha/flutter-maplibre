@@ -46,8 +46,8 @@ class InvalidMarkerPositionException extends jni$_.JObject {
 
   @jni$_.internal
   InvalidMarkerPositionException.fromReference(jni$_.JReference reference)
-    : $type = type,
-      super.fromReference(reference);
+      : $type = type,
+        super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/exceptions/InvalidMarkerPositionException',
@@ -58,21 +58,17 @@ class InvalidMarkerPositionException extends jni$_.JObject {
   static const type = $InvalidMarkerPositionException$Type();
   static final _id_new$ = _class.constructorId(r'()V');
 
-  static final _new$ =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_NewObject')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
+              )>>('globalEnv_NewObject')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
 
   /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
@@ -97,8 +93,8 @@ final class $InvalidMarkerPositionException$NullableType
   @core$_.override
   InvalidMarkerPositionException? fromReference(jni$_.JReference reference) =>
       reference.isNull
-      ? null
-      : InvalidMarkerPositionException.fromReference(reference);
+          ? null
+          : InvalidMarkerPositionException.fromReference(reference);
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

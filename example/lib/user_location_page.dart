@@ -32,10 +32,10 @@ class _UserLocationPageState extends State<UserLocationPage> {
               children: [
                 OutlinedButton(
                   onPressed: () async {
-                    final granted = await _permissionManager
-                        .requestLocationPermissions(
-                          explanation: 'Show the user location on the map.',
-                        );
+                    final granted =
+                        await _permissionManager.requestLocationPermissions(
+                      explanation: 'Show the user location on the map.',
+                    );
                     if (context.mounted) {
                       context.showSnackBox(
                         'Permission ${granted ? 'granted' : 'not granted'}.',
