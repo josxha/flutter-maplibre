@@ -57,13 +57,13 @@ class QueriedLayer {
     required this.sourceLayer,
   });
 
-  /// The layer id.
+  /// The ID of the layer the feature was rendered in.
   final String layerId;
 
-  /// The source id.
-  final String sourceId;
+  /// The ID of the vector source that provided the feature.
+  final String? sourceId;
 
-  /// The source layer id.
+  /// The ID of the vector source layer that provided the feature.
   final String? sourceLayer;
 
   @override
