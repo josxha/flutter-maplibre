@@ -116,7 +116,8 @@ abstract interface class MapController {
   /// The smallest bounding box that includes the visible region.
   LngLatBounds getVisibleRegionSync();
 
-  /// Queries the map for rendered features.
+  /// Queries the map for layers containing rendered features which intersect
+  /// with a given [screenLocation].
   Future<List<QueriedLayer>> queryLayers(Offset screenLocation);
 
   /// Show the user location on the map
