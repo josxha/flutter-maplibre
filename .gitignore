@@ -38,3 +38,5 @@ build/
 # Swift Package Manager
 Package.resolved
 .swiftpm
+
+ios/maplibre/.build

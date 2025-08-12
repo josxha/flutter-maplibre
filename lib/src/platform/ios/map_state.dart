@@ -304,4 +304,10 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   @override
   List<Offset> toScreenLocationsSync(List<Position> lngLats) =>
       lngLats.map(toScreenLocationSync).toList(growable: false);
+
+  // TODO(mhernz)
+  @override
+  Future<void> setStyle(String style) async {
+    throw UnimplementedError();
+  }
 }
