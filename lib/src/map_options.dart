@@ -8,7 +8,7 @@ import 'package:maplibre/src/inherited_model.dart';
 /// {@category Basic}
 @immutable
 class MapOptions {
-  /// Default constructor for the [MapOptions].
+  /// Creates a new [MapOptions] instance. See fields for more information.
   const MapOptions({
     this.initStyle = 'https://demotiles.maplibre.org/style.json',
     this.initZoom = 0,
@@ -37,8 +37,11 @@ class MapOptions {
       maybeOf(context) ??
       (throw StateError('Unable to find an instance of MapOptions'));
 
-  /// The style URL that should get used. If not set, the default MapLibre style
-  /// is used (https://demotiles.maplibre.org/style.json).
+  /// A JSON string representing a valid MapLibre style document, or a URL
+  /// pointing to such a document.
+  ///
+  /// If not set, the default MapLibre style is used
+  /// (https://demotiles.maplibre.org/style.json).
   ///
   /// If you need to change to a different map style later on,
   /// use [MapController.setStyle].
