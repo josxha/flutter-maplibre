@@ -79,8 +79,11 @@ Build the example project to fetch Gradle dependencies:
 Run jnigen:
 
 ```bash
-dart run jnigen --config jnigen.yml
+./run_jnigen.sh
 ```
+
+This script runs `dart run jnigen --config jnigen.yaml` and applies some manual
+fixes to the generated code.
 
 ## ffigen (macOS only)
 
