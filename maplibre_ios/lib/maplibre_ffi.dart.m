@@ -2,31 +2,7 @@
 #import <Foundation/Foundation.h>
 #import <objc/message.h>
 #import "../ios/maplibre_ios/Sources/maplibre_ios/MapLibreRegistry.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNMapView.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNMapProjection.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNStyle.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNSource.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNVectorTileSource.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNComputedShapeSource.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNImageSource.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNRasterTileSource.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNRasterDEMSource.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNBackgroundStyleLayer.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNCircleStyleLayer.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNFillExtrusionStyleLayer.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNFillStyleLayer.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNHeatmapStyleLayer.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNHillshadeStyleLayer.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNLineStyleLayer.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNRasterStyleLayer.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNSymbolStyleLayer.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNVectorStyleLayer.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNAttributionInfo.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/NSExpression+MLNAdditions.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNOfflineStorage.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNOfflinePack.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNOfflineRegion.h"
-#import "../../../../../Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNTilePyramidOfflineRegion.h"
+#import "../MapLibre.h"
 
 #if !__has_feature(objc_arc)
 #error "This file must be compiled with ARC enabled"
@@ -143,6 +119,8 @@ ListenerTrampoline_1 _MapLibreFFi_wrapBlockingBlock_1pl9qdv(
     listenerBlock(waiter);
   });
 }
+
+Protocol* _MapLibreFFi_NSProgressReporting(void) { return @protocol(NSProgressReporting); }
 
 typedef void  (^ListenerTrampoline_2)(id arg0, struct _NSRange arg1, BOOL * arg2);
 __attribute__((visibility("default"))) __attribute__((used))
@@ -261,13 +239,51 @@ Protocol* _MapLibreFFi_MLNMapViewDelegate(void) { return @protocol(MLNMapViewDel
 
 Protocol* _MapLibreFFi_MLNLocationManager(void) { return @protocol(MLNLocationManager); }
 
+typedef struct CLLocationCoordinate2D  (^ProtocolTrampoline_10)(void * sel);
+__attribute__((visibility("default"))) __attribute__((used))
+struct CLLocationCoordinate2D  _MapLibreFFi_protocolTrampoline_neuenc(id target, void * sel) {
+  return ((ProtocolTrampoline_10)((id (*)(id, SEL, SEL))objc_msgSend)(target, @selector(getDOBJCDartProtocolMethodForSelector:), sel))(sel);
+}
+
 Protocol* _MapLibreFFi_MLNAnnotation(void) { return @protocol(MLNAnnotation); }
+
+typedef struct MLNCoordinateBounds  (^ProtocolTrampoline_11)(void * sel);
+__attribute__((visibility("default"))) __attribute__((used))
+struct MLNCoordinateBounds  _MapLibreFFi_protocolTrampoline_1fkc0ji(id target, void * sel) {
+  return ((ProtocolTrampoline_11)((id (*)(id, SEL, SEL))objc_msgSend)(target, @selector(getDOBJCDartProtocolMethodForSelector:), sel))(sel);
+}
+
+typedef BOOL  (^ProtocolTrampoline_12)(void * sel, struct MLNCoordinateBounds arg1);
+__attribute__((visibility("default"))) __attribute__((used))
+BOOL  _MapLibreFFi_protocolTrampoline_krbldm(id target, void * sel, struct MLNCoordinateBounds arg1) {
+  return ((ProtocolTrampoline_12)((id (*)(id, SEL, SEL))objc_msgSend)(target, @selector(getDOBJCDartProtocolMethodForSelector:), sel))(sel, arg1);
+}
 
 Protocol* _MapLibreFFi_MLNOverlay(void) { return @protocol(MLNOverlay); }
 
+Protocol* _MapLibreFFi_MLNFeature(void) { return @protocol(MLNFeature); }
+
+typedef unsigned long  (^ProtocolTrampoline_13)(void * sel);
+__attribute__((visibility("default"))) __attribute__((used))
+unsigned long  _MapLibreFFi_protocolTrampoline_1ckyi24(id target, void * sel) {
+  return ((ProtocolTrampoline_13)((id (*)(id, SEL, SEL))objc_msgSend)(target, @selector(getDOBJCDartProtocolMethodForSelector:), sel))(sel);
+}
+
 Protocol* _MapLibreFFi_MLNCluster(void) { return @protocol(MLNCluster); }
 
-Protocol* _MapLibreFFi_MLNFeature(void) { return @protocol(MLNFeature); }
+typedef id  (^ProtocolTrampoline_14)(void * sel, unsigned long arg1, unsigned long arg2, unsigned long arg3);
+__attribute__((visibility("default"))) __attribute__((used))
+id  _MapLibreFFi_protocolTrampoline_fclj7c(id target, void * sel, unsigned long arg1, unsigned long arg2, unsigned long arg3) {
+  return ((ProtocolTrampoline_14)((id (*)(id, SEL, SEL))objc_msgSend)(target, @selector(getDOBJCDartProtocolMethodForSelector:), sel))(sel, arg1, arg2, arg3);
+}
+
+typedef id  (^ProtocolTrampoline_15)(void * sel, struct MLNCoordinateBounds arg1, unsigned long arg2);
+__attribute__((visibility("default"))) __attribute__((used))
+id  _MapLibreFFi_protocolTrampoline_129i16p(id target, void * sel, struct MLNCoordinateBounds arg1, unsigned long arg2) {
+  return ((ProtocolTrampoline_15)((id (*)(id, SEL, SEL))objc_msgSend)(target, @selector(getDOBJCDartProtocolMethodForSelector:), sel))(sel, arg1, arg2);
+}
+
+Protocol* _MapLibreFFi_MLNComputedShapeSourceDataSource(void) { return @protocol(MLNComputedShapeSourceDataSource); }
 
 Protocol* _MapLibreFFi_CTAdaptiveImageProviding(void) { return @protocol(CTAdaptiveImageProviding); }
 
@@ -275,21 +291,50 @@ Protocol* _MapLibreFFi_NSTextAttachmentLayout(void) { return @protocol(NSTextAtt
 
 Protocol* _MapLibreFFi_CKRecordValue(void) { return @protocol(CKRecordValue); }
 
+typedef void  (^ListenerTrampoline_5)(void * arg0, BOOL arg1);
+__attribute__((visibility("default"))) __attribute__((used))
+ListenerTrampoline_5 _MapLibreFFi_wrapListenerBlock_10lndml(ListenerTrampoline_5 block) NS_RETURNS_RETAINED {
+  return ^void(void * arg0, BOOL arg1) {
+    objc_retainBlock(block);
+    block(arg0, arg1);
+  };
+}
+
+typedef void  (^BlockingTrampoline_5)(void * waiter, void * arg0, BOOL arg1);
+__attribute__((visibility("default"))) __attribute__((used))
+ListenerTrampoline_5 _MapLibreFFi_wrapBlockingBlock_10lndml(
+    BlockingTrampoline_5 block, BlockingTrampoline_5 listenerBlock,
+    DOBJC_Context* ctx) NS_RETURNS_RETAINED {
+  BLOCKING_BLOCK_IMPL(ctx, ^void(void * arg0, BOOL arg1), {
+    objc_retainBlock(block);
+    block(nil, arg0, arg1);
+  }, {
+    objc_retainBlock(listenerBlock);
+    listenerBlock(waiter, arg0, arg1);
+  });
+}
+
+typedef void  (^ProtocolTrampoline_16)(void * sel, BOOL arg1);
+__attribute__((visibility("default"))) __attribute__((used))
+void  _MapLibreFFi_protocolTrampoline_10lndml(id target, void * sel, BOOL arg1) {
+  return ((ProtocolTrampoline_16)((id (*)(id, SEL, SEL))objc_msgSend)(target, @selector(getDOBJCDartProtocolMethodForSelector:), sel))(sel, arg1);
+}
+
 Protocol* _MapLibreFFi_MLNOfflineRegion(void) { return @protocol(MLNOfflineRegion); }
 
-typedef void  (^ListenerTrampoline_5)(id arg0);
+typedef void  (^ListenerTrampoline_6)(id arg0);
 __attribute__((visibility("default"))) __attribute__((used))
-ListenerTrampoline_5 _MapLibreFFi_wrapListenerBlock_xtuoz7(ListenerTrampoline_5 block) NS_RETURNS_RETAINED {
+ListenerTrampoline_6 _MapLibreFFi_wrapListenerBlock_xtuoz7(ListenerTrampoline_6 block) NS_RETURNS_RETAINED {
   return ^void(id arg0) {
     objc_retainBlock(block);
     block((__bridge id)(__bridge_retained void*)(arg0));
   };
 }
 
-typedef void  (^BlockingTrampoline_5)(void * waiter, id arg0);
+typedef void  (^BlockingTrampoline_6)(void * waiter, id arg0);
 __attribute__((visibility("default"))) __attribute__((used))
-ListenerTrampoline_5 _MapLibreFFi_wrapBlockingBlock_xtuoz7(
-    BlockingTrampoline_5 block, BlockingTrampoline_5 listenerBlock,
+ListenerTrampoline_6 _MapLibreFFi_wrapBlockingBlock_xtuoz7(
+    BlockingTrampoline_6 block, BlockingTrampoline_6 listenerBlock,
     DOBJC_Context* ctx) NS_RETURNS_RETAINED {
   BLOCKING_BLOCK_IMPL(ctx, ^void(id arg0), {
     objc_retainBlock(block);
@@ -300,19 +345,19 @@ ListenerTrampoline_5 _MapLibreFFi_wrapBlockingBlock_xtuoz7(
   });
 }
 
-typedef void  (^ListenerTrampoline_6)(id arg0, id arg1, id arg2);
+typedef void  (^ListenerTrampoline_7)(id arg0, id arg1, id arg2);
 __attribute__((visibility("default"))) __attribute__((used))
-ListenerTrampoline_6 _MapLibreFFi_wrapListenerBlock_r8gdi7(ListenerTrampoline_6 block) NS_RETURNS_RETAINED {
+ListenerTrampoline_7 _MapLibreFFi_wrapListenerBlock_r8gdi7(ListenerTrampoline_7 block) NS_RETURNS_RETAINED {
   return ^void(id arg0, id arg1, id arg2) {
     objc_retainBlock(block);
     block((__bridge id)(__bridge_retained void*)(arg0), (__bridge id)(__bridge_retained void*)(arg1), (__bridge id)(__bridge_retained void*)(arg2));
   };
 }
 
-typedef void  (^BlockingTrampoline_6)(void * waiter, id arg0, id arg1, id arg2);
+typedef void  (^BlockingTrampoline_7)(void * waiter, id arg0, id arg1, id arg2);
 __attribute__((visibility("default"))) __attribute__((used))
-ListenerTrampoline_6 _MapLibreFFi_wrapBlockingBlock_r8gdi7(
-    BlockingTrampoline_6 block, BlockingTrampoline_6 listenerBlock,
+ListenerTrampoline_7 _MapLibreFFi_wrapBlockingBlock_r8gdi7(
+    BlockingTrampoline_7 block, BlockingTrampoline_7 listenerBlock,
     DOBJC_Context* ctx) NS_RETURNS_RETAINED {
   BLOCKING_BLOCK_IMPL(ctx, ^void(id arg0, id arg1, id arg2), {
     objc_retainBlock(block);
@@ -321,6 +366,12 @@ ListenerTrampoline_6 _MapLibreFFi_wrapBlockingBlock_r8gdi7(
     objc_retainBlock(listenerBlock);
     listenerBlock(waiter, (__bridge id)(__bridge_retained void*)(arg0), (__bridge id)(__bridge_retained void*)(arg1), (__bridge id)(__bridge_retained void*)(arg2));
   });
+}
+
+typedef id  (^ProtocolTrampoline_17)(void * sel, id arg1, MLNResourceKind arg2, id arg3);
+__attribute__((visibility("default"))) __attribute__((used))
+id  _MapLibreFFi_protocolTrampoline_1fy0zqa(id target, void * sel, id arg1, MLNResourceKind arg2, id arg3) {
+  return ((ProtocolTrampoline_17)((id (*)(id, SEL, SEL))objc_msgSend)(target, @selector(getDOBJCDartProtocolMethodForSelector:), sel))(sel, arg1, arg2, arg3);
 }
 
 Protocol* _MapLibreFFi_MLNOfflineStorageDelegate(void) { return @protocol(MLNOfflineStorageDelegate); }

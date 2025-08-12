@@ -64,4 +64,5 @@ ffigen:
       - 'ios/maplibre_ios/Sources/maplibre_ios/MapLibreRegistry.h'
       - 'MapLibre.h'
   preamble: |
-    // ignore_for_file: type=lint, unused_element, unused_field
+    // ignore_for_file: type=lint, unused_element, unused_field |
+    // dart format off
