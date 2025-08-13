@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
@@ -10,6 +11,9 @@ import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/layer/layer_manager.dart';
 import 'package:maplibre/src/platform/android/extensions.dart';
 import 'package:maplibre/src/platform/android/jni.dart' as jni;
+import 'package:maplibre/src/platform/android/jni/com/google/gson/Gson.dart';
+import 'package:maplibre/src/platform/android/jni/org/maplibre/geojson/Feature.dart'
+    as jni;
 import 'package:maplibre/src/platform/map_state_native.dart';
 import 'package:maplibre/src/platform/pigeon.g.dart' as pigeon;
 
@@ -354,6 +358,97 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
 
   @override
   Future<LngLatBounds> getVisibleRegion() async => getVisibleRegionSync();
+
+  List<RenderedFeature> _nativeQueryToRenderedFeatures(
+    JList<jni.Feature?> query,
+  ) {
+    final features = query.where((f) => f != null).map((f) => f!);
+
+    final gson = Gson();
+    return features
+        .map(
+          (feature) => RenderedFeature(
+            id: feature.id()?.toDartString(releaseOriginal: true),
+            properties:
+                jsonDecode(
+                      gson.toJson(feature.properties())?.toString() ?? '{}',
+                    )
+                    as Map<String, Object?>,
+          ),
+        )
+        .toList();
+  }
+
+  @override
+  Future<List<RenderedFeature>> featuresAtPoint(
+    Offset point, {
+    List<String>? layerIds,
+  }) async {
+    final style = this.style;
+    final map = _jniMapLibreMap;
+    if (style == null || map == null) {
+      return [];
+    }
+    if (layerIds?.isEmpty ?? false) {
+      // https://github.com/maplibre/maplibre-native/issues/2828
+      return [];
+    }
+
+    final scaledPoint = point * MediaQuery.of(context).devicePixelRatio;
+
+    final query = map.queryRenderedFeatures(
+      jni.PointF.new$3(scaledPoint.dx, scaledPoint.dy),
+      layerIds != null
+          ? JArray.of(
+              JString.nullableType,
+              layerIds.map((s) => s.toJString()),
+            )
+          : null,
+    );
+
+    return _nativeQueryToRenderedFeatures(query);
+  }
+
+  @override
+  Future<List<RenderedFeature>> featuresInRect(
+    Rect rect, {
+    List<String>? layerIds,
+  }) async {
+    final style = this.style;
+    final map = _jniMapLibreMap;
+    if (style == null || map == null) {
+      return [];
+    }
+    if (layerIds?.isEmpty ?? false) {
+      // https://github.com/maplibre/maplibre-native/issues/2828
+      return [];
+    }
+
+    final devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
+    final scaledRect = Rect.fromLTRB(
+      rect.left * devicePixelRatio,
+      rect.top * devicePixelRatio,
+      rect.right * devicePixelRatio,
+      rect.bottom * devicePixelRatio,
+    );
+
+    final query = map.queryRenderedFeatures$2(
+      jni.RectF.new$3(
+        scaledRect.left,
+        scaledRect.top,
+        scaledRect.right,
+        scaledRect.bottom,
+      ),
+      layerIds != null
+          ? JArray.of(
+              JString.nullableType,
+              layerIds.map((s) => s.toJString()),
+            )
+          : null,
+    );
+
+    return _nativeQueryToRenderedFeatures(query);
+  }
 
   @override
   Future<List<QueriedLayer>> queryLayers(Offset screenLocation) async {
