@@ -51,8 +51,9 @@ class AndroidLocationEngineImpl extends jni$_.JObject {
   final jni$_.JObjType<AndroidLocationEngineImpl> $type;
 
   @jni$_.internal
-  AndroidLocationEngineImpl.fromReference(jni$_.JReference reference)
-    : $type = type,
+  AndroidLocationEngineImpl.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -62,7 +63,9 @@ class AndroidLocationEngineImpl extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $AndroidLocationEngineImpl$NullableType();
   static const type = $AndroidLocationEngineImpl$Type();
-  static final _id_new$ = _class.constructorId(r'(Landroid/content/Context;)V');
+  static final _id_new$ = _class.constructorId(
+    r'(Landroid/content/Context;)V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -84,7 +87,9 @@ class AndroidLocationEngineImpl extends jni$_.JObject {
 
   /// from: `public void <init>(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory AndroidLocationEngineImpl(jni$_.JObject context) {
+  factory AndroidLocationEngineImpl(
+    jni$_.JObject context,
+  ) {
     final _$context = context.reference;
     return AndroidLocationEngineImpl.fromReference(
       _new$(
@@ -287,7 +292,9 @@ class AndroidLocationEngineImpl extends jni$_.JObject {
           >();
 
   /// from: `public void removeLocationUpdates(android.location.LocationListener locationListener)`
-  void removeLocationUpdates(jni$_.JObject locationListener) {
+  void removeLocationUpdates(
+    jni$_.JObject locationListener,
+  ) {
     final _$locationListener = locationListener.reference;
     _removeLocationUpdates(
       reference.pointer,
@@ -320,7 +327,9 @@ class AndroidLocationEngineImpl extends jni$_.JObject {
           >();
 
   /// from: `public void removeLocationUpdates(android.app.PendingIntent pendingIntent)`
-  void removeLocationUpdates$1(jni$_.JObject? pendingIntent) {
+  void removeLocationUpdates$1(
+    jni$_.JObject? pendingIntent,
+  ) {
     final _$pendingIntent = pendingIntent?.reference ?? jni$_.jNullReference;
     _removeLocationUpdates$1(
       reference.pointer,
@@ -345,7 +354,9 @@ final class $AndroidLocationEngineImpl$NullableType
   AndroidLocationEngineImpl? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : AndroidLocationEngineImpl.fromReference(reference);
+      : AndroidLocationEngineImpl.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -381,7 +392,9 @@ final class $AndroidLocationEngineImpl$Type
   @jni$_.internal
   @core$_.override
   AndroidLocationEngineImpl fromReference(jni$_.JReference reference) =>
-      AndroidLocationEngineImpl.fromReference(reference);
+      AndroidLocationEngineImpl.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

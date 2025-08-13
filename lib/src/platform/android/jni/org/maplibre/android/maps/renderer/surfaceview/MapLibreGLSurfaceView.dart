@@ -49,8 +49,9 @@ class MapLibreGLSurfaceView extends maplibresurfaceview$_.MapLibreSurfaceView {
   final jni$_.JObjType<MapLibreGLSurfaceView> $type;
 
   @jni$_.internal
-  MapLibreGLSurfaceView.fromReference(jni$_.JReference reference)
-    : $type = type,
+  MapLibreGLSurfaceView.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -60,7 +61,9 @@ class MapLibreGLSurfaceView extends maplibresurfaceview$_.MapLibreSurfaceView {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $MapLibreGLSurfaceView$NullableType();
   static const type = $MapLibreGLSurfaceView$Type();
-  static final _id_new$ = _class.constructorId(r'(Landroid/content/Context;)V');
+  static final _id_new$ = _class.constructorId(
+    r'(Landroid/content/Context;)V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -82,7 +85,9 @@ class MapLibreGLSurfaceView extends maplibresurfaceview$_.MapLibreSurfaceView {
 
   /// from: `public void <init>(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory MapLibreGLSurfaceView(jni$_.JObject? context) {
+  factory MapLibreGLSurfaceView(
+    jni$_.JObject? context,
+  ) {
     final _$context = context?.reference ?? jni$_.jNullReference;
     return MapLibreGLSurfaceView.fromReference(
       _new$(
@@ -160,7 +165,9 @@ class MapLibreGLSurfaceView extends maplibresurfaceview$_.MapLibreSurfaceView {
           >();
 
   /// from: `public void setPreserveEGLContextOnPause(boolean z)`
-  void setPreserveEGLContextOnPause(bool z) {
+  void setPreserveEGLContextOnPause(
+    bool z,
+  ) {
     _setPreserveEGLContextOnPause(
       reference.pointer,
       _id_setPreserveEGLContextOnPause as jni$_.JMethodIDPtr,
@@ -257,7 +264,9 @@ class MapLibreGLSurfaceView extends maplibresurfaceview$_.MapLibreSurfaceView {
           >();
 
   /// from: `public void setEGLContextFactory(android.opengl.GLSurfaceView$EGLContextFactory eGLContextFactory)`
-  void setEGLContextFactory(jni$_.JObject? eGLContextFactory) {
+  void setEGLContextFactory(
+    jni$_.JObject? eGLContextFactory,
+  ) {
     final _$eGLContextFactory =
         eGLContextFactory?.reference ?? jni$_.jNullReference;
     _setEGLContextFactory(
@@ -291,7 +300,9 @@ class MapLibreGLSurfaceView extends maplibresurfaceview$_.MapLibreSurfaceView {
           >();
 
   /// from: `public void setEGLWindowSurfaceFactory(android.opengl.GLSurfaceView$EGLWindowSurfaceFactory eGLWindowSurfaceFactory)`
-  void setEGLWindowSurfaceFactory(jni$_.JObject? eGLWindowSurfaceFactory) {
+  void setEGLWindowSurfaceFactory(
+    jni$_.JObject? eGLWindowSurfaceFactory,
+  ) {
     final _$eGLWindowSurfaceFactory =
         eGLWindowSurfaceFactory?.reference ?? jni$_.jNullReference;
     _setEGLWindowSurfaceFactory(
@@ -325,7 +336,9 @@ class MapLibreGLSurfaceView extends maplibresurfaceview$_.MapLibreSurfaceView {
           >();
 
   /// from: `public void setEGLConfigChooser(android.opengl.GLSurfaceView$EGLConfigChooser eGLConfigChooser)`
-  void setEGLConfigChooser(jni$_.JObject? eGLConfigChooser) {
+  void setEGLConfigChooser(
+    jni$_.JObject? eGLConfigChooser,
+  ) {
     final _$eGLConfigChooser =
         eGLConfigChooser?.reference ?? jni$_.jNullReference;
     _setEGLConfigChooser(
@@ -349,7 +362,11 @@ final class $MapLibreGLSurfaceView$NullableType
   @jni$_.internal
   @core$_.override
   MapLibreGLSurfaceView? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : MapLibreGLSurfaceView.fromReference(reference);
+      reference.isNull
+      ? null
+      : MapLibreGLSurfaceView.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>
@@ -386,7 +403,9 @@ final class $MapLibreGLSurfaceView$Type
   @jni$_.internal
   @core$_.override
   MapLibreGLSurfaceView fromReference(jni$_.JReference reference) =>
-      MapLibreGLSurfaceView.fromReference(reference);
+      MapLibreGLSurfaceView.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>

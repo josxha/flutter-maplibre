@@ -428,6 +428,52 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   }
 
   @override
+  Future<List<RenderedFeature>> featuresAtPoint(
+    Offset point, {
+    List<String>? layerIds,
+  }) async {
+    final features = _map
+        .queryRenderedFeatures(
+          point.toJsPoint(),
+          interop.QueryRenderedFeaturesOptions(
+            layers: layerIds?.map((l) => l.toJS).toList().toJS,
+          ),
+        )
+        .toDart;
+    return features
+        .map(
+          (f) => RenderedFeature(
+            id: f.id.dartify(),
+            properties: f.properties.asStringMap() ?? {},
+          ),
+        )
+        .toList();
+  }
+
+  @override
+  Future<List<RenderedFeature>> featuresInRect(
+    Rect rect, {
+    List<String>? layerIds,
+  }) async {
+    final features = _map
+        .queryRenderedFeaturesRect(
+          [rect.bottomLeft.toJsPoint(), rect.topRight.toJsPoint()].toJS,
+          interop.QueryRenderedFeaturesOptions(
+            layers: layerIds?.map((l) => l.toJS).toList().toJS,
+          ),
+        )
+        .toDart;
+    return features
+        .map(
+          (f) => RenderedFeature(
+            id: f.id.dartify(),
+            properties: f.properties.asStringMap() ?? {},
+          ),
+        )
+        .toList();
+  }
+
+  @override
   Future<List<QueriedLayer>> queryLayers(Offset screenLocation) async {
     final features = _map.queryRenderedFeatures(
       screenLocation.toJsPoint(),

@@ -47,8 +47,9 @@ class LatLng$Companion extends jni$_.JObject {
   final jni$_.JObjType<LatLng$Companion> $type;
 
   @jni$_.internal
-  LatLng$Companion.fromReference(jni$_.JReference reference)
-    : $type = type,
+  LatLng$Companion.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -58,7 +59,10 @@ class LatLng$Companion extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $LatLng$Companion$NullableType();
   static const type = $LatLng$Companion$Type();
-  static final _id_wrap = _class.instanceMethodId(r'wrap', r'(DDD)D');
+  static final _id_wrap = _class.instanceMethodId(
+    r'wrap',
+    r'(DDD)D',
+  );
 
   static final _wrap =
       jni$_.ProtectedJniExtensions.lookup<
@@ -81,7 +85,11 @@ class LatLng$Companion extends jni$_.JObject {
           >();
 
   /// from: `public final double wrap(double d, double d1, double d2)`
-  double wrap(double d, double d1, double d2) {
+  double wrap(
+    double d,
+    double d1,
+    double d2,
+  ) {
     return _wrap(
       reference.pointer,
       _id_wrap as jni$_.JMethodIDPtr,
@@ -115,7 +123,9 @@ class LatLng$Companion extends jni$_.JObject {
 
   /// from: `synthetic public void <init>(kotlin.jvm.internal.DefaultConstructorMarker defaultConstructorMarker)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory LatLng$Companion(jni$_.JObject? defaultConstructorMarker) {
+  factory LatLng$Companion(
+    jni$_.JObject? defaultConstructorMarker,
+  ) {
     final _$defaultConstructorMarker =
         defaultConstructorMarker?.reference ?? jni$_.jNullReference;
     return LatLng$Companion.fromReference(
@@ -140,7 +150,11 @@ final class $LatLng$Companion$NullableType
   @jni$_.internal
   @core$_.override
   LatLng$Companion? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : LatLng$Companion.fromReference(reference);
+      reference.isNull
+      ? null
+      : LatLng$Companion.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -174,7 +188,9 @@ final class $LatLng$Companion$Type extends jni$_.JObjType<LatLng$Companion> {
   @jni$_.internal
   @core$_.override
   LatLng$Companion fromReference(jni$_.JReference reference) =>
-      LatLng$Companion.fromReference(reference);
+      LatLng$Companion.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -205,8 +221,9 @@ class LatLng extends jni$_.JObject {
   final jni$_.JObjType<LatLng> $type;
 
   @jni$_.internal
-  LatLng.fromReference(jni$_.JReference reference)
-    : $type = type,
+  LatLng.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -289,7 +306,9 @@ class LatLng extends jni$_.JObject {
           >();
 
   /// from: `public final void setLatitude(double d)`
-  void setLatitude(double d) {
+  void setLatitude(
+    double d,
+  ) {
     _setLatitude(
       reference.pointer,
       _id_setLatitude as jni$_.JMethodIDPtr,
@@ -350,7 +369,9 @@ class LatLng extends jni$_.JObject {
           >();
 
   /// from: `public final void setLongitude(double d)`
-  void setLongitude(double d) {
+  void setLongitude(
+    double d,
+  ) {
     _setLongitude(
       reference.pointer,
       _id_setLongitude as jni$_.JMethodIDPtr,
@@ -411,7 +432,9 @@ class LatLng extends jni$_.JObject {
           >();
 
   /// from: `public final void setAltitude(double d)`
-  void setAltitude(double d) {
+  void setAltitude(
+    double d,
+  ) {
     _setAltitude(
       reference.pointer,
       _id_setAltitude as jni$_.JMethodIDPtr,
@@ -419,7 +442,9 @@ class LatLng extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_new$ = _class.constructorId(r'()V');
+  static final _id_new$ = _class.constructorId(
+    r'()V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -445,7 +470,9 @@ class LatLng extends jni$_.JObject {
     );
   }
 
-  static final _id_new$1 = _class.constructorId(r'(DD)V');
+  static final _id_new$1 = _class.constructorId(
+    r'(DD)V',
+  );
 
   static final _new$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -468,7 +495,10 @@ class LatLng extends jni$_.JObject {
 
   /// from: `public void <init>(double d, double d1)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory LatLng.new$1(double d, double d1) {
+  factory LatLng.new$1(
+    double d,
+    double d1,
+  ) {
     return LatLng.fromReference(
       _new$1(
         _class.reference.pointer,
@@ -479,7 +509,9 @@ class LatLng extends jni$_.JObject {
     );
   }
 
-  static final _id_new$2 = _class.constructorId(r'(DDD)V');
+  static final _id_new$2 = _class.constructorId(
+    r'(DDD)V',
+  );
 
   static final _new$2 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -503,7 +535,11 @@ class LatLng extends jni$_.JObject {
 
   /// from: `public void <init>(double d, double d1, double d2)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory LatLng.new$2(double d, double d1, double d2) {
+  factory LatLng.new$2(
+    double d,
+    double d1,
+    double d2,
+  ) {
     return LatLng.fromReference(
       _new$2(
         _class.reference.pointer,
@@ -539,7 +575,9 @@ class LatLng extends jni$_.JObject {
 
   /// from: `public void <init>(android.location.Location location)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory LatLng.new$3(location$_.Location location) {
+  factory LatLng.new$3(
+    location$_.Location location,
+  ) {
     final _$location = location.reference;
     return LatLng.fromReference(
       _new$3(
@@ -574,7 +612,9 @@ class LatLng extends jni$_.JObject {
 
   /// from: `public void <init>(org.maplibre.android.geometry.LatLng latLng)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory LatLng.new$4(LatLng latLng) {
+  factory LatLng.new$4(
+    LatLng latLng,
+  ) {
     final _$latLng = latLng.reference;
     return LatLng.fromReference(
       _new$4(
@@ -585,7 +625,9 @@ class LatLng extends jni$_.JObject {
     );
   }
 
-  static final _id_new$5 = _class.constructorId(r'(Landroid/os/Parcel;)V');
+  static final _id_new$5 = _class.constructorId(
+    r'(Landroid/os/Parcel;)V',
+  );
 
   static final _new$5 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -607,7 +649,9 @@ class LatLng extends jni$_.JObject {
 
   /// from: `public void <init>(android.os.Parcel parcel)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory LatLng.new$5(jni$_.JObject parcel) {
+  factory LatLng.new$5(
+    jni$_.JObject parcel,
+  ) {
     final _$parcel = parcel.reference;
     return LatLng.fromReference(
       _new$5(
@@ -672,7 +716,9 @@ class LatLng extends jni$_.JObject {
           >();
 
   /// from: `public boolean equals(java.lang.Object object)`
-  bool equals(jni$_.JObject? object) {
+  bool equals(
+    jni$_.JObject? object,
+  ) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     return _equals(
       reference.pointer,
@@ -681,7 +727,10 @@ class LatLng extends jni$_.JObject {
     ).boolean;
   }
 
-  static final _id_hashCode$1 = _class.instanceMethodId(r'hashCode', r'()I');
+  static final _id_hashCode$1 = _class.instanceMethodId(
+    r'hashCode',
+    r'()I',
+  );
 
   static final _hashCode$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -791,7 +840,10 @@ class LatLng extends jni$_.JObject {
           >();
 
   /// from: `public void writeToParcel(android.os.Parcel parcel, int i)`
-  void writeToParcel(jni$_.JObject parcel, int i) {
+  void writeToParcel(
+    jni$_.JObject parcel,
+    int i,
+  ) {
     final _$parcel = parcel.reference;
     _writeToParcel(
       reference.pointer,
@@ -825,7 +877,9 @@ class LatLng extends jni$_.JObject {
           >();
 
   /// from: `public final double distanceTo(org.maplibre.android.geometry.LatLng latLng)`
-  double distanceTo(LatLng latLng) {
+  double distanceTo(
+    LatLng latLng,
+  ) {
     final _$latLng = latLng.reference;
     return _distanceTo(
       reference.pointer,
@@ -845,8 +899,11 @@ final class $LatLng$NullableType extends jni$_.JObjType<LatLng?> {
 
   @jni$_.internal
   @core$_.override
-  LatLng? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : LatLng.fromReference(reference);
+  LatLng? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : LatLng.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -879,8 +936,9 @@ final class $LatLng$Type extends jni$_.JObjType<LatLng> {
 
   @jni$_.internal
   @core$_.override
-  LatLng fromReference(jni$_.JReference reference) =>
-      LatLng.fromReference(reference);
+  LatLng fromReference(jni$_.JReference reference) => LatLng.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

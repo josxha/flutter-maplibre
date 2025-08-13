@@ -45,8 +45,9 @@ class PulsingLocationCircleAnimator extends jni$_.JObject {
   final jni$_.JObjType<PulsingLocationCircleAnimator> $type;
 
   @jni$_.internal
-  PulsingLocationCircleAnimator.fromReference(jni$_.JReference reference)
-    : $type = type,
+  PulsingLocationCircleAnimator.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -118,7 +119,9 @@ final class $PulsingLocationCircleAnimator$NullableType
   PulsingLocationCircleAnimator? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : PulsingLocationCircleAnimator.fromReference(reference);
+      : PulsingLocationCircleAnimator.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -154,7 +157,9 @@ final class $PulsingLocationCircleAnimator$Type
   @jni$_.internal
   @core$_.override
   PulsingLocationCircleAnimator fromReference(jni$_.JReference reference) =>
-      PulsingLocationCircleAnimator.fromReference(reference);
+      PulsingLocationCircleAnimator.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

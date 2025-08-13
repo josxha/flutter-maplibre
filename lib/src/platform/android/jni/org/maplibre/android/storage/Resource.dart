@@ -45,8 +45,9 @@ class Resource$Kind extends jni$_.JObject {
   final jni$_.JObjType<Resource$Kind> $type;
 
   @jni$_.internal
-  Resource$Kind.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Resource$Kind.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -66,7 +67,11 @@ class Resource$Kind extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -115,10 +120,14 @@ class Resource$Kind extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Resource$Kind.implement($Resource$Kind $impl) {
+  factory Resource$Kind.implement(
+    $Resource$Kind $impl,
+  ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Resource$Kind.fromReference($i.implementReference());
+    return Resource$Kind.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -140,8 +149,11 @@ final class $Resource$Kind$NullableType extends jni$_.JObjType<Resource$Kind?> {
 
   @jni$_.internal
   @core$_.override
-  Resource$Kind? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : Resource$Kind.fromReference(reference);
+  Resource$Kind? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : Resource$Kind.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -175,7 +187,9 @@ final class $Resource$Kind$Type extends jni$_.JObjType<Resource$Kind> {
   @jni$_.internal
   @core$_.override
   Resource$Kind fromReference(jni$_.JReference reference) =>
-      Resource$Kind.fromReference(reference);
+      Resource$Kind.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -206,8 +220,9 @@ class Resource extends jni$_.JObject {
   final jni$_.JObjType<Resource> $type;
 
   @jni$_.internal
-  Resource.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Resource.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -238,7 +253,9 @@ class Resource extends jni$_.JObject {
 
   /// from: `static public final int SPRITE_JSON`
   static const SPRITE_JSON = 6;
-  static final _id_new$ = _class.constructorId(r'()V');
+  static final _id_new$ = _class.constructorId(
+    r'()V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -275,8 +292,11 @@ final class $Resource$NullableType extends jni$_.JObjType<Resource?> {
 
   @jni$_.internal
   @core$_.override
-  Resource? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : Resource.fromReference(reference);
+  Resource? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : Resource.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -309,8 +329,9 @@ final class $Resource$Type extends jni$_.JObjType<Resource> {
 
   @jni$_.internal
   @core$_.override
-  Resource fromReference(jni$_.JReference reference) =>
-      Resource.fromReference(reference);
+  Resource fromReference(jni$_.JReference reference) => Resource.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

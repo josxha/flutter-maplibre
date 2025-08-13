@@ -45,8 +45,9 @@ class Compare extends jni$_.JObject {
   final jni$_.JObjType<Compare> $type;
 
   @jni$_.internal
-  Compare.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Compare.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -56,7 +57,9 @@ class Compare extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Compare$NullableType();
   static const type = $Compare$Type();
-  static final _id_new$ = _class.constructorId(r'()V');
+  static final _id_new$ = _class.constructorId(
+    r'()V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -82,7 +85,10 @@ class Compare extends jni$_.JObject {
     );
   }
 
-  static final _id_compare = _class.staticMethodId(r'compare', r'(II)I');
+  static final _id_compare = _class.staticMethodId(
+    r'compare',
+    r'(II)I',
+  );
 
   static final _compare =
       jni$_.ProtectedJniExtensions.lookup<
@@ -104,7 +110,10 @@ class Compare extends jni$_.JObject {
           >();
 
   /// from: `static public int compare(int i, int i1)`
-  static int compare(int i, int i1) {
+  static int compare(
+    int i,
+    int i1,
+  ) {
     return _compare(
       _class.reference.pointer,
       _id_compare as jni$_.JMethodIDPtr,
@@ -113,7 +122,10 @@ class Compare extends jni$_.JObject {
     ).integer;
   }
 
-  static final _id_compare$1 = _class.staticMethodId(r'compare', r'(ZZ)I');
+  static final _id_compare$1 = _class.staticMethodId(
+    r'compare',
+    r'(ZZ)I',
+  );
 
   static final _compare$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -135,7 +147,10 @@ class Compare extends jni$_.JObject {
           >();
 
   /// from: `static public int compare(boolean z, boolean z1)`
-  static int compare$1(bool z, bool z1) {
+  static int compare$1(
+    bool z,
+    bool z1,
+  ) {
     return _compare$1(
       _class.reference.pointer,
       _id_compare$1 as jni$_.JMethodIDPtr,
@@ -155,8 +170,11 @@ final class $Compare$NullableType extends jni$_.JObjType<Compare?> {
 
   @jni$_.internal
   @core$_.override
-  Compare? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : Compare.fromReference(reference);
+  Compare? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : Compare.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -189,8 +207,9 @@ final class $Compare$Type extends jni$_.JObjType<Compare> {
 
   @jni$_.internal
   @core$_.override
-  Compare fromReference(jni$_.JReference reference) =>
-      Compare.fromReference(reference);
+  Compare fromReference(jni$_.JReference reference) => Compare.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

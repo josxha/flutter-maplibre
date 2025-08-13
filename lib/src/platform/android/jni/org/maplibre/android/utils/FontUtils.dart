@@ -45,8 +45,9 @@ class FontUtils extends jni$_.JObject {
   final jni$_.JObjType<FontUtils> $type;
 
   @jni$_.internal
-  FontUtils.fromReference(jni$_.JReference reference)
-    : $type = type,
+  FontUtils.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -103,8 +104,11 @@ final class $FontUtils$NullableType extends jni$_.JObjType<FontUtils?> {
 
   @jni$_.internal
   @core$_.override
-  FontUtils? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : FontUtils.fromReference(reference);
+  FontUtils? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : FontUtils.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -138,7 +142,9 @@ final class $FontUtils$Type extends jni$_.JObjType<FontUtils> {
   @jni$_.internal
   @core$_.override
   FontUtils fromReference(jni$_.JReference reference) =>
-      FontUtils.fromReference(reference);
+      FontUtils.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

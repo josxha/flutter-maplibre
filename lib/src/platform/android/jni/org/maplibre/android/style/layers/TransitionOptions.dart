@@ -45,8 +45,9 @@ class TransitionOptions extends jni$_.JObject {
   final jni$_.JObjType<TransitionOptions> $type;
 
   @jni$_.internal
-  TransitionOptions.fromReference(jni$_.JReference reference)
-    : $type = type,
+  TransitionOptions.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -56,7 +57,9 @@ class TransitionOptions extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $TransitionOptions$NullableType();
   static const type = $TransitionOptions$Type();
-  static final _id_new$ = _class.constructorId(r'(JJ)V');
+  static final _id_new$ = _class.constructorId(
+    r'(JJ)V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -79,7 +82,10 @@ class TransitionOptions extends jni$_.JObject {
 
   /// from: `public void <init>(long j, long j1)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory TransitionOptions(int j, int j1) {
+  factory TransitionOptions(
+    int j,
+    int j1,
+  ) {
     return TransitionOptions.fromReference(
       _new$(
         _class.reference.pointer,
@@ -90,7 +96,9 @@ class TransitionOptions extends jni$_.JObject {
     );
   }
 
-  static final _id_new$1 = _class.constructorId(r'(JJZ)V');
+  static final _id_new$1 = _class.constructorId(
+    r'(JJZ)V',
+  );
 
   static final _new$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -114,7 +122,11 @@ class TransitionOptions extends jni$_.JObject {
 
   /// from: `public void <init>(long j, long j1, boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory TransitionOptions.new$1(int j, int j1, bool z) {
+  factory TransitionOptions.new$1(
+    int j,
+    int j1,
+    bool z,
+  ) {
     return TransitionOptions.fromReference(
       _new$1(
         _class.reference.pointer,
@@ -152,7 +164,10 @@ class TransitionOptions extends jni$_.JObject {
 
   /// from: `static public org.maplibre.android.style.layers.TransitionOptions fromTransitionOptions(long j, long j1)`
   /// The returned object must be released after use, by calling the [release] method.
-  static TransitionOptions? fromTransitionOptions(int j, int j1) {
+  static TransitionOptions? fromTransitionOptions(
+    int j,
+    int j1,
+  ) {
     return _fromTransitionOptions(
       _class.reference.pointer,
       _id_fromTransitionOptions as jni$_.JMethodIDPtr,
@@ -190,7 +205,10 @@ class TransitionOptions extends jni$_.JObject {
     ).long;
   }
 
-  static final _id_getDelay = _class.instanceMethodId(r'getDelay', r'()J');
+  static final _id_getDelay = _class.instanceMethodId(
+    r'getDelay',
+    r'()J',
+  );
 
   static final _getDelay =
       jni$_.ProtectedJniExtensions.lookup<
@@ -269,7 +287,9 @@ class TransitionOptions extends jni$_.JObject {
           >();
 
   /// from: `public boolean equals(java.lang.Object object)`
-  bool equals(jni$_.JObject? object) {
+  bool equals(
+    jni$_.JObject? object,
+  ) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     return _equals(
       reference.pointer,
@@ -278,7 +298,10 @@ class TransitionOptions extends jni$_.JObject {
     ).boolean;
   }
 
-  static final _id_hashCode$1 = _class.instanceMethodId(r'hashCode', r'()I');
+  static final _id_hashCode$1 = _class.instanceMethodId(
+    r'hashCode',
+    r'()I',
+  );
 
   static final _hashCode$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -348,7 +371,11 @@ final class $TransitionOptions$NullableType
   @jni$_.internal
   @core$_.override
   TransitionOptions? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : TransitionOptions.fromReference(reference);
+      reference.isNull
+      ? null
+      : TransitionOptions.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -383,7 +410,9 @@ final class $TransitionOptions$Type extends jni$_.JObjType<TransitionOptions> {
   @jni$_.internal
   @core$_.override
   TransitionOptions fromReference(jni$_.JReference reference) =>
-      TransitionOptions.fromReference(reference);
+      TransitionOptions.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
