@@ -394,7 +394,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
       return [];
     }
 
-    final scaledPoint = point * MediaQuery.of(context).devicePixelRatio;
+    final scaledPoint = point * MediaQuery.devicePixelRatioOf(context);
 
     final query = map.queryRenderedFeatures(
       jni.PointF.new$3(scaledPoint.dx, scaledPoint.dy),
@@ -424,7 +424,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
       return [];
     }
 
-    final devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
+    final devicePixelRatio = MediaQuery.devicePixelRatioOf(context);
     final scaledRect = Rect.fromLTRB(
       rect.left * devicePixelRatio,
       rect.top * devicePixelRatio,
@@ -480,8 +480,20 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
         jSourceId = layer.getSourceId();
         jSourceLayer = layer.getSourceLayer();
         layer.release();
+      } else if (jniLayer.isA(jni.FillExtrusionLayer.type)) {
+        final layer = jniLayer.as(jni.FillExtrusionLayer.type);
+        jLayerId = layer.getId();
+        jSourceId = layer.getSourceId();
+        jSourceLayer = layer.getSourceLayer();
+        layer.release();
       } else if (jniLayer.isA(jni.SymbolLayer.type)) {
         final layer = jniLayer.as(jni.SymbolLayer.type);
+        jLayerId = layer.getId();
+        jSourceId = layer.getSourceId();
+        jSourceLayer = layer.getSourceLayer();
+        layer.release();
+      } else if (jniLayer.isA(jni.CircleLayer.type)) {
+        final layer = jniLayer.as(jni.CircleLayer.type);
         jLayerId = layer.getId();
         jSourceId = layer.getSourceId();
         jSourceLayer = layer.getSourceLayer();
@@ -493,8 +505,10 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
       final queryLayerIds = JArray<JString?>(JString.nullableType, 1)
         ..[0] = jLayerId;
       // query one layer at a time
+      final scaledPoint =
+          (screenLocation * MediaQuery.devicePixelRatioOf(context)).toPointF();
       final jniFeatures = _jniMapLibreMap!.queryRenderedFeatures(
-        jni.PointF.new$3(screenLocation.dx, screenLocation.dy),
+        scaledPoint,
         queryLayerIds,
       );
       queryLayerIds.release();
@@ -598,7 +612,9 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
 
   @override
   Position toLngLatSync(Offset screenLocation) => _jniProjection
-      .fromScreenLocation(screenLocation.toPointF())
+      .fromScreenLocation(
+        (screenLocation * MediaQuery.devicePixelRatioOf(context)).toPointF(),
+      )
       .toPosition(releaseOriginal: true);
 
   @override
@@ -606,9 +622,11 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
       screenLocations.map(toLngLatSync).toList(growable: false);
 
   @override
-  Offset toScreenLocationSync(Position lngLat) => _jniProjection
-      .toScreenLocation(lngLat.toLatLng())
-      .toOffset(releaseOriginal: true);
+  Offset toScreenLocationSync(Position lngLat) =>
+      _jniProjection
+          .toScreenLocation(lngLat.toLatLng())
+          .toOffset(releaseOriginal: true) /
+      MediaQuery.devicePixelRatioOf(context);
 
   @override
   List<Offset> toScreenLocationsSync(List<Position> lngLats) =>

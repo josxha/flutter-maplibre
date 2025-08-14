@@ -248,7 +248,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     final camera = getCamera();
     _map.jumpTo(
       interop.JumpToOptions(
-        center: center?.toLngLat(),
+        center: center?.toLngLat() ?? camera.center.toLngLat(),
         zoom: zoom ?? camera.zoom,
         bearing: bearing ?? camera.bearing,
         pitch: pitch ?? camera.pitch,

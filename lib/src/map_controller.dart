@@ -25,32 +25,40 @@ abstract interface class MapController {
   /// accessed before [MapLibreMap.onStyleLoaded] has been called.
   StyleController? get style;
 
-  /// Convert a latitude/longitude coordinate to a screen location.
+  /// Convert a latitude/longitude coordinate to a screen location in logical
+  /// pixels.
   // TODO: can be made sync when flutter platform and ui thread are merged
   Future<Offset> toScreenLocation(Position lngLat);
 
-  /// Get the latitude/longitude coordinate for a screen location.
+  /// Get the latitude/longitude coordinate for a screen location in logical
+  /// pixels.
   // TODO: can be made sync when flutter platform and ui thread are merged
   Future<Position> toLngLat(Offset screenLocation);
 
-  /// Convert a latitude/longitude coordinate to a screen location.
+  /// Convert a latitude/longitude coordinate to a screen location in logical
+  /// pixels.
   // TODO: can be made sync when flutter platform and ui thread are merged
   Future<List<Offset>> toScreenLocations(List<Position> lngLats);
 
-  /// Get the latitude/longitude coordinate for a screen location.
+  /// Get the latitude/longitude coordinate for a screen location in logical
+  /// pixels.
   // TODO: can be made sync when flutter platform and ui thread are merged
   Future<List<Position>> toLngLats(List<Offset> screenLocations);
 
-  /// Convert a latitude/longitude coordinate to a screen location.
+  /// Convert a latitude/longitude coordinate to a screen location in logical
+  /// pixels.
   Offset toScreenLocationSync(Position lngLat);
 
-  /// Get the latitude/longitude coordinate for a screen location.
+  /// Get the latitude/longitude coordinate for a screen location in logical
+  /// pixels.
   Position toLngLatSync(Offset screenLocation);
 
-  /// Convert a latitude/longitude coordinate to a screen location.
+  /// Convert a latitude/longitude coordinate to a screen location in logical
+  /// pixels.
   List<Offset> toScreenLocationsSync(List<Position> lngLats);
 
-  /// Get the latitude/longitude coordinate for a screen location.
+  /// Get the latitude/longitude coordinate for a screen location in logical
+  /// pixels.
   List<Position> toLngLatsSync(List<Offset> screenLocations);
 
   /// Instantly move the map camera to a new location.
@@ -92,8 +100,8 @@ abstract interface class MapController {
   /// Get the current camera position on the map.
   MapCamera? get camera;
 
-  /// Returns the distance spanned by one pixel at the specified latitude and
-  /// current zoom level.
+  /// Returns the distance spanned by one logical pixel at the specified
+  /// latitude and current zoom level.
   ///
   /// The distance between pixels decreases as the latitude approaches the
   /// poles. This relationship parallels the relationship between longitudinal
@@ -105,8 +113,8 @@ abstract interface class MapController {
   // TODO: can be made sync when flutter platform and ui thread are merged
   Future<LngLatBounds> getVisibleRegion();
 
-  /// Returns the distance spanned by one pixel at the specified latitude and
-  /// current zoom level.
+  /// Returns the distance spanned by one logical pixel at the specified
+  /// latitude and current zoom level.
   ///
   /// The distance between pixels decreases as the latitude approaches the
   /// poles. This relationship parallels the relationship between longitudinal
@@ -117,7 +125,7 @@ abstract interface class MapController {
   LngLatBounds getVisibleRegionSync();
 
   /// Queries the map for layers containing rendered features which intersect
-  /// with a given [screenLocation].
+  /// with a given [screenLocation] measured in logical pixels.
   Future<List<QueriedLayer>> queryLayers(Offset screenLocation);
 
   /// Returns an array of rendered map features that intersect with a given

@@ -250,10 +250,8 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
       return [];
     }
 
-    final scaledPoint = point * MediaQuery.of(context).devicePixelRatio;
-
     final query = _mapView.visibleFeaturesAtPoint$1(
-      scaledPoint.toCGPoint(),
+      point.toCGPoint(),
       inStyleLayersWithIdentifiers: layerIds == null
           ? null
           : NSSet.of(layerIds.map((s) => s.toNSString())),
@@ -276,16 +274,8 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
       return [];
     }
 
-    final devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
-    final scaledRect = Rect.fromLTRB(
-      rect.left * devicePixelRatio,
-      rect.top * devicePixelRatio,
-      rect.right * devicePixelRatio,
-      rect.bottom * devicePixelRatio,
-    );
-
     final query = _mapView.visibleFeaturesInRect$1(
-      scaledRect.toCGRect(),
+      rect.toCGRect(),
       inStyleLayersWithIdentifiers: layerIds == null
           ? null
           : NSSet.of(layerIds.map((s) => s.toNSString())),
@@ -309,7 +299,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
         inStyleLayersWithIdentifiers: NSSet.setWithObject(layer.identifier),
       );
       if (features.count == 0) continue;
-      if (!features.isEmpty && MLNVectorStyleLayer.isInstance(layer)) {
+      if (features.isNotEmpty && MLNVectorStyleLayer.isInstance(layer)) {
         final vectorLayer = MLNVectorStyleLayer.castFrom(layer);
         final queriedLayer = QueriedLayer(
           layerId: layer.identifier.toDartString(),
