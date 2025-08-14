@@ -47,8 +47,9 @@ class UnknownSource extends source$_.Source {
   final jni$_.JObjType<UnknownSource> $type;
 
   @jni$_.internal
-  UnknownSource.fromReference(jni$_.JReference reference)
-    : $type = type,
+  UnknownSource.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -58,7 +59,9 @@ class UnknownSource extends source$_.Source {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $UnknownSource$NullableType();
   static const type = $UnknownSource$Type();
-  static final _id_new$ = _class.constructorId(r'(J)V');
+  static final _id_new$ = _class.constructorId(
+    r'(J)V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -80,7 +83,9 @@ class UnknownSource extends source$_.Source {
 
   /// from: `public void <init>(long j)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory UnknownSource(int j) {
+  factory UnknownSource(
+    int j,
+  ) {
     return UnknownSource.fromReference(
       _new$(
         _class.reference.pointer,
@@ -101,8 +106,11 @@ final class $UnknownSource$NullableType extends jni$_.JObjType<UnknownSource?> {
 
   @jni$_.internal
   @core$_.override
-  UnknownSource? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : UnknownSource.fromReference(reference);
+  UnknownSource? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : UnknownSource.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const source$_.$Source$Type();
@@ -136,7 +144,9 @@ final class $UnknownSource$Type extends jni$_.JObjType<UnknownSource> {
   @jni$_.internal
   @core$_.override
   UnknownSource fromReference(jni$_.JReference reference) =>
-      UnknownSource.fromReference(reference);
+      UnknownSource.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const source$_.$Source$Type();

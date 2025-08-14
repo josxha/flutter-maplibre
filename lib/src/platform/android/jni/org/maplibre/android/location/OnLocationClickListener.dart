@@ -45,8 +45,9 @@ class OnLocationClickListener extends jni$_.JObject {
   final jni$_.JObjType<OnLocationClickListener> $type;
 
   @jni$_.internal
-  OnLocationClickListener.fromReference(jni$_.JReference reference)
-    : $type = type,
+  OnLocationClickListener.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -94,7 +95,11 @@ class OnLocationClickListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -150,10 +155,14 @@ class OnLocationClickListener extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory OnLocationClickListener.implement($OnLocationClickListener $impl) {
+  factory OnLocationClickListener.implement(
+    $OnLocationClickListener $impl,
+  ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return OnLocationClickListener.fromReference($i.implementReference());
+    return OnLocationClickListener.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -196,7 +205,9 @@ final class $OnLocationClickListener$NullableType
   OnLocationClickListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : OnLocationClickListener.fromReference(reference);
+      : OnLocationClickListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -232,7 +243,9 @@ final class $OnLocationClickListener$Type
   @jni$_.internal
   @core$_.override
   OnLocationClickListener fromReference(jni$_.JReference reference) =>
-      OnLocationClickListener.fromReference(reference);
+      OnLocationClickListener.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

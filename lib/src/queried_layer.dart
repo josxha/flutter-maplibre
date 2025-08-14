@@ -1,5 +1,49 @@
 import 'package:flutter/foundation.dart';
-import 'package:maplibre/maplibre.dart';
+import 'package:maplibre/maplibre.dart' show MapController;
+import 'package:maplibre/src/map_controller.dart' show MapController;
+
+/// Data class representing a vector feature that was rendered on the map.
+///
+/// {@category Basic}
+@immutable
+class RenderedFeature {
+  /// Create a new [RenderedFeature].
+  const RenderedFeature({
+    required this.id,
+    required this.properties,
+  });
+
+  /// If present, an object uniquely identifying the feature in the vector
+  /// source. May be either a string or an integer.
+  ///
+  /// If the source is GeoJSON, this property corresponds to the feature's `id`
+  /// field.*
+  ///
+  /// **DANGER**:
+  /// This field is unpredictable on MapLibre web when the underlying GeoJSON
+  /// feature has an `id` field that is not a positive integer.
+  /// See https://github.com/maplibre/maplibre-gl-js/issues/1043.
+  ///
+  /// **DANGER**:
+  /// On Android, the `id` field is always converted to a string.
+  ///
+  /// If using GeoJSON sources, consider relying on `[properties]` rather
+  /// than `[id]`.
+  final Object? id;
+
+  /// The properties of the feature as provided by its source.
+  final Map<String, Object?> properties;
+
+  @override
+  String toString() => 'RenderedFeature(id: $id, properties: $properties)';
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || other is RenderedFeature && id == other.id;
+
+  @override
+  int get hashCode => Object.hash(id, properties);
+}
 
 /// Return used for [MapController.queryLayers].
 ///

@@ -1,3 +1,5 @@
+import 'dart:js_interop';
+
 import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/platform/web/interop/interop.dart' as interop;
@@ -38,4 +40,14 @@ extension EdgeInsetsExt on EdgeInsets {
     bottom: bottom,
     top: top,
   );
+}
+
+/// Internal extension to convert JSAny to Map\<String, dynamic\>
+extension StringMap on JSAny? {
+  /// Like [JSAny?.dartify], but for the special case of a JSON map.
+  Map<String, Object?>? asStringMap() =>
+      (dartify() as Map<Object?, Object?>?)?.map(
+        (k, v) => MapEntry(k.toString(), v),
+      ) ??
+      {};
 }

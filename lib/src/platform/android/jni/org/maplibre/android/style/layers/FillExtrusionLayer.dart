@@ -51,8 +51,9 @@ class FillExtrusionLayer extends layer$_.Layer {
   final jni$_.JObjType<FillExtrusionLayer> $type;
 
   @jni$_.internal
-  FillExtrusionLayer.fromReference(jni$_.JReference reference)
-    : $type = type,
+  FillExtrusionLayer.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -89,7 +90,10 @@ class FillExtrusionLayer extends layer$_.Layer {
 
   /// from: `public void <init>(java.lang.String string, java.lang.String string1)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory FillExtrusionLayer(jni$_.JString? string, jni$_.JString? string1) {
+  factory FillExtrusionLayer(
+    jni$_.JString? string,
+    jni$_.JString? string1,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
     return FillExtrusionLayer.fromReference(
@@ -126,7 +130,9 @@ class FillExtrusionLayer extends layer$_.Layer {
           >();
 
   /// from: `public void setSourceLayer(java.lang.String string)`
-  void setSourceLayer(jni$_.JString? string) {
+  void setSourceLayer(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setSourceLayer(
       reference.pointer,
@@ -160,7 +166,9 @@ class FillExtrusionLayer extends layer$_.Layer {
 
   /// from: `public org.maplibre.android.style.layers.FillExtrusionLayer withSourceLayer(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  FillExtrusionLayer withSourceLayer(jni$_.JString? string) {
+  FillExtrusionLayer withSourceLayer(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return _withSourceLayer(
       reference.pointer,
@@ -253,7 +261,9 @@ class FillExtrusionLayer extends layer$_.Layer {
           >();
 
   /// from: `public void setFilter(org.maplibre.android.style.expressions.Expression expression)`
-  void setFilter(jni$_.JObject expression) {
+  void setFilter(
+    jni$_.JObject expression,
+  ) {
     final _$expression = expression.reference;
     _setFilter(
       reference.pointer,
@@ -287,7 +297,9 @@ class FillExtrusionLayer extends layer$_.Layer {
 
   /// from: `public org.maplibre.android.style.layers.FillExtrusionLayer withFilter(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  FillExtrusionLayer withFilter(jni$_.JObject expression) {
+  FillExtrusionLayer withFilter(
+    jni$_.JObject expression,
+  ) {
     final _$expression = expression.reference;
     return _withFilter(
       reference.pointer,
@@ -1084,7 +1096,11 @@ final class $FillExtrusionLayer$NullableType
   @jni$_.internal
   @core$_.override
   FillExtrusionLayer? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : FillExtrusionLayer.fromReference(reference);
+      reference.isNull
+      ? null
+      : FillExtrusionLayer.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const layer$_.$Layer$NullableType();
@@ -1120,7 +1136,9 @@ final class $FillExtrusionLayer$Type
   @jni$_.internal
   @core$_.override
   FillExtrusionLayer fromReference(jni$_.JReference reference) =>
-      FillExtrusionLayer.fromReference(reference);
+      FillExtrusionLayer.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const layer$_.$Layer$NullableType();

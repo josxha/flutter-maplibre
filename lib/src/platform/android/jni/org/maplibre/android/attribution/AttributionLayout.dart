@@ -47,8 +47,9 @@ class AttributionLayout extends jni$_.JObject {
   final jni$_.JObjType<AttributionLayout> $type;
 
   @jni$_.internal
-  AttributionLayout.fromReference(jni$_.JReference reference)
-    : $type = type,
+  AttributionLayout.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -221,7 +222,9 @@ class AttributionLayout extends jni$_.JObject {
           >();
 
   /// from: `public boolean equals(java.lang.Object object)`
-  bool equals(jni$_.JObject? object) {
+  bool equals(
+    jni$_.JObject? object,
+  ) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     return _equals(
       reference.pointer,
@@ -230,7 +233,10 @@ class AttributionLayout extends jni$_.JObject {
     ).boolean;
   }
 
-  static final _id_hashCode$1 = _class.instanceMethodId(r'hashCode', r'()I');
+  static final _id_hashCode$1 = _class.instanceMethodId(
+    r'hashCode',
+    r'()I',
+  );
 
   static final _hashCode$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -300,7 +306,11 @@ final class $AttributionLayout$NullableType
   @jni$_.internal
   @core$_.override
   AttributionLayout? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : AttributionLayout.fromReference(reference);
+      reference.isNull
+      ? null
+      : AttributionLayout.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -335,7 +345,9 @@ final class $AttributionLayout$Type extends jni$_.JObjType<AttributionLayout> {
   @jni$_.internal
   @core$_.override
   AttributionLayout fromReference(jni$_.JReference reference) =>
-      AttributionLayout.fromReference(reference);
+      AttributionLayout.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

@@ -45,8 +45,9 @@ class FormattedSection extends jni$_.JObject {
   final jni$_.JObjType<FormattedSection> $type;
 
   @jni$_.internal
-  FormattedSection.fromReference(jni$_.JReference reference)
-    : $type = type,
+  FormattedSection.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -56,7 +57,9 @@ class FormattedSection extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $FormattedSection$NullableType();
   static const type = $FormattedSection$Type();
-  static final _id_new$ = _class.constructorId(r'(Ljava/lang/String;)V');
+  static final _id_new$ = _class.constructorId(
+    r'(Ljava/lang/String;)V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -78,7 +81,9 @@ class FormattedSection extends jni$_.JObject {
 
   /// from: `public void <init>(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory FormattedSection(jni$_.JString string) {
+  factory FormattedSection(
+    jni$_.JString string,
+  ) {
     final _$string = string.reference;
     return FormattedSection.fromReference(
       _new$(
@@ -223,7 +228,10 @@ class FormattedSection extends jni$_.JObject {
 
   /// from: `public void <init>(java.lang.String string, java.lang.Number number)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory FormattedSection.new$3(jni$_.JString string, jni$_.JNumber? number) {
+  factory FormattedSection.new$3(
+    jni$_.JString string,
+    jni$_.JNumber? number,
+  ) {
     final _$string = string.reference;
     final _$number = number?.reference ?? jni$_.jNullReference;
     return FormattedSection.fromReference(
@@ -427,7 +435,9 @@ class FormattedSection extends jni$_.JObject {
           >();
 
   /// from: `public void setFontScale(java.lang.Number number)`
-  void setFontScale(jni$_.JNumber? number) {
+  void setFontScale(
+    jni$_.JNumber? number,
+  ) {
     final _$number = number?.reference ?? jni$_.jNullReference;
     _setFontScale(
       reference.pointer,
@@ -460,7 +470,9 @@ class FormattedSection extends jni$_.JObject {
           >();
 
   /// from: `public void setFontStack(java.lang.String[] strings)`
-  void setFontStack(jni$_.JArray<jni$_.JString?>? strings) {
+  void setFontStack(
+    jni$_.JArray<jni$_.JString?>? strings,
+  ) {
     final _$strings = strings?.reference ?? jni$_.jNullReference;
     _setFontStack(
       reference.pointer,
@@ -493,7 +505,9 @@ class FormattedSection extends jni$_.JObject {
           >();
 
   /// from: `public void setTextColor(java.lang.String string)`
-  void setTextColor(jni$_.JString? string) {
+  void setTextColor(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setTextColor(
       reference.pointer,
@@ -526,7 +540,9 @@ class FormattedSection extends jni$_.JObject {
           >();
 
   /// from: `public void setTextColor(int i)`
-  void setTextColor$1(int i) {
+  void setTextColor$1(
+    int i,
+  ) {
     _setTextColor$1(
       reference.pointer,
       _id_setTextColor$1 as jni$_.JMethodIDPtr,
@@ -558,7 +574,9 @@ class FormattedSection extends jni$_.JObject {
           >();
 
   /// from: `public boolean equals(java.lang.Object object)`
-  bool equals(jni$_.JObject? object) {
+  bool equals(
+    jni$_.JObject? object,
+  ) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     return _equals(
       reference.pointer,
@@ -567,7 +585,10 @@ class FormattedSection extends jni$_.JObject {
     ).boolean;
   }
 
-  static final _id_hashCode$1 = _class.instanceMethodId(r'hashCode', r'()I');
+  static final _id_hashCode$1 = _class.instanceMethodId(
+    r'hashCode',
+    r'()I',
+  );
 
   static final _hashCode$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -637,7 +658,11 @@ final class $FormattedSection$NullableType
   @jni$_.internal
   @core$_.override
   FormattedSection? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : FormattedSection.fromReference(reference);
+      reference.isNull
+      ? null
+      : FormattedSection.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -672,7 +697,9 @@ final class $FormattedSection$Type extends jni$_.JObjType<FormattedSection> {
   @jni$_.internal
   @core$_.override
   FormattedSection fromReference(jni$_.JReference reference) =>
-      FormattedSection.fromReference(reference);
+      FormattedSection.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

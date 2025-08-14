@@ -50,8 +50,9 @@ class MapLibrePaddingAnimator
   final jni$_.JObjType<MapLibrePaddingAnimator> $type;
 
   @jni$_.internal
-  MapLibrePaddingAnimator.fromReference(jni$_.JReference reference)
-    : $type = type,
+  MapLibrePaddingAnimator.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(const jni$_.JDoubleArrayType(), reference);
 
   static final _class = jni$_.JClass.forName(
@@ -160,7 +161,9 @@ final class $MapLibrePaddingAnimator$NullableType
   MapLibrePaddingAnimator? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : MapLibrePaddingAnimator.fromReference(reference);
+      : MapLibrePaddingAnimator.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>
@@ -199,7 +202,9 @@ final class $MapLibrePaddingAnimator$Type
   @jni$_.internal
   @core$_.override
   MapLibrePaddingAnimator fromReference(jni$_.JReference reference) =>
-      MapLibrePaddingAnimator.fromReference(reference);
+      MapLibrePaddingAnimator.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>

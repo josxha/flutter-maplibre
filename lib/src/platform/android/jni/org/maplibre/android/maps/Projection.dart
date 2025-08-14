@@ -53,8 +53,9 @@ class Projection extends jni$_.JObject {
   final jni$_.JObjType<Projection> $type;
 
   @jni$_.internal
-  Projection.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Projection.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -191,7 +192,9 @@ class Projection extends jni$_.JObject {
           >();
 
   /// from: `public double getMetersPerPixelAtLatitude(double d)`
-  double getMetersPerPixelAtLatitude(double d) {
+  double getMetersPerPixelAtLatitude(
+    double d,
+  ) {
     return _getMetersPerPixelAtLatitude(
       reference.pointer,
       _id_getMetersPerPixelAtLatitude as jni$_.JMethodIDPtr,
@@ -224,7 +227,9 @@ class Projection extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.geometry.LatLng fromScreenLocation(android.graphics.PointF pointF)`
   /// The returned object must be released after use, by calling the [release] method.
-  latlng$_.LatLng fromScreenLocation(pointf$_.PointF pointF) {
+  latlng$_.LatLng fromScreenLocation(
+    pointf$_.PointF pointF,
+  ) {
     final _$pointF = pointF.reference;
     return _fromScreenLocation(
       reference.pointer,
@@ -260,7 +265,10 @@ class Projection extends jni$_.JObject {
           >();
 
   /// from: `public void fromScreenLocations(double[] ds, double[] ds1)`
-  void fromScreenLocations(jni$_.JDoubleArray ds, jni$_.JDoubleArray ds1) {
+  void fromScreenLocations(
+    jni$_.JDoubleArray ds,
+    jni$_.JDoubleArray ds1,
+  ) {
     final _$ds = ds.reference;
     final _$ds1 = ds1.reference;
     _fromScreenLocations(
@@ -328,7 +336,9 @@ class Projection extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.geometry.VisibleRegion getVisibleRegion(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  visibleregion$_.VisibleRegion getVisibleRegion$1(bool z) {
+  visibleregion$_.VisibleRegion getVisibleRegion$1(
+    bool z,
+  ) {
     return _getVisibleRegion$1(
       reference.pointer,
       _id_getVisibleRegion$1 as jni$_.JMethodIDPtr,
@@ -362,7 +372,9 @@ class Projection extends jni$_.JObject {
           >();
 
   /// from: `public void getVisibleCoordinateBounds(double[] ds)`
-  void getVisibleCoordinateBounds(jni$_.JDoubleArray ds) {
+  void getVisibleCoordinateBounds(
+    jni$_.JDoubleArray ds,
+  ) {
     final _$ds = ds.reference;
     _getVisibleCoordinateBounds(
       reference.pointer,
@@ -396,7 +408,9 @@ class Projection extends jni$_.JObject {
 
   /// from: `public android.graphics.PointF toScreenLocation(org.maplibre.android.geometry.LatLng latLng)`
   /// The returned object must be released after use, by calling the [release] method.
-  pointf$_.PointF toScreenLocation(latlng$_.LatLng latLng) {
+  pointf$_.PointF toScreenLocation(
+    latlng$_.LatLng latLng,
+  ) {
     final _$latLng = latLng.reference;
     return _toScreenLocation(
       reference.pointer,
@@ -432,7 +446,10 @@ class Projection extends jni$_.JObject {
           >();
 
   /// from: `public void toScreenLocations(double[] ds, double[] ds1)`
-  void toScreenLocations(jni$_.JDoubleArray ds, jni$_.JDoubleArray ds1) {
+  void toScreenLocations(
+    jni$_.JDoubleArray ds,
+    jni$_.JDoubleArray ds1,
+  ) {
     final _$ds = ds.reference;
     final _$ds1 = ds1.reference;
     _toScreenLocations(
@@ -467,7 +484,9 @@ class Projection extends jni$_.JObject {
           >();
 
   /// from: `public double calculateZoom(float f)`
-  double calculateZoom(double f) {
+  double calculateZoom(
+    double f,
+  ) {
     return _calculateZoom(
       reference.pointer,
       _id_calculateZoom as jni$_.JMethodIDPtr,
@@ -486,8 +505,11 @@ final class $Projection$NullableType extends jni$_.JObjType<Projection?> {
 
   @jni$_.internal
   @core$_.override
-  Projection? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : Projection.fromReference(reference);
+  Projection? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : Projection.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -521,7 +543,9 @@ final class $Projection$Type extends jni$_.JObjType<Projection> {
   @jni$_.internal
   @core$_.override
   Projection fromReference(jni$_.JReference reference) =>
-      Projection.fromReference(reference);
+      Projection.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

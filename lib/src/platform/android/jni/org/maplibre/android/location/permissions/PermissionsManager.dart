@@ -47,8 +47,9 @@ class PermissionsManager extends jni$_.JObject {
   final jni$_.JObjType<PermissionsManager> $type;
 
   @jni$_.internal
-  PermissionsManager.fromReference(jni$_.JReference reference)
-    : $type = type,
+  PermissionsManager.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -189,7 +190,9 @@ class PermissionsManager extends jni$_.JObject {
           >();
 
   /// from: `static public boolean isBackgroundLocationPermissionGranted(android.content.Context context)`
-  static bool isBackgroundLocationPermissionGranted(jni$_.JObject? context) {
+  static bool isBackgroundLocationPermissionGranted(
+    jni$_.JObject? context,
+  ) {
     final _$context = context?.reference ?? jni$_.jNullReference;
     return _isBackgroundLocationPermissionGranted(
       _class.reference.pointer,
@@ -222,7 +225,9 @@ class PermissionsManager extends jni$_.JObject {
           >();
 
   /// from: `static public boolean areLocationPermissionsGranted(android.content.Context context)`
-  static bool areLocationPermissionsGranted(jni$_.JObject? context) {
+  static bool areLocationPermissionsGranted(
+    jni$_.JObject? context,
+  ) {
     final _$context = context?.reference ?? jni$_.jNullReference;
     return _areLocationPermissionsGranted(
       _class.reference.pointer,
@@ -284,7 +289,9 @@ class PermissionsManager extends jni$_.JObject {
           >();
 
   /// from: `public void requestLocationPermissions(android.app.Activity activity)`
-  void requestLocationPermissions(jni$_.JObject? activity) {
+  void requestLocationPermissions(
+    jni$_.JObject? activity,
+  ) {
     final _$activity = activity?.reference ?? jni$_.jNullReference;
     _requestLocationPermissions(
       reference.pointer,
@@ -355,7 +362,11 @@ final class $PermissionsManager$NullableType
   @jni$_.internal
   @core$_.override
   PermissionsManager? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : PermissionsManager.fromReference(reference);
+      reference.isNull
+      ? null
+      : PermissionsManager.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -391,7 +402,9 @@ final class $PermissionsManager$Type
   @jni$_.internal
   @core$_.override
   PermissionsManager fromReference(jni$_.JReference reference) =>
-      PermissionsManager.fromReference(reference);
+      PermissionsManager.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

@@ -45,8 +45,9 @@ class Utils extends jni$_.JObject {
   final jni$_.JObjType<Utils> $type;
 
   @jni$_.internal
-  Utils.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Utils.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -81,7 +82,10 @@ class Utils extends jni$_.JObject {
           >();
 
   /// from: `static public float shortestRotation(float f, float f1)`
-  static double shortestRotation(double f, double f1) {
+  static double shortestRotation(
+    double f,
+    double f1,
+  ) {
     return _shortestRotation(
       _class.reference.pointer,
       _id_shortestRotation as jni$_.JMethodIDPtr,
@@ -90,7 +94,10 @@ class Utils extends jni$_.JObject {
     ).float;
   }
 
-  static final _id_normalize = _class.staticMethodId(r'normalize', r'(F)F');
+  static final _id_normalize = _class.staticMethodId(
+    r'normalize',
+    r'(F)F',
+  );
 
   static final _normalize =
       jni$_.ProtectedJniExtensions.lookup<
@@ -111,7 +118,9 @@ class Utils extends jni$_.JObject {
           >();
 
   /// from: `static public float normalize(float f)`
-  static double normalize(double f) {
+  static double normalize(
+    double f,
+  ) {
     return _normalize(
       _class.reference.pointer,
       _id_normalize as jni$_.JMethodIDPtr,
@@ -130,8 +139,11 @@ final class $Utils$NullableType extends jni$_.JObjType<Utils?> {
 
   @jni$_.internal
   @core$_.override
-  Utils? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : Utils.fromReference(reference);
+  Utils? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : Utils.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -164,8 +176,9 @@ final class $Utils$Type extends jni$_.JObjType<Utils> {
 
   @jni$_.internal
   @core$_.override
-  Utils fromReference(jni$_.JReference reference) =>
-      Utils.fromReference(reference);
+  Utils fromReference(jni$_.JReference reference) => Utils.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
