@@ -29,30 +29,52 @@ class MapScalebar extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = MapController.maybeOf(context);
     final camera = MapCamera.maybeOf(context);
-    if (controller == null || camera == null) return const SizedBox.shrink();
+    if (controller == null || camera == null) {
+      return const SizedBox.shrink();
+    }
 
-    final latitude = camera.center.lat.toDouble();
+    // We want to make the scalebar accurate at the location it is rendered
+    // onscreen, rather than the camera center.
+    const height = 22.0;
+    final screenSize = MediaQuery.sizeOf(context);
+    final totalPadding = padding + MediaQuery.viewPaddingOf(context);
+    final paddingOffset = Offset(totalPadding.left, totalPadding.top);
+    final paddedSize =
+        screenSize - Offset(totalPadding.right, totalPadding.bottom) as Size;
+    final scalebarCenter = alignment.alongSize(paddedSize) + paddingOffset;
+    final scalebarLat = controller.toLngLatSync(scalebarCenter).lat.toDouble();
     final theme = Theme.of(context);
 
-    final metersPerPixel = controller.getMetersPerPixelAtLatitudeSync(latitude);
-    final painter = _ScaleBarPainter(metersPerPixel, theme);
+    final metersPerPixel = controller.getMetersPerPixelAtLatitudeSync(
+      scalebarLat,
+    );
+    final painter = ScaleBarPainter(metersPerPixel, theme);
     // Use a SafeArea to ensure the widget is completely visible on devices
     // with rounded edges like iOS.
     return SafeArea(
       child: Container(
         alignment: alignment,
         padding: padding,
-        child: CustomPaint(painter: painter, size: Size(painter.width, 22)),
+        child: CustomPaint(painter: painter, size: Size(painter.width, height)),
       ),
     );
   }
 }
 
-class _ScaleBarPainter extends CustomPainter {
-  _ScaleBarPainter(this.metersPerPixel, this.theme);
+@visibleForTesting
+/// Visible for testing only.
+class ScaleBarPainter extends CustomPainter {
+  /// Visible for testing only.
+  ScaleBarPainter(this.metersPerPixel, this.theme);
 
+  /// The meters per pixel of the map.
   final double metersPerPixel;
+
+  /// The [ThemeData] of the scalebar.
   final ThemeData theme;
+
+  /// The distance in meters that the scalebar represents.
+  @visibleForTesting
   late final double meters = switch (metersPerPixel) {
     >= 300000 => 50000000,
     >= 200000 => 30000000,
@@ -88,6 +110,9 @@ class _ScaleBarPainter extends CustomPainter {
     >= 0.01 => 1,
     _ => metersPerPixel * 100,
   };
+
+  /// The width of the scalebar in pixels.
+  @visibleForTesting
   late final double width = meters / metersPerPixel;
 
   late final _linePaint = Paint()
@@ -152,7 +177,7 @@ class _ScaleBarPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant _ScaleBarPainter oldDelegate) =>
+  bool shouldRepaint(covariant ScaleBarPainter oldDelegate) =>
       metersPerPixel != oldDelegate.metersPerPixel;
 }
 

@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
 
@@ -28,12 +27,7 @@ class _FeaturesQueryPageState extends State<FeaturesQueryPage> {
         onStyleLoaded: _onStyleLoaded,
         onEvent: (event) async {
           if (event is MapEventClick) {
-            // FIXME: https://github.com/josxha/flutter-maplibre/issues/317
-            final physPoint = await _controller.toScreenLocation(event.point);
-            if (!context.mounted) return;
-            final screenPoint =
-                physPoint /
-                (kIsWeb ? 1 : MediaQuery.of(context).devicePixelRatio);
+            final screenPoint = await _controller.toScreenLocation(event.point);
             final features = await _controller.featuresAtPoint(
               screenPoint,
             );
@@ -41,12 +35,7 @@ class _FeaturesQueryPageState extends State<FeaturesQueryPage> {
               _showFeatures(features);
             }
           } else if (event is MapEventLongClick) {
-            // FIXME: https://github.com/josxha/flutter-maplibre/issues/317
-            final physPoint = await _controller.toScreenLocation(event.point);
-            if (!context.mounted) return;
-            final screenPoint =
-                physPoint /
-                (kIsWeb ? 1 : MediaQuery.of(context).devicePixelRatio);
+            final screenPoint = await _controller.toScreenLocation(event.point);
             final features = await _controller.featuresInRect(
               Rect.fromCircle(
                 center: screenPoint,
