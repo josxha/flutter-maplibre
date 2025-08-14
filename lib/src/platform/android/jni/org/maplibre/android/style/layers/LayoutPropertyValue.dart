@@ -51,8 +51,10 @@ class LayoutPropertyValue<$T extends jni$_.JObject?>
   final jni$_.JObjType<$T> T;
 
   @jni$_.internal
-  LayoutPropertyValue.fromReference(this.T, jni$_.JReference reference)
-    : $type = type<$T>(T),
+  LayoutPropertyValue.fromReference(
+    this.T,
+    jni$_.JReference reference,
+  ) : $type = type<$T>(T),
       super.fromReference(T.nullableType, reference);
 
   static final _class = jni$_.JClass.forName(
@@ -61,14 +63,20 @@ class LayoutPropertyValue<$T extends jni$_.JObject?>
 
   /// The type which includes information such as the signature of this class.
   static $LayoutPropertyValue$NullableType<$T>
-  nullableType<$T extends jni$_.JObject?>(jni$_.JObjType<$T> T) {
-    return $LayoutPropertyValue$NullableType<$T>(T);
+  nullableType<$T extends jni$_.JObject?>(
+    jni$_.JObjType<$T> T,
+  ) {
+    return $LayoutPropertyValue$NullableType<$T>(
+      T,
+    );
   }
 
   static $LayoutPropertyValue$Type<$T> type<$T extends jni$_.JObject?>(
     jni$_.JObjType<$T> T,
   ) {
-    return $LayoutPropertyValue$Type<$T>(T);
+    return $LayoutPropertyValue$Type<$T>(
+      T,
+    );
   }
 
   static final _id_new$ = _class.constructorId(
@@ -123,7 +131,9 @@ final class $LayoutPropertyValue$NullableType<$T extends jni$_.JObject?>
   final jni$_.JObjType<$T> T;
 
   @jni$_.internal
-  const $LayoutPropertyValue$NullableType(this.T);
+  const $LayoutPropertyValue$NullableType(
+    this.T,
+  );
 
   @jni$_.internal
   @core$_.override
@@ -135,7 +145,10 @@ final class $LayoutPropertyValue$NullableType<$T extends jni$_.JObject?>
   LayoutPropertyValue<$T>? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : LayoutPropertyValue<$T>.fromReference(T, reference);
+      : LayoutPropertyValue<$T>.fromReference(
+          T,
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>
@@ -166,7 +179,9 @@ final class $LayoutPropertyValue$Type<$T extends jni$_.JObject?>
   final jni$_.JObjType<$T> T;
 
   @jni$_.internal
-  const $LayoutPropertyValue$Type(this.T);
+  const $LayoutPropertyValue$Type(
+    this.T,
+  );
 
   @jni$_.internal
   @core$_.override
@@ -176,7 +191,10 @@ final class $LayoutPropertyValue$Type<$T extends jni$_.JObject?>
   @jni$_.internal
   @core$_.override
   LayoutPropertyValue<$T> fromReference(jni$_.JReference reference) =>
-      LayoutPropertyValue<$T>.fromReference(T, reference);
+      LayoutPropertyValue<$T>.fromReference(
+        T,
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>

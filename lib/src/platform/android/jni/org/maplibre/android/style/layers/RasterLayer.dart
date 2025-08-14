@@ -51,8 +51,9 @@ class RasterLayer extends layer$_.Layer {
   final jni$_.JObjType<RasterLayer> $type;
 
   @jni$_.internal
-  RasterLayer.fromReference(jni$_.JReference reference)
-    : $type = type,
+  RasterLayer.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -89,7 +90,10 @@ class RasterLayer extends layer$_.Layer {
 
   /// from: `public void <init>(java.lang.String string, java.lang.String string1)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory RasterLayer(jni$_.JString? string, jni$_.JString? string1) {
+  factory RasterLayer(
+    jni$_.JString? string,
+    jni$_.JString? string1,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
     return RasterLayer.fromReference(
@@ -126,7 +130,9 @@ class RasterLayer extends layer$_.Layer {
           >();
 
   /// from: `public void setSourceLayer(java.lang.String string)`
-  void setSourceLayer(jni$_.JString? string) {
+  void setSourceLayer(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setSourceLayer(
       reference.pointer,
@@ -160,7 +166,9 @@ class RasterLayer extends layer$_.Layer {
 
   /// from: `public org.maplibre.android.style.layers.RasterLayer withSourceLayer(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  RasterLayer withSourceLayer(jni$_.JString? string) {
+  RasterLayer withSourceLayer(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return _withSourceLayer(
       reference.pointer,
@@ -920,8 +928,11 @@ final class $RasterLayer$NullableType extends jni$_.JObjType<RasterLayer?> {
 
   @jni$_.internal
   @core$_.override
-  RasterLayer? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : RasterLayer.fromReference(reference);
+  RasterLayer? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : RasterLayer.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const layer$_.$Layer$NullableType();
@@ -955,7 +966,9 @@ final class $RasterLayer$Type extends jni$_.JObjType<RasterLayer> {
   @jni$_.internal
   @core$_.override
   RasterLayer fromReference(jni$_.JReference reference) =>
-      RasterLayer.fromReference(reference);
+      RasterLayer.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const layer$_.$Layer$NullableType();

@@ -45,8 +45,9 @@ class PointF extends jni$_.JObject {
   final jni$_.JObjType<PointF> $type;
 
   @jni$_.internal
-  PointF.fromReference(jni$_.JReference reference)
-    : $type = type,
+  PointF.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(r'android/graphics/PointF');
@@ -64,7 +65,10 @@ class PointF extends jni$_.JObject {
   static jni$_.JObject? get CREATOR =>
       _id_CREATOR.get(_class, const jni$_.JObjectNullableType());
 
-  static final _id_x = _class.instanceFieldId(r'x', r'F');
+  static final _id_x = _class.instanceFieldId(
+    r'x',
+    r'F',
+  );
 
   /// from: `public float x`
   double get x => _id_x.get(this, const jni$_.jfloatType());
@@ -72,7 +76,10 @@ class PointF extends jni$_.JObject {
   /// from: `public float x`
   set x(double value) => _id_x.set(this, const jni$_.jfloatType(), value);
 
-  static final _id_y = _class.instanceFieldId(r'y', r'F');
+  static final _id_y = _class.instanceFieldId(
+    r'y',
+    r'F',
+  );
 
   /// from: `public float y`
   double get y => _id_y.get(this, const jni$_.jfloatType());
@@ -80,7 +87,9 @@ class PointF extends jni$_.JObject {
   /// from: `public float y`
   set y(double value) => _id_y.set(this, const jni$_.jfloatType(), value);
 
-  static final _id_new$ = _class.constructorId(r'()V');
+  static final _id_new$ = _class.constructorId(
+    r'()V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -106,7 +115,9 @@ class PointF extends jni$_.JObject {
     );
   }
 
-  static final _id_new$1 = _class.constructorId(r'(FF)V');
+  static final _id_new$1 = _class.constructorId(
+    r'(FF)V',
+  );
 
   static final _new$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -129,7 +140,10 @@ class PointF extends jni$_.JObject {
 
   /// from: `public void <init>(float f, float f1)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory PointF.new$1(double f, double f1) {
+  factory PointF.new$1(
+    double f,
+    double f1,
+  ) {
     return PointF.fromReference(
       _new$1(
         _class.reference.pointer,
@@ -140,7 +154,9 @@ class PointF extends jni$_.JObject {
     );
   }
 
-  static final _id_new$2 = _class.constructorId(r'(Landroid/graphics/Point;)V');
+  static final _id_new$2 = _class.constructorId(
+    r'(Landroid/graphics/Point;)V',
+  );
 
   static final _new$2 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -162,7 +178,9 @@ class PointF extends jni$_.JObject {
 
   /// from: `public void <init>(android.graphics.Point point)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory PointF.new$2(jni$_.JObject? point) {
+  factory PointF.new$2(
+    jni$_.JObject? point,
+  ) {
     final _$point = point?.reference ?? jni$_.jNullReference;
     return PointF.fromReference(
       _new$2(
@@ -197,7 +215,9 @@ class PointF extends jni$_.JObject {
 
   /// from: `public void <init>(android.graphics.PointF pointF)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory PointF.new$3(PointF? pointF) {
+  factory PointF.new$3(
+    PointF? pointF,
+  ) {
     final _$pointF = pointF?.reference ?? jni$_.jNullReference;
     return PointF.fromReference(
       _new$3(
@@ -208,7 +228,10 @@ class PointF extends jni$_.JObject {
     );
   }
 
-  static final _id_set = _class.instanceMethodId(r'set', r'(FF)V');
+  static final _id_set = _class.instanceMethodId(
+    r'set',
+    r'(FF)V',
+  );
 
   static final _set =
       jni$_.ProtectedJniExtensions.lookup<
@@ -230,7 +253,10 @@ class PointF extends jni$_.JObject {
           >();
 
   /// from: `public final void set(float f, float f1)`
-  void set(double f, double f1) {
+  void set(
+    double f,
+    double f1,
+  ) {
     _set(reference.pointer, _id_set as jni$_.JMethodIDPtr, f, f1).check();
   }
 
@@ -258,7 +284,9 @@ class PointF extends jni$_.JObject {
           >();
 
   /// from: `public final void set(android.graphics.PointF pointF)`
-  void set$1(PointF? pointF) {
+  void set$1(
+    PointF? pointF,
+  ) {
     final _$pointF = pointF?.reference ?? jni$_.jNullReference;
     _set$1(
       reference.pointer,
@@ -267,7 +295,10 @@ class PointF extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_negate = _class.instanceMethodId(r'negate', r'()V');
+  static final _id_negate = _class.instanceMethodId(
+    r'negate',
+    r'()V',
+  );
 
   static final _negate =
       jni$_.ProtectedJniExtensions.lookup<
@@ -290,7 +321,10 @@ class PointF extends jni$_.JObject {
     _negate(reference.pointer, _id_negate as jni$_.JMethodIDPtr).check();
   }
 
-  static final _id_offset = _class.instanceMethodId(r'offset', r'(FF)V');
+  static final _id_offset = _class.instanceMethodId(
+    r'offset',
+    r'(FF)V',
+  );
 
   static final _offset =
       jni$_.ProtectedJniExtensions.lookup<
@@ -312,11 +346,17 @@ class PointF extends jni$_.JObject {
           >();
 
   /// from: `public final void offset(float f, float f1)`
-  void offset(double f, double f1) {
+  void offset(
+    double f,
+    double f1,
+  ) {
     _offset(reference.pointer, _id_offset as jni$_.JMethodIDPtr, f, f1).check();
   }
 
-  static final _id_equals = _class.instanceMethodId(r'equals', r'(FF)Z');
+  static final _id_equals = _class.instanceMethodId(
+    r'equals',
+    r'(FF)Z',
+  );
 
   static final _equals =
       jni$_.ProtectedJniExtensions.lookup<
@@ -338,7 +378,10 @@ class PointF extends jni$_.JObject {
           >();
 
   /// from: `public final boolean equals(float f, float f1)`
-  bool equals(double f, double f1) {
+  bool equals(
+    double f,
+    double f1,
+  ) {
     return _equals(
       reference.pointer,
       _id_equals as jni$_.JMethodIDPtr,
@@ -371,7 +414,9 @@ class PointF extends jni$_.JObject {
           >();
 
   /// from: `public boolean equals(java.lang.Object object)`
-  bool equals$1(jni$_.JObject? object) {
+  bool equals$1(
+    jni$_.JObject? object,
+  ) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     return _equals$1(
       reference.pointer,
@@ -380,7 +425,10 @@ class PointF extends jni$_.JObject {
     ).boolean;
   }
 
-  static final _id_hashCode$1 = _class.instanceMethodId(r'hashCode', r'()I');
+  static final _id_hashCode$1 = _class.instanceMethodId(
+    r'hashCode',
+    r'()I',
+  );
 
   static final _hashCode$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -436,7 +484,10 @@ class PointF extends jni$_.JObject {
     ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
-  static final _id_length = _class.instanceMethodId(r'length', r'()F');
+  static final _id_length = _class.instanceMethodId(
+    r'length',
+    r'()F',
+  );
 
   static final _length =
       jni$_.ProtectedJniExtensions.lookup<
@@ -459,7 +510,10 @@ class PointF extends jni$_.JObject {
     return _length(reference.pointer, _id_length as jni$_.JMethodIDPtr).float;
   }
 
-  static final _id_length$1 = _class.staticMethodId(r'length', r'(FF)F');
+  static final _id_length$1 = _class.staticMethodId(
+    r'length',
+    r'(FF)F',
+  );
 
   static final _length$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -481,7 +535,10 @@ class PointF extends jni$_.JObject {
           >();
 
   /// from: `static public float length(float f, float f1)`
-  static double length$1(double f, double f1) {
+  static double length$1(
+    double f,
+    double f1,
+  ) {
     return _length$1(
       _class.reference.pointer,
       _id_length$1 as jni$_.JMethodIDPtr,
@@ -544,7 +601,10 @@ class PointF extends jni$_.JObject {
           >();
 
   /// from: `public void writeToParcel(android.os.Parcel parcel, int i)`
-  void writeToParcel(jni$_.JObject? parcel, int i) {
+  void writeToParcel(
+    jni$_.JObject? parcel,
+    int i,
+  ) {
     final _$parcel = parcel?.reference ?? jni$_.jNullReference;
     _writeToParcel(
       reference.pointer,
@@ -578,7 +638,9 @@ class PointF extends jni$_.JObject {
           >();
 
   /// from: `public void readFromParcel(android.os.Parcel parcel)`
-  void readFromParcel(jni$_.JObject? parcel) {
+  void readFromParcel(
+    jni$_.JObject? parcel,
+  ) {
     final _$parcel = parcel?.reference ?? jni$_.jNullReference;
     _readFromParcel(
       reference.pointer,
@@ -598,8 +660,11 @@ final class $PointF$NullableType extends jni$_.JObjType<PointF?> {
 
   @jni$_.internal
   @core$_.override
-  PointF? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : PointF.fromReference(reference);
+  PointF? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : PointF.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -632,8 +697,9 @@ final class $PointF$Type extends jni$_.JObjType<PointF> {
 
   @jni$_.internal
   @core$_.override
-  PointF fromReference(jni$_.JReference reference) =>
-      PointF.fromReference(reference);
+  PointF fromReference(jni$_.JReference reference) => PointF.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

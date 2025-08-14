@@ -45,8 +45,9 @@ class ThreadUtils extends jni$_.JObject {
   final jni$_.JObjType<ThreadUtils> $type;
 
   @jni$_.internal
-  ThreadUtils.fromReference(jni$_.JReference reference)
-    : $type = type,
+  ThreadUtils.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -56,7 +57,9 @@ class ThreadUtils extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $ThreadUtils$NullableType();
   static const type = $ThreadUtils$Type();
-  static final _id_new$ = _class.constructorId(r'()V');
+  static final _id_new$ = _class.constructorId(
+    r'()V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -107,7 +110,9 @@ class ThreadUtils extends jni$_.JObject {
 
   /// from: `static public org.maplibre.android.utils.ThreadUtils init(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
-  static ThreadUtils? init(jni$_.JObject context) {
+  static ThreadUtils? init(
+    jni$_.JObject context,
+  ) {
     final _$context = context.reference;
     return _init(
       _class.reference.pointer,
@@ -140,7 +145,9 @@ class ThreadUtils extends jni$_.JObject {
           >();
 
   /// from: `static public void checkThread(java.lang.String string)`
-  static void checkThread(jni$_.JString string) {
+  static void checkThread(
+    jni$_.JString string,
+  ) {
     final _$string = string.reference;
     _checkThread(
       _class.reference.pointer,
@@ -160,8 +167,11 @@ final class $ThreadUtils$NullableType extends jni$_.JObjType<ThreadUtils?> {
 
   @jni$_.internal
   @core$_.override
-  ThreadUtils? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : ThreadUtils.fromReference(reference);
+  ThreadUtils? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : ThreadUtils.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -195,7 +205,9 @@ final class $ThreadUtils$Type extends jni$_.JObjType<ThreadUtils> {
   @jni$_.internal
   @core$_.override
   ThreadUtils fromReference(jni$_.JReference reference) =>
-      ThreadUtils.fromReference(reference);
+      ThreadUtils.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

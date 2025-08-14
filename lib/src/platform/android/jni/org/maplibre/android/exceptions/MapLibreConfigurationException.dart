@@ -45,8 +45,9 @@ class MapLibreConfigurationException extends jni$_.JObject {
   final jni$_.JObjType<MapLibreConfigurationException> $type;
 
   @jni$_.internal
-  MapLibreConfigurationException.fromReference(jni$_.JReference reference)
-    : $type = type,
+  MapLibreConfigurationException.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -56,7 +57,9 @@ class MapLibreConfigurationException extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $MapLibreConfigurationException$NullableType();
   static const type = $MapLibreConfigurationException$Type();
-  static final _id_new$ = _class.constructorId(r'()V');
+  static final _id_new$ = _class.constructorId(
+    r'()V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -82,7 +85,9 @@ class MapLibreConfigurationException extends jni$_.JObject {
     );
   }
 
-  static final _id_new$1 = _class.constructorId(r'(Ljava/lang/String;)V');
+  static final _id_new$1 = _class.constructorId(
+    r'(Ljava/lang/String;)V',
+  );
 
   static final _new$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -104,7 +109,9 @@ class MapLibreConfigurationException extends jni$_.JObject {
 
   /// from: `public void <init>(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory MapLibreConfigurationException.new$1(jni$_.JString string) {
+  factory MapLibreConfigurationException.new$1(
+    jni$_.JString string,
+  ) {
     final _$string = string.reference;
     return MapLibreConfigurationException.fromReference(
       _new$1(
@@ -131,7 +138,9 @@ final class $MapLibreConfigurationException$NullableType
   MapLibreConfigurationException? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : MapLibreConfigurationException.fromReference(reference);
+      : MapLibreConfigurationException.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -168,7 +177,9 @@ final class $MapLibreConfigurationException$Type
   @jni$_.internal
   @core$_.override
   MapLibreConfigurationException fromReference(jni$_.JReference reference) =>
-      MapLibreConfigurationException.fromReference(reference);
+      MapLibreConfigurationException.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

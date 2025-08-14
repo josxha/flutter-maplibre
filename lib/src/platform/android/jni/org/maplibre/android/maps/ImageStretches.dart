@@ -45,8 +45,9 @@ class ImageStretches extends jni$_.JObject {
   final jni$_.JObjType<ImageStretches> $type;
 
   @jni$_.internal
-  ImageStretches.fromReference(jni$_.JReference reference)
-    : $type = type,
+  ImageStretches.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -56,7 +57,9 @@ class ImageStretches extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $ImageStretches$NullableType();
   static const type = $ImageStretches$Type();
-  static final _id_new$ = _class.constructorId(r'(FF)V');
+  static final _id_new$ = _class.constructorId(
+    r'(FF)V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -79,7 +82,10 @@ class ImageStretches extends jni$_.JObject {
 
   /// from: `public void <init>(float f, float f1)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory ImageStretches(double f, double f1) {
+  factory ImageStretches(
+    double f,
+    double f1,
+  ) {
     return ImageStretches.fromReference(
       _new$(
         _class.reference.pointer,
@@ -90,7 +96,10 @@ class ImageStretches extends jni$_.JObject {
     );
   }
 
-  static final _id_getFirst = _class.instanceMethodId(r'getFirst', r'()F');
+  static final _id_getFirst = _class.instanceMethodId(
+    r'getFirst',
+    r'()F',
+  );
 
   static final _getFirst =
       jni$_.ProtectedJniExtensions.lookup<
@@ -116,7 +125,10 @@ class ImageStretches extends jni$_.JObject {
     ).float;
   }
 
-  static final _id_getSecond = _class.instanceMethodId(r'getSecond', r'()F');
+  static final _id_getSecond = _class.instanceMethodId(
+    r'getSecond',
+    r'()F',
+  );
 
   static final _getSecond =
       jni$_.ProtectedJniExtensions.lookup<
@@ -166,7 +178,9 @@ class ImageStretches extends jni$_.JObject {
           >();
 
   /// from: `public boolean equals(java.lang.Object object)`
-  bool equals(jni$_.JObject? object) {
+  bool equals(
+    jni$_.JObject? object,
+  ) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     return _equals(
       reference.pointer,
@@ -175,7 +189,10 @@ class ImageStretches extends jni$_.JObject {
     ).boolean;
   }
 
-  static final _id_hashCode$1 = _class.instanceMethodId(r'hashCode', r'()I');
+  static final _id_hashCode$1 = _class.instanceMethodId(
+    r'hashCode',
+    r'()I',
+  );
 
   static final _hashCode$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -243,8 +260,11 @@ final class $ImageStretches$NullableType
 
   @jni$_.internal
   @core$_.override
-  ImageStretches? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : ImageStretches.fromReference(reference);
+  ImageStretches? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : ImageStretches.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -278,7 +298,9 @@ final class $ImageStretches$Type extends jni$_.JObjType<ImageStretches> {
   @jni$_.internal
   @core$_.override
   ImageStretches fromReference(jni$_.JReference reference) =>
-      ImageStretches.fromReference(reference);
+      ImageStretches.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

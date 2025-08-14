@@ -45,8 +45,9 @@ class OnRenderModeChangedListener extends jni$_.JObject {
   final jni$_.JObjType<OnRenderModeChangedListener> $type;
 
   @jni$_.internal
-  OnRenderModeChangedListener.fromReference(jni$_.JReference reference)
-    : $type = type,
+  OnRenderModeChangedListener.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -80,7 +81,9 @@ class OnRenderModeChangedListener extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onRenderModeChanged(int i)`
-  void onRenderModeChanged(int i) {
+  void onRenderModeChanged(
+    int i,
+  ) {
     _onRenderModeChanged(
       reference.pointer,
       _id_onRenderModeChanged as jni$_.JMethodIDPtr,
@@ -97,7 +100,11 @@ class OnRenderModeChangedListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -148,7 +155,9 @@ class OnRenderModeChangedListener extends jni$_.JObject {
       r'org.maplibre.android.location.OnRenderModeChangedListener',
       $p,
       _$invokePointer,
-      [if ($impl.onRenderModeChanged$async) r'onRenderModeChanged(I)V'],
+      [
+        if ($impl.onRenderModeChanged$async) r'onRenderModeChanged(I)V',
+      ],
     );
     final $a = $p.sendPort.nativePort;
     _$impls[$a] = $impl;
@@ -159,7 +168,9 @@ class OnRenderModeChangedListener extends jni$_.JObject {
   ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return OnRenderModeChangedListener.fromReference($i.implementReference());
+    return OnRenderModeChangedListener.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -202,7 +213,9 @@ final class $OnRenderModeChangedListener$NullableType
   OnRenderModeChangedListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : OnRenderModeChangedListener.fromReference(reference);
+      : OnRenderModeChangedListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -238,7 +251,9 @@ final class $OnRenderModeChangedListener$Type
   @jni$_.internal
   @core$_.override
   OnRenderModeChangedListener fromReference(jni$_.JReference reference) =>
-      OnRenderModeChangedListener.fromReference(reference);
+      OnRenderModeChangedListener.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

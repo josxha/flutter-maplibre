@@ -45,8 +45,9 @@ class ImageContent extends jni$_.JObject {
   final jni$_.JObjType<ImageContent> $type;
 
   @jni$_.internal
-  ImageContent.fromReference(jni$_.JReference reference)
-    : $type = type,
+  ImageContent.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -56,7 +57,9 @@ class ImageContent extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $ImageContent$NullableType();
   static const type = $ImageContent$Type();
-  static final _id_new$ = _class.constructorId(r'(FFFF)V');
+  static final _id_new$ = _class.constructorId(
+    r'(FFFF)V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -83,7 +86,12 @@ class ImageContent extends jni$_.JObject {
 
   /// from: `public void <init>(float f, float f1, float f2, float f3)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory ImageContent(double f, double f1, double f2, double f3) {
+  factory ImageContent(
+    double f,
+    double f1,
+    double f2,
+    double f3,
+  ) {
     return ImageContent.fromReference(
       _new$(
         _class.reference.pointer,
@@ -150,7 +158,9 @@ class ImageContent extends jni$_.JObject {
           >();
 
   /// from: `public boolean equals(java.lang.Object object)`
-  bool equals(jni$_.JObject? object) {
+  bool equals(
+    jni$_.JObject? object,
+  ) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     return _equals(
       reference.pointer,
@@ -159,7 +169,10 @@ class ImageContent extends jni$_.JObject {
     ).boolean;
   }
 
-  static final _id_hashCode$1 = _class.instanceMethodId(r'hashCode', r'()I');
+  static final _id_hashCode$1 = _class.instanceMethodId(
+    r'hashCode',
+    r'()I',
+  );
 
   static final _hashCode$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -226,8 +239,11 @@ final class $ImageContent$NullableType extends jni$_.JObjType<ImageContent?> {
 
   @jni$_.internal
   @core$_.override
-  ImageContent? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : ImageContent.fromReference(reference);
+  ImageContent? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : ImageContent.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -261,7 +277,9 @@ final class $ImageContent$Type extends jni$_.JObjType<ImageContent> {
   @jni$_.internal
   @core$_.override
   ImageContent fromReference(jni$_.JReference reference) =>
-      ImageContent.fromReference(reference);
+      ImageContent.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

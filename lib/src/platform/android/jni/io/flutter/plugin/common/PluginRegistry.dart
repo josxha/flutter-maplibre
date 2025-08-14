@@ -86,7 +86,11 @@ class PluginRegistry$ActivityResultListener extends jni$_.JObject {
           >();
 
   /// from: `public abstract boolean onActivityResult(int i, int i1, android.content.Intent intent)`
-  bool onActivityResult(int i, int i1, jni$_.JObject? intent) {
+  bool onActivityResult(
+    int i,
+    int i1,
+    jni$_.JObject? intent,
+  ) {
     final _$intent = intent?.reference ?? jni$_.jNullReference;
     return _onActivityResult(
       reference.pointer,
@@ -107,7 +111,11 @@ class PluginRegistry$ActivityResultListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -218,7 +226,9 @@ final class $PluginRegistry$ActivityResultListener$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : PluginRegistry$ActivityResultListener.fromReference(reference);
+      : PluginRegistry$ActivityResultListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -258,7 +268,9 @@ final class $PluginRegistry$ActivityResultListener$Type
   @core$_.override
   PluginRegistry$ActivityResultListener fromReference(
     jni$_.JReference reference,
-  ) => PluginRegistry$ActivityResultListener.fromReference(reference);
+  ) => PluginRegistry$ActivityResultListener.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -289,8 +301,9 @@ class PluginRegistry$NewIntentListener extends jni$_.JObject {
   final jni$_.JObjType<PluginRegistry$NewIntentListener> $type;
 
   @jni$_.internal
-  PluginRegistry$NewIntentListener.fromReference(jni$_.JReference reference)
-    : $type = type,
+  PluginRegistry$NewIntentListener.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -324,7 +337,9 @@ class PluginRegistry$NewIntentListener extends jni$_.JObject {
           >();
 
   /// from: `public abstract boolean onNewIntent(android.content.Intent intent)`
-  bool onNewIntent(jni$_.JObject intent) {
+  bool onNewIntent(
+    jni$_.JObject intent,
+  ) {
     final _$intent = intent.reference;
     return _onNewIntent(
       reference.pointer,
@@ -342,7 +357,11 @@ class PluginRegistry$NewIntentListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -444,7 +463,9 @@ final class $PluginRegistry$NewIntentListener$NullableType
   PluginRegistry$NewIntentListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : PluginRegistry$NewIntentListener.fromReference(reference);
+      : PluginRegistry$NewIntentListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -481,7 +502,9 @@ final class $PluginRegistry$NewIntentListener$Type
   @jni$_.internal
   @core$_.override
   PluginRegistry$NewIntentListener fromReference(jni$_.JReference reference) =>
-      PluginRegistry$NewIntentListener.fromReference(reference);
+      PluginRegistry$NewIntentListener.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -583,7 +606,11 @@ class PluginRegistry$RequestPermissionsResultListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -758,7 +785,9 @@ final class $PluginRegistry$RequestPermissionsResultListener$Type
   @core$_.override
   PluginRegistry$RequestPermissionsResultListener fromReference(
     jni$_.JReference reference,
-  ) => PluginRegistry$RequestPermissionsResultListener.fromReference(reference);
+  ) => PluginRegistry$RequestPermissionsResultListener.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -792,8 +821,9 @@ class PluginRegistry$UserLeaveHintListener extends jni$_.JObject {
   final jni$_.JObjType<PluginRegistry$UserLeaveHintListener> $type;
 
   @jni$_.internal
-  PluginRegistry$UserLeaveHintListener.fromReference(jni$_.JReference reference)
-    : $type = type,
+  PluginRegistry$UserLeaveHintListener.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -843,7 +873,11 @@ class PluginRegistry$UserLeaveHintListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -890,7 +924,9 @@ class PluginRegistry$UserLeaveHintListener extends jni$_.JObject {
       r'io.flutter.plugin.common.PluginRegistry$UserLeaveHintListener',
       $p,
       _$invokePointer,
-      [if ($impl.onUserLeaveHint$async) r'onUserLeaveHint()V'],
+      [
+        if ($impl.onUserLeaveHint$async) r'onUserLeaveHint()V',
+      ],
     );
     final $a = $p.sendPort.nativePort;
     _$impls[$a] = $impl;
@@ -948,7 +984,9 @@ final class $PluginRegistry$UserLeaveHintListener$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : PluginRegistry$UserLeaveHintListener.fromReference(reference);
+      : PluginRegistry$UserLeaveHintListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -988,7 +1026,9 @@ final class $PluginRegistry$UserLeaveHintListener$Type
   @core$_.override
   PluginRegistry$UserLeaveHintListener fromReference(
     jni$_.JReference reference,
-  ) => PluginRegistry$UserLeaveHintListener.fromReference(reference);
+  ) => PluginRegistry$UserLeaveHintListener.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1056,7 +1096,9 @@ class PluginRegistry$WindowFocusChangedListener extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onWindowFocusChanged(boolean z)`
-  void onWindowFocusChanged(bool z) {
+  void onWindowFocusChanged(
+    bool z,
+  ) {
     _onWindowFocusChanged(
       reference.pointer,
       _id_onWindowFocusChanged as jni$_.JMethodIDPtr,
@@ -1074,7 +1116,11 @@ class PluginRegistry$WindowFocusChangedListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -1125,7 +1171,9 @@ class PluginRegistry$WindowFocusChangedListener extends jni$_.JObject {
       r'io.flutter.plugin.common.PluginRegistry$WindowFocusChangedListener',
       $p,
       _$invokePointer,
-      [if ($impl.onWindowFocusChanged$async) r'onWindowFocusChanged(Z)V'],
+      [
+        if ($impl.onWindowFocusChanged$async) r'onWindowFocusChanged(Z)V',
+      ],
     );
     final $a = $p.sendPort.nativePort;
     _$impls[$a] = $impl;
@@ -1183,7 +1231,9 @@ final class $PluginRegistry$WindowFocusChangedListener$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : PluginRegistry$WindowFocusChangedListener.fromReference(reference);
+      : PluginRegistry$WindowFocusChangedListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1223,7 +1273,9 @@ final class $PluginRegistry$WindowFocusChangedListener$Type
   @core$_.override
   PluginRegistry$WindowFocusChangedListener fromReference(
     jni$_.JReference reference,
-  ) => PluginRegistry$WindowFocusChangedListener.fromReference(reference);
+  ) => PluginRegistry$WindowFocusChangedListener.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1256,8 +1308,9 @@ class PluginRegistry extends jni$_.JObject {
   final jni$_.JObjType<PluginRegistry> $type;
 
   @jni$_.internal
-  PluginRegistry.fromReference(jni$_.JReference reference)
-    : $type = type,
+  PluginRegistry.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -1277,7 +1330,11 @@ class PluginRegistry extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -1326,10 +1383,14 @@ class PluginRegistry extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory PluginRegistry.implement($PluginRegistry $impl) {
+  factory PluginRegistry.implement(
+    $PluginRegistry $impl,
+  ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return PluginRegistry.fromReference($i.implementReference());
+    return PluginRegistry.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -1352,8 +1413,11 @@ final class $PluginRegistry$NullableType
 
   @jni$_.internal
   @core$_.override
-  PluginRegistry? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : PluginRegistry.fromReference(reference);
+  PluginRegistry? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : PluginRegistry.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1387,7 +1451,9 @@ final class $PluginRegistry$Type extends jni$_.JObjType<PluginRegistry> {
   @jni$_.internal
   @core$_.override
   PluginRegistry fromReference(jni$_.JReference reference) =>
-      PluginRegistry.fromReference(reference);
+      PluginRegistry.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

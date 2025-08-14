@@ -84,7 +84,9 @@ class ActivityPluginBinding$OnSaveInstanceStateListener extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onSaveInstanceState(android.os.Bundle bundle)`
-  void onSaveInstanceState(jni$_.JObject bundle) {
+  void onSaveInstanceState(
+    jni$_.JObject bundle,
+  ) {
     final _$bundle = bundle.reference;
     _onSaveInstanceState(
       reference.pointer,
@@ -117,7 +119,9 @@ class ActivityPluginBinding$OnSaveInstanceStateListener extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onRestoreInstanceState(android.os.Bundle bundle)`
-  void onRestoreInstanceState(jni$_.JObject? bundle) {
+  void onRestoreInstanceState(
+    jni$_.JObject? bundle,
+  ) {
     final _$bundle = bundle?.reference ?? jni$_.jNullReference;
     _onRestoreInstanceState(
       reference.pointer,
@@ -139,7 +143,11 @@ class ActivityPluginBinding$OnSaveInstanceStateListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -350,8 +358,9 @@ class ActivityPluginBinding extends jni$_.JObject {
   final jni$_.JObjType<ActivityPluginBinding> $type;
 
   @jni$_.internal
-  ActivityPluginBinding.fromReference(jni$_.JReference reference)
-    : $type = type,
+  ActivityPluginBinding.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -860,7 +869,11 @@ class ActivityPluginBinding extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -1070,10 +1083,14 @@ class ActivityPluginBinding extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory ActivityPluginBinding.implement($ActivityPluginBinding $impl) {
+  factory ActivityPluginBinding.implement(
+    $ActivityPluginBinding $impl,
+  ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return ActivityPluginBinding.fromReference($i.implementReference());
+    return ActivityPluginBinding.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -1481,7 +1498,11 @@ final class $ActivityPluginBinding$NullableType
   @jni$_.internal
   @core$_.override
   ActivityPluginBinding? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : ActivityPluginBinding.fromReference(reference);
+      reference.isNull
+      ? null
+      : ActivityPluginBinding.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1517,7 +1538,9 @@ final class $ActivityPluginBinding$Type
   @jni$_.internal
   @core$_.override
   ActivityPluginBinding fromReference(jni$_.JReference reference) =>
-      ActivityPluginBinding.fromReference(reference);
+      ActivityPluginBinding.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

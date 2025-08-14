@@ -47,8 +47,9 @@ class FileSource$ResourceTransformCallback extends jni$_.JObject {
   final jni$_.JObjType<FileSource$ResourceTransformCallback> $type;
 
   @jni$_.internal
-  FileSource$ResourceTransformCallback.fromReference(jni$_.JReference reference)
-    : $type = type,
+  FileSource$ResourceTransformCallback.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -85,7 +86,10 @@ class FileSource$ResourceTransformCallback extends jni$_.JObject {
 
   /// from: `public abstract java.lang.String onURL(int i, java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JString? onURL(int i, jni$_.JString? string) {
+  jni$_.JString? onURL(
+    int i,
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return _onURL(
       reference.pointer,
@@ -105,7 +109,11 @@ class FileSource$ResourceTransformCallback extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -215,7 +223,9 @@ final class $FileSource$ResourceTransformCallback$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : FileSource$ResourceTransformCallback.fromReference(reference);
+      : FileSource$ResourceTransformCallback.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -255,7 +265,9 @@ final class $FileSource$ResourceTransformCallback$Type
   @core$_.override
   FileSource$ResourceTransformCallback fromReference(
     jni$_.JReference reference,
-  ) => FileSource$ResourceTransformCallback.fromReference(reference);
+  ) => FileSource$ResourceTransformCallback.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -323,7 +335,9 @@ class FileSource$ResourcesCachePathChangeCallback extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onSuccess(java.lang.String string)`
-  void onSuccess(jni$_.JString string) {
+  void onSuccess(
+    jni$_.JString string,
+  ) {
     final _$string = string.reference;
     _onSuccess(
       reference.pointer,
@@ -356,7 +370,9 @@ class FileSource$ResourcesCachePathChangeCallback extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onError(java.lang.String string)`
-  void onError(jni$_.JString string) {
+  void onError(
+    jni$_.JString string,
+  ) {
     final _$string = string.reference;
     _onError(
       reference.pointer,
@@ -375,7 +391,11 @@ class FileSource$ResourcesCachePathChangeCallback extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -504,7 +524,9 @@ final class $FileSource$ResourcesCachePathChangeCallback$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : FileSource$ResourcesCachePathChangeCallback.fromReference(reference);
+      : FileSource$ResourcesCachePathChangeCallback.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -544,7 +566,9 @@ final class $FileSource$ResourcesCachePathChangeCallback$Type
   @core$_.override
   FileSource$ResourcesCachePathChangeCallback fromReference(
     jni$_.JReference reference,
-  ) => FileSource$ResourcesCachePathChangeCallback.fromReference(reference);
+  ) => FileSource$ResourcesCachePathChangeCallback.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -578,8 +602,9 @@ class FileSource extends jni$_.JObject {
   final jni$_.JObjType<FileSource> $type;
 
   @jni$_.internal
-  FileSource.fromReference(jni$_.JReference reference)
-    : $type = type,
+  FileSource.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -614,7 +639,9 @@ class FileSource extends jni$_.JObject {
 
   /// from: `static public org.maplibre.android.storage.FileSource getInstance(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
-  static FileSource? getInstance(jni$_.JObject context) {
+  static FileSource? getInstance(
+    jni$_.JObject context,
+  ) {
     final _$context = context.reference;
     return _getInstance(
       _class.reference.pointer,
@@ -676,7 +703,9 @@ class FileSource extends jni$_.JObject {
           >();
 
   /// from: `static public void initializeFileDirsPaths(android.content.Context context)`
-  static void initializeFileDirsPaths(jni$_.JObject? context) {
+  static void initializeFileDirsPaths(
+    jni$_.JObject? context,
+  ) {
     final _$context = context?.reference ?? jni$_.jNullReference;
     _initializeFileDirsPaths(
       _class.reference.pointer,
@@ -710,7 +739,9 @@ class FileSource extends jni$_.JObject {
 
   /// from: `static public java.lang.String getResourcesCachePath(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni$_.JString getResourcesCachePath(jni$_.JObject context) {
+  static jni$_.JString getResourcesCachePath(
+    jni$_.JObject context,
+  ) {
     final _$context = context.reference;
     return _getResourcesCachePath(
       _class.reference.pointer,
@@ -744,7 +775,9 @@ class FileSource extends jni$_.JObject {
 
   /// from: `static public java.lang.String getInternalCachePath(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni$_.JString? getInternalCachePath(jni$_.JObject context) {
+  static jni$_.JString? getInternalCachePath(
+    jni$_.JObject context,
+  ) {
     final _$context = context.reference;
     return _getInternalCachePath(
       _class.reference.pointer,
@@ -912,7 +945,10 @@ class FileSource extends jni$_.JObject {
     ).boolean;
   }
 
-  static final _id_activate = _class.instanceMethodId(r'activate', r'()V');
+  static final _id_activate = _class.instanceMethodId(
+    r'activate',
+    r'()V',
+  );
 
   static final _activate =
       jni$_.ProtectedJniExtensions.lookup<
@@ -935,7 +971,10 @@ class FileSource extends jni$_.JObject {
     _activate(reference.pointer, _id_activate as jni$_.JMethodIDPtr).check();
   }
 
-  static final _id_deactivate = _class.instanceMethodId(r'deactivate', r'()V');
+  static final _id_deactivate = _class.instanceMethodId(
+    r'deactivate',
+    r'()V',
+  );
 
   static final _deactivate =
       jni$_.ProtectedJniExtensions.lookup<
@@ -985,7 +1024,9 @@ class FileSource extends jni$_.JObject {
           >();
 
   /// from: `public native void setApiKey(java.lang.String string)`
-  void setApiKey(jni$_.JString? string) {
+  void setApiKey(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setApiKey(
       reference.pointer,
@@ -1048,7 +1089,9 @@ class FileSource extends jni$_.JObject {
           >();
 
   /// from: `public native void setApiBaseUrl(java.lang.String string)`
-  void setApiBaseUrl(jni$_.JString? string) {
+  void setApiBaseUrl(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setApiBaseUrl(
       reference.pointer,
@@ -1134,8 +1177,11 @@ final class $FileSource$NullableType extends jni$_.JObjType<FileSource?> {
 
   @jni$_.internal
   @core$_.override
-  FileSource? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : FileSource.fromReference(reference);
+  FileSource? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : FileSource.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1169,7 +1215,9 @@ final class $FileSource$Type extends jni$_.JObjType<FileSource> {
   @jni$_.internal
   @core$_.override
   FileSource fromReference(jni$_.JReference reference) =>
-      FileSource.fromReference(reference);
+      FileSource.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
