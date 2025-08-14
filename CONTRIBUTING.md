@@ -26,20 +26,21 @@ you're interested in making contributions:
 1. [Fork the repository](https://github.com/josxha/flutter-maplibre/fork) and
    push your changes to a new branch to avoid conflicts in your forked
    repository.
-2. Along with your contribution please also adapt the example app to showcase
+1. (Optional) Install [pre-commit](https://pre-commit.com/) and run `pre-commit install` in the repo directory to add pre-commit hooks for some formatting CI checks.
+1. Along with your contribution please also adapt the example app to showcase
    any new features or APIs you have developed. This allows quick testing and
    gives evaluating users a better idea about the functionality of the package.
-3. Consider updating
+1. Consider updating
    the [documentation](https://github.com/josxha/flutter-maplibre/tree/main/docs/docs)
    to explain users how to implement.
-4. If there are any changes that developers should be aware of, please update
+1. If there are any changes that developers should be aware of, please update
    the [CHANGELOG.md](https://github.com/josxha/flutter-maplibre/blob/main/CHANGELOG.md)
    file together with your pull request.
-5. If you change the [./pigeons/pigeon.dart](./pigeons/pigeon.dart) file, you'll
+1. If you change the [./pigeons/pigeon.dart](./pigeons/pigeon.dart) file, you'll
    have to run the [pigeon](https://pub.dev/packages/pigeon) code generation.
    You can use [./pigeons/run_code_gen.sh](./pigeons/run_code_gen.sh)
    or [./pigeons/run_code_gen.ps1](./pigeons/run_code_gen.ps1).
-6. If you have a pull request that isn't complete yet and want to get
+1. If you have a pull request that isn't complete yet and want to get
    feedback, consider
    to [open a draft pull request](https://github.com/josxha/flutter-maplibre/pulls).
    This helps others to get
@@ -47,7 +48,7 @@ you're interested in making contributions:
    open issues. Give a quick summary about your changes listing any related
    issues that exist. Screenshots and videos are or course welcome, too.
    Use a [conventional](https://www.conventionalcommits.org/) title if you like.
-7. When your contribution is ready to review, disable the draft state of your
+1. When your contribution is ready to review, disable the draft state of your
    pull request and update the summary by editing your initial pull request
    message. This summary will go into the commit details of the squashed commit.
 
