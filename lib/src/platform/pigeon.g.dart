@@ -1090,7 +1090,7 @@ abstract class MapLibreFlutterApi {
   void onMapReady();
 
   /// Callback when the user clicks on the map.
-  void onClick(LngLat point);
+  void onClick(LngLat point, Offset screenPoint);
 
   /// Callback when the map idles.
   void onIdle();
@@ -1100,13 +1100,13 @@ abstract class MapLibreFlutterApi {
 
   /// Callback when the user performs a secondary click on the map
   /// (e.g. by default a click with the right mouse button).
-  void onSecondaryClick(LngLat point);
+  void onSecondaryClick(LngLat point, Offset screenPoint);
 
   /// Callback when the user performs a double click on the map.
-  void onDoubleClick(LngLat point);
+  void onDoubleClick(LngLat point, Offset screenPoint);
 
   /// Callback when the user performs a long lasting click on the map.
-  void onLongClick(LngLat point);
+  void onLongClick(LngLat point, Offset screenPoint);
 
   /// Callback when the map camera changes.
   void onMoveCamera(MapCamera camera);
@@ -1215,8 +1215,13 @@ abstract class MapLibreFlutterApi {
             arg_point != null,
             'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onClick was null, expected non-null LngLat.',
           );
+          final Offset? arg_screenPoint = (args[1] as Offset?);
+          assert(
+            arg_screenPoint != null,
+            'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onClick was null, expected non-null Offset.',
+          );
           try {
-            api.onClick(arg_point!);
+            api.onClick(arg_point!, arg_screenPoint!);
             return wrapResponse(empty: true);
           } on PlatformException catch (e) {
             return wrapResponse(error: e);
@@ -1297,8 +1302,13 @@ abstract class MapLibreFlutterApi {
             arg_point != null,
             'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onSecondaryClick was null, expected non-null LngLat.',
           );
+          final Offset? arg_screenPoint = (args[1] as Offset?);
+          assert(
+            arg_screenPoint != null,
+            'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onSecondaryClick was null, expected non-null Offset.',
+          );
           try {
-            api.onSecondaryClick(arg_point!);
+            api.onSecondaryClick(arg_point!, arg_screenPoint!);
             return wrapResponse(empty: true);
           } on PlatformException catch (e) {
             return wrapResponse(error: e);
@@ -1331,8 +1341,13 @@ abstract class MapLibreFlutterApi {
             arg_point != null,
             'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onDoubleClick was null, expected non-null LngLat.',
           );
+          final Offset? arg_screenPoint = (args[1] as Offset?);
+          assert(
+            arg_screenPoint != null,
+            'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onDoubleClick was null, expected non-null Offset.',
+          );
           try {
-            api.onDoubleClick(arg_point!);
+            api.onDoubleClick(arg_point!, arg_screenPoint!);
             return wrapResponse(empty: true);
           } on PlatformException catch (e) {
             return wrapResponse(error: e);
@@ -1365,8 +1380,13 @@ abstract class MapLibreFlutterApi {
             arg_point != null,
             'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongClick was null, expected non-null LngLat.',
           );
+          final Offset? arg_screenPoint = (args[1] as Offset?);
+          assert(
+            arg_screenPoint != null,
+            'Argument for dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongClick was null, expected non-null Offset.',
+          );
           try {
-            api.onLongClick(arg_point!);
+            api.onLongClick(arg_point!, arg_screenPoint!);
             return wrapResponse(empty: true);
           } on PlatformException catch (e) {
             return wrapResponse(error: e);

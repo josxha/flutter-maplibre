@@ -910,18 +910,18 @@ protocol MapLibreFlutterApiProtocol {
   /// Callback for when the map is ready and can be used.
   func onMapReady(completion: @escaping (Result<Void, PigeonError>) -> Void)
   /// Callback when the user clicks on the map.
-  func onClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void)
+  func onClick(point pointArg: LngLat, screenPoint screenPointArg: Offset, completion: @escaping (Result<Void, PigeonError>) -> Void)
   /// Callback when the map idles.
   func onIdle(completion: @escaping (Result<Void, PigeonError>) -> Void)
   /// Callback when the map camera idles.
   func onCameraIdle(completion: @escaping (Result<Void, PigeonError>) -> Void)
   /// Callback when the user performs a secondary click on the map
   /// (e.g. by default a click with the right mouse button).
-  func onSecondaryClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void)
+  func onSecondaryClick(point pointArg: LngLat, screenPoint screenPointArg: Offset, completion: @escaping (Result<Void, PigeonError>) -> Void)
   /// Callback when the user performs a double click on the map.
-  func onDoubleClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void)
+  func onDoubleClick(point pointArg: LngLat, screenPoint screenPointArg: Offset, completion: @escaping (Result<Void, PigeonError>) -> Void)
   /// Callback when the user performs a long lasting click on the map.
-  func onLongClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void)
+  func onLongClick(point pointArg: LngLat, screenPoint screenPointArg: Offset, completion: @escaping (Result<Void, PigeonError>) -> Void)
   /// Callback when the map camera changes.
   func onMoveCamera(camera cameraArg: MapCamera, completion: @escaping (Result<Void, PigeonError>) -> Void)
   /// Callback when the map camera starts changing.
@@ -998,10 +998,10 @@ class MapLibreFlutterApi: MapLibreFlutterApiProtocol {
     }
   }
   /// Callback when the user clicks on the map.
-  func onClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void) {
+  func onClick(point pointArg: LngLat, screenPoint screenPointArg: Offset, completion: @escaping (Result<Void, PigeonError>) -> Void) {
     let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onClick\(messageChannelSuffix)"
     let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
-    channel.sendMessage([pointArg] as [Any?]) { response in
+    channel.sendMessage([pointArg, screenPointArg] as [Any?]) { response in
       guard let listResponse = response as? [Any?] else {
         completion(.failure(createConnectionError(withChannelName: channelName)))
         return
@@ -1056,10 +1056,10 @@ class MapLibreFlutterApi: MapLibreFlutterApiProtocol {
   }
   /// Callback when the user performs a secondary click on the map
   /// (e.g. by default a click with the right mouse button).
-  func onSecondaryClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void) {
+  func onSecondaryClick(point pointArg: LngLat, screenPoint screenPointArg: Offset, completion: @escaping (Result<Void, PigeonError>) -> Void) {
     let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onSecondaryClick\(messageChannelSuffix)"
     let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
-    channel.sendMessage([pointArg] as [Any?]) { response in
+    channel.sendMessage([pointArg, screenPointArg] as [Any?]) { response in
       guard let listResponse = response as? [Any?] else {
         completion(.failure(createConnectionError(withChannelName: channelName)))
         return
@@ -1075,10 +1075,10 @@ class MapLibreFlutterApi: MapLibreFlutterApiProtocol {
     }
   }
   /// Callback when the user performs a double click on the map.
-  func onDoubleClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void) {
+  func onDoubleClick(point pointArg: LngLat, screenPoint screenPointArg: Offset, completion: @escaping (Result<Void, PigeonError>) -> Void) {
     let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onDoubleClick\(messageChannelSuffix)"
     let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
-    channel.sendMessage([pointArg] as [Any?]) { response in
+    channel.sendMessage([pointArg, screenPointArg] as [Any?]) { response in
       guard let listResponse = response as? [Any?] else {
         completion(.failure(createConnectionError(withChannelName: channelName)))
         return
@@ -1094,10 +1094,10 @@ class MapLibreFlutterApi: MapLibreFlutterApiProtocol {
     }
   }
   /// Callback when the user performs a long lasting click on the map.
-  func onLongClick(point pointArg: LngLat, completion: @escaping (Result<Void, PigeonError>) -> Void) {
+  func onLongClick(point pointArg: LngLat, screenPoint screenPointArg: Offset, completion: @escaping (Result<Void, PigeonError>) -> Void) {
     let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongClick\(messageChannelSuffix)"
     let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
-    channel.sendMessage([pointArg] as [Any?]) { response in
+    channel.sendMessage([pointArg, screenPointArg] as [Any?]) { response in
       guard let listResponse = response as? [Any?] else {
         completion(.failure(createConnectionError(withChannelName: channelName)))
         return

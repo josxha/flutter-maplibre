@@ -8,6 +8,7 @@ import MapCamera
 import MapLibreFlutterApi
 import MapLibreHostApi
 import MapOptions
+import Offset
 import android.content.Context
 import android.graphics.BitmapFactory
 import android.util.Log
@@ -61,6 +62,7 @@ class MapLibreMapController(
     private val flutterApi: MapLibreFlutterApi
     private lateinit var mapOptions: MapOptions
     private var style: Style? = null
+    private val density = getDensityMultiplier()
 
     init {
         val channelSuffix = viewId.toString()
@@ -116,11 +118,27 @@ class MapLibreMapController(
         this.mapLibreMap = mapLibreMap
         MapLibreRegistry.addMap(viewId, mapLibreMap)
         this.mapLibreMap.addOnMapClickListener { latLng ->
-            flutterApi.onClick(LngLat(latLng.longitude, latLng.latitude)) { }
+            val projection = mapLibreMap.projection
+            val screenLocation = projection.toScreenLocation(latLng)
+            flutterApi.onClick(
+                LngLat(latLng.longitude, latLng.latitude),
+                Offset(
+                    (screenLocation.x / density).toDouble(),
+                    (screenLocation.y / density).toDouble()
+                )
+            ) { }
             true
         }
         this.mapLibreMap.addOnMapLongClickListener { latLng ->
-            flutterApi.onLongClick(LngLat(latLng.longitude, latLng.latitude)) { }
+            val projection = mapLibreMap.projection
+            val screenLocation = projection.toScreenLocation(latLng)
+            flutterApi.onLongClick(
+                LngLat(latLng.longitude, latLng.latitude),
+                Offset(
+                    (screenLocation.x / density).toDouble(),
+                    (screenLocation.y / density).toDouble()
+                )
+            ) { }
             true
         }
         this.mapLibreMap.addOnCameraMoveListener {
@@ -426,5 +444,10 @@ class MapLibreMapController(
         val bitmap = BitmapFactory.decodeStream(bytes.inputStream())
         mapLibreMap.style?.addImage(id, bitmap)
         callback(Result.success(Unit))
+    }
+
+    private fun getDensityMultiplier(): Float {
+        val metrics = context.resources.displayMetrics
+        return metrics.density
     }
 }

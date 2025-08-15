@@ -79,26 +79,38 @@ abstract class MapLibreMapStateNative extends MapLibreMapState
   void onCameraIdle() => widget.onEvent?.call(const MapEventCameraIdle());
 
   @override
-  void onDoubleClick(pigeon.LngLat point) {
+  void onDoubleClick(pigeon.LngLat point, pigeon.Offset screenPoint) {
     final position = point.toPosition();
-    widget.onEvent?.call(MapEventClick(point: position));
+    final screenOffset = screenPoint.toOffset();
+    widget.onEvent?.call(
+      MapEventClick(point: position, screenPoint: screenOffset),
+    );
   }
 
   @override
-  void onSecondaryClick(pigeon.LngLat point) {
+  void onSecondaryClick(pigeon.LngLat point, pigeon.Offset screenPoint) {
     final position = point.toPosition();
-    widget.onEvent?.call(MapEventClick(point: position));
+    final screenOffset = screenPoint.toOffset();
+    widget.onEvent?.call(
+      MapEventClick(point: position, screenPoint: screenOffset),
+    );
   }
 
   @override
-  void onClick(pigeon.LngLat point) {
+  void onClick(pigeon.LngLat point, pigeon.Offset screenPoint) {
     final position = point.toPosition();
-    widget.onEvent?.call(MapEventClick(point: position));
+    final screenOffset = screenPoint.toOffset();
+    widget.onEvent?.call(
+      MapEventClick(point: position, screenPoint: screenOffset),
+    );
   }
 
   @override
-  void onLongClick(pigeon.LngLat point) {
+  void onLongClick(pigeon.LngLat point, pigeon.Offset screenPoint) {
     final position = point.toPosition();
-    widget.onEvent?.call(MapEventLongClick(point: position));
+    final screenOffset = screenPoint.toOffset();
+    widget.onEvent?.call(
+      MapEventLongClick(point: position, screenPoint: screenOffset),
+    );
   }
 }
