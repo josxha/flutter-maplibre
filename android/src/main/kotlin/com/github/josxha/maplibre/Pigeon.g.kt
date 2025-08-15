@@ -977,12 +977,12 @@ class MapLibreFlutterApi(private val binaryMessenger: BinaryMessenger, private v
     }
   }
   /** Callback when the user clicks on the map. */
-  fun onClick(pointArg: LngLat, callback: (Result<Unit>) -> Unit)
+  fun onClick(pointArg: LngLat, screenPointArg: Offset, callback: (Result<Unit>) -> Unit)
 {
     val separatedMessageChannelSuffix = if (messageChannelSuffix.isNotEmpty()) ".$messageChannelSuffix" else ""
     val channelName = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onClick$separatedMessageChannelSuffix"
     val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
-    channel.send(listOf(pointArg)) {
+    channel.send(listOf(pointArg, screenPointArg)) {
       if (it is List<*>) {
         if (it.size > 1) {
           callback(Result.failure(FlutterError(it[0] as String, it[1] as String, it[2] as String?)))
@@ -1034,12 +1034,12 @@ class MapLibreFlutterApi(private val binaryMessenger: BinaryMessenger, private v
    * Callback when the user performs a secondary click on the map
    * (e.g. by default a click with the right mouse button).
    */
-  fun onSecondaryClick(pointArg: LngLat, callback: (Result<Unit>) -> Unit)
+  fun onSecondaryClick(pointArg: LngLat, screenPointArg: Offset, callback: (Result<Unit>) -> Unit)
 {
     val separatedMessageChannelSuffix = if (messageChannelSuffix.isNotEmpty()) ".$messageChannelSuffix" else ""
     val channelName = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onSecondaryClick$separatedMessageChannelSuffix"
     val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
-    channel.send(listOf(pointArg)) {
+    channel.send(listOf(pointArg, screenPointArg)) {
       if (it is List<*>) {
         if (it.size > 1) {
           callback(Result.failure(FlutterError(it[0] as String, it[1] as String, it[2] as String?)))
@@ -1052,12 +1052,12 @@ class MapLibreFlutterApi(private val binaryMessenger: BinaryMessenger, private v
     }
   }
   /** Callback when the user performs a double click on the map. */
-  fun onDoubleClick(pointArg: LngLat, callback: (Result<Unit>) -> Unit)
+  fun onDoubleClick(pointArg: LngLat, screenPointArg: Offset, callback: (Result<Unit>) -> Unit)
 {
     val separatedMessageChannelSuffix = if (messageChannelSuffix.isNotEmpty()) ".$messageChannelSuffix" else ""
     val channelName = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onDoubleClick$separatedMessageChannelSuffix"
     val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
-    channel.send(listOf(pointArg)) {
+    channel.send(listOf(pointArg, screenPointArg)) {
       if (it is List<*>) {
         if (it.size > 1) {
           callback(Result.failure(FlutterError(it[0] as String, it[1] as String, it[2] as String?)))
@@ -1070,12 +1070,12 @@ class MapLibreFlutterApi(private val binaryMessenger: BinaryMessenger, private v
     }
   }
   /** Callback when the user performs a long lasting click on the map. */
-  fun onLongClick(pointArg: LngLat, callback: (Result<Unit>) -> Unit)
+  fun onLongClick(pointArg: LngLat, screenPointArg: Offset, callback: (Result<Unit>) -> Unit)
 {
     val separatedMessageChannelSuffix = if (messageChannelSuffix.isNotEmpty()) ".$messageChannelSuffix" else ""
     val channelName = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongClick$separatedMessageChannelSuffix"
     val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
-    channel.send(listOf(pointArg)) {
+    channel.send(listOf(pointArg, screenPointArg)) {
       if (it is List<*>) {
         if (it.size > 1) {
           callback(Result.failure(FlutterError(it[0] as String, it[1] as String, it[2] as String?)))
