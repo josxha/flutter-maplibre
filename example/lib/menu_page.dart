@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:maplibre_example/animation_page.dart';
 import 'package:maplibre_example/controller_page.dart';
 import 'package:maplibre_example/events_page.dart';
+import 'package:maplibre_example/features_query_page.dart';
 import 'package:maplibre_example/gestures_page.dart';
 import 'package:maplibre_example/layers_circle_page.dart';
 import 'package:maplibre_example/layers_marker_page.dart';
@@ -81,6 +82,11 @@ class MenuPage extends StatelessWidget {
                   label: 'Controller',
                   iconData: Icons.api,
                   location: ControllerPage.location,
+                ),
+                const ItemCard(
+                  label: 'Query Features',
+                  iconData: Icons.question_answer,
+                  location: FeaturesQueryPage.location,
                 ),
                 const ItemCard(
                   label: 'Two Maps',

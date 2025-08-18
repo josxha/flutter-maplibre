@@ -45,8 +45,9 @@ class PaddingEvaluator extends jni$_.JObject {
   final jni$_.JObjType<PaddingEvaluator> $type;
 
   @jni$_.internal
-  PaddingEvaluator.fromReference(jni$_.JReference reference)
-    : $type = type,
+  PaddingEvaluator.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -56,7 +57,9 @@ class PaddingEvaluator extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $PaddingEvaluator$NullableType();
   static const type = $PaddingEvaluator$Type();
-  static final _id_new$ = _class.constructorId(r'()V');
+  static final _id_new$ = _class.constructorId(
+    r'()V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -144,7 +147,11 @@ final class $PaddingEvaluator$NullableType
   @jni$_.internal
   @core$_.override
   PaddingEvaluator? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : PaddingEvaluator.fromReference(reference);
+      reference.isNull
+      ? null
+      : PaddingEvaluator.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -178,7 +185,9 @@ final class $PaddingEvaluator$Type extends jni$_.JObjType<PaddingEvaluator> {
   @jni$_.internal
   @core$_.override
   PaddingEvaluator fromReference(jni$_.JReference reference) =>
-      PaddingEvaluator.fromReference(reference);
+      PaddingEvaluator.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

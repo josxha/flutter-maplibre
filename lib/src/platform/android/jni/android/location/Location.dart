@@ -45,8 +45,9 @@ class Location extends jni$_.JObject {
   final jni$_.JObjType<Location> $type;
 
   @jni$_.internal
-  Location.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Location.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(r'android/location/Location');
@@ -72,7 +73,9 @@ class Location extends jni$_.JObject {
 
   /// from: `static public final int FORMAT_SECONDS`
   static const FORMAT_SECONDS = 2;
-  static final _id_new$ = _class.constructorId(r'(Ljava/lang/String;)V');
+  static final _id_new$ = _class.constructorId(
+    r'(Ljava/lang/String;)V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -94,7 +97,9 @@ class Location extends jni$_.JObject {
 
   /// from: `public void <init>(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory Location(jni$_.JString? string) {
+  factory Location(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return Location.fromReference(
       _new$(
@@ -129,7 +134,9 @@ class Location extends jni$_.JObject {
 
   /// from: `public void <init>(android.location.Location location)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory Location.new$1(Location? location) {
+  factory Location.new$1(
+    Location? location,
+  ) {
     final _$location = location?.reference ?? jni$_.jNullReference;
     return Location.fromReference(
       _new$1(
@@ -164,7 +171,9 @@ class Location extends jni$_.JObject {
           >();
 
   /// from: `public void set(android.location.Location location)`
-  void set(Location? location) {
+  void set(
+    Location? location,
+  ) {
     final _$location = location?.reference ?? jni$_.jNullReference;
     _set(
       reference.pointer,
@@ -173,7 +182,10 @@ class Location extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_reset = _class.instanceMethodId(r'reset', r'()V');
+  static final _id_reset = _class.instanceMethodId(
+    r'reset',
+    r'()V',
+  );
 
   static final _reset =
       jni$_.ProtectedJniExtensions.lookup<
@@ -220,7 +232,9 @@ class Location extends jni$_.JObject {
           >();
 
   /// from: `public float distanceTo(android.location.Location location)`
-  double distanceTo(Location? location) {
+  double distanceTo(
+    Location? location,
+  ) {
     final _$location = location?.reference ?? jni$_.jNullReference;
     return _distanceTo(
       reference.pointer,
@@ -253,7 +267,9 @@ class Location extends jni$_.JObject {
           >();
 
   /// from: `public float bearingTo(android.location.Location location)`
-  double bearingTo(Location? location) {
+  double bearingTo(
+    Location? location,
+  ) {
     final _$location = location?.reference ?? jni$_.jNullReference;
     return _bearingTo(
       reference.pointer,
@@ -316,7 +332,9 @@ class Location extends jni$_.JObject {
           >();
 
   /// from: `public void setProvider(java.lang.String string)`
-  void setProvider(jni$_.JString? string) {
+  void setProvider(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setProvider(
       reference.pointer,
@@ -325,7 +343,10 @@ class Location extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_getTime = _class.instanceMethodId(r'getTime', r'()J');
+  static final _id_getTime = _class.instanceMethodId(
+    r'getTime',
+    r'()J',
+  );
 
   static final _getTime =
       jni$_.ProtectedJniExtensions.lookup<
@@ -348,7 +369,10 @@ class Location extends jni$_.JObject {
     return _getTime(reference.pointer, _id_getTime as jni$_.JMethodIDPtr).long;
   }
 
-  static final _id_setTime = _class.instanceMethodId(r'setTime', r'(J)V');
+  static final _id_setTime = _class.instanceMethodId(
+    r'setTime',
+    r'(J)V',
+  );
 
   static final _setTime =
       jni$_.ProtectedJniExtensions.lookup<
@@ -369,7 +393,9 @@ class Location extends jni$_.JObject {
           >();
 
   /// from: `public void setTime(long j)`
-  void setTime(int j) {
+  void setTime(
+    int j,
+  ) {
     _setTime(reference.pointer, _id_setTime as jni$_.JMethodIDPtr, j).check();
   }
 
@@ -484,7 +510,9 @@ class Location extends jni$_.JObject {
           >();
 
   /// from: `public long getElapsedRealtimeAgeMillis(long j)`
-  int getElapsedRealtimeAgeMillis$1(int j) {
+  int getElapsedRealtimeAgeMillis$1(
+    int j,
+  ) {
     return _getElapsedRealtimeAgeMillis$1(
       reference.pointer,
       _id_getElapsedRealtimeAgeMillis$1 as jni$_.JMethodIDPtr,
@@ -516,7 +544,9 @@ class Location extends jni$_.JObject {
           >();
 
   /// from: `public void setElapsedRealtimeNanos(long j)`
-  void setElapsedRealtimeNanos(int j) {
+  void setElapsedRealtimeNanos(
+    int j,
+  ) {
     _setElapsedRealtimeNanos(
       reference.pointer,
       _id_setElapsedRealtimeNanos as jni$_.JMethodIDPtr,
@@ -577,7 +607,9 @@ class Location extends jni$_.JObject {
           >();
 
   /// from: `public void setElapsedRealtimeUncertaintyNanos(double d)`
-  void setElapsedRealtimeUncertaintyNanos(double d) {
+  void setElapsedRealtimeUncertaintyNanos(
+    double d,
+  ) {
     _setElapsedRealtimeUncertaintyNanos(
       reference.pointer,
       _id_setElapsedRealtimeUncertaintyNanos as jni$_.JMethodIDPtr,
@@ -615,7 +647,10 @@ class Location extends jni$_.JObject {
   }
 
   static final _id_removeElapsedRealtimeUncertaintyNanos = _class
-      .instanceMethodId(r'removeElapsedRealtimeUncertaintyNanos', r'()V');
+      .instanceMethodId(
+        r'removeElapsedRealtimeUncertaintyNanos',
+        r'()V',
+      );
 
   static final _removeElapsedRealtimeUncertaintyNanos =
       jni$_.ProtectedJniExtensions.lookup<
@@ -694,7 +729,9 @@ class Location extends jni$_.JObject {
           >();
 
   /// from: `public void setLatitude(double d)`
-  void setLatitude(double d) {
+  void setLatitude(
+    double d,
+  ) {
     _setLatitude(
       reference.pointer,
       _id_setLatitude as jni$_.JMethodIDPtr,
@@ -755,7 +792,9 @@ class Location extends jni$_.JObject {
           >();
 
   /// from: `public void setLongitude(double d)`
-  void setLongitude(double d) {
+  void setLongitude(
+    double d,
+  ) {
     _setLongitude(
       reference.pointer,
       _id_setLongitude as jni$_.JMethodIDPtr,
@@ -816,7 +855,9 @@ class Location extends jni$_.JObject {
           >();
 
   /// from: `public void setAccuracy(float f)`
-  void setAccuracy(double f) {
+  void setAccuracy(
+    double f,
+  ) {
     _setAccuracy(
       reference.pointer,
       _id_setAccuracy as jni$_.JMethodIDPtr,
@@ -935,7 +976,9 @@ class Location extends jni$_.JObject {
           >();
 
   /// from: `public void setAltitude(double d)`
-  void setAltitude(double d) {
+  void setAltitude(
+    double d,
+  ) {
     _setAltitude(
       reference.pointer,
       _id_setAltitude as jni$_.JMethodIDPtr,
@@ -1054,7 +1097,9 @@ class Location extends jni$_.JObject {
           >();
 
   /// from: `public void setVerticalAccuracyMeters(float f)`
-  void setVerticalAccuracyMeters(double f) {
+  void setVerticalAccuracyMeters(
+    double f,
+  ) {
     _setVerticalAccuracyMeters(
       reference.pointer,
       _id_setVerticalAccuracyMeters as jni$_.JMethodIDPtr,
@@ -1120,7 +1165,10 @@ class Location extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_getSpeed = _class.instanceMethodId(r'getSpeed', r'()F');
+  static final _id_getSpeed = _class.instanceMethodId(
+    r'getSpeed',
+    r'()F',
+  );
 
   static final _getSpeed =
       jni$_.ProtectedJniExtensions.lookup<
@@ -1146,7 +1194,10 @@ class Location extends jni$_.JObject {
     ).float;
   }
 
-  static final _id_setSpeed = _class.instanceMethodId(r'setSpeed', r'(F)V');
+  static final _id_setSpeed = _class.instanceMethodId(
+    r'setSpeed',
+    r'(F)V',
+  );
 
   static final _setSpeed =
       jni$_.ProtectedJniExtensions.lookup<
@@ -1167,11 +1218,16 @@ class Location extends jni$_.JObject {
           >();
 
   /// from: `public void setSpeed(float f)`
-  void setSpeed(double f) {
+  void setSpeed(
+    double f,
+  ) {
     _setSpeed(reference.pointer, _id_setSpeed as jni$_.JMethodIDPtr, f).check();
   }
 
-  static final _id_hasSpeed = _class.instanceMethodId(r'hasSpeed', r'()Z');
+  static final _id_hasSpeed = _class.instanceMethodId(
+    r'hasSpeed',
+    r'()Z',
+  );
 
   static final _hasSpeed =
       jni$_.ProtectedJniExtensions.lookup<
@@ -1279,7 +1335,9 @@ class Location extends jni$_.JObject {
           >();
 
   /// from: `public void setSpeedAccuracyMetersPerSecond(float f)`
-  void setSpeedAccuracyMetersPerSecond(double f) {
+  void setSpeedAccuracyMetersPerSecond(
+    double f,
+  ) {
     _setSpeedAccuracyMetersPerSecond(
       reference.pointer,
       _id_setSpeedAccuracyMetersPerSecond as jni$_.JMethodIDPtr,
@@ -1345,7 +1403,10 @@ class Location extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_getBearing = _class.instanceMethodId(r'getBearing', r'()F');
+  static final _id_getBearing = _class.instanceMethodId(
+    r'getBearing',
+    r'()F',
+  );
 
   static final _getBearing =
       jni$_.ProtectedJniExtensions.lookup<
@@ -1371,7 +1432,10 @@ class Location extends jni$_.JObject {
     ).float;
   }
 
-  static final _id_setBearing = _class.instanceMethodId(r'setBearing', r'(F)V');
+  static final _id_setBearing = _class.instanceMethodId(
+    r'setBearing',
+    r'(F)V',
+  );
 
   static final _setBearing =
       jni$_.ProtectedJniExtensions.lookup<
@@ -1392,7 +1456,9 @@ class Location extends jni$_.JObject {
           >();
 
   /// from: `public void setBearing(float f)`
-  void setBearing(double f) {
+  void setBearing(
+    double f,
+  ) {
     _setBearing(
       reference.pointer,
       _id_setBearing as jni$_.JMethodIDPtr,
@@ -1400,7 +1466,10 @@ class Location extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_hasBearing = _class.instanceMethodId(r'hasBearing', r'()Z');
+  static final _id_hasBearing = _class.instanceMethodId(
+    r'hasBearing',
+    r'()Z',
+  );
 
   static final _hasBearing =
       jni$_.ProtectedJniExtensions.lookup<
@@ -1508,7 +1577,9 @@ class Location extends jni$_.JObject {
           >();
 
   /// from: `public void setBearingAccuracyDegrees(float f)`
-  void setBearingAccuracyDegrees(double f) {
+  void setBearingAccuracyDegrees(
+    double f,
+  ) {
     _setBearingAccuracyDegrees(
       reference.pointer,
       _id_setBearingAccuracyDegrees as jni$_.JMethodIDPtr,
@@ -1627,7 +1698,9 @@ class Location extends jni$_.JObject {
           >();
 
   /// from: `public void setMslAltitudeMeters(double d)`
-  void setMslAltitudeMeters(double d) {
+  void setMslAltitudeMeters(
+    double d,
+  ) {
     _setMslAltitudeMeters(
       reference.pointer,
       _id_setMslAltitudeMeters as jni$_.JMethodIDPtr,
@@ -1746,7 +1819,9 @@ class Location extends jni$_.JObject {
           >();
 
   /// from: `public void setMslAltitudeAccuracyMeters(float f)`
-  void setMslAltitudeAccuracyMeters(double f) {
+  void setMslAltitudeAccuracyMeters(
+    double f,
+  ) {
     _setMslAltitudeAccuracyMeters(
       reference.pointer,
       _id_setMslAltitudeAccuracyMeters as jni$_.JMethodIDPtr,
@@ -1841,7 +1916,10 @@ class Location extends jni$_.JObject {
     ).boolean;
   }
 
-  static final _id_isMock = _class.instanceMethodId(r'isMock', r'()Z');
+  static final _id_isMock = _class.instanceMethodId(
+    r'isMock',
+    r'()Z',
+  );
 
   static final _isMock =
       jni$_.ProtectedJniExtensions.lookup<
@@ -1864,7 +1942,10 @@ class Location extends jni$_.JObject {
     return _isMock(reference.pointer, _id_isMock as jni$_.JMethodIDPtr).boolean;
   }
 
-  static final _id_setMock = _class.instanceMethodId(r'setMock', r'(Z)V');
+  static final _id_setMock = _class.instanceMethodId(
+    r'setMock',
+    r'(Z)V',
+  );
 
   static final _setMock =
       jni$_.ProtectedJniExtensions.lookup<
@@ -1885,7 +1966,9 @@ class Location extends jni$_.JObject {
           >();
 
   /// from: `public void setMock(boolean z)`
-  void setMock(bool z) {
+  void setMock(
+    bool z,
+  ) {
     _setMock(
       reference.pointer,
       _id_setMock as jni$_.JMethodIDPtr,
@@ -1947,7 +2030,9 @@ class Location extends jni$_.JObject {
           >();
 
   /// from: `public void setExtras(android.os.Bundle bundle)`
-  void setExtras(jni$_.JObject? bundle) {
+  void setExtras(
+    jni$_.JObject? bundle,
+  ) {
     final _$bundle = bundle?.reference ?? jni$_.jNullReference;
     _setExtras(
       reference.pointer,
@@ -1956,7 +2041,10 @@ class Location extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_isComplete = _class.instanceMethodId(r'isComplete', r'()Z');
+  static final _id_isComplete = _class.instanceMethodId(
+    r'isComplete',
+    r'()Z',
+  );
 
   static final _isComplete =
       jni$_.ProtectedJniExtensions.lookup<
@@ -2006,7 +2094,9 @@ class Location extends jni$_.JObject {
           >();
 
   /// from: `public boolean equals(java.lang.Object object)`
-  bool equals(jni$_.JObject? object) {
+  bool equals(
+    jni$_.JObject? object,
+  ) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     return _equals(
       reference.pointer,
@@ -2015,7 +2105,10 @@ class Location extends jni$_.JObject {
     ).boolean;
   }
 
-  static final _id_hashCode$1 = _class.instanceMethodId(r'hashCode', r'()I');
+  static final _id_hashCode$1 = _class.instanceMethodId(
+    r'hashCode',
+    r'()I',
+  );
 
   static final _hashCode$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -2098,7 +2191,10 @@ class Location extends jni$_.JObject {
           >();
 
   /// from: `public void dump(android.util.Printer printer, java.lang.String string)`
-  void dump(jni$_.JObject? printer, jni$_.JString? string) {
+  void dump(
+    jni$_.JObject? printer,
+    jni$_.JString? string,
+  ) {
     final _$printer = printer?.reference ?? jni$_.jNullReference;
     final _$string = string?.reference ?? jni$_.jNullReference;
     _dump(
@@ -2163,7 +2259,10 @@ class Location extends jni$_.JObject {
           >();
 
   /// from: `public void writeToParcel(android.os.Parcel parcel, int i)`
-  void writeToParcel(jni$_.JObject? parcel, int i) {
+  void writeToParcel(
+    jni$_.JObject? parcel,
+    int i,
+  ) {
     final _$parcel = parcel?.reference ?? jni$_.jNullReference;
     _writeToParcel(
       reference.pointer,
@@ -2199,7 +2298,10 @@ class Location extends jni$_.JObject {
 
   /// from: `static public java.lang.String convert(double d, int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni$_.JString? convert(double d, int i) {
+  static jni$_.JString? convert(
+    double d,
+    int i,
+  ) {
     return _convert(
       _class.reference.pointer,
       _id_convert as jni$_.JMethodIDPtr,
@@ -2232,7 +2334,9 @@ class Location extends jni$_.JObject {
           >();
 
   /// from: `static public double convert(java.lang.String string)`
-  static double convert$1(jni$_.JString? string) {
+  static double convert$1(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return _convert$1(
       _class.reference.pointer,
@@ -2307,8 +2411,11 @@ final class $Location$NullableType extends jni$_.JObjType<Location?> {
 
   @jni$_.internal
   @core$_.override
-  Location? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : Location.fromReference(reference);
+  Location? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : Location.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2341,8 +2448,9 @@ final class $Location$Type extends jni$_.JObjType<Location> {
 
   @jni$_.internal
   @core$_.override
-  Location fromReference(jni$_.JReference reference) =>
-      Location.fromReference(reference);
+  Location fromReference(jni$_.JReference reference) => Location.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

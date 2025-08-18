@@ -45,8 +45,9 @@ class IconBitmapChangedException extends jni$_.JObject {
   final jni$_.JObjType<IconBitmapChangedException> $type;
 
   @jni$_.internal
-  IconBitmapChangedException.fromReference(jni$_.JReference reference)
-    : $type = type,
+  IconBitmapChangedException.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -56,7 +57,9 @@ class IconBitmapChangedException extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $IconBitmapChangedException$NullableType();
   static const type = $IconBitmapChangedException$Type();
-  static final _id_new$ = _class.constructorId(r'()V');
+  static final _id_new$ = _class.constructorId(
+    r'()V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -98,7 +101,9 @@ final class $IconBitmapChangedException$NullableType
   IconBitmapChangedException? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : IconBitmapChangedException.fromReference(reference);
+      : IconBitmapChangedException.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -134,7 +139,9 @@ final class $IconBitmapChangedException$Type
   @jni$_.internal
   @core$_.override
   IconBitmapChangedException fromReference(jni$_.JReference reference) =>
-      IconBitmapChangedException.fromReference(reference);
+      IconBitmapChangedException.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

@@ -248,7 +248,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     final camera = getCamera();
     _map.jumpTo(
       interop.JumpToOptions(
-        center: center?.toLngLat(),
+        center: center?.toLngLat() ?? camera.center.toLngLat(),
         zoom: zoom ?? camera.zoom,
         bearing: bearing ?? camera.bearing,
         pitch: pitch ?? camera.pitch,
@@ -425,6 +425,52 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     BearingTrackMode trackBearing = BearingTrackMode.gps,
   }) async {
     debugPrint("Can't track the user location on web.");
+  }
+
+  @override
+  Future<List<RenderedFeature>> featuresAtPoint(
+    Offset point, {
+    List<String>? layerIds,
+  }) async {
+    final features = _map
+        .queryRenderedFeatures(
+          point.toJsPoint(),
+          interop.QueryRenderedFeaturesOptions(
+            layers: layerIds?.map((l) => l.toJS).toList().toJS,
+          ),
+        )
+        .toDart;
+    return features
+        .map(
+          (f) => RenderedFeature(
+            id: f.id.dartify(),
+            properties: f.properties.asStringMap() ?? {},
+          ),
+        )
+        .toList();
+  }
+
+  @override
+  Future<List<RenderedFeature>> featuresInRect(
+    Rect rect, {
+    List<String>? layerIds,
+  }) async {
+    final features = _map
+        .queryRenderedFeaturesRect(
+          [rect.bottomLeft.toJsPoint(), rect.topRight.toJsPoint()].toJS,
+          interop.QueryRenderedFeaturesOptions(
+            layers: layerIds?.map((l) => l.toJS).toList().toJS,
+          ),
+        )
+        .toDart;
+    return features
+        .map(
+          (f) => RenderedFeature(
+            id: f.id.dartify(),
+            properties: f.properties.asStringMap() ?? {},
+          ),
+        )
+        .toList();
   }
 
   @override

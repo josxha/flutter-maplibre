@@ -8,7 +8,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
   private var _mapView: MLNMapView!
   private var _viewId: Int64
   private var _flutterApi: MapLibreFlutterApi
-  private var _mapOptions: MapOptions? = nil
+  private var _mapOptions: MapOptions?
 
   init(
     frame _: CGRect,

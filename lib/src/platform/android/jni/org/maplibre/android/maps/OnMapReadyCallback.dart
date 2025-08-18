@@ -47,8 +47,9 @@ class OnMapReadyCallback extends jni$_.JObject {
   final jni$_.JObjType<OnMapReadyCallback> $type;
 
   @jni$_.internal
-  OnMapReadyCallback.fromReference(jni$_.JReference reference)
-    : $type = type,
+  OnMapReadyCallback.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -82,7 +83,9 @@ class OnMapReadyCallback extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onMapReady(org.maplibre.android.maps.MapLibreMap mapLibreMap)`
-  void onMapReady(maplibremap$_.MapLibreMap mapLibreMap) {
+  void onMapReady(
+    maplibremap$_.MapLibreMap mapLibreMap,
+  ) {
     final _$mapLibreMap = mapLibreMap.reference;
     _onMapReady(
       reference.pointer,
@@ -100,7 +103,11 @@ class OnMapReadyCallback extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -161,10 +168,14 @@ class OnMapReadyCallback extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory OnMapReadyCallback.implement($OnMapReadyCallback $impl) {
+  factory OnMapReadyCallback.implement(
+    $OnMapReadyCallback $impl,
+  ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return OnMapReadyCallback.fromReference($i.implementReference());
+    return OnMapReadyCallback.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -204,7 +215,11 @@ final class $OnMapReadyCallback$NullableType
   @jni$_.internal
   @core$_.override
   OnMapReadyCallback? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : OnMapReadyCallback.fromReference(reference);
+      reference.isNull
+      ? null
+      : OnMapReadyCallback.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -239,7 +254,9 @@ final class $OnMapReadyCallback$Type
   @jni$_.internal
   @core$_.override
   OnMapReadyCallback fromReference(jni$_.JReference reference) =>
-      OnMapReadyCallback.fromReference(reference);
+      OnMapReadyCallback.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

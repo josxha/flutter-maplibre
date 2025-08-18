@@ -45,8 +45,9 @@ class EGLConfigChooser extends jni$_.JObject {
   final jni$_.JObjType<EGLConfigChooser> $type;
 
   @jni$_.internal
-  EGLConfigChooser.fromReference(jni$_.JReference reference)
-    : $type = type,
+  EGLConfigChooser.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -56,7 +57,9 @@ class EGLConfigChooser extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $EGLConfigChooser$NullableType();
   static const type = $EGLConfigChooser$Type();
-  static final _id_new$ = _class.constructorId(r'()V');
+  static final _id_new$ = _class.constructorId(
+    r'()V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -82,7 +85,9 @@ class EGLConfigChooser extends jni$_.JObject {
     );
   }
 
-  static final _id_new$1 = _class.constructorId(r'(Z)V');
+  static final _id_new$1 = _class.constructorId(
+    r'(Z)V',
+  );
 
   static final _new$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -104,7 +109,9 @@ class EGLConfigChooser extends jni$_.JObject {
 
   /// from: `public void <init>(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory EGLConfigChooser.new$1(bool z) {
+  factory EGLConfigChooser.new$1(
+    bool z,
+  ) {
     return EGLConfigChooser.fromReference(
       _new$1(
         _class.reference.pointer,
@@ -142,7 +149,10 @@ class EGLConfigChooser extends jni$_.JObject {
 
   /// from: `public javax.microedition.khronos.egl.EGLConfig chooseConfig(javax.microedition.khronos.egl.EGL10 eGL10, javax.microedition.khronos.egl.EGLDisplay eGLDisplay)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? chooseConfig(jni$_.JObject eGL10, jni$_.JObject? eGLDisplay) {
+  jni$_.JObject? chooseConfig(
+    jni$_.JObject eGL10,
+    jni$_.JObject? eGLDisplay,
+  ) {
     final _$eGL10 = eGL10.reference;
     final _$eGLDisplay = eGLDisplay?.reference ?? jni$_.jNullReference;
     return _chooseConfig(
@@ -167,7 +177,11 @@ final class $EGLConfigChooser$NullableType
   @jni$_.internal
   @core$_.override
   EGLConfigChooser? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : EGLConfigChooser.fromReference(reference);
+      reference.isNull
+      ? null
+      : EGLConfigChooser.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -202,7 +216,9 @@ final class $EGLConfigChooser$Type extends jni$_.JObjType<EGLConfigChooser> {
   @jni$_.internal
   @core$_.override
   EGLConfigChooser fromReference(jni$_.JReference reference) =>
-      EGLConfigChooser.fromReference(reference);
+      EGLConfigChooser.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

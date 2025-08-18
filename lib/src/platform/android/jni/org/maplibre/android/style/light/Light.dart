@@ -49,8 +49,9 @@ class Light extends jni$_.JObject {
   final jni$_.JObjType<Light> $type;
 
   @jni$_.internal
-  Light.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Light.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -84,7 +85,9 @@ class Light extends jni$_.JObject {
           >();
 
   /// from: `public void setAnchor(java.lang.String string)`
-  void setAnchor(jni$_.JString? string) {
+  void setAnchor(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setAnchor(
       reference.pointer,
@@ -147,7 +150,9 @@ class Light extends jni$_.JObject {
           >();
 
   /// from: `public void setPosition(org.maplibre.android.style.light.Position position)`
-  void setPosition(position$_.Position position) {
+  void setPosition(
+    position$_.Position position,
+  ) {
     final _$position = position.reference;
     _setPosition(
       reference.pointer,
@@ -253,7 +258,10 @@ class Light extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_setColor = _class.instanceMethodId(r'setColor', r'(I)V');
+  static final _id_setColor = _class.instanceMethodId(
+    r'setColor',
+    r'(I)V',
+  );
 
   static final _setColor =
       jni$_.ProtectedJniExtensions.lookup<
@@ -274,7 +282,9 @@ class Light extends jni$_.JObject {
           >();
 
   /// from: `public void setColor(int i)`
-  void setColor(int i) {
+  void setColor(
+    int i,
+  ) {
     _setColor(reference.pointer, _id_setColor as jni$_.JMethodIDPtr, i).check();
   }
 
@@ -302,7 +312,9 @@ class Light extends jni$_.JObject {
           >();
 
   /// from: `public void setColor(java.lang.String string)`
-  void setColor$1(jni$_.JString? string) {
+  void setColor$1(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setColor$1(
       reference.pointer,
@@ -432,7 +444,9 @@ class Light extends jni$_.JObject {
           >();
 
   /// from: `public void setIntensity(float f)`
-  void setIntensity(double f) {
+  void setIntensity(
+    double f,
+  ) {
     _setIntensity(
       reference.pointer,
       _id_setIntensity as jni$_.JMethodIDPtr,
@@ -547,8 +561,11 @@ final class $Light$NullableType extends jni$_.JObjType<Light?> {
 
   @jni$_.internal
   @core$_.override
-  Light? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : Light.fromReference(reference);
+  Light? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : Light.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -581,8 +598,9 @@ final class $Light$Type extends jni$_.JObjType<Light> {
 
   @jni$_.internal
   @core$_.override
-  Light fromReference(jni$_.JReference reference) =>
-      Light.fromReference(reference);
+  Light fromReference(jni$_.JReference reference) => Light.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
