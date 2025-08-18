@@ -24,6 +24,7 @@ import 'package:maplibre_example/style_layers_line_page.dart';
 import 'package:maplibre_example/style_layers_raster_page.dart';
 import 'package:maplibre_example/style_layers_symbol_page.dart';
 import 'package:maplibre_example/styled_map_page.dart';
+import 'package:maplibre_example/translucent_map_page.dart';
 import 'package:maplibre_example/two_maps_page.dart';
 import 'package:maplibre_example/user_location_page.dart';
 import 'package:maplibre_example/widget_layer_interactive_page.dart';
@@ -52,46 +53,15 @@ class MenuPage extends StatelessWidget {
                   location: StyledMapPage.location,
                 ),
                 const ItemCard(
+                  label: 'Translucent Map',
+                  iconData: Icons.map_outlined,
+                  location: TranslucentMapPage.location,
+                ),
+                const ItemCard(
                   label: 'PMTiles Source',
                   iconData: Icons.file_open,
                   location: PmTilesPage.location,
                 ),
-                const ItemCard(
-                  label: 'Parameters',
-                  iconData: Icons.build,
-                  location: ParametersPage.location,
-                ),
-                const ItemCard(
-                  label: 'Gestures',
-                  iconData: Icons.back_hand,
-                  location: GesturesPage.location,
-                ),
-                const ItemCard(
-                  label: 'Events',
-                  iconData: Icons.notifications,
-                  location: EventsPage.location,
-                ),
-                const ItemCard(
-                  label: 'Controller',
-                  iconData: Icons.api,
-                  location: ControllerPage.location,
-                ),
-                const ItemCard(
-                  label: 'Two Maps',
-                  iconData: Icons.looks_two,
-                  location: TwoMapsPage.location,
-                ),
-                const ItemCard(
-                  label: 'Animation',
-                  iconData: Icons.animation,
-                  location: AnimationPage.location,
-                ),
-                if (!kIsWeb)
-                  const ItemCard(
-                    label: 'User Location',
-                    iconData: Icons.gps_fixed,
-                    location: UserLocationPage.location,
-                  ),
                 const ItemCard(
                   label: 'Parameters',
                   iconData: Icons.build,
