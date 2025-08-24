@@ -49,8 +49,9 @@ class MapLibre extends jni$_.JObject {
   final jni$_.JObjType<MapLibre> $type;
 
   @jni$_.internal
-  MapLibre.fromReference(jni$_.JReference reference)
-    : $type = type,
+  MapLibre.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(r'org/maplibre/android/MapLibre');
@@ -83,7 +84,9 @@ class MapLibre extends jni$_.JObject {
 
   /// from: `static public org.maplibre.android.MapLibre getInstance(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
-  static MapLibre getInstance(jni$_.JObject context) {
+  static MapLibre getInstance(
+    jni$_.JObject context,
+  ) {
     final _$context = context.reference;
     return _getInstance(
       _class.reference.pointer,
@@ -197,7 +200,9 @@ class MapLibre extends jni$_.JObject {
           >();
 
   /// from: `static public void setApiKey(java.lang.String string)`
-  static void setApiKey(jni$_.JString? string) {
+  static void setApiKey(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setApiKey(
       _class.reference.pointer,
@@ -364,7 +369,9 @@ class MapLibre extends jni$_.JObject {
           >();
 
   /// from: `static public void setConnected(java.lang.Boolean boolean)`
-  static void setConnected(jni$_.JBoolean? boolean) {
+  static void setConnected(
+    jni$_.JBoolean? boolean,
+  ) {
     final _$boolean = boolean?.reference ?? jni$_.jNullReference;
     _setConnected(
       _class.reference.pointer,
@@ -457,7 +464,9 @@ class MapLibre extends jni$_.JObject {
           >();
 
   /// from: `static public void setModuleProvider(org.maplibre.android.ModuleProvider moduleProvider)`
-  static void setModuleProvider(jni$_.JObject? moduleProvider) {
+  static void setModuleProvider(
+    jni$_.JObject? moduleProvider,
+  ) {
     final _$moduleProvider = moduleProvider?.reference ?? jni$_.jNullReference;
     _setModuleProvider(
       _class.reference.pointer,
@@ -490,7 +499,9 @@ class MapLibre extends jni$_.JObject {
           >();
 
   /// from: `static public void throwIfApiKeyInvalid(java.lang.String string)`
-  static void throwIfApiKeyInvalid(jni$_.JString? string) {
+  static void throwIfApiKeyInvalid(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _throwIfApiKeyInvalid(
       _class.reference.pointer,
@@ -499,7 +510,10 @@ class MapLibre extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_hasInstance = _class.staticMethodId(r'hasInstance', r'()Z');
+  static final _id_hasInstance = _class.staticMethodId(
+    r'hasInstance',
+    r'()Z',
+  );
 
   static final _hasInstance =
       jni$_.ProtectedJniExtensions.lookup<
@@ -536,8 +550,11 @@ final class $MapLibre$NullableType extends jni$_.JObjType<MapLibre?> {
 
   @jni$_.internal
   @core$_.override
-  MapLibre? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : MapLibre.fromReference(reference);
+  MapLibre? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : MapLibre.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -570,8 +587,9 @@ final class $MapLibre$Type extends jni$_.JObjType<MapLibre> {
 
   @jni$_.internal
   @core$_.override
-  MapLibre fromReference(jni$_.JReference reference) =>
-      MapLibre.fromReference(reference);
+  MapLibre fromReference(jni$_.JReference reference) => MapLibre.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

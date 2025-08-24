@@ -45,8 +45,9 @@ class GeoJsonOptions extends jni$_.JObject {
   final jni$_.JObjType<GeoJsonOptions> $type;
 
   @jni$_.internal
-  GeoJsonOptions.fromReference(jni$_.JReference reference)
-    : $type = type,
+  GeoJsonOptions.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -56,7 +57,9 @@ class GeoJsonOptions extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $GeoJsonOptions$NullableType();
   static const type = $GeoJsonOptions$Type();
-  static final _id_new$ = _class.constructorId(r'()V');
+  static final _id_new$ = _class.constructorId(
+    r'()V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -107,7 +110,9 @@ class GeoJsonOptions extends jni$_.JObject {
 
   /// from: `public final org.maplibre.android.style.sources.GeoJsonOptions withMinZoom(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  GeoJsonOptions withMinZoom(int i) {
+  GeoJsonOptions withMinZoom(
+    int i,
+  ) {
     return _withMinZoom(
       reference.pointer,
       _id_withMinZoom as jni$_.JMethodIDPtr,
@@ -140,7 +145,9 @@ class GeoJsonOptions extends jni$_.JObject {
 
   /// from: `public final org.maplibre.android.style.sources.GeoJsonOptions withMaxZoom(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  GeoJsonOptions withMaxZoom(int i) {
+  GeoJsonOptions withMaxZoom(
+    int i,
+  ) {
     return _withMaxZoom(
       reference.pointer,
       _id_withMaxZoom as jni$_.JMethodIDPtr,
@@ -173,7 +180,9 @@ class GeoJsonOptions extends jni$_.JObject {
 
   /// from: `public final org.maplibre.android.style.sources.GeoJsonOptions withBuffer(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  GeoJsonOptions withBuffer(int i) {
+  GeoJsonOptions withBuffer(
+    int i,
+  ) {
     return _withBuffer(
       reference.pointer,
       _id_withBuffer as jni$_.JMethodIDPtr,
@@ -206,7 +215,9 @@ class GeoJsonOptions extends jni$_.JObject {
 
   /// from: `public final org.maplibre.android.style.sources.GeoJsonOptions withLineMetrics(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  GeoJsonOptions withLineMetrics(bool z) {
+  GeoJsonOptions withLineMetrics(
+    bool z,
+  ) {
     return _withLineMetrics(
       reference.pointer,
       _id_withLineMetrics as jni$_.JMethodIDPtr,
@@ -239,7 +250,9 @@ class GeoJsonOptions extends jni$_.JObject {
 
   /// from: `public final org.maplibre.android.style.sources.GeoJsonOptions withTolerance(float f)`
   /// The returned object must be released after use, by calling the [release] method.
-  GeoJsonOptions withTolerance(double f) {
+  GeoJsonOptions withTolerance(
+    double f,
+  ) {
     return _withTolerance(
       reference.pointer,
       _id_withTolerance as jni$_.JMethodIDPtr,
@@ -272,7 +285,9 @@ class GeoJsonOptions extends jni$_.JObject {
 
   /// from: `public final org.maplibre.android.style.sources.GeoJsonOptions withCluster(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  GeoJsonOptions withCluster(bool z) {
+  GeoJsonOptions withCluster(
+    bool z,
+  ) {
     return _withCluster(
       reference.pointer,
       _id_withCluster as jni$_.JMethodIDPtr,
@@ -305,7 +320,9 @@ class GeoJsonOptions extends jni$_.JObject {
 
   /// from: `public final org.maplibre.android.style.sources.GeoJsonOptions withClusterMaxZoom(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  GeoJsonOptions withClusterMaxZoom(int i) {
+  GeoJsonOptions withClusterMaxZoom(
+    int i,
+  ) {
     return _withClusterMaxZoom(
       reference.pointer,
       _id_withClusterMaxZoom as jni$_.JMethodIDPtr,
@@ -338,7 +355,9 @@ class GeoJsonOptions extends jni$_.JObject {
 
   /// from: `public final org.maplibre.android.style.sources.GeoJsonOptions withClusterRadius(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  GeoJsonOptions withClusterRadius(int i) {
+  GeoJsonOptions withClusterRadius(
+    int i,
+  ) {
     return _withClusterRadius(
       reference.pointer,
       _id_withClusterRadius as jni$_.JMethodIDPtr,
@@ -371,7 +390,9 @@ class GeoJsonOptions extends jni$_.JObject {
 
   /// from: `public final org.maplibre.android.style.sources.GeoJsonOptions withClusterMinPoints(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  GeoJsonOptions withClusterMinPoints(int i) {
+  GeoJsonOptions withClusterMinPoints(
+    int i,
+  ) {
     return _withClusterMinPoints(
       reference.pointer,
       _id_withClusterMinPoints as jni$_.JMethodIDPtr,
@@ -429,7 +450,10 @@ class GeoJsonOptions extends jni$_.JObject {
     ).object<GeoJsonOptions>(const $GeoJsonOptions$Type());
   }
 
-  static final _id_getSize = _class.instanceMethodId(r'getSize', r'()I');
+  static final _id_getSize = _class.instanceMethodId(
+    r'getSize',
+    r'()I',
+  );
 
   static final _getSize =
       jni$_.ProtectedJniExtensions.lookup<
@@ -455,7 +479,10 @@ class GeoJsonOptions extends jni$_.JObject {
     ).integer;
   }
 
-  static final _id_size = _class.instanceMethodId(r'size', r'()I');
+  static final _id_size = _class.instanceMethodId(
+    r'size',
+    r'()I',
+  );
 
   static final _size =
       jni$_.ProtectedJniExtensions.lookup<
@@ -503,7 +530,9 @@ class GeoJsonOptions extends jni$_.JObject {
 
   /// from: `public bridge java.lang.Object get(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? get(jni$_.JString? string) {
+  jni$_.JObject? get(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return _get(
       reference.pointer,
@@ -537,7 +566,9 @@ class GeoJsonOptions extends jni$_.JObject {
 
   /// from: `public final bridge java.lang.Object get(java.lang.Object object)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? get$1(jni$_.JObject? object) {
+  jni$_.JObject? get$1(
+    jni$_.JObject? object,
+  ) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     return _get$1(
       reference.pointer,
@@ -570,7 +601,9 @@ class GeoJsonOptions extends jni$_.JObject {
           >();
 
   /// from: `public bridge boolean containsKey(java.lang.String string)`
-  bool containsKey(jni$_.JString? string) {
+  bool containsKey(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return _containsKey(
       reference.pointer,
@@ -603,7 +636,9 @@ class GeoJsonOptions extends jni$_.JObject {
           >();
 
   /// from: `public final bridge boolean containsKey(java.lang.Object object)`
-  bool containsKey$1(jni$_.JObject? object) {
+  bool containsKey$1(
+    jni$_.JObject? object,
+  ) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     return _containsKey$1(
       reference.pointer,
@@ -637,7 +672,9 @@ class GeoJsonOptions extends jni$_.JObject {
 
   /// from: `public bridge java.lang.Object remove(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? remove(jni$_.JString? string) {
+  jni$_.JObject? remove(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return _remove(
       reference.pointer,
@@ -671,7 +708,9 @@ class GeoJsonOptions extends jni$_.JObject {
 
   /// from: `public final bridge java.lang.Object remove(java.lang.Object object)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? remove$1(jni$_.JObject? object) {
+  jni$_.JObject? remove$1(
+    jni$_.JObject? object,
+  ) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     return _remove$1(
       reference.pointer,
@@ -707,7 +746,10 @@ class GeoJsonOptions extends jni$_.JObject {
           >();
 
   /// from: `public bridge boolean remove(java.lang.String string, java.lang.Object object)`
-  bool remove$2(jni$_.JString? string, jni$_.JObject? object) {
+  bool remove$2(
+    jni$_.JString? string,
+    jni$_.JObject? object,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$object = object?.reference ?? jni$_.jNullReference;
     return _remove$2(
@@ -745,7 +787,10 @@ class GeoJsonOptions extends jni$_.JObject {
           >();
 
   /// from: `public final bridge boolean remove(java.lang.Object object, java.lang.Object object1)`
-  bool remove$3(jni$_.JObject? object, jni$_.JObject? object1) {
+  bool remove$3(
+    jni$_.JObject? object,
+    jni$_.JObject? object1,
+  ) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     final _$object1 = object1?.reference ?? jni$_.jNullReference;
     return _remove$3(
@@ -844,7 +889,10 @@ class GeoJsonOptions extends jni$_.JObject {
 
   /// from: `public bridge java.lang.Object getOrDefault(java.lang.String string, java.lang.Object object)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? getOrDefault(jni$_.JString? string, jni$_.JObject? object) {
+  jni$_.JObject? getOrDefault(
+    jni$_.JString? string,
+    jni$_.JObject? object,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$object = object?.reference ?? jni$_.jNullReference;
     return _getOrDefault(
@@ -883,7 +931,10 @@ class GeoJsonOptions extends jni$_.JObject {
 
   /// from: `public final bridge java.lang.Object getOrDefault(java.lang.Object object, java.lang.Object object1)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? getOrDefault$1(jni$_.JObject? object, jni$_.JObject? object1) {
+  jni$_.JObject? getOrDefault$1(
+    jni$_.JObject? object,
+    jni$_.JObject? object1,
+  ) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     final _$object1 = object1?.reference ?? jni$_.jNullReference;
     return _getOrDefault$1(
@@ -1035,8 +1086,11 @@ final class $GeoJsonOptions$NullableType
 
   @jni$_.internal
   @core$_.override
-  GeoJsonOptions? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : GeoJsonOptions.fromReference(reference);
+  GeoJsonOptions? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : GeoJsonOptions.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -1071,7 +1125,9 @@ final class $GeoJsonOptions$Type extends jni$_.JObjType<GeoJsonOptions> {
   @jni$_.internal
   @core$_.override
   GeoJsonOptions fromReference(jni$_.JReference reference) =>
-      GeoJsonOptions.fromReference(reference);
+      GeoJsonOptions.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();

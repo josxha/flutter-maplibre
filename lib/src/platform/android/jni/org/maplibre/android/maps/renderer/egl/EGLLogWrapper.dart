@@ -45,8 +45,9 @@ class EGLLogWrapper extends jni$_.JObject {
   final jni$_.JObjType<EGLLogWrapper> $type;
 
   @jni$_.internal
-  EGLLogWrapper.fromReference(jni$_.JReference reference)
-    : $type = type,
+  EGLLogWrapper.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -88,7 +89,11 @@ class EGLLogWrapper extends jni$_.JObject {
 
   /// from: `public void <init>(javax.microedition.khronos.egl.EGL eGL, int i, java.io.Writer writer)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory EGLLogWrapper(jni$_.JObject? eGL, int i, jni$_.JObject? writer) {
+  factory EGLLogWrapper(
+    jni$_.JObject? eGL,
+    int i,
+    jni$_.JObject? writer,
+  ) {
     final _$eGL = eGL?.reference ?? jni$_.jNullReference;
     final _$writer = writer?.reference ?? jni$_.jNullReference;
     return EGLLogWrapper.fromReference(
@@ -451,7 +456,10 @@ class EGLLogWrapper extends jni$_.JObject {
           >();
 
   /// from: `public boolean eglDestroyContext(javax.microedition.khronos.egl.EGLDisplay eGLDisplay, javax.microedition.khronos.egl.EGLContext eGLContext)`
-  bool eglDestroyContext(jni$_.JObject? eGLDisplay, jni$_.JObject? eGLContext) {
+  bool eglDestroyContext(
+    jni$_.JObject? eGLDisplay,
+    jni$_.JObject? eGLContext,
+  ) {
     final _$eGLDisplay = eGLDisplay?.reference ?? jni$_.jNullReference;
     final _$eGLContext = eGLContext?.reference ?? jni$_.jNullReference;
     return _eglDestroyContext(
@@ -489,7 +497,10 @@ class EGLLogWrapper extends jni$_.JObject {
           >();
 
   /// from: `public boolean eglDestroySurface(javax.microedition.khronos.egl.EGLDisplay eGLDisplay, javax.microedition.khronos.egl.EGLSurface eGLSurface)`
-  bool eglDestroySurface(jni$_.JObject? eGLDisplay, jni$_.JObject? eGLSurface) {
+  bool eglDestroySurface(
+    jni$_.JObject? eGLDisplay,
+    jni$_.JObject? eGLSurface,
+  ) {
     final _$eGLDisplay = eGLDisplay?.reference ?? jni$_.jNullReference;
     final _$eGLSurface = eGLSurface?.reference ?? jni$_.jNullReference;
     return _eglDestroySurface(
@@ -691,7 +702,9 @@ class EGLLogWrapper extends jni$_.JObject {
 
   /// from: `public javax.microedition.khronos.egl.EGLSurface eglGetCurrentSurface(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? eglGetCurrentSurface(int i) {
+  jni$_.JObject? eglGetCurrentSurface(
+    int i,
+  ) {
     return _eglGetCurrentSurface(
       reference.pointer,
       _id_eglGetCurrentSurface as jni$_.JMethodIDPtr,
@@ -724,7 +737,9 @@ class EGLLogWrapper extends jni$_.JObject {
 
   /// from: `public javax.microedition.khronos.egl.EGLDisplay eglGetDisplay(java.lang.Object object)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? eglGetDisplay(jni$_.JObject? object) {
+  jni$_.JObject? eglGetDisplay(
+    jni$_.JObject? object,
+  ) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     return _eglGetDisplay(
       reference.pointer,
@@ -789,7 +804,10 @@ class EGLLogWrapper extends jni$_.JObject {
           >();
 
   /// from: `public boolean eglInitialize(javax.microedition.khronos.egl.EGLDisplay eGLDisplay, int[] is)`
-  bool eglInitialize(jni$_.JObject? eGLDisplay, jni$_.JIntArray? is$) {
+  bool eglInitialize(
+    jni$_.JObject? eGLDisplay,
+    jni$_.JIntArray? is$,
+  ) {
     final _$eGLDisplay = eGLDisplay?.reference ?? jni$_.jNullReference;
     final _$is$ = is$?.reference ?? jni$_.jNullReference;
     return _eglInitialize(
@@ -933,7 +951,10 @@ class EGLLogWrapper extends jni$_.JObject {
 
   /// from: `public java.lang.String eglQueryString(javax.microedition.khronos.egl.EGLDisplay eGLDisplay, int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JString? eglQueryString(jni$_.JObject? eGLDisplay, int i) {
+  jni$_.JString? eglQueryString(
+    jni$_.JObject? eGLDisplay,
+    int i,
+  ) {
     final _$eGLDisplay = eGLDisplay?.reference ?? jni$_.jNullReference;
     return _eglQueryString(
       reference.pointer,
@@ -1023,7 +1044,10 @@ class EGLLogWrapper extends jni$_.JObject {
           >();
 
   /// from: `public boolean eglSwapBuffers(javax.microedition.khronos.egl.EGLDisplay eGLDisplay, javax.microedition.khronos.egl.EGLSurface eGLSurface)`
-  bool eglSwapBuffers(jni$_.JObject? eGLDisplay, jni$_.JObject? eGLSurface) {
+  bool eglSwapBuffers(
+    jni$_.JObject? eGLDisplay,
+    jni$_.JObject? eGLSurface,
+  ) {
     final _$eGLDisplay = eGLDisplay?.reference ?? jni$_.jNullReference;
     final _$eGLSurface = eGLSurface?.reference ?? jni$_.jNullReference;
     return _eglSwapBuffers(
@@ -1058,7 +1082,9 @@ class EGLLogWrapper extends jni$_.JObject {
           >();
 
   /// from: `public boolean eglTerminate(javax.microedition.khronos.egl.EGLDisplay eGLDisplay)`
-  bool eglTerminate(jni$_.JObject? eGLDisplay) {
+  bool eglTerminate(
+    jni$_.JObject? eGLDisplay,
+  ) {
     final _$eGLDisplay = eGLDisplay?.reference ?? jni$_.jNullReference;
     return _eglTerminate(
       reference.pointer,
@@ -1067,7 +1093,10 @@ class EGLLogWrapper extends jni$_.JObject {
     ).boolean;
   }
 
-  static final _id_eglWaitGL = _class.instanceMethodId(r'eglWaitGL', r'()Z');
+  static final _id_eglWaitGL = _class.instanceMethodId(
+    r'eglWaitGL',
+    r'()Z',
+  );
 
   static final _eglWaitGL =
       jni$_.ProtectedJniExtensions.lookup<
@@ -1118,7 +1147,10 @@ class EGLLogWrapper extends jni$_.JObject {
           >();
 
   /// from: `public boolean eglWaitNative(int i, java.lang.Object object)`
-  bool eglWaitNative(int i, jni$_.JObject? object) {
+  bool eglWaitNative(
+    int i,
+    jni$_.JObject? object,
+  ) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     return _eglWaitNative(
       reference.pointer,
@@ -1153,7 +1185,9 @@ class EGLLogWrapper extends jni$_.JObject {
 
   /// from: `static public java.lang.String getErrorString(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni$_.JString? getErrorString(int i) {
+  static jni$_.JString? getErrorString(
+    int i,
+  ) {
     return _getErrorString(
       _class.reference.pointer,
       _id_getErrorString as jni$_.JMethodIDPtr,
@@ -1173,8 +1207,11 @@ final class $EGLLogWrapper$NullableType extends jni$_.JObjType<EGLLogWrapper?> {
 
   @jni$_.internal
   @core$_.override
-  EGLLogWrapper? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : EGLLogWrapper.fromReference(reference);
+  EGLLogWrapper? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : EGLLogWrapper.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1209,7 +1246,9 @@ final class $EGLLogWrapper$Type extends jni$_.JObjType<EGLLogWrapper> {
   @jni$_.internal
   @core$_.override
   EGLLogWrapper fromReference(jni$_.JReference reference) =>
-      EGLLogWrapper.fromReference(reference);
+      EGLLogWrapper.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

@@ -251,7 +251,9 @@ class LocationComponentActivationOptions$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.LocationComponentActivationOptions$Builder styleRes(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentActivationOptions$Builder? styleRes(int i) {
+  LocationComponentActivationOptions$Builder? styleRes(
+    int i,
+  ) {
     return _styleRes(
       reference.pointer,
       _id_styleRes as jni$_.JMethodIDPtr,
@@ -286,7 +288,9 @@ class LocationComponentActivationOptions$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.LocationComponentActivationOptions$Builder useDefaultLocationEngine(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentActivationOptions$Builder? useDefaultLocationEngine(bool z) {
+  LocationComponentActivationOptions$Builder? useDefaultLocationEngine(
+    bool z,
+  ) {
     return _useDefaultLocationEngine(
       reference.pointer,
       _id_useDefaultLocationEngine as jni$_.JMethodIDPtr,
@@ -382,7 +386,9 @@ final class $LocationComponentActivationOptions$Builder$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : LocationComponentActivationOptions$Builder.fromReference(reference);
+      : LocationComponentActivationOptions$Builder.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -422,7 +428,9 @@ final class $LocationComponentActivationOptions$Builder$Type
   @core$_.override
   LocationComponentActivationOptions$Builder fromReference(
     jni$_.JReference reference,
-  ) => LocationComponentActivationOptions$Builder.fromReference(reference);
+  ) => LocationComponentActivationOptions$Builder.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -456,8 +464,9 @@ class LocationComponentActivationOptions extends jni$_.JObject {
   final jni$_.JObjType<LocationComponentActivationOptions> $type;
 
   @jni$_.internal
-  LocationComponentActivationOptions.fromReference(jni$_.JReference reference)
-    : $type = type,
+  LocationComponentActivationOptions.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -669,7 +678,10 @@ class LocationComponentActivationOptions extends jni$_.JObject {
     );
   }
 
-  static final _id_styleRes = _class.instanceMethodId(r'styleRes', r'()I');
+  static final _id_styleRes = _class.instanceMethodId(
+    r'styleRes',
+    r'()I',
+  );
 
   static final _styleRes =
       jni$_.ProtectedJniExtensions.lookup<
@@ -770,7 +782,9 @@ final class $LocationComponentActivationOptions$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : LocationComponentActivationOptions.fromReference(reference);
+      : LocationComponentActivationOptions.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -809,7 +823,9 @@ final class $LocationComponentActivationOptions$Type
   @core$_.override
   LocationComponentActivationOptions fromReference(
     jni$_.JReference reference,
-  ) => LocationComponentActivationOptions.fromReference(reference);
+  ) => LocationComponentActivationOptions.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

@@ -51,8 +51,9 @@ class OfflineRegion$Companion extends jni$_.JObject {
   final jni$_.JObjType<OfflineRegion$Companion> $type;
 
   @jni$_.internal
-  OfflineRegion$Companion.fromReference(jni$_.JReference reference)
-    : $type = type,
+  OfflineRegion$Companion.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -86,7 +87,9 @@ class OfflineRegion$Companion extends jni$_.JObject {
 
   /// from: `synthetic public void <init>(kotlin.jvm.internal.DefaultConstructorMarker defaultConstructorMarker)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory OfflineRegion$Companion(jni$_.JObject? defaultConstructorMarker) {
+  factory OfflineRegion$Companion(
+    jni$_.JObject? defaultConstructorMarker,
+  ) {
     final _$defaultConstructorMarker =
         defaultConstructorMarker?.reference ?? jni$_.jNullReference;
     return OfflineRegion$Companion.fromReference(
@@ -114,7 +117,9 @@ final class $OfflineRegion$Companion$NullableType
   OfflineRegion$Companion? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : OfflineRegion$Companion.fromReference(reference);
+      : OfflineRegion$Companion.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -150,7 +155,9 @@ final class $OfflineRegion$Companion$Type
   @jni$_.internal
   @core$_.override
   OfflineRegion$Companion fromReference(jni$_.JReference reference) =>
-      OfflineRegion$Companion.fromReference(reference);
+      OfflineRegion$Companion.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -181,8 +188,9 @@ class OfflineRegion$DownloadState extends jni$_.JObject {
   final jni$_.JObjType<OfflineRegion$DownloadState> $type;
 
   @jni$_.internal
-  OfflineRegion$DownloadState.fromReference(jni$_.JReference reference)
-    : $type = type,
+  OfflineRegion$DownloadState.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -202,7 +210,11 @@ class OfflineRegion$DownloadState extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -256,7 +268,9 @@ class OfflineRegion$DownloadState extends jni$_.JObject {
   ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return OfflineRegion$DownloadState.fromReference($i.implementReference());
+    return OfflineRegion$DownloadState.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -283,7 +297,9 @@ final class $OfflineRegion$DownloadState$NullableType
   OfflineRegion$DownloadState? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : OfflineRegion$DownloadState.fromReference(reference);
+      : OfflineRegion$DownloadState.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -319,7 +335,9 @@ final class $OfflineRegion$DownloadState$Type
   @jni$_.internal
   @core$_.override
   OfflineRegion$DownloadState fromReference(jni$_.JReference reference) =>
-      OfflineRegion$DownloadState.fromReference(reference);
+      OfflineRegion$DownloadState.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -363,7 +381,10 @@ class OfflineRegion$OfflineRegionDeleteCallback extends jni$_.JObject {
   static const nullableType =
       $OfflineRegion$OfflineRegionDeleteCallback$NullableType();
   static const type = $OfflineRegion$OfflineRegionDeleteCallback$Type();
-  static final _id_onDelete = _class.instanceMethodId(r'onDelete', r'()V');
+  static final _id_onDelete = _class.instanceMethodId(
+    r'onDelete',
+    r'()V',
+  );
 
   static final _onDelete =
       jni$_.ProtectedJniExtensions.lookup<
@@ -410,7 +431,9 @@ class OfflineRegion$OfflineRegionDeleteCallback extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onError(java.lang.String string)`
-  void onError(jni$_.JString string) {
+  void onError(
+    jni$_.JString string,
+  ) {
     final _$string = string.reference;
     _onError(
       reference.pointer,
@@ -429,7 +452,11 @@ class OfflineRegion$OfflineRegionDeleteCallback extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -556,7 +583,9 @@ final class $OfflineRegion$OfflineRegionDeleteCallback$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : OfflineRegion$OfflineRegionDeleteCallback.fromReference(reference);
+      : OfflineRegion$OfflineRegionDeleteCallback.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -596,7 +625,9 @@ final class $OfflineRegion$OfflineRegionDeleteCallback$Type
   @core$_.override
   OfflineRegion$OfflineRegionDeleteCallback fromReference(
     jni$_.JReference reference,
-  ) => OfflineRegion$OfflineRegionDeleteCallback.fromReference(reference);
+  ) => OfflineRegion$OfflineRegionDeleteCallback.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -695,7 +726,9 @@ class OfflineRegion$OfflineRegionInvalidateCallback extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onError(java.lang.String string)`
-  void onError(jni$_.JString string) {
+  void onError(
+    jni$_.JString string,
+  ) {
     final _$string = string.reference;
     _onError(
       reference.pointer,
@@ -714,7 +747,11 @@ class OfflineRegion$OfflineRegionInvalidateCallback extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -841,7 +878,9 @@ final class $OfflineRegion$OfflineRegionInvalidateCallback$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : OfflineRegion$OfflineRegionInvalidateCallback.fromReference(reference);
+      : OfflineRegion$OfflineRegionInvalidateCallback.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -881,7 +920,9 @@ final class $OfflineRegion$OfflineRegionInvalidateCallback$Type
   @core$_.override
   OfflineRegion$OfflineRegionInvalidateCallback fromReference(
     jni$_.JReference reference,
-  ) => OfflineRegion$OfflineRegionInvalidateCallback.fromReference(reference);
+  ) => OfflineRegion$OfflineRegionInvalidateCallback.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -915,8 +956,9 @@ class OfflineRegion$OfflineRegionObserver extends jni$_.JObject {
   final jni$_.JObjType<OfflineRegion$OfflineRegionObserver> $type;
 
   @jni$_.internal
-  OfflineRegion$OfflineRegionObserver.fromReference(jni$_.JReference reference)
-    : $type = type,
+  OfflineRegion$OfflineRegionObserver.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -986,7 +1028,9 @@ class OfflineRegion$OfflineRegionObserver extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onError(org.maplibre.android.offline.OfflineRegionError offlineRegionError)`
-  void onError(offlineregionerror$_.OfflineRegionError offlineRegionError) {
+  void onError(
+    offlineregionerror$_.OfflineRegionError offlineRegionError,
+  ) {
     final _$offlineRegionError = offlineRegionError.reference;
     _onError(
       reference.pointer,
@@ -1019,7 +1063,9 @@ class OfflineRegion$OfflineRegionObserver extends jni$_.JObject {
           >();
 
   /// from: `public abstract void mapboxTileCountLimitExceeded(long j)`
-  void mapboxTileCountLimitExceeded(int j) {
+  void mapboxTileCountLimitExceeded(
+    int j,
+  ) {
     _mapboxTileCountLimitExceeded(
       reference.pointer,
       _id_mapboxTileCountLimitExceeded as jni$_.JMethodIDPtr,
@@ -1037,7 +1083,11 @@ class OfflineRegion$OfflineRegionObserver extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -1221,7 +1271,9 @@ final class $OfflineRegion$OfflineRegionObserver$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : OfflineRegion$OfflineRegionObserver.fromReference(reference);
+      : OfflineRegion$OfflineRegionObserver.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -1260,7 +1312,9 @@ final class $OfflineRegion$OfflineRegionObserver$Type
   @core$_.override
   OfflineRegion$OfflineRegionObserver fromReference(
     jni$_.JReference reference,
-  ) => OfflineRegion$OfflineRegionObserver.fromReference(reference);
+  ) => OfflineRegion$OfflineRegionObserver.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -1364,7 +1418,9 @@ class OfflineRegion$OfflineRegionStatusCallback extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onError(java.lang.String string)`
-  void onError(jni$_.JString? string) {
+  void onError(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _onError(
       reference.pointer,
@@ -1383,7 +1439,11 @@ class OfflineRegion$OfflineRegionStatusCallback extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -1528,7 +1588,9 @@ final class $OfflineRegion$OfflineRegionStatusCallback$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : OfflineRegion$OfflineRegionStatusCallback.fromReference(reference);
+      : OfflineRegion$OfflineRegionStatusCallback.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -1568,7 +1630,9 @@ final class $OfflineRegion$OfflineRegionStatusCallback$Type
   @core$_.override
   OfflineRegion$OfflineRegionStatusCallback fromReference(
     jni$_.JReference reference,
-  ) => OfflineRegion$OfflineRegionStatusCallback.fromReference(reference);
+  ) => OfflineRegion$OfflineRegionStatusCallback.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -1614,7 +1678,10 @@ class OfflineRegion$OfflineRegionUpdateMetadataCallback extends jni$_.JObject {
   static const nullableType =
       $OfflineRegion$OfflineRegionUpdateMetadataCallback$NullableType();
   static const type = $OfflineRegion$OfflineRegionUpdateMetadataCallback$Type();
-  static final _id_onUpdate = _class.instanceMethodId(r'onUpdate', r'([B)V');
+  static final _id_onUpdate = _class.instanceMethodId(
+    r'onUpdate',
+    r'([B)V',
+  );
 
   static final _onUpdate =
       jni$_.ProtectedJniExtensions.lookup<
@@ -1635,7 +1702,9 @@ class OfflineRegion$OfflineRegionUpdateMetadataCallback extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onUpdate(byte[] bs)`
-  void onUpdate(jni$_.JByteArray bs) {
+  void onUpdate(
+    jni$_.JByteArray bs,
+  ) {
     final _$bs = bs.reference;
     _onUpdate(
       reference.pointer,
@@ -1668,7 +1737,9 @@ class OfflineRegion$OfflineRegionUpdateMetadataCallback extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onError(java.lang.String string)`
-  void onError(jni$_.JString string) {
+  void onError(
+    jni$_.JString string,
+  ) {
     final _$string = string.reference;
     _onError(
       reference.pointer,
@@ -1690,7 +1761,11 @@ class OfflineRegion$OfflineRegionUpdateMetadataCallback extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -1899,8 +1974,9 @@ class OfflineRegion extends jni$_.JObject {
   final jni$_.JObjType<OfflineRegion> $type;
 
   @jni$_.internal
-  OfflineRegion.fromReference(jni$_.JReference reference)
-    : $type = type,
+  OfflineRegion.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -1925,7 +2001,10 @@ class OfflineRegion extends jni$_.JObject {
 
   /// from: `static public final int STATE_ACTIVE`
   static const STATE_ACTIVE = 1;
-  static final _id_getId = _class.instanceMethodId(r'getId', r'()J');
+  static final _id_getId = _class.instanceMethodId(
+    r'getId',
+    r'()J',
+  );
 
   static final _getId =
       jni$_.ProtectedJniExtensions.lookup<
@@ -2063,7 +2142,9 @@ class OfflineRegion extends jni$_.JObject {
           >();
 
   /// from: `public final void setDeliverInactiveMessages(boolean z)`
-  void setDeliverInactiveMessages(bool z) {
+  void setDeliverInactiveMessages(
+    bool z,
+  ) {
     _setDeliverInactiveMessages(
       reference.pointer,
       _id_setDeliverInactiveMessages as jni$_.JMethodIDPtr,
@@ -2095,7 +2176,9 @@ class OfflineRegion extends jni$_.JObject {
           >();
 
   /// from: `public final void setObserver(org.maplibre.android.offline.OfflineRegion$OfflineRegionObserver offlineRegionObserver)`
-  void setObserver(OfflineRegion$OfflineRegionObserver? offlineRegionObserver) {
+  void setObserver(
+    OfflineRegion$OfflineRegionObserver? offlineRegionObserver,
+  ) {
     final _$offlineRegionObserver =
         offlineRegionObserver?.reference ?? jni$_.jNullReference;
     _setObserver(
@@ -2129,7 +2212,9 @@ class OfflineRegion extends jni$_.JObject {
           >();
 
   /// from: `public final void setDownloadState(int i)`
-  void setDownloadState(int i) {
+  void setDownloadState(
+    int i,
+  ) {
     _setDownloadState(
       reference.pointer,
       _id_setDownloadState as jni$_.JMethodIDPtr,
@@ -2298,8 +2383,11 @@ final class $OfflineRegion$NullableType extends jni$_.JObjType<OfflineRegion?> {
 
   @jni$_.internal
   @core$_.override
-  OfflineRegion? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : OfflineRegion.fromReference(reference);
+  OfflineRegion? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : OfflineRegion.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -2333,7 +2421,9 @@ final class $OfflineRegion$Type extends jni$_.JObjType<OfflineRegion> {
   @jni$_.internal
   @core$_.override
   OfflineRegion fromReference(jni$_.JReference reference) =>
-      OfflineRegion.fromReference(reference);
+      OfflineRegion.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();

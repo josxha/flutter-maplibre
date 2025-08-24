@@ -45,8 +45,9 @@ class InvalidMarkerPositionException extends jni$_.JObject {
   final jni$_.JObjType<InvalidMarkerPositionException> $type;
 
   @jni$_.internal
-  InvalidMarkerPositionException.fromReference(jni$_.JReference reference)
-    : $type = type,
+  InvalidMarkerPositionException.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -56,7 +57,9 @@ class InvalidMarkerPositionException extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $InvalidMarkerPositionException$NullableType();
   static const type = $InvalidMarkerPositionException$Type();
-  static final _id_new$ = _class.constructorId(r'()V');
+  static final _id_new$ = _class.constructorId(
+    r'()V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -98,7 +101,9 @@ final class $InvalidMarkerPositionException$NullableType
   InvalidMarkerPositionException? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : InvalidMarkerPositionException.fromReference(reference);
+      : InvalidMarkerPositionException.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -135,7 +140,9 @@ final class $InvalidMarkerPositionException$Type
   @jni$_.internal
   @core$_.override
   InvalidMarkerPositionException fromReference(jni$_.JReference reference) =>
-      InvalidMarkerPositionException.fromReference(reference);
+      InvalidMarkerPositionException.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

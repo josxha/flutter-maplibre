@@ -45,8 +45,9 @@ class BitmapUtils extends jni$_.JObject {
   final jni$_.JObjType<BitmapUtils> $type;
 
   @jni$_.internal
-  BitmapUtils.fromReference(jni$_.JReference reference)
-    : $type = type,
+  BitmapUtils.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -56,7 +57,9 @@ class BitmapUtils extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $BitmapUtils$NullableType();
   static const type = $BitmapUtils$Type();
-  static final _id_new$ = _class.constructorId(r'()V');
+  static final _id_new$ = _class.constructorId(
+    r'()V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -107,7 +110,9 @@ class BitmapUtils extends jni$_.JObject {
 
   /// from: `static public android.graphics.Bitmap createBitmapFromView(android.view.View view)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni$_.JObject? createBitmapFromView(jni$_.JObject view) {
+  static jni$_.JObject? createBitmapFromView(
+    jni$_.JObject view,
+  ) {
     final _$view = view.reference;
     return _createBitmapFromView(
       _class.reference.pointer,
@@ -278,7 +283,9 @@ class BitmapUtils extends jni$_.JObject {
 
   /// from: `static public android.graphics.Bitmap getBitmapFromDrawable(android.graphics.drawable.Drawable drawable)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni$_.JObject? getBitmapFromDrawable(jni$_.JObject? drawable) {
+  static jni$_.JObject? getBitmapFromDrawable(
+    jni$_.JObject? drawable,
+  ) {
     final _$drawable = drawable?.reference ?? jni$_.jNullReference;
     return _getBitmapFromDrawable(
       _class.reference.pointer,
@@ -312,7 +319,9 @@ class BitmapUtils extends jni$_.JObject {
 
   /// from: `static public byte[] getByteArrayFromDrawable(android.graphics.drawable.Drawable drawable)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni$_.JByteArray? getByteArrayFromDrawable(jni$_.JObject? drawable) {
+  static jni$_.JByteArray? getByteArrayFromDrawable(
+    jni$_.JObject? drawable,
+  ) {
     final _$drawable = drawable?.reference ?? jni$_.jNullReference;
     return _getByteArrayFromDrawable(
       _class.reference.pointer,
@@ -389,7 +398,10 @@ class BitmapUtils extends jni$_.JObject {
 
   /// from: `static public android.graphics.drawable.Drawable getDrawableFromRes(android.content.Context context, int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni$_.JObject? getDrawableFromRes(jni$_.JObject context, int i) {
+  static jni$_.JObject? getDrawableFromRes(
+    jni$_.JObject context,
+    int i,
+  ) {
     final _$context = context.reference;
     return _getDrawableFromRes(
       _class.reference.pointer,
@@ -475,7 +487,10 @@ class BitmapUtils extends jni$_.JObject {
           >();
 
   /// from: `static public boolean equals(android.graphics.Bitmap bitmap, android.graphics.Bitmap bitmap1)`
-  static bool equals(jni$_.JObject? bitmap, jni$_.JObject? bitmap1) {
+  static bool equals(
+    jni$_.JObject? bitmap,
+    jni$_.JObject? bitmap1,
+  ) {
     final _$bitmap = bitmap?.reference ?? jni$_.jNullReference;
     final _$bitmap1 = bitmap1?.reference ?? jni$_.jNullReference;
     return _equals(
@@ -497,8 +512,11 @@ final class $BitmapUtils$NullableType extends jni$_.JObjType<BitmapUtils?> {
 
   @jni$_.internal
   @core$_.override
-  BitmapUtils? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : BitmapUtils.fromReference(reference);
+  BitmapUtils? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : BitmapUtils.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -532,7 +550,9 @@ final class $BitmapUtils$Type extends jni$_.JObjType<BitmapUtils> {
   @jni$_.internal
   @core$_.override
   BitmapUtils fromReference(jni$_.JReference reference) =>
-      BitmapUtils.fromReference(reference);
+      BitmapUtils.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

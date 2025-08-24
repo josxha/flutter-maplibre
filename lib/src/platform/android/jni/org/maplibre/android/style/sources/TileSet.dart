@@ -49,8 +49,9 @@ class TileSet extends jni$_.JObject {
   final jni$_.JObjType<TileSet> $type;
 
   @jni$_.internal
-  TileSet.fromReference(jni$_.JReference reference)
-    : $type = type,
+  TileSet.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -117,7 +118,10 @@ class TileSet extends jni$_.JObject {
 
   /// from: `public void <init>(java.lang.String string, java.lang.String[] strings)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory TileSet(jni$_.JString string, jni$_.JArray<jni$_.JString> strings) {
+  factory TileSet(
+    jni$_.JString string,
+    jni$_.JArray<jni$_.JString> strings,
+  ) {
     final _$string = string.reference;
     final _$strings = strings.reference;
     return TileSet.fromReference(
@@ -214,7 +218,9 @@ class TileSet extends jni$_.JObject {
           >();
 
   /// from: `public final void setName(java.lang.String string)`
-  void setName(jni$_.JString? string) {
+  void setName(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setName(
       reference.pointer,
@@ -277,7 +283,9 @@ class TileSet extends jni$_.JObject {
           >();
 
   /// from: `public final void setDescription(java.lang.String string)`
-  void setDescription(jni$_.JString? string) {
+  void setDescription(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setDescription(
       reference.pointer,
@@ -340,7 +348,9 @@ class TileSet extends jni$_.JObject {
           >();
 
   /// from: `public final void setVersion(java.lang.String string)`
-  void setVersion(jni$_.JString? string) {
+  void setVersion(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setVersion(
       reference.pointer,
@@ -403,7 +413,9 @@ class TileSet extends jni$_.JObject {
           >();
 
   /// from: `public final void setAttribution(java.lang.String string)`
-  void setAttribution(jni$_.JString? string) {
+  void setAttribution(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setAttribution(
       reference.pointer,
@@ -466,7 +478,9 @@ class TileSet extends jni$_.JObject {
           >();
 
   /// from: `public final void setTemplate(java.lang.String string)`
-  void setTemplate(jni$_.JString? string) {
+  void setTemplate(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setTemplate(
       reference.pointer,
@@ -529,7 +543,9 @@ class TileSet extends jni$_.JObject {
           >();
 
   /// from: `public final void setLegend(java.lang.String string)`
-  void setLegend(jni$_.JString? string) {
+  void setLegend(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setLegend(
       reference.pointer,
@@ -592,7 +608,9 @@ class TileSet extends jni$_.JObject {
           >();
 
   /// from: `public final void setScheme(java.lang.String string)`
-  void setScheme(jni$_.JString? string) {
+  void setScheme(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setScheme(
       reference.pointer,
@@ -815,7 +833,9 @@ class TileSet extends jni$_.JObject {
           >();
 
   /// from: `public final void setEncoding(java.lang.String string)`
-  void setEncoding(jni$_.JString? string) {
+  void setEncoding(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setEncoding(
       reference.pointer,
@@ -848,7 +868,9 @@ class TileSet extends jni$_.JObject {
           >();
 
   /// from: `public final void setGrids(java.lang.String[] strings)`
-  void setGrids(jni$_.JArray<jni$_.JString> strings) {
+  void setGrids(
+    jni$_.JArray<jni$_.JString> strings,
+  ) {
     final _$strings = strings.reference;
     _setGrids(
       reference.pointer,
@@ -881,7 +903,9 @@ class TileSet extends jni$_.JObject {
           >();
 
   /// from: `public final void setData(java.lang.String[] strings)`
-  void setData(jni$_.JArray<jni$_.JString> strings) {
+  void setData(
+    jni$_.JArray<jni$_.JString> strings,
+  ) {
     final _$strings = strings.reference;
     _setData(
       reference.pointer,
@@ -890,7 +914,10 @@ class TileSet extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_getMinZoom = _class.instanceMethodId(r'getMinZoom', r'()F');
+  static final _id_getMinZoom = _class.instanceMethodId(
+    r'getMinZoom',
+    r'()F',
+  );
 
   static final _getMinZoom =
       jni$_.ProtectedJniExtensions.lookup<
@@ -916,7 +943,10 @@ class TileSet extends jni$_.JObject {
     ).float;
   }
 
-  static final _id_setMinZoom = _class.instanceMethodId(r'setMinZoom', r'(F)V');
+  static final _id_setMinZoom = _class.instanceMethodId(
+    r'setMinZoom',
+    r'(F)V',
+  );
 
   static final _setMinZoom =
       jni$_.ProtectedJniExtensions.lookup<
@@ -937,7 +967,9 @@ class TileSet extends jni$_.JObject {
           >();
 
   /// from: `public final void setMinZoom(float f)`
-  void setMinZoom(double f) {
+  void setMinZoom(
+    double f,
+  ) {
     _setMinZoom(
       reference.pointer,
       _id_setMinZoom as jni$_.JMethodIDPtr,
@@ -945,7 +977,10 @@ class TileSet extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_getMaxZoom = _class.instanceMethodId(r'getMaxZoom', r'()F');
+  static final _id_getMaxZoom = _class.instanceMethodId(
+    r'getMaxZoom',
+    r'()F',
+  );
 
   static final _getMaxZoom =
       jni$_.ProtectedJniExtensions.lookup<
@@ -971,7 +1006,10 @@ class TileSet extends jni$_.JObject {
     ).float;
   }
 
-  static final _id_setMaxZoom = _class.instanceMethodId(r'setMaxZoom', r'(F)V');
+  static final _id_setMaxZoom = _class.instanceMethodId(
+    r'setMaxZoom',
+    r'(F)V',
+  );
 
   static final _setMaxZoom =
       jni$_.ProtectedJniExtensions.lookup<
@@ -992,7 +1030,9 @@ class TileSet extends jni$_.JObject {
           >();
 
   /// from: `public final void setMaxZoom(float f)`
-  void setMaxZoom(double f) {
+  void setMaxZoom(
+    double f,
+  ) {
     _setMaxZoom(
       reference.pointer,
       _id_setMaxZoom as jni$_.JMethodIDPtr,
@@ -1000,7 +1040,10 @@ class TileSet extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_setBounds = _class.instanceMethodId(r'setBounds', r'([F)V');
+  static final _id_setBounds = _class.instanceMethodId(
+    r'setBounds',
+    r'([F)V',
+  );
 
   static final _setBounds =
       jni$_.ProtectedJniExtensions.lookup<
@@ -1021,7 +1064,9 @@ class TileSet extends jni$_.JObject {
           >();
 
   /// from: `public final void setBounds(float[] fs)`
-  void setBounds(jni$_.JFloatArray fs) {
+  void setBounds(
+    jni$_.JFloatArray fs,
+  ) {
     final _$fs = fs.reference;
     _setBounds(
       reference.pointer,
@@ -1059,7 +1104,12 @@ class TileSet extends jni$_.JObject {
           >();
 
   /// from: `public final void setBounds(float f, float f1, float f2, float f3)`
-  void setBounds$1(double f, double f1, double f2, double f3) {
+  void setBounds$1(
+    double f,
+    double f1,
+    double f2,
+    double f3,
+  ) {
     _setBounds$1(
       reference.pointer,
       _id_setBounds$1 as jni$_.JMethodIDPtr,
@@ -1094,7 +1144,9 @@ class TileSet extends jni$_.JObject {
           >();
 
   /// from: `public final void setBounds(java.lang.Float[] floats)`
-  void setBounds$2(jni$_.JArray<jni$_.JFloat> floats) {
+  void setBounds$2(
+    jni$_.JArray<jni$_.JFloat> floats,
+  ) {
     final _$floats = floats.reference;
     _setBounds$2(
       reference.pointer,
@@ -1127,7 +1179,9 @@ class TileSet extends jni$_.JObject {
           >();
 
   /// from: `public final void setBounds(org.maplibre.android.geometry.LatLngBounds latLngBounds)`
-  void setBounds$3(latlngbounds$_.LatLngBounds latLngBounds) {
+  void setBounds$3(
+    latlngbounds$_.LatLngBounds latLngBounds,
+  ) {
     final _$latLngBounds = latLngBounds.reference;
     _setBounds$3(
       reference.pointer,
@@ -1136,7 +1190,10 @@ class TileSet extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_setCenter = _class.instanceMethodId(r'setCenter', r'([F)V');
+  static final _id_setCenter = _class.instanceMethodId(
+    r'setCenter',
+    r'([F)V',
+  );
 
   static final _setCenter =
       jni$_.ProtectedJniExtensions.lookup<
@@ -1157,7 +1214,9 @@ class TileSet extends jni$_.JObject {
           >();
 
   /// from: `public final void setCenter(float[] fs)`
-  void setCenter(jni$_.JFloatArray fs) {
+  void setCenter(
+    jni$_.JFloatArray fs,
+  ) {
     final _$fs = fs.reference;
     _setCenter(
       reference.pointer,
@@ -1190,7 +1249,9 @@ class TileSet extends jni$_.JObject {
           >();
 
   /// from: `public final void setCenter(org.maplibre.android.geometry.LatLng latLng)`
-  void setCenter$1(latlng$_.LatLng latLng) {
+  void setCenter$1(
+    latlng$_.LatLng latLng,
+  ) {
     final _$latLng = latLng.reference;
     _setCenter$1(
       reference.pointer,
@@ -1245,8 +1306,11 @@ final class $TileSet$NullableType extends jni$_.JObjType<TileSet?> {
 
   @jni$_.internal
   @core$_.override
-  TileSet? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : TileSet.fromReference(reference);
+  TileSet? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : TileSet.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -1279,8 +1343,9 @@ final class $TileSet$Type extends jni$_.JObjType<TileSet> {
 
   @jni$_.internal
   @core$_.override
-  TileSet fromReference(jni$_.JReference reference) =>
-      TileSet.fromReference(reference);
+  TileSet fromReference(jni$_.JReference reference) => TileSet.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();

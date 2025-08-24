@@ -51,8 +51,9 @@ class Transform extends jni$_.JObject {
   final jni$_.JObjType<Transform> $type;
 
   @jni$_.internal
-  Transform.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Transform.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -118,7 +119,9 @@ class Transform extends jni$_.JObject {
           >();
 
   /// from: `public void onCameraDidChange(boolean z)`
-  void onCameraDidChange(bool z) {
+  void onCameraDidChange(
+    bool z,
+  ) {
     _onCameraDidChange(
       reference.pointer,
       _id_onCameraDidChange as jni$_.JMethodIDPtr,
@@ -241,8 +244,11 @@ final class $Transform$NullableType extends jni$_.JObjType<Transform?> {
 
   @jni$_.internal
   @core$_.override
-  Transform? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : Transform.fromReference(reference);
+  Transform? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : Transform.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -276,7 +282,9 @@ final class $Transform$Type extends jni$_.JObjType<Transform> {
   @jni$_.internal
   @core$_.override
   Transform fromReference(jni$_.JReference reference) =>
-      Transform.fromReference(reference);
+      Transform.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

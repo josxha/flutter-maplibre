@@ -45,8 +45,9 @@ class EGLWindowSurfaceFactory extends jni$_.JObject {
   final jni$_.JObjType<EGLWindowSurfaceFactory> $type;
 
   @jni$_.internal
-  EGLWindowSurfaceFactory.fromReference(jni$_.JReference reference)
-    : $type = type,
+  EGLWindowSurfaceFactory.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -56,7 +57,9 @@ class EGLWindowSurfaceFactory extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $EGLWindowSurfaceFactory$NullableType();
   static const type = $EGLWindowSurfaceFactory$Type();
-  static final _id_new$ = _class.constructorId(r'()V');
+  static final _id_new$ = _class.constructorId(
+    r'()V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -202,7 +205,9 @@ final class $EGLWindowSurfaceFactory$NullableType
   EGLWindowSurfaceFactory? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : EGLWindowSurfaceFactory.fromReference(reference);
+      : EGLWindowSurfaceFactory.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -238,7 +243,9 @@ final class $EGLWindowSurfaceFactory$Type
   @jni$_.internal
   @core$_.override
   EGLWindowSurfaceFactory fromReference(jni$_.JReference reference) =>
-      EGLWindowSurfaceFactory.fromReference(reference);
+      EGLWindowSurfaceFactory.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

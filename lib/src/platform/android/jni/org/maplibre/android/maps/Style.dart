@@ -61,8 +61,9 @@ class Style$Builder$ImageWrapper extends jni$_.JObject {
   final jni$_.JObjType<Style$Builder$ImageWrapper> $type;
 
   @jni$_.internal
-  Style$Builder$ImageWrapper.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Style$Builder$ImageWrapper.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -247,7 +248,10 @@ class Style$Builder$ImageWrapper extends jni$_.JObject {
     ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
-  static final _id_isSdf = _class.instanceMethodId(r'isSdf', r'()Z');
+  static final _id_isSdf = _class.instanceMethodId(
+    r'isSdf',
+    r'()Z',
+  );
 
   static final _isSdf =
       jni$_.ProtectedJniExtensions.lookup<
@@ -492,7 +496,9 @@ final class $Style$Builder$ImageWrapper$NullableType
   Style$Builder$ImageWrapper? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : Style$Builder$ImageWrapper.fromReference(reference);
+      : Style$Builder$ImageWrapper.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -528,7 +534,9 @@ final class $Style$Builder$ImageWrapper$Type
   @jni$_.internal
   @core$_.override
   Style$Builder$ImageWrapper fromReference(jni$_.JReference reference) =>
-      Style$Builder$ImageWrapper.fromReference(reference);
+      Style$Builder$ImageWrapper.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -559,8 +567,9 @@ class Style$Builder$LayerAboveWrapper extends Style$Builder$LayerWrapper {
   final jni$_.JObjType<Style$Builder$LayerAboveWrapper> $type;
 
   @jni$_.internal
-  Style$Builder$LayerAboveWrapper.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Style$Builder$LayerAboveWrapper.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -616,7 +625,9 @@ final class $Style$Builder$LayerAboveWrapper$NullableType
   Style$Builder$LayerAboveWrapper? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : Style$Builder$LayerAboveWrapper.fromReference(reference);
+      : Style$Builder$LayerAboveWrapper.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>
@@ -654,7 +665,9 @@ final class $Style$Builder$LayerAboveWrapper$Type
   @jni$_.internal
   @core$_.override
   Style$Builder$LayerAboveWrapper fromReference(jni$_.JReference reference) =>
-      Style$Builder$LayerAboveWrapper.fromReference(reference);
+      Style$Builder$LayerAboveWrapper.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>
@@ -686,8 +699,9 @@ class Style$Builder$LayerAtWrapper extends Style$Builder$LayerWrapper {
   final jni$_.JObjType<Style$Builder$LayerAtWrapper> $type;
 
   @jni$_.internal
-  Style$Builder$LayerAtWrapper.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Style$Builder$LayerAtWrapper.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -697,7 +711,10 @@ class Style$Builder$LayerAtWrapper extends Style$Builder$LayerWrapper {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Style$Builder$LayerAtWrapper$NullableType();
   static const type = $Style$Builder$LayerAtWrapper$Type();
-  static final _id_getIndex = _class.instanceMethodId(r'getIndex', r'()I');
+  static final _id_getIndex = _class.instanceMethodId(
+    r'getIndex',
+    r'()I',
+  );
 
   static final _getIndex =
       jni$_.ProtectedJniExtensions.lookup<
@@ -739,7 +756,9 @@ final class $Style$Builder$LayerAtWrapper$NullableType
   Style$Builder$LayerAtWrapper? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : Style$Builder$LayerAtWrapper.fromReference(reference);
+      : Style$Builder$LayerAtWrapper.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>
@@ -776,7 +795,9 @@ final class $Style$Builder$LayerAtWrapper$Type
   @jni$_.internal
   @core$_.override
   Style$Builder$LayerAtWrapper fromReference(jni$_.JReference reference) =>
-      Style$Builder$LayerAtWrapper.fromReference(reference);
+      Style$Builder$LayerAtWrapper.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>
@@ -808,8 +829,9 @@ class Style$Builder$LayerBelowWrapper extends Style$Builder$LayerWrapper {
   final jni$_.JObjType<Style$Builder$LayerBelowWrapper> $type;
 
   @jni$_.internal
-  Style$Builder$LayerBelowWrapper.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Style$Builder$LayerBelowWrapper.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -865,7 +887,9 @@ final class $Style$Builder$LayerBelowWrapper$NullableType
   Style$Builder$LayerBelowWrapper? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : Style$Builder$LayerBelowWrapper.fromReference(reference);
+      : Style$Builder$LayerBelowWrapper.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>
@@ -903,7 +927,9 @@ final class $Style$Builder$LayerBelowWrapper$Type
   @jni$_.internal
   @core$_.override
   Style$Builder$LayerBelowWrapper fromReference(jni$_.JReference reference) =>
-      Style$Builder$LayerBelowWrapper.fromReference(reference);
+      Style$Builder$LayerBelowWrapper.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>
@@ -935,8 +961,9 @@ class Style$Builder$LayerWrapper extends jni$_.JObject {
   final jni$_.JObjType<Style$Builder$LayerWrapper> $type;
 
   @jni$_.internal
-  Style$Builder$LayerWrapper.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Style$Builder$LayerWrapper.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -992,7 +1019,9 @@ final class $Style$Builder$LayerWrapper$NullableType
   Style$Builder$LayerWrapper? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : Style$Builder$LayerWrapper.fromReference(reference);
+      : Style$Builder$LayerWrapper.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1028,7 +1057,9 @@ final class $Style$Builder$LayerWrapper$Type
   @jni$_.internal
   @core$_.override
   Style$Builder$LayerWrapper fromReference(jni$_.JReference reference) =>
-      Style$Builder$LayerWrapper.fromReference(reference);
+      Style$Builder$LayerWrapper.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1059,8 +1090,9 @@ class Style$Builder extends jni$_.JObject {
   final jni$_.JObjType<Style$Builder> $type;
 
   @jni$_.internal
-  Style$Builder.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Style$Builder.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -1070,7 +1102,9 @@ class Style$Builder extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Style$Builder$NullableType();
   static const type = $Style$Builder$Type();
-  static final _id_new$ = _class.constructorId(r'()V');
+  static final _id_new$ = _class.constructorId(
+    r'()V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -1121,7 +1155,9 @@ class Style$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.Style$Builder fromUrl(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  Style$Builder fromUrl(jni$_.JString string) {
+  Style$Builder fromUrl(
+    jni$_.JString string,
+  ) {
     final _$string = string.reference;
     return _fromUrl(
       reference.pointer,
@@ -1155,7 +1191,9 @@ class Style$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.Style$Builder fromUri(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  Style$Builder fromUri(jni$_.JString string) {
+  Style$Builder fromUri(
+    jni$_.JString string,
+  ) {
     final _$string = string.reference;
     return _fromUri(
       reference.pointer,
@@ -1189,7 +1227,9 @@ class Style$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.Style$Builder fromJson(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  Style$Builder fromJson(jni$_.JString string) {
+  Style$Builder fromJson(
+    jni$_.JString string,
+  ) {
     final _$string = string.reference;
     return _fromJson(
       reference.pointer,
@@ -1223,7 +1263,9 @@ class Style$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.Style$Builder withSource(org.maplibre.android.style.sources.Source source)`
   /// The returned object must be released after use, by calling the [release] method.
-  Style$Builder withSource(source$_.Source source) {
+  Style$Builder withSource(
+    source$_.Source source,
+  ) {
     final _$source = source.reference;
     return _withSource(
       reference.pointer,
@@ -1257,7 +1299,9 @@ class Style$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.Style$Builder withSources(org.maplibre.android.style.sources.Source[] sources)`
   /// The returned object must be released after use, by calling the [release] method.
-  Style$Builder withSources(jni$_.JArray<source$_.Source?> sources) {
+  Style$Builder withSources(
+    jni$_.JArray<source$_.Source?> sources,
+  ) {
     final _$sources = sources.reference;
     return _withSources(
       reference.pointer,
@@ -1291,7 +1335,9 @@ class Style$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.Style$Builder withLayer(org.maplibre.android.style.layers.Layer layer)`
   /// The returned object must be released after use, by calling the [release] method.
-  Style$Builder withLayer(layer$_.Layer layer) {
+  Style$Builder withLayer(
+    layer$_.Layer layer,
+  ) {
     final _$layer = layer.reference;
     return _withLayer(
       reference.pointer,
@@ -1325,7 +1371,9 @@ class Style$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.Style$Builder withLayers(org.maplibre.android.style.layers.Layer[] layers)`
   /// The returned object must be released after use, by calling the [release] method.
-  Style$Builder withLayers(jni$_.JArray<layer$_.Layer?> layers) {
+  Style$Builder withLayers(
+    jni$_.JArray<layer$_.Layer?> layers,
+  ) {
     final _$layers = layers.reference;
     return _withLayers(
       reference.pointer,
@@ -1360,7 +1408,10 @@ class Style$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.Style$Builder withLayerAt(org.maplibre.android.style.layers.Layer layer, int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  Style$Builder withLayerAt(layer$_.Layer layer, int i) {
+  Style$Builder withLayerAt(
+    layer$_.Layer layer,
+    int i,
+  ) {
     final _$layer = layer.reference;
     return _withLayerAt(
       reference.pointer,
@@ -1398,7 +1449,10 @@ class Style$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.Style$Builder withLayerAbove(org.maplibre.android.style.layers.Layer layer, java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  Style$Builder withLayerAbove(layer$_.Layer layer, jni$_.JString string) {
+  Style$Builder withLayerAbove(
+    layer$_.Layer layer,
+    jni$_.JString string,
+  ) {
     final _$layer = layer.reference;
     final _$string = string.reference;
     return _withLayerAbove(
@@ -1437,7 +1491,10 @@ class Style$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.Style$Builder withLayerBelow(org.maplibre.android.style.layers.Layer layer, java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  Style$Builder withLayerBelow(layer$_.Layer layer, jni$_.JString string) {
+  Style$Builder withLayerBelow(
+    layer$_.Layer layer,
+    jni$_.JString string,
+  ) {
     final _$layer = layer.reference;
     final _$string = string.reference;
     return _withLayerBelow(
@@ -1512,7 +1569,10 @@ class Style$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.Style$Builder withImage(java.lang.String string, android.graphics.drawable.Drawable drawable)`
   /// The returned object must be released after use, by calling the [release] method.
-  Style$Builder withImage(jni$_.JString string, jni$_.JObject drawable) {
+  Style$Builder withImage(
+    jni$_.JString string,
+    jni$_.JObject drawable,
+  ) {
     final _$string = string.reference;
     final _$drawable = drawable.reference;
     return _withImage(
@@ -1608,7 +1668,9 @@ class Style$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.Style$Builder withDrawableImages(android.util.Pair[] pairs)`
   /// The returned object must be released after use, by calling the [release] method.
-  Style$Builder withDrawableImages(jni$_.JArray<jni$_.JObject?> pairs) {
+  Style$Builder withDrawableImages(
+    jni$_.JArray<jni$_.JObject?> pairs,
+  ) {
     final _$pairs = pairs.reference;
     return _withDrawableImages(
       reference.pointer,
@@ -1645,7 +1707,10 @@ class Style$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.Style$Builder withImage(java.lang.String string, android.graphics.Bitmap bitmap)`
   /// The returned object must be released after use, by calling the [release] method.
-  Style$Builder withImage$2(jni$_.JString string, jni$_.JObject bitmap) {
+  Style$Builder withImage$2(
+    jni$_.JString string,
+    jni$_.JObject bitmap,
+  ) {
     final _$string = string.reference;
     final _$bitmap = bitmap.reference;
     return _withImage$2(
@@ -1741,7 +1806,9 @@ class Style$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.Style$Builder withBitmapImages(android.util.Pair[] pairs)`
   /// The returned object must be released after use, by calling the [release] method.
-  Style$Builder withBitmapImages(jni$_.JArray<jni$_.JObject?> pairs) {
+  Style$Builder withBitmapImages(
+    jni$_.JArray<jni$_.JObject?> pairs,
+  ) {
     final _$pairs = pairs.reference;
     return _withBitmapImages(
       reference.pointer,
@@ -2041,7 +2108,10 @@ class Style$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.maps.Style$Builder withBitmapImages(boolean z, android.util.Pair[] pairs)`
   /// The returned object must be released after use, by calling the [release] method.
-  Style$Builder withBitmapImages$1(bool z, jni$_.JArray<jni$_.JObject?> pairs) {
+  Style$Builder withBitmapImages$1(
+    bool z,
+    jni$_.JArray<jni$_.JObject?> pairs,
+  ) {
     final _$pairs = pairs.reference;
     return _withBitmapImages$1(
       reference.pointer,
@@ -2224,8 +2294,11 @@ final class $Style$Builder$NullableType extends jni$_.JObjType<Style$Builder?> {
 
   @jni$_.internal
   @core$_.override
-  Style$Builder? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : Style$Builder.fromReference(reference);
+  Style$Builder? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : Style$Builder.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2259,7 +2332,9 @@ final class $Style$Builder$Type extends jni$_.JObjType<Style$Builder> {
   @jni$_.internal
   @core$_.override
   Style$Builder fromReference(jni$_.JReference reference) =>
-      Style$Builder.fromReference(reference);
+      Style$Builder.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2290,8 +2365,9 @@ class Style$OnStyleLoaded extends jni$_.JObject {
   final jni$_.JObjType<Style$OnStyleLoaded> $type;
 
   @jni$_.internal
-  Style$OnStyleLoaded.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Style$OnStyleLoaded.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -2325,7 +2401,9 @@ class Style$OnStyleLoaded extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onStyleLoaded(org.maplibre.android.maps.Style style)`
-  void onStyleLoaded(Style style) {
+  void onStyleLoaded(
+    Style style,
+  ) {
     final _$style = style.reference;
     _onStyleLoaded(
       reference.pointer,
@@ -2343,7 +2421,11 @@ class Style$OnStyleLoaded extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -2401,10 +2483,14 @@ class Style$OnStyleLoaded extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Style$OnStyleLoaded.implement($Style$OnStyleLoaded $impl) {
+  factory Style$OnStyleLoaded.implement(
+    $Style$OnStyleLoaded $impl,
+  ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Style$OnStyleLoaded.fromReference($i.implementReference());
+    return Style$OnStyleLoaded.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -2444,7 +2530,11 @@ final class $Style$OnStyleLoaded$NullableType
   @jni$_.internal
   @core$_.override
   Style$OnStyleLoaded? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : Style$OnStyleLoaded.fromReference(reference);
+      reference.isNull
+      ? null
+      : Style$OnStyleLoaded.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2479,7 +2569,9 @@ final class $Style$OnStyleLoaded$Type
   @jni$_.internal
   @core$_.override
   Style$OnStyleLoaded fromReference(jni$_.JReference reference) =>
-      Style$OnStyleLoaded.fromReference(reference);
+      Style$OnStyleLoaded.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2510,8 +2602,9 @@ class Style extends jni$_.JObject {
   final jni$_.JObjType<Style> $type;
 
   @jni$_.internal
-  Style.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Style.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -2667,7 +2760,9 @@ class Style extends jni$_.JObject {
           >();
 
   /// from: `public void addSource(org.maplibre.android.style.sources.Source source)`
-  void addSource(source$_.Source source) {
+  void addSource(
+    source$_.Source source,
+  ) {
     final _$source = source.reference;
     _addSource(
       reference.pointer,
@@ -2701,7 +2796,9 @@ class Style extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.style.sources.Source getSource(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  source$_.Source? getSource(jni$_.JString? string) {
+  source$_.Source? getSource(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return _getSource(
       reference.pointer,
@@ -2771,7 +2868,9 @@ class Style extends jni$_.JObject {
           >();
 
   /// from: `public boolean removeSource(java.lang.String string)`
-  bool removeSource(jni$_.JString string) {
+  bool removeSource(
+    jni$_.JString string,
+  ) {
     final _$string = string.reference;
     return _removeSource(
       reference.pointer,
@@ -2804,7 +2903,9 @@ class Style extends jni$_.JObject {
           >();
 
   /// from: `public boolean removeSource(org.maplibre.android.style.sources.Source source)`
-  bool removeSource$1(source$_.Source source) {
+  bool removeSource$1(
+    source$_.Source source,
+  ) {
     final _$source = source.reference;
     return _removeSource$1(
       reference.pointer,
@@ -2837,7 +2938,9 @@ class Style extends jni$_.JObject {
           >();
 
   /// from: `public void addLayer(org.maplibre.android.style.layers.Layer layer)`
-  void addLayer(layer$_.Layer layer) {
+  void addLayer(
+    layer$_.Layer layer,
+  ) {
     final _$layer = layer.reference;
     _addLayer(
       reference.pointer,
@@ -2873,7 +2976,10 @@ class Style extends jni$_.JObject {
           >();
 
   /// from: `public void addLayerBelow(org.maplibre.android.style.layers.Layer layer, java.lang.String string)`
-  void addLayerBelow(layer$_.Layer layer, jni$_.JString string) {
+  void addLayerBelow(
+    layer$_.Layer layer,
+    jni$_.JString string,
+  ) {
     final _$layer = layer.reference;
     final _$string = string.reference;
     _addLayerBelow(
@@ -2911,7 +3017,10 @@ class Style extends jni$_.JObject {
           >();
 
   /// from: `public void addLayerAbove(org.maplibre.android.style.layers.Layer layer, java.lang.String string)`
-  void addLayerAbove(layer$_.Layer layer, jni$_.JString string) {
+  void addLayerAbove(
+    layer$_.Layer layer,
+    jni$_.JString string,
+  ) {
     final _$layer = layer.reference;
     final _$string = string.reference;
     _addLayerAbove(
@@ -2947,7 +3056,10 @@ class Style extends jni$_.JObject {
           >();
 
   /// from: `public void addLayerAt(org.maplibre.android.style.layers.Layer layer, int i)`
-  void addLayerAt(layer$_.Layer layer, int i) {
+  void addLayerAt(
+    layer$_.Layer layer,
+    int i,
+  ) {
     final _$layer = layer.reference;
     _addLayerAt(
       reference.pointer,
@@ -2982,7 +3094,9 @@ class Style extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.style.layers.Layer getLayer(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  layer$_.Layer? getLayer(jni$_.JString string) {
+  layer$_.Layer? getLayer(
+    jni$_.JString string,
+  ) {
     final _$string = string.reference;
     return _getLayer(
       reference.pointer,
@@ -3084,7 +3198,9 @@ class Style extends jni$_.JObject {
           >();
 
   /// from: `public boolean removeLayer(java.lang.String string)`
-  bool removeLayer(jni$_.JString string) {
+  bool removeLayer(
+    jni$_.JString string,
+  ) {
     final _$string = string.reference;
     return _removeLayer(
       reference.pointer,
@@ -3117,7 +3233,9 @@ class Style extends jni$_.JObject {
           >();
 
   /// from: `public boolean removeLayer(org.maplibre.android.style.layers.Layer layer)`
-  bool removeLayer$1(layer$_.Layer layer) {
+  bool removeLayer$1(
+    layer$_.Layer layer,
+  ) {
     final _$layer = layer.reference;
     return _removeLayer$1(
       reference.pointer,
@@ -3150,7 +3268,9 @@ class Style extends jni$_.JObject {
           >();
 
   /// from: `public boolean removeLayerAt(int i)`
-  bool removeLayerAt(int i) {
+  bool removeLayerAt(
+    int i,
+  ) {
     return _removeLayerAt(
       reference.pointer,
       _id_removeLayerAt as jni$_.JMethodIDPtr,
@@ -3185,7 +3305,10 @@ class Style extends jni$_.JObject {
           >();
 
   /// from: `public void addImage(java.lang.String string, android.graphics.Bitmap bitmap)`
-  void addImage(jni$_.JString string, jni$_.JObject bitmap) {
+  void addImage(
+    jni$_.JString string,
+    jni$_.JObject bitmap,
+  ) {
     final _$string = string.reference;
     final _$bitmap = bitmap.reference;
     _addImage(
@@ -3282,7 +3405,10 @@ class Style extends jni$_.JObject {
           >();
 
   /// from: `public void addImage(java.lang.String string, android.graphics.drawable.Drawable drawable)`
-  void addImage$2(jni$_.JString string, jni$_.JObject drawable) {
+  void addImage$2(
+    jni$_.JString string,
+    jni$_.JObject drawable,
+  ) {
     final _$string = string.reference;
     final _$drawable = drawable.reference;
     _addImage$2(
@@ -3384,7 +3510,11 @@ class Style extends jni$_.JObject {
           >();
 
   /// from: `public void addImage(java.lang.String string, android.graphics.Bitmap bitmap, boolean z)`
-  void addImage$4(jni$_.JString string, jni$_.JObject bitmap, bool z) {
+  void addImage$4(
+    jni$_.JString string,
+    jni$_.JObject bitmap,
+    bool z,
+  ) {
     final _$string = string.reference;
     final _$bitmap = bitmap.reference;
     _addImage$4(
@@ -3486,7 +3616,10 @@ class Style extends jni$_.JObject {
           >();
 
   /// from: `public void addImageAsync(java.lang.String string, android.graphics.Bitmap bitmap)`
-  void addImageAsync(jni$_.JString string, jni$_.JObject bitmap) {
+  void addImageAsync(
+    jni$_.JString string,
+    jni$_.JObject bitmap,
+  ) {
     final _$string = string.reference;
     final _$bitmap = bitmap.reference;
     _addImageAsync(
@@ -3583,7 +3716,10 @@ class Style extends jni$_.JObject {
           >();
 
   /// from: `public void addImageAsync(java.lang.String string, android.graphics.drawable.Drawable drawable)`
-  void addImageAsync$2(jni$_.JString string, jni$_.JObject drawable) {
+  void addImageAsync$2(
+    jni$_.JString string,
+    jni$_.JObject drawable,
+  ) {
     final _$string = string.reference;
     final _$drawable = drawable.reference;
     _addImageAsync$2(
@@ -3685,7 +3821,11 @@ class Style extends jni$_.JObject {
           >();
 
   /// from: `public void addImageAsync(java.lang.String string, android.graphics.Bitmap bitmap, boolean z)`
-  void addImageAsync$4(jni$_.JString string, jni$_.JObject bitmap, bool z) {
+  void addImageAsync$4(
+    jni$_.JString string,
+    jni$_.JObject bitmap,
+    bool z,
+  ) {
     final _$string = string.reference;
     final _$bitmap = bitmap.reference;
     _addImageAsync$4(
@@ -3784,7 +3924,9 @@ class Style extends jni$_.JObject {
           >();
 
   /// from: `public void addImages(java.util.HashMap<java.lang.String, android.graphics.Bitmap> hashMap)`
-  void addImages(jni$_.JObject hashMap) {
+  void addImages(
+    jni$_.JObject hashMap,
+  ) {
     final _$hashMap = hashMap.reference;
     _addImages(
       reference.pointer,
@@ -3872,7 +4014,10 @@ class Style extends jni$_.JObject {
           >();
 
   /// from: `public void addImages(java.util.HashMap<java.lang.String, android.graphics.Bitmap> hashMap, boolean z)`
-  void addImages$2(jni$_.JObject hashMap, bool z) {
+  void addImages$2(
+    jni$_.JObject hashMap,
+    bool z,
+  ) {
     final _$hashMap = hashMap.reference;
     _addImages$2(
       reference.pointer,
@@ -3964,7 +4109,9 @@ class Style extends jni$_.JObject {
           >();
 
   /// from: `public void addImagesAsync(java.util.HashMap<java.lang.String, android.graphics.Bitmap> hashMap)`
-  void addImagesAsync(jni$_.JObject hashMap) {
+  void addImagesAsync(
+    jni$_.JObject hashMap,
+  ) {
     final _$hashMap = hashMap.reference;
     _addImagesAsync(
       reference.pointer,
@@ -4052,7 +4199,10 @@ class Style extends jni$_.JObject {
           >();
 
   /// from: `public void addImagesAsync(java.util.HashMap<java.lang.String, android.graphics.Bitmap> hashMap, boolean z)`
-  void addImagesAsync$2(jni$_.JObject hashMap, bool z) {
+  void addImagesAsync$2(
+    jni$_.JObject hashMap,
+    bool z,
+  ) {
     final _$hashMap = hashMap.reference;
     _addImagesAsync$2(
       reference.pointer,
@@ -4144,7 +4294,9 @@ class Style extends jni$_.JObject {
           >();
 
   /// from: `public void removeImage(java.lang.String string)`
-  void removeImage(jni$_.JString string) {
+  void removeImage(
+    jni$_.JString string,
+  ) {
     final _$string = string.reference;
     _removeImage(
       reference.pointer,
@@ -4178,7 +4330,9 @@ class Style extends jni$_.JObject {
 
   /// from: `public android.graphics.Bitmap getImage(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? getImage(jni$_.JString string) {
+  jni$_.JObject? getImage(
+    jni$_.JString string,
+  ) {
     final _$string = string.reference;
     return _getImage(
       reference.pointer,
@@ -4211,7 +4365,9 @@ class Style extends jni$_.JObject {
           >();
 
   /// from: `public void setTransition(org.maplibre.android.style.layers.TransitionOptions transitionOptions)`
-  void setTransition(transitionoptions$_.TransitionOptions transitionOptions) {
+  void setTransition(
+    transitionoptions$_.TransitionOptions transitionOptions,
+  ) {
     final _$transitionOptions = transitionOptions.reference;
     _setTransition(
       reference.pointer,
@@ -4336,7 +4492,9 @@ class Style extends jni$_.JObject {
 
   /// from: `static public org.maplibre.android.maps.Image toImage(org.maplibre.android.maps.Style$Builder$ImageWrapper imageWrapper)`
   /// The returned object must be released after use, by calling the [release] method.
-  static image$_.Image? toImage(Style$Builder$ImageWrapper? imageWrapper) {
+  static image$_.Image? toImage(
+    Style$Builder$ImageWrapper? imageWrapper,
+  ) {
     final _$imageWrapper = imageWrapper?.reference ?? jni$_.jNullReference;
     return _toImage(
       _class.reference.pointer,
@@ -4404,7 +4562,9 @@ class Style extends jni$_.JObject {
 
   /// from: `static public java.lang.String getPredefinedStyle(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni$_.JString getPredefinedStyle(jni$_.JString? string) {
+  static jni$_.JString getPredefinedStyle(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return _getPredefinedStyle(
       _class.reference.pointer,
@@ -4424,8 +4584,11 @@ final class $Style$NullableType extends jni$_.JObjType<Style?> {
 
   @jni$_.internal
   @core$_.override
-  Style? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : Style.fromReference(reference);
+  Style? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : Style.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4458,8 +4621,9 @@ final class $Style$Type extends jni$_.JObjType<Style> {
 
   @jni$_.internal
   @core$_.override
-  Style fromReference(jni$_.JReference reference) =>
-      Style.fromReference(reference);
+  Style fromReference(jni$_.JReference reference) => Style.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
