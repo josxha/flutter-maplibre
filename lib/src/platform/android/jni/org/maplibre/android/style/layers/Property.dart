@@ -45,8 +45,9 @@ class Property$ANCHOR extends jni$_.JObject {
   final jni$_.JObjType<Property$ANCHOR> $type;
 
   @jni$_.internal
-  Property$ANCHOR.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Property$ANCHOR.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -66,7 +67,11 @@ class Property$ANCHOR extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -115,10 +120,14 @@ class Property$ANCHOR extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property$ANCHOR.implement($Property$ANCHOR $impl) {
+  factory Property$ANCHOR.implement(
+    $Property$ANCHOR $impl,
+  ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property$ANCHOR.fromReference($i.implementReference());
+    return Property$ANCHOR.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -142,8 +151,11 @@ final class $Property$ANCHOR$NullableType
 
   @jni$_.internal
   @core$_.override
-  Property$ANCHOR? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : Property$ANCHOR.fromReference(reference);
+  Property$ANCHOR? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : Property$ANCHOR.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -178,7 +190,9 @@ final class $Property$ANCHOR$Type extends jni$_.JObjType<Property$ANCHOR> {
   @jni$_.internal
   @core$_.override
   Property$ANCHOR fromReference(jni$_.JReference reference) =>
-      Property$ANCHOR.fromReference(reference);
+      Property$ANCHOR.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -209,8 +223,9 @@ class Property$CIRCLE_PITCH_ALIGNMENT extends jni$_.JObject {
   final jni$_.JObjType<Property$CIRCLE_PITCH_ALIGNMENT> $type;
 
   @jni$_.internal
-  Property$CIRCLE_PITCH_ALIGNMENT.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Property$CIRCLE_PITCH_ALIGNMENT.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -230,7 +245,11 @@ class Property$CIRCLE_PITCH_ALIGNMENT extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -315,7 +334,9 @@ final class $Property$CIRCLE_PITCH_ALIGNMENT$NullableType
   Property$CIRCLE_PITCH_ALIGNMENT? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : Property$CIRCLE_PITCH_ALIGNMENT.fromReference(reference);
+      : Property$CIRCLE_PITCH_ALIGNMENT.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -352,7 +373,9 @@ final class $Property$CIRCLE_PITCH_ALIGNMENT$Type
   @jni$_.internal
   @core$_.override
   Property$CIRCLE_PITCH_ALIGNMENT fromReference(jni$_.JReference reference) =>
-      Property$CIRCLE_PITCH_ALIGNMENT.fromReference(reference);
+      Property$CIRCLE_PITCH_ALIGNMENT.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -383,8 +406,9 @@ class Property$CIRCLE_PITCH_SCALE extends jni$_.JObject {
   final jni$_.JObjType<Property$CIRCLE_PITCH_SCALE> $type;
 
   @jni$_.internal
-  Property$CIRCLE_PITCH_SCALE.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Property$CIRCLE_PITCH_SCALE.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -404,7 +428,11 @@ class Property$CIRCLE_PITCH_SCALE extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -458,7 +486,9 @@ class Property$CIRCLE_PITCH_SCALE extends jni$_.JObject {
   ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property$CIRCLE_PITCH_SCALE.fromReference($i.implementReference());
+    return Property$CIRCLE_PITCH_SCALE.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -485,7 +515,9 @@ final class $Property$CIRCLE_PITCH_SCALE$NullableType
   Property$CIRCLE_PITCH_SCALE? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : Property$CIRCLE_PITCH_SCALE.fromReference(reference);
+      : Property$CIRCLE_PITCH_SCALE.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -521,7 +553,9 @@ final class $Property$CIRCLE_PITCH_SCALE$Type
   @jni$_.internal
   @core$_.override
   Property$CIRCLE_PITCH_SCALE fromReference(jni$_.JReference reference) =>
-      Property$CIRCLE_PITCH_SCALE.fromReference(reference);
+      Property$CIRCLE_PITCH_SCALE.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -552,8 +586,9 @@ class Property$CIRCLE_TRANSLATE_ANCHOR extends jni$_.JObject {
   final jni$_.JObjType<Property$CIRCLE_TRANSLATE_ANCHOR> $type;
 
   @jni$_.internal
-  Property$CIRCLE_TRANSLATE_ANCHOR.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Property$CIRCLE_TRANSLATE_ANCHOR.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -573,7 +608,11 @@ class Property$CIRCLE_TRANSLATE_ANCHOR extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -658,7 +697,9 @@ final class $Property$CIRCLE_TRANSLATE_ANCHOR$NullableType
   Property$CIRCLE_TRANSLATE_ANCHOR? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : Property$CIRCLE_TRANSLATE_ANCHOR.fromReference(reference);
+      : Property$CIRCLE_TRANSLATE_ANCHOR.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -695,7 +736,9 @@ final class $Property$CIRCLE_TRANSLATE_ANCHOR$Type
   @jni$_.internal
   @core$_.override
   Property$CIRCLE_TRANSLATE_ANCHOR fromReference(jni$_.JReference reference) =>
-      Property$CIRCLE_TRANSLATE_ANCHOR.fromReference(reference);
+      Property$CIRCLE_TRANSLATE_ANCHOR.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -750,7 +793,11 @@ class Property$FILL_EXTRUSION_TRANSLATE_ANCHOR extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -836,7 +883,9 @@ final class $Property$FILL_EXTRUSION_TRANSLATE_ANCHOR$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : Property$FILL_EXTRUSION_TRANSLATE_ANCHOR.fromReference(reference);
+      : Property$FILL_EXTRUSION_TRANSLATE_ANCHOR.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -876,7 +925,9 @@ final class $Property$FILL_EXTRUSION_TRANSLATE_ANCHOR$Type
   @core$_.override
   Property$FILL_EXTRUSION_TRANSLATE_ANCHOR fromReference(
     jni$_.JReference reference,
-  ) => Property$FILL_EXTRUSION_TRANSLATE_ANCHOR.fromReference(reference);
+  ) => Property$FILL_EXTRUSION_TRANSLATE_ANCHOR.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -908,8 +959,9 @@ class Property$FILL_TRANSLATE_ANCHOR extends jni$_.JObject {
   final jni$_.JObjType<Property$FILL_TRANSLATE_ANCHOR> $type;
 
   @jni$_.internal
-  Property$FILL_TRANSLATE_ANCHOR.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Property$FILL_TRANSLATE_ANCHOR.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -929,7 +981,11 @@ class Property$FILL_TRANSLATE_ANCHOR extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -1013,7 +1069,9 @@ final class $Property$FILL_TRANSLATE_ANCHOR$NullableType
   Property$FILL_TRANSLATE_ANCHOR? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : Property$FILL_TRANSLATE_ANCHOR.fromReference(reference);
+      : Property$FILL_TRANSLATE_ANCHOR.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1050,7 +1108,9 @@ final class $Property$FILL_TRANSLATE_ANCHOR$Type
   @jni$_.internal
   @core$_.override
   Property$FILL_TRANSLATE_ANCHOR fromReference(jni$_.JReference reference) =>
-      Property$FILL_TRANSLATE_ANCHOR.fromReference(reference);
+      Property$FILL_TRANSLATE_ANCHOR.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1105,7 +1165,11 @@ class Property$HILLSHADE_ILLUMINATION_ANCHOR extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -1191,7 +1255,9 @@ final class $Property$HILLSHADE_ILLUMINATION_ANCHOR$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : Property$HILLSHADE_ILLUMINATION_ANCHOR.fromReference(reference);
+      : Property$HILLSHADE_ILLUMINATION_ANCHOR.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1231,7 +1297,9 @@ final class $Property$HILLSHADE_ILLUMINATION_ANCHOR$Type
   @core$_.override
   Property$HILLSHADE_ILLUMINATION_ANCHOR fromReference(
     jni$_.JReference reference,
-  ) => Property$HILLSHADE_ILLUMINATION_ANCHOR.fromReference(reference);
+  ) => Property$HILLSHADE_ILLUMINATION_ANCHOR.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1263,8 +1331,9 @@ class Property$ICON_ANCHOR extends jni$_.JObject {
   final jni$_.JObjType<Property$ICON_ANCHOR> $type;
 
   @jni$_.internal
-  Property$ICON_ANCHOR.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Property$ICON_ANCHOR.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -1284,7 +1353,11 @@ class Property$ICON_ANCHOR extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -1333,10 +1406,14 @@ class Property$ICON_ANCHOR extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property$ICON_ANCHOR.implement($Property$ICON_ANCHOR $impl) {
+  factory Property$ICON_ANCHOR.implement(
+    $Property$ICON_ANCHOR $impl,
+  ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property$ICON_ANCHOR.fromReference($i.implementReference());
+    return Property$ICON_ANCHOR.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -1361,7 +1438,11 @@ final class $Property$ICON_ANCHOR$NullableType
   @jni$_.internal
   @core$_.override
   Property$ICON_ANCHOR? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : Property$ICON_ANCHOR.fromReference(reference);
+      reference.isNull
+      ? null
+      : Property$ICON_ANCHOR.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1397,7 +1478,9 @@ final class $Property$ICON_ANCHOR$Type
   @jni$_.internal
   @core$_.override
   Property$ICON_ANCHOR fromReference(jni$_.JReference reference) =>
-      Property$ICON_ANCHOR.fromReference(reference);
+      Property$ICON_ANCHOR.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1428,8 +1511,9 @@ class Property$ICON_PITCH_ALIGNMENT extends jni$_.JObject {
   final jni$_.JObjType<Property$ICON_PITCH_ALIGNMENT> $type;
 
   @jni$_.internal
-  Property$ICON_PITCH_ALIGNMENT.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Property$ICON_PITCH_ALIGNMENT.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -1449,7 +1533,11 @@ class Property$ICON_PITCH_ALIGNMENT extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -1503,7 +1591,9 @@ class Property$ICON_PITCH_ALIGNMENT extends jni$_.JObject {
   ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property$ICON_PITCH_ALIGNMENT.fromReference($i.implementReference());
+    return Property$ICON_PITCH_ALIGNMENT.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -1531,7 +1621,9 @@ final class $Property$ICON_PITCH_ALIGNMENT$NullableType
   Property$ICON_PITCH_ALIGNMENT? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : Property$ICON_PITCH_ALIGNMENT.fromReference(reference);
+      : Property$ICON_PITCH_ALIGNMENT.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1567,7 +1659,9 @@ final class $Property$ICON_PITCH_ALIGNMENT$Type
   @jni$_.internal
   @core$_.override
   Property$ICON_PITCH_ALIGNMENT fromReference(jni$_.JReference reference) =>
-      Property$ICON_PITCH_ALIGNMENT.fromReference(reference);
+      Property$ICON_PITCH_ALIGNMENT.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1598,8 +1692,9 @@ class Property$ICON_ROTATION_ALIGNMENT extends jni$_.JObject {
   final jni$_.JObjType<Property$ICON_ROTATION_ALIGNMENT> $type;
 
   @jni$_.internal
-  Property$ICON_ROTATION_ALIGNMENT.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Property$ICON_ROTATION_ALIGNMENT.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -1619,7 +1714,11 @@ class Property$ICON_ROTATION_ALIGNMENT extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -1704,7 +1803,9 @@ final class $Property$ICON_ROTATION_ALIGNMENT$NullableType
   Property$ICON_ROTATION_ALIGNMENT? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : Property$ICON_ROTATION_ALIGNMENT.fromReference(reference);
+      : Property$ICON_ROTATION_ALIGNMENT.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1741,7 +1842,9 @@ final class $Property$ICON_ROTATION_ALIGNMENT$Type
   @jni$_.internal
   @core$_.override
   Property$ICON_ROTATION_ALIGNMENT fromReference(jni$_.JReference reference) =>
-      Property$ICON_ROTATION_ALIGNMENT.fromReference(reference);
+      Property$ICON_ROTATION_ALIGNMENT.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1772,8 +1875,9 @@ class Property$ICON_TEXT_FIT extends jni$_.JObject {
   final jni$_.JObjType<Property$ICON_TEXT_FIT> $type;
 
   @jni$_.internal
-  Property$ICON_TEXT_FIT.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Property$ICON_TEXT_FIT.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -1793,7 +1897,11 @@ class Property$ICON_TEXT_FIT extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -1842,10 +1950,14 @@ class Property$ICON_TEXT_FIT extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property$ICON_TEXT_FIT.implement($Property$ICON_TEXT_FIT $impl) {
+  factory Property$ICON_TEXT_FIT.implement(
+    $Property$ICON_TEXT_FIT $impl,
+  ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property$ICON_TEXT_FIT.fromReference($i.implementReference());
+    return Property$ICON_TEXT_FIT.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -1870,7 +1982,11 @@ final class $Property$ICON_TEXT_FIT$NullableType
   @jni$_.internal
   @core$_.override
   Property$ICON_TEXT_FIT? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : Property$ICON_TEXT_FIT.fromReference(reference);
+      reference.isNull
+      ? null
+      : Property$ICON_TEXT_FIT.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1906,7 +2022,9 @@ final class $Property$ICON_TEXT_FIT$Type
   @jni$_.internal
   @core$_.override
   Property$ICON_TEXT_FIT fromReference(jni$_.JReference reference) =>
-      Property$ICON_TEXT_FIT.fromReference(reference);
+      Property$ICON_TEXT_FIT.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1937,8 +2055,9 @@ class Property$ICON_TRANSLATE_ANCHOR extends jni$_.JObject {
   final jni$_.JObjType<Property$ICON_TRANSLATE_ANCHOR> $type;
 
   @jni$_.internal
-  Property$ICON_TRANSLATE_ANCHOR.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Property$ICON_TRANSLATE_ANCHOR.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -1958,7 +2077,11 @@ class Property$ICON_TRANSLATE_ANCHOR extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -2042,7 +2165,9 @@ final class $Property$ICON_TRANSLATE_ANCHOR$NullableType
   Property$ICON_TRANSLATE_ANCHOR? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : Property$ICON_TRANSLATE_ANCHOR.fromReference(reference);
+      : Property$ICON_TRANSLATE_ANCHOR.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2079,7 +2204,9 @@ final class $Property$ICON_TRANSLATE_ANCHOR$Type
   @jni$_.internal
   @core$_.override
   Property$ICON_TRANSLATE_ANCHOR fromReference(jni$_.JReference reference) =>
-      Property$ICON_TRANSLATE_ANCHOR.fromReference(reference);
+      Property$ICON_TRANSLATE_ANCHOR.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2110,8 +2237,9 @@ class Property$LINE_CAP extends jni$_.JObject {
   final jni$_.JObjType<Property$LINE_CAP> $type;
 
   @jni$_.internal
-  Property$LINE_CAP.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Property$LINE_CAP.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -2131,7 +2259,11 @@ class Property$LINE_CAP extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -2180,10 +2312,14 @@ class Property$LINE_CAP extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property$LINE_CAP.implement($Property$LINE_CAP $impl) {
+  factory Property$LINE_CAP.implement(
+    $Property$LINE_CAP $impl,
+  ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property$LINE_CAP.fromReference($i.implementReference());
+    return Property$LINE_CAP.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -2208,7 +2344,11 @@ final class $Property$LINE_CAP$NullableType
   @jni$_.internal
   @core$_.override
   Property$LINE_CAP? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : Property$LINE_CAP.fromReference(reference);
+      reference.isNull
+      ? null
+      : Property$LINE_CAP.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2243,7 +2383,9 @@ final class $Property$LINE_CAP$Type extends jni$_.JObjType<Property$LINE_CAP> {
   @jni$_.internal
   @core$_.override
   Property$LINE_CAP fromReference(jni$_.JReference reference) =>
-      Property$LINE_CAP.fromReference(reference);
+      Property$LINE_CAP.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2274,8 +2416,9 @@ class Property$LINE_JOIN extends jni$_.JObject {
   final jni$_.JObjType<Property$LINE_JOIN> $type;
 
   @jni$_.internal
-  Property$LINE_JOIN.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Property$LINE_JOIN.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -2295,7 +2438,11 @@ class Property$LINE_JOIN extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -2344,10 +2491,14 @@ class Property$LINE_JOIN extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property$LINE_JOIN.implement($Property$LINE_JOIN $impl) {
+  factory Property$LINE_JOIN.implement(
+    $Property$LINE_JOIN $impl,
+  ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property$LINE_JOIN.fromReference($i.implementReference());
+    return Property$LINE_JOIN.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -2372,7 +2523,11 @@ final class $Property$LINE_JOIN$NullableType
   @jni$_.internal
   @core$_.override
   Property$LINE_JOIN? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : Property$LINE_JOIN.fromReference(reference);
+      reference.isNull
+      ? null
+      : Property$LINE_JOIN.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2408,7 +2563,9 @@ final class $Property$LINE_JOIN$Type
   @jni$_.internal
   @core$_.override
   Property$LINE_JOIN fromReference(jni$_.JReference reference) =>
-      Property$LINE_JOIN.fromReference(reference);
+      Property$LINE_JOIN.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2439,8 +2596,9 @@ class Property$LINE_TRANSLATE_ANCHOR extends jni$_.JObject {
   final jni$_.JObjType<Property$LINE_TRANSLATE_ANCHOR> $type;
 
   @jni$_.internal
-  Property$LINE_TRANSLATE_ANCHOR.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Property$LINE_TRANSLATE_ANCHOR.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -2460,7 +2618,11 @@ class Property$LINE_TRANSLATE_ANCHOR extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -2544,7 +2706,9 @@ final class $Property$LINE_TRANSLATE_ANCHOR$NullableType
   Property$LINE_TRANSLATE_ANCHOR? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : Property$LINE_TRANSLATE_ANCHOR.fromReference(reference);
+      : Property$LINE_TRANSLATE_ANCHOR.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2581,7 +2745,9 @@ final class $Property$LINE_TRANSLATE_ANCHOR$Type
   @jni$_.internal
   @core$_.override
   Property$LINE_TRANSLATE_ANCHOR fromReference(jni$_.JReference reference) =>
-      Property$LINE_TRANSLATE_ANCHOR.fromReference(reference);
+      Property$LINE_TRANSLATE_ANCHOR.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2612,8 +2778,9 @@ class Property$RASTER_RESAMPLING extends jni$_.JObject {
   final jni$_.JObjType<Property$RASTER_RESAMPLING> $type;
 
   @jni$_.internal
-  Property$RASTER_RESAMPLING.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Property$RASTER_RESAMPLING.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -2633,7 +2800,11 @@ class Property$RASTER_RESAMPLING extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -2687,7 +2858,9 @@ class Property$RASTER_RESAMPLING extends jni$_.JObject {
   ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property$RASTER_RESAMPLING.fromReference($i.implementReference());
+    return Property$RASTER_RESAMPLING.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -2714,7 +2887,9 @@ final class $Property$RASTER_RESAMPLING$NullableType
   Property$RASTER_RESAMPLING? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : Property$RASTER_RESAMPLING.fromReference(reference);
+      : Property$RASTER_RESAMPLING.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2750,7 +2925,9 @@ final class $Property$RASTER_RESAMPLING$Type
   @jni$_.internal
   @core$_.override
   Property$RASTER_RESAMPLING fromReference(jni$_.JReference reference) =>
-      Property$RASTER_RESAMPLING.fromReference(reference);
+      Property$RASTER_RESAMPLING.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2781,8 +2958,9 @@ class Property$SYMBOL_PLACEMENT extends jni$_.JObject {
   final jni$_.JObjType<Property$SYMBOL_PLACEMENT> $type;
 
   @jni$_.internal
-  Property$SYMBOL_PLACEMENT.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Property$SYMBOL_PLACEMENT.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -2802,7 +2980,11 @@ class Property$SYMBOL_PLACEMENT extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -2856,7 +3038,9 @@ class Property$SYMBOL_PLACEMENT extends jni$_.JObject {
   ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property$SYMBOL_PLACEMENT.fromReference($i.implementReference());
+    return Property$SYMBOL_PLACEMENT.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -2883,7 +3067,9 @@ final class $Property$SYMBOL_PLACEMENT$NullableType
   Property$SYMBOL_PLACEMENT? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : Property$SYMBOL_PLACEMENT.fromReference(reference);
+      : Property$SYMBOL_PLACEMENT.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2919,7 +3105,9 @@ final class $Property$SYMBOL_PLACEMENT$Type
   @jni$_.internal
   @core$_.override
   Property$SYMBOL_PLACEMENT fromReference(jni$_.JReference reference) =>
-      Property$SYMBOL_PLACEMENT.fromReference(reference);
+      Property$SYMBOL_PLACEMENT.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2950,8 +3138,9 @@ class Property$SYMBOL_Z_ORDER extends jni$_.JObject {
   final jni$_.JObjType<Property$SYMBOL_Z_ORDER> $type;
 
   @jni$_.internal
-  Property$SYMBOL_Z_ORDER.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Property$SYMBOL_Z_ORDER.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -2971,7 +3160,11 @@ class Property$SYMBOL_Z_ORDER extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -3020,10 +3213,14 @@ class Property$SYMBOL_Z_ORDER extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property$SYMBOL_Z_ORDER.implement($Property$SYMBOL_Z_ORDER $impl) {
+  factory Property$SYMBOL_Z_ORDER.implement(
+    $Property$SYMBOL_Z_ORDER $impl,
+  ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property$SYMBOL_Z_ORDER.fromReference($i.implementReference());
+    return Property$SYMBOL_Z_ORDER.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -3050,7 +3247,9 @@ final class $Property$SYMBOL_Z_ORDER$NullableType
   Property$SYMBOL_Z_ORDER? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : Property$SYMBOL_Z_ORDER.fromReference(reference);
+      : Property$SYMBOL_Z_ORDER.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3086,7 +3285,9 @@ final class $Property$SYMBOL_Z_ORDER$Type
   @jni$_.internal
   @core$_.override
   Property$SYMBOL_Z_ORDER fromReference(jni$_.JReference reference) =>
-      Property$SYMBOL_Z_ORDER.fromReference(reference);
+      Property$SYMBOL_Z_ORDER.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3117,8 +3318,9 @@ class Property$TEXT_ANCHOR extends jni$_.JObject {
   final jni$_.JObjType<Property$TEXT_ANCHOR> $type;
 
   @jni$_.internal
-  Property$TEXT_ANCHOR.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Property$TEXT_ANCHOR.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -3138,7 +3340,11 @@ class Property$TEXT_ANCHOR extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -3187,10 +3393,14 @@ class Property$TEXT_ANCHOR extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property$TEXT_ANCHOR.implement($Property$TEXT_ANCHOR $impl) {
+  factory Property$TEXT_ANCHOR.implement(
+    $Property$TEXT_ANCHOR $impl,
+  ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property$TEXT_ANCHOR.fromReference($i.implementReference());
+    return Property$TEXT_ANCHOR.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -3215,7 +3425,11 @@ final class $Property$TEXT_ANCHOR$NullableType
   @jni$_.internal
   @core$_.override
   Property$TEXT_ANCHOR? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : Property$TEXT_ANCHOR.fromReference(reference);
+      reference.isNull
+      ? null
+      : Property$TEXT_ANCHOR.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3251,7 +3465,9 @@ final class $Property$TEXT_ANCHOR$Type
   @jni$_.internal
   @core$_.override
   Property$TEXT_ANCHOR fromReference(jni$_.JReference reference) =>
-      Property$TEXT_ANCHOR.fromReference(reference);
+      Property$TEXT_ANCHOR.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3282,8 +3498,9 @@ class Property$TEXT_JUSTIFY extends jni$_.JObject {
   final jni$_.JObjType<Property$TEXT_JUSTIFY> $type;
 
   @jni$_.internal
-  Property$TEXT_JUSTIFY.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Property$TEXT_JUSTIFY.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -3303,7 +3520,11 @@ class Property$TEXT_JUSTIFY extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -3352,10 +3573,14 @@ class Property$TEXT_JUSTIFY extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property$TEXT_JUSTIFY.implement($Property$TEXT_JUSTIFY $impl) {
+  factory Property$TEXT_JUSTIFY.implement(
+    $Property$TEXT_JUSTIFY $impl,
+  ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property$TEXT_JUSTIFY.fromReference($i.implementReference());
+    return Property$TEXT_JUSTIFY.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -3380,7 +3605,11 @@ final class $Property$TEXT_JUSTIFY$NullableType
   @jni$_.internal
   @core$_.override
   Property$TEXT_JUSTIFY? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : Property$TEXT_JUSTIFY.fromReference(reference);
+      reference.isNull
+      ? null
+      : Property$TEXT_JUSTIFY.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3416,7 +3645,9 @@ final class $Property$TEXT_JUSTIFY$Type
   @jni$_.internal
   @core$_.override
   Property$TEXT_JUSTIFY fromReference(jni$_.JReference reference) =>
-      Property$TEXT_JUSTIFY.fromReference(reference);
+      Property$TEXT_JUSTIFY.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3447,8 +3678,9 @@ class Property$TEXT_PITCH_ALIGNMENT extends jni$_.JObject {
   final jni$_.JObjType<Property$TEXT_PITCH_ALIGNMENT> $type;
 
   @jni$_.internal
-  Property$TEXT_PITCH_ALIGNMENT.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Property$TEXT_PITCH_ALIGNMENT.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -3468,7 +3700,11 @@ class Property$TEXT_PITCH_ALIGNMENT extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -3522,7 +3758,9 @@ class Property$TEXT_PITCH_ALIGNMENT extends jni$_.JObject {
   ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property$TEXT_PITCH_ALIGNMENT.fromReference($i.implementReference());
+    return Property$TEXT_PITCH_ALIGNMENT.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -3550,7 +3788,9 @@ final class $Property$TEXT_PITCH_ALIGNMENT$NullableType
   Property$TEXT_PITCH_ALIGNMENT? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : Property$TEXT_PITCH_ALIGNMENT.fromReference(reference);
+      : Property$TEXT_PITCH_ALIGNMENT.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3586,7 +3826,9 @@ final class $Property$TEXT_PITCH_ALIGNMENT$Type
   @jni$_.internal
   @core$_.override
   Property$TEXT_PITCH_ALIGNMENT fromReference(jni$_.JReference reference) =>
-      Property$TEXT_PITCH_ALIGNMENT.fromReference(reference);
+      Property$TEXT_PITCH_ALIGNMENT.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3617,8 +3859,9 @@ class Property$TEXT_ROTATION_ALIGNMENT extends jni$_.JObject {
   final jni$_.JObjType<Property$TEXT_ROTATION_ALIGNMENT> $type;
 
   @jni$_.internal
-  Property$TEXT_ROTATION_ALIGNMENT.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Property$TEXT_ROTATION_ALIGNMENT.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -3638,7 +3881,11 @@ class Property$TEXT_ROTATION_ALIGNMENT extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -3723,7 +3970,9 @@ final class $Property$TEXT_ROTATION_ALIGNMENT$NullableType
   Property$TEXT_ROTATION_ALIGNMENT? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : Property$TEXT_ROTATION_ALIGNMENT.fromReference(reference);
+      : Property$TEXT_ROTATION_ALIGNMENT.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3760,7 +4009,9 @@ final class $Property$TEXT_ROTATION_ALIGNMENT$Type
   @jni$_.internal
   @core$_.override
   Property$TEXT_ROTATION_ALIGNMENT fromReference(jni$_.JReference reference) =>
-      Property$TEXT_ROTATION_ALIGNMENT.fromReference(reference);
+      Property$TEXT_ROTATION_ALIGNMENT.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3791,8 +4042,9 @@ class Property$TEXT_TRANSFORM extends jni$_.JObject {
   final jni$_.JObjType<Property$TEXT_TRANSFORM> $type;
 
   @jni$_.internal
-  Property$TEXT_TRANSFORM.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Property$TEXT_TRANSFORM.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -3812,7 +4064,11 @@ class Property$TEXT_TRANSFORM extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -3861,10 +4117,14 @@ class Property$TEXT_TRANSFORM extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property$TEXT_TRANSFORM.implement($Property$TEXT_TRANSFORM $impl) {
+  factory Property$TEXT_TRANSFORM.implement(
+    $Property$TEXT_TRANSFORM $impl,
+  ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property$TEXT_TRANSFORM.fromReference($i.implementReference());
+    return Property$TEXT_TRANSFORM.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -3891,7 +4151,9 @@ final class $Property$TEXT_TRANSFORM$NullableType
   Property$TEXT_TRANSFORM? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : Property$TEXT_TRANSFORM.fromReference(reference);
+      : Property$TEXT_TRANSFORM.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3927,7 +4189,9 @@ final class $Property$TEXT_TRANSFORM$Type
   @jni$_.internal
   @core$_.override
   Property$TEXT_TRANSFORM fromReference(jni$_.JReference reference) =>
-      Property$TEXT_TRANSFORM.fromReference(reference);
+      Property$TEXT_TRANSFORM.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3958,8 +4222,9 @@ class Property$TEXT_TRANSLATE_ANCHOR extends jni$_.JObject {
   final jni$_.JObjType<Property$TEXT_TRANSLATE_ANCHOR> $type;
 
   @jni$_.internal
-  Property$TEXT_TRANSLATE_ANCHOR.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Property$TEXT_TRANSLATE_ANCHOR.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -3979,7 +4244,11 @@ class Property$TEXT_TRANSLATE_ANCHOR extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -4063,7 +4332,9 @@ final class $Property$TEXT_TRANSLATE_ANCHOR$NullableType
   Property$TEXT_TRANSLATE_ANCHOR? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : Property$TEXT_TRANSLATE_ANCHOR.fromReference(reference);
+      : Property$TEXT_TRANSLATE_ANCHOR.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4100,7 +4371,9 @@ final class $Property$TEXT_TRANSLATE_ANCHOR$Type
   @jni$_.internal
   @core$_.override
   Property$TEXT_TRANSLATE_ANCHOR fromReference(jni$_.JReference reference) =>
-      Property$TEXT_TRANSLATE_ANCHOR.fromReference(reference);
+      Property$TEXT_TRANSLATE_ANCHOR.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4131,8 +4404,9 @@ class Property$TEXT_WRITING_MODE extends jni$_.JObject {
   final jni$_.JObjType<Property$TEXT_WRITING_MODE> $type;
 
   @jni$_.internal
-  Property$TEXT_WRITING_MODE.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Property$TEXT_WRITING_MODE.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -4152,7 +4426,11 @@ class Property$TEXT_WRITING_MODE extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -4206,7 +4484,9 @@ class Property$TEXT_WRITING_MODE extends jni$_.JObject {
   ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property$TEXT_WRITING_MODE.fromReference($i.implementReference());
+    return Property$TEXT_WRITING_MODE.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -4233,7 +4513,9 @@ final class $Property$TEXT_WRITING_MODE$NullableType
   Property$TEXT_WRITING_MODE? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : Property$TEXT_WRITING_MODE.fromReference(reference);
+      : Property$TEXT_WRITING_MODE.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4269,7 +4551,9 @@ final class $Property$TEXT_WRITING_MODE$Type
   @jni$_.internal
   @core$_.override
   Property$TEXT_WRITING_MODE fromReference(jni$_.JReference reference) =>
-      Property$TEXT_WRITING_MODE.fromReference(reference);
+      Property$TEXT_WRITING_MODE.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4300,8 +4584,9 @@ class Property$VISIBILITY extends jni$_.JObject {
   final jni$_.JObjType<Property$VISIBILITY> $type;
 
   @jni$_.internal
-  Property$VISIBILITY.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Property$VISIBILITY.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -4321,7 +4606,11 @@ class Property$VISIBILITY extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -4370,10 +4659,14 @@ class Property$VISIBILITY extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory Property$VISIBILITY.implement($Property$VISIBILITY $impl) {
+  factory Property$VISIBILITY.implement(
+    $Property$VISIBILITY $impl,
+  ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return Property$VISIBILITY.fromReference($i.implementReference());
+    return Property$VISIBILITY.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -4398,7 +4691,11 @@ final class $Property$VISIBILITY$NullableType
   @jni$_.internal
   @core$_.override
   Property$VISIBILITY? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : Property$VISIBILITY.fromReference(reference);
+      reference.isNull
+      ? null
+      : Property$VISIBILITY.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4434,7 +4731,9 @@ final class $Property$VISIBILITY$Type
   @jni$_.internal
   @core$_.override
   Property$VISIBILITY fromReference(jni$_.JReference reference) =>
-      Property$VISIBILITY.fromReference(reference);
+      Property$VISIBILITY.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -4465,8 +4764,9 @@ class Property extends jni$_.JObject {
   final jni$_.JObjType<Property> $type;
 
   @jni$_.internal
-  Property.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Property.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -4486,7 +4786,10 @@ class Property extends jni$_.JObject {
   static jni$_.JString? get VISIBLE =>
       _id_VISIBLE.get(_class, const jni$_.JStringNullableType());
 
-  static final _id_NONE = _class.staticFieldId(r'NONE', r'Ljava/lang/String;');
+  static final _id_NONE = _class.staticFieldId(
+    r'NONE',
+    r'Ljava/lang/String;',
+  );
 
   /// from: `static public final java.lang.String NONE`
   /// The returned object must be released after use, by calling the [release] method.
@@ -5399,8 +5702,11 @@ final class $Property$NullableType extends jni$_.JObjType<Property?> {
 
   @jni$_.internal
   @core$_.override
-  Property? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : Property.fromReference(reference);
+  Property? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : Property.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -5433,8 +5739,9 @@ final class $Property$Type extends jni$_.JObjType<Property> {
 
   @jni$_.internal
   @core$_.override
-  Property fromReference(jni$_.JReference reference) =>
-      Property.fromReference(reference);
+  Property fromReference(jni$_.JReference reference) => Property.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

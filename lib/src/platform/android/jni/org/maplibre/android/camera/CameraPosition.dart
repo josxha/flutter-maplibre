@@ -49,8 +49,9 @@ class CameraPosition$Builder extends jni$_.JObject {
   final jni$_.JObjType<CameraPosition$Builder> $type;
 
   @jni$_.internal
-  CameraPosition$Builder.fromReference(jni$_.JReference reference)
-    : $type = type,
+  CameraPosition$Builder.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -60,7 +61,9 @@ class CameraPosition$Builder extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $CameraPosition$Builder$NullableType();
   static const type = $CameraPosition$Builder$Type();
-  static final _id_new$ = _class.constructorId(r'()V');
+  static final _id_new$ = _class.constructorId(
+    r'()V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -110,7 +113,9 @@ class CameraPosition$Builder extends jni$_.JObject {
 
   /// from: `public void <init>(org.maplibre.android.camera.CameraPosition cameraPosition)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory CameraPosition$Builder.new$1(CameraPosition? cameraPosition) {
+  factory CameraPosition$Builder.new$1(
+    CameraPosition? cameraPosition,
+  ) {
     final _$cameraPosition = cameraPosition?.reference ?? jni$_.jNullReference;
     return CameraPosition$Builder.fromReference(
       _new$1(
@@ -145,7 +150,9 @@ class CameraPosition$Builder extends jni$_.JObject {
 
   /// from: `public void <init>(android.content.res.TypedArray typedArray)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory CameraPosition$Builder.new$2(jni$_.JObject? typedArray) {
+  factory CameraPosition$Builder.new$2(
+    jni$_.JObject? typedArray,
+  ) {
     final _$typedArray = typedArray?.reference ?? jni$_.jNullReference;
     return CameraPosition$Builder.fromReference(
       _new$2(
@@ -257,7 +264,9 @@ class CameraPosition$Builder extends jni$_.JObject {
 
   /// from: `public final org.maplibre.android.camera.CameraPosition$Builder bearing(double d)`
   /// The returned object must be released after use, by calling the [release] method.
-  CameraPosition$Builder bearing(double d) {
+  CameraPosition$Builder bearing(
+    double d,
+  ) {
     return _bearing(
       reference.pointer,
       _id_bearing as jni$_.JMethodIDPtr,
@@ -290,7 +299,9 @@ class CameraPosition$Builder extends jni$_.JObject {
 
   /// from: `public final org.maplibre.android.camera.CameraPosition$Builder target(org.maplibre.android.geometry.LatLng latLng)`
   /// The returned object must be released after use, by calling the [release] method.
-  CameraPosition$Builder target(latlng$_.LatLng? latLng) {
+  CameraPosition$Builder target(
+    latlng$_.LatLng? latLng,
+  ) {
     final _$latLng = latLng?.reference ?? jni$_.jNullReference;
     return _target(
       reference.pointer,
@@ -324,7 +335,9 @@ class CameraPosition$Builder extends jni$_.JObject {
 
   /// from: `public final org.maplibre.android.camera.CameraPosition$Builder tilt(double d)`
   /// The returned object must be released after use, by calling the [release] method.
-  CameraPosition$Builder tilt(double d) {
+  CameraPosition$Builder tilt(
+    double d,
+  ) {
     return _tilt(
       reference.pointer,
       _id_tilt as jni$_.JMethodIDPtr,
@@ -357,7 +370,9 @@ class CameraPosition$Builder extends jni$_.JObject {
 
   /// from: `public final org.maplibre.android.camera.CameraPosition$Builder zoom(double d)`
   /// The returned object must be released after use, by calling the [release] method.
-  CameraPosition$Builder zoom(double d) {
+  CameraPosition$Builder zoom(
+    double d,
+  ) {
     return _zoom(
       reference.pointer,
       _id_zoom as jni$_.JMethodIDPtr,
@@ -390,7 +405,9 @@ class CameraPosition$Builder extends jni$_.JObject {
 
   /// from: `public final org.maplibre.android.camera.CameraPosition$Builder padding(double[] ds)`
   /// The returned object must be released after use, by calling the [release] method.
-  CameraPosition$Builder padding(jni$_.JDoubleArray? ds) {
+  CameraPosition$Builder padding(
+    jni$_.JDoubleArray? ds,
+  ) {
     final _$ds = ds?.reference ?? jni$_.jNullReference;
     return _padding(
       reference.pointer,
@@ -429,7 +446,12 @@ class CameraPosition$Builder extends jni$_.JObject {
 
   /// from: `public final org.maplibre.android.camera.CameraPosition$Builder padding(double d, double d1, double d2, double d3)`
   /// The returned object must be released after use, by calling the [release] method.
-  CameraPosition$Builder padding$1(double d, double d1, double d2, double d3) {
+  CameraPosition$Builder padding$1(
+    double d,
+    double d1,
+    double d2,
+    double d3,
+  ) {
     return _padding$1(
       reference.pointer,
       _id_padding$1 as jni$_.JMethodIDPtr,
@@ -484,7 +506,11 @@ final class $CameraPosition$Builder$NullableType
   @jni$_.internal
   @core$_.override
   CameraPosition$Builder? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : CameraPosition$Builder.fromReference(reference);
+      reference.isNull
+      ? null
+      : CameraPosition$Builder.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -520,7 +546,9 @@ final class $CameraPosition$Builder$Type
   @jni$_.internal
   @core$_.override
   CameraPosition$Builder fromReference(jni$_.JReference reference) =>
-      CameraPosition$Builder.fromReference(reference);
+      CameraPosition$Builder.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -551,8 +579,9 @@ class CameraPosition$Companion extends jni$_.JObject {
   final jni$_.JObjType<CameraPosition$Companion> $type;
 
   @jni$_.internal
-  CameraPosition$Companion.fromReference(jni$_.JReference reference)
-    : $type = type,
+  CameraPosition$Companion.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -586,7 +615,9 @@ class CameraPosition$Companion extends jni$_.JObject {
 
   /// from: `synthetic public void <init>(kotlin.jvm.internal.DefaultConstructorMarker defaultConstructorMarker)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory CameraPosition$Companion(jni$_.JObject? defaultConstructorMarker) {
+  factory CameraPosition$Companion(
+    jni$_.JObject? defaultConstructorMarker,
+  ) {
     final _$defaultConstructorMarker =
         defaultConstructorMarker?.reference ?? jni$_.jNullReference;
     return CameraPosition$Companion.fromReference(
@@ -614,7 +645,9 @@ final class $CameraPosition$Companion$NullableType
   CameraPosition$Companion? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : CameraPosition$Companion.fromReference(reference);
+      : CameraPosition$Companion.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -650,7 +683,9 @@ final class $CameraPosition$Companion$Type
   @jni$_.internal
   @core$_.override
   CameraPosition$Companion fromReference(jni$_.JReference reference) =>
-      CameraPosition$Companion.fromReference(reference);
+      CameraPosition$Companion.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -681,8 +716,9 @@ class CameraPosition extends jni$_.JObject {
   final jni$_.JObjType<CameraPosition> $type;
 
   @jni$_.internal
-  CameraPosition.fromReference(jni$_.JReference reference)
-    : $type = type,
+  CameraPosition.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -712,22 +748,34 @@ class CameraPosition extends jni$_.JObject {
   latlng$_.LatLng? get target =>
       _id_target.get(this, const latlng$_.$LatLng$NullableType());
 
-  static final _id_zoom = _class.instanceFieldId(r'zoom', r'D');
+  static final _id_zoom = _class.instanceFieldId(
+    r'zoom',
+    r'D',
+  );
 
   /// from: `public final double zoom`
   double get zoom => _id_zoom.get(this, const jni$_.jdoubleType());
 
-  static final _id_tilt = _class.instanceFieldId(r'tilt', r'D');
+  static final _id_tilt = _class.instanceFieldId(
+    r'tilt',
+    r'D',
+  );
 
   /// from: `public final double tilt`
   double get tilt => _id_tilt.get(this, const jni$_.jdoubleType());
 
-  static final _id_bearing = _class.instanceFieldId(r'bearing', r'D');
+  static final _id_bearing = _class.instanceFieldId(
+    r'bearing',
+    r'D',
+  );
 
   /// from: `public final double bearing`
   double get bearing => _id_bearing.get(this, const jni$_.jdoubleType());
 
-  static final _id_padding = _class.instanceFieldId(r'padding', r'[D');
+  static final _id_padding = _class.instanceFieldId(
+    r'padding',
+    r'[D',
+  );
 
   /// from: `public final double[] padding`
   /// The returned object must be released after use, by calling the [release] method.
@@ -919,7 +967,10 @@ class CameraPosition extends jni$_.JObject {
           >();
 
   /// from: `public void writeToParcel(android.os.Parcel parcel, int i)`
-  void writeToParcel(jni$_.JObject parcel, int i) {
+  void writeToParcel(
+    jni$_.JObject parcel,
+    int i,
+  ) {
     final _$parcel = parcel.reference;
     _writeToParcel(
       reference.pointer,
@@ -983,7 +1034,9 @@ class CameraPosition extends jni$_.JObject {
           >();
 
   /// from: `public boolean equals(java.lang.Object object)`
-  bool equals(jni$_.JObject? object) {
+  bool equals(
+    jni$_.JObject? object,
+  ) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     return _equals(
       reference.pointer,
@@ -992,7 +1045,10 @@ class CameraPosition extends jni$_.JObject {
     ).boolean;
   }
 
-  static final _id_hashCode$1 = _class.instanceMethodId(r'hashCode', r'()I');
+  static final _id_hashCode$1 = _class.instanceMethodId(
+    r'hashCode',
+    r'()I',
+  );
 
   static final _hashCode$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -1030,8 +1086,11 @@ final class $CameraPosition$NullableType
 
   @jni$_.internal
   @core$_.override
-  CameraPosition? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : CameraPosition.fromReference(reference);
+  CameraPosition? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : CameraPosition.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1065,7 +1124,9 @@ final class $CameraPosition$Type extends jni$_.JObjType<CameraPosition> {
   @jni$_.internal
   @core$_.override
   CameraPosition fromReference(jni$_.JReference reference) =>
-      CameraPosition.fromReference(reference);
+      CameraPosition.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

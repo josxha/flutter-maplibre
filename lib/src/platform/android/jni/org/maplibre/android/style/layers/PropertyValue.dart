@@ -48,8 +48,10 @@ class PropertyValue<$T extends jni$_.JObject?> extends jni$_.JObject {
   final jni$_.JObjType<$T> T;
 
   @jni$_.internal
-  PropertyValue.fromReference(this.T, jni$_.JReference reference)
-    : $type = type<$T>(T),
+  PropertyValue.fromReference(
+    this.T,
+    jni$_.JReference reference,
+  ) : $type = type<$T>(T),
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -58,14 +60,20 @@ class PropertyValue<$T extends jni$_.JObject?> extends jni$_.JObject {
 
   /// The type which includes information such as the signature of this class.
   static $PropertyValue$NullableType<$T>
-  nullableType<$T extends jni$_.JObject?>(jni$_.JObjType<$T> T) {
-    return $PropertyValue$NullableType<$T>(T);
+  nullableType<$T extends jni$_.JObject?>(
+    jni$_.JObjType<$T> T,
+  ) {
+    return $PropertyValue$NullableType<$T>(
+      T,
+    );
   }
 
   static $PropertyValue$Type<$T> type<$T extends jni$_.JObject?>(
     jni$_.JObjType<$T> T,
   ) {
-    return $PropertyValue$Type<$T>(T);
+    return $PropertyValue$Type<$T>(
+      T,
+    );
   }
 
   static final _id_name = _class.instanceFieldId(
@@ -131,7 +139,10 @@ class PropertyValue<$T extends jni$_.JObject?> extends jni$_.JObject {
     );
   }
 
-  static final _id_isNull$1 = _class.instanceMethodId(r'isNull', r'()Z');
+  static final _id_isNull$1 = _class.instanceMethodId(
+    r'isNull',
+    r'()Z',
+  );
 
   static final _isNull$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -216,7 +227,10 @@ class PropertyValue<$T extends jni$_.JObject?> extends jni$_.JObject {
     ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
-  static final _id_isValue = _class.instanceMethodId(r'isValue', r'()Z');
+  static final _id_isValue = _class.instanceMethodId(
+    r'isValue',
+    r'()Z',
+  );
 
   static final _isValue =
       jni$_.ProtectedJniExtensions.lookup<
@@ -356,7 +370,9 @@ class PropertyValue<$T extends jni$_.JObject?> extends jni$_.JObject {
           >();
 
   /// from: `public boolean equals(java.lang.Object object)`
-  bool equals(jni$_.JObject? object) {
+  bool equals(
+    jni$_.JObject? object,
+  ) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     return _equals(
       reference.pointer,
@@ -365,7 +381,10 @@ class PropertyValue<$T extends jni$_.JObject?> extends jni$_.JObject {
     ).boolean;
   }
 
-  static final _id_hashCode$1 = _class.instanceMethodId(r'hashCode', r'()I');
+  static final _id_hashCode$1 = _class.instanceMethodId(
+    r'hashCode',
+    r'()I',
+  );
 
   static final _hashCode$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -398,7 +417,9 @@ final class $PropertyValue$NullableType<$T extends jni$_.JObject?>
   final jni$_.JObjType<$T> T;
 
   @jni$_.internal
-  const $PropertyValue$NullableType(this.T);
+  const $PropertyValue$NullableType(
+    this.T,
+  );
 
   @jni$_.internal
   @core$_.override
@@ -407,7 +428,12 @@ final class $PropertyValue$NullableType<$T extends jni$_.JObject?>
   @jni$_.internal
   @core$_.override
   PropertyValue<$T>? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : PropertyValue<$T>.fromReference(T, reference);
+      reference.isNull
+      ? null
+      : PropertyValue<$T>.fromReference(
+          T,
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -437,7 +463,9 @@ final class $PropertyValue$Type<$T extends jni$_.JObject?>
   final jni$_.JObjType<$T> T;
 
   @jni$_.internal
-  const $PropertyValue$Type(this.T);
+  const $PropertyValue$Type(
+    this.T,
+  );
 
   @jni$_.internal
   @core$_.override
@@ -446,7 +474,10 @@ final class $PropertyValue$Type<$T extends jni$_.JObject?>
   @jni$_.internal
   @core$_.override
   PropertyValue<$T> fromReference(jni$_.JReference reference) =>
-      PropertyValue<$T>.fromReference(T, reference);
+      PropertyValue<$T>.fromReference(
+        T,
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

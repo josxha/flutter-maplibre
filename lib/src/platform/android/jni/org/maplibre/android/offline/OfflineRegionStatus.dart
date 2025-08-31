@@ -45,8 +45,9 @@ class OfflineRegionStatus extends jni$_.JObject {
   final jni$_.JObjType<OfflineRegionStatus> $type;
 
   @jni$_.internal
-  OfflineRegionStatus.fromReference(jni$_.JReference reference)
-    : $type = type,
+  OfflineRegionStatus.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -259,7 +260,10 @@ class OfflineRegionStatus extends jni$_.JObject {
     ).boolean;
   }
 
-  static final _id_isComplete = _class.instanceMethodId(r'isComplete', r'()Z');
+  static final _id_isComplete = _class.instanceMethodId(
+    r'isComplete',
+    r'()Z',
+  );
 
   static final _isComplete =
       jni$_.ProtectedJniExtensions.lookup<
@@ -298,7 +302,11 @@ final class $OfflineRegionStatus$NullableType
   @jni$_.internal
   @core$_.override
   OfflineRegionStatus? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : OfflineRegionStatus.fromReference(reference);
+      reference.isNull
+      ? null
+      : OfflineRegionStatus.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -333,7 +341,9 @@ final class $OfflineRegionStatus$Type
   @jni$_.internal
   @core$_.override
   OfflineRegionStatus fromReference(jni$_.JReference reference) =>
-      OfflineRegionStatus.fromReference(reference);
+      OfflineRegionStatus.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();

@@ -47,8 +47,9 @@ class MapLibreAnimatorListener extends jni$_.JObject {
   final jni$_.JObjType<MapLibreAnimatorListener> $type;
 
   @jni$_.internal
-  MapLibreAnimatorListener.fromReference(jni$_.JReference reference)
-    : $type = type,
+  MapLibreAnimatorListener.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -120,7 +121,9 @@ class MapLibreAnimatorListener extends jni$_.JObject {
           >();
 
   /// from: `public void onAnimationCancel(android.animation.Animator animator)`
-  void onAnimationCancel(jni$_.JObject animator) {
+  void onAnimationCancel(
+    jni$_.JObject animator,
+  ) {
     final _$animator = animator.reference;
     _onAnimationCancel(
       reference.pointer,
@@ -153,7 +156,9 @@ class MapLibreAnimatorListener extends jni$_.JObject {
           >();
 
   /// from: `public void onAnimationEnd(android.animation.Animator animator)`
-  void onAnimationEnd(jni$_.JObject animator) {
+  void onAnimationEnd(
+    jni$_.JObject animator,
+  ) {
     final _$animator = animator.reference;
     _onAnimationEnd(
       reference.pointer,
@@ -178,7 +183,9 @@ final class $MapLibreAnimatorListener$NullableType
   MapLibreAnimatorListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : MapLibreAnimatorListener.fromReference(reference);
+      : MapLibreAnimatorListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -214,7 +221,9 @@ final class $MapLibreAnimatorListener$Type
   @jni$_.internal
   @core$_.override
   MapLibreAnimatorListener fromReference(jni$_.JReference reference) =>
-      MapLibreAnimatorListener.fromReference(reference);
+      MapLibreAnimatorListener.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();

@@ -47,8 +47,9 @@ class Formatted extends jni$_.JObject {
   final jni$_.JObjType<Formatted> $type;
 
   @jni$_.internal
-  Formatted.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Formatted.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -185,7 +186,9 @@ class Formatted extends jni$_.JObject {
           >();
 
   /// from: `public boolean equals(java.lang.Object object)`
-  bool equals(jni$_.JObject? object) {
+  bool equals(
+    jni$_.JObject? object,
+  ) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     return _equals(
       reference.pointer,
@@ -194,7 +197,10 @@ class Formatted extends jni$_.JObject {
     ).boolean;
   }
 
-  static final _id_hashCode$1 = _class.instanceMethodId(r'hashCode', r'()I');
+  static final _id_hashCode$1 = _class.instanceMethodId(
+    r'hashCode',
+    r'()I',
+  );
 
   static final _hashCode$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -261,8 +267,11 @@ final class $Formatted$NullableType extends jni$_.JObjType<Formatted?> {
 
   @jni$_.internal
   @core$_.override
-  Formatted? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : Formatted.fromReference(reference);
+  Formatted? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : Formatted.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -296,7 +305,9 @@ final class $Formatted$Type extends jni$_.JObjType<Formatted> {
   @jni$_.internal
   @core$_.override
   Formatted fromReference(jni$_.JReference reference) =>
-      Formatted.fromReference(reference);
+      Formatted.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
