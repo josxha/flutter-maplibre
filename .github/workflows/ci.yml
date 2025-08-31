@@ -16,7 +16,7 @@ jobs:
     name: "[Dart] Check formatting"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: subosito/flutter-action@v2
         with:
           cache: true
@@ -28,7 +28,7 @@ jobs:
     name: "[Dart] Static code analysis"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: subosito/flutter-action@v2
         with:
           cache: true
@@ -40,7 +40,7 @@ jobs:
     name: "[Kotlin] Code quality"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: ktlint
         uses: ScaCap/action-ktlint@v1
         with:
@@ -56,7 +56,7 @@ jobs:
 #      run:
 #        working-directory: example
 #    steps:
-#      - uses: actions/checkout@v4
+#      - uses: actions/checkout@v5
 #      - uses: futureware-tech/simulator-action@v3
 #        with:
 #          model: 'iPhone 15'
@@ -74,7 +74,7 @@ jobs:
         sdk: [ '3.35.0', '' ]
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: "Setup Flutter SDK"
         uses: subosito/flutter-action@v2
         with:
@@ -97,7 +97,7 @@ jobs:
         api-level: [ 24, 35 ]
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: "Setup Flutter SDK"
         uses: subosito/flutter-action@v2
         with:
@@ -135,7 +135,7 @@ jobs:
 #      run:
 #        working-directory: example
 #    steps:
-#      - uses: actions/checkout@v4
+#      - uses: actions/checkout@v5
 #      - name: "Setup Flutter SDK"
 #        uses: subosito/flutter-action@v2
 #        with:
@@ -158,7 +158,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout project
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -180,7 +180,7 @@ jobs:
       matrix:
         sdk: [ '3.35.0', '' ]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ matrix.sdk }}
@@ -212,7 +212,7 @@ jobs:
 #      matrix:
 #        sdk: [ '3.35.0', '' ]
 #    steps:
-#      - uses: actions/checkout@v4
+#      - uses: actions/checkout@v5
 #      - uses: subosito/flutter-action@v2
 #        with:
 #          flutter-version: ${{ matrix.sdk }}
@@ -241,7 +241,7 @@ jobs:
       matrix:
         sdk: [ '3.35.0', '' ]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ matrix.sdk }}
@@ -261,7 +261,7 @@ jobs:
       matrix:
         sdk: [ '3.35.0', '' ]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ matrix.sdk }}
