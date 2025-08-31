@@ -49,8 +49,9 @@ class VisibleRegion$Companion extends jni$_.JObject {
   final jni$_.JObjType<VisibleRegion$Companion> $type;
 
   @jni$_.internal
-  VisibleRegion$Companion.fromReference(jni$_.JReference reference)
-    : $type = type,
+  VisibleRegion$Companion.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -84,7 +85,9 @@ class VisibleRegion$Companion extends jni$_.JObject {
 
   /// from: `synthetic public void <init>(kotlin.jvm.internal.DefaultConstructorMarker defaultConstructorMarker)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory VisibleRegion$Companion(jni$_.JObject? defaultConstructorMarker) {
+  factory VisibleRegion$Companion(
+    jni$_.JObject? defaultConstructorMarker,
+  ) {
     final _$defaultConstructorMarker =
         defaultConstructorMarker?.reference ?? jni$_.jNullReference;
     return VisibleRegion$Companion.fromReference(
@@ -112,7 +115,9 @@ final class $VisibleRegion$Companion$NullableType
   VisibleRegion$Companion? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : VisibleRegion$Companion.fromReference(reference);
+      : VisibleRegion$Companion.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -148,7 +153,9 @@ final class $VisibleRegion$Companion$Type
   @jni$_.internal
   @core$_.override
   VisibleRegion$Companion fromReference(jni$_.JReference reference) =>
-      VisibleRegion$Companion.fromReference(reference);
+      VisibleRegion$Companion.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -179,8 +186,9 @@ class VisibleRegion extends jni$_.JObject {
   final jni$_.JObjType<VisibleRegion> $type;
 
   @jni$_.internal
-  VisibleRegion.fromReference(jni$_.JReference reference)
-    : $type = type,
+  VisibleRegion.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -345,7 +353,9 @@ class VisibleRegion extends jni$_.JObject {
           >();
 
   /// from: `public boolean equals(java.lang.Object object)`
-  bool equals(jni$_.JObject? object) {
+  bool equals(
+    jni$_.JObject? object,
+  ) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     return _equals(
       reference.pointer,
@@ -384,7 +394,10 @@ class VisibleRegion extends jni$_.JObject {
     ).object<jni$_.JString>(const jni$_.JStringType());
   }
 
-  static final _id_hashCode$1 = _class.instanceMethodId(r'hashCode', r'()I');
+  static final _id_hashCode$1 = _class.instanceMethodId(
+    r'hashCode',
+    r'()I',
+  );
 
   static final _hashCode$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -464,7 +477,10 @@ class VisibleRegion extends jni$_.JObject {
           >();
 
   /// from: `public void writeToParcel(android.os.Parcel parcel, int i)`
-  void writeToParcel(jni$_.JObject parcel, int i) {
+  void writeToParcel(
+    jni$_.JObject parcel,
+    int i,
+  ) {
     final _$parcel = parcel.reference;
     _writeToParcel(
       reference.pointer,
@@ -529,8 +545,11 @@ final class $VisibleRegion$NullableType extends jni$_.JObjType<VisibleRegion?> {
 
   @jni$_.internal
   @core$_.override
-  VisibleRegion? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : VisibleRegion.fromReference(reference);
+  VisibleRegion? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : VisibleRegion.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -564,7 +583,9 @@ final class $VisibleRegion$Type extends jni$_.JObjType<VisibleRegion> {
   @jni$_.internal
   @core$_.override
   VisibleRegion fromReference(jni$_.JReference reference) =>
-      VisibleRegion.fromReference(reference);
+      VisibleRegion.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

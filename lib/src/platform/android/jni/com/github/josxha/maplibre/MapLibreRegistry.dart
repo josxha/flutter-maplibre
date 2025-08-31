@@ -48,8 +48,9 @@ class MapLibreRegistry extends jni$_.JObject {
   final jni$_.JObjType<MapLibreRegistry> $type;
 
   @jni$_.internal
-  MapLibreRegistry.fromReference(jni$_.JReference reference)
-    : $type = type,
+  MapLibreRegistry.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -94,7 +95,9 @@ class MapLibreRegistry extends jni$_.JObject {
 
   /// from: `public final org.maplibre.android.maps.MapLibreMap getMap(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  maplibremap$_.MapLibreMap? getMap(int i) {
+  maplibremap$_.MapLibreMap? getMap(
+    int i,
+  ) {
     return _getMap(
       reference.pointer,
       _id_getMap as jni$_.JMethodIDPtr,
@@ -129,7 +132,10 @@ class MapLibreRegistry extends jni$_.JObject {
           >();
 
   /// from: `public final void addMap(int i, org.maplibre.android.maps.MapLibreMap mapLibreMap)`
-  void addMap(int i, maplibremap$_.MapLibreMap mapLibreMap) {
+  void addMap(
+    int i,
+    maplibremap$_.MapLibreMap mapLibreMap,
+  ) {
     final _$mapLibreMap = mapLibreMap.reference;
     _addMap(
       reference.pointer,
@@ -193,7 +199,9 @@ class MapLibreRegistry extends jni$_.JObject {
           >();
 
   /// from: `public final void setActivity(android.app.Activity activity)`
-  void setActivity(jni$_.JObject? activity) {
+  void setActivity(
+    jni$_.JObject? activity,
+  ) {
     final _$activity = activity?.reference ?? jni$_.jNullReference;
     _setActivity(
       reference.pointer,
@@ -256,7 +264,9 @@ class MapLibreRegistry extends jni$_.JObject {
           >();
 
   /// from: `public final void setContext(android.content.Context context)`
-  void setContext(jni$_.JObject? context) {
+  void setContext(
+    jni$_.JObject? context,
+  ) {
     final _$context = context?.reference ?? jni$_.jNullReference;
     _setContext(
       reference.pointer,
@@ -278,7 +288,11 @@ final class $MapLibreRegistry$NullableType
   @jni$_.internal
   @core$_.override
   MapLibreRegistry? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : MapLibreRegistry.fromReference(reference);
+      reference.isNull
+      ? null
+      : MapLibreRegistry.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -312,7 +326,9 @@ final class $MapLibreRegistry$Type extends jni$_.JObjType<MapLibreRegistry> {
   @jni$_.internal
   @core$_.override
   MapLibreRegistry fromReference(jni$_.JReference reference) =>
-      MapLibreRegistry.fromReference(reference);
+      MapLibreRegistry.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();

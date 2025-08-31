@@ -114,7 +114,9 @@ final class $FileUtils$CheckFileReadPermissionTask$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : FileUtils$CheckFileReadPermissionTask.fromReference(reference);
+      : FileUtils$CheckFileReadPermissionTask.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -154,7 +156,9 @@ final class $FileUtils$CheckFileReadPermissionTask$Type
   @core$_.override
   FileUtils$CheckFileReadPermissionTask fromReference(
     jni$_.JReference reference,
-  ) => FileUtils$CheckFileReadPermissionTask.fromReference(reference);
+  ) => FileUtils$CheckFileReadPermissionTask.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -254,7 +258,9 @@ final class $FileUtils$CheckFileWritePermissionTask$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : FileUtils$CheckFileWritePermissionTask.fromReference(reference);
+      : FileUtils$CheckFileWritePermissionTask.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -294,7 +300,9 @@ final class $FileUtils$CheckFileWritePermissionTask$Type
   @core$_.override
   FileUtils$CheckFileWritePermissionTask fromReference(
     jni$_.JReference reference,
-  ) => FileUtils$CheckFileWritePermissionTask.fromReference(reference);
+  ) => FileUtils$CheckFileWritePermissionTask.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -368,7 +376,10 @@ class FileUtils$OnCheckFileReadPermissionListener extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_onError = _class.instanceMethodId(r'onError', r'()V');
+  static final _id_onError = _class.instanceMethodId(
+    r'onError',
+    r'()V',
+  );
 
   static final _onError =
       jni$_.ProtectedJniExtensions.lookup<
@@ -401,7 +412,11 @@ class FileUtils$OnCheckFileReadPermissionListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -526,7 +541,9 @@ final class $FileUtils$OnCheckFileReadPermissionListener$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : FileUtils$OnCheckFileReadPermissionListener.fromReference(reference);
+      : FileUtils$OnCheckFileReadPermissionListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -566,7 +583,9 @@ final class $FileUtils$OnCheckFileReadPermissionListener$Type
   @core$_.override
   FileUtils$OnCheckFileReadPermissionListener fromReference(
     jni$_.JReference reference,
-  ) => FileUtils$OnCheckFileReadPermissionListener.fromReference(reference);
+  ) => FileUtils$OnCheckFileReadPermissionListener.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -642,7 +661,10 @@ class FileUtils$OnCheckFileWritePermissionListener extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_onError = _class.instanceMethodId(r'onError', r'()V');
+  static final _id_onError = _class.instanceMethodId(
+    r'onError',
+    r'()V',
+  );
 
   static final _onError =
       jni$_.ProtectedJniExtensions.lookup<
@@ -675,7 +697,11 @@ class FileUtils$OnCheckFileWritePermissionListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -801,7 +827,9 @@ final class $FileUtils$OnCheckFileWritePermissionListener$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : FileUtils$OnCheckFileWritePermissionListener.fromReference(reference);
+      : FileUtils$OnCheckFileWritePermissionListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -841,7 +869,9 @@ final class $FileUtils$OnCheckFileWritePermissionListener$Type
   @core$_.override
   FileUtils$OnCheckFileWritePermissionListener fromReference(
     jni$_.JReference reference,
-  ) => FileUtils$OnCheckFileWritePermissionListener.fromReference(reference);
+  ) => FileUtils$OnCheckFileWritePermissionListener.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -875,8 +905,9 @@ class FileUtils extends jni$_.JObject {
   final jni$_.JObjType<FileUtils> $type;
 
   @jni$_.internal
-  FileUtils.fromReference(jni$_.JReference reference)
-    : $type = type,
+  FileUtils.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -886,7 +917,9 @@ class FileUtils extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $FileUtils$NullableType();
   static const type = $FileUtils$Type();
-  static final _id_new$ = _class.constructorId(r'()V');
+  static final _id_new$ = _class.constructorId(
+    r'()V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -936,7 +969,9 @@ class FileUtils extends jni$_.JObject {
           >();
 
   /// from: `static public void deleteFile(java.lang.String string)`
-  static void deleteFile(jni$_.JString string) {
+  static void deleteFile(
+    jni$_.JString string,
+  ) {
     final _$string = string.reference;
     _deleteFile(
       _class.reference.pointer,
@@ -956,8 +991,11 @@ final class $FileUtils$NullableType extends jni$_.JObjType<FileUtils?> {
 
   @jni$_.internal
   @core$_.override
-  FileUtils? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : FileUtils.fromReference(reference);
+  FileUtils? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : FileUtils.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -991,7 +1029,9 @@ final class $FileUtils$Type extends jni$_.JObjType<FileUtils> {
   @jni$_.internal
   @core$_.override
   FileUtils fromReference(jni$_.JReference reference) =>
-      FileUtils.fromReference(reference);
+      FileUtils.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

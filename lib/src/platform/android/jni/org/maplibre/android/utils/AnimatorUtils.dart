@@ -45,8 +45,9 @@ class AnimatorUtils$OnAnimationEndListener extends jni$_.JObject {
   final jni$_.JObjType<AnimatorUtils$OnAnimationEndListener> $type;
 
   @jni$_.internal
-  AnimatorUtils$OnAnimationEndListener.fromReference(jni$_.JReference reference)
-    : $type = type,
+  AnimatorUtils$OnAnimationEndListener.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -96,7 +97,11 @@ class AnimatorUtils$OnAnimationEndListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -143,7 +148,9 @@ class AnimatorUtils$OnAnimationEndListener extends jni$_.JObject {
       r'org.maplibre.android.utils.AnimatorUtils$OnAnimationEndListener',
       $p,
       _$invokePointer,
-      [if ($impl.onAnimationEnd$async) r'onAnimationEnd()V'],
+      [
+        if ($impl.onAnimationEnd$async) r'onAnimationEnd()V',
+      ],
     );
     final $a = $p.sendPort.nativePort;
     _$impls[$a] = $impl;
@@ -201,7 +208,9 @@ final class $AnimatorUtils$OnAnimationEndListener$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : AnimatorUtils$OnAnimationEndListener.fromReference(reference);
+      : AnimatorUtils$OnAnimationEndListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -241,7 +250,9 @@ final class $AnimatorUtils$OnAnimationEndListener$Type
   @core$_.override
   AnimatorUtils$OnAnimationEndListener fromReference(
     jni$_.JReference reference,
-  ) => AnimatorUtils$OnAnimationEndListener.fromReference(reference);
+  ) => AnimatorUtils$OnAnimationEndListener.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -272,8 +283,9 @@ class AnimatorUtils extends jni$_.JObject {
   final jni$_.JObjType<AnimatorUtils> $type;
 
   @jni$_.internal
-  AnimatorUtils.fromReference(jni$_.JReference reference)
-    : $type = type,
+  AnimatorUtils.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -283,7 +295,9 @@ class AnimatorUtils extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $AnimatorUtils$NullableType();
   static const type = $AnimatorUtils$Type();
-  static final _id_new$ = _class.constructorId(r'()V');
+  static final _id_new$ = _class.constructorId(
+    r'()V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -436,7 +450,10 @@ class AnimatorUtils extends jni$_.JObject {
           >();
 
   /// from: `static public void animate(android.view.View view, int i)`
-  static void animate$2(jni$_.JObject view, int i) {
+  static void animate$2(
+    jni$_.JObject view,
+    int i,
+  ) {
     final _$view = view.reference;
     _animate$2(
       _class.reference.pointer,
@@ -474,7 +491,11 @@ class AnimatorUtils extends jni$_.JObject {
           >();
 
   /// from: `static public void animate(android.view.View view, int i, int i1)`
-  static void animate$3(jni$_.JObject view, int i, int i1) {
+  static void animate$3(
+    jni$_.JObject view,
+    int i,
+    int i1,
+  ) {
     final _$view = view.reference;
     _animate$3(
       _class.reference.pointer,
@@ -510,7 +531,10 @@ class AnimatorUtils extends jni$_.JObject {
           >();
 
   /// from: `static public void rotate(android.view.View view, float f)`
-  static void rotate(jni$_.JObject view, double f) {
+  static void rotate(
+    jni$_.JObject view,
+    double f,
+  ) {
     final _$view = view.reference;
     _rotate(
       _class.reference.pointer,
@@ -545,7 +569,10 @@ class AnimatorUtils extends jni$_.JObject {
           >();
 
   /// from: `static public void rotateBy(android.view.View view, float f)`
-  static void rotateBy(jni$_.JObject view, double f) {
+  static void rotateBy(
+    jni$_.JObject view,
+    double f,
+  ) {
     final _$view = view.reference;
     _rotateBy(
       _class.reference.pointer,
@@ -629,7 +656,10 @@ class AnimatorUtils extends jni$_.JObject {
           >();
 
   /// from: `static public void alpha(android.view.View view, float f)`
-  static void alpha$1(jni$_.JObject view, double f) {
+  static void alpha$1(
+    jni$_.JObject view,
+    double f,
+  ) {
     final _$view = view.reference;
     _alpha$1(
       _class.reference.pointer,
@@ -650,8 +680,11 @@ final class $AnimatorUtils$NullableType extends jni$_.JObjType<AnimatorUtils?> {
 
   @jni$_.internal
   @core$_.override
-  AnimatorUtils? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : AnimatorUtils.fromReference(reference);
+  AnimatorUtils? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : AnimatorUtils.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -685,7 +718,9 @@ final class $AnimatorUtils$Type extends jni$_.JObjType<AnimatorUtils> {
   @jni$_.internal
   @core$_.override
   AnimatorUtils fromReference(jni$_.JReference reference) =>
-      AnimatorUtils.fromReference(reference);
+      AnimatorUtils.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

@@ -45,8 +45,9 @@ class CameraMode$Mode extends jni$_.JObject {
   final jni$_.JObjType<CameraMode$Mode> $type;
 
   @jni$_.internal
-  CameraMode$Mode.fromReference(jni$_.JReference reference)
-    : $type = type,
+  CameraMode$Mode.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -66,7 +67,11 @@ class CameraMode$Mode extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -115,10 +120,14 @@ class CameraMode$Mode extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory CameraMode$Mode.implement($CameraMode$Mode $impl) {
+  factory CameraMode$Mode.implement(
+    $CameraMode$Mode $impl,
+  ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return CameraMode$Mode.fromReference($i.implementReference());
+    return CameraMode$Mode.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -142,8 +151,11 @@ final class $CameraMode$Mode$NullableType
 
   @jni$_.internal
   @core$_.override
-  CameraMode$Mode? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : CameraMode$Mode.fromReference(reference);
+  CameraMode$Mode? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : CameraMode$Mode.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -178,7 +190,9 @@ final class $CameraMode$Mode$Type extends jni$_.JObjType<CameraMode$Mode> {
   @jni$_.internal
   @core$_.override
   CameraMode$Mode fromReference(jni$_.JReference reference) =>
-      CameraMode$Mode.fromReference(reference);
+      CameraMode$Mode.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -209,8 +223,9 @@ class CameraMode extends jni$_.JObject {
   final jni$_.JObjType<CameraMode> $type;
 
   @jni$_.internal
-  CameraMode.fromReference(jni$_.JReference reference)
-    : $type = type,
+  CameraMode.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -253,8 +268,11 @@ final class $CameraMode$NullableType extends jni$_.JObjType<CameraMode?> {
 
   @jni$_.internal
   @core$_.override
-  CameraMode? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : CameraMode.fromReference(reference);
+  CameraMode? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : CameraMode.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -288,7 +306,9 @@ final class $CameraMode$Type extends jni$_.JObjType<CameraMode> {
   @jni$_.internal
   @core$_.override
   CameraMode fromReference(jni$_.JReference reference) =>
-      CameraMode.fromReference(reference);
+      CameraMode.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

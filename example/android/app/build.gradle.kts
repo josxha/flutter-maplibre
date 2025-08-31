@@ -8,7 +8,7 @@ plugins {
 android {
     namespace = "com.github.josxha.maplibre_example"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = "26.3.11579264" // flutter.ndkVersion
+    ndkVersion = "27.0.12077973" // flutter.ndkVersion
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -21,8 +21,7 @@ android {
 
     defaultConfig {
         applicationId = "com.github.josxha.maplibre_example"
-        // minSdk 21 required by maplibre
-        minSdk = 21 // flutter.minSdkVersion
+        minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName

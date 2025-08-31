@@ -51,8 +51,9 @@ class HillshadeLayer extends layer$_.Layer {
   final jni$_.JObjType<HillshadeLayer> $type;
 
   @jni$_.internal
-  HillshadeLayer.fromReference(jni$_.JReference reference)
-    : $type = type,
+  HillshadeLayer.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -89,7 +90,10 @@ class HillshadeLayer extends layer$_.Layer {
 
   /// from: `public void <init>(java.lang.String string, java.lang.String string1)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory HillshadeLayer(jni$_.JString? string, jni$_.JString? string1) {
+  factory HillshadeLayer(
+    jni$_.JString? string,
+    jni$_.JString? string1,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
     return HillshadeLayer.fromReference(
@@ -126,7 +130,9 @@ class HillshadeLayer extends layer$_.Layer {
           >();
 
   /// from: `public void setSourceLayer(java.lang.String string)`
-  void setSourceLayer(jni$_.JString? string) {
+  void setSourceLayer(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setSourceLayer(
       reference.pointer,
@@ -160,7 +166,9 @@ class HillshadeLayer extends layer$_.Layer {
 
   /// from: `public org.maplibre.android.style.layers.HillshadeLayer withSourceLayer(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  HillshadeLayer withSourceLayer(jni$_.JString? string) {
+  HillshadeLayer withSourceLayer(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return _withSourceLayer(
       reference.pointer,
@@ -810,8 +818,11 @@ final class $HillshadeLayer$NullableType
 
   @jni$_.internal
   @core$_.override
-  HillshadeLayer? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : HillshadeLayer.fromReference(reference);
+  HillshadeLayer? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : HillshadeLayer.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const layer$_.$Layer$NullableType();
@@ -845,7 +856,9 @@ final class $HillshadeLayer$Type extends jni$_.JObjType<HillshadeLayer> {
   @jni$_.internal
   @core$_.override
   HillshadeLayer fromReference(jni$_.JReference reference) =>
-      HillshadeLayer.fromReference(reference);
+      HillshadeLayer.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const layer$_.$Layer$NullableType();

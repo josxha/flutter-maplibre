@@ -45,8 +45,9 @@ class JObject$OnLocalRequestResponse extends jni$_.JObject {
   final jni$_.JObjType<JObject$OnLocalRequestResponse> $type;
 
   @jni$_.internal
-  JObject$OnLocalRequestResponse.fromReference(jni$_.JReference reference)
-    : $type = type,
+  JObject$OnLocalRequestResponse.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -80,7 +81,9 @@ class JObject$OnLocalRequestResponse extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onResponse(byte[] bs)`
-  void onResponse(jni$_.JByteArray? bs) {
+  void onResponse(
+    jni$_.JByteArray? bs,
+  ) {
     final _$bs = bs?.reference ?? jni$_.jNullReference;
     _onResponse(
       reference.pointer,
@@ -98,7 +101,11 @@ class JObject$OnLocalRequestResponse extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -147,7 +154,9 @@ class JObject$OnLocalRequestResponse extends jni$_.JObject {
       r'org.maplibre.android.http.LocalRequestTask$OnLocalRequestResponse',
       $p,
       _$invokePointer,
-      [if ($impl.onResponse$async) r'onResponse([B)V'],
+      [
+        if ($impl.onResponse$async) r'onResponse([B)V',
+      ],
     );
     final $a = $p.sendPort.nativePort;
     _$impls[$a] = $impl;
@@ -204,7 +213,9 @@ final class $JObject$OnLocalRequestResponse$NullableType
   JObject$OnLocalRequestResponse? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : JObject$OnLocalRequestResponse.fromReference(reference);
+      : JObject$OnLocalRequestResponse.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -241,7 +252,9 @@ final class $JObject$OnLocalRequestResponse$Type
   @jni$_.internal
   @core$_.override
   JObject$OnLocalRequestResponse fromReference(jni$_.JReference reference) =>
-      JObject$OnLocalRequestResponse.fromReference(reference);
+      JObject$OnLocalRequestResponse.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

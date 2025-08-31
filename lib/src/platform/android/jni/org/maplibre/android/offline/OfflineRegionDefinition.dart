@@ -47,8 +47,9 @@ class OfflineRegionDefinition extends jni$_.JObject {
   final jni$_.JObjType<OfflineRegionDefinition> $type;
 
   @jni$_.internal
-  OfflineRegionDefinition.fromReference(jni$_.JReference reference)
-    : $type = type,
+  OfflineRegionDefinition.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -120,7 +121,10 @@ class OfflineRegionDefinition extends jni$_.JObject {
     ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
-  static final _id_getMinZoom = _class.instanceMethodId(r'getMinZoom', r'()D');
+  static final _id_getMinZoom = _class.instanceMethodId(
+    r'getMinZoom',
+    r'()D',
+  );
 
   static final _getMinZoom =
       jni$_.ProtectedJniExtensions.lookup<
@@ -146,7 +150,10 @@ class OfflineRegionDefinition extends jni$_.JObject {
     ).doubleFloat;
   }
 
-  static final _id_getMaxZoom = _class.instanceMethodId(r'getMaxZoom', r'()D');
+  static final _id_getMaxZoom = _class.instanceMethodId(
+    r'getMaxZoom',
+    r'()D',
+  );
 
   static final _getMaxZoom =
       jni$_.ProtectedJniExtensions.lookup<
@@ -269,7 +276,11 @@ class OfflineRegionDefinition extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -358,10 +369,14 @@ class OfflineRegionDefinition extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory OfflineRegionDefinition.implement($OfflineRegionDefinition $impl) {
+  factory OfflineRegionDefinition.implement(
+    $OfflineRegionDefinition $impl,
+  ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return OfflineRegionDefinition.fromReference($i.implementReference());
+    return OfflineRegionDefinition.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -454,7 +469,9 @@ final class $OfflineRegionDefinition$NullableType
   OfflineRegionDefinition? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : OfflineRegionDefinition.fromReference(reference);
+      : OfflineRegionDefinition.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -490,7 +507,9 @@ final class $OfflineRegionDefinition$Type
   @jni$_.internal
   @core$_.override
   OfflineRegionDefinition fromReference(jni$_.JReference reference) =>
-      OfflineRegionDefinition.fromReference(reference);
+      OfflineRegionDefinition.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

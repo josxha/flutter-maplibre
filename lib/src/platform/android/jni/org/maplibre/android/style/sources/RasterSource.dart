@@ -53,8 +53,9 @@ class RasterSource$Companion extends jni$_.JObject {
   final jni$_.JObjType<RasterSource$Companion> $type;
 
   @jni$_.internal
-  RasterSource$Companion.fromReference(jni$_.JReference reference)
-    : $type = type,
+  RasterSource$Companion.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -88,7 +89,9 @@ class RasterSource$Companion extends jni$_.JObject {
 
   /// from: `synthetic public void <init>(kotlin.jvm.internal.DefaultConstructorMarker defaultConstructorMarker)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory RasterSource$Companion(jni$_.JObject? defaultConstructorMarker) {
+  factory RasterSource$Companion(
+    jni$_.JObject? defaultConstructorMarker,
+  ) {
     final _$defaultConstructorMarker =
         defaultConstructorMarker?.reference ?? jni$_.jNullReference;
     return RasterSource$Companion.fromReference(
@@ -114,7 +117,11 @@ final class $RasterSource$Companion$NullableType
   @jni$_.internal
   @core$_.override
   RasterSource$Companion? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : RasterSource$Companion.fromReference(reference);
+      reference.isNull
+      ? null
+      : RasterSource$Companion.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -150,7 +157,9 @@ final class $RasterSource$Companion$Type
   @jni$_.internal
   @core$_.override
   RasterSource$Companion fromReference(jni$_.JReference reference) =>
-      RasterSource$Companion.fromReference(reference);
+      RasterSource$Companion.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -181,8 +190,9 @@ class RasterSource extends source$_.Source {
   final jni$_.JObjType<RasterSource> $type;
 
   @jni$_.internal
-  RasterSource.fromReference(jni$_.JReference reference)
-    : $type = type,
+  RasterSource.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -204,7 +214,9 @@ class RasterSource extends source$_.Source {
 
   /// from: `static public final int DEFAULT_TILE_SIZE`
   static const DEFAULT_TILE_SIZE = 512;
-  static final _id_new$ = _class.constructorId(r'(J)V');
+  static final _id_new$ = _class.constructorId(
+    r'(J)V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -226,7 +238,9 @@ class RasterSource extends source$_.Source {
 
   /// from: `public void <init>(long j)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory RasterSource(int j) {
+  factory RasterSource(
+    int j,
+  ) {
     return RasterSource.fromReference(
       _new$(
         _class.reference.pointer,
@@ -263,7 +277,10 @@ class RasterSource extends source$_.Source {
 
   /// from: `public void <init>(java.lang.String string, java.net.URL uRL)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory RasterSource.new$1(jni$_.JString? string, url$_.URL uRL) {
+  factory RasterSource.new$1(
+    jni$_.JString? string,
+    url$_.URL uRL,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$uRL = uRL.reference;
     return RasterSource.fromReference(
@@ -303,7 +320,10 @@ class RasterSource extends source$_.Source {
 
   /// from: `public void <init>(java.lang.String string, java.net.URI uRI)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory RasterSource.new$2(jni$_.JString? string, uri$_.URI uRI) {
+  factory RasterSource.new$2(
+    jni$_.JString? string,
+    uri$_.URI uRI,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$uRI = uRI.reference;
     return RasterSource.fromReference(
@@ -343,7 +363,10 @@ class RasterSource extends source$_.Source {
 
   /// from: `public void <init>(java.lang.String string, java.lang.String string1)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory RasterSource.new$3(jni$_.JString? string, jni$_.JString? string1) {
+  factory RasterSource.new$3(
+    jni$_.JString? string,
+    jni$_.JString? string1,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
     return RasterSource.fromReference(
@@ -433,7 +456,10 @@ class RasterSource extends source$_.Source {
 
   /// from: `public void <init>(java.lang.String string, org.maplibre.android.style.sources.TileSet tileSet)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory RasterSource.new$5(jni$_.JString? string, tileset$_.TileSet tileSet) {
+  factory RasterSource.new$5(
+    jni$_.JString? string,
+    tileset$_.TileSet tileSet,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$tileSet = tileSet.reference;
     return RasterSource.fromReference(
@@ -567,8 +593,11 @@ final class $RasterSource$NullableType extends jni$_.JObjType<RasterSource?> {
 
   @jni$_.internal
   @core$_.override
-  RasterSource? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : RasterSource.fromReference(reference);
+  RasterSource? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : RasterSource.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const source$_.$Source$Type();
@@ -602,7 +631,9 @@ final class $RasterSource$Type extends jni$_.JObjType<RasterSource> {
   @jni$_.internal
   @core$_.override
   RasterSource fromReference(jni$_.JReference reference) =>
-      RasterSource.fromReference(reference);
+      RasterSource.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const source$_.$Source$Type();
