@@ -54,8 +54,10 @@ class LocationEngineImpl<$T extends jni$_.JObject?> extends jni$_.JObject {
   final jni$_.JObjType<$T> T;
 
   @jni$_.internal
-  LocationEngineImpl.fromReference(this.T, jni$_.JReference reference)
-    : $type = type<$T>(T),
+  LocationEngineImpl.fromReference(
+    this.T,
+    jni$_.JReference reference,
+  ) : $type = type<$T>(T),
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -64,14 +66,20 @@ class LocationEngineImpl<$T extends jni$_.JObject?> extends jni$_.JObject {
 
   /// The type which includes information such as the signature of this class.
   static $LocationEngineImpl$NullableType<$T>
-  nullableType<$T extends jni$_.JObject?>(jni$_.JObjType<$T> T) {
-    return $LocationEngineImpl$NullableType<$T>(T);
+  nullableType<$T extends jni$_.JObject?>(
+    jni$_.JObjType<$T> T,
+  ) {
+    return $LocationEngineImpl$NullableType<$T>(
+      T,
+    );
   }
 
   static $LocationEngineImpl$Type<$T> type<$T extends jni$_.JObject?>(
     jni$_.JObjType<$T> T,
   ) {
-    return $LocationEngineImpl$Type<$T>(T);
+    return $LocationEngineImpl$Type<$T>(
+      T,
+    );
   }
 
   static final _id_createListener = _class.instanceMethodId(
@@ -266,7 +274,9 @@ class LocationEngineImpl<$T extends jni$_.JObject?> extends jni$_.JObject {
           >();
 
   /// from: `public abstract void removeLocationUpdates(T object)`
-  void removeLocationUpdates($T? object) {
+  void removeLocationUpdates(
+    $T? object,
+  ) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     _removeLocationUpdates(
       reference.pointer,
@@ -299,7 +309,9 @@ class LocationEngineImpl<$T extends jni$_.JObject?> extends jni$_.JObject {
           >();
 
   /// from: `public abstract void removeLocationUpdates(android.app.PendingIntent pendingIntent)`
-  void removeLocationUpdates$1(jni$_.JObject? pendingIntent) {
+  void removeLocationUpdates$1(
+    jni$_.JObject? pendingIntent,
+  ) {
     final _$pendingIntent = pendingIntent?.reference ?? jni$_.jNullReference;
     _removeLocationUpdates$1(
       reference.pointer,
@@ -317,7 +329,11 @@ class LocationEngineImpl<$T extends jni$_.JObject?> extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -440,7 +456,9 @@ class LocationEngineImpl<$T extends jni$_.JObject?> extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory LocationEngineImpl.implement($LocationEngineImpl<$T> $impl) {
+  factory LocationEngineImpl.implement(
+    $LocationEngineImpl<$T> $impl,
+  ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
     return LocationEngineImpl<$T>.fromReference(
@@ -648,7 +666,9 @@ final class $LocationEngineImpl$NullableType<$T extends jni$_.JObject?>
   final jni$_.JObjType<$T> T;
 
   @jni$_.internal
-  const $LocationEngineImpl$NullableType(this.T);
+  const $LocationEngineImpl$NullableType(
+    this.T,
+  );
 
   @jni$_.internal
   @core$_.override
@@ -660,7 +680,10 @@ final class $LocationEngineImpl$NullableType<$T extends jni$_.JObject?>
   LocationEngineImpl<$T>? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : LocationEngineImpl<$T>.fromReference(T, reference);
+      : LocationEngineImpl<$T>.fromReference(
+          T,
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -690,7 +713,9 @@ final class $LocationEngineImpl$Type<$T extends jni$_.JObject?>
   final jni$_.JObjType<$T> T;
 
   @jni$_.internal
-  const $LocationEngineImpl$Type(this.T);
+  const $LocationEngineImpl$Type(
+    this.T,
+  );
 
   @jni$_.internal
   @core$_.override
@@ -700,7 +725,10 @@ final class $LocationEngineImpl$Type<$T extends jni$_.JObject?>
   @jni$_.internal
   @core$_.override
   LocationEngineImpl<$T> fromReference(jni$_.JReference reference) =>
-      LocationEngineImpl<$T>.fromReference(T, reference);
+      LocationEngineImpl<$T>.fromReference(
+        T,
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

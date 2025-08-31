@@ -45,8 +45,9 @@ class Position extends jni$_.JObject {
   final jni$_.JObjType<Position> $type;
 
   @jni$_.internal
-  Position.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Position.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -56,7 +57,9 @@ class Position extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Position$NullableType();
   static const type = $Position$Type();
-  static final _id_new$ = _class.constructorId(r'(FFF)V');
+  static final _id_new$ = _class.constructorId(
+    r'(FFF)V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -80,7 +83,11 @@ class Position extends jni$_.JObject {
 
   /// from: `public void <init>(float f, float f1, float f2)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory Position(double f, double f1, double f2) {
+  factory Position(
+    double f,
+    double f1,
+    double f2,
+  ) {
     return Position.fromReference(
       _new$(
         _class.reference.pointer,
@@ -119,7 +126,11 @@ class Position extends jni$_.JObject {
 
   /// from: `static public org.maplibre.android.style.light.Position fromPosition(float f, float f1, float f2)`
   /// The returned object must be released after use, by calling the [release] method.
-  static Position? fromPosition(double f, double f1, double f2) {
+  static Position? fromPosition(
+    double f,
+    double f1,
+    double f2,
+  ) {
     return _fromPosition(
       _class.reference.pointer,
       _id_fromPosition as jni$_.JMethodIDPtr,
@@ -153,7 +164,9 @@ class Position extends jni$_.JObject {
           >();
 
   /// from: `public boolean equals(java.lang.Object object)`
-  bool equals(jni$_.JObject? object) {
+  bool equals(
+    jni$_.JObject? object,
+  ) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     return _equals(
       reference.pointer,
@@ -162,7 +175,10 @@ class Position extends jni$_.JObject {
     ).boolean;
   }
 
-  static final _id_hashCode$1 = _class.instanceMethodId(r'hashCode', r'()I');
+  static final _id_hashCode$1 = _class.instanceMethodId(
+    r'hashCode',
+    r'()I',
+  );
 
   static final _hashCode$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -229,8 +245,11 @@ final class $Position$NullableType extends jni$_.JObjType<Position?> {
 
   @jni$_.internal
   @core$_.override
-  Position? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : Position.fromReference(reference);
+  Position? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : Position.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -263,8 +282,9 @@ final class $Position$Type extends jni$_.JObjType<Position> {
 
   @jni$_.internal
   @core$_.override
-  Position fromReference(jni$_.JReference reference) =>
-      Position.fromReference(reference);
+  Position fromReference(jni$_.JReference reference) => Position.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

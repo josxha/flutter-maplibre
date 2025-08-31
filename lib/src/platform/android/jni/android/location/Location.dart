@@ -45,8 +45,9 @@ class Location extends jni$_.JObject {
   final jni$_.JObjType<Location> $type;
 
   @jni$_.internal
-  Location.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Location.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(r'android/location/Location');
@@ -72,7 +73,9 @@ class Location extends jni$_.JObject {
 
   /// from: `static public final int FORMAT_SECONDS`
   static const FORMAT_SECONDS = 2;
-  static final _id_new$ = _class.constructorId(r'(Ljava/lang/String;)V');
+  static final _id_new$ = _class.constructorId(
+    r'(Landroid/location/Location;)V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -92,21 +95,23 @@ class Location extends jni$_.JObject {
             )
           >();
 
-  /// from: `public void <init>(java.lang.String string)`
+  /// from: `public void <init>(android.location.Location location)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory Location(jni$_.JString? string) {
-    final _$string = string?.reference ?? jni$_.jNullReference;
+  factory Location(
+    Location? location,
+  ) {
+    final _$location = location?.reference ?? jni$_.jNullReference;
     return Location.fromReference(
       _new$(
         _class.reference.pointer,
         _id_new$ as jni$_.JMethodIDPtr,
-        _$string.pointer,
+        _$location.pointer,
       ).reference,
     );
   }
 
   static final _id_new$1 = _class.constructorId(
-    r'(Landroid/location/Location;)V',
+    r'(Ljava/lang/String;)V',
   );
 
   static final _new$1 =
@@ -127,106 +132,19 @@ class Location extends jni$_.JObject {
             )
           >();
 
-  /// from: `public void <init>(android.location.Location location)`
+  /// from: `public void <init>(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory Location.new$1(Location? location) {
-    final _$location = location?.reference ?? jni$_.jNullReference;
+  factory Location.new$1(
+    jni$_.JString? string,
+  ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return Location.fromReference(
       _new$1(
         _class.reference.pointer,
         _id_new$1 as jni$_.JMethodIDPtr,
-        _$location.pointer,
+        _$string.pointer,
       ).reference,
     );
-  }
-
-  static final _id_set = _class.instanceMethodId(
-    r'set',
-    r'(Landroid/location/Location;)V',
-  );
-
-  static final _set =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public void set(android.location.Location location)`
-  void set(Location? location) {
-    final _$location = location?.reference ?? jni$_.jNullReference;
-    _set(
-      reference.pointer,
-      _id_set as jni$_.JMethodIDPtr,
-      _$location.pointer,
-    ).check();
-  }
-
-  static final _id_reset = _class.instanceMethodId(r'reset', r'()V');
-
-  static final _reset =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public void reset()`
-  void reset() {
-    _reset(reference.pointer, _id_reset as jni$_.JMethodIDPtr).check();
-  }
-
-  static final _id_distanceTo = _class.instanceMethodId(
-    r'distanceTo',
-    r'(Landroid/location/Location;)F',
-  );
-
-  static final _distanceTo =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallFloatMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public float distanceTo(android.location.Location location)`
-  double distanceTo(Location? location) {
-    final _$location = location?.reference ?? jni$_.jNullReference;
-    return _distanceTo(
-      reference.pointer,
-      _id_distanceTo as jni$_.JMethodIDPtr,
-      _$location.pointer,
-    ).float;
   }
 
   static final _id_bearingTo = _class.instanceMethodId(
@@ -253,1924 +171,15 @@ class Location extends jni$_.JObject {
           >();
 
   /// from: `public float bearingTo(android.location.Location location)`
-  double bearingTo(Location? location) {
+  double bearingTo(
+    Location? location,
+  ) {
     final _$location = location?.reference ?? jni$_.jNullReference;
     return _bearingTo(
       reference.pointer,
       _id_bearingTo as jni$_.JMethodIDPtr,
       _$location.pointer,
     ).float;
-  }
-
-  static final _id_getProvider = _class.instanceMethodId(
-    r'getProvider',
-    r'()Ljava/lang/String;',
-  );
-
-  static final _getProvider =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public java.lang.String getProvider()`
-  /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JString? getProvider() {
-    return _getProvider(
-      reference.pointer,
-      _id_getProvider as jni$_.JMethodIDPtr,
-    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
-  }
-
-  static final _id_setProvider = _class.instanceMethodId(
-    r'setProvider',
-    r'(Ljava/lang/String;)V',
-  );
-
-  static final _setProvider =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public void setProvider(java.lang.String string)`
-  void setProvider(jni$_.JString? string) {
-    final _$string = string?.reference ?? jni$_.jNullReference;
-    _setProvider(
-      reference.pointer,
-      _id_setProvider as jni$_.JMethodIDPtr,
-      _$string.pointer,
-    ).check();
-  }
-
-  static final _id_getTime = _class.instanceMethodId(r'getTime', r'()J');
-
-  static final _getTime =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallLongMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public long getTime()`
-  int getTime() {
-    return _getTime(reference.pointer, _id_getTime as jni$_.JMethodIDPtr).long;
-  }
-
-  static final _id_setTime = _class.instanceMethodId(r'setTime', r'(J)V');
-
-  static final _setTime =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Int64,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-            )
-          >();
-
-  /// from: `public void setTime(long j)`
-  void setTime(int j) {
-    _setTime(reference.pointer, _id_setTime as jni$_.JMethodIDPtr, j).check();
-  }
-
-  static final _id_getElapsedRealtimeNanos = _class.instanceMethodId(
-    r'getElapsedRealtimeNanos',
-    r'()J',
-  );
-
-  static final _getElapsedRealtimeNanos =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallLongMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public long getElapsedRealtimeNanos()`
-  int getElapsedRealtimeNanos() {
-    return _getElapsedRealtimeNanos(
-      reference.pointer,
-      _id_getElapsedRealtimeNanos as jni$_.JMethodIDPtr,
-    ).long;
-  }
-
-  static final _id_getElapsedRealtimeMillis = _class.instanceMethodId(
-    r'getElapsedRealtimeMillis',
-    r'()J',
-  );
-
-  static final _getElapsedRealtimeMillis =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallLongMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public long getElapsedRealtimeMillis()`
-  int getElapsedRealtimeMillis() {
-    return _getElapsedRealtimeMillis(
-      reference.pointer,
-      _id_getElapsedRealtimeMillis as jni$_.JMethodIDPtr,
-    ).long;
-  }
-
-  static final _id_getElapsedRealtimeAgeMillis = _class.instanceMethodId(
-    r'getElapsedRealtimeAgeMillis',
-    r'()J',
-  );
-
-  static final _getElapsedRealtimeAgeMillis =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallLongMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public long getElapsedRealtimeAgeMillis()`
-  int getElapsedRealtimeAgeMillis() {
-    return _getElapsedRealtimeAgeMillis(
-      reference.pointer,
-      _id_getElapsedRealtimeAgeMillis as jni$_.JMethodIDPtr,
-    ).long;
-  }
-
-  static final _id_getElapsedRealtimeAgeMillis$1 = _class.instanceMethodId(
-    r'getElapsedRealtimeAgeMillis',
-    r'(J)J',
-  );
-
-  static final _getElapsedRealtimeAgeMillis$1 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Int64,)>,
-              )
-            >
-          >('globalEnv_CallLongMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-            )
-          >();
-
-  /// from: `public long getElapsedRealtimeAgeMillis(long j)`
-  int getElapsedRealtimeAgeMillis$1(int j) {
-    return _getElapsedRealtimeAgeMillis$1(
-      reference.pointer,
-      _id_getElapsedRealtimeAgeMillis$1 as jni$_.JMethodIDPtr,
-      j,
-    ).long;
-  }
-
-  static final _id_setElapsedRealtimeNanos = _class.instanceMethodId(
-    r'setElapsedRealtimeNanos',
-    r'(J)V',
-  );
-
-  static final _setElapsedRealtimeNanos =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Int64,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-            )
-          >();
-
-  /// from: `public void setElapsedRealtimeNanos(long j)`
-  void setElapsedRealtimeNanos(int j) {
-    _setElapsedRealtimeNanos(
-      reference.pointer,
-      _id_setElapsedRealtimeNanos as jni$_.JMethodIDPtr,
-      j,
-    ).check();
-  }
-
-  static final _id_getElapsedRealtimeUncertaintyNanos = _class.instanceMethodId(
-    r'getElapsedRealtimeUncertaintyNanos',
-    r'()D',
-  );
-
-  static final _getElapsedRealtimeUncertaintyNanos =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallDoubleMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public double getElapsedRealtimeUncertaintyNanos()`
-  double getElapsedRealtimeUncertaintyNanos() {
-    return _getElapsedRealtimeUncertaintyNanos(
-      reference.pointer,
-      _id_getElapsedRealtimeUncertaintyNanos as jni$_.JMethodIDPtr,
-    ).doubleFloat;
-  }
-
-  static final _id_setElapsedRealtimeUncertaintyNanos = _class.instanceMethodId(
-    r'setElapsedRealtimeUncertaintyNanos',
-    r'(D)V',
-  );
-
-  static final _setElapsedRealtimeUncertaintyNanos =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Double,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              double,
-            )
-          >();
-
-  /// from: `public void setElapsedRealtimeUncertaintyNanos(double d)`
-  void setElapsedRealtimeUncertaintyNanos(double d) {
-    _setElapsedRealtimeUncertaintyNanos(
-      reference.pointer,
-      _id_setElapsedRealtimeUncertaintyNanos as jni$_.JMethodIDPtr,
-      d,
-    ).check();
-  }
-
-  static final _id_hasElapsedRealtimeUncertaintyNanos = _class.instanceMethodId(
-    r'hasElapsedRealtimeUncertaintyNanos',
-    r'()Z',
-  );
-
-  static final _hasElapsedRealtimeUncertaintyNanos =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public boolean hasElapsedRealtimeUncertaintyNanos()`
-  bool hasElapsedRealtimeUncertaintyNanos() {
-    return _hasElapsedRealtimeUncertaintyNanos(
-      reference.pointer,
-      _id_hasElapsedRealtimeUncertaintyNanos as jni$_.JMethodIDPtr,
-    ).boolean;
-  }
-
-  static final _id_removeElapsedRealtimeUncertaintyNanos = _class
-      .instanceMethodId(r'removeElapsedRealtimeUncertaintyNanos', r'()V');
-
-  static final _removeElapsedRealtimeUncertaintyNanos =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public void removeElapsedRealtimeUncertaintyNanos()`
-  void removeElapsedRealtimeUncertaintyNanos() {
-    _removeElapsedRealtimeUncertaintyNanos(
-      reference.pointer,
-      _id_removeElapsedRealtimeUncertaintyNanos as jni$_.JMethodIDPtr,
-    ).check();
-  }
-
-  static final _id_getLatitude = _class.instanceMethodId(
-    r'getLatitude',
-    r'()D',
-  );
-
-  static final _getLatitude =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallDoubleMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public double getLatitude()`
-  double getLatitude() {
-    return _getLatitude(
-      reference.pointer,
-      _id_getLatitude as jni$_.JMethodIDPtr,
-    ).doubleFloat;
-  }
-
-  static final _id_setLatitude = _class.instanceMethodId(
-    r'setLatitude',
-    r'(D)V',
-  );
-
-  static final _setLatitude =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Double,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              double,
-            )
-          >();
-
-  /// from: `public void setLatitude(double d)`
-  void setLatitude(double d) {
-    _setLatitude(
-      reference.pointer,
-      _id_setLatitude as jni$_.JMethodIDPtr,
-      d,
-    ).check();
-  }
-
-  static final _id_getLongitude = _class.instanceMethodId(
-    r'getLongitude',
-    r'()D',
-  );
-
-  static final _getLongitude =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallDoubleMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public double getLongitude()`
-  double getLongitude() {
-    return _getLongitude(
-      reference.pointer,
-      _id_getLongitude as jni$_.JMethodIDPtr,
-    ).doubleFloat;
-  }
-
-  static final _id_setLongitude = _class.instanceMethodId(
-    r'setLongitude',
-    r'(D)V',
-  );
-
-  static final _setLongitude =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Double,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              double,
-            )
-          >();
-
-  /// from: `public void setLongitude(double d)`
-  void setLongitude(double d) {
-    _setLongitude(
-      reference.pointer,
-      _id_setLongitude as jni$_.JMethodIDPtr,
-      d,
-    ).check();
-  }
-
-  static final _id_getAccuracy = _class.instanceMethodId(
-    r'getAccuracy',
-    r'()F',
-  );
-
-  static final _getAccuracy =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallFloatMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public float getAccuracy()`
-  double getAccuracy() {
-    return _getAccuracy(
-      reference.pointer,
-      _id_getAccuracy as jni$_.JMethodIDPtr,
-    ).float;
-  }
-
-  static final _id_setAccuracy = _class.instanceMethodId(
-    r'setAccuracy',
-    r'(F)V',
-  );
-
-  static final _setAccuracy =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Double,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              double,
-            )
-          >();
-
-  /// from: `public void setAccuracy(float f)`
-  void setAccuracy(double f) {
-    _setAccuracy(
-      reference.pointer,
-      _id_setAccuracy as jni$_.JMethodIDPtr,
-      f,
-    ).check();
-  }
-
-  static final _id_hasAccuracy = _class.instanceMethodId(
-    r'hasAccuracy',
-    r'()Z',
-  );
-
-  static final _hasAccuracy =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public boolean hasAccuracy()`
-  bool hasAccuracy() {
-    return _hasAccuracy(
-      reference.pointer,
-      _id_hasAccuracy as jni$_.JMethodIDPtr,
-    ).boolean;
-  }
-
-  static final _id_removeAccuracy = _class.instanceMethodId(
-    r'removeAccuracy',
-    r'()V',
-  );
-
-  static final _removeAccuracy =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public void removeAccuracy()`
-  void removeAccuracy() {
-    _removeAccuracy(
-      reference.pointer,
-      _id_removeAccuracy as jni$_.JMethodIDPtr,
-    ).check();
-  }
-
-  static final _id_getAltitude = _class.instanceMethodId(
-    r'getAltitude',
-    r'()D',
-  );
-
-  static final _getAltitude =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallDoubleMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public double getAltitude()`
-  double getAltitude() {
-    return _getAltitude(
-      reference.pointer,
-      _id_getAltitude as jni$_.JMethodIDPtr,
-    ).doubleFloat;
-  }
-
-  static final _id_setAltitude = _class.instanceMethodId(
-    r'setAltitude',
-    r'(D)V',
-  );
-
-  static final _setAltitude =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Double,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              double,
-            )
-          >();
-
-  /// from: `public void setAltitude(double d)`
-  void setAltitude(double d) {
-    _setAltitude(
-      reference.pointer,
-      _id_setAltitude as jni$_.JMethodIDPtr,
-      d,
-    ).check();
-  }
-
-  static final _id_hasAltitude = _class.instanceMethodId(
-    r'hasAltitude',
-    r'()Z',
-  );
-
-  static final _hasAltitude =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public boolean hasAltitude()`
-  bool hasAltitude() {
-    return _hasAltitude(
-      reference.pointer,
-      _id_hasAltitude as jni$_.JMethodIDPtr,
-    ).boolean;
-  }
-
-  static final _id_removeAltitude = _class.instanceMethodId(
-    r'removeAltitude',
-    r'()V',
-  );
-
-  static final _removeAltitude =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public void removeAltitude()`
-  void removeAltitude() {
-    _removeAltitude(
-      reference.pointer,
-      _id_removeAltitude as jni$_.JMethodIDPtr,
-    ).check();
-  }
-
-  static final _id_getVerticalAccuracyMeters = _class.instanceMethodId(
-    r'getVerticalAccuracyMeters',
-    r'()F',
-  );
-
-  static final _getVerticalAccuracyMeters =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallFloatMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public float getVerticalAccuracyMeters()`
-  double getVerticalAccuracyMeters() {
-    return _getVerticalAccuracyMeters(
-      reference.pointer,
-      _id_getVerticalAccuracyMeters as jni$_.JMethodIDPtr,
-    ).float;
-  }
-
-  static final _id_setVerticalAccuracyMeters = _class.instanceMethodId(
-    r'setVerticalAccuracyMeters',
-    r'(F)V',
-  );
-
-  static final _setVerticalAccuracyMeters =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Double,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              double,
-            )
-          >();
-
-  /// from: `public void setVerticalAccuracyMeters(float f)`
-  void setVerticalAccuracyMeters(double f) {
-    _setVerticalAccuracyMeters(
-      reference.pointer,
-      _id_setVerticalAccuracyMeters as jni$_.JMethodIDPtr,
-      f,
-    ).check();
-  }
-
-  static final _id_hasVerticalAccuracy = _class.instanceMethodId(
-    r'hasVerticalAccuracy',
-    r'()Z',
-  );
-
-  static final _hasVerticalAccuracy =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public boolean hasVerticalAccuracy()`
-  bool hasVerticalAccuracy() {
-    return _hasVerticalAccuracy(
-      reference.pointer,
-      _id_hasVerticalAccuracy as jni$_.JMethodIDPtr,
-    ).boolean;
-  }
-
-  static final _id_removeVerticalAccuracy = _class.instanceMethodId(
-    r'removeVerticalAccuracy',
-    r'()V',
-  );
-
-  static final _removeVerticalAccuracy =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public void removeVerticalAccuracy()`
-  void removeVerticalAccuracy() {
-    _removeVerticalAccuracy(
-      reference.pointer,
-      _id_removeVerticalAccuracy as jni$_.JMethodIDPtr,
-    ).check();
-  }
-
-  static final _id_getSpeed = _class.instanceMethodId(r'getSpeed', r'()F');
-
-  static final _getSpeed =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallFloatMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public float getSpeed()`
-  double getSpeed() {
-    return _getSpeed(
-      reference.pointer,
-      _id_getSpeed as jni$_.JMethodIDPtr,
-    ).float;
-  }
-
-  static final _id_setSpeed = _class.instanceMethodId(r'setSpeed', r'(F)V');
-
-  static final _setSpeed =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Double,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              double,
-            )
-          >();
-
-  /// from: `public void setSpeed(float f)`
-  void setSpeed(double f) {
-    _setSpeed(reference.pointer, _id_setSpeed as jni$_.JMethodIDPtr, f).check();
-  }
-
-  static final _id_hasSpeed = _class.instanceMethodId(r'hasSpeed', r'()Z');
-
-  static final _hasSpeed =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public boolean hasSpeed()`
-  bool hasSpeed() {
-    return _hasSpeed(
-      reference.pointer,
-      _id_hasSpeed as jni$_.JMethodIDPtr,
-    ).boolean;
-  }
-
-  static final _id_removeSpeed = _class.instanceMethodId(
-    r'removeSpeed',
-    r'()V',
-  );
-
-  static final _removeSpeed =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public void removeSpeed()`
-  void removeSpeed() {
-    _removeSpeed(
-      reference.pointer,
-      _id_removeSpeed as jni$_.JMethodIDPtr,
-    ).check();
-  }
-
-  static final _id_getSpeedAccuracyMetersPerSecond = _class.instanceMethodId(
-    r'getSpeedAccuracyMetersPerSecond',
-    r'()F',
-  );
-
-  static final _getSpeedAccuracyMetersPerSecond =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallFloatMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public float getSpeedAccuracyMetersPerSecond()`
-  double getSpeedAccuracyMetersPerSecond() {
-    return _getSpeedAccuracyMetersPerSecond(
-      reference.pointer,
-      _id_getSpeedAccuracyMetersPerSecond as jni$_.JMethodIDPtr,
-    ).float;
-  }
-
-  static final _id_setSpeedAccuracyMetersPerSecond = _class.instanceMethodId(
-    r'setSpeedAccuracyMetersPerSecond',
-    r'(F)V',
-  );
-
-  static final _setSpeedAccuracyMetersPerSecond =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Double,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              double,
-            )
-          >();
-
-  /// from: `public void setSpeedAccuracyMetersPerSecond(float f)`
-  void setSpeedAccuracyMetersPerSecond(double f) {
-    _setSpeedAccuracyMetersPerSecond(
-      reference.pointer,
-      _id_setSpeedAccuracyMetersPerSecond as jni$_.JMethodIDPtr,
-      f,
-    ).check();
-  }
-
-  static final _id_hasSpeedAccuracy = _class.instanceMethodId(
-    r'hasSpeedAccuracy',
-    r'()Z',
-  );
-
-  static final _hasSpeedAccuracy =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public boolean hasSpeedAccuracy()`
-  bool hasSpeedAccuracy() {
-    return _hasSpeedAccuracy(
-      reference.pointer,
-      _id_hasSpeedAccuracy as jni$_.JMethodIDPtr,
-    ).boolean;
-  }
-
-  static final _id_removeSpeedAccuracy = _class.instanceMethodId(
-    r'removeSpeedAccuracy',
-    r'()V',
-  );
-
-  static final _removeSpeedAccuracy =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public void removeSpeedAccuracy()`
-  void removeSpeedAccuracy() {
-    _removeSpeedAccuracy(
-      reference.pointer,
-      _id_removeSpeedAccuracy as jni$_.JMethodIDPtr,
-    ).check();
-  }
-
-  static final _id_getBearing = _class.instanceMethodId(r'getBearing', r'()F');
-
-  static final _getBearing =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallFloatMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public float getBearing()`
-  double getBearing() {
-    return _getBearing(
-      reference.pointer,
-      _id_getBearing as jni$_.JMethodIDPtr,
-    ).float;
-  }
-
-  static final _id_setBearing = _class.instanceMethodId(r'setBearing', r'(F)V');
-
-  static final _setBearing =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Double,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              double,
-            )
-          >();
-
-  /// from: `public void setBearing(float f)`
-  void setBearing(double f) {
-    _setBearing(
-      reference.pointer,
-      _id_setBearing as jni$_.JMethodIDPtr,
-      f,
-    ).check();
-  }
-
-  static final _id_hasBearing = _class.instanceMethodId(r'hasBearing', r'()Z');
-
-  static final _hasBearing =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public boolean hasBearing()`
-  bool hasBearing() {
-    return _hasBearing(
-      reference.pointer,
-      _id_hasBearing as jni$_.JMethodIDPtr,
-    ).boolean;
-  }
-
-  static final _id_removeBearing = _class.instanceMethodId(
-    r'removeBearing',
-    r'()V',
-  );
-
-  static final _removeBearing =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public void removeBearing()`
-  void removeBearing() {
-    _removeBearing(
-      reference.pointer,
-      _id_removeBearing as jni$_.JMethodIDPtr,
-    ).check();
-  }
-
-  static final _id_getBearingAccuracyDegrees = _class.instanceMethodId(
-    r'getBearingAccuracyDegrees',
-    r'()F',
-  );
-
-  static final _getBearingAccuracyDegrees =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallFloatMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public float getBearingAccuracyDegrees()`
-  double getBearingAccuracyDegrees() {
-    return _getBearingAccuracyDegrees(
-      reference.pointer,
-      _id_getBearingAccuracyDegrees as jni$_.JMethodIDPtr,
-    ).float;
-  }
-
-  static final _id_setBearingAccuracyDegrees = _class.instanceMethodId(
-    r'setBearingAccuracyDegrees',
-    r'(F)V',
-  );
-
-  static final _setBearingAccuracyDegrees =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Double,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              double,
-            )
-          >();
-
-  /// from: `public void setBearingAccuracyDegrees(float f)`
-  void setBearingAccuracyDegrees(double f) {
-    _setBearingAccuracyDegrees(
-      reference.pointer,
-      _id_setBearingAccuracyDegrees as jni$_.JMethodIDPtr,
-      f,
-    ).check();
-  }
-
-  static final _id_hasBearingAccuracy = _class.instanceMethodId(
-    r'hasBearingAccuracy',
-    r'()Z',
-  );
-
-  static final _hasBearingAccuracy =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public boolean hasBearingAccuracy()`
-  bool hasBearingAccuracy() {
-    return _hasBearingAccuracy(
-      reference.pointer,
-      _id_hasBearingAccuracy as jni$_.JMethodIDPtr,
-    ).boolean;
-  }
-
-  static final _id_removeBearingAccuracy = _class.instanceMethodId(
-    r'removeBearingAccuracy',
-    r'()V',
-  );
-
-  static final _removeBearingAccuracy =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public void removeBearingAccuracy()`
-  void removeBearingAccuracy() {
-    _removeBearingAccuracy(
-      reference.pointer,
-      _id_removeBearingAccuracy as jni$_.JMethodIDPtr,
-    ).check();
-  }
-
-  static final _id_getMslAltitudeMeters = _class.instanceMethodId(
-    r'getMslAltitudeMeters',
-    r'()D',
-  );
-
-  static final _getMslAltitudeMeters =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallDoubleMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public double getMslAltitudeMeters()`
-  double getMslAltitudeMeters() {
-    return _getMslAltitudeMeters(
-      reference.pointer,
-      _id_getMslAltitudeMeters as jni$_.JMethodIDPtr,
-    ).doubleFloat;
-  }
-
-  static final _id_setMslAltitudeMeters = _class.instanceMethodId(
-    r'setMslAltitudeMeters',
-    r'(D)V',
-  );
-
-  static final _setMslAltitudeMeters =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Double,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              double,
-            )
-          >();
-
-  /// from: `public void setMslAltitudeMeters(double d)`
-  void setMslAltitudeMeters(double d) {
-    _setMslAltitudeMeters(
-      reference.pointer,
-      _id_setMslAltitudeMeters as jni$_.JMethodIDPtr,
-      d,
-    ).check();
-  }
-
-  static final _id_hasMslAltitude = _class.instanceMethodId(
-    r'hasMslAltitude',
-    r'()Z',
-  );
-
-  static final _hasMslAltitude =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public boolean hasMslAltitude()`
-  bool hasMslAltitude() {
-    return _hasMslAltitude(
-      reference.pointer,
-      _id_hasMslAltitude as jni$_.JMethodIDPtr,
-    ).boolean;
-  }
-
-  static final _id_removeMslAltitude = _class.instanceMethodId(
-    r'removeMslAltitude',
-    r'()V',
-  );
-
-  static final _removeMslAltitude =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public void removeMslAltitude()`
-  void removeMslAltitude() {
-    _removeMslAltitude(
-      reference.pointer,
-      _id_removeMslAltitude as jni$_.JMethodIDPtr,
-    ).check();
-  }
-
-  static final _id_getMslAltitudeAccuracyMeters = _class.instanceMethodId(
-    r'getMslAltitudeAccuracyMeters',
-    r'()F',
-  );
-
-  static final _getMslAltitudeAccuracyMeters =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallFloatMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public float getMslAltitudeAccuracyMeters()`
-  double getMslAltitudeAccuracyMeters() {
-    return _getMslAltitudeAccuracyMeters(
-      reference.pointer,
-      _id_getMslAltitudeAccuracyMeters as jni$_.JMethodIDPtr,
-    ).float;
-  }
-
-  static final _id_setMslAltitudeAccuracyMeters = _class.instanceMethodId(
-    r'setMslAltitudeAccuracyMeters',
-    r'(F)V',
-  );
-
-  static final _setMslAltitudeAccuracyMeters =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Double,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              double,
-            )
-          >();
-
-  /// from: `public void setMslAltitudeAccuracyMeters(float f)`
-  void setMslAltitudeAccuracyMeters(double f) {
-    _setMslAltitudeAccuracyMeters(
-      reference.pointer,
-      _id_setMslAltitudeAccuracyMeters as jni$_.JMethodIDPtr,
-      f,
-    ).check();
-  }
-
-  static final _id_hasMslAltitudeAccuracy = _class.instanceMethodId(
-    r'hasMslAltitudeAccuracy',
-    r'()Z',
-  );
-
-  static final _hasMslAltitudeAccuracy =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public boolean hasMslAltitudeAccuracy()`
-  bool hasMslAltitudeAccuracy() {
-    return _hasMslAltitudeAccuracy(
-      reference.pointer,
-      _id_hasMslAltitudeAccuracy as jni$_.JMethodIDPtr,
-    ).boolean;
-  }
-
-  static final _id_removeMslAltitudeAccuracy = _class.instanceMethodId(
-    r'removeMslAltitudeAccuracy',
-    r'()V',
-  );
-
-  static final _removeMslAltitudeAccuracy =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public void removeMslAltitudeAccuracy()`
-  void removeMslAltitudeAccuracy() {
-    _removeMslAltitudeAccuracy(
-      reference.pointer,
-      _id_removeMslAltitudeAccuracy as jni$_.JMethodIDPtr,
-    ).check();
-  }
-
-  static final _id_isFromMockProvider = _class.instanceMethodId(
-    r'isFromMockProvider',
-    r'()Z',
-  );
-
-  static final _isFromMockProvider =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public boolean isFromMockProvider()`
-  bool isFromMockProvider() {
-    return _isFromMockProvider(
-      reference.pointer,
-      _id_isFromMockProvider as jni$_.JMethodIDPtr,
-    ).boolean;
-  }
-
-  static final _id_isMock = _class.instanceMethodId(r'isMock', r'()Z');
-
-  static final _isMock =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public boolean isMock()`
-  bool isMock() {
-    return _isMock(reference.pointer, _id_isMock as jni$_.JMethodIDPtr).boolean;
-  }
-
-  static final _id_setMock = _class.instanceMethodId(r'setMock', r'(Z)V');
-
-  static final _setMock =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Int32,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-            )
-          >();
-
-  /// from: `public void setMock(boolean z)`
-  void setMock(bool z) {
-    _setMock(
-      reference.pointer,
-      _id_setMock as jni$_.JMethodIDPtr,
-      z ? 1 : 0,
-    ).check();
-  }
-
-  static final _id_getExtras = _class.instanceMethodId(
-    r'getExtras',
-    r'()Landroid/os/Bundle;',
-  );
-
-  static final _getExtras =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public android.os.Bundle getExtras()`
-  /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? getExtras() {
-    return _getExtras(
-      reference.pointer,
-      _id_getExtras as jni$_.JMethodIDPtr,
-    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
-  }
-
-  static final _id_setExtras = _class.instanceMethodId(
-    r'setExtras',
-    r'(Landroid/os/Bundle;)V',
-  );
-
-  static final _setExtras =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public void setExtras(android.os.Bundle bundle)`
-  void setExtras(jni$_.JObject? bundle) {
-    final _$bundle = bundle?.reference ?? jni$_.jNullReference;
-    _setExtras(
-      reference.pointer,
-      _id_setExtras as jni$_.JMethodIDPtr,
-      _$bundle.pointer,
-    ).check();
-  }
-
-  static final _id_isComplete = _class.instanceMethodId(r'isComplete', r'()Z');
-
-  static final _isComplete =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public boolean isComplete()`
-  bool isComplete() {
-    return _isComplete(
-      reference.pointer,
-      _id_isComplete as jni$_.JMethodIDPtr,
-    ).boolean;
-  }
-
-  static final _id_equals = _class.instanceMethodId(
-    r'equals',
-    r'(Ljava/lang/Object;)Z',
-  );
-
-  static final _equals =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public boolean equals(java.lang.Object object)`
-  bool equals(jni$_.JObject? object) {
-    final _$object = object?.reference ?? jni$_.jNullReference;
-    return _equals(
-      reference.pointer,
-      _id_equals as jni$_.JMethodIDPtr,
-      _$object.pointer,
-    ).boolean;
-  }
-
-  static final _id_hashCode$1 = _class.instanceMethodId(r'hashCode', r'()I');
-
-  static final _hashCode$1 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallIntMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public int hashCode()`
-  int hashCode$1() {
-    return _hashCode$1(
-      reference.pointer,
-      _id_hashCode$1 as jni$_.JMethodIDPtr,
-    ).integer;
-  }
-
-  static final _id_toString$1 = _class.instanceMethodId(
-    r'toString',
-    r'()Ljava/lang/String;',
-  );
-
-  static final _toString$1 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public java.lang.String toString()`
-  /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JString? toString$1() {
-    return _toString$1(
-      reference.pointer,
-      _id_toString$1 as jni$_.JMethodIDPtr,
-    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
-  }
-
-  static final _id_dump = _class.instanceMethodId(
-    r'dump',
-    r'(Landroid/util/Printer;Ljava/lang/String;)V',
-  );
-
-  static final _dump =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<
-                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
-                >,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public void dump(android.util.Printer printer, java.lang.String string)`
-  void dump(jni$_.JObject? printer, jni$_.JString? string) {
-    final _$printer = printer?.reference ?? jni$_.jNullReference;
-    final _$string = string?.reference ?? jni$_.jNullReference;
-    _dump(
-      reference.pointer,
-      _id_dump as jni$_.JMethodIDPtr,
-      _$printer.pointer,
-      _$string.pointer,
-    ).check();
-  }
-
-  static final _id_describeContents = _class.instanceMethodId(
-    r'describeContents',
-    r'()I',
-  );
-
-  static final _describeContents =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallIntMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public int describeContents()`
-  int describeContents() {
-    return _describeContents(
-      reference.pointer,
-      _id_describeContents as jni$_.JMethodIDPtr,
-    ).integer;
-  }
-
-  static final _id_writeToParcel = _class.instanceMethodId(
-    r'writeToParcel',
-    r'(Landroid/os/Parcel;I)V',
-  );
-
-  static final _writeToParcel =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              int,
-            )
-          >();
-
-  /// from: `public void writeToParcel(android.os.Parcel parcel, int i)`
-  void writeToParcel(jni$_.JObject? parcel, int i) {
-    final _$parcel = parcel?.reference ?? jni$_.jNullReference;
-    _writeToParcel(
-      reference.pointer,
-      _id_writeToParcel as jni$_.JMethodIDPtr,
-      _$parcel.pointer,
-      i,
-    ).check();
   }
 
   static final _id_convert = _class.staticMethodId(
@@ -2199,7 +208,10 @@ class Location extends jni$_.JObject {
 
   /// from: `static public java.lang.String convert(double d, int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni$_.JString? convert(double d, int i) {
+  static jni$_.JString? convert(
+    double d,
+    int i,
+  ) {
     return _convert(
       _class.reference.pointer,
       _id_convert as jni$_.JMethodIDPtr,
@@ -2232,13 +244,44 @@ class Location extends jni$_.JObject {
           >();
 
   /// from: `static public double convert(java.lang.String string)`
-  static double convert$1(jni$_.JString? string) {
+  static double convert$1(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return _convert$1(
       _class.reference.pointer,
       _id_convert$1 as jni$_.JMethodIDPtr,
       _$string.pointer,
     ).doubleFloat;
+  }
+
+  static final _id_describeContents = _class.instanceMethodId(
+    r'describeContents',
+    r'()I',
+  );
+
+  static final _describeContents =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public int describeContents()`
+  int describeContents() {
+    return _describeContents(
+      reference.pointer,
+      _id_describeContents as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_distanceBetween = _class.staticMethodId(
@@ -2295,6 +338,2067 @@ class Location extends jni$_.JObject {
       _$fs.pointer,
     ).check();
   }
+
+  static final _id_distanceTo = _class.instanceMethodId(
+    r'distanceTo',
+    r'(Landroid/location/Location;)F',
+  );
+
+  static final _distanceTo =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallFloatMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public float distanceTo(android.location.Location location)`
+  double distanceTo(
+    Location? location,
+  ) {
+    final _$location = location?.reference ?? jni$_.jNullReference;
+    return _distanceTo(
+      reference.pointer,
+      _id_distanceTo as jni$_.JMethodIDPtr,
+      _$location.pointer,
+    ).float;
+  }
+
+  static final _id_dump = _class.instanceMethodId(
+    r'dump',
+    r'(Landroid/util/Printer;Ljava/lang/String;)V',
+  );
+
+  static final _dump =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public void dump(android.util.Printer printer, java.lang.String string)`
+  void dump(
+    jni$_.JObject? printer,
+    jni$_.JString? string,
+  ) {
+    final _$printer = printer?.reference ?? jni$_.jNullReference;
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    _dump(
+      reference.pointer,
+      _id_dump as jni$_.JMethodIDPtr,
+      _$printer.pointer,
+      _$string.pointer,
+    ).check();
+  }
+
+  static final _id_equals = _class.instanceMethodId(
+    r'equals',
+    r'(Ljava/lang/Object;)Z',
+  );
+
+  static final _equals =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public boolean equals(java.lang.Object object)`
+  bool equals(
+    jni$_.JObject? object,
+  ) {
+    final _$object = object?.reference ?? jni$_.jNullReference;
+    return _equals(
+      reference.pointer,
+      _id_equals as jni$_.JMethodIDPtr,
+      _$object.pointer,
+    ).boolean;
+  }
+
+  static final _id_getAccuracy = _class.instanceMethodId(
+    r'getAccuracy',
+    r'()F',
+  );
+
+  static final _getAccuracy =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallFloatMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public float getAccuracy()`
+  double getAccuracy() {
+    return _getAccuracy(
+      reference.pointer,
+      _id_getAccuracy as jni$_.JMethodIDPtr,
+    ).float;
+  }
+
+  static final _id_getAltitude = _class.instanceMethodId(
+    r'getAltitude',
+    r'()D',
+  );
+
+  static final _getAltitude =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallDoubleMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public double getAltitude()`
+  double getAltitude() {
+    return _getAltitude(
+      reference.pointer,
+      _id_getAltitude as jni$_.JMethodIDPtr,
+    ).doubleFloat;
+  }
+
+  static final _id_getBearing = _class.instanceMethodId(
+    r'getBearing',
+    r'()F',
+  );
+
+  static final _getBearing =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallFloatMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public float getBearing()`
+  double getBearing() {
+    return _getBearing(
+      reference.pointer,
+      _id_getBearing as jni$_.JMethodIDPtr,
+    ).float;
+  }
+
+  static final _id_getBearingAccuracyDegrees = _class.instanceMethodId(
+    r'getBearingAccuracyDegrees',
+    r'()F',
+  );
+
+  static final _getBearingAccuracyDegrees =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallFloatMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public float getBearingAccuracyDegrees()`
+  double getBearingAccuracyDegrees() {
+    return _getBearingAccuracyDegrees(
+      reference.pointer,
+      _id_getBearingAccuracyDegrees as jni$_.JMethodIDPtr,
+    ).float;
+  }
+
+  static final _id_getElapsedRealtimeAgeMillis = _class.instanceMethodId(
+    r'getElapsedRealtimeAgeMillis',
+    r'()J',
+  );
+
+  static final _getElapsedRealtimeAgeMillis =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallLongMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public long getElapsedRealtimeAgeMillis()`
+  int getElapsedRealtimeAgeMillis() {
+    return _getElapsedRealtimeAgeMillis(
+      reference.pointer,
+      _id_getElapsedRealtimeAgeMillis as jni$_.JMethodIDPtr,
+    ).long;
+  }
+
+  static final _id_getElapsedRealtimeAgeMillis$1 = _class.instanceMethodId(
+    r'getElapsedRealtimeAgeMillis',
+    r'(J)J',
+  );
+
+  static final _getElapsedRealtimeAgeMillis$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int64,)>,
+              )
+            >
+          >('globalEnv_CallLongMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
+
+  /// from: `public long getElapsedRealtimeAgeMillis(long j)`
+  int getElapsedRealtimeAgeMillis$1(
+    int j,
+  ) {
+    return _getElapsedRealtimeAgeMillis$1(
+      reference.pointer,
+      _id_getElapsedRealtimeAgeMillis$1 as jni$_.JMethodIDPtr,
+      j,
+    ).long;
+  }
+
+  static final _id_getElapsedRealtimeMillis = _class.instanceMethodId(
+    r'getElapsedRealtimeMillis',
+    r'()J',
+  );
+
+  static final _getElapsedRealtimeMillis =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallLongMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public long getElapsedRealtimeMillis()`
+  int getElapsedRealtimeMillis() {
+    return _getElapsedRealtimeMillis(
+      reference.pointer,
+      _id_getElapsedRealtimeMillis as jni$_.JMethodIDPtr,
+    ).long;
+  }
+
+  static final _id_getElapsedRealtimeNanos = _class.instanceMethodId(
+    r'getElapsedRealtimeNanos',
+    r'()J',
+  );
+
+  static final _getElapsedRealtimeNanos =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallLongMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public long getElapsedRealtimeNanos()`
+  int getElapsedRealtimeNanos() {
+    return _getElapsedRealtimeNanos(
+      reference.pointer,
+      _id_getElapsedRealtimeNanos as jni$_.JMethodIDPtr,
+    ).long;
+  }
+
+  static final _id_getElapsedRealtimeUncertaintyNanos = _class.instanceMethodId(
+    r'getElapsedRealtimeUncertaintyNanos',
+    r'()D',
+  );
+
+  static final _getElapsedRealtimeUncertaintyNanos =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallDoubleMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public double getElapsedRealtimeUncertaintyNanos()`
+  double getElapsedRealtimeUncertaintyNanos() {
+    return _getElapsedRealtimeUncertaintyNanos(
+      reference.pointer,
+      _id_getElapsedRealtimeUncertaintyNanos as jni$_.JMethodIDPtr,
+    ).doubleFloat;
+  }
+
+  static final _id_getExtras = _class.instanceMethodId(
+    r'getExtras',
+    r'()Landroid/os/Bundle;',
+  );
+
+  static final _getExtras =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public android.os.Bundle getExtras()`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JObject? getExtras() {
+    return _getExtras(
+      reference.pointer,
+      _id_getExtras as jni$_.JMethodIDPtr,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+  }
+
+  static final _id_getLatitude = _class.instanceMethodId(
+    r'getLatitude',
+    r'()D',
+  );
+
+  static final _getLatitude =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallDoubleMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public double getLatitude()`
+  double getLatitude() {
+    return _getLatitude(
+      reference.pointer,
+      _id_getLatitude as jni$_.JMethodIDPtr,
+    ).doubleFloat;
+  }
+
+  static final _id_getLongitude = _class.instanceMethodId(
+    r'getLongitude',
+    r'()D',
+  );
+
+  static final _getLongitude =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallDoubleMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public double getLongitude()`
+  double getLongitude() {
+    return _getLongitude(
+      reference.pointer,
+      _id_getLongitude as jni$_.JMethodIDPtr,
+    ).doubleFloat;
+  }
+
+  static final _id_getMslAltitudeAccuracyMeters = _class.instanceMethodId(
+    r'getMslAltitudeAccuracyMeters',
+    r'()F',
+  );
+
+  static final _getMslAltitudeAccuracyMeters =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallFloatMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public float getMslAltitudeAccuracyMeters()`
+  double getMslAltitudeAccuracyMeters() {
+    return _getMslAltitudeAccuracyMeters(
+      reference.pointer,
+      _id_getMslAltitudeAccuracyMeters as jni$_.JMethodIDPtr,
+    ).float;
+  }
+
+  static final _id_getMslAltitudeMeters = _class.instanceMethodId(
+    r'getMslAltitudeMeters',
+    r'()D',
+  );
+
+  static final _getMslAltitudeMeters =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallDoubleMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public double getMslAltitudeMeters()`
+  double getMslAltitudeMeters() {
+    return _getMslAltitudeMeters(
+      reference.pointer,
+      _id_getMslAltitudeMeters as jni$_.JMethodIDPtr,
+    ).doubleFloat;
+  }
+
+  static final _id_getProvider = _class.instanceMethodId(
+    r'getProvider',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getProvider =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public java.lang.String getProvider()`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JString? getProvider() {
+    return _getProvider(
+      reference.pointer,
+      _id_getProvider as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
+  }
+
+  static final _id_getSpeed = _class.instanceMethodId(
+    r'getSpeed',
+    r'()F',
+  );
+
+  static final _getSpeed =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallFloatMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public float getSpeed()`
+  double getSpeed() {
+    return _getSpeed(
+      reference.pointer,
+      _id_getSpeed as jni$_.JMethodIDPtr,
+    ).float;
+  }
+
+  static final _id_getSpeedAccuracyMetersPerSecond = _class.instanceMethodId(
+    r'getSpeedAccuracyMetersPerSecond',
+    r'()F',
+  );
+
+  static final _getSpeedAccuracyMetersPerSecond =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallFloatMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public float getSpeedAccuracyMetersPerSecond()`
+  double getSpeedAccuracyMetersPerSecond() {
+    return _getSpeedAccuracyMetersPerSecond(
+      reference.pointer,
+      _id_getSpeedAccuracyMetersPerSecond as jni$_.JMethodIDPtr,
+    ).float;
+  }
+
+  static final _id_getTime = _class.instanceMethodId(
+    r'getTime',
+    r'()J',
+  );
+
+  static final _getTime =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallLongMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public long getTime()`
+  int getTime() {
+    return _getTime(reference.pointer, _id_getTime as jni$_.JMethodIDPtr).long;
+  }
+
+  static final _id_getVerticalAccuracyMeters = _class.instanceMethodId(
+    r'getVerticalAccuracyMeters',
+    r'()F',
+  );
+
+  static final _getVerticalAccuracyMeters =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallFloatMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public float getVerticalAccuracyMeters()`
+  double getVerticalAccuracyMeters() {
+    return _getVerticalAccuracyMeters(
+      reference.pointer,
+      _id_getVerticalAccuracyMeters as jni$_.JMethodIDPtr,
+    ).float;
+  }
+
+  static final _id_hasAccuracy = _class.instanceMethodId(
+    r'hasAccuracy',
+    r'()Z',
+  );
+
+  static final _hasAccuracy =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public boolean hasAccuracy()`
+  bool hasAccuracy() {
+    return _hasAccuracy(
+      reference.pointer,
+      _id_hasAccuracy as jni$_.JMethodIDPtr,
+    ).boolean;
+  }
+
+  static final _id_hasAltitude = _class.instanceMethodId(
+    r'hasAltitude',
+    r'()Z',
+  );
+
+  static final _hasAltitude =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public boolean hasAltitude()`
+  bool hasAltitude() {
+    return _hasAltitude(
+      reference.pointer,
+      _id_hasAltitude as jni$_.JMethodIDPtr,
+    ).boolean;
+  }
+
+  static final _id_hasBearing = _class.instanceMethodId(
+    r'hasBearing',
+    r'()Z',
+  );
+
+  static final _hasBearing =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public boolean hasBearing()`
+  bool hasBearing() {
+    return _hasBearing(
+      reference.pointer,
+      _id_hasBearing as jni$_.JMethodIDPtr,
+    ).boolean;
+  }
+
+  static final _id_hasBearingAccuracy = _class.instanceMethodId(
+    r'hasBearingAccuracy',
+    r'()Z',
+  );
+
+  static final _hasBearingAccuracy =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public boolean hasBearingAccuracy()`
+  bool hasBearingAccuracy() {
+    return _hasBearingAccuracy(
+      reference.pointer,
+      _id_hasBearingAccuracy as jni$_.JMethodIDPtr,
+    ).boolean;
+  }
+
+  static final _id_hasElapsedRealtimeUncertaintyNanos = _class.instanceMethodId(
+    r'hasElapsedRealtimeUncertaintyNanos',
+    r'()Z',
+  );
+
+  static final _hasElapsedRealtimeUncertaintyNanos =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public boolean hasElapsedRealtimeUncertaintyNanos()`
+  bool hasElapsedRealtimeUncertaintyNanos() {
+    return _hasElapsedRealtimeUncertaintyNanos(
+      reference.pointer,
+      _id_hasElapsedRealtimeUncertaintyNanos as jni$_.JMethodIDPtr,
+    ).boolean;
+  }
+
+  static final _id_hasMslAltitude = _class.instanceMethodId(
+    r'hasMslAltitude',
+    r'()Z',
+  );
+
+  static final _hasMslAltitude =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public boolean hasMslAltitude()`
+  bool hasMslAltitude() {
+    return _hasMslAltitude(
+      reference.pointer,
+      _id_hasMslAltitude as jni$_.JMethodIDPtr,
+    ).boolean;
+  }
+
+  static final _id_hasMslAltitudeAccuracy = _class.instanceMethodId(
+    r'hasMslAltitudeAccuracy',
+    r'()Z',
+  );
+
+  static final _hasMslAltitudeAccuracy =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public boolean hasMslAltitudeAccuracy()`
+  bool hasMslAltitudeAccuracy() {
+    return _hasMslAltitudeAccuracy(
+      reference.pointer,
+      _id_hasMslAltitudeAccuracy as jni$_.JMethodIDPtr,
+    ).boolean;
+  }
+
+  static final _id_hasSpeed = _class.instanceMethodId(
+    r'hasSpeed',
+    r'()Z',
+  );
+
+  static final _hasSpeed =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public boolean hasSpeed()`
+  bool hasSpeed() {
+    return _hasSpeed(
+      reference.pointer,
+      _id_hasSpeed as jni$_.JMethodIDPtr,
+    ).boolean;
+  }
+
+  static final _id_hasSpeedAccuracy = _class.instanceMethodId(
+    r'hasSpeedAccuracy',
+    r'()Z',
+  );
+
+  static final _hasSpeedAccuracy =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public boolean hasSpeedAccuracy()`
+  bool hasSpeedAccuracy() {
+    return _hasSpeedAccuracy(
+      reference.pointer,
+      _id_hasSpeedAccuracy as jni$_.JMethodIDPtr,
+    ).boolean;
+  }
+
+  static final _id_hasVerticalAccuracy = _class.instanceMethodId(
+    r'hasVerticalAccuracy',
+    r'()Z',
+  );
+
+  static final _hasVerticalAccuracy =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public boolean hasVerticalAccuracy()`
+  bool hasVerticalAccuracy() {
+    return _hasVerticalAccuracy(
+      reference.pointer,
+      _id_hasVerticalAccuracy as jni$_.JMethodIDPtr,
+    ).boolean;
+  }
+
+  static final _id_hashCode$1 = _class.instanceMethodId(
+    r'hashCode',
+    r'()I',
+  );
+
+  static final _hashCode$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public int hashCode()`
+  int hashCode$1() {
+    return _hashCode$1(
+      reference.pointer,
+      _id_hashCode$1 as jni$_.JMethodIDPtr,
+    ).integer;
+  }
+
+  static final _id_isComplete = _class.instanceMethodId(
+    r'isComplete',
+    r'()Z',
+  );
+
+  static final _isComplete =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public boolean isComplete()`
+  bool isComplete() {
+    return _isComplete(
+      reference.pointer,
+      _id_isComplete as jni$_.JMethodIDPtr,
+    ).boolean;
+  }
+
+  static final _id_isFromMockProvider = _class.instanceMethodId(
+    r'isFromMockProvider',
+    r'()Z',
+  );
+
+  static final _isFromMockProvider =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public boolean isFromMockProvider()`
+  bool isFromMockProvider() {
+    return _isFromMockProvider(
+      reference.pointer,
+      _id_isFromMockProvider as jni$_.JMethodIDPtr,
+    ).boolean;
+  }
+
+  static final _id_isMock = _class.instanceMethodId(
+    r'isMock',
+    r'()Z',
+  );
+
+  static final _isMock =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public boolean isMock()`
+  bool isMock() {
+    return _isMock(reference.pointer, _id_isMock as jni$_.JMethodIDPtr).boolean;
+  }
+
+  static final _id_removeAccuracy = _class.instanceMethodId(
+    r'removeAccuracy',
+    r'()V',
+  );
+
+  static final _removeAccuracy =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public void removeAccuracy()`
+  void removeAccuracy() {
+    _removeAccuracy(
+      reference.pointer,
+      _id_removeAccuracy as jni$_.JMethodIDPtr,
+    ).check();
+  }
+
+  static final _id_removeAltitude = _class.instanceMethodId(
+    r'removeAltitude',
+    r'()V',
+  );
+
+  static final _removeAltitude =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public void removeAltitude()`
+  void removeAltitude() {
+    _removeAltitude(
+      reference.pointer,
+      _id_removeAltitude as jni$_.JMethodIDPtr,
+    ).check();
+  }
+
+  static final _id_removeBearing = _class.instanceMethodId(
+    r'removeBearing',
+    r'()V',
+  );
+
+  static final _removeBearing =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public void removeBearing()`
+  void removeBearing() {
+    _removeBearing(
+      reference.pointer,
+      _id_removeBearing as jni$_.JMethodIDPtr,
+    ).check();
+  }
+
+  static final _id_removeBearingAccuracy = _class.instanceMethodId(
+    r'removeBearingAccuracy',
+    r'()V',
+  );
+
+  static final _removeBearingAccuracy =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public void removeBearingAccuracy()`
+  void removeBearingAccuracy() {
+    _removeBearingAccuracy(
+      reference.pointer,
+      _id_removeBearingAccuracy as jni$_.JMethodIDPtr,
+    ).check();
+  }
+
+  static final _id_removeElapsedRealtimeUncertaintyNanos = _class
+      .instanceMethodId(
+        r'removeElapsedRealtimeUncertaintyNanos',
+        r'()V',
+      );
+
+  static final _removeElapsedRealtimeUncertaintyNanos =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public void removeElapsedRealtimeUncertaintyNanos()`
+  void removeElapsedRealtimeUncertaintyNanos() {
+    _removeElapsedRealtimeUncertaintyNanos(
+      reference.pointer,
+      _id_removeElapsedRealtimeUncertaintyNanos as jni$_.JMethodIDPtr,
+    ).check();
+  }
+
+  static final _id_removeMslAltitude = _class.instanceMethodId(
+    r'removeMslAltitude',
+    r'()V',
+  );
+
+  static final _removeMslAltitude =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public void removeMslAltitude()`
+  void removeMslAltitude() {
+    _removeMslAltitude(
+      reference.pointer,
+      _id_removeMslAltitude as jni$_.JMethodIDPtr,
+    ).check();
+  }
+
+  static final _id_removeMslAltitudeAccuracy = _class.instanceMethodId(
+    r'removeMslAltitudeAccuracy',
+    r'()V',
+  );
+
+  static final _removeMslAltitudeAccuracy =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public void removeMslAltitudeAccuracy()`
+  void removeMslAltitudeAccuracy() {
+    _removeMslAltitudeAccuracy(
+      reference.pointer,
+      _id_removeMslAltitudeAccuracy as jni$_.JMethodIDPtr,
+    ).check();
+  }
+
+  static final _id_removeSpeed = _class.instanceMethodId(
+    r'removeSpeed',
+    r'()V',
+  );
+
+  static final _removeSpeed =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public void removeSpeed()`
+  void removeSpeed() {
+    _removeSpeed(
+      reference.pointer,
+      _id_removeSpeed as jni$_.JMethodIDPtr,
+    ).check();
+  }
+
+  static final _id_removeSpeedAccuracy = _class.instanceMethodId(
+    r'removeSpeedAccuracy',
+    r'()V',
+  );
+
+  static final _removeSpeedAccuracy =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public void removeSpeedAccuracy()`
+  void removeSpeedAccuracy() {
+    _removeSpeedAccuracy(
+      reference.pointer,
+      _id_removeSpeedAccuracy as jni$_.JMethodIDPtr,
+    ).check();
+  }
+
+  static final _id_removeVerticalAccuracy = _class.instanceMethodId(
+    r'removeVerticalAccuracy',
+    r'()V',
+  );
+
+  static final _removeVerticalAccuracy =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public void removeVerticalAccuracy()`
+  void removeVerticalAccuracy() {
+    _removeVerticalAccuracy(
+      reference.pointer,
+      _id_removeVerticalAccuracy as jni$_.JMethodIDPtr,
+    ).check();
+  }
+
+  static final _id_reset = _class.instanceMethodId(
+    r'reset',
+    r'()V',
+  );
+
+  static final _reset =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public void reset()`
+  void reset() {
+    _reset(reference.pointer, _id_reset as jni$_.JMethodIDPtr).check();
+  }
+
+  static final _id_set = _class.instanceMethodId(
+    r'set',
+    r'(Landroid/location/Location;)V',
+  );
+
+  static final _set =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public void set(android.location.Location location)`
+  void set(
+    Location? location,
+  ) {
+    final _$location = location?.reference ?? jni$_.jNullReference;
+    _set(
+      reference.pointer,
+      _id_set as jni$_.JMethodIDPtr,
+      _$location.pointer,
+    ).check();
+  }
+
+  static final _id_setAccuracy = _class.instanceMethodId(
+    r'setAccuracy',
+    r'(F)V',
+  );
+
+  static final _setAccuracy =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
+
+  /// from: `public void setAccuracy(float f)`
+  void setAccuracy(
+    double f,
+  ) {
+    _setAccuracy(
+      reference.pointer,
+      _id_setAccuracy as jni$_.JMethodIDPtr,
+      f,
+    ).check();
+  }
+
+  static final _id_setAltitude = _class.instanceMethodId(
+    r'setAltitude',
+    r'(D)V',
+  );
+
+  static final _setAltitude =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
+
+  /// from: `public void setAltitude(double d)`
+  void setAltitude(
+    double d,
+  ) {
+    _setAltitude(
+      reference.pointer,
+      _id_setAltitude as jni$_.JMethodIDPtr,
+      d,
+    ).check();
+  }
+
+  static final _id_setBearing = _class.instanceMethodId(
+    r'setBearing',
+    r'(F)V',
+  );
+
+  static final _setBearing =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
+
+  /// from: `public void setBearing(float f)`
+  void setBearing(
+    double f,
+  ) {
+    _setBearing(
+      reference.pointer,
+      _id_setBearing as jni$_.JMethodIDPtr,
+      f,
+    ).check();
+  }
+
+  static final _id_setBearingAccuracyDegrees = _class.instanceMethodId(
+    r'setBearingAccuracyDegrees',
+    r'(F)V',
+  );
+
+  static final _setBearingAccuracyDegrees =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
+
+  /// from: `public void setBearingAccuracyDegrees(float f)`
+  void setBearingAccuracyDegrees(
+    double f,
+  ) {
+    _setBearingAccuracyDegrees(
+      reference.pointer,
+      _id_setBearingAccuracyDegrees as jni$_.JMethodIDPtr,
+      f,
+    ).check();
+  }
+
+  static final _id_setElapsedRealtimeNanos = _class.instanceMethodId(
+    r'setElapsedRealtimeNanos',
+    r'(J)V',
+  );
+
+  static final _setElapsedRealtimeNanos =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int64,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
+
+  /// from: `public void setElapsedRealtimeNanos(long j)`
+  void setElapsedRealtimeNanos(
+    int j,
+  ) {
+    _setElapsedRealtimeNanos(
+      reference.pointer,
+      _id_setElapsedRealtimeNanos as jni$_.JMethodIDPtr,
+      j,
+    ).check();
+  }
+
+  static final _id_setElapsedRealtimeUncertaintyNanos = _class.instanceMethodId(
+    r'setElapsedRealtimeUncertaintyNanos',
+    r'(D)V',
+  );
+
+  static final _setElapsedRealtimeUncertaintyNanos =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
+
+  /// from: `public void setElapsedRealtimeUncertaintyNanos(double d)`
+  void setElapsedRealtimeUncertaintyNanos(
+    double d,
+  ) {
+    _setElapsedRealtimeUncertaintyNanos(
+      reference.pointer,
+      _id_setElapsedRealtimeUncertaintyNanos as jni$_.JMethodIDPtr,
+      d,
+    ).check();
+  }
+
+  static final _id_setExtras = _class.instanceMethodId(
+    r'setExtras',
+    r'(Landroid/os/Bundle;)V',
+  );
+
+  static final _setExtras =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public void setExtras(android.os.Bundle bundle)`
+  void setExtras(
+    jni$_.JObject? bundle,
+  ) {
+    final _$bundle = bundle?.reference ?? jni$_.jNullReference;
+    _setExtras(
+      reference.pointer,
+      _id_setExtras as jni$_.JMethodIDPtr,
+      _$bundle.pointer,
+    ).check();
+  }
+
+  static final _id_setLatitude = _class.instanceMethodId(
+    r'setLatitude',
+    r'(D)V',
+  );
+
+  static final _setLatitude =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
+
+  /// from: `public void setLatitude(double d)`
+  void setLatitude(
+    double d,
+  ) {
+    _setLatitude(
+      reference.pointer,
+      _id_setLatitude as jni$_.JMethodIDPtr,
+      d,
+    ).check();
+  }
+
+  static final _id_setLongitude = _class.instanceMethodId(
+    r'setLongitude',
+    r'(D)V',
+  );
+
+  static final _setLongitude =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
+
+  /// from: `public void setLongitude(double d)`
+  void setLongitude(
+    double d,
+  ) {
+    _setLongitude(
+      reference.pointer,
+      _id_setLongitude as jni$_.JMethodIDPtr,
+      d,
+    ).check();
+  }
+
+  static final _id_setMock = _class.instanceMethodId(
+    r'setMock',
+    r'(Z)V',
+  );
+
+  static final _setMock =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
+
+  /// from: `public void setMock(boolean z)`
+  void setMock(
+    bool z,
+  ) {
+    _setMock(
+      reference.pointer,
+      _id_setMock as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).check();
+  }
+
+  static final _id_setMslAltitudeAccuracyMeters = _class.instanceMethodId(
+    r'setMslAltitudeAccuracyMeters',
+    r'(F)V',
+  );
+
+  static final _setMslAltitudeAccuracyMeters =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
+
+  /// from: `public void setMslAltitudeAccuracyMeters(float f)`
+  void setMslAltitudeAccuracyMeters(
+    double f,
+  ) {
+    _setMslAltitudeAccuracyMeters(
+      reference.pointer,
+      _id_setMslAltitudeAccuracyMeters as jni$_.JMethodIDPtr,
+      f,
+    ).check();
+  }
+
+  static final _id_setMslAltitudeMeters = _class.instanceMethodId(
+    r'setMslAltitudeMeters',
+    r'(D)V',
+  );
+
+  static final _setMslAltitudeMeters =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
+
+  /// from: `public void setMslAltitudeMeters(double d)`
+  void setMslAltitudeMeters(
+    double d,
+  ) {
+    _setMslAltitudeMeters(
+      reference.pointer,
+      _id_setMslAltitudeMeters as jni$_.JMethodIDPtr,
+      d,
+    ).check();
+  }
+
+  static final _id_setProvider = _class.instanceMethodId(
+    r'setProvider',
+    r'(Ljava/lang/String;)V',
+  );
+
+  static final _setProvider =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public void setProvider(java.lang.String string)`
+  void setProvider(
+    jni$_.JString? string,
+  ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    _setProvider(
+      reference.pointer,
+      _id_setProvider as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).check();
+  }
+
+  static final _id_setSpeed = _class.instanceMethodId(
+    r'setSpeed',
+    r'(F)V',
+  );
+
+  static final _setSpeed =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
+
+  /// from: `public void setSpeed(float f)`
+  void setSpeed(
+    double f,
+  ) {
+    _setSpeed(reference.pointer, _id_setSpeed as jni$_.JMethodIDPtr, f).check();
+  }
+
+  static final _id_setSpeedAccuracyMetersPerSecond = _class.instanceMethodId(
+    r'setSpeedAccuracyMetersPerSecond',
+    r'(F)V',
+  );
+
+  static final _setSpeedAccuracyMetersPerSecond =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
+
+  /// from: `public void setSpeedAccuracyMetersPerSecond(float f)`
+  void setSpeedAccuracyMetersPerSecond(
+    double f,
+  ) {
+    _setSpeedAccuracyMetersPerSecond(
+      reference.pointer,
+      _id_setSpeedAccuracyMetersPerSecond as jni$_.JMethodIDPtr,
+      f,
+    ).check();
+  }
+
+  static final _id_setTime = _class.instanceMethodId(
+    r'setTime',
+    r'(J)V',
+  );
+
+  static final _setTime =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int64,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
+
+  /// from: `public void setTime(long j)`
+  void setTime(
+    int j,
+  ) {
+    _setTime(reference.pointer, _id_setTime as jni$_.JMethodIDPtr, j).check();
+  }
+
+  static final _id_setVerticalAccuracyMeters = _class.instanceMethodId(
+    r'setVerticalAccuracyMeters',
+    r'(F)V',
+  );
+
+  static final _setVerticalAccuracyMeters =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+            )
+          >();
+
+  /// from: `public void setVerticalAccuracyMeters(float f)`
+  void setVerticalAccuracyMeters(
+    double f,
+  ) {
+    _setVerticalAccuracyMeters(
+      reference.pointer,
+      _id_setVerticalAccuracyMeters as jni$_.JMethodIDPtr,
+      f,
+    ).check();
+  }
+
+  static final _id_toString$1 = _class.instanceMethodId(
+    r'toString',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _toString$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public java.lang.String toString()`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JString? toString$1() {
+    return _toString$1(
+      reference.pointer,
+      _id_toString$1 as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
+  }
+
+  static final _id_writeToParcel = _class.instanceMethodId(
+    r'writeToParcel',
+    r'(Landroid/os/Parcel;I)V',
+  );
+
+  static final _writeToParcel =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+            )
+          >();
+
+  /// from: `public void writeToParcel(android.os.Parcel parcel, int i)`
+  void writeToParcel(
+    jni$_.JObject? parcel,
+    int i,
+  ) {
+    final _$parcel = parcel?.reference ?? jni$_.jNullReference;
+    _writeToParcel(
+      reference.pointer,
+      _id_writeToParcel as jni$_.JMethodIDPtr,
+      _$parcel.pointer,
+      i,
+    ).check();
+  }
 }
 
 final class $Location$NullableType extends jni$_.JObjType<Location?> {
@@ -2307,8 +2411,11 @@ final class $Location$NullableType extends jni$_.JObjType<Location?> {
 
   @jni$_.internal
   @core$_.override
-  Location? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : Location.fromReference(reference);
+  Location? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : Location.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2341,8 +2448,9 @@ final class $Location$Type extends jni$_.JObjType<Location> {
 
   @jni$_.internal
   @core$_.override
-  Location fromReference(jni$_.JReference reference) =>
-      Location.fromReference(reference);
+  Location fromReference(jni$_.JReference reference) => Location.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

@@ -45,8 +45,9 @@ class PermissionsListener extends jni$_.JObject {
   final jni$_.JObjType<PermissionsListener> $type;
 
   @jni$_.internal
-  PermissionsListener.fromReference(jni$_.JReference reference)
-    : $type = type,
+  PermissionsListener.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -80,7 +81,9 @@ class PermissionsListener extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onExplanationNeeded(java.util.List<java.lang.String> list)`
-  void onExplanationNeeded(jni$_.JList<jni$_.JString?>? list) {
+  void onExplanationNeeded(
+    jni$_.JList<jni$_.JString?>? list,
+  ) {
     final _$list = list?.reference ?? jni$_.jNullReference;
     _onExplanationNeeded(
       reference.pointer,
@@ -113,7 +116,9 @@ class PermissionsListener extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onPermissionResult(boolean z)`
-  void onPermissionResult(bool z) {
+  void onPermissionResult(
+    bool z,
+  ) {
     _onPermissionResult(
       reference.pointer,
       _id_onPermissionResult as jni$_.JMethodIDPtr,
@@ -130,7 +135,11 @@ class PermissionsListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -200,10 +209,14 @@ class PermissionsListener extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory PermissionsListener.implement($PermissionsListener $impl) {
+  factory PermissionsListener.implement(
+    $PermissionsListener $impl,
+  ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return PermissionsListener.fromReference($i.implementReference());
+    return PermissionsListener.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -259,7 +272,11 @@ final class $PermissionsListener$NullableType
   @jni$_.internal
   @core$_.override
   PermissionsListener? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : PermissionsListener.fromReference(reference);
+      reference.isNull
+      ? null
+      : PermissionsListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -295,7 +312,9 @@ final class $PermissionsListener$Type
   @jni$_.internal
   @core$_.override
   PermissionsListener fromReference(jni$_.JReference reference) =>
-      PermissionsListener.fromReference(reference);
+      PermissionsListener.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

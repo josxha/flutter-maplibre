@@ -47,8 +47,9 @@ class NativeMapOptions extends jni$_.JObject {
   final jni$_.JObjType<NativeMapOptions> $type;
 
   @jni$_.internal
-  NativeMapOptions.fromReference(jni$_.JReference reference)
-    : $type = type,
+  NativeMapOptions.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -96,7 +97,9 @@ class NativeMapOptions extends jni$_.JObject {
     );
   }
 
-  static final _id_new$1 = _class.constructorId(r'(FZ)V');
+  static final _id_new$1 = _class.constructorId(
+    r'(FZ)V',
+  );
 
   static final _new$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -119,7 +122,10 @@ class NativeMapOptions extends jni$_.JObject {
 
   /// from: `public void <init>(float f, boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory NativeMapOptions.new$1(double f, bool z) {
+  factory NativeMapOptions.new$1(
+    double f,
+    bool z,
+  ) {
     return NativeMapOptions.fromReference(
       _new$1(
         _class.reference.pointer,
@@ -130,7 +136,10 @@ class NativeMapOptions extends jni$_.JObject {
     );
   }
 
-  static final _id_pixelRatio = _class.instanceMethodId(r'pixelRatio', r'()F');
+  static final _id_pixelRatio = _class.instanceMethodId(
+    r'pixelRatio',
+    r'()F',
+  );
 
   static final _pixelRatio =
       jni$_.ProtectedJniExtensions.lookup<
@@ -301,6 +310,36 @@ class NativeMapOptions extends jni$_.JObject {
       _id_actionJournalLogFileCount as jni$_.JMethodIDPtr,
     ).long;
   }
+
+  static final _id_actionJournalRenderingReportInterval = _class
+      .instanceMethodId(
+        r'actionJournalRenderingReportInterval',
+        r'()I',
+      );
+
+  static final _actionJournalRenderingReportInterval =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public int actionJournalRenderingReportInterval()`
+  int actionJournalRenderingReportInterval() {
+    return _actionJournalRenderingReportInterval(
+      reference.pointer,
+      _id_actionJournalRenderingReportInterval as jni$_.JMethodIDPtr,
+    ).integer;
+  }
 }
 
 final class $NativeMapOptions$NullableType
@@ -315,7 +354,11 @@ final class $NativeMapOptions$NullableType
   @jni$_.internal
   @core$_.override
   NativeMapOptions? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : NativeMapOptions.fromReference(reference);
+      reference.isNull
+      ? null
+      : NativeMapOptions.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -349,7 +392,9 @@ final class $NativeMapOptions$Type extends jni$_.JObjType<NativeMapOptions> {
   @jni$_.internal
   @core$_.override
   NativeMapOptions fromReference(jni$_.JReference reference) =>
-      NativeMapOptions.fromReference(reference);
+      NativeMapOptions.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

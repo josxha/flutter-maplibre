@@ -47,8 +47,9 @@ class GLTextureViewRenderThread extends jni$_.JObject {
   final jni$_.JObjType<GLTextureViewRenderThread> $type;
 
   @jni$_.internal
-  GLTextureViewRenderThread.fromReference(jni$_.JReference reference)
-    : $type = type,
+  GLTextureViewRenderThread.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -101,7 +102,10 @@ class GLTextureViewRenderThread extends jni$_.JObject {
     );
   }
 
-  static final _id_run = _class.instanceMethodId(r'run', r'()V');
+  static final _id_run = _class.instanceMethodId(
+    r'run',
+    r'()V',
+  );
 
   static final _run =
       jni$_.ProtectedJniExtensions.lookup<
@@ -140,7 +144,9 @@ final class $GLTextureViewRenderThread$NullableType
   GLTextureViewRenderThread? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : GLTextureViewRenderThread.fromReference(reference);
+      : GLTextureViewRenderThread.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -176,7 +182,9 @@ final class $GLTextureViewRenderThread$Type
   @jni$_.internal
   @core$_.override
   GLTextureViewRenderThread fromReference(jni$_.JReference reference) =>
-      GLTextureViewRenderThread.fromReference(reference);
+      GLTextureViewRenderThread.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

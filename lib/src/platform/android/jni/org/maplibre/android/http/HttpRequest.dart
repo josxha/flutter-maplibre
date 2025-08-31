@@ -47,8 +47,9 @@ class HttpRequest extends jni$_.JObject {
   final jni$_.JObjType<HttpRequest> $type;
 
   @jni$_.internal
-  HttpRequest.fromReference(jni$_.JReference reference)
-    : $type = type,
+  HttpRequest.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -172,7 +173,11 @@ class HttpRequest extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -220,7 +225,10 @@ class HttpRequest extends jni$_.JObject {
     return jni$_.nullptr;
   }
 
-  static void implementIn(jni$_.JImplementer implementer, $HttpRequest $impl) {
+  static void implementIn(
+    jni$_.JImplementer implementer,
+    $HttpRequest $impl,
+  ) {
     late final jni$_.RawReceivePort $p;
     $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
@@ -246,10 +254,14 @@ class HttpRequest extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory HttpRequest.implement($HttpRequest $impl) {
+  factory HttpRequest.implement(
+    $HttpRequest $impl,
+  ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return HttpRequest.fromReference($i.implementReference());
+    return HttpRequest.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -351,8 +363,11 @@ final class $HttpRequest$NullableType extends jni$_.JObjType<HttpRequest?> {
 
   @jni$_.internal
   @core$_.override
-  HttpRequest? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : HttpRequest.fromReference(reference);
+  HttpRequest? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : HttpRequest.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -386,7 +401,9 @@ final class $HttpRequest$Type extends jni$_.JObjType<HttpRequest> {
   @jni$_.internal
   @core$_.override
   HttpRequest fromReference(jni$_.JReference reference) =>
-      HttpRequest.fromReference(reference);
+      HttpRequest.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
