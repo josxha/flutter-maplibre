@@ -21,8 +21,7 @@ android {
 
     defaultConfig {
         applicationId = "com.github.josxha.maplibre_example"
-        // minSdk 21 required by maplibre
-        minSdk = 21 // flutter.minSdkVersion
+        minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName

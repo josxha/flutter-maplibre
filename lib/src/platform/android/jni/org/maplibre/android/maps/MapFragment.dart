@@ -53,8 +53,9 @@ class MapFragment$OnMapViewReadyCallback extends jni$_.JObject {
   final jni$_.JObjType<MapFragment$OnMapViewReadyCallback> $type;
 
   @jni$_.internal
-  MapFragment$OnMapViewReadyCallback.fromReference(jni$_.JReference reference)
-    : $type = type,
+  MapFragment$OnMapViewReadyCallback.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -89,7 +90,9 @@ class MapFragment$OnMapViewReadyCallback extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onMapViewReady(org.maplibre.android.maps.MapView mapView)`
-  void onMapViewReady(mapview$_.MapView? mapView) {
+  void onMapViewReady(
+    mapview$_.MapView? mapView,
+  ) {
     final _$mapView = mapView?.reference ?? jni$_.jNullReference;
     _onMapViewReady(
       reference.pointer,
@@ -108,7 +111,11 @@ class MapFragment$OnMapViewReadyCallback extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -218,7 +225,9 @@ final class $MapFragment$OnMapViewReadyCallback$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : MapFragment$OnMapViewReadyCallback.fromReference(reference);
+      : MapFragment$OnMapViewReadyCallback.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -257,7 +266,9 @@ final class $MapFragment$OnMapViewReadyCallback$Type
   @core$_.override
   MapFragment$OnMapViewReadyCallback fromReference(
     jni$_.JReference reference,
-  ) => MapFragment$OnMapViewReadyCallback.fromReference(reference);
+  ) => MapFragment$OnMapViewReadyCallback.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -288,8 +299,9 @@ class MapFragment extends jni$_.JObject {
   final jni$_.JObjType<MapFragment> $type;
 
   @jni$_.internal
-  MapFragment.fromReference(jni$_.JReference reference)
-    : $type = type,
+  MapFragment.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -299,7 +311,9 @@ class MapFragment extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $MapFragment$NullableType();
   static const type = $MapFragment$Type();
-  static final _id_new$ = _class.constructorId(r'()V');
+  static final _id_new$ = _class.constructorId(
+    r'()V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -465,7 +479,9 @@ class MapFragment extends jni$_.JObject {
           >();
 
   /// from: `public void onAttach(android.content.Context context)`
-  void onAttach(jni$_.JObject? context) {
+  void onAttach(
+    jni$_.JObject? context,
+  ) {
     final _$context = context?.reference ?? jni$_.jNullReference;
     _onAttach(
       reference.pointer,
@@ -551,7 +567,10 @@ class MapFragment extends jni$_.JObject {
           >();
 
   /// from: `public void onViewCreated(android.view.View view, android.os.Bundle bundle)`
-  void onViewCreated(jni$_.JObject? view, jni$_.JObject? bundle) {
+  void onViewCreated(
+    jni$_.JObject? view,
+    jni$_.JObject? bundle,
+  ) {
     final _$view = view?.reference ?? jni$_.jNullReference;
     final _$bundle = bundle?.reference ?? jni$_.jNullReference;
     _onViewCreated(
@@ -586,7 +605,9 @@ class MapFragment extends jni$_.JObject {
           >();
 
   /// from: `public void onMapReady(org.maplibre.android.maps.MapLibreMap mapLibreMap)`
-  void onMapReady(maplibremap$_.MapLibreMap mapLibreMap) {
+  void onMapReady(
+    maplibremap$_.MapLibreMap mapLibreMap,
+  ) {
     final _$mapLibreMap = mapLibreMap.reference;
     _onMapReady(
       reference.pointer,
@@ -595,7 +616,10 @@ class MapFragment extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_onStart = _class.instanceMethodId(r'onStart', r'()V');
+  static final _id_onStart = _class.instanceMethodId(
+    r'onStart',
+    r'()V',
+  );
 
   static final _onStart =
       jni$_.ProtectedJniExtensions.lookup<
@@ -618,7 +642,10 @@ class MapFragment extends jni$_.JObject {
     _onStart(reference.pointer, _id_onStart as jni$_.JMethodIDPtr).check();
   }
 
-  static final _id_onResume = _class.instanceMethodId(r'onResume', r'()V');
+  static final _id_onResume = _class.instanceMethodId(
+    r'onResume',
+    r'()V',
+  );
 
   static final _onResume =
       jni$_.ProtectedJniExtensions.lookup<
@@ -641,7 +668,10 @@ class MapFragment extends jni$_.JObject {
     _onResume(reference.pointer, _id_onResume as jni$_.JMethodIDPtr).check();
   }
 
-  static final _id_onPause = _class.instanceMethodId(r'onPause', r'()V');
+  static final _id_onPause = _class.instanceMethodId(
+    r'onPause',
+    r'()V',
+  );
 
   static final _onPause =
       jni$_.ProtectedJniExtensions.lookup<
@@ -688,7 +718,9 @@ class MapFragment extends jni$_.JObject {
           >();
 
   /// from: `public void onSaveInstanceState(android.os.Bundle bundle)`
-  void onSaveInstanceState(jni$_.JObject bundle) {
+  void onSaveInstanceState(
+    jni$_.JObject bundle,
+  ) {
     final _$bundle = bundle.reference;
     _onSaveInstanceState(
       reference.pointer,
@@ -697,7 +729,10 @@ class MapFragment extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_onStop = _class.instanceMethodId(r'onStop', r'()V');
+  static final _id_onStop = _class.instanceMethodId(
+    r'onStop',
+    r'()V',
+  );
 
   static final _onStop =
       jni$_.ProtectedJniExtensions.lookup<
@@ -778,7 +813,10 @@ class MapFragment extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_onDestroy = _class.instanceMethodId(r'onDestroy', r'()V');
+  static final _id_onDestroy = _class.instanceMethodId(
+    r'onDestroy',
+    r'()V',
+  );
 
   static final _onDestroy =
       jni$_.ProtectedJniExtensions.lookup<
@@ -825,7 +863,9 @@ class MapFragment extends jni$_.JObject {
           >();
 
   /// from: `public void getMapAsync(org.maplibre.android.maps.OnMapReadyCallback onMapReadyCallback)`
-  void getMapAsync(onmapreadycallback$_.OnMapReadyCallback onMapReadyCallback) {
+  void getMapAsync(
+    onmapreadycallback$_.OnMapReadyCallback onMapReadyCallback,
+  ) {
     final _$onMapReadyCallback = onMapReadyCallback.reference;
     _getMapAsync(
       reference.pointer,
@@ -845,8 +885,11 @@ final class $MapFragment$NullableType extends jni$_.JObjType<MapFragment?> {
 
   @jni$_.internal
   @core$_.override
-  MapFragment? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : MapFragment.fromReference(reference);
+  MapFragment? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : MapFragment.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -880,7 +923,9 @@ final class $MapFragment$Type extends jni$_.JObjType<MapFragment> {
   @jni$_.internal
   @core$_.override
   MapFragment fromReference(jni$_.JReference reference) =>
-      MapFragment.fromReference(reference);
+      MapFragment.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

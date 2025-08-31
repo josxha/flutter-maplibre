@@ -45,8 +45,9 @@ class HttpResponder extends jni$_.JObject {
   final jni$_.JObjType<HttpResponder> $type;
 
   @jni$_.internal
-  HttpResponder.fromReference(jni$_.JReference reference)
-    : $type = type,
+  HttpResponder.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -154,7 +155,10 @@ class HttpResponder extends jni$_.JObject {
           >();
 
   /// from: `public abstract void handleFailure(int i, java.lang.String string)`
-  void handleFailure(int i, jni$_.JString? string) {
+  void handleFailure(
+    int i,
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _handleFailure(
       reference.pointer,
@@ -173,7 +177,11 @@ class HttpResponder extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -251,10 +259,14 @@ class HttpResponder extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory HttpResponder.implement($HttpResponder $impl) {
+  factory HttpResponder.implement(
+    $HttpResponder $impl,
+  ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return HttpResponder.fromReference($i.implementReference());
+    return HttpResponder.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -362,8 +374,11 @@ final class $HttpResponder$NullableType extends jni$_.JObjType<HttpResponder?> {
 
   @jni$_.internal
   @core$_.override
-  HttpResponder? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : HttpResponder.fromReference(reference);
+  HttpResponder? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : HttpResponder.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -397,7 +412,9 @@ final class $HttpResponder$Type extends jni$_.JObjType<HttpResponder> {
   @jni$_.internal
   @core$_.override
   HttpResponder fromReference(jni$_.JReference reference) =>
-      HttpResponder.fromReference(reference);
+      HttpResponder.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

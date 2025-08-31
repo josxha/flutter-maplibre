@@ -45,8 +45,9 @@ class HttpRequestUrl extends jni$_.JObject {
   final jni$_.JObjType<HttpRequestUrl> $type;
 
   @jni$_.internal
-  HttpRequestUrl.fromReference(jni$_.JReference reference)
-    : $type = type,
+  HttpRequestUrl.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -121,8 +122,11 @@ final class $HttpRequestUrl$NullableType
 
   @jni$_.internal
   @core$_.override
-  HttpRequestUrl? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : HttpRequestUrl.fromReference(reference);
+  HttpRequestUrl? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : HttpRequestUrl.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -156,7 +160,9 @@ final class $HttpRequestUrl$Type extends jni$_.JObjType<HttpRequestUrl> {
   @jni$_.internal
   @core$_.override
   HttpRequestUrl fromReference(jni$_.JReference reference) =>
-      HttpRequestUrl.fromReference(reference);
+      HttpRequestUrl.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
