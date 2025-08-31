@@ -17,6 +17,7 @@ class _StyledMapPageState extends State<StyledMapPage> {
     'MapTiler Streets': MapStyles.maptilerStreets,
     'Protomaps Light': MapStyles.protomapsLight,
     'Protomaps Dark': MapStyles.protomapsDark,
+    'Custom JSON': MapStyles.customJsonStyle,
   };
   String _styleUrl = _styles.values.first;
   late MapController _controller;

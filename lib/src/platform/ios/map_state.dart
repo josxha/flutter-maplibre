@@ -304,4 +304,13 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   @override
   List<Offset> toScreenLocationsSync(List<Position> lngLats) =>
       lngLats.map(toScreenLocationSync).toList(growable: false);
+
+  @override
+  void setStyle(String style) {
+    if (style.startsWith('{') || style.startsWith('[')) {
+      _mapView.styleJSON = style.toNSString();
+    } else {
+      _mapView.styleURL = NSURL.URLWithString(style.toNSString())!;
+    }
+  }
 }

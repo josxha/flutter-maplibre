@@ -8,7 +8,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
   private var _mapView: MLNMapView!
   private var _viewId: Int64
   private var _flutterApi: MapLibreFlutterApi
-  private var _mapOptions: MapOptions? = nil
+  private var _mapOptions: MapOptions?
 
   init(
     frame _: CGRect,
@@ -32,8 +32,13 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
       switch result {
       case let .success(mapOptions):
         self._mapOptions = mapOptions
-        // init map view
-        self._mapView = MLNMapView(frame: self._view.bounds)
+
+        if mapOptions.style.hasPrefix("{") || mapOptions.style.hasPrefix("[") {
+          self._mapView = MLNMapView(frame: self._view.bounds, styleJSON: mapOptions.style)
+        } else {
+          self._mapView = MLNMapView(frame: self._view.bounds, styleURL: URL(string: mapOptions.style))
+        }
+
         MapLibreRegistry.addMap(viewId: viewId, map: self._mapView)
         self._mapView.autoresizingMask = [
           .flexibleWidth, .flexibleHeight,
@@ -65,8 +70,6 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
         self._mapView.maximumZoomLevel = mapOptions.maxZoom
         self._mapView.minimumPitch = mapOptions.minPitch
         self._mapView.maximumPitch = mapOptions.maxPitch
-
-        self._mapView.styleURL = URL(string: mapOptions.style)
 
         self._mapView.allowsRotating = mapOptions.gestures.rotate
         self._mapView.allowsScrolling = mapOptions.gestures.pan
