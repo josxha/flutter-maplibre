@@ -1,3 +1,0 @@
-configurations.maybeCreate("default")
-// https://repo1.maven.org/maven2/org/maplibre/gl/android-sdk/11.13.1/android-sdk-11.13.1.aar
-artifacts.add("default", file('android-sdk-11.13.1.aar'))
