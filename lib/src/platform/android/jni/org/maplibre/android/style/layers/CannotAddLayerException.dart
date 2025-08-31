@@ -45,8 +45,9 @@ class CannotAddLayerException extends jni$_.JObject {
   final jni$_.JObjType<CannotAddLayerException> $type;
 
   @jni$_.internal
-  CannotAddLayerException.fromReference(jni$_.JReference reference)
-    : $type = type,
+  CannotAddLayerException.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -56,7 +57,9 @@ class CannotAddLayerException extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $CannotAddLayerException$NullableType();
   static const type = $CannotAddLayerException$Type();
-  static final _id_new$ = _class.constructorId(r'(Ljava/lang/String;)V');
+  static final _id_new$ = _class.constructorId(
+    r'(Ljava/lang/String;)V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -78,7 +81,9 @@ class CannotAddLayerException extends jni$_.JObject {
 
   /// from: `public void <init>(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory CannotAddLayerException(jni$_.JString? string) {
+  factory CannotAddLayerException(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return CannotAddLayerException.fromReference(
       _new$(
@@ -105,7 +110,9 @@ final class $CannotAddLayerException$NullableType
   CannotAddLayerException? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : CannotAddLayerException.fromReference(reference);
+      : CannotAddLayerException.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -141,7 +148,9 @@ final class $CannotAddLayerException$Type
   @jni$_.internal
   @core$_.override
   CannotAddLayerException fromReference(jni$_.JReference reference) =>
-      CannotAddLayerException.fromReference(reference);
+      CannotAddLayerException.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

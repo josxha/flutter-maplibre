@@ -31,6 +31,7 @@ abstract interface class MapLibreHostApi {
     required Map<String, Object> layout,
     required Map<String, Object> paint,
     String? belowLayerId,
+    String? aboveLayerId,
   });
 
   /// Add a circle layer to the map style.
@@ -41,6 +42,7 @@ abstract interface class MapLibreHostApi {
     required Map<String, Object> layout,
     required Map<String, Object> paint,
     String? belowLayerId,
+    String? aboveLayerId,
   });
 
   /// Add a background layer to the map style.
@@ -50,6 +52,7 @@ abstract interface class MapLibreHostApi {
     required Map<String, Object> layout,
     required Map<String, Object> paint,
     String? belowLayerId,
+    String? aboveLayerId,
   });
 
   /// Add a fill extrusion layer to the map style.
@@ -60,6 +63,7 @@ abstract interface class MapLibreHostApi {
     required Map<String, Object> layout,
     required Map<String, Object> paint,
     String? belowLayerId,
+    String? aboveLayerId,
   });
 
   /// Add a heatmap layer to the map style.
@@ -70,6 +74,7 @@ abstract interface class MapLibreHostApi {
     required Map<String, Object> layout,
     required Map<String, Object> paint,
     String? belowLayerId,
+    String? aboveLayerId,
   });
 
   /// Add a hillshade layer to the map style.
@@ -80,6 +85,7 @@ abstract interface class MapLibreHostApi {
     required Map<String, Object> layout,
     required Map<String, Object> paint,
     String? belowLayerId,
+    String? aboveLayerId,
   });
 
   /// Add a line layer to the map style.
@@ -90,6 +96,7 @@ abstract interface class MapLibreHostApi {
     required Map<String, Object> layout,
     required Map<String, Object> paint,
     String? belowLayerId,
+    String? aboveLayerId,
   });
 
   /// Add a raster layer to the map style.
@@ -100,6 +107,7 @@ abstract interface class MapLibreHostApi {
     required Map<String, Object> layout,
     required Map<String, Object> paint,
     String? belowLayerId,
+    String? aboveLayerId,
   });
 
   /// Add a symbol layer to the map style.
@@ -110,6 +118,7 @@ abstract interface class MapLibreHostApi {
     required Map<String, Object> layout,
     required Map<String, Object> paint,
     String? belowLayerId,
+    String? aboveLayerId,
   });
 
   /// Loads an image to the map. An image needs to be loaded before it can
@@ -120,6 +129,10 @@ abstract interface class MapLibreHostApi {
   /// Add an image to the map.
   @async
   void addImage(String id, Uint8List bytes);
+
+  /// Add multiple images to the map.
+  @async
+  void addImages(Map<String, Uint8List> images);
 }
 
 @FlutterApi()

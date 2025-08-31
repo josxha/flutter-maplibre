@@ -47,8 +47,9 @@ class TileServerOptions extends jni$_.JObject {
   final jni$_.JObjType<TileServerOptions> $type;
 
   @jni$_.internal
-  TileServerOptions.fromReference(jni$_.JReference reference)
-    : $type = type,
+  TileServerOptions.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -232,7 +233,9 @@ class TileServerOptions extends jni$_.JObject {
           >();
 
   /// from: `public void setBaseURL(java.lang.String string)`
-  void setBaseURL(jni$_.JString? string) {
+  void setBaseURL(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setBaseURL(
       reference.pointer,
@@ -295,7 +298,9 @@ class TileServerOptions extends jni$_.JObject {
           >();
 
   /// from: `public void setUriSchemeAlias(java.lang.String string)`
-  void setUriSchemeAlias(jni$_.JString? string) {
+  void setUriSchemeAlias(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setUriSchemeAlias(
       reference.pointer,
@@ -358,7 +363,9 @@ class TileServerOptions extends jni$_.JObject {
           >();
 
   /// from: `public void setSourceTemplate(java.lang.String string)`
-  void setSourceTemplate(jni$_.JString? string) {
+  void setSourceTemplate(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setSourceTemplate(
       reference.pointer,
@@ -421,7 +428,9 @@ class TileServerOptions extends jni$_.JObject {
           >();
 
   /// from: `public void setSourceDomainName(java.lang.String string)`
-  void setSourceDomainName(jni$_.JString? string) {
+  void setSourceDomainName(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setSourceDomainName(
       reference.pointer,
@@ -484,7 +493,9 @@ class TileServerOptions extends jni$_.JObject {
           >();
 
   /// from: `public void setSourceVersionPrefix(java.lang.String string)`
-  void setSourceVersionPrefix(jni$_.JString? string) {
+  void setSourceVersionPrefix(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setSourceVersionPrefix(
       reference.pointer,
@@ -547,7 +558,9 @@ class TileServerOptions extends jni$_.JObject {
           >();
 
   /// from: `public void setStyleTemplate(java.lang.String string)`
-  void setStyleTemplate(jni$_.JString? string) {
+  void setStyleTemplate(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setStyleTemplate(
       reference.pointer,
@@ -610,7 +623,9 @@ class TileServerOptions extends jni$_.JObject {
           >();
 
   /// from: `public void setStyleDomainName(java.lang.String string)`
-  void setStyleDomainName(jni$_.JString? string) {
+  void setStyleDomainName(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setStyleDomainName(
       reference.pointer,
@@ -673,7 +688,9 @@ class TileServerOptions extends jni$_.JObject {
           >();
 
   /// from: `public void setStyleVersionPrefix(java.lang.String string)`
-  void setStyleVersionPrefix(jni$_.JString? string) {
+  void setStyleVersionPrefix(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setStyleVersionPrefix(
       reference.pointer,
@@ -736,7 +753,9 @@ class TileServerOptions extends jni$_.JObject {
           >();
 
   /// from: `public void setSpritesTemplate(java.lang.String string)`
-  void setSpritesTemplate(jni$_.JString? string) {
+  void setSpritesTemplate(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setSpritesTemplate(
       reference.pointer,
@@ -799,7 +818,9 @@ class TileServerOptions extends jni$_.JObject {
           >();
 
   /// from: `public void setSpritesDomainName(java.lang.String string)`
-  void setSpritesDomainName(jni$_.JString? string) {
+  void setSpritesDomainName(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setSpritesDomainName(
       reference.pointer,
@@ -862,7 +883,9 @@ class TileServerOptions extends jni$_.JObject {
           >();
 
   /// from: `public void setSpritesVersionPrefix(java.lang.String string)`
-  void setSpritesVersionPrefix(jni$_.JString? string) {
+  void setSpritesVersionPrefix(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setSpritesVersionPrefix(
       reference.pointer,
@@ -925,7 +948,9 @@ class TileServerOptions extends jni$_.JObject {
           >();
 
   /// from: `public void setGlyphsTemplate(java.lang.String string)`
-  void setGlyphsTemplate(jni$_.JString? string) {
+  void setGlyphsTemplate(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setGlyphsTemplate(
       reference.pointer,
@@ -988,7 +1013,9 @@ class TileServerOptions extends jni$_.JObject {
           >();
 
   /// from: `public void setGlyphsDomainName(java.lang.String string)`
-  void setGlyphsDomainName(jni$_.JString? string) {
+  void setGlyphsDomainName(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setGlyphsDomainName(
       reference.pointer,
@@ -1051,7 +1078,9 @@ class TileServerOptions extends jni$_.JObject {
           >();
 
   /// from: `public void setGlyphsVersionPrefix(java.lang.String string)`
-  void setGlyphsVersionPrefix(jni$_.JString? string) {
+  void setGlyphsVersionPrefix(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setGlyphsVersionPrefix(
       reference.pointer,
@@ -1114,7 +1143,9 @@ class TileServerOptions extends jni$_.JObject {
           >();
 
   /// from: `public void setTileTemplate(java.lang.String string)`
-  void setTileTemplate(jni$_.JString? string) {
+  void setTileTemplate(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setTileTemplate(
       reference.pointer,
@@ -1177,7 +1208,9 @@ class TileServerOptions extends jni$_.JObject {
           >();
 
   /// from: `public void setTileDomainName(java.lang.String string)`
-  void setTileDomainName(jni$_.JString? string) {
+  void setTileDomainName(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setTileDomainName(
       reference.pointer,
@@ -1240,7 +1273,9 @@ class TileServerOptions extends jni$_.JObject {
           >();
 
   /// from: `public void setTileVersionPrefix(java.lang.String string)`
-  void setTileVersionPrefix(jni$_.JString? string) {
+  void setTileVersionPrefix(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setTileVersionPrefix(
       reference.pointer,
@@ -1303,7 +1338,9 @@ class TileServerOptions extends jni$_.JObject {
           >();
 
   /// from: `public void setApiKeyParameterName(java.lang.String string)`
-  void setApiKeyParameterName(jni$_.JString? string) {
+  void setApiKeyParameterName(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setApiKeyParameterName(
       reference.pointer,
@@ -1366,7 +1403,9 @@ class TileServerOptions extends jni$_.JObject {
           >();
 
   /// from: `public void setApiKeyRequired(boolean z)`
-  void setApiKeyRequired(bool z) {
+  void setApiKeyRequired(
+    bool z,
+  ) {
     _setApiKeyRequired(
       reference.pointer,
       _id_setApiKeyRequired as jni$_.JMethodIDPtr,
@@ -1496,7 +1535,9 @@ class TileServerOptions extends jni$_.JObject {
           >();
 
   /// from: `public void setDefaultStyle(java.lang.String string)`
-  void setDefaultStyle(jni$_.JString? string) {
+  void setDefaultStyle(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setDefaultStyle(
       reference.pointer,
@@ -1589,7 +1630,10 @@ class TileServerOptions extends jni$_.JObject {
           >();
 
   /// from: `public void writeToParcel(android.os.Parcel parcel, int i)`
-  void writeToParcel(jni$_.JObject parcel, int i) {
+  void writeToParcel(
+    jni$_.JObject parcel,
+    int i,
+  ) {
     final _$parcel = parcel.reference;
     _writeToParcel(
       reference.pointer,
@@ -1624,7 +1668,9 @@ class TileServerOptions extends jni$_.JObject {
 
   /// from: `static public org.maplibre.android.util.TileServerOptions get(org.maplibre.android.WellKnownTileServer wellKnownTileServer)`
   /// The returned object must be released after use, by calling the [release] method.
-  static TileServerOptions? get(jni$_.JObject? wellKnownTileServer) {
+  static TileServerOptions? get(
+    jni$_.JObject? wellKnownTileServer,
+  ) {
     final _$wellKnownTileServer =
         wellKnownTileServer?.reference ?? jni$_.jNullReference;
     return _get(
@@ -1647,7 +1693,11 @@ final class $TileServerOptions$NullableType
   @jni$_.internal
   @core$_.override
   TileServerOptions? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : TileServerOptions.fromReference(reference);
+      reference.isNull
+      ? null
+      : TileServerOptions.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1681,7 +1731,9 @@ final class $TileServerOptions$Type extends jni$_.JObjType<TileServerOptions> {
   @jni$_.internal
   @core$_.override
   TileServerOptions fromReference(jni$_.JReference reference) =>
-      TileServerOptions.fromReference(reference);
+      TileServerOptions.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

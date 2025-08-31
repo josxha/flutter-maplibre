@@ -47,8 +47,9 @@ class AttributionDialogManager extends jni$_.JObject {
   final jni$_.JObjType<AttributionDialogManager> $type;
 
   @jni$_.internal
-  AttributionDialogManager.fromReference(jni$_.JReference reference)
-    : $type = type,
+  AttributionDialogManager.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -125,7 +126,9 @@ class AttributionDialogManager extends jni$_.JObject {
           >();
 
   /// from: `public void onClick(android.view.View view)`
-  void onClick(jni$_.JObject view) {
+  void onClick(
+    jni$_.JObject view,
+  ) {
     final _$view = view.reference;
     _onClick(
       reference.pointer,
@@ -159,7 +162,10 @@ class AttributionDialogManager extends jni$_.JObject {
           >();
 
   /// from: `public void onClick(android.content.DialogInterface dialogInterface, int i)`
-  void onClick$1(jni$_.JObject? dialogInterface, int i) {
+  void onClick$1(
+    jni$_.JObject? dialogInterface,
+    int i,
+  ) {
     final _$dialogInterface =
         dialogInterface?.reference ?? jni$_.jNullReference;
     _onClick$1(
@@ -170,7 +176,10 @@ class AttributionDialogManager extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_onStop = _class.instanceMethodId(r'onStop', r'()V');
+  static final _id_onStop = _class.instanceMethodId(
+    r'onStop',
+    r'()V',
+  );
 
   static final _onStop =
       jni$_.ProtectedJniExtensions.lookup<
@@ -209,7 +218,9 @@ final class $AttributionDialogManager$NullableType
   AttributionDialogManager? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : AttributionDialogManager.fromReference(reference);
+      : AttributionDialogManager.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -245,7 +256,9 @@ final class $AttributionDialogManager$Type
   @jni$_.internal
   @core$_.override
   AttributionDialogManager fromReference(jni$_.JReference reference) =>
-      AttributionDialogManager.fromReference(reference);
+      AttributionDialogManager.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

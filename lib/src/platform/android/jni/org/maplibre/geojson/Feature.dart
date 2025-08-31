@@ -73,8 +73,9 @@ class Feature extends jni$_.JObject {
   final jni$_.JObjType<Feature> $type;
 
   @jni$_.internal
-  Feature.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Feature.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(r'org/maplibre/geojson/Feature');
@@ -115,7 +116,9 @@ class Feature extends jni$_.JObject {
   ///@return a new instance of this class defined by the values passed inside this static factory
   ///   method
   ///@since 1.0.0
-  static Feature? fromJson(jni$_.JString json) {
+  static Feature? fromJson(
+    jni$_.JString json,
+  ) {
     final _$json = json.reference;
     return _fromJson(
       _class.reference.pointer,
@@ -155,7 +158,9 @@ class Feature extends jni$_.JObject {
   ///@return a new instance of this class defined by the values passed inside this static factory
   ///   method
   ///@since 1.0.0
-  static Feature? fromGeometry(jni$_.JObject? geometry) {
+  static Feature? fromGeometry(
+    jni$_.JObject? geometry,
+  ) {
     final _$geometry = geometry?.reference ?? jni$_.jNullReference;
     return _fromGeometry(
       _class.reference.pointer,
@@ -200,7 +205,10 @@ class Feature extends jni$_.JObject {
   ///@return a new instance of this class defined by the values passed inside this static factory
   ///   method
   ///@since 1.0.0
-  static Feature? fromGeometry$1(jni$_.JObject? geometry, jni$_.JObject? bbox) {
+  static Feature? fromGeometry$1(
+    jni$_.JObject? geometry,
+    jni$_.JObject? bbox,
+  ) {
     final _$geometry = geometry?.reference ?? jni$_.jNullReference;
     final _$bbox = bbox?.reference ?? jni$_.jNullReference;
     return _fromGeometry$1(
@@ -516,7 +524,10 @@ class Feature extends jni$_.JObject {
     ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
-  static final _id_id = _class.instanceMethodId(r'id', r'()Ljava/lang/String;');
+  static final _id_id = _class.instanceMethodId(
+    r'id',
+    r'()Ljava/lang/String;',
+  );
 
   static final _id =
       jni$_.ProtectedJniExtensions.lookup<
@@ -684,7 +695,9 @@ class Feature extends jni$_.JObject {
   ///@param gson the built Gson object
   ///@return the TYPE adapter for this class
   ///@since 3.0.0
-  static jni$_.JObject? typeAdapter(jni$_.JObject? gson) {
+  static jni$_.JObject? typeAdapter(
+    jni$_.JObject? gson,
+  ) {
     final _$gson = gson?.reference ?? jni$_.jNullReference;
     return _typeAdapter(
       _class.reference.pointer,
@@ -725,7 +738,10 @@ class Feature extends jni$_.JObject {
   ///@param key name of the member
   ///@param value the String value associated with the member
   ///@since 1.0.0
-  void addStringProperty(jni$_.JString? key, jni$_.JString? value) {
+  void addStringProperty(
+    jni$_.JString? key,
+    jni$_.JString? value,
+  ) {
     final _$key = key?.reference ?? jni$_.jNullReference;
     final _$value = value?.reference ?? jni$_.jNullReference;
     _addStringProperty(
@@ -768,7 +784,10 @@ class Feature extends jni$_.JObject {
   ///@param key name of the member
   ///@param value the Number value associated with the member
   ///@since 1.0.0
-  void addNumberProperty(jni$_.JString? key, jni$_.JNumber? value) {
+  void addNumberProperty(
+    jni$_.JString? key,
+    jni$_.JNumber? value,
+  ) {
     final _$key = key?.reference ?? jni$_.jNullReference;
     final _$value = value?.reference ?? jni$_.jNullReference;
     _addNumberProperty(
@@ -811,7 +830,10 @@ class Feature extends jni$_.JObject {
   ///@param key name of the member
   ///@param value the Boolean value associated with the member
   ///@since 1.0.0
-  void addBooleanProperty(jni$_.JString? key, jni$_.JBoolean? value) {
+  void addBooleanProperty(
+    jni$_.JString? key,
+    jni$_.JBoolean? value,
+  ) {
     final _$key = key?.reference ?? jni$_.jNullReference;
     final _$value = value?.reference ?? jni$_.jNullReference;
     _addBooleanProperty(
@@ -854,7 +876,10 @@ class Feature extends jni$_.JObject {
   ///@param key name of the member
   ///@param value the Character value associated with the member
   ///@since 1.0.0
-  void addCharacterProperty(jni$_.JString? key, jni$_.JCharacter? value) {
+  void addCharacterProperty(
+    jni$_.JString? key,
+    jni$_.JCharacter? value,
+  ) {
     final _$key = key?.reference ?? jni$_.jNullReference;
     final _$value = value?.reference ?? jni$_.jNullReference;
     _addCharacterProperty(
@@ -897,7 +922,10 @@ class Feature extends jni$_.JObject {
   ///@param key name of the member
   ///@param value the JsonElement value associated with the member
   ///@since 1.0.0
-  void addProperty(jni$_.JString? key, jni$_.JObject? value) {
+  void addProperty(
+    jni$_.JString? key,
+    jni$_.JObject? value,
+  ) {
     final _$key = key?.reference ?? jni$_.jNullReference;
     final _$value = value?.reference ?? jni$_.jNullReference;
     _addProperty(
@@ -938,7 +966,9 @@ class Feature extends jni$_.JObject {
   ///@param key name of the member
   ///@return the value of the member, null if it doesn't exist
   ///@since 1.0.0
-  jni$_.JString? getStringProperty(jni$_.JString? key) {
+  jni$_.JString? getStringProperty(
+    jni$_.JString? key,
+  ) {
     final _$key = key?.reference ?? jni$_.jNullReference;
     return _getStringProperty(
       reference.pointer,
@@ -977,7 +1007,9 @@ class Feature extends jni$_.JObject {
   ///@param key name of the member
   ///@return the value of the member, null if it doesn't exist
   ///@since 1.0.0
-  jni$_.JNumber? getNumberProperty(jni$_.JString? key) {
+  jni$_.JNumber? getNumberProperty(
+    jni$_.JString? key,
+  ) {
     final _$key = key?.reference ?? jni$_.jNullReference;
     return _getNumberProperty(
       reference.pointer,
@@ -1016,7 +1048,9 @@ class Feature extends jni$_.JObject {
   ///@param key name of the member
   ///@return the value of the member, null if it doesn't exist
   ///@since 1.0.0
-  jni$_.JBoolean? getBooleanProperty(jni$_.JString? key) {
+  jni$_.JBoolean? getBooleanProperty(
+    jni$_.JString? key,
+  ) {
     final _$key = key?.reference ?? jni$_.jNullReference;
     return _getBooleanProperty(
       reference.pointer,
@@ -1058,7 +1092,9 @@ class Feature extends jni$_.JObject {
   ///@deprecated This method was passing the call to JsonElement::getAsCharacter()
   ///   which is in turn deprecated because of misleading nature, as it
   ///   does not get this element as a char but rather as a string's first character.
-  jni$_.JCharacter? getCharacterProperty(jni$_.JString? key) {
+  jni$_.JCharacter? getCharacterProperty(
+    jni$_.JString? key,
+  ) {
     final _$key = key?.reference ?? jni$_.jNullReference;
     return _getCharacterProperty(
       reference.pointer,
@@ -1097,7 +1133,9 @@ class Feature extends jni$_.JObject {
   ///@param key name of the member
   ///@return the value of the member, null if it doesn't exist
   ///@since 1.0.0
-  jni$_.JObject? getProperty(jni$_.JString? key) {
+  jni$_.JObject? getProperty(
+    jni$_.JString? key,
+  ) {
     final _$key = key?.reference ?? jni$_.jNullReference;
     return _getProperty(
       reference.pointer,
@@ -1136,7 +1174,9 @@ class Feature extends jni$_.JObject {
   ///@param key name of the member
   ///@return Removed {@code property} from the key string passed in through the parameter.
   ///@since 1.0.0
-  jni$_.JObject? removeProperty(jni$_.JString? key) {
+  jni$_.JObject? removeProperty(
+    jni$_.JString? key,
+  ) {
     final _$key = key?.reference ?? jni$_.jNullReference;
     return _removeProperty(
       reference.pointer,
@@ -1174,7 +1214,9 @@ class Feature extends jni$_.JObject {
   ///@param key name of the member
   ///@return true if there is the member has the specified name, false otherwise.
   ///@since 1.0.0
-  bool hasProperty(jni$_.JString? key) {
+  bool hasProperty(
+    jni$_.JString? key,
+  ) {
     final _$key = key?.reference ?? jni$_.jNullReference;
     return _hasProperty(
       reference.pointer,
@@ -1212,7 +1254,9 @@ class Feature extends jni$_.JObject {
   ///@param key name of the member
   ///@return true if member is present with non-null value, false otherwise.
   ///@since 1.3.0
-  bool hasNonNullValueForProperty(jni$_.JString? key) {
+  bool hasNonNullValueForProperty(
+    jni$_.JString? key,
+  ) {
     final _$key = key?.reference ?? jni$_.jNullReference;
     return _hasNonNullValueForProperty(
       reference.pointer,
@@ -1275,7 +1319,9 @@ class Feature extends jni$_.JObject {
           >();
 
   /// from: `public boolean equals(java.lang.Object obj)`
-  bool equals(jni$_.JObject? obj) {
+  bool equals(
+    jni$_.JObject? obj,
+  ) {
     final _$obj = obj?.reference ?? jni$_.jNullReference;
     return _equals(
       reference.pointer,
@@ -1284,7 +1330,10 @@ class Feature extends jni$_.JObject {
     ).boolean;
   }
 
-  static final _id_hashCode$1 = _class.instanceMethodId(r'hashCode', r'()I');
+  static final _id_hashCode$1 = _class.instanceMethodId(
+    r'hashCode',
+    r'()I',
+  );
 
   static final _hashCode$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -1321,8 +1370,11 @@ final class $Feature$NullableType extends jni$_.JObjType<Feature?> {
 
   @jni$_.internal
   @core$_.override
-  Feature? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : Feature.fromReference(reference);
+  Feature? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : Feature.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1355,8 +1407,9 @@ final class $Feature$Type extends jni$_.JObjType<Feature> {
 
   @jni$_.internal
   @core$_.override
-  Feature fromReference(jni$_.JReference reference) =>
-      Feature.fromReference(reference);
+  Feature fromReference(jni$_.JReference reference) => Feature.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

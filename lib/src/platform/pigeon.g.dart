@@ -630,6 +630,7 @@ class MapLibreHostApi {
     required Map<String, Object> layout,
     required Map<String, Object> paint,
     String? belowLayerId,
+    String? aboveLayerId,
   }) async {
     final String pigeonVar_channelName =
         'dev.flutter.pigeon.maplibre.MapLibreHostApi.addFillLayer$pigeonVar_messageChannelSuffix';
@@ -640,7 +641,7 @@ class MapLibreHostApi {
           binaryMessenger: pigeonVar_binaryMessenger,
         );
     final Future<Object?> pigeonVar_sendFuture = pigeonVar_channel.send(
-      <Object?>[id, sourceId, layout, paint, belowLayerId],
+      <Object?>[id, sourceId, layout, paint, belowLayerId, aboveLayerId],
     );
     final List<Object?>? pigeonVar_replyList =
         await pigeonVar_sendFuture as List<Object?>?;
@@ -664,6 +665,7 @@ class MapLibreHostApi {
     required Map<String, Object> layout,
     required Map<String, Object> paint,
     String? belowLayerId,
+    String? aboveLayerId,
   }) async {
     final String pigeonVar_channelName =
         'dev.flutter.pigeon.maplibre.MapLibreHostApi.addCircleLayer$pigeonVar_messageChannelSuffix';
@@ -674,7 +676,7 @@ class MapLibreHostApi {
           binaryMessenger: pigeonVar_binaryMessenger,
         );
     final Future<Object?> pigeonVar_sendFuture = pigeonVar_channel.send(
-      <Object?>[id, sourceId, layout, paint, belowLayerId],
+      <Object?>[id, sourceId, layout, paint, belowLayerId, aboveLayerId],
     );
     final List<Object?>? pigeonVar_replyList =
         await pigeonVar_sendFuture as List<Object?>?;
@@ -697,6 +699,7 @@ class MapLibreHostApi {
     required Map<String, Object> layout,
     required Map<String, Object> paint,
     String? belowLayerId,
+    String? aboveLayerId,
   }) async {
     final String pigeonVar_channelName =
         'dev.flutter.pigeon.maplibre.MapLibreHostApi.addBackgroundLayer$pigeonVar_messageChannelSuffix';
@@ -707,7 +710,7 @@ class MapLibreHostApi {
           binaryMessenger: pigeonVar_binaryMessenger,
         );
     final Future<Object?> pigeonVar_sendFuture = pigeonVar_channel.send(
-      <Object?>[id, layout, paint, belowLayerId],
+      <Object?>[id, layout, paint, belowLayerId, aboveLayerId],
     );
     final List<Object?>? pigeonVar_replyList =
         await pigeonVar_sendFuture as List<Object?>?;
@@ -731,6 +734,7 @@ class MapLibreHostApi {
     required Map<String, Object> layout,
     required Map<String, Object> paint,
     String? belowLayerId,
+    String? aboveLayerId,
   }) async {
     final String pigeonVar_channelName =
         'dev.flutter.pigeon.maplibre.MapLibreHostApi.addFillExtrusionLayer$pigeonVar_messageChannelSuffix';
@@ -741,7 +745,7 @@ class MapLibreHostApi {
           binaryMessenger: pigeonVar_binaryMessenger,
         );
     final Future<Object?> pigeonVar_sendFuture = pigeonVar_channel.send(
-      <Object?>[id, sourceId, layout, paint, belowLayerId],
+      <Object?>[id, sourceId, layout, paint, belowLayerId, aboveLayerId],
     );
     final List<Object?>? pigeonVar_replyList =
         await pigeonVar_sendFuture as List<Object?>?;
@@ -765,6 +769,7 @@ class MapLibreHostApi {
     required Map<String, Object> layout,
     required Map<String, Object> paint,
     String? belowLayerId,
+    String? aboveLayerId,
   }) async {
     final String pigeonVar_channelName =
         'dev.flutter.pigeon.maplibre.MapLibreHostApi.addHeatmapLayer$pigeonVar_messageChannelSuffix';
@@ -775,7 +780,7 @@ class MapLibreHostApi {
           binaryMessenger: pigeonVar_binaryMessenger,
         );
     final Future<Object?> pigeonVar_sendFuture = pigeonVar_channel.send(
-      <Object?>[id, sourceId, layout, paint, belowLayerId],
+      <Object?>[id, sourceId, layout, paint, belowLayerId, aboveLayerId],
     );
     final List<Object?>? pigeonVar_replyList =
         await pigeonVar_sendFuture as List<Object?>?;
@@ -799,6 +804,7 @@ class MapLibreHostApi {
     required Map<String, Object> layout,
     required Map<String, Object> paint,
     String? belowLayerId,
+    String? aboveLayerId,
   }) async {
     final String pigeonVar_channelName =
         'dev.flutter.pigeon.maplibre.MapLibreHostApi.addHillshadeLayer$pigeonVar_messageChannelSuffix';
@@ -809,7 +815,7 @@ class MapLibreHostApi {
           binaryMessenger: pigeonVar_binaryMessenger,
         );
     final Future<Object?> pigeonVar_sendFuture = pigeonVar_channel.send(
-      <Object?>[id, sourceId, layout, paint, belowLayerId],
+      <Object?>[id, sourceId, layout, paint, belowLayerId, aboveLayerId],
     );
     final List<Object?>? pigeonVar_replyList =
         await pigeonVar_sendFuture as List<Object?>?;
@@ -833,6 +839,7 @@ class MapLibreHostApi {
     required Map<String, Object> layout,
     required Map<String, Object> paint,
     String? belowLayerId,
+    String? aboveLayerId,
   }) async {
     final String pigeonVar_channelName =
         'dev.flutter.pigeon.maplibre.MapLibreHostApi.addLineLayer$pigeonVar_messageChannelSuffix';
@@ -843,7 +850,7 @@ class MapLibreHostApi {
           binaryMessenger: pigeonVar_binaryMessenger,
         );
     final Future<Object?> pigeonVar_sendFuture = pigeonVar_channel.send(
-      <Object?>[id, sourceId, layout, paint, belowLayerId],
+      <Object?>[id, sourceId, layout, paint, belowLayerId, aboveLayerId],
     );
     final List<Object?>? pigeonVar_replyList =
         await pigeonVar_sendFuture as List<Object?>?;
@@ -867,6 +874,7 @@ class MapLibreHostApi {
     required Map<String, Object> layout,
     required Map<String, Object> paint,
     String? belowLayerId,
+    String? aboveLayerId,
   }) async {
     final String pigeonVar_channelName =
         'dev.flutter.pigeon.maplibre.MapLibreHostApi.addRasterLayer$pigeonVar_messageChannelSuffix';
@@ -877,7 +885,7 @@ class MapLibreHostApi {
           binaryMessenger: pigeonVar_binaryMessenger,
         );
     final Future<Object?> pigeonVar_sendFuture = pigeonVar_channel.send(
-      <Object?>[id, sourceId, layout, paint, belowLayerId],
+      <Object?>[id, sourceId, layout, paint, belowLayerId, aboveLayerId],
     );
     final List<Object?>? pigeonVar_replyList =
         await pigeonVar_sendFuture as List<Object?>?;
@@ -901,6 +909,7 @@ class MapLibreHostApi {
     required Map<String, Object> layout,
     required Map<String, Object> paint,
     String? belowLayerId,
+    String? aboveLayerId,
   }) async {
     final String pigeonVar_channelName =
         'dev.flutter.pigeon.maplibre.MapLibreHostApi.addSymbolLayer$pigeonVar_messageChannelSuffix';
@@ -911,7 +920,7 @@ class MapLibreHostApi {
           binaryMessenger: pigeonVar_binaryMessenger,
         );
     final Future<Object?> pigeonVar_sendFuture = pigeonVar_channel.send(
-      <Object?>[id, sourceId, layout, paint, belowLayerId],
+      <Object?>[id, sourceId, layout, paint, belowLayerId, aboveLayerId],
     );
     final List<Object?>? pigeonVar_replyList =
         await pigeonVar_sendFuture as List<Object?>?;
@@ -974,6 +983,34 @@ class MapLibreHostApi {
         );
     final Future<Object?> pigeonVar_sendFuture = pigeonVar_channel.send(
       <Object?>[id, bytes],
+    );
+    final List<Object?>? pigeonVar_replyList =
+        await pigeonVar_sendFuture as List<Object?>?;
+    if (pigeonVar_replyList == null) {
+      throw _createConnectionError(pigeonVar_channelName);
+    } else if (pigeonVar_replyList.length > 1) {
+      throw PlatformException(
+        code: pigeonVar_replyList[0]! as String,
+        message: pigeonVar_replyList[1] as String?,
+        details: pigeonVar_replyList[2],
+      );
+    } else {
+      return;
+    }
+  }
+
+  /// Add multiple images to the map.
+  Future<void> addImages(Map<String, Uint8List> images) async {
+    final String pigeonVar_channelName =
+        'dev.flutter.pigeon.maplibre.MapLibreHostApi.addImages$pigeonVar_messageChannelSuffix';
+    final BasicMessageChannel<Object?> pigeonVar_channel =
+        BasicMessageChannel<Object?>(
+          pigeonVar_channelName,
+          pigeonChannelCodec,
+          binaryMessenger: pigeonVar_binaryMessenger,
+        );
+    final Future<Object?> pigeonVar_sendFuture = pigeonVar_channel.send(
+      <Object?>[images],
     );
     final List<Object?>? pigeonVar_replyList =
         await pigeonVar_sendFuture as List<Object?>?;

@@ -51,8 +51,9 @@ class BackgroundLayer extends layer$_.Layer {
   final jni$_.JObjType<BackgroundLayer> $type;
 
   @jni$_.internal
-  BackgroundLayer.fromReference(jni$_.JReference reference)
-    : $type = type,
+  BackgroundLayer.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -62,7 +63,9 @@ class BackgroundLayer extends layer$_.Layer {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $BackgroundLayer$NullableType();
   static const type = $BackgroundLayer$Type();
-  static final _id_new$ = _class.constructorId(r'(Ljava/lang/String;)V');
+  static final _id_new$ = _class.constructorId(
+    r'(Ljava/lang/String;)V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -84,7 +87,9 @@ class BackgroundLayer extends layer$_.Layer {
 
   /// from: `public void <init>(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory BackgroundLayer(jni$_.JString? string) {
+  factory BackgroundLayer(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return BackgroundLayer.fromReference(
       _new$(
@@ -476,8 +481,11 @@ final class $BackgroundLayer$NullableType
 
   @jni$_.internal
   @core$_.override
-  BackgroundLayer? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : BackgroundLayer.fromReference(reference);
+  BackgroundLayer? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : BackgroundLayer.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const layer$_.$Layer$NullableType();
@@ -512,7 +520,9 @@ final class $BackgroundLayer$Type extends jni$_.JObjType<BackgroundLayer> {
   @jni$_.internal
   @core$_.override
   BackgroundLayer fromReference(jni$_.JReference reference) =>
-      BackgroundLayer.fromReference(reference);
+      BackgroundLayer.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const layer$_.$Layer$NullableType();

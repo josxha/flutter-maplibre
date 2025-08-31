@@ -45,8 +45,9 @@ class LocationEngineRequest$Builder extends jni$_.JObject {
   final jni$_.JObjType<LocationEngineRequest$Builder> $type;
 
   @jni$_.internal
-  LocationEngineRequest$Builder.fromReference(jni$_.JReference reference)
-    : $type = type,
+  LocationEngineRequest$Builder.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -56,7 +57,9 @@ class LocationEngineRequest$Builder extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $LocationEngineRequest$Builder$NullableType();
   static const type = $LocationEngineRequest$Builder$Type();
-  static final _id_new$ = _class.constructorId(r'(J)V');
+  static final _id_new$ = _class.constructorId(
+    r'(J)V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -78,7 +81,9 @@ class LocationEngineRequest$Builder extends jni$_.JObject {
 
   /// from: `public void <init>(long j)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory LocationEngineRequest$Builder(int j) {
+  factory LocationEngineRequest$Builder(
+    int j,
+  ) {
     return LocationEngineRequest$Builder.fromReference(
       _new$(
         _class.reference.pointer,
@@ -113,7 +118,9 @@ class LocationEngineRequest$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.engine.LocationEngineRequest$Builder setPriority(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationEngineRequest$Builder? setPriority(int i) {
+  LocationEngineRequest$Builder? setPriority(
+    int i,
+  ) {
     return _setPriority(
       reference.pointer,
       _id_setPriority as jni$_.JMethodIDPtr,
@@ -148,7 +155,9 @@ class LocationEngineRequest$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.engine.LocationEngineRequest$Builder setDisplacement(float f)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationEngineRequest$Builder? setDisplacement(double f) {
+  LocationEngineRequest$Builder? setDisplacement(
+    double f,
+  ) {
     return _setDisplacement(
       reference.pointer,
       _id_setDisplacement as jni$_.JMethodIDPtr,
@@ -183,7 +192,9 @@ class LocationEngineRequest$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.engine.LocationEngineRequest$Builder setMaxWaitTime(long j)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationEngineRequest$Builder? setMaxWaitTime(int j) {
+  LocationEngineRequest$Builder? setMaxWaitTime(
+    int j,
+  ) {
     return _setMaxWaitTime(
       reference.pointer,
       _id_setMaxWaitTime as jni$_.JMethodIDPtr,
@@ -218,7 +229,9 @@ class LocationEngineRequest$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.engine.LocationEngineRequest$Builder setFastestInterval(long j)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationEngineRequest$Builder? setFastestInterval(int j) {
+  LocationEngineRequest$Builder? setFastestInterval(
+    int j,
+  ) {
     return _setFastestInterval(
       reference.pointer,
       _id_setFastestInterval as jni$_.JMethodIDPtr,
@@ -276,7 +289,9 @@ final class $LocationEngineRequest$Builder$NullableType
   LocationEngineRequest$Builder? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : LocationEngineRequest$Builder.fromReference(reference);
+      : LocationEngineRequest$Builder.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -312,7 +327,9 @@ final class $LocationEngineRequest$Builder$Type
   @jni$_.internal
   @core$_.override
   LocationEngineRequest$Builder fromReference(jni$_.JReference reference) =>
-      LocationEngineRequest$Builder.fromReference(reference);
+      LocationEngineRequest$Builder.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -343,8 +360,9 @@ class LocationEngineRequest extends jni$_.JObject {
   final jni$_.JObjType<LocationEngineRequest> $type;
 
   @jni$_.internal
-  LocationEngineRequest.fromReference(jni$_.JReference reference)
-    : $type = type,
+  LocationEngineRequest.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -535,7 +553,9 @@ class LocationEngineRequest extends jni$_.JObject {
           >();
 
   /// from: `public boolean equals(java.lang.Object object)`
-  bool equals(jni$_.JObject? object) {
+  bool equals(
+    jni$_.JObject? object,
+  ) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     return _equals(
       reference.pointer,
@@ -544,7 +564,10 @@ class LocationEngineRequest extends jni$_.JObject {
     ).boolean;
   }
 
-  static final _id_hashCode$1 = _class.instanceMethodId(r'hashCode', r'()I');
+  static final _id_hashCode$1 = _class.instanceMethodId(
+    r'hashCode',
+    r'()I',
+  );
 
   static final _hashCode$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -584,7 +607,11 @@ final class $LocationEngineRequest$NullableType
   @jni$_.internal
   @core$_.override
   LocationEngineRequest? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : LocationEngineRequest.fromReference(reference);
+      reference.isNull
+      ? null
+      : LocationEngineRequest.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -620,7 +647,9 @@ final class $LocationEngineRequest$Type
   @jni$_.internal
   @core$_.override
   LocationEngineRequest fromReference(jni$_.JReference reference) =>
-      LocationEngineRequest.fromReference(reference);
+      LocationEngineRequest.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

@@ -1,0 +1,1 @@
+dart run jnigen --config jnigen.yml

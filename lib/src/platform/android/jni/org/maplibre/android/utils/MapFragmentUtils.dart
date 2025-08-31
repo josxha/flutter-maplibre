@@ -47,8 +47,9 @@ class MapFragmentUtils extends jni$_.JObject {
   final jni$_.JObjType<MapFragmentUtils> $type;
 
   @jni$_.internal
-  MapFragmentUtils.fromReference(jni$_.JReference reference)
-    : $type = type,
+  MapFragmentUtils.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -58,7 +59,9 @@ class MapFragmentUtils extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $MapFragmentUtils$NullableType();
   static const type = $MapFragmentUtils$Type();
-  static final _id_new$ = _class.constructorId(r'()V');
+  static final _id_new$ = _class.constructorId(
+    r'()V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -178,7 +181,11 @@ final class $MapFragmentUtils$NullableType
   @jni$_.internal
   @core$_.override
   MapFragmentUtils? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : MapFragmentUtils.fromReference(reference);
+      reference.isNull
+      ? null
+      : MapFragmentUtils.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -212,7 +219,9 @@ final class $MapFragmentUtils$Type extends jni$_.JObjType<MapFragmentUtils> {
   @jni$_.internal
   @core$_.override
   MapFragmentUtils fromReference(jni$_.JReference reference) =>
-      MapFragmentUtils.fromReference(reference);
+      MapFragmentUtils.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

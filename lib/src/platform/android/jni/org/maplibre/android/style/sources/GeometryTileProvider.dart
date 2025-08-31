@@ -47,8 +47,9 @@ class GeometryTileProvider extends jni$_.JObject {
   final jni$_.JObjType<GeometryTileProvider> $type;
 
   @jni$_.internal
-  GeometryTileProvider.fromReference(jni$_.JReference reference)
-    : $type = type,
+  GeometryTileProvider.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -106,7 +107,11 @@ class GeometryTileProvider extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -172,10 +177,14 @@ class GeometryTileProvider extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory GeometryTileProvider.implement($GeometryTileProvider $impl) {
+  factory GeometryTileProvider.implement(
+    $GeometryTileProvider $impl,
+  ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return GeometryTileProvider.fromReference($i.implementReference());
+    return GeometryTileProvider.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -227,7 +236,11 @@ final class $GeometryTileProvider$NullableType
   @jni$_.internal
   @core$_.override
   GeometryTileProvider? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : GeometryTileProvider.fromReference(reference);
+      reference.isNull
+      ? null
+      : GeometryTileProvider.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -263,7 +276,9 @@ final class $GeometryTileProvider$Type
   @jni$_.internal
   @core$_.override
   GeometryTileProvider fromReference(jni$_.JReference reference) =>
-      GeometryTileProvider.fromReference(reference);
+      GeometryTileProvider.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
