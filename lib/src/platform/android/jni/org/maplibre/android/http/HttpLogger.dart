@@ -45,8 +45,9 @@ class HttpLogger extends jni$_.JObject {
   final jni$_.JObjType<HttpLogger> $type;
 
   @jni$_.internal
-  HttpLogger.fromReference(jni$_.JReference reference)
-    : $type = type,
+  HttpLogger.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -56,7 +57,10 @@ class HttpLogger extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $HttpLogger$NullableType();
   static const type = $HttpLogger$Type();
-  static final _id_logRequestUrl = _class.staticFieldId(r'logRequestUrl', r'Z');
+  static final _id_logRequestUrl = _class.staticFieldId(
+    r'logRequestUrl',
+    r'Z',
+  );
 
   /// from: `static public boolean logRequestUrl`
   static bool get logRequestUrl =>
@@ -66,7 +70,10 @@ class HttpLogger extends jni$_.JObject {
   static set logRequestUrl(bool value) =>
       _id_logRequestUrl.set(_class, const jni$_.jbooleanType(), value);
 
-  static final _id_logEnabled = _class.staticFieldId(r'logEnabled', r'Z');
+  static final _id_logEnabled = _class.staticFieldId(
+    r'logEnabled',
+    r'Z',
+  );
 
   /// from: `static public boolean logEnabled`
   static bool get logEnabled =>
@@ -108,7 +115,11 @@ class HttpLogger extends jni$_.JObject {
           >();
 
   /// from: `static public void logFailure(int i, java.lang.String string, java.lang.String string1)`
-  static void logFailure(int i, jni$_.JString? string, jni$_.JString? string1) {
+  static void logFailure(
+    int i,
+    jni$_.JString? string,
+    jni$_.JString? string1,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
     _logFailure(
@@ -145,7 +156,10 @@ class HttpLogger extends jni$_.JObject {
           >();
 
   /// from: `static public void log(int i, java.lang.String string)`
-  static void log(int i, jni$_.JString? string) {
+  static void log(
+    int i,
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _log(
       _class.reference.pointer,
@@ -166,8 +180,11 @@ final class $HttpLogger$NullableType extends jni$_.JObjType<HttpLogger?> {
 
   @jni$_.internal
   @core$_.override
-  HttpLogger? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : HttpLogger.fromReference(reference);
+  HttpLogger? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : HttpLogger.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -201,7 +218,9 @@ final class $HttpLogger$Type extends jni$_.JObjType<HttpLogger> {
   @jni$_.internal
   @core$_.override
   HttpLogger fromReference(jni$_.JReference reference) =>
-      HttpLogger.fromReference(reference);
+      HttpLogger.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

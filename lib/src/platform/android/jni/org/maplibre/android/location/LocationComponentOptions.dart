@@ -45,8 +45,9 @@ class LocationComponentOptions$Builder extends jni$_.JObject {
   final jni$_.JObjType<LocationComponentOptions$Builder> $type;
 
   @jni$_.internal
-  LocationComponentOptions$Builder.fromReference(jni$_.JReference reference)
-    : $type = type,
+  LocationComponentOptions$Builder.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -111,7 +112,9 @@ class LocationComponentOptions$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder accuracyAlpha(float f)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions$Builder accuracyAlpha(double f) {
+  LocationComponentOptions$Builder accuracyAlpha(
+    double f,
+  ) {
     return _accuracyAlpha(
       reference.pointer,
       _id_accuracyAlpha as jni$_.JMethodIDPtr,
@@ -146,7 +149,9 @@ class LocationComponentOptions$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder accuracyColor(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions$Builder accuracyColor(int i) {
+  LocationComponentOptions$Builder accuracyColor(
+    int i,
+  ) {
     return _accuracyColor(
       reference.pointer,
       _id_accuracyColor as jni$_.JMethodIDPtr,
@@ -181,7 +186,9 @@ class LocationComponentOptions$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder backgroundDrawableStale(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions$Builder backgroundDrawableStale(int i) {
+  LocationComponentOptions$Builder backgroundDrawableStale(
+    int i,
+  ) {
     return _backgroundDrawableStale(
       reference.pointer,
       _id_backgroundDrawableStale as jni$_.JMethodIDPtr,
@@ -216,7 +223,9 @@ class LocationComponentOptions$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder backgroundStaleName(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions$Builder backgroundStaleName(jni$_.JString? string) {
+  LocationComponentOptions$Builder backgroundStaleName(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return _backgroundStaleName(
       reference.pointer,
@@ -252,7 +261,9 @@ class LocationComponentOptions$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder foregroundDrawableStale(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions$Builder foregroundDrawableStale(int i) {
+  LocationComponentOptions$Builder foregroundDrawableStale(
+    int i,
+  ) {
     return _foregroundDrawableStale(
       reference.pointer,
       _id_foregroundDrawableStale as jni$_.JMethodIDPtr,
@@ -287,7 +298,9 @@ class LocationComponentOptions$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder foregroundStaleName(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions$Builder foregroundStaleName(jni$_.JString? string) {
+  LocationComponentOptions$Builder foregroundStaleName(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return _foregroundStaleName(
       reference.pointer,
@@ -323,7 +336,9 @@ class LocationComponentOptions$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder gpsDrawable(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions$Builder gpsDrawable(int i) {
+  LocationComponentOptions$Builder gpsDrawable(
+    int i,
+  ) {
     return _gpsDrawable(
       reference.pointer,
       _id_gpsDrawable as jni$_.JMethodIDPtr,
@@ -358,7 +373,9 @@ class LocationComponentOptions$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder gpsName(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions$Builder gpsName(jni$_.JString? string) {
+  LocationComponentOptions$Builder gpsName(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return _gpsName(
       reference.pointer,
@@ -394,7 +411,9 @@ class LocationComponentOptions$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder foregroundDrawable(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions$Builder foregroundDrawable(int i) {
+  LocationComponentOptions$Builder foregroundDrawable(
+    int i,
+  ) {
     return _foregroundDrawable(
       reference.pointer,
       _id_foregroundDrawable as jni$_.JMethodIDPtr,
@@ -429,7 +448,9 @@ class LocationComponentOptions$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder foregroundName(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions$Builder foregroundName(jni$_.JString? string) {
+  LocationComponentOptions$Builder foregroundName(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return _foregroundName(
       reference.pointer,
@@ -465,7 +486,9 @@ class LocationComponentOptions$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder backgroundDrawable(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions$Builder backgroundDrawable(int i) {
+  LocationComponentOptions$Builder backgroundDrawable(
+    int i,
+  ) {
     return _backgroundDrawable(
       reference.pointer,
       _id_backgroundDrawable as jni$_.JMethodIDPtr,
@@ -500,7 +523,9 @@ class LocationComponentOptions$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder backgroundName(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions$Builder backgroundName(jni$_.JString? string) {
+  LocationComponentOptions$Builder backgroundName(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return _backgroundName(
       reference.pointer,
@@ -536,7 +561,9 @@ class LocationComponentOptions$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder bearingDrawable(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions$Builder bearingDrawable(int i) {
+  LocationComponentOptions$Builder bearingDrawable(
+    int i,
+  ) {
     return _bearingDrawable(
       reference.pointer,
       _id_bearingDrawable as jni$_.JMethodIDPtr,
@@ -571,7 +598,9 @@ class LocationComponentOptions$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder bearingName(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions$Builder bearingName(jni$_.JString? string) {
+  LocationComponentOptions$Builder bearingName(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return _bearingName(
       reference.pointer,
@@ -607,7 +636,9 @@ class LocationComponentOptions$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder bearingTintColor(java.lang.Integer integer)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions$Builder bearingTintColor(jni$_.JInteger? integer) {
+  LocationComponentOptions$Builder bearingTintColor(
+    jni$_.JInteger? integer,
+  ) {
     final _$integer = integer?.reference ?? jni$_.jNullReference;
     return _bearingTintColor(
       reference.pointer,
@@ -795,7 +826,9 @@ class LocationComponentOptions$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder elevation(float f)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions$Builder elevation(double f) {
+  LocationComponentOptions$Builder elevation(
+    double f,
+  ) {
     return _elevation(
       reference.pointer,
       _id_elevation as jni$_.JMethodIDPtr,
@@ -830,7 +863,9 @@ class LocationComponentOptions$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder enableStaleState(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions$Builder enableStaleState(bool z) {
+  LocationComponentOptions$Builder enableStaleState(
+    bool z,
+  ) {
     return _enableStaleState(
       reference.pointer,
       _id_enableStaleState as jni$_.JMethodIDPtr,
@@ -865,7 +900,9 @@ class LocationComponentOptions$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder staleStateTimeout(long j)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions$Builder staleStateTimeout(int j) {
+  LocationComponentOptions$Builder staleStateTimeout(
+    int j,
+  ) {
     return _staleStateTimeout(
       reference.pointer,
       _id_staleStateTimeout as jni$_.JMethodIDPtr,
@@ -900,7 +937,9 @@ class LocationComponentOptions$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder padding(int[] is)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions$Builder padding(jni$_.JIntArray? is$) {
+  LocationComponentOptions$Builder padding(
+    jni$_.JIntArray? is$,
+  ) {
     final _$is$ = is$?.reference ?? jni$_.jNullReference;
     return _padding(
       reference.pointer,
@@ -936,7 +975,9 @@ class LocationComponentOptions$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder maxZoomIconScale(float f)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions$Builder maxZoomIconScale(double f) {
+  LocationComponentOptions$Builder maxZoomIconScale(
+    double f,
+  ) {
     return _maxZoomIconScale(
       reference.pointer,
       _id_maxZoomIconScale as jni$_.JMethodIDPtr,
@@ -971,7 +1012,9 @@ class LocationComponentOptions$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder minZoomIconScale(float f)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions$Builder minZoomIconScale(double f) {
+  LocationComponentOptions$Builder minZoomIconScale(
+    double f,
+  ) {
     return _minZoomIconScale(
       reference.pointer,
       _id_minZoomIconScale as jni$_.JMethodIDPtr,
@@ -1006,7 +1049,9 @@ class LocationComponentOptions$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder trackingGesturesManagement(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions$Builder trackingGesturesManagement(bool z) {
+  LocationComponentOptions$Builder trackingGesturesManagement(
+    bool z,
+  ) {
     return _trackingGesturesManagement(
       reference.pointer,
       _id_trackingGesturesManagement as jni$_.JMethodIDPtr,
@@ -1041,7 +1086,9 @@ class LocationComponentOptions$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder trackingInitialMoveThreshold(float f)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions$Builder trackingInitialMoveThreshold(double f) {
+  LocationComponentOptions$Builder trackingInitialMoveThreshold(
+    double f,
+  ) {
     return _trackingInitialMoveThreshold(
       reference.pointer,
       _id_trackingInitialMoveThreshold as jni$_.JMethodIDPtr,
@@ -1076,7 +1123,9 @@ class LocationComponentOptions$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder trackingMultiFingerMoveThreshold(float f)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions$Builder trackingMultiFingerMoveThreshold(double f) {
+  LocationComponentOptions$Builder trackingMultiFingerMoveThreshold(
+    double f,
+  ) {
     return _trackingMultiFingerMoveThreshold(
       reference.pointer,
       _id_trackingMultiFingerMoveThreshold as jni$_.JMethodIDPtr,
@@ -1149,7 +1198,9 @@ class LocationComponentOptions$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder layerAbove(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions$Builder layerAbove(jni$_.JString? string) {
+  LocationComponentOptions$Builder layerAbove(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return _layerAbove(
       reference.pointer,
@@ -1185,7 +1236,9 @@ class LocationComponentOptions$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder layerBelow(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions$Builder layerBelow(jni$_.JString? string) {
+  LocationComponentOptions$Builder layerBelow(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return _layerBelow(
       reference.pointer,
@@ -1297,7 +1350,9 @@ class LocationComponentOptions$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder accuracyAnimationEnabled(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions$Builder? accuracyAnimationEnabled(bool z) {
+  LocationComponentOptions$Builder? accuracyAnimationEnabled(
+    bool z,
+  ) {
     return _accuracyAnimationEnabled(
       reference.pointer,
       _id_accuracyAnimationEnabled as jni$_.JMethodIDPtr,
@@ -1332,7 +1387,9 @@ class LocationComponentOptions$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder pulseEnabled(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions$Builder? pulseEnabled(bool z) {
+  LocationComponentOptions$Builder? pulseEnabled(
+    bool z,
+  ) {
     return _pulseEnabled(
       reference.pointer,
       _id_pulseEnabled as jni$_.JMethodIDPtr,
@@ -1367,7 +1424,9 @@ class LocationComponentOptions$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder pulseFadeEnabled(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions$Builder? pulseFadeEnabled(bool z) {
+  LocationComponentOptions$Builder? pulseFadeEnabled(
+    bool z,
+  ) {
     return _pulseFadeEnabled(
       reference.pointer,
       _id_pulseFadeEnabled as jni$_.JMethodIDPtr,
@@ -1402,7 +1461,9 @@ class LocationComponentOptions$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder pulseColor(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions$Builder? pulseColor(int i) {
+  LocationComponentOptions$Builder? pulseColor(
+    int i,
+  ) {
     return _pulseColor(
       reference.pointer,
       _id_pulseColor as jni$_.JMethodIDPtr,
@@ -1437,7 +1498,9 @@ class LocationComponentOptions$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder pulseSingleDuration(float f)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions$Builder? pulseSingleDuration(double f) {
+  LocationComponentOptions$Builder? pulseSingleDuration(
+    double f,
+  ) {
     return _pulseSingleDuration(
       reference.pointer,
       _id_pulseSingleDuration as jni$_.JMethodIDPtr,
@@ -1472,7 +1535,9 @@ class LocationComponentOptions$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder pulseMaxRadius(float f)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions$Builder? pulseMaxRadius(double f) {
+  LocationComponentOptions$Builder? pulseMaxRadius(
+    double f,
+  ) {
     return _pulseMaxRadius(
       reference.pointer,
       _id_pulseMaxRadius as jni$_.JMethodIDPtr,
@@ -1507,7 +1572,9 @@ class LocationComponentOptions$Builder extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder pulseAlpha(float f)`
   /// The returned object must be released after use, by calling the [release] method.
-  LocationComponentOptions$Builder? pulseAlpha(double f) {
+  LocationComponentOptions$Builder? pulseAlpha(
+    double f,
+  ) {
     return _pulseAlpha(
       reference.pointer,
       _id_pulseAlpha as jni$_.JMethodIDPtr,
@@ -1571,7 +1638,9 @@ final class $LocationComponentOptions$Builder$NullableType
   LocationComponentOptions$Builder? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : LocationComponentOptions$Builder.fromReference(reference);
+      : LocationComponentOptions$Builder.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1608,7 +1677,9 @@ final class $LocationComponentOptions$Builder$Type
   @jni$_.internal
   @core$_.override
   LocationComponentOptions$Builder fromReference(jni$_.JReference reference) =>
-      LocationComponentOptions$Builder.fromReference(reference);
+      LocationComponentOptions$Builder.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1639,8 +1710,9 @@ class LocationComponentOptions extends jni$_.JObject {
   final jni$_.JObjType<LocationComponentOptions> $type;
 
   @jni$_.internal
-  LocationComponentOptions.fromReference(jni$_.JReference reference)
-    : $type = type,
+  LocationComponentOptions.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -1978,7 +2050,9 @@ class LocationComponentOptions extends jni$_.JObject {
 
   /// from: `static public org.maplibre.android.location.LocationComponentOptions$Builder builder(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
-  static LocationComponentOptions$Builder builder(jni$_.JObject context) {
+  static LocationComponentOptions$Builder builder(
+    jni$_.JObject context,
+  ) {
     final _$context = context.reference;
     return _builder(
       _class.reference.pointer,
@@ -2551,7 +2625,10 @@ class LocationComponentOptions extends jni$_.JObject {
     ).object<jni$_.JInteger?>(const jni$_.JIntegerNullableType());
   }
 
-  static final _id_elevation = _class.instanceMethodId(r'elevation', r'()F');
+  static final _id_elevation = _class.instanceMethodId(
+    r'elevation',
+    r'()F',
+  );
 
   static final _elevation =
       jni$_.ProtectedJniExtensions.lookup<
@@ -2635,7 +2712,10 @@ class LocationComponentOptions extends jni$_.JObject {
     ).long;
   }
 
-  static final _id_padding = _class.instanceMethodId(r'padding', r'()[I');
+  static final _id_padding = _class.instanceMethodId(
+    r'padding',
+    r'()[I',
+  );
 
   static final _padding =
       jni$_.ProtectedJniExtensions.lookup<
@@ -2899,7 +2979,10 @@ class LocationComponentOptions extends jni$_.JObject {
   }
 
   static final _id_trackingAnimationDurationMultiplier = _class
-      .instanceMethodId(r'trackingAnimationDurationMultiplier', r'()F');
+      .instanceMethodId(
+        r'trackingAnimationDurationMultiplier',
+        r'()F',
+      );
 
   static final _trackingAnimationDurationMultiplier =
       jni$_.ProtectedJniExtensions.lookup<
@@ -3131,7 +3214,10 @@ class LocationComponentOptions extends jni$_.JObject {
     ).float;
   }
 
-  static final _id_pulseAlpha = _class.instanceMethodId(r'pulseAlpha', r'()F');
+  static final _id_pulseAlpha = _class.instanceMethodId(
+    r'pulseAlpha',
+    r'()F',
+  );
 
   static final _pulseAlpha =
       jni$_.ProtectedJniExtensions.lookup<
@@ -3241,7 +3327,9 @@ class LocationComponentOptions extends jni$_.JObject {
           >();
 
   /// from: `public boolean equals(java.lang.Object object)`
-  bool equals(jni$_.JObject? object) {
+  bool equals(
+    jni$_.JObject? object,
+  ) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     return _equals(
       reference.pointer,
@@ -3250,7 +3338,10 @@ class LocationComponentOptions extends jni$_.JObject {
     ).boolean;
   }
 
-  static final _id_hashCode$1 = _class.instanceMethodId(r'hashCode', r'()I');
+  static final _id_hashCode$1 = _class.instanceMethodId(
+    r'hashCode',
+    r'()I',
+  );
 
   static final _hashCode$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -3330,7 +3421,10 @@ class LocationComponentOptions extends jni$_.JObject {
           >();
 
   /// from: `public void writeToParcel(android.os.Parcel parcel, int i)`
-  void writeToParcel(jni$_.JObject? parcel, int i) {
+  void writeToParcel(
+    jni$_.JObject? parcel,
+    int i,
+  ) {
     final _$parcel = parcel?.reference ?? jni$_.jNullReference;
     _writeToParcel(
       reference.pointer,
@@ -3356,7 +3450,9 @@ final class $LocationComponentOptions$NullableType
   LocationComponentOptions? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : LocationComponentOptions.fromReference(reference);
+      : LocationComponentOptions.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -3392,7 +3488,9 @@ final class $LocationComponentOptions$Type
   @jni$_.internal
   @core$_.override
   LocationComponentOptions fromReference(jni$_.JReference reference) =>
-      LocationComponentOptions.fromReference(reference);
+      LocationComponentOptions.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

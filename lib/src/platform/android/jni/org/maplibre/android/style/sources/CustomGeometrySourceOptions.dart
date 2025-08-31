@@ -45,8 +45,9 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
   final jni$_.JObjType<CustomGeometrySourceOptions> $type;
 
   @jni$_.internal
-  CustomGeometrySourceOptions.fromReference(jni$_.JReference reference)
-    : $type = type,
+  CustomGeometrySourceOptions.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -56,7 +57,9 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $CustomGeometrySourceOptions$NullableType();
   static const type = $CustomGeometrySourceOptions$Type();
-  static final _id_new$ = _class.constructorId(r'()V');
+  static final _id_new$ = _class.constructorId(
+    r'()V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -107,7 +110,9 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
 
   /// from: `public final org.maplibre.android.style.sources.CustomGeometrySourceOptions withWrap(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  CustomGeometrySourceOptions withWrap(bool z) {
+  CustomGeometrySourceOptions withWrap(
+    bool z,
+  ) {
     return _withWrap(
       reference.pointer,
       _id_withWrap as jni$_.JMethodIDPtr,
@@ -142,7 +147,9 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
 
   /// from: `public final org.maplibre.android.style.sources.CustomGeometrySourceOptions withClip(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  CustomGeometrySourceOptions withClip(bool z) {
+  CustomGeometrySourceOptions withClip(
+    bool z,
+  ) {
     return _withClip(
       reference.pointer,
       _id_withClip as jni$_.JMethodIDPtr,
@@ -177,7 +184,9 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
 
   /// from: `public final org.maplibre.android.style.sources.CustomGeometrySourceOptions withMinZoom(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  CustomGeometrySourceOptions withMinZoom(int i) {
+  CustomGeometrySourceOptions withMinZoom(
+    int i,
+  ) {
     return _withMinZoom(
       reference.pointer,
       _id_withMinZoom as jni$_.JMethodIDPtr,
@@ -212,7 +221,9 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
 
   /// from: `public final org.maplibre.android.style.sources.CustomGeometrySourceOptions withMaxZoom(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  CustomGeometrySourceOptions withMaxZoom(int i) {
+  CustomGeometrySourceOptions withMaxZoom(
+    int i,
+  ) {
     return _withMaxZoom(
       reference.pointer,
       _id_withMaxZoom as jni$_.JMethodIDPtr,
@@ -247,7 +258,9 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
 
   /// from: `public final org.maplibre.android.style.sources.CustomGeometrySourceOptions withBuffer(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  CustomGeometrySourceOptions withBuffer(int i) {
+  CustomGeometrySourceOptions withBuffer(
+    int i,
+  ) {
     return _withBuffer(
       reference.pointer,
       _id_withBuffer as jni$_.JMethodIDPtr,
@@ -282,7 +295,9 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
 
   /// from: `public final org.maplibre.android.style.sources.CustomGeometrySourceOptions withTolerance(float f)`
   /// The returned object must be released after use, by calling the [release] method.
-  CustomGeometrySourceOptions withTolerance(double f) {
+  CustomGeometrySourceOptions withTolerance(
+    double f,
+  ) {
     return _withTolerance(
       reference.pointer,
       _id_withTolerance as jni$_.JMethodIDPtr,
@@ -292,7 +307,10 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
     );
   }
 
-  static final _id_getSize = _class.instanceMethodId(r'getSize', r'()I');
+  static final _id_getSize = _class.instanceMethodId(
+    r'getSize',
+    r'()I',
+  );
 
   static final _getSize =
       jni$_.ProtectedJniExtensions.lookup<
@@ -318,7 +336,10 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
     ).integer;
   }
 
-  static final _id_size = _class.instanceMethodId(r'size', r'()I');
+  static final _id_size = _class.instanceMethodId(
+    r'size',
+    r'()I',
+  );
 
   static final _size =
       jni$_.ProtectedJniExtensions.lookup<
@@ -366,7 +387,9 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
 
   /// from: `public bridge java.lang.Object get(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? get(jni$_.JString? string) {
+  jni$_.JObject? get(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return _get(
       reference.pointer,
@@ -400,7 +423,9 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
 
   /// from: `public final bridge java.lang.Object get(java.lang.Object object)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? get$1(jni$_.JObject? object) {
+  jni$_.JObject? get$1(
+    jni$_.JObject? object,
+  ) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     return _get$1(
       reference.pointer,
@@ -433,7 +458,9 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
           >();
 
   /// from: `public bridge boolean containsKey(java.lang.String string)`
-  bool containsKey(jni$_.JString? string) {
+  bool containsKey(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return _containsKey(
       reference.pointer,
@@ -466,7 +493,9 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
           >();
 
   /// from: `public final bridge boolean containsKey(java.lang.Object object)`
-  bool containsKey$1(jni$_.JObject? object) {
+  bool containsKey$1(
+    jni$_.JObject? object,
+  ) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     return _containsKey$1(
       reference.pointer,
@@ -500,7 +529,9 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
 
   /// from: `public bridge java.lang.Object remove(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? remove(jni$_.JString? string) {
+  jni$_.JObject? remove(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return _remove(
       reference.pointer,
@@ -534,7 +565,9 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
 
   /// from: `public final bridge java.lang.Object remove(java.lang.Object object)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? remove$1(jni$_.JObject? object) {
+  jni$_.JObject? remove$1(
+    jni$_.JObject? object,
+  ) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     return _remove$1(
       reference.pointer,
@@ -570,7 +603,10 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
           >();
 
   /// from: `public bridge boolean remove(java.lang.String string, java.lang.Object object)`
-  bool remove$2(jni$_.JString? string, jni$_.JObject? object) {
+  bool remove$2(
+    jni$_.JString? string,
+    jni$_.JObject? object,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$object = object?.reference ?? jni$_.jNullReference;
     return _remove$2(
@@ -608,7 +644,10 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
           >();
 
   /// from: `public final bridge boolean remove(java.lang.Object object, java.lang.Object object1)`
-  bool remove$3(jni$_.JObject? object, jni$_.JObject? object1) {
+  bool remove$3(
+    jni$_.JObject? object,
+    jni$_.JObject? object1,
+  ) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     final _$object1 = object1?.reference ?? jni$_.jNullReference;
     return _remove$3(
@@ -707,7 +746,10 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
 
   /// from: `public bridge java.lang.Object getOrDefault(java.lang.String string, java.lang.Object object)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? getOrDefault(jni$_.JString? string, jni$_.JObject? object) {
+  jni$_.JObject? getOrDefault(
+    jni$_.JString? string,
+    jni$_.JObject? object,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$object = object?.reference ?? jni$_.jNullReference;
     return _getOrDefault(
@@ -746,7 +788,10 @@ class CustomGeometrySourceOptions extends jni$_.JObject {
 
   /// from: `public final bridge java.lang.Object getOrDefault(java.lang.Object object, java.lang.Object object1)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? getOrDefault$1(jni$_.JObject? object, jni$_.JObject? object1) {
+  jni$_.JObject? getOrDefault$1(
+    jni$_.JObject? object,
+    jni$_.JObject? object1,
+  ) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     final _$object1 = object1?.reference ?? jni$_.jNullReference;
     return _getOrDefault$1(
@@ -901,7 +946,9 @@ final class $CustomGeometrySourceOptions$NullableType
   CustomGeometrySourceOptions? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : CustomGeometrySourceOptions.fromReference(reference);
+      : CustomGeometrySourceOptions.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -937,7 +984,9 @@ final class $CustomGeometrySourceOptions$Type
   @jni$_.internal
   @core$_.override
   CustomGeometrySourceOptions fromReference(jni$_.JReference reference) =>
-      CustomGeometrySourceOptions.fromReference(reference);
+      CustomGeometrySourceOptions.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();

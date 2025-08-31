@@ -47,8 +47,9 @@ class LocationEngineDefault extends jni$_.JObject {
   final jni$_.JObjType<LocationEngineDefault> $type;
 
   @jni$_.internal
-  LocationEngineDefault.fromReference(jni$_.JReference reference)
-    : $type = type,
+  LocationEngineDefault.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -120,7 +121,11 @@ final class $LocationEngineDefault$NullableType
   @jni$_.internal
   @core$_.override
   LocationEngineDefault? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : LocationEngineDefault.fromReference(reference);
+      reference.isNull
+      ? null
+      : LocationEngineDefault.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -156,7 +161,9 @@ final class $LocationEngineDefault$Type
   @jni$_.internal
   @core$_.override
   LocationEngineDefault fromReference(jni$_.JReference reference) =>
-      LocationEngineDefault.fromReference(reference);
+      LocationEngineDefault.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();

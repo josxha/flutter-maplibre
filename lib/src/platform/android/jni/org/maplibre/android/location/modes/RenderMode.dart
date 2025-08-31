@@ -45,8 +45,9 @@ class RenderMode$Mode extends jni$_.JObject {
   final jni$_.JObjType<RenderMode$Mode> $type;
 
   @jni$_.internal
-  RenderMode$Mode.fromReference(jni$_.JReference reference)
-    : $type = type,
+  RenderMode$Mode.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -66,7 +67,11 @@ class RenderMode$Mode extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -115,10 +120,14 @@ class RenderMode$Mode extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory RenderMode$Mode.implement($RenderMode$Mode $impl) {
+  factory RenderMode$Mode.implement(
+    $RenderMode$Mode $impl,
+  ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return RenderMode$Mode.fromReference($i.implementReference());
+    return RenderMode$Mode.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -142,8 +151,11 @@ final class $RenderMode$Mode$NullableType
 
   @jni$_.internal
   @core$_.override
-  RenderMode$Mode? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : RenderMode$Mode.fromReference(reference);
+  RenderMode$Mode? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : RenderMode$Mode.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -178,7 +190,9 @@ final class $RenderMode$Mode$Type extends jni$_.JObjType<RenderMode$Mode> {
   @jni$_.internal
   @core$_.override
   RenderMode$Mode fromReference(jni$_.JReference reference) =>
-      RenderMode$Mode.fromReference(reference);
+      RenderMode$Mode.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -209,8 +223,9 @@ class RenderMode extends jni$_.JObject {
   final jni$_.JObjType<RenderMode> $type;
 
   @jni$_.internal
-  RenderMode.fromReference(jni$_.JReference reference)
-    : $type = type,
+  RenderMode.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -241,8 +256,11 @@ final class $RenderMode$NullableType extends jni$_.JObjType<RenderMode?> {
 
   @jni$_.internal
   @core$_.override
-  RenderMode? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : RenderMode.fromReference(reference);
+  RenderMode? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : RenderMode.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -276,7 +294,9 @@ final class $RenderMode$Type extends jni$_.JObjType<RenderMode> {
   @jni$_.internal
   @core$_.override
   RenderMode fromReference(jni$_.JReference reference) =>
-      RenderMode.fromReference(reference);
+      RenderMode.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

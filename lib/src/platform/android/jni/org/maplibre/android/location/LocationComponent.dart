@@ -76,8 +76,9 @@ class LocationComponent extends jni$_.JObject {
   final jni$_.JObjType<LocationComponent> $type;
 
   @jni$_.internal
-  LocationComponent.fromReference(jni$_.JReference reference)
-    : $type = type,
+  LocationComponent.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -199,7 +200,9 @@ class LocationComponent extends jni$_.JObject {
           >();
 
   /// from: `public void setLocationComponentEnabled(boolean z)`
-  void setLocationComponentEnabled(bool z) {
+  void setLocationComponentEnabled(
+    bool z,
+  ) {
     _setLocationComponentEnabled(
       reference.pointer,
       _id_setLocationComponentEnabled as jni$_.JMethodIDPtr,
@@ -260,7 +263,9 @@ class LocationComponent extends jni$_.JObject {
           >();
 
   /// from: `public void setCameraMode(int i)`
-  void setCameraMode(int i) {
+  void setCameraMode(
+    int i,
+  ) {
     _setCameraMode(
       reference.pointer,
       _id_setCameraMode as jni$_.JMethodIDPtr,
@@ -425,7 +430,9 @@ class LocationComponent extends jni$_.JObject {
           >();
 
   /// from: `public void setRenderMode(int i)`
-  void setRenderMode(int i) {
+  void setRenderMode(
+    int i,
+  ) {
     _setRenderMode(
       reference.pointer,
       _id_setRenderMode as jni$_.JMethodIDPtr,
@@ -520,7 +527,10 @@ class LocationComponent extends jni$_.JObject {
           >();
 
   /// from: `public void applyStyle(android.content.Context context, int i)`
-  void applyStyle(jni$_.JObject context, int i) {
+  void applyStyle(
+    jni$_.JObject context,
+    int i,
+  ) {
     final _$context = context.reference;
     _applyStyle(
       reference.pointer,
@@ -635,7 +645,10 @@ class LocationComponent extends jni$_.JObject {
           >();
 
   /// from: `public void zoomWhileTracking(double d, long j)`
-  void zoomWhileTracking$1(double d, int j) {
+  void zoomWhileTracking$1(
+    double d,
+    int j,
+  ) {
     _zoomWhileTracking$1(
       reference.pointer,
       _id_zoomWhileTracking$1 as jni$_.JMethodIDPtr,
@@ -668,7 +681,9 @@ class LocationComponent extends jni$_.JObject {
           >();
 
   /// from: `public void zoomWhileTracking(double d)`
-  void zoomWhileTracking$2(double d) {
+  void zoomWhileTracking$2(
+    double d,
+  ) {
     _zoomWhileTracking$2(
       reference.pointer,
       _id_zoomWhileTracking$2 as jni$_.JMethodIDPtr,
@@ -729,7 +744,9 @@ class LocationComponent extends jni$_.JObject {
           >();
 
   /// from: `public void paddingWhileTracking(double[] ds)`
-  void paddingWhileTracking(jni$_.JDoubleArray? ds) {
+  void paddingWhileTracking(
+    jni$_.JDoubleArray? ds,
+  ) {
     final _$ds = ds?.reference ?? jni$_.jNullReference;
     _paddingWhileTracking(
       reference.pointer,
@@ -763,7 +780,10 @@ class LocationComponent extends jni$_.JObject {
           >();
 
   /// from: `public void paddingWhileTracking(double[] ds, long j)`
-  void paddingWhileTracking$1(jni$_.JDoubleArray? ds, int j) {
+  void paddingWhileTracking$1(
+    jni$_.JDoubleArray? ds,
+    int j,
+  ) {
     final _$ds = ds?.reference ?? jni$_.jNullReference;
     _paddingWhileTracking$1(
       reference.pointer,
@@ -823,7 +843,10 @@ class LocationComponent extends jni$_.JObject {
   }
 
   static final _id_cancelPaddingWhileTrackingAnimation = _class
-      .instanceMethodId(r'cancelPaddingWhileTrackingAnimation', r'()V');
+      .instanceMethodId(
+        r'cancelPaddingWhileTrackingAnimation',
+        r'()V',
+      );
 
   static final _cancelPaddingWhileTrackingAnimation =
       jni$_.ProtectedJniExtensions.lookup<
@@ -918,7 +941,10 @@ class LocationComponent extends jni$_.JObject {
           >();
 
   /// from: `public void tiltWhileTracking(double d, long j)`
-  void tiltWhileTracking$1(double d, int j) {
+  void tiltWhileTracking$1(
+    double d,
+    int j,
+  ) {
     _tiltWhileTracking$1(
       reference.pointer,
       _id_tiltWhileTracking$1 as jni$_.JMethodIDPtr,
@@ -951,7 +977,9 @@ class LocationComponent extends jni$_.JObject {
           >();
 
   /// from: `public void tiltWhileTracking(double d)`
-  void tiltWhileTracking$2(double d) {
+  void tiltWhileTracking$2(
+    double d,
+  ) {
     _tiltWhileTracking$2(
       reference.pointer,
       _id_tiltWhileTracking$2 as jni$_.JMethodIDPtr,
@@ -1012,7 +1040,9 @@ class LocationComponent extends jni$_.JObject {
           >();
 
   /// from: `public void forceLocationUpdate(android.location.Location location)`
-  void forceLocationUpdate(location$_.Location? location) {
+  void forceLocationUpdate(
+    location$_.Location? location,
+  ) {
     final _$location = location?.reference ?? jni$_.jNullReference;
     _forceLocationUpdate(
       reference.pointer,
@@ -1046,7 +1076,10 @@ class LocationComponent extends jni$_.JObject {
           >();
 
   /// from: `public void forceLocationUpdate(java.util.List<android.location.Location> list, boolean z)`
-  void forceLocationUpdate$1(jni$_.JList<location$_.Location?>? list, bool z) {
+  void forceLocationUpdate$1(
+    jni$_.JList<location$_.Location?>? list,
+    bool z,
+  ) {
     final _$list = list?.reference ?? jni$_.jNullReference;
     _forceLocationUpdate$1(
       reference.pointer,
@@ -1080,7 +1113,9 @@ class LocationComponent extends jni$_.JObject {
           >();
 
   /// from: `public void setMaxAnimationFps(int i)`
-  void setMaxAnimationFps(int i) {
+  void setMaxAnimationFps(
+    int i,
+  ) {
     _setMaxAnimationFps(
       reference.pointer,
       _id_setMaxAnimationFps as jni$_.JMethodIDPtr,
@@ -1112,7 +1147,9 @@ class LocationComponent extends jni$_.JObject {
           >();
 
   /// from: `public void setLocationEngine(org.maplibre.android.location.engine.LocationEngine locationEngine)`
-  void setLocationEngine(locationengine$_.LocationEngine? locationEngine) {
+  void setLocationEngine(
+    locationengine$_.LocationEngine? locationEngine,
+  ) {
     final _$locationEngine = locationEngine?.reference ?? jni$_.jNullReference;
     _setLocationEngine(
       reference.pointer,
@@ -1244,7 +1281,9 @@ class LocationComponent extends jni$_.JObject {
           >();
 
   /// from: `public void setCompassEngine(org.maplibre.android.location.CompassEngine compassEngine)`
-  void setCompassEngine(compassengine$_.CompassEngine? compassEngine) {
+  void setCompassEngine(
+    compassengine$_.CompassEngine? compassEngine,
+  ) {
     final _$compassEngine = compassEngine?.reference ?? jni$_.jNullReference;
     _setCompassEngine(
       reference.pointer,
@@ -1674,7 +1713,10 @@ class LocationComponent extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_onStart = _class.instanceMethodId(r'onStart', r'()V');
+  static final _id_onStart = _class.instanceMethodId(
+    r'onStart',
+    r'()V',
+  );
 
   static final _onStart =
       jni$_.ProtectedJniExtensions.lookup<
@@ -1697,7 +1739,10 @@ class LocationComponent extends jni$_.JObject {
     _onStart(reference.pointer, _id_onStart as jni$_.JMethodIDPtr).check();
   }
 
-  static final _id_onStop = _class.instanceMethodId(r'onStop', r'()V');
+  static final _id_onStop = _class.instanceMethodId(
+    r'onStop',
+    r'()V',
+  );
 
   static final _onStop =
       jni$_.ProtectedJniExtensions.lookup<
@@ -1720,7 +1765,10 @@ class LocationComponent extends jni$_.JObject {
     _onStop(reference.pointer, _id_onStop as jni$_.JMethodIDPtr).check();
   }
 
-  static final _id_onDestroy = _class.instanceMethodId(r'onDestroy', r'()V');
+  static final _id_onDestroy = _class.instanceMethodId(
+    r'onDestroy',
+    r'()V',
+  );
 
   static final _onDestroy =
       jni$_.ProtectedJniExtensions.lookup<
@@ -1843,7 +1891,11 @@ final class $LocationComponent$NullableType
   @jni$_.internal
   @core$_.override
   LocationComponent? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : LocationComponent.fromReference(reference);
+      reference.isNull
+      ? null
+      : LocationComponent.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1877,7 +1929,9 @@ final class $LocationComponent$Type extends jni$_.JObjType<LocationComponent> {
   @jni$_.internal
   @core$_.override
   LocationComponent fromReference(jni$_.JReference reference) =>
-      LocationComponent.fromReference(reference);
+      LocationComponent.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

@@ -45,8 +45,9 @@ class OnCameraTrackingChangedListener extends jni$_.JObject {
   final jni$_.JObjType<OnCameraTrackingChangedListener> $type;
 
   @jni$_.internal
-  OnCameraTrackingChangedListener.fromReference(jni$_.JReference reference)
-    : $type = type,
+  OnCameraTrackingChangedListener.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -109,7 +110,9 @@ class OnCameraTrackingChangedListener extends jni$_.JObject {
           >();
 
   /// from: `public abstract void onCameraTrackingChanged(int i)`
-  void onCameraTrackingChanged(int i) {
+  void onCameraTrackingChanged(
+    int i,
+  ) {
     _onCameraTrackingChanged(
       reference.pointer,
       _id_onCameraTrackingChanged as jni$_.JMethodIDPtr,
@@ -126,7 +129,11 @@ class OnCameraTrackingChangedListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -255,7 +262,9 @@ final class $OnCameraTrackingChangedListener$NullableType
   OnCameraTrackingChangedListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : OnCameraTrackingChangedListener.fromReference(reference);
+      : OnCameraTrackingChangedListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -292,7 +301,9 @@ final class $OnCameraTrackingChangedListener$Type
   @jni$_.internal
   @core$_.override
   OnCameraTrackingChangedListener fromReference(jni$_.JReference reference) =>
-      OnCameraTrackingChangedListener.fromReference(reference);
+      OnCameraTrackingChangedListener.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

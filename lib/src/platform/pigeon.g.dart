@@ -97,6 +97,8 @@ class MapOptions {
     required this.maxPitch,
     required this.gestures,
     required this.androidTextureMode,
+    required this.androidTranslucentTextureSurface,
+    required this.androidForegroundLoadColor,
   });
 
   /// The URL of the used map style.
@@ -135,6 +137,12 @@ class MapOptions {
   /// Toggle the texture mode on android.
   bool androidTextureMode;
 
+  /// Toggle the translucent texture surface mode on Android.
+  bool androidTranslucentTextureSurface;
+
+  /// The MapView foreground color that is used when the map surface is being created.
+  int androidForegroundLoadColor;
+
   List<Object?> _toList() {
     return <Object?>[
       style,
@@ -149,6 +157,8 @@ class MapOptions {
       maxPitch,
       gestures,
       androidTextureMode,
+      androidTranslucentTextureSurface,
+      androidForegroundLoadColor,
     ];
   }
 
@@ -171,6 +181,8 @@ class MapOptions {
       maxPitch: result[9]! as double,
       gestures: result[10]! as MapGestures,
       androidTextureMode: result[11]! as bool,
+      androidTranslucentTextureSurface: result[12]! as bool,
+      androidForegroundLoadColor: result[13]! as int,
     );
   }
 

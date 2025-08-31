@@ -45,8 +45,9 @@ class JObject$ViewCallback extends jni$_.JObject {
   final jni$_.JObjType<JObject$ViewCallback> $type;
 
   @jni$_.internal
-  JObject$ViewCallback.fromReference(jni$_.JReference reference)
-    : $type = type,
+  JObject$ViewCallback.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -95,7 +96,11 @@ class JObject$ViewCallback extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -152,10 +157,14 @@ class JObject$ViewCallback extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory JObject$ViewCallback.implement($JObject$ViewCallback $impl) {
+  factory JObject$ViewCallback.implement(
+    $JObject$ViewCallback $impl,
+  ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return JObject$ViewCallback.fromReference($i.implementReference());
+    return JObject$ViewCallback.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -168,8 +177,9 @@ abstract base mixin class $JObject$ViewCallback {
 }
 
 final class _$JObject$ViewCallback with $JObject$ViewCallback {
-  _$JObject$ViewCallback({required jni$_.JObject? Function() getViewContent})
-    : _getViewContent = getViewContent;
+  _$JObject$ViewCallback({
+    required jni$_.JObject? Function() getViewContent,
+  }) : _getViewContent = getViewContent;
 
   final jni$_.JObject? Function() _getViewContent;
 
@@ -191,7 +201,11 @@ final class $JObject$ViewCallback$NullableType
   @jni$_.internal
   @core$_.override
   JObject$ViewCallback? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : JObject$ViewCallback.fromReference(reference);
+      reference.isNull
+      ? null
+      : JObject$ViewCallback.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -227,7 +241,9 @@ final class $JObject$ViewCallback$Type
   @jni$_.internal
   @core$_.override
   JObject$ViewCallback fromReference(jni$_.JReference reference) =>
-      JObject$ViewCallback.fromReference(reference);
+      JObject$ViewCallback.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

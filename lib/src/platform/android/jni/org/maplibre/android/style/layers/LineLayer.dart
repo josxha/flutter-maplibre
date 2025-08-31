@@ -51,8 +51,9 @@ class LineLayer extends layer$_.Layer {
   final jni$_.JObjType<LineLayer> $type;
 
   @jni$_.internal
-  LineLayer.fromReference(jni$_.JReference reference)
-    : $type = type,
+  LineLayer.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -89,7 +90,10 @@ class LineLayer extends layer$_.Layer {
 
   /// from: `public void <init>(java.lang.String string, java.lang.String string1)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory LineLayer(jni$_.JString? string, jni$_.JString? string1) {
+  factory LineLayer(
+    jni$_.JString? string,
+    jni$_.JString? string1,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
     return LineLayer.fromReference(
@@ -126,7 +130,9 @@ class LineLayer extends layer$_.Layer {
           >();
 
   /// from: `public void setSourceLayer(java.lang.String string)`
-  void setSourceLayer(jni$_.JString? string) {
+  void setSourceLayer(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setSourceLayer(
       reference.pointer,
@@ -160,7 +166,9 @@ class LineLayer extends layer$_.Layer {
 
   /// from: `public org.maplibre.android.style.layers.LineLayer withSourceLayer(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  LineLayer withSourceLayer(jni$_.JString? string) {
+  LineLayer withSourceLayer(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return _withSourceLayer(
       reference.pointer,
@@ -253,7 +261,9 @@ class LineLayer extends layer$_.Layer {
           >();
 
   /// from: `public void setFilter(org.maplibre.android.style.expressions.Expression expression)`
-  void setFilter(jni$_.JObject expression) {
+  void setFilter(
+    jni$_.JObject expression,
+  ) {
     final _$expression = expression.reference;
     _setFilter(
       reference.pointer,
@@ -287,7 +297,9 @@ class LineLayer extends layer$_.Layer {
 
   /// from: `public org.maplibre.android.style.layers.LineLayer withFilter(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  LineLayer withFilter(jni$_.JObject expression) {
+  LineLayer withFilter(
+    jni$_.JObject expression,
+  ) {
     final _$expression = expression.reference;
     return _withFilter(
       reference.pointer,
@@ -1580,8 +1592,11 @@ final class $LineLayer$NullableType extends jni$_.JObjType<LineLayer?> {
 
   @jni$_.internal
   @core$_.override
-  LineLayer? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : LineLayer.fromReference(reference);
+  LineLayer? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : LineLayer.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const layer$_.$Layer$NullableType();
@@ -1615,7 +1630,9 @@ final class $LineLayer$Type extends jni$_.JObjType<LineLayer> {
   @jni$_.internal
   @core$_.override
   LineLayer fromReference(jni$_.JReference reference) =>
-      LineLayer.fromReference(reference);
+      LineLayer.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const layer$_.$Layer$NullableType();

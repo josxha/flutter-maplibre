@@ -45,8 +45,9 @@ class MapRendererScheduler extends jni$_.JObject {
   final jni$_.JObjType<MapRendererScheduler> $type;
 
   @jni$_.internal
-  MapRendererScheduler.fromReference(jni$_.JReference reference)
-    : $type = type,
+  MapRendererScheduler.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -109,7 +110,9 @@ class MapRendererScheduler extends jni$_.JObject {
           >();
 
   /// from: `public abstract void queueEvent(java.lang.Runnable runnable)`
-  void queueEvent(jni$_.JObject? runnable) {
+  void queueEvent(
+    jni$_.JObject? runnable,
+  ) {
     final _$runnable = runnable?.reference ?? jni$_.jNullReference;
     _queueEvent(
       reference.pointer,
@@ -156,7 +159,11 @@ class MapRendererScheduler extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -223,10 +230,14 @@ class MapRendererScheduler extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory MapRendererScheduler.implement($MapRendererScheduler $impl) {
+  factory MapRendererScheduler.implement(
+    $MapRendererScheduler $impl,
+  ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return MapRendererScheduler.fromReference($i.implementReference());
+    return MapRendererScheduler.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -293,7 +304,11 @@ final class $MapRendererScheduler$NullableType
   @jni$_.internal
   @core$_.override
   MapRendererScheduler? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : MapRendererScheduler.fromReference(reference);
+      reference.isNull
+      ? null
+      : MapRendererScheduler.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -329,7 +344,9 @@ final class $MapRendererScheduler$Type
   @jni$_.internal
   @core$_.override
   MapRendererScheduler fromReference(jni$_.JReference reference) =>
-      MapRendererScheduler.fromReference(reference);
+      MapRendererScheduler.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

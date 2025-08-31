@@ -45,8 +45,9 @@ class DefaultStyle extends jni$_.JObject {
   final jni$_.JObjType<DefaultStyle> $type;
 
   @jni$_.internal
-  DefaultStyle.fromReference(jni$_.JReference reference)
-    : $type = type,
+  DefaultStyle.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -98,7 +99,11 @@ class DefaultStyle extends jni$_.JObject {
 
   /// from: `public void <init>(java.lang.String string, java.lang.String string1, int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory DefaultStyle(jni$_.JString? string, jni$_.JString? string1, int i) {
+  factory DefaultStyle(
+    jni$_.JString? string,
+    jni$_.JString? string1,
+    int i,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
     return DefaultStyle.fromReference(
@@ -136,7 +141,9 @@ class DefaultStyle extends jni$_.JObject {
           >();
 
   /// from: `public void setUrl(java.lang.String string)`
-  void setUrl(jni$_.JString? string) {
+  void setUrl(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setUrl(
       reference.pointer,
@@ -199,7 +206,9 @@ class DefaultStyle extends jni$_.JObject {
           >();
 
   /// from: `public void setName(java.lang.String string)`
-  void setName(jni$_.JString? string) {
+  void setName(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setName(
       reference.pointer,
@@ -238,7 +247,10 @@ class DefaultStyle extends jni$_.JObject {
     ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
-  static final _id_setVersion = _class.instanceMethodId(r'setVersion', r'(I)V');
+  static final _id_setVersion = _class.instanceMethodId(
+    r'setVersion',
+    r'(I)V',
+  );
 
   static final _setVersion =
       jni$_.ProtectedJniExtensions.lookup<
@@ -259,7 +271,9 @@ class DefaultStyle extends jni$_.JObject {
           >();
 
   /// from: `public void setVersion(int i)`
-  void setVersion(int i) {
+  void setVersion(
+    int i,
+  ) {
     _setVersion(
       reference.pointer,
       _id_setVersion as jni$_.JMethodIDPtr,
@@ -267,7 +281,10 @@ class DefaultStyle extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_getVersion = _class.instanceMethodId(r'getVersion', r'()I');
+  static final _id_getVersion = _class.instanceMethodId(
+    r'getVersion',
+    r'()I',
+  );
 
   static final _getVersion =
       jni$_.ProtectedJniExtensions.lookup<
@@ -347,7 +364,10 @@ class DefaultStyle extends jni$_.JObject {
           >();
 
   /// from: `public void writeToParcel(android.os.Parcel parcel, int i)`
-  void writeToParcel(jni$_.JObject parcel, int i) {
+  void writeToParcel(
+    jni$_.JObject parcel,
+    int i,
+  ) {
     final _$parcel = parcel.reference;
     _writeToParcel(
       reference.pointer,
@@ -368,8 +388,11 @@ final class $DefaultStyle$NullableType extends jni$_.JObjType<DefaultStyle?> {
 
   @jni$_.internal
   @core$_.override
-  DefaultStyle? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : DefaultStyle.fromReference(reference);
+  DefaultStyle? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : DefaultStyle.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -403,7 +426,9 @@ final class $DefaultStyle$Type extends jni$_.JObjType<DefaultStyle> {
   @jni$_.internal
   @core$_.override
   DefaultStyle fromReference(jni$_.JReference reference) =>
-      DefaultStyle.fromReference(reference);
+      DefaultStyle.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

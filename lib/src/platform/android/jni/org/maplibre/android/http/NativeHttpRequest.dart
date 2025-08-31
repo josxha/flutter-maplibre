@@ -45,8 +45,9 @@ class NativeHttpRequest extends jni$_.JObject {
   final jni$_.JObjType<NativeHttpRequest> $type;
 
   @jni$_.internal
-  NativeHttpRequest.fromReference(jni$_.JReference reference)
-    : $type = type,
+  NativeHttpRequest.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -56,7 +57,10 @@ class NativeHttpRequest extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $NativeHttpRequest$NullableType();
   static const type = $NativeHttpRequest$Type();
-  static final _id_cancel = _class.instanceMethodId(r'cancel', r'()V');
+  static final _id_cancel = _class.instanceMethodId(
+    r'cancel',
+    r'()V',
+  );
 
   static final _cancel =
       jni$_.ProtectedJniExtensions.lookup<
@@ -177,7 +181,10 @@ class NativeHttpRequest extends jni$_.JObject {
           >();
 
   /// from: `public void handleFailure(int i, java.lang.String string)`
-  void handleFailure(int i, jni$_.JString? string) {
+  void handleFailure(
+    int i,
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _handleFailure(
       reference.pointer,
@@ -200,7 +207,11 @@ final class $NativeHttpRequest$NullableType
   @jni$_.internal
   @core$_.override
   NativeHttpRequest? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : NativeHttpRequest.fromReference(reference);
+      reference.isNull
+      ? null
+      : NativeHttpRequest.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -234,7 +245,9 @@ final class $NativeHttpRequest$Type extends jni$_.JObjType<NativeHttpRequest> {
   @jni$_.internal
   @core$_.override
   NativeHttpRequest fromReference(jni$_.JReference reference) =>
-      NativeHttpRequest.fromReference(reference);
+      NativeHttpRequest.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

@@ -47,8 +47,9 @@ class AttributionParser$Options extends jni$_.JObject {
   final jni$_.JObjType<AttributionParser$Options> $type;
 
   @jni$_.internal
-  AttributionParser$Options.fromReference(jni$_.JReference reference)
-    : $type = type,
+  AttributionParser$Options.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -58,7 +59,9 @@ class AttributionParser$Options extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $AttributionParser$Options$NullableType();
   static const type = $AttributionParser$Options$Type();
-  static final _id_new$ = _class.constructorId(r'(Landroid/content/Context;)V');
+  static final _id_new$ = _class.constructorId(
+    r'(Landroid/content/Context;)V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -80,7 +83,9 @@ class AttributionParser$Options extends jni$_.JObject {
 
   /// from: `public void <init>(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory AttributionParser$Options(jni$_.JObject context) {
+  factory AttributionParser$Options(
+    jni$_.JObject context,
+  ) {
     final _$context = context.reference;
     return AttributionParser$Options.fromReference(
       _new$(
@@ -154,7 +159,9 @@ class AttributionParser$Options extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.attribution.AttributionParser$Options withImproveMap(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  AttributionParser$Options withImproveMap(bool z) {
+  AttributionParser$Options withImproveMap(
+    bool z,
+  ) {
     return _withImproveMap(
       reference.pointer,
       _id_withImproveMap as jni$_.JMethodIDPtr,
@@ -189,7 +196,9 @@ class AttributionParser$Options extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.attribution.AttributionParser$Options withCopyrightSign(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  AttributionParser$Options withCopyrightSign(bool z) {
+  AttributionParser$Options withCopyrightSign(
+    bool z,
+  ) {
     return _withCopyrightSign(
       reference.pointer,
       _id_withCopyrightSign as jni$_.JMethodIDPtr,
@@ -224,7 +233,9 @@ class AttributionParser$Options extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.attribution.AttributionParser$Options withMapboxAttribution(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  AttributionParser$Options withMapboxAttribution(bool z) {
+  AttributionParser$Options withMapboxAttribution(
+    bool z,
+  ) {
     return _withMapboxAttribution(
       reference.pointer,
       _id_withMapboxAttribution as jni$_.JMethodIDPtr,
@@ -280,7 +291,9 @@ final class $AttributionParser$Options$NullableType
   AttributionParser$Options? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : AttributionParser$Options.fromReference(reference);
+      : AttributionParser$Options.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -316,7 +329,9 @@ final class $AttributionParser$Options$Type
   @jni$_.internal
   @core$_.override
   AttributionParser$Options fromReference(jni$_.JReference reference) =>
-      AttributionParser$Options.fromReference(reference);
+      AttributionParser$Options.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -347,8 +362,9 @@ class AttributionParser extends jni$_.JObject {
   final jni$_.JObjType<AttributionParser> $type;
 
   @jni$_.internal
-  AttributionParser.fromReference(jni$_.JReference reference)
-    : $type = type,
+  AttributionParser.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -447,7 +463,9 @@ class AttributionParser extends jni$_.JObject {
 
   /// from: `public java.lang.String createAttributionString(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JString createAttributionString$1(bool z) {
+  jni$_.JString createAttributionString$1(
+    bool z,
+  ) {
     return _createAttributionString$1(
       reference.pointer,
       _id_createAttributionString$1 as jni$_.JMethodIDPtr,
@@ -469,7 +487,11 @@ final class $AttributionParser$NullableType
   @jni$_.internal
   @core$_.override
   AttributionParser? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : AttributionParser.fromReference(reference);
+      reference.isNull
+      ? null
+      : AttributionParser.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -504,7 +526,9 @@ final class $AttributionParser$Type extends jni$_.JObjType<AttributionParser> {
   @jni$_.internal
   @core$_.override
   AttributionParser fromReference(jni$_.JReference reference) =>
-      AttributionParser.fromReference(reference);
+      AttributionParser.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

@@ -47,8 +47,9 @@ class TextureViewMapRenderer extends maprenderer$_.MapRenderer {
   final jni$_.JObjType<TextureViewMapRenderer> $type;
 
   @jni$_.internal
-  TextureViewMapRenderer.fromReference(jni$_.JReference reference)
-    : $type = type,
+  TextureViewMapRenderer.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -137,7 +138,9 @@ class TextureViewMapRenderer extends maprenderer$_.MapRenderer {
           >();
 
   /// from: `public void setRenderThread(org.maplibre.android.maps.renderer.textureview.TextureViewRenderThread textureViewRenderThread)`
-  void setRenderThread(jni$_.JObject? textureViewRenderThread) {
+  void setRenderThread(
+    jni$_.JObject? textureViewRenderThread,
+  ) {
     final _$textureViewRenderThread =
         textureViewRenderThread?.reference ?? jni$_.jNullReference;
     _setRenderThread(
@@ -230,7 +233,9 @@ class TextureViewMapRenderer extends maprenderer$_.MapRenderer {
           >();
 
   /// from: `public void queueEvent(java.lang.Runnable runnable)`
-  void queueEvent(jni$_.JObject? runnable) {
+  void queueEvent(
+    jni$_.JObject? runnable,
+  ) {
     final _$runnable = runnable?.reference ?? jni$_.jNullReference;
     _queueEvent(
       reference.pointer,
@@ -268,7 +273,10 @@ class TextureViewMapRenderer extends maprenderer$_.MapRenderer {
     ).check();
   }
 
-  static final _id_onStop = _class.instanceMethodId(r'onStop', r'()V');
+  static final _id_onStop = _class.instanceMethodId(
+    r'onStop',
+    r'()V',
+  );
 
   static final _onStop =
       jni$_.ProtectedJniExtensions.lookup<
@@ -291,7 +299,10 @@ class TextureViewMapRenderer extends maprenderer$_.MapRenderer {
     _onStop(reference.pointer, _id_onStop as jni$_.JMethodIDPtr).check();
   }
 
-  static final _id_onStart = _class.instanceMethodId(r'onStart', r'()V');
+  static final _id_onStart = _class.instanceMethodId(
+    r'onStart',
+    r'()V',
+  );
 
   static final _onStart =
       jni$_.ProtectedJniExtensions.lookup<
@@ -314,7 +325,10 @@ class TextureViewMapRenderer extends maprenderer$_.MapRenderer {
     _onStart(reference.pointer, _id_onStart as jni$_.JMethodIDPtr).check();
   }
 
-  static final _id_onDestroy = _class.instanceMethodId(r'onDestroy', r'()V');
+  static final _id_onDestroy = _class.instanceMethodId(
+    r'onDestroy',
+    r'()V',
+  );
 
   static final _onDestroy =
       jni$_.ProtectedJniExtensions.lookup<
@@ -448,7 +462,11 @@ final class $TextureViewMapRenderer$NullableType
   @jni$_.internal
   @core$_.override
   TextureViewMapRenderer? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : TextureViewMapRenderer.fromReference(reference);
+      reference.isNull
+      ? null
+      : TextureViewMapRenderer.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>
@@ -485,7 +503,9 @@ final class $TextureViewMapRenderer$Type
   @jni$_.internal
   @core$_.override
   TextureViewMapRenderer fromReference(jni$_.JReference reference) =>
-      TextureViewMapRenderer.fromReference(reference);
+      TextureViewMapRenderer.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>
