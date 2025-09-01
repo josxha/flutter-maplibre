@@ -50,8 +50,9 @@ class GLSurfaceViewMapRenderer
   final jni$_.JObjType<GLSurfaceViewMapRenderer> $type;
 
   @jni$_.internal
-  GLSurfaceViewMapRenderer.fromReference(jni$_.JReference reference)
-    : $type = type,
+  GLSurfaceViewMapRenderer.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -128,7 +129,9 @@ final class $GLSurfaceViewMapRenderer$NullableType
   GLSurfaceViewMapRenderer? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : GLSurfaceViewMapRenderer.fromReference(reference);
+      : GLSurfaceViewMapRenderer.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>
@@ -165,7 +168,9 @@ final class $GLSurfaceViewMapRenderer$Type
   @jni$_.internal
   @core$_.override
   GLSurfaceViewMapRenderer fromReference(jni$_.JReference reference) =>
-      GLSurfaceViewMapRenderer.fromReference(reference);
+      GLSurfaceViewMapRenderer.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>

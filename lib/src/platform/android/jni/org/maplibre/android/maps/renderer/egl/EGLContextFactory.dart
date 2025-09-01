@@ -45,8 +45,9 @@ class EGLContextFactory extends jni$_.JObject {
   final jni$_.JObjType<EGLContextFactory> $type;
 
   @jni$_.internal
-  EGLContextFactory.fromReference(jni$_.JReference reference)
-    : $type = type,
+  EGLContextFactory.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -56,7 +57,9 @@ class EGLContextFactory extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $EGLContextFactory$NullableType();
   static const type = $EGLContextFactory$Type();
-  static final _id_new$ = _class.constructorId(r'()V');
+  static final _id_new$ = _class.constructorId(
+    r'()V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -195,7 +198,11 @@ final class $EGLContextFactory$NullableType
   @jni$_.internal
   @core$_.override
   EGLContextFactory? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : EGLContextFactory.fromReference(reference);
+      reference.isNull
+      ? null
+      : EGLContextFactory.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -230,7 +237,9 @@ final class $EGLContextFactory$Type extends jni$_.JObjType<EGLContextFactory> {
   @jni$_.internal
   @core$_.override
   EGLContextFactory fromReference(jni$_.JReference reference) =>
-      EGLContextFactory.fromReference(reference);
+      EGLContextFactory.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

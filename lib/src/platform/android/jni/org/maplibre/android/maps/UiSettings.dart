@@ -49,8 +49,9 @@ class UiSettings extends jni$_.JObject {
   final jni$_.JObjType<UiSettings> $type;
 
   @jni$_.internal
-  UiSettings.fromReference(jni$_.JReference reference)
-    : $type = type,
+  UiSettings.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -142,7 +143,9 @@ class UiSettings extends jni$_.JObject {
           >();
 
   /// from: `public void setFlingAnimationBaseTime(long j)`
-  void setFlingAnimationBaseTime(int j) {
+  void setFlingAnimationBaseTime(
+    int j,
+  ) {
     _setFlingAnimationBaseTime(
       reference.pointer,
       _id_setFlingAnimationBaseTime as jni$_.JMethodIDPtr,
@@ -174,7 +177,9 @@ class UiSettings extends jni$_.JObject {
           >();
 
   /// from: `public void setFlingThreshold(long j)`
-  void setFlingThreshold(int j) {
+  void setFlingThreshold(
+    int j,
+  ) {
     _setFlingThreshold(
       reference.pointer,
       _id_setFlingThreshold as jni$_.JMethodIDPtr,
@@ -206,7 +211,9 @@ class UiSettings extends jni$_.JObject {
           >();
 
   /// from: `public void setCompassEnabled(boolean z)`
-  void setCompassEnabled(bool z) {
+  void setCompassEnabled(
+    bool z,
+  ) {
     _setCompassEnabled(
       reference.pointer,
       _id_setCompassEnabled as jni$_.JMethodIDPtr,
@@ -267,7 +274,9 @@ class UiSettings extends jni$_.JObject {
           >();
 
   /// from: `public void setCompassGravity(int i)`
-  void setCompassGravity(int i) {
+  void setCompassGravity(
+    int i,
+  ) {
     _setCompassGravity(
       reference.pointer,
       _id_setCompassGravity as jni$_.JMethodIDPtr,
@@ -299,7 +308,9 @@ class UiSettings extends jni$_.JObject {
           >();
 
   /// from: `public void setCompassFadeFacingNorth(boolean z)`
-  void setCompassFadeFacingNorth(bool z) {
+  void setCompassFadeFacingNorth(
+    bool z,
+  ) {
     _setCompassFadeFacingNorth(
       reference.pointer,
       _id_setCompassFadeFacingNorth as jni$_.JMethodIDPtr,
@@ -331,7 +342,9 @@ class UiSettings extends jni$_.JObject {
           >();
 
   /// from: `public void setCompassImage(android.graphics.drawable.Drawable drawable)`
-  void setCompassImage(jni$_.JObject drawable) {
+  void setCompassImage(
+    jni$_.JObject drawable,
+  ) {
     final _$drawable = drawable.reference;
     _setCompassImage(
       reference.pointer,
@@ -427,7 +440,12 @@ class UiSettings extends jni$_.JObject {
           >();
 
   /// from: `public void setCompassMargins(int i, int i1, int i2, int i3)`
-  void setCompassMargins(int i, int i1, int i2, int i3) {
+  void setCompassMargins(
+    int i,
+    int i1,
+    int i2,
+    int i3,
+  ) {
     _setCompassMargins(
       reference.pointer,
       _id_setCompassMargins as jni$_.JMethodIDPtr,
@@ -608,7 +626,9 @@ class UiSettings extends jni$_.JObject {
           >();
 
   /// from: `public void setLogoEnabled(boolean z)`
-  void setLogoEnabled(bool z) {
+  void setLogoEnabled(
+    bool z,
+  ) {
     _setLogoEnabled(
       reference.pointer,
       _id_setLogoEnabled as jni$_.JMethodIDPtr,
@@ -669,7 +689,9 @@ class UiSettings extends jni$_.JObject {
           >();
 
   /// from: `public void setLogoGravity(int i)`
-  void setLogoGravity(int i) {
+  void setLogoGravity(
+    int i,
+  ) {
     _setLogoGravity(
       reference.pointer,
       _id_setLogoGravity as jni$_.JMethodIDPtr,
@@ -735,7 +757,12 @@ class UiSettings extends jni$_.JObject {
           >();
 
   /// from: `public void setLogoMargins(int i, int i1, int i2, int i3)`
-  void setLogoMargins(int i, int i1, int i2, int i3) {
+  void setLogoMargins(
+    int i,
+    int i1,
+    int i2,
+    int i3,
+  ) {
     _setLogoMargins(
       reference.pointer,
       _id_setLogoMargins as jni$_.JMethodIDPtr,
@@ -886,7 +913,9 @@ class UiSettings extends jni$_.JObject {
           >();
 
   /// from: `public void setAttributionEnabled(boolean z)`
-  void setAttributionEnabled(bool z) {
+  void setAttributionEnabled(
+    bool z,
+  ) {
     _setAttributionEnabled(
       reference.pointer,
       _id_setAttributionEnabled as jni$_.JMethodIDPtr,
@@ -1016,7 +1045,9 @@ class UiSettings extends jni$_.JObject {
           >();
 
   /// from: `public void setAttributionGravity(int i)`
-  void setAttributionGravity(int i) {
+  void setAttributionGravity(
+    int i,
+  ) {
     _setAttributionGravity(
       reference.pointer,
       _id_setAttributionGravity as jni$_.JMethodIDPtr,
@@ -1082,7 +1113,12 @@ class UiSettings extends jni$_.JObject {
           >();
 
   /// from: `public void setAttributionMargins(int i, int i1, int i2, int i3)`
-  void setAttributionMargins(int i, int i1, int i2, int i3) {
+  void setAttributionMargins(
+    int i,
+    int i1,
+    int i2,
+    int i3,
+  ) {
     _setAttributionMargins(
       reference.pointer,
       _id_setAttributionMargins as jni$_.JMethodIDPtr,
@@ -1117,7 +1153,9 @@ class UiSettings extends jni$_.JObject {
           >();
 
   /// from: `public void setAttributionTintColor(int i)`
-  void setAttributionTintColor(int i) {
+  void setAttributionTintColor(
+    int i,
+  ) {
     _setAttributionTintColor(
       reference.pointer,
       _id_setAttributionTintColor as jni$_.JMethodIDPtr,
@@ -1265,7 +1303,9 @@ class UiSettings extends jni$_.JObject {
           >();
 
   /// from: `public void setRotateGesturesEnabled(boolean z)`
-  void setRotateGesturesEnabled(bool z) {
+  void setRotateGesturesEnabled(
+    bool z,
+  ) {
     _setRotateGesturesEnabled(
       reference.pointer,
       _id_setRotateGesturesEnabled as jni$_.JMethodIDPtr,
@@ -1326,7 +1366,9 @@ class UiSettings extends jni$_.JObject {
           >();
 
   /// from: `public void setTiltGesturesEnabled(boolean z)`
-  void setTiltGesturesEnabled(bool z) {
+  void setTiltGesturesEnabled(
+    bool z,
+  ) {
     _setTiltGesturesEnabled(
       reference.pointer,
       _id_setTiltGesturesEnabled as jni$_.JMethodIDPtr,
@@ -1387,7 +1429,9 @@ class UiSettings extends jni$_.JObject {
           >();
 
   /// from: `public void setZoomGesturesEnabled(boolean z)`
-  void setZoomGesturesEnabled(bool z) {
+  void setZoomGesturesEnabled(
+    bool z,
+  ) {
     _setZoomGesturesEnabled(
       reference.pointer,
       _id_setZoomGesturesEnabled as jni$_.JMethodIDPtr,
@@ -1448,7 +1492,9 @@ class UiSettings extends jni$_.JObject {
           >();
 
   /// from: `public void setDoubleTapGesturesEnabled(boolean z)`
-  void setDoubleTapGesturesEnabled(bool z) {
+  void setDoubleTapGesturesEnabled(
+    bool z,
+  ) {
     _setDoubleTapGesturesEnabled(
       reference.pointer,
       _id_setDoubleTapGesturesEnabled as jni$_.JMethodIDPtr,
@@ -1538,7 +1584,9 @@ class UiSettings extends jni$_.JObject {
           >();
 
   /// from: `public void setQuickZoomGesturesEnabled(boolean z)`
-  void setQuickZoomGesturesEnabled(bool z) {
+  void setQuickZoomGesturesEnabled(
+    bool z,
+  ) {
     _setQuickZoomGesturesEnabled(
       reference.pointer,
       _id_setQuickZoomGesturesEnabled as jni$_.JMethodIDPtr,
@@ -1599,7 +1647,9 @@ class UiSettings extends jni$_.JObject {
           >();
 
   /// from: `public void setZoomRate(float f)`
-  void setZoomRate(double f) {
+  void setZoomRate(
+    double f,
+  ) {
     _setZoomRate(
       reference.pointer,
       _id_setZoomRate as jni$_.JMethodIDPtr,
@@ -1660,7 +1710,9 @@ class UiSettings extends jni$_.JObject {
           >();
 
   /// from: `public void setDeselectMarkersOnTap(boolean z)`
-  void setDeselectMarkersOnTap(bool z) {
+  void setDeselectMarkersOnTap(
+    bool z,
+  ) {
     _setDeselectMarkersOnTap(
       reference.pointer,
       _id_setDeselectMarkersOnTap as jni$_.JMethodIDPtr,
@@ -1692,7 +1744,9 @@ class UiSettings extends jni$_.JObject {
           >();
 
   /// from: `public void setScrollGesturesEnabled(boolean z)`
-  void setScrollGesturesEnabled(bool z) {
+  void setScrollGesturesEnabled(
+    bool z,
+  ) {
     _setScrollGesturesEnabled(
       reference.pointer,
       _id_setScrollGesturesEnabled as jni$_.JMethodIDPtr,
@@ -1753,7 +1807,9 @@ class UiSettings extends jni$_.JObject {
           >();
 
   /// from: `public void setHorizontalScrollGesturesEnabled(boolean z)`
-  void setHorizontalScrollGesturesEnabled(bool z) {
+  void setHorizontalScrollGesturesEnabled(
+    bool z,
+  ) {
     _setHorizontalScrollGesturesEnabled(
       reference.pointer,
       _id_setHorizontalScrollGesturesEnabled as jni$_.JMethodIDPtr,
@@ -1843,7 +1899,9 @@ class UiSettings extends jni$_.JObject {
           >();
 
   /// from: `public void setScaleVelocityAnimationEnabled(boolean z)`
-  void setScaleVelocityAnimationEnabled(bool z) {
+  void setScaleVelocityAnimationEnabled(
+    bool z,
+  ) {
     _setScaleVelocityAnimationEnabled(
       reference.pointer,
       _id_setScaleVelocityAnimationEnabled as jni$_.JMethodIDPtr,
@@ -1904,7 +1962,9 @@ class UiSettings extends jni$_.JObject {
           >();
 
   /// from: `public void setRotateVelocityAnimationEnabled(boolean z)`
-  void setRotateVelocityAnimationEnabled(bool z) {
+  void setRotateVelocityAnimationEnabled(
+    bool z,
+  ) {
     _setRotateVelocityAnimationEnabled(
       reference.pointer,
       _id_setRotateVelocityAnimationEnabled as jni$_.JMethodIDPtr,
@@ -1965,7 +2025,9 @@ class UiSettings extends jni$_.JObject {
           >();
 
   /// from: `public void setFlingVelocityAnimationEnabled(boolean z)`
-  void setFlingVelocityAnimationEnabled(bool z) {
+  void setFlingVelocityAnimationEnabled(
+    bool z,
+  ) {
     _setFlingVelocityAnimationEnabled(
       reference.pointer,
       _id_setFlingVelocityAnimationEnabled as jni$_.JMethodIDPtr,
@@ -1997,7 +2059,9 @@ class UiSettings extends jni$_.JObject {
           >();
 
   /// from: `public void setAllVelocityAnimationsEnabled(boolean z)`
-  void setAllVelocityAnimationsEnabled(bool z) {
+  void setAllVelocityAnimationsEnabled(
+    bool z,
+  ) {
     _setAllVelocityAnimationsEnabled(
       reference.pointer,
       _id_setAllVelocityAnimationsEnabled as jni$_.JMethodIDPtr,
@@ -2006,7 +2070,10 @@ class UiSettings extends jni$_.JObject {
   }
 
   static final _id_isIncreaseRotateThresholdWhenScaling = _class
-      .instanceMethodId(r'isIncreaseRotateThresholdWhenScaling', r'()Z');
+      .instanceMethodId(
+        r'isIncreaseRotateThresholdWhenScaling',
+        r'()Z',
+      );
 
   static final _isIncreaseRotateThresholdWhenScaling =
       jni$_.ProtectedJniExtensions.lookup<
@@ -2033,7 +2100,10 @@ class UiSettings extends jni$_.JObject {
   }
 
   static final _id_setIncreaseRotateThresholdWhenScaling = _class
-      .instanceMethodId(r'setIncreaseRotateThresholdWhenScaling', r'(Z)V');
+      .instanceMethodId(
+        r'setIncreaseRotateThresholdWhenScaling',
+        r'(Z)V',
+      );
 
   static final _setIncreaseRotateThresholdWhenScaling =
       jni$_.ProtectedJniExtensions.lookup<
@@ -2054,7 +2124,9 @@ class UiSettings extends jni$_.JObject {
           >();
 
   /// from: `public void setIncreaseRotateThresholdWhenScaling(boolean z)`
-  void setIncreaseRotateThresholdWhenScaling(bool z) {
+  void setIncreaseRotateThresholdWhenScaling(
+    bool z,
+  ) {
     _setIncreaseRotateThresholdWhenScaling(
       reference.pointer,
       _id_setIncreaseRotateThresholdWhenScaling as jni$_.JMethodIDPtr,
@@ -2115,7 +2187,9 @@ class UiSettings extends jni$_.JObject {
           >();
 
   /// from: `public void setDisableRotateWhenScaling(boolean z)`
-  void setDisableRotateWhenScaling(bool z) {
+  void setDisableRotateWhenScaling(
+    bool z,
+  ) {
     _setDisableRotateWhenScaling(
       reference.pointer,
       _id_setDisableRotateWhenScaling as jni$_.JMethodIDPtr,
@@ -2124,7 +2198,10 @@ class UiSettings extends jni$_.JObject {
   }
 
   static final _id_isIncreaseScaleThresholdWhenRotating = _class
-      .instanceMethodId(r'isIncreaseScaleThresholdWhenRotating', r'()Z');
+      .instanceMethodId(
+        r'isIncreaseScaleThresholdWhenRotating',
+        r'()Z',
+      );
 
   static final _isIncreaseScaleThresholdWhenRotating =
       jni$_.ProtectedJniExtensions.lookup<
@@ -2151,7 +2228,10 @@ class UiSettings extends jni$_.JObject {
   }
 
   static final _id_setIncreaseScaleThresholdWhenRotating = _class
-      .instanceMethodId(r'setIncreaseScaleThresholdWhenRotating', r'(Z)V');
+      .instanceMethodId(
+        r'setIncreaseScaleThresholdWhenRotating',
+        r'(Z)V',
+      );
 
   static final _setIncreaseScaleThresholdWhenRotating =
       jni$_.ProtectedJniExtensions.lookup<
@@ -2172,7 +2252,9 @@ class UiSettings extends jni$_.JObject {
           >();
 
   /// from: `public void setIncreaseScaleThresholdWhenRotating(boolean z)`
-  void setIncreaseScaleThresholdWhenRotating(bool z) {
+  void setIncreaseScaleThresholdWhenRotating(
+    bool z,
+  ) {
     _setIncreaseScaleThresholdWhenRotating(
       reference.pointer,
       _id_setIncreaseScaleThresholdWhenRotating as jni$_.JMethodIDPtr,
@@ -2204,7 +2286,9 @@ class UiSettings extends jni$_.JObject {
           >();
 
   /// from: `public void setAllGesturesEnabled(boolean z)`
-  void setAllGesturesEnabled(bool z) {
+  void setAllGesturesEnabled(
+    bool z,
+  ) {
     _setAllGesturesEnabled(
       reference.pointer,
       _id_setAllGesturesEnabled as jni$_.JMethodIDPtr,
@@ -2265,7 +2349,9 @@ class UiSettings extends jni$_.JObject {
           >();
 
   /// from: `public void setFocalPoint(android.graphics.PointF pointF)`
-  void setFocalPoint(pointf$_.PointF? pointF) {
+  void setFocalPoint(
+    pointf$_.PointF? pointF,
+  ) {
     final _$pointF = pointF?.reference ?? jni$_.jNullReference;
     _setFocalPoint(
       reference.pointer,
@@ -2304,7 +2390,10 @@ class UiSettings extends jni$_.JObject {
     ).object<pointf$_.PointF?>(const pointf$_.$PointF$NullableType());
   }
 
-  static final _id_getHeight = _class.instanceMethodId(r'getHeight', r'()F');
+  static final _id_getHeight = _class.instanceMethodId(
+    r'getHeight',
+    r'()F',
+  );
 
   static final _getHeight =
       jni$_.ProtectedJniExtensions.lookup<
@@ -2330,7 +2419,10 @@ class UiSettings extends jni$_.JObject {
     ).float;
   }
 
-  static final _id_getWidth = _class.instanceMethodId(r'getWidth', r'()F');
+  static final _id_getWidth = _class.instanceMethodId(
+    r'getWidth',
+    r'()F',
+  );
 
   static final _getWidth =
       jni$_.ProtectedJniExtensions.lookup<
@@ -2356,7 +2448,10 @@ class UiSettings extends jni$_.JObject {
     ).float;
   }
 
-  static final _id_invalidate = _class.instanceMethodId(r'invalidate', r'()V');
+  static final _id_invalidate = _class.instanceMethodId(
+    r'invalidate',
+    r'()V',
+  );
 
   static final _invalidate =
       jni$_.ProtectedJniExtensions.lookup<
@@ -2393,8 +2488,11 @@ final class $UiSettings$NullableType extends jni$_.JObjType<UiSettings?> {
 
   @jni$_.internal
   @core$_.override
-  UiSettings? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : UiSettings.fromReference(reference);
+  UiSettings? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : UiSettings.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -2428,7 +2526,9 @@ final class $UiSettings$Type extends jni$_.JObjType<UiSettings> {
   @jni$_.internal
   @core$_.override
   UiSettings fromReference(jni$_.JReference reference) =>
-      UiSettings.fromReference(reference);
+      UiSettings.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

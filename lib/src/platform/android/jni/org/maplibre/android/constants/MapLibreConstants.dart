@@ -45,8 +45,9 @@ class MapLibreConstants extends jni$_.JObject {
   final jni$_.JObjType<MapLibreConstants> $type;
 
   @jni$_.internal
-  MapLibreConstants.fromReference(jni$_.JReference reference)
-    : $type = type,
+  MapLibreConstants.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -685,7 +686,9 @@ class MapLibreConstants extends jni$_.JObject {
         const jni$_.JStringNullableType(),
       );
 
-  static final _id_new$ = _class.constructorId(r'()V');
+  static final _id_new$ = _class.constructorId(
+    r'()V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -724,7 +727,11 @@ final class $MapLibreConstants$NullableType
   @jni$_.internal
   @core$_.override
   MapLibreConstants? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : MapLibreConstants.fromReference(reference);
+      reference.isNull
+      ? null
+      : MapLibreConstants.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -758,7 +765,9 @@ final class $MapLibreConstants$Type extends jni$_.JObjType<MapLibreConstants> {
   @jni$_.internal
   @core$_.override
   MapLibreConstants fromReference(jni$_.JReference reference) =>
-      MapLibreConstants.fromReference(reference);
+      MapLibreConstants.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

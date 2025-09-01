@@ -156,7 +156,10 @@ class CameraUpdateFactory$CameraBoundsUpdate extends jni$_.JObject {
     );
   }
 
-  static final _id_getPadding = _class.instanceMethodId(r'getPadding', r'()[I');
+  static final _id_getPadding = _class.instanceMethodId(
+    r'getPadding',
+    r'()[I',
+  );
 
   static final _getPadding =
       jni$_.ProtectedJniExtensions.lookup<
@@ -312,7 +315,9 @@ class CameraUpdateFactory$CameraBoundsUpdate extends jni$_.JObject {
           >();
 
   /// from: `public boolean equals(java.lang.Object object)`
-  bool equals(jni$_.JObject? object) {
+  bool equals(
+    jni$_.JObject? object,
+  ) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     return _equals(
       reference.pointer,
@@ -321,7 +326,10 @@ class CameraUpdateFactory$CameraBoundsUpdate extends jni$_.JObject {
     ).boolean;
   }
 
-  static final _id_hashCode$1 = _class.instanceMethodId(r'hashCode', r'()I');
+  static final _id_hashCode$1 = _class.instanceMethodId(
+    r'hashCode',
+    r'()I',
+  );
 
   static final _hashCode$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -394,7 +402,9 @@ final class $CameraUpdateFactory$CameraBoundsUpdate$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : CameraUpdateFactory$CameraBoundsUpdate.fromReference(reference);
+      : CameraUpdateFactory$CameraBoundsUpdate.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -434,7 +444,9 @@ final class $CameraUpdateFactory$CameraBoundsUpdate$Type
   @core$_.override
   CameraUpdateFactory$CameraBoundsUpdate fromReference(
     jni$_.JReference reference,
-  ) => CameraUpdateFactory$CameraBoundsUpdate.fromReference(reference);
+  ) => CameraUpdateFactory$CameraBoundsUpdate.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -537,7 +549,10 @@ class CameraUpdateFactory$CameraPositionUpdate extends jni$_.JObject {
     );
   }
 
-  static final _id_getBearing = _class.instanceMethodId(r'getBearing', r'()D');
+  static final _id_getBearing = _class.instanceMethodId(
+    r'getBearing',
+    r'()D',
+  );
 
   static final _getBearing =
       jni$_.ProtectedJniExtensions.lookup<
@@ -593,7 +608,10 @@ class CameraUpdateFactory$CameraPositionUpdate extends jni$_.JObject {
     ).object<latlng$_.LatLng?>(const latlng$_.$LatLng$NullableType());
   }
 
-  static final _id_getTilt = _class.instanceMethodId(r'getTilt', r'()D');
+  static final _id_getTilt = _class.instanceMethodId(
+    r'getTilt',
+    r'()D',
+  );
 
   static final _getTilt =
       jni$_.ProtectedJniExtensions.lookup<
@@ -619,7 +637,10 @@ class CameraUpdateFactory$CameraPositionUpdate extends jni$_.JObject {
     ).doubleFloat;
   }
 
-  static final _id_getZoom = _class.instanceMethodId(r'getZoom', r'()D');
+  static final _id_getZoom = _class.instanceMethodId(
+    r'getZoom',
+    r'()D',
+  );
 
   static final _getZoom =
       jni$_.ProtectedJniExtensions.lookup<
@@ -645,7 +666,10 @@ class CameraUpdateFactory$CameraPositionUpdate extends jni$_.JObject {
     ).doubleFloat;
   }
 
-  static final _id_getPadding = _class.instanceMethodId(r'getPadding', r'()[D');
+  static final _id_getPadding = _class.instanceMethodId(
+    r'getPadding',
+    r'()[D',
+  );
 
   static final _getPadding =
       jni$_.ProtectedJniExtensions.lookup<
@@ -734,7 +758,9 @@ class CameraUpdateFactory$CameraPositionUpdate extends jni$_.JObject {
           >();
 
   /// from: `public boolean equals(java.lang.Object object)`
-  bool equals(jni$_.JObject? object) {
+  bool equals(
+    jni$_.JObject? object,
+  ) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     return _equals(
       reference.pointer,
@@ -743,7 +769,10 @@ class CameraUpdateFactory$CameraPositionUpdate extends jni$_.JObject {
     ).boolean;
   }
 
-  static final _id_hashCode$1 = _class.instanceMethodId(r'hashCode', r'()I');
+  static final _id_hashCode$1 = _class.instanceMethodId(
+    r'hashCode',
+    r'()I',
+  );
 
   static final _hashCode$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -816,7 +845,9 @@ final class $CameraUpdateFactory$CameraPositionUpdate$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : CameraUpdateFactory$CameraPositionUpdate.fromReference(reference);
+      : CameraUpdateFactory$CameraPositionUpdate.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -856,7 +887,9 @@ final class $CameraUpdateFactory$CameraPositionUpdate$Type
   @core$_.override
   CameraUpdateFactory$CameraPositionUpdate fromReference(
     jni$_.JReference reference,
-  ) => CameraUpdateFactory$CameraPositionUpdate.fromReference(reference);
+  ) => CameraUpdateFactory$CameraPositionUpdate.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -956,7 +989,9 @@ final class $CameraUpdateFactory$ZoomUpdate$Companion$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : CameraUpdateFactory$ZoomUpdate$Companion.fromReference(reference);
+      : CameraUpdateFactory$ZoomUpdate$Companion.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -996,7 +1031,9 @@ final class $CameraUpdateFactory$ZoomUpdate$Companion$Type
   @core$_.override
   CameraUpdateFactory$ZoomUpdate$Companion fromReference(
     jni$_.JReference reference,
-  ) => CameraUpdateFactory$ZoomUpdate$Companion.fromReference(reference);
+  ) => CameraUpdateFactory$ZoomUpdate$Companion.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -1028,8 +1065,9 @@ class CameraUpdateFactory$ZoomUpdate$Type extends jni$_.JObject {
   final jni$_.JObjType<CameraUpdateFactory$ZoomUpdate$Type> $type;
 
   @jni$_.internal
-  CameraUpdateFactory$ZoomUpdate$Type.fromReference(jni$_.JReference reference)
-    : $type = type,
+  CameraUpdateFactory$ZoomUpdate$Type.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -1051,7 +1089,11 @@ class CameraUpdateFactory$ZoomUpdate$Type extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -1127,7 +1169,9 @@ final class $CameraUpdateFactory$ZoomUpdate$Type$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : CameraUpdateFactory$ZoomUpdate$Type.fromReference(reference);
+      : CameraUpdateFactory$ZoomUpdate$Type.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1166,7 +1210,9 @@ final class $CameraUpdateFactory$ZoomUpdate$Type$Type
   @core$_.override
   CameraUpdateFactory$ZoomUpdate$Type fromReference(
     jni$_.JReference reference,
-  ) => CameraUpdateFactory$ZoomUpdate$Type.fromReference(reference);
+  ) => CameraUpdateFactory$ZoomUpdate$Type.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1197,8 +1243,9 @@ class CameraUpdateFactory$ZoomUpdate extends jni$_.JObject {
   final jni$_.JObjType<CameraUpdateFactory$ZoomUpdate> $type;
 
   @jni$_.internal
-  CameraUpdateFactory$ZoomUpdate.fromReference(jni$_.JReference reference)
-    : $type = type,
+  CameraUpdateFactory$ZoomUpdate.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -1232,7 +1279,10 @@ class CameraUpdateFactory$ZoomUpdate extends jni$_.JObject {
 
   /// from: `static public final int ZOOM_TO_POINT`
   static const ZOOM_TO_POINT = 4;
-  static final _id_getType = _class.instanceMethodId(r'getType', r'()I');
+  static final _id_getType = _class.instanceMethodId(
+    r'getType',
+    r'()I',
+  );
 
   static final _getType =
       jni$_.ProtectedJniExtensions.lookup<
@@ -1258,7 +1308,10 @@ class CameraUpdateFactory$ZoomUpdate extends jni$_.JObject {
     ).integer;
   }
 
-  static final _id_getZoom = _class.instanceMethodId(r'getZoom', r'()D');
+  static final _id_getZoom = _class.instanceMethodId(
+    r'getZoom',
+    r'()D',
+  );
 
   static final _getZoom =
       jni$_.ProtectedJniExtensions.lookup<
@@ -1284,7 +1337,10 @@ class CameraUpdateFactory$ZoomUpdate extends jni$_.JObject {
     ).doubleFloat;
   }
 
-  static final _id_getX = _class.instanceMethodId(r'getX', r'()F');
+  static final _id_getX = _class.instanceMethodId(
+    r'getX',
+    r'()F',
+  );
 
   static final _getX =
       jni$_.ProtectedJniExtensions.lookup<
@@ -1307,7 +1363,10 @@ class CameraUpdateFactory$ZoomUpdate extends jni$_.JObject {
     return _getX(reference.pointer, _id_getX as jni$_.JMethodIDPtr).float;
   }
 
-  static final _id_getY = _class.instanceMethodId(r'getY', r'()F');
+  static final _id_getY = _class.instanceMethodId(
+    r'getY',
+    r'()F',
+  );
 
   static final _getY =
       jni$_.ProtectedJniExtensions.lookup<
@@ -1330,7 +1389,9 @@ class CameraUpdateFactory$ZoomUpdate extends jni$_.JObject {
     return _getY(reference.pointer, _id_getY as jni$_.JMethodIDPtr).float;
   }
 
-  static final _id_new$ = _class.constructorId(r'(I)V');
+  static final _id_new$ = _class.constructorId(
+    r'(I)V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -1352,7 +1413,9 @@ class CameraUpdateFactory$ZoomUpdate extends jni$_.JObject {
 
   /// from: `public void <init>(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory CameraUpdateFactory$ZoomUpdate(int i) {
+  factory CameraUpdateFactory$ZoomUpdate(
+    int i,
+  ) {
     return CameraUpdateFactory$ZoomUpdate.fromReference(
       _new$(
         _class.reference.pointer,
@@ -1362,7 +1425,9 @@ class CameraUpdateFactory$ZoomUpdate extends jni$_.JObject {
     );
   }
 
-  static final _id_new$1 = _class.constructorId(r'(ID)V');
+  static final _id_new$1 = _class.constructorId(
+    r'(ID)V',
+  );
 
   static final _new$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -1385,7 +1450,10 @@ class CameraUpdateFactory$ZoomUpdate extends jni$_.JObject {
 
   /// from: `public void <init>(int i, double d)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory CameraUpdateFactory$ZoomUpdate.new$1(int i, double d) {
+  factory CameraUpdateFactory$ZoomUpdate.new$1(
+    int i,
+    double d,
+  ) {
     return CameraUpdateFactory$ZoomUpdate.fromReference(
       _new$1(
         _class.reference.pointer,
@@ -1396,7 +1464,9 @@ class CameraUpdateFactory$ZoomUpdate extends jni$_.JObject {
     );
   }
 
-  static final _id_new$2 = _class.constructorId(r'(DFF)V');
+  static final _id_new$2 = _class.constructorId(
+    r'(DFF)V',
+  );
 
   static final _new$2 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -1420,7 +1490,11 @@ class CameraUpdateFactory$ZoomUpdate extends jni$_.JObject {
 
   /// from: `public void <init>(double d, float f, float f1)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory CameraUpdateFactory$ZoomUpdate.new$2(double d, double f, double f1) {
+  factory CameraUpdateFactory$ZoomUpdate.new$2(
+    double d,
+    double f,
+    double f1,
+  ) {
     return CameraUpdateFactory$ZoomUpdate.fromReference(
       _new$2(
         _class.reference.pointer,
@@ -1494,7 +1568,9 @@ class CameraUpdateFactory$ZoomUpdate extends jni$_.JObject {
           >();
 
   /// from: `public boolean equals(java.lang.Object object)`
-  bool equals(jni$_.JObject? object) {
+  bool equals(
+    jni$_.JObject? object,
+  ) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     return _equals(
       reference.pointer,
@@ -1503,7 +1579,10 @@ class CameraUpdateFactory$ZoomUpdate extends jni$_.JObject {
     ).boolean;
   }
 
-  static final _id_hashCode$1 = _class.instanceMethodId(r'hashCode', r'()I');
+  static final _id_hashCode$1 = _class.instanceMethodId(
+    r'hashCode',
+    r'()I',
+  );
 
   static final _hashCode$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -1575,7 +1654,9 @@ final class $CameraUpdateFactory$ZoomUpdate$NullableType
   CameraUpdateFactory$ZoomUpdate? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : CameraUpdateFactory$ZoomUpdate.fromReference(reference);
+      : CameraUpdateFactory$ZoomUpdate.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1612,7 +1693,9 @@ final class $CameraUpdateFactory$ZoomUpdate$Type
   @jni$_.internal
   @core$_.override
   CameraUpdateFactory$ZoomUpdate fromReference(jni$_.JReference reference) =>
-      CameraUpdateFactory$ZoomUpdate.fromReference(reference);
+      CameraUpdateFactory$ZoomUpdate.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -1643,8 +1726,9 @@ class CameraUpdateFactory extends jni$_.JObject {
   final jni$_.JObjType<CameraUpdateFactory> $type;
 
   @jni$_.internal
-  CameraUpdateFactory.fromReference(jni$_.JReference reference)
-    : $type = type,
+  CameraUpdateFactory.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -1727,7 +1811,9 @@ class CameraUpdateFactory extends jni$_.JObject {
 
   /// from: `static public final org.maplibre.android.camera.CameraUpdate newLatLng(org.maplibre.android.geometry.LatLng latLng)`
   /// The returned object must be released after use, by calling the [release] method.
-  static cameraupdate$_.CameraUpdate newLatLng(latlng$_.LatLng latLng) {
+  static cameraupdate$_.CameraUpdate newLatLng(
+    latlng$_.LatLng latLng,
+  ) {
     final _$latLng = latLng.reference;
     return _newLatLng(
       _class.reference.pointer,
@@ -2082,7 +2168,10 @@ class CameraUpdateFactory extends jni$_.JObject {
 
   /// from: `static public final org.maplibre.android.camera.CameraUpdate zoomBy(double d, android.graphics.Point point)`
   /// The returned object must be released after use, by calling the [release] method.
-  static cameraupdate$_.CameraUpdate zoomBy(double d, jni$_.JObject point) {
+  static cameraupdate$_.CameraUpdate zoomBy(
+    double d,
+    jni$_.JObject point,
+  ) {
     final _$point = point.reference;
     return _zoomBy(
       _class.reference.pointer,
@@ -2119,7 +2208,9 @@ class CameraUpdateFactory extends jni$_.JObject {
 
   /// from: `static public final org.maplibre.android.camera.CameraUpdate zoomBy(double d)`
   /// The returned object must be released after use, by calling the [release] method.
-  static cameraupdate$_.CameraUpdate zoomBy$1(double d) {
+  static cameraupdate$_.CameraUpdate zoomBy$1(
+    double d,
+  ) {
     return _zoomBy$1(
       _class.reference.pointer,
       _id_zoomBy$1 as jni$_.JMethodIDPtr,
@@ -2218,7 +2309,9 @@ class CameraUpdateFactory extends jni$_.JObject {
 
   /// from: `static public final org.maplibre.android.camera.CameraUpdate zoomTo(double d)`
   /// The returned object must be released after use, by calling the [release] method.
-  static cameraupdate$_.CameraUpdate zoomTo(double d) {
+  static cameraupdate$_.CameraUpdate zoomTo(
+    double d,
+  ) {
     return _zoomTo(
       _class.reference.pointer,
       _id_zoomTo as jni$_.JMethodIDPtr,
@@ -2253,7 +2346,9 @@ class CameraUpdateFactory extends jni$_.JObject {
 
   /// from: `static public final org.maplibre.android.camera.CameraUpdate bearingTo(double d)`
   /// The returned object must be released after use, by calling the [release] method.
-  static cameraupdate$_.CameraUpdate bearingTo(double d) {
+  static cameraupdate$_.CameraUpdate bearingTo(
+    double d,
+  ) {
     return _bearingTo(
       _class.reference.pointer,
       _id_bearingTo as jni$_.JMethodIDPtr,
@@ -2288,7 +2383,9 @@ class CameraUpdateFactory extends jni$_.JObject {
 
   /// from: `static public final org.maplibre.android.camera.CameraUpdate tiltTo(double d)`
   /// The returned object must be released after use, by calling the [release] method.
-  static cameraupdate$_.CameraUpdate tiltTo(double d) {
+  static cameraupdate$_.CameraUpdate tiltTo(
+    double d,
+  ) {
     return _tiltTo(
       _class.reference.pointer,
       _id_tiltTo as jni$_.JMethodIDPtr,
@@ -2323,7 +2420,9 @@ class CameraUpdateFactory extends jni$_.JObject {
 
   /// from: `static public final org.maplibre.android.camera.CameraUpdate paddingTo(double[] ds)`
   /// The returned object must be released after use, by calling the [release] method.
-  static cameraupdate$_.CameraUpdate paddingTo(jni$_.JDoubleArray? ds) {
+  static cameraupdate$_.CameraUpdate paddingTo(
+    jni$_.JDoubleArray? ds,
+  ) {
     final _$ds = ds?.reference ?? jni$_.jNullReference;
     return _paddingTo(
       _class.reference.pointer,
@@ -2395,7 +2494,11 @@ final class $CameraUpdateFactory$NullableType
   @jni$_.internal
   @core$_.override
   CameraUpdateFactory? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : CameraUpdateFactory.fromReference(reference);
+      reference.isNull
+      ? null
+      : CameraUpdateFactory.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -2430,7 +2533,9 @@ final class $CameraUpdateFactory$Type
   @jni$_.internal
   @core$_.override
   CameraUpdateFactory fromReference(jni$_.JReference reference) =>
-      CameraUpdateFactory.fromReference(reference);
+      CameraUpdateFactory.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();

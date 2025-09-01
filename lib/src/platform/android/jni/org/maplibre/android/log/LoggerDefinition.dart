@@ -45,8 +45,9 @@ class LoggerDefinition extends jni$_.JObject {
   final jni$_.JObjType<LoggerDefinition> $type;
 
   @jni$_.internal
-  LoggerDefinition.fromReference(jni$_.JReference reference)
-    : $type = type,
+  LoggerDefinition.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -83,7 +84,10 @@ class LoggerDefinition extends jni$_.JObject {
           >();
 
   /// from: `public abstract void v(java.lang.String string, java.lang.String string1)`
-  void v(jni$_.JString? string, jni$_.JString? string1) {
+  void v(
+    jni$_.JString? string,
+    jni$_.JString? string1,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
     _v(
@@ -170,7 +174,10 @@ class LoggerDefinition extends jni$_.JObject {
           >();
 
   /// from: `public abstract void d(java.lang.String string, java.lang.String string1)`
-  void d(jni$_.JString? string, jni$_.JString? string1) {
+  void d(
+    jni$_.JString? string,
+    jni$_.JString? string1,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
     _d(
@@ -257,7 +264,10 @@ class LoggerDefinition extends jni$_.JObject {
           >();
 
   /// from: `public abstract void i(java.lang.String string, java.lang.String string1)`
-  void i(jni$_.JString? string, jni$_.JString? string1) {
+  void i(
+    jni$_.JString? string,
+    jni$_.JString? string1,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
     _i(
@@ -344,7 +354,10 @@ class LoggerDefinition extends jni$_.JObject {
           >();
 
   /// from: `public abstract void w(java.lang.String string, java.lang.String string1)`
-  void w(jni$_.JString? string, jni$_.JString? string1) {
+  void w(
+    jni$_.JString? string,
+    jni$_.JString? string1,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
     _w(
@@ -431,7 +444,10 @@ class LoggerDefinition extends jni$_.JObject {
           >();
 
   /// from: `public abstract void e(java.lang.String string, java.lang.String string1)`
-  void e(jni$_.JString? string, jni$_.JString? string1) {
+  void e(
+    jni$_.JString? string,
+    jni$_.JString? string1,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
     _e(
@@ -500,7 +516,11 @@ class LoggerDefinition extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -645,10 +665,14 @@ class LoggerDefinition extends jni$_.JObject {
     _$impls[$a] = $impl;
   }
 
-  factory LoggerDefinition.implement($LoggerDefinition $impl) {
+  factory LoggerDefinition.implement(
+    $LoggerDefinition $impl,
+  ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return LoggerDefinition.fromReference($i.implementReference());
+    return LoggerDefinition.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -920,7 +944,11 @@ final class $LoggerDefinition$NullableType
   @jni$_.internal
   @core$_.override
   LoggerDefinition? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : LoggerDefinition.fromReference(reference);
+      reference.isNull
+      ? null
+      : LoggerDefinition.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -954,7 +982,9 @@ final class $LoggerDefinition$Type extends jni$_.JObjType<LoggerDefinition> {
   @jni$_.internal
   @core$_.override
   LoggerDefinition fromReference(jni$_.JReference reference) =>
-      LoggerDefinition.fromReference(reference);
+      LoggerDefinition.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

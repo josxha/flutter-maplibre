@@ -51,8 +51,9 @@ class HeatmapLayer extends layer$_.Layer {
   final jni$_.JObjType<HeatmapLayer> $type;
 
   @jni$_.internal
-  HeatmapLayer.fromReference(jni$_.JReference reference)
-    : $type = type,
+  HeatmapLayer.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -89,7 +90,10 @@ class HeatmapLayer extends layer$_.Layer {
 
   /// from: `public void <init>(java.lang.String string, java.lang.String string1)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory HeatmapLayer(jni$_.JString? string, jni$_.JString? string1) {
+  factory HeatmapLayer(
+    jni$_.JString? string,
+    jni$_.JString? string1,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
     return HeatmapLayer.fromReference(
@@ -126,7 +130,9 @@ class HeatmapLayer extends layer$_.Layer {
           >();
 
   /// from: `public void setSourceLayer(java.lang.String string)`
-  void setSourceLayer(jni$_.JString? string) {
+  void setSourceLayer(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     _setSourceLayer(
       reference.pointer,
@@ -160,7 +166,9 @@ class HeatmapLayer extends layer$_.Layer {
 
   /// from: `public org.maplibre.android.style.layers.HeatmapLayer withSourceLayer(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  HeatmapLayer withSourceLayer(jni$_.JString? string) {
+  HeatmapLayer withSourceLayer(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return _withSourceLayer(
       reference.pointer,
@@ -253,7 +261,9 @@ class HeatmapLayer extends layer$_.Layer {
           >();
 
   /// from: `public void setFilter(org.maplibre.android.style.expressions.Expression expression)`
-  void setFilter(jni$_.JObject expression) {
+  void setFilter(
+    jni$_.JObject expression,
+  ) {
     final _$expression = expression.reference;
     _setFilter(
       reference.pointer,
@@ -287,7 +297,9 @@ class HeatmapLayer extends layer$_.Layer {
 
   /// from: `public org.maplibre.android.style.layers.HeatmapLayer withFilter(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
-  HeatmapLayer withFilter(jni$_.JObject expression) {
+  HeatmapLayer withFilter(
+    jni$_.JObject expression,
+  ) {
     final _$expression = expression.reference;
     return _withFilter(
       reference.pointer,
@@ -773,8 +785,11 @@ final class $HeatmapLayer$NullableType extends jni$_.JObjType<HeatmapLayer?> {
 
   @jni$_.internal
   @core$_.override
-  HeatmapLayer? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : HeatmapLayer.fromReference(reference);
+  HeatmapLayer? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : HeatmapLayer.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const layer$_.$Layer$NullableType();
@@ -808,7 +823,9 @@ final class $HeatmapLayer$Type extends jni$_.JObjType<HeatmapLayer> {
   @jni$_.internal
   @core$_.override
   HeatmapLayer fromReference(jni$_.JReference reference) =>
-      HeatmapLayer.fromReference(reference);
+      HeatmapLayer.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const layer$_.$Layer$NullableType();

@@ -49,8 +49,9 @@ class SurfaceViewMapRenderer extends maprenderer$_.MapRenderer {
   final jni$_.JObjType<SurfaceViewMapRenderer> $type;
 
   @jni$_.internal
-  SurfaceViewMapRenderer.fromReference(jni$_.JReference reference)
-    : $type = type,
+  SurfaceViewMapRenderer.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -142,7 +143,10 @@ class SurfaceViewMapRenderer extends maprenderer$_.MapRenderer {
     ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
-  static final _id_onStop = _class.instanceMethodId(r'onStop', r'()V');
+  static final _id_onStop = _class.instanceMethodId(
+    r'onStop',
+    r'()V',
+  );
 
   static final _onStop =
       jni$_.ProtectedJniExtensions.lookup<
@@ -165,7 +169,10 @@ class SurfaceViewMapRenderer extends maprenderer$_.MapRenderer {
     _onStop(reference.pointer, _id_onStop as jni$_.JMethodIDPtr).check();
   }
 
-  static final _id_onPause = _class.instanceMethodId(r'onPause', r'()V');
+  static final _id_onPause = _class.instanceMethodId(
+    r'onPause',
+    r'()V',
+  );
 
   static final _onPause =
       jni$_.ProtectedJniExtensions.lookup<
@@ -188,7 +195,10 @@ class SurfaceViewMapRenderer extends maprenderer$_.MapRenderer {
     _onPause(reference.pointer, _id_onPause as jni$_.JMethodIDPtr).check();
   }
 
-  static final _id_onDestroy = _class.instanceMethodId(r'onDestroy', r'()V');
+  static final _id_onDestroy = _class.instanceMethodId(
+    r'onDestroy',
+    r'()V',
+  );
 
   static final _onDestroy =
       jni$_.ProtectedJniExtensions.lookup<
@@ -211,7 +221,10 @@ class SurfaceViewMapRenderer extends maprenderer$_.MapRenderer {
     _onDestroy(reference.pointer, _id_onDestroy as jni$_.JMethodIDPtr).check();
   }
 
-  static final _id_onStart = _class.instanceMethodId(r'onStart', r'()V');
+  static final _id_onStart = _class.instanceMethodId(
+    r'onStart',
+    r'()V',
+  );
 
   static final _onStart =
       jni$_.ProtectedJniExtensions.lookup<
@@ -234,7 +247,10 @@ class SurfaceViewMapRenderer extends maprenderer$_.MapRenderer {
     _onStart(reference.pointer, _id_onStart as jni$_.JMethodIDPtr).check();
   }
 
-  static final _id_onResume = _class.instanceMethodId(r'onResume', r'()V');
+  static final _id_onResume = _class.instanceMethodId(
+    r'onResume',
+    r'()V',
+  );
 
   static final _onResume =
       jni$_.ProtectedJniExtensions.lookup<
@@ -281,7 +297,9 @@ class SurfaceViewMapRenderer extends maprenderer$_.MapRenderer {
           >();
 
   /// from: `public void onSurfaceCreated(android.view.Surface surface)`
-  void onSurfaceCreated(jni$_.JObject? surface) {
+  void onSurfaceCreated(
+    jni$_.JObject? surface,
+  ) {
     final _$surface = surface?.reference ?? jni$_.jNullReference;
     _onSurfaceCreated(
       reference.pointer,
@@ -344,7 +362,10 @@ class SurfaceViewMapRenderer extends maprenderer$_.MapRenderer {
           >();
 
   /// from: `public void onSurfaceChanged(int i, int i1)`
-  void onSurfaceChanged(int i, int i1) {
+  void onSurfaceChanged(
+    int i,
+    int i1,
+  ) {
     _onSurfaceChanged(
       reference.pointer,
       _id_onSurfaceChanged as jni$_.JMethodIDPtr,
@@ -435,7 +456,9 @@ class SurfaceViewMapRenderer extends maprenderer$_.MapRenderer {
           >();
 
   /// from: `public void queueEvent(java.lang.Runnable runnable)`
-  void queueEvent(jni$_.JObject? runnable) {
+  void queueEvent(
+    jni$_.JObject? runnable,
+  ) {
     final _$runnable = runnable?.reference ?? jni$_.jNullReference;
     _queueEvent(
       reference.pointer,
@@ -555,7 +578,11 @@ final class $SurfaceViewMapRenderer$NullableType
   @jni$_.internal
   @core$_.override
   SurfaceViewMapRenderer? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : SurfaceViewMapRenderer.fromReference(reference);
+      reference.isNull
+      ? null
+      : SurfaceViewMapRenderer.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>
@@ -592,7 +619,9 @@ final class $SurfaceViewMapRenderer$Type
   @jni$_.internal
   @core$_.override
   SurfaceViewMapRenderer fromReference(jni$_.JReference reference) =>
-      SurfaceViewMapRenderer.fromReference(reference);
+      SurfaceViewMapRenderer.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>
