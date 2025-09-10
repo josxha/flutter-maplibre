@@ -2,7 +2,7 @@ group = "com.github.josxha.maplibre"
 version = "1.0-SNAPSHOT"
 
 buildscript {
-    ext.kotlin_version = "2.1.0"
+    ext.kotlin_version = "2.2.10"
     repositories {
         google()
         mavenCentral()
@@ -12,10 +12,10 @@ buildscript {
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:8.11.1")
+        classpath("com.android.tools.build:gradle:8.12.2")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
         // noinspection GradleDynamicVersion
-        classpath("org.jlleitschuh.gradle:ktlint-gradle:13.0.+")
+        classpath("org.jlleitschuh.gradle:ktlint-gradle:13.1.+")
     }
 }
 
@@ -78,7 +78,7 @@ android {
 //        implementation 'org.maplibre.gl:android-plugin-offline-v9:3.0.2'
 // JNIGEN        implementation 'com.squareup.okhttp3:okhttp:4.12.0'
         testImplementation("org.jetbrains.kotlin:kotlin-test")
-        testImplementation("org.mockito:mockito-core:5.18.0")
+        testImplementation("org.mockito:mockito-core:5.19.0")
     }
 
     testOptions {
