@@ -89,11 +89,14 @@ class WidgetLayer extends StatelessWidget {
         );
 
     if (allowInteraction) {
-      // Web requires a PointerInterceptor to prevent the HtmlElementView from
-      // recieving gestures.
-      return PointerInterceptor(child: buildChildAsync(points));
+      if (kIsWeb) {
+        // Web requires a PointerInterceptor to prevent the HtmlElementView from
+        // receiving gestures.
+        return PointerInterceptor(child: buildChildAsync(points));
+      }
+      return buildChildAsync(points);
     } else {
-      // Android needs a TranslucentPointer so that the widgets don't prevent
+      // Android and iOS needs a TranslucentPointer so that the widgets don't prevent
       // panning on the map.
       return TranslucentPointer(child: buildChildAsync(points));
     }

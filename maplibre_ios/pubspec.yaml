@@ -1,0 +1,114 @@
+name: maplibre_ios
+description: "Helper package for maplibre that provides iOS FFI bindings"
+version: 0.0.1
+homepage: https://github.com/josxha/flutter-maplibre
+
+environment:
+  flutter: ^3.29.0
+  sdk: ^3.7.0
+
+dependencies:
+  ffi: ^2.1.3
+  flutter:
+    sdk: flutter
+  objective_c: ^8.0.0
+
+dev_dependencies:
+  ffigen: ^19.0.0
+  very_good_analysis: ^9.0.0
+
+flutter:
+  plugin:
+    platforms:
+      ios:
+        pluginClass: MapLibreIosPlugin
+
+ffigen:
+  name: MapLibreFFi
+  description: Bindings for MapLibre iOS.
+  language: objc
+  output: 'lib/maplibre_ffi.dart'
+  exclude-all-by-default: true
+  objc-interfaces:
+    include:
+      - 'NSString'
+      - 'MapLibreRegistry'
+      - 'MLNMapView'
+      - 'MLNMapCamera'
+      - 'CLLocationCoordinate2D'
+      - 'MLNMapProjection'
+      - 'MLNStyle'
+      - 'MLNSource'
+      - 'MLNRasterTileSource'
+      - 'MLNVectorTileSource'
+      - 'MLNImageSource'
+      - 'MLNRasterDEMSource'
+      - 'MLNVectorTileSource'
+      - 'MLNBackgroundStyleLayer'
+      - 'MLNCircleStyleLayer'
+      - 'MLNFillExtrusionStyleLayer'
+      - 'MLNFillStyleLayer'
+      - 'MLNHeatmapStyleLayer'
+      - 'MLNHillshadeStyleLayer'
+      - 'MLNLineStyleLayer'
+      - 'MLNRasterStyleLayer'
+      - 'MLNSymbolStyleLayer'
+      - 'MLNVectorStyleLayer'
+      - 'MLNAttributionInfo'
+      - 'NSAttributedString'
+      - 'MLNShapeSource'
+      - 'MLNImageSource'
+      - 'MLNShape'
+      - 'MLNRasterDEMSource'
+      - 'MLNOfflineStorage'
+      - 'MLNTilePyramidOfflineRegion'
+      - 'MLNOfflinePack'
+      - 'MLNOfflineRegion'
+      - 'MLNTilePyramidOfflineRegion'
+      - 'NSImage'
+      - 'NSExpression'
+      - 'Helpers'
+    module:
+      'MapLibreRegistry': 'maplibre_ios'
+      'Helpers': 'maplibre_ios'
+      'MLNMapView': 'MapLibre'
+      'MLNMapCamera': 'MapLibre'
+      'MLNVectorTileSource': 'MapLibre'
+      'MLNOfflinePack': 'MapLibre'
+      'MLNOfflineRegion': 'MapLibre'
+  headers:
+    entry-points:
+      - 'ios/maplibre_ios/Sources/maplibre_ios/MapLibreRegistry.h'
+      - 'ios/maplibre_ios/Sources/maplibre_ios/Helpers.h'
+      # using the MapLibre.h file doesn't seem to work
+      # TODO find a better solution for the entry points
+      #- '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MapLibre.h'
+      - '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNMapView.h'
+      - '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNMapProjection.h'
+      - '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNStyle.h'
+      - '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNSource.h'
+      - '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNVectorTileSource.h'
+      - '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNComputedShapeSource.h'
+      - '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNImageSource.h'
+      - '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNRasterTileSource.h'
+      - '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNRasterDEMSource.h'
+      - '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNBackgroundStyleLayer.h'
+      - '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNCircleStyleLayer.h'
+      - '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNFillExtrusionStyleLayer.h'
+      - '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNFillStyleLayer.h'
+      - '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNHeatmapStyleLayer.h'
+      - '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNHillshadeStyleLayer.h'
+      - '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNLineStyleLayer.h'
+      - '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNRasterStyleLayer.h'
+      - '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNSymbolStyleLayer.h'
+      - '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNVectorStyleLayer.h'
+      - '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNAttributionInfo.h'
+      - '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/NSExpression+MLNAdditions.h'
+      - '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNOfflineStorage.h'
+      - '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNOfflinePack.h'
+      - '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNOfflineRegion.h'
+      - '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers/MLNTilePyramidOfflineRegion.h'
+    #include-directives:
+      #- '/Users/joscha/Library/Caches/CocoaPods/Pods/Release/MapLibre/6.17.1-46027/MapLibre.xcframework/ios-arm64_x86_64-simulator/MapLibre.framework/Headers'
+  preamble: |
+    // ignore_for_file: type=lint, unused_element, unused_field
