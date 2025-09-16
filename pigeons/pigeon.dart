@@ -6,13 +6,13 @@ import 'package:pigeon/pigeon.dart';
     dartOptions: DartOptions(),
     dartPackageName: 'maplibre',
     // linux
-    gobjectHeaderOut: 'linux/pigeon.g.h',
-    gobjectSourceOut: 'linux/pigeon.g.cc',
-    gobjectOptions: GObjectOptions(),
+    // gobjectHeaderOut: 'linux/pigeon.g.h',
+    // gobjectSourceOut: 'linux/pigeon.g.cc',
+    // gobjectOptions: GObjectOptions(),
     // windows
-    cppOptions: CppOptions(namespace: 'pigeon_maplibre'),
-    cppHeaderOut: 'windows/runner/pigeon.g.h',
-    cppSourceOut: 'windows/runner/pigeon.g.cpp',
+    // cppOptions: CppOptions(namespace: 'pigeon_maplibre'),
+    // cppHeaderOut: 'windows/runner/pigeon.g.h',
+    // cppSourceOut: 'windows/runner/pigeon.g.cpp',
     // android
     kotlinOut: 'android/src/main/kotlin/com/github/josxha/maplibre/Pigeon.g.kt',
     kotlinOptions: KotlinOptions(),
@@ -182,6 +182,8 @@ class MapOptions {
     required this.maxPitch,
     required this.gestures,
     required this.androidTextureMode,
+    required this.androidTranslucentTextureSurface,
+    required this.androidForegroundLoadColor,
   });
 
   /// The URL of the used map style.
@@ -219,6 +221,12 @@ class MapOptions {
 
   /// Toggle the texture mode on android.
   final bool androidTextureMode;
+
+  /// Toggle the translucent texture surface mode on Android.
+  final bool androidTranslucentTextureSurface;
+
+  /// The MapView foreground color that is used when the map surface is being created.
+  final int androidForegroundLoadColor;
 }
 
 /// Map gestures

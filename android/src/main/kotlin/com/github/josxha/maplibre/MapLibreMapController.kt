@@ -10,10 +10,12 @@ import MapLibreHostApi
 import MapOptions
 import android.content.Context
 import android.graphics.BitmapFactory
+import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
 import androidx.lifecycle.DefaultLifecycleObserver
 import com.google.gson.Gson
+import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.platform.PlatformView
 import org.maplibre.android.MapLibre
@@ -48,6 +50,7 @@ class MapLibreMapController(
     private val context: Context,
     private val lifecycleProvider: LifecycleProvider,
     binaryMessenger: BinaryMessenger,
+    private val flutterAssets: FlutterPlugin.FlutterAssets,
 ) : PlatformView,
     DefaultLifecycleObserver,
     OnMapReadyCallback,
@@ -86,6 +89,8 @@ class MapLibreMapController(
                     .logoEnabled(false)
                     // TODO: textureMode comes at a significant performance penalty, https://maplibre.org/maplibre-native/android/api/-map-libre%20-native%20-android/org.maplibre.android.maps/-map-libre-map-options/texture-mode.html
                     .textureMode(mapOptions.androidTextureMode)
+                    .foregroundLoadColor(mapOptions.androidForegroundLoadColor.toInt())
+                    .translucentTextureSurface(mapOptions.androidTranslucentTextureSurface)
                     .compassEnabled(false)
                     .minZoomPreference(mapOptions.minZoom)
                     .maxZoomPreference(mapOptions.maxZoom)
@@ -139,16 +144,51 @@ class MapLibreMapController(
                 }
             if (changeReason != null) flutterApi.onStartMoveCamera(changeReason) { }
         }
-        val style = Style.Builder().fromUri(mapOptions.style)
-        mapLibreMap.setStyle(style) { loadedStyle ->
-            this.style = loadedStyle
-            flutterApi.onStyleLoaded { }
+
+        val style = getStyle(mapOptions.style)
+        try {
+            mapLibreMap.setStyle(style) { loadedStyle ->
+                this.style = loadedStyle
+                flutterApi.onStyleLoaded { }
+            }
+        } catch (e: Exception) {
+            Log.e("MapLibreMapController", "setStyle - error: ${e.message}")
         }
         flutterApi.onMapReady { }
     }
 
     override fun dispose() {
         // free any resources
+    }
+
+    private fun getStyle(styleString: String): Style.Builder? {
+        val style = styleString.trim()
+
+        // Check if style is null or empty.
+        if (style.isEmpty()) {
+            Log.e("MapLibreMapController", "getStyle - string empty or null")
+            return null
+        }
+
+        // Returns the Style based on its type.
+        return when {
+            // JSON style objects
+            style.startsWith("{") ->
+                Style.Builder().fromJson(style)
+
+            // Absolute file paths
+            style.startsWith("/") ->
+                Style.Builder().fromUri("file://$style")
+
+            // Asset files (non-URL, non-Mapbox)
+            !style.startsWith("http://") &&
+                !style.startsWith("https://") &&
+                !style.startsWith("mapbox://") ->
+                Style.Builder().fromUri("asset://" + flutterAssets.getAssetFilePathByName(style))
+
+            // Remote URIs (HTTP/HTTPS/Mapbox)
+            else -> Style.Builder().fromUri(style)
+        }
     }
 
     private val gson = Gson()

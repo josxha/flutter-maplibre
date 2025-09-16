@@ -45,8 +45,9 @@ class HttpIdentifier extends jni$_.JObject {
   final jni$_.JObjType<HttpIdentifier> $type;
 
   @jni$_.internal
-  HttpIdentifier.fromReference(jni$_.JReference reference)
-    : $type = type,
+  HttpIdentifier.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -98,8 +99,11 @@ final class $HttpIdentifier$NullableType
 
   @jni$_.internal
   @core$_.override
-  HttpIdentifier? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : HttpIdentifier.fromReference(reference);
+  HttpIdentifier? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : HttpIdentifier.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -133,7 +137,9 @@ final class $HttpIdentifier$Type extends jni$_.JObjType<HttpIdentifier> {
   @jni$_.internal
   @core$_.override
   HttpIdentifier fromReference(jni$_.JReference reference) =>
-      HttpIdentifier.fromReference(reference);
+      HttpIdentifier.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

@@ -45,8 +45,9 @@ class TooManyIconsException extends jni$_.JObject {
   final jni$_.JObjType<TooManyIconsException> $type;
 
   @jni$_.internal
-  TooManyIconsException.fromReference(jni$_.JReference reference)
-    : $type = type,
+  TooManyIconsException.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -56,7 +57,9 @@ class TooManyIconsException extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $TooManyIconsException$NullableType();
   static const type = $TooManyIconsException$Type();
-  static final _id_new$ = _class.constructorId(r'()V');
+  static final _id_new$ = _class.constructorId(
+    r'()V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -96,7 +99,11 @@ final class $TooManyIconsException$NullableType
   @jni$_.internal
   @core$_.override
   TooManyIconsException? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : TooManyIconsException.fromReference(reference);
+      reference.isNull
+      ? null
+      : TooManyIconsException.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -132,7 +139,9 @@ final class $TooManyIconsException$Type
   @jni$_.internal
   @core$_.override
   TooManyIconsException fromReference(jni$_.JReference reference) =>
-      TooManyIconsException.fromReference(reference);
+      TooManyIconsException.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

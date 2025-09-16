@@ -56,8 +56,10 @@ class LocationEngineProxy<$T extends jni$_.JObject?> extends jni$_.JObject {
   final jni$_.JObjType<$T> T;
 
   @jni$_.internal
-  LocationEngineProxy.fromReference(this.T, jni$_.JReference reference)
-    : $type = type<$T>(T),
+  LocationEngineProxy.fromReference(
+    this.T,
+    jni$_.JReference reference,
+  ) : $type = type<$T>(T),
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -66,14 +68,20 @@ class LocationEngineProxy<$T extends jni$_.JObject?> extends jni$_.JObject {
 
   /// The type which includes information such as the signature of this class.
   static $LocationEngineProxy$NullableType<$T>
-  nullableType<$T extends jni$_.JObject?>(jni$_.JObjType<$T> T) {
-    return $LocationEngineProxy$NullableType<$T>(T);
+  nullableType<$T extends jni$_.JObject?>(
+    jni$_.JObjType<$T> T,
+  ) {
+    return $LocationEngineProxy$NullableType<$T>(
+      T,
+    );
   }
 
   static $LocationEngineProxy$Type<$T> type<$T extends jni$_.JObject?>(
     jni$_.JObjType<$T> T,
   ) {
-    return $LocationEngineProxy$Type<$T>(T);
+    return $LocationEngineProxy$Type<$T>(
+      T,
+    );
   }
 
   static final _id_new$ = _class.constructorId(
@@ -309,7 +317,9 @@ class LocationEngineProxy<$T extends jni$_.JObject?> extends jni$_.JObject {
           >();
 
   /// from: `public void removeLocationUpdates(android.app.PendingIntent pendingIntent)`
-  void removeLocationUpdates$1(jni$_.JObject? pendingIntent) {
+  void removeLocationUpdates$1(
+    jni$_.JObject? pendingIntent,
+  ) {
     final _$pendingIntent = pendingIntent?.reference ?? jni$_.jNullReference;
     _removeLocationUpdates$1(
       reference.pointer,
@@ -325,7 +335,9 @@ final class $LocationEngineProxy$NullableType<$T extends jni$_.JObject?>
   final jni$_.JObjType<$T> T;
 
   @jni$_.internal
-  const $LocationEngineProxy$NullableType(this.T);
+  const $LocationEngineProxy$NullableType(
+    this.T,
+  );
 
   @jni$_.internal
   @core$_.override
@@ -337,7 +349,10 @@ final class $LocationEngineProxy$NullableType<$T extends jni$_.JObject?>
   LocationEngineProxy<$T>? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : LocationEngineProxy<$T>.fromReference(T, reference);
+      : LocationEngineProxy<$T>.fromReference(
+          T,
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -367,7 +382,9 @@ final class $LocationEngineProxy$Type<$T extends jni$_.JObject?>
   final jni$_.JObjType<$T> T;
 
   @jni$_.internal
-  const $LocationEngineProxy$Type(this.T);
+  const $LocationEngineProxy$Type(
+    this.T,
+  );
 
   @jni$_.internal
   @core$_.override
@@ -377,7 +394,10 @@ final class $LocationEngineProxy$Type<$T extends jni$_.JObject?>
   @jni$_.internal
   @core$_.override
   LocationEngineProxy<$T> fromReference(jni$_.JReference reference) =>
-      LocationEngineProxy<$T>.fromReference(T, reference);
+      LocationEngineProxy<$T>.fromReference(
+        T,
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

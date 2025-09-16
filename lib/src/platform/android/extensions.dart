@@ -46,7 +46,7 @@ extension OffsetExt on Offset {
   pigeon.Offset toOffset() => pigeon.Offset(x: dx, y: dy);
 
   /// Convert an [Offset] to an [jni.PointF].
-  jni.PointF toPointF() => jni.PointF.new$1(dx, dy);
+  jni.PointF toPointF() => jni.PointF.new$3(dx, dy);
 }
 
 /// Extension methods for the [LngLatBounds] class. Not exported publicly.

@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/inherited_model.dart';
 
@@ -24,6 +24,8 @@ class MapOptions {
     this.gestures = const MapGestures.all(),
     this.androidTextureMode = true,
     this.androidMode = AndroidPlatformViewMode.tlhc_vd,
+    this.androidTranslucentTextureSurface = false,
+    this.androidForegroundLoadColor = Colors.transparent,
   }) : initPitch = pitch ?? initPitch;
 
   /// Find the [MapOptions] of the closest [MapLibreMap] in the widget tree.
@@ -39,6 +41,9 @@ class MapOptions {
 
   /// The style URL that should get used. If not set, the default MapLibre style
   /// is used (https://demotiles.maplibre.org/style.json).
+  ///
+  /// If you need to change to a different map style later on,
+  /// use [MapController.setStyle].
   final String initStyle;
 
   /// The initial zoom level.
@@ -88,4 +93,13 @@ class MapOptions {
   /// textureMode comes at a significant performance penalty.
   /// https://maplibre.org/maplibre-native/android/api/-map-libre%20-native%20-android/org.maplibre.android.maps/-map-libre-map-options/texture-mode.html
   final bool androidTextureMode;
+
+  /// Toggle the translucent texture surface mode on Android.
+  /// This enables textureMode and comes at a significant performance penalty.
+  ///
+  /// **NOTE**! This may cause **buffer management issues** on some Android devices, so [AndroidPlatformViewMode.hc] use is recommended.
+  final bool androidTranslucentTextureSurface;
+
+  /// The MapView foreground color that is used when the map surface is being created.
+  final Color androidForegroundLoadColor;
 }

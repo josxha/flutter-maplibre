@@ -45,8 +45,9 @@ class Image extends jni$_.JObject {
   final jni$_.JObjType<Image> $type;
 
   @jni$_.internal
-  Image.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Image.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -56,7 +57,9 @@ class Image extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $Image$NullableType();
   static const type = $Image$Type();
-  static final _id_new$ = _class.constructorId(r'([BFLjava/lang/String;IIZ)V');
+  static final _id_new$ = _class.constructorId(
+    r'([BFLjava/lang/String;IIZ)V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -204,8 +207,11 @@ final class $Image$NullableType extends jni$_.JObjType<Image?> {
 
   @jni$_.internal
   @core$_.override
-  Image? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : Image.fromReference(reference);
+  Image? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : Image.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -238,8 +244,9 @@ final class $Image$Type extends jni$_.JObjType<Image> {
 
   @jni$_.internal
   @core$_.override
-  Image fromReference(jni$_.JReference reference) =>
-      Image.fromReference(reference);
+  Image fromReference(jni$_.JReference reference) => Image.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

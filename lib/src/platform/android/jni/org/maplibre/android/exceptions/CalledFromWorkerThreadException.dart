@@ -45,8 +45,9 @@ class CalledFromWorkerThreadException extends jni$_.JObject {
   final jni$_.JObjType<CalledFromWorkerThreadException> $type;
 
   @jni$_.internal
-  CalledFromWorkerThreadException.fromReference(jni$_.JReference reference)
-    : $type = type,
+  CalledFromWorkerThreadException.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -56,7 +57,9 @@ class CalledFromWorkerThreadException extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $CalledFromWorkerThreadException$NullableType();
   static const type = $CalledFromWorkerThreadException$Type();
-  static final _id_new$ = _class.constructorId(r'(Ljava/lang/String;)V');
+  static final _id_new$ = _class.constructorId(
+    r'(Ljava/lang/String;)V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -78,7 +81,9 @@ class CalledFromWorkerThreadException extends jni$_.JObject {
 
   /// from: `public void <init>(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory CalledFromWorkerThreadException(jni$_.JString? string) {
+  factory CalledFromWorkerThreadException(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return CalledFromWorkerThreadException.fromReference(
       _new$(
@@ -105,7 +110,9 @@ final class $CalledFromWorkerThreadException$NullableType
   CalledFromWorkerThreadException? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : CalledFromWorkerThreadException.fromReference(reference);
+      : CalledFromWorkerThreadException.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -142,7 +149,9 @@ final class $CalledFromWorkerThreadException$Type
   @jni$_.internal
   @core$_.override
   CalledFromWorkerThreadException fromReference(jni$_.JReference reference) =>
-      CalledFromWorkerThreadException.fromReference(reference);
+      CalledFromWorkerThreadException.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

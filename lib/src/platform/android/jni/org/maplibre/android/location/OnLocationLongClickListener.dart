@@ -45,8 +45,9 @@ class OnLocationLongClickListener extends jni$_.JObject {
   final jni$_.JObjType<OnLocationLongClickListener> $type;
 
   @jni$_.internal
-  OnLocationLongClickListener.fromReference(jni$_.JReference reference)
-    : $type = type,
+  OnLocationLongClickListener.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -94,7 +95,11 @@ class OnLocationLongClickListener extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -155,7 +160,9 @@ class OnLocationLongClickListener extends jni$_.JObject {
   ) {
     final $i = jni$_.JImplementer();
     implementIn($i, $impl);
-    return OnLocationLongClickListener.fromReference($i.implementReference());
+    return OnLocationLongClickListener.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
@@ -198,7 +205,9 @@ final class $OnLocationLongClickListener$NullableType
   OnLocationLongClickListener? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : OnLocationLongClickListener.fromReference(reference);
+      : OnLocationLongClickListener.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -234,7 +243,9 @@ final class $OnLocationLongClickListener$Type
   @jni$_.internal
   @core$_.override
   OnLocationLongClickListener fromReference(jni$_.JReference reference) =>
-      OnLocationLongClickListener.fromReference(reference);
+      OnLocationLongClickListener.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

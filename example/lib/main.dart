@@ -13,6 +13,7 @@ import 'package:maplibre_example/menu_page.dart';
 import 'package:maplibre_example/offline_page.dart';
 import 'package:maplibre_example/parameters_page.dart';
 import 'package:maplibre_example/permissions_page.dart';
+import 'package:maplibre_example/pmtiles_page.dart';
 import 'package:maplibre_example/style_layers_circle_page.dart';
 import 'package:maplibre_example/style_layers_fill_extrusion_page.dart';
 import 'package:maplibre_example/style_layers_fill_page.dart';
@@ -22,6 +23,7 @@ import 'package:maplibre_example/style_layers_line_page.dart';
 import 'package:maplibre_example/style_layers_raster_page.dart';
 import 'package:maplibre_example/style_layers_symbol_page.dart';
 import 'package:maplibre_example/styled_map_page.dart';
+import 'package:maplibre_example/translucent_map_page.dart';
 import 'package:maplibre_example/two_maps_page.dart';
 import 'package:maplibre_example/user_location_page.dart';
 import 'package:maplibre_example/widget_layer_interactive_page.dart';
@@ -46,6 +48,8 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         MenuPage.location: (context) => const MenuPage(),
+        TranslucentMapPage.location: (context) => const TranslucentMapPage(),
+        PmTilesPage.location: (context) => const PmTilesPage(),
         KioskPage.location: (context) => const KioskPage(),
         AnimationPage.location: (context) => const AnimationPage(),
         GesturesPage.location: (context) => const GesturesPage(),

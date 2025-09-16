@@ -12,6 +12,7 @@ import 'package:maplibre_example/layers_polyline_page.dart';
 import 'package:maplibre_example/offline_page.dart';
 import 'package:maplibre_example/parameters_page.dart';
 import 'package:maplibre_example/permissions_page.dart';
+import 'package:maplibre_example/pmtiles_page.dart';
 import 'package:maplibre_example/style_layers_circle_page.dart';
 import 'package:maplibre_example/style_layers_fill_extrusion_page.dart';
 import 'package:maplibre_example/style_layers_fill_page.dart';
@@ -21,6 +22,7 @@ import 'package:maplibre_example/style_layers_line_page.dart';
 import 'package:maplibre_example/style_layers_raster_page.dart';
 import 'package:maplibre_example/style_layers_symbol_page.dart';
 import 'package:maplibre_example/styled_map_page.dart';
+import 'package:maplibre_example/translucent_map_page.dart';
 import 'package:maplibre_example/two_maps_page.dart';
 import 'package:maplibre_example/user_location_page.dart';
 import 'package:maplibre_example/widget_layer_interactive_page.dart';
@@ -46,6 +48,16 @@ class MenuPage extends StatelessWidget {
                 label: 'Styled Map',
                 iconData: Icons.map,
                 location: StyledMapPage.location,
+              ),
+              ItemCard(
+                label: 'Translucent Map',
+                iconData: Icons.map_outlined,
+                location: TranslucentMapPage.location,
+              ),
+              ItemCard(
+                label: 'PMTiles Source',
+                iconData: Icons.file_open,
+                location: PmTilesPage.location,
               ),
               ItemCard(
                 label: 'Parameters',

@@ -51,8 +51,10 @@ class PaintPropertyValue<$T extends jni$_.JObject?>
   final jni$_.JObjType<$T> T;
 
   @jni$_.internal
-  PaintPropertyValue.fromReference(this.T, jni$_.JReference reference)
-    : $type = type<$T>(T),
+  PaintPropertyValue.fromReference(
+    this.T,
+    jni$_.JReference reference,
+  ) : $type = type<$T>(T),
       super.fromReference(T.nullableType, reference);
 
   static final _class = jni$_.JClass.forName(
@@ -61,14 +63,20 @@ class PaintPropertyValue<$T extends jni$_.JObject?>
 
   /// The type which includes information such as the signature of this class.
   static $PaintPropertyValue$NullableType<$T>
-  nullableType<$T extends jni$_.JObject?>(jni$_.JObjType<$T> T) {
-    return $PaintPropertyValue$NullableType<$T>(T);
+  nullableType<$T extends jni$_.JObject?>(
+    jni$_.JObjType<$T> T,
+  ) {
+    return $PaintPropertyValue$NullableType<$T>(
+      T,
+    );
   }
 
   static $PaintPropertyValue$Type<$T> type<$T extends jni$_.JObject?>(
     jni$_.JObjType<$T> T,
   ) {
-    return $PaintPropertyValue$Type<$T>(T);
+    return $PaintPropertyValue$Type<$T>(
+      T,
+    );
   }
 
   static final _id_new$ = _class.constructorId(
@@ -123,7 +131,9 @@ final class $PaintPropertyValue$NullableType<$T extends jni$_.JObject?>
   final jni$_.JObjType<$T> T;
 
   @jni$_.internal
-  const $PaintPropertyValue$NullableType(this.T);
+  const $PaintPropertyValue$NullableType(
+    this.T,
+  );
 
   @jni$_.internal
   @core$_.override
@@ -135,7 +145,10 @@ final class $PaintPropertyValue$NullableType<$T extends jni$_.JObject?>
   PaintPropertyValue<$T>? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : PaintPropertyValue<$T>.fromReference(T, reference);
+      : PaintPropertyValue<$T>.fromReference(
+          T,
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>
@@ -166,7 +179,9 @@ final class $PaintPropertyValue$Type<$T extends jni$_.JObject?>
   final jni$_.JObjType<$T> T;
 
   @jni$_.internal
-  const $PaintPropertyValue$Type(this.T);
+  const $PaintPropertyValue$Type(
+    this.T,
+  );
 
   @jni$_.internal
   @core$_.override
@@ -176,7 +191,10 @@ final class $PaintPropertyValue$Type<$T extends jni$_.JObject?>
   @jni$_.internal
   @core$_.override
   PaintPropertyValue<$T> fromReference(jni$_.JReference reference) =>
-      PaintPropertyValue<$T>.fromReference(T, reference);
+      PaintPropertyValue<$T>.fromReference(
+        T,
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType =>
