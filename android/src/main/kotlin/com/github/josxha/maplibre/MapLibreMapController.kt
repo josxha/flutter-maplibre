@@ -126,8 +126,8 @@ class MapLibreMapController(
                 LngLat(latLng.longitude, latLng.latitude),
                 Offset(
                     (screenLocation.x / density).toDouble(),
-                    (screenLocation.y / density).toDouble()
-                )
+                    (screenLocation.y / density).toDouble(),
+                ),
             ) { }
             true
         }
@@ -138,8 +138,8 @@ class MapLibreMapController(
                 LngLat(latLng.longitude, latLng.latitude),
                 Offset(
                     (screenLocation.x / density).toDouble(),
-                    (screenLocation.y / density).toDouble()
-                )
+                    (screenLocation.y / density).toDouble(),
+                ),
             ) { }
             true
         }
