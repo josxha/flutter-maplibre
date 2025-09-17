@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:maplibre_example/animation_page.dart';
@@ -37,168 +39,170 @@ class MenuPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('MapLibre Demo')),
-      body: CustomScrollView(
-        slivers: [
-          const SliverToBoxAdapter(child: SectionTitle('General')),
-          SliverGrid.extent(
-            maxCrossAxisExtent: 150,
-            childAspectRatio: 1.5,
-            children: const [
-              ItemCard(
-                label: 'Styled Map',
-                iconData: Icons.map,
-                location: StyledMapPage.location,
-              ),
-              ItemCard(
-                label: 'Translucent Map',
-                iconData: Icons.map_outlined,
-                location: TranslucentMapPage.location,
-              ),
-              ItemCard(
-                label: 'PMTiles Source',
-                iconData: Icons.file_open,
-                location: PmTilesPage.location,
-              ),
-              ItemCard(
-                label: 'Parameters',
-                iconData: Icons.build,
-                location: ParametersPage.location,
-              ),
-              ItemCard(
-                label: 'Gestures',
-                iconData: Icons.back_hand,
-                location: GesturesPage.location,
-              ),
-              ItemCard(
-                label: 'Events',
-                iconData: Icons.notifications,
-                location: EventsPage.location,
-              ),
-              ItemCard(
-                label: 'Controller',
-                iconData: Icons.api,
-                location: ControllerPage.location,
-              ),
-              ItemCard(
-                label: 'Two Maps',
-                iconData: Icons.looks_two,
-                location: TwoMapsPage.location,
-              ),
-              ItemCard(
-                label: 'Animation',
-                iconData: Icons.animation,
-                location: AnimationPage.location,
-              ),
-              if (!kIsWeb)
-                ItemCard(
-                  label: 'User Location',
-                  iconData: Icons.gps_fixed,
-                  location: UserLocationPage.location,
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            const SliverToBoxAdapter(child: SectionTitle('General')),
+            SliverGrid.extent(
+              maxCrossAxisExtent: 150,
+              childAspectRatio: 1.5,
+              children: [
+                const ItemCard(
+                  label: 'Styled Map',
+                  iconData: Icons.map,
+                  location: StyledMapPage.location,
                 ),
-              if (!kIsWeb)
-                ItemCard(
-                  label: 'Offline',
-                  iconData: Icons.wifi_off,
-                  location: OfflinePage.location,
+                const ItemCard(
+                  label: 'Translucent Map',
+                  iconData: Icons.map_outlined,
+                  location: TranslucentMapPage.location,
                 ),
-              if (!kIsWeb)
-                ItemCard(
-                  label: 'Permissions',
-                  iconData: Icons.key,
-                  location: PermissionsPage.location,
+                const ItemCard(
+                  label: 'PMTiles Source',
+                  iconData: Icons.file_open,
+                  location: PmTilesPage.location,
                 ),
-            ],
-          ),
-          const SliverToBoxAdapter(child: SectionTitle('Layers')),
-          SliverGrid.extent(
-            maxCrossAxisExtent: 150,
-            childAspectRatio: 1.5,
-            children: const [
-              ItemCard(
-                label: 'Mixed Layers',
-                iconData: Icons.control_point_duplicate_outlined,
-                location: LayersMixedPage.location,
-              ),
-              ItemCard(
-                label: 'Widgets',
-                iconData: Icons.location_on,
-                location: WidgetLayerPage.location,
-              ),
-              ItemCard(
-                label: 'Interactive Widgets',
-                iconData: Icons.location_on,
-                location: WidgetLayerInteractivePage.location,
-              ),
-              ItemCard(
-                label: 'Circles',
-                iconData: Icons.circle,
-                location: LayersCirclePage.location,
-              ),
-              ItemCard(
-                label: 'Markers',
-                iconData: Icons.location_on,
-                location: LayersMarkerPage.location,
-              ),
-              ItemCard(
-                label: 'Polygons',
-                iconData: Icons.format_shapes,
-                location: LayersPolygonPage.location,
-              ),
-              ItemCard(
-                label: 'Polylines',
-                iconData: Icons.polyline,
-                location: LayersPolylinePage.location,
-              ),
-            ],
-          ),
-          const SliverToBoxAdapter(child: SectionTitle('Style Layers')),
-          SliverGrid.extent(
-            maxCrossAxisExtent: 150,
-            childAspectRatio: 1.5,
-            children: const [
-              ItemCard(
-                label: 'Circle',
-                iconData: Icons.circle,
-                location: StyleLayersCirclePage.location,
-              ),
-              ItemCard(
-                label: 'Fill',
-                iconData: Icons.format_shapes,
-                location: StyleLayersFillPage.location,
-              ),
-              ItemCard(
-                label: 'Fill Extrusion',
-                iconData: Icons.house,
-                location: StyleLayersFillExtrusionPage.location,
-              ),
-              ItemCard(
-                label: 'Heatmap',
-                iconData: Icons.thermostat,
-                location: StyleLayersHeatmapPage.location,
-              ),
-              ItemCard(
-                label: 'Hillshade',
-                iconData: Icons.landscape,
-                location: StyleLayersHillshadePage.location,
-              ),
-              ItemCard(
-                label: 'Line',
-                iconData: Icons.polyline,
-                location: StyleLayersLinePage.location,
-              ),
-              ItemCard(
-                label: 'Raster',
-                iconData: Icons.grid_on,
-                location: StyleLayersRasterPage.location,
-              ),
-              ItemCard(
-                label: 'Symbol',
-                iconData: Icons.emoji_emotions,
-                location: StyleLayersSymbolPage.location,
-              ),
-            ],
-          ),
-        ],
+                const ItemCard(
+                  label: 'Parameters',
+                  iconData: Icons.build,
+                  location: ParametersPage.location,
+                ),
+                const ItemCard(
+                  label: 'Gestures',
+                  iconData: Icons.back_hand,
+                  location: GesturesPage.location,
+                ),
+                const ItemCard(
+                  label: 'Events',
+                  iconData: Icons.notifications,
+                  location: EventsPage.location,
+                ),
+                const ItemCard(
+                  label: 'Controller',
+                  iconData: Icons.api,
+                  location: ControllerPage.location,
+                ),
+                const ItemCard(
+                  label: 'Two Maps',
+                  iconData: Icons.looks_two,
+                  location: TwoMapsPage.location,
+                ),
+                const ItemCard(
+                  label: 'Animation',
+                  iconData: Icons.animation,
+                  location: AnimationPage.location,
+                ),
+                if (!kIsWeb)
+                  const ItemCard(
+                    label: 'User Location',
+                    iconData: Icons.gps_fixed,
+                    location: UserLocationPage.location,
+                  ),
+                if (!kIsWeb)
+                  const ItemCard(
+                    label: 'Offline',
+                    iconData: Icons.wifi_off,
+                    location: OfflinePage.location,
+                  ),
+                if (!kIsWeb && !Platform.isIOS)
+                  const ItemCard(
+                    label: 'Permissions',
+                    iconData: Icons.key,
+                    location: PermissionsPage.location,
+                  ),
+              ],
+            ),
+            const SliverToBoxAdapter(child: SectionTitle('Layers')),
+            SliverGrid.extent(
+              maxCrossAxisExtent: 150,
+              childAspectRatio: 1.5,
+              children: const [
+                ItemCard(
+                  label: 'Mixed Layers',
+                  iconData: Icons.control_point_duplicate_outlined,
+                  location: LayersMixedPage.location,
+                ),
+                ItemCard(
+                  label: 'Widgets',
+                  iconData: Icons.location_on,
+                  location: WidgetLayerPage.location,
+                ),
+                ItemCard(
+                  label: 'Interactive Widgets',
+                  iconData: Icons.location_on,
+                  location: WidgetLayerInteractivePage.location,
+                ),
+                ItemCard(
+                  label: 'Circles',
+                  iconData: Icons.circle,
+                  location: LayersCirclePage.location,
+                ),
+                ItemCard(
+                  label: 'Markers',
+                  iconData: Icons.location_on,
+                  location: LayersMarkerPage.location,
+                ),
+                ItemCard(
+                  label: 'Polygons',
+                  iconData: Icons.format_shapes,
+                  location: LayersPolygonPage.location,
+                ),
+                ItemCard(
+                  label: 'Polylines',
+                  iconData: Icons.polyline,
+                  location: LayersPolylinePage.location,
+                ),
+              ],
+            ),
+            const SliverToBoxAdapter(child: SectionTitle('Style Layers')),
+            SliverGrid.extent(
+              maxCrossAxisExtent: 150,
+              childAspectRatio: 1.5,
+              children: const [
+                ItemCard(
+                  label: 'Circle',
+                  iconData: Icons.circle,
+                  location: StyleLayersCirclePage.location,
+                ),
+                ItemCard(
+                  label: 'Fill',
+                  iconData: Icons.format_shapes,
+                  location: StyleLayersFillPage.location,
+                ),
+                ItemCard(
+                  label: 'Fill Extrusion',
+                  iconData: Icons.house,
+                  location: StyleLayersFillExtrusionPage.location,
+                ),
+                ItemCard(
+                  label: 'Heatmap',
+                  iconData: Icons.thermostat,
+                  location: StyleLayersHeatmapPage.location,
+                ),
+                ItemCard(
+                  label: 'Hillshade',
+                  iconData: Icons.landscape,
+                  location: StyleLayersHillshadePage.location,
+                ),
+                ItemCard(
+                  label: 'Line',
+                  iconData: Icons.polyline,
+                  location: StyleLayersLinePage.location,
+                ),
+                ItemCard(
+                  label: 'Raster',
+                  iconData: Icons.grid_on,
+                  location: StyleLayersRasterPage.location,
+                ),
+                ItemCard(
+                  label: 'Symbol',
+                  iconData: Icons.emoji_emotions,
+                  location: StyleLayersSymbolPage.location,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

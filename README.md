@@ -1,5 +1,10 @@
 # MapLibre for Flutter
 
+> [!WARNING]
+> The iOS implementation is during the funding phase provided under
+> the [Non-Profit Open Software License version 3.0 (NPOSL-3.0)](https://opensource.org/license/osl-3-0-php).
+> After funding is completed, it will get released under the permissive 3-Clause BSD License.
+
 [![Pub Version](https://img.shields.io/pub/v/maplibre)](https://pub.dev/packages/maplibre)
 [![stars](https://badgen.net/github/stars/josxha/flutter-maplibre?label=stars&color=green&icon=github)](https://github.com/josxha/flutter-maplibre/stargazers)
 [![likes](https://img.shields.io/pub/likes/maplibre?logo=flutter)](https://pub.dev/packages/maplibre)

@@ -9,6 +9,7 @@ ignore:
   - "**/*.g.dart"
   - "lib/src/platform/android/jni/**"
   - "example/**"
+  - "maplibre_ios/**"
 
 github_checks:
   annotations: false
