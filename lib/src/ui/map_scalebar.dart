@@ -26,7 +26,7 @@ class MapScalebar extends StatelessWidget {
   /// The [padding] of the scalebar.
   final EdgeInsets padding;
 
-  /// If `true`, the scalebar will show its units in imperial instead of metric.
+  /// Wether the scalebar uses the metric or imperial measurement system.
   final ScaleBarUnit units;
 
   @override
