@@ -15,7 +15,7 @@ class MapScalebar extends StatelessWidget {
   const MapScalebar({
     this.alignment = Alignment.bottomLeft,
     this.padding = const EdgeInsets.all(12),
-    this.imperial = false,
+    this.units = ScaleBarUnit.metric,
     super.key,
   });
 
@@ -27,7 +27,7 @@ class MapScalebar extends StatelessWidget {
   final EdgeInsets padding;
 
   /// If `true`, the scalebar will show its units in imperial instead of metric.
-  final bool imperial;
+  final ScaleBarUnit units;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class MapScalebar extends StatelessWidget {
     final theme = Theme.of(context);
 
     final metersPerPixel = controller.getMetersPerPixelAtLatitudeSync(latitude);
-    final painter = _ScaleBarPainter(metersPerPixel, theme, imperial: imperial);
+    final painter = _ScaleBarPainter(metersPerPixel, theme, units: units);
     return Container(
       alignment: alignment,
       padding: padding,
@@ -49,11 +49,11 @@ class MapScalebar extends StatelessWidget {
 }
 
 class _ScaleBarPainter extends CustomPainter {
-  _ScaleBarPainter(this.metersPerPixel, this.theme, {required this.imperial}) {
+  _ScaleBarPainter(this.metersPerPixel, this.theme, {required this.units}) {
     const milesToMeters = 1609.344;
     const feetToMeters = 0.3048;
 
-    if (imperial) {
+    if (units == ScaleBarUnit.imperial) {
       const maxPx = 200.0;
       final candidatesMeters = <double>[
         20 * feetToMeters, // 20 ft
@@ -130,7 +130,7 @@ class _ScaleBarPainter extends CustomPainter {
 
   final double metersPerPixel;
   final ThemeData theme;
-  final bool imperial;
+  final ScaleBarUnit units;
   late final double meters;
   late final double width = meters / metersPerPixel;
 
@@ -142,7 +142,7 @@ class _ScaleBarPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final unit = imperial
+    final unit = units == ScaleBarUnit.imperial
         ? (meters >= _Unit.mi.meters ? _Unit.mi : _Unit.ft)
         : (meters >= _Unit.km.meters ? _Unit.km : _Unit.m);
     canvas.drawVertices(
@@ -200,7 +200,7 @@ class _ScaleBarPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant _ScaleBarPainter oldDelegate) =>
       metersPerPixel != oldDelegate.metersPerPixel ||
-      imperial != oldDelegate.imperial;
+      units != oldDelegate.units;
 }
 
 enum _Unit {
@@ -213,4 +213,13 @@ enum _Unit {
 
   final double meters;
   final String abbreviation;
+}
+
+/// The unit system to use for the [MapScalebar].
+enum ScaleBarUnit {
+  /// Use metric units (meters/kilometers).
+  metric,
+
+  /// Use imperial units (feet/miles).
+  imperial,
 }
