@@ -63,14 +63,14 @@ ffigen:
       'MLNSource':
         # https://github.com/dart-lang/native/issues/2419
         'initWithIdentifier:': 'initWithIdentifier_:'
-      'MLNMapView':
-        'initWithFrame': 'initWithFrame_'
-        'convertPoint': 'convertPoint_'
-        'convertRect': 'convertRect_'
-      'UIResponder':
-        'copy': 'copy_'
-      'UIPointerStyle':
-        'styleWithShape': 'styleWithShape_'
+#      'MLNMapView':
+#        'initWithFrame': 'initWithFrame_'
+#        'convertPoint': 'convertPoint_'
+#        'convertRect': 'convertRect_'
+#      'UIResponder':
+#        'copy': 'copy_'
+#      'UIPointerStyle':
+#        'styleWithShape': 'styleWithShape_'
   compiler-opts:
     - '-Fios/.build/MapLibre.xcframework/ios-arm64/'
     - '-Iios/.build/MapLibre.xcframework/ios-arm64/MapLibre.framework/Headers'

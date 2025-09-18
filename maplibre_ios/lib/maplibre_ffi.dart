@@ -23579,7 +23579,7 @@ class UIResponder extends objc.NSObject
   }
 
   /// copy:
-  void copy(objc.ObjCObjectBase? sender) {
+  void copy2(objc.ObjCObjectBase? sender) {
     objc.checkOsVersionInternal('UIResponder.copy:', iOS: (false, (3, 0, 0)));
     if (!objc.respondsToSelector(this.ref.pointer, _sel_copy_)) {
       throw objc.UnimplementedOptionalMethodException('UIResponder', 'copy:');
@@ -30712,7 +30712,7 @@ class UIPointerStyle extends UIHoverStyle implements objc.NSCopying {
   }
 
   /// styleWithShape:
-  static UIPointerStyle styleWithShape(UIShape? shape$1) {
+  static UIPointerStyle styleWithShape2(UIShape? shape$1) {
     objc.checkOsVersionInternal('UIPointerStyle.styleWithShape:',
         iOS: (false, (17, 0, 0)));
     final _ret = _objc_msgSend_1sotr3r(_class_UIPointerStyle,
@@ -43556,7 +43556,7 @@ class MLNMapView extends UIView implements MLNStylable {
   ///
   /// - TODO: initialize an ``MLNMapView`` with a custom style
   /// - TODO: how to initialize an ``MLNMapView`` with a third-party tile source
-  MLNMapView initWithFrame(objc.CGRect frame, {objc.NSURL? styleURL}) {
+  MLNMapView initWithFrame2(objc.CGRect frame, {objc.NSURL? styleURL}) {
     final _ret = _objc_msgSend_gxusyk(
         this.ref.retainAndReturnPointer(),
         _sel_initWithFrame_styleURL_,
@@ -45863,7 +45863,7 @@ class MLNMapView extends UIView implements MLNStylable {
   ///
   /// #### Related examples
   /// - TODO: Point conversion example to learn how to convert a `CGPoint` to a map coordinate.
-  CLLocationCoordinate2D convertPoint(objc.CGPoint point,
+  CLLocationCoordinate2D convertPoint2(objc.CGPoint point,
       {UIView? toCoordinateFromView}) {
     final _ptr = pkg_ffi.calloc<CLLocationCoordinate2D>();
     objc.useMsgSendVariants
@@ -45928,7 +45928,7 @@ class MLNMapView extends UIView implements MLNStylable {
   /// @param rect The rectangle to convert.
   /// @param view The view in whose coordinate system the rectangle is expressed.
   /// @return The geographic bounding box coextensive with the given rectangle.
-  MLNCoordinateBounds convertRect(objc.CGRect rect,
+  MLNCoordinateBounds convertRect2(objc.CGRect rect,
       {UIView? toCoordinateBoundsFromView}) {
     final _ptr = pkg_ffi.calloc<MLNCoordinateBounds>();
     objc.useMsgSendVariants
