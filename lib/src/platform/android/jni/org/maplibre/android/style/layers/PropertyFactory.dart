@@ -49,8 +49,9 @@ class PropertyFactory extends jni$_.JObject {
   final jni$_.JObjType<PropertyFactory> $type;
 
   @jni$_.internal
-  PropertyFactory.fromReference(jni$_.JReference reference)
-    : $type = type,
+  PropertyFactory.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -60,7 +61,9 @@ class PropertyFactory extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $PropertyFactory$NullableType();
   static const type = $PropertyFactory$Type();
-  static final _id_new$ = _class.constructorId(r'()V');
+  static final _id_new$ = _class.constructorId(
+    r'()V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -311,7 +314,9 @@ class PropertyFactory extends jni$_.JObject {
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue<java.lang.String> fillColor(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue$_.PropertyValue<jni$_.JString?>? fillColor(int i) {
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? fillColor(
+    int i,
+  ) {
     return _fillColor(
       _class.reference.pointer,
       _id_fillColor as jni$_.JMethodIDPtr,
@@ -548,7 +553,9 @@ class PropertyFactory extends jni$_.JObject {
   /// from: `static public org.maplibre.android.style.layers.PropertyValue<java.lang.Float[]> fillTranslate(java.lang.Float[] floats)`
   /// The returned object must be released after use, by calling the [release] method.
   static propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>?
-  fillTranslate(jni$_.JArray<jni$_.JFloat?>? floats) {
+  fillTranslate(
+    jni$_.JArray<jni$_.JFloat?>? floats,
+  ) {
     final _$floats = floats?.reference ?? jni$_.jNullReference;
     return _fillTranslate(
       _class.reference.pointer,
@@ -866,7 +873,9 @@ class PropertyFactory extends jni$_.JObject {
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue<java.lang.String> lineColor(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue$_.PropertyValue<jni$_.JString?>? lineColor(int i) {
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? lineColor(
+    int i,
+  ) {
     return _lineColor(
       _class.reference.pointer,
       _id_lineColor as jni$_.JMethodIDPtr,
@@ -984,7 +993,9 @@ class PropertyFactory extends jni$_.JObject {
   /// from: `static public org.maplibre.android.style.layers.PropertyValue<java.lang.Float[]> lineTranslate(java.lang.Float[] floats)`
   /// The returned object must be released after use, by calling the [release] method.
   static propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>?
-  lineTranslate(jni$_.JArray<jni$_.JFloat?>? floats) {
+  lineTranslate(
+    jni$_.JArray<jni$_.JFloat?>? floats,
+  ) {
     final _$floats = floats?.reference ?? jni$_.jNullReference;
     return _lineTranslate(
       _class.reference.pointer,
@@ -1463,7 +1474,9 @@ class PropertyFactory extends jni$_.JObject {
   /// from: `static public org.maplibre.android.style.layers.PropertyValue<java.lang.Float[]> lineDasharray(java.lang.Float[] floats)`
   /// The returned object must be released after use, by calling the [release] method.
   static propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>?
-  lineDasharray(jni$_.JArray<jni$_.JFloat?>? floats) {
+  lineDasharray(
+    jni$_.JArray<jni$_.JFloat?>? floats,
+  ) {
     final _$floats = floats?.reference ?? jni$_.jNullReference;
     return _lineDasharray(
       _class.reference.pointer,
@@ -1621,7 +1634,9 @@ class PropertyFactory extends jni$_.JObject {
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue<java.lang.String> lineGradient(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue$_.PropertyValue<jni$_.JString?>? lineGradient(int i) {
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? lineGradient(
+    int i,
+  ) {
     return _lineGradient(
       _class.reference.pointer,
       _id_lineGradient as jni$_.JMethodIDPtr,
@@ -1818,7 +1833,9 @@ class PropertyFactory extends jni$_.JObject {
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue<java.lang.String> iconColor(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue$_.PropertyValue<jni$_.JString?>? iconColor(int i) {
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? iconColor(
+    int i,
+  ) {
     return _iconColor(
       _class.reference.pointer,
       _id_iconColor as jni$_.JMethodIDPtr,
@@ -1935,7 +1952,9 @@ class PropertyFactory extends jni$_.JObject {
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue<java.lang.String> iconHaloColor(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue$_.PropertyValue<jni$_.JString?>? iconHaloColor(int i) {
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? iconHaloColor(
+    int i,
+  ) {
     return _iconHaloColor(
       _class.reference.pointer,
       _id_iconHaloColor as jni$_.JMethodIDPtr,
@@ -2213,7 +2232,9 @@ class PropertyFactory extends jni$_.JObject {
   /// from: `static public org.maplibre.android.style.layers.PropertyValue<java.lang.Float[]> iconTranslate(java.lang.Float[] floats)`
   /// The returned object must be released after use, by calling the [release] method.
   static propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>?
-  iconTranslate(jni$_.JArray<jni$_.JFloat?>? floats) {
+  iconTranslate(
+    jni$_.JArray<jni$_.JFloat?>? floats,
+  ) {
     final _$floats = floats?.reference ?? jni$_.jNullReference;
     return _iconTranslate(
       _class.reference.pointer,
@@ -2451,7 +2472,9 @@ class PropertyFactory extends jni$_.JObject {
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue<java.lang.String> textColor(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue$_.PropertyValue<jni$_.JString?>? textColor(int i) {
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? textColor(
+    int i,
+  ) {
     return _textColor(
       _class.reference.pointer,
       _id_textColor as jni$_.JMethodIDPtr,
@@ -2568,7 +2591,9 @@ class PropertyFactory extends jni$_.JObject {
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue<java.lang.String> textHaloColor(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue$_.PropertyValue<jni$_.JString?>? textHaloColor(int i) {
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? textHaloColor(
+    int i,
+  ) {
     return _textHaloColor(
       _class.reference.pointer,
       _id_textHaloColor as jni$_.JMethodIDPtr,
@@ -2846,7 +2871,9 @@ class PropertyFactory extends jni$_.JObject {
   /// from: `static public org.maplibre.android.style.layers.PropertyValue<java.lang.Float[]> textTranslate(java.lang.Float[] floats)`
   /// The returned object must be released after use, by calling the [release] method.
   static propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>?
-  textTranslate(jni$_.JArray<jni$_.JFloat?>? floats) {
+  textTranslate(
+    jni$_.JArray<jni$_.JFloat?>? floats,
+  ) {
     final _$floats = floats?.reference ?? jni$_.jNullReference;
     return _textTranslate(
       _class.reference.pointer,
@@ -3084,7 +3111,9 @@ class PropertyFactory extends jni$_.JObject {
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue<java.lang.String> circleColor(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue$_.PropertyValue<jni$_.JString?>? circleColor(int i) {
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? circleColor(
+    int i,
+  ) {
     return _circleColor(
       _class.reference.pointer,
       _id_circleColor as jni$_.JMethodIDPtr,
@@ -3362,7 +3391,9 @@ class PropertyFactory extends jni$_.JObject {
   /// from: `static public org.maplibre.android.style.layers.PropertyValue<java.lang.Float[]> circleTranslate(java.lang.Float[] floats)`
   /// The returned object must be released after use, by calling the [release] method.
   static propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>?
-  circleTranslate(jni$_.JArray<jni$_.JFloat?>? floats) {
+  circleTranslate(
+    jni$_.JArray<jni$_.JFloat?>? floats,
+  ) {
     final _$floats = floats?.reference ?? jni$_.jNullReference;
     return _circleTranslate(
       _class.reference.pointer,
@@ -4199,7 +4230,9 @@ class PropertyFactory extends jni$_.JObject {
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue<java.lang.String> heatmapColor(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue$_.PropertyValue<jni$_.JString?>? heatmapColor(int i) {
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? heatmapColor(
+    int i,
+  ) {
     return _heatmapColor(
       _class.reference.pointer,
       _id_heatmapColor as jni$_.JMethodIDPtr,
@@ -4596,7 +4629,9 @@ class PropertyFactory extends jni$_.JObject {
   /// from: `static public org.maplibre.android.style.layers.PropertyValue<java.lang.Float[]> fillExtrusionTranslate(java.lang.Float[] floats)`
   /// The returned object must be released after use, by calling the [release] method.
   static propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>?
-  fillExtrusionTranslate(jni$_.JArray<jni$_.JFloat?>? floats) {
+  fillExtrusionTranslate(
+    jni$_.JArray<jni$_.JFloat?>? floats,
+  ) {
     final _$floats = floats?.reference ?? jni$_.jNullReference;
     return _fillExtrusionTranslate(
       _class.reference.pointer,
@@ -4635,7 +4670,9 @@ class PropertyFactory extends jni$_.JObject {
   /// from: `static public org.maplibre.android.style.layers.PropertyValue<org.maplibre.android.style.expressions.Expression> fillExtrusionTranslate(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
   static propertyvalue$_.PropertyValue<jni$_.JObject?>?
-  fillExtrusionTranslate$1(jni$_.JObject? expression) {
+  fillExtrusionTranslate$1(
+    jni$_.JObject? expression,
+  ) {
     final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _fillExtrusionTranslate$1(
       _class.reference.pointer,
@@ -4674,7 +4711,9 @@ class PropertyFactory extends jni$_.JObject {
   /// from: `static public org.maplibre.android.style.layers.PropertyValue<java.lang.String> fillExtrusionTranslateAnchor(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
   static propertyvalue$_.PropertyValue<jni$_.JString?>?
-  fillExtrusionTranslateAnchor(jni$_.JString? string) {
+  fillExtrusionTranslateAnchor(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return _fillExtrusionTranslateAnchor(
       _class.reference.pointer,
@@ -4713,7 +4752,9 @@ class PropertyFactory extends jni$_.JObject {
   /// from: `static public org.maplibre.android.style.layers.PropertyValue<org.maplibre.android.style.expressions.Expression> fillExtrusionTranslateAnchor(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
   static propertyvalue$_.PropertyValue<jni$_.JObject?>?
-  fillExtrusionTranslateAnchor$1(jni$_.JObject? expression) {
+  fillExtrusionTranslateAnchor$1(
+    jni$_.JObject? expression,
+  ) {
     final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _fillExtrusionTranslateAnchor$1(
       _class.reference.pointer,
@@ -4992,7 +5033,9 @@ class PropertyFactory extends jni$_.JObject {
   /// from: `static public org.maplibre.android.style.layers.PropertyValue<java.lang.Boolean> fillExtrusionVerticalGradient(java.lang.Boolean boolean)`
   /// The returned object must be released after use, by calling the [release] method.
   static propertyvalue$_.PropertyValue<jni$_.JBoolean?>?
-  fillExtrusionVerticalGradient(jni$_.JBoolean? boolean) {
+  fillExtrusionVerticalGradient(
+    jni$_.JBoolean? boolean,
+  ) {
     final _$boolean = boolean?.reference ?? jni$_.jNullReference;
     return _fillExtrusionVerticalGradient(
       _class.reference.pointer,
@@ -5031,7 +5074,9 @@ class PropertyFactory extends jni$_.JObject {
   /// from: `static public org.maplibre.android.style.layers.PropertyValue<org.maplibre.android.style.expressions.Expression> fillExtrusionVerticalGradient(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
   static propertyvalue$_.PropertyValue<jni$_.JObject?>?
-  fillExtrusionVerticalGradient$1(jni$_.JObject? expression) {
+  fillExtrusionVerticalGradient$1(
+    jni$_.JObject? expression,
+  ) {
     final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _fillExtrusionVerticalGradient$1(
       _class.reference.pointer,
@@ -5710,7 +5755,9 @@ class PropertyFactory extends jni$_.JObject {
   /// from: `static public org.maplibre.android.style.layers.PropertyValue<java.lang.Float> hillshadeIlluminationDirection(java.lang.Float float)`
   /// The returned object must be released after use, by calling the [release] method.
   static propertyvalue$_.PropertyValue<jni$_.JFloat?>?
-  hillshadeIlluminationDirection(jni$_.JFloat? float) {
+  hillshadeIlluminationDirection(
+    jni$_.JFloat? float,
+  ) {
     final _$float = float?.reference ?? jni$_.jNullReference;
     return _hillshadeIlluminationDirection(
       _class.reference.pointer,
@@ -5749,7 +5796,9 @@ class PropertyFactory extends jni$_.JObject {
   /// from: `static public org.maplibre.android.style.layers.PropertyValue<org.maplibre.android.style.expressions.Expression> hillshadeIlluminationDirection(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
   static propertyvalue$_.PropertyValue<jni$_.JObject?>?
-  hillshadeIlluminationDirection$1(jni$_.JObject? expression) {
+  hillshadeIlluminationDirection$1(
+    jni$_.JObject? expression,
+  ) {
     final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _hillshadeIlluminationDirection$1(
       _class.reference.pointer,
@@ -5788,7 +5837,9 @@ class PropertyFactory extends jni$_.JObject {
   /// from: `static public org.maplibre.android.style.layers.PropertyValue<java.lang.String> hillshadeIlluminationAnchor(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
   static propertyvalue$_.PropertyValue<jni$_.JString?>?
-  hillshadeIlluminationAnchor(jni$_.JString? string) {
+  hillshadeIlluminationAnchor(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return _hillshadeIlluminationAnchor(
       _class.reference.pointer,
@@ -5827,7 +5878,9 @@ class PropertyFactory extends jni$_.JObject {
   /// from: `static public org.maplibre.android.style.layers.PropertyValue<org.maplibre.android.style.expressions.Expression> hillshadeIlluminationAnchor(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
   static propertyvalue$_.PropertyValue<jni$_.JObject?>?
-  hillshadeIlluminationAnchor$1(jni$_.JObject? expression) {
+  hillshadeIlluminationAnchor$1(
+    jni$_.JObject? expression,
+  ) {
     final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _hillshadeIlluminationAnchor$1(
       _class.reference.pointer,
@@ -6104,7 +6157,9 @@ class PropertyFactory extends jni$_.JObject {
   /// from: `static public org.maplibre.android.style.layers.PropertyValue<java.lang.String> hillshadeHighlightColor(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
   static propertyvalue$_.PropertyValue<jni$_.JString?>?
-  hillshadeHighlightColor$1(jni$_.JString? string) {
+  hillshadeHighlightColor$1(
+    jni$_.JString? string,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return _hillshadeHighlightColor$1(
       _class.reference.pointer,
@@ -6143,7 +6198,9 @@ class PropertyFactory extends jni$_.JObject {
   /// from: `static public org.maplibre.android.style.layers.PropertyValue<org.maplibre.android.style.expressions.Expression> hillshadeHighlightColor(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
   static propertyvalue$_.PropertyValue<jni$_.JObject?>?
-  hillshadeHighlightColor$2(jni$_.JObject? expression) {
+  hillshadeHighlightColor$2(
+    jni$_.JObject? expression,
+  ) {
     final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _hillshadeHighlightColor$2(
       _class.reference.pointer,
@@ -6300,7 +6357,9 @@ class PropertyFactory extends jni$_.JObject {
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue<java.lang.String> backgroundColor(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue$_.PropertyValue<jni$_.JString?>? backgroundColor(int i) {
+  static propertyvalue$_.PropertyValue<jni$_.JString?>? backgroundColor(
+    int i,
+  ) {
     return _backgroundColor(
       _class.reference.pointer,
       _id_backgroundColor as jni$_.JMethodIDPtr,
@@ -7938,7 +7997,9 @@ class PropertyFactory extends jni$_.JObject {
   /// from: `static public org.maplibre.android.style.layers.PropertyValue<java.lang.Float[]> iconTextFitPadding(java.lang.Float[] floats)`
   /// The returned object must be released after use, by calling the [release] method.
   static propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>?
-  iconTextFitPadding(jni$_.JArray<jni$_.JFloat?>? floats) {
+  iconTextFitPadding(
+    jni$_.JArray<jni$_.JFloat?>? floats,
+  ) {
     final _$floats = floats?.reference ?? jni$_.jNullReference;
     return _iconTextFitPadding(
       _class.reference.pointer,
@@ -8217,7 +8278,9 @@ class PropertyFactory extends jni$_.JObject {
   /// from: `static public org.maplibre.android.style.layers.PropertyValue<java.lang.Float[]> iconPadding(java.lang.Float[] floats)`
   /// The returned object must be released after use, by calling the [release] method.
   static propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>?
-  iconPadding$1(jni$_.JArray<jni$_.JFloat?>? floats) {
+  iconPadding$1(
+    jni$_.JArray<jni$_.JFloat?>? floats,
+  ) {
     final _$floats = floats?.reference ?? jni$_.jNullReference;
     return _iconPadding$1(
       _class.reference.pointer,
@@ -8376,7 +8439,9 @@ class PropertyFactory extends jni$_.JObject {
   /// from: `static public org.maplibre.android.style.layers.PropertyValue<java.lang.Float[]> iconOffset(java.lang.Float[] floats)`
   /// The returned object must be released after use, by calling the [release] method.
   static propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>?
-  iconOffset(jni$_.JArray<jni$_.JFloat?>? floats) {
+  iconOffset(
+    jni$_.JArray<jni$_.JFloat?>? floats,
+  ) {
     final _$floats = floats?.reference ?? jni$_.jNullReference;
     return _iconOffset(
       _class.reference.pointer,
@@ -9455,7 +9520,9 @@ class PropertyFactory extends jni$_.JObject {
   /// from: `static public org.maplibre.android.style.layers.PropertyValue<java.lang.String[]> textVariableAnchor(java.lang.String[] strings)`
   /// The returned object must be released after use, by calling the [release] method.
   static propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JString?>?>?
-  textVariableAnchor(jni$_.JArray<jni$_.JString?>? strings) {
+  textVariableAnchor(
+    jni$_.JArray<jni$_.JString?>? strings,
+  ) {
     final _$strings = strings?.reference ?? jni$_.jNullReference;
     return _textVariableAnchor(
       _class.reference.pointer,
@@ -9534,7 +9601,9 @@ class PropertyFactory extends jni$_.JObject {
   /// from: `static public org.maplibre.android.style.layers.PropertyValue<java.lang.Object[]> textVariableAnchorOffset(java.lang.Object[] objects)`
   /// The returned object must be released after use, by calling the [release] method.
   static propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JObject?>?>?
-  textVariableAnchorOffset(jni$_.JArray<jni$_.JObject?>? objects) {
+  textVariableAnchorOffset(
+    jni$_.JArray<jni$_.JObject?>? objects,
+  ) {
     final _$objects = objects?.reference ?? jni$_.jNullReference;
     return _textVariableAnchorOffset(
       _class.reference.pointer,
@@ -9573,7 +9642,9 @@ class PropertyFactory extends jni$_.JObject {
   /// from: `static public org.maplibre.android.style.layers.PropertyValue<org.maplibre.android.style.expressions.Expression> textVariableAnchorOffset(org.maplibre.android.style.expressions.Expression expression)`
   /// The returned object must be released after use, by calling the [release] method.
   static propertyvalue$_.PropertyValue<jni$_.JObject?>?
-  textVariableAnchorOffset$1(jni$_.JObject? expression) {
+  textVariableAnchorOffset$1(
+    jni$_.JObject? expression,
+  ) {
     final _$expression = expression?.reference ?? jni$_.jNullReference;
     return _textVariableAnchorOffset$1(
       _class.reference.pointer,
@@ -9772,7 +9843,9 @@ class PropertyFactory extends jni$_.JObject {
   /// from: `static public org.maplibre.android.style.layers.PropertyValue<java.lang.String[]> textWritingMode(java.lang.String[] strings)`
   /// The returned object must be released after use, by calling the [release] method.
   static propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JString?>?>?
-  textWritingMode(jni$_.JArray<jni$_.JString?>? strings) {
+  textWritingMode(
+    jni$_.JArray<jni$_.JString?>? strings,
+  ) {
     final _$strings = strings?.reference ?? jni$_.jNullReference;
     return _textWritingMode(
       _class.reference.pointer,
@@ -10171,7 +10244,9 @@ class PropertyFactory extends jni$_.JObject {
   /// from: `static public org.maplibre.android.style.layers.PropertyValue<java.lang.Float[]> textOffset(java.lang.Float[] floats)`
   /// The returned object must be released after use, by calling the [release] method.
   static propertyvalue$_.PropertyValue<jni$_.JArray<jni$_.JFloat?>?>?
-  textOffset(jni$_.JArray<jni$_.JFloat?>? floats) {
+  textOffset(
+    jni$_.JArray<jni$_.JFloat?>? floats,
+  ) {
     final _$floats = floats?.reference ?? jni$_.jNullReference;
     return _textOffset(
       _class.reference.pointer,
@@ -10637,8 +10712,11 @@ final class $PropertyFactory$NullableType
 
   @jni$_.internal
   @core$_.override
-  PropertyFactory? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : PropertyFactory.fromReference(reference);
+  PropertyFactory? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : PropertyFactory.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -10673,7 +10751,9 @@ final class $PropertyFactory$Type extends jni$_.JObjType<PropertyFactory> {
   @jni$_.internal
   @core$_.override
   PropertyFactory fromReference(jni$_.JReference reference) =>
-      PropertyFactory.fromReference(reference);
+      PropertyFactory.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

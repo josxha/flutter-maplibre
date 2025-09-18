@@ -47,8 +47,9 @@ class LocationEngineResult extends jni$_.JObject {
   final jni$_.JObjType<LocationEngineResult> $type;
 
   @jni$_.internal
-  LocationEngineResult.fromReference(jni$_.JReference reference)
-    : $type = type,
+  LocationEngineResult.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -83,7 +84,9 @@ class LocationEngineResult extends jni$_.JObject {
 
   /// from: `static public org.maplibre.android.location.engine.LocationEngineResult create(android.location.Location location)`
   /// The returned object must be released after use, by calling the [release] method.
-  static LocationEngineResult create(location$_.Location? location) {
+  static LocationEngineResult create(
+    location$_.Location? location,
+  ) {
     final _$location = location?.reference ?? jni$_.jNullReference;
     return _create(
       _class.reference.pointer,
@@ -217,7 +220,9 @@ class LocationEngineResult extends jni$_.JObject {
 
   /// from: `static public org.maplibre.android.location.engine.LocationEngineResult extractResult(android.content.Intent intent)`
   /// The returned object must be released after use, by calling the [release] method.
-  static LocationEngineResult? extractResult(jni$_.JObject? intent) {
+  static LocationEngineResult? extractResult(
+    jni$_.JObject? intent,
+  ) {
     final _$intent = intent?.reference ?? jni$_.jNullReference;
     return _extractResult(
       _class.reference.pointer,
@@ -240,7 +245,11 @@ final class $LocationEngineResult$NullableType
   @jni$_.internal
   @core$_.override
   LocationEngineResult? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : LocationEngineResult.fromReference(reference);
+      reference.isNull
+      ? null
+      : LocationEngineResult.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -276,7 +285,9 @@ final class $LocationEngineResult$Type
   @jni$_.internal
   @core$_.override
   LocationEngineResult fromReference(jni$_.JReference reference) =>
-      LocationEngineResult.fromReference(reference);
+      LocationEngineResult.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

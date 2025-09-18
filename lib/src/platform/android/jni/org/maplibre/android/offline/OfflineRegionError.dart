@@ -45,8 +45,9 @@ class OfflineRegionError$Companion extends jni$_.JObject {
   final jni$_.JObjType<OfflineRegionError$Companion> $type;
 
   @jni$_.internal
-  OfflineRegionError$Companion.fromReference(jni$_.JReference reference)
-    : $type = type,
+  OfflineRegionError$Companion.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -110,7 +111,9 @@ final class $OfflineRegionError$Companion$NullableType
   OfflineRegionError$Companion? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : OfflineRegionError$Companion.fromReference(reference);
+      : OfflineRegionError$Companion.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -146,7 +149,9 @@ final class $OfflineRegionError$Companion$Type
   @jni$_.internal
   @core$_.override
   OfflineRegionError$Companion fromReference(jni$_.JReference reference) =>
-      OfflineRegionError$Companion.fromReference(reference);
+      OfflineRegionError$Companion.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -177,8 +182,9 @@ class OfflineRegionError$ErrorReason extends jni$_.JObject {
   final jni$_.JObjType<OfflineRegionError$ErrorReason> $type;
 
   @jni$_.internal
-  OfflineRegionError$ErrorReason.fromReference(jni$_.JReference reference)
-    : $type = type,
+  OfflineRegionError$ErrorReason.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -198,7 +204,11 @@ class OfflineRegionError$ErrorReason extends jni$_.JObject {
   ) {
     return _$invokeMethod(
       port,
-      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+      jni$_.MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
     );
   }
 
@@ -282,7 +292,9 @@ final class $OfflineRegionError$ErrorReason$NullableType
   OfflineRegionError$ErrorReason? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : OfflineRegionError$ErrorReason.fromReference(reference);
+      : OfflineRegionError$ErrorReason.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -319,7 +331,9 @@ final class $OfflineRegionError$ErrorReason$Type
   @jni$_.internal
   @core$_.override
   OfflineRegionError$ErrorReason fromReference(jni$_.JReference reference) =>
-      OfflineRegionError$ErrorReason.fromReference(reference);
+      OfflineRegionError$ErrorReason.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -350,8 +364,9 @@ class OfflineRegionError extends jni$_.JObject {
   final jni$_.JObjType<OfflineRegionError> $type;
 
   @jni$_.internal
-  OfflineRegionError.fromReference(jni$_.JReference reference)
-    : $type = type,
+  OfflineRegionError.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -505,7 +520,9 @@ class OfflineRegionError extends jni$_.JObject {
           >();
 
   /// from: `public boolean equals(java.lang.Object object)`
-  bool equals(jni$_.JObject? object) {
+  bool equals(
+    jni$_.JObject? object,
+  ) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     return _equals(
       reference.pointer,
@@ -514,7 +531,10 @@ class OfflineRegionError extends jni$_.JObject {
     ).boolean;
   }
 
-  static final _id_hashCode$1 = _class.instanceMethodId(r'hashCode', r'()I');
+  static final _id_hashCode$1 = _class.instanceMethodId(
+    r'hashCode',
+    r'()I',
+  );
 
   static final _hashCode$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -583,7 +603,11 @@ final class $OfflineRegionError$NullableType
   @jni$_.internal
   @core$_.override
   OfflineRegionError? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : OfflineRegionError.fromReference(reference);
+      reference.isNull
+      ? null
+      : OfflineRegionError.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -618,7 +642,9 @@ final class $OfflineRegionError$Type
   @jni$_.internal
   @core$_.override
   OfflineRegionError fromReference(jni$_.JReference reference) =>
-      OfflineRegionError.fromReference(reference);
+      OfflineRegionError.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();

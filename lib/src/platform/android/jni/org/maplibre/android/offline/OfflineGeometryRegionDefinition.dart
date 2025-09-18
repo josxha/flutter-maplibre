@@ -115,7 +115,9 @@ final class $OfflineGeometryRegionDefinition$Companion$NullableType
     jni$_.JReference reference,
   ) => reference.isNull
       ? null
-      : OfflineGeometryRegionDefinition$Companion.fromReference(reference);
+      : OfflineGeometryRegionDefinition$Companion.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -155,7 +157,9 @@ final class $OfflineGeometryRegionDefinition$Companion$Type
   @core$_.override
   OfflineGeometryRegionDefinition$Companion fromReference(
     jni$_.JReference reference,
-  ) => OfflineGeometryRegionDefinition$Companion.fromReference(reference);
+  ) => OfflineGeometryRegionDefinition$Companion.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -188,8 +192,9 @@ class OfflineGeometryRegionDefinition extends jni$_.JObject {
   final jni$_.JObjType<OfflineGeometryRegionDefinition> $type;
 
   @jni$_.internal
-  OfflineGeometryRegionDefinition.fromReference(jni$_.JReference reference)
-    : $type = type,
+  OfflineGeometryRegionDefinition.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -282,7 +287,10 @@ class OfflineGeometryRegionDefinition extends jni$_.JObject {
     ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
-  static final _id_getMinZoom = _class.instanceMethodId(r'getMinZoom', r'()D');
+  static final _id_getMinZoom = _class.instanceMethodId(
+    r'getMinZoom',
+    r'()D',
+  );
 
   static final _getMinZoom =
       jni$_.ProtectedJniExtensions.lookup<
@@ -308,7 +316,10 @@ class OfflineGeometryRegionDefinition extends jni$_.JObject {
     ).doubleFloat;
   }
 
-  static final _id_getMaxZoom = _class.instanceMethodId(r'getMaxZoom', r'()D');
+  static final _id_getMaxZoom = _class.instanceMethodId(
+    r'getMaxZoom',
+    r'()D',
+  );
 
   static final _getMaxZoom =
       jni$_.ProtectedJniExtensions.lookup<
@@ -512,7 +523,9 @@ class OfflineGeometryRegionDefinition extends jni$_.JObject {
     );
   }
 
-  static final _id_new$2 = _class.constructorId(r'(Landroid/os/Parcel;)V');
+  static final _id_new$2 = _class.constructorId(
+    r'(Landroid/os/Parcel;)V',
+  );
 
   static final _new$2 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -534,7 +547,9 @@ class OfflineGeometryRegionDefinition extends jni$_.JObject {
 
   /// from: `public void <init>(android.os.Parcel parcel)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory OfflineGeometryRegionDefinition.new$2(jni$_.JObject parcel) {
+  factory OfflineGeometryRegionDefinition.new$2(
+    jni$_.JObject parcel,
+  ) {
     final _$parcel = parcel.reference;
     return OfflineGeometryRegionDefinition.fromReference(
       _new$2(
@@ -661,7 +676,10 @@ class OfflineGeometryRegionDefinition extends jni$_.JObject {
           >();
 
   /// from: `public void writeToParcel(android.os.Parcel parcel, int i)`
-  void writeToParcel(jni$_.JObject parcel, int i) {
+  void writeToParcel(
+    jni$_.JObject parcel,
+    int i,
+  ) {
     final _$parcel = parcel.reference;
     _writeToParcel(
       reference.pointer,
@@ -687,7 +705,9 @@ final class $OfflineGeometryRegionDefinition$NullableType
   OfflineGeometryRegionDefinition? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : OfflineGeometryRegionDefinition.fromReference(reference);
+      : OfflineGeometryRegionDefinition.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -724,7 +744,9 @@ final class $OfflineGeometryRegionDefinition$Type
   @jni$_.internal
   @core$_.override
   OfflineGeometryRegionDefinition fromReference(jni$_.JReference reference) =>
-      OfflineGeometryRegionDefinition.fromReference(reference);
+      OfflineGeometryRegionDefinition.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

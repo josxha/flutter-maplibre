@@ -48,8 +48,9 @@ class Helpers extends jni$_.JObject {
   final jni$_.JObjType<Helpers> $type;
 
   @jni$_.internal
-  Helpers.fromReference(jni$_.JReference reference)
-    : $type = type,
+  Helpers.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -138,8 +139,11 @@ final class $Helpers$NullableType extends jni$_.JObjType<Helpers?> {
 
   @jni$_.internal
   @core$_.override
-  Helpers? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : Helpers.fromReference(reference);
+  Helpers? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : Helpers.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -172,8 +176,9 @@ final class $Helpers$Type extends jni$_.JObjType<Helpers> {
 
   @jni$_.internal
   @core$_.override
-  Helpers fromReference(jni$_.JReference reference) =>
-      Helpers.fromReference(reference);
+  Helpers fromReference(jni$_.JReference reference) => Helpers.fromReference(
+    reference,
+  );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();

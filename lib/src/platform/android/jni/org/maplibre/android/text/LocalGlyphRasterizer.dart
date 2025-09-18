@@ -45,8 +45,9 @@ class LocalGlyphRasterizer extends jni$_.JObject {
   final jni$_.JObjType<LocalGlyphRasterizer> $type;
 
   @jni$_.internal
-  LocalGlyphRasterizer.fromReference(jni$_.JReference reference)
-    : $type = type,
+  LocalGlyphRasterizer.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -70,7 +71,11 @@ final class $LocalGlyphRasterizer$NullableType
   @jni$_.internal
   @core$_.override
   LocalGlyphRasterizer? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : LocalGlyphRasterizer.fromReference(reference);
+      reference.isNull
+      ? null
+      : LocalGlyphRasterizer.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -105,7 +110,9 @@ final class $LocalGlyphRasterizer$Type
   @jni$_.internal
   @core$_.override
   LocalGlyphRasterizer fromReference(jni$_.JReference reference) =>
-      LocalGlyphRasterizer.fromReference(reference);
+      LocalGlyphRasterizer.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

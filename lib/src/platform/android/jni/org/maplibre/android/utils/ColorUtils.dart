@@ -45,8 +45,9 @@ class ColorUtils extends jni$_.JObject {
   final jni$_.JObjType<ColorUtils> $type;
 
   @jni$_.internal
-  ColorUtils.fromReference(jni$_.JReference reference)
-    : $type = type,
+  ColorUtils.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -56,7 +57,9 @@ class ColorUtils extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $ColorUtils$NullableType();
   static const type = $ColorUtils$Type();
-  static final _id_new$ = _class.constructorId(r'()V');
+  static final _id_new$ = _class.constructorId(
+    r'()V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -106,7 +109,9 @@ class ColorUtils extends jni$_.JObject {
           >();
 
   /// from: `static public int getPrimaryColor(android.content.Context context)`
-  static int getPrimaryColor(jni$_.JObject context) {
+  static int getPrimaryColor(
+    jni$_.JObject context,
+  ) {
     final _$context = context.reference;
     return _getPrimaryColor(
       _class.reference.pointer,
@@ -139,7 +144,9 @@ class ColorUtils extends jni$_.JObject {
           >();
 
   /// from: `static public int getPrimaryDarkColor(android.content.Context context)`
-  static int getPrimaryDarkColor(jni$_.JObject context) {
+  static int getPrimaryDarkColor(
+    jni$_.JObject context,
+  ) {
     final _$context = context.reference;
     return _getPrimaryDarkColor(
       _class.reference.pointer,
@@ -172,7 +179,9 @@ class ColorUtils extends jni$_.JObject {
           >();
 
   /// from: `static public int getAccentColor(android.content.Context context)`
-  static int getAccentColor(jni$_.JObject context) {
+  static int getAccentColor(
+    jni$_.JObject context,
+  ) {
     final _$context = context.reference;
     return _getAccentColor(
       _class.reference.pointer,
@@ -206,7 +215,9 @@ class ColorUtils extends jni$_.JObject {
 
   /// from: `static public android.content.res.ColorStateList getSelector(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni$_.JObject getSelector(int i) {
+  static jni$_.JObject getSelector(
+    int i,
+  ) {
     return _getSelector(
       _class.reference.pointer,
       _id_getSelector as jni$_.JMethodIDPtr,
@@ -239,7 +250,10 @@ class ColorUtils extends jni$_.JObject {
           >();
 
   /// from: `static public void setTintList(android.widget.ImageView imageView, int i)`
-  static void setTintList(jni$_.JObject imageView, int i) {
+  static void setTintList(
+    jni$_.JObject imageView,
+    int i,
+  ) {
     final _$imageView = imageView.reference;
     _setTintList(
       _class.reference.pointer,
@@ -273,7 +287,9 @@ class ColorUtils extends jni$_.JObject {
           >();
 
   /// from: `static public int rgbaToColor(java.lang.String string)`
-  static int rgbaToColor(jni$_.JString string) {
+  static int rgbaToColor(
+    jni$_.JString string,
+  ) {
     final _$string = string.reference;
     return _rgbaToColor(
       _class.reference.pointer,
@@ -307,7 +323,9 @@ class ColorUtils extends jni$_.JObject {
 
   /// from: `static public java.lang.String colorToRgbaString(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni$_.JString? colorToRgbaString(int i) {
+  static jni$_.JString? colorToRgbaString(
+    int i,
+  ) {
     return _colorToRgbaString(
       _class.reference.pointer,
       _id_colorToRgbaString as jni$_.JMethodIDPtr,
@@ -340,7 +358,9 @@ class ColorUtils extends jni$_.JObject {
 
   /// from: `static public float[] colorToRgbaArray(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni$_.JFloatArray? colorToRgbaArray(int i) {
+  static jni$_.JFloatArray? colorToRgbaArray(
+    int i,
+  ) {
     return _colorToRgbaArray(
       _class.reference.pointer,
       _id_colorToRgbaArray as jni$_.JMethodIDPtr,
@@ -373,7 +393,9 @@ class ColorUtils extends jni$_.JObject {
 
   /// from: `static public float[] colorToGlRgbaArray(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni$_.JFloatArray? colorToGlRgbaArray(int i) {
+  static jni$_.JFloatArray? colorToGlRgbaArray(
+    int i,
+  ) {
     return _colorToGlRgbaArray(
       _class.reference.pointer,
       _id_colorToGlRgbaArray as jni$_.JMethodIDPtr,
@@ -392,8 +414,11 @@ final class $ColorUtils$NullableType extends jni$_.JObjType<ColorUtils?> {
 
   @jni$_.internal
   @core$_.override
-  ColorUtils? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : ColorUtils.fromReference(reference);
+  ColorUtils? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : ColorUtils.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -427,7 +452,9 @@ final class $ColorUtils$Type extends jni$_.JObjType<ColorUtils> {
   @jni$_.internal
   @core$_.override
   ColorUtils fromReference(jni$_.JReference reference) =>
-      ColorUtils.fromReference(reference);
+      ColorUtils.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

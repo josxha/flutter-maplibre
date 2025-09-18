@@ -47,8 +47,9 @@ class LatLngQuad$Companion extends jni$_.JObject {
   final jni$_.JObjType<LatLngQuad$Companion> $type;
 
   @jni$_.internal
-  LatLngQuad$Companion.fromReference(jni$_.JReference reference)
-    : $type = type,
+  LatLngQuad$Companion.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -82,7 +83,9 @@ class LatLngQuad$Companion extends jni$_.JObject {
 
   /// from: `synthetic public void <init>(kotlin.jvm.internal.DefaultConstructorMarker defaultConstructorMarker)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory LatLngQuad$Companion(jni$_.JObject? defaultConstructorMarker) {
+  factory LatLngQuad$Companion(
+    jni$_.JObject? defaultConstructorMarker,
+  ) {
     final _$defaultConstructorMarker =
         defaultConstructorMarker?.reference ?? jni$_.jNullReference;
     return LatLngQuad$Companion.fromReference(
@@ -108,7 +111,11 @@ final class $LatLngQuad$Companion$NullableType
   @jni$_.internal
   @core$_.override
   LatLngQuad$Companion? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : LatLngQuad$Companion.fromReference(reference);
+      reference.isNull
+      ? null
+      : LatLngQuad$Companion.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -144,7 +151,9 @@ final class $LatLngQuad$Companion$Type
   @jni$_.internal
   @core$_.override
   LatLngQuad$Companion fromReference(jni$_.JReference reference) =>
-      LatLngQuad$Companion.fromReference(reference);
+      LatLngQuad$Companion.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -175,8 +184,9 @@ class LatLngQuad extends jni$_.JObject {
   final jni$_.JObjType<LatLngQuad> $type;
 
   @jni$_.internal
-  LatLngQuad.fromReference(jni$_.JReference reference)
-    : $type = type,
+  LatLngQuad.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -436,7 +446,10 @@ class LatLngQuad extends jni$_.JObject {
           >();
 
   /// from: `public void writeToParcel(android.os.Parcel parcel, int i)`
-  void writeToParcel(jni$_.JObject parcel, int i) {
+  void writeToParcel(
+    jni$_.JObject parcel,
+    int i,
+  ) {
     final _$parcel = parcel.reference;
     _writeToParcel(
       reference.pointer,
@@ -470,7 +483,9 @@ class LatLngQuad extends jni$_.JObject {
           >();
 
   /// from: `public boolean equals(java.lang.Object object)`
-  bool equals(jni$_.JObject? object) {
+  bool equals(
+    jni$_.JObject? object,
+  ) {
     final _$object = object?.reference ?? jni$_.jNullReference;
     return _equals(
       reference.pointer,
@@ -479,7 +494,10 @@ class LatLngQuad extends jni$_.JObject {
     ).boolean;
   }
 
-  static final _id_hashCode$1 = _class.instanceMethodId(r'hashCode', r'()I');
+  static final _id_hashCode$1 = _class.instanceMethodId(
+    r'hashCode',
+    r'()I',
+  );
 
   static final _hashCode$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -516,8 +534,11 @@ final class $LatLngQuad$NullableType extends jni$_.JObjType<LatLngQuad?> {
 
   @jni$_.internal
   @core$_.override
-  LatLngQuad? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : LatLngQuad.fromReference(reference);
+  LatLngQuad? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : LatLngQuad.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();
@@ -551,7 +572,9 @@ final class $LatLngQuad$Type extends jni$_.JObjType<LatLngQuad> {
   @jni$_.internal
   @core$_.override
   LatLngQuad fromReference(jni$_.JReference reference) =>
-      LatLngQuad.fromReference(reference);
+      LatLngQuad.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectNullableType();

@@ -306,11 +306,22 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
       lngLats.map(toScreenLocationSync).toList(growable: false);
 
   @override
-  void setStyle(String style) {
-    if (style.startsWith('{') || style.startsWith('[')) {
-      _mapView.styleJSON = style.toNSString();
+  Future<void> setStyle(String style) async {
+    final trimmed = style.trim();
+    if (trimmed.startsWith('{')) {
+      // Raw JSON
+      _mapView.styleJSON = trimmed.toNSString();
+    } else if (trimmed.startsWith('/')) {
+      _mapView.styleURL = 'file://$trimmed'.toNSURL()!;
+    } else if (!trimmed.startsWith('http://') &&
+        !trimmed.startsWith('https://') &&
+        !trimmed.startsWith('mapbox://')) {
+      // flutter asset
+      final content = await rootBundle.loadString(trimmed);
+      _mapView.styleJSON = content.toNSString();
     } else {
-      _mapView.styleURL = NSURL.URLWithString(style.toNSString())!;
+      // URI
+      _mapView.styleURL = trimmed.toNSURL()!;
     }
   }
 }

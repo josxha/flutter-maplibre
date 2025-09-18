@@ -67,7 +67,10 @@ final _isNaN =
         >();
 
 /// from: `static public final boolean isNaN(kotlin.jvm.internal.DoubleCompanionObject doubleCompanionObject, double d)`
-bool isNaN(jni$_.JObject doubleCompanionObject, double d) {
+bool isNaN(
+  jni$_.JObject doubleCompanionObject,
+  double d,
+) {
   final _$doubleCompanionObject = doubleCompanionObject.reference;
   return _isNaN(
     _ExtensionsKtClass.reference.pointer,
@@ -102,7 +105,10 @@ final _isNaN$1 =
         >();
 
 /// from: `static public final boolean isNaN(kotlin.jvm.internal.FloatCompanionObject floatCompanionObject, float f)`
-bool isNaN$1(jni$_.JObject floatCompanionObject, double f) {
+bool isNaN$1(
+  jni$_.JObject floatCompanionObject,
+  double f,
+) {
   final _$floatCompanionObject = floatCompanionObject.reference;
   return _isNaN$1(
     _ExtensionsKtClass.reference.pointer,
@@ -137,7 +143,10 @@ final _isInfinite =
         >();
 
 /// from: `static public final boolean isInfinite(kotlin.jvm.internal.DoubleCompanionObject doubleCompanionObject, double d)`
-bool isInfinite(jni$_.JObject doubleCompanionObject, double d) {
+bool isInfinite(
+  jni$_.JObject doubleCompanionObject,
+  double d,
+) {
   final _$doubleCompanionObject = doubleCompanionObject.reference;
   return _isInfinite(
     _ExtensionsKtClass.reference.pointer,
@@ -172,7 +181,10 @@ final _isInfinite$1 =
         >();
 
 /// from: `static public final boolean isInfinite(kotlin.jvm.internal.FloatCompanionObject floatCompanionObject, double d)`
-bool isInfinite$1(jni$_.JObject floatCompanionObject, double d) {
+bool isInfinite$1(
+  jni$_.JObject floatCompanionObject,
+  double d,
+) {
   final _$floatCompanionObject = floatCompanionObject.reference;
   return _isInfinite$1(
     _ExtensionsKtClass.reference.pointer,

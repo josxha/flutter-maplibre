@@ -53,8 +53,9 @@ class RasterDemSource$Companion extends jni$_.JObject {
   final jni$_.JObjType<RasterDemSource$Companion> $type;
 
   @jni$_.internal
-  RasterDemSource$Companion.fromReference(jni$_.JReference reference)
-    : $type = type,
+  RasterDemSource$Companion.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -88,7 +89,9 @@ class RasterDemSource$Companion extends jni$_.JObject {
 
   /// from: `synthetic public void <init>(kotlin.jvm.internal.DefaultConstructorMarker defaultConstructorMarker)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory RasterDemSource$Companion(jni$_.JObject? defaultConstructorMarker) {
+  factory RasterDemSource$Companion(
+    jni$_.JObject? defaultConstructorMarker,
+  ) {
     final _$defaultConstructorMarker =
         defaultConstructorMarker?.reference ?? jni$_.jNullReference;
     return RasterDemSource$Companion.fromReference(
@@ -116,7 +119,9 @@ final class $RasterDemSource$Companion$NullableType
   RasterDemSource$Companion? fromReference(jni$_.JReference reference) =>
       reference.isNull
       ? null
-      : RasterDemSource$Companion.fromReference(reference);
+      : RasterDemSource$Companion.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -152,7 +157,9 @@ final class $RasterDemSource$Companion$Type
   @jni$_.internal
   @core$_.override
   RasterDemSource$Companion fromReference(jni$_.JReference reference) =>
-      RasterDemSource$Companion.fromReference(reference);
+      RasterDemSource$Companion.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const jni$_.JObjectType();
@@ -183,8 +190,9 @@ class RasterDemSource extends source$_.Source {
   final jni$_.JObjType<RasterDemSource> $type;
 
   @jni$_.internal
-  RasterDemSource.fromReference(jni$_.JReference reference)
-    : $type = type,
+  RasterDemSource.fromReference(
+    jni$_.JReference reference,
+  ) : $type = type,
       super.fromReference(reference);
 
   static final _class = jni$_.JClass.forName(
@@ -206,7 +214,9 @@ class RasterDemSource extends source$_.Source {
 
   /// from: `static public final int DEFAULT_TILE_SIZE`
   static const DEFAULT_TILE_SIZE = 512;
-  static final _id_new$ = _class.constructorId(r'(J)V');
+  static final _id_new$ = _class.constructorId(
+    r'(J)V',
+  );
 
   static final _new$ =
       jni$_.ProtectedJniExtensions.lookup<
@@ -228,7 +238,9 @@ class RasterDemSource extends source$_.Source {
 
   /// from: `public void <init>(long j)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory RasterDemSource(int j) {
+  factory RasterDemSource(
+    int j,
+  ) {
     return RasterDemSource.fromReference(
       _new$(
         _class.reference.pointer,
@@ -265,7 +277,10 @@ class RasterDemSource extends source$_.Source {
 
   /// from: `public void <init>(java.lang.String string, java.net.URL uRL)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory RasterDemSource.new$1(jni$_.JString? string, url$_.URL uRL) {
+  factory RasterDemSource.new$1(
+    jni$_.JString? string,
+    url$_.URL uRL,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$uRL = uRL.reference;
     return RasterDemSource.fromReference(
@@ -305,7 +320,10 @@ class RasterDemSource extends source$_.Source {
 
   /// from: `public void <init>(java.lang.String string, java.net.URI uRI)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory RasterDemSource.new$2(jni$_.JString? string, uri$_.URI uRI) {
+  factory RasterDemSource.new$2(
+    jni$_.JString? string,
+    uri$_.URI uRI,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$uRI = uRI.reference;
     return RasterDemSource.fromReference(
@@ -345,7 +363,10 @@ class RasterDemSource extends source$_.Source {
 
   /// from: `public void <init>(java.lang.String string, java.lang.String string1)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory RasterDemSource.new$3(jni$_.JString? string, jni$_.JString? string1) {
+  factory RasterDemSource.new$3(
+    jni$_.JString? string,
+    jni$_.JString? string1,
+  ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$string1 = string1?.reference ?? jni$_.jNullReference;
     return RasterDemSource.fromReference(
@@ -574,8 +595,11 @@ final class $RasterDemSource$NullableType
 
   @jni$_.internal
   @core$_.override
-  RasterDemSource? fromReference(jni$_.JReference reference) =>
-      reference.isNull ? null : RasterDemSource.fromReference(reference);
+  RasterDemSource? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : RasterDemSource.fromReference(
+          reference,
+        );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const source$_.$Source$Type();
@@ -610,7 +634,9 @@ final class $RasterDemSource$Type extends jni$_.JObjType<RasterDemSource> {
   @jni$_.internal
   @core$_.override
   RasterDemSource fromReference(jni$_.JReference reference) =>
-      RasterDemSource.fromReference(reference);
+      RasterDemSource.fromReference(
+        reference,
+      );
   @jni$_.internal
   @core$_.override
   jni$_.JObjType get superType => const source$_.$Source$Type();
