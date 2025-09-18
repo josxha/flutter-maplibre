@@ -1,10 +1,5 @@
 # MapLibre for Flutter
 
-> [!WARNING]
-> The iOS implementation is during the funding phase provided under
-> the [Non-Profit Open Software License version 3.0 (NPOSL-3.0)](https://opensource.org/license/osl-3-0-php).
-> After funding is completed, it will get released under the permissive 3-Clause BSD License.
-
 [![Pub Version](https://img.shields.io/pub/v/maplibre)](https://pub.dev/packages/maplibre)
 [![stars](https://badgen.net/github/stars/josxha/flutter-maplibre?label=stars&color=green&icon=github)](https://github.com/josxha/flutter-maplibre/stargazers)
 [![likes](https://img.shields.io/pub/likes/maplibre?logo=flutter)](https://pub.dev/packages/maplibre)
@@ -14,17 +9,20 @@
 [![codecov](https://codecov.io/gh/josxha/flutter-maplibre/graph/badge.svg?token=3LK7EQMSUM)](https://codecov.io/gh/josxha/flutter-maplibre)
 [![style: very good analysis](https://img.shields.io/badge/style-very_good_analysis-B22C89.svg)](https://pub.dev/packages/very_good_analysis)
 
-This package provides unofficial Flutter bindings for MapLibre SDKs.
+This package provides Flutter bindings for the MapLibre SDKs through native
+interoperability (FFI/JNI). Its goal is to deliver a consistent, cross-platform
+experience with excellent performance.
 
-- [maplibre-gl-js](https://github.com/maplibre/maplibre-gl-js) is used for web
-- [maplibre-native](https://github.com/maplibre/maplibre-native) (previously
-  named maplibre-gl) is used for android and in the future for iOS,
-  windows, macOS and Linux
+- For web, it uses [maplibre-gl-js](https://github.com/maplibre/maplibre-gl-js),
+  a fork of [mapbox-gl-js](https://github.com/mapbox/mapbox-gl-js).
+- For Android and iOS, it
+  uses [maplibre-native](https://github.com/maplibre/maplibre-native) (formerly
+  maplibre-gl), a fork
+  of [mapbox-gl-native](https://github.com/mapbox/mapbox-gl-native).
 
-MapLibre is a permissive and open source solution for the MVT
-(Mapbox Vector Tile) standard. By binding to native SDKs the package
-accomplishes performant rendering while supporting a lot of complex
-functionality.
+MapLibre is a permissive, open-source implementation of the Mapbox Vector Tile 
+(MVT) standard. By leveraging native SDKs, this package enables high-performance
+rendering while supporting advanced mapping features.
 
 <table>
   <tbody>
