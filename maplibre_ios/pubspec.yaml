@@ -39,6 +39,15 @@ ffigen:
       - 'CLLocationCoordinate2D'
       - 'NSAttributedString'
       - 'NSImage'
+      - 'UIAction'
+      - 'UIMenu'
+      - 'UIPointerEffect'
+      - 'UIPointerShape'
+      - 'UIPointerStyle'
+      - 'UITableViewCell'
+      - 'UICellConfigurationState'
+      - 'UITableViewHeaderFooterView'
+      - 'UIViewConfigurationState'
       - 'NSExpression'
       - 'Helpers'
       - 'MLN.*'
@@ -53,12 +62,21 @@ ffigen:
     member-rename:
       'MLNSource':
         # https://github.com/dart-lang/native/issues/2419
-        'initWithIdentifier:': 'initWithIdentifierOnly:'
+        'initWithIdentifier:': 'initWithIdentifier_:'
+      'MLNMapView':
+        'initWithFrame': 'initWithFrame_'
+        'convertPoint': 'convertPoint_'
+        'convertRect': 'convertRect_'
+      'UIResponder':
+        'copy': 'copy_'
+      'UIPointerStyle':
+        'styleWithShape': 'styleWithShape_'
   compiler-opts:
-    - '-Fios/maplibre_ios/.build/artifacts/maplibre-gl-native-distribution/MapLibre/MapLibre.xcframework/ios-arm64/'
-    - '-framework'
-    - 'MapLibre'
-    # - '-isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk'
+    - '-Fios/.build/MapLibre.xcframework/ios-arm64/'
+    - '-Iios/.build/MapLibre.xcframework/ios-arm64/MapLibre.framework/Headers'
+#    - '-framework'
+#    - 'MapLibre'
+    - '-isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk'
   headers:
     entry-points:
       - 'ios/maplibre_ios/Sources/maplibre_ios/MapLibreRegistry.h'

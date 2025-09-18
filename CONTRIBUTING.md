@@ -106,7 +106,7 @@ git clone https://github.com/maplibre/maplibre-native --recurse-submodules --sha
 Then build MapLibre (this will take a while):
 
 ```bash
-cd flutter-maplibre/maplibre_ios
+cd flutter-maplibre/maplibre_ios/ios
 ./build_maplibre.sh
 ```
 
@@ -125,7 +125,7 @@ Generate Obj-C headers for the library's native Swift layer:
 (cd ios/maplibre_ios/Sources/maplibre_ios && ./gen_swift_headers.sh)
 ```
 
-Finally, run ffigen from the maplibre_ios directory:
+Finally, run ffigen from the `maplibre_ios` directory:
 
 ```bash
 dart run ffigen
