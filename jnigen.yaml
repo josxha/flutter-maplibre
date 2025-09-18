@@ -48,5 +48,5 @@ classes:
   - 'org.maplibre.android.util'
   - 'org.maplibre.android.utils'
   - 'org.maplibre.geojson.Feature'
-  - 'com.google.gson.JsonObject'
   - 'com.google.gson.Gson'
+  - 'com.google.gson.JsonObject'
