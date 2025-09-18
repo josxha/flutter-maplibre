@@ -20,7 +20,7 @@ experience with excellent performance.
   maplibre-gl), a fork
   of [mapbox-gl-native](https://github.com/mapbox/mapbox-gl-native).
 
-MapLibre is a permissive, open-source implementation of the Mapbox Vector Tile 
+MapLibre is a permissive, open-source implementation of the Mapbox Vector Tile
 (MVT) standard. By leveraging native SDKs, this package enables high-performance
 rendering while supporting advanced mapping features.
 
