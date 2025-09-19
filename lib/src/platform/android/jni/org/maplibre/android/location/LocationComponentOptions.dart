@@ -38,6 +38,8 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
+import '../../../../android/graphics/RectF.dart' as rectf$_;
+
 /// from: `org.maplibre.android.location.LocationComponentOptions$Builder`
 class LocationComponentOptions$Builder extends jni$_.JObject {
   @jni$_.internal
@@ -1161,7 +1163,7 @@ class LocationComponentOptions$Builder extends jni$_.JObject {
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder trackingMultiFingerProtectedMoveArea(android.graphics.RectF rectF)`
   /// The returned object must be released after use, by calling the [release] method.
   LocationComponentOptions$Builder trackingMultiFingerProtectedMoveArea(
-    jni$_.JObject? rectF,
+    rectf$_.RectF? rectF,
   ) {
     final _$rectF = rectF?.reference ?? jni$_.jNullReference;
     return _trackingMultiFingerProtectedMoveArea(
@@ -1872,7 +1874,7 @@ class LocationComponentOptions extends jni$_.JObject {
     bool z1,
     double f4,
     double f5,
-    jni$_.JObject? rectF,
+    rectf$_.RectF? rectF,
     jni$_.JString? string6,
     jni$_.JString? string7,
     double f6,
@@ -2911,11 +2913,11 @@ class LocationComponentOptions extends jni$_.JObject {
 
   /// from: `public android.graphics.RectF trackingMultiFingerProtectedMoveArea()`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? trackingMultiFingerProtectedMoveArea() {
+  rectf$_.RectF? trackingMultiFingerProtectedMoveArea() {
     return _trackingMultiFingerProtectedMoveArea(
       reference.pointer,
       _id_trackingMultiFingerProtectedMoveArea as jni$_.JMethodIDPtr,
-    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+    ).object<rectf$_.RectF?>(const rectf$_.$RectF$NullableType());
   }
 
   static final _id_layerAbove = _class.instanceMethodId(
