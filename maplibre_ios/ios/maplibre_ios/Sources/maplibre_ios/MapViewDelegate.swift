@@ -32,7 +32,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
       switch result {
       case let .success(mapOptions):
         self._mapOptions = mapOptions
-         
+
         // TODO(josxha): match the implementation from `setStyle()`
         if mapOptions.style.hasPrefix("{") || mapOptions.style.hasPrefix("[") {
           self._mapView = MLNMapView(frame: self._view.bounds, styleJSON: mapOptions.style)
