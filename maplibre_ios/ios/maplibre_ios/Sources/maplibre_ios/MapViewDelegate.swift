@@ -32,7 +32,8 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
       switch result {
       case let .success(mapOptions):
         self._mapOptions = mapOptions
-
+         
+        // TODO(josxha): match the implementation from `setStyle()`
         if mapOptions.style.hasPrefix("{") || mapOptions.style.hasPrefix("[") {
           self._mapView = MLNMapView(frame: self._view.bounds, styleJSON: mapOptions.style)
         } else {
@@ -70,6 +71,8 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
         self._mapView.maximumZoomLevel = mapOptions.maxZoom
         self._mapView.minimumPitch = mapOptions.minPitch
         self._mapView.maximumPitch = mapOptions.maxPitch
+
+        self._mapView.styleURL = URL(string: mapOptions.style)
 
         self._mapView.allowsRotating = mapOptions.gestures.rotate
         self._mapView.allowsScrolling = mapOptions.gestures.pan

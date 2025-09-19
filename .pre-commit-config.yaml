@@ -1,0 +1,27 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.2.0
+    hooks:
+    # -   id: trailing-whitespace
+    # -   id: end-of-file-fixer
+    -   id: check-yaml
+    -   id: check-added-large-files
+-   repo: local
+    hooks:
+    -   id: dart-format
+        name: dart format
+        entry: dart format
+        language: system
+        types: [dart]
+    -   id: dart-analyze
+        name: dart analyze
+        entry: dart analyze --fatal-warnings --fatal-infos
+        language: system
+        types: [dart]
+    -   id: swift-format
+        name: swift format
+        entry: swiftformat --swiftversion 6 --indent 2
+        language: system
+        types: [swift]
