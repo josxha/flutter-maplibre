@@ -38,6 +38,10 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
+import '../../../com/google/gson/Gson.dart' as gson$_;
+
+import '../../../com/google/gson/JsonObject.dart' as jsonobject$_;
+
 /// from: `org.maplibre.geojson.Feature`
 ///
 /// This defines a GeoJson Feature object which represents a spatially bound thing. Every Feature
@@ -257,7 +261,7 @@ class Feature extends jni$_.JObject {
   ///@since 1.0.0
   static Feature? fromGeometry$2(
     jni$_.JObject? geometry,
-    jni$_.JObject? properties,
+    jsonobject$_.JsonObject? properties,
   ) {
     final _$geometry = geometry?.reference ?? jni$_.jNullReference;
     final _$properties = properties?.reference ?? jni$_.jNullReference;
@@ -313,7 +317,7 @@ class Feature extends jni$_.JObject {
   ///@since 1.0.0
   static Feature? fromGeometry$3(
     jni$_.JObject? geometry,
-    jni$_.JObject? properties,
+    jsonobject$_.JsonObject? properties,
     jni$_.JObject? bbox,
   ) {
     final _$geometry = geometry?.reference ?? jni$_.jNullReference;
@@ -371,7 +375,7 @@ class Feature extends jni$_.JObject {
   ///@since 1.0.0
   static Feature? fromGeometry$4(
     jni$_.JObject? geometry,
-    jni$_.JObject? properties,
+    jsonobject$_.JsonObject? properties,
     jni$_.JString? id,
   ) {
     final _$geometry = geometry?.reference ?? jni$_.jNullReference;
@@ -432,7 +436,7 @@ class Feature extends jni$_.JObject {
   ///@since 1.0.0
   static Feature? fromGeometry$5(
     jni$_.JObject? geometry,
-    jni$_.JObject? properties,
+    jsonobject$_.JsonObject? properties,
     jni$_.JString? id,
     jni$_.JObject? bbox,
   ) {
@@ -623,11 +627,13 @@ class Feature extends jni$_.JObject {
   /// member is a JsonObject and might be empty if no properties are provided.
   ///@return a JsonObject which holds this features current properties
   ///@since 1.0.0
-  jni$_.JObject? properties() {
+  jsonobject$_.JsonObject? properties() {
     return _properties(
       reference.pointer,
       _id_properties as jni$_.JMethodIDPtr,
-    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+    ).object<jsonobject$_.JsonObject?>(
+      const jsonobject$_.$JsonObject$NullableType(),
+    );
   }
 
   static final _id_toJson = _class.instanceMethodId(
@@ -696,7 +702,7 @@ class Feature extends jni$_.JObject {
   ///@return the TYPE adapter for this class
   ///@since 3.0.0
   static jni$_.JObject? typeAdapter(
-    jni$_.JObject? gson,
+    gson$_.Gson? gson,
   ) {
     final _$gson = gson?.reference ?? jni$_.jNullReference;
     return _typeAdapter(

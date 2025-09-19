@@ -1,6 +1,5 @@
 maven_downloads:
   source_deps:
-    #  jar_only_deps:
     - 'org.maplibre.gl:android-sdk-geojson:6.0.1'
 preamble: |
   // ignore_for_file: type=lint
@@ -16,6 +15,7 @@ source_path:
 classes:
 # https://github.com/maplibre/maplibre-native/tree/main/platform/android/MapLibreAndroid/src/main/java/org/maplibre/android
   - 'android.graphics.PointF'
+  - 'android.graphics.RectF'
   - 'android.location.Location'
   - 'com.github.josxha.maplibre.Helpers'
   - 'com.github.josxha.maplibre.MapLibreRegistry'
@@ -48,3 +48,5 @@ classes:
   - 'org.maplibre.android.util'
   - 'org.maplibre.android.utils'
   - 'org.maplibre.geojson.Feature'
+  - 'com.google.gson.Gson'
+  - 'com.google.gson.JsonObject'

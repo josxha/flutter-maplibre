@@ -53,3 +53,83 @@ you're interested in making contributions:
    message. This summary will go into the commit details of the squashed commit.
 
 Thanks for every contribution you make to the project.
+
+# Building
+
+## jnigen
+
+Ensure you have JDK 17 installed and set as the system JDK version:
+
+```bash
+apt install openjdk-17-jdk-headless
+sudo update-alternatives --config java
+```  
+or
+```bash
+brew install openjdk@17
+echo 'export JAVA_HOME="$(/usr/libexec/java_home -v 17)"' >> ~/.zshrc
+source ~/.zshrc
+```  
+
+Build the example project to fetch Gradle dependencies:
+
+```bash
+(cd example/ && flutter build apk)
+```
+
+Run jnigen:
+
+```bash
+./run_jnigen.sh
+```
+
+This script runs `dart run jnigen --config jnigen.yaml` and applies some manual
+fixes to the generated code.
+
+## ffigen (macOS only)
+
+Build the example project:
+
+```bash
+(cd example/ && flutter build ios --release --no-codesign)
+```
+
+### \<optional> build MapLibre Native with debugging symbols
+
+Clone maplibre-native as a sibling to flutter-maplibre:
+
+```bash
+cd ..
+git clone https://github.com/maplibre/maplibre-native --recurse-submodules --shallow-submodules
+```
+
+Then build MapLibre (this will take a while):
+
+```bash
+cd flutter-maplibre/maplibre_ios/ios
+./build_maplibre.sh
+```
+
+This will output a copy of MapLibre.xcframework in `maplibre_ios/.build`.
+
+Finally, modify `maplibre_ios/ios/maplibre_ios.podspec` and 
+`maplibre_ios/ios/maplibre_ios/Package.swift` to use your local copy of 
+MapLibre. Comment out lines marked `// FOR PREBUILT LIBRARY` and
+uncomment lines marked `// FOR LOCAL LIBRARY`.
+
+### \</optional>
+
+Generate Obj-C headers for the library's native Swift layer:
+
+```bash
+(cd ios/maplibre_ios/Sources/maplibre_ios && ./gen_swift_headers.sh)
+```
+
+Finally, run ffigen from the `maplibre_ios` directory:
+
+```bash
+dart run ffigen
+```
+
+The script runs ffigen on the relevant version of MapLibre.framework in the 
+Swift build cache.
