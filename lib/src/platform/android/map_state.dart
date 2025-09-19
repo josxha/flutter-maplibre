@@ -533,34 +533,33 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
   }
 
   @override
-  void setStyle(String style) {
-    (() async {
-      final trimmed = style.trim();
-      final builder = jni.Style$Builder();
-      if (trimmed.startsWith('{') || trimmed.startsWith('[')) {
-        // Raw JSON
-        builder.fromJson(trimmed.toJString());
-      } else if (trimmed.startsWith('/')) {
-        builder.fromUri('file://$trimmed'.toJString());
-      } else if (!trimmed.startsWith('http://') &&
-          !trimmed.startsWith('https://') &&
-          !trimmed.startsWith('mapbox://')) {
-        // flutter asset
-        final content = await rootBundle.loadString(trimmed);
-        builder.fromJson(content.toJString());
-      } else {
-        // URI
-        builder.fromUri(trimmed.toJString());
-      }
-      _jniMapLibreMap?.setStyle$3(
-        builder,
-        jni.Style$OnStyleLoaded.implement(
-          jni.$Style$OnStyleLoaded(
-            onStyleLoaded: (style) => onStyleLoaded(),
-          ),
+  // ignore: avoid_void_async
+  void setStyle(String style) async {
+    final trimmed = style.trim();
+    final builder = jni.Style$Builder();
+    if (trimmed.startsWith('{') || trimmed.startsWith('[')) {
+      // Raw JSON
+      builder.fromJson(trimmed.toJString());
+    } else if (trimmed.startsWith('/')) {
+      builder.fromUri('file://$trimmed'.toJString());
+    } else if (!trimmed.startsWith('http://') &&
+        !trimmed.startsWith('https://') &&
+        !trimmed.startsWith('mapbox://')) {
+      // flutter asset
+      final content = await rootBundle.loadString(trimmed);
+      builder.fromJson(content.toJString());
+    } else {
+      // URI
+      builder.fromUri(trimmed.toJString());
+    }
+    _jniMapLibreMap?.setStyle$3(
+      builder,
+      jni.Style$OnStyleLoaded.implement(
+        jni.$Style$OnStyleLoaded(
+          onStyleLoaded: (style) => onStyleLoaded(),
         ),
-      );
-      builder.release();
-    })();
+      ),
+    );
+    builder.release();
   }
 }
