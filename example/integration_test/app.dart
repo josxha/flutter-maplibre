@@ -11,6 +11,7 @@ class App extends StatelessWidget {
     this.onMapCreated,
     this.onStyleLoaded,
     this.onEvent,
+    this.children = const [],
     super.key,
   });
 
@@ -18,6 +19,7 @@ class App extends StatelessWidget {
   final MapCreatedCallback? onMapCreated;
   final MapEventCallback? onEvent;
   final StyleLoadedCallback? onStyleLoaded;
+  final List<Widget> children;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +31,7 @@ class App extends StatelessWidget {
           onMapCreated: onMapCreated,
           onStyleLoaded: onStyleLoaded,
           onEvent: onEvent,
+          children: children,
         ),
       ),
     );

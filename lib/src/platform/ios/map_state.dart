@@ -209,6 +209,81 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     }
   }
 
+  Object? _featureIdFrom(ObjCObjectBase? object) {
+    if (object == null) {
+      return null;
+    } else if (NSString.isInstance(object)) {
+      return NSString.castFrom(object).toDartString();
+    } else if (NSNumber.isInstance(object)) {
+      return NSNumber.castFrom(object).intValue;
+    }
+    return null;
+  }
+
+  Future<List<RenderedFeature>> _nativeQueryToRenderedFeatures(
+    NSArray query,
+  ) async {
+    final features = query.map(MLNFeatureWrapper.castFrom);
+    return features
+        .map(
+          (f) => RenderedFeature(
+            id: _featureIdFrom(f.identifier),
+            properties: f.attributes.toDartMap().map(
+              (k, v) => MapEntry(k.toString(), v),
+            ),
+          ),
+        )
+        .toList();
+  }
+
+  @override
+  Future<List<RenderedFeature>> featuresAtPoint(
+    Offset point, {
+    List<String>? layerIds,
+  }) async {
+    final style = this.style;
+    if (style == null) {
+      return [];
+    }
+    if (layerIds?.isEmpty ?? false) {
+      // https://github.com/maplibre/maplibre-native/issues/2828
+      return [];
+    }
+
+    final query = _mapView.visibleFeaturesAtPoint$1(
+      point.toCGPoint(),
+      inStyleLayersWithIdentifiers: layerIds == null
+          ? null
+          : NSSet.of(layerIds.map((s) => s.toNSString())),
+    );
+
+    return _nativeQueryToRenderedFeatures(query);
+  }
+
+  @override
+  Future<List<RenderedFeature>> featuresInRect(
+    Rect rect, {
+    List<String>? layerIds,
+  }) async {
+    final style = this.style;
+    if (style == null) {
+      return [];
+    }
+    if (layerIds?.isEmpty ?? false) {
+      // https://github.com/maplibre/maplibre-native/issues/2828
+      return [];
+    }
+
+    final query = _mapView.visibleFeaturesInRect$1(
+      rect.toCGRect(),
+      inStyleLayersWithIdentifiers: layerIds == null
+          ? null
+          : NSSet.of(layerIds.map((s) => s.toNSString())),
+    );
+
+    return _nativeQueryToRenderedFeatures(query);
+  }
+
   @override
   Future<List<QueriedLayer>> queryLayers(Offset screenLocation) async {
     final style = this.style;
@@ -217,20 +292,22 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
 
     final point = screenLocation.toCGPoint();
     final queriedLayers = <QueriedLayer>[];
-    for (var i = layers.count - 1; i >= 0; i--) {
+    for (var i = layers.length - 1; i >= 0; i--) {
       final layer = layers[i];
       final features = _mapView.visibleFeaturesAtPoint$1(
         point,
-        // TODO use layer.id
-        inStyleLayersWithIdentifiers: NSSet.setWithObject(layer),
+        inStyleLayersWithIdentifiers: NSSet.setWithObject(layer.identifier),
       );
       if (features.count == 0) continue;
-      /* TODO final queriedLayer = QueriedLayer(
-        layerId: jLayerId.toDartString(releaseOriginal: true),
-        sourceId: jSourceId.toDartString(releaseOriginal: true),
-        sourceLayer: sourceLayer.isEmpty ? null : sourceLayer,
-      );
-      queriedLayers.add(queriedLayer);*/
+      if (features.isNotEmpty && MLNVectorStyleLayer.isInstance(layer)) {
+        final vectorLayer = MLNVectorStyleLayer.castFrom(layer);
+        final queriedLayer = QueriedLayer(
+          layerId: layer.identifier.toDartString(),
+          sourceId: vectorLayer.sourceIdentifier?.toDartString(),
+          sourceLayer: vectorLayer.sourceLayerIdentifier?.toDartString(),
+        );
+        queriedLayers.add(queriedLayer);
+      }
     }
     return queriedLayers;
   }

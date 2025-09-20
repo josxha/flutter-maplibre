@@ -233,7 +233,9 @@ class StyleControllerIos implements StyleController {
     );
   }
 
-  NSArray _getLayers() => _ffiStyle.layers;
+  List<MLNStyleLayer> _getLayers() => List<MLNStyleLayer>.from(
+    _ffiStyle.layers.toDartList(convertOther: MLNStyleLayer.castFrom),
+  );
 
   @override
   void setProjection(MapProjection projection) {

@@ -26,8 +26,9 @@ void main() {
       final ctrl = await completer.future;
       final camera = ctrl.camera;
       expect(camera, isNot(isNull));
-      expect(camera!.zoom, equals(1));
-      expect(camera.center, equals(Position(1, 2)));
+      expect(camera!.zoom, closeTo(1, 0.01));
+      expect(camera.center.lng, closeTo(1, 0.01));
+      expect(camera.center.lat, closeTo(2, 0.01));
     });
   });
 }

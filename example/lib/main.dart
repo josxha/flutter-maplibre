@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:maplibre_example/animation_page.dart';
 import 'package:maplibre_example/controller_page.dart';
 import 'package:maplibre_example/events_page.dart';
+import 'package:maplibre_example/features_query_page.dart';
 import 'package:maplibre_example/gestures_page.dart';
 import 'package:maplibre_example/kiosk_page.dart';
 import 'package:maplibre_example/layers_circle_page.dart';
@@ -81,6 +82,7 @@ class MyApp extends StatelessWidget {
         LayersPolylinePage.location: (context) => const LayersPolylinePage(),
         LayersPolygonPage.location: (context) => const LayersPolygonPage(),
         ParametersPage.location: (context) => const ParametersPage(),
+        FeaturesQueryPage.location: (context) => const FeaturesQueryPage(),
         ControllerPage.location: (context) => const ControllerPage(),
         TwoMapsPage.location: (context) => const TwoMapsPage(),
       },
