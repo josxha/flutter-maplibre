@@ -51,15 +51,17 @@ class _EventsPageState extends State<EventsPage> {
     MapEventStartMoveCamera() => _print(
       'start move camera, reason: ${event.reason.name}',
     ),
-    MapEventClick() => _print('clicked: ${_formatPosition(event.point)}'),
+    MapEventClick() => _print(
+      'clicked: ${_formatPosition(event.point)}, screen: ${_formatOffset(event.screenPoint)}',
+    ),
     MapEventDoubleClick() => _print(
-      'double clicked: ${_formatPosition(event.point)}',
+      'double clicked: ${_formatPosition(event.point)}, screen: ${_formatOffset(event.screenPoint)}',
     ),
     MapEventLongClick() => _print(
-      'long clicked: ${_formatPosition(event.point)}',
+      'long clicked: ${_formatPosition(event.point)}, screen: ${_formatOffset(event.screenPoint)}',
     ),
     MapEventSecondaryClick() => _print(
-      'secondary clicked: ${_formatPosition(event.point)}',
+      'secondary clicked: ${_formatPosition(event.point)}, screen: ${_formatOffset(event.screenPoint)}',
     ),
     MapEventIdle() => _print('idle'),
     MapEventCameraIdle() => _print('camera idle'),
@@ -75,4 +77,7 @@ class _EventsPageState extends State<EventsPage> {
 
   String _formatPosition(Position point) =>
       '${point.lng.toStringAsFixed(3)}, ${point.lat.toStringAsFixed(3)}';
+
+  String _formatOffset(Offset offset) =>
+      '${offset.dx.toStringAsFixed(1)}, ${offset.dy.toStringAsFixed(1)}';
 }

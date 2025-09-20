@@ -17,6 +17,7 @@ extension type MapMouseEvent._(MapLibreEvent _) implements MapLibreEvent {
 
   external LngLat lngLat;
   external JSObject originalEvent;
+  external Point point;
 }
 
 /// Abstract class for type safe event types.
