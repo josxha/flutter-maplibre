@@ -5,7 +5,6 @@ repository: https://github.com/josxha/flutter-maplibre
 issue_tracker: https://github.com/josxha/flutter-maplibre/issues
 homepage: https://flutter-maplibre.pages.dev
 documentation: https://flutter-maplibre.pages.dev/docs/index/
-publish_to: 'none'
 
 topics: [ map, maplibre, mvt ]
 
