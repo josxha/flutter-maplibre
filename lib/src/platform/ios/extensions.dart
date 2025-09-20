@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:ffi';
+import 'dart:ffi' hide Size;
 
 import 'package:flutter/cupertino.dart';
 import 'package:maplibre/maplibre.dart';
@@ -31,6 +31,28 @@ extension OffsetExt on Offset {
     point.x = dx;
     point.y = dy;
     return point;
+  }
+}
+
+/// Internal extension on [Size].
+extension SizeExt on Size {
+  /// Convert a [Size] to a [CGSize].
+  CGSize toCGSize() {
+    final size = Struct.create<CGSize>();
+    size.width = width;
+    size.height = height;
+    return size;
+  }
+}
+
+/// Internal extension on [Rect].
+extension RectExt on Rect {
+  /// Convert a [Rect] to a [CGRect].
+  CGRect toCGRect() {
+    final rect = Struct.create<CGRect>();
+    rect.origin = topLeft.toCGPoint();
+    rect.size = size.toCGSize();
+    return rect;
   }
 }
 
