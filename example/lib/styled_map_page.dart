@@ -17,15 +17,13 @@ class _StyledMapPageState extends State<StyledMapPage> {
     'MapTiler Streets': MapStyles.maptilerStreets,
     'Protomaps Light': MapStyles.protomapsLight,
     'Protomaps Dark': MapStyles.protomapsDark,
+    'Countries': MapStyles.countries,
   };
   String _styleUrl = _styles.values.first;
   late MapController _controller;
 
   @override
   Widget build(BuildContext context) {
-    final buttonSegments = _styles.entries
-        .map((e) => ButtonSegment(value: e.value, label: Text(e.key)))
-        .toList(growable: false);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Styled Map'),
@@ -33,15 +31,29 @@ class _StyledMapPageState extends State<StyledMapPage> {
           preferredSize: const Size.fromHeight(50),
           child: Padding(
             padding: const EdgeInsets.only(bottom: 16, left: 8, right: 8),
-            child: SegmentedButton<String>(
-              segments: buttonSegments,
-              selected: {_styleUrl},
-              onSelectionChanged: (values) {
-                // update the segmented button
-                setState(() => _styleUrl = values.first);
-                // apply the new style on the map
-                _controller.setStyle(_styleUrl);
-              },
+            child: SizedBox(
+              height: 30,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+                children: _styles.entries
+                    .map(
+                      (e) => Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 2),
+                        child: ChoiceChip(
+                          label: Text(e.key),
+                          selected: _styleUrl == e.value,
+                          onSelected: (value) {
+                            // update the segmented button
+                            setState(() => _styleUrl = e.value);
+                            // apply the new style on the map
+                            _controller.setStyle(_styleUrl);
+                          },
+                        ),
+                      ),
+                    )
+                    .toList(growable: false),
+              ),
             ),
           ),
         ),

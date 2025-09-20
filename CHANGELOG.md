@@ -1,3 +1,8 @@
+# next
+
+- `MapController#setStyle` no longer returns a Future. To know when the map
+  style has loaded, listen to `MapLibreMap#onStyleLoaded`
+
 ## 0.2.2
 
 Maintenance release and some new functionality. 

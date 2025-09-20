@@ -60,6 +60,16 @@ class StyleControllerWeb implements StyleController {
   }
 
   @override
+  List<String> getLayerIds() {
+    final layers = _map.getStyle()?.layers.dartify() as List<Object?>?;
+    if (layers == null) return const [];
+    return layers
+        .map((l) => (l as Map<Object?, Object?>?)?['id'])
+        .whereType<String>()
+        .toList();
+  }
+
+  @override
   Future<void> addLayer(StyleLayer layer, {String? belowLayerId}) async {
     switch (layer) {
       case FillStyleLayer():

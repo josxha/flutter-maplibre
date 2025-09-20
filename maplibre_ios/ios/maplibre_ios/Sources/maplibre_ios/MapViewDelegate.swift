@@ -32,8 +32,14 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
       switch result {
       case let .success(mapOptions):
         self._mapOptions = mapOptions
-        // init map view
-        self._mapView = MLNMapView(frame: self._view.bounds)
+
+        // TODO(josxha): match the implementation from `setStyle()`
+        if mapOptions.style.hasPrefix("{") || mapOptions.style.hasPrefix("[") {
+          self._mapView = MLNMapView(frame: self._view.bounds, styleJSON: mapOptions.style)
+        } else {
+          self._mapView = MLNMapView(frame: self._view.bounds, styleURL: URL(string: mapOptions.style))
+        }
+
         MapLibreRegistry.addMap(viewId: viewId, map: self._mapView)
         self._mapView.autoresizingMask = [
           .flexibleWidth, .flexibleHeight,
