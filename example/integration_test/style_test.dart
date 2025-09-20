@@ -18,7 +18,7 @@ void main() {
         onStyleLoaded: style.complete,
         options: MapOptions(
           initCenter: Position(0, 0),
-          initStyle: MapStyles.customJsonStyle,
+          initStyle: MapStyles.countries,
         ),
       );
       await tester.pumpWidget(app);

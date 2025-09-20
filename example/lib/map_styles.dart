@@ -7,62 +7,57 @@ abstract class MapStyles {
       'https://api.maptiler.com/maps/streets-v2/style.json?key=$_maptilerKey';
   static const protomapsLightPmTiles = 'assets/styles/protomaps-light.json';
   static const translucentAsset = 'assets/styles/translucent_style.json';
-  static const customJsonStyle =
-      '''
+  static const countries = '''
 {
-"version": 8,
-"name": "Basic",
-"metadata": {
-  "mapbox:autocomposite": false,
-  "mapbox:type": "template",
-  "maputnik:renderer": "mbgljs",
-  "openmaptiles:version": "3.x",
-  "openmaptiles:mapbox:owner": "openmaptiles",
-  "openmaptiles:mapbox:source:url": "mapbox://openmaptiles.4qljc88t"
-},
-"sources": {
-  "openmaptiles": {
-    "type": "vector",
-    "url": "https://api.maptiler.com/tiles/v3-openmaptiles/tiles.json?key=$_maptilerKey",
-    "attribution": "Custom JSON"
-  }
-},
-"sprite": "https://openmaptiles.github.io/maptiler-basic-gl-style/sprite",
-"glyphs": "https://api.maptiler.com/fonts/{fontstack}/{range}.pbf?key=$_maptilerKey",
-"layers": [
-  {
-    "id": "background",
-    "type": "background",
-    "paint": {"background-color": "hsl(47, 26%, 88%)"}
-  },
-  {
-    "id": "water_red",
-    "type": "fill",
-    "source": "openmaptiles",
-    "source-layer": "water",
-    "filter": [
-      "all",
-      ["==", "\$type", "Polygon"],
-      ["!=", "intermittent", 1],
-      ["!=", "brunnel", "tunnel"]
-    ],
-    "layout": {"visibility": "visible"},
-    "paint": {"fill-color": "rgba(215, 14, 17, 1)"}
-  },
-  {
-    "id": "admin_pink",
-    "type": "line",
-    "source": "openmaptiles",
-    "source-layer": "boundary",
-    "filter": ["all"],
-    "layout": {"visibility": "visible"},
-    "paint": {
-      "line-color": "rgba(255, 0, 229, 0.5)",
-      "line-dasharray": [2, 1]
+  "version": 8,
+  "name": "MapLibre",
+  "center": [17.65431710431244, 32.954120326746775],
+  "zoom": 0.8619833357855968,
+  "bearing": 0,
+  "pitch": 0,
+  "sources": {
+    "maplibre": {
+      "url": "https://demotiles.maplibre.org/tiles/tiles.json",
+      "type": "vector"
     }
-  }
-],
-"id": "basic"
+  },
+  "glyphs": "https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf",
+  "layers": [
+    {
+      "id": "background",
+      "type": "background",
+      "maxzoom": 24,
+      "filter": ["all"],
+      "paint": {"background-color": "#D8F2FF"}
+    },
+    {
+      "id": "countries-fill",
+      "type": "fill",
+      "source": "maplibre",
+      "source-layer": "countries",
+      "maxzoom": 24,
+      "filter": ["all"],
+      "paint": {"fill-color": "#FFFFFF"}
+    },
+    {
+      "id": "countries-boundary",
+      "type": "line",
+      "source": "maplibre",
+      "source-layer": "countries",
+      "maxzoom": 24,
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round",
+        "visibility": "visible"
+      },
+      "paint": {
+        "line-color": "#198EC8",
+        "line-width": {"stops": [[1, 1], [6, 2], [14, 6], [22, 12]]},
+        "line-opacity": {"stops": [[3, 0.5], [6, 1]]}
+      }
+    }
+  ],
+  "id": "43f36e14-e3f5-43c1-84c0-50a9c80dc5c7"
 }
   ''';
 
