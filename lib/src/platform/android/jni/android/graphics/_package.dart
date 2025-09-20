@@ -2,3 +2,4 @@
 export 'Bitmap.dart';
 export 'BitmapFactory.dart';
 export 'PointF.dart';
+export 'RectF.dart';

@@ -42,6 +42,8 @@ import '../../../../android/graphics/Bitmap.dart' as bitmap$_;
 
 import '../../../../android/graphics/PointF.dart' as pointf$_;
 
+import '../../../../android/graphics/RectF.dart' as rectf$_;
+
 import '../../geojson/Feature.dart' as feature$_;
 
 import '../camera/CameraPosition.dart' as cameraposition$_;
@@ -11312,7 +11314,7 @@ class MapLibreMap extends jni$_.JObject {
   /// from: `public java.util.List<org.maplibre.geojson.Feature> queryRenderedFeatures(android.graphics.RectF rectF, java.lang.String[] strings)`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JList<feature$_.Feature?> queryRenderedFeatures$2(
-    jni$_.JObject rectF,
+    rectf$_.RectF rectF,
     jni$_.JArray<jni$_.JString?>? strings,
   ) {
     final _$rectF = rectF.reference;
@@ -11363,7 +11365,7 @@ class MapLibreMap extends jni$_.JObject {
   /// from: `public java.util.List<org.maplibre.geojson.Feature> queryRenderedFeatures(android.graphics.RectF rectF, org.maplibre.android.style.expressions.Expression expression, java.lang.String[] strings)`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JList<feature$_.Feature?> queryRenderedFeatures$3(
-    jni$_.JObject rectF,
+    rectf$_.RectF rectF,
     jni$_.JObject? expression,
     jni$_.JArray<jni$_.JString?>? strings,
   ) {

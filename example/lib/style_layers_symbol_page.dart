@@ -39,35 +39,40 @@ class _StyleLayersSymbolPageState extends State<StyleLayersSymbolPage> {
           // add the images to the map
           await style.addImages(images);
 
-          // add some points as GeoJSON source to the map
-          await style.addSource(
-            const GeoJsonSource(id: 'points', data: _geoJsonString),
-          );
+          try {
+            // add some points as GeoJSON source to the map
+            await style.addSource(
+              const GeoJsonSource(id: 'points', data: _geoJsonString),
+            );
 
-          // display the image on the map
-          await style.addLayer(
-            const SymbolStyleLayer(
-              id: 'images',
-              sourceId: 'points',
-              layout: {
-                // see https://maplibre.org/maplibre-style-spec/layers/#symbol
-                // Takes the icon-image to display from the GeoJSON 'icon' property.
-                'icon-image': [
-                  'case',
-                  [
-                    '==',
-                    ['get', 'icon'],
+            // display the image on the map
+            await style.addLayer(
+              const SymbolStyleLayer(
+                id: 'images',
+                sourceId: 'points',
+                layout: {
+                  // see https://maplibre.org/maplibre-style-spec/layers/#symbol
+                  // Takes the icon-image to display from the GeoJSON 'icon' property.
+                  'icon-image': [
+                    'case',
+                    [
+                      '==',
+                      ['get', 'icon'],
+                      'red_pin',
+                    ],
                     'red_pin',
+                    'black_pin',
                   ],
-                  'red_pin',
-                  'black_pin',
-                ],
-                'icon-size': 0.08,
-                'icon-allow-overlap': true,
-                'icon-anchor': 'bottom',
-              },
-            ),
-          );
+                  'icon-size': 0.08,
+                  'icon-allow-overlap': true,
+                  'icon-anchor': 'bottom',
+                },
+              ),
+            );
+          } on Exception catch (error, stacktrace) {
+            debugPrint(error.toString());
+            debugPrintStack(stackTrace: stacktrace);
+          }
         },
       ),
     );

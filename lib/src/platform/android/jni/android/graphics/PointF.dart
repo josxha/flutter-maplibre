@@ -116,7 +116,7 @@ class PointF extends jni$_.JObject {
   }
 
   static final _id_new$1 = _class.constructorId(
-    r'(FF)V',
+    r'(Landroid/graphics/Point;)V',
   );
 
   static final _new$1 =
@@ -125,7 +125,7 @@ class PointF extends jni$_.JObject {
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Double, jni$_.Double)>,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
               )
             >
           >('globalEnv_NewObject')
@@ -133,29 +133,27 @@ class PointF extends jni$_.JObject {
             jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
-              double,
-              double,
+              jni$_.Pointer<jni$_.Void>,
             )
           >();
 
-  /// from: `public void <init>(float f, float f1)`
+  /// from: `public void <init>(android.graphics.Point point)`
   /// The returned object must be released after use, by calling the [release] method.
   factory PointF.new$1(
-    double f,
-    double f1,
+    jni$_.JObject? point,
   ) {
+    final _$point = point?.reference ?? jni$_.jNullReference;
     return PointF.fromReference(
       _new$1(
         _class.reference.pointer,
         _id_new$1 as jni$_.JMethodIDPtr,
-        f,
-        f1,
+        _$point.pointer,
       ).reference,
     );
   }
 
   static final _id_new$2 = _class.constructorId(
-    r'(Landroid/graphics/Point;)V',
+    r'(Landroid/graphics/PointF;)V',
   );
 
   static final _new$2 =
@@ -176,23 +174,23 @@ class PointF extends jni$_.JObject {
             )
           >();
 
-  /// from: `public void <init>(android.graphics.Point point)`
+  /// from: `public void <init>(android.graphics.PointF pointF)`
   /// The returned object must be released after use, by calling the [release] method.
   factory PointF.new$2(
-    jni$_.JObject? point,
+    PointF? pointF,
   ) {
-    final _$point = point?.reference ?? jni$_.jNullReference;
+    final _$pointF = pointF?.reference ?? jni$_.jNullReference;
     return PointF.fromReference(
       _new$2(
         _class.reference.pointer,
         _id_new$2 as jni$_.JMethodIDPtr,
-        _$point.pointer,
+        _$pointF.pointer,
       ).reference,
     );
   }
 
   static final _id_new$3 = _class.constructorId(
-    r'(Landroid/graphics/PointF;)V',
+    r'(FF)V',
   );
 
   static final _new$3 =
@@ -201,7 +199,7 @@ class PointF extends jni$_.JObject {
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                jni$_.VarArgs<(jni$_.Double, jni$_.Double)>,
               )
             >
           >('globalEnv_NewObject')
@@ -209,148 +207,54 @@ class PointF extends jni$_.JObject {
             jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
+              double,
+              double,
             )
           >();
 
-  /// from: `public void <init>(android.graphics.PointF pointF)`
+  /// from: `public void <init>(float f, float f1)`
   /// The returned object must be released after use, by calling the [release] method.
   factory PointF.new$3(
-    PointF? pointF,
+    double f,
+    double f1,
   ) {
-    final _$pointF = pointF?.reference ?? jni$_.jNullReference;
     return PointF.fromReference(
       _new$3(
         _class.reference.pointer,
         _id_new$3 as jni$_.JMethodIDPtr,
-        _$pointF.pointer,
+        f,
+        f1,
       ).reference,
     );
   }
 
-  static final _id_set = _class.instanceMethodId(
-    r'set',
-    r'(FF)V',
+  static final _id_describeContents = _class.instanceMethodId(
+    r'describeContents',
+    r'()I',
   );
 
-  static final _set =
+  static final _describeContents =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
+              jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Double, jni$_.Double)>,
               )
             >
-          >('globalEnv_CallVoidMethod')
+          >('globalEnv_CallIntMethod')
           .asFunction<
-            jni$_.JThrowablePtr Function(
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
-              double,
-              double,
             )
           >();
 
-  /// from: `public final void set(float f, float f1)`
-  void set(
-    double f,
-    double f1,
-  ) {
-    _set(reference.pointer, _id_set as jni$_.JMethodIDPtr, f, f1).check();
-  }
-
-  static final _id_set$1 = _class.instanceMethodId(
-    r'set',
-    r'(Landroid/graphics/PointF;)V',
-  );
-
-  static final _set$1 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public final void set(android.graphics.PointF pointF)`
-  void set$1(
-    PointF? pointF,
-  ) {
-    final _$pointF = pointF?.reference ?? jni$_.jNullReference;
-    _set$1(
+  /// from: `public int describeContents()`
+  int describeContents() {
+    return _describeContents(
       reference.pointer,
-      _id_set$1 as jni$_.JMethodIDPtr,
-      _$pointF.pointer,
-    ).check();
-  }
-
-  static final _id_negate = _class.instanceMethodId(
-    r'negate',
-    r'()V',
-  );
-
-  static final _negate =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public final void negate()`
-  void negate() {
-    _negate(reference.pointer, _id_negate as jni$_.JMethodIDPtr).check();
-  }
-
-  static final _id_offset = _class.instanceMethodId(
-    r'offset',
-    r'(FF)V',
-  );
-
-  static final _offset =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Double, jni$_.Double)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              double,
-              double,
-            )
-          >();
-
-  /// from: `public final void offset(float f, float f1)`
-  void offset(
-    double f,
-    double f1,
-  ) {
-    _offset(reference.pointer, _id_offset as jni$_.JMethodIDPtr, f, f1).check();
+      _id_describeContents as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_equals = _class.instanceMethodId(
@@ -454,36 +358,6 @@ class PointF extends jni$_.JObject {
     ).integer;
   }
 
-  static final _id_toString$1 = _class.instanceMethodId(
-    r'toString',
-    r'()Ljava/lang/String;',
-  );
-
-  static final _toString$1 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public java.lang.String toString()`
-  /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JString? toString$1() {
-    return _toString$1(
-      reference.pointer,
-      _id_toString$1 as jni$_.JMethodIDPtr,
-    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
-  }
-
   static final _id_length = _class.instanceMethodId(
     r'length',
     r'()F',
@@ -547,12 +421,172 @@ class PointF extends jni$_.JObject {
     ).float;
   }
 
-  static final _id_describeContents = _class.instanceMethodId(
-    r'describeContents',
-    r'()I',
+  static final _id_negate = _class.instanceMethodId(
+    r'negate',
+    r'()V',
   );
 
-  static final _describeContents =
+  static final _negate =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public final void negate()`
+  void negate() {
+    _negate(reference.pointer, _id_negate as jni$_.JMethodIDPtr).check();
+  }
+
+  static final _id_offset = _class.instanceMethodId(
+    r'offset',
+    r'(FF)V',
+  );
+
+  static final _offset =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double, jni$_.Double)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+              double,
+            )
+          >();
+
+  /// from: `public final void offset(float f, float f1)`
+  void offset(
+    double f,
+    double f1,
+  ) {
+    _offset(reference.pointer, _id_offset as jni$_.JMethodIDPtr, f, f1).check();
+  }
+
+  static final _id_readFromParcel = _class.instanceMethodId(
+    r'readFromParcel',
+    r'(Landroid/os/Parcel;)V',
+  );
+
+  static final _readFromParcel =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public void readFromParcel(android.os.Parcel parcel)`
+  void readFromParcel(
+    jni$_.JObject? parcel,
+  ) {
+    final _$parcel = parcel?.reference ?? jni$_.jNullReference;
+    _readFromParcel(
+      reference.pointer,
+      _id_readFromParcel as jni$_.JMethodIDPtr,
+      _$parcel.pointer,
+    ).check();
+  }
+
+  static final _id_set = _class.instanceMethodId(
+    r'set',
+    r'(Landroid/graphics/PointF;)V',
+  );
+
+  static final _set =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public final void set(android.graphics.PointF pointF)`
+  void set(
+    PointF? pointF,
+  ) {
+    final _$pointF = pointF?.reference ?? jni$_.jNullReference;
+    _set(
+      reference.pointer,
+      _id_set as jni$_.JMethodIDPtr,
+      _$pointF.pointer,
+    ).check();
+  }
+
+  static final _id_set$1 = _class.instanceMethodId(
+    r'set',
+    r'(FF)V',
+  );
+
+  static final _set$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Double, jni$_.Double)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              double,
+              double,
+            )
+          >();
+
+  /// from: `public final void set(float f, float f1)`
+  void set$1(
+    double f,
+    double f1,
+  ) {
+    _set$1(reference.pointer, _id_set$1 as jni$_.JMethodIDPtr, f, f1).check();
+  }
+
+  static final _id_toString$1 = _class.instanceMethodId(
+    r'toString',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _toString$1 =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
@@ -560,7 +594,7 @@ class PointF extends jni$_.JObject {
                 jni$_.JMethodIDPtr,
               )
             >
-          >('globalEnv_CallIntMethod')
+          >('globalEnv_CallObjectMethod')
           .asFunction<
             jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
@@ -568,12 +602,13 @@ class PointF extends jni$_.JObject {
             )
           >();
 
-  /// from: `public int describeContents()`
-  int describeContents() {
-    return _describeContents(
+  /// from: `public java.lang.String toString()`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JString? toString$1() {
+    return _toString$1(
       reference.pointer,
-      _id_describeContents as jni$_.JMethodIDPtr,
-    ).integer;
+      _id_toString$1 as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_writeToParcel = _class.instanceMethodId(
@@ -611,41 +646,6 @@ class PointF extends jni$_.JObject {
       _id_writeToParcel as jni$_.JMethodIDPtr,
       _$parcel.pointer,
       i,
-    ).check();
-  }
-
-  static final _id_readFromParcel = _class.instanceMethodId(
-    r'readFromParcel',
-    r'(Landroid/os/Parcel;)V',
-  );
-
-  static final _readFromParcel =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public void readFromParcel(android.os.Parcel parcel)`
-  void readFromParcel(
-    jni$_.JObject? parcel,
-  ) {
-    final _$parcel = parcel?.reference ?? jni$_.jNullReference;
-    _readFromParcel(
-      reference.pointer,
-      _id_readFromParcel as jni$_.JMethodIDPtr,
-      _$parcel.pointer,
     ).check();
   }
 }

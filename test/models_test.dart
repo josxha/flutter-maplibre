@@ -221,6 +221,7 @@ void main() {
       final controller = MockMapController();
       final camera = MockMapCamera();
       final position = MockPosition();
+      final screenPoint = MockOffset();
 
       final mapCreated = MapEventMapCreated(mapController: controller);
       expect(mapCreated, isA<MapEvent>());
@@ -236,24 +237,37 @@ void main() {
       expect(startMoveCamera, isA<MapEvent>());
       expect(startMoveCamera.reason, equals(CameraChangeReason.apiGesture));
 
-      final click = MapEventClick(point: position);
+      final click = MapEventClick(point: position, screenPoint: screenPoint);
       expect(click, isA<MapEvent>());
       expect(click.point, equals(position));
+      expect(click.screenPoint, equals(screenPoint));
       expect(click.toString(), contains('MapEventClick'));
 
-      final doubleClick = MapEventDoubleClick(point: position);
+      final doubleClick = MapEventDoubleClick(
+        point: position,
+        screenPoint: screenPoint,
+      );
       expect(doubleClick, isA<MapEvent>());
       expect(doubleClick.point, equals(position));
+      expect(doubleClick.screenPoint, equals(screenPoint));
       expect(doubleClick.toString(), contains('MapEventDoubleClick'));
 
-      final secondaryClick = MapEventSecondaryClick(point: position);
+      final secondaryClick = MapEventSecondaryClick(
+        point: position,
+        screenPoint: screenPoint,
+      );
       expect(secondaryClick, isA<MapEvent>());
       expect(secondaryClick.point, equals(position));
+      expect(secondaryClick.screenPoint, equals(screenPoint));
       expect(secondaryClick.toString(), contains('MapEventSecondaryClick'));
 
-      final longClick = MapEventLongClick(point: position);
+      final longClick = MapEventLongClick(
+        point: position,
+        screenPoint: screenPoint,
+      );
       expect(longClick, isA<MapEvent>());
       expect(longClick.point, equals(position));
+      expect(longClick.screenPoint, equals(screenPoint));
       expect(longClick.toString(), contains('MapEventLongClick'));
 
       const idle = MapEventIdle();

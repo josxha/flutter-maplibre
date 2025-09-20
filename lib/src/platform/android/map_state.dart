@@ -400,7 +400,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
         ..[0] = jLayerId;
       // query one layer at a time
       final jniFeatures = _jniMapLibreMap!.queryRenderedFeatures(
-        jni.PointF.new$1(screenLocation.dx, screenLocation.dy),
+        jni.PointF.new$3(screenLocation.dx, screenLocation.dy),
         queryLayerIds,
       );
       queryLayerIds.release();

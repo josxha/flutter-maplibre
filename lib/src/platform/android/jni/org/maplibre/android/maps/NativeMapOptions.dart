@@ -310,6 +310,36 @@ class NativeMapOptions extends jni$_.JObject {
       _id_actionJournalLogFileCount as jni$_.JMethodIDPtr,
     ).long;
   }
+
+  static final _id_actionJournalRenderingReportInterval = _class
+      .instanceMethodId(
+        r'actionJournalRenderingReportInterval',
+        r'()I',
+      );
+
+  static final _actionJournalRenderingReportInterval =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public int actionJournalRenderingReportInterval()`
+  int actionJournalRenderingReportInterval() {
+    return _actionJournalRenderingReportInterval(
+      reference.pointer,
+      _id_actionJournalRenderingReportInterval as jni$_.JMethodIDPtr,
+    ).integer;
+  }
 }
 
 final class $NativeMapOptions$NullableType

@@ -5,6 +5,7 @@ import 'package:pigeon/pigeon.dart';
     dartOut: 'lib/src/platform/pigeon.g.dart',
     dartOptions: DartOptions(),
     dartPackageName: 'maplibre',
+    copyrightHeader: 'pigeons/header.txt',
     // linux
     // gobjectHeaderOut: 'linux/pigeon.g.h',
     // gobjectSourceOut: 'linux/pigeon.g.cc',
@@ -17,12 +18,15 @@ import 'package:pigeon/pigeon.dart';
     kotlinOut: 'android/src/main/kotlin/com/github/josxha/maplibre/Pigeon.g.kt',
     kotlinOptions: KotlinOptions(),
     // ios
-    swiftOut: 'ios/Classes/Pigeon.g.swift',
+    swiftOut:
+        'maplibre_ios/ios/maplibre_ios/Sources/maplibre_ios/Pigeon.g.swift',
     swiftOptions: SwiftOptions(),
   ),
 )
 @HostApi()
 abstract interface class MapLibreHostApi {
+  void dispose();
+
   /// Add a fill layer to the map style.
   @async
   void addFillLayer({
@@ -147,7 +151,7 @@ abstract interface class MapLibreFlutterApi {
   void onMapReady();
 
   /// Callback when the user clicks on the map.
-  void onClick(LngLat point);
+  void onClick(LngLat point, Offset screenPoint);
 
   /// Callback when the map idles.
   void onIdle();
@@ -157,13 +161,13 @@ abstract interface class MapLibreFlutterApi {
 
   /// Callback when the user performs a secondary click on the map
   /// (e.g. by default a click with the right mouse button).
-  void onSecondaryClick(LngLat point);
+  void onSecondaryClick(LngLat point, Offset screenPoint);
 
   /// Callback when the user performs a double click on the map.
-  void onDoubleClick(LngLat point);
+  void onDoubleClick(LngLat point, Offset screenPoint);
 
   /// Callback when the user performs a long lasting click on the map.
-  void onLongClick(LngLat point);
+  void onLongClick(LngLat point, Offset screenPoint);
 
   /// Callback when the map camera changes.
   void onMoveCamera(MapCamera camera);
@@ -178,6 +182,36 @@ abstract interface class PermissionManagerHostApi {
   /// Request location permissions.
   @async
   bool requestLocationPermissions({required String explanation});
+}
+
+@HostApi()
+abstract interface class OfflineManagerHostApi {
+  /// Clear the ambient cache.
+  @async
+  void clearAmbientCache();
+
+  /// Invalidate the ambient cache.
+  @async
+  void invalidateAmbientCache();
+
+  /// Reset database.
+  @async
+  void resetDatabase();
+
+  /// Set maximum ambient cache size.
+  @async
+  void setMaximumAmbientCacheSize({required int bytes});
+
+  /// Download a map region.
+  @async
+  void downloadRegion({
+    required String mapStyleUrl,
+    required LngLatBounds bounds,
+    required double minZoom,
+    required double maxZoom,
+    required double pixelDensity,
+    required String metadata,
+  });
 }
 
 /// The map options define initial values for the MapLibre map.
@@ -195,6 +229,8 @@ class MapOptions {
     required this.maxPitch,
     required this.gestures,
     required this.androidTextureMode,
+    required this.androidTranslucentTextureSurface,
+    required this.androidForegroundLoadColor,
   });
 
   /// The URL of the used map style.
@@ -232,6 +268,12 @@ class MapOptions {
 
   /// Toggle the texture mode on android.
   final bool androidTextureMode;
+
+  /// Toggle the translucent texture surface mode on Android.
+  final bool androidTranslucentTextureSurface;
+
+  /// The MapView foreground color that is used when the map surface is being created.
+  final int androidForegroundLoadColor;
 }
 
 /// Map gestures
@@ -268,7 +310,7 @@ class LngLat {
   final double lat;
 }
 
-/// A pixel location / location on the device screen.
+/// A pixel location / location on the device screen, in logical pixels.
 class Offset {
   const Offset({required this.x, required this.y});
 
@@ -322,6 +364,25 @@ class LngLatBounds {
   final double longitudeEast;
   final double latitudeSouth;
   final double latitudeNorth;
+}
+
+/// Model that describes an offline map region.
+class OfflineRegion {
+  const OfflineRegion({
+    required this.id,
+    required this.bounds,
+    required this.minZoom,
+    required this.maxZoom,
+    required this.pixelRatio,
+    required this.styleUrl,
+  });
+
+  final int id;
+  final LngLatBounds bounds;
+  final double minZoom;
+  final double maxZoom;
+  final double pixelRatio;
+  final String styleUrl;
 }
 
 /// Influences the y direction of the tile coordinates.

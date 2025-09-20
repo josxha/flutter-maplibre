@@ -58,10 +58,47 @@ class URL extends jni$_.JObject {
   static const nullableType = $URL$NullableType();
   static const type = $URL$Type();
   static final _id_new$ = _class.constructorId(
-    r'(Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;)V',
+    r'(Ljava/lang/String;)V',
   );
 
   static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public void <init>(java.lang.String string)`
+  /// The returned object must be released after use, by calling the [release] method.
+  factory URL(
+    jni$_.JString? string,
+  ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    return URL.fromReference(
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        _$string.pointer,
+      ).reference,
+    );
+  }
+
+  static final _id_new$1 = _class.constructorId(
+    r'(Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;)V',
+  );
+
+  static final _new$1 =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
@@ -91,62 +128,10 @@ class URL extends jni$_.JObject {
 
   /// from: `public void <init>(java.lang.String string, java.lang.String string1, int i, java.lang.String string2)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory URL(
-    jni$_.JString? string,
-    jni$_.JString? string1,
-    int i,
-    jni$_.JString? string2,
-  ) {
-    final _$string = string?.reference ?? jni$_.jNullReference;
-    final _$string1 = string1?.reference ?? jni$_.jNullReference;
-    final _$string2 = string2?.reference ?? jni$_.jNullReference;
-    return URL.fromReference(
-      _new$(
-        _class.reference.pointer,
-        _id_new$ as jni$_.JMethodIDPtr,
-        _$string.pointer,
-        _$string1.pointer,
-        i,
-        _$string2.pointer,
-      ).reference,
-    );
-  }
-
-  static final _id_new$1 = _class.constructorId(
-    r'(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V',
-  );
-
-  static final _new$1 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<
-                  (
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.Pointer<jni$_.Void>,
-                  )
-                >,
-              )
-            >
-          >('globalEnv_NewObject')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public void <init>(java.lang.String string, java.lang.String string1, java.lang.String string2)`
-  /// The returned object must be released after use, by calling the [release] method.
   factory URL.new$1(
     jni$_.JString? string,
     jni$_.JString? string1,
+    int i,
     jni$_.JString? string2,
   ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
@@ -158,6 +143,7 @@ class URL extends jni$_.JObject {
         _id_new$1 as jni$_.JMethodIDPtr,
         _$string.pointer,
         _$string1.pointer,
+        i,
         _$string2.pointer,
       ).reference,
     );
@@ -225,7 +211,7 @@ class URL extends jni$_.JObject {
   }
 
   static final _id_new$3 = _class.constructorId(
-    r'(Ljava/lang/String;)V',
+    r'(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V',
   );
 
   static final _new$3 =
@@ -234,7 +220,13 @@ class URL extends jni$_.JObject {
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
               )
             >
           >('globalEnv_NewObject')
@@ -243,20 +235,28 @@ class URL extends jni$_.JObject {
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
             )
           >();
 
-  /// from: `public void <init>(java.lang.String string)`
+  /// from: `public void <init>(java.lang.String string, java.lang.String string1, java.lang.String string2)`
   /// The returned object must be released after use, by calling the [release] method.
   factory URL.new$3(
     jni$_.JString? string,
+    jni$_.JString? string1,
+    jni$_.JString? string2,
   ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$string1 = string1?.reference ?? jni$_.jNullReference;
+    final _$string2 = string2?.reference ?? jni$_.jNullReference;
     return URL.fromReference(
       _new$3(
         _class.reference.pointer,
         _id_new$3 as jni$_.JMethodIDPtr,
         _$string.pointer,
+        _$string1.pointer,
+        _$string2.pointer,
       ).reference,
     );
   }
@@ -356,304 +356,6 @@ class URL extends jni$_.JObject {
     );
   }
 
-  static final _id_getQuery = _class.instanceMethodId(
-    r'getQuery',
-    r'()Ljava/lang/String;',
-  );
-
-  static final _getQuery =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public java.lang.String getQuery()`
-  /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JString? getQuery() {
-    return _getQuery(
-      reference.pointer,
-      _id_getQuery as jni$_.JMethodIDPtr,
-    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
-  }
-
-  static final _id_getPath = _class.instanceMethodId(
-    r'getPath',
-    r'()Ljava/lang/String;',
-  );
-
-  static final _getPath =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public java.lang.String getPath()`
-  /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JString? getPath() {
-    return _getPath(
-      reference.pointer,
-      _id_getPath as jni$_.JMethodIDPtr,
-    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
-  }
-
-  static final _id_getUserInfo = _class.instanceMethodId(
-    r'getUserInfo',
-    r'()Ljava/lang/String;',
-  );
-
-  static final _getUserInfo =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public java.lang.String getUserInfo()`
-  /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JString? getUserInfo() {
-    return _getUserInfo(
-      reference.pointer,
-      _id_getUserInfo as jni$_.JMethodIDPtr,
-    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
-  }
-
-  static final _id_getAuthority = _class.instanceMethodId(
-    r'getAuthority',
-    r'()Ljava/lang/String;',
-  );
-
-  static final _getAuthority =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public java.lang.String getAuthority()`
-  /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JString? getAuthority() {
-    return _getAuthority(
-      reference.pointer,
-      _id_getAuthority as jni$_.JMethodIDPtr,
-    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
-  }
-
-  static final _id_getPort = _class.instanceMethodId(
-    r'getPort',
-    r'()I',
-  );
-
-  static final _getPort =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallIntMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public int getPort()`
-  int getPort() {
-    return _getPort(
-      reference.pointer,
-      _id_getPort as jni$_.JMethodIDPtr,
-    ).integer;
-  }
-
-  static final _id_getDefaultPort = _class.instanceMethodId(
-    r'getDefaultPort',
-    r'()I',
-  );
-
-  static final _getDefaultPort =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallIntMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public int getDefaultPort()`
-  int getDefaultPort() {
-    return _getDefaultPort(
-      reference.pointer,
-      _id_getDefaultPort as jni$_.JMethodIDPtr,
-    ).integer;
-  }
-
-  static final _id_getProtocol = _class.instanceMethodId(
-    r'getProtocol',
-    r'()Ljava/lang/String;',
-  );
-
-  static final _getProtocol =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public java.lang.String getProtocol()`
-  /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JString? getProtocol() {
-    return _getProtocol(
-      reference.pointer,
-      _id_getProtocol as jni$_.JMethodIDPtr,
-    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
-  }
-
-  static final _id_getHost = _class.instanceMethodId(
-    r'getHost',
-    r'()Ljava/lang/String;',
-  );
-
-  static final _getHost =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public java.lang.String getHost()`
-  /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JString? getHost() {
-    return _getHost(
-      reference.pointer,
-      _id_getHost as jni$_.JMethodIDPtr,
-    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
-  }
-
-  static final _id_getFile = _class.instanceMethodId(
-    r'getFile',
-    r'()Ljava/lang/String;',
-  );
-
-  static final _getFile =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public java.lang.String getFile()`
-  /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JString? getFile() {
-    return _getFile(
-      reference.pointer,
-      _id_getFile as jni$_.JMethodIDPtr,
-    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
-  }
-
-  static final _id_getRef = _class.instanceMethodId(
-    r'getRef',
-    r'()Ljava/lang/String;',
-  );
-
-  static final _getRef =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public java.lang.String getRef()`
-  /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JString? getRef() {
-    return _getRef(
-      reference.pointer,
-      _id_getRef as jni$_.JMethodIDPtr,
-    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
-  }
-
   static final _id_equals = _class.instanceMethodId(
     r'equals',
     r'(Ljava/lang/Object;)Z',
@@ -689,6 +391,370 @@ class URL extends jni$_.JObject {
     ).boolean;
   }
 
+  static final _id_getAuthority = _class.instanceMethodId(
+    r'getAuthority',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getAuthority =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public java.lang.String getAuthority()`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JString? getAuthority() {
+    return _getAuthority(
+      reference.pointer,
+      _id_getAuthority as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
+  }
+
+  static final _id_getContent = _class.instanceMethodId(
+    r'getContent',
+    r'()Ljava/lang/Object;',
+  );
+
+  static final _getContent =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public java.lang.Object getContent()`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JObject? getContent() {
+    return _getContent(
+      reference.pointer,
+      _id_getContent as jni$_.JMethodIDPtr,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+  }
+
+  static final _id_getContent$1 = _class.instanceMethodId(
+    r'getContent',
+    r'([Ljava/lang/Class;)Ljava/lang/Object;',
+  );
+
+  static final _getContent$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public java.lang.Object getContent(java.lang.Class[] classs)`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JObject? getContent$1(
+    jni$_.JArray<jni$_.JObject?>? classs,
+  ) {
+    final _$classs = classs?.reference ?? jni$_.jNullReference;
+    return _getContent$1(
+      reference.pointer,
+      _id_getContent$1 as jni$_.JMethodIDPtr,
+      _$classs.pointer,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+  }
+
+  static final _id_getDefaultPort = _class.instanceMethodId(
+    r'getDefaultPort',
+    r'()I',
+  );
+
+  static final _getDefaultPort =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public int getDefaultPort()`
+  int getDefaultPort() {
+    return _getDefaultPort(
+      reference.pointer,
+      _id_getDefaultPort as jni$_.JMethodIDPtr,
+    ).integer;
+  }
+
+  static final _id_getFile = _class.instanceMethodId(
+    r'getFile',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getFile =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public java.lang.String getFile()`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JString? getFile() {
+    return _getFile(
+      reference.pointer,
+      _id_getFile as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
+  }
+
+  static final _id_getHost = _class.instanceMethodId(
+    r'getHost',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getHost =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public java.lang.String getHost()`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JString? getHost() {
+    return _getHost(
+      reference.pointer,
+      _id_getHost as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
+  }
+
+  static final _id_getPath = _class.instanceMethodId(
+    r'getPath',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getPath =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public java.lang.String getPath()`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JString? getPath() {
+    return _getPath(
+      reference.pointer,
+      _id_getPath as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
+  }
+
+  static final _id_getPort = _class.instanceMethodId(
+    r'getPort',
+    r'()I',
+  );
+
+  static final _getPort =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public int getPort()`
+  int getPort() {
+    return _getPort(
+      reference.pointer,
+      _id_getPort as jni$_.JMethodIDPtr,
+    ).integer;
+  }
+
+  static final _id_getProtocol = _class.instanceMethodId(
+    r'getProtocol',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getProtocol =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public java.lang.String getProtocol()`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JString? getProtocol() {
+    return _getProtocol(
+      reference.pointer,
+      _id_getProtocol as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
+  }
+
+  static final _id_getQuery = _class.instanceMethodId(
+    r'getQuery',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getQuery =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public java.lang.String getQuery()`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JString? getQuery() {
+    return _getQuery(
+      reference.pointer,
+      _id_getQuery as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
+  }
+
+  static final _id_getRef = _class.instanceMethodId(
+    r'getRef',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getRef =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public java.lang.String getRef()`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JString? getRef() {
+    return _getRef(
+      reference.pointer,
+      _id_getRef as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
+  }
+
+  static final _id_getUserInfo = _class.instanceMethodId(
+    r'getUserInfo',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getUserInfo =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public java.lang.String getUserInfo()`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JString? getUserInfo() {
+    return _getUserInfo(
+      reference.pointer,
+      _id_getUserInfo as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
+  }
+
   static final _id_hashCode$1 = _class.instanceMethodId(
     r'hashCode',
     r'()I',
@@ -716,131 +782,6 @@ class URL extends jni$_.JObject {
       reference.pointer,
       _id_hashCode$1 as jni$_.JMethodIDPtr,
     ).integer;
-  }
-
-  static final _id_sameFile = _class.instanceMethodId(
-    r'sameFile',
-    r'(Ljava/net/URL;)Z',
-  );
-
-  static final _sameFile =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public boolean sameFile(java.net.URL uRL)`
-  bool sameFile(
-    URL? uRL,
-  ) {
-    final _$uRL = uRL?.reference ?? jni$_.jNullReference;
-    return _sameFile(
-      reference.pointer,
-      _id_sameFile as jni$_.JMethodIDPtr,
-      _$uRL.pointer,
-    ).boolean;
-  }
-
-  static final _id_toString$1 = _class.instanceMethodId(
-    r'toString',
-    r'()Ljava/lang/String;',
-  );
-
-  static final _toString$1 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public java.lang.String toString()`
-  /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JString? toString$1() {
-    return _toString$1(
-      reference.pointer,
-      _id_toString$1 as jni$_.JMethodIDPtr,
-    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
-  }
-
-  static final _id_toExternalForm = _class.instanceMethodId(
-    r'toExternalForm',
-    r'()Ljava/lang/String;',
-  );
-
-  static final _toExternalForm =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public java.lang.String toExternalForm()`
-  /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JString? toExternalForm() {
-    return _toExternalForm(
-      reference.pointer,
-      _id_toExternalForm as jni$_.JMethodIDPtr,
-    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
-  }
-
-  static final _id_toURI = _class.instanceMethodId(
-    r'toURI',
-    r'()Ljava/net/URI;',
-  );
-
-  static final _toURI =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public java.net.URI toURI()`
-  /// The returned object must be released after use, by calling the [release] method.
-  uri$_.URI? toURI() {
-    return _toURI(
-      reference.pointer,
-      _id_toURI as jni$_.JMethodIDPtr,
-    ).object<uri$_.URI?>(const uri$_.$URI$NullableType());
   }
 
   static final _id_openConnection = _class.instanceMethodId(
@@ -939,42 +880,12 @@ class URL extends jni$_.JObject {
     ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
-  static final _id_getContent = _class.instanceMethodId(
-    r'getContent',
-    r'()Ljava/lang/Object;',
+  static final _id_sameFile = _class.instanceMethodId(
+    r'sameFile',
+    r'(Ljava/net/URL;)Z',
   );
 
-  static final _getContent =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public java.lang.Object getContent()`
-  /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? getContent() {
-    return _getContent(
-      reference.pointer,
-      _id_getContent as jni$_.JMethodIDPtr,
-    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
-  }
-
-  static final _id_getContent$1 = _class.instanceMethodId(
-    r'getContent',
-    r'([Ljava/lang/Class;)Ljava/lang/Object;',
-  );
-
-  static final _getContent$1 =
+  static final _sameFile =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
@@ -983,7 +894,7 @@ class URL extends jni$_.JObject {
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
               )
             >
-          >('globalEnv_CallObjectMethod')
+          >('globalEnv_CallBooleanMethod')
           .asFunction<
             jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
@@ -992,17 +903,16 @@ class URL extends jni$_.JObject {
             )
           >();
 
-  /// from: `public java.lang.Object getContent(java.lang.Class[] classs)`
-  /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? getContent$1(
-    jni$_.JArray<jni$_.JObject?>? classs,
+  /// from: `public boolean sameFile(java.net.URL uRL)`
+  bool sameFile(
+    URL? uRL,
   ) {
-    final _$classs = classs?.reference ?? jni$_.jNullReference;
-    return _getContent$1(
+    final _$uRL = uRL?.reference ?? jni$_.jNullReference;
+    return _sameFile(
       reference.pointer,
-      _id_getContent$1 as jni$_.JMethodIDPtr,
-      _$classs.pointer,
-    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+      _id_sameFile as jni$_.JMethodIDPtr,
+      _$uRL.pointer,
+    ).boolean;
   }
 
   static final _id_setURLStreamHandlerFactory = _class.staticMethodId(
@@ -1039,6 +949,96 @@ class URL extends jni$_.JObject {
       _id_setURLStreamHandlerFactory as jni$_.JMethodIDPtr,
       _$uRLStreamHandlerFactory.pointer,
     ).check();
+  }
+
+  static final _id_toExternalForm = _class.instanceMethodId(
+    r'toExternalForm',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _toExternalForm =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public java.lang.String toExternalForm()`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JString? toExternalForm() {
+    return _toExternalForm(
+      reference.pointer,
+      _id_toExternalForm as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
+  }
+
+  static final _id_toString$1 = _class.instanceMethodId(
+    r'toString',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _toString$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public java.lang.String toString()`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JString? toString$1() {
+    return _toString$1(
+      reference.pointer,
+      _id_toString$1 as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.JStringNullableType());
+  }
+
+  static final _id_toURI = _class.instanceMethodId(
+    r'toURI',
+    r'()Ljava/net/URI;',
+  );
+
+  static final _toURI =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public java.net.URI toURI()`
+  /// The returned object must be released after use, by calling the [release] method.
+  uri$_.URI? toURI() {
+    return _toURI(
+      reference.pointer,
+      _id_toURI as jni$_.JMethodIDPtr,
+    ).object<uri$_.URI?>(const uri$_.$URI$NullableType());
   }
 }
 

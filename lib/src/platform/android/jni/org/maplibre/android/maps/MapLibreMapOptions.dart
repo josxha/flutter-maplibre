@@ -1478,6 +1478,42 @@ class MapLibreMapOptions extends jni$_.JObject {
     ).object<MapLibreMapOptions>(const $MapLibreMapOptions$Type());
   }
 
+  static final _id_actionJournalRenderingReportInterval = _class
+      .instanceMethodId(
+        r'actionJournalRenderingReportInterval',
+        r'(I)Lorg/maplibre/android/maps/MapLibreMapOptions;',
+      );
+
+  static final _actionJournalRenderingReportInterval =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
+
+  /// from: `public org.maplibre.android.maps.MapLibreMapOptions actionJournalRenderingReportInterval(int i)`
+  /// The returned object must be released after use, by calling the [release] method.
+  MapLibreMapOptions actionJournalRenderingReportInterval(
+    int i,
+  ) {
+    return _actionJournalRenderingReportInterval(
+      reference.pointer,
+      _id_actionJournalRenderingReportInterval as jni$_.JMethodIDPtr,
+      i,
+    ).object<MapLibreMapOptions>(const $MapLibreMapOptions$Type());
+  }
+
   static final _id_localIdeographFontFamilyEnabled = _class.instanceMethodId(
     r'localIdeographFontFamilyEnabled',
     r'(Z)Lorg/maplibre/android/maps/MapLibreMapOptions;',
@@ -1822,6 +1858,36 @@ class MapLibreMapOptions extends jni$_.JObject {
       reference.pointer,
       _id_getActionJournalLogFileCount as jni$_.JMethodIDPtr,
     ).long;
+  }
+
+  static final _id_getActionJournalRenderingReportInterval = _class
+      .instanceMethodId(
+        r'getActionJournalRenderingReportInterval',
+        r'()I',
+      );
+
+  static final _getActionJournalRenderingReportInterval =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public int getActionJournalRenderingReportInterval()`
+  int getActionJournalRenderingReportInterval() {
+    return _getActionJournalRenderingReportInterval(
+      reference.pointer,
+      _id_getActionJournalRenderingReportInterval as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_renderSurfaceOnTop = _class.instanceMethodId(
