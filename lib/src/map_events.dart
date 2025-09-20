@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:maplibre/maplibre.dart';
 
 /// Base class for all the events emitted by the [MapLibreMap].
@@ -72,10 +74,13 @@ enum CameraChangeReason {
 /// {@category Events}
 sealed class MapEventUserInput extends MapEvent {
   /// Create a new [MapEventUserInput] object.
-  const MapEventUserInput({required this.point});
+  const MapEventUserInput({required this.point, required this.screenPoint});
 
   /// The [Position] of where the user clicked at.
   final Position point;
+
+  /// The screen coordinates in logical pixels where the user interacted with the map.
+  final Offset screenPoint;
 
   @override
   String toString() => 'MapEventUserInput(point: $point)';
@@ -83,10 +88,12 @@ sealed class MapEventUserInput extends MapEvent {
 
 /// Emitted when the user clicks on the map.
 ///
+/// Supported platforms: all
+///
 /// {@category Events}
 final class MapEventClick extends MapEventUserInput {
   /// Create a new [MapEventClick] object.
-  const MapEventClick({required super.point});
+  const MapEventClick({required super.point, required super.screenPoint});
 
   @override
   String toString() => 'MapEventClick(point: $point)';
@@ -94,10 +101,12 @@ final class MapEventClick extends MapEventUserInput {
 
 /// Emitted when the user clicks twice in a short amount of time on the map.
 ///
+/// Supported platforms: iOS
+///
 /// {@category Events}
 final class MapEventDoubleClick extends MapEventUserInput {
   /// Create a new [MapEventDoubleClick] object.
-  const MapEventDoubleClick({required super.point});
+  const MapEventDoubleClick({required super.point, required super.screenPoint});
 
   @override
   String toString() => 'MapEventDoubleClick(point: $point)';
@@ -106,10 +115,15 @@ final class MapEventDoubleClick extends MapEventUserInput {
 /// Emitted when the user clicks with the secondary button on the map. This
 /// would be classically the right mouse button.
 ///
+/// Supported platforms: iOS >=13.4, web
+///
 /// {@category Events}
 final class MapEventSecondaryClick extends MapEventUserInput {
   /// Create a new [MapEventSecondaryClick] object.
-  const MapEventSecondaryClick({required super.point});
+  const MapEventSecondaryClick({
+    required super.point,
+    required super.screenPoint,
+  });
 
   @override
   String toString() => 'MapEventSecondaryClick(point: $point)';
@@ -118,10 +132,12 @@ final class MapEventSecondaryClick extends MapEventUserInput {
 /// Emitted when the user clicks on the map and holds button down at the same
 /// location for some time.
 ///
+/// Supported platforms: Android, iOS
+///
 /// {@category Events}
 final class MapEventLongClick extends MapEventUserInput {
   /// Create a new [MapEventLongClick] object.
-  const MapEventLongClick({required super.point});
+  const MapEventLongClick({required super.point, required super.screenPoint});
 
   @override
   String toString() => 'MapEventLongClick(point: $point)';

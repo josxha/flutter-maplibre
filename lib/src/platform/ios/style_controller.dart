@@ -101,7 +101,7 @@ class StyleControllerIos implements StyleController {
             options: NSDictionary.new$(),
           );
         } else {
-          shapeSource.initWithIdentifier$10(
+          shapeSource.initWithIdentifier(
             source.id.toNSString(),
             URL: source.data.toNSURL()!,
             options: NSDictionary.new$(),
@@ -173,7 +173,7 @@ class StyleControllerIos implements StyleController {
           ..topLeft = source.coordinates.topLeft.toCLLocationCoordinate2D()
           ..topRight = source.coordinates.topRight.toCLLocationCoordinate2D();
         final imageSource = ffiSource = MLNImageSource.new$();
-        imageSource.initWithIdentifier$10(
+        imageSource.initWithIdentifier(
           source.id.toNSString(),
           coordinateQuad: coordinates,
           URL: source.url.toNSURL()!,

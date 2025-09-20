@@ -138,7 +138,7 @@ abstract interface class MapLibreFlutterApi {
   void onMapReady();
 
   /// Callback when the user clicks on the map.
-  void onClick(LngLat point);
+  void onClick(LngLat point, Offset screenPoint);
 
   /// Callback when the map idles.
   void onIdle();
@@ -148,13 +148,13 @@ abstract interface class MapLibreFlutterApi {
 
   /// Callback when the user performs a secondary click on the map
   /// (e.g. by default a click with the right mouse button).
-  void onSecondaryClick(LngLat point);
+  void onSecondaryClick(LngLat point, Offset screenPoint);
 
   /// Callback when the user performs a double click on the map.
-  void onDoubleClick(LngLat point);
+  void onDoubleClick(LngLat point, Offset screenPoint);
 
   /// Callback when the user performs a long lasting click on the map.
-  void onLongClick(LngLat point);
+  void onLongClick(LngLat point, Offset screenPoint);
 
   /// Callback when the map camera changes.
   void onMoveCamera(MapCamera camera);
@@ -297,7 +297,7 @@ class LngLat {
   final double lat;
 }
 
-/// A pixel location / location on the device screen.
+/// A pixel location / location on the device screen, in logical pixels.
 class Offset {
   const Offset({required this.x, required this.y});
 

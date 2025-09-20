@@ -15,8 +15,14 @@ Helper package for maplibre that provides iOS FFI bindings
   s.source           = { :path => '.' }
   s.source_files = 'maplibre_ios/Sources/maplibre_ios/**/*'
   s.dependency 'Flutter'
+
   # Needs to be the same version as in maplibre_ios/Package.swift
+  # FOR PREBUILT LIBRARY
   s.dependency 'MapLibre', '~> 6.17'
+
+  # FOR LOCAL LIBRARY
+  # s.vendored_frameworks = '.build/MapLibre.xcframework'
+
   s.platform = :ios, '12.0'
 
   # Flutter.framework does not contain a i386 slice.

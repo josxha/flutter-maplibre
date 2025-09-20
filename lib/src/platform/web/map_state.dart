@@ -93,21 +93,33 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         interop.MapEventType.click,
         (interop.MapMouseEvent event) {
           final point = event.lngLat.toPosition();
-          widget.onEvent?.call(MapEventClick(point: point));
+          widget.onEvent?.call(
+            MapEventClick(point: point, screenPoint: event.point.toOffset()),
+          );
         }.toJS,
       );
       _map.on(
         interop.MapEventType.dblclick,
         (interop.MapMouseEvent event) {
           final point = event.lngLat.toPosition();
-          widget.onEvent?.call(MapEventDoubleClick(point: point));
+          widget.onEvent?.call(
+            MapEventDoubleClick(
+              point: point,
+              screenPoint: event.point.toOffset(),
+            ),
+          );
         }.toJS,
       );
       _map.on(
         interop.MapEventType.contextmenu,
         (interop.MapMouseEvent event) {
           final point = event.lngLat.toPosition();
-          widget.onEvent?.call(MapEventSecondaryClick(point: point));
+          widget.onEvent?.call(
+            MapEventSecondaryClick(
+              point: point,
+              screenPoint: event.point.toOffset(),
+            ),
+          );
         }.toJS,
       );
       _map.on(
