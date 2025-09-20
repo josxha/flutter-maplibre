@@ -535,12 +535,145 @@ class BitmapFactory extends jni$_.JObject {
     );
   }
 
+  static final _id_decodeByteArray = _class.staticMethodId(
+    r'decodeByteArray',
+    r'([BII)Landroid/graphics/Bitmap;',
+  );
+
+  static final _decodeByteArray =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Int32, jni$_.Int32)
+                >,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+              int,
+            )
+          >();
+
+  /// from: `static public android.graphics.Bitmap decodeByteArray(byte[] bs, int i, int i1)`
+  /// The returned object must be released after use, by calling the [release] method.
+  static bitmap$_.Bitmap? decodeByteArray(
+    jni$_.JByteArray? bs,
+    int i,
+    int i1,
+  ) {
+    final _$bs = bs?.reference ?? jni$_.jNullReference;
+    return _decodeByteArray(
+      _class.reference.pointer,
+      _id_decodeByteArray as jni$_.JMethodIDPtr,
+      _$bs.pointer,
+      i,
+      i1,
+    ).object<bitmap$_.Bitmap?>(const bitmap$_.$Bitmap$NullableType());
+  }
+
+  static final _id_decodeByteArray$1 = _class.staticMethodId(
+    r'decodeByteArray',
+    r'([BIILandroid/graphics/BitmapFactory$Options;)Landroid/graphics/Bitmap;',
+  );
+
+  static final _decodeByteArray$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                    jni$_.Int32,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+              int,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `static public android.graphics.Bitmap decodeByteArray(byte[] bs, int i, int i1, android.graphics.BitmapFactory$Options options)`
+  /// The returned object must be released after use, by calling the [release] method.
+  static bitmap$_.Bitmap? decodeByteArray$1(
+    jni$_.JByteArray? bs,
+    int i,
+    int i1,
+    BitmapFactory$Options? options,
+  ) {
+    final _$bs = bs?.reference ?? jni$_.jNullReference;
+    final _$options = options?.reference ?? jni$_.jNullReference;
+    return _decodeByteArray$1(
+      _class.reference.pointer,
+      _id_decodeByteArray$1 as jni$_.JMethodIDPtr,
+      _$bs.pointer,
+      i,
+      i1,
+      _$options.pointer,
+    ).object<bitmap$_.Bitmap?>(const bitmap$_.$Bitmap$NullableType());
+  }
+
   static final _id_decodeFile = _class.staticMethodId(
+    r'decodeFile',
+    r'(Ljava/lang/String;)Landroid/graphics/Bitmap;',
+  );
+
+  static final _decodeFile =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `static public android.graphics.Bitmap decodeFile(java.lang.String string)`
+  /// The returned object must be released after use, by calling the [release] method.
+  static bitmap$_.Bitmap? decodeFile(
+    jni$_.JString? string,
+  ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    return _decodeFile(
+      _class.reference.pointer,
+      _id_decodeFile as jni$_.JMethodIDPtr,
+      _$string.pointer,
+    ).object<bitmap$_.Bitmap?>(const bitmap$_.$Bitmap$NullableType());
+  }
+
+  static final _id_decodeFile$1 = _class.staticMethodId(
     r'decodeFile',
     r'(Ljava/lang/String;Landroid/graphics/BitmapFactory$Options;)Landroid/graphics/Bitmap;',
   );
 
-  static final _decodeFile =
+  static final _decodeFile$1 =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
@@ -563,26 +696,26 @@ class BitmapFactory extends jni$_.JObject {
 
   /// from: `static public android.graphics.Bitmap decodeFile(java.lang.String string, android.graphics.BitmapFactory$Options options)`
   /// The returned object must be released after use, by calling the [release] method.
-  static bitmap$_.Bitmap? decodeFile(
+  static bitmap$_.Bitmap? decodeFile$1(
     jni$_.JString? string,
     BitmapFactory$Options? options,
   ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$options = options?.reference ?? jni$_.jNullReference;
-    return _decodeFile(
+    return _decodeFile$1(
       _class.reference.pointer,
-      _id_decodeFile as jni$_.JMethodIDPtr,
+      _id_decodeFile$1 as jni$_.JMethodIDPtr,
       _$string.pointer,
       _$options.pointer,
     ).object<bitmap$_.Bitmap?>(const bitmap$_.$Bitmap$NullableType());
   }
 
-  static final _id_decodeFile$1 = _class.staticMethodId(
-    r'decodeFile',
-    r'(Ljava/lang/String;)Landroid/graphics/Bitmap;',
+  static final _id_decodeFileDescriptor = _class.staticMethodId(
+    r'decodeFileDescriptor',
+    r'(Ljava/io/FileDescriptor;)Landroid/graphics/Bitmap;',
   );
 
-  static final _decodeFile$1 =
+  static final _decodeFileDescriptor =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
@@ -600,16 +733,154 @@ class BitmapFactory extends jni$_.JObject {
             )
           >();
 
-  /// from: `static public android.graphics.Bitmap decodeFile(java.lang.String string)`
+  /// from: `static public android.graphics.Bitmap decodeFileDescriptor(java.io.FileDescriptor fileDescriptor)`
   /// The returned object must be released after use, by calling the [release] method.
-  static bitmap$_.Bitmap? decodeFile$1(
-    jni$_.JString? string,
+  static bitmap$_.Bitmap? decodeFileDescriptor(
+    jni$_.JObject? fileDescriptor,
   ) {
-    final _$string = string?.reference ?? jni$_.jNullReference;
-    return _decodeFile$1(
+    final _$fileDescriptor = fileDescriptor?.reference ?? jni$_.jNullReference;
+    return _decodeFileDescriptor(
       _class.reference.pointer,
-      _id_decodeFile$1 as jni$_.JMethodIDPtr,
-      _$string.pointer,
+      _id_decodeFileDescriptor as jni$_.JMethodIDPtr,
+      _$fileDescriptor.pointer,
+    ).object<bitmap$_.Bitmap?>(const bitmap$_.$Bitmap$NullableType());
+  }
+
+  static final _id_decodeFileDescriptor$1 = _class.staticMethodId(
+    r'decodeFileDescriptor',
+    r'(Ljava/io/FileDescriptor;Landroid/graphics/Rect;Landroid/graphics/BitmapFactory$Options;)Landroid/graphics/Bitmap;',
+  );
+
+  static final _decodeFileDescriptor$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `static public android.graphics.Bitmap decodeFileDescriptor(java.io.FileDescriptor fileDescriptor, android.graphics.Rect rect, android.graphics.BitmapFactory$Options options)`
+  /// The returned object must be released after use, by calling the [release] method.
+  static bitmap$_.Bitmap? decodeFileDescriptor$1(
+    jni$_.JObject? fileDescriptor,
+    jni$_.JObject? rect,
+    BitmapFactory$Options? options,
+  ) {
+    final _$fileDescriptor = fileDescriptor?.reference ?? jni$_.jNullReference;
+    final _$rect = rect?.reference ?? jni$_.jNullReference;
+    final _$options = options?.reference ?? jni$_.jNullReference;
+    return _decodeFileDescriptor$1(
+      _class.reference.pointer,
+      _id_decodeFileDescriptor$1 as jni$_.JMethodIDPtr,
+      _$fileDescriptor.pointer,
+      _$rect.pointer,
+      _$options.pointer,
+    ).object<bitmap$_.Bitmap?>(const bitmap$_.$Bitmap$NullableType());
+  }
+
+  static final _id_decodeResource = _class.staticMethodId(
+    r'decodeResource',
+    r'(Landroid/content/res/Resources;I)Landroid/graphics/Bitmap;',
+  );
+
+  static final _decodeResource =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+            )
+          >();
+
+  /// from: `static public android.graphics.Bitmap decodeResource(android.content.res.Resources resources, int i)`
+  /// The returned object must be released after use, by calling the [release] method.
+  static bitmap$_.Bitmap? decodeResource(
+    jni$_.JObject? resources,
+    int i,
+  ) {
+    final _$resources = resources?.reference ?? jni$_.jNullReference;
+    return _decodeResource(
+      _class.reference.pointer,
+      _id_decodeResource as jni$_.JMethodIDPtr,
+      _$resources.pointer,
+      i,
+    ).object<bitmap$_.Bitmap?>(const bitmap$_.$Bitmap$NullableType());
+  }
+
+  static final _id_decodeResource$1 = _class.staticMethodId(
+    r'decodeResource',
+    r'(Landroid/content/res/Resources;ILandroid/graphics/BitmapFactory$Options;)Landroid/graphics/Bitmap;',
+  );
+
+  static final _decodeResource$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `static public android.graphics.Bitmap decodeResource(android.content.res.Resources resources, int i, android.graphics.BitmapFactory$Options options)`
+  /// The returned object must be released after use, by calling the [release] method.
+  static bitmap$_.Bitmap? decodeResource$1(
+    jni$_.JObject? resources,
+    int i,
+    BitmapFactory$Options? options,
+  ) {
+    final _$resources = resources?.reference ?? jni$_.jNullReference;
+    final _$options = options?.reference ?? jni$_.jNullReference;
+    return _decodeResource$1(
+      _class.reference.pointer,
+      _id_decodeResource$1 as jni$_.JMethodIDPtr,
+      _$resources.pointer,
+      i,
+      _$options.pointer,
     ).object<bitmap$_.Bitmap?>(const bitmap$_.$Bitmap$NullableType());
   }
 
@@ -673,197 +944,48 @@ class BitmapFactory extends jni$_.JObject {
     ).object<bitmap$_.Bitmap?>(const bitmap$_.$Bitmap$NullableType());
   }
 
-  static final _id_decodeResource = _class.staticMethodId(
-    r'decodeResource',
-    r'(Landroid/content/res/Resources;ILandroid/graphics/BitmapFactory$Options;)Landroid/graphics/Bitmap;',
-  );
-
-  static final _decodeResource =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<
-                  (
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.Int32,
-                    jni$_.Pointer<jni$_.Void>,
-                  )
-                >,
-              )
-            >
-          >('globalEnv_CallStaticObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              int,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `static public android.graphics.Bitmap decodeResource(android.content.res.Resources resources, int i, android.graphics.BitmapFactory$Options options)`
-  /// The returned object must be released after use, by calling the [release] method.
-  static bitmap$_.Bitmap? decodeResource(
-    jni$_.JObject? resources,
-    int i,
-    BitmapFactory$Options? options,
-  ) {
-    final _$resources = resources?.reference ?? jni$_.jNullReference;
-    final _$options = options?.reference ?? jni$_.jNullReference;
-    return _decodeResource(
-      _class.reference.pointer,
-      _id_decodeResource as jni$_.JMethodIDPtr,
-      _$resources.pointer,
-      i,
-      _$options.pointer,
-    ).object<bitmap$_.Bitmap?>(const bitmap$_.$Bitmap$NullableType());
-  }
-
-  static final _id_decodeResource$1 = _class.staticMethodId(
-    r'decodeResource',
-    r'(Landroid/content/res/Resources;I)Landroid/graphics/Bitmap;',
-  );
-
-  static final _decodeResource$1 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>,
-              )
-            >
-          >('globalEnv_CallStaticObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              int,
-            )
-          >();
-
-  /// from: `static public android.graphics.Bitmap decodeResource(android.content.res.Resources resources, int i)`
-  /// The returned object must be released after use, by calling the [release] method.
-  static bitmap$_.Bitmap? decodeResource$1(
-    jni$_.JObject? resources,
-    int i,
-  ) {
-    final _$resources = resources?.reference ?? jni$_.jNullReference;
-    return _decodeResource$1(
-      _class.reference.pointer,
-      _id_decodeResource$1 as jni$_.JMethodIDPtr,
-      _$resources.pointer,
-      i,
-    ).object<bitmap$_.Bitmap?>(const bitmap$_.$Bitmap$NullableType());
-  }
-
-  static final _id_decodeByteArray = _class.staticMethodId(
-    r'decodeByteArray',
-    r'([BIILandroid/graphics/BitmapFactory$Options;)Landroid/graphics/Bitmap;',
-  );
-
-  static final _decodeByteArray =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<
-                  (
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.Int32,
-                    jni$_.Int32,
-                    jni$_.Pointer<jni$_.Void>,
-                  )
-                >,
-              )
-            >
-          >('globalEnv_CallStaticObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              int,
-              int,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `static public android.graphics.Bitmap decodeByteArray(byte[] bs, int i, int i1, android.graphics.BitmapFactory$Options options)`
-  /// The returned object must be released after use, by calling the [release] method.
-  static bitmap$_.Bitmap? decodeByteArray(
-    jni$_.JByteArray? bs,
-    int i,
-    int i1,
-    BitmapFactory$Options? options,
-  ) {
-    final _$bs = bs?.reference ?? jni$_.jNullReference;
-    final _$options = options?.reference ?? jni$_.jNullReference;
-    return _decodeByteArray(
-      _class.reference.pointer,
-      _id_decodeByteArray as jni$_.JMethodIDPtr,
-      _$bs.pointer,
-      i,
-      i1,
-      _$options.pointer,
-    ).object<bitmap$_.Bitmap?>(const bitmap$_.$Bitmap$NullableType());
-  }
-
-  static final _id_decodeByteArray$1 = _class.staticMethodId(
-    r'decodeByteArray',
-    r'([BII)Landroid/graphics/Bitmap;',
-  );
-
-  static final _decodeByteArray$1 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<
-                  (jni$_.Pointer<jni$_.Void>, jni$_.Int32, jni$_.Int32)
-                >,
-              )
-            >
-          >('globalEnv_CallStaticObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              int,
-              int,
-            )
-          >();
-
-  /// from: `static public android.graphics.Bitmap decodeByteArray(byte[] bs, int i, int i1)`
-  /// The returned object must be released after use, by calling the [release] method.
-  static bitmap$_.Bitmap? decodeByteArray$1(
-    jni$_.JByteArray? bs,
-    int i,
-    int i1,
-  ) {
-    final _$bs = bs?.reference ?? jni$_.jNullReference;
-    return _decodeByteArray$1(
-      _class.reference.pointer,
-      _id_decodeByteArray$1 as jni$_.JMethodIDPtr,
-      _$bs.pointer,
-      i,
-      i1,
-    ).object<bitmap$_.Bitmap?>(const bitmap$_.$Bitmap$NullableType());
-  }
-
   static final _id_decodeStream = _class.staticMethodId(
+    r'decodeStream',
+    r'(Ljava/io/InputStream;)Landroid/graphics/Bitmap;',
+  );
+
+  static final _decodeStream =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `static public android.graphics.Bitmap decodeStream(java.io.InputStream inputStream)`
+  /// The returned object must be released after use, by calling the [release] method.
+  static bitmap$_.Bitmap? decodeStream(
+    jni$_.JObject? inputStream,
+  ) {
+    final _$inputStream = inputStream?.reference ?? jni$_.jNullReference;
+    return _decodeStream(
+      _class.reference.pointer,
+      _id_decodeStream as jni$_.JMethodIDPtr,
+      _$inputStream.pointer,
+    ).object<bitmap$_.Bitmap?>(const bitmap$_.$Bitmap$NullableType());
+  }
+
+  static final _id_decodeStream$1 = _class.staticMethodId(
     r'decodeStream',
     r'(Ljava/io/InputStream;Landroid/graphics/Rect;Landroid/graphics/BitmapFactory$Options;)Landroid/graphics/Bitmap;',
   );
 
-  static final _decodeStream =
+  static final _decodeStream$1 =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
@@ -891,7 +1013,7 @@ class BitmapFactory extends jni$_.JObject {
 
   /// from: `static public android.graphics.Bitmap decodeStream(java.io.InputStream inputStream, android.graphics.Rect rect, android.graphics.BitmapFactory$Options options)`
   /// The returned object must be released after use, by calling the [release] method.
-  static bitmap$_.Bitmap? decodeStream(
+  static bitmap$_.Bitmap? decodeStream$1(
     jni$_.JObject? inputStream,
     jni$_.JObject? rect,
     BitmapFactory$Options? options,
@@ -899,134 +1021,12 @@ class BitmapFactory extends jni$_.JObject {
     final _$inputStream = inputStream?.reference ?? jni$_.jNullReference;
     final _$rect = rect?.reference ?? jni$_.jNullReference;
     final _$options = options?.reference ?? jni$_.jNullReference;
-    return _decodeStream(
-      _class.reference.pointer,
-      _id_decodeStream as jni$_.JMethodIDPtr,
-      _$inputStream.pointer,
-      _$rect.pointer,
-      _$options.pointer,
-    ).object<bitmap$_.Bitmap?>(const bitmap$_.$Bitmap$NullableType());
-  }
-
-  static final _id_decodeStream$1 = _class.staticMethodId(
-    r'decodeStream',
-    r'(Ljava/io/InputStream;)Landroid/graphics/Bitmap;',
-  );
-
-  static final _decodeStream$1 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallStaticObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `static public android.graphics.Bitmap decodeStream(java.io.InputStream inputStream)`
-  /// The returned object must be released after use, by calling the [release] method.
-  static bitmap$_.Bitmap? decodeStream$1(
-    jni$_.JObject? inputStream,
-  ) {
-    final _$inputStream = inputStream?.reference ?? jni$_.jNullReference;
     return _decodeStream$1(
       _class.reference.pointer,
       _id_decodeStream$1 as jni$_.JMethodIDPtr,
       _$inputStream.pointer,
-    ).object<bitmap$_.Bitmap?>(const bitmap$_.$Bitmap$NullableType());
-  }
-
-  static final _id_decodeFileDescriptor = _class.staticMethodId(
-    r'decodeFileDescriptor',
-    r'(Ljava/io/FileDescriptor;Landroid/graphics/Rect;Landroid/graphics/BitmapFactory$Options;)Landroid/graphics/Bitmap;',
-  );
-
-  static final _decodeFileDescriptor =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<
-                  (
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.Pointer<jni$_.Void>,
-                  )
-                >,
-              )
-            >
-          >('globalEnv_CallStaticObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `static public android.graphics.Bitmap decodeFileDescriptor(java.io.FileDescriptor fileDescriptor, android.graphics.Rect rect, android.graphics.BitmapFactory$Options options)`
-  /// The returned object must be released after use, by calling the [release] method.
-  static bitmap$_.Bitmap? decodeFileDescriptor(
-    jni$_.JObject? fileDescriptor,
-    jni$_.JObject? rect,
-    BitmapFactory$Options? options,
-  ) {
-    final _$fileDescriptor = fileDescriptor?.reference ?? jni$_.jNullReference;
-    final _$rect = rect?.reference ?? jni$_.jNullReference;
-    final _$options = options?.reference ?? jni$_.jNullReference;
-    return _decodeFileDescriptor(
-      _class.reference.pointer,
-      _id_decodeFileDescriptor as jni$_.JMethodIDPtr,
-      _$fileDescriptor.pointer,
       _$rect.pointer,
       _$options.pointer,
-    ).object<bitmap$_.Bitmap?>(const bitmap$_.$Bitmap$NullableType());
-  }
-
-  static final _id_decodeFileDescriptor$1 = _class.staticMethodId(
-    r'decodeFileDescriptor',
-    r'(Ljava/io/FileDescriptor;)Landroid/graphics/Bitmap;',
-  );
-
-  static final _decodeFileDescriptor$1 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallStaticObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `static public android.graphics.Bitmap decodeFileDescriptor(java.io.FileDescriptor fileDescriptor)`
-  /// The returned object must be released after use, by calling the [release] method.
-  static bitmap$_.Bitmap? decodeFileDescriptor$1(
-    jni$_.JObject? fileDescriptor,
-  ) {
-    final _$fileDescriptor = fileDescriptor?.reference ?? jni$_.jNullReference;
-    return _decodeFileDescriptor$1(
-      _class.reference.pointer,
-      _id_decodeFileDescriptor$1 as jni$_.JMethodIDPtr,
-      _$fileDescriptor.pointer,
     ).object<bitmap$_.Bitmap?>(const bitmap$_.$Bitmap$NullableType());
   }
 }

@@ -87,16 +87,6 @@ class Bitmap$CompressFormat extends jni$_.JObject {
   static Bitmap$CompressFormat get WEBP =>
       _id_WEBP.get(_class, const $Bitmap$CompressFormat$Type());
 
-  static final _id_WEBP_LOSSY = _class.staticFieldId(
-    r'WEBP_LOSSY',
-    r'Landroid/graphics/Bitmap$CompressFormat;',
-  );
-
-  /// from: `static public final android.graphics.Bitmap$CompressFormat WEBP_LOSSY`
-  /// The returned object must be released after use, by calling the [release] method.
-  static Bitmap$CompressFormat get WEBP_LOSSY =>
-      _id_WEBP_LOSSY.get(_class, const $Bitmap$CompressFormat$Type());
-
   static final _id_WEBP_LOSSLESS = _class.staticFieldId(
     r'WEBP_LOSSLESS',
     r'Landroid/graphics/Bitmap$CompressFormat;',
@@ -106,6 +96,16 @@ class Bitmap$CompressFormat extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static Bitmap$CompressFormat get WEBP_LOSSLESS =>
       _id_WEBP_LOSSLESS.get(_class, const $Bitmap$CompressFormat$Type());
+
+  static final _id_WEBP_LOSSY = _class.staticFieldId(
+    r'WEBP_LOSSY',
+    r'Landroid/graphics/Bitmap$CompressFormat;',
+  );
+
+  /// from: `static public final android.graphics.Bitmap$CompressFormat WEBP_LOSSY`
+  /// The returned object must be released after use, by calling the [release] method.
+  static Bitmap$CompressFormat get WEBP_LOSSY =>
+      _id_WEBP_LOSSY.get(_class, const $Bitmap$CompressFormat$Type());
 
   static final _id_values = _class.staticMethodId(
     r'values',
@@ -284,16 +284,6 @@ class Bitmap$Config extends jni$_.JObject {
   static Bitmap$Config get ALPHA_8 =>
       _id_ALPHA_8.get(_class, const $Bitmap$Config$Type());
 
-  static final _id_RGB_565 = _class.staticFieldId(
-    r'RGB_565',
-    r'Landroid/graphics/Bitmap$Config;',
-  );
-
-  /// from: `static public final android.graphics.Bitmap$Config RGB_565`
-  /// The returned object must be released after use, by calling the [release] method.
-  static Bitmap$Config get RGB_565 =>
-      _id_RGB_565.get(_class, const $Bitmap$Config$Type());
-
   static final _id_ARGB_4444 = _class.staticFieldId(
     r'ARGB_4444',
     r'Landroid/graphics/Bitmap$Config;',
@@ -314,16 +304,6 @@ class Bitmap$Config extends jni$_.JObject {
   static Bitmap$Config get ARGB_8888 =>
       _id_ARGB_8888.get(_class, const $Bitmap$Config$Type());
 
-  static final _id_RGBA_F16 = _class.staticFieldId(
-    r'RGBA_F16',
-    r'Landroid/graphics/Bitmap$Config;',
-  );
-
-  /// from: `static public final android.graphics.Bitmap$Config RGBA_F16`
-  /// The returned object must be released after use, by calling the [release] method.
-  static Bitmap$Config get RGBA_F16 =>
-      _id_RGBA_F16.get(_class, const $Bitmap$Config$Type());
-
   static final _id_HARDWARE = _class.staticFieldId(
     r'HARDWARE',
     r'Landroid/graphics/Bitmap$Config;',
@@ -343,6 +323,26 @@ class Bitmap$Config extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static Bitmap$Config get RGBA_1010102 =>
       _id_RGBA_1010102.get(_class, const $Bitmap$Config$Type());
+
+  static final _id_RGBA_F16 = _class.staticFieldId(
+    r'RGBA_F16',
+    r'Landroid/graphics/Bitmap$Config;',
+  );
+
+  /// from: `static public final android.graphics.Bitmap$Config RGBA_F16`
+  /// The returned object must be released after use, by calling the [release] method.
+  static Bitmap$Config get RGBA_F16 =>
+      _id_RGBA_F16.get(_class, const $Bitmap$Config$Type());
+
+  static final _id_RGB_565 = _class.staticFieldId(
+    r'RGB_565',
+    r'Landroid/graphics/Bitmap$Config;',
+  );
+
+  /// from: `static public final android.graphics.Bitmap$Config RGB_565`
+  /// The returned object must be released after use, by calling the [release] method.
+  static Bitmap$Config get RGB_565 =>
+      _id_RGB_565.get(_class, const $Bitmap$Config$Type());
 
   static final _id_values = _class.staticMethodId(
     r'values',
@@ -518,12 +518,12 @@ class Bitmap extends jni$_.JObject {
 
   /// from: `static public final int DENSITY_NONE`
   static const DENSITY_NONE = 0;
-  static final _id_getDensity = _class.instanceMethodId(
-    r'getDensity',
-    r'()I',
+  static final _id_asShared = _class.instanceMethodId(
+    r'asShared',
+    r'()Landroid/graphics/Bitmap;',
   );
 
-  static final _getDensity =
+  static final _asShared =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
@@ -531,7 +531,7 @@ class Bitmap extends jni$_.JObject {
                 jni$_.JMethodIDPtr,
               )
             >
-          >('globalEnv_CallIntMethod')
+          >('globalEnv_CallObjectMethod')
           .asFunction<
             jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
@@ -539,227 +539,33 @@ class Bitmap extends jni$_.JObject {
             )
           >();
 
-  /// from: `public int getDensity()`
-  int getDensity() {
-    return _getDensity(
+  /// from: `public android.graphics.Bitmap asShared()`
+  /// The returned object must be released after use, by calling the [release] method.
+  Bitmap? asShared() {
+    return _asShared(
       reference.pointer,
-      _id_getDensity as jni$_.JMethodIDPtr,
-    ).integer;
+      _id_asShared as jni$_.JMethodIDPtr,
+    ).object<Bitmap?>(const $Bitmap$NullableType());
   }
 
-  static final _id_setDensity = _class.instanceMethodId(
-    r'setDensity',
-    r'(I)V',
+  static final _id_compress = _class.instanceMethodId(
+    r'compress',
+    r'(Landroid/graphics/Bitmap$CompressFormat;ILjava/io/OutputStream;)Z',
   );
 
-  static final _setDensity =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Int32,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-            )
-          >();
-
-  /// from: `public void setDensity(int i)`
-  void setDensity(
-    int i,
-  ) {
-    _setDensity(
-      reference.pointer,
-      _id_setDensity as jni$_.JMethodIDPtr,
-      i,
-    ).check();
-  }
-
-  static final _id_reconfigure = _class.instanceMethodId(
-    r'reconfigure',
-    r'(IILandroid/graphics/Bitmap$Config;)V',
-  );
-
-  static final _reconfigure =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<
-                  (jni$_.Int32, jni$_.Int32, jni$_.Pointer<jni$_.Void>)
-                >,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-              int,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public void reconfigure(int i, int i1, android.graphics.Bitmap$Config config)`
-  void reconfigure(
-    int i,
-    int i1,
-    Bitmap$Config? config,
-  ) {
-    final _$config = config?.reference ?? jni$_.jNullReference;
-    _reconfigure(
-      reference.pointer,
-      _id_reconfigure as jni$_.JMethodIDPtr,
-      i,
-      i1,
-      _$config.pointer,
-    ).check();
-  }
-
-  static final _id_setWidth = _class.instanceMethodId(
-    r'setWidth',
-    r'(I)V',
-  );
-
-  static final _setWidth =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Int32,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-            )
-          >();
-
-  /// from: `public void setWidth(int i)`
-  void setWidth(
-    int i,
-  ) {
-    _setWidth(reference.pointer, _id_setWidth as jni$_.JMethodIDPtr, i).check();
-  }
-
-  static final _id_setHeight = _class.instanceMethodId(
-    r'setHeight',
-    r'(I)V',
-  );
-
-  static final _setHeight =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Int32,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-            )
-          >();
-
-  /// from: `public void setHeight(int i)`
-  void setHeight(
-    int i,
-  ) {
-    _setHeight(
-      reference.pointer,
-      _id_setHeight as jni$_.JMethodIDPtr,
-      i,
-    ).check();
-  }
-
-  static final _id_setConfig = _class.instanceMethodId(
-    r'setConfig',
-    r'(Landroid/graphics/Bitmap$Config;)V',
-  );
-
-  static final _setConfig =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public void setConfig(android.graphics.Bitmap$Config config)`
-  void setConfig(
-    Bitmap$Config? config,
-  ) {
-    final _$config = config?.reference ?? jni$_.jNullReference;
-    _setConfig(
-      reference.pointer,
-      _id_setConfig as jni$_.JMethodIDPtr,
-      _$config.pointer,
-    ).check();
-  }
-
-  static final _id_recycle = _class.instanceMethodId(
-    r'recycle',
-    r'()V',
-  );
-
-  static final _recycle =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public void recycle()`
-  void recycle() {
-    _recycle(reference.pointer, _id_recycle as jni$_.JMethodIDPtr).check();
-  }
-
-  static final _id_isRecycled = _class.instanceMethodId(
-    r'isRecycled',
-    r'()Z',
-  );
-
-  static final _isRecycled =
+  static final _compress =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
               )
             >
           >('globalEnv_CallBooleanMethod')
@@ -767,114 +573,27 @@ class Bitmap extends jni$_.JObject {
             jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+              jni$_.Pointer<jni$_.Void>,
             )
           >();
 
-  /// from: `public boolean isRecycled()`
-  bool isRecycled() {
-    return _isRecycled(
+  /// from: `public boolean compress(android.graphics.Bitmap$CompressFormat compressFormat, int i, java.io.OutputStream outputStream)`
+  bool compress(
+    Bitmap$CompressFormat? compressFormat,
+    int i,
+    jni$_.JObject? outputStream,
+  ) {
+    final _$compressFormat = compressFormat?.reference ?? jni$_.jNullReference;
+    final _$outputStream = outputStream?.reference ?? jni$_.jNullReference;
+    return _compress(
       reference.pointer,
-      _id_isRecycled as jni$_.JMethodIDPtr,
+      _id_compress as jni$_.JMethodIDPtr,
+      _$compressFormat.pointer,
+      i,
+      _$outputStream.pointer,
     ).boolean;
-  }
-
-  static final _id_getGenerationId = _class.instanceMethodId(
-    r'getGenerationId',
-    r'()I',
-  );
-
-  static final _getGenerationId =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallIntMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public int getGenerationId()`
-  int getGenerationId() {
-    return _getGenerationId(
-      reference.pointer,
-      _id_getGenerationId as jni$_.JMethodIDPtr,
-    ).integer;
-  }
-
-  static final _id_copyPixelsToBuffer = _class.instanceMethodId(
-    r'copyPixelsToBuffer',
-    r'(Ljava/nio/Buffer;)V',
-  );
-
-  static final _copyPixelsToBuffer =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public void copyPixelsToBuffer(java.nio.Buffer buffer)`
-  void copyPixelsToBuffer(
-    jni$_.JBuffer? buffer,
-  ) {
-    final _$buffer = buffer?.reference ?? jni$_.jNullReference;
-    _copyPixelsToBuffer(
-      reference.pointer,
-      _id_copyPixelsToBuffer as jni$_.JMethodIDPtr,
-      _$buffer.pointer,
-    ).check();
-  }
-
-  static final _id_copyPixelsFromBuffer = _class.instanceMethodId(
-    r'copyPixelsFromBuffer',
-    r'(Ljava/nio/Buffer;)V',
-  );
-
-  static final _copyPixelsFromBuffer =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public void copyPixelsFromBuffer(java.nio.Buffer buffer)`
-  void copyPixelsFromBuffer(
-    jni$_.JBuffer? buffer,
-  ) {
-    final _$buffer = buffer?.reference ?? jni$_.jNullReference;
-    _copyPixelsFromBuffer(
-      reference.pointer,
-      _id_copyPixelsFromBuffer as jni$_.JMethodIDPtr,
-      _$buffer.pointer,
-    ).check();
   }
 
   static final _id_copy = _class.instanceMethodId(
@@ -916,128 +635,74 @@ class Bitmap extends jni$_.JObject {
     ).object<Bitmap?>(const $Bitmap$NullableType());
   }
 
-  static final _id_asShared = _class.instanceMethodId(
-    r'asShared',
-    r'()Landroid/graphics/Bitmap;',
+  static final _id_copyPixelsFromBuffer = _class.instanceMethodId(
+    r'copyPixelsFromBuffer',
+    r'(Ljava/nio/Buffer;)V',
   );
 
-  static final _asShared =
+  static final _copyPixelsFromBuffer =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
-              jni$_.JniResult Function(
+              jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
               )
             >
-          >('globalEnv_CallObjectMethod')
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-            jni$_.JniResult Function(
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
             )
           >();
 
-  /// from: `public android.graphics.Bitmap asShared()`
-  /// The returned object must be released after use, by calling the [release] method.
-  Bitmap? asShared() {
-    return _asShared(
+  /// from: `public void copyPixelsFromBuffer(java.nio.Buffer buffer)`
+  void copyPixelsFromBuffer(
+    jni$_.JBuffer? buffer,
+  ) {
+    final _$buffer = buffer?.reference ?? jni$_.jNullReference;
+    _copyPixelsFromBuffer(
       reference.pointer,
-      _id_asShared as jni$_.JMethodIDPtr,
-    ).object<Bitmap?>(const $Bitmap$NullableType());
+      _id_copyPixelsFromBuffer as jni$_.JMethodIDPtr,
+      _$buffer.pointer,
+    ).check();
   }
 
-  static final _id_wrapHardwareBuffer = _class.staticMethodId(
-    r'wrapHardwareBuffer',
-    r'(Landroid/hardware/HardwareBuffer;Landroid/graphics/ColorSpace;)Landroid/graphics/Bitmap;',
+  static final _id_copyPixelsToBuffer = _class.instanceMethodId(
+    r'copyPixelsToBuffer',
+    r'(Ljava/nio/Buffer;)V',
   );
 
-  static final _wrapHardwareBuffer =
+  static final _copyPixelsToBuffer =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
-              jni$_.JniResult Function(
+              jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<
-                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
-                >,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
               )
             >
-          >('globalEnv_CallStaticObjectMethod')
+          >('globalEnv_CallVoidMethod')
           .asFunction<
-            jni$_.JniResult Function(
+            jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
             )
           >();
 
-  /// from: `static public android.graphics.Bitmap wrapHardwareBuffer(android.hardware.HardwareBuffer hardwareBuffer, android.graphics.ColorSpace colorSpace)`
-  /// The returned object must be released after use, by calling the [release] method.
-  static Bitmap? wrapHardwareBuffer(
-    jni$_.JObject? hardwareBuffer,
-    jni$_.JObject? colorSpace,
+  /// from: `public void copyPixelsToBuffer(java.nio.Buffer buffer)`
+  void copyPixelsToBuffer(
+    jni$_.JBuffer? buffer,
   ) {
-    final _$hardwareBuffer = hardwareBuffer?.reference ?? jni$_.jNullReference;
-    final _$colorSpace = colorSpace?.reference ?? jni$_.jNullReference;
-    return _wrapHardwareBuffer(
-      _class.reference.pointer,
-      _id_wrapHardwareBuffer as jni$_.JMethodIDPtr,
-      _$hardwareBuffer.pointer,
-      _$colorSpace.pointer,
-    ).object<Bitmap?>(const $Bitmap$NullableType());
-  }
-
-  static final _id_createScaledBitmap = _class.staticMethodId(
-    r'createScaledBitmap',
-    r'(Landroid/graphics/Bitmap;IIZ)Landroid/graphics/Bitmap;',
-  );
-
-  static final _createScaledBitmap =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<
-                  (
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.Int32,
-                    jni$_.Int32,
-                    jni$_.Int32,
-                  )
-                >,
-              )
-            >
-          >('globalEnv_CallStaticObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              int,
-              int,
-              int,
-            )
-          >();
-
-  /// from: `static public android.graphics.Bitmap createScaledBitmap(android.graphics.Bitmap bitmap, int i, int i1, boolean z)`
-  /// The returned object must be released after use, by calling the [release] method.
-  static Bitmap? createScaledBitmap(
-    Bitmap? bitmap,
-    int i,
-    int i1,
-    bool z,
-  ) {
-    final _$bitmap = bitmap?.reference ?? jni$_.jNullReference;
-    return _createScaledBitmap(
-      _class.reference.pointer,
-      _id_createScaledBitmap as jni$_.JMethodIDPtr,
-      _$bitmap.pointer,
-      i,
-      i1,
-      z ? 1 : 0,
-    ).object<Bitmap?>(const $Bitmap$NullableType());
+    final _$buffer = buffer?.reference ?? jni$_.jNullReference;
+    _copyPixelsToBuffer(
+      reference.pointer,
+      _id_copyPixelsToBuffer as jni$_.JMethodIDPtr,
+      _$buffer.pointer,
+    ).check();
   }
 
   static final _id_createBitmap = _class.staticMethodId(
@@ -1199,7 +864,7 @@ class Bitmap extends jni$_.JObject {
 
   static final _id_createBitmap$3 = _class.staticMethodId(
     r'createBitmap',
-    r'(IILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;',
+    r'(Landroid/graphics/Picture;)Landroid/graphics/Bitmap;',
   );
 
   static final _createBitmap$3 =
@@ -1208,9 +873,7 @@ class Bitmap extends jni$_.JObject {
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<
-                  (jni$_.Int32, jni$_.Int32, jni$_.Pointer<jni$_.Void>)
-                >,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
               )
             >
           >('globalEnv_CallStaticObjectMethod')
@@ -1218,32 +881,26 @@ class Bitmap extends jni$_.JObject {
             jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
-              int,
-              int,
               jni$_.Pointer<jni$_.Void>,
             )
           >();
 
-  /// from: `static public android.graphics.Bitmap createBitmap(int i, int i1, android.graphics.Bitmap$Config config)`
+  /// from: `static public android.graphics.Bitmap createBitmap(android.graphics.Picture picture)`
   /// The returned object must be released after use, by calling the [release] method.
   static Bitmap? createBitmap$3(
-    int i,
-    int i1,
-    Bitmap$Config? config,
+    jni$_.JObject? picture,
   ) {
-    final _$config = config?.reference ?? jni$_.jNullReference;
+    final _$picture = picture?.reference ?? jni$_.jNullReference;
     return _createBitmap$3(
       _class.reference.pointer,
       _id_createBitmap$3 as jni$_.JMethodIDPtr,
-      i,
-      i1,
-      _$config.pointer,
+      _$picture.pointer,
     ).object<Bitmap?>(const $Bitmap$NullableType());
   }
 
   static final _id_createBitmap$4 = _class.staticMethodId(
     r'createBitmap',
-    r'(Landroid/util/DisplayMetrics;IILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;',
+    r'(Landroid/graphics/Picture;IILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;',
   );
 
   static final _createBitmap$4 =
@@ -1274,20 +931,20 @@ class Bitmap extends jni$_.JObject {
             )
           >();
 
-  /// from: `static public android.graphics.Bitmap createBitmap(android.util.DisplayMetrics displayMetrics, int i, int i1, android.graphics.Bitmap$Config config)`
+  /// from: `static public android.graphics.Bitmap createBitmap(android.graphics.Picture picture, int i, int i1, android.graphics.Bitmap$Config config)`
   /// The returned object must be released after use, by calling the [release] method.
   static Bitmap? createBitmap$4(
-    jni$_.JObject? displayMetrics,
+    jni$_.JObject? picture,
     int i,
     int i1,
     Bitmap$Config? config,
   ) {
-    final _$displayMetrics = displayMetrics?.reference ?? jni$_.jNullReference;
+    final _$picture = picture?.reference ?? jni$_.jNullReference;
     final _$config = config?.reference ?? jni$_.jNullReference;
     return _createBitmap$4(
       _class.reference.pointer,
       _id_createBitmap$4 as jni$_.JMethodIDPtr,
-      _$displayMetrics.pointer,
+      _$picture.pointer,
       i,
       i1,
       _$config.pointer,
@@ -1296,7 +953,7 @@ class Bitmap extends jni$_.JObject {
 
   static final _id_createBitmap$5 = _class.staticMethodId(
     r'createBitmap',
-    r'(IILandroid/graphics/Bitmap$Config;Z)Landroid/graphics/Bitmap;',
+    r'(Landroid/util/DisplayMetrics;IILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;',
   );
 
   static final _createBitmap$5 =
@@ -1307,10 +964,10 @@ class Bitmap extends jni$_.JObject {
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<
                   (
+                    jni$_.Pointer<jni$_.Void>,
                     jni$_.Int32,
                     jni$_.Int32,
                     jni$_.Pointer<jni$_.Void>,
-                    jni$_.Int32,
                   )
                 >,
               )
@@ -1320,95 +977,39 @@ class Bitmap extends jni$_.JObject {
             jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
               int,
               int,
               jni$_.Pointer<jni$_.Void>,
-              int,
             )
           >();
 
-  /// from: `static public android.graphics.Bitmap createBitmap(int i, int i1, android.graphics.Bitmap$Config config, boolean z)`
+  /// from: `static public android.graphics.Bitmap createBitmap(android.util.DisplayMetrics displayMetrics, int i, int i1, android.graphics.Bitmap$Config config)`
   /// The returned object must be released after use, by calling the [release] method.
   static Bitmap? createBitmap$5(
+    jni$_.JObject? displayMetrics,
     int i,
     int i1,
     Bitmap$Config? config,
-    bool z,
   ) {
+    final _$displayMetrics = displayMetrics?.reference ?? jni$_.jNullReference;
     final _$config = config?.reference ?? jni$_.jNullReference;
     return _createBitmap$5(
       _class.reference.pointer,
       _id_createBitmap$5 as jni$_.JMethodIDPtr,
+      _$displayMetrics.pointer,
       i,
       i1,
       _$config.pointer,
-      z ? 1 : 0,
     ).object<Bitmap?>(const $Bitmap$NullableType());
   }
 
   static final _id_createBitmap$6 = _class.staticMethodId(
     r'createBitmap',
-    r'(IILandroid/graphics/Bitmap$Config;ZLandroid/graphics/ColorSpace;)Landroid/graphics/Bitmap;',
-  );
-
-  static final _createBitmap$6 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<
-                  (
-                    jni$_.Int32,
-                    jni$_.Int32,
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.Int32,
-                    jni$_.Pointer<jni$_.Void>,
-                  )
-                >,
-              )
-            >
-          >('globalEnv_CallStaticObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-              int,
-              jni$_.Pointer<jni$_.Void>,
-              int,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `static public android.graphics.Bitmap createBitmap(int i, int i1, android.graphics.Bitmap$Config config, boolean z, android.graphics.ColorSpace colorSpace)`
-  /// The returned object must be released after use, by calling the [release] method.
-  static Bitmap? createBitmap$6(
-    int i,
-    int i1,
-    Bitmap$Config? config,
-    bool z,
-    jni$_.JObject? colorSpace,
-  ) {
-    final _$config = config?.reference ?? jni$_.jNullReference;
-    final _$colorSpace = colorSpace?.reference ?? jni$_.jNullReference;
-    return _createBitmap$6(
-      _class.reference.pointer,
-      _id_createBitmap$6 as jni$_.JMethodIDPtr,
-      i,
-      i1,
-      _$config.pointer,
-      z ? 1 : 0,
-      _$colorSpace.pointer,
-    ).object<Bitmap?>(const $Bitmap$NullableType());
-  }
-
-  static final _id_createBitmap$7 = _class.staticMethodId(
-    r'createBitmap',
     r'(Landroid/util/DisplayMetrics;IILandroid/graphics/Bitmap$Config;Z)Landroid/graphics/Bitmap;',
   );
 
-  static final _createBitmap$7 =
+  static final _createBitmap$6 =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
@@ -1440,7 +1041,7 @@ class Bitmap extends jni$_.JObject {
 
   /// from: `static public android.graphics.Bitmap createBitmap(android.util.DisplayMetrics displayMetrics, int i, int i1, android.graphics.Bitmap$Config config, boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  static Bitmap? createBitmap$7(
+  static Bitmap? createBitmap$6(
     jni$_.JObject? displayMetrics,
     int i,
     int i1,
@@ -1449,9 +1050,9 @@ class Bitmap extends jni$_.JObject {
   ) {
     final _$displayMetrics = displayMetrics?.reference ?? jni$_.jNullReference;
     final _$config = config?.reference ?? jni$_.jNullReference;
-    return _createBitmap$7(
+    return _createBitmap$6(
       _class.reference.pointer,
-      _id_createBitmap$7 as jni$_.JMethodIDPtr,
+      _id_createBitmap$6 as jni$_.JMethodIDPtr,
       _$displayMetrics.pointer,
       i,
       i1,
@@ -1460,12 +1061,12 @@ class Bitmap extends jni$_.JObject {
     ).object<Bitmap?>(const $Bitmap$NullableType());
   }
 
-  static final _id_createBitmap$8 = _class.staticMethodId(
+  static final _id_createBitmap$7 = _class.staticMethodId(
     r'createBitmap',
     r'(Landroid/util/DisplayMetrics;IILandroid/graphics/Bitmap$Config;ZLandroid/graphics/ColorSpace;)Landroid/graphics/Bitmap;',
   );
 
-  static final _createBitmap$8 =
+  static final _createBitmap$7 =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
@@ -1499,7 +1100,7 @@ class Bitmap extends jni$_.JObject {
 
   /// from: `static public android.graphics.Bitmap createBitmap(android.util.DisplayMetrics displayMetrics, int i, int i1, android.graphics.Bitmap$Config config, boolean z, android.graphics.ColorSpace colorSpace)`
   /// The returned object must be released after use, by calling the [release] method.
-  static Bitmap? createBitmap$8(
+  static Bitmap? createBitmap$7(
     jni$_.JObject? displayMetrics,
     int i,
     int i1,
@@ -1510,9 +1111,9 @@ class Bitmap extends jni$_.JObject {
     final _$displayMetrics = displayMetrics?.reference ?? jni$_.jNullReference;
     final _$config = config?.reference ?? jni$_.jNullReference;
     final _$colorSpace = colorSpace?.reference ?? jni$_.jNullReference;
-    return _createBitmap$8(
+    return _createBitmap$7(
       _class.reference.pointer,
-      _id_createBitmap$8 as jni$_.JMethodIDPtr,
+      _id_createBitmap$7 as jni$_.JMethodIDPtr,
       _$displayMetrics.pointer,
       i,
       i1,
@@ -1522,12 +1123,12 @@ class Bitmap extends jni$_.JObject {
     ).object<Bitmap?>(const $Bitmap$NullableType());
   }
 
-  static final _id_createBitmap$9 = _class.staticMethodId(
+  static final _id_createBitmap$8 = _class.staticMethodId(
     r'createBitmap',
-    r'([IIIIILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;',
+    r'(Landroid/util/DisplayMetrics;[IIILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;',
   );
 
-  static final _createBitmap$9 =
+  static final _createBitmap$8 =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
@@ -1536,8 +1137,7 @@ class Bitmap extends jni$_.JObject {
                 jni$_.VarArgs<
                   (
                     jni$_.Pointer<jni$_.Void>,
-                    jni$_.Int32,
-                    jni$_.Int32,
+                    jni$_.Pointer<jni$_.Void>,
                     jni$_.Int32,
                     jni$_.Int32,
                     jni$_.Pointer<jni$_.Void>,
@@ -1551,44 +1151,42 @@ class Bitmap extends jni$_.JObject {
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
-              int,
-              int,
+              jni$_.Pointer<jni$_.Void>,
               int,
               int,
               jni$_.Pointer<jni$_.Void>,
             )
           >();
 
-  /// from: `static public android.graphics.Bitmap createBitmap(int[] is, int i, int i1, int i2, int i3, android.graphics.Bitmap$Config config)`
+  /// from: `static public android.graphics.Bitmap createBitmap(android.util.DisplayMetrics displayMetrics, int[] is, int i, int i1, android.graphics.Bitmap$Config config)`
   /// The returned object must be released after use, by calling the [release] method.
-  static Bitmap? createBitmap$9(
+  static Bitmap? createBitmap$8(
+    jni$_.JObject? displayMetrics,
     jni$_.JIntArray? is$,
     int i,
     int i1,
-    int i2,
-    int i3,
     Bitmap$Config? config,
   ) {
+    final _$displayMetrics = displayMetrics?.reference ?? jni$_.jNullReference;
     final _$is$ = is$?.reference ?? jni$_.jNullReference;
     final _$config = config?.reference ?? jni$_.jNullReference;
-    return _createBitmap$9(
+    return _createBitmap$8(
       _class.reference.pointer,
-      _id_createBitmap$9 as jni$_.JMethodIDPtr,
+      _id_createBitmap$8 as jni$_.JMethodIDPtr,
+      _$displayMetrics.pointer,
       _$is$.pointer,
       i,
       i1,
-      i2,
-      i3,
       _$config.pointer,
     ).object<Bitmap?>(const $Bitmap$NullableType());
   }
 
-  static final _id_createBitmap$10 = _class.staticMethodId(
+  static final _id_createBitmap$9 = _class.staticMethodId(
     r'createBitmap',
     r'(Landroid/util/DisplayMetrics;[IIIIILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;',
   );
 
-  static final _createBitmap$10 =
+  static final _createBitmap$9 =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
@@ -1624,7 +1222,7 @@ class Bitmap extends jni$_.JObject {
 
   /// from: `static public android.graphics.Bitmap createBitmap(android.util.DisplayMetrics displayMetrics, int[] is, int i, int i1, int i2, int i3, android.graphics.Bitmap$Config config)`
   /// The returned object must be released after use, by calling the [release] method.
-  static Bitmap? createBitmap$10(
+  static Bitmap? createBitmap$9(
     jni$_.JObject? displayMetrics,
     jni$_.JIntArray? is$,
     int i,
@@ -1636,9 +1234,9 @@ class Bitmap extends jni$_.JObject {
     final _$displayMetrics = displayMetrics?.reference ?? jni$_.jNullReference;
     final _$is$ = is$?.reference ?? jni$_.jNullReference;
     final _$config = config?.reference ?? jni$_.jNullReference;
-    return _createBitmap$10(
+    return _createBitmap$9(
       _class.reference.pointer,
-      _id_createBitmap$10 as jni$_.JMethodIDPtr,
+      _id_createBitmap$9 as jni$_.JMethodIDPtr,
       _$displayMetrics.pointer,
       _$is$.pointer,
       i,
@@ -1649,12 +1247,165 @@ class Bitmap extends jni$_.JObject {
     ).object<Bitmap?>(const $Bitmap$NullableType());
   }
 
+  static final _id_createBitmap$10 = _class.staticMethodId(
+    r'createBitmap',
+    r'(IILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;',
+  );
+
+  static final _createBitmap$10 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Int32, jni$_.Int32, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+              int,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `static public android.graphics.Bitmap createBitmap(int i, int i1, android.graphics.Bitmap$Config config)`
+  /// The returned object must be released after use, by calling the [release] method.
+  static Bitmap? createBitmap$10(
+    int i,
+    int i1,
+    Bitmap$Config? config,
+  ) {
+    final _$config = config?.reference ?? jni$_.jNullReference;
+    return _createBitmap$10(
+      _class.reference.pointer,
+      _id_createBitmap$10 as jni$_.JMethodIDPtr,
+      i,
+      i1,
+      _$config.pointer,
+    ).object<Bitmap?>(const $Bitmap$NullableType());
+  }
+
   static final _id_createBitmap$11 = _class.staticMethodId(
+    r'createBitmap',
+    r'(IILandroid/graphics/Bitmap$Config;Z)Landroid/graphics/Bitmap;',
+  );
+
+  static final _createBitmap$11 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Int32,
+                    jni$_.Int32,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+              int,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+            )
+          >();
+
+  /// from: `static public android.graphics.Bitmap createBitmap(int i, int i1, android.graphics.Bitmap$Config config, boolean z)`
+  /// The returned object must be released after use, by calling the [release] method.
+  static Bitmap? createBitmap$11(
+    int i,
+    int i1,
+    Bitmap$Config? config,
+    bool z,
+  ) {
+    final _$config = config?.reference ?? jni$_.jNullReference;
+    return _createBitmap$11(
+      _class.reference.pointer,
+      _id_createBitmap$11 as jni$_.JMethodIDPtr,
+      i,
+      i1,
+      _$config.pointer,
+      z ? 1 : 0,
+    ).object<Bitmap?>(const $Bitmap$NullableType());
+  }
+
+  static final _id_createBitmap$12 = _class.staticMethodId(
+    r'createBitmap',
+    r'(IILandroid/graphics/Bitmap$Config;ZLandroid/graphics/ColorSpace;)Landroid/graphics/Bitmap;',
+  );
+
+  static final _createBitmap$12 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Int32,
+                    jni$_.Int32,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+              int,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `static public android.graphics.Bitmap createBitmap(int i, int i1, android.graphics.Bitmap$Config config, boolean z, android.graphics.ColorSpace colorSpace)`
+  /// The returned object must be released after use, by calling the [release] method.
+  static Bitmap? createBitmap$12(
+    int i,
+    int i1,
+    Bitmap$Config? config,
+    bool z,
+    jni$_.JObject? colorSpace,
+  ) {
+    final _$config = config?.reference ?? jni$_.jNullReference;
+    final _$colorSpace = colorSpace?.reference ?? jni$_.jNullReference;
+    return _createBitmap$12(
+      _class.reference.pointer,
+      _id_createBitmap$12 as jni$_.JMethodIDPtr,
+      i,
+      i1,
+      _$config.pointer,
+      z ? 1 : 0,
+      _$colorSpace.pointer,
+    ).object<Bitmap?>(const $Bitmap$NullableType());
+  }
+
+  static final _id_createBitmap$13 = _class.staticMethodId(
     r'createBitmap',
     r'([IIILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;',
   );
 
-  static final _createBitmap$11 =
+  static final _createBitmap$13 =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
@@ -1684,121 +1435,27 @@ class Bitmap extends jni$_.JObject {
 
   /// from: `static public android.graphics.Bitmap createBitmap(int[] is, int i, int i1, android.graphics.Bitmap$Config config)`
   /// The returned object must be released after use, by calling the [release] method.
-  static Bitmap? createBitmap$11(
-    jni$_.JIntArray? is$,
-    int i,
-    int i1,
-    Bitmap$Config? config,
-  ) {
-    final _$is$ = is$?.reference ?? jni$_.jNullReference;
-    final _$config = config?.reference ?? jni$_.jNullReference;
-    return _createBitmap$11(
-      _class.reference.pointer,
-      _id_createBitmap$11 as jni$_.JMethodIDPtr,
-      _$is$.pointer,
-      i,
-      i1,
-      _$config.pointer,
-    ).object<Bitmap?>(const $Bitmap$NullableType());
-  }
-
-  static final _id_createBitmap$12 = _class.staticMethodId(
-    r'createBitmap',
-    r'(Landroid/util/DisplayMetrics;[IIILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;',
-  );
-
-  static final _createBitmap$12 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<
-                  (
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.Int32,
-                    jni$_.Int32,
-                    jni$_.Pointer<jni$_.Void>,
-                  )
-                >,
-              )
-            >
-          >('globalEnv_CallStaticObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-              int,
-              int,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `static public android.graphics.Bitmap createBitmap(android.util.DisplayMetrics displayMetrics, int[] is, int i, int i1, android.graphics.Bitmap$Config config)`
-  /// The returned object must be released after use, by calling the [release] method.
-  static Bitmap? createBitmap$12(
-    jni$_.JObject? displayMetrics,
-    jni$_.JIntArray? is$,
-    int i,
-    int i1,
-    Bitmap$Config? config,
-  ) {
-    final _$displayMetrics = displayMetrics?.reference ?? jni$_.jNullReference;
-    final _$is$ = is$?.reference ?? jni$_.jNullReference;
-    final _$config = config?.reference ?? jni$_.jNullReference;
-    return _createBitmap$12(
-      _class.reference.pointer,
-      _id_createBitmap$12 as jni$_.JMethodIDPtr,
-      _$displayMetrics.pointer,
-      _$is$.pointer,
-      i,
-      i1,
-      _$config.pointer,
-    ).object<Bitmap?>(const $Bitmap$NullableType());
-  }
-
-  static final _id_createBitmap$13 = _class.staticMethodId(
-    r'createBitmap',
-    r'(Landroid/graphics/Picture;)Landroid/graphics/Bitmap;',
-  );
-
-  static final _createBitmap$13 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallStaticObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `static public android.graphics.Bitmap createBitmap(android.graphics.Picture picture)`
-  /// The returned object must be released after use, by calling the [release] method.
   static Bitmap? createBitmap$13(
-    jni$_.JObject? picture,
+    jni$_.JIntArray? is$,
+    int i,
+    int i1,
+    Bitmap$Config? config,
   ) {
-    final _$picture = picture?.reference ?? jni$_.jNullReference;
+    final _$is$ = is$?.reference ?? jni$_.jNullReference;
+    final _$config = config?.reference ?? jni$_.jNullReference;
     return _createBitmap$13(
       _class.reference.pointer,
       _id_createBitmap$13 as jni$_.JMethodIDPtr,
-      _$picture.pointer,
+      _$is$.pointer,
+      i,
+      i1,
+      _$config.pointer,
     ).object<Bitmap?>(const $Bitmap$NullableType());
   }
 
   static final _id_createBitmap$14 = _class.staticMethodId(
     r'createBitmap',
-    r'(Landroid/graphics/Picture;IILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;',
+    r'([IIIIILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;',
   );
 
   static final _createBitmap$14 =
@@ -1812,6 +1469,8 @@ class Bitmap extends jni$_.JObject {
                     jni$_.Pointer<jni$_.Void>,
                     jni$_.Int32,
                     jni$_.Int32,
+                    jni$_.Int32,
+                    jni$_.Int32,
                     jni$_.Pointer<jni$_.Void>,
                   )
                 >,
@@ -1825,66 +1484,42 @@ class Bitmap extends jni$_.JObject {
               jni$_.Pointer<jni$_.Void>,
               int,
               int,
+              int,
+              int,
               jni$_.Pointer<jni$_.Void>,
             )
           >();
 
-  /// from: `static public android.graphics.Bitmap createBitmap(android.graphics.Picture picture, int i, int i1, android.graphics.Bitmap$Config config)`
+  /// from: `static public android.graphics.Bitmap createBitmap(int[] is, int i, int i1, int i2, int i3, android.graphics.Bitmap$Config config)`
   /// The returned object must be released after use, by calling the [release] method.
   static Bitmap? createBitmap$14(
-    jni$_.JObject? picture,
+    jni$_.JIntArray? is$,
     int i,
     int i1,
+    int i2,
+    int i3,
     Bitmap$Config? config,
   ) {
-    final _$picture = picture?.reference ?? jni$_.jNullReference;
+    final _$is$ = is$?.reference ?? jni$_.jNullReference;
     final _$config = config?.reference ?? jni$_.jNullReference;
     return _createBitmap$14(
       _class.reference.pointer,
       _id_createBitmap$14 as jni$_.JMethodIDPtr,
-      _$picture.pointer,
+      _$is$.pointer,
       i,
       i1,
+      i2,
+      i3,
       _$config.pointer,
     ).object<Bitmap?>(const $Bitmap$NullableType());
   }
 
-  static final _id_getNinePatchChunk = _class.instanceMethodId(
-    r'getNinePatchChunk',
-    r'()[B',
+  static final _id_createScaledBitmap = _class.staticMethodId(
+    r'createScaledBitmap',
+    r'(Landroid/graphics/Bitmap;IIZ)Landroid/graphics/Bitmap;',
   );
 
-  static final _getNinePatchChunk =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public byte[] getNinePatchChunk()`
-  /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JByteArray? getNinePatchChunk() {
-    return _getNinePatchChunk(
-      reference.pointer,
-      _id_getNinePatchChunk as jni$_.JMethodIDPtr,
-    ).object<jni$_.JByteArray?>(const jni$_.JByteArrayNullableType());
-  }
-
-  static final _id_compress = _class.instanceMethodId(
-    r'compress',
-    r'(Landroid/graphics/Bitmap$CompressFormat;ILjava/io/OutputStream;)Z',
-  );
-
-  static final _compress =
+  static final _createScaledBitmap =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
@@ -1894,583 +1529,49 @@ class Bitmap extends jni$_.JObject {
                   (
                     jni$_.Pointer<jni$_.Void>,
                     jni$_.Int32,
-                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                    jni$_.Int32,
                   )
                 >,
               )
             >
-          >('globalEnv_CallBooleanMethod')
+          >('globalEnv_CallStaticObjectMethod')
           .asFunction<
             jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               jni$_.Pointer<jni$_.Void>,
               int,
-              jni$_.Pointer<jni$_.Void>,
+              int,
+              int,
             )
           >();
 
-  /// from: `public boolean compress(android.graphics.Bitmap$CompressFormat compressFormat, int i, java.io.OutputStream outputStream)`
-  bool compress(
-    Bitmap$CompressFormat? compressFormat,
+  /// from: `static public android.graphics.Bitmap createScaledBitmap(android.graphics.Bitmap bitmap, int i, int i1, boolean z)`
+  /// The returned object must be released after use, by calling the [release] method.
+  static Bitmap? createScaledBitmap(
+    Bitmap? bitmap,
     int i,
-    jni$_.JObject? outputStream,
-  ) {
-    final _$compressFormat = compressFormat?.reference ?? jni$_.jNullReference;
-    final _$outputStream = outputStream?.reference ?? jni$_.jNullReference;
-    return _compress(
-      reference.pointer,
-      _id_compress as jni$_.JMethodIDPtr,
-      _$compressFormat.pointer,
-      i,
-      _$outputStream.pointer,
-    ).boolean;
-  }
-
-  static final _id_isMutable = _class.instanceMethodId(
-    r'isMutable',
-    r'()Z',
-  );
-
-  static final _isMutable =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public boolean isMutable()`
-  bool isMutable() {
-    return _isMutable(
-      reference.pointer,
-      _id_isMutable as jni$_.JMethodIDPtr,
-    ).boolean;
-  }
-
-  static final _id_isPremultiplied = _class.instanceMethodId(
-    r'isPremultiplied',
-    r'()Z',
-  );
-
-  static final _isPremultiplied =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public boolean isPremultiplied()`
-  bool isPremultiplied() {
-    return _isPremultiplied(
-      reference.pointer,
-      _id_isPremultiplied as jni$_.JMethodIDPtr,
-    ).boolean;
-  }
-
-  static final _id_setPremultiplied = _class.instanceMethodId(
-    r'setPremultiplied',
-    r'(Z)V',
-  );
-
-  static final _setPremultiplied =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Int32,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-            )
-          >();
-
-  /// from: `public void setPremultiplied(boolean z)`
-  void setPremultiplied(
+    int i1,
     bool z,
   ) {
-    _setPremultiplied(
-      reference.pointer,
-      _id_setPremultiplied as jni$_.JMethodIDPtr,
-      z ? 1 : 0,
-    ).check();
-  }
-
-  static final _id_getWidth = _class.instanceMethodId(
-    r'getWidth',
-    r'()I',
-  );
-
-  static final _getWidth =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallIntMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public int getWidth()`
-  int getWidth() {
-    return _getWidth(
-      reference.pointer,
-      _id_getWidth as jni$_.JMethodIDPtr,
-    ).integer;
-  }
-
-  static final _id_getHeight = _class.instanceMethodId(
-    r'getHeight',
-    r'()I',
-  );
-
-  static final _getHeight =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallIntMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public int getHeight()`
-  int getHeight() {
-    return _getHeight(
-      reference.pointer,
-      _id_getHeight as jni$_.JMethodIDPtr,
-    ).integer;
-  }
-
-  static final _id_getScaledWidth = _class.instanceMethodId(
-    r'getScaledWidth',
-    r'(Landroid/graphics/Canvas;)I',
-  );
-
-  static final _getScaledWidth =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallIntMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public int getScaledWidth(android.graphics.Canvas canvas)`
-  int getScaledWidth(
-    jni$_.JObject? canvas,
-  ) {
-    final _$canvas = canvas?.reference ?? jni$_.jNullReference;
-    return _getScaledWidth(
-      reference.pointer,
-      _id_getScaledWidth as jni$_.JMethodIDPtr,
-      _$canvas.pointer,
-    ).integer;
-  }
-
-  static final _id_getScaledHeight = _class.instanceMethodId(
-    r'getScaledHeight',
-    r'(Landroid/graphics/Canvas;)I',
-  );
-
-  static final _getScaledHeight =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallIntMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public int getScaledHeight(android.graphics.Canvas canvas)`
-  int getScaledHeight(
-    jni$_.JObject? canvas,
-  ) {
-    final _$canvas = canvas?.reference ?? jni$_.jNullReference;
-    return _getScaledHeight(
-      reference.pointer,
-      _id_getScaledHeight as jni$_.JMethodIDPtr,
-      _$canvas.pointer,
-    ).integer;
-  }
-
-  static final _id_getScaledWidth$1 = _class.instanceMethodId(
-    r'getScaledWidth',
-    r'(Landroid/util/DisplayMetrics;)I',
-  );
-
-  static final _getScaledWidth$1 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallIntMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public int getScaledWidth(android.util.DisplayMetrics displayMetrics)`
-  int getScaledWidth$1(
-    jni$_.JObject? displayMetrics,
-  ) {
-    final _$displayMetrics = displayMetrics?.reference ?? jni$_.jNullReference;
-    return _getScaledWidth$1(
-      reference.pointer,
-      _id_getScaledWidth$1 as jni$_.JMethodIDPtr,
-      _$displayMetrics.pointer,
-    ).integer;
-  }
-
-  static final _id_getScaledHeight$1 = _class.instanceMethodId(
-    r'getScaledHeight',
-    r'(Landroid/util/DisplayMetrics;)I',
-  );
-
-  static final _getScaledHeight$1 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallIntMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public int getScaledHeight(android.util.DisplayMetrics displayMetrics)`
-  int getScaledHeight$1(
-    jni$_.JObject? displayMetrics,
-  ) {
-    final _$displayMetrics = displayMetrics?.reference ?? jni$_.jNullReference;
-    return _getScaledHeight$1(
-      reference.pointer,
-      _id_getScaledHeight$1 as jni$_.JMethodIDPtr,
-      _$displayMetrics.pointer,
-    ).integer;
-  }
-
-  static final _id_getScaledWidth$2 = _class.instanceMethodId(
-    r'getScaledWidth',
-    r'(I)I',
-  );
-
-  static final _getScaledWidth$2 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Int32,)>,
-              )
-            >
-          >('globalEnv_CallIntMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-            )
-          >();
-
-  /// from: `public int getScaledWidth(int i)`
-  int getScaledWidth$2(
-    int i,
-  ) {
-    return _getScaledWidth$2(
-      reference.pointer,
-      _id_getScaledWidth$2 as jni$_.JMethodIDPtr,
+    final _$bitmap = bitmap?.reference ?? jni$_.jNullReference;
+    return _createScaledBitmap(
+      _class.reference.pointer,
+      _id_createScaledBitmap as jni$_.JMethodIDPtr,
+      _$bitmap.pointer,
       i,
-    ).integer;
-  }
-
-  static final _id_getScaledHeight$2 = _class.instanceMethodId(
-    r'getScaledHeight',
-    r'(I)I',
-  );
-
-  static final _getScaledHeight$2 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Int32,)>,
-              )
-            >
-          >('globalEnv_CallIntMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-            )
-          >();
-
-  /// from: `public int getScaledHeight(int i)`
-  int getScaledHeight$2(
-    int i,
-  ) {
-    return _getScaledHeight$2(
-      reference.pointer,
-      _id_getScaledHeight$2 as jni$_.JMethodIDPtr,
-      i,
-    ).integer;
-  }
-
-  static final _id_getRowBytes = _class.instanceMethodId(
-    r'getRowBytes',
-    r'()I',
-  );
-
-  static final _getRowBytes =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallIntMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public int getRowBytes()`
-  int getRowBytes() {
-    return _getRowBytes(
-      reference.pointer,
-      _id_getRowBytes as jni$_.JMethodIDPtr,
-    ).integer;
-  }
-
-  static final _id_getByteCount = _class.instanceMethodId(
-    r'getByteCount',
-    r'()I',
-  );
-
-  static final _getByteCount =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallIntMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public int getByteCount()`
-  int getByteCount() {
-    return _getByteCount(
-      reference.pointer,
-      _id_getByteCount as jni$_.JMethodIDPtr,
-    ).integer;
-  }
-
-  static final _id_getAllocationByteCount = _class.instanceMethodId(
-    r'getAllocationByteCount',
-    r'()I',
-  );
-
-  static final _getAllocationByteCount =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallIntMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public int getAllocationByteCount()`
-  int getAllocationByteCount() {
-    return _getAllocationByteCount(
-      reference.pointer,
-      _id_getAllocationByteCount as jni$_.JMethodIDPtr,
-    ).integer;
-  }
-
-  static final _id_getConfig = _class.instanceMethodId(
-    r'getConfig',
-    r'()Landroid/graphics/Bitmap$Config;',
-  );
-
-  static final _getConfig =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public android.graphics.Bitmap$Config getConfig()`
-  /// The returned object must be released after use, by calling the [release] method.
-  Bitmap$Config? getConfig() {
-    return _getConfig(
-      reference.pointer,
-      _id_getConfig as jni$_.JMethodIDPtr,
-    ).object<Bitmap$Config?>(const $Bitmap$Config$NullableType());
-  }
-
-  static final _id_hasAlpha = _class.instanceMethodId(
-    r'hasAlpha',
-    r'()Z',
-  );
-
-  static final _hasAlpha =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public boolean hasAlpha()`
-  bool hasAlpha() {
-    return _hasAlpha(
-      reference.pointer,
-      _id_hasAlpha as jni$_.JMethodIDPtr,
-    ).boolean;
-  }
-
-  static final _id_setHasAlpha = _class.instanceMethodId(
-    r'setHasAlpha',
-    r'(Z)V',
-  );
-
-  static final _setHasAlpha =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Int32,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-            )
-          >();
-
-  /// from: `public void setHasAlpha(boolean z)`
-  void setHasAlpha(
-    bool z,
-  ) {
-    _setHasAlpha(
-      reference.pointer,
-      _id_setHasAlpha as jni$_.JMethodIDPtr,
+      i1,
       z ? 1 : 0,
-    ).check();
+    ).object<Bitmap?>(const $Bitmap$NullableType());
   }
 
-  static final _id_hasMipMap = _class.instanceMethodId(
-    r'hasMipMap',
-    r'()Z',
+  static final _id_describeContents = _class.instanceMethodId(
+    r'describeContents',
+    r'()I',
   );
 
-  static final _hasMipMap =
+  static final _describeContents =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
@@ -2478,7 +1579,7 @@ class Bitmap extends jni$_.JObject {
                 jni$_.JMethodIDPtr,
               )
             >
-          >('globalEnv_CallBooleanMethod')
+          >('globalEnv_CallIntMethod')
           .asFunction<
             jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
@@ -2486,205 +1587,12 @@ class Bitmap extends jni$_.JObject {
             )
           >();
 
-  /// from: `public boolean hasMipMap()`
-  bool hasMipMap() {
-    return _hasMipMap(
+  /// from: `public int describeContents()`
+  int describeContents() {
+    return _describeContents(
       reference.pointer,
-      _id_hasMipMap as jni$_.JMethodIDPtr,
-    ).boolean;
-  }
-
-  static final _id_setHasMipMap = _class.instanceMethodId(
-    r'setHasMipMap',
-    r'(Z)V',
-  );
-
-  static final _setHasMipMap =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Int32,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-            )
-          >();
-
-  /// from: `public void setHasMipMap(boolean z)`
-  void setHasMipMap(
-    bool z,
-  ) {
-    _setHasMipMap(
-      reference.pointer,
-      _id_setHasMipMap as jni$_.JMethodIDPtr,
-      z ? 1 : 0,
-    ).check();
-  }
-
-  static final _id_getColorSpace = _class.instanceMethodId(
-    r'getColorSpace',
-    r'()Landroid/graphics/ColorSpace;',
-  );
-
-  static final _getColorSpace =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public android.graphics.ColorSpace getColorSpace()`
-  /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? getColorSpace() {
-    return _getColorSpace(
-      reference.pointer,
-      _id_getColorSpace as jni$_.JMethodIDPtr,
-    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
-  }
-
-  static final _id_setColorSpace = _class.instanceMethodId(
-    r'setColorSpace',
-    r'(Landroid/graphics/ColorSpace;)V',
-  );
-
-  static final _setColorSpace =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public void setColorSpace(android.graphics.ColorSpace colorSpace)`
-  void setColorSpace(
-    jni$_.JObject? colorSpace,
-  ) {
-    final _$colorSpace = colorSpace?.reference ?? jni$_.jNullReference;
-    _setColorSpace(
-      reference.pointer,
-      _id_setColorSpace as jni$_.JMethodIDPtr,
-      _$colorSpace.pointer,
-    ).check();
-  }
-
-  static final _id_hasGainmap = _class.instanceMethodId(
-    r'hasGainmap',
-    r'()Z',
-  );
-
-  static final _hasGainmap =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public boolean hasGainmap()`
-  bool hasGainmap() {
-    return _hasGainmap(
-      reference.pointer,
-      _id_hasGainmap as jni$_.JMethodIDPtr,
-    ).boolean;
-  }
-
-  static final _id_getGainmap = _class.instanceMethodId(
-    r'getGainmap',
-    r'()Landroid/graphics/Gainmap;',
-  );
-
-  static final _getGainmap =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public android.graphics.Gainmap getGainmap()`
-  /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? getGainmap() {
-    return _getGainmap(
-      reference.pointer,
-      _id_getGainmap as jni$_.JMethodIDPtr,
-    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
-  }
-
-  static final _id_setGainmap = _class.instanceMethodId(
-    r'setGainmap',
-    r'(Landroid/graphics/Gainmap;)V',
-  );
-
-  static final _setGainmap =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public void setGainmap(android.graphics.Gainmap gainmap)`
-  void setGainmap(
-    jni$_.JObject? gainmap,
-  ) {
-    final _$gainmap = gainmap?.reference ?? jni$_.jNullReference;
-    _setGainmap(
-      reference.pointer,
-      _id_setGainmap as jni$_.JMethodIDPtr,
-      _$gainmap.pointer,
-    ).check();
+      _id_describeContents as jni$_.JMethodIDPtr,
+    ).integer;
   }
 
   static final _id_eraseColor = _class.instanceMethodId(
@@ -2755,18 +1663,89 @@ class Bitmap extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_getPixel = _class.instanceMethodId(
-    r'getPixel',
-    r'(II)I',
+  static final _id_extractAlpha = _class.instanceMethodId(
+    r'extractAlpha',
+    r'()Landroid/graphics/Bitmap;',
   );
 
-  static final _getPixel =
+  static final _extractAlpha =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Int32, jni$_.Int32)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public android.graphics.Bitmap extractAlpha()`
+  /// The returned object must be released after use, by calling the [release] method.
+  Bitmap? extractAlpha() {
+    return _extractAlpha(
+      reference.pointer,
+      _id_extractAlpha as jni$_.JMethodIDPtr,
+    ).object<Bitmap?>(const $Bitmap$NullableType());
+  }
+
+  static final _id_extractAlpha$1 = _class.instanceMethodId(
+    r'extractAlpha',
+    r'(Landroid/graphics/Paint;[I)Landroid/graphics/Bitmap;',
+  );
+
+  static final _extractAlpha$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public android.graphics.Bitmap extractAlpha(android.graphics.Paint paint, int[] is)`
+  /// The returned object must be released after use, by calling the [release] method.
+  Bitmap? extractAlpha$1(
+    jni$_.JObject? paint,
+    jni$_.JIntArray? is$,
+  ) {
+    final _$paint = paint?.reference ?? jni$_.jNullReference;
+    final _$is$ = is$?.reference ?? jni$_.jNullReference;
+    return _extractAlpha$1(
+      reference.pointer,
+      _id_extractAlpha$1 as jni$_.JMethodIDPtr,
+      _$paint.pointer,
+      _$is$.pointer,
+    ).object<Bitmap?>(const $Bitmap$NullableType());
+  }
+
+  static final _id_getAllocationByteCount = _class.instanceMethodId(
+    r'getAllocationByteCount',
+    r'()I',
+  );
+
+  static final _getAllocationByteCount =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )
             >
           >('globalEnv_CallIntMethod')
@@ -2774,21 +1753,43 @@ class Bitmap extends jni$_.JObject {
             jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
-              int,
-              int,
             )
           >();
 
-  /// from: `public int getPixel(int i, int i1)`
-  int getPixel(
-    int i,
-    int i1,
-  ) {
-    return _getPixel(
+  /// from: `public int getAllocationByteCount()`
+  int getAllocationByteCount() {
+    return _getAllocationByteCount(
       reference.pointer,
-      _id_getPixel as jni$_.JMethodIDPtr,
-      i,
-      i1,
+      _id_getAllocationByteCount as jni$_.JMethodIDPtr,
+    ).integer;
+  }
+
+  static final _id_getByteCount = _class.instanceMethodId(
+    r'getByteCount',
+    r'()I',
+  );
+
+  static final _getByteCount =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public int getByteCount()`
+  int getByteCount() {
+    return _getByteCount(
+      reference.pointer,
+      _id_getByteCount as jni$_.JMethodIDPtr,
     ).integer;
   }
 
@@ -2828,6 +1829,280 @@ class Bitmap extends jni$_.JObject {
       i,
       i1,
     ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+  }
+
+  static final _id_getColorSpace = _class.instanceMethodId(
+    r'getColorSpace',
+    r'()Landroid/graphics/ColorSpace;',
+  );
+
+  static final _getColorSpace =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public android.graphics.ColorSpace getColorSpace()`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JObject? getColorSpace() {
+    return _getColorSpace(
+      reference.pointer,
+      _id_getColorSpace as jni$_.JMethodIDPtr,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+  }
+
+  static final _id_getConfig = _class.instanceMethodId(
+    r'getConfig',
+    r'()Landroid/graphics/Bitmap$Config;',
+  );
+
+  static final _getConfig =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public android.graphics.Bitmap$Config getConfig()`
+  /// The returned object must be released after use, by calling the [release] method.
+  Bitmap$Config? getConfig() {
+    return _getConfig(
+      reference.pointer,
+      _id_getConfig as jni$_.JMethodIDPtr,
+    ).object<Bitmap$Config?>(const $Bitmap$Config$NullableType());
+  }
+
+  static final _id_getDensity = _class.instanceMethodId(
+    r'getDensity',
+    r'()I',
+  );
+
+  static final _getDensity =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public int getDensity()`
+  int getDensity() {
+    return _getDensity(
+      reference.pointer,
+      _id_getDensity as jni$_.JMethodIDPtr,
+    ).integer;
+  }
+
+  static final _id_getGainmap = _class.instanceMethodId(
+    r'getGainmap',
+    r'()Landroid/graphics/Gainmap;',
+  );
+
+  static final _getGainmap =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public android.graphics.Gainmap getGainmap()`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JObject? getGainmap() {
+    return _getGainmap(
+      reference.pointer,
+      _id_getGainmap as jni$_.JMethodIDPtr,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+  }
+
+  static final _id_getGenerationId = _class.instanceMethodId(
+    r'getGenerationId',
+    r'()I',
+  );
+
+  static final _getGenerationId =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public int getGenerationId()`
+  int getGenerationId() {
+    return _getGenerationId(
+      reference.pointer,
+      _id_getGenerationId as jni$_.JMethodIDPtr,
+    ).integer;
+  }
+
+  static final _id_getHardwareBuffer = _class.instanceMethodId(
+    r'getHardwareBuffer',
+    r'()Landroid/hardware/HardwareBuffer;',
+  );
+
+  static final _getHardwareBuffer =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public android.hardware.HardwareBuffer getHardwareBuffer()`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JObject? getHardwareBuffer() {
+    return _getHardwareBuffer(
+      reference.pointer,
+      _id_getHardwareBuffer as jni$_.JMethodIDPtr,
+    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+  }
+
+  static final _id_getHeight = _class.instanceMethodId(
+    r'getHeight',
+    r'()I',
+  );
+
+  static final _getHeight =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public int getHeight()`
+  int getHeight() {
+    return _getHeight(
+      reference.pointer,
+      _id_getHeight as jni$_.JMethodIDPtr,
+    ).integer;
+  }
+
+  static final _id_getNinePatchChunk = _class.instanceMethodId(
+    r'getNinePatchChunk',
+    r'()[B',
+  );
+
+  static final _getNinePatchChunk =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public byte[] getNinePatchChunk()`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JByteArray? getNinePatchChunk() {
+    return _getNinePatchChunk(
+      reference.pointer,
+      _id_getNinePatchChunk as jni$_.JMethodIDPtr,
+    ).object<jni$_.JByteArray?>(const jni$_.JByteArrayNullableType());
+  }
+
+  static final _id_getPixel = _class.instanceMethodId(
+    r'getPixel',
+    r'(II)I',
+  );
+
+  static final _getPixel =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32, jni$_.Int32)>,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+              int,
+            )
+          >();
+
+  /// from: `public int getPixel(int i, int i1)`
+  int getPixel(
+    int i,
+    int i1,
+  ) {
+    return _getPixel(
+      reference.pointer,
+      _id_getPixel as jni$_.JMethodIDPtr,
+      i,
+      i1,
+    ).integer;
   }
 
   static final _id_getPixels = _class.instanceMethodId(
@@ -2890,6 +2165,820 @@ class Bitmap extends jni$_.JObject {
       i3,
       i4,
       i5,
+    ).check();
+  }
+
+  static final _id_getRowBytes = _class.instanceMethodId(
+    r'getRowBytes',
+    r'()I',
+  );
+
+  static final _getRowBytes =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public int getRowBytes()`
+  int getRowBytes() {
+    return _getRowBytes(
+      reference.pointer,
+      _id_getRowBytes as jni$_.JMethodIDPtr,
+    ).integer;
+  }
+
+  static final _id_getScaledHeight = _class.instanceMethodId(
+    r'getScaledHeight',
+    r'(Landroid/graphics/Canvas;)I',
+  );
+
+  static final _getScaledHeight =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public int getScaledHeight(android.graphics.Canvas canvas)`
+  int getScaledHeight(
+    jni$_.JObject? canvas,
+  ) {
+    final _$canvas = canvas?.reference ?? jni$_.jNullReference;
+    return _getScaledHeight(
+      reference.pointer,
+      _id_getScaledHeight as jni$_.JMethodIDPtr,
+      _$canvas.pointer,
+    ).integer;
+  }
+
+  static final _id_getScaledHeight$1 = _class.instanceMethodId(
+    r'getScaledHeight',
+    r'(Landroid/util/DisplayMetrics;)I',
+  );
+
+  static final _getScaledHeight$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public int getScaledHeight(android.util.DisplayMetrics displayMetrics)`
+  int getScaledHeight$1(
+    jni$_.JObject? displayMetrics,
+  ) {
+    final _$displayMetrics = displayMetrics?.reference ?? jni$_.jNullReference;
+    return _getScaledHeight$1(
+      reference.pointer,
+      _id_getScaledHeight$1 as jni$_.JMethodIDPtr,
+      _$displayMetrics.pointer,
+    ).integer;
+  }
+
+  static final _id_getScaledHeight$2 = _class.instanceMethodId(
+    r'getScaledHeight',
+    r'(I)I',
+  );
+
+  static final _getScaledHeight$2 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
+
+  /// from: `public int getScaledHeight(int i)`
+  int getScaledHeight$2(
+    int i,
+  ) {
+    return _getScaledHeight$2(
+      reference.pointer,
+      _id_getScaledHeight$2 as jni$_.JMethodIDPtr,
+      i,
+    ).integer;
+  }
+
+  static final _id_getScaledWidth = _class.instanceMethodId(
+    r'getScaledWidth',
+    r'(Landroid/graphics/Canvas;)I',
+  );
+
+  static final _getScaledWidth =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public int getScaledWidth(android.graphics.Canvas canvas)`
+  int getScaledWidth(
+    jni$_.JObject? canvas,
+  ) {
+    final _$canvas = canvas?.reference ?? jni$_.jNullReference;
+    return _getScaledWidth(
+      reference.pointer,
+      _id_getScaledWidth as jni$_.JMethodIDPtr,
+      _$canvas.pointer,
+    ).integer;
+  }
+
+  static final _id_getScaledWidth$1 = _class.instanceMethodId(
+    r'getScaledWidth',
+    r'(Landroid/util/DisplayMetrics;)I',
+  );
+
+  static final _getScaledWidth$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public int getScaledWidth(android.util.DisplayMetrics displayMetrics)`
+  int getScaledWidth$1(
+    jni$_.JObject? displayMetrics,
+  ) {
+    final _$displayMetrics = displayMetrics?.reference ?? jni$_.jNullReference;
+    return _getScaledWidth$1(
+      reference.pointer,
+      _id_getScaledWidth$1 as jni$_.JMethodIDPtr,
+      _$displayMetrics.pointer,
+    ).integer;
+  }
+
+  static final _id_getScaledWidth$2 = _class.instanceMethodId(
+    r'getScaledWidth',
+    r'(I)I',
+  );
+
+  static final _getScaledWidth$2 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
+
+  /// from: `public int getScaledWidth(int i)`
+  int getScaledWidth$2(
+    int i,
+  ) {
+    return _getScaledWidth$2(
+      reference.pointer,
+      _id_getScaledWidth$2 as jni$_.JMethodIDPtr,
+      i,
+    ).integer;
+  }
+
+  static final _id_getWidth = _class.instanceMethodId(
+    r'getWidth',
+    r'()I',
+  );
+
+  static final _getWidth =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public int getWidth()`
+  int getWidth() {
+    return _getWidth(
+      reference.pointer,
+      _id_getWidth as jni$_.JMethodIDPtr,
+    ).integer;
+  }
+
+  static final _id_hasAlpha = _class.instanceMethodId(
+    r'hasAlpha',
+    r'()Z',
+  );
+
+  static final _hasAlpha =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public boolean hasAlpha()`
+  bool hasAlpha() {
+    return _hasAlpha(
+      reference.pointer,
+      _id_hasAlpha as jni$_.JMethodIDPtr,
+    ).boolean;
+  }
+
+  static final _id_hasGainmap = _class.instanceMethodId(
+    r'hasGainmap',
+    r'()Z',
+  );
+
+  static final _hasGainmap =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public boolean hasGainmap()`
+  bool hasGainmap() {
+    return _hasGainmap(
+      reference.pointer,
+      _id_hasGainmap as jni$_.JMethodIDPtr,
+    ).boolean;
+  }
+
+  static final _id_hasMipMap = _class.instanceMethodId(
+    r'hasMipMap',
+    r'()Z',
+  );
+
+  static final _hasMipMap =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public boolean hasMipMap()`
+  bool hasMipMap() {
+    return _hasMipMap(
+      reference.pointer,
+      _id_hasMipMap as jni$_.JMethodIDPtr,
+    ).boolean;
+  }
+
+  static final _id_isMutable = _class.instanceMethodId(
+    r'isMutable',
+    r'()Z',
+  );
+
+  static final _isMutable =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public boolean isMutable()`
+  bool isMutable() {
+    return _isMutable(
+      reference.pointer,
+      _id_isMutable as jni$_.JMethodIDPtr,
+    ).boolean;
+  }
+
+  static final _id_isPremultiplied = _class.instanceMethodId(
+    r'isPremultiplied',
+    r'()Z',
+  );
+
+  static final _isPremultiplied =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public boolean isPremultiplied()`
+  bool isPremultiplied() {
+    return _isPremultiplied(
+      reference.pointer,
+      _id_isPremultiplied as jni$_.JMethodIDPtr,
+    ).boolean;
+  }
+
+  static final _id_isRecycled = _class.instanceMethodId(
+    r'isRecycled',
+    r'()Z',
+  );
+
+  static final _isRecycled =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public boolean isRecycled()`
+  bool isRecycled() {
+    return _isRecycled(
+      reference.pointer,
+      _id_isRecycled as jni$_.JMethodIDPtr,
+    ).boolean;
+  }
+
+  static final _id_prepareToDraw = _class.instanceMethodId(
+    r'prepareToDraw',
+    r'()V',
+  );
+
+  static final _prepareToDraw =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public void prepareToDraw()`
+  void prepareToDraw() {
+    _prepareToDraw(
+      reference.pointer,
+      _id_prepareToDraw as jni$_.JMethodIDPtr,
+    ).check();
+  }
+
+  static final _id_reconfigure = _class.instanceMethodId(
+    r'reconfigure',
+    r'(IILandroid/graphics/Bitmap$Config;)V',
+  );
+
+  static final _reconfigure =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Int32, jni$_.Int32, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+              int,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public void reconfigure(int i, int i1, android.graphics.Bitmap$Config config)`
+  void reconfigure(
+    int i,
+    int i1,
+    Bitmap$Config? config,
+  ) {
+    final _$config = config?.reference ?? jni$_.jNullReference;
+    _reconfigure(
+      reference.pointer,
+      _id_reconfigure as jni$_.JMethodIDPtr,
+      i,
+      i1,
+      _$config.pointer,
+    ).check();
+  }
+
+  static final _id_recycle = _class.instanceMethodId(
+    r'recycle',
+    r'()V',
+  );
+
+  static final _recycle =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public void recycle()`
+  void recycle() {
+    _recycle(reference.pointer, _id_recycle as jni$_.JMethodIDPtr).check();
+  }
+
+  static final _id_sameAs = _class.instanceMethodId(
+    r'sameAs',
+    r'(Landroid/graphics/Bitmap;)Z',
+  );
+
+  static final _sameAs =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public boolean sameAs(android.graphics.Bitmap bitmap)`
+  bool sameAs(
+    Bitmap? bitmap,
+  ) {
+    final _$bitmap = bitmap?.reference ?? jni$_.jNullReference;
+    return _sameAs(
+      reference.pointer,
+      _id_sameAs as jni$_.JMethodIDPtr,
+      _$bitmap.pointer,
+    ).boolean;
+  }
+
+  static final _id_setColorSpace = _class.instanceMethodId(
+    r'setColorSpace',
+    r'(Landroid/graphics/ColorSpace;)V',
+  );
+
+  static final _setColorSpace =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public void setColorSpace(android.graphics.ColorSpace colorSpace)`
+  void setColorSpace(
+    jni$_.JObject? colorSpace,
+  ) {
+    final _$colorSpace = colorSpace?.reference ?? jni$_.jNullReference;
+    _setColorSpace(
+      reference.pointer,
+      _id_setColorSpace as jni$_.JMethodIDPtr,
+      _$colorSpace.pointer,
+    ).check();
+  }
+
+  static final _id_setConfig = _class.instanceMethodId(
+    r'setConfig',
+    r'(Landroid/graphics/Bitmap$Config;)V',
+  );
+
+  static final _setConfig =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public void setConfig(android.graphics.Bitmap$Config config)`
+  void setConfig(
+    Bitmap$Config? config,
+  ) {
+    final _$config = config?.reference ?? jni$_.jNullReference;
+    _setConfig(
+      reference.pointer,
+      _id_setConfig as jni$_.JMethodIDPtr,
+      _$config.pointer,
+    ).check();
+  }
+
+  static final _id_setDensity = _class.instanceMethodId(
+    r'setDensity',
+    r'(I)V',
+  );
+
+  static final _setDensity =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
+
+  /// from: `public void setDensity(int i)`
+  void setDensity(
+    int i,
+  ) {
+    _setDensity(
+      reference.pointer,
+      _id_setDensity as jni$_.JMethodIDPtr,
+      i,
+    ).check();
+  }
+
+  static final _id_setGainmap = _class.instanceMethodId(
+    r'setGainmap',
+    r'(Landroid/graphics/Gainmap;)V',
+  );
+
+  static final _setGainmap =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public void setGainmap(android.graphics.Gainmap gainmap)`
+  void setGainmap(
+    jni$_.JObject? gainmap,
+  ) {
+    final _$gainmap = gainmap?.reference ?? jni$_.jNullReference;
+    _setGainmap(
+      reference.pointer,
+      _id_setGainmap as jni$_.JMethodIDPtr,
+      _$gainmap.pointer,
+    ).check();
+  }
+
+  static final _id_setHasAlpha = _class.instanceMethodId(
+    r'setHasAlpha',
+    r'(Z)V',
+  );
+
+  static final _setHasAlpha =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
+
+  /// from: `public void setHasAlpha(boolean z)`
+  void setHasAlpha(
+    bool z,
+  ) {
+    _setHasAlpha(
+      reference.pointer,
+      _id_setHasAlpha as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).check();
+  }
+
+  static final _id_setHasMipMap = _class.instanceMethodId(
+    r'setHasMipMap',
+    r'(Z)V',
+  );
+
+  static final _setHasMipMap =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
+
+  /// from: `public void setHasMipMap(boolean z)`
+  void setHasMipMap(
+    bool z,
+  ) {
+    _setHasMipMap(
+      reference.pointer,
+      _id_setHasMipMap as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).check();
+  }
+
+  static final _id_setHeight = _class.instanceMethodId(
+    r'setHeight',
+    r'(I)V',
+  );
+
+  static final _setHeight =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
+
+  /// from: `public void setHeight(int i)`
+  void setHeight(
+    int i,
+  ) {
+    _setHeight(
+      reference.pointer,
+      _id_setHeight as jni$_.JMethodIDPtr,
+      i,
     ).check();
   }
 
@@ -2996,33 +3085,110 @@ class Bitmap extends jni$_.JObject {
     ).check();
   }
 
-  static final _id_describeContents = _class.instanceMethodId(
-    r'describeContents',
-    r'()I',
+  static final _id_setPremultiplied = _class.instanceMethodId(
+    r'setPremultiplied',
+    r'(Z)V',
   );
 
-  static final _describeContents =
+  static final _setPremultiplied =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
+
+  /// from: `public void setPremultiplied(boolean z)`
+  void setPremultiplied(
+    bool z,
+  ) {
+    _setPremultiplied(
+      reference.pointer,
+      _id_setPremultiplied as jni$_.JMethodIDPtr,
+      z ? 1 : 0,
+    ).check();
+  }
+
+  static final _id_setWidth = _class.instanceMethodId(
+    r'setWidth',
+    r'(I)V',
+  );
+
+  static final _setWidth =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
+
+  /// from: `public void setWidth(int i)`
+  void setWidth(
+    int i,
+  ) {
+    _setWidth(reference.pointer, _id_setWidth as jni$_.JMethodIDPtr, i).check();
+  }
+
+  static final _id_wrapHardwareBuffer = _class.staticMethodId(
+    r'wrapHardwareBuffer',
+    r'(Landroid/hardware/HardwareBuffer;Landroid/graphics/ColorSpace;)Landroid/graphics/Bitmap;',
+  );
+
+  static final _wrapHardwareBuffer =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
               )
             >
-          >('globalEnv_CallIntMethod')
+          >('globalEnv_CallStaticObjectMethod')
           .asFunction<
             jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
             )
           >();
 
-  /// from: `public int describeContents()`
-  int describeContents() {
-    return _describeContents(
-      reference.pointer,
-      _id_describeContents as jni$_.JMethodIDPtr,
-    ).integer;
+  /// from: `static public android.graphics.Bitmap wrapHardwareBuffer(android.hardware.HardwareBuffer hardwareBuffer, android.graphics.ColorSpace colorSpace)`
+  /// The returned object must be released after use, by calling the [release] method.
+  static Bitmap? wrapHardwareBuffer(
+    jni$_.JObject? hardwareBuffer,
+    jni$_.JObject? colorSpace,
+  ) {
+    final _$hardwareBuffer = hardwareBuffer?.reference ?? jni$_.jNullReference;
+    final _$colorSpace = colorSpace?.reference ?? jni$_.jNullReference;
+    return _wrapHardwareBuffer(
+      _class.reference.pointer,
+      _id_wrapHardwareBuffer as jni$_.JMethodIDPtr,
+      _$hardwareBuffer.pointer,
+      _$colorSpace.pointer,
+    ).object<Bitmap?>(const $Bitmap$NullableType());
   }
 
   static final _id_writeToParcel = _class.instanceMethodId(
@@ -3061,172 +3227,6 @@ class Bitmap extends jni$_.JObject {
       _$parcel.pointer,
       i,
     ).check();
-  }
-
-  static final _id_extractAlpha = _class.instanceMethodId(
-    r'extractAlpha',
-    r'()Landroid/graphics/Bitmap;',
-  );
-
-  static final _extractAlpha =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public android.graphics.Bitmap extractAlpha()`
-  /// The returned object must be released after use, by calling the [release] method.
-  Bitmap? extractAlpha() {
-    return _extractAlpha(
-      reference.pointer,
-      _id_extractAlpha as jni$_.JMethodIDPtr,
-    ).object<Bitmap?>(const $Bitmap$NullableType());
-  }
-
-  static final _id_extractAlpha$1 = _class.instanceMethodId(
-    r'extractAlpha',
-    r'(Landroid/graphics/Paint;[I)Landroid/graphics/Bitmap;',
-  );
-
-  static final _extractAlpha$1 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<
-                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
-                >,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public android.graphics.Bitmap extractAlpha(android.graphics.Paint paint, int[] is)`
-  /// The returned object must be released after use, by calling the [release] method.
-  Bitmap? extractAlpha$1(
-    jni$_.JObject? paint,
-    jni$_.JIntArray? is$,
-  ) {
-    final _$paint = paint?.reference ?? jni$_.jNullReference;
-    final _$is$ = is$?.reference ?? jni$_.jNullReference;
-    return _extractAlpha$1(
-      reference.pointer,
-      _id_extractAlpha$1 as jni$_.JMethodIDPtr,
-      _$paint.pointer,
-      _$is$.pointer,
-    ).object<Bitmap?>(const $Bitmap$NullableType());
-  }
-
-  static final _id_sameAs = _class.instanceMethodId(
-    r'sameAs',
-    r'(Landroid/graphics/Bitmap;)Z',
-  );
-
-  static final _sameAs =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public boolean sameAs(android.graphics.Bitmap bitmap)`
-  bool sameAs(
-    Bitmap? bitmap,
-  ) {
-    final _$bitmap = bitmap?.reference ?? jni$_.jNullReference;
-    return _sameAs(
-      reference.pointer,
-      _id_sameAs as jni$_.JMethodIDPtr,
-      _$bitmap.pointer,
-    ).boolean;
-  }
-
-  static final _id_prepareToDraw = _class.instanceMethodId(
-    r'prepareToDraw',
-    r'()V',
-  );
-
-  static final _prepareToDraw =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public void prepareToDraw()`
-  void prepareToDraw() {
-    _prepareToDraw(
-      reference.pointer,
-      _id_prepareToDraw as jni$_.JMethodIDPtr,
-    ).check();
-  }
-
-  static final _id_getHardwareBuffer = _class.instanceMethodId(
-    r'getHardwareBuffer',
-    r'()Landroid/hardware/HardwareBuffer;',
-  );
-
-  static final _getHardwareBuffer =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public android.hardware.HardwareBuffer getHardwareBuffer()`
-  /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? getHardwareBuffer() {
-    return _getHardwareBuffer(
-      reference.pointer,
-      _id_getHardwareBuffer as jni$_.JMethodIDPtr,
-    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 }
 
