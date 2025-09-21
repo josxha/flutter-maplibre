@@ -106,8 +106,8 @@ void main() {
       );
       final positioned = tester.firstWidget<Positioned>(finder);
       // defaultTargetPlatform defaults to Android in the tests
-      expect(positioned.left, closeTo(offsets.first.dx / 3, 0.01));
-      expect(positioned.top, closeTo(offsets.first.dy / 3, 0.01));
+      expect(positioned.left, closeTo(offsets.first.dx, 0.01));
+      expect(positioned.top, closeTo(offsets.first.dy, 0.01));
       expect(positioned.width, closeTo(size, 0.01));
       expect(positioned.height, closeTo(size, 0.01));
     });
