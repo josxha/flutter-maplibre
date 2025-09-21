@@ -29,7 +29,7 @@ class _FeaturesQueryPageState extends State<FeaturesQueryPage> {
         onEvent: (event) async {
           if (event is MapEventClick) {
             final screenPoint = _controller.toScreenLocation(event.point);
-            final features = await _controller.featuresAtPoint(
+            final features = _controller.featuresAtPoint(
               screenPoint,
             );
             if (context.mounted) {
@@ -37,7 +37,7 @@ class _FeaturesQueryPageState extends State<FeaturesQueryPage> {
             }
           } else if (event is MapEventLongClick) {
             final screenPoint = _controller.toScreenLocation(event.point);
-            final features = await _controller.featuresInRect(
+            final features = _controller.featuresInRect(
               Rect.fromCircle(
                 center: screenPoint,
                 radius: 20,

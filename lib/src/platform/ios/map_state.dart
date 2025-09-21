@@ -213,9 +213,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     return null;
   }
 
-  Future<List<RenderedFeature>> _nativeQueryToRenderedFeatures(
-    NSArray query,
-  ) async {
+  List<RenderedFeature> _nativeQueryToRenderedFeatures(NSArray query) {
     final features = query.map(MLNFeatureWrapper.castFrom);
     return features
         .map(
@@ -230,10 +228,10 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   }
 
   @override
-  Future<List<RenderedFeature>> featuresAtPoint(
+  List<RenderedFeature> featuresAtPoint(
     Offset point, {
     List<String>? layerIds,
-  }) async {
+  }) {
     final style = this.style;
     if (style == null) {
       return [];
@@ -254,10 +252,10 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   }
 
   @override
-  Future<List<RenderedFeature>> featuresInRect(
+  List<RenderedFeature> featuresInRect(
     Rect rect, {
     List<String>? layerIds,
-  }) async {
+  }) {
     final style = this.style;
     if (style == null) {
       return [];

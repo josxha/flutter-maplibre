@@ -418,10 +418,10 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   }
 
   @override
-  Future<List<RenderedFeature>> featuresAtPoint(
+  List<RenderedFeature> featuresAtPoint(
     Offset point, {
     List<String>? layerIds,
-  }) async {
+  }) {
     final features = _map
         .queryRenderedFeatures(
           point.toJsPoint(),
@@ -441,10 +441,10 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   }
 
   @override
-  Future<List<RenderedFeature>> featuresInRect(
+  List<RenderedFeature> featuresInRect(
     Rect rect, {
     List<String>? layerIds,
-  }) async {
+  }) {
     final features = _map
         .queryRenderedFeaturesRect(
           [rect.bottomLeft.toJsPoint(), rect.topRight.toJsPoint()].toJS,

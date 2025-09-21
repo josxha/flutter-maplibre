@@ -486,9 +486,9 @@ void main() {
         await tester.pump(const Duration(seconds: 1));
         final size = tester.getSize(find.byType(MapLibreMap));
         final centerScreen = Offset(size.width / 2, size.height / 2);
-        var features = await ctrl.featuresAtPoint(Offset.zero);
+        var features = ctrl.featuresAtPoint(Offset.zero);
         expect(features, isEmpty);
-        features = await ctrl.featuresAtPoint(centerScreen);
+        features = ctrl.featuresAtPoint(centerScreen);
         expect(features, hasLength(2));
         final pointFeature = features.firstWhere(
           (f) => f.id == 1 || f.id == '1',
@@ -500,14 +500,14 @@ void main() {
         );
         expect(polygonFeature.properties['poly'], 'gon');
 
-        features = await ctrl.featuresAtPoint(
+        features = ctrl.featuresAtPoint(
           centerScreen,
           layerIds: [pointLayerId],
         );
         expect(features, hasLength(1));
         expect(features.first.id, isIn([1, '1']));
         expect(features.first.properties['foo'], 'bar');
-        features = await ctrl.featuresAtPoint(
+        features = ctrl.featuresAtPoint(
           centerScreen,
           layerIds: [polygonLayerId],
         );
@@ -523,14 +523,14 @@ void main() {
           ),
         );
         await tester.pump(const Duration(seconds: 1));
-        features = await ctrl.featuresAtPoint(centerScreen);
+        features = ctrl.featuresAtPoint(centerScreen);
         expect(features, hasLength(3));
-        features = await ctrl.featuresAtPoint(
+        features = ctrl.featuresAtPoint(
           centerScreen,
           layerIds: [pointLayerId, pointLayer2Id],
         );
         expect(features, hasLength(2));
-        features = await ctrl.featuresAtPoint(
+        features = ctrl.featuresAtPoint(
           centerScreen,
           layerIds: [],
         );
@@ -644,12 +644,12 @@ void main() {
         );
         await tester.pump(const Duration(seconds: 1));
         final size = tester.getSize(find.byType(MapLibreMap));
-        var features = await ctrl.featuresInRect(
+        var features = ctrl.featuresInRect(
           const Rect.fromLTWH(0, 0, 10, 10),
         );
         expect(features, isEmpty);
         final pointScreen = Offset(size.width / 2, size.height / 2);
-        features = await ctrl.featuresInRect(
+        features = ctrl.featuresInRect(
           Rect.fromCenter(center: pointScreen, width: 2, height: 2),
         );
         expect(features, hasLength(2));
@@ -665,7 +665,7 @@ void main() {
           Position(0.09, 0.11),
         );
         final lineEndScreen = ctrl.toScreenLocation(Position(0.11, 0.11));
-        features = await ctrl.featuresInRect(
+        features = ctrl.featuresInRect(
           Rect.fromPoints(lineStartScreen, lineEndScreen),
         );
         // FIXME: blocked on https://github.com/josxha/flutter-maplibre/issues/317
@@ -673,7 +673,7 @@ void main() {
         //   features.firstWhere((f) => f.id == 2 || f.id == '2').properties['line'],
         //   'string',
         // );
-        features = await ctrl.featuresInRect(
+        features = ctrl.featuresInRect(
           Rect.fromLTWH(0, 0, size.width, size.height),
         );
         expect(features, hasLength(3));
@@ -693,7 +693,7 @@ void main() {
         );
         expect(polygonFeature2.properties['poly'], 'gon');
 
-        features = await ctrl.featuresInRect(
+        features = ctrl.featuresInRect(
           Rect.fromLTWH(0, 0, size.width, size.height),
           layerIds: [pointLayerId, lineLayerId],
         );
@@ -708,7 +708,7 @@ void main() {
           (f) => f.id == 2 || f.id == '2',
         );
         expect(lineFeature2.properties['line'], 'string');
-        features = await ctrl.featuresInRect(
+        features = ctrl.featuresInRect(
           Rect.fromLTWH(0, 0, size.width, size.height),
           layerIds: [],
         );

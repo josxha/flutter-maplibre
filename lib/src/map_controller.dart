@@ -110,7 +110,7 @@ abstract interface class MapController {
   //
   // [filter] is an array of filter expressions. If provided, only features
   // that match all of the filters will be returned.
-  Future<List<RenderedFeature>> featuresAtPoint(
+  List<RenderedFeature> featuresAtPoint(
     Offset point, {
     List<String>? layerIds,
   });
@@ -130,7 +130,7 @@ abstract interface class MapController {
   //
   // [filter] is an array of filter expressions. If provided, only features
   // that match all of the filters will be returned.
-  Future<List<RenderedFeature>> featuresInRect(
+  List<RenderedFeature> featuresInRect(
     Rect rect, {
     List<String>? layerIds,
   });

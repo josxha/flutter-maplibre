@@ -357,10 +357,10 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
   }
 
   @override
-  Future<List<RenderedFeature>> featuresAtPoint(
+  List<RenderedFeature> featuresAtPoint(
     Offset point, {
     List<String>? layerIds,
-  }) async {
+  }) {
     final style = this.style;
     final map = _jniMapLibreMap;
     if (style == null || map == null) {
@@ -387,10 +387,10 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
   }
 
   @override
-  Future<List<RenderedFeature>> featuresInRect(
+  List<RenderedFeature> featuresInRect(
     Rect rect, {
     List<String>? layerIds,
-  }) async {
+  }) {
     final style = this.style;
     final map = _jniMapLibreMap;
     if (style == null || map == null) {
