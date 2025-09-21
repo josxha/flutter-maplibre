@@ -209,6 +209,91 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     }
   }
 
+  Object? _featureIdFrom(ObjCObjectBase? object) {
+    if (object == null) {
+      return null;
+    } else if (NSString.isInstance(object)) {
+      return NSString.castFrom(object).toDartString();
+    } else if (NSNumber.isInstance(object)) {
+      return NSNumber.castFrom(object).intValue;
+    }
+    return null;
+  }
+
+  Future<List<RenderedFeature>> _nativeQueryToRenderedFeatures(
+    NSArray query,
+  ) async {
+    final features = query.map(MLNFeatureWrapper.castFrom);
+    return features
+        .map(
+          (f) => RenderedFeature(
+            id: _featureIdFrom(f.identifier),
+            properties: f.attributes.toDartMap().map(
+              (k, v) => MapEntry(k.toString(), v),
+            ),
+          ),
+        )
+        .toList(growable: false);
+  }
+
+  @override
+  Future<List<RenderedFeature>> featuresAtPoint(
+    Offset point, {
+    List<String>? layerIds,
+  }) async {
+    final style = this.style;
+    if (style == null) {
+      return [];
+    }
+    if (layerIds?.isEmpty ?? false) {
+      // https://github.com/maplibre/maplibre-native/issues/2828
+      return [];
+    }
+
+    final scaledPoint = point * MediaQuery.of(context).devicePixelRatio;
+
+    final query = _mapView.visibleFeaturesAtPoint$1(
+      scaledPoint.toCGPoint(),
+      inStyleLayersWithIdentifiers: layerIds == null
+          ? null
+          : NSSet.of(layerIds.map((s) => s.toNSString())),
+    );
+
+    return _nativeQueryToRenderedFeatures(query);
+  }
+
+  @override
+  Future<List<RenderedFeature>> featuresInRect(
+    Rect rect, {
+    List<String>? layerIds,
+  }) async {
+    final style = this.style;
+    if (style == null) {
+      return [];
+    }
+    if (layerIds?.isEmpty ?? false) {
+      // https://github.com/maplibre/maplibre-native/issues/2828
+      return [];
+    }
+
+    final devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
+    final scaledRect = Rect.fromLTRB(
+      rect.left * devicePixelRatio,
+      rect.top * devicePixelRatio,
+      rect.right * devicePixelRatio,
+      rect.bottom * devicePixelRatio,
+    );
+
+    final query = _mapView.visibleFeaturesInRect$1(
+      scaledRect.toCGRect(),
+      inStyleLayersWithIdentifiers: layerIds == null
+          ? null
+          : NSSet.of(layerIds.map((s) => s.toNSString())),
+    );
+
+    return _nativeQueryToRenderedFeatures(query);
+  }
+
   @override
   Future<List<QueriedLayer>> queryLayers(Offset screenLocation) async {
     final style = this.style;
