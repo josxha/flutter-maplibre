@@ -1,5 +1,4 @@
-import 'dart:typed_data';
-
+import 'package:flutter/foundation.dart';
 import 'package:maplibre/maplibre.dart';
 
 /// The [StyleController] can be used to manipulate the style of
@@ -46,6 +45,10 @@ abstract interface class StyleController {
 
   /// Get a list of all attributions from the map style.
   List<String> getAttributionsSync();
+
+  @visibleForTesting
+  /// For testing purposes only. Will be replaced with a public API.
+  List<String> getLayerIds();
 
   /// Add an image to the map.
   Future<void> addImage(String id, Uint8List bytes);

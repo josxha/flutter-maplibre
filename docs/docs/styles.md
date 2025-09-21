@@ -30,7 +30,7 @@ The following formats are supported:
 2. Passing the style as a local file. Create a JSON file in the app directory
    (e.g. ApplicationDocumentsDirectory). Then, set the style string to
    the absolute path of this JSON file.
-3. (Android only) Passing the raw JSON of the map style.
+3. Passing the raw JSON of the map style.
 
 ## Tile sources that require an API key
 

@@ -142,11 +142,18 @@ abstract interface class MapController {
     BearingTrackMode trackBearing = BearingTrackMode.gps,
   });
 
-  /// Set a new map style.
+  /// Asynchronously change the style of the map. [style] can be a JSON string
+  /// representing a valid MapLibre style document, or a URL pointing to such a
+  /// document.
   ///
-  /// All temporary layers will get removed as well. You can apply them again in
-  /// the [MapLibreMap.onStyleLoaded] callback.
-  Future<void> setStyle(String style);
+  /// To know when the style has been loaded, you can listen to the
+  /// [MapLibreMap.onStyleLoaded] callback or wait for a [MapEventStyleLoaded]
+  /// event.
+  ///
+  /// All layers added with [StyleController.addLayer] will be removed.
+  /// You can apply them again after the style has been loaded.
+  // TODO(mhernz): what kind of URLs?
+  void setStyle(String style);
 }
 
 /// The mode how the bearing should get tracked on the map.

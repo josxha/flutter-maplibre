@@ -534,10 +534,11 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
   }
 
   @override
-  Future<void> setStyle(String style) async {
+  // ignore: avoid_void_async
+  void setStyle(String style) async {
     final trimmed = style.trim();
     final builder = jni.Style$Builder();
-    if (trimmed.startsWith('{')) {
+    if (trimmed.startsWith('{') || trimmed.startsWith('[')) {
       // Raw JSON
       builder.fromJson(trimmed.toJString());
     } else if (trimmed.startsWith('/')) {
