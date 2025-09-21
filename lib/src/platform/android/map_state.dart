@@ -376,7 +376,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
                     as Map<String, Object?>,
           ),
         )
-        .toList(growable: false);
+        .toList();
   }
 
   @override

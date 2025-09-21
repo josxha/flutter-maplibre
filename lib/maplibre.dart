@@ -20,7 +20,7 @@ export 'src/style/style.dart';
 export 'src/style_controller.dart';
 export 'src/ui/map_compass.dart';
 export 'src/ui/map_control_buttons.dart';
-export 'src/ui/map_scalebar.dart' hide ScaleBarPainter;
+export 'src/ui/map_scalebar.dart';
 export 'src/ui/source_attribution.dart';
 export 'src/utils.dart';
 export 'src/widget_layer.dart';
