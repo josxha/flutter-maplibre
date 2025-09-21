@@ -72,7 +72,9 @@ class _FeaturesQueryPageState extends State<FeaturesQueryPage> {
     for (var i = 0; i < 5; i++) {
       features.add({
         'type': 'Feature',
-        'id': 'point-$i',
+        // MapLibre web only supports positive integers as id,
+        // android and iOS use a String.
+        'id': kIsWeb ? 100 + i : 'point-$i',
         'geometry': {
           'type': 'Point',
           'coordinates': [
@@ -147,15 +149,19 @@ class _FeaturesQueryPageState extends State<FeaturesQueryPage> {
   }
 
   void _showFeatures(List<RenderedFeature> features) {
+    var text = '${features.length} layers clicked: ';
+
+    // The Feature ID field is unpredictable on MapLibre web when the underlying
+    // GeoJSON feature has an `id` field that is not a positive integer.
+    // That's why we use the properties to store and retrieve the ID on web.
+    if (kIsWeb) {
+      text += features.map((e) => e.properties['id']).join(', ');
+    } else {
+      text += features.map((e) => e.id).join(', ');
+    }
+    debugPrint(text);
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          content: Text(
-            '${features.length} layers clicked: '
-            '${features.map((e) => e.id).join(', ')}',
-          ),
-        ),
-      );
+      ..showSnackBar(SnackBar(content: Text(text)));
   }
 }
