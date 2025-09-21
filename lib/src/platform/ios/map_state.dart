@@ -250,10 +250,8 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
       return [];
     }
 
-    final scaledPoint = point * MediaQuery.of(context).devicePixelRatio;
-
     final query = _mapView.visibleFeaturesAtPoint$1(
-      scaledPoint.toCGPoint(),
+      point.toCGPoint(),
       inStyleLayersWithIdentifiers: layerIds == null
           ? null
           : NSSet.of(layerIds.map((s) => s.toNSString())),
@@ -276,16 +274,8 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
       return [];
     }
 
-    final devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
-    final scaledRect = Rect.fromLTRB(
-      rect.left * devicePixelRatio,
-      rect.top * devicePixelRatio,
-      rect.right * devicePixelRatio,
-      rect.bottom * devicePixelRatio,
-    );
-
     final query = _mapView.visibleFeaturesInRect$1(
-      scaledRect.toCGRect(),
+      rect.toCGRect(),
       inStyleLayersWithIdentifiers: layerIds == null
           ? null
           : NSSet.of(layerIds.map((s) => s.toNSString())),
@@ -302,20 +292,22 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
 
     final point = screenLocation.toCGPoint();
     final queriedLayers = <QueriedLayer>[];
-    for (var i = layers.count - 1; i >= 0; i--) {
+    for (var i = layers.length - 1; i >= 0; i--) {
       final layer = layers[i];
       final features = _mapView.visibleFeaturesAtPoint$1(
         point,
-        // TODO use layer.id
-        inStyleLayersWithIdentifiers: NSSet.setWithObject(layer),
+        inStyleLayersWithIdentifiers: NSSet.setWithObject(layer.identifier),
       );
       if (features.count == 0) continue;
-      /* TODO final queriedLayer = QueriedLayer(
-        layerId: jLayerId.toDartString(releaseOriginal: true),
-        sourceId: jSourceId.toDartString(releaseOriginal: true),
-        sourceLayer: sourceLayer.isEmpty ? null : sourceLayer,
-      );
-      queriedLayers.add(queriedLayer);*/
+      if (features.isNotEmpty && MLNVectorStyleLayer.isInstance(layer)) {
+        final vectorLayer = MLNVectorStyleLayer.castFrom(layer);
+        final queriedLayer = QueriedLayer(
+          layerId: layer.identifier.toDartString(),
+          sourceId: vectorLayer.sourceIdentifier?.toDartString(),
+          sourceLayer: vectorLayer.sourceLayerIdentifier?.toDartString(),
+        );
+        queriedLayers.add(queriedLayer);
+      }
     }
     return queriedLayers;
   }
