@@ -126,8 +126,7 @@ pitch: ${camera.pitch}'''),
                   onPressed: () async {
                     final camera = _controller.getCamera();
                     final lat = camera.center.lat.toDouble();
-                    final meters = _controller
-                        .getMetersPerPixelAtLatitude(lat);
+                    final meters = _controller.getMetersPerPixelAtLatitude(lat);
                     debugPrint('latitude: $lat: $meters m/px');
                     if (context.mounted) {
                       ScaffoldMessenger.of(context)
