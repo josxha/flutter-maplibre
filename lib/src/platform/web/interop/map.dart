@@ -17,7 +17,7 @@ extension type JsMap._(Camera _) implements Camera {
   external void once(String type, JSExportedDartFunction listener);
 
   /// https://github.com/maplibre/maplibre-gl-js/blob/76410880f81de2582be073bc2d730b3f4b8f254d/src/ui/map.ts#L1685
-  external void setStyle(String style, [StyleSwapOptions? options]);
+  external void setStyle(JSAny style, [StyleSwapOptions? options]);
 
   /// https://github.com/maplibre/maplibre-gl-js/blob/41e5b32f5bd6264cbc4a8b38210ec6a410152259/src/ui/map.ts#L1935
   external void addSource(String id, SourceSpecification source);
@@ -144,7 +144,7 @@ extension type JsMap._(Camera _) implements Camera {
 extension type MapOptions._(JSObject _) implements JSObject {
   /// Create a new JS [MapOptions] object.
   external factory MapOptions({
-    required String style,
+    required JSAny style,
     required JSObject container,
     required double zoom,
     required LngLat? center,

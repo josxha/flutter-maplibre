@@ -32,8 +32,14 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
       switch result {
       case let .success(mapOptions):
         self._mapOptions = mapOptions
-        // init map view
-        self._mapView = MLNMapView(frame: self._view.bounds)
+
+        // TODO(josxha): match the implementation from `setStyle()`
+        if mapOptions.style.hasPrefix("{") || mapOptions.style.hasPrefix("[") {
+          self._mapView = MLNMapView(frame: self._view.bounds, styleJSON: mapOptions.style)
+        } else {
+          self._mapView = MLNMapView(frame: self._view.bounds, styleURL: URL(string: mapOptions.style))
+        }
+
         MapLibreRegistry.addMap(viewId: viewId, map: self._mapView)
         self._mapView.autoresizingMask = [
           .flexibleWidth, .flexibleHeight,
@@ -74,11 +80,24 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
         self._mapView.allowsZooming = mapOptions.gestures.zoom
 
         self._flutterApi.onMapReady { _ in }
-        // tap gestures
-        self._mapView.addGestureRecognizer(
-          UITapGestureRecognizer(
-            target: self, action: #selector(self.onTap(sender:))
-          ))
+
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(self.onDoubleTap(sender:)))
+        doubleTap.numberOfTapsRequired = 2
+        self._mapView.addGestureRecognizer(doubleTap)
+
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(self.onTap(sender:)))
+        singleTap.require(toFail: doubleTap)
+        if #available(iOS 13.4, *) {
+          singleTap.buttonMaskRequired = .primary
+        }
+        self._mapView.addGestureRecognizer(singleTap)
+
+        if #available(iOS 13.4, *) {
+          let secondaryTap = UITapGestureRecognizer(target: self, action: #selector(self.onSecondaryTap(sender:)))
+          secondaryTap.buttonMaskRequired = .secondary
+          self._mapView.addGestureRecognizer(secondaryTap)
+        }
+
         self._mapView.addGestureRecognizer(
           UILongPressGestureRecognizer(
             target: self,
@@ -103,7 +122,27 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
     var screenPosition = sender.location(in: _mapView)
     var point = _mapView.convert(screenPosition, toCoordinateFrom: _mapView)
     _flutterApi.onClick(
-      point: LngLat(lng: point.longitude, lat: point.latitude)
+      point: LngLat(lng: point.longitude, lat: point.latitude),
+      // NB: iOS points should be equivalent to Flutter LP
+      screenPoint: Offset(x: screenPosition.x, y: screenPosition.y)
+    ) { _ in }
+  }
+
+  @objc func onSecondaryTap(sender: UITapGestureRecognizer) {
+    var screenPosition = sender.location(in: _mapView)
+    var point = _mapView.convert(screenPosition, toCoordinateFrom: _mapView)
+    _flutterApi.onSecondaryClick(
+      point: LngLat(lng: point.longitude, lat: point.latitude),
+      screenPoint: Offset(x: screenPosition.x, y: screenPosition.y)
+    ) { _ in }
+  }
+
+  @objc func onDoubleTap(sender: UITapGestureRecognizer) {
+    var screenPosition = sender.location(in: _mapView)
+    var point = _mapView.convert(screenPosition, toCoordinateFrom: _mapView)
+    _flutterApi.onDoubleClick(
+      point: LngLat(lng: point.longitude, lat: point.latitude),
+      screenPoint: Offset(x: screenPosition.x, y: screenPosition.y)
     ) { _ in }
   }
 
@@ -111,7 +150,8 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
     var screenPosition = sender.location(in: _mapView)
     var point = _mapView.convert(screenPosition, toCoordinateFrom: _mapView)
     _flutterApi.onLongClick(
-      point: LngLat(lng: point.longitude, lat: point.latitude)
+      point: LngLat(lng: point.longitude, lat: point.latitude),
+      screenPoint: Offset(x: screenPosition.x, y: screenPosition.y)
     ) { _ in }
   }
 

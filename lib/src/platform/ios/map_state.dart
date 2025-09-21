@@ -371,7 +371,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
 
   @override
   Position toLngLatSync(Offset screenLocation) => _mapView
-      .convertPoint2(screenLocation.toCGPoint(), toCoordinateFromView: _mapView)
+      .convertPoint_(screenLocation.toCGPoint(), view: _mapView)
       .toPosition();
 
   @override

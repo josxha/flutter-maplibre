@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:js_interop';
 import 'dart:math';
 import 'dart:ui_web';
@@ -54,7 +55,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       _map = interop.JsMap(
         interop.MapOptions(
           container: _htmlElement,
-          style: options.initStyle,
+          style: _styleAsJsonOrUrl(options.initStyle),
           zoom: options.initZoom,
           center: options.initCenter?.toLngLat(),
           bearing: options.initBearing,
@@ -92,21 +93,33 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         interop.MapEventType.click,
         (interop.MapMouseEvent event) {
           final point = event.lngLat.toPosition();
-          widget.onEvent?.call(MapEventClick(point: point));
+          widget.onEvent?.call(
+            MapEventClick(point: point, screenPoint: event.point.toOffset()),
+          );
         }.toJS,
       );
       _map.on(
         interop.MapEventType.dblclick,
         (interop.MapMouseEvent event) {
           final point = event.lngLat.toPosition();
-          widget.onEvent?.call(MapEventDoubleClick(point: point));
+          widget.onEvent?.call(
+            MapEventDoubleClick(
+              point: point,
+              screenPoint: event.point.toOffset(),
+            ),
+          );
         }.toJS,
       );
       _map.on(
         interop.MapEventType.contextmenu,
         (interop.MapMouseEvent event) {
           final point = event.lngLat.toPosition();
-          widget.onEvent?.call(MapEventSecondaryClick(point: point));
+          widget.onEvent?.call(
+            MapEventSecondaryClick(
+              point: point,
+              screenPoint: event.point.toOffset(),
+            ),
+          );
         }.toJS,
       );
       _map.on(
@@ -490,15 +503,23 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         .toList(growable: false);
   }
 
+  JSAny _styleAsJsonOrUrl(String styleString) {
+    JSAny? ret;
+    if (styleString.startsWith('{') || styleString.startsWith('[')) {
+      ret = (jsonDecode(styleString) as Map<String, dynamic>).jsify();
+    }
+    return ret ?? styleString.toJS;
+  }
+
   @override
-  Future<void> setStyle(String style) async {
+  void setStyle(String style) {
     _map.once(
       interop.MapEventType.styleLoad,
       (JSAny _) {
         _onStyleLoaded();
       }.toJS,
     );
-    _map.setStyle(style);
+    _map.setStyle(_styleAsJsonOrUrl(style));
   }
 
   void _onStyleLoaded() {

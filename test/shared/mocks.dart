@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:maplibre/maplibre.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -12,3 +14,5 @@ class MockMapOptions extends Mock implements MapOptions {}
 class MockDuration extends Mock implements Duration {}
 
 class MockPosition extends Mock implements Position {}
+
+class MockOffset extends Mock implements Offset {}

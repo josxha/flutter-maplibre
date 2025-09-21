@@ -14,7 +14,7 @@ dependencies:
   objective_c: ^8.0.0
 
 dev_dependencies:
-  ffigen: ^19.0.0
+  ffigen: 19.1.0
   very_good_analysis: ^9.0.0
 
 flutter:
@@ -59,15 +59,25 @@ ffigen:
       'MLNVectorTileSource': 'MapLibre'
       'MLNOfflinePack': 'MapLibre'
       'MLNOfflineRegion': 'MapLibre'
+    member-filter:
+      'UIResponder':
+        exclude:
+          - 'copy:'
+      'MLNMapView':
+        exclude:
+          - 'initWithFrame:'
     member-rename:
       'MLNSource':
         # https://github.com/dart-lang/native/issues/2419
-        'initWithIdentifier:': 'initWithIdentifier_:'
+        'initWithIdentifier:': 'initWithIdentifier_'
+      'MLNMapView':
+        'convertPoint:toCoordinateFromView:': 'convertPoint_'
+        'convertRect:toCoordinateBoundsFromView:': 'convertRect_'
+      'UIPointerStyle':
+        'styleWithShape:constrainedAxes:': 'styleWithShape_'
   compiler-opts:
     - '-Fios/.build/MapLibre.xcframework/ios-arm64/'
     - '-Iios/.build/MapLibre.xcframework/ios-arm64/MapLibre.framework/Headers'
-#    - '-framework'
-#    - 'MapLibre'
     - '-isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk'
   headers:
     entry-points:
