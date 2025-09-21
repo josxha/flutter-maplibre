@@ -278,7 +278,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   }
 
   @override
-  Future<List<QueriedLayer>> queryLayers(Offset screenLocation) async {
+  List<QueriedLayer> queryLayers(Offset screenLocation) {
     final style = this.style;
     if (style == null) return [];
     final layers = style._getLayers();

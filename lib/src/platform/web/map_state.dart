@@ -464,7 +464,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   }
 
   @override
-  Future<List<QueriedLayer>> queryLayers(Offset screenLocation) async {
+  List<QueriedLayer> queryLayers(Offset screenLocation) {
     final features = _map.queryRenderedFeatures(
       screenLocation.toJsPoint(),
       null,

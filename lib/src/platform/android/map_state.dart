@@ -428,7 +428,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
   }
 
   @override
-  Future<List<QueriedLayer>> queryLayers(Offset screenLocation) async {
+  List<QueriedLayer> queryLayers(Offset screenLocation) {
     if (_jniMapLibreMap == null) {
       throw Exception(
         "queryLayers can't be called before the map is initialized.",

@@ -93,7 +93,7 @@ abstract interface class MapController {
 
   /// Queries the map for layers containing rendered features which intersect
   /// with a given [screenLocation] measured in logical pixels.
-  Future<List<QueriedLayer>> queryLayers(Offset screenLocation);
+  List<QueriedLayer> queryLayers(Offset screenLocation);
 
   /// Returns an array of rendered map features that intersect with a given
   /// screen location measured in logical pixels.

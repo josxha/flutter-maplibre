@@ -326,10 +326,10 @@ void main() {
         final size = tester.getSize(find.byType(MapLibreMap));
         final centerScreen = Offset(size.width / 2, size.height / 2);
 
-        var layers = await ctrl.queryLayers(Offset.zero);
+        var layers = ctrl.queryLayers(Offset.zero);
         expect(layers, isEmpty);
 
-        layers = await ctrl.queryLayers(centerScreen);
+        layers = ctrl.queryLayers(centerScreen);
         expect(layers, hasLength(1));
         expect(layers.first, expectedPoint);
 
@@ -375,7 +375,7 @@ void main() {
 
         await tester.pumpAndSettle(const Duration(seconds: 2));
 
-        layers = await ctrl.queryLayers(centerScreen);
+        layers = ctrl.queryLayers(centerScreen);
         expect(layers, hasLength(2));
         expect(layers, containsAll([expectedPoint, expectedPolygon]));
       });
@@ -403,7 +403,7 @@ void main() {
           sourceId: 'maptiler_planet',
           sourceLayer: 'water',
         );
-        final layers = await ctrl.queryLayers(Offset.zero);
+        final layers = ctrl.queryLayers(Offset.zero);
         expect(layers, hasLength(1));
         expect(layers.first, oceanExpected);
       });
