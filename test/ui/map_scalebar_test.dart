@@ -20,12 +20,9 @@ void main() {
       );
       final controller = MockMapController();
       when(controller.getCamera).thenReturn(camera);
-      when(() => controller.toLngLatSync(any())).thenReturn(Position(0, 0));
+      when(() => controller.toLngLat(any())).thenReturn(Position(0, 0));
       when(
         () => controller.getMetersPerPixelAtLatitude(any()),
-      ).thenAnswer((_) async => 100.0);
-      when(
-        () => controller.getMetersPerPixelAtLatitudeSync(any()),
       ).thenReturn(100);
       const padding = EdgeInsets.all(2);
       const alignment = Alignment.center;
@@ -69,12 +66,9 @@ void main() {
       );
       final controller = MockMapController();
       when(controller.getCamera).thenReturn(camera);
-      when(() => controller.toLngLatSync(any())).thenReturn(Position(0, 0));
+      when(() => controller.toLngLat(any())).thenReturn(Position(0, 0));
       when(
         () => controller.getMetersPerPixelAtLatitude(any()),
-      ).thenAnswer((_) async => 100.0);
-      when(
-        () => controller.getMetersPerPixelAtLatitudeSync(any()),
       ).thenReturn(100);
       const padding = EdgeInsets.all(2);
       const alignment = Alignment.center;
@@ -124,12 +118,9 @@ void main() {
       );
       final controller = MockMapController();
       when(controller.getCamera).thenReturn(camera);
-      when(() => controller.toLngLatSync(any())).thenReturn(Position(0, 0));
+      when(() => controller.toLngLat(any())).thenReturn(Position(0, 0));
       when(
         () => controller.getMetersPerPixelAtLatitude(any()),
-      ).thenAnswer((_) async => 0.001);
-      when(
-        () => controller.getMetersPerPixelAtLatitudeSync(any()),
       ).thenReturn(0.001);
       final app = App(
         camera: camera,
@@ -168,12 +159,9 @@ void main() {
       );
       final controller = MockMapController();
       when(controller.getCamera).thenReturn(camera);
-      when(() => controller.toLngLatSync(any())).thenReturn(Position(0, 0));
+      when(() => controller.toLngLat(any())).thenReturn(Position(0, 0));
       when(
         () => controller.getMetersPerPixelAtLatitude(any()),
-      ).thenAnswer((_) async => 0.001);
-      when(
-        () => controller.getMetersPerPixelAtLatitudeSync(any()),
       ).thenReturn(0.001);
       final app = App(
         camera: camera,
@@ -250,10 +238,9 @@ void main() {
           );
           final controller = MockMapController();
           when(controller.getCamera).thenReturn(camera);
-          when(() => controller.toLngLatSync(any())).thenReturn(Position(0, 0));
-          when(() => controller.toLngLatSync(any())).thenReturn(Position(0, 0));
+          when(() => controller.toLngLat(any())).thenReturn(Position(0, 0));
           when(
-            () => controller.getMetersPerPixelAtLatitudeSync(any()),
+            () => controller.getMetersPerPixelAtLatitude(any()),
           ).thenReturn(metersPerPixel);
           final app = App(
             camera: camera,

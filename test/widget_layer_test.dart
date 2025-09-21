@@ -18,10 +18,7 @@ void main() {
       final controller = MockMapController();
       when(controller.getCamera).thenReturn(camera);
       const offsets = [Offset(123, 423)];
-      when(
-        () => controller.toScreenLocations(any()),
-      ).thenAnswer((_) async => offsets);
-      when(() => controller.toScreenLocationsSync(any())).thenReturn(offsets);
+      when(() => controller.toScreenLocations(any())).thenReturn(offsets);
       final marker = Marker(
         point: Position(0, 0),
         size: const Size.square(50),
@@ -63,10 +60,7 @@ void main() {
       final controller = MockMapController();
       when(controller.getCamera).thenReturn(camera);
       const offsets = [Offset(1, 100), Offset(2, 100), Offset(3, 300)];
-      when(
-        () => controller.toScreenLocations(any()),
-      ).thenAnswer((_) async => offsets);
-      when(() => controller.toScreenLocationsSync(any())).thenReturn(offsets);
+      when(() => controller.toScreenLocations(any())).thenReturn(offsets);
       const size = 50.0;
       final markers = [
         Marker(

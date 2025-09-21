@@ -55,27 +55,27 @@ void main() {
       final ctrl = await ctrlCompleter.future;
       final size = tester.getSize(find.byType(MapLibreMap));
 
-      final region = await ctrl.getVisibleRegion();
+      final region = ctrl.getVisibleRegion();
 
-      var offset = await ctrl.toScreenLocation(
+      var offset = ctrl.toScreenLocation(
         Position(region.longitudeWest, region.latitudeNorth),
       );
       expect(offset.dx, closeTo(0, 1));
       expect(offset.dy, closeTo(0, 1));
 
-      offset = await ctrl.toScreenLocation(
+      offset = ctrl.toScreenLocation(
         Position(region.longitudeEast, region.latitudeNorth),
       );
       expect(offset.dx, closeTo(size.width, 1));
       expect(offset.dy, closeTo(0, 1));
 
-      offset = await ctrl.toScreenLocation(
+      offset = ctrl.toScreenLocation(
         Position(region.longitudeWest, region.latitudeSouth),
       );
       expect(offset.dx, closeTo(0, 1));
       expect(offset.dy, closeTo(size.height, 1));
 
-      offset = await ctrl.toScreenLocation(
+      offset = ctrl.toScreenLocation(
         Position(region.longitudeEast, region.latitudeSouth),
       );
       expect(offset.dx, closeTo(size.width, 1));
@@ -91,14 +91,14 @@ void main() {
       await tester.pumpWidget(app);
       final ctrl = await ctrlCompleter.future;
       final size = tester.getSize(find.byType(MapLibreMap));
-      final region = await ctrl.getVisibleRegion();
+      final region = ctrl.getVisibleRegion();
       final positions = [
         Position(region.longitudeWest, region.latitudeNorth),
         Position(region.longitudeEast, region.latitudeNorth),
         Position(region.longitudeWest, region.latitudeSouth),
         Position(region.longitudeEast, region.latitudeSouth),
       ];
-      final offsets = await ctrl.toScreenLocations(positions);
+      final offsets = ctrl.toScreenLocations(positions);
 
       expect(offsets[0].dx, closeTo(0, 1));
       expect(offsets[0].dy, closeTo(0, 1));
@@ -122,21 +122,21 @@ void main() {
       await tester.pumpWidget(app);
       final ctrl = await ctrlCompleter.future;
       final size = tester.getSize(find.byType(MapLibreMap));
-      final region = await ctrl.getVisibleRegion();
+      final region = ctrl.getVisibleRegion();
 
-      var lngLat = await ctrl.toLngLat(Offset.zero);
+      var lngLat = ctrl.toLngLat(Offset.zero);
       expect(lngLat.lng, closeTo(region.longitudeWest, 0.00001));
       expect(lngLat.lat, closeTo(region.latitudeNorth, 0.00001));
 
-      lngLat = await ctrl.toLngLat(Offset(size.width, 0));
+      lngLat = ctrl.toLngLat(Offset(size.width, 0));
       expect(lngLat.lng, closeTo(region.longitudeEast, 0.00001));
       expect(lngLat.lat, closeTo(region.latitudeNorth, 0.00001));
 
-      lngLat = await ctrl.toLngLat(Offset(0, size.height));
+      lngLat = ctrl.toLngLat(Offset(0, size.height));
       expect(lngLat.lng, closeTo(region.longitudeWest, 0.00001));
       expect(lngLat.lat, closeTo(region.latitudeSouth, 0.00001));
 
-      lngLat = await ctrl.toLngLat(Offset(size.width, size.height));
+      lngLat = ctrl.toLngLat(Offset(size.width, size.height));
       expect(lngLat.lng, closeTo(region.longitudeEast, 0.00001));
       expect(lngLat.lat, closeTo(region.latitudeSouth, 0.00001));
     });
@@ -150,14 +150,14 @@ void main() {
       await tester.pumpWidget(app);
       final ctrl = await ctrlCompleter.future;
       final size = tester.getSize(find.byType(MapLibreMap));
-      final region = await ctrl.getVisibleRegion();
+      final region = ctrl.getVisibleRegion();
       final offsets = [
         Offset.zero,
         Offset(size.width, 0),
         Offset(0, size.height),
         Offset(size.width, size.height),
       ];
-      final lngLats = await ctrl.toLngLats(offsets);
+      final lngLats = ctrl.toLngLats(offsets);
 
       expect(lngLats[0].lng, closeTo(region.longitudeWest, 0.00001));
       expect(lngLats[0].lat, closeTo(region.latitudeNorth, 0.00001));
@@ -184,9 +184,9 @@ void main() {
       await tester.pumpWidget(app);
       final ctrl = await ctrlCompleter.future;
       final size = tester.getSize(find.byType(MapLibreMap));
-      final pos0 = await ctrl.toLngLat(Offset(0, size.height / 4));
-      final pos1 = await ctrl.toLngLat(Offset(100, size.height / 4));
-      final meters = await ctrl.getMetersPerPixelAtLatitude(
+      final pos0 = ctrl.toLngLat(Offset(0, size.height / 4));
+      final pos1 = ctrl.toLngLat(Offset(100, size.height / 4));
+      final meters = ctrl.getMetersPerPixelAtLatitude(
         pos0.lat.toDouble(),
       );
       final actual =
@@ -206,7 +206,7 @@ void main() {
       );
       await tester.pumpWidget(app);
       final ctrl = await ctrlCompleter.future;
-      final region = await ctrl.getVisibleRegion();
+      final region = ctrl.getVisibleRegion();
       // testing devices have different screen sizes
       expect(region.longitudeWest, lessThan(0));
       expect(region.longitudeEast, greaterThan(0));
@@ -661,10 +661,10 @@ void main() {
           (f) => f.id == 3 || f.id == '3',
         );
         expect(polygonFeature.properties['poly'], 'gon');
-        final lineStartScreen = await ctrl.toScreenLocation(
+        final lineStartScreen = ctrl.toScreenLocation(
           Position(0.09, 0.11),
         );
-        final lineEndScreen = await ctrl.toScreenLocation(Position(0.11, 0.11));
+        final lineEndScreen = ctrl.toScreenLocation(Position(0.11, 0.11));
         features = await ctrl.featuresInRect(
           Rect.fromPoints(lineStartScreen, lineEndScreen),
         );

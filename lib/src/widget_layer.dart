@@ -53,42 +53,19 @@ class WidgetLayer extends StatelessWidget {
     );
 
     final points = markers.map((m) => m.point).toList(growable: false);
-
-    if (kIsWeb) {
-      final offsets = controller.toScreenLocationsSync(points);
-      return buildChild(offsets);
-    }
-
-    Widget buildChildAsync(List<Position> points) =>
-        FutureBuilder<List<Offset>>(
-          future: controller.toScreenLocations(points),
-          builder: (context, snapshot) {
-            if (snapshot.hasData && snapshot.data!.length == markers.length) {
-              final offsets = snapshot.data!;
-
-              return buildChild(offsets);
-            }
-
-            if (snapshot.error case final Object error) {
-              debugPrint(error.toString());
-              debugPrintStack(stackTrace: snapshot.stackTrace);
-            }
-
-            return const SizedBox.shrink();
-          },
-        );
+    final offsets = controller.toScreenLocations(points);
 
     if (allowInteraction) {
       if (kIsWeb) {
         // Web requires a PointerInterceptor to prevent the HtmlElementView from
         // receiving gestures.
-        return PointerInterceptor(child: buildChildAsync(points));
+        return PointerInterceptor(child: buildChild(offsets));
       }
-      return buildChildAsync(points);
+      return buildChild(offsets);
     } else {
       // Android and iOS needs a TranslucentPointer so that the widgets don't prevent
       // panning on the map.
-      return TranslucentPointer(child: buildChildAsync(points));
+      return TranslucentPointer(child: buildChild(offsets));
     }
   }
 }

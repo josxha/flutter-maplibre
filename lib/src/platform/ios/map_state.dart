@@ -125,13 +125,6 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   }
 
   @override
-  Future<double> getMetersPerPixelAtLatitude(double latitude) async =>
-      getMetersPerPixelAtLatitudeSync(latitude);
-
-  @override
-  Future<LngLatBounds> getVisibleRegion() async => getVisibleRegionSync();
-
-  @override
   Future<void> moveCamera({
     Position? center,
     double? zoom,
@@ -313,22 +306,6 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   }
 
   @override
-  Future<Position> toLngLat(Offset screenLocation) async =>
-      toLngLatSync(screenLocation);
-
-  @override
-  Future<List<Position>> toLngLats(List<Offset> screenLocations) async =>
-      toLngLatsSync(screenLocations);
-
-  @override
-  Future<Offset> toScreenLocation(Position lngLat) async =>
-      toScreenLocationSync(lngLat);
-
-  @override
-  Future<List<Offset>> toScreenLocations(List<Position> lngLats) async =>
-      toScreenLocationsSync(lngLats);
-
-  @override
   Future<void> trackLocation({
     bool trackLocation = true,
     BearingTrackMode trackBearing = BearingTrackMode.gps,
@@ -347,11 +324,11 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   }
 
   @override
-  double getMetersPerPixelAtLatitudeSync(double latitude) =>
+  double getMetersPerPixelAtLatitude(double latitude) =>
       _mapView.metersPerPointAtLatitude(latitude);
 
   @override
-  LngLatBounds getVisibleRegionSync() {
+  LngLatBounds getVisibleRegion() {
     final bounds = _mapView.visibleCoordinateBounds;
     return LngLatBounds(
       longitudeWest: bounds.sw.longitude,
@@ -362,16 +339,16 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   }
 
   @override
-  Position toLngLatSync(Offset screenLocation) => _mapView
+  Position toLngLat(Offset screenLocation) => _mapView
       .convertPoint_(screenLocation.toCGPoint(), view: _mapView)
       .toPosition();
 
   @override
-  List<Position> toLngLatsSync(List<Offset> screenLocations) =>
-      screenLocations.map(toLngLatSync).toList(growable: false);
+  List<Position> toLngLats(List<Offset> screenLocations) =>
+      screenLocations.map(toLngLat).toList(growable: false);
 
   @override
-  Offset toScreenLocationSync(Position lngLat) => _mapView
+  Offset toScreenLocation(Position lngLat) => _mapView
       .convertCoordinate(
         lngLat.toCLLocationCoordinate2D(),
         toPointToView: _mapView,
@@ -379,8 +356,8 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
       .toOffset();
 
   @override
-  List<Offset> toScreenLocationsSync(List<Position> lngLats) =>
-      lngLats.map(toScreenLocationSync).toList(growable: false);
+  List<Offset> toScreenLocations(List<Position> lngLats) =>
+      lngLats.map(toScreenLocation).toList(growable: false);
 
   @override
   Future<void> setStyle(String style) async {

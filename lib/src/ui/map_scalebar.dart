@@ -46,10 +46,10 @@ class MapScalebar extends StatelessWidget {
     final paddedSize =
         screenSize - Offset(totalPadding.right, totalPadding.bottom) as Size;
     final scalebarCenter = alignment.alongSize(paddedSize) + paddingOffset;
-    final scalebarLat = controller.toLngLatSync(scalebarCenter).lat.toDouble();
+    final scalebarLat = controller.toLngLat(scalebarCenter).lat.toDouble();
     final theme = Theme.of(context);
 
-    final metersPerPixel = controller.getMetersPerPixelAtLatitudeSync(
+    final metersPerPixel = controller.getMetersPerPixelAtLatitude(
       scalebarLat,
     );
     final painter = ScaleBarPainter(metersPerPixel, theme, units: units);
