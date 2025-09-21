@@ -17,7 +17,7 @@ class RenderedFeature {
   /// source. May be either a string or an integer.
   ///
   /// If the source is GeoJSON, this property corresponds to the feature's `id`
-  /// field.*
+  /// field.
   ///
   /// **DANGER**:
   /// This field is unpredictable on MapLibre web when the underlying GeoJSON
