@@ -195,6 +195,12 @@ class StyleControllerIos implements StyleController {
   Future<List<String>> getAttributions() async => getAttributionsSync();
 
   @override
+  List<String> getLayerIds() {
+    final layers = _ffiStyle.layers.map(MLNStyleLayer.castFrom);
+    return layers.map((l) => l.identifier.toDartString()).toList();
+  }
+
+  @override
   Future<void> removeImage(String id) async {
     final ffiId = id.toNSString();
     _ffiStyle.removeImageForName(ffiId);

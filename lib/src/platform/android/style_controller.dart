@@ -210,6 +210,16 @@ class StyleControllerAndroid implements StyleController {
   }
 
   @override
+  List<String> getLayerIds() {
+    final layers = _jniStyle.getLayers();
+    return layers
+        .map((e) => e?.getId())
+        .where((i) => i != null)
+        .map((i) => i!.toDartString(releaseOriginal: true))
+        .toList();
+  }
+
+  @override
   void dispose() {
     if (!_jniStyle.isReleased) {
       _jniStyle.release();
