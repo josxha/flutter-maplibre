@@ -450,6 +450,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
           point.toJsPoint(),
           interop.QueryRenderedFeaturesOptions(
             layers: layerIds?.map((l) => l.toJS).toList().toJS,
+            layers: layerIds?.map((l) => l.toJS).toList(growable: false).toJS,
           ),
         )
         .toDart;
@@ -461,6 +462,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
           ),
         )
         .toList();
+        .toList(growable: false);
   }
 
   @override
@@ -473,6 +475,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
           [rect.bottomLeft.toJsPoint(), rect.topRight.toJsPoint()].toJS,
           interop.QueryRenderedFeaturesOptions(
             layers: layerIds?.map((l) => l.toJS).toList().toJS,
+            layers: layerIds?.map((l) => l.toJS).toList(growable: false).toJS,
           ),
         )
         .toDart;
@@ -484,6 +487,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
           ),
         )
         .toList();
+        .toList(growable: false);
   }
 
   @override

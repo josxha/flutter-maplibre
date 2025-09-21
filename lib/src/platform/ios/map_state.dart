@@ -233,7 +233,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
             ),
           ),
         )
-        .toList();
+        .toList(growable: false);
   }
 
   @override
