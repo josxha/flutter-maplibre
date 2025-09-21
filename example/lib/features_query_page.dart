@@ -72,7 +72,9 @@ class _FeaturesQueryPageState extends State<FeaturesQueryPage> {
     for (var i = 0; i < 5; i++) {
       features.add({
         'type': 'Feature',
-        'id': 'point-$i',
+        // MapLibre web only supports positive integers as id,
+        // android and iOS use a String.
+        'id': kIsWeb ? 100 + i : 'point-$i',
         'geometry': {
           'type': 'Point',
           'coordinates': [
