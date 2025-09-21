@@ -48,8 +48,8 @@ void main() {
           closeTo(scaleBarPainter.width, 0.01),
         );
         final scalebarCenter = tester.getCenter(customPaintFinder);
-        final scalebarLat = ctrl.toLngLatSync(scalebarCenter).lat.toDouble();
-        final metersPerPixel = ctrl.getMetersPerPixelAtLatitudeSync(
+        final scalebarLat = ctrl.toLngLat(scalebarCenter).lat.toDouble();
+        final metersPerPixel = ctrl.getMetersPerPixelAtLatitude(
           scalebarLat,
         );
         final expected = scaleBarPainter.meters / metersPerPixel;

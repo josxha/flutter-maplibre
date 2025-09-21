@@ -182,22 +182,6 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
   }
 
   @override
-  Future<Position> toLngLat(Offset screenLocation) async =>
-      toLngLatSync(screenLocation);
-
-  @override
-  Future<Offset> toScreenLocation(Position lngLat) async =>
-      toScreenLocationSync(lngLat);
-
-  @override
-  Future<List<Position>> toLngLats(List<Offset> screenLocations) async =>
-      toLngLatsSync(screenLocations);
-
-  @override
-  Future<List<Offset>> toScreenLocations(List<Position> lngLats) async =>
-      toScreenLocationsSync(lngLats);
-
-  @override
   Future<void> moveCamera({
     Position? center,
     double? zoom,
@@ -352,13 +336,6 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     return mapCamera;
   }
 
-  @override
-  Future<double> getMetersPerPixelAtLatitude(double latitude) async =>
-      getMetersPerPixelAtLatitudeSync(latitude);
-
-  @override
-  Future<LngLatBounds> getVisibleRegion() async => getVisibleRegionSync();
-
   List<RenderedFeature> _nativeQueryToRenderedFeatures(
     JList<jni.Feature?> query,
   ) {
@@ -380,10 +357,10 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
   }
 
   @override
-  Future<List<RenderedFeature>> featuresAtPoint(
+  List<RenderedFeature> featuresAtPoint(
     Offset point, {
     List<String>? layerIds,
-  }) async {
+  }) {
     final style = this.style;
     final map = _jniMapLibreMap;
     if (style == null || map == null) {
@@ -410,10 +387,10 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
   }
 
   @override
-  Future<List<RenderedFeature>> featuresInRect(
+  List<RenderedFeature> featuresInRect(
     Rect rect, {
     List<String>? layerIds,
-  }) async {
+  }) {
     final style = this.style;
     final map = _jniMapLibreMap;
     if (style == null || map == null) {
@@ -451,7 +428,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
   }
 
   @override
-  Future<List<QueriedLayer>> queryLayers(Offset screenLocation) async {
+  List<QueriedLayer> queryLayers(Offset screenLocation) {
     if (_jniMapLibreMap == null) {
       throw Exception(
         "queryLayers can't be called before the map is initialized.",
@@ -611,33 +588,33 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
   }
 
   @override
-  Position toLngLatSync(Offset screenLocation) => _jniProjection
+  Position toLngLat(Offset screenLocation) => _jniProjection
       .fromScreenLocation(
         (screenLocation * MediaQuery.devicePixelRatioOf(context)).toPointF(),
       )
       .toPosition(releaseOriginal: true);
 
   @override
-  List<Position> toLngLatsSync(List<Offset> screenLocations) =>
-      screenLocations.map(toLngLatSync).toList(growable: false);
+  List<Position> toLngLats(List<Offset> screenLocations) =>
+      screenLocations.map(toLngLat).toList(growable: false);
 
   @override
-  Offset toScreenLocationSync(Position lngLat) =>
+  Offset toScreenLocation(Position lngLat) =>
       _jniProjection
           .toScreenLocation(lngLat.toLatLng())
           .toOffset(releaseOriginal: true) /
       MediaQuery.devicePixelRatioOf(context);
 
   @override
-  List<Offset> toScreenLocationsSync(List<Position> lngLats) =>
-      lngLats.map(toScreenLocationSync).toList(growable: false);
+  List<Offset> toScreenLocations(List<Position> lngLats) =>
+      lngLats.map(toScreenLocation).toList(growable: false);
 
   @override
-  double getMetersPerPixelAtLatitudeSync(double latitude) =>
+  double getMetersPerPixelAtLatitude(double latitude) =>
       _jniProjection.getMetersPerPixelAtLatitude(latitude);
 
   @override
-  LngLatBounds getVisibleRegionSync() {
+  LngLatBounds getVisibleRegion() {
     final region = _jniProjection.getVisibleRegion();
     final jniBounds = region.latLngBounds;
     region.release();
@@ -645,9 +622,9 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     return bounds;
   }
 
+  /// Note, that [MapController.setStyle] is synchronous.
   @override
-  // ignore: avoid_void_async
-  void setStyle(String style) async {
+  Future<void> setStyle(String style) async {
     final trimmed = style.trim();
     final builder = jni.Style$Builder();
     if (trimmed.startsWith('{') || trimmed.startsWith('[')) {

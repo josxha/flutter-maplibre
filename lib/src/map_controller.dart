@@ -27,39 +27,19 @@ abstract interface class MapController {
 
   /// Convert a latitude/longitude coordinate to a screen location in logical
   /// pixels.
-  // TODO: can be made sync when flutter platform and ui thread are merged
-  Future<Offset> toScreenLocation(Position lngLat);
+  Offset toScreenLocation(Position lngLat);
 
   /// Get the latitude/longitude coordinate for a screen location in logical
   /// pixels.
-  // TODO: can be made sync when flutter platform and ui thread are merged
-  Future<Position> toLngLat(Offset screenLocation);
+  Position toLngLat(Offset screenLocation);
 
   /// Convert a latitude/longitude coordinate to a screen location in logical
   /// pixels.
-  // TODO: can be made sync when flutter platform and ui thread are merged
-  Future<List<Offset>> toScreenLocations(List<Position> lngLats);
+  List<Offset> toScreenLocations(List<Position> lngLats);
 
   /// Get the latitude/longitude coordinate for a screen location in logical
   /// pixels.
-  // TODO: can be made sync when flutter platform and ui thread are merged
-  Future<List<Position>> toLngLats(List<Offset> screenLocations);
-
-  /// Convert a latitude/longitude coordinate to a screen location in logical
-  /// pixels.
-  Offset toScreenLocationSync(Position lngLat);
-
-  /// Get the latitude/longitude coordinate for a screen location in logical
-  /// pixels.
-  Position toLngLatSync(Offset screenLocation);
-
-  /// Convert a latitude/longitude coordinate to a screen location in logical
-  /// pixels.
-  List<Offset> toScreenLocationsSync(List<Position> lngLats);
-
-  /// Get the latitude/longitude coordinate for a screen location in logical
-  /// pixels.
-  List<Position> toLngLatsSync(List<Offset> screenLocations);
+  List<Position> toLngLats(List<Offset> screenLocations);
 
   /// Instantly move the map camera to a new location.
   Future<void> moveCamera({
@@ -106,27 +86,14 @@ abstract interface class MapController {
   /// The distance between pixels decreases as the latitude approaches the
   /// poles. This relationship parallels the relationship between longitudinal
   /// coordinates at different latitudes.
-  // TODO: can be made sync when flutter platform and ui thread are merged
-  Future<double> getMetersPerPixelAtLatitude(double latitude);
+  double getMetersPerPixelAtLatitude(double latitude);
 
   /// The smallest bounding box that includes the visible region.
-  // TODO: can be made sync when flutter platform and ui thread are merged
-  Future<LngLatBounds> getVisibleRegion();
-
-  /// Returns the distance spanned by one logical pixel at the specified
-  /// latitude and current zoom level.
-  ///
-  /// The distance between pixels decreases as the latitude approaches the
-  /// poles. This relationship parallels the relationship between longitudinal
-  /// coordinates at different latitudes.
-  double getMetersPerPixelAtLatitudeSync(double latitude);
-
-  /// The smallest bounding box that includes the visible region.
-  LngLatBounds getVisibleRegionSync();
+  LngLatBounds getVisibleRegion();
 
   /// Queries the map for layers containing rendered features which intersect
   /// with a given [screenLocation] measured in logical pixels.
-  Future<List<QueriedLayer>> queryLayers(Offset screenLocation);
+  List<QueriedLayer> queryLayers(Offset screenLocation);
 
   /// Returns an array of rendered map features that intersect with a given
   /// screen location measured in logical pixels.
@@ -143,7 +110,7 @@ abstract interface class MapController {
   //
   // [filter] is an array of filter expressions. If provided, only features
   // that match all of the filters will be returned.
-  Future<List<RenderedFeature>> featuresAtPoint(
+  List<RenderedFeature> featuresAtPoint(
     Offset point, {
     List<String>? layerIds,
   });
@@ -163,7 +130,7 @@ abstract interface class MapController {
   //
   // [filter] is an array of filter expressions. If provided, only features
   // that match all of the filters will be returned.
-  Future<List<RenderedFeature>> featuresInRect(
+  List<RenderedFeature> featuresInRect(
     Rect rect, {
     List<String>? layerIds,
   });
