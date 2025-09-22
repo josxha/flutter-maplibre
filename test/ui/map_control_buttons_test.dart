@@ -6,8 +6,6 @@ import 'package:mocktail/mocktail.dart';
 import '../shared/mocks.dart';
 import '../shared/ui_app.dart';
 
-class MockPermissionManager extends Mock implements PermissionManager {}
-
 void main() {
   group('MapControlButtons', () {
     testWidgets('render', (tester) async {
