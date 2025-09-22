@@ -484,7 +484,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     final trimmed = style.trim();
     if (trimmed.startsWith('{')) {
       // Raw JSON
-      final json = jsonDecode(style) as Map<String, dynamic>;
+      final json = jsonDecode(trimmed) as Map<String, dynamic>;
       final jsified = json.jsify();
       if (jsified == null) {
         throw StateError('Failed to convert style JSON to JS object.');
@@ -500,7 +500,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       return AssetManager().getAssetUrl(trimmed).toJS;
     } else {
       // URI
-      return style.toJS;
+      return trimmed.toJS;
     }
   }
 
