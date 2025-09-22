@@ -45,7 +45,7 @@ dev_dependencies:
   jnigen: 0.14.2
   mocktail: ^1.0.4
   pigeon: ^26.0.0
-  very_good_analysis: ^9.0.0
+  very_good_analysis: ^10.0.0
 
 screenshots:
   - description: 'MapLibre Logo'
