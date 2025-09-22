@@ -18,7 +18,6 @@ part 'style_controller.dart';
 /// android using JNI and Pigeon as a fallback.
 final class MapLibreMapStateIos extends MapLibreMapStateNative
     implements pigeon.MapLibreFlutterApi {
-  late final pigeon.MapLibreHostApi _hostApi;
   late final int _viewId;
   MLNMapView? _cachedMapView;
 
@@ -45,7 +44,6 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   /// guaranteed that the map is ready.
   void _onPlatformViewCreated(int viewId) {
     final channelSuffix = viewId.toString();
-    _hostApi = pigeon.MapLibreHostApi(messageChannelSuffix: channelSuffix);
     pigeon.MapLibreFlutterApi.setUp(this, messageChannelSuffix: channelSuffix);
     _viewId = viewId;
   }
@@ -152,7 +150,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   void onStyleLoaded() {
     // We need to refresh the cached style for when the style reloads.
     style?.dispose();
-    final styleCtrl = style = StyleControllerIos._(_mapView.style!, _hostApi);
+    final styleCtrl = style = StyleControllerIos._(_mapView.style!);
 
     widget.onEvent?.call(MapEventStyleLoaded(styleCtrl));
     widget.onStyleLoaded?.call(styleCtrl);
@@ -164,7 +162,6 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   @override
   void dispose() {
     style?.dispose();
-    unawaited(_hostApi.dispose());
     super.dispose();
   }
 

@@ -2,10 +2,9 @@ part of 'map_state.dart';
 
 /// Android specific implementation of the [StyleController].
 class StyleControllerAndroid implements StyleController {
-  const StyleControllerAndroid._(this._jniStyle, this._hostApi);
+  const StyleControllerAndroid._(this._jniStyle);
 
   final jni.Style _jniStyle;
-  final pigeon.MapLibreHostApi _hostApi;
 
   @override
   Future<void> addLayer(
@@ -173,7 +172,7 @@ class StyleControllerAndroid implements StyleController {
   @override
   Future<void> addImage(String id, Uint8List bytes) async {
     final byteArray = JByteArray.from(bytes);
-    final bitmap = jni.BitmapFactory.decodeByteArray$1(
+    final bitmap = jni.BitmapFactory.decodeByteArray(
       byteArray,
       0,
       byteArray.length,
@@ -194,7 +193,7 @@ class StyleControllerAndroid implements StyleController {
 
     for (final entry in images.entries) {
       final byteArray = JByteArray.from(entry.value);
-      final bitmap = jni.BitmapFactory.decodeByteArray$1(
+      final bitmap = jni.BitmapFactory.decodeByteArray(
         byteArray,
         0,
         byteArray.length,
