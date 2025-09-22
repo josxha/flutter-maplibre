@@ -130,7 +130,7 @@ void main() {
       final oString = o.toString();
       expect(
         oString,
-        contains('Geographic(lon: lng: ${o.center.lon}, lat: ${o.center.lat})'),
+        contains('Geographic(lon: ${o.center.lon}, lat: ${o.center.lat})'),
       );
       expect(oString, contains(o.pitch.toString()));
       expect(oString, contains(o.bearing.toString()));

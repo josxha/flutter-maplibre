@@ -41,7 +41,7 @@ class MapCamera {
   @override
   String toString() =>
       'MapCamera('
-      'center: Geographic(lon: lng: ${center.lon}, lat: ${center.lat}), '
+      'center: Geographic(lon: ${center.lon}, lat: ${center.lat}), '
       'zoom: $zoom, bearing: $bearing, pitch: $pitch)';
 
   @override
