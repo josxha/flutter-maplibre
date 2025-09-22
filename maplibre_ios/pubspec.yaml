@@ -7,8 +7,8 @@ homepage: https://flutter-maplibre.pages.dev
 documentation: https://flutter-maplibre.pages.dev/docs/index/
 
 environment:
-  flutter: ^3.35.0
-  sdk: ^3.9.0
+  sdk: '>=3.9.0 <4.0.0'
+  flutter: '>=3.35.0'
 
 resolution: workspace
 
