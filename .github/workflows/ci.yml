@@ -80,7 +80,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.35.0', '' ]
+        sdk: [ '' ] # option to use a matrix test with the lower supported flutter version
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v5
@@ -187,7 +187,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.35.0', '' ]
+        sdk: [ '' ] # option to use a matrix test with the lower supported flutter version
     steps:
       - uses: actions/checkout@v5
       - uses: subosito/flutter-action@v2
@@ -219,7 +219,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.35.0', '' ]
+        sdk: [ '' ] # option to use a matrix test with the lower supported flutter version
     steps:
       - uses: actions/checkout@v5
       - uses: subosito/flutter-action@v2
@@ -246,7 +246,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.35.0', '' ]
+        sdk: [ '' ] # option to use a matrix test with the lower supported flutter version
     steps:
       - uses: actions/checkout@v5
       - uses: subosito/flutter-action@v2
@@ -266,7 +266,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.35.0', '' ]
+        sdk: [ '' ] # option to use a matrix test with the lower supported flutter version
     steps:
       - uses: actions/checkout@v5
       - uses: subosito/flutter-action@v2
@@ -277,3 +277,104 @@ jobs:
         run: dart pub get
       - name: Build web
         run: flutter build web --wasm
+  codegen-pigeon:
+    name: "[Pigeon] Check codegen"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: subosito/flutter-action@v2
+        with:
+          cache: true
+      - name: "Get Flutter dependencies"
+        working-directory: example
+        run: dart pub get
+      - name: Run pigeon
+        run: ./pigeons/run_code_gen.sh
+      - name: Check changes
+        run: |
+          if [[ -n "$(git status --porcelain)" ]]; then
+            echo "❌ Uncommitted changes detected in files:"
+            git diff --name-only
+            exit 1
+          else
+            echo "✅ No uncommitted changes"
+          fi
+  codegen-android:
+    name: "[Android] Check codegen"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: subosito/flutter-action@v2
+        with:
+          cache: true
+      - uses: actions/setup-java@v5
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: 'gradle'
+      - name: "Get Flutter dependencies"
+        working-directory: example
+        run: dart pub get
+      - name: Build example APK
+        working-directory: example
+        run: flutter build apk
+      - name: Run jnigen
+        run: ./run_jnigen.sh
+      - name: Format code
+        run: dart format lib/src/platform/android/jni
+      - name: Check changes
+        run: |
+          if [[ -n "$(git status --porcelain)" ]]; then
+            echo "❌ Uncommitted changes detected in files:"
+            git diff
+            exit 1
+          else
+            echo "✅ No uncommitted changes"
+          fi
+#  codegen-ios:
+#    name: "[iOS] Check codegen"
+#    runs-on: macos-latest
+#    timeout-minutes: 30
+#    strategy:
+#      fail-fast: false
+#      matrix:
+#        sdk: [ '' ] # option to use a matrix test with the lower supported flutter version
+#    steps:
+#      - uses: actions/checkout@v5
+#      - name: Clone maplibre-native with shallow submodules
+#        run: |
+#          git clone \
+#            --depth 1 \
+#            --filter=blob:none \
+#            --recurse-submodules \
+#            --shallow-submodules \
+#            --jobs 8 \
+#            https://github.com/maplibre/maplibre-native ../maplibre-native
+#      - uses: subosito/flutter-action@v2
+#        with:
+#          flutter-version: ${{ matrix.sdk }}
+#          cache: true
+#      - run: flutter config --enable-swift-package-manager
+#      - name: "Get Flutter dependencies"
+#        working-directory: maplibre_ios/example
+#        run: dart pub get
+#      - name: "Build iOS package"
+#        working-directory: maplibre_ios/example
+#        run: flutter build ios --release --no-codesign
+#      - name: Build MapLibre Native
+#        working-directory: maplibre_ios/ios
+#        run: ./build_maplibre.sh
+#      - name: Prepare ffigen
+#        run: echo TODO modify swift dependencies
+#      - name: Run ffigen
+#        working-directory: maplibre_ios
+#        run: dart run ffigen
+#      - name: Check changes
+#        run: |
+#          if [[ -n "$(git status --porcelain)" ]]; then
+#            echo "❌ Uncommitted changes detected in files:"
+#            git diff --name-only
+#            exit 1
+#          else
+#            echo "✅ No uncommitted changes"
+#          fi
