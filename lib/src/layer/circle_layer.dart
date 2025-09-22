@@ -4,10 +4,10 @@ part of 'layer.dart';
 ///
 /// {@category Layers}
 @immutable
-class CircleLayer extends Layer<Point> {
+class CircleLayer extends Layer<Feature<Point>> {
   /// Create a new [CircleLayer] instance.
   const CircleLayer({
-    required List<Point> points,
+    required List<Feature<Point>> points,
     this.radius = 5,
     this.color = const Color(0xFF000000),
     this.blur = 0,

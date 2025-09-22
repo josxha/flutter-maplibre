@@ -34,7 +34,7 @@ void main() {
     testWidgets('add and remove layers', (tester) async {
       final manager = LayerManager(style, []);
       const layer1 = CircleLayer(
-        points: [Point(Geographic(lon: 0, lat: 0))],
+        points: [Feature(geometry: Point(Geographic(lon: 0, lat: 0)))],
       );
 
       manager.updateLayers([layer1]);

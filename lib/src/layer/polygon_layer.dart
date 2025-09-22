@@ -4,10 +4,10 @@ part of 'layer.dart';
 ///
 /// {@category Layers}
 @immutable
-class PolygonLayer extends Layer<Polygon> {
+class PolygonLayer extends Layer<Feature<Polygon>> {
   /// Create a new [PolygonLayer] instance.
   const PolygonLayer({
-    required List<Polygon> polygons,
+    required List<Feature<Polygon>> polygons,
     this.color = const Color(0xFF000000),
     this.outlineColor = const Color(0xFF000000),
   }) : super._(list: polygons);
