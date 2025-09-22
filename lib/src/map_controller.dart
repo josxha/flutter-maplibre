@@ -27,23 +27,23 @@ abstract interface class MapController {
 
   /// Convert a latitude/longitude coordinate to a screen location in logical
   /// pixels.
-  Offset toScreenLocation(Position lngLat);
+  Offset toScreenLocation(Geographic lngLat);
 
   /// Get the latitude/longitude coordinate for a screen location in logical
   /// pixels.
-  Position toLngLat(Offset screenLocation);
+  Geographic toLngLat(Offset screenLocation);
 
   /// Convert a latitude/longitude coordinate to a screen location in logical
   /// pixels.
-  List<Offset> toScreenLocations(List<Position> lngLats);
+  List<Offset> toScreenLocations(List<Geographic> lngLats);
 
   /// Get the latitude/longitude coordinate for a screen location in logical
   /// pixels.
-  List<Position> toLngLats(List<Offset> screenLocations);
+  List<Geographic> toLngLats(List<Offset> screenLocations);
 
   /// Instantly move the map camera to a new location.
   Future<void> moveCamera({
-    Position? center,
+    Geographic? center,
     double? zoom,
     double? bearing,
     double? pitch,
@@ -51,7 +51,7 @@ abstract interface class MapController {
 
   /// Animate the map camera to a new location.
   Future<void> animateCamera({
-    Position? center,
+    Geographic? center,
     double? zoom,
     double? bearing,
     double? pitch,

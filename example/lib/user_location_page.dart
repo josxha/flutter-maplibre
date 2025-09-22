@@ -88,9 +88,9 @@ class _UserLocationPageState extends State<UserLocationPage> {
           ),
           Expanded(
             child: MapLibreMap(
-              options: MapOptions(
+              options: const MapOptions(
                 initZoom: 1,
-                initCenter: Position(0, 0),
+                initCenter: Geographic(lon: 0, lat: 0),
                 initStyle: MapStyles.protomapsLight,
               ),
               onMapCreated: (controller) => _controller = controller,

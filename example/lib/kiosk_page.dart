@@ -24,10 +24,10 @@ class _KioskPageState extends State<KioskPage> {
 
   late final MapController _controller;
   final _locations = <_Location>[
-    _Location(Position(5.7056, 21.9137), 2, 0, 0),
-    _Location(Position(113.685084, 1.084979), 5, 0, 60),
-    _Location(Position(174.7717, -36.8821), 12, -50, 60),
-    _Location(Position(172.4714, -42.4862), 6, -100, 40),
+    const _Location(Geographic(lon: 5.7056, lat: 21.9137), 2, 0, 0),
+    const _Location(Geographic(lon: 113.685084, lat: 1.084979), 5, 0, 60),
+    const _Location(Geographic(lon: 174.7717, lat: -36.8821), 12, -50, 60),
+    const _Location(Geographic(lon: 172.4714, lat: -42.4862), 6, -100, 40),
   ];
   Timer? _timer;
   int index = 0;
@@ -36,7 +36,10 @@ class _KioskPageState extends State<KioskPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: MapLibreMap(
-        options: MapOptions(initStyle: _styleUrl, initCenter: Position(0, 0)),
+        options: const MapOptions(
+          initStyle: _styleUrl,
+          initCenter: Geographic(lon: 0, lat: 0),
+        ),
         onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: (_) {
           _timer = Timer.periodic(const Duration(seconds: 5), _onTimer);
@@ -67,7 +70,7 @@ class _KioskPageState extends State<KioskPage> {
 class _Location {
   const _Location(this.center, this.zoom, this.bearing, this.pitch);
 
-  final Position center;
+  final Geographic center;
   final double zoom;
   final double bearing;
   final double pitch;

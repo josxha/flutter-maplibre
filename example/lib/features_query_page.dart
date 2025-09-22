@@ -23,7 +23,10 @@ class _FeaturesQueryPageState extends State<FeaturesQueryPage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Query Features')),
       body: MapLibreMap(
-        options: MapOptions(initZoom: 7, initCenter: Position(0.1, 0.1)),
+        options: const MapOptions(
+          initZoom: 7,
+          initCenter: Geographic(lon: 0.1, lat: 0.1),
+        ),
         onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: _onStyleLoaded,
         onEvent: (event) async {

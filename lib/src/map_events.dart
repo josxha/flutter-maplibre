@@ -76,8 +76,8 @@ sealed class MapEventUserInput extends MapEvent {
   /// Create a new [MapEventUserInput] object.
   const MapEventUserInput({required this.point, required this.screenPoint});
 
-  /// The [Position] of where the user clicked at.
-  final Position point;
+  /// The [Geographic] of where the user clicked at.
+  final Geographic point;
 
   /// The screen coordinates in logical pixels where the user interacted with the map.
   final Offset screenPoint;

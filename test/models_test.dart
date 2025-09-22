@@ -67,10 +67,10 @@ void main() {
     test('LngLatBounds.fromPoints', () {
       // Test multiple points
       final o = [
-        Position(10, 20), // lng: 10, lat: 20
-        Position(-5, 30), // lng: -5, lat: 30
-        Position(15, 10), // lng: 15, lat: 10
-        Position(0, 0), // lng: 0,  lat: 0
+        const Geographic(lon: 10, lat: 20),
+        const Geographic(lon: -5, lat: 30),
+        const Geographic(lon: 15, lat: 10),
+        const Geographic(lon: 0, lat: 0),
       ];
       final b = LngLatBounds.fromPoints(o);
       expect(b.longitudeWest, -5.0);
@@ -79,7 +79,7 @@ void main() {
       expect(b.latitudeNorth, 30.0);
 
       // Test a single point
-      final o2 = [Position(5.5, -5.5)]; // lng: 5.5, lat: -5.5
+      final o2 = [const Geographic(lon: 5.5, lat: -5.5)];
       final b2 = LngLatBounds.fromPoints(o2);
       expect(b2.longitudeWest, 5.5);
       expect(b2.longitudeEast, 5.5);
@@ -88,9 +88,9 @@ void main() {
 
       // Test points at same latitude
       final o3 = [
-        Position(0, 10), // lng: 0, lat: 10
-        Position(5, 10), // lng: 5, lat: 10
-        Position(-5, 10), // lng: -5, lat: 10
+        const Geographic(lon: 0, lat: 10),
+        const Geographic(lon: 5, lat: 10),
+        const Geographic(lon: -5, lat: 10),
       ];
       final b3 = LngLatBounds.fromPoints(o3);
       expect(b3.longitudeWest, -5.0);
@@ -100,9 +100,9 @@ void main() {
 
       // Test points at same longitude
       final o4 = [
-        Position(10, 0), // lng: 10, lat: 0
-        Position(10, 5), // lng: 10, lat: 5
-        Position(10, -5), // lng: 10, lat: -5
+        const Geographic(lon: 10, lat: 0),
+        const Geographic(lon: 10, lat: 5),
+        const Geographic(lon: 10, lat: -5),
       ];
       final b4 = LngLatBounds.fromPoints(o4);
       expect(b4.longitudeWest, 10.0);
@@ -111,17 +111,17 @@ void main() {
       expect(b4.latitudeNorth, 5.0);
     });
     test('MapCamera', () {
-      final o = MapCamera(
+      const o = MapCamera(
         pitch: 12,
         zoom: 2,
         bearing: 213,
-        center: Position(12, 2),
+        center: Geographic(lon: 12, lat: 2),
       );
-      final o2 = MapCamera(
+      const o2 = MapCamera(
         pitch: 0,
         zoom: 0,
         bearing: 0,
-        center: Position(0, 0),
+        center: Geographic(lon: 0, lat: 0),
       );
       expect(o, equals(o));
       expect(o2, equals(o2));
@@ -130,7 +130,7 @@ void main() {
       final oString = o.toString();
       expect(
         oString,
-        contains('Position(lng: ${o.center.lng}, lat: ${o.center.lat})'),
+        contains('Geographic(lon: ${o.center.lon}, lat: ${o.center.lat})'),
       );
       expect(oString, contains(o.pitch.toString()));
       expect(oString, contains(o.bearing.toString()));
@@ -220,7 +220,7 @@ void main() {
     test('MapEvents', () {
       final controller = MockMapController();
       final camera = MockMapCamera();
-      final position = MockPosition();
+      final position = MockGeographic();
       final screenPoint = MockOffset();
 
       final mapCreated = MapEventMapCreated(mapController: controller);

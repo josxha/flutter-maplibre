@@ -16,16 +16,19 @@ class _WidgetLayerPageState extends State<WidgetLayerPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Widget Layer')),
-      body: MapLibreMap(
-        options: MapOptions(initZoom: 3, initCenter: Position(0, 0)),
+      body: const MapLibreMap(
+        options: MapOptions(
+          initZoom: 3,
+          initCenter: Geographic(lon: 0, lat: 0),
+        ),
         children: [
           WidgetLayer(
             markers: [
               // A 3D marker
               Marker(
-                size: const Size.square(50),
-                point: Position(-10, 0),
-                child: const Icon(
+                size: Size.square(50),
+                point: Geographic(lon: -10, lat: 0),
+                child: Icon(
                   Icons.location_on,
                   color: Colors.red,
                   size: 50,
@@ -33,9 +36,9 @@ class _WidgetLayerPageState extends State<WidgetLayerPage> {
                 alignment: Alignment.bottomCenter,
               ),
               Marker(
-                size: const Size.square(50),
-                point: Position(-5, 0),
-                child: const Icon(
+                size: Size.square(50),
+                point: Geographic(lon: -5, lat: 0),
+                child: Icon(
                   Icons.location_on,
                   color: Colors.red,
                   size: 50,
@@ -44,9 +47,9 @@ class _WidgetLayerPageState extends State<WidgetLayerPage> {
                 rotate: true,
               ),
               Marker(
-                size: const Size.square(50),
-                point: Position(0, 0),
-                child: const Icon(
+                size: Size.square(50),
+                point: Geographic(lon: 0, lat: 0),
+                child: Icon(
                   Icons.location_on,
                   color: Colors.red,
                   size: 50,
@@ -55,9 +58,9 @@ class _WidgetLayerPageState extends State<WidgetLayerPage> {
                 flat: true,
               ),
               Marker(
-                size: const Size.square(50),
-                point: Position(5, 0),
-                child: const Icon(
+                size: Size.square(50),
+                point: Geographic(lon: 5, lat: 0),
+                child: Icon(
                   Icons.location_on,
                   color: Colors.red,
                   size: 50,
@@ -69,7 +72,7 @@ class _WidgetLayerPageState extends State<WidgetLayerPage> {
             ],
           ),
           // display the UI widgets above the widget markers.
-          const SourceAttribution(),
+          SourceAttribution(),
         ],
       ),
     );

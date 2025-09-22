@@ -20,7 +20,10 @@ class _StyleLayersFillPageState extends State<StyleLayersFillPage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Fill Style Layer')),
       body: MapLibreMap(
-        options: MapOptions(initZoom: 7, initCenter: Position(9.17, 47.68)),
+        options: const MapOptions(
+          initZoom: 7,
+          initCenter: Geographic(lon: 9.17, lat: 47.68),
+        ),
         onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: _onStyleLoaded,
         onEvent: (event) async {

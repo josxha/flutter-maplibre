@@ -20,7 +20,7 @@ late final MapController _controller;
 @override
 Widget build(BuildContext context) {
   return MapLibreMap(
-      options: MapOptions(center: Position(9.17, 47.68)),
+      options: MapOptions(center: Geographic(lon: 9.17, lat: 47.68)),
       onMapCreated: (controller) => _controller = controller,
       onStyleLoaded: (style) async {
         // highlight-start
