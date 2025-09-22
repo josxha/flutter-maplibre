@@ -1,11 +1,11 @@
 ---
 sidebar_position: 100
-title: 'Upgrade from 0.1.x'
+title: 'Upgrade from 0.2.x'
 ---
 
-# Upgrade from version 0.1.x
+# Upgrade from version 0.2.x
 
-Version `0.2.0` introduced some breaking changes. This site will guide you
+Version `0.3.0` introduced some breaking changes. This site will guide you
 through all of them.
 
 ## General Information on Breaking Changes
@@ -22,59 +22,52 @@ rules apply:
 
 ## Step-by-Step guide
 
-### 1. Compatible Flutter Version
+### 1. iOS Support
 
-Version `0.2.0` increased the minimum allowed version of Flutter
-to [3.24](https://medium.com/flutter/whats-new-in-flutter-3-24-6c040f87d1e4).
+Version `0.3.0` finally added iOS as a supported platform. Head over to
+[Setup iOS](getting-started/setup-ios) to read how to use.
 
-Run `flutter upgrade` to upgrade Flutter.
+### 2. Migration to the `geobase` package
 
-### 2. Name Changes
+`maplibre` was previously based on a package
+called [geotypes](https://pub.dev/packages/geotypes) for easy use
+with [turf](https://pub.dev/packages/turf). The package now uses the
+package [geobase](https://pub.dev/packages/geobase) instead.
+All `geobase` classes are exported together with the default `maplibre` import.
+Head over to the geobase documentation to learn on how to
+use: https://geospatial.navibyte.dev/v1/geobase/
+
+The most noticeable change will be to change usages of `Position` to
+`Geographic`.
+
+### 3. Name Changes
 
 Some properties and class names have changed. Replace the old with the new
 names.
 
-| Old Name                | New Name                |
-|-------------------------|-------------------------|
-| MapZoomButtons          | MapControlButtons       |
-| CircleLayer             | CircleStyleLayer        |
-| FillExtrusionLayer      | FillExtrusionStyleLayer |
-| FillLayer               | FillStyleLayer          |
-| HeatmapLayer            | HeatmapStyleLayer       |
-| HillshadeLayer          | HillshadeStyleLayer     |
-| LineLayer               | LineStyleLayer          |
-| RasterLayer             | RasterStyleLayer        |
-| SymbolLayer             | SymbolStyleLayer        |
-| CircleAnnotationLayer   | CircleLayer             |
-| MarkerAnnotationLayer   | MarkerLayer             |
-| PolygonAnnotationLayer  | PolygonLayer            |
-| PolylineAnnotationLayer | PolylineLayer           |
+| Old Name                    | New Name                          |
+|-----------------------------|-----------------------------------|
+| MapCompass.rotationDuration | MapCompass.nativeRotationDuration |
 
-### 3. Programmatic Style Control
+### 4. Changed return types and removed methods
 
-Style related functionality is now loaded in the new `StyleController`.
-For an easy migration, you can access it using the
-nullable `mapController.style` getter.
+With the ongoing effort towards a complete interop implementation, more methods
+are now called synchronously.
 
-The `onStyleLoaded` callback now returns the `StyleController` of the loaded
-style: `onStyleLoaded: (style) { ... }`
+- `MapController.toScreenLocation()`
+- `MapController.toLngLat()`
+- `MapController.toScreenLocations()`
+- `MapController.toLngLats()`
+- `MapController.getMetersPerPixelAtLatitude()`
+- `MapController.getVisibleRegion()`
+- `MapController.queryLayers()`
 
-### 4. Update your web integration
+Previously added synchronous overloads are no longer required and therefore
+removed.
 
-maplibre 0.2.0
-uses [MapLibre GL JS version 5.0.0](https://github.com/maplibre/maplibre-gl-js/releases/tag/v5.0.0)
-onwards. Open your `web/index.html` file and update the used library version.
-
-```html title="web/index.html"
-<!DOCTYPE html>
-<html>
-<head>
-    <!-- other html -->
-    <!-- highlight-start -->
-    <script src='https://unpkg.com/maplibre-gl@^5.0/dist/maplibre-gl.js'></script>
-    <link href='https://unpkg.com/maplibre-gl@^5.0/dist/maplibre-gl.css'
-          rel='stylesheet'/>
-    <!-- highlight-end -->
-</head>
-</html>
-```
+- `MapController.toScreenLocationSync()`
+- `MapController.toLngLatSync()`
+- `MapController.toScreenLocationsSync()`
+- `MapController.toLngLatsSync()`
+- `MapController.getMetersPerPixelAtLatitudeSync()`
+- `MapController.getVisibleRegionSync()`
