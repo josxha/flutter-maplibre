@@ -31,5 +31,5 @@ final class VideoSource extends Source {
   final List<String> urls;
 
   /// Corners of video specified in longitude, latitude pairs.
-  final List<Position> coordinates;
+  final List<Geographic> coordinates;
 }

@@ -29,7 +29,7 @@ Widget build(BuildContext context) {
     body: MapLibreMap(
       options: MapOptions(
         initZoom: 3,
-        initCenter: Position(0, 0),
+        initCenter: Geographic(lon: 0, lat: 0),
       ),
       children: [
         // highlight-start
@@ -39,7 +39,7 @@ Widget build(BuildContext context) {
               // must be the same dimension as the inner widget
               size: const Size.square(50),
               // the longitude / latitude position on the map
-              point: Position(-10, 0),
+              point: Geographic(lon: -10, lat: 0),
               // child can be any flutter widget tree
               child: const Icon(
                 Icons.location_on,

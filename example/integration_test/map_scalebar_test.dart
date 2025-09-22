@@ -15,7 +15,7 @@ void main() {
       final ctrlCompleter = Completer<MapController>();
       final app = App(
         onMapCreated: ctrlCompleter.complete,
-        options: MapOptions(initCenter: Position(0, 0)),
+        options: const MapOptions(initCenter: Geographic(lon: 0, lat: 0)),
         children: const [MapScalebar()],
       );
       await tester.pumpWidget(app);
@@ -48,7 +48,7 @@ void main() {
           closeTo(scaleBarPainter.width, 0.01),
         );
         final scalebarCenter = tester.getCenter(customPaintFinder);
-        final scalebarLat = ctrl.toLngLat(scalebarCenter).lat.toDouble();
+        final scalebarLat = ctrl.toLngLat(scalebarCenter).lat;
         final metersPerPixel = ctrl.getMetersPerPixelAtLatitude(
           scalebarLat,
         );

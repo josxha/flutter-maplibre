@@ -55,7 +55,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       _map = interop.JsMap(
         interop.MapOptions(
           container: _htmlElement,
-          style: _styleAsJsonOrUrl(options.initStyle),
+          style: _prepareStyleString(options.initStyle),
           zoom: options.initZoom,
           center: options.initCenter?.toLngLat(),
           bearing: options.initBearing,
@@ -92,7 +92,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       _map.on(
         interop.MapEventType.click,
         (interop.MapMouseEvent event) {
-          final point = event.lngLat.toPosition();
+          final point = event.lngLat.toGeographic();
           widget.onEvent?.call(
             MapEventClick(point: point, screenPoint: event.point.toOffset()),
           );
@@ -101,7 +101,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       _map.on(
         interop.MapEventType.dblclick,
         (interop.MapMouseEvent event) {
-          final point = event.lngLat.toPosition();
+          final point = event.lngLat.toGeographic();
           widget.onEvent?.call(
             MapEventDoubleClick(
               point: point,
@@ -113,7 +113,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       _map.on(
         interop.MapEventType.contextmenu,
         (interop.MapMouseEvent event) {
-          final point = event.lngLat.toPosition();
+          final point = event.lngLat.toGeographic();
           widget.onEvent?.call(
             MapEventSecondaryClick(
               point: point,
@@ -147,7 +147,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         interop.MapEventType.move,
         (interop.MapLibreEvent event) {
           final mapCamera = MapCamera(
-            center: _map.getCenter().toPosition(),
+            center: _map.getCenter().toGeographic(),
             zoom: _map.getZoom().toDouble(),
             pitch: _map.getPitch().toDouble(),
             bearing: _map.getBearing().toDouble(),
@@ -217,26 +217,26 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   }
 
   @override
-  Position toLngLat(Offset screenLocation) =>
-      _map.unproject(screenLocation.toJsPoint()).toPosition();
+  Geographic toLngLat(Offset screenLocation) =>
+      _map.unproject(screenLocation.toJsPoint()).toGeographic();
 
   @override
-  List<Position> toLngLats(List<Offset> screenLocations) => screenLocations
-      .map((offset) => _map.unproject(offset.toJsPoint()).toPosition())
+  List<Geographic> toLngLats(List<Offset> screenLocations) => screenLocations
+      .map((offset) => _map.unproject(offset.toJsPoint()).toGeographic())
       .toList(growable: false);
 
   @override
-  Offset toScreenLocation(Position lngLat) =>
+  Offset toScreenLocation(Geographic lngLat) =>
       _map.project(lngLat.toLngLat()).toOffset();
 
   @override
-  List<Offset> toScreenLocations(List<Position> lngLats) => lngLats
+  List<Offset> toScreenLocations(List<Geographic> lngLats) => lngLats
       .map((lngLat) => _map.project(lngLat.toLngLat()).toOffset())
       .toList(growable: false);
 
   @override
   Future<void> moveCamera({
-    Position? center,
+    Geographic? center,
     double? zoom,
     double? bearing,
     double? pitch,
@@ -255,7 +255,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
 
   @override
   Future<void> animateCamera({
-    Position? center,
+    Geographic? center,
     double? zoom,
     double? bearing,
     double? pitch,
@@ -333,7 +333,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
 
   @override
   MapCamera getCamera() => MapCamera(
-    center: _map.getCenter().toPosition(),
+    center: _map.getCenter().toGeographic(),
     zoom: _map.getZoom().toDouble(),
     pitch: _map.getPitch().toDouble(),
     bearing: _map.getBearing().toDouble(),
@@ -480,12 +480,28 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         .toList(growable: false);
   }
 
-  JSAny _styleAsJsonOrUrl(String styleString) {
-    JSAny? ret;
-    if (styleString.startsWith('{') || styleString.startsWith('[')) {
-      ret = (jsonDecode(styleString) as Map<String, dynamic>).jsify();
+  JSAny _prepareStyleString(String style) {
+    final trimmed = style.trim();
+    if (trimmed.startsWith('{')) {
+      // Raw JSON
+      final json = jsonDecode(trimmed) as Map<String, dynamic>;
+      final jsified = json.jsify();
+      if (jsified == null) {
+        throw StateError('Failed to convert style JSON to JS object.');
+      }
+      return jsified;
+    } else if (trimmed.startsWith('/')) {
+      // path
+      return trimmed.toJS;
+    } else if (!trimmed.startsWith('http://') &&
+        !trimmed.startsWith('https://') &&
+        !trimmed.startsWith('mapbox://')) {
+      // flutter asset
+      return AssetManager().getAssetUrl(trimmed).toJS;
+    } else {
+      // URI
+      return trimmed.toJS;
     }
-    return ret ?? styleString.toJS;
   }
 
   @override
@@ -496,7 +512,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         _onStyleLoaded();
       }.toJS,
     );
-    _map.setStyle(_styleAsJsonOrUrl(style));
+    _map.setStyle(_prepareStyleString(style));
   }
 
   void _onStyleLoaded() {

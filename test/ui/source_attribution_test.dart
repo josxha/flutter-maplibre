@@ -9,8 +9,8 @@ import '../shared/ui_app.dart';
 void main() {
   group('SourceAttribution', () {
     testWidgets('render', (tester) async {
-      final camera = MapCamera(
-        center: Position(0, 0),
+      const camera = MapCamera(
+        center: Geographic(lon: 0, lat: 0),
         zoom: 5,
         bearing: 12,
         pitch: 0,

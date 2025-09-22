@@ -24,7 +24,9 @@ class _TwoMapsPageState extends State<TwoMapsPage> {
           _ButtonsWidget(controller: _controller1),
           Expanded(
             child: MapLibreMap(
-              options: MapOptions(initCenter: Position(9.17, 47.68)),
+              options: const MapOptions(
+                initCenter: Geographic(lon: 9.17, lat: 47.68),
+              ),
               onMapCreated: (controller) {
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   setState(() => _controller1 = controller);
@@ -35,7 +37,9 @@ class _TwoMapsPageState extends State<TwoMapsPage> {
           _ButtonsWidget(controller: _controller2),
           Expanded(
             child: MapLibreMap(
-              options: MapOptions(initCenter: Position(9.17, 47.68)),
+              options: const MapOptions(
+                initCenter: Geographic(lon: 9.17, lat: 47.68),
+              ),
               onMapCreated: (controller) {
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   setState(() => _controller2 = controller);
@@ -65,7 +69,7 @@ class _ButtonsWidget extends StatelessWidget {
           OutlinedButton(
             onPressed: () {
               controller?.moveCamera(
-                center: Position(172.4714, -42.4862),
+                center: const Geographic(lon: 172.4714, lat: -42.4862),
                 zoom: 4,
                 bearing: 0,
                 pitch: 0,
@@ -76,7 +80,7 @@ class _ButtonsWidget extends StatelessWidget {
           OutlinedButton(
             onPressed: () {
               controller?.animateCamera(
-                center: Position(-18.6874, 64.9445),
+                center: const Geographic(lon: -18.6874, lat: 64.9445),
                 zoom: 5,
                 bearing: -50,
                 pitch: 60,

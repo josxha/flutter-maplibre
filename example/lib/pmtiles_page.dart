@@ -32,9 +32,9 @@ class _PmTilesPageState extends State<PmTilesPage> {
         return Scaffold(
           appBar: AppBar(title: const Text('PMTiles')),
           body: MapLibreMap(
-            options: MapOptions(
-              initCenter: Position(11.254343, 43.767213),
-              maxBounds: const LngLatBounds(
+            options: const MapOptions(
+              initCenter: Geographic(lon: 11.254343, lat: 43.767213),
+              maxBounds: LngLatBounds(
                 longitudeWest: 11.221144,
                 longitudeEast: 11.287543,
                 latitudeSouth: 43.745121,

@@ -33,11 +33,11 @@ class _TranslucentMapPageState extends State<TranslucentMapPage> {
             ),
           ),
           MapLibreMap(
-            options: MapOptions(
+            options: const MapOptions(
               androidMode: AndroidPlatformViewMode.hc,
               androidTranslucentTextureSurface: true,
               androidForegroundLoadColor: Colors.blue,
-              initCenter: Position(9.17, 47.68),
+              initCenter: Geographic(lon: 9.17, lat: 47.68),
               initStyle: MapStyles.translucentAsset,
               initZoom: 2,
             ),

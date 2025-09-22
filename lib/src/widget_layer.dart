@@ -85,8 +85,8 @@ class Marker {
     this.flat = false,
   });
 
-  /// The [Position] of the [Marker].
-  final Position point;
+  /// The [Geographic] of the [Marker].
+  final Geographic point;
 
   /// The [Size] of the [Marker]. This needs to be set to the same dimensions
   /// as the [child] Widget.

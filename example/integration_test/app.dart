@@ -27,7 +27,9 @@ class App extends StatelessWidget {
       title: 'MapLibre Demo',
       home: Scaffold(
         body: MapLibreMap(
-          options: options ?? MapOptions(initCenter: Position(0, 0)),
+          options:
+              options ??
+              const MapOptions(initCenter: Geographic(lon: 0, lat: 0)),
           onMapCreated: onMapCreated,
           onStyleLoaded: onStyleLoaded,
           onEvent: onEvent,

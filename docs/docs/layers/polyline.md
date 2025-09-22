@@ -19,16 +19,16 @@ Polylines are way to show paths or similar on the map.
 @override
 Widget build(BuildContext context) {
   return MapLibreMap(
-    options: MapOptions(zoom: 7, center: Position(9.17, 47.68)),
+    options: MapOptions(zoom: 7, center: Geographic(lon: 9.17, lat: 47.68)),
     layers: [
       // highlight-start
       PolylineLayer(
         polylines: <LineString>[
           LineString(
             coordinates: [
-              Position(9.17, 47.68),
-              Position(9.5, 48),
-              Position(9, 48),
+              Geographic(lon: 9.17, lat: 47.68),
+              Geographic(lon: 9.5, lat: 48),
+              Geographic(lon: 9, lat: 48),
             ],
           ),
         ],

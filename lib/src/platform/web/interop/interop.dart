@@ -32,14 +32,15 @@ extension type LngLat._(JSObject _) implements JSObject {
   /// Create a new [LngLat] coordinates object.
   external factory LngLat({required num lng, required num lat});
 
-  /// Create a new JS [LngLat] object from a [Position].
-  factory LngLat.fromPosition(Position p) => LngLat(lng: p.lng, lat: p.lat);
+  /// Create a new JS [LngLat] object from a [Geographic].
+  factory LngLat.fromGeographic(Geographic p) => LngLat(lng: p.lon, lat: p.lat);
 
   external num lng;
   external num lat;
 
-  /// Convert the JS [LngLat] object to a dart [Position] object.
-  Position toPosition() => Position(lng, lat);
+  /// Convert the JS [LngLat] object to a dart [Geographic] object.
+  Geographic toGeographic() =>
+      Geographic(lon: lng.toDouble(), lat: lat.toDouble());
 }
 
 /// A [LngLatBounds] object represents a geographical bounding box,

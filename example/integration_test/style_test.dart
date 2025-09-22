@@ -16,8 +16,8 @@ void main() {
       final app = App(
         onMapCreated: controller.complete,
         onStyleLoaded: style.complete,
-        options: MapOptions(
-          initCenter: Position(0, 0),
+        options: const MapOptions(
+          initCenter: Geographic(lon: 0, lat: 0),
           initStyle: MapStyles.countries,
         ),
       );
@@ -34,8 +34,8 @@ void main() {
       final app = App(
         onMapCreated: controller.complete,
         onStyleLoaded: style.complete,
-        options: MapOptions(
-          initCenter: Position(0, 0),
+        options: const MapOptions(
+          initCenter: Geographic(lon: 0, lat: 0),
           initStyle: MapStyles.maptilerStreets,
         ),
       );

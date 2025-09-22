@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:maplibre/maplibre.dart';
 
 /// The layer manager handles the high-level layer API used in
@@ -15,7 +13,7 @@ class LayerManager {
     for (final (index, layer) in layers.indexed) {
       final source = GeoJsonSource(
         id: layer.getSourceId(index),
-        data: jsonEncode(GeometryCollection(geometries: layer.list).toJson()),
+        data: GeometryCollection(layer.list).toText(),
       );
       style.addSource(source);
       style.addLayer(layer.createStyleLayer(index));
@@ -42,12 +40,12 @@ class LayerManager {
       if (oldLayer case Layer()) {
         style.updateGeoJsonSource(
           id: layer.getSourceId(index),
-          data: jsonEncode(GeometryCollection(geometries: layer.list).toJson()),
+          data: GeometryCollection(layer.list).toText(),
         );
       } else {
         final source = GeoJsonSource(
           id: layer.getSourceId(index),
-          data: jsonEncode(GeometryCollection(geometries: layer.list).toJson()),
+          data: GeometryCollection(layer.list).toText(),
         );
         style.addSource(source);
       }
