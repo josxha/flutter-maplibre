@@ -7,6 +7,8 @@ environment:
   flutter: ^3.29.0
   sdk: ^3.7.0
 
+resolution: workspace
+
 dependencies:
   flutter:
     sdk: flutter
@@ -15,7 +17,7 @@ dependencies:
     path: ../
 
 dev_dependencies:
-  very_good_analysis: ^7.0.0
+  very_good_analysis: ^9.0.0
 
 flutter:
   uses-material-design: true
