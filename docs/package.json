@@ -28,6 +28,8 @@
     "@docusaurus/module-type-aliases": "^3.8.1",
     "@docusaurus/tsconfig": "^3.8.1",
     "@docusaurus/types": "^3.8.1",
+    "@types/shelljs": "^0",
+    "shelljs": "^0.10.0",
     "typescript": "~5.9.2"
   },
   "browserslist": {
