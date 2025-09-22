@@ -1,6 +1,6 @@
-// We export the geotypes package here so that users don't have to add
+// We export the geobase package here so that users don't have to add
 // the dependency themselves.
-export 'package:geotypes/geotypes.dart';
+export 'package:geobase/geobase.dart';
 
 export 'src/android_platform_view_mode.dart';
 export 'src/layer/layer.dart';

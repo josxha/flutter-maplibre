@@ -28,7 +28,7 @@ dependencies:
     sdk: flutter
   flutter_web_plugins:
     sdk: flutter
-  geotypes: ^0.0.2
+  geobase: ^1.5.0
   html: ^0.15.4
   jni: ^0.14.2
   maplibre_ios:

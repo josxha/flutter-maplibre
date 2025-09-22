@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
@@ -25,9 +24,9 @@ class _AnimationPageState extends State<AnimationPage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Animation')),
       body: MapLibreMap(
-        options: MapOptions(
+        options: const MapOptions(
           initZoom: 14,
-          initCenter: Position(-122.01971, 45.632472),
+          initCenter: Geographic(lon: -122.01971, lat: 45.632472),
         ),
         onStyleLoaded: _onStyleLoaded,
       ),
@@ -38,19 +37,18 @@ class _AnimationPageState extends State<AnimationPage> {
     final response = await get(
       Uri.parse('https://maplibre.org/maplibre-gl-js/docs/assets/hike.geojson'),
     );
-    final geojsonLine = response.body;
-    final geojson = FeatureCollection.fromJson(
-      jsonDecode(geojsonLine) as Map<String, Object?>,
-    );
-    final lineString = geojson.features.first.geometry! as LineString;
-    // TODO: setting the id is currently required as geotypes would set it to null, Feature.id documented at https://datatracker.ietf.org/doc/html/rfc7946#section-3.2
-    geojson.features.first.id = 1;
-    final allCoords = lineString.coordinates;
+    final origCollection = FeatureCollection.parse(response.body);
+    final lineString = origCollection.features.first.geometry! as LineString;
+    final allCoords = lineString.chain.positions.toList(growable: false);
 
-    // a LineString on MapLibre Native must have at least 2 Points
-    lineString.coordinates = allCoords.sublist(0, 2);
+    // A LineString on MapLibre Native must have at least 2 Points. Initialize
+    // the animation with 2 coordinates.
+    final chain = allCoords.sublist(0, 2);
+    final collection = FeatureCollection([
+      Feature(geometry: LineString.from(chain)),
+    ]);
     await style.addSource(
-      GeoJsonSource(id: _sourceId, data: jsonEncode(geojson.toJson())),
+      GeoJsonSource(id: _sourceId, data: collection.toText()),
     );
     await style.addLayer(
       const LineStyleLayer(
@@ -68,14 +66,18 @@ class _AnimationPageState extends State<AnimationPage> {
         timer.cancel();
         return;
       }
-      lineString.coordinates = allCoords.sublist(0, index);
+      // Add more and more points to the LineString.
+      final chain = allCoords.sublist(0, index);
+      final collection = FeatureCollection([
+        Feature(geometry: LineString.from(chain)),
+      ]);
       style.updateGeoJsonSource(
         id: _sourceId,
-        data: jsonEncode(geojson.toJson()),
+        data: collection.toText(),
       );
       debugPrint(
         '[$index] update line: '
-        '${allCoords[index].lng}, ${allCoords[index].lat}',
+        '${allCoords[index].x}, ${allCoords[index].y}',
       );
     });
   }

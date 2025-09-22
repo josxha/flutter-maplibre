@@ -8,24 +8,24 @@ import 'package:objective_c/objective_c.dart';
 
 /// Internal extensions on [CLLocationCoordinate2D].
 extension CLLocationCoordinate2DExt on CLLocationCoordinate2D {
-  /// Convert a [CLLocationCoordinate2D] to [Position].
-  Position toPosition() => Position(longitude, latitude);
+  /// Convert a [CLLocationCoordinate2D] to [Geographic].
+  Geographic toGeographic() => Geographic(lon: longitude, lat: latitude);
 }
 
-/// Internal extensions on [Position].
-extension PositionExt on Position {
-  /// Convert a [Position] to a [CLLocationCoordinate2D].
+/// Internal extensions on [Geographic].
+extension PositionExt on Geographic {
+  /// Convert a [Geographic] to a [CLLocationCoordinate2D].
   CLLocationCoordinate2D toCLLocationCoordinate2D() {
     final coords = Struct.create<CLLocationCoordinate2D>();
-    coords.latitude = lat.toDouble();
-    coords.longitude = lng.toDouble();
+    coords.latitude = lat;
+    coords.longitude = lon;
     return coords;
   }
 }
 
 /// Internal extensions on [Offset].
 extension OffsetExt on Offset {
-  /// Convert a [Position] to a [CGPoint].
+  /// Convert a [Geographic] to a [CGPoint].
   CGPoint toCGPoint() {
     final point = Struct.create<CGPoint>();
     point.x = dx;
