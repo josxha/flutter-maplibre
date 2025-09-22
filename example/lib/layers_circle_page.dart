@@ -13,10 +13,10 @@ class LayersCirclePage extends StatefulWidget {
 
 class _LayersCirclePageState extends State<LayersCirclePage> {
   final _points = <Point>[
-    Point(coordinates: Position(9.17, 47.68)),
-    Point(coordinates: Position(9.17, 48)),
-    Point(coordinates: Position(9, 48)),
-    Point(coordinates: Position(9.5, 48)),
+    const Point(Geographic(lon: 9.17, lat: 47.68)),
+    const Point(Geographic(lon: 9.17, lat: 48)),
+    const Point(Geographic(lon: 9, lat: 48)),
+    const Point(Geographic(lon: 9.5, lat: 48)),
   ];
 
   @override
@@ -24,11 +24,14 @@ class _LayersCirclePageState extends State<LayersCirclePage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Circle Layers')),
       body: MapLibreMap(
-        options: MapOptions(initZoom: 7, initCenter: Position(9.17, 47.68)),
+        options: const MapOptions(
+          initZoom: 7,
+          initCenter: Geographic(lon: 9.17, lat: 47.68),
+        ),
         onEvent: (event) {
           if (event case MapEventClick()) {
             setState(() {
-              _points.add(Point(coordinates: event.point));
+              _points.add(Point(event.point));
             });
           }
         },

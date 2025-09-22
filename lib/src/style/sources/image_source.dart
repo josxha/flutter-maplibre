@@ -34,14 +34,14 @@ class LngLatQuad {
   });
 
   /// The position of the bottom left corner.
-  final Position bottomLeft;
+  final Geographic bottomLeft;
 
   /// The position of the bottom right corner.
-  final Position bottomRight;
+  final Geographic bottomRight;
 
   /// The position of the top left corner.
-  final Position topLeft;
+  final Geographic topLeft;
 
   /// The position of the top right corner.
-  final Position topRight;
+  final Geographic topRight;
 }

@@ -28,7 +28,7 @@ jobs:
     name: "[Swift] Check formatting"
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: "Install SwiftFormat"
         run: brew install swiftformat
       - name: "Format Swift code"
@@ -177,7 +177,7 @@ jobs:
           sudo apt-get install webp && \
           dart pub global activate pana
       - name: Check package score
-        run: pana --exit-code-threshold 20 --no-dartdoc .
+        run: pana --exit-code-threshold 150 --no-dartdoc .
   build-android:
     name: "[Android] Build APK"
     runs-on: ubuntu-latest

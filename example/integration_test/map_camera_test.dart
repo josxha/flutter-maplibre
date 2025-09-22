@@ -11,11 +11,11 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   group('MapCamera', () {
     testWidgets('get from map', (tester) async {
-      final options = MapOptions(
+      const options = MapOptions(
         minZoom: 1,
         maxZoom: 2,
         initZoom: 1,
-        initCenter: Position(1, 2),
+        initCenter: Geographic(lon: 1, lat: 2),
         initStyle: MapStyles.protomapsLight,
       );
       final completer = Completer<MapController>();
@@ -27,7 +27,7 @@ void main() {
       final camera = ctrl.camera;
       expect(camera, isNot(isNull));
       expect(camera!.zoom, closeTo(1, 0.01));
-      expect(camera.center.lng, closeTo(1, 0.01));
+      expect(camera.center.lon, closeTo(1, 0.01));
       expect(camera.center.lat, closeTo(2, 0.01));
     });
   });

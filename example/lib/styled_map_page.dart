@@ -60,7 +60,7 @@ class _StyledMapPageState extends State<StyledMapPage> {
       ),
       body: MapLibreMap(
         options: MapOptions(
-          initCenter: Position(9.17, 47.68),
+          initCenter: const Geographic(lon: 9.17, lat: 47.68),
           initZoom: 2,
           initStyle: _styleUrl,
         ),

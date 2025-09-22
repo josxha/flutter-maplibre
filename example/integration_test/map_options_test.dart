@@ -11,11 +11,11 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   group('MapOptions', () {
     testWidgets('get from map', (tester) async {
-      final options = MapOptions(
+      const options = MapOptions(
         minZoom: 1,
         maxZoom: 2,
         initZoom: 1,
-        initCenter: Position(1, 2),
+        initCenter: Geographic(lon: 1, lat: 2),
         initStyle: MapStyles.protomapsLight,
       );
       final completer = Completer<MapController>();

@@ -13,24 +13,24 @@ void main() {
       expect(o.hashCode, isNot(equals(o2.hashCode)));
     });
     test('ImageSource', () {
-      final o = ImageSource(
+      const o = ImageSource(
         id: '12',
         url: '',
         coordinates: LngLatQuad(
-          bottomLeft: Position(0, 0),
-          bottomRight: Position(1, 0),
-          topLeft: Position(0, 1),
-          topRight: Position(1, 1),
+          bottomLeft: Geographic(lon: 0, lat: 0),
+          bottomRight: Geographic(lon: 1, lat: 0),
+          topLeft: Geographic(lon: 0, lat: 1),
+          topRight: Geographic(lon: 1, lat: 1),
         ),
       );
-      final o2 = ImageSource(
+      const o2 = ImageSource(
         id: '13',
         url: '',
         coordinates: LngLatQuad(
-          bottomLeft: Position(0, 0),
-          bottomRight: Position(1, 0),
-          topLeft: Position(0, 1),
-          topRight: Position(1, 1),
+          bottomLeft: Geographic(lon: 0, lat: 0),
+          bottomRight: Geographic(lon: 1, lat: 0),
+          topLeft: Geographic(lon: 0, lat: 1),
+          topRight: Geographic(lon: 1, lat: 1),
         ),
       );
       expect(o, equals(o));
@@ -67,8 +67,16 @@ void main() {
       expect(o.hashCode, isNot(equals(o2.hashCode)));
     });
     test('VideoSource', () {
-      final o = VideoSource(id: '12', urls: [], coordinates: [Position(2, 3)]);
-      final o2 = VideoSource(id: '13', urls: [], coordinates: [Position(2, 3)]);
+      const o = VideoSource(
+        id: '12',
+        urls: [],
+        coordinates: [Geographic(lon: 2, lat: 3)],
+      );
+      const o2 = VideoSource(
+        id: '13',
+        urls: [],
+        coordinates: [Geographic(lon: 2, lat: 3)],
+      );
       expect(o, equals(o));
       expect(o2, equals(o2));
       expect(o, isNot(equals(o2)));
