@@ -28,7 +28,7 @@ jobs:
     name: "[Swift] Check formatting"
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: "Install SwiftFormat"
         run: brew install swiftformat
       - name: "Format Swift code"
