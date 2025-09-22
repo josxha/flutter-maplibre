@@ -485,7 +485,11 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     if (trimmed.startsWith('{')) {
       // Raw JSON
       final json = jsonDecode(style) as Map<String, dynamic>;
-      return json.jsify() ?? style.toJS;
+      final jsified = json.jsify();
+      if (jsified == null) {
+        throw StateError('Failed to convert style JSON to JS object.');
+      }
+      return jsified;
     } else if (trimmed.startsWith('/')) {
       // path
       return trimmed.toJS;
