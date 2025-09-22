@@ -2,7 +2,7 @@ group = "com.github.josxha.maplibre"
 version = "1.0-SNAPSHOT"
 
 buildscript {
-    ext.kotlin_version = "2.1.0"
+    ext.kotlin_version = "2.1.20"
     repositories {
         google()
         mavenCentral()
@@ -67,9 +67,9 @@ android {
 
     dependencies {
         // jnigen picks up api dependencies
-        api 'org.maplibre.gl:android-sdk:11.13.5'
+        api 'org.maplibre.gl:android-sdk:11.13.+'
         testImplementation "org.jetbrains.kotlin:kotlin-test"
-        testImplementation "org.mockito:mockito-core:5.20.0"
+        testImplementation "org.mockito:mockito-core:5.20.+"
     }
 
     testOptions {
