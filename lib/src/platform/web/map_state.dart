@@ -55,7 +55,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       _map = interop.JsMap(
         interop.MapOptions(
           container: _htmlElement,
-          style: _styleAsJsonOrUrl(options.initStyle),
+          style: _prepareStyleString(options.initStyle),
           zoom: options.initZoom,
           center: options.initCenter?.toLngLat(),
           bearing: options.initBearing,
@@ -480,12 +480,24 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         .toList(growable: false);
   }
 
-  JSAny _styleAsJsonOrUrl(String styleString) {
-    JSAny? ret;
-    if (styleString.startsWith('{') || styleString.startsWith('[')) {
-      ret = (jsonDecode(styleString) as Map<String, dynamic>).jsify();
+  JSAny _prepareStyleString(String style) {
+    final trimmed = style.trim();
+    if (trimmed.startsWith('{')) {
+      // Raw JSON
+      final json = jsonDecode(style) as Map<String, dynamic>;
+      return json.jsify() ?? style.toJS;
+    } else if (trimmed.startsWith('/')) {
+      // path
+      return trimmed.toJS;
+    } else if (!trimmed.startsWith('http://') &&
+        !trimmed.startsWith('https://') &&
+        !trimmed.startsWith('mapbox://')) {
+      // flutter asset
+      return AssetManager().getAssetUrl(trimmed).toJS;
+    } else {
+      // URI
+      return style.toJS;
     }
-    return ret ?? styleString.toJS;
   }
 
   @override
@@ -496,7 +508,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         _onStyleLoaded();
       }.toJS,
     );
-    _map.setStyle(_styleAsJsonOrUrl(style));
+    _map.setStyle(_prepareStyleString(style));
   }
 
   void _onStyleLoaded() {
