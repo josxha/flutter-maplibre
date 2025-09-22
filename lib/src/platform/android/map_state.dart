@@ -11,6 +11,7 @@ import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/layer/layer_manager.dart';
 import 'package:maplibre/src/platform/android/extensions.dart';
 import 'package:maplibre/src/platform/android/jni.dart' as jni;
+import 'package:maplibre/src/platform/android/jni/android/graphics/_package.dart';
 import 'package:maplibre/src/platform/android/jni/com/google/gson/Gson.dart';
 import 'package:maplibre/src/platform/android/jni/org/maplibre/geojson/Feature.dart'
     as jni;
