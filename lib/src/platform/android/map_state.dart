@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
@@ -10,7 +11,9 @@ import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/layer/layer_manager.dart';
 import 'package:maplibre/src/platform/android/extensions.dart';
 import 'package:maplibre/src/platform/android/jni.dart' as jni;
-import 'package:maplibre/src/platform/android/jni/android/graphics/_package.dart';
+import 'package:maplibre/src/platform/android/jni/com/google/gson/Gson.dart';
+import 'package:maplibre/src/platform/android/jni/org/maplibre/geojson/Feature.dart'
+    as jni;
 import 'package:maplibre/src/platform/map_state_native.dart';
 import 'package:maplibre/src/platform/pigeon.g.dart' as pigeon;
 
@@ -177,22 +180,6 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
   }
 
   @override
-  Future<Position> toLngLat(Offset screenLocation) async =>
-      toLngLatSync(screenLocation);
-
-  @override
-  Future<Offset> toScreenLocation(Position lngLat) async =>
-      toScreenLocationSync(lngLat);
-
-  @override
-  Future<List<Position>> toLngLats(List<Offset> screenLocations) async =>
-      toLngLatsSync(screenLocations);
-
-  @override
-  Future<List<Offset>> toScreenLocations(List<Position> lngLats) async =>
-      toScreenLocationsSync(lngLats);
-
-  @override
   Future<void> moveCamera({
     Position? center,
     double? zoom,
@@ -344,15 +331,99 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     return mapCamera;
   }
 
-  @override
-  Future<double> getMetersPerPixelAtLatitude(double latitude) async =>
-      getMetersPerPixelAtLatitudeSync(latitude);
+  List<RenderedFeature> _nativeQueryToRenderedFeatures(
+    JList<jni.Feature?> query,
+  ) {
+    final features = query.where((f) => f != null).map((f) => f!);
+
+    final gson = Gson();
+    return features
+        .map(
+          (feature) => RenderedFeature(
+            id: feature.id()?.toDartString(releaseOriginal: true),
+            properties:
+                jsonDecode(
+                      gson.toJson(feature.properties())?.toString() ?? '{}',
+                    )
+                    as Map<String, Object?>,
+          ),
+        )
+        .toList(growable: false);
+  }
 
   @override
-  Future<LngLatBounds> getVisibleRegion() async => getVisibleRegionSync();
+  List<RenderedFeature> featuresAtPoint(
+    Offset point, {
+    List<String>? layerIds,
+  }) {
+    final style = this.style;
+    final map = _jniMapLibreMap;
+    if (style == null || map == null) {
+      return [];
+    }
+    if (layerIds?.isEmpty ?? false) {
+      // https://github.com/maplibre/maplibre-native/issues/2828
+      return [];
+    }
+
+    final scaledPoint = point * MediaQuery.devicePixelRatioOf(context);
+
+    final query = map.queryRenderedFeatures(
+      jni.PointF.new$3(scaledPoint.dx, scaledPoint.dy),
+      layerIds != null
+          ? JArray.of(
+              JString.nullableType,
+              layerIds.map((s) => s.toJString()),
+            )
+          : null,
+    );
+
+    return _nativeQueryToRenderedFeatures(query);
+  }
 
   @override
-  Future<List<QueriedLayer>> queryLayers(Offset screenLocation) async {
+  List<RenderedFeature> featuresInRect(
+    Rect rect, {
+    List<String>? layerIds,
+  }) {
+    final style = this.style;
+    final map = _jniMapLibreMap;
+    if (style == null || map == null) {
+      return [];
+    }
+    if (layerIds?.isEmpty ?? false) {
+      // https://github.com/maplibre/maplibre-native/issues/2828
+      return [];
+    }
+
+    final devicePixelRatio = MediaQuery.devicePixelRatioOf(context);
+    final scaledRect = Rect.fromLTRB(
+      rect.left * devicePixelRatio,
+      rect.top * devicePixelRatio,
+      rect.right * devicePixelRatio,
+      rect.bottom * devicePixelRatio,
+    );
+
+    final query = map.queryRenderedFeatures$2(
+      jni.RectF.new$3(
+        scaledRect.left,
+        scaledRect.top,
+        scaledRect.right,
+        scaledRect.bottom,
+      ),
+      layerIds != null
+          ? JArray.of(
+              JString.nullableType,
+              layerIds.map((s) => s.toJString()),
+            )
+          : null,
+    );
+
+    return _nativeQueryToRenderedFeatures(query);
+  }
+
+  @override
+  List<QueriedLayer> queryLayers(Offset screenLocation) {
     if (_jniMapLibreMap == null) {
       throw Exception(
         "queryLayers can't be called before the map is initialized.",
@@ -381,8 +452,20 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
         jSourceId = layer.getSourceId();
         jSourceLayer = layer.getSourceLayer();
         layer.release();
+      } else if (jniLayer.isA(jni.FillExtrusionLayer.type)) {
+        final layer = jniLayer.as(jni.FillExtrusionLayer.type);
+        jLayerId = layer.getId();
+        jSourceId = layer.getSourceId();
+        jSourceLayer = layer.getSourceLayer();
+        layer.release();
       } else if (jniLayer.isA(jni.SymbolLayer.type)) {
         final layer = jniLayer.as(jni.SymbolLayer.type);
+        jLayerId = layer.getId();
+        jSourceId = layer.getSourceId();
+        jSourceLayer = layer.getSourceLayer();
+        layer.release();
+      } else if (jniLayer.isA(jni.CircleLayer.type)) {
+        final layer = jniLayer.as(jni.CircleLayer.type);
         jLayerId = layer.getId();
         jSourceId = layer.getSourceId();
         jSourceLayer = layer.getSourceLayer();
@@ -394,8 +477,10 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
       final queryLayerIds = JArray<JString?>(JString.nullableType, 1)
         ..[0] = jLayerId;
       // query one layer at a time
+      final scaledPoint =
+          (screenLocation * MediaQuery.devicePixelRatioOf(context)).toPointF();
       final jniFeatures = _jniMapLibreMap!.queryRenderedFeatures(
-        jni.PointF.new$3(screenLocation.dx, screenLocation.dy),
+        scaledPoint,
         queryLayerIds,
       );
       queryLayerIds.release();
@@ -498,29 +583,33 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
   }
 
   @override
-  Position toLngLatSync(Offset screenLocation) => _jniProjection
-      .fromScreenLocation(screenLocation.toPointF())
+  Position toLngLat(Offset screenLocation) => _jniProjection
+      .fromScreenLocation(
+        (screenLocation * MediaQuery.devicePixelRatioOf(context)).toPointF(),
+      )
       .toPosition(releaseOriginal: true);
 
   @override
-  List<Position> toLngLatsSync(List<Offset> screenLocations) =>
-      screenLocations.map(toLngLatSync).toList(growable: false);
+  List<Position> toLngLats(List<Offset> screenLocations) =>
+      screenLocations.map(toLngLat).toList(growable: false);
 
   @override
-  Offset toScreenLocationSync(Position lngLat) => _jniProjection
-      .toScreenLocation(lngLat.toLatLng())
-      .toOffset(releaseOriginal: true);
+  Offset toScreenLocation(Position lngLat) =>
+      _jniProjection
+          .toScreenLocation(lngLat.toLatLng())
+          .toOffset(releaseOriginal: true) /
+      MediaQuery.devicePixelRatioOf(context);
 
   @override
-  List<Offset> toScreenLocationsSync(List<Position> lngLats) =>
-      lngLats.map(toScreenLocationSync).toList(growable: false);
+  List<Offset> toScreenLocations(List<Position> lngLats) =>
+      lngLats.map(toScreenLocation).toList(growable: false);
 
   @override
-  double getMetersPerPixelAtLatitudeSync(double latitude) =>
+  double getMetersPerPixelAtLatitude(double latitude) =>
       _jniProjection.getMetersPerPixelAtLatitude(latitude);
 
   @override
-  LngLatBounds getVisibleRegionSync() {
+  LngLatBounds getVisibleRegion() {
     final region = _jniProjection.getVisibleRegion();
     final jniBounds = region.latLngBounds;
     region.release();
@@ -528,9 +617,9 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     return bounds;
   }
 
+  /// Note, that [MapController.setStyle] is synchronous.
   @override
-  // ignore: avoid_void_async
-  void setStyle(String style) async {
+  Future<void> setStyle(String style) async {
     final trimmed = style.trim();
     final builder = jni.Style$Builder();
     if (trimmed.startsWith('{') || trimmed.startsWith('[')) {

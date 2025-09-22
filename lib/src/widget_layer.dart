@@ -28,12 +28,6 @@ class WidgetLayer extends StatelessWidget {
     final camera = MapCamera.maybeOf(context);
     if (controller == null || camera == null) return const SizedBox.shrink();
 
-    // Only Android returns screen pixel, other platforms return logical pixels.
-    final pixelRatio =
-        (!kIsWeb && defaultTargetPlatform == TargetPlatform.android)
-        ? MediaQuery.devicePixelRatioOf(context)
-        : 1.0;
-
     Widget buildChild(List<Offset> offsets) => Stack(
       // TODO: filter markers that are completely outside of the visible screen.
       children: markers.indexed
@@ -44,12 +38,8 @@ class WidgetLayer extends StatelessWidget {
             if (m.flat) matrix.rotateX(camera.pitch * degree2Radian);
             if (m.rotate) matrix.rotateZ(-camera.bearing * degree2Radian);
             return Positioned(
-              left:
-                  offset.dx / pixelRatio -
-                  m.size.width / 2 * (m.alignment.x + 1),
-              top:
-                  offset.dy / pixelRatio -
-                  m.size.height / 2 * (m.alignment.y + 1),
+              left: offset.dx - m.size.width / 2 * (m.alignment.x + 1),
+              top: offset.dy - m.size.height / 2 * (m.alignment.y + 1),
               height: m.size.height,
               width: m.size.width,
               child: Transform(
@@ -63,42 +53,19 @@ class WidgetLayer extends StatelessWidget {
     );
 
     final points = markers.map((m) => m.point).toList(growable: false);
-
-    if (kIsWeb) {
-      final offsets = controller.toScreenLocationsSync(points);
-      return buildChild(offsets);
-    }
-
-    Widget buildChildAsync(List<Position> points) =>
-        FutureBuilder<List<Offset>>(
-          future: controller.toScreenLocations(points),
-          builder: (context, snapshot) {
-            if (snapshot.hasData && snapshot.data!.length == markers.length) {
-              final offsets = snapshot.data!;
-
-              return buildChild(offsets);
-            }
-
-            if (snapshot.error case final Object error) {
-              debugPrint(error.toString());
-              debugPrintStack(stackTrace: snapshot.stackTrace);
-            }
-
-            return const SizedBox.shrink();
-          },
-        );
+    final offsets = controller.toScreenLocations(points);
 
     if (allowInteraction) {
       if (kIsWeb) {
         // Web requires a PointerInterceptor to prevent the HtmlElementView from
         // receiving gestures.
-        return PointerInterceptor(child: buildChildAsync(points));
+        return PointerInterceptor(child: buildChild(offsets));
       }
-      return buildChildAsync(points);
+      return buildChild(offsets);
     } else {
       // Android and iOS needs a TranslucentPointer so that the widgets don't prevent
       // panning on the map.
-      return TranslucentPointer(child: buildChildAsync(points));
+      return TranslucentPointer(child: buildChild(offsets));
     }
   }
 }

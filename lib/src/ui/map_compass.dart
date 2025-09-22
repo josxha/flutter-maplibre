@@ -15,7 +15,7 @@ class MapCompass extends StatelessWidget {
     this.child,
     super.key,
     this.rotationOffset = 0,
-    this.rotationDuration = const Duration(milliseconds: 200),
+    this.nativeRotationDuration = const Duration(milliseconds: 200),
     this.webRotationSpeed = 1.2,
     this.removePinchOnPressed = false,
     this.rotateNorthOnPressed = true,
@@ -57,15 +57,15 @@ class MapCompass extends StatelessWidget {
   /// Default to [Alignment.topRight].
   final Alignment alignment;
 
-  /// The padding of the compass
+  /// The padding of the compass.
   ///
   /// Defaults to 10px on all sides.
   final EdgeInsets padding;
 
   /// The duration of the rotation animation.
   ///
-  /// Default to 200 ms.
-  final Duration rotationDuration;
+  /// Default to 200 ms. Only supported on android and iOS.
+  final Duration nativeRotationDuration;
 
   /// The speed of the rotation animation on web.
   final double webRotationSpeed;
@@ -108,7 +108,7 @@ class MapCompass extends StatelessWidget {
       controller.animateCamera(
         bearing: rotateNorthOnPressed ? 0 : null,
         pitch: removePinchOnPressed ? 0 : null,
-        nativeDuration: rotationDuration,
+        nativeDuration: nativeRotationDuration,
         webSpeed: webRotationSpeed,
       );
     }

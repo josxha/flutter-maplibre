@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -53,10 +54,33 @@ void main() {
       );
       await tester.pumpWidget(app);
       final ctrl = await ctrlCompleter.future;
-      final offset = await ctrl.toScreenLocation(Position(1, 2));
-      // Different devices have different screen sizes.
-      expect(offset.dx, greaterThanOrEqualTo(0));
-      expect(offset.dy, greaterThanOrEqualTo(0));
+      final size = tester.getSize(find.byType(MapLibreMap));
+
+      final region = ctrl.getVisibleRegion();
+
+      var offset = ctrl.toScreenLocation(
+        Position(region.longitudeWest, region.latitudeNorth),
+      );
+      expect(offset.dx, closeTo(0, 1));
+      expect(offset.dy, closeTo(0, 1));
+
+      offset = ctrl.toScreenLocation(
+        Position(region.longitudeEast, region.latitudeNorth),
+      );
+      expect(offset.dx, closeTo(size.width, 1));
+      expect(offset.dy, closeTo(0, 1));
+
+      offset = ctrl.toScreenLocation(
+        Position(region.longitudeWest, region.latitudeSouth),
+      );
+      expect(offset.dx, closeTo(0, 1));
+      expect(offset.dy, closeTo(size.height, 1));
+
+      offset = ctrl.toScreenLocation(
+        Position(region.longitudeEast, region.latitudeSouth),
+      );
+      expect(offset.dx, closeTo(size.width, 1));
+      expect(offset.dy, closeTo(size.height, 1));
     });
 
     testWidgets('toScreenLocations', (tester) async {
@@ -67,15 +91,27 @@ void main() {
       );
       await tester.pumpWidget(app);
       final ctrl = await ctrlCompleter.future;
-      final offsets = await ctrl.toScreenLocations([
-        Position(1, 2),
-        Position(43.5, -23),
-      ]);
-      // Different devices have different screen sizes.
-      expect(offsets[0].dx, greaterThanOrEqualTo(0));
-      expect(offsets[0].dy, greaterThanOrEqualTo(0));
-      expect(offsets[1].dx, greaterThanOrEqualTo(0));
-      expect(offsets[1].dy, greaterThanOrEqualTo(0));
+      final size = tester.getSize(find.byType(MapLibreMap));
+      final region = ctrl.getVisibleRegion();
+      final positions = [
+        Position(region.longitudeWest, region.latitudeNorth),
+        Position(region.longitudeEast, region.latitudeNorth),
+        Position(region.longitudeWest, region.latitudeSouth),
+        Position(region.longitudeEast, region.latitudeSouth),
+      ];
+      final offsets = ctrl.toScreenLocations(positions);
+
+      expect(offsets[0].dx, closeTo(0, 1));
+      expect(offsets[0].dy, closeTo(0, 1));
+
+      expect(offsets[1].dx, closeTo(size.width, 1));
+      expect(offsets[1].dy, closeTo(0, 1));
+
+      expect(offsets[2].dx, closeTo(0, 1));
+      expect(offsets[2].dy, closeTo(size.height, 1));
+
+      expect(offsets[3].dx, closeTo(size.width, 1));
+      expect(offsets[3].dy, closeTo(size.height, 1));
     });
 
     testWidgets('toLngLat', (tester) async {
@@ -86,13 +122,27 @@ void main() {
       );
       await tester.pumpWidget(app);
       final ctrl = await ctrlCompleter.future;
-      final lngLat = await ctrl.toLngLat(Offset.zero);
-      // Different devices have different screen sizes.
-      expect(lngLat.lng, isNot(equals(0)));
-      expect(lngLat.lat, isNot(equals(0)));
+      final size = tester.getSize(find.byType(MapLibreMap));
+      final region = ctrl.getVisibleRegion();
+
+      var lngLat = ctrl.toLngLat(Offset.zero);
+      expect(lngLat.lng, closeTo(region.longitudeWest, 0.00001));
+      expect(lngLat.lat, closeTo(region.latitudeNorth, 0.00001));
+
+      lngLat = ctrl.toLngLat(Offset(size.width, 0));
+      expect(lngLat.lng, closeTo(region.longitudeEast, 0.00001));
+      expect(lngLat.lat, closeTo(region.latitudeNorth, 0.00001));
+
+      lngLat = ctrl.toLngLat(Offset(0, size.height));
+      expect(lngLat.lng, closeTo(region.longitudeWest, 0.00001));
+      expect(lngLat.lat, closeTo(region.latitudeSouth, 0.00001));
+
+      lngLat = ctrl.toLngLat(Offset(size.width, size.height));
+      expect(lngLat.lng, closeTo(region.longitudeEast, 0.00001));
+      expect(lngLat.lat, closeTo(region.latitudeSouth, 0.00001));
     });
 
-    testWidgets('toLnLats', (tester) async {
+    testWidgets('toLngLats', (tester) async {
       final ctrlCompleter = Completer<MapController>();
       final app = App(
         onMapCreated: ctrlCompleter.complete,
@@ -100,27 +150,53 @@ void main() {
       );
       await tester.pumpWidget(app);
       final ctrl = await ctrlCompleter.future;
-      final lngLats = await ctrl.toLngLats([
-        const Offset(23, 53),
-        const Offset(23.3, 53.5),
-      ]);
-      // Different devices have different screen sizes.
-      expect(lngLats[0].lng, isNot(equals(0)));
-      expect(lngLats[0].lat, isNot(equals(0)));
-      expect(lngLats[1].lng, isNot(equals(0)));
-      expect(lngLats[1].lat, isNot(equals(0)));
+      final size = tester.getSize(find.byType(MapLibreMap));
+      final region = ctrl.getVisibleRegion();
+      final offsets = [
+        Offset.zero,
+        Offset(size.width, 0),
+        Offset(0, size.height),
+        Offset(size.width, size.height),
+      ];
+      final lngLats = ctrl.toLngLats(offsets);
+
+      expect(lngLats[0].lng, closeTo(region.longitudeWest, 0.00001));
+      expect(lngLats[0].lat, closeTo(region.latitudeNorth, 0.00001));
+
+      expect(lngLats[1].lng, closeTo(region.longitudeEast, 0.00001));
+      expect(lngLats[1].lat, closeTo(region.latitudeNorth, 0.00001));
+
+      expect(lngLats[2].lng, closeTo(region.longitudeWest, 0.00001));
+      expect(lngLats[2].lat, closeTo(region.latitudeSouth, 0.00001));
+
+      expect(lngLats[3].lng, closeTo(region.longitudeEast, 0.00001));
+      expect(lngLats[3].lat, closeTo(region.latitudeSouth, 0.00001));
     });
 
     testWidgets('getMetersPerPixelAtLatitude', (tester) async {
       final ctrlCompleter = Completer<MapController>();
       final app = App(
         onMapCreated: ctrlCompleter.complete,
-        options: MapOptions(initCenter: Position(1, 2), initZoom: 10),
+        options: MapOptions(
+          initCenter: Position(111.6513, 35.1983),
+          initZoom: 14,
+        ),
       );
       await tester.pumpWidget(app);
       final ctrl = await ctrlCompleter.future;
-      final meters = await ctrl.getMetersPerPixelAtLatitude(2.34);
-      expect(meters, closeTo(76.37, 0.1));
+      final size = tester.getSize(find.byType(MapLibreMap));
+      final pos0 = ctrl.toLngLat(Offset(0, size.height / 4));
+      final pos1 = ctrl.toLngLat(Offset(100, size.height / 4));
+      final meters = ctrl.getMetersPerPixelAtLatitude(
+        pos0.lat.toDouble(),
+      );
+      final actual =
+          6371000 *
+          (pos0.lng - pos1.lng).abs() *
+          pi /
+          180 *
+          cos(pos0.lat * pi / 180);
+      expect(meters * 100, closeTo(actual, 1));
     });
 
     testWidgets('getVisibleRegion', (tester) async {
@@ -131,7 +207,7 @@ void main() {
       );
       await tester.pumpWidget(app);
       final ctrl = await ctrlCompleter.future;
-      final region = await ctrl.getVisibleRegion();
+      final region = ctrl.getVisibleRegion();
       // testing devices have different screen sizes
       expect(region.longitudeWest, lessThan(0));
       expect(region.longitudeEast, greaterThan(0));
@@ -198,24 +274,447 @@ void main() {
       );
     });
 
-    testWidgets('queryLayers', (tester) async {
-      final ctrlCompleter = Completer<MapController>();
-      final styleCompleter = Completer<void>();
-      final app = App(
-        onMapCreated: ctrlCompleter.complete,
-        onStyleLoaded: styleCompleter.complete,
-        options: MapOptions(initCenter: Position(0, 0), initZoom: 10),
-      );
-      await tester.pumpWidget(app);
-      final ctrl = await ctrlCompleter.future;
-      await styleCompleter.future;
-      final size = tester.getSize(find.byType(MapLibreMap));
+    group('feature queries', () {
+      testWidgets('queryLayers GeoJSON', (tester) async {
+        final ctrlCompleter = Completer<MapController>();
+        final styleCompleter = Completer<StyleController>();
+        await tester.pumpWidget(
+          App(
+            onMapCreated: ctrlCompleter.complete,
+            onStyleLoaded: styleCompleter.complete,
+            options: MapOptions(
+              initCenter: Position(0.1, 0.1),
+              initZoom: 14,
+            ),
+          ),
+        );
+        final ctrl = await ctrlCompleter.future;
+        final style = await styleCompleter.future;
+        await tester.pumpAndSettle(const Duration(seconds: 2));
 
-      var layers = await ctrl.queryLayers(Offset(size.width, size.height));
-      expect(layers, hasLength(0));
+        const pointSourceId = 'point_source';
+        await style.addSource(
+          GeoJsonSource(
+            id: pointSourceId,
+            data: jsonEncode(
+              FeatureCollection(
+                features: [
+                  Feature(
+                    geometry: Point(coordinates: Position(0.1, 0.1)),
+                    id: 1,
+                    properties: {'foo': 'bar'},
+                  ),
+                ],
+              ).toJson(),
+            ),
+          ),
+        );
+        const pointLayerId = 'point_layer';
+        await style.addLayer(
+          const CircleStyleLayer(
+            id: pointLayerId,
+            sourceId: pointSourceId,
+            paint: {'circle-radius': 10, 'circle-color': '#FF0000'},
+          ),
+        );
+        const expectedPoint = QueriedLayer(
+          layerId: pointLayerId,
+          sourceId: pointSourceId,
+          sourceLayer: null,
+        );
+        await tester.pumpAndSettle(const Duration(seconds: 2));
 
-      layers = await ctrl.queryLayers(Offset.zero);
-      expect(layers, hasLength(0));
+        final size = tester.getSize(find.byType(MapLibreMap));
+        final centerScreen = Offset(size.width / 2, size.height / 2);
+
+        var layers = ctrl.queryLayers(Offset.zero);
+        expect(layers, isEmpty);
+
+        layers = ctrl.queryLayers(centerScreen);
+        expect(layers, hasLength(1));
+        expect(layers.first, expectedPoint);
+
+        const polygonSourceId = 'polygon_source';
+        await style.addSource(
+          GeoJsonSource(
+            id: polygonSourceId,
+            data: jsonEncode(
+              FeatureCollection(
+                features: [
+                  Feature(
+                    id: 2,
+                    geometry: Polygon(
+                      coordinates: [
+                        [
+                          Position(0.09, 0.09),
+                          Position(0.11, 0.09),
+                          Position(0.11, 0.11),
+                          Position(0.09, 0.11),
+                          Position(0.09, 0.09),
+                        ],
+                      ],
+                    ),
+                  ),
+                ],
+              ).toJson(),
+            ),
+          ),
+        );
+        const polygonLayerId = 'polygon_layer';
+        await style.addLayer(
+          const FillStyleLayer(
+            id: polygonLayerId,
+            sourceId: polygonSourceId,
+            paint: {'fill-color': '#00FF00'},
+          ),
+        );
+        const expectedPolygon = QueriedLayer(
+          layerId: polygonLayerId,
+          sourceId: polygonSourceId,
+          sourceLayer: null,
+        );
+
+        await tester.pumpAndSettle(const Duration(seconds: 2));
+
+        layers = ctrl.queryLayers(centerScreen);
+        expect(layers, hasLength(2));
+        expect(layers, containsAll([expectedPoint, expectedPolygon]));
+      });
+
+      testWidgets('queryLayers MVT', (tester) async {
+        final ctrlCompleter = Completer<MapController>();
+        final styleCompleter = Completer<StyleController>();
+        await tester.pumpWidget(
+          App(
+            onMapCreated: ctrlCompleter.complete,
+            onStyleLoaded: styleCompleter.complete,
+            options: MapOptions(
+              initCenter: Position(0.1, 0.1),
+              initZoom: 14,
+              initStyle: MapStyles.maptilerStreets,
+            ),
+          ),
+        );
+        final ctrl = await ctrlCompleter.future;
+        await styleCompleter.future;
+        await tester.pumpAndSettle(const Duration(seconds: 2));
+
+        const oceanExpected = QueriedLayer(
+          layerId: 'Water',
+          sourceId: 'maptiler_planet',
+          sourceLayer: 'water',
+        );
+        final layers = ctrl.queryLayers(Offset.zero);
+        expect(layers, hasLength(1));
+        expect(layers.first, oceanExpected);
+      });
+
+      testWidgets('featuresAtPoint', (tester) async {
+        final ctrlCompleter = Completer<MapController>();
+        final styleCompleter = Completer<StyleController>();
+        await tester.pumpWidget(
+          App(
+            onMapCreated: ctrlCompleter.complete,
+            onStyleLoaded: styleCompleter.complete,
+            options: MapOptions(
+              initCenter: Position(0.1, 0.1),
+              initZoom: 10,
+            ),
+          ),
+        );
+        final ctrl = await ctrlCompleter.future;
+        final style = await styleCompleter.future;
+        const pointSourceId = 'point_source';
+        await style.addSource(
+          GeoJsonSource(
+            id: pointSourceId,
+            data: jsonEncode(
+              FeatureCollection(
+                features: [
+                  Feature(
+                    geometry: Point(coordinates: Position(0.1, 0.1)),
+                    id: 1,
+                    properties: {'foo': 'bar'},
+                  ),
+                ],
+              ).toJson(),
+            ),
+          ),
+        );
+        const pointLayerId = 'point_layer';
+        await style.addLayer(
+          const CircleStyleLayer(
+            id: pointLayerId,
+            sourceId: pointSourceId,
+            paint: {'circle-radius': 5, 'circle-color': '#FF0000'},
+          ),
+        );
+        const polygonSourceId = 'polygon_source';
+        await style.addSource(
+          GeoJsonSource(
+            id: polygonSourceId,
+            data: jsonEncode(
+              FeatureCollection(
+                features: [
+                  Feature(
+                    geometry: Polygon(
+                      coordinates: [
+                        [
+                          Position(0.09, 0.09),
+                          Position(0.11, 0.09),
+                          Position(0.11, 0.11),
+                          Position(0.09, 0.11),
+                          Position(0.09, 0.09),
+                        ],
+                      ],
+                    ),
+                    id: 2,
+                    properties: {'poly': 'gon'},
+                  ),
+                ],
+              ).toJson(),
+            ),
+          ),
+        );
+        const polygonLayerId = 'polygon_layer';
+        await style.addLayer(
+          const FillStyleLayer(
+            id: polygonLayerId,
+            sourceId: polygonSourceId,
+            paint: {'fill-color': '#00FF00'},
+          ),
+        );
+        await tester.pump(const Duration(seconds: 1));
+        final size = tester.getSize(find.byType(MapLibreMap));
+        final centerScreen = Offset(size.width / 2, size.height / 2);
+        var features = ctrl.featuresAtPoint(Offset.zero);
+        expect(features, isEmpty);
+        features = ctrl.featuresAtPoint(centerScreen);
+        expect(features, hasLength(2));
+        final pointFeature = features.firstWhere(
+          (f) => f.id == 1 || f.id == '1',
+        );
+        expect(pointFeature.properties['foo'], 'bar');
+
+        final polygonFeature = features.firstWhere(
+          (f) => f.id == 2 || f.id == '2',
+        );
+        expect(polygonFeature.properties['poly'], 'gon');
+
+        features = ctrl.featuresAtPoint(
+          centerScreen,
+          layerIds: [pointLayerId],
+        );
+        expect(features, hasLength(1));
+        expect(features.first.id, isIn([1, '1']));
+        expect(features.first.properties['foo'], 'bar');
+        features = ctrl.featuresAtPoint(
+          centerScreen,
+          layerIds: [polygonLayerId],
+        );
+        expect(features, hasLength(1));
+        expect(features.first.id, isIn([2, '2']));
+        expect(features.first.properties['poly'], 'gon');
+        const pointLayer2Id = 'point_layer_2';
+        await style.addLayer(
+          const CircleStyleLayer(
+            id: pointLayer2Id,
+            sourceId: pointSourceId,
+            paint: {'circle-radius': 5, 'circle-color': '#FF00FF'},
+          ),
+        );
+        await tester.pump(const Duration(seconds: 1));
+        features = ctrl.featuresAtPoint(centerScreen);
+        expect(features, hasLength(3));
+        features = ctrl.featuresAtPoint(
+          centerScreen,
+          layerIds: [pointLayerId, pointLayer2Id],
+        );
+        expect(features, hasLength(2));
+        features = ctrl.featuresAtPoint(
+          centerScreen,
+          layerIds: [],
+        );
+        expect(features, isEmpty);
+      });
+
+      testWidgets('featuresInRect', (tester) async {
+        final ctrlCompleter = Completer<MapController>();
+        final styleCompleter = Completer<StyleController>();
+        await tester.pumpWidget(
+          App(
+            onMapCreated: ctrlCompleter.complete,
+            onStyleLoaded: styleCompleter.complete,
+            options: MapOptions(
+              initCenter: Position(0.1, 0.1),
+              initZoom: 10,
+            ),
+          ),
+        );
+        final ctrl = await ctrlCompleter.future;
+        final style = await styleCompleter.future;
+        const pointSourceId = 'point_source';
+        await style.addSource(
+          GeoJsonSource(
+            id: pointSourceId,
+            data: jsonEncode(
+              FeatureCollection(
+                features: [
+                  Feature(
+                    geometry: Point(coordinates: Position(0.1, 0.1)),
+                    id: 1,
+                    properties: {'foo': 'bar'},
+                  ),
+                ],
+              ).toJson(),
+            ),
+          ),
+        );
+        const pointLayerId = 'point_layer';
+        await style.addLayer(
+          const CircleStyleLayer(
+            id: pointLayerId,
+            sourceId: pointSourceId,
+            paint: {'circle-radius': 5, 'circle-color': '#FF0000'},
+          ),
+        );
+        const lineSourceId = 'line_source';
+        await style.addSource(
+          GeoJsonSource(
+            id: lineSourceId,
+            data: jsonEncode(
+              FeatureCollection(
+                features: [
+                  Feature(
+                    geometry: LineString(
+                      coordinates: [Position(0.09, 0.11), Position(0.11, 0.11)],
+                    ),
+                    id: 2,
+                    properties: {'line': 'string'},
+                  ),
+                ],
+              ).toJson(),
+            ),
+          ),
+        );
+        const lineLayerId = 'line_layer';
+        await style.addLayer(
+          const LineStyleLayer(
+            id: lineLayerId,
+            sourceId: lineSourceId,
+            paint: {
+              'line-color': '#0000FF',
+              'line-width': 5,
+            },
+          ),
+        );
+        const polygonSourceId = 'polygon_source';
+        await style.addSource(
+          GeoJsonSource(
+            id: polygonSourceId,
+            data: jsonEncode(
+              FeatureCollection(
+                features: [
+                  Feature(
+                    geometry: Polygon(
+                      coordinates: [
+                        [
+                          Position(0.09, 0.09),
+                          Position(0.11, 0.09),
+                          Position(0.11, 0.11),
+                          Position(0.09, 0.11),
+                          Position(0.09, 0.09),
+                        ],
+                      ],
+                    ),
+                    id: 3,
+                    properties: {'poly': 'gon'},
+                  ),
+                ],
+              ).toJson(),
+            ),
+          ),
+        );
+        const polygonLayerId = 'polygon_layer';
+        await style.addLayer(
+          const FillStyleLayer(
+            id: polygonLayerId,
+            sourceId: polygonSourceId,
+            paint: {'fill-color': '#00FF00'},
+          ),
+        );
+        await tester.pump(const Duration(seconds: 1));
+        final size = tester.getSize(find.byType(MapLibreMap));
+        var features = ctrl.featuresInRect(
+          const Rect.fromLTWH(0, 0, 10, 10),
+        );
+        expect(features, isEmpty);
+        final pointScreen = Offset(size.width / 2, size.height / 2);
+        features = ctrl.featuresInRect(
+          Rect.fromCenter(center: pointScreen, width: 2, height: 2),
+        );
+        expect(features, hasLength(2));
+        final pointFeature = features.firstWhere(
+          (f) => f.id == 1 || f.id == '1',
+        );
+        expect(pointFeature.properties['foo'], 'bar');
+        final polygonFeature = features.firstWhere(
+          (f) => f.id == 3 || f.id == '3',
+        );
+        expect(polygonFeature.properties['poly'], 'gon');
+        final lineStartScreen = ctrl.toScreenLocation(
+          Position(0.09, 0.11),
+        );
+        final lineEndScreen = ctrl.toScreenLocation(Position(0.11, 0.11));
+        features = ctrl.featuresInRect(
+          Rect.fromPoints(lineStartScreen, lineEndScreen),
+        );
+        // FIXME: blocked on https://github.com/josxha/flutter-maplibre/issues/317
+        // expect(
+        //   features.firstWhere((f) => f.id == 2 || f.id == '2').properties['line'],
+        //   'string',
+        // );
+        features = ctrl.featuresInRect(
+          Rect.fromLTWH(0, 0, size.width, size.height),
+        );
+        expect(features, hasLength(3));
+
+        final pointFeature2 = features.firstWhere(
+          (f) => f.id == 1 || f.id == '1',
+        );
+        expect(pointFeature2.properties['foo'], 'bar');
+
+        final lineFeature = features.firstWhere(
+          (f) => f.id == 2 || f.id == '2',
+        );
+        expect(lineFeature.properties['line'], 'string');
+
+        final polygonFeature2 = features.firstWhere(
+          (f) => f.id == 3 || f.id == '3',
+        );
+        expect(polygonFeature2.properties['poly'], 'gon');
+
+        features = ctrl.featuresInRect(
+          Rect.fromLTWH(0, 0, size.width, size.height),
+          layerIds: [pointLayerId, lineLayerId],
+        );
+        expect(features, hasLength(2));
+
+        final pointFeature3 = features.firstWhere(
+          (f) => f.id == 1 || f.id == '1',
+        );
+        expect(pointFeature3.properties['foo'], 'bar');
+
+        final lineFeature2 = features.firstWhere(
+          (f) => f.id == 2 || f.id == '2',
+        );
+        expect(lineFeature2.properties['line'], 'string');
+        features = ctrl.featuresInRect(
+          Rect.fromLTWH(0, 0, size.width, size.height),
+          layerIds: [],
+        );
+        expect(features, isEmpty);
+      });
     });
 
     testWidgets('getAttributions', (tester) async {

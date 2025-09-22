@@ -126,8 +126,7 @@ pitch: ${camera.pitch}'''),
                   onPressed: () async {
                     final camera = _controller.getCamera();
                     final lat = camera.center.lat.toDouble();
-                    final meters = await _controller
-                        .getMetersPerPixelAtLatitude(lat);
+                    final meters = _controller.getMetersPerPixelAtLatitude(lat);
                     debugPrint('latitude: $lat: $meters m/px');
                     if (context.mounted) {
                       ScaffoldMessenger.of(context)
@@ -146,7 +145,7 @@ pitch: ${camera.pitch}'''),
                 ),
                 OutlinedButton(
                   onPressed: () async {
-                    final region = await _controller.getVisibleRegion();
+                    final region = _controller.getVisibleRegion();
                     if (context.mounted) {
                       ScaffoldMessenger.of(context)
                         ..hideCurrentSnackBar()
@@ -162,7 +161,7 @@ pitch: ${camera.pitch}'''),
                 ),
                 OutlinedButton(
                   onPressed: () async {
-                    final lngLat = await _controller.toLngLat(Offset.zero);
+                    final lngLat = _controller.toLngLat(Offset.zero);
                     if (context.mounted) {
                       ScaffoldMessenger.of(context)
                         ..hideCurrentSnackBar()
@@ -182,7 +181,7 @@ pitch: ${camera.pitch}'''),
                 ),
                 OutlinedButton(
                   onPressed: () async {
-                    final offset = await _controller.toScreenLocation(
+                    final offset = _controller.toScreenLocation(
                       Position(0, 0),
                     );
                     if (context.mounted) {

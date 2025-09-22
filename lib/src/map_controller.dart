@@ -25,33 +25,21 @@ abstract interface class MapController {
   /// accessed before [MapLibreMap.onStyleLoaded] has been called.
   StyleController? get style;
 
-  /// Convert a latitude/longitude coordinate to a screen location.
-  // TODO: can be made sync when flutter platform and ui thread are merged
-  Future<Offset> toScreenLocation(Position lngLat);
+  /// Convert a latitude/longitude coordinate to a screen location in logical
+  /// pixels.
+  Offset toScreenLocation(Position lngLat);
 
-  /// Get the latitude/longitude coordinate for a screen location.
-  // TODO: can be made sync when flutter platform and ui thread are merged
-  Future<Position> toLngLat(Offset screenLocation);
+  /// Get the latitude/longitude coordinate for a screen location in logical
+  /// pixels.
+  Position toLngLat(Offset screenLocation);
 
-  /// Convert a latitude/longitude coordinate to a screen location.
-  // TODO: can be made sync when flutter platform and ui thread are merged
-  Future<List<Offset>> toScreenLocations(List<Position> lngLats);
+  /// Convert a latitude/longitude coordinate to a screen location in logical
+  /// pixels.
+  List<Offset> toScreenLocations(List<Position> lngLats);
 
-  /// Get the latitude/longitude coordinate for a screen location.
-  // TODO: can be made sync when flutter platform and ui thread are merged
-  Future<List<Position>> toLngLats(List<Offset> screenLocations);
-
-  /// Convert a latitude/longitude coordinate to a screen location.
-  Offset toScreenLocationSync(Position lngLat);
-
-  /// Get the latitude/longitude coordinate for a screen location.
-  Position toLngLatSync(Offset screenLocation);
-
-  /// Convert a latitude/longitude coordinate to a screen location.
-  List<Offset> toScreenLocationsSync(List<Position> lngLats);
-
-  /// Get the latitude/longitude coordinate for a screen location.
-  List<Position> toLngLatsSync(List<Offset> screenLocations);
+  /// Get the latitude/longitude coordinate for a screen location in logical
+  /// pixels.
+  List<Position> toLngLats(List<Offset> screenLocations);
 
   /// Instantly move the map camera to a new location.
   Future<void> moveCamera({
@@ -92,32 +80,60 @@ abstract interface class MapController {
   /// Get the current camera position on the map.
   MapCamera? get camera;
 
-  /// Returns the distance spanned by one pixel at the specified latitude and
-  /// current zoom level.
+  /// Returns the distance spanned by one logical pixel at the specified
+  /// latitude and current zoom level.
   ///
   /// The distance between pixels decreases as the latitude approaches the
   /// poles. This relationship parallels the relationship between longitudinal
   /// coordinates at different latitudes.
-  // TODO: can be made sync when flutter platform and ui thread are merged
-  Future<double> getMetersPerPixelAtLatitude(double latitude);
+  double getMetersPerPixelAtLatitude(double latitude);
 
   /// The smallest bounding box that includes the visible region.
-  // TODO: can be made sync when flutter platform and ui thread are merged
-  Future<LngLatBounds> getVisibleRegion();
+  LngLatBounds getVisibleRegion();
 
-  /// Returns the distance spanned by one pixel at the specified latitude and
-  /// current zoom level.
+  /// Queries the map for layers containing rendered features which intersect
+  /// with a given [screenLocation] measured in logical pixels.
+  List<QueriedLayer> queryLayers(Offset screenLocation);
+
+  /// Returns an array of rendered map features that intersect with a given
+  /// screen location measured in logical pixels.
   ///
-  /// The distance between pixels decreases as the latitude approaches the
-  /// poles. This relationship parallels the relationship between longitudinal
-  /// coordinates at different latitudes.
-  double getMetersPerPixelAtLatitudeSync(double latitude);
+  /// If [layerIds] is non-null, only features from those layers will be
+  /// returned.
+  ///
+  /// NOTE: features may appear multiple times in query results, for example if
+  /// they cross tile boundaries.
+  ///
+  /// Returns an empty list if either the map or underlying render surface has
+  /// been destroyed.
+  // TODO(mhernz): add filter parameter
+  //
+  // [filter] is an array of filter expressions. If provided, only features
+  // that match all of the filters will be returned.
+  List<RenderedFeature> featuresAtPoint(
+    Offset point, {
+    List<String>? layerIds,
+  });
 
-  /// The smallest bounding box that includes the visible region.
-  LngLatBounds getVisibleRegionSync();
-
-  /// Queries the map for rendered features.
-  Future<List<QueriedLayer>> queryLayers(Offset screenLocation);
+  /// Returns an array of rendered map features that intersect with a given
+  /// on-screen rectangle measured in logical pixels.
+  ///
+  /// If [layerIds] is non-null, only features from those layers will be
+  /// returned.
+  ///
+  /// NOTE: features may appear multiple times in query results, for example if
+  /// they cross tile boundaries.
+  ///
+  /// Returns an empty list if either the map or underlying render surface has
+  /// been destroyed.
+  // TODO(mhernz): add filter parameter
+  //
+  // [filter] is an array of filter expressions. If provided, only features
+  // that match all of the filters will be returned.
+  List<RenderedFeature> featuresInRect(
+    Rect rect, {
+    List<String>? layerIds,
+  });
 
   /// Show the user location on the map
   Future<void> enableLocation({

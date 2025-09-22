@@ -1,6 +1,3 @@
-import 'dart:io';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
 
@@ -98,11 +95,6 @@ class _WidgetLayerPageState extends State<WidgetLayerInteractivePage> {
   }
 
   Future<Position> _toLngLat(Offset eventOffset) async {
-    // Only Android returns screen pixel, other platforms return logical pixels.
-    final pixelRatio = (!kIsWeb && Platform.isAndroid)
-        ? MediaQuery.devicePixelRatioOf(context)
-        : 1.0;
-
     final mapRenderBox =
         _mapKey.currentContext?.findRenderObject() as RenderBox?;
 
@@ -115,7 +107,7 @@ class _WidgetLayerPageState extends State<WidgetLayerInteractivePage> {
       eventOffset.dy - mapOffset.dy,
     );
 
-    return _controller.toLngLat(offset.scale(pixelRatio, pixelRatio));
+    return _controller.toLngLat(offset);
   }
 
   void _onLongPress(int index, LongPressStartDetails details) {
