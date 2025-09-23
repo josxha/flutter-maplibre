@@ -2088,30 +2088,6 @@ class NSAttributedString extends objc.NSObject implements objc.NSCopying, objc.N
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_NSAttributedString);
   }
 
-  /// string
-  objc.NSString get string {
-  objc.checkOsVersionInternal('NSAttributedString.string', iOS: (false, (3, 2, 0)), macOS: (false, (10, 0, 0)));
-    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_string);
-    return objc.NSString.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// attributesAtIndex:effectiveRange:
-  objc.NSDictionary attributesAtIndex(int location, {required ffi.Pointer<objc.NSRange> effectiveRange}) {
-  objc.checkOsVersionInternal('NSAttributedString.attributesAtIndex:effectiveRange:', iOS: (false, (3, 2, 0)), macOS: (false, (10, 0, 0)));
-    final _ret = _objc_msgSend_1776v9k(this.ref.pointer, _sel_attributesAtIndex_effectiveRange_, location, effectiveRange);
-    return objc.NSDictionary.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// init
-  NSAttributedString init() {
-  objc.checkOsVersionInternal('NSAttributedString.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
-    return NSAttributedString.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// new
   static NSAttributedString new$() {
     final _ret = _objc_msgSend_151sglz(_class_NSAttributedString, _sel_new);
@@ -2137,6 +2113,91 @@ class NSAttributedString extends objc.NSObject implements objc.NSCopying, objc.N
   static bool getSupportsSecureCoding() {
     return _objc_msgSend_91o635(_class_NSAttributedString, _sel_supportsSecureCoding);
 
+  }
+
+
+  /// localizedAttributedStringWithFormat:
+  static NSAttributedString localizedAttributedStringWithFormat(NSAttributedString format) {
+  objc.checkOsVersionInternal('NSAttributedString.localizedAttributedStringWithFormat:', iOS: (false, (15, 0, 0)), macOS: (false, (12, 0, 0)));
+    final _ret = _objc_msgSend_1sotr3r(_class_NSAttributedString, _sel_localizedAttributedStringWithFormat_, format.ref.pointer);
+    return NSAttributedString.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// localizedAttributedStringWithFormat:options:
+  static NSAttributedString localizedAttributedStringWithFormat$1(NSAttributedString format, {required NSAttributedStringFormattingOptions options}) {
+  objc.checkOsVersionInternal('NSAttributedString.localizedAttributedStringWithFormat:options:', iOS: (false, (15, 0, 0)), macOS: (false, (12, 0, 0)));
+    final _ret = _objc_msgSend_s058d2(_class_NSAttributedString, _sel_localizedAttributedStringWithFormat_options_, format.ref.pointer, options.value);
+    return NSAttributedString.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// localizedAttributedStringWithFormat:context:
+  static NSAttributedString localizedAttributedStringWithFormat$2(NSAttributedString format, {required objc.NSDictionary context}) {
+  objc.checkOsVersionInternal('NSAttributedString.localizedAttributedStringWithFormat:context:', iOS: (false, (17, 0, 0)), macOS: (false, (14, 0, 0)));
+    final _ret = _objc_msgSend_15qeuct(_class_NSAttributedString, _sel_localizedAttributedStringWithFormat_context_, format.ref.pointer, context.ref.pointer);
+    return NSAttributedString.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// localizedAttributedStringWithFormat:options:context:
+  static NSAttributedString localizedAttributedStringWithFormat$3(NSAttributedString format, {required NSAttributedStringFormattingOptions options,required objc.NSDictionary context}) {
+  objc.checkOsVersionInternal('NSAttributedString.localizedAttributedStringWithFormat:options:context:', iOS: (false, (17, 0, 0)), macOS: (false, (14, 0, 0)));
+    final _ret = _objc_msgSend_187k8ck(_class_NSAttributedString, _sel_localizedAttributedStringWithFormat_options_context_, format.ref.pointer, options.value, context.ref.pointer);
+    return NSAttributedString.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// attributedStringWithAttachment:attributes:
+  static NSAttributedString attributedStringWithAttachment(NSTextAttachment attachment, {required objc.NSDictionary attributes}) {
+  objc.checkOsVersionInternal('NSAttributedString.attributedStringWithAttachment:attributes:', iOS: (false, (18, 0, 0)), macOS: (false, (15, 0, 0)));
+    final _ret = _objc_msgSend_15qeuct(_class_NSAttributedString, _sel_attributedStringWithAttachment_attributes_, attachment.ref.pointer, attributes.ref.pointer);
+    return NSAttributedString.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// objectWithItemProviderData:typeIdentifier:error:
+  static NSAttributedString? objectWithItemProviderData(objc.NSData data, {required objc.NSString typeIdentifier,required ffi.Pointer<ffi.Pointer<objc.ObjCObject>> error}) {
+  objc.checkOsVersionInternal('NSAttributedString.objectWithItemProviderData:typeIdentifier:error:', iOS: (false, (11, 0, 0)), macOS: (false, (10, 13, 0)));
+    final _ret = _objc_msgSend_1pnyuds(_class_NSAttributedString, _sel_objectWithItemProviderData_typeIdentifier_error_, data.ref.pointer, typeIdentifier.ref.pointer, error);
+    return _ret.address == 0 ? null : NSAttributedString.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// attributedStringWithAdaptiveImageGlyph:attributes:
+  static NSAttributedString attributedStringWithAdaptiveImageGlyph(NSAdaptiveImageGlyph adaptiveImageGlyph, {required objc.NSDictionary attributes}) {
+  objc.checkOsVersionInternal('NSAttributedString.attributedStringWithAdaptiveImageGlyph:attributes:', iOS: (false, (18, 0, 0)), macOS: (false, (15, 0, 0)));
+    final _ret = _objc_msgSend_15qeuct(_class_NSAttributedString, _sel_attributedStringWithAdaptiveImageGlyph_attributes_, adaptiveImageGlyph.ref.pointer, attributes.ref.pointer);
+    return NSAttributedString.castFromPointer(_ret, retain: true, release: true);
+  }
+  /// Returns a new instance of NSAttributedString constructed with the default `new` method.
+  factory NSAttributedString() => new$();
+
+}
+
+extension NSAttributedString$Methods on NSAttributedString {
+
+  /// string
+  objc.NSString get string {
+  objc.checkOsVersionInternal('NSAttributedString.string', iOS: (false, (3, 2, 0)), macOS: (false, (10, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_string);
+    return objc.NSString.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// attributesAtIndex:effectiveRange:
+  objc.NSDictionary attributesAtIndex(int location, {required ffi.Pointer<objc.NSRange> effectiveRange}) {
+  objc.checkOsVersionInternal('NSAttributedString.attributesAtIndex:effectiveRange:', iOS: (false, (3, 2, 0)), macOS: (false, (10, 0, 0)));
+    final _ret = _objc_msgSend_1776v9k(this.ref.pointer, _sel_attributesAtIndex_effectiveRange_, location, effectiveRange);
+    return objc.NSDictionary.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// init
+  NSAttributedString init() {
+  objc.checkOsVersionInternal('NSAttributedString.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
+    return NSAttributedString.castFromPointer(_ret, retain: false, release: true);
   }
 
 
@@ -2210,51 +2271,11 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_encodeWithCoder_, coder.ref.pointer)
   }
 
 
-  /// localizedAttributedStringWithFormat:
-  static NSAttributedString localizedAttributedStringWithFormat(NSAttributedString format) {
-  objc.checkOsVersionInternal('NSAttributedString.localizedAttributedStringWithFormat:', iOS: (false, (15, 0, 0)), macOS: (false, (12, 0, 0)));
-    final _ret = _objc_msgSend_1sotr3r(_class_NSAttributedString, _sel_localizedAttributedStringWithFormat_, format.ref.pointer);
-    return NSAttributedString.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// localizedAttributedStringWithFormat:options:
-  static NSAttributedString localizedAttributedStringWithFormat$1(NSAttributedString format, {required NSAttributedStringFormattingOptions options}) {
-  objc.checkOsVersionInternal('NSAttributedString.localizedAttributedStringWithFormat:options:', iOS: (false, (15, 0, 0)), macOS: (false, (12, 0, 0)));
-    final _ret = _objc_msgSend_s058d2(_class_NSAttributedString, _sel_localizedAttributedStringWithFormat_options_, format.ref.pointer, options.value);
-    return NSAttributedString.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
   /// initWithFormat:options:locale:context:
   NSAttributedString initWithFormat$1(NSAttributedString format, {required NSAttributedStringFormattingOptions options,objc.NSLocale? locale,required objc.NSDictionary context}) {
   objc.checkOsVersionInternal('NSAttributedString.initWithFormat:options:locale:context:', iOS: (false, (17, 0, 0)), macOS: (false, (14, 0, 0)));
     final _ret = _objc_msgSend_3fn4ca(this.ref.retainAndReturnPointer(), _sel_initWithFormat_options_locale_context_, format.ref.pointer, options.value, locale?.ref.pointer ?? ffi.nullptr, context.ref.pointer);
     return NSAttributedString.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// localizedAttributedStringWithFormat:context:
-  static NSAttributedString localizedAttributedStringWithFormat$2(NSAttributedString format, {required objc.NSDictionary context}) {
-  objc.checkOsVersionInternal('NSAttributedString.localizedAttributedStringWithFormat:context:', iOS: (false, (17, 0, 0)), macOS: (false, (14, 0, 0)));
-    final _ret = _objc_msgSend_15qeuct(_class_NSAttributedString, _sel_localizedAttributedStringWithFormat_context_, format.ref.pointer, context.ref.pointer);
-    return NSAttributedString.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// localizedAttributedStringWithFormat:options:context:
-  static NSAttributedString localizedAttributedStringWithFormat$3(NSAttributedString format, {required NSAttributedStringFormattingOptions options,required objc.NSDictionary context}) {
-  objc.checkOsVersionInternal('NSAttributedString.localizedAttributedStringWithFormat:options:context:', iOS: (false, (17, 0, 0)), macOS: (false, (14, 0, 0)));
-    final _ret = _objc_msgSend_187k8ck(_class_NSAttributedString, _sel_localizedAttributedStringWithFormat_options_context_, format.ref.pointer, options.value, context.ref.pointer);
-    return NSAttributedString.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// attributedStringWithAttachment:attributes:
-  static NSAttributedString attributedStringWithAttachment(NSTextAttachment attachment, {required objc.NSDictionary attributes}) {
-  objc.checkOsVersionInternal('NSAttributedString.attributedStringWithAttachment:attributes:', iOS: (false, (18, 0, 0)), macOS: (false, (15, 0, 0)));
-    final _ret = _objc_msgSend_15qeuct(_class_NSAttributedString, _sel_attributedStringWithAttachment_attributes_, attachment.ref.pointer, attributes.ref.pointer);
-    return NSAttributedString.castFromPointer(_ret, retain: true, release: true);
   }
 
 
@@ -2274,30 +2295,12 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_encodeWithCoder_, coder.ref.pointer)
   }
 
 
-  /// objectWithItemProviderData:typeIdentifier:error:
-  static NSAttributedString? objectWithItemProviderData(objc.NSData data, {required objc.NSString typeIdentifier,required ffi.Pointer<ffi.Pointer<objc.ObjCObject>> error}) {
-  objc.checkOsVersionInternal('NSAttributedString.objectWithItemProviderData:typeIdentifier:error:', iOS: (false, (11, 0, 0)), macOS: (false, (10, 13, 0)));
-    final _ret = _objc_msgSend_1pnyuds(_class_NSAttributedString, _sel_objectWithItemProviderData_typeIdentifier_error_, data.ref.pointer, typeIdentifier.ref.pointer, error);
-    return _ret.address == 0 ? null : NSAttributedString.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
   /// initWithFileURL:options:documentAttributes:error:
   NSAttributedString? initWithFileURL(objc.NSURL url, {required objc.NSDictionary options,required ffi.Pointer<ffi.Pointer<objc.ObjCObject>> documentAttributes,required ffi.Pointer<ffi.Pointer<objc.ObjCObject>> error}) {
   objc.checkOsVersionInternal('NSAttributedString.initWithFileURL:options:documentAttributes:error:', iOS: (false, (7, 0, 0)));
     final _ret = _objc_msgSend_of3pfd(this.ref.retainAndReturnPointer(), _sel_initWithFileURL_options_documentAttributes_error_, url.ref.pointer, options.ref.pointer, documentAttributes, error);
     return _ret.address == 0 ? null : NSAttributedString.castFromPointer(_ret, retain: false, release: true);
   }
-
-
-  /// attributedStringWithAdaptiveImageGlyph:attributes:
-  static NSAttributedString attributedStringWithAdaptiveImageGlyph(NSAdaptiveImageGlyph adaptiveImageGlyph, {required objc.NSDictionary attributes}) {
-  objc.checkOsVersionInternal('NSAttributedString.attributedStringWithAdaptiveImageGlyph:attributes:', iOS: (false, (18, 0, 0)), macOS: (false, (15, 0, 0)));
-    final _ret = _objc_msgSend_15qeuct(_class_NSAttributedString, _sel_attributedStringWithAdaptiveImageGlyph_attributes_, adaptiveImageGlyph.ref.pointer, attributes.ref.pointer);
-    return NSAttributedString.castFromPointer(_ret, retain: true, release: true);
-  }
-  /// Returns a new instance of NSAttributedString constructed with the default `new` method.
-  factory NSAttributedString() => new$();
 
 }
 
@@ -3252,6 +3255,136 @@ class NSExpression extends objc.NSObject implements objc.NSSecureCoding, objc.NS
   }
 
 
+  /// new
+  static NSExpression new$() {
+    final _ret = _objc_msgSend_151sglz(_class_NSExpression, _sel_new);
+    return NSExpression.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static NSExpression allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_NSExpression, _sel_allocWithZone_, zone);
+    return NSExpression.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static NSExpression alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_NSExpression, _sel_alloc);
+    return NSExpression.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// supportsSecureCoding
+  static bool getSupportsSecureCoding() {
+    return _objc_msgSend_91o635(_class_NSExpression, _sel_supportsSecureCoding);
+
+  }
+
+
+  /// Returns a conditional function expression specifying the string predicate, and
+/// expressions for each condition.
+/// 
+/// @param conditionPredicate The predicate to get evaluated.
+/// @param trueExpression The expression for conditions equal to true.
+/// @param falseExpression The expression for conditions equal to false.
+  static NSExpression mgl_expressionForConditional(NSPredicate conditionPredicate, {required NSExpression trueExpression,required NSExpression falseExpresssion}) {
+  objc.checkOsVersionInternal('NSExpression.mgl_expressionForConditional:trueExpression:falseExpresssion:', iOS: (false, (3, 0, 0)), macOS: (false, (10, 4, 0)));
+    final _ret = _objc_msgSend_11spmsz(_class_NSExpression, _sel_mgl_expressionForConditional_trueExpression_falseExpresssion_, conditionPredicate.ref.pointer, trueExpression.ref.pointer, falseExpresssion.ref.pointer);
+    return NSExpression.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// Returns a step function expression specifying the stepping, from expression
+/// and stops.
+/// 
+/// @param steppingExpression The stepping expression.
+/// @param minimumExpression The expression which could be a constant or function expression.
+/// @param stops The stops must be an `NSDictionary` constant `NSExpression`.
+/// 
+/// #### Related examples
+/// TODO: Data-driven circles
+/// TODO: Cluster point data
+/// TODO: Use images to cluster point data
+/// Learn how to use this expression to style a map layer based on an attribute value.
+  static NSExpression mgl_expressionForSteppingExpression(NSExpression steppingExpression, {required NSExpression fromExpression,required NSExpression stops}) {
+  objc.checkOsVersionInternal('NSExpression.mgl_expressionForSteppingExpression:fromExpression:stops:', iOS: (false, (3, 0, 0)), macOS: (false, (10, 4, 0)));
+    final _ret = _objc_msgSend_11spmsz(_class_NSExpression, _sel_mgl_expressionForSteppingExpression_fromExpression_stops_, steppingExpression.ref.pointer, fromExpression.ref.pointer, stops.ref.pointer);
+    return NSExpression.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// Returns an interpolated function expression specifying the function operator, curve type,
+/// parameters and steps.
+/// 
+/// @param inputExpression The interpolating expression input.
+/// @param curveType The curve type could be ``MLNExpressionInterpolationModeLinear``,
+/// ``MLNExpressionInterpolationModeExponential`` and
+/// ``MLNExpressionInterpolationModeCubicBezier``.
+/// @param parameters The parameters expression.
+/// @param stops The stops expression.
+/// 
+/// #### Related examples
+/// TODO: Create a heatmap layer, learn how to style an ``MLNHeatmapStyleLayer``
+/// based on zoom level and point density with this expression.
+  static NSExpression mgl_expressionForInterpolatingExpression(NSExpression inputExpression, {required objc.NSString withCurveType,NSExpression? parameters,required NSExpression stops}) {
+  objc.checkOsVersionInternal('NSExpression.mgl_expressionForInterpolatingExpression:withCurveType:parameters:stops:', iOS: (false, (3, 0, 0)), macOS: (false, (10, 4, 0)));
+    final _ret = _objc_msgSend_s92gih(_class_NSExpression, _sel_mgl_expressionForInterpolatingExpression_withCurveType_parameters_stops_, inputExpression.ref.pointer, withCurveType.ref.pointer, parameters?.ref.pointer ?? ffi.nullptr, stops.ref.pointer);
+    return NSExpression.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// Returns a match function expression specifying the input, matching values,
+/// and default value.
+/// 
+/// @param inputExpression The matching expression.
+/// @param matchedExpressions The matched values expression dictionary must be condition : value.
+/// @param defaultExpression The defaultValue expression to be used in case there is no match.
+  static NSExpression mgl_expressionForMatchingExpression(NSExpression inputExpression, {required objc.NSDictionary inDictionary,required NSExpression defaultExpression}) {
+  objc.checkOsVersionInternal('NSExpression.mgl_expressionForMatchingExpression:inDictionary:defaultExpression:', iOS: (false, (3, 0, 0)), macOS: (false, (10, 4, 0)));
+    final _ret = _objc_msgSend_11spmsz(_class_NSExpression, _sel_mgl_expressionForMatchingExpression_inDictionary_defaultExpression_, inputExpression.ref.pointer, inDictionary.ref.pointer, defaultExpression.ref.pointer);
+    return NSExpression.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// Returns an attributed function expression specifying an ``MLNAttributedExpression`` constant
+/// expression array.
+/// 
+/// @param attributedExpressions The ``MLNAttributedExpression`` constant expression array.
+  static NSExpression mgl_expressionForAttributedExpressions(objc.NSArray attributedExpressions) {
+  objc.checkOsVersionInternal('NSExpression.mgl_expressionForAttributedExpressions:', iOS: (false, (3, 0, 0)), macOS: (false, (10, 4, 0)));
+    final _ret = _objc_msgSend_1sotr3r(_class_NSExpression, _sel_mgl_expressionForAttributedExpressions_, attributedExpressions.ref.pointer);
+    return NSExpression.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// Returns an expression equivalent to the given Foundation object deserialized
+/// from JSON data.
+/// 
+/// The Foundation object is interpreted according to the
+/// [MapLibre Style Spec](https://maplibre.org/maplibre-style-spec/expressions/).
+/// See the
+/// “[Information for Style Authors](../for-style-authors.html#setting-attribute-values)”
+/// guide for a correspondence of operators and types between the style
+/// specification and the `NSExpression` representation used by this SDK.
+/// 
+/// @param object A Foundation object deserialized from JSON data, for example
+/// using `NSJSONSerialization`.
+/// @return An initialized expression equivalent to `object`, suitable for use as
+/// the value of a style layer attribute.
+  static NSExpression expressionWithMLNJSONObject(objc.ObjCObjectBase object) {
+  objc.checkOsVersionInternal('NSExpression.expressionWithMLNJSONObject:', iOS: (false, (3, 0, 0)), macOS: (false, (10, 4, 0)));
+    final _ret = _objc_msgSend_1sotr3r(_class_NSExpression, _sel_expressionWithMLNJSONObject_, object.ref.pointer);
+    return NSExpression.castFromPointer(_ret, retain: true, release: true);
+  }
+  /// Returns a new instance of NSExpression constructed with the default `new` method.
+  factory NSExpression() => new$();
+
+}
+
+extension NSExpression$Methods on NSExpression {
+
   /// initWithExpressionType:
   NSExpression initWithExpressionType(NSExpressionType type) {
   objc.checkOsVersionInternal('NSExpression.initWithExpressionType:', iOS: (false, (3, 0, 0)), macOS: (false, (10, 4, 0)));
@@ -3403,27 +3536,6 @@ _objc_msgSend_1pl9qdv(this.ref.pointer, _sel_allowEvaluation);
   }
 
 
-  /// new
-  static NSExpression new$() {
-    final _ret = _objc_msgSend_151sglz(_class_NSExpression, _sel_new);
-    return NSExpression.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static NSExpression allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_NSExpression, _sel_allocWithZone_, zone);
-    return NSExpression.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static NSExpression alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_NSExpression, _sel_alloc);
-    return NSExpression.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// self
   NSExpression self$1() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_self);
@@ -3445,93 +3557,10 @@ _objc_msgSend_1pl9qdv(this.ref.pointer, _sel_allowEvaluation);
   }
 
 
-  /// supportsSecureCoding
-  static bool getSupportsSecureCoding() {
-    return _objc_msgSend_91o635(_class_NSExpression, _sel_supportsSecureCoding);
-
-  }
-
-
   /// encodeWithCoder:
   void encodeWithCoder(objc.NSCoder coder) {
 _objc_msgSend_xtuoz7(this.ref.pointer, _sel_encodeWithCoder_, coder.ref.pointer);
 
-  }
-
-
-  /// Returns a conditional function expression specifying the string predicate, and
-/// expressions for each condition.
-/// 
-/// @param conditionPredicate The predicate to get evaluated.
-/// @param trueExpression The expression for conditions equal to true.
-/// @param falseExpression The expression for conditions equal to false.
-  static NSExpression mgl_expressionForConditional(NSPredicate conditionPredicate, {required NSExpression trueExpression$1,required NSExpression falseExpresssion}) {
-  objc.checkOsVersionInternal('NSExpression.mgl_expressionForConditional:trueExpression:falseExpresssion:', iOS: (false, (3, 0, 0)), macOS: (false, (10, 4, 0)));
-    final _ret = _objc_msgSend_11spmsz(_class_NSExpression, _sel_mgl_expressionForConditional_trueExpression_falseExpresssion_, conditionPredicate.ref.pointer, trueExpression$1.ref.pointer, falseExpresssion.ref.pointer);
-    return NSExpression.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// Returns a step function expression specifying the stepping, from expression
-/// and stops.
-/// 
-/// @param steppingExpression The stepping expression.
-/// @param minimumExpression The expression which could be a constant or function expression.
-/// @param stops The stops must be an `NSDictionary` constant `NSExpression`.
-/// 
-/// #### Related examples
-/// TODO: Data-driven circles
-/// TODO: Cluster point data
-/// TODO: Use images to cluster point data
-/// Learn how to use this expression to style a map layer based on an attribute value.
-  static NSExpression mgl_expressionForSteppingExpression(NSExpression steppingExpression, {required NSExpression fromExpression,required NSExpression stops}) {
-  objc.checkOsVersionInternal('NSExpression.mgl_expressionForSteppingExpression:fromExpression:stops:', iOS: (false, (3, 0, 0)), macOS: (false, (10, 4, 0)));
-    final _ret = _objc_msgSend_11spmsz(_class_NSExpression, _sel_mgl_expressionForSteppingExpression_fromExpression_stops_, steppingExpression.ref.pointer, fromExpression.ref.pointer, stops.ref.pointer);
-    return NSExpression.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// Returns an interpolated function expression specifying the function operator, curve type,
-/// parameters and steps.
-/// 
-/// @param inputExpression The interpolating expression input.
-/// @param curveType The curve type could be ``MLNExpressionInterpolationModeLinear``,
-/// ``MLNExpressionInterpolationModeExponential`` and
-/// ``MLNExpressionInterpolationModeCubicBezier``.
-/// @param parameters The parameters expression.
-/// @param stops The stops expression.
-/// 
-/// #### Related examples
-/// TODO: Create a heatmap layer, learn how to style an ``MLNHeatmapStyleLayer``
-/// based on zoom level and point density with this expression.
-  static NSExpression mgl_expressionForInterpolatingExpression(NSExpression inputExpression, {required objc.NSString withCurveType,NSExpression? parameters,required NSExpression stops}) {
-  objc.checkOsVersionInternal('NSExpression.mgl_expressionForInterpolatingExpression:withCurveType:parameters:stops:', iOS: (false, (3, 0, 0)), macOS: (false, (10, 4, 0)));
-    final _ret = _objc_msgSend_s92gih(_class_NSExpression, _sel_mgl_expressionForInterpolatingExpression_withCurveType_parameters_stops_, inputExpression.ref.pointer, withCurveType.ref.pointer, parameters?.ref.pointer ?? ffi.nullptr, stops.ref.pointer);
-    return NSExpression.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// Returns a match function expression specifying the input, matching values,
-/// and default value.
-/// 
-/// @param inputExpression The matching expression.
-/// @param matchedExpressions The matched values expression dictionary must be condition : value.
-/// @param defaultExpression The defaultValue expression to be used in case there is no match.
-  static NSExpression mgl_expressionForMatchingExpression(NSExpression inputExpression, {required objc.NSDictionary inDictionary,required NSExpression defaultExpression}) {
-  objc.checkOsVersionInternal('NSExpression.mgl_expressionForMatchingExpression:inDictionary:defaultExpression:', iOS: (false, (3, 0, 0)), macOS: (false, (10, 4, 0)));
-    final _ret = _objc_msgSend_11spmsz(_class_NSExpression, _sel_mgl_expressionForMatchingExpression_inDictionary_defaultExpression_, inputExpression.ref.pointer, inDictionary.ref.pointer, defaultExpression.ref.pointer);
-    return NSExpression.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// Returns an attributed function expression specifying an ``MLNAttributedExpression`` constant
-/// expression array.
-/// 
-/// @param attributedExpressions The ``MLNAttributedExpression`` constant expression array.
-  static NSExpression mgl_expressionForAttributedExpressions(objc.NSArray attributedExpressions) {
-  objc.checkOsVersionInternal('NSExpression.mgl_expressionForAttributedExpressions:', iOS: (false, (3, 0, 0)), macOS: (false, (10, 4, 0)));
-    final _ret = _objc_msgSend_1sotr3r(_class_NSExpression, _sel_mgl_expressionForAttributedExpressions_, attributedExpressions.ref.pointer);
-    return NSExpression.castFromPointer(_ret, retain: true, release: true);
   }
 
 
@@ -3546,29 +3575,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_encodeWithCoder_, coder.ref.pointer)
     final _ret = _objc_msgSend_1sotr3r(this.ref.pointer, _sel_mgl_expressionByAppendingExpression_, expression.ref.pointer);
     return NSExpression.castFromPointer(_ret, retain: true, release: true);
   }
-
-
-  /// Returns an expression equivalent to the given Foundation object deserialized
-/// from JSON data.
-/// 
-/// The Foundation object is interpreted according to the
-/// [MapLibre Style Spec](https://maplibre.org/maplibre-style-spec/expressions/).
-/// See the
-/// “[Information for Style Authors](../for-style-authors.html#setting-attribute-values)”
-/// guide for a correspondence of operators and types between the style
-/// specification and the `NSExpression` representation used by this SDK.
-/// 
-/// @param object A Foundation object deserialized from JSON data, for example
-/// using `NSJSONSerialization`.
-/// @return An initialized expression equivalent to `object`, suitable for use as
-/// the value of a style layer attribute.
-  static NSExpression expressionWithMLNJSONObject(objc.ObjCObjectBase object) {
-  objc.checkOsVersionInternal('NSExpression.expressionWithMLNJSONObject:', iOS: (false, (3, 0, 0)), macOS: (false, (10, 4, 0)));
-    final _ret = _objc_msgSend_1sotr3r(_class_NSExpression, _sel_expressionWithMLNJSONObject_, object.ref.pointer);
-    return NSExpression.castFromPointer(_ret, retain: true, release: true);
-  }
-  /// Returns a new instance of NSExpression constructed with the default `new` method.
-  factory NSExpression() => new$();
 
 }
 
@@ -3830,14 +3836,6 @@ _objc_msgSend_r8gdi7(_class_Helpers, _sel_setExpressionWithTarget_field_expressi
   }
 
 
-  /// init
-  Helpers init() {
-  objc.checkOsVersionInternal('Helpers.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
-    return Helpers.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// new
   static Helpers new$() {
     final _ret = _objc_msgSend_151sglz(_class_Helpers, _sel_new);
@@ -3855,6 +3853,19 @@ _objc_msgSend_r8gdi7(_class_Helpers, _sel_setExpressionWithTarget_field_expressi
   /// alloc
   static Helpers alloc() {
     final _ret = _objc_msgSend_151sglz(_class_Helpers, _sel_alloc);
+    return Helpers.castFromPointer(_ret, retain: false, release: true);
+  }
+  /// Returns a new instance of Helpers constructed with the default `new` method.
+  factory Helpers() => new$();
+
+}
+
+extension Helpers$Methods on Helpers {
+
+  /// init
+  Helpers init() {
+  objc.checkOsVersionInternal('Helpers.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
     return Helpers.castFromPointer(_ret, retain: false, release: true);
   }
 
@@ -3878,8 +3889,6 @@ _objc_msgSend_r8gdi7(_class_Helpers, _sel_setExpressionWithTarget_field_expressi
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return Helpers.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of Helpers constructed with the default `new` method.
-  factory Helpers() => new$();
 
 }
 
@@ -3945,14 +3954,6 @@ _objc_msgSend_xtuoz7(_class_MapLibreRegistry, _sel_setContext_, value?.ref.point
   }
 
 
-  /// init
-  MapLibreRegistry init() {
-  objc.checkOsVersionInternal('MapLibreRegistry.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
-    return MapLibreRegistry.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// new
   static MapLibreRegistry new$() {
     final _ret = _objc_msgSend_151sglz(_class_MapLibreRegistry, _sel_new);
@@ -3970,6 +3971,19 @@ _objc_msgSend_xtuoz7(_class_MapLibreRegistry, _sel_setContext_, value?.ref.point
   /// alloc
   static MapLibreRegistry alloc() {
     final _ret = _objc_msgSend_151sglz(_class_MapLibreRegistry, _sel_alloc);
+    return MapLibreRegistry.castFromPointer(_ret, retain: false, release: true);
+  }
+  /// Returns a new instance of MapLibreRegistry constructed with the default `new` method.
+  factory MapLibreRegistry() => new$();
+
+}
+
+extension MapLibreRegistry$Methods on MapLibreRegistry {
+
+  /// init
+  MapLibreRegistry init() {
+  objc.checkOsVersionInternal('MapLibreRegistry.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
     return MapLibreRegistry.castFromPointer(_ret, retain: false, release: true);
   }
 
@@ -3993,8 +4007,6 @@ _objc_msgSend_xtuoz7(_class_MapLibreRegistry, _sel_setContext_, value?.ref.point
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MapLibreRegistry.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MapLibreRegistry constructed with the default `new` method.
-  factory MapLibreRegistry() => new$();
 
 }
 
@@ -5281,6 +5293,39 @@ class UIMenuElement extends objc.NSObject implements objc.NSCopying, objc.NSSecu
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_UIMenuElement);
   }
 
+  /// new
+  static UIMenuElement new$() {
+    final _ret = _objc_msgSend_151sglz(_class_UIMenuElement, _sel_new);
+    return UIMenuElement.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static UIMenuElement allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_UIMenuElement, _sel_allocWithZone_, zone);
+    return UIMenuElement.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static UIMenuElement alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_UIMenuElement, _sel_alloc);
+    return UIMenuElement.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// supportsSecureCoding
+  static bool getSupportsSecureCoding() {
+    return _objc_msgSend_91o635(_class_UIMenuElement, _sel_supportsSecureCoding);
+
+  }
+  /// Returns a new instance of UIMenuElement constructed with the default `new` method.
+  factory UIMenuElement() => new$();
+
+}
+
+extension UIMenuElement$Methods on UIMenuElement {
+
   /// title
   objc.NSString get title {
   objc.checkOsVersionInternal('UIMenuElement.title', iOS: (false, (13, 0, 0)));
@@ -5328,41 +5373,11 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setSubtitle_, value?.ref.pointer ?? 
   }
 
 
-  /// new
-  static UIMenuElement new$() {
-    final _ret = _objc_msgSend_151sglz(_class_UIMenuElement, _sel_new);
-    return UIMenuElement.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static UIMenuElement allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_UIMenuElement, _sel_allocWithZone_, zone);
-    return UIMenuElement.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static UIMenuElement alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_UIMenuElement, _sel_alloc);
-    return UIMenuElement.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// supportsSecureCoding
-  static bool getSupportsSecureCoding() {
-    return _objc_msgSend_91o635(_class_UIMenuElement, _sel_supportsSecureCoding);
-
-  }
-
-
   /// encodeWithCoder:
   void encodeWithCoder(objc.NSCoder coder) {
 _objc_msgSend_xtuoz7(this.ref.pointer, _sel_encodeWithCoder_, coder.ref.pointer);
 
   }
-  /// Returns a new instance of UIMenuElement constructed with the default `new` method.
-  factory UIMenuElement() => new$();
 
 }
 
@@ -5464,6 +5479,61 @@ class UIMenu extends UIMenuElement {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_UIMenu);
   }
 
+  /// menuWithChildren:
+  static UIMenu menuWithChildren(objc.NSArray children) {
+  objc.checkOsVersionInternal('UIMenu.menuWithChildren:', iOS: (false, (14, 0, 0)));
+    final _ret = _objc_msgSend_1sotr3r(_class_UIMenu, _sel_menuWithChildren_, children.ref.pointer);
+    return UIMenu.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// menuWithTitle:children:
+  static UIMenu menuWithTitle(objc.NSString title, {required objc.NSArray children}) {
+    final _ret = _objc_msgSend_15qeuct(_class_UIMenu, _sel_menuWithTitle_children_, title.ref.pointer, children.ref.pointer);
+    return UIMenu.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// menuWithTitle:image:identifier:options:children:
+  static UIMenu menuWithTitle$1(objc.NSString title, {UIImage? image,objc.NSString? identifier,required UIMenuOptions options,required objc.NSArray children}) {
+    final _ret = _objc_msgSend_zjuvxo(_class_UIMenu, _sel_menuWithTitle_image_identifier_options_children_, title.ref.pointer, image?.ref.pointer ?? ffi.nullptr, identifier?.ref.pointer ?? ffi.nullptr, options.value, children.ref.pointer);
+    return UIMenu.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// new
+  static UIMenu new$() {
+    final _ret = _objc_msgSend_151sglz(_class_UIMenu, _sel_new);
+    return UIMenu.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static UIMenu allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_UIMenu, _sel_allocWithZone_, zone);
+    return UIMenu.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static UIMenu alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_UIMenu, _sel_alloc);
+    return UIMenu.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// supportsSecureCoding
+  static bool getSupportsSecureCoding() {
+    return _objc_msgSend_91o635(_class_UIMenu, _sel_supportsSecureCoding);
+
+  }
+  /// Returns a new instance of UIMenu constructed with the default `new` method.
+  factory UIMenu() => new$();
+
+}
+
+extension UIMenu$Methods on UIMenu {
+
   /// identifier
   objc.NSString get identifier {
   objc.checkOsVersionInternal('UIMenu.identifier', iOS: (false, (13, 0, 0)));
@@ -5528,28 +5598,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setDisplayPreferences_, value?.ref.p
   }
 
 
-  /// menuWithChildren:
-  static UIMenu menuWithChildren(objc.NSArray children$1) {
-  objc.checkOsVersionInternal('UIMenu.menuWithChildren:', iOS: (false, (14, 0, 0)));
-    final _ret = _objc_msgSend_1sotr3r(_class_UIMenu, _sel_menuWithChildren_, children$1.ref.pointer);
-    return UIMenu.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// menuWithTitle:children:
-  static UIMenu menuWithTitle(objc.NSString title, {required objc.NSArray children$1}) {
-    final _ret = _objc_msgSend_15qeuct(_class_UIMenu, _sel_menuWithTitle_children_, title.ref.pointer, children$1.ref.pointer);
-    return UIMenu.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// menuWithTitle:image:identifier:options:children:
-  static UIMenu menuWithTitle$1(objc.NSString title, {UIImage? image,objc.NSString? identifier$1,required UIMenuOptions options$1,required objc.NSArray children$1}) {
-    final _ret = _objc_msgSend_zjuvxo(_class_UIMenu, _sel_menuWithTitle_image_identifier_options_children_, title.ref.pointer, image?.ref.pointer ?? ffi.nullptr, identifier$1?.ref.pointer ?? ffi.nullptr, options$1.value, children$1.ref.pointer);
-    return UIMenu.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
   /// initWithCoder:
   UIMenu? initWithCoder(objc.NSCoder coder) {
     final _ret = _objc_msgSend_1sotr3r(this.ref.retainAndReturnPointer(), _sel_initWithCoder_, coder.ref.pointer);
@@ -5565,42 +5613,12 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setDisplayPreferences_, value?.ref.p
   }
 
 
-  /// new
-  static UIMenu new$() {
-    final _ret = _objc_msgSend_151sglz(_class_UIMenu, _sel_new);
-    return UIMenu.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// menuByReplacingChildren:
   UIMenu menuByReplacingChildren(objc.NSArray newChildren) {
   objc.checkOsVersionInternal('UIMenu.menuByReplacingChildren:', iOS: (false, (13, 0, 0)));
     final _ret = _objc_msgSend_1sotr3r(this.ref.pointer, _sel_menuByReplacingChildren_, newChildren.ref.pointer);
     return UIMenu.castFromPointer(_ret, retain: true, release: true);
   }
-
-
-  /// allocWithZone:
-  static UIMenu allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_UIMenu, _sel_allocWithZone_, zone);
-    return UIMenu.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static UIMenu alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_UIMenu, _sel_alloc);
-    return UIMenu.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// supportsSecureCoding
-  static bool getSupportsSecureCoding() {
-    return _objc_msgSend_91o635(_class_UIMenu, _sel_supportsSecureCoding);
-
-  }
-  /// Returns a new instance of UIMenu constructed with the default `new` method.
-  factory UIMenu() => new$();
 
 }
 
@@ -9100,6 +9118,56 @@ class UIHoverStyle extends objc.NSObject implements objc.NSCopying {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_UIHoverStyle);
   }
 
+  /// styleWithEffect:shape:
+  static UIHoverStyle styleWithEffect(UIHoverEffect effect, {UIShape? shape}) {
+  objc.checkOsVersionInternal('UIHoverStyle.styleWithEffect:shape:', iOS: (false, (17, 0, 0)));
+    final _ret = _objc_msgSend_15qeuct(_class_UIHoverStyle, _sel_styleWithEffect_shape_, effect.ref.pointer, shape?.ref.pointer ?? ffi.nullptr);
+    return UIHoverStyle.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// styleWithShape:
+  static UIHoverStyle styleWithShape(UIShape? shape) {
+  objc.checkOsVersionInternal('UIHoverStyle.styleWithShape:', iOS: (false, (17, 0, 0)));
+    final _ret = _objc_msgSend_1sotr3r(_class_UIHoverStyle, _sel_styleWithShape_, shape?.ref.pointer ?? ffi.nullptr);
+    return UIHoverStyle.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// automaticStyle
+  static UIHoverStyle automaticStyle() {
+  objc.checkOsVersionInternal('UIHoverStyle.automaticStyle', iOS: (false, (17, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(_class_UIHoverStyle, _sel_automaticStyle);
+    return UIHoverStyle.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// new
+  static UIHoverStyle new$() {
+    final _ret = _objc_msgSend_151sglz(_class_UIHoverStyle, _sel_new);
+    return UIHoverStyle.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static UIHoverStyle allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_UIHoverStyle, _sel_allocWithZone_, zone);
+    return UIHoverStyle.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static UIHoverStyle alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_UIHoverStyle, _sel_alloc);
+    return UIHoverStyle.castFromPointer(_ret, retain: false, release: true);
+  }
+  /// Returns a new instance of UIHoverStyle constructed with the default `new` method.
+  factory UIHoverStyle() => new$();
+
+}
+
+extension UIHoverStyle$Methods on UIHoverStyle {
+
   /// effect
   UIHoverEffect get effect {
   objc.checkOsVersionInternal('UIHoverStyle.effect', iOS: (false, (17, 0, 0)));
@@ -9148,59 +9216,12 @@ _objc_msgSend_1s56lr9(this.ref.pointer, _sel_setEnabled_, value);
   }
 
 
-  /// styleWithEffect:shape:
-  static UIHoverStyle styleWithEffect(UIHoverEffect effect$1, {UIShape? shape$1}) {
-  objc.checkOsVersionInternal('UIHoverStyle.styleWithEffect:shape:', iOS: (false, (17, 0, 0)));
-    final _ret = _objc_msgSend_15qeuct(_class_UIHoverStyle, _sel_styleWithEffect_shape_, effect$1.ref.pointer, shape$1?.ref.pointer ?? ffi.nullptr);
-    return UIHoverStyle.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// styleWithShape:
-  static UIHoverStyle styleWithShape(UIShape? shape$1) {
-  objc.checkOsVersionInternal('UIHoverStyle.styleWithShape:', iOS: (false, (17, 0, 0)));
-    final _ret = _objc_msgSend_1sotr3r(_class_UIHoverStyle, _sel_styleWithShape_, shape$1?.ref.pointer ?? ffi.nullptr);
-    return UIHoverStyle.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// automaticStyle
-  static UIHoverStyle automaticStyle() {
-  objc.checkOsVersionInternal('UIHoverStyle.automaticStyle', iOS: (false, (17, 0, 0)));
-    final _ret = _objc_msgSend_151sglz(_class_UIHoverStyle, _sel_automaticStyle);
-    return UIHoverStyle.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
   /// init
   UIHoverStyle init() {
   objc.checkOsVersionInternal('UIHoverStyle.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
     final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
     return UIHoverStyle.castFromPointer(_ret, retain: false, release: true);
   }
-
-
-  /// new
-  static UIHoverStyle new$() {
-    final _ret = _objc_msgSend_151sglz(_class_UIHoverStyle, _sel_new);
-    return UIHoverStyle.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static UIHoverStyle allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_UIHoverStyle, _sel_allocWithZone_, zone);
-    return UIHoverStyle.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static UIHoverStyle alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_UIHoverStyle, _sel_alloc);
-    return UIHoverStyle.castFromPointer(_ret, retain: false, release: true);
-  }
-  /// Returns a new instance of UIHoverStyle constructed with the default `new` method.
-  factory UIHoverStyle() => new$();
 
 }
 
@@ -12056,6 +12077,95 @@ class UIView extends UIResponder implements objc.NSCoding, UIAppearance, UIAppea
   }
 
 
+  /// userInterfaceLayoutDirectionForSemanticContentAttribute:
+  static UIUserInterfaceLayoutDirection userInterfaceLayoutDirectionForSemanticContentAttribute(UISemanticContentAttribute attribute) {
+  objc.checkOsVersionInternal('UIView.userInterfaceLayoutDirectionForSemanticContentAttribute:', iOS: (false, (9, 0, 0)));
+    final _ret = _objc_msgSend_racczx(_class_UIView, _sel_userInterfaceLayoutDirectionForSemanticContentAttribute_, attribute.value);
+    return UIUserInterfaceLayoutDirection.fromValue(_ret);
+  }
+
+
+  /// userInterfaceLayoutDirectionForSemanticContentAttribute:relativeToLayoutDirection:
+  static UIUserInterfaceLayoutDirection userInterfaceLayoutDirectionForSemanticContentAttribute$1(UISemanticContentAttribute semanticContentAttribute, {required UIUserInterfaceLayoutDirection relativeToLayoutDirection}) {
+  objc.checkOsVersionInternal('UIView.userInterfaceLayoutDirectionForSemanticContentAttribute:relativeToLayoutDirection:', iOS: (false, (10, 0, 0)));
+    final _ret = _objc_msgSend_tz4p54(_class_UIView, _sel_userInterfaceLayoutDirectionForSemanticContentAttribute_relativeToLayoutDirection_, semanticContentAttribute.value, relativeToLayoutDirection.value);
+    return UIUserInterfaceLayoutDirection.fromValue(_ret);
+  }
+
+
+  /// new
+  static UIView new$() {
+    final _ret = _objc_msgSend_151sglz(_class_UIView, _sel_new);
+    return UIView.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static UIView allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_UIView, _sel_allocWithZone_, zone);
+    return UIView.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static UIView alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_UIView, _sel_alloc);
+    return UIView.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// appearance
+  static UIView appearance() {
+    final _ret = _objc_msgSend_151sglz(_class_UIView, _sel_appearance);
+    return UIView.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// appearanceWhenContainedIn:
+  static UIView appearanceWhenContainedIn(UIAppearanceContainer? ContainerClass) {
+  objc.checkOsVersionInternal('UIView.appearanceWhenContainedIn:', iOS: (false, (5, 0, 0)));
+    final _ret = _objc_msgSend_1sotr3r(_class_UIView, _sel_appearanceWhenContainedIn_, ContainerClass?.ref.pointer ?? ffi.nullptr);
+    return UIView.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// appearanceWhenContainedInInstancesOfClasses:
+  static UIView appearanceWhenContainedInInstancesOfClasses(objc.NSArray containerTypes) {
+  objc.checkOsVersionInternal('UIView.appearanceWhenContainedInInstancesOfClasses:', iOS: (false, (9, 0, 0)));
+    final _ret = _objc_msgSend_1sotr3r(_class_UIView, _sel_appearanceWhenContainedInInstancesOfClasses_, containerTypes.ref.pointer);
+    return UIView.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// appearanceForTraitCollection:
+  static UIView appearanceForTraitCollection(UITraitCollection trait) {
+  objc.checkOsVersionInternal('UIView.appearanceForTraitCollection:', iOS: (false, (8, 0, 0)));
+    final _ret = _objc_msgSend_1sotr3r(_class_UIView, _sel_appearanceForTraitCollection_, trait.ref.pointer);
+    return UIView.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// appearanceForTraitCollection:whenContainedIn:
+  static UIView appearanceForTraitCollection$1(UITraitCollection trait, {UIAppearanceContainer? whenContainedIn}) {
+  objc.checkOsVersionInternal('UIView.appearanceForTraitCollection:whenContainedIn:', iOS: (false, (8, 0, 0)));
+    final _ret = _objc_msgSend_15qeuct(_class_UIView, _sel_appearanceForTraitCollection_whenContainedIn_, trait.ref.pointer, whenContainedIn?.ref.pointer ?? ffi.nullptr);
+    return UIView.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// appearanceForTraitCollection:whenContainedInInstancesOfClasses:
+  static UIView appearanceForTraitCollection$2(UITraitCollection trait, {required objc.NSArray whenContainedInInstancesOfClasses}) {
+  objc.checkOsVersionInternal('UIView.appearanceForTraitCollection:whenContainedInInstancesOfClasses:', iOS: (false, (9, 0, 0)));
+    final _ret = _objc_msgSend_15qeuct(_class_UIView, _sel_appearanceForTraitCollection_whenContainedInInstancesOfClasses_, trait.ref.pointer, whenContainedInInstancesOfClasses.ref.pointer);
+    return UIView.castFromPointer(_ret, retain: true, release: true);
+  }
+  /// Returns a new instance of UIView constructed with the default `new` method.
+  factory UIView() => new$();
+
+}
+
+extension UIView$Methods on UIView {
+
   /// initWithFrame:
   UIView initWithFrame(objc.CGRect frame) {
   objc.checkOsVersionInternal('UIView.initWithFrame:', iOS: (false, (2, 0, 0)));
@@ -12191,22 +12301,6 @@ _objc_msgSend_162qwxu(this.ref.pointer, _sel_setSemanticContentAttribute_, value
   }
 
 
-  /// userInterfaceLayoutDirectionForSemanticContentAttribute:
-  static UIUserInterfaceLayoutDirection userInterfaceLayoutDirectionForSemanticContentAttribute(UISemanticContentAttribute attribute) {
-  objc.checkOsVersionInternal('UIView.userInterfaceLayoutDirectionForSemanticContentAttribute:', iOS: (false, (9, 0, 0)));
-    final _ret = _objc_msgSend_racczx(_class_UIView, _sel_userInterfaceLayoutDirectionForSemanticContentAttribute_, attribute.value);
-    return UIUserInterfaceLayoutDirection.fromValue(_ret);
-  }
-
-
-  /// userInterfaceLayoutDirectionForSemanticContentAttribute:relativeToLayoutDirection:
-  static UIUserInterfaceLayoutDirection userInterfaceLayoutDirectionForSemanticContentAttribute$1(UISemanticContentAttribute semanticContentAttribute$1, {required UIUserInterfaceLayoutDirection relativeToLayoutDirection}) {
-  objc.checkOsVersionInternal('UIView.userInterfaceLayoutDirectionForSemanticContentAttribute:relativeToLayoutDirection:', iOS: (false, (10, 0, 0)));
-    final _ret = _objc_msgSend_tz4p54(_class_UIView, _sel_userInterfaceLayoutDirectionForSemanticContentAttribute_relativeToLayoutDirection_, semanticContentAttribute$1.value, relativeToLayoutDirection.value);
-    return UIUserInterfaceLayoutDirection.fromValue(_ret);
-  }
-
-
   /// effectiveUserInterfaceLayoutDirection
   UIUserInterfaceLayoutDirection get effectiveUserInterfaceLayoutDirection {
   objc.checkOsVersionInternal('UIView.effectiveUserInterfaceLayoutDirection', iOS: (false, (10, 0, 0)));
@@ -12223,78 +12317,10 @@ _objc_msgSend_162qwxu(this.ref.pointer, _sel_setSemanticContentAttribute_, value
   }
 
 
-  /// new
-  static UIView new$() {
-    final _ret = _objc_msgSend_151sglz(_class_UIView, _sel_new);
-    return UIView.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static UIView allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_UIView, _sel_allocWithZone_, zone);
-    return UIView.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static UIView alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_UIView, _sel_alloc);
-    return UIView.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// encodeWithCoder:
   void encodeWithCoder(objc.NSCoder coder) {
 _objc_msgSend_xtuoz7(this.ref.pointer, _sel_encodeWithCoder_, coder.ref.pointer);
 
-  }
-
-
-  /// appearance
-  static UIView appearance() {
-    final _ret = _objc_msgSend_151sglz(_class_UIView, _sel_appearance);
-    return UIView.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// appearanceWhenContainedIn:
-  static UIView appearanceWhenContainedIn(UIAppearanceContainer? ContainerClass) {
-  objc.checkOsVersionInternal('UIView.appearanceWhenContainedIn:', iOS: (false, (5, 0, 0)));
-    final _ret = _objc_msgSend_1sotr3r(_class_UIView, _sel_appearanceWhenContainedIn_, ContainerClass?.ref.pointer ?? ffi.nullptr);
-    return UIView.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// appearanceWhenContainedInInstancesOfClasses:
-  static UIView appearanceWhenContainedInInstancesOfClasses(objc.NSArray containerTypes) {
-  objc.checkOsVersionInternal('UIView.appearanceWhenContainedInInstancesOfClasses:', iOS: (false, (9, 0, 0)));
-    final _ret = _objc_msgSend_1sotr3r(_class_UIView, _sel_appearanceWhenContainedInInstancesOfClasses_, containerTypes.ref.pointer);
-    return UIView.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// appearanceForTraitCollection:
-  static UIView appearanceForTraitCollection(UITraitCollection trait) {
-  objc.checkOsVersionInternal('UIView.appearanceForTraitCollection:', iOS: (false, (8, 0, 0)));
-    final _ret = _objc_msgSend_1sotr3r(_class_UIView, _sel_appearanceForTraitCollection_, trait.ref.pointer);
-    return UIView.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// appearanceForTraitCollection:whenContainedIn:
-  static UIView appearanceForTraitCollection$1(UITraitCollection trait, {UIAppearanceContainer? whenContainedIn}) {
-  objc.checkOsVersionInternal('UIView.appearanceForTraitCollection:whenContainedIn:', iOS: (false, (8, 0, 0)));
-    final _ret = _objc_msgSend_15qeuct(_class_UIView, _sel_appearanceForTraitCollection_whenContainedIn_, trait.ref.pointer, whenContainedIn?.ref.pointer ?? ffi.nullptr);
-    return UIView.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// appearanceForTraitCollection:whenContainedInInstancesOfClasses:
-  static UIView appearanceForTraitCollection$2(UITraitCollection trait, {required objc.NSArray whenContainedInInstancesOfClasses}) {
-  objc.checkOsVersionInternal('UIView.appearanceForTraitCollection:whenContainedInInstancesOfClasses:', iOS: (false, (9, 0, 0)));
-    final _ret = _objc_msgSend_15qeuct(_class_UIView, _sel_appearanceForTraitCollection_whenContainedInInstancesOfClasses_, trait.ref.pointer, whenContainedInInstancesOfClasses.ref.pointer);
-    return UIView.castFromPointer(_ret, retain: true, release: true);
   }
 
 
@@ -12684,8 +12710,6 @@ _objc_msgSend_1pl9qdv(this.ref.pointer, _sel_updateTraitsIfNeeded);
 _objc_msgSend_xtuoz7(this.ref.pointer, _sel_unregisterForTraitChanges_, registration.ref.pointer);
 
   }
-  /// Returns a new instance of UIView constructed with the default `new` method.
-  factory UIView() => new$();
 
 }
 
@@ -14082,6 +14106,32 @@ class UIResponder extends objc.NSObject implements UIResponderStandardEditAction
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_UIResponder);
   }
 
+  /// new
+  static UIResponder new$() {
+    final _ret = _objc_msgSend_151sglz(_class_UIResponder, _sel_new);
+    return UIResponder.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static UIResponder allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_UIResponder, _sel_allocWithZone_, zone);
+    return UIResponder.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static UIResponder alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_UIResponder, _sel_alloc);
+    return UIResponder.castFromPointer(_ret, retain: false, release: true);
+  }
+  /// Returns a new instance of UIResponder constructed with the default `new` method.
+  factory UIResponder() => new$();
+
+}
+
+extension UIResponder$Methods on UIResponder {
+
   /// nextResponder
   UIResponder? get nextResponder {
   objc.checkOsVersionInternal('UIResponder.nextResponder', iOS: (false, (2, 0, 0)));
@@ -14286,27 +14336,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_validateCommand_, command.ref.pointe
   UIResponder init() {
   objc.checkOsVersionInternal('UIResponder.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
     final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
-    return UIResponder.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// new
-  static UIResponder new$() {
-    final _ret = _objc_msgSend_151sglz(_class_UIResponder, _sel_new);
-    return UIResponder.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static UIResponder allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_UIResponder, _sel_allocWithZone_, zone);
-    return UIResponder.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static UIResponder alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_UIResponder, _sel_alloc);
     return UIResponder.castFromPointer(_ret, retain: false, release: true);
   }
 
@@ -14633,8 +14662,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_export_, sender?.ref.pointer ?? ffi.
 _objc_msgSend_xtuoz7(this.ref.pointer, _sel_showWritingTools_, sender.ref.pointer);
 
   }
-  /// Returns a new instance of UIResponder constructed with the default `new` method.
-  factory UIResponder() => new$();
 
 }
 
@@ -16234,6 +16261,62 @@ class UIAction extends UIMenuElement implements UIMenuLeaf {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_UIAction);
   }
 
+  /// actionWithHandler:
+  static UIAction actionWithHandler(objc.ObjCBlock<ffi.Void Function(UIAction)> handler) {
+  objc.checkOsVersionInternal('UIAction.actionWithHandler:', iOS: (false, (14, 0, 0)));
+    final _ret = _objc_msgSend_nnxkei(_class_UIAction, _sel_actionWithHandler_, handler.ref.pointer);
+    return UIAction.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// actionWithTitle:image:identifier:handler:
+  static UIAction actionWithTitle(objc.NSString title, {UIImage? image,objc.NSString? identifier,required objc.ObjCBlock<ffi.Void Function(UIAction)> handler}) {
+    final _ret = _objc_msgSend_bpwlds(_class_UIAction, _sel_actionWithTitle_image_identifier_handler_, title.ref.pointer, image?.ref.pointer ?? ffi.nullptr, identifier?.ref.pointer ?? ffi.nullptr, handler.ref.pointer);
+    return UIAction.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// new
+  static UIAction new$() {
+    final _ret = _objc_msgSend_151sglz(_class_UIAction, _sel_new);
+    return UIAction.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static UIAction allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_UIAction, _sel_allocWithZone_, zone);
+    return UIAction.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static UIAction alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_UIAction, _sel_alloc);
+    return UIAction.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// supportsSecureCoding
+  static bool getSupportsSecureCoding() {
+    return _objc_msgSend_91o635(_class_UIAction, _sel_supportsSecureCoding);
+
+  }
+
+
+  /// captureTextFromCameraActionForResponder:identifier:
+  static UIAction captureTextFromCameraActionForResponder(UIResponder responder, {objc.NSString? identifier}) {
+  objc.checkOsVersionInternal('UIAction.captureTextFromCameraActionForResponder:identifier:', iOS: (false, (15, 0, 0)));
+    final _ret = _objc_msgSend_15qeuct(_class_UIAction, _sel_captureTextFromCameraActionForResponder_identifier_, responder.ref.pointer, identifier?.ref.pointer ?? ffi.nullptr);
+    return UIAction.castFromPointer(_ret, retain: true, release: true);
+  }
+  /// Returns a new instance of UIAction constructed with the default `new` method.
+  factory UIAction() => new$();
+
+}
+
+extension UIAction$Methods on UIAction {
+
   /// title
   objc.NSString get title {
   objc.checkOsVersionInternal('UIAction.title', iOS: (false, (16, 0, 0)));
@@ -16330,21 +16413,6 @@ _objc_msgSend_1qgnjih(this.ref.pointer, _sel_setState_, value.value);
   }
 
 
-  /// actionWithHandler:
-  static UIAction actionWithHandler(objc.ObjCBlock<ffi.Void Function(UIAction)> handler) {
-  objc.checkOsVersionInternal('UIAction.actionWithHandler:', iOS: (false, (14, 0, 0)));
-    final _ret = _objc_msgSend_nnxkei(_class_UIAction, _sel_actionWithHandler_, handler.ref.pointer);
-    return UIAction.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// actionWithTitle:image:identifier:handler:
-  static UIAction actionWithTitle(objc.NSString title$1, {UIImage? image$1,objc.NSString? identifier$1,required objc.ObjCBlock<ffi.Void Function(UIAction)> handler}) {
-    final _ret = _objc_msgSend_bpwlds(_class_UIAction, _sel_actionWithTitle_image_identifier_handler_, title$1.ref.pointer, image$1?.ref.pointer ?? ffi.nullptr, identifier$1?.ref.pointer ?? ffi.nullptr, handler.ref.pointer);
-    return UIAction.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
   /// init
   UIAction init() {
   objc.checkOsVersionInternal('UIAction.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
@@ -16353,38 +16421,10 @@ _objc_msgSend_1qgnjih(this.ref.pointer, _sel_setState_, value.value);
   }
 
 
-  /// new
-  static UIAction new$() {
-    final _ret = _objc_msgSend_151sglz(_class_UIAction, _sel_new);
-    return UIAction.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// initWithCoder:
   UIAction? initWithCoder(objc.NSCoder coder) {
     final _ret = _objc_msgSend_1sotr3r(this.ref.retainAndReturnPointer(), _sel_initWithCoder_, coder.ref.pointer);
     return _ret.address == 0 ? null : UIAction.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static UIAction allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_UIAction, _sel_allocWithZone_, zone);
-    return UIAction.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static UIAction alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_UIAction, _sel_alloc);
-    return UIAction.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// supportsSecureCoding
-  static bool getSupportsSecureCoding() {
-    return _objc_msgSend_91o635(_class_UIAction, _sel_supportsSecureCoding);
-
   }
 
 
@@ -16418,16 +16458,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setSelectedImage_, value?.ref.pointe
 _objc_msgSend_pfv6jd(this.ref.pointer, _sel_performWithSender_target_, sender$1?.ref.pointer ?? ffi.nullptr, target?.ref.pointer ?? ffi.nullptr);
 
   }
-
-
-  /// captureTextFromCameraActionForResponder:identifier:
-  static UIAction captureTextFromCameraActionForResponder(UIResponder responder, {objc.NSString? identifier$1}) {
-  objc.checkOsVersionInternal('UIAction.captureTextFromCameraActionForResponder:identifier:', iOS: (false, (15, 0, 0)));
-    final _ret = _objc_msgSend_15qeuct(_class_UIAction, _sel_captureTextFromCameraActionForResponder_identifier_, responder.ref.pointer, identifier$1?.ref.pointer ?? ffi.nullptr);
-    return UIAction.castFromPointer(_ret, retain: true, release: true);
-  }
-  /// Returns a new instance of UIAction constructed with the default `new` method.
-  factory UIAction() => new$();
 
 }
 
@@ -18333,6 +18363,33 @@ class UIImageView extends UIView {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_UIImageView);
   }
 
+  /// layerClass
+  static objc.ObjCObjectBase getLayerClass() {
+  objc.checkOsVersionInternal('UIImageView.layerClass', iOS: (false, (2, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(_class_UIImageView, _sel_layerClass);
+    return objc.ObjCObjectBase(_ret, retain: true, release: true);
+  }
+
+
+  /// userInterfaceLayoutDirectionForSemanticContentAttribute:
+  static UIUserInterfaceLayoutDirection userInterfaceLayoutDirectionForSemanticContentAttribute(UISemanticContentAttribute attribute) {
+  objc.checkOsVersionInternal('UIImageView.userInterfaceLayoutDirectionForSemanticContentAttribute:', iOS: (false, (9, 0, 0)));
+    final _ret = _objc_msgSend_racczx(_class_UIImageView, _sel_userInterfaceLayoutDirectionForSemanticContentAttribute_, attribute.value);
+    return UIUserInterfaceLayoutDirection.fromValue(_ret);
+  }
+
+
+  /// userInterfaceLayoutDirectionForSemanticContentAttribute:relativeToLayoutDirection:
+  static UIUserInterfaceLayoutDirection userInterfaceLayoutDirectionForSemanticContentAttribute$1(UISemanticContentAttribute semanticContentAttribute, {required UIUserInterfaceLayoutDirection relativeToLayoutDirection}) {
+  objc.checkOsVersionInternal('UIImageView.userInterfaceLayoutDirectionForSemanticContentAttribute:relativeToLayoutDirection:', iOS: (false, (10, 0, 0)));
+    final _ret = _objc_msgSend_tz4p54(_class_UIImageView, _sel_userInterfaceLayoutDirectionForSemanticContentAttribute_relativeToLayoutDirection_, semanticContentAttribute.value, relativeToLayoutDirection.value);
+    return UIUserInterfaceLayoutDirection.fromValue(_ret);
+  }
+
+}
+
+extension UIImageView$Methods on UIImageView {
+
   /// initWithImage:
   UIImageView initWithImage(UIImage? image) {
   objc.checkOsVersionInternal('UIImageView.initWithImage:', iOS: (false, (2, 0, 0)));
@@ -18605,14 +18662,6 @@ _objc_msgSend_1s56lr9(this.ref.pointer, _sel_setMasksFocusEffectToContents_, val
   }
 
 
-  /// layerClass
-  static objc.ObjCObjectBase getLayerClass() {
-  objc.checkOsVersionInternal('UIImageView.layerClass', iOS: (false, (2, 0, 0)));
-    final _ret = _objc_msgSend_151sglz(_class_UIImageView, _sel_layerClass);
-    return objc.ObjCObjectBase(_ret, retain: true, release: true);
-  }
-
-
   /// initWithFrame:
   UIImageView initWithFrame(objc.CGRect frame) {
   objc.checkOsVersionInternal('UIImageView.initWithFrame:', iOS: (false, (2, 0, 0)));
@@ -18626,22 +18675,6 @@ _objc_msgSend_1s56lr9(this.ref.pointer, _sel_setMasksFocusEffectToContents_, val
   objc.checkOsVersionInternal('UIImageView.initWithCoder:', iOS: (false, (2, 0, 0)));
     final _ret = _objc_msgSend_1sotr3r(this.ref.retainAndReturnPointer(), _sel_initWithCoder_, coder.ref.pointer);
     return _ret.address == 0 ? null : UIImageView.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// userInterfaceLayoutDirectionForSemanticContentAttribute:
-  static UIUserInterfaceLayoutDirection userInterfaceLayoutDirectionForSemanticContentAttribute(UISemanticContentAttribute attribute) {
-  objc.checkOsVersionInternal('UIImageView.userInterfaceLayoutDirectionForSemanticContentAttribute:', iOS: (false, (9, 0, 0)));
-    final _ret = _objc_msgSend_racczx(_class_UIImageView, _sel_userInterfaceLayoutDirectionForSemanticContentAttribute_, attribute.value);
-    return UIUserInterfaceLayoutDirection.fromValue(_ret);
-  }
-
-
-  /// userInterfaceLayoutDirectionForSemanticContentAttribute:relativeToLayoutDirection:
-  static UIUserInterfaceLayoutDirection userInterfaceLayoutDirectionForSemanticContentAttribute$1(UISemanticContentAttribute semanticContentAttribute$1, {required UIUserInterfaceLayoutDirection relativeToLayoutDirection}) {
-  objc.checkOsVersionInternal('UIImageView.userInterfaceLayoutDirectionForSemanticContentAttribute:relativeToLayoutDirection:', iOS: (false, (10, 0, 0)));
-    final _ret = _objc_msgSend_tz4p54(_class_UIImageView, _sel_userInterfaceLayoutDirectionForSemanticContentAttribute_relativeToLayoutDirection_, semanticContentAttribute$1.value, relativeToLayoutDirection.value);
-    return UIUserInterfaceLayoutDirection.fromValue(_ret);
   }
 
 
@@ -19045,14 +19078,6 @@ class UIPointerShape extends objc.NSObject implements objc.NSCopying {
   }
 
 
-  /// init
-  UIPointerShape init() {
-  objc.checkOsVersionInternal('UIPointerShape.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
-    return UIPointerShape.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// new
   static UIPointerShape new$() {
     final _ret = _objc_msgSend_151sglz(_class_UIPointerShape, _sel_new);
@@ -19070,6 +19095,19 @@ class UIPointerShape extends objc.NSObject implements objc.NSCopying {
   /// alloc
   static UIPointerShape alloc() {
     final _ret = _objc_msgSend_151sglz(_class_UIPointerShape, _sel_alloc);
+    return UIPointerShape.castFromPointer(_ret, retain: false, release: true);
+  }
+  /// Returns a new instance of UIPointerShape constructed with the default `new` method.
+  factory UIPointerShape() => new$();
+
+}
+
+extension UIPointerShape$Methods on UIPointerShape {
+
+  /// init
+  UIPointerShape init() {
+  objc.checkOsVersionInternal('UIPointerShape.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
     return UIPointerShape.castFromPointer(_ret, retain: false, release: true);
   }
 
@@ -19093,8 +19131,6 @@ class UIPointerShape extends objc.NSObject implements objc.NSCopying {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return UIPointerShape.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of UIPointerShape constructed with the default `new` method.
-  factory UIPointerShape() => new$();
 
 }
 
@@ -19122,26 +19158,10 @@ class UIPointerStyle extends UIHoverStyle implements objc.NSCopying {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_UIPointerStyle);
   }
 
-  /// accessories
-  objc.NSArray get accessories {
-  objc.checkOsVersionInternal('UIPointerStyle.accessories', iOS: (false, (15, 0, 0)));
-    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_accessories);
-    return objc.NSArray.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// setAccessories:
-  set accessories(objc.NSArray value) {
-  objc.checkOsVersionInternal('UIPointerStyle.setAccessories:', iOS: (false, (15, 0, 0)));
-_objc_msgSend_xtuoz7(this.ref.pointer, _sel_setAccessories_, value.ref.pointer);
-
-  }
-
-
   /// styleWithEffect:shape:
-  static UIPointerStyle styleWithEffect(UIHoverEffect effect$1, {UIShape? shape$1}) {
+  static UIPointerStyle styleWithEffect(UIHoverEffect effect, {UIShape? shape}) {
   objc.checkOsVersionInternal('UIPointerStyle.styleWithEffect:shape:', iOS: (false, (17, 0, 0)));
-    final _ret = _objc_msgSend_15qeuct(_class_UIPointerStyle, _sel_styleWithEffect_shape_, effect$1.ref.pointer, shape$1?.ref.pointer ?? ffi.nullptr);
+    final _ret = _objc_msgSend_15qeuct(_class_UIPointerStyle, _sel_styleWithEffect_shape_, effect.ref.pointer, shape?.ref.pointer ?? ffi.nullptr);
     return UIPointerStyle.castFromPointer(_ret, retain: true, release: true);
   }
 
@@ -19170,14 +19190,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setAccessories_, value.ref.pointer);
   }
 
 
-  /// init
-  UIPointerStyle init() {
-  objc.checkOsVersionInternal('UIPointerStyle.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
-    return UIPointerStyle.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// new
   static UIPointerStyle new$() {
     final _ret = _objc_msgSend_151sglz(_class_UIPointerStyle, _sel_new);
@@ -19186,9 +19198,9 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setAccessories_, value.ref.pointer);
 
 
   /// styleWithShape:
-  static UIPointerStyle styleWithShape(UIShape? shape$1) {
+  static UIPointerStyle styleWithShape(UIShape? shape) {
   objc.checkOsVersionInternal('UIPointerStyle.styleWithShape:', iOS: (false, (17, 0, 0)));
-    final _ret = _objc_msgSend_1sotr3r(_class_UIPointerStyle, _sel_styleWithShape_, shape$1?.ref.pointer ?? ffi.nullptr);
+    final _ret = _objc_msgSend_1sotr3r(_class_UIPointerStyle, _sel_styleWithShape_, shape?.ref.pointer ?? ffi.nullptr);
     return UIPointerStyle.castFromPointer(_ret, retain: true, release: true);
   }
 
@@ -19215,6 +19227,33 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setAccessories_, value.ref.pointer);
   }
   /// Returns a new instance of UIPointerStyle constructed with the default `new` method.
   factory UIPointerStyle() => new$();
+
+}
+
+extension UIPointerStyle$Methods on UIPointerStyle {
+
+  /// accessories
+  objc.NSArray get accessories {
+  objc.checkOsVersionInternal('UIPointerStyle.accessories', iOS: (false, (15, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_accessories);
+    return objc.NSArray.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// setAccessories:
+  set accessories(objc.NSArray value) {
+  objc.checkOsVersionInternal('UIPointerStyle.setAccessories:', iOS: (false, (15, 0, 0)));
+_objc_msgSend_xtuoz7(this.ref.pointer, _sel_setAccessories_, value.ref.pointer);
+
+  }
+
+
+  /// init
+  UIPointerStyle init() {
+  objc.checkOsVersionInternal('UIPointerStyle.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
+    return UIPointerStyle.castFromPointer(_ret, retain: false, release: true);
+  }
 
 }
 
@@ -19283,27 +19322,11 @@ class UIPointerEffect extends objc.NSObject implements objc.NSCopying, UIHoverEf
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_UIPointerEffect);
   }
 
-  /// preview
-  UITargetedPreview get preview {
-  objc.checkOsVersionInternal('UIPointerEffect.preview', iOS: (false, (13, 4, 0)));
-    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_preview);
-    return UITargetedPreview.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
   /// effectWithPreview:
-  static UIPointerEffect effectWithPreview(UITargetedPreview preview$1) {
+  static UIPointerEffect effectWithPreview(UITargetedPreview preview) {
   objc.checkOsVersionInternal('UIPointerEffect.effectWithPreview:', iOS: (false, (13, 4, 0)));
-    final _ret = _objc_msgSend_1sotr3r(_class_UIPointerEffect, _sel_effectWithPreview_, preview$1.ref.pointer);
+    final _ret = _objc_msgSend_1sotr3r(_class_UIPointerEffect, _sel_effectWithPreview_, preview.ref.pointer);
     return UIPointerEffect.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// init
-  UIPointerEffect init() {
-  objc.checkOsVersionInternal('UIPointerEffect.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
-    return UIPointerEffect.castFromPointer(_ret, retain: false, release: true);
   }
 
 
@@ -19324,6 +19347,27 @@ class UIPointerEffect extends objc.NSObject implements objc.NSCopying, UIHoverEf
   /// alloc
   static UIPointerEffect alloc() {
     final _ret = _objc_msgSend_151sglz(_class_UIPointerEffect, _sel_alloc);
+    return UIPointerEffect.castFromPointer(_ret, retain: false, release: true);
+  }
+  /// Returns a new instance of UIPointerEffect constructed with the default `new` method.
+  factory UIPointerEffect() => new$();
+
+}
+
+extension UIPointerEffect$Methods on UIPointerEffect {
+
+  /// preview
+  UITargetedPreview get preview {
+  objc.checkOsVersionInternal('UIPointerEffect.preview', iOS: (false, (13, 4, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_preview);
+    return UITargetedPreview.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// init
+  UIPointerEffect init() {
+  objc.checkOsVersionInternal('UIPointerEffect.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
     return UIPointerEffect.castFromPointer(_ret, retain: false, release: true);
   }
 
@@ -19347,8 +19391,6 @@ class UIPointerEffect extends objc.NSObject implements objc.NSCopying, UIHoverEf
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return UIPointerEffect.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of UIPointerEffect constructed with the default `new` method.
-  factory UIPointerEffect() => new$();
 
 }
 
@@ -20457,6 +20499,39 @@ class UIViewConfigurationState extends objc.NSObject implements UIConfigurationS
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_UIViewConfigurationState);
   }
 
+  /// new
+  static UIViewConfigurationState new$() {
+    final _ret = _objc_msgSend_151sglz(_class_UIViewConfigurationState, _sel_new);
+    return UIViewConfigurationState.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static UIViewConfigurationState allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_UIViewConfigurationState, _sel_allocWithZone_, zone);
+    return UIViewConfigurationState.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static UIViewConfigurationState alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_UIViewConfigurationState, _sel_alloc);
+    return UIViewConfigurationState.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// supportsSecureCoding
+  static bool getSupportsSecureCoding() {
+    return _objc_msgSend_91o635(_class_UIViewConfigurationState, _sel_supportsSecureCoding);
+
+  }
+  /// Returns a new instance of UIViewConfigurationState constructed with the default `new` method.
+  factory UIViewConfigurationState() => new$();
+
+}
+
+extension UIViewConfigurationState$Methods on UIViewConfigurationState {
+
   /// initWithTraitCollection:
   UIViewConfigurationState initWithTraitCollection(UITraitCollection traitCollection) {
   objc.checkOsVersionInternal('UIViewConfigurationState.initWithTraitCollection:', iOS: (false, (14, 0, 0)));
@@ -20476,13 +20551,6 @@ class UIViewConfigurationState extends objc.NSObject implements UIConfigurationS
   UIViewConfigurationState init() {
   objc.checkOsVersionInternal('UIViewConfigurationState.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
     final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
-    return UIViewConfigurationState.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// new
-  static UIViewConfigurationState new$() {
-    final _ret = _objc_msgSend_151sglz(_class_UIViewConfigurationState, _sel_new);
     return UIViewConfigurationState.castFromPointer(_ret, retain: false, release: true);
   }
 
@@ -20583,20 +20651,6 @@ _objc_msgSend_1s56lr9(this.ref.pointer, _sel_setPinned_, value);
   }
 
 
-  /// allocWithZone:
-  static UIViewConfigurationState allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_UIViewConfigurationState, _sel_allocWithZone_, zone);
-    return UIViewConfigurationState.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static UIViewConfigurationState alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_UIViewConfigurationState, _sel_alloc);
-    return UIViewConfigurationState.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// customStateForKey:
   objc.ObjCObjectBase? customStateForKey(objc.NSString key) {
   objc.checkOsVersionInternal('UIViewConfigurationState.customStateForKey:', iOS: (false, (14, 0, 0)));
@@ -20629,20 +20683,11 @@ _objc_msgSend_pfv6jd(this.ref.pointer, _sel_setObject_forKeyedSubscript_, obj?.r
   }
 
 
-  /// supportsSecureCoding
-  static bool getSupportsSecureCoding() {
-    return _objc_msgSend_91o635(_class_UIViewConfigurationState, _sel_supportsSecureCoding);
-
-  }
-
-
   /// encodeWithCoder:
   void encodeWithCoder(objc.NSCoder coder) {
 _objc_msgSend_xtuoz7(this.ref.pointer, _sel_encodeWithCoder_, coder.ref.pointer);
 
   }
-  /// Returns a new instance of UIViewConfigurationState constructed with the default `new` method.
-  factory UIViewConfigurationState() => new$();
 
 }
 
@@ -20718,6 +20763,39 @@ class UICellConfigurationState extends UIViewConfigurationState {
   static bool isInstance(objc.ObjCObjectBase obj) {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_UICellConfigurationState);
   }
+
+  /// new
+  static UICellConfigurationState new$() {
+    final _ret = _objc_msgSend_151sglz(_class_UICellConfigurationState, _sel_new);
+    return UICellConfigurationState.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static UICellConfigurationState allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_UICellConfigurationState, _sel_allocWithZone_, zone);
+    return UICellConfigurationState.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static UICellConfigurationState alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_UICellConfigurationState, _sel_alloc);
+    return UICellConfigurationState.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// supportsSecureCoding
+  static bool getSupportsSecureCoding() {
+    return _objc_msgSend_91o635(_class_UICellConfigurationState, _sel_supportsSecureCoding);
+
+  }
+  /// Returns a new instance of UICellConfigurationState constructed with the default `new` method.
+  factory UICellConfigurationState() => new$();
+
+}
+
+extension UICellConfigurationState$Methods on UICellConfigurationState {
 
   /// isEditing
   bool get editing {
@@ -20832,36 +20910,6 @@ _objc_msgSend_9t0hj7(this.ref.pointer, _sel_setCellDropState_, value.value);
     final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
     return UICellConfigurationState.castFromPointer(_ret, retain: false, release: true);
   }
-
-
-  /// new
-  static UICellConfigurationState new$() {
-    final _ret = _objc_msgSend_151sglz(_class_UICellConfigurationState, _sel_new);
-    return UICellConfigurationState.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static UICellConfigurationState allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_UICellConfigurationState, _sel_allocWithZone_, zone);
-    return UICellConfigurationState.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static UICellConfigurationState alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_UICellConfigurationState, _sel_alloc);
-    return UICellConfigurationState.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// supportsSecureCoding
-  static bool getSupportsSecureCoding() {
-    return _objc_msgSend_91o635(_class_UICellConfigurationState, _sel_supportsSecureCoding);
-
-  }
-  /// Returns a new instance of UICellConfigurationState constructed with the default `new` method.
-  factory UICellConfigurationState() => new$();
 
 }
 
@@ -21287,6 +21335,33 @@ class UITableViewCell extends UIView implements objc.NSCoding, UIGestureRecogniz
   static bool isInstance(objc.ObjCObjectBase obj) {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_UITableViewCell);
   }
+
+  /// layerClass
+  static objc.ObjCObjectBase getLayerClass() {
+  objc.checkOsVersionInternal('UITableViewCell.layerClass', iOS: (false, (2, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(_class_UITableViewCell, _sel_layerClass);
+    return objc.ObjCObjectBase(_ret, retain: true, release: true);
+  }
+
+
+  /// userInterfaceLayoutDirectionForSemanticContentAttribute:
+  static UIUserInterfaceLayoutDirection userInterfaceLayoutDirectionForSemanticContentAttribute(UISemanticContentAttribute attribute) {
+  objc.checkOsVersionInternal('UITableViewCell.userInterfaceLayoutDirectionForSemanticContentAttribute:', iOS: (false, (9, 0, 0)));
+    final _ret = _objc_msgSend_racczx(_class_UITableViewCell, _sel_userInterfaceLayoutDirectionForSemanticContentAttribute_, attribute.value);
+    return UIUserInterfaceLayoutDirection.fromValue(_ret);
+  }
+
+
+  /// userInterfaceLayoutDirectionForSemanticContentAttribute:relativeToLayoutDirection:
+  static UIUserInterfaceLayoutDirection userInterfaceLayoutDirectionForSemanticContentAttribute$1(UISemanticContentAttribute semanticContentAttribute, {required UIUserInterfaceLayoutDirection relativeToLayoutDirection}) {
+  objc.checkOsVersionInternal('UITableViewCell.userInterfaceLayoutDirectionForSemanticContentAttribute:relativeToLayoutDirection:', iOS: (false, (10, 0, 0)));
+    final _ret = _objc_msgSend_tz4p54(_class_UITableViewCell, _sel_userInterfaceLayoutDirectionForSemanticContentAttribute_relativeToLayoutDirection_, semanticContentAttribute.value, relativeToLayoutDirection.value);
+    return UIUserInterfaceLayoutDirection.fromValue(_ret);
+  }
+
+}
+
+extension UITableViewCell$Methods on UITableViewCell {
 
   /// initWithStyle:reuseIdentifier:
   UITableViewCell initWithStyle(UITableViewCellStyle style, {objc.NSString? reuseIdentifier}) {
@@ -21827,35 +21902,11 @@ _objc_msgSend_1s56lr9(this.ref.pointer, _sel_setUserInteractionEnabledWhileDragg
   }
 
 
-  /// layerClass
-  static objc.ObjCObjectBase getLayerClass() {
-  objc.checkOsVersionInternal('UITableViewCell.layerClass', iOS: (false, (2, 0, 0)));
-    final _ret = _objc_msgSend_151sglz(_class_UITableViewCell, _sel_layerClass);
-    return objc.ObjCObjectBase(_ret, retain: true, release: true);
-  }
-
-
   /// initWithFrame:
   UITableViewCell initWithFrame(objc.CGRect frame) {
   objc.checkOsVersionInternal('UITableViewCell.initWithFrame:', iOS: (false, (2, 0, 0)));
     final _ret = _objc_msgSend_15yz4e6(this.ref.retainAndReturnPointer(), _sel_initWithFrame_, frame);
     return UITableViewCell.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// userInterfaceLayoutDirectionForSemanticContentAttribute:
-  static UIUserInterfaceLayoutDirection userInterfaceLayoutDirectionForSemanticContentAttribute(UISemanticContentAttribute attribute) {
-  objc.checkOsVersionInternal('UITableViewCell.userInterfaceLayoutDirectionForSemanticContentAttribute:', iOS: (false, (9, 0, 0)));
-    final _ret = _objc_msgSend_racczx(_class_UITableViewCell, _sel_userInterfaceLayoutDirectionForSemanticContentAttribute_, attribute.value);
-    return UIUserInterfaceLayoutDirection.fromValue(_ret);
-  }
-
-
-  /// userInterfaceLayoutDirectionForSemanticContentAttribute:relativeToLayoutDirection:
-  static UIUserInterfaceLayoutDirection userInterfaceLayoutDirectionForSemanticContentAttribute$1(UISemanticContentAttribute semanticContentAttribute$1, {required UIUserInterfaceLayoutDirection relativeToLayoutDirection}) {
-  objc.checkOsVersionInternal('UITableViewCell.userInterfaceLayoutDirectionForSemanticContentAttribute:relativeToLayoutDirection:', iOS: (false, (10, 0, 0)));
-    final _ret = _objc_msgSend_tz4p54(_class_UITableViewCell, _sel_userInterfaceLayoutDirectionForSemanticContentAttribute_relativeToLayoutDirection_, semanticContentAttribute$1.value, relativeToLayoutDirection.value);
-    return UIUserInterfaceLayoutDirection.fromValue(_ret);
   }
 
 
@@ -23457,6 +23508,33 @@ class UITableViewHeaderFooterView extends UIView {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_UITableViewHeaderFooterView);
   }
 
+  /// layerClass
+  static objc.ObjCObjectBase getLayerClass() {
+  objc.checkOsVersionInternal('UITableViewHeaderFooterView.layerClass', iOS: (false, (2, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(_class_UITableViewHeaderFooterView, _sel_layerClass);
+    return objc.ObjCObjectBase(_ret, retain: true, release: true);
+  }
+
+
+  /// userInterfaceLayoutDirectionForSemanticContentAttribute:
+  static UIUserInterfaceLayoutDirection userInterfaceLayoutDirectionForSemanticContentAttribute(UISemanticContentAttribute attribute) {
+  objc.checkOsVersionInternal('UITableViewHeaderFooterView.userInterfaceLayoutDirectionForSemanticContentAttribute:', iOS: (false, (9, 0, 0)));
+    final _ret = _objc_msgSend_racczx(_class_UITableViewHeaderFooterView, _sel_userInterfaceLayoutDirectionForSemanticContentAttribute_, attribute.value);
+    return UIUserInterfaceLayoutDirection.fromValue(_ret);
+  }
+
+
+  /// userInterfaceLayoutDirectionForSemanticContentAttribute:relativeToLayoutDirection:
+  static UIUserInterfaceLayoutDirection userInterfaceLayoutDirectionForSemanticContentAttribute$1(UISemanticContentAttribute semanticContentAttribute, {required UIUserInterfaceLayoutDirection relativeToLayoutDirection}) {
+  objc.checkOsVersionInternal('UITableViewHeaderFooterView.userInterfaceLayoutDirectionForSemanticContentAttribute:relativeToLayoutDirection:', iOS: (false, (10, 0, 0)));
+    final _ret = _objc_msgSend_tz4p54(_class_UITableViewHeaderFooterView, _sel_userInterfaceLayoutDirectionForSemanticContentAttribute_relativeToLayoutDirection_, semanticContentAttribute.value, relativeToLayoutDirection.value);
+    return UIUserInterfaceLayoutDirection.fromValue(_ret);
+  }
+
+}
+
+extension UITableViewHeaderFooterView$Methods on UITableViewHeaderFooterView {
+
   /// initWithReuseIdentifier:
   UITableViewHeaderFooterView initWithReuseIdentifier(objc.NSString? reuseIdentifier) {
   objc.checkOsVersionInternal('UITableViewHeaderFooterView.initWithReuseIdentifier:', iOS: (false, (6, 0, 0)));
@@ -23649,35 +23727,11 @@ _objc_msgSend_1pl9qdv(this.ref.pointer, _sel_prepareForReuse);
   }
 
 
-  /// layerClass
-  static objc.ObjCObjectBase getLayerClass() {
-  objc.checkOsVersionInternal('UITableViewHeaderFooterView.layerClass', iOS: (false, (2, 0, 0)));
-    final _ret = _objc_msgSend_151sglz(_class_UITableViewHeaderFooterView, _sel_layerClass);
-    return objc.ObjCObjectBase(_ret, retain: true, release: true);
-  }
-
-
   /// initWithFrame:
   UITableViewHeaderFooterView initWithFrame(objc.CGRect frame) {
   objc.checkOsVersionInternal('UITableViewHeaderFooterView.initWithFrame:', iOS: (false, (2, 0, 0)));
     final _ret = _objc_msgSend_15yz4e6(this.ref.retainAndReturnPointer(), _sel_initWithFrame_, frame);
     return UITableViewHeaderFooterView.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// userInterfaceLayoutDirectionForSemanticContentAttribute:
-  static UIUserInterfaceLayoutDirection userInterfaceLayoutDirectionForSemanticContentAttribute(UISemanticContentAttribute attribute) {
-  objc.checkOsVersionInternal('UITableViewHeaderFooterView.userInterfaceLayoutDirectionForSemanticContentAttribute:', iOS: (false, (9, 0, 0)));
-    final _ret = _objc_msgSend_racczx(_class_UITableViewHeaderFooterView, _sel_userInterfaceLayoutDirectionForSemanticContentAttribute_, attribute.value);
-    return UIUserInterfaceLayoutDirection.fromValue(_ret);
-  }
-
-
-  /// userInterfaceLayoutDirectionForSemanticContentAttribute:relativeToLayoutDirection:
-  static UIUserInterfaceLayoutDirection userInterfaceLayoutDirectionForSemanticContentAttribute$1(UISemanticContentAttribute semanticContentAttribute$1, {required UIUserInterfaceLayoutDirection relativeToLayoutDirection}) {
-  objc.checkOsVersionInternal('UITableViewHeaderFooterView.userInterfaceLayoutDirectionForSemanticContentAttribute:relativeToLayoutDirection:', iOS: (false, (10, 0, 0)));
-    final _ret = _objc_msgSend_tz4p54(_class_UITableViewHeaderFooterView, _sel_userInterfaceLayoutDirectionForSemanticContentAttribute_relativeToLayoutDirection_, semanticContentAttribute$1.value, relativeToLayoutDirection.value);
-    return UIUserInterfaceLayoutDirection.fromValue(_ret);
   }
 
 }
@@ -24606,14 +24660,6 @@ class MLNBackendResource extends objc.NSObject {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNBackendResource);
   }
 
-  /// init
-  MLNBackendResource init() {
-  objc.checkOsVersionInternal('MLNBackendResource.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
-    return MLNBackendResource.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// new
   static MLNBackendResource new$() {
     final _ret = _objc_msgSend_151sglz(_class_MLNBackendResource, _sel_new);
@@ -24631,6 +24677,19 @@ class MLNBackendResource extends objc.NSObject {
   /// alloc
   static MLNBackendResource alloc() {
     final _ret = _objc_msgSend_151sglz(_class_MLNBackendResource, _sel_alloc);
+    return MLNBackendResource.castFromPointer(_ret, retain: false, release: true);
+  }
+  /// Returns a new instance of MLNBackendResource constructed with the default `new` method.
+  factory MLNBackendResource() => new$();
+
+}
+
+extension MLNBackendResource$Methods on MLNBackendResource {
+
+  /// init
+  MLNBackendResource init() {
+  objc.checkOsVersionInternal('MLNBackendResource.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
     return MLNBackendResource.castFromPointer(_ret, retain: false, release: true);
   }
 
@@ -24654,8 +24713,6 @@ class MLNBackendResource extends objc.NSObject {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNBackendResource.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNBackendResource constructed with the default `new` method.
-  factory MLNBackendResource() => new$();
 
 }
 
@@ -24750,6 +24807,33 @@ class MLNCompassButton extends UIImageView {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNCompassButton);
   }
 
+  /// layerClass
+  static objc.ObjCObjectBase getLayerClass() {
+  objc.checkOsVersionInternal('MLNCompassButton.layerClass', iOS: (false, (2, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(_class_MLNCompassButton, _sel_layerClass);
+    return objc.ObjCObjectBase(_ret, retain: true, release: true);
+  }
+
+
+  /// userInterfaceLayoutDirectionForSemanticContentAttribute:
+  static UIUserInterfaceLayoutDirection userInterfaceLayoutDirectionForSemanticContentAttribute(UISemanticContentAttribute attribute) {
+  objc.checkOsVersionInternal('MLNCompassButton.userInterfaceLayoutDirectionForSemanticContentAttribute:', iOS: (false, (9, 0, 0)));
+    final _ret = _objc_msgSend_racczx(_class_MLNCompassButton, _sel_userInterfaceLayoutDirectionForSemanticContentAttribute_, attribute.value);
+    return UIUserInterfaceLayoutDirection.fromValue(_ret);
+  }
+
+
+  /// userInterfaceLayoutDirectionForSemanticContentAttribute:relativeToLayoutDirection:
+  static UIUserInterfaceLayoutDirection userInterfaceLayoutDirectionForSemanticContentAttribute$1(UISemanticContentAttribute semanticContentAttribute, {required UIUserInterfaceLayoutDirection relativeToLayoutDirection}) {
+  objc.checkOsVersionInternal('MLNCompassButton.userInterfaceLayoutDirectionForSemanticContentAttribute:relativeToLayoutDirection:', iOS: (false, (10, 0, 0)));
+    final _ret = _objc_msgSend_tz4p54(_class_MLNCompassButton, _sel_userInterfaceLayoutDirectionForSemanticContentAttribute_relativeToLayoutDirection_, semanticContentAttribute.value, relativeToLayoutDirection.value);
+    return UIUserInterfaceLayoutDirection.fromValue(_ret);
+  }
+
+}
+
+extension MLNCompassButton$Methods on MLNCompassButton {
+
   /// The visibility of the compass button.
 /// 
 /// You can configure a compass button to be visible all the time or only when the compass heading
@@ -24786,14 +24870,6 @@ _objc_msgSend_1khwzis(this.ref.pointer, _sel_setCompassVisibility_, value.value)
   }
 
 
-  /// layerClass
-  static objc.ObjCObjectBase getLayerClass() {
-  objc.checkOsVersionInternal('MLNCompassButton.layerClass', iOS: (false, (2, 0, 0)));
-    final _ret = _objc_msgSend_151sglz(_class_MLNCompassButton, _sel_layerClass);
-    return objc.ObjCObjectBase(_ret, retain: true, release: true);
-  }
-
-
   /// initWithFrame:
   MLNCompassButton initWithFrame(objc.CGRect frame) {
   objc.checkOsVersionInternal('MLNCompassButton.initWithFrame:', iOS: (false, (2, 0, 0)));
@@ -24807,22 +24883,6 @@ _objc_msgSend_1khwzis(this.ref.pointer, _sel_setCompassVisibility_, value.value)
   objc.checkOsVersionInternal('MLNCompassButton.initWithCoder:', iOS: (false, (2, 0, 0)));
     final _ret = _objc_msgSend_1sotr3r(this.ref.retainAndReturnPointer(), _sel_initWithCoder_, coder.ref.pointer);
     return _ret.address == 0 ? null : MLNCompassButton.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// userInterfaceLayoutDirectionForSemanticContentAttribute:
-  static UIUserInterfaceLayoutDirection userInterfaceLayoutDirectionForSemanticContentAttribute(UISemanticContentAttribute attribute) {
-  objc.checkOsVersionInternal('MLNCompassButton.userInterfaceLayoutDirectionForSemanticContentAttribute:', iOS: (false, (9, 0, 0)));
-    final _ret = _objc_msgSend_racczx(_class_MLNCompassButton, _sel_userInterfaceLayoutDirectionForSemanticContentAttribute_, attribute.value);
-    return UIUserInterfaceLayoutDirection.fromValue(_ret);
-  }
-
-
-  /// userInterfaceLayoutDirectionForSemanticContentAttribute:relativeToLayoutDirection:
-  static UIUserInterfaceLayoutDirection userInterfaceLayoutDirectionForSemanticContentAttribute$1(UISemanticContentAttribute semanticContentAttribute$1, {required UIUserInterfaceLayoutDirection relativeToLayoutDirection}) {
-  objc.checkOsVersionInternal('MLNCompassButton.userInterfaceLayoutDirectionForSemanticContentAttribute:relativeToLayoutDirection:', iOS: (false, (10, 0, 0)));
-    final _ret = _objc_msgSend_tz4p54(_class_MLNCompassButton, _sel_userInterfaceLayoutDirectionForSemanticContentAttribute_relativeToLayoutDirection_, semanticContentAttribute$1.value, relativeToLayoutDirection.value);
-    return UIUserInterfaceLayoutDirection.fromValue(_ret);
   }
 
 }
@@ -24914,6 +24974,117 @@ class MLNMapCamera extends objc.NSObject implements objc.NSSecureCoding, objc.NS
   static bool isInstance(objc.ObjCObjectBase obj) {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNMapCamera);
   }
+
+  /// Returns a new camera with all properties set to 0.
+  static MLNMapCamera camera() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNMapCamera, _sel_camera);
+    return MLNMapCamera.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// Returns a new camera based on information about the camera’s viewpoint
+/// and focus point.
+/// 
+/// @param centerCoordinate The geographic coordinate on which the map should be
+/// centered.
+/// @param eyeCoordinate The geometric coordinate at which the camera should be
+/// situated.
+/// @param eyeAltitude The altitude (measured in meters) above the map at which the
+/// camera should be situated. The altitude may be less than the distance from
+/// the camera’s viewpoint to the camera’s focus point.
+  static MLNMapCamera cameraLookingAtCenterCoordinate(CLLocationCoordinate2D centerCoordinate, {required CLLocationCoordinate2D fromEyeCoordinate,required double eyeAltitude}) {
+    final _ret = _objc_msgSend_2d68z4(_class_MLNMapCamera, _sel_cameraLookingAtCenterCoordinate_fromEyeCoordinate_eyeAltitude_, centerCoordinate, fromEyeCoordinate, eyeAltitude);
+    return MLNMapCamera.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// Returns a new camera with the given distance, pitch, and heading.
+/// 
+/// This method interprets the distance as a straight-line distance from the
+/// viewpoint to the center coordinate. To specify the altitude of the viewpoint,
+/// use the ``cameraLookingAtCenterCoordinate:altitude:pitch:heading:`` method.
+/// 
+/// @param centerCoordinate The geographic coordinate on which the map should be
+/// centered.
+/// @param distance The straight-line distance from the viewpoint to the
+/// ``centerCoordinate``.
+/// @param pitch The viewing angle of the camera, measured in degrees. A value of
+/// `0` results in a camera pointed straight down at the map. Angles greater
+/// than `0` result in a camera angled toward the horizon.
+/// @param heading The camera’s heading, measured in degrees clockwise from true
+/// north. A value of `0` means that the top edge of the map view corresponds to
+/// true north. The value `90` means the top of the map is pointing due east.
+/// The value `180` means the top of the map points due south, and so on.
+  static MLNMapCamera cameraLookingAtCenterCoordinate$1(CLLocationCoordinate2D centerCoordinate, {required double acrossDistance,required double pitch,required double heading}) {
+    final _ret = _objc_msgSend_x3m0f9(_class_MLNMapCamera, _sel_cameraLookingAtCenterCoordinate_acrossDistance_pitch_heading_, centerCoordinate, acrossDistance, pitch, heading);
+    return MLNMapCamera.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// Returns a new camera with the given altitude, pitch, and heading.
+/// 
+/// @param centerCoordinate The geographic coordinate on which the map should be
+/// centered.
+/// @param altitude The altitude (measured in meters) above the map at which the
+/// camera should be situated. The altitude may be less than the distance from
+/// the camera’s viewpoint to the camera’s focus point.
+/// @param pitch The viewing angle of the camera, measured in degrees. A value of
+/// `0` results in a camera pointed straight down at the map. Angles greater
+/// than `0` result in a camera angled toward the horizon.
+/// @param heading The camera’s heading, measured in degrees clockwise from true
+/// north. A value of `0` means that the top edge of the map view corresponds to
+/// true north. The value `90` means the top of the map is pointing due east.
+/// The value `180` means the top of the map points due south, and so on.
+  static MLNMapCamera cameraLookingAtCenterCoordinate$2(CLLocationCoordinate2D centerCoordinate, {required double altitude,required double pitch,required double heading}) {
+    final _ret = _objc_msgSend_x3m0f9(_class_MLNMapCamera, _sel_cameraLookingAtCenterCoordinate_altitude_pitch_heading_, centerCoordinate, altitude, pitch, heading);
+    return MLNMapCamera.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// > This initializer incorrectly interprets the `distance` parameter. To
+/// specify the straight-line distance from the viewpoint to ``centerCoordinate``,
+/// use the ``cameraLookingAtCenterCoordinate:acrossDistance:pitch:heading:``
+/// method. To specify the altitude of the viewpoint, use the
+/// ``cameraLookingAtCenterCoordinate:altitude:pitch:heading:`` method, which has
+/// the same behavior as this initializer.
+  static MLNMapCamera cameraLookingAtCenterCoordinate$3(CLLocationCoordinate2D centerCoordinate, {required double fromDistance,required double pitch,required double heading}) {
+    final _ret = _objc_msgSend_x3m0f9(_class_MLNMapCamera, _sel_cameraLookingAtCenterCoordinate_fromDistance_pitch_heading_, centerCoordinate, fromDistance, pitch, heading);
+    return MLNMapCamera.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// new
+  static MLNMapCamera new$() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNMapCamera, _sel_new);
+    return MLNMapCamera.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static MLNMapCamera allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_MLNMapCamera, _sel_allocWithZone_, zone);
+    return MLNMapCamera.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static MLNMapCamera alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNMapCamera, _sel_alloc);
+    return MLNMapCamera.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// supportsSecureCoding
+  static bool getSupportsSecureCoding() {
+    return _objc_msgSend_91o635(_class_MLNMapCamera, _sel_supportsSecureCoding);
+
+  }
+  /// Returns a new instance of MLNMapCamera constructed with the default `new` method.
+  factory MLNMapCamera() => new$();
+
+}
+
+extension MLNMapCamera$Methods on MLNMapCamera {
 
   /// Coordinate at the center of the map view.
   CLLocationCoordinate2D get centerCoordinate {
@@ -25013,84 +25184,6 @@ _objc_msgSend_hwm8nu(this.ref.pointer, _sel_setViewingDistance_, value);
   }
 
 
-  /// Returns a new camera with all properties set to 0.
-  static MLNMapCamera camera() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNMapCamera, _sel_camera);
-    return MLNMapCamera.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// Returns a new camera based on information about the camera’s viewpoint
-/// and focus point.
-/// 
-/// @param centerCoordinate The geographic coordinate on which the map should be
-/// centered.
-/// @param eyeCoordinate The geometric coordinate at which the camera should be
-/// situated.
-/// @param eyeAltitude The altitude (measured in meters) above the map at which the
-/// camera should be situated. The altitude may be less than the distance from
-/// the camera’s viewpoint to the camera’s focus point.
-  static MLNMapCamera cameraLookingAtCenterCoordinate(CLLocationCoordinate2D centerCoordinate$1, {required CLLocationCoordinate2D fromEyeCoordinate,required double eyeAltitude}) {
-    final _ret = _objc_msgSend_2d68z4(_class_MLNMapCamera, _sel_cameraLookingAtCenterCoordinate_fromEyeCoordinate_eyeAltitude_, centerCoordinate$1, fromEyeCoordinate, eyeAltitude);
-    return MLNMapCamera.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// Returns a new camera with the given distance, pitch, and heading.
-/// 
-/// This method interprets the distance as a straight-line distance from the
-/// viewpoint to the center coordinate. To specify the altitude of the viewpoint,
-/// use the ``cameraLookingAtCenterCoordinate:altitude:pitch:heading:`` method.
-/// 
-/// @param centerCoordinate The geographic coordinate on which the map should be
-/// centered.
-/// @param distance The straight-line distance from the viewpoint to the
-/// ``centerCoordinate``.
-/// @param pitch The viewing angle of the camera, measured in degrees. A value of
-/// `0` results in a camera pointed straight down at the map. Angles greater
-/// than `0` result in a camera angled toward the horizon.
-/// @param heading The camera’s heading, measured in degrees clockwise from true
-/// north. A value of `0` means that the top edge of the map view corresponds to
-/// true north. The value `90` means the top of the map is pointing due east.
-/// The value `180` means the top of the map points due south, and so on.
-  static MLNMapCamera cameraLookingAtCenterCoordinate$1(CLLocationCoordinate2D centerCoordinate$1, {required double acrossDistance,required double pitch$1,required double heading$1}) {
-    final _ret = _objc_msgSend_x3m0f9(_class_MLNMapCamera, _sel_cameraLookingAtCenterCoordinate_acrossDistance_pitch_heading_, centerCoordinate$1, acrossDistance, pitch$1, heading$1);
-    return MLNMapCamera.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// Returns a new camera with the given altitude, pitch, and heading.
-/// 
-/// @param centerCoordinate The geographic coordinate on which the map should be
-/// centered.
-/// @param altitude The altitude (measured in meters) above the map at which the
-/// camera should be situated. The altitude may be less than the distance from
-/// the camera’s viewpoint to the camera’s focus point.
-/// @param pitch The viewing angle of the camera, measured in degrees. A value of
-/// `0` results in a camera pointed straight down at the map. Angles greater
-/// than `0` result in a camera angled toward the horizon.
-/// @param heading The camera’s heading, measured in degrees clockwise from true
-/// north. A value of `0` means that the top edge of the map view corresponds to
-/// true north. The value `90` means the top of the map is pointing due east.
-/// The value `180` means the top of the map points due south, and so on.
-  static MLNMapCamera cameraLookingAtCenterCoordinate$2(CLLocationCoordinate2D centerCoordinate$1, {required double altitude$1,required double pitch$1,required double heading$1}) {
-    final _ret = _objc_msgSend_x3m0f9(_class_MLNMapCamera, _sel_cameraLookingAtCenterCoordinate_altitude_pitch_heading_, centerCoordinate$1, altitude$1, pitch$1, heading$1);
-    return MLNMapCamera.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// > This initializer incorrectly interprets the `distance` parameter. To
-/// specify the straight-line distance from the viewpoint to ``centerCoordinate``,
-/// use the ``cameraLookingAtCenterCoordinate:acrossDistance:pitch:heading:``
-/// method. To specify the altitude of the viewpoint, use the
-/// ``cameraLookingAtCenterCoordinate:altitude:pitch:heading:`` method, which has
-/// the same behavior as this initializer.
-  static MLNMapCamera cameraLookingAtCenterCoordinate$3(CLLocationCoordinate2D centerCoordinate$1, {required double fromDistance,required double pitch$1,required double heading$1}) {
-    final _ret = _objc_msgSend_x3m0f9(_class_MLNMapCamera, _sel_cameraLookingAtCenterCoordinate_fromDistance_pitch_heading_, centerCoordinate$1, fromDistance, pitch$1, heading$1);
-    return MLNMapCamera.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
   /// Returns a Boolean value indicating whether the given camera is functionally
 /// equivalent to the receiver.
 /// 
@@ -25111,27 +25204,6 @@ _objc_msgSend_hwm8nu(this.ref.pointer, _sel_setViewingDistance_, value);
   MLNMapCamera init() {
   objc.checkOsVersionInternal('MLNMapCamera.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
     final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
-    return MLNMapCamera.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// new
-  static MLNMapCamera new$() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNMapCamera, _sel_new);
-    return MLNMapCamera.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static MLNMapCamera allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_MLNMapCamera, _sel_allocWithZone_, zone);
-    return MLNMapCamera.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static MLNMapCamera alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNMapCamera, _sel_alloc);
     return MLNMapCamera.castFromPointer(_ret, retain: false, release: true);
   }
 
@@ -25157,13 +25229,6 @@ _objc_msgSend_hwm8nu(this.ref.pointer, _sel_setViewingDistance_, value);
   }
 
 
-  /// supportsSecureCoding
-  static bool getSupportsSecureCoding() {
-    return _objc_msgSend_91o635(_class_MLNMapCamera, _sel_supportsSecureCoding);
-
-  }
-
-
   /// encodeWithCoder:
   void encodeWithCoder(objc.NSCoder coder) {
 _objc_msgSend_xtuoz7(this.ref.pointer, _sel_encodeWithCoder_, coder.ref.pointer);
@@ -25176,8 +25241,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_encodeWithCoder_, coder.ref.pointer)
     final _ret = _objc_msgSend_1sotr3r(this.ref.retainAndReturnPointer(), _sel_initWithCoder_, coder.ref.pointer);
     return _ret.address == 0 ? null : MLNMapCamera.castFromPointer(_ret, retain: false, release: true);
   }
-  /// Returns a new instance of MLNMapCamera constructed with the default `new` method.
-  factory MLNMapCamera() => new$();
 
 }
 
@@ -25210,6 +25273,32 @@ class MLNActionJournalOptions extends objc.NSObject {
   static bool isInstance(objc.ObjCObjectBase obj) {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNActionJournalOptions);
   }
+
+  /// new
+  static MLNActionJournalOptions new$() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNActionJournalOptions, _sel_new);
+    return MLNActionJournalOptions.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static MLNActionJournalOptions allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_MLNActionJournalOptions, _sel_allocWithZone_, zone);
+    return MLNActionJournalOptions.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static MLNActionJournalOptions alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNActionJournalOptions, _sel_alloc);
+    return MLNActionJournalOptions.castFromPointer(_ret, retain: false, release: true);
+  }
+  /// Returns a new instance of MLNActionJournalOptions constructed with the default `new` method.
+  factory MLNActionJournalOptions() => new$();
+
+}
+
+extension MLNActionJournalOptions$Methods on MLNActionJournalOptions {
 
   /// Enable/disable journal logging
   bool get enabled {
@@ -25289,27 +25378,6 @@ _objc_msgSend_4sp4xj(this.ref.pointer, _sel_setRenderingStatsReportInterval_, va
   }
 
 
-  /// new
-  static MLNActionJournalOptions new$() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNActionJournalOptions, _sel_new);
-    return MLNActionJournalOptions.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static MLNActionJournalOptions allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_MLNActionJournalOptions, _sel_allocWithZone_, zone);
-    return MLNActionJournalOptions.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static MLNActionJournalOptions alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNActionJournalOptions, _sel_alloc);
-    return MLNActionJournalOptions.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// self
   MLNActionJournalOptions self$1() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_self);
@@ -25329,8 +25397,6 @@ _objc_msgSend_4sp4xj(this.ref.pointer, _sel_setRenderingStatsReportInterval_, va
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNActionJournalOptions.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNActionJournalOptions constructed with the default `new` method.
-  factory MLNActionJournalOptions() => new$();
 
 }
 
@@ -25362,6 +25428,32 @@ class MLNMapOptions extends objc.NSObject {
   static bool isInstance(objc.ObjCObjectBase obj) {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNMapOptions);
   }
+
+  /// new
+  static MLNMapOptions new$() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNMapOptions, _sel_new);
+    return MLNMapOptions.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static MLNMapOptions allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_MLNMapOptions, _sel_allocWithZone_, zone);
+    return MLNMapOptions.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static MLNMapOptions alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNMapOptions, _sel_alloc);
+    return MLNMapOptions.castFromPointer(_ret, retain: false, release: true);
+  }
+  /// Returns a new instance of MLNMapOptions constructed with the default `new` method.
+  factory MLNMapOptions() => new$();
+
+}
+
+extension MLNMapOptions$Methods on MLNMapOptions {
 
   /// URL of the map style to display. The URL may be a full HTTP
 /// or HTTPS URL, a canonical URL or a path to a local file relative
@@ -25437,27 +25529,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setPluginLayers_, value.ref.pointer)
   }
 
 
-  /// new
-  static MLNMapOptions new$() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNMapOptions, _sel_new);
-    return MLNMapOptions.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static MLNMapOptions allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_MLNMapOptions, _sel_allocWithZone_, zone);
-    return MLNMapOptions.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static MLNMapOptions alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNMapOptions, _sel_alloc);
-    return MLNMapOptions.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// self
   MLNMapOptions self$1() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_self);
@@ -25477,8 +25548,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setPluginLayers_, value.ref.pointer)
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNMapOptions.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNMapOptions constructed with the default `new` method.
-  factory MLNMapOptions() => new$();
 
 }
 
@@ -25524,6 +25593,32 @@ class MLNStyleLayer extends objc.NSObject {
   static bool isInstance(objc.ObjCObjectBase obj) {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNStyleLayer);
   }
+
+  /// new
+  static MLNStyleLayer new$() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNStyleLayer, _sel_new);
+    return MLNStyleLayer.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static MLNStyleLayer allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_MLNStyleLayer, _sel_allocWithZone_, zone);
+    return MLNStyleLayer.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static MLNStyleLayer alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNStyleLayer, _sel_alloc);
+    return MLNStyleLayer.castFromPointer(_ret, retain: false, release: true);
+  }
+  /// Returns a new instance of MLNStyleLayer constructed with the default `new` method.
+  factory MLNStyleLayer() => new$();
+
+}
+
+extension MLNStyleLayer$Methods on MLNStyleLayer {
 
   /// init
   MLNStyleLayer init() {
@@ -25595,27 +25690,6 @@ _objc_msgSend_v5hmet(this.ref.pointer, _sel_setMinimumZoomLevel_, value);
   }
 
 
-  /// new
-  static MLNStyleLayer new$() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNStyleLayer, _sel_new);
-    return MLNStyleLayer.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static MLNStyleLayer allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_MLNStyleLayer, _sel_allocWithZone_, zone);
-    return MLNStyleLayer.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static MLNStyleLayer alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNStyleLayer, _sel_alloc);
-    return MLNStyleLayer.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// self
   MLNStyleLayer self$1() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_self);
@@ -25635,8 +25709,6 @@ _objc_msgSend_v5hmet(this.ref.pointer, _sel_setMinimumZoomLevel_, value);
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNStyleLayer.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNStyleLayer constructed with the default `new` method.
-  factory MLNStyleLayer() => new$();
 
 }
 
@@ -25668,6 +25740,32 @@ class MLNDefaultStyle extends objc.NSObject {
   static bool isInstance(objc.ObjCObjectBase obj) {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNDefaultStyle);
   }
+
+  /// new
+  static MLNDefaultStyle new$() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNDefaultStyle, _sel_new);
+    return MLNDefaultStyle.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static MLNDefaultStyle allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_MLNDefaultStyle, _sel_allocWithZone_, zone);
+    return MLNDefaultStyle.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static MLNDefaultStyle alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNDefaultStyle, _sel_alloc);
+    return MLNDefaultStyle.castFromPointer(_ret, retain: false, release: true);
+  }
+  /// Returns a new instance of MLNDefaultStyle constructed with the default `new` method.
+  factory MLNDefaultStyle() => new$();
+
+}
+
+extension MLNDefaultStyle$Methods on MLNDefaultStyle {
 
   /// The style URL
   objc.NSURL get url {
@@ -25719,27 +25817,6 @@ _objc_msgSend_9o8504(this.ref.pointer, _sel_setVersion_, value);
   }
 
 
-  /// new
-  static MLNDefaultStyle new$() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNDefaultStyle, _sel_new);
-    return MLNDefaultStyle.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static MLNDefaultStyle allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_MLNDefaultStyle, _sel_allocWithZone_, zone);
-    return MLNDefaultStyle.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static MLNDefaultStyle alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNDefaultStyle, _sel_alloc);
-    return MLNDefaultStyle.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// self
   MLNDefaultStyle self$1() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_self);
@@ -25759,8 +25836,6 @@ _objc_msgSend_9o8504(this.ref.pointer, _sel_setVersion_, value);
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNDefaultStyle.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNDefaultStyle constructed with the default `new` method.
-  factory MLNDefaultStyle() => new$();
 
 }
 
@@ -25824,6 +25899,32 @@ class MLNTileServerOptions extends objc.NSObject {
   static bool isInstance(objc.ObjCObjectBase obj) {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNTileServerOptions);
   }
+
+  /// new
+  static MLNTileServerOptions new$() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNTileServerOptions, _sel_new);
+    return MLNTileServerOptions.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static MLNTileServerOptions allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_MLNTileServerOptions, _sel_allocWithZone_, zone);
+    return MLNTileServerOptions.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static MLNTileServerOptions alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNTileServerOptions, _sel_alloc);
+    return MLNTileServerOptions.castFromPointer(_ret, retain: false, release: true);
+  }
+  /// Returns a new instance of MLNTileServerOptions constructed with the default `new` method.
+  factory MLNTileServerOptions() => new$();
+
+}
+
+extension MLNTileServerOptions$Methods on MLNTileServerOptions {
 
   /// API base URL.
   objc.NSString get baseURL {
@@ -26113,27 +26214,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setDefaultStyle_, value.ref.pointer)
   }
 
 
-  /// new
-  static MLNTileServerOptions new$() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNTileServerOptions, _sel_new);
-    return MLNTileServerOptions.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static MLNTileServerOptions allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_MLNTileServerOptions, _sel_allocWithZone_, zone);
-    return MLNTileServerOptions.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static MLNTileServerOptions alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNTileServerOptions, _sel_alloc);
-    return MLNTileServerOptions.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// self
   MLNTileServerOptions self$1() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_self);
@@ -26153,8 +26233,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setDefaultStyle_, value.ref.pointer)
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNTileServerOptions.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNTileServerOptions constructed with the default `new` method.
-  factory MLNTileServerOptions() => new$();
 
 }
 
@@ -26259,14 +26337,6 @@ _objc_msgSend_1vrforg(_class_MLNSettings, _sel_useWellKnownTileServer_, tileServ
   }
 
 
-  /// init
-  MLNSettings init() {
-  objc.checkOsVersionInternal('MLNSettings.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
-    return MLNSettings.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// new
   static MLNSettings new$() {
     final _ret = _objc_msgSend_151sglz(_class_MLNSettings, _sel_new);
@@ -26284,6 +26354,19 @@ _objc_msgSend_1vrforg(_class_MLNSettings, _sel_useWellKnownTileServer_, tileServ
   /// alloc
   static MLNSettings alloc() {
     final _ret = _objc_msgSend_151sglz(_class_MLNSettings, _sel_alloc);
+    return MLNSettings.castFromPointer(_ret, retain: false, release: true);
+  }
+  /// Returns a new instance of MLNSettings constructed with the default `new` method.
+  factory MLNSettings() => new$();
+
+}
+
+extension MLNSettings$Methods on MLNSettings {
+
+  /// init
+  MLNSettings init() {
+  objc.checkOsVersionInternal('MLNSettings.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
     return MLNSettings.castFromPointer(_ret, retain: false, release: true);
   }
 
@@ -26307,8 +26390,6 @@ _objc_msgSend_1vrforg(_class_MLNSettings, _sel_useWellKnownTileServer_, tileServ
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNSettings.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNSettings constructed with the default `new` method.
-  factory MLNSettings() => new$();
 
 }
 
@@ -26363,6 +26444,32 @@ class MLNSource extends objc.NSObject {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNSource);
   }
 
+  /// new
+  static MLNSource new$() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNSource, _sel_new);
+    return MLNSource.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static MLNSource allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_MLNSource, _sel_allocWithZone_, zone);
+    return MLNSource.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static MLNSource alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNSource, _sel_alloc);
+    return MLNSource.castFromPointer(_ret, retain: false, release: true);
+  }
+  /// Returns a new instance of MLNSource constructed with the default `new` method.
+  factory MLNSource() => new$();
+
+}
+
+extension MLNSource$Methods on MLNSource {
+
   /// init
   MLNSource init() {
   objc.checkOsVersionInternal('MLNSource.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
@@ -26399,27 +26506,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setIdentifier_, value.ref.pointer);
   }
 
 
-  /// new
-  static MLNSource new$() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNSource, _sel_new);
-    return MLNSource.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static MLNSource allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_MLNSource, _sel_allocWithZone_, zone);
-    return MLNSource.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static MLNSource alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNSource, _sel_alloc);
-    return MLNSource.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// self
   MLNSource self$1() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_self);
@@ -26439,8 +26525,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setIdentifier_, value.ref.pointer);
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNSource.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNSource constructed with the default `new` method.
-  factory MLNSource() => new$();
 
 }
 
@@ -26481,6 +26565,10 @@ class MLNLight extends objc.ObjCObjectBase {
   static bool isInstance(objc.ObjCObjectBase obj) {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNLight);
   }
+
+}
+
+extension MLNLight$Methods on MLNLight {
 
 }
 
@@ -26548,6 +26636,32 @@ class MLNStyle extends objc.NSObject {
     return _ret.address == 0 ? null : MLNDefaultStyle.castFromPointer(_ret, retain: true, release: true);
   }
 
+
+  /// new
+  static MLNStyle new$() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNStyle, _sel_new);
+    return MLNStyle.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static MLNStyle allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_MLNStyle, _sel_allocWithZone_, zone);
+    return MLNStyle.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static MLNStyle alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNStyle, _sel_alloc);
+    return MLNStyle.castFromPointer(_ret, retain: false, release: true);
+  }
+  /// Returns a new instance of MLNStyle constructed with the default `new` method.
+  factory MLNStyle() => new$();
+
+}
+
+extension MLNStyle$Methods on MLNStyle {
 
   /// The name of the style.
 /// 
@@ -26886,27 +27000,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_localizeLabelsIntoLocale_, locale?.r
   }
 
 
-  /// new
-  static MLNStyle new$() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNStyle, _sel_new);
-    return MLNStyle.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static MLNStyle allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_MLNStyle, _sel_allocWithZone_, zone);
-    return MLNStyle.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static MLNStyle alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNStyle, _sel_alloc);
-    return MLNStyle.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// self
   MLNStyle self$1() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_self);
@@ -26926,8 +27019,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_localizeLabelsIntoLocale_, locale?.r
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNStyle.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNStyle constructed with the default `new` method.
-  factory MLNStyle() => new$();
 
 }
 
@@ -27250,6 +27341,10 @@ class MLNScaleBar extends objc.ObjCObjectBase {
 
 }
 
+extension MLNScaleBar$Methods on MLNScaleBar {
+
+}
+
 late final _sel_scaleBar = objc.registerName("scaleBar");
 late final _sel_scaleBarShouldShowDarkStyles = objc.registerName("scaleBarShouldShowDarkStyles");
 late final _sel_setScaleBarShouldShowDarkStyles_ = objc.registerName("setScaleBarShouldShowDarkStyles:");
@@ -27369,6 +27464,10 @@ class MLNUserLocation extends objc.ObjCObjectBase {
   static bool isInstance(objc.ObjCObjectBase obj) {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNUserLocation);
   }
+
+}
+
+extension MLNUserLocation$Methods on MLNUserLocation {
 
 }
 
@@ -27729,6 +27828,39 @@ class MLNShape extends objc.NSObject implements MLNAnnotation, objc.NSSecureCodi
   }
 
 
+  /// new
+  static MLNShape new$() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNShape, _sel_new);
+    return MLNShape.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static MLNShape allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_MLNShape, _sel_allocWithZone_, zone);
+    return MLNShape.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static MLNShape alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNShape, _sel_alloc);
+    return MLNShape.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// supportsSecureCoding
+  static bool getSupportsSecureCoding() {
+    return _objc_msgSend_91o635(_class_MLNShape, _sel_supportsSecureCoding);
+
+  }
+  /// Returns a new instance of MLNShape constructed with the default `new` method.
+  factory MLNShape() => new$();
+
+}
+
+extension MLNShape$Methods on MLNShape {
+
   /// The title of the shape annotation.
 /// 
 /// The default value of this property is `nil`.
@@ -27798,27 +27930,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setSubtitle_, value?.ref.pointer ?? 
   }
 
 
-  /// new
-  static MLNShape new$() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNShape, _sel_new);
-    return MLNShape.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static MLNShape allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_MLNShape, _sel_allocWithZone_, zone);
-    return MLNShape.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static MLNShape alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNShape, _sel_alloc);
-    return MLNShape.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// self
   MLNShape self$1() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_self);
@@ -27852,13 +27963,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setSubtitle_, value?.ref.pointer ?? 
   }
 
 
-  /// supportsSecureCoding
-  static bool getSupportsSecureCoding() {
-    return _objc_msgSend_91o635(_class_MLNShape, _sel_supportsSecureCoding);
-
-  }
-
-
   /// encodeWithCoder:
   void encodeWithCoder(objc.NSCoder coder) {
 _objc_msgSend_xtuoz7(this.ref.pointer, _sel_encodeWithCoder_, coder.ref.pointer);
@@ -27871,8 +27975,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_encodeWithCoder_, coder.ref.pointer)
     final _ret = _objc_msgSend_1sotr3r(this.ref.retainAndReturnPointer(), _sel_initWithCoder_, coder.ref.pointer);
     return _ret.address == 0 ? null : MLNShape.castFromPointer(_ret, retain: false, release: true);
   }
-  /// Returns a new instance of MLNShape constructed with the default `new` method.
-  factory MLNShape() => new$();
 
 }
 
@@ -27939,6 +28041,32 @@ class MLNMapProjection extends objc.NSObject {
   static bool isInstance(objc.ObjCObjectBase obj) {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNMapProjection);
   }
+
+  /// new
+  static MLNMapProjection new$() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNMapProjection, _sel_new);
+    return MLNMapProjection.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static MLNMapProjection allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_MLNMapProjection, _sel_allocWithZone_, zone);
+    return MLNMapProjection.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static MLNMapProjection alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNMapProjection, _sel_alloc);
+    return MLNMapProjection.castFromPointer(_ret, retain: false, release: true);
+  }
+  /// Returns a new instance of MLNMapProjection constructed with the default `new` method.
+  factory MLNMapProjection() => new$();
+
+}
+
+extension MLNMapProjection$Methods on MLNMapProjection {
 
   /// Initializes and returns the new projection object with the current
 /// camera state from the provided map view.
@@ -28029,27 +28157,6 @@ _objc_msgSend_vmuxgq(this.ref.pointer, _sel_setVisibleCoordinateBounds_edgePaddi
   }
 
 
-  /// new
-  static MLNMapProjection new$() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNMapProjection, _sel_new);
-    return MLNMapProjection.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static MLNMapProjection allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_MLNMapProjection, _sel_allocWithZone_, zone);
-    return MLNMapProjection.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static MLNMapProjection alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNMapProjection, _sel_alloc);
-    return MLNMapProjection.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// self
   MLNMapProjection self$1() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_self);
@@ -28069,8 +28176,6 @@ _objc_msgSend_vmuxgq(this.ref.pointer, _sel_setVisibleCoordinateBounds_edgePaddi
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNMapProjection.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNMapProjection constructed with the default `new` method.
-  factory MLNMapProjection() => new$();
 
 }
 
@@ -28103,6 +28208,10 @@ class MLNAnnotationView extends objc.ObjCObjectBase {
 
 }
 
+extension MLNAnnotationView$Methods on MLNAnnotationView {
+
+}
+
 late final _sel_viewForAnnotation_ = objc.registerName("viewForAnnotation:");
 late final _class_MLNAnnotationImage = objc.getClass("MLNAnnotationImage");
 
@@ -28124,6 +28233,10 @@ class MLNAnnotationImage extends objc.ObjCObjectBase {
   static bool isInstance(objc.ObjCObjectBase obj) {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNAnnotationImage);
   }
+
+}
+
+extension MLNAnnotationImage$Methods on MLNAnnotationImage {
 
 }
 
@@ -28472,6 +28585,103 @@ class MLNMapView extends UIView implements MLNStylable {
   static bool isInstance(objc.ObjCObjectBase obj) {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNMapView);
   }
+
+  /// layerClass
+  static objc.ObjCObjectBase getLayerClass() {
+  objc.checkOsVersionInternal('MLNMapView.layerClass', iOS: (false, (2, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(_class_MLNMapView, _sel_layerClass);
+    return objc.ObjCObjectBase(_ret, retain: true, release: true);
+  }
+
+
+  /// userInterfaceLayoutDirectionForSemanticContentAttribute:
+  static UIUserInterfaceLayoutDirection userInterfaceLayoutDirectionForSemanticContentAttribute(UISemanticContentAttribute attribute) {
+  objc.checkOsVersionInternal('MLNMapView.userInterfaceLayoutDirectionForSemanticContentAttribute:', iOS: (false, (9, 0, 0)));
+    final _ret = _objc_msgSend_racczx(_class_MLNMapView, _sel_userInterfaceLayoutDirectionForSemanticContentAttribute_, attribute.value);
+    return UIUserInterfaceLayoutDirection.fromValue(_ret);
+  }
+
+
+  /// userInterfaceLayoutDirectionForSemanticContentAttribute:relativeToLayoutDirection:
+  static UIUserInterfaceLayoutDirection userInterfaceLayoutDirectionForSemanticContentAttribute$1(UISemanticContentAttribute semanticContentAttribute, {required UIUserInterfaceLayoutDirection relativeToLayoutDirection}) {
+  objc.checkOsVersionInternal('MLNMapView.userInterfaceLayoutDirectionForSemanticContentAttribute:relativeToLayoutDirection:', iOS: (false, (10, 0, 0)));
+    final _ret = _objc_msgSend_tz4p54(_class_MLNMapView, _sel_userInterfaceLayoutDirectionForSemanticContentAttribute_relativeToLayoutDirection_, semanticContentAttribute.value, relativeToLayoutDirection.value);
+    return UIUserInterfaceLayoutDirection.fromValue(_ret);
+  }
+
+
+  /// new
+  static MLNMapView new$() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNMapView, _sel_new);
+    return MLNMapView.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static MLNMapView allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_MLNMapView, _sel_allocWithZone_, zone);
+    return MLNMapView.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static MLNMapView alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNMapView, _sel_alloc);
+    return MLNMapView.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// appearance
+  static MLNMapView appearance() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNMapView, _sel_appearance);
+    return MLNMapView.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// appearanceWhenContainedIn:
+  static MLNMapView appearanceWhenContainedIn(UIAppearanceContainer? ContainerClass) {
+  objc.checkOsVersionInternal('MLNMapView.appearanceWhenContainedIn:', iOS: (false, (5, 0, 0)));
+    final _ret = _objc_msgSend_1sotr3r(_class_MLNMapView, _sel_appearanceWhenContainedIn_, ContainerClass?.ref.pointer ?? ffi.nullptr);
+    return MLNMapView.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// appearanceWhenContainedInInstancesOfClasses:
+  static MLNMapView appearanceWhenContainedInInstancesOfClasses(objc.NSArray containerTypes) {
+  objc.checkOsVersionInternal('MLNMapView.appearanceWhenContainedInInstancesOfClasses:', iOS: (false, (9, 0, 0)));
+    final _ret = _objc_msgSend_1sotr3r(_class_MLNMapView, _sel_appearanceWhenContainedInInstancesOfClasses_, containerTypes.ref.pointer);
+    return MLNMapView.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// appearanceForTraitCollection:
+  static MLNMapView appearanceForTraitCollection(UITraitCollection trait) {
+  objc.checkOsVersionInternal('MLNMapView.appearanceForTraitCollection:', iOS: (false, (8, 0, 0)));
+    final _ret = _objc_msgSend_1sotr3r(_class_MLNMapView, _sel_appearanceForTraitCollection_, trait.ref.pointer);
+    return MLNMapView.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// appearanceForTraitCollection:whenContainedIn:
+  static MLNMapView appearanceForTraitCollection$1(UITraitCollection trait, {UIAppearanceContainer? whenContainedIn}) {
+  objc.checkOsVersionInternal('MLNMapView.appearanceForTraitCollection:whenContainedIn:', iOS: (false, (8, 0, 0)));
+    final _ret = _objc_msgSend_15qeuct(_class_MLNMapView, _sel_appearanceForTraitCollection_whenContainedIn_, trait.ref.pointer, whenContainedIn?.ref.pointer ?? ffi.nullptr);
+    return MLNMapView.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// appearanceForTraitCollection:whenContainedInInstancesOfClasses:
+  static MLNMapView appearanceForTraitCollection$2(UITraitCollection trait, {required objc.NSArray whenContainedInInstancesOfClasses}) {
+  objc.checkOsVersionInternal('MLNMapView.appearanceForTraitCollection:whenContainedInInstancesOfClasses:', iOS: (false, (9, 0, 0)));
+    final _ret = _objc_msgSend_15qeuct(_class_MLNMapView, _sel_appearanceForTraitCollection_whenContainedInInstancesOfClasses_, trait.ref.pointer, whenContainedInInstancesOfClasses.ref.pointer);
+    return MLNMapView.castFromPointer(_ret, retain: true, release: true);
+  }
+  /// Returns a new instance of MLNMapView constructed with the default `new` method.
+  factory MLNMapView() => new$();
+
+}
+
+extension MLNMapView$Methods on MLNMapView {
 
   /// Initializes and returns a newly allocated map view with the specified frame
 /// and style URL.
@@ -31474,34 +31684,10 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_addPluginLayerType_, pluginLayerClas
   }
 
 
-  /// layerClass
-  static objc.ObjCObjectBase getLayerClass() {
-  objc.checkOsVersionInternal('MLNMapView.layerClass', iOS: (false, (2, 0, 0)));
-    final _ret = _objc_msgSend_151sglz(_class_MLNMapView, _sel_layerClass);
-    return objc.ObjCObjectBase(_ret, retain: true, release: true);
-  }
-
-
   /// initWithCoder:
   MLNMapView? initWithCoder(objc.NSCoder coder) {
     final _ret = _objc_msgSend_1sotr3r(this.ref.retainAndReturnPointer(), _sel_initWithCoder_, coder.ref.pointer);
     return _ret.address == 0 ? null : MLNMapView.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// userInterfaceLayoutDirectionForSemanticContentAttribute:
-  static UIUserInterfaceLayoutDirection userInterfaceLayoutDirectionForSemanticContentAttribute(UISemanticContentAttribute attribute) {
-  objc.checkOsVersionInternal('MLNMapView.userInterfaceLayoutDirectionForSemanticContentAttribute:', iOS: (false, (9, 0, 0)));
-    final _ret = _objc_msgSend_racczx(_class_MLNMapView, _sel_userInterfaceLayoutDirectionForSemanticContentAttribute_, attribute.value);
-    return UIUserInterfaceLayoutDirection.fromValue(_ret);
-  }
-
-
-  /// userInterfaceLayoutDirectionForSemanticContentAttribute:relativeToLayoutDirection:
-  static UIUserInterfaceLayoutDirection userInterfaceLayoutDirectionForSemanticContentAttribute$1(UISemanticContentAttribute semanticContentAttribute$1, {required UIUserInterfaceLayoutDirection relativeToLayoutDirection}) {
-  objc.checkOsVersionInternal('MLNMapView.userInterfaceLayoutDirectionForSemanticContentAttribute:relativeToLayoutDirection:', iOS: (false, (10, 0, 0)));
-    final _ret = _objc_msgSend_tz4p54(_class_MLNMapView, _sel_userInterfaceLayoutDirectionForSemanticContentAttribute_relativeToLayoutDirection_, semanticContentAttribute$1.value, relativeToLayoutDirection.value);
-    return UIUserInterfaceLayoutDirection.fromValue(_ret);
   }
 
 
@@ -31511,76 +31697,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_addPluginLayerType_, pluginLayerClas
     final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
     return MLNMapView.castFromPointer(_ret, retain: false, release: true);
   }
-
-
-  /// new
-  static MLNMapView new$() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNMapView, _sel_new);
-    return MLNMapView.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static MLNMapView allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_MLNMapView, _sel_allocWithZone_, zone);
-    return MLNMapView.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static MLNMapView alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNMapView, _sel_alloc);
-    return MLNMapView.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// appearance
-  static MLNMapView appearance() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNMapView, _sel_appearance);
-    return MLNMapView.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// appearanceWhenContainedIn:
-  static MLNMapView appearanceWhenContainedIn(UIAppearanceContainer? ContainerClass) {
-  objc.checkOsVersionInternal('MLNMapView.appearanceWhenContainedIn:', iOS: (false, (5, 0, 0)));
-    final _ret = _objc_msgSend_1sotr3r(_class_MLNMapView, _sel_appearanceWhenContainedIn_, ContainerClass?.ref.pointer ?? ffi.nullptr);
-    return MLNMapView.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// appearanceWhenContainedInInstancesOfClasses:
-  static MLNMapView appearanceWhenContainedInInstancesOfClasses(objc.NSArray containerTypes) {
-  objc.checkOsVersionInternal('MLNMapView.appearanceWhenContainedInInstancesOfClasses:', iOS: (false, (9, 0, 0)));
-    final _ret = _objc_msgSend_1sotr3r(_class_MLNMapView, _sel_appearanceWhenContainedInInstancesOfClasses_, containerTypes.ref.pointer);
-    return MLNMapView.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// appearanceForTraitCollection:
-  static MLNMapView appearanceForTraitCollection(UITraitCollection trait) {
-  objc.checkOsVersionInternal('MLNMapView.appearanceForTraitCollection:', iOS: (false, (8, 0, 0)));
-    final _ret = _objc_msgSend_1sotr3r(_class_MLNMapView, _sel_appearanceForTraitCollection_, trait.ref.pointer);
-    return MLNMapView.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// appearanceForTraitCollection:whenContainedIn:
-  static MLNMapView appearanceForTraitCollection$1(UITraitCollection trait, {UIAppearanceContainer? whenContainedIn}) {
-  objc.checkOsVersionInternal('MLNMapView.appearanceForTraitCollection:whenContainedIn:', iOS: (false, (8, 0, 0)));
-    final _ret = _objc_msgSend_15qeuct(_class_MLNMapView, _sel_appearanceForTraitCollection_whenContainedIn_, trait.ref.pointer, whenContainedIn?.ref.pointer ?? ffi.nullptr);
-    return MLNMapView.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// appearanceForTraitCollection:whenContainedInInstancesOfClasses:
-  static MLNMapView appearanceForTraitCollection$2(UITraitCollection trait, {required objc.NSArray whenContainedInInstancesOfClasses}) {
-  objc.checkOsVersionInternal('MLNMapView.appearanceForTraitCollection:whenContainedInInstancesOfClasses:', iOS: (false, (9, 0, 0)));
-    final _ret = _objc_msgSend_15qeuct(_class_MLNMapView, _sel_appearanceForTraitCollection_whenContainedInInstancesOfClasses_, trait.ref.pointer, whenContainedInInstancesOfClasses.ref.pointer);
-    return MLNMapView.castFromPointer(_ret, retain: true, release: true);
-  }
-  /// Returns a new instance of MLNMapView constructed with the default `new` method.
-  factory MLNMapView() => new$();
 
 }
 
@@ -32739,24 +32855,6 @@ class MLNPointAnnotation extends MLNShape {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNPointAnnotation);
   }
 
-  /// The coordinate point of the shape, specified as a latitude and longitude.
-  CLLocationCoordinate2D get coordinate {
-    final _ptr = pkg_ffi.calloc<CLLocationCoordinate2D>();
-    objc.useMsgSendVariants ? _objc_msgSend_18o5nokStret(_ptr, this.ref.pointer, _sel_coordinate) : _ptr.ref = _objc_msgSend_18o5nok(this.ref.pointer, _sel_coordinate);
-    final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<CLLocationCoordinate2D>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<CLLocationCoordinate2D>(_finalizable);
-
-  }
-
-
-  /// The coordinate point of the shape, specified as a latitude and longitude.
-  set coordinate(CLLocationCoordinate2D value) {
-_objc_msgSend_1zv0am(this.ref.pointer, _sel_setCoordinate_, value);
-
-  }
-
-
   /// Returns an ``MLNShape`` object initialized with the given data interpreted as a
 /// string containing a GeoJSON object.
 /// 
@@ -32788,14 +32886,6 @@ _objc_msgSend_1zv0am(this.ref.pointer, _sel_setCoordinate_, value);
   }
 
 
-  /// init
-  MLNPointAnnotation init() {
-  objc.checkOsVersionInternal('MLNPointAnnotation.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
-    return MLNPointAnnotation.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// new
   static MLNPointAnnotation new$() {
     final _ret = _objc_msgSend_151sglz(_class_MLNPointAnnotation, _sel_new);
@@ -32813,6 +32903,44 @@ _objc_msgSend_1zv0am(this.ref.pointer, _sel_setCoordinate_, value);
   /// alloc
   static MLNPointAnnotation alloc() {
     final _ret = _objc_msgSend_151sglz(_class_MLNPointAnnotation, _sel_alloc);
+    return MLNPointAnnotation.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// supportsSecureCoding
+  static bool getSupportsSecureCoding() {
+    return _objc_msgSend_91o635(_class_MLNPointAnnotation, _sel_supportsSecureCoding);
+
+  }
+  /// Returns a new instance of MLNPointAnnotation constructed with the default `new` method.
+  factory MLNPointAnnotation() => new$();
+
+}
+
+extension MLNPointAnnotation$Methods on MLNPointAnnotation {
+
+  /// The coordinate point of the shape, specified as a latitude and longitude.
+  CLLocationCoordinate2D get coordinate {
+    final _ptr = pkg_ffi.calloc<CLLocationCoordinate2D>();
+    objc.useMsgSendVariants ? _objc_msgSend_18o5nokStret(_ptr, this.ref.pointer, _sel_coordinate) : _ptr.ref = _objc_msgSend_18o5nok(this.ref.pointer, _sel_coordinate);
+    final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
+        ffi.sizeOf<CLLocationCoordinate2D>(), finalizer: pkg_ffi.calloc.nativeFree);
+    return ffi.Struct.create<CLLocationCoordinate2D>(_finalizable);
+
+  }
+
+
+  /// The coordinate point of the shape, specified as a latitude and longitude.
+  set coordinate(CLLocationCoordinate2D value) {
+_objc_msgSend_1zv0am(this.ref.pointer, _sel_setCoordinate_, value);
+
+  }
+
+
+  /// init
+  MLNPointAnnotation init() {
+  objc.checkOsVersionInternal('MLNPointAnnotation.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
     return MLNPointAnnotation.castFromPointer(_ret, retain: false, release: true);
   }
 
@@ -32838,20 +32966,11 @@ _objc_msgSend_1zv0am(this.ref.pointer, _sel_setCoordinate_, value);
   }
 
 
-  /// supportsSecureCoding
-  static bool getSupportsSecureCoding() {
-    return _objc_msgSend_91o635(_class_MLNPointAnnotation, _sel_supportsSecureCoding);
-
-  }
-
-
   /// initWithCoder:
   MLNPointAnnotation? initWithCoder(objc.NSCoder coder) {
     final _ret = _objc_msgSend_1sotr3r(this.ref.retainAndReturnPointer(), _sel_initWithCoder_, coder.ref.pointer);
     return _ret.address == 0 ? null : MLNPointAnnotation.castFromPointer(_ret, retain: false, release: true);
   }
-  /// Returns a new instance of MLNPointAnnotation constructed with the default `new` method.
-  factory MLNPointAnnotation() => new$();
 
 }
 
@@ -32916,36 +33035,6 @@ class MLNPointCollection extends MLNShape implements MLNOverlay {
   }
 
 
-  /// The array of coordinates associated with the shape.
-  ffi.Pointer<CLLocationCoordinate2D> get coordinates {
-    return _objc_msgSend_k56nhe(this.ref.pointer, _sel_coordinates);
-
-  }
-
-
-  /// The number of coordinates associated with the shape.
-  int get pointCount {
-    return _objc_msgSend_xw2lbc(this.ref.pointer, _sel_pointCount);
-
-  }
-
-
-  /// Retrieves one or more coordinates associated with the shape.
-/// 
-/// @param coords On input, you must provide a C array of structures large enough
-/// to hold the desired number of coordinates. On output, this structure
-/// contains the requested coordinate data.
-/// @param range The range of points you want. The `location` field indicates the
-/// first point you are requesting, with `0` being the first point, `1` being
-/// the second point, and so on. The `length` field indicates the number of
-/// points you want. The array in _`coords`_ must be large enough to accommodate
-/// the number of requested coordinates.
-  void getCoordinates(ffi.Pointer<CLLocationCoordinate2D> coords, {required objc.NSRange range}) {
-_objc_msgSend_peohs4(this.ref.pointer, _sel_getCoordinates_range_, coords, range);
-
-  }
-
-
   /// Returns an ``MLNShape`` object initialized with the given data interpreted as a
 /// string containing a GeoJSON object.
 /// 
@@ -32977,14 +33066,6 @@ _objc_msgSend_peohs4(this.ref.pointer, _sel_getCoordinates_range_, coords, range
   }
 
 
-  /// init
-  MLNPointCollection init() {
-  objc.checkOsVersionInternal('MLNPointCollection.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
-    return MLNPointCollection.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// new
   static MLNPointCollection new$() {
     final _ret = _objc_msgSend_151sglz(_class_MLNPointCollection, _sel_new);
@@ -33002,6 +33083,56 @@ _objc_msgSend_peohs4(this.ref.pointer, _sel_getCoordinates_range_, coords, range
   /// alloc
   static MLNPointCollection alloc() {
     final _ret = _objc_msgSend_151sglz(_class_MLNPointCollection, _sel_alloc);
+    return MLNPointCollection.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// supportsSecureCoding
+  static bool getSupportsSecureCoding() {
+    return _objc_msgSend_91o635(_class_MLNPointCollection, _sel_supportsSecureCoding);
+
+  }
+  /// Returns a new instance of MLNPointCollection constructed with the default `new` method.
+  factory MLNPointCollection() => new$();
+
+}
+
+extension MLNPointCollection$Methods on MLNPointCollection {
+
+  /// The array of coordinates associated with the shape.
+  ffi.Pointer<CLLocationCoordinate2D> get coordinates {
+    return _objc_msgSend_k56nhe(this.ref.pointer, _sel_coordinates);
+
+  }
+
+
+  /// The number of coordinates associated with the shape.
+  int get pointCount {
+    return _objc_msgSend_xw2lbc(this.ref.pointer, _sel_pointCount);
+
+  }
+
+
+  /// Retrieves one or more coordinates associated with the shape.
+/// 
+/// @param coords On input, you must provide a C array of structures large enough
+/// to hold the desired number of coordinates. On output, this structure
+/// contains the requested coordinate data.
+/// @param range The range of points you want. The `location` field indicates the
+/// first point you are requesting, with `0` being the first point, `1` being
+/// the second point, and so on. The `length` field indicates the number of
+/// points you want. The array in _`coords`_ must be large enough to accommodate
+/// the number of requested coordinates.
+  void getCoordinates(ffi.Pointer<CLLocationCoordinate2D> coords, {required objc.NSRange range}) {
+_objc_msgSend_peohs4(this.ref.pointer, _sel_getCoordinates_range_, coords, range);
+
+  }
+
+
+  /// init
+  MLNPointCollection init() {
+  objc.checkOsVersionInternal('MLNPointCollection.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
     return MLNPointCollection.castFromPointer(_ret, retain: false, release: true);
   }
 
@@ -33024,13 +33155,6 @@ _objc_msgSend_peohs4(this.ref.pointer, _sel_getCoordinates_range_, coords, range
   MLNPointCollection autorelease() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNPointCollection.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// supportsSecureCoding
-  static bool getSupportsSecureCoding() {
-    return _objc_msgSend_91o635(_class_MLNPointCollection, _sel_supportsSecureCoding);
-
   }
 
 
@@ -33115,8 +33239,6 @@ _objc_msgSend_peohs4(this.ref.pointer, _sel_getCoordinates_range_, coords, range
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_subtitle);
     return _ret.address == 0 ? null : objc.NSString.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNPointCollection constructed with the default `new` method.
-  factory MLNPointCollection() => new$();
 
 }
 
@@ -33161,6 +33283,70 @@ class MLNMultiPoint extends MLNShape {
   static bool isInstance(objc.ObjCObjectBase obj) {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNMultiPoint);
   }
+
+  /// Returns an ``MLNShape`` object initialized with the given data interpreted as a
+/// string containing a GeoJSON object.
+/// 
+/// If the GeoJSON object is a geometry, the returned value is a kind of
+/// ``MLNShape``. If it is a feature object, the returned value is a kind of
+/// ``MLNShape`` that conforms to the ``MLNShape`` protocol. If it is a feature
+/// collection object, the returned value is an instance of
+/// ``MLNShapeCollectionFeature``.
+/// 
+/// ### Example
+/// 
+/// ```swift
+/// let url = mainBundle.url(forResource: "amsterdam", withExtension: "geojson")!
+/// let data = try! Data(contentsOf: url)
+/// let feature = try! MLNShape(data: data, encoding: String.Encoding.utf8.rawValue) as!
+/// MLNShapeCollectionFeature
+/// ```
+/// 
+/// @param data String data containing GeoJSON source code.
+/// @param encoding The encoding used by `data`.
+/// @param outError Upon return, if an error has occurred, a pointer to an
+/// `NSError` object describing the error. Pass in `NULL` to ignore any error.
+/// @return An ``MLNShape`` object representation of `data`, or `nil` if `data` could
+/// not be parsed as valid GeoJSON source code. If `nil`, `outError` contains an
+/// `NSError` object describing the problem.
+  static MLNShape? shapeWithData(objc.NSData data, {required int encoding,required ffi.Pointer<ffi.Pointer<objc.ObjCObject>> error}) {
+    final _ret = _objc_msgSend_1nomli1(_class_MLNMultiPoint, _sel_shapeWithData_encoding_error_, data.ref.pointer, encoding, error);
+    return _ret.address == 0 ? null : MLNShape.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// new
+  static MLNMultiPoint new$() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNMultiPoint, _sel_new);
+    return MLNMultiPoint.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static MLNMultiPoint allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_MLNMultiPoint, _sel_allocWithZone_, zone);
+    return MLNMultiPoint.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static MLNMultiPoint alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNMultiPoint, _sel_alloc);
+    return MLNMultiPoint.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// supportsSecureCoding
+  static bool getSupportsSecureCoding() {
+    return _objc_msgSend_91o635(_class_MLNMultiPoint, _sel_supportsSecureCoding);
+
+  }
+  /// Returns a new instance of MLNMultiPoint constructed with the default `new` method.
+  factory MLNMultiPoint() => new$();
+
+}
+
+extension MLNMultiPoint$Methods on MLNMultiPoint {
 
   /// The array of vertices associated with the shape.
 /// 
@@ -33322,62 +33508,10 @@ _objc_msgSend_1e3pm0z(this.ref.pointer, _sel_removeCoordinatesInRange_, range);
   }
 
 
-  /// Returns an ``MLNShape`` object initialized with the given data interpreted as a
-/// string containing a GeoJSON object.
-/// 
-/// If the GeoJSON object is a geometry, the returned value is a kind of
-/// ``MLNShape``. If it is a feature object, the returned value is a kind of
-/// ``MLNShape`` that conforms to the ``MLNShape`` protocol. If it is a feature
-/// collection object, the returned value is an instance of
-/// ``MLNShapeCollectionFeature``.
-/// 
-/// ### Example
-/// 
-/// ```swift
-/// let url = mainBundle.url(forResource: "amsterdam", withExtension: "geojson")!
-/// let data = try! Data(contentsOf: url)
-/// let feature = try! MLNShape(data: data, encoding: String.Encoding.utf8.rawValue) as!
-/// MLNShapeCollectionFeature
-/// ```
-/// 
-/// @param data String data containing GeoJSON source code.
-/// @param encoding The encoding used by `data`.
-/// @param outError Upon return, if an error has occurred, a pointer to an
-/// `NSError` object describing the error. Pass in `NULL` to ignore any error.
-/// @return An ``MLNShape`` object representation of `data`, or `nil` if `data` could
-/// not be parsed as valid GeoJSON source code. If `nil`, `outError` contains an
-/// `NSError` object describing the problem.
-  static MLNShape? shapeWithData(objc.NSData data, {required int encoding,required ffi.Pointer<ffi.Pointer<objc.ObjCObject>> error}) {
-    final _ret = _objc_msgSend_1nomli1(_class_MLNMultiPoint, _sel_shapeWithData_encoding_error_, data.ref.pointer, encoding, error);
-    return _ret.address == 0 ? null : MLNShape.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
   /// init
   MLNMultiPoint init() {
   objc.checkOsVersionInternal('MLNMultiPoint.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
     final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
-    return MLNMultiPoint.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// new
-  static MLNMultiPoint new$() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNMultiPoint, _sel_new);
-    return MLNMultiPoint.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static MLNMultiPoint allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_MLNMultiPoint, _sel_allocWithZone_, zone);
-    return MLNMultiPoint.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static MLNMultiPoint alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNMultiPoint, _sel_alloc);
     return MLNMultiPoint.castFromPointer(_ret, retain: false, release: true);
   }
 
@@ -33403,20 +33537,11 @@ _objc_msgSend_1e3pm0z(this.ref.pointer, _sel_removeCoordinatesInRange_, range);
   }
 
 
-  /// supportsSecureCoding
-  static bool getSupportsSecureCoding() {
-    return _objc_msgSend_91o635(_class_MLNMultiPoint, _sel_supportsSecureCoding);
-
-  }
-
-
   /// initWithCoder:
   MLNMultiPoint? initWithCoder(objc.NSCoder coder) {
     final _ret = _objc_msgSend_1sotr3r(this.ref.retainAndReturnPointer(), _sel_initWithCoder_, coder.ref.pointer);
     return _ret.address == 0 ? null : MLNMultiPoint.castFromPointer(_ret, retain: false, release: true);
   }
-  /// Returns a new instance of MLNMultiPoint constructed with the default `new` method.
-  factory MLNMultiPoint() => new$();
 
 }
 
@@ -33482,19 +33607,6 @@ class MLNPolygon extends MLNMultiPoint implements MLNOverlay {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNPolygon);
   }
 
-  /// The array of polygons nested inside the receiver.
-/// 
-/// The area occupied by any interior polygons is excluded from the overall shape.
-/// Interior polygons should not overlap. An interior polygon should not have
-/// interior polygons of its own.
-/// 
-/// If there are no interior polygons, the value of this property is `nil`.
-  objc.NSArray? get interiorPolygons {
-    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_interiorPolygons);
-    return _ret.address == 0 ? null : objc.NSArray.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
   /// Creates and returns an ``MLNPolygon`` object from the specified set of
 /// coordinates.
 /// 
@@ -33518,8 +33630,8 @@ class MLNPolygon extends MLNMultiPoint implements MLNOverlay {
 /// excluded from the overall shape. If this array is `nil` or empty, the shape
 /// is considered to have no interior polygons.
 /// @return A new polygon object.
-  static MLNPolygon polygonWithCoordinates$1(ffi.Pointer<CLLocationCoordinate2D> coords, {required int count,objc.NSArray? interiorPolygons$1}) {
-    final _ret = _objc_msgSend_inmhr7(_class_MLNPolygon, _sel_polygonWithCoordinates_count_interiorPolygons_, coords, count, interiorPolygons$1?.ref.pointer ?? ffi.nullptr);
+  static MLNPolygon polygonWithCoordinates$1(ffi.Pointer<CLLocationCoordinate2D> coords, {required int count,objc.NSArray? interiorPolygons}) {
+    final _ret = _objc_msgSend_inmhr7(_class_MLNPolygon, _sel_polygonWithCoordinates_count_interiorPolygons_, coords, count, interiorPolygons?.ref.pointer ?? ffi.nullptr);
     return MLNPolygon.castFromPointer(_ret, retain: true, release: true);
   }
 
@@ -33555,14 +33667,6 @@ class MLNPolygon extends MLNMultiPoint implements MLNOverlay {
   }
 
 
-  /// init
-  MLNPolygon init() {
-  objc.checkOsVersionInternal('MLNPolygon.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
-    return MLNPolygon.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// new
   static MLNPolygon new$() {
     final _ret = _objc_msgSend_151sglz(_class_MLNPolygon, _sel_new);
@@ -33580,6 +33684,39 @@ class MLNPolygon extends MLNMultiPoint implements MLNOverlay {
   /// alloc
   static MLNPolygon alloc() {
     final _ret = _objc_msgSend_151sglz(_class_MLNPolygon, _sel_alloc);
+    return MLNPolygon.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// supportsSecureCoding
+  static bool getSupportsSecureCoding() {
+    return _objc_msgSend_91o635(_class_MLNPolygon, _sel_supportsSecureCoding);
+
+  }
+  /// Returns a new instance of MLNPolygon constructed with the default `new` method.
+  factory MLNPolygon() => new$();
+
+}
+
+extension MLNPolygon$Methods on MLNPolygon {
+
+  /// The array of polygons nested inside the receiver.
+/// 
+/// The area occupied by any interior polygons is excluded from the overall shape.
+/// Interior polygons should not overlap. An interior polygon should not have
+/// interior polygons of its own.
+/// 
+/// If there are no interior polygons, the value of this property is `nil`.
+  objc.NSArray? get interiorPolygons {
+    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_interiorPolygons);
+    return _ret.address == 0 ? null : objc.NSArray.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// init
+  MLNPolygon init() {
+  objc.checkOsVersionInternal('MLNPolygon.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
     return MLNPolygon.castFromPointer(_ret, retain: false, release: true);
   }
 
@@ -33602,13 +33739,6 @@ class MLNPolygon extends MLNMultiPoint implements MLNOverlay {
   MLNPolygon autorelease() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNPolygon.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// supportsSecureCoding
-  static bool getSupportsSecureCoding() {
-    return _objc_msgSend_91o635(_class_MLNPolygon, _sel_supportsSecureCoding);
-
   }
 
 
@@ -33693,8 +33823,6 @@ class MLNPolygon extends MLNMultiPoint implements MLNOverlay {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_subtitle);
     return _ret.address == 0 ? null : objc.NSString.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNPolygon constructed with the default `new` method.
-  factory MLNPolygon() => new$();
 
 }
 
@@ -33735,19 +33863,12 @@ class MLNMultiPolygon extends MLNShape implements MLNOverlay {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNMultiPolygon);
   }
 
-  /// An array of polygons forming the multipolygon.
-  objc.NSArray get polygons {
-    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_polygons);
-    return objc.NSArray.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
   /// Creates and returns a multipolygon object consisting of the given polygons.
 /// 
 /// @param polygons The array of polygons defining the shape.
 /// @return A new multipolygon object.
-  static MLNMultiPolygon multiPolygonWithPolygons(objc.NSArray polygons$1) {
-    final _ret = _objc_msgSend_1sotr3r(_class_MLNMultiPolygon, _sel_multiPolygonWithPolygons_, polygons$1.ref.pointer);
+  static MLNMultiPolygon multiPolygonWithPolygons(objc.NSArray polygons) {
+    final _ret = _objc_msgSend_1sotr3r(_class_MLNMultiPolygon, _sel_multiPolygonWithPolygons_, polygons.ref.pointer);
     return MLNMultiPolygon.castFromPointer(_ret, retain: true, release: true);
   }
 
@@ -33783,14 +33904,6 @@ class MLNMultiPolygon extends MLNShape implements MLNOverlay {
   }
 
 
-  /// init
-  MLNMultiPolygon init() {
-  objc.checkOsVersionInternal('MLNMultiPolygon.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
-    return MLNMultiPolygon.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// new
   static MLNMultiPolygon new$() {
     final _ret = _objc_msgSend_151sglz(_class_MLNMultiPolygon, _sel_new);
@@ -33808,6 +33921,33 @@ class MLNMultiPolygon extends MLNShape implements MLNOverlay {
   /// alloc
   static MLNMultiPolygon alloc() {
     final _ret = _objc_msgSend_151sglz(_class_MLNMultiPolygon, _sel_alloc);
+    return MLNMultiPolygon.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// supportsSecureCoding
+  static bool getSupportsSecureCoding() {
+    return _objc_msgSend_91o635(_class_MLNMultiPolygon, _sel_supportsSecureCoding);
+
+  }
+  /// Returns a new instance of MLNMultiPolygon constructed with the default `new` method.
+  factory MLNMultiPolygon() => new$();
+
+}
+
+extension MLNMultiPolygon$Methods on MLNMultiPolygon {
+
+  /// An array of polygons forming the multipolygon.
+  objc.NSArray get polygons {
+    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_polygons);
+    return objc.NSArray.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// init
+  MLNMultiPolygon init() {
+  objc.checkOsVersionInternal('MLNMultiPolygon.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
     return MLNMultiPolygon.castFromPointer(_ret, retain: false, release: true);
   }
 
@@ -33830,13 +33970,6 @@ class MLNMultiPolygon extends MLNShape implements MLNOverlay {
   MLNMultiPolygon autorelease() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNMultiPolygon.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// supportsSecureCoding
-  static bool getSupportsSecureCoding() {
-    return _objc_msgSend_91o635(_class_MLNMultiPolygon, _sel_supportsSecureCoding);
-
   }
 
 
@@ -33921,8 +34054,6 @@ class MLNMultiPolygon extends MLNShape implements MLNOverlay {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_subtitle);
     return _ret.address == 0 ? null : objc.NSString.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNMultiPolygon constructed with the default `new` method.
-  factory MLNMultiPolygon() => new$();
 
 }
 
@@ -34036,14 +34167,6 @@ class MLNPolyline extends MLNMultiPoint implements MLNOverlay {
   }
 
 
-  /// init
-  MLNPolyline init() {
-  objc.checkOsVersionInternal('MLNPolyline.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
-    return MLNPolyline.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// new
   static MLNPolyline new$() {
     final _ret = _objc_msgSend_151sglz(_class_MLNPolyline, _sel_new);
@@ -34061,6 +34184,26 @@ class MLNPolyline extends MLNMultiPoint implements MLNOverlay {
   /// alloc
   static MLNPolyline alloc() {
     final _ret = _objc_msgSend_151sglz(_class_MLNPolyline, _sel_alloc);
+    return MLNPolyline.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// supportsSecureCoding
+  static bool getSupportsSecureCoding() {
+    return _objc_msgSend_91o635(_class_MLNPolyline, _sel_supportsSecureCoding);
+
+  }
+  /// Returns a new instance of MLNPolyline constructed with the default `new` method.
+  factory MLNPolyline() => new$();
+
+}
+
+extension MLNPolyline$Methods on MLNPolyline {
+
+  /// init
+  MLNPolyline init() {
+  objc.checkOsVersionInternal('MLNPolyline.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
     return MLNPolyline.castFromPointer(_ret, retain: false, release: true);
   }
 
@@ -34083,13 +34226,6 @@ class MLNPolyline extends MLNMultiPoint implements MLNOverlay {
   MLNPolyline autorelease() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNPolyline.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// supportsSecureCoding
-  static bool getSupportsSecureCoding() {
-    return _objc_msgSend_91o635(_class_MLNPolyline, _sel_supportsSecureCoding);
-
   }
 
 
@@ -34174,8 +34310,6 @@ class MLNPolyline extends MLNMultiPoint implements MLNOverlay {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_subtitle);
     return _ret.address == 0 ? null : objc.NSString.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNPolyline constructed with the default `new` method.
-  factory MLNPolyline() => new$();
 
 }
 
@@ -34218,19 +34352,12 @@ class MLNMultiPolyline extends MLNShape implements MLNOverlay {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNMultiPolyline);
   }
 
-  /// An array of polygons forming the multipolyline.
-  objc.NSArray get polylines {
-    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_polylines);
-    return objc.NSArray.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
   /// Creates and returns a multipolyline object consisting of the given polylines.
 /// 
 /// @param polylines The array of polylines defining the shape.
 /// @return A new multipolyline object.
-  static MLNMultiPolyline multiPolylineWithPolylines(objc.NSArray polylines$1) {
-    final _ret = _objc_msgSend_1sotr3r(_class_MLNMultiPolyline, _sel_multiPolylineWithPolylines_, polylines$1.ref.pointer);
+  static MLNMultiPolyline multiPolylineWithPolylines(objc.NSArray polylines) {
+    final _ret = _objc_msgSend_1sotr3r(_class_MLNMultiPolyline, _sel_multiPolylineWithPolylines_, polylines.ref.pointer);
     return MLNMultiPolyline.castFromPointer(_ret, retain: true, release: true);
   }
 
@@ -34266,14 +34393,6 @@ class MLNMultiPolyline extends MLNShape implements MLNOverlay {
   }
 
 
-  /// init
-  MLNMultiPolyline init() {
-  objc.checkOsVersionInternal('MLNMultiPolyline.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
-    return MLNMultiPolyline.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// new
   static MLNMultiPolyline new$() {
     final _ret = _objc_msgSend_151sglz(_class_MLNMultiPolyline, _sel_new);
@@ -34291,6 +34410,33 @@ class MLNMultiPolyline extends MLNShape implements MLNOverlay {
   /// alloc
   static MLNMultiPolyline alloc() {
     final _ret = _objc_msgSend_151sglz(_class_MLNMultiPolyline, _sel_alloc);
+    return MLNMultiPolyline.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// supportsSecureCoding
+  static bool getSupportsSecureCoding() {
+    return _objc_msgSend_91o635(_class_MLNMultiPolyline, _sel_supportsSecureCoding);
+
+  }
+  /// Returns a new instance of MLNMultiPolyline constructed with the default `new` method.
+  factory MLNMultiPolyline() => new$();
+
+}
+
+extension MLNMultiPolyline$Methods on MLNMultiPolyline {
+
+  /// An array of polygons forming the multipolyline.
+  objc.NSArray get polylines {
+    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_polylines);
+    return objc.NSArray.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// init
+  MLNMultiPolyline init() {
+  objc.checkOsVersionInternal('MLNMultiPolyline.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
     return MLNMultiPolyline.castFromPointer(_ret, retain: false, release: true);
   }
 
@@ -34313,13 +34459,6 @@ class MLNMultiPolyline extends MLNShape implements MLNOverlay {
   MLNMultiPolyline autorelease() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNMultiPolyline.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// supportsSecureCoding
-  static bool getSupportsSecureCoding() {
-    return _objc_msgSend_91o635(_class_MLNMultiPolyline, _sel_supportsSecureCoding);
-
   }
 
 
@@ -34404,8 +34543,6 @@ class MLNMultiPolyline extends MLNShape implements MLNOverlay {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_subtitle);
     return _ret.address == 0 ? null : objc.NSString.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNMultiPolyline constructed with the default `new` method.
-  factory MLNMultiPolyline() => new$();
 
 }
 
@@ -34456,20 +34593,13 @@ class MLNShapeCollection extends MLNShape {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNShapeCollection);
   }
 
-  /// An array of shapes forming the shape collection.
-  objc.NSArray get shapes {
-    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_shapes);
-    return objc.NSArray.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
   /// Creates and returns a shape collection consisting of the given shapes.
 /// 
 /// @param shapes The array of shapes defining the shape collection. The data in
 /// this array is copied to the new object.
 /// @return A new shape collection object.
-  static MLNShapeCollection shapeCollectionWithShapes(objc.NSArray shapes$1) {
-    final _ret = _objc_msgSend_1sotr3r(_class_MLNShapeCollection, _sel_shapeCollectionWithShapes_, shapes$1.ref.pointer);
+  static MLNShapeCollection shapeCollectionWithShapes(objc.NSArray shapes) {
+    final _ret = _objc_msgSend_1sotr3r(_class_MLNShapeCollection, _sel_shapeCollectionWithShapes_, shapes.ref.pointer);
     return MLNShapeCollection.castFromPointer(_ret, retain: true, release: true);
   }
 
@@ -34505,14 +34635,6 @@ class MLNShapeCollection extends MLNShape {
   }
 
 
-  /// init
-  MLNShapeCollection init() {
-  objc.checkOsVersionInternal('MLNShapeCollection.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
-    return MLNShapeCollection.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// new
   static MLNShapeCollection new$() {
     final _ret = _objc_msgSend_151sglz(_class_MLNShapeCollection, _sel_new);
@@ -34530,6 +34652,33 @@ class MLNShapeCollection extends MLNShape {
   /// alloc
   static MLNShapeCollection alloc() {
     final _ret = _objc_msgSend_151sglz(_class_MLNShapeCollection, _sel_alloc);
+    return MLNShapeCollection.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// supportsSecureCoding
+  static bool getSupportsSecureCoding() {
+    return _objc_msgSend_91o635(_class_MLNShapeCollection, _sel_supportsSecureCoding);
+
+  }
+  /// Returns a new instance of MLNShapeCollection constructed with the default `new` method.
+  factory MLNShapeCollection() => new$();
+
+}
+
+extension MLNShapeCollection$Methods on MLNShapeCollection {
+
+  /// An array of shapes forming the shape collection.
+  objc.NSArray get shapes {
+    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_shapes);
+    return objc.NSArray.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// init
+  MLNShapeCollection init() {
+  objc.checkOsVersionInternal('MLNShapeCollection.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
     return MLNShapeCollection.castFromPointer(_ret, retain: false, release: true);
   }
 
@@ -34555,20 +34704,11 @@ class MLNShapeCollection extends MLNShape {
   }
 
 
-  /// supportsSecureCoding
-  static bool getSupportsSecureCoding() {
-    return _objc_msgSend_91o635(_class_MLNShapeCollection, _sel_supportsSecureCoding);
-
-  }
-
-
   /// initWithCoder:
   MLNShapeCollection? initWithCoder(objc.NSCoder coder) {
     final _ret = _objc_msgSend_1sotr3r(this.ref.retainAndReturnPointer(), _sel_initWithCoder_, coder.ref.pointer);
     return _ret.address == 0 ? null : MLNShapeCollection.castFromPointer(_ret, retain: false, release: true);
   }
-  /// Returns a new instance of MLNShapeCollection constructed with the default `new` method.
-  factory MLNShapeCollection() => new$();
 
 }
 
@@ -34625,14 +34765,6 @@ class MLNEmptyFeature extends MLNShape implements MLNFeature {
   }
 
 
-  /// init
-  MLNEmptyFeature init() {
-  objc.checkOsVersionInternal('MLNEmptyFeature.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
-    return MLNEmptyFeature.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// new
   static MLNEmptyFeature new$() {
     final _ret = _objc_msgSend_151sglz(_class_MLNEmptyFeature, _sel_new);
@@ -34650,6 +34782,26 @@ class MLNEmptyFeature extends MLNShape implements MLNFeature {
   /// alloc
   static MLNEmptyFeature alloc() {
     final _ret = _objc_msgSend_151sglz(_class_MLNEmptyFeature, _sel_alloc);
+    return MLNEmptyFeature.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// supportsSecureCoding
+  static bool getSupportsSecureCoding() {
+    return _objc_msgSend_91o635(_class_MLNEmptyFeature, _sel_supportsSecureCoding);
+
+  }
+  /// Returns a new instance of MLNEmptyFeature constructed with the default `new` method.
+  factory MLNEmptyFeature() => new$();
+
+}
+
+extension MLNEmptyFeature$Methods on MLNEmptyFeature {
+
+  /// init
+  MLNEmptyFeature init() {
+  objc.checkOsVersionInternal('MLNEmptyFeature.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
     return MLNEmptyFeature.castFromPointer(_ret, retain: false, release: true);
   }
 
@@ -34672,13 +34824,6 @@ class MLNEmptyFeature extends MLNShape implements MLNFeature {
   MLNEmptyFeature autorelease() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNEmptyFeature.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// supportsSecureCoding
-  static bool getSupportsSecureCoding() {
-    return _objc_msgSend_91o635(_class_MLNEmptyFeature, _sel_supportsSecureCoding);
-
   }
 
 
@@ -34942,8 +35087,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setAttributes_, value.ref.pointer);
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_subtitle);
     return _ret.address == 0 ? null : objc.NSString.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNEmptyFeature constructed with the default `new` method.
-  factory MLNEmptyFeature() => new$();
 
 }
 
@@ -35003,14 +35146,6 @@ class MLNPointFeature extends MLNPointAnnotation implements MLNFeature {
   }
 
 
-  /// init
-  MLNPointFeature init() {
-  objc.checkOsVersionInternal('MLNPointFeature.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
-    return MLNPointFeature.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// new
   static MLNPointFeature new$() {
     final _ret = _objc_msgSend_151sglz(_class_MLNPointFeature, _sel_new);
@@ -35028,6 +35163,26 @@ class MLNPointFeature extends MLNPointAnnotation implements MLNFeature {
   /// alloc
   static MLNPointFeature alloc() {
     final _ret = _objc_msgSend_151sglz(_class_MLNPointFeature, _sel_alloc);
+    return MLNPointFeature.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// supportsSecureCoding
+  static bool getSupportsSecureCoding() {
+    return _objc_msgSend_91o635(_class_MLNPointFeature, _sel_supportsSecureCoding);
+
+  }
+  /// Returns a new instance of MLNPointFeature constructed with the default `new` method.
+  factory MLNPointFeature() => new$();
+
+}
+
+extension MLNPointFeature$Methods on MLNPointFeature {
+
+  /// init
+  MLNPointFeature init() {
+  objc.checkOsVersionInternal('MLNPointFeature.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
     return MLNPointFeature.castFromPointer(_ret, retain: false, release: true);
   }
 
@@ -35050,13 +35205,6 @@ class MLNPointFeature extends MLNPointAnnotation implements MLNFeature {
   MLNPointFeature autorelease() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNPointFeature.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// supportsSecureCoding
-  static bool getSupportsSecureCoding() {
-    return _objc_msgSend_91o635(_class_MLNPointFeature, _sel_supportsSecureCoding);
-
   }
 
 
@@ -35320,8 +35468,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setAttributes_, value.ref.pointer);
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_subtitle);
     return _ret.address == 0 ? null : objc.NSString.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNPointFeature constructed with the default `new` method.
-  factory MLNPointFeature() => new$();
 
 }
 
@@ -35384,14 +35530,6 @@ class MLNPointFeatureCluster extends MLNPointFeature implements MLNCluster {
   }
 
 
-  /// init
-  MLNPointFeatureCluster init() {
-  objc.checkOsVersionInternal('MLNPointFeatureCluster.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
-    return MLNPointFeatureCluster.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// new
   static MLNPointFeatureCluster new$() {
     final _ret = _objc_msgSend_151sglz(_class_MLNPointFeatureCluster, _sel_new);
@@ -35409,6 +35547,26 @@ class MLNPointFeatureCluster extends MLNPointFeature implements MLNCluster {
   /// alloc
   static MLNPointFeatureCluster alloc() {
     final _ret = _objc_msgSend_151sglz(_class_MLNPointFeatureCluster, _sel_alloc);
+    return MLNPointFeatureCluster.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// supportsSecureCoding
+  static bool getSupportsSecureCoding() {
+    return _objc_msgSend_91o635(_class_MLNPointFeatureCluster, _sel_supportsSecureCoding);
+
+  }
+  /// Returns a new instance of MLNPointFeatureCluster constructed with the default `new` method.
+  factory MLNPointFeatureCluster() => new$();
+
+}
+
+extension MLNPointFeatureCluster$Methods on MLNPointFeatureCluster {
+
+  /// init
+  MLNPointFeatureCluster init() {
+  objc.checkOsVersionInternal('MLNPointFeatureCluster.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
     return MLNPointFeatureCluster.castFromPointer(_ret, retain: false, release: true);
   }
 
@@ -35431,13 +35589,6 @@ class MLNPointFeatureCluster extends MLNPointFeature implements MLNCluster {
   MLNPointFeatureCluster autorelease() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNPointFeatureCluster.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// supportsSecureCoding
-  static bool getSupportsSecureCoding() {
-    return _objc_msgSend_91o635(_class_MLNPointFeatureCluster, _sel_supportsSecureCoding);
-
   }
 
 
@@ -35715,8 +35866,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setAttributes_, value.ref.pointer);
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_subtitle);
     return _ret.address == 0 ? null : objc.NSString.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNPointFeatureCluster constructed with the default `new` method.
-  factory MLNPointFeatureCluster() => new$();
 
 }
 
@@ -35793,14 +35942,6 @@ class MLNPolylineFeature extends MLNPolyline implements MLNFeature {
   }
 
 
-  /// init
-  MLNPolylineFeature init() {
-  objc.checkOsVersionInternal('MLNPolylineFeature.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
-    return MLNPolylineFeature.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// new
   static MLNPolylineFeature new$() {
     final _ret = _objc_msgSend_151sglz(_class_MLNPolylineFeature, _sel_new);
@@ -35818,6 +35959,26 @@ class MLNPolylineFeature extends MLNPolyline implements MLNFeature {
   /// alloc
   static MLNPolylineFeature alloc() {
     final _ret = _objc_msgSend_151sglz(_class_MLNPolylineFeature, _sel_alloc);
+    return MLNPolylineFeature.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// supportsSecureCoding
+  static bool getSupportsSecureCoding() {
+    return _objc_msgSend_91o635(_class_MLNPolylineFeature, _sel_supportsSecureCoding);
+
+  }
+  /// Returns a new instance of MLNPolylineFeature constructed with the default `new` method.
+  factory MLNPolylineFeature() => new$();
+
+}
+
+extension MLNPolylineFeature$Methods on MLNPolylineFeature {
+
+  /// init
+  MLNPolylineFeature init() {
+  objc.checkOsVersionInternal('MLNPolylineFeature.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
     return MLNPolylineFeature.castFromPointer(_ret, retain: false, release: true);
   }
 
@@ -35840,13 +36001,6 @@ class MLNPolylineFeature extends MLNPolyline implements MLNFeature {
   MLNPolylineFeature autorelease() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNPolylineFeature.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// supportsSecureCoding
-  static bool getSupportsSecureCoding() {
-    return _objc_msgSend_91o635(_class_MLNPolylineFeature, _sel_supportsSecureCoding);
-
   }
 
 
@@ -36110,8 +36264,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setAttributes_, value.ref.pointer);
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_subtitle);
     return _ret.address == 0 ? null : objc.NSString.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNPolylineFeature constructed with the default `new` method.
-  factory MLNPolylineFeature() => new$();
 
 }
 
@@ -36160,8 +36312,8 @@ class MLNPolygonFeature extends MLNPolygon implements MLNFeature {
 /// excluded from the overall shape. If this array is `nil` or empty, the shape
 /// is considered to have no interior polygons.
 /// @return A new polygon object.
-  static MLNPolygonFeature polygonWithCoordinates$1(ffi.Pointer<CLLocationCoordinate2D> coords, {required int count,objc.NSArray? interiorPolygons$1}) {
-    final _ret = _objc_msgSend_inmhr7(_class_MLNPolygonFeature, _sel_polygonWithCoordinates_count_interiorPolygons_, coords, count, interiorPolygons$1?.ref.pointer ?? ffi.nullptr);
+  static MLNPolygonFeature polygonWithCoordinates$1(ffi.Pointer<CLLocationCoordinate2D> coords, {required int count,objc.NSArray? interiorPolygons}) {
+    final _ret = _objc_msgSend_inmhr7(_class_MLNPolygonFeature, _sel_polygonWithCoordinates_count_interiorPolygons_, coords, count, interiorPolygons?.ref.pointer ?? ffi.nullptr);
     return MLNPolygonFeature.castFromPointer(_ret, retain: true, release: true);
   }
 
@@ -36197,14 +36349,6 @@ class MLNPolygonFeature extends MLNPolygon implements MLNFeature {
   }
 
 
-  /// init
-  MLNPolygonFeature init() {
-  objc.checkOsVersionInternal('MLNPolygonFeature.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
-    return MLNPolygonFeature.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// new
   static MLNPolygonFeature new$() {
     final _ret = _objc_msgSend_151sglz(_class_MLNPolygonFeature, _sel_new);
@@ -36222,6 +36366,26 @@ class MLNPolygonFeature extends MLNPolygon implements MLNFeature {
   /// alloc
   static MLNPolygonFeature alloc() {
     final _ret = _objc_msgSend_151sglz(_class_MLNPolygonFeature, _sel_alloc);
+    return MLNPolygonFeature.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// supportsSecureCoding
+  static bool getSupportsSecureCoding() {
+    return _objc_msgSend_91o635(_class_MLNPolygonFeature, _sel_supportsSecureCoding);
+
+  }
+  /// Returns a new instance of MLNPolygonFeature constructed with the default `new` method.
+  factory MLNPolygonFeature() => new$();
+
+}
+
+extension MLNPolygonFeature$Methods on MLNPolygonFeature {
+
+  /// init
+  MLNPolygonFeature init() {
+  objc.checkOsVersionInternal('MLNPolygonFeature.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
     return MLNPolygonFeature.castFromPointer(_ret, retain: false, release: true);
   }
 
@@ -36244,13 +36408,6 @@ class MLNPolygonFeature extends MLNPolygon implements MLNFeature {
   MLNPolygonFeature autorelease() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNPolygonFeature.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// supportsSecureCoding
-  static bool getSupportsSecureCoding() {
-    return _objc_msgSend_91o635(_class_MLNPolygonFeature, _sel_supportsSecureCoding);
-
   }
 
 
@@ -36514,8 +36671,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setAttributes_, value.ref.pointer);
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_subtitle);
     return _ret.address == 0 ? null : objc.NSString.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNPolygonFeature constructed with the default `new` method.
-  factory MLNPolygonFeature() => new$();
 
 }
 
@@ -36589,14 +36744,6 @@ class MLNPointCollectionFeature extends MLNPointCollection implements MLNFeature
   }
 
 
-  /// init
-  MLNPointCollectionFeature init() {
-  objc.checkOsVersionInternal('MLNPointCollectionFeature.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
-    return MLNPointCollectionFeature.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// new
   static MLNPointCollectionFeature new$() {
     final _ret = _objc_msgSend_151sglz(_class_MLNPointCollectionFeature, _sel_new);
@@ -36614,6 +36761,26 @@ class MLNPointCollectionFeature extends MLNPointCollection implements MLNFeature
   /// alloc
   static MLNPointCollectionFeature alloc() {
     final _ret = _objc_msgSend_151sglz(_class_MLNPointCollectionFeature, _sel_alloc);
+    return MLNPointCollectionFeature.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// supportsSecureCoding
+  static bool getSupportsSecureCoding() {
+    return _objc_msgSend_91o635(_class_MLNPointCollectionFeature, _sel_supportsSecureCoding);
+
+  }
+  /// Returns a new instance of MLNPointCollectionFeature constructed with the default `new` method.
+  factory MLNPointCollectionFeature() => new$();
+
+}
+
+extension MLNPointCollectionFeature$Methods on MLNPointCollectionFeature {
+
+  /// init
+  MLNPointCollectionFeature init() {
+  objc.checkOsVersionInternal('MLNPointCollectionFeature.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
     return MLNPointCollectionFeature.castFromPointer(_ret, retain: false, release: true);
   }
 
@@ -36636,13 +36803,6 @@ class MLNPointCollectionFeature extends MLNPointCollection implements MLNFeature
   MLNPointCollectionFeature autorelease() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNPointCollectionFeature.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// supportsSecureCoding
-  static bool getSupportsSecureCoding() {
-    return _objc_msgSend_91o635(_class_MLNPointCollectionFeature, _sel_supportsSecureCoding);
-
   }
 
 
@@ -36906,8 +37066,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setAttributes_, value.ref.pointer);
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_subtitle);
     return _ret.address == 0 ? null : objc.NSString.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNPointCollectionFeature constructed with the default `new` method.
-  factory MLNPointCollectionFeature() => new$();
 
 }
 
@@ -36941,8 +37099,8 @@ class MLNMultiPolylineFeature extends MLNMultiPolyline implements MLNFeature {
 /// 
 /// @param polylines The array of polylines defining the shape.
 /// @return A new multipolyline object.
-  static MLNMultiPolylineFeature multiPolylineWithPolylines(objc.NSArray polylines$1) {
-    final _ret = _objc_msgSend_1sotr3r(_class_MLNMultiPolylineFeature, _sel_multiPolylineWithPolylines_, polylines$1.ref.pointer);
+  static MLNMultiPolylineFeature multiPolylineWithPolylines(objc.NSArray polylines) {
+    final _ret = _objc_msgSend_1sotr3r(_class_MLNMultiPolylineFeature, _sel_multiPolylineWithPolylines_, polylines.ref.pointer);
     return MLNMultiPolylineFeature.castFromPointer(_ret, retain: true, release: true);
   }
 
@@ -36978,14 +37136,6 @@ class MLNMultiPolylineFeature extends MLNMultiPolyline implements MLNFeature {
   }
 
 
-  /// init
-  MLNMultiPolylineFeature init() {
-  objc.checkOsVersionInternal('MLNMultiPolylineFeature.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
-    return MLNMultiPolylineFeature.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// new
   static MLNMultiPolylineFeature new$() {
     final _ret = _objc_msgSend_151sglz(_class_MLNMultiPolylineFeature, _sel_new);
@@ -37003,6 +37153,26 @@ class MLNMultiPolylineFeature extends MLNMultiPolyline implements MLNFeature {
   /// alloc
   static MLNMultiPolylineFeature alloc() {
     final _ret = _objc_msgSend_151sglz(_class_MLNMultiPolylineFeature, _sel_alloc);
+    return MLNMultiPolylineFeature.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// supportsSecureCoding
+  static bool getSupportsSecureCoding() {
+    return _objc_msgSend_91o635(_class_MLNMultiPolylineFeature, _sel_supportsSecureCoding);
+
+  }
+  /// Returns a new instance of MLNMultiPolylineFeature constructed with the default `new` method.
+  factory MLNMultiPolylineFeature() => new$();
+
+}
+
+extension MLNMultiPolylineFeature$Methods on MLNMultiPolylineFeature {
+
+  /// init
+  MLNMultiPolylineFeature init() {
+  objc.checkOsVersionInternal('MLNMultiPolylineFeature.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
     return MLNMultiPolylineFeature.castFromPointer(_ret, retain: false, release: true);
   }
 
@@ -37025,13 +37195,6 @@ class MLNMultiPolylineFeature extends MLNMultiPolyline implements MLNFeature {
   MLNMultiPolylineFeature autorelease() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNMultiPolylineFeature.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// supportsSecureCoding
-  static bool getSupportsSecureCoding() {
-    return _objc_msgSend_91o635(_class_MLNMultiPolylineFeature, _sel_supportsSecureCoding);
-
   }
 
 
@@ -37295,8 +37458,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setAttributes_, value.ref.pointer);
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_subtitle);
     return _ret.address == 0 ? null : objc.NSString.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNMultiPolylineFeature constructed with the default `new` method.
-  factory MLNMultiPolylineFeature() => new$();
 
 }
 
@@ -37326,8 +37487,8 @@ class MLNMultiPolygonFeature extends MLNMultiPolygon implements MLNFeature {
 /// 
 /// @param polygons The array of polygons defining the shape.
 /// @return A new multipolygon object.
-  static MLNMultiPolygonFeature multiPolygonWithPolygons(objc.NSArray polygons$1) {
-    final _ret = _objc_msgSend_1sotr3r(_class_MLNMultiPolygonFeature, _sel_multiPolygonWithPolygons_, polygons$1.ref.pointer);
+  static MLNMultiPolygonFeature multiPolygonWithPolygons(objc.NSArray polygons) {
+    final _ret = _objc_msgSend_1sotr3r(_class_MLNMultiPolygonFeature, _sel_multiPolygonWithPolygons_, polygons.ref.pointer);
     return MLNMultiPolygonFeature.castFromPointer(_ret, retain: true, release: true);
   }
 
@@ -37363,14 +37524,6 @@ class MLNMultiPolygonFeature extends MLNMultiPolygon implements MLNFeature {
   }
 
 
-  /// init
-  MLNMultiPolygonFeature init() {
-  objc.checkOsVersionInternal('MLNMultiPolygonFeature.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
-    return MLNMultiPolygonFeature.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// new
   static MLNMultiPolygonFeature new$() {
     final _ret = _objc_msgSend_151sglz(_class_MLNMultiPolygonFeature, _sel_new);
@@ -37388,6 +37541,26 @@ class MLNMultiPolygonFeature extends MLNMultiPolygon implements MLNFeature {
   /// alloc
   static MLNMultiPolygonFeature alloc() {
     final _ret = _objc_msgSend_151sglz(_class_MLNMultiPolygonFeature, _sel_alloc);
+    return MLNMultiPolygonFeature.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// supportsSecureCoding
+  static bool getSupportsSecureCoding() {
+    return _objc_msgSend_91o635(_class_MLNMultiPolygonFeature, _sel_supportsSecureCoding);
+
+  }
+  /// Returns a new instance of MLNMultiPolygonFeature constructed with the default `new` method.
+  factory MLNMultiPolygonFeature() => new$();
+
+}
+
+extension MLNMultiPolygonFeature$Methods on MLNMultiPolygonFeature {
+
+  /// init
+  MLNMultiPolygonFeature init() {
+  objc.checkOsVersionInternal('MLNMultiPolygonFeature.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
     return MLNMultiPolygonFeature.castFromPointer(_ret, retain: false, release: true);
   }
 
@@ -37410,13 +37583,6 @@ class MLNMultiPolygonFeature extends MLNMultiPolygon implements MLNFeature {
   MLNMultiPolygonFeature autorelease() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNMultiPolygonFeature.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// supportsSecureCoding
-  static bool getSupportsSecureCoding() {
-    return _objc_msgSend_91o635(_class_MLNMultiPolygonFeature, _sel_supportsSecureCoding);
-
   }
 
 
@@ -37680,8 +37846,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setAttributes_, value.ref.pointer);
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_subtitle);
     return _ret.address == 0 ? null : objc.NSString.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNMultiPolygonFeature constructed with the default `new` method.
-  factory MLNMultiPolygonFeature() => new$();
 
 }
 
@@ -37722,20 +37886,13 @@ class MLNShapeCollectionFeature extends MLNShapeCollection implements MLNFeature
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNShapeCollectionFeature);
   }
 
-  /// shapes
-  objc.NSArray get shapes {
-    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_shapes);
-    return objc.NSArray.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
   /// Creates and returns a shape collection consisting of the given shapes.
 /// 
 /// @param shapes The array of shapes defining the shape collection. The data in
 /// this array is copied to the new object.
 /// @return A new shape collection object.
-  static MLNShapeCollectionFeature shapeCollectionWithShapes(objc.NSArray shapes$1) {
-    final _ret = _objc_msgSend_1sotr3r(_class_MLNShapeCollectionFeature, _sel_shapeCollectionWithShapes_, shapes$1.ref.pointer);
+  static MLNShapeCollectionFeature shapeCollectionWithShapes(objc.NSArray shapes) {
+    final _ret = _objc_msgSend_1sotr3r(_class_MLNShapeCollectionFeature, _sel_shapeCollectionWithShapes_, shapes.ref.pointer);
     return MLNShapeCollectionFeature.castFromPointer(_ret, retain: true, release: true);
   }
 
@@ -37771,14 +37928,6 @@ class MLNShapeCollectionFeature extends MLNShapeCollection implements MLNFeature
   }
 
 
-  /// init
-  MLNShapeCollectionFeature init() {
-  objc.checkOsVersionInternal('MLNShapeCollectionFeature.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
-    return MLNShapeCollectionFeature.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// new
   static MLNShapeCollectionFeature new$() {
     final _ret = _objc_msgSend_151sglz(_class_MLNShapeCollectionFeature, _sel_new);
@@ -37796,6 +37945,33 @@ class MLNShapeCollectionFeature extends MLNShapeCollection implements MLNFeature
   /// alloc
   static MLNShapeCollectionFeature alloc() {
     final _ret = _objc_msgSend_151sglz(_class_MLNShapeCollectionFeature, _sel_alloc);
+    return MLNShapeCollectionFeature.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// supportsSecureCoding
+  static bool getSupportsSecureCoding() {
+    return _objc_msgSend_91o635(_class_MLNShapeCollectionFeature, _sel_supportsSecureCoding);
+
+  }
+  /// Returns a new instance of MLNShapeCollectionFeature constructed with the default `new` method.
+  factory MLNShapeCollectionFeature() => new$();
+
+}
+
+extension MLNShapeCollectionFeature$Methods on MLNShapeCollectionFeature {
+
+  /// shapes
+  objc.NSArray get shapes {
+    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_shapes);
+    return objc.NSArray.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// init
+  MLNShapeCollectionFeature init() {
+  objc.checkOsVersionInternal('MLNShapeCollectionFeature.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
     return MLNShapeCollectionFeature.castFromPointer(_ret, retain: false, release: true);
   }
 
@@ -37818,13 +37994,6 @@ class MLNShapeCollectionFeature extends MLNShapeCollection implements MLNFeature
   MLNShapeCollectionFeature autorelease() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNShapeCollectionFeature.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
-  /// supportsSecureCoding
-  static bool getSupportsSecureCoding() {
-    return _objc_msgSend_91o635(_class_MLNShapeCollectionFeature, _sel_supportsSecureCoding);
-
   }
 
 
@@ -38088,8 +38257,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setAttributes_, value.ref.pointer);
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_subtitle);
     return _ret.address == 0 ? null : objc.NSString.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNShapeCollectionFeature constructed with the default `new` method.
-  factory MLNShapeCollectionFeature() => new$();
 
 }
 
@@ -38130,6 +38297,32 @@ class MLNTileSource extends MLNSource {
   static bool isInstance(objc.ObjCObjectBase obj) {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNTileSource);
   }
+
+  /// new
+  static MLNTileSource new$() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNTileSource, _sel_new);
+    return MLNTileSource.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static MLNTileSource allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_MLNTileSource, _sel_allocWithZone_, zone);
+    return MLNTileSource.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static MLNTileSource alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNTileSource, _sel_alloc);
+    return MLNTileSource.castFromPointer(_ret, retain: false, release: true);
+  }
+  /// Returns a new instance of MLNTileSource constructed with the default `new` method.
+  factory MLNTileSource() => new$();
+
+}
+
+extension MLNTileSource$Methods on MLNTileSource {
 
   /// The URL to the TileJSON configuration file that specifies the contents of the
 /// source.
@@ -38187,27 +38380,6 @@ class MLNTileSource extends MLNSource {
   }
 
 
-  /// new
-  static MLNTileSource new$() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNTileSource, _sel_new);
-    return MLNTileSource.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static MLNTileSource allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_MLNTileSource, _sel_allocWithZone_, zone);
-    return MLNTileSource.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static MLNTileSource alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNTileSource, _sel_alloc);
-    return MLNTileSource.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// self
   MLNTileSource self$1() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_self);
@@ -38227,8 +38399,6 @@ class MLNTileSource extends MLNSource {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNTileSource.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNTileSource constructed with the default `new` method.
-  factory MLNTileSource() => new$();
 
 }
 
@@ -38308,6 +38478,32 @@ class MLNVectorTileSource extends MLNTileSource {
   static bool isInstance(objc.ObjCObjectBase obj) {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNVectorTileSource);
   }
+
+  /// new
+  static MLNVectorTileSource new$() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNVectorTileSource, _sel_new);
+    return MLNVectorTileSource.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static MLNVectorTileSource allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_MLNVectorTileSource, _sel_allocWithZone_, zone);
+    return MLNVectorTileSource.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static MLNVectorTileSource alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNVectorTileSource, _sel_alloc);
+    return MLNVectorTileSource.castFromPointer(_ret, retain: false, release: true);
+  }
+  /// Returns a new instance of MLNVectorTileSource constructed with the default `new` method.
+  factory MLNVectorTileSource() => new$();
+
+}
+
+extension MLNVectorTileSource$Methods on MLNVectorTileSource {
 
   /// Returns a vector tile source initialized with an identifier and configuration
 /// URL.
@@ -38440,27 +38636,6 @@ class MLNVectorTileSource extends MLNTileSource {
   }
 
 
-  /// new
-  static MLNVectorTileSource new$() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNVectorTileSource, _sel_new);
-    return MLNVectorTileSource.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static MLNVectorTileSource allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_MLNVectorTileSource, _sel_allocWithZone_, zone);
-    return MLNVectorTileSource.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static MLNVectorTileSource alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNVectorTileSource, _sel_alloc);
-    return MLNVectorTileSource.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// self
   MLNVectorTileSource self$1() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_self);
@@ -38480,8 +38655,6 @@ class MLNVectorTileSource extends MLNTileSource {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNVectorTileSource.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNVectorTileSource constructed with the default `new` method.
-  factory MLNVectorTileSource() => new$();
 
 }
 
@@ -38557,6 +38730,32 @@ class MLNShapeSource extends MLNSource {
   static bool isInstance(objc.ObjCObjectBase obj) {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNShapeSource);
   }
+
+  /// new
+  static MLNShapeSource new$() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNShapeSource, _sel_new);
+    return MLNShapeSource.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static MLNShapeSource allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_MLNShapeSource, _sel_allocWithZone_, zone);
+    return MLNShapeSource.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static MLNShapeSource alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNShapeSource, _sel_alloc);
+    return MLNShapeSource.castFromPointer(_ret, retain: false, release: true);
+  }
+  /// Returns a new instance of MLNShapeSource constructed with the default `new` method.
+  factory MLNShapeSource() => new$();
+
+}
+
+extension MLNShapeSource$Methods on MLNShapeSource {
 
   /// Returns a shape source with an identifier, URL, and dictionary of options for
 /// the source.
@@ -38831,27 +39030,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setURL_, value?.ref.pointer ?? ffi.n
   }
 
 
-  /// new
-  static MLNShapeSource new$() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNShapeSource, _sel_new);
-    return MLNShapeSource.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static MLNShapeSource allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_MLNShapeSource, _sel_allocWithZone_, zone);
-    return MLNShapeSource.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static MLNShapeSource alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNShapeSource, _sel_alloc);
-    return MLNShapeSource.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// self
   MLNShapeSource self$1() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_self);
@@ -38871,8 +39049,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setURL_, value?.ref.pointer ?? ffi.n
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNShapeSource.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNShapeSource constructed with the default `new` method.
-  factory MLNShapeSource() => new$();
 
 }
 
@@ -39112,6 +39288,32 @@ class MLNComputedShapeSource extends MLNSource {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNComputedShapeSource);
   }
 
+  /// new
+  static MLNComputedShapeSource new$() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNComputedShapeSource, _sel_new);
+    return MLNComputedShapeSource.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static MLNComputedShapeSource allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_MLNComputedShapeSource, _sel_allocWithZone_, zone);
+    return MLNComputedShapeSource.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static MLNComputedShapeSource alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNComputedShapeSource, _sel_alloc);
+    return MLNComputedShapeSource.castFromPointer(_ret, retain: false, release: true);
+  }
+  /// Returns a new instance of MLNComputedShapeSource constructed with the default `new` method.
+  factory MLNComputedShapeSource() => new$();
+
+}
+
+extension MLNComputedShapeSource$Methods on MLNComputedShapeSource {
+
   /// Returns a custom shape data source initialized with an identifier, and a
 /// dictionary of options for the source according to the
 /// <a href="https://maplibre.org/maplibre-style-spec/#sources-geojson">style
@@ -39235,27 +39437,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setDataSource_, value?.ref.pointer ?
   }
 
 
-  /// new
-  static MLNComputedShapeSource new$() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNComputedShapeSource, _sel_new);
-    return MLNComputedShapeSource.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static MLNComputedShapeSource allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_MLNComputedShapeSource, _sel_allocWithZone_, zone);
-    return MLNComputedShapeSource.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static MLNComputedShapeSource alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNComputedShapeSource, _sel_alloc);
-    return MLNComputedShapeSource.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// self
   MLNComputedShapeSource self$1() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_self);
@@ -39275,8 +39456,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setDataSource_, value?.ref.pointer ?
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNComputedShapeSource.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNComputedShapeSource constructed with the default `new` method.
-  factory MLNComputedShapeSource() => new$();
 
 }
 
@@ -39342,6 +39521,32 @@ class MLNImageSource extends MLNSource {
   static bool isInstance(objc.ObjCObjectBase obj) {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNImageSource);
   }
+
+  /// new
+  static MLNImageSource new$() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNImageSource, _sel_new);
+    return MLNImageSource.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static MLNImageSource allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_MLNImageSource, _sel_allocWithZone_, zone);
+    return MLNImageSource.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static MLNImageSource alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNImageSource, _sel_alloc);
+    return MLNImageSource.castFromPointer(_ret, retain: false, release: true);
+  }
+  /// Returns a new instance of MLNImageSource constructed with the default `new` method.
+  factory MLNImageSource() => new$();
+
+}
+
+extension MLNImageSource$Methods on MLNImageSource {
 
   /// Returns a georeferenced image source with an identifier, coordinates and a URL.
 /// 
@@ -39450,27 +39655,6 @@ _objc_msgSend_1wvd2xm(this.ref.pointer, _sel_setCoordinates_, value);
   }
 
 
-  /// new
-  static MLNImageSource new$() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNImageSource, _sel_new);
-    return MLNImageSource.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static MLNImageSource allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_MLNImageSource, _sel_allocWithZone_, zone);
-    return MLNImageSource.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static MLNImageSource alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNImageSource, _sel_alloc);
-    return MLNImageSource.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// self
   MLNImageSource self$1() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_self);
@@ -39490,8 +39674,6 @@ _objc_msgSend_1wvd2xm(this.ref.pointer, _sel_setCoordinates_, value);
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNImageSource.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNImageSource constructed with the default `new` method.
-  factory MLNImageSource() => new$();
 
 }
 
@@ -39550,6 +39732,32 @@ class MLNRasterTileSource extends MLNTileSource {
   static bool isInstance(objc.ObjCObjectBase obj) {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNRasterTileSource);
   }
+
+  /// new
+  static MLNRasterTileSource new$() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNRasterTileSource, _sel_new);
+    return MLNRasterTileSource.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static MLNRasterTileSource allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_MLNRasterTileSource, _sel_allocWithZone_, zone);
+    return MLNRasterTileSource.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static MLNRasterTileSource alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNRasterTileSource, _sel_alloc);
+    return MLNRasterTileSource.castFromPointer(_ret, retain: false, release: true);
+  }
+  /// Returns a new instance of MLNRasterTileSource constructed with the default `new` method.
+  factory MLNRasterTileSource() => new$();
+
+}
+
+extension MLNRasterTileSource$Methods on MLNRasterTileSource {
 
   /// Returns a raster tile source initialized with an identifier and configuration
 /// URL.
@@ -39648,27 +39856,6 @@ class MLNRasterTileSource extends MLNTileSource {
   }
 
 
-  /// new
-  static MLNRasterTileSource new$() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNRasterTileSource, _sel_new);
-    return MLNRasterTileSource.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static MLNRasterTileSource allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_MLNRasterTileSource, _sel_allocWithZone_, zone);
-    return MLNRasterTileSource.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static MLNRasterTileSource alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNRasterTileSource, _sel_alloc);
-    return MLNRasterTileSource.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// self
   MLNRasterTileSource self$1() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_self);
@@ -39688,8 +39875,6 @@ class MLNRasterTileSource extends MLNTileSource {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNRasterTileSource.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNRasterTileSource constructed with the default `new` method.
-  factory MLNRasterTileSource() => new$();
 
 }
 
@@ -39741,6 +39926,32 @@ class MLNRasterDEMSource extends MLNRasterTileSource {
   static bool isInstance(objc.ObjCObjectBase obj) {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNRasterDEMSource);
   }
+
+  /// new
+  static MLNRasterDEMSource new$() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNRasterDEMSource, _sel_new);
+    return MLNRasterDEMSource.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static MLNRasterDEMSource allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_MLNRasterDEMSource, _sel_allocWithZone_, zone);
+    return MLNRasterDEMSource.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static MLNRasterDEMSource alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNRasterDEMSource, _sel_alloc);
+    return MLNRasterDEMSource.castFromPointer(_ret, retain: false, release: true);
+  }
+  /// Returns a new instance of MLNRasterDEMSource constructed with the default `new` method.
+  factory MLNRasterDEMSource() => new$();
+
+}
+
+extension MLNRasterDEMSource$Methods on MLNRasterDEMSource {
 
   /// Returns a raster tile source initialized with an identifier and configuration
 /// URL.
@@ -39839,27 +40050,6 @@ class MLNRasterDEMSource extends MLNRasterTileSource {
   }
 
 
-  /// new
-  static MLNRasterDEMSource new$() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNRasterDEMSource, _sel_new);
-    return MLNRasterDEMSource.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static MLNRasterDEMSource allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_MLNRasterDEMSource, _sel_allocWithZone_, zone);
-    return MLNRasterDEMSource.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static MLNRasterDEMSource alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNRasterDEMSource, _sel_alloc);
-    return MLNRasterDEMSource.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// self
   MLNRasterDEMSource self$1() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_self);
@@ -39879,8 +40069,6 @@ class MLNRasterDEMSource extends MLNRasterTileSource {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNRasterDEMSource.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNRasterDEMSource constructed with the default `new` method.
-  factory MLNRasterDEMSource() => new$();
 
 }
 
@@ -39925,6 +40113,32 @@ class MLNBackgroundStyleLayer extends MLNStyleLayer {
   static bool isInstance(objc.ObjCObjectBase obj) {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNBackgroundStyleLayer);
   }
+
+  /// new
+  static MLNBackgroundStyleLayer new$() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNBackgroundStyleLayer, _sel_new);
+    return MLNBackgroundStyleLayer.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static MLNBackgroundStyleLayer allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_MLNBackgroundStyleLayer, _sel_allocWithZone_, zone);
+    return MLNBackgroundStyleLayer.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static MLNBackgroundStyleLayer alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNBackgroundStyleLayer, _sel_alloc);
+    return MLNBackgroundStyleLayer.castFromPointer(_ret, retain: false, release: true);
+  }
+  /// Returns a new instance of MLNBackgroundStyleLayer constructed with the default `new` method.
+  factory MLNBackgroundStyleLayer() => new$();
+
+}
+
+extension MLNBackgroundStyleLayer$Methods on MLNBackgroundStyleLayer {
 
   /// Returns a background style layer initialized with an identifier.
 /// 
@@ -40148,27 +40362,6 @@ _objc_msgSend_z7lywk(this.ref.pointer, _sel_setBackgroundPatternTransition_, val
   }
 
 
-  /// new
-  static MLNBackgroundStyleLayer new$() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNBackgroundStyleLayer, _sel_new);
-    return MLNBackgroundStyleLayer.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static MLNBackgroundStyleLayer allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_MLNBackgroundStyleLayer, _sel_allocWithZone_, zone);
-    return MLNBackgroundStyleLayer.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static MLNBackgroundStyleLayer alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNBackgroundStyleLayer, _sel_alloc);
-    return MLNBackgroundStyleLayer.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// self
   MLNBackgroundStyleLayer self$1() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_self);
@@ -40188,8 +40381,6 @@ _objc_msgSend_z7lywk(this.ref.pointer, _sel_setBackgroundPatternTransition_, val
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNBackgroundStyleLayer.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNBackgroundStyleLayer constructed with the default `new` method.
-  factory MLNBackgroundStyleLayer() => new$();
 
 }
 
@@ -40222,21 +40413,6 @@ class MLNForegroundStyleLayer extends MLNStyleLayer {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNForegroundStyleLayer);
   }
 
-  /// init
-  MLNForegroundStyleLayer init() {
-  objc.checkOsVersionInternal('MLNForegroundStyleLayer.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
-    return MLNForegroundStyleLayer.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// Identifier of the source from which the receiver obtains the data to style.
-  objc.NSString? get sourceIdentifier {
-    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_sourceIdentifier);
-    return _ret.address == 0 ? null : objc.NSString.castFromPointer(_ret, retain: true, release: true);
-  }
-
-
   /// new
   static MLNForegroundStyleLayer new$() {
     final _ret = _objc_msgSend_151sglz(_class_MLNForegroundStyleLayer, _sel_new);
@@ -40255,6 +40431,26 @@ class MLNForegroundStyleLayer extends MLNStyleLayer {
   static MLNForegroundStyleLayer alloc() {
     final _ret = _objc_msgSend_151sglz(_class_MLNForegroundStyleLayer, _sel_alloc);
     return MLNForegroundStyleLayer.castFromPointer(_ret, retain: false, release: true);
+  }
+  /// Returns a new instance of MLNForegroundStyleLayer constructed with the default `new` method.
+  factory MLNForegroundStyleLayer() => new$();
+
+}
+
+extension MLNForegroundStyleLayer$Methods on MLNForegroundStyleLayer {
+
+  /// init
+  MLNForegroundStyleLayer init() {
+  objc.checkOsVersionInternal('MLNForegroundStyleLayer.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
+    return MLNForegroundStyleLayer.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// Identifier of the source from which the receiver obtains the data to style.
+  objc.NSString? get sourceIdentifier {
+    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_sourceIdentifier);
+    return _ret.address == 0 ? null : objc.NSString.castFromPointer(_ret, retain: true, release: true);
   }
 
 
@@ -40277,8 +40473,6 @@ class MLNForegroundStyleLayer extends MLNStyleLayer {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNForegroundStyleLayer.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNForegroundStyleLayer constructed with the default `new` method.
-  factory MLNForegroundStyleLayer() => new$();
 
 }
 
@@ -40312,6 +40506,32 @@ class MLNVectorStyleLayer extends MLNForegroundStyleLayer {
   static bool isInstance(objc.ObjCObjectBase obj) {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNVectorStyleLayer);
   }
+
+  /// new
+  static MLNVectorStyleLayer new$() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNVectorStyleLayer, _sel_new);
+    return MLNVectorStyleLayer.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static MLNVectorStyleLayer allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_MLNVectorStyleLayer, _sel_allocWithZone_, zone);
+    return MLNVectorStyleLayer.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static MLNVectorStyleLayer alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNVectorStyleLayer, _sel_alloc);
+    return MLNVectorStyleLayer.castFromPointer(_ret, retain: false, release: true);
+  }
+  /// Returns a new instance of MLNVectorStyleLayer constructed with the default `new` method.
+  factory MLNVectorStyleLayer() => new$();
+
+}
+
+extension MLNVectorStyleLayer$Methods on MLNVectorStyleLayer {
 
   /// Identifier of the layer within the source identified by the `sourceIdentifier`
 /// property from which the receiver obtains the data to style.
@@ -40395,27 +40615,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setPredicate_, value?.ref.pointer ??
   }
 
 
-  /// new
-  static MLNVectorStyleLayer new$() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNVectorStyleLayer, _sel_new);
-    return MLNVectorStyleLayer.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static MLNVectorStyleLayer allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_MLNVectorStyleLayer, _sel_allocWithZone_, zone);
-    return MLNVectorStyleLayer.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static MLNVectorStyleLayer alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNVectorStyleLayer, _sel_alloc);
-    return MLNVectorStyleLayer.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// self
   MLNVectorStyleLayer self$1() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_self);
@@ -40435,8 +40634,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setPredicate_, value?.ref.pointer ??
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNVectorStyleLayer.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNVectorStyleLayer constructed with the default `new` method.
-  factory MLNVectorStyleLayer() => new$();
 
 }
 
@@ -40540,6 +40737,32 @@ class MLNCircleStyleLayer extends MLNVectorStyleLayer {
   static bool isInstance(objc.ObjCObjectBase obj) {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNCircleStyleLayer);
   }
+
+  /// new
+  static MLNCircleStyleLayer new$() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNCircleStyleLayer, _sel_new);
+    return MLNCircleStyleLayer.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static MLNCircleStyleLayer allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_MLNCircleStyleLayer, _sel_allocWithZone_, zone);
+    return MLNCircleStyleLayer.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static MLNCircleStyleLayer alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNCircleStyleLayer, _sel_alloc);
+    return MLNCircleStyleLayer.castFromPointer(_ret, retain: false, release: true);
+  }
+  /// Returns a new instance of MLNCircleStyleLayer constructed with the default `new` method.
+  factory MLNCircleStyleLayer() => new$();
+
+}
+
+extension MLNCircleStyleLayer$Methods on MLNCircleStyleLayer {
 
   /// Returns a circle style layer initialized with an identifier and source.
 /// 
@@ -41330,27 +41553,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setCircleTranslateAnchor_, value.ref
   }
 
 
-  /// new
-  static MLNCircleStyleLayer new$() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNCircleStyleLayer, _sel_new);
-    return MLNCircleStyleLayer.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static MLNCircleStyleLayer allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_MLNCircleStyleLayer, _sel_allocWithZone_, zone);
-    return MLNCircleStyleLayer.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static MLNCircleStyleLayer alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNCircleStyleLayer, _sel_alloc);
-    return MLNCircleStyleLayer.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// self
   MLNCircleStyleLayer self$1() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_self);
@@ -41370,8 +41572,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setCircleTranslateAnchor_, value.ref
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNCircleStyleLayer.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNCircleStyleLayer constructed with the default `new` method.
-  factory MLNCircleStyleLayer() => new$();
 
 }
 
@@ -41452,6 +41652,32 @@ class MLNFillExtrusionStyleLayer extends MLNVectorStyleLayer {
   static bool isInstance(objc.ObjCObjectBase obj) {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNFillExtrusionStyleLayer);
   }
+
+  /// new
+  static MLNFillExtrusionStyleLayer new$() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNFillExtrusionStyleLayer, _sel_new);
+    return MLNFillExtrusionStyleLayer.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static MLNFillExtrusionStyleLayer allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_MLNFillExtrusionStyleLayer, _sel_allocWithZone_, zone);
+    return MLNFillExtrusionStyleLayer.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static MLNFillExtrusionStyleLayer alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNFillExtrusionStyleLayer, _sel_alloc);
+    return MLNFillExtrusionStyleLayer.castFromPointer(_ret, retain: false, release: true);
+  }
+  /// Returns a new instance of MLNFillExtrusionStyleLayer constructed with the default `new` method.
+  factory MLNFillExtrusionStyleLayer() => new$();
+
+}
+
+extension MLNFillExtrusionStyleLayer$Methods on MLNFillExtrusionStyleLayer {
 
   /// Returns a fill-extrusion style layer initialized with an identifier and source.
 /// 
@@ -42050,27 +42276,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setFillExtrusionTranslateAnchor_, va
   }
 
 
-  /// new
-  static MLNFillExtrusionStyleLayer new$() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNFillExtrusionStyleLayer, _sel_new);
-    return MLNFillExtrusionStyleLayer.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static MLNFillExtrusionStyleLayer allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_MLNFillExtrusionStyleLayer, _sel_allocWithZone_, zone);
-    return MLNFillExtrusionStyleLayer.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static MLNFillExtrusionStyleLayer alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNFillExtrusionStyleLayer, _sel_alloc);
-    return MLNFillExtrusionStyleLayer.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// self
   MLNFillExtrusionStyleLayer self$1() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_self);
@@ -42090,8 +42295,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setFillExtrusionTranslateAnchor_, va
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNFillExtrusionStyleLayer.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNFillExtrusionStyleLayer constructed with the default `new` method.
-  factory MLNFillExtrusionStyleLayer() => new$();
 
 }
 
@@ -42174,6 +42377,32 @@ class MLNFillStyleLayer extends MLNVectorStyleLayer {
   static bool isInstance(objc.ObjCObjectBase obj) {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNFillStyleLayer);
   }
+
+  /// new
+  static MLNFillStyleLayer new$() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNFillStyleLayer, _sel_new);
+    return MLNFillStyleLayer.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static MLNFillStyleLayer allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_MLNFillStyleLayer, _sel_allocWithZone_, zone);
+    return MLNFillStyleLayer.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static MLNFillStyleLayer alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNFillStyleLayer, _sel_alloc);
+    return MLNFillStyleLayer.castFromPointer(_ret, retain: false, release: true);
+  }
+  /// Returns a new instance of MLNFillStyleLayer constructed with the default `new` method.
+  factory MLNFillStyleLayer() => new$();
+
+}
+
+extension MLNFillStyleLayer$Methods on MLNFillStyleLayer {
 
   /// Returns a fill style layer initialized with an identifier and source.
 /// 
@@ -42720,27 +42949,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setFillTranslateAnchor_, value.ref.p
   }
 
 
-  /// new
-  static MLNFillStyleLayer new$() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNFillStyleLayer, _sel_new);
-    return MLNFillStyleLayer.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static MLNFillStyleLayer allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_MLNFillStyleLayer, _sel_allocWithZone_, zone);
-    return MLNFillStyleLayer.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static MLNFillStyleLayer alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNFillStyleLayer, _sel_alloc);
-    return MLNFillStyleLayer.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// self
   MLNFillStyleLayer self$1() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_self);
@@ -42760,8 +42968,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setFillTranslateAnchor_, value.ref.p
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNFillStyleLayer.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNFillStyleLayer constructed with the default `new` method.
-  factory MLNFillStyleLayer() => new$();
 
 }
 
@@ -42834,6 +43040,32 @@ class MLNHeatmapStyleLayer extends MLNVectorStyleLayer {
   static bool isInstance(objc.ObjCObjectBase obj) {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNHeatmapStyleLayer);
   }
+
+  /// new
+  static MLNHeatmapStyleLayer new$() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNHeatmapStyleLayer, _sel_new);
+    return MLNHeatmapStyleLayer.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static MLNHeatmapStyleLayer allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_MLNHeatmapStyleLayer, _sel_allocWithZone_, zone);
+    return MLNHeatmapStyleLayer.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static MLNHeatmapStyleLayer alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNHeatmapStyleLayer, _sel_alloc);
+    return MLNHeatmapStyleLayer.castFromPointer(_ret, retain: false, release: true);
+  }
+  /// Returns a new instance of MLNHeatmapStyleLayer constructed with the default `new` method.
+  factory MLNHeatmapStyleLayer() => new$();
+
+}
+
+extension MLNHeatmapStyleLayer$Methods on MLNHeatmapStyleLayer {
 
   /// Returns a heatmap style layer initialized with an identifier and source.
 /// 
@@ -43146,27 +43378,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setHeatmapWeight_, value.ref.pointer
   }
 
 
-  /// new
-  static MLNHeatmapStyleLayer new$() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNHeatmapStyleLayer, _sel_new);
-    return MLNHeatmapStyleLayer.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static MLNHeatmapStyleLayer allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_MLNHeatmapStyleLayer, _sel_allocWithZone_, zone);
-    return MLNHeatmapStyleLayer.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static MLNHeatmapStyleLayer alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNHeatmapStyleLayer, _sel_alloc);
-    return MLNHeatmapStyleLayer.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// self
   MLNHeatmapStyleLayer self$1() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_self);
@@ -43186,8 +43397,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setHeatmapWeight_, value.ref.pointer
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNHeatmapStyleLayer.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNHeatmapStyleLayer constructed with the default `new` method.
-  factory MLNHeatmapStyleLayer() => new$();
 
 }
 
@@ -43255,6 +43464,32 @@ class MLNHillshadeStyleLayer extends MLNForegroundStyleLayer {
   static bool isInstance(objc.ObjCObjectBase obj) {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNHillshadeStyleLayer);
   }
+
+  /// new
+  static MLNHillshadeStyleLayer new$() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNHillshadeStyleLayer, _sel_new);
+    return MLNHillshadeStyleLayer.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static MLNHillshadeStyleLayer allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_MLNHillshadeStyleLayer, _sel_allocWithZone_, zone);
+    return MLNHillshadeStyleLayer.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static MLNHillshadeStyleLayer alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNHillshadeStyleLayer, _sel_alloc);
+    return MLNHillshadeStyleLayer.castFromPointer(_ret, retain: false, release: true);
+  }
+  /// Returns a new instance of MLNHillshadeStyleLayer constructed with the default `new` method.
+  factory MLNHillshadeStyleLayer() => new$();
+
+}
+
+extension MLNHillshadeStyleLayer$Methods on MLNHillshadeStyleLayer {
 
   /// Returns a hillshade style layer initialized with an identifier and source.
 /// 
@@ -43645,27 +43880,6 @@ _objc_msgSend_z7lywk(this.ref.pointer, _sel_setHillshadeShadowColorTransition_, 
   }
 
 
-  /// new
-  static MLNHillshadeStyleLayer new$() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNHillshadeStyleLayer, _sel_new);
-    return MLNHillshadeStyleLayer.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static MLNHillshadeStyleLayer allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_MLNHillshadeStyleLayer, _sel_allocWithZone_, zone);
-    return MLNHillshadeStyleLayer.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static MLNHillshadeStyleLayer alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNHillshadeStyleLayer, _sel_alloc);
-    return MLNHillshadeStyleLayer.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// self
   MLNHillshadeStyleLayer self$1() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_self);
@@ -43685,8 +43899,6 @@ _objc_msgSend_z7lywk(this.ref.pointer, _sel_setHillshadeShadowColorTransition_, 
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNHillshadeStyleLayer.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNHillshadeStyleLayer constructed with the default `new` method.
-  factory MLNHillshadeStyleLayer() => new$();
 
 }
 
@@ -43793,6 +44005,32 @@ class MLNLineStyleLayer extends MLNVectorStyleLayer {
   static bool isInstance(objc.ObjCObjectBase obj) {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNLineStyleLayer);
   }
+
+  /// new
+  static MLNLineStyleLayer new$() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNLineStyleLayer, _sel_new);
+    return MLNLineStyleLayer.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static MLNLineStyleLayer allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_MLNLineStyleLayer, _sel_allocWithZone_, zone);
+    return MLNLineStyleLayer.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static MLNLineStyleLayer alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNLineStyleLayer, _sel_alloc);
+    return MLNLineStyleLayer.castFromPointer(_ret, retain: false, release: true);
+  }
+  /// Returns a new instance of MLNLineStyleLayer constructed with the default `new` method.
+  factory MLNLineStyleLayer() => new$();
+
+}
+
+extension MLNLineStyleLayer$Methods on MLNLineStyleLayer {
 
   /// Returns a line style layer initialized with an identifier and source.
 /// 
@@ -44831,27 +45069,6 @@ _objc_msgSend_z7lywk(this.ref.pointer, _sel_setLineWidthTransition_, value);
   }
 
 
-  /// new
-  static MLNLineStyleLayer new$() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNLineStyleLayer, _sel_new);
-    return MLNLineStyleLayer.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static MLNLineStyleLayer allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_MLNLineStyleLayer, _sel_allocWithZone_, zone);
-    return MLNLineStyleLayer.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static MLNLineStyleLayer alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNLineStyleLayer, _sel_alloc);
-    return MLNLineStyleLayer.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// self
   MLNLineStyleLayer self$1() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_self);
@@ -44871,8 +45088,6 @@ _objc_msgSend_z7lywk(this.ref.pointer, _sel_setLineWidthTransition_, value);
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNLineStyleLayer.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNLineStyleLayer constructed with the default `new` method.
-  factory MLNLineStyleLayer() => new$();
 
 }
 
@@ -44965,6 +45180,32 @@ class MLNRasterStyleLayer extends MLNForegroundStyleLayer {
   static bool isInstance(objc.ObjCObjectBase obj) {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNRasterStyleLayer);
   }
+
+  /// new
+  static MLNRasterStyleLayer new$() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNRasterStyleLayer, _sel_new);
+    return MLNRasterStyleLayer.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static MLNRasterStyleLayer allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_MLNRasterStyleLayer, _sel_allocWithZone_, zone);
+    return MLNRasterStyleLayer.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static MLNRasterStyleLayer alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNRasterStyleLayer, _sel_alloc);
+    return MLNRasterStyleLayer.castFromPointer(_ret, retain: false, release: true);
+  }
+  /// Returns a new instance of MLNRasterStyleLayer constructed with the default `new` method.
+  factory MLNRasterStyleLayer() => new$();
+
+}
+
+extension MLNRasterStyleLayer$Methods on MLNRasterStyleLayer {
 
   /// Returns a raster style layer initialized with an identifier and source.
 /// 
@@ -45579,27 +45820,6 @@ _objc_msgSend_z7lywk(this.ref.pointer, _sel_setRasterSaturationTransition_, valu
   }
 
 
-  /// new
-  static MLNRasterStyleLayer new$() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNRasterStyleLayer, _sel_new);
-    return MLNRasterStyleLayer.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static MLNRasterStyleLayer allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_MLNRasterStyleLayer, _sel_allocWithZone_, zone);
-    return MLNRasterStyleLayer.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static MLNRasterStyleLayer alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNRasterStyleLayer, _sel_alloc);
-    return MLNRasterStyleLayer.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// self
   MLNRasterStyleLayer self$1() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_self);
@@ -45619,8 +45839,6 @@ _objc_msgSend_z7lywk(this.ref.pointer, _sel_setRasterSaturationTransition_, valu
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNRasterStyleLayer.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNRasterStyleLayer constructed with the default `new` method.
-  factory MLNRasterStyleLayer() => new$();
 
 }
 
@@ -45847,6 +46065,32 @@ class MLNSymbolStyleLayer extends MLNVectorStyleLayer {
   static bool isInstance(objc.ObjCObjectBase obj) {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNSymbolStyleLayer);
   }
+
+  /// new
+  static MLNSymbolStyleLayer new$() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNSymbolStyleLayer, _sel_new);
+    return MLNSymbolStyleLayer.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static MLNSymbolStyleLayer allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_MLNSymbolStyleLayer, _sel_allocWithZone_, zone);
+    return MLNSymbolStyleLayer.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static MLNSymbolStyleLayer alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNSymbolStyleLayer, _sel_alloc);
+    return MLNSymbolStyleLayer.castFromPointer(_ret, retain: false, release: true);
+  }
+  /// Returns a new instance of MLNSymbolStyleLayer constructed with the default `new` method.
+  factory MLNSymbolStyleLayer() => new$();
+
+}
+
+extension MLNSymbolStyleLayer$Methods on MLNSymbolStyleLayer {
 
   /// Returns a symbol style layer initialized with an identifier and source.
 /// 
@@ -49779,27 +50023,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setTextTranslateAnchor_, value.ref.p
   }
 
 
-  /// new
-  static MLNSymbolStyleLayer new$() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNSymbolStyleLayer, _sel_new);
-    return MLNSymbolStyleLayer.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static MLNSymbolStyleLayer allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_MLNSymbolStyleLayer, _sel_allocWithZone_, zone);
-    return MLNSymbolStyleLayer.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static MLNSymbolStyleLayer alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNSymbolStyleLayer, _sel_alloc);
-    return MLNSymbolStyleLayer.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// self
   MLNSymbolStyleLayer self$1() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_self);
@@ -49819,8 +50042,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setTextTranslateAnchor_, value.ref.p
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNSymbolStyleLayer.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNSymbolStyleLayer constructed with the default `new` method.
-  factory MLNSymbolStyleLayer() => new$();
 
 }
 
@@ -49872,6 +50093,32 @@ class MLNAttributionInfo extends objc.NSObject {
   static bool isInstance(objc.ObjCObjectBase obj) {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNAttributionInfo);
   }
+
+  /// new
+  static MLNAttributionInfo new$() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNAttributionInfo, _sel_new);
+    return MLNAttributionInfo.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static MLNAttributionInfo allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_MLNAttributionInfo, _sel_allocWithZone_, zone);
+    return MLNAttributionInfo.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static MLNAttributionInfo alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNAttributionInfo, _sel_alloc);
+    return MLNAttributionInfo.castFromPointer(_ret, retain: false, release: true);
+  }
+  /// Returns a new instance of MLNAttributionInfo constructed with the default `new` method.
+  factory MLNAttributionInfo() => new$();
+
+}
+
+extension MLNAttributionInfo$Methods on MLNAttributionInfo {
 
   /// Returns an initialized attribution info object with the given title and URL.
 /// 
@@ -49964,27 +50211,6 @@ _objc_msgSend_1s56lr9(this.ref.pointer, _sel_setFeedbackLink_, value);
   }
 
 
-  /// new
-  static MLNAttributionInfo new$() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNAttributionInfo, _sel_new);
-    return MLNAttributionInfo.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static MLNAttributionInfo allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_MLNAttributionInfo, _sel_allocWithZone_, zone);
-    return MLNAttributionInfo.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static MLNAttributionInfo alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNAttributionInfo, _sel_alloc);
-    return MLNAttributionInfo.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// self
   MLNAttributionInfo self$1() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_self);
@@ -50004,8 +50230,6 @@ _objc_msgSend_1s56lr9(this.ref.pointer, _sel_setFeedbackLink_, value);
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNAttributionInfo.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNAttributionInfo constructed with the default `new` method.
-  factory MLNAttributionInfo() => new$();
 
 }
 
@@ -50357,6 +50581,32 @@ class MLNOfflinePack extends objc.NSObject {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNOfflinePack);
   }
 
+  /// new
+  static MLNOfflinePack new$() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNOfflinePack, _sel_new);
+    return MLNOfflinePack.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static MLNOfflinePack allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_MLNOfflinePack, _sel_allocWithZone_, zone);
+    return MLNOfflinePack.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static MLNOfflinePack alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNOfflinePack, _sel_alloc);
+    return MLNOfflinePack.castFromPointer(_ret, retain: false, release: true);
+  }
+  /// Returns a new instance of MLNOfflinePack constructed with the default `new` method.
+  factory MLNOfflinePack() => new$();
+
+}
+
+extension MLNOfflinePack$Methods on MLNOfflinePack {
+
   /// The region for which the pack manages resources.
   MLNOfflineRegion get region {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_region);
@@ -50482,27 +50732,6 @@ _objc_msgSend_1pl9qdv(this.ref.pointer, _sel_requestProgress);
   }
 
 
-  /// new
-  static MLNOfflinePack new$() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNOfflinePack, _sel_new);
-    return MLNOfflinePack.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static MLNOfflinePack allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_MLNOfflinePack, _sel_allocWithZone_, zone);
-    return MLNOfflinePack.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static MLNOfflinePack alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNOfflinePack, _sel_alloc);
-    return MLNOfflinePack.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// self
   MLNOfflinePack self$1() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_self);
@@ -50522,8 +50751,6 @@ _objc_msgSend_1pl9qdv(this.ref.pointer, _sel_requestProgress);
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNOfflinePack.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNOfflinePack constructed with the default `new` method.
-  factory MLNOfflinePack() => new$();
 
 }
 
@@ -51092,6 +51319,32 @@ class MLNOfflineStorage extends objc.NSObject {
   }
 
 
+  /// new
+  static MLNOfflineStorage new$() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNOfflineStorage, _sel_new);
+    return MLNOfflineStorage.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static MLNOfflineStorage allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_MLNOfflineStorage, _sel_allocWithZone_, zone);
+    return MLNOfflineStorage.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static MLNOfflineStorage alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNOfflineStorage, _sel_alloc);
+    return MLNOfflineStorage.castFromPointer(_ret, retain: false, release: true);
+  }
+  /// Returns a new instance of MLNOfflineStorage constructed with the default `new` method.
+  factory MLNOfflineStorage() => new$();
+
+}
+
+extension MLNOfflineStorage$Methods on MLNOfflineStorage {
+
   /// The receiver’s delegate.
 /// 
 /// An offline storage object sends messages to its delegate to allow it to
@@ -51441,27 +51694,6 @@ _objc_msgSend_899qho(this.ref.pointer, _sel_preloadData_forURL_modificationDate_
   }
 
 
-  /// new
-  static MLNOfflineStorage new$() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNOfflineStorage, _sel_new);
-    return MLNOfflineStorage.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static MLNOfflineStorage allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_MLNOfflineStorage, _sel_allocWithZone_, zone);
-    return MLNOfflineStorage.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static MLNOfflineStorage alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNOfflineStorage, _sel_alloc);
-    return MLNOfflineStorage.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// self
   MLNOfflineStorage self$1() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_self);
@@ -51481,8 +51713,6 @@ _objc_msgSend_899qho(this.ref.pointer, _sel_preloadData_forURL_modificationDate_
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_autorelease);
     return MLNOfflineStorage.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNOfflineStorage constructed with the default `new` method.
-  factory MLNOfflineStorage() => new$();
 
 }
 
@@ -51527,6 +51757,39 @@ class MLNTilePyramidOfflineRegion extends objc.NSObject implements MLNOfflineReg
   static bool isInstance(objc.ObjCObjectBase obj) {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNTilePyramidOfflineRegion);
   }
+
+  /// new
+  static MLNTilePyramidOfflineRegion new$() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNTilePyramidOfflineRegion, _sel_new);
+    return MLNTilePyramidOfflineRegion.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static MLNTilePyramidOfflineRegion allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_MLNTilePyramidOfflineRegion, _sel_allocWithZone_, zone);
+    return MLNTilePyramidOfflineRegion.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static MLNTilePyramidOfflineRegion alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_MLNTilePyramidOfflineRegion, _sel_alloc);
+    return MLNTilePyramidOfflineRegion.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// supportsSecureCoding
+  static bool getSupportsSecureCoding() {
+    return _objc_msgSend_91o635(_class_MLNTilePyramidOfflineRegion, _sel_supportsSecureCoding);
+
+  }
+  /// Returns a new instance of MLNTilePyramidOfflineRegion constructed with the default `new` method.
+  factory MLNTilePyramidOfflineRegion() => new$();
+
+}
+
+extension MLNTilePyramidOfflineRegion$Methods on MLNTilePyramidOfflineRegion {
 
   /// The coordinate bounds for the geographic region covered by the downloaded
 /// tiles.
@@ -51597,27 +51860,6 @@ class MLNTilePyramidOfflineRegion extends objc.NSObject implements MLNOfflineReg
   }
 
 
-  /// new
-  static MLNTilePyramidOfflineRegion new$() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNTilePyramidOfflineRegion, _sel_new);
-    return MLNTilePyramidOfflineRegion.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static MLNTilePyramidOfflineRegion allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final _ret = _objc_msgSend_1cwp428(_class_MLNTilePyramidOfflineRegion, _sel_allocWithZone_, zone);
-    return MLNTilePyramidOfflineRegion.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
-  /// alloc
-  static MLNTilePyramidOfflineRegion alloc() {
-    final _ret = _objc_msgSend_151sglz(_class_MLNTilePyramidOfflineRegion, _sel_alloc);
-    return MLNTilePyramidOfflineRegion.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// self
   MLNTilePyramidOfflineRegion self$1() {
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_self);
@@ -51681,13 +51923,6 @@ _objc_msgSend_1s56lr9(this.ref.pointer, _sel_setIncludesIdeographicGlyphs_, valu
   }
 
 
-  /// supportsSecureCoding
-  static bool getSupportsSecureCoding() {
-    return _objc_msgSend_91o635(_class_MLNTilePyramidOfflineRegion, _sel_supportsSecureCoding);
-
-  }
-
-
   /// encodeWithCoder:
   void encodeWithCoder(objc.NSCoder coder) {
 _objc_msgSend_xtuoz7(this.ref.pointer, _sel_encodeWithCoder_, coder.ref.pointer);
@@ -51700,8 +51935,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_encodeWithCoder_, coder.ref.pointer)
     final _ret = _objc_msgSend_1sotr3r(this.ref.retainAndReturnPointer(), _sel_initWithCoder_, coder.ref.pointer);
     return _ret.address == 0 ? null : MLNTilePyramidOfflineRegion.castFromPointer(_ret, retain: false, release: true);
   }
-  /// Returns a new instance of MLNTilePyramidOfflineRegion constructed with the default `new` method.
-  factory MLNTilePyramidOfflineRegion() => new$();
 
 }
 
@@ -51727,14 +51960,6 @@ class MLNFeatureWrapper extends objc.NSObject implements MLNFeature {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNFeatureWrapper);
   }
 
-  /// init
-  MLNFeatureWrapper init() {
-  objc.checkOsVersionInternal('MLNFeatureWrapper.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
-    return MLNFeatureWrapper.castFromPointer(_ret, retain: false, release: true);
-  }
-
-
   /// new
   static MLNFeatureWrapper new$() {
     final _ret = _objc_msgSend_151sglz(_class_MLNFeatureWrapper, _sel_new);
@@ -51752,6 +51977,19 @@ class MLNFeatureWrapper extends objc.NSObject implements MLNFeature {
   /// alloc
   static MLNFeatureWrapper alloc() {
     final _ret = _objc_msgSend_151sglz(_class_MLNFeatureWrapper, _sel_alloc);
+    return MLNFeatureWrapper.castFromPointer(_ret, retain: false, release: true);
+  }
+  /// Returns a new instance of MLNFeatureWrapper constructed with the default `new` method.
+  factory MLNFeatureWrapper() => new$();
+
+}
+
+extension MLNFeatureWrapper$Methods on MLNFeatureWrapper {
+
+  /// init
+  MLNFeatureWrapper init() {
+  objc.checkOsVersionInternal('MLNFeatureWrapper.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
     return MLNFeatureWrapper.castFromPointer(_ret, retain: false, release: true);
   }
 
@@ -52030,8 +52268,6 @@ _objc_msgSend_xtuoz7(this.ref.pointer, _sel_setAttributes_, value.ref.pointer);
     final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_subtitle);
     return _ret.address == 0 ? null : objc.NSString.castFromPointer(_ret, retain: true, release: true);
   }
-  /// Returns a new instance of MLNFeatureWrapper constructed with the default `new` method.
-  factory MLNFeatureWrapper() => new$();
 
 }
 
