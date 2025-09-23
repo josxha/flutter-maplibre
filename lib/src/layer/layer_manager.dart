@@ -13,7 +13,7 @@ class LayerManager {
     for (final (index, layer) in layers.indexed) {
       final source = GeoJsonSource(
         id: layer.getSourceId(index),
-        data: GeometryCollection(layer.list).toText(),
+        data: FeatureCollection(layer.list).toText(),
       );
       style.addSource(source);
       style.addLayer(layer.createStyleLayer(index));
@@ -40,12 +40,12 @@ class LayerManager {
       if (oldLayer case Layer()) {
         style.updateGeoJsonSource(
           id: layer.getSourceId(index),
-          data: GeometryCollection(layer.list).toText(),
+          data: FeatureCollection(layer.list).toText(),
         );
       } else {
         final source = GeoJsonSource(
           id: layer.getSourceId(index),
-          data: GeometryCollection(layer.list).toText(),
+          data: FeatureCollection(layer.list).toText(),
         );
         style.addSource(source);
       }

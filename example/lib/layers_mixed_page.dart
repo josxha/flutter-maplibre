@@ -15,11 +15,11 @@ class LayersMixedPage extends StatefulWidget {
 
 class _LayersMixedPageState extends State<LayersMixedPage> {
   final _random = Random.secure();
-  final _circlePoints = <Point>[
-    const Point(Geographic(lon: 9.17, lat: 47.68)),
-    const Point(Geographic(lon: 9.17, lat: 48)),
-    const Point(Geographic(lon: 9, lat: 48)),
-    const Point(Geographic(lon: 9.5, lat: 48)),
+  final _circlePoints = <Feature<Point>>[
+    const Feature(geometry: Point(Geographic(lon: 9.17, lat: 47.68))),
+    const Feature(geometry: Point(Geographic(lon: 9.17, lat: 48))),
+    const Feature(geometry: Point(Geographic(lon: 9, lat: 48))),
+    const Feature(geometry: Point(Geographic(lon: 9.5, lat: 48))),
   ];
   Color _circleColor = Colors.orange.withValues(alpha: 0.5);
   PolylineLayer? _polylineLayer;
@@ -56,12 +56,14 @@ class _LayersMixedPageState extends State<LayersMixedPage> {
                       if (_polylineLayer == null) {
                         _polylineLayer = PolylineLayer(
                           polylines: [
-                            LineString.from(
-                              const [
-                                Geographic(lon: 9.17, lat: 47.68),
-                                Geographic(lon: 9.5, lat: 48),
-                                Geographic(lon: 9, lat: 48),
-                              ],
+                            Feature(
+                              geometry: LineString.from(
+                                const [
+                                  Geographic(lon: 9.17, lat: 47.68),
+                                  Geographic(lon: 9.5, lat: 48),
+                                  Geographic(lon: 9, lat: 48),
+                                ],
+                              ),
                             ),
                           ],
                         );
@@ -87,7 +89,7 @@ class _LayersMixedPageState extends State<LayersMixedPage> {
               onEvent: (event) {
                 if (event case MapEventClick()) {
                   setState(() {
-                    _circlePoints.add(Point(event.point));
+                    _circlePoints.add(Feature(geometry: Point(event.point)));
                   });
                 }
               },

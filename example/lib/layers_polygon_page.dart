@@ -12,18 +12,20 @@ class LayersPolygonPage extends StatefulWidget {
 }
 
 class _LayersPolygonPageState extends State<LayersPolygonPage> {
-  final _polygons = <Polygon>[
-    Polygon.from(
-      const [
-        [
-          Geographic(lon: 8.201306116882563, lat: 48.107357488669464),
-          Geographic(lon: 8.885254895692924, lat: 48.09428546381665),
-          Geographic(lon: 8.759684141159909, lat: 47.69326800157776),
-          Geographic(lon: 9.631980099303235, lat: 48.08929468133098),
-          Geographic(lon: 8.68543348810175, lat: 48.45383566718806),
-          Geographic(lon: 8.201306116882563, lat: 48.107357488669464),
+  final _polygons = <Feature<Polygon>>[
+    Feature(
+      geometry: Polygon.from(
+        const [
+          [
+            Geographic(lon: 8.201306116882563, lat: 48.107357488669464),
+            Geographic(lon: 8.885254895692924, lat: 48.09428546381665),
+            Geographic(lon: 8.759684141159909, lat: 47.69326800157776),
+            Geographic(lon: 9.631980099303235, lat: 48.08929468133098),
+            Geographic(lon: 8.68543348810175, lat: 48.45383566718806),
+            Geographic(lon: 8.201306116882563, lat: 48.107357488669464),
+          ],
         ],
-      ],
+      ),
     ),
   ];
 
@@ -38,11 +40,13 @@ class _LayersPolygonPageState extends State<LayersPolygonPage> {
         ),
         onEvent: (event) {
           if (event case MapEventClick()) {
-            final points = _polygons.first.rings.first.inserted(0, [
+            final points = _polygons.first.geometry!.rings.first.inserted(0, [
               event.point,
             ]);
             setState(() {
-              _polygons[0] = Polygon.from([points.positions]);
+              _polygons[0] = Feature(
+                geometry: Polygon.from([points.positions]),
+              );
             });
           }
         },

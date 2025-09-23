@@ -4,10 +4,10 @@ part of 'layer.dart';
 ///
 /// {@category Layers}
 @immutable
-class MarkerLayer extends Layer<Point> {
+class MarkerLayer extends Layer<Feature<Point>> {
   /// Create a new [MarkerLayer] instance.
   const MarkerLayer({
-    required List<Point> points,
+    required List<Feature<Point>> points,
     this.iconAllowOverlap = false,
     this.iconIgnorePlacement = false,
     this.iconOptional = false,
