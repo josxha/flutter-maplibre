@@ -30958,9 +30958,9 @@ _objc_msgSend_1vx0lfy(this.ref.pointer, _sel_setContentInset_animated_completion
 /// 
 /// #### Related examples
 /// - TODO: Point conversion example to learn how to convert a `CGPoint` to a map coordinate.
-  CLLocationCoordinate2D convertPoint_(objc.CGPoint point, {UIView? view}) {
+  CLLocationCoordinate2D convertPoint(objc.CGPoint point, {UIView? toCoordinateFromView}) {
     final _ptr = pkg_ffi.calloc<CLLocationCoordinate2D>();
-    objc.useMsgSendVariants ? _objc_msgSend_4xp05xStret(_ptr, this.ref.pointer, _sel_convertPoint_toCoordinateFromView_, point, view?.ref.pointer ?? ffi.nullptr) : _ptr.ref = _objc_msgSend_4xp05x(this.ref.pointer, _sel_convertPoint_toCoordinateFromView_, point, view?.ref.pointer ?? ffi.nullptr);
+    objc.useMsgSendVariants ? _objc_msgSend_4xp05xStret(_ptr, this.ref.pointer, _sel_convertPoint_toCoordinateFromView_, point, toCoordinateFromView?.ref.pointer ?? ffi.nullptr) : _ptr.ref = _objc_msgSend_4xp05x(this.ref.pointer, _sel_convertPoint_toCoordinateFromView_, point, toCoordinateFromView?.ref.pointer ?? ffi.nullptr);
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
         ffi.sizeOf<CLLocationCoordinate2D>(), finalizer: pkg_ffi.calloc.nativeFree);
     return ffi.Struct.create<CLLocationCoordinate2D>(_finalizable);
@@ -31001,9 +31001,9 @@ _objc_msgSend_1vx0lfy(this.ref.pointer, _sel_setContentInset_animated_completion
 /// @param rect The rectangle to convert.
 /// @param view The view in whose coordinate system the rectangle is expressed.
 /// @return The geographic bounding box coextensive with the given rectangle.
-  MLNCoordinateBounds convertRect_(objc.CGRect rect, {UIView? view}) {
+  MLNCoordinateBounds convertRect(objc.CGRect rect, {UIView? toCoordinateBoundsFromView}) {
     final _ptr = pkg_ffi.calloc<MLNCoordinateBounds>();
-    objc.useMsgSendVariants ? _objc_msgSend_1f65wixStret(_ptr, this.ref.pointer, _sel_convertRect_toCoordinateBoundsFromView_, rect, view?.ref.pointer ?? ffi.nullptr) : _ptr.ref = _objc_msgSend_1f65wix(this.ref.pointer, _sel_convertRect_toCoordinateBoundsFromView_, rect, view?.ref.pointer ?? ffi.nullptr);
+    objc.useMsgSendVariants ? _objc_msgSend_1f65wixStret(_ptr, this.ref.pointer, _sel_convertRect_toCoordinateBoundsFromView_, rect, toCoordinateBoundsFromView?.ref.pointer ?? ffi.nullptr) : _ptr.ref = _objc_msgSend_1f65wix(this.ref.pointer, _sel_convertRect_toCoordinateBoundsFromView_, rect, toCoordinateBoundsFromView?.ref.pointer ?? ffi.nullptr);
     final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
         ffi.sizeOf<MLNCoordinateBounds>(), finalizer: pkg_ffi.calloc.nativeFree);
     return ffi.Struct.create<MLNCoordinateBounds>(_finalizable);

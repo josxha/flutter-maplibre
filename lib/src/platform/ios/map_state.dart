@@ -338,7 +338,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
 
   @override
   Geographic toLngLat(Offset screenLocation) => _mapView
-      .convertPoint_(screenLocation.toCGPoint(), view: _mapView)
+      .convertPoint(screenLocation.toCGPoint(), toCoordinateFromView: _mapView)
       .toGeographic();
 
   @override

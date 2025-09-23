@@ -75,9 +75,6 @@ ffigen:
       'MLNSource':
         # https://github.com/dart-lang/native/issues/2419
         'initWithIdentifier:': 'initWithIdentifier_'
-      'MLNMapView':
-        'convertPoint:toCoordinateFromView:': 'convertPoint_'
-        'convertRect:toCoordinateBoundsFromView:': 'convertRect_'
       'UIPointerStyle':
         'styleWithShape:constrainedAxes:': 'styleWithShape_'
   compiler-opts:
