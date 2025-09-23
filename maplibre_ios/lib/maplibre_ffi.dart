@@ -19167,9 +19167,9 @@ class UIPointerStyle extends UIHoverStyle implements objc.NSCopying {
 
 
   /// styleWithShape:constrainedAxes:
-  static UIPointerStyle styleWithShape_(UIPointerShape shape, {required UIAxis axes}) {
+  static UIPointerStyle styleWithShape(UIPointerShape shape, {required UIAxis constrainedAxes}) {
   objc.checkOsVersionInternal('UIPointerStyle.styleWithShape:constrainedAxes:', iOS: (false, (13, 4, 0)));
-    final _ret = _objc_msgSend_tuvlta(_class_UIPointerStyle, _sel_styleWithShape_constrainedAxes_, shape.ref.pointer, axes.value);
+    final _ret = _objc_msgSend_tuvlta(_class_UIPointerStyle, _sel_styleWithShape_constrainedAxes_, shape.ref.pointer, constrainedAxes.value);
     return UIPointerStyle.castFromPointer(_ret, retain: true, release: true);
   }
 
