@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre_example/map_styles.dart';
+import 'package:maplibre_example/utils/map_styles.dart';
 
 import 'app.dart';
 
@@ -16,9 +16,9 @@ void main() {
       final app = App(
         onMapCreated: controller.complete,
         onStyleLoaded: style.complete,
-        options: const MapOptions(
-          initCenter: Geographic(lon: 0, lat: 0),
-          initStyle: MapStyles.countries,
+        options: MapOptions(
+          initCenter: const Geographic(lon: 0, lat: 0),
+          initStyle: MapStyles.countries.uri,
         ),
       );
       await tester.pumpWidget(app);
@@ -34,9 +34,9 @@ void main() {
       final app = App(
         onMapCreated: controller.complete,
         onStyleLoaded: style.complete,
-        options: const MapOptions(
-          initCenter: Geographic(lon: 0, lat: 0),
-          initStyle: MapStyles.maptilerStreets,
+        options: MapOptions(
+          initCenter: const Geographic(lon: 0, lat: 0),
+          initStyle: MapStyles.openMapTilesStreets.uri,
         ),
       );
       await tester.pumpWidget(app);

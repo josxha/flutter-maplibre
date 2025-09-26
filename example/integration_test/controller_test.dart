@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre_example/map_styles.dart';
+import 'package:maplibre_example/utils/map_styles.dart';
 
 import 'app.dart';
 
@@ -392,10 +392,10 @@ void main() {
           App(
             onMapCreated: ctrlCompleter.complete,
             onStyleLoaded: styleCompleter.complete,
-            options: const MapOptions(
-              initCenter: Geographic(lon: 0.1, lat: 0.1),
+            options: MapOptions(
+              initCenter: const Geographic(lon: 0.1, lat: 0.1),
               initZoom: 14,
-              initStyle: MapStyles.maptilerStreets,
+              initStyle: MapStyles.openMapTilesStreets.uri,
             ),
           ),
         );
@@ -722,10 +722,10 @@ void main() {
       final app = App(
         onMapCreated: ctrlCompleter.complete,
         onStyleLoaded: styleCompleter.complete,
-        options: const MapOptions(
-          initCenter: Geographic(lon: 0, lat: 0),
+        options: MapOptions(
+          initCenter: const Geographic(lon: 0, lat: 0),
           initZoom: 10,
-          initStyle: MapStyles.protomapsLight,
+          initStyle: MapStyles.protomapsLight.uri,
         ),
       );
       await tester.pumpWidget(app);
