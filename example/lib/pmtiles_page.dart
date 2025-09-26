@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre_example/map_styles.dart';
+import 'package:maplibre_example/utils/map_styles.dart';
 
 @immutable
 class PmTilesPage extends StatefulWidget {
@@ -15,7 +15,7 @@ class PmTilesPage extends StatefulWidget {
 
 class _PmTilesPageState extends State<PmTilesPage> {
   final Future<String> _futureStyle = rootBundle.loadString(
-    MapStyles.protomapsLightPmTiles,
+    MapStyles.protomapsLightPmTiles.uri,
   );
 
   @override
@@ -32,16 +32,16 @@ class _PmTilesPageState extends State<PmTilesPage> {
         return Scaffold(
           appBar: AppBar(title: const Text('PMTiles')),
           body: MapLibreMap(
-            options: const MapOptions(
-              initCenter: Geographic(lon: 11.254343, lat: 43.767213),
-              maxBounds: LngLatBounds(
+            options: MapOptions(
+              initCenter: const Geographic(lon: 11.254343, lat: 43.767213),
+              maxBounds: const LngLatBounds(
                 longitudeWest: 11.221144,
                 longitudeEast: 11.287543,
                 latitudeSouth: 43.745121,
                 latitudeNorth: 43.789306,
               ),
               initZoom: 10,
-              initStyle: MapStyles.protomapsLightPmTiles,
+              initStyle: MapStyles.protomapsLightPmTiles.uri,
             ),
             children: const [
               MapScalebar(),

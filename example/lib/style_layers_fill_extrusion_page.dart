@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre_example/map_styles.dart';
+import 'package:maplibre_example/utils/map_styles.dart';
 
 @immutable
 class StyleLayersFillExtrusionPage extends StatefulWidget {
@@ -22,12 +22,12 @@ class _StyleLayersFillExtrusionPageState
     return Scaffold(
       appBar: AppBar(title: const Text('Fill Extrusion Style Layer')),
       body: MapLibreMap(
-        options: const MapOptions(
-          initCenter: Geographic(lon: -87.61694, lat: 41.86625),
+        options: MapOptions(
+          initCenter: const Geographic(lon: -87.61694, lat: 41.86625),
           initZoom: 15.99,
           initPitch: 40,
           initBearing: 20,
-          initStyle: MapStyles.protomapsLight,
+          initStyle: MapStyles.protomapsLight.uri,
         ),
         onStyleLoaded: _onStyleLoaded,
       ),
