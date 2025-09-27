@@ -18,7 +18,7 @@ run `flutter pub get`:
 ```yaml title="pubspec.yaml"
 dependencies:
   # highlight-next-line
-  maplibre: ^0.2.0
+  maplibre: ^0.3.0
 ```
 
 Ensure that you use the documentation of the right
