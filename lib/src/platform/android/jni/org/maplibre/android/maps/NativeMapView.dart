@@ -38,6 +38,8 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
+import '../../../../android/graphics/Bitmap.dart' as bitmap$_;
+
 /// from: `org.maplibre.android.maps.NativeMapView$ViewCallback`
 class JObject$ViewCallback extends jni$_.JObject {
   @jni$_.internal
@@ -80,11 +82,11 @@ class JObject$ViewCallback extends jni$_.JObject {
 
   /// from: `public abstract android.graphics.Bitmap getViewContent()`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? getViewContent() {
+  bitmap$_.Bitmap? getViewContent() {
     return _getViewContent(
       reference.pointer,
       _id_getViewContent as jni$_.JMethodIDPtr,
-    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+    ).object<bitmap$_.Bitmap?>(const bitmap$_.$Bitmap$NullableType());
   }
 
   /// Maps a specific port to the implemented interface.
@@ -170,20 +172,20 @@ class JObject$ViewCallback extends jni$_.JObject {
 
 abstract base mixin class $JObject$ViewCallback {
   factory $JObject$ViewCallback({
-    required jni$_.JObject? Function() getViewContent,
+    required bitmap$_.Bitmap? Function() getViewContent,
   }) = _$JObject$ViewCallback;
 
-  jni$_.JObject? getViewContent();
+  bitmap$_.Bitmap? getViewContent();
 }
 
 final class _$JObject$ViewCallback with $JObject$ViewCallback {
   _$JObject$ViewCallback({
-    required jni$_.JObject? Function() getViewContent,
+    required bitmap$_.Bitmap? Function() getViewContent,
   }) : _getViewContent = getViewContent;
 
-  final jni$_.JObject? Function() _getViewContent;
+  final bitmap$_.Bitmap? Function() _getViewContent;
 
-  jni$_.JObject? getViewContent() {
+  bitmap$_.Bitmap? getViewContent() {
     return _getViewContent();
   }
 }

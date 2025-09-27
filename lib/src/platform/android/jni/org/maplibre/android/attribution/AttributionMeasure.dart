@@ -38,6 +38,8 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
+import '../../../../android/graphics/Bitmap.dart' as bitmap$_;
+
 import 'AttributionLayout.dart' as attributionlayout$_;
 
 /// from: `org.maplibre.android.attribution.AttributionMeasure$Builder`
@@ -113,7 +115,7 @@ class AttributionMeasure$Builder extends jni$_.JObject {
   /// from: `public org.maplibre.android.attribution.AttributionMeasure$Builder setSnapshot(android.graphics.Bitmap bitmap)`
   /// The returned object must be released after use, by calling the [release] method.
   AttributionMeasure$Builder setSnapshot(
-    jni$_.JObject? bitmap,
+    bitmap$_.Bitmap? bitmap,
   ) {
     final _$bitmap = bitmap?.reference ?? jni$_.jNullReference;
     return _setSnapshot(
@@ -151,7 +153,7 @@ class AttributionMeasure$Builder extends jni$_.JObject {
   /// from: `public org.maplibre.android.attribution.AttributionMeasure$Builder setLogo(android.graphics.Bitmap bitmap)`
   /// The returned object must be released after use, by calling the [release] method.
   AttributionMeasure$Builder setLogo(
-    jni$_.JObject? bitmap,
+    bitmap$_.Bitmap? bitmap,
   ) {
     final _$bitmap = bitmap?.reference ?? jni$_.jNullReference;
     return _setLogo(
@@ -189,7 +191,7 @@ class AttributionMeasure$Builder extends jni$_.JObject {
   /// from: `public org.maplibre.android.attribution.AttributionMeasure$Builder setLogoSmall(android.graphics.Bitmap bitmap)`
   /// The returned object must be released after use, by calling the [release] method.
   AttributionMeasure$Builder setLogoSmall(
-    jni$_.JObject? bitmap,
+    bitmap$_.Bitmap? bitmap,
   ) {
     final _$bitmap = bitmap?.reference ?? jni$_.jNullReference;
     return _setLogoSmall(
