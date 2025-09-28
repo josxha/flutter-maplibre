@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/foundation.dart';
@@ -8,7 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:integration_test/integration_test.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre_example/map_styles.dart';
+import 'package:maplibre_example/utils/map_styles.dart';
 
 import 'app.dart';
 
@@ -20,14 +19,14 @@ void main() {
       final events = <MapEvent>[];
       final app = App(
         onMapCreated: ctrlCompleter.complete,
-        options: MapOptions(initCenter: Position(1, 2)),
+        options: const MapOptions(initCenter: Geographic(lon: 1, lat: 2)),
         onEvent: events.add,
       );
       await tester.pumpWidget(app);
       final ctrl = await ctrlCompleter.future;
       events.clear();
       await ctrl.moveCamera(
-        center: Position(1, 1),
+        center: const Geographic(lon: 1, lat: 1),
         bearing: 1,
         zoom: 1,
         pitch: 1,
@@ -35,7 +34,7 @@ void main() {
       await tester.pumpAndSettle();
 
       final camera = ctrl.getCamera();
-      expect(camera.center.lng, closeTo(1, 0.00001));
+      expect(camera.center.lon, closeTo(1, 0.00001));
       expect(camera.center.lat, closeTo(1, 0.00001));
       expect(camera.zoom, closeTo(1, 0.00001));
       expect(camera.bearing, closeTo(1, 0.00001));
@@ -50,7 +49,7 @@ void main() {
       final ctrlCompleter = Completer<MapController>();
       final app = App(
         onMapCreated: ctrlCompleter.complete,
-        options: MapOptions(initCenter: Position(1, 2)),
+        options: const MapOptions(initCenter: Geographic(lon: 1, lat: 2)),
       );
       await tester.pumpWidget(app);
       final ctrl = await ctrlCompleter.future;
@@ -59,25 +58,25 @@ void main() {
       final region = ctrl.getVisibleRegion();
 
       var offset = ctrl.toScreenLocation(
-        Position(region.longitudeWest, region.latitudeNorth),
+        Geographic(lon: region.longitudeWest, lat: region.latitudeNorth),
       );
       expect(offset.dx, closeTo(0, 1));
       expect(offset.dy, closeTo(0, 1));
 
       offset = ctrl.toScreenLocation(
-        Position(region.longitudeEast, region.latitudeNorth),
+        Geographic(lon: region.longitudeEast, lat: region.latitudeNorth),
       );
       expect(offset.dx, closeTo(size.width, 1));
       expect(offset.dy, closeTo(0, 1));
 
       offset = ctrl.toScreenLocation(
-        Position(region.longitudeWest, region.latitudeSouth),
+        Geographic(lon: region.longitudeWest, lat: region.latitudeSouth),
       );
       expect(offset.dx, closeTo(0, 1));
       expect(offset.dy, closeTo(size.height, 1));
 
       offset = ctrl.toScreenLocation(
-        Position(region.longitudeEast, region.latitudeSouth),
+        Geographic(lon: region.longitudeEast, lat: region.latitudeSouth),
       );
       expect(offset.dx, closeTo(size.width, 1));
       expect(offset.dy, closeTo(size.height, 1));
@@ -87,17 +86,17 @@ void main() {
       final ctrlCompleter = Completer<MapController>();
       final app = App(
         onMapCreated: ctrlCompleter.complete,
-        options: MapOptions(initCenter: Position(1, 2)),
+        options: const MapOptions(initCenter: Geographic(lon: 1, lat: 2)),
       );
       await tester.pumpWidget(app);
       final ctrl = await ctrlCompleter.future;
       final size = tester.getSize(find.byType(MapLibreMap));
       final region = ctrl.getVisibleRegion();
       final positions = [
-        Position(region.longitudeWest, region.latitudeNorth),
-        Position(region.longitudeEast, region.latitudeNorth),
-        Position(region.longitudeWest, region.latitudeSouth),
-        Position(region.longitudeEast, region.latitudeSouth),
+        Geographic(lon: region.longitudeWest, lat: region.latitudeNorth),
+        Geographic(lon: region.longitudeEast, lat: region.latitudeNorth),
+        Geographic(lon: region.longitudeWest, lat: region.latitudeSouth),
+        Geographic(lon: region.longitudeEast, lat: region.latitudeSouth),
       ];
       final offsets = ctrl.toScreenLocations(positions);
 
@@ -118,7 +117,7 @@ void main() {
       final ctrlCompleter = Completer<MapController>();
       final app = App(
         onMapCreated: ctrlCompleter.complete,
-        options: MapOptions(initCenter: Position(1, 2)),
+        options: const MapOptions(initCenter: Geographic(lon: 1, lat: 2)),
       );
       await tester.pumpWidget(app);
       final ctrl = await ctrlCompleter.future;
@@ -126,19 +125,19 @@ void main() {
       final region = ctrl.getVisibleRegion();
 
       var lngLat = ctrl.toLngLat(Offset.zero);
-      expect(lngLat.lng, closeTo(region.longitudeWest, 0.00001));
+      expect(lngLat.lon, closeTo(region.longitudeWest, 0.00001));
       expect(lngLat.lat, closeTo(region.latitudeNorth, 0.00001));
 
       lngLat = ctrl.toLngLat(Offset(size.width, 0));
-      expect(lngLat.lng, closeTo(region.longitudeEast, 0.00001));
+      expect(lngLat.lon, closeTo(region.longitudeEast, 0.00001));
       expect(lngLat.lat, closeTo(region.latitudeNorth, 0.00001));
 
       lngLat = ctrl.toLngLat(Offset(0, size.height));
-      expect(lngLat.lng, closeTo(region.longitudeWest, 0.00001));
+      expect(lngLat.lon, closeTo(region.longitudeWest, 0.00001));
       expect(lngLat.lat, closeTo(region.latitudeSouth, 0.00001));
 
       lngLat = ctrl.toLngLat(Offset(size.width, size.height));
-      expect(lngLat.lng, closeTo(region.longitudeEast, 0.00001));
+      expect(lngLat.lon, closeTo(region.longitudeEast, 0.00001));
       expect(lngLat.lat, closeTo(region.latitudeSouth, 0.00001));
     });
 
@@ -146,7 +145,7 @@ void main() {
       final ctrlCompleter = Completer<MapController>();
       final app = App(
         onMapCreated: ctrlCompleter.complete,
-        options: MapOptions(initCenter: Position(1, 2)),
+        options: const MapOptions(initCenter: Geographic(lon: 1, lat: 2)),
       );
       await tester.pumpWidget(app);
       final ctrl = await ctrlCompleter.future;
@@ -160,16 +159,16 @@ void main() {
       ];
       final lngLats = ctrl.toLngLats(offsets);
 
-      expect(lngLats[0].lng, closeTo(region.longitudeWest, 0.00001));
+      expect(lngLats[0].lon, closeTo(region.longitudeWest, 0.00001));
       expect(lngLats[0].lat, closeTo(region.latitudeNorth, 0.00001));
 
-      expect(lngLats[1].lng, closeTo(region.longitudeEast, 0.00001));
+      expect(lngLats[1].lon, closeTo(region.longitudeEast, 0.00001));
       expect(lngLats[1].lat, closeTo(region.latitudeNorth, 0.00001));
 
-      expect(lngLats[2].lng, closeTo(region.longitudeWest, 0.00001));
+      expect(lngLats[2].lon, closeTo(region.longitudeWest, 0.00001));
       expect(lngLats[2].lat, closeTo(region.latitudeSouth, 0.00001));
 
-      expect(lngLats[3].lng, closeTo(region.longitudeEast, 0.00001));
+      expect(lngLats[3].lon, closeTo(region.longitudeEast, 0.00001));
       expect(lngLats[3].lat, closeTo(region.latitudeSouth, 0.00001));
     });
 
@@ -177,8 +176,8 @@ void main() {
       final ctrlCompleter = Completer<MapController>();
       final app = App(
         onMapCreated: ctrlCompleter.complete,
-        options: MapOptions(
-          initCenter: Position(111.6513, 35.1983),
+        options: const MapOptions(
+          initCenter: Geographic(lon: 111.6513, lat: 35.1983),
           initZoom: 14,
         ),
       );
@@ -188,11 +187,11 @@ void main() {
       final pos0 = ctrl.toLngLat(Offset(0, size.height / 4));
       final pos1 = ctrl.toLngLat(Offset(100, size.height / 4));
       final meters = ctrl.getMetersPerPixelAtLatitude(
-        pos0.lat.toDouble(),
+        pos0.lat,
       );
       final actual =
           6371000 *
-          (pos0.lng - pos1.lng).abs() *
+          (pos0.lon - pos1.lon).abs() *
           pi /
           180 *
           cos(pos0.lat * pi / 180);
@@ -203,7 +202,10 @@ void main() {
       final ctrlCompleter = Completer<MapController>();
       final app = App(
         onMapCreated: ctrlCompleter.complete,
-        options: MapOptions(initCenter: Position(0, 0), initZoom: 10),
+        options: const MapOptions(
+          initCenter: Geographic(lon: 0, lat: 0),
+          initZoom: 10,
+        ),
       );
       await tester.pumpWidget(app);
       final ctrl = await ctrlCompleter.future;
@@ -224,7 +226,10 @@ void main() {
       final ctrlCompleter = Completer<MapController>();
       final app = App(
         onMapCreated: ctrlCompleter.complete,
-        options: MapOptions(initCenter: Position(0, 0), initZoom: 10),
+        options: const MapOptions(
+          initCenter: Geographic(lon: 0, lat: 0),
+          initZoom: 10,
+        ),
       );
       await tester.pumpWidget(app);
       final ctrl = await ctrlCompleter.future;
@@ -240,7 +245,10 @@ void main() {
       final ctrlCompleter = Completer<MapController>();
       final app = App(
         onMapCreated: ctrlCompleter.complete,
-        options: MapOptions(initCenter: Position(0, 0), initZoom: 10),
+        options: const MapOptions(
+          initCenter: Geographic(lon: 0, lat: 0),
+          initZoom: 10,
+        ),
       );
       await tester.pumpWidget(app);
       final ctrl = await ctrlCompleter.future;
@@ -257,7 +265,10 @@ void main() {
       final ctrlCompleter = Completer<MapController>();
       final app = App(
         onMapCreated: ctrlCompleter.complete,
-        options: MapOptions(initCenter: Position(0, 0), initZoom: 10),
+        options: const MapOptions(
+          initCenter: Geographic(lon: 0, lat: 0),
+          initZoom: 10,
+        ),
       );
       await tester.pumpWidget(app);
       final ctrl = await ctrlCompleter.future;
@@ -266,11 +277,9 @@ void main() {
       await ctrl.style?.addSource(source);
       await ctrl.style?.updateGeoJsonSource(
         id: source.id,
-        data: jsonEncode(
-          GeometryCollection(
-            geometries: [Point(coordinates: Position(0, 0))],
-          ).toJson(),
-        ),
+        data: GeometryCollection(
+          const [Point(Geographic(lon: 0, lat: 0))],
+        ).toText(),
       );
     });
 
@@ -282,8 +291,8 @@ void main() {
           App(
             onMapCreated: ctrlCompleter.complete,
             onStyleLoaded: styleCompleter.complete,
-            options: MapOptions(
-              initCenter: Position(0.1, 0.1),
+            options: const MapOptions(
+              initCenter: Geographic(lon: 0.1, lat: 0.1),
               initZoom: 14,
             ),
           ),
@@ -296,17 +305,15 @@ void main() {
         await style.addSource(
           GeoJsonSource(
             id: pointSourceId,
-            data: jsonEncode(
-              FeatureCollection(
-                features: [
-                  Feature(
-                    geometry: Point(coordinates: Position(0.1, 0.1)),
-                    id: 1,
-                    properties: {'foo': 'bar'},
-                  ),
-                ],
-              ).toJson(),
-            ),
+            data: FeatureCollection(
+              const [
+                Feature(
+                  geometry: Point(Geographic(lon: 0.1, lat: 0.1)),
+                  id: 1,
+                  properties: {'foo': 'bar'},
+                ),
+              ],
+            ).toText(),
           ),
         );
         const pointLayerId = 'point_layer';
@@ -338,26 +345,24 @@ void main() {
         await style.addSource(
           GeoJsonSource(
             id: polygonSourceId,
-            data: jsonEncode(
-              FeatureCollection(
-                features: [
-                  Feature(
-                    id: 2,
-                    geometry: Polygon(
-                      coordinates: [
-                        [
-                          Position(0.09, 0.09),
-                          Position(0.11, 0.09),
-                          Position(0.11, 0.11),
-                          Position(0.09, 0.11),
-                          Position(0.09, 0.09),
-                        ],
+            data: FeatureCollection(
+              [
+                Feature(
+                  id: 2,
+                  geometry: Polygon.from(
+                    const [
+                      [
+                        Geographic(lon: 0.09, lat: 0.09),
+                        Geographic(lon: 0.11, lat: 0.09),
+                        Geographic(lon: 0.11, lat: 0.11),
+                        Geographic(lon: 0.09, lat: 0.11),
+                        Geographic(lon: 0.09, lat: 0.09),
                       ],
-                    ),
+                    ],
                   ),
-                ],
-              ).toJson(),
-            ),
+                ),
+              ],
+            ).toText(),
           ),
         );
         const polygonLayerId = 'polygon_layer';
@@ -389,9 +394,9 @@ void main() {
             onMapCreated: ctrlCompleter.complete,
             onStyleLoaded: styleCompleter.complete,
             options: MapOptions(
-              initCenter: Position(0.1, 0.1),
+              initCenter: const Geographic(lon: 0.1, lat: 0.1),
               initZoom: 14,
-              initStyle: MapStyles.maptilerStreets,
+              initStyle: MapStyles.openMapTilesStreets.uri,
             ),
           ),
         );
@@ -416,8 +421,8 @@ void main() {
           App(
             onMapCreated: ctrlCompleter.complete,
             onStyleLoaded: styleCompleter.complete,
-            options: MapOptions(
-              initCenter: Position(0.1, 0.1),
+            options: const MapOptions(
+              initCenter: Geographic(lon: 0.1, lat: 0.1),
               initZoom: 10,
             ),
           ),
@@ -428,17 +433,15 @@ void main() {
         await style.addSource(
           GeoJsonSource(
             id: pointSourceId,
-            data: jsonEncode(
-              FeatureCollection(
-                features: [
-                  Feature(
-                    geometry: Point(coordinates: Position(0.1, 0.1)),
-                    id: 1,
-                    properties: {'foo': 'bar'},
-                  ),
-                ],
-              ).toJson(),
-            ),
+            data: FeatureCollection(
+              const [
+                Feature(
+                  geometry: Point(Geographic(lon: 0.1, lat: 0.1)),
+                  id: 1,
+                  properties: {'foo': 'bar'},
+                ),
+              ],
+            ).toText(),
           ),
         );
         const pointLayerId = 'point_layer';
@@ -453,27 +456,25 @@ void main() {
         await style.addSource(
           GeoJsonSource(
             id: polygonSourceId,
-            data: jsonEncode(
-              FeatureCollection(
-                features: [
-                  Feature(
-                    geometry: Polygon(
-                      coordinates: [
-                        [
-                          Position(0.09, 0.09),
-                          Position(0.11, 0.09),
-                          Position(0.11, 0.11),
-                          Position(0.09, 0.11),
-                          Position(0.09, 0.09),
-                        ],
+            data: FeatureCollection(
+              [
+                Feature(
+                  geometry: Polygon.from(
+                    const [
+                      [
+                        Geographic(lon: 0.09, lat: 0.09),
+                        Geographic(lon: 0.11, lat: 0.09),
+                        Geographic(lon: 0.11, lat: 0.11),
+                        Geographic(lon: 0.09, lat: 0.11),
+                        Geographic(lon: 0.09, lat: 0.09),
                       ],
-                    ),
-                    id: 2,
-                    properties: {'poly': 'gon'},
+                    ],
                   ),
-                ],
-              ).toJson(),
-            ),
+                  id: 2,
+                  properties: const {'poly': 'gon'},
+                ),
+              ],
+            ).toText(),
           ),
         );
         const polygonLayerId = 'polygon_layer';
@@ -545,8 +546,8 @@ void main() {
           App(
             onMapCreated: ctrlCompleter.complete,
             onStyleLoaded: styleCompleter.complete,
-            options: MapOptions(
-              initCenter: Position(0.1, 0.1),
+            options: const MapOptions(
+              initCenter: Geographic(lon: 0.1, lat: 0.1),
               initZoom: 10,
             ),
           ),
@@ -557,17 +558,15 @@ void main() {
         await style.addSource(
           GeoJsonSource(
             id: pointSourceId,
-            data: jsonEncode(
-              FeatureCollection(
-                features: [
-                  Feature(
-                    geometry: Point(coordinates: Position(0.1, 0.1)),
-                    id: 1,
-                    properties: {'foo': 'bar'},
-                  ),
-                ],
-              ).toJson(),
-            ),
+            data: FeatureCollection(
+              const [
+                Feature(
+                  geometry: Point(Geographic(lon: 0.1, lat: 0.1)),
+                  id: 1,
+                  properties: {'foo': 'bar'},
+                ),
+              ],
+            ).toText(),
           ),
         );
         const pointLayerId = 'point_layer';
@@ -582,19 +581,20 @@ void main() {
         await style.addSource(
           GeoJsonSource(
             id: lineSourceId,
-            data: jsonEncode(
-              FeatureCollection(
-                features: [
-                  Feature(
-                    geometry: LineString(
-                      coordinates: [Position(0.09, 0.11), Position(0.11, 0.11)],
-                    ),
-                    id: 2,
-                    properties: {'line': 'string'},
+            data: FeatureCollection(
+              [
+                Feature(
+                  geometry: LineString.from(
+                    const [
+                      Geographic(lon: 0.09, lat: 0.11),
+                      Geographic(lon: 0.11, lat: 0.11),
+                    ],
                   ),
-                ],
-              ).toJson(),
-            ),
+                  id: 2,
+                  properties: const {'line': 'string'},
+                ),
+              ],
+            ).toText(),
           ),
         );
         const lineLayerId = 'line_layer';
@@ -612,27 +612,25 @@ void main() {
         await style.addSource(
           GeoJsonSource(
             id: polygonSourceId,
-            data: jsonEncode(
-              FeatureCollection(
-                features: [
-                  Feature(
-                    geometry: Polygon(
-                      coordinates: [
-                        [
-                          Position(0.09, 0.09),
-                          Position(0.11, 0.09),
-                          Position(0.11, 0.11),
-                          Position(0.09, 0.11),
-                          Position(0.09, 0.09),
-                        ],
+            data: FeatureCollection(
+              [
+                Feature(
+                  geometry: Polygon.from(
+                    const [
+                      [
+                        Geographic(lon: 0.09, lat: 0.09),
+                        Geographic(lon: 0.11, lat: 0.09),
+                        Geographic(lon: 0.11, lat: 0.11),
+                        Geographic(lon: 0.09, lat: 0.11),
+                        Geographic(lon: 0.09, lat: 0.09),
                       ],
-                    ),
-                    id: 3,
-                    properties: {'poly': 'gon'},
+                    ],
                   ),
-                ],
-              ).toJson(),
-            ),
+                  id: 3,
+                  properties: const {'poly': 'gon'},
+                ),
+              ],
+            ).toText(),
           ),
         );
         const polygonLayerId = 'polygon_layer';
@@ -663,9 +661,11 @@ void main() {
         );
         expect(polygonFeature.properties['poly'], 'gon');
         final lineStartScreen = ctrl.toScreenLocation(
-          Position(0.09, 0.11),
+          const Geographic(lon: 0.09, lat: 0.11),
         );
-        final lineEndScreen = ctrl.toScreenLocation(Position(0.11, 0.11));
+        final lineEndScreen = ctrl.toScreenLocation(
+          const Geographic(lon: 0.11, lat: 0.11),
+        );
         features = ctrl.featuresInRect(
           Rect.fromPoints(lineStartScreen, lineEndScreen),
         );
@@ -724,9 +724,9 @@ void main() {
         onMapCreated: ctrlCompleter.complete,
         onStyleLoaded: styleCompleter.complete,
         options: MapOptions(
-          initCenter: Position(0, 0),
+          initCenter: const Geographic(lon: 0, lat: 0),
           initZoom: 10,
-          initStyle: MapStyles.protomapsLight,
+          initStyle: MapStyles.protomapsLight.uri,
         ),
       );
       await tester.pumpWidget(app);
@@ -743,14 +743,14 @@ void main() {
       await tester.pumpWidget(app);
       final ctrl = await ctrlCompleter.future;
       await ctrl.moveCamera(
-        center: Position(1, 2),
+        center: const Geographic(lon: 1, lat: 2),
         bearing: 1,
         zoom: 1,
         pitch: 1,
       );
       await tester.pumpAndSettle();
       final camera = ctrl.getCamera();
-      expect(camera.center.lng, closeTo(1, 0.00001));
+      expect(camera.center.lon, closeTo(1, 0.00001));
       expect(camera.center.lat, closeTo(2, 0.00001));
       expect(camera.zoom, closeTo(1, 0.00001));
       expect(camera.bearing, closeTo(1, 0.00001));
@@ -763,15 +763,15 @@ void main() {
     final app = App(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
-    final source = ImageSource(
+    const source = ImageSource(
       id: '1',
       url:
           'https://raw.githubusercontent.com/josxha/flutter-maplibre/57396548693857a80083303f56aa83b4901dad48/docs/static/img/favicon-32x32.png',
       coordinates: LngLatQuad(
-        bottomLeft: Position(0, 0),
-        bottomRight: Position(1, 0),
-        topLeft: Position(0, 1),
-        topRight: Position(1, 1),
+        bottomLeft: Geographic(lon: 0, lat: 0),
+        bottomRight: Geographic(lon: 1, lat: 0),
+        topLeft: Geographic(lon: 0, lat: 1),
+        topRight: Geographic(lon: 1, lat: 1),
       ),
     );
     await ctrl.style?.addSource(source);
@@ -785,11 +785,9 @@ void main() {
     final ctrl = await ctrlCompleter.future;
     final source = GeoJsonSource(
       id: '1',
-      data: jsonEncode(
-        GeometryCollection(
-          geometries: [Point(coordinates: Position(12, 2))],
-        ).toJson(),
-      ),
+      data: GeometryCollection(
+        const [Point(Geographic(lon: 12, lat: 2))],
+      ).toText(),
     );
     await ctrl.style?.addSource(source);
     await tester.pumpAndSettle();
@@ -801,9 +799,9 @@ void main() {
     final app = App(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
-    final source = VideoSource(
+    const source = VideoSource(
       id: '1',
-      coordinates: [Position(0, 0), Position(10, 10)],
+      coordinates: [Geographic(lon: 0, lat: 0), Geographic(lon: 10, lat: 10)],
       urls: [
         'https://file-examples.com/storage/fefd65c2506728a13a07e72/2017/04/file_example_MP4_480_1_5MG.mp4',
       ],

@@ -16,11 +16,11 @@ class LayersMarkerPage extends StatefulWidget {
 }
 
 class _LayersMarkerPageState extends State<LayersMarkerPage> {
-  final _points = <Point>[
-    Point(coordinates: Position(9.17, 47.68)),
-    Point(coordinates: Position(9.17, 48)),
-    Point(coordinates: Position(9, 48)),
-    Point(coordinates: Position(9.5, 48)),
+  final _points = <Feature<Point>>[
+    const Feature(geometry: Point(Geographic(lon: 9.17, lat: 47.68))),
+    const Feature(geometry: Point(Geographic(lon: 9.17, lat: 48))),
+    const Feature(geometry: Point(Geographic(lon: 9, lat: 48))),
+    const Feature(geometry: Point(Geographic(lon: 9.5, lat: 48))),
   ];
 
   bool _imageLoaded = false;
@@ -30,7 +30,10 @@ class _LayersMarkerPageState extends State<LayersMarkerPage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Marker Layers')),
       body: MapLibreMap(
-        options: MapOptions(initZoom: 7, initCenter: Position(9.17, 47.68)),
+        options: const MapOptions(
+          initZoom: 7,
+          initCenter: Geographic(lon: 9.17, lat: 47.68),
+        ),
         onEvent: (event) async {
           switch (event) {
             case MapEventStyleLoaded():
@@ -51,7 +54,7 @@ class _LayersMarkerPageState extends State<LayersMarkerPage> {
             case MapEventClick():
               // add a new marker on click
               setState(() {
-                _points.add(Point(coordinates: event.point));
+                _points.add(Feature(geometry: Point(event.point)));
               });
             default:
               // ignore all other events

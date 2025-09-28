@@ -21,7 +21,7 @@ late final MapController _controller;
 @override
 Widget build(BuildContext context) {
   return MapLibreMap(
-    options: MapOptions(center: Position(9.17, 47.68)),
+    options: MapOptions(center: Geographic(lon: 9.17, lat: 47.68)),
     onEvent: (event) async {
       switch (event) {
         case MapEventMapCreated():
@@ -37,7 +37,7 @@ Widget build(BuildContext context) {
         case MapEventClick():
         // add a new marker on click
           setState(() {
-            _points.add(Point(coordinates: event.point));
+            _points.add(Point(event.point));
           });
         default:
         // ignore all other events
@@ -48,10 +48,10 @@ Widget build(BuildContext context) {
       // highlight-start
       MarkerLayer(
         points: <Point>[
-          Point(coordinates: Position(9.17, 47.68)),
-          Point(coordinates: Position(9.17, 48)),
-          Point(coordinates: Position(9, 48)),
-          Point(coordinates: Position(9.5, 48)),
+          Point(Geographic(lon: 9.17, lat: 47.68)),
+          Point(Geographic(lon: 9.17, lat: 48)),
+          Point(Geographic(lon: 9, lat: 48)),
+          Point(Geographic(lon: 9.5, lat: 48)),
         ],
         textField: 'Marker',
         textAllowOverlap: true,

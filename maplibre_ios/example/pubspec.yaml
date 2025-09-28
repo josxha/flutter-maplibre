@@ -4,18 +4,19 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  flutter: ^3.29.0
-  sdk: ^3.7.0
+  sdk: '>=3.9.0 <4.0.0'
+  flutter: '>=3.35.0'
+
+resolution: workspace
 
 dependencies:
   flutter:
     sdk: flutter
-
   maplibre_ios:
     path: ../
 
 dev_dependencies:
-  very_good_analysis: ^7.0.0
+  very_good_analysis: ^10.0.0
 
 flutter:
   uses-material-design: true

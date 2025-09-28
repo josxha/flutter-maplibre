@@ -49,8 +49,8 @@ class MenuPage extends StatelessWidget {
               childAspectRatio: 1.5,
               children: [
                 const ItemCard(
-                  label: 'Styled Map',
-                  iconData: Icons.map,
+                  label: 'Map Styles',
+                  iconData: Icons.color_lens,
                   location: StyledMapPage.location,
                 ),
                 const ItemCard(

@@ -182,7 +182,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
 
   @override
   Future<void> moveCamera({
-    Position? center,
+    Geographic? center,
     double? zoom,
     double? bearing,
     double? pitch,
@@ -217,7 +217,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
 
   @override
   Future<void> animateCamera({
-    Position? center,
+    Geographic? center,
     double? zoom,
     double? bearing,
     double? pitch,
@@ -321,7 +321,10 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     final jniCamera = _jniMapLibreMap!.getCameraPosition();
     final jniTarget = jniCamera.target!;
     final mapCamera = MapCamera(
-      center: Position(jniTarget.getLongitude(), jniTarget.getLatitude()),
+      center: Geographic(
+        lon: jniTarget.getLongitude(),
+        lat: jniTarget.getLatitude(),
+      ),
       zoom: jniCamera.zoom,
       pitch: jniCamera.tilt,
       bearing: jniCamera.bearing,
@@ -584,25 +587,25 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
   }
 
   @override
-  Position toLngLat(Offset screenLocation) => _jniProjection
+  Geographic toLngLat(Offset screenLocation) => _jniProjection
       .fromScreenLocation(
         (screenLocation * MediaQuery.devicePixelRatioOf(context)).toPointF(),
       )
-      .toPosition(releaseOriginal: true);
+      .toGeographic(releaseOriginal: true);
 
   @override
-  List<Position> toLngLats(List<Offset> screenLocations) =>
+  List<Geographic> toLngLats(List<Offset> screenLocations) =>
       screenLocations.map(toLngLat).toList(growable: false);
 
   @override
-  Offset toScreenLocation(Position lngLat) =>
+  Offset toScreenLocation(Geographic lngLat) =>
       _jniProjection
           .toScreenLocation(lngLat.toLatLng())
           .toOffset(releaseOriginal: true) /
       MediaQuery.devicePixelRatioOf(context);
 
   @override
-  List<Offset> toScreenLocations(List<Position> lngLats) =>
+  List<Offset> toScreenLocations(List<Geographic> lngLats) =>
       lngLats.map(toScreenLocation).toList(growable: false);
 
   @override

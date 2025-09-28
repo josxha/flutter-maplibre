@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre_example/extensions.dart';
-import 'package:maplibre_example/map_styles.dart';
+import 'package:maplibre_example/utils/map_styles.dart';
 
 @immutable
 class UserLocationPage extends StatefulWidget {
@@ -90,8 +90,8 @@ class _UserLocationPageState extends State<UserLocationPage> {
             child: MapLibreMap(
               options: MapOptions(
                 initZoom: 1,
-                initCenter: Position(0, 0),
-                initStyle: MapStyles.protomapsLight,
+                initCenter: const Geographic(lon: 0, lat: 0),
+                initStyle: MapStyles.protomapsLight.uri,
               ),
               onMapCreated: (controller) => _controller = controller,
             ),

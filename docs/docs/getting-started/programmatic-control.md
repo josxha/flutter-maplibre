@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 60
 ---
 
 # Programmatic Control
@@ -33,7 +33,7 @@ class _MyMapWidget extends State<GesturesPage> {
       body: MapLibreMap(
           options: MapOptions(
             // parameters that start with init* can't be updated
-            initCenter: Position(9.17, 47.68),
+            initCenter: Geographic(lon: 9.17, lat: 47.68),
             initZoom: 3,
             // other parameters can be updated
             // highlight-start
@@ -78,7 +78,7 @@ class _MyMapWidget extends State<GesturesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: MapLibreMap(
-          options: MapOptions(initCenter: Position(9.17, 47.68), initZoom: 3),
+          options: MapOptions(initCenter: Geographic(lon: 9.17, lat: 47.68), initZoom: 3),
           onEvent: (event) {
             // check if the MapEvent type is a MapEventMapCreated
             if (event case MapEventMapCreated()) {
@@ -108,7 +108,7 @@ class _MyMapWidget extends State<GesturesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: MapLibreMap(
-          options: MapOptions(initCenter: Position(9.17, 47.68), initZoom: 3),
+          options: MapOptions(initCenter: Geographic(lon: 9.17, lat: 47.68), initZoom: 3),
           onEvent: (event) {
             // check if the MapEvent type is a MapEventStyleLoaded
             if (event case MapEventStyleLoaded()) {

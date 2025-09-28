@@ -50,7 +50,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
 
   @override
   Future<void> animateCamera({
-    Position? center,
+    Geographic? center,
     double? zoom,
     double? bearing,
     double? pitch,
@@ -115,7 +115,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   MapCamera getCamera() {
     final ffiCamera = _mapView.camera;
     return MapCamera(
-      center: ffiCamera.centerCoordinate.toPosition(),
+      center: ffiCamera.centerCoordinate.toGeographic(),
       zoom: _mapView.zoomLevel,
       bearing: ffiCamera.heading,
       pitch: ffiCamera.pitch,
@@ -124,7 +124,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
 
   @override
   Future<void> moveCamera({
-    Position? center,
+    Geographic? center,
     double? zoom,
     double? bearing,
     double? pitch,
@@ -334,16 +334,16 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   }
 
   @override
-  Position toLngLat(Offset screenLocation) => _mapView
+  Geographic toLngLat(Offset screenLocation) => _mapView
       .convertPoint_(screenLocation.toCGPoint(), view: _mapView)
-      .toPosition();
+      .toGeographic();
 
   @override
-  List<Position> toLngLats(List<Offset> screenLocations) =>
+  List<Geographic> toLngLats(List<Offset> screenLocations) =>
       screenLocations.map(toLngLat).toList(growable: false);
 
   @override
-  Offset toScreenLocation(Position lngLat) => _mapView
+  Offset toScreenLocation(Geographic lngLat) => _mapView
       .convertCoordinate(
         lngLat.toCLLocationCoordinate2D(),
         toPointToView: _mapView,
@@ -351,7 +351,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
       .toOffset();
 
   @override
-  List<Offset> toScreenLocations(List<Position> lngLats) =>
+  List<Offset> toScreenLocations(List<Geographic> lngLats) =>
       lngLats.map(toScreenLocation).toList(growable: false);
 
   @override

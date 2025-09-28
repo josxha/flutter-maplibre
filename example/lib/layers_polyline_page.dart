@@ -12,9 +12,15 @@ class LayersPolylinePage extends StatefulWidget {
 }
 
 class _LayersPolylinePageState extends State<LayersPolylinePage> {
-  final _polylines = <LineString>[
-    LineString(
-      coordinates: [Position(9.17, 47.68), Position(9.5, 48), Position(9, 48)],
+  final _polylines = <Feature<LineString>>[
+    Feature(
+      geometry: LineString.from(
+        const [
+          Geographic(lon: 9.17, lat: 47.68),
+          Geographic(lon: 9.5, lat: 48),
+          Geographic(lon: 9, lat: 48),
+        ],
+      ),
     ),
   ];
 
@@ -23,11 +29,20 @@ class _LayersPolylinePageState extends State<LayersPolylinePage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Polyline Layers')),
       body: MapLibreMap(
-        options: MapOptions(initZoom: 7, initCenter: Position(9.17, 47.68)),
+        options: const MapOptions(
+          initZoom: 7,
+          initCenter: Geographic(lon: 9.17, lat: 47.68),
+        ),
         onEvent: (event) {
           if (event case MapEventClick()) {
+            // add the clicked point to the line
+            final newChain = _polylines.first.geometry!.chain.inserted(0, [
+              event.point,
+            ]);
             setState(() {
-              _polylines.first.coordinates.add(event.point);
+              _polylines[0] = Feature(
+                geometry: LineString.from(newChain.positions),
+              );
             });
           }
         },

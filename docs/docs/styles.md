@@ -15,7 +15,7 @@ options like so:
 Widget build() {
   return MapLibreMap(
       options: MapOptions(
-        center: Position(9.17, 47.68),
+        center: Geographic(lon: 9.17, lat: 47.68),
         // highlight-next-line
         style: 'https://demotiles.maplibre.org/style.json',
       )

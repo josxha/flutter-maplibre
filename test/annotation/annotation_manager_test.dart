@@ -33,7 +33,9 @@ void main() {
 
     testWidgets('add and remove layers', (tester) async {
       final manager = LayerManager(style, []);
-      final layer1 = CircleLayer(points: [Point(coordinates: Position(0, 0))]);
+      const layer1 = CircleLayer(
+        points: [Feature(geometry: Point(Geographic(lon: 0, lat: 0)))],
+      );
 
       manager.updateLayers([layer1]);
       verify(() => style.addSource(any(that: isA<GeoJsonSource>()))).called(1);

@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:geotypes/geotypes.dart';
+import 'package:maplibre/maplibre.dart';
 
 /// LatLng bounds class.
 ///
@@ -16,7 +16,7 @@ class LngLatBounds {
 
   /// Create a new [LngLatBounds] from a list of [Position] points. This
   /// calculates the bounding box of the provided points.
-  factory LngLatBounds.fromPoints(List<Position> points) {
+  factory LngLatBounds.fromPoints(List<Geographic> points) {
     assert(
       points.isNotEmpty,
       'LngLatBounds cannot be created with an empty List',
@@ -30,10 +30,10 @@ class LngLatBounds {
 
     // Find the largest and smallest latitude and longitude
     for (final point in points) {
-      if (point.lng < minX) minX = point.lng.toDouble();
-      if (point.lng > maxX) maxX = point.lng.toDouble();
-      if (point.lat < minY) minY = point.lat.toDouble();
-      if (point.lat > maxY) maxY = point.lat.toDouble();
+      if (point.lon < minX) minX = point.lon;
+      if (point.lon > maxX) maxX = point.lon;
+      if (point.lat < minY) minY = point.lat;
+      if (point.lat > maxY) maxY = point.lat;
     }
 
     return LngLatBounds(

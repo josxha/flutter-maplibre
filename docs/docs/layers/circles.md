@@ -19,15 +19,15 @@ Circles are a simple way to show data on the map.
 @override
 Widget build(BuildContext context) {
   return MapLibreMap(
-    options: MapOptions(center: Position(9.17, 47.68)),
+    options: MapOptions(center: Geographic(lon: 9.17, lat: 47.68)),
     layers: [
       // highlight-start
       CircleLayer(
         points: <Point>[
-          Point(coordinates: Position(9.17, 47.68)),
-          Point(coordinates: Position(9.17, 48)),
-          Point(coordinates: Position(9, 48)),
-          Point(coordinates: Position(9.5, 48)),
+          Point(Geographic(lon: 9.17, lat: 47.68)),
+          Point(Geographic(lon: 9.17, lat: 48)),
+          Point(Geographic(lon: 9, lat: 48)),
+          Point(Geographic(lon: 9.5, lat: 48)),
         ],
         color: Colors.orange.withOpacity(0.5),
         radius: 20,

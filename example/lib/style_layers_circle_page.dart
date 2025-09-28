@@ -20,8 +20,8 @@ class _StyleLayersCirclePageState extends State<StyleLayersCirclePage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Circle Style Layer')),
       body: MapLibreMap(
-        options: MapOptions(
-          initCenter: Position(-152.9959, 59.8150),
+        options: const MapOptions(
+          initCenter: Geographic(lon: -152.9959, lat: 59.8150),
           initZoom: 9,
         ),
         onStyleLoaded: _onStyleLoaded,

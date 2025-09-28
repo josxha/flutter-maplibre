@@ -5,10 +5,10 @@ import 'package:maplibre/maplibre.dart';
 void main() {
   group('Annotation Model Classes', () {
     test('CircleAnnotationLayer', () {
-      final o = CircleLayer(
+      const o = CircleLayer(
         points: [
-          Point(coordinates: Position(0, 0)),
-          Point(coordinates: Position(12.4, -4)),
+          Feature(geometry: Point(Geographic(lon: 0, lat: 0))),
+          Feature(geometry: Point(Geographic(lon: 12.4, lat: -4))),
         ],
         color: Colors.purple,
         strokeWidth: 5,
@@ -32,16 +32,16 @@ void main() {
       expect(o.getPaint(), isA<Map<String, Object>>());
     });
     test('MarkerAnnotationLayer', () {
-      final o = MarkerLayer(
+      const o = MarkerLayer(
         points: [
-          Point(coordinates: Position(0, 0)),
-          Point(coordinates: Position(12.4, -4)),
+          Feature(geometry: Point(Geographic(lon: 0, lat: 0))),
+          Feature(geometry: Point(Geographic(lon: 12.4, lat: -4))),
         ],
         textColor: Colors.purple,
         textHaloColor: Colors.greenAccent,
         iconHaloColor: Colors.amber,
         iconColor: Colors.yellow,
-        textOffset: const [2, 4],
+        textOffset: [2, 4],
         iconImage: 'test.png',
         textAllowOverlap: true,
         textSize: 23,
@@ -64,20 +64,36 @@ void main() {
     test('PolygonAnnotationLayer', () {
       final o = PolygonLayer(
         polygons: [
-          Polygon(
-            coordinates: [
-              [Position(2, 23.4), Position(5.2, 32), Position(53, 2)],
-              [Position(2, 23.4), Position(5.2, 32), Position(53, 3)],
-            ],
+          Feature(
+            geometry: Polygon.from(
+              const [
+                [
+                  Geographic(lon: 2, lat: 23.4),
+                  Geographic(lon: 5.2, lat: 32),
+                  Geographic(lon: 53, lat: 2),
+                ],
+                [
+                  Geographic(lon: 2, lat: 23.4),
+                  Geographic(lon: 5.2, lat: 32),
+                  Geographic(lon: 53, lat: 3),
+                ],
+              ],
+            ),
           ),
         ],
       );
       final o2 = PolygonLayer(
         polygons: [
-          Polygon(
-            coordinates: [
-              [Position(2, 23.4), Position(5.2, 32), Position(53, 2)],
-            ],
+          Feature(
+            geometry: Polygon.from(
+              const [
+                [
+                  Geographic(lon: 2, lat: 23.4),
+                  Geographic(lon: 5.2, lat: 32),
+                  Geographic(lon: 53, lat: 2),
+                ],
+              ],
+            ),
           ),
         ],
       );
@@ -85,7 +101,7 @@ void main() {
         polygons: [
           Polygon(
             coordinates: [
-              [Position(2, 23.4), Position(5.2, 32), Position(53, 2)],
+              [Geographic(lon: 2, 23.4), Geographic(lon: 5.2, 32), Geographic(lon: 53, 2)],
             ],
           ),
         ],
@@ -106,17 +122,26 @@ void main() {
     test('PolylineAnnotationLayer', () {
       final o = PolylineLayer(
         polylines: [
-          LineString(coordinates: [Position(2, 23.4), Position(5.2, 32)]),
+          Feature(
+            geometry: LineString.from(
+              const [
+                Geographic(lon: 2, lat: 23.4),
+                Geographic(lon: 5.2, lat: 32),
+              ],
+            ),
+          ),
         ],
       );
       final o2 = PolylineLayer(
         polylines: [
-          LineString(
-            coordinates: [
-              Position(2, 23.4),
-              Position(5.2, 32),
-              Position(53, 2),
-            ],
+          Feature(
+            geometry: LineString.from(
+              const [
+                Geographic(lon: 2, lat: 23.4),
+                Geographic(lon: 5.2, lat: 32),
+                Geographic(lon: 53, lat: 2),
+              ],
+            ),
           ),
         ],
       );
@@ -124,9 +149,9 @@ void main() {
         polylines: [
           LineString(
             coordinates: [
-              Position(2, 23.4),
-              Position(5.2, 32),
-              Position(53, 2),
+              Geographic(lon: 2, lat: 23.4),
+              Geographic(lon: 5.2, lat: 32),
+              Geographic(lon: 53, lat: 2),
             ],
           ),
         ],

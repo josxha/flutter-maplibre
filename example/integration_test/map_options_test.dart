@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre_example/map_styles.dart';
+import 'package:maplibre_example/utils/map_styles.dart';
 
 import 'app.dart';
 
@@ -15,8 +15,8 @@ void main() {
         minZoom: 1,
         maxZoom: 2,
         initZoom: 1,
-        initCenter: Position(1, 2),
-        initStyle: MapStyles.protomapsLight,
+        initCenter: const Geographic(lon: 1, lat: 2),
+        initStyle: MapStyles.protomapsLight.uri,
       );
       final completer = Completer<MapController>();
       await tester.pumpWidget(
