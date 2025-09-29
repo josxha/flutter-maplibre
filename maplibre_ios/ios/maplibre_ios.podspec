@@ -18,7 +18,7 @@ Helper package for maplibre that provides iOS FFI bindings
 
   # Needs to be the same version as in maplibre_ios/Package.swift
   # FOR PREBUILT LIBRARY
-  s.dependency 'MapLibre', '~> 6.17'
+  s.dependency 'MapLibre', '~> 6.18'
 
   # FOR LOCAL LIBRARY
   # s.vendored_frameworks = '.build/MapLibre.xcframework'
