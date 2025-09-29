@@ -4,7 +4,7 @@ sidebar_position: 35
 
 # User Interface
 
-To accomplish a unified and easy to use user interface across the differerent
+To accomplish a unified and easy to use user interface across the different
 platforms, the package has some flutter widgets, that are rendered above the
 map. These UI elements are just like every other Flutter widgets and can be used
 in the `children` List of the `MapLibreMap` widget.

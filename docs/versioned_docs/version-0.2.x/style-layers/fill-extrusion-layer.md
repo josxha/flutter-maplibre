@@ -54,8 +54,8 @@ Widget build(BuildContext context) {
 ```
 
 Check out
-the [example app](https://github.com/josxha/flutter-maplibre/blob/main/example/lib/style-layers_circle_page.dart)
-for to learn more.
+the [example app](https://github.com/josxha/flutter-maplibre/blob/main/example/lib/style-layers_fill_extrusion_page.dart)
+to learn more.
 
 ## Style & Layout
 
