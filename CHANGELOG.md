@@ -27,7 +27,7 @@ more on how to update your implementation.
   their `*Sync()` overloads have been removed.
 - **Breaking** All declarative layers now require a `FeatureCollection`. This
   allows users to add properties to their layers.
-- Add iOS as supported platform with MapLibre Native iOS 6.18.
+- Add iOS as supported platform with MapLibre Native iOS 6.19.
 - Update MapLibre Native Android to 11.13
 - Load map styles from Flutter assets, a JSON string or via URI.
 - Add `setStyle()`, to know when the map style has loaded, listen to

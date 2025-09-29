@@ -14,7 +14,7 @@ let package = Package(
   dependencies: [
     // Needs to be the same version as in ../maplibre_ios.podspec
     // FOR PREBUILT LIBRARY
-    .package(url: "https://github.com/maplibre/maplibre-gl-native-distribution", .upToNextMinor(from: "6.18.0")),
+    .package(url: "https://github.com/maplibre/maplibre-gl-native-distribution", .upToNextMinor(from: "6.19.0")),
   ],
   targets: [
     .target(
