@@ -32,7 +32,7 @@ Widget build(BuildContext context) {
           ),
         );
         // highlight-end
-        const _fillExtrusionStyleLayer = FillExtrusionStyleLayer(
+        const layer = FillExtrusionStyleLayer(
           id: 'room-extrusion',
           sourceId: _sourceId,
           paint: {
@@ -46,7 +46,7 @@ Widget build(BuildContext context) {
         );
         // add the layer
         // highlight-start
-        await style.addLayer(_fillExtrusionLayer);
+        await style.addLayer(layer);
         // highlight-end
       }
   );
