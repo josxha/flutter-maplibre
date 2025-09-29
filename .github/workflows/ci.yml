@@ -177,7 +177,7 @@ jobs:
           sudo apt-get install webp && \
           dart pub global activate pana
       - name: Check package score
-        run: pana --exit-code-threshold 150 --no-dartdoc .
+        run: pana --exit-code-threshold 0 --no-dartdoc .
   build-android:
     name: "[Android] Build APK"
     runs-on: ubuntu-latest
