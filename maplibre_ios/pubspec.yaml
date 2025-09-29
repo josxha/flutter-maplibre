@@ -16,7 +16,7 @@ dependencies:
   ffi: ^2.1.3
   flutter:
     sdk: flutter
-  objective_c: ^8.0.0
+  objective_c: ^8.1.0
 
 dev_dependencies:
   ffigen: 19.1.0

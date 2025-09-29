@@ -126,6 +126,7 @@ in an easy way.
 | **Feature**               | maplibre | maplibre_gl | flutter_map | mapbox_maps_flutter | google_maps_flutter |
 |---------------------------|----------|-------------|-------------|---------------------|---------------------|
 | Mapbox Vector Tiles (MVT) | ✅        | ✅           | ⚠️ 1        | ✅                   | ❌                   |
+| PMTiles                   | ✅        | ⚠️ 3        | ⚠️ 1        | ❌                   | ❌                   |
 | Raster Tiles              | ✅        | ✅           | ✅           | ✅                   | ✅                   |
 | Vector Tiles              | ✅        | ✅           | ⚠️ 1,2      | ✅                   | ✅                   |
 | Hillshade Tiles           | ✅        | ✅           | ❌           | ✅                   | ❌                   |
@@ -152,7 +153,7 @@ in an easy way.
 | **Platform** | maplibre | maplibre_gl | flutter_map | mapbox_maps_flutter | google_maps_flutter |
 |--------------|----------|-------------|-------------|---------------------|---------------------|
 | Android      | ✅        | ✅           | ✅           | ✅                   | ✅                   |
-| iOS          | ❌        | ✅           | ✅           | ✅                   | ✅                   |
+| iOS          | ✅        | ✅           | ✅           | ✅                   | ✅                   |
 | Web          | ✅        | ✅           | ✅           | ❌                   | ✅                   |
 | Windows      | ❌        | ❌           | ✅           | ❌                   | ❌                   |
 | macOS        | ❌        | ❌           | ✅           | ❌                   | ❌                   |

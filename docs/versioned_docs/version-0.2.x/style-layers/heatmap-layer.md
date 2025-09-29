@@ -28,7 +28,7 @@ Widget build(BuildContext context) {
           data:
           'https://maplibre.org/maplibre-gl-js/docs/assets/earthquakes.geojson',
         );
-        await _controller.addSource(earthquakes);
+        await style.addSource(earthquakes);
         const layer = HeatmapStyleLayer(id: _layerId, sourceId: _sourceId);
         await style.addLayer(layer);
         // highlight-end
@@ -38,8 +38,8 @@ Widget build(BuildContext context) {
 ```
 
 Check out
-the [example app](https://github.com/josxha/flutter-maplibre/blob/main/example/lib/style-layers_circle_page.dart)
-for to learn more.
+the [example app](https://github.com/josxha/flutter-maplibre/blob/main/example/lib/style-layers_heatmap_page.dart)
+to learn more.
 
 ## Style & Layout
 
