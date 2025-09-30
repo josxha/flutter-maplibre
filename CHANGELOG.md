@@ -1,14 +1,58 @@
-# next
+# 0.3.0
 
-- `MapController#setStyle` no longer returns a Future. To know when the map
-  style has loaded, listen to `MapLibreMap#onStyleLoaded`
+In this release, I'm blazed to finally announce support for iOS.
+Similar to our other platforms, iOS uses FFI to natively interop between Dart
+and Swift/ObjC. Checkout
+the [iOS documentation](https://flutter-maplibre.pages.dev/docs/getting-started/setup-ios)
+to get started.
+A big thanks to @mhernz, @gabbopalma and @jt274 that helped with their awesome
+contributions in this release!
+
+This release introduces breaking changes. Head over to
+the [migration guide](https://flutter-maplibre.pages.dev/docs/upgrade) to learn
+more on how to update your implementation.
+
+### New Features
+
+- **Breaking** Require Flutter 3.35
+- **Breaking** Migrate from `geotypes`
+  to [geobase](https://pub.dev/packages/geobase).
+- **Breaking** Return logical pixels in events on all platforms.
+- **Breaking** Add `screenPoint` parameter to `MapEventUserInput` events to show
+  the screen coordinates in logical pixels where the user interacted with the
+  map.
+- **Breaking** Rename `rotationDuration` in `MapCompass` to
+  `nativeRotationDuration`.
+- **Breaking** Multiple `MapController` functions are now called synchronously,
+  their `*Sync()` overloads have been removed.
+- **Breaking** All declarative layers now require a `FeatureCollection`. This
+  allows users to add properties to their layers.
+- Add iOS as supported platform with MapLibre Native iOS 6.19.
+- Update MapLibre Native Android to 11.13
+- Load map styles from Flutter assets, a JSON string or via URI.
+- Add `setStyle()`, to know when the map style has loaded, listen to
+  `onStyleLoaded()`.
+- Add support for PMTiles on the web.
+- Add `androidTranslucentTextureSurface` and `androidForegroundLoadColor` to use
+  a translucent map.
+- Add `MapScalebar.units` to support imperial units in the scalebar.
+- Add `featuresAtPoint()` and `featuresInRect()` to `MapController`.
+- Update to `pigeon` 26.0.0
+
+### Bug Fixes
+
+- Fix missing export of `BearingRenderMode`
+- Remove `dart:io` import to fix pub.dev WASM compatibility detection
+
+Full
+Changelog: [v0.2.2...v0.3.0](https://github.com/josxha/flutter-maplibre/compare/v0.2.2...v0.3.0)
 
 ## 0.2.2
 
-Maintenance release and some new functionality. 
+Maintenance release and some new functionality.
 Thanks for your contribution in this release @jt274!
 
-## New Features
+### New Features
 
 - Migrate `requestLocationPermissions()` and `addLayer()` to use JNI
 - Update `jni` and `jnigen` to v0.14
