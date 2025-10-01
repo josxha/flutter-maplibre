@@ -22,11 +22,16 @@ dev_dependencies:
   ffigen: 19.1.0
   very_good_analysis: ^10.0.0
 
-flutter:
-  plugin:
-    platforms:
-      ios:
-        pluginClass: MapLibreIosPlugin
+# flutter:
+#   plugin:
+#     platforms:
+#       ios:
+#         pluginClass: MapLibreIosPlugin
+
+# Note: This package uses FFI (Foreign Function Interface) for iOS integration,
+# not traditional Flutter plugin architecture. The plugin declaration above
+# causes Flutter to generate incorrect plugin registration code.
+# See: https://github.com/josxha/flutter-maplibre/issues/[YOUR_ISSUE_NUMBER]
 
 ffigen:
   name: MapLibreFFi
