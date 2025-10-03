@@ -38,6 +38,8 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
+import '../../../../../android/graphics/Bitmap.dart' as bitmap$_;
+
 import '../../../../../java/net/URI.dart' as uri$_;
 
 import '../../../../../java/net/URL.dart' as url$_;
@@ -238,7 +240,7 @@ class ImageSource extends source$_.Source {
   factory ImageSource.new$3(
     jni$_.JString? string,
     latlngquad$_.LatLngQuad? latLngQuad,
-    jni$_.JObject bitmap,
+    bitmap$_.Bitmap bitmap,
   ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     final _$latLngQuad = latLngQuad?.reference ?? jni$_.jNullReference;
@@ -469,7 +471,7 @@ class ImageSource extends source$_.Source {
 
   /// from: `public final void setImage(android.graphics.Bitmap bitmap)`
   void setImage(
-    jni$_.JObject bitmap,
+    bitmap$_.Bitmap bitmap,
   ) {
     final _$bitmap = bitmap.reference;
     _setImage(

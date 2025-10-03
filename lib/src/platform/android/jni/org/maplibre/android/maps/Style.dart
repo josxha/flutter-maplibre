@@ -38,6 +38,8 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
+import '../../../../android/graphics/Bitmap.dart' as bitmap$_;
+
 import '../style/layers/Layer.dart' as layer$_;
 
 import '../style/layers/TransitionOptions.dart' as transitionoptions$_;
@@ -107,7 +109,7 @@ class Style$Builder$ImageWrapper extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   factory Style$Builder$ImageWrapper(
     jni$_.JString? string,
-    jni$_.JObject? bitmap,
+    bitmap$_.Bitmap? bitmap,
     bool z,
   ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
@@ -163,7 +165,7 @@ class Style$Builder$ImageWrapper extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   factory Style$Builder$ImageWrapper.new$1(
     jni$_.JString? string,
-    jni$_.JObject? bitmap,
+    bitmap$_.Bitmap? bitmap,
     bool z,
     jni$_.JList<imagestretches$_.ImageStretches?>? list,
     jni$_.JList<imagestretches$_.ImageStretches?>? list1,
@@ -211,11 +213,11 @@ class Style$Builder$ImageWrapper extends jni$_.JObject {
 
   /// from: `public android.graphics.Bitmap getBitmap()`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? getBitmap() {
+  bitmap$_.Bitmap? getBitmap() {
     return _getBitmap(
       reference.pointer,
       _id_getBitmap as jni$_.JMethodIDPtr,
-    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+    ).object<bitmap$_.Bitmap?>(const bitmap$_.$Bitmap$NullableType());
   }
 
   static final _id_getId = _class.instanceMethodId(
@@ -1709,7 +1711,7 @@ class Style$Builder extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   Style$Builder withImage$2(
     jni$_.JString string,
-    jni$_.JObject bitmap,
+    bitmap$_.Bitmap bitmap,
   ) {
     final _$string = string.reference;
     final _$bitmap = bitmap.reference;
@@ -1760,7 +1762,7 @@ class Style$Builder extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   Style$Builder withImage$3(
     jni$_.JString string,
-    jni$_.JObject bitmap,
+    bitmap$_.Bitmap bitmap,
     jni$_.JList<imagestretches$_.ImageStretches?> list,
     jni$_.JList<imagestretches$_.ImageStretches?> list1,
     imagecontent$_.ImageContent? imageContent,
@@ -2004,7 +2006,7 @@ class Style$Builder extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   Style$Builder withImage$6(
     jni$_.JString string,
-    jni$_.JObject bitmap,
+    bitmap$_.Bitmap bitmap,
     bool z,
   ) {
     final _$string = string.reference;
@@ -2059,7 +2061,7 @@ class Style$Builder extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   Style$Builder withImage$7(
     jni$_.JString string,
-    jni$_.JObject bitmap,
+    bitmap$_.Bitmap bitmap,
     bool z,
     jni$_.JList<imagestretches$_.ImageStretches?> list,
     jni$_.JList<imagestretches$_.ImageStretches?> list1,
@@ -3307,7 +3309,7 @@ class Style extends jni$_.JObject {
   /// from: `public void addImage(java.lang.String string, android.graphics.Bitmap bitmap)`
   void addImage(
     jni$_.JString string,
-    jni$_.JObject bitmap,
+    bitmap$_.Bitmap bitmap,
   ) {
     final _$string = string.reference;
     final _$bitmap = bitmap.reference;
@@ -3357,7 +3359,7 @@ class Style extends jni$_.JObject {
   /// from: `public void addImage(java.lang.String string, android.graphics.Bitmap bitmap, java.util.List<org.maplibre.android.maps.ImageStretches> list, java.util.List<org.maplibre.android.maps.ImageStretches> list1, org.maplibre.android.maps.ImageContent imageContent)`
   void addImage$1(
     jni$_.JString string,
-    jni$_.JObject bitmap,
+    bitmap$_.Bitmap bitmap,
     jni$_.JList<imagestretches$_.ImageStretches?> list,
     jni$_.JList<imagestretches$_.ImageStretches?> list1,
     imagecontent$_.ImageContent? imageContent,
@@ -3512,7 +3514,7 @@ class Style extends jni$_.JObject {
   /// from: `public void addImage(java.lang.String string, android.graphics.Bitmap bitmap, boolean z)`
   void addImage$4(
     jni$_.JString string,
-    jni$_.JObject bitmap,
+    bitmap$_.Bitmap bitmap,
     bool z,
   ) {
     final _$string = string.reference;
@@ -3566,7 +3568,7 @@ class Style extends jni$_.JObject {
   /// from: `public void addImage(java.lang.String string, android.graphics.Bitmap bitmap, boolean z, java.util.List<org.maplibre.android.maps.ImageStretches> list, java.util.List<org.maplibre.android.maps.ImageStretches> list1, org.maplibre.android.maps.ImageContent imageContent)`
   void addImage$5(
     jni$_.JString string,
-    jni$_.JObject bitmap,
+    bitmap$_.Bitmap bitmap,
     bool z,
     jni$_.JList<imagestretches$_.ImageStretches?> list,
     jni$_.JList<imagestretches$_.ImageStretches?> list1,
@@ -3618,7 +3620,7 @@ class Style extends jni$_.JObject {
   /// from: `public void addImageAsync(java.lang.String string, android.graphics.Bitmap bitmap)`
   void addImageAsync(
     jni$_.JString string,
-    jni$_.JObject bitmap,
+    bitmap$_.Bitmap bitmap,
   ) {
     final _$string = string.reference;
     final _$bitmap = bitmap.reference;
@@ -3668,7 +3670,7 @@ class Style extends jni$_.JObject {
   /// from: `public void addImageAsync(java.lang.String string, android.graphics.Bitmap bitmap, java.util.List<org.maplibre.android.maps.ImageStretches> list, java.util.List<org.maplibre.android.maps.ImageStretches> list1, org.maplibre.android.maps.ImageContent imageContent)`
   void addImageAsync$1(
     jni$_.JString string,
-    jni$_.JObject bitmap,
+    bitmap$_.Bitmap bitmap,
     jni$_.JList<imagestretches$_.ImageStretches?> list,
     jni$_.JList<imagestretches$_.ImageStretches?> list1,
     imagecontent$_.ImageContent? imageContent,
@@ -3823,7 +3825,7 @@ class Style extends jni$_.JObject {
   /// from: `public void addImageAsync(java.lang.String string, android.graphics.Bitmap bitmap, boolean z)`
   void addImageAsync$4(
     jni$_.JString string,
-    jni$_.JObject bitmap,
+    bitmap$_.Bitmap bitmap,
     bool z,
   ) {
     final _$string = string.reference;
@@ -3877,7 +3879,7 @@ class Style extends jni$_.JObject {
   /// from: `public void addImageAsync(java.lang.String string, android.graphics.Bitmap bitmap, boolean z, java.util.List<org.maplibre.android.maps.ImageStretches> list, java.util.List<org.maplibre.android.maps.ImageStretches> list1, org.maplibre.android.maps.ImageContent imageContent)`
   void addImageAsync$5(
     jni$_.JString string,
-    jni$_.JObject bitmap,
+    bitmap$_.Bitmap bitmap,
     bool z,
     jni$_.JList<imagestretches$_.ImageStretches?> list,
     jni$_.JList<imagestretches$_.ImageStretches?> list1,
@@ -4330,7 +4332,7 @@ class Style extends jni$_.JObject {
 
   /// from: `public android.graphics.Bitmap getImage(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? getImage(
+  bitmap$_.Bitmap? getImage(
     jni$_.JString string,
   ) {
     final _$string = string.reference;
@@ -4338,7 +4340,7 @@ class Style extends jni$_.JObject {
       reference.pointer,
       _id_getImage as jni$_.JMethodIDPtr,
       _$string.pointer,
-    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+    ).object<bitmap$_.Bitmap?>(const bitmap$_.$Bitmap$NullableType());
   }
 
   static final _id_setTransition = _class.instanceMethodId(

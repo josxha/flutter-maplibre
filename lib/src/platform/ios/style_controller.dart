@@ -2,10 +2,9 @@ part of 'map_state.dart';
 
 /// Android specific implementation of the [StyleController].
 class StyleControllerIos implements StyleController {
-  StyleControllerIos._(this._ffiStyle, this._hostApi);
+  StyleControllerIos._(this._ffiStyle);
 
   final MLNStyle _ffiStyle;
-  final pigeon.MapLibreHostApi _hostApi;
 
   @override
   Future<void> addImage(String id, Uint8List bytes) async {
@@ -20,11 +19,22 @@ class StyleControllerIos implements StyleController {
       )!,
       id.toNSString(),
     );*/
-    await _hostApi.addImage(id, bytes);
+    // TODO: implement addImage
+    throw UnimplementedError('addImage is not implemented on iOS yet.');
   }
 
   @override
-  Future<void> addLayer(StyleLayer layer, {String? belowLayerId}) async {
+  Future<void> addImages(Map<String, Uint8List> images) {
+    // TODO: implement addImages
+    throw UnimplementedError('addImages is not implemented on iOS yet.');
+  }
+
+  @override
+  Future<void> addLayer(
+    StyleLayer layer, {
+    String? aboveLayerId,
+    String? belowLayerId,
+  }) async {
     MLNStyleLayer? ffiStyleLayer;
     switch (layer) {
       case BackgroundStyleLayer():

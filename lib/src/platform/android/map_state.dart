@@ -11,6 +11,7 @@ import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/layer/layer_manager.dart';
 import 'package:maplibre/src/platform/android/extensions.dart';
 import 'package:maplibre/src/platform/android/jni.dart' as jni;
+import 'package:maplibre/src/platform/android/jni/android/graphics/_package.dart';
 import 'package:maplibre/src/platform/android/jni/com/google/gson/Gson.dart';
 import 'package:maplibre/src/platform/android/jni/org/maplibre/geojson/Feature.dart'
     as jni;
@@ -22,7 +23,6 @@ part 'style_controller.dart';
 /// The implementation that gets used for state of the [MapLibreMap] widget on
 /// android using JNI and Pigeon as a fallback.
 final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
-  late final pigeon.MapLibreHostApi _hostApi;
   late final int _viewId;
   jni.MapLibreMap? _cachedJniMapLibreMap;
   jni.Projection? _cachedJniProjection;
@@ -113,7 +113,6 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
   /// guaranteed that the map is ready.
   void _onPlatformViewCreated(int viewId) {
     final channelSuffix = viewId.toString();
-    _hostApi = pigeon.MapLibreHostApi(messageChannelSuffix: channelSuffix);
     pigeon.MapLibreFlutterApi.setUp(this, messageChannelSuffix: channelSuffix);
     _viewId = viewId;
     jni.Logger.setVerbosity(jni.Logger.WARN);
@@ -307,10 +306,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
   void onStyleLoaded() {
     // We need to refresh the cached style for when the style reloads.
     style?.dispose();
-    final styleCtrl = StyleControllerAndroid._(
-      _jniMapLibreMap!.getStyle$1()!,
-      _hostApi,
-    );
+    final styleCtrl = StyleControllerAndroid._(_jniMapLibreMap!.getStyle$1()!);
     style = styleCtrl;
 
     widget.onEvent?.call(MapEventStyleLoaded(styleCtrl));
