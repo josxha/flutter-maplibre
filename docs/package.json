@@ -30,7 +30,7 @@
     "@docusaurus/types": "^3.9.1",
     "@types/shelljs": "^0",
     "shelljs": "^0.10.0",
-    "typescript": "~5.9.2"
+    "typescript": "~5.9.3"
   },
   "browserslist": {
     "production": [
