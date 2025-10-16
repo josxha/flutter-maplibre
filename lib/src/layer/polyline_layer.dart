@@ -13,6 +13,8 @@ class PolylineLayer extends Layer<Feature<LineString>> {
     this.gapWidth = 0,
     this.blur = 0,
     this.dashArray,
+    super.minZoom = 0,
+    super.maxZoom = 24,
   }) : super._(list: polylines);
 
   /// The color of the polyline. Defaults to black
@@ -52,6 +54,8 @@ class PolylineLayer extends Layer<Feature<LineString>> {
     sourceId: getSourceId(index),
     paint: getPaint(),
     layout: getLayout(),
+    minZoom: minZoom,
+    maxZoom: maxZoom,
   );
 
   @override

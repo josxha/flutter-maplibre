@@ -73,14 +73,10 @@ class StyleControllerIos implements StyleController {
         'The Layer is not supported: ${layer.runtimeType}',
       );
     }
+    ffiStyleLayer.minimumZoomLevel = layer.minZoom;
+    ffiStyleLayer.maximumZoomLevel = layer.maxZoom;
     ffiStyleLayer.setProperties(layer.paint);
     ffiStyleLayer.setProperties(layer.layout);
-    if (layer.minZoom case final double minZoom) {
-      ffiStyleLayer.minimumZoomLevel = minZoom;
-    }
-    if (layer.maxZoom case final double maxZoom) {
-      ffiStyleLayer.maximumZoomLevel = maxZoom;
-    }
     _ffiStyle.addLayer(ffiStyleLayer);
   }
 

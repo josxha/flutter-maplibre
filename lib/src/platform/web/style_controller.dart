@@ -80,6 +80,8 @@ class StyleControllerWeb implements StyleController {
             source: layer.sourceId,
             layout: layer.layout.jsify()!,
             paint: layer.paint.jsify()!,
+            minzoom: layer.minZoom,
+            maxzoom: layer.maxZoom,
           ),
           belowLayerId,
         );
@@ -91,6 +93,8 @@ class StyleControllerWeb implements StyleController {
             source: layer.sourceId,
             layout: layer.layout.jsify()!,
             paint: layer.paint.jsify()!,
+            minzoom: layer.minZoom,
+            maxzoom: layer.maxZoom,
           ),
           belowLayerId,
         );
@@ -102,6 +106,8 @@ class StyleControllerWeb implements StyleController {
             source: null,
             layout: layer.layout.jsify()!,
             paint: layer.paint.jsify()!,
+            minzoom: layer.minZoom,
+            maxzoom: layer.maxZoom,
           ),
           belowLayerId,
         );
@@ -113,6 +119,8 @@ class StyleControllerWeb implements StyleController {
             source: layer.sourceId,
             layout: layer.layout.jsify()!,
             paint: layer.paint.jsify()!,
+            minzoom: layer.minZoom,
+            maxzoom: layer.maxZoom,
           ),
           belowLayerId,
         );
@@ -124,6 +132,8 @@ class StyleControllerWeb implements StyleController {
             source: layer.sourceId,
             layout: layer.layout.jsify()!,
             paint: layer.paint.jsify()!,
+            minzoom: layer.minZoom,
+            maxzoom: layer.maxZoom,
           ),
           belowLayerId,
         );
@@ -135,6 +145,8 @@ class StyleControllerWeb implements StyleController {
             source: layer.sourceId,
             layout: layer.layout.jsify()!,
             paint: layer.paint.jsify()!,
+            minzoom: layer.minZoom,
+            maxzoom: layer.maxZoom,
           ),
           belowLayerId,
         );
@@ -146,6 +158,8 @@ class StyleControllerWeb implements StyleController {
             source: layer.sourceId,
             layout: layer.layout.jsify()!,
             paint: layer.paint.jsify()!,
+            minzoom: layer.minZoom,
+            maxzoom: layer.maxZoom,
           ),
           belowLayerId,
         );
@@ -157,6 +171,8 @@ class StyleControllerWeb implements StyleController {
             source: layer.sourceId,
             layout: layer.layout.jsify()!,
             paint: layer.paint.jsify()!,
+            minzoom: layer.minZoom,
+            maxzoom: layer.maxZoom,
           ),
           belowLayerId,
         );
@@ -168,6 +184,8 @@ class StyleControllerWeb implements StyleController {
             source: layer.sourceId,
             layout: layer.layout.jsify()!,
             paint: layer.paint.jsify()!,
+            minzoom: layer.minZoom,
+            maxzoom: layer.maxZoom,
           ),
           belowLayerId,
         );

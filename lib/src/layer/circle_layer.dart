@@ -13,6 +13,8 @@ class CircleLayer extends Layer<Feature<Point>> {
     this.blur = 0,
     this.strokeWidth = 0,
     this.strokeColor = const Color(0xFF000000),
+    super.minZoom = 0,
+    super.maxZoom = 24,
   }) : super._(list: points);
 
   /// Circle radius in pixels. Defaults to 5px.
@@ -43,6 +45,8 @@ class CircleLayer extends Layer<Feature<Point>> {
     sourceId: getSourceId(index),
     paint: getPaint(),
     layout: getLayout(),
+    minZoom: minZoom,
+    maxZoom: maxZoom,
   );
 
   @override
