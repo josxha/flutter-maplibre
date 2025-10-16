@@ -38,6 +38,8 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
+import '../../../../android/graphics/Bitmap.dart' as bitmap$_;
+
 import '../../../../android/graphics/PointF.dart' as pointf$_;
 
 import '../../../../android/graphics/RectF.dart' as rectf$_;
@@ -5938,7 +5940,7 @@ class MapLibreMap$SnapshotReadyCallback extends jni$_.JObject {
 
   /// from: `public abstract void onSnapshotReady(android.graphics.Bitmap bitmap)`
   void onSnapshotReady(
-    jni$_.JObject bitmap,
+    bitmap$_.Bitmap bitmap,
   ) {
     final _$bitmap = bitmap.reference;
     _onSnapshotReady(
@@ -5981,7 +5983,7 @@ class MapLibreMap$SnapshotReadyCallback extends jni$_.JObject {
       final $a = $i.args;
       if ($d == r'onSnapshotReady(Landroid/graphics/Bitmap;)V') {
         _$impls[$p]!.onSnapshotReady(
-          $a![0]!.as(const jni$_.JObjectType(), releaseOriginal: true),
+          $a![0]!.as(const bitmap$_.$Bitmap$Type(), releaseOriginal: true),
         );
         return jni$_.nullptr;
       }
@@ -6032,25 +6034,25 @@ class MapLibreMap$SnapshotReadyCallback extends jni$_.JObject {
 
 abstract base mixin class $MapLibreMap$SnapshotReadyCallback {
   factory $MapLibreMap$SnapshotReadyCallback({
-    required void Function(jni$_.JObject bitmap) onSnapshotReady,
+    required void Function(bitmap$_.Bitmap bitmap) onSnapshotReady,
     bool onSnapshotReady$async,
   }) = _$MapLibreMap$SnapshotReadyCallback;
 
-  void onSnapshotReady(jni$_.JObject bitmap);
+  void onSnapshotReady(bitmap$_.Bitmap bitmap);
   bool get onSnapshotReady$async => false;
 }
 
 final class _$MapLibreMap$SnapshotReadyCallback
     with $MapLibreMap$SnapshotReadyCallback {
   _$MapLibreMap$SnapshotReadyCallback({
-    required void Function(jni$_.JObject bitmap) onSnapshotReady,
+    required void Function(bitmap$_.Bitmap bitmap) onSnapshotReady,
     this.onSnapshotReady$async = false,
   }) : _onSnapshotReady = onSnapshotReady;
 
-  final void Function(jni$_.JObject bitmap) _onSnapshotReady;
+  final void Function(bitmap$_.Bitmap bitmap) _onSnapshotReady;
   final bool onSnapshotReady$async;
 
-  void onSnapshotReady(jni$_.JObject bitmap) {
+  void onSnapshotReady(bitmap$_.Bitmap bitmap) {
     return _onSnapshotReady(bitmap);
   }
 }

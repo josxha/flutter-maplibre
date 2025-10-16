@@ -2,7 +2,7 @@ import Flutter
 import MapLibre
 
 class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
-  MapLibreHostApi, UIGestureRecognizerDelegate
+  UIGestureRecognizerDelegate
 {
   private var _view: UIView = .init()
   private var _mapView: MLNMapView!
@@ -23,10 +23,6 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
       messageChannelSuffix: channelSuffix
     )
     super.init() // self can be used after calling super.init()
-    MapLibreHostApiSetup.setUp(
-      binaryMessenger: binaryMessenger, api: self,
-      messageChannelSuffix: channelSuffix
-    )
     // get and apply the MapOptions from Flutter
     _flutterApi.getOptions { result in
       switch result {
@@ -198,102 +194,5 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
       bearing: mlnCamera.heading
     )
     _flutterApi.onMoveCamera(camera: pigeonCamera) { _ in }
-  }
-
-  func addFillLayer(
-    id _: String, sourceId _: String, layout _: [String: Any],
-    paint _: [String: Any], belowLayerId _: String?,
-    completion: @escaping (Result<Void, Error>) -> Void
-  ) {
-    completion(.success(()))
-  }
-
-  func addCircleLayer(
-    id _: String, sourceId _: String, layout _: [String: Any],
-    paint _: [String: Any], belowLayerId _: String?,
-    completion: @escaping (Result<Void, Error>) -> Void
-  ) {
-    completion(.success(()))
-  }
-
-  func addBackgroundLayer(
-    id _: String, layout _: [String: Any], paint _: [String: Any],
-    belowLayerId _: String?,
-    completion: @escaping (Result<Void, Error>) -> Void
-  ) {
-    completion(.success(()))
-  }
-
-  func addFillExtrusionLayer(
-    id _: String, sourceId _: String, layout _: [String: Any],
-    paint _: [String: Any], belowLayerId _: String?,
-    completion: @escaping (Result<Void, Error>) -> Void
-  ) {
-    completion(.success(()))
-  }
-
-  func addHeatmapLayer(
-    id _: String, sourceId _: String, layout _: [String: Any],
-    paint _: [String: Any], belowLayerId _: String?,
-    completion: @escaping (Result<Void, Error>) -> Void
-  ) {
-    completion(.success(()))
-  }
-
-  func addHillshadeLayer(
-    id _: String, sourceId _: String, layout _: [String: Any],
-    paint _: [String: Any], belowLayerId _: String?,
-    completion: @escaping (Result<Void, Error>) -> Void
-  ) {
-    completion(.success(()))
-  }
-
-  func addLineLayer(
-    id _: String, sourceId _: String, layout _: [String: Any],
-    paint _: [String: Any], belowLayerId _: String?,
-    completion: @escaping (Result<Void, Error>) -> Void
-  ) {
-    completion(.success(()))
-  }
-
-  func addRasterLayer(
-    id _: String, sourceId _: String, layout _: [String: Any],
-    paint _: [String: Any], belowLayerId _: String?,
-    completion: @escaping (Result<Void, Error>) -> Void
-  ) {
-    completion(.success(()))
-  }
-
-  func addSymbolLayer(
-    id _: String, sourceId _: String, layout _: [String: Any],
-    paint _: [String: Any], belowLayerId _: String?,
-    completion: @escaping (Result<Void, Error>) -> Void
-  ) {
-    completion(.success(()))
-  }
-
-  func loadImage(
-    url _: String,
-    completion _: @escaping (Result<FlutterStandardTypedData, Error>) ->
-      Void
-  ) {
-    // completion(.success((bytes)))
-  }
-
-  func addImage(
-    id: String, bytes: FlutterStandardTypedData,
-    completion: @escaping (Result<Void, Error>) -> Void
-  ) {
-    // Main Thread Checker: UI API called on a background thread: -[UIView frame]
-    // DispatchQueue.main.async {
-    print("addImage before")
-    var style = _mapView.style!
-    var imageData = bytes.data
-    var image = UIImage(data: imageData, scale: UIScreen.main.scale)!
-    style.setImage(image, forName: id)
-    print("addImage afters")
-    print("added image: \(style.image(forName: id))")
-    // }
-    completion(.success(()))
   }
 }

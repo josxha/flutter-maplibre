@@ -38,6 +38,8 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
+import '../../../../android/graphics/Bitmap.dart' as bitmap$_;
+
 /// from: `org.maplibre.android.utils.BitmapUtils`
 class BitmapUtils extends jni$_.JObject {
   @jni$_.internal
@@ -110,7 +112,7 @@ class BitmapUtils extends jni$_.JObject {
 
   /// from: `static public android.graphics.Bitmap createBitmapFromView(android.view.View view)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni$_.JObject? createBitmapFromView(
+  static bitmap$_.Bitmap? createBitmapFromView(
     jni$_.JObject view,
   ) {
     final _$view = view.reference;
@@ -118,7 +120,7 @@ class BitmapUtils extends jni$_.JObject {
       _class.reference.pointer,
       _id_createBitmapFromView as jni$_.JMethodIDPtr,
       _$view.pointer,
-    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+    ).object<bitmap$_.Bitmap?>(const bitmap$_.$Bitmap$NullableType());
   }
 
   static final _id_mergeBitmap = _class.staticMethodId(
@@ -149,9 +151,9 @@ class BitmapUtils extends jni$_.JObject {
 
   /// from: `static public android.graphics.Bitmap mergeBitmap(android.graphics.Bitmap bitmap, android.graphics.Bitmap bitmap1)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni$_.JObject? mergeBitmap(
-    jni$_.JObject bitmap,
-    jni$_.JObject bitmap1,
+  static bitmap$_.Bitmap? mergeBitmap(
+    bitmap$_.Bitmap bitmap,
+    bitmap$_.Bitmap bitmap1,
   ) {
     final _$bitmap = bitmap.reference;
     final _$bitmap1 = bitmap1.reference;
@@ -160,7 +162,7 @@ class BitmapUtils extends jni$_.JObject {
       _id_mergeBitmap as jni$_.JMethodIDPtr,
       _$bitmap.pointer,
       _$bitmap1.pointer,
-    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+    ).object<bitmap$_.Bitmap?>(const bitmap$_.$Bitmap$NullableType());
   }
 
   static final _id_mergeBitmaps = _class.staticMethodId(
@@ -191,9 +193,9 @@ class BitmapUtils extends jni$_.JObject {
 
   /// from: `static public android.graphics.Bitmap mergeBitmaps(android.graphics.Bitmap bitmap, android.graphics.Bitmap bitmap1)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni$_.JObject? mergeBitmaps(
-    jni$_.JObject bitmap,
-    jni$_.JObject bitmap1,
+  static bitmap$_.Bitmap? mergeBitmaps(
+    bitmap$_.Bitmap bitmap,
+    bitmap$_.Bitmap bitmap1,
   ) {
     final _$bitmap = bitmap.reference;
     final _$bitmap1 = bitmap1.reference;
@@ -202,7 +204,7 @@ class BitmapUtils extends jni$_.JObject {
       _id_mergeBitmaps as jni$_.JMethodIDPtr,
       _$bitmap.pointer,
       _$bitmap1.pointer,
-    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+    ).object<bitmap$_.Bitmap?>(const bitmap$_.$Bitmap$NullableType());
   }
 
   static final _id_mergeBitmap$1 = _class.staticMethodId(
@@ -240,9 +242,9 @@ class BitmapUtils extends jni$_.JObject {
 
   /// from: `static public android.graphics.Bitmap mergeBitmap(android.graphics.Bitmap bitmap, android.graphics.Bitmap bitmap1, float f, float f1)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni$_.JObject? mergeBitmap$1(
-    jni$_.JObject bitmap,
-    jni$_.JObject bitmap1,
+  static bitmap$_.Bitmap? mergeBitmap$1(
+    bitmap$_.Bitmap bitmap,
+    bitmap$_.Bitmap bitmap1,
     double f,
     double f1,
   ) {
@@ -255,7 +257,7 @@ class BitmapUtils extends jni$_.JObject {
       _$bitmap1.pointer,
       f,
       f1,
-    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+    ).object<bitmap$_.Bitmap?>(const bitmap$_.$Bitmap$NullableType());
   }
 
   static final _id_getBitmapFromDrawable = _class.staticMethodId(
@@ -283,7 +285,7 @@ class BitmapUtils extends jni$_.JObject {
 
   /// from: `static public android.graphics.Bitmap getBitmapFromDrawable(android.graphics.drawable.Drawable drawable)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni$_.JObject? getBitmapFromDrawable(
+  static bitmap$_.Bitmap? getBitmapFromDrawable(
     jni$_.JObject? drawable,
   ) {
     final _$drawable = drawable?.reference ?? jni$_.jNullReference;
@@ -291,7 +293,7 @@ class BitmapUtils extends jni$_.JObject {
       _class.reference.pointer,
       _id_getBitmapFromDrawable as jni$_.JMethodIDPtr,
       _$drawable.pointer,
-    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+    ).object<bitmap$_.Bitmap?>(const bitmap$_.$Bitmap$NullableType());
   }
 
   static final _id_getByteArrayFromDrawable = _class.staticMethodId(
@@ -488,8 +490,8 @@ class BitmapUtils extends jni$_.JObject {
 
   /// from: `static public boolean equals(android.graphics.Bitmap bitmap, android.graphics.Bitmap bitmap1)`
   static bool equals(
-    jni$_.JObject? bitmap,
-    jni$_.JObject? bitmap1,
+    bitmap$_.Bitmap? bitmap,
+    bitmap$_.Bitmap? bitmap1,
   ) {
     final _$bitmap = bitmap?.reference ?? jni$_.jNullReference;
     final _$bitmap1 = bitmap1?.reference ?? jni$_.jNullReference;

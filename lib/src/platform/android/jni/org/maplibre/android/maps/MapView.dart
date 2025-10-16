@@ -38,6 +38,8 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
+import '../../../../android/graphics/Bitmap.dart' as bitmap$_;
+
 import 'MapLibreMapOptions.dart' as maplibremapoptions$_;
 
 import 'OnMapReadyCallback.dart' as onmapreadycallback$_;
@@ -7513,11 +7515,11 @@ class MapView extends jni$_.JObject {
 
   /// from: `public android.graphics.Bitmap getViewContent()`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? getViewContent() {
+  bitmap$_.Bitmap? getViewContent() {
     return _getViewContent(
       reference.pointer,
       _id_getViewContent as jni$_.JMethodIDPtr,
-    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
+    ).object<bitmap$_.Bitmap?>(const bitmap$_.$Bitmap$NullableType());
   }
 
   static final _id_addOnCameraWillChangeListener = _class.instanceMethodId(
