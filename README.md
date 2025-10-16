@@ -85,12 +85,14 @@ rendering while supporting advanced mapping features.
 
 ## Resources
 
-### Demo Application
+### 📱Demo Application
+
+Many features of the package are showcased in the example app.
 
 - [Hosted Demo App](https://flutter-maplibre.pages.dev/demo)
 - [Code of the Example App](https://github.com/josxha/flutter-maplibre/tree/main/example/lib)
 
-### Get Started & Documentation
+### 🤓Get Started & Documentation
 
 Visit the docs to learn how to get started with maplibre in your
 project: [Get Started](https://flutter-maplibre.pages.dev/docs/category/getting-started)
@@ -99,19 +101,25 @@ If you want to know more about the classes and properties of the package, have
 a look at
 the [API docs](https://pub.dev/documentation/maplibre/latest/maplibre/maplibre-library.html).
 
-## Development & Contributing
+## ❤️Development & Contributing
 
 All kinds of contributions are welcome. Thanks a lot if you consider to
 contribute in any way! There are different ways how you can help the
 development:
 
-- Use the package in your project
+- 🌟Give the project on [GitHub](https://github.com/josxha/flutter-maplibre)
+  and [pub.dev](https://pub.dev/packages/maplibre).
+- 🪴Use the package in your project
   and [share feedback](https://github.com/josxha/flutter-maplibre/discussions/categories/show-and-tell).
-- [Open bug reports](https://github.com/josxha/flutter-maplibre/issues/new?assignees=&labels=bug&projects=&template=1-bug.yml&title=%5BBUG%5D+%3Ctitle%3E)
+- 🐛[Open bug reports](https://github.com/josxha/flutter-maplibre/issues/new?assignees=&labels=bug&projects=&template=1-bug.yml&title=%5BBUG%5D+%3Ctitle%3E)
   in case you find any.
-- If you need a specific
+- 💡If you need a specific
   feature, [open a feature request](https://github.com/josxha/flutter-maplibre/issues/new?assignees=&labels=feature&projects=&template=2-feature.yml&title=%5BFEATURE%5D+%3Ctitle%3E).
   or [post your idea as discussion](https://github.com/josxha/flutter-maplibre/discussions/categories/ideas).
-- Enhance the package documentation.
-- Sponsor this
+- 📖Enhance the package documentation.
+- 💝Sponsor this
   project: [GitHub-Sponsors](https://github.com/sponsors/josxha), [PayPal](https://www.paypal.com/paypalme/joschaeckert).
+
+#### A huge thanks to all contributors! 😎
+
+[![List of contributors](https://contrib.rocks/image?repo=josxha/flutter-maplibre)](https://github.com/josxha/flutter-maplibre/graphs/contributors)
