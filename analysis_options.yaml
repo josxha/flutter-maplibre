@@ -12,7 +12,5 @@ linter:
     lines_longer_than_80_chars: false
     flutter_style_todos: false
     cascade_invocations: false
-    document_ignores: false
     avoid_catches_without_on_clauses: false
     require_trailing_commas: false
-    discarded_futures: false
