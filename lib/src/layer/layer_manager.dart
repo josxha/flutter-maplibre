@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:maplibre/maplibre.dart';
 
 /// The layer manager handles the high-level layer API used in
@@ -15,8 +17,8 @@ class LayerManager {
         id: layer.getSourceId(index),
         data: FeatureCollection(layer.list).toText(),
       );
-      style.addSource(source);
-      style.addLayer(layer.createStyleLayer(index));
+      unawaited(style.addSource(source));
+      unawaited(style.addLayer(layer.createStyleLayer(index)));
     }
     _oldLayers = layers;
   }
