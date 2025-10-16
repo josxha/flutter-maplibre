@@ -24,7 +24,7 @@ interface class StyleLayer {
     this.paint = const {},
     this.metadata,
     this.minZoom = 0,
-    this.maxZoom = 0,
+    this.maxZoom = 24,
     this.filter,
   });
 

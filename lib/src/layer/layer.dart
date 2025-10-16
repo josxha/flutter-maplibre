@@ -44,7 +44,11 @@ sealed class Layer<G extends Feature<Geometry>> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is Layer && runtimeType == other.runtimeType && list == other.list;
+      other is Layer &&
+          runtimeType == other.runtimeType &&
+          list == other.list &&
+          minZoom == other.minZoom &&
+          maxZoom == other.maxZoom;
 
   @override
   int get hashCode => Object.hash(minZoom, maxZoom, list);
