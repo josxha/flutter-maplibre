@@ -48,6 +48,8 @@ class StyleControllerAndroid implements StyleController {
             'The Layer is not supported: ${layer.runtimeType}',
           ),
         };
+        jLayer.setMinZoom(layer.minZoom);
+        jLayer.setMaxZoom(layer.maxZoom);
 
         // paint and layout properties
         final layoutEntries = layer.layout.entries.toList(growable: false);

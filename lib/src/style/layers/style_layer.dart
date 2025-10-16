@@ -23,8 +23,8 @@ interface class StyleLayer {
     this.layout = const {},
     this.paint = const {},
     this.metadata,
-    this.minZoom,
-    this.maxZoom,
+    this.minZoom = 0,
+    this.maxZoom = 0,
     this.filter,
   });
 
@@ -40,13 +40,13 @@ interface class StyleLayer {
   /// minzoom, the layer will be hidden.
   ///
   /// Needs to be in the range of [0,24].
-  final double? minZoom;
+  final double minZoom;
 
   /// The maximum zoom level for the layer. At zoom levels equal to or greater
   /// than the maxzoom, the layer will be hidden.
   ///
   /// Needs to be in the range of [0,24].
-  final double? maxZoom;
+  final double maxZoom;
 
   /// A expression specifying conditions on source features. Only features that
   /// match the filter are displayed. Zoom expressions in filters are only

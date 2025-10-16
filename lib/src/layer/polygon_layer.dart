@@ -10,6 +10,8 @@ class PolygonLayer extends Layer<Feature<Polygon>> {
     required List<Feature<Polygon>> polygons,
     this.color = const Color(0xFF000000),
     this.outlineColor = const Color(0xFF000000),
+    super.minZoom = 0,
+    super.maxZoom = 24,
   }) : super._(list: polygons);
 
   /// The color of the polygon. Defaults to black.
@@ -37,6 +39,8 @@ class PolygonLayer extends Layer<Feature<Polygon>> {
     sourceId: getSourceId(index),
     paint: getPaint(),
     layout: getLayout(),
+    minZoom: minZoom,
+    maxZoom: maxZoom,
   );
 
   @override

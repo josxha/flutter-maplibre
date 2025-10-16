@@ -13,6 +13,8 @@ final class CircleStyleLayer extends StyleLayerWithSource {
     required super.sourceId,
     super.layout,
     super.paint,
+    super.minZoom = 0,
+    super.maxZoom = 24,
   });
 
   // TODO add properties
