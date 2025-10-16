@@ -14,3 +14,4 @@ linter:
     cascade_invocations: false
     avoid_catches_without_on_clauses: false
     require_trailing_commas: false
+    discarded_futures: false
