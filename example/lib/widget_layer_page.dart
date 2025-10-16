@@ -28,43 +28,27 @@ class _WidgetLayerPageState extends State<WidgetLayerPage> {
               Marker(
                 size: Size.square(50),
                 point: Geographic(lon: -10, lat: 0),
-                child: Icon(
-                  Icons.location_on,
-                  color: Colors.red,
-                  size: 50,
-                ),
+                child: Icon(Icons.location_on, color: Colors.red, size: 50),
                 alignment: Alignment.bottomCenter,
               ),
               Marker(
                 size: Size.square(50),
                 point: Geographic(lon: -5, lat: 0),
-                child: Icon(
-                  Icons.location_on,
-                  color: Colors.red,
-                  size: 50,
-                ),
+                child: Icon(Icons.location_on, color: Colors.red, size: 50),
                 alignment: Alignment.bottomCenter,
                 rotate: true,
               ),
               Marker(
                 size: Size.square(50),
                 point: Geographic(lon: 0, lat: 0),
-                child: Icon(
-                  Icons.location_on,
-                  color: Colors.red,
-                  size: 50,
-                ),
+                child: Icon(Icons.location_on, color: Colors.red, size: 50),
                 alignment: Alignment.bottomCenter,
                 flat: true,
               ),
               Marker(
                 size: Size.square(50),
                 point: Geographic(lon: 5, lat: 0),
-                child: Icon(
-                  Icons.location_on,
-                  color: Colors.red,
-                  size: 50,
-                ),
+                child: Icon(Icons.location_on, color: Colors.red, size: 50),
                 alignment: Alignment.bottomCenter,
                 flat: true,
                 rotate: true,
