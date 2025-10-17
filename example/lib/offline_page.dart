@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre_example/map_styles.dart';
+import 'package:maplibre_example/utils/map_styles.dart';
 
 @immutable
 class OfflinePage extends StatefulWidget {
@@ -54,7 +54,7 @@ class _OfflinePageState extends State<OfflinePage> {
                                   minZoom: 0,
                                   maxZoom: 2,
                                   bounds: _boundsWorld,
-                                  mapStyleUrl: MapStyles.protomapsLight,
+                                  mapStyleUrl: MapStyles.protomapsLight.uri,
                                   pixelDensity: 1,
                                 );
                                 try {
@@ -114,7 +114,7 @@ class _OfflinePageState extends State<OfflinePage> {
                                   minZoom: 10,
                                   maxZoom: 14,
                                   bounds: _boundsBregenz,
-                                  mapStyleUrl: MapStyles.protomapsLight,
+                                  mapStyleUrl: MapStyles.protomapsLight.uri,
                                   pixelDensity: 1,
                                 );
                                 try {
@@ -325,7 +325,7 @@ class _OfflineMapPage extends StatelessWidget {
       appBar: AppBar(title: Text('Offline Map "$title"')),
       body: MapLibreMap(
         options: MapOptions(
-          initStyle: MapStyles.protomapsLight,
+          initStyle: MapStyles.protomapsLight.uri,
           maxBounds: bounds,
           initCenter: center,
           initZoom: zoom,
@@ -336,29 +336,31 @@ class _OfflineMapPage extends StatelessWidget {
             color: Colors.red,
             width: 3,
             polylines: [
-              LineString.from(
-                [
-                  Geographic(
-                    lon: bounds.longitudeWest,
-                    lat: bounds.latitudeSouth,
-                  ),
-                  Geographic(
-                    lon: bounds.longitudeWest,
-                    lat: bounds.latitudeNorth,
-                  ),
-                  Geographic(
-                    lon: bounds.longitudeEast,
-                    lat: bounds.latitudeNorth,
-                  ),
-                  Geographic(
-                    lon: bounds.longitudeEast,
-                    lat: bounds.latitudeSouth,
-                  ),
-                  Geographic(
-                    lon: bounds.longitudeWest,
-                    lat: bounds.latitudeSouth,
-                  ),
-                ],
+              Feature(
+                geometry: LineString.from(
+                  [
+                    Geographic(
+                      lon: bounds.longitudeWest,
+                      lat: bounds.latitudeSouth,
+                    ),
+                    Geographic(
+                      lon: bounds.longitudeWest,
+                      lat: bounds.latitudeNorth,
+                    ),
+                    Geographic(
+                      lon: bounds.longitudeEast,
+                      lat: bounds.latitudeNorth,
+                    ),
+                    Geographic(
+                      lon: bounds.longitudeEast,
+                      lat: bounds.latitudeSouth,
+                    ),
+                    Geographic(
+                      lon: bounds.longitudeWest,
+                      lat: bounds.latitudeSouth,
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

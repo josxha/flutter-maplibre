@@ -19,7 +19,7 @@ dependencies:
   objective_c: 9.0.0-dev.0
 
 dev_dependencies:
-  ffigen: 20.0.0-dev.0
+  ffigen: 20.0.0-dev.1
   very_good_analysis: ^10.0.0
 
 flutter:

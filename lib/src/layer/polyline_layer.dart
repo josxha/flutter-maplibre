@@ -4,15 +4,17 @@ part of 'layer.dart';
 ///
 /// {@category Layers}
 @immutable
-class PolylineLayer extends Layer<LineString> {
+class PolylineLayer extends Layer<Feature<LineString>> {
   /// Create a new [PolylineLayer] instance.
   const PolylineLayer({
-    required List<LineString> polylines,
+    required List<Feature<LineString>> polylines,
     this.color = const Color(0xFF000000),
     this.width = 1,
     this.gapWidth = 0,
     this.blur = 0,
     this.dashArray,
+    super.minZoom = 0,
+    super.maxZoom = 24,
   }) : super._(list: polylines);
 
   /// The color of the polyline. Defaults to black
@@ -52,6 +54,8 @@ class PolylineLayer extends Layer<LineString> {
     sourceId: getSourceId(index),
     paint: getPaint(),
     layout: getLayout(),
+    minZoom: minZoom,
+    maxZoom: maxZoom,
   );
 
   @override

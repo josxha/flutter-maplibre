@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:maplibre/maplibre.dart';
 
 /// The layer manager handles the high-level layer API used in
@@ -13,10 +15,10 @@ class LayerManager {
     for (final (index, layer) in layers.indexed) {
       final source = GeoJsonSource(
         id: layer.getSourceId(index),
-        data: GeometryCollection(layer.list).toText(),
+        data: FeatureCollection(layer.list).toText(),
       );
-      style.addSource(source);
-      style.addLayer(layer.createStyleLayer(index));
+      unawaited(style.addSource(source));
+      unawaited(style.addLayer(layer.createStyleLayer(index)));
     }
     _oldLayers = layers;
   }
@@ -40,12 +42,12 @@ class LayerManager {
       if (oldLayer case Layer()) {
         style.updateGeoJsonSource(
           id: layer.getSourceId(index),
-          data: GeometryCollection(layer.list).toText(),
+          data: FeatureCollection(layer.list).toText(),
         );
       } else {
         final source = GeoJsonSource(
           id: layer.getSourceId(index),
-          data: GeometryCollection(layer.list).toText(),
+          data: FeatureCollection(layer.list).toText(),
         );
         style.addSource(source);
       }

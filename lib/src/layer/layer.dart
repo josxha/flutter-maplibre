@@ -14,11 +14,17 @@ part 'polyline_layer.dart';
 ///
 /// {@category Layers}
 @immutable
-sealed class Layer<G extends Geometry> {
-  const Layer._({required this.list});
+sealed class Layer<G extends Feature<Geometry>> {
+  const Layer._({required this.list, this.minZoom = 0, this.maxZoom = 24});
 
-  /// The [List] of layers.
+  /// The [List] of geometry features.
   final List<G> list;
+
+  /// The minimum zoom level that the [Layer] is displayed.
+  final double minZoom;
+
+  /// The maximum zoom level that the [Layer] is displayed.
+  final double maxZoom;
 
   /// Get a unique source id.
   String getSourceId(int index) => 'maplibre-source-$index';
@@ -38,8 +44,12 @@ sealed class Layer<G extends Geometry> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is Layer && runtimeType == other.runtimeType && list == other.list;
+      other is Layer &&
+          runtimeType == other.runtimeType &&
+          list == other.list &&
+          minZoom == other.minZoom &&
+          maxZoom == other.maxZoom;
 
   @override
-  int get hashCode => list.hashCode;
+  int get hashCode => Object.hash(minZoom, maxZoom, list);
 }

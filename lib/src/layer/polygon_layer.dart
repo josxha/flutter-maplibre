@@ -4,12 +4,14 @@ part of 'layer.dart';
 ///
 /// {@category Layers}
 @immutable
-class PolygonLayer extends Layer<Polygon> {
+class PolygonLayer extends Layer<Feature<Polygon>> {
   /// Create a new [PolygonLayer] instance.
   const PolygonLayer({
-    required List<Polygon> polygons,
+    required List<Feature<Polygon>> polygons,
     this.color = const Color(0xFF000000),
     this.outlineColor = const Color(0xFF000000),
+    super.minZoom = 0,
+    super.maxZoom = 24,
   }) : super._(list: polygons);
 
   /// The color of the polygon. Defaults to black.
@@ -37,6 +39,8 @@ class PolygonLayer extends Layer<Polygon> {
     sourceId: getSourceId(index),
     paint: getPaint(),
     layout: getLayout(),
+    minZoom: minZoom,
+    maxZoom: maxZoom,
   );
 
   @override

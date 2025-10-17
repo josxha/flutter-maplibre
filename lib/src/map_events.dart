@@ -83,7 +83,8 @@ sealed class MapEventUserInput extends MapEvent {
   final Offset screenPoint;
 
   @override
-  String toString() => 'MapEventUserInput(point: $point)';
+  String toString() =>
+      'MapEventUserInput(point: $point, screenPoint: $screenPoint)';
 }
 
 /// Emitted when the user clicks on the map.
@@ -96,7 +97,8 @@ final class MapEventClick extends MapEventUserInput {
   const MapEventClick({required super.point, required super.screenPoint});
 
   @override
-  String toString() => 'MapEventClick(point: $point)';
+  String toString() =>
+      'MapEventClick(point: $point, screenPoint: $screenPoint)';
 }
 
 /// Emitted when the user clicks twice in a short amount of time on the map.
@@ -109,7 +111,8 @@ final class MapEventDoubleClick extends MapEventUserInput {
   const MapEventDoubleClick({required super.point, required super.screenPoint});
 
   @override
-  String toString() => 'MapEventDoubleClick(point: $point)';
+  String toString() =>
+      'MapEventDoubleClick(point: $point, screenPoint: $screenPoint)';
 }
 
 /// Emitted when the user clicks with the secondary button on the map. This
@@ -126,7 +129,8 @@ final class MapEventSecondaryClick extends MapEventUserInput {
   });
 
   @override
-  String toString() => 'MapEventSecondaryClick(point: $point)';
+  String toString() =>
+      'MapEventSecondaryClick(point: $point, screenPoint: $screenPoint)';
 }
 
 /// Emitted when the user clicks on the map and holds button down at the same
@@ -140,7 +144,8 @@ final class MapEventLongClick extends MapEventUserInput {
   const MapEventLongClick({required super.point, required super.screenPoint});
 
   @override
-  String toString() => 'MapEventLongClick(point: $point)';
+  String toString() =>
+      'MapEventLongClick(point: $point, screenPoint: $screenPoint)';
 }
 
 /// Emitted when the map enters an idle state.

@@ -4,10 +4,10 @@ part of 'layer.dart';
 ///
 /// {@category Layers}
 @immutable
-class MarkerLayer extends Layer<Point> {
+class MarkerLayer extends Layer<Feature<Point>> {
   /// Create a new [MarkerLayer] instance.
   const MarkerLayer({
-    required List<Point> points,
+    required List<Feature<Point>> points,
     this.iconAllowOverlap = false,
     this.iconIgnorePlacement = false,
     this.iconOptional = false,
@@ -45,6 +45,8 @@ class MarkerLayer extends Layer<Point> {
     this.textHaloBlur = 0,
     this.textTranslate = const [0, 0],
     this.iconAnchor = IconAnchor.center,
+    super.minZoom = 0,
+    super.maxZoom = 24,
   }) : super._(list: points);
 
   /// If true, the icon will be visible even if it collides with other
@@ -236,6 +238,8 @@ class MarkerLayer extends Layer<Point> {
     sourceId: getSourceId(index),
     paint: getPaint(),
     layout: getLayout(),
+    minZoom: minZoom,
+    maxZoom: maxZoom,
   );
 
   @override

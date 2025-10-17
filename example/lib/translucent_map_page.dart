@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre_example/map_styles.dart';
+import 'package:maplibre_example/utils/map_styles.dart';
 
 @immutable
 class TranslucentMapPage extends StatefulWidget {
@@ -33,12 +33,12 @@ class _TranslucentMapPageState extends State<TranslucentMapPage> {
             ),
           ),
           MapLibreMap(
-            options: const MapOptions(
+            options: MapOptions(
               androidMode: AndroidPlatformViewMode.hc,
               androidTranslucentTextureSurface: true,
               androidForegroundLoadColor: Colors.blue,
-              initCenter: Geographic(lon: 9.17, lat: 47.68),
-              initStyle: MapStyles.translucentAsset,
+              initCenter: const Geographic(lon: 9.17, lat: 47.68),
+              initStyle: MapStyles.translucent.uri,
               initZoom: 2,
             ),
             children: const [

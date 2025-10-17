@@ -19,7 +19,9 @@ class WidgetLayer extends StatelessWidget {
   /// The list of [Marker]s.
   final List<Marker> markers;
 
-  /// Allow gestures on [Marker]s.
+  /// Allow gestures on [Marker]s on iOS and Android. The flag is not a
+  /// requirement on web but it mimics the same behaviour from other platforms
+  /// when set.
   final bool allowInteraction;
 
   @override
@@ -45,7 +47,9 @@ class WidgetLayer extends StatelessWidget {
               child: Transform(
                 transform: matrix,
                 alignment: m.alignment,
-                child: m.child,
+                child: (allowInteraction && kIsWeb)
+                    ? PointerInterceptor(child: m.child)
+                    : m.child,
               ),
             );
           })
@@ -56,11 +60,6 @@ class WidgetLayer extends StatelessWidget {
     final offsets = controller.toScreenLocations(points);
 
     if (allowInteraction) {
-      if (kIsWeb) {
-        // Web requires a PointerInterceptor to prevent the HtmlElementView from
-        // receiving gestures.
-        return PointerInterceptor(child: buildChild(offsets));
-      }
       return buildChild(offsets);
     } else {
       // Android and iOS needs a TranslucentPointer so that the widgets don't prevent
