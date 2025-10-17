@@ -15,6 +15,7 @@ jobs:
       working-directory: maplibre_ios
   publish-maplibre:
     name: "Publish `maplibre`"
+    needs: publish-maplibre-ios
     permissions:
       id-token: write
     uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
