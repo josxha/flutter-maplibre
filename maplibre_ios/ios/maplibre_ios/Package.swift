@@ -35,5 +35,5 @@ let package = Package(
     //   name: "MapLibre",
     //   path: "../.build/MapLibre.xcframework",
     // ),
-  ],
+  ]
 )
