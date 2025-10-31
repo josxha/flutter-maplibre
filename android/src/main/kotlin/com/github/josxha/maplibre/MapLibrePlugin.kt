@@ -58,18 +58,16 @@ class MapLibrePlugin :
         permissionsManager?.onRequestPermissionsResult(
             requestCode,
             permissions,
-            grantResults
+            grantResults,
         )
         return true
     }
 }
 
-class MapLibreMapFactory() :
-    PlatformViewFactory(StandardMessageCodec.INSTANCE) {
+class MapLibreMapFactory : PlatformViewFactory(StandardMessageCodec.INSTANCE) {
     override fun create(
         context: Context,
         viewId: Int,
         args: Any?,
-    ): PlatformView =
-        MapLibreRegistry.flutterApi!!.createPlatformView(viewId)
+    ): PlatformView = MapLibreRegistry.flutterApi!!.createPlatformView(viewId)
 }
