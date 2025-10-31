@@ -9,39 +9,40 @@ class StyleControllerAndroid implements StyleController {
   @override
   Future<void> addLayer(StyleLayer layer, {String? belowLayerId}) async =>
       using((arena) {
+        final iId = layer.id.toJString()..releasedBy(arena);
         final jLayer = switch (layer) {
           FillStyleLayer() => jni.FillLayer(
-            layer.id.toJString(),
-            layer.sourceId.toJString(),
+            iId,
+            layer.sourceId.toJString()..releasedBy(arena),
           ),
           CircleStyleLayer() => jni.CircleLayer(
-            layer.id.toJString(),
-            layer.sourceId.toJString(),
+            iId,
+            layer.sourceId.toJString()..releasedBy(arena),
           ),
           BackgroundStyleLayer() => jni.BackgroundLayer(layer.id.toJString()),
           FillExtrusionStyleLayer() => jni.FillExtrusionLayer(
-            layer.id.toJString(),
-            layer.sourceId.toJString(),
+            iId,
+            layer.sourceId.toJString()..releasedBy(arena),
           ),
           HeatmapStyleLayer() => jni.HeatmapLayer(
-            layer.id.toJString(),
-            layer.sourceId.toJString(),
+            iId,
+            layer.sourceId.toJString()..releasedBy(arena),
           ),
           HillshadeStyleLayer() => jni.HillshadeLayer(
-            layer.id.toJString(),
-            layer.sourceId.toJString(),
+            iId,
+            layer.sourceId.toJString()..releasedBy(arena),
           ),
           LineStyleLayer() => jni.LineLayer(
-            layer.id.toJString(),
-            layer.sourceId.toJString(),
+            iId,
+            layer.sourceId.toJString()..releasedBy(arena),
           ),
           RasterStyleLayer() => jni.RasterLayer(
-            layer.id.toJString(),
-            layer.sourceId.toJString(),
+            iId,
+            layer.sourceId.toJString()..releasedBy(arena),
           ),
           SymbolStyleLayer() => jni.SymbolLayer(
-            layer.id.toJString(),
-            layer.sourceId.toJString(),
+            iId,
+            layer.sourceId.toJString()..releasedBy(arena),
           ),
           _ => throw UnimplementedError(
             'The Layer is not supported: ${layer.runtimeType}',
@@ -63,7 +64,7 @@ class StyleControllerAndroid implements StyleController {
             entry.key.toJString(),
             entry.value.toJObject(arena),
             T: JObject.type,
-          );
+          )..releasedBy(arena);
         }
         for (var i = 0; i < layoutEntries.length; i++) {
           final entry = layoutEntries[i];
@@ -71,16 +72,16 @@ class StyleControllerAndroid implements StyleController {
             entry.key.toJString(),
             entry.value.toJObject(arena),
             T: JObject.type,
-          );
+          )..releasedBy(arena);
         }
         jLayer.releasedBy(arena);
         jLayer.setProperties(props);
 
         // add to style
-        if (belowLayerId == null) {
-          _jStyle.addLayer(jLayer);
+        if (belowLayerId case final String belowId) {
+          _jStyle.addLayerBelow(jLayer, belowId.toJString()..releasedBy(arena));
         } else {
-          _jStyle.addLayerBelow(jLayer, belowLayerId.toJString());
+          _jStyle.addLayer(jLayer);
         }
       });
 
@@ -172,9 +173,7 @@ class StyleControllerAndroid implements StyleController {
   Future<void> addImage(String id, Uint8List bytes) async => using((arena) {
     final jId = id.toJString()..releasedBy(arena);
     final jBitmap = jni.BitmapFactory.decodeByteArray(
-      JByteArray.from(bytes)
-        ..releasedBy(arena)
-        ..releasedBy(arena),
+      JByteArray.from(bytes)..releasedBy(arena),
       0,
       bytes.length,
     );
