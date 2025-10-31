@@ -13,12 +13,12 @@ class OfflineManagerAndroid implements OfflineManager {
   final jni.OfflineManager _jManager;
 
   /// Create a new [OfflineManager].
-  static Future<OfflineManager> createInstance() async {
-    final jContext = jni.MapLibreRegistry.INSTANCE.getContext()!;
+  static Future<OfflineManager> createInstance() async => using((arena) async {
+    final jContext = Jni.getCachedApplicationContext().toJObject(arena);
     jni.MapLibre.getInstance(jContext);
     final jManager = jni.OfflineManager.getInstance(jContext);
     return OfflineManagerAndroid._(jManager);
-  }
+  });
 
   @override
   void dispose() {
@@ -210,21 +210,13 @@ class OfflineManagerAndroid implements OfflineManager {
     final stream = StreamController<DownloadProgress>();
     final jMapStyleUrl = mapStyleUrl.toJString();
     final jBounds = bounds.toLatLngBounds();
-    /*final jDefinition = jni.OfflineTilePyramidRegionDefinition(
+    final jDefinition = jni.OfflineTilePyramidRegionDefinition(
       jMapStyleUrl,
       jBounds,
       minZoom,
       maxZoom,
       pixelDensity,
-    );*/
-    final jDefinition = jni.Helpers.INSTANCE
-        .createOfflineTilePyramidRegionDefinition(
-          jMapStyleUrl,
-          jBounds,
-          minZoom,
-          maxZoom,
-          pixelDensity,
-        );
+    );
 
     // convert the Map to a Java byte Array
     final metadataJson = jsonEncode(metadata);

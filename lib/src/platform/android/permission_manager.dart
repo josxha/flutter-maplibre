@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:jni/jni.dart';
 import 'package:maplibre/maplibre.dart';
+import 'package:maplibre/src/platform/android/extensions.dart';
 import 'package:maplibre/src/platform/android/jni.dart' as jni;
 
 /// MapLibre Android specific implementation of the [PermissionManager].
@@ -11,24 +12,28 @@ class PermissionManagerAndroid implements PermissionManager {
   /// Create a new [PermissionManagerAndroid] instance.
   PermissionManagerAndroid();
 
-  static JObject? get _jContext => jni.MapLibreRegistry.INSTANCE.getContext();
-
-  static JObject? get _jActivity => jni.MapLibreRegistry.INSTANCE.getActivity();
-
   @override
-  bool get locationPermissionsGranted =>
-      jni.PermissionsManager.areLocationPermissionsGranted(_jContext);
+  bool get locationPermissionsGranted => using((arena) {
+    final jContext = Jni.getCachedApplicationContext().toJObject(arena);
+    return jni.PermissionsManager.areLocationPermissionsGranted(jContext);
+  });
 
   @override
   bool get runtimePermissionsRequired =>
       jni.PermissionsManager.areRuntimePermissionsRequired();
 
   @override
-  bool get backgroundLocationPermissionGranted =>
-      jni.PermissionsManager.isBackgroundLocationPermissionGranted(_jContext);
+  bool get backgroundLocationPermissionGranted => using((arena) {
+    final jContext = Jni.getCachedApplicationContext().toJObject(arena);
+    return jni.PermissionsManager.isBackgroundLocationPermissionGranted(
+      jContext,
+    );
+  });
 
   @override
-  Future<bool> requestLocationPermissions({required String explanation}) async {
+  Future<bool> requestLocationPermissions({
+    required String explanation,
+  }) async => using((arena) async {
     final completer = Completer<bool>();
     final listener = jni.PermissionsListener.implement(
       jni.$PermissionsListener(
@@ -38,12 +43,11 @@ class PermissionManagerAndroid implements PermissionManager {
         },
         onPermissionResult: completer.complete,
       ),
-    );
-    final manager = jni.PermissionsManager(listener);
-    manager.requestLocationPermissions(_jActivity);
-    final result = await completer.future;
-    listener.release();
-    manager.release();
-    return result;
-  }
+    )..releasedBy(arena);
+    final jActivity = Jni.getApplicationClassLoader().toJObject(arena);
+    jni.PermissionsManager(listener)
+      ..releasedBy(arena)
+      ..requestLocationPermissions(jActivity);
+    return completer.future;
+  });
 }

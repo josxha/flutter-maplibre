@@ -514,7 +514,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     bool compassAnimation = true,
     bool pulse = true,
     BearingRenderMode bearingRenderMode = BearingRenderMode.gps,
-  }) async {
+  }) async => using((arena) {
     // https://maplibre.org/maplibre-native/docs/book/android/location-component-guide.html
     final style = this.style;
     if (style == null) return;
@@ -524,41 +524,39 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
       BearingRenderMode.compass => jni.RenderMode.COMPASS,
       BearingRenderMode.gps => jni.RenderMode.GPS,
     };
-    final jniContext = jni.MapLibreRegistry.INSTANCE.getContext()!;
-    final locOptionsBuilder = jni.LocationComponentOptions.builder(jniContext)
-        .pulseFadeEnabled(pulseFade)!
-        .accuracyAnimationEnabled(accuracyAnimation)!
-        .compassAnimationEnabled(compassAnimation.toJBoolean())!
-        .pulseEnabled(pulse)!;
-    final locOptions = locOptionsBuilder.build();
+    final jniContext = Jni.getCachedApplicationContext().toJObject(arena);
+    final locOptionsBuilder =
+        jni.LocationComponentOptions.builder(jniContext)
+              .pulseFadeEnabled(pulseFade)!
+              .accuracyAnimationEnabled(accuracyAnimation)!
+              .compassAnimationEnabled(compassAnimation.toJBoolean())!
+              .pulseEnabled(pulse)!
+          ..releasedBy(arena);
+    final locOptions = locOptionsBuilder.build()..releasedBy(arena);
     final locationEngineRequestBuilder =
         jni.LocationEngineRequest$Builder(750) // TODO integrate as parameter
-            .setFastestInterval(fastestInterval.inMilliseconds)!
-            .setMaxWaitTime(maxWaitTime.inMilliseconds)!
-            .setPriority(jni.LocationEngineRequest.PRIORITY_HIGH_ACCURACY)!;
-    final locationEngineRequest = locationEngineRequestBuilder.build();
+              .setFastestInterval(fastestInterval.inMilliseconds)!
+              .setMaxWaitTime(maxWaitTime.inMilliseconds)!
+              .setPriority(jni.LocationEngineRequest.PRIORITY_HIGH_ACCURACY)!
+          ..releasedBy(arena);
+    final locationEngineRequest = locationEngineRequestBuilder.build()
+      ?..releasedBy(arena);
     final activationOptionsBuilder =
         jni.LocationComponentActivationOptions.builder(
-              jniContext,
-              style._jniStyle,
-            )
-            .locationComponentOptions(locOptions)!
-            .useDefaultLocationEngine(true)!
-            .locationEngineRequest(locationEngineRequest)!;
-    final activationOptions = activationOptionsBuilder.build()!;
+                jniContext,
+                style._jniStyle,
+              )
+              .locationComponentOptions(locOptions)!
+              .useDefaultLocationEngine(true)!
+              .locationEngineRequest(locationEngineRequest)!
+          ..releasedBy(arena);
+    final activationOptions = activationOptionsBuilder.build()!
+      ..releasedBy(arena);
 
     _locationComponent.activateLocationComponent(activationOptions);
     _locationComponent.setRenderMode(bearing);
     _locationComponent.setLocationComponentEnabled(true);
-
-    activationOptionsBuilder.release();
-    locOptionsBuilder.release();
-    locOptions.release();
-    locationEngineRequestBuilder.release();
-    locationEngineRequest?.release();
-    activationOptions.release();
-    jniContext.release();
-  }
+  });
 
   @override
   Future<void> trackLocation({
