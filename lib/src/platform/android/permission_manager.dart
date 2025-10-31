@@ -61,5 +61,4 @@ final class _PermissionsListener with jni.$PermissionsListener {
   void onPermissionResult(bool result) {
     weakCompleter.target?.complete(result);
   }
-
 }
