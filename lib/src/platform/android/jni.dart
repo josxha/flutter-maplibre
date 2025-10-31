@@ -1,8 +1,8 @@
+export 'jni/android/app/_package.dart';
+export 'jni/android/content/_package.dart';
 export 'jni/android/graphics/_package.dart';
 export 'jni/android/location/_package.dart';
 export 'jni/com/github/josxha/maplibre/_package.dart';
-// export 'jni/io/flutter/embedding/engine/plugins/activity/_package.dart';
-// export 'jni/io/flutter/plugin/common/_package.dart';
 export 'jni/java/net/_package.dart';
 export 'jni/org/maplibre/android/_package.dart';
 export 'jni/org/maplibre/android/attribution/_package.dart';

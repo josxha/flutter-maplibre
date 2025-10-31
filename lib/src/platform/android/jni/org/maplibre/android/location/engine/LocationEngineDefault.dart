@@ -38,6 +38,8 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
+import '../../../../../android/content/Context.dart' as context$_;
+
 import 'LocationEngine.dart' as locationengine$_;
 
 /// from: `org.maplibre.android.location.engine.LocationEngineDefault`
@@ -95,7 +97,7 @@ class LocationEngineDefault extends jni$_.JObject {
   /// from: `public final org.maplibre.android.location.engine.LocationEngine getDefaultLocationEngine(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
   locationengine$_.LocationEngine getDefaultLocationEngine(
-    jni$_.JObject context,
+    context$_.Context context,
   ) {
     final _$context = context.reference;
     return _getDefaultLocationEngine(

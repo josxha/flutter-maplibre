@@ -51,7 +51,8 @@ extension OffsetExt on Offset {
   pigeon.Offset toOffset() => pigeon.Offset(x: dx, y: dy);
 
   /// Convert an [Offset] to an [jni.PointF].
-  jni.PointF toPointF() => jni.PointF.new$3(dx, dy);
+  jni.PointF toJPointF({required Arena arena}) =>
+      jni.PointF.new$3(dx, dy)..releasedBy(arena);
 }
 
 /// Extension methods for the [LngLatBounds] class. Not exported publicly.
@@ -65,12 +66,13 @@ extension LngLatBoundsExt on LngLatBounds {
   );
 
   /// Convert an [LngLatBounds] to an internal [jni.LatLngBounds].
-  jni.LatLngBounds toLatLngBounds() => jni.LatLngBounds.from(
-    latitudeNorth,
-    longitudeEast,
-    latitudeSouth,
-    longitudeWest,
-  );
+  jni.LatLngBounds toJLatLngBounds({required Arena arena}) =>
+      jni.LatLngBounds.from(
+        latitudeNorth,
+        longitudeEast,
+        latitudeSouth,
+        longitudeWest,
+      )..releasedBy(arena);
 }
 
 /// Extension methods for the [jni.LatLngBounds] class. Not exported publicly.
@@ -83,7 +85,7 @@ extension LatLngBounds on jni.LatLngBounds {
       latitudeSouth: latitudeSouth,
       latitudeNorth: latitudeNorth,
     );
-    release();
+    if (releaseOriginal) release();
     return bounds;
   }
 }
@@ -102,10 +104,10 @@ extension EdgeInsetsExt on EdgeInsets {
 /// Extension methods for the [EdgeInsets] class. Not exported publicly.
 extension OfflineRegionExt on jni.OfflineRegion {
   /// Convert an [EdgeInsets] to an internal [pigeon.Padding].
-  OfflineRegion toOfflineRegion() {
-    final jDefinition = getDefinition();
+  OfflineRegion toOfflineRegion() => using((arena) {
+    final jDefinition = getDefinition()..releasedBy(arena);
     // TODO add getMetadata();
-    final region = OfflineRegion(
+    return OfflineRegion(
       id: getId(),
       bounds: jDefinition.getBounds()!.toLngLatBounds(releaseOriginal: true),
       minZoom: jDefinition.getMinZoom(),
@@ -113,9 +115,7 @@ extension OfflineRegionExt on jni.OfflineRegion {
       pixelRatio: jDefinition.getPixelRatio(),
       styleUrl: jDefinition.getStyleURL()!.toDartString(releaseOriginal: true),
     );
-    jDefinition.release();
-    return region;
-  }
+  });
 }
 
 /// Extension methods on [Object].
@@ -125,7 +125,9 @@ extension ObjectExt on Object {
     return switch (this) {
       final List<Object?> value => JArray.of(
         JObject.nullableType,
-        value.map((e) => e?.toJObject(arena)).toList(growable: false),
+        value
+            .map((e) => e?.toJObject(arena)?..releasedBy(arena))
+            .toList(growable: false),
       )..releasedBy(arena),
       final String value => value.toJString()..releasedBy(arena),
       final double value => value.toJDouble()..releasedBy(arena),

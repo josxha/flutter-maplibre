@@ -10,6 +10,7 @@ import 'package:jni/jni.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/layer/layer_manager.dart';
 import 'package:maplibre/src/platform/android/extensions.dart';
+import 'package:maplibre/src/platform/android/functions.dart';
 import 'package:maplibre/src/platform/android/jni.dart' as jni;
 import 'package:maplibre/src/platform/android/jni/com/google/gson/Gson.dart';
 import 'package:maplibre/src/platform/android/jni/org/maplibre/geojson/Feature.dart'
@@ -24,21 +25,21 @@ part 'style_controller.dart';
 final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
   late final pigeon.MapLibreHostApi _hostApi;
   late final int _viewId;
-  jni.MapLibreMap? _cachedJniMapLibreMap;
-  jni.Projection? _cachedJniProjection;
-  jni.LocationComponent? _cachedLocationComponent;
+  jni.MapLibreMap? _cachedJMapLibreMap;
+  jni.Projection? _cachedJProjection;
+  jni.LocationComponent? _cachedJLocationComponent;
 
   @override
   StyleControllerAndroid? style;
 
-  jni.MapLibreMap? get _jniMapLibreMap =>
-      _cachedJniMapLibreMap ??= jni.MapLibreRegistry.INSTANCE.getMap(_viewId);
+  jni.MapLibreMap? get _jMapLibreMap =>
+      _cachedJMapLibreMap ??= jni.MapLibreRegistry.INSTANCE.getMap(_viewId);
 
-  jni.Projection get _jniProjection =>
-      _cachedJniProjection ??= _jniMapLibreMap!.getProjection();
+  jni.Projection get _jProjection =>
+      _cachedJProjection ??= _jMapLibreMap!.getProjection();
 
-  jni.LocationComponent get _locationComponent =>
-      _cachedLocationComponent ??= _jniMapLibreMap!.getLocationComponent();
+  jni.LocationComponent get _jLocationComponent =>
+      _cachedJLocationComponent ??= _jMapLibreMap!.getLocationComponent();
 
   @override
   Widget buildPlatformWidget(BuildContext context) {
@@ -128,40 +129,40 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
 
   @override
   void dispose() {
-    _cachedJniProjection?.release();
-    _cachedJniMapLibreMap?.release();
-    _cachedLocationComponent?.release();
+    _cachedJProjection?.release();
+    _cachedJMapLibreMap?.release();
+    _cachedJLocationComponent?.release();
     super.dispose();
   }
 
-  Future<void> _updateOptions(MapLibreMap oldWidget) async {
-    final jniMap = _jniMapLibreMap;
-    // jniMap can be null if the widget rebuilds while the map hasn't been initialized.
-    if (jniMap == null) return;
+  Future<void> _updateOptions(MapLibreMap oldWidget) async => using((arena) {
+    final jMap = _jMapLibreMap;
+    // jMap can be null if the widget rebuilds while the map hasn't been initialized.
+    if (jMap == null) return;
 
     final oldOptions = oldWidget.options;
     final options = this.options;
     if (this.options == oldOptions) return;
 
-    jniMap.setMinZoomPreference(options.minZoom);
-    jniMap.setMaxZoomPreference(options.maxZoom);
-    jniMap.setMinPitchPreference(options.minPitch);
-    jniMap.setMaxPitchPreference(options.maxPitch);
+    jMap.setMinZoomPreference(options.minZoom);
+    jMap.setMaxZoomPreference(options.maxZoom);
+    jMap.setMinPitchPreference(options.minPitch);
+    jMap.setMaxPitchPreference(options.maxPitch);
 
     // map bounds
     final oldBounds = oldOptions.maxBounds;
     final newBounds = options.maxBounds;
     if (oldBounds != null && newBounds == null) {
       // TODO @Nullable latLngBounds, https://github.com/dart-lang/native/issues/1644
-      // _jniMapLibreMap.setLatLngBoundsForCameraTarget(null);
+      // _jMapLibreMap.setLatLngBoundsForCameraTarget(null);
     } else if ((oldBounds == null && newBounds != null) ||
         (newBounds != null && oldBounds != newBounds)) {
-      final bounds = newBounds.toLatLngBounds();
-      jniMap.setLatLngBoundsForCameraTarget(bounds);
+      final bounds = newBounds.toJLatLngBounds(arena: arena);
+      jMap.setLatLngBoundsForCameraTarget(bounds);
     }
 
     // gestures
-    final uiSettings = jniMap.getUiSettings();
+    final uiSettings = jMap.getUiSettings()..releasedBy(arena);
     if (options.gestures.rotate != oldOptions.gestures.rotate) {
       uiSettings.setRotateGesturesEnabled(options.gestures.rotate);
     }
@@ -178,8 +179,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     if (options.gestures.pitch != oldOptions.gestures.pitch) {
       uiSettings.setTiltGesturesEnabled(options.gestures.pitch);
     }
-    uiSettings.release();
-  }
+  });
 
   @override
   Future<void> moveCamera({
@@ -187,34 +187,27 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     double? zoom,
     double? bearing,
     double? pitch,
-  }) async {
-    assert(_jniMapLibreMap != null, '_jniMapLibreMap needs to be not null.');
-    final cameraPositionBuilder = jni.CameraPosition$Builder();
-    if (center != null) cameraPositionBuilder.target(center.toLatLng());
-    if (zoom != null) cameraPositionBuilder.zoom(zoom);
-    if (pitch != null) cameraPositionBuilder.tilt(pitch);
-    if (bearing != null) cameraPositionBuilder.bearing(bearing);
+  }) async => using((arena) {
+    assert(_jMapLibreMap != null, '_jMapLibreMap needs to be not null.');
+    final cameraPosBuilder = jni.CameraPosition$Builder()..releasedBy(arena);
+    if (center != null) cameraPosBuilder.target(center.toLatLng());
+    if (zoom != null) cameraPosBuilder.zoom(zoom);
+    if (pitch != null) cameraPosBuilder.tilt(pitch);
+    if (bearing != null) cameraPosBuilder.bearing(bearing);
 
-    final cameraPosition = cameraPositionBuilder.build();
-    cameraPositionBuilder.release();
+    final cameraPosition = cameraPosBuilder.build()..releasedBy(arena);
     final cameraUpdate = jni.CameraUpdateFactory.newCameraPosition(
       cameraPosition,
-    );
+    )..releasedBy(arena);
     final completer = Completer<void>();
-    _jniMapLibreMap?.moveCamera$1(
+    _jMapLibreMap?.moveCamera$1(
       cameraUpdate,
       jni.MapLibreMap$CancelableCallback.implement(
-        jni.$MapLibreMap$CancelableCallback(
-          onCancel: () =>
-              completer.completeError(Exception('Animation cancelled.')),
-          onFinish: completer.complete,
-          onCancel$async: true,
-          onFinish$async: true,
-        ),
-      ),
+        _CameraMovementCallback(WeakReference(completer)),
+      )..releasedBy(arena),
     );
-    cameraUpdate.release();
-  }
+    return completer.future;
+  });
 
   @override
   Future<void> animateCamera({
@@ -225,38 +218,28 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
     Duration? webMaxDuration,
-  }) async {
-    final jniMap = _jniMapLibreMap!;
-    final cameraPositionBuilder = jni.CameraPosition$Builder();
-    if (center != null) cameraPositionBuilder.target(center.toLatLng());
-    if (zoom != null) cameraPositionBuilder.zoom(zoom);
-    if (pitch != null) cameraPositionBuilder.tilt(pitch);
-    if (bearing != null) cameraPositionBuilder.bearing(bearing);
+  }) async => using((arena) async {
+    final jMap = _jMapLibreMap!;
+    final cameraPosBuilder = jni.CameraPosition$Builder()..releasedBy(arena);
+    if (center != null) cameraPosBuilder.target(center.toLatLng());
+    if (zoom != null) cameraPosBuilder.zoom(zoom);
+    if (pitch != null) cameraPosBuilder.tilt(pitch);
+    if (bearing != null) cameraPosBuilder.bearing(bearing);
 
-    final cameraPosition = cameraPositionBuilder.build();
-    cameraPositionBuilder.release();
     final cameraUpdate = jni.CameraUpdateFactory.newCameraPosition(
-      cameraPosition,
-    );
+      cameraPosBuilder.build()..releasedBy(arena),
+    )..releasedBy(arena);
 
     final completer = Completer<void>();
-    jniMap.animateCamera$3(
+    jMap.animateCamera$3(
       cameraUpdate,
       nativeDuration.inMilliseconds,
       jni.MapLibreMap$CancelableCallback.implement(
-        jni.$MapLibreMap$CancelableCallback(
-          onCancel: () =>
-              completer.completeError(Exception('Animation cancelled.')),
-          onFinish: completer.complete,
-          onFinish$async: true,
-          onCancel$async: true,
-        ),
-      ),
+        _CameraMovementCallback(WeakReference(completer)),
+      )..releasedBy(arena),
     );
-    final result = await completer.future;
-    cameraUpdate.release();
-    return result;
-  }
+    return completer.future;
+  });
 
   @override
   Future<void> fitBounds({
@@ -270,45 +253,35 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     double webMaxZoom = double.maxFinite,
     bool webLinear = false,
     EdgeInsets padding = EdgeInsets.zero,
-  }) async {
-    final jniMap = _jniMapLibreMap!;
-    final latLngBounds = bounds.toLatLngBounds();
+  }) async => using((arena) async {
+    final jMap = _jMapLibreMap!;
     final cameraUpdate = jni.CameraUpdateFactory.newLatLngBounds$3(
-      latLngBounds,
+      bounds.toJLatLngBounds(arena: arena),
       bearing ?? -1.0,
       pitch ?? -1.0,
       padding.left.toInt(),
       padding.top.toInt(),
       padding.right.toInt(),
       padding.bottom.toInt(),
-    );
-    latLngBounds.release();
+    )..releasedBy(arena);
 
     final completer = Completer<void>();
-    jniMap.animateCamera$3(
+    jMap.animateCamera$3(
       cameraUpdate,
       nativeDuration.inMilliseconds,
       jni.MapLibreMap$CancelableCallback.implement(
-        jni.$MapLibreMap$CancelableCallback(
-          onCancel: () =>
-              completer.completeError(Exception('Animation cancelled.')),
-          onFinish: completer.complete,
-          onCancel$async: true,
-          onFinish$async: true,
-        ),
-      ),
+        _CameraMovementCallback(WeakReference(completer)),
+      )..releasedBy(arena),
     );
-    final result = await completer.future;
-    cameraUpdate.release();
-    return result;
-  }
+    return completer.future;
+  });
 
   @override
   void onStyleLoaded() {
     // We need to refresh the cached style for when the style reloads.
     style?.dispose();
     final styleCtrl = StyleControllerAndroid._(
-      _jniMapLibreMap!.getStyle$1()!,
+      _jMapLibreMap!.getStyle$1()!,
       _hostApi,
     );
     style = styleCtrl;
@@ -321,10 +294,10 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
   }
 
   @override
-  MapCamera getCamera() {
-    final jniCamera = _jniMapLibreMap!.getCameraPosition();
-    final jniTarget = jniCamera.target!;
-    final mapCamera = MapCamera(
+  MapCamera getCamera() => using((arena) {
+    final jniCamera = _jMapLibreMap!.getCameraPosition()..releasedBy(arena);
+    final jniTarget = jniCamera.target!..releasedBy(arena);
+    return MapCamera(
       center: Geographic(
         lon: jniTarget.getLongitude(),
         lat: jniTarget.getLatitude(),
@@ -334,10 +307,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
       bearing: jniCamera.bearing,
     );
     // camera = mapCamera;
-    jniTarget.release();
-    jniCamera.release();
-    return mapCamera;
-  }
+  });
 
   List<RenderedFeature> _nativeQueryToRenderedFeatures(
     JList<jni.Feature?> query,
@@ -365,7 +335,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     List<String>? layerIds,
   }) {
     final style = this.style;
-    final map = _jniMapLibreMap;
+    final map = _jMapLibreMap;
     if (style == null || map == null) {
       return [];
     }
@@ -395,7 +365,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     List<String>? layerIds,
   }) {
     final style = this.style;
-    final map = _jniMapLibreMap;
+    final map = _jMapLibreMap;
     if (style == null || map == null) {
       return [];
     }
@@ -431,8 +401,8 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
   }
 
   @override
-  List<QueriedLayer> queryLayers(Offset screenLocation) {
-    if (_jniMapLibreMap == null) {
+  List<QueriedLayer> queryLayers(Offset screenLocation) => using((arena) {
+    if (_jMapLibreMap == null) {
       throw Exception(
         "queryLayers can't be called before the map is initialized.",
       );
@@ -441,69 +411,66 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     // there are no sources without a loaded style.
     if (style == null) return [];
 
-    final jniLayers = style._getLayers();
+    final jniLayers = style._getLayers()..releasedBy(arena);
     final queriedLayers = <QueriedLayer>[];
     for (var i = jniLayers.length - 1; i >= 0; i--) {
-      final jniLayer = jniLayers[i]!;
+      final jniLayer = jniLayers[i]!..releasedBy(arena);
       JString? jLayerId;
       late final JString jSourceId;
       late final JString jSourceLayer;
       if (jniLayer.isA(jni.LineLayer.type)) {
-        final layer = jniLayer.as(jni.LineLayer.type);
+        final layer = jniLayer.as(jni.LineLayer.type)..releasedBy(arena);
         jLayerId = layer.getId();
         jSourceId = layer.getSourceId();
         jSourceLayer = layer.getSourceLayer();
-        layer.release();
       } else if (jniLayer.isA(jni.FillLayer.type)) {
-        final layer = jniLayer.as(jni.FillLayer.type);
+        final layer = jniLayer.as(jni.FillLayer.type)..releasedBy(arena);
         jLayerId = layer.getId();
         jSourceId = layer.getSourceId();
         jSourceLayer = layer.getSourceLayer();
-        layer.release();
       } else if (jniLayer.isA(jni.FillExtrusionLayer.type)) {
-        final layer = jniLayer.as(jni.FillExtrusionLayer.type);
+        final layer = jniLayer.as(jni.FillExtrusionLayer.type)
+          ..releasedBy(arena);
         jLayerId = layer.getId();
         jSourceId = layer.getSourceId();
         jSourceLayer = layer.getSourceLayer();
-        layer.release();
       } else if (jniLayer.isA(jni.SymbolLayer.type)) {
-        final layer = jniLayer.as(jni.SymbolLayer.type);
+        final layer = jniLayer.as(jni.SymbolLayer.type)..releasedBy(arena);
         jLayerId = layer.getId();
         jSourceId = layer.getSourceId();
         jSourceLayer = layer.getSourceLayer();
-        layer.release();
       } else if (jniLayer.isA(jni.CircleLayer.type)) {
-        final layer = jniLayer.as(jni.CircleLayer.type);
+        final layer = jniLayer.as(jni.CircleLayer.type)..releasedBy(arena);
         jLayerId = layer.getId();
         jSourceId = layer.getSourceId();
         jSourceLayer = layer.getSourceLayer();
-        layer.release();
       }
-      jniLayer.release();
       if (jLayerId == null) continue; // ignore all other layers
+      jLayerId.releasedBy(arena);
+      jSourceId.releasedBy(arena);
+      jSourceLayer.releasedBy(arena);
 
       final queryLayerIds = JArray<JString?>(JString.nullableType, 1)
+        ..releasedBy(arena)
         ..[0] = jLayerId;
       // query one layer at a time
-      final scaledPoint =
-          (screenLocation * MediaQuery.devicePixelRatioOf(context)).toPointF();
-      final jniFeatures = _jniMapLibreMap!.queryRenderedFeatures(
+      final pixelRatio = MediaQuery.devicePixelRatioOf(context);
+      final scaledPoint = (screenLocation * pixelRatio).toJPointF(arena: arena);
+      final jniFeatures = _jMapLibreMap!.queryRenderedFeatures(
         scaledPoint,
         queryLayerIds,
-      );
-      queryLayerIds.release();
+      )..releasedBy(arena);
       if (jniFeatures.isEmpty) continue; // layer hasn't been clicked if empty
-      jniFeatures.release();
-      final sourceLayer = jSourceLayer.toDartString(releaseOriginal: true);
+      final sourceLayer = jSourceLayer.toDartString();
       final queriedLayer = QueriedLayer(
-        layerId: jLayerId.toDartString(releaseOriginal: true),
-        sourceId: jSourceId.toDartString(releaseOriginal: true),
+        layerId: jLayerId.toDartString(),
+        sourceId: jSourceId.toDartString(),
         sourceLayer: sourceLayer.isEmpty ? null : sourceLayer,
       );
       queriedLayers.add(queriedLayer);
     }
     return queriedLayers;
-  }
+  });
 
   @override
   Future<void> enableLocation({
@@ -514,7 +481,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     bool compassAnimation = true,
     bool pulse = true,
     BearingRenderMode bearingRenderMode = BearingRenderMode.gps,
-  }) async {
+  }) async => using((arena) {
     // https://maplibre.org/maplibre-native/docs/book/android/location-component-guide.html
     final style = this.style;
     if (style == null) return;
@@ -524,41 +491,39 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
       BearingRenderMode.compass => jni.RenderMode.COMPASS,
       BearingRenderMode.gps => jni.RenderMode.GPS,
     };
-    final jniContext = jni.MapLibreRegistry.INSTANCE.getContext()!;
-    final locOptionsBuilder = jni.LocationComponentOptions.builder(jniContext)
-        .pulseFadeEnabled(pulseFade)!
-        .accuracyAnimationEnabled(accuracyAnimation)!
-        .compassAnimationEnabled(compassAnimation.toJBoolean())!
-        .pulseEnabled(pulse)!;
-    final locOptions = locOptionsBuilder.build();
+    final jniContext = getJContext(arena);
+    final locOptionsBuilder =
+        jni.LocationComponentOptions.builder(jniContext)
+              .pulseFadeEnabled(pulseFade)!
+              .accuracyAnimationEnabled(accuracyAnimation)!
+              .compassAnimationEnabled(compassAnimation.toJBoolean())!
+              .pulseEnabled(pulse)!
+          ..releasedBy(arena);
+    final locOptions = locOptionsBuilder.build()..releasedBy(arena);
     final locationEngineRequestBuilder =
         jni.LocationEngineRequest$Builder(750) // TODO integrate as parameter
-            .setFastestInterval(fastestInterval.inMilliseconds)!
-            .setMaxWaitTime(maxWaitTime.inMilliseconds)!
-            .setPriority(jni.LocationEngineRequest.PRIORITY_HIGH_ACCURACY)!;
-    final locationEngineRequest = locationEngineRequestBuilder.build();
+              .setFastestInterval(fastestInterval.inMilliseconds)!
+              .setMaxWaitTime(maxWaitTime.inMilliseconds)!
+              .setPriority(jni.LocationEngineRequest.PRIORITY_HIGH_ACCURACY)!
+          ..releasedBy(arena);
+    final locationEngineRequest = locationEngineRequestBuilder.build()
+      ?..releasedBy(arena);
     final activationOptionsBuilder =
         jni.LocationComponentActivationOptions.builder(
-              jniContext,
-              style._jniStyle,
-            )
-            .locationComponentOptions(locOptions)!
-            .useDefaultLocationEngine(true)!
-            .locationEngineRequest(locationEngineRequest)!;
-    final activationOptions = activationOptionsBuilder.build()!;
+                jniContext,
+                style._jniStyle,
+              )
+              .locationComponentOptions(locOptions)!
+              .useDefaultLocationEngine(true)!
+              .locationEngineRequest(locationEngineRequest)!
+          ..releasedBy(arena);
+    final activationOptions = activationOptionsBuilder.build()!
+      ..releasedBy(arena);
 
-    _locationComponent.activateLocationComponent(activationOptions);
-    _locationComponent.setRenderMode(bearing);
-    _locationComponent.setLocationComponentEnabled(true);
-
-    activationOptionsBuilder.release();
-    locOptionsBuilder.release();
-    locOptions.release();
-    locationEngineRequestBuilder.release();
-    locationEngineRequest?.release();
-    activationOptions.release();
-    jniContext.release();
-  }
+    _jLocationComponent.activateLocationComponent(activationOptions);
+    _jLocationComponent.setRenderMode(bearing);
+    _jLocationComponent.setLocationComponentEnabled(true);
+  });
 
   @override
   Future<void> trackLocation({
@@ -587,26 +552,32 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
             // only gps bearing
             : jni.CameraMode.NONE_GPS,
     };
-    _locationComponent.setCameraMode(mode);
+    _jLocationComponent.setCameraMode(mode);
   }
 
   @override
-  Geographic toLngLat(Offset screenLocation) => _jniProjection
-      .fromScreenLocation(
-        (screenLocation * MediaQuery.devicePixelRatioOf(context)).toPointF(),
-      )
-      .toGeographic(releaseOriginal: true);
+  Geographic toLngLat(Offset screenLocation) => using(
+    (arena) => _jProjection
+        .fromScreenLocation(
+          (screenLocation * MediaQuery.devicePixelRatioOf(context)).toJPointF(
+            arena: arena,
+          ),
+        )
+        .toGeographic(),
+  );
 
   @override
   List<Geographic> toLngLats(List<Offset> screenLocations) =>
       screenLocations.map(toLngLat).toList(growable: false);
 
   @override
-  Offset toScreenLocation(Geographic lngLat) =>
-      _jniProjection
-          .toScreenLocation(lngLat.toLatLng())
-          .toOffset(releaseOriginal: true) /
-      MediaQuery.devicePixelRatioOf(context);
+  Offset toScreenLocation(Geographic lngLat) => using((arena) {
+    final screenLocation = _jProjection.toScreenLocation(
+      lngLat.toLatLng()..releasedBy(arena),
+    )..releasedBy(arena);
+    final pixelRatio = MediaQuery.devicePixelRatioOf(context);
+    return screenLocation.toOffset() / pixelRatio;
+  });
 
   @override
   List<Offset> toScreenLocations(List<Geographic> lngLats) =>
@@ -614,45 +585,71 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
 
   @override
   double getMetersPerPixelAtLatitude(double latitude) =>
-      _jniProjection.getMetersPerPixelAtLatitude(latitude);
+      _jProjection.getMetersPerPixelAtLatitude(latitude);
 
   @override
-  LngLatBounds getVisibleRegion() {
-    final region = _jniProjection.getVisibleRegion();
-    final jniBounds = region.latLngBounds;
-    region.release();
-    final bounds = jniBounds.toLngLatBounds(releaseOriginal: true);
-    return bounds;
-  }
+  LngLatBounds getVisibleRegion() => using((arena) {
+    final region = _jProjection.getVisibleRegion()..releasedBy(arena);
+    final jniBounds = region.latLngBounds..releasedBy(arena);
+    return jniBounds.toLngLatBounds();
+  });
 
   /// Note, that [MapController.setStyle] is synchronous.
   @override
-  Future<void> setStyle(String style) async {
+  Future<void> setStyle(String style) async => using((arena) async {
     final trimmed = style.trim();
-    final builder = jni.Style$Builder();
-    if (trimmed.startsWith('{') || trimmed.startsWith('[')) {
+    final builder = jni.Style$Builder()..releasedBy(arena);
+    if (trimmed.startsWith('{')) {
       // Raw JSON
-      builder.fromJson(trimmed.toJString());
+      builder.fromJson(trimmed.toJString()..releasedBy(arena));
     } else if (trimmed.startsWith('/')) {
-      builder.fromUri('file://$trimmed'.toJString());
+      builder.fromUri('file://$trimmed'.toJString()..releasedBy(arena));
     } else if (!trimmed.startsWith('http://') &&
         !trimmed.startsWith('https://') &&
         !trimmed.startsWith('mapbox://')) {
       // flutter asset
       final content = await rootBundle.loadString(trimmed);
-      builder.fromJson(content.toJString());
+      builder.fromJson(content.toJString()..releasedBy(arena));
     } else {
       // URI
-      builder.fromUri(trimmed.toJString());
+      builder.fromUri(trimmed.toJString()..releasedBy(arena));
     }
-    _jniMapLibreMap?.setStyle$3(
+    _jMapLibreMap?.setStyle$3(
       builder,
       jni.Style$OnStyleLoaded.implement(
-        jni.$Style$OnStyleLoaded(
-          onStyleLoaded: (style) => onStyleLoaded(),
-        ),
-      ),
+        _StyleLoadedCallback(WeakReference(onStyleLoaded)),
+      )..releasedBy(arena),
     );
-    builder.release();
+  });
+}
+
+final class _CameraMovementCallback with jni.$MapLibreMap$CancelableCallback {
+  const _CameraMovementCallback(this.weakCompleter);
+
+  final WeakReference<Completer<void>> weakCompleter;
+
+  @override
+  void onCancel() => weakCompleter.target?.completeError(
+    Exception('Map camera movement cancelled.'),
+  );
+
+  @override
+  void onFinish() => weakCompleter.target?.complete();
+
+  @override
+  bool get onCancel$async => true;
+
+  @override
+  bool get onFinish$async => true;
+}
+
+final class _StyleLoadedCallback with jni.$Style$OnStyleLoaded {
+  const _StyleLoadedCallback(this.weakCallback);
+
+  final WeakReference<VoidCallback> weakCallback;
+
+  @override
+  void onStyleLoaded(jni.Style style) {
+    weakCallback.target?.call();
   }
 }

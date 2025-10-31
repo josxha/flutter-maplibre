@@ -1,6 +1,7 @@
 package com.github.josxha.maplibre
 
 import PermissionManagerHostApi
+import android.app.Activity
 import android.content.Context
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
@@ -23,10 +24,10 @@ class MapLibrePlugin :
     PermissionManagerHostApi {
     private var lifecycle: Lifecycle? = null
 
+    private lateinit var activity: Activity
     private lateinit var flutterAssets: FlutterPlugin.FlutterAssets
 
     override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
-        MapLibreRegistry.context = binding.applicationContext
         PermissionManagerHostApi.setUp(binding.binaryMessenger, this)
         binding
             .platformViewRegistry
@@ -43,7 +44,7 @@ class MapLibrePlugin :
     }
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
-        MapLibreRegistry.activity = binding.activity
+        activity = binding.activity
         binding.addRequestPermissionsResultListener(this)
         lifecycle = FlutterLifecycleAdapter.getActivityLifecycle(binding)
     }
@@ -91,7 +92,7 @@ class MapLibrePlugin :
                     }
                 },
             )
-        permissionsManager?.requestLocationPermissions(MapLibreRegistry.activity)
+        permissionsManager?.requestLocationPermissions(activity)
     }
 }
 

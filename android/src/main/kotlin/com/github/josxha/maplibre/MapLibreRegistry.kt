@@ -1,8 +1,6 @@
 package com.github.josxha.maplibre
 
 import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.Context
 import androidx.annotation.Keep
 import org.maplibre.android.maps.MapLibreMap
 
@@ -21,10 +19,4 @@ object MapLibreRegistry {
     ) {
         mapRegistry[viewId] = map
     }
-
-    // TODO: Storing the Activity in a static field is a potential memory leak.
-    public var activity: Activity? = null
-
-    // TODO: Storing the Context in a static field is a potential memory leak.
-    public var context: Context? = null
 }

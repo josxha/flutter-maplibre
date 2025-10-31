@@ -38,6 +38,8 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
+import '../../../../android/content/Context.dart' as context$_;
+
 /// from: `org.maplibre.android.utils.BitmapUtils`
 class BitmapUtils extends jni$_.JObject {
   @jni$_.internal
@@ -359,7 +361,7 @@ class BitmapUtils extends jni$_.JObject {
   /// from: `static public android.graphics.drawable.Drawable getDrawableFromByteArray(android.content.Context context, byte[] bs)`
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JObject? getDrawableFromByteArray(
-    jni$_.JObject context,
+    context$_.Context context,
     jni$_.JByteArray? bs,
   ) {
     final _$context = context.reference;
@@ -399,7 +401,7 @@ class BitmapUtils extends jni$_.JObject {
   /// from: `static public android.graphics.drawable.Drawable getDrawableFromRes(android.content.Context context, int i)`
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JObject? getDrawableFromRes(
-    jni$_.JObject context,
+    context$_.Context context,
     int i,
   ) {
     final _$context = context.reference;
@@ -445,7 +447,7 @@ class BitmapUtils extends jni$_.JObject {
   /// from: `static public android.graphics.drawable.Drawable getDrawableFromRes(android.content.Context context, int i, java.lang.Integer integer)`
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JObject? getDrawableFromRes$1(
-    jni$_.JObject context,
+    context$_.Context context,
     int i,
     jni$_.JInteger? integer,
   ) {

@@ -38,6 +38,8 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
+import '../../../../../../android/content/Context.dart' as context$_;
+
 import 'MapLibreGLSurfaceView.dart' as maplibreglsurfaceview$_;
 
 import 'SurfaceViewMapRenderer.dart' as surfaceviewmaprenderer$_;
@@ -95,7 +97,7 @@ class GLSurfaceViewMapRenderer
   /// from: `public void <init>(android.content.Context context, org.maplibre.android.maps.renderer.surfaceview.MapLibreGLSurfaceView mapLibreGLSurfaceView, java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
   factory GLSurfaceViewMapRenderer.new$1(
-    jni$_.JObject? context,
+    context$_.Context? context,
     maplibreglsurfaceview$_.MapLibreGLSurfaceView mapLibreGLSurfaceView,
     jni$_.JString? string,
   ) {

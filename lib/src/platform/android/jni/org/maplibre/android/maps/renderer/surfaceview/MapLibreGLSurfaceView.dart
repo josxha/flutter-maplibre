@@ -38,6 +38,8 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
+import '../../../../../../android/content/Context.dart' as context$_;
+
 import 'MapLibreSurfaceView.dart' as maplibresurfaceview$_;
 
 import 'SurfaceViewMapRenderer.dart' as surfaceviewmaprenderer$_;
@@ -86,7 +88,7 @@ class MapLibreGLSurfaceView extends maplibresurfaceview$_.MapLibreSurfaceView {
   /// from: `public void <init>(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
   factory MapLibreGLSurfaceView(
-    jni$_.JObject? context,
+    context$_.Context? context,
   ) {
     final _$context = context?.reference ?? jni$_.jNullReference;
     return MapLibreGLSurfaceView.fromReference(
@@ -126,7 +128,7 @@ class MapLibreGLSurfaceView extends maplibresurfaceview$_.MapLibreSurfaceView {
   /// from: `public void <init>(android.content.Context context, android.util.AttributeSet attributeSet)`
   /// The returned object must be released after use, by calling the [release] method.
   factory MapLibreGLSurfaceView.new$1(
-    jni$_.JObject? context,
+    context$_.Context? context,
     jni$_.JObject? attributeSet,
   ) {
     final _$context = context?.reference ?? jni$_.jNullReference;

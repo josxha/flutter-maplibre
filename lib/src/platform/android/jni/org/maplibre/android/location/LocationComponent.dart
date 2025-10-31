@@ -38,6 +38,8 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
+import '../../../../android/content/Context.dart' as context$_;
+
 import '../../../../android/location/Location.dart' as location$_;
 
 import '../maps/MapLibreMap.dart' as maplibremap$_;
@@ -528,7 +530,7 @@ class LocationComponent extends jni$_.JObject {
 
   /// from: `public void applyStyle(android.content.Context context, int i)`
   void applyStyle(
-    jni$_.JObject context,
+    context$_.Context context,
     int i,
   ) {
     final _$context = context.reference;

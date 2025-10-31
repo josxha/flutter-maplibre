@@ -38,6 +38,8 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
+import '../../../../android/content/Context.dart' as context$_;
+
 import '../camera/CameraPosition.dart' as cameraposition$_;
 
 /// from: `org.maplibre.android.maps.MapLibreMapOptions`
@@ -123,7 +125,7 @@ class MapLibreMapOptions extends jni$_.JObject {
   /// from: `static public org.maplibre.android.maps.MapLibreMapOptions createFromAttributes(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
   static MapLibreMapOptions createFromAttributes(
-    jni$_.JObject context,
+    context$_.Context context,
   ) {
     final _$context = context.reference;
     return _createFromAttributes(
@@ -162,7 +164,7 @@ class MapLibreMapOptions extends jni$_.JObject {
   /// from: `static public org.maplibre.android.maps.MapLibreMapOptions createFromAttributes(android.content.Context context, android.util.AttributeSet attributeSet)`
   /// The returned object must be released after use, by calling the [release] method.
   static MapLibreMapOptions createFromAttributes$1(
-    jni$_.JObject context,
+    context$_.Context context,
     jni$_.JObject? attributeSet,
   ) {
     final _$context = context.reference;

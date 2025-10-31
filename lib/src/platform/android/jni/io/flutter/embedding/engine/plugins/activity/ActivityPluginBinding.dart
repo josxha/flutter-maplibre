@@ -38,6 +38,8 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
+import '../../../../../../android/app/Activity.dart' as activity$_;
+
 import '../../../../plugin/common/PluginRegistry.dart' as pluginregistry$_;
 
 /// from: `io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding$OnSaveInstanceStateListener`
@@ -393,11 +395,11 @@ class ActivityPluginBinding extends jni$_.JObject {
 
   /// from: `public abstract android.app.Activity getActivity()`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject getActivity() {
+  activity$_.Activity getActivity() {
     return _getActivity(
       reference.pointer,
       _id_getActivity as jni$_.JMethodIDPtr,
-    ).object<jni$_.JObject>(const jni$_.JObjectType());
+    ).object<activity$_.Activity>(const activity$_.$Activity$Type());
   }
 
   static final _id_getLifecycle = _class.instanceMethodId(
@@ -1096,7 +1098,7 @@ class ActivityPluginBinding extends jni$_.JObject {
 
 abstract base mixin class $ActivityPluginBinding {
   factory $ActivityPluginBinding({
-    required jni$_.JObject Function() getActivity,
+    required activity$_.Activity Function() getActivity,
     required jni$_.JObject Function() getLifecycle,
     required void Function(
       pluginregistry$_.PluginRegistry$RequestPermissionsResultListener
@@ -1170,7 +1172,7 @@ abstract base mixin class $ActivityPluginBinding {
     bool removeOnSaveStateListener$async,
   }) = _$ActivityPluginBinding;
 
-  jni$_.JObject getActivity();
+  activity$_.Activity getActivity();
   jni$_.JObject getLifecycle();
   void addRequestPermissionsResultListener(
     pluginregistry$_.PluginRegistry$RequestPermissionsResultListener
@@ -1232,7 +1234,7 @@ abstract base mixin class $ActivityPluginBinding {
 
 final class _$ActivityPluginBinding with $ActivityPluginBinding {
   _$ActivityPluginBinding({
-    required jni$_.JObject Function() getActivity,
+    required activity$_.Activity Function() getActivity,
     required jni$_.JObject Function() getLifecycle,
     required void Function(
       pluginregistry$_.PluginRegistry$RequestPermissionsResultListener
@@ -1321,7 +1323,7 @@ final class _$ActivityPluginBinding with $ActivityPluginBinding {
        _addOnSaveStateListener = addOnSaveStateListener,
        _removeOnSaveStateListener = removeOnSaveStateListener;
 
-  final jni$_.JObject Function() _getActivity;
+  final activity$_.Activity Function() _getActivity;
   final jni$_.JObject Function() _getLifecycle;
   final void Function(
     pluginregistry$_.PluginRegistry$RequestPermissionsResultListener
@@ -1392,7 +1394,7 @@ final class _$ActivityPluginBinding with $ActivityPluginBinding {
   _removeOnSaveStateListener;
   final bool removeOnSaveStateListener$async;
 
-  jni$_.JObject getActivity() {
+  activity$_.Activity getActivity() {
     return _getActivity();
   }
 

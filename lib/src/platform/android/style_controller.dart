@@ -86,56 +86,59 @@ class StyleControllerAndroid implements StyleController {
       });
 
   @override
-  Future<void> addSource(Source source) async {
-    final jniId = source.id.toJString();
-    final jni.Source jniSource;
+  Future<void> addSource(Source source) async => using((arena) {
+    final jId = source.id.toJString()..releasedBy(arena);
+    final jni.Source jSource;
     switch (source) {
       case GeoJsonSource():
-        final jniOptions = jni.GeoJsonOptions();
-        final jniData = source.data.toJString();
+        final jOptions = jni.GeoJsonOptions()..releasedBy(arena);
+        final jData = source.data.toJString()..releasedBy(arena);
         if (source.data.startsWith('{')) {
-          jniSource = jni.GeoJsonSource.new$4(jniId, jniData, jniOptions);
+          jSource = jni.GeoJsonSource.new$4(jId, jData, jOptions);
         } else {
-          final jniUri = jni.URI.create(jniData);
-          jniSource = jni.GeoJsonSource.new$8(jniId, jniUri!, jniOptions);
-          jniUri.release();
+          final jUri = jni.URI.create(jData)!..releasedBy(arena);
+          jSource = jni.GeoJsonSource.new$8(jId, jUri, jOptions);
         }
-        jniOptions.release();
       case RasterDemSource():
-        jniSource = jni.RasterDemSource.new$4(
-          jniId,
-          source.url!.toJString(),
+        jSource = jni.RasterDemSource.new$4(
+          jId,
+          source.url!.toJString()..releasedBy(arena),
           source.tileSize,
         );
         // TODO apply other properties
-        jniSource.setVolatile(source.volatile.toJBoolean());
+        jSource.setVolatile(source.volatile.toJBoolean()..releasedBy(arena));
       case RasterSource():
         if (source.url case final String url) {
-          jniSource = jni.RasterSource.new$4(
-            jniId,
-            url.toJString(),
+          jSource = jni.RasterSource.new$4(
+            jId,
+            url.toJString()..releasedBy(arena),
             source.tileSize,
           );
         } else {
-          final tiles = source.tiles!.map((e) => e.toJString());
-          final tilesArray = JArray.of(JString.nullableType, tiles);
+          final tiles = source.tiles!.map(
+            (e) => e.toJString()..releasedBy(arena),
+          );
+          final tilesArray = JArray.of(JString.nullableType, tiles)
+            ..releasedBy(arena);
           final tileSet =
               jni.TileSet(
-                  '{}'.toJString(),
-                  tilesArray.as(JArray.type(JString.type)),
+                  '{}'.toJString()..releasedBy(arena),
+                  tilesArray.as(JArray.type(JString.type))..releasedBy(arena),
                 )
+                ..releasedBy(arena)
                 ..setMaxZoom(source.maxZoom)
                 ..setMinZoom(source.minZoom);
-          jniSource = jni.RasterSource.new$6(jniId, tileSet, source.tileSize);
-          tilesArray.release();
-          tileSet.release();
+          jSource = jni.RasterSource.new$6(jId, tileSet, source.tileSize);
         }
         // TODO apply other properties
-        jniSource.setVolatile(source.volatile.toJBoolean());
+        jSource.setVolatile(source.volatile.toJBoolean()..releasedBy(arena));
       case VectorSource():
-        jniSource = jni.VectorSource.new$3(jniId, source.url!.toJString());
+        jSource = jni.VectorSource.new$3(
+          jId,
+          source.url!.toJString()..releasedBy(arena),
+        );
         // TODO apply other properties
-        jniSource.setVolatile(source.volatile.toJBoolean());
+        jSource.setVolatile(source.volatile.toJBoolean()..releasedBy(arena));
       case ImageSource():
         // https://maplibre.org/maplibre-native/android/api/-map-libre%20-native%20-android/org.maplibre.android.geometry/-lat-lng-quad/index.html
         final jniQuad = jni.LatLngQuad(
@@ -143,11 +146,10 @@ class StyleControllerAndroid implements StyleController {
           source.coordinates.topRight.toLatLng(),
           source.coordinates.bottomRight.toLatLng(),
           source.coordinates.bottomLeft.toLatLng(),
-        );
-        final jniUri = jni.URI(source.url.toJString());
-        jniSource = jni.ImageSource.new$2(jniId, jniQuad, jniUri);
-        jniUri.release();
-        jniQuad.release();
+        )..releasedBy(arena);
+        final jniUri = jni.URI(source.url.toJString()..releasedBy(arena))
+          ..releasedBy(arena);
+        jSource = jni.ImageSource.new$2(jId, jniQuad, jniUri);
       case VideoSource():
         throw UnimplementedError('Video source is only supported on web.');
       default:
@@ -155,9 +157,9 @@ class StyleControllerAndroid implements StyleController {
           'The Source is not supported: ${source.runtimeType}',
         );
     }
-    _jniStyle.addSource(jniSource);
-    jniSource.release();
-  }
+    jSource.releasedBy(arena);
+    _jniStyle.addSource(jSource);
+  });
 
   @override
   Future<void> removeLayer(String id) async =>
@@ -192,40 +194,36 @@ class StyleControllerAndroid implements StyleController {
   Future<List<String>> getAttributions() async => getAttributionsSync();
 
   @override
-  List<String> getAttributionsSync() {
+  List<String> getAttributionsSync() => using((arena) {
     try {
-      final jSources = _jniStyle.getSources();
+      final jSources = _jniStyle.getSources()..releasedBy(arena);
       final attributions = <String>[];
       for (final jSource in jSources) {
-        final jniAttribution = jSource?.getAttribution();
-        if (jniAttribution == null) continue;
-        final attribution = jniAttribution.toDartString(releaseOriginal: true);
+        final jAttribution = jSource?.getAttribution();
+        if (jAttribution == null) continue;
+        final attribution = jAttribution.toDartString(releaseOriginal: true);
         if (attribution.trim().isEmpty) continue;
         attributions.add(attribution);
       }
-      jSources.release();
       return attributions;
     } catch (e) {
       // hide error during setStyle()
       return const [];
     }
-  }
+  });
 
   @override
   List<String> getLayerIds() {
     final layers = _jniStyle.getLayers();
     return layers
-        .map((e) => e?.getId())
-        .where((i) => i != null)
-        .map((i) => i!.toDartString(releaseOriginal: true))
-        .toList();
+        .map((e) => e?.getId().toDartString(releaseOriginal: true))
+        .nonNulls
+        .toList(growable: false);
   }
 
   @override
   void dispose() {
-    if (!_jniStyle.isReleased) {
-      _jniStyle.release();
-    }
+    if (!_jniStyle.isReleased) _jniStyle.release();
   }
 
   JList<jni.Layer?> _getLayers() => _jniStyle.getLayers();

@@ -38,6 +38,8 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
+import '../../../../../android/content/Context.dart' as context$_;
+
 import 'surfaceview/SurfaceViewMapRenderer.dart' as surfaceviewmaprenderer$_;
 
 import 'textureview/TextureViewMapRenderer.dart' as textureviewmaprenderer$_;
@@ -128,7 +130,7 @@ class MapRendererFactory extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static textureviewmaprenderer$_.TextureViewMapRenderer?
   newTextureViewMapRenderer(
-    jni$_.JObject context,
+    context$_.Context context,
     jni$_.JObject? textureView,
     jni$_.JString? string,
     bool z,
@@ -188,7 +190,7 @@ class MapRendererFactory extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static surfaceviewmaprenderer$_.SurfaceViewMapRenderer?
   newSurfaceViewMapRenderer(
-    jni$_.JObject context,
+    context$_.Context context,
     jni$_.JString? string,
     bool z,
     jni$_.JObject? runnable,
