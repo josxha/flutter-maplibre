@@ -41,32 +41,27 @@ class _EventsPageState extends State<EventsPage> {
     );
   }
 
-  String eventToString(MapEvent event) =>
-      switch (event) {
-        MapEventMapCreated() => 'map created',
-        MapEventStyleLoaded() => 'style loaded',
-        MapEventMoveCamera() =>
-        'move camera: center ${_formatGeographic(event.camera.center)}, '
-            'zoom ${event.camera.zoom.toStringAsFixed(2)}, '
-            'pitch ${event.camera.pitch.toStringAsFixed(2)}, '
-            'bearing ${event.camera.bearing.toStringAsFixed(2)}',
-        MapEventStartMoveCamera() =>
-        'start move camera, reason: ${event.reason.name}',
-        MapEventClick() =>
-        'clicked: ${_formatGeographic(event.point)}, screen: ${_formatOffset(
-            event.screenPoint)}',
-        MapEventDoubleClick() =>
-        'double clicked: ${_formatGeographic(
-            event.point)}, screen: ${_formatOffset(event.screenPoint)}',
-        MapEventLongClick() =>
-        'long clicked: ${_formatGeographic(
-            event.point)}, screen: ${_formatOffset(event.screenPoint)}',
-        MapEventSecondaryClick() =>
-        'secondary clicked: ${_formatGeographic(
-            event.point)}, screen: ${_formatOffset(event.screenPoint)}',
-        MapEventIdle() => 'idle',
-        MapEventCameraIdle() => 'camera idle',
-      };
+  String eventToString(MapEvent event) => switch (event) {
+    MapEventMapCreated() => 'map created',
+    MapEventStyleLoaded() => 'style loaded',
+    MapEventMoveCamera() =>
+      'move camera: center ${_formatGeographic(event.camera.center)}, '
+          'zoom ${event.camera.zoom.toStringAsFixed(2)}, '
+          'pitch ${event.camera.pitch.toStringAsFixed(2)}, '
+          'bearing ${event.camera.bearing.toStringAsFixed(2)}',
+    MapEventStartMoveCamera() =>
+      'start move camera, reason: ${event.reason.name}',
+    MapEventClick() =>
+      'clicked: ${_formatGeographic(event.point)}, screen: ${_formatOffset(event.screenPoint)}',
+    MapEventDoubleClick() =>
+      'double clicked: ${_formatGeographic(event.point)}, screen: ${_formatOffset(event.screenPoint)}',
+    MapEventLongClick() =>
+      'long clicked: ${_formatGeographic(event.point)}, screen: ${_formatOffset(event.screenPoint)}',
+    MapEventSecondaryClick() =>
+      'secondary clicked: ${_formatGeographic(event.point)}, screen: ${_formatOffset(event.screenPoint)}',
+    MapEventIdle() => 'idle',
+    MapEventCameraIdle() => 'camera idle',
+  };
 
   void _onEvent(MapEvent event) {
     debugPrint('[MapLibreMap] ${eventToString(event)}');

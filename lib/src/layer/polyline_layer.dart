@@ -38,7 +38,7 @@ class PolylineLayer extends Layer<Feature<LineString>> {
 
   @override
   Map<String, Object> getPaint() => {
-    'line-color': color.toHexString(alpha: false),
+    'line-color': color.toHexString(),
     'line-opacity': opacity,
     'line-width': width,
     'line-gap-width': gapWidth,
