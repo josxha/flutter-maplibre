@@ -52,11 +52,11 @@ class CircleLayer extends Layer<Feature<Point>> {
   @override
   Map<String, Object> getPaint() => {
     'circle-radius': radius,
-    'circle-color': color.toHexString(alpha: false),
+    'circle-color': color.toHexString(),
     'circle-blur': blur,
     'circle-opacity': opacity,
     'circle-stroke-width': strokeWidth,
-    'circle-stroke-color': strokeColor.toHexString(alpha: false),
+    'circle-stroke-color': strokeColor.toHexString(),
     'circle-stroke-opacity': strokeOpacity,
   };
 

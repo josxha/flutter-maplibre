@@ -192,11 +192,11 @@ class MarkerLayer extends Layer<Feature<Point>> {
   Map<String, Object> getPaint() => {
     'icon-opacity': iconOpacity,
     'icon-color': iconColor.toHexString(),
-    'icon-halo-color': iconHaloColor.toHexString(alpha: false),
+    'icon-halo-color': iconHaloColor.toHexString(),
     'icon-halo-width': iconHaloWidth,
     'icon-halo-blur': iconHaloBlur,
     'text-opacity': iconOpacity,
-    'text-color': textColor.toHexString(alpha: false),
+    'text-color': textColor.toHexString(),
     'text-halo-color': textHaloColor.toHexString(),
     'text-halo-width': textHaloWidth,
     'text-halo-blur': textHaloBlur,

@@ -25,9 +25,9 @@ class PolygonLayer extends Layer<Feature<Polygon>> {
 
   @override
   Map<String, Object> getPaint() => {
-    'fill-color': color.toHexString(alpha: false),
+    'fill-color': color.toHexString(),
     'fill-opacity': opacity,
-    'fill-outline-color': outlineColor.toHexString(alpha: false),
+    'fill-outline-color': outlineColor.toHexString(),
   };
 
   @override

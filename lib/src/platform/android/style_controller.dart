@@ -2,47 +2,47 @@ part of 'map_state.dart';
 
 /// Android specific implementation of the [StyleController].
 class StyleControllerAndroid implements StyleController {
-  const StyleControllerAndroid._(this._jniStyle, this._hostApi);
+  const StyleControllerAndroid._(this._jStyle);
 
-  final jni.Style _jniStyle;
-  final pigeon.MapLibreHostApi _hostApi;
+  final jni.Style _jStyle;
 
   @override
   Future<void> addLayer(StyleLayer layer, {String? belowLayerId}) async =>
       using((arena) {
+        final iId = layer.id.toJString()..releasedBy(arena);
         final jLayer = switch (layer) {
           FillStyleLayer() => jni.FillLayer(
-            layer.id.toJString(),
-            layer.sourceId.toJString(),
+            iId,
+            layer.sourceId.toJString()..releasedBy(arena),
           ),
           CircleStyleLayer() => jni.CircleLayer(
-            layer.id.toJString(),
-            layer.sourceId.toJString(),
+            iId,
+            layer.sourceId.toJString()..releasedBy(arena),
           ),
           BackgroundStyleLayer() => jni.BackgroundLayer(layer.id.toJString()),
           FillExtrusionStyleLayer() => jni.FillExtrusionLayer(
-            layer.id.toJString(),
-            layer.sourceId.toJString(),
+            iId,
+            layer.sourceId.toJString()..releasedBy(arena),
           ),
           HeatmapStyleLayer() => jni.HeatmapLayer(
-            layer.id.toJString(),
-            layer.sourceId.toJString(),
+            iId,
+            layer.sourceId.toJString()..releasedBy(arena),
           ),
           HillshadeStyleLayer() => jni.HillshadeLayer(
-            layer.id.toJString(),
-            layer.sourceId.toJString(),
+            iId,
+            layer.sourceId.toJString()..releasedBy(arena),
           ),
           LineStyleLayer() => jni.LineLayer(
-            layer.id.toJString(),
-            layer.sourceId.toJString(),
+            iId,
+            layer.sourceId.toJString()..releasedBy(arena),
           ),
           RasterStyleLayer() => jni.RasterLayer(
-            layer.id.toJString(),
-            layer.sourceId.toJString(),
+            iId,
+            layer.sourceId.toJString()..releasedBy(arena),
           ),
           SymbolStyleLayer() => jni.SymbolLayer(
-            layer.id.toJString(),
-            layer.sourceId.toJString(),
+            iId,
+            layer.sourceId.toJString()..releasedBy(arena),
           ),
           _ => throw UnimplementedError(
             'The Layer is not supported: ${layer.runtimeType}',
@@ -64,7 +64,7 @@ class StyleControllerAndroid implements StyleController {
             entry.key.toJString(),
             entry.value.toJObject(arena),
             T: JObject.type,
-          );
+          )..releasedBy(arena);
         }
         for (var i = 0; i < layoutEntries.length; i++) {
           final entry = layoutEntries[i];
@@ -72,16 +72,16 @@ class StyleControllerAndroid implements StyleController {
             entry.key.toJString(),
             entry.value.toJObject(arena),
             T: JObject.type,
-          );
+          )..releasedBy(arena);
         }
         jLayer.releasedBy(arena);
         jLayer.setProperties(props);
 
         // add to style
-        if (belowLayerId == null) {
-          _jniStyle.addLayer(jLayer);
+        if (belowLayerId case final String belowId) {
+          _jStyle.addLayerBelow(jLayer, belowId.toJString()..releasedBy(arena));
         } else {
-          _jniStyle.addLayerBelow(jLayer, belowLayerId.toJString());
+          _jStyle.addLayer(jLayer);
         }
       });
 
@@ -158,32 +158,40 @@ class StyleControllerAndroid implements StyleController {
         );
     }
     jSource.releasedBy(arena);
-    _jniStyle.addSource(jSource);
+    _jStyle.addSource(jSource);
   });
 
   @override
   Future<void> removeLayer(String id) async =>
-      _jniStyle.removeLayer(id.toJString());
+      _jStyle.removeLayer(id.toJString());
 
   @override
   Future<void> removeSource(String id) async =>
-      _jniStyle.removeSource(id.toJString());
+      _jStyle.removeSource(id.toJString());
 
   @override
-  Future<void> addImage(String id, Uint8List bytes) =>
-      // TODO: use JNI for this method
-      _hostApi.addImage(id, bytes);
+  Future<void> addImage(String id, Uint8List bytes) async => using((arena) {
+    final jId = id.toJString()..releasedBy(arena);
+    final jBitmap = jni.BitmapFactory.decodeByteArray(
+      JByteArray.from(bytes)..releasedBy(arena),
+      0,
+      bytes.length,
+    );
+    if (jBitmap == null) return;
+    jBitmap.releasedBy(arena);
+    _jStyle.addImage(jId, jBitmap);
+  });
 
   @override
   Future<void> removeImage(String id) async =>
-      _jniStyle.removeImage(id.toJString());
+      _jStyle.removeImage(id.toJString());
 
   @override
   Future<void> updateGeoJsonSource({
     required String id,
     required String data,
   }) async {
-    final source = _jniStyle.getSourceAs(
+    final source = _jStyle.getSourceAs(
       id.toJString(),
       T: jni.GeoJsonSource.type,
     )!;
@@ -196,7 +204,7 @@ class StyleControllerAndroid implements StyleController {
   @override
   List<String> getAttributionsSync() => using((arena) {
     try {
-      final jSources = _jniStyle.getSources()..releasedBy(arena);
+      final jSources = _jStyle.getSources()..releasedBy(arena);
       final attributions = <String>[];
       for (final jSource in jSources) {
         final jAttribution = jSource?.getAttribution();
@@ -214,7 +222,7 @@ class StyleControllerAndroid implements StyleController {
 
   @override
   List<String> getLayerIds() {
-    final layers = _jniStyle.getLayers();
+    final layers = _jStyle.getLayers();
     return layers
         .map((e) => e?.getId().toDartString(releaseOriginal: true))
         .nonNulls
@@ -223,10 +231,10 @@ class StyleControllerAndroid implements StyleController {
 
   @override
   void dispose() {
-    if (!_jniStyle.isReleased) _jniStyle.release();
+    if (!_jStyle.isReleased) _jStyle.release();
   }
 
-  JList<jni.Layer?> _getLayers() => _jniStyle.getLayers();
+  JList<jni.Layer?> _getLayers() => _jStyle.getLayers();
 
   @override
   void setProjection(MapProjection projection) {

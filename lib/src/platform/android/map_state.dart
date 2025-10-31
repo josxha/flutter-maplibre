@@ -10,42 +10,43 @@ import 'package:jni/jni.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/layer/layer_manager.dart';
 import 'package:maplibre/src/platform/android/extensions.dart';
+import 'package:maplibre/src/platform/android/flutter_api.dart';
 import 'package:maplibre/src/platform/android/functions.dart';
 import 'package:maplibre/src/platform/android/jni.dart' as jni;
-import 'package:maplibre/src/platform/android/jni/com/google/gson/Gson.dart';
-import 'package:maplibre/src/platform/android/jni/org/maplibre/geojson/Feature.dart'
-    as jni;
+import 'package:maplibre/src/platform/android/registry.dart';
 import 'package:maplibre/src/platform/map_state_native.dart';
-import 'package:maplibre/src/platform/pigeon.g.dart' as pigeon;
 
 part 'style_controller.dart';
 
 /// The implementation that gets used for state of the [MapLibreMap] widget on
 /// android using JNI and Pigeon as a fallback.
-final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
-  late final pigeon.MapLibreHostApi _hostApi;
+final class MapLibreMapStateAndroid extends MapLibreMapStateNative
+    with jni.$OnMapReadyCallback, jni.$Style$OnStyleLoaded {
   late final int _viewId;
-  jni.MapLibreMap? _cachedJMapLibreMap;
+  late final jni.MapView _mapView;
+  jni.MapLibreMap? _jMap;
   jni.Projection? _cachedJProjection;
   jni.LocationComponent? _cachedJLocationComponent;
 
   @override
   StyleControllerAndroid? style;
 
-  jni.MapLibreMap? get _jMapLibreMap =>
-      _cachedJMapLibreMap ??= jni.MapLibreRegistry.INSTANCE.getMap(_viewId);
+  jni.FrameLayout get _platformView => Registry.platformViews[_viewId]!;
 
   jni.Projection get _jProjection =>
-      _cachedJProjection ??= _jMapLibreMap!.getProjection();
+      _cachedJProjection ??= _jMap!.getProjection();
 
   jni.LocationComponent get _jLocationComponent =>
-      _cachedJLocationComponent ??= _jMapLibreMap!.getLocationComponent();
+      _cachedJLocationComponent ??= _jMap!.getLocationComponent();
 
   @override
   Widget buildPlatformWidget(BuildContext context) {
     const viewType = 'plugins.flutter.io/maplibre';
-    final mode = options.androidMode;
-    if (mode == AndroidPlatformViewMode.tlhc_vd) {
+    jni.MapLibreRegistry.INSTANCE.setFlutterApi(
+      jni.FlutterApi.implement(const FlutterApi()),
+    );
+
+    if (options.androidMode == AndroidPlatformViewMode.tlhc_vd) {
       return AndroidView(
         viewType: viewType,
         onPlatformViewCreated: _onPlatformViewCreated,
@@ -64,7 +65,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
         );
       },
       onCreatePlatformView: (params) {
-        final viewController = switch (mode) {
+        final viewController = switch (options.androidMode) {
           // This attempts to use the newest and most efficient platform view
           // implementation when possible. In cases where that is not
           // supported, it falls back to using Hybrid Composition, which is
@@ -112,13 +113,138 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
 
   /// This method gets called when the platform view is created. It is not
   /// guaranteed that the map is ready.
-  void _onPlatformViewCreated(int viewId) {
-    final channelSuffix = viewId.toString();
-    _hostApi = pigeon.MapLibreHostApi(messageChannelSuffix: channelSuffix);
-    pigeon.MapLibreFlutterApi.setUp(this, messageChannelSuffix: channelSuffix);
+  void _onPlatformViewCreated(int viewId) => using((arena) {
     _viewId = viewId;
-    jni.Logger.setVerbosity(jni.Logger.WARN);
-  }
+    final jContext = getJContext(arena);
+    final cameraBuilder = jni.CameraPosition$Builder()
+      ..releasedBy(arena)
+      ..zoom(options.initZoom)
+      ..bearing(options.initBearing)
+      ..tilt(options.initPitch);
+    if (options.initCenter case final Geographic center) {
+      cameraBuilder.target(center.toLatLng()..releasedBy(arena));
+    }
+    final jMapOptions = jni.MapLibreMapOptions.createFromAttributes(jContext)
+      ..releasedBy(arena)
+      ..attributionEnabled(false)
+      ..logoEnabled(false)
+      ..compassEnabled(false)
+      // TODO: textureMode comes at a significant performance penalty, https://maplibre.org/maplibre-native/android/api/-map-libre%20-native%20-android/org.maplibre.android.maps/-map-libre-map-options/texture-mode.html
+      ..textureMode(options.androidTextureMode)
+      ..foregroundLoadColor(options.androidForegroundLoadColor.toARGB32())
+      ..translucentTextureSurface(options.androidTranslucentTextureSurface)
+      ..minZoomPreference(options.minZoom)
+      ..maxZoomPreference(options.maxZoom)
+      ..minPitchPreference(options.minPitch)
+      ..maxPitchPreference(options.maxPitch)
+      ..rotateGesturesEnabled(options.gestures.rotate)
+      ..zoomGesturesEnabled(options.gestures.zoom)
+      ..doubleTapGesturesEnabled(options.gestures.zoom)
+      ..scrollGesturesEnabled(options.gestures.zoom)
+      ..quickZoomGesturesEnabled(options.gestures.zoom)
+      ..tiltGesturesEnabled(options.gestures.pitch)
+      ..camera(cameraBuilder.build()..releasedBy(arena));
+    _mapView = jni.MapView.new$4(jContext, jMapOptions)
+      ..getMapAsync(jni.OnMapReadyCallback.implement(this));
+    _platformView.addView(_mapView);
+  });
+
+  @override
+  void onMapReady(jni.MapLibreMap jMap) => using((arena) {
+    _jMap = jMap
+      ..addOnMapClickListener(
+        jni.MapLibreMap$OnMapClickListener.implement(
+          jni.$MapLibreMap$OnMapClickListener(
+            onMapClick: (latLng) => using((arena) {
+              latLng.releasedBy(arena);
+              final screenLocation = _jProjection.toScreenLocation(latLng)
+                ..releasedBy(arena);
+              final pixelRatio = 1 / MediaQuery.devicePixelRatioOf(context);
+              widget.onEvent?.call(
+                MapEventClick(
+                  point: latLng.toGeographic(),
+                  screenPoint: screenLocation.toOffset() / pixelRatio,
+                ),
+              );
+              return true;
+            }),
+          ),
+        ),
+      )
+      ..addOnMapLongClickListener(
+        jni.MapLibreMap$OnMapLongClickListener.implement(
+          jni.$MapLibreMap$OnMapLongClickListener(
+            onMapLongClick: (latLng) => using((arena) {
+              latLng.releasedBy(arena);
+              final screenLocation = _jProjection.toScreenLocation(latLng)
+                ..releasedBy(arena);
+              final pixelRatio = 1 / MediaQuery.devicePixelRatioOf(context);
+              widget.onEvent?.call(
+                MapEventLongClick(
+                  point: latLng.toGeographic(),
+                  screenPoint: screenLocation.toOffset() / pixelRatio,
+                ),
+              );
+              return true;
+            }),
+          ),
+        ),
+      )
+      ..addOnCameraMoveListener(
+        jni.MapLibreMap$OnCameraMoveListener.implement(
+          jni.$MapLibreMap$OnCameraMoveListener(
+            onCameraMove: () => using((arena) {
+              final mapCamera = getCamera();
+              setState(() => camera = mapCamera);
+              widget.onEvent?.call(MapEventMoveCamera(camera: mapCamera));
+            }),
+          ),
+        ),
+      )
+      ..addOnCameraIdleListener(
+        jni.MapLibreMap$OnCameraIdleListener.implement(
+          jni.$MapLibreMap$OnCameraIdleListener(
+            onCameraIdle: () => using((arena) {
+              widget.onEvent?.call(const MapEventCameraIdle());
+            }),
+          ),
+        ),
+      )
+      ..addOnCameraMoveStartedListener(
+        jni.MapLibreMap$OnCameraMoveStartedListener.implement(
+          jni.$MapLibreMap$OnCameraMoveStartedListener(
+            onCameraMoveStarted: (reason) => using((arena) {
+              final moveReason = switch (reason) {
+                jni
+                    .MapLibreMap$OnCameraMoveStartedListener
+                    .REASON_API_GESTURE =>
+                  CameraChangeReason.apiGesture,
+                jni
+                    .MapLibreMap$OnCameraMoveStartedListener
+                    .REASON_API_ANIMATION =>
+                  CameraChangeReason.apiAnimation,
+                jni
+                    .MapLibreMap$OnCameraMoveStartedListener
+                    .REASON_DEVELOPER_ANIMATION =>
+                  CameraChangeReason.developerAnimation,
+                _ => null,
+              };
+              if (moveReason == null) return;
+              widget.onEvent?.call(
+                MapEventStartMoveCamera(reason: moveReason),
+              );
+            }),
+          ),
+        ),
+      );
+    setStyle(options.initStyle);
+    widget.onEvent?.call(MapEventMapCreated(mapController: this));
+    widget.onMapCreated?.call(this);
+    setState(() {
+      camera = getCamera();
+      isInitialized = true;
+    });
+  });
 
   @override
   void didUpdateWidget(covariant MapLibreMap oldWidget) {
@@ -129,14 +255,14 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
 
   @override
   void dispose() {
+    _jMap?.release();
     _cachedJProjection?.release();
-    _cachedJMapLibreMap?.release();
     _cachedJLocationComponent?.release();
     super.dispose();
   }
 
   Future<void> _updateOptions(MapLibreMap oldWidget) async => using((arena) {
-    final jMap = _jMapLibreMap;
+    final jMap = _jMap;
     // jMap can be null if the widget rebuilds while the map hasn't been initialized.
     if (jMap == null) return;
 
@@ -188,7 +314,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     double? bearing,
     double? pitch,
   }) async => using((arena) {
-    assert(_jMapLibreMap != null, '_jMapLibreMap needs to be not null.');
+    assert(_jMap != null, '_jMapLibreMap needs to be not null.');
     final cameraPosBuilder = jni.CameraPosition$Builder()..releasedBy(arena);
     if (center != null) cameraPosBuilder.target(center.toLatLng());
     if (zoom != null) cameraPosBuilder.zoom(zoom);
@@ -200,7 +326,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
       cameraPosition,
     )..releasedBy(arena);
     final completer = Completer<void>();
-    _jMapLibreMap?.moveCamera$1(
+    _jMap?.moveCamera$1(
       cameraUpdate,
       jni.MapLibreMap$CancelableCallback.implement(
         _CameraMovementCallback(WeakReference(completer)),
@@ -219,7 +345,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     double webSpeed = 1.2,
     Duration? webMaxDuration,
   }) async => using((arena) async {
-    final jMap = _jMapLibreMap!;
+    final jMap = _jMap!;
     final cameraPosBuilder = jni.CameraPosition$Builder()..releasedBy(arena);
     if (center != null) cameraPosBuilder.target(center.toLatLng());
     if (zoom != null) cameraPosBuilder.zoom(zoom);
@@ -254,7 +380,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     bool webLinear = false,
     EdgeInsets padding = EdgeInsets.zero,
   }) async => using((arena) async {
-    final jMap = _jMapLibreMap!;
+    final jMap = _jMap!;
     final cameraUpdate = jni.CameraUpdateFactory.newLatLngBounds$3(
       bounds.toJLatLngBounds(arena: arena),
       bearing ?? -1.0,
@@ -277,13 +403,10 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
   });
 
   @override
-  void onStyleLoaded() {
+  void onStyleLoaded(jni.Style jStyle) {
     // We need to refresh the cached style for when the style reloads.
     style?.dispose();
-    final styleCtrl = StyleControllerAndroid._(
-      _jMapLibreMap!.getStyle$1()!,
-      _hostApi,
-    );
+    final styleCtrl = StyleControllerAndroid._(jStyle);
     style = styleCtrl;
 
     widget.onEvent?.call(MapEventStyleLoaded(styleCtrl));
@@ -295,7 +418,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
 
   @override
   MapCamera getCamera() => using((arena) {
-    final jniCamera = _jMapLibreMap!.getCameraPosition()..releasedBy(arena);
+    final jniCamera = _jMap!.getCameraPosition()..releasedBy(arena);
     final jniTarget = jniCamera.target!..releasedBy(arena);
     return MapCamera(
       center: Geographic(
@@ -314,7 +437,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
   ) {
     final features = query.where((f) => f != null).map((f) => f!);
 
-    final gson = Gson();
+    final gson = jni.Gson();
     return features
         .map(
           (feature) => RenderedFeature(
@@ -335,7 +458,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     List<String>? layerIds,
   }) {
     final style = this.style;
-    final map = _jMapLibreMap;
+    final map = _jMap;
     if (style == null || map == null) {
       return [];
     }
@@ -365,7 +488,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     List<String>? layerIds,
   }) {
     final style = this.style;
-    final map = _jMapLibreMap;
+    final map = _jMap;
     if (style == null || map == null) {
       return [];
     }
@@ -402,7 +525,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
 
   @override
   List<QueriedLayer> queryLayers(Offset screenLocation) => using((arena) {
-    if (_jMapLibreMap == null) {
+    if (_jMap == null) {
       throw Exception(
         "queryLayers can't be called before the map is initialized.",
       );
@@ -456,7 +579,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
       // query one layer at a time
       final pixelRatio = MediaQuery.devicePixelRatioOf(context);
       final scaledPoint = (screenLocation * pixelRatio).toJPointF(arena: arena);
-      final jniFeatures = _jMapLibreMap!.queryRenderedFeatures(
+      final jniFeatures = _jMap!.queryRenderedFeatures(
         scaledPoint,
         queryLayerIds,
       )..releasedBy(arena);
@@ -511,7 +634,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     final activationOptionsBuilder =
         jni.LocationComponentActivationOptions.builder(
                 jniContext,
-                style._jniStyle,
+                style._jStyle,
               )
               .locationComponentOptions(locOptions)!
               .useDefaultLocationEngine(true)!
@@ -614,7 +737,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
       // URI
       builder.fromUri(trimmed.toJString()..releasedBy(arena));
     }
-    _jMapLibreMap?.setStyle$3(
+    _jMap?.setStyle$3(
       builder,
       jni.Style$OnStyleLoaded.implement(
         _StyleLoadedCallback(WeakReference(onStyleLoaded)),
@@ -646,10 +769,10 @@ final class _CameraMovementCallback with jni.$MapLibreMap$CancelableCallback {
 final class _StyleLoadedCallback with jni.$Style$OnStyleLoaded {
   const _StyleLoadedCallback(this.weakCallback);
 
-  final WeakReference<VoidCallback> weakCallback;
+  final WeakReference<void Function(jni.Style jStyle)> weakCallback;
 
   @override
   void onStyleLoaded(jni.Style style) {
-    weakCallback.target?.call();
+    weakCallback.target?.call(style);
   }
 }

@@ -86,7 +86,7 @@ android {
 }
 
 ktlint {
-    version = "0.43.2"
+    version = "1.7.1"
     android = true
     ignoreFailures = false
     reporters {
@@ -95,7 +95,7 @@ ktlint {
     }
     dependencies {
         // noinspection GradleDynamicVersion
-        ktlintRuleset("io.nlopez.compose.rules:ktlint:0.4.+")
+        ktlintRuleset("io.nlopez.compose.rules:ktlint:0.4.27")
     }
     filter {
         exclude("**/*.g.kt")

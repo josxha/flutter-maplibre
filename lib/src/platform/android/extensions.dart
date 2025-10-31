@@ -128,12 +128,12 @@ extension ObjectExt on Object {
         value
             .map((e) => e?.toJObject(arena)?..releasedBy(arena))
             .toList(growable: false),
-      )..releasedBy(arena),
-      final String value => value.toJString()..releasedBy(arena),
-      final double value => value.toJDouble()..releasedBy(arena),
+      ),
+      final String value => value.toJString(),
+      final double value => value.toJDouble(),
       // a dart int equals a java long
-      final int value => value.toJLong()..releasedBy(arena),
-      final bool value => value.toJBoolean()..releasedBy(arena),
+      final int value => value.toJLong(),
+      final bool value => value.toJBoolean(),
       _ => throw Exception('Unsupported property type: $runtimeType, $this'),
     };
   }

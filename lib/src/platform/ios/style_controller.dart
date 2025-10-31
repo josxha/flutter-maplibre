@@ -31,7 +31,7 @@ class StyleControllerIos implements StyleController {
         ffiStyleLayer = MLNBackgroundStyleLayer.new$()
           ..initWithIdentifier(layer.id.toNSString())
           ..backgroundColor = NSExpression.expressionWithFormat$1(
-            layer.color.toHexString(alpha: false).toNSString(),
+            layer.color.toHexString().toNSString(),
           );
       case StyleLayerWithSource():
         final ffiSource = _ffiStyle.sourceWithIdentifier(

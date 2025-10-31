@@ -40,6 +40,8 @@ import 'package:jni/jni.dart' as jni$_;
 
 import '../content/Context.dart' as context$_;
 
+import '../view/ViewGroup.dart' as viewgroup$_;
+
 /// from: `android.app.Activity$ScreenCaptureCallback`
 class Activity$ScreenCaptureCallback extends jni$_.JObject {
   @jni$_.internal
@@ -380,7 +382,7 @@ class Activity extends jni$_.JObject {
   /// from: `public void addContentView(android.view.View view, android.view.ViewGroup$LayoutParams layoutParams)`
   void addContentView(
     jni$_.JObject? view,
-    jni$_.JObject? layoutParams,
+    viewgroup$_.ViewGroup$LayoutParams? layoutParams,
   ) {
     final _$view = view?.reference ?? jni$_.jNullReference;
     final _$layoutParams = layoutParams?.reference ?? jni$_.jNullReference;
@@ -6728,7 +6730,7 @@ class Activity extends jni$_.JObject {
   /// from: `public void setContentView(android.view.View view, android.view.ViewGroup$LayoutParams layoutParams)`
   void setContentView$1(
     jni$_.JObject? view,
-    jni$_.JObject? layoutParams,
+    viewgroup$_.ViewGroup$LayoutParams? layoutParams,
   ) {
     final _$view = view?.reference ?? jni$_.jNullReference;
     final _$layoutParams = layoutParams?.reference ?? jni$_.jNullReference;
