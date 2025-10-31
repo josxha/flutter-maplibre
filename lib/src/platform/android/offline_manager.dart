@@ -29,11 +29,10 @@ class OfflineManagerAndroid implements OfflineManager {
   @override
   Future<List<OfflineRegion>> mergeOfflineRegions({
     required String path,
-  }) async {
-    final jPath = JString.fromString(path);
+  }) async => using((arena) async {
     final completer = Completer<List<OfflineRegion>>();
     _jManager.mergeOfflineRegions(
-      jPath,
+      path.toJString()..releasedBy(arena),
       jni.OfflineManager$MergeOfflineRegionsCallback.implement(
         jni.$OfflineManager$MergeOfflineRegionsCallback(
           onMerge: (jRegions) {
@@ -55,9 +54,8 @@ class OfflineManagerAndroid implements OfflineManager {
         ),
       ),
     );
-    jPath.release();
     return completer.future;
-  }
+  });
 
   @override
   Future<OfflineRegion> getOfflineRegion({required int regionId}) async {
@@ -207,13 +205,11 @@ class OfflineManagerAndroid implements OfflineManager {
     required double maxZoom,
     required double pixelDensity,
     Map<String, Object?> metadata = const {},
-  }) {
+  }) => using((arena) {
     final stream = StreamController<DownloadProgress>();
-    final jMapStyleUrl = mapStyleUrl.toJString();
-    final jBounds = bounds.toLatLngBounds();
     final jDefinition = jni.OfflineTilePyramidRegionDefinition(
-      jMapStyleUrl,
-      jBounds,
+      mapStyleUrl.toJString()..releasedBy(arena),
+      bounds.toJLatLngBounds(arena: arena),
       minZoom,
       maxZoom,
       pixelDensity,
@@ -221,18 +217,20 @@ class OfflineManagerAndroid implements OfflineManager {
 
     // convert the Map to a Java byte Array
     final metadataJson = jsonEncode(metadata);
-    final jMetadata = JByteArray.from(utf8.encode(metadataJson));
 
     _jManager.createOfflineRegion(
-      jDefinition.as(jni.OfflineRegionDefinition.type),
-      jMetadata,
+      jDefinition.as(jni.OfflineRegionDefinition.type)..releasedBy(arena),
+      JByteArray.from(utf8.encode(metadataJson))
+        ..releasedBy(arena),
       jni.OfflineManager$CreateOfflineRegionCallback.implement(
         jni.$OfflineManager$CreateOfflineRegionCallback(
           onCreate: (jRegion) {
+            jRegion.releasedBy(arena);
             final region = jRegion.toOfflineRegion();
             final jObserver = jni.OfflineRegion$OfflineRegionObserver.implement(
               jni.$OfflineRegion$OfflineRegionObserver(
                 onStatusChanged: (status) {
+                  status.releasedBy(arena);
                   if (!stream.isClosed) {
                     stream.add(
                       DownloadProgress(
@@ -275,7 +273,7 @@ class OfflineManagerAndroid implements OfflineManager {
                 mapboxTileCountLimitExceeded$async: true,
                 onStatusChanged$async: true,
               ),
-            );
+            )..releasedBy(arena);
             jRegion.setObserver(jObserver);
             jRegion.setDownloadState(jni.OfflineRegion.STATE_ACTIVE);
           },
@@ -283,10 +281,8 @@ class OfflineManagerAndroid implements OfflineManager {
           onError$async: true,
           onCreate$async: true,
         ),
-      ),
+      )..releasedBy(arena),
     );
-    jMapStyleUrl.release();
-    jBounds.release();
     return stream.stream;
-  }
+  });
 }
