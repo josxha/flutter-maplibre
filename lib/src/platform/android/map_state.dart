@@ -205,7 +205,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative
         jni.MapLibreMap$OnCameraIdleListener.implement(
           jni.$MapLibreMap$OnCameraIdleListener(
             onCameraIdle: () => using((arena) {
-              widget.onEvent?.call(const MapEventIdle());
+              widget.onEvent?.call(const MapEventCameraIdle());
             }),
           ),
         ),
