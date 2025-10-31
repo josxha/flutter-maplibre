@@ -8,7 +8,8 @@ body:
     attributes:
       label: Platforms
       description: On what platforms does the bug happen?
-      options: [ "Please Select", "Android", "iOS", "Web", "MacOS", "Windows", "Linux", "Multiple" ]
+      placeholder: "Please Select"
+      options: [ "Android", "iOS", "Web", "MacOS", "Windows", "Linux", "All" ]
     validations:
       required: true
   - type: input
