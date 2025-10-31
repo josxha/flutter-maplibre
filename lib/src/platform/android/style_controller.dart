@@ -2,9 +2,9 @@ part of 'map_state.dart';
 
 /// Android specific implementation of the [StyleController].
 class StyleControllerAndroid implements StyleController {
-  const StyleControllerAndroid._(this._jniStyle);
+  const StyleControllerAndroid._(this._jStyle);
 
-  final jni.Style _jniStyle;
+  final jni.Style _jStyle;
 
   @override
   Future<void> addLayer(StyleLayer layer, {String? belowLayerId}) async =>
@@ -78,9 +78,9 @@ class StyleControllerAndroid implements StyleController {
 
         // add to style
         if (belowLayerId == null) {
-          _jniStyle.addLayer(jLayer);
+          _jStyle.addLayer(jLayer);
         } else {
-          _jniStyle.addLayerBelow(jLayer, belowLayerId.toJString());
+          _jStyle.addLayerBelow(jLayer, belowLayerId.toJString());
         }
       });
 
@@ -157,16 +157,16 @@ class StyleControllerAndroid implements StyleController {
         );
     }
     jSource.releasedBy(arena);
-    _jniStyle.addSource(jSource);
+    _jStyle.addSource(jSource);
   });
 
   @override
   Future<void> removeLayer(String id) async =>
-      _jniStyle.removeLayer(id.toJString());
+      _jStyle.removeLayer(id.toJString());
 
   @override
   Future<void> removeSource(String id) async =>
-      _jniStyle.removeSource(id.toJString());
+      _jStyle.removeSource(id.toJString());
 
   @override
   Future<void> addImage(String id, Uint8List bytes) async {
@@ -176,14 +176,14 @@ class StyleControllerAndroid implements StyleController {
 
   @override
   Future<void> removeImage(String id) async =>
-      _jniStyle.removeImage(id.toJString());
+      _jStyle.removeImage(id.toJString());
 
   @override
   Future<void> updateGeoJsonSource({
     required String id,
     required String data,
   }) async {
-    final source = _jniStyle.getSourceAs(
+    final source = _jStyle.getSourceAs(
       id.toJString(),
       T: jni.GeoJsonSource.type,
     )!;
@@ -196,7 +196,7 @@ class StyleControllerAndroid implements StyleController {
   @override
   List<String> getAttributionsSync() => using((arena) {
     try {
-      final jSources = _jniStyle.getSources()..releasedBy(arena);
+      final jSources = _jStyle.getSources()..releasedBy(arena);
       final attributions = <String>[];
       for (final jSource in jSources) {
         final jAttribution = jSource?.getAttribution();
@@ -214,7 +214,7 @@ class StyleControllerAndroid implements StyleController {
 
   @override
   List<String> getLayerIds() {
-    final layers = _jniStyle.getLayers();
+    final layers = _jStyle.getLayers();
     return layers
         .map((e) => e?.getId().toDartString(releaseOriginal: true))
         .nonNulls
@@ -223,10 +223,10 @@ class StyleControllerAndroid implements StyleController {
 
   @override
   void dispose() {
-    if (!_jniStyle.isReleased) _jniStyle.release();
+    if (!_jStyle.isReleased) _jStyle.release();
   }
 
-  JList<jni.Layer?> _getLayers() => _jniStyle.getLayers();
+  JList<jni.Layer?> _getLayers() => _jStyle.getLayers();
 
   @override
   void setProjection(MapProjection projection) {

@@ -18,7 +18,7 @@ final class FlutterApi with jni.$FlutterApi {
 
     final view = jni.FrameLayout(jContext);
     Registry.platformViews[viewId] = view;
-    return jni.PlatformView.implement(
+    final platformView = jni.PlatformView.implement(
       jni.$PlatformView(
         getView: () => view,
         onFlutterViewAttached: (view) {},
@@ -27,6 +27,8 @@ final class FlutterApi with jni.$FlutterApi {
         onInputConnectionLocked: () {},
         onInputConnectionUnlocked: () {},
       ),
-    )..releasedBy(arena);
+    );
+    print('#6');
+    return platformView;
   });
 }

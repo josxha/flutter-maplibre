@@ -20,7 +20,8 @@ part 'style_controller.dart';
 
 /// The implementation that gets used for state of the [MapLibreMap] widget on
 /// android using JNI and Pigeon as a fallback.
-final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
+final class MapLibreMapStateAndroid extends MapLibreMapStateNative
+    with jni.$OnMapReadyCallback, jni.$Style$OnStyleLoaded {
   late final int _viewId;
   jni.MapLibreMap? _jMap;
   jni.Projection? _cachedJProjection;
@@ -101,7 +102,9 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
         };
         return viewController
           ..addOnPlatformViewCreatedListener((id) {
+            print('#8');
             params.onPlatformViewCreated(id);
+            print('#9');
             _onPlatformViewCreated(id);
           })
           ..create();
@@ -142,25 +145,41 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
       ..tiltGesturesEnabled(options.gestures.pitch)
       ..camera(cameraBuilder.build()..releasedBy(arena));
     final mapView = jni.MapView.new$4(jContext, jMapOptions);
-    mapView.getMapAsync(
-      jni.OnMapReadyCallback.implement(
-        jni.$OnMapReadyCallback(
-          onMapReady: (mapLibreMap) {
-            print('onMapReady called for viewId $_viewId');
-          },
+    mapView.getMapAsync(jni.OnMapReadyCallback.implement(this));
+    _platformView.addView(mapView);
+  });
+
+  @override
+  void onMapReady(jni.MapLibreMap jMap) => using((arena) {
+    print('#20');
+    _jMap = jMap
+      ..addOnMapClickListener(
+        jni.MapLibreMap$OnMapClickListener.implement(
+          jni.$MapLibreMap$OnMapClickListener(
+            onMapClick: (latLng) => using((arena) {
+              latLng.releasedBy(arena);
+              final screenLocation = _jProjection.toScreenLocation(latLng)
+                ..releasedBy(arena);
+              widget.onEvent?.call(
+                MapEventClick(
+                  point: latLng.toGeographic(),
+                  screenPoint: screenLocation.toOffset(),
+                ),
+              );
+              return true;
+            }),
+          ),
         ),
-      )..releasedBy(arena),
+      );
+    final style = jni.Style$Builder().fromUrl(
+      options.initStyle.toJString()..releasedBy(arena),
     );
-    mapView.getMapAsync(
-      jni.OnMapReadyCallback.implement(
-        jni.$OnMapReadyCallback(
-          onMapReady: (mapLibreMap) {
-            _jMap = mapLibreMap;
-          },
-        ),
+    jMap.setStyle$3(
+      style,
+      jni.Style$OnStyleLoaded.implement(
+        _StyleLoadedCallback(WeakReference(onStyleLoaded)),
       ),
     );
-    _platformView.addView(mapView);
   });
 
   @override
@@ -320,10 +339,10 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
   });
 
   @override
-  void onStyleLoaded() {
+  void onStyleLoaded(jni.Style jStyle) {
     // We need to refresh the cached style for when the style reloads.
     style?.dispose();
-    final styleCtrl = StyleControllerAndroid._(_jMap!.getStyle$1()!);
+    final styleCtrl = StyleControllerAndroid._(jStyle);
     style = styleCtrl;
 
     widget.onEvent?.call(MapEventStyleLoaded(styleCtrl));
@@ -551,7 +570,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     final activationOptionsBuilder =
         jni.LocationComponentActivationOptions.builder(
                 jniContext,
-                style._jniStyle,
+                style._jStyle,
               )
               .locationComponentOptions(locOptions)!
               .useDefaultLocationEngine(true)!
@@ -686,10 +705,10 @@ final class _CameraMovementCallback with jni.$MapLibreMap$CancelableCallback {
 final class _StyleLoadedCallback with jni.$Style$OnStyleLoaded {
   const _StyleLoadedCallback(this.weakCallback);
 
-  final WeakReference<VoidCallback> weakCallback;
+  final WeakReference<void Function(jni.Style jStyle)> weakCallback;
 
   @override
   void onStyleLoaded(jni.Style style) {
-    weakCallback.target?.call();
+    weakCallback.target?.call(style);
   }
 }
