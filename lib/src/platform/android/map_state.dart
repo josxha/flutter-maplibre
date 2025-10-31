@@ -23,6 +23,7 @@ part 'style_controller.dart';
 final class MapLibreMapStateAndroid extends MapLibreMapStateNative
     with jni.$OnMapReadyCallback, jni.$Style$OnStyleLoaded {
   late final int _viewId;
+  late final jni.MapView _mapView;
   jni.MapLibreMap? _jMap;
   jni.Projection? _cachedJProjection;
   jni.LocationComponent? _cachedJLocationComponent;
@@ -128,6 +129,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative
       ..attributionEnabled(false)
       ..logoEnabled(false)
       ..compassEnabled(false)
+      // TODO: textureMode comes at a significant performance penalty, https://maplibre.org/maplibre-native/android/api/-map-libre%20-native%20-android/org.maplibre.android.maps/-map-libre-map-options/texture-mode.html
       ..textureMode(options.androidTextureMode)
       ..foregroundLoadColor(options.androidForegroundLoadColor.toARGB32())
       ..translucentTextureSurface(options.androidTranslucentTextureSurface)
@@ -142,9 +144,9 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative
       ..quickZoomGesturesEnabled(options.gestures.zoom)
       ..tiltGesturesEnabled(options.gestures.pitch)
       ..camera(cameraBuilder.build()..releasedBy(arena));
-    final mapView = jni.MapView.new$4(jContext, jMapOptions);
-    mapView.getMapAsync(jni.OnMapReadyCallback.implement(this));
-    _platformView.addView(mapView);
+    _mapView = jni.MapView.new$4(jContext, jMapOptions)
+      ..getMapAsync(jni.OnMapReadyCallback.implement(this));
+    _platformView.addView(_mapView);
   });
 
   @override
@@ -157,10 +159,11 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative
               latLng.releasedBy(arena);
               final screenLocation = _jProjection.toScreenLocation(latLng)
                 ..releasedBy(arena);
+              final pixelRatio = 1 / MediaQuery.devicePixelRatioOf(context);
               widget.onEvent?.call(
                 MapEventClick(
                   point: latLng.toGeographic(),
-                  screenPoint: screenLocation.toOffset(),
+                  screenPoint: screenLocation.toOffset() / pixelRatio,
                 ),
               );
               return true;
@@ -175,10 +178,11 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative
               latLng.releasedBy(arena);
               final screenLocation = _jProjection.toScreenLocation(latLng)
                 ..releasedBy(arena);
+              final pixelRatio = 1 / MediaQuery.devicePixelRatioOf(context);
               widget.onEvent?.call(
                 MapEventLongClick(
                   point: latLng.toGeographic(),
-                  screenPoint: screenLocation.toOffset(),
+                  screenPoint: screenLocation.toOffset() / pixelRatio,
                 ),
               );
               return true;
@@ -233,16 +237,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative
           ),
         ),
       );
-    // TODO cover all style cases (like JSON, asset, file)
-    final style = jni.Style$Builder().fromUrl(
-      options.initStyle.toJString()..releasedBy(arena),
-    );
-    jMap.setStyle$3(
-      style,
-      jni.Style$OnStyleLoaded.implement(
-        _StyleLoadedCallback(WeakReference(onStyleLoaded)),
-      ),
-    );
+    setStyle(options.initStyle);
     widget.onEvent?.call(MapEventMapCreated(mapController: this));
     widget.onMapCreated?.call(this);
     setState(() {

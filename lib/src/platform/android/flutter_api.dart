@@ -28,7 +28,6 @@ final class FlutterApi with jni.$FlutterApi {
         onInputConnectionUnlocked: () {},
       ),
     );
-    print('#6');
     return platformView;
   });
 }

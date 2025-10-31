@@ -169,10 +169,19 @@ class StyleControllerAndroid implements StyleController {
       _jStyle.removeSource(id.toJString());
 
   @override
-  Future<void> addImage(String id, Uint8List bytes) async {
-    // TODO: use JNI for this method
-    // _hostApi.addImage(id, bytes);
-  }
+  Future<void> addImage(String id, Uint8List bytes) async => using((arena) {
+    final jId = id.toJString()..releasedBy(arena);
+    final jBitmap = jni.BitmapFactory.decodeByteArray(
+      JByteArray.from(bytes)
+        ..releasedBy(arena)
+        ..releasedBy(arena),
+      0,
+      bytes.length,
+    );
+    if (jBitmap == null) return;
+    jBitmap.releasedBy(arena);
+    _jStyle.addImage(jId, jBitmap);
+  });
 
   @override
   Future<void> removeImage(String id) async =>
