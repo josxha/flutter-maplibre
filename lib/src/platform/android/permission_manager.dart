@@ -36,13 +36,7 @@ class PermissionManagerAndroid implements PermissionManager {
   }) async => using((arena) async {
     final completer = Completer<bool>();
     final listener = jni.PermissionsListener.implement(
-      jni.$PermissionsListener(
-        onExplanationNeeded: (permissionsToExplain) {
-          // This method fires when the user gets prompted to accept the permissions.
-          // No not handle the return here, onPermissionResult will still be called.
-        },
-        onPermissionResult: completer.complete,
-      ),
+      _PermissionsListener(WeakReference(completer)),
     )..releasedBy(arena);
     final jActivity = getJActivity(arena);
     jni.PermissionsManager(listener)
@@ -50,4 +44,22 @@ class PermissionManagerAndroid implements PermissionManager {
       ..requestLocationPermissions(jActivity);
     return completer.future;
   });
+}
+
+final class _PermissionsListener with jni.$PermissionsListener {
+  const _PermissionsListener(this.weakCompleter);
+
+  final WeakReference<Completer<bool>> weakCompleter;
+
+  @override
+  void onExplanationNeeded(JList<JString?>? permissionsToExplain) {
+    // This method fires when the user gets prompted to accept the permissions.
+    // No not handle the return here, onPermissionResult will still be called.
+  }
+
+  @override
+  void onPermissionResult(bool result) {
+    weakCompleter.target?.complete(result);
+  }
+
 }

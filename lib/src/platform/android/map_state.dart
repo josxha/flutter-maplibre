@@ -203,15 +203,10 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     _jMapLibreMap?.moveCamera$1(
       cameraUpdate,
       jni.MapLibreMap$CancelableCallback.implement(
-        jni.$MapLibreMap$CancelableCallback(
-          onCancel: () =>
-              completer.completeError(Exception('Animation cancelled.')),
-          onFinish: completer.complete,
-          onCancel$async: true,
-          onFinish$async: true,
-        ),
+        _CameraMovementCallback(WeakReference(completer)),
       )..releasedBy(arena),
     );
+    return completer.future;
   });
 
   @override
@@ -240,13 +235,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
       cameraUpdate,
       nativeDuration.inMilliseconds,
       jni.MapLibreMap$CancelableCallback.implement(
-        jni.$MapLibreMap$CancelableCallback(
-          onCancel: () =>
-              completer.completeError(Exception('Animation cancelled.')),
-          onFinish: completer.complete,
-          onFinish$async: true,
-          onCancel$async: true,
-        ),
+        _CameraMovementCallback(WeakReference(completer)),
       )..releasedBy(arena),
     );
     return completer.future;
@@ -281,13 +270,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
       cameraUpdate,
       nativeDuration.inMilliseconds,
       jni.MapLibreMap$CancelableCallback.implement(
-        jni.$MapLibreMap$CancelableCallback(
-          onCancel: () =>
-              completer.completeError(Exception('Animation cancelled.')),
-          onFinish: completer.complete,
-          onCancel$async: true,
-          onFinish$async: true,
-        ),
+        _CameraMovementCallback(WeakReference(completer)),
       )..releasedBy(arena),
     );
     return completer.future;
@@ -631,10 +614,39 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     _jMapLibreMap?.setStyle$3(
       builder,
       jni.Style$OnStyleLoaded.implement(
-        jni.$Style$OnStyleLoaded(
-          onStyleLoaded: (style) => onStyleLoaded(),
-        ),
+        _StyleLoadedCallback(WeakReference(onStyleLoaded)),
       )..releasedBy(arena),
     );
   });
+}
+
+final class _CameraMovementCallback with jni.$MapLibreMap$CancelableCallback {
+  const _CameraMovementCallback(this.weakCompleter);
+
+  final WeakReference<Completer<void>> weakCompleter;
+
+  @override
+  void onCancel() => weakCompleter.target?.completeError(
+    Exception('Map camera movement cancelled.'),
+  );
+
+  @override
+  void onFinish() => weakCompleter.target?.complete();
+
+  @override
+  bool get onCancel$async => true;
+
+  @override
+  bool get onFinish$async => true;
+}
+
+final class _StyleLoadedCallback with jni.$Style$OnStyleLoaded {
+  const _StyleLoadedCallback(this.weakCallback);
+
+  final WeakReference<VoidCallback> weakCallback;
+
+  @override
+  void onStyleLoaded(jni.Style style) {
+    weakCallback.target?.call();
+  }
 }
