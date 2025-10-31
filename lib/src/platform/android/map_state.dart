@@ -12,9 +12,6 @@ import 'package:maplibre/src/layer/layer_manager.dart';
 import 'package:maplibre/src/platform/android/extensions.dart';
 import 'package:maplibre/src/platform/android/functions.dart';
 import 'package:maplibre/src/platform/android/jni.dart' as jni;
-import 'package:maplibre/src/platform/android/jni/com/google/gson/Gson.dart';
-import 'package:maplibre/src/platform/android/jni/org/maplibre/geojson/Feature.dart'
-    as jni;
 import 'package:maplibre/src/platform/map_state_native.dart';
 import 'package:maplibre/src/platform/pigeon.g.dart' as pigeon;
 
@@ -22,7 +19,9 @@ part 'style_controller.dart';
 
 /// The implementation that gets used for state of the [MapLibreMap] widget on
 /// android using JNI and Pigeon as a fallback.
-final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
+final class MapLibreMapStateAndroid extends MapLibreMapStateNative
+    with jni.$FlutterApi, jni.$PlatformView {
+  late final jni.FrameLayout _platformView;
   late final pigeon.MapLibreHostApi _hostApi;
   late final int _viewId;
   jni.MapLibreMap? _cachedJMapLibreMap;
@@ -44,6 +43,24 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
   @override
   Widget buildPlatformWidget(BuildContext context) {
     const viewType = 'plugins.flutter.io/maplibre';
+    jni.MapLibreRegistry.INSTANCE.setFlutterApi(jni.FlutterApi.implement(this));
+    final jContext = getJContext();
+    _platformView = jni.FrameLayout(jContext);
+    final jMapOptions = jni.MapLibreMapOptions()
+      ..minZoomPreference(options.minZoom)
+      ..maxZoomPreference(options.maxZoom)
+      ..minPitchPreference(options.minPitch)
+      ..maxPitchPreference(options.maxPitch);
+    final mapView = jni.MapView.new$4(jContext, jMapOptions);
+    mapView.getMapAsync(
+      jni.OnMapReadyCallback.implement(
+        jni.$OnMapReadyCallback(
+          onMapReady: (mapLibreMap) {},
+        ),
+      ),
+    );
+    _platformView.addView(mapView);
+
     final mode = options.androidMode;
     if (mode == AndroidPlatformViewMode.tlhc_vd) {
       return AndroidView(
@@ -314,7 +331,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
   ) {
     final features = query.where((f) => f != null).map((f) => f!);
 
-    final gson = Gson();
+    final gson = jni.Gson();
     return features
         .map(
           (feature) => RenderedFeature(
@@ -621,6 +638,28 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
       )..releasedBy(arena),
     );
   });
+
+  @override
+  jni.PlatformView createPlatformView() => using((arena) {
+    // MapLibre.getInstance needs to be called before creating the map.
+    jni.MapLibre.getInstance(getJContext(arena));
+    return jni.PlatformView.implement(this)..releasedBy(arena);
+  });
+
+  @override
+  JObject? getView() => _platformView;
+
+  @override
+  void onFlutterViewAttached(JObject view) {}
+
+  @override
+  void onFlutterViewDetached() {}
+
+  @override
+  void onInputConnectionLocked() {}
+
+  @override
+  void onInputConnectionUnlocked() {}
 }
 
 final class _CameraMovementCallback with jni.$MapLibreMap$CancelableCallback {

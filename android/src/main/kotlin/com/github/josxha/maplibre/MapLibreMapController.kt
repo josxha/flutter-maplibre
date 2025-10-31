@@ -1,6 +1,9 @@
 package com.github.josxha.maplibre
 
-// if imports can't resolve: https://stackoverflow.com/a/65903576/9439899
+// if imports can't resolve:
+// - remove all .idea/ folders
+// - open example/android/build.gradle.kts as project
+// - sync project to download dependencies
 
 import CameraChangeReason
 import LngLat

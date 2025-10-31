@@ -19,4 +19,6 @@ object MapLibreRegistry {
     ) {
         mapRegistry[viewId] = map
     }
+
+    public var flutterApi: FlutterApi? = null
 }

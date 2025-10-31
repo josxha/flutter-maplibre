@@ -41,6 +41,8 @@ import 'package:jni/jni.dart' as jni$_;
 import '../../../../org/maplibre/android/maps/MapLibreMap.dart'
     as maplibremap$_;
 
+import 'FlutterApi.dart' as flutterapi$_;
+
 /// from: `com.github.josxha.maplibre.MapLibreRegistry`
 class MapLibreRegistry extends jni$_.JObject {
   @jni$_.internal
@@ -142,6 +144,73 @@ class MapLibreRegistry extends jni$_.JObject {
       _id_addMap as jni$_.JMethodIDPtr,
       i,
       _$mapLibreMap.pointer,
+    ).check();
+  }
+
+  static final _id_getFlutterApi = _class.instanceMethodId(
+    r'getFlutterApi',
+    r'()Lcom/github/josxha/maplibre/FlutterApi;',
+  );
+
+  static final _getFlutterApi =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public final com.github.josxha.maplibre.FlutterApi getFlutterApi()`
+  /// The returned object must be released after use, by calling the [release] method.
+  flutterapi$_.FlutterApi? getFlutterApi() {
+    return _getFlutterApi(
+      reference.pointer,
+      _id_getFlutterApi as jni$_.JMethodIDPtr,
+    ).object<flutterapi$_.FlutterApi?>(
+      const flutterapi$_.$FlutterApi$NullableType(),
+    );
+  }
+
+  static final _id_setFlutterApi = _class.instanceMethodId(
+    r'setFlutterApi',
+    r'(Lcom/github/josxha/maplibre/FlutterApi;)V',
+  );
+
+  static final _setFlutterApi =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public final void setFlutterApi(com.github.josxha.maplibre.FlutterApi flutterApi)`
+  void setFlutterApi(
+    flutterapi$_.FlutterApi? flutterApi,
+  ) {
+    final _$flutterApi = flutterApi?.reference ?? jni$_.jNullReference;
+    _setFlutterApi(
+      reference.pointer,
+      _id_setFlutterApi as jni$_.JMethodIDPtr,
+      _$flutterApi.pointer,
     ).check();
   }
 }
