@@ -446,11 +446,13 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
         jSourceLayer = layer.getSourceLayer();
       }
       if (jLayerId == null) continue; // ignore all other layers
+      jLayerId.releasedBy(arena);
+      jSourceId.releasedBy(arena);
+      jSourceLayer.releasedBy(arena);
 
       final queryLayerIds = JArray<JString?>(JString.nullableType, 1)
         ..releasedBy(arena)
-        ..[0] = jLayerId
-        ..releasedBy(arena);
+        ..[0] = jLayerId;
       // query one layer at a time
       final pixelRatio = MediaQuery.devicePixelRatioOf(context);
       final scaledPoint = (screenLocation * pixelRatio).toJPointF(arena: arena);
@@ -459,10 +461,10 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
         queryLayerIds,
       )..releasedBy(arena);
       if (jniFeatures.isEmpty) continue; // layer hasn't been clicked if empty
-      final sourceLayer = jSourceLayer.toDartString(releaseOriginal: true);
+      final sourceLayer = jSourceLayer.toDartString();
       final queriedLayer = QueriedLayer(
-        layerId: jLayerId.toDartString(releaseOriginal: true),
-        sourceId: jSourceId.toDartString(releaseOriginal: true),
+        layerId: jLayerId.toDartString(),
+        sourceId: jSourceId.toDartString(),
         sourceLayer: sourceLayer.isEmpty ? null : sourceLayer,
       );
       queriedLayers.add(queriedLayer);
