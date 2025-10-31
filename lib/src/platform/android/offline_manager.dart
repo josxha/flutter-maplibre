@@ -152,7 +152,7 @@ class OfflineManagerAndroid implements OfflineManager {
       jDefinition.as(jni.OfflineRegionDefinition.type)..releasedBy(arena),
       JByteArray.from(utf8.encode(metadataJson))..releasedBy(arena),
       jni.OfflineManager$CreateOfflineRegionCallback.implement(
-        _CreateOfflineRegionCallback(WeakReference(stream)),
+        _CreateOfflineRegionCallback(stream, arena),
       )..releasedBy(arena),
     );
     return stream.stream;
@@ -292,24 +292,27 @@ final class _ListOfflineRegionsCallback
 
 final class _CreateOfflineRegionCallback
     with jni.$OfflineManager$CreateOfflineRegionCallback {
-  const _CreateOfflineRegionCallback(this.weakStream);
+  const _CreateOfflineRegionCallback(this.stream, this.arena);
 
-  final WeakReference<StreamController<DownloadProgress>> weakStream;
+  final StreamController<DownloadProgress> stream;
+  final Arena arena;
 
   @override
-  void onCreate(jni.OfflineRegion jRegion) => using((arena) {
+  void onCreate(jni.OfflineRegion jRegion) {
     jRegion.releasedBy(arena);
-    final stream = weakStream.target;
-    if (stream == null) return;
     final jObserver = jni.OfflineRegion$OfflineRegionObserver.implement(
-      _OfflineRegionObserver(WeakReference(stream), WeakReference(jRegion)),
+      _OfflineRegionObserver(
+        stream,
+        WeakReference(jRegion),
+        arena,
+      ),
     )..releasedBy(arena);
     jRegion.setObserver(jObserver);
     jRegion.setDownloadState(jni.OfflineRegion.STATE_ACTIVE);
-  });
+  }
 
   @override
-  void onError(JString error) => weakStream.target?.addError(Exception(error));
+  void onError(JString error) => stream.addError(Exception(error));
 
   @override
   bool get onCreate$async => true;
@@ -320,17 +323,17 @@ final class _CreateOfflineRegionCallback
 
 final class _OfflineRegionObserver
     with jni.$OfflineRegion$OfflineRegionObserver {
-  const _OfflineRegionObserver(this.weakStream, this.weakJRegion);
+  const _OfflineRegionObserver(this.stream, this.weakJRegion, this.arena);
 
-  final WeakReference<StreamController<DownloadProgress>> weakStream;
+  final StreamController<DownloadProgress> stream;
   final WeakReference<jni.OfflineRegion> weakJRegion;
+  final Arena arena;
 
   @override
-  void onStatusChanged(jni.OfflineRegionStatus jStatus) => using((arena) {
+  void onStatusChanged(jni.OfflineRegionStatus jStatus) {
     jStatus.releasedBy(arena);
-    final stream = weakStream.target;
     final region = weakJRegion.target?.toOfflineRegion();
-    if (stream == null || region == null) return;
+    if (region == null) return;
     if (!stream.isClosed) {
       stream.add(
         DownloadProgress(
@@ -353,23 +356,23 @@ final class _OfflineRegionObserver
       }
       return;
     }
-  });
+  }
 
   @override
-  void onError(jni.OfflineRegionError error) => using((arena) {
+  void onError(jni.OfflineRegionError error) {
     error.releasedBy(arena);
     weakJRegion.target?.setDownloadState(jni.OfflineRegion.STATE_INACTIVE);
-    weakStream.target?.addError(
+    stream.addError(
       Exception(
         error.getMessage().toDartString(releaseOriginal: true),
       ),
     );
-  });
+  }
 
   @override
   void mapboxTileCountLimitExceeded(int limit) {
     weakJRegion.target?.setDownloadState(jni.OfflineRegion.STATE_INACTIVE);
-    weakStream.target?.addError(
+    stream.addError(
       Exception('Tile count limit exceeded: $limit'),
     );
   }
