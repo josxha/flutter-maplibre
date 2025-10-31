@@ -102,9 +102,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative
         };
         return viewController
           ..addOnPlatformViewCreatedListener((id) {
-            print('#8');
             params.onPlatformViewCreated(id);
-            print('#9');
             _onPlatformViewCreated(id);
           })
           ..create();
@@ -151,7 +149,6 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative
 
   @override
   void onMapReady(jni.MapLibreMap jMap) => using((arena) {
-    print('#20');
     _jMap = jMap
       ..addOnMapClickListener(
         jni.MapLibreMap$OnMapClickListener.implement(
@@ -170,7 +167,73 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative
             }),
           ),
         ),
+      )
+      ..addOnMapLongClickListener(
+        jni.MapLibreMap$OnMapLongClickListener.implement(
+          jni.$MapLibreMap$OnMapLongClickListener(
+            onMapLongClick: (latLng) => using((arena) {
+              latLng.releasedBy(arena);
+              final screenLocation = _jProjection.toScreenLocation(latLng)
+                ..releasedBy(arena);
+              widget.onEvent?.call(
+                MapEventLongClick(
+                  point: latLng.toGeographic(),
+                  screenPoint: screenLocation.toOffset(),
+                ),
+              );
+              return true;
+            }),
+          ),
+        ),
+      )
+      ..addOnCameraMoveListener(
+        jni.MapLibreMap$OnCameraMoveListener.implement(
+          jni.$MapLibreMap$OnCameraMoveListener(
+            onCameraMove: () => using((arena) {
+              final mapCamera = getCamera();
+              setState(() => camera = mapCamera);
+              widget.onEvent?.call(MapEventMoveCamera(camera: mapCamera));
+            }),
+          ),
+        ),
+      )
+      ..addOnCameraIdleListener(
+        jni.MapLibreMap$OnCameraIdleListener.implement(
+          jni.$MapLibreMap$OnCameraIdleListener(
+            onCameraIdle: () => using((arena) {
+              widget.onEvent?.call(const MapEventIdle());
+            }),
+          ),
+        ),
+      )
+      ..addOnCameraMoveStartedListener(
+        jni.MapLibreMap$OnCameraMoveStartedListener.implement(
+          jni.$MapLibreMap$OnCameraMoveStartedListener(
+            onCameraMoveStarted: (reason) => using((arena) {
+              final moveReason = switch (reason) {
+                jni
+                    .MapLibreMap$OnCameraMoveStartedListener
+                    .REASON_API_GESTURE =>
+                  CameraChangeReason.apiGesture,
+                jni
+                    .MapLibreMap$OnCameraMoveStartedListener
+                    .REASON_API_ANIMATION =>
+                  CameraChangeReason.apiAnimation,
+                jni
+                    .MapLibreMap$OnCameraMoveStartedListener
+                    .REASON_DEVELOPER_ANIMATION =>
+                  CameraChangeReason.developerAnimation,
+                _ => null,
+              };
+              if (moveReason == null) return;
+              widget.onEvent?.call(
+                MapEventStartMoveCamera(reason: moveReason),
+              );
+            }),
+          ),
+        ),
       );
+    // TODO cover all style cases (like JSON, asset, file)
     final style = jni.Style$Builder().fromUrl(
       options.initStyle.toJString()..releasedBy(arena),
     );
@@ -180,6 +243,12 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative
         _StyleLoadedCallback(WeakReference(onStyleLoaded)),
       ),
     );
+    widget.onEvent?.call(MapEventMapCreated(mapController: this));
+    widget.onMapCreated?.call(this);
+    setState(() {
+      camera = getCamera();
+      isInitialized = true;
+    });
   });
 
   @override
