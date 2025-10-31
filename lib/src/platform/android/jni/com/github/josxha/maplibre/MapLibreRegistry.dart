@@ -38,9 +38,6 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
-import '../../../../org/maplibre/android/maps/MapLibreMap.dart'
-    as maplibremap$_;
-
 import 'FlutterApi.dart' as flutterapi$_;
 
 /// from: `com.github.josxha.maplibre.MapLibreRegistry`
@@ -71,81 +68,6 @@ class MapLibreRegistry extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static MapLibreRegistry get INSTANCE =>
       _id_INSTANCE.get(_class, const $MapLibreRegistry$Type());
-
-  static final _id_getMap = _class.instanceMethodId(
-    r'getMap',
-    r'(I)Lorg/maplibre/android/maps/MapLibreMap;',
-  );
-
-  static final _getMap =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Int32,)>,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-            )
-          >();
-
-  /// from: `public final org.maplibre.android.maps.MapLibreMap getMap(int i)`
-  /// The returned object must be released after use, by calling the [release] method.
-  maplibremap$_.MapLibreMap? getMap(
-    int i,
-  ) {
-    return _getMap(
-      reference.pointer,
-      _id_getMap as jni$_.JMethodIDPtr,
-      i,
-    ).object<maplibremap$_.MapLibreMap?>(
-      const maplibremap$_.$MapLibreMap$NullableType(),
-    );
-  }
-
-  static final _id_addMap = _class.instanceMethodId(
-    r'addMap',
-    r'(ILorg/maplibre/android/maps/MapLibreMap;)V',
-  );
-
-  static final _addMap =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Int32, jni$_.Pointer<jni$_.Void>)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public final void addMap(int i, org.maplibre.android.maps.MapLibreMap mapLibreMap)`
-  void addMap(
-    int i,
-    maplibremap$_.MapLibreMap mapLibreMap,
-  ) {
-    final _$mapLibreMap = mapLibreMap.reference;
-    _addMap(
-      reference.pointer,
-      _id_addMap as jni$_.JMethodIDPtr,
-      i,
-      _$mapLibreMap.pointer,
-    ).check();
-  }
 
   static final _id_getFlutterApi = _class.instanceMethodId(
     r'getFlutterApi',
