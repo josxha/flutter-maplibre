@@ -85,7 +85,7 @@ extension LatLngBounds on jni.LatLngBounds {
       latitudeSouth: latitudeSouth,
       latitudeNorth: latitudeNorth,
     );
-    release();
+    if (releaseOriginal) release();
     return bounds;
   }
 }

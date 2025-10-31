@@ -569,11 +569,13 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
       screenLocations.map(toLngLat).toList(growable: false);
 
   @override
-  Offset toScreenLocation(Geographic lngLat) =>
-      _jProjection
-          .toScreenLocation(lngLat.toLatLng())
-          .toOffset(releaseOriginal: true) /
-      MediaQuery.devicePixelRatioOf(context);
+  Offset toScreenLocation(Geographic lngLat) => using((arena) {
+    final screenLocation = _jProjection.toScreenLocation(
+      lngLat.toLatLng()..releasedBy(arena),
+    )..releasedBy(arena);
+    final pixelRatio = MediaQuery.devicePixelRatioOf(context);
+    return screenLocation.toOffset() / pixelRatio;
+  });
 
   @override
   List<Offset> toScreenLocations(List<Geographic> lngLats) =>
