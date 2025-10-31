@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 /// Extension methods on [Color].
-extension ColorExt on Color {
+extension ColorExtension on Color {
   /// Convert the [Color] object to an hex string without an optional opacity.
   String toHexString({bool hashSign = true, bool alpha = false}) {
     final alphaStr = (a * 255).toInt().toRadixString(16).padLeft(2, '0');

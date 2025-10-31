@@ -1,4 +1,13 @@
-# 0.3.0
+## 0.3.1
+
+### New Features
+
+### Bug Fixes
+
+Full
+Changelog: [v0.3.0...v0.3.1](https://github.com/josxha/flutter-maplibre/compare/v0.3.0...v0.3.1)
+
+## 0.3.0
 
 In this release, I'm blazed to finally announce support for iOS.
 Similar to our other platforms, iOS uses FFI to natively interop between Dart
