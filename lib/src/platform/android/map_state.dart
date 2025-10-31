@@ -450,7 +450,6 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
       final queryLayerIds = JArray<JString?>(JString.nullableType, 1)
         ..releasedBy(arena)
         ..[0] = jLayerId
-        ..releasedBy(arena)
         ..releasedBy(arena);
       // query one layer at a time
       final pixelRatio = MediaQuery.devicePixelRatioOf(context);
