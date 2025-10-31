@@ -1,3 +1,5 @@
+export 'jni/android/app/_package.dart';
+export 'jni/android/content/_package.dart';
 export 'jni/android/graphics/_package.dart';
 export 'jni/android/location/_package.dart';
 export 'jni/com/github/josxha/maplibre/_package.dart';

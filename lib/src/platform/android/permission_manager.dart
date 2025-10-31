@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:jni/jni.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/platform/android/extensions.dart';
+import 'package:maplibre/src/platform/android/functions.dart';
 import 'package:maplibre/src/platform/android/jni.dart' as jni;
 
 /// MapLibre Android specific implementation of the [PermissionManager].
@@ -13,22 +13,22 @@ class PermissionManagerAndroid implements PermissionManager {
   PermissionManagerAndroid();
 
   @override
-  bool get locationPermissionsGranted => using((arena) {
-    final jContext = Jni.getCachedApplicationContext().toJObject(arena);
-    return jni.PermissionsManager.areLocationPermissionsGranted(jContext);
-  });
+  bool get locationPermissionsGranted => using(
+    (arena) => jni.PermissionsManager.areLocationPermissionsGranted(
+      getJContext(arena),
+    ),
+  );
 
   @override
   bool get runtimePermissionsRequired =>
       jni.PermissionsManager.areRuntimePermissionsRequired();
 
   @override
-  bool get backgroundLocationPermissionGranted => using((arena) {
-    final jContext = Jni.getCachedApplicationContext().toJObject(arena);
-    return jni.PermissionsManager.isBackgroundLocationPermissionGranted(
-      jContext,
-    );
-  });
+  bool get backgroundLocationPermissionGranted => using(
+    (arena) => jni.PermissionsManager.isBackgroundLocationPermissionGranted(
+      getJContext(arena),
+    ),
+  );
 
   @override
   Future<bool> requestLocationPermissions({
@@ -44,7 +44,7 @@ class PermissionManagerAndroid implements PermissionManager {
         onPermissionResult: completer.complete,
       ),
     )..releasedBy(arena);
-    final jActivity = Jni.getApplicationClassLoader().toJObject(arena);
+    final jActivity = getJActivity(arena);
     jni.PermissionsManager(listener)
       ..releasedBy(arena)
       ..requestLocationPermissions(jActivity);

@@ -38,6 +38,8 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
+import '../../../../../android/content/Context.dart' as context$_;
+
 import '../MapLibreMap.dart' as maplibremap$_;
 
 /// from: `org.maplibre.android.maps.widgets.CompassView`
@@ -90,7 +92,7 @@ class CompassView extends jni$_.JObject {
   /// from: `public void <init>(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
   factory CompassView(
-    jni$_.JObject context,
+    context$_.Context context,
   ) {
     final _$context = context.reference;
     return CompassView.fromReference(
@@ -130,7 +132,7 @@ class CompassView extends jni$_.JObject {
   /// from: `public void <init>(android.content.Context context, android.util.AttributeSet attributeSet)`
   /// The returned object must be released after use, by calling the [release] method.
   factory CompassView.new$1(
-    jni$_.JObject context,
+    context$_.Context context,
     jni$_.JObject? attributeSet,
   ) {
     final _$context = context.reference;
@@ -178,7 +180,7 @@ class CompassView extends jni$_.JObject {
   /// from: `public void <init>(android.content.Context context, android.util.AttributeSet attributeSet, int i)`
   /// The returned object must be released after use, by calling the [release] method.
   factory CompassView.new$2(
-    jni$_.JObject context,
+    context$_.Context context,
     jni$_.JObject? attributeSet,
     int i,
   ) {

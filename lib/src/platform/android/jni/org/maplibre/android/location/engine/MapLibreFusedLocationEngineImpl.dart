@@ -38,6 +38,8 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
+import '../../../../../android/content/Context.dart' as context$_;
+
 import 'AndroidLocationEngineImpl.dart' as androidlocationengineimpl$_;
 
 import 'LocationEngineCallback.dart' as locationenginecallback$_;
@@ -91,7 +93,7 @@ class MapLibreFusedLocationEngineImpl
   /// from: `public void <init>(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
   factory MapLibreFusedLocationEngineImpl(
-    jni$_.JObject context,
+    context$_.Context context,
   ) {
     final _$context = context.reference;
     return MapLibreFusedLocationEngineImpl.fromReference(

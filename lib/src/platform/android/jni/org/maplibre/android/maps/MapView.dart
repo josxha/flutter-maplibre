@@ -38,6 +38,8 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
+import '../../../../android/content/Context.dart' as context$_;
+
 import 'MapLibreMapOptions.dart' as maplibremapoptions$_;
 
 import 'OnMapReadyCallback.dart' as onmapreadycallback$_;
@@ -6668,7 +6670,7 @@ class MapView extends jni$_.JObject {
   /// from: `public void <init>(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
   factory MapView(
-    jni$_.JObject context,
+    context$_.Context context,
   ) {
     final _$context = context.reference;
     return MapView.fromReference(
@@ -6708,7 +6710,7 @@ class MapView extends jni$_.JObject {
   /// from: `public void <init>(android.content.Context context, android.util.AttributeSet attributeSet)`
   /// The returned object must be released after use, by calling the [release] method.
   factory MapView.new$1(
-    jni$_.JObject context,
+    context$_.Context context,
     jni$_.JObject? attributeSet,
   ) {
     final _$context = context.reference;
@@ -6756,7 +6758,7 @@ class MapView extends jni$_.JObject {
   /// from: `public void <init>(android.content.Context context, android.util.AttributeSet attributeSet, int i)`
   /// The returned object must be released after use, by calling the [release] method.
   factory MapView.new$2(
-    jni$_.JObject context,
+    context$_.Context context,
     jni$_.JObject? attributeSet,
     int i,
   ) {
@@ -6801,7 +6803,7 @@ class MapView extends jni$_.JObject {
   /// from: `public void <init>(android.content.Context context, org.maplibre.android.maps.MapLibreMapOptions mapLibreMapOptions)`
   /// The returned object must be released after use, by calling the [release] method.
   factory MapView.new$3(
-    jni$_.JObject context,
+    context$_.Context context,
     maplibremapoptions$_.MapLibreMapOptions? mapLibreMapOptions,
   ) {
     final _$context = context.reference;

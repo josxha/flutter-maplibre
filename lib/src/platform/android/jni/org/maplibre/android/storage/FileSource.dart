@@ -38,6 +38,8 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
+import '../../../../android/content/Context.dart' as context$_;
+
 import '../util/TileServerOptions.dart' as tileserveroptions$_;
 
 /// from: `org.maplibre.android.storage.FileSource$ResourceTransformCallback`
@@ -640,7 +642,7 @@ class FileSource extends jni$_.JObject {
   /// from: `static public org.maplibre.android.storage.FileSource getInstance(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
   static FileSource? getInstance(
-    jni$_.JObject context,
+    context$_.Context context,
   ) {
     final _$context = context.reference;
     return _getInstance(
@@ -704,7 +706,7 @@ class FileSource extends jni$_.JObject {
 
   /// from: `static public void initializeFileDirsPaths(android.content.Context context)`
   static void initializeFileDirsPaths(
-    jni$_.JObject? context,
+    context$_.Context? context,
   ) {
     final _$context = context?.reference ?? jni$_.jNullReference;
     _initializeFileDirsPaths(
@@ -740,7 +742,7 @@ class FileSource extends jni$_.JObject {
   /// from: `static public java.lang.String getResourcesCachePath(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString getResourcesCachePath(
-    jni$_.JObject context,
+    context$_.Context context,
   ) {
     final _$context = context.reference;
     return _getResourcesCachePath(
@@ -776,7 +778,7 @@ class FileSource extends jni$_.JObject {
   /// from: `static public java.lang.String getInternalCachePath(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? getInternalCachePath(
-    jni$_.JObject context,
+    context$_.Context context,
   ) {
     final _$context = context.reference;
     return _getInternalCachePath(
@@ -819,7 +821,7 @@ class FileSource extends jni$_.JObject {
 
   /// from: `static public void setResourcesCachePath(android.content.Context context, java.lang.String string, org.maplibre.android.storage.FileSource$ResourcesCachePathChangeCallback resourcesCachePathChangeCallback)`
   static void setResourcesCachePath(
-    jni$_.JObject context,
+    context$_.Context context,
     jni$_.JString string,
     FileSource$ResourcesCachePathChangeCallback
     resourcesCachePathChangeCallback,

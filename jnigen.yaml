@@ -14,6 +14,8 @@ source_path:
   - 'android/src/main'
 classes:
 # https://github.com/maplibre/maplibre-native/tree/main/platform/android/MapLibreAndroid/src/main/java/org/maplibre/android
+  - 'android.app.Activity'
+  - 'android.content.Context'
   - 'android.graphics.PointF'
   - 'android.graphics.RectF'
   - 'android.location.Location'

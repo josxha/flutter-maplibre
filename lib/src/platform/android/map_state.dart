@@ -10,10 +10,11 @@ import 'package:jni/jni.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/layer/layer_manager.dart';
 import 'package:maplibre/src/platform/android/extensions.dart';
+import 'package:maplibre/src/platform/android/functions.dart';
 import 'package:maplibre/src/platform/android/jni.dart' as jni;
 import 'package:maplibre/src/platform/android/jni/com/google/gson/Gson.dart';
 import 'package:maplibre/src/platform/android/jni/org/maplibre/geojson/Feature.dart'
-    as jni;
+as jni;
 import 'package:maplibre/src/platform/map_state_native.dart';
 import 'package:maplibre/src/platform/pigeon.g.dart' as pigeon;
 
@@ -57,47 +58,48 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
         return AndroidViewSurface(
           controller: controller as AndroidViewController,
           gestureRecognizers:
-              widget.gestureRecognizers ??
+          widget.gestureRecognizers ??
               const <Factory<OneSequenceGestureRecognizer>>{},
           hitTestBehavior: PlatformViewHitTestBehavior.opaque,
         );
       },
       onCreatePlatformView: (params) {
         final viewController = switch (mode) {
-          // This attempts to use the newest and most efficient platform view
-          // implementation when possible. In cases where that is not
-          // supported, it falls back to using Hybrid Composition, which is
-          // the mode used by initExpensiveAndroidView.
-          // https://api.flutter.dev/flutter/services/PlatformViewsService/initSurfaceAndroidView.html
-          // https://github.com/flutter/flutter/blob/master/docs/platforms/android/Android-Platform-Views.md#selecting-a-mode
+        // This attempts to use the newest and most efficient platform view
+        // implementation when possible. In cases where that is not
+        // supported, it falls back to using Hybrid Composition, which is
+        // the mode used by initExpensiveAndroidView.
+        // https://api.flutter.dev/flutter/services/PlatformViewsService/initSurfaceAndroidView.html
+        // https://github.com/flutter/flutter/blob/master/docs/platforms/android/Android-Platform-Views.md#selecting-a-mode
           AndroidPlatformViewMode.tlhc_hc =>
-            PlatformViewsService.initSurfaceAndroidView(
-              id: params.id,
-              viewType: viewType,
-              layoutDirection: TextDirection.ltr,
-              onFocus: () => params.onFocusChanged(true),
-            ),
+              PlatformViewsService.initSurfaceAndroidView(
+                id: params.id,
+                viewType: viewType,
+                layoutDirection: TextDirection.ltr,
+                onFocus: () => params.onFocusChanged(true),
+              ),
           AndroidPlatformViewMode.tlhc_vd =>
-            PlatformViewsService.initAndroidView(
-              id: params.id,
-              viewType: viewType,
-              layoutDirection: TextDirection.ltr,
-              onFocus: () => params.onFocusChanged(true),
-            ),
+              PlatformViewsService.initAndroidView(
+                id: params.id,
+                viewType: viewType,
+                layoutDirection: TextDirection.ltr,
+                onFocus: () => params.onFocusChanged(true),
+              ),
           AndroidPlatformViewMode.hc =>
-            PlatformViewsService.initExpensiveAndroidView(
-              id: params.id,
-              viewType: viewType,
-              layoutDirection: TextDirection.ltr,
-              onFocus: () => params.onFocusChanged(true),
-            ),
-          // https://github.com/flutter/flutter/blob/master/docs/platforms/android/Virtual-Display.md
-          AndroidPlatformViewMode.vd => PlatformViewsService.initAndroidView(
-            id: params.id,
-            viewType: viewType,
-            layoutDirection: TextDirection.ltr,
-            onFocus: () => params.onFocusChanged(true),
-          ),
+              PlatformViewsService.initExpensiveAndroidView(
+                id: params.id,
+                viewType: viewType,
+                layoutDirection: TextDirection.ltr,
+                onFocus: () => params.onFocusChanged(true),
+              ),
+        // https://github.com/flutter/flutter/blob/master/docs/platforms/android/Virtual-Display.md
+          AndroidPlatformViewMode.vd =>
+              PlatformViewsService.initAndroidView(
+                id: params.id,
+                viewType: viewType,
+                layoutDirection: TextDirection.ltr,
+                onFocus: () => params.onFocusChanged(true),
+              ),
         };
         return viewController
           ..addOnPlatformViewCreatedListener((id) {
@@ -340,28 +342,27 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
   }
 
   List<RenderedFeature> _nativeQueryToRenderedFeatures(
-    JList<jni.Feature?> query,
-  ) {
+      JList<jni.Feature?> query,) {
     final features = query.where((f) => f != null).map((f) => f!);
 
     final gson = Gson();
     return features
         .map(
-          (feature) => RenderedFeature(
+          (feature) =>
+          RenderedFeature(
             id: feature.id()?.toDartString(releaseOriginal: true),
             properties:
-                jsonDecode(
-                      gson.toJson(feature.properties())?.toString() ?? '{}',
-                    )
-                    as Map<String, Object?>,
+            jsonDecode(
+              gson.toJson(feature.properties())?.toString() ?? '{}',
+            )
+            as Map<String, Object?>,
           ),
-        )
+    )
         .toList(growable: false);
   }
 
   @override
-  List<RenderedFeature> featuresAtPoint(
-    Offset point, {
+  List<RenderedFeature> featuresAtPoint(Offset point, {
     List<String>? layerIds,
   }) {
     final style = this.style;
@@ -380,9 +381,9 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
       jni.PointF.new$3(scaledPoint.dx, scaledPoint.dy),
       layerIds != null
           ? JArray.of(
-              JString.nullableType,
-              layerIds.map((s) => s.toJString()),
-            )
+        JString.nullableType,
+        layerIds.map((s) => s.toJString()),
+      )
           : null,
     );
 
@@ -390,8 +391,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
   }
 
   @override
-  List<RenderedFeature> featuresInRect(
-    Rect rect, {
+  List<RenderedFeature> featuresInRect(Rect rect, {
     List<String>? layerIds,
   }) {
     final style = this.style;
@@ -421,9 +421,9 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
       ),
       layerIds != null
           ? JArray.of(
-              JString.nullableType,
-              layerIds.map((s) => s.toJString()),
-            )
+        JString.nullableType,
+        layerIds.map((s) => s.toJString()),
+      )
           : null,
     );
 
@@ -486,7 +486,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
         ..[0] = jLayerId;
       // query one layer at a time
       final scaledPoint =
-          (screenLocation * MediaQuery.devicePixelRatioOf(context)).toPointF();
+      (screenLocation * MediaQuery.devicePixelRatioOf(context)).toPointF();
       final jniFeatures = _jniMapLibreMap!.queryRenderedFeatures(
         scaledPoint,
         queryLayerIds,
@@ -514,49 +514,51 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
     bool compassAnimation = true,
     bool pulse = true,
     BearingRenderMode bearingRenderMode = BearingRenderMode.gps,
-  }) async => using((arena) {
-    // https://maplibre.org/maplibre-native/docs/book/android/location-component-guide.html
-    final style = this.style;
-    if (style == null) return;
+  }) async =>
+      using((arena) {
+        // https://maplibre.org/maplibre-native/docs/book/android/location-component-guide.html
+        final style = this.style;
+        if (style == null) return;
 
-    final bearing = switch (bearingRenderMode) {
-      BearingRenderMode.none => jni.RenderMode.NORMAL,
-      BearingRenderMode.compass => jni.RenderMode.COMPASS,
-      BearingRenderMode.gps => jni.RenderMode.GPS,
-    };
-    final jniContext = Jni.getCachedApplicationContext().toJObject(arena);
-    final locOptionsBuilder =
+        final bearing = switch (bearingRenderMode) {
+          BearingRenderMode.none => jni.RenderMode.NORMAL,
+          BearingRenderMode.compass => jni.RenderMode.COMPASS,
+          BearingRenderMode.gps => jni.RenderMode.GPS,
+        };
+        final jniContext = getJContext(arena);
+        final locOptionsBuilder =
         jni.LocationComponentOptions.builder(jniContext)
-              .pulseFadeEnabled(pulseFade)!
-              .accuracyAnimationEnabled(accuracyAnimation)!
-              .compassAnimationEnabled(compassAnimation.toJBoolean())!
-              .pulseEnabled(pulse)!
+            .pulseFadeEnabled(pulseFade)!
+            .accuracyAnimationEnabled(accuracyAnimation)!
+            .compassAnimationEnabled(compassAnimation.toJBoolean())!
+            .pulseEnabled(pulse)!
           ..releasedBy(arena);
-    final locOptions = locOptionsBuilder.build()..releasedBy(arena);
-    final locationEngineRequestBuilder =
+        final locOptions = locOptionsBuilder.build()
+          ..releasedBy(arena);
+        final locationEngineRequestBuilder =
         jni.LocationEngineRequest$Builder(750) // TODO integrate as parameter
-              .setFastestInterval(fastestInterval.inMilliseconds)!
-              .setMaxWaitTime(maxWaitTime.inMilliseconds)!
-              .setPriority(jni.LocationEngineRequest.PRIORITY_HIGH_ACCURACY)!
+            .setFastestInterval(fastestInterval.inMilliseconds)!
+            .setMaxWaitTime(maxWaitTime.inMilliseconds)!
+            .setPriority(jni.LocationEngineRequest.PRIORITY_HIGH_ACCURACY)!
           ..releasedBy(arena);
-    final locationEngineRequest = locationEngineRequestBuilder.build()
-      ?..releasedBy(arena);
-    final activationOptionsBuilder =
+        final locationEngineRequest = locationEngineRequestBuilder.build()
+          ?..releasedBy(arena);
+        final activationOptionsBuilder =
         jni.LocationComponentActivationOptions.builder(
-                jniContext,
-                style._jniStyle,
-              )
-              .locationComponentOptions(locOptions)!
-              .useDefaultLocationEngine(true)!
-              .locationEngineRequest(locationEngineRequest)!
+          jniContext,
+          style._jniStyle,
+        )
+            .locationComponentOptions(locOptions)!
+            .useDefaultLocationEngine(true)!
+            .locationEngineRequest(locationEngineRequest)!
           ..releasedBy(arena);
-    final activationOptions = activationOptionsBuilder.build()!
-      ..releasedBy(arena);
+        final activationOptions = activationOptionsBuilder.build()!
+          ..releasedBy(arena);
 
-    _locationComponent.activateLocationComponent(activationOptions);
-    _locationComponent.setRenderMode(bearing);
-    _locationComponent.setLocationComponentEnabled(true);
-  });
+        _locationComponent.activateLocationComponent(activationOptions);
+        _locationComponent.setRenderMode(bearing);
+        _locationComponent.setLocationComponentEnabled(true);
+      });
 
   @override
   Future<void> trackLocation({
@@ -565,35 +567,36 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
   }) async {
     final mode = switch (trackBearing) {
       BearingTrackMode.none =>
-        trackLocation
-            // only location
-            ? jni.CameraMode.TRACKING
-            // neither location nor bearing
-            : jni.CameraMode.NONE,
+      trackLocation
+      // only location
+          ? jni.CameraMode.TRACKING
+      // neither location nor bearing
+          : jni.CameraMode.NONE,
 
       BearingTrackMode.compass =>
-        trackLocation
-            // location with compass bearing
-            ? jni.CameraMode.TRACKING_COMPASS
-            // only compass bearing
-            : jni.CameraMode.NONE_COMPASS,
+      trackLocation
+      // location with compass bearing
+          ? jni.CameraMode.TRACKING_COMPASS
+      // only compass bearing
+          : jni.CameraMode.NONE_COMPASS,
 
       BearingTrackMode.gps =>
-        trackLocation
-            // location with gps bearing
-            ? jni.CameraMode.TRACKING_GPS
-            // only gps bearing
-            : jni.CameraMode.NONE_GPS,
+      trackLocation
+      // location with gps bearing
+          ? jni.CameraMode.TRACKING_GPS
+      // only gps bearing
+          : jni.CameraMode.NONE_GPS,
     };
     _locationComponent.setCameraMode(mode);
   }
 
   @override
-  Geographic toLngLat(Offset screenLocation) => _jniProjection
-      .fromScreenLocation(
+  Geographic toLngLat(Offset screenLocation) =>
+      _jniProjection
+          .fromScreenLocation(
         (screenLocation * MediaQuery.devicePixelRatioOf(context)).toPointF(),
       )
-      .toGeographic(releaseOriginal: true);
+          .toGeographic(releaseOriginal: true);
 
   @override
   List<Geographic> toLngLats(List<Offset> screenLocations) =>
@@ -604,7 +607,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative {
       _jniProjection
           .toScreenLocation(lngLat.toLatLng())
           .toOffset(releaseOriginal: true) /
-      MediaQuery.devicePixelRatioOf(context);
+          MediaQuery.devicePixelRatioOf(context);
 
   @override
   List<Offset> toScreenLocations(List<Geographic> lngLats) =>

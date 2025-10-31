@@ -38,6 +38,8 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
+import '../../../../../../android/content/Context.dart' as context$_;
+
 import '../MapRenderer.dart' as maprenderer$_;
 
 /// from: `org.maplibre.android.maps.renderer.textureview.TextureViewMapRenderer`
@@ -94,7 +96,7 @@ class TextureViewMapRenderer extends maprenderer$_.MapRenderer {
   /// from: `public void <init>(android.content.Context context, android.view.TextureView textureView, java.lang.String string, boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
   factory TextureViewMapRenderer(
-    jni$_.JObject context,
+    context$_.Context context,
     jni$_.JObject textureView,
     jni$_.JString? string,
     bool z,

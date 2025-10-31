@@ -38,6 +38,8 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
+import '../../../../android/content/Context.dart' as context$_;
+
 import '../../../../android/graphics/RectF.dart' as rectf$_;
 
 /// from: `org.maplibre.android.location.LocationComponentOptions$Builder`
@@ -1983,7 +1985,7 @@ class LocationComponentOptions extends jni$_.JObject {
   /// from: `static public org.maplibre.android.location.LocationComponentOptions createFromAttributes(android.content.Context context, int i)`
   /// The returned object must be released after use, by calling the [release] method.
   static LocationComponentOptions createFromAttributes(
-    jni$_.JObject context,
+    context$_.Context context,
     int i,
   ) {
     final _$context = context.reference;
@@ -2053,7 +2055,7 @@ class LocationComponentOptions extends jni$_.JObject {
   /// from: `static public org.maplibre.android.location.LocationComponentOptions$Builder builder(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
   static LocationComponentOptions$Builder builder(
-    jni$_.JObject context,
+    context$_.Context context,
   ) {
     final _$context = context.reference;
     return _builder(

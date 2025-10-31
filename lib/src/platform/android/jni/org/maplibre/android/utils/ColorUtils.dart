@@ -38,6 +38,8 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
+import '../../../../android/content/Context.dart' as context$_;
+
 /// from: `org.maplibre.android.utils.ColorUtils`
 class ColorUtils extends jni$_.JObject {
   @jni$_.internal
@@ -110,7 +112,7 @@ class ColorUtils extends jni$_.JObject {
 
   /// from: `static public int getPrimaryColor(android.content.Context context)`
   static int getPrimaryColor(
-    jni$_.JObject context,
+    context$_.Context context,
   ) {
     final _$context = context.reference;
     return _getPrimaryColor(
@@ -145,7 +147,7 @@ class ColorUtils extends jni$_.JObject {
 
   /// from: `static public int getPrimaryDarkColor(android.content.Context context)`
   static int getPrimaryDarkColor(
-    jni$_.JObject context,
+    context$_.Context context,
   ) {
     final _$context = context.reference;
     return _getPrimaryDarkColor(
@@ -180,7 +182,7 @@ class ColorUtils extends jni$_.JObject {
 
   /// from: `static public int getAccentColor(android.content.Context context)`
   static int getAccentColor(
-    jni$_.JObject context,
+    context$_.Context context,
   ) {
     final _$context = context.reference;
     return _getAccentColor(
