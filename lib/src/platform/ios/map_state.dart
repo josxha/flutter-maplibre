@@ -378,7 +378,6 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     }
   }
 
-
   @override
   void onMoveCamera(pigeon.MapCamera camera) {
     final mapCamera = MapCamera(
@@ -397,7 +396,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
       pigeon.CameraChangeReason.apiAnimation => CameraChangeReason.apiAnimation,
       pigeon.CameraChangeReason.apiGesture => CameraChangeReason.apiGesture,
       pigeon.CameraChangeReason.developerAnimation =>
-      CameraChangeReason.developerAnimation,
+        CameraChangeReason.developerAnimation,
     };
     widget.onEvent?.call(MapEventStartMoveCamera(reason: changeReason));
   }
@@ -463,9 +462,9 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     center: options.initCenter == null
         ? null
         : pigeon.LngLat(
-      lng: options.initCenter!.lon,
-      lat: options.initCenter!.lat,
-    ),
+            lng: options.initCenter!.lon,
+            lat: options.initCenter!.lat,
+          ),
     minZoom: options.minZoom,
     maxZoom: options.maxZoom,
     minPitch: options.minPitch,
