@@ -62,7 +62,7 @@ class FlutterApi extends jni$_.JObject {
   static const type = $FlutterApi$Type();
   static final _id_createPlatformView = _class.instanceMethodId(
     r'createPlatformView',
-    r'()Lio/flutter/plugin/platform/PlatformView;',
+    r'(I)Lio/flutter/plugin/platform/PlatformView;',
   );
 
   static final _createPlatformView =
@@ -71,6 +71,7 @@ class FlutterApi extends jni$_.JObject {
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
               )
             >
           >('globalEnv_CallObjectMethod')
@@ -78,15 +79,19 @@ class FlutterApi extends jni$_.JObject {
             jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
+              int,
             )
           >();
 
-  /// from: `public abstract io.flutter.plugin.platform.PlatformView createPlatformView()`
+  /// from: `public abstract io.flutter.plugin.platform.PlatformView createPlatformView(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  platformview$_.PlatformView createPlatformView() {
+  platformview$_.PlatformView createPlatformView(
+    int i,
+  ) {
     return _createPlatformView(
       reference.pointer,
       _id_createPlatformView as jni$_.JMethodIDPtr,
+      i,
     ).object<platformview$_.PlatformView>(
       const platformview$_.$PlatformView$Type(),
     );
@@ -124,8 +129,12 @@ class FlutterApi extends jni$_.JObject {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
       if ($d ==
-          r'createPlatformView()Lio/flutter/plugin/platform/PlatformView;') {
-        final $r = _$impls[$p]!.createPlatformView();
+          r'createPlatformView(I)Lio/flutter/plugin/platform/PlatformView;') {
+        final $r = _$impls[$p]!.createPlatformView(
+          $a![0]!
+              .as(const jni$_.JIntegerType(), releaseOriginal: true)
+              .intValue(releaseOriginal: true),
+        );
         return ($r as jni$_.JObject?)
                 ?.as(const jni$_.JObjectType())
                 .reference
@@ -176,21 +185,21 @@ class FlutterApi extends jni$_.JObject {
 
 abstract base mixin class $FlutterApi {
   factory $FlutterApi({
-    required platformview$_.PlatformView Function() createPlatformView,
+    required platformview$_.PlatformView Function(int i) createPlatformView,
   }) = _$FlutterApi;
 
-  platformview$_.PlatformView createPlatformView();
+  platformview$_.PlatformView createPlatformView(int i);
 }
 
 final class _$FlutterApi with $FlutterApi {
   _$FlutterApi({
-    required platformview$_.PlatformView Function() createPlatformView,
+    required platformview$_.PlatformView Function(int i) createPlatformView,
   }) : _createPlatformView = createPlatformView;
 
-  final platformview$_.PlatformView Function() _createPlatformView;
+  final platformview$_.PlatformView Function(int i) _createPlatformView;
 
-  platformview$_.PlatformView createPlatformView() {
-    return _createPlatformView();
+  platformview$_.PlatformView createPlatformView(int i) {
+    return _createPlatformView(i);
   }
 }
 

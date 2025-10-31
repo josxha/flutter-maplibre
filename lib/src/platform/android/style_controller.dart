@@ -2,10 +2,9 @@ part of 'map_state.dart';
 
 /// Android specific implementation of the [StyleController].
 class StyleControllerAndroid implements StyleController {
-  const StyleControllerAndroid._(this._jniStyle, this._hostApi);
+  const StyleControllerAndroid._(this._jniStyle);
 
   final jni.Style _jniStyle;
-  final pigeon.MapLibreHostApi _hostApi;
 
   @override
   Future<void> addLayer(StyleLayer layer, {String? belowLayerId}) async =>
@@ -170,9 +169,10 @@ class StyleControllerAndroid implements StyleController {
       _jniStyle.removeSource(id.toJString());
 
   @override
-  Future<void> addImage(String id, Uint8List bytes) =>
-      // TODO: use JNI for this method
-      _hostApi.addImage(id, bytes);
+  Future<void> addImage(String id, Uint8List bytes) async {
+    // TODO: use JNI for this method
+    // _hostApi.addImage(id, bytes);
+  }
 
   @override
   Future<void> removeImage(String id) async =>

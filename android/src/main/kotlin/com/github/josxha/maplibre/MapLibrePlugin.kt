@@ -8,7 +8,6 @@ import androidx.lifecycle.LifecycleOwner
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
-import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.PluginRegistry
 import io.flutter.plugin.common.StandardMessageCodec
 import io.flutter.plugin.platform.PlatformView
@@ -33,13 +32,7 @@ class MapLibrePlugin :
             .platformViewRegistry
             .registerViewFactory(
                 "plugins.flutter.io/maplibre",
-                MapLibreMapFactory(
-                    object : LifecycleProvider {
-                        override fun getLifecycle(): Lifecycle? = lifecycle
-                    },
-                    binaryMessenger = binding.binaryMessenger,
-                    flutterAssets = binding.flutterAssets,
-                ),
+                MapLibreMapFactory(),
             )
     }
 
@@ -69,7 +62,11 @@ class MapLibrePlugin :
         permissions: Array<out String>,
         grantResults: IntArray,
     ): Boolean {
-        permissionsManager?.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        permissionsManager?.onRequestPermissionsResult(
+            requestCode,
+            permissions,
+            grantResults
+        )
         return true
     }
 
@@ -116,23 +113,14 @@ object FlutterLifecycleAdapter {
     }
 }
 
-class MapLibreMapFactory(
-    private val lifecycleProvider: LifecycleProvider,
-    private val binaryMessenger: BinaryMessenger,
-    private val flutterAssets: FlutterPlugin.FlutterAssets,
-) : PlatformViewFactory(StandardMessageCodec.INSTANCE) {
+class MapLibreMapFactory() :
+    PlatformViewFactory(StandardMessageCodec.INSTANCE) {
     override fun create(
         context: Context,
         viewId: Int,
         args: Any?,
     ): PlatformView =
-        MapLibreMapController(
-            viewId,
-            context,
-            lifecycleProvider,
-            binaryMessenger,
-            flutterAssets,
-        )
+        MapLibreRegistry.flutterApi!!.createPlatformView(viewId)
 }
 
 interface LifecycleProvider {
