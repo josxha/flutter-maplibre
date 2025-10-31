@@ -216,10 +216,9 @@ class StyleControllerAndroid implements StyleController {
   List<String> getLayerIds() {
     final layers = _jniStyle.getLayers();
     return layers
-        .map((e) => e?.getId())
-        .where((i) => i != null)
-        .map((i) => i!.toDartString(releaseOriginal: true))
-        .toList();
+        .map((e) => e?.getId().toDartString(releaseOriginal: true))
+        .nonNulls
+        .toList(growable: false);
   }
 
   @override
