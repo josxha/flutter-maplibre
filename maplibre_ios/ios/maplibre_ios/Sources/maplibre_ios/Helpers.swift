@@ -55,25 +55,24 @@ import UIKit
 
           // print("json: \(json)")
           if let offset = json as? [Any] {
-            if offset.first is String {
-              if offset.count == 2, offset.first == "literal" {
-                if let vector = offset.last as? [Any] {
-                  if vector.count == 2 {
-                    if let x = vector.first as? Double,
-                       let y = vector.last as? Double
-                    {
-                      result = NSExpression(
-                        forConstantValue: NSValue(
-                          cgVector: CGVector(dx: x, dy: y)))
-                      return
-                    }
-                  }
-                }
-              }
-            } else {
-              result = NSExpression(forConstantValue: offset)
+            // Case 1: ["literal", [x, y]]
+            if let keyword = offset.first as? String,
+               keyword == "literal",
+               offset.count == 2,
+               let vector = offset.last as? [Any],
+               vector.count == 2,
+               let x = vector.first as? Double,
+               let y = vector.last as? Double
+            {
+              result = NSExpression(
+                forConstantValue: NSValue(cgVector: CGVector(dx: x, dy: y))
+              )
               return
             }
+
+            // Case 2: simple array literal like [x, y] or [5,5]
+            result = NSExpression(forConstantValue: offset)
+            return
           }
           result = NSExpression(mglJSONObject: json)
           return
