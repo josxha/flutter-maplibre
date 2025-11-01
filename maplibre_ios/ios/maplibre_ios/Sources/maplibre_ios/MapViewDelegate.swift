@@ -15,7 +15,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
     viewId: Int64,
     binaryMessenger: FlutterBinaryMessenger
   ) {
-    print("### init new MapViewDelegate ### \(viewId) ###")
+    // print("### init new MapViewDelegate ### \(viewId) ###")
     var channelSuffix = String(viewId)
     _viewId = viewId
     _flutterApi = MapLibreFlutterApi(
@@ -34,10 +34,31 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
         self._mapOptions = mapOptions
 
         // TODO(josxha): match the implementation from `setStyle()`
-        if mapOptions.style.hasPrefix("{") || mapOptions.style.hasPrefix("[") {
-          self._mapView = MLNMapView(frame: self._view.bounds, styleJSON: mapOptions.style)
+        var style = mapOptions.style
+        if style.hasPrefix("{") {
+          self._mapView = MLNMapView(frame: self._view.bounds, styleJSON: style)
+        } else if style.hasPrefix("/") {
+          var styleUrl = URL(string: "file://\(style)")
+          self._mapView = MLNMapView(frame: self._view.bounds, styleURL: styleUrl)
+        } else if !style.hasPrefix("http://"), !style.hasPrefix("https://"),
+                  !style.hasPrefix("mapbox://")
+        {
+          if let assetPath = Bundle.main.path(
+            forResource: style.replacingOccurrences(of: ".json", with: ""),
+            ofType: "json",
+            inDirectory: "Frameworks/App.framework/flutter_assets"
+          ) {
+            do {
+              let content = try String(contentsOfFile: assetPath, encoding: .utf8)
+              self._mapView = MLNMapView(frame: self._view.bounds, styleJSON: content)
+            } catch {
+              print("❌ Failed to read Flutter asset: \(error)")
+            }
+          } else {
+            print("❌ Could not find Flutter asset at path.")
+          }
         } else {
-          self._mapView = MLNMapView(frame: self._view.bounds, styleURL: URL(string: mapOptions.style))
+          self._mapView = MLNMapView(frame: self._view.bounds, styleURL: URL(string: style))
         }
 
         MapLibreRegistry.addMap(viewId: viewId, map: self._mapView)
@@ -78,10 +99,23 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
         self._mapView.allowsScrolling = mapOptions.gestures.pan
         self._mapView.allowsTilting = mapOptions.gestures.tilt
         self._mapView.allowsZooming = mapOptions.gestures.zoom
+        if let bounds = mapOptions.maxBounds {
+          var mlnBounds = MLNCoordinateBounds(
+            sw: CLLocationCoordinate2D(
+              latitude: bounds.latitudeSouth, longitude: bounds.longitudeWest
+            ),
+            ne: CLLocationCoordinate2D(
+              latitude: bounds.latitudeNorth, longitude: bounds.longitudeEast
+            )
+          )
+          self._mapView.maximumScreenBounds = mlnBounds
+        }
 
         self._flutterApi.onMapReady { _ in }
 
-        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(self.onDoubleTap(sender:)))
+        let doubleTap = UITapGestureRecognizer(
+          target: self, action: #selector(self.onDoubleTap(sender:))
+        )
         doubleTap.numberOfTapsRequired = 2
         self._mapView.addGestureRecognizer(doubleTap)
 
@@ -93,7 +127,9 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
         self._mapView.addGestureRecognizer(singleTap)
 
         if #available(iOS 13.4, *) {
-          let secondaryTap = UITapGestureRecognizer(target: self, action: #selector(self.onSecondaryTap(sender:)))
+          let secondaryTap = UITapGestureRecognizer(
+            target: self, action: #selector(self.onSecondaryTap(sender:))
+          )
           secondaryTap.buttonMaskRequired = .secondary
           self._mapView.addGestureRecognizer(secondaryTap)
         }
@@ -110,7 +146,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
   }
 
   func dispose() throws {
-    print("### dispose MapLibre view ### \(_viewId) ###")
+    // print("### dispose MapLibre view ### \(_viewId) ###")
     MapLibreRegistry.removeMap(viewId: _viewId)
     _mapView.removeFromSuperview()
     _mapView.delegate = nil
@@ -175,7 +211,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
     _mapView.setCamera(camera, animated: false)
 
     _mapView = mapView
-    print("mapView didFinishLoading, call onStyleLoaded")
+    // print("mapView didFinishLoading, call onStyleLoaded")
     _flutterApi.onStyleLoaded { _ in }
   }
 

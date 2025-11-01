@@ -2,10 +2,10 @@ import Flutter
 import UIKit
 import XCTest
 
+@testable import maplibre_ios
+
 // If your plugin has been explicitly set to "type: .dynamic" in the Package.swift,
 // you will need to add your plugin as a dependency of RunnerTests within Xcode.
-
-@testable import maplibre_ios
 
 // This demonstrates a simple unit test of the Swift portion of this plugin's implementation.
 //
