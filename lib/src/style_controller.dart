@@ -40,7 +40,7 @@ abstract class StyleController {
     StyleLayer layer, {
     String? belowLayerId,
     String? aboveLayerId,
-        int? atIndex,
+    int? atIndex,
   });
 
   /// Update the data of a GeoJSON source.
