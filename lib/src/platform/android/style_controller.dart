@@ -9,39 +9,40 @@ class StyleControllerAndroid implements StyleController {
   @override
   Future<void> addLayer(StyleLayer layer, {String? belowLayerId}) async =>
       using((arena) {
-        final iId = layer.id.toJString()..releasedBy(arena);
+        final jId = layer.id.toJString()..releasedBy(arena);
+        _jStyle.removeLayer(jId);
         final jLayer = switch (layer) {
           FillStyleLayer() => jni.FillLayer(
-            iId,
+            jId,
             layer.sourceId.toJString()..releasedBy(arena),
           ),
           CircleStyleLayer() => jni.CircleLayer(
-            iId,
+            jId,
             layer.sourceId.toJString()..releasedBy(arena),
           ),
           BackgroundStyleLayer() => jni.BackgroundLayer(layer.id.toJString()),
           FillExtrusionStyleLayer() => jni.FillExtrusionLayer(
-            iId,
+            jId,
             layer.sourceId.toJString()..releasedBy(arena),
           ),
           HeatmapStyleLayer() => jni.HeatmapLayer(
-            iId,
+            jId,
             layer.sourceId.toJString()..releasedBy(arena),
           ),
           HillshadeStyleLayer() => jni.HillshadeLayer(
-            iId,
+            jId,
             layer.sourceId.toJString()..releasedBy(arena),
           ),
           LineStyleLayer() => jni.LineLayer(
-            iId,
+            jId,
             layer.sourceId.toJString()..releasedBy(arena),
           ),
           RasterStyleLayer() => jni.RasterLayer(
-            iId,
+            jId,
             layer.sourceId.toJString()..releasedBy(arena),
           ),
           SymbolStyleLayer() => jni.SymbolLayer(
-            iId,
+            jId,
             layer.sourceId.toJString()..releasedBy(arena),
           ),
           _ => throw UnimplementedError(
@@ -88,6 +89,7 @@ class StyleControllerAndroid implements StyleController {
   @override
   Future<void> addSource(Source source) async => using((arena) {
     final jId = source.id.toJString()..releasedBy(arena);
+    _jStyle.removeSource(jId);
     final jni.Source jSource;
     switch (source) {
       case GeoJsonSource():

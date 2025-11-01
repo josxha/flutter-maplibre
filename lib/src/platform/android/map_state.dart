@@ -236,6 +236,9 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative
             }),
           ),
         ),
+      )
+      ..setLatLngBoundsForCameraTarget(
+        options.maxBounds?.toJLatLngBounds(arena: arena),
       );
     setStyle(options.initStyle);
     widget.onEvent?.call(MapEventMapCreated(mapController: this));
@@ -279,8 +282,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative
     final oldBounds = oldOptions.maxBounds;
     final newBounds = options.maxBounds;
     if (oldBounds != null && newBounds == null) {
-      // TODO @Nullable latLngBounds, https://github.com/dart-lang/native/issues/1644
-      // _jMapLibreMap.setLatLngBoundsForCameraTarget(null);
+      jMap.setLatLngBoundsForCameraTarget(null);
     } else if ((oldBounds == null && newBounds != null) ||
         (newBounds != null && oldBounds != newBounds)) {
       final bounds = newBounds.toJLatLngBounds(arena: arena);
@@ -294,7 +296,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative
     }
     // TODO: pan is not handled, there is no setPanGestureEnabled on Android.
     /*if (options.gestures.pan != oldOptions.gestures.pan) {
-        uiSettings.setRotateGesturesEnabled(options.gestures.pan);
+        uiSettings.setPanGesturesEnabled(options.gestures.pan);
       }*/
     if (options.gestures.zoom != oldOptions.gestures.zoom) {
       uiSettings.setZoomGesturesEnabled(options.gestures.zoom);
