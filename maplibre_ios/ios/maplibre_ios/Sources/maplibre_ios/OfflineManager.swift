@@ -5,12 +5,12 @@ class OfflineManager: NSObject, OfflineManagerHostApi {
   init(messenger: FlutterBinaryMessenger) {
     super.init()
     OfflineManagerHostApiSetup.setUp(
-      binaryMessenger: messenger, api: self, messageChannelSuffix: ""
+      binaryMessenger: messenger, api: self, messageChannelSuffix: "",
     )
   }
 
   func clearAmbientCache(
-    completion: @escaping (Result<Void, any Error>) -> Void
+    completion: @escaping (Result<Void, any Error>) -> Void,
   ) {
     MLNOfflineStorage.shared.clearAmbientCache(completionHandler: { error in
       if let error {
@@ -22,7 +22,7 @@ class OfflineManager: NSObject, OfflineManagerHostApi {
   }
 
   func invalidateAmbientCache(
-    completion: @escaping (Result<Void, any Error>) -> Void
+    completion: @escaping (Result<Void, any Error>) -> Void,
   ) {
     MLNOfflineStorage.shared.invalidateAmbientCache(completionHandler: {
       error in
@@ -45,7 +45,7 @@ class OfflineManager: NSObject, OfflineManagerHostApi {
   }
 
   func setMaximumAmbientCacheSize(
-    bytes: Int64, completion: @escaping (Result<Void, any Error>) -> Void
+    bytes: Int64, completion: @escaping (Result<Void, any Error>) -> Void,
   ) {
     MLNOfflineStorage.shared.setMaximumAmbientCacheSize(UInt(bytes)) {
       error in
@@ -60,20 +60,20 @@ class OfflineManager: NSObject, OfflineManagerHostApi {
   func downloadRegion(
     mapStyleUrl: String, bounds: LngLatBounds, minZoom: Double,
     maxZoom: Double, pixelDensity _: Double, metadata: String,
-    completion: @escaping (Result<Void, any Error>) -> Void
+    completion: @escaping (Result<Void, any Error>) -> Void,
   ) {
     // TODO: encode all information into the metadata for parity with android
     let mlnBounds = MLNCoordinateBounds(
       sw: CLLocationCoordinate2D(
-        latitude: bounds.latitudeSouth, longitude: bounds.longitudeWest
+        latitude: bounds.latitudeSouth, longitude: bounds.longitudeWest,
       ),
       ne: CLLocationCoordinate2D(
-        latitude: bounds.latitudeNorth, longitude: bounds.longitudeEast
-      )
+        latitude: bounds.latitudeNorth, longitude: bounds.longitudeEast,
+      ),
     )
     let region = MLNTilePyramidOfflineRegion(
       styleURL: URL(string: mapStyleUrl), bounds: mlnBounds,
-      fromZoomLevel: minZoom, toZoomLevel: maxZoom
+      fromZoomLevel: minZoom, toZoomLevel: maxZoom,
     )
     // TODO: implement
     let context = metadata.data(using: .utf8)
@@ -81,7 +81,7 @@ class OfflineManager: NSObject, OfflineManagerHostApi {
       let error = PigeonError(
         code: "INVALID_METADATA",
         message: "The metadata could not be converted to NSData.",
-        details: nil
+        details: nil,
       )
       completion(.failure(error))
       return

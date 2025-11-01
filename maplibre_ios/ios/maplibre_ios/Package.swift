@@ -16,7 +16,7 @@ let package = Package(
     // FOR PREBUILT LIBRARY
     .package(
       url: "https://github.com/maplibre/maplibre-gl-native-distribution",
-      .upToNextMinor(from: "6.19.0")
+      .upToNextMinor(from: "6.19.0"),
     ),
   ],
   targets: [
@@ -31,12 +31,12 @@ let package = Package(
       ],
       cSettings: [
         .headerSearchPath("include/maplibre_ios"),
-      ]
+      ],
     ),
     // FOR LOCAL LIBRARY
     // .binaryTarget(
     //   name: "MapLibre",
     //   path: "../.build/MapLibre.xcframework",
     // ),
-  ]
+  ],
 )

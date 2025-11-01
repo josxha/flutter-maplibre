@@ -13,19 +13,19 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
   init(
     frame _: CGRect,
     viewId: Int64,
-    binaryMessenger: FlutterBinaryMessenger
+    binaryMessenger: FlutterBinaryMessenger,
   ) {
     // print("### init new MapViewDelegate ### \(viewId) ###")
     var channelSuffix = String(viewId)
     _viewId = viewId
     _flutterApi = MapLibreFlutterApi(
       binaryMessenger: binaryMessenger,
-      messageChannelSuffix: channelSuffix
+      messageChannelSuffix: channelSuffix,
     )
     super.init() // self can be used after calling super.init()
     MapLibreHostApiSetup.setUp(
       binaryMessenger: binaryMessenger, api: self,
-      messageChannelSuffix: channelSuffix
+      messageChannelSuffix: channelSuffix,
     )
     // get and apply the MapOptions from Flutter
     _flutterApi.getOptions { result in
@@ -46,7 +46,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
           if let assetPath = Bundle.main.path(
             forResource: style.replacingOccurrences(of: ".json", with: ""),
             ofType: "json",
-            inDirectory: "Frameworks/App.framework/flutter_assets"
+            inDirectory: "Frameworks/App.framework/flutter_assets",
           ) {
             do {
               let content = try String(contentsOfFile: assetPath, encoding: .utf8)
@@ -78,11 +78,11 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
             latitude: mapOptions.center?.lat
               ?? currentCenter.latitude,
             longitude: mapOptions.center?.lng
-              ?? currentCenter.longitude
+              ?? currentCenter.longitude,
           )
           self._mapView.setCenter(
             center, zoomLevel: mapOptions.zoom,
-            direction: mapOptions.bearing, animated: false
+            direction: mapOptions.bearing, animated: false,
           )
         }
 
@@ -102,11 +102,11 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
         if let bounds = mapOptions.maxBounds {
           var mlnBounds = MLNCoordinateBounds(
             sw: CLLocationCoordinate2D(
-              latitude: bounds.latitudeSouth, longitude: bounds.longitudeWest
+              latitude: bounds.latitudeSouth, longitude: bounds.longitudeWest,
             ),
             ne: CLLocationCoordinate2D(
-              latitude: bounds.latitudeNorth, longitude: bounds.longitudeEast
-            )
+              latitude: bounds.latitudeNorth, longitude: bounds.longitudeEast,
+            ),
           )
           self._mapView.maximumScreenBounds = mlnBounds
         }
@@ -114,7 +114,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
         self._flutterApi.onMapReady { _ in }
 
         let doubleTap = UITapGestureRecognizer(
-          target: self, action: #selector(self.onDoubleTap(sender:))
+          target: self, action: #selector(self.onDoubleTap(sender:)),
         )
         doubleTap.numberOfTapsRequired = 2
         self._mapView.addGestureRecognizer(doubleTap)
@@ -128,7 +128,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
 
         if #available(iOS 13.4, *) {
           let secondaryTap = UITapGestureRecognizer(
-            target: self, action: #selector(self.onSecondaryTap(sender:))
+            target: self, action: #selector(self.onSecondaryTap(sender:)),
           )
           secondaryTap.buttonMaskRequired = .secondary
           self._mapView.addGestureRecognizer(secondaryTap)
@@ -137,7 +137,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
         self._mapView.addGestureRecognizer(
           UILongPressGestureRecognizer(
             target: self,
-            action: #selector(self.onLongPress(sender:))
+            action: #selector(self.onLongPress(sender:)),
           ))
       case let .failure(error):
         print(error)
@@ -160,7 +160,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
     _flutterApi.onClick(
       point: LngLat(lng: point.longitude, lat: point.latitude),
       // NB: iOS points should be equivalent to Flutter LP
-      screenPoint: Offset(x: screenPosition.x, y: screenPosition.y)
+      screenPoint: Offset(x: screenPosition.x, y: screenPosition.y),
     ) { _ in }
   }
 
@@ -169,7 +169,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
     var point = _mapView.convert(screenPosition, toCoordinateFrom: _mapView)
     _flutterApi.onSecondaryClick(
       point: LngLat(lng: point.longitude, lat: point.latitude),
-      screenPoint: Offset(x: screenPosition.x, y: screenPosition.y)
+      screenPoint: Offset(x: screenPosition.x, y: screenPosition.y),
     ) { _ in }
   }
 
@@ -178,7 +178,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
     var point = _mapView.convert(screenPosition, toCoordinateFrom: _mapView)
     _flutterApi.onDoubleClick(
       point: LngLat(lng: point.longitude, lat: point.latitude),
-      screenPoint: Offset(x: screenPosition.x, y: screenPosition.y)
+      screenPoint: Offset(x: screenPosition.x, y: screenPosition.y),
     ) { _ in }
   }
 
@@ -187,7 +187,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
     var point = _mapView.convert(screenPosition, toCoordinateFrom: _mapView)
     _flutterApi.onLongClick(
       point: LngLat(lng: point.longitude, lat: point.latitude),
-      screenPoint: Offset(x: screenPosition.x, y: screenPosition.y)
+      screenPoint: Offset(x: screenPosition.x, y: screenPosition.y),
     ) { _ in }
   }
 
@@ -197,7 +197,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
 
   func gestureRecognizer(
     _: UIGestureRecognizer,
-    shouldRecognizeSimultaneouslyWith _: UIGestureRecognizer
+    shouldRecognizeSimultaneouslyWith _: UIGestureRecognizer,
   ) -> Bool {
     // Do not override the default behavior
     true
@@ -227,11 +227,11 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
     var mlnCamera = _mapView.camera
     var center = LngLat(
       lng: mlnCamera.centerCoordinate.longitude,
-      lat: mlnCamera.centerCoordinate.latitude
+      lat: mlnCamera.centerCoordinate.latitude,
     )
     var pigeonCamera = MapCamera(
       center: center, zoom: mlnCamera.altitude, pitch: mlnCamera.pitch,
-      bearing: mlnCamera.heading
+      bearing: mlnCamera.heading,
     )
     _flutterApi.onMoveCamera(camera: pigeonCamera) { _ in }
   }
@@ -239,7 +239,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
   func addFillLayer(
     id _: String, sourceId _: String, layout _: [String: Any],
     paint _: [String: Any], belowLayerId _: String?,
-    completion: @escaping (Result<Void, Error>) -> Void
+    completion: @escaping (Result<Void, Error>) -> Void,
   ) {
     completion(.success(()))
   }
@@ -247,7 +247,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
   func addCircleLayer(
     id _: String, sourceId _: String, layout _: [String: Any],
     paint _: [String: Any], belowLayerId _: String?,
-    completion: @escaping (Result<Void, Error>) -> Void
+    completion: @escaping (Result<Void, Error>) -> Void,
   ) {
     completion(.success(()))
   }
@@ -255,7 +255,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
   func addBackgroundLayer(
     id _: String, layout _: [String: Any], paint _: [String: Any],
     belowLayerId _: String?,
-    completion: @escaping (Result<Void, Error>) -> Void
+    completion: @escaping (Result<Void, Error>) -> Void,
   ) {
     completion(.success(()))
   }
@@ -263,7 +263,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
   func addFillExtrusionLayer(
     id _: String, sourceId _: String, layout _: [String: Any],
     paint _: [String: Any], belowLayerId _: String?,
-    completion: @escaping (Result<Void, Error>) -> Void
+    completion: @escaping (Result<Void, Error>) -> Void,
   ) {
     completion(.success(()))
   }
@@ -271,7 +271,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
   func addHeatmapLayer(
     id _: String, sourceId _: String, layout _: [String: Any],
     paint _: [String: Any], belowLayerId _: String?,
-    completion: @escaping (Result<Void, Error>) -> Void
+    completion: @escaping (Result<Void, Error>) -> Void,
   ) {
     completion(.success(()))
   }
@@ -279,7 +279,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
   func addHillshadeLayer(
     id _: String, sourceId _: String, layout _: [String: Any],
     paint _: [String: Any], belowLayerId _: String?,
-    completion: @escaping (Result<Void, Error>) -> Void
+    completion: @escaping (Result<Void, Error>) -> Void,
   ) {
     completion(.success(()))
   }
@@ -287,7 +287,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
   func addLineLayer(
     id _: String, sourceId _: String, layout _: [String: Any],
     paint _: [String: Any], belowLayerId _: String?,
-    completion: @escaping (Result<Void, Error>) -> Void
+    completion: @escaping (Result<Void, Error>) -> Void,
   ) {
     completion(.success(()))
   }
@@ -295,7 +295,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
   func addRasterLayer(
     id _: String, sourceId _: String, layout _: [String: Any],
     paint _: [String: Any], belowLayerId _: String?,
-    completion: @escaping (Result<Void, Error>) -> Void
+    completion: @escaping (Result<Void, Error>) -> Void,
   ) {
     completion(.success(()))
   }
@@ -303,7 +303,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
   func addSymbolLayer(
     id _: String, sourceId _: String, layout _: [String: Any],
     paint _: [String: Any], belowLayerId _: String?,
-    completion: @escaping (Result<Void, Error>) -> Void
+    completion: @escaping (Result<Void, Error>) -> Void,
   ) {
     completion(.success(()))
   }
@@ -311,14 +311,14 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
   func loadImage(
     url _: String,
     completion _: @escaping (Result<FlutterStandardTypedData, Error>) ->
-      Void
+      Void,
   ) {
     // completion(.success((bytes)))
   }
 
   func addImage(
     id: String, bytes: FlutterStandardTypedData,
-    completion: @escaping (Result<Void, Error>) -> Void
+    completion: @escaping (Result<Void, Error>) -> Void,
   ) {
     // Main Thread Checker: UI API called on a background thread: -[UIView frame]
     // DispatchQueue.main.async {
