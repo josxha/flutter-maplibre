@@ -6,11 +6,9 @@
 xcrun --sdk iphonesimulator --show-sdk-path
 
 swiftc \
-    -c MapLibreRegistry.swift \
-    -c Extensions.swift \
+    -c MapLibreIos.swift \
     -module-name maplibre_ios \
-    -emit-objc-header-path MapLibreRegistry.h \
-    -emit-objc-header-path Helpers.h \
+    -emit-objc-header-path MapLibreIos.h \
     -emit-library -o libmaplibreios.dylib \
     -target arm64-apple-ios18.5-simulator \
     -sdk $(xcrun --sdk iphonesimulator --show-sdk-path) \
