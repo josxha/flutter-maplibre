@@ -85,7 +85,7 @@ import UIKit
       // parse as a constant value
       result = NSExpression(forConstantValue: expression)
     }) {
-      print("⚠️ Couldn't set expression in Helpers.parseExpression(): \(exception)")
+      print("⚠️ Couldn't parse expression in Helpers.parseExpression(): \(exception)")
     }
     return result
   }
