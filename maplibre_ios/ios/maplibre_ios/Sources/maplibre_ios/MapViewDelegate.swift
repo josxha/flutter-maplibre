@@ -22,7 +22,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
       binaryMessenger: binaryMessenger,
       messageChannelSuffix: channelSuffix,
     )
-    super.init() // self can be used after calling super.init()
+    super.init()  // self can be used after calling super.init()
     MapLibreHostApiSetup.setUp(
       binaryMessenger: binaryMessenger, api: self,
       messageChannelSuffix: channelSuffix,
@@ -41,7 +41,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
           var styleUrl = URL(string: "file://\(style)")
           self._mapView = MLNMapView(frame: self._view.bounds, styleURL: styleUrl)
         } else if !style.hasPrefix("http://"), !style.hasPrefix("https://"),
-                  !style.hasPrefix("mapbox://")
+          !style.hasPrefix("mapbox://")
         {
           if let assetPath = Bundle.main.path(
             forResource: style.replacingOccurrences(of: ".json", with: ""),
