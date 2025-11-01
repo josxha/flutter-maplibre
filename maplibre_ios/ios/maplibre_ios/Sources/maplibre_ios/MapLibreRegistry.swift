@@ -33,7 +33,7 @@ import UIKit
 
 @objc public class Helpers: NSObject {
   @objc public static func addImageToStyle(
-    target: NSObject, field: String, expression: NSExpression,
+    target: NSObject, field: String, expression: NSExpression
   ) {
     do {
       target.setValue(expression, forKey: field)
@@ -43,7 +43,7 @@ import UIKit
   }
 
   @objc public static func setExpression(
-    target: NSObject, field: String, expression: NSExpression,
+    target: NSObject, field: String, expression: NSExpression
   ) {
     do {
       // https://developer.apple.com/documentation/objectivec/nsobject/1418139-setvalue
@@ -54,7 +54,7 @@ import UIKit
   }
 
   @objc public static func parseExpression(
-    propertyName: String, expression: String,
+    propertyName: String, expression: String
   ) -> NSExpression? {
     print("\(propertyName): \(expression)")
     do {
@@ -67,17 +67,17 @@ import UIKit
         // can't create an Expression if the data of a literal is an array
         let json = try JSONSerialization.jsonObject(
           with: expression.data(using: .utf8)!,
-          options: .fragmentsAllowed,
+          options: .fragmentsAllowed
         )
         // print("json: \(json)")
         if let offset = json as? [Any] {
           if offset.count == 2, offset.first is String,
-            offset.first as? String == "literal"
+             offset.first as? String == "literal"
           {
             if let vector = offset.last as? [Any] {
               if vector.count == 2 {
                 if let x = vector.first as? Double,
-                  let y = vector.last as? Double
+                   let y = vector.last as? Double
                 {
                   return NSExpression(
                     forConstantValue: NSValue(
