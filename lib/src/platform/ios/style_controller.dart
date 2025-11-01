@@ -27,7 +27,11 @@ class StyleControllerIos implements StyleController {
   Future<void> addLayer(StyleLayer layer, {String? belowLayerId}) async {
     final ffiId = layer.id.toNSString();
     final prevStyleLayer = _ffiStyle.layerWithIdentifier(ffiId);
-    if (prevStyleLayer != null) _ffiStyle.removeLayer(prevStyleLayer);
+    if (prevStyleLayer != null) {
+      throw Exception(
+        'A Layer with the id "${layer.id}" already exists in the map style.',
+      );
+    }
 
     MLNStyleLayer? ffiStyleLayer;
     switch (layer) {
@@ -82,13 +86,19 @@ class StyleControllerIos implements StyleController {
     ffiStyleLayer.setProperties(layer.paint);
     ffiStyleLayer.setProperties(layer.layout);
     _ffiStyle.addLayer(ffiStyleLayer);
+    ffiStyleLayer.release();
+    ffiId.release();
   }
 
   @override
   Future<void> addSource(Source source) async {
     final ffiId = source.id.toNSString();
     final prevSource = _ffiStyle.sourceWithIdentifier(ffiId);
-    if (prevSource != null) _ffiStyle.removeSource(prevSource);
+    if (prevSource != null) {
+      throw Exception(
+        'A Source with the id "${source.id}" already exists in the map style.',
+      );
+    }
 
     final MLNSource ffiSource;
     switch (source) {
@@ -190,6 +200,8 @@ class StyleControllerIos implements StyleController {
         );
     }
     _ffiStyle.addSource(ffiSource);
+    ffiSource.release();
+    ffiId.release();
   }
 
   @override
