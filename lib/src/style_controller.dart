@@ -1,4 +1,8 @@
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
 
 /// The [StyleController] can be used to manipulate the style of
@@ -66,6 +70,49 @@ abstract class StyleController {
   Future<void> addImages(Map<String, Uint8List> images) => Future.wait(
     images.entries.map((e) => addImage(e.key, e.value)),
   );
+
+  /// Load an image from the Flutter assets to the map by its [asset] path.
+  Future<void> addImageFromAssets({
+    required String id,
+    required String asset,
+  }) async {
+    final byteData = await rootBundle.load(asset);
+    final bytes = byteData.buffer.asUint8List();
+    await addImage(id, bytes);
+  }
+
+  /// Create an image from [IconData] and add it to the map with the given [id].
+  /// The [size] parameter defines the width and height of the resulting image
+  /// in pixels.
+  Future<void> addImageFromIconData({
+    required String id,
+    required IconData iconData,
+    int size = 100,
+  }) async {
+    final pictureRecorder = PictureRecorder();
+    final canvas = Canvas(pictureRecorder);
+
+    TextPainter(textDirection: TextDirection.ltr)
+      ..text = TextSpan(
+        text: String.fromCharCode(iconData.codePoint),
+        style: TextStyle(
+          letterSpacing: 0,
+          fontSize: size.toDouble(),
+          fontFamily: iconData.fontFamily,
+          package: iconData.fontPackage,
+          color: const Color(0x00000000), // black
+        ),
+      )
+      ..layout()
+      ..paint(canvas, Offset.zero);
+
+    final picture = pictureRecorder.endRecording();
+    final image = await picture.toImage(size, size);
+    final bytes = await image.toByteData(format: ImageByteFormat.png);
+    if (bytes == null) return;
+
+    await addImage(id, bytes.buffer.asUint8List());
+  }
 
   /// Removes an image from the map
   Future<void> removeImage(String id);
