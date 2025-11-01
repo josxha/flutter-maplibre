@@ -1,7 +1,7 @@
 #include <stdint.h>
 #import <Foundation/Foundation.h>
 #import <objc/message.h>
-#import "../ios/maplibre_ios/Sources/maplibre_ios/MapLibreRegistry.h"
+#import "../ios/maplibre_ios/Sources/maplibre_ios/MapLibreIos.h"
 #import "../MapLibre.h"
 
 #if !__has_feature(objc_arc)
