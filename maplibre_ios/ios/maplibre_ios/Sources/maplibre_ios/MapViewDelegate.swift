@@ -34,10 +34,29 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
         self._mapOptions = mapOptions
 
         // TODO(josxha): match the implementation from `setStyle()`
-        if mapOptions.style.hasPrefix("{") {
-          self._mapView = MLNMapView(frame: self._view.bounds, styleJSON: mapOptions.style)
+        var style = mapOptions.style
+        if style.hasPrefix("{") {
+          self._mapView = MLNMapView(frame: self._view.bounds, styleJSON: style)
+        } else if (style.hasPrefix("/")) {
+          var styleUrl = URL(string: "file://\(style)")
+          self._mapView = MLNMapView(frame: self._view.bounds, styleURL: styleUrl)
+        } else if (!style.hasPrefix("http://") && !style.hasPrefix("https://") && !style.hasPrefix("mapbox://")) {
+            if let assetPath = Bundle.main.path(
+                forResource: "assets/styles/translucent_style",
+                ofType: "json",
+                inDirectory: "Frameworks/App.framework/flutter_assets"
+            ) {
+                do {
+                    let content = try String(contentsOfFile: assetPath, encoding: .utf8)
+                    self._mapView = MLNMapView(frame: self._view.bounds, styleJSON: content)
+                } catch {
+                    print("❌ Failed to read Flutter asset: \(error)")
+                }
+            } else {
+                print("❌ Could not find Flutter asset at path.")
+            }
         } else {
-          self._mapView = MLNMapView(frame: self._view.bounds, styleURL: URL(string: mapOptions.style))
+          self._mapView = MLNMapView(frame: self._view.bounds, styleURL: URL(string: style))
         }
 
         MapLibreRegistry.addMap(viewId: viewId, map: self._mapView)
