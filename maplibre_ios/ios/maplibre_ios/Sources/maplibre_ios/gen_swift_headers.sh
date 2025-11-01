@@ -6,7 +6,9 @@
 xcrun --sdk iphonesimulator --show-sdk-path
 
 swiftc \
-    -c MapLibreIos.swift \
+    -c MapLibreRegistry.swift \
+    -c Extensions.swift \
+    -c Helpers.swift \
     -module-name maplibre_ios \
     -emit-objc-header-path MapLibreIos.h \
     -emit-library -o libmaplibreios.dylib \
