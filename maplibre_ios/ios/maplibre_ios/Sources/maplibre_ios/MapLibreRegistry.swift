@@ -30,4 +30,3 @@ import UIKit
   // Warning: Storing Context in a static field may lead to memory leaks.
   @objc public static var context: AnyObject?
 }
-
