@@ -57,9 +57,7 @@ private func wrapError(_ error: Any) -> [Any?] {
 }
 
 private func createConnectionError(withChannelName channelName: String) -> PigeonError {
-  return PigeonError(
-    code: "channel-error", message: "Unable to establish connection on channel: '\(channelName)'.",
-    details: "")
+  return PigeonError(code: "channel-error", message: "Unable to establish connection on channel: '\(channelName)'.", details: "")
 }
 
 private func isNullish(_ value: Any?) -> Bool {
@@ -114,12 +112,12 @@ func deepEqualsPigeon(_ lhs: Any?, _ rhs: Any?) -> Bool {
 
 func deepHashPigeon(value: Any?, hasher: inout Hasher) {
   if let valueList = value as? [AnyHashable] {
-    for item in valueList { deepHashPigeon(value: item, hasher: &hasher) }
-    return
+     for item in valueList { deepHashPigeon(value: item, hasher: &hasher) }
+     return
   }
 
   if let valueDict = value as? [AnyHashable: AnyHashable] {
-    for key in valueDict.keys {
+    for key in valueDict.keys { 
       hasher.combine(key)
       deepHashPigeon(value: valueDict[key]!, hasher: &hasher)
     }
@@ -132,6 +130,8 @@ func deepHashPigeon(value: Any?, hasher: inout Hasher) {
 
   return hasher.combine(String(describing: value))
 }
+
+    
 
 /// Influences the y direction of the tile coordinates.
 enum TileScheme: Int {
@@ -195,6 +195,7 @@ struct MapOptions: Hashable {
   /// The MapView foreground color that is used when the map surface is being created.
   var androidForegroundLoadColor: Int64
 
+
   // swift-format-ignore: AlwaysUseLowerCamelCase
   static func fromList(_ pigeonVar_list: [Any?]) -> MapOptions? {
     let style = pigeonVar_list[0] as! String
@@ -248,8 +249,7 @@ struct MapOptions: Hashable {
     ]
   }
   static func == (lhs: MapOptions, rhs: MapOptions) -> Bool {
-    return deepEqualsPigeon(lhs.toList(), rhs.toList())
-  }
+    return deepEqualsPigeon(lhs.toList(), rhs.toList())  }
   func hash(into hasher: inout Hasher) {
     deepHashPigeon(value: toList(), hasher: &hasher)
   }
@@ -267,6 +267,7 @@ struct MapGestures: Hashable {
   var zoom: Bool
   /// Tilt (pitch) the map camera.
   var tilt: Bool
+
 
   // swift-format-ignore: AlwaysUseLowerCamelCase
   static func fromList(_ pigeonVar_list: [Any?]) -> MapGestures? {
@@ -291,8 +292,7 @@ struct MapGestures: Hashable {
     ]
   }
   static func == (lhs: MapGestures, rhs: MapGestures) -> Bool {
-    return deepEqualsPigeon(lhs.toList(), rhs.toList())
-  }
+    return deepEqualsPigeon(lhs.toList(), rhs.toList())  }
   func hash(into hasher: inout Hasher) {
     deepHashPigeon(value: toList(), hasher: &hasher)
   }
@@ -306,6 +306,7 @@ struct LngLat: Hashable {
   var lng: Double
   /// The latitude
   var lat: Double
+
 
   // swift-format-ignore: AlwaysUseLowerCamelCase
   static func fromList(_ pigeonVar_list: [Any?]) -> LngLat? {
@@ -324,8 +325,7 @@ struct LngLat: Hashable {
     ]
   }
   static func == (lhs: LngLat, rhs: LngLat) -> Bool {
-    return deepEqualsPigeon(lhs.toList(), rhs.toList())
-  }
+    return deepEqualsPigeon(lhs.toList(), rhs.toList())  }
   func hash(into hasher: inout Hasher) {
     deepHashPigeon(value: toList(), hasher: &hasher)
   }
@@ -339,6 +339,7 @@ struct Offset: Hashable {
   var x: Double
   /// The y coordinate
   var y: Double
+
 
   // swift-format-ignore: AlwaysUseLowerCamelCase
   static func fromList(_ pigeonVar_list: [Any?]) -> Offset? {
@@ -357,8 +358,7 @@ struct Offset: Hashable {
     ]
   }
   static func == (lhs: Offset, rhs: Offset) -> Bool {
-    return deepEqualsPigeon(lhs.toList(), rhs.toList())
-  }
+    return deepEqualsPigeon(lhs.toList(), rhs.toList())  }
   func hash(into hasher: inout Hasher) {
     deepHashPigeon(value: toList(), hasher: &hasher)
   }
@@ -372,6 +372,7 @@ struct Padding: Hashable {
   var bottom: Int64
   var left: Int64
   var right: Int64
+
 
   // swift-format-ignore: AlwaysUseLowerCamelCase
   static func fromList(_ pigeonVar_list: [Any?]) -> Padding? {
@@ -396,8 +397,7 @@ struct Padding: Hashable {
     ]
   }
   static func == (lhs: Padding, rhs: Padding) -> Bool {
-    return deepEqualsPigeon(lhs.toList(), rhs.toList())
-  }
+    return deepEqualsPigeon(lhs.toList(), rhs.toList())  }
   func hash(into hasher: inout Hasher) {
     deepHashPigeon(value: toList(), hasher: &hasher)
   }
@@ -411,6 +411,7 @@ struct MapCamera: Hashable {
   var zoom: Double
   var pitch: Double
   var bearing: Double
+
 
   // swift-format-ignore: AlwaysUseLowerCamelCase
   static func fromList(_ pigeonVar_list: [Any?]) -> MapCamera? {
@@ -435,8 +436,7 @@ struct MapCamera: Hashable {
     ]
   }
   static func == (lhs: MapCamera, rhs: MapCamera) -> Bool {
-    return deepEqualsPigeon(lhs.toList(), rhs.toList())
-  }
+    return deepEqualsPigeon(lhs.toList(), rhs.toList())  }
   func hash(into hasher: inout Hasher) {
     deepHashPigeon(value: toList(), hasher: &hasher)
   }
@@ -450,6 +450,7 @@ struct LngLatBounds: Hashable {
   var longitudeEast: Double
   var latitudeSouth: Double
   var latitudeNorth: Double
+
 
   // swift-format-ignore: AlwaysUseLowerCamelCase
   static func fromList(_ pigeonVar_list: [Any?]) -> LngLatBounds? {
@@ -474,8 +475,7 @@ struct LngLatBounds: Hashable {
     ]
   }
   static func == (lhs: LngLatBounds, rhs: LngLatBounds) -> Bool {
-    return deepEqualsPigeon(lhs.toList(), rhs.toList())
-  }
+    return deepEqualsPigeon(lhs.toList(), rhs.toList())  }
   func hash(into hasher: inout Hasher) {
     deepHashPigeon(value: toList(), hasher: &hasher)
   }
@@ -491,6 +491,7 @@ struct OfflineRegion: Hashable {
   var maxZoom: Double
   var pixelRatio: Double
   var styleUrl: String
+
 
   // swift-format-ignore: AlwaysUseLowerCamelCase
   static func fromList(_ pigeonVar_list: [Any?]) -> OfflineRegion? {
@@ -521,8 +522,7 @@ struct OfflineRegion: Hashable {
     ]
   }
   static func == (lhs: OfflineRegion, rhs: OfflineRegion) -> Bool {
-    return deepEqualsPigeon(lhs.toList(), rhs.toList())
-  }
+    return deepEqualsPigeon(lhs.toList(), rhs.toList())  }
   func hash(into hasher: inout Hasher) {
     deepHashPigeon(value: toList(), hasher: &hasher)
   }
@@ -626,67 +626,42 @@ class PigeonPigeonCodec: FlutterStandardMessageCodec, @unchecked Sendable {
   static let shared = PigeonPigeonCodec(readerWriter: PigeonPigeonCodecReaderWriter())
 }
 
+
 /// Generated protocol from Pigeon that represents a handler of messages from Flutter.
 protocol MapLibreHostApi {
   func dispose() throws
   /// Add a fill layer to the map style.
-  func addFillLayer(
-    id: String, sourceId: String, layout: [String: Any], paint: [String: Any],
-    belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
+  func addFillLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
   /// Add a circle layer to the map style.
-  func addCircleLayer(
-    id: String, sourceId: String, layout: [String: Any], paint: [String: Any],
-    belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
+  func addCircleLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
   /// Add a background layer to the map style.
-  func addBackgroundLayer(
-    id: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?,
-    completion: @escaping (Result<Void, Error>) -> Void)
+  func addBackgroundLayer(id: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
   /// Add a fill extrusion layer to the map style.
-  func addFillExtrusionLayer(
-    id: String, sourceId: String, layout: [String: Any], paint: [String: Any],
-    belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
+  func addFillExtrusionLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
   /// Add a heatmap layer to the map style.
-  func addHeatmapLayer(
-    id: String, sourceId: String, layout: [String: Any], paint: [String: Any],
-    belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
+  func addHeatmapLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
   /// Add a hillshade layer to the map style.
-  func addHillshadeLayer(
-    id: String, sourceId: String, layout: [String: Any], paint: [String: Any],
-    belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
+  func addHillshadeLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
   /// Add a line layer to the map style.
-  func addLineLayer(
-    id: String, sourceId: String, layout: [String: Any], paint: [String: Any],
-    belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
+  func addLineLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
   /// Add a raster layer to the map style.
-  func addRasterLayer(
-    id: String, sourceId: String, layout: [String: Any], paint: [String: Any],
-    belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
+  func addRasterLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
   /// Add a symbol layer to the map style.
-  func addSymbolLayer(
-    id: String, sourceId: String, layout: [String: Any], paint: [String: Any],
-    belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
+  func addSymbolLayer(id: String, sourceId: String, layout: [String: Any], paint: [String: Any], belowLayerId: String?, completion: @escaping (Result<Void, Error>) -> Void)
   /// Loads an image to the map. An image needs to be loaded before it can
   /// get used.
-  func loadImage(
-    url: String, completion: @escaping (Result<FlutterStandardTypedData, Error>) -> Void)
+  func loadImage(url: String, completion: @escaping (Result<FlutterStandardTypedData, Error>) -> Void)
   /// Add an image to the map.
-  func addImage(
-    id: String, bytes: FlutterStandardTypedData, completion: @escaping (Result<Void, Error>) -> Void
-  )
+  func addImage(id: String, bytes: FlutterStandardTypedData, completion: @escaping (Result<Void, Error>) -> Void)
 }
 
 /// Generated setup class from Pigeon to handle messages through the `binaryMessenger`.
 class MapLibreHostApiSetup {
   static var codec: FlutterStandardMessageCodec { PigeonPigeonCodec.shared }
   /// Sets up an instance of `MapLibreHostApi` to handle messages through the `binaryMessenger`.
-  static func setUp(
-    binaryMessenger: FlutterBinaryMessenger, api: MapLibreHostApi?,
-    messageChannelSuffix: String = ""
-  ) {
+  static func setUp(binaryMessenger: FlutterBinaryMessenger, api: MapLibreHostApi?, messageChannelSuffix: String = "") {
     let channelSuffix = messageChannelSuffix.count > 0 ? ".\(messageChannelSuffix)" : ""
-    let disposeChannel = FlutterBasicMessageChannel(
-      name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.dispose\(channelSuffix)",
-      binaryMessenger: binaryMessenger, codec: codec)
+    let disposeChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.dispose\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
       disposeChannel.setMessageHandler { _, reply in
         do {
@@ -700,9 +675,7 @@ class MapLibreHostApiSetup {
       disposeChannel.setMessageHandler(nil)
     }
     /// Add a fill layer to the map style.
-    let addFillLayerChannel = FlutterBasicMessageChannel(
-      name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addFillLayer\(channelSuffix)",
-      binaryMessenger: binaryMessenger, codec: codec)
+    let addFillLayerChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addFillLayer\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
       addFillLayerChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
@@ -711,10 +684,7 @@ class MapLibreHostApiSetup {
         let layoutArg = args[2] as! [String: Any]
         let paintArg = args[3] as! [String: Any]
         let belowLayerIdArg: String? = nilOrValue(args[4])
-        api.addFillLayer(
-          id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg,
-          belowLayerId: belowLayerIdArg
-        ) { result in
+        api.addFillLayer(id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg, belowLayerId: belowLayerIdArg) { result in
           switch result {
           case .success:
             reply(wrapResult(nil))
@@ -727,9 +697,7 @@ class MapLibreHostApiSetup {
       addFillLayerChannel.setMessageHandler(nil)
     }
     /// Add a circle layer to the map style.
-    let addCircleLayerChannel = FlutterBasicMessageChannel(
-      name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addCircleLayer\(channelSuffix)",
-      binaryMessenger: binaryMessenger, codec: codec)
+    let addCircleLayerChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addCircleLayer\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
       addCircleLayerChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
@@ -738,10 +706,7 @@ class MapLibreHostApiSetup {
         let layoutArg = args[2] as! [String: Any]
         let paintArg = args[3] as! [String: Any]
         let belowLayerIdArg: String? = nilOrValue(args[4])
-        api.addCircleLayer(
-          id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg,
-          belowLayerId: belowLayerIdArg
-        ) { result in
+        api.addCircleLayer(id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg, belowLayerId: belowLayerIdArg) { result in
           switch result {
           case .success:
             reply(wrapResult(nil))
@@ -754,9 +719,7 @@ class MapLibreHostApiSetup {
       addCircleLayerChannel.setMessageHandler(nil)
     }
     /// Add a background layer to the map style.
-    let addBackgroundLayerChannel = FlutterBasicMessageChannel(
-      name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addBackgroundLayer\(channelSuffix)",
-      binaryMessenger: binaryMessenger, codec: codec)
+    let addBackgroundLayerChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addBackgroundLayer\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
       addBackgroundLayerChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
@@ -764,9 +727,7 @@ class MapLibreHostApiSetup {
         let layoutArg = args[1] as! [String: Any]
         let paintArg = args[2] as! [String: Any]
         let belowLayerIdArg: String? = nilOrValue(args[3])
-        api.addBackgroundLayer(
-          id: idArg, layout: layoutArg, paint: paintArg, belowLayerId: belowLayerIdArg
-        ) { result in
+        api.addBackgroundLayer(id: idArg, layout: layoutArg, paint: paintArg, belowLayerId: belowLayerIdArg) { result in
           switch result {
           case .success:
             reply(wrapResult(nil))
@@ -779,9 +740,7 @@ class MapLibreHostApiSetup {
       addBackgroundLayerChannel.setMessageHandler(nil)
     }
     /// Add a fill extrusion layer to the map style.
-    let addFillExtrusionLayerChannel = FlutterBasicMessageChannel(
-      name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addFillExtrusionLayer\(channelSuffix)",
-      binaryMessenger: binaryMessenger, codec: codec)
+    let addFillExtrusionLayerChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addFillExtrusionLayer\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
       addFillExtrusionLayerChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
@@ -790,10 +749,7 @@ class MapLibreHostApiSetup {
         let layoutArg = args[2] as! [String: Any]
         let paintArg = args[3] as! [String: Any]
         let belowLayerIdArg: String? = nilOrValue(args[4])
-        api.addFillExtrusionLayer(
-          id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg,
-          belowLayerId: belowLayerIdArg
-        ) { result in
+        api.addFillExtrusionLayer(id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg, belowLayerId: belowLayerIdArg) { result in
           switch result {
           case .success:
             reply(wrapResult(nil))
@@ -806,9 +762,7 @@ class MapLibreHostApiSetup {
       addFillExtrusionLayerChannel.setMessageHandler(nil)
     }
     /// Add a heatmap layer to the map style.
-    let addHeatmapLayerChannel = FlutterBasicMessageChannel(
-      name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addHeatmapLayer\(channelSuffix)",
-      binaryMessenger: binaryMessenger, codec: codec)
+    let addHeatmapLayerChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addHeatmapLayer\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
       addHeatmapLayerChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
@@ -817,10 +771,7 @@ class MapLibreHostApiSetup {
         let layoutArg = args[2] as! [String: Any]
         let paintArg = args[3] as! [String: Any]
         let belowLayerIdArg: String? = nilOrValue(args[4])
-        api.addHeatmapLayer(
-          id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg,
-          belowLayerId: belowLayerIdArg
-        ) { result in
+        api.addHeatmapLayer(id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg, belowLayerId: belowLayerIdArg) { result in
           switch result {
           case .success:
             reply(wrapResult(nil))
@@ -833,9 +784,7 @@ class MapLibreHostApiSetup {
       addHeatmapLayerChannel.setMessageHandler(nil)
     }
     /// Add a hillshade layer to the map style.
-    let addHillshadeLayerChannel = FlutterBasicMessageChannel(
-      name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addHillshadeLayer\(channelSuffix)",
-      binaryMessenger: binaryMessenger, codec: codec)
+    let addHillshadeLayerChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addHillshadeLayer\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
       addHillshadeLayerChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
@@ -844,10 +793,7 @@ class MapLibreHostApiSetup {
         let layoutArg = args[2] as! [String: Any]
         let paintArg = args[3] as! [String: Any]
         let belowLayerIdArg: String? = nilOrValue(args[4])
-        api.addHillshadeLayer(
-          id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg,
-          belowLayerId: belowLayerIdArg
-        ) { result in
+        api.addHillshadeLayer(id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg, belowLayerId: belowLayerIdArg) { result in
           switch result {
           case .success:
             reply(wrapResult(nil))
@@ -860,9 +806,7 @@ class MapLibreHostApiSetup {
       addHillshadeLayerChannel.setMessageHandler(nil)
     }
     /// Add a line layer to the map style.
-    let addLineLayerChannel = FlutterBasicMessageChannel(
-      name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addLineLayer\(channelSuffix)",
-      binaryMessenger: binaryMessenger, codec: codec)
+    let addLineLayerChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addLineLayer\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
       addLineLayerChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
@@ -871,10 +815,7 @@ class MapLibreHostApiSetup {
         let layoutArg = args[2] as! [String: Any]
         let paintArg = args[3] as! [String: Any]
         let belowLayerIdArg: String? = nilOrValue(args[4])
-        api.addLineLayer(
-          id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg,
-          belowLayerId: belowLayerIdArg
-        ) { result in
+        api.addLineLayer(id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg, belowLayerId: belowLayerIdArg) { result in
           switch result {
           case .success:
             reply(wrapResult(nil))
@@ -887,9 +828,7 @@ class MapLibreHostApiSetup {
       addLineLayerChannel.setMessageHandler(nil)
     }
     /// Add a raster layer to the map style.
-    let addRasterLayerChannel = FlutterBasicMessageChannel(
-      name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addRasterLayer\(channelSuffix)",
-      binaryMessenger: binaryMessenger, codec: codec)
+    let addRasterLayerChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addRasterLayer\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
       addRasterLayerChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
@@ -898,10 +837,7 @@ class MapLibreHostApiSetup {
         let layoutArg = args[2] as! [String: Any]
         let paintArg = args[3] as! [String: Any]
         let belowLayerIdArg: String? = nilOrValue(args[4])
-        api.addRasterLayer(
-          id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg,
-          belowLayerId: belowLayerIdArg
-        ) { result in
+        api.addRasterLayer(id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg, belowLayerId: belowLayerIdArg) { result in
           switch result {
           case .success:
             reply(wrapResult(nil))
@@ -914,9 +850,7 @@ class MapLibreHostApiSetup {
       addRasterLayerChannel.setMessageHandler(nil)
     }
     /// Add a symbol layer to the map style.
-    let addSymbolLayerChannel = FlutterBasicMessageChannel(
-      name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addSymbolLayer\(channelSuffix)",
-      binaryMessenger: binaryMessenger, codec: codec)
+    let addSymbolLayerChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addSymbolLayer\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
       addSymbolLayerChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
@@ -925,10 +859,7 @@ class MapLibreHostApiSetup {
         let layoutArg = args[2] as! [String: Any]
         let paintArg = args[3] as! [String: Any]
         let belowLayerIdArg: String? = nilOrValue(args[4])
-        api.addSymbolLayer(
-          id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg,
-          belowLayerId: belowLayerIdArg
-        ) { result in
+        api.addSymbolLayer(id: idArg, sourceId: sourceIdArg, layout: layoutArg, paint: paintArg, belowLayerId: belowLayerIdArg) { result in
           switch result {
           case .success:
             reply(wrapResult(nil))
@@ -942,9 +873,7 @@ class MapLibreHostApiSetup {
     }
     /// Loads an image to the map. An image needs to be loaded before it can
     /// get used.
-    let loadImageChannel = FlutterBasicMessageChannel(
-      name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.loadImage\(channelSuffix)",
-      binaryMessenger: binaryMessenger, codec: codec)
+    let loadImageChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.loadImage\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
       loadImageChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
@@ -962,9 +891,7 @@ class MapLibreHostApiSetup {
       loadImageChannel.setMessageHandler(nil)
     }
     /// Add an image to the map.
-    let addImageChannel = FlutterBasicMessageChannel(
-      name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addImage\(channelSuffix)",
-      binaryMessenger: binaryMessenger, codec: codec)
+    let addImageChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.MapLibreHostApi.addImage\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
       addImageChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
@@ -993,32 +920,22 @@ protocol MapLibreFlutterApiProtocol {
   /// Callback for when the map is ready and can be used.
   func onMapReady(completion: @escaping (Result<Void, PigeonError>) -> Void)
   /// Callback when the user clicks on the map.
-  func onClick(
-    point pointArg: LngLat, screenPoint screenPointArg: Offset,
-    completion: @escaping (Result<Void, PigeonError>) -> Void)
+  func onClick(point pointArg: LngLat, screenPoint screenPointArg: Offset, completion: @escaping (Result<Void, PigeonError>) -> Void)
   /// Callback when the map idles.
   func onIdle(completion: @escaping (Result<Void, PigeonError>) -> Void)
   /// Callback when the map camera idles.
   func onCameraIdle(completion: @escaping (Result<Void, PigeonError>) -> Void)
   /// Callback when the user performs a secondary click on the map
   /// (e.g. by default a click with the right mouse button).
-  func onSecondaryClick(
-    point pointArg: LngLat, screenPoint screenPointArg: Offset,
-    completion: @escaping (Result<Void, PigeonError>) -> Void)
+  func onSecondaryClick(point pointArg: LngLat, screenPoint screenPointArg: Offset, completion: @escaping (Result<Void, PigeonError>) -> Void)
   /// Callback when the user performs a double click on the map.
-  func onDoubleClick(
-    point pointArg: LngLat, screenPoint screenPointArg: Offset,
-    completion: @escaping (Result<Void, PigeonError>) -> Void)
+  func onDoubleClick(point pointArg: LngLat, screenPoint screenPointArg: Offset, completion: @escaping (Result<Void, PigeonError>) -> Void)
   /// Callback when the user performs a long lasting click on the map.
-  func onLongClick(
-    point pointArg: LngLat, screenPoint screenPointArg: Offset,
-    completion: @escaping (Result<Void, PigeonError>) -> Void)
+  func onLongClick(point pointArg: LngLat, screenPoint screenPointArg: Offset, completion: @escaping (Result<Void, PigeonError>) -> Void)
   /// Callback when the map camera changes.
-  func onMoveCamera(
-    camera cameraArg: MapCamera, completion: @escaping (Result<Void, PigeonError>) -> Void)
+  func onMoveCamera(camera cameraArg: MapCamera, completion: @escaping (Result<Void, PigeonError>) -> Void)
   /// Callback when the map camera starts changing.
-  func onStartMoveCamera(
-    reason reasonArg: CameraChangeReason, completion: @escaping (Result<Void, PigeonError>) -> Void)
+  func onStartMoveCamera(reason reasonArg: CameraChangeReason, completion: @escaping (Result<Void, PigeonError>) -> Void)
 }
 class MapLibreFlutterApi: MapLibreFlutterApiProtocol {
   private let binaryMessenger: FlutterBinaryMessenger
@@ -1032,10 +949,8 @@ class MapLibreFlutterApi: MapLibreFlutterApiProtocol {
   }
   /// Get the map options from dart.
   func getOptions(completion: @escaping (Result<MapOptions, PigeonError>) -> Void) {
-    let channelName: String =
-      "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.getOptions\(messageChannelSuffix)"
-    let channel = FlutterBasicMessageChannel(
-      name: channelName, binaryMessenger: binaryMessenger, codec: codec)
+    let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.getOptions\(messageChannelSuffix)"
+    let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
     channel.sendMessage(nil) { response in
       guard let listResponse = response as? [Any?] else {
         completion(.failure(createConnectionError(withChannelName: channelName)))
@@ -1047,11 +962,7 @@ class MapLibreFlutterApi: MapLibreFlutterApiProtocol {
         let details: String? = nilOrValue(listResponse[2])
         completion(.failure(PigeonError(code: code, message: message, details: details)))
       } else if listResponse[0] == nil {
-        completion(
-          .failure(
-            PigeonError(
-              code: "null-error",
-              message: "Flutter api returned null value for non-null return value.", details: "")))
+        completion(.failure(PigeonError(code: "null-error", message: "Flutter api returned null value for non-null return value.", details: "")))
       } else {
         let result = listResponse[0] as! MapOptions
         completion(.success(result))
@@ -1060,10 +971,8 @@ class MapLibreFlutterApi: MapLibreFlutterApiProtocol {
   }
   /// Callback for when the style has been loaded.
   func onStyleLoaded(completion: @escaping (Result<Void, PigeonError>) -> Void) {
-    let channelName: String =
-      "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onStyleLoaded\(messageChannelSuffix)"
-    let channel = FlutterBasicMessageChannel(
-      name: channelName, binaryMessenger: binaryMessenger, codec: codec)
+    let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onStyleLoaded\(messageChannelSuffix)"
+    let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
     channel.sendMessage(nil) { response in
       guard let listResponse = response as? [Any?] else {
         completion(.failure(createConnectionError(withChannelName: channelName)))
@@ -1081,10 +990,8 @@ class MapLibreFlutterApi: MapLibreFlutterApiProtocol {
   }
   /// Callback for when the map is ready and can be used.
   func onMapReady(completion: @escaping (Result<Void, PigeonError>) -> Void) {
-    let channelName: String =
-      "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onMapReady\(messageChannelSuffix)"
-    let channel = FlutterBasicMessageChannel(
-      name: channelName, binaryMessenger: binaryMessenger, codec: codec)
+    let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onMapReady\(messageChannelSuffix)"
+    let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
     channel.sendMessage(nil) { response in
       guard let listResponse = response as? [Any?] else {
         completion(.failure(createConnectionError(withChannelName: channelName)))
@@ -1101,14 +1008,9 @@ class MapLibreFlutterApi: MapLibreFlutterApiProtocol {
     }
   }
   /// Callback when the user clicks on the map.
-  func onClick(
-    point pointArg: LngLat, screenPoint screenPointArg: Offset,
-    completion: @escaping (Result<Void, PigeonError>) -> Void
-  ) {
-    let channelName: String =
-      "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onClick\(messageChannelSuffix)"
-    let channel = FlutterBasicMessageChannel(
-      name: channelName, binaryMessenger: binaryMessenger, codec: codec)
+  func onClick(point pointArg: LngLat, screenPoint screenPointArg: Offset, completion: @escaping (Result<Void, PigeonError>) -> Void) {
+    let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onClick\(messageChannelSuffix)"
+    let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
     channel.sendMessage([pointArg, screenPointArg] as [Any?]) { response in
       guard let listResponse = response as? [Any?] else {
         completion(.failure(createConnectionError(withChannelName: channelName)))
@@ -1126,10 +1028,8 @@ class MapLibreFlutterApi: MapLibreFlutterApiProtocol {
   }
   /// Callback when the map idles.
   func onIdle(completion: @escaping (Result<Void, PigeonError>) -> Void) {
-    let channelName: String =
-      "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onIdle\(messageChannelSuffix)"
-    let channel = FlutterBasicMessageChannel(
-      name: channelName, binaryMessenger: binaryMessenger, codec: codec)
+    let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onIdle\(messageChannelSuffix)"
+    let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
     channel.sendMessage(nil) { response in
       guard let listResponse = response as? [Any?] else {
         completion(.failure(createConnectionError(withChannelName: channelName)))
@@ -1147,10 +1047,8 @@ class MapLibreFlutterApi: MapLibreFlutterApiProtocol {
   }
   /// Callback when the map camera idles.
   func onCameraIdle(completion: @escaping (Result<Void, PigeonError>) -> Void) {
-    let channelName: String =
-      "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onCameraIdle\(messageChannelSuffix)"
-    let channel = FlutterBasicMessageChannel(
-      name: channelName, binaryMessenger: binaryMessenger, codec: codec)
+    let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onCameraIdle\(messageChannelSuffix)"
+    let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
     channel.sendMessage(nil) { response in
       guard let listResponse = response as? [Any?] else {
         completion(.failure(createConnectionError(withChannelName: channelName)))
@@ -1168,14 +1066,9 @@ class MapLibreFlutterApi: MapLibreFlutterApiProtocol {
   }
   /// Callback when the user performs a secondary click on the map
   /// (e.g. by default a click with the right mouse button).
-  func onSecondaryClick(
-    point pointArg: LngLat, screenPoint screenPointArg: Offset,
-    completion: @escaping (Result<Void, PigeonError>) -> Void
-  ) {
-    let channelName: String =
-      "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onSecondaryClick\(messageChannelSuffix)"
-    let channel = FlutterBasicMessageChannel(
-      name: channelName, binaryMessenger: binaryMessenger, codec: codec)
+  func onSecondaryClick(point pointArg: LngLat, screenPoint screenPointArg: Offset, completion: @escaping (Result<Void, PigeonError>) -> Void) {
+    let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onSecondaryClick\(messageChannelSuffix)"
+    let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
     channel.sendMessage([pointArg, screenPointArg] as [Any?]) { response in
       guard let listResponse = response as? [Any?] else {
         completion(.failure(createConnectionError(withChannelName: channelName)))
@@ -1192,14 +1085,9 @@ class MapLibreFlutterApi: MapLibreFlutterApiProtocol {
     }
   }
   /// Callback when the user performs a double click on the map.
-  func onDoubleClick(
-    point pointArg: LngLat, screenPoint screenPointArg: Offset,
-    completion: @escaping (Result<Void, PigeonError>) -> Void
-  ) {
-    let channelName: String =
-      "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onDoubleClick\(messageChannelSuffix)"
-    let channel = FlutterBasicMessageChannel(
-      name: channelName, binaryMessenger: binaryMessenger, codec: codec)
+  func onDoubleClick(point pointArg: LngLat, screenPoint screenPointArg: Offset, completion: @escaping (Result<Void, PigeonError>) -> Void) {
+    let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onDoubleClick\(messageChannelSuffix)"
+    let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
     channel.sendMessage([pointArg, screenPointArg] as [Any?]) { response in
       guard let listResponse = response as? [Any?] else {
         completion(.failure(createConnectionError(withChannelName: channelName)))
@@ -1216,14 +1104,9 @@ class MapLibreFlutterApi: MapLibreFlutterApiProtocol {
     }
   }
   /// Callback when the user performs a long lasting click on the map.
-  func onLongClick(
-    point pointArg: LngLat, screenPoint screenPointArg: Offset,
-    completion: @escaping (Result<Void, PigeonError>) -> Void
-  ) {
-    let channelName: String =
-      "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongClick\(messageChannelSuffix)"
-    let channel = FlutterBasicMessageChannel(
-      name: channelName, binaryMessenger: binaryMessenger, codec: codec)
+  func onLongClick(point pointArg: LngLat, screenPoint screenPointArg: Offset, completion: @escaping (Result<Void, PigeonError>) -> Void) {
+    let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onLongClick\(messageChannelSuffix)"
+    let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
     channel.sendMessage([pointArg, screenPointArg] as [Any?]) { response in
       guard let listResponse = response as? [Any?] else {
         completion(.failure(createConnectionError(withChannelName: channelName)))
@@ -1240,13 +1123,9 @@ class MapLibreFlutterApi: MapLibreFlutterApiProtocol {
     }
   }
   /// Callback when the map camera changes.
-  func onMoveCamera(
-    camera cameraArg: MapCamera, completion: @escaping (Result<Void, PigeonError>) -> Void
-  ) {
-    let channelName: String =
-      "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onMoveCamera\(messageChannelSuffix)"
-    let channel = FlutterBasicMessageChannel(
-      name: channelName, binaryMessenger: binaryMessenger, codec: codec)
+  func onMoveCamera(camera cameraArg: MapCamera, completion: @escaping (Result<Void, PigeonError>) -> Void) {
+    let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onMoveCamera\(messageChannelSuffix)"
+    let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
     channel.sendMessage([cameraArg] as [Any?]) { response in
       guard let listResponse = response as? [Any?] else {
         completion(.failure(createConnectionError(withChannelName: channelName)))
@@ -1263,13 +1142,9 @@ class MapLibreFlutterApi: MapLibreFlutterApiProtocol {
     }
   }
   /// Callback when the map camera starts changing.
-  func onStartMoveCamera(
-    reason reasonArg: CameraChangeReason, completion: @escaping (Result<Void, PigeonError>) -> Void
-  ) {
-    let channelName: String =
-      "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onStartMoveCamera\(messageChannelSuffix)"
-    let channel = FlutterBasicMessageChannel(
-      name: channelName, binaryMessenger: binaryMessenger, codec: codec)
+  func onStartMoveCamera(reason reasonArg: CameraChangeReason, completion: @escaping (Result<Void, PigeonError>) -> Void) {
+    let channelName: String = "dev.flutter.pigeon.maplibre.MapLibreFlutterApi.onStartMoveCamera\(messageChannelSuffix)"
+    let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
     channel.sendMessage([reasonArg] as [Any?]) { response in
       guard let listResponse = response as? [Any?] else {
         completion(.failure(createConnectionError(withChannelName: channelName)))
@@ -1289,24 +1164,17 @@ class MapLibreFlutterApi: MapLibreFlutterApiProtocol {
 /// Generated protocol from Pigeon that represents a handler of messages from Flutter.
 protocol PermissionManagerHostApi {
   /// Request location permissions.
-  func requestLocationPermissions(
-    explanation: String, completion: @escaping (Result<Bool, Error>) -> Void)
+  func requestLocationPermissions(explanation: String, completion: @escaping (Result<Bool, Error>) -> Void)
 }
 
 /// Generated setup class from Pigeon to handle messages through the `binaryMessenger`.
 class PermissionManagerHostApiSetup {
   static var codec: FlutterStandardMessageCodec { PigeonPigeonCodec.shared }
   /// Sets up an instance of `PermissionManagerHostApi` to handle messages through the `binaryMessenger`.
-  static func setUp(
-    binaryMessenger: FlutterBinaryMessenger, api: PermissionManagerHostApi?,
-    messageChannelSuffix: String = ""
-  ) {
+  static func setUp(binaryMessenger: FlutterBinaryMessenger, api: PermissionManagerHostApi?, messageChannelSuffix: String = "") {
     let channelSuffix = messageChannelSuffix.count > 0 ? ".\(messageChannelSuffix)" : ""
     /// Request location permissions.
-    let requestLocationPermissionsChannel = FlutterBasicMessageChannel(
-      name:
-        "dev.flutter.pigeon.maplibre.PermissionManagerHostApi.requestLocationPermissions\(channelSuffix)",
-      binaryMessenger: binaryMessenger, codec: codec)
+    let requestLocationPermissionsChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.PermissionManagerHostApi.requestLocationPermissions\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
       requestLocationPermissionsChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
@@ -1336,24 +1204,17 @@ protocol OfflineManagerHostApi {
   /// Set maximum ambient cache size.
   func setMaximumAmbientCacheSize(bytes: Int64, completion: @escaping (Result<Void, Error>) -> Void)
   /// Download a map region.
-  func downloadRegion(
-    mapStyleUrl: String, bounds: LngLatBounds, minZoom: Double, maxZoom: Double,
-    pixelDensity: Double, metadata: String, completion: @escaping (Result<Void, Error>) -> Void)
+  func downloadRegion(mapStyleUrl: String, bounds: LngLatBounds, minZoom: Double, maxZoom: Double, pixelDensity: Double, metadata: String, completion: @escaping (Result<Void, Error>) -> Void)
 }
 
 /// Generated setup class from Pigeon to handle messages through the `binaryMessenger`.
 class OfflineManagerHostApiSetup {
   static var codec: FlutterStandardMessageCodec { PigeonPigeonCodec.shared }
   /// Sets up an instance of `OfflineManagerHostApi` to handle messages through the `binaryMessenger`.
-  static func setUp(
-    binaryMessenger: FlutterBinaryMessenger, api: OfflineManagerHostApi?,
-    messageChannelSuffix: String = ""
-  ) {
+  static func setUp(binaryMessenger: FlutterBinaryMessenger, api: OfflineManagerHostApi?, messageChannelSuffix: String = "") {
     let channelSuffix = messageChannelSuffix.count > 0 ? ".\(messageChannelSuffix)" : ""
     /// Clear the ambient cache.
-    let clearAmbientCacheChannel = FlutterBasicMessageChannel(
-      name: "dev.flutter.pigeon.maplibre.OfflineManagerHostApi.clearAmbientCache\(channelSuffix)",
-      binaryMessenger: binaryMessenger, codec: codec)
+    let clearAmbientCacheChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.OfflineManagerHostApi.clearAmbientCache\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
       clearAmbientCacheChannel.setMessageHandler { _, reply in
         api.clearAmbientCache { result in
@@ -1369,10 +1230,7 @@ class OfflineManagerHostApiSetup {
       clearAmbientCacheChannel.setMessageHandler(nil)
     }
     /// Invalidate the ambient cache.
-    let invalidateAmbientCacheChannel = FlutterBasicMessageChannel(
-      name:
-        "dev.flutter.pigeon.maplibre.OfflineManagerHostApi.invalidateAmbientCache\(channelSuffix)",
-      binaryMessenger: binaryMessenger, codec: codec)
+    let invalidateAmbientCacheChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.OfflineManagerHostApi.invalidateAmbientCache\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
       invalidateAmbientCacheChannel.setMessageHandler { _, reply in
         api.invalidateAmbientCache { result in
@@ -1388,9 +1246,7 @@ class OfflineManagerHostApiSetup {
       invalidateAmbientCacheChannel.setMessageHandler(nil)
     }
     /// Reset database.
-    let resetDatabaseChannel = FlutterBasicMessageChannel(
-      name: "dev.flutter.pigeon.maplibre.OfflineManagerHostApi.resetDatabase\(channelSuffix)",
-      binaryMessenger: binaryMessenger, codec: codec)
+    let resetDatabaseChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.OfflineManagerHostApi.resetDatabase\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
       resetDatabaseChannel.setMessageHandler { _, reply in
         api.resetDatabase { result in
@@ -1406,10 +1262,7 @@ class OfflineManagerHostApiSetup {
       resetDatabaseChannel.setMessageHandler(nil)
     }
     /// Set maximum ambient cache size.
-    let setMaximumAmbientCacheSizeChannel = FlutterBasicMessageChannel(
-      name:
-        "dev.flutter.pigeon.maplibre.OfflineManagerHostApi.setMaximumAmbientCacheSize\(channelSuffix)",
-      binaryMessenger: binaryMessenger, codec: codec)
+    let setMaximumAmbientCacheSizeChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.OfflineManagerHostApi.setMaximumAmbientCacheSize\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
       setMaximumAmbientCacheSizeChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
@@ -1427,9 +1280,7 @@ class OfflineManagerHostApiSetup {
       setMaximumAmbientCacheSizeChannel.setMessageHandler(nil)
     }
     /// Download a map region.
-    let downloadRegionChannel = FlutterBasicMessageChannel(
-      name: "dev.flutter.pigeon.maplibre.OfflineManagerHostApi.downloadRegion\(channelSuffix)",
-      binaryMessenger: binaryMessenger, codec: codec)
+    let downloadRegionChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.maplibre.OfflineManagerHostApi.downloadRegion\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
       downloadRegionChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
@@ -1439,10 +1290,7 @@ class OfflineManagerHostApiSetup {
         let maxZoomArg = args[3] as! Double
         let pixelDensityArg = args[4] as! Double
         let metadataArg = args[5] as! String
-        api.downloadRegion(
-          mapStyleUrl: mapStyleUrlArg, bounds: boundsArg, minZoom: minZoomArg, maxZoom: maxZoomArg,
-          pixelDensity: pixelDensityArg, metadata: metadataArg
-        ) { result in
+        api.downloadRegion(mapStyleUrl: mapStyleUrlArg, bounds: boundsArg, minZoom: minZoomArg, maxZoom: maxZoomArg, pixelDensity: pixelDensityArg, metadata: metadataArg) { result in
           switch result {
           case .success:
             reply(wrapResult(nil))
