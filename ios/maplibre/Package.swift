@@ -6,10 +6,10 @@ import PackageDescription
 let package = Package(
   name: "maplibre",
   platforms: [
-    .iOS("12.0")
+    .iOS("12.0"),
   ],
   products: [
-    .library(name: "maplibre", targets: ["maplibre"])
+    .library(name: "maplibre", targets: ["maplibre"]),
   ],
   dependencies: [],
   targets: [
@@ -27,6 +27,6 @@ let package = Package(
         // the following instructions to add them:
         // https://developer.apple.com/documentation/xcode/bundling-resources-with-a-swift-package
       ]
-    )
+    ),
   ]
 )
