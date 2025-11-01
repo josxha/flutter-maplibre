@@ -100,15 +100,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     bool webLinear = false,
     EdgeInsets padding = EdgeInsets.zero,
   }) async {
-    final sw = Struct.create<CLLocationCoordinate2D>()
-      ..longitude = bounds.longitudeWest
-      ..latitude = bounds.latitudeSouth;
-    final ne = Struct.create<CLLocationCoordinate2D>()
-      ..longitude = bounds.longitudeEast
-      ..latitude = bounds.latitudeNorth;
-    final ffiBounds = Struct.create<MLNCoordinateBounds>()
-      ..sw = sw
-      ..ne = ne;
+    final ffiBounds = bounds.toMLNCoordinateBounds();
     // TODO support padding with Struct UIEdgeInsets
     _mapView.setVisibleCoordinateBounds(ffiBounds, animated: true);
   }

@@ -15,7 +15,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
     viewId: Int64,
     binaryMessenger: FlutterBinaryMessenger
   ) {
-    print("### init new MapViewDelegate ### \(viewId) ###")
+    // print("### init new MapViewDelegate ### \(viewId) ###")
     var channelSuffix = String(viewId)
     _viewId = viewId
     _flutterApi = MapLibreFlutterApi(
@@ -34,7 +34,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
         self._mapOptions = mapOptions
 
         // TODO(josxha): match the implementation from `setStyle()`
-        if mapOptions.style.hasPrefix("{") || mapOptions.style.hasPrefix("[") {
+        if mapOptions.style.hasPrefix("{") {
           self._mapView = MLNMapView(frame: self._view.bounds, styleJSON: mapOptions.style)
         } else {
           self._mapView = MLNMapView(frame: self._view.bounds, styleURL: URL(string: mapOptions.style))
@@ -169,6 +169,12 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
 
   // MLNMapViewDelegate method called when map has finished loading
   func mapView(_ mapView: MLNMapView, didFinishLoading _: MLNStyle) {
+    if let bounds = _mapOptions!.maxBounds {
+      self._mapView.setVisibleCoordinateBounds(MLNCoordinateBounds(
+          sw: CLLocationCoordinate2D(latitude: bounds.latitudeSouth, longitude: bounds.longitudeWest),
+          ne: CLLocationCoordinate2D(latitude: bounds.latitudeNorth, longitude: bounds.longitudeEast),
+      ), animated: false)
+    }
     // setCamera() can only be used after the map did finish loading
     var camera = _mapView.camera
     camera.pitch = _mapOptions!.pitch
