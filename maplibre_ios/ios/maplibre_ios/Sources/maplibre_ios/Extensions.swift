@@ -1,7 +1,7 @@
 import MapLibre
 
-public extension UIColor {
-  convenience init?(hexString: String) {
+extension UIColor {
+  public convenience init?(hexString: String) {
     let r: CGFloat
     let g: CGFloat
     let b: CGFloat
@@ -15,7 +15,7 @@ public extension UIColor {
       var hexNumber: UInt64 = 0
 
       switch hexColor.count {
-      case 6: // e.g. FF0000
+      case 6:  // e.g. FF0000
         if scanner.scanHexInt64(&hexNumber) {
           a = 255
           r = CGFloat((hexNumber & 0xFF0000) >> 16) / 255
@@ -24,7 +24,7 @@ public extension UIColor {
           self.init(red: r, green: g, blue: b, alpha: a)
           return
         }
-      case 8: // with alpha value e.g. FFFF0000
+      case 8:  // with alpha value e.g. FFFF0000
         if scanner.scanHexInt64(&hexNumber) {
           a = CGFloat((hexNumber & 0xFF00_0000) >> 24) / 255
           r = CGFloat((hexNumber & 0x00FF_0000) >> 16) / 255
@@ -33,7 +33,7 @@ public extension UIColor {
           self.init(red: r, green: g, blue: b, alpha: a)
           return
         }
-      case 3: // short form e.g. "F00"
+      case 3:  // short form e.g. "F00"
         if scanner.scanHexInt64(&hexNumber) {
           a = 255
           r = CGFloat((hexNumber & 0xF00) >> 8) / 15

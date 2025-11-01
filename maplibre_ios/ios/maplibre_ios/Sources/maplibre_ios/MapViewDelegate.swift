@@ -22,7 +22,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
       binaryMessenger: binaryMessenger,
       messageChannelSuffix: channelSuffix
     )
-    super.init() // self can be used after calling super.init()
+    super.init()  // self can be used after calling super.init()
     MapLibreHostApiSetup.setUp(
       binaryMessenger: binaryMessenger, api: self,
       messageChannelSuffix: channelSuffix
@@ -37,24 +37,26 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
         var style = mapOptions.style
         if style.hasPrefix("{") {
           self._mapView = MLNMapView(frame: self._view.bounds, styleJSON: style)
-        } else if (style.hasPrefix("/")) {
+        } else if style.hasPrefix("/") {
           var styleUrl = URL(string: "file://\(style)")
           self._mapView = MLNMapView(frame: self._view.bounds, styleURL: styleUrl)
-        } else if (!style.hasPrefix("http://") && !style.hasPrefix("https://") && !style.hasPrefix("mapbox://")) {
-            if let assetPath = Bundle.main.path(
-                forResource: style.replacingOccurrences(of: ".json", with: ""),
-                ofType: "json",
-                inDirectory: "Frameworks/App.framework/flutter_assets"
-            ) {
-                do {
-                    let content = try String(contentsOfFile: assetPath, encoding: .utf8)
-                    self._mapView = MLNMapView(frame: self._view.bounds, styleJSON: content)
-                } catch {
-                    print("❌ Failed to read Flutter asset: \(error)")
-                }
-            } else {
-                print("❌ Could not find Flutter asset at path.")
+        } else if !style.hasPrefix("http://") && !style.hasPrefix("https://")
+          && !style.hasPrefix("mapbox://")
+        {
+          if let assetPath = Bundle.main.path(
+            forResource: style.replacingOccurrences(of: ".json", with: ""),
+            ofType: "json",
+            inDirectory: "Frameworks/App.framework/flutter_assets"
+          ) {
+            do {
+              let content = try String(contentsOfFile: assetPath, encoding: .utf8)
+              self._mapView = MLNMapView(frame: self._view.bounds, styleJSON: content)
+            } catch {
+              print("❌ Failed to read Flutter asset: \(error)")
             }
+          } else {
+            print("❌ Could not find Flutter asset at path.")
+          }
         } else {
           self._mapView = MLNMapView(frame: self._view.bounds, styleURL: URL(string: style))
         }
@@ -99,15 +101,18 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
         self._mapView.allowsZooming = mapOptions.gestures.zoom
         if let bounds = mapOptions.maxBounds {
           var mlnBounds = MLNCoordinateBounds(
-              sw: CLLocationCoordinate2D(latitude: bounds.latitudeSouth, longitude: bounds.longitudeWest),
-              ne: CLLocationCoordinate2D(latitude: bounds.latitudeNorth, longitude: bounds.longitudeEast),
+            sw: CLLocationCoordinate2D(
+              latitude: bounds.latitudeSouth, longitude: bounds.longitudeWest),
+            ne: CLLocationCoordinate2D(
+              latitude: bounds.latitudeNorth, longitude: bounds.longitudeEast),
           )
           self._mapView.maximumScreenBounds = mlnBounds
         }
 
         self._flutterApi.onMapReady { _ in }
 
-        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(self.onDoubleTap(sender:)))
+        let doubleTap = UITapGestureRecognizer(
+          target: self, action: #selector(self.onDoubleTap(sender:)))
         doubleTap.numberOfTapsRequired = 2
         self._mapView.addGestureRecognizer(doubleTap)
 
@@ -119,7 +124,8 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
         self._mapView.addGestureRecognizer(singleTap)
 
         if #available(iOS 13.4, *) {
-          let secondaryTap = UITapGestureRecognizer(target: self, action: #selector(self.onSecondaryTap(sender:)))
+          let secondaryTap = UITapGestureRecognizer(
+            target: self, action: #selector(self.onSecondaryTap(sender:)))
           secondaryTap.buttonMaskRequired = .secondary
           self._mapView.addGestureRecognizer(secondaryTap)
         }
