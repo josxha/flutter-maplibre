@@ -82,12 +82,17 @@ abstract class StyleController {
   }
 
   /// Create an image from [IconData] and add it to the map with the given [id].
+  ///
   /// The [size] parameter defines the width and height of the resulting image
   /// in pixels.
+  ///
+  /// The [color] parameter defines the color of the icon. By default, it is
+  /// black.
   Future<void> addImageFromIconData({
     required String id,
     required IconData iconData,
-    int size = 100,
+    int size = 200,
+    Color color = const Color(0xFF000000),
   }) async {
     final pictureRecorder = PictureRecorder();
     final canvas = Canvas(pictureRecorder);
@@ -100,15 +105,19 @@ abstract class StyleController {
           fontSize: size.toDouble(),
           fontFamily: iconData.fontFamily,
           package: iconData.fontPackage,
-          color: const Color(0x00000000), // black
+          color: color,
         ),
       )
       ..layout()
       ..paint(canvas, Offset.zero);
+    print('#2');
 
     final picture = pictureRecorder.endRecording();
+    print('#3');
     final image = await picture.toImage(size, size);
+    print('#4');
     final bytes = await image.toByteData(format: ImageByteFormat.png);
+    print('#5');
     if (bytes == null) return;
 
     await addImage(id, bytes.buffer.asUint8List());
