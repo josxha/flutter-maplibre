@@ -26,7 +26,7 @@ let package = Package(
 
         // FOR LOCAL LIBRARY
         // "MapLibre",
-        
+
         .product(name: "CwlCatchException", package: "CwlCatchException"),
       ],
       cSettings: [
