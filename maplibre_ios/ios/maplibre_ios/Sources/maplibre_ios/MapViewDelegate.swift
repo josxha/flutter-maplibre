@@ -106,7 +106,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
             ),
             ne: CLLocationCoordinate2D(
               latitude: bounds.latitudeNorth, longitude: bounds.longitudeEast
-            ),
+            )
           )
           self._mapView.maximumScreenBounds = mlnBounds
         }
