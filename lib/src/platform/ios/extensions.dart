@@ -2,18 +2,9 @@ import 'dart:convert';
 import 'dart:ffi' hide Size;
 
 import 'package:flutter/cupertino.dart';
-import 'package:jni/jni.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre_ios/maplibre_ffi.dart';
 import 'package:objective_c/objective_c.dart';
-
-/// Custom helper methods on [NSObject].
-extension NSObjectExt on NSObject {
-  /// Registers this object to be released at the end of [arena]'s lifetime.
-  /// 
-  /// Same as [JObject.releasedBy] but for objective_c.
-  void releasedBy(Arena arena) => arena.onReleaseAll(release);
-}
 
 /// Internal extensions on [CLLocationCoordinate2D].
 extension CLLocationCoordinate2DExt on CLLocationCoordinate2D {

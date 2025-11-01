@@ -24,12 +24,9 @@ class StyleControllerIos implements StyleController {
   }
 
   @override
-  Future<void> addLayer(StyleLayer layer, {String? belowLayerId}) => using((
-    arena,
-  ) async {
-    final ffiId = layer.id.toNSString()..releasedBy(arena);
-    final prevStyleLayer = _ffiStyle.layerWithIdentifier(ffiId)
-      ?..releasedBy(arena);
+  Future<void> addLayer(StyleLayer layer, {String? belowLayerId}) async {
+    final ffiId = layer.id.toNSString();
+    final prevStyleLayer = _ffiStyle.layerWithIdentifier(ffiId);
     if (prevStyleLayer != null) {
       throw Exception(
         'A Layer with the id "${layer.id}" already exists in the map style.',
@@ -41,15 +38,13 @@ class StyleControllerIos implements StyleController {
       case BackgroundStyleLayer():
         ffiStyleLayer = MLNBackgroundStyleLayer.new$()
           ..initWithIdentifier(ffiId)
-          ..releasedBy(arena)
           ..backgroundColor = NSExpression.expressionWithFormat$1(
-            layer.color.toHexString().toNSString()..releasedBy(arena),
-          )
-          ..releasedBy(arena);
+            layer.color.toHexString().toNSString(),
+          );
       case StyleLayerWithSource():
         final ffiSource = _ffiStyle.sourceWithIdentifier(
           layer.sourceId.toNSString(),
-        )?..releasedBy(arena);
+        );
         if (ffiSource == null) {
           throw Exception('Source "${layer.sourceId}" does not exist.');
         }
@@ -79,7 +74,6 @@ class StyleControllerIos implements StyleController {
             ffiStyleLayer = MLNSymbolStyleLayer.new$()
               ..initWithIdentifier(ffiId, source: ffiSource);
         }
-        ffiStyleLayer?.releasedBy(arena);
     }
 
     if (ffiStyleLayer == null) {
@@ -92,14 +86,14 @@ class StyleControllerIos implements StyleController {
     ffiStyleLayer.setProperties(layer.paint);
     ffiStyleLayer.setProperties(layer.layout);
     _ffiStyle.addLayer(ffiStyleLayer);
-  });
+    ffiStyleLayer.release();
+    ffiId.release();
+  }
 
   @override
-  Future<void> addSource(Source source) => using((arena) async {
-    final ffiId = source.id.toNSString()..releasedBy(arena);
-    final prevSource = _ffiStyle.sourceWithIdentifier(ffiId)
-      ?..releasedBy(arena);
-
+  Future<void> addSource(Source source) async {
+    final ffiId = source.id.toNSString();
+    final prevSource = _ffiStyle.sourceWithIdentifier(ffiId);
     if (prevSource != null) {
       throw Exception(
         'A Source with the id "${source.id}" already exists in the map style.',
@@ -114,17 +108,17 @@ class StyleControllerIos implements StyleController {
           shapeSource.initWithIdentifier$1(
             ffiId,
             shape: MLNShape.shapeWithData(
-              source.data.toNSDataUTF8()!..releasedBy(arena),
+              source.data.toNSDataUTF8()!,
               encoding: nsUTF8StringEncoding,
               error: nullptr,
-            )?..releasedBy(arena),
-            options: NSDictionary.new$()..releasedBy(arena),
+            ),
+            options: NSDictionary.new$(),
           );
         } else {
           shapeSource.initWithIdentifier(
             ffiId,
-            URL: source.data.toNSURL()!..releasedBy(arena),
-            options: NSDictionary.new$()..releasedBy(arena),
+            URL: source.data.toNSURL()!,
+            options: NSDictionary.new$(),
           );
         }
         ffiSource = shapeSource;
@@ -137,14 +131,14 @@ class StyleControllerIos implements StyleController {
             tileSize: source.tileSize.toDouble(),
           );
         } else {
-          final ffiUrls = NSMutableArray.new$()..releasedBy(arena);
+          final ffiUrls = NSMutableArray.new$();
           for (final url in source.tiles ?? <String>[]) {
-            ffiUrls.addObject(url.toNSString()..releasedBy(arena));
+            ffiUrls.addObject(url.toNSString());
           }
           demSource.initWithIdentifier$2(
             ffiId,
             tileURLTemplates: ffiUrls,
-            options: NSDictionary.new$()..releasedBy(arena),
+            options: NSDictionary.new$(),
           );
         }
       case RasterSource():
@@ -152,20 +146,18 @@ class StyleControllerIos implements StyleController {
         if (source.url case final String url) {
           rasterSource.initWithIdentifier$1(
             ffiId,
-            configurationURL: url.toNSURL()!..releasedBy(arena),
+            configurationURL: url.toNSURL()!,
             tileSize: source.tileSize.toDouble(),
           );
         } else {
-          final ffiUrls = NSMutableArray.new$()
-            ..init()
-            ..releasedBy(arena);
+          final ffiUrls = NSMutableArray.new$()..init();
           for (final url in source.tiles ?? <String>[]) {
-            ffiUrls.addObject(url.toNSString()..releasedBy(arena));
+            ffiUrls.addObject(url.toNSString());
           }
           rasterSource.initWithIdentifier$2(
             ffiId,
             tileURLTemplates: ffiUrls,
-            options: NSDictionary.new$()..releasedBy(arena),
+            options: NSDictionary.new$(),
           );
         }
       case VectorSource():
@@ -173,19 +165,17 @@ class StyleControllerIos implements StyleController {
         if (source.url case final String url) {
           vectorSource.initWithIdentifier$1(
             ffiId,
-            configurationURLString: url.toNSString()..releasedBy(arena),
+            configurationURLString: url.toNSString(),
           );
         } else {
-          final ffiUrls = NSMutableArray.new$()
-            ..init()
-            ..releasedBy(arena);
+          final ffiUrls = NSMutableArray.new$()..init();
           for (final url in source.tiles ?? <String>[]) {
-            ffiUrls.addObject(url.toNSString()..releasedBy(arena));
+            ffiUrls.addObject(url.toNSString());
           }
           vectorSource.initWithIdentifier$2(
             ffiId,
             tileURLTemplates: ffiUrls,
-            options: NSDictionary.new$()..releasedBy(arena),
+            options: NSDictionary.new$(),
           );
         }
       case ImageSource():
@@ -200,7 +190,7 @@ class StyleControllerIos implements StyleController {
         imageSource.initWithIdentifier(
           ffiId,
           coordinateQuad: coordinates,
-          URL: source.url.toNSURL()!..releasedBy(arena),
+          URL: source.url.toNSURL()!,
         );
       case VideoSource():
         throw UnimplementedError('Video source is only supported on web.');
@@ -210,8 +200,9 @@ class StyleControllerIos implements StyleController {
         );
     }
     _ffiStyle.addSource(ffiSource);
-    ffiSource.releasedBy(arena);
-  });
+    ffiSource.release();
+    ffiId.release();
+  }
 
   @override
   Future<void> dispose() async {}
@@ -220,51 +211,49 @@ class StyleControllerIos implements StyleController {
   Future<List<String>> getAttributions() async => getAttributionsSync();
 
   @override
-  List<String> getLayerIds() => using((arena) {
-    final layers = _ffiStyle.layers.map(
-      (e) => MLNStyleLayer.castFrom(e)..releasedBy(arena),
-    );
+  List<String> getLayerIds() {
+    final layers = _ffiStyle.layers.map(MLNStyleLayer.castFrom);
     return layers.map((l) => l.identifier.toDartString()).toList();
-  });
+  }
 
   @override
-  Future<void> removeImage(String id) => using((arena) async {
-    final ffiId = id.toNSString()..releasedBy(arena);
+  Future<void> removeImage(String id) async {
+    final ffiId = id.toNSString();
     _ffiStyle.removeImageForName(ffiId);
-  });
+    ffiId.release();
+  }
 
   @override
-  Future<void> removeLayer(String id) => using((arena) async {
-    final ffiId = id.toNSString()..releasedBy(arena);
-    final ffiLayer = _ffiStyle.layerWithIdentifier(ffiId)?..releasedBy(arena);
+  Future<void> removeLayer(String id) async {
+    final ffiId = id.toNSString();
+    final ffiLayer = _ffiStyle.layerWithIdentifier(ffiId);
     if (ffiLayer == null) return;
     _ffiStyle.removeLayer(ffiLayer);
-  });
+    ffiId.release();
+  }
 
   @override
-  Future<void> removeSource(String id) => using((arena) async {
-    final ffiId = id.toNSString()..releasedBy(arena);
-    final ffiSource = _ffiStyle.sourceWithIdentifier(ffiId)?..releasedBy(arena);
+  Future<void> removeSource(String id) async {
+    final ffiId = id.toNSString();
+    final ffiSource = _ffiStyle.sourceWithIdentifier(ffiId);
     if (ffiSource == null) return;
     _ffiStyle.removeSource(ffiSource);
     ffiId.release();
-  });
+  }
 
   @override
   Future<void> updateGeoJsonSource({
     required String id,
     required String data,
-  }) => using((arena) async {
-    final source = _ffiStyle.sourceWithIdentifier(
-      id.toNSString()..releasedBy(arena),
-    )!..releasedBy(arena);
-    final shapeSource = MLNShapeSource.castFrom(source)..releasedBy(arena);
+  }) async {
+    final source = _ffiStyle.sourceWithIdentifier(id.toNSString())!;
+    final shapeSource = MLNShapeSource.castFrom(source);
     shapeSource.shape = MLNShape.shapeWithData(
-      data.toNSDataUTF8()!..releasedBy(arena),
+      data.toNSDataUTF8()!,
       encoding: 4, // utf-8
       error: nullptr,
-    )?..releasedBy(arena);
-  });
+    );
+  }
 
   List<MLNStyleLayer> _getLayers() => List<MLNStyleLayer>.from(
     _ffiStyle.layers.toDartList(convertOther: MLNStyleLayer.castFrom),
@@ -276,17 +265,17 @@ class StyleControllerIos implements StyleController {
   }
 
   @override
-  List<String> getAttributionsSync() => using((arena) {
+  List<String> getAttributionsSync() {
     final attributions = <String>[];
-    final sources = _ffiStyle.sources.allObjects..releasedBy(arena);
+    final sources = _ffiStyle.sources.allObjects;
     for (var i = 0; i < sources.count; i++) {
       final source = sources[i];
       if (!MLNTileSource.isInstance(source)) continue;
-      final tileSource = MLNTileSource.castFrom(source)..releasedBy(arena);
-      final html = tileSource.attributionHTMLString?..releasedBy(arena);
+      final tileSource = MLNTileSource.castFrom(source);
+      final html = tileSource.attributionHTMLString;
       if (html == null) continue;
       attributions.add(html.toDartString());
     }
     return attributions;
-  });
+  }
 }
