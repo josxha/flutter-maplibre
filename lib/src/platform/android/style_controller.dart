@@ -7,89 +7,103 @@ class StyleControllerAndroid implements StyleController {
   final jni.Style _jStyle;
 
   @override
-  Future<void> addLayer(StyleLayer layer, {String? belowLayerId}) async =>
-      using((arena) {
-        final jId = layer.id.toJString()..releasedBy(arena);
-        _jStyle.removeLayer(jId);
-        final jLayer = switch (layer) {
-          FillStyleLayer() => jni.FillLayer(
-            jId,
-            layer.sourceId.toJString()..releasedBy(arena),
-          ),
-          CircleStyleLayer() => jni.CircleLayer(
-            jId,
-            layer.sourceId.toJString()..releasedBy(arena),
-          ),
-          BackgroundStyleLayer() => jni.BackgroundLayer(layer.id.toJString()),
-          FillExtrusionStyleLayer() => jni.FillExtrusionLayer(
-            jId,
-            layer.sourceId.toJString()..releasedBy(arena),
-          ),
-          HeatmapStyleLayer() => jni.HeatmapLayer(
-            jId,
-            layer.sourceId.toJString()..releasedBy(arena),
-          ),
-          HillshadeStyleLayer() => jni.HillshadeLayer(
-            jId,
-            layer.sourceId.toJString()..releasedBy(arena),
-          ),
-          LineStyleLayer() => jni.LineLayer(
-            jId,
-            layer.sourceId.toJString()..releasedBy(arena),
-          ),
-          RasterStyleLayer() => jni.RasterLayer(
-            jId,
-            layer.sourceId.toJString()..releasedBy(arena),
-          ),
-          SymbolStyleLayer() => jni.SymbolLayer(
-            jId,
-            layer.sourceId.toJString()..releasedBy(arena),
-          ),
-          _ => throw UnimplementedError(
-            'The Layer is not supported: ${layer.runtimeType}',
-          ),
-        };
-        jLayer.setMinZoom(layer.minZoom);
-        jLayer.setMaxZoom(layer.maxZoom);
+  Future<void> addLayer(
+    StyleLayer layer, {
+    String? belowLayerId,
+  }) async => using((arena) {
+    final jId = layer.id.toJString()..releasedBy(arena);
+    final prevLayer = _jStyle.getLayer(jId);
+    if (prevLayer != null) {
+      throw Exception(
+        'A Layer with the id "${layer.id}" already exists in the map style.',
+      );
+    }
 
-        // paint and layout properties
-        final layoutEntries = layer.layout.entries.toList(growable: false);
-        final paintEntries = layer.paint.entries.toList(growable: false);
-        final props = JArray(
-          jni.PropertyValue.nullableType(JObject.nullableType),
-          layoutEntries.length + paintEntries.length,
-        )..releasedBy(arena);
-        for (var i = 0; i < paintEntries.length; i++) {
-          final entry = paintEntries[i];
-          props[i] = jni.PaintPropertyValue(
-            entry.key.toJString(),
-            entry.value.toJObject(arena),
-            T: JObject.type,
-          )..releasedBy(arena);
-        }
-        for (var i = 0; i < layoutEntries.length; i++) {
-          final entry = layoutEntries[i];
-          props[paintEntries.length + i] = jni.LayoutPropertyValue(
-            entry.key.toJString(),
-            entry.value.toJObject(arena),
-            T: JObject.type,
-          )..releasedBy(arena);
-        }
-        jLayer.releasedBy(arena);
-        jLayer.setProperties(props);
+    final jLayer = switch (layer) {
+      FillStyleLayer() => jni.FillLayer(
+        jId,
+        layer.sourceId.toJString()..releasedBy(arena),
+      ),
+      CircleStyleLayer() => jni.CircleLayer(
+        jId,
+        layer.sourceId.toJString()..releasedBy(arena),
+      ),
+      BackgroundStyleLayer() => jni.BackgroundLayer(layer.id.toJString()),
+      FillExtrusionStyleLayer() => jni.FillExtrusionLayer(
+        jId,
+        layer.sourceId.toJString()..releasedBy(arena),
+      ),
+      HeatmapStyleLayer() => jni.HeatmapLayer(
+        jId,
+        layer.sourceId.toJString()..releasedBy(arena),
+      ),
+      HillshadeStyleLayer() => jni.HillshadeLayer(
+        jId,
+        layer.sourceId.toJString()..releasedBy(arena),
+      ),
+      LineStyleLayer() => jni.LineLayer(
+        jId,
+        layer.sourceId.toJString()..releasedBy(arena),
+      ),
+      RasterStyleLayer() => jni.RasterLayer(
+        jId,
+        layer.sourceId.toJString()..releasedBy(arena),
+      ),
+      SymbolStyleLayer() => jni.SymbolLayer(
+        jId,
+        layer.sourceId.toJString()..releasedBy(arena),
+      ),
+      _ => throw UnimplementedError(
+        'The Layer is not supported: ${layer.runtimeType}',
+      ),
+    };
+    jLayer.setMinZoom(layer.minZoom);
+    jLayer.setMaxZoom(layer.maxZoom);
 
-        // add to style
-        if (belowLayerId case final String belowId) {
-          _jStyle.addLayerBelow(jLayer, belowId.toJString()..releasedBy(arena));
-        } else {
-          _jStyle.addLayer(jLayer);
-        }
-      });
+    // paint and layout properties
+    final layoutEntries = layer.layout.entries.toList(growable: false);
+    final paintEntries = layer.paint.entries.toList(growable: false);
+    final props = JArray(
+      jni.PropertyValue.nullableType(JObject.nullableType),
+      layoutEntries.length + paintEntries.length,
+    )..releasedBy(arena);
+    for (var i = 0; i < paintEntries.length; i++) {
+      final entry = paintEntries[i];
+      props[i] = jni.PaintPropertyValue(
+        entry.key.toJString(),
+        entry.value.toJObject(arena),
+        T: JObject.type,
+      )..releasedBy(arena);
+    }
+    for (var i = 0; i < layoutEntries.length; i++) {
+      final entry = layoutEntries[i];
+      props[paintEntries.length + i] = jni.LayoutPropertyValue(
+        entry.key.toJString(),
+        entry.value.toJObject(arena),
+        T: JObject.type,
+      )..releasedBy(arena);
+    }
+    jLayer.releasedBy(arena);
+    jLayer.setProperties(props);
+
+    // add to style
+    if (belowLayerId case final String belowId) {
+      _jStyle.addLayerBelow(jLayer, belowId.toJString()..releasedBy(arena));
+    } else {
+      _jStyle.addLayer(jLayer);
+    }
+  });
 
   @override
   Future<void> addSource(Source source) async => using((arena) {
     final jId = source.id.toJString()..releasedBy(arena);
-    _jStyle.removeSource(jId);
+    final prevSource = _jStyle.getSource(jId);
+    if (prevSource != null) {
+      throw Exception(
+        'A Source with the id "${source.id}" already exists in the map style.',
+      );
+    }
+
     final jni.Source jSource;
     switch (source) {
       case GeoJsonSource():
