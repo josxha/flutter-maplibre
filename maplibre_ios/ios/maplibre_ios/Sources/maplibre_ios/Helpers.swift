@@ -56,7 +56,7 @@ import UIKit
           // print("json: \(json)")
           if let offset = json as? [Any] {
             if offset.first is String {
-              if offset.count == 2, offset.first as? String == "literal" {
+              if offset.count == 2, offset.first == "literal" {
                 if let vector = offset.last as? [Any] {
                   if vector.count == 2 {
                     if let x = vector.first as? Double,
