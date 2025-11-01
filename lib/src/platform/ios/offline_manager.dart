@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:ffi/ffi.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/platform/ios/extensions.dart';
 import 'package:maplibre/src/platform/offline_manager_native.dart';
@@ -35,7 +36,9 @@ class OfflineManagerIos extends OfflineManagerNative {
   }*/
 
   @override
-  void dispose() {}
+  void dispose() {
+    _storage.release();
+  }
 
   /*@override
   Stream<DownloadProgress> downloadRegion({
@@ -72,15 +75,18 @@ class OfflineManagerIos extends OfflineManagerNative {
   }*/
 
   @override
-  Future<OfflineRegion> getOfflineRegion({required int regionId}) async {
+  Future<OfflineRegion> getOfflineRegion({
+    required int regionId,
+  }) async => using((arena) async {
     final packs = _storage.packs;
     for (var i = 0; i < packs!.count; i++) {
-      final ffiPack = MLNOfflinePack.castFrom(packs[i]);
+      final ffiPack = MLNOfflinePack.castFrom(packs[i])..releasedBy(arena);
       final jsonBytes = ffiPack.context.toList();
       final json = jsonDecode(utf8.decode(jsonBytes)) as Map<String, Object?>;
       // print(json);
       if (json['id'] != regionId) {
-        final ffiRegion = MLNTilePyramidOfflineRegion.castFrom(ffiPack.region);
+        final ffiRegion = MLNTilePyramidOfflineRegion.castFrom(ffiPack.region)
+          ..releasedBy(arena);
         return OfflineRegion(
           id: regionId,
           bounds: ffiRegion.bounds.toLngLatBounds(),
@@ -93,7 +99,7 @@ class OfflineManagerIos extends OfflineManagerNative {
       }
     }
     throw Exception('Region not found');
-  }
+  });
 
   /*@override
   Future<void> invalidateAmbientCache() async {
@@ -108,11 +114,12 @@ class OfflineManagerIos extends OfflineManagerNative {
   }*/
 
   @override
-  Future<List<OfflineRegion>> listOfflineRegions() async {
-    final packs = _storage.packs;
+  Future<List<OfflineRegion>> listOfflineRegions() => using((arena) async {
+    final packs = _storage.packs?..releasedBy(arena);
     return List<OfflineRegion>.generate(packs!.count, (i) {
-      final ffiPack = MLNOfflinePack.castFrom(packs[i]);
-      final ffiRegion = MLNTilePyramidOfflineRegion.castFrom(ffiPack.region);
+      final ffiPack = MLNOfflinePack.castFrom(packs[i])..releasedBy(arena);
+      final ffiRegion = MLNTilePyramidOfflineRegion.castFrom(ffiPack.region)
+        ..releasedBy(arena);
       final jsonBytes = ffiPack.context.toList();
       final json = jsonDecode(utf8.decode(jsonBytes)) as Map<String, Object?>;
       return OfflineRegion(
@@ -125,7 +132,7 @@ class OfflineManagerIos extends OfflineManagerNative {
         styleUrl: 'ffiRegion.styleURL.absoluteString!.toDartString()',
       );
     }, growable: false);
-  }
+  });
 
   /*@override
   Future<void> resetDatabase() async {

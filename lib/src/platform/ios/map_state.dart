@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:ffi';
 
+import 'package:ffi/ffi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:maplibre/maplibre.dart';
@@ -59,9 +60,9 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
     Duration? webMaxDuration,
-  }) async {
+  }) async => using((arena) {
     if (zoom != null) _mapView.zoomLevel = zoom;
-    final ffiCamera = _mapView.camera;
+    final ffiCamera = _mapView.camera..releasedBy(arena);
     if (pitch != null) ffiCamera.pitch = pitch;
     if (bearing != null) ffiCamera.heading = bearing;
     if (center != null) {
@@ -71,7 +72,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
       ffiCamera,
       withDuration: nativeDuration.inMicroseconds / 1000000,
     );
-  }
+  });
 
   @override
   Future<void> enableLocation({
@@ -122,16 +123,16 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     double? zoom,
     double? bearing,
     double? pitch,
-  }) async {
+  }) async => using((arena) {
     if (zoom != null) _mapView.zoomLevel = zoom;
-    final ffiCamera = _mapView.camera;
+    final ffiCamera = _mapView.camera..releasedBy(arena);
     if (pitch != null) ffiCamera.pitch = pitch;
     if (bearing != null) ffiCamera.heading = bearing;
     if (center != null) {
       ffiCamera.centerCoordinate = center.toCLLocationCoordinate2D();
     }
     _mapView.setCamera(ffiCamera, animated: false);
-  }
+  });
 
   @override
   void onStyleLoaded() {
@@ -223,7 +224,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   List<RenderedFeature> featuresAtPoint(
     Offset point, {
     List<String>? layerIds,
-  }) {
+  }) => using((arena) {
     final style = this.style;
     if (style == null) {
       return [];
@@ -235,19 +236,21 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
 
     final query = _mapView.visibleFeaturesAtPoint$1(
       point.toCGPoint(),
-      inStyleLayersWithIdentifiers: layerIds == null
-          ? null
-          : NSSet.of(layerIds.map((s) => s.toNSString())),
+      inStyleLayersWithIdentifiers:
+          layerIds == null
+                ? null
+                : NSSet.of(layerIds.map((s) => s.toNSString()))
+            ?..releasedBy(arena),
     );
 
     return _nativeQueryToRenderedFeatures(query);
-  }
+  });
 
   @override
   List<RenderedFeature> featuresInRect(
     Rect rect, {
     List<String>? layerIds,
-  }) {
+  }) => using((arena) {
     final style = this.style;
     if (style == null) {
       return [];
@@ -259,16 +262,18 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
 
     final query = _mapView.visibleFeaturesInRect$1(
       rect.toCGRect(),
-      inStyleLayersWithIdentifiers: layerIds == null
-          ? null
-          : NSSet.of(layerIds.map((s) => s.toNSString())),
+      inStyleLayersWithIdentifiers:
+          layerIds == null
+                ? null
+                : NSSet.of(layerIds.map((s) => s.toNSString()))
+            ?..releasedBy(arena),
     );
 
     return _nativeQueryToRenderedFeatures(query);
-  }
+  });
 
   @override
-  List<QueriedLayer> queryLayers(Offset screenLocation) {
+  List<QueriedLayer> queryLayers(Offset screenLocation) => using((arena) {
     final style = this.style;
     if (style == null) return [];
     final layers = style._getLayers();
@@ -276,14 +281,15 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     final point = screenLocation.toCGPoint();
     final queriedLayers = <QueriedLayer>[];
     for (var i = layers.length - 1; i >= 0; i--) {
-      final layer = layers[i];
+      final layer = layers[i]..releasedBy(arena);
       final features = _mapView.visibleFeaturesAtPoint$1(
         point,
         inStyleLayersWithIdentifiers: NSSet.setWithObject(layer.identifier),
-      );
+      )..releasedBy(arena);
       if (features.count == 0) continue;
       if (features.isNotEmpty && MLNVectorStyleLayer.isInstance(layer)) {
-        final vectorLayer = MLNVectorStyleLayer.castFrom(layer);
+        final vectorLayer = MLNVectorStyleLayer.castFrom(layer)
+          ..releasedBy(arena);
         final queriedLayer = QueriedLayer(
           layerId: layer.identifier.toDartString(),
           sourceId: vectorLayer.sourceIdentifier?.toDartString(),
@@ -293,7 +299,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
       }
     }
     return queriedLayers;
-  }
+  });
 
   @override
   Future<void> trackLocation({
@@ -350,24 +356,24 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
       lngLats.map(toScreenLocation).toList(growable: false);
 
   @override
-  Future<void> setStyle(String style) async {
+  Future<void> setStyle(String style) async => using((arena) async {
     final trimmed = style.trim();
     if (trimmed.startsWith('{')) {
       // Raw JSON
-      _mapView.styleJSON = trimmed.toNSString();
+      _mapView.styleJSON = trimmed.toNSString()..releasedBy(arena);
     } else if (trimmed.startsWith('/')) {
-      _mapView.styleURL = 'file://$trimmed'.toNSURL()!;
+      _mapView.styleURL = 'file://$trimmed'.toNSURL()!..releasedBy(arena);
     } else if (!trimmed.startsWith('http://') &&
         !trimmed.startsWith('https://') &&
         !trimmed.startsWith('mapbox://')) {
       // flutter asset
       final content = await rootBundle.loadString(trimmed);
-      _mapView.styleJSON = content.toNSString();
+      _mapView.styleJSON = content.toNSString()..releasedBy(arena);
     } else {
       // URI
-      _mapView.styleURL = trimmed.toNSURL()!;
+      _mapView.styleURL = trimmed.toNSURL()!..releasedBy(arena);
     }
-  }
+  });
 
   @override
   void onMoveCamera(pigeon.MapCamera camera) {
