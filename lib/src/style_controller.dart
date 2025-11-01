@@ -110,14 +110,10 @@ abstract class StyleController {
       )
       ..layout()
       ..paint(canvas, Offset.zero);
-    print('#2');
 
     final picture = pictureRecorder.endRecording();
-    print('#3');
     final image = await picture.toImage(size, size);
-    print('#4');
     final bytes = await image.toByteData(format: ImageByteFormat.png);
-    print('#5');
     if (bytes == null) return;
 
     await addImage(id, bytes.buffer.asUint8List());
