@@ -71,6 +71,7 @@ class StyleControllerWeb implements StyleController {
 
   @override
   Future<void> addLayer(StyleLayer layer, {String? belowLayerId}) async {
+    if (_map.getLayer(layer.id) != null) _map.removeLayer(layer.id);
     switch (layer) {
       case FillStyleLayer():
         _map.addLayer(
@@ -194,6 +195,7 @@ class StyleControllerWeb implements StyleController {
 
   @override
   Future<void> addSource(Source source) async {
+    if (_map.getSource(source.id) != null) _map.removeSource(source.id);
     switch (source) {
       case GeoJsonSource():
         JSAny data;
