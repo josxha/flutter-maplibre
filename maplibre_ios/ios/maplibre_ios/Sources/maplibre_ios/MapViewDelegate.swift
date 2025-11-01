@@ -78,6 +78,13 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
         self._mapView.allowsScrolling = mapOptions.gestures.pan
         self._mapView.allowsTilting = mapOptions.gestures.tilt
         self._mapView.allowsZooming = mapOptions.gestures.zoom
+        if let bounds = mapOptions.maxBounds {
+          var mlnBounds = MLNCoordinateBounds(
+              sw: CLLocationCoordinate2D(latitude: bounds.latitudeSouth, longitude: bounds.longitudeWest),
+              ne: CLLocationCoordinate2D(latitude: bounds.latitudeNorth, longitude: bounds.longitudeEast),
+          )
+          self._mapView.maximumScreenBounds = mlnBounds
+        }
 
         self._flutterApi.onMapReady { _ in }
 
@@ -110,7 +117,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
   }
 
   func dispose() throws {
-    print("### dispose MapLibre view ### \(_viewId) ###")
+    // print("### dispose MapLibre view ### \(_viewId) ###")
     MapLibreRegistry.removeMap(viewId: _viewId)
     _mapView.removeFromSuperview()
     _mapView.delegate = nil
@@ -169,19 +176,13 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
 
   // MLNMapViewDelegate method called when map has finished loading
   func mapView(_ mapView: MLNMapView, didFinishLoading _: MLNStyle) {
-    if let bounds = _mapOptions!.maxBounds {
-      self._mapView.setVisibleCoordinateBounds(MLNCoordinateBounds(
-          sw: CLLocationCoordinate2D(latitude: bounds.latitudeSouth, longitude: bounds.longitudeWest),
-          ne: CLLocationCoordinate2D(latitude: bounds.latitudeNorth, longitude: bounds.longitudeEast),
-      ), animated: false)
-    }
     // setCamera() can only be used after the map did finish loading
     var camera = _mapView.camera
     camera.pitch = _mapOptions!.pitch
     _mapView.setCamera(camera, animated: false)
 
     _mapView = mapView
-    print("mapView didFinishLoading, call onStyleLoaded")
+    // print("mapView didFinishLoading, call onStyleLoaded")
     _flutterApi.onStyleLoaded { _ in }
   }
 
