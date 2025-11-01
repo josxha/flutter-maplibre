@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:http/http.dart' as http;
 import 'package:integration_test/integration_test.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre_example/utils/map_styles.dart';
@@ -941,6 +942,64 @@ void main() {
     final ctrl = await ctrlCompleter.future;
     const layer = SymbolStyleLayer(id: '1', sourceId: 'source1');
     await ctrl.style?.addLayer(layer);
+    await tester.pumpAndSettle();
+  });
+
+  testWidgets('addImage', (tester) async {
+    final ctrlCompleter = Completer<MapController>();
+    final app = App(onMapCreated: ctrlCompleter.complete);
+    await tester.pumpWidget(app);
+    final ctrl = await ctrlCompleter.future;
+
+    const imageUrl =
+        'https://upload.wikimedia.org/wikipedia/commons/f/f2/678111-map-marker-512.png';
+    final imageBytes = await http.readBytes(Uri.parse(imageUrl));
+
+    await ctrl.style?.addImage('test-icon', imageBytes);
+    await tester.pumpAndSettle();
+  });
+
+  testWidgets('addImages', (tester) async {
+    final ctrlCompleter = Completer<MapController>();
+    final app = App(onMapCreated: ctrlCompleter.complete);
+    await tester.pumpWidget(app);
+    final ctrl = await ctrlCompleter.future;
+
+    const redPinUrl =
+        'https://upload.wikimedia.org/wikipedia/commons/f/f2/678111-map-marker-512.png';
+    const blackPinUrl =
+        'https://upload.wikimedia.org/wikipedia/commons/3/3b/Blackicon.png';
+
+    final images = <String, Uint8List>{
+      'image1': await http.readBytes(Uri.parse(redPinUrl)),
+      'image2': await http.readBytes(Uri.parse(blackPinUrl)),
+    };
+
+    await ctrl.style?.addImages(images);
+    await tester.pumpAndSettle();
+  });
+
+  testWidgets('removeImage', (tester) async {
+    final ctrlCompleter = Completer<MapController>();
+    final app = App(onMapCreated: ctrlCompleter.complete);
+    await tester.pumpWidget(app);
+    final ctrl = await ctrlCompleter.future;
+
+    // Download the red pin image from Wikipedia (same as used in example)
+    const imageUrl =
+        'https://upload.wikimedia.org/wikipedia/commons/f/f2/678111-map-marker-512.png';
+    final imageBytes = await http.readBytes(Uri.parse(imageUrl));
+
+    // Add image first
+    await ctrl.style?.addImage('test-image', imageBytes);
+    await tester.pumpAndSettle();
+
+    // Then remove it
+    await ctrl.style?.removeImage('test-image');
+    await tester.pumpAndSettle();
+
+    // Ensure no crash if image doesn't exist
+    await ctrl.style?.removeImage('test-image');
     await tester.pumpAndSettle();
   });
 }

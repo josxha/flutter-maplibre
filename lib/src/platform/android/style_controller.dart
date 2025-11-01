@@ -1,7 +1,7 @@
 part of 'map_state.dart';
 
 /// Android specific implementation of the [StyleController].
-class StyleControllerAndroid implements StyleController {
+class StyleControllerAndroid extends StyleController {
   const StyleControllerAndroid._(this._jStyle);
 
   final jni.Style _jStyle;
@@ -10,6 +10,8 @@ class StyleControllerAndroid implements StyleController {
   Future<void> addLayer(
     StyleLayer layer, {
     String? belowLayerId,
+    String? aboveLayerId,
+    int? atIndex,
   }) async => using((arena) {
     final jId = layer.id.toJString()..releasedBy(arena);
     final prevLayer = _jStyle.getLayer(jId);
@@ -89,6 +91,10 @@ class StyleControllerAndroid implements StyleController {
     // add to style
     if (belowLayerId case final String belowId) {
       _jStyle.addLayerBelow(jLayer, belowId.toJString()..releasedBy(arena));
+    } else if (aboveLayerId case final String aboveId) {
+      _jStyle.addLayerAbove(jLayer, aboveId.toJString()..releasedBy(arena));
+    } else if (atIndex case final int index) {
+      _jStyle.addLayerAt(jLayer, index);
     } else {
       _jStyle.addLayer(jLayer);
     }

@@ -1,7 +1,7 @@
 part of 'map_state.dart';
 
 /// Web specific implementation of the [StyleController].
-class StyleControllerWeb implements StyleController {
+class StyleControllerWeb extends StyleController {
   /// Create a new [StyleControllerWeb] instance.
   const StyleControllerWeb(this._map);
 
@@ -70,7 +70,12 @@ class StyleControllerWeb implements StyleController {
   }
 
   @override
-  Future<void> addLayer(StyleLayer layer, {String? belowLayerId}) async {
+  Future<void> addLayer(
+    StyleLayer layer, {
+    String? belowLayerId,
+    String? aboveLayerId,
+    int? atIndex,
+  }) async {
     if (_map.getLayer(layer.id) != null) {
       throw Exception(
         'A Layer with the id "${layer.id}" already exists in the map style.',
