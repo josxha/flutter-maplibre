@@ -4,6 +4,7 @@
 
 import FlutterMacOS
 import Foundation
+
 import maplibre
 import url_launcher_macos
 
