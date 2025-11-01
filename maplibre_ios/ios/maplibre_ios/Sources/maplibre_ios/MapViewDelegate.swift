@@ -42,7 +42,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
           self._mapView = MLNMapView(frame: self._view.bounds, styleURL: styleUrl)
         } else if (!style.hasPrefix("http://") && !style.hasPrefix("https://") && !style.hasPrefix("mapbox://")) {
             if let assetPath = Bundle.main.path(
-                forResource: "assets/styles/translucent_style",
+                forResource: style.replacingOccurrences(of: ".json", with: ""),
                 ofType: "json",
                 inDirectory: "Frameworks/App.framework/flutter_assets"
             ) {
