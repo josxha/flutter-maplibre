@@ -86,8 +86,6 @@ class StyleControllerIos implements StyleController {
     ffiStyleLayer.setProperties(layer.paint);
     ffiStyleLayer.setProperties(layer.layout);
     _ffiStyle.addLayer(ffiStyleLayer);
-    ffiStyleLayer.release();
-    ffiId.release();
   }
 
   @override
@@ -200,8 +198,6 @@ class StyleControllerIos implements StyleController {
         );
     }
     _ffiStyle.addSource(ffiSource);
-    ffiSource.release();
-    ffiId.release();
   }
 
   @override
@@ -220,7 +216,6 @@ class StyleControllerIos implements StyleController {
   Future<void> removeImage(String id) async {
     final ffiId = id.toNSString();
     _ffiStyle.removeImageForName(ffiId);
-    ffiId.release();
   }
 
   @override
@@ -229,7 +224,6 @@ class StyleControllerIos implements StyleController {
     final ffiLayer = _ffiStyle.layerWithIdentifier(ffiId);
     if (ffiLayer == null) return;
     _ffiStyle.removeLayer(ffiLayer);
-    ffiId.release();
   }
 
   @override
@@ -238,7 +232,6 @@ class StyleControllerIos implements StyleController {
     final ffiSource = _ffiStyle.sourceWithIdentifier(ffiId);
     if (ffiSource == null) return;
     _ffiStyle.removeSource(ffiSource);
-    ffiId.release();
   }
 
   @override
