@@ -1,7 +1,7 @@
 part of 'map_state.dart';
 
 /// Android specific implementation of the [StyleController].
-class StyleControllerIos implements StyleController {
+class StyleControllerIos extends StyleController {
   StyleControllerIos._(this._ffiStyle, this._hostApi);
 
   final MLNStyle _ffiStyle;
@@ -24,7 +24,12 @@ class StyleControllerIos implements StyleController {
   }
 
   @override
-  Future<void> addLayer(StyleLayer layer, {String? belowLayerId}) async {
+  Future<void> addLayer(
+    StyleLayer layer, {
+    String? belowLayerId,
+    String? aboveLayerId,
+    int? atIndex,
+  }) async {
     final ffiId = layer.id.toNSString();
     final prevStyleLayer = _ffiStyle.layerWithIdentifier(ffiId);
     if (prevStyleLayer != null) {
@@ -85,9 +90,24 @@ class StyleControllerIos implements StyleController {
     ffiStyleLayer.maximumZoomLevel = layer.maxZoom;
     ffiStyleLayer.setProperties(layer.paint);
     ffiStyleLayer.setProperties(layer.layout);
-    _ffiStyle.addLayer(ffiStyleLayer);
-    ffiStyleLayer.release();
-    ffiId.release();
+
+    if (belowLayerId case final String id) {
+      final belowLayer = _ffiStyle.layerWithIdentifier(id.toNSString());
+      if (belowLayer == null) {
+        throw Exception('Layer "$id" does not exist.');
+      }
+      _ffiStyle.insertLayer$1(ffiStyleLayer, belowLayer: belowLayer);
+    } else if (aboveLayerId case final String id) {
+      final aboveLayer = _ffiStyle.layerWithIdentifier(id.toNSString());
+      if (aboveLayer == null) {
+        throw Exception('Layer "$id" does not exist.');
+      }
+      _ffiStyle.insertLayer$2(ffiStyleLayer, aboveLayer: aboveLayer);
+    } else if (atIndex case final int index) {
+      _ffiStyle.insertLayer(ffiStyleLayer, atIndex: index);
+    } else {
+      _ffiStyle.addLayer(ffiStyleLayer);
+    }
   }
 
   @override
@@ -200,8 +220,6 @@ class StyleControllerIos implements StyleController {
         );
     }
     _ffiStyle.addSource(ffiSource);
-    ffiSource.release();
-    ffiId.release();
   }
 
   @override
@@ -220,7 +238,6 @@ class StyleControllerIos implements StyleController {
   Future<void> removeImage(String id) async {
     final ffiId = id.toNSString();
     _ffiStyle.removeImageForName(ffiId);
-    ffiId.release();
   }
 
   @override
@@ -229,7 +246,6 @@ class StyleControllerIos implements StyleController {
     final ffiLayer = _ffiStyle.layerWithIdentifier(ffiId);
     if (ffiLayer == null) return;
     _ffiStyle.removeLayer(ffiLayer);
-    ffiId.release();
   }
 
   @override
@@ -238,7 +254,6 @@ class StyleControllerIos implements StyleController {
     final ffiSource = _ffiStyle.sourceWithIdentifier(ffiId);
     if (ffiSource == null) return;
     _ffiStyle.removeSource(ffiSource);
-    ffiId.release();
   }
 
   @override
