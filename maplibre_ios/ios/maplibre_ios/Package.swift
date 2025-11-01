@@ -6,10 +6,10 @@ import PackageDescription
 let package = Package(
     name: "maplibre_ios",
     platforms: [
-        .iOS("12.0"),
+        .iOS("12.0")
     ],
     products: [
-        .library(name: "maplibre-ios", targets: ["maplibre_ios"]),
+        .library(name: "maplibre-ios", targets: ["maplibre_ios"])
     ],
     dependencies: [
         // Needs to be the same version as in ../maplibre_ios.podspec
@@ -29,7 +29,7 @@ let package = Package(
             cSettings: [
                 .headerSearchPath("include/maplibre_ios"),
             ]
-        ),
+        )
         // FOR LOCAL LIBRARY
         // .binaryTarget(
         //   name: "MapLibre",
