@@ -26,13 +26,15 @@ class _EventsPageState extends State<EventsPage> {
             ),
             onEvent: _onEvent,
           ),
-          IgnorePointer(
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              alignment: Alignment.bottomLeft,
-              child: Text(
-                _events.map(eventToString).join('\n'),
-                style: const TextStyle(color: Colors.black),
+          SafeArea(
+            child: IgnorePointer(
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                alignment: Alignment.bottomLeft,
+                child: Text(
+                  _events.map(eventToString).join('\n'),
+                  style: const TextStyle(color: Colors.black),
+                ),
               ),
             ),
           ),
