@@ -1,3 +1,4 @@
+import CwlCatchException
 import Foundation
 import MapLibre
 import UIKit
@@ -10,66 +11,79 @@ import UIKit
   @objc public static func addImageToStyle(
     target: NSObject, field: String, expression: NSExpression
   ) {
-    do {
+    if let exception = NSException.catchException(in: {
       target.setValue(expression, forKey: field)
-    } catch {
-      print("Couldn't set expression in Helpers.addImageToStyle()")
+    }) {
+      print("⚠️ Couldn't set expression in Helpers.addImageToStyle(): \(exception)")
     }
   }
 
   @objc public static func setExpression(
     target: NSObject, field: String, expression: NSExpression
   ) {
-    do {
+    if let exception = NSException.catchException(in: {
       // https://developer.apple.com/documentation/objectivec/nsobject/1418139-setvalue
-      try target.setValue(expression, forKey: field)
-    } catch {
-      print("Couldn't set expression in Helpers.setExpression()")
+      target.setValue(expression, forKey: field)
+    }) {
+      print("⚠️ Couldn't set expression in Helpers.setExpression(): \(exception)")
     }
   }
 
   @objc public static func parseExpression(
     propertyName: String, expression: String
   ) -> NSExpression? {
-    print("\(propertyName): \(expression)")
-    do {
+    print("Helpers.parseExpression(): \(propertyName): \(expression)")
+    var result: NSExpression? = nil
+
+    if let exception = NSException.catchException(in: {
       // can't create an Expression using the default method if the data is a hex string
       if propertyName.contains("color"), expression.first == "#" {
-        let color = UIColor(hexString: expression)
-        return NSExpression(forConstantValue: color)
+        guard let color = UIColor(hexString: expression) else {
+          print("⚠️ Couldn't create UIColor from hex string: \(expression)")
+          return
+        }
+        result = NSExpression(forConstantValue: color)
+        return
       }
       if expression.starts(with: "[") {
         // can't create an Expression if the data of a literal is an array
-        let json = try JSONSerialization.jsonObject(
-          with: expression.data(using: .utf8)!,
-          options: .fragmentsAllowed
-        )
-        // print("json: \(json)")
-        if let offset = json as? [Any] {
-          if offset.count == 2, offset.first is String,
-             offset.first as? String == "literal"
-          {
-            if let vector = offset.last as? [Any] {
-              if vector.count == 2 {
-                if let x = vector.first as? Double,
-                   let y = vector.last as? Double
-                {
-                  return NSExpression(
-                    forConstantValue: NSValue(
-                      cgVector: CGVector(dx: x, dy: y)))
+        do {
+          let json = try JSONSerialization.jsonObject(
+            with: expression.data(using: .utf8)!,
+            options: .fragmentsAllowed
+          )
+
+          // print("json: \(json)")
+          if let offset = json as? [Any] {
+            if offset.count == 2, offset.first is String,
+               offset.first as? String == "literal"
+            {
+              if let vector = offset.last as? [Any] {
+                if vector.count == 2 {
+                  if let x = vector.first as? Double,
+                     let y = vector.last as? Double
+                  {
+                    result = NSExpression(
+                      forConstantValue: NSValue(
+                        cgVector: CGVector(dx: x, dy: y)))
+                    return
+                  }
                 }
               }
             }
           }
+          result = NSExpression(mglJSONObject: json)
+          return
+        } catch {
+          print("⚠️ JSON parsing error in Helpers.parseExpression(): \(error)")
+          return
         }
-        return NSExpression(mglJSONObject: json)
       }
       // parse as a constant value
-      return NSExpression(forConstantValue: expression)
-
-    } catch {
-      print("Couldn't parse Expression: " + expression)
+      result = NSExpression(forConstantValue: expression)
+    }) {
+      print("⚠️ Couldn't set expression in Helpers.parseExpression(): \(exception)")
     }
-    return nil
+    return result
   }
 }

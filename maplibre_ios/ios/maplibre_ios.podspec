@@ -19,6 +19,7 @@ Helper package for maplibre that provides iOS FFI bindings
   # Needs to be the same version as in maplibre_ios/Package.swift
   # FOR PREBUILT LIBRARY
   s.dependency 'MapLibre', '~> 6.19'
+  s.dependency 'CwlCatchException', :git => 'https://github.com/mattgallagher/CwlCatchException.git'
 
   # FOR LOCAL LIBRARY
   # s.vendored_frameworks = '.build/MapLibre.xcframework'
