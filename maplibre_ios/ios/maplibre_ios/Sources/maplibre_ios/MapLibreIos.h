@@ -305,7 +305,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 @protocol FlutterPlatformView;
 SWIFT_PROTOCOL("_TtP12maplibre_ios10FlutterApi_")
 @protocol FlutterApi
-- (id <FlutterPlatformView> _Nonnull)createPlatformViewWithViewId:(NSInteger)viewId SWIFT_WARN_UNUSED_RESULT;
+- (id <FlutterPlatformView> _Nonnull)createPlatformViewWithViewId:(int64_t)viewId SWIFT_WARN_UNUSED_RESULT;
 @end
 
 @class UIView;
@@ -322,7 +322,6 @@ SWIFT_CLASS("_TtC12maplibre_ios7Helpers")
 
 SWIFT_CLASS("_TtC12maplibre_ios16MapLibreRegistry")
 @interface MapLibreRegistry : NSObject
-+ (id _Nullable)getMapWithViewId:(int64_t)viewId SWIFT_WARN_UNUSED_RESULT;
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) id <FlutterApi> _Nullable flutterApi;)
 + (id <FlutterApi> _Nullable)flutterApi SWIFT_WARN_UNUSED_RESULT;
 + (void)setFlutterApi:(id <FlutterApi> _Nullable)value;

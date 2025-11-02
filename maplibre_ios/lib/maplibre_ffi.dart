@@ -90,8 +90,8 @@ ffi.Pointer<objc.ObjCBlockImpl> listnerBlock,
 ffi.Pointer<objc.DOBJC_Context> context,
 );
 
-@ffi.Native<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<ffi.Void> , ffi.Long )>()
-external ffi.Pointer<objc.ObjCObject> _MapLibreFFi_protocolTrampoline_ldbu1n(ffi.Pointer<objc.ObjCObject> target,
+@ffi.Native<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<ffi.Void> , ffi.Int64 )>()
+external ffi.Pointer<objc.ObjCObject> _MapLibreFFi_protocolTrampoline_19kkouj(ffi.Pointer<objc.ObjCObject> target,
 ffi.Pointer<ffi.Void> arg0,
 int arg1,
 );
@@ -3869,32 +3869,32 @@ interface class FlutterPlatformView extends objc.ObjCProtocolBase {
   
 }
 late final _sel_createPlatformViewWithViewId_ = objc.registerName("createPlatformViewWithViewId:");
-ffi.Pointer<objc.ObjCObject> _ObjCBlock_idFlutterPlatformView_ffiVoid_NSInteger_fnPtrTrampoline(
+ffi.Pointer<objc.ObjCObject> _ObjCBlock_idFlutterPlatformView_ffiVoid_Int64_fnPtrTrampoline(
     ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, int arg1) =>
-        block.ref.target.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void> arg0, ffi.Long arg1)>>()
+        block.ref.target.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void> arg0, ffi.Int64 arg1)>>()
             .asFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void> , int )>()(arg0, arg1);
-ffi.Pointer<ffi.Void> _ObjCBlock_idFlutterPlatformView_ffiVoid_NSInteger_fnPtrCallable = ffi.Pointer.fromFunction<
-    ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Long )>(_ObjCBlock_idFlutterPlatformView_ffiVoid_NSInteger_fnPtrTrampoline ).cast();
-ffi.Pointer<objc.ObjCObject> _ObjCBlock_idFlutterPlatformView_ffiVoid_NSInteger_closureTrampoline(
+ffi.Pointer<ffi.Void> _ObjCBlock_idFlutterPlatformView_ffiVoid_Int64_fnPtrCallable = ffi.Pointer.fromFunction<
+    ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Int64 )>(_ObjCBlock_idFlutterPlatformView_ffiVoid_Int64_fnPtrTrampoline ).cast();
+ffi.Pointer<objc.ObjCObject> _ObjCBlock_idFlutterPlatformView_ffiVoid_Int64_closureTrampoline(
     ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, int arg1) =>
     (objc.getBlockClosure(block) as ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void> , int ))(arg0, arg1);
-ffi.Pointer<ffi.Void> _ObjCBlock_idFlutterPlatformView_ffiVoid_NSInteger_closureCallable = ffi.Pointer.fromFunction<
-    ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Long )>(_ObjCBlock_idFlutterPlatformView_ffiVoid_NSInteger_closureTrampoline ).cast();
+ffi.Pointer<ffi.Void> _ObjCBlock_idFlutterPlatformView_ffiVoid_Int64_closureCallable = ffi.Pointer.fromFunction<
+    ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Int64 )>(_ObjCBlock_idFlutterPlatformView_ffiVoid_Int64_closureTrampoline ).cast();
 
-/// Construction methods for `objc.ObjCBlock<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void>, ffi.Long)>`.
-abstract final class ObjCBlock_idFlutterPlatformView_ffiVoid_NSInteger {
+/// Construction methods for `objc.ObjCBlock<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void>, ffi.Int64)>`.
+abstract final class ObjCBlock_idFlutterPlatformView_ffiVoid_Int64 {
   /// Returns a block that wraps the given raw block pointer.
-  static objc.ObjCBlock<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void>, ffi.Long)> castFromPointer(ffi.Pointer<objc.ObjCBlockImpl> pointer,
+  static objc.ObjCBlock<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void>, ffi.Int64)> castFromPointer(ffi.Pointer<objc.ObjCBlockImpl> pointer,
       {bool retain = false, bool release = false}) =>
-      objc.ObjCBlock<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void>, ffi.Long)>(pointer, retain: retain, release: release);
+      objc.ObjCBlock<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void>, ffi.Int64)>(pointer, retain: retain, release: release);
 
   /// Creates a block from a C function pointer.
   ///
   /// This block must be invoked by native code running on the same thread as
   /// the isolate that registered it. Invoking the block on the wrong thread
   /// will result in a crash.
-  static objc.ObjCBlock<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void>, ffi.Long)> fromFunctionPointer(ffi.Pointer<ffi.NativeFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void> arg0, ffi.Long arg1)>> ptr) =>
-      objc.ObjCBlock<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void>, ffi.Long)>(objc.newPointerBlock(_ObjCBlock_idFlutterPlatformView_ffiVoid_NSInteger_fnPtrCallable, ptr.cast()),
+  static objc.ObjCBlock<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void>, ffi.Int64)> fromFunctionPointer(ffi.Pointer<ffi.NativeFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void> arg0, ffi.Int64 arg1)>> ptr) =>
+      objc.ObjCBlock<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void>, ffi.Int64)>(objc.newPointerBlock(_ObjCBlock_idFlutterPlatformView_ffiVoid_Int64_fnPtrCallable, ptr.cast()),
           retain: false, release: true);
 
   /// Creates a block from a Dart function.
@@ -3905,15 +3905,15 @@ abstract final class ObjCBlock_idFlutterPlatformView_ffiVoid_NSInteger {
   ///
   /// If `keepIsolateAlive` is true, this block will keep this isolate alive
   /// until it is garbage collected by both Dart and ObjC.
-  static objc.ObjCBlock<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void>, ffi.Long)> fromFunction(FlutterPlatformView Function(ffi.Pointer<ffi.Void> , int ) fn,
+  static objc.ObjCBlock<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void>, ffi.Int64)> fromFunction(FlutterPlatformView Function(ffi.Pointer<ffi.Void> , int ) fn,
           {bool keepIsolateAlive = true}) =>
-      objc.ObjCBlock<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void>, ffi.Long)>(objc.newClosureBlock(_ObjCBlock_idFlutterPlatformView_ffiVoid_NSInteger_closureCallable, (ffi.Pointer<ffi.Void> arg0, int arg1) => fn(arg0, arg1).ref.retainAndAutorelease(), keepIsolateAlive),
+      objc.ObjCBlock<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void>, ffi.Int64)>(objc.newClosureBlock(_ObjCBlock_idFlutterPlatformView_ffiVoid_Int64_closureCallable, (ffi.Pointer<ffi.Void> arg0, int arg1) => fn(arg0, arg1).ref.retainAndAutorelease(), keepIsolateAlive),
           retain: false, release: true);
 }
 
-/// Call operator for `objc.ObjCBlock<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void>, ffi.Long)>`.
-extension ObjCBlock_idFlutterPlatformView_ffiVoid_NSInteger_CallExtension on objc.ObjCBlock<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void>, ffi.Long)> {
-  FlutterPlatformView call(ffi.Pointer<ffi.Void> arg0, int arg1) =>FlutterPlatformView.castFromPointer(ref.pointer.ref.invoke.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, ffi.Long arg1)>>()
+/// Call operator for `objc.ObjCBlock<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void>, ffi.Int64)>`.
+extension ObjCBlock_idFlutterPlatformView_ffiVoid_Int64_CallExtension on objc.ObjCBlock<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void>, ffi.Int64)> {
+  FlutterPlatformView call(ffi.Pointer<ffi.Void> arg0, int arg1) =>FlutterPlatformView.castFromPointer(ref.pointer.ref.invoke.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, ffi.Int64 arg1)>>()
   .asFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , int )>()(
     ref.pointer, arg0, arg1), retain: true, release: true);
 }
@@ -3968,14 +3968,14 @@ interface class FlutterApi extends objc.ObjCProtocolBase {
 static final createPlatformViewWithViewId_ = objc.ObjCProtocolMethod<FlutterPlatformView Function(int )>(
       _protocol_FlutterApi,
       _sel_createPlatformViewWithViewId_,
-      ffi.Native.addressOf<ffi.NativeFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<ffi.Void> , ffi.Long )>>(_MapLibreFFi_protocolTrampoline_ldbu1n).cast(),
+      ffi.Native.addressOf<ffi.NativeFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<ffi.Void> , ffi.Int64 )>>(_MapLibreFFi_protocolTrampoline_19kkouj).cast(),
       objc.getProtocolMethodSignature(
           _protocol_FlutterApi,
           _sel_createPlatformViewWithViewId_,
           isRequired: true,
           isInstanceMethod: true,
       ),
-      (FlutterPlatformView Function(int ) func) => ObjCBlock_idFlutterPlatformView_ffiVoid_NSInteger.fromFunction((ffi.Pointer<ffi.Void> _, int arg1) => func(arg1)),
+      (FlutterPlatformView Function(int ) func) => ObjCBlock_idFlutterPlatformView_ffiVoid_Int64.fromFunction((ffi.Pointer<ffi.Void> _, int arg1) => func(arg1)),
       
     );
 
@@ -14736,8 +14736,6 @@ _objc_msgSend_r8gdi7(_class_Helpers, _sel_setExpressionWithTarget_field_expressi
 }
 
 late final _class_MapLibreRegistry = objc.getClass("maplibre_ios.MapLibreRegistry");
-late final _sel_getMapWithViewId_ = objc.registerName("getMapWithViewId:");
-final _objc_msgSend_1ya1kjn = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , ffi.Int64 )>>().asFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , int )>();
 late final _sel_flutterApi = objc.registerName("flutterApi");
 late final _sel_setFlutterApi_ = objc.registerName("setFlutterApi:");
 late final _sel_activity = objc.registerName("activity");
@@ -14763,13 +14761,6 @@ class MapLibreRegistry extends objc.NSObject {
   static bool isInstance(objc.ObjCObjectBase obj) {
     return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MapLibreRegistry);
   }
-
-  /// getMapWithViewId:
-  static objc.ObjCObjectBase? getMapWithViewId(int viewId) {
-    final _ret = _objc_msgSend_1ya1kjn(_class_MapLibreRegistry, _sel_getMapWithViewId_, viewId);
-    return _ret.address == 0 ? null : objc.ObjCObjectBase(_ret, retain: true, release: true);
-  }
-
 
   /// flutterApi
   static FlutterApi? getFlutterApi() {

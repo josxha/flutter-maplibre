@@ -188,9 +188,9 @@ ListenerTrampoline_3 _MapLibreFFi_wrapBlockingBlock_lmc3p5(
 
 Protocol* _MapLibreFFi_FlutterPlatformView(void) { return @protocol(FlutterPlatformView); }
 
-typedef id  (^ProtocolTrampoline_7)(void * sel, long arg1);
+typedef id  (^ProtocolTrampoline_7)(void * sel, int64_t arg1);
 __attribute__((visibility("default"))) __attribute__((used))
-id  _MapLibreFFi_protocolTrampoline_ldbu1n(id target, void * sel, long arg1) {
+id  _MapLibreFFi_protocolTrampoline_19kkouj(id target, void * sel, int64_t arg1) {
   return ((ProtocolTrampoline_7)((id (*)(id, SEL, SEL))objc_msgSend)(target, @selector(getDOBJCDartProtocolMethodForSelector:), sel))(sel, arg1);
 }
 
