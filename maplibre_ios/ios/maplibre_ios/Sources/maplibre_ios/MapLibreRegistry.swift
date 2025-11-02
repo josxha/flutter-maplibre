@@ -24,6 +24,9 @@ import UIKit
     mapRegistry.removeValue(forKey: viewId)
   }
 
+  // Warning: Storing FlutterApi in a static field may lead to memory leaks.
+  @objc public static var flutterApi: FlutterApi?
+
   // Warning: Storing Activity in a static field may lead to memory leaks.
   @objc public static var activity: AnyObject?
 

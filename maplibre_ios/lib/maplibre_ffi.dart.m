@@ -186,46 +186,25 @@ ListenerTrampoline_3 _MapLibreFFi_wrapBlockingBlock_lmc3p5(
   });
 }
 
-Protocol* _MapLibreFFi_UIItemProviderPresentationSizeProviding(void) { return @protocol(UIItemProviderPresentationSizeProviding); }
+Protocol* _MapLibreFFi_FlutterPlatformView(void) { return @protocol(FlutterPlatformView); }
+
+typedef id  (^ProtocolTrampoline_7)(void * sel, long arg1);
+__attribute__((visibility("default"))) __attribute__((used))
+id  _MapLibreFFi_protocolTrampoline_ldbu1n(id target, void * sel, long arg1) {
+  return ((ProtocolTrampoline_7)((id (*)(id, SEL, SEL))objc_msgSend)(target, @selector(getDOBJCDartProtocolMethodForSelector:), sel))(sel, arg1);
+}
+
+Protocol* _MapLibreFFi_FlutterApi(void) { return @protocol(FlutterApi); }
 
 Protocol* _MapLibreFFi_NSTextAttachmentLayout(void) { return @protocol(NSTextAttachmentLayout); }
-
-typedef struct CGSize  (^ProtocolTrampoline_7)(void * sel);
-__attribute__((visibility("default"))) __attribute__((used))
-struct CGSize  _MapLibreFFi_protocolTrampoline_1j20mp(id target, void * sel) {
-  return ((ProtocolTrampoline_7)((id (*)(id, SEL, SEL))objc_msgSend)(target, @selector(getDOBJCDartProtocolMethodForSelector:), sel))(sel);
-}
-
-Protocol* _MapLibreFFi_UIAccessibilityIdentification(void) { return @protocol(UIAccessibilityIdentification); }
-
-typedef void  (^ListenerTrampoline_4)(id arg0);
-__attribute__((visibility("default"))) __attribute__((used))
-ListenerTrampoline_4 _MapLibreFFi_wrapListenerBlock_xtuoz7(ListenerTrampoline_4 block) NS_RETURNS_RETAINED {
-  return ^void(id arg0) {
-    objc_retainBlock(block);
-    block((__bridge id)(__bridge_retained void*)(arg0));
-  };
-}
-
-typedef void  (^BlockingTrampoline_4)(void * waiter, id arg0);
-__attribute__((visibility("default"))) __attribute__((used))
-ListenerTrampoline_4 _MapLibreFFi_wrapBlockingBlock_xtuoz7(
-    BlockingTrampoline_4 block, BlockingTrampoline_4 listenerBlock,
-    DOBJC_Context* ctx) NS_RETURNS_RETAINED {
-  BLOCKING_BLOCK_IMPL(ctx, ^void(id arg0), {
-    objc_retainBlock(block);
-    block(nil, (__bridge id)(__bridge_retained void*)(arg0));
-  }, {
-    objc_retainBlock(listenerBlock);
-    listenerBlock(waiter, (__bridge id)(__bridge_retained void*)(arg0));
-  });
-}
 
 Protocol* _MapLibreFFi_CAMediaTiming(void) { return @protocol(CAMediaTiming); }
 
 Protocol* _MapLibreFFi_CAAction(void) { return @protocol(CAAction); }
 
 Protocol* _MapLibreFFi_CALayerDelegate(void) { return @protocol(CALayerDelegate); }
+
+Protocol* _MapLibreFFi_UIAccessibilityIdentification(void) { return @protocol(UIAccessibilityIdentification); }
 
 Protocol* _MapLibreFFi_UIMenuLeaf(void) { return @protocol(UIMenuLeaf); }
 
@@ -249,19 +228,19 @@ Protocol* _MapLibreFFi_UIFocusItem(void) { return @protocol(UIFocusItem); }
 
 Protocol* _MapLibreFFi_UIFocusItemContainer(void) { return @protocol(UIFocusItemContainer); }
 
-typedef void  (^ListenerTrampoline_5)();
+typedef void  (^ListenerTrampoline_4)();
 __attribute__((visibility("default"))) __attribute__((used))
-ListenerTrampoline_5 _MapLibreFFi_wrapListenerBlock_1pl9qdv(ListenerTrampoline_5 block) NS_RETURNS_RETAINED {
+ListenerTrampoline_4 _MapLibreFFi_wrapListenerBlock_1pl9qdv(ListenerTrampoline_4 block) NS_RETURNS_RETAINED {
   return ^void() {
     objc_retainBlock(block);
     block();
   };
 }
 
-typedef void  (^BlockingTrampoline_5)(void * waiter);
+typedef void  (^BlockingTrampoline_4)(void * waiter);
 __attribute__((visibility("default"))) __attribute__((used))
-ListenerTrampoline_5 _MapLibreFFi_wrapBlockingBlock_1pl9qdv(
-    BlockingTrampoline_5 block, BlockingTrampoline_5 listenerBlock,
+ListenerTrampoline_4 _MapLibreFFi_wrapBlockingBlock_1pl9qdv(
+    BlockingTrampoline_4 block, BlockingTrampoline_4 listenerBlock,
     DOBJC_Context* ctx) NS_RETURNS_RETAINED {
   BLOCKING_BLOCK_IMPL(ctx, ^void(), {
     objc_retainBlock(block);
@@ -272,19 +251,19 @@ ListenerTrampoline_5 _MapLibreFFi_wrapBlockingBlock_1pl9qdv(
   });
 }
 
-typedef void  (^ListenerTrampoline_6)(BOOL arg0);
+typedef void  (^ListenerTrampoline_5)(BOOL arg0);
 __attribute__((visibility("default"))) __attribute__((used))
-ListenerTrampoline_6 _MapLibreFFi_wrapListenerBlock_1s56lr9(ListenerTrampoline_6 block) NS_RETURNS_RETAINED {
+ListenerTrampoline_5 _MapLibreFFi_wrapListenerBlock_1s56lr9(ListenerTrampoline_5 block) NS_RETURNS_RETAINED {
   return ^void(BOOL arg0) {
     objc_retainBlock(block);
     block(arg0);
   };
 }
 
-typedef void  (^BlockingTrampoline_6)(void * waiter, BOOL arg0);
+typedef void  (^BlockingTrampoline_5)(void * waiter, BOOL arg0);
 __attribute__((visibility("default"))) __attribute__((used))
-ListenerTrampoline_6 _MapLibreFFi_wrapBlockingBlock_1s56lr9(
-    BlockingTrampoline_6 block, BlockingTrampoline_6 listenerBlock,
+ListenerTrampoline_5 _MapLibreFFi_wrapBlockingBlock_1s56lr9(
+    BlockingTrampoline_5 block, BlockingTrampoline_5 listenerBlock,
     DOBJC_Context* ctx) NS_RETURNS_RETAINED {
   BLOCKING_BLOCK_IMPL(ctx, ^void(BOOL arg0), {
     objc_retainBlock(block);
@@ -329,19 +308,19 @@ struct CGPoint  _MapLibreFFi_protocolTrampoline_7ohnx8(id target, void * sel) {
   return ((ProtocolTrampoline_11)((id (*)(id, SEL, SEL))objc_msgSend)(target, @selector(getDOBJCDartProtocolMethodForSelector:), sel))(sel);
 }
 
-typedef void  (^ListenerTrampoline_7)(void * arg0, struct CGPoint arg1);
+typedef void  (^ListenerTrampoline_6)(void * arg0, struct CGPoint arg1);
 __attribute__((visibility("default"))) __attribute__((used))
-ListenerTrampoline_7 _MapLibreFFi_wrapListenerBlock_1bktu2(ListenerTrampoline_7 block) NS_RETURNS_RETAINED {
+ListenerTrampoline_6 _MapLibreFFi_wrapListenerBlock_1bktu2(ListenerTrampoline_6 block) NS_RETURNS_RETAINED {
   return ^void(void * arg0, struct CGPoint arg1) {
     objc_retainBlock(block);
     block(arg0, arg1);
   };
 }
 
-typedef void  (^BlockingTrampoline_7)(void * waiter, void * arg0, struct CGPoint arg1);
+typedef void  (^BlockingTrampoline_6)(void * waiter, void * arg0, struct CGPoint arg1);
 __attribute__((visibility("default"))) __attribute__((used))
-ListenerTrampoline_7 _MapLibreFFi_wrapBlockingBlock_1bktu2(
-    BlockingTrampoline_7 block, BlockingTrampoline_7 listenerBlock,
+ListenerTrampoline_6 _MapLibreFFi_wrapBlockingBlock_1bktu2(
+    BlockingTrampoline_6 block, BlockingTrampoline_6 listenerBlock,
     DOBJC_Context* ctx) NS_RETURNS_RETAINED {
   BLOCKING_BLOCK_IMPL(ctx, ^void(void * arg0, struct CGPoint arg1), {
     objc_retainBlock(block);
@@ -370,19 +349,19 @@ struct CGAffineTransform  _MapLibreFFi_protocolTrampoline_8o6he9(id target, void
   return ((ProtocolTrampoline_14)((id (*)(id, SEL, SEL))objc_msgSend)(target, @selector(getDOBJCDartProtocolMethodForSelector:), sel))(sel);
 }
 
-typedef void  (^ListenerTrampoline_8)(void * arg0, struct CGAffineTransform arg1);
+typedef void  (^ListenerTrampoline_7)(void * arg0, struct CGAffineTransform arg1);
 __attribute__((visibility("default"))) __attribute__((used))
-ListenerTrampoline_8 _MapLibreFFi_wrapListenerBlock_1lznlw3(ListenerTrampoline_8 block) NS_RETURNS_RETAINED {
+ListenerTrampoline_7 _MapLibreFFi_wrapListenerBlock_1lznlw3(ListenerTrampoline_7 block) NS_RETURNS_RETAINED {
   return ^void(void * arg0, struct CGAffineTransform arg1) {
     objc_retainBlock(block);
     block(arg0, arg1);
   };
 }
 
-typedef void  (^BlockingTrampoline_8)(void * waiter, void * arg0, struct CGAffineTransform arg1);
+typedef void  (^BlockingTrampoline_7)(void * waiter, void * arg0, struct CGAffineTransform arg1);
 __attribute__((visibility("default"))) __attribute__((used))
-ListenerTrampoline_8 _MapLibreFFi_wrapBlockingBlock_1lznlw3(
-    BlockingTrampoline_8 block, BlockingTrampoline_8 listenerBlock,
+ListenerTrampoline_7 _MapLibreFFi_wrapBlockingBlock_1lznlw3(
+    BlockingTrampoline_7 block, BlockingTrampoline_7 listenerBlock,
     DOBJC_Context* ctx) NS_RETURNS_RETAINED {
   BLOCKING_BLOCK_IMPL(ctx, ^void(void * arg0, struct CGAffineTransform arg1), {
     objc_retainBlock(block);
@@ -425,19 +404,19 @@ UIFocusItemDeferralMode  _MapLibreFFi_protocolTrampoline_1qeotwu(id target, void
 
 Protocol* _MapLibreFFi_UIFocusEnvironment(void) { return @protocol(UIFocusEnvironment); }
 
-typedef void  (^ListenerTrampoline_9)(void * arg0);
+typedef void  (^ListenerTrampoline_8)(void * arg0);
 __attribute__((visibility("default"))) __attribute__((used))
-ListenerTrampoline_9 _MapLibreFFi_wrapListenerBlock_ovsamd(ListenerTrampoline_9 block) NS_RETURNS_RETAINED {
+ListenerTrampoline_8 _MapLibreFFi_wrapListenerBlock_ovsamd(ListenerTrampoline_8 block) NS_RETURNS_RETAINED {
   return ^void(void * arg0) {
     objc_retainBlock(block);
     block(arg0);
   };
 }
 
-typedef void  (^BlockingTrampoline_9)(void * waiter, void * arg0);
+typedef void  (^BlockingTrampoline_8)(void * waiter, void * arg0);
 __attribute__((visibility("default"))) __attribute__((used))
-ListenerTrampoline_9 _MapLibreFFi_wrapBlockingBlock_ovsamd(
-    BlockingTrampoline_9 block, BlockingTrampoline_9 listenerBlock,
+ListenerTrampoline_8 _MapLibreFFi_wrapBlockingBlock_ovsamd(
+    BlockingTrampoline_8 block, BlockingTrampoline_8 listenerBlock,
     DOBJC_Context* ctx) NS_RETURNS_RETAINED {
   BLOCKING_BLOCK_IMPL(ctx, ^void(void * arg0), {
     objc_retainBlock(block);
@@ -460,19 +439,19 @@ BOOL  _MapLibreFFi_protocolTrampoline_3su7tt(id target, void * sel, id arg1) {
   return ((ProtocolTrampoline_21)((id (*)(id, SEL, SEL))objc_msgSend)(target, @selector(getDOBJCDartProtocolMethodForSelector:), sel))(sel, arg1);
 }
 
-typedef void  (^ListenerTrampoline_10)(void * arg0, id arg1, id arg2);
+typedef void  (^ListenerTrampoline_9)(void * arg0, id arg1, id arg2);
 __attribute__((visibility("default"))) __attribute__((used))
-ListenerTrampoline_10 _MapLibreFFi_wrapListenerBlock_fjrv01(ListenerTrampoline_10 block) NS_RETURNS_RETAINED {
+ListenerTrampoline_9 _MapLibreFFi_wrapListenerBlock_fjrv01(ListenerTrampoline_9 block) NS_RETURNS_RETAINED {
   return ^void(void * arg0, id arg1, id arg2) {
     objc_retainBlock(block);
     block(arg0, (__bridge id)(__bridge_retained void*)(arg1), (__bridge id)(__bridge_retained void*)(arg2));
   };
 }
 
-typedef void  (^BlockingTrampoline_10)(void * waiter, void * arg0, id arg1, id arg2);
+typedef void  (^BlockingTrampoline_9)(void * waiter, void * arg0, id arg1, id arg2);
 __attribute__((visibility("default"))) __attribute__((used))
-ListenerTrampoline_10 _MapLibreFFi_wrapBlockingBlock_fjrv01(
-    BlockingTrampoline_10 block, BlockingTrampoline_10 listenerBlock,
+ListenerTrampoline_9 _MapLibreFFi_wrapBlockingBlock_fjrv01(
+    BlockingTrampoline_9 block, BlockingTrampoline_9 listenerBlock,
     DOBJC_Context* ctx) NS_RETURNS_RETAINED {
   BLOCKING_BLOCK_IMPL(ctx, ^void(void * arg0, id arg1, id arg2), {
     objc_retainBlock(block);
@@ -495,19 +474,19 @@ id  _MapLibreFFi_protocolTrampoline_12thpau(id target, void * sel, struct CGRect
   return ((ProtocolTrampoline_23)((id (*)(id, SEL, SEL))objc_msgSend)(target, @selector(getDOBJCDartProtocolMethodForSelector:), sel))(sel, arg1);
 }
 
-typedef void  (^ListenerTrampoline_11)(void * arg0, id arg1, struct CGContext * arg2);
+typedef void  (^ListenerTrampoline_10)(void * arg0, id arg1, struct CGContext * arg2);
 __attribute__((visibility("default"))) __attribute__((used))
-ListenerTrampoline_11 _MapLibreFFi_wrapListenerBlock_qvcerx(ListenerTrampoline_11 block) NS_RETURNS_RETAINED {
+ListenerTrampoline_10 _MapLibreFFi_wrapListenerBlock_qvcerx(ListenerTrampoline_10 block) NS_RETURNS_RETAINED {
   return ^void(void * arg0, id arg1, struct CGContext * arg2) {
     objc_retainBlock(block);
     block(arg0, (__bridge id)(__bridge_retained void*)(arg1), arg2);
   };
 }
 
-typedef void  (^BlockingTrampoline_11)(void * waiter, void * arg0, id arg1, struct CGContext * arg2);
+typedef void  (^BlockingTrampoline_10)(void * waiter, void * arg0, id arg1, struct CGContext * arg2);
 __attribute__((visibility("default"))) __attribute__((used))
-ListenerTrampoline_11 _MapLibreFFi_wrapBlockingBlock_qvcerx(
-    BlockingTrampoline_11 block, BlockingTrampoline_11 listenerBlock,
+ListenerTrampoline_10 _MapLibreFFi_wrapBlockingBlock_qvcerx(
+    BlockingTrampoline_10 block, BlockingTrampoline_10 listenerBlock,
     DOBJC_Context* ctx) NS_RETURNS_RETAINED {
   BLOCKING_BLOCK_IMPL(ctx, ^void(void * arg0, id arg1, struct CGContext * arg2), {
     objc_retainBlock(block);
@@ -545,6 +524,29 @@ Protocol* _MapLibreFFi_UIActivityItemsConfigurationProviding(void) { return @pro
 Protocol* _MapLibreFFi_UIActivityItemsConfigurationReading(void) { return @protocol(UIActivityItemsConfigurationReading); }
 
 Protocol* _MapLibreFFi_UIMenuBuilder(void) { return @protocol(UIMenuBuilder); }
+
+typedef void  (^ListenerTrampoline_11)(id arg0);
+__attribute__((visibility("default"))) __attribute__((used))
+ListenerTrampoline_11 _MapLibreFFi_wrapListenerBlock_xtuoz7(ListenerTrampoline_11 block) NS_RETURNS_RETAINED {
+  return ^void(id arg0) {
+    objc_retainBlock(block);
+    block((__bridge id)(__bridge_retained void*)(arg0));
+  };
+}
+
+typedef void  (^BlockingTrampoline_11)(void * waiter, id arg0);
+__attribute__((visibility("default"))) __attribute__((used))
+ListenerTrampoline_11 _MapLibreFFi_wrapBlockingBlock_xtuoz7(
+    BlockingTrampoline_11 block, BlockingTrampoline_11 listenerBlock,
+    DOBJC_Context* ctx) NS_RETURNS_RETAINED {
+  BLOCKING_BLOCK_IMPL(ctx, ^void(id arg0), {
+    objc_retainBlock(block);
+    block(nil, (__bridge id)(__bridge_retained void*)(arg0));
+  }, {
+    objc_retainBlock(listenerBlock);
+    listenerBlock(waiter, (__bridge id)(__bridge_retained void*)(arg0));
+  });
+}
 
 typedef void  (^ListenerTrampoline_12)(void * arg0, id arg1);
 __attribute__((visibility("default"))) __attribute__((used))

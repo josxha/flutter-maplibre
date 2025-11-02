@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:ffi' hide Size;
 
 import 'package:flutter/cupertino.dart';
@@ -108,11 +107,11 @@ extension StringExt on String {
 }
 
 /// Convert a raw String to a [NSExpression].
-NSExpression? parseNSExpression(String propertyName, String json) =>
+/*NSExpression? parseNSExpression(String propertyName, String json) =>
     Helpers.parseExpressionWithPropertyName(
       propertyName.toNSString(),
       expression: json.toNSString(),
-    );
+    );*/
 
 /// Internal extensions on [MLNStyleLayer].
 extension MLNStyleLayerExt on MLNStyleLayer {
@@ -124,13 +123,13 @@ extension MLNStyleLayerExt on MLNStyleLayer {
         case 'visibility':
           visible = property.value == 'none';
         default:
-          setProperty(property.key, property.value);
+          // setProperty(property.key, property.value);
       }
     }
   }
 
   /// Set a layout or paint property for a [MLNStyleLayer].
-  void setProperty(String key, Object value) {
+  /*void setProperty(String key, Object value) {
     // convert to a String
     var rawValue = switch (value) {
       List() || Map() => jsonEncode(value),
@@ -239,13 +238,13 @@ extension MLNStyleLayerExt on MLNStyleLayer {
       case 'text-translate-anchor':
         (this as MLNSymbolStyleLayer).textTranslationAnchor = expression;
       default:
-        Helpers.setExpressionWithTarget(
+        *//*Helpers.setExpressionWithTarget(
           this,
           field: key.dashedToCamelCase().toNSString(),
           expression: expression,
-        );
+        );*//*
     }
-  }
+  }*/
 }
 
 /// UTF8 Encoding

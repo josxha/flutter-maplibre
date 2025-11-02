@@ -37,6 +37,7 @@ ffigen:
   objc-protocols:
     include:
       - 'MLN.*'
+      - 'FlutterApi'
   objc-interfaces:
     include:
       - 'NSString'
@@ -57,11 +58,14 @@ ffigen:
       - 'Helpers'
       - 'MapLibreRegistry'
       - 'Extensions'
+      - 'FlutterPlatformView'
       - 'MLN.*'
     module:
       'MapLibreRegistry': 'maplibre_ios'
+      'FlutterApi': 'maplibre_ios'
       'Helpers': 'maplibre_ios'
       'Extensions': 'maplibre_ios'
+      'FlutterPlatformView': 'Flutter'
       'MLNMapView': 'MapLibre'
       'MLNMapCamera': 'MapLibre'
       'MLNVectorTileSource': 'MapLibre'
