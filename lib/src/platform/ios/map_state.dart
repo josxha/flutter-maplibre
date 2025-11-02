@@ -8,6 +8,7 @@ import 'package:maplibre/src/layer/layer_manager.dart';
 import 'package:maplibre/src/platform/android/extensions.dart';
 import 'package:maplibre/src/platform/ios/extensions.dart';
 import 'package:maplibre/src/platform/ios/flutter_api.dart';
+import 'package:maplibre/src/platform/ios/registry.dart';
 import 'package:maplibre/src/platform/map_state_native.dart';
 import 'package:maplibre/src/platform/pigeon.g.dart' as pigeon;
 import 'package:maplibre_ios/maplibre_ffi.dart' as ffi;
@@ -43,11 +44,42 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   /// guaranteed that the map is ready.
   void _onPlatformViewCreated(int viewId) {
     _viewId = viewId;
-    final ffiMap = _ffiMap = ffi.MLNMapView();
+    final view = Registry.platformViews[_viewId]!;
+    final ffiMap = _ffiMap = ffi.MLNMapView()..frameInView(view);
+    setStyle(options.initStyle);
+    /*TODO ffiMap.autoresizingMask = ffi.UIViewAutoresizing(
+      ffi.UIViewAutoresizing.UIViewAutoresizingFlexibleHeight.value |
+          ffi.UIViewAutoresizing.UIViewAutoresizingFlexibleWidth.value,
+    );*/
+    view.addSubview(ffiMap);
+    ffiMap.delegate = ffi.MLNMapViewDelegate.implement();
+    ffiMap.compassView.compassVisibility =
+        ffi.MLNOrnamentVisibility.MLNOrnamentVisibilityHidden;
+    // TODO attribution
+    // TODO logoView
+    final currentCenter = ffiMap.camera.centerCoordinate;
+    ffiMap.setCenterCoordinate$2(
+      options.initCenter?.toCLLocationCoordinate2D() ?? currentCenter,
+      zoomLevel: options.initZoom,
+      direction: options.initBearing,
+      animated: false,
+    );
+    ffiMap..minimumZoomLevel = options.minZoom
+    ..maximumZoomLevel = options.maxZoom
+    ..minimumPitch = options.minPitch
+    ..maximumPitch = options.maxPitch
+    ..rotateEnabled = options.gestures.rotate
+    ..scrollEnabled = options.gestures.pan
+    ..pitchEnabled = options.gestures.pitch
+    ..zoomEnabled = options.gestures.zoom;
+    if (options.maxBounds case final LngLatBounds bounds)  {
+      ffiMap.maximumScreenBounds = bounds.toMLNCoordinateBounds();
+    }
+    // ffiMap.addGestureRecognizer(ffi.UIGestureRecognizer.)
 
-    final channelSuffix = viewId.toString();
-    _hostApi = pigeon.MapLibreHostApi(messageChannelSuffix: channelSuffix);
-    pigeon.MapLibreFlutterApi.setUp(this, messageChannelSuffix: channelSuffix);
+    // final channelSuffix = viewId.toString();
+    // _hostApi = pigeon.MapLibreHostApi(messageChannelSuffix: channelSuffix);
+    // pigeon.MapLibreFlutterApi.setUp(this, messageChannelSuffix: channelSuffix);
   }
 
   @override
