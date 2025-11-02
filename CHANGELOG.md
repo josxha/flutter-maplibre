@@ -1,8 +1,27 @@
 ## 0.3.1
 
+This release brings a couple of new features and bug fixes.
+The android platform view creation has been migrated to Dart. Android is now
+completely free from method channels.
+
 ### New Features
 
+- Add `minZoom`, `maxZoom` to layers.
+- Bump MapLibre Native on Android to 12.0.+.
+- Migrate android platform view creation to Dart.
+- Throw exception if layer or source id already exists when adding
+  programmatically.
+- Add `aboveLayerId` and `atIndex` to `addLayer()`.
+- Add `addImages()` to `StyleController` to add multiple images at once.
+- Add `addImageFromAssets()` to load an image from Flutter assets.
+- Add `addImageFromIconData` to add an image from Flutter icons.
+
 ### Bug Fixes
+
+- Fix `allowInteraction` parameter in `WidgetLayer` not working on web.
+- Fix pub.dev score.
+- Fix `maxBounds` parameter
+- Fix `linePattern` int array causing crash on iOS.
 
 Full
 Changelog: [v0.3.0...v0.3.1](https://github.com/josxha/flutter-maplibre/compare/v0.3.0...v0.3.1)
