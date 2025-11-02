@@ -226,15 +226,15 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
     )
     _flutterApi.onMoveCamera(camera: pigeonCamera) { _ in }
   }
-    
-    func addImage(
-      id: String, bytes: FlutterStandardTypedData,
-      completion: @escaping (Result<Void, Error>) -> Void
-    ) {
-      var style = _mapView.style!
-      var imageData = bytes.data
-      var image = UIImage(data: imageData, scale: UIScreen.main.scale)!
-      style.setImage(image, forName: id)
-      completion(.success(()))
-    }
+
+  func addImage(
+    id: String, bytes: FlutterStandardTypedData,
+    completion: @escaping (Result<Void, Error>) -> Void
+  ) {
+    var style = _mapView.style!
+    var imageData = bytes.data
+    var image = UIImage(data: imageData, scale: UIScreen.main.scale)!
+    style.setImage(image, forName: id)
+    completion(.success(()))
+  }
 }
