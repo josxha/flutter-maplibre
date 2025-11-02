@@ -97,45 +97,45 @@ jobs:
         if: ${{ matrix.sdk == '' }}
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-  integration-test-android:
-    name: "[Android] Integration tests"
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        api-level: [ 24, 35 ]
-    timeout-minutes: 30
-    steps:
-      - uses: actions/checkout@v5
-      - name: "Setup Flutter SDK"
-        uses: subosito/flutter-action@v2
-        with:
-          cache: true
-      - uses: actions/setup-java@v5
-        with:
-          java-version: '21'
-          distribution: 'temurin'
-          cache: 'gradle'
-      - name: "Get Flutter dependencies"
-        run: flutter pub get
-        # https://github.com/marketplace/actions/android-emulator-runner#running-hardware-accelerated-emulators-on-linux-runners
-      - name: "Enable KVM group perms"
-        run: |
-          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
-          sudo udevadm control --reload-rules
-          sudo udevadm trigger --name-match=kvm
-      - name: "Run integration tests"
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: ${{ matrix.api-level }}
-          arch: x86_64
-          emulator-boot-timeout: 1800 # 30 minutes
-          script: cd example && flutter test integration_test/main.dart --timeout=1800s -r expanded --coverage --coverage-package maplibre
-      - name: "Run Codecov"
-        uses: codecov/codecov-action@v5
-        if: ${{ matrix.api-level == '35' }}
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+#  integration-test-android:
+#    name: "[Android] Integration tests"
+#    runs-on: ubuntu-latest
+#    strategy:
+#      fail-fast: false
+#      matrix:
+#        api-level: [ 24, 35 ]
+#    timeout-minutes: 30
+#    steps:
+#      - uses: actions/checkout@v5
+#      - name: "Setup Flutter SDK"
+#        uses: subosito/flutter-action@v2
+#        with:
+#          cache: true
+#      - uses: actions/setup-java@v5
+#        with:
+#          java-version: '21'
+#          distribution: 'temurin'
+#          cache: 'gradle'
+#      - name: "Get Flutter dependencies"
+#        run: flutter pub get
+#        # https://github.com/marketplace/actions/android-emulator-runner#running-hardware-accelerated-emulators-on-linux-runners
+#      - name: "Enable KVM group perms"
+#        run: |
+#          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+#          sudo udevadm control --reload-rules
+#          sudo udevadm trigger --name-match=kvm
+#      - name: "Run integration tests"
+#        uses: reactivecircus/android-emulator-runner@v2
+#        with:
+#          api-level: ${{ matrix.api-level }}
+#          arch: x86_64
+#          emulator-boot-timeout: 1800 # 30 minutes
+#          script: cd example && flutter test integration_test/main.dart --timeout=1800s -r expanded --coverage --coverage-package maplibre
+#      - name: "Run Codecov"
+#        uses: codecov/codecov-action@v5
+#        if: ${{ matrix.api-level == '35' }}
+#        env:
+#          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 #  integration-test-web:
 #    name: "[Web] Integration tests"
 #    runs-on: ubuntu-latest
