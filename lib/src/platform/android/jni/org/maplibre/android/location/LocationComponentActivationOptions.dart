@@ -38,6 +38,8 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
+import '../../../../android/content/Context.dart' as context$_;
+
 import '../maps/Style.dart' as style$_;
 
 import 'LocationComponentOptions.dart' as locationcomponentoptions$_;
@@ -94,7 +96,7 @@ class LocationComponentActivationOptions$Builder extends jni$_.JObject {
   /// from: `public void <init>(android.content.Context context, org.maplibre.android.maps.Style style)`
   /// The returned object must be released after use, by calling the [release] method.
   factory LocationComponentActivationOptions$Builder(
-    jni$_.JObject context,
+    context$_.Context context,
     style$_.Style style,
   ) {
     final _$context = context.reference;
@@ -506,7 +508,7 @@ class LocationComponentActivationOptions extends jni$_.JObject {
   /// from: `static public org.maplibre.android.location.LocationComponentActivationOptions$Builder builder(android.content.Context context, org.maplibre.android.maps.Style style)`
   /// The returned object must be released after use, by calling the [release] method.
   static LocationComponentActivationOptions$Builder builder(
-    jni$_.JObject context,
+    context$_.Context context,
     style$_.Style style,
   ) {
     final _$context = context.reference;
@@ -544,11 +546,11 @@ class LocationComponentActivationOptions extends jni$_.JObject {
 
   /// from: `public android.content.Context context()`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject context() {
+  context$_.Context context() {
     return _context(
       reference.pointer,
       _id_context as jni$_.JMethodIDPtr,
-    ).object<jni$_.JObject>(const jni$_.JObjectType());
+    ).object<context$_.Context>(const context$_.$Context$Type());
   }
 
   static final _id_style = _class.instanceMethodId(

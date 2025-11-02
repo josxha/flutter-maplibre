@@ -8,7 +8,7 @@ plugins {
 android {
     namespace = "com.github.josxha.maplibre_example"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = "27.0.12077973" // flutter.ndkVersion
+    ndkVersion = "28.2.13676358" // flutter.ndkVersion
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11

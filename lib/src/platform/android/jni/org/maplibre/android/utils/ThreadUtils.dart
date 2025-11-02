@@ -38,6 +38,8 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
+import '../../../../android/content/Context.dart' as context$_;
+
 /// from: `org.maplibre.android.utils.ThreadUtils`
 class ThreadUtils extends jni$_.JObject {
   @jni$_.internal
@@ -111,7 +113,7 @@ class ThreadUtils extends jni$_.JObject {
   /// from: `static public org.maplibre.android.utils.ThreadUtils init(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
   static ThreadUtils? init(
-    jni$_.JObject context,
+    context$_.Context context,
   ) {
     final _$context = context.reference;
     return _init(

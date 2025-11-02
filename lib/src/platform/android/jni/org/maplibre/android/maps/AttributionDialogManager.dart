@@ -38,6 +38,8 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
+import '../../../../android/content/Context.dart' as context$_;
+
 import 'MapLibreMap.dart' as maplibremap$_;
 
 /// from: `org.maplibre.android.maps.AttributionDialogManager`
@@ -87,7 +89,7 @@ class AttributionDialogManager extends jni$_.JObject {
   /// from: `public void <init>(android.content.Context context, org.maplibre.android.maps.MapLibreMap mapLibreMap)`
   /// The returned object must be released after use, by calling the [release] method.
   factory AttributionDialogManager(
-    jni$_.JObject context,
+    context$_.Context context,
     maplibremap$_.MapLibreMap mapLibreMap,
   ) {
     final _$context = context.reference;

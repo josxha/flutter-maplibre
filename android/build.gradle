@@ -12,7 +12,7 @@ buildscript {
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:8.13.0")
+        classpath("com.android.tools.build:gradle:8.12.3")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
         // noinspection GradleDynamicVersion
         classpath("org.jlleitschuh.gradle:ktlint-gradle:13.1.+")
@@ -67,7 +67,7 @@ android {
 
     dependencies {
         // jnigen picks up api dependencies
-        api 'org.maplibre.gl:android-sdk:11.13.+'
+        api 'org.maplibre.gl:android-sdk:12.0.+'
         testImplementation "org.jetbrains.kotlin:kotlin-test"
         testImplementation "org.mockito:mockito-core:5.20.+"
     }
@@ -86,7 +86,7 @@ android {
 }
 
 ktlint {
-    version = "0.43.2"
+    version = "1.7.1"
     android = true
     ignoreFailures = false
     reporters {
@@ -95,7 +95,7 @@ ktlint {
     }
     dependencies {
         // noinspection GradleDynamicVersion
-        ktlintRuleset("io.nlopez.compose.rules:ktlint:0.4.+")
+        ktlintRuleset("io.nlopez.compose.rules:ktlint:0.4.27")
     }
     filter {
         exclude("**/*.g.kt")

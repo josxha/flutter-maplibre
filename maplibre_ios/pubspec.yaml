@@ -40,7 +40,6 @@ ffigen:
   objc-interfaces:
     include:
       - 'NSString'
-      - 'MapLibreRegistry'
       - 'CLLocationCoordinate2D'
       - 'NSAttributedString'
       - 'NSImage'
@@ -55,10 +54,13 @@ ffigen:
       - 'UIViewConfigurationState'
       - 'NSExpression'
       - 'Helpers'
+      - 'MapLibreRegistry'
+      - 'Extensions'
       - 'MLN.*'
     module:
       'MapLibreRegistry': 'maplibre_ios'
       'Helpers': 'maplibre_ios'
+      'Extensions': 'maplibre_ios'
       'MLNMapView': 'MapLibre'
       'MLNMapCamera': 'MapLibre'
       'MLNVectorTileSource': 'MapLibre'
@@ -81,7 +83,7 @@ ffigen:
     - '-isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk'
   headers:
     entry-points:
-      - 'ios/maplibre_ios/Sources/maplibre_ios/MapLibreRegistry.h'
+      - 'ios/maplibre_ios/Sources/maplibre_ios/MapLibreIos.h'
       - 'MapLibre.h'
   preamble: |
     // ignore_for_file: type=lint, unused_element, unused_field |

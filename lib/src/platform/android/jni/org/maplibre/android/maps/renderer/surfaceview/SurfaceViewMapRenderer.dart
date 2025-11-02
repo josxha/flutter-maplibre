@@ -38,6 +38,8 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
+import '../../../../../../android/content/Context.dart' as context$_;
+
 import '../MapRenderer.dart' as maprenderer$_;
 
 import 'MapLibreSurfaceView.dart' as maplibresurfaceview$_;
@@ -94,7 +96,7 @@ class SurfaceViewMapRenderer extends maprenderer$_.MapRenderer {
   /// from: `public void <init>(android.content.Context context, org.maplibre.android.maps.renderer.surfaceview.MapLibreSurfaceView mapLibreSurfaceView, java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
   factory SurfaceViewMapRenderer(
-    jni$_.JObject? context,
+    context$_.Context? context,
     maplibresurfaceview$_.MapLibreSurfaceView? mapLibreSurfaceView,
     jni$_.JString? string,
   ) {

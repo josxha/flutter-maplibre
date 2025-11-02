@@ -38,6 +38,8 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
+import '../../../../android/content/Context.dart' as context$_;
+
 import '../maps/MapLibreMapOptions.dart' as maplibremapoptions$_;
 
 /// from: `org.maplibre.android.utils.MapFragmentUtils`
@@ -153,7 +155,7 @@ class MapFragmentUtils extends jni$_.JObject {
   /// from: `static public org.maplibre.android.maps.MapLibreMapOptions resolveArgs(android.content.Context context, android.os.Bundle bundle)`
   /// The returned object must be released after use, by calling the [release] method.
   static maplibremapoptions$_.MapLibreMapOptions? resolveArgs(
-    jni$_.JObject context,
+    context$_.Context context,
     jni$_.JObject? bundle,
   ) {
     final _$context = context.reference;

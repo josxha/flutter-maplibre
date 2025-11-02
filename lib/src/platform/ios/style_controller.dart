@@ -1,7 +1,7 @@
 part of 'map_state.dart';
 
 /// Android specific implementation of the [StyleController].
-class StyleControllerIos implements StyleController {
+class StyleControllerIos extends StyleController {
   StyleControllerIos._(this._ffiStyle, this._hostApi);
 
   final MLNStyle _ffiStyle;
@@ -24,14 +24,27 @@ class StyleControllerIos implements StyleController {
   }
 
   @override
-  Future<void> addLayer(StyleLayer layer, {String? belowLayerId}) async {
+  Future<void> addLayer(
+    StyleLayer layer, {
+    String? belowLayerId,
+    String? aboveLayerId,
+    int? atIndex,
+  }) async {
+    final ffiId = layer.id.toNSString();
+    final prevStyleLayer = _ffiStyle.layerWithIdentifier(ffiId);
+    if (prevStyleLayer != null) {
+      throw Exception(
+        'A Layer with the id "${layer.id}" already exists in the map style.',
+      );
+    }
+
     MLNStyleLayer? ffiStyleLayer;
     switch (layer) {
       case BackgroundStyleLayer():
         ffiStyleLayer = MLNBackgroundStyleLayer.new$()
-          ..initWithIdentifier(layer.id.toNSString())
+          ..initWithIdentifier(ffiId)
           ..backgroundColor = NSExpression.expressionWithFormat$1(
-            layer.color.toHexString(alpha: false).toNSString(),
+            layer.color.toHexString().toNSString(),
           );
       case StyleLayerWithSource():
         final ffiSource = _ffiStyle.sourceWithIdentifier(
@@ -43,28 +56,28 @@ class StyleControllerIos implements StyleController {
         switch (layer) {
           case FillStyleLayer():
             ffiStyleLayer = MLNFillStyleLayer.new$()
-              ..initWithIdentifier(layer.id.toNSString(), source: ffiSource);
+              ..initWithIdentifier(ffiId, source: ffiSource);
           case CircleStyleLayer():
             ffiStyleLayer = MLNCircleStyleLayer.new$()
-              ..initWithIdentifier(layer.id.toNSString(), source: ffiSource);
+              ..initWithIdentifier(ffiId, source: ffiSource);
           case FillExtrusionStyleLayer():
             ffiStyleLayer = MLNFillExtrusionStyleLayer.new$()
-              ..initWithIdentifier(layer.id.toNSString(), source: ffiSource);
+              ..initWithIdentifier(ffiId, source: ffiSource);
           case HeatmapStyleLayer():
             ffiStyleLayer = MLNHeatmapStyleLayer.new$()
-              ..initWithIdentifier(layer.id.toNSString(), source: ffiSource);
+              ..initWithIdentifier(ffiId, source: ffiSource);
           case HillshadeStyleLayer():
             ffiStyleLayer = MLNHillshadeStyleLayer.new$()
-              ..initWithIdentifier(layer.id.toNSString(), source: ffiSource);
+              ..initWithIdentifier(ffiId, source: ffiSource);
           case LineStyleLayer():
             ffiStyleLayer = MLNLineStyleLayer.new$()
-              ..initWithIdentifier(layer.id.toNSString(), source: ffiSource);
+              ..initWithIdentifier(ffiId, source: ffiSource);
           case RasterStyleLayer():
             ffiStyleLayer = MLNRasterStyleLayer.new$()
-              ..initWithIdentifier(layer.id.toNSString(), source: ffiSource);
+              ..initWithIdentifier(ffiId, source: ffiSource);
           case SymbolStyleLayer():
             ffiStyleLayer = MLNSymbolStyleLayer.new$()
-              ..initWithIdentifier(layer.id.toNSString(), source: ffiSource);
+              ..initWithIdentifier(ffiId, source: ffiSource);
         }
     }
 
@@ -77,18 +90,43 @@ class StyleControllerIos implements StyleController {
     ffiStyleLayer.maximumZoomLevel = layer.maxZoom;
     ffiStyleLayer.setProperties(layer.paint);
     ffiStyleLayer.setProperties(layer.layout);
-    _ffiStyle.addLayer(ffiStyleLayer);
+
+    if (belowLayerId case final String id) {
+      final belowLayer = _ffiStyle.layerWithIdentifier(id.toNSString());
+      if (belowLayer == null) {
+        throw Exception('Layer "$id" does not exist.');
+      }
+      _ffiStyle.insertLayer$1(ffiStyleLayer, belowLayer: belowLayer);
+    } else if (aboveLayerId case final String id) {
+      final aboveLayer = _ffiStyle.layerWithIdentifier(id.toNSString());
+      if (aboveLayer == null) {
+        throw Exception('Layer "$id" does not exist.');
+      }
+      _ffiStyle.insertLayer$2(ffiStyleLayer, aboveLayer: aboveLayer);
+    } else if (atIndex case final int index) {
+      _ffiStyle.insertLayer(ffiStyleLayer, atIndex: index);
+    } else {
+      _ffiStyle.addLayer(ffiStyleLayer);
+    }
   }
 
   @override
   Future<void> addSource(Source source) async {
+    final ffiId = source.id.toNSString();
+    final prevSource = _ffiStyle.sourceWithIdentifier(ffiId);
+    if (prevSource != null) {
+      throw Exception(
+        'A Source with the id "${source.id}" already exists in the map style.',
+      );
+    }
+
     final MLNSource ffiSource;
     switch (source) {
       case GeoJsonSource():
         final shapeSource = MLNShapeSource.new$();
         if (source.data.startsWith('{')) {
           shapeSource.initWithIdentifier$1(
-            source.id.toNSString(),
+            ffiId,
             shape: MLNShape.shapeWithData(
               source.data.toNSDataUTF8()!,
               encoding: nsUTF8StringEncoding,
@@ -98,7 +136,7 @@ class StyleControllerIos implements StyleController {
           );
         } else {
           shapeSource.initWithIdentifier(
-            source.id.toNSString(),
+            ffiId,
             URL: source.data.toNSURL()!,
             options: NSDictionary.new$(),
           );
@@ -108,7 +146,7 @@ class StyleControllerIos implements StyleController {
         final demSource = ffiSource = MLNRasterDEMSource.new$();
         if (source.url case final String url) {
           demSource.initWithIdentifier$1(
-            source.id.toNSString(),
+            ffiId,
             configurationURL: url.toNSURL()!,
             tileSize: source.tileSize.toDouble(),
           );
@@ -118,7 +156,7 @@ class StyleControllerIos implements StyleController {
             ffiUrls.addObject(url.toNSString());
           }
           demSource.initWithIdentifier$2(
-            source.id.toNSString(),
+            ffiId,
             tileURLTemplates: ffiUrls,
             options: NSDictionary.new$(),
           );
@@ -127,7 +165,7 @@ class StyleControllerIos implements StyleController {
         final rasterSource = ffiSource = MLNRasterTileSource.new$();
         if (source.url case final String url) {
           rasterSource.initWithIdentifier$1(
-            source.id.toNSString(),
+            ffiId,
             configurationURL: url.toNSURL()!,
             tileSize: source.tileSize.toDouble(),
           );
@@ -137,7 +175,7 @@ class StyleControllerIos implements StyleController {
             ffiUrls.addObject(url.toNSString());
           }
           rasterSource.initWithIdentifier$2(
-            source.id.toNSString(),
+            ffiId,
             tileURLTemplates: ffiUrls,
             options: NSDictionary.new$(),
           );
@@ -146,7 +184,7 @@ class StyleControllerIos implements StyleController {
         final vectorSource = ffiSource = MLNVectorTileSource.new$();
         if (source.url case final String url) {
           vectorSource.initWithIdentifier$1(
-            source.id.toNSString(),
+            ffiId,
             configurationURLString: url.toNSString(),
           );
         } else {
@@ -155,7 +193,7 @@ class StyleControllerIos implements StyleController {
             ffiUrls.addObject(url.toNSString());
           }
           vectorSource.initWithIdentifier$2(
-            source.id.toNSString(),
+            ffiId,
             tileURLTemplates: ffiUrls,
             options: NSDictionary.new$(),
           );
@@ -170,7 +208,7 @@ class StyleControllerIos implements StyleController {
           ..topRight = source.coordinates.topRight.toCLLocationCoordinate2D();
         final imageSource = ffiSource = MLNImageSource.new$();
         imageSource.initWithIdentifier(
-          source.id.toNSString(),
+          ffiId,
           coordinateQuad: coordinates,
           URL: source.url.toNSURL()!,
         );
@@ -200,7 +238,6 @@ class StyleControllerIos implements StyleController {
   Future<void> removeImage(String id) async {
     final ffiId = id.toNSString();
     _ffiStyle.removeImageForName(ffiId);
-    ffiId.release();
   }
 
   @override
@@ -209,7 +246,6 @@ class StyleControllerIos implements StyleController {
     final ffiLayer = _ffiStyle.layerWithIdentifier(ffiId);
     if (ffiLayer == null) return;
     _ffiStyle.removeLayer(ffiLayer);
-    ffiId.release();
   }
 
   @override
@@ -218,7 +254,6 @@ class StyleControllerIos implements StyleController {
     final ffiSource = _ffiStyle.sourceWithIdentifier(ffiId);
     if (ffiSource == null) return;
     _ffiStyle.removeSource(ffiSource);
-    ffiId.release();
   }
 
   @override

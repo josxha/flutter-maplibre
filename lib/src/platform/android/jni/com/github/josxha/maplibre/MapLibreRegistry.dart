@@ -38,8 +38,7 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
-import '../../../../org/maplibre/android/maps/MapLibreMap.dart'
-    as maplibremap$_;
+import 'FlutterApi.dart' as flutterapi$_;
 
 /// from: `com.github.josxha.maplibre.MapLibreRegistry`
 class MapLibreRegistry extends jni$_.JObject {
@@ -70,18 +69,17 @@ class MapLibreRegistry extends jni$_.JObject {
   static MapLibreRegistry get INSTANCE =>
       _id_INSTANCE.get(_class, const $MapLibreRegistry$Type());
 
-  static final _id_getMap = _class.instanceMethodId(
-    r'getMap',
-    r'(I)Lorg/maplibre/android/maps/MapLibreMap;',
+  static final _id_getFlutterApi = _class.instanceMethodId(
+    r'getFlutterApi',
+    r'()Lcom/github/josxha/maplibre/FlutterApi;',
   );
 
-  static final _getMap =
+  static final _getFlutterApi =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Int32,)>,
               )
             >
           >('globalEnv_CallObjectMethod')
@@ -89,98 +87,26 @@ class MapLibreRegistry extends jni$_.JObject {
             jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
-              int,
             )
           >();
 
-  /// from: `public final org.maplibre.android.maps.MapLibreMap getMap(int i)`
+  /// from: `public final com.github.josxha.maplibre.FlutterApi getFlutterApi()`
   /// The returned object must be released after use, by calling the [release] method.
-  maplibremap$_.MapLibreMap? getMap(
-    int i,
-  ) {
-    return _getMap(
+  flutterapi$_.FlutterApi? getFlutterApi() {
+    return _getFlutterApi(
       reference.pointer,
-      _id_getMap as jni$_.JMethodIDPtr,
-      i,
-    ).object<maplibremap$_.MapLibreMap?>(
-      const maplibremap$_.$MapLibreMap$NullableType(),
+      _id_getFlutterApi as jni$_.JMethodIDPtr,
+    ).object<flutterapi$_.FlutterApi?>(
+      const flutterapi$_.$FlutterApi$NullableType(),
     );
   }
 
-  static final _id_addMap = _class.instanceMethodId(
-    r'addMap',
-    r'(ILorg/maplibre/android/maps/MapLibreMap;)V',
+  static final _id_setFlutterApi = _class.instanceMethodId(
+    r'setFlutterApi',
+    r'(Lcom/github/josxha/maplibre/FlutterApi;)V',
   );
 
-  static final _addMap =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Int32, jni$_.Pointer<jni$_.Void>)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              int,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public final void addMap(int i, org.maplibre.android.maps.MapLibreMap mapLibreMap)`
-  void addMap(
-    int i,
-    maplibremap$_.MapLibreMap mapLibreMap,
-  ) {
-    final _$mapLibreMap = mapLibreMap.reference;
-    _addMap(
-      reference.pointer,
-      _id_addMap as jni$_.JMethodIDPtr,
-      i,
-      _$mapLibreMap.pointer,
-    ).check();
-  }
-
-  static final _id_getActivity = _class.instanceMethodId(
-    r'getActivity',
-    r'()Landroid/app/Activity;',
-  );
-
-  static final _getActivity =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public final android.app.Activity getActivity()`
-  /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? getActivity() {
-    return _getActivity(
-      reference.pointer,
-      _id_getActivity as jni$_.JMethodIDPtr,
-    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
-  }
-
-  static final _id_setActivity = _class.instanceMethodId(
-    r'setActivity',
-    r'(Landroid/app/Activity;)V',
-  );
-
-  static final _setActivity =
+  static final _setFlutterApi =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
@@ -198,80 +124,15 @@ class MapLibreRegistry extends jni$_.JObject {
             )
           >();
 
-  /// from: `public final void setActivity(android.app.Activity activity)`
-  void setActivity(
-    jni$_.JObject? activity,
+  /// from: `public final void setFlutterApi(com.github.josxha.maplibre.FlutterApi flutterApi)`
+  void setFlutterApi(
+    flutterapi$_.FlutterApi? flutterApi,
   ) {
-    final _$activity = activity?.reference ?? jni$_.jNullReference;
-    _setActivity(
+    final _$flutterApi = flutterApi?.reference ?? jni$_.jNullReference;
+    _setFlutterApi(
       reference.pointer,
-      _id_setActivity as jni$_.JMethodIDPtr,
-      _$activity.pointer,
-    ).check();
-  }
-
-  static final _id_getContext = _class.instanceMethodId(
-    r'getContext',
-    r'()Landroid/content/Context;',
-  );
-
-  static final _getContext =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public final android.content.Context getContext()`
-  /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? getContext() {
-    return _getContext(
-      reference.pointer,
-      _id_getContext as jni$_.JMethodIDPtr,
-    ).object<jni$_.JObject?>(const jni$_.JObjectNullableType());
-  }
-
-  static final _id_setContext = _class.instanceMethodId(
-    r'setContext',
-    r'(Landroid/content/Context;)V',
-  );
-
-  static final _setContext =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public final void setContext(android.content.Context context)`
-  void setContext(
-    jni$_.JObject? context,
-  ) {
-    final _$context = context?.reference ?? jni$_.jNullReference;
-    _setContext(
-      reference.pointer,
-      _id_setContext as jni$_.JMethodIDPtr,
-      _$context.pointer,
+      _id_setFlutterApi as jni$_.JMethodIDPtr,
+      _$flutterApi.pointer,
     ).check();
   }
 }

@@ -1,7 +1,7 @@
 part of 'map_state.dart';
 
 /// Web specific implementation of the [StyleController].
-class StyleControllerWeb implements StyleController {
+class StyleControllerWeb extends StyleController {
   /// Create a new [StyleControllerWeb] instance.
   const StyleControllerWeb(this._map);
 
@@ -70,7 +70,18 @@ class StyleControllerWeb implements StyleController {
   }
 
   @override
-  Future<void> addLayer(StyleLayer layer, {String? belowLayerId}) async {
+  Future<void> addLayer(
+    StyleLayer layer, {
+    String? belowLayerId,
+    String? aboveLayerId,
+    int? atIndex,
+  }) async {
+    if (_map.getLayer(layer.id) != null) {
+      throw Exception(
+        'A Layer with the id "${layer.id}" already exists in the map style.',
+      );
+    }
+
     switch (layer) {
       case FillStyleLayer():
         _map.addLayer(
@@ -194,6 +205,11 @@ class StyleControllerWeb implements StyleController {
 
   @override
   Future<void> addSource(Source source) async {
+    if (_map.getSource(source.id) != null) {
+      throw Exception(
+        'A Source with the id "${source.id}" already exists in the map style.',
+      );
+    }
     switch (source) {
       case GeoJsonSource():
         JSAny data;

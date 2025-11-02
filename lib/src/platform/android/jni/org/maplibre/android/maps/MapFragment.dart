@@ -38,6 +38,10 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
+import '../../../../android/content/Context.dart' as context$_;
+
+import '../../../../android/view/ViewGroup.dart' as viewgroup$_;
+
 import 'MapLibreMap.dart' as maplibremap$_;
 
 import 'MapLibreMapOptions.dart' as maplibremapoptions$_;
@@ -439,7 +443,7 @@ class MapFragment extends jni$_.JObject {
 
   /// from: `public void onInflate(android.content.Context context, android.util.AttributeSet attributeSet, android.os.Bundle bundle)`
   void onInflate(
-    jni$_.JObject context,
+    context$_.Context context,
     jni$_.JObject? attributeSet,
     jni$_.JObject? bundle,
   ) {
@@ -480,7 +484,7 @@ class MapFragment extends jni$_.JObject {
 
   /// from: `public void onAttach(android.content.Context context)`
   void onAttach(
-    jni$_.JObject? context,
+    context$_.Context? context,
   ) {
     final _$context = context?.reference ?? jni$_.jNullReference;
     _onAttach(
@@ -525,7 +529,7 @@ class MapFragment extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JObject? onCreateView(
     jni$_.JObject layoutInflater,
-    jni$_.JObject? viewGroup,
+    viewgroup$_.ViewGroup? viewGroup,
     jni$_.JObject? bundle,
   ) {
     final _$layoutInflater = layoutInflater.reference;

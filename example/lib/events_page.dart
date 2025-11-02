@@ -12,7 +12,7 @@ class EventsPage extends StatefulWidget {
 }
 
 class _EventsPageState extends State<EventsPage> {
-  final _eventMessages = <String>[];
+  final _events = <MapEvent>[];
 
   @override
   Widget build(BuildContext context) {
@@ -26,13 +26,15 @@ class _EventsPageState extends State<EventsPage> {
             ),
             onEvent: _onEvent,
           ),
-          IgnorePointer(
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              alignment: Alignment.bottomLeft,
-              child: Text(
-                _eventMessages.join('\n'),
-                style: const TextStyle(color: Colors.black),
+          SafeArea(
+            child: IgnorePointer(
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                alignment: Alignment.bottomLeft,
+                child: Text(
+                  _events.map(eventToString).join('\n'),
+                  style: const TextStyle(color: Colors.black),
+                ),
               ),
             ),
           ),
@@ -41,40 +43,40 @@ class _EventsPageState extends State<EventsPage> {
     );
   }
 
-  void _onEvent(MapEvent event) => switch (event) {
-    MapEventMapCreated() => _print('map created'),
-    MapEventStyleLoaded() => _print('style loaded'),
-    MapEventMoveCamera() => _print(
+  String eventToString(MapEvent event) => switch (event) {
+    MapEventMapCreated() => 'map created',
+    MapEventStyleLoaded() => 'style loaded',
+    MapEventMoveCamera() =>
       'move camera: center ${_formatGeographic(event.camera.center)}, '
-      'zoom ${event.camera.zoom.toStringAsFixed(2)}, '
-      'pitch ${event.camera.pitch.toStringAsFixed(2)}, '
-      'bearing ${event.camera.bearing.toStringAsFixed(2)}',
-    ),
-    MapEventStartMoveCamera() => _print(
+          'zoom ${event.camera.zoom.toStringAsFixed(2)}, '
+          'pitch ${event.camera.pitch.toStringAsFixed(2)}, '
+          'bearing ${event.camera.bearing.toStringAsFixed(2)}',
+    MapEventStartMoveCamera() =>
       'start move camera, reason: ${event.reason.name}',
-    ),
-    MapEventClick() => _print(
+    MapEventClick() =>
       'clicked: ${_formatGeographic(event.point)}, screen: ${_formatOffset(event.screenPoint)}',
-    ),
-    MapEventDoubleClick() => _print(
+    MapEventDoubleClick() =>
       'double clicked: ${_formatGeographic(event.point)}, screen: ${_formatOffset(event.screenPoint)}',
-    ),
-    MapEventLongClick() => _print(
+    MapEventLongClick() =>
       'long clicked: ${_formatGeographic(event.point)}, screen: ${_formatOffset(event.screenPoint)}',
-    ),
-    MapEventSecondaryClick() => _print(
+    MapEventSecondaryClick() =>
       'secondary clicked: ${_formatGeographic(event.point)}, screen: ${_formatOffset(event.screenPoint)}',
-    ),
-    MapEventIdle() => _print('idle'),
-    MapEventCameraIdle() => _print('camera idle'),
+    MapEventIdle() => 'idle',
+    MapEventCameraIdle() => 'camera idle',
   };
 
-  void _print(String message) {
-    debugPrint('[MapLibreMap] $message');
-    setState(() {
-      _eventMessages.add(message);
-      if (_eventMessages.length > 10) _eventMessages.removeAt(0);
-    });
+  void _onEvent(MapEvent event) {
+    debugPrint('[MapLibreMap] ${eventToString(event)}');
+    if (event.runtimeType == _events.lastOrNull?.runtimeType) {
+      setState(() {
+        _events[_events.length - 1] = event;
+      });
+    } else {
+      setState(() {
+        _events.add(event);
+        if (_events.length > 10) _events.removeAt(0);
+      });
+    }
   }
 
   String _formatGeographic(Geographic point) =>

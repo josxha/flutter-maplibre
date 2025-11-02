@@ -79,7 +79,7 @@ class OfflineManagerIos extends OfflineManagerNative {
       final jsonBytes = ffiPack.context.toList();
       final json = jsonDecode(utf8.decode(jsonBytes)) as Map<String, Object?>;
       // print(json);
-      if (json['id'] != regionId) {
+      if (json['id'] == regionId) {
         final ffiRegion = MLNTilePyramidOfflineRegion.castFrom(ffiPack.region);
         return OfflineRegion(
           id: regionId,

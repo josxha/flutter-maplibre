@@ -38,6 +38,10 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
+import '../../../../android/content/Context.dart' as context$_;
+
+import '../../../../android/widget/FrameLayout.dart' as framelayout$_;
+
 import 'MapLibreMapOptions.dart' as maplibremapoptions$_;
 
 import 'OnMapReadyCallback.dart' as onmapreadycallback$_;
@@ -6625,7 +6629,7 @@ final class $MapView$OnWillStartRenderingMapListener$Type
 }
 
 /// from: `org.maplibre.android.maps.MapView`
-class MapView extends jni$_.JObject {
+class MapView extends framelayout$_.FrameLayout {
   @jni$_.internal
   @core$_.override
   final jni$_.JObjType<MapView> $type;
@@ -6668,7 +6672,7 @@ class MapView extends jni$_.JObject {
   /// from: `public void <init>(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
   factory MapView(
-    jni$_.JObject context,
+    context$_.Context context,
   ) {
     final _$context = context.reference;
     return MapView.fromReference(
@@ -6680,11 +6684,11 @@ class MapView extends jni$_.JObject {
     );
   }
 
-  static final _id_new$1 = _class.constructorId(
+  static final _id_new1 = _class.constructorId(
     r'(Landroid/content/Context;Landroid/util/AttributeSet;)V',
   );
 
-  static final _new$1 =
+  static final _new1 =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
@@ -6707,27 +6711,27 @@ class MapView extends jni$_.JObject {
 
   /// from: `public void <init>(android.content.Context context, android.util.AttributeSet attributeSet)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory MapView.new$1(
-    jni$_.JObject context,
+  factory MapView.new1(
+    context$_.Context context,
     jni$_.JObject? attributeSet,
   ) {
     final _$context = context.reference;
     final _$attributeSet = attributeSet?.reference ?? jni$_.jNullReference;
     return MapView.fromReference(
-      _new$1(
+      _new1(
         _class.reference.pointer,
-        _id_new$1 as jni$_.JMethodIDPtr,
+        _id_new1 as jni$_.JMethodIDPtr,
         _$context.pointer,
         _$attributeSet.pointer,
       ).reference,
     );
   }
 
-  static final _id_new$2 = _class.constructorId(
+  static final _id_new2 = _class.constructorId(
     r'(Landroid/content/Context;Landroid/util/AttributeSet;I)V',
   );
 
-  static final _new$2 =
+  static final _new2 =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
@@ -6755,17 +6759,17 @@ class MapView extends jni$_.JObject {
 
   /// from: `public void <init>(android.content.Context context, android.util.AttributeSet attributeSet, int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory MapView.new$2(
-    jni$_.JObject context,
+  factory MapView.new2(
+    context$_.Context context,
     jni$_.JObject? attributeSet,
     int i,
   ) {
     final _$context = context.reference;
     final _$attributeSet = attributeSet?.reference ?? jni$_.jNullReference;
     return MapView.fromReference(
-      _new$2(
+      _new2(
         _class.reference.pointer,
-        _id_new$2 as jni$_.JMethodIDPtr,
+        _id_new2 as jni$_.JMethodIDPtr,
         _$context.pointer,
         _$attributeSet.pointer,
         i,
@@ -6773,11 +6777,11 @@ class MapView extends jni$_.JObject {
     );
   }
 
-  static final _id_new$3 = _class.constructorId(
+  static final _id_new$4 = _class.constructorId(
     r'(Landroid/content/Context;Lorg/maplibre/android/maps/MapLibreMapOptions;)V',
   );
 
-  static final _new$3 =
+  static final _new$4 =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
@@ -6800,17 +6804,17 @@ class MapView extends jni$_.JObject {
 
   /// from: `public void <init>(android.content.Context context, org.maplibre.android.maps.MapLibreMapOptions mapLibreMapOptions)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory MapView.new$3(
-    jni$_.JObject context,
+  factory MapView.new$4(
+    context$_.Context context,
     maplibremapoptions$_.MapLibreMapOptions? mapLibreMapOptions,
   ) {
     final _$context = context.reference;
     final _$mapLibreMapOptions =
         mapLibreMapOptions?.reference ?? jni$_.jNullReference;
     return MapView.fromReference(
-      _new$3(
+      _new$4(
         _class.reference.pointer,
-        _id_new$3 as jni$_.JMethodIDPtr,
+        _id_new$4 as jni$_.JMethodIDPtr,
         _$context.pointer,
         _$mapLibreMapOptions.pointer,
       ).reference,
@@ -9479,7 +9483,8 @@ final class $MapView$NullableType extends jni$_.JObjType<MapView?> {
         );
   @jni$_.internal
   @core$_.override
-  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+  jni$_.JObjType get superType =>
+      const framelayout$_.$FrameLayout$NullableType();
 
   @jni$_.internal
   @core$_.override
@@ -9487,7 +9492,7 @@ final class $MapView$NullableType extends jni$_.JObjType<MapView?> {
 
   @jni$_.internal
   @core$_.override
-  final superCount = 1;
+  final superCount = 3;
 
   @core$_.override
   int get hashCode => ($MapView$NullableType).hashCode;
@@ -9514,7 +9519,8 @@ final class $MapView$Type extends jni$_.JObjType<MapView> {
   );
   @jni$_.internal
   @core$_.override
-  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+  jni$_.JObjType get superType =>
+      const framelayout$_.$FrameLayout$NullableType();
 
   @jni$_.internal
   @core$_.override
@@ -9522,7 +9528,7 @@ final class $MapView$Type extends jni$_.JObjType<MapView> {
 
   @jni$_.internal
   @core$_.override
-  final superCount = 1;
+  final superCount = 3;
 
   @core$_.override
   int get hashCode => ($MapView$Type).hashCode;

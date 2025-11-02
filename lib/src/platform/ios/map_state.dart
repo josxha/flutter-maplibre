@@ -4,8 +4,8 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/layer/extensions.dart';
 import 'package:maplibre/src/layer/layer_manager.dart';
+import 'package:maplibre/src/platform/android/extensions.dart';
 import 'package:maplibre/src/platform/ios/extensions.dart';
 import 'package:maplibre/src/platform/map_state_native.dart';
 import 'package:maplibre/src/platform/pigeon.g.dart' as pigeon;
@@ -100,15 +100,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     bool webLinear = false,
     EdgeInsets padding = EdgeInsets.zero,
   }) async {
-    final sw = Struct.create<CLLocationCoordinate2D>()
-      ..longitude = bounds.longitudeWest
-      ..latitude = bounds.latitudeSouth;
-    final ne = Struct.create<CLLocationCoordinate2D>()
-      ..longitude = bounds.longitudeEast
-      ..latitude = bounds.latitudeNorth;
-    final ffiBounds = Struct.create<MLNCoordinateBounds>()
-      ..sw = sw
-      ..ne = ne;
+    final ffiBounds = bounds.toMLNCoordinateBounds();
     // TODO support padding with Struct UIEdgeInsets
     _mapView.setVisibleCoordinateBounds(ffiBounds, animated: true);
   }
@@ -376,4 +368,107 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
       _mapView.styleURL = trimmed.toNSURL()!;
     }
   }
+
+  @override
+  void onMoveCamera(pigeon.MapCamera camera) {
+    final mapCamera = MapCamera(
+      center: camera.center.toGeographic(),
+      zoom: camera.zoom,
+      pitch: camera.pitch,
+      bearing: camera.bearing,
+    );
+    setState(() => this.camera = mapCamera);
+    widget.onEvent?.call(MapEventMoveCamera(camera: mapCamera));
+  }
+
+  @override
+  void onStartMoveCamera(pigeon.CameraChangeReason reason) {
+    final changeReason = switch (reason) {
+      pigeon.CameraChangeReason.apiAnimation => CameraChangeReason.apiAnimation,
+      pigeon.CameraChangeReason.apiGesture => CameraChangeReason.apiGesture,
+      pigeon.CameraChangeReason.developerAnimation =>
+        CameraChangeReason.developerAnimation,
+    };
+    widget.onEvent?.call(MapEventStartMoveCamera(reason: changeReason));
+  }
+
+  @override
+  void onIdle() => widget.onEvent?.call(const MapEventIdle());
+
+  @override
+  void onCameraIdle() => widget.onEvent?.call(const MapEventCameraIdle());
+
+  @override
+  void onDoubleClick(pigeon.LngLat point, pigeon.Offset screenPoint) {
+    final position = point.toGeographic();
+    final screenOffset = screenPoint.toOffset();
+    widget.onEvent?.call(
+      MapEventClick(point: position, screenPoint: screenOffset),
+    );
+  }
+
+  @override
+  void onSecondaryClick(pigeon.LngLat point, pigeon.Offset screenPoint) {
+    final position = point.toGeographic();
+    final screenOffset = screenPoint.toOffset();
+    widget.onEvent?.call(
+      MapEventClick(point: position, screenPoint: screenOffset),
+    );
+  }
+
+  @override
+  void onClick(pigeon.LngLat point, pigeon.Offset screenPoint) {
+    final position = point.toGeographic();
+    final screenOffset = screenPoint.toOffset();
+    widget.onEvent?.call(
+      MapEventClick(point: position, screenPoint: screenOffset),
+    );
+  }
+
+  @override
+  void onLongClick(pigeon.LngLat point, pigeon.Offset screenPoint) {
+    final position = point.toGeographic();
+    final screenOffset = screenPoint.toOffset();
+    widget.onEvent?.call(
+      MapEventLongClick(point: position, screenPoint: screenOffset),
+    );
+  }
+
+  @override
+  void onMapReady() {
+    widget.onEvent?.call(MapEventMapCreated(mapController: this));
+    widget.onMapCreated?.call(this);
+    setState(() {
+      camera = getCamera();
+      isInitialized = true;
+    });
+  }
+
+  @override
+  pigeon.MapOptions getOptions() => pigeon.MapOptions(
+    style: options.initStyle,
+    bearing: options.initBearing,
+    zoom: options.initZoom,
+    pitch: options.initPitch,
+    center: options.initCenter == null
+        ? null
+        : pigeon.LngLat(
+            lng: options.initCenter!.lon,
+            lat: options.initCenter!.lat,
+          ),
+    minZoom: options.minZoom,
+    maxZoom: options.maxZoom,
+    minPitch: options.minPitch,
+    maxPitch: options.maxPitch,
+    maxBounds: options.maxBounds?.toLngLatBounds(),
+    gestures: pigeon.MapGestures(
+      rotate: options.gestures.rotate,
+      pan: options.gestures.pan,
+      zoom: options.gestures.zoom,
+      tilt: options.gestures.pitch,
+    ),
+    androidTextureMode: options.androidTextureMode,
+    androidTranslucentTextureSurface: options.androidTranslucentTextureSurface,
+    androidForegroundLoadColor: options.androidForegroundLoadColor.toARGB32(),
+  );
 }

@@ -3,6 +3,7 @@
 export 'package:geobase/geobase.dart';
 
 export 'src/android_platform_view_mode.dart';
+export 'src/layer/extensions.dart' show ColorExtension;
 export 'src/layer/layer.dart';
 export 'src/lng_lat_bounds.dart';
 export 'src/map.dart';

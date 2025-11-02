@@ -38,6 +38,8 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
+import '../../../../../android/content/Context.dart' as context$_;
+
 import '../MapLibreMap.dart' as maplibremap$_;
 
 import '../MapLibreMapOptions.dart' as maplibremapoptions$_;
@@ -292,7 +294,7 @@ class MapRenderer extends jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static MapRenderer? create(
     maplibremapoptions$_.MapLibreMapOptions? mapLibreMapOptions,
-    jni$_.JObject context,
+    context$_.Context context,
     jni$_.JObject? runnable,
   ) {
     final _$mapLibreMapOptions =

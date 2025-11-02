@@ -38,6 +38,10 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
+import '../../../../../android/app/Activity.dart' as activity$_;
+
+import '../../../../../android/content/Context.dart' as context$_;
+
 import 'PermissionsListener.dart' as permissionslistener$_;
 
 /// from: `org.maplibre.android.location.permissions.PermissionsManager`
@@ -191,7 +195,7 @@ class PermissionsManager extends jni$_.JObject {
 
   /// from: `static public boolean isBackgroundLocationPermissionGranted(android.content.Context context)`
   static bool isBackgroundLocationPermissionGranted(
-    jni$_.JObject? context,
+    context$_.Context? context,
   ) {
     final _$context = context?.reference ?? jni$_.jNullReference;
     return _isBackgroundLocationPermissionGranted(
@@ -226,7 +230,7 @@ class PermissionsManager extends jni$_.JObject {
 
   /// from: `static public boolean areLocationPermissionsGranted(android.content.Context context)`
   static bool areLocationPermissionsGranted(
-    jni$_.JObject? context,
+    context$_.Context? context,
   ) {
     final _$context = context?.reference ?? jni$_.jNullReference;
     return _areLocationPermissionsGranted(
@@ -290,7 +294,7 @@ class PermissionsManager extends jni$_.JObject {
 
   /// from: `public void requestLocationPermissions(android.app.Activity activity)`
   void requestLocationPermissions(
-    jni$_.JObject? activity,
+    activity$_.Activity? activity,
   ) {
     final _$activity = activity?.reference ?? jni$_.jNullReference;
     _requestLocationPermissions(

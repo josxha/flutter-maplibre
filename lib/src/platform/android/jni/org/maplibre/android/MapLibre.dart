@@ -38,6 +38,8 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
+import '../../../android/content/Context.dart' as context$_;
+
 import 'util/DefaultStyle.dart' as defaultstyle$_;
 
 import 'util/TileServerOptions.dart' as tileserveroptions$_;
@@ -85,7 +87,7 @@ class MapLibre extends jni$_.JObject {
   /// from: `static public org.maplibre.android.MapLibre getInstance(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
   static MapLibre getInstance(
-    jni$_.JObject context,
+    context$_.Context context,
   ) {
     final _$context = context.reference;
     return _getInstance(
@@ -129,7 +131,7 @@ class MapLibre extends jni$_.JObject {
   /// from: `static public org.maplibre.android.MapLibre getInstance(android.content.Context context, java.lang.String string, org.maplibre.android.WellKnownTileServer wellKnownTileServer)`
   /// The returned object must be released after use, by calling the [release] method.
   static MapLibre getInstance$1(
-    jni$_.JObject context,
+    context$_.Context context,
     jni$_.JString? string,
     jni$_.JObject? wellKnownTileServer,
   ) {
@@ -338,11 +340,11 @@ class MapLibre extends jni$_.JObject {
 
   /// from: `static public android.content.Context getApplicationContext()`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni$_.JObject getApplicationContext() {
+  static context$_.Context getApplicationContext() {
     return _getApplicationContext(
       _class.reference.pointer,
       _id_getApplicationContext as jni$_.JMethodIDPtr,
-    ).object<jni$_.JObject>(const jni$_.JObjectType());
+    ).object<context$_.Context>(const context$_.$Context$Type());
   }
 
   static final _id_setConnected = _class.staticMethodId(

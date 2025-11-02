@@ -1,6 +1,6 @@
 name: Feature Request
 description: Suggest a Feature
-title: "[FEATURE] <title>"
+title: ""
 labels: [ "feature" ]
 body:
   - type: textarea

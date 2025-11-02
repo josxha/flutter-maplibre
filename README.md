@@ -107,8 +107,8 @@ All kinds of contributions are welcome. Thanks a lot if you consider to
 contribute in any way! There are different ways how you can help the
 development:
 
-- 🌟Give the project on [GitHub](https://github.com/josxha/flutter-maplibre)
-  and [pub.dev](https://pub.dev/packages/maplibre).
+- 🌟Give the project on [GitHub](https://github.com/josxha/flutter-maplibre) a star
+  and like it on [pub.dev](https://pub.dev/packages/maplibre).
 - 🪴Use the package in your project
   and [share feedback](https://github.com/josxha/flutter-maplibre/discussions/categories/show-and-tell).
 - 🐛[Open bug reports](https://github.com/josxha/flutter-maplibre/issues/new?assignees=&labels=bug&projects=&template=1-bug.yml&title=%5BBUG%5D+%3Ctitle%3E)

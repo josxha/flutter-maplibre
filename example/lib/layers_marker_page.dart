@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre_example/style_layers_symbol_page.dart';
 
 @immutable
 class LayersMarkerPage extends StatefulWidget {
@@ -36,11 +34,11 @@ class _LayersMarkerPageState extends State<LayersMarkerPage> {
           switch (event) {
             case MapEventStyleLoaded():
               // add marker image to map
-              final response = await http.get(
-                Uri.parse(StyleLayersSymbolPage.imageUrl),
+              await event.style.addImageFromIconData(
+                id: 'marker',
+                iconData: Icons.location_on,
+                color: Colors.red,
               );
-              final bytes = response.bodyBytes;
-              await event.style.addImage('marker', bytes);
               setState(() {
                 _imageLoaded = true;
               });
@@ -60,7 +58,7 @@ class _LayersMarkerPageState extends State<LayersMarkerPage> {
             textField: 'Marker',
             textAllowOverlap: true,
             iconImage: _imageLoaded ? 'marker' : null,
-            iconSize: 0.08,
+            iconSize: 0.15,
             iconAnchor: IconAnchor.bottom,
             textOffset: const [0, 1],
           ),

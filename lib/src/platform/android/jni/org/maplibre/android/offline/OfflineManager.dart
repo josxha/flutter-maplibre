@@ -38,6 +38,8 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
+import '../../../../android/content/Context.dart' as context$_;
+
 import 'OfflineRegion.dart' as offlineregion$_;
 
 import 'OfflineRegionDefinition.dart' as offlineregiondefinition$_;
@@ -87,7 +89,7 @@ class OfflineManager$Companion extends jni$_.JObject {
   /// from: `public final org.maplibre.android.offline.OfflineManager getInstance(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
   OfflineManager getInstance(
-    jni$_.JObject context,
+    context$_.Context context,
   ) {
     final _$context = context.reference;
     return _getInstance(
@@ -2333,7 +2335,7 @@ class OfflineManager extends jni$_.JObject {
   /// from: `static public final org.maplibre.android.offline.OfflineManager getInstance(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
   static OfflineManager getInstance(
-    jni$_.JObject context,
+    context$_.Context context,
   ) {
     final _$context = context.reference;
     return _getInstance(
@@ -2371,7 +2373,7 @@ class OfflineManager extends jni$_.JObject {
   /// from: `synthetic public void <init>(android.content.Context context, kotlin.jvm.internal.DefaultConstructorMarker defaultConstructorMarker)`
   /// The returned object must be released after use, by calling the [release] method.
   factory OfflineManager(
-    jni$_.JObject? context,
+    context$_.Context? context,
     jni$_.JObject? defaultConstructorMarker,
   ) {
     final _$context = context?.reference ?? jni$_.jNullReference;
