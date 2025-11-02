@@ -2,11 +2,10 @@ import 'package:maplibre/src/platform/ios/registry.dart';
 import 'package:maplibre_ios/maplibre_ffi.dart' as ffi;
 
 /// Call dart from native swift code.
-void createFlutterApi() => ffi.FlutterApi.implement(
+ffi.FlutterApi createFlutterApi() => ffi.FlutterApi.implement(
   createPlatformViewWithViewId_: (viewId) {
-    final view2 = ffi.UIView();
-    final view = ffi.FlutterPlatformView.implement()..view = ;
+    final view = ffi.UIView();
     Registry.platformViews[viewId] = view;
-    return view;
+    return ffi.Helpers.createMapLibrePlatformViewWithView(view);
   },
 );

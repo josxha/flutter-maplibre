@@ -308,6 +308,18 @@ SWIFT_PROTOCOL("_TtP12maplibre_ios10FlutterApi_")
 - (id <FlutterPlatformView> _Nonnull)createPlatformViewWithViewId:(NSInteger)viewId SWIFT_WARN_UNUSED_RESULT;
 @end
 
+@class UIView;
+@class NSString;
+@class NSExpression;
+SWIFT_CLASS("_TtC12maplibre_ios7Helpers")
+@interface Helpers : NSObject
++ (id <FlutterPlatformView> _Nonnull)createMapLibrePlatformViewWithView:(UIView * _Nonnull)view SWIFT_WARN_UNUSED_RESULT;
++ (void)addImageToStyleWithTarget:(NSObject * _Nonnull)target field:(NSString * _Nonnull)field expression:(NSExpression * _Nonnull)expression;
++ (void)setExpressionWithTarget:(NSObject * _Nonnull)target field:(NSString * _Nonnull)field expression:(NSExpression * _Nonnull)expression;
++ (NSExpression * _Nullable)parseExpressionWithPropertyName:(NSString * _Nonnull)propertyName expression:(NSString * _Nonnull)expression SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
 SWIFT_CLASS("_TtC12maplibre_ios16MapLibreRegistry")
 @interface MapLibreRegistry : NSObject
 + (id _Nullable)getMapWithViewId:(int64_t)viewId SWIFT_WARN_UNUSED_RESULT;

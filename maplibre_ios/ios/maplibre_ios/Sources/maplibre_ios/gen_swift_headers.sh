@@ -27,6 +27,8 @@ swiftc \
   -c MapLibreRegistry.swift \
   -c Extensions.swift \
   -c FlutterApi.swift \
+  -c Helpers.swift \
+  -c MapLibrePlatformView.swift \
   -module-name maplibre_ios \
   -emit-objc-header-path MapLibreIos.h \
   -emit-library -o libmaplibreios.dylib \

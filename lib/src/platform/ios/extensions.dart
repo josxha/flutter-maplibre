@@ -107,11 +107,11 @@ extension StringExt on String {
 }
 
 /// Convert a raw String to a [NSExpression].
-/*NSExpression? parseNSExpression(String propertyName, String json) =>
+NSExpression? parseNSExpression(String propertyName, String json) =>
     Helpers.parseExpressionWithPropertyName(
       propertyName.toNSString(),
       expression: json.toNSString(),
-    );*/
+    );
 
 /// Internal extensions on [MLNStyleLayer].
 extension MLNStyleLayerExt on MLNStyleLayer {
