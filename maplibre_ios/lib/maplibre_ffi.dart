@@ -96,6 +96,21 @@ ffi.Pointer<ffi.Void> arg0,
 int arg1,
 );
 
+@ffi.Native<objc.CGSize Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<ffi.Void> )>()
+external objc.CGSize _MapLibreFFi_protocolTrampoline_1j20mp(ffi.Pointer<objc.ObjCObject> target,
+ffi.Pointer<ffi.Void> arg0,
+);
+
+@ffi.Native<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> )>(isLeaf: true)
+external ffi.Pointer<objc.ObjCBlockImpl> _MapLibreFFi_wrapListenerBlock_xtuoz7(ffi.Pointer<objc.ObjCBlockImpl> block,
+);
+
+@ffi.Native<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.DOBJC_Context> )>(isLeaf: true)
+external ffi.Pointer<objc.ObjCBlockImpl> _MapLibreFFi_wrapBlockingBlock_xtuoz7(ffi.Pointer<objc.ObjCBlockImpl> block,
+ffi.Pointer<objc.ObjCBlockImpl> listnerBlock,
+ffi.Pointer<objc.DOBJC_Context> context,
+);
+
 @ffi.Native<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> )>(isLeaf: true)
 external ffi.Pointer<objc.ObjCBlockImpl> _MapLibreFFi_wrapListenerBlock_1pl9qdv(ffi.Pointer<objc.ObjCBlockImpl> block,
 );
@@ -287,16 +302,6 @@ external ffi.Pointer<objc.ObjCBlockImpl> _MapLibreFFi_wrapListenerBlock_1l4hxwm(
 
 @ffi.Native<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.DOBJC_Context> )>(isLeaf: true)
 external ffi.Pointer<objc.ObjCBlockImpl> _MapLibreFFi_wrapBlockingBlock_1l4hxwm(ffi.Pointer<objc.ObjCBlockImpl> block,
-ffi.Pointer<objc.ObjCBlockImpl> listnerBlock,
-ffi.Pointer<objc.DOBJC_Context> context,
-);
-
-@ffi.Native<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> )>(isLeaf: true)
-external ffi.Pointer<objc.ObjCBlockImpl> _MapLibreFFi_wrapListenerBlock_xtuoz7(ffi.Pointer<objc.ObjCBlockImpl> block,
-);
-
-@ffi.Native<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.DOBJC_Context> )>(isLeaf: true)
-external ffi.Pointer<objc.ObjCBlockImpl> _MapLibreFFi_wrapBlockingBlock_xtuoz7(ffi.Pointer<objc.ObjCBlockImpl> block,
 ffi.Pointer<objc.ObjCBlockImpl> listnerBlock,
 ffi.Pointer<objc.DOBJC_Context> context,
 );
@@ -1106,6 +1111,27 @@ interface class NSProgressReporting extends objc.ObjCProtocolBase implements obj
       this._(other, retain: retain, release: release);
 
 }
+
+/// WARNING: NSBundle is a stub. To generate bindings for this class, include
+/// NSBundle in your config's objc-interfaces list.
+///
+/// NSBundle
+class NSBundle extends objc.NSObject {
+  NSBundle._(ffi.Pointer<objc.ObjCObject> pointer, {bool retain = false, bool release = false}) :
+      super.castFromPointer(pointer, retain: retain, release: release);
+
+  /// Constructs a [NSBundle] that points to the same underlying object as [other].
+  NSBundle.castFrom(objc.ObjCObjectBase other) :
+      this._(other.ref.pointer, retain: true, release: true);
+
+  /// Constructs a [NSBundle] that wraps the given raw object pointer.
+  NSBundle.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false}) :
+      this._(other, retain: retain, release: release);
+
+
+}
+
 late final _sel_variantFittingPresentationWidth_ = objc.registerName("variantFittingPresentationWidth:");
 final _objc_msgSend_qugqlf = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , ffi.Long )>>().asFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , int )>();
 
@@ -3793,10 +3819,8 @@ class NSUserActivity extends objc.NSObject {
 late final _protocol_FlutterApi = objc.getProtocol("FlutterApi");
 late final _sel_conformsToProtocol_ = objc.registerName("conformsToProtocol:");
 final _objc_msgSend_e3qsqz = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Bool Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCProtocol> )>>().asFunction<bool Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCProtocol> )>();
+late final _protocol_FlutterPlatformView = objc.getProtocol("FlutterPlatformView");
 
-/// WARNING: FlutterPlatformView is a stub. To generate bindings for this class, include
-/// FlutterPlatformView in your config's objc-protocols list.
-///
 /// FlutterPlatformView
 interface class FlutterPlatformView extends objc.ObjCProtocolBase {
   FlutterPlatformView._(ffi.Pointer<objc.ObjCObject> pointer, {bool retain = false, bool release = false}) :
@@ -3811,6 +3835,38 @@ interface class FlutterPlatformView extends objc.ObjCProtocolBase {
       {bool retain = false, bool release = false}) :
       this._(other, retain: retain, release: release);
 
+  /// Returns whether [obj] is an instance of [FlutterPlatformView].
+  static bool conformsTo(objc.ObjCObjectBase obj) {
+    return _objc_msgSend_e3qsqz(obj.ref.pointer, _sel_conformsToProtocol_, _protocol_FlutterPlatformView);
+  }
+
+    /// Returns the [objc.Protocol] object for this protocol.
+  static objc.Protocol get $protocol =>
+      objc.Protocol.castFromPointer(_protocol_FlutterPlatformView.cast());
+
+  /// Builds an object that implements the FlutterPlatformView protocol. To implement
+  /// multiple protocols, use [addToBuilder] or [objc.ObjCProtocolBuilder] directly.
+  ///
+  /// If `$keepIsolateAlive` is true, this protocol will keep this isolate
+  /// alive until it is garbage collected by both Dart and ObjC.
+  static FlutterPlatformView implement({bool $keepIsolateAlive = true}) {
+    final builder = objc.ObjCProtocolBuilder(debugName: 'FlutterPlatformView');
+    
+    builder.addProtocol($protocol);
+    return FlutterPlatformView.castFrom(builder.build(keepIsolateAlive: $keepIsolateAlive));
+  }
+
+  /// Adds the implementation of the FlutterPlatformView protocol to an existing
+  /// [objc.ObjCProtocolBuilder].
+  ///
+  /// Note: You cannot call this method after you have called `builder.build`.
+  static void addToBuilder(objc.ObjCProtocolBuilder builder, {bool $keepIsolateAlive = true}) {
+    
+    builder.addProtocol($protocol);
+  }
+
+  
+  
 }
 late final _sel_createPlatformViewWithViewId_ = objc.registerName("createPlatformViewWithViewId:");
 ffi.Pointer<objc.ObjCObject> _ObjCBlock_idFlutterPlatformView_ffiVoid_NSInteger_fnPtrTrampoline(
@@ -4364,6 +4420,27 @@ enum CGImagePropertyOrientation {
 
 }
 
+
+/// WARNING: CIImage is a stub. To generate bindings for this class, include
+/// CIImage in your config's objc-interfaces list.
+///
+/// CIImage
+class CIImage extends objc.NSObject implements objc.NSSecureCoding, objc.NSCopying {
+  CIImage._(ffi.Pointer<objc.ObjCObject> pointer, {bool retain = false, bool release = false}) :
+      super.castFromPointer(pointer, retain: retain, release: release) { objc.checkOsVersionInternal('CIImage', iOS: (false, (5, 0, 0))); }
+
+  /// Constructs a [CIImage] that points to the same underlying object as [other].
+  CIImage.castFrom(objc.ObjCObjectBase other) :
+      this._(other.ref.pointer, retain: true, release: true);
+
+  /// Constructs a [CIImage] that wraps the given raw object pointer.
+  CIImage.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false}) :
+      this._(other, retain: retain, release: release);
+
+
+}
+
 enum UIColorProminence {
   UIColorProminencePrimary(0),
   UIColorProminenceSecondary(1),
@@ -4481,6 +4558,25 @@ class UIFont extends objc.NSObject implements objc.NSCopying, objc.NSSecureCodin
 }
 
 
+/// WARNING: UIItemProviderPresentationSizeProviding is a stub. To generate bindings for this class, include
+/// UIItemProviderPresentationSizeProviding in your config's objc-protocols list.
+///
+/// UIItemProviderPresentationSizeProviding
+interface class UIItemProviderPresentationSizeProviding extends objc.ObjCProtocolBase implements objc.NSObjectProtocol{
+  UIItemProviderPresentationSizeProviding._(ffi.Pointer<objc.ObjCObject> pointer, {bool retain = false, bool release = false}) :
+          super(pointer, retain: retain, release: release);
+
+  /// Constructs a [UIItemProviderPresentationSizeProviding] that points to the same underlying object as [other].
+  UIItemProviderPresentationSizeProviding.castFrom(objc.ObjCObjectBase other) :
+      this._(other.ref.pointer, retain: true, release: true);
+
+  /// Constructs a [UIItemProviderPresentationSizeProviding] that wraps the given raw object pointer.
+  UIItemProviderPresentationSizeProviding.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false}) :
+      this._(other, retain: retain, release: release);
+
+}
+
 /// WARNING: NSTextAttachmentLayout is a stub. To generate bindings for this class, include
 /// NSTextAttachmentLayout in your config's objc-protocols list.
 ///
@@ -4561,27 +4657,422 @@ enum UIImageRenderingMode {
 
 }
 
+late final _class_UIImage = objc.getClass("UIKit.UIImage");
+late final _sel_actionsImage = objc.registerName("actionsImage");
+late final _sel_addImage = objc.registerName("addImage");
+late final _sel_removeImage = objc.registerName("removeImage");
+late final _sel_checkmarkImage = objc.registerName("checkmarkImage");
+late final _sel_strokedCheckmarkImage = objc.registerName("strokedCheckmarkImage");
 
-/// WARNING: UIImage is a stub. To generate bindings for this class, include
-/// UIImage in your config's objc-interfaces list.
-///
-/// UIImage
-class UIImage extends objc.NSObject implements objc.NSSecureCoding {
-  UIImage._(ffi.Pointer<objc.ObjCObject> pointer, {bool retain = false, bool release = false}) :
-      super.castFromPointer(pointer, retain: retain, release: release) { objc.checkOsVersionInternal('UIImage', iOS: (false, (2, 0, 0))); }
+/// PreconfiguredSystemImages
+extension PreconfiguredSystemImages on UIImage {
 
-  /// Constructs a [UIImage] that points to the same underlying object as [other].
-  UIImage.castFrom(objc.ObjCObjectBase other) :
-      this._(other.ref.pointer, retain: true, release: true);
+  /// actionsImage
+  static UIImage getActionsImage() {
+  objc.checkOsVersionInternal('UIImage.actionsImage', iOS: (false, (13, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(_class_UIImage, _sel_actionsImage);
+    return UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
 
-  /// Constructs a [UIImage] that wraps the given raw object pointer.
-  UIImage.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
-      {bool retain = false, bool release = false}) :
-      this._(other, retain: retain, release: release);
 
+  /// addImage
+  static UIImage getAddImage() {
+  objc.checkOsVersionInternal('UIImage.addImage', iOS: (false, (13, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(_class_UIImage, _sel_addImage);
+    return UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// removeImage
+  static UIImage getRemoveImage() {
+  objc.checkOsVersionInternal('UIImage.removeImage', iOS: (false, (13, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(_class_UIImage, _sel_removeImage);
+    return UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// checkmarkImage
+  static UIImage getCheckmarkImage() {
+  objc.checkOsVersionInternal('UIImage.checkmarkImage', iOS: (false, (13, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(_class_UIImage, _sel_checkmarkImage);
+    return UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// strokedCheckmarkImage
+  static UIImage getStrokedCheckmarkImage() {
+  objc.checkOsVersionInternal('UIImage.strokedCheckmarkImage', iOS: (false, (13, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(_class_UIImage, _sel_strokedCheckmarkImage);
+    return UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
 
 }
 
+late final _sel_preferredPresentationSizeForItemProvider = objc.registerName("preferredPresentationSizeForItemProvider");
+objc.CGSize _ObjCBlock_CGSize_ffiVoid_fnPtrTrampoline(
+    ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0) =>
+        block.ref.target.cast<ffi.NativeFunction<objc.CGSize Function(ffi.Pointer<ffi.Void> arg0)>>()
+            .asFunction<objc.CGSize Function(ffi.Pointer<ffi.Void> )>()(arg0);
+ffi.Pointer<ffi.Void> _ObjCBlock_CGSize_ffiVoid_fnPtrCallable = ffi.Pointer.fromFunction<
+    objc.CGSize Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> )>(_ObjCBlock_CGSize_ffiVoid_fnPtrTrampoline ).cast();
+objc.CGSize _ObjCBlock_CGSize_ffiVoid_closureTrampoline(
+    ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0) =>
+    (objc.getBlockClosure(block) as objc.CGSize Function(ffi.Pointer<ffi.Void> ))(arg0);
+ffi.Pointer<ffi.Void> _ObjCBlock_CGSize_ffiVoid_closureCallable = ffi.Pointer.fromFunction<
+    objc.CGSize Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> )>(_ObjCBlock_CGSize_ffiVoid_closureTrampoline ).cast();
+
+/// Construction methods for `objc.ObjCBlock<objc.CGSize Function(ffi.Pointer<ffi.Void>)>`.
+abstract final class ObjCBlock_CGSize_ffiVoid {
+  /// Returns a block that wraps the given raw block pointer.
+  static objc.ObjCBlock<objc.CGSize Function(ffi.Pointer<ffi.Void>)> castFromPointer(ffi.Pointer<objc.ObjCBlockImpl> pointer,
+      {bool retain = false, bool release = false}) =>
+      objc.ObjCBlock<objc.CGSize Function(ffi.Pointer<ffi.Void>)>(pointer, retain: retain, release: release);
+
+  /// Creates a block from a C function pointer.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  static objc.ObjCBlock<objc.CGSize Function(ffi.Pointer<ffi.Void>)> fromFunctionPointer(ffi.Pointer<ffi.NativeFunction<objc.CGSize Function(ffi.Pointer<ffi.Void> arg0)>> ptr) =>
+      objc.ObjCBlock<objc.CGSize Function(ffi.Pointer<ffi.Void>)>(objc.newPointerBlock(_ObjCBlock_CGSize_ffiVoid_fnPtrCallable, ptr.cast()),
+          retain: false, release: true);
+
+  /// Creates a block from a Dart function.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  ///
+  /// If `keepIsolateAlive` is true, this block will keep this isolate alive
+  /// until it is garbage collected by both Dart and ObjC.
+  static objc.ObjCBlock<objc.CGSize Function(ffi.Pointer<ffi.Void>)> fromFunction(objc.CGSize Function(ffi.Pointer<ffi.Void> ) fn,
+          {bool keepIsolateAlive = true}) =>
+      objc.ObjCBlock<objc.CGSize Function(ffi.Pointer<ffi.Void>)>(objc.newClosureBlock(_ObjCBlock_CGSize_ffiVoid_closureCallable, (ffi.Pointer<ffi.Void> arg0) => fn(arg0), keepIsolateAlive),
+          retain: false, release: true);
+}
+
+/// Call operator for `objc.ObjCBlock<objc.CGSize Function(ffi.Pointer<ffi.Void>)>`.
+extension ObjCBlock_CGSize_ffiVoid_CallExtension on objc.ObjCBlock<objc.CGSize Function(ffi.Pointer<ffi.Void>)> {
+  objc.CGSize call(ffi.Pointer<ffi.Void> arg0) =>ref.pointer.ref.invoke.cast<ffi.NativeFunction<objc.CGSize Function(ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0)>>()
+  .asFunction<objc.CGSize Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> )>()(
+    ref.pointer, arg0);
+}
+
+
+/// NSItemProvider
+extension NSItemProvider$1 on UIImage {
+
+  /// readableTypeIdentifiersForItemProvider
+  static objc.NSArray getReadableTypeIdentifiersForItemProvider() {
+  objc.checkOsVersionInternal('UIImage.readableTypeIdentifiersForItemProvider', iOS: (false, (11, 0, 0)), macOS: (false, (10, 13, 0)));
+    final _ret = _objc_msgSend_151sglz(_class_UIImage, _sel_readableTypeIdentifiersForItemProvider);
+    return objc.NSArray.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// writableTypeIdentifiersForItemProvider
+  static objc.NSArray getWritableTypeIdentifiersForItemProvider() {
+  objc.checkOsVersionInternal('UIImage.writableTypeIdentifiersForItemProvider', iOS: (false, (11, 0, 0)), macOS: (false, (10, 13, 0)));
+    final _ret = _objc_msgSend_151sglz(_class_UIImage, _sel_writableTypeIdentifiersForItemProvider);
+    return objc.NSArray.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// writableTypeIdentifiersForItemProvider
+  objc.NSArray get writableTypeIdentifiersForItemProvider$1 {
+  objc.checkOsVersionInternal('UIImage.writableTypeIdentifiersForItemProvider', iOS: (false, (11, 0, 0)), macOS: (false, (10, 13, 0)));
+    if (!objc.respondsToSelector(this.ref.pointer, _sel_writableTypeIdentifiersForItemProvider)) {
+      throw objc.UnimplementedOptionalMethodException(
+          'UIImage', 'writableTypeIdentifiersForItemProvider');
+    }
+    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_writableTypeIdentifiersForItemProvider);
+    return objc.NSArray.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// itemProviderVisibilityForRepresentationWithTypeIdentifier:
+  static objc.NSItemProviderRepresentationVisibility itemProviderVisibilityForRepresentationWithTypeIdentifier(objc.NSString typeIdentifier) {
+  objc.checkOsVersionInternal('UIImage.itemProviderVisibilityForRepresentationWithTypeIdentifier:', iOS: (false, (11, 0, 0)), macOS: (false, (10, 13, 0)));
+    if (!objc.respondsToSelector(_class_UIImage, _sel_itemProviderVisibilityForRepresentationWithTypeIdentifier_)) {
+      throw objc.UnimplementedOptionalMethodException(
+          'UIImage', 'itemProviderVisibilityForRepresentationWithTypeIdentifier:');
+    }
+    final _ret = _objc_msgSend_16fy0up(_class_UIImage, _sel_itemProviderVisibilityForRepresentationWithTypeIdentifier_, typeIdentifier.ref.pointer);
+    return objc.NSItemProviderRepresentationVisibility.fromValue(_ret);
+  }
+
+
+  /// itemProviderVisibilityForRepresentationWithTypeIdentifier:
+  objc.NSItemProviderRepresentationVisibility itemProviderVisibilityForRepresentationWithTypeIdentifier$1(objc.NSString typeIdentifier) {
+  objc.checkOsVersionInternal('UIImage.itemProviderVisibilityForRepresentationWithTypeIdentifier:', iOS: (false, (11, 0, 0)), macOS: (false, (10, 13, 0)));
+    if (!objc.respondsToSelector(this.ref.pointer, _sel_itemProviderVisibilityForRepresentationWithTypeIdentifier_)) {
+      throw objc.UnimplementedOptionalMethodException(
+          'UIImage', 'itemProviderVisibilityForRepresentationWithTypeIdentifier:');
+    }
+    final _ret = _objc_msgSend_16fy0up(this.ref.pointer, _sel_itemProviderVisibilityForRepresentationWithTypeIdentifier_, typeIdentifier.ref.pointer);
+    return objc.NSItemProviderRepresentationVisibility.fromValue(_ret);
+  }
+
+
+  /// loadDataWithTypeIdentifier:forItemProviderCompletionHandler:
+  objc.NSProgress? loadDataWithTypeIdentifier(objc.NSString typeIdentifier, {required objc.ObjCBlock<ffi.Void Function(objc.NSData?, objc.NSError?)> forItemProviderCompletionHandler}) {
+  objc.checkOsVersionInternal('UIImage.loadDataWithTypeIdentifier:forItemProviderCompletionHandler:', iOS: (false, (11, 0, 0)), macOS: (false, (10, 13, 0)));
+    final _ret = _objc_msgSend_r0bo0s(this.ref.pointer, _sel_loadDataWithTypeIdentifier_forItemProviderCompletionHandler_, typeIdentifier.ref.pointer, forItemProviderCompletionHandler.ref.pointer);
+    return _ret.address == 0 ? null : objc.NSProgress.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// preferredPresentationSizeForItemProvider
+  objc.CGSize get preferredPresentationSizeForItemProvider {
+  objc.checkOsVersionInternal('UIImage.preferredPresentationSizeForItemProvider', iOS: (false, (11, 0, 0)));
+    final _ptr = pkg_ffi.calloc<objc.CGSize>();
+    objc.useMsgSendVariants ? _objc_msgSend_1vdfkenStret(_ptr, this.ref.pointer, _sel_preferredPresentationSizeForItemProvider) : _ptr.ref = _objc_msgSend_1vdfken(this.ref.pointer, _sel_preferredPresentationSizeForItemProvider);
+    final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
+        ffi.sizeOf<objc.CGSize>(), finalizer: pkg_ffi.calloc.nativeFree);
+    return ffi.Struct.create<objc.CGSize>(_finalizable);
+
+  }
+
+}
+
+late final _sel_stretchableImageWithLeftCapWidth_topCapHeight_ = objc.registerName("stretchableImageWithLeftCapWidth:topCapHeight:");
+final _objc_msgSend_1nzyvs1 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , ffi.Long , ffi.Long )>>().asFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , int , int )>();
+late final _sel_leftCapWidth = objc.registerName("leftCapWidth");
+final _objc_msgSend_1hz7y9r = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Long Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> )>();
+late final _sel_topCapHeight = objc.registerName("topCapHeight");
+
+/// UIImageDeprecated
+extension UIImageDeprecated on UIImage {
+
+  /// stretchableImageWithLeftCapWidth:topCapHeight:
+  UIImage stretchableImageWithLeftCapWidth(int leftCapWidth, {required int topCapHeight}) {
+    final _ret = _objc_msgSend_1nzyvs1(this.ref.pointer, _sel_stretchableImageWithLeftCapWidth_topCapHeight_, leftCapWidth, topCapHeight);
+    return UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// leftCapWidth
+  int get leftCapWidth {
+    return _objc_msgSend_1hz7y9r(this.ref.pointer, _sel_leftCapWidth);
+
+  }
+
+
+  /// topCapHeight
+  int get topCapHeight {
+    return _objc_msgSend_1hz7y9r(this.ref.pointer, _sel_topCapHeight);
+
+  }
+
+}
+
+
+/// WARNING: UIAccessibilityIdentification is a stub. To generate bindings for this class, include
+/// UIAccessibilityIdentification in your config's objc-protocols list.
+///
+/// UIAccessibilityIdentification
+interface class UIAccessibilityIdentification extends objc.ObjCProtocolBase implements objc.NSObjectProtocol{
+  UIAccessibilityIdentification._(ffi.Pointer<objc.ObjCObject> pointer, {bool retain = false, bool release = false}) :
+          super(pointer, retain: retain, release: release);
+
+  /// Constructs a [UIAccessibilityIdentification] that points to the same underlying object as [other].
+  UIAccessibilityIdentification.castFrom(objc.ObjCObjectBase other) :
+      this._(other.ref.pointer, retain: true, release: true);
+
+  /// Constructs a [UIAccessibilityIdentification] that wraps the given raw object pointer.
+  UIAccessibilityIdentification.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false}) :
+      this._(other, retain: retain, release: release);
+
+}
+late final _sel_accessibilityIdentifier = objc.registerName("accessibilityIdentifier");
+ffi.Pointer<objc.ObjCObject> _ObjCBlock_NSString_ffiVoid_fnPtrTrampoline(
+    ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0) =>
+        block.ref.target.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void> arg0)>>()
+            .asFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void> )>()(arg0);
+ffi.Pointer<ffi.Void> _ObjCBlock_NSString_ffiVoid_fnPtrCallable = ffi.Pointer.fromFunction<
+    ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> )>(_ObjCBlock_NSString_ffiVoid_fnPtrTrampoline ).cast();
+ffi.Pointer<objc.ObjCObject> _ObjCBlock_NSString_ffiVoid_closureTrampoline(
+    ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0) =>
+    (objc.getBlockClosure(block) as ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void> ))(arg0);
+ffi.Pointer<ffi.Void> _ObjCBlock_NSString_ffiVoid_closureCallable = ffi.Pointer.fromFunction<
+    ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> )>(_ObjCBlock_NSString_ffiVoid_closureTrampoline ).cast();
+
+/// Construction methods for `objc.ObjCBlock<objc.NSString? Function(ffi.Pointer<ffi.Void>)>`.
+abstract final class ObjCBlock_NSString_ffiVoid {
+  /// Returns a block that wraps the given raw block pointer.
+  static objc.ObjCBlock<objc.NSString? Function(ffi.Pointer<ffi.Void>)> castFromPointer(ffi.Pointer<objc.ObjCBlockImpl> pointer,
+      {bool retain = false, bool release = false}) =>
+      objc.ObjCBlock<objc.NSString? Function(ffi.Pointer<ffi.Void>)>(pointer, retain: retain, release: release);
+
+  /// Creates a block from a C function pointer.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  static objc.ObjCBlock<objc.NSString? Function(ffi.Pointer<ffi.Void>)> fromFunctionPointer(ffi.Pointer<ffi.NativeFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void> arg0)>> ptr) =>
+      objc.ObjCBlock<objc.NSString? Function(ffi.Pointer<ffi.Void>)>(objc.newPointerBlock(_ObjCBlock_NSString_ffiVoid_fnPtrCallable, ptr.cast()),
+          retain: false, release: true);
+
+  /// Creates a block from a Dart function.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  ///
+  /// If `keepIsolateAlive` is true, this block will keep this isolate alive
+  /// until it is garbage collected by both Dart and ObjC.
+  static objc.ObjCBlock<objc.NSString? Function(ffi.Pointer<ffi.Void>)> fromFunction(objc.NSString? Function(ffi.Pointer<ffi.Void> ) fn,
+          {bool keepIsolateAlive = true}) =>
+      objc.ObjCBlock<objc.NSString? Function(ffi.Pointer<ffi.Void>)>(objc.newClosureBlock(_ObjCBlock_NSString_ffiVoid_closureCallable, (ffi.Pointer<ffi.Void> arg0) => fn(arg0)?.ref.retainAndAutorelease() ?? ffi.nullptr, keepIsolateAlive),
+          retain: false, release: true);
+}
+
+/// Call operator for `objc.ObjCBlock<objc.NSString? Function(ffi.Pointer<ffi.Void>)>`.
+extension ObjCBlock_NSString_ffiVoid_CallExtension on objc.ObjCBlock<objc.NSString? Function(ffi.Pointer<ffi.Void>)> {
+  objc.NSString? call(ffi.Pointer<ffi.Void> arg0) =>ref.pointer.ref.invoke.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0)>>()
+  .asFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> )>()(
+    ref.pointer, arg0).address == 0 ? null : objc.NSString.castFromPointer(ref.pointer.ref.invoke.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0)>>()
+  .asFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> )>()(
+    ref.pointer, arg0), retain: true, release: true);
+}
+
+late final _sel_setAccessibilityIdentifier_ = objc.registerName("setAccessibilityIdentifier:");
+void _ObjCBlock_ffiVoid_ffiVoid_NSString_fnPtrTrampoline(
+    ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObject> arg1) =>
+        block.ref.target.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObject> arg1)>>()
+            .asFunction<void Function(ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObject> )>()(arg0, arg1);
+ffi.Pointer<ffi.Void> _ObjCBlock_ffiVoid_ffiVoid_NSString_fnPtrCallable = ffi.Pointer.fromFunction<
+    ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObject> )>(_ObjCBlock_ffiVoid_ffiVoid_NSString_fnPtrTrampoline ).cast();
+void _ObjCBlock_ffiVoid_ffiVoid_NSString_closureTrampoline(
+    ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObject> arg1) =>
+    (objc.getBlockClosure(block) as void Function(ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObject> ))(arg0, arg1);
+ffi.Pointer<ffi.Void> _ObjCBlock_ffiVoid_ffiVoid_NSString_closureCallable = ffi.Pointer.fromFunction<
+    ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObject> )>(_ObjCBlock_ffiVoid_ffiVoid_NSString_closureTrampoline ).cast();
+void _ObjCBlock_ffiVoid_ffiVoid_NSString_listenerTrampoline(
+    ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObject> arg1) {
+  (objc.getBlockClosure(block) as void Function(ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObject> ))(arg0, arg1);
+  objc.objectRelease(block.cast());
+}
+ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObject> )> _ObjCBlock_ffiVoid_ffiVoid_NSString_listenerCallable = ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObject> )>.listener(
+    _ObjCBlock_ffiVoid_ffiVoid_NSString_listenerTrampoline )..keepIsolateAlive = false;
+void _ObjCBlock_ffiVoid_ffiVoid_NSString_blockingTrampoline(
+    ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> waiter, ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObject> arg1) {
+  try {
+    (objc.getBlockClosure(block) as void Function(ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObject> ))(arg0, arg1);
+  } catch (e) {
+  } finally {
+    objc.signalWaiter(waiter);
+    objc.objectRelease(block.cast());
+  }
+}
+ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObject> )> _ObjCBlock_ffiVoid_ffiVoid_NSString_blockingCallable =
+    ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObject> )>.isolateLocal(
+        _ObjCBlock_ffiVoid_ffiVoid_NSString_blockingTrampoline )..keepIsolateAlive = false;
+ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObject> )> _ObjCBlock_ffiVoid_ffiVoid_NSString_blockingListenerCallable =
+    ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObject> )>.listener(
+        _ObjCBlock_ffiVoid_ffiVoid_NSString_blockingTrampoline )..keepIsolateAlive = false;
+
+/// Construction methods for `objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSString?)>`.
+abstract final class ObjCBlock_ffiVoid_ffiVoid_NSString {
+  /// Returns a block that wraps the given raw block pointer.
+  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSString?)> castFromPointer(ffi.Pointer<objc.ObjCBlockImpl> pointer,
+      {bool retain = false, bool release = false}) =>
+      objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSString?)>(pointer, retain: retain, release: release);
+
+  /// Creates a block from a C function pointer.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSString?)> fromFunctionPointer(ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObject> arg1)>> ptr) =>
+      objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSString?)>(objc.newPointerBlock(_ObjCBlock_ffiVoid_ffiVoid_NSString_fnPtrCallable, ptr.cast()),
+          retain: false, release: true);
+
+  /// Creates a block from a Dart function.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  ///
+  /// If `keepIsolateAlive` is true, this block will keep this isolate alive
+  /// until it is garbage collected by both Dart and ObjC.
+  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSString?)> fromFunction(void Function(ffi.Pointer<ffi.Void> , objc.NSString? ) fn,
+          {bool keepIsolateAlive = true}) =>
+      objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSString?)>(objc.newClosureBlock(_ObjCBlock_ffiVoid_ffiVoid_NSString_closureCallable, (ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObject> arg1) => fn(arg0, arg1.address == 0 ? null : objc.NSString.castFromPointer(arg1, retain: true, release: true)), keepIsolateAlive),
+          retain: false, release: true);
+
+  /// Creates a listener block from a Dart function.
+  ///
+  /// This is based on FFI's NativeCallable.listener, and has the same
+  /// capabilities and limitations. This block can be invoked from any thread,
+  /// but only supports void functions, and is not run synchronously. See
+  /// NativeCallable.listener for more details.
+  ///
+  /// If `keepIsolateAlive` is true, this block will keep this isolate alive
+  /// until it is garbage collected by both Dart and ObjC.
+  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSString?)> listener(void Function(ffi.Pointer<ffi.Void> , objc.NSString? ) fn,
+          {bool keepIsolateAlive = true}) {
+    final raw = objc.newClosureBlock(_ObjCBlock_ffiVoid_ffiVoid_NSString_listenerCallable.nativeFunction.cast(),
+        (ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObject> arg1) => fn(arg0, arg1.address == 0 ? null : objc.NSString.castFromPointer(arg1, retain: false, release: true)), keepIsolateAlive);
+    final wrapper = _MapLibreFFi_wrapListenerBlock_18v1jvf(raw);
+    objc.objectRelease(raw.cast());
+    return objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSString?)>(wrapper, retain: false, release: true);
+  }
+
+  /// Creates a blocking block from a Dart function.
+  ///
+  /// This callback can be invoked from any native thread, and will block the
+  /// caller until the callback is handled by the Dart isolate that created
+  /// the block. Async functions are not supported.
+  ///
+  /// If `keepIsolateAlive` is true, this block will keep this isolate alive
+  /// until it is garbage collected by both Dart and ObjC. If the owner isolate
+  /// has shut down, and the block is invoked by native code, it may block
+  /// indefinitely, or have other undefined behavior.
+  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSString?)> blocking(void Function(ffi.Pointer<ffi.Void> , objc.NSString? ) fn,
+          {bool keepIsolateAlive = true}) {
+    final raw = objc.newClosureBlock(_ObjCBlock_ffiVoid_ffiVoid_NSString_blockingCallable.nativeFunction.cast(),
+        (ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObject> arg1) => fn(arg0, arg1.address == 0 ? null : objc.NSString.castFromPointer(arg1, retain: false, release: true)), keepIsolateAlive);
+    final rawListener = objc.newClosureBlock(
+        _ObjCBlock_ffiVoid_ffiVoid_NSString_blockingListenerCallable.nativeFunction.cast(),
+        (ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObject> arg1) => fn(arg0, arg1.address == 0 ? null : objc.NSString.castFromPointer(arg1, retain: false, release: true)), keepIsolateAlive);
+    final wrapper = _MapLibreFFi_wrapBlockingBlock_18v1jvf(raw, rawListener, objc.objCContext);
+    objc.objectRelease(raw.cast());
+    objc.objectRelease(rawListener.cast());
+    return objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSString?)>(wrapper, retain: false, release: true);
+  }
+}
+
+/// Call operator for `objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSString?)>`.
+extension ObjCBlock_ffiVoid_ffiVoid_NSString_CallExtension on objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSString?)> {
+  void call(ffi.Pointer<ffi.Void> arg0, objc.NSString? arg1) =>ref.pointer.ref.invoke.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObject> arg1)>>()
+  .asFunction<void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObject> )>()(
+    ref.pointer, arg0, arg1?.ref.pointer ?? ffi.nullptr);
+}
+
+
+/// UIAccessibility
+extension UIAccessibility on UIImage {
+
+  /// accessibilityIdentifier
+  objc.NSString? get accessibilityIdentifier {
+  objc.checkOsVersionInternal('UIImage.accessibilityIdentifier', iOS: (false, (5, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_accessibilityIdentifier);
+    return _ret.address == 0 ? null : objc.NSString.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// setAccessibilityIdentifier:
+  set accessibilityIdentifier(objc.NSString? value) {
+  objc.checkOsVersionInternal('UIImage.setAccessibilityIdentifier:', iOS: (false, (5, 0, 0)));
+_objc_msgSend_xtuoz7(this.ref.pointer, _sel_setAccessibilityIdentifier_, value?.ref.pointer ?? ffi.nullptr);
+
+  }
+
+}
+
+late final _sel_systemImageNamed_ = objc.registerName("systemImageNamed:");
 
 /// WARNING: UIImageConfiguration is a stub. To generate bindings for this class, include
 /// UIImageConfiguration in your config's objc-interfaces list.
@@ -4600,6 +5091,938 @@ class UIImageConfiguration extends objc.NSObject implements objc.NSCopying, objc
       {bool retain = false, bool release = false}) :
       this._(other, retain: retain, release: release);
 
+
+}
+
+late final _sel_systemImageNamed_withConfiguration_ = objc.registerName("systemImageNamed:withConfiguration:");
+
+/// WARNING: UITraitCollection is a stub. To generate bindings for this class, include
+/// UITraitCollection in your config's objc-interfaces list.
+///
+/// UITraitCollection
+class UITraitCollection extends objc.NSObject implements objc.NSCopying, objc.NSSecureCoding {
+  UITraitCollection._(ffi.Pointer<objc.ObjCObject> pointer, {bool retain = false, bool release = false}) :
+      super.castFromPointer(pointer, retain: retain, release: release) { objc.checkOsVersionInternal('UITraitCollection', iOS: (false, (8, 0, 0))); }
+
+  /// Constructs a [UITraitCollection] that points to the same underlying object as [other].
+  UITraitCollection.castFrom(objc.ObjCObjectBase other) :
+      this._(other.ref.pointer, retain: true, release: true);
+
+  /// Constructs a [UITraitCollection] that wraps the given raw object pointer.
+  UITraitCollection.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false}) :
+      this._(other, retain: retain, release: release);
+
+
+}
+
+late final _sel_systemImageNamed_compatibleWithTraitCollection_ = objc.registerName("systemImageNamed:compatibleWithTraitCollection:");
+late final _sel_systemImageNamed_variableValue_withConfiguration_ = objc.registerName("systemImageNamed:variableValue:withConfiguration:");
+final _objc_msgSend_17i4wqy = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObject> , ffi.Double , ffi.Pointer<objc.ObjCObject> )>>().asFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObject> , double , ffi.Pointer<objc.ObjCObject> )>();
+late final _sel_imageNamed_ = objc.registerName("imageNamed:");
+late final _sel_imageNamed_inBundle_withConfiguration_ = objc.registerName("imageNamed:inBundle:withConfiguration:");
+late final _sel_imageNamed_inBundle_compatibleWithTraitCollection_ = objc.registerName("imageNamed:inBundle:compatibleWithTraitCollection:");
+late final _sel_imageNamed_inBundle_variableValue_withConfiguration_ = objc.registerName("imageNamed:inBundle:variableValue:withConfiguration:");
+final _objc_msgSend_1vft1l4 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCObject> , ffi.Double , ffi.Pointer<objc.ObjCObject> )>>().asFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCObject> , double , ffi.Pointer<objc.ObjCObject> )>();
+late final _sel_imageWithContentsOfFile_ = objc.registerName("imageWithContentsOfFile:");
+late final _sel_imageWithData_ = objc.registerName("imageWithData:");
+late final _sel_imageWithData_scale_ = objc.registerName("imageWithData:scale:");
+final _objc_msgSend_6plvbo = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObject> , ffi.Double )>>().asFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObject> , double )>();
+late final _sel_imageWithCGImage_ = objc.registerName("imageWithCGImage:");
+final _objc_msgSend_2tjjtl = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<CGImage> )>>().asFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<CGImage> )>();
+late final _sel_imageWithCGImage_scale_orientation_ = objc.registerName("imageWithCGImage:scale:orientation:");
+final _objc_msgSend_16go90j = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<CGImage> , ffi.Double , ffi.Long )>>().asFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<CGImage> , double , int )>();
+late final _sel_imageWithCIImage_ = objc.registerName("imageWithCIImage:");
+late final _sel_imageWithCIImage_scale_orientation_ = objc.registerName("imageWithCIImage:scale:orientation:");
+final _objc_msgSend_2xggvt = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObject> , ffi.Double , ffi.Long )>>().asFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObject> , double , int )>();
+late final _sel_initWithData_ = objc.registerName("initWithData:");
+late final _sel_initWithData_scale_ = objc.registerName("initWithData:scale:");
+late final _sel_initWithCGImage_ = objc.registerName("initWithCGImage:");
+late final _sel_initWithCGImage_scale_orientation_ = objc.registerName("initWithCGImage:scale:orientation:");
+late final _sel_initWithCIImage_ = objc.registerName("initWithCIImage:");
+late final _sel_initWithCIImage_scale_orientation_ = objc.registerName("initWithCIImage:scale:orientation:");
+late final _sel_CGImage = objc.registerName("CGImage");
+final _objc_msgSend_y1izi1 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<CGImage> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<ffi.Pointer<CGImage> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> )>();
+late final _sel_CIImage = objc.registerName("CIImage");
+late final _sel_imageOrientation = objc.registerName("imageOrientation");
+final _objc_msgSend_fkvhxy = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Long Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> )>();
+late final _sel_scale = objc.registerName("scale");
+final _objc_msgSend_1ukqyt8 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Double Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<double Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> )>();
+final _objc_msgSend_1ukqyt8Fpret = objc.msgSendFpretPointer.cast<ffi.NativeFunction<ffi.Double Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<double Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> )>();
+late final _sel_isSymbolImage = objc.registerName("isSymbolImage");
+late final _sel_animatedImageNamed_duration_ = objc.registerName("animatedImageNamed:duration:");
+late final _sel_animatedResizableImageNamed_capInsets_duration_ = objc.registerName("animatedResizableImageNamed:capInsets:duration:");
+final _objc_msgSend_lxcnyc = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObject> , UIEdgeInsets , ffi.Double )>>().asFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObject> , UIEdgeInsets , double )>();
+late final _sel_animatedResizableImageNamed_capInsets_resizingMode_duration_ = objc.registerName("animatedResizableImageNamed:capInsets:resizingMode:duration:");
+final _objc_msgSend_25drz7 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObject> , UIEdgeInsets , ffi.Long , ffi.Double )>>().asFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObject> , UIEdgeInsets , int , double )>();
+late final _sel_animatedImageWithImages_duration_ = objc.registerName("animatedImageWithImages:duration:");
+late final _sel_images = objc.registerName("images");
+late final _sel_duration = objc.registerName("duration");
+late final _sel_drawAtPoint_blendMode_alpha_ = objc.registerName("drawAtPoint:blendMode:alpha:");
+final _objc_msgSend_yg3i7f = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , objc.CGPoint , ffi.Int32 , ffi.Double )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , objc.CGPoint , int , double )>();
+late final _sel_drawInRect_blendMode_alpha_ = objc.registerName("drawInRect:blendMode:alpha:");
+final _objc_msgSend_1ggt4c3 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , objc.CGRect , ffi.Int32 , ffi.Double )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , objc.CGRect , int , double )>();
+late final _sel_drawAsPatternInRect_ = objc.registerName("drawAsPatternInRect:");
+late final _sel_resizableImageWithCapInsets_ = objc.registerName("resizableImageWithCapInsets:");
+final _objc_msgSend_1mhd1pt = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , UIEdgeInsets )>>().asFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , UIEdgeInsets )>();
+late final _sel_resizableImageWithCapInsets_resizingMode_ = objc.registerName("resizableImageWithCapInsets:resizingMode:");
+final _objc_msgSend_1utaosa = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , UIEdgeInsets , ffi.Long )>>().asFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , UIEdgeInsets , int )>();
+late final _sel_capInsets = objc.registerName("capInsets");
+final _objc_msgSend_ct4cu5 = objc.msgSendPointer.cast<ffi.NativeFunction<UIEdgeInsets Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<UIEdgeInsets Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> )>();
+final _objc_msgSend_ct4cu5Stret = objc.msgSendStretPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<UIEdgeInsets> , ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<void Function(ffi.Pointer<UIEdgeInsets> , ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> )>();
+late final _sel_resizingMode = objc.registerName("resizingMode");
+final _objc_msgSend_knxebs = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Long Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> )>();
+late final _sel_imageWithAlignmentRectInsets_ = objc.registerName("imageWithAlignmentRectInsets:");
+late final _sel_alignmentRectInsets = objc.registerName("alignmentRectInsets");
+late final _sel_imageWithRenderingMode_ = objc.registerName("imageWithRenderingMode:");
+final _objc_msgSend_1o8rmw3 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , ffi.Long )>>().asFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , int )>();
+late final _sel_renderingMode = objc.registerName("renderingMode");
+final _objc_msgSend_s2io2v = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Long Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> )>();
+
+/// WARNING: UIGraphicsImageRendererFormat is a stub. To generate bindings for this class, include
+/// UIGraphicsImageRendererFormat in your config's objc-interfaces list.
+///
+/// UIGraphicsImageRendererFormat
+class UIGraphicsImageRendererFormat extends UIGraphicsRendererFormat {
+  UIGraphicsImageRendererFormat._(ffi.Pointer<objc.ObjCObject> pointer, {bool retain = false, bool release = false}) :
+      super.castFromPointer(pointer, retain: retain, release: release) { objc.checkOsVersionInternal('UIGraphicsImageRendererFormat', iOS: (false, (10, 0, 0))); }
+
+  /// Constructs a [UIGraphicsImageRendererFormat] that points to the same underlying object as [other].
+  UIGraphicsImageRendererFormat.castFrom(objc.ObjCObjectBase other) :
+      this._(other.ref.pointer, retain: true, release: true);
+
+  /// Constructs a [UIGraphicsImageRendererFormat] that wraps the given raw object pointer.
+  UIGraphicsImageRendererFormat.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false}) :
+      this._(other, retain: retain, release: release);
+
+
+}
+
+late final _sel_imageRendererFormat = objc.registerName("imageRendererFormat");
+late final _sel_traitCollection = objc.registerName("traitCollection");
+
+/// WARNING: UIImageAsset is a stub. To generate bindings for this class, include
+/// UIImageAsset in your config's objc-interfaces list.
+///
+/// UIImageAsset
+class UIImageAsset extends objc.NSObject implements objc.NSSecureCoding {
+  UIImageAsset._(ffi.Pointer<objc.ObjCObject> pointer, {bool retain = false, bool release = false}) :
+      super.castFromPointer(pointer, retain: retain, release: release) { objc.checkOsVersionInternal('UIImageAsset', iOS: (false, (8, 0, 0))); }
+
+  /// Constructs a [UIImageAsset] that points to the same underlying object as [other].
+  UIImageAsset.castFrom(objc.ObjCObjectBase other) :
+      this._(other.ref.pointer, retain: true, release: true);
+
+  /// Constructs a [UIImageAsset] that wraps the given raw object pointer.
+  UIImageAsset.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false}) :
+      this._(other, retain: retain, release: release);
+
+
+}
+
+late final _sel_imageAsset = objc.registerName("imageAsset");
+late final _sel_imageFlippedForRightToLeftLayoutDirection = objc.registerName("imageFlippedForRightToLeftLayoutDirection");
+late final _sel_flipsForRightToLeftLayoutDirection = objc.registerName("flipsForRightToLeftLayoutDirection");
+late final _sel_imageWithHorizontallyFlippedOrientation = objc.registerName("imageWithHorizontallyFlippedOrientation");
+late final _sel_baselineOffsetFromBottom = objc.registerName("baselineOffsetFromBottom");
+late final _sel_hasBaseline = objc.registerName("hasBaseline");
+late final _sel_imageWithBaselineOffsetFromBottom_ = objc.registerName("imageWithBaselineOffsetFromBottom:");
+final _objc_msgSend_oa8mke = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , ffi.Double )>>().asFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , double )>();
+late final _sel_imageWithoutBaseline = objc.registerName("imageWithoutBaseline");
+late final _sel_configuration = objc.registerName("configuration");
+late final _sel_imageWithConfiguration_ = objc.registerName("imageWithConfiguration:");
+
+/// WARNING: UIImageSymbolConfiguration is a stub. To generate bindings for this class, include
+/// UIImageSymbolConfiguration in your config's objc-interfaces list.
+///
+/// UIImageSymbolConfiguration
+class UIImageSymbolConfiguration extends UIImageConfiguration {
+  UIImageSymbolConfiguration._(ffi.Pointer<objc.ObjCObject> pointer, {bool retain = false, bool release = false}) :
+      super.castFromPointer(pointer, retain: retain, release: release) { objc.checkOsVersionInternal('UIImageSymbolConfiguration', iOS: (false, (13, 0, 0))); }
+
+  /// Constructs a [UIImageSymbolConfiguration] that points to the same underlying object as [other].
+  UIImageSymbolConfiguration.castFrom(objc.ObjCObjectBase other) :
+      this._(other.ref.pointer, retain: true, release: true);
+
+  /// Constructs a [UIImageSymbolConfiguration] that wraps the given raw object pointer.
+  UIImageSymbolConfiguration.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false}) :
+      this._(other, retain: retain, release: release);
+
+
+}
+
+late final _sel_symbolConfiguration = objc.registerName("symbolConfiguration");
+late final _sel_imageByApplyingSymbolConfiguration_ = objc.registerName("imageByApplyingSymbolConfiguration:");
+late final _sel_imageWithTintColor_ = objc.registerName("imageWithTintColor:");
+late final _sel_imageWithTintColor_renderingMode_ = objc.registerName("imageWithTintColor:renderingMode:");
+final _objc_msgSend_15gm1s5 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObject> , ffi.Long )>>().asFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObject> , int )>();
+late final _sel_imageByPreparingForDisplay = objc.registerName("imageByPreparingForDisplay");
+void _ObjCBlock_ffiVoid_UIImage_fnPtrTrampoline(
+    ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<objc.ObjCObject> arg0) =>
+        block.ref.target.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObject> arg0)>>()
+            .asFunction<void Function(ffi.Pointer<objc.ObjCObject> )>()(arg0);
+ffi.Pointer<ffi.Void> _ObjCBlock_ffiVoid_UIImage_fnPtrCallable = ffi.Pointer.fromFunction<
+    ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.ObjCObject> )>(_ObjCBlock_ffiVoid_UIImage_fnPtrTrampoline ).cast();
+void _ObjCBlock_ffiVoid_UIImage_closureTrampoline(
+    ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<objc.ObjCObject> arg0) =>
+    (objc.getBlockClosure(block) as void Function(ffi.Pointer<objc.ObjCObject> ))(arg0);
+ffi.Pointer<ffi.Void> _ObjCBlock_ffiVoid_UIImage_closureCallable = ffi.Pointer.fromFunction<
+    ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.ObjCObject> )>(_ObjCBlock_ffiVoid_UIImage_closureTrampoline ).cast();
+void _ObjCBlock_ffiVoid_UIImage_listenerTrampoline(
+    ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<objc.ObjCObject> arg0) {
+  (objc.getBlockClosure(block) as void Function(ffi.Pointer<objc.ObjCObject> ))(arg0);
+  objc.objectRelease(block.cast());
+}
+ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.ObjCObject> )> _ObjCBlock_ffiVoid_UIImage_listenerCallable = ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.ObjCObject> )>.listener(
+    _ObjCBlock_ffiVoid_UIImage_listenerTrampoline )..keepIsolateAlive = false;
+void _ObjCBlock_ffiVoid_UIImage_blockingTrampoline(
+    ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> waiter, ffi.Pointer<objc.ObjCObject> arg0) {
+  try {
+    (objc.getBlockClosure(block) as void Function(ffi.Pointer<objc.ObjCObject> ))(arg0);
+  } catch (e) {
+  } finally {
+    objc.signalWaiter(waiter);
+    objc.objectRelease(block.cast());
+  }
+}
+ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObject> )> _ObjCBlock_ffiVoid_UIImage_blockingCallable =
+    ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObject> )>.isolateLocal(
+        _ObjCBlock_ffiVoid_UIImage_blockingTrampoline )..keepIsolateAlive = false;
+ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObject> )> _ObjCBlock_ffiVoid_UIImage_blockingListenerCallable =
+    ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObject> )>.listener(
+        _ObjCBlock_ffiVoid_UIImage_blockingTrampoline )..keepIsolateAlive = false;
+
+/// Construction methods for `objc.ObjCBlock<ffi.Void Function(UIImage?)>`.
+abstract final class ObjCBlock_ffiVoid_UIImage {
+  /// Returns a block that wraps the given raw block pointer.
+  static objc.ObjCBlock<ffi.Void Function(UIImage?)> castFromPointer(ffi.Pointer<objc.ObjCBlockImpl> pointer,
+      {bool retain = false, bool release = false}) =>
+      objc.ObjCBlock<ffi.Void Function(UIImage?)>(pointer, retain: retain, release: release);
+
+  /// Creates a block from a C function pointer.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  static objc.ObjCBlock<ffi.Void Function(UIImage?)> fromFunctionPointer(ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObject> arg0)>> ptr) =>
+      objc.ObjCBlock<ffi.Void Function(UIImage?)>(objc.newPointerBlock(_ObjCBlock_ffiVoid_UIImage_fnPtrCallable, ptr.cast()),
+          retain: false, release: true);
+
+  /// Creates a block from a Dart function.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  ///
+  /// If `keepIsolateAlive` is true, this block will keep this isolate alive
+  /// until it is garbage collected by both Dart and ObjC.
+  static objc.ObjCBlock<ffi.Void Function(UIImage?)> fromFunction(void Function(UIImage? ) fn,
+          {bool keepIsolateAlive = true}) =>
+      objc.ObjCBlock<ffi.Void Function(UIImage?)>(objc.newClosureBlock(_ObjCBlock_ffiVoid_UIImage_closureCallable, (ffi.Pointer<objc.ObjCObject> arg0) => fn(arg0.address == 0 ? null : UIImage.castFromPointer(arg0, retain: true, release: true)), keepIsolateAlive),
+          retain: false, release: true);
+
+  /// Creates a listener block from a Dart function.
+  ///
+  /// This is based on FFI's NativeCallable.listener, and has the same
+  /// capabilities and limitations. This block can be invoked from any thread,
+  /// but only supports void functions, and is not run synchronously. See
+  /// NativeCallable.listener for more details.
+  ///
+  /// If `keepIsolateAlive` is true, this block will keep this isolate alive
+  /// until it is garbage collected by both Dart and ObjC.
+  static objc.ObjCBlock<ffi.Void Function(UIImage?)> listener(void Function(UIImage? ) fn,
+          {bool keepIsolateAlive = true}) {
+    final raw = objc.newClosureBlock(_ObjCBlock_ffiVoid_UIImage_listenerCallable.nativeFunction.cast(),
+        (ffi.Pointer<objc.ObjCObject> arg0) => fn(arg0.address == 0 ? null : UIImage.castFromPointer(arg0, retain: false, release: true)), keepIsolateAlive);
+    final wrapper = _MapLibreFFi_wrapListenerBlock_xtuoz7(raw);
+    objc.objectRelease(raw.cast());
+    return objc.ObjCBlock<ffi.Void Function(UIImage?)>(wrapper, retain: false, release: true);
+  }
+
+  /// Creates a blocking block from a Dart function.
+  ///
+  /// This callback can be invoked from any native thread, and will block the
+  /// caller until the callback is handled by the Dart isolate that created
+  /// the block. Async functions are not supported.
+  ///
+  /// If `keepIsolateAlive` is true, this block will keep this isolate alive
+  /// until it is garbage collected by both Dart and ObjC. If the owner isolate
+  /// has shut down, and the block is invoked by native code, it may block
+  /// indefinitely, or have other undefined behavior.
+  static objc.ObjCBlock<ffi.Void Function(UIImage?)> blocking(void Function(UIImage? ) fn,
+          {bool keepIsolateAlive = true}) {
+    final raw = objc.newClosureBlock(_ObjCBlock_ffiVoid_UIImage_blockingCallable.nativeFunction.cast(),
+        (ffi.Pointer<objc.ObjCObject> arg0) => fn(arg0.address == 0 ? null : UIImage.castFromPointer(arg0, retain: false, release: true)), keepIsolateAlive);
+    final rawListener = objc.newClosureBlock(
+        _ObjCBlock_ffiVoid_UIImage_blockingListenerCallable.nativeFunction.cast(),
+        (ffi.Pointer<objc.ObjCObject> arg0) => fn(arg0.address == 0 ? null : UIImage.castFromPointer(arg0, retain: false, release: true)), keepIsolateAlive);
+    final wrapper = _MapLibreFFi_wrapBlockingBlock_xtuoz7(raw, rawListener, objc.objCContext);
+    objc.objectRelease(raw.cast());
+    objc.objectRelease(rawListener.cast());
+    return objc.ObjCBlock<ffi.Void Function(UIImage?)>(wrapper, retain: false, release: true);
+  }
+}
+
+/// Call operator for `objc.ObjCBlock<ffi.Void Function(UIImage?)>`.
+extension ObjCBlock_ffiVoid_UIImage_CallExtension on objc.ObjCBlock<ffi.Void Function(UIImage?)> {
+  void call(UIImage? arg0) =>ref.pointer.ref.invoke.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<objc.ObjCObject> arg0)>>()
+  .asFunction<void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.ObjCObject> )>()(
+    ref.pointer, arg0?.ref.pointer ?? ffi.nullptr);
+}
+
+late final _sel_prepareForDisplayWithCompletionHandler_ = objc.registerName("prepareForDisplayWithCompletionHandler:");
+final _objc_msgSend_f167m6 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCBlockImpl> )>();
+late final _sel_imageByPreparingThumbnailOfSize_ = objc.registerName("imageByPreparingThumbnailOfSize:");
+final _objc_msgSend_1c2zpn3 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , objc.CGSize )>>().asFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , objc.CGSize )>();
+late final _sel_prepareThumbnailOfSize_completionHandler_ = objc.registerName("prepareThumbnailOfSize:completionHandler:");
+final _objc_msgSend_1awx4w = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , objc.CGSize , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , objc.CGSize , ffi.Pointer<objc.ObjCBlockImpl> )>();
+late final _sel_isHighDynamicRange = objc.registerName("isHighDynamicRange");
+late final _sel_imageRestrictedToStandardDynamicRange = objc.registerName("imageRestrictedToStandardDynamicRange");
+
+/// UIImage
+class UIImage extends objc.NSObject implements objc.NSSecureCoding {
+  UIImage._(ffi.Pointer<objc.ObjCObject> pointer, {bool retain = false, bool release = false}) :
+      super.castFromPointer(pointer, retain: retain, release: release) { objc.checkOsVersionInternal('UIImage', iOS: (false, (2, 0, 0))); }
+
+  /// Constructs a [UIImage] that points to the same underlying object as [other].
+  UIImage.castFrom(objc.ObjCObjectBase other) :
+      this._(other.ref.pointer, retain: true, release: true);
+
+  /// Constructs a [UIImage] that wraps the given raw object pointer.
+  UIImage.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false}) :
+      this._(other, retain: retain, release: release);
+
+  /// Returns whether [obj] is an instance of [UIImage].
+  static bool isInstance(objc.ObjCObjectBase obj) {
+    return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_UIImage);
+  }
+
+  /// systemImageNamed:
+  static UIImage? systemImageNamed(objc.NSString name) {
+  objc.checkOsVersionInternal('UIImage.systemImageNamed:', iOS: (false, (13, 0, 0)));
+    final _ret = _objc_msgSend_1sotr3r(_class_UIImage, _sel_systemImageNamed_, name.ref.pointer);
+    return _ret.address == 0 ? null : UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// systemImageNamed:withConfiguration:
+  static UIImage? systemImageNamed$1(objc.NSString name, {UIImageConfiguration? withConfiguration}) {
+  objc.checkOsVersionInternal('UIImage.systemImageNamed:withConfiguration:', iOS: (false, (13, 0, 0)));
+    final _ret = _objc_msgSend_15qeuct(_class_UIImage, _sel_systemImageNamed_withConfiguration_, name.ref.pointer, withConfiguration?.ref.pointer ?? ffi.nullptr);
+    return _ret.address == 0 ? null : UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// systemImageNamed:compatibleWithTraitCollection:
+  static UIImage? systemImageNamed$2(objc.NSString name, {UITraitCollection? compatibleWithTraitCollection}) {
+  objc.checkOsVersionInternal('UIImage.systemImageNamed:compatibleWithTraitCollection:', iOS: (false, (13, 0, 0)));
+    final _ret = _objc_msgSend_15qeuct(_class_UIImage, _sel_systemImageNamed_compatibleWithTraitCollection_, name.ref.pointer, compatibleWithTraitCollection?.ref.pointer ?? ffi.nullptr);
+    return _ret.address == 0 ? null : UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// systemImageNamed:variableValue:withConfiguration:
+  static UIImage? systemImageNamed$3(objc.NSString name, {required double variableValue,UIImageConfiguration? withConfiguration}) {
+  objc.checkOsVersionInternal('UIImage.systemImageNamed:variableValue:withConfiguration:', iOS: (false, (16, 0, 0)));
+    final _ret = _objc_msgSend_17i4wqy(_class_UIImage, _sel_systemImageNamed_variableValue_withConfiguration_, name.ref.pointer, variableValue, withConfiguration?.ref.pointer ?? ffi.nullptr);
+    return _ret.address == 0 ? null : UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// imageNamed:
+  static UIImage? imageNamed(objc.NSString name) {
+  objc.checkOsVersionInternal('UIImage.imageNamed:', iOS: (false, (2, 0, 0)));
+    final _ret = _objc_msgSend_1sotr3r(_class_UIImage, _sel_imageNamed_, name.ref.pointer);
+    return _ret.address == 0 ? null : UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// imageNamed:inBundle:withConfiguration:
+  static UIImage? imageNamed$1(objc.NSString name, {NSBundle? inBundle,UIImageConfiguration? withConfiguration}) {
+  objc.checkOsVersionInternal('UIImage.imageNamed:inBundle:withConfiguration:', iOS: (false, (13, 0, 0)));
+    final _ret = _objc_msgSend_11spmsz(_class_UIImage, _sel_imageNamed_inBundle_withConfiguration_, name.ref.pointer, inBundle?.ref.pointer ?? ffi.nullptr, withConfiguration?.ref.pointer ?? ffi.nullptr);
+    return _ret.address == 0 ? null : UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// imageNamed:inBundle:compatibleWithTraitCollection:
+  static UIImage? imageNamed$2(objc.NSString name, {NSBundle? inBundle,UITraitCollection? compatibleWithTraitCollection}) {
+  objc.checkOsVersionInternal('UIImage.imageNamed:inBundle:compatibleWithTraitCollection:', iOS: (false, (8, 0, 0)));
+    final _ret = _objc_msgSend_11spmsz(_class_UIImage, _sel_imageNamed_inBundle_compatibleWithTraitCollection_, name.ref.pointer, inBundle?.ref.pointer ?? ffi.nullptr, compatibleWithTraitCollection?.ref.pointer ?? ffi.nullptr);
+    return _ret.address == 0 ? null : UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// imageNamed:inBundle:variableValue:withConfiguration:
+  static UIImage? imageNamed$3(objc.NSString name, {NSBundle? inBundle,required double variableValue,UIImageConfiguration? withConfiguration}) {
+  objc.checkOsVersionInternal('UIImage.imageNamed:inBundle:variableValue:withConfiguration:', iOS: (false, (16, 0, 0)));
+    final _ret = _objc_msgSend_1vft1l4(_class_UIImage, _sel_imageNamed_inBundle_variableValue_withConfiguration_, name.ref.pointer, inBundle?.ref.pointer ?? ffi.nullptr, variableValue, withConfiguration?.ref.pointer ?? ffi.nullptr);
+    return _ret.address == 0 ? null : UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// imageWithContentsOfFile:
+  static UIImage? imageWithContentsOfFile(objc.NSString path) {
+  objc.checkOsVersionInternal('UIImage.imageWithContentsOfFile:', iOS: (false, (2, 0, 0)));
+    final _ret = _objc_msgSend_1sotr3r(_class_UIImage, _sel_imageWithContentsOfFile_, path.ref.pointer);
+    return _ret.address == 0 ? null : UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// imageWithData:
+  static UIImage? imageWithData(objc.NSData data) {
+  objc.checkOsVersionInternal('UIImage.imageWithData:', iOS: (false, (2, 0, 0)));
+    final _ret = _objc_msgSend_1sotr3r(_class_UIImage, _sel_imageWithData_, data.ref.pointer);
+    return _ret.address == 0 ? null : UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// imageWithData:scale:
+  static UIImage? imageWithData$1(objc.NSData data, {required double scale}) {
+  objc.checkOsVersionInternal('UIImage.imageWithData:scale:', iOS: (false, (6, 0, 0)));
+    final _ret = _objc_msgSend_6plvbo(_class_UIImage, _sel_imageWithData_scale_, data.ref.pointer, scale);
+    return _ret.address == 0 ? null : UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// imageWithCGImage:
+  static UIImage imageWithCGImage(ffi.Pointer<CGImage> cgImage) {
+  objc.checkOsVersionInternal('UIImage.imageWithCGImage:', iOS: (false, (2, 0, 0)));
+    final _ret = _objc_msgSend_2tjjtl(_class_UIImage, _sel_imageWithCGImage_, cgImage);
+    return UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// imageWithCGImage:scale:orientation:
+  static UIImage imageWithCGImage$1(ffi.Pointer<CGImage> cgImage, {required double scale,required UIImageOrientation orientation}) {
+  objc.checkOsVersionInternal('UIImage.imageWithCGImage:scale:orientation:', iOS: (false, (4, 0, 0)));
+    final _ret = _objc_msgSend_16go90j(_class_UIImage, _sel_imageWithCGImage_scale_orientation_, cgImage, scale, orientation.value);
+    return UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// imageWithCIImage:
+  static UIImage imageWithCIImage(CIImage ciImage) {
+  objc.checkOsVersionInternal('UIImage.imageWithCIImage:', iOS: (false, (5, 0, 0)));
+    final _ret = _objc_msgSend_1sotr3r(_class_UIImage, _sel_imageWithCIImage_, ciImage.ref.pointer);
+    return UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// imageWithCIImage:scale:orientation:
+  static UIImage imageWithCIImage$1(CIImage ciImage, {required double scale,required UIImageOrientation orientation}) {
+  objc.checkOsVersionInternal('UIImage.imageWithCIImage:scale:orientation:', iOS: (false, (6, 0, 0)));
+    final _ret = _objc_msgSend_2xggvt(_class_UIImage, _sel_imageWithCIImage_scale_orientation_, ciImage.ref.pointer, scale, orientation.value);
+    return UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// initWithContentsOfFile:
+  UIImage? initWithContentsOfFile(objc.NSString path) {
+  objc.checkOsVersionInternal('UIImage.initWithContentsOfFile:', iOS: (false, (2, 0, 0)));
+    final _ret = _objc_msgSend_1sotr3r(this.ref.retainAndReturnPointer(), _sel_initWithContentsOfFile_, path.ref.pointer);
+    return _ret.address == 0 ? null : UIImage.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// initWithData:
+  UIImage? initWithData(objc.NSData data) {
+  objc.checkOsVersionInternal('UIImage.initWithData:', iOS: (false, (2, 0, 0)));
+    final _ret = _objc_msgSend_1sotr3r(this.ref.retainAndReturnPointer(), _sel_initWithData_, data.ref.pointer);
+    return _ret.address == 0 ? null : UIImage.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// initWithData:scale:
+  UIImage? initWithData$1(objc.NSData data, {required double scale}) {
+  objc.checkOsVersionInternal('UIImage.initWithData:scale:', iOS: (false, (6, 0, 0)));
+    final _ret = _objc_msgSend_6plvbo(this.ref.retainAndReturnPointer(), _sel_initWithData_scale_, data.ref.pointer, scale);
+    return _ret.address == 0 ? null : UIImage.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// initWithCGImage:
+  UIImage initWithCGImage(ffi.Pointer<CGImage> cgImage) {
+  objc.checkOsVersionInternal('UIImage.initWithCGImage:', iOS: (false, (2, 0, 0)));
+    final _ret = _objc_msgSend_2tjjtl(this.ref.retainAndReturnPointer(), _sel_initWithCGImage_, cgImage);
+    return UIImage.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// initWithCGImage:scale:orientation:
+  UIImage initWithCGImage$1(ffi.Pointer<CGImage> cgImage, {required double scale,required UIImageOrientation orientation}) {
+  objc.checkOsVersionInternal('UIImage.initWithCGImage:scale:orientation:', iOS: (false, (4, 0, 0)));
+    final _ret = _objc_msgSend_16go90j(this.ref.retainAndReturnPointer(), _sel_initWithCGImage_scale_orientation_, cgImage, scale, orientation.value);
+    return UIImage.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// initWithCIImage:
+  UIImage initWithCIImage(CIImage ciImage) {
+  objc.checkOsVersionInternal('UIImage.initWithCIImage:', iOS: (false, (5, 0, 0)));
+    final _ret = _objc_msgSend_1sotr3r(this.ref.retainAndReturnPointer(), _sel_initWithCIImage_, ciImage.ref.pointer);
+    return UIImage.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// initWithCIImage:scale:orientation:
+  UIImage initWithCIImage$1(CIImage ciImage, {required double scale,required UIImageOrientation orientation}) {
+  objc.checkOsVersionInternal('UIImage.initWithCIImage:scale:orientation:', iOS: (false, (6, 0, 0)));
+    final _ret = _objc_msgSend_2xggvt(this.ref.retainAndReturnPointer(), _sel_initWithCIImage_scale_orientation_, ciImage.ref.pointer, scale, orientation.value);
+    return UIImage.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// size
+  objc.CGSize get size {
+  objc.checkOsVersionInternal('UIImage.size', iOS: (false, (2, 0, 0)));
+    final _ptr = pkg_ffi.calloc<objc.CGSize>();
+    objc.useMsgSendVariants ? _objc_msgSend_1vdfkenStret(_ptr, this.ref.pointer, _sel_size) : _ptr.ref = _objc_msgSend_1vdfken(this.ref.pointer, _sel_size);
+    final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
+        ffi.sizeOf<objc.CGSize>(), finalizer: pkg_ffi.calloc.nativeFree);
+    return ffi.Struct.create<objc.CGSize>(_finalizable);
+
+  }
+
+
+  /// CGImage
+  ffi.Pointer<CGImage> get CGImage$1 {
+  objc.checkOsVersionInternal('UIImage.CGImage', iOS: (false, (2, 0, 0)));
+    return _objc_msgSend_y1izi1(this.ref.pointer, _sel_CGImage);
+
+  }
+
+
+  /// CIImage
+  CIImage? get CIImage$1 {
+  objc.checkOsVersionInternal('UIImage.CIImage', iOS: (false, (5, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_CIImage);
+    return _ret.address == 0 ? null : CIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// imageOrientation
+  UIImageOrientation get imageOrientation {
+  objc.checkOsVersionInternal('UIImage.imageOrientation', iOS: (false, (2, 0, 0)));
+    final _ret = _objc_msgSend_fkvhxy(this.ref.pointer, _sel_imageOrientation);
+    return UIImageOrientation.fromValue(_ret);
+  }
+
+
+  /// scale
+  double get scale {
+  objc.checkOsVersionInternal('UIImage.scale', iOS: (false, (4, 0, 0)));
+    return objc.useMsgSendVariants ? _objc_msgSend_1ukqyt8Fpret(this.ref.pointer, _sel_scale) : _objc_msgSend_1ukqyt8(this.ref.pointer, _sel_scale);
+
+  }
+
+
+  /// isSymbolImage
+  bool get symbolImage {
+  objc.checkOsVersionInternal('UIImage.isSymbolImage', iOS: (false, (13, 0, 0)));
+    return _objc_msgSend_91o635(this.ref.pointer, _sel_isSymbolImage);
+
+  }
+
+
+  /// animatedImageNamed:duration:
+  static UIImage? animatedImageNamed(objc.NSString name, {required double duration}) {
+  objc.checkOsVersionInternal('UIImage.animatedImageNamed:duration:', iOS: (false, (5, 0, 0)));
+    final _ret = _objc_msgSend_6plvbo(_class_UIImage, _sel_animatedImageNamed_duration_, name.ref.pointer, duration);
+    return _ret.address == 0 ? null : UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// animatedResizableImageNamed:capInsets:duration:
+  static UIImage? animatedResizableImageNamed(objc.NSString name, {required UIEdgeInsets capInsets,required double duration}) {
+  objc.checkOsVersionInternal('UIImage.animatedResizableImageNamed:capInsets:duration:', iOS: (false, (5, 0, 0)));
+    final _ret = _objc_msgSend_lxcnyc(_class_UIImage, _sel_animatedResizableImageNamed_capInsets_duration_, name.ref.pointer, capInsets, duration);
+    return _ret.address == 0 ? null : UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// animatedResizableImageNamed:capInsets:resizingMode:duration:
+  static UIImage? animatedResizableImageNamed$1(objc.NSString name, {required UIEdgeInsets capInsets,required UIImageResizingMode resizingMode,required double duration}) {
+  objc.checkOsVersionInternal('UIImage.animatedResizableImageNamed:capInsets:resizingMode:duration:', iOS: (false, (6, 0, 0)));
+    final _ret = _objc_msgSend_25drz7(_class_UIImage, _sel_animatedResizableImageNamed_capInsets_resizingMode_duration_, name.ref.pointer, capInsets, resizingMode.value, duration);
+    return _ret.address == 0 ? null : UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// animatedImageWithImages:duration:
+  static UIImage? animatedImageWithImages(objc.NSArray images, {required double duration}) {
+  objc.checkOsVersionInternal('UIImage.animatedImageWithImages:duration:', iOS: (false, (5, 0, 0)));
+    final _ret = _objc_msgSend_6plvbo(_class_UIImage, _sel_animatedImageWithImages_duration_, images.ref.pointer, duration);
+    return _ret.address == 0 ? null : UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// images
+  objc.NSArray? get images {
+  objc.checkOsVersionInternal('UIImage.images', iOS: (false, (5, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_images);
+    return _ret.address == 0 ? null : objc.NSArray.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// duration
+  double get duration {
+  objc.checkOsVersionInternal('UIImage.duration', iOS: (false, (5, 0, 0)));
+    return objc.useMsgSendVariants ? _objc_msgSend_1ukqyt8Fpret(this.ref.pointer, _sel_duration) : _objc_msgSend_1ukqyt8(this.ref.pointer, _sel_duration);
+
+  }
+
+
+  /// drawAtPoint:
+  void drawAtPoint(objc.CGPoint point) {
+  objc.checkOsVersionInternal('UIImage.drawAtPoint:', iOS: (false, (2, 0, 0)));
+_objc_msgSend_iy8iz6(this.ref.pointer, _sel_drawAtPoint_, point);
+
+  }
+
+
+  /// drawAtPoint:blendMode:alpha:
+  void drawAtPoint$1(objc.CGPoint point, {required CGBlendMode blendMode,required double alpha}) {
+  objc.checkOsVersionInternal('UIImage.drawAtPoint:blendMode:alpha:', iOS: (false, (2, 0, 0)));
+_objc_msgSend_yg3i7f(this.ref.pointer, _sel_drawAtPoint_blendMode_alpha_, point, blendMode.value, alpha);
+
+  }
+
+
+  /// drawInRect:
+  void drawInRect(objc.CGRect rect) {
+  objc.checkOsVersionInternal('UIImage.drawInRect:', iOS: (false, (2, 0, 0)));
+_objc_msgSend_1okkq16(this.ref.pointer, _sel_drawInRect_, rect);
+
+  }
+
+
+  /// drawInRect:blendMode:alpha:
+  void drawInRect$1(objc.CGRect rect, {required CGBlendMode blendMode,required double alpha}) {
+  objc.checkOsVersionInternal('UIImage.drawInRect:blendMode:alpha:', iOS: (false, (2, 0, 0)));
+_objc_msgSend_1ggt4c3(this.ref.pointer, _sel_drawInRect_blendMode_alpha_, rect, blendMode.value, alpha);
+
+  }
+
+
+  /// drawAsPatternInRect:
+  void drawAsPatternInRect(objc.CGRect rect) {
+  objc.checkOsVersionInternal('UIImage.drawAsPatternInRect:', iOS: (false, (2, 0, 0)));
+_objc_msgSend_1okkq16(this.ref.pointer, _sel_drawAsPatternInRect_, rect);
+
+  }
+
+
+  /// resizableImageWithCapInsets:
+  UIImage resizableImageWithCapInsets(UIEdgeInsets capInsets) {
+  objc.checkOsVersionInternal('UIImage.resizableImageWithCapInsets:', iOS: (false, (5, 0, 0)));
+    final _ret = _objc_msgSend_1mhd1pt(this.ref.pointer, _sel_resizableImageWithCapInsets_, capInsets);
+    return UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// resizableImageWithCapInsets:resizingMode:
+  UIImage resizableImageWithCapInsets$1(UIEdgeInsets capInsets, {required UIImageResizingMode resizingMode}) {
+  objc.checkOsVersionInternal('UIImage.resizableImageWithCapInsets:resizingMode:', iOS: (false, (6, 0, 0)));
+    final _ret = _objc_msgSend_1utaosa(this.ref.pointer, _sel_resizableImageWithCapInsets_resizingMode_, capInsets, resizingMode.value);
+    return UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// capInsets
+  UIEdgeInsets get capInsets {
+  objc.checkOsVersionInternal('UIImage.capInsets', iOS: (false, (5, 0, 0)));
+    final _ptr = pkg_ffi.calloc<UIEdgeInsets>();
+    objc.useMsgSendVariants ? _objc_msgSend_ct4cu5Stret(_ptr, this.ref.pointer, _sel_capInsets) : _ptr.ref = _objc_msgSend_ct4cu5(this.ref.pointer, _sel_capInsets);
+    final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
+        ffi.sizeOf<UIEdgeInsets>(), finalizer: pkg_ffi.calloc.nativeFree);
+    return ffi.Struct.create<UIEdgeInsets>(_finalizable);
+
+  }
+
+
+  /// resizingMode
+  UIImageResizingMode get resizingMode {
+  objc.checkOsVersionInternal('UIImage.resizingMode', iOS: (false, (6, 0, 0)));
+    final _ret = _objc_msgSend_knxebs(this.ref.pointer, _sel_resizingMode);
+    return UIImageResizingMode.fromValue(_ret);
+  }
+
+
+  /// imageWithAlignmentRectInsets:
+  UIImage imageWithAlignmentRectInsets(UIEdgeInsets alignmentInsets) {
+  objc.checkOsVersionInternal('UIImage.imageWithAlignmentRectInsets:', iOS: (false, (6, 0, 0)));
+    final _ret = _objc_msgSend_1mhd1pt(this.ref.pointer, _sel_imageWithAlignmentRectInsets_, alignmentInsets);
+    return UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// alignmentRectInsets
+  UIEdgeInsets get alignmentRectInsets {
+  objc.checkOsVersionInternal('UIImage.alignmentRectInsets', iOS: (false, (6, 0, 0)));
+    final _ptr = pkg_ffi.calloc<UIEdgeInsets>();
+    objc.useMsgSendVariants ? _objc_msgSend_ct4cu5Stret(_ptr, this.ref.pointer, _sel_alignmentRectInsets) : _ptr.ref = _objc_msgSend_ct4cu5(this.ref.pointer, _sel_alignmentRectInsets);
+    final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
+        ffi.sizeOf<UIEdgeInsets>(), finalizer: pkg_ffi.calloc.nativeFree);
+    return ffi.Struct.create<UIEdgeInsets>(_finalizable);
+
+  }
+
+
+  /// imageWithRenderingMode:
+  UIImage imageWithRenderingMode(UIImageRenderingMode renderingMode) {
+  objc.checkOsVersionInternal('UIImage.imageWithRenderingMode:', iOS: (false, (7, 0, 0)));
+    final _ret = _objc_msgSend_1o8rmw3(this.ref.pointer, _sel_imageWithRenderingMode_, renderingMode.value);
+    return UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// renderingMode
+  UIImageRenderingMode get renderingMode {
+  objc.checkOsVersionInternal('UIImage.renderingMode', iOS: (false, (7, 0, 0)));
+    final _ret = _objc_msgSend_s2io2v(this.ref.pointer, _sel_renderingMode);
+    return UIImageRenderingMode.fromValue(_ret);
+  }
+
+
+  /// imageRendererFormat
+  UIGraphicsImageRendererFormat get imageRendererFormat {
+  objc.checkOsVersionInternal('UIImage.imageRendererFormat', iOS: (false, (10, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_imageRendererFormat);
+    return UIGraphicsImageRendererFormat.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// traitCollection
+  UITraitCollection get traitCollection {
+  objc.checkOsVersionInternal('UIImage.traitCollection', iOS: (false, (8, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_traitCollection);
+    return UITraitCollection.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// imageAsset
+  UIImageAsset? get imageAsset {
+  objc.checkOsVersionInternal('UIImage.imageAsset', iOS: (false, (8, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_imageAsset);
+    return _ret.address == 0 ? null : UIImageAsset.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// imageFlippedForRightToLeftLayoutDirection
+  UIImage imageFlippedForRightToLeftLayoutDirection() {
+  objc.checkOsVersionInternal('UIImage.imageFlippedForRightToLeftLayoutDirection', iOS: (false, (9, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_imageFlippedForRightToLeftLayoutDirection);
+    return UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// flipsForRightToLeftLayoutDirection
+  bool get flipsForRightToLeftLayoutDirection {
+  objc.checkOsVersionInternal('UIImage.flipsForRightToLeftLayoutDirection', iOS: (false, (9, 0, 0)));
+    return _objc_msgSend_91o635(this.ref.pointer, _sel_flipsForRightToLeftLayoutDirection);
+
+  }
+
+
+  /// imageWithHorizontallyFlippedOrientation
+  UIImage imageWithHorizontallyFlippedOrientation() {
+  objc.checkOsVersionInternal('UIImage.imageWithHorizontallyFlippedOrientation', iOS: (false, (10, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_imageWithHorizontallyFlippedOrientation);
+    return UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// baselineOffsetFromBottom
+  double get baselineOffsetFromBottom {
+  objc.checkOsVersionInternal('UIImage.baselineOffsetFromBottom', iOS: (false, (13, 0, 0)));
+    return objc.useMsgSendVariants ? _objc_msgSend_1ukqyt8Fpret(this.ref.pointer, _sel_baselineOffsetFromBottom) : _objc_msgSend_1ukqyt8(this.ref.pointer, _sel_baselineOffsetFromBottom);
+
+  }
+
+
+  /// hasBaseline
+  bool get hasBaseline {
+  objc.checkOsVersionInternal('UIImage.hasBaseline', iOS: (false, (13, 0, 0)));
+    return _objc_msgSend_91o635(this.ref.pointer, _sel_hasBaseline);
+
+  }
+
+
+  /// imageWithBaselineOffsetFromBottom:
+  UIImage imageWithBaselineOffsetFromBottom(double baselineOffset) {
+  objc.checkOsVersionInternal('UIImage.imageWithBaselineOffsetFromBottom:', iOS: (false, (13, 0, 0)));
+    final _ret = _objc_msgSend_oa8mke(this.ref.pointer, _sel_imageWithBaselineOffsetFromBottom_, baselineOffset);
+    return UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// imageWithoutBaseline
+  UIImage imageWithoutBaseline() {
+  objc.checkOsVersionInternal('UIImage.imageWithoutBaseline', iOS: (false, (13, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_imageWithoutBaseline);
+    return UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// configuration
+  UIImageConfiguration? get configuration {
+  objc.checkOsVersionInternal('UIImage.configuration', iOS: (false, (13, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_configuration);
+    return _ret.address == 0 ? null : UIImageConfiguration.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// imageWithConfiguration:
+  UIImage imageWithConfiguration(UIImageConfiguration configuration$1) {
+  objc.checkOsVersionInternal('UIImage.imageWithConfiguration:', iOS: (false, (13, 0, 0)));
+    final _ret = _objc_msgSend_1sotr3r(this.ref.pointer, _sel_imageWithConfiguration_, configuration$1.ref.pointer);
+    return UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// symbolConfiguration
+  UIImageSymbolConfiguration? get symbolConfiguration {
+  objc.checkOsVersionInternal('UIImage.symbolConfiguration', iOS: (false, (13, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_symbolConfiguration);
+    return _ret.address == 0 ? null : UIImageSymbolConfiguration.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// imageByApplyingSymbolConfiguration:
+  UIImage? imageByApplyingSymbolConfiguration(UIImageSymbolConfiguration configuration$1) {
+  objc.checkOsVersionInternal('UIImage.imageByApplyingSymbolConfiguration:', iOS: (false, (13, 0, 0)));
+    final _ret = _objc_msgSend_1sotr3r(this.ref.pointer, _sel_imageByApplyingSymbolConfiguration_, configuration$1.ref.pointer);
+    return _ret.address == 0 ? null : UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// imageWithTintColor:
+  UIImage imageWithTintColor(UIColor color) {
+  objc.checkOsVersionInternal('UIImage.imageWithTintColor:', iOS: (false, (13, 0, 0)));
+    final _ret = _objc_msgSend_1sotr3r(this.ref.pointer, _sel_imageWithTintColor_, color.ref.pointer);
+    return UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// imageWithTintColor:renderingMode:
+  UIImage imageWithTintColor$1(UIColor color, {required UIImageRenderingMode renderingMode$1}) {
+  objc.checkOsVersionInternal('UIImage.imageWithTintColor:renderingMode:', iOS: (false, (13, 0, 0)));
+    final _ret = _objc_msgSend_15gm1s5(this.ref.pointer, _sel_imageWithTintColor_renderingMode_, color.ref.pointer, renderingMode$1.value);
+    return UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// imageByPreparingForDisplay
+  UIImage? imageByPreparingForDisplay() {
+  objc.checkOsVersionInternal('UIImage.imageByPreparingForDisplay', iOS: (false, (15, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_imageByPreparingForDisplay);
+    return _ret.address == 0 ? null : UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// prepareForDisplayWithCompletionHandler:
+  void prepareForDisplayWithCompletionHandler(objc.ObjCBlock<ffi.Void Function(UIImage?)> completionHandler) {
+  objc.checkOsVersionInternal('UIImage.prepareForDisplayWithCompletionHandler:', iOS: (false, (15, 0, 0)));
+_objc_msgSend_f167m6(this.ref.pointer, _sel_prepareForDisplayWithCompletionHandler_, completionHandler.ref.pointer);
+
+  }
+
+
+  /// imageByPreparingThumbnailOfSize:
+  UIImage? imageByPreparingThumbnailOfSize(objc.CGSize size$1) {
+  objc.checkOsVersionInternal('UIImage.imageByPreparingThumbnailOfSize:', iOS: (false, (15, 0, 0)));
+    final _ret = _objc_msgSend_1c2zpn3(this.ref.pointer, _sel_imageByPreparingThumbnailOfSize_, size$1);
+    return _ret.address == 0 ? null : UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// prepareThumbnailOfSize:completionHandler:
+  void prepareThumbnailOfSize(objc.CGSize size$1, {required objc.ObjCBlock<ffi.Void Function(UIImage?)> completionHandler}) {
+  objc.checkOsVersionInternal('UIImage.prepareThumbnailOfSize:completionHandler:', iOS: (false, (15, 0, 0)));
+_objc_msgSend_1awx4w(this.ref.pointer, _sel_prepareThumbnailOfSize_completionHandler_, size$1, completionHandler.ref.pointer);
+
+  }
+
+
+  /// isHighDynamicRange
+  bool get isHighDynamicRange {
+  objc.checkOsVersionInternal('UIImage.isHighDynamicRange', iOS: (false, (17, 0, 0)));
+    return _objc_msgSend_91o635(this.ref.pointer, _sel_isHighDynamicRange);
+
+  }
+
+
+  /// imageRestrictedToStandardDynamicRange
+  UIImage imageRestrictedToStandardDynamicRange() {
+  objc.checkOsVersionInternal('UIImage.imageRestrictedToStandardDynamicRange', iOS: (false, (17, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_imageRestrictedToStandardDynamicRange);
+    return UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// init
+  UIImage init() {
+  objc.checkOsVersionInternal('UIImage.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
+    return UIImage.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// new
+  static UIImage new$() {
+    final _ret = _objc_msgSend_151sglz(_class_UIImage, _sel_new);
+    return UIImage.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static UIImage allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_UIImage, _sel_allocWithZone_, zone);
+    return UIImage.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static UIImage alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_UIImage, _sel_alloc);
+    return UIImage.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// supportsSecureCoding
+  static bool getSupportsSecureCoding() {
+    return _objc_msgSend_91o635(_class_UIImage, _sel_supportsSecureCoding);
+
+  }
+
+
+  /// encodeWithCoder:
+  void encodeWithCoder(objc.NSCoder coder) {
+_objc_msgSend_xtuoz7(this.ref.pointer, _sel_encodeWithCoder_, coder.ref.pointer);
+
+  }
+
+
+  /// initWithCoder:
+  UIImage? initWithCoder(objc.NSCoder coder) {
+    final _ret = _objc_msgSend_1sotr3r(this.ref.retainAndReturnPointer(), _sel_initWithCoder_, coder.ref.pointer);
+    return _ret.address == 0 ? null : UIImage.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// objectWithItemProviderData:typeIdentifier:error:
+  static UIImage? objectWithItemProviderData(objc.NSData data, {required objc.NSString typeIdentifier,required ffi.Pointer<ffi.Pointer<objc.ObjCObject>> error}) {
+  objc.checkOsVersionInternal('UIImage.objectWithItemProviderData:typeIdentifier:error:', iOS: (false, (11, 0, 0)), macOS: (false, (10, 13, 0)));
+    final _ret = _objc_msgSend_1pnyuds(_class_UIImage, _sel_objectWithItemProviderData_typeIdentifier_error_, data.ref.pointer, typeIdentifier.ref.pointer, error);
+    return _ret.address == 0 ? null : UIImage.castFromPointer(_ret, retain: true, release: true);
+  }
+  /// Returns a new instance of UIImage constructed with the default `new` method.
+  factory UIImage() => new$();
 
 }
 
@@ -4654,27 +6077,6 @@ enum UIImageSymbolWeight {
     9 => UIImageSymbolWeightBlack,
     _ => throw ArgumentError('Unknown value for UIImageSymbolWeight: $value'),
   };
-
-}
-
-
-/// WARNING: UIImageSymbolConfiguration is a stub. To generate bindings for this class, include
-/// UIImageSymbolConfiguration in your config's objc-interfaces list.
-///
-/// UIImageSymbolConfiguration
-class UIImageSymbolConfiguration extends UIImageConfiguration {
-  UIImageSymbolConfiguration._(ffi.Pointer<objc.ObjCObject> pointer, {bool retain = false, bool release = false}) :
-      super.castFromPointer(pointer, retain: retain, release: release) { objc.checkOsVersionInternal('UIImageSymbolConfiguration', iOS: (false, (13, 0, 0))); }
-
-  /// Constructs a [UIImageSymbolConfiguration] that points to the same underlying object as [other].
-  UIImageSymbolConfiguration.castFrom(objc.ObjCObjectBase other) :
-      this._(other.ref.pointer, retain: true, release: true);
-
-  /// Constructs a [UIImageSymbolConfiguration] that wraps the given raw object pointer.
-  UIImageSymbolConfiguration.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
-      {bool retain = false, bool release = false}) :
-      this._(other, retain: retain, release: release);
-
 
 }
 
@@ -5049,6 +6451,27 @@ final class CAFrameRateRange extends ffi.Struct{
 }
 
 
+/// WARNING: CADisplayLink is a stub. To generate bindings for this class, include
+/// CADisplayLink in your config's objc-interfaces list.
+///
+/// CADisplayLink
+class CADisplayLink extends objc.NSObject {
+  CADisplayLink._(ffi.Pointer<objc.ObjCObject> pointer, {bool retain = false, bool release = false}) :
+      super.castFromPointer(pointer, retain: retain, release: release) { objc.checkOsVersionInternal('CADisplayLink', iOS: (false, (3, 1, 0)), macOS: (false, (14, 0, 0))); }
+
+  /// Constructs a [CADisplayLink] that points to the same underlying object as [other].
+  CADisplayLink.castFrom(objc.ObjCObjectBase other) :
+      this._(other.ref.pointer, retain: true, release: true);
+
+  /// Constructs a [CADisplayLink] that wraps the given raw object pointer.
+  CADisplayLink.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false}) :
+      this._(other, retain: retain, release: release);
+
+
+}
+
+
 /// WARNING: CAMediaTimingFunction is a stub. To generate bindings for this class, include
 /// CAMediaTimingFunction in your config's objc-interfaces list.
 ///
@@ -5109,193 +6532,8 @@ enum UIMenuElementAttributes {
 
 late final _class_UIMenuElement = objc.getClass("UIMenuElement");
 
-/// WARNING: UIAccessibilityIdentification is a stub. To generate bindings for this class, include
-/// UIAccessibilityIdentification in your config's objc-protocols list.
-///
-/// UIAccessibilityIdentification
-interface class UIAccessibilityIdentification extends objc.ObjCProtocolBase implements objc.NSObjectProtocol{
-  UIAccessibilityIdentification._(ffi.Pointer<objc.ObjCObject> pointer, {bool retain = false, bool release = false}) :
-          super(pointer, retain: retain, release: release);
-
-  /// Constructs a [UIAccessibilityIdentification] that points to the same underlying object as [other].
-  UIAccessibilityIdentification.castFrom(objc.ObjCObjectBase other) :
-      this._(other.ref.pointer, retain: true, release: true);
-
-  /// Constructs a [UIAccessibilityIdentification] that wraps the given raw object pointer.
-  UIAccessibilityIdentification.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
-      {bool retain = false, bool release = false}) :
-      this._(other, retain: retain, release: release);
-
-}
-late final _sel_accessibilityIdentifier = objc.registerName("accessibilityIdentifier");
-ffi.Pointer<objc.ObjCObject> _ObjCBlock_NSString_ffiVoid_fnPtrTrampoline(
-    ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0) =>
-        block.ref.target.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void> arg0)>>()
-            .asFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void> )>()(arg0);
-ffi.Pointer<ffi.Void> _ObjCBlock_NSString_ffiVoid_fnPtrCallable = ffi.Pointer.fromFunction<
-    ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> )>(_ObjCBlock_NSString_ffiVoid_fnPtrTrampoline ).cast();
-ffi.Pointer<objc.ObjCObject> _ObjCBlock_NSString_ffiVoid_closureTrampoline(
-    ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0) =>
-    (objc.getBlockClosure(block) as ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void> ))(arg0);
-ffi.Pointer<ffi.Void> _ObjCBlock_NSString_ffiVoid_closureCallable = ffi.Pointer.fromFunction<
-    ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> )>(_ObjCBlock_NSString_ffiVoid_closureTrampoline ).cast();
-
-/// Construction methods for `objc.ObjCBlock<objc.NSString? Function(ffi.Pointer<ffi.Void>)>`.
-abstract final class ObjCBlock_NSString_ffiVoid {
-  /// Returns a block that wraps the given raw block pointer.
-  static objc.ObjCBlock<objc.NSString? Function(ffi.Pointer<ffi.Void>)> castFromPointer(ffi.Pointer<objc.ObjCBlockImpl> pointer,
-      {bool retain = false, bool release = false}) =>
-      objc.ObjCBlock<objc.NSString? Function(ffi.Pointer<ffi.Void>)>(pointer, retain: retain, release: release);
-
-  /// Creates a block from a C function pointer.
-  ///
-  /// This block must be invoked by native code running on the same thread as
-  /// the isolate that registered it. Invoking the block on the wrong thread
-  /// will result in a crash.
-  static objc.ObjCBlock<objc.NSString? Function(ffi.Pointer<ffi.Void>)> fromFunctionPointer(ffi.Pointer<ffi.NativeFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void> arg0)>> ptr) =>
-      objc.ObjCBlock<objc.NSString? Function(ffi.Pointer<ffi.Void>)>(objc.newPointerBlock(_ObjCBlock_NSString_ffiVoid_fnPtrCallable, ptr.cast()),
-          retain: false, release: true);
-
-  /// Creates a block from a Dart function.
-  ///
-  /// This block must be invoked by native code running on the same thread as
-  /// the isolate that registered it. Invoking the block on the wrong thread
-  /// will result in a crash.
-  ///
-  /// If `keepIsolateAlive` is true, this block will keep this isolate alive
-  /// until it is garbage collected by both Dart and ObjC.
-  static objc.ObjCBlock<objc.NSString? Function(ffi.Pointer<ffi.Void>)> fromFunction(objc.NSString? Function(ffi.Pointer<ffi.Void> ) fn,
-          {bool keepIsolateAlive = true}) =>
-      objc.ObjCBlock<objc.NSString? Function(ffi.Pointer<ffi.Void>)>(objc.newClosureBlock(_ObjCBlock_NSString_ffiVoid_closureCallable, (ffi.Pointer<ffi.Void> arg0) => fn(arg0)?.ref.retainAndAutorelease() ?? ffi.nullptr, keepIsolateAlive),
-          retain: false, release: true);
-}
-
-/// Call operator for `objc.ObjCBlock<objc.NSString? Function(ffi.Pointer<ffi.Void>)>`.
-extension ObjCBlock_NSString_ffiVoid_CallExtension on objc.ObjCBlock<objc.NSString? Function(ffi.Pointer<ffi.Void>)> {
-  objc.NSString? call(ffi.Pointer<ffi.Void> arg0) =>ref.pointer.ref.invoke.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0)>>()
-  .asFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> )>()(
-    ref.pointer, arg0).address == 0 ? null : objc.NSString.castFromPointer(ref.pointer.ref.invoke.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0)>>()
-  .asFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> )>()(
-    ref.pointer, arg0), retain: true, release: true);
-}
-
-late final _sel_setAccessibilityIdentifier_ = objc.registerName("setAccessibilityIdentifier:");
-void _ObjCBlock_ffiVoid_ffiVoid_NSString_fnPtrTrampoline(
-    ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObject> arg1) =>
-        block.ref.target.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObject> arg1)>>()
-            .asFunction<void Function(ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObject> )>()(arg0, arg1);
-ffi.Pointer<ffi.Void> _ObjCBlock_ffiVoid_ffiVoid_NSString_fnPtrCallable = ffi.Pointer.fromFunction<
-    ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObject> )>(_ObjCBlock_ffiVoid_ffiVoid_NSString_fnPtrTrampoline ).cast();
-void _ObjCBlock_ffiVoid_ffiVoid_NSString_closureTrampoline(
-    ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObject> arg1) =>
-    (objc.getBlockClosure(block) as void Function(ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObject> ))(arg0, arg1);
-ffi.Pointer<ffi.Void> _ObjCBlock_ffiVoid_ffiVoid_NSString_closureCallable = ffi.Pointer.fromFunction<
-    ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObject> )>(_ObjCBlock_ffiVoid_ffiVoid_NSString_closureTrampoline ).cast();
-void _ObjCBlock_ffiVoid_ffiVoid_NSString_listenerTrampoline(
-    ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObject> arg1) {
-  (objc.getBlockClosure(block) as void Function(ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObject> ))(arg0, arg1);
-  objc.objectRelease(block.cast());
-}
-ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObject> )> _ObjCBlock_ffiVoid_ffiVoid_NSString_listenerCallable = ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObject> )>.listener(
-    _ObjCBlock_ffiVoid_ffiVoid_NSString_listenerTrampoline )..keepIsolateAlive = false;
-void _ObjCBlock_ffiVoid_ffiVoid_NSString_blockingTrampoline(
-    ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> waiter, ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObject> arg1) {
-  try {
-    (objc.getBlockClosure(block) as void Function(ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObject> ))(arg0, arg1);
-  } catch (e) {
-  } finally {
-    objc.signalWaiter(waiter);
-    objc.objectRelease(block.cast());
-  }
-}
-ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObject> )> _ObjCBlock_ffiVoid_ffiVoid_NSString_blockingCallable =
-    ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObject> )>.isolateLocal(
-        _ObjCBlock_ffiVoid_ffiVoid_NSString_blockingTrampoline )..keepIsolateAlive = false;
-ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObject> )> _ObjCBlock_ffiVoid_ffiVoid_NSString_blockingListenerCallable =
-    ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObject> )>.listener(
-        _ObjCBlock_ffiVoid_ffiVoid_NSString_blockingTrampoline )..keepIsolateAlive = false;
-
-/// Construction methods for `objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSString?)>`.
-abstract final class ObjCBlock_ffiVoid_ffiVoid_NSString {
-  /// Returns a block that wraps the given raw block pointer.
-  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSString?)> castFromPointer(ffi.Pointer<objc.ObjCBlockImpl> pointer,
-      {bool retain = false, bool release = false}) =>
-      objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSString?)>(pointer, retain: retain, release: release);
-
-  /// Creates a block from a C function pointer.
-  ///
-  /// This block must be invoked by native code running on the same thread as
-  /// the isolate that registered it. Invoking the block on the wrong thread
-  /// will result in a crash.
-  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSString?)> fromFunctionPointer(ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObject> arg1)>> ptr) =>
-      objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSString?)>(objc.newPointerBlock(_ObjCBlock_ffiVoid_ffiVoid_NSString_fnPtrCallable, ptr.cast()),
-          retain: false, release: true);
-
-  /// Creates a block from a Dart function.
-  ///
-  /// This block must be invoked by native code running on the same thread as
-  /// the isolate that registered it. Invoking the block on the wrong thread
-  /// will result in a crash.
-  ///
-  /// If `keepIsolateAlive` is true, this block will keep this isolate alive
-  /// until it is garbage collected by both Dart and ObjC.
-  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSString?)> fromFunction(void Function(ffi.Pointer<ffi.Void> , objc.NSString? ) fn,
-          {bool keepIsolateAlive = true}) =>
-      objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSString?)>(objc.newClosureBlock(_ObjCBlock_ffiVoid_ffiVoid_NSString_closureCallable, (ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObject> arg1) => fn(arg0, arg1.address == 0 ? null : objc.NSString.castFromPointer(arg1, retain: true, release: true)), keepIsolateAlive),
-          retain: false, release: true);
-
-  /// Creates a listener block from a Dart function.
-  ///
-  /// This is based on FFI's NativeCallable.listener, and has the same
-  /// capabilities and limitations. This block can be invoked from any thread,
-  /// but only supports void functions, and is not run synchronously. See
-  /// NativeCallable.listener for more details.
-  ///
-  /// If `keepIsolateAlive` is true, this block will keep this isolate alive
-  /// until it is garbage collected by both Dart and ObjC.
-  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSString?)> listener(void Function(ffi.Pointer<ffi.Void> , objc.NSString? ) fn,
-          {bool keepIsolateAlive = true}) {
-    final raw = objc.newClosureBlock(_ObjCBlock_ffiVoid_ffiVoid_NSString_listenerCallable.nativeFunction.cast(),
-        (ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObject> arg1) => fn(arg0, arg1.address == 0 ? null : objc.NSString.castFromPointer(arg1, retain: false, release: true)), keepIsolateAlive);
-    final wrapper = _MapLibreFFi_wrapListenerBlock_18v1jvf(raw);
-    objc.objectRelease(raw.cast());
-    return objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSString?)>(wrapper, retain: false, release: true);
-  }
-
-  /// Creates a blocking block from a Dart function.
-  ///
-  /// This callback can be invoked from any native thread, and will block the
-  /// caller until the callback is handled by the Dart isolate that created
-  /// the block. Async functions are not supported.
-  ///
-  /// If `keepIsolateAlive` is true, this block will keep this isolate alive
-  /// until it is garbage collected by both Dart and ObjC. If the owner isolate
-  /// has shut down, and the block is invoked by native code, it may block
-  /// indefinitely, or have other undefined behavior.
-  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSString?)> blocking(void Function(ffi.Pointer<ffi.Void> , objc.NSString? ) fn,
-          {bool keepIsolateAlive = true}) {
-    final raw = objc.newClosureBlock(_ObjCBlock_ffiVoid_ffiVoid_NSString_blockingCallable.nativeFunction.cast(),
-        (ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObject> arg1) => fn(arg0, arg1.address == 0 ? null : objc.NSString.castFromPointer(arg1, retain: false, release: true)), keepIsolateAlive);
-    final rawListener = objc.newClosureBlock(
-        _ObjCBlock_ffiVoid_ffiVoid_NSString_blockingListenerCallable.nativeFunction.cast(),
-        (ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObject> arg1) => fn(arg0, arg1.address == 0 ? null : objc.NSString.castFromPointer(arg1, retain: false, release: true)), keepIsolateAlive);
-    final wrapper = _MapLibreFFi_wrapBlockingBlock_18v1jvf(raw, rawListener, objc.objCContext);
-    objc.objectRelease(raw.cast());
-    objc.objectRelease(rawListener.cast());
-    return objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSString?)>(wrapper, retain: false, release: true);
-  }
-}
-
-/// Call operator for `objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSString?)>`.
-extension ObjCBlock_ffiVoid_ffiVoid_NSString_CallExtension on objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSString?)> {
-  void call(ffi.Pointer<ffi.Void> arg0, objc.NSString? arg1) =>ref.pointer.ref.invoke.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObject> arg1)>>()
-  .asFunction<void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObject> )>()(
-    ref.pointer, arg0, arg1?.ref.pointer ?? ffi.nullptr);
-}
-
-
 /// UIAccessibility
-extension UIAccessibility on UIMenuElement {
+extension UIAccessibility$1 on UIMenuElement {
 
   /// accessibilityIdentifier
   objc.NSString? get accessibilityIdentifier {
@@ -6116,8 +7354,6 @@ final _objc_msgSend_5qlg3jStret = objc.msgSendStretPointer.cast<ffi.NativeFuncti
 late final _sel_setTransform3D_ = objc.registerName("setTransform3D:");
 final _objc_msgSend_1s50tpz = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , CATransform3D )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , CATransform3D )>();
 late final _sel_contentScaleFactor = objc.registerName("contentScaleFactor");
-final _objc_msgSend_1ukqyt8 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Double Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<double Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> )>();
-final _objc_msgSend_1ukqyt8Fpret = objc.msgSendFpretPointer.cast<ffi.NativeFunction<ffi.Double Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<double Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> )>();
 late final _sel_setContentScaleFactor_ = objc.registerName("setContentScaleFactor:");
 final _objc_msgSend_hwm8nu = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , ffi.Double )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , double )>();
 late final _sel_anchorPoint = objc.registerName("anchorPoint");
@@ -6507,8 +7743,6 @@ late final _sel_setNeedsLayout = objc.registerName("setNeedsLayout");
 late final _sel_layoutIfNeeded = objc.registerName("layoutIfNeeded");
 late final _sel_layoutSubviews = objc.registerName("layoutSubviews");
 late final _sel_layoutMargins = objc.registerName("layoutMargins");
-final _objc_msgSend_ct4cu5 = objc.msgSendPointer.cast<ffi.NativeFunction<UIEdgeInsets Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<UIEdgeInsets Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> )>();
-final _objc_msgSend_ct4cu5Stret = objc.msgSendStretPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<UIEdgeInsets> , ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<void Function(ffi.Pointer<UIEdgeInsets> , ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> )>();
 late final _sel_setLayoutMargins_ = objc.registerName("setLayoutMargins:");
 final _objc_msgSend_1g8fos5 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , UIEdgeInsets )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , UIEdgeInsets )>();
 late final _sel_directionalLayoutMargins = objc.registerName("directionalLayoutMargins");
@@ -7301,7 +8535,6 @@ extension ObjCBlock_ffiVoid_CallExtension on objc.ObjCBlock<ffi.Void Function()>
 }
 
 late final _sel_performWithoutAnimation_ = objc.registerName("performWithoutAnimation:");
-final _objc_msgSend_f167m6 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCBlockImpl> )>();
 late final _sel_inheritedAnimationDuration = objc.registerName("inheritedAnimationDuration");
 
 /// UIViewAnimation
@@ -7967,7 +9200,6 @@ late final _sel_alignmentRectForFrame_ = objc.registerName("alignmentRectForFram
 final _objc_msgSend_1gn1s3d = objc.msgSendPointer.cast<ffi.NativeFunction<objc.CGRect Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , objc.CGRect )>>().asFunction<objc.CGRect Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , objc.CGRect )>();
 final _objc_msgSend_1gn1s3dStret = objc.msgSendStretPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.CGRect> , ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , objc.CGRect )>>().asFunction<void Function(ffi.Pointer<objc.CGRect> , ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , objc.CGRect )>();
 late final _sel_frameForAlignmentRect_ = objc.registerName("frameForAlignmentRect:");
-late final _sel_alignmentRectInsets = objc.registerName("alignmentRectInsets");
 late final _sel_viewForBaselineLayout = objc.registerName("viewForBaselineLayout");
 late final _sel_viewForFirstBaselineLayout = objc.registerName("viewForFirstBaselineLayout");
 late final _sel_viewForLastBaselineLayout = objc.registerName("viewForLastBaselineLayout");
@@ -8850,7 +10082,7 @@ extension UITextField on UIView {
 
 
 /// UIAccessibility
-extension UIAccessibility$1 on UIView {
+extension UIAccessibility$2 on UIView {
 
   /// accessibilityIdentifier
   objc.NSString? get accessibilityIdentifier {
@@ -9418,7 +10650,6 @@ final _objc_msgSend_15yz4e6 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Po
 late final _sel_isUserInteractionEnabled = objc.registerName("isUserInteractionEnabled");
 late final _sel_setUserInteractionEnabled_ = objc.registerName("setUserInteractionEnabled:");
 late final _sel_tag = objc.registerName("tag");
-final _objc_msgSend_1hz7y9r = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Long Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> )>();
 late final _sel_setTag_ = objc.registerName("setTag:");
 final _objc_msgSend_4sp4xj = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , ffi.Long )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , int )>();
 late final _sel_layer = objc.registerName("layer");
@@ -9598,27 +10829,6 @@ extension ObjCBlock_instancetype_ffiVoid_NSArray_CallExtension on objc.ObjCBlock
   Dartinstancetype call(ffi.Pointer<ffi.Void> arg0, objc.NSArray arg1) =>objc.ObjCObjectBase(ref.pointer.ref.invoke.cast<ffi.NativeFunction<instancetype Function(ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObject> arg1)>>()
   .asFunction<instancetype Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObject> )>()(
     ref.pointer, arg0, arg1.ref.pointer), retain: true, release: true);
-}
-
-
-/// WARNING: UITraitCollection is a stub. To generate bindings for this class, include
-/// UITraitCollection in your config's objc-interfaces list.
-///
-/// UITraitCollection
-class UITraitCollection extends objc.NSObject implements objc.NSCopying, objc.NSSecureCoding {
-  UITraitCollection._(ffi.Pointer<objc.ObjCObject> pointer, {bool retain = false, bool release = false}) :
-      super.castFromPointer(pointer, retain: retain, release: release) { objc.checkOsVersionInternal('UITraitCollection', iOS: (false, (8, 0, 0))); }
-
-  /// Constructs a [UITraitCollection] that points to the same underlying object as [other].
-  UITraitCollection.castFrom(objc.ObjCObjectBase other) :
-      this._(other.ref.pointer, retain: true, release: true);
-
-  /// Constructs a [UITraitCollection] that wraps the given raw object pointer.
-  UITraitCollection.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
-      {bool retain = false, bool release = false}) :
-      this._(other, retain: retain, release: release);
-
-
 }
 
 late final _sel_appearanceForTraitCollection_ = objc.registerName("appearanceForTraitCollection:");
@@ -10263,7 +11473,6 @@ extension ObjCBlock_UIBezierPath_ffiVoid_CallExtension on objc.ObjCBlock<UIBezie
     ref.pointer, arg0), retain: true, release: true);
 }
 
-late final _sel_traitCollection = objc.registerName("traitCollection");
 ffi.Pointer<objc.ObjCObject> _ObjCBlock_UITraitCollection_ffiVoid_fnPtrTrampoline(
     ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0) =>
         block.ref.target.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void> arg0)>>()
@@ -22793,6 +24002,27 @@ enum UIBlurEffectStyle {
 
 }
 
+
+/// WARNING: UIGraphicsRendererFormat is a stub. To generate bindings for this class, include
+/// UIGraphicsRendererFormat in your config's objc-interfaces list.
+///
+/// UIGraphicsRendererFormat
+class UIGraphicsRendererFormat extends objc.NSObject implements objc.NSCopying {
+  UIGraphicsRendererFormat._(ffi.Pointer<objc.ObjCObject> pointer, {bool retain = false, bool release = false}) :
+      super.castFromPointer(pointer, retain: retain, release: release) { objc.checkOsVersionInternal('UIGraphicsRendererFormat', iOS: (false, (10, 0, 0))); }
+
+  /// Constructs a [UIGraphicsRendererFormat] that points to the same underlying object as [other].
+  UIGraphicsRendererFormat.castFrom(objc.ObjCObjectBase other) :
+      this._(other.ref.pointer, retain: true, release: true);
+
+  /// Constructs a [UIGraphicsRendererFormat] that wraps the given raw object pointer.
+  UIGraphicsRendererFormat.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false}) :
+      this._(other, retain: retain, release: release);
+
+
+}
+
 enum UIGraphicsImageRendererFormatRange {
   UIGraphicsImageRendererFormatRangeUnspecified(-1),
   UIGraphicsImageRendererFormatRangeAutomatic(0),
@@ -23146,6 +24376,404 @@ enum UIScreenReferenceDisplayModeStatus {
     3 => UIScreenReferenceDisplayModeStatusEnabled,
     _ => throw ArgumentError('Unknown value for UIScreenReferenceDisplayModeStatus: $value'),
   };
+
+}
+
+late final _class_UIScreen = objc.getClass("UIKit.UIScreen");
+
+/// UISnapshotting
+extension UISnapshotting$1 on UIScreen {
+
+  /// snapshotViewAfterScreenUpdates:
+  UIView snapshotViewAfterScreenUpdates(bool afterUpdates) {
+  objc.checkOsVersionInternal('UIScreen.snapshotViewAfterScreenUpdates:', iOS: (false, (7, 0, 0)));
+    final _ret = _objc_msgSend_1t6aok9(this.ref.pointer, _sel_snapshotViewAfterScreenUpdates_, afterUpdates);
+    return UIView.castFromPointer(_ret, retain: true, release: true);
+  }
+
+}
+
+late final _sel_screens = objc.registerName("screens");
+late final _sel_mainScreen = objc.registerName("mainScreen");
+late final _sel_availableModes = objc.registerName("availableModes");
+
+/// WARNING: UIScreenMode is a stub. To generate bindings for this class, include
+/// UIScreenMode in your config's objc-interfaces list.
+///
+/// UIScreenMode
+class UIScreenMode extends objc.NSObject {
+  UIScreenMode._(ffi.Pointer<objc.ObjCObject> pointer, {bool retain = false, bool release = false}) :
+      super.castFromPointer(pointer, retain: retain, release: release) { objc.checkOsVersionInternal('UIScreenMode', iOS: (false, (3, 2, 0))); }
+
+  /// Constructs a [UIScreenMode] that points to the same underlying object as [other].
+  UIScreenMode.castFrom(objc.ObjCObjectBase other) :
+      this._(other.ref.pointer, retain: true, release: true);
+
+  /// Constructs a [UIScreenMode] that wraps the given raw object pointer.
+  UIScreenMode.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false}) :
+      this._(other, retain: retain, release: release);
+
+
+}
+
+late final _sel_preferredMode = objc.registerName("preferredMode");
+late final _sel_currentMode = objc.registerName("currentMode");
+late final _sel_setCurrentMode_ = objc.registerName("setCurrentMode:");
+late final _sel_overscanCompensation = objc.registerName("overscanCompensation");
+final _objc_msgSend_8mvtpi = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Long Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> )>();
+late final _sel_setOverscanCompensation_ = objc.registerName("setOverscanCompensation:");
+final _objc_msgSend_1mz4wgw = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , ffi.Long )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> , int )>();
+late final _sel_overscanCompensationInsets = objc.registerName("overscanCompensationInsets");
+late final _sel_mirroredScreen = objc.registerName("mirroredScreen");
+late final _sel_isCaptured = objc.registerName("isCaptured");
+late final _sel_brightness = objc.registerName("brightness");
+late final _sel_setBrightness_ = objc.registerName("setBrightness:");
+late final _sel_wantsSoftwareDimming = objc.registerName("wantsSoftwareDimming");
+late final _sel_setWantsSoftwareDimming_ = objc.registerName("setWantsSoftwareDimming:");
+late final _sel_fixedCoordinateSpace = objc.registerName("fixedCoordinateSpace");
+late final _sel_nativeBounds = objc.registerName("nativeBounds");
+late final _sel_nativeScale = objc.registerName("nativeScale");
+late final _sel_displayLinkWithTarget_selector_ = objc.registerName("displayLinkWithTarget:selector:");
+late final _sel_maximumFramesPerSecond = objc.registerName("maximumFramesPerSecond");
+late final _sel_calibratedLatency = objc.registerName("calibratedLatency");
+late final _sel_referenceDisplayModeStatus = objc.registerName("referenceDisplayModeStatus");
+final _objc_msgSend_1wd735b = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Long Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObject> , ffi.Pointer<objc.ObjCSelector> )>();
+late final _sel_currentEDRHeadroom = objc.registerName("currentEDRHeadroom");
+late final _sel_potentialEDRHeadroom = objc.registerName("potentialEDRHeadroom");
+late final _sel_focusedItem = objc.registerName("focusedItem");
+late final _sel_focusedView = objc.registerName("focusedView");
+late final _sel_supportsFocus = objc.registerName("supportsFocus");
+late final _sel_applicationFrame = objc.registerName("applicationFrame");
+
+/// UIScreen
+class UIScreen extends objc.NSObject implements UITraitEnvironment {
+  UIScreen._(ffi.Pointer<objc.ObjCObject> pointer, {bool retain = false, bool release = false}) :
+      super.castFromPointer(pointer, retain: retain, release: release) { objc.checkOsVersionInternal('UIScreen', iOS: (false, (2, 0, 0))); }
+
+  /// Constructs a [UIScreen] that points to the same underlying object as [other].
+  UIScreen.castFrom(objc.ObjCObjectBase other) :
+      this._(other.ref.pointer, retain: true, release: true);
+
+  /// Constructs a [UIScreen] that wraps the given raw object pointer.
+  UIScreen.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false}) :
+      this._(other, retain: retain, release: release);
+
+  /// Returns whether [obj] is an instance of [UIScreen].
+  static bool isInstance(objc.ObjCObjectBase obj) {
+    return _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_UIScreen);
+  }
+
+  /// screens
+  static objc.NSArray getScreens() {
+  objc.checkOsVersionInternal('UIScreen.screens', iOS: (false, (3, 2, 0)));
+    final _ret = _objc_msgSend_151sglz(_class_UIScreen, _sel_screens);
+    return objc.NSArray.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// mainScreen
+  static UIScreen getMainScreen() {
+  objc.checkOsVersionInternal('UIScreen.mainScreen', iOS: (false, (2, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(_class_UIScreen, _sel_mainScreen);
+    return UIScreen.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// bounds
+  objc.CGRect get bounds {
+  objc.checkOsVersionInternal('UIScreen.bounds', iOS: (false, (2, 0, 0)));
+    final _ptr = pkg_ffi.calloc<objc.CGRect>();
+    objc.useMsgSendVariants ? _objc_msgSend_bu1hbwStret(_ptr, this.ref.pointer, _sel_bounds) : _ptr.ref = _objc_msgSend_bu1hbw(this.ref.pointer, _sel_bounds);
+    final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
+        ffi.sizeOf<objc.CGRect>(), finalizer: pkg_ffi.calloc.nativeFree);
+    return ffi.Struct.create<objc.CGRect>(_finalizable);
+
+  }
+
+
+  /// scale
+  double get scale {
+  objc.checkOsVersionInternal('UIScreen.scale', iOS: (false, (4, 0, 0)));
+    return objc.useMsgSendVariants ? _objc_msgSend_1ukqyt8Fpret(this.ref.pointer, _sel_scale) : _objc_msgSend_1ukqyt8(this.ref.pointer, _sel_scale);
+
+  }
+
+
+  /// availableModes
+  objc.NSArray get availableModes {
+  objc.checkOsVersionInternal('UIScreen.availableModes', iOS: (false, (3, 2, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_availableModes);
+    return objc.NSArray.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// preferredMode
+  UIScreenMode? get preferredMode {
+  objc.checkOsVersionInternal('UIScreen.preferredMode', iOS: (false, (4, 3, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_preferredMode);
+    return _ret.address == 0 ? null : UIScreenMode.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// currentMode
+  UIScreenMode? get currentMode {
+  objc.checkOsVersionInternal('UIScreen.currentMode', iOS: (false, (3, 2, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_currentMode);
+    return _ret.address == 0 ? null : UIScreenMode.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// setCurrentMode:
+  set currentMode(UIScreenMode? value) {
+  objc.checkOsVersionInternal('UIScreen.setCurrentMode:', iOS: (false, (3, 2, 0)));
+_objc_msgSend_xtuoz7(this.ref.pointer, _sel_setCurrentMode_, value?.ref.pointer ?? ffi.nullptr);
+
+  }
+
+
+  /// overscanCompensation
+  UIScreenOverscanCompensation get overscanCompensation {
+  objc.checkOsVersionInternal('UIScreen.overscanCompensation', iOS: (false, (5, 0, 0)));
+    final _ret = _objc_msgSend_8mvtpi(this.ref.pointer, _sel_overscanCompensation);
+    return UIScreenOverscanCompensation.fromValue(_ret);
+  }
+
+
+  /// setOverscanCompensation:
+  set overscanCompensation(UIScreenOverscanCompensation value) {
+  objc.checkOsVersionInternal('UIScreen.setOverscanCompensation:', iOS: (false, (5, 0, 0)));
+_objc_msgSend_1mz4wgw(this.ref.pointer, _sel_setOverscanCompensation_, value.value);
+
+  }
+
+
+  /// overscanCompensationInsets
+  UIEdgeInsets get overscanCompensationInsets {
+  objc.checkOsVersionInternal('UIScreen.overscanCompensationInsets', iOS: (false, (9, 0, 0)));
+    final _ptr = pkg_ffi.calloc<UIEdgeInsets>();
+    objc.useMsgSendVariants ? _objc_msgSend_ct4cu5Stret(_ptr, this.ref.pointer, _sel_overscanCompensationInsets) : _ptr.ref = _objc_msgSend_ct4cu5(this.ref.pointer, _sel_overscanCompensationInsets);
+    final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
+        ffi.sizeOf<UIEdgeInsets>(), finalizer: pkg_ffi.calloc.nativeFree);
+    return ffi.Struct.create<UIEdgeInsets>(_finalizable);
+
+  }
+
+
+  /// mirroredScreen
+  UIScreen? get mirroredScreen {
+  objc.checkOsVersionInternal('UIScreen.mirroredScreen', iOS: (false, (4, 3, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_mirroredScreen);
+    return _ret.address == 0 ? null : UIScreen.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// isCaptured
+  bool get captured {
+  objc.checkOsVersionInternal('UIScreen.isCaptured', iOS: (false, (11, 0, 0)));
+    return _objc_msgSend_91o635(this.ref.pointer, _sel_isCaptured);
+
+  }
+
+
+  /// brightness
+  double get brightness {
+  objc.checkOsVersionInternal('UIScreen.brightness', iOS: (false, (5, 0, 0)));
+    return objc.useMsgSendVariants ? _objc_msgSend_1ukqyt8Fpret(this.ref.pointer, _sel_brightness) : _objc_msgSend_1ukqyt8(this.ref.pointer, _sel_brightness);
+
+  }
+
+
+  /// setBrightness:
+  set brightness(double value) {
+  objc.checkOsVersionInternal('UIScreen.setBrightness:', iOS: (false, (5, 0, 0)));
+_objc_msgSend_hwm8nu(this.ref.pointer, _sel_setBrightness_, value);
+
+  }
+
+
+  /// wantsSoftwareDimming
+  bool get wantsSoftwareDimming {
+  objc.checkOsVersionInternal('UIScreen.wantsSoftwareDimming', iOS: (false, (5, 0, 0)));
+    return _objc_msgSend_91o635(this.ref.pointer, _sel_wantsSoftwareDimming);
+
+  }
+
+
+  /// setWantsSoftwareDimming:
+  set wantsSoftwareDimming(bool value) {
+  objc.checkOsVersionInternal('UIScreen.setWantsSoftwareDimming:', iOS: (false, (5, 0, 0)));
+_objc_msgSend_1s56lr9(this.ref.pointer, _sel_setWantsSoftwareDimming_, value);
+
+  }
+
+
+  /// coordinateSpace
+  UICoordinateSpace get coordinateSpace {
+  objc.checkOsVersionInternal('UIScreen.coordinateSpace', iOS: (false, (8, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_coordinateSpace);
+    return UICoordinateSpace.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// fixedCoordinateSpace
+  UICoordinateSpace get fixedCoordinateSpace {
+  objc.checkOsVersionInternal('UIScreen.fixedCoordinateSpace', iOS: (false, (8, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_fixedCoordinateSpace);
+    return UICoordinateSpace.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// nativeBounds
+  objc.CGRect get nativeBounds {
+  objc.checkOsVersionInternal('UIScreen.nativeBounds', iOS: (false, (8, 0, 0)));
+    final _ptr = pkg_ffi.calloc<objc.CGRect>();
+    objc.useMsgSendVariants ? _objc_msgSend_bu1hbwStret(_ptr, this.ref.pointer, _sel_nativeBounds) : _ptr.ref = _objc_msgSend_bu1hbw(this.ref.pointer, _sel_nativeBounds);
+    final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
+        ffi.sizeOf<objc.CGRect>(), finalizer: pkg_ffi.calloc.nativeFree);
+    return ffi.Struct.create<objc.CGRect>(_finalizable);
+
+  }
+
+
+  /// nativeScale
+  double get nativeScale {
+  objc.checkOsVersionInternal('UIScreen.nativeScale', iOS: (false, (8, 0, 0)));
+    return objc.useMsgSendVariants ? _objc_msgSend_1ukqyt8Fpret(this.ref.pointer, _sel_nativeScale) : _objc_msgSend_1ukqyt8(this.ref.pointer, _sel_nativeScale);
+
+  }
+
+
+  /// displayLinkWithTarget:selector:
+  CADisplayLink? displayLinkWithTarget(objc.ObjCObjectBase target, {required ffi.Pointer<objc.ObjCSelector> selector}) {
+  objc.checkOsVersionInternal('UIScreen.displayLinkWithTarget:selector:', iOS: (false, (4, 0, 0)));
+    final _ret = _objc_msgSend_836y90(this.ref.pointer, _sel_displayLinkWithTarget_selector_, target.ref.pointer, selector);
+    return _ret.address == 0 ? null : CADisplayLink.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// maximumFramesPerSecond
+  int get maximumFramesPerSecond {
+  objc.checkOsVersionInternal('UIScreen.maximumFramesPerSecond', iOS: (false, (10, 3, 0)));
+    return _objc_msgSend_1hz7y9r(this.ref.pointer, _sel_maximumFramesPerSecond);
+
+  }
+
+
+  /// calibratedLatency
+  double get calibratedLatency {
+  objc.checkOsVersionInternal('UIScreen.calibratedLatency', iOS: (false, (13, 0, 0)));
+    return objc.useMsgSendVariants ? _objc_msgSend_1ukqyt8Fpret(this.ref.pointer, _sel_calibratedLatency) : _objc_msgSend_1ukqyt8(this.ref.pointer, _sel_calibratedLatency);
+
+  }
+
+
+  /// referenceDisplayModeStatus
+  UIScreenReferenceDisplayModeStatus get referenceDisplayModeStatus {
+  objc.checkOsVersionInternal('UIScreen.referenceDisplayModeStatus', iOS: (false, (16, 0, 0)));
+    final _ret = _objc_msgSend_1wd735b(this.ref.pointer, _sel_referenceDisplayModeStatus);
+    return UIScreenReferenceDisplayModeStatus.fromValue(_ret);
+  }
+
+
+  /// currentEDRHeadroom
+  double get currentEDRHeadroom {
+  objc.checkOsVersionInternal('UIScreen.currentEDRHeadroom', iOS: (false, (16, 0, 0)));
+    return objc.useMsgSendVariants ? _objc_msgSend_1ukqyt8Fpret(this.ref.pointer, _sel_currentEDRHeadroom) : _objc_msgSend_1ukqyt8(this.ref.pointer, _sel_currentEDRHeadroom);
+
+  }
+
+
+  /// potentialEDRHeadroom
+  double get potentialEDRHeadroom {
+  objc.checkOsVersionInternal('UIScreen.potentialEDRHeadroom', iOS: (false, (16, 0, 0)));
+    return objc.useMsgSendVariants ? _objc_msgSend_1ukqyt8Fpret(this.ref.pointer, _sel_potentialEDRHeadroom) : _objc_msgSend_1ukqyt8(this.ref.pointer, _sel_potentialEDRHeadroom);
+
+  }
+
+
+  /// focusedItem
+  UIFocusItem? get focusedItem {
+  objc.checkOsVersionInternal('UIScreen.focusedItem', iOS: (false, (10, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_focusedItem);
+    return _ret.address == 0 ? null : UIFocusItem.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// focusedView
+  UIView? get focusedView {
+  objc.checkOsVersionInternal('UIScreen.focusedView', iOS: (false, (9, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_focusedView);
+    return _ret.address == 0 ? null : UIView.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// supportsFocus
+  bool get supportsFocus {
+  objc.checkOsVersionInternal('UIScreen.supportsFocus', iOS: (false, (9, 0, 0)));
+    return _objc_msgSend_91o635(this.ref.pointer, _sel_supportsFocus);
+
+  }
+
+
+  /// applicationFrame
+  objc.CGRect get applicationFrame {
+  objc.checkOsVersionInternal('UIScreen.applicationFrame', iOS: (false, (2, 0, 0)));
+    final _ptr = pkg_ffi.calloc<objc.CGRect>();
+    objc.useMsgSendVariants ? _objc_msgSend_bu1hbwStret(_ptr, this.ref.pointer, _sel_applicationFrame) : _ptr.ref = _objc_msgSend_bu1hbw(this.ref.pointer, _sel_applicationFrame);
+    final _finalizable = _ptr.cast<ffi.Uint8>().asTypedList(
+        ffi.sizeOf<objc.CGRect>(), finalizer: pkg_ffi.calloc.nativeFree);
+    return ffi.Struct.create<objc.CGRect>(_finalizable);
+
+  }
+
+
+  /// init
+  UIScreen init() {
+  objc.checkOsVersionInternal('UIScreen.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.retainAndReturnPointer(), _sel_init);
+    return UIScreen.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// new
+  static UIScreen new$() {
+    final _ret = _objc_msgSend_151sglz(_class_UIScreen, _sel_new);
+    return UIScreen.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static UIScreen allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final _ret = _objc_msgSend_1cwp428(_class_UIScreen, _sel_allocWithZone_, zone);
+    return UIScreen.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// alloc
+  static UIScreen alloc() {
+    final _ret = _objc_msgSend_151sglz(_class_UIScreen, _sel_alloc);
+    return UIScreen.castFromPointer(_ret, retain: false, release: true);
+  }
+
+
+  /// traitCollection
+  UITraitCollection get traitCollection {
+  objc.checkOsVersionInternal('UIScreen.traitCollection', iOS: (false, (8, 0, 0)));
+    final _ret = _objc_msgSend_151sglz(this.ref.pointer, _sel_traitCollection);
+    return UITraitCollection.castFromPointer(_ret, retain: true, release: true);
+  }
+
+
+  /// traitCollectionDidChange:
+  void traitCollectionDidChange(UITraitCollection? previousTraitCollection) {
+  objc.checkOsVersionInternal('UIScreen.traitCollectionDidChange:', iOS: (false, (8, 0, 0)));
+_objc_msgSend_xtuoz7(this.ref.pointer, _sel_traitCollectionDidChange_, previousTraitCollection?.ref.pointer ?? ffi.nullptr);
+
+  }
+  /// Returns a new instance of UIScreen constructed with the default `new` method.
+  factory UIScreen() => new$();
 
 }
 

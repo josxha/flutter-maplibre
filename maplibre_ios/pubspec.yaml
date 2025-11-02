@@ -38,6 +38,7 @@ ffigen:
     include:
       - 'MLN.*'
       - 'FlutterApi'
+      - 'FlutterPlatformView'
   objc-interfaces:
     include:
       - 'NSString'

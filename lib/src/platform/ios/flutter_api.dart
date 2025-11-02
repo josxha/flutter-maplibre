@@ -5,7 +5,7 @@ import 'package:maplibre_ios/maplibre_ffi.dart' as ffi;
 void createFlutterApi() => ffi.FlutterApi.implement(
   createPlatformViewWithViewId_: (viewId) {
     final view2 = ffi.UIView();
-    final view = ffi.FlutterPlatformView.castFrom(other);
+    final view = ffi.FlutterPlatformView.implement()..view = ;
     Registry.platformViews[viewId] = view;
     return view;
   },
