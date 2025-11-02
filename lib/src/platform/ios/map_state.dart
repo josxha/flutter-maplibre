@@ -10,7 +10,7 @@ import 'package:maplibre/src/platform/ios/extensions.dart';
 import 'package:maplibre/src/platform/ios/flutter_api.dart';
 import 'package:maplibre/src/platform/map_state_native.dart';
 import 'package:maplibre/src/platform/pigeon.g.dart' as pigeon;
-import 'package:maplibre_ios/maplibre_ffi.dart';
+import 'package:maplibre_ios/maplibre_ffi.dart' as ffi;
 import 'package:objective_c/objective_c.dart';
 
 part 'style_controller.dart';
@@ -21,11 +21,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     implements pigeon.MapLibreFlutterApi {
   late final pigeon.MapLibreHostApi _hostApi;
   late final int _viewId;
-  MLNMapView? _cachedMapView;
-
-  MLNMapView get _mapView => _cachedMapView ??= MLNMapView.castFrom(
-    MapLibreRegistry.getMapWithViewId(_viewId)!,
-  );
+  ffi.MLNMapView? _ffiMap;
 
   @override
   StyleControllerIos? style;
@@ -33,7 +29,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   @override
   Widget buildPlatformWidget(BuildContext context) {
     const viewType = 'plugins.flutter.io/maplibre';
-    MapLibreRegistry.setFlutterApi(createFlutterApi());
+    ffi.MapLibreRegistry.setFlutterApi(createFlutterApi());
 
     return UiKitView(
       viewType: viewType,
@@ -46,10 +42,12 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   /// This method gets called when the platform view is created. It is not
   /// guaranteed that the map is ready.
   void _onPlatformViewCreated(int viewId) {
+    _viewId = viewId;
+    final ffiMap = _ffiMap = ffi.MLNMapView();
+
     final channelSuffix = viewId.toString();
     _hostApi = pigeon.MapLibreHostApi(messageChannelSuffix: channelSuffix);
     pigeon.MapLibreFlutterApi.setUp(this, messageChannelSuffix: channelSuffix);
-    _viewId = viewId;
   }
 
   @override
@@ -62,14 +60,14 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     double webSpeed = 1.2,
     Duration? webMaxDuration,
   }) async {
-    if (zoom != null) _mapView.zoomLevel = zoom;
-    final ffiCamera = _mapView.camera;
+    if (zoom != null) _ffiMap?.zoomLevel = zoom;
+    final ffiCamera = _ffiMap!.camera;
     if (pitch != null) ffiCamera.pitch = pitch;
     if (bearing != null) ffiCamera.heading = bearing;
     if (center != null) {
       ffiCamera.centerCoordinate = center.toCLLocationCoordinate2D();
     }
-    _mapView.flyToCamera$1(
+    _ffiMap?.flyToCamera$1(
       ffiCamera,
       withDuration: nativeDuration.inMicroseconds / 1000000,
     );
@@ -85,7 +83,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     bool pulse = true,
     BearingRenderMode bearingRenderMode = BearingRenderMode.gps,
   }) async {
-    _mapView.showsUserLocation = true;
+    _ffiMap?.showsUserLocation = true;
     // TODO: apply bearingRenderMode
   }
 
@@ -104,15 +102,15 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   }) async {
     final ffiBounds = bounds.toMLNCoordinateBounds();
     // TODO support padding with Struct UIEdgeInsets
-    _mapView.setVisibleCoordinateBounds(ffiBounds, animated: true);
+    _ffiMap?.setVisibleCoordinateBounds(ffiBounds, animated: true);
   }
 
   @override
   MapCamera getCamera() {
-    final ffiCamera = _mapView.camera;
+    final ffiCamera = _ffiMap!.camera;
     return MapCamera(
       center: ffiCamera.centerCoordinate.toGeographic(),
-      zoom: _mapView.zoomLevel,
+      zoom: _ffiMap!.zoomLevel,
       bearing: ffiCamera.heading,
       pitch: ffiCamera.pitch,
     );
@@ -125,21 +123,21 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     double? bearing,
     double? pitch,
   }) async {
-    if (zoom != null) _mapView.zoomLevel = zoom;
-    final ffiCamera = _mapView.camera;
+    if (zoom != null) _ffiMap?.zoomLevel = zoom;
+    final ffiCamera = _ffiMap!.camera;
     if (pitch != null) ffiCamera.pitch = pitch;
     if (bearing != null) ffiCamera.heading = bearing;
     if (center != null) {
       ffiCamera.centerCoordinate = center.toCLLocationCoordinate2D();
     }
-    _mapView.setCamera(ffiCamera, animated: false);
+    _ffiMap?.setCamera(ffiCamera, animated: false);
   }
 
   @override
   void onStyleLoaded() {
     // We need to refresh the cached style for when the style reloads.
     style?.dispose();
-    final styleCtrl = style = StyleControllerIos._(_mapView.style!, _hostApi);
+    final styleCtrl = style = StyleControllerIos._(_ffiMap!.style!, _hostApi);
 
     widget.onEvent?.call(MapEventStyleLoaded(styleCtrl));
     widget.onStyleLoaded?.call(styleCtrl);
@@ -164,34 +162,34 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   Future<void> _updateOptions(MapLibreMap oldWidget) async {
     final oldOptions = oldWidget.options;
     final options = this.options;
-    _mapView.minimumZoomLevel = options.minZoom;
-    _mapView.maximumZoomLevel = options.maxZoom;
-    _mapView.minimumPitch = options.minPitch;
-    _mapView.maximumPitch = options.maxPitch;
+    _ffiMap?.minimumZoomLevel = options.minZoom;
+    _ffiMap?.maximumZoomLevel = options.maxZoom;
+    _ffiMap?.minimumPitch = options.minPitch;
+    _ffiMap?.maximumPitch = options.maxPitch;
 
     // map bounds
     final oldBounds = oldOptions.maxBounds;
     final newBounds = options.maxBounds;
     if (oldBounds != null && newBounds == null) {
-      _mapView.maximumScreenBounds = Struct.create<MLNCoordinateBounds>();
+      _ffiMap?.maximumScreenBounds = Struct.create<ffi.MLNCoordinateBounds>();
     } else if ((oldBounds == null && newBounds != null) ||
         (newBounds != null && oldBounds != newBounds)) {
       final bounds = newBounds.toMLNCoordinateBounds();
-      _mapView.maximumScreenBounds = bounds;
+      _ffiMap?.maximumScreenBounds = bounds;
     }
 
     // gestures
     if (options.gestures.rotate != oldOptions.gestures.rotate) {
-      _mapView.rotateEnabled = options.gestures.rotate;
+      _ffiMap?.rotateEnabled = options.gestures.rotate;
     }
     if (options.gestures.pan != oldOptions.gestures.pan) {
-      _mapView.scrollEnabled = options.gestures.pan;
+      _ffiMap?.scrollEnabled = options.gestures.pan;
     }
     if (options.gestures.zoom != oldOptions.gestures.zoom) {
-      _mapView.zoomEnabled = options.gestures.zoom;
+      _ffiMap?.zoomEnabled = options.gestures.zoom;
     }
     if (options.gestures.pitch != oldOptions.gestures.pitch) {
-      _mapView.pitchEnabled = options.gestures.pitch;
+      _ffiMap?.pitchEnabled = options.gestures.pitch;
     }
   }
 
@@ -207,7 +205,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   }
 
   List<RenderedFeature> _nativeQueryToRenderedFeatures(NSArray query) {
-    final features = query.map(MLNFeatureWrapper.castFrom);
+    final features = query.map(ffi.MLNFeatureWrapper.castFrom);
     return features
         .map(
           (f) => RenderedFeature(
@@ -234,7 +232,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
       return [];
     }
 
-    final query = _mapView.visibleFeaturesAtPoint$1(
+    final query = _ffiMap!.visibleFeaturesAtPoint$1(
       point.toCGPoint(),
       inStyleLayersWithIdentifiers: layerIds == null
           ? null
@@ -258,7 +256,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
       return [];
     }
 
-    final query = _mapView.visibleFeaturesInRect$1(
+    final query = _ffiMap!.visibleFeaturesInRect$1(
       rect.toCGRect(),
       inStyleLayersWithIdentifiers: layerIds == null
           ? null
@@ -278,13 +276,13 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     final queriedLayers = <QueriedLayer>[];
     for (var i = layers.length - 1; i >= 0; i--) {
       final layer = layers[i];
-      final features = _mapView.visibleFeaturesAtPoint$1(
+      final features = _ffiMap!.visibleFeaturesAtPoint$1(
         point,
         inStyleLayersWithIdentifiers: NSSet.setWithObject(layer.identifier),
       );
       if (features.count == 0) continue;
-      if (features.isNotEmpty && MLNVectorStyleLayer.isInstance(layer)) {
-        final vectorLayer = MLNVectorStyleLayer.castFrom(layer);
+      if (features.isNotEmpty && ffi.MLNVectorStyleLayer.isInstance(layer)) {
+        final vectorLayer = ffi.MLNVectorStyleLayer.castFrom(layer);
         final queriedLayer = QueriedLayer(
           layerId: layer.identifier.toDartString(),
           sourceId: vectorLayer.sourceIdentifier?.toDartString(),
@@ -302,25 +300,27 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     BearingTrackMode trackBearing = BearingTrackMode.gps,
   }) async {
     if (!trackLocation) {
-      _mapView.userTrackingMode = MLNUserTrackingMode.MLNUserTrackingModeNone;
+      _ffiMap?.userTrackingMode =
+          ffi.MLNUserTrackingMode.MLNUserTrackingModeNone;
       return;
     }
-    _mapView.userTrackingMode = switch (trackBearing) {
-      BearingTrackMode.none => MLNUserTrackingMode.MLNUserTrackingModeFollow,
+    _ffiMap?.userTrackingMode = switch (trackBearing) {
+      BearingTrackMode.none =>
+        ffi.MLNUserTrackingMode.MLNUserTrackingModeFollow,
       BearingTrackMode.compass =>
-        MLNUserTrackingMode.MLNUserTrackingModeFollowWithHeading,
+        ffi.MLNUserTrackingMode.MLNUserTrackingModeFollowWithHeading,
       BearingTrackMode.gps =>
-        MLNUserTrackingMode.MLNUserTrackingModeFollowWithCourse,
+        ffi.MLNUserTrackingMode.MLNUserTrackingModeFollowWithCourse,
     };
   }
 
   @override
   double getMetersPerPixelAtLatitude(double latitude) =>
-      _mapView.metersPerPointAtLatitude(latitude);
+      _ffiMap!.metersPerPointAtLatitude(latitude);
 
   @override
   LngLatBounds getVisibleRegion() {
-    final bounds = _mapView.visibleCoordinateBounds;
+    final bounds = _ffiMap!.visibleCoordinateBounds;
     return LngLatBounds(
       longitudeWest: bounds.sw.longitude,
       longitudeEast: bounds.ne.longitude,
@@ -330,8 +330,8 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   }
 
   @override
-  Geographic toLngLat(Offset screenLocation) => _mapView
-      .convertPoint_(screenLocation.toCGPoint(), view: _mapView)
+  Geographic toLngLat(Offset screenLocation) => _ffiMap!
+      .convertPoint_(screenLocation.toCGPoint(), view: _ffiMap)
       .toGeographic();
 
   @override
@@ -339,10 +339,10 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
       screenLocations.map(toLngLat).toList(growable: false);
 
   @override
-  Offset toScreenLocation(Geographic lngLat) => _mapView
+  Offset toScreenLocation(Geographic lngLat) => _ffiMap!
       .convertCoordinate(
         lngLat.toCLLocationCoordinate2D(),
-        toPointToView: _mapView,
+        toPointToView: _ffiMap,
       )
       .toOffset();
 
@@ -355,18 +355,18 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     final trimmed = style.trim();
     if (trimmed.startsWith('{')) {
       // Raw JSON
-      _mapView.styleJSON = trimmed.toNSString();
+      _ffiMap?.styleJSON = trimmed.toNSString();
     } else if (trimmed.startsWith('/')) {
-      _mapView.styleURL = 'file://$trimmed'.toNSURL()!;
+      _ffiMap?.styleURL = 'file://$trimmed'.toNSURL()!;
     } else if (!trimmed.startsWith('http://') &&
         !trimmed.startsWith('https://') &&
         !trimmed.startsWith('mapbox://')) {
       // flutter asset
       final content = await rootBundle.loadString(trimmed);
-      _mapView.styleJSON = content.toNSString();
+      _ffiMap?.styleJSON = content.toNSString();
     } else {
       // URI
-      _mapView.styleURL = trimmed.toNSURL()!;
+      _ffiMap?.styleURL = trimmed.toNSURL()!;
     }
   }
 

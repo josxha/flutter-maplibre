@@ -4,7 +4,7 @@ part of 'map_state.dart';
 class StyleControllerIos extends StyleController {
   StyleControllerIos._(this._ffiStyle, this._hostApi);
 
-  final MLNStyle _ffiStyle;
+  final ffi.MLNStyle _ffiStyle;
   final pigeon.MapLibreHostApi _hostApi;
 
   @override
@@ -32,12 +32,12 @@ class StyleControllerIos extends StyleController {
       );
     }
 
-    MLNStyleLayer? ffiStyleLayer;
+    ffi.MLNStyleLayer? ffiStyleLayer;
     switch (layer) {
       case BackgroundStyleLayer():
-        ffiStyleLayer = MLNBackgroundStyleLayer.new$()
+        ffiStyleLayer = ffi.MLNBackgroundStyleLayer.new$()
           ..initWithIdentifier(ffiId)
-          ..backgroundColor = NSExpression.expressionWithFormat$1(
+          ..backgroundColor = ffi.NSExpression.expressionWithFormat$1(
             layer.color.toHexString().toNSString(),
           );
       case StyleLayerWithSource():
@@ -49,28 +49,28 @@ class StyleControllerIos extends StyleController {
         }
         switch (layer) {
           case FillStyleLayer():
-            ffiStyleLayer = MLNFillStyleLayer.new$()
+            ffiStyleLayer = ffi.MLNFillStyleLayer.new$()
               ..initWithIdentifier(ffiId, source: ffiSource);
           case CircleStyleLayer():
-            ffiStyleLayer = MLNCircleStyleLayer.new$()
+            ffiStyleLayer = ffi.MLNCircleStyleLayer.new$()
               ..initWithIdentifier(ffiId, source: ffiSource);
           case FillExtrusionStyleLayer():
-            ffiStyleLayer = MLNFillExtrusionStyleLayer.new$()
+            ffiStyleLayer = ffi.MLNFillExtrusionStyleLayer.new$()
               ..initWithIdentifier(ffiId, source: ffiSource);
           case HeatmapStyleLayer():
-            ffiStyleLayer = MLNHeatmapStyleLayer.new$()
+            ffiStyleLayer = ffi.MLNHeatmapStyleLayer.new$()
               ..initWithIdentifier(ffiId, source: ffiSource);
           case HillshadeStyleLayer():
-            ffiStyleLayer = MLNHillshadeStyleLayer.new$()
+            ffiStyleLayer = ffi.MLNHillshadeStyleLayer.new$()
               ..initWithIdentifier(ffiId, source: ffiSource);
           case LineStyleLayer():
-            ffiStyleLayer = MLNLineStyleLayer.new$()
+            ffiStyleLayer = ffi.MLNLineStyleLayer.new$()
               ..initWithIdentifier(ffiId, source: ffiSource);
           case RasterStyleLayer():
-            ffiStyleLayer = MLNRasterStyleLayer.new$()
+            ffiStyleLayer = ffi.MLNRasterStyleLayer.new$()
               ..initWithIdentifier(ffiId, source: ffiSource);
           case SymbolStyleLayer():
-            ffiStyleLayer = MLNSymbolStyleLayer.new$()
+            ffiStyleLayer = ffi.MLNSymbolStyleLayer.new$()
               ..initWithIdentifier(ffiId, source: ffiSource);
         }
     }
@@ -114,14 +114,14 @@ class StyleControllerIos extends StyleController {
       );
     }
 
-    final MLNSource ffiSource;
+    final ffi.MLNSource ffiSource;
     switch (source) {
       case GeoJsonSource():
-        final shapeSource = MLNShapeSource.new$();
+        final shapeSource = ffi.MLNShapeSource.new$();
         if (source.data.startsWith('{')) {
           shapeSource.initWithIdentifier$1(
             ffiId,
-            shape: MLNShape.shapeWithData(
+            shape: ffi.MLNShape.shapeWithData(
               source.data.toNSDataUTF8()!,
               encoding: nsUTF8StringEncoding,
               error: nullptr,
@@ -137,7 +137,7 @@ class StyleControllerIos extends StyleController {
         }
         ffiSource = shapeSource;
       case RasterDemSource():
-        final demSource = ffiSource = MLNRasterDEMSource.new$();
+        final demSource = ffiSource = ffi.MLNRasterDEMSource.new$();
         if (source.url case final String url) {
           demSource.initWithIdentifier$1(
             ffiId,
@@ -156,7 +156,7 @@ class StyleControllerIos extends StyleController {
           );
         }
       case RasterSource():
-        final rasterSource = ffiSource = MLNRasterTileSource.new$();
+        final rasterSource = ffiSource = ffi.MLNRasterTileSource.new$();
         if (source.url case final String url) {
           rasterSource.initWithIdentifier$1(
             ffiId,
@@ -175,7 +175,7 @@ class StyleControllerIos extends StyleController {
           );
         }
       case VectorSource():
-        final vectorSource = ffiSource = MLNVectorTileSource.new$();
+        final vectorSource = ffiSource = ffi.MLNVectorTileSource.new$();
         if (source.url case final String url) {
           vectorSource.initWithIdentifier$1(
             ffiId,
@@ -193,14 +193,14 @@ class StyleControllerIos extends StyleController {
           );
         }
       case ImageSource():
-        final coordinates = Struct.create<MLNCoordinateQuad>()
+        final coordinates = Struct.create<ffi.MLNCoordinateQuad>()
           ..bottomLeft = source.coordinates.bottomLeft
               .toCLLocationCoordinate2D()
           ..bottomRight = source.coordinates.bottomRight
               .toCLLocationCoordinate2D()
           ..topLeft = source.coordinates.topLeft.toCLLocationCoordinate2D()
           ..topRight = source.coordinates.topRight.toCLLocationCoordinate2D();
-        final imageSource = ffiSource = MLNImageSource.new$();
+        final imageSource = ffiSource = ffi.MLNImageSource.new$();
         imageSource.initWithIdentifier(
           ffiId,
           coordinateQuad: coordinates,
@@ -224,7 +224,7 @@ class StyleControllerIos extends StyleController {
 
   @override
   List<String> getLayerIds() {
-    final layers = _ffiStyle.layers.map(MLNStyleLayer.castFrom);
+    final layers = _ffiStyle.layers.map(ffi.MLNStyleLayer.castFrom);
     return layers.map((l) => l.identifier.toDartString()).toList();
   }
 
@@ -256,16 +256,16 @@ class StyleControllerIos extends StyleController {
     required String data,
   }) async {
     final source = _ffiStyle.sourceWithIdentifier(id.toNSString())!;
-    final shapeSource = MLNShapeSource.castFrom(source);
-    shapeSource.shape = MLNShape.shapeWithData(
+    final shapeSource = ffi.MLNShapeSource.castFrom(source);
+    shapeSource.shape = ffi.MLNShape.shapeWithData(
       data.toNSDataUTF8()!,
       encoding: 4, // utf-8
       error: nullptr,
     );
   }
 
-  List<MLNStyleLayer> _getLayers() => List<MLNStyleLayer>.from(
-    _ffiStyle.layers.toDartList(convertOther: MLNStyleLayer.castFrom),
+  List<ffi.MLNStyleLayer> _getLayers() => List<ffi.MLNStyleLayer>.from(
+    _ffiStyle.layers.toDartList(convertOther: ffi.MLNStyleLayer.castFrom),
   );
 
   @override
@@ -279,8 +279,8 @@ class StyleControllerIos extends StyleController {
     final sources = _ffiStyle.sources.allObjects;
     for (var i = 0; i < sources.count; i++) {
       final source = sources[i];
-      if (!MLNTileSource.isInstance(source)) continue;
-      final tileSource = MLNTileSource.castFrom(source);
+      if (!ffi.MLNTileSource.isInstance(source)) continue;
+      final tileSource = ffi.MLNTileSource.castFrom(source);
       final html = tileSource.attributionHTMLString;
       if (html == null) continue;
       attributions.add(html.toDartString());
