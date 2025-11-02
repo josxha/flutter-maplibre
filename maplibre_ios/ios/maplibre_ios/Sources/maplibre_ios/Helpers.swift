@@ -46,9 +46,7 @@ import UIKit
         )
         // print("json: \(json)")
         if let offset = json as? [Any] {
-          if offset.count == 2, offset.first is String,
-             offset.first as? String == "literal"
-          {
+          if offset.count == 2, offset.first as? String == "literal" {
             if let vector = offset.last as? [Any] {
               if vector.count == 2 {
                 if let x = vector.first as? Double,
@@ -60,6 +58,8 @@ import UIKit
                 }
               }
             }
+          } else if let first = offset.first, !(first is String) {
+            return NSExpression(forConstantValue: offset)
           }
         }
         return NSExpression(mglJSONObject: json)
