@@ -42,7 +42,8 @@ ffigen:
       - 'NSString'
       - 'CLLocationCoordinate2D'
       - 'NSAttributedString'
-      - 'NSImage'
+      - 'UIImage'
+      - 'UIScreen'
       - 'UIAction'
       - 'UIMenu'
       - 'UIPointerEffect'
@@ -66,6 +67,8 @@ ffigen:
       'MLNVectorTileSource': 'MapLibre'
       'MLNOfflinePack': 'MapLibre'
       'MLNOfflineRegion': 'MapLibre'
+      'UIImage': 'UIKit'
+      'UIScreen': 'UIKit'
     member-filter:
       'UIResponder':
         exclude:
