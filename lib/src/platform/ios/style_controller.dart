@@ -11,15 +11,9 @@ class StyleControllerIos extends StyleController {
   Future<void> addImage(String id, Uint8List bytes) async {
     // TODO Unhandled Exception: FailedToLoadClassException: Failed to load Objective-C class: NSImage
     // https://developer.apple.com/documentation/foundation/nsitemproviderreading/2919479-objectwithitemproviderdata
-    /*_ffiStyle.setImage_forName_(
-      NSImage.objectWithItemProviderData_typeIdentifier_error_(
-        bytes.toNSData(),
-        // The uniform type identifier (UTI) representing the data type of data.
-        'public.image'.toNSString(),
-        nullptr,
-      )!,
-      id.toNSString(),
-    );*/
+    /*final image = UIImage.imageWithData(bytes.toNSData());
+    if (image == null) return;
+    _ffiStyle.setImage(image, forName: id.toNSString());*/
     await _hostApi.addImage(id, bytes);
   }
 
