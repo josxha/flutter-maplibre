@@ -149,7 +149,6 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   @override
   void dispose() {
     style?.dispose();
-    unawaited(_hostApi.dispose());
     super.dispose();
   }
 
