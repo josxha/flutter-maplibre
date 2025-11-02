@@ -67,7 +67,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     if (center != null) {
       ffiCamera.centerCoordinate = center.toCLLocationCoordinate2D();
     }
-    _mapView.flyToCamera$1(
+    _mapView.flyToCamera$2(
       ffiCamera,
       withDuration: nativeDuration.inMicroseconds / 1000000,
     );
@@ -200,7 +200,8 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     } else if (NSString.isInstance(object)) {
       return NSString.castFrom(object).toDartString();
     } else if (NSNumber.isInstance(object)) {
-      return NSNumber.castFrom(object).intValue;
+      final number = NSNumber.castFrom(object);
+      return number.longLongValue;
     }
     return null;
   }
@@ -330,7 +331,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
 
   @override
   Geographic toLngLat(Offset screenLocation) => _mapView
-      .convertPoint(screenLocation.toCGPoint(), toCoordinateFromView: _mapView)
+      .convertPoint$2(screenLocation.toCGPoint(), toCoordinateFromView: _mapView)
       .toGeographic();
 
   @override

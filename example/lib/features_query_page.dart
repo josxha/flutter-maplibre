@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
+import 'package:maplibre_example/utils/map_styles.dart';
 
 @immutable
 class FeaturesQueryPage extends StatefulWidget {
@@ -23,9 +24,10 @@ class _FeaturesQueryPageState extends State<FeaturesQueryPage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Query Features')),
       body: MapLibreMap(
-        options: const MapOptions(
+        options: MapOptions(
           initZoom: 7,
-          initCenter: Geographic(lon: 0.1, lat: 0.1),
+          initCenter: const Geographic(lon: 0.1, lat: 0.1),
+          initStyle: MapStyles.openMapTilesBright.uri,
         ),
         onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: _onStyleLoaded,

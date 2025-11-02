@@ -43,7 +43,7 @@ class StyleControllerIos extends StyleController {
       case BackgroundStyleLayer():
         ffiStyleLayer = MLNBackgroundStyleLayer.new$()
           ..initWithIdentifier(ffiId)
-          ..backgroundColor = NSExpression.expressionWithFormat$1(
+          ..backgroundColor = NSExpression.expressionWithFormat(
             layer.color.toHexString().toNSString(),
           );
       case StyleLayerWithSource():
@@ -96,15 +96,15 @@ class StyleControllerIos extends StyleController {
       if (belowLayer == null) {
         throw Exception('Layer "$id" does not exist.');
       }
-      _ffiStyle.insertLayer$1(ffiStyleLayer, belowLayer: belowLayer);
+      _ffiStyle.insertLayer$2(ffiStyleLayer, belowLayer: belowLayer);
     } else if (aboveLayerId case final String id) {
       final aboveLayer = _ffiStyle.layerWithIdentifier(id.toNSString());
       if (aboveLayer == null) {
         throw Exception('Layer "$id" does not exist.');
       }
-      _ffiStyle.insertLayer$2(ffiStyleLayer, aboveLayer: aboveLayer);
+      _ffiStyle.insertLayer(ffiStyleLayer, aboveLayer: aboveLayer);
     } else if (atIndex case final int index) {
-      _ffiStyle.insertLayer(ffiStyleLayer, atIndex: index);
+      _ffiStyle.insertLayer$1(ffiStyleLayer, atIndex: index);
     } else {
       _ffiStyle.addLayer(ffiStyleLayer);
     }
@@ -125,7 +125,7 @@ class StyleControllerIos extends StyleController {
       case GeoJsonSource():
         final shapeSource = MLNShapeSource.new$();
         if (source.data.startsWith('{')) {
-          shapeSource.initWithIdentifier$1(
+          shapeSource.initWithIdentifier$2(
             ffiId,
             shape: MLNShape.shapeWithData(
               source.data.toNSDataUTF8()!,
