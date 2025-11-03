@@ -294,7 +294,7 @@ jobs:
       - name: "Get Flutter dependencies"
         run: dart pub get
       - name: Run pigeon
-        run: ./pigeons/run_code_gen.sh
+        run: sh ./pigeons/run_code_gen.sh
       - name: Format code
         run: dart format .
       - name: Check changes
