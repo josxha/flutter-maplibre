@@ -82,6 +82,9 @@ jobs:
       matrix:
         sdk: [ '' ] # option to use a matrix test with the lower supported flutter version
     timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: maplibre
     steps:
       - uses: actions/checkout@v5
       - name: "Setup Flutter SDK"
@@ -165,6 +168,9 @@ jobs:
   score:
     name: "Package score"
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: maplibre
     steps:
       - name: Checkout project
         uses: actions/checkout@v5
@@ -286,10 +292,11 @@ jobs:
         with:
           cache: true
       - name: "Get Flutter dependencies"
-        working-directory: example
         run: dart pub get
       - name: Run pigeon
-        run: ./pigeons/run_code_gen.sh
+        run: sh ./pigeons/run_code_gen.sh
+      - name: Format code
+        run: dart format .
       - name: Check changes
         run: |
           if [[ -n "$(git status --porcelain)" ]]; then
@@ -313,15 +320,15 @@ jobs:
           distribution: 'temurin'
           cache: 'gradle'
       - name: "Get Flutter dependencies"
-        working-directory: example
         run: dart pub get
       - name: Build example APK
         working-directory: example
         run: flutter build apk
       - name: Run jnigen
-        run: ./run_jnigen.sh
+        working-directory: maplibre
+        run: sh ./run_jnigen.sh
       - name: Format code
-        run: dart format lib/src/platform/android/jni
+        run: dart format maplibre/lib/src/platform/android/jni
       - name: Check changes
         run: |
           if [[ -n "$(git status --porcelain)" ]]; then
