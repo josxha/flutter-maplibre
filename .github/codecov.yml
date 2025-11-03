@@ -7,7 +7,7 @@ comment:
 
 ignore:
   - "**/*.g.dart"
-  - "lib/src/platform/android/jni/**"
+  - "maplibre/lib/src/platform/android/jni/**"
   - "example/**"
   - "maplibre_ios/**"
 

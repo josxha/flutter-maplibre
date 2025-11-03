@@ -82,6 +82,9 @@ jobs:
       matrix:
         sdk: [ '' ] # option to use a matrix test with the lower supported flutter version
     timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: maplibre
     steps:
       - uses: actions/checkout@v5
       - name: "Setup Flutter SDK"
@@ -165,6 +168,9 @@ jobs:
   score:
     name: "Package score"
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: maplibre
     steps:
       - name: Checkout project
         uses: actions/checkout@v5
@@ -313,7 +319,6 @@ jobs:
           distribution: 'temurin'
           cache: 'gradle'
       - name: "Get Flutter dependencies"
-        working-directory: example
         run: dart pub get
       - name: Build example APK
         working-directory: example
