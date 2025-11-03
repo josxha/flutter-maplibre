@@ -1,6 +1,5 @@
 name: Bug Report
 description: Report a bug
-title: ""
 labels: [ "bug" ]
 body:
   - type: dropdown
@@ -8,8 +7,8 @@ body:
     attributes:
       label: Platforms
       description: On what platforms does the bug happen?
-      placeholder: "Please Select"
-      options: [ "Android", "iOS", "Web", "MacOS", "Windows", "Linux", "All" ]
+      placeholder: 
+      options: [ "Please Select", "Android", "iOS", "Web", "MacOS", "Windows", "Linux", "All" ]
     validations:
       required: true
   - type: input
