@@ -1,0 +1,1 @@
+Checkout our docs for a minimal example: https://flutter-maplibre.pages.dev/docs/getting-started/use-widget
