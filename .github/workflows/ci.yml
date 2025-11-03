@@ -295,10 +295,11 @@ jobs:
         with:
           cache: true
       - name: "Get Flutter dependencies"
-        working-directory: example
         run: dart pub get
       - name: Run pigeon
-        run: ./pigeons/run_code_gen.sh
+        run: |
+          chmod +x ./pigeons/run_code_gen.sh
+          ./pigeons/run_code_gen.sh
       - name: Check changes
         run: |
           if [[ -n "$(git status --porcelain)" ]]; then
