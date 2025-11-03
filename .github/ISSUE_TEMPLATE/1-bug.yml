@@ -7,7 +7,6 @@ body:
     attributes:
       label: Platforms
       description: On what platforms does the bug happen?
-      placeholder: 
       options: [ "Please Select", "Android", "iOS", "Web", "MacOS", "Windows", "Linux", "All" ]
     validations:
       required: true
