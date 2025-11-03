@@ -286,9 +286,6 @@ jobs:
   codegen-pigeon:
     name: "[Pigeon] Check codegen"
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: maplibre
     steps:
       - uses: actions/checkout@v5
       - uses: subosito/flutter-action@v2

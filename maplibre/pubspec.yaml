@@ -44,7 +44,6 @@ dev_dependencies:
     sdk: flutter
   jnigen: 0.14.2
   mocktail: ^1.0.4
-  pigeon: 26.0.1
   very_good_analysis: ^10.0.0
 
 screenshots:
