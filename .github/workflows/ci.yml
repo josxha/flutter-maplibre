@@ -325,9 +325,10 @@ jobs:
         working-directory: example
         run: flutter build apk
       - name: Run jnigen
+        working-directory: maplibre
         run: ./run_jnigen.sh
       - name: Format code
-        run: dart format lib/src/platform/android/jni
+        run: dart format maplibre/lib/src/platform/android/jni
       - name: Check changes
         run: |
           if [[ -n "$(git status --porcelain)" ]]; then
