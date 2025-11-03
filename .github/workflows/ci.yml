@@ -326,7 +326,7 @@ jobs:
         run: flutter build apk
       - name: Run jnigen
         working-directory: maplibre
-        run: ./run_jnigen.sh
+        run: sh ./run_jnigen.sh
       - name: Format code
         run: dart format maplibre/lib/src/platform/android/jni
       - name: Check changes
