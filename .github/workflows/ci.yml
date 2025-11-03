@@ -297,6 +297,8 @@ jobs:
         run: |
           chmod +x ./pigeons/run_code_gen.sh
           ./pigeons/run_code_gen.sh
+      - name: Format code
+        run: dart format .
       - name: Check changes
         run: |
           if [[ -n "$(git status --porcelain)" ]]; then
