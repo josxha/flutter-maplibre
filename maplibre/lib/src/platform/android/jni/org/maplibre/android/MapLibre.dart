@@ -40,10 +40,6 @@ import 'package:jni/jni.dart' as jni$_;
 
 import '../../../android/content/Context.dart' as context$_;
 
-import 'util/DefaultStyle.dart' as defaultstyle$_;
-
-import 'util/TileServerOptions.dart' as tileserveroptions$_;
-
 /// from: `org.maplibre.android.MapLibre`
 class MapLibre extends jni$_.JObject {
   @jni$_.internal
@@ -238,13 +234,11 @@ class MapLibre extends jni$_.JObject {
 
   /// from: `static public org.maplibre.android.util.TileServerOptions getTileServerOptions()`
   /// The returned object must be released after use, by calling the [release] method.
-  static tileserveroptions$_.TileServerOptions? getTileServerOptions() {
+  static jni$_.JObject? getTileServerOptions() {
     return _getTileServerOptions(
       _class.reference.pointer,
       _id_getTileServerOptions as jni$_.JMethodIDPtr,
-    ).object<tileserveroptions$_.TileServerOptions?>(
-      const tileserveroptions$_.$TileServerOptions$NullableType$(),
-    );
+    ).object<jni$_.JObject?>(const jni$_.$JObject$NullableType$());
   }
 
   static final _id_getPredefinedStyles = _class.staticMethodId(
@@ -270,13 +264,13 @@ class MapLibre extends jni$_.JObject {
 
   /// from: `static public org.maplibre.android.util.DefaultStyle[] getPredefinedStyles()`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni$_.JArray<defaultstyle$_.DefaultStyle?>? getPredefinedStyles() {
+  static jni$_.JArray<jni$_.JObject?>? getPredefinedStyles() {
     return _getPredefinedStyles(
       _class.reference.pointer,
       _id_getPredefinedStyles as jni$_.JMethodIDPtr,
-    ).object<jni$_.JArray<defaultstyle$_.DefaultStyle?>?>(
-      const jni$_.$JArray$NullableType$<defaultstyle$_.DefaultStyle?>(
-        defaultstyle$_.$DefaultStyle$NullableType$(),
+    ).object<jni$_.JArray<jni$_.JObject?>?>(
+      const jni$_.$JArray$NullableType$<jni$_.JObject?>(
+        jni$_.$JObject$NullableType$(),
       ),
     );
   }
@@ -306,7 +300,7 @@ class MapLibre extends jni$_.JObject {
 
   /// from: `static public org.maplibre.android.util.DefaultStyle getPredefinedStyle(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static defaultstyle$_.DefaultStyle? getPredefinedStyle(
+  static jni$_.JObject? getPredefinedStyle(
     jni$_.JString? string,
   ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
@@ -314,9 +308,7 @@ class MapLibre extends jni$_.JObject {
       _class.reference.pointer,
       _id_getPredefinedStyle as jni$_.JMethodIDPtr,
       _$string.pointer,
-    ).object<defaultstyle$_.DefaultStyle?>(
-      const defaultstyle$_.$DefaultStyle$NullableType$(),
-    );
+    ).object<jni$_.JObject?>(const jni$_.$JObject$NullableType$());
   }
 
   static final _id_getApplicationContext = _class.staticMethodId(

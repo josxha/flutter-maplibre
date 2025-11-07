@@ -38,8 +38,6 @@ import 'dart:core' show Object, String, bool, double, int;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
-import 'LoggerDefinition.dart' as loggerdefinition$_;
-
 /// from: `org.maplibre.android.log.Logger$LogLevel`
 class Logger$LogLevel extends jni$_.JObject {
   @jni$_.internal
@@ -345,7 +343,7 @@ class Logger extends jni$_.JObject {
 
   /// from: `static public void setLoggerDefinition(org.maplibre.android.log.LoggerDefinition loggerDefinition)`
   static void setLoggerDefinition(
-    loggerdefinition$_.LoggerDefinition? loggerDefinition,
+    jni$_.JObject? loggerDefinition,
   ) {
     final _$loggerDefinition =
         loggerDefinition?.reference ?? jni$_.jNullReference;

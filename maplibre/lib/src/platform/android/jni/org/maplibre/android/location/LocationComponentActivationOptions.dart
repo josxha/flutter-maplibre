@@ -44,8 +44,6 @@ import '../maps/Style.dart' as style$_;
 
 import 'LocationComponentOptions.dart' as locationcomponentoptions$_;
 
-import 'engine/LocationEngine.dart' as locationengine$_;
-
 import 'engine/LocationEngineRequest.dart' as locationenginerequest$_;
 
 /// from: `org.maplibre.android.location.LocationComponentActivationOptions$Builder`
@@ -140,7 +138,7 @@ class LocationComponentActivationOptions$Builder extends jni$_.JObject {
   /// from: `public org.maplibre.android.location.LocationComponentActivationOptions$Builder locationEngine(org.maplibre.android.location.engine.LocationEngine locationEngine)`
   /// The returned object must be released after use, by calling the [release] method.
   LocationComponentActivationOptions$Builder locationEngine(
-    locationengine$_.LocationEngine? locationEngine,
+    jni$_.JObject? locationEngine,
   ) {
     final _$locationEngine = locationEngine?.reference ?? jni$_.jNullReference;
     return _locationEngine(
@@ -611,13 +609,11 @@ class LocationComponentActivationOptions extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.engine.LocationEngine locationEngine()`
   /// The returned object must be released after use, by calling the [release] method.
-  locationengine$_.LocationEngine? locationEngine() {
+  jni$_.JObject? locationEngine() {
     return _locationEngine(
       reference.pointer,
       _id_locationEngine as jni$_.JMethodIDPtr,
-    ).object<locationengine$_.LocationEngine?>(
-      const locationengine$_.$LocationEngine$NullableType$(),
-    );
+    ).object<jni$_.JObject?>(const jni$_.$JObject$NullableType$());
   }
 
   static final _id_locationEngineRequest = _class.instanceMethodId(

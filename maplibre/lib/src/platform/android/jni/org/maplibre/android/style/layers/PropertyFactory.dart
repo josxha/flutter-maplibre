@@ -38,8 +38,6 @@ import 'dart:core' show Object, String, bool, double, int;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
-import '../types/Formatted.dart' as formatted$_;
-
 import 'PropertyValue.dart' as propertyvalue$_;
 
 /// from: `org.maplibre.android.style.layers.PropertyFactory`
@@ -8922,18 +8920,18 @@ class PropertyFactory extends jni$_.JObject {
 
   /// from: `static public org.maplibre.android.style.layers.PropertyValue<org.maplibre.android.style.types.Formatted> textField(org.maplibre.android.style.types.Formatted formatted)`
   /// The returned object must be released after use, by calling the [release] method.
-  static propertyvalue$_.PropertyValue<formatted$_.Formatted?>? textField$1(
-    formatted$_.Formatted? formatted,
+  static propertyvalue$_.PropertyValue<jni$_.JObject?>? textField$1(
+    jni$_.JObject? formatted,
   ) {
     final _$formatted = formatted?.reference ?? jni$_.jNullReference;
     return _textField$1(
       _class.reference.pointer,
       _id_textField$1 as jni$_.JMethodIDPtr,
       _$formatted.pointer,
-    ).object<propertyvalue$_.PropertyValue<formatted$_.Formatted?>?>(
-      const propertyvalue$_.$PropertyValue$NullableType$<
-        formatted$_.Formatted?
-      >(formatted$_.$Formatted$NullableType$()),
+    ).object<propertyvalue$_.PropertyValue<jni$_.JObject?>?>(
+      const propertyvalue$_.$PropertyValue$NullableType$<jni$_.JObject?>(
+        jni$_.$JObject$NullableType$(),
+      ),
     );
   }
 

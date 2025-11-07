@@ -42,11 +42,7 @@ import '../style/layers/Layer.dart' as layer$_;
 
 import '../style/layers/TransitionOptions.dart' as transitionoptions$_;
 
-import '../style/light/Light.dart' as light$_;
-
 import '../style/sources/Source.dart' as source$_;
-
-import '../util/DefaultStyle.dart' as defaultstyle$_;
 
 import 'Image.dart' as image$_;
 
@@ -4462,11 +4458,11 @@ class Style extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.style.light.Light getLight()`
   /// The returned object must be released after use, by calling the [release] method.
-  light$_.Light? getLight() {
+  jni$_.JObject? getLight() {
     return _getLight(
       reference.pointer,
       _id_getLight as jni$_.JMethodIDPtr,
-    ).object<light$_.Light?>(const light$_.$Light$NullableType$());
+    ).object<jni$_.JObject?>(const jni$_.$JObject$NullableType$());
   }
 
   static final _id_isFullyLoaded = _class.instanceMethodId(
@@ -4557,13 +4553,13 @@ class Style extends jni$_.JObject {
 
   /// from: `static public org.maplibre.android.util.DefaultStyle[] getPredefinedStyles()`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni$_.JArray<defaultstyle$_.DefaultStyle?>? getPredefinedStyles() {
+  static jni$_.JArray<jni$_.JObject?>? getPredefinedStyles() {
     return _getPredefinedStyles(
       _class.reference.pointer,
       _id_getPredefinedStyles as jni$_.JMethodIDPtr,
-    ).object<jni$_.JArray<defaultstyle$_.DefaultStyle?>?>(
-      const jni$_.$JArray$NullableType$<defaultstyle$_.DefaultStyle?>(
-        defaultstyle$_.$DefaultStyle$NullableType$(),
+    ).object<jni$_.JArray<jni$_.JObject?>?>(
+      const jni$_.$JArray$NullableType$<jni$_.JObject?>(
+        jni$_.$JObject$NullableType$(),
       ),
     );
   }

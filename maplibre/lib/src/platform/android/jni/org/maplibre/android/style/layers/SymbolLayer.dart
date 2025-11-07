@@ -38,8 +38,6 @@ import 'dart:core' show Object, String, bool, double, int;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
-import '../types/Formatted.dart' as formatted$_;
-
 import 'Layer.dart' as layer$_;
 
 import 'PropertyValue.dart' as propertyvalue$_;
@@ -1123,13 +1121,13 @@ class SymbolLayer extends layer$_.Layer {
 
   /// from: `public org.maplibre.android.style.layers.PropertyValue<org.maplibre.android.style.types.Formatted> getTextField()`
   /// The returned object must be released after use, by calling the [release] method.
-  propertyvalue$_.PropertyValue<formatted$_.Formatted?> getTextField() {
+  propertyvalue$_.PropertyValue<jni$_.JObject?> getTextField() {
     return _getTextField(
       reference.pointer,
       _id_getTextField as jni$_.JMethodIDPtr,
-    ).object<propertyvalue$_.PropertyValue<formatted$_.Formatted?>>(
-      const propertyvalue$_.$PropertyValue$Type$<formatted$_.Formatted?>(
-        formatted$_.$Formatted$NullableType$(),
+    ).object<propertyvalue$_.PropertyValue<jni$_.JObject?>>(
+      const propertyvalue$_.$PropertyValue$Type$<jni$_.JObject?>(
+        jni$_.$JObject$NullableType$(),
       ),
     );
   }

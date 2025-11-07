@@ -46,28 +46,10 @@ import '../maps/MapLibreMap.dart' as maplibremap$_;
 
 import '../maps/Transform.dart' as transform$_;
 
-import 'CompassEngine.dart' as compassengine$_;
-
 import 'LocationComponentActivationOptions.dart'
     as locationcomponentactivationoptions$_;
 
 import 'LocationComponentOptions.dart' as locationcomponentoptions$_;
-
-import 'OnCameraTrackingChangedListener.dart'
-    as oncameratrackingchangedlistener$_;
-
-import 'OnLocationCameraTransitionListener.dart'
-    as onlocationcameratransitionlistener$_;
-
-import 'OnLocationClickListener.dart' as onlocationclicklistener$_;
-
-import 'OnLocationLongClickListener.dart' as onlocationlongclicklistener$_;
-
-import 'OnLocationStaleListener.dart' as onlocationstalelistener$_;
-
-import 'OnRenderModeChangedListener.dart' as onrendermodechangedlistener$_;
-
-import 'engine/LocationEngine.dart' as locationengine$_;
 
 import 'engine/LocationEngineRequest.dart' as locationenginerequest$_;
 
@@ -305,8 +287,7 @@ class LocationComponent extends jni$_.JObject {
   /// from: `public void setCameraMode(int i, org.maplibre.android.location.OnLocationCameraTransitionListener onLocationCameraTransitionListener)`
   void setCameraMode$1(
     int i,
-    onlocationcameratransitionlistener$_.OnLocationCameraTransitionListener?
-    onLocationCameraTransitionListener,
+    jni$_.JObject? onLocationCameraTransitionListener,
   ) {
     final _$onLocationCameraTransitionListener =
         onLocationCameraTransitionListener?.reference ?? jni$_.jNullReference;
@@ -362,8 +343,7 @@ class LocationComponent extends jni$_.JObject {
     jni$_.JDouble? double,
     jni$_.JDouble? double1,
     jni$_.JDouble? double2,
-    onlocationcameratransitionlistener$_.OnLocationCameraTransitionListener?
-    onLocationCameraTransitionListener,
+    jni$_.JObject? onLocationCameraTransitionListener,
   ) {
     final _$double = double?.reference ?? jni$_.jNullReference;
     final _$double1 = double1?.reference ?? jni$_.jNullReference;
@@ -1153,7 +1133,7 @@ class LocationComponent extends jni$_.JObject {
 
   /// from: `public void setLocationEngine(org.maplibre.android.location.engine.LocationEngine locationEngine)`
   void setLocationEngine(
-    locationengine$_.LocationEngine? locationEngine,
+    jni$_.JObject? locationEngine,
   ) {
     final _$locationEngine = locationEngine?.reference ?? jni$_.jNullReference;
     _setLocationEngine(
@@ -1253,13 +1233,11 @@ class LocationComponent extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.engine.LocationEngine getLocationEngine()`
   /// The returned object must be released after use, by calling the [release] method.
-  locationengine$_.LocationEngine? getLocationEngine() {
+  jni$_.JObject? getLocationEngine() {
     return _getLocationEngine(
       reference.pointer,
       _id_getLocationEngine as jni$_.JMethodIDPtr,
-    ).object<locationengine$_.LocationEngine?>(
-      const locationengine$_.$LocationEngine$NullableType$(),
-    );
+    ).object<jni$_.JObject?>(const jni$_.$JObject$NullableType$());
   }
 
   static final _id_setCompassEngine = _class.instanceMethodId(
@@ -1287,7 +1265,7 @@ class LocationComponent extends jni$_.JObject {
 
   /// from: `public void setCompassEngine(org.maplibre.android.location.CompassEngine compassEngine)`
   void setCompassEngine(
-    compassengine$_.CompassEngine? compassEngine,
+    jni$_.JObject? compassEngine,
   ) {
     final _$compassEngine = compassEngine?.reference ?? jni$_.jNullReference;
     _setCompassEngine(
@@ -1320,13 +1298,11 @@ class LocationComponent extends jni$_.JObject {
 
   /// from: `public org.maplibre.android.location.CompassEngine getCompassEngine()`
   /// The returned object must be released after use, by calling the [release] method.
-  compassengine$_.CompassEngine? getCompassEngine() {
+  jni$_.JObject? getCompassEngine() {
     return _getCompassEngine(
       reference.pointer,
       _id_getCompassEngine as jni$_.JMethodIDPtr,
-    ).object<compassengine$_.CompassEngine?>(
-      const compassengine$_.$CompassEngine$NullableType$(),
-    );
+    ).object<jni$_.JObject?>(const jni$_.$JObject$NullableType$());
   }
 
   static final _id_getLastKnownLocation = _class.instanceMethodId(
@@ -1384,7 +1360,7 @@ class LocationComponent extends jni$_.JObject {
 
   /// from: `public void addOnLocationClickListener(org.maplibre.android.location.OnLocationClickListener onLocationClickListener)`
   void addOnLocationClickListener(
-    onlocationclicklistener$_.OnLocationClickListener onLocationClickListener,
+    jni$_.JObject onLocationClickListener,
   ) {
     final _$onLocationClickListener = onLocationClickListener.reference;
     _addOnLocationClickListener(
@@ -1419,7 +1395,7 @@ class LocationComponent extends jni$_.JObject {
 
   /// from: `public void removeOnLocationClickListener(org.maplibre.android.location.OnLocationClickListener onLocationClickListener)`
   void removeOnLocationClickListener(
-    onlocationclicklistener$_.OnLocationClickListener onLocationClickListener,
+    jni$_.JObject onLocationClickListener,
   ) {
     final _$onLocationClickListener = onLocationClickListener.reference;
     _removeOnLocationClickListener(
@@ -1454,8 +1430,7 @@ class LocationComponent extends jni$_.JObject {
 
   /// from: `public void addOnLocationLongClickListener(org.maplibre.android.location.OnLocationLongClickListener onLocationLongClickListener)`
   void addOnLocationLongClickListener(
-    onlocationlongclicklistener$_.OnLocationLongClickListener
-    onLocationLongClickListener,
+    jni$_.JObject onLocationLongClickListener,
   ) {
     final _$onLocationLongClickListener = onLocationLongClickListener.reference;
     _addOnLocationLongClickListener(
@@ -1490,8 +1465,7 @@ class LocationComponent extends jni$_.JObject {
 
   /// from: `public void removeOnLocationLongClickListener(org.maplibre.android.location.OnLocationLongClickListener onLocationLongClickListener)`
   void removeOnLocationLongClickListener(
-    onlocationlongclicklistener$_.OnLocationLongClickListener
-    onLocationLongClickListener,
+    jni$_.JObject onLocationLongClickListener,
   ) {
     final _$onLocationLongClickListener = onLocationLongClickListener.reference;
     _removeOnLocationLongClickListener(
@@ -1526,8 +1500,7 @@ class LocationComponent extends jni$_.JObject {
 
   /// from: `public void addOnCameraTrackingChangedListener(org.maplibre.android.location.OnCameraTrackingChangedListener onCameraTrackingChangedListener)`
   void addOnCameraTrackingChangedListener(
-    oncameratrackingchangedlistener$_.OnCameraTrackingChangedListener
-    onCameraTrackingChangedListener,
+    jni$_.JObject onCameraTrackingChangedListener,
   ) {
     final _$onCameraTrackingChangedListener =
         onCameraTrackingChangedListener.reference;
@@ -1564,8 +1537,7 @@ class LocationComponent extends jni$_.JObject {
 
   /// from: `public void removeOnCameraTrackingChangedListener(org.maplibre.android.location.OnCameraTrackingChangedListener onCameraTrackingChangedListener)`
   void removeOnCameraTrackingChangedListener(
-    oncameratrackingchangedlistener$_.OnCameraTrackingChangedListener
-    onCameraTrackingChangedListener,
+    jni$_.JObject onCameraTrackingChangedListener,
   ) {
     final _$onCameraTrackingChangedListener =
         onCameraTrackingChangedListener.reference;
@@ -1601,8 +1573,7 @@ class LocationComponent extends jni$_.JObject {
 
   /// from: `public void addOnRenderModeChangedListener(org.maplibre.android.location.OnRenderModeChangedListener onRenderModeChangedListener)`
   void addOnRenderModeChangedListener(
-    onrendermodechangedlistener$_.OnRenderModeChangedListener
-    onRenderModeChangedListener,
+    jni$_.JObject onRenderModeChangedListener,
   ) {
     final _$onRenderModeChangedListener = onRenderModeChangedListener.reference;
     _addOnRenderModeChangedListener(
@@ -1637,8 +1608,7 @@ class LocationComponent extends jni$_.JObject {
 
   /// from: `public void removeRenderModeChangedListener(org.maplibre.android.location.OnRenderModeChangedListener onRenderModeChangedListener)`
   void removeRenderModeChangedListener(
-    onrendermodechangedlistener$_.OnRenderModeChangedListener
-    onRenderModeChangedListener,
+    jni$_.JObject onRenderModeChangedListener,
   ) {
     final _$onRenderModeChangedListener = onRenderModeChangedListener.reference;
     _removeRenderModeChangedListener(
@@ -1673,7 +1643,7 @@ class LocationComponent extends jni$_.JObject {
 
   /// from: `public void addOnLocationStaleListener(org.maplibre.android.location.OnLocationStaleListener onLocationStaleListener)`
   void addOnLocationStaleListener(
-    onlocationstalelistener$_.OnLocationStaleListener onLocationStaleListener,
+    jni$_.JObject onLocationStaleListener,
   ) {
     final _$onLocationStaleListener = onLocationStaleListener.reference;
     _addOnLocationStaleListener(
@@ -1708,7 +1678,7 @@ class LocationComponent extends jni$_.JObject {
 
   /// from: `public void removeOnLocationStaleListener(org.maplibre.android.location.OnLocationStaleListener onLocationStaleListener)`
   void removeOnLocationStaleListener(
-    onlocationstalelistener$_.OnLocationStaleListener onLocationStaleListener,
+    jni$_.JObject onLocationStaleListener,
   ) {
     final _$onLocationStaleListener = onLocationStaleListener.reference;
     _removeOnLocationStaleListener(
