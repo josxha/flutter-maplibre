@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/platform/ios/extensions.dart';
 import 'package:maplibre/src/platform/offline_manager_native.dart';
-import 'package:maplibre_ios/maplibre_ffi.dart';
+import 'package:maplibre_ios/maplibre_ffi.g.dart';
 import 'package:objective_c/objective_c.dart' as objc;
 
 /// iOS specific implementation of the [OfflineManager].
@@ -73,14 +73,14 @@ class OfflineManagerIos extends OfflineManagerNative {
 
   @override
   Future<OfflineRegion> getOfflineRegion({required int regionId}) async {
-    final packs = _storage.packs;
-    for (var i = 0; i < packs!.count; i++) {
-      final ffiPack = MLNOfflinePack.castFrom(packs[i]);
+    final packs = _storage.packs!.asDart();
+    for (var i = 0; i < packs.length; i++) {
+      final ffiPack = MLNOfflinePack.as(packs[i]);
       final jsonBytes = ffiPack.context.toList();
       final json = jsonDecode(utf8.decode(jsonBytes)) as Map<String, Object?>;
       // print(json);
       if (json['id'] == regionId) {
-        final ffiRegion = MLNTilePyramidOfflineRegion.castFrom(ffiPack.region);
+        final ffiRegion = MLNTilePyramidOfflineRegion.as(ffiPack.region);
         return OfflineRegion(
           id: regionId,
           bounds: ffiRegion.bounds.toLngLatBounds(),
@@ -109,10 +109,10 @@ class OfflineManagerIos extends OfflineManagerNative {
 
   @override
   Future<List<OfflineRegion>> listOfflineRegions() async {
-    final packs = _storage.packs;
-    return List<OfflineRegion>.generate(packs!.count, (i) {
-      final ffiPack = MLNOfflinePack.castFrom(packs[i]);
-      final ffiRegion = MLNTilePyramidOfflineRegion.castFrom(ffiPack.region);
+    final packs = _storage.packs!.asDart();
+    return List<OfflineRegion>.generate(packs.length, (i) {
+      final ffiPack = MLNOfflinePack.as(packs[i]);
+      final ffiRegion = MLNTilePyramidOfflineRegion.as(ffiPack.region);
       final jsonBytes = ffiPack.context.toList();
       final json = jsonDecode(utf8.decode(jsonBytes)) as Map<String, Object?>;
       return OfflineRegion(

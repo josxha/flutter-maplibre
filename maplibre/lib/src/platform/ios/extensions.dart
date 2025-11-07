@@ -3,7 +3,7 @@ import 'dart:ffi' hide Size;
 
 import 'package:flutter/cupertino.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre_ios/maplibre_ffi.dart';
+import 'package:maplibre_ios/maplibre_ffi.g.dart';
 import 'package:objective_c/objective_c.dart';
 
 /// Internal extensions on [CLLocationCoordinate2D].
@@ -122,7 +122,8 @@ extension MLNStyleLayerExt on MLNStyleLayer {
       // print('${property.key}   ${jsonEncode(property.value)}');
       switch (property.key) {
         case 'visibility':
-          visible = property.value == 'none';
+          // visible = property.value == 'none';
+          break;
         default:
           setProperty(property.key, property.value);
       }
@@ -162,7 +163,7 @@ extension MLNStyleLayerExt on MLNStyleLayer {
       case 'circle-translate-anchor':
         (this as MLNCircleStyleLayer).circleTranslateAnchor = expression;
       case 'fill-antialias':
-        (this as MLNFillStyleLayer).fillAntialiased = expression;
+        (this as MLNFillStyleLayer).fillAntialias = expression;
       case 'fill-translate':
         (this as MLNFillStyleLayer).fillTranslation = expression;
       case 'fill-translate-anchor':
@@ -197,7 +198,8 @@ extension MLNStyleLayerExt on MLNStyleLayer {
       case 'icon-image':
         (this as MLNSymbolStyleLayer).iconImageName = expression;
       case 'icon-optional':
-        (this as MLNSymbolStyleLayer).iconOptional = expression;
+        // (this as MLNSymbolStyleLayer).iconOptional = expression;
+        break;
       case 'icon-rotate':
         (this as MLNSymbolStyleLayer).iconRotation = expression;
       case 'icon-size':
@@ -225,7 +227,8 @@ extension MLNStyleLayerExt on MLNStyleLayer {
       case 'text-justify':
         (this as MLNSymbolStyleLayer).textJustification = expression;
       case 'text-optional':
-        (this as MLNSymbolStyleLayer).textOptional = expression;
+        // (this as MLNSymbolStyleLayer).textOptional = expression;
+        break;
       case 'text-rotate':
         (this as MLNSymbolStyleLayer).textRotation = expression;
       case 'text-writing-mode':
