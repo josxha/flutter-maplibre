@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:jni/jni.dart';
-import 'package:maplibre/src/platform/android/jni.dart';
+import 'package:maplibre/src/platform/android/jni.g.dart';
 
 /// Get the Android [Context].
 Context getJContext() =>

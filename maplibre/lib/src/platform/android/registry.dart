@@ -1,4 +1,4 @@
-import 'package:maplibre/src/platform/android/jni.dart' as jni;
+import 'package:maplibre/src/platform/android/jni.g.dart' as jni;
 
 /// Registry for platform views.
 abstract class Registry {

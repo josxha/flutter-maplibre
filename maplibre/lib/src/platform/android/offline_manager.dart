@@ -5,7 +5,7 @@ import 'package:jni/jni.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/platform/android/extensions.dart';
 import 'package:maplibre/src/platform/android/functions.dart';
-import 'package:maplibre/src/platform/android/jni.dart' as jni;
+import 'package:maplibre/src/platform/android/jni.g.dart' as jni;
 
 /// MapLibre Android specific implementation of the [OfflineManager].
 class OfflineManagerAndroid implements OfflineManager {
