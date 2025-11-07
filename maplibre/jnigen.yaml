@@ -5,7 +5,7 @@ preamble: |
   // ignore_for_file: type=lint
 android_sdk_config:
   add_gradle_deps: true
-  android_example: 'example/'
+  android_example: '../example/'
 #suspend_fun_to_async: true
 output:
   dart:

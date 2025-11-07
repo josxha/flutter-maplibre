@@ -15,7 +15,7 @@ class PermissionManagerAndroid implements PermissionManager {
   @override
   bool get locationPermissionsGranted => using(
     (arena) => jni.PermissionsManager.areLocationPermissionsGranted(
-      getJContext(arena),
+      getJContext(),
     ),
   );
 
@@ -26,7 +26,7 @@ class PermissionManagerAndroid implements PermissionManager {
   @override
   bool get backgroundLocationPermissionGranted => using(
     (arena) => jni.PermissionsManager.isBackgroundLocationPermissionGranted(
-      getJContext(arena),
+      getJContext(),
     ),
   );
 
@@ -38,7 +38,7 @@ class PermissionManagerAndroid implements PermissionManager {
     final listener = jni.PermissionsListener.implement(
       _PermissionsListener(WeakReference(completer)),
     )..releasedBy(arena);
-    final jActivity = getJActivity(arena);
+    final jActivity = getJActivity();
     jni.PermissionsManager(listener)
       ..releasedBy(arena)
       ..requestLocationPermissions(jActivity);

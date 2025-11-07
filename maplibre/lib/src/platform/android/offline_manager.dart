@@ -15,7 +15,7 @@ class OfflineManagerAndroid implements OfflineManager {
 
   /// Create a new [OfflineManager].
   static Future<OfflineManager> createInstance() async => using((arena) async {
-    final jContext = getJContext(arena);
+    final jContext = getJContext();
     jni.MapLibre.getInstance(jContext);
     final jManager = jni.OfflineManager.getInstance(jContext);
     return OfflineManagerAndroid._(jManager);

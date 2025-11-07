@@ -115,7 +115,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative
   /// guaranteed that the map is ready.
   void _onPlatformViewCreated(int viewId) => using((arena) {
     _viewId = viewId;
-    final jContext = getJContext(arena);
+    final jContext = getJContext();
     final cameraBuilder = jni.CameraPosition$Builder()
       ..releasedBy(arena)
       ..zoom(options.initZoom)
@@ -616,7 +616,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative
       BearingRenderMode.compass => jni.RenderMode.COMPASS,
       BearingRenderMode.gps => jni.RenderMode.GPS,
     };
-    final jniContext = getJContext(arena);
+    final jniContext = getJContext();
     final locOptionsBuilder =
         jni.LocationComponentOptions.builder(jniContext)
               .pulseFadeEnabled(pulseFade)!

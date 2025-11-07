@@ -10,7 +10,7 @@ final class FlutterApi with jni.$FlutterApi {
 
   @override
   jni.PlatformView createPlatformView(int viewId) => using((arena) {
-    final jContext = getJContext(arena);
+    final jContext = getJContext();
 
     // MapLibre.getInstance needs to be called before creating the map.
     jni.MapLibre.getInstance(jContext);
