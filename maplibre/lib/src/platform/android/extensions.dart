@@ -1,7 +1,7 @@
 import 'package:flutter/rendering.dart';
 import 'package:jni/jni.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/platform/android/jni.dart' as jni;
+import 'package:maplibre/src/platform/android/jni.g.dart' as jni;
 import 'package:maplibre/src/platform/pigeon.g.dart' as pigeon;
 
 /// Extension methods for the [Geographic] class. Not exported publicly.

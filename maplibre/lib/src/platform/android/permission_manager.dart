@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:jni/jni.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/platform/android/functions.dart';
-import 'package:maplibre/src/platform/android/jni.dart' as jni;
+import 'package:maplibre/src/platform/android/jni.g.dart' as jni;
 
 /// MapLibre Android specific implementation of the [PermissionManager].
 ///
@@ -15,7 +15,7 @@ class PermissionManagerAndroid implements PermissionManager {
   @override
   bool get locationPermissionsGranted => using(
     (arena) => jni.PermissionsManager.areLocationPermissionsGranted(
-      getJContext(arena),
+      getJContext(),
     ),
   );
 
@@ -26,7 +26,7 @@ class PermissionManagerAndroid implements PermissionManager {
   @override
   bool get backgroundLocationPermissionGranted => using(
     (arena) => jni.PermissionsManager.isBackgroundLocationPermissionGranted(
-      getJContext(arena),
+      getJContext(),
     ),
   );
 
@@ -38,7 +38,7 @@ class PermissionManagerAndroid implements PermissionManager {
     final listener = jni.PermissionsListener.implement(
       _PermissionsListener(WeakReference(completer)),
     )..releasedBy(arena);
-    final jActivity = getJActivity(arena);
+    final jActivity = getJActivity();
     jni.PermissionsManager(listener)
       ..releasedBy(arena)
       ..requestLocationPermissions(jActivity);

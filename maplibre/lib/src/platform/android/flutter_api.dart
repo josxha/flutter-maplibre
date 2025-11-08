@@ -1,6 +1,6 @@
 import 'package:ffi/ffi.dart';
 import 'package:maplibre/src/platform/android/functions.dart';
-import 'package:maplibre/src/platform/android/jni.dart' as jni;
+import 'package:maplibre/src/platform/android/jni.g.dart' as jni;
 import 'package:maplibre/src/platform/android/registry.dart';
 
 /// The members of this class are called by the native Android code.
@@ -10,7 +10,7 @@ final class FlutterApi with jni.$FlutterApi {
 
   @override
   jni.PlatformView createPlatformView(int viewId) => using((arena) {
-    final jContext = getJContext(arena);
+    final jContext = getJContext();
 
     // MapLibre.getInstance needs to be called before creating the map.
     jni.MapLibre.getInstance(jContext);
