@@ -6,7 +6,7 @@ updates:
     schedule:
       interval: "weekly"
   - package-ecosystem: "pub"
-    directories: [ "/", "/example" ]
+    directories: [ "/example", "/maplibre", "maplibre_ios", "/" ]
     schedule:
       interval: "weekly"
     ignore:
@@ -23,7 +23,7 @@ updates:
       dependencies:
         patterns: [ "*" ]
   - package-ecosystem: "gradle"
-    directories: [ "/android" , "/example/android" ]
+    directories: [ "/maplibre/android" , "/example/android" ]
     schedule:
       interval: "weekly"
     groups:
