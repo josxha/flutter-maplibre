@@ -5,7 +5,7 @@ import 'package:maplibre/src/platform/android/jni.g.dart';
 
 /// Get the Android [Context].
 Context getJContext() =>
-    Jni.androidApplicationContext(_engineId).as(Context.type);
+    Jni.androidApplicationContext.as(Context.type);
 
 /// Get the Android [Activity].
 Activity getJActivity() =>
