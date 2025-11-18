@@ -111,10 +111,8 @@ class MapOptions {
   const MapOptions({
     required this.style,
     required this.zoom,
-    required this.center,
     required this.pitch,
     required this.bearing,
-    required this.maxBounds,
     required this.minZoom,
     required this.maxZoom,
     required this.minPitch,
@@ -123,6 +121,8 @@ class MapOptions {
     required this.androidTextureMode,
     required this.androidTranslucentTextureSurface,
     required this.androidForegroundLoadColor,
+    required this.center,
+    required this.maxBounds,
   });
 
   /// The URL of the used map style.
