@@ -1,1 +1,2 @@
 swiftformat:disable all
+ignore_for_file: type=lint
