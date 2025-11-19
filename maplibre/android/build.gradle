@@ -12,10 +12,10 @@ buildscript {
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:8.12.3")
+        classpath("com.android.tools.build:gradle:8.13.1")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
         // noinspection GradleDynamicVersion
-        classpath("org.jlleitschuh.gradle:ktlint-gradle:13.1.+")
+        classpath("org.jlleitschuh.gradle:ktlint-gradle:14.0.+")
     }
 }
 
@@ -67,7 +67,7 @@ android {
 
     dependencies {
         // jnigen picks up api dependencies
-        api 'org.maplibre.gl:android-sdk:12.0.+'
+        api 'org.maplibre.gl:android-sdk:12.1.+'
         testImplementation "org.jetbrains.kotlin:kotlin-test"
         testImplementation "org.mockito:mockito-core:5.20.+"
     }
