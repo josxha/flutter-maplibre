@@ -1,6 +1,10 @@
 ## 0.3.2
 
-TODO
+Maintenance release with some optimizations and dependency upgrades.
+
+- Optimize package size on pub.dev
+- Clean up repository structure
+- Upgrade `jni` / `jnigen` to 0.15
 
 ## 0.3.1
 
