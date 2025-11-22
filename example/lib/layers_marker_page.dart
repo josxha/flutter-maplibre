@@ -13,10 +13,22 @@ class LayersMarkerPage extends StatefulWidget {
 
 class _LayersMarkerPageState extends State<LayersMarkerPage> {
   final _points = <Feature<Point>>[
-    const Feature(geometry: Point(Geographic(lon: 9.17, lat: 47.68))),
-    const Feature(geometry: Point(Geographic(lon: 9.17, lat: 48))),
-    const Feature(geometry: Point(Geographic(lon: 9, lat: 48))),
-    const Feature(geometry: Point(Geographic(lon: 9.5, lat: 48))),
+    const Feature(
+      geometry: Point(Geographic(lon: 9.17, lat: 47.68)),
+      properties: {'name': 'Marker 1'},
+    ),
+    const Feature(
+      geometry: Point(Geographic(lon: 9.17, lat: 48)),
+      properties: {'name': 'Marker 2'},
+    ),
+    const Feature(
+      geometry: Point(Geographic(lon: 9, lat: 48)),
+      properties: {'name': 'Marker 3'},
+    ),
+    const Feature(
+      geometry: Point(Geographic(lon: 9.5, lat: 48)),
+      properties: {'name': 'Marker 4'},
+    ),
   ];
 
   bool _imageLoaded = false;
@@ -55,7 +67,7 @@ class _LayersMarkerPageState extends State<LayersMarkerPage> {
         layers: [
           MarkerLayer(
             points: _points,
-            textField: 'Marker',
+            textField: '{name}',
             textAllowOverlap: true,
             iconImage: _imageLoaded ? 'marker' : null,
             iconSize: 0.15,
