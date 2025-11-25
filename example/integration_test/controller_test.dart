@@ -25,7 +25,7 @@ void main() {
       await tester.pumpWidget(app);
       final ctrl = await ctrlCompleter.future;
       events.clear();
-      await ctrl.moveCamera(
+      ctrl.moveCamera(
         center: const Geographic(lon: 1, lat: 1),
         bearing: 1,
         zoom: 1,
@@ -742,7 +742,7 @@ void main() {
       final app = App(onMapCreated: ctrlCompleter.complete);
       await tester.pumpWidget(app);
       final ctrl = await ctrlCompleter.future;
-      await ctrl.moveCamera(
+      ctrl.moveCamera(
         center: const Geographic(lon: 1, lat: 2),
         bearing: 1,
         zoom: 1,

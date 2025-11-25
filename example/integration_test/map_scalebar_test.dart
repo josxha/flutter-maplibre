@@ -33,7 +33,7 @@ void main() {
       final widths = <double>[];
 
       for (final zoom in zoomLevels) {
-        await ctrl.moveCamera(zoom: zoom);
+        ctrl.moveCamera(zoom: zoom);
         await tester.pumpAndSettle(const Duration(seconds: 2));
 
         final size = tester.getSize(customPaintFinder);
