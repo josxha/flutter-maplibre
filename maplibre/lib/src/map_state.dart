@@ -1,10 +1,16 @@
-import 'package:flutter/widgets.dart';
+import 'dart:math' as math;
+import 'dart:ui';
+
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/inherited_model.dart';
 import 'package:maplibre/src/layer/layer_manager.dart';
+import 'package:pointer_interceptor/pointer_interceptor.dart';
 
 /// The [State] of the [MapLibreMap] widget.
 abstract class MapLibreMapState extends State<MapLibreMap>
+    with TickerProviderStateMixin
     implements MapController {
   /// The counter is used to ensure an unique [viewName] for the platform view.
   static int _counter = 0;
@@ -27,17 +33,53 @@ abstract class MapLibreMapState extends State<MapLibreMap>
   /// is set.
   bool isInitialized = false;
 
+  late final _animationController = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 300),
+  )..addListener(_onAnimation);
+  Animation<MapCamera>? _animation;
+  ScaleStartDetails? _onScaleStartEvent;
+  TapDownDetails? _doubleTapDownDetails;
+  ScaleUpdateDetails? _lastScaleUpdateDetails;
+  MapCamera? _targetCamera;
+
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         buildPlatformWidget(context),
-        MapLibreInheritedModel(
-          mapController: this,
-          mapCamera: camera,
-          child: isInitialized
-              ? Stack(children: widget.children)
-              : const SizedBox.shrink(),
+        PointerInterceptor(
+          debug: true,
+          child: Listener(
+            onPointerDown: (event) => _stopAnimation(),
+            onPointerSignal: (event) {
+              switch (event) {
+                case final PointerScrollEvent event:
+                  _scrollWheelZoom(event);
+              }
+            },
+            child: GestureDetector(
+              onDoubleTapDown: _onDoubleTapDown,
+              onDoubleTapCancel: _onDoubleTapCancel,
+              onDoubleTap: _onDoubleTap,
+              // pan and scale, scale is a superset of the pan gesture
+              onScaleStart: _onScaleStart,
+              onScaleUpdate: _onScaleUpdate,
+              onScaleEnd: _onScaleEnd,
+              // This transparent ColoredBox is needed to make sure the
+              // GestureDetector has a size and can detect gestures.
+              child: ColoredBox(
+                color: Colors.transparent,
+                child: MapLibreInheritedModel(
+                  mapController: this,
+                  mapCamera: camera,
+                  child: isInitialized
+                      ? Stack(children: widget.children)
+                      : const SizedBox.expand(),
+                ),
+              ),
+            ),
+          ),
         ),
       ],
     );
@@ -45,4 +87,130 @@ abstract class MapLibreMapState extends State<MapLibreMap>
 
   /// Build the platform specific widget.
   Widget buildPlatformWidget(BuildContext context);
+
+  void _onDoubleTap() {
+    debugPrint('Double tap detected');
+    _doubleTapDownDetails = null;
+    final camera = this.camera!;
+
+    // zoom in on double tap
+    final tweens = _MapCameraTween(
+      begin: camera,
+      end: camera.copyWith(zoom: camera.zoom + 1),
+    );
+    _animation = tweens.animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
+    );
+    _animationController.forward(from: 0);
+  }
+
+  void _onAnimation() => moveCamera(
+    zoom: _animation!.value.zoom,
+    center: _animation!.value.center,
+    bearing: _animation!.value.bearing,
+    pitch: _animation!.value.pitch,
+  );
+
+  @override
+  void dispose() {
+    _animation?.removeListener(_onAnimation);
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  void _onDoubleTapDown(TapDownDetails details) {
+    // zoom in or out on double tap down
+    debugPrint('Double tap down at position: ${details.localPosition}');
+    _doubleTapDownDetails = details;
+  }
+
+  void _onDoubleTapCancel() {
+    _doubleTapDownDetails = null;
+  }
+
+  void _stopAnimation() {
+    _animationController.stop();
+    _animation = null;
+    _targetCamera = null;
+  }
+
+  void _scrollWheelZoom(PointerScrollEvent event) {
+    debugPrint('Scroll wheel event: ${event.scrollDelta.dy}');
+    final camera = this.camera!;
+    final zoomChange = -event.scrollDelta.dy / 300; // sensitivity
+
+    final target = _targetCamera = camera.copyWith(
+      zoom: (_targetCamera?.zoom ?? camera.zoom) + zoomChange,
+      center: (_targetCamera?.center ?? camera.center).intermediatePointTo(
+        toLngLat(event.localPosition),
+        fraction: zoomChange > 0 ? 0.2 : -0.2,
+      ),
+    );
+    final tweens = _MapCameraTween(begin: camera, end: target);
+    _animation = tweens.animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeOut),
+    );
+    _animationController.forward(from: 0);
+  }
+
+  void _onScaleStart(ScaleStartDetails details) {
+    debugPrint('Scale start: $details');
+    _onScaleStartEvent = details;
+  }
+
+  void _onScaleUpdate(ScaleUpdateDetails details) {
+    // debugPrint('Scale update: $details');
+    final camera = this.camera!;
+    final startEvent = _onScaleStartEvent;
+    if (startEvent == null) return;
+    final lastEvent = _lastScaleUpdateDetails;
+    _lastScaleUpdateDetails = details;
+
+    // zoom
+    final lastScale = lastEvent?.scale ?? 1.0;
+    final scaleDelta = details.scale - lastScale;
+    final targetZoom = switch (scaleDelta) {
+      0.0 => camera.zoom,
+      _ => camera.zoom + scaleDelta * 5, // sensitivity
+    };
+
+    // center
+    final lastPointerOffset = lastEvent?.focalPoint ?? startEvent.focalPoint;
+    final delta = details.focalPoint - lastPointerOffset;
+    final centerOffset = toScreenLocation(camera.center);
+    final newCenterOffset = centerOffset - delta;
+    final newCenter = toLngLat(newCenterOffset);
+
+    // bearing
+    final rotationDelta = details.rotation - (lastEvent?.rotation ?? 0.0);
+    final targetBearing = camera.bearing - rotationDelta * radian2Degree;
+
+    moveCamera(
+      zoom: targetZoom.clamp(options.minZoom, options.maxZoom),
+      center: newCenter,
+      bearing: targetBearing,
+      pitch: 0,
+    );
+  }
+
+  void _onScaleEnd(ScaleEndDetails details) {
+    debugPrint('Scale end: $details');
+    _onScaleStartEvent = null;
+    _lastScaleUpdateDetails = null;
+  }
+}
+
+class _MapCameraTween extends Tween<MapCamera> {
+  _MapCameraTween({required MapCamera begin, required MapCamera end})
+    : super(begin: begin, end: end);
+
+  @override
+  MapCamera lerp(double t) {
+    return MapCamera(
+      center: begin!.center.intermediatePointTo(end!.center, fraction: t),
+      zoom: lerpDouble(begin!.zoom, end!.zoom, t)!,
+      bearing: lerpDouble(begin!.bearing, end!.bearing, t)!,
+      pitch: lerpDouble(begin!.pitch, end!.pitch, t)!,
+    );
+  }
 }

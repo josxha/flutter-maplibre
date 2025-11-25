@@ -39,6 +39,7 @@ class _StyledMapPageState extends State<StyledMapPage> {
           initCenter: const Geographic(lon: 9.17, lat: 47.68),
           initZoom: 2,
           initStyle: _style.uri,
+          gestures: const MapGestures.none()
         ),
         children: const [
           MapScalebar(),
