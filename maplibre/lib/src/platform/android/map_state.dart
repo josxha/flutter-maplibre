@@ -328,7 +328,6 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative
       cameraPosition,
     )..releasedBy(arena);
     _jMap?.moveCamera(cameraUpdate);
-    _jMap?.triggerRepaint();
   });
 
   @override
