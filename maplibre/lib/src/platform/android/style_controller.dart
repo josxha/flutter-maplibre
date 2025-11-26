@@ -262,4 +262,7 @@ class StyleControllerAndroid extends StyleController {
   void setProjection(MapProjection projection) {
     // globe is not supported on android.
   }
+
+  @override
+  MapProjection get projection => MapProjection.mercator;
 }

@@ -131,6 +131,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
       ffiCamera.centerCoordinate = center.toCLLocationCoordinate2D();
     }
     _mapView.setCamera(ffiCamera, animated: false);
+    _mapView.triggerRepaint();
   }
 
   @override

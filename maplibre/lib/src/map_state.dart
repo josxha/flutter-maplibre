@@ -40,6 +40,8 @@ abstract class MapLibreMapState extends State<MapLibreMap>
   ScaleStartDetails? _onScaleStartEvent;
   TapDownDetails? _doubleTapDownDetails;
   ScaleUpdateDetails? _lastScaleUpdateDetails;
+  ScaleUpdateDetails? _secondToLastScaleUpdateDetails;
+  PointerDownEvent? _pointerDownEvent;
   MapCamera? _targetCamera;
 
   @override
@@ -48,9 +50,17 @@ abstract class MapLibreMapState extends State<MapLibreMap>
       children: [
         buildPlatformWidget(context),
         PointerInterceptor(
-          debug: true,
           child: Listener(
-            onPointerDown: (event) => _stopAnimation(),
+            onPointerDown: (event) {
+              /*web.document.addEventListener(
+                'contextmenu',
+                (interop.PointerEvent event) {
+                  event.preventDefault();
+                }.toJS,
+              );*/
+              _pointerDownEvent = event;
+              _stopAnimation();
+            },
             onPointerSignal: (event) {
               switch (event) {
                 case final PointerScrollEvent event:
@@ -89,13 +99,21 @@ abstract class MapLibreMapState extends State<MapLibreMap>
 
   void _onDoubleTap() {
     debugPrint('Double tap detected');
+    final details = _doubleTapDownDetails;
     _doubleTapDownDetails = null;
+    if (details == null) return;
     final camera = this.camera!;
 
     // zoom in on double tap
     final tweens = _MapCameraTween(
       begin: camera,
-      end: camera.copyWith(zoom: camera.zoom + 1),
+      end: camera.copyWith(
+        zoom: camera.zoom + 1,
+        center: (_targetCamera?.center ?? camera.center).intermediatePointTo(
+          toLngLat(details.localPosition),
+          fraction: 0.5,
+        ),
+      ),
     );
     _animation = tweens.animate(
       CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
@@ -134,7 +152,7 @@ abstract class MapLibreMapState extends State<MapLibreMap>
   }
 
   void _scrollWheelZoom(PointerScrollEvent event) {
-    debugPrint('Scroll wheel event: ${event.scrollDelta.dy}');
+    // debugPrint('Scroll wheel event: ${event.scrollDelta.dy}');
     final camera = this.camera!;
     final zoomChange = -event.scrollDelta.dy / 300; // sensitivity
 
@@ -161,41 +179,97 @@ abstract class MapLibreMapState extends State<MapLibreMap>
     // debugPrint('Scale update: $details');
     final camera = this.camera!;
     final startEvent = _onScaleStartEvent;
-    if (startEvent == null) return;
+    final pointerDownEvent = _pointerDownEvent;
+    if (startEvent == null || pointerDownEvent == null) return;
     final lastEvent = _lastScaleUpdateDetails;
+    _secondToLastScaleUpdateDetails = _lastScaleUpdateDetails;
     _lastScaleUpdateDetails = details;
 
-    // zoom
-    final lastScale = lastEvent?.scale ?? 1.0;
-    final scaleDelta = details.scale - lastScale;
-    final targetZoom = switch (scaleDelta) {
-      0.0 => camera.zoom,
-      _ => camera.zoom + scaleDelta * 5, // sensitivity
-    };
+    if ((pointerDownEvent.buttons & kSecondaryMouseButton) != 0) {
+      // secondary button (right)
+      final lastPointerOffset = lastEvent?.focalPoint ?? startEvent.focalPoint;
+      final delta = details.focalPoint - lastPointerOffset;
 
-    // center
-    final lastPointerOffset = lastEvent?.focalPoint ?? startEvent.focalPoint;
-    final delta = details.focalPoint - lastPointerOffset;
-    final centerOffset = toScreenLocation(camera.center);
-    final newCenterOffset = centerOffset - delta;
-    final newCenter = toLngLat(newCenterOffset);
+      moveCamera(
+        bearing: camera.bearing + delta.dx * 0.5, // sensitivity
+        pitch: camera.pitch - delta.dy * 0.5, // sensitivity
+        zoom: camera.zoom, // TODO adjust for globe projection
+      );
+    } else if ((pointerDownEvent.buttons & kPrimaryMouseButton) != 0) {
+      // primary button (left)
 
-    // bearing
-    final rotationDelta = details.rotation - (lastEvent?.rotation ?? 0.0);
-    final targetBearing = camera.bearing - rotationDelta * radian2Degree;
+      // zoom
+      final lastScale = lastEvent?.scale ?? 1.0;
+      final scaleDelta = details.scale - lastScale;
+      final targetZoom = switch (scaleDelta) {
+        0.0 => camera.zoom,
+        _ => camera.zoom + scaleDelta * 5, // sensitivity
+      };
 
-    moveCamera(
-      zoom: targetZoom.clamp(options.minZoom, options.maxZoom),
-      center: newCenter,
-      bearing: targetBearing,
-      pitch: 0,
-    );
+      // center
+      final lastPointerOffset = lastEvent?.focalPoint ?? startEvent.focalPoint;
+      final delta = details.focalPoint - lastPointerOffset;
+      final centerOffset = toScreenLocation(camera.center);
+      final newCenterOffset = centerOffset - delta;
+      final newCenter = toLngLat(newCenterOffset);
+
+      // bearing
+      final rotationDelta = details.rotation - (lastEvent?.rotation ?? 0.0);
+      final newBearing = camera.bearing - rotationDelta * radian2Degree;
+
+      moveCamera(
+        zoom: targetZoom.clamp(options.minZoom, options.maxZoom),
+        center: newCenter,
+        bearing: newBearing,
+      );
+    }
   }
 
   void _onScaleEnd(ScaleEndDetails details) {
     debugPrint('Scale end: $details');
+    final camera = this.camera!;
+    final firstEvent = _onScaleStartEvent;
+    final secondToLastEvent = _secondToLastScaleUpdateDetails;
+    final lastEvent = _lastScaleUpdateDetails;
+    if (lastEvent == null || firstEvent == null || secondToLastEvent == null) {
+      return;
+    }
+    // fling animation
+    final velocity = details.velocity.pixelsPerSecond.distance;
+    if (velocity >= 800) {
+      final offset = secondToLastEvent.focalPoint - lastEvent.focalPoint;
+      final distance = offset.distance;
+      final direction = offset.direction * radian2Degree + 90 + camera.bearing;
+      final tweens = _MapCameraTween(
+        begin: camera,
+        end: camera.copyWith(
+          center: camera.center.destinationPoint2D(
+            distance: distance,
+            bearing: direction,
+          ),
+        ),
+      );
+      _animation = tweens.animate(
+        CurvedAnimation(parent: _animationController, curve: Curves.easeOut),
+      );
+      _animationController
+        ..duration = Duration(
+          milliseconds: (distance / velocity * 1000).round(),
+        )
+        ..value = 0
+        ..fling(
+          velocity: velocity / 1000,
+          springDescription: SpringDescription.withDampingRatio(
+            mass: 1,
+            stiffness: 1000,
+            ratio: 3,
+          ),
+        );
+    }
+
     _onScaleStartEvent = null;
     _lastScaleUpdateDetails = null;
+    _secondToLastScaleUpdateDetails = null;
   }
 }
 
