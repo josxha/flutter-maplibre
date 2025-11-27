@@ -211,13 +211,14 @@ abstract class MapLibreMapState extends State<MapLibreMap>
 
     if (doubleTapDown != null && options.gestures.zoom) {
       // double tap drag: zoom
-      debugPrint('Double tap drag zoom detected $doubleTapDown');
+      // debugPrint('Double tap drag zoom detected $doubleTapDown');
       final lastY = lastEvent?.focalPoint.dy ?? startEvent.focalPoint.dy;
       final iOS = Theme.of(context).platform == TargetPlatform.iOS;
       var deltaY = details.focalPoint.dy - lastY;
       if (iOS) deltaY = -deltaY;
       final newZoom = camera.zoom + deltaY * 0.01; // sensitivity
       moveCamera(zoom: newZoom.clamp(options.minZoom, options.maxZoom));
+
     } else if ((buttons & kSecondaryMouseButton) != 0 || ctrlPressed) {
       // secondary button: pitch and bearing
       final lastPointerOffset = lastEvent?.focalPoint ?? startEvent.focalPoint;
@@ -232,11 +233,12 @@ abstract class MapLibreMapState extends State<MapLibreMap>
       }
       final newZoom = camera.zoom;
       if (options.gestures.zoom) {
-        // TODO adjust for globe projection
+        // TODO adjust newZoom for globe projection
       }
       moveCamera(bearing: newBearing, pitch: newPitch, zoom: newZoom);
+
     } else if ((buttons & kPrimaryMouseButton) != 0) {
-      // primary button: pan, zoom, bearing
+      // primary button: pan, zoom, bearing, pinch
 
       // zoom
       var newZoom = camera.zoom;
