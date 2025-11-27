@@ -287,4 +287,7 @@ class StyleControllerIos extends StyleController {
     }
     return attributions;
   }
+
+  @override
+  MapProjection get projection => MapProjection.mercator;
 }

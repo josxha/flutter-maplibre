@@ -127,6 +127,9 @@ abstract class StyleController {
   /// [MapProjection.globe] is currently on supported on web.
   void setProjection(MapProjection projection);
 
+  /// Get the map projection.
+  MapProjection get projection;
+
   /// Clean up resources.
   void dispose();
 }
