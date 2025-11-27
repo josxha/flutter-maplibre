@@ -33,8 +33,10 @@ abstract class MapLibreMapState extends State<MapLibreMap>
   /// is set.
   bool isInitialized = false;
 
-  late final _animationController = AnimationController(vsync: this)
-    ..addListener(_onAnimation);
+  late final _animationController = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 300),
+  )..addListener(_onAnimation);
   Animation<MapCamera>? _animation;
   ScaleStartDetails? _onScaleStartEvent;
   TapDownDetails? _doubleTapDownDetails;
@@ -98,28 +100,34 @@ abstract class MapLibreMapState extends State<MapLibreMap>
 
   void _onDoubleTap() {
     debugPrint('Double tap detected');
+
     final details = _doubleTapDownDetails;
     _doubleTapDownDetails = null;
     if (details == null) return;
-    final camera = this.camera!;
 
-    // zoom in on double tap
-    final tweens = _MapCameraTween(
-      begin: camera,
-      end: camera.copyWith(
-        zoom: camera.zoom + 1,
-        center: (_targetCamera?.center ?? camera.center).intermediatePointTo(
-          toLngLat(details.localPosition),
-          fraction: 0.5,
+    if (options.gestures.zoom) {
+      final camera = this.camera!;
+      final newCenter = (_targetCamera?.center ?? camera.center)
+          .intermediatePointTo(
+            toLngLat(details.localPosition),
+            fraction: 0.5,
+          );
+
+      // zoom in on double tap
+      final tweens = _MapCameraTween(
+        begin: camera,
+        end: camera.copyWith(
+          zoom: camera.zoom + 1,
+          center: newCenter,
         ),
-      ),
-    );
-    _animation = tweens.animate(
-      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
-    );
-    _animationController
-      ..duration = const Duration(milliseconds: 300)
-      ..forward(from: 0);
+      );
+      _animation = tweens.animate(
+        CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
+      );
+      _animationController
+        ..duration = const Duration(milliseconds: 300)
+        ..forward(from: 0);
+    }
   }
 
   void _onAnimation() => moveCamera(
@@ -154,23 +162,35 @@ abstract class MapLibreMapState extends State<MapLibreMap>
 
   void _scrollWheelZoom(PointerScrollEvent event) {
     // debugPrint('Scroll wheel event: ${event.scrollDelta.dy}');
-    final camera = this.camera!;
-    final zoomChange = -event.scrollDelta.dy / 300; // sensitivity
+    if (options.gestures.zoom) {
+      final currCamera = camera!;
+      final zoomChange = -event.scrollDelta.dy / 300; // sensitivity
+      final prevTarget = _targetCamera ?? currCamera;
 
-    final target = _targetCamera = camera.copyWith(
-      zoom: (_targetCamera?.zoom ?? camera.zoom) + zoomChange,
-      center: (_targetCamera?.center ?? camera.center).intermediatePointTo(
-        toLngLat(event.localPosition),
-        fraction: zoomChange > 0 ? 0.2 : -0.2,
-      ),
-    );
-    final tweens = _MapCameraTween(begin: camera, end: target);
-    _animation = tweens.animate(
-      CurvedAnimation(parent: _animationController, curve: Curves.easeOut),
-    );
-    _animationController.forward(from: 0);
+      var targetZoom = prevTarget.zoom;
+      if (options.gestures.zoom) {
+        targetZoom = prevTarget.zoom + zoomChange;
+      }
+      var targetCenter = prevTarget.center;
+      if (options.gestures.pan) {
+        targetCenter = prevTarget.center.intermediatePointTo(
+          toLngLat(event.localPosition),
+          fraction: zoomChange > 0 ? 0.2 : -0.2,
+        );
+      }
+      final targetCamera = _targetCamera = currCamera.copyWith(
+        zoom: targetZoom,
+        center: targetCenter,
+      );
+      final tweens = _MapCameraTween(begin: currCamera, end: targetCamera);
+      _animation = tweens.animate(
+        CurvedAnimation(parent: _animationController, curve: Curves.easeOut),
+      );
+      _animationController.forward(from: 0);
+    }
   }
 
+  // ignore: use_setters_to_change_properties
   void _onScaleStart(ScaleStartDetails details) {
     // debugPrint('Scale start: $details');
     _onScaleStartEvent = details;
@@ -186,8 +206,10 @@ abstract class MapLibreMapState extends State<MapLibreMap>
     final lastEvent = _lastScaleUpdateDetails;
     _secondToLastScaleUpdateDetails = _lastScaleUpdateDetails;
     _lastScaleUpdateDetails = details;
+    final ctrlPressed = HardwareKeyboard.instance.isControlPressed;
+    final buttons = pointerDownEvent.buttons;
 
-    if (doubleTapDown != null) {
+    if (doubleTapDown != null && options.gestures.zoom) {
       // double tap drag: zoom
       debugPrint('Double tap drag zoom detected $doubleTapDown');
       final lastY = lastEvent?.focalPoint.dy ?? startEvent.focalPoint.dy;
@@ -195,51 +217,56 @@ abstract class MapLibreMapState extends State<MapLibreMap>
       var deltaY = details.focalPoint.dy - lastY;
       if (iOS) deltaY = -deltaY;
       final newZoom = camera.zoom + deltaY * 0.01; // sensitivity
-      moveCamera(
-        zoom: newZoom.clamp(options.minZoom, options.maxZoom),
-      );
-      return;
-    }
-
-    final ctrlPressed = HardwareKeyboard.instance.isControlPressed;
-    final buttons = pointerDownEvent.buttons;
-    if ((buttons & kSecondaryMouseButton) != 0 || ctrlPressed) {
+      moveCamera(zoom: newZoom.clamp(options.minZoom, options.maxZoom));
+    } else if ((buttons & kSecondaryMouseButton) != 0 || ctrlPressed) {
       // secondary button: pitch and bearing
       final lastPointerOffset = lastEvent?.focalPoint ?? startEvent.focalPoint;
       final delta = details.focalPoint - lastPointerOffset;
-
-      moveCamera(
-        bearing: camera.bearing + delta.dx * 0.5, // sensitivity
-        pitch: camera.pitch - delta.dy * 0.5, // sensitivity
-        zoom: camera.zoom, // TODO adjust for globe projection
-      );
+      var newBearing = camera.bearing;
+      if (options.gestures.rotate) {
+        newBearing = camera.bearing + delta.dx * 0.5; // sensitivity
+      }
+      var newPitch = camera.pitch;
+      if (options.gestures.pitch) {
+        newPitch = camera.pitch - delta.dy * 0.5; // sensitivity;
+      }
+      final newZoom = camera.zoom;
+      if (options.gestures.zoom) {
+        // TODO adjust for globe projection
+      }
+      moveCamera(bearing: newBearing, pitch: newPitch, zoom: newZoom);
     } else if ((buttons & kPrimaryMouseButton) != 0) {
       // primary button: pan, zoom, bearing
 
       // zoom
+      var newZoom = camera.zoom;
       final lastScale = lastEvent?.scale ?? 1.0;
       final scaleDelta = details.scale - lastScale;
-      final targetZoom = switch (scaleDelta) {
-        0.0 => camera.zoom,
-        _ => camera.zoom + scaleDelta * 1, // sensitivity
-      };
+      if (scaleDelta != 0 && options.gestures.zoom) {
+        const scaleSensitivity = 1.0;
+        newZoom = camera.zoom + scaleDelta * scaleSensitivity;
+      }
 
       // center
-      final lastPointerOffset = lastEvent?.focalPoint ?? startEvent.focalPoint;
-      final delta = details.focalPoint - lastPointerOffset;
-      final centerOffset = toScreenLocation(camera.center);
-      final newCenterOffset = centerOffset - delta;
-      final newCenter = toLngLat(newCenterOffset);
+      var newCenter = camera.center;
+      if (options.gestures.pan) {
+        final lastPointerOffset =
+            lastEvent?.focalPoint ?? startEvent.focalPoint;
+        final delta = details.focalPoint - lastPointerOffset;
+        final centerOffset = toScreenLocation(camera.center);
+        final newCenterOffset = centerOffset - delta;
+        newCenter = toLngLat(newCenterOffset);
+      }
 
       // bearing
-      final rotationDelta = details.rotation - (lastEvent?.rotation ?? 0.0);
-      final newBearing = camera.bearing - rotationDelta * radian2Degree;
+      var newBearing = camera.bearing;
+      if (options.gestures.rotate && details.rotation != 0.0) {
+        final lastRotation = lastEvent?.rotation ?? 0.0;
+        final rotationDelta = details.rotation - lastRotation;
+        newBearing = camera.bearing - rotationDelta * radian2Degree;
+      }
 
-      moveCamera(
-        zoom: targetZoom.clamp(options.minZoom, options.maxZoom),
-        center: newCenter,
-        bearing: newBearing,
-      );
+      moveCamera(zoom: newZoom, center: newCenter, bearing: newBearing);
     }
   }
 
@@ -252,22 +279,26 @@ abstract class MapLibreMapState extends State<MapLibreMap>
     if (firstEvent == null) return;
 
     // zoom out
-    if (lastEvent == null) {
+    if (lastEvent == null && options.gestures.zoom) {
       debugPrint('### Zoom out on scale end');
-      animateCamera(
-        zoom: (camera.zoom - 1).clamp(options.minZoom, options.maxZoom),
-        center: camera.center.intermediatePointTo(
-          toLngLat(firstEvent.focalPoint),
-          fraction: -0.8,
-        ),
-      );
-    } else if (secondToLastEvent != null) {
+      var newCenter = camera.center;
+      if (options.gestures.pan) {
+        newCenter = toLngLat(
+          firstEvent.focalPoint,
+        ).intermediatePointTo(camera.center, fraction: 0.2);
+      }
+      animateCamera(zoom: camera.zoom - 1, center: newCenter);
+
+    } else if (secondToLastEvent != null &&
+        lastEvent != null &&
+        options.gestures.pan) {
       // fling animation
       final velocity = details.velocity.pixelsPerSecond.distance;
       if (velocity >= 800) {
         final offset = secondToLastEvent.focalPoint - lastEvent.focalPoint;
         final distance = offset.distance;
-        final direction = offset.direction * radian2Degree + 90 + camera.bearing;
+        final direction =
+            offset.direction * radian2Degree + 90 + camera.bearing;
         final tweens = _MapCameraTween(
           begin: camera,
           end: camera.copyWith(
