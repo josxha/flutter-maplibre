@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/inherited_model.dart';
 import 'package:maplibre/src/layer/layer_manager.dart';
@@ -185,7 +186,9 @@ abstract class MapLibreMapState extends State<MapLibreMap>
     _secondToLastScaleUpdateDetails = _lastScaleUpdateDetails;
     _lastScaleUpdateDetails = details;
 
-    if ((pointerDownEvent.buttons & kSecondaryMouseButton) != 0) {
+    final ctrlPressed = HardwareKeyboard.instance.isControlPressed;
+    final buttons = pointerDownEvent.buttons;
+    if ((buttons & kSecondaryMouseButton) != 0 || ctrlPressed) {
       // secondary button (right)
       final lastPointerOffset = lastEvent?.focalPoint ?? startEvent.focalPoint;
       final delta = details.focalPoint - lastPointerOffset;
@@ -195,7 +198,7 @@ abstract class MapLibreMapState extends State<MapLibreMap>
         pitch: camera.pitch - delta.dy * 0.5, // sensitivity
         zoom: camera.zoom, // TODO adjust for globe projection
       );
-    } else if ((pointerDownEvent.buttons & kPrimaryMouseButton) != 0) {
+    } else if ((buttons & kPrimaryMouseButton) != 0) {
       // primary button (left)
 
       // zoom
