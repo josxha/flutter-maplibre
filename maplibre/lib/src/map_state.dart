@@ -249,9 +249,20 @@ abstract class MapLibreMapState extends State<MapLibreMap>
     final firstEvent = _onScaleStartEvent;
     final secondToLastEvent = _secondToLastScaleUpdateDetails;
     final lastEvent = _lastScaleUpdateDetails;
-    if (lastEvent == null || firstEvent == null || secondToLastEvent == null) {
+    if (firstEvent == null) return;
+
+    // zoom out
+    if (lastEvent == null || secondToLastEvent == null) {
+      animateCamera(
+        zoom: (camera.zoom - 1).clamp(options.minZoom, options.maxZoom),
+        center: camera.center.intermediatePointTo(
+          toLngLat(firstEvent.focalPoint),
+          fraction: 0.2,
+        ),
+      );
       return;
     }
+
     // fling animation
     final velocity = details.velocity.pixelsPerSecond.distance;
     if (velocity >= 800) {
