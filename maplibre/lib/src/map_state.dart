@@ -143,7 +143,7 @@ abstract class MapLibreMapState extends State<MapLibreMap>
   }
 
   void _onDoubleTapCancel() {
-    _doubleTapDownDetails = null;
+    debugPrint('Double tap cancelled');
   }
 
   void _stopAnimation() {
@@ -182,14 +182,29 @@ abstract class MapLibreMapState extends State<MapLibreMap>
     final startEvent = _onScaleStartEvent;
     final pointerDownEvent = _pointerDownEvent;
     if (startEvent == null || pointerDownEvent == null) return;
+    final doubleTapDown = _doubleTapDownDetails;
     final lastEvent = _lastScaleUpdateDetails;
     _secondToLastScaleUpdateDetails = _lastScaleUpdateDetails;
     _lastScaleUpdateDetails = details;
 
+    if (doubleTapDown != null) {
+      // double tap drag: zoom
+      debugPrint('Double tap drag zoom detected $doubleTapDown');
+      final lastY = lastEvent?.focalPoint.dy ?? startEvent.focalPoint.dy;
+      final iOS = Theme.of(context).platform == TargetPlatform.iOS;
+      var deltaY = details.focalPoint.dy - lastY;
+      if (iOS) deltaY = -deltaY;
+      final newZoom = camera.zoom + deltaY * 0.01; // sensitivity
+      moveCamera(
+        zoom: newZoom.clamp(options.minZoom, options.maxZoom),
+      );
+      return;
+    }
+
     final ctrlPressed = HardwareKeyboard.instance.isControlPressed;
     final buttons = pointerDownEvent.buttons;
     if ((buttons & kSecondaryMouseButton) != 0 || ctrlPressed) {
-      // secondary button (right)
+      // secondary button: pitch and bearing
       final lastPointerOffset = lastEvent?.focalPoint ?? startEvent.focalPoint;
       final delta = details.focalPoint - lastPointerOffset;
 
@@ -199,7 +214,7 @@ abstract class MapLibreMapState extends State<MapLibreMap>
         zoom: camera.zoom, // TODO adjust for globe projection
       );
     } else if ((buttons & kPrimaryMouseButton) != 0) {
-      // primary button (left)
+      // primary button: pan and zoom
 
       // zoom
       final lastScale = lastEvent?.scale ?? 1.0;
@@ -273,6 +288,7 @@ abstract class MapLibreMapState extends State<MapLibreMap>
     _onScaleStartEvent = null;
     _lastScaleUpdateDetails = null;
     _secondToLastScaleUpdateDetails = null;
+    _doubleTapDownDetails = null;
   }
 }
 
