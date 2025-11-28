@@ -221,7 +221,7 @@ jobs:
     timeout-minutes: 30
     defaults:
       run:
-        working-directory: maplibre_ios/example
+        working-directory: example
     strategy:
       fail-fast: false
       matrix:
@@ -242,7 +242,7 @@ jobs:
         uses: actions/upload-artifact@v5
         with:
           name: maplibre-flutter-demo.app
-          path: build/ios/iphonesimulator
+          path: build/ios/iphoneos/Runner.app
   build-web:
     name: "[Web] Build"
     runs-on: ubuntu-latest

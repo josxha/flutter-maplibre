@@ -1,3 +1,11 @@
+## 0.3.2
+
+Maintenance release with some optimizations and dependency upgrades.
+
+- Optimize package size on pub.dev
+- Clean up repository structure
+- Upgrade `jni` / `jnigen` to 0.15
+
 ## 0.3.1
 
 This release brings a couple of new features and bug fixes.
