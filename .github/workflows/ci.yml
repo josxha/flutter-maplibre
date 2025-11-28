@@ -221,7 +221,7 @@ jobs:
     timeout-minutes: 30
     defaults:
       run:
-        working-directory: maplibre_ios/example
+        working-directory: example
     strategy:
       fail-fast: false
       matrix:
