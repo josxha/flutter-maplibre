@@ -52,6 +52,14 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         debugPrint('[MapLibre] PMTiles support could not be loaded. $e');
       }
 
+      _htmlElement.addEventListener(
+        'contextmenu',
+        (Event event) {
+          print('context menu event prevented');
+          event.preventDefault();
+        }.toJS,
+      );
+
       _map = interop.JsMap(
         interop.MapOptions(
           container: _htmlElement,
@@ -80,7 +88,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       _map.setMinPitch(options.minPitch);
       _map.setMaxPitch(options.maxPitch);
       _map.setMaxBounds(options.maxBounds?.toJsLngLatBounds());
-      _updateGestures(options.gestures);
+      _updateGestures(const MapGestures.none());
 
       // add callbacks
       _map.on(
@@ -210,7 +218,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       _map.setMaxBounds(options.maxBounds?.toJsLngLatBounds());
     }
     if (options.gestures != oldWidget.options.gestures) {
-      _updateGestures(options.gestures);
+      _updateGestures(const MapGestures.none());
     }
     _layerManager?.updateLayers(widget.layers);
     super.didUpdateWidget(oldWidget);

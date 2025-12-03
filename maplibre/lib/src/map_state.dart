@@ -53,12 +53,6 @@ abstract class MapLibreMapState extends State<MapLibreMap>
         PointerInterceptor(
           child: Listener(
             onPointerDown: (event) {
-              /*web.document.addEventListener(
-                'contextmenu',
-                (interop.PointerEvent event) {
-                  event.preventDefault();
-                }.toJS,
-              );*/
               _pointerDownEvent = event;
               _stopAnimation();
             },
