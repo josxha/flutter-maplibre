@@ -212,7 +212,6 @@ abstract class MapLibreMapState extends State<MapLibreMap>
       if (iOS) deltaY = -deltaY;
       final newZoom = camera.zoom + deltaY * 0.01; // sensitivity
       moveCamera(zoom: newZoom.clamp(options.minZoom, options.maxZoom));
-
     } else if ((buttons & kSecondaryMouseButton) != 0 || ctrlPressed) {
       // secondary button: pitch and bearing
       final lastPointerOffset = lastEvent?.focalPoint ?? startEvent.focalPoint;
@@ -230,7 +229,6 @@ abstract class MapLibreMapState extends State<MapLibreMap>
         // TODO adjust newZoom for globe projection
       }
       moveCamera(bearing: newBearing, pitch: newPitch, zoom: newZoom);
-
     } else if ((buttons & kPrimaryMouseButton) != 0) {
       // primary button: pan, zoom, bearing, pinch
 
@@ -284,7 +282,6 @@ abstract class MapLibreMapState extends State<MapLibreMap>
         ).intermediatePointTo(camera.center, fraction: 0.2);
       }
       animateCamera(zoom: camera.zoom - 1, center: newCenter);
-
     } else if (secondToLastEvent != null &&
         lastEvent != null &&
         options.gestures.pan) {
