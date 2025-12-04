@@ -2,15 +2,15 @@
 
 Maintenance release with some optimizations and dependency upgrades.
 
+### New Features
+
+- Optimize package size on `pub.dev` by restructuring the repository.
+- Upgrade `jni` / `jnigen` to ^0.15.1.
+
 ### Bug Fixes
 
 - Fix missing proguard rules for jni/jnigen causing issues in release builds on
   Android.
-
-### Maintenance
-
-- Restructure repository and optimize package size on pub.dev.
-- Upgrade `jni` / `jnigen` to 0.15.
 
 Full
 Changelog: [v0.3.1...v0.3.2](https://github.com/josxha/flutter-maplibre/compare/v0.3.1...v0.3.2)
