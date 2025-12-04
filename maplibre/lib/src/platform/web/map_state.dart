@@ -55,7 +55,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       _htmlElement.addEventListener(
         'contextmenu',
         (Event event) {
-          print('context menu event prevented');
+          debugPrint('context menu event prevented');
           event.preventDefault();
         }.toJS,
       );

@@ -37,6 +37,7 @@ abstract class MapLibreMapState extends State<MapLibreMap>
     vsync: this,
     duration: const Duration(milliseconds: 300),
   )..addListener(_onAnimation);
+  final Map<int, Offset> _pointers = {};
   Animation<MapCamera>? _animation;
   ScaleStartDetails? _onScaleStartEvent;
   TapDownDetails? _doubleTapDownDetails;
@@ -54,7 +55,15 @@ abstract class MapLibreMapState extends State<MapLibreMap>
           child: Listener(
             onPointerDown: (event) {
               _pointerDownEvent = event;
+              _pointers[event.pointer] = event.position;
               _stopAnimation();
+            },
+            onPointerMove: (event) {
+              _pointers[event.pointer] = event.position;
+            },
+            onPointerUp: (event) {
+              _pointers.remove(event.pointer);
+              if (_pointers.isEmpty) _pointerDownEvent = null;
             },
             onPointerSignal: (event) {
               switch (event) {
@@ -202,6 +211,7 @@ abstract class MapLibreMapState extends State<MapLibreMap>
     _lastScaleUpdateDetails = details;
     final ctrlPressed = HardwareKeyboard.instance.isControlPressed;
     final buttons = pointerDownEvent.buttons;
+    final lastPointerOffset = lastEvent?.focalPoint ?? startEvent.focalPoint;
 
     if (doubleTapDown != null && options.gestures.zoom) {
       // double tap drag: zoom
@@ -214,7 +224,6 @@ abstract class MapLibreMapState extends State<MapLibreMap>
       moveCamera(zoom: newZoom.clamp(options.minZoom, options.maxZoom));
     } else if ((buttons & kSecondaryMouseButton) != 0 || ctrlPressed) {
       // secondary button: pitch and bearing
-      final lastPointerOffset = lastEvent?.focalPoint ?? startEvent.focalPoint;
       final delta = details.focalPoint - lastPointerOffset;
       var newBearing = camera.bearing;
       if (options.gestures.rotate) {
@@ -231,21 +240,25 @@ abstract class MapLibreMapState extends State<MapLibreMap>
       moveCamera(bearing: newBearing, pitch: newPitch, zoom: newZoom);
     } else if ((buttons & kPrimaryMouseButton) != 0) {
       // primary button: pan, zoom, bearing, pinch
+      var pitch = false;
+      if (options.gestures.pitch && _pointers.length == 2) {
+        final pointers = _pointers.values.toList(growable: false);
+        final delta = pointers.first - pointers.last;
+        pitch = delta.dy.abs() < delta.dx.abs();
+      }
 
       // zoom
       var newZoom = camera.zoom;
       final lastScale = lastEvent?.scale ?? 1.0;
       final scaleDelta = details.scale - lastScale;
-      if (scaleDelta != 0 && options.gestures.zoom) {
+      if (scaleDelta != 0 && options.gestures.zoom && !pitch) {
         const scaleSensitivity = 1.0;
         newZoom = camera.zoom + scaleDelta * scaleSensitivity;
       }
 
       // center
       var newCenter = camera.center;
-      if (options.gestures.pan) {
-        final lastPointerOffset =
-            lastEvent?.focalPoint ?? startEvent.focalPoint;
+      if (options.gestures.pan && !pitch) {
         final delta = details.focalPoint - lastPointerOffset;
         final centerOffset = toScreenLocation(camera.center);
         final newCenterOffset = centerOffset - delta;
@@ -254,18 +267,30 @@ abstract class MapLibreMapState extends State<MapLibreMap>
 
       // bearing
       var newBearing = camera.bearing;
-      if (options.gestures.rotate && details.rotation != 0.0) {
+      if (options.gestures.rotate && details.rotation != 0.0 && !pitch) {
         final lastRotation = lastEvent?.rotation ?? 0.0;
         final rotationDelta = details.rotation - lastRotation;
         newBearing = camera.bearing - rotationDelta * radian2Degree;
       }
 
-      moveCamera(zoom: newZoom, center: newCenter, bearing: newBearing);
+      // pitch
+      var newPitch = camera.pitch;
+      if (options.gestures.pitch && pitch) {
+        final delta = details.focalPoint - lastPointerOffset;
+        newPitch = camera.pitch - delta.dy * 0.5; // sensitivity;
+      }
+
+      moveCamera(
+        zoom: newZoom,
+        center: newCenter,
+        bearing: newBearing,
+        pitch: newPitch,
+      );
     }
   }
 
   void _onScaleEnd(ScaleEndDetails details) {
-    debugPrint('Scale end: $details');
+    // debugPrint('Scale end: $details');
     final camera = this.camera!;
     final firstEvent = _onScaleStartEvent;
     final secondToLastEvent = _secondToLastScaleUpdateDetails;
@@ -274,7 +299,6 @@ abstract class MapLibreMapState extends State<MapLibreMap>
 
     // zoom out
     if (lastEvent == null && options.gestures.zoom) {
-      debugPrint('### Zoom out on scale end');
       var newCenter = camera.center;
       if (options.gestures.pan) {
         newCenter = toLngLat(
