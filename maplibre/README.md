@@ -1,7 +1,7 @@
 # MapLibre for Flutter
 
 [![Pub Version](https://img.shields.io/pub/v/maplibre)](https://pub.dev/packages/maplibre)
-[![stars](https://badgen.net/github/stars/josxha/flutter-maplibre?label=stars&color=green&icon=github)](https://github.com/josxha/flutter-maplibre/stargazers)
+[![stars](https://img.shields.io/github/stars/josxha/flutter-maplibre?style=flat&logo=github)](https://github.com/josxha/flutter-maplibre)
 [![likes](https://img.shields.io/pub/likes/maplibre?logo=flutter)](https://pub.dev/packages/maplibre)
 [![Pub Points](https://img.shields.io/pub/points/maplibre)](https://pub.dev/packages/maplibre/score)
 [![Pub Downloads](https://img.shields.io/pub/dm/maplibre)](https://pub.dev/packages/maplibre)

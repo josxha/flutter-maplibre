@@ -17,3 +17,4 @@
 -keep class org.maplibre.android.util.** { public *; }
 -keep class org.maplibre.android.utils.** { public *; }
 -keep class org.maplibre.geojson.** { public *; }
+-keep class io.flutter.plugin.platform.** { public *; }
