@@ -5,6 +5,7 @@ in release builds on Android.
 
 ### New Features
 
+- Upgrade MapLibre Native on Android to [12.2](https://github.com/maplibre/maplibre-native/blob/main/platform/android/CHANGELOG.md#1220).
 - Optimize package size on `pub.dev` by restructuring the repository.
 - Upgrade `jni` / `jnigen` to ^0.15.1.
 
