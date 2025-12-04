@@ -1,6 +1,7 @@
 ## 0.3.2
 
-Maintenance release with some optimizations and dependency upgrades.
+Maintenance release that optimizes the package on `pub.dev` and fixes a bug
+in release builds on Android.
 
 ### New Features
 
