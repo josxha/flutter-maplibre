@@ -16,7 +16,7 @@ jobs:
     name: "[Dart] Check formatting"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
         with:
           cache: true
@@ -28,7 +28,7 @@ jobs:
     name: "[Swift] Check formatting"
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: "Install SwiftFormat"
         run: brew install swiftformat
       - name: "Format Swift code"
@@ -37,7 +37,7 @@ jobs:
     name: "[Dart] Static code analysis"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
         with:
           cache: true
@@ -49,7 +49,7 @@ jobs:
     name: "[Kotlin] Code quality"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: ktlint
         uses: ScaCap/action-ktlint@v1
         with:
@@ -65,7 +65,7 @@ jobs:
 #      run:
 #        working-directory: example
 #    steps:
-#      - uses: actions/checkout@v5
+#      - uses: actions/checkout@v6
 #      - uses: futureware-tech/simulator-action@v3
 #        with:
 #          model: 'iPhone 15'
@@ -86,7 +86,7 @@ jobs:
       run:
         working-directory: maplibre
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: "Setup Flutter SDK"
         uses: subosito/flutter-action@v2
         with:
@@ -109,7 +109,7 @@ jobs:
 #        api-level: [ 24, 35 ]
 #    timeout-minutes: 30
 #    steps:
-#      - uses: actions/checkout@v5
+#      - uses: actions/checkout@v6
 #      - name: "Setup Flutter SDK"
 #        uses: subosito/flutter-action@v2
 #        with:
@@ -147,7 +147,7 @@ jobs:
 #      run:
 #        working-directory: example
 #    steps:
-#      - uses: actions/checkout@v5
+#      - uses: actions/checkout@v6
 #      - name: "Setup Flutter SDK"
 #        uses: subosito/flutter-action@v2
 #        with:
@@ -173,7 +173,7 @@ jobs:
         working-directory: maplibre
     steps:
       - name: Checkout project
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -195,7 +195,7 @@ jobs:
       matrix:
         sdk: [ '' ] # option to use a matrix test with the lower supported flutter version
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ matrix.sdk }}
@@ -221,13 +221,13 @@ jobs:
     timeout-minutes: 30
     defaults:
       run:
-        working-directory: maplibre_ios/example
+        working-directory: example
     strategy:
       fail-fast: false
       matrix:
         sdk: [ '' ] # option to use a matrix test with the lower supported flutter version
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ matrix.sdk }}
@@ -242,7 +242,7 @@ jobs:
         uses: actions/upload-artifact@v5
         with:
           name: maplibre-flutter-demo.app
-          path: build/ios/iphonesimulator
+          path: build/ios/iphoneos/Runner.app
   build-web:
     name: "[Web] Build"
     runs-on: ubuntu-latest
@@ -254,7 +254,7 @@ jobs:
       matrix:
         sdk: [ '' ] # option to use a matrix test with the lower supported flutter version
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ matrix.sdk }}
@@ -274,7 +274,7 @@ jobs:
       matrix:
         sdk: [ '' ] # option to use a matrix test with the lower supported flutter version
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ matrix.sdk }}
@@ -287,7 +287,7 @@ jobs:
     name: "[Pigeon] Check codegen"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
         with:
           cache: true
@@ -310,7 +310,7 @@ jobs:
     name: "[Android] Check codegen"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
         with:
           cache: true
@@ -347,7 +347,7 @@ jobs:
 #      matrix:
 #        sdk: [ '' ] # option to use a matrix test with the lower supported flutter version
 #    steps:
-#      - uses: actions/checkout@v5
+#      - uses: actions/checkout@v6
 #      - name: Clone maplibre-native with shallow submodules
 #        run: |
 #          git clone \
