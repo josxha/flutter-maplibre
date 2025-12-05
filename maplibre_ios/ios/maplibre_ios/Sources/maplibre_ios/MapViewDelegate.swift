@@ -38,7 +38,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
         if style.hasPrefix("{") {
           self._mapView = MLNMapView(frame: self._view.bounds, styleJSON: style)
         } else if style.hasPrefix("/") {
-          var styleUrl = URL(string: "file://\(style)")
+          var styleUrl = URL(fileURLWithPath: style)
           self._mapView = MLNMapView(frame: self._view.bounds, styleURL: styleUrl)
         } else if !style.hasPrefix("http://"), !style.hasPrefix("https://"),
                   !style.hasPrefix("mapbox://")
@@ -92,8 +92,6 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
         self._mapView.maximumZoomLevel = mapOptions.maxZoom
         self._mapView.minimumPitch = mapOptions.minPitch
         self._mapView.maximumPitch = mapOptions.maxPitch
-
-        self._mapView.styleURL = URL(string: mapOptions.style)
 
         self._mapView.allowsRotating = mapOptions.gestures.rotate
         self._mapView.allowsScrolling = mapOptions.gestures.pan
