@@ -265,10 +265,10 @@ abstract class MapLibreMapState extends State<MapLibreMap>
       // zoom
       var newZoom = camera.zoom;
       final lastScale = lastEvent?.scale ?? 1.0;
-      final scaleDelta = details.scale - lastScale;
+      const scaleSensitivity = 1.0;
+      final scaleDelta = (details.scale - lastScale) * scaleSensitivity;
       if (scaleDelta != 0 && options.gestures.zoom && !pitch) {
-        const scaleSensitivity = 1.0;
-        newZoom = camera.zoom + scaleDelta * scaleSensitivity;
+        newZoom = camera.zoom + scaleDelta;
       }
 
       // center
@@ -277,7 +277,10 @@ abstract class MapLibreMapState extends State<MapLibreMap>
         final delta = details.focalPoint - lastPointerOffset;
         final centerOffset = toScreenLocation(camera.center);
         final newCenterOffset = centerOffset - delta;
-        newCenter = toLngLat(newCenterOffset);
+        newCenter = toLngLat(newCenterOffset).intermediatePointTo(
+          toLngLat(details.focalPoint),
+          fraction: scaleDelta,
+        );
       }
 
       // bearing
@@ -440,7 +443,7 @@ abstract class MapLibreMapState extends State<MapLibreMap>
   }
 
   void _onAnimationStatus(AnimationStatus status) {
-    debugPrint('Animation status: $status');
+    // debugPrint('Animation status: $status');
     if (status == AnimationStatus.completed && _animation != null) {
       // restart animation if arrow keys are still pressed
       _updateKeyboardAnimation();
