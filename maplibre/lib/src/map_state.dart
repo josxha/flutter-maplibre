@@ -281,10 +281,13 @@ abstract class MapLibreMapState extends State<MapLibreMap>
         final delta = details.focalPoint - lastPointerOffset;
         final centerOffset = toScreenLocation(camera.center);
         final newCenterOffset = centerOffset - delta;
-        newCenter = toLngLat(newCenterOffset).intermediatePointTo(
-          toLngLat(details.focalPoint),
-          fraction: scaleDelta * 0.8, // zoom towards focal point
-        );
+        newCenter = toLngLat(newCenterOffset);
+        if (options.gestures.zoom) {
+          newCenter = newCenter.intermediatePointTo(
+            toLngLat(details.focalPoint),
+            fraction: scaleDelta * 0.8, // zoom towards focal point
+          );
+        }
       }
 
       // bearing
