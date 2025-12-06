@@ -33,10 +33,13 @@ abstract class MapLibreMapState extends State<MapLibreMap>
   /// is set.
   bool isInitialized = false;
 
-  late final _animationController = AnimationController(
-    vsync: this,
-    duration: const Duration(milliseconds: 300),
-  )..addListener(_onAnimation);
+  late final _animationController =
+      AnimationController(
+          vsync: this,
+          duration: const Duration(milliseconds: 300),
+        )
+        ..addListener(_onAnimation)
+        ..addStatusListener(_onAnimationStatus);
   final Map<int, Offset> _pointers = {};
   Animation<MapCamera>? _animation;
   ScaleStartDetails? _onScaleStartEvent;
@@ -45,7 +48,13 @@ abstract class MapLibreMapState extends State<MapLibreMap>
   ScaleUpdateDetails? _secondToLastScaleUpdateDetails;
   PointerDownEvent? _pointerDownEvent;
   MapCamera? _targetCamera;
-  bool? _twoPointerPitch;
+  bool? _isTwoPointerPitch;
+
+  @override
+  void initState() {
+    HardwareKeyboard.instance.addHandler(_keyboardHandler);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -143,6 +152,7 @@ abstract class MapLibreMapState extends State<MapLibreMap>
 
   @override
   void dispose() {
+    HardwareKeyboard.instance.removeHandler(_keyboardHandler);
     _animation?.removeListener(_onAnimation);
     _animationController.dispose();
     super.dispose();
@@ -241,16 +251,16 @@ abstract class MapLibreMapState extends State<MapLibreMap>
       moveCamera(bearing: newBearing, pitch: newPitch, zoom: newZoom);
     } else if ((buttons & kPrimaryMouseButton) != 0) {
       // primary button: pan, zoom, bearing, pinch
-      if (_twoPointerPitch == null) {
+      if (_isTwoPointerPitch == null) {
         if (options.gestures.pitch && _pointers.length == 2) {
           final pointers = _pointers.values.toList(growable: false);
           final delta = pointers.first - pointers.last;
-          _twoPointerPitch = delta.dy.abs() < delta.dx.abs();
+          _isTwoPointerPitch = delta.dy.abs() < delta.dx.abs();
         } else {
-          _twoPointerPitch = false;
+          _isTwoPointerPitch = false;
         }
       }
-      final pitch = _twoPointerPitch!;
+      final pitch = _isTwoPointerPitch!;
 
       // zoom
       var newZoom = camera.zoom;
@@ -355,7 +365,86 @@ abstract class MapLibreMapState extends State<MapLibreMap>
     _lastScaleUpdateDetails = null;
     _secondToLastScaleUpdateDetails = null;
     _doubleTapDownDetails = null;
-    _twoPointerPitch = null;
+    _isTwoPointerPitch = null;
+  }
+
+  bool _keyboardHandler(KeyEvent event) {
+    // debugPrint('Keyboard event: $event');
+    final direction = switch (event.physicalKey) {
+      PhysicalKeyboardKey.arrowUp => const Offset(0, -1),
+      PhysicalKeyboardKey.arrowDown => const Offset(0, 1),
+      PhysicalKeyboardKey.arrowLeft => const Offset(-1, 0),
+      PhysicalKeyboardKey.arrowRight => const Offset(1, 0),
+      _ => null,
+    };
+    if (direction == null) return false;
+    switch (event) {
+      case KeyDownEvent():
+        _updateKeyboardAnimation();
+        return true;
+      case KeyUpEvent():
+        _updateKeyboardAnimation();
+        return true;
+    }
+    return false;
+  }
+
+  void _updateKeyboardAnimation() {
+    var direction = Offset.zero;
+    if (HardwareKeyboard.instance.isPhysicalKeyPressed(
+      PhysicalKeyboardKey.arrowUp,
+    )) {
+      direction += const Offset(0, -1);
+    }
+    if (HardwareKeyboard.instance.isPhysicalKeyPressed(
+      PhysicalKeyboardKey.arrowDown,
+    )) {
+      direction += const Offset(0, 1);
+    }
+    if (HardwareKeyboard.instance.isPhysicalKeyPressed(
+      PhysicalKeyboardKey.arrowLeft,
+    )) {
+      direction += const Offset(-1, 0);
+    }
+    if (HardwareKeyboard.instance.isPhysicalKeyPressed(
+      PhysicalKeyboardKey.arrowRight,
+    )) {
+      direction += const Offset(1, 0);
+    }
+    if (direction == Offset.zero) {
+      _animation = null;
+      _animationController.stop();
+      return;
+    }
+
+    // normalize direction
+    direction = Offset.fromDirection(direction.direction);
+    final camera = this.camera!;
+    _animation =
+        _MapCameraTween(
+          begin: camera,
+          end: camera.copyWith(
+            center: toLngLat(
+              toScreenLocation(camera.center) + direction * 300,
+            ),
+          ),
+        ).animate(
+          CurvedAnimation(
+            parent: _animationController,
+            curve: Curves.linear,
+          ),
+        );
+    _animationController
+      ..duration = const Duration(seconds: 1)
+      ..forward(from: 0);
+  }
+
+  void _onAnimationStatus(AnimationStatus status) {
+    debugPrint('Animation status: $status');
+    if (status == AnimationStatus.completed && _animation != null) {
+      // restart animation if arrow keys are still pressed
+      _updateKeyboardAnimation();
+    }
   }
 }
 
