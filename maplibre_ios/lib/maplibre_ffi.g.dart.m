@@ -447,7 +447,7 @@ void  _NativeLibrary_protocolTrampoline_qvcerx(id target, void * sel, id arg1, s
   return ((_ProtocolTrampoline_23)((id (*)(id, SEL, SEL))objc_msgSend)(target, @selector(getDOBJCDartProtocolMethodForSelector:), sel))(sel, arg1, arg2);
 }
 
-typedef void  (^_ListenerTrampoline_11)();
+typedef void  (^_ListenerTrampoline_11)(void);
 __attribute__((visibility("default"))) __attribute__((used))
 _ListenerTrampoline_11 _NativeLibrary_wrapListenerBlock_1pl9qdv(_ListenerTrampoline_11 block) NS_RETURNS_RETAINED {
   return ^void() {

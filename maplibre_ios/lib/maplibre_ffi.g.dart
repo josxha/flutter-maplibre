@@ -626,7 +626,7 @@ abstract final class ObjCBlock_NSItemProviderRepresentationVisibility_ffiVoid_NS
   ///
   /// If `keepIsolateAlive` is true, this block will keep this isolate alive
   /// until it is garbage collected by both Dart and ObjC.
-  static objc.ObjCBlock<ffi.Long Function(ffi.Pointer<ffi.Void>, objc.NSString)> fromFunction(objc.NSItemProviderRepresentationVisibility Function(ffi.Pointer<ffi.Void> , objc.NSString ) fn,
+  static objc.ObjCBlock<ffi.Long Function(ffi.Pointer<ffi.Void>, objc.NSString)> fromFunction(int Function(ffi.Pointer<ffi.Void> , objc.NSString ) fn,
           {bool keepIsolateAlive = true}) =>
       objc.ObjCBlock<ffi.Long Function(ffi.Pointer<ffi.Void>, objc.NSString)>(objc.newClosureBlock(_closureCallable, (ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1) => fn(arg0, objc.NSString.fromPointer(arg1, retain: true, release: true)), keepIsolateAlive),
           retain: false, release: true);
@@ -646,7 +646,7 @@ abstract final class ObjCBlock_NSItemProviderRepresentationVisibility_ffiVoid_NS
 
 /// Call operator for `objc.ObjCBlock<ffi.Long Function(ffi.Pointer<ffi.Void>, objc.NSString)>`.
 extension ObjCBlock_NSItemProviderRepresentationVisibility_ffiVoid_NSString$CallExtension on objc.ObjCBlock<ffi.Long Function(ffi.Pointer<ffi.Void>, objc.NSString)> {
-  objc.NSItemProviderRepresentationVisibility call(ffi.Pointer<ffi.Void> arg0, objc.NSString arg1) =>ref.pointer.ref.invoke.cast<ffi.NativeFunction<ffi.Long Function(ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1)>>()
+  int call(ffi.Pointer<ffi.Void> arg0, objc.NSString arg1) =>ref.pointer.ref.invoke.cast<ffi.NativeFunction<ffi.Long Function(ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1)>>()
   .asFunction<int Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> )>()(
     ref.pointer, arg0, arg1.ref.pointer);
 }
@@ -825,7 +825,7 @@ extension ObjCBlock_NSProgress_ffiVoid_NSString_ffiVoidNSDataNSError$CallExtensi
 extension NSItemProvider on objc.NSString {
 
   /// itemProviderVisibilityForRepresentationWithTypeIdentifier:
-  objc.NSItemProviderRepresentationVisibility itemProviderVisibilityForRepresentationWithTypeIdentifier(objc.NSString typeIdentifier) {
+  int itemProviderVisibilityForRepresentationWithTypeIdentifier(objc.NSString typeIdentifier) {
   objc.checkOsVersionInternal('NSString.itemProviderVisibilityForRepresentationWithTypeIdentifier:', iOS: (false, (11, 0, 0)), macOS: (false, (10, 13, 0)));
     if (!objc.respondsToSelector(object$.ref.pointer, _sel_itemProviderVisibilityForRepresentationWithTypeIdentifier_)) {
       throw objc.UnimplementedOptionalMethodException('NSString', 'itemProviderVisibilityForRepresentationWithTypeIdentifier:');
@@ -855,7 +855,7 @@ extension NSItemProvider on objc.NSString {
 
 
   /// itemProviderVisibilityForRepresentationWithTypeIdentifier:
-  static objc.NSItemProviderRepresentationVisibility itemProviderVisibilityForRepresentationWithTypeIdentifier$1(objc.NSString typeIdentifier) {
+  static int itemProviderVisibilityForRepresentationWithTypeIdentifier$1(objc.NSString typeIdentifier) {
   objc.checkOsVersionInternal('NSString.itemProviderVisibilityForRepresentationWithTypeIdentifier:', iOS: (false, (11, 0, 0)), macOS: (false, (10, 13, 0)));
     if (!objc.respondsToSelector(_class_NSString, _sel_itemProviderVisibilityForRepresentationWithTypeIdentifier_)) {
       throw objc.UnimplementedOptionalMethodException('NSString', 'itemProviderVisibilityForRepresentationWithTypeIdentifier:');
@@ -1411,7 +1411,7 @@ extension NSExtendedAttributedString on objc.NSAttributedString {
 
 
   /// enumerateAttribute:inRange:options:usingBlock:
-  void enumerateAttribute(objc.NSString attrName, {required objc.NSRange inRange,required objc.NSAttributedStringEnumerationOptions options,required objc.ObjCBlock<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl>?, objc.NSRange, ffi.Pointer<ffi.Bool>)> usingBlock}) {
+  void enumerateAttribute(objc.NSString attrName, {required objc.NSRange inRange,required int options,required objc.ObjCBlock<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl>?, objc.NSRange, ffi.Pointer<ffi.Bool>)> usingBlock}) {
   objc.checkOsVersionInternal('NSAttributedString.enumerateAttribute:inRange:options:usingBlock:', iOS: (false, (4, 0, 0)), macOS: (false, (10, 6, 0)));
 _objc_msgSend_ipgwfh(object$.ref.pointer, _sel_enumerateAttribute_inRange_options_usingBlock_, attrName.ref.pointer, inRange, options, usingBlock.ref.pointer);
 
@@ -1419,7 +1419,7 @@ _objc_msgSend_ipgwfh(object$.ref.pointer, _sel_enumerateAttribute_inRange_option
 
 
   /// enumerateAttributesInRange:options:usingBlock:
-  void enumerateAttributesInRange(objc.NSRange enumerationRange, {required objc.NSAttributedStringEnumerationOptions options,required objc.ObjCBlock<ffi.Void Function(objc.NSDictionary, objc.NSRange, ffi.Pointer<ffi.Bool>)> usingBlock}) {
+  void enumerateAttributesInRange(objc.NSRange enumerationRange, {required int options,required objc.ObjCBlock<ffi.Void Function(objc.NSDictionary, objc.NSRange, ffi.Pointer<ffi.Bool>)> usingBlock}) {
   objc.checkOsVersionInternal('NSAttributedString.enumerateAttributesInRange:options:usingBlock:', iOS: (false, (4, 0, 0)), macOS: (false, (10, 6, 0)));
 _objc_msgSend_1kok4b(object$.ref.pointer, _sel_enumerateAttributesInRange_options_usingBlock_, enumerationRange, options, usingBlock.ref.pointer);
 
@@ -1532,7 +1532,7 @@ late final _sel_localizedAttributedStringWithFormat_options_context_ = objc.regi
 extension NSAttributedStringFormatting on objc.NSAttributedString {
 
   /// initWithFormat:options:locale:
-  objc.NSAttributedString initWithFormat(objc.NSAttributedString format, {required objc.NSAttributedStringFormattingOptions options,objc.NSLocale? locale}) {
+  objc.NSAttributedString initWithFormat(objc.NSAttributedString format, {required int options,objc.NSLocale? locale}) {
   objc.checkOsVersionInternal('NSAttributedString.initWithFormat:options:locale:', iOS: (false, (15, 0, 0)), macOS: (false, (12, 0, 0)));
     final $ret = _objc_msgSend_187k8ck(object$.ref.retainAndReturnPointer(), _sel_initWithFormat_options_locale_, format.ref.pointer, options, locale?.ref.pointer ?? ffi.nullptr);
     return objc.NSAttributedString.fromPointer($ret, retain: false, release: true);
@@ -1540,7 +1540,7 @@ extension NSAttributedStringFormatting on objc.NSAttributedString {
 
 
   /// initWithFormat:options:locale:context:
-  objc.NSAttributedString initWithFormat$1(objc.NSAttributedString format, {required objc.NSAttributedStringFormattingOptions options,objc.NSLocale? locale,required objc.NSDictionary context}) {
+  objc.NSAttributedString initWithFormat$1(objc.NSAttributedString format, {required int options,objc.NSLocale? locale,required objc.NSDictionary context}) {
   objc.checkOsVersionInternal('NSAttributedString.initWithFormat:options:locale:context:', iOS: (false, (17, 0, 0)), macOS: (false, (14, 0, 0)));
     final $ret = _objc_msgSend_3fn4ca(object$.ref.retainAndReturnPointer(), _sel_initWithFormat_options_locale_context_, format.ref.pointer, options, locale?.ref.pointer ?? ffi.nullptr, context.ref.pointer);
     return objc.NSAttributedString.fromPointer($ret, retain: false, release: true);
@@ -1564,7 +1564,7 @@ extension NSAttributedStringFormatting on objc.NSAttributedString {
 
 
   /// localizedAttributedStringWithFormat:options:
-  static objc.NSAttributedString localizedAttributedStringWithFormat$2(objc.NSAttributedString format, {required objc.NSAttributedStringFormattingOptions options}) {
+  static objc.NSAttributedString localizedAttributedStringWithFormat$2(objc.NSAttributedString format, {required int options}) {
   objc.checkOsVersionInternal('NSAttributedString.localizedAttributedStringWithFormat:options:', iOS: (false, (15, 0, 0)), macOS: (false, (12, 0, 0)));
     final $ret = _objc_msgSend_s058d2(_class_NSAttributedString, _sel_localizedAttributedStringWithFormat_options_, format.ref.pointer, options);
     return objc.NSAttributedString.fromPointer($ret, retain: true, release: true);
@@ -1572,7 +1572,7 @@ extension NSAttributedStringFormatting on objc.NSAttributedString {
 
 
   /// localizedAttributedStringWithFormat:options:context:
-  static objc.NSAttributedString localizedAttributedStringWithFormat$3(objc.NSAttributedString format, {required objc.NSAttributedStringFormattingOptions options,required objc.NSDictionary context}) {
+  static objc.NSAttributedString localizedAttributedStringWithFormat$3(objc.NSAttributedString format, {required int options,required objc.NSDictionary context}) {
   objc.checkOsVersionInternal('NSAttributedString.localizedAttributedStringWithFormat:options:context:', iOS: (false, (17, 0, 0)), macOS: (false, (14, 0, 0)));
     final $ret = _objc_msgSend_187k8ck(_class_NSAttributedString, _sel_localizedAttributedStringWithFormat_options_context_, format.ref.pointer, options, context.ref.pointer);
     return objc.NSAttributedString.fromPointer($ret, retain: true, release: true);
@@ -3004,7 +3004,7 @@ final _objc_msgSend_vij4rw = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Voi
 extension NSLinguisticAnalysis on objc.NSString {
 
   /// enumerateLinguisticTagsInRange:scheme:options:orthography:usingBlock:
-  void enumerateLinguisticTagsInRange(objc.NSRange range, {required objc.NSString scheme,required objc.NSLinguisticTaggerOptions options,NSOrthography? orthography,required objc.ObjCBlock<ffi.Void Function(objc.NSString?, objc.NSRange, objc.NSRange, ffi.Pointer<ffi.Bool>)> usingBlock}) {
+  void enumerateLinguisticTagsInRange(objc.NSRange range, {required objc.NSString scheme,required int options,NSOrthography? orthography,required objc.ObjCBlock<ffi.Void Function(objc.NSString?, objc.NSRange, objc.NSRange, ffi.Pointer<ffi.Bool>)> usingBlock}) {
   objc.checkOsVersionInternal('NSString.enumerateLinguisticTagsInRange:scheme:options:orthography:usingBlock:', iOS: (false, (5, 0, 0)), macOS: (false, (10, 7, 0)));
 _objc_msgSend_vij4rw(object$.ref.pointer, _sel_enumerateLinguisticTagsInRange_scheme_options_orthography_usingBlock_, range, scheme.ref.pointer, options, orthography?.ref.pointer ?? ffi.nullptr, usingBlock.ref.pointer);
 
@@ -3012,7 +3012,7 @@ _objc_msgSend_vij4rw(object$.ref.pointer, _sel_enumerateLinguisticTagsInRange_sc
 
 
   /// linguisticTagsInRange:scheme:options:orthography:tokenRanges:
-  objc.NSArray linguisticTagsInRange(objc.NSRange range, {required objc.NSString scheme,required objc.NSLinguisticTaggerOptions options,NSOrthography? orthography,required ffi.Pointer<ffi.Pointer<objc.ObjCObjectImpl>> tokenRanges}) {
+  objc.NSArray linguisticTagsInRange(objc.NSRange range, {required objc.NSString scheme,required int options,NSOrthography? orthography,required ffi.Pointer<ffi.Pointer<objc.ObjCObjectImpl>> tokenRanges}) {
   objc.checkOsVersionInternal('NSString.linguisticTagsInRange:scheme:options:orthography:tokenRanges:', iOS: (false, (5, 0, 0)), macOS: (false, (10, 7, 0)));
     final $ret = _objc_msgSend_1l09uru(object$.ref.pointer, _sel_linguisticTagsInRange_scheme_options_orthography_tokenRanges_, range, scheme.ref.pointer, options, orthography?.ref.pointer ?? ffi.nullptr, tokenRanges);
     return objc.NSArray.fromPointer($ret, retain: true, release: true);
@@ -4012,7 +4012,7 @@ extension ObjCBlock_CGSize_ffiVoid$CallExtension on objc.ObjCBlock<objc.CGSize F
 extension NSItemProvider$1 on UIImage {
 
   /// itemProviderVisibilityForRepresentationWithTypeIdentifier:
-  objc.NSItemProviderRepresentationVisibility itemProviderVisibilityForRepresentationWithTypeIdentifier(objc.NSString typeIdentifier) {
+  int itemProviderVisibilityForRepresentationWithTypeIdentifier(objc.NSString typeIdentifier) {
   objc.checkOsVersionInternal('UIImage.itemProviderVisibilityForRepresentationWithTypeIdentifier:', iOS: (false, (11, 0, 0)), macOS: (false, (10, 13, 0)));
     if (!objc.respondsToSelector(object$.ref.pointer, _sel_itemProviderVisibilityForRepresentationWithTypeIdentifier_)) {
       throw objc.UnimplementedOptionalMethodException('UIImage', 'itemProviderVisibilityForRepresentationWithTypeIdentifier:');
@@ -4055,7 +4055,7 @@ extension NSItemProvider$1 on UIImage {
 
 
   /// itemProviderVisibilityForRepresentationWithTypeIdentifier:
-  static objc.NSItemProviderRepresentationVisibility itemProviderVisibilityForRepresentationWithTypeIdentifier$1(objc.NSString typeIdentifier) {
+  static int itemProviderVisibilityForRepresentationWithTypeIdentifier$1(objc.NSString typeIdentifier) {
   objc.checkOsVersionInternal('UIImage.itemProviderVisibilityForRepresentationWithTypeIdentifier:', iOS: (false, (11, 0, 0)), macOS: (false, (10, 13, 0)));
     if (!objc.respondsToSelector(_class_UIImage, _sel_itemProviderVisibilityForRepresentationWithTypeIdentifier_)) {
       throw objc.UnimplementedOptionalMethodException('UIImage', 'itemProviderVisibilityForRepresentationWithTypeIdentifier:');
@@ -4299,7 +4299,7 @@ extension type UIAccessibilityIdentification._(objc.ObjCProtocol object$) implem
 
 
 /// UIAccessibility
-extension UIAccessibility$1 on UIImage {
+extension UIAccessibility on UIImage {
 
   /// accessibilityIdentifier
   objc.NSString? get accessibilityIdentifier {
@@ -5098,7 +5098,7 @@ extension NSAttributedStringKitAdditions on objc.NSAttributedString {
 extension NSAttributedString_ItemProvider on objc.NSAttributedString {
 
   /// itemProviderVisibilityForRepresentationWithTypeIdentifier:
-  objc.NSItemProviderRepresentationVisibility itemProviderVisibilityForRepresentationWithTypeIdentifier(objc.NSString typeIdentifier) {
+  int itemProviderVisibilityForRepresentationWithTypeIdentifier(objc.NSString typeIdentifier) {
   objc.checkOsVersionInternal('NSAttributedString.itemProviderVisibilityForRepresentationWithTypeIdentifier:', iOS: (false, (11, 0, 0)), macOS: (false, (10, 13, 0)));
     if (!objc.respondsToSelector(object$.ref.pointer, _sel_itemProviderVisibilityForRepresentationWithTypeIdentifier_)) {
       throw objc.UnimplementedOptionalMethodException('NSAttributedString', 'itemProviderVisibilityForRepresentationWithTypeIdentifier:');
@@ -5128,7 +5128,7 @@ extension NSAttributedString_ItemProvider on objc.NSAttributedString {
 
 
   /// itemProviderVisibilityForRepresentationWithTypeIdentifier:
-  static objc.NSItemProviderRepresentationVisibility itemProviderVisibilityForRepresentationWithTypeIdentifier$1(objc.NSString typeIdentifier) {
+  static int itemProviderVisibilityForRepresentationWithTypeIdentifier$1(objc.NSString typeIdentifier) {
   objc.checkOsVersionInternal('NSAttributedString.itemProviderVisibilityForRepresentationWithTypeIdentifier:', iOS: (false, (11, 0, 0)), macOS: (false, (10, 13, 0)));
     if (!objc.respondsToSelector(_class_NSAttributedString, _sel_itemProviderVisibilityForRepresentationWithTypeIdentifier_)) {
       throw objc.UnimplementedOptionalMethodException('NSAttributedString', 'itemProviderVisibilityForRepresentationWithTypeIdentifier:');
@@ -11934,7 +11934,7 @@ extension UITextField on UIView {
 
 
 /// UIAccessibility
-extension UIAccessibility on UIView {
+extension UIAccessibility$1 on UIView {
 
   /// accessibilityIdentifier
   objc.NSString? get accessibilityIdentifier {
