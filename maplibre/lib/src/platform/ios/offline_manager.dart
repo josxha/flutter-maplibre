@@ -5,7 +5,7 @@ import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/platform/ios/extensions.dart';
 import 'package:maplibre/src/platform/offline_manager_native.dart';
 import 'package:maplibre_ios/maplibre_ffi.g.dart';
-import 'package:objective_c/objective_c.dart' as objc;
+import 'package:maplibre_ios/objective_c.dart' as objc;
 
 /// iOS specific implementation of the [OfflineManager].
 class OfflineManagerIos extends OfflineManagerNative {

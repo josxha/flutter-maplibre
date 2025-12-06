@@ -10,7 +10,7 @@ import 'package:maplibre/src/platform/ios/extensions.dart';
 import 'package:maplibre/src/platform/map_state_native.dart';
 import 'package:maplibre/src/platform/pigeon.g.dart' as pigeon;
 import 'package:maplibre_ios/maplibre_ffi.g.dart';
-import 'package:objective_c/objective_c.dart';
+import 'package:maplibre_ios/objective_c.dart';
 
 part 'style_controller.dart';
 

@@ -4,7 +4,7 @@ import 'dart:ffi' hide Size;
 import 'package:flutter/cupertino.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre_ios/maplibre_ffi.g.dart';
-import 'package:objective_c/objective_c.dart';
+import 'package:maplibre_ios/objective_c.dart';
 
 /// Internal extensions on [CLLocationCoordinate2D].
 extension CLLocationCoordinate2DExt on CLLocationCoordinate2D {
