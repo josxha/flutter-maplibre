@@ -18,6 +18,5 @@ public class MapLibreIosPlugin: NSObject, FlutterPlugin {
     OfflineManager(messenger: registrar.messenger())
   }
 
-  public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-  }
+  public func handle(_: FlutterMethodCall, result _: @escaping FlutterResult) {}
 }

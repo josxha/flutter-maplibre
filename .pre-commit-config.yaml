@@ -22,6 +22,6 @@ repos:
         types: [dart]
     -   id: swift-format
         name: swift format
-        entry: swiftformat --swiftversion 6 --indent 2
+        entry: swiftformat --verbose --lint . --reporter github-actions-log --swiftversion 6 --indent 2 --disable trailingCommas
         language: system
         types: [swift]
