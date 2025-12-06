@@ -255,7 +255,11 @@ abstract class MapLibreMapState extends State<MapLibreMap>
         if (options.gestures.pitch && _pointers.length == 2) {
           final pointers = _pointers.values.toList(growable: false);
           final delta = pointers.first - pointers.last;
-          _isTwoPointerPitch = delta.dy.abs() < delta.dx.abs();
+          final pointersAlignedVertically = delta.dy.abs() < delta.dx.abs();
+          final movingVertically =
+              (details.focalPoint - lastPointerOffset).dy.abs() >
+              (details.focalPoint - lastPointerOffset).dx.abs();
+          _isTwoPointerPitch = pointersAlignedVertically && movingVertically;
         } else {
           _isTwoPointerPitch = false;
         }
@@ -265,7 +269,7 @@ abstract class MapLibreMapState extends State<MapLibreMap>
       // zoom
       var newZoom = camera.zoom;
       final lastScale = lastEvent?.scale ?? 1.0;
-      const scaleSensitivity = 1.0;
+      const scaleSensitivity = 0.9;
       final scaleDelta = (details.scale - lastScale) * scaleSensitivity;
       if (scaleDelta != 0 && options.gestures.zoom && !pitch) {
         newZoom = camera.zoom + scaleDelta;
@@ -279,7 +283,7 @@ abstract class MapLibreMapState extends State<MapLibreMap>
         final newCenterOffset = centerOffset - delta;
         newCenter = toLngLat(newCenterOffset).intermediatePointTo(
           toLngLat(details.focalPoint),
-          fraction: scaleDelta,
+          fraction: scaleDelta * 0.8, // zoom towards focal point
         );
       }
 
@@ -354,7 +358,7 @@ abstract class MapLibreMapState extends State<MapLibreMap>
           )
           ..value = 0
           ..fling(
-            velocity: velocity / 1000,
+            velocity: velocity / 2000,
             springDescription: SpringDescription.withDampingRatio(
               mass: 1,
               stiffness: 1000,
