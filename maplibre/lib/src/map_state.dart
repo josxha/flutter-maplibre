@@ -45,6 +45,7 @@ abstract class MapLibreMapState extends State<MapLibreMap>
   ScaleUpdateDetails? _secondToLastScaleUpdateDetails;
   PointerDownEvent? _pointerDownEvent;
   MapCamera? _targetCamera;
+  bool? _twoPointerPitch;
 
   @override
   Widget build(BuildContext context) {
@@ -240,12 +241,16 @@ abstract class MapLibreMapState extends State<MapLibreMap>
       moveCamera(bearing: newBearing, pitch: newPitch, zoom: newZoom);
     } else if ((buttons & kPrimaryMouseButton) != 0) {
       // primary button: pan, zoom, bearing, pinch
-      var pitch = false;
-      if (options.gestures.pitch && _pointers.length == 2) {
-        final pointers = _pointers.values.toList(growable: false);
-        final delta = pointers.first - pointers.last;
-        pitch = delta.dy.abs() < delta.dx.abs();
+      if (_twoPointerPitch == null) {
+        if (options.gestures.pitch && _pointers.length == 2) {
+          final pointers = _pointers.values.toList(growable: false);
+          final delta = pointers.first - pointers.last;
+          _twoPointerPitch = delta.dy.abs() < delta.dx.abs();
+        } else {
+          _twoPointerPitch = false;
+        }
       }
+      final pitch = _twoPointerPitch!;
 
       // zoom
       var newZoom = camera.zoom;
@@ -298,7 +303,9 @@ abstract class MapLibreMapState extends State<MapLibreMap>
     if (firstEvent == null) return;
 
     // zoom out
-    if (lastEvent == null && options.gestures.zoom) {
+    if (lastEvent == null &&
+        options.gestures.zoom &&
+        firstEvent.pointerCount == 2) {
       var newCenter = camera.center;
       if (options.gestures.pan) {
         newCenter = toLngLat(
@@ -348,6 +355,7 @@ abstract class MapLibreMapState extends State<MapLibreMap>
     _lastScaleUpdateDetails = null;
     _secondToLastScaleUpdateDetails = null;
     _doubleTapDownDetails = null;
+    _twoPointerPitch = null;
   }
 }
 
