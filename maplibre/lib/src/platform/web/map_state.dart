@@ -441,10 +441,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   }
 
   @override
-  List<RenderedFeature> featuresInRect(
-    Rect rect, {
-    List<String>? layerIds,
-  }) {
+  List<RenderedFeature> featuresInRect(Rect rect, {List<String>? layerIds}) {
     final features = _map
         .queryRenderedFeaturesRect(
           [rect.bottomLeft.toJsPoint(), rect.topRight.toJsPoint()].toJS,

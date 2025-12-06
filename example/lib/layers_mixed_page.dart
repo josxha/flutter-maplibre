@@ -57,13 +57,11 @@ class _LayersMixedPageState extends State<LayersMixedPage> {
                         _polylineLayer = PolylineLayer(
                           polylines: [
                             Feature(
-                              geometry: LineString.from(
-                                const [
-                                  Geographic(lon: 9.17, lat: 47.68),
-                                  Geographic(lon: 9.5, lat: 48),
-                                  Geographic(lon: 9, lat: 48),
-                                ],
-                              ),
+                              geometry: LineString.from(const [
+                                Geographic(lon: 9.17, lat: 47.68),
+                                Geographic(lon: 9.5, lat: 48),
+                                Geographic(lon: 9, lat: 48),
+                              ]),
                             ),
                           ],
                         );

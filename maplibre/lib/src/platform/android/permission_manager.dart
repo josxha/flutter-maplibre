@@ -14,9 +14,8 @@ class PermissionManagerAndroid implements PermissionManager {
 
   @override
   bool get locationPermissionsGranted => using(
-    (arena) => jni.PermissionsManager.areLocationPermissionsGranted(
-      getJContext(),
-    ),
+    (arena) =>
+        jni.PermissionsManager.areLocationPermissionsGranted(getJContext()),
   );
 
   @override
