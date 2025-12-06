@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:ffigen/ffigen.dart';
-import 'package:ffigen/src/config_provider/config.dart' show EnumStyle;
 
 void main(List<String> args) {
   final packageRoot = Platform.script.resolve('../');
