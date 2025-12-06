@@ -6,7 +6,8 @@ import UIKit
 // cd maplibre_ios/ios/maplibre_ios/Sources/maplibre_ios/
 // ./gen_swift_headers.sh
 
-@objc public class MapLibreRegistry: NSObject {
+@objc(MapLibreRegistry)
+public class MapLibreRegistry: NSObject {
   private static var mapRegistry: [Int64: AnyObject] = [:]
 
   // Method to get the map for a given viewId
