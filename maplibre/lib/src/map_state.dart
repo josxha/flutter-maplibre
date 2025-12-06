@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/gestures.dart';
@@ -275,12 +276,34 @@ abstract class MapLibreMapState extends State<MapLibreMap>
         newZoom = camera.zoom + scaleDelta;
       }
 
+      // bearing
+      var newBearing = camera.bearing;
+      final lastRotation = lastEvent?.rotation ?? 0.0;
+      final rotationDelta = details.rotation - lastRotation;
+      final rotationDegree = rotationDelta * radian2Degree;
+      if (options.gestures.rotate && details.rotation != 0.0 && !pitch) {
+        newBearing -= rotationDegree;
+      }
+
       // center
       var newCenter = camera.center;
       if (options.gestures.pan && !pitch) {
         final delta = details.focalPoint - lastPointerOffset;
         final centerOffset = toScreenLocation(camera.center);
-        final newCenterOffset = centerOffset - delta;
+        var newCenterOffset = centerOffset - delta;
+        if (options.gestures.rotate) {
+          // rotate around details.focalPoint
+          newCenterOffset = Offset(
+            cos(-rotationDelta) * (newCenterOffset.dx - details.focalPoint.dx) -
+                sin(-rotationDelta) *
+                    (newCenterOffset.dy - details.focalPoint.dy) +
+                details.focalPoint.dx,
+            sin(-rotationDelta) * (newCenterOffset.dx - details.focalPoint.dx) +
+                cos(-rotationDelta) *
+                    (newCenterOffset.dy - details.focalPoint.dy) +
+                details.focalPoint.dy,
+          );
+        }
         newCenter = toLngLat(newCenterOffset);
         if (options.gestures.zoom) {
           newCenter = newCenter.intermediatePointTo(
@@ -288,14 +311,6 @@ abstract class MapLibreMapState extends State<MapLibreMap>
             fraction: scaleDelta * 0.8, // zoom towards focal point
           );
         }
-      }
-
-      // bearing
-      var newBearing = camera.bearing;
-      if (options.gestures.rotate && details.rotation != 0.0 && !pitch) {
-        final lastRotation = lastEvent?.rotation ?? 0.0;
-        final rotationDelta = details.rotation - lastRotation;
-        newBearing = camera.bearing - rotationDelta * radian2Degree;
       }
 
       // pitch
