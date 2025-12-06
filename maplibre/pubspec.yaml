@@ -55,12 +55,8 @@ flutter:
       android:
         package: com.github.josxha.maplibre
         pluginClass: MapLibrePlugin
-      linux:
-        pluginClass: MaplibrePlugin
       macos:
         pluginClass: MaplibrePlugin
-      windows:
-        pluginClass: MaplibrePluginCApi
       web:
         pluginClass: PlatformImpl
         fileName: src/platform/platform_web.dart
