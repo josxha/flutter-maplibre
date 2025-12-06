@@ -65,35 +65,31 @@ void main() {
       final o = PolygonLayer(
         polygons: [
           Feature(
-            geometry: Polygon.from(
-              const [
-                [
-                  Geographic(lon: 2, lat: 23.4),
-                  Geographic(lon: 5.2, lat: 32),
-                  Geographic(lon: 53, lat: 2),
-                ],
-                [
-                  Geographic(lon: 2, lat: 23.4),
-                  Geographic(lon: 5.2, lat: 32),
-                  Geographic(lon: 53, lat: 3),
-                ],
+            geometry: Polygon.from(const [
+              [
+                Geographic(lon: 2, lat: 23.4),
+                Geographic(lon: 5.2, lat: 32),
+                Geographic(lon: 53, lat: 2),
               ],
-            ),
+              [
+                Geographic(lon: 2, lat: 23.4),
+                Geographic(lon: 5.2, lat: 32),
+                Geographic(lon: 53, lat: 3),
+              ],
+            ]),
           ),
         ],
       );
       final o2 = PolygonLayer(
         polygons: [
           Feature(
-            geometry: Polygon.from(
-              const [
-                [
-                  Geographic(lon: 2, lat: 23.4),
-                  Geographic(lon: 5.2, lat: 32),
-                  Geographic(lon: 53, lat: 2),
-                ],
+            geometry: Polygon.from(const [
+              [
+                Geographic(lon: 2, lat: 23.4),
+                Geographic(lon: 5.2, lat: 32),
+                Geographic(lon: 53, lat: 2),
               ],
-            ),
+            ]),
           ),
         ],
       );
@@ -123,25 +119,21 @@ void main() {
       final o = PolylineLayer(
         polylines: [
           Feature(
-            geometry: LineString.from(
-              const [
-                Geographic(lon: 2, lat: 23.4),
-                Geographic(lon: 5.2, lat: 32),
-              ],
-            ),
+            geometry: LineString.from(const [
+              Geographic(lon: 2, lat: 23.4),
+              Geographic(lon: 5.2, lat: 32),
+            ]),
           ),
         ],
       );
       final o2 = PolylineLayer(
         polylines: [
           Feature(
-            geometry: LineString.from(
-              const [
-                Geographic(lon: 2, lat: 23.4),
-                Geographic(lon: 5.2, lat: 32),
-                Geographic(lon: 53, lat: 2),
-              ],
-            ),
+            geometry: LineString.from(const [
+              Geographic(lon: 2, lat: 23.4),
+              Geographic(lon: 5.2, lat: 32),
+              Geographic(lon: 53, lat: 2),
+            ]),
           ),
         ],
       );

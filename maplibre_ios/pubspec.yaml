@@ -16,10 +16,10 @@ dependencies:
   ffi: ^2.1.3
   flutter:
     sdk: flutter
-  objective_c: ^8.1.0
+  objective_c: ^9.0.0+1
 
 dev_dependencies:
-  ffigen: 19.1.0
+  ffigen: 20.1.1
   very_good_analysis: ^10.0.0
 
 flutter:
@@ -27,72 +27,3 @@ flutter:
     platforms:
       ios:
         pluginClass: MapLibreIosPlugin
-
-ffigen:
-  name: MapLibreFFi
-  description: Bindings for MapLibre iOS.
-  language: objc
-  output: 'lib/maplibre_ffi.dart'
-  exclude-all-by-default: true
-  objc-protocols:
-    include:
-      - 'MLN.*'
-  objc-interfaces:
-    include:
-      - 'NSString'
-      - 'CLLocationCoordinate2D'
-      - 'NSAttributedString'
-      - 'UIImage'
-      - 'UIScreen'
-      - 'UIAction'
-      - 'UIMenu'
-      - 'UIPointerEffect'
-      - 'UIPointerShape'
-      - 'UIPointerStyle'
-      - 'UITableViewCell'
-      - 'UICellConfigurationState'
-      - 'UITableViewHeaderFooterView'
-      - 'UIViewConfigurationState'
-      - 'NSExpression'
-      - 'Helpers'
-      - 'MapLibreRegistry'
-      - 'Extensions'
-      - 'MLN.*'
-    module:
-      'MapLibreRegistry': 'maplibre_ios'
-      'Helpers': 'maplibre_ios'
-      'Extensions': 'maplibre_ios'
-      'MLNMapView': 'MapLibre'
-      'MLNMapCamera': 'MapLibre'
-      'MLNVectorTileSource': 'MapLibre'
-      'MLNOfflinePack': 'MapLibre'
-      'MLNOfflineRegion': 'MapLibre'
-      'UIImage': 'UIKit'
-      'UIScreen': 'UIKit'
-    member-filter:
-      'UIResponder':
-        exclude:
-          - 'copy:'
-      'MLNMapView':
-        exclude:
-          - 'initWithFrame:'
-    member-rename:
-      'MLNSource':
-        # https://github.com/dart-lang/native/issues/2419
-        'initWithIdentifier:': 'initWithIdentifier_'
-      'MLNMapView':
-        'convertPoint:toCoordinateFromView:': 'convertPoint_'
-        'convertRect:toCoordinateBoundsFromView:': 'convertRect_'
-      'UIPointerStyle':
-        'styleWithShape:constrainedAxes:': 'styleWithShape_'
-  compiler-opts:
-    - '-Fios/.build/MapLibre.xcframework/ios-arm64/'
-    - '-Iios/.build/MapLibre.xcframework/ios-arm64/MapLibre.framework/Headers'
-    - '-isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk'
-  headers:
-    entry-points:
-      - 'ios/maplibre_ios/Sources/maplibre_ios/MapLibreIos.h'
-      - 'MapLibre.h'
-  preamble: |
-    // ignore_for_file: type=lint, unused_element, unused_field |
-    // dart format off

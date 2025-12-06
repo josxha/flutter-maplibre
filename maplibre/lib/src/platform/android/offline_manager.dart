@@ -179,13 +179,10 @@ final class _MergeOfflineRegionsCallback
       return;
     }
     jRegions.releasedBy(arena);
-    final regions = List.generate(
-      jRegions.length,
-      (index) {
-        final jRegion = jRegions[index]..releasedBy(arena);
-        return jRegion.toOfflineRegion();
-      },
-    );
+    final regions = List.generate(jRegions.length, (index) {
+      final jRegion = jRegions[index]..releasedBy(arena);
+      return jRegion.toOfflineRegion();
+    });
     weakCompleter.target?.complete(regions);
   });
 
@@ -273,13 +270,10 @@ final class _ListOfflineRegionsCallback
       return;
     }
     jRegions.releasedBy(arena);
-    final regions = List.generate(
-      jRegions.length,
-      (index) {
-        final jRegion = jRegions[index]..releasedBy(arena);
-        return jRegion.toOfflineRegion();
-      },
-    );
+    final regions = List.generate(jRegions.length, (index) {
+      final jRegion = jRegions[index]..releasedBy(arena);
+      return jRegion.toOfflineRegion();
+    });
     weakCompleter.target?.complete(regions);
   });
 
@@ -301,11 +295,7 @@ final class _CreateOfflineRegionCallback
   void onCreate(jni.OfflineRegion jRegion) {
     jRegion.releasedBy(arena);
     final jObserver = jni.OfflineRegion$OfflineRegionObserver.implement(
-      _OfflineRegionObserver(
-        stream,
-        WeakReference(jRegion),
-        arena,
-      ),
+      _OfflineRegionObserver(stream, WeakReference(jRegion), arena),
     )..releasedBy(arena);
     jRegion.setObserver(jObserver);
     jRegion.setDownloadState(jni.OfflineRegion.STATE_ACTIVE);
@@ -363,18 +353,14 @@ final class _OfflineRegionObserver
     error.releasedBy(arena);
     weakJRegion.target?.setDownloadState(jni.OfflineRegion.STATE_INACTIVE);
     stream.addError(
-      Exception(
-        error.getMessage().toDartString(releaseOriginal: true),
-      ),
+      Exception(error.getMessage().toDartString(releaseOriginal: true)),
     );
   }
 
   @override
   void mapboxTileCountLimitExceeded(int limit) {
     weakJRegion.target?.setDownloadState(jni.OfflineRegion.STATE_INACTIVE);
-    stream.addError(
-      Exception('Tile count limit exceeded: $limit'),
-    );
+    stream.addError(Exception('Tile count limit exceeded: $limit'));
   }
 
   @override

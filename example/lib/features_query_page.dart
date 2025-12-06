@@ -32,19 +32,14 @@ class _FeaturesQueryPageState extends State<FeaturesQueryPage> {
         onEvent: (event) async {
           if (event is MapEventClick) {
             final screenPoint = _controller.toScreenLocation(event.point);
-            final features = _controller.featuresAtPoint(
-              screenPoint,
-            );
+            final features = _controller.featuresAtPoint(screenPoint);
             if (context.mounted) {
               _showFeatures(features);
             }
           } else if (event is MapEventLongClick) {
             final screenPoint = _controller.toScreenLocation(event.point);
             final features = _controller.featuresInRect(
-              Rect.fromCircle(
-                center: screenPoint,
-                radius: 20,
-              ),
+              Rect.fromCircle(center: screenPoint, radius: 20),
             );
             _showFeatures(features);
           }
@@ -77,10 +72,7 @@ class _FeaturesQueryPageState extends State<FeaturesQueryPage> {
       });
     }
 
-    final geojson = {
-      'type': 'FeatureCollection',
-      'features': features,
-    };
+    final geojson = {'type': 'FeatureCollection', 'features': features};
 
     await style.addSource(
       GeoJsonSource(id: 'points', data: jsonEncode(geojson)),
@@ -113,10 +105,7 @@ class _FeaturesQueryPageState extends State<FeaturesQueryPage> {
       });
     }
 
-    final geojson2 = {
-      'type': 'FeatureCollection',
-      'features': features,
-    };
+    final geojson2 = {'type': 'FeatureCollection', 'features': features};
 
     await style.addSource(
       GeoJsonSource(id: 'polygons', data: jsonEncode(geojson2)),
