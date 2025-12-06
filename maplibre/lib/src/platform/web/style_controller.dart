@@ -295,4 +295,13 @@ class StyleControllerWeb extends StyleController {
   void setProjection(MapProjection projection) => _map.setProjection(
     interop.ProjectionSpecification(type: projection.name),
   );
+
+  @override
+  MapProjection get projection {
+    final type = _map.getProjection().type;
+    return MapProjection.values.firstWhere(
+      (e) => e.name == type,
+      orElse: () => MapProjection.mercator,
+    );
+  }
 }

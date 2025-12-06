@@ -3,6 +3,9 @@ import 'dart:math';
 /// pre compiled factor to convert a coordinate in radian to degrees.
 const double degree2Radian = pi / 180;
 
+/// pre compiled factor to convert a coordinate in degrees to radian.
+const double radian2Degree = 180 / pi;
+
 /// circumference of the Earth
 const circumferenceOfEarth = 40075016.686;
 
