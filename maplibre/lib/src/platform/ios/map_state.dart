@@ -232,10 +232,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   }
 
   @override
-  List<RenderedFeature> featuresInRect(
-    Rect rect, {
-    List<String>? layerIds,
-  }) {
+  List<RenderedFeature> featuresInRect(Rect rect, {List<String>? layerIds}) {
     final style = this.style;
     if (style == null) {
       return [];

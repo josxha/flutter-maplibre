@@ -227,12 +227,7 @@ class MapGestures {
   bool tilt;
 
   List<Object?> _toList() {
-    return <Object?>[
-      rotate,
-      pan,
-      zoom,
-      tilt,
-    ];
+    return <Object?>[rotate, pan, zoom, tilt];
   }
 
   Object encode() {
@@ -268,10 +263,7 @@ class MapGestures {
 
 /// A longitude/latitude coordinate object.
 class LngLat {
-  LngLat({
-    required this.lng,
-    required this.lat,
-  });
+  LngLat({required this.lng, required this.lat});
 
   /// The longitude
   double lng;
@@ -280,10 +272,7 @@ class LngLat {
   double lat;
 
   List<Object?> _toList() {
-    return <Object?>[
-      lng,
-      lat,
-    ];
+    return <Object?>[lng, lat];
   }
 
   Object encode() {
@@ -292,10 +281,7 @@ class LngLat {
 
   static LngLat decode(Object result) {
     result as List<Object?>;
-    return LngLat(
-      lng: result[0]! as double,
-      lat: result[1]! as double,
-    );
+    return LngLat(lng: result[0]! as double, lat: result[1]! as double);
   }
 
   @override
@@ -317,10 +303,7 @@ class LngLat {
 
 /// A pixel location / location on the device screen, in logical pixels.
 class Offset {
-  Offset({
-    required this.x,
-    required this.y,
-  });
+  Offset({required this.x, required this.y});
 
   /// The x coordinate
   double x;
@@ -329,10 +312,7 @@ class Offset {
   double y;
 
   List<Object?> _toList() {
-    return <Object?>[
-      x,
-      y,
-    ];
+    return <Object?>[x, y];
   }
 
   Object encode() {
@@ -341,10 +321,7 @@ class Offset {
 
   static Offset decode(Object result) {
     result as List<Object?>;
-    return Offset(
-      x: result[0]! as double,
-      y: result[1]! as double,
-    );
+    return Offset(x: result[0]! as double, y: result[1]! as double);
   }
 
   @override
@@ -382,12 +359,7 @@ class Padding {
   int right;
 
   List<Object?> _toList() {
-    return <Object?>[
-      top,
-      bottom,
-      left,
-      right,
-    ];
+    return <Object?>[top, bottom, left, right];
   }
 
   Object encode() {
@@ -439,12 +411,7 @@ class MapCamera {
   double bearing;
 
   List<Object?> _toList() {
-    return <Object?>[
-      center,
-      zoom,
-      pitch,
-      bearing,
-    ];
+    return <Object?>[center, zoom, pitch, bearing];
   }
 
   Object encode() {
@@ -559,14 +526,7 @@ class OfflineRegion {
   String styleUrl;
 
   List<Object?> _toList() {
-    return <Object?>[
-      id,
-      bounds,
-      minZoom,
-      maxZoom,
-      pixelRatio,
-      styleUrl,
-    ];
+    return <Object?>[id, bounds, minZoom, maxZoom, pixelRatio, styleUrl];
   }
 
   Object encode() {

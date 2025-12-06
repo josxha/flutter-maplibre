@@ -67,9 +67,8 @@ abstract class StyleController {
 
   /// Add multiple images to the map where the key is the image ID and the
   /// value is the image bytes.
-  Future<void> addImages(Map<String, Uint8List> images) => Future.wait(
-    images.entries.map((e) => addImage(e.key, e.value)),
-  );
+  Future<void> addImages(Map<String, Uint8List> images) =>
+      Future.wait(images.entries.map((e) => addImage(e.key, e.value)));
 
   /// Load an image from the Flutter assets to the map by its [asset] path.
   Future<void> addImageFromAssets({

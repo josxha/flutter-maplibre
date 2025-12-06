@@ -88,9 +88,7 @@ void main(List<String> args) {
         },
       },*/
     ),
-    enums: Enums(
-      style: (decl, suggestedStyle) => EnumStyle.intConstants,
-    ),
+    enums: Enums(style: (decl, suggestedStyle) => EnumStyle.intConstants),
   );
 
   generator.generate();

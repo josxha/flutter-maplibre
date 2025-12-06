@@ -186,9 +186,7 @@ void main() {
       final size = tester.getSize(find.byType(MapLibreMap));
       final pos0 = ctrl.toLngLat(Offset(0, size.height / 4));
       final pos1 = ctrl.toLngLat(Offset(100, size.height / 4));
-      final meters = ctrl.getMetersPerPixelAtLatitude(
-        pos0.lat,
-      );
+      final meters = ctrl.getMetersPerPixelAtLatitude(pos0.lat);
       final actual =
           6371000 *
           (pos0.lon - pos1.lon).abs() *
@@ -277,9 +275,9 @@ void main() {
       await ctrl.style?.addSource(source);
       await ctrl.style?.updateGeoJsonSource(
         id: source.id,
-        data: GeometryCollection(
-          const [Point(Geographic(lon: 0, lat: 0))],
-        ).toText(),
+        data: GeometryCollection(const [
+          Point(Geographic(lon: 0, lat: 0)),
+        ]).toText(),
       );
     });
 
@@ -305,15 +303,13 @@ void main() {
         await style.addSource(
           GeoJsonSource(
             id: pointSourceId,
-            data: FeatureCollection(
-              const [
-                Feature(
-                  geometry: Point(Geographic(lon: 0.1, lat: 0.1)),
-                  id: 1,
-                  properties: {'foo': 'bar'},
-                ),
-              ],
-            ).toText(),
+            data: FeatureCollection(const [
+              Feature(
+                geometry: Point(Geographic(lon: 0.1, lat: 0.1)),
+                id: 1,
+                properties: {'foo': 'bar'},
+              ),
+            ]).toText(),
           ),
         );
         const pointLayerId = 'point_layer';
@@ -345,24 +341,20 @@ void main() {
         await style.addSource(
           GeoJsonSource(
             id: polygonSourceId,
-            data: FeatureCollection(
-              [
-                Feature(
-                  id: 2,
-                  geometry: Polygon.from(
-                    const [
-                      [
-                        Geographic(lon: 0.09, lat: 0.09),
-                        Geographic(lon: 0.11, lat: 0.09),
-                        Geographic(lon: 0.11, lat: 0.11),
-                        Geographic(lon: 0.09, lat: 0.11),
-                        Geographic(lon: 0.09, lat: 0.09),
-                      ],
-                    ],
-                  ),
-                ),
-              ],
-            ).toText(),
+            data: FeatureCollection([
+              Feature(
+                id: 2,
+                geometry: Polygon.from(const [
+                  [
+                    Geographic(lon: 0.09, lat: 0.09),
+                    Geographic(lon: 0.11, lat: 0.09),
+                    Geographic(lon: 0.11, lat: 0.11),
+                    Geographic(lon: 0.09, lat: 0.11),
+                    Geographic(lon: 0.09, lat: 0.09),
+                  ],
+                ]),
+              ),
+            ]).toText(),
           ),
         );
         const polygonLayerId = 'polygon_layer';
@@ -433,15 +425,13 @@ void main() {
         await style.addSource(
           GeoJsonSource(
             id: pointSourceId,
-            data: FeatureCollection(
-              const [
-                Feature(
-                  geometry: Point(Geographic(lon: 0.1, lat: 0.1)),
-                  id: 1,
-                  properties: {'foo': 'bar'},
-                ),
-              ],
-            ).toText(),
+            data: FeatureCollection(const [
+              Feature(
+                geometry: Point(Geographic(lon: 0.1, lat: 0.1)),
+                id: 1,
+                properties: {'foo': 'bar'},
+              ),
+            ]).toText(),
           ),
         );
         const pointLayerId = 'point_layer';
@@ -456,25 +446,21 @@ void main() {
         await style.addSource(
           GeoJsonSource(
             id: polygonSourceId,
-            data: FeatureCollection(
-              [
-                Feature(
-                  geometry: Polygon.from(
-                    const [
-                      [
-                        Geographic(lon: 0.09, lat: 0.09),
-                        Geographic(lon: 0.11, lat: 0.09),
-                        Geographic(lon: 0.11, lat: 0.11),
-                        Geographic(lon: 0.09, lat: 0.11),
-                        Geographic(lon: 0.09, lat: 0.09),
-                      ],
-                    ],
-                  ),
-                  id: 2,
-                  properties: const {'poly': 'gon'},
-                ),
-              ],
-            ).toText(),
+            data: FeatureCollection([
+              Feature(
+                geometry: Polygon.from(const [
+                  [
+                    Geographic(lon: 0.09, lat: 0.09),
+                    Geographic(lon: 0.11, lat: 0.09),
+                    Geographic(lon: 0.11, lat: 0.11),
+                    Geographic(lon: 0.09, lat: 0.11),
+                    Geographic(lon: 0.09, lat: 0.09),
+                  ],
+                ]),
+                id: 2,
+                properties: const {'poly': 'gon'},
+              ),
+            ]).toText(),
           ),
         );
         const polygonLayerId = 'polygon_layer';
@@ -502,10 +488,7 @@ void main() {
         );
         expect(polygonFeature.properties['poly'], 'gon');
 
-        features = ctrl.featuresAtPoint(
-          centerScreen,
-          layerIds: [pointLayerId],
-        );
+        features = ctrl.featuresAtPoint(centerScreen, layerIds: [pointLayerId]);
         expect(features, hasLength(1));
         expect(features.first.id, isIn([1, '1']));
         expect(features.first.properties['foo'], 'bar');
@@ -532,10 +515,7 @@ void main() {
           layerIds: [pointLayerId, pointLayer2Id],
         );
         expect(features, hasLength(2));
-        features = ctrl.featuresAtPoint(
-          centerScreen,
-          layerIds: [],
-        );
+        features = ctrl.featuresAtPoint(centerScreen, layerIds: []);
         expect(features, isEmpty);
       });
 
@@ -558,15 +538,13 @@ void main() {
         await style.addSource(
           GeoJsonSource(
             id: pointSourceId,
-            data: FeatureCollection(
-              const [
-                Feature(
-                  geometry: Point(Geographic(lon: 0.1, lat: 0.1)),
-                  id: 1,
-                  properties: {'foo': 'bar'},
-                ),
-              ],
-            ).toText(),
+            data: FeatureCollection(const [
+              Feature(
+                geometry: Point(Geographic(lon: 0.1, lat: 0.1)),
+                id: 1,
+                properties: {'foo': 'bar'},
+              ),
+            ]).toText(),
           ),
         );
         const pointLayerId = 'point_layer';
@@ -581,20 +559,16 @@ void main() {
         await style.addSource(
           GeoJsonSource(
             id: lineSourceId,
-            data: FeatureCollection(
-              [
-                Feature(
-                  geometry: LineString.from(
-                    const [
-                      Geographic(lon: 0.09, lat: 0.11),
-                      Geographic(lon: 0.11, lat: 0.11),
-                    ],
-                  ),
-                  id: 2,
-                  properties: const {'line': 'string'},
-                ),
-              ],
-            ).toText(),
+            data: FeatureCollection([
+              Feature(
+                geometry: LineString.from(const [
+                  Geographic(lon: 0.09, lat: 0.11),
+                  Geographic(lon: 0.11, lat: 0.11),
+                ]),
+                id: 2,
+                properties: const {'line': 'string'},
+              ),
+            ]).toText(),
           ),
         );
         const lineLayerId = 'line_layer';
@@ -602,35 +576,28 @@ void main() {
           const LineStyleLayer(
             id: lineLayerId,
             sourceId: lineSourceId,
-            paint: {
-              'line-color': '#0000FF',
-              'line-width': 5,
-            },
+            paint: {'line-color': '#0000FF', 'line-width': 5},
           ),
         );
         const polygonSourceId = 'polygon_source';
         await style.addSource(
           GeoJsonSource(
             id: polygonSourceId,
-            data: FeatureCollection(
-              [
-                Feature(
-                  geometry: Polygon.from(
-                    const [
-                      [
-                        Geographic(lon: 0.09, lat: 0.09),
-                        Geographic(lon: 0.11, lat: 0.09),
-                        Geographic(lon: 0.11, lat: 0.11),
-                        Geographic(lon: 0.09, lat: 0.11),
-                        Geographic(lon: 0.09, lat: 0.09),
-                      ],
-                    ],
-                  ),
-                  id: 3,
-                  properties: const {'poly': 'gon'},
-                ),
-              ],
-            ).toText(),
+            data: FeatureCollection([
+              Feature(
+                geometry: Polygon.from(const [
+                  [
+                    Geographic(lon: 0.09, lat: 0.09),
+                    Geographic(lon: 0.11, lat: 0.09),
+                    Geographic(lon: 0.11, lat: 0.11),
+                    Geographic(lon: 0.09, lat: 0.11),
+                    Geographic(lon: 0.09, lat: 0.09),
+                  ],
+                ]),
+                id: 3,
+                properties: const {'poly': 'gon'},
+              ),
+            ]).toText(),
           ),
         );
         const polygonLayerId = 'polygon_layer';
@@ -643,9 +610,7 @@ void main() {
         );
         await tester.pump(const Duration(seconds: 1));
         final size = tester.getSize(find.byType(MapLibreMap));
-        var features = ctrl.featuresInRect(
-          const Rect.fromLTWH(0, 0, 10, 10),
-        );
+        var features = ctrl.featuresInRect(const Rect.fromLTWH(0, 0, 10, 10));
         expect(features, isEmpty);
         final pointScreen = Offset(size.width / 2, size.height / 2);
         features = ctrl.featuresInRect(
@@ -785,9 +750,9 @@ void main() {
     final ctrl = await ctrlCompleter.future;
     final source = GeoJsonSource(
       id: '1',
-      data: GeometryCollection(
-        const [Point(Geographic(lon: 12, lat: 2))],
-      ).toText(),
+      data: GeometryCollection(const [
+        Point(Geographic(lon: 12, lat: 2)),
+      ]).toText(),
     );
     await ctrl.style?.addSource(source);
     await tester.pumpAndSettle();
