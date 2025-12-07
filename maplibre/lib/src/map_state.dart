@@ -7,7 +7,6 @@ import 'package:maplibre/src/interaction/pointer_handler.dart';
 import 'package:maplibre/src/interaction/scroll_wheel_zoom_handler.dart';
 import 'package:maplibre/src/interaction/tap_handler.dart';
 import 'package:maplibre/src/layer/layer_manager.dart';
-import 'package:pointer_interceptor/pointer_interceptor.dart';
 
 /// The [State] of the [MapLibreMap] widget.
 abstract class MapLibreMapState extends State<MapLibreMap>
@@ -76,54 +75,52 @@ abstract class MapLibreMapState extends State<MapLibreMap>
     return Stack(
       children: [
         buildPlatformWidget(context),
-        PointerInterceptor(
-          child: Listener(
-            onPointerDown: (event) {
-              pointerDownEvent = event;
-              pointers[event.pointer] = event.position;
-              _stopAnimation();
-            },
-            onPointerMove: (event) {
-              pointers[event.pointer] = event.position;
-            },
-            onPointerUp: (event) {
-              pointers.remove(event.pointer);
-              if (pointers.isEmpty) pointerDownEvent = null;
-            },
-            onPointerCancel: (event) {
-              pointers.remove(event.pointer);
-              if (pointers.isEmpty) pointerDownEvent = null;
-            },
-            onPointerSignal: (event) {
-              switch (event) {
-                case final PointerScrollEvent event:
-                  _scrollWheelZoomHandler.onPointerScrollSignal(event);
-              }
-            },
-            child: GestureDetector(
-              onTapDown: (details) => _tapHandler.onTapDown,
-              onTap: () => _tapHandler.onTap,
-              onTapCancel: () => _tapHandler.onTapCancel,
-              onSecondaryTapDown: (details) => _tapHandler.onSecondaryTapDown,
-              onSecondaryTap: () => _tapHandler.onSecondaryTap,
-              onDoubleTapDown: _tapHandler.onDoubleTapDown,
-              onDoubleTapCancel: _tapHandler.onDoubleTapCancel,
-              onDoubleTap: _tapHandler.onDoubleTap,
-              // pan and scale, scale is a superset of the pan gesture
-              onScaleStart: _pointerHandler.onScaleStart,
-              onScaleUpdate: _pointerHandler.onScaleUpdate,
-              onScaleEnd: _pointerHandler.onScaleEnd,
-              // This transparent ColoredBox is needed to make sure the
-              // GestureDetector has a size and can detect gestures.
-              child: ColoredBox(
-                color: Colors.transparent,
-                child: MapLibreInheritedModel(
-                  mapController: this,
-                  mapCamera: camera,
-                  child: isInitialized
-                      ? Stack(children: widget.children)
-                      : const SizedBox.expand(),
-                ),
+        Listener(
+          onPointerDown: (event) {
+            pointerDownEvent = event;
+            pointers[event.pointer] = event.position;
+            _stopAnimation();
+          },
+          onPointerMove: (event) {
+            pointers[event.pointer] = event.position;
+          },
+          onPointerUp: (event) {
+            pointers.remove(event.pointer);
+            if (pointers.isEmpty) pointerDownEvent = null;
+          },
+          onPointerCancel: (event) {
+            pointers.remove(event.pointer);
+            if (pointers.isEmpty) pointerDownEvent = null;
+          },
+          onPointerSignal: (event) {
+            switch (event) {
+              case final PointerScrollEvent event:
+                _scrollWheelZoomHandler.onPointerScrollSignal(event);
+            }
+          },
+          child: GestureDetector(
+            onTapDown: (details) => _tapHandler.onTapDown,
+            onTap: () => _tapHandler.onTap,
+            onTapCancel: () => _tapHandler.onTapCancel,
+            onSecondaryTapDown: (details) => _tapHandler.onSecondaryTapDown,
+            onSecondaryTap: () => _tapHandler.onSecondaryTap,
+            onDoubleTapDown: _tapHandler.onDoubleTapDown,
+            onDoubleTapCancel: _tapHandler.onDoubleTapCancel,
+            onDoubleTap: _tapHandler.onDoubleTap,
+            // pan and scale, scale is a superset of the pan gesture
+            onScaleStart: _pointerHandler.onScaleStart,
+            onScaleUpdate: _pointerHandler.onScaleUpdate,
+            onScaleEnd: _pointerHandler.onScaleEnd,
+            // This transparent ColoredBox is needed to make sure the
+            // GestureDetector has a size and can detect gestures.
+            child: ColoredBox(
+              color: Colors.transparent,
+              child: MapLibreInheritedModel(
+                mapController: this,
+                mapCamera: camera,
+                child: isInitialized
+                    ? Stack(children: widget.children)
+                    : const SizedBox.expand(),
               ),
             ),
           ),
