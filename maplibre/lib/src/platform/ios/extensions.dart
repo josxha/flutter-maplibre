@@ -71,6 +71,19 @@ extension LngLatBoundsExt on LngLatBounds {
   }
 }
 
+/// Internal extensions on [EdgeInsets].
+extension EdgeInsetsExt on EdgeInsets {
+  /// Convert an [EdgeInsets] to a [UIEdgeInsets].
+  UIEdgeInsets toUIEdgeInsets() {
+    final insets = Struct.create<UIEdgeInsets>()
+      ..top = top
+      ..left = left
+      ..bottom = bottom
+      ..right = right;
+    return insets;
+  }
+}
+
 /// Internal extensions on [MLNCoordinateBounds].
 extension MLNCoordinateBoundsExt on MLNCoordinateBounds {
   /// Convert a [MLNCoordinateBounds] to a [LngLatBounds].
