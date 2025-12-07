@@ -2,10 +2,10 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/inherited_model.dart';
-import 'package:maplibre/src/interaction/double_tap_handler.dart';
 import 'package:maplibre/src/interaction/keyboard_handler.dart';
 import 'package:maplibre/src/interaction/pointer_handler.dart';
 import 'package:maplibre/src/interaction/scroll_wheel_zoom_handler.dart';
+import 'package:maplibre/src/interaction/tap_handler.dart';
 import 'package:maplibre/src/layer/layer_manager.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
 
@@ -22,10 +22,10 @@ abstract class MapLibreMapState extends State<MapLibreMap>
   /// The [LayerManager] handles the high level markers, polygons,
   /// circles and polylines.
   LayerManager? layerManager;
-  late final _scrollWheelZoomHandler = ScrollWheelZoomHandler(this);
-  late final _pointerHandler = PointerHandler(this);
-  late final _keyboardHandler = KeyboardHandler(this);
-  late final _doubleTapHandler = DoubleTapHandler(this);
+  late final ScrollWheelZoomHandler _scrollWheelZoomHandler;
+  late final PointerHandler _pointerHandler;
+  late final KeyboardHandler _keyboardHandler;
+  late final TapHandler _tapHandler;
 
   /// The [TapDownDetails] of the last double tap down event.
   TapDownDetails? doubleTapDownDetails;
@@ -64,7 +64,10 @@ abstract class MapLibreMapState extends State<MapLibreMap>
 
   @override
   void initState() {
-    _keyboardHandler.initState();
+    _scrollWheelZoomHandler = ScrollWheelZoomHandler(this);
+    _pointerHandler = PointerHandler(this);
+    _keyboardHandler = KeyboardHandler(this);
+    _tapHandler = TapHandler(this);
     super.initState();
   }
 
@@ -98,9 +101,14 @@ abstract class MapLibreMapState extends State<MapLibreMap>
               }
             },
             child: GestureDetector(
-              onDoubleTapDown: _doubleTapHandler.onDoubleTapDown,
-              onDoubleTapCancel: _doubleTapHandler.onDoubleTapCancel,
-              onDoubleTap: _doubleTapHandler.onDoubleTap,
+              onTapDown: (details) => _tapHandler.onTapDown,
+              onTap: () => _tapHandler.onTap,
+              onTapCancel: () => _tapHandler.onTapCancel,
+              onSecondaryTapDown: (details) => _tapHandler.onSecondaryTapDown,
+              onSecondaryTap: () => _tapHandler.onSecondaryTap,
+              onDoubleTapDown: _tapHandler.onDoubleTapDown,
+              onDoubleTapCancel: _tapHandler.onDoubleTapCancel,
+              onDoubleTap: _tapHandler.onDoubleTap,
               // pan and scale, scale is a superset of the pan gesture
               onScaleStart: _pointerHandler.onScaleStart,
               onScaleUpdate: _pointerHandler.onScaleUpdate,
@@ -127,18 +135,20 @@ abstract class MapLibreMapState extends State<MapLibreMap>
   /// Build the platform specific widget.
   Widget buildPlatformWidget(BuildContext context);
 
-  void _onAnimation() => moveCamera(
-    zoom: animation!.value.zoom,
-    center: animation!.value.center,
-    bearing: animation!.value.bearing,
-    pitch: animation!.value.pitch,
-  );
+  void _onAnimation() {
+    moveCamera(
+      zoom: animation!.value.zoom,
+      center: animation!.value.center,
+      bearing: animation!.value.bearing,
+      pitch: animation!.value.pitch,
+    );
+  }
 
   @override
   void dispose() {
-    _keyboardHandler.dispose();
     animation?.removeListener(_onAnimation);
     animationController.dispose();
+    _keyboardHandler.dispose();
     super.dispose();
   }
 
@@ -151,7 +161,10 @@ abstract class MapLibreMapState extends State<MapLibreMap>
   void _onAnimationStatus(AnimationStatus status) {
     // debugPrint('Animation status: $status');
     if (status == AnimationStatus.completed && animation != null) {
-      _keyboardHandler.onAnimationStatusCompleted();
+      final ongoingInteraction = _keyboardHandler.onAnimationStatusCompleted();
+      if (!ongoingInteraction) {
+        widget.onEvent?.call(const MapEventCameraIdle());
+      }
     }
   }
 }

@@ -13,8 +13,17 @@ abstract class InteractionHandler {
   MapOptions get options => controller.options;
 
   /// Accessor to the current map camera.
-  MapCamera? get camera => controller.camera;
+  MapCamera get camera => controller.camera ?? controller.getCamera();
 
   /// Accessor to the map gestures configuration.
   MapGestures get gestures => options.gestures;
+
+  /// Emits a [MapEventStartMoveCamera].
+  void emitMoveStartEvent() => controller.widget.onEvent?.call(
+    const MapEventStartMoveCamera(reason: CameraChangeReason.apiGesture),
+  );
+
+  /// Emits a [MapEventCameraIdle].
+  void emitCameraIdleEvent() =>
+      controller.widget.onEvent?.call(const MapEventCameraIdle());
 }

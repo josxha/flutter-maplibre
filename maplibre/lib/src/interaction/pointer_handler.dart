@@ -18,16 +18,16 @@ class PointerHandler extends InteractionHandler {
   ScaleUpdateDetails? _secondToLastScaleUpdateDetails;
 
   /// [GestureDetector.onScaleStart]
-  // ignore: use_setters_to_change_properties
   void onScaleStart(ScaleStartDetails details) {
     // debugPrint('Scale start: $details');
     _onScaleStartEvent = details;
+    emitMoveStartEvent();
   }
 
   /// [GestureDetector.onScaleUpdate]
   void onScaleUpdate(ScaleUpdateDetails details) {
     // debugPrint('Scale update: $details');
-    final camera = this.camera!;
+    final camera = this.camera;
     final startEvent = _onScaleStartEvent;
     final pointerDownEvent = controller.pointerDownEvent;
     if (startEvent == null || pointerDownEvent == null) return;
@@ -154,8 +154,8 @@ class PointerHandler extends InteractionHandler {
 
   /// [GestureDetector.onScaleEnd]
   void onScaleEnd(ScaleEndDetails details) {
-    debugPrint('Scale end: $details');
-    final camera = this.camera!;
+    // debugPrint('Scale end: $details');
+    final camera = this.camera;
     final firstEvent = _onScaleStartEvent;
     final secondToLastEvent = _secondToLastScaleUpdateDetails;
     final lastEvent = _lastScaleUpdateDetails;
@@ -173,6 +173,7 @@ class PointerHandler extends InteractionHandler {
             )
             .intermediatePointTo(camera.center, fraction: 0.2);
       }
+      emitMoveStartEvent();
       controller.animateCamera(zoom: camera.zoom - 1, center: newCenter);
     } else if (secondToLastEvent != null &&
         lastEvent != null &&
@@ -212,6 +213,9 @@ class PointerHandler extends InteractionHandler {
               ratio: 5,
             ),
           );
+      } else {
+        // interation ended without fling animation
+        emitCameraIdleEvent();
       }
     }
 

@@ -22,7 +22,6 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   late HTMLDivElement _htmlElement;
   late interop.JsMap _map;
   Completer<interop.MapLibreEvent>? _movementCompleter;
-  bool _nextGestureCausedByController = false;
   LayerManager? _layerManager;
 
   /// Get the [MapOptions] from [MapLibreMap.options].
@@ -49,7 +48,8 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         final pmtilesProtocol = pmtiles.Protocol();
         interop.addProtocol('pmtiles', pmtilesProtocol.tile);
       } catch (e) {
-        debugPrint('[MapLibre] PMTiles support could not be loaded. $e');
+        // silence error if pmtiles support is not added
+        // debugPrint('[MapLibre] PMTiles support could not be loaded. $e');
       }
 
       _htmlElement.addEventListener(
@@ -88,7 +88,15 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       _map.setMinPitch(options.minPitch);
       _map.setMaxPitch(options.maxPitch);
       _map.setMaxBounds(options.maxBounds?.toJsLngLatBounds());
-      _updateGestures(const MapGestures.none());
+      // disable gestures because we handle them in Flutter
+      _map.dragPan.disable();
+      _map.touchZoomRotate.disable();
+      _map.doubleClickZoom.disable();
+      _map.scrollZoom.disable();
+      _map.boxZoom.disable();
+      _map.dragRotate.disable();
+      _map.touchPitch.disable();
+      _map.keyboard.disable();
 
       // add callbacks
       _map.on(
@@ -98,57 +106,11 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         }.toJS,
       );
       _map.on(
-        interop.MapEventType.click,
-        (interop.MapMouseEvent event) {
-          final point = event.lngLat.toGeographic();
-          widget.onEvent?.call(
-            MapEventClick(point: point, screenPoint: event.point.toOffset()),
-          );
-        }.toJS,
-      );
-      _map.on(
-        interop.MapEventType.dblclick,
-        (interop.MapMouseEvent event) {
-          final point = event.lngLat.toGeographic();
-          widget.onEvent?.call(
-            MapEventDoubleClick(
-              point: point,
-              screenPoint: event.point.toOffset(),
-            ),
-          );
-        }.toJS,
-      );
-      _map.on(
-        interop.MapEventType.contextmenu,
-        (interop.MapMouseEvent event) {
-          final point = event.lngLat.toGeographic();
-          widget.onEvent?.call(
-            MapEventSecondaryClick(
-              point: point,
-              screenPoint: event.point.toOffset(),
-            ),
-          );
-        }.toJS,
-      );
-      _map.on(
         interop.MapEventType.idle,
         (interop.MapMouseEvent event) {
-          widget.onEvent?.call(const MapEventIdle());
-        }.toJS,
-      );
-      _map.on(
-        interop.MapEventType.moveStart,
-        (interop.MapLibreEvent event) {
-          final CameraChangeReason reason;
-          if (_nextGestureCausedByController) {
-            _nextGestureCausedByController = false;
-            reason = CameraChangeReason.developerAnimation;
-          } else if (event.originalEvent != null) {
-            reason = CameraChangeReason.apiGesture;
-          } else {
-            reason = CameraChangeReason.apiAnimation;
+          if (!animationController.isAnimating) {
+            widget.onEvent?.call(const MapEventIdle());
           }
-          widget.onEvent?.call(MapEventStartMoveCamera(reason: reason));
         }.toJS,
       );
       _map.on(
@@ -167,7 +129,6 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       _map.on(
         interop.MapEventType.moveEnd,
         (interop.MapLibreEvent event) {
-          widget.onEvent?.call(const MapEventCameraIdle());
           if (!(_movementCompleter?.isCompleted ?? true)) {
             _movementCompleter?.complete(event);
           }
@@ -217,9 +178,6 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     if (options.maxBounds != oldWidget.options.maxBounds) {
       _map.setMaxBounds(options.maxBounds?.toJsLngLatBounds());
     }
-    if (options.gestures != oldWidget.options.gestures) {
-      _updateGestures(const MapGestures.none());
-    }
     _layerManager?.updateLayers(widget.layers);
     super.didUpdateWidget(oldWidget);
   }
@@ -249,7 +207,6 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     double? bearing,
     double? pitch,
   }) async {
-    _nextGestureCausedByController = true;
     final camera = getCamera();
     _map.jumpTo(
       interop.JumpToOptions(
@@ -272,7 +229,6 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     Duration? webMaxDuration,
   }) async {
     final destination = center?.toLngLat();
-    _nextGestureCausedByController = true;
     final camera = getCamera();
     _map.flyTo(
       interop.FlyToOptions(
@@ -363,45 +319,6 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       latitudeSouth: bounds.getSouth().toDouble(),
       latitudeNorth: bounds.getNorth().toDouble(),
     );
-  }
-
-  void _updateGestures(MapGestures gestures) {
-    if (gestures.pan) {
-      _map.dragPan.enable();
-    } else {
-      _map.dragPan.disable();
-    }
-    if (gestures.zoom) {
-      _map.touchZoomRotate.enable();
-      _map.doubleClickZoom.enable();
-      _map.scrollZoom.enable();
-      _map.boxZoom.enable();
-    } else {
-      _map.touchZoomRotate.disable(); // this disables rotation as well
-      _map.doubleClickZoom.disable();
-      _map.scrollZoom.disable();
-      _map.boxZoom.disable();
-    }
-    if (gestures.rotate) {
-      _map.dragRotate.enable();
-      _map.touchZoomRotate.enableRotation();
-    } else {
-      _map.touchZoomRotate.disableRotation();
-      _map.dragRotate.disable();
-    }
-    if (gestures.pitch) {
-      // TODO dragRotate allows to pitch too but has no option to disable pitch.
-      _map.touchPitch.enable();
-    } else {
-      _map.touchPitch.disable();
-    }
-    // It's not possible to disable just some gestures for the KeyboardHandler.
-    // That's why we disable it completely if not all gestures are enabled.
-    if (gestures.allEnabled) {
-      _map.keyboard.enable();
-    } else {
-      _map.keyboard.disable();
-    }
   }
 
   @override

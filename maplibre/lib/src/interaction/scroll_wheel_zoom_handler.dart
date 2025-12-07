@@ -13,7 +13,7 @@ class ScrollWheelZoomHandler extends InteractionHandler {
     // debugPrint('Scroll wheel event: ${event.scrollDelta.dy}');
     if (!options.gestures.zoom) return;
 
-    final currCamera = camera!;
+    final currCamera = camera;
     final zoomChange = -event.scrollDelta.dy / 300; // sensitivity
     final prevTarget = controller.targetCamera ?? currCamera;
 
@@ -33,6 +33,9 @@ class ScrollWheelZoomHandler extends InteractionHandler {
       center: targetCenter,
     );
     final tweens = MapCameraTween(begin: currCamera, end: targetCamera);
+    if (!controller.animationController.isAnimating) {
+      emitMoveStartEvent();
+    }
     controller.animation = tweens.animate(
       CurvedAnimation(
         parent: controller.animationController,
