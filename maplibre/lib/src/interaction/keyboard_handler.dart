@@ -1,6 +1,5 @@
 import 'package:flutter/animation.dart';
 import 'package:flutter/services.dart';
-import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/interaction/interaction_handler.dart';
 import 'package:maplibre/src/map_camera_tween.dart';
 import 'package:maplibre/src/map_state.dart';

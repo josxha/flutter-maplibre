@@ -33,111 +33,110 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
 
   @override
   void initState() {
-    platformViewRegistry.registerViewFactory(viewName, (
-      int viewId, [
-      dynamic params,
-    ]) {
-      _htmlElement = HTMLDivElement()
-        ..style.padding = '0'
-        ..style.margin = '0'
-        ..style.height = '100%'
-        ..style.width = '100%';
-
-      // add pmtiles support
-      try {
-        final pmtilesProtocol = pmtiles.Protocol();
-        interop.addProtocol('pmtiles', pmtilesProtocol.tile);
-      } catch (e) {
-        // silence error if pmtiles support is not added
-        // debugPrint('[MapLibre] PMTiles support could not be loaded. $e');
-      }
-
-      _htmlElement.addEventListener(
-        'contextmenu',
-        (Event event) {
-          debugPrint('context menu event prevented');
-          event.preventDefault();
-        }.toJS,
-      );
-
-      _map = interop.JsMap(
-        interop.MapOptions(
-          container: _htmlElement,
-          style: _prepareStyleString(options.initStyle),
-          zoom: options.initZoom,
-          center: options.initCenter?.toLngLat(),
-          bearing: options.initBearing,
-          pitch: options.initPitch,
-          attributionControl: false,
-        ),
-      );
-
-      document.body?.appendChild(_htmlElement);
-      // Invoke the onMapCreated callback async to avoid getting it called
-      // during the widget build.
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        widget.onEvent?.call(MapEventMapCreated(mapController: this));
-        widget.onMapCreated?.call(this);
-        setState(() => isInitialized = true);
-      });
-      _resizeMap();
-
-      // set options
-      _map.setMinZoom(options.minZoom);
-      _map.setMaxZoom(options.maxZoom);
-      _map.setMinPitch(options.minPitch);
-      _map.setMaxPitch(options.maxPitch);
-      _map.setMaxBounds(options.maxBounds?.toJsLngLatBounds());
-      // disable gestures because we handle them in Flutter
-      _map.dragPan.disable();
-      _map.touchZoomRotate.disable();
-      _map.doubleClickZoom.disable();
-      _map.scrollZoom.disable();
-      _map.boxZoom.disable();
-      _map.dragRotate.disable();
-      _map.touchPitch.disable();
-      _map.keyboard.disable();
-
-      // add callbacks
-      _map.on(
-        interop.MapEventType.load,
-        (interop.MapMouseEvent event) {
-          _onStyleLoaded();
-        }.toJS,
-      );
-      _map.on(
-        interop.MapEventType.idle,
-        (interop.MapMouseEvent event) {
-          if (!animationController.isAnimating) {
-            widget.onEvent?.call(const MapEventIdle());
-          }
-        }.toJS,
-      );
-      _map.on(
-        interop.MapEventType.move,
-        (interop.MapLibreEvent event) {
-          final mapCamera = MapCamera(
-            center: _map.getCenter().toGeographic(),
-            zoom: _map.getZoom().toDouble(),
-            pitch: _map.getPitch().toDouble(),
-            bearing: _map.getBearing().toDouble(),
-          );
-          setState(() => camera = mapCamera);
-          widget.onEvent?.call(MapEventMoveCamera(camera: mapCamera));
-        }.toJS,
-      );
-      _map.on(
-        interop.MapEventType.moveEnd,
-        (interop.MapLibreEvent event) {
-          if (!(_movementCompleter?.isCompleted ?? true)) {
-            _movementCompleter?.complete(event);
-          }
-        }.toJS,
-      );
-
-      return _htmlElement;
-    });
+    platformViewRegistry.registerViewFactory(viewName, _onRegisterViewFactory);
     super.initState();
+  }
+
+  HTMLElement _onRegisterViewFactory(int viewId, [dynamic params]) {
+    _htmlElement = HTMLDivElement()
+      ..style.padding = '0'
+      ..style.margin = '0'
+      ..style.height = '100%'
+      ..style.width = '100%';
+
+    // add pmtiles support
+    try {
+      final pmtilesProtocol = pmtiles.Protocol();
+      interop.addProtocol('pmtiles', pmtilesProtocol.tile);
+    } catch (e) {
+      // silence error if pmtiles support is not added
+      // debugPrint('[MapLibre] PMTiles support could not be loaded. $e');
+    }
+
+    _htmlElement.addEventListener(
+      'contextmenu',
+          (Event event) {
+        debugPrint('context menu event prevented');
+        event.preventDefault();
+      }.toJS,
+    );
+
+    _map = interop.JsMap(
+      interop.MapOptions(
+        container: _htmlElement,
+        style: _prepareStyleString(options.initStyle),
+        zoom: options.initZoom,
+        center: options.initCenter?.toLngLat(),
+        bearing: options.initBearing,
+        pitch: options.initPitch,
+        attributionControl: false,
+      ),
+    );
+
+    document.body?.appendChild(_htmlElement);
+    // Invoke the onMapCreated callback async to avoid getting it called
+    // during the widget build.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      widget.onEvent?.call(MapEventMapCreated(mapController: this));
+      widget.onMapCreated?.call(this);
+      setState(() => isInitialized = true);
+    });
+    _resizeMap();
+
+    // set options
+    _map.setMinZoom(options.minZoom);
+    _map.setMaxZoom(options.maxZoom);
+    _map.setMinPitch(options.minPitch);
+    _map.setMaxPitch(options.maxPitch);
+    _map.setMaxBounds(options.maxBounds?.toJsLngLatBounds());
+    // disable gestures because we handle them in Flutter
+    _map.dragPan.disable();
+    _map.touchZoomRotate.disable();
+    _map.doubleClickZoom.disable();
+    _map.scrollZoom.disable();
+    _map.boxZoom.disable();
+    _map.dragRotate.disable();
+    _map.touchPitch.disable();
+    _map.keyboard.disable();
+
+    // add callbacks
+    _map.on(
+      interop.MapEventType.load,
+          (interop.MapMouseEvent event) {
+        _onStyleLoaded();
+      }.toJS,
+    );
+    _map.on(
+      interop.MapEventType.idle,
+          (interop.MapMouseEvent event) {
+        if (!animationController.isAnimating) {
+          widget.onEvent?.call(const MapEventIdle());
+        }
+      }.toJS,
+    );
+    _map.on(
+      interop.MapEventType.move,
+          (interop.MapLibreEvent event) {
+        final mapCamera = MapCamera(
+          center: _map.getCenter().toGeographic(),
+          zoom: _map.getZoom().toDouble(),
+          pitch: _map.getPitch().toDouble(),
+          bearing: _map.getBearing().toDouble(),
+        );
+        setState(() => camera = mapCamera);
+        widget.onEvent?.call(MapEventMoveCamera(camera: mapCamera));
+      }.toJS,
+    );
+    _map.on(
+      interop.MapEventType.moveEnd,
+          (interop.MapLibreEvent event) {
+        if (!(_movementCompleter?.isCompleted ?? true)) {
+          _movementCompleter?.complete(event);
+        }
+      }.toJS,
+    );
+
+    return _htmlElement;
   }
 
   @override
