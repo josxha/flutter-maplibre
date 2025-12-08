@@ -194,6 +194,28 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
     true
   }
 
+  // MLNMapViewDelegate method called when camera is about to start changing
+  func mapView(_ mapView: MLNMapView, regionWillChangeWith reason: MLNCameraChangeReason, animated: Bool) {
+    let changeReason: CameraChangeReason = {
+      switch reason {
+      case .gestureOneFingerZoom, .gesturePan, .gesturePinch, .gestureRotate, .gestureTilt,
+        .gestureZoomIn, .gestureZoomOut, .transitionCancelled:
+        return .apiGesture
+      case .programmatic:
+        return .apiAnimation
+      default:
+        return .developerAnimation
+      }
+    }()
+
+    _flutterApi.onStartMoveCamera(reason: changeReason) { _ in }
+  }
+
+  /// MLNMapViewDelegate method called when camera has finished changing
+  func mapView(_ mapView: MLNMapView, regionDidChangeWith _: MLNCameraChangeReason, animated: Bool) {
+    _flutterApi.onCameraIdle { (_: Result<Void, PigeonError>) in }
+  }
+
   // MLNMapViewDelegate method called when map has finished loading
   func mapView(_ mapView: MLNMapView, didFinishLoading _: MLNStyle) {
     // setCamera() can only be used after the map did finish loading
