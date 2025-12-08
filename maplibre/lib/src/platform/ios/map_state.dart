@@ -194,7 +194,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   }
 
   List<RenderedFeature> _nativeQueryToRenderedFeatures(NSArray query) {
-    final features = query.asDart().map(MLNFeatureWrapper.as);
+    final features = query.asDart().map((e) => e as MLNFeatureWrapper);
     return features
         .map(
           (f) => RenderedFeature(
