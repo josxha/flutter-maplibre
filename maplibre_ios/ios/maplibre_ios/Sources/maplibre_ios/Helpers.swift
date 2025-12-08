@@ -6,7 +6,8 @@ import UIKit
 // cd maplibre_ios/ios/maplibre_ios/Sources/maplibre_ios/
 // ./gen_swift_headers.sh
 
-@objc public class Helpers: NSObject {
+@objc(Helpers)
+public class Helpers: NSObject {
   @objc public static func addImageToStyle(
     target: NSObject, field: String, expression: NSExpression
   ) {
