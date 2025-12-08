@@ -55,8 +55,8 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
 
     _htmlElement.addEventListener(
       'contextmenu',
-          (Event event) {
-        debugPrint('context menu event prevented');
+      (Event event) {
+        // debugPrint('context menu event prevented');
         event.preventDefault();
       }.toJS,
     );
@@ -102,13 +102,13 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     // add callbacks
     _map.on(
       interop.MapEventType.load,
-          (interop.MapMouseEvent event) {
+      (interop.MapMouseEvent event) {
         _onStyleLoaded();
       }.toJS,
     );
     _map.on(
       interop.MapEventType.idle,
-          (interop.MapMouseEvent event) {
+      (interop.MapMouseEvent event) {
         if (!animationController.isAnimating) {
           widget.onEvent?.call(const MapEventIdle());
         }
@@ -116,7 +116,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     );
     _map.on(
       interop.MapEventType.move,
-          (interop.MapLibreEvent event) {
+      (interop.MapLibreEvent event) {
         final mapCamera = MapCamera(
           center: _map.getCenter().toGeographic(),
           zoom: _map.getZoom().toDouble(),
@@ -129,7 +129,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     );
     _map.on(
       interop.MapEventType.moveEnd,
-          (interop.MapLibreEvent event) {
+      (interop.MapLibreEvent event) {
         if (!(_movementCompleter?.isCompleted ?? true)) {
           _movementCompleter?.complete(event);
         }

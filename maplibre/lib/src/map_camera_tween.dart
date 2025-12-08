@@ -7,7 +7,7 @@ import 'package:maplibre/maplibre.dart';
 class MapCameraTween extends Tween<MapCamera> {
   /// Creates a [MapCameraTween] with the given [begin] and [end] camera states.
   MapCameraTween({required MapCamera begin, required MapCamera end})
-      : super(begin: begin, end: end);
+    : super(begin: begin, end: end);
 
   @override
   MapCamera lerp(double t) {
