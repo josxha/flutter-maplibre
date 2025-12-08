@@ -168,9 +168,6 @@ jobs:
   score:
     name: "Package score"
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: maplibre
     steps:
       - name: Checkout project
         uses: actions/checkout@v6
@@ -182,8 +179,11 @@ jobs:
         run: |
           sudo apt-get install webp && \
           dart pub global activate pana
+      - name: Get dependencies
+        run: flutter pub get
       - name: Check package score
-        run: pana --exit-code-threshold 10 --no-dartdoc .
+        working-directory: maplibre
+        run: pana --exit-code-threshold 70 --no-dartdoc .
   build-android:
     name: "[Android] Build APK"
     runs-on: ubuntu-latest

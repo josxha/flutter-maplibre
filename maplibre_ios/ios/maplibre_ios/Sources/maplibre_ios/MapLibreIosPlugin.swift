@@ -18,14 +18,5 @@ public class MapLibreIosPlugin: NSObject, FlutterPlugin {
     OfflineManager(messenger: registrar.messenger())
   }
 
-  public func handle(
-    _ call: FlutterMethodCall, result: @escaping FlutterResult
-  ) {
-    switch call.method {
-    case "getPlatformVersion":
-      result("iOS " + UIDevice.current.systemVersion)
-    default:
-      result(FlutterMethodNotImplemented)
-    }
-  }
+  public func handle(_: FlutterMethodCall, result _: @escaping FlutterResult) {}
 }

@@ -91,10 +91,7 @@ enum MapStyles {
     name: 'MapLibre Debug',
     uri: 'https://demotiles.maplibre.org/debug-tiles/style.json',
   ),
-  translucent(
-    name: 'Translucent',
-    uri: 'assets/styles/translucent_style.json',
-  ),
+  translucent(name: 'Translucent', uri: 'assets/styles/translucent_style.json'),
   countries(
     name: 'Countries',
     uri: '''
