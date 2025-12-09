@@ -14,18 +14,16 @@ class LayersPolygonPage extends StatefulWidget {
 class _LayersPolygonPageState extends State<LayersPolygonPage> {
   final _polygons = <Feature<Polygon>>[
     Feature(
-      geometry: Polygon.from(
-        const [
-          [
-            Geographic(lon: 8.201306116882563, lat: 48.107357488669464),
-            Geographic(lon: 8.885254895692924, lat: 48.09428546381665),
-            Geographic(lon: 8.759684141159909, lat: 47.69326800157776),
-            Geographic(lon: 9.631980099303235, lat: 48.08929468133098),
-            Geographic(lon: 8.68543348810175, lat: 48.45383566718806),
-            Geographic(lon: 8.201306116882563, lat: 48.107357488669464),
-          ],
+      geometry: Polygon.from(const [
+        [
+          Geographic(lon: 8.201306116882563, lat: 48.107357488669464),
+          Geographic(lon: 8.885254895692924, lat: 48.09428546381665),
+          Geographic(lon: 8.759684141159909, lat: 47.69326800157776),
+          Geographic(lon: 9.631980099303235, lat: 48.08929468133098),
+          Geographic(lon: 8.68543348810175, lat: 48.45383566718806),
+          Geographic(lon: 8.201306116882563, lat: 48.107357488669464),
         ],
-      ),
+      ]),
     ),
   ];
 

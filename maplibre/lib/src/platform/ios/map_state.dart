@@ -9,8 +9,8 @@ import 'package:maplibre/src/platform/android/extensions.dart';
 import 'package:maplibre/src/platform/ios/extensions.dart';
 import 'package:maplibre/src/platform/map_state_native.dart';
 import 'package:maplibre/src/platform/pigeon.g.dart' as pigeon;
-import 'package:maplibre_ios/maplibre_ffi.dart';
-import 'package:objective_c/objective_c.dart';
+import 'package:maplibre_ios/maplibre_ffi.g.dart';
+import 'package:maplibre_ios/objective_c.dart';
 
 part 'style_controller.dart';
 
@@ -22,7 +22,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   late final int _viewId;
   MLNMapView? _cachedMapView;
 
-  MLNMapView get _mapView => _cachedMapView ??= MLNMapView.castFrom(
+  MLNMapView get _mapView => _cachedMapView ??= MLNMapView.as(
     MapLibreRegistry.getMapWithViewId(_viewId)!,
   );
 
@@ -67,7 +67,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     if (center != null) {
       ffiCamera.centerCoordinate = center.toCLLocationCoordinate2D();
     }
-    _mapView.flyToCamera$1(
+    _mapView.flyToCamera$2(
       ffiCamera,
       withDuration: nativeDuration.inMicroseconds / 1000000,
     );
@@ -183,7 +183,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     }
 
     // gestures
-    if (options.gestures.rotate != oldOptions.gestures.rotate) {
+    /*if (options.gestures.rotate != oldOptions.gestures.rotate) {
       _mapView.rotateEnabled = options.gestures.rotate;
     }
     if (options.gestures.pan != oldOptions.gestures.pan) {
@@ -194,26 +194,15 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     }
     if (options.gestures.pitch != oldOptions.gestures.pitch) {
       _mapView.pitchEnabled = options.gestures.pitch;
-    }
-  }
-
-  Object? _featureIdFrom(ObjCObjectBase? object) {
-    if (object == null) {
-      return null;
-    } else if (NSString.isInstance(object)) {
-      return NSString.castFrom(object).toDartString();
-    } else if (NSNumber.isInstance(object)) {
-      return NSNumber.castFrom(object).intValue;
-    }
-    return null;
+    }*/
   }
 
   List<RenderedFeature> _nativeQueryToRenderedFeatures(NSArray query) {
-    final features = query.map(MLNFeatureWrapper.castFrom);
+    final features = query.asDart().map(MLNFeatureWrapper.as);
     return features
         .map(
           (f) => RenderedFeature(
-            id: _featureIdFrom(f.identifier),
+            id: f.identifier == null ? null : toDartObject(f.identifier!),
             properties: f.attributes.toDartMap().map(
               (k, v) => MapEntry(k.toString(), v),
             ),
@@ -247,10 +236,7 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   }
 
   @override
-  List<RenderedFeature> featuresInRect(
-    Rect rect, {
-    List<String>? layerIds,
-  }) {
+  List<RenderedFeature> featuresInRect(Rect rect, {List<String>? layerIds}) {
     final style = this.style;
     if (style == null) {
       return [];
@@ -280,13 +266,15 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     final queriedLayers = <QueriedLayer>[];
     for (var i = layers.length - 1; i >= 0; i--) {
       final layer = layers[i];
-      final features = _mapView.visibleFeaturesAtPoint$1(
-        point,
-        inStyleLayersWithIdentifiers: NSSet.setWithObject(layer.identifier),
-      );
-      if (features.count == 0) continue;
-      if (features.isNotEmpty && MLNVectorStyleLayer.isInstance(layer)) {
-        final vectorLayer = MLNVectorStyleLayer.castFrom(layer);
+      final features = _mapView
+          .visibleFeaturesAtPoint$1(
+            point,
+            inStyleLayersWithIdentifiers: NSSet.setWithObject(layer.identifier),
+          )
+          .asDart();
+      if (features.isEmpty) continue;
+      if (features.isNotEmpty && MLNVectorStyleLayer.isA(layer)) {
+        final vectorLayer = MLNVectorStyleLayer.as(layer);
         final queriedLayer = QueriedLayer(
           layerId: layer.identifier.toDartString(),
           sourceId: vectorLayer.sourceIdentifier?.toDartString(),
@@ -333,7 +321,10 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
 
   @override
   Geographic toLngLat(Offset screenLocation) => _mapView
-      .convertPoint_(screenLocation.toCGPoint(), view: _mapView)
+      .convertPoint$2(
+        screenLocation.toCGPoint(),
+        toCoordinateFromView: _mapView,
+      )
       .toGeographic();
 
   @override

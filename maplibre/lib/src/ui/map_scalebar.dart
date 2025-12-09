@@ -49,9 +49,7 @@ class MapScalebar extends StatelessWidget {
     final scalebarLat = controller.toLngLat(scalebarCenter).lat;
     final theme = Theme.of(context);
 
-    final metersPerPixel = controller.getMetersPerPixelAtLatitude(
-      scalebarLat,
-    );
+    final metersPerPixel = controller.getMetersPerPixelAtLatitude(scalebarLat);
     final painter = ScaleBarPainter(metersPerPixel, theme, units: units);
     // Use a SafeArea to ensure the widget is completely visible on devices
     // with rounded edges like iOS.

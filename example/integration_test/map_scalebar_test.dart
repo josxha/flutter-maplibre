@@ -43,20 +43,12 @@ void main() {
             (customPaintFinder.evaluate().first.widget as CustomPaint).painter!
                 as ScaleBarPainter;
 
-        expect(
-          size.width,
-          closeTo(scaleBarPainter.width, 0.01),
-        );
+        expect(size.width, closeTo(scaleBarPainter.width, 0.01));
         final scalebarCenter = tester.getCenter(customPaintFinder);
         final scalebarLat = ctrl.toLngLat(scalebarCenter).lat;
-        final metersPerPixel = ctrl.getMetersPerPixelAtLatitude(
-          scalebarLat,
-        );
+        final metersPerPixel = ctrl.getMetersPerPixelAtLatitude(scalebarLat);
         final expected = scaleBarPainter.meters / metersPerPixel;
-        expect(
-          expected,
-          closeTo(size.width, expected * 0.01),
-        );
+        expect(expected, closeTo(size.width, expected * 0.01));
       }
 
       // Ensure that the width of the scalebar is different for each zoom level.

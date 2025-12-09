@@ -23,9 +23,7 @@ void main() {
       when(
         () => controller.toLngLat(any()),
       ).thenReturn(const Geographic(lon: 0, lat: 0));
-      when(
-        () => controller.getMetersPerPixelAtLatitude(any()),
-      ).thenReturn(100);
+      when(() => controller.getMetersPerPixelAtLatitude(any())).thenReturn(100);
       const padding = EdgeInsets.all(2);
       const alignment = Alignment.center;
       final app = App(
@@ -71,9 +69,7 @@ void main() {
       when(
         () => controller.toLngLat(any()),
       ).thenReturn(const Geographic(lon: 0, lat: 0));
-      when(
-        () => controller.getMetersPerPixelAtLatitude(any()),
-      ).thenReturn(100);
+      when(() => controller.getMetersPerPixelAtLatitude(any())).thenReturn(100);
       const padding = EdgeInsets.all(2);
       const alignment = Alignment.center;
       final app = App(

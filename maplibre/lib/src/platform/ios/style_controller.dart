@@ -37,7 +37,7 @@ class StyleControllerIos extends StyleController {
       case BackgroundStyleLayer():
         ffiStyleLayer = MLNBackgroundStyleLayer.new$()
           ..initWithIdentifier(ffiId)
-          ..backgroundColor = NSExpression.expressionWithFormat$1(
+          ..backgroundColor = NSExpression.expressionWithFormat(
             layer.color.toHexString().toNSString(),
           );
       case StyleLayerWithSource():
@@ -90,15 +90,15 @@ class StyleControllerIos extends StyleController {
       if (belowLayer == null) {
         throw Exception('Layer "$id" does not exist.');
       }
-      _ffiStyle.insertLayer$1(ffiStyleLayer, belowLayer: belowLayer);
+      _ffiStyle.insertLayer$2(ffiStyleLayer, belowLayer: belowLayer);
     } else if (aboveLayerId case final String id) {
       final aboveLayer = _ffiStyle.layerWithIdentifier(id.toNSString());
       if (aboveLayer == null) {
         throw Exception('Layer "$id" does not exist.');
       }
-      _ffiStyle.insertLayer$2(ffiStyleLayer, aboveLayer: aboveLayer);
+      _ffiStyle.insertLayer(ffiStyleLayer, aboveLayer: aboveLayer);
     } else if (atIndex case final int index) {
-      _ffiStyle.insertLayer(ffiStyleLayer, atIndex: index);
+      _ffiStyle.insertLayer$1(ffiStyleLayer, atIndex: index);
     } else {
       _ffiStyle.addLayer(ffiStyleLayer);
     }
@@ -119,17 +119,16 @@ class StyleControllerIos extends StyleController {
       case GeoJsonSource():
         final shapeSource = MLNShapeSource.new$();
         if (source.data.startsWith('{')) {
-          shapeSource.initWithIdentifier$1(
+          shapeSource.initWithIdentifier$3(
             ffiId,
             shape: MLNShape.shapeWithData(
               source.data.toNSDataUTF8()!,
               encoding: nsUTF8StringEncoding,
-              error: nullptr,
             ),
             options: NSDictionary.new$(),
           );
         } else {
-          shapeSource.initWithIdentifier(
+          shapeSource.initWithIdentifier$1(
             ffiId,
             URL: source.data.toNSURL()!,
             options: NSDictionary.new$(),
@@ -139,7 +138,7 @@ class StyleControllerIos extends StyleController {
       case RasterDemSource():
         final demSource = ffiSource = MLNRasterDEMSource.new$();
         if (source.url case final String url) {
-          demSource.initWithIdentifier$1(
+          demSource.initWithIdentifier$2(
             ffiId,
             configurationURL: url.toNSURL()!,
             tileSize: source.tileSize.toDouble(),
@@ -149,7 +148,7 @@ class StyleControllerIos extends StyleController {
           for (final url in source.tiles ?? <String>[]) {
             ffiUrls.addObject(url.toNSString());
           }
-          demSource.initWithIdentifier$2(
+          demSource.initWithIdentifier$3(
             ffiId,
             tileURLTemplates: ffiUrls,
             options: NSDictionary.new$(),
@@ -158,7 +157,7 @@ class StyleControllerIos extends StyleController {
       case RasterSource():
         final rasterSource = ffiSource = MLNRasterTileSource.new$();
         if (source.url case final String url) {
-          rasterSource.initWithIdentifier$1(
+          rasterSource.initWithIdentifier$2(
             ffiId,
             configurationURL: url.toNSURL()!,
             tileSize: source.tileSize.toDouble(),
@@ -168,7 +167,7 @@ class StyleControllerIos extends StyleController {
           for (final url in source.tiles ?? <String>[]) {
             ffiUrls.addObject(url.toNSString());
           }
-          rasterSource.initWithIdentifier$2(
+          rasterSource.initWithIdentifier$3(
             ffiId,
             tileURLTemplates: ffiUrls,
             options: NSDictionary.new$(),
@@ -177,7 +176,7 @@ class StyleControllerIos extends StyleController {
       case VectorSource():
         final vectorSource = ffiSource = MLNVectorTileSource.new$();
         if (source.url case final String url) {
-          vectorSource.initWithIdentifier$1(
+          vectorSource.initWithIdentifier$2(
             ffiId,
             configurationURLString: url.toNSString(),
           );
@@ -186,7 +185,7 @@ class StyleControllerIos extends StyleController {
           for (final url in source.tiles ?? <String>[]) {
             ffiUrls.addObject(url.toNSString());
           }
-          vectorSource.initWithIdentifier$2(
+          vectorSource.initWithIdentifier$3(
             ffiId,
             tileURLTemplates: ffiUrls,
             options: NSDictionary.new$(),
@@ -201,7 +200,7 @@ class StyleControllerIos extends StyleController {
           ..topLeft = source.coordinates.topLeft.toCLLocationCoordinate2D()
           ..topRight = source.coordinates.topRight.toCLLocationCoordinate2D();
         final imageSource = ffiSource = MLNImageSource.new$();
-        imageSource.initWithIdentifier(
+        imageSource.initWithIdentifier$1(
           ffiId,
           coordinateQuad: coordinates,
           URL: source.url.toNSURL()!,
@@ -224,7 +223,7 @@ class StyleControllerIos extends StyleController {
 
   @override
   List<String> getLayerIds() {
-    final layers = _ffiStyle.layers.map(MLNStyleLayer.castFrom);
+    final layers = _ffiStyle.layers.asDart().map(MLNStyleLayer.as);
     return layers.map((l) => l.identifier.toDartString()).toList();
   }
 
@@ -256,16 +255,15 @@ class StyleControllerIos extends StyleController {
     required String data,
   }) async {
     final source = _ffiStyle.sourceWithIdentifier(id.toNSString())!;
-    final shapeSource = MLNShapeSource.castFrom(source);
+    final shapeSource = MLNShapeSource.as(source);
     shapeSource.shape = MLNShape.shapeWithData(
       data.toNSDataUTF8()!,
       encoding: 4, // utf-8
-      error: nullptr,
     );
   }
 
   List<MLNStyleLayer> _getLayers() => List<MLNStyleLayer>.from(
-    _ffiStyle.layers.toDartList(convertOther: MLNStyleLayer.castFrom),
+    _ffiStyle.layers.toDartList(convertOther: MLNStyleLayer.as),
   );
 
   @override
@@ -276,11 +274,11 @@ class StyleControllerIos extends StyleController {
   @override
   List<String> getAttributionsSync() {
     final attributions = <String>[];
-    final sources = _ffiStyle.sources.allObjects;
-    for (var i = 0; i < sources.count; i++) {
+    final sources = _ffiStyle.sources.allObjects.asDart();
+    for (var i = 0; i < sources.length; i++) {
       final source = sources[i];
-      if (!MLNTileSource.isInstance(source)) continue;
-      final tileSource = MLNTileSource.castFrom(source);
+      if (!MLNTileSource.isA(source)) continue;
+      final tileSource = MLNTileSource.as(source);
       final html = tileSource.attributionHTMLString;
       if (html == null) continue;
       attributions.add(html.toDartString());

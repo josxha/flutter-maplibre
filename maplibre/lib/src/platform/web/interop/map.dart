@@ -279,7 +279,5 @@ extension type StyleSwapOptions._(JSObject _) implements JSObject {
 @JS()
 extension type QueryRenderedFeaturesOptions._(JSObject _) implements JSObject {
   /// Create a new JS [MapOptions] object.
-  external factory QueryRenderedFeaturesOptions({
-    JSArray<JSString>? layers,
-  });
+  external factory QueryRenderedFeaturesOptions({JSArray<JSString>? layers});
 }
