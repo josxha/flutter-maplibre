@@ -23,8 +23,3 @@
 #include "MapLibre/MLNOfflineRegion.h"
 #include "MapLibre/MLNTilePyramidOfflineRegion.h"
 #include "MapLibre/MLNFeature.h"
-
-/// Stub interface, so that ffigen can generate a getter for MLNFeature#identifier
-/// https://github.com/dart-lang/native/issues/2492
-@interface MLNFeatureWrapper : NSObject <MLNFeature>
-@end
