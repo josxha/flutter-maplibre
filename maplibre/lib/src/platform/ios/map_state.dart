@@ -101,8 +101,12 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
     EdgeInsets padding = EdgeInsets.zero,
   }) async {
     final ffiBounds = bounds.toMLNCoordinateBounds();
-    // TODO support padding with Struct UIEdgeInsets
-    _mapView.setVisibleCoordinateBounds(ffiBounds, animated: true);
+    final ffiPadding = padding.toUIEdgeInsets();
+    _mapView.setVisibleCoordinateBounds$1(
+      ffiBounds,
+      edgePadding: ffiPadding,
+      animated: true,
+    );
   }
 
   @override
