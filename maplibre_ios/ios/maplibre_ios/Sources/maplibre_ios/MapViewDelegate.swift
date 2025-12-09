@@ -239,7 +239,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
       lat: mlnCamera.centerCoordinate.latitude
     )
     var pigeonCamera = MapCamera(
-      center: center, zoom: mlnCamera.altitude, pitch: mlnCamera.pitch,
+      center: center, zoom: _mapView.zoomLevel, pitch: mlnCamera.pitch,
       bearing: mlnCamera.heading
     )
     _flutterApi.onMoveCamera(camera: pigeonCamera) { _ in }
