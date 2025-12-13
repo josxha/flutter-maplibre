@@ -134,6 +134,13 @@ class PointerHandler extends InteractionHandler {
             fraction: scaleDelta * 0.8, // zoom towards focal point
           );
         }
+        if (controller.style?.projection == MapProjection.globe) {
+          // on globe projection the planet gets rendered as a sphere. A
+          // changed latitude affects zoom level so that the visual height of
+          // the map remains the same. This represents the amount that the
+          // tiles would be stretched horizontally in web mercator projection.
+          // TODO implement zoom adjustment for globe projection
+        }
       }
 
       // pitch
