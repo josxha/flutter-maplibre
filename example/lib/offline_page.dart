@@ -337,30 +337,28 @@ class _OfflineMapPage extends StatelessWidget {
             width: 3,
             polylines: [
               Feature(
-                geometry: LineString.from(
-                  [
-                    Geographic(
-                      lon: bounds.longitudeWest,
-                      lat: bounds.latitudeSouth,
-                    ),
-                    Geographic(
-                      lon: bounds.longitudeWest,
-                      lat: bounds.latitudeNorth,
-                    ),
-                    Geographic(
-                      lon: bounds.longitudeEast,
-                      lat: bounds.latitudeNorth,
-                    ),
-                    Geographic(
-                      lon: bounds.longitudeEast,
-                      lat: bounds.latitudeSouth,
-                    ),
-                    Geographic(
-                      lon: bounds.longitudeWest,
-                      lat: bounds.latitudeSouth,
-                    ),
-                  ],
-                ),
+                geometry: LineString.from([
+                  Geographic(
+                    lon: bounds.longitudeWest,
+                    lat: bounds.latitudeSouth,
+                  ),
+                  Geographic(
+                    lon: bounds.longitudeWest,
+                    lat: bounds.latitudeNorth,
+                  ),
+                  Geographic(
+                    lon: bounds.longitudeEast,
+                    lat: bounds.latitudeNorth,
+                  ),
+                  Geographic(
+                    lon: bounds.longitudeEast,
+                    lat: bounds.latitudeSouth,
+                  ),
+                  Geographic(
+                    lon: bounds.longitudeWest,
+                    lat: bounds.latitudeSouth,
+                  ),
+                ]),
               ),
             ],
           ),

@@ -71,10 +71,7 @@ class _AnimationPageState extends State<AnimationPage> {
       final collection = FeatureCollection([
         Feature(geometry: LineString.from(chain)),
       ]);
-      style.updateGeoJsonSource(
-        id: _sourceId,
-        data: collection.toText(),
-      );
+      style.updateGeoJsonSource(id: _sourceId, data: collection.toText());
       debugPrint(
         '[$index] update line: '
         '${allCoords[index].x}, ${allCoords[index].y}',

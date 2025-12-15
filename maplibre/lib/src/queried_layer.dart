@@ -8,10 +8,7 @@ import 'package:maplibre/src/map_controller.dart' show MapController;
 @immutable
 class RenderedFeature {
   /// Create a new [RenderedFeature].
-  const RenderedFeature({
-    required this.id,
-    required this.properties,
-  });
+  const RenderedFeature({required this.id, required this.properties});
 
   /// If present, an object uniquely identifying the feature in the vector
   /// source. May be either a string or an integer.

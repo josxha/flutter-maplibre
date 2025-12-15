@@ -99,14 +99,19 @@ Build the example project:
 Clone maplibre-native as a sibling to flutter-maplibre:
 
 ```bash
-cd ..
-git clone https://github.com/maplibre/maplibre-native --recurse-submodules --shallow-submodules
+git clone https://github.com/maplibre/maplibre-native \
+    --filter=blob:none \
+    --no-checkout \
+    ../maplibre-native
+cd ../maplibre-native
+git checkout ios-v6.19.2
+git submodule update --init --recursive --depth 1
 ```
 
 Then build MapLibre (this will take a while):
 
 ```bash
-cd flutter-maplibre/maplibre_ios/ios
+cd maplibre_ios/ios
 ./build_maplibre.sh
 ```
 
@@ -122,13 +127,14 @@ uncomment lines marked `// FOR LOCAL LIBRARY`.
 Generate Obj-C headers for the library's native Swift layer:
 
 ```bash
-(cd ios/maplibre_ios/Sources/maplibre_ios && ./gen_swift_headers.sh)
+(cd maplibre_ios/ios/maplibre_ios/Sources/maplibre_ios && ./gen_swift_headers.sh)
 ```
 
 Finally, run ffigen from the `maplibre_ios` directory:
 
 ```bash
-dart run ffigen
+cd maplibre_ios
+dart run tool/ffigen.dart
 ```
 
 The script runs ffigen on the relevant version of MapLibre.framework in the 

@@ -78,6 +78,7 @@ class _ControllerPageState extends State<ControllerPage> {
                           latitudeSouth: 45.806154,
                           latitudeNorth: 47.902069,
                         ),
+                        padding: const EdgeInsets.all(50),
                       );
                       debugPrint('fitBounds end');
                     } on PlatformException catch (error) {

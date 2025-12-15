@@ -230,9 +230,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative
                 _ => null,
               };
               if (moveReason == null) return;
-              widget.onEvent?.call(
-                MapEventStartMoveCamera(reason: moveReason),
-              );
+              widget.onEvent?.call(MapEventStartMoveCamera(reason: moveReason));
             }),
           ),
         ),
@@ -467,10 +465,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative
     final query = map.queryRenderedFeatures(
       jni.PointF.new$3(scaledPoint.dx, scaledPoint.dy),
       layerIds != null
-          ? JArray.of(
-              JString.nullableType,
-              layerIds.map((s) => s.toJString()),
-            )
+          ? JArray.of(JString.nullableType, layerIds.map((s) => s.toJString()))
           : null,
     );
 
@@ -478,10 +473,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative
   }
 
   @override
-  List<RenderedFeature> featuresInRect(
-    Rect rect, {
-    List<String>? layerIds,
-  }) {
+  List<RenderedFeature> featuresInRect(Rect rect, {List<String>? layerIds}) {
     final style = this.style;
     final map = _jMap;
     if (style == null || map == null) {
@@ -508,10 +500,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative
         scaledRect.bottom,
       ),
       layerIds != null
-          ? JArray.of(
-              JString.nullableType,
-              layerIds.map((s) => s.toJString()),
-            )
+          ? JArray.of(JString.nullableType, layerIds.map((s) => s.toJString()))
           : null,
     );
 

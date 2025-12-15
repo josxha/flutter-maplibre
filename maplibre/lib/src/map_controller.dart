@@ -110,10 +110,7 @@ abstract interface class MapController {
   //
   // [filter] is an array of filter expressions. If provided, only features
   // that match all of the filters will be returned.
-  List<RenderedFeature> featuresAtPoint(
-    Offset point, {
-    List<String>? layerIds,
-  });
+  List<RenderedFeature> featuresAtPoint(Offset point, {List<String>? layerIds});
 
   /// Returns an array of rendered map features that intersect with a given
   /// on-screen rectangle measured in logical pixels.
@@ -130,10 +127,7 @@ abstract interface class MapController {
   //
   // [filter] is an array of filter expressions. If provided, only features
   // that match all of the filters will be returned.
-  List<RenderedFeature> featuresInRect(
-    Rect rect, {
-    List<String>? layerIds,
-  });
+  List<RenderedFeature> featuresInRect(Rect rect, {List<String>? layerIds});
 
   /// Show the user location on the map
   Future<void> enableLocation({

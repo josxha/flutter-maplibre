@@ -38,7 +38,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
         if style.hasPrefix("{") {
           self._mapView = MLNMapView(frame: self._view.bounds, styleJSON: style)
         } else if style.hasPrefix("/") {
-          var styleUrl = URL(string: "file://\(style)")
+          var styleUrl = URL(fileURLWithPath: style)
           self._mapView = MLNMapView(frame: self._view.bounds, styleURL: styleUrl)
         } else if !style.hasPrefix("http://"), !style.hasPrefix("https://"),
                   !style.hasPrefix("mapbox://")
@@ -92,8 +92,6 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
         self._mapView.maximumZoomLevel = mapOptions.maxZoom
         self._mapView.minimumPitch = mapOptions.minPitch
         self._mapView.maximumPitch = mapOptions.maxPitch
-
-        self._mapView.styleURL = URL(string: mapOptions.style)
 
         self._mapView.allowsRotating = mapOptions.gestures.rotate
         self._mapView.allowsScrolling = mapOptions.gestures.pan
@@ -194,6 +192,26 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
     true
   }
 
+  // MLNMapViewDelegate method called when camera is about to start changing
+  func mapView(_: MLNMapView, regionWillChangeWith reason: MLNCameraChangeReason, animated _: Bool) {
+    let changeReason: CameraChangeReason = switch reason {
+    case .gestureOneFingerZoom, .gesturePan, .gesturePinch, .gestureRotate, .gestureTilt,
+         .gestureZoomIn, .gestureZoomOut, .transitionCancelled:
+      .apiGesture
+    case .programmatic:
+      .apiAnimation
+    default:
+      .developerAnimation
+    }
+
+    _flutterApi.onStartMoveCamera(reason: changeReason) { _ in }
+  }
+
+  /// MLNMapViewDelegate method called when camera has finished changing
+  func mapView(_: MLNMapView, regionDidChangeWith _: MLNCameraChangeReason, animated _: Bool) {
+    _flutterApi.onCameraIdle { (_: Result<Void, PigeonError>) in }
+  }
+
   // MLNMapViewDelegate method called when map has finished loading
   func mapView(_ mapView: MLNMapView, didFinishLoading _: MLNStyle) {
     // setCamera() can only be used after the map did finish loading
@@ -221,7 +239,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
       lat: mlnCamera.centerCoordinate.latitude
     )
     var pigeonCamera = MapCamera(
-      center: center, zoom: mlnCamera.altitude, pitch: mlnCamera.pitch,
+      center: center, zoom: _mapView.zoomLevel, pitch: mlnCamera.pitch,
       bearing: mlnCamera.heading
     )
     _flutterApi.onMoveCamera(camera: pigeonCamera) { _ in }
