@@ -24,6 +24,7 @@ import 'package:maplibre_example/style_layers_hillshade_page.dart';
 import 'package:maplibre_example/style_layers_line_page.dart';
 import 'package:maplibre_example/style_layers_raster_page.dart';
 import 'package:maplibre_example/style_layers_symbol_page.dart';
+import 'package:maplibre_example/style_layers_vector_page.dart';
 import 'package:maplibre_example/styled_map_page.dart';
 import 'package:maplibre_example/translucent_map_page.dart';
 import 'package:maplibre_example/two_maps_page.dart';
@@ -204,6 +205,11 @@ class MenuPage extends StatelessWidget {
                   label: 'Symbol',
                   iconData: Icons.emoji_emotions,
                   location: StyleLayersSymbolPage.location,
+                ),
+                ItemCard(
+                  label: 'Vector',
+                  iconData: Icons.category,
+                  location: StyleLayersVectorPage.location,
                 ),
               ],
             ),
