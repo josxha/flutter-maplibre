@@ -15,7 +15,7 @@ class _StyleLayersVectorPageState extends State<StyleLayersVectorPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Symbol Style Layer')),
+      appBar: AppBar(title: const Text('Vector Style Layer')),
       body: MapLibreMap(
         options: const MapOptions(
           initZoom: 3,
