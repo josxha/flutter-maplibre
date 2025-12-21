@@ -15,6 +15,8 @@ final class HeatmapStyleLayer extends StyleLayerWithSource {
     super.paint,
     super.minZoom = 0,
     super.maxZoom = 24,
+    super.filter,
+    super.metadata,
   });
 
   // TODO add properties
