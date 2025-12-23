@@ -15,6 +15,7 @@ final class FillStyleLayer extends StyleLayerWithSource {
     super.paint,
     super.minZoom = 0,
     super.maxZoom = 24,
+    super.sourceLayerId,
   });
   // TODO add properties
 }

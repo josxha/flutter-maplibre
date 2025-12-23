@@ -71,6 +71,7 @@ interface class StyleLayerWithSource extends StyleLayer {
   const StyleLayerWithSource({
     required super.id,
     required this.sourceId,
+    this.sourceLayerId,
     super.paint = const {},
     super.layout = const {},
     super.metadata,
@@ -82,4 +83,7 @@ interface class StyleLayerWithSource extends StyleLayer {
   /// Name of a source description to be used for this layer. Required for all
   /// layer types except background.
   final String sourceId;
+
+  /// Name of source layer.
+  final String? sourceLayerId;
 }
