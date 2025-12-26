@@ -26,7 +26,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative
         jni.$Style$OnStyleLoaded,
         WidgetsBindingObserver {
   late final int _viewId;
-  late final jni.MapView _mapView;
+  jni.MapView? _mapView;
   jni.MapLibreMap? _jMap;
   jni.Projection? _cachedJProjection;
   jni.LocationComponent? _cachedJLocationComponent;
@@ -266,7 +266,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
-    _mapView.onDestroy();
+    _mapView?.onDestroy();
     _jMap?.release();
     _cachedJProjection?.release();
     _cachedJLocationComponent?.release();
@@ -288,23 +288,23 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative
           null,
         };
         if (!_mapViewStarted || nonActiveStates.contains(_lastLifecycleState)) {
-          _mapView.onStart();
+          _mapView?.onStart();
           _mapViewStarted = true;
         }
-        _mapView.onResume();
+        _mapView?.onResume();
         _jMap?.triggerRepaint();
       case AppLifecycleState.inactive:
-        _mapView.onPause();
+        _mapView?.onPause();
       case AppLifecycleState.paused || AppLifecycleState.hidden:
-        _mapView.onPause();
+        _mapView?.onPause();
         if (_mapViewStarted) {
-          _mapView.onStop();
+          _mapView?.onStop();
           _mapViewStarted = false;
         }
       case AppLifecycleState.detached:
-        _mapView.onPause();
+        _mapView?.onPause();
         if (_mapViewStarted) {
-          _mapView.onStop();
+          _mapView?.onStop();
           _mapViewStarted = false;
         }
     }
@@ -312,7 +312,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative
   }
 
   @override
-  void didHaveMemoryPressure() => _mapView.onLowMemory();
+  void didHaveMemoryPressure() => _mapView?.onLowMemory();
 
   Future<void> _updateOptions(MapLibreMap oldWidget) async => using((arena) {
     final jMap = _jMap;
