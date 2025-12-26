@@ -266,6 +266,11 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
+    if (_mapViewStarted) {
+      _mapView?.onPause();
+      _mapView?.onStop();
+      _mapViewStarted = false;
+    }
     _mapView?.onDestroy();
     _jMap?.release();
     _cachedJProjection?.release();
