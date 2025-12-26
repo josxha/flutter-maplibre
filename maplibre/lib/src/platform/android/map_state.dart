@@ -253,6 +253,12 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative
   @override
   void initState() {
     WidgetsBinding.instance.addObserver(this);
+    // Trigger the initial lifecycle state callback.
+    final currentState = WidgetsBinding.instance.lifecycleState;
+    if (currentState != null) {
+      _lastLifecycleState = currentState;
+      didChangeAppLifecycleState(currentState);
+    }
     super.initState();
   }
 
@@ -300,13 +306,9 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative
         _jMap?.triggerRepaint();
       case AppLifecycleState.inactive:
         _mapView?.onPause();
-      case AppLifecycleState.paused || AppLifecycleState.hidden:
-        _mapView?.onPause();
-        if (_mapViewStarted) {
-          _mapView?.onStop();
-          _mapViewStarted = false;
-        }
-      case AppLifecycleState.detached:
+      case AppLifecycleState.paused ||
+          AppLifecycleState.hidden ||
+          AppLifecycleState.detached:
         _mapView?.onPause();
         if (_mapViewStarted) {
           _mapView?.onStop();
