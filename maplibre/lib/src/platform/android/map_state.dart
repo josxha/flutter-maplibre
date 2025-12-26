@@ -30,6 +30,8 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative
   jni.MapLibreMap? _jMap;
   jni.Projection? _cachedJProjection;
   jni.LocationComponent? _cachedJLocationComponent;
+  AppLifecycleState? _lastLifecycleState;
+  bool _mapViewStarted = false;
 
   @override
   StyleControllerAndroid? style;
@@ -283,9 +285,6 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative
     _cachedJLocationComponent?.release();
     super.dispose();
   }
-
-  AppLifecycleState? _lastLifecycleState;
-  bool _mapViewStarted = false;
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
