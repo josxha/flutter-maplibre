@@ -273,23 +273,42 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative
     super.dispose();
   }
 
+  AppLifecycleState? _lastLifecycleState;
+  bool _mapViewStarted = false;
+
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    // debugPrint('AppLifecycleState changed to $state');
     switch (state) {
       case AppLifecycleState.resumed:
-        _mapView.onStart();
+        // Start MapView only if it was stopped
+        const nonActiveStates = {
+          AppLifecycleState.paused,
+          AppLifecycleState.hidden,
+          AppLifecycleState.detached,
+          null,
+        };
+        if (!_mapViewStarted || nonActiveStates.contains(_lastLifecycleState)) {
+          _mapView.onStart();
+          _mapViewStarted = true;
+        }
         _mapView.onResume();
         _jMap?.triggerRepaint();
       case AppLifecycleState.inactive:
         _mapView.onPause();
-      case AppLifecycleState.hidden || AppLifecycleState.paused:
+      case AppLifecycleState.paused || AppLifecycleState.hidden:
         _mapView.onPause();
-        _mapView.onStop();
+        if (_mapViewStarted) {
+          _mapView.onStop();
+          _mapViewStarted = false;
+        }
       case AppLifecycleState.detached:
         _mapView.onPause();
-        _mapView.onStop();
+        if (_mapViewStarted) {
+          _mapView.onStop();
+          _mapViewStarted = false;
+        }
     }
+    _lastLifecycleState = state;
   }
 
   @override
