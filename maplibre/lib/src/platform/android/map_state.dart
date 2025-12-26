@@ -21,7 +21,10 @@ part 'style_controller.dart';
 /// The implementation that gets used for state of the [MapLibreMap] widget on
 /// android using JNI and Pigeon as a fallback.
 final class MapLibreMapStateAndroid extends MapLibreMapStateNative
-    with jni.$OnMapReadyCallback, jni.$Style$OnStyleLoaded {
+    with
+        jni.$OnMapReadyCallback,
+        jni.$Style$OnStyleLoaded,
+        WidgetsBindingObserver {
   late final int _viewId;
   late final jni.MapView _mapView;
   jni.MapLibreMap? _jMap;
@@ -248,6 +251,12 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative
   });
 
   @override
+  void initState() {
+    WidgetsBinding.instance.addObserver(this);
+    super.initState();
+  }
+
+  @override
   void didUpdateWidget(covariant MapLibreMap oldWidget) {
     _updateOptions(oldWidget);
     layerManager?.updateLayers(widget.layers);
@@ -256,10 +265,31 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    _mapView.onDestroy();
     _jMap?.release();
     _cachedJProjection?.release();
     _cachedJLocationComponent?.release();
     super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    // debugPrint('AppLifecycleState changed to $state');
+    switch (state) {
+      case AppLifecycleState.resumed:
+        _mapView.onStart();
+        _mapView.onResume();
+        _jMap?.triggerRepaint();
+      case AppLifecycleState.inactive:
+        _mapView.onPause();
+      case AppLifecycleState.hidden || AppLifecycleState.paused:
+        _mapView.onPause();
+        _mapView.onStop();
+      case AppLifecycleState.detached:
+        _mapView.onPause();
+        _mapView.onStop();
+    }
   }
 
   Future<void> _updateOptions(MapLibreMap oldWidget) async => using((arena) {
