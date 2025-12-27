@@ -52,7 +52,10 @@ interface class StyleLayer {
   /// match the filter are displayed. Zoom expressions in filters are only
   /// evaluated at integer zoom levels. The feature-state expression is not
   /// supported in filter expressions.
-  final Object? filter;
+  ///
+  /// This is not supported on android on the [BackgroundStyleLayer],
+  /// [RasterStyleLayer] and [HillshadeStyleLayer].
+  final List<Object>? filter;
 
   /// Layout properties for the layer.
   final Map<String, Object> layout;
