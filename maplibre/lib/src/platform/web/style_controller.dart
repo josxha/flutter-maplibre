@@ -82,6 +82,15 @@ class StyleControllerWeb extends StyleController {
       );
     }
 
+    JSAny? jsFilter;
+    if (layer.filter case final filter?) {
+      jsFilter = filter.jsify();
+    }
+    final sourceLayerId = switch (layer) {
+      StyleLayerWithSource(sourceLayerId: final id) => id,
+      _ => null,
+    };
+
     switch (layer) {
       case FillStyleLayer():
         _map.addLayer(
@@ -93,6 +102,8 @@ class StyleControllerWeb extends StyleController {
             paint: layer.paint.jsify()!,
             minzoom: layer.minZoom,
             maxzoom: layer.maxZoom,
+            sourceLayer: sourceLayerId,
+            filter: jsFilter,
           ),
           belowLayerId,
         );
@@ -106,6 +117,8 @@ class StyleControllerWeb extends StyleController {
             paint: layer.paint.jsify()!,
             minzoom: layer.minZoom,
             maxzoom: layer.maxZoom,
+            sourceLayer: sourceLayerId,
+            filter: jsFilter,
           ),
           belowLayerId,
         );
@@ -132,6 +145,8 @@ class StyleControllerWeb extends StyleController {
             paint: layer.paint.jsify()!,
             minzoom: layer.minZoom,
             maxzoom: layer.maxZoom,
+            sourceLayer: sourceLayerId,
+            filter: jsFilter,
           ),
           belowLayerId,
         );
@@ -145,6 +160,8 @@ class StyleControllerWeb extends StyleController {
             paint: layer.paint.jsify()!,
             minzoom: layer.minZoom,
             maxzoom: layer.maxZoom,
+            sourceLayer: sourceLayerId,
+            filter: jsFilter,
           ),
           belowLayerId,
         );
@@ -158,6 +175,7 @@ class StyleControllerWeb extends StyleController {
             paint: layer.paint.jsify()!,
             minzoom: layer.minZoom,
             maxzoom: layer.maxZoom,
+            filter: jsFilter,
           ),
           belowLayerId,
         );
@@ -171,6 +189,8 @@ class StyleControllerWeb extends StyleController {
             paint: layer.paint.jsify()!,
             minzoom: layer.minZoom,
             maxzoom: layer.maxZoom,
+            sourceLayer: sourceLayerId,
+            filter: jsFilter,
           ),
           belowLayerId,
         );
@@ -184,6 +204,7 @@ class StyleControllerWeb extends StyleController {
             paint: layer.paint.jsify()!,
             minzoom: layer.minZoom,
             maxzoom: layer.maxZoom,
+            filter: jsFilter,
           ),
           belowLayerId,
         );
@@ -197,6 +218,8 @@ class StyleControllerWeb extends StyleController {
             paint: layer.paint.jsify()!,
             minzoom: layer.minZoom,
             maxzoom: layer.maxZoom,
+            sourceLayer: sourceLayerId,
+            filter: jsFilter,
           ),
           belowLayerId,
         );

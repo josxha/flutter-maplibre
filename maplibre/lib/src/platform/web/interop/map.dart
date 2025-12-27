@@ -226,6 +226,8 @@ extension type LayerSpecification._(JSObject _) implements JSObject {
     required JSAny paint,
     required double? minzoom,
     required double? maxzoom,
+    @JS('source-layer') String? sourceLayer,
+    JSAny? filter,
   });
 
   /// Get the layer id.
