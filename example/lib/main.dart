@@ -23,6 +23,7 @@ import 'package:maplibre_example/style_layers_hillshade_page.dart';
 import 'package:maplibre_example/style_layers_line_page.dart';
 import 'package:maplibre_example/style_layers_raster_page.dart';
 import 'package:maplibre_example/style_layers_symbol_page.dart';
+import 'package:maplibre_example/style_layers_symbol_vector_source_page.dart';
 import 'package:maplibre_example/styled_map_page.dart';
 import 'package:maplibre_example/translucent_map_page.dart';
 import 'package:maplibre_example/two_maps_page.dart';
@@ -64,6 +65,8 @@ class MyApp extends StatelessWidget {
         PermissionsPage.location: (context) => const PermissionsPage(),
         StyleLayersSymbolPage.location: (context) =>
             const StyleLayersSymbolPage(),
+        StyleLayersSymbolVectorSourcePage.location: (context) =>
+            const StyleLayersSymbolVectorSourcePage(),
         StyleLayersCirclePage.location: (context) =>
             const StyleLayersCirclePage(),
         StyleLayersHeatmapPage.location: (context) =>

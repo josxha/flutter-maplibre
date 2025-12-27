@@ -91,139 +91,111 @@ class StyleControllerWeb extends StyleController {
       _ => null,
     };
 
+    final interop.LayerSpecification jsLayer;
     switch (layer) {
       case FillStyleLayer():
-        _map.addLayer(
-          interop.LayerSpecification(
-            id: layer.id,
-            type: 'fill',
-            source: layer.sourceId,
-            layout: layer.layout.jsify()!,
-            paint: layer.paint.jsify()!,
-            minzoom: layer.minZoom,
-            maxzoom: layer.maxZoom,
-            sourceLayer: sourceLayerId,
-            filter: jsFilter,
-          ),
-          belowLayerId,
+        jsLayer = interop.LayerSpecification(
+          id: layer.id,
+          type: 'fill',
+          source: layer.sourceId,
+          layout: layer.layout.jsify()!,
+          paint: layer.paint.jsify()!,
+          minzoom: layer.minZoom,
+          maxzoom: layer.maxZoom,
+          sourceLayer: sourceLayerId,
         );
       case CircleStyleLayer():
-        _map.addLayer(
-          interop.LayerSpecification(
-            id: layer.id,
-            type: 'circle',
-            source: layer.sourceId,
-            layout: layer.layout.jsify()!,
-            paint: layer.paint.jsify()!,
-            minzoom: layer.minZoom,
-            maxzoom: layer.maxZoom,
-            sourceLayer: sourceLayerId,
-            filter: jsFilter,
-          ),
-          belowLayerId,
+        jsLayer = interop.LayerSpecification(
+          id: layer.id,
+          type: 'circle',
+          source: layer.sourceId,
+          layout: layer.layout.jsify()!,
+          paint: layer.paint.jsify()!,
+          minzoom: layer.minZoom,
+          maxzoom: layer.maxZoom,
+          sourceLayer: sourceLayerId,
         );
       case BackgroundStyleLayer():
-        _map.addLayer(
-          interop.LayerSpecification(
-            id: layer.id,
-            type: 'background',
-            source: null,
-            layout: layer.layout.jsify()!,
-            paint: layer.paint.jsify()!,
-            minzoom: layer.minZoom,
-            maxzoom: layer.maxZoom,
-          ),
-          belowLayerId,
+        jsLayer = interop.LayerSpecification(
+          id: layer.id,
+          type: 'background',
+          source: null,
+          layout: layer.layout.jsify()!,
+          paint: layer.paint.jsify()!,
+          minzoom: layer.minZoom,
+          maxzoom: layer.maxZoom,
         );
       case FillExtrusionStyleLayer():
-        _map.addLayer(
-          interop.LayerSpecification(
-            id: layer.id,
-            type: 'fill-extrusion',
-            source: layer.sourceId,
-            layout: layer.layout.jsify()!,
-            paint: layer.paint.jsify()!,
-            minzoom: layer.minZoom,
-            maxzoom: layer.maxZoom,
-            sourceLayer: sourceLayerId,
-            filter: jsFilter,
-          ),
-          belowLayerId,
+        jsLayer = interop.LayerSpecification(
+          id: layer.id,
+          type: 'fill-extrusion',
+          source: layer.sourceId,
+          layout: layer.layout.jsify()!,
+          paint: layer.paint.jsify()!,
+          minzoom: layer.minZoom,
+          maxzoom: layer.maxZoom,
+          sourceLayer: sourceLayerId,
         );
       case HeatmapStyleLayer():
-        _map.addLayer(
-          interop.LayerSpecification(
-            id: layer.id,
-            type: 'heatmap',
-            source: layer.sourceId,
-            layout: layer.layout.jsify()!,
-            paint: layer.paint.jsify()!,
-            minzoom: layer.minZoom,
-            maxzoom: layer.maxZoom,
-            sourceLayer: sourceLayerId,
-            filter: jsFilter,
-          ),
-          belowLayerId,
+        jsLayer = interop.LayerSpecification(
+          id: layer.id,
+          type: 'heatmap',
+          source: layer.sourceId,
+          layout: layer.layout.jsify()!,
+          paint: layer.paint.jsify()!,
+          minzoom: layer.minZoom,
+          maxzoom: layer.maxZoom,
+          sourceLayer: sourceLayerId,
         );
       case HillshadeStyleLayer():
-        _map.addLayer(
-          interop.LayerSpecification(
-            id: layer.id,
-            type: 'hillshade',
-            source: layer.sourceId,
-            layout: layer.layout.jsify()!,
-            paint: layer.paint.jsify()!,
-            minzoom: layer.minZoom,
-            maxzoom: layer.maxZoom,
-            filter: jsFilter,
-          ),
-          belowLayerId,
+        jsLayer = interop.LayerSpecification(
+          id: layer.id,
+          type: 'hillshade',
+          source: layer.sourceId,
+          layout: layer.layout.jsify()!,
+          paint: layer.paint.jsify()!,
+          minzoom: layer.minZoom,
+          maxzoom: layer.maxZoom,
         );
       case LineStyleLayer():
-        _map.addLayer(
-          interop.LayerSpecification(
-            id: layer.id,
-            type: 'line',
-            source: layer.sourceId,
-            layout: layer.layout.jsify()!,
-            paint: layer.paint.jsify()!,
-            minzoom: layer.minZoom,
-            maxzoom: layer.maxZoom,
-            sourceLayer: sourceLayerId,
-            filter: jsFilter,
-          ),
-          belowLayerId,
+        jsLayer = interop.LayerSpecification(
+          id: layer.id,
+          type: 'line',
+          source: layer.sourceId,
+          layout: layer.layout.jsify()!,
+          paint: layer.paint.jsify()!,
+          minzoom: layer.minZoom,
+          maxzoom: layer.maxZoom,
+          sourceLayer: sourceLayerId,
         );
       case RasterStyleLayer():
-        _map.addLayer(
-          interop.LayerSpecification(
-            id: layer.id,
-            type: 'raster',
-            source: layer.sourceId,
-            layout: layer.layout.jsify()!,
-            paint: layer.paint.jsify()!,
-            minzoom: layer.minZoom,
-            maxzoom: layer.maxZoom,
-            filter: jsFilter,
-          ),
-          belowLayerId,
+        jsLayer = interop.LayerSpecification(
+          id: layer.id,
+          type: 'raster',
+          source: layer.sourceId,
+          layout: layer.layout.jsify()!,
+          paint: layer.paint.jsify()!,
+          minzoom: layer.minZoom,
+          maxzoom: layer.maxZoom,
         );
       case SymbolStyleLayer():
-        _map.addLayer(
-          interop.LayerSpecification(
-            id: layer.id,
-            type: 'symbol',
-            source: layer.sourceId,
-            layout: layer.layout.jsify()!,
-            paint: layer.paint.jsify()!,
-            minzoom: layer.minZoom,
-            maxzoom: layer.maxZoom,
-            sourceLayer: sourceLayerId,
-            filter: jsFilter,
-          ),
-          belowLayerId,
+        jsLayer = interop.LayerSpecification(
+          id: layer.id,
+          type: 'symbol',
+          source: layer.sourceId,
+          layout: layer.layout.jsify()!,
+          paint: layer.paint.jsify()!,
+          minzoom: layer.minZoom,
+          maxzoom: layer.maxZoom,
+          sourceLayer: sourceLayerId,
+        );
+      default:
+        throw UnimplementedError(
+          'Layer type "${layer.runtimeType}" is not supported on Web platform.',
         );
     }
+    if (jsFilter != null) jsLayer.filter = jsFilter;
+    _map.addLayer(jsLayer, belowLayerId);
   }
 
   @override
