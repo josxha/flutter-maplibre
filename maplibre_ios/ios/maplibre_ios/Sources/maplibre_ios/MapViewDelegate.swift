@@ -115,10 +115,12 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
           target: self, action: #selector(self.onDoubleTap(sender:))
         )
         doubleTap.numberOfTapsRequired = 2
+        doubleTap.delegate = self
         self._mapView.addGestureRecognizer(doubleTap)
 
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(self.onTap(sender:)))
         singleTap.require(toFail: doubleTap)
+        singleTap.delegate = self
         if #available(iOS 13.4, *) {
           singleTap.buttonMaskRequired = .primary
         }
@@ -129,14 +131,16 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
             target: self, action: #selector(self.onSecondaryTap(sender:))
           )
           secondaryTap.buttonMaskRequired = .secondary
+          secondaryTap.delegate = self
           self._mapView.addGestureRecognizer(secondaryTap)
         }
 
-        self._mapView.addGestureRecognizer(
-          UILongPressGestureRecognizer(
-            target: self,
-            action: #selector(self.onLongPress(sender:))
-          ))
+        let longPress = UILongPressGestureRecognizer(
+          target: self,
+          action: #selector(self.onLongPress(sender:))
+        )
+        longPress.delegate = self
+        self._mapView.addGestureRecognizer(longPress)
       case let .failure(error):
         print(error)
       }
