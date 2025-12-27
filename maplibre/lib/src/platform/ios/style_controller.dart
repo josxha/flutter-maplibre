@@ -52,22 +52,30 @@ class StyleControllerIos extends StyleController {
           final expression = jsonEncode(filter).toNSString();
           filterPredicate = Helpers.parsePredicateWithRaw(expression);
         }
+        NSString? ffiSourceLayerId;
+        if (layer.sourceLayerId case final String id) {
+          ffiSourceLayerId = id.toNSString();
+        }
         switch (layer) {
           case FillStyleLayer():
             ffiLayer = MLNFillStyleLayer.new$()
               ..initWithIdentifier(ffiId, source: ffiSource)
+              ..sourceLayerIdentifier = ffiSourceLayerId
               ..predicate = filterPredicate;
           case CircleStyleLayer():
             ffiLayer = MLNCircleStyleLayer.new$()
               ..initWithIdentifier(ffiId, source: ffiSource)
+              ..sourceLayerIdentifier = ffiSourceLayerId
               ..predicate = filterPredicate;
           case FillExtrusionStyleLayer():
             ffiLayer = MLNFillExtrusionStyleLayer.new$()
               ..initWithIdentifier(ffiId, source: ffiSource)
+              ..sourceLayerIdentifier = ffiSourceLayerId
               ..predicate = filterPredicate;
           case HeatmapStyleLayer():
             ffiLayer = MLNHeatmapStyleLayer.new$()
               ..initWithIdentifier(ffiId, source: ffiSource)
+              ..sourceLayerIdentifier = ffiSourceLayerId
               ..predicate = filterPredicate;
           case HillshadeStyleLayer():
             ffiLayer = MLNHillshadeStyleLayer.new$()
@@ -76,6 +84,7 @@ class StyleControllerIos extends StyleController {
           case LineStyleLayer():
             ffiLayer = MLNLineStyleLayer.new$()
               ..initWithIdentifier(ffiId, source: ffiSource)
+              ..sourceLayerIdentifier = ffiSourceLayerId
               ..predicate = filterPredicate;
           case RasterStyleLayer():
             ffiLayer = MLNRasterStyleLayer.new$()
@@ -84,6 +93,7 @@ class StyleControllerIos extends StyleController {
           case SymbolStyleLayer():
             ffiLayer = MLNSymbolStyleLayer.new$()
               ..initWithIdentifier(ffiId, source: ffiSource)
+              ..sourceLayerIdentifier = ffiSourceLayerId
               ..predicate = filterPredicate;
         }
     }
