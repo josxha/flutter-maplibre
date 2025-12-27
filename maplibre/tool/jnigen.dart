@@ -36,6 +36,7 @@ void main(List<String> args) {
         'com.github.josxha.maplibre.MapLibreRegistry',
         'java.net.URI',
         'java.net.URL',
+        'java.util.HashMap',
         'io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding',
         'io.flutter.plugin.common.PluginRegistry',
         'io.flutter.plugin.platform.PlatformView',

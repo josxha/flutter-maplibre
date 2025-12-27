@@ -107,23 +107,32 @@ class StyleControllerAndroid extends StyleController {
     // paint and layout properties
     final layoutEntries = layer.layout.entries.toList(growable: false);
     final paintEntries = layer.paint.entries.toList(growable: false);
+    final metadata = layer.metadata;
+    final hasMetadata = metadata != null && metadata.isNotEmpty;
     final props = JArray(
       jni.PropertyValue.nullableType(JObject.nullableType),
-      layoutEntries.length + paintEntries.length,
+      layoutEntries.length + paintEntries.length + (hasMetadata ? 1 : 0),
     )..releasedBy(arena);
     for (var i = 0; i < paintEntries.length; i++) {
       final entry = paintEntries[i];
       props[i] = jni.PaintPropertyValue(
-        entry.key.toJString(),
-        entry.value.toJObject(arena),
+        entry.key.toJString()..releasedBy(arena),
+        entry.value.toJObject(arena)..releasedBy(arena),
         T: JObject.type,
       )..releasedBy(arena);
     }
     for (var i = 0; i < layoutEntries.length; i++) {
       final entry = layoutEntries[i];
       props[paintEntries.length + i] = jni.LayoutPropertyValue(
-        entry.key.toJString(),
-        entry.value.toJObject(arena),
+        entry.key.toJString()..releasedBy(arena),
+        entry.value.toJObject(arena)..releasedBy(arena),
+        T: JObject.type,
+      )..releasedBy(arena);
+    }
+    if (hasMetadata) {
+      props[paintEntries.length + layoutEntries.length] = jni.PropertyValue(
+        'metadata'.toJString()..releasedBy(arena),
+        metadata.toJObject(arena),
         T: JObject.type,
       )..releasedBy(arena);
     }

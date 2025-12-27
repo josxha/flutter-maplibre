@@ -122,19 +122,36 @@ extension OfflineRegionExt on jni.OfflineRegion {
 extension ObjectExt on Object {
   /// Convert a [Object] to a [JObject].
   JObject toJObject(Arena arena) {
-    return switch (this) {
-      final List<Object?> value => JArray.of(
-        JObject.nullableType,
-        value
-            .map((e) => e?.toJObject(arena)?..releasedBy(arena))
-            .toList(growable: false),
-      ),
-      final String value => value.toJString(),
-      final double value => value.toJDouble(),
+    switch (this) {
+      case final Map<String, Object?> value:
+        final jMap = jni.HashMap(
+          K: JObject.nullableType,
+          V: JObject.nullableType,
+        )..releasedBy(arena);
+        for (final entry in value.entries) {
+          final jKey = entry.key.toJObject(arena)..releasedBy(arena);
+          final jValue = entry.value?.toJObject(arena);
+          jMap.put(jKey, jValue);
+        }
+        return jMap;
+      case final List<Object?> value:
+        return JArray.of(
+          JObject.nullableType,
+          value
+              .map((e) => e?.toJObject(arena))
+              .toList(growable: false),
+        )..releasedBy(arena);
+      case final String value:
+        return value.toJString()..releasedBy(arena);
+      case final double value:
+        return value.toJDouble()..releasedBy(arena);
       // a dart int equals a java long
-      final int value => value.toJLong(),
-      final bool value => value.toJBoolean(),
-      _ => throw Exception('Unsupported property type: $runtimeType, $this'),
-    };
+      case final int value:
+        return value.toJLong()..releasedBy(arena);
+      case final bool value:
+        return value.toJBoolean()..releasedBy(arena);
+      default:
+        throw Exception('Unsupported property type: $runtimeType, $this');
+    }
   }
 }
