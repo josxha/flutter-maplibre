@@ -49,8 +49,8 @@ class StyleControllerIos extends StyleController {
         }
         NSPredicate? filterPredicate;
         if (layer.filter case final List<Object> filter) {
-          // TODO implement filter conversion
-          filterPredicate = null;
+          final expression = jsonEncode(filter).toNSString();
+          filterPredicate = Helpers.parsePredicateWithRaw(expression);
         }
         switch (layer) {
           case FillStyleLayer():

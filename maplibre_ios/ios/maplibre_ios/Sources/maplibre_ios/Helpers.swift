@@ -28,6 +28,21 @@ public class Helpers: NSObject {
       print("Couldn't set expression in Helpers.setExpression()")
     }
   }
+    
+    @objc public static func parsePredicate(raw: String) -> NSPredicate? {
+        if let data = raw.data(using: .utf8) {
+            do {
+                let json = try JSONSerialization.jsonObject(with: data, options: [])
+                return NSPredicate(mglJSONObject: json)
+            } catch (let e) {
+                print("Couldn't parse NSPredicate from JSON: \(e)")
+                return nil
+            }
+        } else {
+            return nil
+        }
+        
+    }
 
   @objc public static func parseExpression(
     propertyName: String, expression: String

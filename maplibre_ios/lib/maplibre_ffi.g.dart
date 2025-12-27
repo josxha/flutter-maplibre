@@ -3066,6 +3066,7 @@ late final _class_Helpers = objc.getClass("Helpers");
 late final _sel_addImageToStyleWithTarget_field_expression_ = objc.registerName("addImageToStyleWithTarget:field:expression:");
 final _objc_msgSend_r8gdi7 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>();
 late final _sel_setExpressionWithTarget_field_expression_ = objc.registerName("setExpressionWithTarget:field:expression:");
+late final _sel_parsePredicateWithRaw_ = objc.registerName("parsePredicateWithRaw:");
 late final _sel_parseExpressionWithPropertyName_expression_ = objc.registerName("parseExpressionWithPropertyName:expression:");
 
 /// Helpers
@@ -3117,6 +3118,13 @@ _objc_msgSend_r8gdi7(_class_Helpers, _sel_addImageToStyleWithTarget_field_expres
   static NSExpression? parseExpressionWithPropertyName(objc.NSString propertyName, {required objc.NSString expression}) {
     final $ret = _objc_msgSend_15qeuct(_class_Helpers, _sel_parseExpressionWithPropertyName_expression_, propertyName.ref.pointer, expression.ref.pointer);
     return $ret.address == 0 ? null : NSExpression.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// parsePredicateWithRaw:
+  static NSPredicate? parsePredicateWithRaw(objc.NSString raw) {
+    final $ret = _objc_msgSend_1sotr3r(_class_Helpers, _sel_parsePredicateWithRaw_, raw.ref.pointer);
+    return $ret.address == 0 ? null : NSPredicate.fromPointer($ret, retain: true, release: true);
   }
 
 
