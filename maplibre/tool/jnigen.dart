@@ -58,7 +58,6 @@ void main(List<String> args) {
         'org.maplibre.android.offline.OfflineRegionError',
         'org.maplibre.android.offline.OfflineRegionStatus',
         'org.maplibre.android.offline.OfflineTilePyramidRegionDefinition',
-        'org.maplibre.android.style.expressions.Expression',
         'org.maplibre.android.style.layers',
         'org.maplibre.android.style.sources',
         'org.maplibre.geojson.Feature',
