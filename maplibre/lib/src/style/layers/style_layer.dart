@@ -80,9 +80,14 @@ interface class StyleLayerWithSource extends StyleLayer {
     super.minZoom,
     super.maxZoom,
     super.filter,
+    this.sourceLayerId,
   });
 
   /// Name of a source description to be used for this layer. Required for all
   /// layer types except background.
   final String sourceId;
+
+  /// Layer to use from a vector tile source. Required for vector tile
+  /// sources; prohibited for all other source types, including GeoJSON sources.
+  final String? sourceLayerId;
 }

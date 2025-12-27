@@ -1,6 +1,6 @@
 part of 'style_layer.dart';
 
-/// A layer that contains circles.
+/// A layer that contains hillshades.
 ///
 /// https://maplibre.org/maplibre-style-spec/layers/#circle
 ///

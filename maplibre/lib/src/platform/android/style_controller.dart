@@ -27,6 +27,13 @@ class StyleControllerAndroid extends StyleController {
       jFilter = jni.Helpers.INSTANCE.parseExpression(jFilterString)
         ..releasedBy(arena);
     }
+    JString? jSourceLayer;
+    if (layer is StyleLayerWithSource) {
+      if (layer.sourceLayerId case final String id) {
+        jSourceLayer = id.toJString()..releasedBy(arena);
+      }
+    }
+
     final jni.Layer jLayer;
     switch (layer) {
       case StyleLayerWithSource():
@@ -35,34 +42,48 @@ class StyleControllerAndroid extends StyleController {
           case FillStyleLayer():
             final jFillLayer = jni.FillLayer(jId, jSourceId);
             if (jFilter != null) jFillLayer.setFilter(jFilter);
+            if (jSourceLayer != null) jFillLayer.setSourceLayer(jSourceLayer);
             jLayer = jFillLayer;
           case CircleStyleLayer():
             final jCircleLayer = jni.CircleLayer(jId, jSourceId);
             if (jFilter != null) jCircleLayer.setFilter(jFilter);
+            if (jSourceLayer != null) jCircleLayer.setSourceLayer(jSourceLayer);
             jLayer = jCircleLayer;
           case FillExtrusionStyleLayer():
             final jFillExtrusionLayer = jni.FillExtrusionLayer(jId, jSourceId);
             if (jFilter != null) jFillExtrusionLayer.setFilter(jFilter);
+            if (jSourceLayer != null) {
+              jFillExtrusionLayer.setSourceLayer(jSourceLayer);
+            }
             jLayer = jFillExtrusionLayer;
           case HeatmapStyleLayer():
             final jHeatmapLayer = jni.HeatmapLayer(jId, jSourceId);
             if (jFilter != null) jHeatmapLayer.setFilter(jFilter);
+            if (jSourceLayer != null) {
+              jHeatmapLayer.setSourceLayer(jSourceLayer);
+            }
             jLayer = jHeatmapLayer;
           case HillshadeStyleLayer():
             final jHillshadeLayer = jni.HillshadeLayer(jId, jSourceId);
             // TODO if (jFilter != null) jHillshadeLayer.setFilter(jFilter);
+            if (jSourceLayer != null) {
+              jHillshadeLayer.setSourceLayer(jSourceLayer);
+            }
             jLayer = jHillshadeLayer;
           case LineStyleLayer():
             final jLineLayer = jni.LineLayer(jId, jSourceId);
             if (jFilter != null) jLineLayer.setFilter(jFilter);
+            if (jSourceLayer != null) jLineLayer.setSourceLayer(jSourceLayer);
             jLayer = jLineLayer;
           case RasterStyleLayer():
             final jRasterLayer = jni.RasterLayer(jId, jSourceId);
             // TODO if (jFilter != null) jRasterLayer.setFilter(jFilter);
+            if (jSourceLayer != null) jRasterLayer.setSourceLayer(jSourceLayer);
             jLayer = jRasterLayer;
           case SymbolStyleLayer():
             final jSymbolLayer = jni.SymbolLayer(jId, jSourceId);
             if (jFilter != null) jSymbolLayer.setFilter(jFilter);
+            if (jSourceLayer != null) jSymbolLayer.setSourceLayer(jSourceLayer);
             jLayer = jSymbolLayer;
           default:
             throw UnimplementedError(

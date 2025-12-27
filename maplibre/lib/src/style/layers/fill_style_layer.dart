@@ -17,6 +17,7 @@ final class FillStyleLayer extends StyleLayerWithSource {
     super.maxZoom = 24,
     super.filter,
     super.metadata,
+    super.sourceLayerId,
   });
   // TODO add properties
 }
