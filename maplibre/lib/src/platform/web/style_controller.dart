@@ -194,7 +194,12 @@ class StyleControllerWeb extends StyleController {
           'Layer type "${layer.runtimeType}" is not supported on Web platform.',
         );
     }
-    if (jsFilter != null) jsLayer.filter = jsFilter;
+    if (layer.metadata case final metadata?) {
+      jsLayer.metadata = metadata.jsify()!;
+    }
+    if (jsFilter != null) {
+      jsLayer.filter = jsFilter;
+    }
     _map.addLayer(jsLayer, belowLayerId);
   }
 

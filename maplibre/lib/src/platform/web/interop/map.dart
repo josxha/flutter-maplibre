@@ -232,7 +232,8 @@ extension type LayerSpecification._(JSObject _) implements JSObject {
   /// Get the layer id.
   external String id;
 
-  external JSAny? filter;
+  external JSAny filter;
+  external JSAny metadata;
 }
 
 /// Image data used by [JsMap.addImage].
