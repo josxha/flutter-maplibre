@@ -21,12 +21,16 @@ part 'style_controller.dart';
 /// The implementation that gets used for state of the [MapLibreMap] widget on
 /// android using JNI and Pigeon as a fallback.
 final class MapLibreMapStateAndroid extends MapLibreMapStateNative
-    with jni.$OnMapReadyCallback, jni.$Style$OnStyleLoaded {
+    with
+        jni.$OnMapReadyCallback,
+        jni.$Style$OnStyleLoaded,
+        WidgetsBindingObserver {
   late final int _viewId;
-  late final jni.MapView _mapView;
+  jni.MapView? _mapView;
   jni.MapLibreMap? _jMap;
   jni.Projection? _cachedJProjection;
   jni.LocationComponent? _cachedJLocationComponent;
+  bool _mapViewStarted = false;
 
   @override
   StyleControllerAndroid? style;
@@ -248,6 +252,12 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative
   });
 
   @override
+  void initState() {
+    WidgetsBinding.instance.addObserver(this);
+    super.initState();
+  }
+
+  @override
   void didUpdateWidget(covariant MapLibreMap oldWidget) {
     _updateOptions(oldWidget);
     layerManager?.updateLayers(widget.layers);
@@ -256,11 +266,40 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    if (_mapViewStarted) {
+      _mapView?.onPause();
+      _mapView?.onStop();
+      _mapViewStarted = false;
+    }
+    _mapView?.onDestroy();
     _jMap?.release();
     _cachedJProjection?.release();
     _cachedJLocationComponent?.release();
     super.dispose();
   }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      // Start MapView only if it was stopped
+      if (!_mapViewStarted) {
+        _mapView?.onStart();
+        _mapViewStarted = true;
+      }
+      _mapView?.onResume();
+      _jMap?.triggerRepaint();
+    } else {
+      _mapView?.onPause();
+      if (_mapViewStarted) {
+        _mapView?.onStop();
+        _mapViewStarted = false;
+      }
+    }
+  }
+
+  @override
+  void didHaveMemoryPressure() => _mapView?.onLowMemory();
 
   Future<void> _updateOptions(MapLibreMap oldWidget) async => using((arena) {
     final jMap = _jMap;
