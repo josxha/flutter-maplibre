@@ -32,10 +32,10 @@ class StyleControllerIos extends StyleController {
       );
     }
 
-    MLNStyleLayer? ffiStyleLayer;
+    MLNStyleLayer? ffiLayer;
     switch (layer) {
       case BackgroundStyleLayer():
-        ffiStyleLayer = MLNBackgroundStyleLayer.new$()
+        ffiLayer = MLNBackgroundStyleLayer.new$()
           ..initWithIdentifier(ffiId)
           ..backgroundColor = NSExpression.expressionWithFormat(
             layer.color.toHexString().toNSString(),
@@ -47,60 +47,73 @@ class StyleControllerIos extends StyleController {
         if (ffiSource == null) {
           throw Exception('Source "${layer.sourceId}" does not exist.');
         }
+        NSPredicate? filterPredicate;
+        if (layer.filter case final List<Object> filter) {
+          // TODO implement filter conversion
+          filterPredicate = null;
+        }
         switch (layer) {
           case FillStyleLayer():
-            ffiStyleLayer = MLNFillStyleLayer.new$()
-              ..initWithIdentifier(ffiId, source: ffiSource);
+            ffiLayer = MLNFillStyleLayer.new$()
+              ..initWithIdentifier(ffiId, source: ffiSource)
+              ..predicate = filterPredicate;
           case CircleStyleLayer():
-            ffiStyleLayer = MLNCircleStyleLayer.new$()
-              ..initWithIdentifier(ffiId, source: ffiSource);
+            ffiLayer = MLNCircleStyleLayer.new$()
+              ..initWithIdentifier(ffiId, source: ffiSource)
+              ..predicate = filterPredicate;
           case FillExtrusionStyleLayer():
-            ffiStyleLayer = MLNFillExtrusionStyleLayer.new$()
-              ..initWithIdentifier(ffiId, source: ffiSource);
+            ffiLayer = MLNFillExtrusionStyleLayer.new$()
+              ..initWithIdentifier(ffiId, source: ffiSource)
+              ..predicate = filterPredicate;
           case HeatmapStyleLayer():
-            ffiStyleLayer = MLNHeatmapStyleLayer.new$()
-              ..initWithIdentifier(ffiId, source: ffiSource);
+            ffiLayer = MLNHeatmapStyleLayer.new$()
+              ..initWithIdentifier(ffiId, source: ffiSource)
+              ..predicate = filterPredicate;
           case HillshadeStyleLayer():
-            ffiStyleLayer = MLNHillshadeStyleLayer.new$()
+            ffiLayer = MLNHillshadeStyleLayer.new$()
               ..initWithIdentifier(ffiId, source: ffiSource);
+              // TODO ..predicate = filterPredicate;
           case LineStyleLayer():
-            ffiStyleLayer = MLNLineStyleLayer.new$()
-              ..initWithIdentifier(ffiId, source: ffiSource);
+            ffiLayer = MLNLineStyleLayer.new$()
+              ..initWithIdentifier(ffiId, source: ffiSource)
+              ..predicate = filterPredicate;
           case RasterStyleLayer():
-            ffiStyleLayer = MLNRasterStyleLayer.new$()
+            ffiLayer = MLNRasterStyleLayer.new$()
               ..initWithIdentifier(ffiId, source: ffiSource);
+              // TODO ..predicate = filterPredicate;
           case SymbolStyleLayer():
-            ffiStyleLayer = MLNSymbolStyleLayer.new$()
-              ..initWithIdentifier(ffiId, source: ffiSource);
+            ffiLayer = MLNSymbolStyleLayer.new$()
+              ..initWithIdentifier(ffiId, source: ffiSource)
+              ..predicate = filterPredicate;
         }
     }
 
-    if (ffiStyleLayer == null) {
+    if (ffiLayer == null) {
       throw UnimplementedError(
         'The Layer is not supported: ${layer.runtimeType}',
       );
     }
-    ffiStyleLayer.minimumZoomLevel = layer.minZoom;
-    ffiStyleLayer.maximumZoomLevel = layer.maxZoom;
-    ffiStyleLayer.setProperties(layer.paint);
-    ffiStyleLayer.setProperties(layer.layout);
+    ffiLayer.minimumZoomLevel = layer.minZoom;
+    ffiLayer.maximumZoomLevel = layer.maxZoom;
+    ffiLayer.setProperties(layer.paint);
+    ffiLayer.setProperties(layer.layout);
 
     if (belowLayerId case final String id) {
       final belowLayer = _ffiStyle.layerWithIdentifier(id.toNSString());
       if (belowLayer == null) {
         throw Exception('Layer "$id" does not exist.');
       }
-      _ffiStyle.insertLayer$2(ffiStyleLayer, belowLayer: belowLayer);
+      _ffiStyle.insertLayer$2(ffiLayer, belowLayer: belowLayer);
     } else if (aboveLayerId case final String id) {
       final aboveLayer = _ffiStyle.layerWithIdentifier(id.toNSString());
       if (aboveLayer == null) {
         throw Exception('Layer "$id" does not exist.');
       }
-      _ffiStyle.insertLayer(ffiStyleLayer, aboveLayer: aboveLayer);
+      _ffiStyle.insertLayer(ffiLayer, aboveLayer: aboveLayer);
     } else if (atIndex case final int index) {
-      _ffiStyle.insertLayer$1(ffiStyleLayer, atIndex: index);
+      _ffiStyle.insertLayer$1(ffiLayer, atIndex: index);
     } else {
-      _ffiStyle.addLayer(ffiStyleLayer);
+      _ffiStyle.addLayer(ffiLayer);
     }
   }
 

@@ -53,7 +53,7 @@ interface class StyleLayer {
   /// evaluated at integer zoom levels. The feature-state expression is not
   /// supported in filter expressions.
   ///
-  /// This is not supported on android on the [BackgroundStyleLayer],
+  /// This is not supported on android and iOS on the [BackgroundStyleLayer],
   /// [RasterStyleLayer] and [HillshadeStyleLayer].
   final List<Object>? filter;
 
