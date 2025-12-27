@@ -30,7 +30,6 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative
   jni.MapLibreMap? _jMap;
   jni.Projection? _cachedJProjection;
   jni.LocationComponent? _cachedJLocationComponent;
-  AppLifecycleState? _lastLifecycleState;
   bool _mapViewStarted = false;
 
   @override
@@ -255,12 +254,6 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative
   @override
   void initState() {
     WidgetsBinding.instance.addObserver(this);
-    // Trigger the initial lifecycle state callback.
-    final currentState = WidgetsBinding.instance.lifecycleState;
-    if (currentState != null) {
-      _lastLifecycleState = currentState;
-      didChangeAppLifecycleState(currentState);
-    }
     super.initState();
   }
 
@@ -288,33 +281,21 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    switch (state) {
-      case AppLifecycleState.resumed:
-        // Start MapView only if it was stopped
-        const nonActiveStates = {
-          AppLifecycleState.paused,
-          AppLifecycleState.hidden,
-          AppLifecycleState.detached,
-          null,
-        };
-        if (!_mapViewStarted || nonActiveStates.contains(_lastLifecycleState)) {
-          _mapView?.onStart();
-          _mapViewStarted = true;
-        }
-        _mapView?.onResume();
-        _jMap?.triggerRepaint();
-      case AppLifecycleState.inactive:
-        _mapView?.onPause();
-      case AppLifecycleState.paused ||
-          AppLifecycleState.hidden ||
-          AppLifecycleState.detached:
-        _mapView?.onPause();
-        if (_mapViewStarted) {
-          _mapView?.onStop();
-          _mapViewStarted = false;
-        }
+    if (state == AppLifecycleState.resumed) {
+      // Start MapView only if it was stopped
+      if (!_mapViewStarted) {
+        _mapView?.onStart();
+        _mapViewStarted = true;
+      }
+      _mapView?.onResume();
+      _jMap?.triggerRepaint();
+    } else {
+      _mapView?.onPause();
+      if (_mapViewStarted) {
+        _mapView?.onStop();
+        _mapViewStarted = false;
+      }
     }
-    _lastLifecycleState = state;
   }
 
   @override
