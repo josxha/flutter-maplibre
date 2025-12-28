@@ -255,10 +255,10 @@ extension MLNStyleLayerExt on MLNStyleLayer {
       case 'text-translate-anchor':
         (this as MLNSymbolStyleLayer).textTranslationAnchor = expression;
       default:
-        Helpers.setExpressionWithTarget(
+        Helpers.setValueWithTarget(
           this,
           field: key.dashedToCamelCase().toNSString(),
-          expression: expression,
+          value: expression,
         );
     }
   }

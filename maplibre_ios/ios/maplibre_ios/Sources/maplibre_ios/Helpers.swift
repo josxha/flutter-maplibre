@@ -18,14 +18,14 @@ public class Helpers: NSObject {
         }
     }
 
-    @objc public static func setExpression(
-        target: NSObject, field: String, expression: NSExpression
+    @objc public static func setValue(
+        target: NSObject, field: String, value: NSObject
     ) {
         do {
             // https://developer.apple.com/documentation/objectivec/nsobject/1418139-setvalue
-            try target.setValue(expression, forKey: field)
+            try target.setValue(value, forKey: field)
         } catch {
-            print("Couldn't set expression in Helpers.setExpression()")
+            print("Couldn't set value in Helpers.setValue()")
         }
     }
 
