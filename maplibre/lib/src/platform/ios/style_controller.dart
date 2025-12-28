@@ -110,10 +110,7 @@ class StyleControllerIos extends StyleController {
     if (layer.metadata case final Map<String, Object> metadata) {
       final ffiMetadata = NSMutableDictionary.new$()..init();
       for (final entry in metadata.entries) {
-        ffiMetadata.setObject(
-          entry.value,
-          forKey: entry.key.toNSString(),
-        );
+        ffiMetadata.setObject(entry.value, forKey: entry.key.toNSString());
       }
       Helpers.setExpressionWithTarget(
         ffiLayer,

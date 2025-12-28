@@ -40,10 +40,7 @@ class _StyleLayersSymbolVectorSourcePageState
               id: 'centroid-labels',
               sourceId: sourceId,
               sourceLayerId: 'centroids',
-              layout: {
-                'icon-allow-overlap': true,
-                'text-field': '{NAME}',
-              },
+              layout: {'icon-allow-overlap': true, 'text-field': '{NAME}'},
             ),
           );
         },

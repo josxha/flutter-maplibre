@@ -137,9 +137,7 @@ extension ObjectExt on Object {
       case final List<Object?> value:
         return JArray.of(
           JObject.nullableType,
-          value
-              .map((e) => e?.toJObject(arena))
-              .toList(growable: false),
+          value.map((e) => e?.toJObject(arena)).toList(growable: false),
         )..releasedBy(arena);
       case final String value:
         return value.toJString()..releasedBy(arena);
