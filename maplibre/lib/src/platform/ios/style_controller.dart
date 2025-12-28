@@ -111,7 +111,10 @@ class StyleControllerIos extends StyleController {
       final ffiMetadata = NSMutableDictionary.new$()..init();
       for (final entry in metadata.entries) {
         // TODO implement
-        ffiMetadata.setObject('entry.value'.toNSString(), forKey: entry.key.toNSString());
+        ffiMetadata.setObject(
+          entry.value.toNSObject(),
+          forKey: entry.key.toNSString(),
+        );
       }
       Helpers.setValueWithTarget(
         ffiLayer,

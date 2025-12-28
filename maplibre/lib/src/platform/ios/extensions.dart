@@ -264,5 +264,45 @@ extension MLNStyleLayerExt on MLNStyleLayer {
   }
 }
 
+/// Internal extensions on [Object].
+extension ObjectExt on Object {
+  /// Convert a Dart [Object] to an [NSObject].
+  NSObject toNSObject() {
+    final obj = this;
+    switch (obj) {
+      case String():
+        return obj.toNSString();
+      case int():
+        return obj.toNSNumber();
+      case double():
+        return obj.toNSNumber();
+      case bool():
+        return NSNumber.new$().initWithBool(obj);
+      case List():
+        final array = NSMutableArray.new$()..init();
+        for (final item in obj) {
+          final nsObject = (item as Object).toNSObject();
+          array.addObject(nsObject);
+        }
+        return array;
+      case Map():
+        final dict = NSMutableDictionary.new$()..init();
+        for (final entry in obj.entries) {
+          final valueObj = entry.value as Object;
+          final keyObj = entry.key as Object;
+          dict.setObject(
+            valueObj.toNSObject(),
+            forKey: NSCopying.as(keyObj.toNSObject()),
+          );
+        }
+        return dict;
+      default:
+        throw UnimplementedError(
+          'Conversion to NSObject not implemented for type ${obj.runtimeType}',
+        );
+    }
+  }
+}
+
 /// UTF8 Encoding
 const nsUTF8StringEncoding = 4;
