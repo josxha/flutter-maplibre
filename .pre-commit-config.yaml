@@ -22,7 +22,7 @@ repos:
         types: [dart]
     -   id: swift-format
         name: swift format
-        entry: swiftformat --verbose --lint . --reporter github-actions-log --swiftversion 6 --indent 2 --disable trailingCommas
+        entry: swiftformat --verbose --lint . --reporter github-actions-log --swiftversion 6 --disable trailingCommas
         language: system
         types: [swift]
 #     -   id: kotlin-format
