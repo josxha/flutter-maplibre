@@ -2,7 +2,7 @@
 # See https://pre-commit.com/hooks.html for more hooks
 repos:
 -   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v3.2.0
+    rev: v6.0.0
     hooks:
     # -   id: trailing-whitespace
     # -   id: end-of-file-fixer
@@ -25,3 +25,9 @@ repos:
         entry: swiftformat --verbose --lint . --reporter github-actions-log --swiftversion 6 --indent 2 --disable trailingCommas
         language: system
         types: [swift]
+#     -   id: kotlin-format
+#         name: ktlint format
+#         entry: ./gradlew ktlintFormat
+#         language: system
+#         types: [kotlin]
+#         working_directory: maplibre/android
