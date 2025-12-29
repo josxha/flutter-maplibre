@@ -118,6 +118,8 @@ abstract class StyleController {
   }) async {
     await addImageFromCanvas(
       id: id,
+      width: size,
+      height: size,
       painter: (canvas) {
         TextPainter(textDirection: TextDirection.ltr)
           ..text = TextSpan(
