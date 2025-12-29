@@ -85,7 +85,7 @@ abstract class StyleController {
   ///
   /// The [painter] function receives a [Canvas] to draw on.
   ///
-  /// The [size] parameter defines the width and height of the resulting image
+  /// The [width] and [height] defines the size of the resulting image
   /// in pixels.
   Future<void> addImageFromCanvas({
     required String id,
