@@ -1,4 +1,3 @@
-import 'dart:ui' as ui;
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
@@ -155,7 +154,7 @@ abstract class StyleController {
       ),
     );
 
-    final view = ui.PlatformDispatcher.instance.views.first;
+    final view = PlatformDispatcher.instance.views.first;
 
     final repaintBoundary = RenderRepaintBoundary();
     logicalSize ??= view.physicalSize / view.devicePixelRatio;
@@ -195,7 +194,7 @@ abstract class StyleController {
     final image = await repaintBoundary.toImage(
       pixelRatio: imageSize.width / logicalSize.width,
     );
-    final bytes = await image.toByteData(format: ui.ImageByteFormat.png);
+    final bytes = await image.toByteData(format: ImageByteFormat.png);
     if (bytes == null) return;
     await addImage(id, bytes.buffer.asUint8List());
   }
