@@ -99,7 +99,12 @@ abstract class StyleController {
     final picture = pictureRecorder.endRecording();
     final image = await picture.toImage(width, height);
     final bytes = await image.toByteData(format: ImageByteFormat.png);
-    if (bytes == null) return;
+    if (bytes == null) {
+      debugPrint(
+        'addImageFromCanvas: Failed to convert image to bytes for id "$id".',
+      );
+      return;
+    }
     await addImage(id, bytes.buffer.asUint8List());
   }
 
@@ -185,8 +190,6 @@ abstract class StyleController {
     ).attachToRenderTree(buildOwner);
 
     buildOwner.buildScope(rootElement);
-
-    buildOwner.buildScope(rootElement);
     buildOwner.finalizeTree();
 
     pipelineOwner.flushLayout();
@@ -197,7 +200,14 @@ abstract class StyleController {
       pixelRatio: imageSize.width / logicalSize.width,
     );
     final bytes = await image.toByteData(format: ImageByteFormat.png);
-    if (bytes == null) return;
+    buildOwner.finalizeTree();
+    if (bytes == null) {
+      debugPrint(
+        'StyleController.addWidgetImage: failed to convert widget to '
+        'image bytes for id "$id".',
+      );
+      return;
+    }
     await addImage(id, bytes.buffer.asUint8List());
   }
 
