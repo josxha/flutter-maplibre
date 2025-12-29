@@ -10,7 +10,7 @@ class WebViewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return InAppWebView(
       initialUrlRequest: URLRequest(
-        url: WebUri('https://maplibre.org/maplibre-gl-js/docs/examples/'),
+        url: WebUri('https://openmaptiles.github.io/osm-bright-gl-style'),
       ),
     );
   }
