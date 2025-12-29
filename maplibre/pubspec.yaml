@@ -61,3 +61,5 @@ flutter:
       web:
         pluginClass: PlatformImpl
         fileName: src/platform/platform_web.dart
+  assets:
+    - lib/assets/map.html

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <script src="https://unpkg.com/maplibre-gl@^5.15.0/dist/maplibre-gl.js"></script>
+    <link href="https://unpkg.com/maplibre-gl@^5.15.0/dist/maplibre-gl.css" rel="stylesheet"/>
+    <style>
+      html, body, #map { margin: 0; height: 100%; width: 100%; }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+
+<script>
+    const map = new maplibregl.Map({
+        container: 'map',
+        // style: 'https://demotiles.maplibre.org/style.json',
+        center: [0, 0],
+        zoom: 2
+    });
+
+    // --- SEND EVENTS TO FLUTTER ---
+    map.on('moveend', () => {
+        const center = map.getCenter();
+        window.flutter_inappwebview.callHandler(
+            'mapEvent',
+            {
+                type: 'moveend',
+                lng: center.lng,
+                lat: center.lat,
+                zoom: map.getZoom()
+            }
+        );
+    });
+    map.on('move', () => {
+        const center = map.getCenter();
+        window.flutter_inappwebview.callHandler(
+            'mapEvent',
+            {
+                type: 'move',
+                lng: center.lng,
+                lat: center.lat,
+                zoom: map.getZoom()
+            }
+        );
+    });
+
+    map.on('click', (e) => {
+        window.flutter_inappwebview.callHandler(
+            'mapEvent',
+            {
+                type: 'click',
+                lng: e.lngLat.lng,
+                lat: e.lngLat.lat
+            }
+        );
+    });
+
+    // --- EXPOSE FUNCTIONS FOR FLUTTER ---
+    window.mapControls = {
+        flyTo: (lng, lat, zoom) => {
+            map.flyTo({ center: [lng, lat], zoom });
+        },
+        setStyle: (styleUrl) => {
+            map.setStyle(styleUrl);
+        }
+    };
+</script>
+</body>
+</html>
