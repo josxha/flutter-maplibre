@@ -117,21 +117,24 @@ abstract class StyleController {
     int size = 200,
     Color color = const Color(0xFF000000),
   }) async {
-    await addImageFromCanvas(id: id, painter: (canvas) {
-      TextPainter(textDirection: TextDirection.ltr)
-        ..text = TextSpan(
-          text: String.fromCharCode(iconData.codePoint),
-          style: TextStyle(
-            letterSpacing: 0,
-            fontSize: size.toDouble(),
-            fontFamily: iconData.fontFamily,
-            package: iconData.fontPackage,
-            color: color,
-          ),
-        )
-        ..layout()
-        ..paint(canvas, Offset.zero);
-    });
+    await addImageFromCanvas(
+      id: id,
+      painter: (canvas) {
+        TextPainter(textDirection: TextDirection.ltr)
+          ..text = TextSpan(
+            text: String.fromCharCode(iconData.codePoint),
+            style: TextStyle(
+              letterSpacing: 0,
+              fontSize: size.toDouble(),
+              fontFamily: iconData.fontFamily,
+              package: iconData.fontPackage,
+              color: color,
+            ),
+          )
+          ..layout()
+          ..paint(canvas, Offset.zero);
+      },
+    );
   }
 
   /// Create an image from a [Widget] and add it to the map with the given [id].
