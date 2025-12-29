@@ -29,8 +29,10 @@ import 'package:maplibre_example/two_maps_page.dart';
 import 'package:maplibre_example/user_location_page.dart';
 import 'package:maplibre_example/widget_layer_interactive_page.dart';
 import 'package:maplibre_example/widget_layer_page.dart';
+import 'package:maplibre_example/web_view.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -48,6 +50,7 @@ class MyApp extends StatelessWidget {
         colorSchemeSeed: Colors.blue,
       ),
       routes: {
+        WebViewPage.location: (context) => const WebViewPage(),
         MenuPage.location: (context) => const MenuPage(),
         TranslucentMapPage.location: (context) => const TranslucentMapPage(),
         PmTilesPage.location: (context) => const PmTilesPage(),
