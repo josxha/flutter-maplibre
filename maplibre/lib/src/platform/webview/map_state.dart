@@ -23,18 +23,35 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
     Duration? webMaxDuration,
-  }) {
-    // TODO: implement animateCamera
-    throw UnimplementedError();
+  }) async {
+    await _webViewController.evaluateJavascript(
+      source: '''
+  window.mapControls.flyTo(13.4050, 52.5200, 12);
+''',
+    );
   }
 
   @override
   Widget buildPlatformWidget(BuildContext context) {
     return InAppWebView(
-      initialFile: 'packages/maplibre/lib/assets/map.html',
-      // initialUrlRequest: URLRequest(
-      //   url: WebUri('https://openmaptiles.github.io/osm-bright-gl-style'),
-      // ),
+      initialData: InAppWebViewInitialData(
+        data: '''
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <script src="https://unpkg.com/maplibre-gl@^5.15.0/dist/maplibre-gl.js"></script>
+    <link href="https://unpkg.com/maplibre-gl@^5.15.0/dist/maplibre-gl.css" rel="stylesheet"/>
+    <style>
+      html, body, #map { margin: 0; height: 100%; width: 100%; }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+</body>
+</html>
+''',
+      ),
       onWebViewCreated: (controller) async {
         _webViewController = controller;
         widget.onMapCreated?.call(this);
@@ -44,6 +61,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
           callback: _onMapEvent,
         );
       },
+      onLoadStop: _onLoadStop,
       onConsoleMessage: (controller, consoleMessage) {
         debugPrint(consoleMessage.message);
       },
@@ -123,7 +141,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
   }) async {
     await _webViewController.evaluateJavascript(
       source: '''
-  window.mapControls.flyTo(13.4050, 52.5200, 12);
+  window.mapControls.jumpTo(13.4050, 52.5200, 12);
 ''',
     );
   }
@@ -211,5 +229,65 @@ class MapLibreMapStateWebView extends MapLibreMapState {
           ),
         );
     }
+  }
+
+  void _onLoadStop(InAppWebViewController controller, WebUri? url) {
+    debugPrint('_onLoadStop: $url');
+    controller.evaluateJavascript(
+      source: '''
+    const map = new maplibregl.Map({
+        container: 'map',
+        style: '${widget.options.initStyle}',
+        center: [0, 0],
+        zoom: ${widget.options.initZoom}
+    });
+    map.on('moveend', () => {
+        const center = map.getCenter();
+        window.flutter_inappwebview.callHandler(
+            'mapEvent',
+            {
+                type: 'moveend',
+                lng: center.lng,
+                lat: center.lat,
+                zoom: map.getZoom()
+            }
+        );
+    });
+    map.on('move', () => {
+        const center = map.getCenter();
+        window.flutter_inappwebview.callHandler(
+            'mapEvent',
+            {
+                type: 'move',
+                lng: center.lng,
+                lat: center.lat,
+                zoom: map.getZoom()
+            }
+        );
+    });
+    map.on('click', (e) => {
+        window.flutter_inappwebview.callHandler(
+            'mapEvent',
+            {
+                type: 'click',
+                lng: e.lngLat.lng,
+                lat: e.lngLat.lat
+            }
+        );
+    });
+
+    window.mapControls = {
+        flyTo: (lng, lat, zoom) => {
+            map.flyTo({ center: [lng, lat], zoom });
+        },
+        jumpTo: (lng, lat, zoom) => {
+            map.jumpTo({ center: [lng, lat], zoom });
+        },
+        setStyle: (styleUrl) => {
+            map.setStyle(styleUrl);
+        }
+    };  
+''',
+    );
   }
 }
