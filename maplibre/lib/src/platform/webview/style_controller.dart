@@ -1,9 +1,17 @@
 import 'dart:typed_data';
 
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:maplibre/maplibre.dart';
 
 /// Android specific implementation of the [StyleController].
 class StyleControllerWebView extends StyleController {
+  /// Creates a new instance of [StyleControllerWebView].
+  StyleControllerWebView(this._webViewController);
+
+  final InAppWebViewController _webViewController;
+
+  List<String> _cachedAttributions = const [];
+
   @override
   Future<void> addImage(String id, Uint8List bytes) {
     // TODO: implement addImage
@@ -33,16 +41,18 @@ class StyleControllerWebView extends StyleController {
   }
 
   @override
-  Future<List<String>> getAttributions() {
-    // TODO: implement getAttributions
-    throw UnimplementedError();
+  Future<List<String>> getAttributions() async {
+    final result = await _webViewController.callAsyncJavaScript(functionBody: '''
+      return map.getAttributions();
+''');
+    if (result?.value case final List<dynamic> list) {
+      _cachedAttributions = list.cast<String>();
+    }
+    return _cachedAttributions;
   }
 
   @override
-  List<String> getAttributionsSync() {
-    // TODO: implement getAttributionsSync
-    throw UnimplementedError();
-  }
+  List<String> getAttributionsSync() => _cachedAttributions;
 
   @override
   List<String> getLayerIds() {
