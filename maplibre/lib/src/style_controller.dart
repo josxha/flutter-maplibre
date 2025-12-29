@@ -82,6 +82,28 @@ abstract class StyleController {
     await addImage(id, bytes);
   }
 
+  /// Create an image from a [Canvas] and add it to the map with the given [id].
+  ///
+  /// The [painter] function receives a [Canvas] to draw on.
+  ///
+  /// The [size] parameter defines the width and height of the resulting image
+  /// in pixels.
+  Future<void> addImageFromCanvas({
+    required String id,
+    required void Function(Canvas canvas) painter,
+    int size = 200,
+  }) async {
+    final pictureRecorder = PictureRecorder();
+    final canvas = Canvas(pictureRecorder);
+    painter(canvas);
+    final picture = pictureRecorder.endRecording();
+    final image = await picture.toImage(size, size);
+    final bytes = await image.toByteData(format: ImageByteFormat.png);
+    if (bytes == null) return;
+
+    await addImage(id, bytes.buffer.asUint8List());
+  }
+
   /// Create an image from [IconData] and add it to the map with the given [id].
   ///
   /// The [size] parameter defines the width and height of the resulting image
@@ -95,29 +117,21 @@ abstract class StyleController {
     int size = 200,
     Color color = const Color(0xFF000000),
   }) async {
-    final pictureRecorder = PictureRecorder();
-    final canvas = Canvas(pictureRecorder);
-
-    TextPainter(textDirection: TextDirection.ltr)
-      ..text = TextSpan(
-        text: String.fromCharCode(iconData.codePoint),
-        style: TextStyle(
-          letterSpacing: 0,
-          fontSize: size.toDouble(),
-          fontFamily: iconData.fontFamily,
-          package: iconData.fontPackage,
-          color: color,
-        ),
-      )
-      ..layout()
-      ..paint(canvas, Offset.zero);
-
-    final picture = pictureRecorder.endRecording();
-    final image = await picture.toImage(size, size);
-    final bytes = await image.toByteData(format: ImageByteFormat.png);
-    if (bytes == null) return;
-
-    await addImage(id, bytes.buffer.asUint8List());
+    await addImageFromCanvas(id: id, painter: (canvas) {
+      TextPainter(textDirection: TextDirection.ltr)
+        ..text = TextSpan(
+          text: String.fromCharCode(iconData.codePoint),
+          style: TextStyle(
+            letterSpacing: 0,
+            fontSize: size.toDouble(),
+            fontFamily: iconData.fontFamily,
+            package: iconData.fontPackage,
+            color: color,
+          ),
+        )
+        ..layout()
+        ..paint(canvas, Offset.zero);
+    });
   }
 
   /// Create an image from a [Widget] and add it to the map with the given [id].
