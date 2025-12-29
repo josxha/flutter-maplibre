@@ -1,6 +1,8 @@
+import 'dart:ui' as ui;
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
@@ -115,6 +117,69 @@ abstract class StyleController {
     final bytes = await image.toByteData(format: ImageByteFormat.png);
     if (bytes == null) return;
 
+    await addImage(id, bytes.buffer.asUint8List());
+  }
+
+  /// Create an image from a [Widget] and add it to the map with the given [id].
+  ///
+  /// This method is inspired by the
+  /// [widget_to_marker](https://pub.dev/packages/widget_to_marker) package.
+  Future<void> addImageFromWidget({
+    required String id,
+    required Widget widget,
+    Size? logicalSize,
+    Size? imageSize,
+    TextDirection textDirection = TextDirection.ltr,
+  }) async {
+    final rb = RepaintBoundary(
+      child: MediaQuery(
+        data: const MediaQueryData(),
+        child: Directionality(textDirection: textDirection, child: widget),
+      ),
+    );
+
+    final view = ui.PlatformDispatcher.instance.views.first;
+
+    final repaintBoundary = RenderRepaintBoundary();
+    logicalSize ??= view.physicalSize / view.devicePixelRatio;
+    imageSize ??= view.physicalSize;
+
+    final renderView = RenderView(
+      view: view,
+      child: RenderPositionedBox(child: repaintBoundary),
+      configuration: ViewConfiguration(
+        physicalConstraints:
+            BoxConstraints.tight(logicalSize) * view.devicePixelRatio,
+        logicalConstraints: BoxConstraints.tight(logicalSize),
+        devicePixelRatio: view.devicePixelRatio,
+      ),
+    );
+
+    final pipelineOwner = PipelineOwner();
+    final buildOwner = BuildOwner(focusManager: FocusManager());
+
+    pipelineOwner.rootNode = renderView;
+    renderView.prepareInitialFrame();
+
+    final rootElement = RenderObjectToWidgetAdapter<RenderBox>(
+      container: repaintBoundary,
+      child: rb,
+    ).attachToRenderTree(buildOwner);
+
+    buildOwner.buildScope(rootElement);
+
+    buildOwner.buildScope(rootElement);
+    buildOwner.finalizeTree();
+
+    pipelineOwner.flushLayout();
+    pipelineOwner.flushCompositingBits();
+    pipelineOwner.flushPaint();
+
+    final image = await repaintBoundary.toImage(
+      pixelRatio: imageSize.width / logicalSize.width,
+    );
+    final bytes = await image.toByteData(format: ui.ImageByteFormat.png);
+    if (bytes == null) return;
     await addImage(id, bytes.buffer.asUint8List());
   }
 
