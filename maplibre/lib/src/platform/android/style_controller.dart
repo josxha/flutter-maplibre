@@ -25,36 +25,36 @@ class StyleControllerAndroid extends StyleController {
       FillStyleLayer() => jni.FillLayer(
         jId,
         layer.sourceId.toJString()..releasedBy(arena),
-      ),
+      )..setSourceLayer(layer.sourceLayerId?.toJString()),
       CircleStyleLayer() => jni.CircleLayer(
         jId,
         layer.sourceId.toJString()..releasedBy(arena),
-      ),
+      )..setSourceLayer(layer.sourceLayerId?.toJString()),
       BackgroundStyleLayer() => jni.BackgroundLayer(layer.id.toJString()),
       FillExtrusionStyleLayer() => jni.FillExtrusionLayer(
         jId,
         layer.sourceId.toJString()..releasedBy(arena),
-      ),
+      )..setSourceLayer(layer.sourceLayerId?.toJString()),
       HeatmapStyleLayer() => jni.HeatmapLayer(
         jId,
         layer.sourceId.toJString()..releasedBy(arena),
-      ),
+      )..setSourceLayer(layer.sourceLayerId?.toJString()),
       HillshadeStyleLayer() => jni.HillshadeLayer(
         jId,
         layer.sourceId.toJString()..releasedBy(arena),
-      ),
+      )..setSourceLayer(layer.sourceLayerId?.toJString()),
       LineStyleLayer() => jni.LineLayer(
         jId,
         layer.sourceId.toJString()..releasedBy(arena),
-      ),
+      )..setSourceLayer(layer.sourceLayerId?.toJString()),
       RasterStyleLayer() => jni.RasterLayer(
         jId,
         layer.sourceId.toJString()..releasedBy(arena),
-      ),
+      )..setSourceLayer(layer.sourceLayerId?.toJString()),
       SymbolStyleLayer() => jni.SymbolLayer(
         jId,
         layer.sourceId.toJString()..releasedBy(arena),
-      ),
+      )..setSourceLayer(layer.sourceLayerId?.toJString()),
       _ => throw UnimplementedError(
         'The Layer is not supported: ${layer.runtimeType}',
       ),
