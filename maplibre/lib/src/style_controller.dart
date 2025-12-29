@@ -90,16 +90,16 @@ abstract class StyleController {
   Future<void> addImageFromCanvas({
     required String id,
     required void Function(Canvas canvas) painter,
-    int size = 200,
+    int width = 200,
+    int height = 200,
   }) async {
     final pictureRecorder = PictureRecorder();
     final canvas = Canvas(pictureRecorder);
     painter(canvas);
     final picture = pictureRecorder.endRecording();
-    final image = await picture.toImage(size, size);
+    final image = await picture.toImage(width, height);
     final bytes = await image.toByteData(format: ImageByteFormat.png);
     if (bytes == null) return;
-
     await addImage(id, bytes.buffer.asUint8List());
   }
 
