@@ -21,11 +21,11 @@ class StyleControllerAndroid extends StyleController {
       );
     }
 
-    JObject? jFilter;
+    jni.Expression? jFilter;
     if (layer.filter case final List<Object> filter) {
       final jFilterString = jsonEncode(filter).toJString()..releasedBy(arena);
-      jFilter = jni.Helpers.INSTANCE.parseExpression(jFilterString)
-        ..releasedBy(arena);
+      jFilter = jni.Expression$Converter.convert(jFilterString)
+        ?..releasedBy(arena);
     }
     JString? jSourceLayer;
     if (layer is StyleLayerWithSource) {

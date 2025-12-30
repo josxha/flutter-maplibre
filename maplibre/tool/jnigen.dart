@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:jnigen/jnigen.dart';
+import 'package:jnigen/src/elements/j_elements.dart' as j show Method, Visitor;
 
 void main(List<String> args) {
   final packageRoot = Platform.script.resolve('../');
@@ -32,7 +33,7 @@ void main(List<String> args) {
         'android.widget.FrameLayout',
         'android.view.ViewGroup',
         'com.github.josxha.maplibre.FlutterApi',
-        'com.github.josxha.maplibre.Helpers',
+        // 'com.github.josxha.maplibre.Helpers',
         'com.github.josxha.maplibre.MapLibreRegistry',
         'java.net.URI',
         'java.net.URL',
@@ -60,12 +61,25 @@ void main(List<String> args) {
         'org.maplibre.android.offline.OfflineRegionError',
         'org.maplibre.android.offline.OfflineRegionStatus',
         'org.maplibre.android.offline.OfflineTilePyramidRegionDefinition',
+        'org.maplibre.android.style.expressions.Expression',
         'org.maplibre.android.style.layers',
         'org.maplibre.android.style.sources',
         'org.maplibre.geojson.Feature',
         'com.google.gson.Gson',
         'com.google.gson.JsonObject',
       ],
+      visitors: [_RenameVisitor()],
     ),
   );
+}
+
+class _RenameVisitor extends j.Visitor {
+  @override
+  void visitMethod(j.Method method) {
+    super.visitMethod(method);
+    // https://github.com/dart-lang/native/issues/2903#issuecomment-3695196951
+    if (method.originalName == 'bool') {
+      method.name = 'bool_';
+    }
+  }
 }
