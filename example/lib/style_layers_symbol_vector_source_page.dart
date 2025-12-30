@@ -34,7 +34,7 @@ class _StyleLayersSymbolVectorSourcePageState
           );
           await style.addSource(vectorSource);
 
-          // display the image on the map
+          // display the labels on the map
           await style.addLayer(
             const SymbolStyleLayer(
               id: 'centroid-labels',
