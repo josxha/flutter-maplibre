@@ -12,6 +12,7 @@ import 'package:maplibre_example/layers_marker_page.dart';
 import 'package:maplibre_example/layers_mixed_page.dart';
 import 'package:maplibre_example/layers_polygon_page.dart';
 import 'package:maplibre_example/layers_polyline_page.dart';
+import 'package:maplibre_example/layers_widget_marker_page.dart';
 import 'package:maplibre_example/offline_page.dart';
 import 'package:maplibre_example/parameters_page.dart';
 import 'package:maplibre_example/permissions_page.dart';
@@ -147,6 +148,11 @@ class MenuPage extends StatelessWidget {
                   label: 'Markers',
                   iconData: Icons.location_on,
                   location: LayersMarkerPage.location,
+                ),
+                ItemCard(
+                  label: 'Widget Markers',
+                  iconData: Icons.widgets,
+                  location: LayersWidgetMarkerPage.location,
                 ),
                 ItemCard(
                   label: 'Polygons',

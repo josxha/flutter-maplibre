@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
@@ -80,6 +81,33 @@ abstract class StyleController {
     await addImage(id, bytes);
   }
 
+  /// Create an image from a [Canvas] and add it to the map with the given [id].
+  ///
+  /// The [painter] function receives a [Canvas] to draw on.
+  ///
+  /// The [width] and [height] defines the size of the resulting image
+  /// in pixels.
+  Future<void> addImageFromCanvas({
+    required String id,
+    required void Function(Canvas canvas) painter,
+    int width = 200,
+    int height = 200,
+  }) async {
+    final pictureRecorder = PictureRecorder();
+    final canvas = Canvas(pictureRecorder);
+    painter(canvas);
+    final picture = pictureRecorder.endRecording();
+    final image = await picture.toImage(width, height);
+    final bytes = await image.toByteData(format: ImageByteFormat.png);
+    if (bytes == null) {
+      debugPrint(
+        'addImageFromCanvas: Failed to convert image to bytes for id "$id".',
+      );
+      return;
+    }
+    await addImage(id, bytes.buffer.asUint8List());
+  }
+
   /// Create an image from [IconData] and add it to the map with the given [id].
   ///
   /// The [size] parameter defines the width and height of the resulting image
@@ -93,28 +121,93 @@ abstract class StyleController {
     int size = 200,
     Color color = const Color(0xFF000000),
   }) async {
-    final pictureRecorder = PictureRecorder();
-    final canvas = Canvas(pictureRecorder);
+    await addImageFromCanvas(
+      id: id,
+      width: size,
+      height: size,
+      painter: (canvas) {
+        TextPainter(textDirection: TextDirection.ltr)
+          ..text = TextSpan(
+            text: String.fromCharCode(iconData.codePoint),
+            style: TextStyle(
+              letterSpacing: 0,
+              fontSize: size.toDouble(),
+              fontFamily: iconData.fontFamily,
+              package: iconData.fontPackage,
+              color: color,
+            ),
+          )
+          ..layout()
+          ..paint(canvas, Offset.zero);
+      },
+    );
+  }
 
-    TextPainter(textDirection: TextDirection.ltr)
-      ..text = TextSpan(
-        text: String.fromCharCode(iconData.codePoint),
-        style: TextStyle(
-          letterSpacing: 0,
-          fontSize: size.toDouble(),
-          fontFamily: iconData.fontFamily,
-          package: iconData.fontPackage,
-          color: color,
-        ),
-      )
-      ..layout()
-      ..paint(canvas, Offset.zero);
+  /// Create an image from a [Widget] and add it to the map with the given [id].
+  ///
+  /// This method is inspired by the
+  /// [widget_to_marker](https://pub.dev/packages/widget_to_marker) package.
+  Future<void> addImageFromWidget({
+    required String id,
+    required Widget widget,
+    Size? logicalSize,
+    Size? imageSize,
+    TextDirection textDirection = TextDirection.ltr,
+  }) async {
+    final rb = RepaintBoundary(
+      child: MediaQuery(
+        data: const MediaQueryData(),
+        child: Directionality(textDirection: textDirection, child: widget),
+      ),
+    );
 
-    final picture = pictureRecorder.endRecording();
-    final image = await picture.toImage(size, size);
+    final view = PlatformDispatcher.instance.views.first;
+
+    final repaintBoundary = RenderRepaintBoundary();
+    logicalSize ??= view.physicalSize / view.devicePixelRatio;
+    imageSize ??= view.physicalSize;
+
+    final renderView = RenderView(
+      view: view,
+      child: RenderPositionedBox(child: repaintBoundary),
+      configuration: ViewConfiguration(
+        physicalConstraints:
+            BoxConstraints.tight(logicalSize) * view.devicePixelRatio,
+        logicalConstraints: BoxConstraints.tight(logicalSize),
+        devicePixelRatio: view.devicePixelRatio,
+      ),
+    );
+
+    final pipelineOwner = PipelineOwner();
+    final buildOwner = BuildOwner(focusManager: FocusManager());
+
+    pipelineOwner.rootNode = renderView;
+    renderView.prepareInitialFrame();
+
+    final rootElement = RenderObjectToWidgetAdapter<RenderBox>(
+      container: repaintBoundary,
+      child: rb,
+    ).attachToRenderTree(buildOwner);
+
+    buildOwner.buildScope(rootElement);
+    buildOwner.finalizeTree();
+
+    pipelineOwner.flushLayout();
+    pipelineOwner.flushCompositingBits();
+    pipelineOwner.flushPaint();
+
+    final image = await repaintBoundary.toImage(
+      pixelRatio: imageSize.width / logicalSize.width,
+    );
     final bytes = await image.toByteData(format: ImageByteFormat.png);
-    if (bytes == null) return;
-
+    buildOwner.finalizeTree();
+    if (bytes == null) {
+      debugPrint(
+        'StyleController.addWidgetImage: failed to convert widget to '
+        'image bytes for id "$id".',
+      );
+      return;
+    }
     await addImage(id, bytes.buffer.asUint8List());
   }
 
