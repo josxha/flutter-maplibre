@@ -20,19 +20,17 @@ class OfflineManagerIos extends OfflineManagerNative {
     return OfflineManagerIos(storage);
   }
 
-  // TODO: It is currently not possible to use callbacks via ObjectiveC bindings. See https://github.com/dart-lang/native/issues/1475
-
-  /*@override
+  @override
   Future<void> clearAmbientCache() async {
     final completer = Completer<void>();
-    _storage.clearAmbientCacheWithCompletionHandler_(
+    _storage.clearAmbientCacheWithCompletionHandler(
       ObjCBlock_ffiVoid_NSError.listener((error) {
-        if (error != null) completer.completeError(error);
-        completer.complete();
+        // if (error != null) completer.completeError(error);
+        // completer.complete();
       }),
     );
     return completer.future;
-  }*/
+  }
 
   @override
   void dispose() {}
