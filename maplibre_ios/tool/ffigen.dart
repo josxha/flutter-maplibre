@@ -72,20 +72,6 @@ void main(List<String> args) {
         }[decl.originalName],
         includeMember: (declaration, member) => true,
       ),
-      /*memberFilterMap: {
-        'UIResponder': MemberFilter(exclude: ['copy:']),
-        'MLNMapView': MemberFilter(exclude: ['initWithFrame:']),
-      },
-      memberRenameMap: {
-        'MLNSource': {'initWithIdentifier:': 'initWithIdentifier_'},
-        'MLNMapView': {
-          'convertPoint:toCoordinateFromView:': 'convertPoint_',
-          'convertRect:toCoordinateBoundsFromView:': 'convertRect_',
-        },
-        'UIPointerStyle': {
-          'styleWithShape:constrainedAxes:': 'styleWithShape_',
-        },
-      },*/
     ),
     enums: Enums(style: (decl, suggestedStyle) => EnumStyle.intConstants),
   );
