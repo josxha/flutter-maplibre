@@ -21,44 +21,72 @@ class StyleControllerAndroid extends StyleController {
       );
     }
 
-    final jLayer = switch (layer) {
-      FillStyleLayer() => jni.FillLayer(
-        jId,
-        layer.sourceId.toJString()..releasedBy(arena),
-      )..setSourceLayer(layer.sourceLayerId?.toJString()),
-      CircleStyleLayer() => jni.CircleLayer(
-        jId,
-        layer.sourceId.toJString()..releasedBy(arena),
-      )..setSourceLayer(layer.sourceLayerId?.toJString()),
-      BackgroundStyleLayer() => jni.BackgroundLayer(layer.id.toJString()),
-      FillExtrusionStyleLayer() => jni.FillExtrusionLayer(
-        jId,
-        layer.sourceId.toJString()..releasedBy(arena),
-      )..setSourceLayer(layer.sourceLayerId?.toJString()),
-      HeatmapStyleLayer() => jni.HeatmapLayer(
-        jId,
-        layer.sourceId.toJString()..releasedBy(arena),
-      )..setSourceLayer(layer.sourceLayerId?.toJString()),
-      HillshadeStyleLayer() => jni.HillshadeLayer(
-        jId,
-        layer.sourceId.toJString()..releasedBy(arena),
-      )..setSourceLayer(layer.sourceLayerId?.toJString()),
-      LineStyleLayer() => jni.LineLayer(
-        jId,
-        layer.sourceId.toJString()..releasedBy(arena),
-      )..setSourceLayer(layer.sourceLayerId?.toJString()),
-      RasterStyleLayer() => jni.RasterLayer(
-        jId,
-        layer.sourceId.toJString()..releasedBy(arena),
-      )..setSourceLayer(layer.sourceLayerId?.toJString()),
-      SymbolStyleLayer() => jni.SymbolLayer(
-        jId,
-        layer.sourceId.toJString()..releasedBy(arena),
-      )..setSourceLayer(layer.sourceLayerId?.toJString()),
-      _ => throw UnimplementedError(
-        'The Layer is not supported: ${layer.runtimeType}',
-      ),
-    };
+    JString? jSourceLayer;
+    if (layer is StyleLayerWithSource) {
+      if (layer.sourceLayerId case final String id) {
+        jSourceLayer = id.toJString()..releasedBy(arena);
+      }
+    }
+
+    final jni.Layer jLayer;
+    switch (layer) {
+      case StyleLayerWithSource():
+        final jSourceId = layer.sourceId.toJString()..releasedBy(arena);
+        switch (layer) {
+          case FillStyleLayer():
+            final jFillLayer = jni.FillLayer(jId, jSourceId);
+            if (jSourceLayer != null) jFillLayer.setSourceLayer(jSourceLayer);
+            jLayer = jFillLayer;
+          case CircleStyleLayer():
+            final jCircleLayer = jni.CircleLayer(jId, jSourceId);
+            if (jSourceLayer != null) jCircleLayer.setSourceLayer(jSourceLayer);
+            jLayer = jCircleLayer;
+          case FillExtrusionStyleLayer():
+            final jFillExtrusionLayer = jni.FillExtrusionLayer(jId, jSourceId);
+            if (jSourceLayer != null) {
+              jFillExtrusionLayer.setSourceLayer(jSourceLayer);
+            }
+            jLayer = jFillExtrusionLayer;
+          case HeatmapStyleLayer():
+            final jHeatmapLayer = jni.HeatmapLayer(jId, jSourceId);
+            if (jSourceLayer != null) {
+              jHeatmapLayer.setSourceLayer(jSourceLayer);
+            }
+            jLayer = jHeatmapLayer;
+          case HillshadeStyleLayer():
+            final jHillshadeLayer = jni.HillshadeLayer(jId, jSourceId);
+            if (jSourceLayer != null) {
+              jHillshadeLayer.setSourceLayer(jSourceLayer);
+            }
+            jLayer = jHillshadeLayer;
+          case LineStyleLayer():
+            final jLineLayer = jni.LineLayer(jId, jSourceId);
+            if (jSourceLayer != null) jLineLayer.setSourceLayer(jSourceLayer);
+            jLayer = jLineLayer;
+          case RasterStyleLayer():
+            final jRasterLayer = jni.RasterLayer(jId, jSourceId);
+            if (jSourceLayer != null) jRasterLayer.setSourceLayer(jSourceLayer);
+            jLayer = jRasterLayer;
+          case SymbolStyleLayer():
+            final jSymbolLayer = jni.SymbolLayer(jId, jSourceId);
+            if (jSourceLayer != null) jSymbolLayer.setSourceLayer(jSourceLayer);
+            jLayer = jSymbolLayer;
+          default:
+            throw UnimplementedError(
+              'The Layer is not supported: ${layer.runtimeType}',
+            );
+        }
+      default:
+        switch (layer) {
+          case BackgroundStyleLayer():
+            jLayer = jni.BackgroundLayer(jId);
+          default:
+            throw UnimplementedError(
+              'The Layer is not supported: ${layer.runtimeType}',
+            );
+        }
+    }
+
     jLayer.setMinZoom(layer.minZoom);
     jLayer.setMaxZoom(layer.maxZoom);
 
