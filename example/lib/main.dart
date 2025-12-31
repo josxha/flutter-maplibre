@@ -66,8 +66,6 @@ class MyApp extends StatelessWidget {
         PermissionsPage.location: (context) => const PermissionsPage(),
         StyleLayersSymbolPage.location: (context) =>
             const StyleLayersSymbolPage(),
-        StyleLayersSymbolVectorSourcePage.location: (context) =>
-            const StyleLayersSymbolVectorSourcePage(),
         StyleLayersCirclePage.location: (context) =>
             const StyleLayersCirclePage(),
         StyleLayersHeatmapPage.location: (context) =>

@@ -52,10 +52,6 @@ class StyleControllerIos extends StyleController {
           final expression = jsonEncode(filter).toNSString();
           filterPredicate = Helpers.parsePredicateWithRaw(expression);
         }
-        NSString? ffiSourceLayerId;
-        if (layer.sourceLayerId case final String id) {
-          ffiSourceLayerId = id.toNSString();
-        }
         switch (layer) {
           case FillStyleLayer():
             ffiLayer = MLNFillStyleLayer.new$()
