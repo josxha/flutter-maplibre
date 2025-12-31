@@ -85,6 +85,12 @@ class StyleControllerIos extends StyleController {
     ffiStyleLayer.setProperties(layer.paint);
     ffiStyleLayer.setProperties(layer.layout);
 
+    if (layer is StyleLayerWithSource && layer.sourceLayerId != null) {
+      (ffiStyleLayer as MLNVectorStyleLayer).sourceLayerIdentifier = layer
+          .sourceLayerId!
+          .toNSString();
+    }
+
     if (belowLayerId case final String id) {
       final belowLayer = _ffiStyle.layerWithIdentifier(id.toNSString());
       if (belowLayer == null) {
