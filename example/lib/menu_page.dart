@@ -25,7 +25,7 @@ import 'package:maplibre_example/style_layers_hillshade_page.dart';
 import 'package:maplibre_example/style_layers_line_page.dart';
 import 'package:maplibre_example/style_layers_raster_page.dart';
 import 'package:maplibre_example/style_layers_symbol_page.dart';
-import 'package:maplibre_example/style_layers_vector_page.dart';
+import 'package:maplibre_example/style_sources_vector_page.dart';
 import 'package:maplibre_example/styled_map_page.dart';
 import 'package:maplibre_example/translucent_map_page.dart';
 import 'package:maplibre_example/two_maps_page.dart';
@@ -167,6 +167,18 @@ class MenuPage extends StatelessWidget {
                 ),
               ],
             ),
+            const SliverToBoxAdapter(child: SectionTitle('Style Sources')),
+            SliverGrid.extent(
+              maxCrossAxisExtent: 150,
+              childAspectRatio: 1.5,
+              children: const [
+                ItemCard(
+                  label: 'Vector',
+                  iconData: Icons.category,
+                  location: StyleSourcesVectorPage.location,
+                ),
+              ],
+            ),
             const SliverToBoxAdapter(child: SectionTitle('Style Layers')),
             SliverGrid.extent(
               maxCrossAxisExtent: 150,
@@ -211,11 +223,6 @@ class MenuPage extends StatelessWidget {
                   label: 'Symbol',
                   iconData: Icons.emoji_emotions,
                   location: StyleLayersSymbolPage.location,
-                ),
-                ItemCard(
-                  label: 'Vector',
-                  iconData: Icons.category,
-                  location: StyleLayersVectorPage.location,
                 ),
               ],
             ),

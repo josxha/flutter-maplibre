@@ -4,20 +4,20 @@ import 'package:maplibre/maplibre.dart';
 import 'package:maplibre_example/style_layers_symbol_page.dart';
 
 @immutable
-class StyleLayersVectorPage extends StatefulWidget {
-  const StyleLayersVectorPage({super.key});
+class StyleSourcesVectorPage extends StatefulWidget {
+  const StyleSourcesVectorPage({super.key});
 
-  static const location = '/style-layers/vector';
+  static const location = '/style-sources/vector';
 
   @override
-  State<StyleLayersVectorPage> createState() => _StyleLayersVectorPageState();
+  State<StyleSourcesVectorPage> createState() => _StyleSourcesVectorPageState();
 }
 
-class _StyleLayersVectorPageState extends State<StyleLayersVectorPage> {
+class _StyleSourcesVectorPageState extends State<StyleSourcesVectorPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Vector Style Layer')),
+      appBar: AppBar(title: const Text('Vector Source')),
       body: MapLibreMap(
         options: const MapOptions(
           initZoom: 2,
@@ -38,7 +38,6 @@ class _StyleLayersVectorPageState extends State<StyleLayersVectorPage> {
             const vectorSource = VectorSource(
               id: sourceId,
               url: 'https://demotiles.maplibre.org/tiles/tiles.json',
-              // sourceLayer: 'centroids', // it doesn't work too
             );
             await style.addSource(vectorSource);
 
