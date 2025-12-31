@@ -1,3 +1,31 @@
+## 0.3.3
+
+This release brings stability improvements and a couple of new features.
+A big thanks to @markszente and @BartoszStasiurka for their contributions in
+this release!
+
+### New Features
+
+- update MapLibre Native on iOS
+  to [6.21](https://github.com/maplibre/maplibre-native/blob/main/platform/ios/CHANGELOG.md#6210)
+- update
+  to [ffigen v20](https://pub.dev/packages/ffigen/changelog#2000), [objective_c v9](https://pub.dev/packages/objective_c/changelog#900)
+- Add `padding` to `fitBounds()` on iOS.
+- Render a Flutter `Widget` or `Canvas` into an image and use it as marker on
+  the map.
+- Add `sourceLayerId` to style layers for vector sources.
+
+### Bug Fixes
+
+- Fix iOS can't load style from file.
+- Add missing MapEventCameraIdle, MapEventStartMoveCamera events on iOS.
+- Fix queryLayers() throws exception on iOS when receiving numeric layer IDs.
+- Fix `onCameraMoved` callback returning altitude instead of zoom level on iOS.
+- Fix invisible map on android when coming back from background.
+
+Full
+Changelog: [v0.3.2...v0.3.3](https://github.com/josxha/flutter-maplibre/compare/v0.3.2...v0.3.3)
+
 ## 0.3.2
 
 Maintenance release that optimizes the package on `pub.dev` and fixes a bug
@@ -5,7 +33,8 @@ in release builds on Android.
 
 ### New Features
 
-- Upgrade MapLibre Native on Android to [12.2](https://github.com/maplibre/maplibre-native/blob/main/platform/android/CHANGELOG.md#1220).
+- Upgrade MapLibre Native on Android
+  to [12.2](https://github.com/maplibre/maplibre-native/blob/main/platform/android/CHANGELOG.md#1220).
 - Optimize package size on `pub.dev` by restructuring the repository.
 - Upgrade `jni` / `jnigen` to ^0.15.1.
 
