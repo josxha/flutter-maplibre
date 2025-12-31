@@ -60,22 +60,18 @@ class StyleControllerIos extends StyleController {
           case FillStyleLayer():
             ffiLayer = MLNFillStyleLayer.new$()
               ..initWithIdentifier(ffiId, source: ffiSource)
-              ..sourceLayerIdentifier = ffiSourceLayerId
               ..predicate = filterPredicate;
           case CircleStyleLayer():
             ffiLayer = MLNCircleStyleLayer.new$()
               ..initWithIdentifier(ffiId, source: ffiSource)
-              ..sourceLayerIdentifier = ffiSourceLayerId
               ..predicate = filterPredicate;
           case FillExtrusionStyleLayer():
             ffiLayer = MLNFillExtrusionStyleLayer.new$()
               ..initWithIdentifier(ffiId, source: ffiSource)
-              ..sourceLayerIdentifier = ffiSourceLayerId
               ..predicate = filterPredicate;
           case HeatmapStyleLayer():
             ffiLayer = MLNHeatmapStyleLayer.new$()
               ..initWithIdentifier(ffiId, source: ffiSource)
-              ..sourceLayerIdentifier = ffiSourceLayerId
               ..predicate = filterPredicate;
           case HillshadeStyleLayer():
             ffiLayer = MLNHillshadeStyleLayer.new$()
@@ -84,7 +80,6 @@ class StyleControllerIos extends StyleController {
           case LineStyleLayer():
             ffiLayer = MLNLineStyleLayer.new$()
               ..initWithIdentifier(ffiId, source: ffiSource)
-              ..sourceLayerIdentifier = ffiSourceLayerId
               ..predicate = filterPredicate;
           case RasterStyleLayer():
             ffiLayer = MLNRasterStyleLayer.new$()
@@ -93,7 +88,6 @@ class StyleControllerIos extends StyleController {
           case SymbolStyleLayer():
             ffiLayer = MLNSymbolStyleLayer.new$()
               ..initWithIdentifier(ffiId, source: ffiSource)
-              ..sourceLayerIdentifier = ffiSourceLayerId
               ..predicate = filterPredicate;
         }
     }
@@ -124,7 +118,7 @@ class StyleControllerIos extends StyleController {
     }
 
     if (layer is StyleLayerWithSource && layer.sourceLayerId != null) {
-      (ffiStyleLayer as MLNVectorStyleLayer).sourceLayerIdentifier = layer
+      (ffiLayer as MLNVectorStyleLayer).sourceLayerIdentifier = layer
           .sourceLayerId!
           .toNSString();
     }
