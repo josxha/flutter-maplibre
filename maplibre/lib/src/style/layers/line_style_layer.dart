@@ -1,6 +1,6 @@
 part of 'style_layer.dart';
 
-/// A layer that contains circles.
+/// A layer that contains lines.
 ///
 /// https://maplibre.org/maplibre-style-spec/layers/#circle
 ///
@@ -15,6 +15,8 @@ final class LineStyleLayer extends StyleLayerWithSource {
     super.paint,
     super.minZoom = 0,
     super.maxZoom = 24,
+    super.filter,
+    super.metadata,
     super.sourceLayerId,
   });
 
