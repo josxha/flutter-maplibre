@@ -33,6 +33,7 @@ import 'package:maplibre_example/widget_layer_interactive_page.dart';
 import 'package:maplibre_example/widget_layer_page.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
