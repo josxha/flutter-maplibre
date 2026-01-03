@@ -56,4 +56,18 @@ class MapCamera {
 
   @override
   int get hashCode => Object.hash(center, zoom, bearing, pitch);
+
+  /// Returns a copy of this [MapCamera] with the given fields replaced by the
+  /// new values.
+  MapCamera copyWith({
+    Geographic? center,
+    double? zoom,
+    double? bearing,
+    double? pitch,
+  }) => MapCamera(
+    center: center ?? this.center,
+    zoom: zoom ?? this.zoom,
+    bearing: bearing ?? this.bearing,
+    pitch: pitch ?? this.pitch,
+  );
 }
