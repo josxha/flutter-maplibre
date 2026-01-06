@@ -21,7 +21,7 @@ jobs:
       - name: "Install SwiftFormat"
         run: brew install swiftformat
       - name: "dart fix"
-      - run: dart fix --apply
+        run: dart fix --apply
       - name: "Format Swift code"
         run: swiftformat --verbose . --reporter github-actions-log --swiftversion 6 --disable trailingCommas
       - name: ktlint
