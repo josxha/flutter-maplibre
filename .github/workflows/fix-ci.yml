@@ -20,19 +20,16 @@ jobs:
           cache: true
       - name: "Get Flutter dependencies"
         run: dart pub get
-      - name: "Install SwiftFormat"
-        run: brew install swiftformat
       - name: "dart fix"
         run: dart fix --apply
+      - name: "Install SwiftFormat"
+        run: brew install swiftformat
       - name: "Format Swift code"
         run: swiftformat --verbose . --reporter github-actions-log --swiftversion 6 --disable trailingCommas
-      - name: ktlint
-        uses: ScaCap/action-ktlint@v1
-        with:
-          github_token: ${{ secrets.github_token }}
-          reporter: github-pr-check
-          filter_mode: nofilter
-          file_glob: "!**/*.g.*"
+      - name: "Install ktlint"
+        run: brew install ktlint
+      - name: Run ktlint
+        run: ktlint -F
       - name: Run pigeon
         run: sh ./pigeons/run_code_gen.sh
       - name: Build example APK
