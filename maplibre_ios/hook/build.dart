@@ -15,12 +15,11 @@ void main(List<String> args) async {
     }
 
     final spm = await _resolveSpmPaths(
-      useSimulatorSlice:
-          input.config.code.iOS.targetSdk == IOSSdk.iPhoneSimulator,
+      useSimulator: input.config.code.iOS.targetSdk == IOSSdk.iPhoneSimulator,
     );
     final builder = CBuilder.library(
       name: 'maplibre_ffi',
-      assetName: 'maplibre_ffi.dylib',
+      assetName: 'maplibre_ffi.g.dart',
       sources: ['lib/maplibre_ffi.g.dart.m'],
       language: Language.objectiveC,
       includes: [spm.headersDir],
@@ -40,7 +39,7 @@ class _SpmPaths {
   final String frameworkDir;
 }
 
-Future<_SpmPaths> _resolveSpmPaths({required bool useSimulatorSlice}) async {
+Future<_SpmPaths> _resolveSpmPaths({required bool useSimulator}) async {
   final envHeaders = Platform.environment['MAPLIBRE_SPM_HEADERS'];
   final envFramework = Platform.environment['MAPLIBRE_SPM_FRAMEWORK'];
   if (envHeaders != null && envFramework != null) {
@@ -54,9 +53,7 @@ Future<_SpmPaths> _resolveSpmPaths({required bool useSimulatorSlice}) async {
     Platform.environment['HOME'] ?? '',
     'Library/Developer/Xcode/DerivedData',
   );
-  final archSegment = useSimulatorSlice
-      ? 'ios-arm64_x86_64-simulator'
-      : 'ios-arm64';
+  final archSegment = useSimulator ? 'ios-arm64_x86_64-simulator' : 'ios-arm64';
   final findArgs = [
     derivedData,
     '-path',
