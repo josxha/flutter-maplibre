@@ -4,7 +4,7 @@ import 'package:ffigen/ffigen.dart';
 
 void main(List<String> args) {
   final packageRoot = Platform.script.resolve('../');
-  // final frameworkPath = packageRoot.resolve('.dart_tool/maplibre_xcframework/MapLibre.xcframework/ios-arm64/');
+  final frameworkPath = packageRoot.resolve('.dart_tool/maplibre_xcframework/MapLibre.xcframework/ios-arm64/');
   final generator = FfiGenerator(
     output: Output(
       dartFile: packageRoot.resolve('lib/maplibre_ffi.g.dart'),
@@ -22,10 +22,10 @@ void main(List<String> args) {
       ],
       compilerOptions: [
         // TODO cannot use the headers from SPM, maybe because of missing debug symbols
-        // '-F$frameworkPath',
-        // '-I${frameworkPath}MapLibre.framework/Headers',
-        '-Fios/.build/MapLibre.xcframework/ios-arm64/',
-        '-Iios/.build/MapLibre.xcframework/ios-arm64/MapLibre.framework/Headers',
+        '-F$frameworkPath',
+        '-I${frameworkPath}MapLibre.framework/Headers',
+        // '-Fios/.build/MapLibre.xcframework/ios-arm64/',
+        // '-Iios/.build/MapLibre.xcframework/ios-arm64/MapLibre.framework/Headers',
         '-isysroot',
         '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk',
       ],
