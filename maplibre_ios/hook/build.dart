@@ -17,11 +17,7 @@ void main(List<String> args) async {
       packageRoot: input.packageRoot.toFilePath(),
       useSimulator: input.config.code.iOS.targetSdk == IOSSdk.iPhoneSimulator,
     );
-    final headersDir = p.join(
-      frameworkPath,
-      'MapLibre.framework',
-      'Headers',
-    );
+    final headersDir = p.join(frameworkPath, 'MapLibre.framework', 'Headers');
     final builder = CBuilder.library(
       name: 'maplibre_ffi',
       assetName: 'maplibre_ffi.g.dart',
@@ -74,17 +70,20 @@ Future<String> _resolveSpmPaths({
     throw Exception('Expected MapLibre ZIP not found at $zipPath');
   }
 
-  final zipBase = p.basename(zipPath);
+  // extract resolved MapLibre ZIP from SPM artifacts if needed
   final extractionRoot = p.join(
     packageRoot,
     '.dart_tool',
-    'maplibre_xcframeworks',
-    zipBase,
+    'maplibre_xcframework',
   );
-  final extractedXcframework = p.join(extractionRoot, 'MapLibre.xcframework');
-
-  // extract resolved MapLibre ZIP from SPM artifacts if needed
-  if (!Directory(extractedXcframework).existsSync()) {
+  final versionPath = p.join(extractionRoot, 'version.txt');
+  if (File(versionPath).existsSync()) {
+    final existingVersion = File(versionPath).readAsStringSync();
+    if (existingVersion != version) {
+      await Directory(extractionRoot).delete(recursive: true);
+    }
+  }
+  if (!Directory(extractionRoot).existsSync()) {
     await Directory(extractionRoot).create(recursive: true);
     final unzipResult = await Process.run('unzip', [
       '-o',
@@ -95,11 +94,16 @@ Future<String> _resolveSpmPaths({
     if (unzipResult.exitCode != 0) {
       throw Exception('Failed to extract MapLibre zip: ${unzipResult.stderr}');
     }
+    await File(versionPath).writeAsString(version);
   }
 
   // Return paths to headers and framework for the desired architecture.
   final archSegment = useSimulator ? 'ios-arm64_x86_64-simulator' : 'ios-arm64';
-  final frameworkDir = p.join(extractedXcframework, archSegment);
+  final frameworkDir = p.join(
+    extractionRoot,
+    'MapLibre.xcframework',
+    archSegment,
+  );
   if (!Directory(frameworkDir).existsSync()) {
     throw Exception(
       'Expected MapLibre framework directory not found at $frameworkDir',
