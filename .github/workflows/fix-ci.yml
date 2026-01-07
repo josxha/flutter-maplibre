@@ -1,0 +1,53 @@
+name: Fix CI
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  format-dart:
+    name: "Fix CI"
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: subosito/flutter-action@v2
+        with:
+          cache: true
+      - name: "Get Flutter dependencies"
+        run: dart pub get
+      - name: "dart fix"
+        run: dart fix --apply
+      - name: "Install SwiftFormat"
+        run: brew install swiftformat
+      - name: "Format Swift code"
+        run: swiftformat --verbose . --reporter github-actions-log --swiftversion 6 --disable trailingCommas
+      - name: "Install ktlint"
+        run: brew install ktlint
+      - name: Run ktlint
+        run: ktlint -F
+      - name: Run pigeon
+        run: sh ./pigeons/run_code_gen.sh
+      - name: Build example APK
+        working-directory: example
+        run: flutter build apk
+      - name: Run jnigen
+        working-directory: maplibre
+        run: dart run tool/jnigen.dart
+      - name: dart format
+        run: dart format .
+      - name: Check difference
+        run: |
+          git add --all . && \
+          status=$(git status -s .) && \
+          echo $status && \
+          echo "GIT_STATUS=${status//$'\n'/\\n}" >> $GITHUB_ENV
+      - name: Push changes
+        if: "contains(env.GIT_STATUS, 'bodensee_navigator-v')"
+        run: |
+          git config --global user.email "action@github.com" && \
+          git config --global user.name "Github CI" && \
+          git commit -a -m "run codegen, format code" && \
+          git push
