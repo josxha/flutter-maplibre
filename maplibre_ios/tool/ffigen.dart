@@ -21,8 +21,9 @@ void main(List<String> args) {
         packageRoot.resolve('MapLibre.h'),
       ],
       compilerOptions: [
-        '-Fios/.build/MapLibre.xcframework/ios-arm64/',
-        '-Iios/.build/MapLibre.xcframework/ios-arm64/MapLibre.framework/Headers',
+        // or zip file from /Users/joscha/Library/Caches/org.swift.swiftpm/artifacts/https___github_com_maplibre_maplibre_native_releases_download_ios_v6_21_2_MapLibre_dynamic_xcframework_zip
+        '-F/Users/joscha/Library/Developer/Xcode/DerivedData/Runner-bfmejxnuzebocealvodgkkqwnvzx/SourcePackages/artifacts/maplibre-gl-native-distribution/MapLibre/MapLibre.xcframework/ios-arm64/',
+        '-I/Users/joscha/Library/Developer/Xcode/DerivedData/Runner-bfmejxnuzebocealvodgkkqwnvzx/SourcePackages/artifacts/maplibre-gl-native-distribution/MapLibre/MapLibre.xcframework/ios-arm64/MapLibre.framework/Headers',
         '-isysroot',
         '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk',
       ],

@@ -12218,73 +12218,73 @@ late final _sel_styleWithShape_ = objc.registerName("styleWithShape:");
 late final _sel_automaticStyle = objc.registerName("automaticStyle");
 
 /// UIHoverStyle
-extension type UIHoverStyle$1._(objc.ObjCObject object$) implements objc.ObjCObject,objc.NSObject,objc.NSCopying {
-  /// Constructs a [UIHoverStyle$1] that points to the same underlying object as [other].
-  UIHoverStyle$1.as(objc.ObjCObject other) : object$ = other {
+extension type UIHoverStyle._(objc.ObjCObject object$) implements objc.ObjCObject,objc.NSObject,objc.NSCopying {
+  /// Constructs a [UIHoverStyle] that points to the same underlying object as [other].
+  UIHoverStyle.as(objc.ObjCObject other) : object$ = other {
     objc.checkOsVersionInternal('UIHoverStyle', iOS: (false, (17, 0, 0)));
     assert(isA(object$));
   }
 
-  /// Constructs a [UIHoverStyle$1] that wraps the given raw object pointer.
-  UIHoverStyle$1.fromPointer(ffi.Pointer<objc.ObjCObjectImpl> other,
+  /// Constructs a [UIHoverStyle] that wraps the given raw object pointer.
+  UIHoverStyle.fromPointer(ffi.Pointer<objc.ObjCObjectImpl> other,
       {bool retain = false, bool release = false}) :
           object$ = objc.ObjCObject(other, retain: retain, release: release) {
     objc.checkOsVersionInternal('UIHoverStyle', iOS: (false, (17, 0, 0)));
     assert(isA(object$));
   }
 
-  /// Returns whether [obj] is an instance of [UIHoverStyle$1].
+  /// Returns whether [obj] is an instance of [UIHoverStyle].
   static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_UIHoverStyle);
 
   /// alloc
-  static UIHoverStyle$1 alloc() {
+  static UIHoverStyle alloc() {
     final $ret = _objc_msgSend_151sglz(_class_UIHoverStyle, _sel_alloc);
-    return UIHoverStyle$1.fromPointer($ret, retain: false, release: true);
+    return UIHoverStyle.fromPointer($ret, retain: false, release: true);
   }
 
 
   /// allocWithZone:
-  static UIHoverStyle$1 allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+  static UIHoverStyle allocWithZone(ffi.Pointer<objc.NSZone> zone) {
     final $ret = _objc_msgSend_1cwp428(_class_UIHoverStyle, _sel_allocWithZone_, zone);
-    return UIHoverStyle$1.fromPointer($ret, retain: false, release: true);
+    return UIHoverStyle.fromPointer($ret, retain: false, release: true);
   }
 
 
   /// automaticStyle
-  static UIHoverStyle$1 automaticStyle() {
+  static UIHoverStyle automaticStyle() {
   objc.checkOsVersionInternal('UIHoverStyle.automaticStyle', iOS: (false, (17, 0, 0)));
     final $ret = _objc_msgSend_151sglz(_class_UIHoverStyle, _sel_automaticStyle);
-    return UIHoverStyle$1.fromPointer($ret, retain: true, release: true);
+    return UIHoverStyle.fromPointer($ret, retain: true, release: true);
   }
 
 
   /// new
-  static UIHoverStyle$1 new$() {
+  static UIHoverStyle new$() {
     final $ret = _objc_msgSend_151sglz(_class_UIHoverStyle, _sel_new);
-    return UIHoverStyle$1.fromPointer($ret, retain: false, release: true);
+    return UIHoverStyle.fromPointer($ret, retain: false, release: true);
   }
 
 
   /// styleWithEffect:shape:
-  static UIHoverStyle$1 styleWithEffect(UIHoverEffect effect, {UIShape? shape}) {
+  static UIHoverStyle styleWithEffect(UIHoverEffect effect, {UIShape? shape}) {
   objc.checkOsVersionInternal('UIHoverStyle.styleWithEffect:shape:', iOS: (false, (17, 0, 0)));
     final $ret = _objc_msgSend_15qeuct(_class_UIHoverStyle, _sel_styleWithEffect_shape_, effect.ref.pointer, shape?.ref.pointer ?? ffi.nullptr);
-    return UIHoverStyle$1.fromPointer($ret, retain: true, release: true);
+    return UIHoverStyle.fromPointer($ret, retain: true, release: true);
   }
 
 
   /// styleWithShape:
-  static UIHoverStyle$1 styleWithShape(UIShape? shape) {
+  static UIHoverStyle styleWithShape(UIShape? shape) {
   objc.checkOsVersionInternal('UIHoverStyle.styleWithShape:', iOS: (false, (17, 0, 0)));
     final $ret = _objc_msgSend_1sotr3r(_class_UIHoverStyle, _sel_styleWithShape_, shape?.ref.pointer ?? ffi.nullptr);
-    return UIHoverStyle$1.fromPointer($ret, retain: true, release: true);
+    return UIHoverStyle.fromPointer($ret, retain: true, release: true);
   }
-  /// Returns a new instance of UIHoverStyle$1 constructed with the default `new` method.
-  UIHoverStyle$1() : this.as(new$().object$);
+  /// Returns a new instance of UIHoverStyle constructed with the default `new` method.
+  UIHoverStyle() : this.as(new$().object$);
 
 }
 
-extension UIHoverStyle$1$Methods on UIHoverStyle$1 {
+extension UIHoverStyle$Methods on UIHoverStyle {
 
   /// effect
   UIHoverEffect get effect {
@@ -12295,10 +12295,10 @@ extension UIHoverStyle$1$Methods on UIHoverStyle$1 {
 
 
   /// init
-  UIHoverStyle$1 init() {
+  UIHoverStyle init() {
   objc.checkOsVersionInternal('UIHoverStyle.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
     final $ret = _objc_msgSend_151sglz(object$.ref.retainAndReturnPointer(), _sel_init);
-    return UIHoverStyle$1.fromPointer($ret, retain: false, release: true);
+    return UIHoverStyle.fromPointer($ret, retain: false, release: true);
   }
 
 
@@ -12347,17 +12347,17 @@ late final _sel_hoverStyle = objc.registerName("hoverStyle");
 late final _sel_setHoverStyle_ = objc.registerName("setHoverStyle:");
 
 /// UIHoverStyle
-extension UIHoverStyle on UIView {
+extension UIHoverStyle$1 on UIView {
 
   /// hoverStyle
-  UIHoverStyle$1? get hoverStyle {
+  UIHoverStyle? get hoverStyle {
     final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_hoverStyle);
-    return $ret.address == 0 ? null : UIHoverStyle$1.fromPointer($ret, retain: true, release: true);
+    return $ret.address == 0 ? null : UIHoverStyle.fromPointer($ret, retain: true, release: true);
   }
 
 
   /// setHoverStyle:
-  set hoverStyle(UIHoverStyle$1? value) {
+  set hoverStyle(UIHoverStyle? value) {
 _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setHoverStyle_, value?.ref.pointer ?? ffi.nullptr);
 
   }
@@ -18362,7 +18362,7 @@ late final _sel_hiddenPointerStyle = objc.registerName("hiddenPointerStyle");
 late final _sel_systemPointerStyle = objc.registerName("systemPointerStyle");
 
 /// UIPointerStyle
-extension type UIPointerStyle._(objc.ObjCObject object$) implements objc.ObjCObject,UIHoverStyle$1,objc.NSCopying {
+extension type UIPointerStyle._(objc.ObjCObject object$) implements objc.ObjCObject,UIHoverStyle,objc.NSCopying {
   /// Constructs a [UIPointerStyle] that points to the same underlying object as [other].
   UIPointerStyle.as(objc.ObjCObject other) : object$ = other {
     objc.checkOsVersionInternal('UIPointerStyle', iOS: (false, (13, 4, 0)));
@@ -25545,16 +25545,22 @@ late final _sel_setScaleBarPosition_ = objc.registerName("setScaleBarPosition:")
 final _objc_msgSend_8fd115 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.UnsignedLong )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int )>();
 late final _sel_scaleBarMargins = objc.registerName("scaleBarMargins");
 late final _sel_setScaleBarMargins_ = objc.registerName("setScaleBarMargins:");
+late final _sel_showsCompassView = objc.registerName("showsCompassView");
+late final _sel_setShowsCompassView_ = objc.registerName("setShowsCompassView:");
 late final _sel_compassView = objc.registerName("compassView");
 late final _sel_compassViewPosition = objc.registerName("compassViewPosition");
 late final _sel_setCompassViewPosition_ = objc.registerName("setCompassViewPosition:");
 late final _sel_compassViewMargins = objc.registerName("compassViewMargins");
 late final _sel_setCompassViewMargins_ = objc.registerName("setCompassViewMargins:");
+late final _sel_showsLogoView = objc.registerName("showsLogoView");
+late final _sel_setShowsLogoView_ = objc.registerName("setShowsLogoView:");
 late final _sel_logoView = objc.registerName("logoView");
 late final _sel_logoViewPosition = objc.registerName("logoViewPosition");
 late final _sel_setLogoViewPosition_ = objc.registerName("setLogoViewPosition:");
 late final _sel_logoViewMargins = objc.registerName("logoViewMargins");
 late final _sel_setLogoViewMargins_ = objc.registerName("setLogoViewMargins:");
+late final _sel_showsAttributionButton = objc.registerName("showsAttributionButton");
+late final _sel_setShowsAttributionButton_ = objc.registerName("setShowsAttributionButton:");
 late final _sel_attributionButton = objc.registerName("attributionButton");
 late final _sel_attributionButtonPosition = objc.registerName("attributionButtonPosition");
 late final _sel_setAttributionButtonPosition_ = objc.registerName("setAttributionButtonPosition:");
@@ -25575,6 +25581,9 @@ late final _sel_tileLodPitchThreshold = objc.registerName("tileLodPitchThreshold
 late final _sel_setTileLodPitchThreshold_ = objc.registerName("setTileLodPitchThreshold:");
 late final _sel_tileLodZoomShift = objc.registerName("tileLodZoomShift");
 late final _sel_setTileLodZoomShift_ = objc.registerName("setTileLodZoomShift:");
+late final _sel_frustumOffset = objc.registerName("frustumOffset");
+late final _sel_setFrustumOffset_ = objc.registerName("setFrustumOffset:");
+late final _sel_disableLocationManager = objc.registerName("disableLocationManager");
 late final _protocol_MLNLocationManager = objc.getProtocol("MLNLocationManager");
 
 /// MLNLocationManager
@@ -25700,6 +25709,8 @@ late final _sel_setPanScrollingMode_ = objc.registerName("setPanScrollingMode:")
 final _objc_msgSend_k7jknj = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.UnsignedLong )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int )>();
 late final _sel_isRotateEnabled = objc.registerName("isRotateEnabled");
 late final _sel_setRotateEnabled_ = objc.registerName("setRotateEnabled:");
+late final _sel_toleranceForSnappingToNorth = objc.registerName("toleranceForSnappingToNorth");
+late final _sel_setToleranceForSnappingToNorth_ = objc.registerName("setToleranceForSnappingToNorth:");
 late final _sel_isPitchEnabled = objc.registerName("isPitchEnabled");
 late final _sel_setPitchEnabled_ = objc.registerName("setPitchEnabled:");
 late final _sel_anchorRotateOrZoomGesturesToCenterCoordinate = objc.registerName("anchorRotateOrZoomGesturesToCenterCoordinate");
@@ -27521,6 +27532,13 @@ _objc_msgSend_6p7ndb(object$.ref.pointer, _sel_deselectAnnotation_animated_, ann
   }
 
 
+  /// Disabled using a current location manager.
+  void disableLocationManager() {
+_objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_disableLocationManager);
+
+  }
+
+
   /// Whether the map view should display a heading calibration alert when necessary.
 /// The default value is `YES`.
   bool get displayHeadingCalibration {
@@ -27618,6 +27636,23 @@ _objc_msgSend_a85mgj(object$.ref.pointer, _sel_flyToCamera_withDuration_completi
 /// @param completion The block to execute after the animation finishes.
   void flyToCamera$3(MLNMapCamera camera, {required double withDuration,required double peakAltitude,objc.ObjCBlock<ffi.Void Function()>? completionHandler}) {
 _objc_msgSend_b0p9a0(object$.ref.pointer, _sel_flyToCamera_withDuration_peakAltitude_completionHandler_, camera.ref.pointer, withDuration, peakAltitude, completionHandler?.ref.pointer ?? ffi.nullptr);
+
+  }
+
+
+  /// Frustum offset used to disable rendering of elements at the edge of the screen
+/// 
+/// Offset applied to camera frustum and scissor rectangle. The camrea frustum is modified
+/// to avoid loading geometry that's behind UI elements at the top of the screen. The scissor
+/// rectangle is used to avoid shading fragments that are behind UI elements at the edges of
+/// the screen. All values are in logical pixels.
+  UIEdgeInsets get frustumOffset {
+    final $ptr = pkg_ffi.calloc<UIEdgeInsets>();
+    objc.useMsgSendVariants ? _objc_msgSend_ct4cu5Stret($ptr, object$.ref.pointer, _sel_frustumOffset) : $ptr.ref = _objc_msgSend_ct4cu5(object$.ref.pointer, _sel_frustumOffset);
+    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
+        ffi.sizeOf<UIEdgeInsets>(), finalizer: pkg_ffi.calloc.nativeFree);
+    return ffi.Struct.create<UIEdgeInsets>(
+        $finalizable);
 
   }
 
@@ -27900,8 +27935,6 @@ _objc_msgSend_b0p9a0(object$.ref.pointer, _sel_flyToCamera_withDuration_peakAlti
 
 
   /// The maximum bounds of the map that can be shown on screen.
-/// 
-/// @param MLNCoordinateBounds the bounds to constrain the screen to.
   MLNCoordinateBounds get maximumScreenBounds {
     final $ptr = pkg_ffi.calloc<MLNCoordinateBounds>();
     objc.useMsgSendVariants ? _objc_msgSend_ygoa6aStret($ptr, object$.ref.pointer, _sel_maximumScreenBounds) : $ptr.ref = _objc_msgSend_ygoa6a(object$.ref.pointer, _sel_maximumScreenBounds);
@@ -28642,6 +28675,18 @@ _objc_msgSend_1s56lr9(object$.ref.pointer, _sel_setDynamicNavigationCameraAnimat
   }
 
 
+  /// Frustum offset used to disable rendering of elements at the edge of the screen
+/// 
+/// Offset applied to camera frustum and scissor rectangle. The camrea frustum is modified
+/// to avoid loading geometry that's behind UI elements at the top of the screen. The scissor
+/// rectangle is used to avoid shading fragments that are behind UI elements at the edges of
+/// the screen. All values are in logical pixels.
+  set frustumOffset(UIEdgeInsets value) {
+_objc_msgSend_1g8fos5(object$.ref.pointer, _sel_setFrustumOffset_, value);
+
+  }
+
+
   /// A Boolean value that determines whether the user will receive haptic feedback
 /// for certain interactions with the map.
 /// 
@@ -28706,8 +28751,6 @@ _objc_msgSend_hwm8nu(object$.ref.pointer, _sel_setMaximumPitch_, value);
 
 
   /// The maximum bounds of the map that can be shown on screen.
-/// 
-/// @param MLNCoordinateBounds the bounds to constrain the screen to.
   set maximumScreenBounds(MLNCoordinateBounds value) {
 _objc_msgSend_9ay59k(object$.ref.pointer, _sel_setMaximumScreenBounds_, value);
 
@@ -28916,6 +28959,36 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setSelectedAnnotations_, value.re
 /// The default value of this property is `YES`.
   set shouldRequestAuthorizationToUseLocationServices(bool value) {
 _objc_msgSend_1s56lr9(object$.ref.pointer, _sel_setShouldRequestAuthorizationToUseLocationServices_, value);
+
+  }
+
+
+  /// A Boolean value indicating whether the map may display Attribution Button.
+/// 
+/// The view controlled by this property is available at `attributionButton`. The default value
+/// of this property is `YES`.
+  set showsAttributionButton(bool value) {
+_objc_msgSend_1s56lr9(object$.ref.pointer, _sel_setShowsAttributionButton_, value);
+
+  }
+
+
+  /// A Boolean value indicating whether the map may display Compass View.
+/// 
+/// The view controlled by this property is available at `compassView`. The default value
+/// of this property is `YES`.
+  set showsCompassView(bool value) {
+_objc_msgSend_1s56lr9(object$.ref.pointer, _sel_setShowsCompassView_, value);
+
+  }
+
+
+  /// A Boolean value indicating whether the map may display MapLibre logo.
+/// 
+/// The view controlled by this property is available at `logoView`. The default value
+/// of this property is `YES`.
+  set showsLogoView(bool value) {
+_objc_msgSend_1s56lr9(object$.ref.pointer, _sel_setShowsLogoView_, value);
 
   }
 
@@ -29145,6 +29218,17 @@ _objc_msgSend_hwm8nu(object$.ref.pointer, _sel_setTileLodScale_, value);
 /// average It is recommended to first configure the pixelRatio before adjusting TileLodZoomShift.
   set tileLodZoomShift(double value) {
 _objc_msgSend_hwm8nu(object$.ref.pointer, _sel_setTileLodZoomShift_, value);
+
+  }
+
+
+  /// The threshold, measured in degrees, that determines when the map's bearing will snap to north.
+/// For example, with a toleranceForSnappingToNorth of 7, if the user rotates the map within 7 degrees
+/// of north, the map will automatically snap to exact north.
+/// 
+/// The default value of this property is 7.
+  set toleranceForSnappingToNorth(double value) {
+_objc_msgSend_hwm8nu(object$.ref.pointer, _sel_setToleranceForSnappingToNorth_, value);
 
   }
 
@@ -29469,6 +29553,36 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_showAttribution_, sender.ref.poin
   }
 
 
+  /// A Boolean value indicating whether the map may display Attribution Button.
+/// 
+/// The view controlled by this property is available at `attributionButton`. The default value
+/// of this property is `YES`.
+  bool get showsAttributionButton {
+    return _objc_msgSend_91o635(object$.ref.pointer, _sel_showsAttributionButton);
+
+  }
+
+
+  /// A Boolean value indicating whether the map may display Compass View.
+/// 
+/// The view controlled by this property is available at `compassView`. The default value
+/// of this property is `YES`.
+  bool get showsCompassView {
+    return _objc_msgSend_91o635(object$.ref.pointer, _sel_showsCompassView);
+
+  }
+
+
+  /// A Boolean value indicating whether the map may display MapLibre logo.
+/// 
+/// The view controlled by this property is available at `logoView`. The default value
+/// of this property is `YES`.
+  bool get showsLogoView {
+    return _objc_msgSend_91o635(object$.ref.pointer, _sel_showsLogoView);
+
+  }
+
+
   /// A Boolean value indicating whether the map may display scale information.
 /// 
 /// The scale bar may not be shown at all zoom levels. The scale bar becomes visible
@@ -29657,6 +29771,17 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_showAttribution_, sender.ref.poin
 /// average It is recommended to first configure the pixelRatio before adjusting TileLodZoomShift.
   double get tileLodZoomShift {
     return objc.useMsgSendVariants ? _objc_msgSend_1ukqyt8Fpret(object$.ref.pointer, _sel_tileLodZoomShift) : _objc_msgSend_1ukqyt8(object$.ref.pointer, _sel_tileLodZoomShift);
+
+  }
+
+
+  /// The threshold, measured in degrees, that determines when the map's bearing will snap to north.
+/// For example, with a toleranceForSnappingToNorth of 7, if the user rotates the map within 7 degrees
+/// of north, the map will automatically snap to exact north.
+/// 
+/// The default value of this property is 7.
+  double get toleranceForSnappingToNorth {
+    return objc.useMsgSendVariants ? _objc_msgSend_1ukqyt8Fpret(object$.ref.pointer, _sel_toleranceForSnappingToNorth) : _objc_msgSend_1ukqyt8(object$.ref.pointer, _sel_toleranceForSnappingToNorth);
 
   }
 
