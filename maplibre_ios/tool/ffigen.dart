@@ -21,6 +21,7 @@ void main(List<String> args) {
         packageRoot.resolve('MapLibre.h'),
       ],
       compilerOptions: [
+        // TODO cannot use the headers from SPM, maybe because of missing debug symbols
         // '-F$frameworkPath',
         // '-I${frameworkPath}MapLibre.framework/Headers',
         '-Fios/.build/MapLibre.xcframework/ios-arm64/',
