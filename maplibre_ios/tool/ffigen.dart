@@ -23,8 +23,6 @@ void main(List<String> args) {
       compilerOptions: [
         // '-F$frameworkPath',
         // '-I${frameworkPath}MapLibre.framework/Headers',
-        //'-F/Users/joscha/Library/Developer/Xcode/DerivedData/Runner-bfmejxnuzebocealvodgkkqwnvzx/SourcePackages/artifacts/maplibre-gl-native-distribution/MapLibre/MapLibre.xcframework/ios-arm64/',
-        // '-I/Users/joscha/Library/Developer/Xcode/DerivedData/Runner-bfmejxnuzebocealvodgkkqwnvzx/SourcePackages/artifacts/maplibre-gl-native-distribution/MapLibre/MapLibre.xcframework/ios-arm64/MapLibre.framework/Headers',
         '-Fios/.build/MapLibre.xcframework/ios-arm64/',
         '-Iios/.build/MapLibre.xcframework/ios-arm64/MapLibre.framework/Headers',
         '-isysroot',
