@@ -13,7 +13,7 @@ void main(List<String> args) async {
       throw UnsupportedError('Static linking not supported.');
     }
 
-    final frameworkPath = await _resolveSpmPaths(
+    final frameworkPath = await _getMapLibreFrameworkPath(
       packageRoot: input.packageRoot.toFilePath(),
       useSimulator: input.config.code.iOS.targetSdk == IOSSdk.iPhoneSimulator,
     );
@@ -33,7 +33,7 @@ void main(List<String> args) async {
   });
 }
 
-Future<String> _resolveSpmPaths({
+Future<String> _getMapLibreFrameworkPath({
   required String packageRoot,
   required bool useSimulator,
 }) async {
