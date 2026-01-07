@@ -9,22 +9,27 @@ void main(List<String> args) async {
   await build(args, (input, output) async {
     if (!input.config.buildCodeAssets) return;
     if (input.config.code.targetOS != OS.iOS) return;
-
     if (input.config.code.linkModePreference == LinkModePreference.static) {
       throw UnsupportedError('Static linking not supported.');
     }
 
-    final spm = await _resolveSpmPaths(
+    final frameworkPath = await _resolveSpmPaths(
+      packageRoot: input.packageRoot.toFilePath(),
       useSimulator: input.config.code.iOS.targetSdk == IOSSdk.iPhoneSimulator,
+    );
+    final headersDir = p.join(
+      frameworkPath,
+      'MapLibre.framework',
+      'Headers',
     );
     final builder = CBuilder.library(
       name: 'maplibre_ffi',
       assetName: 'maplibre_ffi.g.dart',
       sources: ['lib/maplibre_ffi.g.dart.m'],
       language: Language.objectiveC,
-      includes: [spm.headersDir],
+      includes: [headersDir],
       // ARC is required by generated bindings; -F points clang at the xcframework slice.
-      flags: ['-fobjc-arc', '-F${spm.frameworkDir}'],
+      flags: ['-fobjc-arc', '-F$frameworkPath'],
       frameworks: ['Foundation', 'MapLibre'],
     );
 
@@ -32,63 +37,73 @@ void main(List<String> args) async {
   });
 }
 
-class _SpmPaths {
-  _SpmPaths(this.headersDir, this.frameworkDir);
-
-  final String headersDir;
-  final String frameworkDir;
-}
-
-Future<_SpmPaths> _resolveSpmPaths({required bool useSimulator}) async {
-  final envHeaders = Platform.environment['MAPLIBRE_SPM_HEADERS'];
-  final envFramework = Platform.environment['MAPLIBRE_SPM_FRAMEWORK'];
-  if (envHeaders != null && envFramework != null) {
-    final normalizedFrameworkDir = envFramework.endsWith('MapLibre.framework')
-        ? Directory(envFramework).parent.path
-        : envFramework;
-    return _SpmPaths(envHeaders, normalizedFrameworkDir);
-  }
-
-  final derivedData = p.join(
-    Platform.environment['HOME'] ?? '',
-    'Library/Developer/Xcode/DerivedData',
+Future<String> _resolveSpmPaths({
+  required String packageRoot,
+  required bool useSimulator,
+}) async {
+  // Try to detect desired MapLibre version from Package.resolved in the package.
+  // TODO resolve the app root path dynamically
+  const appRoot = '/Users/joscha/Documents/GitHub/flutter-maplibre/example';
+  final resolvedSpmPackage = p.join(
+    appRoot,
+    'ios',
+    'Runner.xcworkspace',
+    'xcshareddata',
+    'swiftpm',
+    'Package.resolved',
   );
+  final content = File(resolvedSpmPackage).readAsStringSync();
+  final match = RegExp(
+    r'"identity"\s*:\s*"maplibre-gl-native-distribution"[\s\S]*?"version"\s*:\s*"([0-9.]+)"',
+  ).firstMatch(content);
+
+  if (match == null || match.group(1) == null) {
+    throw Exception(
+      'Failed to detect MapLibre version from Package.resolved at $resolvedSpmPackage',
+    );
+  }
+  final version = match.group(1)!;
+
+  // Find the ZIP file for the detected version.
+  final zipPath = p.join(
+    Platform.environment['HOME'] ?? '',
+    'Library/Caches/org.swift.swiftpm/artifacts',
+    'https___github_com_maplibre_maplibre_native_releases_download_ios_v${version.replaceAll('.', '_')}_MapLibre_dynamic_xcframework_zip',
+  );
+  if (!File(zipPath).existsSync()) {
+    throw Exception('Expected MapLibre ZIP not found at $zipPath');
+  }
+
+  final zipBase = p.basename(zipPath);
+  final extractionRoot = p.join(
+    packageRoot,
+    '.dart_tool',
+    'maplibre_xcframeworks',
+    zipBase,
+  );
+  final extractedXcframework = p.join(extractionRoot, 'MapLibre.xcframework');
+
+  // extract resolved MapLibre ZIP from SPM artifacts if needed
+  if (!Directory(extractedXcframework).existsSync()) {
+    await Directory(extractionRoot).create(recursive: true);
+    final unzipResult = await Process.run('unzip', [
+      '-o',
+      zipPath,
+      '-d',
+      extractionRoot,
+    ]);
+    if (unzipResult.exitCode != 0) {
+      throw Exception('Failed to extract MapLibre zip: ${unzipResult.stderr}');
+    }
+  }
+
+  // Return paths to headers and framework for the desired architecture.
   final archSegment = useSimulator ? 'ios-arm64_x86_64-simulator' : 'ios-arm64';
-  final findArgs = [
-    derivedData,
-    '-path',
-    '*/SourcePackages/artifacts/maplibre-gl-native-distribution/MapLibre/MapLibre.xcframework/$archSegment/MapLibre.framework/Headers',
-    '-type',
-    'd',
-  ];
-
-  final result = await Process.run('find', findArgs);
-  if (result.exitCode != 0) {
+  final frameworkDir = p.join(extractedXcframework, archSegment);
+  if (!Directory(frameworkDir).existsSync()) {
     throw Exception(
-      'Failed to locate MapLibre.xcframework headers: ${result.stderr}',
+      'Expected MapLibre framework directory not found at $frameworkDir',
     );
   }
-
-  final candidates = (result.stdout as String)
-      .split('\n')
-      .map((e) => e.trim())
-      .where((e) => e.isNotEmpty)
-      .toList(growable: false);
-
-  if (candidates.isEmpty) {
-    throw Exception(
-      'MapLibre.xcframework headers not found in DerivedData. '
-      'Set MAPLIBRE_SPM_HEADERS and MAPLIBRE_SPM_FRAMEWORK (directory containing MapLibre.framework).',
-    );
-  }
-
-  candidates.sort((a, b) {
-    final sa = FileStat.statSync(a).modified;
-    final sb = FileStat.statSync(b).modified;
-    return sb.compareTo(sa);
-  });
-
-  final headersDir = candidates.first;
-  final frameworkDir = Directory(headersDir).parent.parent.path; // …/ios-arm64
-  return _SpmPaths(headersDir, frameworkDir);
+  return frameworkDir;
 }
