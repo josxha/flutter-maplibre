@@ -53,9 +53,10 @@ interface class StyleLayer {
   /// evaluated at integer zoom levels. The feature-state expression is not
   /// supported in filter expressions.
   ///
-  /// This property is only supported for layers that render vector features
-  /// from a source: [FillStyleLayer], [FillExtrusionStyleLayer],
-  /// [HeatmapStyleLayer], [LineStyleLayer] and [SymbolStyleLayer].
+  /// This property is only supported for layers that can render vector features
+  /// from a source: [CircleStyleLayer], [FillStyleLayer],
+  /// [FillExtrusionStyleLayer], [HeatmapStyleLayer], [LineStyleLayer]
+  /// and [SymbolStyleLayer].
   final List<Object>? filter;
 
   /// Layout properties for the layer.

@@ -95,7 +95,7 @@ class StyleControllerIos extends StyleController {
     ffiLayer.maximumZoomLevel = layer.maxZoom;
     ffiLayer.setProperties(layer.paint);
     ffiLayer.setProperties(layer.layout);
-    if (layer.metadata case final Map<String, Object> metadata) {
+    if (layer.metadata case final Map<String, Object?> metadata) {
       final ffiMetadata = NSMutableDictionary.new$()..init();
       for (final entry in metadata.entries) {
         ffiMetadata.setObject(
