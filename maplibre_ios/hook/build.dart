@@ -12,7 +12,7 @@ void main(List<String> args) async {
     if (input.config.code.linkModePreference == LinkModePreference.static) {
       throw UnsupportedError('Static linking not supported.');
     }
-    throw Exception('### Platform.script: ${Platform.script}');
+    throw Exception('Platform.script: ${Platform.script.path}');
 
     final frameworkPath = await _getMapLibreFrameworkPath(
       packageRoot: input.packageRoot.toFilePath(),
