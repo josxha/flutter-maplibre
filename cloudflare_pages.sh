@@ -7,8 +7,8 @@ corepack prepare yarn@3.6.3 --activate
 
 echo "▶ Building website (Yarn)"
 cd website
-yarn install --immutable
-yarn build
+corepack yarn install --immutable
+corepack yarn build
 cd ..
 
 echo "▶ Fetching Flutter SDK (stable)"
