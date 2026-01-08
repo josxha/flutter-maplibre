@@ -8,10 +8,11 @@ import 'package:path/path.dart' as p;
 void main(List<String> args) async {
   await build(args, (input, output) async {
     if (!input.config.buildCodeAssets) return;
-    if (input.config.code.targetOS != OS.iOS) return;
+    // if (input.config.code.targetOS != OS.iOS) return;
     if (input.config.code.linkModePreference == LinkModePreference.static) {
       throw UnsupportedError('Static linking not supported.');
     }
+    throw Exception('### Platform.script: ${Platform.script}');
 
     final frameworkPath = await _getMapLibreFrameworkPath(
       packageRoot: input.packageRoot.toFilePath(),
