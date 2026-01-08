@@ -226,7 +226,6 @@ extension type LayerSpecification._(JSObject _) implements JSObject {
     required double? minzoom,
     required double? maxzoom,
     String? source,
-    @JS('source-layer') String? sourceLayer,
   });
 
   /// Get the layer id.
@@ -234,6 +233,8 @@ extension type LayerSpecification._(JSObject _) implements JSObject {
 
   external JSAny filter;
   external JSAny metadata;
+  @JS('source-layer')
+  external String? sourceLayer;
 }
 
 /// Image data used by [JsMap.addImage].
