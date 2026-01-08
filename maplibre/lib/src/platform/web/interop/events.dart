@@ -60,3 +60,13 @@ abstract class MapEventType {
   /// Called once the style has loaded.
   static const styleLoad = 'style.load';
 }
+
+/// Event that fires for example when the context menu is triggered.
+@JS()
+extension type PointerEvent._(JSObject _) implements JSObject {
+  /// Create a new [PointerEvent].
+  external PointerEvent();
+
+  /// Prevent the default action associated with the event.
+  external JSFunction preventDefault();
+}
