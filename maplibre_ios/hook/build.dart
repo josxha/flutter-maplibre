@@ -4,15 +4,15 @@ import 'package:code_assets/code_assets.dart';
 import 'package:hooks/hooks.dart';
 import 'package:native_toolchain_c/native_toolchain_c.dart';
 import 'package:path/path.dart' as p;
+import 'package:pubspec_parse/pubspec_parse.dart';
 
 void main(List<String> args) async {
   await build(args, (input, output) async {
     if (!input.config.buildCodeAssets) return;
-    // if (input.config.code.targetOS != OS.iOS) return;
+    if (input.config.code.targetOS != OS.iOS) return;
     if (input.config.code.linkModePreference == LinkModePreference.static) {
       throw UnsupportedError('Static linking not supported.');
     }
-    throw Exception('Platform.script: ${Platform.script.path}');
 
     final frameworkPath = await _getMapLibreFrameworkPath(
       packageRoot: input.packageRoot.toFilePath(),
@@ -39,16 +39,7 @@ Future<String> _getMapLibreFrameworkPath({
   required bool useSimulator,
 }) async {
   // Try to detect desired MapLibre version from Package.resolved in the package.
-  // TODO resolve the app root path dynamically
-  const appRoot = '/Users/joscha/Documents/GitHub/flutter-maplibre/example';
-  final resolvedSpmPackage = p.join(
-    appRoot,
-    'ios',
-    'Runner.xcworkspace',
-    'xcshareddata',
-    'swiftpm',
-    'Package.resolved',
-  );
+  final resolvedSpmPackage = _getResolvedSpmPackagePath();
   final content = File(resolvedSpmPackage).readAsStringSync();
   final match = RegExp(
     r'"identity"\s*:\s*"maplibre-gl-native-distribution"[\s\S]*?"version"\s*:\s*"([0-9.]+)"',
@@ -111,4 +102,35 @@ Future<String> _getMapLibreFrameworkPath({
     );
   }
   return frameworkDir;
+}
+
+String _getResolvedSpmPackagePath() {
+  final root = Platform.script.resolve('../../../../');
+  const packageResolvedLocation =
+      'ios/Runner.xcworkspace/xcshareddata/swiftpm/Package.resolved';
+  // default app structure
+  final defaultUri = root.resolve(packageResolvedLocation);
+  if (File.fromUri(defaultUri).existsSync()) {
+    return defaultUri.toFilePath();
+  }
+  // pub workspace structure
+  final pubspecUri = root.resolve('pubspec.yaml');
+  if (!File.fromUri(pubspecUri).existsSync()) {
+    throw Exception('Failed to find pubspec.yaml at $pubspecUri');
+  }
+
+  final pubspec = Pubspec.parse(File.fromUri(pubspecUri).readAsStringSync());
+  final paths = <String>[];
+  for (final package in pubspec.workspace ?? const <String>[]) {
+    final uri = root.resolve('$package/$packageResolvedLocation');
+    if (File.fromUri(uri).existsSync()) {
+      // we assume that the first package containing a Package.resolved is the correct one
+      return uri.toFilePath();
+    }
+    paths.add(uri.toFilePath());
+  }
+  throw Exception(
+    'Failed to find Package.resolved in default or workspace locations. '
+    'Tried the following paths:\n${[defaultUri.toFilePath(), ...paths].join('\n')}',
+  );
 }

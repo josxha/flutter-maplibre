@@ -21,6 +21,7 @@ dependencies:
   native_toolchain_c: ^0.17.4
   objective_c: ^9.0.0+1
   path: ^1.9.1
+  pubspec_parse: ^1.5.0
 
 dev_dependencies:
   ffigen: 20.1.1
