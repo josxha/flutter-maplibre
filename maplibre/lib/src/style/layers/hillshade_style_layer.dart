@@ -1,8 +1,8 @@
 part of 'style_layer.dart';
 
-/// A layer that contains circles.
+/// A layer that contains hillshades.
 ///
-/// https://maplibre.org/maplibre-style-spec/layers/#circle
+/// https://maplibre.org/maplibre-style-spec/layers/#hillshade
 ///
 /// {@category Style}
 /// {@subCategory Style Layers}
@@ -15,7 +15,7 @@ final class HillshadeStyleLayer extends StyleLayerWithSource {
     super.paint,
     super.minZoom = 0,
     super.maxZoom = 24,
-    super.sourceLayerId,
+    super.metadata,
   });
 
   // TODO add properties

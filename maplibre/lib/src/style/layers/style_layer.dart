@@ -52,7 +52,12 @@ interface class StyleLayer {
   /// match the filter are displayed. Zoom expressions in filters are only
   /// evaluated at integer zoom levels. The feature-state expression is not
   /// supported in filter expressions.
-  final Object? filter;
+  ///
+  /// This property is only supported for layers that can render vector features
+  /// from a source: [CircleStyleLayer], [FillStyleLayer],
+  /// [FillExtrusionStyleLayer], [HeatmapStyleLayer], [LineStyleLayer]
+  /// and [SymbolStyleLayer].
+  final List<Object>? filter;
 
   /// Layout properties for the layer.
   final Map<String, Object> layout;
@@ -71,19 +76,20 @@ interface class StyleLayerWithSource extends StyleLayer {
   const StyleLayerWithSource({
     required super.id,
     required this.sourceId,
-    this.sourceLayerId,
     super.paint = const {},
     super.layout = const {},
     super.metadata,
     super.minZoom,
     super.maxZoom,
     super.filter,
+    this.sourceLayerId,
   });
 
   /// Name of a source description to be used for this layer. Required for all
   /// layer types except background.
   final String sourceId;
 
-  /// Name of source layer.
+  /// Layer to use from a vector tile source. Required for vector tile
+  /// sources; prohibited for all other source types, including GeoJSON sources.
   final String? sourceLayerId;
 }
