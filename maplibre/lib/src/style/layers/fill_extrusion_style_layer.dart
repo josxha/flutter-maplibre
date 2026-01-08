@@ -2,7 +2,7 @@ part of 'style_layer.dart';
 
 /// A layer that contains fill extrusions.
 ///
-/// https://maplibre.org/maplibre-style-spec/layers/#circle
+/// https://maplibre.org/maplibre-style-spec/layers/#fill-extrusion
 ///
 /// {@category Style}
 /// {@subCategory Style Layers}

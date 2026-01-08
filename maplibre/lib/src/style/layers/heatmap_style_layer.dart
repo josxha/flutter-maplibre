@@ -2,7 +2,7 @@ part of 'style_layer.dart';
 
 /// A layer that contains heatmaps.
 ///
-/// https://maplibre.org/maplibre-style-spec/layers/#circle
+/// https://maplibre.org/maplibre-style-spec/layers/#heatmap
 ///
 /// {@category Style}
 /// {@subCategory Style Layers}

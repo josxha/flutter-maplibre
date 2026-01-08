@@ -65,7 +65,6 @@ class StyleControllerAndroid extends StyleController {
             jLayer = jHeatmapLayer;
           case HillshadeStyleLayer():
             final jHillshadeLayer = jni.HillshadeLayer(jId, jSourceId);
-            // TODO if (jFilter != null) jHillshadeLayer.setFilter(jFilter);
             if (jSourceLayer != null) {
               jHillshadeLayer.setSourceLayer(jSourceLayer);
             }
@@ -77,7 +76,6 @@ class StyleControllerAndroid extends StyleController {
             jLayer = jLineLayer;
           case RasterStyleLayer():
             final jRasterLayer = jni.RasterLayer(jId, jSourceId);
-            // TODO if (jFilter != null) jRasterLayer.setFilter(jFilter);
             if (jSourceLayer != null) jRasterLayer.setSourceLayer(jSourceLayer);
             jLayer = jRasterLayer;
           case SymbolStyleLayer():

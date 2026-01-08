@@ -2,7 +2,7 @@ part of 'style_layer.dart';
 
 /// A layer that contains lines.
 ///
-/// https://maplibre.org/maplibre-style-spec/layers/#circle
+/// https://maplibre.org/maplibre-style-spec/layers/#line
 ///
 /// {@category Style}
 /// {@subCategory Style Layers}

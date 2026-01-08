@@ -221,11 +221,11 @@ extension type LayerSpecification._(JSObject _) implements JSObject {
   external LayerSpecification({
     required String id,
     required String type,
-    required String? source,
     required JSAny layout,
     required JSAny paint,
     required double? minzoom,
     required double? maxzoom,
+    String? source,
     @JS('source-layer') String? sourceLayer,
   });
 

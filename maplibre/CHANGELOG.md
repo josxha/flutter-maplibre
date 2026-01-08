@@ -1,8 +1,14 @@
 ## 0.3.3
 
-This release brings stability improvements and a couple of new features.
-A big thanks to @markszente and @BartoszStasiurka for their contributions in
-this release!
+This release focuses on stability improvements along with a few small
+enhancements. Notably, it is now possible to render a Flutter widget or canvas
+directly into an image and use it as a map marker without any delay.
+Many thanks to @markszente and @BartoszStasiurka for their valuable
+contributions to this release.
+
+I would also like to extend my sincere gratitude to Thilko M., @oboukili,
+@ton-An, @YumNumm, and @smallTrogdor for helping fund the development of this
+package throughout 2025. Your support is truly appreciated!
 
 ### New Features
 
@@ -14,6 +20,7 @@ this release!
 - Render a Flutter `Widget` or `Canvas` into an image and use it as marker on
   the map.
 - Add `sourceLayerId` to style layers for vector sources.
+- Add layer filter expressions to style layers.
 
 ### Bug Fixes
 
@@ -22,6 +29,7 @@ this release!
 - Fix queryLayers() throws exception on iOS when receiving numeric layer IDs.
 - Fix `onCameraMoved` callback returning altitude instead of zoom level on iOS.
 - Fix invisible map on android when coming back from background.
+- Fix double tap zoom interaction on iOS.
 
 Full
 Changelog: [v0.3.2...v0.3.3](https://github.com/josxha/flutter-maplibre/compare/v0.3.2...v0.3.3)

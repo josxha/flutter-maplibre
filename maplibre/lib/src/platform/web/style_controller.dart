@@ -115,7 +115,6 @@ class StyleControllerWeb extends StyleController {
         jsLayer = interop.LayerSpecification(
           id: layer.id,
           type: 'background',
-          source: null,
           layout: layer.layout.jsify()!,
           paint: layer.paint.jsify()!,
           minzoom: layer.minZoom,

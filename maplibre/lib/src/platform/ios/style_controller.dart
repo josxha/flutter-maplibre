@@ -72,7 +72,6 @@ class StyleControllerIos extends StyleController {
           case HillshadeStyleLayer():
             ffiLayer = MLNHillshadeStyleLayer.new$()
               ..initWithIdentifier(ffiId, source: ffiSource);
-          // TODO ..predicate = filterPredicate;
           case LineStyleLayer():
             ffiLayer = MLNLineStyleLayer.new$()
               ..initWithIdentifier(ffiId, source: ffiSource)
@@ -80,7 +79,6 @@ class StyleControllerIos extends StyleController {
           case RasterStyleLayer():
             ffiLayer = MLNRasterStyleLayer.new$()
               ..initWithIdentifier(ffiId, source: ffiSource);
-          // TODO ..predicate = filterPredicate;
           case SymbolStyleLayer():
             ffiLayer = MLNSymbolStyleLayer.new$()
               ..initWithIdentifier(ffiId, source: ffiSource)
@@ -100,7 +98,6 @@ class StyleControllerIos extends StyleController {
     if (layer.metadata case final Map<String, Object> metadata) {
       final ffiMetadata = NSMutableDictionary.new$()..init();
       for (final entry in metadata.entries) {
-        // TODO implement
         ffiMetadata.setObject(
           entry.value.toNSObject(),
           forKey: entry.key.toNSString(),
