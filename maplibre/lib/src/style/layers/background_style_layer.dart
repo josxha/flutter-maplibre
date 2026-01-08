@@ -17,6 +17,7 @@ final class BackgroundStyleLayer extends StyleLayer {
     super.paint,
     super.minZoom = 0,
     super.maxZoom = 24,
+    super.metadata,
   });
 
   /// Whether this layer is displayed.

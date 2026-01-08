@@ -17,4 +17,4 @@ workspace:
   - maplibre_ios/example
 
 dev_dependencies:
-  pigeon: 26.1.4
+  pigeon: 26.1.5

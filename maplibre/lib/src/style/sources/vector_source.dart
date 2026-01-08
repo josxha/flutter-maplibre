@@ -21,6 +21,10 @@ final class VectorSource extends Source {
     this.maxZoom = 2,
     this.attribution,
     this.volatile = false,
+    @Deprecated(
+      'This property has no effect. Specify the source layer in the style '
+      'layer that uses this source instead.',
+    )
     this.sourceLayer,
   });
 
@@ -67,5 +71,9 @@ final class VectorSource extends Source {
 
   /// Layer to use from a vector tile source. Required for vector tile sources;
   /// prohibited for all other source types, including GeoJSON sources.
+  @Deprecated(
+    'This property has no effect. Specify the source layer in the style '
+    'layer that uses this source instead.',
+  )
   final String? sourceLayer;
 }

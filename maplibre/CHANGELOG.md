@@ -1,3 +1,39 @@
+## 0.3.3
+
+This release focuses on stability improvements along with a few small
+enhancements. Notably, it is now possible to render a Flutter widget or canvas
+directly into an image and use it as a map marker without any delay.
+Many thanks to @markszente and @BartoszStasiurka for their valuable
+contributions to this release.
+
+I would also like to extend my sincere gratitude to Thilko M., @oboukili,
+@ton-An, @YumNumm, and @smallTrogdor for helping fund the development of this
+package throughout 2025. Your support is truly appreciated!
+
+### New Features
+
+- update MapLibre Native on iOS
+  to [6.21](https://github.com/maplibre/maplibre-native/blob/main/platform/ios/CHANGELOG.md#6210)
+- update
+  to [ffigen v20](https://pub.dev/packages/ffigen/changelog#2000), [objective_c v9](https://pub.dev/packages/objective_c/changelog#900)
+- Add `padding` to `fitBounds()` on iOS.
+- Render a Flutter `Widget` or `Canvas` into an image and use it as marker on
+  the map.
+- Add `sourceLayerId` to style layers for vector sources.
+- Add layer filter expressions to style layers.
+
+### Bug Fixes
+
+- Fix iOS can't load style from file.
+- Add missing MapEventCameraIdle, MapEventStartMoveCamera events on iOS.
+- Fix queryLayers() throws exception on iOS when receiving numeric layer IDs.
+- Fix `onCameraMoved` callback returning altitude instead of zoom level on iOS.
+- Fix invisible map on android when coming back from background.
+- Fix double tap zoom interaction on iOS.
+
+Full
+Changelog: [v0.3.2...v0.3.3](https://github.com/josxha/flutter-maplibre/compare/v0.3.2...v0.3.3)
+
 ## 0.3.2
 
 Maintenance release that optimizes the package on `pub.dev` and fixes a bug
@@ -5,7 +41,8 @@ in release builds on Android.
 
 ### New Features
 
-- Upgrade MapLibre Native on Android to [12.2](https://github.com/maplibre/maplibre-native/blob/main/platform/android/CHANGELOG.md#1220).
+- Upgrade MapLibre Native on Android
+  to [12.2](https://github.com/maplibre/maplibre-native/blob/main/platform/android/CHANGELOG.md#1220).
 - Optimize package size on `pub.dev` by restructuring the repository.
 - Upgrade `jni` / `jnigen` to ^0.15.1.
 
