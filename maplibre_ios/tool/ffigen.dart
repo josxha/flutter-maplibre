@@ -18,7 +18,10 @@ void main(List<String> args) {
         packageRoot.resolve(
           'ios/maplibre_ios/Sources/maplibre_ios/MapLibreIos.h',
         ),
-        packageRoot.resolve('MapLibre.h'),
+        // packageRoot.resolve('MapLibre.h'),
+        packageRoot.resolve(
+          'ios/.build/MapLibre.xcframework/ios-arm64/MapLibre.framework/Headers/MapLibre.h',
+        ),
       ],
       compilerOptions: [
         // TODO cannot use the headers from SPM, maybe because of missing debug symbols
@@ -29,11 +32,50 @@ void main(List<String> args) {
         '-isysroot',
         '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk',
       ],
+      include: (header) {
+        const include = {
+          'MLNMapProjection.h',
+          'MLNStyle.h',
+          'MLNSource.h',
+          'MLNVectorTileSource.h',
+          'MLNShapeSource.h',
+          'MLNImageSource.h',
+          'MLNRasterTileSource.h',
+          'MLNRasterDEMSource.h',
+          'MLNBackgroundStyleLayer.h',
+          'MLNCircleStyleLayer.h',
+          'MLNFillExtrusionStyleLayer.h',
+          'MLNFillStyleLayer.h',
+          'MLNHeatmapStyleLayer.h',
+          'MLNHillshadeStyleLayer.h',
+          'MLNLineStyleLayer.h',
+          'MLNRasterStyleLayer.h',
+          'MLNSymbolStyleLayer.h',
+          'MLNVectorStyleLayer.h',
+          'MLNAttributionInfo.h',
+          'NSExpression+MLNAdditions.h',
+          'MLNOfflineStorage.h',
+          'MLNOfflinePack.h',
+          'MLNOfflineRegion.h',
+          'MLNTilePyramidOfflineRegion.h',
+          'MLNFeature.h',
+          'maplibre_ios/Sources/maplibre_ios/',
+        };
+        for (final path in include) {
+          if (header.path.contains(path)) return true;
+        }
+        return false;
+      },
     ),
     objectiveC: ObjectiveC(
       interfaces: Interfaces(
+        includeMember: (decl, member) {
+          final name = '${decl.originalName}::$member';
+          if (name == 'MLNMapView::backendResource') return false;
+          return true;
+        },
         include: (decl) {
-          const set = {
+          const include = {
             'NSString',
             'CLLocationCoordinate2D',
             'NSAttributedString',
@@ -54,12 +96,15 @@ void main(List<String> args) {
             'Extensions',
             'MLN.*',
           };
-          if (set.contains(decl.originalName)) return true;
+          if (include.contains(decl.originalName)) return true;
           return decl.originalName.startsWith('MLN');
         },
       ),
       protocols: Protocols(
-        include: (decl) => decl.originalName.startsWith('MLN'),
+        include: (decl) {
+          if (decl.originalName == 'MLNMapViewDelegate') return false;
+          return true;
+        },
         module: (decl) => const {
           'MapLibreRegistry': 'maplibre_ios',
           'Helpers': 'maplibre_ios',
