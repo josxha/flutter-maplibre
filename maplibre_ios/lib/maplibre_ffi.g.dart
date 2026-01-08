@@ -25545,16 +25545,22 @@ late final _sel_setScaleBarPosition_ = objc.registerName("setScaleBarPosition:")
 final _objc_msgSend_8fd115 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.UnsignedLong )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int )>();
 late final _sel_scaleBarMargins = objc.registerName("scaleBarMargins");
 late final _sel_setScaleBarMargins_ = objc.registerName("setScaleBarMargins:");
+late final _sel_showsCompassView = objc.registerName("showsCompassView");
+late final _sel_setShowsCompassView_ = objc.registerName("setShowsCompassView:");
 late final _sel_compassView = objc.registerName("compassView");
 late final _sel_compassViewPosition = objc.registerName("compassViewPosition");
 late final _sel_setCompassViewPosition_ = objc.registerName("setCompassViewPosition:");
 late final _sel_compassViewMargins = objc.registerName("compassViewMargins");
 late final _sel_setCompassViewMargins_ = objc.registerName("setCompassViewMargins:");
+late final _sel_showsLogoView = objc.registerName("showsLogoView");
+late final _sel_setShowsLogoView_ = objc.registerName("setShowsLogoView:");
 late final _sel_logoView = objc.registerName("logoView");
 late final _sel_logoViewPosition = objc.registerName("logoViewPosition");
 late final _sel_setLogoViewPosition_ = objc.registerName("setLogoViewPosition:");
 late final _sel_logoViewMargins = objc.registerName("logoViewMargins");
 late final _sel_setLogoViewMargins_ = objc.registerName("setLogoViewMargins:");
+late final _sel_showsAttributionButton = objc.registerName("showsAttributionButton");
+late final _sel_setShowsAttributionButton_ = objc.registerName("setShowsAttributionButton:");
 late final _sel_attributionButton = objc.registerName("attributionButton");
 late final _sel_attributionButtonPosition = objc.registerName("attributionButtonPosition");
 late final _sel_setAttributionButtonPosition_ = objc.registerName("setAttributionButtonPosition:");
@@ -25575,6 +25581,7 @@ late final _sel_tileLodPitchThreshold = objc.registerName("tileLodPitchThreshold
 late final _sel_setTileLodPitchThreshold_ = objc.registerName("setTileLodPitchThreshold:");
 late final _sel_tileLodZoomShift = objc.registerName("tileLodZoomShift");
 late final _sel_setTileLodZoomShift_ = objc.registerName("setTileLodZoomShift:");
+late final _sel_disableLocationManager = objc.registerName("disableLocationManager");
 late final _protocol_MLNLocationManager = objc.getProtocol("MLNLocationManager");
 
 /// MLNLocationManager
@@ -27521,6 +27528,13 @@ _objc_msgSend_6p7ndb(object$.ref.pointer, _sel_deselectAnnotation_animated_, ann
   }
 
 
+  /// Disabled using a current location manager.
+  void disableLocationManager() {
+_objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_disableLocationManager);
+
+  }
+
+
   /// Whether the map view should display a heading calibration alert when necessary.
 /// The default value is `YES`.
   bool get displayHeadingCalibration {
@@ -27900,8 +27914,6 @@ _objc_msgSend_b0p9a0(object$.ref.pointer, _sel_flyToCamera_withDuration_peakAlti
 
 
   /// The maximum bounds of the map that can be shown on screen.
-/// 
-/// @param MLNCoordinateBounds the bounds to constrain the screen to.
   MLNCoordinateBounds get maximumScreenBounds {
     final $ptr = pkg_ffi.calloc<MLNCoordinateBounds>();
     objc.useMsgSendVariants ? _objc_msgSend_ygoa6aStret($ptr, object$.ref.pointer, _sel_maximumScreenBounds) : $ptr.ref = _objc_msgSend_ygoa6a(object$.ref.pointer, _sel_maximumScreenBounds);
@@ -28706,8 +28718,6 @@ _objc_msgSend_hwm8nu(object$.ref.pointer, _sel_setMaximumPitch_, value);
 
 
   /// The maximum bounds of the map that can be shown on screen.
-/// 
-/// @param MLNCoordinateBounds the bounds to constrain the screen to.
   set maximumScreenBounds(MLNCoordinateBounds value) {
 _objc_msgSend_9ay59k(object$.ref.pointer, _sel_setMaximumScreenBounds_, value);
 
@@ -28916,6 +28926,36 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setSelectedAnnotations_, value.re
 /// The default value of this property is `YES`.
   set shouldRequestAuthorizationToUseLocationServices(bool value) {
 _objc_msgSend_1s56lr9(object$.ref.pointer, _sel_setShouldRequestAuthorizationToUseLocationServices_, value);
+
+  }
+
+
+  /// A Boolean value indicating whether the map may display Attribution Button.
+/// 
+/// The view controlled by this property is available at `attributionButton`. The default value
+/// of this property is `YES`.
+  set showsAttributionButton(bool value) {
+_objc_msgSend_1s56lr9(object$.ref.pointer, _sel_setShowsAttributionButton_, value);
+
+  }
+
+
+  /// A Boolean value indicating whether the map may display Compass View.
+/// 
+/// The view controlled by this property is available at `compassView`. The default value
+/// of this property is `YES`.
+  set showsCompassView(bool value) {
+_objc_msgSend_1s56lr9(object$.ref.pointer, _sel_setShowsCompassView_, value);
+
+  }
+
+
+  /// A Boolean value indicating whether the map may display MapLibre logo.
+/// 
+/// The view controlled by this property is available at `logoView`. The default value
+/// of this property is `YES`.
+  set showsLogoView(bool value) {
+_objc_msgSend_1s56lr9(object$.ref.pointer, _sel_setShowsLogoView_, value);
 
   }
 
@@ -29465,6 +29505,36 @@ _objc_msgSend_16lja1o(object$.ref.pointer, _sel_showAnnotations_edgePadding_anim
 /// attribution button, you should add this action to the button.
   void showAttribution(objc.ObjCObject sender) {
 _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_showAttribution_, sender.ref.pointer);
+
+  }
+
+
+  /// A Boolean value indicating whether the map may display Attribution Button.
+/// 
+/// The view controlled by this property is available at `attributionButton`. The default value
+/// of this property is `YES`.
+  bool get showsAttributionButton {
+    return _objc_msgSend_91o635(object$.ref.pointer, _sel_showsAttributionButton);
+
+  }
+
+
+  /// A Boolean value indicating whether the map may display Compass View.
+/// 
+/// The view controlled by this property is available at `compassView`. The default value
+/// of this property is `YES`.
+  bool get showsCompassView {
+    return _objc_msgSend_91o635(object$.ref.pointer, _sel_showsCompassView);
+
+  }
+
+
+  /// A Boolean value indicating whether the map may display MapLibre logo.
+/// 
+/// The view controlled by this property is available at `logoView`. The default value
+/// of this property is `YES`.
+  bool get showsLogoView {
+    return _objc_msgSend_91o635(object$.ref.pointer, _sel_showsLogoView);
 
   }
 
