@@ -1,6 +1,6 @@
 name: maplibre_ios
 description: "Helper package for maplibre that provides iOS FFI bindings"
-version: 0.3.2
+version: 0.3.3
 repository: https://github.com/josxha/flutter-maplibre
 issue_tracker: https://github.com/josxha/flutter-maplibre/issues
 homepage: https://flutter-maplibre.pages.dev
