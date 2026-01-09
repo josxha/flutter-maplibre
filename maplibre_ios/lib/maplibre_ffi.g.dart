@@ -390,40 +390,9 @@ ffi.Pointer<objc.ObjCBlockImpl> listnerBlock,
 ffi.Pointer<objc.DOBJC_Context> context,
 );
 
-@ffi.Native<CLLocationCoordinate2D Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> )>()
-external CLLocationCoordinate2D _NativeLibrary_protocolTrampoline_neuenc(ffi.Pointer<objc.ObjCObjectImpl> target,
-ffi.Pointer<ffi.Void> arg0,
-);
-
-@ffi.Native<MLNCoordinateBounds Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> )>()
-external MLNCoordinateBounds _NativeLibrary_protocolTrampoline_1fkc0ji(ffi.Pointer<objc.ObjCObjectImpl> target,
-ffi.Pointer<ffi.Void> arg0,
-);
-
-@ffi.Native<ffi.Bool Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> , MLNCoordinateBounds )>()
-external bool _NativeLibrary_protocolTrampoline_krbldm(ffi.Pointer<objc.ObjCObjectImpl> target,
-ffi.Pointer<ffi.Void> arg0,
-MLNCoordinateBounds arg1,
-);
-
 @ffi.Native<ffi.UnsignedLong Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> )>()
 external int _NativeLibrary_protocolTrampoline_1ckyi24(ffi.Pointer<objc.ObjCObjectImpl> target,
 ffi.Pointer<ffi.Void> arg0,
-);
-
-@ffi.Native<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> , ffi.UnsignedLong , ffi.UnsignedLong , ffi.UnsignedLong )>()
-external ffi.Pointer<objc.ObjCObjectImpl> _NativeLibrary_protocolTrampoline_fclj7c(ffi.Pointer<objc.ObjCObjectImpl> target,
-ffi.Pointer<ffi.Void> arg0,
-int arg1,
-int arg2,
-int arg3,
-);
-
-@ffi.Native<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> , MLNCoordinateBounds , ffi.UnsignedLong )>()
-external ffi.Pointer<objc.ObjCObjectImpl> _NativeLibrary_protocolTrampoline_129i16p(ffi.Pointer<objc.ObjCObjectImpl> target,
-ffi.Pointer<ffi.Void> arg0,
-MLNCoordinateBounds arg1,
-int arg2,
 );
 
 @ffi.Native<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> )>(isLeaf: true)
@@ -1092,21 +1061,6 @@ _objc_msgSend_g3kdhc(object$.ref.pointer, _sel_getCharacters_, buffer);
     return $ret.address == 0 ? null : objc.ObjCObject($ret, retain: true, release: true);
   }
 
-}
-
-
-/// WARNING: NSProgressReporting is a stub. To generate bindings for this class, include
-/// NSProgressReporting in your config's objc-protocols list.
-///
-/// NSProgressReporting
-extension type NSProgressReporting._(objc.ObjCProtocol object$) implements objc.ObjCProtocol, objc.NSObjectProtocol {
-  /// Constructs a [NSProgressReporting] that points to the same underlying object as [other].
-  NSProgressReporting.as(objc.ObjCObject other) : object$ = other;
-
-  /// Constructs a [NSProgressReporting] that wraps the given raw object pointer.
-  NSProgressReporting.fromPointer(ffi.Pointer<objc.ObjCObjectImpl> other,
-      {bool retain = false, bool release = false}) :
-      object$ = objc.ObjCProtocol(other, retain: retain, release: release);
 }
 
 late final _sel_variantFittingPresentationWidth_ = objc.registerName("variantFittingPresentationWidth:");
@@ -1855,27 +1809,6 @@ sealed class NSOperationQueuePriority {
   static const NSOperationQueuePriorityNormal = 0;
   static const NSOperationQueuePriorityHigh = 4;
   static const NSOperationQueuePriorityVeryHigh = 8;}
-
-
-/// WARNING: NSOperationQueue is a stub. To generate bindings for this class, include
-/// NSOperationQueue in your config's objc-interfaces list.
-///
-/// NSOperationQueue
-extension type NSOperationQueue._(objc.ObjCObject object$) implements objc.ObjCObject,objc.NSObject,NSProgressReporting {
-  /// Constructs a [NSOperationQueue] that points to the same underlying object as [other].
-  NSOperationQueue.as(objc.ObjCObject other) : object$ = other {
-    objc.checkOsVersionInternal('NSOperationQueue', iOS: (false, (2, 0, 0)), macOS: (false, (10, 5, 0)));
-  }
-
-  /// Constructs a [NSOperationQueue] that wraps the given raw object pointer.
-  NSOperationQueue.fromPointer(ffi.Pointer<objc.ObjCObjectImpl> other,
-      {bool retain = false, bool release = false}) :
-          object$ = objc.ObjCObject(other, retain: retain, release: release) {
-    objc.checkOsVersionInternal('NSOperationQueue', iOS: (false, (2, 0, 0)), macOS: (false, (10, 5, 0)));
-  }
-
-
-}
 
 
 /// WARNING: NSOrthography is a stub. To generate bindings for this class, include
@@ -24691,22 +24624,7 @@ late final _class_MLNSource = objc.getClass("MLNSource");
 late final _sel_initWithIdentifier_ = objc.registerName("initWithIdentifier:");
 late final _sel_setIdentifier_ = objc.registerName("setIdentifier:");
 
-/// ``MLNSource`` is an abstract base class for map content sources. A map content
-/// source supplies content to be shown on the map. A source is added to an
-/// ``MLNStyle`` object along with an ``MLNStyle`` object. The
-/// foreground style layer defines the appearance of any content supplied by the
-/// source.
-/// 
-/// Each source defined by the style JSON file is represented at runtime by an
-/// ``MLNSource`` object that you can use to refine the map’s content. You can also
-/// add and remove sources dynamically using methods such as
-/// ``MLNStyle/addSource:`` and ``MLNStyle/sourceWithIdentifier:``.
-/// 
-/// Create instances of ``MLNShapeSource``, ``MLNShapeSource``,
-/// ``MLNImageSource``, and the concrete subclasses of ``MLNImageSource``
-/// (``MLNVectorTileSource`` and ``MLNRasterTileSource``) in order to use ``MLNRasterTileSource``’s
-/// properties and methods. Do not create instances of ``MLNSource`` directly, and do
-/// not create your own subclasses of this class.
+/// MLNSource
 extension type MLNSource._(objc.ObjCObject object$) implements objc.ObjCObject,objc.NSObject {
   /// Constructs a [MLNSource] that points to the same underlying object as [other].
   MLNSource.as(objc.ObjCObject other) : object$ = other {
@@ -25791,76 +25709,10 @@ late final _class_MLNShape = objc.getClass("MLNShape");
 late final _sel_shapeWithData_encoding_error_ = objc.registerName("shapeWithData:encoding:error:");
 final _objc_msgSend_1nomli1 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.UnsignedLong , ffi.Pointer<ffi.Pointer<objc.ObjCObjectImpl>> )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , int , ffi.Pointer<ffi.Pointer<objc.ObjCObjectImpl>> )>();
 late final _sel_geoJSONDataUsingEncoding_ = objc.registerName("geoJSONDataUsingEncoding:");
-late final _sel_coordinate = objc.registerName("coordinate");
-
-/// Construction methods for `objc.ObjCBlock<CLLocationCoordinate2D Function(ffi.Pointer<ffi.Void>)>`.
-abstract final class ObjCBlock_CLLocationCoordinate2D_ffiVoid {
-  /// Returns a block that wraps the given raw block pointer.
-  static objc.ObjCBlock<CLLocationCoordinate2D Function(ffi.Pointer<ffi.Void>)> fromPointer(ffi.Pointer<objc.ObjCBlockImpl> pointer,
-      {bool retain = false, bool release = false}) =>
-      objc.ObjCBlock<CLLocationCoordinate2D Function(ffi.Pointer<ffi.Void>)>(pointer, retain: retain, release: release);
-
-  /// Creates a block from a C function pointer.
-  ///
-  /// This block must be invoked by native code running on the same thread as
-  /// the isolate that registered it. Invoking the block on the wrong thread
-  /// will result in a crash.
-  static objc.ObjCBlock<CLLocationCoordinate2D Function(ffi.Pointer<ffi.Void>)> fromFunctionPointer(ffi.Pointer<ffi.NativeFunction<CLLocationCoordinate2D Function(ffi.Pointer<ffi.Void> arg0)>> ptr) =>
-      objc.ObjCBlock<CLLocationCoordinate2D Function(ffi.Pointer<ffi.Void>)>(objc.newPointerBlock(_fnPtrCallable, ptr.cast()),
-          retain: false, release: true);
-
-  /// Creates a block from a Dart function.
-  ///
-  /// This block must be invoked by native code running on the same thread as
-  /// the isolate that registered it. Invoking the block on the wrong thread
-  /// will result in a crash.
-  ///
-  /// If `keepIsolateAlive` is true, this block will keep this isolate alive
-  /// until it is garbage collected by both Dart and ObjC.
-  static objc.ObjCBlock<CLLocationCoordinate2D Function(ffi.Pointer<ffi.Void>)> fromFunction(CLLocationCoordinate2D Function(ffi.Pointer<ffi.Void> ) fn,
-          {bool keepIsolateAlive = true}) =>
-      objc.ObjCBlock<CLLocationCoordinate2D Function(ffi.Pointer<ffi.Void>)>(objc.newClosureBlock(_closureCallable, (ffi.Pointer<ffi.Void> arg0) => fn(arg0), keepIsolateAlive),
-          retain: false, release: true);
-
-  static CLLocationCoordinate2D _fnPtrTrampoline(
-      ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0) =>
-          block.ref.target.cast<ffi.NativeFunction<CLLocationCoordinate2D Function(ffi.Pointer<ffi.Void> arg0)>>()
-              .asFunction<CLLocationCoordinate2D Function(ffi.Pointer<ffi.Void> )>()(arg0);
-  static ffi.Pointer<ffi.Void> _fnPtrCallable = ffi.Pointer.fromFunction<
-      CLLocationCoordinate2D Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> )>(_fnPtrTrampoline ).cast();
-  static CLLocationCoordinate2D _closureTrampoline(
-      ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0) =>
-      (objc.getBlockClosure(block) as CLLocationCoordinate2D Function(ffi.Pointer<ffi.Void> ))(arg0);
-  static ffi.Pointer<ffi.Void> _closureCallable = ffi.Pointer.fromFunction<
-      CLLocationCoordinate2D Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> )>(_closureTrampoline ).cast();
-}
-
-/// Call operator for `objc.ObjCBlock<CLLocationCoordinate2D Function(ffi.Pointer<ffi.Void>)>`.
-extension ObjCBlock_CLLocationCoordinate2D_ffiVoid$CallExtension on objc.ObjCBlock<CLLocationCoordinate2D Function(ffi.Pointer<ffi.Void>)> {
-  CLLocationCoordinate2D call(ffi.Pointer<ffi.Void> arg0) =>ref.pointer.ref.invoke.cast<ffi.NativeFunction<CLLocationCoordinate2D Function(ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0)>>()
-  .asFunction<CLLocationCoordinate2D Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> )>()(
-    ref.pointer, arg0);
-}
-
 late final _protocol_MLNAnnotation = objc.getProtocol("MLNAnnotation");
 
-/// The ``MLNAnnotation`` protocol is used to provide annotation-related information
-/// to a map view. To use this protocol, you adopt it in any custom objects that
-/// store or represent annotation data. Each object then serves as the source of
-/// information about a single map annotation and provides critical information,
-/// such as the annotation’s location on the map. Annotation objects do not provide
-/// the visual representation of the annotation but typically coordinate (in
-/// conjunction with the map view’s delegate) the creation of an appropriate
-/// objects to handle the display.
-/// 
-/// An object that adopts this protocol must implement the `coordinate` property.
-/// The other methods of this protocol are optional.
-/// 
-/// #### Related examples
-/// TODO: Annotation models
-/// TODO: Annotation views, learn how to add objects that follow the
-/// ``MLNAnnotation`` protocol
-extension type MLNAnnotation._(objc.ObjCProtocol object$) implements objc.ObjCProtocol, objc.NSObjectProtocol {
+/// MLNAnnotation
+extension type MLNAnnotation._(objc.ObjCProtocol object$) implements objc.ObjCProtocol {
   /// Constructs a [MLNAnnotation] that points to the same underlying object as [other].
   MLNAnnotation.as(objc.ObjCObject other) : object$ = other;
 
@@ -25877,44 +25729,6 @@ extension type MLNAnnotation._(objc.ObjCProtocol object$) implements objc.ObjCPr
 
 extension MLNAnnotation$Methods on MLNAnnotation {
 
-  /// The center point (specified as a map coordinate) of the annotation. (required)
-/// (read-only)
-  CLLocationCoordinate2D get coordinate {
-    final $ptr = pkg_ffi.calloc<CLLocationCoordinate2D>();
-    objc.useMsgSendVariants ? _objc_msgSend_18o5nokStret($ptr, object$.ref.pointer, _sel_coordinate) : $ptr.ref = _objc_msgSend_18o5nok(object$.ref.pointer, _sel_coordinate);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<CLLocationCoordinate2D>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<CLLocationCoordinate2D>(
-        $finalizable);
-
-  }
-
-
-  /// The string containing the annotation’s subtitle.
-/// 
-/// This string is displayed in the callout for the associated annotation.
-  objc.NSString? get subtitle {
-    if (!objc.respondsToSelector(object$.ref.pointer, _sel_subtitle)) {
-      throw objc.UnimplementedOptionalMethodException('MLNAnnotation', 'subtitle');
-    }
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_subtitle);
-    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// The string containing the annotation’s title.
-/// 
-/// Although this property is optional, if you support the selection of annotations
-/// in your map view, you are expected to provide this property. This string is
-/// displayed in the callout for the associated annotation.
-  objc.NSString? get title {
-    if (!objc.respondsToSelector(object$.ref.pointer, _sel_title)) {
-      throw objc.UnimplementedOptionalMethodException('MLNAnnotation', 'title');
-    }
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_title);
-    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
-  }
-
 }
 
   interface class MLNAnnotation$Builder {
@@ -25928,9 +25742,9 @@ extension MLNAnnotation$Methods on MLNAnnotation {
   ///
   /// If `$keepIsolateAlive` is true, this protocol will keep this isolate
   /// alive until it is garbage collected by both Dart and ObjC.
-  static MLNAnnotation implement({required CLLocationCoordinate2D Function() coordinate, objc.NSString? Function()? subtitle, objc.NSString? Function()? title, bool $keepIsolateAlive = true}) {
+  static MLNAnnotation implement({bool $keepIsolateAlive = true}) {
     final builder = objc.ObjCProtocolBuilder(debugName: 'MLNAnnotation');
-        MLNAnnotation$Builder.coordinate.implement(builder, coordinate);    MLNAnnotation$Builder.subtitle.implement(builder, subtitle);    MLNAnnotation$Builder.title.implement(builder, title);
+    
     builder.addProtocol($protocol);
     return MLNAnnotation.as(builder.build(keepIsolateAlive: $keepIsolateAlive));
   }
@@ -25939,93 +25753,16 @@ extension MLNAnnotation$Methods on MLNAnnotation {
   /// [objc.ObjCProtocolBuilder].
   ///
   /// Note: You cannot call this method after you have called `builder.build`.
-  static void addToBuilder(objc.ObjCProtocolBuilder builder, {required CLLocationCoordinate2D Function() coordinate, objc.NSString? Function()? subtitle, objc.NSString? Function()? title, bool $keepIsolateAlive = true}) {
-        MLNAnnotation$Builder.coordinate.implement(builder, coordinate);    MLNAnnotation$Builder.subtitle.implement(builder, subtitle);    MLNAnnotation$Builder.title.implement(builder, title);
+  static void addToBuilder(objc.ObjCProtocolBuilder builder, {bool $keepIsolateAlive = true}) {
+    
     builder.addProtocol($protocol);
   }
 
   
-  /// The center point (specified as a map coordinate) of the annotation. (required)
-/// (read-only)
-static final coordinate = objc.ObjCProtocolMethod<CLLocationCoordinate2D Function()>(
-      _protocol_MLNAnnotation,
-      _sel_coordinate,
-      ffi.Native.addressOf<ffi.NativeFunction<CLLocationCoordinate2D Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> )>>(_NativeLibrary_protocolTrampoline_neuenc).cast(),
-      objc.getProtocolMethodSignature(
-          _protocol_MLNAnnotation,
-          _sel_coordinate,
-          isRequired: true,
-          isInstanceMethod: true,
-      ),
-      (CLLocationCoordinate2D Function() func) => ObjCBlock_CLLocationCoordinate2D_ffiVoid.fromFunction((ffi.Pointer<ffi.Void> _, ) => func()),
-      
-    );
-/// The string containing the annotation’s subtitle.
-/// 
-/// This string is displayed in the callout for the associated annotation.
-static final subtitle = objc.ObjCProtocolMethod<objc.NSString? Function()>(
-      _protocol_MLNAnnotation,
-      _sel_subtitle,
-      ffi.Native.addressOf<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> )>>(_NativeLibrary_protocolTrampoline_1mbt9g9).cast(),
-      objc.getProtocolMethodSignature(
-          _protocol_MLNAnnotation,
-          _sel_subtitle,
-          isRequired: false,
-          isInstanceMethod: true,
-      ),
-      (objc.NSString? Function() func) => ObjCBlock_NSString_ffiVoid$1.fromFunction((ffi.Pointer<ffi.Void> _, ) => func()),
-      
-    );
-/// The string containing the annotation’s title.
-/// 
-/// Although this property is optional, if you support the selection of annotations
-/// in your map view, you are expected to provide this property. This string is
-/// displayed in the callout for the associated annotation.
-static final title = objc.ObjCProtocolMethod<objc.NSString? Function()>(
-      _protocol_MLNAnnotation,
-      _sel_title,
-      ffi.Native.addressOf<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> )>>(_NativeLibrary_protocolTrampoline_1mbt9g9).cast(),
-      objc.getProtocolMethodSignature(
-          _protocol_MLNAnnotation,
-          _sel_title,
-          isRequired: false,
-          isInstanceMethod: true,
-      ),
-      (objc.NSString? Function() func) => ObjCBlock_NSString_ffiVoid$1.fromFunction((ffi.Pointer<ffi.Void> _, ) => func()),
-      
-    );
-
+  
 }
 
-/// ``MLNShape`` is an abstract class that represents a shape or annotation. Shapes
-/// constitute the content of a map — not only the overlays atop the map, but also
-/// the content that forms the base map.
-/// 
-/// Create instances of ``MLNPointAnnotation``, ``MLNPointAnnotation``, ``MLNPointAnnotation``,
-/// ``MLNMultiPolyline``, ``MLNMultiPolyline``, ``MLNMultiPolyline``, or ``MLNMultiPolyline`` in
-/// order to use ``MLNShape``'s methods. Do not create instances of ``MLNShape``
-/// directly, and do not create your own subclasses of this class. The shape
-/// classes correspond to the
-/// <a href="https://tools.ietf.org/html/rfc7946#section-3.1">Geometry</a> object
-/// types in the GeoJSON standard, but some have nonstandard names for backwards
-/// compatibility.
-/// 
-/// Although you do not create instances of this class directly, you can use its
-/// ``MLNShape/shapeWithData:encoding:error:`` factory method to create one of the
-/// concrete subclasses of ``MLNShape`` noted above from GeoJSON data. To access a
-/// shape’s attributes, use the corresponding ``MLNFeature`` class instead.
-/// 
-/// You can add shapes to the map by adding them to an ``MLNShapeSource`` object.
-/// Configure the appearance of an ``MLNShapeSource``’s or ``MLNShapeSource``’s
-/// shapes collectively using a concrete instance of ``MLNVectorStyleLayer``.
-/// Alternatively, you can add some kinds of shapes directly to a map view as
-/// annotations or overlays.
-/// 
-/// You can filter the features in a ``MLNVectorStyleLayer`` or vary their layout or
-/// paint attributes based on the features’ geographies. Pass an ``MLNShape`` into an
-/// `NSPredicate` with the format `SELF IN %@` or `%@ CONTAINS SELF` and set the
-/// ``MLNVectorStyleLayer/predicate`` property to that predicate, or set a layout or
-/// paint attribute to a similarly formatted `NSExpression`.
+/// MLNShape
 extension type MLNShape._(objc.ObjCObject object$) implements objc.ObjCObject,objc.NSObject,MLNAnnotation,objc.NSSecureCoding {
   /// Constructs a [MLNShape] that points to the same underlying object as [other].
   MLNShape.as(objc.ObjCObject other) : object$ = other {
@@ -26111,19 +25848,6 @@ extension type MLNShape._(objc.ObjCObject object$) implements objc.ObjCObject,ob
 }
 
 extension MLNShape$Methods on MLNShape {
-
-  /// The center point (specified as a map coordinate) of the annotation. (required)
-/// (read-only)
-  CLLocationCoordinate2D get coordinate {
-    final $ptr = pkg_ffi.calloc<CLLocationCoordinate2D>();
-    objc.useMsgSendVariants ? _objc_msgSend_18o5nokStret($ptr, object$.ref.pointer, _sel_coordinate) : $ptr.ref = _objc_msgSend_18o5nok(object$.ref.pointer, _sel_coordinate);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<CLLocationCoordinate2D>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<CLLocationCoordinate2D>(
-        $finalizable);
-
-  }
-
 
   /// encodeWithCoder:
   void encodeWithCoder(objc.NSCoder coder) {
@@ -26460,120 +26184,9 @@ final _objc_msgSend_2nhnqw = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Voi
 late final _sel_deselectAnnotation_animated_ = objc.registerName("deselectAnnotation:animated:");
 late final _sel_overlays = objc.registerName("overlays");
 late final _protocol_MLNOverlay = objc.getProtocol("MLNOverlay");
-late final _sel_overlayBounds = objc.registerName("overlayBounds");
 
-/// Construction methods for `objc.ObjCBlock<MLNCoordinateBounds Function(ffi.Pointer<ffi.Void>)>`.
-abstract final class ObjCBlock_MLNCoordinateBounds_ffiVoid {
-  /// Returns a block that wraps the given raw block pointer.
-  static objc.ObjCBlock<MLNCoordinateBounds Function(ffi.Pointer<ffi.Void>)> fromPointer(ffi.Pointer<objc.ObjCBlockImpl> pointer,
-      {bool retain = false, bool release = false}) =>
-      objc.ObjCBlock<MLNCoordinateBounds Function(ffi.Pointer<ffi.Void>)>(pointer, retain: retain, release: release);
-
-  /// Creates a block from a C function pointer.
-  ///
-  /// This block must be invoked by native code running on the same thread as
-  /// the isolate that registered it. Invoking the block on the wrong thread
-  /// will result in a crash.
-  static objc.ObjCBlock<MLNCoordinateBounds Function(ffi.Pointer<ffi.Void>)> fromFunctionPointer(ffi.Pointer<ffi.NativeFunction<MLNCoordinateBounds Function(ffi.Pointer<ffi.Void> arg0)>> ptr) =>
-      objc.ObjCBlock<MLNCoordinateBounds Function(ffi.Pointer<ffi.Void>)>(objc.newPointerBlock(_fnPtrCallable, ptr.cast()),
-          retain: false, release: true);
-
-  /// Creates a block from a Dart function.
-  ///
-  /// This block must be invoked by native code running on the same thread as
-  /// the isolate that registered it. Invoking the block on the wrong thread
-  /// will result in a crash.
-  ///
-  /// If `keepIsolateAlive` is true, this block will keep this isolate alive
-  /// until it is garbage collected by both Dart and ObjC.
-  static objc.ObjCBlock<MLNCoordinateBounds Function(ffi.Pointer<ffi.Void>)> fromFunction(MLNCoordinateBounds Function(ffi.Pointer<ffi.Void> ) fn,
-          {bool keepIsolateAlive = true}) =>
-      objc.ObjCBlock<MLNCoordinateBounds Function(ffi.Pointer<ffi.Void>)>(objc.newClosureBlock(_closureCallable, (ffi.Pointer<ffi.Void> arg0) => fn(arg0), keepIsolateAlive),
-          retain: false, release: true);
-
-  static MLNCoordinateBounds _fnPtrTrampoline(
-      ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0) =>
-          block.ref.target.cast<ffi.NativeFunction<MLNCoordinateBounds Function(ffi.Pointer<ffi.Void> arg0)>>()
-              .asFunction<MLNCoordinateBounds Function(ffi.Pointer<ffi.Void> )>()(arg0);
-  static ffi.Pointer<ffi.Void> _fnPtrCallable = ffi.Pointer.fromFunction<
-      MLNCoordinateBounds Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> )>(_fnPtrTrampoline ).cast();
-  static MLNCoordinateBounds _closureTrampoline(
-      ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0) =>
-      (objc.getBlockClosure(block) as MLNCoordinateBounds Function(ffi.Pointer<ffi.Void> ))(arg0);
-  static ffi.Pointer<ffi.Void> _closureCallable = ffi.Pointer.fromFunction<
-      MLNCoordinateBounds Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> )>(_closureTrampoline ).cast();
-}
-
-/// Call operator for `objc.ObjCBlock<MLNCoordinateBounds Function(ffi.Pointer<ffi.Void>)>`.
-extension ObjCBlock_MLNCoordinateBounds_ffiVoid$CallExtension on objc.ObjCBlock<MLNCoordinateBounds Function(ffi.Pointer<ffi.Void>)> {
-  MLNCoordinateBounds call(ffi.Pointer<ffi.Void> arg0) =>ref.pointer.ref.invoke.cast<ffi.NativeFunction<MLNCoordinateBounds Function(ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0)>>()
-  .asFunction<MLNCoordinateBounds Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> )>()(
-    ref.pointer, arg0);
-}
-
-late final _sel_intersectsOverlayBounds_ = objc.registerName("intersectsOverlayBounds:");
-final _objc_msgSend_10h1dgu = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Bool Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , MLNCoordinateBounds )>>().asFunction<bool Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , MLNCoordinateBounds )>();
-
-/// Construction methods for `objc.ObjCBlock<ffi.Bool Function(ffi.Pointer<ffi.Void>, MLNCoordinateBounds)>`.
-abstract final class ObjCBlock_bool_ffiVoid_MLNCoordinateBounds {
-  /// Returns a block that wraps the given raw block pointer.
-  static objc.ObjCBlock<ffi.Bool Function(ffi.Pointer<ffi.Void>, MLNCoordinateBounds)> fromPointer(ffi.Pointer<objc.ObjCBlockImpl> pointer,
-      {bool retain = false, bool release = false}) =>
-      objc.ObjCBlock<ffi.Bool Function(ffi.Pointer<ffi.Void>, MLNCoordinateBounds)>(pointer, retain: retain, release: release);
-
-  /// Creates a block from a C function pointer.
-  ///
-  /// This block must be invoked by native code running on the same thread as
-  /// the isolate that registered it. Invoking the block on the wrong thread
-  /// will result in a crash.
-  static objc.ObjCBlock<ffi.Bool Function(ffi.Pointer<ffi.Void>, MLNCoordinateBounds)> fromFunctionPointer(ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Pointer<ffi.Void> arg0, MLNCoordinateBounds arg1)>> ptr) =>
-      objc.ObjCBlock<ffi.Bool Function(ffi.Pointer<ffi.Void>, MLNCoordinateBounds)>(objc.newPointerBlock(_fnPtrCallable, ptr.cast()),
-          retain: false, release: true);
-
-  /// Creates a block from a Dart function.
-  ///
-  /// This block must be invoked by native code running on the same thread as
-  /// the isolate that registered it. Invoking the block on the wrong thread
-  /// will result in a crash.
-  ///
-  /// If `keepIsolateAlive` is true, this block will keep this isolate alive
-  /// until it is garbage collected by both Dart and ObjC.
-  static objc.ObjCBlock<ffi.Bool Function(ffi.Pointer<ffi.Void>, MLNCoordinateBounds)> fromFunction(bool Function(ffi.Pointer<ffi.Void> , MLNCoordinateBounds ) fn,
-          {bool keepIsolateAlive = true}) =>
-      objc.ObjCBlock<ffi.Bool Function(ffi.Pointer<ffi.Void>, MLNCoordinateBounds)>(objc.newClosureBlock(_closureCallable, (ffi.Pointer<ffi.Void> arg0, MLNCoordinateBounds arg1) => fn(arg0, arg1), keepIsolateAlive),
-          retain: false, release: true);
-
-  static bool _fnPtrTrampoline(
-      ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, MLNCoordinateBounds arg1) =>
-          block.ref.target.cast<ffi.NativeFunction<ffi.Bool Function(ffi.Pointer<ffi.Void> arg0, MLNCoordinateBounds arg1)>>()
-              .asFunction<bool Function(ffi.Pointer<ffi.Void> , MLNCoordinateBounds )>()(arg0, arg1);
-  static ffi.Pointer<ffi.Void> _fnPtrCallable = ffi.Pointer.fromFunction<
-      ffi.Bool Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , MLNCoordinateBounds )>(_fnPtrTrampoline , false).cast();
-  static bool _closureTrampoline(
-      ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, MLNCoordinateBounds arg1) =>
-      (objc.getBlockClosure(block) as bool Function(ffi.Pointer<ffi.Void> , MLNCoordinateBounds ))(arg0, arg1);
-  static ffi.Pointer<ffi.Void> _closureCallable = ffi.Pointer.fromFunction<
-      ffi.Bool Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , MLNCoordinateBounds )>(_closureTrampoline , false).cast();
-}
-
-/// Call operator for `objc.ObjCBlock<ffi.Bool Function(ffi.Pointer<ffi.Void>, MLNCoordinateBounds)>`.
-extension ObjCBlock_bool_ffiVoid_MLNCoordinateBounds$CallExtension on objc.ObjCBlock<ffi.Bool Function(ffi.Pointer<ffi.Void>, MLNCoordinateBounds)> {
-  bool call(ffi.Pointer<ffi.Void> arg0, MLNCoordinateBounds arg1) =>ref.pointer.ref.invoke.cast<ffi.NativeFunction<ffi.Bool Function(ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, MLNCoordinateBounds arg1)>>()
-  .asFunction<bool Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , MLNCoordinateBounds )>()(
-    ref.pointer, arg0, arg1);
-}
-
-
-/// The ``MLNOverlay`` protocol defines a specific type of annotation that represents
-/// both a point and an area on a map. Overlay objects are essentially data objects
-/// that contain the geographic data needed to represent the map area. Overlays can
-/// take the form of a polyline or polygon.
-/// 
-/// You use overlays to layer more sophisticated content on top of a map view. For
-/// example, you could use an overlay to show the boundaries of a national park or
-/// trace a bus route along city streets. This SDK defines several concrete classes
-/// that conform to this protocol and define standard shapes.
-extension type MLNOverlay._(objc.ObjCProtocol object$) implements objc.ObjCProtocol, MLNAnnotation {
+/// MLNOverlay
+extension type MLNOverlay._(objc.ObjCProtocol object$) implements objc.ObjCProtocol {
   /// Constructs a [MLNOverlay] that points to the same underlying object as [other].
   MLNOverlay.as(objc.ObjCObject other) : object$ = other;
 
@@ -26590,81 +26203,6 @@ extension type MLNOverlay._(objc.ObjCProtocol object$) implements objc.ObjCProto
 
 extension MLNOverlay$Methods on MLNOverlay {
 
-  /// The center point (specified as a map coordinate) of the annotation. (required)
-/// (read-only)
-  CLLocationCoordinate2D get coordinate {
-    final $ptr = pkg_ffi.calloc<CLLocationCoordinate2D>();
-    objc.useMsgSendVariants ? _objc_msgSend_18o5nokStret($ptr, object$.ref.pointer, _sel_coordinate) : $ptr.ref = _objc_msgSend_18o5nok(object$.ref.pointer, _sel_coordinate);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<CLLocationCoordinate2D>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<CLLocationCoordinate2D>(
-        $finalizable);
-
-  }
-
-
-  /// Returns a Boolean indicating whether the specified rectangle intersects the
-/// receiver’s shape.
-/// 
-/// You can implement this method to provide more specific bounds checking for an
-/// overlay. If you do not implement it, the bounding rectangle is used to detect
-/// intersections.
-/// 
-/// @param overlayBounds The rectangle to intersect with the receiver’s area.
-/// @return `YES` if any part of the map rectangle intersects the receiver’s shape
-/// or `NO` if it does not.
-  bool intersectsOverlayBounds(MLNCoordinateBounds overlayBounds) {
-    return _objc_msgSend_10h1dgu(object$.ref.pointer, _sel_intersectsOverlayBounds_, overlayBounds);
-
-  }
-
-
-  /// The cooordinate rectangle that encompasses the overlay. (required) (read-only)
-/// 
-/// This property contains the smallest rectangle that completely encompasses the
-/// overlay. Implementers of this protocol must set this area when implementing
-/// their overlay class, and after setting it, you must not change it.
-/// 
-/// If this overlay spans the antimeridian, its bounds may extend west of −180 degrees
-/// longitude or east of 180 degrees longitude. For example, an overlay covering the
-/// Pacific Ocean from Tokyo to San Francisco might have a bounds extending
-/// from (35.68476, −220.24257) to (37.78428, −122.41310).
-  MLNCoordinateBounds get overlayBounds {
-    final $ptr = pkg_ffi.calloc<MLNCoordinateBounds>();
-    objc.useMsgSendVariants ? _objc_msgSend_ygoa6aStret($ptr, object$.ref.pointer, _sel_overlayBounds) : $ptr.ref = _objc_msgSend_ygoa6a(object$.ref.pointer, _sel_overlayBounds);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<MLNCoordinateBounds>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<MLNCoordinateBounds>(
-        $finalizable);
-
-  }
-
-
-  /// The string containing the annotation’s subtitle.
-/// 
-/// This string is displayed in the callout for the associated annotation.
-  objc.NSString? get subtitle {
-    if (!objc.respondsToSelector(object$.ref.pointer, _sel_subtitle)) {
-      throw objc.UnimplementedOptionalMethodException('MLNOverlay', 'subtitle');
-    }
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_subtitle);
-    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// The string containing the annotation’s title.
-/// 
-/// Although this property is optional, if you support the selection of annotations
-/// in your map view, you are expected to provide this property. This string is
-/// displayed in the callout for the associated annotation.
-  objc.NSString? get title {
-    if (!objc.respondsToSelector(object$.ref.pointer, _sel_title)) {
-      throw objc.UnimplementedOptionalMethodException('MLNOverlay', 'title');
-    }
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_title);
-    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
-  }
-
 }
 
   interface class MLNOverlay$Builder {
@@ -26678,9 +26216,9 @@ extension MLNOverlay$Methods on MLNOverlay {
   ///
   /// If `$keepIsolateAlive` is true, this protocol will keep this isolate
   /// alive until it is garbage collected by both Dart and ObjC.
-  static MLNOverlay implement({required CLLocationCoordinate2D Function() coordinate, required bool Function(MLNCoordinateBounds ) intersectsOverlayBounds_, required MLNCoordinateBounds Function() overlayBounds, objc.NSString? Function()? subtitle, objc.NSString? Function()? title, bool $keepIsolateAlive = true}) {
+  static MLNOverlay implement({bool $keepIsolateAlive = true}) {
     final builder = objc.ObjCProtocolBuilder(debugName: 'MLNOverlay');
-        MLNOverlay$Builder.coordinate.implement(builder, coordinate);    MLNOverlay$Builder.intersectsOverlayBounds_.implement(builder, intersectsOverlayBounds_);    MLNOverlay$Builder.overlayBounds.implement(builder, overlayBounds);    MLNOverlay$Builder.subtitle.implement(builder, subtitle);    MLNOverlay$Builder.title.implement(builder, title);
+    
     builder.addProtocol($protocol);
     return MLNOverlay.as(builder.build(keepIsolateAlive: $keepIsolateAlive));
   }
@@ -26689,108 +26227,13 @@ extension MLNOverlay$Methods on MLNOverlay {
   /// [objc.ObjCProtocolBuilder].
   ///
   /// Note: You cannot call this method after you have called `builder.build`.
-  static void addToBuilder(objc.ObjCProtocolBuilder builder, {required CLLocationCoordinate2D Function() coordinate, required bool Function(MLNCoordinateBounds ) intersectsOverlayBounds_, required MLNCoordinateBounds Function() overlayBounds, objc.NSString? Function()? subtitle, objc.NSString? Function()? title, bool $keepIsolateAlive = true}) {
-        MLNOverlay$Builder.coordinate.implement(builder, coordinate);    MLNOverlay$Builder.intersectsOverlayBounds_.implement(builder, intersectsOverlayBounds_);    MLNOverlay$Builder.overlayBounds.implement(builder, overlayBounds);    MLNOverlay$Builder.subtitle.implement(builder, subtitle);    MLNOverlay$Builder.title.implement(builder, title);
+  static void addToBuilder(objc.ObjCProtocolBuilder builder, {bool $keepIsolateAlive = true}) {
+    
     builder.addProtocol($protocol);
   }
 
   
-  /// The center point (specified as a map coordinate) of the annotation. (required)
-/// (read-only)
-static final coordinate = objc.ObjCProtocolMethod<CLLocationCoordinate2D Function()>(
-      _protocol_MLNOverlay,
-      _sel_coordinate,
-      ffi.Native.addressOf<ffi.NativeFunction<CLLocationCoordinate2D Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> )>>(_NativeLibrary_protocolTrampoline_neuenc).cast(),
-      objc.getProtocolMethodSignature(
-          _protocol_MLNOverlay,
-          _sel_coordinate,
-          isRequired: true,
-          isInstanceMethod: true,
-      ),
-      (CLLocationCoordinate2D Function() func) => ObjCBlock_CLLocationCoordinate2D_ffiVoid.fromFunction((ffi.Pointer<ffi.Void> _, ) => func()),
-      
-    );
-/// Returns a Boolean indicating whether the specified rectangle intersects the
-/// receiver’s shape.
-/// 
-/// You can implement this method to provide more specific bounds checking for an
-/// overlay. If you do not implement it, the bounding rectangle is used to detect
-/// intersections.
-/// 
-/// @param overlayBounds The rectangle to intersect with the receiver’s area.
-/// @return `YES` if any part of the map rectangle intersects the receiver’s shape
-/// or `NO` if it does not.
-static final intersectsOverlayBounds_ = objc.ObjCProtocolMethod<bool Function(MLNCoordinateBounds )>(
-      _protocol_MLNOverlay,
-      _sel_intersectsOverlayBounds_,
-      ffi.Native.addressOf<ffi.NativeFunction<ffi.Bool Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> , MLNCoordinateBounds )>>(_NativeLibrary_protocolTrampoline_krbldm).cast(),
-      objc.getProtocolMethodSignature(
-          _protocol_MLNOverlay,
-          _sel_intersectsOverlayBounds_,
-          isRequired: true,
-          isInstanceMethod: true,
-      ),
-      (bool Function(MLNCoordinateBounds ) func) => ObjCBlock_bool_ffiVoid_MLNCoordinateBounds.fromFunction((ffi.Pointer<ffi.Void> _, MLNCoordinateBounds arg1) => func(arg1)),
-      
-    );
-/// The cooordinate rectangle that encompasses the overlay. (required) (read-only)
-/// 
-/// This property contains the smallest rectangle that completely encompasses the
-/// overlay. Implementers of this protocol must set this area when implementing
-/// their overlay class, and after setting it, you must not change it.
-/// 
-/// If this overlay spans the antimeridian, its bounds may extend west of −180 degrees
-/// longitude or east of 180 degrees longitude. For example, an overlay covering the
-/// Pacific Ocean from Tokyo to San Francisco might have a bounds extending
-/// from (35.68476, −220.24257) to (37.78428, −122.41310).
-static final overlayBounds = objc.ObjCProtocolMethod<MLNCoordinateBounds Function()>(
-      _protocol_MLNOverlay,
-      _sel_overlayBounds,
-      ffi.Native.addressOf<ffi.NativeFunction<MLNCoordinateBounds Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> )>>(_NativeLibrary_protocolTrampoline_1fkc0ji).cast(),
-      objc.getProtocolMethodSignature(
-          _protocol_MLNOverlay,
-          _sel_overlayBounds,
-          isRequired: true,
-          isInstanceMethod: true,
-      ),
-      (MLNCoordinateBounds Function() func) => ObjCBlock_MLNCoordinateBounds_ffiVoid.fromFunction((ffi.Pointer<ffi.Void> _, ) => func()),
-      
-    );
-/// The string containing the annotation’s subtitle.
-/// 
-/// This string is displayed in the callout for the associated annotation.
-static final subtitle = objc.ObjCProtocolMethod<objc.NSString? Function()>(
-      _protocol_MLNOverlay,
-      _sel_subtitle,
-      ffi.Native.addressOf<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> )>>(_NativeLibrary_protocolTrampoline_1mbt9g9).cast(),
-      objc.getProtocolMethodSignature(
-          _protocol_MLNOverlay,
-          _sel_subtitle,
-          isRequired: false,
-          isInstanceMethod: true,
-      ),
-      (objc.NSString? Function() func) => ObjCBlock_NSString_ffiVoid$1.fromFunction((ffi.Pointer<ffi.Void> _, ) => func()),
-      
-    );
-/// The string containing the annotation’s title.
-/// 
-/// Although this property is optional, if you support the selection of annotations
-/// in your map view, you are expected to provide this property. This string is
-/// displayed in the callout for the associated annotation.
-static final title = objc.ObjCProtocolMethod<objc.NSString? Function()>(
-      _protocol_MLNOverlay,
-      _sel_title,
-      ffi.Native.addressOf<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> )>>(_NativeLibrary_protocolTrampoline_1mbt9g9).cast(),
-      objc.getProtocolMethodSignature(
-          _protocol_MLNOverlay,
-          _sel_title,
-          isRequired: false,
-          isInstanceMethod: true,
-      ),
-      (objc.NSString? Function() func) => ObjCBlock_NSString_ffiVoid$1.fromFunction((ffi.Pointer<ffi.Void> _, ) => func()),
-      
-    );
-
+  
 }
 late final _sel_addOverlay_ = objc.registerName("addOverlay:");
 late final _sel_addOverlays_ = objc.registerName("addOverlays:");
@@ -30406,19 +29849,6 @@ extension MLNFeature$Methods on MLNFeature {
   }
 
 
-  /// The center point (specified as a map coordinate) of the annotation. (required)
-/// (read-only)
-  CLLocationCoordinate2D get coordinate {
-    final $ptr = pkg_ffi.calloc<CLLocationCoordinate2D>();
-    objc.useMsgSendVariants ? _objc_msgSend_18o5nokStret($ptr, object$.ref.pointer, _sel_coordinate) : $ptr.ref = _objc_msgSend_18o5nok(object$.ref.pointer, _sel_coordinate);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<CLLocationCoordinate2D>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<CLLocationCoordinate2D>(
-        $finalizable);
-
-  }
-
-
   /// Returns a dictionary that can be serialized as a GeoJSON Feature representation
 /// of an instance of an ``MLNFeature`` subclass.
 /// 
@@ -30561,32 +29991,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setIdentifier_, value?.ref.pointe
 
   }
 
-
-  /// The string containing the annotation’s subtitle.
-/// 
-/// This string is displayed in the callout for the associated annotation.
-  objc.NSString? get subtitle {
-    if (!objc.respondsToSelector(object$.ref.pointer, _sel_subtitle)) {
-      throw objc.UnimplementedOptionalMethodException('MLNFeature', 'subtitle');
-    }
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_subtitle);
-    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// The string containing the annotation’s title.
-/// 
-/// Although this property is optional, if you support the selection of annotations
-/// in your map view, you are expected to provide this property. This string is
-/// displayed in the callout for the associated annotation.
-  objc.NSString? get title {
-    if (!objc.respondsToSelector(object$.ref.pointer, _sel_title)) {
-      throw objc.UnimplementedOptionalMethodException('MLNFeature', 'title');
-    }
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_title);
-    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
-  }
-
 }
 
   interface class MLNFeature$Builder {
@@ -30600,9 +30004,9 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setIdentifier_, value?.ref.pointe
   ///
   /// If `$keepIsolateAlive` is true, this protocol will keep this isolate
   /// alive until it is garbage collected by both Dart and ObjC.
-  static MLNFeature implement({required objc.ObjCObject? Function(objc.NSString ) attributeForKey_, required objc.NSDictionary Function() attributes, required CLLocationCoordinate2D Function() coordinate, required objc.NSDictionary Function() geoJSONDictionary, required objc.ObjCObject? Function() identifier, required void Function(objc.NSDictionary ) setAttributes_, required void Function(objc.ObjCObject? ) setIdentifier_, objc.NSString? Function()? subtitle, objc.NSString? Function()? title, bool $keepIsolateAlive = true}) {
+  static MLNFeature implement({required objc.ObjCObject? Function(objc.NSString ) attributeForKey_, required objc.NSDictionary Function() attributes, required objc.NSDictionary Function() geoJSONDictionary, required objc.ObjCObject? Function() identifier, required void Function(objc.NSDictionary ) setAttributes_, required void Function(objc.ObjCObject? ) setIdentifier_, bool $keepIsolateAlive = true}) {
     final builder = objc.ObjCProtocolBuilder(debugName: 'MLNFeature');
-        MLNFeature$Builder.attributeForKey_.implement(builder, attributeForKey_);    MLNFeature$Builder.attributes.implement(builder, attributes);    MLNFeature$Builder.coordinate.implement(builder, coordinate);    MLNFeature$Builder.geoJSONDictionary.implement(builder, geoJSONDictionary);    MLNFeature$Builder.identifier.implement(builder, identifier);    MLNFeature$Builder.setAttributes_.implement(builder, setAttributes_);    MLNFeature$Builder.setIdentifier_.implement(builder, setIdentifier_);    MLNFeature$Builder.subtitle.implement(builder, subtitle);    MLNFeature$Builder.title.implement(builder, title);
+        MLNFeature$Builder.attributeForKey_.implement(builder, attributeForKey_);    MLNFeature$Builder.attributes.implement(builder, attributes);    MLNFeature$Builder.geoJSONDictionary.implement(builder, geoJSONDictionary);    MLNFeature$Builder.identifier.implement(builder, identifier);    MLNFeature$Builder.setAttributes_.implement(builder, setAttributes_);    MLNFeature$Builder.setIdentifier_.implement(builder, setIdentifier_);
     builder.addProtocol($protocol);
     return MLNFeature.as(builder.build(keepIsolateAlive: $keepIsolateAlive));
   }
@@ -30611,8 +30015,8 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setIdentifier_, value?.ref.pointe
   /// [objc.ObjCProtocolBuilder].
   ///
   /// Note: You cannot call this method after you have called `builder.build`.
-  static void addToBuilder(objc.ObjCProtocolBuilder builder, {required objc.ObjCObject? Function(objc.NSString ) attributeForKey_, required objc.NSDictionary Function() attributes, required CLLocationCoordinate2D Function() coordinate, required objc.NSDictionary Function() geoJSONDictionary, required objc.ObjCObject? Function() identifier, required void Function(objc.NSDictionary ) setAttributes_, required void Function(objc.ObjCObject? ) setIdentifier_, objc.NSString? Function()? subtitle, objc.NSString? Function()? title, bool $keepIsolateAlive = true}) {
-        MLNFeature$Builder.attributeForKey_.implement(builder, attributeForKey_);    MLNFeature$Builder.attributes.implement(builder, attributes);    MLNFeature$Builder.coordinate.implement(builder, coordinate);    MLNFeature$Builder.geoJSONDictionary.implement(builder, geoJSONDictionary);    MLNFeature$Builder.identifier.implement(builder, identifier);    MLNFeature$Builder.setAttributes_.implement(builder, setAttributes_);    MLNFeature$Builder.setIdentifier_.implement(builder, setIdentifier_);    MLNFeature$Builder.subtitle.implement(builder, subtitle);    MLNFeature$Builder.title.implement(builder, title);
+  static void addToBuilder(objc.ObjCProtocolBuilder builder, {required objc.ObjCObject? Function(objc.NSString ) attributeForKey_, required objc.NSDictionary Function() attributes, required objc.NSDictionary Function() geoJSONDictionary, required objc.ObjCObject? Function() identifier, required void Function(objc.NSDictionary ) setAttributes_, required void Function(objc.ObjCObject? ) setIdentifier_, bool $keepIsolateAlive = true}) {
+        MLNFeature$Builder.attributeForKey_.implement(builder, attributeForKey_);    MLNFeature$Builder.attributes.implement(builder, attributes);    MLNFeature$Builder.geoJSONDictionary.implement(builder, geoJSONDictionary);    MLNFeature$Builder.identifier.implement(builder, identifier);    MLNFeature$Builder.setAttributes_.implement(builder, setAttributes_);    MLNFeature$Builder.setIdentifier_.implement(builder, setIdentifier_);
     builder.addProtocol($protocol);
   }
 
@@ -30622,9 +30026,9 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setIdentifier_, value?.ref.pointe
   ///
   /// If `$keepIsolateAlive` is true, this protocol will keep this isolate
   /// alive until it is garbage collected by both Dart and ObjC.
-  static MLNFeature implementAsListener({required objc.ObjCObject? Function(objc.NSString ) attributeForKey_, required objc.NSDictionary Function() attributes, required CLLocationCoordinate2D Function() coordinate, required objc.NSDictionary Function() geoJSONDictionary, required objc.ObjCObject? Function() identifier, required void Function(objc.NSDictionary ) setAttributes_, required void Function(objc.ObjCObject? ) setIdentifier_, objc.NSString? Function()? subtitle, objc.NSString? Function()? title, bool $keepIsolateAlive = true}) {
+  static MLNFeature implementAsListener({required objc.ObjCObject? Function(objc.NSString ) attributeForKey_, required objc.NSDictionary Function() attributes, required objc.NSDictionary Function() geoJSONDictionary, required objc.ObjCObject? Function() identifier, required void Function(objc.NSDictionary ) setAttributes_, required void Function(objc.ObjCObject? ) setIdentifier_, bool $keepIsolateAlive = true}) {
     final builder = objc.ObjCProtocolBuilder(debugName: 'MLNFeature');
-        MLNFeature$Builder.attributeForKey_.implement(builder, attributeForKey_);    MLNFeature$Builder.attributes.implement(builder, attributes);    MLNFeature$Builder.coordinate.implement(builder, coordinate);    MLNFeature$Builder.geoJSONDictionary.implement(builder, geoJSONDictionary);    MLNFeature$Builder.identifier.implement(builder, identifier);    MLNFeature$Builder.setAttributes_.implementAsListener(builder, setAttributes_);    MLNFeature$Builder.setIdentifier_.implementAsListener(builder, setIdentifier_);    MLNFeature$Builder.subtitle.implement(builder, subtitle);    MLNFeature$Builder.title.implement(builder, title);
+        MLNFeature$Builder.attributeForKey_.implement(builder, attributeForKey_);    MLNFeature$Builder.attributes.implement(builder, attributes);    MLNFeature$Builder.geoJSONDictionary.implement(builder, geoJSONDictionary);    MLNFeature$Builder.identifier.implement(builder, identifier);    MLNFeature$Builder.setAttributes_.implementAsListener(builder, setAttributes_);    MLNFeature$Builder.setIdentifier_.implementAsListener(builder, setIdentifier_);
     builder.addProtocol($protocol);
     return MLNFeature.as(builder.build(keepIsolateAlive: $keepIsolateAlive));
   }
@@ -30634,8 +30038,8 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setIdentifier_, value?.ref.pointe
   /// be.
   ///
   /// Note: You cannot call this method after you have called `builder.build`.
-  static void addToBuilderAsListener(objc.ObjCProtocolBuilder builder, {required objc.ObjCObject? Function(objc.NSString ) attributeForKey_, required objc.NSDictionary Function() attributes, required CLLocationCoordinate2D Function() coordinate, required objc.NSDictionary Function() geoJSONDictionary, required objc.ObjCObject? Function() identifier, required void Function(objc.NSDictionary ) setAttributes_, required void Function(objc.ObjCObject? ) setIdentifier_, objc.NSString? Function()? subtitle, objc.NSString? Function()? title, bool $keepIsolateAlive = true}) {
-        MLNFeature$Builder.attributeForKey_.implement(builder, attributeForKey_);    MLNFeature$Builder.attributes.implement(builder, attributes);    MLNFeature$Builder.coordinate.implement(builder, coordinate);    MLNFeature$Builder.geoJSONDictionary.implement(builder, geoJSONDictionary);    MLNFeature$Builder.identifier.implement(builder, identifier);    MLNFeature$Builder.setAttributes_.implementAsListener(builder, setAttributes_);    MLNFeature$Builder.setIdentifier_.implementAsListener(builder, setIdentifier_);    MLNFeature$Builder.subtitle.implement(builder, subtitle);    MLNFeature$Builder.title.implement(builder, title);
+  static void addToBuilderAsListener(objc.ObjCProtocolBuilder builder, {required objc.ObjCObject? Function(objc.NSString ) attributeForKey_, required objc.NSDictionary Function() attributes, required objc.NSDictionary Function() geoJSONDictionary, required objc.ObjCObject? Function() identifier, required void Function(objc.NSDictionary ) setAttributes_, required void Function(objc.ObjCObject? ) setIdentifier_, bool $keepIsolateAlive = true}) {
+        MLNFeature$Builder.attributeForKey_.implement(builder, attributeForKey_);    MLNFeature$Builder.attributes.implement(builder, attributes);    MLNFeature$Builder.geoJSONDictionary.implement(builder, geoJSONDictionary);    MLNFeature$Builder.identifier.implement(builder, identifier);    MLNFeature$Builder.setAttributes_.implementAsListener(builder, setAttributes_);    MLNFeature$Builder.setIdentifier_.implementAsListener(builder, setIdentifier_);
     builder.addProtocol($protocol);
   }
 
@@ -30645,9 +30049,9 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setIdentifier_, value?.ref.pointe
   ///
   /// If `$keepIsolateAlive` is true, this protocol will keep this isolate
   /// alive until it is garbage collected by both Dart and ObjC.
-  static MLNFeature implementAsBlocking({required objc.ObjCObject? Function(objc.NSString ) attributeForKey_, required objc.NSDictionary Function() attributes, required CLLocationCoordinate2D Function() coordinate, required objc.NSDictionary Function() geoJSONDictionary, required objc.ObjCObject? Function() identifier, required void Function(objc.NSDictionary ) setAttributes_, required void Function(objc.ObjCObject? ) setIdentifier_, objc.NSString? Function()? subtitle, objc.NSString? Function()? title, bool $keepIsolateAlive = true}) {
+  static MLNFeature implementAsBlocking({required objc.ObjCObject? Function(objc.NSString ) attributeForKey_, required objc.NSDictionary Function() attributes, required objc.NSDictionary Function() geoJSONDictionary, required objc.ObjCObject? Function() identifier, required void Function(objc.NSDictionary ) setAttributes_, required void Function(objc.ObjCObject? ) setIdentifier_, bool $keepIsolateAlive = true}) {
     final builder = objc.ObjCProtocolBuilder(debugName: 'MLNFeature');
-        MLNFeature$Builder.attributeForKey_.implement(builder, attributeForKey_);    MLNFeature$Builder.attributes.implement(builder, attributes);    MLNFeature$Builder.coordinate.implement(builder, coordinate);    MLNFeature$Builder.geoJSONDictionary.implement(builder, geoJSONDictionary);    MLNFeature$Builder.identifier.implement(builder, identifier);    MLNFeature$Builder.setAttributes_.implementAsBlocking(builder, setAttributes_);    MLNFeature$Builder.setIdentifier_.implementAsBlocking(builder, setIdentifier_);    MLNFeature$Builder.subtitle.implement(builder, subtitle);    MLNFeature$Builder.title.implement(builder, title);
+        MLNFeature$Builder.attributeForKey_.implement(builder, attributeForKey_);    MLNFeature$Builder.attributes.implement(builder, attributes);    MLNFeature$Builder.geoJSONDictionary.implement(builder, geoJSONDictionary);    MLNFeature$Builder.identifier.implement(builder, identifier);    MLNFeature$Builder.setAttributes_.implementAsBlocking(builder, setAttributes_);    MLNFeature$Builder.setIdentifier_.implementAsBlocking(builder, setIdentifier_);
     builder.addProtocol($protocol);
     return MLNFeature.as(builder.build(keepIsolateAlive: $keepIsolateAlive));
   }
@@ -30657,8 +30061,8 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setIdentifier_, value?.ref.pointe
   /// listeners will be.
   ///
   /// Note: You cannot call this method after you have called `builder.build`.
-  static void addToBuilderAsBlocking(objc.ObjCProtocolBuilder builder, {required objc.ObjCObject? Function(objc.NSString ) attributeForKey_, required objc.NSDictionary Function() attributes, required CLLocationCoordinate2D Function() coordinate, required objc.NSDictionary Function() geoJSONDictionary, required objc.ObjCObject? Function() identifier, required void Function(objc.NSDictionary ) setAttributes_, required void Function(objc.ObjCObject? ) setIdentifier_, objc.NSString? Function()? subtitle, objc.NSString? Function()? title, bool $keepIsolateAlive = true}) {
-        MLNFeature$Builder.attributeForKey_.implement(builder, attributeForKey_);    MLNFeature$Builder.attributes.implement(builder, attributes);    MLNFeature$Builder.coordinate.implement(builder, coordinate);    MLNFeature$Builder.geoJSONDictionary.implement(builder, geoJSONDictionary);    MLNFeature$Builder.identifier.implement(builder, identifier);    MLNFeature$Builder.setAttributes_.implementAsBlocking(builder, setAttributes_);    MLNFeature$Builder.setIdentifier_.implementAsBlocking(builder, setIdentifier_);    MLNFeature$Builder.subtitle.implement(builder, subtitle);    MLNFeature$Builder.title.implement(builder, title);
+  static void addToBuilderAsBlocking(objc.ObjCProtocolBuilder builder, {required objc.ObjCObject? Function(objc.NSString ) attributeForKey_, required objc.NSDictionary Function() attributes, required objc.NSDictionary Function() geoJSONDictionary, required objc.ObjCObject? Function() identifier, required void Function(objc.NSDictionary ) setAttributes_, required void Function(objc.ObjCObject? ) setIdentifier_, bool $keepIsolateAlive = true}) {
+        MLNFeature$Builder.attributeForKey_.implement(builder, attributeForKey_);    MLNFeature$Builder.attributes.implement(builder, attributes);    MLNFeature$Builder.geoJSONDictionary.implement(builder, geoJSONDictionary);    MLNFeature$Builder.identifier.implement(builder, identifier);    MLNFeature$Builder.setAttributes_.implementAsBlocking(builder, setAttributes_);    MLNFeature$Builder.setIdentifier_.implementAsBlocking(builder, setIdentifier_);
     builder.addProtocol($protocol);
   }
 
@@ -30746,21 +30150,6 @@ static final attributes = objc.ObjCProtocolMethod<objc.NSDictionary Function()>(
           isInstanceMethod: true,
       ),
       (objc.NSDictionary Function() func) => ObjCBlock_NSDictionary_ffiVoid.fromFunction((ffi.Pointer<ffi.Void> _, ) => func()),
-      
-    );
-/// The center point (specified as a map coordinate) of the annotation. (required)
-/// (read-only)
-static final coordinate = objc.ObjCProtocolMethod<CLLocationCoordinate2D Function()>(
-      _protocol_MLNFeature,
-      _sel_coordinate,
-      ffi.Native.addressOf<ffi.NativeFunction<CLLocationCoordinate2D Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> )>>(_NativeLibrary_protocolTrampoline_neuenc).cast(),
-      objc.getProtocolMethodSignature(
-          _protocol_MLNFeature,
-          _sel_coordinate,
-          isRequired: true,
-          isInstanceMethod: true,
-      ),
-      (CLLocationCoordinate2D Function() func) => ObjCBlock_CLLocationCoordinate2D_ffiVoid.fromFunction((ffi.Pointer<ffi.Void> _, ) => func()),
       
     );
 /// Returns a dictionary that can be serialized as a GeoJSON Feature representation
@@ -30937,40 +30326,6 @@ static final setIdentifier_ = objc.ObjCProtocolListenableMethod<void Function(ob
           (void Function(objc.ObjCObject? ) func) => ObjCBlock_ffiVoid_ffiVoid_objcObjCObjectImpl.listener((ffi.Pointer<ffi.Void> _, objc.ObjCObject? arg1) => func(arg1)),
     (void Function(objc.ObjCObject? ) func) => ObjCBlock_ffiVoid_ffiVoid_objcObjCObjectImpl.blocking((ffi.Pointer<ffi.Void> _, objc.ObjCObject? arg1) => func(arg1)),
 
-    );
-/// The string containing the annotation’s subtitle.
-/// 
-/// This string is displayed in the callout for the associated annotation.
-static final subtitle = objc.ObjCProtocolMethod<objc.NSString? Function()>(
-      _protocol_MLNFeature,
-      _sel_subtitle,
-      ffi.Native.addressOf<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> )>>(_NativeLibrary_protocolTrampoline_1mbt9g9).cast(),
-      objc.getProtocolMethodSignature(
-          _protocol_MLNFeature,
-          _sel_subtitle,
-          isRequired: false,
-          isInstanceMethod: true,
-      ),
-      (objc.NSString? Function() func) => ObjCBlock_NSString_ffiVoid$1.fromFunction((ffi.Pointer<ffi.Void> _, ) => func()),
-      
-    );
-/// The string containing the annotation’s title.
-/// 
-/// Although this property is optional, if you support the selection of annotations
-/// in your map view, you are expected to provide this property. This string is
-/// displayed in the callout for the associated annotation.
-static final title = objc.ObjCProtocolMethod<objc.NSString? Function()>(
-      _protocol_MLNFeature,
-      _sel_title,
-      ffi.Native.addressOf<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> )>>(_NativeLibrary_protocolTrampoline_1mbt9g9).cast(),
-      objc.getProtocolMethodSignature(
-          _protocol_MLNFeature,
-          _sel_title,
-          isRequired: false,
-          isInstanceMethod: true,
-      ),
-      (objc.NSString? Function() func) => ObjCBlock_NSString_ffiVoid$1.fromFunction((ffi.Pointer<ffi.Void> _, ) => func()),
-      
     );
 
 }
@@ -31105,19 +30460,6 @@ extension MLNCluster$Methods on MLNCluster {
   }
 
 
-  /// The center point (specified as a map coordinate) of the annotation. (required)
-/// (read-only)
-  CLLocationCoordinate2D get coordinate {
-    final $ptr = pkg_ffi.calloc<CLLocationCoordinate2D>();
-    objc.useMsgSendVariants ? _objc_msgSend_18o5nokStret($ptr, object$.ref.pointer, _sel_coordinate) : $ptr.ref = _objc_msgSend_18o5nok(object$.ref.pointer, _sel_coordinate);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<CLLocationCoordinate2D>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<CLLocationCoordinate2D>(
-        $finalizable);
-
-  }
-
-
   /// Returns a dictionary that can be serialized as a GeoJSON Feature representation
 /// of an instance of an ``MLNFeature`` subclass.
 /// 
@@ -31260,32 +30602,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setIdentifier_, value?.ref.pointe
 
   }
 
-
-  /// The string containing the annotation’s subtitle.
-/// 
-/// This string is displayed in the callout for the associated annotation.
-  objc.NSString? get subtitle {
-    if (!objc.respondsToSelector(object$.ref.pointer, _sel_subtitle)) {
-      throw objc.UnimplementedOptionalMethodException('MLNCluster', 'subtitle');
-    }
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_subtitle);
-    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// The string containing the annotation’s title.
-/// 
-/// Although this property is optional, if you support the selection of annotations
-/// in your map view, you are expected to provide this property. This string is
-/// displayed in the callout for the associated annotation.
-  objc.NSString? get title {
-    if (!objc.respondsToSelector(object$.ref.pointer, _sel_title)) {
-      throw objc.UnimplementedOptionalMethodException('MLNCluster', 'title');
-    }
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_title);
-    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
-  }
-
 }
 
   interface class MLNCluster$Builder {
@@ -31299,9 +30615,9 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setIdentifier_, value?.ref.pointe
   ///
   /// If `$keepIsolateAlive` is true, this protocol will keep this isolate
   /// alive until it is garbage collected by both Dart and ObjC.
-  static MLNCluster implement({required objc.ObjCObject? Function(objc.NSString ) attributeForKey_, required objc.NSDictionary Function() attributes, required int Function() clusterIdentifier, required int Function() clusterPointCount, required CLLocationCoordinate2D Function() coordinate, required objc.NSDictionary Function() geoJSONDictionary, required objc.ObjCObject? Function() identifier, required void Function(objc.NSDictionary ) setAttributes_, required void Function(objc.ObjCObject? ) setIdentifier_, objc.NSString? Function()? subtitle, objc.NSString? Function()? title, bool $keepIsolateAlive = true}) {
+  static MLNCluster implement({required objc.ObjCObject? Function(objc.NSString ) attributeForKey_, required objc.NSDictionary Function() attributes, required int Function() clusterIdentifier, required int Function() clusterPointCount, required objc.NSDictionary Function() geoJSONDictionary, required objc.ObjCObject? Function() identifier, required void Function(objc.NSDictionary ) setAttributes_, required void Function(objc.ObjCObject? ) setIdentifier_, bool $keepIsolateAlive = true}) {
     final builder = objc.ObjCProtocolBuilder(debugName: 'MLNCluster');
-        MLNCluster$Builder.attributeForKey_.implement(builder, attributeForKey_);    MLNCluster$Builder.attributes.implement(builder, attributes);    MLNCluster$Builder.clusterIdentifier.implement(builder, clusterIdentifier);    MLNCluster$Builder.clusterPointCount.implement(builder, clusterPointCount);    MLNCluster$Builder.coordinate.implement(builder, coordinate);    MLNCluster$Builder.geoJSONDictionary.implement(builder, geoJSONDictionary);    MLNCluster$Builder.identifier.implement(builder, identifier);    MLNCluster$Builder.setAttributes_.implement(builder, setAttributes_);    MLNCluster$Builder.setIdentifier_.implement(builder, setIdentifier_);    MLNCluster$Builder.subtitle.implement(builder, subtitle);    MLNCluster$Builder.title.implement(builder, title);
+        MLNCluster$Builder.attributeForKey_.implement(builder, attributeForKey_);    MLNCluster$Builder.attributes.implement(builder, attributes);    MLNCluster$Builder.clusterIdentifier.implement(builder, clusterIdentifier);    MLNCluster$Builder.clusterPointCount.implement(builder, clusterPointCount);    MLNCluster$Builder.geoJSONDictionary.implement(builder, geoJSONDictionary);    MLNCluster$Builder.identifier.implement(builder, identifier);    MLNCluster$Builder.setAttributes_.implement(builder, setAttributes_);    MLNCluster$Builder.setIdentifier_.implement(builder, setIdentifier_);
     builder.addProtocol($protocol);
     return MLNCluster.as(builder.build(keepIsolateAlive: $keepIsolateAlive));
   }
@@ -31310,8 +30626,8 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setIdentifier_, value?.ref.pointe
   /// [objc.ObjCProtocolBuilder].
   ///
   /// Note: You cannot call this method after you have called `builder.build`.
-  static void addToBuilder(objc.ObjCProtocolBuilder builder, {required objc.ObjCObject? Function(objc.NSString ) attributeForKey_, required objc.NSDictionary Function() attributes, required int Function() clusterIdentifier, required int Function() clusterPointCount, required CLLocationCoordinate2D Function() coordinate, required objc.NSDictionary Function() geoJSONDictionary, required objc.ObjCObject? Function() identifier, required void Function(objc.NSDictionary ) setAttributes_, required void Function(objc.ObjCObject? ) setIdentifier_, objc.NSString? Function()? subtitle, objc.NSString? Function()? title, bool $keepIsolateAlive = true}) {
-        MLNCluster$Builder.attributeForKey_.implement(builder, attributeForKey_);    MLNCluster$Builder.attributes.implement(builder, attributes);    MLNCluster$Builder.clusterIdentifier.implement(builder, clusterIdentifier);    MLNCluster$Builder.clusterPointCount.implement(builder, clusterPointCount);    MLNCluster$Builder.coordinate.implement(builder, coordinate);    MLNCluster$Builder.geoJSONDictionary.implement(builder, geoJSONDictionary);    MLNCluster$Builder.identifier.implement(builder, identifier);    MLNCluster$Builder.setAttributes_.implement(builder, setAttributes_);    MLNCluster$Builder.setIdentifier_.implement(builder, setIdentifier_);    MLNCluster$Builder.subtitle.implement(builder, subtitle);    MLNCluster$Builder.title.implement(builder, title);
+  static void addToBuilder(objc.ObjCProtocolBuilder builder, {required objc.ObjCObject? Function(objc.NSString ) attributeForKey_, required objc.NSDictionary Function() attributes, required int Function() clusterIdentifier, required int Function() clusterPointCount, required objc.NSDictionary Function() geoJSONDictionary, required objc.ObjCObject? Function() identifier, required void Function(objc.NSDictionary ) setAttributes_, required void Function(objc.ObjCObject? ) setIdentifier_, bool $keepIsolateAlive = true}) {
+        MLNCluster$Builder.attributeForKey_.implement(builder, attributeForKey_);    MLNCluster$Builder.attributes.implement(builder, attributes);    MLNCluster$Builder.clusterIdentifier.implement(builder, clusterIdentifier);    MLNCluster$Builder.clusterPointCount.implement(builder, clusterPointCount);    MLNCluster$Builder.geoJSONDictionary.implement(builder, geoJSONDictionary);    MLNCluster$Builder.identifier.implement(builder, identifier);    MLNCluster$Builder.setAttributes_.implement(builder, setAttributes_);    MLNCluster$Builder.setIdentifier_.implement(builder, setIdentifier_);
     builder.addProtocol($protocol);
   }
 
@@ -31321,9 +30637,9 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setIdentifier_, value?.ref.pointe
   ///
   /// If `$keepIsolateAlive` is true, this protocol will keep this isolate
   /// alive until it is garbage collected by both Dart and ObjC.
-  static MLNCluster implementAsListener({required objc.ObjCObject? Function(objc.NSString ) attributeForKey_, required objc.NSDictionary Function() attributes, required int Function() clusterIdentifier, required int Function() clusterPointCount, required CLLocationCoordinate2D Function() coordinate, required objc.NSDictionary Function() geoJSONDictionary, required objc.ObjCObject? Function() identifier, required void Function(objc.NSDictionary ) setAttributes_, required void Function(objc.ObjCObject? ) setIdentifier_, objc.NSString? Function()? subtitle, objc.NSString? Function()? title, bool $keepIsolateAlive = true}) {
+  static MLNCluster implementAsListener({required objc.ObjCObject? Function(objc.NSString ) attributeForKey_, required objc.NSDictionary Function() attributes, required int Function() clusterIdentifier, required int Function() clusterPointCount, required objc.NSDictionary Function() geoJSONDictionary, required objc.ObjCObject? Function() identifier, required void Function(objc.NSDictionary ) setAttributes_, required void Function(objc.ObjCObject? ) setIdentifier_, bool $keepIsolateAlive = true}) {
     final builder = objc.ObjCProtocolBuilder(debugName: 'MLNCluster');
-        MLNCluster$Builder.attributeForKey_.implement(builder, attributeForKey_);    MLNCluster$Builder.attributes.implement(builder, attributes);    MLNCluster$Builder.clusterIdentifier.implement(builder, clusterIdentifier);    MLNCluster$Builder.clusterPointCount.implement(builder, clusterPointCount);    MLNCluster$Builder.coordinate.implement(builder, coordinate);    MLNCluster$Builder.geoJSONDictionary.implement(builder, geoJSONDictionary);    MLNCluster$Builder.identifier.implement(builder, identifier);    MLNCluster$Builder.setAttributes_.implementAsListener(builder, setAttributes_);    MLNCluster$Builder.setIdentifier_.implementAsListener(builder, setIdentifier_);    MLNCluster$Builder.subtitle.implement(builder, subtitle);    MLNCluster$Builder.title.implement(builder, title);
+        MLNCluster$Builder.attributeForKey_.implement(builder, attributeForKey_);    MLNCluster$Builder.attributes.implement(builder, attributes);    MLNCluster$Builder.clusterIdentifier.implement(builder, clusterIdentifier);    MLNCluster$Builder.clusterPointCount.implement(builder, clusterPointCount);    MLNCluster$Builder.geoJSONDictionary.implement(builder, geoJSONDictionary);    MLNCluster$Builder.identifier.implement(builder, identifier);    MLNCluster$Builder.setAttributes_.implementAsListener(builder, setAttributes_);    MLNCluster$Builder.setIdentifier_.implementAsListener(builder, setIdentifier_);
     builder.addProtocol($protocol);
     return MLNCluster.as(builder.build(keepIsolateAlive: $keepIsolateAlive));
   }
@@ -31333,8 +30649,8 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setIdentifier_, value?.ref.pointe
   /// be.
   ///
   /// Note: You cannot call this method after you have called `builder.build`.
-  static void addToBuilderAsListener(objc.ObjCProtocolBuilder builder, {required objc.ObjCObject? Function(objc.NSString ) attributeForKey_, required objc.NSDictionary Function() attributes, required int Function() clusterIdentifier, required int Function() clusterPointCount, required CLLocationCoordinate2D Function() coordinate, required objc.NSDictionary Function() geoJSONDictionary, required objc.ObjCObject? Function() identifier, required void Function(objc.NSDictionary ) setAttributes_, required void Function(objc.ObjCObject? ) setIdentifier_, objc.NSString? Function()? subtitle, objc.NSString? Function()? title, bool $keepIsolateAlive = true}) {
-        MLNCluster$Builder.attributeForKey_.implement(builder, attributeForKey_);    MLNCluster$Builder.attributes.implement(builder, attributes);    MLNCluster$Builder.clusterIdentifier.implement(builder, clusterIdentifier);    MLNCluster$Builder.clusterPointCount.implement(builder, clusterPointCount);    MLNCluster$Builder.coordinate.implement(builder, coordinate);    MLNCluster$Builder.geoJSONDictionary.implement(builder, geoJSONDictionary);    MLNCluster$Builder.identifier.implement(builder, identifier);    MLNCluster$Builder.setAttributes_.implementAsListener(builder, setAttributes_);    MLNCluster$Builder.setIdentifier_.implementAsListener(builder, setIdentifier_);    MLNCluster$Builder.subtitle.implement(builder, subtitle);    MLNCluster$Builder.title.implement(builder, title);
+  static void addToBuilderAsListener(objc.ObjCProtocolBuilder builder, {required objc.ObjCObject? Function(objc.NSString ) attributeForKey_, required objc.NSDictionary Function() attributes, required int Function() clusterIdentifier, required int Function() clusterPointCount, required objc.NSDictionary Function() geoJSONDictionary, required objc.ObjCObject? Function() identifier, required void Function(objc.NSDictionary ) setAttributes_, required void Function(objc.ObjCObject? ) setIdentifier_, bool $keepIsolateAlive = true}) {
+        MLNCluster$Builder.attributeForKey_.implement(builder, attributeForKey_);    MLNCluster$Builder.attributes.implement(builder, attributes);    MLNCluster$Builder.clusterIdentifier.implement(builder, clusterIdentifier);    MLNCluster$Builder.clusterPointCount.implement(builder, clusterPointCount);    MLNCluster$Builder.geoJSONDictionary.implement(builder, geoJSONDictionary);    MLNCluster$Builder.identifier.implement(builder, identifier);    MLNCluster$Builder.setAttributes_.implementAsListener(builder, setAttributes_);    MLNCluster$Builder.setIdentifier_.implementAsListener(builder, setIdentifier_);
     builder.addProtocol($protocol);
   }
 
@@ -31344,9 +30660,9 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setIdentifier_, value?.ref.pointe
   ///
   /// If `$keepIsolateAlive` is true, this protocol will keep this isolate
   /// alive until it is garbage collected by both Dart and ObjC.
-  static MLNCluster implementAsBlocking({required objc.ObjCObject? Function(objc.NSString ) attributeForKey_, required objc.NSDictionary Function() attributes, required int Function() clusterIdentifier, required int Function() clusterPointCount, required CLLocationCoordinate2D Function() coordinate, required objc.NSDictionary Function() geoJSONDictionary, required objc.ObjCObject? Function() identifier, required void Function(objc.NSDictionary ) setAttributes_, required void Function(objc.ObjCObject? ) setIdentifier_, objc.NSString? Function()? subtitle, objc.NSString? Function()? title, bool $keepIsolateAlive = true}) {
+  static MLNCluster implementAsBlocking({required objc.ObjCObject? Function(objc.NSString ) attributeForKey_, required objc.NSDictionary Function() attributes, required int Function() clusterIdentifier, required int Function() clusterPointCount, required objc.NSDictionary Function() geoJSONDictionary, required objc.ObjCObject? Function() identifier, required void Function(objc.NSDictionary ) setAttributes_, required void Function(objc.ObjCObject? ) setIdentifier_, bool $keepIsolateAlive = true}) {
     final builder = objc.ObjCProtocolBuilder(debugName: 'MLNCluster');
-        MLNCluster$Builder.attributeForKey_.implement(builder, attributeForKey_);    MLNCluster$Builder.attributes.implement(builder, attributes);    MLNCluster$Builder.clusterIdentifier.implement(builder, clusterIdentifier);    MLNCluster$Builder.clusterPointCount.implement(builder, clusterPointCount);    MLNCluster$Builder.coordinate.implement(builder, coordinate);    MLNCluster$Builder.geoJSONDictionary.implement(builder, geoJSONDictionary);    MLNCluster$Builder.identifier.implement(builder, identifier);    MLNCluster$Builder.setAttributes_.implementAsBlocking(builder, setAttributes_);    MLNCluster$Builder.setIdentifier_.implementAsBlocking(builder, setIdentifier_);    MLNCluster$Builder.subtitle.implement(builder, subtitle);    MLNCluster$Builder.title.implement(builder, title);
+        MLNCluster$Builder.attributeForKey_.implement(builder, attributeForKey_);    MLNCluster$Builder.attributes.implement(builder, attributes);    MLNCluster$Builder.clusterIdentifier.implement(builder, clusterIdentifier);    MLNCluster$Builder.clusterPointCount.implement(builder, clusterPointCount);    MLNCluster$Builder.geoJSONDictionary.implement(builder, geoJSONDictionary);    MLNCluster$Builder.identifier.implement(builder, identifier);    MLNCluster$Builder.setAttributes_.implementAsBlocking(builder, setAttributes_);    MLNCluster$Builder.setIdentifier_.implementAsBlocking(builder, setIdentifier_);
     builder.addProtocol($protocol);
     return MLNCluster.as(builder.build(keepIsolateAlive: $keepIsolateAlive));
   }
@@ -31356,8 +30672,8 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setIdentifier_, value?.ref.pointe
   /// listeners will be.
   ///
   /// Note: You cannot call this method after you have called `builder.build`.
-  static void addToBuilderAsBlocking(objc.ObjCProtocolBuilder builder, {required objc.ObjCObject? Function(objc.NSString ) attributeForKey_, required objc.NSDictionary Function() attributes, required int Function() clusterIdentifier, required int Function() clusterPointCount, required CLLocationCoordinate2D Function() coordinate, required objc.NSDictionary Function() geoJSONDictionary, required objc.ObjCObject? Function() identifier, required void Function(objc.NSDictionary ) setAttributes_, required void Function(objc.ObjCObject? ) setIdentifier_, objc.NSString? Function()? subtitle, objc.NSString? Function()? title, bool $keepIsolateAlive = true}) {
-        MLNCluster$Builder.attributeForKey_.implement(builder, attributeForKey_);    MLNCluster$Builder.attributes.implement(builder, attributes);    MLNCluster$Builder.clusterIdentifier.implement(builder, clusterIdentifier);    MLNCluster$Builder.clusterPointCount.implement(builder, clusterPointCount);    MLNCluster$Builder.coordinate.implement(builder, coordinate);    MLNCluster$Builder.geoJSONDictionary.implement(builder, geoJSONDictionary);    MLNCluster$Builder.identifier.implement(builder, identifier);    MLNCluster$Builder.setAttributes_.implementAsBlocking(builder, setAttributes_);    MLNCluster$Builder.setIdentifier_.implementAsBlocking(builder, setIdentifier_);    MLNCluster$Builder.subtitle.implement(builder, subtitle);    MLNCluster$Builder.title.implement(builder, title);
+  static void addToBuilderAsBlocking(objc.ObjCProtocolBuilder builder, {required objc.ObjCObject? Function(objc.NSString ) attributeForKey_, required objc.NSDictionary Function() attributes, required int Function() clusterIdentifier, required int Function() clusterPointCount, required objc.NSDictionary Function() geoJSONDictionary, required objc.ObjCObject? Function() identifier, required void Function(objc.NSDictionary ) setAttributes_, required void Function(objc.ObjCObject? ) setIdentifier_, bool $keepIsolateAlive = true}) {
+        MLNCluster$Builder.attributeForKey_.implement(builder, attributeForKey_);    MLNCluster$Builder.attributes.implement(builder, attributes);    MLNCluster$Builder.clusterIdentifier.implement(builder, clusterIdentifier);    MLNCluster$Builder.clusterPointCount.implement(builder, clusterPointCount);    MLNCluster$Builder.geoJSONDictionary.implement(builder, geoJSONDictionary);    MLNCluster$Builder.identifier.implement(builder, identifier);    MLNCluster$Builder.setAttributes_.implementAsBlocking(builder, setAttributes_);    MLNCluster$Builder.setIdentifier_.implementAsBlocking(builder, setIdentifier_);
     builder.addProtocol($protocol);
   }
 
@@ -31473,21 +30789,6 @@ static final clusterPointCount = objc.ObjCProtocolMethod<int Function()>(
           isInstanceMethod: true,
       ),
       (int Function() func) => ObjCBlock_NSUInteger_ffiVoid.fromFunction((ffi.Pointer<ffi.Void> _, ) => func()),
-      
-    );
-/// The center point (specified as a map coordinate) of the annotation. (required)
-/// (read-only)
-static final coordinate = objc.ObjCProtocolMethod<CLLocationCoordinate2D Function()>(
-      _protocol_MLNCluster,
-      _sel_coordinate,
-      ffi.Native.addressOf<ffi.NativeFunction<CLLocationCoordinate2D Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> )>>(_NativeLibrary_protocolTrampoline_neuenc).cast(),
-      objc.getProtocolMethodSignature(
-          _protocol_MLNCluster,
-          _sel_coordinate,
-          isRequired: true,
-          isInstanceMethod: true,
-      ),
-      (CLLocationCoordinate2D Function() func) => ObjCBlock_CLLocationCoordinate2D_ffiVoid.fromFunction((ffi.Pointer<ffi.Void> _, ) => func()),
       
     );
 /// Returns a dictionary that can be serialized as a GeoJSON Feature representation
@@ -31665,43 +30966,10 @@ static final setIdentifier_ = objc.ObjCProtocolListenableMethod<void Function(ob
     (void Function(objc.ObjCObject? ) func) => ObjCBlock_ffiVoid_ffiVoid_objcObjCObjectImpl.blocking((ffi.Pointer<ffi.Void> _, objc.ObjCObject? arg1) => func(arg1)),
 
     );
-/// The string containing the annotation’s subtitle.
-/// 
-/// This string is displayed in the callout for the associated annotation.
-static final subtitle = objc.ObjCProtocolMethod<objc.NSString? Function()>(
-      _protocol_MLNCluster,
-      _sel_subtitle,
-      ffi.Native.addressOf<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> )>>(_NativeLibrary_protocolTrampoline_1mbt9g9).cast(),
-      objc.getProtocolMethodSignature(
-          _protocol_MLNCluster,
-          _sel_subtitle,
-          isRequired: false,
-          isInstanceMethod: true,
-      ),
-      (objc.NSString? Function() func) => ObjCBlock_NSString_ffiVoid$1.fromFunction((ffi.Pointer<ffi.Void> _, ) => func()),
-      
-    );
-/// The string containing the annotation’s title.
-/// 
-/// Although this property is optional, if you support the selection of annotations
-/// in your map view, you are expected to provide this property. This string is
-/// displayed in the callout for the associated annotation.
-static final title = objc.ObjCProtocolMethod<objc.NSString? Function()>(
-      _protocol_MLNCluster,
-      _sel_title,
-      ffi.Native.addressOf<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> )>>(_NativeLibrary_protocolTrampoline_1mbt9g9).cast(),
-      objc.getProtocolMethodSignature(
-          _protocol_MLNCluster,
-          _sel_title,
-          isRequired: false,
-          isInstanceMethod: true,
-      ),
-      (objc.NSString? Function() func) => ObjCBlock_NSString_ffiVoid$1.fromFunction((ffi.Pointer<ffi.Void> _, ) => func()),
-      
-    );
 
 }
 late final _class_MLNPointAnnotation = objc.getClass("MLNPointAnnotation");
+late final _sel_coordinate = objc.registerName("coordinate");
 late final _sel_setCoordinate_ = objc.registerName("setCoordinate:");
 
 /// An ``MLNPointAnnotation`` object represents a one-dimensional shape located at a
@@ -31851,7 +31119,7 @@ extension MLNPointAnnotation$Methods on MLNPointAnnotation {
 
 
   /// The coordinate point of the shape, specified as a latitude and longitude.
-  set coordinate$1(CLLocationCoordinate2D value) {
+  set coordinate(CLLocationCoordinate2D value) {
 _objc_msgSend_1zv0am(object$.ref.pointer, _sel_setCoordinate_, value);
 
   }
@@ -31987,19 +31255,6 @@ extension type MLNPointCollection._(objc.ObjCObject object$) implements objc.Obj
 
 extension MLNPointCollection$Methods on MLNPointCollection {
 
-  /// The center point (specified as a map coordinate) of the annotation. (required)
-/// (read-only)
-  CLLocationCoordinate2D get coordinate {
-    final $ptr = pkg_ffi.calloc<CLLocationCoordinate2D>();
-    objc.useMsgSendVariants ? _objc_msgSend_18o5nokStret($ptr, object$.ref.pointer, _sel_coordinate) : $ptr.ref = _objc_msgSend_18o5nok(object$.ref.pointer, _sel_coordinate);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<CLLocationCoordinate2D>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<CLLocationCoordinate2D>(
-        $finalizable);
-
-  }
-
-
   /// The array of coordinates associated with the shape.
   ffi.Pointer<CLLocationCoordinate2D> get coordinates {
     return _objc_msgSend_k56nhe(object$.ref.pointer, _sel_coordinates);
@@ -32038,73 +31293,10 @@ _objc_msgSend_peohs4(object$.ref.pointer, _sel_getCoordinates_range_, coords, ra
   }
 
 
-  /// Returns a Boolean indicating whether the specified rectangle intersects the
-/// receiver’s shape.
-/// 
-/// You can implement this method to provide more specific bounds checking for an
-/// overlay. If you do not implement it, the bounding rectangle is used to detect
-/// intersections.
-/// 
-/// @param overlayBounds The rectangle to intersect with the receiver’s area.
-/// @return `YES` if any part of the map rectangle intersects the receiver’s shape
-/// or `NO` if it does not.
-  bool intersectsOverlayBounds(MLNCoordinateBounds overlayBounds) {
-    return _objc_msgSend_10h1dgu(object$.ref.pointer, _sel_intersectsOverlayBounds_, overlayBounds);
-
-  }
-
-
-  /// The cooordinate rectangle that encompasses the overlay. (required) (read-only)
-/// 
-/// This property contains the smallest rectangle that completely encompasses the
-/// overlay. Implementers of this protocol must set this area when implementing
-/// their overlay class, and after setting it, you must not change it.
-/// 
-/// If this overlay spans the antimeridian, its bounds may extend west of −180 degrees
-/// longitude or east of 180 degrees longitude. For example, an overlay covering the
-/// Pacific Ocean from Tokyo to San Francisco might have a bounds extending
-/// from (35.68476, −220.24257) to (37.78428, −122.41310).
-  MLNCoordinateBounds get overlayBounds {
-    final $ptr = pkg_ffi.calloc<MLNCoordinateBounds>();
-    objc.useMsgSendVariants ? _objc_msgSend_ygoa6aStret($ptr, object$.ref.pointer, _sel_overlayBounds) : $ptr.ref = _objc_msgSend_ygoa6a(object$.ref.pointer, _sel_overlayBounds);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<MLNCoordinateBounds>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<MLNCoordinateBounds>(
-        $finalizable);
-
-  }
-
-
   /// The number of coordinates associated with the shape.
   int get pointCount {
     return _objc_msgSend_xw2lbc(object$.ref.pointer, _sel_pointCount);
 
-  }
-
-
-  /// The string containing the annotation’s subtitle.
-/// 
-/// This string is displayed in the callout for the associated annotation.
-  objc.NSString? get subtitle {
-    if (!objc.respondsToSelector(object$.ref.pointer, _sel_subtitle)) {
-      throw objc.UnimplementedOptionalMethodException('MLNPointCollection', 'subtitle');
-    }
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_subtitle);
-    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// The string containing the annotation’s title.
-/// 
-/// Although this property is optional, if you support the selection of annotations
-/// in your map view, you are expected to provide this property. This string is
-/// displayed in the callout for the associated annotation.
-  objc.NSString? get title {
-    if (!objc.respondsToSelector(object$.ref.pointer, _sel_title)) {
-      throw objc.UnimplementedOptionalMethodException('MLNPointCollection', 'title');
-    }
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_title);
-    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
   }
 
 }
@@ -32554,19 +31746,6 @@ extension type MLNPolygon._(objc.ObjCObject object$) implements objc.ObjCObject,
 
 extension MLNPolygon$Methods on MLNPolygon {
 
-  /// The center point (specified as a map coordinate) of the annotation. (required)
-/// (read-only)
-  CLLocationCoordinate2D get coordinate {
-    final $ptr = pkg_ffi.calloc<CLLocationCoordinate2D>();
-    objc.useMsgSendVariants ? _objc_msgSend_18o5nokStret($ptr, object$.ref.pointer, _sel_coordinate) : $ptr.ref = _objc_msgSend_18o5nok(object$.ref.pointer, _sel_coordinate);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<CLLocationCoordinate2D>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<CLLocationCoordinate2D>(
-        $finalizable);
-
-  }
-
-
   /// init
   MLNPolygon init() {
   objc.checkOsVersionInternal('MLNPolygon.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
@@ -32592,69 +31771,6 @@ extension MLNPolygon$Methods on MLNPolygon {
   objc.NSArray? get interiorPolygons {
     final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_interiorPolygons);
     return $ret.address == 0 ? null : objc.NSArray.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// Returns a Boolean indicating whether the specified rectangle intersects the
-/// receiver’s shape.
-/// 
-/// You can implement this method to provide more specific bounds checking for an
-/// overlay. If you do not implement it, the bounding rectangle is used to detect
-/// intersections.
-/// 
-/// @param overlayBounds The rectangle to intersect with the receiver’s area.
-/// @return `YES` if any part of the map rectangle intersects the receiver’s shape
-/// or `NO` if it does not.
-  bool intersectsOverlayBounds(MLNCoordinateBounds overlayBounds) {
-    return _objc_msgSend_10h1dgu(object$.ref.pointer, _sel_intersectsOverlayBounds_, overlayBounds);
-
-  }
-
-
-  /// The cooordinate rectangle that encompasses the overlay. (required) (read-only)
-/// 
-/// This property contains the smallest rectangle that completely encompasses the
-/// overlay. Implementers of this protocol must set this area when implementing
-/// their overlay class, and after setting it, you must not change it.
-/// 
-/// If this overlay spans the antimeridian, its bounds may extend west of −180 degrees
-/// longitude or east of 180 degrees longitude. For example, an overlay covering the
-/// Pacific Ocean from Tokyo to San Francisco might have a bounds extending
-/// from (35.68476, −220.24257) to (37.78428, −122.41310).
-  MLNCoordinateBounds get overlayBounds {
-    final $ptr = pkg_ffi.calloc<MLNCoordinateBounds>();
-    objc.useMsgSendVariants ? _objc_msgSend_ygoa6aStret($ptr, object$.ref.pointer, _sel_overlayBounds) : $ptr.ref = _objc_msgSend_ygoa6a(object$.ref.pointer, _sel_overlayBounds);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<MLNCoordinateBounds>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<MLNCoordinateBounds>(
-        $finalizable);
-
-  }
-
-
-  /// The string containing the annotation’s subtitle.
-/// 
-/// This string is displayed in the callout for the associated annotation.
-  objc.NSString? get subtitle {
-    if (!objc.respondsToSelector(object$.ref.pointer, _sel_subtitle)) {
-      throw objc.UnimplementedOptionalMethodException('MLNPolygon', 'subtitle');
-    }
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_subtitle);
-    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// The string containing the annotation’s title.
-/// 
-/// Although this property is optional, if you support the selection of annotations
-/// in your map view, you are expected to provide this property. This string is
-/// displayed in the callout for the associated annotation.
-  objc.NSString? get title {
-    if (!objc.respondsToSelector(object$.ref.pointer, _sel_title)) {
-      throw objc.UnimplementedOptionalMethodException('MLNPolygon', 'title');
-    }
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_title);
-    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
   }
 
 }
@@ -32774,19 +31890,6 @@ extension type MLNMultiPolygon._(objc.ObjCObject object$) implements objc.ObjCOb
 
 extension MLNMultiPolygon$Methods on MLNMultiPolygon {
 
-  /// The center point (specified as a map coordinate) of the annotation. (required)
-/// (read-only)
-  CLLocationCoordinate2D get coordinate {
-    final $ptr = pkg_ffi.calloc<CLLocationCoordinate2D>();
-    objc.useMsgSendVariants ? _objc_msgSend_18o5nokStret($ptr, object$.ref.pointer, _sel_coordinate) : $ptr.ref = _objc_msgSend_18o5nok(object$.ref.pointer, _sel_coordinate);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<CLLocationCoordinate2D>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<CLLocationCoordinate2D>(
-        $finalizable);
-
-  }
-
-
   /// init
   MLNMultiPolygon init() {
   objc.checkOsVersionInternal('MLNMultiPolygon.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
@@ -32802,73 +31905,10 @@ extension MLNMultiPolygon$Methods on MLNMultiPolygon {
   }
 
 
-  /// Returns a Boolean indicating whether the specified rectangle intersects the
-/// receiver’s shape.
-/// 
-/// You can implement this method to provide more specific bounds checking for an
-/// overlay. If you do not implement it, the bounding rectangle is used to detect
-/// intersections.
-/// 
-/// @param overlayBounds The rectangle to intersect with the receiver’s area.
-/// @return `YES` if any part of the map rectangle intersects the receiver’s shape
-/// or `NO` if it does not.
-  bool intersectsOverlayBounds(MLNCoordinateBounds overlayBounds) {
-    return _objc_msgSend_10h1dgu(object$.ref.pointer, _sel_intersectsOverlayBounds_, overlayBounds);
-
-  }
-
-
-  /// The cooordinate rectangle that encompasses the overlay. (required) (read-only)
-/// 
-/// This property contains the smallest rectangle that completely encompasses the
-/// overlay. Implementers of this protocol must set this area when implementing
-/// their overlay class, and after setting it, you must not change it.
-/// 
-/// If this overlay spans the antimeridian, its bounds may extend west of −180 degrees
-/// longitude or east of 180 degrees longitude. For example, an overlay covering the
-/// Pacific Ocean from Tokyo to San Francisco might have a bounds extending
-/// from (35.68476, −220.24257) to (37.78428, −122.41310).
-  MLNCoordinateBounds get overlayBounds {
-    final $ptr = pkg_ffi.calloc<MLNCoordinateBounds>();
-    objc.useMsgSendVariants ? _objc_msgSend_ygoa6aStret($ptr, object$.ref.pointer, _sel_overlayBounds) : $ptr.ref = _objc_msgSend_ygoa6a(object$.ref.pointer, _sel_overlayBounds);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<MLNCoordinateBounds>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<MLNCoordinateBounds>(
-        $finalizable);
-
-  }
-
-
   /// An array of polygons forming the multipolygon.
   objc.NSArray get polygons {
     final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_polygons);
     return objc.NSArray.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// The string containing the annotation’s subtitle.
-/// 
-/// This string is displayed in the callout for the associated annotation.
-  objc.NSString? get subtitle {
-    if (!objc.respondsToSelector(object$.ref.pointer, _sel_subtitle)) {
-      throw objc.UnimplementedOptionalMethodException('MLNMultiPolygon', 'subtitle');
-    }
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_subtitle);
-    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// The string containing the annotation’s title.
-/// 
-/// Although this property is optional, if you support the selection of annotations
-/// in your map view, you are expected to provide this property. This string is
-/// displayed in the callout for the associated annotation.
-  objc.NSString? get title {
-    if (!objc.respondsToSelector(object$.ref.pointer, _sel_title)) {
-      throw objc.UnimplementedOptionalMethodException('MLNMultiPolygon', 'title');
-    }
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_title);
-    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
   }
 
 }
@@ -33020,19 +32060,6 @@ extension type MLNPolyline._(objc.ObjCObject object$) implements objc.ObjCObject
 
 extension MLNPolyline$Methods on MLNPolyline {
 
-  /// The center point (specified as a map coordinate) of the annotation. (required)
-/// (read-only)
-  CLLocationCoordinate2D get coordinate {
-    final $ptr = pkg_ffi.calloc<CLLocationCoordinate2D>();
-    objc.useMsgSendVariants ? _objc_msgSend_18o5nokStret($ptr, object$.ref.pointer, _sel_coordinate) : $ptr.ref = _objc_msgSend_18o5nok(object$.ref.pointer, _sel_coordinate);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<CLLocationCoordinate2D>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<CLLocationCoordinate2D>(
-        $finalizable);
-
-  }
-
-
   /// init
   MLNPolyline init() {
   objc.checkOsVersionInternal('MLNPolyline.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
@@ -33045,69 +32072,6 @@ extension MLNPolyline$Methods on MLNPolyline {
   MLNPolyline? initWithCoder(objc.NSCoder coder) {
     final $ret = _objc_msgSend_1sotr3r(object$.ref.retainAndReturnPointer(), _sel_initWithCoder_, coder.ref.pointer);
     return $ret.address == 0 ? null : MLNPolyline.fromPointer($ret, retain: false, release: true);
-  }
-
-
-  /// Returns a Boolean indicating whether the specified rectangle intersects the
-/// receiver’s shape.
-/// 
-/// You can implement this method to provide more specific bounds checking for an
-/// overlay. If you do not implement it, the bounding rectangle is used to detect
-/// intersections.
-/// 
-/// @param overlayBounds The rectangle to intersect with the receiver’s area.
-/// @return `YES` if any part of the map rectangle intersects the receiver’s shape
-/// or `NO` if it does not.
-  bool intersectsOverlayBounds(MLNCoordinateBounds overlayBounds) {
-    return _objc_msgSend_10h1dgu(object$.ref.pointer, _sel_intersectsOverlayBounds_, overlayBounds);
-
-  }
-
-
-  /// The cooordinate rectangle that encompasses the overlay. (required) (read-only)
-/// 
-/// This property contains the smallest rectangle that completely encompasses the
-/// overlay. Implementers of this protocol must set this area when implementing
-/// their overlay class, and after setting it, you must not change it.
-/// 
-/// If this overlay spans the antimeridian, its bounds may extend west of −180 degrees
-/// longitude or east of 180 degrees longitude. For example, an overlay covering the
-/// Pacific Ocean from Tokyo to San Francisco might have a bounds extending
-/// from (35.68476, −220.24257) to (37.78428, −122.41310).
-  MLNCoordinateBounds get overlayBounds {
-    final $ptr = pkg_ffi.calloc<MLNCoordinateBounds>();
-    objc.useMsgSendVariants ? _objc_msgSend_ygoa6aStret($ptr, object$.ref.pointer, _sel_overlayBounds) : $ptr.ref = _objc_msgSend_ygoa6a(object$.ref.pointer, _sel_overlayBounds);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<MLNCoordinateBounds>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<MLNCoordinateBounds>(
-        $finalizable);
-
-  }
-
-
-  /// The string containing the annotation’s subtitle.
-/// 
-/// This string is displayed in the callout for the associated annotation.
-  objc.NSString? get subtitle {
-    if (!objc.respondsToSelector(object$.ref.pointer, _sel_subtitle)) {
-      throw objc.UnimplementedOptionalMethodException('MLNPolyline', 'subtitle');
-    }
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_subtitle);
-    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// The string containing the annotation’s title.
-/// 
-/// Although this property is optional, if you support the selection of annotations
-/// in your map view, you are expected to provide this property. This string is
-/// displayed in the callout for the associated annotation.
-  objc.NSString? get title {
-    if (!objc.respondsToSelector(object$.ref.pointer, _sel_title)) {
-      throw objc.UnimplementedOptionalMethodException('MLNPolyline', 'title');
-    }
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_title);
-    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
   }
 
 }
@@ -33229,19 +32193,6 @@ extension type MLNMultiPolyline._(objc.ObjCObject object$) implements objc.ObjCO
 
 extension MLNMultiPolyline$Methods on MLNMultiPolyline {
 
-  /// The center point (specified as a map coordinate) of the annotation. (required)
-/// (read-only)
-  CLLocationCoordinate2D get coordinate {
-    final $ptr = pkg_ffi.calloc<CLLocationCoordinate2D>();
-    objc.useMsgSendVariants ? _objc_msgSend_18o5nokStret($ptr, object$.ref.pointer, _sel_coordinate) : $ptr.ref = _objc_msgSend_18o5nok(object$.ref.pointer, _sel_coordinate);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<CLLocationCoordinate2D>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<CLLocationCoordinate2D>(
-        $finalizable);
-
-  }
-
-
   /// init
   MLNMultiPolyline init() {
   objc.checkOsVersionInternal('MLNMultiPolyline.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
@@ -33257,73 +32208,10 @@ extension MLNMultiPolyline$Methods on MLNMultiPolyline {
   }
 
 
-  /// Returns a Boolean indicating whether the specified rectangle intersects the
-/// receiver’s shape.
-/// 
-/// You can implement this method to provide more specific bounds checking for an
-/// overlay. If you do not implement it, the bounding rectangle is used to detect
-/// intersections.
-/// 
-/// @param overlayBounds The rectangle to intersect with the receiver’s area.
-/// @return `YES` if any part of the map rectangle intersects the receiver’s shape
-/// or `NO` if it does not.
-  bool intersectsOverlayBounds(MLNCoordinateBounds overlayBounds) {
-    return _objc_msgSend_10h1dgu(object$.ref.pointer, _sel_intersectsOverlayBounds_, overlayBounds);
-
-  }
-
-
-  /// The cooordinate rectangle that encompasses the overlay. (required) (read-only)
-/// 
-/// This property contains the smallest rectangle that completely encompasses the
-/// overlay. Implementers of this protocol must set this area when implementing
-/// their overlay class, and after setting it, you must not change it.
-/// 
-/// If this overlay spans the antimeridian, its bounds may extend west of −180 degrees
-/// longitude or east of 180 degrees longitude. For example, an overlay covering the
-/// Pacific Ocean from Tokyo to San Francisco might have a bounds extending
-/// from (35.68476, −220.24257) to (37.78428, −122.41310).
-  MLNCoordinateBounds get overlayBounds {
-    final $ptr = pkg_ffi.calloc<MLNCoordinateBounds>();
-    objc.useMsgSendVariants ? _objc_msgSend_ygoa6aStret($ptr, object$.ref.pointer, _sel_overlayBounds) : $ptr.ref = _objc_msgSend_ygoa6a(object$.ref.pointer, _sel_overlayBounds);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<MLNCoordinateBounds>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<MLNCoordinateBounds>(
-        $finalizable);
-
-  }
-
-
   /// An array of polygons forming the multipolyline.
   objc.NSArray get polylines {
     final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_polylines);
     return objc.NSArray.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// The string containing the annotation’s subtitle.
-/// 
-/// This string is displayed in the callout for the associated annotation.
-  objc.NSString? get subtitle {
-    if (!objc.respondsToSelector(object$.ref.pointer, _sel_subtitle)) {
-      throw objc.UnimplementedOptionalMethodException('MLNMultiPolyline', 'subtitle');
-    }
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_subtitle);
-    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// The string containing the annotation’s title.
-/// 
-/// Although this property is optional, if you support the selection of annotations
-/// in your map view, you are expected to provide this property. This string is
-/// displayed in the callout for the associated annotation.
-  objc.NSString? get title {
-    if (!objc.respondsToSelector(object$.ref.pointer, _sel_title)) {
-      throw objc.UnimplementedOptionalMethodException('MLNMultiPolyline', 'title');
-    }
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_title);
-    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
   }
 
 }
@@ -33639,19 +32527,6 @@ extension MLNEmptyFeature$Methods on MLNEmptyFeature {
   }
 
 
-  /// The center point (specified as a map coordinate) of the annotation. (required)
-/// (read-only)
-  CLLocationCoordinate2D get coordinate {
-    final $ptr = pkg_ffi.calloc<CLLocationCoordinate2D>();
-    objc.useMsgSendVariants ? _objc_msgSend_18o5nokStret($ptr, object$.ref.pointer, _sel_coordinate) : $ptr.ref = _objc_msgSend_18o5nok(object$.ref.pointer, _sel_coordinate);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<CLLocationCoordinate2D>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<CLLocationCoordinate2D>(
-        $finalizable);
-
-  }
-
-
   /// Returns a dictionary that can be serialized as a GeoJSON Feature representation
 /// of an instance of an ``MLNFeature`` subclass.
 /// 
@@ -33807,32 +32682,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setAttributes_, value.ref.pointer
   set identifier(objc.ObjCObject? value) {
 _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setIdentifier_, value?.ref.pointer ?? ffi.nullptr);
 
-  }
-
-
-  /// The string containing the annotation’s subtitle.
-/// 
-/// This string is displayed in the callout for the associated annotation.
-  objc.NSString? get subtitle {
-    if (!objc.respondsToSelector(object$.ref.pointer, _sel_subtitle)) {
-      throw objc.UnimplementedOptionalMethodException('MLNEmptyFeature', 'subtitle');
-    }
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_subtitle);
-    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// The string containing the annotation’s title.
-/// 
-/// Although this property is optional, if you support the selection of annotations
-/// in your map view, you are expected to provide this property. This string is
-/// displayed in the callout for the associated annotation.
-  objc.NSString? get title {
-    if (!objc.respondsToSelector(object$.ref.pointer, _sel_title)) {
-      throw objc.UnimplementedOptionalMethodException('MLNEmptyFeature', 'title');
-    }
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_title);
-    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
   }
 
 }
@@ -34002,19 +32851,6 @@ extension MLNPointFeature$Methods on MLNPointFeature {
   }
 
 
-  /// The center point (specified as a map coordinate) of the annotation. (required)
-/// (read-only)
-  CLLocationCoordinate2D get coordinate {
-    final $ptr = pkg_ffi.calloc<CLLocationCoordinate2D>();
-    objc.useMsgSendVariants ? _objc_msgSend_18o5nokStret($ptr, object$.ref.pointer, _sel_coordinate) : $ptr.ref = _objc_msgSend_18o5nok(object$.ref.pointer, _sel_coordinate);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<CLLocationCoordinate2D>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<CLLocationCoordinate2D>(
-        $finalizable);
-
-  }
-
-
   /// Returns a dictionary that can be serialized as a GeoJSON Feature representation
 /// of an instance of an ``MLNFeature`` subclass.
 /// 
@@ -34170,32 +33006,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setAttributes_, value.ref.pointer
   set identifier(objc.ObjCObject? value) {
 _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setIdentifier_, value?.ref.pointer ?? ffi.nullptr);
 
-  }
-
-
-  /// The string containing the annotation’s subtitle.
-/// 
-/// This string is displayed in the callout for the associated annotation.
-  objc.NSString? get subtitle {
-    if (!objc.respondsToSelector(object$.ref.pointer, _sel_subtitle)) {
-      throw objc.UnimplementedOptionalMethodException('MLNPointFeature', 'subtitle');
-    }
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_subtitle);
-    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// The string containing the annotation’s title.
-/// 
-/// Although this property is optional, if you support the selection of annotations
-/// in your map view, you are expected to provide this property. This string is
-/// displayed in the callout for the associated annotation.
-  objc.NSString? get title {
-    if (!objc.respondsToSelector(object$.ref.pointer, _sel_title)) {
-      throw objc.UnimplementedOptionalMethodException('MLNPointFeature', 'title');
-    }
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_title);
-    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
   }
 
 }
@@ -34382,19 +33192,6 @@ extension MLNPointFeatureCluster$Methods on MLNPointFeatureCluster {
   }
 
 
-  /// The center point (specified as a map coordinate) of the annotation. (required)
-/// (read-only)
-  CLLocationCoordinate2D get coordinate {
-    final $ptr = pkg_ffi.calloc<CLLocationCoordinate2D>();
-    objc.useMsgSendVariants ? _objc_msgSend_18o5nokStret($ptr, object$.ref.pointer, _sel_coordinate) : $ptr.ref = _objc_msgSend_18o5nok(object$.ref.pointer, _sel_coordinate);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<CLLocationCoordinate2D>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<CLLocationCoordinate2D>(
-        $finalizable);
-
-  }
-
-
   /// Returns a dictionary that can be serialized as a GeoJSON Feature representation
 /// of an instance of an ``MLNFeature`` subclass.
 /// 
@@ -34550,32 +33347,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setAttributes_, value.ref.pointer
   set identifier(objc.ObjCObject? value) {
 _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setIdentifier_, value?.ref.pointer ?? ffi.nullptr);
 
-  }
-
-
-  /// The string containing the annotation’s subtitle.
-/// 
-/// This string is displayed in the callout for the associated annotation.
-  objc.NSString? get subtitle {
-    if (!objc.respondsToSelector(object$.ref.pointer, _sel_subtitle)) {
-      throw objc.UnimplementedOptionalMethodException('MLNPointFeatureCluster', 'subtitle');
-    }
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_subtitle);
-    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// The string containing the annotation’s title.
-/// 
-/// Although this property is optional, if you support the selection of annotations
-/// in your map view, you are expected to provide this property. This string is
-/// displayed in the callout for the associated annotation.
-  objc.NSString? get title {
-    if (!objc.respondsToSelector(object$.ref.pointer, _sel_title)) {
-      throw objc.UnimplementedOptionalMethodException('MLNPointFeatureCluster', 'title');
-    }
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_title);
-    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
   }
 
 }
@@ -34762,19 +33533,6 @@ extension MLNPolylineFeature$Methods on MLNPolylineFeature {
   }
 
 
-  /// The center point (specified as a map coordinate) of the annotation. (required)
-/// (read-only)
-  CLLocationCoordinate2D get coordinate {
-    final $ptr = pkg_ffi.calloc<CLLocationCoordinate2D>();
-    objc.useMsgSendVariants ? _objc_msgSend_18o5nokStret($ptr, object$.ref.pointer, _sel_coordinate) : $ptr.ref = _objc_msgSend_18o5nok(object$.ref.pointer, _sel_coordinate);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<CLLocationCoordinate2D>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<CLLocationCoordinate2D>(
-        $finalizable);
-
-  }
-
-
   /// Returns a dictionary that can be serialized as a GeoJSON Feature representation
 /// of an instance of an ``MLNFeature`` subclass.
 /// 
@@ -34930,32 +33688,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setAttributes_, value.ref.pointer
   set identifier(objc.ObjCObject? value) {
 _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setIdentifier_, value?.ref.pointer ?? ffi.nullptr);
 
-  }
-
-
-  /// The string containing the annotation’s subtitle.
-/// 
-/// This string is displayed in the callout for the associated annotation.
-  objc.NSString? get subtitle {
-    if (!objc.respondsToSelector(object$.ref.pointer, _sel_subtitle)) {
-      throw objc.UnimplementedOptionalMethodException('MLNPolylineFeature', 'subtitle');
-    }
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_subtitle);
-    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// The string containing the annotation’s title.
-/// 
-/// Although this property is optional, if you support the selection of annotations
-/// in your map view, you are expected to provide this property. This string is
-/// displayed in the callout for the associated annotation.
-  objc.NSString? get title {
-    if (!objc.respondsToSelector(object$.ref.pointer, _sel_title)) {
-      throw objc.UnimplementedOptionalMethodException('MLNPolylineFeature', 'title');
-    }
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_title);
-    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
   }
 
 }
@@ -35151,19 +33883,6 @@ extension MLNPolygonFeature$Methods on MLNPolygonFeature {
   }
 
 
-  /// The center point (specified as a map coordinate) of the annotation. (required)
-/// (read-only)
-  CLLocationCoordinate2D get coordinate {
-    final $ptr = pkg_ffi.calloc<CLLocationCoordinate2D>();
-    objc.useMsgSendVariants ? _objc_msgSend_18o5nokStret($ptr, object$.ref.pointer, _sel_coordinate) : $ptr.ref = _objc_msgSend_18o5nok(object$.ref.pointer, _sel_coordinate);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<CLLocationCoordinate2D>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<CLLocationCoordinate2D>(
-        $finalizable);
-
-  }
-
-
   /// Returns a dictionary that can be serialized as a GeoJSON Feature representation
 /// of an instance of an ``MLNFeature`` subclass.
 /// 
@@ -35319,32 +34038,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setAttributes_, value.ref.pointer
   set identifier(objc.ObjCObject? value) {
 _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setIdentifier_, value?.ref.pointer ?? ffi.nullptr);
 
-  }
-
-
-  /// The string containing the annotation’s subtitle.
-/// 
-/// This string is displayed in the callout for the associated annotation.
-  objc.NSString? get subtitle {
-    if (!objc.respondsToSelector(object$.ref.pointer, _sel_subtitle)) {
-      throw objc.UnimplementedOptionalMethodException('MLNPolygonFeature', 'subtitle');
-    }
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_subtitle);
-    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// The string containing the annotation’s title.
-/// 
-/// Although this property is optional, if you support the selection of annotations
-/// in your map view, you are expected to provide this property. This string is
-/// displayed in the callout for the associated annotation.
-  objc.NSString? get title {
-    if (!objc.respondsToSelector(object$.ref.pointer, _sel_title)) {
-      throw objc.UnimplementedOptionalMethodException('MLNPolygonFeature', 'title');
-    }
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_title);
-    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
   }
 
 }
@@ -35528,19 +34221,6 @@ extension MLNPointCollectionFeature$Methods on MLNPointCollectionFeature {
   }
 
 
-  /// The center point (specified as a map coordinate) of the annotation. (required)
-/// (read-only)
-  CLLocationCoordinate2D get coordinate {
-    final $ptr = pkg_ffi.calloc<CLLocationCoordinate2D>();
-    objc.useMsgSendVariants ? _objc_msgSend_18o5nokStret($ptr, object$.ref.pointer, _sel_coordinate) : $ptr.ref = _objc_msgSend_18o5nok(object$.ref.pointer, _sel_coordinate);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<CLLocationCoordinate2D>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<CLLocationCoordinate2D>(
-        $finalizable);
-
-  }
-
-
   /// Returns a dictionary that can be serialized as a GeoJSON Feature representation
 /// of an instance of an ``MLNFeature`` subclass.
 /// 
@@ -35696,32 +34376,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setAttributes_, value.ref.pointer
   set identifier(objc.ObjCObject? value) {
 _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setIdentifier_, value?.ref.pointer ?? ffi.nullptr);
 
-  }
-
-
-  /// The string containing the annotation’s subtitle.
-/// 
-/// This string is displayed in the callout for the associated annotation.
-  objc.NSString? get subtitle {
-    if (!objc.respondsToSelector(object$.ref.pointer, _sel_subtitle)) {
-      throw objc.UnimplementedOptionalMethodException('MLNPointCollectionFeature', 'subtitle');
-    }
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_subtitle);
-    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// The string containing the annotation’s title.
-/// 
-/// Although this property is optional, if you support the selection of annotations
-/// in your map view, you are expected to provide this property. This string is
-/// displayed in the callout for the associated annotation.
-  objc.NSString? get title {
-    if (!objc.respondsToSelector(object$.ref.pointer, _sel_title)) {
-      throw objc.UnimplementedOptionalMethodException('MLNPointCollectionFeature', 'title');
-    }
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_title);
-    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
   }
 
 }
@@ -35902,19 +34556,6 @@ extension MLNMultiPolylineFeature$Methods on MLNMultiPolylineFeature {
   }
 
 
-  /// The center point (specified as a map coordinate) of the annotation. (required)
-/// (read-only)
-  CLLocationCoordinate2D get coordinate {
-    final $ptr = pkg_ffi.calloc<CLLocationCoordinate2D>();
-    objc.useMsgSendVariants ? _objc_msgSend_18o5nokStret($ptr, object$.ref.pointer, _sel_coordinate) : $ptr.ref = _objc_msgSend_18o5nok(object$.ref.pointer, _sel_coordinate);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<CLLocationCoordinate2D>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<CLLocationCoordinate2D>(
-        $finalizable);
-
-  }
-
-
   /// Returns a dictionary that can be serialized as a GeoJSON Feature representation
 /// of an instance of an ``MLNFeature`` subclass.
 /// 
@@ -36070,32 +34711,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setAttributes_, value.ref.pointer
   set identifier(objc.ObjCObject? value) {
 _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setIdentifier_, value?.ref.pointer ?? ffi.nullptr);
 
-  }
-
-
-  /// The string containing the annotation’s subtitle.
-/// 
-/// This string is displayed in the callout for the associated annotation.
-  objc.NSString? get subtitle {
-    if (!objc.respondsToSelector(object$.ref.pointer, _sel_subtitle)) {
-      throw objc.UnimplementedOptionalMethodException('MLNMultiPolylineFeature', 'subtitle');
-    }
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_subtitle);
-    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// The string containing the annotation’s title.
-/// 
-/// Although this property is optional, if you support the selection of annotations
-/// in your map view, you are expected to provide this property. This string is
-/// displayed in the callout for the associated annotation.
-  objc.NSString? get title {
-    if (!objc.respondsToSelector(object$.ref.pointer, _sel_title)) {
-      throw objc.UnimplementedOptionalMethodException('MLNMultiPolylineFeature', 'title');
-    }
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_title);
-    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
   }
 
 }
@@ -36272,19 +34887,6 @@ extension MLNMultiPolygonFeature$Methods on MLNMultiPolygonFeature {
   }
 
 
-  /// The center point (specified as a map coordinate) of the annotation. (required)
-/// (read-only)
-  CLLocationCoordinate2D get coordinate {
-    final $ptr = pkg_ffi.calloc<CLLocationCoordinate2D>();
-    objc.useMsgSendVariants ? _objc_msgSend_18o5nokStret($ptr, object$.ref.pointer, _sel_coordinate) : $ptr.ref = _objc_msgSend_18o5nok(object$.ref.pointer, _sel_coordinate);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<CLLocationCoordinate2D>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<CLLocationCoordinate2D>(
-        $finalizable);
-
-  }
-
-
   /// Returns a dictionary that can be serialized as a GeoJSON Feature representation
 /// of an instance of an ``MLNFeature`` subclass.
 /// 
@@ -36440,32 +35042,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setAttributes_, value.ref.pointer
   set identifier(objc.ObjCObject? value) {
 _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setIdentifier_, value?.ref.pointer ?? ffi.nullptr);
 
-  }
-
-
-  /// The string containing the annotation’s subtitle.
-/// 
-/// This string is displayed in the callout for the associated annotation.
-  objc.NSString? get subtitle {
-    if (!objc.respondsToSelector(object$.ref.pointer, _sel_subtitle)) {
-      throw objc.UnimplementedOptionalMethodException('MLNMultiPolygonFeature', 'subtitle');
-    }
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_subtitle);
-    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// The string containing the annotation’s title.
-/// 
-/// Although this property is optional, if you support the selection of annotations
-/// in your map view, you are expected to provide this property. This string is
-/// displayed in the callout for the associated annotation.
-  objc.NSString? get title {
-    if (!objc.respondsToSelector(object$.ref.pointer, _sel_title)) {
-      throw objc.UnimplementedOptionalMethodException('MLNMultiPolygonFeature', 'title');
-    }
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_title);
-    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
   }
 
 }
@@ -36658,19 +35234,6 @@ extension MLNShapeCollectionFeature$Methods on MLNShapeCollectionFeature {
   }
 
 
-  /// The center point (specified as a map coordinate) of the annotation. (required)
-/// (read-only)
-  CLLocationCoordinate2D get coordinate {
-    final $ptr = pkg_ffi.calloc<CLLocationCoordinate2D>();
-    objc.useMsgSendVariants ? _objc_msgSend_18o5nokStret($ptr, object$.ref.pointer, _sel_coordinate) : $ptr.ref = _objc_msgSend_18o5nok(object$.ref.pointer, _sel_coordinate);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<CLLocationCoordinate2D>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<CLLocationCoordinate2D>(
-        $finalizable);
-
-  }
-
-
   /// Returns a dictionary that can be serialized as a GeoJSON Feature representation
 /// of an instance of an ``MLNFeature`` subclass.
 /// 
@@ -36833,32 +35396,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setIdentifier_, value?.ref.pointe
   objc.NSArray get shapes {
     final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_shapes);
     return objc.NSArray.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// The string containing the annotation’s subtitle.
-/// 
-/// This string is displayed in the callout for the associated annotation.
-  objc.NSString? get subtitle {
-    if (!objc.respondsToSelector(object$.ref.pointer, _sel_subtitle)) {
-      throw objc.UnimplementedOptionalMethodException('MLNShapeCollectionFeature', 'subtitle');
-    }
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_subtitle);
-    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// The string containing the annotation’s title.
-/// 
-/// Although this property is optional, if you support the selection of annotations
-/// in your map view, you are expected to provide this property. This string is
-/// displayed in the callout for the associated annotation.
-  objc.NSString? get title {
-    if (!objc.respondsToSelector(object$.ref.pointer, _sel_title)) {
-      throw objc.UnimplementedOptionalMethodException('MLNShapeCollectionFeature', 'title');
-    }
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_title);
-    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
   }
 
 }
@@ -37581,423 +36118,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setURL_, value?.ref.pointer ?? ff
 /// considered an error.
   double zoomLevelForExpandingCluster(MLNPointFeatureCluster cluster) {
     return objc.useMsgSendVariants ? _objc_msgSend_mabicuFpret(object$.ref.pointer, _sel_zoomLevelForExpandingCluster_, cluster.ref.pointer) : _objc_msgSend_mabicu(object$.ref.pointer, _sel_zoomLevelForExpandingCluster_, cluster.ref.pointer);
-
-  }
-
-}
-
-late final _protocol_MLNComputedShapeSourceDataSource = objc.getProtocol("MLNComputedShapeSourceDataSource");
-late final _sel_featuresInTileAtX_y_zoomLevel_ = objc.registerName("featuresInTileAtX:y:zoomLevel:");
-final _objc_msgSend_g9dd28 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.UnsignedLong , ffi.UnsignedLong , ffi.UnsignedLong )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int , int , int )>();
-
-/// Construction methods for `objc.ObjCBlock<objc.NSArray Function(ffi.Pointer<ffi.Void>, ffi.UnsignedLong, ffi.UnsignedLong, ffi.UnsignedLong)>`.
-abstract final class ObjCBlock_NSArray_ffiVoid_NSUInteger_NSUInteger_NSUInteger {
-  /// Returns a block that wraps the given raw block pointer.
-  static objc.ObjCBlock<objc.NSArray Function(ffi.Pointer<ffi.Void>, ffi.UnsignedLong, ffi.UnsignedLong, ffi.UnsignedLong)> fromPointer(ffi.Pointer<objc.ObjCBlockImpl> pointer,
-      {bool retain = false, bool release = false}) =>
-      objc.ObjCBlock<objc.NSArray Function(ffi.Pointer<ffi.Void>, ffi.UnsignedLong, ffi.UnsignedLong, ffi.UnsignedLong)>(pointer, retain: retain, release: release);
-
-  /// Creates a block from a C function pointer.
-  ///
-  /// This block must be invoked by native code running on the same thread as
-  /// the isolate that registered it. Invoking the block on the wrong thread
-  /// will result in a crash.
-  static objc.ObjCBlock<objc.NSArray Function(ffi.Pointer<ffi.Void>, ffi.UnsignedLong, ffi.UnsignedLong, ffi.UnsignedLong)> fromFunctionPointer(ffi.Pointer<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<ffi.Void> arg0, ffi.UnsignedLong arg1, ffi.UnsignedLong arg2, ffi.UnsignedLong arg3)>> ptr) =>
-      objc.ObjCBlock<objc.NSArray Function(ffi.Pointer<ffi.Void>, ffi.UnsignedLong, ffi.UnsignedLong, ffi.UnsignedLong)>(objc.newPointerBlock(_fnPtrCallable, ptr.cast()),
-          retain: false, release: true);
-
-  /// Creates a block from a Dart function.
-  ///
-  /// This block must be invoked by native code running on the same thread as
-  /// the isolate that registered it. Invoking the block on the wrong thread
-  /// will result in a crash.
-  ///
-  /// If `keepIsolateAlive` is true, this block will keep this isolate alive
-  /// until it is garbage collected by both Dart and ObjC.
-  static objc.ObjCBlock<objc.NSArray Function(ffi.Pointer<ffi.Void>, ffi.UnsignedLong, ffi.UnsignedLong, ffi.UnsignedLong)> fromFunction(objc.NSArray Function(ffi.Pointer<ffi.Void> , int , int , int ) fn,
-          {bool keepIsolateAlive = true}) =>
-      objc.ObjCBlock<objc.NSArray Function(ffi.Pointer<ffi.Void>, ffi.UnsignedLong, ffi.UnsignedLong, ffi.UnsignedLong)>(objc.newClosureBlock(_closureCallable, (ffi.Pointer<ffi.Void> arg0, int arg1, int arg2, int arg3) => fn(arg0, arg1, arg2, arg3).ref.retainAndAutorelease(), keepIsolateAlive),
-          retain: false, release: true);
-
-  static ffi.Pointer<objc.ObjCObjectImpl> _fnPtrTrampoline(
-      ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, int arg1, int arg2, int arg3) =>
-          block.ref.target.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<ffi.Void> arg0, ffi.UnsignedLong arg1, ffi.UnsignedLong arg2, ffi.UnsignedLong arg3)>>()
-              .asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<ffi.Void> , int , int , int )>()(arg0, arg1, arg2, arg3);
-  static ffi.Pointer<ffi.Void> _fnPtrCallable = ffi.Pointer.fromFunction<
-      ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.UnsignedLong , ffi.UnsignedLong , ffi.UnsignedLong )>(_fnPtrTrampoline ).cast();
-  static ffi.Pointer<objc.ObjCObjectImpl> _closureTrampoline(
-      ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, int arg1, int arg2, int arg3) =>
-      (objc.getBlockClosure(block) as ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<ffi.Void> , int , int , int ))(arg0, arg1, arg2, arg3);
-  static ffi.Pointer<ffi.Void> _closureCallable = ffi.Pointer.fromFunction<
-      ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.UnsignedLong , ffi.UnsignedLong , ffi.UnsignedLong )>(_closureTrampoline ).cast();
-}
-
-/// Call operator for `objc.ObjCBlock<objc.NSArray Function(ffi.Pointer<ffi.Void>, ffi.UnsignedLong, ffi.UnsignedLong, ffi.UnsignedLong)>`.
-extension ObjCBlock_NSArray_ffiVoid_NSUInteger_NSUInteger_NSUInteger$CallExtension on objc.ObjCBlock<objc.NSArray Function(ffi.Pointer<ffi.Void>, ffi.UnsignedLong, ffi.UnsignedLong, ffi.UnsignedLong)> {
-  objc.NSArray call(ffi.Pointer<ffi.Void> arg0, int arg1, int arg2, int arg3) =>objc.NSArray.fromPointer(ref.pointer.ref.invoke.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, ffi.UnsignedLong arg1, ffi.UnsignedLong arg2, ffi.UnsignedLong arg3)>>()
-  .asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , int , int , int )>()(
-    ref.pointer, arg0, arg1, arg2, arg3), retain: true, release: true);
-}
-
-late final _sel_featuresInCoordinateBounds_zoomLevel_ = objc.registerName("featuresInCoordinateBounds:zoomLevel:");
-final _objc_msgSend_14qzqeh = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , MLNCoordinateBounds , ffi.UnsignedLong )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , MLNCoordinateBounds , int )>();
-
-/// Construction methods for `objc.ObjCBlock<objc.NSArray Function(ffi.Pointer<ffi.Void>, MLNCoordinateBounds, ffi.UnsignedLong)>`.
-abstract final class ObjCBlock_NSArray_ffiVoid_MLNCoordinateBounds_NSUInteger {
-  /// Returns a block that wraps the given raw block pointer.
-  static objc.ObjCBlock<objc.NSArray Function(ffi.Pointer<ffi.Void>, MLNCoordinateBounds, ffi.UnsignedLong)> fromPointer(ffi.Pointer<objc.ObjCBlockImpl> pointer,
-      {bool retain = false, bool release = false}) =>
-      objc.ObjCBlock<objc.NSArray Function(ffi.Pointer<ffi.Void>, MLNCoordinateBounds, ffi.UnsignedLong)>(pointer, retain: retain, release: release);
-
-  /// Creates a block from a C function pointer.
-  ///
-  /// This block must be invoked by native code running on the same thread as
-  /// the isolate that registered it. Invoking the block on the wrong thread
-  /// will result in a crash.
-  static objc.ObjCBlock<objc.NSArray Function(ffi.Pointer<ffi.Void>, MLNCoordinateBounds, ffi.UnsignedLong)> fromFunctionPointer(ffi.Pointer<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<ffi.Void> arg0, MLNCoordinateBounds arg1, ffi.UnsignedLong arg2)>> ptr) =>
-      objc.ObjCBlock<objc.NSArray Function(ffi.Pointer<ffi.Void>, MLNCoordinateBounds, ffi.UnsignedLong)>(objc.newPointerBlock(_fnPtrCallable, ptr.cast()),
-          retain: false, release: true);
-
-  /// Creates a block from a Dart function.
-  ///
-  /// This block must be invoked by native code running on the same thread as
-  /// the isolate that registered it. Invoking the block on the wrong thread
-  /// will result in a crash.
-  ///
-  /// If `keepIsolateAlive` is true, this block will keep this isolate alive
-  /// until it is garbage collected by both Dart and ObjC.
-  static objc.ObjCBlock<objc.NSArray Function(ffi.Pointer<ffi.Void>, MLNCoordinateBounds, ffi.UnsignedLong)> fromFunction(objc.NSArray Function(ffi.Pointer<ffi.Void> , MLNCoordinateBounds , int ) fn,
-          {bool keepIsolateAlive = true}) =>
-      objc.ObjCBlock<objc.NSArray Function(ffi.Pointer<ffi.Void>, MLNCoordinateBounds, ffi.UnsignedLong)>(objc.newClosureBlock(_closureCallable, (ffi.Pointer<ffi.Void> arg0, MLNCoordinateBounds arg1, int arg2) => fn(arg0, arg1, arg2).ref.retainAndAutorelease(), keepIsolateAlive),
-          retain: false, release: true);
-
-  static ffi.Pointer<objc.ObjCObjectImpl> _fnPtrTrampoline(
-      ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, MLNCoordinateBounds arg1, int arg2) =>
-          block.ref.target.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<ffi.Void> arg0, MLNCoordinateBounds arg1, ffi.UnsignedLong arg2)>>()
-              .asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<ffi.Void> , MLNCoordinateBounds , int )>()(arg0, arg1, arg2);
-  static ffi.Pointer<ffi.Void> _fnPtrCallable = ffi.Pointer.fromFunction<
-      ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , MLNCoordinateBounds , ffi.UnsignedLong )>(_fnPtrTrampoline ).cast();
-  static ffi.Pointer<objc.ObjCObjectImpl> _closureTrampoline(
-      ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, MLNCoordinateBounds arg1, int arg2) =>
-      (objc.getBlockClosure(block) as ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<ffi.Void> , MLNCoordinateBounds , int ))(arg0, arg1, arg2);
-  static ffi.Pointer<ffi.Void> _closureCallable = ffi.Pointer.fromFunction<
-      ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , MLNCoordinateBounds , ffi.UnsignedLong )>(_closureTrampoline ).cast();
-}
-
-/// Call operator for `objc.ObjCBlock<objc.NSArray Function(ffi.Pointer<ffi.Void>, MLNCoordinateBounds, ffi.UnsignedLong)>`.
-extension ObjCBlock_NSArray_ffiVoid_MLNCoordinateBounds_NSUInteger$CallExtension on objc.ObjCBlock<objc.NSArray Function(ffi.Pointer<ffi.Void>, MLNCoordinateBounds, ffi.UnsignedLong)> {
-  objc.NSArray call(ffi.Pointer<ffi.Void> arg0, MLNCoordinateBounds arg1, int arg2) =>objc.NSArray.fromPointer(ref.pointer.ref.invoke.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, MLNCoordinateBounds arg1, ffi.UnsignedLong arg2)>>()
-  .asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , MLNCoordinateBounds , int )>()(
-    ref.pointer, arg0, arg1, arg2), retain: true, release: true);
-}
-
-
-/// Data source for ``MLNComputedShapeSource``. This protocol defines two optional methods for fetching
-/// data, one based on tile coordinates, and one based on a bounding box. Classes that implement this
-/// protocol must implement one, and only one of the methods. Methods on this protocol will not be
-/// called on main thread, they will be called on the caller's `requestQueue`.
-extension type MLNComputedShapeSourceDataSource._(objc.ObjCProtocol object$) implements objc.ObjCProtocol, objc.NSObjectProtocol {
-  /// Constructs a [MLNComputedShapeSourceDataSource] that points to the same underlying object as [other].
-  MLNComputedShapeSourceDataSource.as(objc.ObjCObject other) : object$ = other;
-
-  /// Constructs a [MLNComputedShapeSourceDataSource] that wraps the given raw object pointer.
-  MLNComputedShapeSourceDataSource.fromPointer(ffi.Pointer<objc.ObjCObjectImpl> other,
-      {bool retain = false, bool release = false}) :
-      object$ = objc.ObjCProtocol(other, retain: retain, release: release);
-
-  /// Returns whether [obj] is an instance of [MLNComputedShapeSourceDataSource].
-  static bool conformsTo(objc.ObjCObject obj) {
-    return _objc_msgSend_e3qsqz(obj.ref.pointer, _sel_conformsToProtocol_, _protocol_MLNComputedShapeSourceDataSource);
-  }
-}
-
-extension MLNComputedShapeSourceDataSource$Methods on MLNComputedShapeSourceDataSource {
-
-  /// Fetch features for a tile. This method will not be invoked on the main queue, it
-/// will be invoked on the caller's `requestQueue`.
-/// @param bounds The bounds to fetch data for.
-/// @param zoomLevel Tile zoom level.
-  objc.NSArray featuresInCoordinateBounds(MLNCoordinateBounds bounds, {required int zoomLevel}) {
-    if (!objc.respondsToSelector(object$.ref.pointer, _sel_featuresInCoordinateBounds_zoomLevel_)) {
-      throw objc.UnimplementedOptionalMethodException('MLNComputedShapeSourceDataSource', 'featuresInCoordinateBounds:zoomLevel:');
-    }
-    final $ret = _objc_msgSend_14qzqeh(object$.ref.pointer, _sel_featuresInCoordinateBounds_zoomLevel_, bounds, zoomLevel);
-    return objc.NSArray.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// Fetch features for a tile. This method will not be invoked on the main queue, it
-/// will be invoked on the caller's `requestQueue`.
-/// @param x Tile X coordinate.
-/// @param y Tile Y coordinate.
-/// @param zoomLevel Tile zoom level.
-  objc.NSArray featuresInTileAtX(int x, {required int y,required int zoomLevel}) {
-    if (!objc.respondsToSelector(object$.ref.pointer, _sel_featuresInTileAtX_y_zoomLevel_)) {
-      throw objc.UnimplementedOptionalMethodException('MLNComputedShapeSourceDataSource', 'featuresInTileAtX:y:zoomLevel:');
-    }
-    final $ret = _objc_msgSend_g9dd28(object$.ref.pointer, _sel_featuresInTileAtX_y_zoomLevel_, x, y, zoomLevel);
-    return objc.NSArray.fromPointer($ret, retain: true, release: true);
-  }
-
-}
-
-  interface class MLNComputedShapeSourceDataSource$Builder {
-  
-    /// Returns the [objc.Protocol] object for this protocol.
-  static objc.Protocol get $protocol =>
-      objc.Protocol.fromPointer(_protocol_MLNComputedShapeSourceDataSource.cast());
-
-  /// Builds an object that implements the MLNComputedShapeSourceDataSource protocol. To implement
-  /// multiple protocols, use [addToBuilder] or [objc.ObjCProtocolBuilder] directly.
-  ///
-  /// If `$keepIsolateAlive` is true, this protocol will keep this isolate
-  /// alive until it is garbage collected by both Dart and ObjC.
-  static MLNComputedShapeSourceDataSource implement({objc.NSArray Function(MLNCoordinateBounds , int )? featuresInCoordinateBounds_zoomLevel_, objc.NSArray Function(int , int , int )? featuresInTileAtX_y_zoomLevel_, bool $keepIsolateAlive = true}) {
-    final builder = objc.ObjCProtocolBuilder(debugName: 'MLNComputedShapeSourceDataSource');
-        MLNComputedShapeSourceDataSource$Builder.featuresInCoordinateBounds_zoomLevel_.implement(builder, featuresInCoordinateBounds_zoomLevel_);    MLNComputedShapeSourceDataSource$Builder.featuresInTileAtX_y_zoomLevel_.implement(builder, featuresInTileAtX_y_zoomLevel_);
-    builder.addProtocol($protocol);
-    return MLNComputedShapeSourceDataSource.as(builder.build(keepIsolateAlive: $keepIsolateAlive));
-  }
-
-  /// Adds the implementation of the MLNComputedShapeSourceDataSource protocol to an existing
-  /// [objc.ObjCProtocolBuilder].
-  ///
-  /// Note: You cannot call this method after you have called `builder.build`.
-  static void addToBuilder(objc.ObjCProtocolBuilder builder, {objc.NSArray Function(MLNCoordinateBounds , int )? featuresInCoordinateBounds_zoomLevel_, objc.NSArray Function(int , int , int )? featuresInTileAtX_y_zoomLevel_, bool $keepIsolateAlive = true}) {
-        MLNComputedShapeSourceDataSource$Builder.featuresInCoordinateBounds_zoomLevel_.implement(builder, featuresInCoordinateBounds_zoomLevel_);    MLNComputedShapeSourceDataSource$Builder.featuresInTileAtX_y_zoomLevel_.implement(builder, featuresInTileAtX_y_zoomLevel_);
-    builder.addProtocol($protocol);
-  }
-
-  
-  /// Fetch features for a tile. This method will not be invoked on the main queue, it
-/// will be invoked on the caller's `requestQueue`.
-/// @param bounds The bounds to fetch data for.
-/// @param zoomLevel Tile zoom level.
-static final featuresInCoordinateBounds_zoomLevel_ = objc.ObjCProtocolMethod<objc.NSArray Function(MLNCoordinateBounds , int )>(
-      _protocol_MLNComputedShapeSourceDataSource,
-      _sel_featuresInCoordinateBounds_zoomLevel_,
-      ffi.Native.addressOf<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> , MLNCoordinateBounds , ffi.UnsignedLong )>>(_NativeLibrary_protocolTrampoline_129i16p).cast(),
-      objc.getProtocolMethodSignature(
-          _protocol_MLNComputedShapeSourceDataSource,
-          _sel_featuresInCoordinateBounds_zoomLevel_,
-          isRequired: false,
-          isInstanceMethod: true,
-      ),
-      (objc.NSArray Function(MLNCoordinateBounds , int ) func) => ObjCBlock_NSArray_ffiVoid_MLNCoordinateBounds_NSUInteger.fromFunction((ffi.Pointer<ffi.Void> _, MLNCoordinateBounds arg1, int arg2) => func(arg1, arg2)),
-      
-    );
-/// Fetch features for a tile. This method will not be invoked on the main queue, it
-/// will be invoked on the caller's `requestQueue`.
-/// @param x Tile X coordinate.
-/// @param y Tile Y coordinate.
-/// @param zoomLevel Tile zoom level.
-static final featuresInTileAtX_y_zoomLevel_ = objc.ObjCProtocolMethod<objc.NSArray Function(int , int , int )>(
-      _protocol_MLNComputedShapeSourceDataSource,
-      _sel_featuresInTileAtX_y_zoomLevel_,
-      ffi.Native.addressOf<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> , ffi.UnsignedLong , ffi.UnsignedLong , ffi.UnsignedLong )>>(_NativeLibrary_protocolTrampoline_fclj7c).cast(),
-      objc.getProtocolMethodSignature(
-          _protocol_MLNComputedShapeSourceDataSource,
-          _sel_featuresInTileAtX_y_zoomLevel_,
-          isRequired: false,
-          isInstanceMethod: true,
-      ),
-      (objc.NSArray Function(int , int , int ) func) => ObjCBlock_NSArray_ffiVoid_NSUInteger_NSUInteger_NSUInteger.fromFunction((ffi.Pointer<ffi.Void> _, int arg1, int arg2, int arg3) => func(arg1, arg2, arg3)),
-      
-    );
-
-}
-late final _class_MLNComputedShapeSource = objc.getClass("MLNComputedShapeSource");
-late final _sel_initWithIdentifier_options_ = objc.registerName("initWithIdentifier:options:");
-late final _sel_initWithIdentifier_dataSource_options_ = objc.registerName("initWithIdentifier:dataSource:options:");
-late final _sel_invalidateBounds_ = objc.registerName("invalidateBounds:");
-late final _sel_invalidateTileAtX_y_zoomLevel_ = objc.registerName("invalidateTileAtX:y:zoomLevel:");
-final _objc_msgSend_1r0ktp8 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.UnsignedLong , ffi.UnsignedLong , ffi.UnsignedLong )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int , int , int )>();
-late final _sel_setFeatures_inTileAtX_y_zoomLevel_ = objc.registerName("setFeatures:inTileAtX:y:zoomLevel:");
-final _objc_msgSend_10v42t6 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.UnsignedLong , ffi.UnsignedLong , ffi.UnsignedLong )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , int , int , int )>();
-late final _sel_dataSource = objc.registerName("dataSource");
-late final _sel_setDataSource_ = objc.registerName("setDataSource:");
-late final _sel_requestQueue = objc.registerName("requestQueue");
-
-/// ``MLNComputedShapeSource`` is a map content source that supplies vector shapes,
-/// one tile at a time, to be shown on the map on demand. You implement a class
-/// conforming to the ``MLNComputedShapeSourceDataSource`` protocol that returns
-/// instances of ``MLNShape`` or ``MLNShape``, then add a computed shape source to an
-/// ``MLNStyle`` object along with an ``MLNStyle`` object. The vector style
-/// layer defines the appearance of any content supplied by the computed shape
-/// source.
-/// 
-/// ``MLNComputedShapeSource`` is similar to ``MLNComputedShapeSource`` but is optimized for
-/// data sets that change dynamically or are too large to fit completely in memory.
-/// It is also useful for data that is divided into tiles in a format other than
-/// <a href="https://www.mapbox.com/vector-tiles/">Mapbox Vector Tiles</a>. For
-/// <a href="http://geojson.org/">GeoJSON</a> data, use the ``MLNShapeSource`` class.
-/// For static tiles or Mapbox Vector Tiles, use the ``MLNVectorTileSource`` class.
-/// 
-/// You can add and remove sources dynamically using methods such as
-/// ``MLNStyle/addSource:`` and ``MLNStyle/sourceWithIdentifier:``. This class
-/// cannot be represented in a style JSON file; you must add it ot the style at
-/// runtime.
-extension type MLNComputedShapeSource._(objc.ObjCObject object$) implements objc.ObjCObject,MLNSource {
-  /// Constructs a [MLNComputedShapeSource] that points to the same underlying object as [other].
-  MLNComputedShapeSource.as(objc.ObjCObject other) : object$ = other {
-    assert(isA(object$));
-  }
-
-  /// Constructs a [MLNComputedShapeSource] that wraps the given raw object pointer.
-  MLNComputedShapeSource.fromPointer(ffi.Pointer<objc.ObjCObjectImpl> other,
-      {bool retain = false, bool release = false}) :
-          object$ = objc.ObjCObject(other, retain: retain, release: release) {
-    assert(isA(object$));
-  }
-
-  /// Returns whether [obj] is an instance of [MLNComputedShapeSource].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNComputedShapeSource);
-
-  /// alloc
-  static MLNComputedShapeSource alloc() {
-    final $ret = _objc_msgSend_151sglz(_class_MLNComputedShapeSource, _sel_alloc);
-    return MLNComputedShapeSource.fromPointer($ret, retain: false, release: true);
-  }
-
-
-  /// allocWithZone:
-  static MLNComputedShapeSource allocWithZone(ffi.Pointer<objc.NSZone> zone) {
-    final $ret = _objc_msgSend_1cwp428(_class_MLNComputedShapeSource, _sel_allocWithZone_, zone);
-    return MLNComputedShapeSource.fromPointer($ret, retain: false, release: true);
-  }
-
-
-  /// new
-  static MLNComputedShapeSource new$() {
-    final $ret = _objc_msgSend_151sglz(_class_MLNComputedShapeSource, _sel_new);
-    return MLNComputedShapeSource.fromPointer($ret, retain: false, release: true);
-  }
-  /// Returns a new instance of MLNComputedShapeSource constructed with the default `new` method.
-  MLNComputedShapeSource() : this.as(new$().object$);
-
-}
-
-extension MLNComputedShapeSource$Methods on MLNComputedShapeSource {
-
-  /// An object that implements the ``MLNComputedShapeSourceDataSource`` protocol that will be queried
-/// for tile data.
-  MLNComputedShapeSourceDataSource? get dataSource {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_dataSource);
-    return $ret.address == 0 ? null : MLNComputedShapeSourceDataSource.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// init
-  MLNComputedShapeSource init() {
-  objc.checkOsVersionInternal('MLNComputedShapeSource.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.retainAndReturnPointer(), _sel_init);
-    return MLNComputedShapeSource.fromPointer($ret, retain: false, release: true);
-  }
-
-
-  /// Returns a source initialized with an identifier.
-/// 
-/// After initializing and configuring the source, add it to a map view’s style
-/// using the ``MLNStyle/addSource:`` method.
-/// 
-/// @param identifier A string that uniquely identifies the source in the style to
-/// which it is added.
-/// @return An initialized source.
-  MLNComputedShapeSource initWithIdentifier(objc.NSString identifier) {
-    final $ret = _objc_msgSend_1sotr3r(object$.ref.retainAndReturnPointer(), _sel_initWithIdentifier_, identifier.ref.pointer);
-    return MLNComputedShapeSource.fromPointer($ret, retain: false, release: true);
-  }
-
-
-  /// Returns a custom shape data source initialized with an identifier, data source, and a
-/// dictionary of options for the source according to the
-/// <a href="https://maplibre.org/maplibre-style-spec/#sources-geojson">style
-/// specification</a>.
-/// 
-/// This class supports the following options:
-/// ``MLNShapeSourceOptionMinimumZoomLevel``, ``MLNShapeSourceOptionMinimumZoomLevel``,
-/// ``MLNShapeSourceOptionBuffer``,
-/// ``MLNShapeSourceOptionSimplificationTolerance``,
-/// ``MLNShapeSourceOptionWrapsCoordinates``, and
-/// ``MLNShapeSourceOptionClipsCoordinates``. Shapes provided by a computed shape
-/// source cannot be clustered.
-/// 
-/// @param identifier A string that uniquely identifies the source.
-/// @param dataSource An object conforming to MLNComputedShapeSourceDataSource protocol that will
-/// provide the shape data.
-/// @param options An `NSDictionary` of options for this source.
-  MLNComputedShapeSource initWithIdentifier$1(objc.NSString identifier, {required MLNComputedShapeSourceDataSource dataSource,objc.NSDictionary? options}) {
-    final $ret = _objc_msgSend_11spmsz(object$.ref.retainAndReturnPointer(), _sel_initWithIdentifier_dataSource_options_, identifier.ref.pointer, dataSource.ref.pointer, options?.ref.pointer ?? ffi.nullptr);
-    return MLNComputedShapeSource.fromPointer($ret, retain: false, release: true);
-  }
-
-
-  /// Returns a custom shape data source initialized with an identifier, and a
-/// dictionary of options for the source according to the
-/// <a href="https://maplibre.org/maplibre-style-spec/#sources-geojson">style
-/// specification</a>.
-/// 
-/// This class supports the following options:
-/// ``MLNShapeSourceOptionMinimumZoomLevel``, ``MLNShapeSourceOptionMinimumZoomLevel``,
-/// ``MLNShapeSourceOptionBuffer``,
-/// ``MLNShapeSourceOptionSimplificationTolerance``,
-/// ``MLNShapeSourceOptionWrapsCoordinates``, and
-/// ``MLNShapeSourceOptionClipsCoordinates``. Shapes provided by a computed
-/// shape source cannot be clustered.
-/// 
-/// @param identifier A string that uniquely identifies the source.
-/// @param options An `NSDictionary` of options for this source.
-  MLNComputedShapeSource initWithIdentifier$2(objc.NSString identifier, {objc.NSDictionary? options}) {
-    final $ret = _objc_msgSend_15qeuct(object$.ref.retainAndReturnPointer(), _sel_initWithIdentifier_options_, identifier.ref.pointer, options?.ref.pointer ?? ffi.nullptr);
-    return MLNComputedShapeSource.fromPointer($ret, retain: false, release: true);
-  }
-
-
-  /// Invalidates all the features and properties intersecting with or contained in
-/// the specified bounds. New fetch requests will immediately be invoked on the
-/// ``MLNComputedShapeSourceDataSource``.
-/// @param bounds  Coordinate bounds to invalidate.
-  void invalidateBounds(MLNCoordinateBounds bounds) {
-_objc_msgSend_9ay59k(object$.ref.pointer, _sel_invalidateBounds_, bounds);
-
-  }
-
-
-  /// Invalidates all the feautres and properties of a given tile. A new fetch request
-/// will immediately be invoked on the ``MLNComputedShapeSourceDataSource``.
-/// @param x Tile X coordinate.
-/// @param y Tile Y coordinate.
-/// @param zoomLevel Tile zoom level.
-  void invalidateTileAtX(int x, {required int y,required int zoomLevel}) {
-_objc_msgSend_1r0ktp8(object$.ref.pointer, _sel_invalidateTileAtX_y_zoomLevel_, x, y, zoomLevel);
-
-  }
-
-
-  /// A queue that calls to the data source will be made on.
-  NSOperationQueue get requestQueue {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_requestQueue);
-    return NSOperationQueue.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// An object that implements the ``MLNComputedShapeSourceDataSource`` protocol that will be queried
-/// for tile data.
-  set dataSource(MLNComputedShapeSourceDataSource? value) {
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setDataSource_, value?.ref.pointer ?? ffi.nullptr);
-
-  }
-
-
-  /// Set a new set of features for a tile. This method can be invkoed from background threads.
-/// For best performance, use this method only to update tiles that have already been requested
-/// through ``MLNComputedShapeSourceDataSource/``
-/// @param features  Features for the tile.
-/// @param x         Tile X coordinate.
-/// @param y         Tile Y coordinate.
-/// @param zoomLevel Tile zoom level.
-  void setFeatures(objc.NSArray features, {required int inTileAtX,required int y,required int zoomLevel}) {
-_objc_msgSend_10v42t6(object$.ref.pointer, _sel_setFeatures_inTileAtX_y_zoomLevel_, features.ref.pointer, inTileAtX, y, zoomLevel);
 
   }
 
@@ -48479,61 +46599,8 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setURL_, value?.ref.pointer ?? ff
 late final _class_MLNOfflinePack = objc.getClass("MLNOfflinePack");
 late final _protocol_MLNOfflineRegion = objc.getProtocol("MapLibre.MLNOfflineRegion");
 
-/// Construction methods for `objc.ObjCBlock<objc.NSURL Function(ffi.Pointer<ffi.Void>)>`.
-abstract final class ObjCBlock_NSURL_ffiVoid {
-  /// Returns a block that wraps the given raw block pointer.
-  static objc.ObjCBlock<objc.NSURL Function(ffi.Pointer<ffi.Void>)> fromPointer(ffi.Pointer<objc.ObjCBlockImpl> pointer,
-      {bool retain = false, bool release = false}) =>
-      objc.ObjCBlock<objc.NSURL Function(ffi.Pointer<ffi.Void>)>(pointer, retain: retain, release: release);
-
-  /// Creates a block from a C function pointer.
-  ///
-  /// This block must be invoked by native code running on the same thread as
-  /// the isolate that registered it. Invoking the block on the wrong thread
-  /// will result in a crash.
-  static objc.ObjCBlock<objc.NSURL Function(ffi.Pointer<ffi.Void>)> fromFunctionPointer(ffi.Pointer<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<ffi.Void> arg0)>> ptr) =>
-      objc.ObjCBlock<objc.NSURL Function(ffi.Pointer<ffi.Void>)>(objc.newPointerBlock(_fnPtrCallable, ptr.cast()),
-          retain: false, release: true);
-
-  /// Creates a block from a Dart function.
-  ///
-  /// This block must be invoked by native code running on the same thread as
-  /// the isolate that registered it. Invoking the block on the wrong thread
-  /// will result in a crash.
-  ///
-  /// If `keepIsolateAlive` is true, this block will keep this isolate alive
-  /// until it is garbage collected by both Dart and ObjC.
-  static objc.ObjCBlock<objc.NSURL Function(ffi.Pointer<ffi.Void>)> fromFunction(objc.NSURL Function(ffi.Pointer<ffi.Void> ) fn,
-          {bool keepIsolateAlive = true}) =>
-      objc.ObjCBlock<objc.NSURL Function(ffi.Pointer<ffi.Void>)>(objc.newClosureBlock(_closureCallable, (ffi.Pointer<ffi.Void> arg0) => fn(arg0).ref.retainAndAutorelease(), keepIsolateAlive),
-          retain: false, release: true);
-
-  static ffi.Pointer<objc.ObjCObjectImpl> _fnPtrTrampoline(
-      ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0) =>
-          block.ref.target.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<ffi.Void> arg0)>>()
-              .asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<ffi.Void> )>()(arg0);
-  static ffi.Pointer<ffi.Void> _fnPtrCallable = ffi.Pointer.fromFunction<
-      ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> )>(_fnPtrTrampoline ).cast();
-  static ffi.Pointer<objc.ObjCObjectImpl> _closureTrampoline(
-      ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0) =>
-      (objc.getBlockClosure(block) as ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<ffi.Void> ))(arg0);
-  static ffi.Pointer<ffi.Void> _closureCallable = ffi.Pointer.fromFunction<
-      ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> )>(_closureTrampoline ).cast();
-}
-
-/// Call operator for `objc.ObjCBlock<objc.NSURL Function(ffi.Pointer<ffi.Void>)>`.
-extension ObjCBlock_NSURL_ffiVoid$CallExtension on objc.ObjCBlock<objc.NSURL Function(ffi.Pointer<ffi.Void>)> {
-  objc.NSURL call(ffi.Pointer<ffi.Void> arg0) =>objc.NSURL.fromPointer(ref.pointer.ref.invoke.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0)>>()
-  .asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> )>()(
-    ref.pointer, arg0), retain: true, release: true);
-}
-
-late final _sel_includesIdeographicGlyphs = objc.registerName("includesIdeographicGlyphs");
-late final _sel_setIncludesIdeographicGlyphs_ = objc.registerName("setIncludesIdeographicGlyphs:");
-
-/// An object conforming to the ``MLNOfflineRegion`` protocol determines which
-/// resources are required by an ``MLNOfflinePack`` object.
-extension type MLNOfflineRegion._(objc.ObjCProtocol object$) implements objc.ObjCProtocol, objc.NSObjectProtocol {
+/// MLNOfflineRegion
+extension type MLNOfflineRegion._(objc.ObjCProtocol object$) implements objc.ObjCProtocol {
   /// Constructs a [MLNOfflineRegion] that points to the same underlying object as [other].
   MLNOfflineRegion.as(objc.ObjCObject other) : object$ = other;
 
@@ -48550,47 +46617,6 @@ extension type MLNOfflineRegion._(objc.ObjCProtocol object$) implements objc.Obj
 
 extension MLNOfflineRegion$Methods on MLNOfflineRegion {
 
-  /// Specifies whether to include ideographic glyphs in downloaded font data.
-/// Ideographic glyphs make up the majority of downloaded font data, but
-/// it is possible to configure the renderer to use locally installed fonts
-/// instead of relying on fonts downloaded as part of the offline pack.
-/// See `MLNIdeographicFontFamilyName` setting. Also, for regions outside of
-/// China, Japan, and Korea, these glyphs will rarely appear for non-CJK users.
-/// 
-/// By default, this property is set to `NO`, so that the offline pack will
-/// include ideographic glyphs.
-  bool get includesIdeographicGlyphs {
-    return _objc_msgSend_91o635(object$.ref.pointer, _sel_includesIdeographicGlyphs);
-
-  }
-
-
-  /// Specifies whether to include ideographic glyphs in downloaded font data.
-/// Ideographic glyphs make up the majority of downloaded font data, but
-/// it is possible to configure the renderer to use locally installed fonts
-/// instead of relying on fonts downloaded as part of the offline pack.
-/// See `MLNIdeographicFontFamilyName` setting. Also, for regions outside of
-/// China, Japan, and Korea, these glyphs will rarely appear for non-CJK users.
-/// 
-/// By default, this property is set to `NO`, so that the offline pack will
-/// include ideographic glyphs.
-  set includesIdeographicGlyphs(bool value) {
-_objc_msgSend_1s56lr9(object$.ref.pointer, _sel_setIncludesIdeographicGlyphs_, value);
-
-  }
-
-
-  /// URL of the style whose resources are required for offline viewing.
-/// 
-/// In addition to the JSON stylesheet, different styles may require different font
-/// glyphs, sprite sheets, and other resources.
-/// 
-/// The URL may be a full HTTP or HTTPS URL or a canonical URL
-  objc.NSURL get styleURL {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_styleURL);
-    return objc.NSURL.fromPointer($ret, retain: true, release: true);
-  }
-
 }
 
   interface class MLNOfflineRegion$Builder {
@@ -48604,9 +46630,9 @@ _objc_msgSend_1s56lr9(object$.ref.pointer, _sel_setIncludesIdeographicGlyphs_, v
   ///
   /// If `$keepIsolateAlive` is true, this protocol will keep this isolate
   /// alive until it is garbage collected by both Dart and ObjC.
-  static MLNOfflineRegion implement({required bool Function() includesIdeographicGlyphs, required void Function(bool ) setIncludesIdeographicGlyphs_, required objc.NSURL Function() styleURL, bool $keepIsolateAlive = true}) {
+  static MLNOfflineRegion implement({bool $keepIsolateAlive = true}) {
     final builder = objc.ObjCProtocolBuilder(debugName: 'MLNOfflineRegion');
-        MLNOfflineRegion$Builder.includesIdeographicGlyphs.implement(builder, includesIdeographicGlyphs);    MLNOfflineRegion$Builder.setIncludesIdeographicGlyphs_.implement(builder, setIncludesIdeographicGlyphs_);    MLNOfflineRegion$Builder.styleURL.implement(builder, styleURL);
+    
     builder.addProtocol($protocol);
     return MLNOfflineRegion.as(builder.build(keepIsolateAlive: $keepIsolateAlive));
   }
@@ -48615,123 +46641,13 @@ _objc_msgSend_1s56lr9(object$.ref.pointer, _sel_setIncludesIdeographicGlyphs_, v
   /// [objc.ObjCProtocolBuilder].
   ///
   /// Note: You cannot call this method after you have called `builder.build`.
-  static void addToBuilder(objc.ObjCProtocolBuilder builder, {required bool Function() includesIdeographicGlyphs, required void Function(bool ) setIncludesIdeographicGlyphs_, required objc.NSURL Function() styleURL, bool $keepIsolateAlive = true}) {
-        MLNOfflineRegion$Builder.includesIdeographicGlyphs.implement(builder, includesIdeographicGlyphs);    MLNOfflineRegion$Builder.setIncludesIdeographicGlyphs_.implement(builder, setIncludesIdeographicGlyphs_);    MLNOfflineRegion$Builder.styleURL.implement(builder, styleURL);
+  static void addToBuilder(objc.ObjCProtocolBuilder builder, {bool $keepIsolateAlive = true}) {
+    
     builder.addProtocol($protocol);
   }
 
-    /// Builds an object that implements the MLNOfflineRegion protocol. To implement
-  /// multiple protocols, use [addToBuilder] or [objc.ObjCProtocolBuilder] directly. All
-  /// methods that can be implemented as listeners will be.
-  ///
-  /// If `$keepIsolateAlive` is true, this protocol will keep this isolate
-  /// alive until it is garbage collected by both Dart and ObjC.
-  static MLNOfflineRegion implementAsListener({required bool Function() includesIdeographicGlyphs, required void Function(bool ) setIncludesIdeographicGlyphs_, required objc.NSURL Function() styleURL, bool $keepIsolateAlive = true}) {
-    final builder = objc.ObjCProtocolBuilder(debugName: 'MLNOfflineRegion');
-        MLNOfflineRegion$Builder.includesIdeographicGlyphs.implement(builder, includesIdeographicGlyphs);    MLNOfflineRegion$Builder.setIncludesIdeographicGlyphs_.implementAsListener(builder, setIncludesIdeographicGlyphs_);    MLNOfflineRegion$Builder.styleURL.implement(builder, styleURL);
-    builder.addProtocol($protocol);
-    return MLNOfflineRegion.as(builder.build(keepIsolateAlive: $keepIsolateAlive));
-  }
-
-  /// Adds the implementation of the MLNOfflineRegion protocol to an existing
-  /// [objc.ObjCProtocolBuilder]. All methods that can be implemented as listeners will
-  /// be.
-  ///
-  /// Note: You cannot call this method after you have called `builder.build`.
-  static void addToBuilderAsListener(objc.ObjCProtocolBuilder builder, {required bool Function() includesIdeographicGlyphs, required void Function(bool ) setIncludesIdeographicGlyphs_, required objc.NSURL Function() styleURL, bool $keepIsolateAlive = true}) {
-        MLNOfflineRegion$Builder.includesIdeographicGlyphs.implement(builder, includesIdeographicGlyphs);    MLNOfflineRegion$Builder.setIncludesIdeographicGlyphs_.implementAsListener(builder, setIncludesIdeographicGlyphs_);    MLNOfflineRegion$Builder.styleURL.implement(builder, styleURL);
-    builder.addProtocol($protocol);
-  }
-
-  /// Builds an object that implements the MLNOfflineRegion protocol. To implement
-  /// multiple protocols, use [addToBuilder] or [objc.ObjCProtocolBuilder] directly. All
-  /// methods that can be implemented as blocking listeners will be.
-  ///
-  /// If `$keepIsolateAlive` is true, this protocol will keep this isolate
-  /// alive until it is garbage collected by both Dart and ObjC.
-  static MLNOfflineRegion implementAsBlocking({required bool Function() includesIdeographicGlyphs, required void Function(bool ) setIncludesIdeographicGlyphs_, required objc.NSURL Function() styleURL, bool $keepIsolateAlive = true}) {
-    final builder = objc.ObjCProtocolBuilder(debugName: 'MLNOfflineRegion');
-        MLNOfflineRegion$Builder.includesIdeographicGlyphs.implement(builder, includesIdeographicGlyphs);    MLNOfflineRegion$Builder.setIncludesIdeographicGlyphs_.implementAsBlocking(builder, setIncludesIdeographicGlyphs_);    MLNOfflineRegion$Builder.styleURL.implement(builder, styleURL);
-    builder.addProtocol($protocol);
-    return MLNOfflineRegion.as(builder.build(keepIsolateAlive: $keepIsolateAlive));
-  }
-
-  /// Adds the implementation of the MLNOfflineRegion protocol to an existing
-  /// [objc.ObjCProtocolBuilder]. All methods that can be implemented as blocking
-  /// listeners will be.
-  ///
-  /// Note: You cannot call this method after you have called `builder.build`.
-  static void addToBuilderAsBlocking(objc.ObjCProtocolBuilder builder, {required bool Function() includesIdeographicGlyphs, required void Function(bool ) setIncludesIdeographicGlyphs_, required objc.NSURL Function() styleURL, bool $keepIsolateAlive = true}) {
-        MLNOfflineRegion$Builder.includesIdeographicGlyphs.implement(builder, includesIdeographicGlyphs);    MLNOfflineRegion$Builder.setIncludesIdeographicGlyphs_.implementAsBlocking(builder, setIncludesIdeographicGlyphs_);    MLNOfflineRegion$Builder.styleURL.implement(builder, styleURL);
-    builder.addProtocol($protocol);
-  }
-
-  /// Specifies whether to include ideographic glyphs in downloaded font data.
-/// Ideographic glyphs make up the majority of downloaded font data, but
-/// it is possible to configure the renderer to use locally installed fonts
-/// instead of relying on fonts downloaded as part of the offline pack.
-/// See `MLNIdeographicFontFamilyName` setting. Also, for regions outside of
-/// China, Japan, and Korea, these glyphs will rarely appear for non-CJK users.
-/// 
-/// By default, this property is set to `NO`, so that the offline pack will
-/// include ideographic glyphs.
-static final includesIdeographicGlyphs = objc.ObjCProtocolMethod<bool Function()>(
-      _protocol_MLNOfflineRegion,
-      _sel_includesIdeographicGlyphs,
-      ffi.Native.addressOf<ffi.NativeFunction<ffi.Bool Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> )>>(_NativeLibrary_protocolTrampoline_e3qsqz).cast(),
-      objc.getProtocolMethodSignature(
-          _protocol_MLNOfflineRegion,
-          _sel_includesIdeographicGlyphs,
-          isRequired: true,
-          isInstanceMethod: true,
-      ),
-      (bool Function() func) => ObjCBlock_bool_ffiVoid.fromFunction((ffi.Pointer<ffi.Void> _, ) => func()),
-      
-    );
-/// Specifies whether to include ideographic glyphs in downloaded font data.
-/// Ideographic glyphs make up the majority of downloaded font data, but
-/// it is possible to configure the renderer to use locally installed fonts
-/// instead of relying on fonts downloaded as part of the offline pack.
-/// See `MLNIdeographicFontFamilyName` setting. Also, for regions outside of
-/// China, Japan, and Korea, these glyphs will rarely appear for non-CJK users.
-/// 
-/// By default, this property is set to `NO`, so that the offline pack will
-/// include ideographic glyphs.
-static final setIncludesIdeographicGlyphs_ = objc.ObjCProtocolListenableMethod<void Function(bool )>(
-      _protocol_MLNOfflineRegion,
-      _sel_setIncludesIdeographicGlyphs_,
-      ffi.Native.addressOf<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> , ffi.Bool )>>(_NativeLibrary_protocolTrampoline_10lndml).cast(),
-      objc.getProtocolMethodSignature(
-          _protocol_MLNOfflineRegion,
-          _sel_setIncludesIdeographicGlyphs_,
-          isRequired: true,
-          isInstanceMethod: true,
-      ),
-      (void Function(bool ) func) => ObjCBlock_ffiVoid_ffiVoid_bool.fromFunction((ffi.Pointer<ffi.Void> _, bool arg1) => func(arg1)),
-          (void Function(bool ) func) => ObjCBlock_ffiVoid_ffiVoid_bool.listener((ffi.Pointer<ffi.Void> _, bool arg1) => func(arg1)),
-    (void Function(bool ) func) => ObjCBlock_ffiVoid_ffiVoid_bool.blocking((ffi.Pointer<ffi.Void> _, bool arg1) => func(arg1)),
-
-    );
-/// URL of the style whose resources are required for offline viewing.
-/// 
-/// In addition to the JSON stylesheet, different styles may require different font
-/// glyphs, sprite sheets, and other resources.
-/// 
-/// The URL may be a full HTTP or HTTPS URL or a canonical URL
-static final styleURL = objc.ObjCProtocolMethod<objc.NSURL Function()>(
-      _protocol_MLNOfflineRegion,
-      _sel_styleURL,
-      ffi.Native.addressOf<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> )>>(_NativeLibrary_protocolTrampoline_1mbt9g9).cast(),
-      objc.getProtocolMethodSignature(
-          _protocol_MLNOfflineRegion,
-          _sel_styleURL,
-          isRequired: true,
-          isInstanceMethod: true,
-      ),
-      (objc.NSURL Function() func) => ObjCBlock_NSURL_ffiVoid.fromFunction((ffi.Pointer<ffi.Void> _, ) => func()),
-      
-    );
-
+  
+  
 }
 late final _sel_region = objc.registerName("region");
 late final _sel_setContext_completionHandler_ = objc.registerName("setContext:completionHandler:");
@@ -48816,26 +46732,7 @@ late final _sel_resume = objc.registerName("resume");
 late final _sel_suspend = objc.registerName("suspend");
 late final _sel_requestProgress = objc.registerName("requestProgress");
 
-/// An ``MLNOfflinePack`` represents a collection of resources necessary for viewing
-/// a region offline to a local database.
-/// 
-/// To create an instance of ``MLNOfflinePack``, use the
-/// ``MLNOfflineStorage/addPackForRegion:withContext:completionHandler:`` method.
-/// A pack created using `MLNOfflinePack/init` is immediately invalid.
-/// 
-/// ### Example
-/// ```swift
-/// MLNOfflineStorage.shared.addPack(for: region, withContext: context) { (pack, error) in
-/// guard let pack = pack else {
-/// // If adding the pack fails, log an error to console.
-/// print("Error:", error?.localizedDescription ?? "unknown error adding pack at
-/// \(#file)(\(#line)) in \(#function)") return
-/// }
-/// 
-/// // Start an MLNOfflinePack download
-/// pack.resume()
-/// }
-/// ```
+/// MLNOfflinePack
 extension type MLNOfflinePack._(objc.ObjCObject object$) implements objc.ObjCObject,objc.NSObject {
   /// Constructs a [MLNOfflinePack] that points to the same underlying object as [other].
   MLNOfflinePack.as(objc.ObjCObject other) : object$ = other {
@@ -50041,21 +47938,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_encodeWithCoder_, coder.ref.point
   }
 
 
-  /// Specifies whether to include ideographic glyphs in downloaded font data.
-/// Ideographic glyphs make up the majority of downloaded font data, but
-/// it is possible to configure the renderer to use locally installed fonts
-/// instead of relying on fonts downloaded as part of the offline pack.
-/// See `MLNIdeographicFontFamilyName` setting. Also, for regions outside of
-/// China, Japan, and Korea, these glyphs will rarely appear for non-CJK users.
-/// 
-/// By default, this property is set to `NO`, so that the offline pack will
-/// include ideographic glyphs.
-  bool get includesIdeographicGlyphs {
-    return _objc_msgSend_91o635(object$.ref.pointer, _sel_includesIdeographicGlyphs);
-
-  }
-
-
   /// init
   MLNTilePyramidOfflineRegion init() {
   objc.checkOsVersionInternal('MLNTilePyramidOfflineRegion.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
@@ -50117,33 +47999,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_encodeWithCoder_, coder.ref.point
   double get minimumZoomLevel {
     return objc.useMsgSendVariants ? _objc_msgSend_1ukqyt8Fpret(object$.ref.pointer, _sel_minimumZoomLevel) : _objc_msgSend_1ukqyt8(object$.ref.pointer, _sel_minimumZoomLevel);
 
-  }
-
-
-  /// Specifies whether to include ideographic glyphs in downloaded font data.
-/// Ideographic glyphs make up the majority of downloaded font data, but
-/// it is possible to configure the renderer to use locally installed fonts
-/// instead of relying on fonts downloaded as part of the offline pack.
-/// See `MLNIdeographicFontFamilyName` setting. Also, for regions outside of
-/// China, Japan, and Korea, these glyphs will rarely appear for non-CJK users.
-/// 
-/// By default, this property is set to `NO`, so that the offline pack will
-/// include ideographic glyphs.
-  set includesIdeographicGlyphs(bool value) {
-_objc_msgSend_1s56lr9(object$.ref.pointer, _sel_setIncludesIdeographicGlyphs_, value);
-
-  }
-
-
-  /// URL of the style whose resources are required for offline viewing.
-/// 
-/// In addition to the JSON stylesheet, different styles may require different font
-/// glyphs, sprite sheets, and other resources.
-/// 
-/// The URL may be a full HTTP or HTTPS URL or a canonical URL
-  objc.NSURL get styleURL {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_styleURL);
-    return objc.NSURL.fromPointer($ret, retain: true, release: true);
   }
 
 }
