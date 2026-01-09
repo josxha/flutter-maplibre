@@ -5,6 +5,9 @@ import 'package:ffigen/ffigen.dart';
 void main(List<String> args) {
   final packageRoot = Platform.script.resolve('../');
   // final frameworkPath = packageRoot.resolve('.dart_tool/maplibre_xcframework/MapLibre.xcframework/ios-arm64/');
+  final mlHeadersPath = packageRoot.resolve(
+    'ios/.build/MapLibre.xcframework/ios-arm64/MapLibre.framework/Headers/',
+  );
   final generator = FfiGenerator(
     output: Output(
       dartFile: packageRoot.resolve('lib/maplibre_ffi.g.dart'),
@@ -18,10 +21,31 @@ void main(List<String> args) {
         packageRoot.resolve(
           'ios/maplibre_ios/Sources/maplibre_ios/MapLibreIos.h',
         ),
-        // packageRoot.resolve('MapLibre.h'),
-        packageRoot.resolve(
-          'ios/.build/MapLibre.xcframework/ios-arm64/MapLibre.framework/Headers/MapLibre.h',
-        ),
+        mlHeadersPath.resolve('MLNMapProjection.h'),
+        mlHeadersPath.resolve('MLNStyle.h'),
+        mlHeadersPath.resolve('MLNSource.h'),
+        mlHeadersPath.resolve('MLNVectorTileSource.h'),
+        mlHeadersPath.resolve('MLNShapeSource.h'),
+        mlHeadersPath.resolve('MLNImageSource.h'),
+        mlHeadersPath.resolve('MLNRasterTileSource.h'),
+        mlHeadersPath.resolve('MLNRasterDEMSource.h'),
+        mlHeadersPath.resolve('MLNBackgroundStyleLayer.h'),
+        mlHeadersPath.resolve('MLNCircleStyleLayer.h'),
+        mlHeadersPath.resolve('MLNFillExtrusionStyleLayer.h'),
+        mlHeadersPath.resolve('MLNFillStyleLayer.h'),
+        mlHeadersPath.resolve('MLNHeatmapStyleLayer.h'),
+        mlHeadersPath.resolve('MLNHillshadeStyleLayer.h'),
+        mlHeadersPath.resolve('MLNLineStyleLayer.h'),
+        mlHeadersPath.resolve('MLNRasterStyleLayer.h'),
+        mlHeadersPath.resolve('MLNSymbolStyleLayer.h'),
+        mlHeadersPath.resolve('MLNVectorStyleLayer.h'),
+        mlHeadersPath.resolve('MLNAttributionInfo.h'),
+        mlHeadersPath.resolve('NSExpression+MLNAdditions.h'),
+        mlHeadersPath.resolve('MLNOfflineStorage.h'),
+        mlHeadersPath.resolve('MLNOfflinePack.h'),
+        mlHeadersPath.resolve('MLNOfflineRegion.h'),
+        mlHeadersPath.resolve('MLNTilePyramidOfflineRegion.h'),
+        mlHeadersPath.resolve('MLNFeature.h'),
       ],
       compilerOptions: [
         // TODO cannot use the headers from SPM, maybe because of missing debug symbols
@@ -33,38 +57,18 @@ void main(List<String> args) {
         '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk',
       ],
       include: (header) {
-        const include = {
-          'MLNMapProjection.h',
-          'MLNStyle.h',
-          'MLNSource.h',
-          'MLNVectorTileSource.h',
-          'MLNShapeSource.h',
-          'MLNImageSource.h',
-          'MLNRasterTileSource.h',
-          'MLNRasterDEMSource.h',
-          'MLNBackgroundStyleLayer.h',
-          'MLNCircleStyleLayer.h',
-          'MLNFillExtrusionStyleLayer.h',
-          'MLNFillStyleLayer.h',
-          'MLNHeatmapStyleLayer.h',
-          'MLNHillshadeStyleLayer.h',
-          'MLNLineStyleLayer.h',
-          'MLNRasterStyleLayer.h',
-          'MLNSymbolStyleLayer.h',
-          'MLNVectorStyleLayer.h',
-          'MLNAttributionInfo.h',
-          'NSExpression+MLNAdditions.h',
-          'MLNOfflineStorage.h',
-          'MLNOfflinePack.h',
-          'MLNOfflineRegion.h',
-          'MLNTilePyramidOfflineRegion.h',
-          'MLNFeature.h',
-          'maplibre_ios/Sources/maplibre_ios/',
+        print('### Considering header: ${header.path}');
+        const exclude = <String>{
+          // 'MLNBackendResource.h',
+          // 'MLNCustomStyleLayer.h',
+          // 'MLNMapViewDelegate.h',
+          // 'MLNDefines.h',
+          // 'Metal.framework',
         };
-        for (final path in include) {
-          if (header.path.contains(path)) return true;
+        for (final path in exclude) {
+          if (header.path.contains(path)) return false;
         }
-        return false;
+        return true;
       },
     ),
     objectiveC: ObjectiveC(
