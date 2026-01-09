@@ -103,7 +103,7 @@ void main(List<String> args) {
       protocols: Protocols(
         include: (decl) {
           if (decl.originalName == 'MLNMapViewDelegate') return false;
-          return true;
+          return decl.originalName.startsWith('MLN');
         },
         module: (decl) => const {
           'MapLibreRegistry': 'maplibre_ios',
