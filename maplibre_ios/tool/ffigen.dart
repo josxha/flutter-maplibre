@@ -74,8 +74,6 @@ void main(List<String> args) {
     objectiveC: ObjectiveC(
       interfaces: Interfaces(
         includeMember: (decl, member) {
-          final name = '${decl.originalName}::$member';
-          if (name == 'MLNMapView::backendResource') return false;
           return true;
         },
         include: (decl) {
@@ -106,7 +104,6 @@ void main(List<String> args) {
       ),
       protocols: Protocols(
         include: (decl) {
-          if (decl.originalName == 'MLNMapViewDelegate') return false;
           return decl.originalName.startsWith('MLN');
         },
         module: (decl) => const {

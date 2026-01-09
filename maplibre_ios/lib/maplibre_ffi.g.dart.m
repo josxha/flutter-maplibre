@@ -717,6 +717,8 @@ _ListenerTrampoline_18 _NativeLibrary_wrapBlockingBlock_13x5jor(
 
 Protocol* _NativeLibrary_MLNStylable(void) { return @protocol(MLNStylable); }
 
+Protocol* _NativeLibrary_MLNMapViewDelegate(void) { return @protocol(MLNMapViewDelegate); }
+
 Protocol* _NativeLibrary_MLNLocationManager(void) { return @protocol(MLNLocationManager); }
 
 Protocol* _NativeLibrary_MLNAnnotation(void) { return @protocol(MLNAnnotation); }

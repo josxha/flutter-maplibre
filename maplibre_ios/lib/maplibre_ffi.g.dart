@@ -4240,7 +4240,7 @@ extension type UIAccessibilityIdentification._(objc.ObjCProtocol object$) implem
 
 
 /// UIAccessibility
-extension UIAccessibility on UIImage {
+extension UIAccessibility$1 on UIImage {
 
   /// accessibilityIdentifier
   objc.NSString? get accessibilityIdentifier {
@@ -5546,7 +5546,7 @@ late final _sel_setSubtitle_ = objc.registerName("setSubtitle:");
 late final _sel_image = objc.registerName("image");
 
 /// UIAccessibility
-extension UIAccessibility$1 on UIMenuElement {
+extension UIAccessibility$2 on UIMenuElement {
 
   /// accessibilityIdentifier
   objc.NSString? get accessibilityIdentifier {
@@ -11875,7 +11875,7 @@ extension UITextField on UIView {
 
 
 /// UIAccessibility
-extension UIAccessibility$2 on UIView {
+extension UIAccessibility on UIView {
 
   /// accessibilityIdentifier
   objc.NSString? get accessibilityIdentifier {
@@ -25376,10 +25376,8 @@ late final _class_MLNMapView = objc.getClass("MLNMapView");
 late final _sel_initWithFrame_styleURL_ = objc.registerName("initWithFrame:styleURL:");
 late final _sel_initWithFrame_styleJSON_ = objc.registerName("initWithFrame:styleJSON:");
 late final _sel_initWithFrame_options_ = objc.registerName("initWithFrame:options:");
+late final _protocol_MLNMapViewDelegate = objc.getProtocol("MLNMapViewDelegate");
 
-/// WARNING: MLNMapViewDelegate is a stub. To generate bindings for this class, include
-/// MLNMapViewDelegate in your config's objc-protocols list.
-///
 /// MLNMapViewDelegate
 extension type MLNMapViewDelegate._(objc.ObjCProtocol object$) implements objc.ObjCProtocol {
   /// Constructs a [MLNMapViewDelegate] that points to the same underlying object as [other].
@@ -25389,8 +25387,47 @@ extension type MLNMapViewDelegate._(objc.ObjCProtocol object$) implements objc.O
   MLNMapViewDelegate.fromPointer(ffi.Pointer<objc.ObjCObjectImpl> other,
       {bool retain = false, bool release = false}) :
       object$ = objc.ObjCProtocol(other, retain: retain, release: release);
+
+  /// Returns whether [obj] is an instance of [MLNMapViewDelegate].
+  static bool conformsTo(objc.ObjCObject obj) {
+    return _objc_msgSend_e3qsqz(obj.ref.pointer, _sel_conformsToProtocol_, _protocol_MLNMapViewDelegate);
+  }
 }
 
+extension MLNMapViewDelegate$Methods on MLNMapViewDelegate {
+
+}
+
+  interface class MLNMapViewDelegate$Builder {
+  
+    /// Returns the [objc.Protocol] object for this protocol.
+  static objc.Protocol get $protocol =>
+      objc.Protocol.fromPointer(_protocol_MLNMapViewDelegate.cast());
+
+  /// Builds an object that implements the MLNMapViewDelegate protocol. To implement
+  /// multiple protocols, use [addToBuilder] or [objc.ObjCProtocolBuilder] directly.
+  ///
+  /// If `$keepIsolateAlive` is true, this protocol will keep this isolate
+  /// alive until it is garbage collected by both Dart and ObjC.
+  static MLNMapViewDelegate implement({bool $keepIsolateAlive = true}) {
+    final builder = objc.ObjCProtocolBuilder(debugName: 'MLNMapViewDelegate');
+    
+    builder.addProtocol($protocol);
+    return MLNMapViewDelegate.as(builder.build(keepIsolateAlive: $keepIsolateAlive));
+  }
+
+  /// Adds the implementation of the MLNMapViewDelegate protocol to an existing
+  /// [objc.ObjCProtocolBuilder].
+  ///
+  /// Note: You cannot call this method after you have called `builder.build`.
+  static void addToBuilder(objc.ObjCProtocolBuilder builder, {bool $keepIsolateAlive = true}) {
+    
+    builder.addProtocol($protocol);
+  }
+
+  
+  
+}
 late final _sel_delegate = objc.registerName("delegate");
 late final _sel_setDelegate_ = objc.registerName("setDelegate:");
 late final _sel_reloadStyle_ = objc.registerName("reloadStyle:");
@@ -26220,6 +26257,7 @@ late final _sel_enableRenderingStatsView_ = objc.registerName("enableRenderingSt
 late final _sel_getActionJournalLogFiles = objc.registerName("getActionJournalLogFiles");
 late final _sel_getActionJournalLog = objc.registerName("getActionJournalLog");
 late final _sel_clearActionJournalLog = objc.registerName("clearActionJournalLog");
+late final _sel_backendResource = objc.registerName("backendResource");
 late final _sel_triggerRepaint = objc.registerName("triggerRepaint");
 late final _sel_addPluginLayerType_ = objc.registerName("addPluginLayerType:");
 
@@ -26530,6 +26568,13 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_addPluginLayerType_, pluginLayerC
   bool get automaticallyAdjustsContentInset {
     return _objc_msgSend_91o635(object$.ref.pointer, _sel_automaticallyAdjustsContentInset);
 
+  }
+
+
+  /// backendResource
+  MLNBackendResource backendResource() {
+    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_backendResource);
+    return MLNBackendResource.fromPointer($ret, retain: true, release: true);
   }
 
 
