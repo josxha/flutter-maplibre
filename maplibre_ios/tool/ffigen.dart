@@ -56,20 +56,6 @@ void main(List<String> args) {
         '-isysroot',
         '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk',
       ],
-      include: (header) {
-        print('### Considering header: ${header.path}');
-        const exclude = <String>{
-          // 'MLNBackendResource.h',
-          // 'MLNCustomStyleLayer.h',
-          // 'MLNMapViewDelegate.h',
-          // 'MLNDefines.h',
-          // 'Metal.framework',
-        };
-        for (final path in exclude) {
-          if (header.path.contains(path)) return false;
-        }
-        return true;
-      },
     ),
     objectiveC: ObjectiveC(
       interfaces: Interfaces(
