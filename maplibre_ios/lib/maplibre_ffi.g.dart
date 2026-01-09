@@ -4240,7 +4240,7 @@ extension type UIAccessibilityIdentification._(objc.ObjCProtocol object$) implem
 
 
 /// UIAccessibility
-extension UIAccessibility$1 on UIImage {
+extension UIAccessibility on UIImage {
 
   /// accessibilityIdentifier
   objc.NSString? get accessibilityIdentifier {
@@ -5546,7 +5546,7 @@ late final _sel_setSubtitle_ = objc.registerName("setSubtitle:");
 late final _sel_image = objc.registerName("image");
 
 /// UIAccessibility
-extension UIAccessibility$2 on UIMenuElement {
+extension UIAccessibility$1 on UIMenuElement {
 
   /// accessibilityIdentifier
   objc.NSString? get accessibilityIdentifier {
@@ -11875,7 +11875,7 @@ extension UITextField on UIView {
 
 
 /// UIAccessibility
-extension UIAccessibility on UIView {
+extension UIAccessibility$2 on UIView {
 
   /// accessibilityIdentifier
   objc.NSString? get accessibilityIdentifier {

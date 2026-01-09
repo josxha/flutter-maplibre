@@ -112,4 +112,14 @@ void main(List<String> args) {
   );
 
   generator.generate();
+
+  // workaround because we use a local MapLibre build during codegen
+  final mFile = File('${generator.output.dartFile.toFilePath()}.m');
+  final mContent = mFile.readAsStringSync();
+  mFile.writeAsStringSync(
+    mContent.replaceAll(
+      '../ios/.build/MapLibre.xcframework/ios-arm64/MapLibre.framework/Headers/',
+      '',
+    ),
+  );
 }
