@@ -4,7 +4,10 @@ import 'package:ffigen/ffigen.dart';
 
 void main(List<String> args) {
   final packageRoot = Platform.script.resolve('../');
-
+  // final frameworkPath = packageRoot.resolve('.dart_tool/maplibre_xcframework/MapLibre.xcframework/ios-arm64/');
+  final mlHeadersPath = packageRoot.resolve(
+    'ios/.build/MapLibre.xcframework/ios-arm64/MapLibre.framework/Headers/',
+  );
   final generator = FfiGenerator(
     output: Output(
       dartFile: packageRoot.resolve('lib/maplibre_ffi.g.dart'),
@@ -18,9 +21,36 @@ void main(List<String> args) {
         packageRoot.resolve(
           'ios/maplibre_ios/Sources/maplibre_ios/MapLibreIos.h',
         ),
-        packageRoot.resolve('MapLibre.h'),
+        mlHeadersPath.resolve('MLNMapProjection.h'),
+        mlHeadersPath.resolve('MLNStyle.h'),
+        mlHeadersPath.resolve('MLNSource.h'),
+        mlHeadersPath.resolve('MLNVectorTileSource.h'),
+        mlHeadersPath.resolve('MLNShapeSource.h'),
+        mlHeadersPath.resolve('MLNImageSource.h'),
+        mlHeadersPath.resolve('MLNRasterTileSource.h'),
+        mlHeadersPath.resolve('MLNRasterDEMSource.h'),
+        mlHeadersPath.resolve('MLNBackgroundStyleLayer.h'),
+        mlHeadersPath.resolve('MLNCircleStyleLayer.h'),
+        mlHeadersPath.resolve('MLNFillExtrusionStyleLayer.h'),
+        mlHeadersPath.resolve('MLNFillStyleLayer.h'),
+        mlHeadersPath.resolve('MLNHeatmapStyleLayer.h'),
+        mlHeadersPath.resolve('MLNHillshadeStyleLayer.h'),
+        mlHeadersPath.resolve('MLNLineStyleLayer.h'),
+        mlHeadersPath.resolve('MLNRasterStyleLayer.h'),
+        mlHeadersPath.resolve('MLNSymbolStyleLayer.h'),
+        mlHeadersPath.resolve('MLNVectorStyleLayer.h'),
+        mlHeadersPath.resolve('MLNAttributionInfo.h'),
+        mlHeadersPath.resolve('NSExpression+MLNAdditions.h'),
+        mlHeadersPath.resolve('MLNOfflineStorage.h'),
+        mlHeadersPath.resolve('MLNOfflinePack.h'),
+        mlHeadersPath.resolve('MLNOfflineRegion.h'),
+        mlHeadersPath.resolve('MLNTilePyramidOfflineRegion.h'),
+        mlHeadersPath.resolve('MLNFeature.h'),
       ],
       compilerOptions: [
+        // TODO cannot use the headers from SPM, maybe because of missing debug symbols
+        // '-F$frameworkPath',
+        // '-I${frameworkPath}MapLibre.framework/Headers',
         '-Fios/.build/MapLibre.xcframework/ios-arm64/',
         '-Iios/.build/MapLibre.xcframework/ios-arm64/MapLibre.framework/Headers',
         '-isysroot',
@@ -29,8 +59,11 @@ void main(List<String> args) {
     ),
     objectiveC: ObjectiveC(
       interfaces: Interfaces(
+        includeMember: (decl, member) {
+          return true;
+        },
         include: (decl) {
-          const set = {
+          const include = {
             'NSString',
             'CLLocationCoordinate2D',
             'NSAttributedString',
@@ -51,12 +84,14 @@ void main(List<String> args) {
             'Extensions',
             'MLN.*',
           };
-          if (set.contains(decl.originalName)) return true;
+          if (include.contains(decl.originalName)) return true;
           return decl.originalName.startsWith('MLN');
         },
       ),
       protocols: Protocols(
-        include: (decl) => decl.originalName.startsWith('MLN'),
+        include: (decl) {
+          return decl.originalName.startsWith('MLN');
+        },
         module: (decl) => const {
           'MapLibreRegistry': 'maplibre_ios',
           'Helpers': 'maplibre_ios',
@@ -72,23 +107,19 @@ void main(List<String> args) {
         }[decl.originalName],
         includeMember: (declaration, member) => true,
       ),
-      /*memberFilterMap: {
-        'UIResponder': MemberFilter(exclude: ['copy:']),
-        'MLNMapView': MemberFilter(exclude: ['initWithFrame:']),
-      },
-      memberRenameMap: {
-        'MLNSource': {'initWithIdentifier:': 'initWithIdentifier_'},
-        'MLNMapView': {
-          'convertPoint:toCoordinateFromView:': 'convertPoint_',
-          'convertRect:toCoordinateBoundsFromView:': 'convertRect_',
-        },
-        'UIPointerStyle': {
-          'styleWithShape:constrainedAxes:': 'styleWithShape_',
-        },
-      },*/
     ),
     enums: Enums(style: (decl, suggestedStyle) => EnumStyle.intConstants),
   );
 
   generator.generate();
+
+  // workaround because we use a local MapLibre build during codegen
+  final mFile = File('${generator.output.dartFile.toFilePath()}.m');
+  final mContent = mFile.readAsStringSync();
+  mFile.writeAsStringSync(
+    mContent.replaceAll(
+      '../ios/.build/MapLibre.xcframework/ios-arm64/MapLibre.framework/Headers/',
+      '',
+    ),
+  );
 }
