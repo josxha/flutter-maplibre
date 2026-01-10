@@ -11,8 +11,6 @@ final class FillExtrusionStyleLayer extends StyleLayerWithSource {
   const FillExtrusionStyleLayer({
     required super.id,
     required super.sourceId,
-    super.layout,
-    super.paint,
     super.minZoom = 0,
     super.maxZoom = 24,
     super.filter,

@@ -86,11 +86,6 @@ class StyleControllerIos extends StyleController {
         }
     }
 
-    if (ffiLayer == null) {
-      throw UnimplementedError(
-        'The Layer is not supported: ${layer.runtimeType}',
-      );
-    }
     ffiLayer.minimumZoomLevel = layer.minZoom;
     ffiLayer.maximumZoomLevel = layer.maxZoom;
     ffiLayer.setProperties(layer.paint);

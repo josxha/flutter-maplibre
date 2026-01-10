@@ -11,8 +11,6 @@ final class CircleStyleLayer extends StyleLayerWithSource {
   const CircleStyleLayer({
     required super.id,
     required super.sourceId,
-    super.layout,
-    super.paint,
     super.minZoom = 0,
     super.maxZoom = 24,
     super.filter,

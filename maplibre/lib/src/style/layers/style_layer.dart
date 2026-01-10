@@ -16,12 +16,10 @@ part 'symbol_style_layer.dart';
 ///
 /// {@category Style}
 /// {@subCategory Style Layers}
-interface class StyleLayer {
+sealed class StyleLayer {
   /// Create a new [StyleLayer] instance.
   const StyleLayer({
     required this.id,
-    this.layout = const {},
-    this.paint = const {},
     this.metadata,
     this.minZoom = 0,
     this.maxZoom = 24,
@@ -58,12 +56,6 @@ interface class StyleLayer {
   /// [FillExtrusionStyleLayer], [HeatmapStyleLayer], [LineStyleLayer]
   /// and [SymbolStyleLayer].
   final List<Object>? filter;
-
-  /// Layout properties for the layer.
-  final Map<String, Object> layout;
-
-  /// Default paint properties for this layer.
-  final Map<String, Object> paint;
 }
 
 /// A [StyleLayer] that pulls its data from a [Source]. Basically every layer
@@ -71,13 +63,11 @@ interface class StyleLayer {
 ///
 /// {@category Style}
 /// {@subCategory Style Layers}
-interface class StyleLayerWithSource extends StyleLayer {
+sealed class StyleLayerWithSource extends StyleLayer {
   /// const constructor for [StyleLayerWithSource].
   const StyleLayerWithSource({
     required super.id,
     required this.sourceId,
-    super.paint = const {},
-    super.layout = const {},
     super.metadata,
     super.minZoom,
     super.maxZoom,
@@ -89,7 +79,7 @@ interface class StyleLayerWithSource extends StyleLayer {
   /// layer types except background.
   final String sourceId;
 
-  /// Layer to use from a vector tile source. Required for vector tile
-  /// sources; prohibited for all other source types, including GeoJSON sources.
+  /// Layer to use from a vector tile source. Required for [VectorSource];
+  /// prohibited for all other source types, including GeoJSON sources.
   final String? sourceLayerId;
 }

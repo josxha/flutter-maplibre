@@ -13,8 +13,6 @@ final class BackgroundStyleLayer extends StyleLayer {
     this.visible = true,
     this.color = const Color(0x00000000),
     this.opacity = 1,
-    super.layout,
-    super.paint,
     super.minZoom = 0,
     super.maxZoom = 24,
     super.metadata,

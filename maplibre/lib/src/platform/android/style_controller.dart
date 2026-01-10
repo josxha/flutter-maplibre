@@ -39,11 +39,6 @@ class StyleControllerAndroid extends StyleController {
       case StyleLayerWithSource():
         final jSourceId = layer.sourceId.toJString()..releasedBy(arena);
         switch (layer) {
-          case FillStyleLayer():
-            final jFillLayer = jni.FillLayer(jId, jSourceId);
-            if (jFilter != null) jFillLayer.setFilter(jFilter);
-            if (jSourceLayer != null) jFillLayer.setSourceLayer(jSourceLayer);
-            jLayer = jFillLayer;
           case CircleStyleLayer():
             final jCircleLayer = jni.CircleLayer(jId, jSourceId);
             if (jFilter != null) jCircleLayer.setFilter(jFilter);
@@ -56,6 +51,11 @@ class StyleControllerAndroid extends StyleController {
               jFillExtrusionLayer.setSourceLayer(jSourceLayer);
             }
             jLayer = jFillExtrusionLayer;
+          case FillStyleLayer():
+            final jFillLayer = jni.FillLayer(jId, jSourceId);
+            if (jFilter != null) jFillLayer.setFilter(jFilter);
+            if (jSourceLayer != null) jFillLayer.setSourceLayer(jSourceLayer);
+            jLayer = jFillLayer;
           case HeatmapStyleLayer():
             final jHeatmapLayer = jni.HeatmapLayer(jId, jSourceId);
             if (jFilter != null) jHeatmapLayer.setFilter(jFilter);
@@ -83,10 +83,6 @@ class StyleControllerAndroid extends StyleController {
             if (jFilter != null) jSymbolLayer.setFilter(jFilter);
             if (jSourceLayer != null) jSymbolLayer.setSourceLayer(jSourceLayer);
             jLayer = jSymbolLayer;
-          default:
-            throw UnimplementedError(
-              'The Layer is not supported: ${layer.runtimeType}',
-            );
         }
       default:
         switch (layer) {
