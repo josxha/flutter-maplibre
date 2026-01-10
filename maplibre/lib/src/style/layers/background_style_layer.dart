@@ -6,16 +6,15 @@ part of 'style_layer.dart';
 ///
 /// {@category Style}
 /// {@subCategory Style Layers}
-final class BackgroundStyleLayer extends StyleLayer {
+interface class BackgroundStyleLayer extends StyleLayer {
   /// Create a new [BackgroundStyleLayer].
-  const BackgroundStyleLayer({
+  BackgroundStyleLayer({
     required super.id,
     this.visible = true,
-    this.color = const Color(0x00000000),
-    this.opacity = 1,
+    this.color = const PropertyValue<Color>.value(Color(0x00000000)),
+    this.opacity = const PropertyValue.value(1),
     super.minZoom = 0,
     super.maxZoom = 24,
-    super.metadata,
   });
 
   /// Whether this layer is displayed.
@@ -26,10 +25,10 @@ final class BackgroundStyleLayer extends StyleLayer {
   /// The color with which the background will be drawn.
   ///
   /// Defaults to #000000 (black).
-  final Color color;
+  final PropertyValue<Color> color;
 
   /// The opacity at which the background will be drawn.
   ///
-  /// Defaults to 1.
-  final double opacity;
+  /// Defaults to 1.0.
+  final PropertyValue<double> opacity;
 }

@@ -6,7 +6,7 @@ part of 'style_layer.dart';
 ///
 /// {@category Style}
 /// {@subCategory Style Layers}
-final class CircleStyleLayer extends StyleLayerWithSource {
+class CircleStyleLayer extends StyleLayerWithSource {
   /// Default constructor for a [CircleStyleLayer] instance.
   const CircleStyleLayer({
     required super.id,
@@ -14,7 +14,6 @@ final class CircleStyleLayer extends StyleLayerWithSource {
     super.minZoom = 0,
     super.maxZoom = 24,
     super.filter,
-    super.metadata,
     super.sourceLayerId,
   });
 

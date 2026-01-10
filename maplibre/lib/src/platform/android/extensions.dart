@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/rendering.dart';
 import 'package:jni/jni.dart';
 import 'package:maplibre/maplibre.dart';
@@ -152,4 +154,40 @@ extension ObjectExt on Object {
         throw Exception('Unsupported property type: $runtimeType, $this');
     }
   }
+}
+
+/// Extension methods for the [jni.Layer] class. Not exported publicly.
+extension JniLayerExt on jni.Layer {
+  /// Set a single property on this layer.
+  void setProperty(jni.PropertyValue? property) => using((arena) {
+    final jProperties =
+        JArray(jni.PropertyValue.nullableType(JObject.nullableType), 1)
+          ..releasedBy(arena)
+          ..[0] = property;
+    setProperties(jProperties);
+  });
+}
+
+/// Extension methods for the [Expression] class. Not exported publicly.
+extension ExpressionExt on Expression {
+  /// Set a single property on this layer.
+  jni.Expression? toJExpression(Arena arena) {
+    final expressionString = jsonEncode(toJson()).toJString()
+      ..releasedBy(arena);
+    return jni.Expression$Converter.convert$2(expressionString)
+      ?..releasedBy(arena);
+  }
+}
+
+/// Extension methods for the [jni.Expression] class. Not exported publicly.
+extension JExpressionExt on jni.Expression {
+  /// Convert a [jni.Expression] to an [Expression].
+  Expression toDartExpression({bool releaseOriginal = false}) => using((arena) {
+    final expressionString = toString$2()?.toDartString(releaseOriginal: true);
+    if (releaseOriginal) release();
+    final expressionJson = jsonDecode(expressionString) as Object;
+    final expression = Expression.fromJson(expressionJson);
+    if (releaseOriginal) release();
+    return expression;
+  });
 }
