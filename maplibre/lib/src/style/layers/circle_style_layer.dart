@@ -6,7 +6,7 @@ part of 'style_layer.dart';
 ///
 /// {@category Style}
 /// {@subCategory Style Layers}
-class CircleStyleLayer extends StyleLayerWithSource {
+abstract interface class CircleStyleLayer extends StyleLayerWithSource {
   /// Default constructor for a [CircleStyleLayer] instance.
   const CircleStyleLayer({
     required super.id,

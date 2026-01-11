@@ -6,7 +6,7 @@ part of 'style_layer.dart';
 ///
 /// {@category Style}
 /// {@subCategory Style Layers}
-final class HeatmapStyleLayer extends StyleLayerWithSource {
+abstract interface class HeatmapStyleLayer extends StyleLayerWithSource {
   /// Default constructor for a [HeatmapStyleLayer] instance.
   const HeatmapStyleLayer({
     required super.id,

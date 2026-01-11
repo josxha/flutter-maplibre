@@ -2,7 +2,7 @@ import 'package:maplibre/src/style/expressions/expressions.dart';
 
 /// Represents a property value that can either be a literal value of type V
 /// or an expression that evaluates to a value of type V.
-extension type PropertyValue<V extends Object>(Object object) {
+extension type PropertyValue<V extends Object?>(dynamic object) {
   /// Creates a PropertyValue from an expression.
   const PropertyValue.expression(Expression expression) : object = expression;
 

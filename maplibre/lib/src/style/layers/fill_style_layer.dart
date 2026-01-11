@@ -6,7 +6,7 @@ part of 'style_layer.dart';
 ///
 /// {@category Style}
 /// {@subCategory Style Layers}
-final class FillStyleLayer extends StyleLayerWithSource {
+abstract interface class FillStyleLayer extends StyleLayerWithSource {
   /// Default constructor for a [FillStyleLayer] instance.
   const FillStyleLayer({
     required super.id,

@@ -6,7 +6,7 @@ part of 'style_layer.dart';
 ///
 /// {@category Style}
 /// {@subCategory Style Layers}
-final class RasterStyleLayer extends StyleLayerWithSource {
+abstract interface class RasterStyleLayer extends StyleLayerWithSource {
   /// Default constructor for a [RasterStyleLayer] instance.
   const RasterStyleLayer({
     required super.id,

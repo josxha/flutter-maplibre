@@ -172,8 +172,7 @@ extension JniLayerExt on jni.Layer {
 extension ExpressionExt on Expression {
   /// Set a single property on this layer.
   jni.Expression? toJExpression(Arena arena) {
-    final expressionString = jsonEncode(toJson()).toJString()
-      ..releasedBy(arena);
+    final expressionString = jsonEncode(json).toJString()..releasedBy(arena);
     return jni.Expression$Converter.convert$2(expressionString)
       ?..releasedBy(arena);
   }
@@ -183,10 +182,10 @@ extension ExpressionExt on Expression {
 extension JExpressionExt on jni.Expression {
   /// Convert a [jni.Expression] to an [Expression].
   Expression toDartExpression({bool releaseOriginal = false}) => using((arena) {
-    final expressionString = toString$2()?.toDartString(releaseOriginal: true);
+    final expressionString = toString$2()!.toDartString(releaseOriginal: true);
     if (releaseOriginal) release();
-    final expressionJson = jsonDecode(expressionString) as Object;
-    final expression = Expression.fromJson(expressionJson);
+    final json = jsonDecode(expressionString) as List<Object?>;
+    final expression = Expression.fromJson(json);
     if (releaseOriginal) release();
     return expression;
   });

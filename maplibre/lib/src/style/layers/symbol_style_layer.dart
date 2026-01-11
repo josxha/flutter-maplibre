@@ -6,7 +6,7 @@ part of 'style_layer.dart';
 ///
 /// {@category Style}
 /// {@subCategory Style Layers}
-final class SymbolStyleLayer extends StyleLayerWithSource {
+abstract interface class SymbolStyleLayer extends StyleLayerWithSource {
   /// Default constructor for a [SymbolStyleLayer] instance.
   const SymbolStyleLayer({
     required super.id,

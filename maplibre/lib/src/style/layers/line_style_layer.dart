@@ -6,7 +6,7 @@ part of 'style_layer.dart';
 ///
 /// {@category Style}
 /// {@subCategory Style Layers}
-final class LineStyleLayer extends StyleLayerWithSource {
+abstract interface class LineStyleLayer extends StyleLayerWithSource {
   /// Default constructor for a [LineStyleLayer] instance.
   const LineStyleLayer({
     required super.id,

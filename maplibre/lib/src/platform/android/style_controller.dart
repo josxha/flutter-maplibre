@@ -86,8 +86,8 @@ class StyleControllerAndroid extends StyleController {
         }
       default:
         switch (layer) {
-          case BackgroundStyleLayer():
-            jLayer = jni.BackgroundLayer(jId);
+          case BackgroundStyleLayerAndroid():
+            jLayer = layer.jLayer;
           default:
             throw UnimplementedError(
               'The Layer is not supported: ${layer.runtimeType}',

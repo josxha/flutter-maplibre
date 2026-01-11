@@ -1,7 +1,8 @@
 import 'dart:ui';
 
+import 'package:flutter/foundation.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:meta/meta.dart';
+import 'package:maplibre/src/platform/android/style/layers/background_style_layer.dart';
 
 part 'background_style_layer.dart';
 part 'circle_style_layer.dart';
@@ -17,28 +18,25 @@ part 'symbol_style_layer.dart';
 ///
 /// {@category Style}
 /// {@subCategory Style Layers}
-interface class StyleLayer {
-  /// Create a new [StyleLayer] instance.
-  const StyleLayer({
-    required this.id,
-    this.minZoom = 0,
-    this.maxZoom = 24,
-  });
-
+abstract interface class StyleLayer {
   /// Unique layer name.
-  final String id;
+  String get id;
 
   /// The minimum zoom level for the layer. At zoom levels less than the
   /// minzoom, the layer will be hidden.
   ///
   /// Needs to be in the range of [0,24].
-  final double minZoom;
+  double get minZoom;
+
+  set minZoom(double value);
 
   /// The maximum zoom level for the layer. At zoom levels equal to or greater
   /// than the maxzoom, the layer will be hidden.
   ///
   /// Needs to be in the range of [0,24].
-  final double maxZoom;
+  double get maxZoom;
+
+  set maxZoom(double value);
 }
 
 /// A [StyleLayer] that pulls its data from a [Source]. Basically every layer
@@ -46,24 +44,18 @@ interface class StyleLayer {
 ///
 /// {@category Style}
 /// {@subCategory Style Layers}
-sealed class StyleLayerWithSource extends StyleLayer {
-  /// const constructor for [StyleLayerWithSource].
-  const StyleLayerWithSource({
-    required super.id,
-    required this.sourceId,
-    super.minZoom,
-    super.maxZoom,
-    this.filter,
-    this.sourceLayerId,
-  });
-
+abstract interface class StyleLayerWithSource extends StyleLayer {
   /// Name of a source description to be used for this layer. Required for all
   /// layer types except background.
-  final String sourceId;
+  String get sourceId;
+
+  set sourceId(String value);
 
   /// Layer to use from a vector tile source. Required for [VectorSource];
   /// prohibited for all other source types, including GeoJSON sources.
-  final String? sourceLayerId;
+  String? get sourceLayerId;
+
+  set sourceLayerId(String? value);
 
   /// A expression specifying conditions on source features. Only features that
   /// match the filter are displayed. Zoom expressions in filters are only
@@ -74,5 +66,7 @@ sealed class StyleLayerWithSource extends StyleLayer {
   /// from a source: [CircleStyleLayer], [FillStyleLayer],
   /// [FillExtrusionStyleLayer], [HeatmapStyleLayer], [LineStyleLayer]
   /// and [SymbolStyleLayer].
-  final List<Object>? filter;
+  List<Object>? get filter;
+
+  set filter(List<Object>? value);
 }
