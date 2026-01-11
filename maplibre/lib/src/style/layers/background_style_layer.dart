@@ -6,7 +6,7 @@ part of 'style_layer.dart';
 ///
 /// {@category Style}
 /// {@subCategory Style Layers}
-abstract interface class BackgroundStyleLayer extends StyleLayer {
+abstract interface class BackgroundStyleLayer implements StyleLayer {
   /// Create a platform-specific implementation of [BackgroundStyleLayer].
   factory BackgroundStyleLayer({
     required String id,
@@ -53,34 +53,29 @@ abstract interface class BackgroundStyleLayer extends StyleLayer {
     },
   };
 
-  /// Whether this layer is displayed.
-  ///
-  /// Defaults to true ("visible").
-  bool get visible;
-
-  set visible(bool value);
-
   /// The color with which the background will be drawn.
   ///
-  /// Defaults to #000000 (black).
+  /// Paint property. Optional color. Defaults to `#000000` (black).
+  /// Disabled by [pattern]. Supports [interpolate] expressions. Transitionable.
   PropertyValue<Color> get color;
 
-  /// Sets the color with which the background will be drawn.
   set color(PropertyValue<Color> value);
 
   /// Name of image in sprite to use for drawing an image background. For
   /// seamless patterns, image width and height must be a factor of two
   /// (2, 4, 8, ..., 512). Note that zoom-dependent expressions will be
   /// evaluated only at integer zoom levels.
+  ///
+  /// Paint property. Optional resolvedImage. Transitionable.
   PropertyValue<String>? get pattern;
 
   set pattern(PropertyValue<String>? value);
 
   /// The opacity at which the background will be drawn.
   ///
-  /// Defaults to 1.0.
+  /// Paint property. Optional number in range `0,1`. Defaults to `1.0`.
+  /// Supports [interpolate] expressions. Transitionable.
   PropertyValue<double> get opacity;
 
-  /// Sets the opacity at which the background will be drawn.
   set opacity(PropertyValue<double> value);
 }

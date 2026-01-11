@@ -5,9 +5,11 @@ import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/platform/android/style/layers/background_style_layer.dart';
 import 'package:maplibre/src/platform/ios/style/layers/background_style_layer.dart';
 import 'package:maplibre/src/platform/web/style/layers/background_style_layer.dart';
+import 'package:maplibre/src/style/expressions/functional.dart';
 
 part 'background_style_layer.dart';
 part 'circle_style_layer.dart';
+part 'enums.dart';
 part 'fill_extrusion_style_layer.dart';
 part 'fill_style_layer.dart';
 part 'heatmap_style_layer.dart';
@@ -22,12 +24,14 @@ part 'symbol_style_layer.dart';
 /// {@subCategory Style Layers}
 abstract interface class StyleLayer {
   /// Unique layer name.
+  ///
+  /// Required string.
   String get id;
 
   /// The minimum zoom level for the layer. At zoom levels less than the
   /// minzoom, the layer will be hidden.
   ///
-  /// Needs to be in the range of [0,24].
+  /// Optional number in the range of `0,24`.
   double get minZoom;
 
   set minZoom(double value);
@@ -35,10 +39,17 @@ abstract interface class StyleLayer {
   /// The maximum zoom level for the layer. At zoom levels equal to or greater
   /// than the maxzoom, the layer will be hidden.
   ///
-  /// Needs to be in the range of [0,24].
+  /// Optional number in the range of `0,24`.
   double get maxZoom;
 
   set maxZoom(double value);
+
+  /// Whether this layer is displayed.
+  ///
+  /// Layout property. Defaults to `true`.
+  bool get visible;
+
+  set visible(bool value);
 }
 
 /// A [StyleLayer] that pulls its data from a [Source]. Basically every layer
@@ -46,9 +57,11 @@ abstract interface class StyleLayer {
 ///
 /// {@category Style}
 /// {@subCategory Style Layers}
-abstract interface class StyleLayerWithSource extends StyleLayer {
+abstract interface class StyleLayerWithSource implements StyleLayer {
   /// Name of a source description to be used for this layer. Required for all
   /// layer types except background.
+  ///
+  /// Optional string.
   String get sourceId;
 
   set sourceId(String value);
@@ -68,7 +81,39 @@ abstract interface class StyleLayerWithSource extends StyleLayer {
   /// from a source: [CircleStyleLayer], [FillStyleLayer],
   /// [FillExtrusionStyleLayer], [HeatmapStyleLayer], [LineStyleLayer]
   /// and [SymbolStyleLayer].
-  List<Object>? get filter;
+  Expression? get filter;
 
-  set filter(List<Object>? value);
+  set filter(Expression? value);
+}
+
+/// A [StyleLayerWithSource] that has a [sortKey] property.
+abstract interface class StyleLayerWithSortKey extends StyleLayerWithSource {
+  /// Sorts features in ascending order based on this value. Features with a
+  /// higher sort key will appear above features with a lower sort key.
+  ///
+  /// Layout property. Optional number.
+  PropertyValue<double>? get sortKey;
+
+  set sortKey(PropertyValue<double>? value);
+}
+
+/// A [StyleLayerWithSource] that has a [translate] and [translateAnchor]
+/// property.
+abstract interface class StyleLayerWithTranslate extends StyleLayerWithSource {
+  /// The geometry's offset. Values are `[x, y]` where negatives indicate left
+  /// and up, respectively.
+  ///
+  /// Paint property. Optional array. Units in pixels. Defaults to `[0,0]`.
+  /// Supports interpolate expressions. Transitionable.
+  PropertyValue<List<double>> get translate;
+
+  set translate(PropertyValue<List<double>> value);
+
+  /// Controls the frame of reference for [translate].
+  ///
+  /// Paint property. Optional enum. Defaults to [ReferenceSpace.map].
+  /// Requires [translate].
+  PropertyValue<ReferenceSpace> get translateAnchor;
+
+  set translateAnchor(PropertyValue<ReferenceSpace> value);
 }

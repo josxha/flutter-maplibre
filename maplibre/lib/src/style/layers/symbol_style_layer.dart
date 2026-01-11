@@ -6,9 +6,9 @@ part of 'style_layer.dart';
 ///
 /// {@category Style}
 /// {@subCategory Style Layers}
-abstract interface class SymbolStyleLayer extends StyleLayerWithSource {
+abstract interface class SymbolStyleLayer implements StyleLayerWithSource {
   /// Default constructor for a [SymbolStyleLayer] instance.
-  const SymbolStyleLayer({
+  factory SymbolStyleLayer({
     required super.id,
     required super.sourceId,
     super.minZoom = 0,

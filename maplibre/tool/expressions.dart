@@ -12,13 +12,16 @@ Future<void> main(List<String> args) async {
         );
 
   final spec = await _loadSpec(specUri);
-  final expressions = _parseExpressions(spec)..sort((a, b) => a.name.compareTo(b.name));
+  final expressions = _parseExpressions(spec)
+    ..sort((a, b) => a.name.compareTo(b.name));
 
   final output = _resolveOutputFile();
   await _writeExpressionsFile(output, specUri, expressions);
   await _formatDart(output);
 
-  stdout.writeln('Generated ${expressions.length} expression classes -> ${output.path}');
+  stdout.writeln(
+    'Generated ${expressions.length} expression classes -> ${output.path}',
+  );
 }
 
 Future<Map<String, dynamic>> _loadSpec(Uri uri) async {
@@ -36,7 +39,10 @@ Future<Map<String, dynamic>> _loadSpec(Uri uri) async {
   final body = await response.transform(utf8.decoder).join();
 
   if (response.statusCode != HttpStatus.ok) {
-    throw HttpException('Failed to download spec (${response.statusCode})', uri: uri);
+    throw HttpException(
+      'Failed to download spec (${response.statusCode})',
+      uri: uri,
+    );
   }
 
   return json.decode(body) as Map<String, dynamic>;
@@ -69,7 +75,9 @@ Future<void> _writeExpressionsFile(
     ..writeln()
     ..writeln("import 'dart:convert';")
     ..writeln()
-    ..writeln('/// Base sealed class for MapLibre style expressions that serialize to JSON arrays.')
+    ..writeln(
+      '/// Base sealed class for MapLibre style expressions that serialize to JSON arrays.',
+    )
     ..writeln('sealed class StyleExpression {')
     ..writeln('  const StyleExpression();')
     ..writeln('  List<Object?> toJson();')
@@ -98,9 +106,15 @@ Future<void> _writeExpressionsFile(
       ..writeln('class $className extends StyleExpression {')
       ..writeln('  /// Creates a $className expression.')
       ..writeln('  const $className([this.args = const []]);')
-      ..writeln("  /// Expression operator name: '${_dartString(expression.name)}'.")
-      ..writeln("  static const String operatorName = '${_dartString(expression.name)}';")
-      ..writeln('  /// Arguments for this expression. Values must be JSON-serializable or nested [StyleExpression]s.')
+      ..writeln(
+        "  /// Expression operator name: '${_dartString(expression.name)}'.",
+      )
+      ..writeln(
+        "  static const String operatorName = '${_dartString(expression.name)}';",
+      )
+      ..writeln(
+        '  /// Arguments for this expression. Values must be JSON-serializable or nested [StyleExpression]s.',
+      )
       ..writeln('  final List<Object?> args;')
       ..writeln('  @override')
       ..writeln('  List<Object?> toJson() => [operatorName, ...args];')
@@ -141,14 +155,18 @@ String _classNameFor(String operatorName) {
   return '${capitalized}Expression';
 }
 
-String _dartString(String value) => value.replaceAll(r'\', r'\\').replaceAll("'", r"\'");
+String _dartString(String value) =>
+    value.replaceAll(r'\', r'\\').replaceAll("'", r"\'");
 
-String _docComment(String value) => _dartString(value).replaceAll('\n', '\n/// ');
+String _docComment(String value) =>
+    _dartString(value).replaceAll('\n', '\n/// ');
 
 File _resolveOutputFile() {
   final scriptDir = File.fromUri(Platform.script).parent;
   final root = scriptDir.parent;
-  final output = File('${root.path}${Platform.pathSeparator}lib${Platform.pathSeparator}src${Platform.pathSeparator}expressions.dart');
+  final output = File(
+    '${root.path}${Platform.pathSeparator}lib${Platform.pathSeparator}src${Platform.pathSeparator}expressions.dart',
+  );
   output.parent.createSync(recursive: true);
   return output;
 }

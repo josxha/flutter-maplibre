@@ -12,10 +12,12 @@ extension type Expression._(List<Object?> json) {
   }
 }
 
-/// Represents a literal expression.
+/// {@template literal-expression}
+/// A literal expression that represents a constant value.
+/// {@endtemplate}
 extension type LiteralExpression<T extends Object?>._(List<Object?> json)
     implements Expression {
-  /// Const constructor for LiteralExpression.
+  /// Create a new literal expression.
   LiteralExpression(T value) : json = [operator, value];
 
   /// The operator for literal expressions.
@@ -25,5 +27,44 @@ extension type LiteralExpression<T extends Object?>._(List<Object?> json)
   T get value => json[1] as T;
 }
 
-/// Creates a [LiteralExpression] with the given [value].
-LiteralExpression literal(Object? value) => LiteralExpression(value);
+/// {@template feature-state-expression}
+/// Retrieves a property value from the current feature's state. Returns null if
+/// the requested property is not present on the feature's state. A feature's
+/// state is not part of the GeoJSON or vector tile data, and must be set
+/// programmatically on each feature. When source.promoteId is not provided,
+/// features are identified by their id attribute, which must be an integer or a
+/// string that can be cast to an integer. When source.promoteId is provided,
+/// features are identified by their promoteId property, which may be a number,
+/// string, or any primitive data type. Note that ["feature-state"] can only be
+/// used with paint properties that support data-driven styling.
+/// {@endtemplate}
+extension type FeatureStateExpression<T extends Object?>._(List<Object?> json)
+    implements Expression {
+  /// Create a new feature-state expression.
+  FeatureStateExpression(String key) : json = [operator, key];
+
+  /// The operator for feature-state expressions.
+  static const String operator = 'feature-state';
+
+  /// The key of the feature state to retrieve.
+  T get value => json[1] as T;
+}
+
+/// {@template interpolate-expression}
+/// Produces continuous, smooth results by interpolating between pairs of input
+/// and output values ("stops"). The `input` may be any numeric expression
+/// (e.g., `["get", "population"]`). Stop inputs must be numeric literals in
+/// strictly ascending order. The output type must be `number`, `array<number>`,
+/// `color`, `array<color>`, or `projection`.
+/// {@endtemplate}
+extension type InterpolateExpression<T extends Object?>._(List<Object?> json)
+    implements Expression {
+  /// Create a new feature-state expression.
+  InterpolateExpression(String key) : json = [operator, key];
+
+  /// The operator for feature-state expressions.
+  static const String operator = 'feature-state';
+
+  /// The key of the feature state to retrieve.
+  T get value => json[1] as T;
+}
