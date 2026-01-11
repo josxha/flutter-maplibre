@@ -18,7 +18,7 @@ class BackgroundStyleLayerAndroid extends StyleLayerAndroid<jni.BackgroundLayer>
     required PropertyValue<String>? pattern,
     required PropertyValue<double> opacity,
     required bool visible,
-  }) : super.fromJLayer(jni.BackgroundLayer(id.toJString())) {
+  }) : super.fromNativeLayer(jni.BackgroundLayer(id.toJString())) {
     this.minZoom = minZoom;
     this.maxZoom = maxZoom;
     this.color = color;

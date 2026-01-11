@@ -18,8 +18,8 @@ abstract interface class BackgroundStyleLayer extends StyleLayer {
     PropertyValue<double> opacity = const PropertyValue.value(1),
     double minZoom = 0,
     double maxZoom = 24,
-  }) => switch (defaultTargetPlatform) {
-    TargetPlatform.android => BackgroundStyleLayerAndroid(
+  }) => switch (kIsWeb) {
+    true => BackgroundStyleLayerWeb(
       id: id,
       visible: visible,
       color: color,
@@ -28,18 +28,29 @@ abstract interface class BackgroundStyleLayer extends StyleLayer {
       minZoom: minZoom,
       maxZoom: maxZoom,
     ),
-    /*TargetPlatform.iOS || TargetPlatform.macOS => IosBackgroundStyleLayer(
-      id: id,
-      visible: visible,
-      color: color,
-      pattern: pattern,
-      opacity: opacity,
-      minZoom: minZoom,
-      maxZoom: maxZoom,
-    ),*/
-    _ => throw UnsupportedError(
-      'BackgroundStyleLayer is not supported for the current platform.',
-    ),
+    false => switch (defaultTargetPlatform) {
+      TargetPlatform.android => BackgroundStyleLayerAndroid(
+        id: id,
+        visible: visible,
+        color: color,
+        pattern: pattern,
+        opacity: opacity,
+        minZoom: minZoom,
+        maxZoom: maxZoom,
+      ),
+      TargetPlatform.iOS => BackgroundStyleLayerIos(
+        id: id,
+        visible: visible,
+        color: color,
+        pattern: pattern,
+        opacity: opacity,
+        minZoom: minZoom,
+        maxZoom: maxZoom,
+      ),
+      _ => throw UnsupportedError(
+        'BackgroundStyleLayer is not supported for the current platform.',
+      ),
+    },
   };
 
   /// Whether this layer is displayed.

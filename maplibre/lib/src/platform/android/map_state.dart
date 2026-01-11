@@ -15,6 +15,7 @@ import 'package:maplibre/src/platform/android/functions.dart';
 import 'package:maplibre/src/platform/android/jni.g.dart' as jni;
 import 'package:maplibre/src/platform/android/registry.dart';
 import 'package:maplibre/src/platform/android/style/layers/background_style_layer.dart';
+import 'package:maplibre/src/platform/android/style/style.dart';
 import 'package:maplibre/src/platform/map_state_native.dart';
 
 part 'style_controller.dart';
