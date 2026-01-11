@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/painting.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/platform/android/style/layers/background_style_layer.dart';
 import 'package:maplibre/src/platform/ios/style/layers/background_style_layer.dart';
@@ -9,7 +10,7 @@ import 'package:maplibre/src/style/expressions/functional.dart';
 
 part 'background_style_layer.dart';
 part 'circle_style_layer.dart';
-part 'enums.dart';
+part 'color_relief_style_layer.dart';
 part 'fill_extrusion_style_layer.dart';
 part 'fill_style_layer.dart';
 part 'heatmap_style_layer.dart';
@@ -17,6 +18,16 @@ part 'hillshade_style_layer.dart';
 part 'line_style_layer.dart';
 part 'raster_style_layer.dart';
 part 'symbol_style_layer.dart';
+
+/// The coordinate space or frame of reference in which a style value is
+/// evaluated.
+enum ReferenceSpace {
+  /// Relative to the map's coordinate system.
+  map,
+
+  /// Relative to the viewport / screen.
+  viewport,
+}
 
 /// The base Layer class that can't be used directly.
 ///

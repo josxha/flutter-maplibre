@@ -16,5 +16,119 @@ abstract interface class HillshadeStyleLayer implements StyleLayerWithSource {
     super.metadata,
   });
 
-  // TODO add properties
+  /// The direction of the light source(s) used to generate the hillshading with
+  /// `0` as the top of the viewport if [illuminationAnchor] is set to
+  /// [IlluminationAnchor.viewport] and due north if [illuminationAnchor] is set
+  /// to [IlluminationAnchor.map].
+  ///
+  /// {@template multiple-light-sources-notice}
+  /// Only when [method] is set to [HillshadeMethod.multidirectional] can you
+  /// specify multiple light sources.
+  /// {@endtemplate}
+  ///
+  /// Paint property. Optional numberArray with value(s) in range `[0, 359]`.
+  /// Defaults to `335`. Supports [interpolate] expressions.
+  PropertyValue<List<double>> get illuminationDirection;
+
+  set illuminationDirection(PropertyValue<List<double>> value);
+
+  /// The altitude of the light source(s) used to generate the hillshading with
+  /// `0` as sunset and `90` as noon.
+  ///
+  /// {@macro multiple-light-sources-notice}
+  ///
+  /// Paint property. Optional `numberArray` with value(s) in range `[0, 90]`.
+  /// Defaults to `45`. Supports interpolate expressions.
+  PropertyValue<List<double>> get illuminationAltitude;
+
+  set illuminationAltitude(PropertyValue<List<double>> value);
+
+  /// {@macro illumination-anchor}
+  ///
+  /// Paint property. Optional enum. Defaults to [IlluminationAnchor.viewport].
+  PropertyValue<IlluminationAnchor> get illuminationAnchor;
+
+  set illuminationAnchor(PropertyValue<IlluminationAnchor> value);
+
+  /// Intensity of the hillshade
+  ///
+  /// Paint property. Optional number in range `[0, 1]`. Defaults to `0.5`.
+  /// Supports [interpolate] expressions. Transitionable.
+  PropertyValue<double> get exaggeration;
+
+  set exaggeration(PropertyValue<double> value);
+
+  /// The shading color of areas that face away from the light source(s).
+  ///
+  /// {@macro multiple-light-sources-notice}
+  ///
+  /// Paint property. Optional `colorArray`. Defaults to `"#000000"`.
+  /// Supports [interpolate] expressions. Transitionable.
+  PropertyValue<Color> get shadowColor;
+
+  set shadowColor(PropertyValue<Color> value);
+
+  /// The shading color of areas that faces towards the light source(s).
+  ///
+  /// {@macro multiple-light-sources-notice}
+  ///
+  /// Paint property. Optional `colorArray`. Defaults to `"#FFFFFF"`.
+  /// Supports [interpolate] expressions. Transitionable.
+  PropertyValue<Color> get highlightColor;
+
+  set highlightColor(PropertyValue<Color> value);
+
+  /// The shading color used to accentuate rugged terrain like sharp cliffs and
+  /// gorges.
+  ///
+  /// Paint property. Optional [Color]. Defaults to `"#000000"`.
+  /// Supports [interpolate] expressions. Transitionable.
+  PropertyValue<Color> get accentColor;
+
+  set accentColor(PropertyValue<Color> value);
+
+  /// {@macro hillshade-method}
+  ///
+  /// Paint property. Optional enum. Defaults to [HillshadeMethod.standard].
+  PropertyValue<HillshadeMethod> get method;
+
+  set method(PropertyValue<HillshadeMethod> value);
+}
+
+/// {@template illumination-anchor}
+/// Direction of light source when map is rotated.
+/// {@endtemplate}
+enum IlluminationAnchor {
+  /// The hillshade illumination is relative to the north direction.
+  map,
+
+  /// The hillshade illumination is relative to the top of the viewport.
+  viewport;
+}
+
+/// {@template hillshade-method}
+/// The hillshade algorithm to use.
+/// ![Preview](https://maplibre.org/maplibre-style-spec/assets/hillshade_methods.png)
+/// {@endtemplate}
+enum HillshadeMethod {
+  /// The legacy hillshade method.
+  standard,
+
+  /// Basic hillshade. Uses a simple physics model where the reflected light
+  /// intensity is proportional to the cosine of the angle between the incident
+  /// light and the surface normal. Similar to GDAL's `gdaldem` default
+  /// algorithm.
+  basic,
+
+  /// Hillshade algorithm whose intensity scales with slope. Similar to GDAL's
+  /// `gdaldem` with `-combined` option.
+  combined,
+
+  /// Hillshade algorithm which tries to minimize effects on other map features
+  /// beneath. Similar to GDAL's `gdaldem` with `-igor` option.
+  igor,
+
+  /// Hillshade with multiple illumination directions. Uses the basic hillshade
+  /// model with multiple independent light sources.
+  multidirectional;
 }
