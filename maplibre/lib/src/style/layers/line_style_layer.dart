@@ -6,13 +6,11 @@ part of 'style_layer.dart';
 ///
 /// {@category Style}
 /// {@subCategory Style Layers}
-final class LineStyleLayer extends StyleLayerWithSource {
+abstract interface class LineStyleLayer implements StyleLayerWithSource {
   /// Default constructor for a [LineStyleLayer] instance.
-  const LineStyleLayer({
+  factory LineStyleLayer({
     required super.id,
     required super.sourceId,
-    super.layout,
-    super.paint,
     super.minZoom = 0,
     super.maxZoom = 24,
     super.filter,

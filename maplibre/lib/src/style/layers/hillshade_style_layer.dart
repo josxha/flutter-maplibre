@@ -6,13 +6,11 @@ part of 'style_layer.dart';
 ///
 /// {@category Style}
 /// {@subCategory Style Layers}
-final class HillshadeStyleLayer extends StyleLayerWithSource {
+abstract interface class HillshadeStyleLayer implements StyleLayerWithSource {
   /// Default constructor for a [HillshadeStyleLayer] instance.
-  const HillshadeStyleLayer({
+  factory HillshadeStyleLayer({
     required super.id,
     required super.sourceId,
-    super.layout,
-    super.paint,
     super.minZoom = 0,
     super.maxZoom = 24,
     super.metadata,

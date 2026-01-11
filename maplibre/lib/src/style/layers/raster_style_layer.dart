@@ -6,13 +6,11 @@ part of 'style_layer.dart';
 ///
 /// {@category Style}
 /// {@subCategory Style Layers}
-final class RasterStyleLayer extends StyleLayerWithSource {
+abstract interface class RasterStyleLayer implements StyleLayerWithSource {
   /// Default constructor for a [RasterStyleLayer] instance.
-  const RasterStyleLayer({
+  factory RasterStyleLayer({
     required super.id,
     required super.sourceId,
-    super.layout,
-    super.paint,
     super.minZoom = 0,
     super.maxZoom = 24,
     super.metadata,
