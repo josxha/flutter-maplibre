@@ -1,5 +1,5 @@
 /// Base class for expressions.
-extension type Expression._(List<Object?> json) {
+extension type const Expression._(List<Object?> json) {
   /// Creates an expression from its JSON representation.
   static Expression fromJson(List<Object?> json) {
     final operator = json.first;
@@ -15,7 +15,7 @@ extension type Expression._(List<Object?> json) {
 /// {@template literal-expression}
 /// A literal expression that represents a constant value.
 /// {@endtemplate}
-extension type LiteralExpression<T extends Object?>._(List<Object?> json)
+extension type const LiteralExpression<T extends Object?>._(List<Object?> json)
     implements Expression {
   /// Create a new literal expression.
   LiteralExpression(T value) : json = [operator, value];
@@ -38,7 +38,9 @@ extension type LiteralExpression<T extends Object?>._(List<Object?> json)
 /// string, or any primitive data type. Note that ["feature-state"] can only be
 /// used with paint properties that support data-driven styling.
 /// {@endtemplate}
-extension type FeatureStateExpression<T extends Object?>._(List<Object?> json)
+extension type const FeatureStateExpression<T extends Object?>._(
+  List<Object?> json
+)
     implements Expression {
   /// Create a new feature-state expression.
   FeatureStateExpression(String key) : json = [operator, key];
@@ -57,7 +59,9 @@ extension type FeatureStateExpression<T extends Object?>._(List<Object?> json)
 /// strictly ascending order. The output type must be `number`, `array<number>`,
 /// `color`, `array<color>`, or `projection`.
 /// {@endtemplate}
-extension type InterpolateExpression<T extends Object?>._(List<Object?> json)
+extension type const InterpolateExpression<T extends Object?>._(
+  List<Object?> json
+)
     implements Expression {
   /// Create a new feature-state expression.
   InterpolateExpression(String key) : json = [operator, key];

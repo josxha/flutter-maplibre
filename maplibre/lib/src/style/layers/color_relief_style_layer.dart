@@ -1,6 +1,5 @@
 part of 'style_layer.dart';
 
-
 /// A layer that contains markers.
 ///
 /// https://maplibre.org/maplibre-style-spec/layers/#color-relief
@@ -10,12 +9,51 @@ part of 'style_layer.dart';
 abstract interface class ColorReliefStyleLayer implements StyleLayerWithSource {
   /// Default constructor for a [ColorReliefStyleLayer] instance.
   factory ColorReliefStyleLayer({
-    required super.id,
-    required super.sourceId,
-    super.minZoom = 0,
-    super.maxZoom = 24,
-    super.metadata,
-  });
+    required String id,
+    required String sourceId,
+    bool visible = StyleLayer.defaultVisible,
+    PropertyValue<Color>? color,
+    PropertyValue<String>? pattern,
+    PropertyValue<double> opacity = ColorReliefStyleLayer.defaultOpacity,
+    double minZoom = StyleLayer.defaultMinZoom,
+    double maxZoom = StyleLayer.defaultMaxZoom,
+  }) => switch (kIsWeb) {
+    true => ColorReliefStyleLayerWeb(
+      id: id,
+      sourceId: sourceId,
+      visible: visible,
+      color: color,
+      pattern: pattern,
+      opacity: opacity,
+      minZoom: minZoom,
+      maxZoom: maxZoom,
+    ),
+    false => switch (defaultTargetPlatform) {
+      TargetPlatform.android => ColorReliefStyleLayerAndroid(
+        id: id,
+        sourceId: sourceId,
+        visible: visible,
+        color: color,
+        pattern: pattern,
+        opacity: opacity,
+        minZoom: minZoom,
+        maxZoom: maxZoom,
+      ),
+      TargetPlatform.iOS => ColorReliefStyleLayerIos(
+        id: id,
+        sourceId: sourceId,
+        visible: visible,
+        color: color,
+        pattern: pattern,
+        opacity: opacity,
+        minZoom: minZoom,
+        maxZoom: maxZoom,
+      ),
+      _ => throw UnsupportedError(
+        'ColorReliefStyleLayer is not supported for the current platform.',
+      ),
+    },
+  };
 
   /// The opacity at which the color-relief will be drawn.
   ///
@@ -24,6 +62,9 @@ abstract interface class ColorReliefStyleLayer implements StyleLayerWithSource {
   PropertyValue<double> get opacity;
 
   set opacity(PropertyValue<double> value);
+
+  /// Default value for [opacity].
+  static const defaultOpacity = PropertyValue<double>.value(1);
 
   /// Defines the color of each pixel based on its elevation. Should be an
   /// [Expression] that uses `["elevation"]` as input. For example:
@@ -40,8 +81,7 @@ abstract interface class ColorReliefStyleLayer implements StyleLayerWithSource {
   /// ```
   ///
   /// Paint property. Optional [Color]. Supports [interpolate] expressions.
-  PropertyValue<Color> get color;
+  PropertyValue<Color>? get color;
 
-  set color(PropertyValue<Color> value);
-
+  set color(PropertyValue<Color>? value);
 }

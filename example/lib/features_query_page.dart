@@ -114,7 +114,7 @@ class _FeaturesQueryPageState extends State<FeaturesQueryPage> {
     );
 
     await style.addLayer(
-      const FillStyleLayer(
+      FillStyleLayer(
         id: 'polygons',
         sourceId: 'polygons',
         paint: {'fill-color': '#429ef5', 'fill-opacity': 0.6},
@@ -122,7 +122,7 @@ class _FeaturesQueryPageState extends State<FeaturesQueryPage> {
     );
 
     await style.addLayer(
-      const CircleStyleLayer(
+      CircleStyleLayer(
         id: 'points',
         sourceId: 'points',
         paint: {'circle-color': '#f54242', 'circle-radius': 8},

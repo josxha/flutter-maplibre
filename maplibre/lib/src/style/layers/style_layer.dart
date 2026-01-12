@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/painting.dart';
 import 'package:maplibre/maplibre.dart';
@@ -47,6 +45,9 @@ abstract interface class StyleLayer {
 
   set minZoom(double value);
 
+  /// Default value of [minZoom].
+  static const defaultMinZoom = 0.0;
+
   /// The maximum zoom level for the layer. At zoom levels equal to or greater
   /// than the maxzoom, the layer will be hidden.
   ///
@@ -55,12 +56,18 @@ abstract interface class StyleLayer {
 
   set maxZoom(double value);
 
+  /// Default value of [maxZoom].
+  static const defaultMaxZoom = 24.0;
+
   /// Whether this layer is displayed.
   ///
   /// Layout property. Defaults to `true`.
   bool get visible;
 
   set visible(bool value);
+
+  /// Default value of [visible].
+  static const defaultVisible = true;
 }
 
 /// A [StyleLayer] that pulls its data from a [Source]. Basically every layer
@@ -111,14 +118,17 @@ abstract interface class StyleLayerWithSortKey extends StyleLayerWithSource {
 /// A [StyleLayerWithSource] that has a [translate] and [translateAnchor]
 /// property.
 abstract interface class StyleLayerWithTranslate extends StyleLayerWithSource {
-  /// The geometry's offset. Values are `[x, y]` where negatives indicate left
+  /// The geometry's [Offset]. Values are `[x, y]` where negatives indicate left
   /// and up, respectively.
   ///
-  /// Paint property. Optional array. Units in pixels. Defaults to `[0,0]`.
-  /// Supports interpolate expressions. Transitionable.
-  PropertyValue<List<double>> get translate;
+  /// Paint property. Optional array. Units in pixels. Defaults to
+  /// [Offset.zero]. Supports interpolate expressions. Transitionable.
+  PropertyValue<Offset> get translate;
 
   set translate(PropertyValue<List<double>> value);
+
+  /// Default value of [translate].
+  static const defaultTranslate = PropertyValue<Offset>.value(Offset.zero);
 
   /// Controls the frame of reference for [translate].
   ///
@@ -127,4 +137,9 @@ abstract interface class StyleLayerWithTranslate extends StyleLayerWithSource {
   PropertyValue<ReferenceSpace> get translateAnchor;
 
   set translateAnchor(PropertyValue<ReferenceSpace> value);
+
+  /// The default value of [translateAnchor].
+  static const defaultTranslateAnchor = PropertyValue<ReferenceSpace>.value(
+    ReferenceSpace.map,
+  );
 }

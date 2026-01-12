@@ -5,6 +5,7 @@ import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/platform/android/extensions.dart';
 import 'package:maplibre/src/platform/web/interop/interop.dart' as js;
 import 'package:maplibre/src/platform/web/style/style.dart';
+import 'package:maplibre/src/style/expressions/types.dart';
 
 /// A layer that contains circles for web platform.
 class BackgroundStyleLayerWeb extends StyleLayerWeb<js.LayerSpecification>

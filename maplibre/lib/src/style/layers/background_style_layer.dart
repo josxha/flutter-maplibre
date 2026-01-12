@@ -10,14 +10,12 @@ abstract interface class BackgroundStyleLayer implements StyleLayer {
   /// Create a platform-specific implementation of [BackgroundStyleLayer].
   factory BackgroundStyleLayer({
     required String id,
-    bool visible = true,
-    PropertyValue<Color> color = const PropertyValue<Color>.value(
-      Color(0xFF000000),
-    ),
+    bool visible = StyleLayer.defaultVisible,
+    PropertyValue<Color> color = defaultColor,
     PropertyValue<String>? pattern,
-    PropertyValue<double> opacity = const PropertyValue.value(1),
-    double minZoom = 0,
-    double maxZoom = 24,
+    PropertyValue<double> opacity = defaultOpacity,
+    double minZoom = StyleLayer.defaultMinZoom,
+    double maxZoom = StyleLayer.defaultMaxZoom,
   }) => switch (kIsWeb) {
     true => BackgroundStyleLayerWeb(
       id: id,
@@ -61,6 +59,9 @@ abstract interface class BackgroundStyleLayer implements StyleLayer {
 
   set color(PropertyValue<Color> value);
 
+  /// Default value of [color].
+  static const defaultColor = PropertyValue<Color>.value(Color(0xFF000000));
+
   /// Name of image in sprite to use for drawing an image background. For
   /// seamless patterns, image width and height must be a factor of two
   /// (2, 4, 8, ..., 512). Note that zoom-dependent expressions will be
@@ -78,4 +79,7 @@ abstract interface class BackgroundStyleLayer implements StyleLayer {
   PropertyValue<double> get opacity;
 
   set opacity(PropertyValue<double> value);
+
+  /// Default value of [opacity].
+  static const defaultOpacity = PropertyValue<double>.value(1);
 }

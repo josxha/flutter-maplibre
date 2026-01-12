@@ -234,7 +234,7 @@ void main() {
       // ensure no crash if a layer does not exist
       await ctrl.style?.removeLayer('notExisting');
 
-      const layer = RasterStyleLayer(id: 'rasterLayer', sourceId: 'source');
+      final layer = RasterStyleLayer(id: 'rasterLayer', sourceId: 'source');
       await ctrl.style?.addLayer(layer);
       await ctrl.style?.removeLayer(layer.id);
     });
@@ -824,7 +824,7 @@ void main() {
     final app = App(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
-    const layer = BackgroundStyleLayer(id: '1', color: Colors.black);
+    final layer = BackgroundStyleLayer(id: '1');
     await ctrl.style?.addLayer(layer);
     await tester.pumpAndSettle();
   });
@@ -833,7 +833,7 @@ void main() {
     final app = App(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
-    const layer = FillStyleLayer(id: '1', sourceId: 'source1');
+    final layer = FillStyleLayer(id: '1', sourceId: 'source1');
     await ctrl.style?.addLayer(layer);
     await tester.pumpAndSettle();
   });
@@ -842,7 +842,7 @@ void main() {
     final app = App(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
-    const layer = CircleStyleLayer(id: '1', sourceId: 'source1');
+    final layer = CircleStyleLayer(id: '1', sourceId: 'source1');
     await ctrl.style?.addLayer(layer);
     await tester.pumpAndSettle();
   });
@@ -851,7 +851,7 @@ void main() {
     final app = App(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
-    const layer = FillExtrusionStyleLayer(id: '1', sourceId: 'source1');
+    final layer = FillExtrusionStyleLayer(id: '1', sourceId: 'source1');
     await ctrl.style?.addLayer(layer);
     await tester.pumpAndSettle();
   });
@@ -860,7 +860,7 @@ void main() {
     final app = App(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
-    const layer = HeatmapStyleLayer(id: '1', sourceId: 'source1');
+    final layer = HeatmapStyleLayer(id: '1', sourceId: 'source1');
     await ctrl.style?.addLayer(layer);
     await tester.pumpAndSettle();
   });
@@ -869,7 +869,7 @@ void main() {
     final app = App(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
-    const layer = HillshadeStyleLayer(id: '1', sourceId: 'source1');
+    final layer = HillshadeStyleLayer(id: '1', sourceId: 'source1');
     await ctrl.style?.addLayer(layer);
     await tester.pumpAndSettle();
   });
@@ -878,7 +878,7 @@ void main() {
     final app = App(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
-    const layer = LineStyleLayer(id: '1', sourceId: 'source1');
+    final layer = LineStyleLayer(id: '1', sourceId: 'source1');
     await ctrl.style?.addLayer(layer);
     await tester.pumpAndSettle();
   });
@@ -887,7 +887,7 @@ void main() {
     final app = App(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
-    const layer = RasterStyleLayer(id: '1', sourceId: 'source1');
+    final layer = RasterStyleLayer(id: '1', sourceId: 'source1');
     await ctrl.style?.addLayer(layer);
     await tester.pumpAndSettle();
   });
@@ -896,7 +896,7 @@ void main() {
     final app = App(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
-    const layer = SymbolStyleLayer(id: '1', sourceId: 'source1');
+    final layer = SymbolStyleLayer(id: '1', sourceId: 'source1');
     await ctrl.style?.addLayer(layer);
     await tester.pumpAndSettle();
   });
@@ -905,7 +905,7 @@ void main() {
     final app = App(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
-    const layer = SymbolStyleLayer(id: '1', sourceId: 'source1');
+    final layer = SymbolStyleLayer(id: '1', sourceId: 'source1');
     await ctrl.style?.addLayer(layer);
     await tester.pumpAndSettle();
   });

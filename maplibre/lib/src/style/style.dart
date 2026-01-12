@@ -1,4 +1,4 @@
 export 'expressions/expressions.dart';
-export 'expressions/property_value.dart';
+export 'expressions/types.dart';
 export 'layers/style_layer.dart';
 export 'sources/source.dart';

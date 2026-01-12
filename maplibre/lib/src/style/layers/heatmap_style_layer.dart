@@ -9,14 +9,80 @@ part of 'style_layer.dart';
 abstract interface class HeatmapStyleLayer implements StyleLayerWithSource {
   /// Default constructor for a [HeatmapStyleLayer] instance.
   factory HeatmapStyleLayer({
-    required super.id,
-    required super.sourceId,
-    super.minZoom = 0,
-    super.maxZoom = 24,
-    super.filter,
-    super.metadata,
-    super.sourceLayerId,
-  });
+    required String id,
+    required String sourceId,
+    String? sourceLayerId,
+    Expression? filter,
+    bool visible = StyleLayer.defaultVisible,
+    double minZoom = StyleLayer.defaultMinZoom,
+    double maxZoom = StyleLayer.defaultMaxZoom,
+    PropertyValue<Offset> translate = StyleLayerWithTranslate.defaultTranslate,
+    PropertyValue<ReferenceSpace> translateAnchor =
+        StyleLayerWithTranslate.defaultTranslateAnchor,
+    PropertyValue<double>? sortKey,
+    PropertyValue<double> radius = defaultRadius,
+    PropertyValue<double> weight = defaultWeight,
+    PropertyValue<double> intensity = defaultIntensity,
+    PropertyValue<Color>? color,
+    PropertyValue<double> opacity = defaultOpacity,
+  }) => switch (kIsWeb) {
+    true => CircleStyleLayerWeb(
+      id: id,
+      sourceId: sourceId,
+      sourceLayerId: sourceLayerId,
+      filter: filter,
+      visible: visible,
+      minZoom: minZoom,
+      maxZoom: maxZoom,
+      translate: translate,
+      translateAnchor: translateAnchor,
+      sortKey: sortKey,
+      radius: radius,
+      weight: weight,
+      intensity: intensity,
+      color: color,
+      opacity: opacity,
+    ),
+    false => switch (defaultTargetPlatform) {
+      TargetPlatform.android => CircleStyleLayerAndroid(
+        id: id,
+        sourceId: sourceId,
+        sourceLayerId: sourceLayerId,
+        filter: filter,
+        visible: visible,
+        minZoom: minZoom,
+        maxZoom: maxZoom,
+        translate: translate,
+        translateAnchor: translateAnchor,
+        sortKey: sortKey,
+        radius: radius,
+        weight: weight,
+        intensity: intensity,
+        color: color,
+        opacity: opacity,
+      ),
+      TargetPlatform.iOS => CircleStyleLayerIos(
+        id: id,
+        sourceId: sourceId,
+        sourceLayerId: sourceLayerId,
+        filter: filter,
+        visible: visible,
+        minZoom: minZoom,
+        maxZoom: maxZoom,
+        translate: translate,
+        translateAnchor: translateAnchor,
+        sortKey: sortKey,
+        radius: radius,
+        weight: weight,
+        intensity: intensity,
+        color: color,
+        opacity: opacity,
+      ),
+      _ => throw UnsupportedError(
+        'CircleStyleLayer is not supported for the current platform.',
+      ),
+    },
+  };
 
   /// Radius of influence of one heatmap point in pixels. Increasing the value
   /// makes the heatmap smoother, but less detailed.
@@ -28,6 +94,9 @@ abstract interface class HeatmapStyleLayer implements StyleLayerWithSource {
 
   set radius(PropertyValue<double> value);
 
+  /// Default value of [radius].
+  static const defaultRadius = PropertyValue<double>.value(30);
+
   /// A measure of how much an individual point contributes to the heatmap.
   /// A value of 10 would be equivalent to having 10 points of weight 1 in the
   /// same spot. Especially useful when combined with clustering.
@@ -38,6 +107,9 @@ abstract interface class HeatmapStyleLayer implements StyleLayerWithSource {
 
   set weight(PropertyValue<double> value);
 
+  /// Default value of [weight].
+  static const defaultWeight = PropertyValue<double>.value(1);
+
   /// Similar to [weight] but controls the intensity of the heatmap globally.
   /// Primarily used for adjusting the heatmap based on zoom level.
   ///
@@ -46,6 +118,9 @@ abstract interface class HeatmapStyleLayer implements StyleLayerWithSource {
   PropertyValue<double> get intensity;
 
   set intensity(PropertyValue<double> value);
+
+  /// Default value of [intensity].
+  static const defaultIntensity = PropertyValue<double>.value(1);
 
   /// Defines the color of each pixel based on its density value in a heatmap.
   /// Should be an expression that uses `["heatmap-density"]` as input.
@@ -65,9 +140,9 @@ abstract interface class HeatmapStyleLayer implements StyleLayerWithSource {
   /// ]
   /// ```
   /// Supports [interpolate] expressions.
-  PropertyValue<Color> get color;
+  PropertyValue<Color>? get color;
 
-  set color(PropertyValue<Color> value);
+  set color(PropertyValue<Color>? value);
 
   /// The global opacity at which the heatmap layer will be drawn.
   ///
@@ -76,4 +151,7 @@ abstract interface class HeatmapStyleLayer implements StyleLayerWithSource {
   PropertyValue<double> get opacity;
 
   set opacity(PropertyValue<double> value);
+
+  /// Default value of [opacity].
+  static const defaultOpacity = PropertyValue<double>.value(1);
 }

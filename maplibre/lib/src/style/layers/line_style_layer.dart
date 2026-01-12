@@ -13,14 +13,112 @@ abstract interface class LineStyleLayer
         StyleLayerWithTranslate {
   /// Default constructor for a [LineStyleLayer] instance.
   factory LineStyleLayer({
-    required super.id,
-    required super.sourceId,
-    super.minZoom = 0,
-    super.maxZoom = 24,
-    super.filter,
-    super.metadata,
-    super.sourceLayerId,
-  });
+    required String id,
+    required String sourceId,
+    bool visible = StyleLayer.defaultVisible,
+    double minZoom = StyleLayer.defaultMinZoom,
+    double maxZoom = StyleLayer.defaultMaxZoom,
+    String? sourceLayerId,
+    Expression? filter,
+    PropertyValue<double>? sortKey,
+    PropertyValue<Offset> translate = StyleLayerWithTranslate.defaultTranslate,
+    PropertyValue<ReferenceSpace> translateAnchor =
+        StyleLayerWithTranslate.defaultTranslateAnchor,
+    PropertyValue<LineCap> lineCap = defaultLineCap,
+    PropertyValue<LineJoin> join = defaultJoin,
+    PropertyValue<double> miterLimit = defaultMiterLimit,
+    PropertyValue<double> roundLimit = defaultRoundLimit,
+    PropertyValue<double> opacity = defaultOpacity,
+    PropertyValue<Color> color = defaultColor,
+    PropertyValue<double> width = defaultWidth,
+    PropertyValue<double> gapWidth = defaultGapWidth,
+    PropertyValue<double> offset = defaultOffset,
+    PropertyValue<double> blur = defaultBlur,
+    PropertyValue<List<double>>? dashArray,
+    PropertyValue<String>? pattern,
+    PropertyValue<Color>? gradient,
+  }) => switch (kIsWeb) {
+    true => LineStyleLayerWeb(
+      id: id,
+      sourceId: sourceId,
+      visible: visible,
+      minZoom: minZoom,
+      maxZoom: maxZoom,
+      sourceLayerId: sourceLayerId,
+      filter: filter,
+      sortKey: sortKey,
+      translate: translate,
+      translateAnchor: translateAnchor,
+      lineCap: lineCap,
+      join: join,
+      miterLimit: miterLimit,
+      roundLimit: roundLimit,
+      opacity: opacity,
+      color: color,
+      width: width,
+      gapWidth: gapWidth,
+      offset: offset,
+      blur: blur,
+      dashArray: dashArray,
+      pattern: pattern,
+      gradient: gradient,
+    ),
+    false => switch (defaultTargetPlatform) {
+      TargetPlatform.android => LineStyleLayerAndroid(
+        id: id,
+        sourceId: sourceId,
+        visible: visible,
+        minZoom: minZoom,
+        maxZoom: maxZoom,
+        sourceLayerId: sourceLayerId,
+        filter: filter,
+        sortKey: sortKey,
+        translate: translate,
+        translateAnchor: translateAnchor,
+        lineCap: lineCap,
+        join: join,
+        miterLimit: miterLimit,
+        roundLimit: roundLimit,
+        opacity: opacity,
+        color: color,
+        width: width,
+        gapWidth: gapWidth,
+        offset: offset,
+        blur: blur,
+        dashArray: dashArray,
+        pattern: pattern,
+        gradient: gradient,
+      ),
+      TargetPlatform.iOS => LineStyleLayerIos(
+        id: id,
+        sourceId: sourceId,
+        visible: visible,
+        minZoom: minZoom,
+        maxZoom: maxZoom,
+        sourceLayerId: sourceLayerId,
+        filter: filter,
+        sortKey: sortKey,
+        translate: translate,
+        translateAnchor: translateAnchor,
+        lineCap: lineCap,
+        join: join,
+        miterLimit: miterLimit,
+        roundLimit: roundLimit,
+        opacity: opacity,
+        color: color,
+        width: width,
+        gapWidth: gapWidth,
+        offset: offset,
+        blur: blur,
+        dashArray: dashArray,
+        pattern: pattern,
+        gradient: gradient,
+      ),
+      _ => throw UnsupportedError(
+        'LineStyleLayer is not supported for the current platform.',
+      ),
+    },
+  };
 
   /// {@macro line-cap}
   ///
@@ -29,12 +127,18 @@ abstract interface class LineStyleLayer
 
   set lineCap(PropertyValue<LineCap> value);
 
+  /// Default value for [lineCap].
+  static const defaultLineCap = PropertyValue<LineCap>.value(LineCap.butt);
+
   /// {@macro line-join}
   ///
   /// Layout property. Optional enum. Defaults to [LineJoin.miter].
   PropertyValue<LineJoin> get join;
 
   set join(PropertyValue<LineJoin> value);
+
+  /// Default value for [join].
+  static const defaultJoin = PropertyValue<LineJoin>.value(LineJoin.miter);
 
   /// Used to automatically convert miter joins to bevel joins for sharp angles.
   ///
@@ -43,6 +147,9 @@ abstract interface class LineStyleLayer
   PropertyValue<double> get miterLimit;
 
   set miterLimit(PropertyValue<double> value);
+
+  /// Default value for [miterLimit].
+  static const defaultMiterLimit = PropertyValue<double>.value(2);
 
   /// Used to automatically convert round joins to miter joins for shallow
   /// angles.
@@ -53,6 +160,9 @@ abstract interface class LineStyleLayer
 
   set roundLimit(PropertyValue<double> value);
 
+  /// Default value for [roundLimit].
+  static const defaultRoundLimit = PropertyValue<double>.value(1.05);
+
   /// The opacity at which the line will be drawn.
   ///
   /// Paint property. Optional number in range `[0, 1]`. Defaults to `1`.
@@ -60,6 +170,9 @@ abstract interface class LineStyleLayer
   PropertyValue<double> get opacity;
 
   set opacity(PropertyValue<double> value);
+
+  /// Default value of [opacity].
+  static const defaultOpacity = PropertyValue<double>.value(1);
 
   /// The color with which the line will be drawn.
   ///
@@ -70,6 +183,9 @@ abstract interface class LineStyleLayer
 
   set color(PropertyValue<Color> value);
 
+  /// Default value of [color].
+  static const defaultColor = PropertyValue<Color>.value(Color(0xFF000000));
+
   /// Stroke thickness.
   ///
   /// Paint property. Optional number in range `[0, ∞)`. Units in pixels.
@@ -78,6 +194,9 @@ abstract interface class LineStyleLayer
   PropertyValue<double> get width;
 
   set width(PropertyValue<double> value);
+
+  /// Default value of [width].
+  static const defaultWidth = PropertyValue<double>.value(1);
 
   /// Draws a line casing outside of a line's actual path. Value indicates the
   /// width of the inner gap.
@@ -88,6 +207,9 @@ abstract interface class LineStyleLayer
   PropertyValue<double> get gapWidth;
 
   set gapWidth(PropertyValue<double> value);
+
+  /// Default value of [gapWidth].
+  static const defaultGapWidth = PropertyValue<double>.value(0);
 
   /// The line's offset. For linear features, a positive value offsets the line
   /// to the right, relative to the direction of the line, and a negative value
@@ -100,6 +222,9 @@ abstract interface class LineStyleLayer
 
   set offset(PropertyValue<double> value);
 
+  /// Default value of [offset].
+  static const defaultOffset = PropertyValue<double>.value(0);
+
   /// Blur applied to the line, in pixels.
   ///
   /// Paint property. Optional number in range `[0, ∞)`. Units in pixels.
@@ -108,6 +233,9 @@ abstract interface class LineStyleLayer
   PropertyValue<double> get blur;
 
   set blur(PropertyValue<double> value);
+
+  /// Default value of [blur].
+  static const defaultBlur = PropertyValue<double>.value(0);
 
   /// Specifies the lengths of the alternating dashes and gaps that form the
   /// dash pattern. The lengths are later scaled by the line width. To convert
@@ -120,9 +248,9 @@ abstract interface class LineStyleLayer
   ///
   /// Paint property. Optional array in range [0, ∞). Units in line widths.
   /// Disabled by line-pattern. Transitionable.
-  PropertyValue<List<double>> get dashArray;
+  PropertyValue<List<double>>? get dashArray;
 
-  set dashArray(PropertyValue<List<double>> value);
+  set dashArray(PropertyValue<List<double>>? value);
 
   /// Name of image in sprite to use for drawing image lines. For seamless
   /// patterns, image width must be a factor of two (2, 4, 8, ..., 512). Note that
@@ -173,5 +301,5 @@ enum LineJoin {
 
   /// A join with a sharp, angled corner which is drawn with the outer sides
   /// beyond the endpoint of the path until they meet.
-  miter;
+  miter,
 }

@@ -40,7 +40,7 @@ class _StyleLayersCirclePageState extends State<StyleLayersCirclePage> {
   }
 }
 
-const _circleStyleLayer = CircleStyleLayer(
+final _circleStyleLayer = CircleStyleLayer(
   id: _layerId,
   sourceId: _sourceId,
   // some arbitrary metadata

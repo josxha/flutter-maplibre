@@ -328,4 +328,3 @@ class MarkerLayer extends Layer<Feature<Point>> {
     iconAnchor,
   ]);
 }
-

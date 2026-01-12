@@ -51,7 +51,7 @@ class _AnimationPageState extends State<AnimationPage> {
       GeoJsonSource(id: _sourceId, data: collection.toText()),
     );
     await style.addLayer(
-      const LineStyleLayer(
+      LineStyleLayer(
         id: 'geojson-line',
         sourceId: _sourceId,
         paint: {'line-color': '#F00', 'line-width': 3},
