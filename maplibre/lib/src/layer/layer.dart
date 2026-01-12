@@ -1,6 +1,5 @@
-import 'dart:ui';
-
 import 'package:flutter/foundation.dart';
+import 'package:flutter/painting.dart';
 import 'package:maplibre/maplibre.dart';
 
 part 'circle_layer.dart';
@@ -30,12 +29,6 @@ sealed class Layer<G extends Feature<Geometry>> {
 
   /// Get a unique layer id.
   String getLayerId(int index) => 'maplibre-layer-$index';
-
-  /// Build the paint properties.
-  Map<String, Object> getPaint();
-
-  /// Build the layout properties.
-  Map<String, Object> getLayout();
 
   /// Add the annotation layer to the map.
   StyleLayer createStyleLayer(int index);

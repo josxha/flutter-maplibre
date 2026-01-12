@@ -1,8 +1,11 @@
 import 'package:flutter/painting.dart';
 import 'package:maplibre/src/style/expressions/expressions.dart';
 
-/// Represents a property value that can either be a literal [value] of type [V]
-/// or an [expression] that evaluates to a value of type [V].
+/// [PropertyValue] is a simple wrapper around a value that can either be a
+/// literal value of type [V] or an [Expression] that evaluates to a value of
+/// type [V].
+///
+/// It is used so that style properties can be created in a type-safe way.
 extension type const PropertyValue<V extends Object?>._(dynamic object) {
   /// Creates a [PropertyValue] from an [Expression].
   const PropertyValue.expression(Expression expression) : object = expression;

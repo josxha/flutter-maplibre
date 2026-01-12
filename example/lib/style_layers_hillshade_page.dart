@@ -44,5 +44,5 @@ class _StyleLayersHillshadePageState extends State<StyleLayersHillshadePage> {
 final _hillshadeStyleLayer = HillshadeStyleLayer(
   id: _layerId,
   sourceId: _sourceId,
-  paint: {'hillshade-shadow-color': '#473B24'},
+  shadowColor: const PropertyValue.value(Color(0xFF473B24)),
 );

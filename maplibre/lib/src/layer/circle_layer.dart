@@ -18,7 +18,7 @@ class CircleLayer extends Layer<Feature<Point>> {
   }) : super._(list: points);
 
   /// Circle radius in pixels. Defaults to 5px.
-  final int radius;
+  final double radius;
 
   /// The color of the circle. Defaults to black.
   final Color color;
@@ -31,7 +31,7 @@ class CircleLayer extends Layer<Feature<Point>> {
   double get opacity => color.a;
 
   /// The outline width
-  final int strokeWidth;
+  final double strokeWidth;
 
   /// The outline color
   final Color strokeColor;
@@ -43,25 +43,17 @@ class CircleLayer extends Layer<Feature<Point>> {
   StyleLayer createStyleLayer(int index) => CircleStyleLayer(
     id: getLayerId(index),
     sourceId: getSourceId(index),
-    paint: getPaint(),
-    layout: getLayout(),
     minZoom: minZoom,
     maxZoom: maxZoom,
+    radius: PropertyValue.value(radius),
+    color: PropertyValue.value(color),
+    blur:  PropertyValue.value(blur),
+    opacity: PropertyValue.value(opacity),
+    strokeWidth: PropertyValue.value(strokeWidth),
+    strokeColor: PropertyValue.value(strokeColor),
+    strokeOpacity: PropertyValue.value(strokeOpacity),
+
   );
-
-  @override
-  Map<String, Object> getPaint() => {
-    'circle-radius': radius,
-    'circle-color': color.toHexString(),
-    'circle-blur': blur,
-    'circle-opacity': opacity,
-    'circle-stroke-width': strokeWidth,
-    'circle-stroke-color': strokeColor.toHexString(),
-    'circle-stroke-opacity': strokeOpacity,
-  };
-
-  @override
-  Map<String, Object> getLayout() => {};
 
   @override
   bool operator ==(Object other) =>

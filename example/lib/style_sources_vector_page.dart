@@ -45,7 +45,8 @@ class _StyleSourcesVectorPageState extends State<StyleSourcesVectorPage> {
               id: 'fill_layer',
               sourceId: sourceId,
               sourceLayerId: 'countries',
-              paint: {'fill-color': '#429ef5', 'fill-opacity': 0.6},
+              color: const PropertyValue.value(Color(0xFF429ef5)),
+              opacity: const PropertyValue.value(0.6),
             );
 
             await style.addLayer(fillLayer);
@@ -54,7 +55,8 @@ class _StyleSourcesVectorPageState extends State<StyleSourcesVectorPage> {
               id: 'line_layer',
               sourceId: sourceId,
               sourceLayerId: 'countries',
-              paint: {'line-color': '#00F', 'line-width': 3},
+              color: const PropertyValue.value(Colors.blue),
+              width: const PropertyValue.value(3),
             );
 
             await style.addLayer(lineLayer);
@@ -63,13 +65,10 @@ class _StyleSourcesVectorPageState extends State<StyleSourcesVectorPage> {
               id: 'circle_layer',
               sourceId: sourceId,
               sourceLayerId: 'centroids',
-              paint: {
-                'circle-radius': 18,
-                'circle-color': '#000000',
-                'circle-opacity': 0.5,
-                'circle-stroke-color': '#FFF',
-                'circle-stroke-width': 2,
-              },
+              radius: const PropertyValue.value(18),
+              opacity: const PropertyValue.value(0.5),
+              strokeColor: const PropertyValue.value(Colors.white),
+              strokeWidth: const PropertyValue.value(2),
             );
             await style.addLayer(circleLayer);
 
@@ -77,12 +76,10 @@ class _StyleSourcesVectorPageState extends State<StyleSourcesVectorPage> {
               id: 'images_layer',
               sourceId: sourceId,
               sourceLayerId: 'centroids',
-              layout: {
-                'icon-image': 'marker',
-                'icon-size': 0.18,
-                'icon-allow-overlap': true,
-                'icon-anchor': 'bottom',
-              },
+              iconImage: const PropertyValue.value('marker'),
+              iconSize: const PropertyValue.value(0.18),
+              iconAllowOverlap: const PropertyValue.value(true),
+              iconAnchor: const PropertyValue.value(IconAnchor.bottom),
             );
             await style.addLayer(symbolLayer);
           } on Exception catch (error, stacktrace) {

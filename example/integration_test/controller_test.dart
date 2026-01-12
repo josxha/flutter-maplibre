@@ -317,7 +317,7 @@ void main() {
           CircleStyleLayer(
             id: pointLayerId,
             sourceId: pointSourceId,
-            paint: {'circle-radius': 10, 'circle-color': '#FF0000'},
+            radius: const PropertyValue.value(10),
           ),
         );
         const expectedPoint = QueriedLayer(
@@ -362,7 +362,7 @@ void main() {
           FillStyleLayer(
             id: polygonLayerId,
             sourceId: polygonSourceId,
-            paint: {'fill-color': '#00FF00'},
+            color: const PropertyValue.value(Colors.green),
           ),
         );
         const expectedPolygon = QueriedLayer(
@@ -439,7 +439,6 @@ void main() {
           CircleStyleLayer(
             id: pointLayerId,
             sourceId: pointSourceId,
-            paint: {'circle-radius': 5, 'circle-color': '#FF0000'},
           ),
         );
         const polygonSourceId = 'polygon_source';
@@ -468,7 +467,7 @@ void main() {
           FillStyleLayer(
             id: polygonLayerId,
             sourceId: polygonSourceId,
-            paint: {'fill-color': '#00FF00'},
+            color: const PropertyValue.value(Colors.green),
           ),
         );
         await tester.pump(const Duration(seconds: 1));
@@ -504,7 +503,7 @@ void main() {
           CircleStyleLayer(
             id: pointLayer2Id,
             sourceId: pointSourceId,
-            paint: {'circle-radius': 5, 'circle-color': '#FF00FF'},
+            color: const PropertyValue.value(Colors.purple),
           ),
         );
         await tester.pump(const Duration(seconds: 1));
@@ -552,7 +551,6 @@ void main() {
           CircleStyleLayer(
             id: pointLayerId,
             sourceId: pointSourceId,
-            paint: {'circle-radius': 5, 'circle-color': '#FF0000'},
           ),
         );
         const lineSourceId = 'line_source';
@@ -576,7 +574,7 @@ void main() {
           LineStyleLayer(
             id: lineLayerId,
             sourceId: lineSourceId,
-            paint: {'line-color': '#0000FF', 'line-width': 5},
+            color: const PropertyValue.value(Colors.blue),
           ),
         );
         const polygonSourceId = 'polygon_source';
@@ -605,7 +603,7 @@ void main() {
           FillStyleLayer(
             id: polygonLayerId,
             sourceId: polygonSourceId,
-            paint: {'fill-color': '#00FF00'},
+            color: const PropertyValue.value(Colors.green),
           ),
         );
         await tester.pump(const Duration(seconds: 1));

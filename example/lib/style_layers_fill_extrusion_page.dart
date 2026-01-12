@@ -57,10 +57,9 @@ class _StyleLayersFillExtrusionPageState
 
         // Get fill-extrusion-base from the source 'base_height' property.
         'fill-extrusion-base': ['get', 'base_height'],
-
-        // Make extrusions slightly opaque for see through indoor walls.
-        'fill-extrusion-opacity': 0.5,
       },
+      // Make extrusions slightly opaque for see through indoor walls.
+      opacity: const PropertyValue.value(0.5),
     );
     await style.addLayer(layer);
   }

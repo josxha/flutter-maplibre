@@ -63,7 +63,7 @@ class _StyleLayersFillPageState extends State<StyleLayersFillPage> {
       FillStyleLayer(
         id: 'LakeConstance-Layer',
         sourceId: 'LakeConstance-Source',
-        paint: {'fill-color': '#429ef5'},
+        color: const PropertyValue.value(Color(0xff429ef5)),
       ),
     );
   }

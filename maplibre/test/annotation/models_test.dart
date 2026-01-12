@@ -41,7 +41,7 @@ void main() {
         textHaloColor: Colors.greenAccent,
         iconHaloColor: Colors.amber,
         iconColor: Colors.yellow,
-        textOffset: [2, 4],
+        textOffset: Offset(2, 4),
         iconImage: 'test.png',
         textAllowOverlap: true,
         textSize: 23,

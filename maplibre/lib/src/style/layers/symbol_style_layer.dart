@@ -81,6 +81,7 @@ abstract interface class SymbolStyleLayer
     PropertyValue<Color> textHaloColor = defaultTextHaloColor,
     PropertyValue<double> textHaloWidth = defaultTextHaloWidth,
     PropertyValue<double> textHaloBlur = defaultTextHaloBlur,
+    PropertyValue<Offset> textTranslate = defaultTextTranslate,
   }) => switch (kIsWeb) {
     true => SymbolStyleLayerWeb(
       id: id,
@@ -148,6 +149,7 @@ abstract interface class SymbolStyleLayer
       textHaloColor: textHaloColor,
       textHaloWidth: textHaloWidth,
       textHaloBlur: textHaloBlur,
+      textTranslate: textTranslate,
     ),
     false => switch (defaultTargetPlatform) {
       TargetPlatform.android => SymbolStyleLayerAndroid(
@@ -215,6 +217,7 @@ abstract interface class SymbolStyleLayer
         textHaloColor: textHaloColor,
         textHaloWidth: textHaloWidth,
         textHaloBlur: textHaloBlur,
+        textTranslate: textTranslate,
       ),
       TargetPlatform.iOS => SymbolStyleLayerIos(
         id: id,
@@ -281,6 +284,7 @@ abstract interface class SymbolStyleLayer
         textHaloColor: textHaloColor,
         textHaloWidth: textHaloWidth,
         textHaloBlur: textHaloBlur,
+        textTranslate: textTranslate,
       ),
       _ => throw UnsupportedError(
         'SymbolStyleLayer is not supported for the current platform.',

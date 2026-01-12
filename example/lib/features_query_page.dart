@@ -117,7 +117,8 @@ class _FeaturesQueryPageState extends State<FeaturesQueryPage> {
       FillStyleLayer(
         id: 'polygons',
         sourceId: 'polygons',
-        paint: {'fill-color': '#429ef5', 'fill-opacity': 0.6},
+        color: const PropertyValue.value(Color(0xFF429EF5)),
+        opacity: const PropertyValue.value(0.6),
       ),
     );
 
@@ -125,7 +126,8 @@ class _FeaturesQueryPageState extends State<FeaturesQueryPage> {
       CircleStyleLayer(
         id: 'points',
         sourceId: 'points',
-        paint: {'circle-color': '#f54242', 'circle-radius': 8},
+        color: const PropertyValue.value(Color(0xFFF54242)),
+        radius: const PropertyValue.value(8),
       ),
     );
   }

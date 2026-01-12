@@ -45,13 +45,10 @@ class _StyleLayersSymbolPageState extends State<StyleLayersSymbolPage> {
               SymbolStyleLayer(
                 id: 'images',
                 sourceId: 'points',
-                layout: {
-                  // see https://maplibre.org/maplibre-style-spec/layers/#symbol
-                  'icon-image': 'marker',
-                  'icon-size': 0.08,
-                  'icon-allow-overlap': true,
-                  'icon-anchor': 'bottom',
-                },
+                iconImage: const PropertyValue.value('marker'),
+                iconSize: const PropertyValue.value(0.08),
+                iconAllowOverlap: const PropertyValue.value(true),
+                iconAnchor: const PropertyValue.value(IconAnchor.bottom),
               ),
             );
           } on Exception catch (error, stacktrace) {

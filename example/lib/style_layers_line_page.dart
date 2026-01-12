@@ -34,7 +34,8 @@ class _StyleLayersLinePageState extends State<StyleLayersLinePage> {
       LineStyleLayer(
         id: 'geojson-line',
         sourceId: 'Path',
-        paint: {'line-color': '#F00', 'line-width': 3},
+        color: const PropertyValue.value(Colors.red),
+        width: const PropertyValue.value(3),
       ),
     );
   }

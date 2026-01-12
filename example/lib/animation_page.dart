@@ -54,7 +54,8 @@ class _AnimationPageState extends State<AnimationPage> {
       LineStyleLayer(
         id: 'geojson-line',
         sourceId: _sourceId,
-        paint: {'line-color': '#F00', 'line-width': 3},
+        color: const PropertyValue.value(Colors.red),
+        width: const PropertyValue.value(3),
       ),
     );
 

@@ -24,7 +24,7 @@ abstract interface class LineStyleLayer
     PropertyValue<Offset> translate = StyleLayerWithTranslate.defaultTranslate,
     PropertyValue<ReferenceSpace> translateAnchor =
         StyleLayerWithTranslate.defaultTranslateAnchor,
-    PropertyValue<LineCap> lineCap = defaultLineCap,
+    PropertyValue<LineCap> lineCap = defaultCap,
     PropertyValue<LineJoin> join = defaultJoin,
     PropertyValue<double> miterLimit = defaultMiterLimit,
     PropertyValue<double> roundLimit = defaultRoundLimit,
@@ -49,7 +49,7 @@ abstract interface class LineStyleLayer
       sortKey: sortKey,
       translate: translate,
       translateAnchor: translateAnchor,
-      lineCap: lineCap,
+      cap: lineCap,
       join: join,
       miterLimit: miterLimit,
       roundLimit: roundLimit,
@@ -75,7 +75,7 @@ abstract interface class LineStyleLayer
         sortKey: sortKey,
         translate: translate,
         translateAnchor: translateAnchor,
-        lineCap: lineCap,
+        cap: lineCap,
         join: join,
         miterLimit: miterLimit,
         roundLimit: roundLimit,
@@ -100,7 +100,7 @@ abstract interface class LineStyleLayer
         sortKey: sortKey,
         translate: translate,
         translateAnchor: translateAnchor,
-        lineCap: lineCap,
+        cap: lineCap,
         join: join,
         miterLimit: miterLimit,
         roundLimit: roundLimit,
@@ -123,12 +123,12 @@ abstract interface class LineStyleLayer
   /// {@macro line-cap}
   ///
   /// Layout property. Optional enum. Defaults to [LineCap.butt].
-  PropertyValue<LineCap> get lineCap;
+  PropertyValue<LineCap> get cap;
 
-  set lineCap(PropertyValue<LineCap> value);
+  set cap(PropertyValue<LineCap> value);
 
-  /// Default value for [lineCap].
-  static const defaultLineCap = PropertyValue<LineCap>.value(LineCap.butt);
+  /// Default value for [cap].
+  static const defaultCap = PropertyValue<LineCap>.value(LineCap.butt);
 
   /// {@macro line-join}
   ///
