@@ -43,8 +43,6 @@ class _StyleLayersCirclePageState extends State<StyleLayersCirclePage> {
 final _circleStyleLayer = CircleStyleLayer(
   id: _layerId,
   sourceId: _sourceId,
-  // some arbitrary metadata
-  metadata: {'title': 'Circle Style Layer'},
   paint: {
     // Size circle radius by earthquake magnitude and zoom level
     'circle-radius': [

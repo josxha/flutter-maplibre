@@ -7,6 +7,7 @@ import 'package:maplibre/src/platform/android/jni.g.dart' as jni;
 
 part 'background_style_layer.dart';
 part 'circle_style_layer.dart';
+
 // part 'color_relief_style_layer.dart';
 // part 'fill_extrusion_style_layer.dart';
 // part 'fill_style_layer.dart';
@@ -16,7 +17,7 @@ part 'circle_style_layer.dart';
 // part 'raster_style_layer.dart';
 // part 'symbol_style_layer.dart';
 
-/// An interface representing a style layer for the Android platform.
+/// The base Layer class for Android platform that can't be used directly.
 abstract class StyleLayerAndroid<JLayer extends jni.Layer>
     implements StyleLayer {
   /// Construct an [StyleLayerAndroid] from a JNI layer.
@@ -59,3 +60,16 @@ abstract class StyleLayerAndroid<JLayer extends jni.Layer>
     jLayer.as(jni.Layer.type).setProperty(jProperty);
   });
 }
+
+/*/// Mixin for [StyleLayerWithSource] for code sharing.
+
+mixin StyleLayerWithSourceMixin<JLayer extends jni.Layer>
+    on StyleLayerAndroid<JLayer>
+    implements StyleLayerWithSource {
+  @override
+  String get sourceId => (jLayer);
+
+  @override
+  set sourceId(String value) {}
+}
+*/

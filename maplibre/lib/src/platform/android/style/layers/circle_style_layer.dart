@@ -123,6 +123,12 @@ class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
   });
 
   @override
+  set filter(Expression? value) => using((arena) {
+    final jFilter = value?.toJExpression(arena)?..releasedBy(arena);
+    jLayer.setFilter(jFilter);
+  });
+
+  @override
   PropertyValue<ReferenceSpace> get pitchAlignment => using((arena) {
     final jProperty = jLayer.getCirclePitchAlignment()..releasedBy(arena);
     if (jProperty.isExpression()) {
@@ -148,6 +154,267 @@ class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
     } else {
       final jValue = property.value.name.toJString()..releasedBy(arena);
       jProperty = jni.PropertyFactory.circlePitchAlignment(jValue);
+    }
+    jProperty?.releasedBy(arena);
+    jLayer.setProperty(jProperty);
+  });
+
+  @override
+  PropertyValue<ReferenceSpace> get pitchScale => using((arena) {
+    final jProperty = jLayer.getCirclePitchScale()..releasedBy(arena);
+    if (jProperty.isExpression()) {
+      final jExpression = jProperty.getExpression()!;
+      final expression = jExpression.toDartExpression(releaseOriginal: true);
+      return PropertyValue.expression(expression);
+    }
+    final jValue = jProperty.getValue()!..releasedBy(arena);
+    final stringValue = jValue.toDartString(releaseOriginal: true);
+    final value = ReferenceSpace.values.firstWhere(
+      (e) => e.name == stringValue,
+    );
+    return PropertyValue.value(value);
+  });
+
+  @override
+  set pitchScale(PropertyValue<ReferenceSpace> value) => using((arena) {
+    final jni.PropertyValue? jProperty;
+    if (value.isExpression) {
+      final jExpression = value.expression.toJExpression(arena)
+        ?..releasedBy(arena);
+      jProperty = jni.PropertyFactory.circlePitchScale$1(jExpression);
+    } else {
+      final jValue = value.value.name.toJString()..releasedBy(arena);
+      jProperty = jni.PropertyFactory.circlePitchScale(jValue);
+    }
+    jProperty?.releasedBy(arena);
+    jLayer.setProperty(jProperty);
+  });
+
+  @override
+  PropertyValue<double> get radius => using((arena) {
+    final jProperty = jLayer.getCircleRadius()..releasedBy(arena);
+    if (jProperty.isExpression()) {
+      final jExpression = jProperty.getExpression()!..releasedBy(arena);
+      final expression = jExpression.toDartExpression(releaseOriginal: true);
+      return PropertyValue.expression(expression);
+    }
+    final jValue = jProperty.getValue()!..releasedBy(arena);
+    final value = jValue.floatValue(releaseOriginal: true);
+    return PropertyValue.value(value);
+  });
+
+  @override
+  set radius(PropertyValue<double> value) => using((arena) {
+    final jni.PropertyValue? jProperty;
+    if (value.isExpression) {
+      final jExpression = value.expression.toJExpression(arena)
+        ?..releasedBy(arena);
+      jProperty = jni.PropertyFactory.circleRadius$1(jExpression);
+    } else {
+      final jValue = value.value.toJFloat()..releasedBy(arena);
+      jProperty = jni.PropertyFactory.circleRadius(jValue);
+    }
+    jProperty?.releasedBy(arena);
+    jLayer.setProperty(jProperty);
+  });
+
+  @override
+  PropertyValue<double>? get sortKey => using((arena) {
+    final jProperty = jLayer.getCircleSortKey()..releasedBy(arena);
+    if (jProperty.isExpression()) {
+      final jExpression = jProperty.getExpression()!..releasedBy(arena);
+      final expression = jExpression.toDartExpression(releaseOriginal: true);
+      return PropertyValue.expression(expression);
+    }
+    final jValue = jProperty.getValue()!..releasedBy(arena);
+    final value = jValue.floatValue(releaseOriginal: true);
+    return PropertyValue.value(value);
+  });
+
+  @override
+  set sortKey(PropertyValue<double>? value) => using((arena) {
+    final jni.PropertyValue? jProperty;
+    if (value == null) {
+      jProperty = jni.PropertyFactory.circleSortKey(null);
+    } else if (value.isExpression) {
+      final jExpression = value.expression.toJExpression(arena)
+        ?..releasedBy(arena);
+      jProperty = jni.PropertyFactory.circleSortKey$1(jExpression);
+    } else {
+      final jValue = value.value.toJFloat()..releasedBy(arena);
+      jProperty = jni.PropertyFactory.circleSortKey(jValue);
+    }
+    jProperty?.releasedBy(arena);
+    jLayer.setProperty(jProperty);
+  });
+
+  @override
+  String get sourceId =>
+      jLayer.getSourceId().toDartString(releaseOriginal: true);
+
+  @override
+  String? get sourceLayerId => using((arena) {
+    final jValue = jLayer.getSourceLayer()..releasedBy(arena);
+    return jValue.toDartString(releaseOriginal: true);
+  });
+
+  @override
+  set sourceLayerId(String value) => using((arena) {
+    final jValue = value.toJString()..releasedBy(arena);
+    jLayer.setSourceLayer(jValue);
+  });
+
+  @override
+  PropertyValue<Color> get strokeColor => using((arena) {
+    final jProperty = jLayer.getCircleStrokeColor()..releasedBy(arena);
+    if (jProperty.isExpression()) {
+      final jExpression = jProperty.getExpression()!..releasedBy(arena);
+      final expression = jExpression.toDartExpression(releaseOriginal: true);
+      return PropertyValue.expression(expression);
+    }
+    final jValue = jProperty.getColorInt()!..releasedBy(arena);
+    final value = jValue.intValue(releaseOriginal: true);
+    return PropertyValue.value(Color(value));
+  });
+
+  @override
+  set strokeColor(PropertyValue<Color> value) => using((arena) {
+    final jni.PropertyValue? jProperty;
+    if (value.isExpression) {
+      jProperty = jni.PropertyFactory.circleStrokeColor$2(
+        value.expression.toJExpression(arena),
+      );
+    } else {
+      final jValue = value.value.toHexString().toJString()
+        ..releasedBy(arena);
+      jProperty = jni.PropertyFactory.circleStrokeColor$1(jValue);
+    }
+    jProperty?.releasedBy(arena);
+    jLayer.setProperty(jProperty);
+  });
+
+  @override
+  PropertyValue<double> get strokeOpacity => using((arena) {
+    final jProperty = jLayer.getCircleStrokeOpacity()..releasedBy(arena);
+    if (jProperty.isExpression()) {
+      final jExpression = jProperty.getExpression()!..releasedBy(arena);
+      final expression = jExpression.toDartExpression(releaseOriginal: true);
+      return PropertyValue.expression(expression);
+    }
+    final jValue = jProperty.getValue()!..releasedBy(arena);
+    final value = jValue.floatValue(releaseOriginal: true);
+    return PropertyValue.value(value);
+  });
+
+  @override
+  set strokeOpacity(PropertyValue<double> value) => using((arena) {
+    final jni.PropertyValue? jProperty;
+    if (value.isExpression) {
+      final jExpression = value.expression.toJExpression(arena)
+        ?..releasedBy(arena);
+      jProperty = jni.PropertyFactory.circleStrokeOpacity$1(jExpression);
+    } else {
+      final jValue = value.value.toJFloat()..releasedBy(arena);
+      jProperty = jni.PropertyFactory.circleStrokeOpacity(jValue);
+    }
+    jProperty?.releasedBy(arena);
+    jLayer.setProperty(jProperty);
+  });
+
+  @override
+  PropertyValue<double> get strokeWidth => using((arena) {
+    final jProperty = jLayer.getCircleStrokeWidth()..releasedBy(arena);
+    if (jProperty.isExpression()) {
+      final jExpression = jProperty.getExpression()!..releasedBy(arena);
+      final expression = jExpression.toDartExpression(releaseOriginal: true);
+      return PropertyValue.expression(expression);
+    }
+    final jValue = jProperty.getValue()!..releasedBy(arena);
+    final value = jValue.floatValue(releaseOriginal: true);
+    return PropertyValue.value(value);
+  });
+
+  @override
+  set strokeWidth(PropertyValue<double> value) => using((arena) {
+    final jni.PropertyValue? jProperty;
+    if (value.isExpression) {
+      final jExpression = value.expression.toJExpression(arena)
+        ?..releasedBy(arena);
+      jProperty = jni.PropertyFactory.circleStrokeWidth$1(jExpression);
+    } else {
+      final jValue = value.value.toJFloat()..releasedBy(arena);
+      jProperty = jni.PropertyFactory.circleStrokeWidth(jValue);
+    }
+    jProperty?.releasedBy(arena);
+    jLayer.setProperty(jProperty);
+  });
+
+  @override
+  PropertyValue<Offset> get translate => using((arena) {
+    final jProperty = jLayer.getCircleTranslate()..releasedBy(arena);
+    if (jProperty.isExpression()) {
+      final jExpression = jProperty.getExpression()!..releasedBy(arena);
+      final expression = jExpression.toDartExpression(releaseOriginal: true);
+      return PropertyValue.expression(expression);
+    }
+    final jValue = jProperty.getValue()!..releasedBy(arena);
+    final jArray = jValue.getArray()!..releasedBy(arena);
+    final length = jArray.length(releaseOriginal: true);
+    final list = List<double>.generate(length, (i) {
+      final jElement = jArray.getElement(i)..releasedBy(arena);
+      final element = jElement.doubleValue(releaseOriginal: true);
+      return element;
+    });
+    return PropertyValue.value(Offset(list[0], list[1]));
+  });
+
+  @override
+  set translate(PropertyValue<List<double>> value) => using((arena) {
+    final jni.PropertyValue? jProperty;
+    if (value.isExpression) {
+      final jExpression = value.expression.toJExpression(arena)
+        ?..releasedBy(arena);
+      jProperty = jni.PropertyFactory.circleTranslate$1(jExpression);
+    } else {
+      final list = value.value;
+      final jArray = jni.JArray.doubleArray(list.length)..releasedBy(arena);
+      for (var i = 0; i < list.length; i++) {
+        final jElement = list[i].toJDouble()..releasedBy(arena);
+        jArray.setElement(i, jElement);
+      }
+      final jValue = jni.Value.fromDoubleArray(jArray)..releasedBy(arena);
+      jProperty = jni.PropertyFactory.circleTranslate(jValue);
+    }
+    jProperty?.releasedBy(arena);
+    jLayer.setProperty(jProperty);
+  });
+
+  @override
+  PropertyValue<ReferenceSpace> get translateAnchor => using((arena) {
+    final jProperty = jLayer.getCircleTranslateAnchor()..releasedBy(arena);
+    if (jProperty.isExpression()) {
+      final jExpression = jProperty.getExpression()!;
+      final expression = jExpression.toDartExpression(releaseOriginal: true);
+      return PropertyValue.expression(expression);
+    }
+    final jValue = jProperty.getValue()!..releasedBy(arena);
+    final stringValue = jValue.toDartString(releaseOriginal: true);
+    final value = ReferenceSpace.values.firstWhere(
+      (e) => e.name == stringValue,
+    );
+    return PropertyValue.value(value);
+  });
+
+  @override
+  set translateAnchor(PropertyValue<ReferenceSpace> value) => using((arena) {
+    final jni.PropertyValue? jProperty;
+    if (value.isExpression) {
+      final jExpression = value.expression.toJExpression(arena)
+        ?..releasedBy(arena);
+      jProperty = jni.PropertyFactory.circleTranslateAnchor$1(jExpression);
+    } else {
+      final jValue = value.value.name.toJString()..releasedBy(arena);
+      jProperty = jni.PropertyFactory.circleTranslateAnchor(jValue);
     }
     jProperty?.releasedBy(arena);
     jLayer.setProperty(jProperty);

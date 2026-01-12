@@ -60,7 +60,7 @@ class _StyleLayersFillPageState extends State<StyleLayersFillPage> {
       GeoJsonSource(id: 'LakeConstance-Source', data: geojsonPolygon),
     );
     await style.addLayer(
-      const FillStyleLayer(
+      FillStyleLayer(
         id: 'LakeConstance-Layer',
         sourceId: 'LakeConstance-Source',
         paint: {'fill-color': '#429ef5'},

@@ -41,7 +41,7 @@ class _StyleLayersHillshadePageState extends State<StyleLayersHillshadePage> {
   }
 }
 
-const _hillshadeStyleLayer = HillshadeStyleLayer(
+final _hillshadeStyleLayer = HillshadeStyleLayer(
   id: _layerId,
   sourceId: _sourceId,
   paint: {'hillshade-shadow-color': '#473B24'},

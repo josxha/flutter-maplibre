@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/painting.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/platform/android/style/layers/background_style_layer.dart';
 import 'package:maplibre/src/platform/ios/style/layers/background_style_layer.dart';
 import 'package:maplibre/src/platform/web/style/layers/background_style_layer.dart';
 import 'package:maplibre/src/style/expressions/functional.dart';
@@ -82,13 +81,11 @@ abstract interface class StyleLayerWithSource implements StyleLayer {
   /// Optional string.
   String get sourceId;
 
-  set sourceId(String value);
-
   /// Layer to use from a vector tile source. Required for [VectorSource];
   /// prohibited for all other source types, including GeoJSON sources.
   String? get sourceLayerId;
 
-  set sourceLayerId(String? value);
+  set sourceLayerId(String value);
 
   /// A expression specifying conditions on source features. Only features that
   /// match the filter are displayed. Zoom expressions in filters are only

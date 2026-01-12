@@ -41,7 +41,7 @@ class _StyleSourcesVectorPageState extends State<StyleSourcesVectorPage> {
             );
             await style.addSource(vectorSource);
 
-            const fillLayer = FillStyleLayer(
+            final fillLayer = FillStyleLayer(
               id: 'fill_layer',
               sourceId: sourceId,
               sourceLayerId: 'countries',
@@ -50,7 +50,7 @@ class _StyleSourcesVectorPageState extends State<StyleSourcesVectorPage> {
 
             await style.addLayer(fillLayer);
 
-            const lineLayer = LineStyleLayer(
+            final lineLayer = LineStyleLayer(
               id: 'line_layer',
               sourceId: sourceId,
               sourceLayerId: 'countries',
@@ -59,7 +59,7 @@ class _StyleSourcesVectorPageState extends State<StyleSourcesVectorPage> {
 
             await style.addLayer(lineLayer);
 
-            const circleLayer = CircleStyleLayer(
+            final circleLayer = CircleStyleLayer(
               id: 'circle_layer',
               sourceId: sourceId,
               sourceLayerId: 'centroids',
@@ -73,7 +73,7 @@ class _StyleSourcesVectorPageState extends State<StyleSourcesVectorPage> {
             );
             await style.addLayer(circleLayer);
 
-            const symbolLayer = SymbolStyleLayer(
+            final symbolLayer = SymbolStyleLayer(
               id: 'images_layer',
               sourceId: sourceId,
               sourceLayerId: 'centroids',

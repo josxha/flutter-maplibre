@@ -42,7 +42,7 @@ class _StyleLayersSymbolPageState extends State<StyleLayersSymbolPage> {
 
             // display the image on the map
             await style.addLayer(
-              const SymbolStyleLayer(
+              SymbolStyleLayer(
                 id: 'images',
                 sourceId: 'points',
                 layout: {

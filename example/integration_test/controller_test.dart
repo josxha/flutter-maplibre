@@ -314,7 +314,7 @@ void main() {
         );
         const pointLayerId = 'point_layer';
         await style.addLayer(
-          const CircleStyleLayer(
+          CircleStyleLayer(
             id: pointLayerId,
             sourceId: pointSourceId,
             paint: {'circle-radius': 10, 'circle-color': '#FF0000'},
@@ -359,7 +359,7 @@ void main() {
         );
         const polygonLayerId = 'polygon_layer';
         await style.addLayer(
-          const FillStyleLayer(
+          FillStyleLayer(
             id: polygonLayerId,
             sourceId: polygonSourceId,
             paint: {'fill-color': '#00FF00'},
@@ -436,7 +436,7 @@ void main() {
         );
         const pointLayerId = 'point_layer';
         await style.addLayer(
-          const CircleStyleLayer(
+          CircleStyleLayer(
             id: pointLayerId,
             sourceId: pointSourceId,
             paint: {'circle-radius': 5, 'circle-color': '#FF0000'},
@@ -465,7 +465,7 @@ void main() {
         );
         const polygonLayerId = 'polygon_layer';
         await style.addLayer(
-          const FillStyleLayer(
+          FillStyleLayer(
             id: polygonLayerId,
             sourceId: polygonSourceId,
             paint: {'fill-color': '#00FF00'},
@@ -501,7 +501,7 @@ void main() {
         expect(features.first.properties['poly'], 'gon');
         const pointLayer2Id = 'point_layer_2';
         await style.addLayer(
-          const CircleStyleLayer(
+          CircleStyleLayer(
             id: pointLayer2Id,
             sourceId: pointSourceId,
             paint: {'circle-radius': 5, 'circle-color': '#FF00FF'},
@@ -549,7 +549,7 @@ void main() {
         );
         const pointLayerId = 'point_layer';
         await style.addLayer(
-          const CircleStyleLayer(
+          CircleStyleLayer(
             id: pointLayerId,
             sourceId: pointSourceId,
             paint: {'circle-radius': 5, 'circle-color': '#FF0000'},
@@ -573,7 +573,7 @@ void main() {
         );
         const lineLayerId = 'line_layer';
         await style.addLayer(
-          const LineStyleLayer(
+          LineStyleLayer(
             id: lineLayerId,
             sourceId: lineSourceId,
             paint: {'line-color': '#0000FF', 'line-width': 5},
@@ -602,7 +602,7 @@ void main() {
         );
         const polygonLayerId = 'polygon_layer';
         await style.addLayer(
-          const FillStyleLayer(
+          FillStyleLayer(
             id: polygonLayerId,
             sourceId: polygonSourceId,
             paint: {'fill-color': '#00FF00'},

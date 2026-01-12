@@ -31,7 +31,7 @@ class _StyleLayersLinePageState extends State<StyleLayersLinePage> {
     final geojsonLine = await rootBundle.loadString('assets/geojson/path.json');
     await style.addSource(GeoJsonSource(id: 'Path', data: geojsonLine));
     await style.addLayer(
-      const LineStyleLayer(
+      LineStyleLayer(
         id: 'geojson-line',
         sourceId: 'Path',
         paint: {'line-color': '#F00', 'line-width': 3},

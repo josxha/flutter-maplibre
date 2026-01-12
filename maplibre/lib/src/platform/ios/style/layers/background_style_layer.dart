@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/platform/ios/style/layers/style.dart';
 import 'package:maplibre/src/platform/ios/style/layers/style_layer.dart';
 import 'package:maplibre_ios/maplibre_ffi.g.dart';
 import 'package:maplibre_ios/objective_c.dart';
