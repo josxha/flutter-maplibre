@@ -3,7 +3,7 @@
 This release focuses on stability improvements along with a few small
 enhancements. Notably, it is now possible to render a Flutter widget or canvas
 directly into an image and use it as a map marker without any delay.
-Many thanks to @markszente and @BartoszStasiurka for their valuable
+Many thanks to @markszente and @BartoszStasiurka for their
 contributions to this release.
 
 I would also like to extend my sincere gratitude to Thilko M., @oboukili,
@@ -20,14 +20,15 @@ package throughout 2025. Your support is truly appreciated!
 - Render a Flutter `Widget` or `Canvas` into an image and use it as marker on
   the map.
 - Add `sourceLayerId` to style layers for vector sources.
-- Add layer filter expressions to style layers.
+- Add `filter` expressions to style layers.
 
 ### Bug Fixes
 
 - Fix iOS can't load style from file.
-- Add missing MapEventCameraIdle, MapEventStartMoveCamera events on iOS.
-- Fix queryLayers() throws exception on iOS when receiving numeric layer IDs.
-- Fix `onCameraMoved` callback returning altitude instead of zoom level on iOS.
+- Add missing `MapEventCameraIdle`, `MapEventStartMoveCamera` events on iOS.
+- Fix `queryLayers()` throws exception on iOS when receiving numeric layer IDs.
+- Fix `onCameraMoved()` callback returning altitude instead of zoom level on
+  iOS.
 - Fix invisible map on android when coming back from background.
 - Fix double tap zoom interaction on iOS.
 

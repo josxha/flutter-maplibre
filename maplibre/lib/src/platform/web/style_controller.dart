@@ -178,9 +178,6 @@ class StyleControllerWeb extends StyleController {
           'Layer type "${layer.runtimeType}" is not implemented for Web.',
         );
     }
-    if (layer.metadata case final metadata?) {
-      jsLayer.metadata = metadata.jsify()!;
-    }
     if (layer.filter case final filter?) {
       final jsFilter = filter.jsify();
       if (jsFilter != null) {
