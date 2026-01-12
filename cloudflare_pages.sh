@@ -19,6 +19,7 @@ cd example
 ../flutter/bin/flutter build web --wasm \
   --base-href /demo/ \
   -o ../website/build/demo
+cd ..
 
 echo "▶ Copy header configuration"
 cp _headers website/build/
