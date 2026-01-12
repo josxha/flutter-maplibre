@@ -186,7 +186,6 @@ extension JExpressionExt on jni.Expression {
     if (releaseOriginal) release();
     final json = jsonDecode(expressionString) as List<Object?>;
     final expression = Expression.fromJson(json);
-    if (releaseOriginal) release();
     return expression;
   });
 }

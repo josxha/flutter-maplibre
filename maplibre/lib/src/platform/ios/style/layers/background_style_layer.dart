@@ -1,7 +1,8 @@
 import 'dart:ui';
 
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/platform/ios/style/style.dart';
+import 'package:maplibre/src/platform/ios/style/layers/style.dart';
+import 'package:maplibre/src/platform/ios/style/layers/style_layer.dart';
 import 'package:maplibre_ios/maplibre_ffi.g.dart';
 import 'package:maplibre_ios/objective_c.dart';
 
@@ -9,7 +10,7 @@ import 'package:maplibre_ios/objective_c.dart';
 class BackgroundStyleLayerIos extends StyleLayerIos<MLNBackgroundStyleLayer>
     implements BackgroundStyleLayer {
   /// Default constructor for a [BackgroundStyleLayerIos] instance.
-  BackgroundStyleLayerIos({
+  factory BackgroundStyleLayerIos({
     required String id,
     required double minZoom,
     required double maxZoom,
@@ -17,30 +18,21 @@ class BackgroundStyleLayerIos extends StyleLayerIos<MLNBackgroundStyleLayer>
     required PropertyValue<String>? pattern,
     required PropertyValue<double> opacity,
     required bool visible,
-  }) : super.fromNativeLayer(MLNBackgroundStyleLayer.new$()) {
-    ffiLayer.initWithIdentifier(id.toNSString());
-    this.minZoom = minZoom;
-    this.maxZoom = maxZoom;
-    this.color = color;
-    this.opacity = opacity;
-    this.visible = visible;
-    this.pattern = pattern;
+  }) {
+    return BackgroundStyleLayerIos.fromNativeLayer(
+        MLNBackgroundStyleLayer.new$()..initWithIdentifier(id.toNSString()),
+      )
+      ..minZoom = minZoom
+      ..maxZoom = maxZoom
+      ..color = color
+      ..opacity = opacity
+      ..visible = visible
+      ..pattern = pattern;
   }
 
-  @override
-  String get id => ffiLayer.identifier.toString();
-
-  @override
-  double get maxZoom => ffiLayer.maximumZoomLevel;
-
-  @override
-  set maxZoom(double value) => ffiLayer.maximumZoomLevel = value;
-
-  @override
-  double get minZoom => ffiLayer.minimumZoomLevel;
-
-  @override
-  set minZoom(double value) => ffiLayer.minimumZoomLevel = value;
+  /// Construct a [BackgroundStyleLayerIos] from a ObjC layer.
+  BackgroundStyleLayerIos.fromNativeLayer(super.ffiLayer)
+    : super.fromNativeLayer();
 
   @override
   PropertyValue<Color> get color => ffiLayer.backgroundColor;

@@ -1,16 +1,10 @@
-import 'dart:ui';
-
-import 'package:jni/jni.dart';
-import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/platform/android/extensions.dart';
-import 'package:maplibre/src/platform/android/jni.g.dart' as jni;
-import 'package:maplibre/src/platform/android/style/style.dart';
+part of 'style_layer.dart';
 
 /// A layer that contains circles for Android platform.
 class BackgroundStyleLayerAndroid extends StyleLayerAndroid<jni.BackgroundLayer>
     implements BackgroundStyleLayer {
-  /// Default constructor for a [BackgroundStyleLayerAndroid] instance.
-  BackgroundStyleLayerAndroid({
+  /// Factory for a [BackgroundStyleLayerAndroid] instance.
+  factory BackgroundStyleLayerAndroid({
     required String id,
     required double minZoom,
     required double maxZoom,
@@ -18,40 +12,32 @@ class BackgroundStyleLayerAndroid extends StyleLayerAndroid<jni.BackgroundLayer>
     required PropertyValue<String>? pattern,
     required PropertyValue<double> opacity,
     required bool visible,
-  }) : super.fromNativeLayer(jni.BackgroundLayer(id.toJString())) {
-    this.minZoom = minZoom;
-    this.maxZoom = maxZoom;
-    this.color = color;
-    this.opacity = opacity;
-    this.visible = visible;
-    this.pattern = pattern;
-  }
+  }) => using((arena) {
+    return BackgroundStyleLayerAndroid.fromNativeLayer(
+        jni.BackgroundLayer(id.toJString()..releasedBy(arena)),
+      )
+      ..minZoom = minZoom
+      ..maxZoom = maxZoom
+      ..color = color
+      ..opacity = opacity
+      ..visible = visible
+      ..pattern = pattern;
+  });
 
-  @override
-  String get id => jLayer.getId().toDartString(releaseOriginal: true);
-
-  @override
-  double get maxZoom => jLayer.getMaxZoom();
-
-  @override
-  set maxZoom(double value) => jLayer.setMaxZoom(value);
-
-  @override
-  double get minZoom => jLayer.getMinZoom();
-
-  @override
-  set minZoom(double value) => jLayer.setMinZoom(value);
+  /// Construct an [BackgroundStyleLayerAndroid] from a JNI..
+  BackgroundStyleLayerAndroid.fromNativeLayer(super.jLayer)
+    : super.fromNativeLayer();
 
   @override
   PropertyValue<double> get opacity => using((arena) {
     final jProperty = jLayer.getBackgroundOpacity()..releasedBy(arena);
     if (jProperty.isExpression()) {
-      final expression = jProperty.getExpression()!.toDartExpression(
-        releaseOriginal: true,
-      );
+      final jExpression = jProperty.getExpression()!..releasedBy(arena);
+      final expression = jExpression.toDartExpression(releaseOriginal: true);
       return PropertyValue.expression(expression);
     }
-    final value = jProperty.getValue()!.floatValue(releaseOriginal: true);
+    final jValue = jProperty.getValue()!..releasedBy(arena);
+    final value = jValue.floatValue(releaseOriginal: true);
     return PropertyValue.value(value);
   });
 
@@ -59,14 +45,15 @@ class BackgroundStyleLayerAndroid extends StyleLayerAndroid<jni.BackgroundLayer>
   set opacity(PropertyValue<double> property) => using((arena) {
     final jni.PropertyValue? jProperty;
     if (property.isExpression) {
-      jProperty = jni.PropertyFactory.backgroundOpacity$1(
-        property.expression.toJExpression(arena),
-      );
+      final jExpression = property.expression.toJExpression(arena)
+        ?..releasedBy(arena);
+      jProperty = jni.PropertyFactory.backgroundOpacity$1(jExpression);
     } else {
       final jValue = property.value.toJFloat()..releasedBy(arena);
       jProperty = jni.PropertyFactory.backgroundOpacity(jValue);
     }
-    jLayer.as(jni.Layer.type).setProperty(jProperty);
+    jProperty?.releasedBy(arena);
+    jLayer.setProperty(jProperty);
   });
 
   @override
@@ -76,12 +63,12 @@ class BackgroundStyleLayerAndroid extends StyleLayerAndroid<jni.BackgroundLayer>
       return null;
     }
     if (jProperty.isExpression()) {
-      final expression = jProperty.getExpression()!.toDartExpression(
-        releaseOriginal: true,
-      );
+      final jExpression = jProperty.getExpression()!..releasedBy(arena);
+      final expression = jExpression.toDartExpression(releaseOriginal: true);
       return PropertyValue.expression(expression);
     }
-    final value = jProperty.getValue()?.toDartString(releaseOriginal: true);
+    final jValue = jProperty.getValue()?..releasedBy(arena);
+    final value = jValue?.toDartString(releaseOriginal: true);
     return PropertyValue.value(value!);
   });
 
@@ -98,35 +85,20 @@ class BackgroundStyleLayerAndroid extends StyleLayerAndroid<jni.BackgroundLayer>
       final jValue = property.value.toJString()..releasedBy(arena);
       jProperty = jni.PropertyFactory.backgroundPattern(jValue);
     }
-    jLayer.as(jni.Layer.type).setProperty(jProperty);
-  });
-
-  @override
-  bool get visible => using((arena) {
-    final jProperty = jLayer.getVisibility()..releasedBy(arena);
-    final value = jProperty.getValue()?.toDartString(releaseOriginal: true);
-    return !(value == 'none');
-  });
-
-  @override
-  set visible(bool newValue) => using((arena) {
-    final jni.PropertyValue? jProperty;
-    final stringValue = newValue ? 'visible' : 'none';
-    final jValue = stringValue.toJString()..releasedBy(arena);
-    jProperty = jni.PropertyFactory.visibility(jValue);
-    jLayer.as(jni.Layer.type).setProperty(jProperty);
+    jProperty?.releasedBy(arena);
+    jLayer.setProperty(jProperty);
   });
 
   @override
   PropertyValue<Color> get color => using((arena) {
     final jProperty = jLayer.getBackgroundColor()..releasedBy(arena);
     if (jProperty.isExpression()) {
-      final expression = jProperty.getExpression()!.toDartExpression(
-        releaseOriginal: true,
-      );
+      final jExpression = jProperty.getExpression()!..releasedBy(arena);
+      final expression = jExpression.toDartExpression(releaseOriginal: true);
       return PropertyValue.expression(expression);
     }
-    final value = jProperty.getColorInt()!.intValue(releaseOriginal: true);
+    final jValue = jProperty.getColorInt()!..releasedBy(arena);
+    final value = jValue.intValue(releaseOriginal: true);
     return PropertyValue.value(Color(value));
   });
 
@@ -142,6 +114,7 @@ class BackgroundStyleLayerAndroid extends StyleLayerAndroid<jni.BackgroundLayer>
         ..releasedBy(arena);
       jProperty = jni.PropertyFactory.backgroundColor$1(jValue);
     }
-    jLayer.as(jni.Layer.type).setProperty(jProperty);
+    jProperty?.releasedBy(arena);
+    jLayer.setProperty(jProperty);
   });
 }
