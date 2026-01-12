@@ -16,8 +16,11 @@ git clone -b stable --depth 1 https://github.com/flutter/flutter.git
 
 echo "▶ Building Flutter web"
 cd example
-../flutter/bin/flutter build web \
+../flutter/bin/flutter build web --wasm \
   --base-href /demo/ \
   -o ../website/build/demo
+
+echo "▶ Copy header configuration"
+cp _headers website/build/
 
 echo "✅ Cloudflare Pages build finished successfully"
