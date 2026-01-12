@@ -1,78 +1,97 @@
-import 'package:flutter/painting.dart';
-import 'package:maplibre/src/style/expressions/expressions.dart';
+part of 'expressions.dart';
 
-/// [PropertyValue] is a simple wrapper around a value that can either be a
-/// literal value of type [V] or an [Expression] that evaluates to a value of
-/// type [V].
+/// {@template literal-expression}
+/// A literal expression that represents a constant value.
+/// Provides a literal array or object value.
 ///
-/// It is used so that style properties can be created in a type-safe way.
-extension type const PropertyValue<V extends Object?>._(dynamic object) {
-  /// Creates a [PropertyValue] from an [Expression].
-  const PropertyValue.expression(Expression expression) : object = expression;
+/// https://maplibre.org/maplibre-style-spec/expressions/#literal
+/// {@endtemplate}
+extension type const LiteralExpression<T extends Object?>._(List<Object?> json)
+    implements Expression {
+  /// Create a new [literal] expression.
+  LiteralExpression(T value) : json = [operator, value];
 
-  /// Creates a [PropertyValue] from a literal value.
-  const PropertyValue.value(V value) : object = value;
+  /// The operator for [literal] expressions.
+  static const String operator = 'literal';
 
-  /// Get the value as type [V].
-  V get value => object as V;
-
-  /// Get the value as an [Expression].
-  Expression get expression => object as Expression;
-
-  /// Indicates whether the [PropertyValue] is an expression.
-  bool get isExpression => object is Expression;
+  /// The literal value of the expression.
+  T get value => json[1] as T;
 }
 
-/// A single [double] value, or an [List] of [double] values.
+/// {@template array-expression}
+/// Asserts that the input is an array (optionally with a specific item type
+/// and length). If, when the input expression is evaluated, it is not of the
+/// asserted type or length, then this assertion will cause the whole
+/// expression to be aborted.
 ///
-/// ```json
-/// {
-///    "hillshade-illumination-direction": 24,
-///    "hillshade-illumination-direction": [45, 57.3]
-/// }
-/// ```
-///
-/// https://maplibre.org/maplibre-style-spec/types/#numberarray
-extension type const NumberArray._(Object object) {
-  /// Creates a [NumberArray] from an [List].
-  const NumberArray.array(List<double> list) : object = list;
+/// https://maplibre.org/maplibre-style-spec/expressions/#array
+/// {@endtemplate}
+extension type const ArrayExpression<Type extends Object>._(List<Object?> json)
+    implements Expression {
+  /// Create a new [array] expression.
+  ArrayExpression(List<Type> value, {ArrayType? type, int? length})
+    : json = [operator, ?type?.name, ?length, ...value];
 
-  /// Creates a [NumberArray] from a [double].
-  const NumberArray.number(double value) : object = value;
-
-  /// Get the value as [double].
-  double get number => object as double;
-
-  /// Get the value as an [List].
-  List<double> get array => object as List<double>;
-
-  /// Indicates whether the [NumberArray] is a [List].
-  bool get isArray => object is List<double>;
+  /// The operator for [array] expressions.
+  static const String operator = 'array';
 }
 
-/// A single [Color] value, or an [List] of [Color] values.
-///
-/// ```json
-/// {
-///    "hillshade-highlight-color": "#ffff00",
-///    "hillshade-highlight-color": ["#ffff00", "rgb(255, 255, 0)", "yellow"]
-/// }
-/// ```
-///
-/// https://maplibre.org/maplibre-style-spec/types/#colorarray
-extension type const ColorArray._(Object object) {
-  /// Creates a [ColorArray] from a [List].
-  const ColorArray.array(List<Color> list) : object = list;
+/// The asserted items type in an [ArrayExpression].
+enum ArrayType {
+  /// An array of numbers.
+  number,
 
-  /// Creates a [ColorArray] from a [Color].
-  const ColorArray.color(Color value) : object = value;
+  /// An array of strings.
+  string,
 
-  /// Get the value as [Color].
-  Color get color => object as Color;
-
-  /// Get the value as an [List].
-  List<Color> get array => object as List<Color>;
-
-  /// Indicates whether the [ColorArray] is a [List].
-  bool get isArray => object is List<Color>;
+  /// An array of booleans.
+  boolean,
 }
+
+/// {@template object-typeof}
+/// Returns a string describing the type of the given value.
+///
+/// https://maplibre.org/maplibre-style-spec/expressions/#typeof
+/// {@endtemplate}
+extension type const TypeOfExpression._(List<Object?> json)
+    implements Expression {
+  /// Create a new [typeof] expression.
+  TypeOfExpression(Object? value) : json = [operator, value];
+
+  /// The operator for [typeof] expressions.
+  static const String operator = 'typeof';
+}
+
+/// {@template string-expression}
+/// Asserts that the input value is a string. If multiple values are provided,
+/// each one is evaluated in order until a string is obtained. If none of the
+/// inputs are strings, the expression is an error.
+///
+/// https://maplibre.org/maplibre-style-spec/expressions/#string
+/// {@endtemplate}
+extension type const StringExpression._(List<Object?> json)
+    implements Expression {
+  /// Create a new [string] expression.
+  StringExpression(List<Object?> values) : json = [operator, ...values];
+
+  /// The operator for [string] expressions.
+  static const String operator = 'string';
+}
+
+/// {@template number-expression}
+/// Asserts that the input value is a number. If multiple values are provided,
+/// each one is evaluated in order until a number is obtained. If none of the
+/// inputs are numbers, the expression is an error.
+///
+/// https://maplibre.org/maplibre-style-spec/expressions/#number
+/// {@endtemplate}
+extension type const NumberExpression._(List<Object?> json)
+    implements Expression {
+  /// Create a new [number] expression.
+  NumberExpression(List<Object?> values) : json = [operator, ...values];
+
+  /// The operator for [number] expressions.
+  static const String operator = 'number';
+}
+
+// TODO continue implementing other expression types.

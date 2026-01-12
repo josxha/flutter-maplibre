@@ -26,4 +26,10 @@ abstract class StyleLayerIos<FfiLayer extends MLNStyleLayer>
 
   @override
   set minZoom(double value) => ffiLayer.minimumZoomLevel = value;
+
+  @override
+  bool get visible => ffiLayer.isVisible;
+
+  @override
+  set visible(bool value) => ffiLayer.isVisible = value;
 }

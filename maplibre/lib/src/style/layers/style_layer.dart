@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/painting.dart';
 import 'package:maplibre/maplibre.dart';
+import 'package:maplibre/src/platform/android/style/layers/style_layer.dart';
 import 'package:maplibre/src/platform/ios/style/layers/background_style_layer.dart';
 import 'package:maplibre/src/platform/web/style/layers/background_style_layer.dart';
 import 'package:maplibre/src/style/expressions/functional.dart';
@@ -122,7 +123,7 @@ abstract interface class StyleLayerWithTranslate extends StyleLayerWithSource {
   /// [Offset.zero]. Supports interpolate expressions. Transitionable.
   PropertyValue<Offset> get translate;
 
-  set translate(PropertyValue<List<double>> value);
+  set translate(PropertyValue<Offset> value);
 
   /// Default value of [translate].
   static const defaultTranslate = PropertyValue<Offset>.value(Offset.zero);

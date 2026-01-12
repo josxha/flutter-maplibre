@@ -12,18 +12,44 @@ class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
     required PropertyValue<Color> color,
     required PropertyValue<double> opacity,
     required bool visible,
+    required String? sourceLayerId,
+    required Expression? filter,
+    required PropertyValue<Offset> translate,
+    required PropertyValue<ReferenceSpace> translateAnchor,
+    required PropertyValue<double>? sortKey,
+    required PropertyValue<double> radius,
+    required PropertyValue<double> blur,
+    required PropertyValue<ReferenceSpace> pitchScale,
+    required PropertyValue<ReferenceSpace> pitchAlignment,
+    required PropertyValue<double> strokeWidth,
+    required PropertyValue<Color> strokeColor,
+    required PropertyValue<double> strokeOpacity,
   }) => using((arena) {
-    return CircleStyleLayerAndroid.fromNativeLayer(
-        jni.CircleLayer(
-          id.toJString()..releasedBy(arena),
-          sourceId.toJString()..releasedBy(arena),
-        ),
-      )
-      ..minZoom = minZoom
-      ..maxZoom = maxZoom
-      ..color = color
-      ..opacity = opacity
-      ..visible = visible;
+    final layer =
+        CircleStyleLayerAndroid.fromNativeLayer(
+            jni.CircleLayer(
+              id.toJString()..releasedBy(arena),
+              sourceId.toJString()..releasedBy(arena),
+            ),
+          )
+          ..minZoom = minZoom
+          ..maxZoom = maxZoom
+          ..color = color
+          ..opacity = opacity
+          ..visible = visible
+          ..filter = filter
+          ..translate = translate
+          ..translateAnchor = translateAnchor
+          ..sortKey = sortKey
+          ..radius = radius
+          ..blur = blur
+          ..pitchScale = pitchScale
+          ..pitchAlignment = pitchAlignment
+          ..strokeWidth = strokeWidth
+          ..strokeColor = strokeColor
+          ..strokeOpacity = strokeOpacity;
+    if (sourceLayerId != null) layer.sourceLayerId = sourceLayerId;
+    return layer;
   });
 
   /// Construct an [CircleStyleLayerAndroid] from a JNI..
@@ -125,7 +151,8 @@ class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
   @override
   set filter(Expression? value) => using((arena) {
     final jFilter = value?.toJExpression(arena)?..releasedBy(arena);
-    jLayer.setFilter(jFilter);
+    /// TODO handle null, MLN Android does not allow setting filter to null
+    if (jFilter != null) jLayer.setFilter(jFilter);
   });
 
   @override
@@ -285,8 +312,7 @@ class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
         value.expression.toJExpression(arena),
       );
     } else {
-      final jValue = value.value.toHexString().toJString()
-        ..releasedBy(arena);
+      final jValue = value.value.toHexString().toJString()..releasedBy(arena);
       jProperty = jni.PropertyFactory.circleStrokeColor$1(jValue);
     }
     jProperty?.releasedBy(arena);
@@ -358,32 +384,24 @@ class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
       return PropertyValue.expression(expression);
     }
     final jValue = jProperty.getValue()!..releasedBy(arena);
-    final jArray = jValue.getArray()!..releasedBy(arena);
-    final length = jArray.length(releaseOriginal: true);
-    final list = List<double>.generate(length, (i) {
-      final jElement = jArray.getElement(i)..releasedBy(arena);
-      final element = jElement.doubleValue(releaseOriginal: true);
-      return element;
-    });
-    return PropertyValue.value(Offset(list[0], list[1]));
+    final x = jValue[0]!.floatValue(releaseOriginal: true);
+    final y = jValue[1]!.floatValue(releaseOriginal: true);
+    return PropertyValue.value(Offset(x, y));
   });
 
   @override
-  set translate(PropertyValue<List<double>> value) => using((arena) {
+  set translate(PropertyValue<Offset> value) => using((arena) {
     final jni.PropertyValue? jProperty;
     if (value.isExpression) {
       final jExpression = value.expression.toJExpression(arena)
         ?..releasedBy(arena);
       jProperty = jni.PropertyFactory.circleTranslate$1(jExpression);
     } else {
-      final list = value.value;
-      final jArray = jni.JArray.doubleArray(list.length)..releasedBy(arena);
-      for (var i = 0; i < list.length; i++) {
-        final jElement = list[i].toJDouble()..releasedBy(arena);
-        jArray.setElement(i, jElement);
-      }
-      final jValue = jni.Value.fromDoubleArray(jArray)..releasedBy(arena);
-      jProperty = jni.PropertyFactory.circleTranslate(jValue);
+      final offset = value.value;
+      final jArray = JArray(JFloat.nullableType, 2)..releasedBy(arena);
+      jArray[0] = offset.dx.toJFloat()..releasedBy(arena);
+      jArray[1] = offset.dy.toJFloat()..releasedBy(arena);
+      jProperty = jni.PropertyFactory.circleTranslate(jArray);
     }
     jProperty?.releasedBy(arena);
     jLayer.setProperty(jProperty);

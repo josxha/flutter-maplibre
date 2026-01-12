@@ -2,10 +2,8 @@ import 'dart:js_interop';
 import 'dart:ui';
 
 import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/platform/android/extensions.dart';
 import 'package:maplibre/src/platform/web/interop/interop.dart' as js;
 import 'package:maplibre/src/platform/web/style/layers/style_layer.dart';
-import 'package:maplibre/src/style/expressions/types.dart';
 
 /// A layer that contains circles for web platform.
 class BackgroundStyleLayerWeb extends StyleLayerWeb<js.LayerSpecification>
@@ -36,56 +34,26 @@ class BackgroundStyleLayerWeb extends StyleLayerWeb<js.LayerSpecification>
   }
 
   @override
-  String get id => jsLayer.identifier.toString();
-
-  @override
-  double get maxZoom => jsLayer.maximumZoomLevel;
-
-  @override
-  set maxZoom(double value) => jsLayer.maximumZoomLevel = value;
-
-  @override
-  double get minZoom => jsLayer.minimumZoomLevel;
-
-  @override
-  set minZoom(double value) => jsLayer.minimumZoomLevel = value;
-
-  @override
-  PropertyValue<Color> get color => jsLayer.backgroundColor;
+  PropertyValue<Color> get color => throw UnimplementedError();
 
   @override
   set color(PropertyValue<Color> value) {
-    jsLayer.backgroundColor = NSExpression.expressionWithFormat(
-      value.value.toHexString().toNSString(),
-    );
-    // TODO handle expressions
+    // TODO handle
   }
 
   @override
-  PropertyValue<double> get opacity => jsLayer.backgroundOpacity;
+  PropertyValue<double> get opacity => throw UnimplementedError();
 
   @override
   set opacity(PropertyValue<double> value) {
-    jsLayer.backgroundOpacity = NSExpression.expressionForConstantValue(
-      value.value.toNSNumber(),
-    );
-    // TODO handle expressions
+    // TODO handle
   }
 
   @override
-  PropertyValue<String>? get pattern => jsLayer.backgroundPattern;
+  PropertyValue<String>? get pattern => throw UnimplementedError();
 
   @override
   set pattern(PropertyValue<String>? value) {
-    jsLayer.backgroundOpacity = NSExpression.expressionForConstantValue(
-      value?.value.toNSString(),
-    );
-    // TODO handle expressions
+    // TODO handle
   }
-
-  @override
-  bool get visible => jsLayer.isVisible;
-
-  @override
-  set visible(bool value) => jsLayer.isVisible = value;
 }

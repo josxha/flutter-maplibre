@@ -60,16 +60,3 @@ abstract class StyleLayerAndroid<JLayer extends jni.Layer>
     jLayer.as(jni.Layer.type).setProperty(jProperty);
   });
 }
-
-/*/// Mixin for [StyleLayerWithSource] for code sharing.
-
-mixin StyleLayerWithSourceMixin<JLayer extends jni.Layer>
-    on StyleLayerAndroid<JLayer>
-    implements StyleLayerWithSource {
-  @override
-  String get sourceId => (jLayer);
-
-  @override
-  set sourceId(String value) {}
-}
-*/

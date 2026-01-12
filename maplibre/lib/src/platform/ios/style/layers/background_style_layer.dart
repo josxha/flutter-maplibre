@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:ui';
 
 import 'package:maplibre/maplibre.dart';
@@ -34,41 +35,64 @@ class BackgroundStyleLayerIos extends StyleLayerIos<MLNBackgroundStyleLayer>
     : super.fromNativeLayer();
 
   @override
-  PropertyValue<Color> get color => ffiLayer.backgroundColor;
+  PropertyValue<Color> get color {
+    throw UnimplementedError();
+    /*final nsExpression = ffiLayer.backgroundColor;
+    if (nsExpression.isKindOfClass()) {
+      return PropertyValue.value();
+    } else {
+      nsExpression.mgl_jsonExpressionObject;
+    }*/
+  }
 
   @override
   set color(PropertyValue<Color> value) {
-    ffiLayer.backgroundColor = NSExpression.expressionWithFormat(
-      value.value.toHexString().toNSString(),
-    );
-    // TODO handle expressions
+    if (value.isExpression) {
+      Helpers.parseExpressionWithPropertyName(
+        'background-color'.toNSString(),
+        expression: jsonEncode(value.expression).toNSString(),
+      );
+    } else {
+      ffiLayer.backgroundColor = NSExpression.expressionWithFormat(
+        value.value.toHexString().toNSString(),
+      );
+    }
   }
 
   @override
-  PropertyValue<double> get opacity => ffiLayer.backgroundOpacity;
+  PropertyValue<double> get opacity => throw UnimplementedError();
 
   @override
   set opacity(PropertyValue<double> value) {
-    ffiLayer.backgroundOpacity = NSExpression.expressionForConstantValue(
-      value.value.toNSNumber(),
-    );
-    // TODO handle expressions
+    if (value.isExpression) {
+      Helpers.parseExpressionWithPropertyName(
+        'background-opacity'.toNSString(),
+        expression: jsonEncode(value.expression).toNSString(),
+      );
+    } else {
+      ffiLayer.backgroundOpacity = NSExpression.expressionForConstantValue(
+        value.value.toNSNumber(),
+      );
+    }
   }
 
   @override
-  PropertyValue<String>? get pattern => ffiLayer.backgroundPattern;
+  PropertyValue<String>? get pattern => throw UnimplementedError();
 
   @override
   set pattern(PropertyValue<String>? value) {
-    ffiLayer.backgroundOpacity = NSExpression.expressionForConstantValue(
-      value?.value.toNSString(),
-    );
-    // TODO handle expressions
+    if (value == null) {
+      throw UnimplementedError();
+      // ffiLayer.backgroundPattern = null;
+    } else if (value.isExpression) {
+      Helpers.parseExpressionWithPropertyName(
+        'background-pattern'.toNSString(),
+        expression: jsonEncode(value.expression).toNSString(),
+      );
+    } else {
+      ffiLayer.backgroundPattern = NSExpression.expressionForConstantValue(
+        value.value.toNSString(),
+      );
+    }
   }
-
-  @override
-  bool get visible => ffiLayer.isVisible;
-
-  @override
-  set visible(bool value) => ffiLayer.isVisible = value;
 }

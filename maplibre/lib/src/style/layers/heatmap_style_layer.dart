@@ -26,7 +26,7 @@ abstract interface class HeatmapStyleLayer implements StyleLayerWithSource {
     PropertyValue<Color>? color,
     PropertyValue<double> opacity = defaultOpacity,
   }) => switch (kIsWeb) {
-    true => CircleStyleLayerWeb(
+    true => HeatmapStyleLayerWeb(
       id: id,
       sourceId: sourceId,
       sourceLayerId: sourceLayerId,
@@ -44,7 +44,7 @@ abstract interface class HeatmapStyleLayer implements StyleLayerWithSource {
       opacity: opacity,
     ),
     false => switch (defaultTargetPlatform) {
-      TargetPlatform.android => CircleStyleLayerAndroid(
+      TargetPlatform.android => HeatmapStyleLayerAndroid(
         id: id,
         sourceId: sourceId,
         sourceLayerId: sourceLayerId,
@@ -61,7 +61,7 @@ abstract interface class HeatmapStyleLayer implements StyleLayerWithSource {
         color: color,
         opacity: opacity,
       ),
-      TargetPlatform.iOS => CircleStyleLayerIos(
+      TargetPlatform.iOS => HeatmapStyleLayerIos(
         id: id,
         sourceId: sourceId,
         sourceLayerId: sourceLayerId,
@@ -79,7 +79,7 @@ abstract interface class HeatmapStyleLayer implements StyleLayerWithSource {
         opacity: opacity,
       ),
       _ => throw UnsupportedError(
-        'CircleStyleLayer is not supported for the current platform.',
+        'HeatmapStyleLayer is not supported for the current platform.',
       ),
     },
   };

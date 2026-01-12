@@ -1,30 +1,32 @@
+import 'package:maplibre/src/style/expressions/functional.dart';
+
+part 'types.dart';
+part 'variable_binding.dart';
+
 /// Base class for expressions.
 extension type const Expression._(List<Object?> json) {
   /// Creates an expression from its JSON representation.
   static Expression fromJson(List<Object?> json) {
-    final operator = json.first;
-    switch (operator) {
+    switch (json.first) {
+      // Variable binding¶
+      case LetExpression.operator:
+        final vars = <String, Object?>{};
+        for (var i = 1; i < json.length - 1; i += 2) {
+          vars[json[i]! as String] = json[i + 1];
+        }
+        return LetExpression(
+          variables: vars,
+          expression: Expression.fromJson(json.last! as List<Object?>),
+        );
+      case VarExpression.operator:
+        return VarExpression(json[1]! as String);
+      // Types
       case LiteralExpression.operator:
         return LiteralExpression(json[1]);
       default:
-        throw Exception('Unsupported expression operator: $operator');
+        throw Exception('Unsupported expression operator: ${json.first}');
     }
   }
-}
-
-/// {@template literal-expression}
-/// A literal expression that represents a constant value.
-/// {@endtemplate}
-extension type const LiteralExpression<T extends Object?>._(List<Object?> json)
-    implements Expression {
-  /// Create a new literal expression.
-  LiteralExpression(T value) : json = [operator, value];
-
-  /// The operator for literal expressions.
-  static const String operator = 'literal';
-
-  /// The literal value of the expression.
-  T get value => json[1] as T;
 }
 
 /// {@template feature-state-expression}
@@ -45,7 +47,7 @@ extension type const FeatureStateExpression<T extends Object?>._(
   /// Create a new feature-state expression.
   FeatureStateExpression(String key) : json = [operator, key];
 
-  /// The operator for feature-state expressions.
+  /// The operator for [featureState] expressions.
   static const String operator = 'feature-state';
 
   /// The key of the feature state to retrieve.
@@ -63,11 +65,25 @@ extension type const InterpolateExpression<T extends Object?>._(
   List<Object?> json
 )
     implements Expression {
-  /// Create a new feature-state expression.
+  /// Create a new interpolate expression.
   InterpolateExpression(String key) : json = [operator, key];
 
-  /// The operator for feature-state expressions.
-  static const String operator = 'feature-state';
+  /// The operator for [interpolate] expressions.
+  static const String operator = 'interpolate';
+
+  /// The key of the feature state to retrieve.
+  T get value => json[1] as T;
+}
+
+/// {@template get-expression}
+///
+extension type const GetExpression<T extends Object?>._(List<Object?> json)
+    implements Expression {
+  /// Create a new interpolate expression.
+  GetExpression(String key) : json = [operator, key];
+
+  /// The operator for [interpolate] expressions.
+  static const String operator = 'interpolate';
 
   /// The key of the feature state to retrieve.
   T get value => json[1] as T;

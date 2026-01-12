@@ -1,11 +1,15 @@
 import 'package:maplibre/src/style/expressions/expressions.dart';
 
+// ignore_for_file: camel_case_types
+
+/// {@macro let-expression}
+typedef let = LetExpression;
+
 /// {@macro literal-expression}
-LiteralExpression literal(Object? value) => LiteralExpression(value);
+typedef literal = LiteralExpression;
 
 /// {@macro feature-state-expression}
-FeatureStateExpression featureState(String value) =>
-    FeatureStateExpression(value);
+typedef featureState = FeatureStateExpression;
 
 /// {@macro interpolate-expression}
-InterpolateExpression interpolate(String value) => InterpolateExpression(value);
+typedef interpolate = InterpolateExpression;
