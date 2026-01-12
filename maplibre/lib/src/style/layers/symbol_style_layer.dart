@@ -33,8 +33,7 @@ abstract interface class SymbolStyleLayer
         defaultIconRotationAlignment,
     PropertyValue<double> iconSize = defaultIconSize,
     PropertyValue<IconTextFit> iconTextFit = defaultIconTextFit,
-    PropertyValue<EdgeInsets> iconTextFitPadding =
-        defaultIconTextFitPadding,
+    PropertyValue<EdgeInsets> iconTextFitPadding = defaultIconTextFitPadding,
     PropertyValue<String>? iconImage,
     PropertyValue<double> iconRotate = defaultIconRotate,
     PropertyValue<EdgeInsets> iconPadding = defaultIconPadding,
@@ -65,7 +64,7 @@ abstract interface class SymbolStyleLayer
     PropertyValue<bool> textKeepUpright = defaultTextKeepUpright,
     PropertyValue<TextTransform> textTransform = defaultTextTransform,
     PropertyValue<Offset> textOffset = defaultTextOffset,
-    PropertyValue <bool> textAllowOverlap = defaultTextAllowOverlap,
+    PropertyValue<bool> textAllowOverlap = defaultTextAllowOverlap,
     PropertyValue<SymbolOverlap>? textOverlap,
     PropertyValue<bool> textIgnorePlacement = defaultTextIgnorePlacement,
     PropertyValue<bool> textOptional = defaultTextOptional,

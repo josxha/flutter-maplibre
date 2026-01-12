@@ -232,7 +232,6 @@ extension type LayerSpecification._(JSObject _) implements JSObject {
   external String id;
 
   external JSAny filter;
-  external JSAny metadata;
   @JS('source-layer')
   external String? sourceLayer;
 }
