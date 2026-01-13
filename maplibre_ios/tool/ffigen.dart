@@ -68,7 +68,6 @@ void main(List<String> args) {
           return true;
         },
         include: Declarations.includeSet(<String>{
-          'UIView',
           'NSExpression',
           'Helpers',
           'MapLibreRegistry',
