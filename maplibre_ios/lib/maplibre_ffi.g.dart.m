@@ -2,7 +2,31 @@
 #import <Foundation/Foundation.h>
 #import <objc/message.h>
 #import "../ios/maplibre_ios/Sources/maplibre_ios/MapLibreIos.h"
-#import "../MapLibre.h"
+#import "MLNMapProjection.h"
+#import "MLNStyle.h"
+#import "MLNSource.h"
+#import "MLNVectorTileSource.h"
+#import "MLNShapeSource.h"
+#import "MLNImageSource.h"
+#import "MLNRasterTileSource.h"
+#import "MLNRasterDEMSource.h"
+#import "MLNBackgroundStyleLayer.h"
+#import "MLNCircleStyleLayer.h"
+#import "MLNFillExtrusionStyleLayer.h"
+#import "MLNFillStyleLayer.h"
+#import "MLNHeatmapStyleLayer.h"
+#import "MLNHillshadeStyleLayer.h"
+#import "MLNLineStyleLayer.h"
+#import "MLNRasterStyleLayer.h"
+#import "MLNSymbolStyleLayer.h"
+#import "MLNVectorStyleLayer.h"
+#import "MLNAttributionInfo.h"
+#import "NSExpression+MLNAdditions.h"
+#import "MLNOfflineStorage.h"
+#import "MLNOfflinePack.h"
+#import "MLNOfflineRegion.h"
+#import "MLNTilePyramidOfflineRegion.h"
+#import "MLNFeature.h"
 
 #if !__has_feature(objc_arc)
 #error "This file must be compiled with ARC enabled"
@@ -697,51 +721,19 @@ Protocol* _NativeLibrary_MLNMapViewDelegate(void) { return @protocol(MLNMapViewD
 
 Protocol* _NativeLibrary_MLNLocationManager(void) { return @protocol(MLNLocationManager); }
 
-typedef struct CLLocationCoordinate2D  (^_ProtocolTrampoline_34)(void * sel);
-__attribute__((visibility("default"))) __attribute__((used))
-struct CLLocationCoordinate2D  _NativeLibrary_protocolTrampoline_neuenc(id target, void * sel) {
-  return ((_ProtocolTrampoline_34)((id (*)(id, SEL, SEL))objc_msgSend)(target, @selector(getDOBJCDartProtocolMethodForSelector:), sel))(sel);
-}
-
 Protocol* _NativeLibrary_MLNAnnotation(void) { return @protocol(MLNAnnotation); }
-
-typedef struct MLNCoordinateBounds  (^_ProtocolTrampoline_35)(void * sel);
-__attribute__((visibility("default"))) __attribute__((used))
-struct MLNCoordinateBounds  _NativeLibrary_protocolTrampoline_1fkc0ji(id target, void * sel) {
-  return ((_ProtocolTrampoline_35)((id (*)(id, SEL, SEL))objc_msgSend)(target, @selector(getDOBJCDartProtocolMethodForSelector:), sel))(sel);
-}
-
-typedef BOOL  (^_ProtocolTrampoline_36)(void * sel, struct MLNCoordinateBounds arg1);
-__attribute__((visibility("default"))) __attribute__((used))
-BOOL  _NativeLibrary_protocolTrampoline_krbldm(id target, void * sel, struct MLNCoordinateBounds arg1) {
-  return ((_ProtocolTrampoline_36)((id (*)(id, SEL, SEL))objc_msgSend)(target, @selector(getDOBJCDartProtocolMethodForSelector:), sel))(sel, arg1);
-}
 
 Protocol* _NativeLibrary_MLNOverlay(void) { return @protocol(MLNOverlay); }
 
-typedef unsigned long  (^_ProtocolTrampoline_37)(void * sel);
+typedef unsigned long  (^_ProtocolTrampoline_34)(void * sel);
 __attribute__((visibility("default"))) __attribute__((used))
 unsigned long  _NativeLibrary_protocolTrampoline_1ckyi24(id target, void * sel) {
-  return ((_ProtocolTrampoline_37)((id (*)(id, SEL, SEL))objc_msgSend)(target, @selector(getDOBJCDartProtocolMethodForSelector:), sel))(sel);
+  return ((_ProtocolTrampoline_34)((id (*)(id, SEL, SEL))objc_msgSend)(target, @selector(getDOBJCDartProtocolMethodForSelector:), sel))(sel);
 }
 
 Protocol* _NativeLibrary_MLNFeature(void) { return @protocol(MLNFeature); }
 
 Protocol* _NativeLibrary_MLNCluster(void) { return @protocol(MLNCluster); }
-
-typedef id  (^_ProtocolTrampoline_38)(void * sel, unsigned long arg1, unsigned long arg2, unsigned long arg3);
-__attribute__((visibility("default"))) __attribute__((used))
-id  _NativeLibrary_protocolTrampoline_fclj7c(id target, void * sel, unsigned long arg1, unsigned long arg2, unsigned long arg3) {
-  return ((_ProtocolTrampoline_38)((id (*)(id, SEL, SEL))objc_msgSend)(target, @selector(getDOBJCDartProtocolMethodForSelector:), sel))(sel, arg1, arg2, arg3);
-}
-
-typedef id  (^_ProtocolTrampoline_39)(void * sel, struct MLNCoordinateBounds arg1, unsigned long arg2);
-__attribute__((visibility("default"))) __attribute__((used))
-id  _NativeLibrary_protocolTrampoline_129i16p(id target, void * sel, struct MLNCoordinateBounds arg1, unsigned long arg2) {
-  return ((_ProtocolTrampoline_39)((id (*)(id, SEL, SEL))objc_msgSend)(target, @selector(getDOBJCDartProtocolMethodForSelector:), sel))(sel, arg1, arg2);
-}
-
-Protocol* _NativeLibrary_MLNComputedShapeSourceDataSource(void) { return @protocol(MLNComputedShapeSourceDataSource); }
 
 Protocol* _NativeLibrary_MLNOfflineRegion(void) { return @protocol(MLNOfflineRegion); }
 
@@ -768,10 +760,10 @@ _ListenerTrampoline_19 _NativeLibrary_wrapBlockingBlock_r8gdi7(
   });
 }
 
-typedef id  (^_ProtocolTrampoline_40)(void * sel, id arg1, MLNResourceKind arg2, id arg3);
+typedef id  (^_ProtocolTrampoline_35)(void * sel, id arg1, MLNResourceKind arg2, id arg3);
 __attribute__((visibility("default"))) __attribute__((used))
 id  _NativeLibrary_protocolTrampoline_1fy0zqa(id target, void * sel, id arg1, MLNResourceKind arg2, id arg3) {
-  return ((_ProtocolTrampoline_40)((id (*)(id, SEL, SEL))objc_msgSend)(target, @selector(getDOBJCDartProtocolMethodForSelector:), sel))(sel, arg1, arg2, arg3);
+  return ((_ProtocolTrampoline_35)((id (*)(id, SEL, SEL))objc_msgSend)(target, @selector(getDOBJCDartProtocolMethodForSelector:), sel))(sel, arg1, arg2, arg3);
 }
 
 Protocol* _NativeLibrary_MLNOfflineStorageDelegate(void) { return @protocol(MLNOfflineStorageDelegate); }
