@@ -31,7 +31,7 @@ class _ControllerPageState extends State<ControllerPage> {
                 OutlinedButton(
                   onPressed: () async {
                     debugPrint('moveCamera start');
-                    await _controller.moveCamera(
+                    _controller.moveCamera(
                       center: const Geographic(lon: 172.4714, lat: -42.4862),
                       zoom: 4,
                       pitch: 0,
