@@ -45,13 +45,19 @@ class MapControlButtons extends StatefulWidget {
 class _MapControlButtonsState extends State<MapControlButtons> {
   late final PermissionManager? _permissionManager;
   _TrackLocationState _trackState = _TrackLocationState.gpsNotFixed;
-
   late bool _trackLocationButtonInitialized = false;
+
+  bool get _showLocationButton {
+    const locationPlatforms = {TargetPlatform.android, TargetPlatform.iOS};
+    return !kIsWeb &&
+        widget.showTrackLocation &&
+        locationPlatforms.contains(defaultTargetPlatform);
+  }
 
   @override
   void initState() {
     super.initState();
-    if (!kIsWeb && widget.showTrackLocation) {
+    if (_showLocationButton) {
       _permissionManager = PermissionManager();
     }
   }
@@ -61,7 +67,7 @@ class _MapControlButtonsState extends State<MapControlButtons> {
     final controller = MapController.maybeOf(context);
     if (controller == null) return const SizedBox.shrink();
 
-    if (!kIsWeb && widget.showTrackLocation) {
+    if (_showLocationButton) {
       if (!_trackLocationButtonInitialized) {
         _trackLocationButtonInitialized = true;
         if (_permissionManager?.locationPermissionsGranted ?? false) {
@@ -97,7 +103,7 @@ class _MapControlButtonsState extends State<MapControlButtons> {
                 ),
                 child: const Icon(Icons.remove),
               ),
-              if (!kIsWeb && widget.showTrackLocation) ...[
+              if (_showLocationButton) ...[
                 FloatingActionButton(
                   heroTag: 'MapLibreTrackLocationButton',
                   onPressed: () async => _initializeLocation(controller),
