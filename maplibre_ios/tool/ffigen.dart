@@ -60,58 +60,56 @@ void main(List<String> args) {
     objectiveC: ObjectiveC(
       interfaces: Interfaces(
         includeMember: (decl, member) {
+          if (decl.originalName == 'UIView' ||
+              decl.originalName == 'MLNMapView') {
+            print('Considering ${decl.originalName}::${member}');
+            return false;
+          }
           return true;
         },
-        include: (decl) {
-          const include = {
-            'NSExpression',
-            'Helpers',
-            'MapLibreRegistry',
-            'Extensions',
-            // 'MLNMapView',
-            'MLNStyle',
-            'MLNStyleLayer',
-            'MLNOfflineStorage',
-            'MLNCoordinateBounds',
-            'CLLocationCoordinate2D',
-            'MLNBackgroundStyleLayer',
-            'MLNCircleStyleLayer',
-            'MLNFillExtrusionStyleLayer',
-            'MLNFillStyleLayer',
-            'MLNHeatmapStyleLayer',
-            'MLNHillshadeStyleLayer',
-            'MLNLineStyleLayer',
-            'MLNRasterStyleLayer',
-            'MLNSymbolStyleLayer',
-            'MLNTilePyramidOfflineRegion',
-            'MLNOfflinePack',
-            'MLNTileSource',
-            'MLNShape',
-            'MLNShapeSource',
-            'MLNImageSource',
-            'MLNVectorTileSource',
-            'MLNRasterTileSource',
-            'MLNRasterDEMSource',
-            'MLNCoordinateQuad',
-            'MLNUserTrackingMode',
-            'MLNFeature',
-            'MLNMapCamera',
-          };
-          if (include.contains(decl.originalName)) return true;
-          return false;
-        },
+        include: Declarations.includeSet(<String>{
+          'UIView',
+          'NSExpression',
+          'Helpers',
+          'MapLibreRegistry',
+          'Extensions',
+          'MLNMapView',
+          'MLNStyle',
+          'MLNStyleLayer',
+          'MLNOfflineStorage',
+          'MLNCoordinateBounds',
+          'CLLocationCoordinate2D',
+          'MLNBackgroundStyleLayer',
+          'MLNCircleStyleLayer',
+          'MLNFillExtrusionStyleLayer',
+          'MLNFillStyleLayer',
+          'MLNHeatmapStyleLayer',
+          'MLNHillshadeStyleLayer',
+          'MLNLineStyleLayer',
+          'MLNRasterStyleLayer',
+          'MLNSymbolStyleLayer',
+          'MLNTilePyramidOfflineRegion',
+          'MLNOfflinePack',
+          'MLNTileSource',
+          'MLNShape',
+          'MLNShapeSource',
+          'MLNImageSource',
+          'MLNVectorTileSource',
+          'MLNRasterTileSource',
+          'MLNRasterDEMSource',
+          'MLNCoordinateQuad',
+          'MLNUserTrackingMode',
+          'MLNFeature',
+          'MLNMapCamera',
+        }),
       ),
       protocols: Protocols(
-        include: (decl) {
-          const include = {
-            'NSExpression',
-            'Helpers',
-            'MapLibreRegistry',
-            'Extensions',
-          };
-          if (include.contains(decl.originalName)) return true;
-          return false;
-        },
+        include: Declarations.includeSet(<String>{
+          'NSExpression',
+          'Helpers',
+          'MapLibreRegistry',
+          'Extensions',
+        }),
         includeMember: (declaration, member) => true,
       ),
     ),
