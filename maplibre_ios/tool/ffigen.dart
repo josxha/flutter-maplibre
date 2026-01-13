@@ -64,32 +64,53 @@ void main(List<String> args) {
         },
         include: (decl) {
           const include = {
-            // 'NSString',
-            // 'CLLocationCoordinate2D',
-            // 'NSAttributedString',
-            // 'UIImage',
-            // 'UIScreen',
-            // 'UIAction',
-            // 'UIMenu',
-            // 'UIPointerEffect',
-            // 'UIPointerShape',
-            // 'UIPointerStyle',
-            // 'UITableViewCell',
-            // 'UICellConfigurationState',
-            // 'UITableViewHeaderFooterView',
-            // 'UIViewConfigurationState',
+            'NSExpression',
+            'Helpers',
+            'MapLibreRegistry',
+            'Extensions',
+            // 'MLNMapView',
+            'MLNStyle',
+            'MLNStyleLayer',
+            'MLNOfflineStorage',
+            'MLNCoordinateBounds',
+            'CLLocationCoordinate2D',
+            'MLNBackgroundStyleLayer',
+            'MLNCircleStyleLayer',
+            'MLNFillExtrusionStyleLayer',
+            'MLNFillStyleLayer',
+            'MLNHeatmapStyleLayer',
+            'MLNHillshadeStyleLayer',
+            'MLNLineStyleLayer',
+            'MLNRasterStyleLayer',
+            'MLNSymbolStyleLayer',
+            'MLNTilePyramidOfflineRegion',
+            'MLNOfflinePack',
+            'MLNTileSource',
+            'MLNShape',
+            'MLNShapeSource',
+            'MLNImageSource',
+            'MLNVectorTileSource',
+            'MLNRasterTileSource',
+            'MLNRasterDEMSource',
+            'MLNCoordinateQuad',
+            'MLNUserTrackingMode',
+            'MLNFeature',
+            'MLNMapCamera',
+          };
+          if (include.contains(decl.originalName)) return true;
+          return false;
+        },
+      ),
+      protocols: Protocols(
+        include: (decl) {
+          const include = {
             'NSExpression',
             'Helpers',
             'MapLibreRegistry',
             'Extensions',
           };
           if (include.contains(decl.originalName)) return true;
-          return decl.originalName.startsWith('MLN');
-        },
-      ),
-      protocols: Protocols(
-        include: (decl) {
-          return decl.originalName.startsWith('MLN');
+          return false;
         },
         includeMember: (declaration, member) => true,
       ),
