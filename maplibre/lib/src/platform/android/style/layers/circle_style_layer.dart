@@ -151,6 +151,7 @@ class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
   @override
   set filter(Expression? value) => using((arena) {
     final jFilter = value?.toJExpression(arena)?..releasedBy(arena);
+
     /// TODO handle null, MLN Android does not allow setting filter to null
     if (jFilter != null) jLayer.setFilter(jFilter);
   });

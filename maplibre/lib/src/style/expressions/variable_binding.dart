@@ -2,37 +2,37 @@ part of 'expressions.dart';
 
 /// {@template let-expression}
 /// Binds expressions to named variables, which can then be referenced in the
-/// result expression using `["var", "variable_name"]`.
+/// result expression using [VarExpr].
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#let
 /// {@endtemplate}
-extension type const LetExpression._(List<Object?> json) implements Expression {
-  /// Create a new [let] expression.
-  /// - `var_name_i`: string literal- The name of the i-th variable.
-  /// - `var_value_i`: any- The value of the i-th variable.
-  /// - `expression`: any- The expression within which the named variables can be referenced.
-  LetExpression({
+extension type const LetExpr._(List<Object?> json) implements Expression {
+  /// Create a new [LetExpr] expression.
+  LetExpr({
     required Map<String, Object?> variables,
     required Expression expression,
   }) : json = [
-    operator,
-    ...variables.entries.expand((e) => [e.key, e.value]),
-    expression,
-  ];
+         op,
+         ...variables.entries.expand((e) => [e.key, e.value]),
+         expression,
+       ];
 
-  /// The operator for [literal] expressions.
-  static const String operator = 'let';
+  /// The operator for `literal` expressions.
+  static const String op = 'let';
 }
 
 /// {@template var-expression}
-/// References variable bound using [let].
+/// References variable bound using [LetExpr].
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#var
 /// {@endtemplate}
-extension type const VarExpression._(List<Object?> json) implements Expression {
-  /// Create a new [var] expression.
-  VarExpression(String variableName) : json = [operator, variableName];
+extension type const VarExpr._(List<Object?> json) implements Expression {
+  /// Create a new `var` expression.
+  VarExpr.string(String variableName) : json = [op, variableName];
 
-  /// The operator for [var] expressions.
-  static const String operator = 'var';
+  /// Create a new `var` expression.
+  VarExpr.expr(Expression expression) : json = [op, expression];
+
+  /// The operator for `var` expressions.
+  static const String op = 'var';
 }

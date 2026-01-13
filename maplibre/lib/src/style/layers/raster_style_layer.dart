@@ -151,8 +151,9 @@ abstract interface class RasterStyleLayer implements StyleLayerWithSource {
   set resampling(PropertyValue<RasterResampling> value);
 
   /// Default value for [resampling] property.
-  static const defaultResampling =
-      PropertyValue<RasterResampling>.value(RasterResampling.linear);
+  static const defaultResampling = PropertyValue<RasterResampling>.value(
+    RasterResampling.linear,
+  );
 
   /// Fade duration when a new tile is added, or when a video is started or its
   /// coordinates are updated.

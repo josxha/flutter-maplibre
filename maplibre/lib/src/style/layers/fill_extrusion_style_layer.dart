@@ -23,8 +23,7 @@ abstract interface class FillExtrusionStyleLayer
     PropertyValue<double> height = defaultHeight,
     PropertyValue<double> base = defaultBase,
     PropertyValue<bool> verticalGradient = defaultVerticalGradient,
-    PropertyValue<Offset> translate =
-        StyleLayerWithTranslate.defaultTranslate,
+    PropertyValue<Offset> translate = StyleLayerWithTranslate.defaultTranslate,
     PropertyValue<ReferenceSpace> translateAnchor =
         StyleLayerWithTranslate.defaultTranslateAnchor,
   }) => switch (kIsWeb) {

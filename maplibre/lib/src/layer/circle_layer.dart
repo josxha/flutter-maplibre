@@ -47,12 +47,11 @@ class CircleLayer extends Layer<Feature<Point>> {
     maxZoom: maxZoom,
     radius: PropertyValue.value(radius),
     color: PropertyValue.value(color),
-    blur:  PropertyValue.value(blur),
+    blur: PropertyValue.value(blur),
     opacity: PropertyValue.value(opacity),
     strokeWidth: PropertyValue.value(strokeWidth),
     strokeColor: PropertyValue.value(strokeColor),
     strokeOpacity: PropertyValue.value(strokeOpacity),
-
   );
 
   @override
