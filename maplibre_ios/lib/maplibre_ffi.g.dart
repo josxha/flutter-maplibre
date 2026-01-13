@@ -46597,7 +46597,7 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setURL_, value?.ref.pointer ?? ff
 }
 
 late final _class_MLNOfflinePack = objc.getClass("MLNOfflinePack");
-late final _protocol_MLNOfflineRegion = objc.getProtocol("MapLibre.MLNOfflineRegion");
+late final _protocol_MLNOfflineRegion = objc.getProtocol("MLNOfflineRegion");
 
 /// MLNOfflineRegion
 extension type MLNOfflineRegion._(objc.ObjCProtocol object$) implements objc.ObjCProtocol {

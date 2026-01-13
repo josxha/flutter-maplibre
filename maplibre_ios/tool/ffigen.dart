@@ -82,7 +82,6 @@ void main(List<String> args) {
             'Helpers',
             'MapLibreRegistry',
             'Extensions',
-            'MLN.*',
           };
           if (include.contains(decl.originalName)) return true;
           return decl.originalName.startsWith('MLN');
@@ -92,19 +91,6 @@ void main(List<String> args) {
         include: (decl) {
           return decl.originalName.startsWith('MLN');
         },
-        module: (decl) => const {
-          'MapLibreRegistry': 'maplibre_ios',
-          'Helpers': 'maplibre_ios',
-          'Extensions': 'maplibre_ios',
-          'MLNMapView': 'MapLibre',
-          'MLNMapCamera': 'MapLibre',
-          'MLNVectorTileSource': 'MapLibre',
-          'MLNSymbolStyleLayer': 'MapLibre',
-          'MLNOfflinePack': 'MapLibre',
-          'MLNOfflineRegion': 'MapLibre',
-          'UIImage': 'UIKit',
-          'UIScreen': 'UIKit',
-        }[decl.originalName],
         includeMember: (declaration, member) => true,
       ),
     ),
