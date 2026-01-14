@@ -3,6 +3,7 @@ import 'package:flutter/painting.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/platform/android/style/layers/style_layer.dart';
 import 'package:maplibre/src/platform/ios/style/layers/background_style_layer.dart';
+import 'package:maplibre/src/platform/ios/style/layers/circle_style_layer.dart';
 import 'package:maplibre/src/platform/web/style/layers/background_style_layer.dart';
 
 part 'background_style_layer.dart';

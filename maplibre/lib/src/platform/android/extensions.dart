@@ -181,11 +181,141 @@ extension ExpressionExt on Expression {
 /// Extension methods for the [jni.Expression] class. Not exported publicly.
 extension JExpressionExt on jni.Expression {
   /// Convert a [jni.Expression] to an [Expression].
-  Expression toDartExpression({bool releaseOriginal = false}) => using((arena) {
+  Expression toDart({bool releaseOriginal = false}) => using((arena) {
     final expressionString = toString$2()!.toDartString(releaseOriginal: true);
     if (releaseOriginal) release();
     final json = jsonDecode(expressionString) as List<Object?>;
     final expression = Expression.fromJson(json);
     return expression;
   });
+}
+
+/// Extension methods for the [jni.PropertyValue] class. Not exported publicly.
+extension JStringPropertyValueExt on jni.PropertyValue<JString?> {
+  /// Convert a [jni.PropertyValue] to a [PropertyValue<String>].
+  PropertyValue<String>? toDart({bool releaseOriginal = false}) =>
+      using((arena) {
+        if (isNull$1()) return null;
+        if (isExpression()) {
+          final jExpression = getExpression()?..releasedBy(arena);
+          if (jExpression == null) return null;
+          return PropertyValue.expression(jExpression.toDart());
+        }
+        final jValue = getValue();
+        if (jValue == null) return null;
+        final value = jValue.toDartString(releaseOriginal: true);
+        if (releaseOriginal) release();
+        return PropertyValue.value(value);
+      });
+
+  /// Convert a [jni.PropertyValue] to a [PropertyValue<Color>].
+  PropertyValue<Color>? toDartColor({bool releaseOriginal = false}) =>
+      using((arena) {
+        if (isNull$1()) return null;
+        if (isExpression()) {
+          final jExpression = getExpression()?..releasedBy(arena);
+          if (jExpression == null) return null;
+          return PropertyValue.expression(jExpression.toDart());
+        }
+        final jValue = getColorInt();
+        if (jValue == null) return null;
+        final value = jValue.intValue(releaseOriginal: true);
+        if (releaseOriginal) release();
+        return PropertyValue.value(Color(value));
+      });
+
+  /// Convert a [jni.PropertyValue] to a [PropertyValue<Color>].
+  PropertyValue<ReferenceSpace>? toDartReferenceSpace({
+    bool releaseOriginal = false,
+  }) => using((arena) {
+    if (isNull$1()) return null;
+    if (isExpression()) {
+      final jExpression = getExpression()?..releasedBy(arena);
+      if (jExpression == null) return null;
+      return PropertyValue.expression(jExpression.toDart());
+    }
+    final jValue = getValue();
+    if (jValue == null) return null;
+    final value = jValue.toDartString(releaseOriginal: true);
+    if (releaseOriginal) release();
+    return PropertyValue.value(
+      ReferenceSpace.values.firstWhere((e) => e.name == value),
+    );
+  });
+}
+
+/// Extension methods for the [jni.PropertyValue] class. Not exported publicly.
+extension JDoublePropertyValueExt on jni.PropertyValue<JDouble?> {
+  /// Convert a [jni.PropertyValue] to a [PropertyValue<double>].
+  PropertyValue<double>? toDart({bool releaseOriginal = false}) =>
+      using((arena) {
+        if (isNull$1()) return null;
+        if (isExpression()) {
+          final jExpression = getExpression()?..releasedBy(arena);
+          if (jExpression == null) return null;
+          return PropertyValue.expression(jExpression.toDart());
+        }
+        final jValue = getValue();
+        if (jValue == null) return null;
+        final value = jValue.doubleValue(releaseOriginal: true);
+        if (releaseOriginal) release();
+        return PropertyValue.value(value);
+      });
+}
+
+/// Extension methods for the [jni.PropertyValue] class. Not exported publicly.
+extension JFloatPropertyValueExt on jni.PropertyValue<JFloat?> {
+  /// Convert a [jni.PropertyValue] to a [PropertyValue<double>].
+  PropertyValue<double>? toDart({bool releaseOriginal = false}) =>
+      using((arena) {
+        if (isNull$1()) return null;
+        if (isExpression()) {
+          final jExpression = getExpression()?..releasedBy(arena);
+          if (jExpression == null) return null;
+          return PropertyValue.expression(jExpression.toDart());
+        }
+        final jValue = getValue();
+        if (jValue == null) return null;
+        final value = jValue.doubleValue(releaseOriginal: true);
+        if (releaseOriginal) release();
+        return PropertyValue.value(value);
+      });
+}
+
+/// Extension methods for the [jni.PropertyValue] class. Not exported publicly.
+extension JBooleanPropertyValueExt on jni.PropertyValue<JBoolean?> {
+  /// Convert a [jni.PropertyValue] to a [PropertyValue<double>].
+  PropertyValue<bool>? toDart({bool releaseOriginal = false}) =>
+      using((arena) {
+        if (isNull$1()) return null;
+        if (isExpression()) {
+          final jExpression = getExpression()?..releasedBy(arena);
+          if (jExpression == null) return null;
+          return PropertyValue.expression(jExpression.toDart());
+        }
+        final jValue = getValue();
+        if (jValue == null) return null;
+        final value = jValue.booleanValue(releaseOriginal: true);
+        if (releaseOriginal) release();
+        return PropertyValue.value(value);
+      });
+}
+
+/// Extension methods for the [jni.PropertyValue] class. Not exported publicly.
+extension JFloatArrayPropertyValueExt on jni.PropertyValue<JArray<JFloat?>?> {
+  /// Convert a [jni.PropertyValue] to a [PropertyValue<Offset>].
+  PropertyValue<Offset>? toDartOffset({bool releaseOriginal = false}) =>
+      using((arena) {
+        if (isNull$1()) return null;
+        if (isExpression()) {
+          final jExpression = getExpression()!..releasedBy(arena);
+          final expression = jExpression.toDart(releaseOriginal: true);
+          return PropertyValue.expression(expression);
+        }
+        final jValue = getValue()!..releasedBy(arena);
+        final x = jValue[0]!.floatValue(releaseOriginal: true);
+        final y = jValue[1]!.floatValue(releaseOriginal: true);
+        if (releaseOriginal) release();
+        return PropertyValue.value(Offset(x, y));
+      });
 }

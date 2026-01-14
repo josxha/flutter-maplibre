@@ -6,7 +6,7 @@ import 'package:maplibre/src/platform/ios/style/layers/style_layer.dart';
 import 'package:maplibre_ios/maplibre_ffi.g.dart';
 import 'package:maplibre_ios/objective_c.dart';
 
-/// A layer that contains circles for iOS platform.
+/// iOS implementation of [BackgroundStyleLayer].
 class BackgroundStyleLayerIos extends StyleLayerIos<MLNBackgroundStyleLayer>
     implements BackgroundStyleLayer {
   /// Default constructor for a [BackgroundStyleLayerIos] instance.

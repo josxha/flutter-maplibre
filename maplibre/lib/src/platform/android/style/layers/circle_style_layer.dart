@@ -1,6 +1,6 @@
 part of 'style_layer.dart';
 
-/// A layer that contains circles for Android platform.
+/// Android implementation of [CircleStyleLayer].
 class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
     implements CircleStyleLayer {
   /// Factory for a [CircleStyleLayerAndroid] instance.
@@ -57,17 +57,9 @@ class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
     : super.fromNativeLayer();
 
   @override
-  PropertyValue<double> get opacity => using((arena) {
-    final jProperty = jLayer.getCircleOpacity()..releasedBy(arena);
-    if (jProperty.isExpression()) {
-      final jExpression = jProperty.getExpression()!..releasedBy(arena);
-      final expression = jExpression.toDartExpression(releaseOriginal: true);
-      return PropertyValue.expression(expression);
-    }
-    final jValue = jProperty.getValue()!..releasedBy(arena);
-    final value = jValue.floatValue(releaseOriginal: true);
-    return PropertyValue.value(value);
-  });
+  PropertyValue<double> get opacity =>
+      jLayer.getCircleOpacity().toDart(releaseOriginal: true) ??
+      CircleStyleLayer.defaultOpacity;
 
   @override
   set opacity(PropertyValue<double> property) => using((arena) {
@@ -85,17 +77,9 @@ class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
   });
 
   @override
-  PropertyValue<Color> get color => using((arena) {
-    final jProperty = jLayer.getCircleColor()..releasedBy(arena);
-    if (jProperty.isExpression()) {
-      final jExpression = jProperty.getExpression()!..releasedBy(arena);
-      final expression = jExpression.toDartExpression(releaseOriginal: true);
-      return PropertyValue.expression(expression);
-    }
-    final jValue = jProperty.getColorInt()!..releasedBy(arena);
-    final value = jValue.intValue(releaseOriginal: true);
-    return PropertyValue.value(Color(value));
-  });
+  PropertyValue<Color> get color =>
+      jLayer.getCircleColor().toDartColor(releaseOriginal: true) ??
+      CircleStyleLayer.defaultColor;
 
   @override
   set color(PropertyValue<Color> property) => using((arena) {
@@ -114,17 +98,9 @@ class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
   });
 
   @override
-  PropertyValue<double> get blur => using((arena) {
-    final jProperty = jLayer.getCircleBlur()..releasedBy(arena);
-    if (jProperty.isExpression()) {
-      final jExpression = jProperty.getExpression()!..releasedBy(arena);
-      final expression = jExpression.toDartExpression(releaseOriginal: true);
-      return PropertyValue.expression(expression);
-    }
-    final jValue = jProperty.getValue()!..releasedBy(arena);
-    final value = jValue.floatValue(releaseOriginal: true);
-    return PropertyValue.value(value);
-  });
+  PropertyValue<double> get blur =>
+      jLayer.getCircleBlur().toDart(releaseOriginal: true) ??
+      CircleStyleLayer.defaultBlur;
 
   @override
   set blur(PropertyValue<double> property) => using((arena) {
@@ -145,32 +121,27 @@ class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
   Expression? get filter => using((arena) {
     final jFilter = jLayer.getFilter();
     if (jFilter == null) return null;
-    return jFilter.toDartExpression(releaseOriginal: true);
+    return jFilter.toDart(releaseOriginal: true);
   });
 
   @override
-  set filter(Expression? value) => using((arena) {
-    final jFilter = value?.toJExpression(arena)?..releasedBy(arena);
-
-    /// TODO handle null, MLN Android does not allow setting filter to null
+  set filter(Expression? expression) => using((arena) {
+    if (expression == null) {
+      throw UnsupportedError(
+        'Setting filter for CircleStyleLayer to null '
+            'is not implemented yet.',
+      );
+    }
+    final jFilter = expression.toJExpression(arena)?..releasedBy(arena);
     if (jFilter != null) jLayer.setFilter(jFilter);
   });
 
   @override
-  PropertyValue<ReferenceSpace> get pitchAlignment => using((arena) {
-    final jProperty = jLayer.getCirclePitchAlignment()..releasedBy(arena);
-    if (jProperty.isExpression()) {
-      final jExpression = jProperty.getExpression()!;
-      final expression = jExpression.toDartExpression(releaseOriginal: true);
-      return PropertyValue.expression(expression);
-    }
-    final jValue = jProperty.getValue()!..releasedBy(arena);
-    final stringValue = jValue.toDartString(releaseOriginal: true);
-    final value = ReferenceSpace.values.firstWhere(
-      (e) => e.name == stringValue,
-    );
-    return PropertyValue.value(value);
-  });
+  PropertyValue<ReferenceSpace> get pitchAlignment =>
+      jLayer.getCirclePitchAlignment().toDartReferenceSpace(
+        releaseOriginal: true,
+      ) ??
+      CircleStyleLayer.defaultPitchAlignment;
 
   @override
   set pitchAlignment(PropertyValue<ReferenceSpace> property) => using((arena) {
@@ -188,20 +159,11 @@ class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
   });
 
   @override
-  PropertyValue<ReferenceSpace> get pitchScale => using((arena) {
-    final jProperty = jLayer.getCirclePitchScale()..releasedBy(arena);
-    if (jProperty.isExpression()) {
-      final jExpression = jProperty.getExpression()!;
-      final expression = jExpression.toDartExpression(releaseOriginal: true);
-      return PropertyValue.expression(expression);
-    }
-    final jValue = jProperty.getValue()!..releasedBy(arena);
-    final stringValue = jValue.toDartString(releaseOriginal: true);
-    final value = ReferenceSpace.values.firstWhere(
-      (e) => e.name == stringValue,
-    );
-    return PropertyValue.value(value);
-  });
+  PropertyValue<ReferenceSpace> get pitchScale =>
+      jLayer.getCirclePitchScale().toDartReferenceSpace(
+        releaseOriginal: true,
+      ) ??
+      CircleStyleLayer.defaultPitchScale;
 
   @override
   set pitchScale(PropertyValue<ReferenceSpace> value) => using((arena) {
@@ -219,17 +181,9 @@ class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
   });
 
   @override
-  PropertyValue<double> get radius => using((arena) {
-    final jProperty = jLayer.getCircleRadius()..releasedBy(arena);
-    if (jProperty.isExpression()) {
-      final jExpression = jProperty.getExpression()!..releasedBy(arena);
-      final expression = jExpression.toDartExpression(releaseOriginal: true);
-      return PropertyValue.expression(expression);
-    }
-    final jValue = jProperty.getValue()!..releasedBy(arena);
-    final value = jValue.floatValue(releaseOriginal: true);
-    return PropertyValue.value(value);
-  });
+  PropertyValue<double> get radius =>
+      jLayer.getCircleRadius().toDart(releaseOriginal: true) ??
+      CircleStyleLayer.defaultRadius;
 
   @override
   set radius(PropertyValue<double> value) => using((arena) {
@@ -247,17 +201,8 @@ class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
   });
 
   @override
-  PropertyValue<double>? get sortKey => using((arena) {
-    final jProperty = jLayer.getCircleSortKey()..releasedBy(arena);
-    if (jProperty.isExpression()) {
-      final jExpression = jProperty.getExpression()!..releasedBy(arena);
-      final expression = jExpression.toDartExpression(releaseOriginal: true);
-      return PropertyValue.expression(expression);
-    }
-    final jValue = jProperty.getValue()!..releasedBy(arena);
-    final value = jValue.floatValue(releaseOriginal: true);
-    return PropertyValue.value(value);
-  });
+  PropertyValue<double>? get sortKey =>
+      jLayer.getCircleSortKey().toDart(releaseOriginal: true);
 
   @override
   set sortKey(PropertyValue<double>? value) => using((arena) {
@@ -281,10 +226,8 @@ class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
       jLayer.getSourceId().toDartString(releaseOriginal: true);
 
   @override
-  String? get sourceLayerId => using((arena) {
-    final jValue = jLayer.getSourceLayer()..releasedBy(arena);
-    return jValue.toDartString(releaseOriginal: true);
-  });
+  String? get sourceLayerId =>
+      jLayer.getSourceLayer().toDartString(releaseOriginal: true);
 
   @override
   set sourceLayerId(String value) => using((arena) {
@@ -293,17 +236,9 @@ class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
   });
 
   @override
-  PropertyValue<Color> get strokeColor => using((arena) {
-    final jProperty = jLayer.getCircleStrokeColor()..releasedBy(arena);
-    if (jProperty.isExpression()) {
-      final jExpression = jProperty.getExpression()!..releasedBy(arena);
-      final expression = jExpression.toDartExpression(releaseOriginal: true);
-      return PropertyValue.expression(expression);
-    }
-    final jValue = jProperty.getColorInt()!..releasedBy(arena);
-    final value = jValue.intValue(releaseOriginal: true);
-    return PropertyValue.value(Color(value));
-  });
+  PropertyValue<Color> get strokeColor =>
+      jLayer.getCircleStrokeColor().toDartColor(releaseOriginal: true) ??
+      CircleStyleLayer.defaultStrokeColor;
 
   @override
   set strokeColor(PropertyValue<Color> value) => using((arena) {
@@ -321,17 +256,9 @@ class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
   });
 
   @override
-  PropertyValue<double> get strokeOpacity => using((arena) {
-    final jProperty = jLayer.getCircleStrokeOpacity()..releasedBy(arena);
-    if (jProperty.isExpression()) {
-      final jExpression = jProperty.getExpression()!..releasedBy(arena);
-      final expression = jExpression.toDartExpression(releaseOriginal: true);
-      return PropertyValue.expression(expression);
-    }
-    final jValue = jProperty.getValue()!..releasedBy(arena);
-    final value = jValue.floatValue(releaseOriginal: true);
-    return PropertyValue.value(value);
-  });
+  PropertyValue<double> get strokeOpacity =>
+      jLayer.getCircleStrokeOpacity().toDart(releaseOriginal: true) ??
+      CircleStyleLayer.defaultStrokeOpacity;
 
   @override
   set strokeOpacity(PropertyValue<double> value) => using((arena) {
@@ -349,17 +276,9 @@ class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
   });
 
   @override
-  PropertyValue<double> get strokeWidth => using((arena) {
-    final jProperty = jLayer.getCircleStrokeWidth()..releasedBy(arena);
-    if (jProperty.isExpression()) {
-      final jExpression = jProperty.getExpression()!..releasedBy(arena);
-      final expression = jExpression.toDartExpression(releaseOriginal: true);
-      return PropertyValue.expression(expression);
-    }
-    final jValue = jProperty.getValue()!..releasedBy(arena);
-    final value = jValue.floatValue(releaseOriginal: true);
-    return PropertyValue.value(value);
-  });
+  PropertyValue<double> get strokeWidth =>
+      jLayer.getCircleStrokeWidth().toDart(releaseOriginal: true) ??
+      CircleStyleLayer.defaultStrokeWidth;
 
   @override
   set strokeWidth(PropertyValue<double> value) => using((arena) {
@@ -377,18 +296,9 @@ class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
   });
 
   @override
-  PropertyValue<Offset> get translate => using((arena) {
-    final jProperty = jLayer.getCircleTranslate()..releasedBy(arena);
-    if (jProperty.isExpression()) {
-      final jExpression = jProperty.getExpression()!..releasedBy(arena);
-      final expression = jExpression.toDartExpression(releaseOriginal: true);
-      return PropertyValue.expression(expression);
-    }
-    final jValue = jProperty.getValue()!..releasedBy(arena);
-    final x = jValue[0]!.floatValue(releaseOriginal: true);
-    final y = jValue[1]!.floatValue(releaseOriginal: true);
-    return PropertyValue.value(Offset(x, y));
-  });
+  PropertyValue<Offset> get translate =>
+      jLayer.getCircleTranslate().toDartOffset(releaseOriginal: true) ??
+      StyleLayerWithTranslate.defaultTranslate;
 
   @override
   set translate(PropertyValue<Offset> value) => using((arena) {
@@ -409,20 +319,11 @@ class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
   });
 
   @override
-  PropertyValue<ReferenceSpace> get translateAnchor => using((arena) {
-    final jProperty = jLayer.getCircleTranslateAnchor()..releasedBy(arena);
-    if (jProperty.isExpression()) {
-      final jExpression = jProperty.getExpression()!;
-      final expression = jExpression.toDartExpression(releaseOriginal: true);
-      return PropertyValue.expression(expression);
-    }
-    final jValue = jProperty.getValue()!..releasedBy(arena);
-    final stringValue = jValue.toDartString(releaseOriginal: true);
-    final value = ReferenceSpace.values.firstWhere(
-      (e) => e.name == stringValue,
-    );
-    return PropertyValue.value(value);
-  });
+  PropertyValue<ReferenceSpace> get translateAnchor =>
+      jLayer.getCircleTranslateAnchor().toDartReferenceSpace(
+        releaseOriginal: true,
+      ) ??
+      StyleLayerWithTranslate.defaultTranslateAnchor;
 
   @override
   set translateAnchor(PropertyValue<ReferenceSpace> value) => using((arena) {

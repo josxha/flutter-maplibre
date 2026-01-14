@@ -48,15 +48,3 @@ extension type const Interpolate<T extends Object?>._(List<Object?> json)
   /// The key of the feature state to retrieve.
   T get value => json[1] as T;
 }
-
-/// {@template get-expression}
-///
-@Deprecated('Rework this expression')
-extension type const Get<T extends Object?>._(List<Object?> json)
-    implements Expression {
-  /// Create a new interpolate expression.
-  Get(String key) : json = [op, key];
-
-  /// The operator for [interpolate] expressions.
-  static const String op = 'interpolate';
-}

@@ -1,6 +1,6 @@
 part of 'style_layer.dart';
 
-/// A layer that contains circles for Android platform.
+/// Android implementation of [BackgroundStyleLayer].
 class BackgroundStyleLayerAndroid extends StyleLayerAndroid<jni.BackgroundLayer>
     implements BackgroundStyleLayer {
   /// Factory for a [BackgroundStyleLayerAndroid] instance.
@@ -29,17 +29,9 @@ class BackgroundStyleLayerAndroid extends StyleLayerAndroid<jni.BackgroundLayer>
     : super.fromNativeLayer();
 
   @override
-  PropertyValue<double> get opacity => using((arena) {
-    final jProperty = jLayer.getBackgroundOpacity()..releasedBy(arena);
-    if (jProperty.isExpression()) {
-      final jExpression = jProperty.getExpression()!..releasedBy(arena);
-      final expression = jExpression.toDartExpression(releaseOriginal: true);
-      return PropertyValue.expression(expression);
-    }
-    final jValue = jProperty.getValue()!..releasedBy(arena);
-    final value = jValue.floatValue(releaseOriginal: true);
-    return PropertyValue.value(value);
-  });
+  PropertyValue<double> get opacity =>
+      jLayer.getBackgroundOpacity().toDart(releaseOriginal: true) ??
+      BackgroundStyleLayer.defaultOpacity;
 
   @override
   set opacity(PropertyValue<double> property) => using((arena) {
@@ -57,20 +49,8 @@ class BackgroundStyleLayerAndroid extends StyleLayerAndroid<jni.BackgroundLayer>
   });
 
   @override
-  PropertyValue<String>? get pattern => using((arena) {
-    final jProperty = jLayer.getBackgroundPattern()..releasedBy(arena);
-    if (jProperty.isNull$1()) {
-      return null;
-    }
-    if (jProperty.isExpression()) {
-      final jExpression = jProperty.getExpression()!..releasedBy(arena);
-      final expression = jExpression.toDartExpression(releaseOriginal: true);
-      return PropertyValue.expression(expression);
-    }
-    final jValue = jProperty.getValue()?..releasedBy(arena);
-    final value = jValue?.toDartString(releaseOriginal: true);
-    return PropertyValue.value(value!);
-  });
+  PropertyValue<String>? get pattern =>
+      jLayer.getBackgroundPattern().toDart(releaseOriginal: true);
 
   @override
   set pattern(PropertyValue<String>? property) => using((arena) {
@@ -90,17 +70,9 @@ class BackgroundStyleLayerAndroid extends StyleLayerAndroid<jni.BackgroundLayer>
   });
 
   @override
-  PropertyValue<Color> get color => using((arena) {
-    final jProperty = jLayer.getBackgroundColor()..releasedBy(arena);
-    if (jProperty.isExpression()) {
-      final jExpression = jProperty.getExpression()!..releasedBy(arena);
-      final expression = jExpression.toDartExpression(releaseOriginal: true);
-      return PropertyValue.expression(expression);
-    }
-    final jValue = jProperty.getColorInt()!..releasedBy(arena);
-    final value = jValue.intValue(releaseOriginal: true);
-    return PropertyValue.value(Color(value));
-  });
+  PropertyValue<Color> get color =>
+      jLayer.getBackgroundColor().toDartColor() ??
+      BackgroundStyleLayer.defaultColor;
 
   @override
   set color(PropertyValue<Color> property) => using((arena) {

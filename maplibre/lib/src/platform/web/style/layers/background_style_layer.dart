@@ -5,7 +5,7 @@ import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/platform/web/interop/interop.dart' as js;
 import 'package:maplibre/src/platform/web/style/layers/style_layer.dart';
 
-/// A layer that contains circles for web platform.
+/// Web implementation of [BackgroundStyleLayer].
 class BackgroundStyleLayerWeb extends StyleLayerWeb<js.LayerSpecification>
     implements BackgroundStyleLayer {
   /// Default constructor for a [BackgroundStyleLayerWeb] instance.

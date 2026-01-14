@@ -7,17 +7,15 @@ import 'package:maplibre/src/platform/android/jni.g.dart' as jni;
 
 part 'background_style_layer.dart';
 part 'circle_style_layer.dart';
+part 'fill_extrusion_style_layer.dart';
+part 'fill_style_layer.dart';
+part 'heatmap_style_layer.dart';
+part 'hillshade_style_layer.dart';
+part 'line_style_layer.dart';
+part 'raster_style_layer.dart';
+part 'symbol_style_layer.dart';
 
-// part 'color_relief_style_layer.dart';
-// part 'fill_extrusion_style_layer.dart';
-// part 'fill_style_layer.dart';
-// part 'heatmap_style_layer.dart';
-// part 'hillshade_style_layer.dart';
-// part 'line_style_layer.dart';
-// part 'raster_style_layer.dart';
-// part 'symbol_style_layer.dart';
-
-/// The base Layer class for Android platform that can't be used directly.
+/// Android implementation of [StyleLayer].
 abstract class StyleLayerAndroid<JLayer extends jni.Layer>
     implements StyleLayer {
   /// Construct an [StyleLayerAndroid] from a JNI layer.

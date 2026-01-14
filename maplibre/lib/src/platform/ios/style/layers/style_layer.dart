@@ -3,7 +3,7 @@ import 'package:maplibre_ios/maplibre_ffi.g.dart';
 
 export 'background_style_layer.dart';
 
-/// An interface representing a style layer for the iOS platform.
+/// iOS implementation of [StyleLayer].
 abstract class StyleLayerIos<FfiLayer extends MLNStyleLayer>
     implements StyleLayer {
   /// Construct an [StyleLayerIos] from a ObjC layer.

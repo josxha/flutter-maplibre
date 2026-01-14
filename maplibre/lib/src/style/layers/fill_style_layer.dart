@@ -133,7 +133,7 @@ abstract interface class FillStyleLayer
   /// expressions. Transitionable.
   PropertyValue<Color> get outlineColor;
 
-  set outlineColor(PropertyValue<double> value);
+  set outlineColor(PropertyValue<Color> value);
 
   /// Default value of [outlineColor].
   static const defaultOutlineColor = PropertyValue<Color>.value(
