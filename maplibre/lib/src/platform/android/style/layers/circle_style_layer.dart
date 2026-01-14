@@ -308,10 +308,7 @@ class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
         ?..releasedBy(arena);
       jProperty = jni.PropertyFactory.circleTranslate$1(jExpression);
     } else {
-      final offset = value.value;
-      final jArray = JArray(JFloat.nullableType, 2)..releasedBy(arena);
-      jArray[0] = offset.dx.toJFloat()..releasedBy(arena);
-      jArray[1] = offset.dy.toJFloat()..releasedBy(arena);
+      final jArray = value.value.toJFloatArray(arena);
       jProperty = jni.PropertyFactory.circleTranslate(jArray);
     }
     jProperty?.releasedBy(arena);

@@ -55,6 +55,14 @@ extension OffsetExt on Offset {
   /// Convert an [Offset] to an [jni.PointF].
   jni.PointF toJPointF({required Arena arena}) =>
       jni.PointF.new$3(dx, dy)..releasedBy(arena);
+      
+  /// Convert an [Offset] to a [JArray<JFloat>].
+  JArray<JFloat?> toJFloatArray(Arena arena) {
+    final jArray = JArray(JFloat.nullableType, 2)..releasedBy(arena);
+    jArray[0] = dx.toJFloat()..releasedBy(arena);
+    jArray[1] = dy.toJFloat()..releasedBy(arena);
+    return jArray;
+  }
 }
 
 /// Extension methods for the [LngLatBounds] class. Not exported publicly.
@@ -285,20 +293,19 @@ extension JFloatPropertyValueExt on jni.PropertyValue<JFloat?> {
 /// Extension methods for the [jni.PropertyValue] class. Not exported publicly.
 extension JBooleanPropertyValueExt on jni.PropertyValue<JBoolean?> {
   /// Convert a [jni.PropertyValue] to a [PropertyValue<double>].
-  PropertyValue<bool>? toDart({bool releaseOriginal = false}) =>
-      using((arena) {
-        if (isNull$1()) return null;
-        if (isExpression()) {
-          final jExpression = getExpression()?..releasedBy(arena);
-          if (jExpression == null) return null;
-          return PropertyValue.expression(jExpression.toDart());
-        }
-        final jValue = getValue();
-        if (jValue == null) return null;
-        final value = jValue.booleanValue(releaseOriginal: true);
-        if (releaseOriginal) release();
-        return PropertyValue.value(value);
-      });
+  PropertyValue<bool>? toDart({bool releaseOriginal = false}) => using((arena) {
+    if (isNull$1()) return null;
+    if (isExpression()) {
+      final jExpression = getExpression()?..releasedBy(arena);
+      if (jExpression == null) return null;
+      return PropertyValue.expression(jExpression.toDart());
+    }
+    final jValue = getValue();
+    if (jValue == null) return null;
+    final value = jValue.booleanValue(releaseOriginal: true);
+    if (releaseOriginal) release();
+    return PropertyValue.value(value);
+  });
 }
 
 /// Extension methods for the [jni.PropertyValue] class. Not exported publicly.

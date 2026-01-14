@@ -5,7 +5,7 @@ class FillStyleLayerAndroid extends StyleLayerAndroid<jni.FillLayer>
     implements FillStyleLayer {
   /// Default constructor for [FillStyleLayerAndroid].
   factory FillStyleLayerAndroid({
-    required String layerId,
+    required String id,
     required String sourceId,
     required double minZoom,
     required double maxZoom,
@@ -22,7 +22,7 @@ class FillStyleLayerAndroid extends StyleLayerAndroid<jni.FillLayer>
   }) => using((arena) {
     final layer = FillStyleLayerAndroid.fromNativeLayer(
       jni.FillLayer(
-        layerId.toJString()..releasedBy(arena),
+        id.toJString()..releasedBy(arena),
         sourceId.toJString()..releasedBy(arena),
       )..releasedBy(arena),
     );
@@ -51,7 +51,17 @@ class FillStyleLayerAndroid extends StyleLayerAndroid<jni.FillLayer>
 
   @override
   set antialias(PropertyValue<bool> value) => using((arena) {
-    throw UnimplementedError('Setting properties is not implemented yet.');
+    final jni.PropertyValue? jProperty;
+    if (value.isExpression) {
+      final jExpression = value.expression.toJExpression(arena)
+        ?..releasedBy(arena);
+      jProperty = jni.PropertyFactory.fillAntialias$1(jExpression);
+    } else {
+      final jValue = value.value.toJBoolean()..releasedBy(arena);
+      jProperty = jni.PropertyFactory.fillAntialias(jValue);
+    }
+    jProperty?.releasedBy(arena);
+    jLayer.setProperty(jProperty);
   });
 
   @override
@@ -61,7 +71,18 @@ class FillStyleLayerAndroid extends StyleLayerAndroid<jni.FillLayer>
 
   @override
   set color(PropertyValue<Color> value) => using((arena) {
-    throw UnimplementedError('Setting properties is not implemented yet.');
+    final jni.PropertyValue? jProperty;
+    if (value.isExpression) {
+      jProperty = jni.PropertyFactory.fillColor$2(
+        value.expression.toJExpression(arena),
+      );
+    } else {
+      final jValue = value.value.toHexString().toJString()
+        ..releasedBy(arena);
+      jProperty = jni.PropertyFactory.fillColor$1(jValue);
+    }
+    jProperty?.releasedBy(arena);
+    jLayer.setProperty(jProperty);
   });
 
   @override
@@ -71,7 +92,17 @@ class FillStyleLayerAndroid extends StyleLayerAndroid<jni.FillLayer>
 
   @override
   set opacity(PropertyValue<double> value) => using((arena) {
-    throw UnimplementedError('Setting properties is not implemented yet.');
+    final jni.PropertyValue? jProperty;
+    if (value.isExpression) {
+      final jExpression = value.expression.toJExpression(arena)
+        ?..releasedBy(arena);
+      jProperty = jni.PropertyFactory.fillOpacity$1(jExpression);
+    } else {
+      final jValue = value.value.toJFloat()..releasedBy(arena);
+      jProperty = jni.PropertyFactory.fillOpacity(jValue);
+    }
+    jProperty?.releasedBy(arena);
+    jLayer.setProperty(jProperty);
   });
 
   @override
@@ -81,7 +112,18 @@ class FillStyleLayerAndroid extends StyleLayerAndroid<jni.FillLayer>
 
   @override
   set outlineColor(PropertyValue<Color> value) => using((arena) {
-    throw UnimplementedError('Setting properties is not implemented yet.');
+    final jni.PropertyValue? jProperty;
+    if (value.isExpression) {
+      jProperty = jni.PropertyFactory.fillOutlineColor$2(
+        value.expression.toJExpression(arena),
+      );
+    } else {
+      final jValue = value.value.toHexString().toJString()
+        ..releasedBy(arena);
+      jProperty = jni.PropertyFactory.fillOutlineColor$1(jValue);
+    }
+    jProperty?.releasedBy(arena);
+    jLayer.setProperty(jProperty);
   });
 
   @override
@@ -90,7 +132,19 @@ class FillStyleLayerAndroid extends StyleLayerAndroid<jni.FillLayer>
 
   @override
   set pattern(PropertyValue<String>? value) => using((arena) {
-    throw UnimplementedError('Setting properties is not implemented yet.');
+    final jni.PropertyValue? jProperty;
+    if (value == null) {
+      jProperty = jni.PropertyFactory.fillPattern(null);
+    } else if (value.isExpression) {
+      jProperty = jni.PropertyFactory.fillPattern$1(
+        value.expression.toJExpression(arena),
+      );
+    } else {
+      final jValue = value.value.toJString()..releasedBy(arena);
+      jProperty = jni.PropertyFactory.fillPattern(jValue);
+    }
+    jProperty?.releasedBy(arena);
+    jLayer.setProperty(jProperty);
   });
 
   @override
@@ -100,7 +154,17 @@ class FillStyleLayerAndroid extends StyleLayerAndroid<jni.FillLayer>
 
   @override
   set translate(PropertyValue<Offset> value) => using((arena) {
-    throw UnimplementedError('Setting properties is not implemented yet.');
+    final jni.PropertyValue? jProperty;
+    if (value.isExpression) {
+      final jExpression = value.expression.toJExpression(arena)
+        ?..releasedBy(arena);
+      jProperty = jni.PropertyFactory.fillTranslate$1(jExpression);
+    } else {
+      final jArray = value.value.toJFloatArray(arena);
+      jProperty = jni.PropertyFactory.fillTranslate(jArray);
+    }
+    jProperty?.releasedBy(arena);
+    jLayer.setProperty(jProperty);
   });
 
   @override
@@ -112,7 +176,17 @@ class FillStyleLayerAndroid extends StyleLayerAndroid<jni.FillLayer>
 
   @override
   set translateAnchor(PropertyValue<ReferenceSpace> value) => using((arena) {
-    throw UnimplementedError('Setting translateAnchor is not implemented yet.');
+    final jni.PropertyValue? jProperty;
+    if (value.isExpression) {
+      final jExpression = value.expression.toJExpression(arena)
+        ?..releasedBy(arena);
+      jProperty = jni.PropertyFactory.fillTranslateAnchor$1(jExpression);
+    } else {
+      final jValue = value.value.name.toJString()..releasedBy(arena);
+      jProperty = jni.PropertyFactory.fillTranslateAnchor(jValue);
+    }
+    jProperty?.releasedBy(arena);
+    jLayer.setProperty(jProperty);
   });
 
   @override
@@ -121,7 +195,9 @@ class FillStyleLayerAndroid extends StyleLayerAndroid<jni.FillLayer>
 
   @override
   set sourceLayerId(String? sourceLayerId) => using((arena) {
-    throw UnimplementedError('Setting sourceLayerId is not implemented yet.');
+    final jValue = sourceLayerId?.toJString();
+    jValue?.releasedBy(arena);
+    jLayer.setSourceLayer(jValue);
   });
 
   @override
@@ -133,10 +209,37 @@ class FillStyleLayerAndroid extends StyleLayerAndroid<jni.FillLayer>
       jLayer.getSourceId().toDartString(releaseOriginal: true);
 
   @override
-  Expression? filter;
+  Expression? get filter => using((arena) {
+    final jFilter = jLayer.getFilter()?..releasedBy(arena);
+    if (jFilter == null) return null;
+    return jFilter.toDart(releaseOriginal: true);
+  });
 
   @override
   set sortKey(PropertyValue<double>? value) => using((arena) {
-    throw UnimplementedError('Setting properties is not implemented yet.');
+    final jni.PropertyValue? jProperty;
+    if (value == null) {
+      jProperty = jni.PropertyFactory.fillSortKey(null);
+    } else if (value.isExpression) {
+      final jExpression = value.expression.toJExpression(arena)
+        ?..releasedBy(arena);
+      jProperty = jni.PropertyFactory.fillSortKey$1(jExpression);
+    } else {
+      final jValue = value.value.toJFloat()..releasedBy(arena);
+      jProperty = jni.PropertyFactory.fillSortKey(jValue);
+    }
+    jProperty?.releasedBy(arena);
+    jLayer.setProperty(jProperty);
+  });
+
+  @override
+  set filter(Expression? expression) => using((arena) {
+    if (expression == null) {
+      throw UnsupportedError(
+        'Setting filter for FillStyleLayer to null is not supported.',
+      );
+    }
+    final jFilter = expression.toJExpression(arena)?..releasedBy(arena);
+    if (jFilter != null) jLayer.setFilter(jFilter);
   });
 }

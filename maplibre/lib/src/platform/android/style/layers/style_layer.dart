@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flutter/painting.dart' show EdgeInsets;
 import 'package:jni/jni.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/platform/android/extensions.dart';

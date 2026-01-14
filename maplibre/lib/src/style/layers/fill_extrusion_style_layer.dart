@@ -48,11 +48,11 @@ abstract interface class FillExtrusionStyleLayer
       TargetPlatform.android => FillExtrusionStyleLayerAndroid(
         id: id,
         sourceId: sourceId,
+        sourceLayerId: sourceLayerId,
         minZoom: minZoom,
         maxZoom: maxZoom,
         visible: visible,
         filter: filter,
-        sourceLayerId: sourceLayerId,
         opacity: opacity,
         color: color,
         pattern: pattern,

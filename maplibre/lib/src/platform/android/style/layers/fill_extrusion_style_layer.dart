@@ -6,7 +6,7 @@ class FillExtrusionStyleLayerAndroid
     implements FillExtrusionStyleLayer {
   /// Default constructor for [FillExtrusionStyleLayerAndroid].
   factory FillExtrusionStyleLayerAndroid({
-    required String layerId,
+    required String id,
     required String sourceId,
     required double minZoom,
     required double maxZoom,
@@ -23,7 +23,7 @@ class FillExtrusionStyleLayerAndroid
     required PropertyValue<ReferenceSpace> translateAnchor,
   }) => using((arena) {
     final layer = FillExtrusionStyleLayerAndroid.fromNativeLayer(jni.FillExtrusionLayer(
-      layerId.toJString()..releasedBy(arena),
+      id.toJString()..releasedBy(arena),
       sourceId.toJString()..releasedBy(arena),
     )..releasedBy(arena));
     layer.minZoom = minZoom;
@@ -53,7 +53,17 @@ class FillExtrusionStyleLayerAndroid
 
   @override
   set base(PropertyValue<double> value) => using((arena) {
-    throw UnimplementedError('Setting properties is not implemented yet.');
+    final jni.PropertyValue? jProperty;
+    if (value.isExpression) {
+      final jExpression = value.expression.toJExpression(arena)
+        ?..releasedBy(arena);
+      jProperty = jni.PropertyFactory.fillExtrusionBase$1(jExpression);
+    } else {
+      final jValue = value.value.toJFloat()..releasedBy(arena);
+      jProperty = jni.PropertyFactory.fillExtrusionBase(jValue);
+    }
+    jProperty?.releasedBy(arena);
+    jLayer.setProperty(jProperty);
   });
 
   @override
@@ -63,7 +73,18 @@ class FillExtrusionStyleLayerAndroid
 
   @override
   set color(PropertyValue<Color> value) => using((arena) {
-    throw UnimplementedError('Setting properties is not implemented yet.');
+    final jni.PropertyValue? jProperty;
+    if (value.isExpression) {
+      jProperty = jni.PropertyFactory.fillExtrusionColor$2(
+        value.expression.toJExpression(arena),
+      );
+    } else {
+      final jValue = value.value.toHexString().toJString()
+        ..releasedBy(arena);
+      jProperty = jni.PropertyFactory.fillExtrusionColor$1(jValue);
+    }
+    jProperty?.releasedBy(arena);
+    jLayer.setProperty(jProperty);
   });
 
   @override
@@ -92,7 +113,17 @@ class FillExtrusionStyleLayerAndroid
 
   @override
   set height(PropertyValue<double> value) => using((arena) {
-    throw UnimplementedError('Setting properties is not implemented yet.');
+    final jni.PropertyValue? jProperty;
+    if (value.isExpression) {
+      final jExpression = value.expression.toJExpression(arena)
+        ?..releasedBy(arena);
+      jProperty = jni.PropertyFactory.fillExtrusionHeight$1(jExpression);
+    } else {
+      final jValue = value.value.toJFloat()..releasedBy(arena);
+      jProperty = jni.PropertyFactory.fillExtrusionHeight(jValue);
+    }
+    jProperty?.releasedBy(arena);
+    jLayer.setProperty(jProperty);
   });
 
   @override
@@ -102,7 +133,17 @@ class FillExtrusionStyleLayerAndroid
 
   @override
   set opacity(PropertyValue<double> value) => using((arena) {
-    throw UnimplementedError('Setting properties is not implemented yet.');
+    final jni.PropertyValue? jProperty;
+    if (value.isExpression) {
+      final jExpression = value.expression.toJExpression(arena)
+        ?..releasedBy(arena);
+      jProperty = jni.PropertyFactory.fillExtrusionOpacity$1(jExpression);
+    } else {
+      final jValue = value.value.toJFloat()..releasedBy(arena);
+      jProperty = jni.PropertyFactory.fillExtrusionOpacity(jValue);
+    }
+    jProperty?.releasedBy(arena);
+    jLayer.setProperty(jProperty);
   });
 
   @override
@@ -111,7 +152,19 @@ class FillExtrusionStyleLayerAndroid
 
   @override
   set pattern(PropertyValue<String>? value) => using((arena) {
-    throw UnimplementedError('Setting properties is not implemented yet.');
+    final jni.PropertyValue? jProperty;
+    if (value == null) {
+      jProperty = jni.PropertyFactory.fillExtrusionPattern(null);
+    } else if (value.isExpression) {
+      jProperty = jni.PropertyFactory.fillExtrusionPattern$1(
+        value.expression.toJExpression(arena),
+      );
+    } else {
+      final jValue = value.value.toJString()..releasedBy(arena);
+      jProperty = jni.PropertyFactory.fillExtrusionPattern(jValue);
+    }
+    jProperty?.releasedBy(arena);
+    jLayer.setProperty(jProperty);
   });
 
   @override
@@ -120,7 +173,9 @@ class FillExtrusionStyleLayerAndroid
 
   @override
   set sourceLayerId(String? sourceLayerId) => using((arena) {
-    throw UnimplementedError('Setting sourceLayerId is not implemented yet.');
+    final jValue = sourceLayerId?.toJString();
+    jValue?.releasedBy(arena);
+    jLayer.setSourceLayer(jValue);
   });
 
   @override
@@ -130,7 +185,17 @@ class FillExtrusionStyleLayerAndroid
 
   @override
   set translate(PropertyValue<Offset> value) => using((arena) {
-    throw UnimplementedError('Setting translate is not implemented yet.');
+    final jni.PropertyValue? jProperty;
+    if (value.isExpression) {
+      final jExpression = value.expression.toJExpression(arena)
+        ?..releasedBy(arena);
+      jProperty = jni.PropertyFactory.fillExtrusionTranslate$1(jExpression);
+    } else {
+      final jArray = value.value.toJFloatArray(arena);
+      jProperty = jni.PropertyFactory.fillExtrusionTranslate(jArray);
+    }
+    jProperty?.releasedBy(arena);
+    jLayer.setProperty(jProperty);
   });
 
   @override
@@ -142,7 +207,19 @@ class FillExtrusionStyleLayerAndroid
 
   @override
   set translateAnchor(PropertyValue<ReferenceSpace> value) => using((arena) {
-    throw UnimplementedError('Setting translateAnchor is not implemented yet.');
+    final jni.PropertyValue? jProperty;
+    if (value.isExpression) {
+      final jExpression = value.expression.toJExpression(arena)
+        ?..releasedBy(arena);
+      jProperty = jni.PropertyFactory.fillExtrusionTranslateAnchor$1(
+        jExpression,
+      );
+    } else {
+      final jValue = value.value.name.toJString()..releasedBy(arena);
+      jProperty = jni.PropertyFactory.fillExtrusionTranslateAnchor(jValue);
+    }
+    jProperty?.releasedBy(arena);
+    jLayer.setProperty(jProperty);
   });
 
   @override
@@ -152,7 +229,19 @@ class FillExtrusionStyleLayerAndroid
 
   @override
   set verticalGradient(PropertyValue<bool> value) => using((arena) {
-    throw UnimplementedError('Setting properties is not implemented yet.');
+    final jni.PropertyValue? jProperty;
+    if (value.isExpression) {
+      final jExpression = value.expression.toJExpression(arena)
+        ?..releasedBy(arena);
+      jProperty = jni.PropertyFactory.fillExtrusionVerticalGradient$1(
+        jExpression,
+      );
+    } else {
+      final jValue = value.value.toJBoolean()..releasedBy(arena);
+      jProperty = jni.PropertyFactory.fillExtrusionVerticalGradient(jValue);
+    }
+    jProperty?.releasedBy(arena);
+    jLayer.setProperty(jProperty);
   });
 
   @override
