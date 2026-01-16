@@ -42,27 +42,25 @@ class _StyleLayersFillExtrusionPageState
             'https://maplibre.org/maplibre-gl-js/docs/assets/indoor-3d-map.geojson',
       ),
     );
-    await style.addLayer(_fillExtrusionStyleLayer);
+    final layer = FillExtrusionStyleLayer(
+      id: 'room-extrusion',
+      sourceId: _sourceId,
+      paint: {
+        // See the MapLibre Style Specification for details on data expressions.
+        // https://maplibre.org/maplibre-style-spec/expressions/
+
+        // Get the fill-extrusion-color from the source 'color' property.
+        'fill-extrusion-color': ['get', 'color'],
+
+        // Get fill-extrusion-height from the source 'height' property.
+        'fill-extrusion-height': ['get', 'height'],
+
+        // Get fill-extrusion-base from the source 'base_height' property.
+        'fill-extrusion-base': ['get', 'base_height'],
+      },
+      // Make extrusions slightly opaque for see through indoor walls.
+      opacity: const PropertyValue.value(0.5),
+    );
+    await style.addLayer(layer);
   }
 }
-
-const _fillExtrusionStyleLayer = FillExtrusionStyleLayer(
-  id: 'room-extrusion',
-  sourceId: _sourceId,
-  paint: {
-    // See the MapLibre Style Specification for details on data expressions.
-    // https://maplibre.org/maplibre-style-spec/expressions/
-
-    // Get the fill-extrusion-color from the source 'color' property.
-    'fill-extrusion-color': ['get', 'color'],
-
-    // Get fill-extrusion-height from the source 'height' property.
-    'fill-extrusion-height': ['get', 'height'],
-
-    // Get fill-extrusion-base from the source 'base_height' property.
-    'fill-extrusion-base': ['get', 'base_height'],
-
-    // Make extrusions slightly opaque for see through indoor walls.
-    'fill-extrusion-opacity': 0.5,
-  },
-);

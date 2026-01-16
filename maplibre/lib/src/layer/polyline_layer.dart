@@ -24,36 +24,28 @@ class PolylineLayer extends Layer<Feature<LineString>> {
   double get opacity => color.a;
 
   /// Stroke thickness.
-  final int width;
+  final double width;
 
   /// Stroke thickness.
-  final int gapWidth;
+  final double gapWidth;
 
   /// Blur applied to the line, in pixels. Defaults to 0.
-  final int blur;
+  final double blur;
 
   /// Specifies the lengths of the alternating dashes and gaps that form the
   /// dash pattern. The lengths are later scaled by the line width.
-  final List<int>? dashArray;
-
-  @override
-  Map<String, Object> getPaint() => {
-    'line-color': color.toHexString(),
-    'line-opacity': opacity,
-    'line-width': width,
-    'line-gap-width': gapWidth,
-    if (dashArray case final List<int> dashArray) 'line-dasharray': dashArray,
-  };
-
-  @override
-  Map<String, Object> getLayout() => {};
+  final List<double>? dashArray;
 
   @override
   StyleLayer createStyleLayer(int index) => LineStyleLayer(
     id: getLayerId(index),
     sourceId: getSourceId(index),
-    paint: getPaint(),
-    layout: getLayout(),
+    color: PropertyValue.value(color),
+    opacity: PropertyValue.value(opacity),
+    width: PropertyValue.value(width),
+    gapWidth: PropertyValue.value(gapWidth),
+    blur: PropertyValue.value(blur),
+    dashArray: dashArray != null ? PropertyValue.value(dashArray!) : null,
     minZoom: minZoom,
     maxZoom: maxZoom,
   );

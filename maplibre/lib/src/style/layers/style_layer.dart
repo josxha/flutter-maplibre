@@ -1,9 +1,14 @@
-import 'dart:ui';
-
+import 'package:flutter/foundation.dart';
+import 'package:flutter/painting.dart';
 import 'package:maplibre/maplibre.dart';
+import 'package:maplibre/src/platform/android/style/layers/style_layer.dart';
+import 'package:maplibre/src/platform/ios/style/layers/background_style_layer.dart';
+import 'package:maplibre/src/platform/ios/style/layers/circle_style_layer.dart';
+import 'package:maplibre/src/platform/web/style/layers/background_style_layer.dart';
 
 part 'background_style_layer.dart';
 part 'circle_style_layer.dart';
+part 'color_relief_style_layer.dart';
 part 'fill_extrusion_style_layer.dart';
 part 'fill_style_layer.dart';
 part 'heatmap_style_layer.dart';
@@ -12,35 +17,76 @@ part 'line_style_layer.dart';
 part 'raster_style_layer.dart';
 part 'symbol_style_layer.dart';
 
+/// The coordinate space or frame of reference in which a style value is
+/// evaluated.
+enum ReferenceSpace {
+  /// Relative to the map's coordinate system.
+  map,
+
+  /// Relative to the viewport / screen.
+  viewport,
+}
+
 /// The base Layer class that can't be used directly.
 ///
 /// {@category Style}
 /// {@subCategory Style Layers}
-interface class StyleLayer {
-  /// Create a new [StyleLayer] instance.
-  const StyleLayer({
-    required this.id,
-    this.layout = const {},
-    this.paint = const {},
-    this.minZoom = 0,
-    this.maxZoom = 24,
-    this.filter,
-  });
-
+abstract interface class StyleLayer {
   /// Unique layer name.
-  final String id;
+  ///
+  /// Required string.
+  String get id;
 
   /// The minimum zoom level for the layer. At zoom levels less than the
   /// minzoom, the layer will be hidden.
   ///
-  /// Needs to be in the range of [0,24].
-  final double minZoom;
+  /// Optional number in the range of `0,24`.
+  double get minZoom;
+
+  set minZoom(double value);
+
+  /// Default value of [minZoom].
+  static const defaultMinZoom = 0.0;
 
   /// The maximum zoom level for the layer. At zoom levels equal to or greater
   /// than the maxzoom, the layer will be hidden.
   ///
-  /// Needs to be in the range of [0,24].
-  final double maxZoom;
+  /// Optional number in the range of `0,24`.
+  double get maxZoom;
+
+  set maxZoom(double value);
+
+  /// Default value of [maxZoom].
+  static const defaultMaxZoom = 24.0;
+
+  /// Whether this layer is displayed.
+  ///
+  /// Layout property. Defaults to `true`.
+  bool get visible;
+
+  set visible(bool value);
+
+  /// Default value of [visible].
+  static const defaultVisible = true;
+}
+
+/// A [StyleLayer] that pulls its data from a [Source]. Basically every layer
+/// except [BackgroundStyleLayer].
+///
+/// {@category Style}
+/// {@subCategory Style Layers}
+abstract interface class StyleLayerWithSource implements StyleLayer {
+  /// Name of a source description to be used for this layer. Required for all
+  /// layer types except background.
+  ///
+  /// Optional string.
+  String get sourceId;
+
+  /// Layer to use from a vector tile source. Required for [VectorSource];
+  /// prohibited for all other source types, including GeoJSON sources.
+  String? get sourceLayerId;
+
+  set sourceLayerId(String value);
 
   /// A expression specifying conditions on source features. Only features that
   /// match the filter are displayed. Zoom expressions in filters are only
@@ -51,38 +97,47 @@ interface class StyleLayer {
   /// from a source: [CircleStyleLayer], [FillStyleLayer],
   /// [FillExtrusionStyleLayer], [HeatmapStyleLayer], [LineStyleLayer]
   /// and [SymbolStyleLayer].
-  final List<Object>? filter;
+  Expression? get filter;
 
-  /// Layout properties for the layer.
-  final Map<String, Object> layout;
-
-  /// Default paint properties for this layer.
-  final Map<String, Object> paint;
+  set filter(Expression? value);
 }
 
-/// A [StyleLayer] that pulls its data from a [Source]. Basically every layer
-/// except [BackgroundStyleLayer].
-///
-/// {@category Style}
-/// {@subCategory Style Layers}
-interface class StyleLayerWithSource extends StyleLayer {
-  /// const constructor for [StyleLayerWithSource].
-  const StyleLayerWithSource({
-    required super.id,
-    required this.sourceId,
-    super.paint = const {},
-    super.layout = const {},
-    super.minZoom,
-    super.maxZoom,
-    super.filter,
-    this.sourceLayerId,
-  });
+/// A [StyleLayerWithSource] that has a [sortKey] property.
+abstract interface class StyleLayerWithSortKey extends StyleLayerWithSource {
+  /// Sorts features in ascending order based on this value. Features with a
+  /// higher sort key will appear above features with a lower sort key.
+  ///
+  /// Layout property. Optional number.
+  PropertyValue<double>? get sortKey;
 
-  /// Name of a source description to be used for this layer. Required for all
-  /// layer types except background.
-  final String sourceId;
+  set sortKey(PropertyValue<double>? value);
+}
 
-  /// Layer to use from a vector tile source. Required for vector tile
-  /// sources; prohibited for all other source types, including GeoJSON sources.
-  final String? sourceLayerId;
+/// A [StyleLayerWithSource] that has a [translate] and [translateAnchor]
+/// property.
+abstract interface class StyleLayerWithTranslate extends StyleLayerWithSource {
+  /// The geometry's [Offset]. Values are `[x, y]` where negatives indicate left
+  /// and up, respectively.
+  ///
+  /// Paint property. Optional array. Units in pixels. Defaults to
+  /// [Offset.zero]. Supports interpolate expressions. Transitionable.
+  PropertyValue<Offset> get translate;
+
+  set translate(PropertyValue<Offset> value);
+
+  /// Default value of [translate].
+  static const defaultTranslate = PropertyValue<Offset>.value(Offset.zero);
+
+  /// Controls the frame of reference for [translate].
+  ///
+  /// Paint property. Optional enum. Defaults to [ReferenceSpace.map].
+  /// Requires [translate].
+  PropertyValue<ReferenceSpace> get translateAnchor;
+
+  set translateAnchor(PropertyValue<ReferenceSpace> value);
+
+  /// The default value of [translateAnchor].
+  static const defaultTranslateAnchor = PropertyValue<ReferenceSpace>.value(
+    ReferenceSpace.map,
+  );
 }

@@ -14,9 +14,9 @@ class MarkerLayer extends Layer<Feature<Point>> {
     this.iconSize = 1,
     this.iconImage,
     this.iconRotate = 0,
-    this.iconPadding = 2,
+    this.iconPadding = const EdgeInsets.all(2),
     this.iconKeepUpright = false,
-    this.iconOffset = const [0, 0],
+    this.iconOffset = Offset.zero,
     this.textField = '',
     this.textFont = const ['Open Sans Regular', 'Arial Unicode MS Regular'],
     this.textSize = 16,
@@ -28,7 +28,7 @@ class MarkerLayer extends Layer<Feature<Point>> {
     this.textRotate = 0,
     this.textPadding = 2,
     this.textKeepUpright = true,
-    this.textOffset = const [0, 0],
+    this.textOffset = Offset.zero,
     this.textAllowOverlap = false,
     this.textIgnorePlacement = false,
     this.textOptional = false,
@@ -37,13 +37,13 @@ class MarkerLayer extends Layer<Feature<Point>> {
     this.iconHaloColor = const Color(0xFF000000),
     this.iconHaloWidth = 0,
     this.iconHaloBlur = 0,
-    this.iconTranslate = const [0, 0],
+    this.iconTranslate = Offset.zero,
     this.textColor = const Color(0xFF000000),
     this.textOpacity = 1,
     this.textHaloColor = const Color(0xFF000000),
     this.textHaloWidth = 0,
     this.textHaloBlur = 0,
-    this.textTranslate = const [0, 0],
+    this.textTranslate = Offset.zero,
     this.iconAnchor = IconAnchor.center,
     super.minZoom = 0,
     super.maxZoom = 24,
@@ -73,7 +73,7 @@ class MarkerLayer extends Layer<Feature<Point>> {
 
   /// Size of additional area round the icon bounding box used for detecting
   /// symbol collisions.
-  final int iconPadding;
+  final EdgeInsets iconPadding;
 
   /// If true, the icon may be flipped to prevent it from being rendered
   /// upside-down.
@@ -84,7 +84,7 @@ class MarkerLayer extends Layer<Feature<Point>> {
   /// multiplied by the value of icon-size to obtain the final offset in
   /// pixels. When combined with icon-rotate the offset will be as if the
   /// rotated direction was up.
-  final List<int> iconOffset;
+  final Offset iconOffset;
 
   /// Value to use for a text label. If a plain string is provided, it will
   /// be treated as a formatted with default/inherited formatting options.
@@ -94,10 +94,10 @@ class MarkerLayer extends Layer<Feature<Point>> {
   final List<String> textFont;
 
   /// Font stack to use for displaying text.
-  final int textSize;
+  final double textSize;
 
   /// Font stack to use for displaying text.
-  final int textMaxWidth;
+  final double textMaxWidth;
 
   /// Text leading value for multi-line text.
   final double textLineHeight;
@@ -129,7 +129,7 @@ class MarkerLayer extends Layer<Feature<Point>> {
   /// text-variable-anchor, input values will be taken as absolute values.
   /// Offsets along the x- and y-axis will be applied automatically based on
   /// the anchor position.
-  final List<int> textOffset;
+  final Offset textOffset;
 
   /// If true, the text will be visible even if it collides with other
   /// previously drawn symbols.
@@ -154,15 +154,15 @@ class MarkerLayer extends Layer<Feature<Point>> {
   /// The unit is in pixels only for SDF sprites that were created with a blur
   /// radius of 8, multiplied by the display density. I.e., the radius needs
   /// to be 16 for @2x sprites, etc.
-  final int iconHaloWidth;
+  final double iconHaloWidth;
 
   /// Fade out the halo towards the outside.
-  final int iconHaloBlur;
+  final double iconHaloBlur;
 
   /// Distance that the icon's anchor is moved from its original placement.
   /// Positive values indicate right and down, while negative values indicate
   /// left and up.
-  final List<int> iconTranslate;
+  final Offset iconTranslate;
 
   /// The opacity at which the text will be drawn.
   final double textOpacity;
@@ -178,68 +178,57 @@ class MarkerLayer extends Layer<Feature<Point>> {
   final double textHaloWidth;
 
   /// The halo's fadeout distance towards the outside.
-  final int textHaloBlur;
+  final double textHaloBlur;
 
   /// Distance that the text's anchor is moved from its original placement.
   /// Positive values indicate right and down, while negative values indicate
   /// left and up.
-  final List<int> textTranslate;
+  final Offset textTranslate;
 
   /// Part of the icon placed closest to the anchor.
   final IconAnchor iconAnchor;
 
   @override
-  Map<String, Object> getPaint() => {
-    'icon-opacity': iconOpacity,
-    'icon-color': iconColor.toHexString(),
-    'icon-halo-color': iconHaloColor.toHexString(),
-    'icon-halo-width': iconHaloWidth,
-    'icon-halo-blur': iconHaloBlur,
-    'text-opacity': iconOpacity,
-    'text-color': textColor.toHexString(),
-    'text-halo-color': textHaloColor.toHexString(),
-    'text-halo-width': textHaloWidth,
-    'text-halo-blur': textHaloBlur,
-    'text-translate': textTranslate,
-  };
-
-  @override
-  Map<String, Object> getLayout() => {
-    'icon-allow-overlap': iconAllowOverlap,
-    'icon-ignore-placement': iconIgnorePlacement,
-    'icon-optional': iconOptional,
-    'icon-size': iconSize,
-    if (iconImage case final String image) 'icon-image': image,
-    'icon-rotate': iconRotate,
-    'icon-padding': iconPadding,
-    'icon-keep-upright': iconKeepUpright,
-    'icon-offset': iconOffset,
-    'icon-anchor': iconAnchor.name,
-    'text-field': textField,
-    'text-font': textFont,
-    'text-size': textSize,
-    'text-max-width': textMaxWidth,
-    'text-line-height': textLineHeight,
-    'text-letter-spacing': textLetterSpacing,
-    'text-radial-offset': textRadialOffset,
-    'text-max-angle': textMaxAngle,
-    'text-rotate': textRotate,
-    'text-padding': textPadding,
-    'text-keep-upright': textKeepUpright,
-    'text-offset': textOffset,
-    'text-allow-overlap': textAllowOverlap,
-    'text-ignore-placement': textIgnorePlacement,
-    'text-optional': textOptional,
-  };
-
-  @override
   StyleLayer createStyleLayer(int index) => SymbolStyleLayer(
     id: getLayerId(index),
     sourceId: getSourceId(index),
-    paint: getPaint(),
-    layout: getLayout(),
     minZoom: minZoom,
     maxZoom: maxZoom,
+    iconOpacity: PropertyValue.value(iconOpacity),
+    iconColor: PropertyValue.value(iconColor),
+    iconHaloColor: PropertyValue.value(iconHaloColor),
+    iconHaloWidth: PropertyValue.value(iconHaloWidth),
+    iconHaloBlur: PropertyValue.value(iconHaloBlur),
+    textOpacity: PropertyValue.value(textOpacity),
+    textColor: PropertyValue.value(textColor),
+    textHaloColor: PropertyValue.value(textHaloColor),
+    textHaloWidth: PropertyValue.value(textHaloWidth),
+    textHaloBlur: PropertyValue.value(textHaloBlur),
+    textTranslate: PropertyValue.value(textTranslate),
+    iconAllowOverlap: PropertyValue.value(iconAllowOverlap),
+    iconIgnorePlacement: PropertyValue.value(iconIgnorePlacement),
+    iconOptional: PropertyValue.value(iconOptional),
+    iconSize: PropertyValue.value(iconSize),
+    iconImage: iconImage != null ? PropertyValue.value(iconImage!) : null,
+    iconRotate: PropertyValue.value(iconRotate),
+    iconPadding: PropertyValue.value(iconPadding),
+    iconKeepUpright: PropertyValue.value(iconKeepUpright),
+    iconOffset: PropertyValue.value(iconOffset),
+    textField: PropertyValue.value(textField),
+    textFont: PropertyValue.value(textFont),
+    textSize: PropertyValue.value(textSize),
+    textMaxWidth: PropertyValue.value(textMaxWidth),
+    textLineHeight: PropertyValue.value(textLineHeight),
+    textLetterSpacing: PropertyValue.value(textLetterSpacing),
+    textRadialOffset: PropertyValue.value(textRadialOffset),
+    textMaxAngle: PropertyValue.value(textMaxAngle),
+    textRotate: PropertyValue.value(textRotate),
+    textPadding: PropertyValue.value(textPadding),
+    textKeepUpright: PropertyValue.value(textKeepUpright),
+    textOffset: PropertyValue.value(textOffset),
+    textAllowOverlap: PropertyValue.value(textAllowOverlap),
+    textIgnorePlacement: PropertyValue.value(textIgnorePlacement),
+    textOptional: PropertyValue.value(textOptional),
   );
 
   @override
@@ -327,39 +316,4 @@ class MarkerLayer extends Layer<Feature<Point>> {
     textTranslate,
     iconAnchor,
   ]);
-}
-
-/// Part of the icon placed closest to the anchor.
-enum IconAnchor {
-  /// The center of the icon is placed closest to the anchor.
-  center('center'),
-
-  /// The left side of the icon is placed closest to the anchor.
-  left('left'),
-
-  /// The right side of the icon is placed closest to the anchor.
-  right('right'),
-
-  /// The top of the icon is placed closest to the anchor.
-  top('top'),
-
-  /// The bottom of the icon is placed closest to the anchor.
-  bottom('bottom'),
-
-  /// The top left corner of the icon is placed closest to the anchor.
-  topLeft('top-left'),
-
-  /// The top right corner of the icon is placed closest to the anchor.
-  topRight('top-right'),
-
-  /// The bottom left corner of the icon is placed closest to the anchor.
-  bottomLeft('bottom-left'),
-
-  /// The bottom right corner of the icon is placed closest to the anchor.
-  bottomRight('bottom-right');
-
-  const IconAnchor(this.name);
-
-  /// The MapLibre Style spec compatible name.
-  final String name;
 }

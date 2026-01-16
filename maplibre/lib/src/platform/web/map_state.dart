@@ -13,6 +13,7 @@ import 'package:maplibre/src/platform/web/extensions.dart';
 import 'package:maplibre/src/platform/web/interop/interop.dart' as interop;
 import 'package:maplibre/src/platform/web/interop/json.dart';
 import 'package:maplibre/src/platform/web/interop/pmtiles.dart' as pmtiles;
+import 'package:maplibre/src/platform/web/style/layers/style_layer.dart';
 import 'package:web/web.dart';
 
 part 'style_controller.dart';

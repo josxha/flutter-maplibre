@@ -231,6 +231,15 @@ extension type LayerSpecification._(JSObject _) implements JSObject {
   /// Get the layer id.
   external String id;
 
+  /// Get the minimum zoom level.
+  external double? minzoom;
+
+  /// Get the maximum zoom level.
+  external double? maxzoom;
+
+  /// Get the source id.
+  external String? source;
+
   external JSAny filter;
   @JS('source-layer')
   external String? sourceLayer;
