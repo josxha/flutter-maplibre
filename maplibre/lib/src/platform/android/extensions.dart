@@ -149,7 +149,7 @@ extension ObjectExt on Object {
       case final double value:
         return value.toJDouble();
       case final int value:
-        return value.toJLong();
+        return value.toJInteger();
       case final bool value:
         return value.toJBoolean();
       default:

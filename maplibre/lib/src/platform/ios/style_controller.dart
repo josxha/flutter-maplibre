@@ -48,7 +48,7 @@ class StyleControllerIos extends StyleController {
           throw Exception('Source "${layer.sourceId}" does not exist.');
         }
         NSPredicate? filterPredicate;
-        if (layer.filter case final List<Object> filter) {
+        if (layer.filter case final filter?) {
           final expression = jsonEncode(filter).toNSString();
           filterPredicate = Helpers.parsePredicateWithRaw(expression);
         }
