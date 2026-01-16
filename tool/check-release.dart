@@ -7,7 +7,11 @@ import 'package:yaml/yaml.dart';
 
 void main(List<String> arguments) {
   final parser = ArgParser()
-    ..addOption('version', abbr: 'v', help: 'Release version, e.g. 0.3.4 or 0.3.4+1');
+    ..addOption(
+      'version',
+      abbr: 'v',
+      help: 'Release version, e.g. 0.3.4 or 0.3.4+1',
+    );
 
   late ArgResults results;
   try {
@@ -54,7 +58,10 @@ void main(List<String> arguments) {
   _ensureChangelogEntry(File('maplibre_ios/CHANGELOG.md'), versionString);
   _ensureDocumentationVersion(File('website/versions.json'), version);
 
-  final releaseNotes = _buildReleaseNotes(File('maplibre/CHANGELOG.md'), version);
+  final releaseNotes = _buildReleaseNotes(
+    File('maplibre/CHANGELOG.md'),
+    version,
+  );
   final notesPath = 'build/release_notes.txt';
   _writeReleaseNotes(notesPath, releaseNotes);
   _writeGithubOutput('release_notes_path', notesPath);
@@ -89,7 +96,10 @@ void _ensure(bool condition, String message) {
 
 void _ensureChangelogEntry(File changelog, String version) {
   final content = changelog.readAsStringSync();
-  final headerPattern = RegExp('^##\\s+${RegExp.escape(version)}\\b', multiLine: true);
+  final headerPattern = RegExp(
+    '^##\\s+${RegExp.escape(version)}\\b',
+    multiLine: true,
+  );
   if (!headerPattern.hasMatch(content)) {
     _fail('Missing changelog entry for $version in ${changelog.path}');
   }
