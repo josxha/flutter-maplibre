@@ -1,4 +1,4 @@
-name: Create Release
+name: Draft Release
 
 on:
   workflow_dispatch:
@@ -18,15 +18,10 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Ensure main branch
-        run: |
-          git fetch origin main --tags
-          git checkout main
-          git pull --ff-only origin main
-      - name: Setup Dart
-        uses: dart-lang/setup-dart@v1
+      - name: "Setup Flutter SDK"
+        uses: subosito/flutter-action@v2
         with:
-          sdk: stable
+          cache: true
       - name: Install dependencies
         run: dart pub get
       - name: Run release checks
