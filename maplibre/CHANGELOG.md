@@ -1,3 +1,10 @@
+## 0.3.3+1
+
+### Bug Fixes
+
+- Fix `addLayer()` throws double release error
+- Tighten version constraint for `maplibre_ios` to fix pub.dev score
+
 ## 0.3.3
 
 This release focuses on stability improvements along with a few small
