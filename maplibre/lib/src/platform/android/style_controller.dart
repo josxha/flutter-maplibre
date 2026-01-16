@@ -115,9 +115,8 @@ class StyleControllerAndroid extends StyleController {
         entry.key.toJString()..releasedBy(arena),
         switch (entry.value) {
           final List<Object> list => jni.Expression$Converter.convert$2(
-              jsonEncode(list).toJString()..releasedBy(arena),
-            )
-            ?..releasedBy(arena),
+            jsonEncode(list).toJString()..releasedBy(arena),
+          )?..releasedBy(arena),
           _ => entry.value.toJObject()..releasedBy(arena),
         },
         T: JObject.type,
@@ -130,8 +129,7 @@ class StyleControllerAndroid extends StyleController {
         switch (entry.value) {
           final List<Object> list => jni.Expression$Converter.convert$2(
             jsonEncode(list).toJString()..releasedBy(arena),
-          )
-            ?..releasedBy(arena),
+          )?..releasedBy(arena),
           _ => entry.value.toJObject()..releasedBy(arena),
         },
         T: JObject.type,
