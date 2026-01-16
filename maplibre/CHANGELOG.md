@@ -2,7 +2,8 @@
 
 ### Bug Fixes
 
-- Fix `addLayer()` throws double release error
+- Fix `addLayer()` throws double release error on Android
+- Fix `filter` cannot be parsed on Android
 - Tighten version constraint for `maplibre_ios` to fix pub.dev score
 
 Full Changelog: [v0.3.3...v0.3.3+1](https://github.com/josxha/flutter-maplibre/compare/v0.3.3...v0.3.3+1)
