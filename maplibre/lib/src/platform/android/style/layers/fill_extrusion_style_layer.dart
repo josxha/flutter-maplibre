@@ -22,10 +22,12 @@ class FillExtrusionStyleLayerAndroid
     required PropertyValue<Offset> translate,
     required PropertyValue<ReferenceSpace> translateAnchor,
   }) => using((arena) {
-    final layer = FillExtrusionStyleLayerAndroid.fromNativeLayer(jni.FillExtrusionLayer(
-      id.toJString()..releasedBy(arena),
-      sourceId.toJString()..releasedBy(arena),
-    )..releasedBy(arena));
+    final layer = FillExtrusionStyleLayerAndroid.fromNativeLayer(
+      jni.FillExtrusionLayer(
+        id.toJString()..releasedBy(arena),
+        sourceId.toJString()..releasedBy(arena),
+      )..releasedBy(arena),
+    );
     layer.minZoom = minZoom;
     layer.maxZoom = maxZoom;
     layer.visible = visible;
@@ -79,8 +81,7 @@ class FillExtrusionStyleLayerAndroid
         value.expression.toJExpression(arena),
       );
     } else {
-      final jValue = value.value.toHexString().toJString()
-        ..releasedBy(arena);
+      final jValue = value.value.toHexString().toJString()..releasedBy(arena);
       jProperty = jni.PropertyFactory.fillExtrusionColor$1(jValue);
     }
     jProperty?.releasedBy(arena);

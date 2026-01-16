@@ -55,7 +55,7 @@ extension OffsetExt on Offset {
   /// Convert an [Offset] to an [jni.PointF].
   jni.PointF toJPointF({required Arena arena}) =>
       jni.PointF.new$3(dx, dy)..releasedBy(arena);
-      
+
   /// Convert an [Offset] to a [JArray<JFloat>].
   JArray<JFloat?> toJFloatArray(Arena arena) {
     final jArray = JArray(JFloat.nullableType, 2)..releasedBy(arena);

@@ -17,43 +17,37 @@ abstract interface class ColorReliefStyleLayer implements StyleLayerWithSource {
     PropertyValue<double> opacity = ColorReliefStyleLayer.defaultOpacity,
     double minZoom = StyleLayer.defaultMinZoom,
     double maxZoom = StyleLayer.defaultMaxZoom,
-  }) =>
-      switch (kIsWeb) {
-        true =>
-            ColorReliefStyleLayerWeb(
-              id: id,
-              sourceId: sourceId,
-              visible: visible,
-              color: color,
-              pattern: pattern,
-              opacity: opacity,
-              minZoom: minZoom,
-              maxZoom: maxZoom,
-            ),
-        false =>
-        switch (defaultTargetPlatform) {
-          TargetPlatform.android =>
-          throw UnsupportedError(
-            'ColorReliefStyleLayer is not supported on Android platform.\n'
-                'https://github.com/maplibre/maplibre-native/issues/3408',
-          ),
-          TargetPlatform.iOS =>
-              ColorReliefStyleLayerIos(
-                id: id,
-                sourceId: sourceId,
-                visible: visible,
-                color: color,
-                pattern: pattern,
-                opacity: opacity,
-                minZoom: minZoom,
-                maxZoom: maxZoom,
-              ),
-          _ =>
-          throw UnsupportedError(
-            'ColorReliefStyleLayer is not supported for the current platform.',
-          ),
-        },
-      };
+  }) => switch (kIsWeb) {
+    true => ColorReliefStyleLayerWeb(
+      id: id,
+      sourceId: sourceId,
+      visible: visible,
+      color: color,
+      pattern: pattern,
+      opacity: opacity,
+      minZoom: minZoom,
+      maxZoom: maxZoom,
+    ),
+    false => switch (defaultTargetPlatform) {
+      TargetPlatform.android => throw UnsupportedError(
+        'ColorReliefStyleLayer is not supported on Android platform.\n'
+        'https://github.com/maplibre/maplibre-native/issues/3408',
+      ),
+      TargetPlatform.iOS => ColorReliefStyleLayerIos(
+        id: id,
+        sourceId: sourceId,
+        visible: visible,
+        color: color,
+        pattern: pattern,
+        opacity: opacity,
+        minZoom: minZoom,
+        maxZoom: maxZoom,
+      ),
+      _ => throw UnsupportedError(
+        'ColorReliefStyleLayer is not supported for the current platform.',
+      ),
+    },
+  };
 
   /// The opacity at which the color-relief will be drawn.
   ///

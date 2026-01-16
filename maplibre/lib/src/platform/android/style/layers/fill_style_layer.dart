@@ -77,8 +77,7 @@ class FillStyleLayerAndroid extends StyleLayerAndroid<jni.FillLayer>
         value.expression.toJExpression(arena),
       );
     } else {
-      final jValue = value.value.toHexString().toJString()
-        ..releasedBy(arena);
+      final jValue = value.value.toHexString().toJString()..releasedBy(arena);
       jProperty = jni.PropertyFactory.fillColor$1(jValue);
     }
     jProperty?.releasedBy(arena);
@@ -118,8 +117,7 @@ class FillStyleLayerAndroid extends StyleLayerAndroid<jni.FillLayer>
         value.expression.toJExpression(arena),
       );
     } else {
-      final jValue = value.value.toHexString().toJString()
-        ..releasedBy(arena);
+      final jValue = value.value.toHexString().toJString()..releasedBy(arena);
       jProperty = jni.PropertyFactory.fillOutlineColor$1(jValue);
     }
     jProperty?.releasedBy(arena);

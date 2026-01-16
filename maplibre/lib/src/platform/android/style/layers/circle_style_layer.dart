@@ -129,7 +129,7 @@ class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
     if (expression == null) {
       throw UnsupportedError(
         'Setting filter for CircleStyleLayer to null '
-            'is not implemented yet.',
+        'is not implemented yet.',
       );
     }
     final jFilter = expression.toJExpression(arena)?..releasedBy(arena);
