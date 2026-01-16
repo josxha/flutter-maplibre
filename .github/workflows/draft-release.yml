@@ -1,8 +1,6 @@
 name: Draft Release
 
 on:
-  pull_request:
-    branches: [main]
   workflow_dispatch:
     inputs:
       version:
@@ -28,7 +26,7 @@ jobs:
         run: dart pub get
       - name: Run release checks
         id: check_release
-        run: dart run tool/check-release.dart --version 0.3.3+1
+        run: dart run tool/check-release.dart --version ${{ inputs.version }}
       - name: Create draft release
         uses: softprops/action-gh-release@v2
         with:
