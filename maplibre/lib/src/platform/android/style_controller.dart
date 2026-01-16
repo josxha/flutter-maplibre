@@ -113,7 +113,7 @@ class StyleControllerAndroid extends StyleController {
       final entry = paintEntries[i];
       props[i] = jni.PaintPropertyValue(
         entry.key.toJString()..releasedBy(arena),
-        entry.value.toJObject(arena)..releasedBy(arena),
+        entry.value.toJObject()..releasedBy(arena),
         T: JObject.type,
       )..releasedBy(arena);
     }
@@ -121,7 +121,7 @@ class StyleControllerAndroid extends StyleController {
       final entry = layoutEntries[i];
       props[paintEntries.length + i] = jni.LayoutPropertyValue(
         entry.key.toJString()..releasedBy(arena),
-        entry.value.toJObject(arena)..releasedBy(arena),
+        entry.value.toJObject()..releasedBy(arena),
         T: JObject.type,
       )..releasedBy(arena);
     }
