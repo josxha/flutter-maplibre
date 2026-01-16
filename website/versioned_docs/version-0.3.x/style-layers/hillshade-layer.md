@@ -43,7 +43,7 @@ Widget build(BuildContext context) {
 ```
 
 Check out
-the [example app](https://github.com/josxha/flutter-maplibre/blob/main/example/lib/layers_hillshade_page.dart)
+the [example app](https://github.com/josxha/flutter-maplibre/blob/v0.3.3/example/lib/layers_hillshade_page.dart)
 to learn more.
 
 ## Style & Layout
