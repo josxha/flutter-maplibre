@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/rendering.dart';
 import 'package:jni/jni.dart';
 import 'package:maplibre/maplibre.dart';
@@ -154,6 +156,22 @@ extension ObjectExt on Object {
         return value.toJBoolean();
       default:
         throw Exception('Unsupported property type: $runtimeType, $this');
+    }
+  }
+
+  /// Convert a [Object] to a [JObject] or [jni.Expression].
+  JObject? toJValue() {
+    final value = this;
+    final isExpression = value is List && value.first is String;
+    if (isExpression) {
+      // expression
+      final jExpressionString = jsonEncode(value).toJString();
+      final jValue = jni.Expression$Converter.convert$2(jExpressionString);
+      jExpressionString.release();
+      return jValue;
+    } else {
+      // direct value (simple type or value array)
+      return value.toJObject();
     }
   }
 }
