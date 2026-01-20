@@ -70,6 +70,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
 
   @override
   void didUpdateWidget(covariant MapLibreMap oldWidget) {
+    if (oldWidget.options != widget.options) return;
     final gestures = options.gestures;
     _webViewController.evaluateJavascript(
       source:
@@ -99,7 +100,6 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     window.map.touchPitch.${gestures.pitch ? 'enable' : 'disable'}();
     
     window.map.keyboard.${gestures.allEnabled ? 'enable' : 'disable'}();
-    ${ /* TODO update LayerManager layers */ ''}
 ''',
     );
     _layerManager?.updateLayers(widget.layers);
@@ -518,7 +518,11 @@ class MapLibreMapStateWebView extends MapLibreMapState {
             }
         );
     });
+    let lastMoveTimestamp = 0;
     window.map.on('move', (e) => {
+        const now = Date.now();
+        if (now - lastMoveTimestamp < 500) return;
+        lastMoveTimestamp = now;    
     
         const center = window.map.getCenter();
         window.flutter_inappwebview.callHandler(
