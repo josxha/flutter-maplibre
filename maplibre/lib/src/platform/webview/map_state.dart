@@ -7,6 +7,7 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/layer/layer_manager.dart';
 import 'package:maplibre/src/map_state.dart';
+import 'package:maplibre/src/platform/webview/magic_numbers.dart';
 import 'package:maplibre/src/platform/webview/style_controller.dart';
 import 'package:maplibre/src/platform/webview/websocket.dart';
 
@@ -28,45 +29,6 @@ class MapLibreMapStateWebView extends MapLibreMapState {
   LngLatBounds? _cachedVisibleRegion;
   Widget? _widget;
   static const _debugMode = false;
-
-  /// Action type for [_test].
-  static const actionTest = 0;
-
-  /// Action type for [moveCamera].
-  static const actionMoveCamera = 1;
-
-  /// Action type for [animateCamera].
-  static const actionAnimateCamera = 2;
-
-  /// Action type for [fitBounds].
-  static const actionFitBounds = 3;
-
-  /// Event type for [_test].
-  static const eventTest = 0;
-
-  /// Action type for [MapEventMoveCamera].
-  static const eventMove = 1;
-
-  /// Action type for [MapEventStartMoveCamera].
-  static const eventMoveStart = 2;
-
-  /// Action type for [MapEventCameraIdle].
-  static const eventMoveEnd = 3;
-
-  /// Action type for [MapEventStyleLoaded].
-  static const eventLoad = 4;
-
-  /// Action type for [MapEventStyleLoaded].
-  static const eventStyleLoad = 5;
-
-  /// Action type for [MapEventClick].
-  static const eventClick = 6;
-
-  /// Action type for [MapEventDoubleClick].
-  static const eventDblClick = 7;
-
-  /// Action type for [MapEventSecondaryClick].
-  static const eventContextMenu = 8;
 
   @override
   void initState() {
@@ -175,7 +137,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
                 },
             });
             break;
-          case ${StyleControllerWebView.actionAddImage}:
+          case $actionAddImage:
             const idLength = view.getUint8(1);
             let id = '';
             for (let i = 0; i < idLength; i++) {

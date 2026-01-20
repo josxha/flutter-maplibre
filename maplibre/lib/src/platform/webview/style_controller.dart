@@ -4,6 +4,7 @@ import 'dart:typed_data';
 
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:maplibre/maplibre.dart';
+import 'package:maplibre/src/platform/webview/magic_numbers.dart';
 import 'package:maplibre/src/platform/webview/websocket.dart';
 
 /// Android specific implementation of the [StyleController].
@@ -16,9 +17,6 @@ class StyleControllerWebView extends StyleController {
 
   /// The web socket used for communication with the map.
   final WebSocket webSocket;
-
-  /// Action type for [addImage].
-  static const actionAddImage = 101;
 
   List<String> _cachedAttributions = const [];
   List<String> _cachedLayerIds = const [];
