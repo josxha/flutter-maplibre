@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 /// Callback type for handling incoming data from the WebSocket.
 typedef OnDataCallback = void Function(dynamic data);
@@ -28,11 +29,14 @@ class Websocket {
   }
 
   /// Sends a message to the connected WebSocket client.
-  void send(Map<String, Object?> message) {
+  void send(ByteData data) {
     final ws = _ws;
-    if (ws != null && ws.readyState == WebSocket.open) {
-      ws.add(jsonEncode(message));
+    if (ws == null || ws.readyState != WebSocket.open) {
+      throw StateError('WebSocket is not connected.');
     }
+    final bytes = data.buffer.asUint8List().toList(growable: false);
+    print('WebSocket send: $bytes');
+    ws.add(bytes);
   }
 
   /// Closes the WebSocket server and any active connections.

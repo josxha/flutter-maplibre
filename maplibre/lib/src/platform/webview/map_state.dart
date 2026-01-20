@@ -23,6 +23,8 @@ class MapLibreMapStateWebView extends MapLibreMapState {
   LngLatBounds? _cachedVisibleRegion;
   Widget? _widget;
   static const _debugMode = true;
+  static const _actionMoveCamera = 1;
+  static const _actionAnimateCamera = 2;
   static const _eventMove = 1;
   static const _eventMoveStart = 2;
   static const _eventMoveEnd = 3;
@@ -233,19 +235,17 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     Duration? webMaxDuration,
   }) async {
     _nextGestureCausedByController = true;
-    await _webViewController.evaluateJavascript(
-      source:
-          '''
-  window.map.flyTo({
-    ${center != null ? 'center: [${center.lon}, ${center.lat}],' : ''}
-    ${zoom != null ? 'zoom: $zoom,' : ''}
-    ${bearing != null ? 'bearing: $bearing,' : ''}
-    ${pitch != null ? 'pitch: $pitch,' : ''}
-    speed: $webSpeed,
-    maxDuration: ${webMaxDuration != null ? webMaxDuration.inMilliseconds : 'undefined'},
-  });
-''',
-    );
+    final ws = await _websocket;
+    final data = ByteData(1+8*5);
+    data.setUint8(0, _actionAnimateCamera);
+    final currCamera = camera!;
+    final currCenter = center ?? currCamera.center;
+    data.setFloat64(1, currCenter.lon, Endian.little);
+    data.setFloat64(9, currCenter.lat, Endian.little);
+    data.setFloat64(17, zoom ?? currCamera.zoom, Endian.little);
+    data.setFloat64(25, pitch ?? currCamera.pitch, Endian.little);
+    data.setFloat64(33, bearing ?? currCamera.bearing, Endian.little);
+    ws.send(data);
   }
 
   @override
@@ -256,17 +256,17 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     double? pitch,
   }) async {
     _nextGestureCausedByController = true;
-    await _webViewController.evaluateJavascript(
-      source:
-          '''
-  window.map.jumpTo({ 
-    ${center != null ? 'center: [${center.lon}, ${center.lat}],' : ''}
-    ${zoom != null ? 'zoom: $zoom,' : ''}
-    ${bearing != null ? 'bearing: $bearing,' : ''}
-    ${pitch != null ? 'pitch: $pitch,' : ''}
-  });
-''',
-    );
+    final ws = await _websocket;
+    final data = ByteData(1+8*5);
+    data.setUint8(0, _actionMoveCamera);
+    final currCamera = camera!;
+    final currCenter = center ?? currCamera.center;
+    data.setFloat64(1, currCenter.lon, Endian.little);
+    data.setFloat64(9, currCenter.lat, Endian.little);
+    data.setFloat64(17, zoom ?? currCamera.zoom, Endian.little);
+    data.setFloat64(25, pitch ?? currCamera.pitch, Endian.little);
+    data.setFloat64(33, bearing ?? currCamera.bearing, Endian.little);
+    ws.send(data);
   }
 
   @override
@@ -300,6 +300,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
 
   void _onStyleLoaded() {
     style?.dispose();
+    unawaited(_fetchCamera());
     final styleCtrl = StyleControllerWebView(_webViewController);
     style = styleCtrl;
     widget.onEvent?.call(MapEventStyleLoaded(styleCtrl));
@@ -404,6 +405,45 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     };
     window.ws.onerror = function(event) {
         console.log('WebSocket error: ' + event);
+    };
+    window.ws.onmessage = async function(event) {
+        let buffer;
+        if (event.data instanceof ArrayBuffer) {
+            buffer = event.data;
+        } else if (event.data instanceof Blob) {
+            buffer = await event.data.arrayBuffer();
+        } else {
+            console.warn('Unknown WS message type:', event.data);
+            return;
+        }
+        const view = new DataView(buffer);
+        const actionType = view.getUint8(0);
+        switch (actionType) {
+          case $_actionMoveCamera:
+            window.map.jumpTo({
+                center: [
+                    view.getFloat64(1, true),
+                    view.getFloat64(9, true)
+                ],
+                zoom: view.getFloat64(17, true),
+                pitch: view.getFloat64(25, true),
+                bearing: view.getFloat64(33, true),
+            });
+            break;
+          case $_actionAnimateCamera:
+            window.map.flyTo({
+                center: [
+                    view.getFloat64(1, true),
+                    view.getFloat64(9, true)
+                ],
+                zoom: view.getFloat64(17, true),
+                pitch: view.getFloat64(25, true),
+                bearing: view.getFloat64(33, true),
+            });
+            break;
+          default:
+            console.log(`Unknown WS binary message type: \${view.getUint8(0)}`);
+        }
     };
     const map = new maplibregl.Map({
         container: 'map',
@@ -515,6 +555,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     window.map.keyboard.${gestures.allEnabled ? 'enable' : 'disable'}();
 ''',
     );
+    unawaited(_fetchCamera());
   }
 
   Future<void> _onWebViewCreated(InAppWebViewController controller) async {
