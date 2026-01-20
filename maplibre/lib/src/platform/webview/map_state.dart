@@ -14,8 +14,10 @@ import 'package:maplibre/src/platform/webview/websocket.dart';
 class MapLibreMapStateWebView extends MapLibreMapState {
   /// The web view controller.
   late InAppWebViewController webViewController;
+
   /// The WebSocket connection to the web view.
-  late final Future<Websocket> webSocket;
+  late final Future<WebSocket> _futureWebSocket;
+  WebSocket? _webSocket;
   int? _wsPort;
   bool _nextGestureCausedByController = false;
   @override
@@ -25,26 +27,55 @@ class MapLibreMapStateWebView extends MapLibreMapState {
 
   LngLatBounds? _cachedVisibleRegion;
   Widget? _widget;
-  static const _debugMode = true;
-  static const _actionTest = 0;
-  static const _actionMoveCamera = 1;
-  static const _actionAnimateCamera = 2;
-  static const _actionFitBounds = 3;
-  static const _eventTest = 0;
-  static const _eventMove = 1;
-  static const _eventMoveStart = 2;
-  static const _eventMoveEnd = 3;
-  static const _eventLoad = 4;
-  static const _eventStyleLoad = 5;
-  static const _eventClick = 6;
-  static const _eventDblClick = 7;
-  static const _eventContextMenu = 8;
+  static const _debugMode = false;
+
+  /// Action type for [_test].
+  static const actionTest = 0;
+
+  /// Action type for [moveCamera].
+  static const actionMoveCamera = 1;
+
+  /// Action type for [animateCamera].
+  static const actionAnimateCamera = 2;
+
+  /// Action type for [fitBounds].
+  static const actionFitBounds = 3;
+
+  /// Event type for [_test].
+  static const eventTest = 0;
+
+  /// Action type for [MapEventMoveCamera].
+  static const eventMove = 1;
+
+  /// Action type for [MapEventStartMoveCamera].
+  static const eventMoveStart = 2;
+
+  /// Action type for [MapEventCameraIdle].
+  static const eventMoveEnd = 3;
+
+  /// Action type for [MapEventStyleLoaded].
+  static const eventLoad = 4;
+
+  /// Action type for [MapEventStyleLoaded].
+  static const eventStyleLoad = 5;
+
+  /// Action type for [MapEventClick].
+  static const eventClick = 6;
+
+  /// Action type for [MapEventDoubleClick].
+  static const eventDblClick = 7;
+
+  /// Action type for [MapEventSecondaryClick].
+  static const eventContextMenu = 8;
 
   @override
   void initState() {
     PlatformInAppWebViewController.debugLoggingSettings.enabled = _debugMode;
-    webSocket = Websocket.create(onData: _onWebSocketData).then((ws) {
-      setState(() => _wsPort = ws.port);
+    _futureWebSocket = WebSocket.create(onData: _onWebSocketData).then((ws) {
+      setState(() {
+        _webSocket = ws;
+        _wsPort = ws.port;
+      });
       return ws;
     });
     super.initState();
@@ -58,7 +89,8 @@ class MapLibreMapStateWebView extends MapLibreMapState {
       // ignore: avoid_redundant_argument_values
       initialSettings: InAppWebViewSettings(isInspectable: _debugMode),
       initialData: InAppWebViewInitialData(
-        data: '''
+        data:
+            '''
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,7 +104,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
 <body>
     <div id="map"></div>
     <script>
-            window.ws = new WebSocket('ws://localhost:$port');
+    window.ws = new WebSocket('ws://localhost:$port');
     window.ws.onopen = function(event) {
         console.log('WebSocket is open now.');
     };
@@ -80,7 +112,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
         console.log('WebSocket is closed now.');
     };
     window.ws.onerror = function(event) {
-        console.log('WebSocket error: ' + event);
+        console.warn('WebSocket error: ' + event);
     };
     window.ws.onmessage = async function(event) {
         let buffer;
@@ -95,15 +127,15 @@ class MapLibreMapStateWebView extends MapLibreMapState {
         const view = new DataView(buffer);
         const actionType = view.getUint8(0);
         switch (actionType) {
-          case $_actionTest:
+          case $actionTest:
             const ts = view.getBigInt64(1, true);
             const buffer2 = new ArrayBuffer(1+8);
             const view2 = new DataView(buffer2);
-            view.setUint8(0, $_eventTest);
+            view.setUint8(0, $eventTest);
             view2.setBigInt64(1, ts, true);
             window.ws.send(buffer2);
             break;
-          case $_actionMoveCamera:
+          case $actionMoveCamera:
             window.map.jumpTo({
                 center: [
                     view.getFloat64(1, true),
@@ -114,7 +146,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
                 bearing: view.getFloat64(33, true),
             });
             break;
-          case $_actionAnimateCamera:
+          case $actionAnimateCamera:
             window.map.flyTo({
                 center: [
                     view.getFloat64(1, true),
@@ -125,8 +157,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
                 bearing: view.getFloat64(33, true),
             });
             break;
-          case $_actionFitBounds:
-          console.log('fitBounds action received');
+          case $actionFitBounds:
           const maxZoom = view.getFloat64(65, true);
             window.map.fitBounds([
                 [view.getFloat64(1, true), view.getFloat64(9, true)],
@@ -143,10 +174,21 @@ class MapLibreMapStateWebView extends MapLibreMapState {
                     right: view.getFloat64(97, true),
                 },
             });
-          console.log('fitBounds action applied');
+            break;
+          case ${StyleControllerWebView.actionAddImage}:
+            const idLength = view.getUint8(1);
+            let id = '';
+            for (let i = 0; i < idLength; i++) {
+                id += String.fromCharCode(view.getUint8(2 + i));
+            }
+            const imageBytes = new Uint8Array(buffer.byteLength - 2 - idLength);
+            for (let i = 0; i < imageBytes.length; i++) {
+                imageBytes[i] = view.getUint8(2 + idLength + i);
+            }
+            window.map.addImage(id, imageBytes);
             break;
           default:
-            console.log(`Unknown WS binary message type: \${view.getUint8(0)}`);
+            console.warn(`Unknown WS binary message type: \${view.getUint8(0)}`);
         }
     };
     </script>
@@ -243,7 +285,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
   }) async {
     final currCamera = camera!;
     final data = ByteData(1 + 8 * 13);
-    data.setUint8(0, _actionFitBounds);
+    data.setUint8(0, actionFitBounds);
     data.setFloat64(1, bounds.longitudeWest, Endian.little);
     data.setFloat64(9, bounds.latitudeSouth, Endian.little);
     data.setFloat64(17, bounds.longitudeEast, Endian.little);
@@ -261,8 +303,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     data.setFloat64(81, padding.bottom, Endian.little);
     data.setFloat64(89, padding.left, Endian.little);
     data.setFloat64(97, padding.right, Endian.little);
-    final ws = await webSocket;
-    ws.send(data);
+    _webSocket?.sendBytes(data);
   }
 
   @override
@@ -324,9 +365,8 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     Duration? webMaxDuration,
   }) async {
     _nextGestureCausedByController = true;
-    final ws = await webSocket;
     final data = ByteData(1 + 8 * 5);
-    data.setUint8(0, _actionAnimateCamera);
+    data.setUint8(0, actionAnimateCamera);
     final currCamera = camera!;
     final currCenter = center ?? currCamera.center;
     data.setFloat64(1, currCenter.lon, Endian.little);
@@ -334,7 +374,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     data.setFloat64(17, zoom ?? currCamera.zoom, Endian.little);
     data.setFloat64(25, pitch ?? currCamera.pitch, Endian.little);
     data.setFloat64(33, bearing ?? currCamera.bearing, Endian.little);
-    ws.send(data);
+    _webSocket?.sendBytes(data);
   }
 
   @override
@@ -345,9 +385,8 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     double? pitch,
   }) async {
     _nextGestureCausedByController = true;
-    final ws = await webSocket;
     final data = ByteData(1 + 8 * 5);
-    data.setUint8(0, _actionMoveCamera);
+    data.setUint8(0, actionMoveCamera);
     final currCamera = camera!;
     final currCenter = center ?? currCamera.center;
     data.setFloat64(1, currCenter.lon, Endian.little);
@@ -355,16 +394,15 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     data.setFloat64(17, zoom ?? currCamera.zoom, Endian.little);
     data.setFloat64(25, pitch ?? currCamera.pitch, Endian.little);
     data.setFloat64(33, bearing ?? currCamera.bearing, Endian.little);
-    ws.send(data);
+    _webSocket?.sendBytes(data);
   }
 
   // ignore: unused_element
   Future<void> _test() async {
-    final ws = await webSocket;
     final data = ByteData(1 + 8);
-    data.setUint8(0, _actionTest);
+    data.setUint8(0, actionTest);
     data.setInt64(1, DateTime.now().microsecondsSinceEpoch, Endian.little);
-    ws.send(data);
+    _webSocket?.sendBytes(data);
   }
 
   @override
@@ -381,7 +419,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
   window.map.once('style.load', () => {
       const buf = new ArrayBuffer(1);
       const view = new DataView(buf);
-      view.setUint8(0, $_eventStyleLoad);
+      view.setUint8(0, $eventStyleLoad);
       window.ws.send(buf);
   });
   window.map.setStyle('${await _prepareStyleString(style)}');
@@ -392,14 +430,14 @@ class MapLibreMapStateWebView extends MapLibreMapState {
   @override
   void dispose() {
     style?.dispose();
-    unawaited(webSocket.then((ws) => ws.dispose()));
+    unawaited(_futureWebSocket.then((ws) => ws.dispose()));
     super.dispose();
   }
 
   void _onStyleLoaded() {
     style?.dispose();
     unawaited(_fetchCamera());
-    final styleCtrl = StyleControllerWebView(webViewController);
+    final styleCtrl = StyleControllerWebView(webViewController, _webSocket!);
     style = styleCtrl;
     widget.onEvent?.call(MapEventStyleLoaded(styleCtrl));
     widget.onStyleLoaded?.call(styleCtrl);
@@ -489,7 +527,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
   ) async {
     debugPrint('_onLoadStop: $url');
     final gestures = options.gestures;
-    final ws = await webSocket;
+    final ws = await _futureWebSocket;
     debugPrint('WebSocket server listening on ws://localhost:${ws.port}');
     await controller.evaluateJavascript(
       source:
@@ -523,13 +561,13 @@ class MapLibreMapStateWebView extends MapLibreMapState {
           }}
     const bufLoad = new ArrayBuffer(1);
     const viewLoad = new DataView(bufLoad);
-    viewLoad.setUint8(0, $_eventLoad);
+    viewLoad.setUint8(0, $eventLoad);
     window.map.on('load', () => {
         window.ws.send(bufLoad);
     });
     const bufClick = new ArrayBuffer(1 + 8*4);
     const viewClick = new DataView(bufClick);
-    viewClick.setUint8(0, $_eventClick);
+    viewClick.setUint8(0, $eventClick);
     window.map.on('click', (e) => {
         viewClick.setFloat64(1, e.lngLat.lng, true);
         viewClick.setFloat64(9, e.lngLat.lat, true);
@@ -539,7 +577,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     });
     const bufDblClick = new ArrayBuffer(1 + 8*4);
     const viewDblClick = new DataView(bufDblClick);
-    viewDblClick.setUint8(0, $_eventDblClick);
+    viewDblClick.setUint8(0, $eventDblClick);
     window.map.on('dblclick', (e) => {
         viewDblClick.setFloat64(1, e.lngLat.lng, true);
         viewDblClick.setFloat64(9, e.lngLat.lat, true);
@@ -549,7 +587,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     });
     const bufContextMenu = new ArrayBuffer(1 + 8*4);
     const viewContextMenu = new DataView(bufContextMenu);
-    viewContextMenu.setUint8(0, $_eventContextMenu);
+    viewContextMenu.setUint8(0, $eventContextMenu);
     window.map.on('contextmenu', (e) => {
         viewContextMenu.setFloat64(1, e.lngLat.lng, true);
         viewContextMenu.setFloat64(9, e.lngLat.lat, true);
@@ -566,16 +604,15 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     });*/
     const bufMoveStart = new ArrayBuffer(1 + 1);
     const viewMoveStart = new DataView(bufMoveStart);
-    viewMoveStart.setUint8(0, $_eventMoveStart);
+    viewMoveStart.setUint8(0, $eventMoveStart);
     window.map.on('movestart', (e) => {
         viewMoveStart.setUint8(1, e.originalEvent ? 1 : 0);
         window.ws.send(bufMoveStart);
     });
     const bufMove = new ArrayBuffer(1 + 8*5);
     const viewMove = new DataView(bufMove);
-    viewMove.setUint8(0, $_eventMove);
+    viewMove.setUint8(0, $eventMove);
     window.map.on('move', (e) => {
-        console.log('map move event');
         const center = window.map.getCenter();
         viewMove.setFloat64(1, center.lng, true);
         viewMove.setFloat64(9, center.lat, true);
@@ -586,7 +623,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     });
     const bufMoveEnd = new ArrayBuffer(1);
     const viewMoveEnd = new DataView(bufMoveEnd);
-    viewMoveEnd.setUint8(0, $_eventMoveEnd);
+    viewMoveEnd.setUint8(0, $eventMoveEnd);
     window.map.on('moveend', (e) => {
         window.ws.send(bufMoveEnd);
     });
@@ -621,12 +658,12 @@ class MapLibreMapStateWebView extends MapLibreMapState {
       case final List<int> data:
         final b = ByteData.sublistView(Uint8List.fromList(data));
         switch (b.getUint8(0)) {
-          case _eventTest:
+          case eventTest:
             final start = b.getInt64(1, Endian.little);
             final end = DateTime.now().microsecondsSinceEpoch;
             final diff = end - start;
             debugPrint('WebSocket test round-trip time: $diff µs');
-          case _eventMove:
+          case eventMove:
             final newCamera = MapCamera(
               center: Geographic(
                 lon: b.getFloat64(1, Endian.little),
@@ -638,7 +675,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
             );
             setState(() => camera = newCamera);
             widget.onEvent?.call(MapEventMoveCamera(camera: newCamera));
-          case _eventMoveStart:
+          case eventMoveStart:
             final CameraChangeReason reason;
             if (_nextGestureCausedByController) {
               _nextGestureCausedByController = false;
@@ -650,14 +687,14 @@ class MapLibreMapStateWebView extends MapLibreMapState {
                   : CameraChangeReason.apiAnimation;
             }
             widget.onEvent?.call(MapEventStartMoveCamera(reason: reason));
-          case _eventMoveEnd:
+          case eventMoveEnd:
             widget.onEvent?.call(const MapEventCameraIdle());
             widget.onEvent?.call(const MapEventIdle());
-          case _eventStyleLoad:
+          case eventStyleLoad:
             _onStyleLoaded();
-          case _eventLoad:
+          case eventLoad:
             widget.onEvent?.call(const MapEventIdle());
-          case _eventClick:
+          case eventClick:
             widget.onEvent?.call(
               MapEventClick(
                 point: Geographic(
@@ -670,7 +707,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
                 ),
               ),
             );
-          case _eventDblClick:
+          case eventDblClick:
             widget.onEvent?.call(
               MapEventDoubleClick(
                 point: Geographic(
@@ -683,7 +720,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
                 ),
               ),
             );
-          case _eventContextMenu:
+          case eventContextMenu:
             widget.onEvent?.call(
               MapEventSecondaryClick(
                 point: Geographic(
