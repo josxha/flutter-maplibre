@@ -23,9 +23,11 @@ class MapLibreMapStateWebView extends MapLibreMapState {
   LngLatBounds? _cachedVisibleRegion;
   Widget? _widget;
   static const _debugMode = true;
+  static const _actionTest = 0;
   static const _actionMoveCamera = 1;
   static const _actionAnimateCamera = 2;
   static const _actionFitBounds = 3;
+  static const _eventTest = 0;
   static const _eventMove = 1;
   static const _eventMoveStart = 2;
   static const _eventMoveEnd = 3;
@@ -269,6 +271,15 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     ws.send(data);
   }
 
+  // ignore: unused_element
+  Future<void> _test() async {
+    final ws = await _websocket;
+    final data = ByteData(1 + 8);
+    data.setUint8(0, _actionTest);
+    data.setInt64(1, DateTime.now().microsecondsSinceEpoch, Endian.little);
+    ws.send(data);
+  }
+
   @override
   List<QueriedLayer> queryLayers(Offset screenLocation) {
     // TODO: implement queryLayers
@@ -419,6 +430,14 @@ class MapLibreMapStateWebView extends MapLibreMapState {
         const view = new DataView(buffer);
         const actionType = view.getUint8(0);
         switch (actionType) {
+          case $_actionTest:
+            const ts = view.getBigInt64(1, true);
+            const buffer2 = new ArrayBuffer(1+8);
+            const view2 = new DataView(buffer2);
+            view.setUint8(0, $_eventTest);
+            view2.setBigInt64(1, ts, true);
+            window.ws.send(buffer2);
+            break;
           case $_actionMoveCamera:
             window.map.jumpTo({
                 center: [
@@ -587,11 +606,16 @@ class MapLibreMapStateWebView extends MapLibreMapState {
   }
 
   void _onWebSocketData(Object? data) {
-    debugPrint('_onWebSocketData: $data');
+    // debugPrint('_onWebSocketData: $data');
     switch (data) {
       case final List<int> data:
         final b = ByteData.sublistView(Uint8List.fromList(data));
         switch (b.getUint8(0)) {
+          case _eventTest:
+            final start = b.getInt64(1, Endian.little);
+            final end = DateTime.now().microsecondsSinceEpoch;
+            final diff = end - start;
+            debugPrint('WebSocket test round-trip time: $diff µs');
           case _eventMove:
             final newCamera = MapCamera(
               center: Geographic(

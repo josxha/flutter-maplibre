@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:flutter/foundation.dart';
+
 /// Callback type for handling incoming data from the WebSocket.
 typedef OnDataCallback = void Function(dynamic data);
 
@@ -34,7 +36,7 @@ class Websocket {
       throw StateError('WebSocket is not connected.');
     }
     final bytes = data.buffer.asUint8List().toList(growable: false);
-    print('WebSocket send: $bytes');
+    // debugPrint('WebSocket send: $bytes');
     ws.add(bytes);
   }
 
