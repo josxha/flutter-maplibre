@@ -7,8 +7,8 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/layer/layer_manager.dart';
 import 'package:maplibre/src/map_state.dart';
-import 'package:maplibre/src/platform/webview/extensions.dart';
 import 'package:maplibre/src/platform/webview/magic_numbers.dart';
+import 'package:maplibre/src/platform/webview/projection.dart';
 import 'package:maplibre/src/platform/webview/style_controller.dart';
 import 'package:maplibre/src/platform/webview/websocket.dart';
 
@@ -28,7 +28,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
   LayerManager? _layerManager;
 
   LngLatBounds? _cachedVisibleRegion;
-  Size? _mapSize;
+  late Size _mapSize;
   Widget? _widget;
   static const _debugMode = false;
 
@@ -85,7 +85,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
         } else if (event.data instanceof Blob) {
             buffer = await event.data.arrayBuffer();
         } else {
-            console.warn('Unknown WS message type:', event.data);
+            console.warn('WebSocket error: Unknown WS message type:', event.data);
             return;
         }
         const view = new DataView(buffer);
@@ -152,7 +152,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
             window.map.addImage(id, imageBytes);
             break;
           default:
-            console.warn(`Unknown WS binary message type: \${view.getUint8(0)}`);
+            console.warn(`WebSocket error: Unknown WS binary message type: \${view.getUint8(0)}`);
         }
     };
     </script>
@@ -390,68 +390,15 @@ class MapLibreMapStateWebView extends MapLibreMapState {
   @override
   Geographic toLngLat(Offset logicalScreen) {
     final cam = camera!;
-    final size = _mapSize!;
-    final scale = cam.worldScale;
-    final dpr = View.of(context).devicePixelRatio;
-
-    // Convert logical pointer to physical pixels (CSS pixels)
-    final screenLocation = logicalScreen * dpr;
-
-    // Move origin to center
-    var p = Offset(
-      screenLocation.dx - size.width / 2,
-      screenLocation.dy - size.height / 2,
-    );
-
-    // Undo pitch
-    final pitchRad = cam.pitch.toRadians();
-    p = Offset(p.dx, p.dy / cos(pitchRad));
-
-    // Undo bearing rotation
-    final bearingRad = cam.bearing.toRadians();
-    final cosB = cos(bearingRad);
-    final sinB = sin(bearingRad);
-    p = Offset(p.dx * cosB - p.dy * sinB, p.dx * sinB + p.dy * cosB);
-
-    // Add camera center world position
-    final world = cam.centerWorld + p;
-
-    // Scale back to tile coordinates and unproject
-    return (world / scale).unprojectWebMercator();
+    final size = _mapSize;
+    return WebViewProjection.toLngLat(cam, size, logicalScreen);
   }
 
   @override
   Offset toScreenLocation(Geographic lngLat) {
     final cam = camera!;
-    final size = _mapSize!;
-    final scale = cam.worldScale;
-    final dpr = View.of(context).devicePixelRatio;
-
-    // Project to world coordinates and scale
-    final world = lngLat.projectWebMercator() * scale;
-    final centerWorld = cam.centerWorld;
-
-    // Relative to center
-    var p = world - centerWorld;
-
-    // Apply bearing rotation (negative because screen coords)
-    final bearingRad = -cam.bearing.toRadians();
-    final cosB = cos(bearingRad);
-    final sinB = sin(bearingRad);
-    p = Offset(p.dx * cosB - p.dy * sinB, p.dx * sinB + p.dy * cosB);
-
-    // Apply pitch (vertical compression)
-    final pitchRad = cam.pitch.toRadians();
-    p = Offset(p.dx, p.dy * cos(pitchRad));
-
-    // Translate origin to top-left
-    final screenPhysical = Offset(
-      size.width / 2 + p.dx,
-      size.height / 2 + p.dy,
-    );
-
-    // Convert back to Flutter logical pixels
-    return screenPhysical / dpr;
+    final size = _mapSize;
+    return WebViewProjection.toScreenLocation(cam, size, lngLat);
   }
 
   @override
@@ -511,7 +458,11 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     };
 ''',
     );
-    final data = result!.toMap()['value'] as Map<String, dynamic>;
+    final map = result!.toMap();
+    if (!map.containsKey('value')) {
+      throw Exception('Failed to get camera data from web view. Result: $map');
+    }
+    final data = map['value'] as Map<String, dynamic>;
     final newCamera = MapCamera(
       center: Geographic(
         lon: (data['lon'] as num).toDouble(),
