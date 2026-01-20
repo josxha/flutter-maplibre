@@ -26,6 +26,11 @@ class MapLibreMapStateWebView extends MapLibreMapState {
   static const _eventMove = 1;
   static const _eventMoveStart = 2;
   static const _eventMoveEnd = 3;
+  static const _eventLoad = 4;
+  static const _eventStyleLoad = 5;
+  static const _eventClick = 6;
+  static const _eventDblClick = 7;
+  static const _eventContextMenu = 8;
 
   @override
   void initState() {
@@ -276,7 +281,10 @@ class MapLibreMapStateWebView extends MapLibreMapState {
       source:
           '''
   window.map.once('style.load', () => {
-      window.flutter_inappwebview.callHandler('mapEvent', { type: 'styleLoad' });
+      const buf = new ArrayBuffer(1);
+      const view = new DataView(buf);
+      view.setUint8(0, $_eventStyleLoad);
+      window.ws.send(buf);
   });
   window.map.setStyle('${await _prepareStyleString(style)}');
 ''',
@@ -369,53 +377,6 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     return newCamera;
   }
 
-  @Deprecated('Replace with WebSocket communication')
-  void _onMapEvent(List<dynamic> args) {
-    final data = args[0] as Map<String, dynamic>;
-    switch (data['type']) {
-      case 'load':
-        _onStyleLoaded();
-      case 'style.load':
-        _onStyleLoaded();
-      case 'click':
-        widget.onEvent?.call(
-          MapEventClick(
-            point: Geographic(
-              lon: (data['lng'] as num).toDouble(),
-              lat: (data['lat'] as num).toDouble(),
-            ),
-            screenPoint: Offset.zero,
-          ),
-        );
-      case 'dblclick':
-        widget.onEvent?.call(
-          MapEventDoubleClick(
-            point: Geographic(
-              lon: (data['lng'] as num).toDouble(),
-              lat: (data['lat'] as num).toDouble(),
-            ),
-            screenPoint: Offset.zero,
-          ),
-        );
-      case 'contextmenu':
-        widget.onEvent?.call(
-          MapEventSecondaryClick(
-            point: Geographic(
-              lon: (data['lng'] as num).toDouble(),
-              lat: (data['lat'] as num).toDouble(),
-            ),
-            screenPoint: Offset.zero,
-          ),
-        );
-      // case 'idle':
-      //   widget.onEvent?.call(const MapEventIdle());
-      case 'moveend':
-        widget.onEvent?.call(const MapEventCameraIdle());
-        widget.onEvent?.call(const MapEventIdle());
-        unawaited(_fetchCamera());
-    }
-  }
-
   Future<void> _onLoadStop(
     InAppWebViewController controller,
     WebUri? url,
@@ -437,7 +398,6 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     window.ws.onerror = function(event) {
         console.log('WebSocket error: ' + event);
     };
-    
     const map = new maplibregl.Map({
         container: 'map',
         style: '${await _prepareStyleString(options.initStyle)}',
@@ -465,26 +425,41 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     ''',
             _ => '',
           }}
+    const bufLoad = new ArrayBuffer(1);
+    const viewLoad = new DataView(bufLoad);
+    viewLoad.setUint8(0, $_eventLoad);
     window.map.on('load', () => {
-        window.flutter_inappwebview.callHandler('mapEvent', { type: 'load' });
+        window.ws.send(bufLoad);
     });
+    const bufClick = new ArrayBuffer(1 + 8*4);
+    const viewClick = new DataView(bufClick);
+    viewClick.setUint8(0, $_eventClick);
     window.map.on('click', (e) => {
-        window.flutter_inappwebview.callHandler(
-            'mapEvent',
-            { type: 'click', event: e }
-        );
+        viewClick.setFloat64(1, e.lngLat.lng, true);
+        viewClick.setFloat64(9, e.lngLat.lat, true);
+        viewClick.setFloat64(17, e.point.x, true);
+        viewClick.setFloat64(25, e.point.y, true);
+        window.ws.send(bufClick);
     });
+    const bufDblClick = new ArrayBuffer(1 + 8*4);
+    const viewDblClick = new DataView(bufDblClick);
+    viewDblClick.setUint8(0, $_eventDblClick);
     window.map.on('dblclick', (e) => {
-        window.flutter_inappwebview.callHandler(
-            'mapEvent',
-            { type: 'dblclick', event: e }
-        );
+        viewDblClick.setFloat64(1, e.lngLat.lng, true);
+        viewDblClick.setFloat64(9, e.lngLat.lat, true);
+        viewDblClick.setFloat64(17, e.point.x, true);
+        viewDblClick.setFloat64(25, e.point.y, true);
+        window.ws.send(bufDblClick);
     });
+    const bufContextMenu = new ArrayBuffer(1 + 8*4);
+    const viewContextMenu = new DataView(bufContextMenu);
+    viewContextMenu.setUint8(0, $_eventContextMenu);
     window.map.on('contextmenu', (e) => {
-        window.flutter_inappwebview.callHandler(
-            'mapEvent',
-            { type: 'contextmenu', event: e }
-        );
+        viewContextMenu.setFloat64(1, e.lngLat.lng, true);
+        viewContextMenu.setFloat64(9, e.lngLat.lat, true);
+        viewContextMenu.setFloat64(17, e.point.x, true);
+        viewContextMenu.setFloat64(25, e.point.y, true);
+        window.ws.send(bufContextMenu);
     });
     /*window.map.on('idle', () => {
         const center = window.map.getCenter();
@@ -500,7 +475,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
         viewMoveStart.setUint8(1, e.originalEvent ? 1 : 0);
         window.ws.send(bufMoveStart);
     });
-    const bufMove = new ArrayBuffer(1 + 8 * 5);
+    const bufMove = new ArrayBuffer(1 + 8*5);
     const viewMove = new DataView(bufMove);
     viewMove.setUint8(0, $_eventMove);
     window.map.on('move', (e) => {
@@ -537,10 +512,6 @@ class MapLibreMapStateWebView extends MapLibreMapState {
 
   Future<void> _onWebViewCreated(InAppWebViewController controller) async {
     _webViewController = controller;
-    controller.addJavaScriptHandler(
-      handlerName: 'mapEvent',
-      callback: _onMapEvent,
-    );
     widget.onEvent?.call(MapEventMapCreated(mapController: this));
     widget.onMapCreated?.call(this);
     // unawaited(_fetchCamera());
@@ -580,6 +551,49 @@ class MapLibreMapStateWebView extends MapLibreMapState {
           case _eventMoveEnd:
             widget.onEvent?.call(const MapEventCameraIdle());
             widget.onEvent?.call(const MapEventIdle());
+          case _eventStyleLoad:
+            _onStyleLoaded();
+          case _eventLoad:
+            widget.onEvent?.call(const MapEventIdle());
+          case _eventClick:
+            widget.onEvent?.call(
+              MapEventClick(
+                point: Geographic(
+                  lon: b.getFloat64(1, Endian.little),
+                  lat: b.getFloat64(9, Endian.little),
+                ),
+                screenPoint: Offset(
+                  b.getFloat64(17, Endian.little),
+                  b.getFloat64(25, Endian.little),
+                ),
+              ),
+            );
+          case _eventDblClick:
+            widget.onEvent?.call(
+              MapEventDoubleClick(
+                point: Geographic(
+                  lon: b.getFloat64(1, Endian.little),
+                  lat: b.getFloat64(9, Endian.little),
+                ),
+                screenPoint: Offset(
+                  b.getFloat64(17, Endian.little),
+                  b.getFloat64(25, Endian.little),
+                ),
+              ),
+            );
+          case _eventContextMenu:
+            widget.onEvent?.call(
+              MapEventSecondaryClick(
+                point: Geographic(
+                  lon: b.getFloat64(1, Endian.little),
+                  lat: b.getFloat64(9, Endian.little),
+                ),
+                screenPoint: Offset(
+                  b.getFloat64(17, Endian.little),
+                  b.getFloat64(25, Endian.little),
+                ),
+              ),
+            );
           default:
             throw Exception('Unknown WS binary message type: ${b.getUint8(0)}');
         }
