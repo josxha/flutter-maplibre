@@ -25,6 +25,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
   static const _debugMode = true;
   static const _actionMoveCamera = 1;
   static const _actionAnimateCamera = 2;
+  static const _actionFitBounds = 3;
   static const _eventMove = 1;
   static const _eventMoveStart = 2;
   static const _eventMoveEnd = 3;
@@ -151,29 +152,28 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     bool webLinear = false,
     EdgeInsets padding = EdgeInsets.zero,
   }) async {
-    await _webViewController.evaluateJavascript(
-      source:
-          '''
-    window.map.fitBounds([
-        [${bounds.longitudeWest}, ${bounds.latitudeSouth}],
-        [${bounds.longitudeEast}, ${bounds.latitudeNorth}]
-    ], {
-        ${bearing != null ? 'bearing: $bearing,' : ''}
-        ${pitch != null ? 'pitch: $pitch,' : ''}
-        speed: $webSpeed,
-        maxDuration: ${webMaxDuration != null ? webMaxDuration.inMilliseconds : 'undefined'},
-        offset: [${offset.dx}, ${offset.dy}],
-        maxZoom: ${webMaxZoom.isFinite ? webMaxZoom : 'undefined'},
-        linear: $webLinear,
-        padding: {
-            top: ${padding.top},
-            bottom: ${padding.bottom},
-            left: ${padding.left},
-            right: ${padding.right},
-        },
-    });
-''',
+    final currCamera = camera!;
+    final data = ByteData(1 + 8 * 13);
+    data.setUint8(0, _actionFitBounds);
+    data.setFloat64(1, bounds.longitudeWest, Endian.little);
+    data.setFloat64(9, bounds.latitudeSouth, Endian.little);
+    data.setFloat64(17, bounds.longitudeEast, Endian.little);
+    data.setFloat64(25, bounds.latitudeNorth, Endian.little);
+    data.setFloat64(33, bearing ?? currCamera.bearing, Endian.little);
+    data.setFloat64(41, pitch ?? currCamera.pitch, Endian.little);
+    data.setFloat64(49, offset.dx, Endian.little);
+    data.setFloat64(57, offset.dy, Endian.little);
+    data.setFloat64(
+      65,
+      webMaxZoom.isFinite ? webMaxZoom : double.nan,
+      Endian.little,
     );
+    data.setFloat64(73, padding.top, Endian.little);
+    data.setFloat64(81, padding.bottom, Endian.little);
+    data.setFloat64(89, padding.left, Endian.little);
+    data.setFloat64(97, padding.right, Endian.little);
+    final ws = await _websocket;
+    ws.send(data);
   }
 
   @override
@@ -236,7 +236,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
   }) async {
     _nextGestureCausedByController = true;
     final ws = await _websocket;
-    final data = ByteData(1+8*5);
+    final data = ByteData(1 + 8 * 5);
     data.setUint8(0, _actionAnimateCamera);
     final currCamera = camera!;
     final currCenter = center ?? currCamera.center;
@@ -257,7 +257,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
   }) async {
     _nextGestureCausedByController = true;
     final ws = await _websocket;
-    final data = ByteData(1+8*5);
+    final data = ByteData(1 + 8 * 5);
     data.setUint8(0, _actionMoveCamera);
     final currCamera = camera!;
     final currCenter = center ?? currCamera.center;
@@ -440,6 +440,26 @@ class MapLibreMapStateWebView extends MapLibreMapState {
                 pitch: view.getFloat64(25, true),
                 bearing: view.getFloat64(33, true),
             });
+            break;
+          case $_actionFitBounds:
+          console.log('fitBounds action received');
+          const maxZoom = view.getFloat64(65, true);
+            window.map.fitBounds([
+                [view.getFloat64(1, true), view.getFloat64(9, true)],
+                [view.getFloat64(17, true), view.getFloat64(25, true)]
+            ], {
+                bearing: view.getFloat64(33, true),
+                pitch: view.getFloat64(41, true),
+                offset: [view.getFloat64(49, true), view.getFloat64(57, true)],
+                maxZoom: Number.isNaN(maxZoom) ? undefined : maxZoom,
+                padding: {
+                    top: view.getFloat64(73, true),
+                    bottom: view.getFloat64(81, true),
+                    left: view.getFloat64(89, true),
+                    right: view.getFloat64(97, true),
+                },
+            });
+          console.log('fitBounds action applied');
             break;
           default:
             console.log(`Unknown WS binary message type: \${view.getUint8(0)}`);
