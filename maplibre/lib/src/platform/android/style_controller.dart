@@ -21,44 +21,84 @@ class StyleControllerAndroid extends StyleController {
       );
     }
 
-    final jLayer = switch (layer) {
-      FillStyleLayer() => jni.FillLayer(
-        jId,
-        layer.sourceId.toJString()..releasedBy(arena),
-      ),
-      CircleStyleLayer() => jni.CircleLayer(
-        jId,
-        layer.sourceId.toJString()..releasedBy(arena),
-      ),
-      BackgroundStyleLayer() => jni.BackgroundLayer(layer.id.toJString()),
-      FillExtrusionStyleLayer() => jni.FillExtrusionLayer(
-        jId,
-        layer.sourceId.toJString()..releasedBy(arena),
-      ),
-      HeatmapStyleLayer() => jni.HeatmapLayer(
-        jId,
-        layer.sourceId.toJString()..releasedBy(arena),
-      ),
-      HillshadeStyleLayer() => jni.HillshadeLayer(
-        jId,
-        layer.sourceId.toJString()..releasedBy(arena),
-      ),
-      LineStyleLayer() => jni.LineLayer(
-        jId,
-        layer.sourceId.toJString()..releasedBy(arena),
-      ),
-      RasterStyleLayer() => jni.RasterLayer(
-        jId,
-        layer.sourceId.toJString()..releasedBy(arena),
-      ),
-      SymbolStyleLayer() => jni.SymbolLayer(
-        jId,
-        layer.sourceId.toJString()..releasedBy(arena),
-      ),
-      _ => throw UnimplementedError(
-        'The Layer is not supported: ${layer.runtimeType}',
-      ),
-    };
+    jni.Expression? jFilter;
+    if (layer.filter case final filter?) {
+      final jFilterString = jsonEncode(filter).toJString()..releasedBy(arena);
+      jFilter = jni.Expression$Converter.convert$2(jFilterString)
+        ?..releasedBy(arena);
+    }
+    JString? jSourceLayer;
+    if (layer is StyleLayerWithSource) {
+      if (layer.sourceLayerId case final String id) {
+        jSourceLayer = id.toJString()..releasedBy(arena);
+      }
+    }
+
+    final jni.Layer jLayer;
+    switch (layer) {
+      case StyleLayerWithSource():
+        final jSourceId = layer.sourceId.toJString()..releasedBy(arena);
+        switch (layer) {
+          case FillStyleLayer():
+            final jFillLayer = jni.FillLayer(jId, jSourceId);
+            if (jFilter != null) jFillLayer.setFilter(jFilter);
+            if (jSourceLayer != null) jFillLayer.setSourceLayer(jSourceLayer);
+            jLayer = jFillLayer;
+          case CircleStyleLayer():
+            final jCircleLayer = jni.CircleLayer(jId, jSourceId);
+            if (jFilter != null) jCircleLayer.setFilter(jFilter);
+            if (jSourceLayer != null) jCircleLayer.setSourceLayer(jSourceLayer);
+            jLayer = jCircleLayer;
+          case FillExtrusionStyleLayer():
+            final jFillExtrusionLayer = jni.FillExtrusionLayer(jId, jSourceId);
+            if (jFilter != null) jFillExtrusionLayer.setFilter(jFilter);
+            if (jSourceLayer != null) {
+              jFillExtrusionLayer.setSourceLayer(jSourceLayer);
+            }
+            jLayer = jFillExtrusionLayer;
+          case HeatmapStyleLayer():
+            final jHeatmapLayer = jni.HeatmapLayer(jId, jSourceId);
+            if (jFilter != null) jHeatmapLayer.setFilter(jFilter);
+            if (jSourceLayer != null) {
+              jHeatmapLayer.setSourceLayer(jSourceLayer);
+            }
+            jLayer = jHeatmapLayer;
+          case HillshadeStyleLayer():
+            final jHillshadeLayer = jni.HillshadeLayer(jId, jSourceId);
+            if (jSourceLayer != null) {
+              jHillshadeLayer.setSourceLayer(jSourceLayer);
+            }
+            jLayer = jHillshadeLayer;
+          case LineStyleLayer():
+            final jLineLayer = jni.LineLayer(jId, jSourceId);
+            if (jFilter != null) jLineLayer.setFilter(jFilter);
+            if (jSourceLayer != null) jLineLayer.setSourceLayer(jSourceLayer);
+            jLayer = jLineLayer;
+          case RasterStyleLayer():
+            final jRasterLayer = jni.RasterLayer(jId, jSourceId);
+            if (jSourceLayer != null) jRasterLayer.setSourceLayer(jSourceLayer);
+            jLayer = jRasterLayer;
+          case SymbolStyleLayer():
+            final jSymbolLayer = jni.SymbolLayer(jId, jSourceId);
+            if (jFilter != null) jSymbolLayer.setFilter(jFilter);
+            if (jSourceLayer != null) jSymbolLayer.setSourceLayer(jSourceLayer);
+            jLayer = jSymbolLayer;
+          default:
+            throw UnimplementedError(
+              'The Layer is not supported: ${layer.runtimeType}',
+            );
+        }
+      default:
+        switch (layer) {
+          case BackgroundStyleLayer():
+            jLayer = jni.BackgroundLayer(jId);
+          default:
+            throw UnimplementedError(
+              'The Layer is not supported: ${layer.runtimeType}',
+            );
+        }
+    }
+
     jLayer.setMinZoom(layer.minZoom);
     jLayer.setMaxZoom(layer.maxZoom);
 
@@ -72,16 +112,26 @@ class StyleControllerAndroid extends StyleController {
     for (var i = 0; i < paintEntries.length; i++) {
       final entry = paintEntries[i];
       props[i] = jni.PaintPropertyValue(
-        entry.key.toJString(),
-        entry.value.toJObject(arena),
+        entry.key.toJString()..releasedBy(arena),
+        switch (entry.value) {
+          final List<Object> list => jni.Expression$Converter.convert$2(
+            jsonEncode(list).toJString()..releasedBy(arena),
+          )?..releasedBy(arena),
+          _ => entry.value.toJObject()..releasedBy(arena),
+        },
         T: JObject.type,
       )..releasedBy(arena);
     }
     for (var i = 0; i < layoutEntries.length; i++) {
       final entry = layoutEntries[i];
       props[paintEntries.length + i] = jni.LayoutPropertyValue(
-        entry.key.toJString(),
-        entry.value.toJObject(arena),
+        entry.key.toJString()..releasedBy(arena),
+        switch (entry.value) {
+          final List<Object> list => jni.Expression$Converter.convert$2(
+            jsonEncode(list).toJString()..releasedBy(arena),
+          )?..releasedBy(arena),
+          _ => entry.value.toJObject()..releasedBy(arena),
+        },
         T: JObject.type,
       )..releasedBy(arena);
     }

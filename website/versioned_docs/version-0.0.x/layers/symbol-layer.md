@@ -17,7 +17,7 @@ programmatically to symbolize data on the map.
 ## Basic Usage
 
 Check out
-the [example app](https://github.com/josxha/flutter-maplibre/blob/main/example/lib/layers_symbol_page.dart)
+the [example app](https://github.com/josxha/flutter-maplibre/blob/v0.0.2/example/lib/layers_symbol_page.dart)
 to learn more.
 
 ## Style

@@ -22,7 +22,6 @@ interface class StyleLayer {
     required this.id,
     this.layout = const {},
     this.paint = const {},
-    this.metadata,
     this.minZoom = 0,
     this.maxZoom = 24,
     this.filter,
@@ -30,11 +29,6 @@ interface class StyleLayer {
 
   /// Unique layer name.
   final String id;
-
-  /// Arbitrary properties useful to track with the layer, but do not influence
-  /// rendering. Properties should be prefixed to avoid collisions,
-  /// like 'maplibre:'.
-  final Map<String, Object?>? metadata;
 
   /// The minimum zoom level for the layer. At zoom levels less than the
   /// minzoom, the layer will be hidden.
@@ -52,7 +46,12 @@ interface class StyleLayer {
   /// match the filter are displayed. Zoom expressions in filters are only
   /// evaluated at integer zoom levels. The feature-state expression is not
   /// supported in filter expressions.
-  final Object? filter;
+  ///
+  /// This property is only supported for layers that can render vector features
+  /// from a source: [CircleStyleLayer], [FillStyleLayer],
+  /// [FillExtrusionStyleLayer], [HeatmapStyleLayer], [LineStyleLayer]
+  /// and [SymbolStyleLayer].
+  final List<Object>? filter;
 
   /// Layout properties for the layer.
   final Map<String, Object> layout;
@@ -73,13 +72,17 @@ interface class StyleLayerWithSource extends StyleLayer {
     required this.sourceId,
     super.paint = const {},
     super.layout = const {},
-    super.metadata,
     super.minZoom,
     super.maxZoom,
     super.filter,
+    this.sourceLayerId,
   });
 
   /// Name of a source description to be used for this layer. Required for all
   /// layer types except background.
   final String sourceId;
+
+  /// Layer to use from a vector tile source. Required for vector tile
+  /// sources; prohibited for all other source types, including GeoJSON sources.
+  final String? sourceLayerId;
 }

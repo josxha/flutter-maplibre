@@ -10,6 +10,7 @@ import 'package:maplibre_example/layers_marker_page.dart';
 import 'package:maplibre_example/layers_mixed_page.dart';
 import 'package:maplibre_example/layers_polygon_page.dart';
 import 'package:maplibre_example/layers_polyline_page.dart';
+import 'package:maplibre_example/layers_widget_marker_page.dart';
 import 'package:maplibre_example/menu_page.dart';
 import 'package:maplibre_example/offline_page.dart';
 import 'package:maplibre_example/parameters_page.dart';
@@ -23,6 +24,7 @@ import 'package:maplibre_example/style_layers_hillshade_page.dart';
 import 'package:maplibre_example/style_layers_line_page.dart';
 import 'package:maplibre_example/style_layers_raster_page.dart';
 import 'package:maplibre_example/style_layers_symbol_page.dart';
+import 'package:maplibre_example/style_sources_vector_page.dart';
 import 'package:maplibre_example/styled_map_page.dart';
 import 'package:maplibre_example/translucent_map_page.dart';
 import 'package:maplibre_example/two_maps_page.dart';
@@ -76,10 +78,14 @@ class MyApp extends StatelessWidget {
             const StyleLayersFillExtrusionPage(),
         StyleLayersRasterPage.location: (context) =>
             const StyleLayersRasterPage(),
+        StyleSourcesVectorPage.location: (context) =>
+            const StyleSourcesVectorPage(),
         StyleLayersLinePage.location: (context) => const StyleLayersLinePage(),
         LayersMixedPage.location: (context) => const LayersMixedPage(),
         LayersCirclePage.location: (context) => const LayersCirclePage(),
         LayersMarkerPage.location: (context) => const LayersMarkerPage(),
+        LayersWidgetMarkerPage.location: (context) =>
+            const LayersWidgetMarkerPage(),
         LayersPolylinePage.location: (context) => const LayersPolylinePage(),
         LayersPolygonPage.location: (context) => const LayersPolygonPage(),
         ParametersPage.location: (context) => const ParametersPage(),

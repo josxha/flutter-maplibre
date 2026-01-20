@@ -304,10 +304,12 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 @class NSString;
 @class NSExpression;
+@class NSPredicate;
 SWIFT_CLASS_NAMED("Helpers")
 @interface Helpers : NSObject
 + (void)addImageToStyleWithTarget:(NSObject * _Nonnull)target field:(NSString * _Nonnull)field expression:(NSExpression * _Nonnull)expression;
-+ (void)setExpressionWithTarget:(NSObject * _Nonnull)target field:(NSString * _Nonnull)field expression:(NSExpression * _Nonnull)expression;
++ (void)setValueWithTarget:(NSObject * _Nonnull)target field:(NSString * _Nonnull)field value:(NSObject * _Nonnull)value;
++ (NSPredicate * _Nullable)parsePredicateWithRaw:(NSString * _Nonnull)raw SWIFT_WARN_UNUSED_RESULT;
 + (NSExpression * _Nullable)parseExpressionWithPropertyName:(NSString * _Nonnull)propertyName expression:(NSString * _Nonnull)expression SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end

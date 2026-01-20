@@ -12,6 +12,7 @@ import 'package:maplibre_example/layers_marker_page.dart';
 import 'package:maplibre_example/layers_mixed_page.dart';
 import 'package:maplibre_example/layers_polygon_page.dart';
 import 'package:maplibre_example/layers_polyline_page.dart';
+import 'package:maplibre_example/layers_widget_marker_page.dart';
 import 'package:maplibre_example/offline_page.dart';
 import 'package:maplibre_example/parameters_page.dart';
 import 'package:maplibre_example/permissions_page.dart';
@@ -24,6 +25,7 @@ import 'package:maplibre_example/style_layers_hillshade_page.dart';
 import 'package:maplibre_example/style_layers_line_page.dart';
 import 'package:maplibre_example/style_layers_raster_page.dart';
 import 'package:maplibre_example/style_layers_symbol_page.dart';
+import 'package:maplibre_example/style_sources_vector_page.dart';
 import 'package:maplibre_example/styled_map_page.dart';
 import 'package:maplibre_example/translucent_map_page.dart';
 import 'package:maplibre_example/two_maps_page.dart';
@@ -149,6 +151,11 @@ class MenuPage extends StatelessWidget {
                   location: LayersMarkerPage.location,
                 ),
                 ItemCard(
+                  label: 'Widget Markers',
+                  iconData: Icons.widgets,
+                  location: LayersWidgetMarkerPage.location,
+                ),
+                ItemCard(
                   label: 'Polygons',
                   iconData: Icons.format_shapes,
                   location: LayersPolygonPage.location,
@@ -157,6 +164,18 @@ class MenuPage extends StatelessWidget {
                   label: 'Polylines',
                   iconData: Icons.polyline,
                   location: LayersPolylinePage.location,
+                ),
+              ],
+            ),
+            const SliverToBoxAdapter(child: SectionTitle('Style Sources')),
+            SliverGrid.extent(
+              maxCrossAxisExtent: 150,
+              childAspectRatio: 1.5,
+              children: const [
+                ItemCard(
+                  label: 'Vector',
+                  iconData: Icons.category,
+                  location: StyleSourcesVectorPage.location,
                 ),
               ],
             ),
