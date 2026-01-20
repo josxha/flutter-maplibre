@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/widgets.dart';
@@ -7,10 +8,12 @@ import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/layer/layer_manager.dart';
 import 'package:maplibre/src/map_state.dart';
 import 'package:maplibre/src/platform/webview/style_controller.dart';
+import 'package:maplibre/src/platform/webview/websocket.dart';
 
 /// MapLibre GL JS using web views for desktop.
 class MapLibreMapStateWebView extends MapLibreMapState {
   late InAppWebViewController _webViewController;
+  late final Future<Websocket> _websocket;
   bool _nextGestureCausedByController = false;
   @override
   StyleControllerWebView? style;
@@ -19,11 +22,12 @@ class MapLibreMapStateWebView extends MapLibreMapState {
 
   LngLatBounds? _cachedVisibleRegion;
   Widget? _widget;
-  static const _debugMode = false;
+  static const _debugMode = true;
 
   @override
   void initState() {
     PlatformInAppWebViewController.debugLoggingSettings.enabled = _debugMode;
+    _websocket = Websocket.create(onData: _onWebSocketData);
     super.initState();
   }
 
@@ -50,17 +54,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
 </html>
 ''',
       ),
-      onWebViewCreated: (controller) async {
-        _webViewController = controller;
-        controller.addJavaScriptHandler(
-          handlerName: 'mapEvent',
-          callback: _onMapEvent,
-        );
-        widget.onEvent?.call(MapEventMapCreated(mapController: this));
-        widget.onMapCreated?.call(this);
-        // unawaited(_fetchCamera());
-        setState(() => isInitialized = true);
-      },
+      onWebViewCreated: _onWebViewCreated,
       onLoadStop: _onLoadStop,
       onConsoleMessage: (controller, consoleMessage) {
         debugPrint(consoleMessage.message);
@@ -372,6 +366,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     return newCamera;
   }
 
+  @Deprecated('Replace with WebSocket communication')
   void _onMapEvent(List<dynamic> args) {
     final data = args[0] as Map<String, dynamic>;
     switch (data['type']) {
@@ -409,8 +404,8 @@ class MapLibreMapStateWebView extends MapLibreMapState {
             screenPoint: Offset.zero,
           ),
         );
-      case 'idle':
-        widget.onEvent?.call(const MapEventIdle());
+      // case 'idle':
+      //   widget.onEvent?.call(const MapEventIdle());
       case 'moveStart':
         final reasonString = data['reason'] as String;
         final CameraChangeReason reason;
@@ -440,6 +435,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
         widget.onEvent?.call(MapEventMoveCamera(camera: newCamera));
       case 'moveend':
         widget.onEvent?.call(const MapEventCameraIdle());
+        widget.onEvent?.call(const MapEventIdle());
         unawaited(_fetchCamera());
     }
   }
@@ -450,9 +446,22 @@ class MapLibreMapStateWebView extends MapLibreMapState {
   ) async {
     debugPrint('_onLoadStop: $url');
     final gestures = options.gestures;
+    final ws = await _websocket;
+    debugPrint('WebSocket server listening on ws://localhost:${ws.port}');
     await controller.evaluateJavascript(
       source:
           '''
+    window.ws = new WebSocket('ws://localhost:${ws.port}');
+    window.ws.onopen = function(event) {
+        console.log('WebSocket is open now.');
+    };
+    window.ws.onclose = function(event) {
+        console.log('WebSocket is closed now.');
+    };
+    window.ws.onerror = function(event) {
+        console.log('WebSocket error: ' + event);
+    };
+    
     const map = new maplibregl.Map({
         container: 'map',
         style: '${await _prepareStyleString(options.initStyle)}',
@@ -501,48 +510,35 @@ class MapLibreMapStateWebView extends MapLibreMapState {
             { type: 'contextmenu', event: e }
         );
     });
-    window.map.on('idle', () => {
+    /*window.map.on('idle', () => {
         const center = window.map.getCenter();
         window.flutter_inappwebview.callHandler(
             'mapEvent',
             { type: 'idle' }
         );
+    });*/
+    window.map.on('movestart', (e) => {
+        window.ws.send(JSON.stringify({
+            type: 'moveStart',
+            reason: e.originalEvent ? 'apiGesture' : 'apiAnimation',
+        }));
     });
-    window.map.on('moveStart', (e) => {
-        const center = window.map.getCenter();
-        window.flutter_inappwebview.callHandler(
-            'mapEvent',
-            { 
-              type: 'moveStart', 
-              reason: e.originalEvent ? 'apiGesture' : 'apiAnimation' 
-            }
-        );
-    });
-    let lastMoveTimestamp = 0;
     window.map.on('move', (e) => {
-        const now = Date.now();
-        if (now - lastMoveTimestamp < 500) return;
-        lastMoveTimestamp = now;    
-    
         const center = window.map.getCenter();
-        window.flutter_inappwebview.callHandler(
-            'mapEvent',
-            {
-                type: 'move',
-                lng: center.lng,
-                lat: center.lat,
-                zoom: window.map.getZoom(),
-                pitch: window.map.getPitch(),
-                bearing: window.map.getBearing(),
-            }
-        );
+        window.ws.send(JSON.stringify({
+            type: 'move',
+            lng: center.lng,
+            lat: center.lat,
+            zoom: window.map.getZoom(),
+            pitch: window.map.getPitch(),
+            bearing: window.map.getBearing(),
+        }));
     });
     window.map.on('moveend', (e) => {
         const center = window.map.getCenter();
-        window.flutter_inappwebview.callHandler(
-            'mapEvent',
-            { type: 'moveend' }
-        );
+        window.ws.send(JSON.stringify({
+            type: 'moveend',
+        }));
     });
     window.map.scrollZoom.${gestures.zoom ? 'enable' : 'disable'}();
     window.map.boxZoom.${gestures.zoom ? 'enable' : 'disable'}();
@@ -558,5 +554,57 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     window.map.keyboard.${gestures.allEnabled ? 'enable' : 'disable'}();
 ''',
     );
+  }
+
+  Future<void> _onWebViewCreated(InAppWebViewController controller) async {
+    _webViewController = controller;
+    controller.addJavaScriptHandler(
+      handlerName: 'mapEvent',
+      callback: _onMapEvent,
+    );
+    widget.onEvent?.call(MapEventMapCreated(mapController: this));
+    widget.onMapCreated?.call(this);
+    // unawaited(_fetchCamera());
+    setState(() => isInitialized = true);
+  }
+
+  void _onWebSocketData(Object? data) {
+    switch (data) {
+      case String():
+        final decoded = jsonDecode(data) as Map<String, Object?>;
+        // debugPrint('WS JSON: $decoded');
+        switch (decoded['type']) {
+          case 'moveStart':
+            final CameraChangeReason reason;
+            if (_nextGestureCausedByController) {
+              _nextGestureCausedByController = false;
+              reason = CameraChangeReason.developerAnimation;
+            } else {
+              reason = CameraChangeReason.values.firstWhere(
+                (e) => e.name == decoded['reason'],
+              );
+            }
+            widget.onEvent?.call(MapEventStartMoveCamera(reason: reason));
+            unawaited(_fetchCamera());
+          case 'move':
+            final newCamera = MapCamera(
+              center: Geographic(
+                lon: (decoded['lng']! as num).toDouble(),
+                lat: (decoded['lat']! as num).toDouble(),
+              ),
+              zoom: (decoded['zoom']! as num).toDouble(),
+              bearing: (decoded['bearing']! as num).toDouble(),
+              pitch: (decoded['pitch']! as num).toDouble(),
+            );
+            setState(() => camera = newCamera);
+            widget.onEvent?.call(MapEventMoveCamera(camera: newCamera));
+          case 'moveend':
+            widget.onEvent?.call(const MapEventCameraIdle());
+            widget.onEvent?.call(const MapEventIdle());
+            unawaited(_fetchCamera());
+        }
+      default:
+        debugPrint('WS RAW: $data');
+    }
   }
 }
