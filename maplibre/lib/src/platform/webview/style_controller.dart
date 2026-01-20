@@ -198,7 +198,7 @@ class StyleControllerWebView extends StyleController {
     webViewController.callAsyncJavaScript(
       functionBody:
           '''
-      window.map.setProjection("${projection.name}");
+      window.map.setProjection({type: "${projection.name}"});
 ''',
     );
   }

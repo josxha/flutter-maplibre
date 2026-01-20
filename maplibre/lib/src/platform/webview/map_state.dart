@@ -7,6 +7,7 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/layer/layer_manager.dart';
 import 'package:maplibre/src/map_state.dart';
+import 'package:maplibre/src/platform/webview/extensions.dart';
 import 'package:maplibre/src/platform/webview/magic_numbers.dart';
 import 'package:maplibre/src/platform/webview/style_controller.dart';
 import 'package:maplibre/src/platform/webview/websocket.dart';
@@ -27,6 +28,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
   LayerManager? _layerManager;
 
   LngLatBounds? _cachedVisibleRegion;
+  Size? _mapSize;
   Widget? _widget;
   static const _debugMode = false;
 
@@ -293,29 +295,6 @@ class MapLibreMapStateWebView extends MapLibreMapState {
         latitudeNorth: 85.0511,
       );
 
-  Future<LngLatBounds> _fetchVisibleRegion() async {
-    final result = await webViewController.callAsyncJavaScript(
-      functionBody: '''
-    const bounds = window.map.getBounds();
-    return {
-        west: bounds.getWest(),
-        south: bounds.getSouth(),
-        east: bounds.getEast(),
-        north: bounds.getNorth(),
-    };
-''',
-    );
-    final data = result!.toMap();
-    debugPrint('_fetchVisibleRegion: $data');
-    final newBounds = LngLatBounds(
-      longitudeWest: (data['west'] as num).toDouble(),
-      latitudeSouth: (data['south'] as num).toDouble(),
-      longitudeEast: (data['east'] as num).toDouble(),
-      latitudeNorth: (data['north'] as num).toDouble(),
-    );
-    return _cachedVisibleRegion = newBounds;
-  }
-
   @override
   Future<void> animateCamera({
     Geographic? center,
@@ -398,7 +377,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
 
   void _onStyleLoaded() {
     style?.dispose();
-    unawaited(_fetchCamera());
+    unawaited(_updateCache());
     final styleCtrl = StyleControllerWebView(webViewController, _webSocket!);
     style = styleCtrl;
     widget.onEvent?.call(MapEventStyleLoaded(styleCtrl));
@@ -409,20 +388,75 @@ class MapLibreMapStateWebView extends MapLibreMapState {
   }
 
   @override
-  Geographic toLngLat(Offset screenLocation) {
-    // TODO: implement toLngLat
-    return const Geographic(lon: 0, lat: 0);
+  Geographic toLngLat(Offset logicalScreen) {
+    final cam = camera!;
+    final size = _mapSize!;
+    final scale = cam.worldScale;
+    final dpr = View.of(context).devicePixelRatio;
+
+    // Convert logical pointer to physical pixels (CSS pixels)
+    final screenLocation = logicalScreen * dpr;
+
+    // Move origin to center
+    var p = Offset(
+      screenLocation.dx - size.width / 2,
+      screenLocation.dy - size.height / 2,
+    );
+
+    // Undo pitch
+    final pitchRad = cam.pitch.toRadians();
+    p = Offset(p.dx, p.dy / cos(pitchRad));
+
+    // Undo bearing rotation
+    final bearingRad = cam.bearing.toRadians();
+    final cosB = cos(bearingRad);
+    final sinB = sin(bearingRad);
+    p = Offset(p.dx * cosB - p.dy * sinB, p.dx * sinB + p.dy * cosB);
+
+    // Add camera center world position
+    final world = cam.centerWorld + p;
+
+    // Scale back to tile coordinates and unproject
+    return (world / scale).unprojectWebMercator();
+  }
+
+  @override
+  Offset toScreenLocation(Geographic lngLat) {
+    final cam = camera!;
+    final size = _mapSize!;
+    final scale = cam.worldScale;
+    final dpr = View.of(context).devicePixelRatio;
+
+    // Project to world coordinates and scale
+    final world = lngLat.projectWebMercator() * scale;
+    final centerWorld = cam.centerWorld;
+
+    // Relative to center
+    var p = world - centerWorld;
+
+    // Apply bearing rotation (negative because screen coords)
+    final bearingRad = -cam.bearing.toRadians();
+    final cosB = cos(bearingRad);
+    final sinB = sin(bearingRad);
+    p = Offset(p.dx * cosB - p.dy * sinB, p.dx * sinB + p.dy * cosB);
+
+    // Apply pitch (vertical compression)
+    final pitchRad = cam.pitch.toRadians();
+    p = Offset(p.dx, p.dy * cos(pitchRad));
+
+    // Translate origin to top-left
+    final screenPhysical = Offset(
+      size.width / 2 + p.dx,
+      size.height / 2 + p.dy,
+    );
+
+    // Convert back to Flutter logical pixels
+    return screenPhysical / dpr;
   }
 
   @override
   List<Geographic> toLngLats(List<Offset> screenLocations) =>
       screenLocations.map(toLngLat).toList(growable: false);
-
-  @override
-  Offset toScreenLocation(Geographic lngLat) {
-    // TODO: implement toScreenLocation
-    return const Offset(200, 200);
-  }
 
   @override
   List<Offset> toScreenLocations(List<Geographic> lngLats) =>
@@ -455,21 +489,29 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     }
   }
 
-  Future<MapCamera> _fetchCamera() async {
+  Future<MapCamera> _updateCache() async {
     final result = await webViewController.callAsyncJavaScript(
       functionBody: '''
     const center = window.map.getCenter();
+    const bounds = window.map.getBounds();
+    const canvas = window.map.getCanvas();
+    const rect = canvas.getBoundingClientRect();
     return {
         lon: center.lng,
         lat: center.lat,
         zoom: window.map.getZoom(),
         bearing: window.map.getBearing(),
         pitch: window.map.getPitch(),
+        west: bounds.getWest(),
+        south: bounds.getSouth(),
+        east: bounds.getEast(),
+        north: bounds.getNorth(),
+        width: rect.width,
+        height: rect.height,
     };
 ''',
     );
     final data = result!.toMap()['value'] as Map<String, dynamic>;
-    debugPrint('_fetchCamera: $data');
     final newCamera = MapCamera(
       center: Geographic(
         lon: (data['lon'] as num).toDouble(),
@@ -479,7 +521,20 @@ class MapLibreMapStateWebView extends MapLibreMapState {
       bearing: (data['bearing'] as num).toDouble(),
       pitch: (data['pitch'] as num).toDouble(),
     );
-    setState(() => camera = newCamera);
+    final newBounds = LngLatBounds(
+      longitudeWest: (data['west'] as num).toDouble(),
+      latitudeSouth: (data['south'] as num).toDouble(),
+      longitudeEast: (data['east'] as num).toDouble(),
+      latitudeNorth: (data['north'] as num).toDouble(),
+    );
+    setState(() {
+      camera = newCamera;
+      _cachedVisibleRegion = newBounds;
+      _mapSize = Size(
+        (data['width'] as num).toDouble(),
+        (data['height'] as num).toDouble(),
+      );
+    });
     return newCamera;
   }
 
@@ -571,16 +626,25 @@ class MapLibreMapStateWebView extends MapLibreMapState {
         viewMoveStart.setUint8(1, e.originalEvent ? 1 : 0);
         window.ws.send(bufMoveStart);
     });
-    const bufMove = new ArrayBuffer(1 + 8*5);
+    const bufMove = new ArrayBuffer(1 + 8*11);
     const viewMove = new DataView(bufMove);
     viewMove.setUint8(0, $eventMove);
     window.map.on('move', (e) => {
         const center = window.map.getCenter();
+        const bounds = window.map.getBounds();
+        const canvas = window.map.getCanvas();
+        const rect = canvas.getBoundingClientRect();
         viewMove.setFloat64(1, center.lng, true);
         viewMove.setFloat64(9, center.lat, true);
         viewMove.setFloat64(17, window.map.getZoom(), true);
         viewMove.setFloat64(25, window.map.getPitch(), true);
         viewMove.setFloat64(33, window.map.getBearing(), true);
+        viewMove.setFloat64(41, bounds.getWest(), true);
+        viewMove.setFloat64(49, bounds.getSouth(), true);
+        viewMove.setFloat64(57, bounds.getEast(), true);
+        viewMove.setFloat64(65, bounds.getNorth(), true);
+        viewMove.setFloat64(73, rect.width, true);
+        viewMove.setFloat64(81, rect.height, true);
         window.ws.send(bufMove);
     });
     const bufMoveEnd = new ArrayBuffer(1);
@@ -603,7 +667,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     window.map.keyboard.${gestures.allEnabled ? 'enable' : 'disable'}();
 ''',
     );
-    unawaited(_fetchCamera());
+    unawaited(_updateCache());
   }
 
   Future<void> _onWebViewCreated(InAppWebViewController controller) async {
@@ -635,7 +699,21 @@ class MapLibreMapStateWebView extends MapLibreMapState {
               pitch: b.getFloat64(25, Endian.little),
               bearing: b.getFloat64(33, Endian.little),
             );
-            setState(() => camera = newCamera);
+            final newBounds = LngLatBounds(
+              longitudeWest: b.getFloat64(41, Endian.little),
+              latitudeSouth: b.getFloat64(49, Endian.little),
+              longitudeEast: b.getFloat64(57, Endian.little),
+              latitudeNorth: b.getFloat64(65, Endian.little),
+            );
+            final newMapSize = Size(
+              b.getFloat64(73, Endian.little),
+              b.getFloat64(81, Endian.little),
+            );
+            setState(() {
+              camera = newCamera;
+              _cachedVisibleRegion = newBounds;
+              _mapSize = newMapSize;
+            });
             widget.onEvent?.call(MapEventMoveCamera(camera: newCamera));
           case eventMoveStart:
             final CameraChangeReason reason;
@@ -652,10 +730,9 @@ class MapLibreMapStateWebView extends MapLibreMapState {
           case eventMoveEnd:
             widget.onEvent?.call(const MapEventCameraIdle());
             widget.onEvent?.call(const MapEventIdle());
-          case eventStyleLoad:
+          // setStyle and initial loading
+          case eventStyleLoad || eventLoad:
             _onStyleLoaded();
-          case eventLoad:
-            widget.onEvent?.call(const MapEventIdle());
           case eventClick:
             widget.onEvent?.call(
               MapEventClick(
