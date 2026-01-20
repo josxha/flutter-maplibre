@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:maplibre/maplibre.dart';
@@ -12,21 +11,27 @@ import 'package:maplibre/src/platform/webview/style_controller.dart';
 /// MapLibre GL JS using web views for desktop.
 class MapLibreMapStateWebView extends MapLibreMapState {
   late InAppWebViewController _webViewController;
+  bool _nextGestureCausedByController = false;
   @override
   StyleControllerWebView? style;
 
   LayerManager? _layerManager;
 
+  LngLatBounds? _cachedVisibleRegion;
+  Widget? _widget;
+  static const _debugMode = false;
+
   @override
   void initState() {
-    PlatformInAppWebViewController.debugLoggingSettings.enabled = kDebugMode;
+    PlatformInAppWebViewController.debugLoggingSettings.enabled = _debugMode;
     super.initState();
   }
 
   @override
   Widget buildPlatformWidget(BuildContext context) {
-    return InAppWebView(
-      initialSettings: InAppWebViewSettings(isInspectable: kDebugMode),
+    return _widget ??= InAppWebView(
+      // ignore: avoid_redundant_argument_values
+      initialSettings: InAppWebViewSettings(isInspectable: _debugMode),
       initialData: InAppWebViewInitialData(
         data: '''
 <!DOCTYPE html>
@@ -65,26 +70,38 @@ class MapLibreMapStateWebView extends MapLibreMapState {
 
   @override
   void didUpdateWidget(covariant MapLibreMap oldWidget) {
+    final gestures = options.gestures;
     _webViewController.evaluateJavascript(
       source:
           '''
-    map.setMinZoom(${options.minZoom});
-    map.setMaxZoom(${options.maxZoom});
-    map.setMinPitch(${options.minPitch});
-    map.setMaxPitch(${options.maxPitch});
+    window.map.setMinZoom(${options.minZoom});
+    window.map.setMaxZoom(${options.maxZoom});
+    window.map.setMinPitch(${options.minPitch});
+    window.map.setMaxPitch(${options.maxPitch});
    ${switch (options.maxBounds) {
             final bounds? => '''
-    map.setMaxBounds([
+    window.map.setMaxBounds([
         [${bounds.longitudeWest}, ${bounds.latitudeSouth}],
         [${bounds.longitudeEast}, ${bounds.latitudeNorth}]
     ]);
     ''',
             _ => 'map.setMaxBounds(null);',
           }}
+    window.map.scrollZoom.${gestures.zoom ? 'enable' : 'disable'}();
+    window.map.boxZoom.${gestures.zoom ? 'enable' : 'disable'}();
+    window.map.doubleClickZoom.${gestures.zoom ? 'enable' : 'disable'}();
+    
+    window.map.dragPan.${gestures.pan ? 'enable' : 'disable'}();
+    
+    window.map.dragRotate.${gestures.rotate ? 'enable' : 'disable'}();
+    window.map.touchZoomRotate.${gestures.rotate ? 'enableRotation' : 'disableRotation'}();
+    
+    window.map.touchPitch.${gestures.pitch ? 'enable' : 'disable'}();
+    
+    window.map.keyboard.${gestures.allEnabled ? 'enable' : 'disable'}();
     ${ /* TODO update LayerManager layers */ ''}
 ''',
     );
-    _updateGestures(options.gestures);
     _layerManager?.updateLayers(widget.layers);
     super.didUpdateWidget(oldWidget);
   }
@@ -171,29 +188,36 @@ class MapLibreMapStateWebView extends MapLibreMapState {
       pow(2, (camera?.zoom ?? 0) + 9);
 
   @override
-  LngLatBounds getVisibleRegion() {
-    // TODO: implement getVisibleRegion
-    throw UnimplementedError();
-  }
+  LngLatBounds getVisibleRegion() =>
+      _cachedVisibleRegion ??
+      const LngLatBounds(
+        longitudeWest: -180,
+        latitudeSouth: -85.0511,
+        longitudeEast: 180,
+        latitudeNorth: 85.0511,
+      );
 
-  Future<void> _updateGestures(MapGestures gestures) async {
-    await _webViewController.evaluateJavascript(
-      source:
-          '''
-    map.scrollZoom.${gestures.zoom ? 'enable' : 'disable'}();
-    map.boxZoom.${gestures.zoom ? 'enable' : 'disable'}();
-    map.doubleClickZoom.${gestures.zoom ? 'enable' : 'disable'}();
-    
-    map.dragPan.${gestures.pan ? 'enable' : 'disable'}();
-    
-    map.dragRotate.${gestures.rotate ? 'enable' : 'disable'}();
-    map.touchZoomRotate.${gestures.rotate ? 'enableRotation' : 'disableRotation'}();
-    
-    map.touchPitch.${gestures.pitch ? 'enable' : 'disable'}();
-    
-    map.keyboard.${gestures.allEnabled ? 'enable' : 'disable'}();
+  Future<LngLatBounds> _fetchVisibleRegion() async {
+    final result = await _webViewController.callAsyncJavaScript(
+      functionBody: '''
+    const bounds = window.map.getBounds();
+    return {
+        west: bounds.getWest(),
+        south: bounds.getSouth(),
+        east: bounds.getEast(),
+        north: bounds.getNorth(),
+    };
 ''',
     );
+    final data = result!.toMap();
+    debugPrint('_fetchVisibleRegion: $data');
+    final newBounds = LngLatBounds(
+      longitudeWest: (data['west'] as num).toDouble(),
+      latitudeSouth: (data['south'] as num).toDouble(),
+      longitudeEast: (data['east'] as num).toDouble(),
+      latitudeNorth: (data['north'] as num).toDouble(),
+    );
+    return _cachedVisibleRegion = newBounds;
   }
 
   @override
@@ -206,6 +230,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     double webSpeed = 1.2,
     Duration? webMaxDuration,
   }) async {
+    _nextGestureCausedByController = true;
     await _webViewController.evaluateJavascript(
       source:
           '''
@@ -219,7 +244,6 @@ class MapLibreMapStateWebView extends MapLibreMapState {
   });
 ''',
     );
-    // TODO integrate a Completer to wait for the animation to finish
   }
 
   @override
@@ -229,6 +253,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     double? bearing,
     double? pitch,
   }) async {
+    _nextGestureCausedByController = true;
     await _webViewController.evaluateJavascript(
       source:
           '''
@@ -332,7 +357,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     };
 ''',
     );
-    final data = result!.toMap();
+    final data = result!.toMap()['value'] as Map<String, dynamic>;
     debugPrint('_fetchCamera: $data');
     final newCamera = MapCamera(
       center: Geographic(
@@ -387,10 +412,20 @@ class MapLibreMapStateWebView extends MapLibreMapState {
       case 'idle':
         widget.onEvent?.call(const MapEventIdle());
       case 'moveStart':
-        widget.onEvent?.call(
-          // TODO CameraChangeReason
-          const MapEventStartMoveCamera(reason: CameraChangeReason.apiGesture),
-        );
+        final reasonString = data['reason'] as String;
+        final CameraChangeReason reason;
+        if (_nextGestureCausedByController) {
+          _nextGestureCausedByController = false;
+          reason = CameraChangeReason.developerAnimation;
+        } else {
+          reason = switch (reasonString) {
+            'apiGesture' => CameraChangeReason.apiGesture,
+            'apiAnimation' => CameraChangeReason.apiAnimation,
+            _ => throw Exception('Unknown moveStart reason: $reasonString'),
+          };
+        }
+        widget.onEvent?.call(MapEventStartMoveCamera(reason: reason));
+        unawaited(_fetchCamera());
       case 'move':
         final newCamera = MapCamera(
           center: Geographic(
@@ -404,8 +439,8 @@ class MapLibreMapStateWebView extends MapLibreMapState {
         setState(() => camera = newCamera);
         widget.onEvent?.call(MapEventMoveCamera(camera: newCamera));
       case 'moveend':
-        // TODO Completer
         widget.onEvent?.call(const MapEventCameraIdle());
+        unawaited(_fetchCamera());
     }
   }
 
@@ -414,6 +449,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     WebUri? url,
   ) async {
     debugPrint('_onLoadStop: $url');
+    final gestures = options.gestures;
     await controller.evaluateJavascript(
       source:
           '''
@@ -429,79 +465,94 @@ class MapLibreMapStateWebView extends MapLibreMapState {
         pitch: ${options.initPitch},
         attributionControl: false,
     });
-    map.setMinZoom(${options.minZoom});
-    map.setMaxZoom(${options.maxZoom});
-    map.setMinPitch(${options.minPitch});
-    map.setMaxPitch(${options.maxPitch});
+    window.map = map;
+    
+    window.map.setMinZoom(${options.minZoom});
+    window.map.setMaxZoom(${options.maxZoom});
+    window.map.setMinPitch(${options.minPitch});
+    window.map.setMaxPitch(${options.maxPitch});
    ${switch (options.maxBounds) {
             final bounds? => '''
-    map.setMaxBounds([
+    window.map.setMaxBounds([
         [${bounds.longitudeWest}, ${bounds.latitudeSouth}],
         [${bounds.longitudeEast}, ${bounds.latitudeNorth}]
     ]);
     ''',
             _ => '',
           }}
-    map.on('load', () => {
+    window.map.on('load', () => {
         window.flutter_inappwebview.callHandler('mapEvent', { type: 'load' });
     });
-    map.on('click', (e) => {
+    window.map.on('click', (e) => {
         window.flutter_inappwebview.callHandler(
             'mapEvent',
             { type: 'click', event: e }
         );
     });
-    map.on('dblclick', (e) => {
+    window.map.on('dblclick', (e) => {
         window.flutter_inappwebview.callHandler(
             'mapEvent',
             { type: 'dblclick', event: e }
         );
     });
-    map.on('contextmenu', (e) => {
+    window.map.on('contextmenu', (e) => {
         window.flutter_inappwebview.callHandler(
             'mapEvent',
             { type: 'contextmenu', event: e }
         );
     });
-    map.on('idle', () => {
-        const center = map.getCenter();
+    window.map.on('idle', () => {
+        const center = window.map.getCenter();
         window.flutter_inappwebview.callHandler(
             'mapEvent',
             { type: 'idle' }
         );
     });
-    map.on('moveStart', () => {
-        const center = map.getCenter();
+    window.map.on('moveStart', (e) => {
+        const center = window.map.getCenter();
         window.flutter_inappwebview.callHandler(
             'mapEvent',
-            { type: 'moveStart' }
-            ${ /* TODO CameraChangeReason */ ''}
+            { 
+              type: 'moveStart', 
+              reason: e.originalEvent ? 'apiGesture' : 'apiAnimation' 
+            }
         );
     });
-    map.on('move', (e) => {
-        const center = map.getCenter();
+    window.map.on('move', (e) => {
+    
+        const center = window.map.getCenter();
         window.flutter_inappwebview.callHandler(
             'mapEvent',
             {
                 type: 'move',
                 lng: center.lng,
                 lat: center.lat,
-                zoom: map.getZoom(),
-                pitch: map.getPitch(),
-                bearing: map.getBearing(),
+                zoom: window.map.getZoom(),
+                pitch: window.map.getPitch(),
+                bearing: window.map.getBearing(),
             }
         );
     });
-    map.on('moveend', (e) => {
-        const center = map.getCenter();
+    window.map.on('moveend', (e) => {
+        const center = window.map.getCenter();
         window.flutter_inappwebview.callHandler(
             'mapEvent',
             { type: 'moveend' }
         );
     });
-    window.map = map;  
+    window.map.scrollZoom.${gestures.zoom ? 'enable' : 'disable'}();
+    window.map.boxZoom.${gestures.zoom ? 'enable' : 'disable'}();
+    window.map.doubleClickZoom.${gestures.zoom ? 'enable' : 'disable'}();
+    
+    window.map.dragPan.${gestures.pan ? 'enable' : 'disable'}();
+    
+    window.map.dragRotate.${gestures.rotate ? 'enable' : 'disable'}();
+    window.map.touchZoomRotate.${gestures.rotate ? 'enableRotation' : 'disableRotation'}();
+    
+    window.map.touchPitch.${gestures.pitch ? 'enable' : 'disable'}();
+    
+    window.map.keyboard.${gestures.allEnabled ? 'enable' : 'disable'}();
 ''',
     );
-    await _updateGestures(options.gestures);
   }
 }
