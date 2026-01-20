@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:math';
+import 'dart:typed_data';
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -23,6 +23,9 @@ class MapLibreMapStateWebView extends MapLibreMapState {
   LngLatBounds? _cachedVisibleRegion;
   Widget? _widget;
   static const _debugMode = true;
+  static const _eventMove = 1;
+  static const _eventMoveStart = 2;
+  static const _eventMoveEnd = 3;
 
   @override
   void initState() {
@@ -406,33 +409,6 @@ class MapLibreMapStateWebView extends MapLibreMapState {
         );
       // case 'idle':
       //   widget.onEvent?.call(const MapEventIdle());
-      case 'moveStart':
-        final reasonString = data['reason'] as String;
-        final CameraChangeReason reason;
-        if (_nextGestureCausedByController) {
-          _nextGestureCausedByController = false;
-          reason = CameraChangeReason.developerAnimation;
-        } else {
-          reason = switch (reasonString) {
-            'apiGesture' => CameraChangeReason.apiGesture,
-            'apiAnimation' => CameraChangeReason.apiAnimation,
-            _ => throw Exception('Unknown moveStart reason: $reasonString'),
-          };
-        }
-        widget.onEvent?.call(MapEventStartMoveCamera(reason: reason));
-        unawaited(_fetchCamera());
-      case 'move':
-        final newCamera = MapCamera(
-          center: Geographic(
-            lon: (data['lng'] as num).toDouble(),
-            lat: (data['lat'] as num).toDouble(),
-          ),
-          zoom: (data['zoom'] as num).toDouble(),
-          bearing: (data['bearing'] as num).toDouble(),
-          pitch: (data['pitch'] as num).toDouble(),
-        );
-        setState(() => camera = newCamera);
-        widget.onEvent?.call(MapEventMoveCamera(camera: newCamera));
       case 'moveend':
         widget.onEvent?.call(const MapEventCameraIdle());
         widget.onEvent?.call(const MapEventIdle());
@@ -517,28 +493,31 @@ class MapLibreMapStateWebView extends MapLibreMapState {
             { type: 'idle' }
         );
     });*/
+    const bufMoveStart = new ArrayBuffer(1 + 1);
+    const viewMoveStart = new DataView(bufMoveStart);
+    viewMoveStart.setUint8(0, $_eventMoveStart);
     window.map.on('movestart', (e) => {
-        window.ws.send(JSON.stringify({
-            type: 'moveStart',
-            reason: e.originalEvent ? 'apiGesture' : 'apiAnimation',
-        }));
+        viewMoveStart.setUint8(1, e.originalEvent ? 1 : 0);
+        window.ws.send(bufMoveStart);
     });
+    const bufMove = new ArrayBuffer(1 + 8 * 5);
+    const viewMove = new DataView(bufMove);
+    viewMove.setUint8(0, $_eventMove);
     window.map.on('move', (e) => {
+        console.log('map move event');
         const center = window.map.getCenter();
-        window.ws.send(JSON.stringify({
-            type: 'move',
-            lng: center.lng,
-            lat: center.lat,
-            zoom: window.map.getZoom(),
-            pitch: window.map.getPitch(),
-            bearing: window.map.getBearing(),
-        }));
+        viewMove.setFloat64(1, center.lng, true);
+        viewMove.setFloat64(9, center.lat, true);
+        viewMove.setFloat64(17, window.map.getZoom(), true);
+        viewMove.setFloat64(25, window.map.getPitch(), true);
+        viewMove.setFloat64(33, window.map.getBearing(), true);
+        window.ws.send(bufMove);
     });
+    const bufMoveEnd = new ArrayBuffer(1);
+    const viewMoveEnd = new DataView(bufMoveEnd);
+    viewMoveEnd.setUint8(0, $_eventMoveEnd);
     window.map.on('moveend', (e) => {
-        const center = window.map.getCenter();
-        window.ws.send(JSON.stringify({
-            type: 'moveend',
-        }));
+        window.ws.send(bufMoveEnd);
     });
     window.map.scrollZoom.${gestures.zoom ? 'enable' : 'disable'}();
     window.map.boxZoom.${gestures.zoom ? 'enable' : 'disable'}();
@@ -569,42 +548,43 @@ class MapLibreMapStateWebView extends MapLibreMapState {
   }
 
   void _onWebSocketData(Object? data) {
+    debugPrint('_onWebSocketData: $data');
     switch (data) {
-      case String():
-        final decoded = jsonDecode(data) as Map<String, Object?>;
-        // debugPrint('WS JSON: $decoded');
-        switch (decoded['type']) {
-          case 'moveStart':
+      case final List<int> data:
+        final b = ByteData.sublistView(Uint8List.fromList(data));
+        switch (b.getUint8(0)) {
+          case _eventMove:
+            final newCamera = MapCamera(
+              center: Geographic(
+                lon: b.getFloat64(1, Endian.little),
+                lat: b.getFloat64(9, Endian.little),
+              ),
+              zoom: b.getFloat64(17, Endian.little),
+              pitch: b.getFloat64(25, Endian.little),
+              bearing: b.getFloat64(33, Endian.little),
+            );
+            setState(() => camera = newCamera);
+            widget.onEvent?.call(MapEventMoveCamera(camera: newCamera));
+          case _eventMoveStart:
             final CameraChangeReason reason;
             if (_nextGestureCausedByController) {
               _nextGestureCausedByController = false;
               reason = CameraChangeReason.developerAnimation;
             } else {
-              reason = CameraChangeReason.values.firstWhere(
-                (e) => e.name == decoded['reason'],
-              );
+              final hasOriginalEvent = b.getUint8(1) == 1;
+              reason = hasOriginalEvent
+                  ? CameraChangeReason.apiGesture
+                  : CameraChangeReason.apiAnimation;
             }
             widget.onEvent?.call(MapEventStartMoveCamera(reason: reason));
-            unawaited(_fetchCamera());
-          case 'move':
-            final newCamera = MapCamera(
-              center: Geographic(
-                lon: (decoded['lng']! as num).toDouble(),
-                lat: (decoded['lat']! as num).toDouble(),
-              ),
-              zoom: (decoded['zoom']! as num).toDouble(),
-              bearing: (decoded['bearing']! as num).toDouble(),
-              pitch: (decoded['pitch']! as num).toDouble(),
-            );
-            setState(() => camera = newCamera);
-            widget.onEvent?.call(MapEventMoveCamera(camera: newCamera));
-          case 'moveend':
+          case _eventMoveEnd:
             widget.onEvent?.call(const MapEventCameraIdle());
             widget.onEvent?.call(const MapEventIdle());
-            unawaited(_fetchCamera());
+          default:
+            throw Exception('Unknown WS binary message type: ${b.getUint8(0)}');
         }
       default:
-        debugPrint('WS RAW: $data');
+        throw Exception('Unknown WS message type: ${data.runtimeType}');
     }
   }
 }

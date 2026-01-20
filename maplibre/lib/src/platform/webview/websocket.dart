@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
-
 /// Callback type for handling incoming data from the WebSocket.
 typedef OnDataCallback = void Function(dynamic data);
 
