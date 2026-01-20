@@ -291,6 +291,13 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     );
   }
 
+  @override
+  void dispose() {
+    style?.dispose();
+    unawaited(_websocket.then((ws) => ws.dispose()));
+    super.dispose();
+  }
+
   void _onStyleLoaded() {
     style?.dispose();
     final styleCtrl = StyleControllerWebView(_webViewController);
