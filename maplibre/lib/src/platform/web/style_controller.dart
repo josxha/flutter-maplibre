@@ -41,7 +41,7 @@ class StyleControllerWeb extends StyleController {
   }
 
   @override
-  Future<List<String>> getAttributions() async => getAttributions();
+  Future<List<String>> getAttributions() async => getAttributionsSync();
 
   @override
   List<String> getAttributionsSync() {
@@ -217,6 +217,7 @@ class StyleControllerWeb extends StyleController {
             tileSize: source.tileSize,
             attribution: source.attribution,
             url: source.url,
+            tiles: source.tiles.jsify(),
           ),
         );
       case RasterSource():
@@ -227,6 +228,7 @@ class StyleControllerWeb extends StyleController {
             attribution: source.attribution,
             tileSize: source.tileSize,
             tiles: source.tiles.jsify(),
+            url: source.url,
           ),
         );
       case VectorSource():
@@ -245,18 +247,9 @@ class StyleControllerWeb extends StyleController {
             // https://github.com/maplibre/maplibre-gl-js/blob/87486a5ef2085e600e8fa4e31252629dd8488dcd/src/source/image_source.ts#L24
             coordinates: [
               [source.coordinates.topLeft.lon, source.coordinates.topLeft.lat],
-              [
-                source.coordinates.topRight.lon,
-                source.coordinates.topRight.lat,
-              ],
-              [
-                source.coordinates.bottomRight.lon,
-                source.coordinates.bottomRight.lat,
-              ],
-              [
-                source.coordinates.bottomLeft.lon,
-                source.coordinates.bottomLeft.lat,
-              ],
+              [source.coordinates.topRight.lon, source.coordinates.topRight.lat],
+              [source.coordinates.bottomRight.lon, source.coordinates.bottomRight.lat],
+              [source.coordinates.bottomLeft.lon, source.coordinates.bottomLeft.lat],
             ].jsify()!,
           ),
         );

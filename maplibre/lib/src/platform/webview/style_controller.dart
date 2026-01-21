@@ -43,6 +43,11 @@ class StyleControllerWebView extends StyleController {
     String? aboveLayerId,
     int? atIndex,
   }) async {
+    final sourceLayerSnippet =
+        layer is StyleLayerWithSource && layer.sourceLayerId != null
+            ? '"source-layer": "${layer.sourceLayerId}",'
+            : '';
+    final belowArg = belowLayerId != null ? "'$belowLayerId'" : 'undefined';
     await webViewController.callAsyncJavaScript(
       functionBody:
           '''
@@ -66,38 +71,54 @@ class StyleControllerWebView extends StyleController {
         minzoom: ${layer.minZoom},
         maxzoom: ${layer.maxZoom},
         ${layer is StyleLayerWithSource ? 'source: "${layer.sourceId}",' : ''}
-        ${layer is StyleLayerWithSource ? 'source-layer: "${layer.sourceLayerId}",' : ''}
+        $sourceLayerSnippet
       };
-      window.map.addLayer(layer, $belowLayerId);
+      if (layer.source && !window.map.getSource(layer.source)) {
+        throw new Error(`Source "\${layer.source}" not found for layer "${layer.id}"`);
+      }
+      window.map.addLayer(layer, $belowArg);
 ''',
     );
-    Future.delayed(const Duration(seconds: 1), _fetchLayerIds);
+    await _fetchLayerIds();
   }
 
   @override
   Future<void> addSource(Source source) async {
     await webViewController.callAsyncJavaScript(
-      functionBody:
-          '''
-      const source = {
+      functionBody: '''
+      if (window.map.getSource("${source.id}")) {
+        throw new Error('A Source with the id "${source.id}" already exists in the map style.');
+      }
+      let dataVal = ${source is GeoJsonSource ? jsonEncode(source.data) : 'null'};
+      if (typeof dataVal === 'string') {
+        const trimmed = dataVal.trim();
+        if (trimmed.startsWith('{') || trimmed.startsWith('[')) {
+          try { dataVal = JSON.parse(trimmed); } catch (e) { console.warn('GeoJSON parse failed', e); }
+        }
+      }
+      const sourceObj = {
         ${switch (source) {
             GeoJsonSource() => '''
             type: 'geojson',
-            data: JSON.parse(`${jsonEncode(source.data)}`),
+            data: dataVal,
           ''',
             RasterSource() => '''
             type: 'raster',
-            tiles: ${jsonEncode(source.tiles)},
+            ${source.tiles != null ? 'tiles: ${jsonEncode(source.tiles)},' : ''}
+            ${source.url != null ? 'url: ${jsonEncode(source.url)},' : ''}
             tileSize: ${source.tileSize},
+            attribution: ${jsonEncode(source.attribution)},
           ''',
             RasterDemSource() => '''
             type: 'raster-dem',
-            tiles: ${jsonEncode(source.tiles)},
+            ${source.tiles != null ? 'tiles: ${jsonEncode(source.tiles)},' : ''}
+            ${source.url != null ? 'url: ${jsonEncode(source.url)},' : ''}
             tileSize: ${source.tileSize},
+            attribution: ${jsonEncode(source.attribution)},
           ''',
             VectorSource() => '''
             type: 'vector',
-            tiles: ${jsonEncode(source.tiles)},
+            url: ${jsonEncode(source.url)},
           ''',
             ImageSource() => '''
             type: 'image',
@@ -122,7 +143,7 @@ class StyleControllerWebView extends StyleController {
             _ => throw UnsupportedError('Unsupported source type: ${source.runtimeType}'),
           }}
       };
-      window.map.addSource("${source.id}", source);
+      window.map.addSource("${source.id}", sourceObj);
 ''',
     );
     Future.delayed(const Duration(seconds: 1), getAttributions);
@@ -134,12 +155,16 @@ class StyleControllerWebView extends StyleController {
   @override
   Future<List<String>> getAttributions() async {
     final result = await webViewController.callAsyncJavaScript(
-      functionBody: '''
-      return window.map.getAttributions();
+      functionBody: r'''
+      const style = window.map.getStyle && window.map.getStyle();
+      const sources = style && style.sources ? Object.values(style.sources) : [];
+      return sources
+        .map(src => src && src.attribution)
+        .filter(attr => attr !== undefined && attr !== null && `${attr}`.length > 0);
 ''',
     );
     if (result?.value case final List<dynamic> list) {
-      _cachedAttributions = list.cast<String>();
+      _cachedAttributions = list.map((e) => e.toString()).toList(growable: false);
     }
     return _cachedAttributions;
   }

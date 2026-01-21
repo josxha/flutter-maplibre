@@ -149,7 +149,10 @@ class MapLibreMapStateWebView extends MapLibreMapState {
             for (let i = 0; i < imageBytes.length; i++) {
                 imageBytes[i] = view.getUint8(2 + idLength + i);
             }
-            window.map.addImage(id, imageBytes);
+            const blob = new Blob([imageBytes], { type: 'image/png' });
+            createImageBitmap(blob).then((img) => {
+                window.map.addImage(id, img);
+            }).catch((err) => console.warn('addImage decode failed', err));
             break;
           default:
             console.warn(`WebSocket error: Unknown WS binary message type: \${view.getUint8(0)}`);
@@ -731,3 +734,5 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     }
   }
 }
+
+
