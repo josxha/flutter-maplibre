@@ -734,5 +734,3 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     }
   }
 }
-
-

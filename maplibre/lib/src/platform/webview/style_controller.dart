@@ -45,8 +45,8 @@ class StyleControllerWebView extends StyleController {
   }) async {
     final sourceLayerSnippet =
         layer is StyleLayerWithSource && layer.sourceLayerId != null
-            ? '"source-layer": "${layer.sourceLayerId}",'
-            : '';
+        ? '"source-layer": "${layer.sourceLayerId}",'
+        : '';
     final belowArg = belowLayerId != null ? "'$belowLayerId'" : 'undefined';
     await webViewController.callAsyncJavaScript(
       functionBody:
@@ -85,7 +85,8 @@ class StyleControllerWebView extends StyleController {
   @override
   Future<void> addSource(Source source) async {
     await webViewController.callAsyncJavaScript(
-      functionBody: '''
+      functionBody:
+          '''
       if (window.map.getSource("${source.id}")) {
         throw new Error('A Source with the id "${source.id}" already exists in the map style.');
       }
@@ -164,7 +165,9 @@ class StyleControllerWebView extends StyleController {
 ''',
     );
     if (result?.value case final List<dynamic> list) {
-      _cachedAttributions = list.map((e) => e.toString()).toList(growable: false);
+      _cachedAttributions = list
+          .map((e) => e.toString())
+          .toList(growable: false);
     }
     return _cachedAttributions;
   }

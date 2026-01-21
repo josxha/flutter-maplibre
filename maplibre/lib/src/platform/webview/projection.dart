@@ -39,10 +39,7 @@ class WebViewProjection {
     p = Offset(p.dx, p.dy * cos(pitchRad));
 
     // Translate origin back to top-left
-    return Offset(
-      mapSize.width / 2 + p.dx,
-      mapSize.height / 2 + p.dy,
-    );
+    return Offset(mapSize.width / 2 + p.dx, mapSize.height / 2 + p.dy);
   }
 
   /// Converts screen space (CSS / logical pixels) back to geographic coords.

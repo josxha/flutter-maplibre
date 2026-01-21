@@ -35,8 +35,16 @@ void main() {
       for (final geo in points) {
         final screen = WebViewProjection.toScreenLocation(camera, mapSize, geo);
         final back = WebViewProjection.toLngLat(camera, mapSize, screen);
-        expect(back.lon, closeTo(geo.lon, 1e-6), reason: 'lon mismatch for $geo');
-        expect(back.lat, closeTo(geo.lat, 1e-6), reason: 'lat mismatch for $geo');
+        expect(
+          back.lon,
+          closeTo(geo.lon, 1e-6),
+          reason: 'lon mismatch for $geo',
+        );
+        expect(
+          back.lat,
+          closeTo(geo.lat, 1e-6),
+          reason: 'lat mismatch for $geo',
+        );
       }
     });
   });
