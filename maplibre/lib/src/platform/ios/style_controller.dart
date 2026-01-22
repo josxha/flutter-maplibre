@@ -32,10 +32,10 @@ class StyleControllerIos extends StyleController {
       );
     }
 
-    MLNStyleLayer? ffiStyleLayer;
+    MLNStyleLayer? ffiLayer;
     switch (layer) {
       case BackgroundStyleLayer():
-        ffiStyleLayer = MLNBackgroundStyleLayer.new$()
+        ffiLayer = MLNBackgroundStyleLayer.new$()
           ..initWithIdentifier(ffiId)
           ..backgroundColor = NSExpression.expressionWithFormat(
             layer.color.toHexString().toNSString(),
@@ -49,46 +49,50 @@ class StyleControllerIos extends StyleController {
         }
         switch (layer) {
           case FillStyleLayer():
-            ffiStyleLayer = MLNFillStyleLayer.new$()
+            ffiLayer = MLNFillStyleLayer.new$()
               ..initWithIdentifier(ffiId, source: ffiSource);
           case CircleStyleLayer():
-            ffiStyleLayer = MLNCircleStyleLayer.new$()
+            ffiLayer = MLNCircleStyleLayer.new$()
               ..initWithIdentifier(ffiId, source: ffiSource);
           case FillExtrusionStyleLayer():
-            ffiStyleLayer = MLNFillExtrusionStyleLayer.new$()
+            ffiLayer = MLNFillExtrusionStyleLayer.new$()
               ..initWithIdentifier(ffiId, source: ffiSource);
           case HeatmapStyleLayer():
-            ffiStyleLayer = MLNHeatmapStyleLayer.new$()
+            ffiLayer = MLNHeatmapStyleLayer.new$()
               ..initWithIdentifier(ffiId, source: ffiSource);
           case HillshadeStyleLayer():
-            ffiStyleLayer = MLNHillshadeStyleLayer.new$()
+            ffiLayer = MLNHillshadeStyleLayer.new$()
               ..initWithIdentifier(ffiId, source: ffiSource);
           case LineStyleLayer():
-            ffiStyleLayer = MLNLineStyleLayer.new$()
+            ffiLayer = MLNLineStyleLayer.new$()
               ..initWithIdentifier(ffiId, source: ffiSource);
           case RasterStyleLayer():
-            ffiStyleLayer = MLNRasterStyleLayer.new$()
+            ffiLayer = MLNRasterStyleLayer.new$()
               ..initWithIdentifier(ffiId, source: ffiSource);
           case SymbolStyleLayer():
-            ffiStyleLayer = MLNSymbolStyleLayer.new$()
+            ffiLayer = MLNSymbolStyleLayer.new$()
               ..initWithIdentifier(ffiId, source: ffiSource);
         }
     }
 
-    if (ffiStyleLayer == null) {
+    if (ffiLayer == null) {
       throw UnimplementedError(
         'The Layer is not supported: ${layer.runtimeType}',
       );
     }
-    ffiStyleLayer.minimumZoomLevel = layer.minZoom;
-    ffiStyleLayer.maximumZoomLevel = layer.maxZoom;
-    ffiStyleLayer.setProperties(layer.paint);
-    ffiStyleLayer.setProperties(layer.layout);
-
-    if (layer is StyleLayerWithSource && layer.sourceLayerId != null) {
-      (ffiStyleLayer as MLNVectorStyleLayer).sourceLayerIdentifier = layer
-          .sourceLayerId!
-          .toNSString();
+    ffiLayer.minimumZoomLevel = layer.minZoom;
+    ffiLayer.maximumZoomLevel = layer.maxZoom;
+    ffiLayer.setProperties(layer.paint);
+    ffiLayer.setProperties(layer.layout);
+    if (ffiLayer case MLNVectorStyleLayer()) {
+      final layerWithSource = layer as StyleLayerWithSource;
+      ffiLayer.sourceLayerIdentifier = layerWithSource.sourceLayerId
+          ?.toNSString();
+      if (layerWithSource.filter case final filter?) {
+        final expression = jsonEncode(filter).toNSString();
+        final ffiPredicate = Helpers.parsePredicateWithRaw(expression);
+        ffiLayer.predicate = ffiPredicate;
+      }
     }
 
     if (belowLayerId case final String id) {
@@ -96,17 +100,17 @@ class StyleControllerIos extends StyleController {
       if (belowLayer == null) {
         throw Exception('Layer "$id" does not exist.');
       }
-      _ffiStyle.insertLayer$2(ffiStyleLayer, belowLayer: belowLayer);
+      _ffiStyle.insertLayer$2(ffiLayer, belowLayer: belowLayer);
     } else if (aboveLayerId case final String id) {
       final aboveLayer = _ffiStyle.layerWithIdentifier(id.toNSString());
       if (aboveLayer == null) {
         throw Exception('Layer "$id" does not exist.');
       }
-      _ffiStyle.insertLayer(ffiStyleLayer, aboveLayer: aboveLayer);
+      _ffiStyle.insertLayer(ffiLayer, aboveLayer: aboveLayer);
     } else if (atIndex case final int index) {
-      _ffiStyle.insertLayer$1(ffiStyleLayer, atIndex: index);
+      _ffiStyle.insertLayer$1(ffiLayer, atIndex: index);
     } else {
-      _ffiStyle.addLayer(ffiStyleLayer);
+      _ffiStyle.addLayer(ffiLayer);
     }
   }
 

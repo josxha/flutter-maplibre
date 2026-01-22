@@ -12,16 +12,16 @@ import XCTest
 // See https://developer.apple.com/documentation/xctest for more information about using XCTest.
 
 class RunnerTests: XCTestCase {
-  func testGetPlatformVersion() {
-    let plugin = MaplibreIosPlugin()
+    func testGetPlatformVersion() {
+        let plugin = MaplibreIosPlugin()
 
-    let call = FlutterMethodCall(methodName: "getPlatformVersion", arguments: [])
+        let call = FlutterMethodCall(methodName: "getPlatformVersion", arguments: [])
 
-    let resultExpectation = expectation(description: "result block must be called.")
-    plugin.handle(call) { result in
-      XCTAssertEqual(result as! String, "iOS " + UIDevice.current.systemVersion)
-      resultExpectation.fulfill()
+        let resultExpectation = expectation(description: "result block must be called.")
+        plugin.handle(call) { result in
+            XCTAssertEqual(result as! String, "iOS " + UIDevice.current.systemVersion)
+            resultExpectation.fulfill()
+        }
+        waitForExpectations(timeout: 1)
     }
-    waitForExpectations(timeout: 1)
-  }
 }

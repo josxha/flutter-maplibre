@@ -29,7 +29,7 @@ Widget build(BuildContext context) {
 ```
 
 See the
-user [interface page in the example app](https://github.com/josxha/flutter-maplibre/blob/main/example/lib/user_interface_page.dart)
+user [interface page in the example app](https://github.com/josxha/flutter-maplibre/blob/v0.2.2/example/lib/user_interface_page.dart)
 for a full implementation.
 
 All widgets inside the `children` List are within the `MapLibreMap` context and
