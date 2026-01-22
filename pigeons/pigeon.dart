@@ -267,6 +267,7 @@ class OfflineRegion {
     required this.maxZoom,
     required this.pixelRatio,
     required this.styleUrl,
+    required this.metadata,
   });
 
   final int id;
@@ -275,6 +276,7 @@ class OfflineRegion {
   final double maxZoom;
   final double pixelRatio;
   final String styleUrl;
+  final Map<String, Object?>? metadata;
 }
 
 /// Influences the y direction of the tile coordinates.

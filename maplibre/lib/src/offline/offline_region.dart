@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/foundation.dart';
 import 'package:maplibre/maplibre.dart';
 
 /// Model class that represents a map region for offline usage.
@@ -14,6 +14,7 @@ class OfflineRegion {
     required this.maxZoom,
     required this.pixelRatio,
     required this.styleUrl,
+    this.metadata = const {},
   });
 
   /// The region id.
@@ -34,6 +35,9 @@ class OfflineRegion {
   /// The style URL.
   final String styleUrl;
 
+  /// The metadata of the region.
+  final Map<String, Object?> metadata;
+
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -44,15 +48,25 @@ class OfflineRegion {
           minZoom == other.minZoom &&
           maxZoom == other.maxZoom &&
           pixelRatio == other.pixelRatio &&
-          styleUrl == other.styleUrl;
+          styleUrl == other.styleUrl &&
+          mapEquals(metadata, other.metadata);
 
   @override
-  int get hashCode =>
-      Object.hash(id, bounds, minZoom, maxZoom, pixelRatio, styleUrl);
+  int get hashCode => Object.hash(
+    id,
+    bounds,
+    minZoom,
+    maxZoom,
+    pixelRatio,
+    styleUrl,
+    Object.hashAllUnordered(
+      metadata.entries.map((e) => Object.hash(e.key, e.value)),
+    ),
+  );
 
   @override
   String toString() =>
       'OfflineRegion(id: $id, bounds: $bounds, '
       'minZoom: $minZoom, maxZoom: $maxZoom, pixelRatio: $pixelRatio, '
-      'styleUrl: $styleUrl)';
+      'styleUrl: $styleUrl, metadata: $metadata)';
 }

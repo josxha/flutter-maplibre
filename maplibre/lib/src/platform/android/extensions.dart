@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/rendering.dart';
 import 'package:jni/jni.dart';
 import 'package:maplibre/maplibre.dart';
@@ -106,7 +107,11 @@ extension OfflineRegionExt on jni.OfflineRegion {
   /// Convert an [EdgeInsets] to an internal [pigeon.Padding].
   OfflineRegion toOfflineRegion() => using((arena) {
     final jDefinition = getDefinition()..releasedBy(arena);
-    // TODO add getMetadata();
+    final jMetadata = getMetadata()..releasedBy(arena);
+    final metadataBytes = jMetadata.toList();
+    final metadataJson = utf8.decode(metadataBytes);
+    final metadata = jsonDecode(metadataJson) as Map<String, Object?>;
+
     return OfflineRegion(
       id: getId(),
       bounds: jDefinition.getBounds()!.toLngLatBounds(releaseOriginal: true),
@@ -114,6 +119,7 @@ extension OfflineRegionExt on jni.OfflineRegion {
       maxZoom: jDefinition.getMaxZoom(),
       pixelRatio: jDefinition.getPixelRatio(),
       styleUrl: jDefinition.getStyleURL()!.toDartString(releaseOriginal: true),
+      metadata: metadata,
     );
   });
 }

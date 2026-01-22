@@ -493,6 +493,7 @@ struct OfflineRegion: Hashable {
   var maxZoom: Double
   var pixelRatio: Double
   var styleUrl: String
+  var metadata: [String: Any?]? = nil
 
 
   // swift-format-ignore: AlwaysUseLowerCamelCase
@@ -503,6 +504,7 @@ struct OfflineRegion: Hashable {
     let maxZoom = pigeonVar_list[3] as! Double
     let pixelRatio = pigeonVar_list[4] as! Double
     let styleUrl = pigeonVar_list[5] as! String
+    let metadata: [String: Any?]? = nilOrValue(pigeonVar_list[6])
 
     return OfflineRegion(
       id: id,
@@ -510,7 +512,8 @@ struct OfflineRegion: Hashable {
       minZoom: minZoom,
       maxZoom: maxZoom,
       pixelRatio: pixelRatio,
-      styleUrl: styleUrl
+      styleUrl: styleUrl,
+      metadata: metadata
     )
   }
   func toList() -> [Any?] {
@@ -521,6 +524,7 @@ struct OfflineRegion: Hashable {
       maxZoom,
       pixelRatio,
       styleUrl,
+      metadata,
     ]
   }
   static func == (lhs: OfflineRegion, rhs: OfflineRegion) -> Bool {
