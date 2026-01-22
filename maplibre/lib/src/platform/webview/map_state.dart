@@ -30,11 +30,12 @@ class MapLibreMapStateWebView extends MapLibreMapState {
   LngLatBounds? _cachedVisibleRegion;
   late Size _mapSize;
   Widget? _widget;
-  static const _debugMode = false;
+
+  bool get _debug => widget.options.webviewDebugMode;
 
   @override
   void initState() {
-    PlatformInAppWebViewController.debugLoggingSettings.enabled = _debugMode;
+    PlatformInAppWebViewController.debugLoggingSettings.enabled = _debug;
     _futureWebSocket = WebSocket.create(onData: _onWebSocketData).then((ws) {
       setState(() {
         _webSocket = ws;
@@ -50,8 +51,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     final port = _wsPort;
     if (port == null) return const SizedBox.shrink();
     return _widget ??= InAppWebView(
-      // ignore: avoid_redundant_argument_values
-      initialSettings: InAppWebViewSettings(isInspectable: _debugMode),
+      initialSettings: InAppWebViewSettings(isInspectable: _debug),
       initialData: InAppWebViewInitialData(
         data:
             '''
@@ -227,13 +227,13 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     Offset point, {
     List<String>? layerIds,
   }) {
-    // TODO: implement featuresAtPoint
+    debugPrint('featuresAtPoint is not supported on webview yet.');
     return const [];
   }
 
   @override
   List<RenderedFeature> featuresInRect(Rect rect, {List<String>? layerIds}) {
-    // TODO: implement featuresInRect
+    debugPrint('featuresAtPoint is not supported on webview yet.');
     return const [];
   }
 
@@ -351,7 +351,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
 
   @override
   List<QueriedLayer> queryLayers(Offset screenLocation) {
-    // TODO: implement queryLayers
+    debugPrint('queryLayers is not supported on webview yet.');
     return const [];
   }
 
@@ -366,7 +366,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
       view.setUint8(0, $eventStyleLoad);
       window.ws.send(buf);
   });
-  window.map.setStyle('${await _prepareStyleString(style)}');
+  window.map.setStyle('${(await _prepareStyleString(style)).replaceAll("'", r"\'")}');
 ''',
     );
   }
