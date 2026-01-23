@@ -7,7 +7,7 @@ import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/platform/webview/magic_numbers.dart';
 import 'package:maplibre/src/platform/webview/websocket.dart';
 
-/// Android specific implementation of the [StyleController].
+/// Implementation of the [StyleController] for platforms using a web view.
 class StyleControllerWebView extends StyleController {
   /// Creates a new instance of [StyleControllerWebView].
   StyleControllerWebView(this.webViewController, this.webSocket);
@@ -73,7 +73,7 @@ class StyleControllerWebView extends StyleController {
         ${layer is StyleLayerWithSource ? 'source: "${layer.sourceId}",' : ''}
         $sourceLayerSnippet
       };
-      if (layer.source && !window.map.getSource(layer.source)) {
+      if (${layer is StyleLayerWithSource ? 'true' : 'false'} && !window.map.getSource(layer.source)) {
         throw new Error(`Source "\${layer.source}" not found for layer "${layer.id}"`);
       }
       window.map.addLayer(layer, $belowArg);
@@ -133,7 +133,7 @@ class StyleControllerWebView extends StyleController {
           ''',
             VideoSource() => '''
             type: 'video',
-            urls: ${source.urls},
+            urls: ${jsonEncode(source.urls)},
             coordinates: [
               [${source.coordinates[0].lon}, ${source.coordinates[0].lat}],
               [${source.coordinates[1].lon}, ${source.coordinates[1].lat}],
@@ -147,6 +147,7 @@ class StyleControllerWebView extends StyleController {
       window.map.addSource("${source.id}", sourceObj);
 ''',
     );
+    // it might take some time until, e.g. the TileJSON is loaded.
     Future.delayed(const Duration(seconds: 1), getAttributions);
   }
 
@@ -157,7 +158,7 @@ class StyleControllerWebView extends StyleController {
   Future<List<String>> getAttributions() async {
     final result = await webViewController.callAsyncJavaScript(
       functionBody: r'''
-      const style = window.map.getStyle && window.map.getStyle();
+      const style = window.map.getStyle();
       const sources = style && style.sources ? Object.values(style.sources) : [];
       return sources
         .map(src => src && src.attribution)
@@ -196,7 +197,7 @@ class StyleControllerWebView extends StyleController {
     await webViewController.callAsyncJavaScript(
       functionBody:
           '''
-      return window.map.removeImage("$id");
+      return window.map.removeImage("${id.replaceAll('"', r'\"')}");
 ''',
     );
   }
@@ -206,7 +207,7 @@ class StyleControllerWebView extends StyleController {
     await webViewController.callAsyncJavaScript(
       functionBody:
           '''
-      return window.map.removeLayer("$id");
+      return window.map.removeLayer("${id.replaceAll('"', r'\"')}");
 ''',
     );
   }
@@ -216,7 +217,7 @@ class StyleControllerWebView extends StyleController {
     await webViewController.callAsyncJavaScript(
       functionBody:
           '''
-      return window.map.removeSource("$id");
+      return window.map.removeSource("${id.replaceAll('"', r'\"')}");
 ''',
     );
   }
@@ -239,9 +240,9 @@ class StyleControllerWebView extends StyleController {
     await webViewController.callAsyncJavaScript(
       functionBody:
           '''
-      const source = window.map.getSource("$id");
+      const source = window.map.getSource("${id.replaceAll('"', r'\"')}");
       if (!source) {
-        throw new Error('Source with id "$id" does not exist.');
+        throw new Error('Source with id "${id.replaceAll('"', r'\"')}" does not exist.');
       }
       source.setData(JSON.parse(`$data`));
 ''',

@@ -20,7 +20,6 @@ class MapLibreMapStateWebView extends MapLibreMapState {
   /// The WebSocket connection to the web view.
   late final Future<WebSocket> _futureWebSocket;
   WebSocket? _webSocket;
-  int? _wsPort;
   bool _nextGestureCausedByController = false;
   @override
   StyleControllerWebView? style;
@@ -39,7 +38,6 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     _futureWebSocket = WebSocket.create(onData: _onWebSocketData).then((ws) {
       setState(() {
         _webSocket = ws;
-        _wsPort = ws.port;
       });
       return ws;
     });
@@ -48,8 +46,9 @@ class MapLibreMapStateWebView extends MapLibreMapState {
 
   @override
   Widget buildPlatformWidget(BuildContext context) {
-    final port = _wsPort;
-    if (port == null) return const SizedBox.shrink();
+    final port = _webSocket?.port;
+    final address = _webSocket?.address;
+    if (port == null || address == null) return const SizedBox.shrink();
     return _widget ??= InAppWebView(
       initialSettings: InAppWebViewSettings(isInspectable: _debug),
       initialData: InAppWebViewInitialData(
@@ -68,7 +67,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
 <body>
     <div id="map"></div>
     <script>
-    window.ws = new WebSocket('ws://localhost:$port');
+    window.ws = new WebSocket('ws://$address:$port');
     window.ws.onopen = function(event) {
         console.log('WebSocket is open now.');
     };
@@ -95,7 +94,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
             const ts = view.getBigInt64(1, true);
             const buffer2 = new ArrayBuffer(1+8);
             const view2 = new DataView(buffer2);
-            view.setUint8(0, $eventTest);
+            view2.setUint8(0, $eventTest);
             view2.setBigInt64(1, ts, true);
             window.ws.send(buffer2);
             break;
@@ -173,7 +172,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
 
   @override
   void didUpdateWidget(covariant MapLibreMap oldWidget) {
-    if (oldWidget.options != widget.options) return;
+    if (oldWidget.options == widget.options) return;
     final gestures = options.gestures;
     webViewController.evaluateJavascript(
       source:
@@ -189,7 +188,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
         [${bounds.longitudeEast}, ${bounds.latitudeNorth}]
     ]);
     ''',
-            _ => 'map.setMaxBounds(null);',
+            _ => 'window.map.setMaxBounds(null);',
           }}
     window.map.scrollZoom.${gestures.zoom ? 'enable' : 'disable'}();
     window.map.boxZoom.${gestures.zoom ? 'enable' : 'disable'}();
@@ -386,6 +385,8 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     widget.onEvent?.call(MapEventStyleLoaded(styleCtrl));
     widget.onStyleLoaded?.call(styleCtrl);
     _layerManager = LayerManager(styleCtrl, widget.layers);
+    // manually fetch attributions to update any UI depending on it.
+    unawaited(styleCtrl.getAttributions());
     // setState is needed to refresh the flutter widgets used in MapLibreMap.children.
     setState(() {});
   }
@@ -424,18 +425,19 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     final trimmed = style.trim();
     if (trimmed.startsWith('{')) {
       // Raw JSON
-      return trimmed;
+      return trimmed.replaceAll("'", r"\'").replaceAll('\n', r'\n');
     } else if (trimmed.startsWith('/')) {
       // path
-      return trimmed;
+      return trimmed.replaceAll("'", r"\'");
     } else if (!trimmed.startsWith('http://') &&
         !trimmed.startsWith('https://') &&
         !trimmed.startsWith('mapbox://')) {
       // flutter asset
-      return DefaultAssetBundle.of(context).loadString(trimmed);
+      final style = await DefaultAssetBundle.of(context).loadString(trimmed);
+      return style.replaceAll("'", r"\'").replaceAll('\n', r'\n');
     } else {
       // URI
-      return trimmed;
+      return trimmed.replaceAll("'", r"\'");
     }
   }
 
@@ -499,13 +501,13 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     debugPrint('_onLoadStop: $url');
     final gestures = options.gestures;
     final ws = await _futureWebSocket;
-    debugPrint('WebSocket server listening on ws://localhost:${ws.port}');
+    debugPrint('WebSocket server listening on ws://${ws.address}:${ws.port}');
     await controller.evaluateJavascript(
       source:
           '''
     const map = new maplibregl.Map({
         container: 'map',
-        style: '${await _prepareStyleString(options.initStyle)}',
+        style: '${(await _prepareStyleString(options.initStyle)).replaceAll("'", r"\'")}',
         ${switch (options.initCenter) {
             final center? => 'center: [${center.lon}, ${center.lat}],',
             _ => '',

@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io' as io;
-import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';
 
@@ -22,6 +21,9 @@ class WebSocket {
 
   /// The port the WebSocket server is listening on.
   int get port => _server.port;
+
+  /// The address the WebSocket server is listening on.
+  String get address => _server.address.address;
 
   /// Creates a WebSocket server listening on a random available port on
   /// localhost.
