@@ -232,7 +232,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
 
   @override
   List<RenderedFeature> featuresInRect(Rect rect, {List<String>? layerIds}) {
-    debugPrint('featuresAtPoint is not supported on webview yet.');
+    debugPrint('featuresInRect is not supported on webview yet.');
     return const [];
   }
 
@@ -463,11 +463,11 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     };
 ''',
     );
-    final map = result!.toMap();
-    if (!map.containsKey('value')) {
+    final map = result?.toMap() ?? <String, Object?>{};
+    final data = map['value'] as Map<String, dynamic>?;
+    if (data == null) {
       throw Exception('Failed to get camera data from web view. Result: $map');
     }
-    final data = map['value'] as Map<String, dynamic>;
     final newCamera = MapCamera(
       center: Geographic(
         lon: (data['lon'] as num).toDouble(),
