@@ -1,3 +1,12 @@
+## 0.3.3+2
+
+### Bug Fixes
+
+- Android: fix can't parse numeric array in layer properties
+- Android: add missing `metadata` parameter to `OfflineRegion`
+
+Full Changelog: [v0.3.3+1...v0.3.3+2](https://github.com/josxha/flutter-maplibre/compare/v0.3.3+1...v0.3.3+2)
+
 ## 0.3.3+1
 
 ### Bug Fixes
