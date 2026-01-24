@@ -56,6 +56,7 @@ class _OfflinePageState extends State<OfflinePage> {
                                   bounds: _boundsWorld,
                                   mapStyleUrl: MapStyles.protomapsLight.uri,
                                   pixelDensity: 1,
+                                  metadata: {'name': 'Test'},
                                 );
                                 try {
                                   await for (final update in stream) {
@@ -116,6 +117,7 @@ class _OfflinePageState extends State<OfflinePage> {
                                   bounds: _boundsBregenz,
                                   mapStyleUrl: MapStyles.protomapsLight.uri,
                                   pixelDensity: 1,
+                                  metadata: {'id': 999, 'name': 'test name'},
                                 );
                                 try {
                                   await for (final update in stream) {
@@ -127,6 +129,9 @@ class _OfflinePageState extends State<OfflinePage> {
                                         _downloadProgressBregenz = null;
                                       });
                                     } else {
+                                      _print(
+                                        'region download progress: ${((update.progress ?? 0) * 100).toStringAsFixed(0)}%',
+                                      );
                                       setState(() {
                                         _downloadProgressBregenz =
                                             '${update.loadedTiles}/${update.totalTiles} '

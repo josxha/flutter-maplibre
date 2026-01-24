@@ -89,6 +89,7 @@ class OfflineManagerIos extends OfflineManagerNative {
           pixelRatio: 1,
           // TODO
           styleUrl: 'ffiRegion.styleURL.toString()',
+          metadata: json,
         );
       }
     }
@@ -123,6 +124,7 @@ class OfflineManagerIos extends OfflineManagerNative {
         // TODO ffiPack.pixelRatio,
         pixelRatio: 1,
         styleUrl: 'ffiRegion.styleURL.absoluteString!.toDartString()',
+        metadata: json,
       );
     }, growable: false);
   }
