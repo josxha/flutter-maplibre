@@ -511,6 +511,7 @@ class OfflineRegion {
     required this.maxZoom,
     required this.pixelRatio,
     required this.styleUrl,
+    this.metadata,
   });
 
   int id;
@@ -525,8 +526,18 @@ class OfflineRegion {
 
   String styleUrl;
 
+  Map<String, Object?>? metadata;
+
   List<Object?> _toList() {
-    return <Object?>[id, bounds, minZoom, maxZoom, pixelRatio, styleUrl];
+    return <Object?>[
+      id,
+      bounds,
+      minZoom,
+      maxZoom,
+      pixelRatio,
+      styleUrl,
+      metadata,
+    ];
   }
 
   Object encode() {
@@ -542,6 +553,7 @@ class OfflineRegion {
       maxZoom: result[3]! as double,
       pixelRatio: result[4]! as double,
       styleUrl: result[5]! as String,
+      metadata: (result[6] as Map<Object?, Object?>?)?.cast<String, Object?>(),
     );
   }
 
