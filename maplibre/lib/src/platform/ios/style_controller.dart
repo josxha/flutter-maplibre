@@ -47,42 +47,31 @@ class StyleControllerIos extends StyleController {
         if (ffiSource == null) {
           throw Exception('Source "${layer.sourceId}" does not exist.');
         }
-        NSPredicate? filterPredicate;
-        if (layer.filter case final List<Object> filter) {
-          final expression = jsonEncode(filter).toNSString();
-          filterPredicate = Helpers.parsePredicateWithRaw(expression);
-        }
         switch (layer) {
           case FillStyleLayer():
             ffiLayer = MLNFillStyleLayer.new$()
-              ..initWithIdentifier(ffiId, source: ffiSource)
-              ..predicate = filterPredicate;
+              ..initWithIdentifier(ffiId, source: ffiSource);
           case CircleStyleLayer():
             ffiLayer = MLNCircleStyleLayer.new$()
-              ..initWithIdentifier(ffiId, source: ffiSource)
-              ..predicate = filterPredicate;
+              ..initWithIdentifier(ffiId, source: ffiSource);
           case FillExtrusionStyleLayer():
             ffiLayer = MLNFillExtrusionStyleLayer.new$()
-              ..initWithIdentifier(ffiId, source: ffiSource)
-              ..predicate = filterPredicate;
+              ..initWithIdentifier(ffiId, source: ffiSource);
           case HeatmapStyleLayer():
             ffiLayer = MLNHeatmapStyleLayer.new$()
-              ..initWithIdentifier(ffiId, source: ffiSource)
-              ..predicate = filterPredicate;
+              ..initWithIdentifier(ffiId, source: ffiSource);
           case HillshadeStyleLayer():
             ffiLayer = MLNHillshadeStyleLayer.new$()
               ..initWithIdentifier(ffiId, source: ffiSource);
           case LineStyleLayer():
             ffiLayer = MLNLineStyleLayer.new$()
-              ..initWithIdentifier(ffiId, source: ffiSource)
-              ..predicate = filterPredicate;
+              ..initWithIdentifier(ffiId, source: ffiSource);
           case RasterStyleLayer():
             ffiLayer = MLNRasterStyleLayer.new$()
               ..initWithIdentifier(ffiId, source: ffiSource);
           case SymbolStyleLayer():
             ffiLayer = MLNSymbolStyleLayer.new$()
-              ..initWithIdentifier(ffiId, source: ffiSource)
-              ..predicate = filterPredicate;
+              ..initWithIdentifier(ffiId, source: ffiSource);
         }
     }
 
@@ -95,25 +84,15 @@ class StyleControllerIos extends StyleController {
     ffiLayer.maximumZoomLevel = layer.maxZoom;
     ffiLayer.setProperties(layer.paint);
     ffiLayer.setProperties(layer.layout);
-    if (layer.metadata case final Map<String, Object?> metadata) {
-      final ffiMetadata = NSMutableDictionary.new$()..init();
-      for (final entry in metadata.entries) {
-        ffiMetadata.setObject(
-          entry.value.toNSObject(),
-          forKey: entry.key.toNSString(),
-        );
+    if (ffiLayer case MLNVectorStyleLayer()) {
+      final layerWithSource = layer as StyleLayerWithSource;
+      ffiLayer.sourceLayerIdentifier = layerWithSource.sourceLayerId
+          ?.toNSString();
+      if (layerWithSource.filter case final filter?) {
+        final expression = jsonEncode(filter).toNSString();
+        final ffiPredicate = Helpers.parsePredicateWithRaw(expression);
+        ffiLayer.predicate = ffiPredicate;
       }
-      Helpers.setValueWithTarget(
-        ffiLayer,
-        field: 'metadata'.toNSString(),
-        value: ffiMetadata,
-      );
-    }
-
-    if (layer is StyleLayerWithSource && layer.sourceLayerId != null) {
-      (ffiLayer as MLNVectorStyleLayer).sourceLayerIdentifier = layer
-          .sourceLayerId!
-          .toNSString();
     }
 
     if (belowLayerId case final String id) {

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/rendering.dart';
 import 'package:jni/jni.dart';
 import 'package:maplibre/maplibre.dart';
@@ -106,7 +107,11 @@ extension OfflineRegionExt on jni.OfflineRegion {
   /// Convert an [EdgeInsets] to an internal [pigeon.Padding].
   OfflineRegion toOfflineRegion() => using((arena) {
     final jDefinition = getDefinition()..releasedBy(arena);
-    // TODO add getMetadata();
+    final jMetadata = getMetadata()..releasedBy(arena);
+    final metadataBytes = jMetadata.toList();
+    final metadataJson = utf8.decode(metadataBytes);
+    final metadata = jsonDecode(metadataJson) as Map<String, Object?>;
+
     return OfflineRegion(
       id: getId(),
       bounds: jDefinition.getBounds()!.toLngLatBounds(releaseOriginal: true),
@@ -114,6 +119,7 @@ extension OfflineRegionExt on jni.OfflineRegion {
       maxZoom: jDefinition.getMaxZoom(),
       pixelRatio: jDefinition.getPixelRatio(),
       styleUrl: jDefinition.getStyleURL()!.toDartString(releaseOriginal: true),
+      metadata: metadata,
     );
   });
 }
@@ -121,33 +127,37 @@ extension OfflineRegionExt on jni.OfflineRegion {
 /// Extension methods on [Object].
 extension ObjectExt on Object {
   /// Convert a [Object] to a [JObject].
-  JObject toJObject(Arena arena) {
+  JObject toJObject() {
     switch (this) {
       case final Map<String, Object?> value:
         final jMap = jni.HashMap(
           K: JObject.nullableType,
           V: JObject.nullableType,
-        )..releasedBy(arena);
+        );
         for (final entry in value.entries) {
-          final jKey = entry.key.toJObject(arena)..releasedBy(arena);
-          final jValue = entry.value?.toJObject(arena);
+          final jKey = entry.key.toJObject();
+          final jValue = entry.value?.toJObject();
           jMap.put(jKey, jValue);
+          jKey.release();
+          jValue?.release();
         }
         return jMap;
       case final List<Object?> value:
-        return JArray.of(
-          JObject.nullableType,
-          value.map((e) => e?.toJObject(arena)).toList(growable: false),
-        )..releasedBy(arena);
+        final jArray = JArray(JObject.nullableType, value.length);
+        for (var i = 0; i < value.length; i++) {
+          final jElement = value[i]?.toJObject();
+          jArray[i] = jElement;
+          jElement?.release();
+        }
+        return jArray;
       case final String value:
-        return value.toJString()..releasedBy(arena);
+        return value.toJString();
       case final double value:
-        return value.toJDouble()..releasedBy(arena);
-      // a dart int equals a java long
+        return value.toJDouble();
       case final int value:
-        return value.toJLong()..releasedBy(arena);
+        return value.toJInteger();
       case final bool value:
-        return value.toJBoolean()..releasedBy(arena);
+        return value.toJBoolean();
       default:
         throw Exception('Unsupported property type: $runtimeType, $this');
     }

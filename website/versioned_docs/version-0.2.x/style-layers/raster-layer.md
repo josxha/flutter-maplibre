@@ -44,7 +44,7 @@ Widget build(BuildContext context) {
 ```
 
 Check out
-the [example app](https://github.com/josxha/flutter-maplibre/blob/main/example/lib/style-layers_raster_page.dart)
+the [example app](https://github.com/josxha/flutter-maplibre/blob/v0.2.2/example/lib/style_layers_raster_page.dart)
 to learn more.
 
 ## Style & Layout

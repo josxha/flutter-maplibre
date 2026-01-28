@@ -71,5 +71,5 @@ To add, remove or alter annotation layers, just use `setState()` like you'd do
 with Flutter widgets.
 
 Check out
-the [example app](https://github.com/josxha/flutter-maplibre/blob/main/example/lib/widget_layer_page.dart)
+the [example app](https://github.com/josxha/flutter-maplibre/blob/v0.2.2/example/lib/widget_layer_page.dart)
 if you want to see how things come together.
