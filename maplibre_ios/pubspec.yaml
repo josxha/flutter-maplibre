@@ -27,6 +27,13 @@ dev_dependencies:
   ffigen: 20.1.1
   very_good_analysis: ^10.0.0
 
+dependency_overrides:
+  ffigen:
+    git:
+      url: https://github.com/dart-lang/native
+      ref: ffigen_2935
+      path: pkgs/ffigen
+
 flutter:
   plugin:
     platforms:
