@@ -22,7 +22,6 @@ interface class StyleLayer {
     required this.id,
     this.layout = const {},
     this.paint = const {},
-    this.metadata,
     this.minZoom = 0,
     this.maxZoom = 24,
     this.filter,
@@ -30,11 +29,6 @@ interface class StyleLayer {
 
   /// Unique layer name.
   final String id;
-
-  /// Arbitrary properties useful to track with the layer, but do not influence
-  /// rendering. Properties should be prefixed to avoid collisions,
-  /// like 'maplibre:'.
-  final Map<String, Object?>? metadata;
 
   /// The minimum zoom level for the layer. At zoom levels less than the
   /// minzoom, the layer will be hidden.
@@ -78,7 +72,6 @@ interface class StyleLayerWithSource extends StyleLayer {
     required this.sourceId,
     super.paint = const {},
     super.layout = const {},
-    super.metadata,
     super.minZoom,
     super.maxZoom,
     super.filter,

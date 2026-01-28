@@ -42,6 +42,7 @@ abstract class OfflineManagerNative implements OfflineManager {
         maxZoom: maxZoom,
         pixelRatio: pixelDensity,
         styleUrl: mapStyleUrl,
+        metadata: metadata,
       ),
       downloadCompleted: true,
     );

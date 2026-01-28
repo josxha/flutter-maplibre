@@ -73,50 +73,37 @@ void main() {
       expect(await manager.listOfflineRegions(), isEmpty);
       manager.dispose();
     });
-    /*testWidgets('downloadRegion', (tester) async {
-      await tester.pumpWidget(const App());
-      await tester.pumpAndSettle();
-      final manager = await OfflineManager.createInstance();
-      await manager.resetDatabase();
+    // testWidgets('downloadRegion', (tester) async {
+    //   await tester.pumpWidget(const App());
+    //   await tester.pumpAndSettle();
+    //   final manager = await OfflineManager.createInstance();
 
-      const styleUrl = 'https://demotiles.maplibre.org/style.json';
-      final stream = manager.downloadRegion(
-        maxZoom: 1,
-        minZoom: 0,
-        pixelDensity: 1,
-        mapStyleUrl: styleUrl,
-        bounds: const LngLatBounds(
-          longitudeWest: -180,
-          longitudeEast: 180,
-          latitudeSouth: -90,
-          latitudeNorth: 90,
-        ),
-      );
-      await for (final event in stream) {
-        expect(event.region.styleUrl, equals(styleUrl));
-        expect(event.region.minZoom, equals(0));
-        expect(event.region.maxZoom, equals(1));
-      }
-      final last = await stream.last;
-      expect(last.progress, closeTo(1, 0.1));
+    //   await manager.resetDatabase();
+    //   await Future.delayed(const Duration(seconds: 1), () {});
 
-      // get regions
-      final regions = await manager.listOfflineRegions();
-      expect(regions, hasLength(1));
-      final region = regions.first;
-      expect(
-        region.styleUrl,
-        equals('https://demotiles.maplibre.org/style.json'),
-      );
-      expect(region.minZoom, 0);
-      expect(region.maxZoom, 0);
+    //   const styleUrl = 'https://demotiles.maplibre.org/style.json';
+    //   const metadata = {'name': 'test', 'id': 99, 'empty': null};
+    //   final stream = manager.downloadRegion(
+    //     maxZoom: 1,
+    //     minZoom: 0,
+    //     pixelDensity: 1,
+    //     mapStyleUrl: styleUrl,
+    //     bounds: const LngLatBounds(
+    //       longitudeWest: -180,
+    //       longitudeEast: 180,
+    //       latitudeSouth: -90,
+    //       latitudeNorth: 90,
+    //     ),
+    //     metadata: metadata,
+    //   );
 
-      // get region
-      final region2 = await manager.getOfflineRegion(regionId: 1);
-      expect(region, equals(region2));
-      expect(region.hashCode, equals(region2.hashCode));
+    //   final first = await stream.first;
+    //   expect(first.region.styleUrl, equals(styleUrl));
+    //   expect(first.region.minZoom, equals(0));
+    //   expect(first.region.maxZoom, equals(1));
+    //   expect(first.region.metadata, equals(metadata));
 
-      manager.dispose();
-    });*/
+    //   manager.dispose();
+    // });
   });
 }
