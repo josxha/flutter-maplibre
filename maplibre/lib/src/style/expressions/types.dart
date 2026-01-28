@@ -1,50 +1,21 @@
 part of 'expressions.dart';
 
-/// {@template literal-expression}
 /// A literal expression that represents a constant value.
 /// Provides a literal array or object value.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#literal
-/// {@endtemplate}
-extension type const LiteralExpr._(List<Object?> json) implements Expression {
-  /// Create a new `literal` expression with a boolean value.
-  // ignore: avoid_positional_boolean_parameters
-  LiteralExpr.bool(bool value) : json = [op, value];
+Expression literal(Object? value) => Expression.fromJson(['literal', value]);
 
-  /// Create a new `literal` expression with a [double] value.
-  LiteralExpr.double(double value) : json = [op, value];
-
-  /// Create a new `literal` expression with a [String] value.
-  LiteralExpr.string(String value) : json = [op, value];
-
-  /// Create a new `literal` expression with an [List] value.
-  LiteralExpr.list(List<Object?> value) : json = [op, value];
-
-  /// Create a new `literal` expression with a [Map] value.
-  LiteralExpr.map(Map<String, Object?> value) : json = [op, value];
-
-  /// The operator for `literal` expressions.
-  static const String op = 'literal';
-}
-
-/// {@template array-expression}
 /// Asserts that the input is an array (optionally with a specific item type
 /// and length). If, when the input expression is evaluated, it is not of the
 /// asserted type or length, then this assertion will cause the whole
 /// expression to be aborted.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#array
-/// {@endtemplate}
-extension type const ArrayExpr._(List<Object?> json) implements Expression {
-  /// Create a new `array` expression.
-  ArrayExpr(Expression expression, {ArrayType? type, int? length})
-    : json = [op, ?type?.name, ?length, ...expression.json];
+Expression array(Expression expression, {ArrayType? type, int? length}) =>
+    Expression.fromJson(['array', ?type?.name, ?length, expression]);
 
-  /// The operator for `array` expressions.
-  static const String op = 'array';
-}
-
-/// The asserted items type in an [ArrayExpr].
+/// The asserted items type in an [array] expression.
 enum ArrayType {
   /// An array of numbers.
   double('number'),
@@ -61,153 +32,113 @@ enum ArrayType {
   final String name;
 }
 
-/// {@template object-typeof}
 /// Returns a string describing the type of the given value.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#typeof
-/// {@endtemplate}
-extension type const TypeOfExpr._(List<Object?> json) implements Expression {
-  /// Create a new `typeof` expression.
-  TypeOfExpr(Expression expression) : json = [op, expression.json];
+Expression typeOf(Expression expression) =>
+    Expression.fromJson(['typeof', expression]);
 
-  /// The operator for `typeof` expressions.
-  static const String op = 'typeof';
-}
-
-/// {@template string-expression}
 /// Asserts that the input value is a string. If multiple values are provided,
 /// each one is evaluated in order until a string is obtained. If none of the
 /// inputs are strings, the expression is an error.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#string
-/// {@endtemplate}
-extension type const StringExpr._(List<Object?> json) implements Expression {
-  /// Create a new `string` expression with a single value.
-  StringExpr(Expression input) : json = [op, input];
-
-  /// Create a new `string` expression with multiple values.
-  StringExpr.list(List<Expression> input) : json = [op, ...input];
-
-  /// The operator for `string` expressions.
-  static const String op = 'string';
+Expression string(OneOf2<Expression, List<Expression>> input) {
+  if (input is List<Expression>) {
+    final values = input as List<Expression>;
+    return Expression.fromJson(['string', ...values]);
+  }
+  if (input is Expression) {
+    return Expression.fromJson(['string', input]);
+  }
+  throw StateError('Unreachable');
 }
 
-/// {@template number-expression}
 /// Asserts that the input value is a number. If multiple values are provided,
 /// each one is evaluated in order until a number is obtained. If none of the
 /// inputs are numbers, the expression is an error.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#number
-/// {@endtemplate}
-extension type const NumberExpr._(List<Object?> json) implements Expression {
-  /// Create a new `number` expression with a single value.
-  NumberExpr(Expression input) : json = [op, input];
-
-  /// Create a new `number` expression with multiple values.
-  NumberExpr.list(List<Expression> input) : json = [op, ...input];
-
-  /// The operator for `number` expressions.
-  static const String op = 'number';
+Expression number(OneOf2<Expression, List<Expression>> input) {
+  if (input is List<Expression>) {
+    final values = input as List<Expression>;
+    return Expression.fromJson(['number', ...values]);
+  }
+  if (input is Expression) {
+    return Expression.fromJson(['number', input]);
+  }
+  throw StateError('Unreachable');
 }
 
-/// {@template boolean-expression}
 /// Asserts that the input value is a boolean. If multiple values are provided,
 /// each one is evaluated in order until a boolean is obtained. If none of the
 /// inputs are booleans, the expression is an error.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#boolean
-/// {@endtemplate}
-extension type const BooleanExpr._(List<Object?> json) implements Expression {
-  /// Create a new `boolean` expression with a single value.
-  BooleanExpr(Expression input) : json = [op, input];
-
-  /// Create a new `boolean` expression with multiple values.
-  BooleanExpr.list(List<Expression> input) : json = [op, ...input];
-
-  /// The operator for `boolean` expressions.
-  static const String op = 'boolean';
+Expression boolean(OneOf2<Expression, List<Expression>> input) {
+  if (input is List<Expression>) {
+    final values = input as List<Expression>;
+    return Expression.fromJson(['boolean', ...values]);
+  }
+  if (input is Expression) {
+    return Expression.fromJson(['boolean', input]);
+  }
+  throw StateError('Unreachable');
 }
 
-/// {@template object-expression}
 /// Asserts that the input value is a [Map]. If multiple values are provided,
 /// each one is evaluated in order until an object is obtained. If none of the
 /// inputs are objects, the expression is an error.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#object
-/// {@endtemplate}
-extension type const ObjectExpr._(List<Object?> json) implements Expression {
-  /// Create a new `object` expression with a single value.
-  ObjectExpr(Expression input) : json = [op, input];
-
-  /// Create a new `object` expression with multiple values.
-  ObjectExpr.list(List<Expression> input) : json = [op, ...input];
-
-  /// The operator for `object` expressions.
-  static const String op = 'object';
+Expression object(OneOf2<Expression, List<Expression>> input) {
+  if (input is List<Expression>) {
+    final values = input as List<Expression>;
+    return Expression.fromJson(['object', ...values]);
+  }
+  if (input is Expression) {
+    return Expression.fromJson(['object', input]);
+  }
+  throw StateError('Unreachable');
 }
 
-/// {@template collator-expression}
 /// Returns a `collator` for use in locale-dependent comparison operations. Use
 /// `resolved-locale` to test the results of locale fallback behavior.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#collator
-/// {@endtemplate}
-extension type const CollatorExpr._(List<Object?> json) implements Expression {
-  /// Create a new `collator` expression with the given options.
-  ///
-  /// - [caseSensitive]: If characters of different case-ness are
-  ///   considered different
-  /// - [diacriticSensitive]: If characters with different diacritics
-  ///   are considered different
-  /// - [locale]: IETF language tag of the locale to use. If none is
-  ///   provided, the default locale is used. If the requested locale is not
-  ///   available, the collator will use a system-defined fallback locale.
-  CollatorExpr({
-    OneOf2<bool, Expression>? caseSensitive,
-    OneOf2<bool, Expression>? diacriticSensitive,
-    OneOf2<Locale, Expression>? locale,
-  }) : json = [
-         op,
-         <String, Object?>{
-           'case-sensitive': ?caseSensitive,
-           'diacritic-sensitive': ?diacriticSensitive,
-           if (locale != null)
-             'locale': switch (locale) {
-               Locale locale => locale.toString(),
-               Expression expr => expr.json,
-               _ => throw StateError('Unreachable'),
-             },
-         },
-       ];
+Expression collator({
+  OneOf2<bool, Expression>? caseSensitive,
+  OneOf2<bool, Expression>? diacriticSensitive,
+  OneOf2<Locale, Expression>? locale,
+}) => Expression.fromJson([
+  'collator',
+  <String, Object?>{
+    'case-sensitive': ?caseSensitive,
+    'diacritic-sensitive': ?diacriticSensitive,
+    if (locale != null)
+      'locale': switch (locale) {
+        Locale locale => locale.toString(),
+        Expression expr => expr,
+        _ => throw StateError('Unreachable'),
+      },
+  },
+]);
 
-  /// The operator for `collator` expressions.
-  static const String op = 'collator';
-}
-
-/// {@template format-expression}
 /// Returns a `formatted` string for displaying mixed-format text in the
 /// [SymbolStyleLayer.textField] property. The input may contain a string
-/// literal or [Expression], including an [ImageExpr]. Strings may be
+/// literal or [Expression], including an [image]. Strings may be
 /// followed by a style override object.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#format
-/// {@endtemplate}
-extension type const FormatExpr._(List<Object?> json) implements Expression {
-  /// Create a new `format` expression.
-  ///
-  /// - input_i: string | image
-  /// - style_overrides_i: {text-font?: string, text-color?: color, font-scale?: number, vertical-align?: "bottom" | "center" | "top"}
-  FormatExpr(Map<String, StyleOverrides> overrides)
-    : json = [
-        op,
-        for (final entry in overrides.entries) ...[entry.key, entry.value.json],
-      ];
+Expression format(Map<String, StyleOverrides> overrides) =>
+    Expression.fromJson([
+      'format',
+      for (final entry in overrides.entries)
+        ...[entry.key, entry.value.json],
+    ]);
 
-  /// The operator for `format` expressions.
-  static const String op = 'format';
-}
-
-/// An object defining style overrides for a section of text in a [FormatExpr].
+/// An object defining style overrides for a section of text in a [format]
+/// expression.
 extension type StyleOverrides._(Map<String, Object> json) {
   /// Create a new [StyleOverrides] object.
   ///
@@ -232,7 +163,7 @@ extension type StyleOverrides._(Map<String, Object> json) {
        };
 }
 
-/// The vertical alignment options for text sections in a [FormatExpr].
+/// The vertical alignment options for text sections in a [format] expression.
 enum VerticalAlign {
   /// Align the bottom of this section with the bottom of other sections.
   ///
@@ -250,7 +181,6 @@ enum VerticalAlign {
   top,
 }
 
-/// {@template image-expression}
 /// Returns an image type for use in icon-image, *-pattern entries and as a
 /// section in the format expression. If set, the image argument will check that
 /// the requested image exists in the style and will return either the resolved
@@ -259,56 +189,40 @@ enum VerticalAlign {
 /// have been added to the style before requesting it in the image argument.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#image
-/// {@endtemplate}
-extension type const ImageExpr._(List<Object?> json) implements Expression {
-  /// Create a new `image` expression from an image name.
-  ImageExpr.string(String imageName) : json = [op, imageName];
+Expression image(OneOf2<String, Expression> input) => Expression.fromJson([
+  'image',
+  switch (input) {
+    String imageName => imageName,
+    Expression expression => expression,
+    _ => throw StateError('Unreachable'),
+  },
+]);
 
-  /// Create a new `image` expression from an [Expression].
-  ImageExpr.expr(Expression expression) : json = [op, expression.json];
-
-  /// The operator for `image` expressions.
-  static const String op = 'image';
-}
-
-/// {@template number-format-expression}
 /// Converts the input number into a string representation using the provided
 /// format_options.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#number-format
-/// {@endtemplate}
-extension type const NumberFormatExpr._(List<Object?> json)
-    implements Expression {
-  /// Create a new [number-format] expression.
-  ///
-  /// - input: number - number to format
-  /// - format_options: {locale?: string, currency?: string, min-fraction-digits?: number, max-fraction-digits?: number}- Format options for the number
-  NumberFormatExpr({
-    required OneOf2<double, Expression> input,
-    required String? locale,
-    required String? currency,
-    required int? minFractionDigits,
-    required int? maxFractionDigits,
-  }) : json = [
-         op,
-         switch (input) {
-           double value => value,
-           Expression expr => expr.json,
-           _ => throw StateError('Unreachable'),
-         },
-         <String, Object?>{
-           'locale': ?locale,
-           'currency': ?currency,
-           'min-fraction-digits': ?minFractionDigits,
-           'max-fraction-digits': ?maxFractionDigits,
-         },
-       ];
+Expression numberFormat({
+  required OneOf2<double, Expression> input,
+  required String? locale,
+  required String? currency,
+  required int? minFractionDigits,
+  required int? maxFractionDigits,
+}) => Expression.fromJson([
+  'number-format',
+  switch (input) {
+    double value => value,
+    Expression expr => expr,
+    _ => throw StateError('Unreachable'),
+  },
+  <String, Object?>{
+    'locale': ?locale,
+    'currency': ?currency,
+    'min-fraction-digits': ?minFractionDigits,
+    'max-fraction-digits': ?maxFractionDigits,
+  },
+]);
 
-  /// The operator for `number-format` expressions.
-  static const String op = 'number-format';
-}
-
-/// {@template to-string-expression}
 /// Converts the input value to a string. If the input is null, the result is
 /// "". If the input is a boolean, the result is "true" or "false". If the input
 /// is a number, it is converted to a string as specified by the
@@ -321,16 +235,9 @@ extension type const NumberFormatExpr._(List<Object?> json)
 /// of the ECMAScript Language Specification.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#to-string
-/// {@endtemplate}
-extension type const ToStringExpr._(List<Object?> json) implements Expression {
-  /// Create a new `to-string` expression.
-  ToStringExpr(Expression input) : json = [op, input.json];
+Expression toString(Expression input) =>
+    Expression.fromJson(['to-string', input]);
 
-  /// The operator for `to-string` expressions.
-  static const String op = 'to-string';
-}
-
-/// {@template to-number-expression}
 /// Converts the input value to a number, if possible. If the input is null or
 /// false, the result is 0. If the input is true, the result is 1. If the input
 /// is a string, it is converted to a number as specified by the "ToNumber
@@ -340,46 +247,36 @@ extension type const ToStringExpr._(List<Object?> json) implements Expression {
 /// inputs can be converted, the expression is an error.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#to-number
-/// {@endtemplate}
-extension type const ToNumberExpr._(List<Object?> json) implements Expression {
-  /// Create a new `to-number` expression with a single value.
-  ToNumberExpr(Expression input) : json = [op, input.json];
-
-  /// Create a new `to-number` expression with multiple values.
-  ToNumberExpr.list(List<Expression> input) : json = [op, ...input];
-
-  /// The operator for `to-number` expressions.
-  static const String op = 'to-number';
+Expression toNumber(OneOf2<Expression, List<Expression>> input) {
+  if (input is List<Expression>) {
+    final values = input as List<Expression>;
+    return Expression.fromJson(['to-number', ...values]);
+  }
+  if (input is Expression) {
+    return Expression.fromJson(['to-number', input]);
+  }
+  throw StateError('Unreachable');
 }
 
-/// {@template to-boolean-expression}
 /// Converts the input value to a boolean. The result is false when the input is
 /// an empty string, 0, false, null, or NaN; otherwise it is true.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#to-boolean
-/// {@endtemplate}
-extension type const ToBooleanExpr._(List<Object?> json) implements Expression {
-  /// Create a new `to-boolean` expression.
-  ToBooleanExpr(Expression input) : json = [op, input];
+Expression toBoolean(Expression input) =>
+    Expression.fromJson(['to-boolean', input]);
 
-  /// The operator for `to-boolean` expressions.
-  static const String op = 'to-boolean';
-}
-
-/// {@template to-color-expression}
 /// Converts the input value to a color. If multiple values are provided, each
 /// one is evaluated in order until the first successful conversion is obtained.
 /// If none of the inputs can be converted, the expression is an error.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#to-color
-/// {@endtemplate}
-extension type const ToColorExpr._(List<Object?> json) implements Expression {
-  /// Create a new [to-color] expression with a single value.
-  ToColorExpr(Expression input) : json = [op, input];
-
-  /// Create a new [to-color] expression with multiple values.
-  ToColorExpr.list(List<Expression> input) : json = [op, ...input];
-
-  /// The operator for [to-color] expressions.
-  static const String op = 'to-color';
+Expression toColor(OneOf2<Expression, List<Expression>> input) {
+  if (input is List<Expression>) {
+    final values = input as List<Expression>;
+    return Expression.fromJson(['to-color', ...values]);
+  }
+  if (input is Expression) {
+    return Expression.fromJson(['to-color', input]);
+  }
+  throw StateError('Unreachable');
 }
