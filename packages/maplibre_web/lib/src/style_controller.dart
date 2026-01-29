@@ -1,4 +1,4 @@
-part of '../../../../../maplibre_web/lib/src/map_state.dart';
+part of 'map_state.dart';
 
 /// Web specific implementation of the [StyleController].
 class StyleControllerWeb extends StyleController {

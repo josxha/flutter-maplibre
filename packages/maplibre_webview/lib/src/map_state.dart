@@ -4,13 +4,11 @@ import 'dart:typed_data';
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/layer/layer_manager.dart';
-import 'package:maplibre/src/map_state.dart';
-import 'package:maplibre/src/platform/webview/magic_numbers.dart';
-import 'package:maplibre/src/platform/webview/projection.dart';
-import 'package:maplibre/src/platform/webview/style_controller.dart';
-import 'package:maplibre/src/platform/webview/websocket.dart';
+import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
+import 'package:maplibre_webview/src/magic_numbers.dart';
+import 'package:maplibre_webview/src/projection.dart';
+import 'package:maplibre_webview/src/style_controller.dart';
+import 'package:maplibre_webview/src/websocket.dart';
 
 /// MapLibre GL JS using web views for desktop.
 class MapLibreMapStateWebView extends MapLibreMapState {

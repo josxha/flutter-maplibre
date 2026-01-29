@@ -1,4 +1,4 @@
-include: ../maplibre/analysis_options.yaml
+include: ../packages/maplibre/analysis_options.yaml
 
 formatter:
   page_width: 80

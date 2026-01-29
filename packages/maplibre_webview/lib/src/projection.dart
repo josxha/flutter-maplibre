@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/widgets.dart';
-import 'package:maplibre/maplibre.dart';
+import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 import 'package:maplibre_webview/src/extensions.dart';
 
 /// Pure helpers to project/unproject using the same math as the webview state.

@@ -1,4 +1,7 @@
-part of 'layer.dart';
+import 'dart:ui';
+
+import 'package:flutter/foundation.dart';
+import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 
 /// A [Point] layer.
 ///
@@ -15,7 +18,7 @@ class CircleLayer extends Layer<Feature<Point>> {
     this.strokeColor = const Color(0xFF000000),
     super.minZoom = 0,
     super.maxZoom = 24,
-  }) : super._(list: points);
+  }) : super(list: points);
 
   /// Circle radius in pixels. Defaults to 5px.
   final int radius;

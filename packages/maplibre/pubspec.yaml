@@ -23,11 +23,13 @@ environment:
 dependencies:
   flutter: { sdk: flutter }
   geobase: ^1.5.0
+  html: ^0.15.6
   maplibre_android: ^0.3.3+2
   maplibre_ios: ^0.3.3+2
   maplibre_platform_interface: ^0.3.3+2
   maplibre_web: ^0.3.3+2
   maplibre_webview: ^0.3.3+2
+  pointer_interceptor: ^0.10.1+2
   url_launcher: ^6.3.0
 
 dev_dependencies:
@@ -43,18 +45,12 @@ flutter:
   plugin:
     platforms:
       android:
-        package: com.github.josxha.maplibre_android
-        pluginClass: MapLibrePlugin
+        default_package: maplibre_android
       ios:
-        package: com.github.josxha.maplibre_ios
-        pluginClass: MaplibrePlugin
-      macos:
-        package: com.github.josxha.maplibre_webview
-        pluginClass: MaplibrePlugin
+        default_package: maplibre_ios
+#      macos:
+#        default_package: maplibre_webview
       web:
-        pluginClass: MaplibrePlugin
-        default_package: maplibre_gl_web
-        fileName: src/platform/platform_web.dart
-      windows:
-        package: com.github.josxha.maplibre_webview
-        pluginClass: MaplibrePlugin
+        default_package: maplibre_web
+#      windows:
+#        default_package: maplibre_webview

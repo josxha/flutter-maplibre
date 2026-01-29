@@ -1,3 +1,5 @@
+maplibre_webview
+
 Copyright 2024 Joscha Eckert (josxha)
 
 Redistribution and use in source and binary forms, with or without modification,
@@ -26,6 +28,7 @@ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
 EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 --------------------------------------------------------------------------------
+maplibre-gl-js
 
 Copyright (c) 2023, MapLibre contributors
 
@@ -55,12 +58,8 @@ LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-
 -------------------------------------------------------------------------------
-
-Contains code from mapbox-gl-js v1.13 and earlier
-
-Version v1.13 of mapbox-gl-js and earlier are licensed under a BSD-3-Clause license
+mapbox-gl-js v1.13 and earlier
 
 Copyright (c) 2020, Mapbox
 Redistribution and use in source and binary forms, with or without modification,
@@ -87,10 +86,8 @@ LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
 EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-
 -------------------------------------------------------------------------------
-
-Contains code from glfx.js
+glfx.js
 
 Copyright (C) 2011 by Evan Wallace
 
@@ -113,8 +110,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 --------------------------------------------------------------------------------
-
-Contains a portion of d3-color https://github.com/d3/d3-color
+d3-color
 
 Copyright 2010-2016 Mike Bostock
 All rights reserved.

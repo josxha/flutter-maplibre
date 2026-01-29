@@ -16,20 +16,20 @@ resolution: workspace
 
 dependencies:
   flutter: { sdk: flutter }
+  flutter_inappwebview: ^6.1.5
   geobase: ^1.5.0
   maplibre_platform_interface: ^0.3.3+2
 
 dev_dependencies:
+  flutter_test: { sdk: flutter }
   very_good_analysis: ^10.0.0
 
 flutter:
   plugin:
     platforms:
 #      android:
-#        pluginClass: MapLibrePlugin
-      ios:
-        pluginClass: MapLibrePlugin
+#      ios:
       macos:
-        pluginClass: MapLibrePlugin
+        dartPluginClass: MapLibrePlugin
       windows:
-        pluginClass: MapLibrePlugin
+        dartPluginClass: MapLibrePlugin

@@ -1,8 +1,8 @@
 import 'dart:js_interop';
 
 import 'package:flutter/widgets.dart';
-import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/platform/web/interop/interop.dart' as interop;
+import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
+import 'package:maplibre_web/src/interop/interop.dart' as interop;
 
 /// Extension methods for the [Geographic] class. Not exported publicly.
 extension PositionExt on Geographic {

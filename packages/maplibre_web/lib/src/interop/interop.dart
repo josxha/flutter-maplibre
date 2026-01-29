@@ -3,7 +3,7 @@ library;
 
 import 'dart:js_interop';
 
-import 'package:maplibre/maplibre.dart';
+import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 import 'package:web/web.dart';
 
 part 'camera.dart';

@@ -1,6 +1,6 @@
-import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/platform/webview/map_state.dart';
-import 'package:maplibre/src/platform/webview/style_controller.dart';
+import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
+import 'package:maplibre_webview/src/map_state.dart';
+import 'package:maplibre_webview/src/style_controller.dart';
 
 /// Action type for [MapLibreMapStateWebView._test].
 const actionTest = 0;

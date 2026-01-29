@@ -1,0 +1,4 @@
+rootProject.name = 'maplibre'
+
+// JNIGEN include ':MapLibreAndroid'
+// JNIGEN project(':MapLibreAndroid').projectDir = new File('../example/android/MapLibreAndroid')

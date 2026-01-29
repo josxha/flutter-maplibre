@@ -1,4 +1,7 @@
-part of 'layer.dart';
+import 'dart:ui';
+
+import 'package:flutter/foundation.dart';
+import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 
 /// A [Point] layer.
 ///
@@ -47,7 +50,7 @@ class MarkerLayer extends Layer<Feature<Point>> {
     this.iconAnchor = IconAnchor.center,
     super.minZoom = 0,
     super.maxZoom = 24,
-  }) : super._(list: points);
+  }) : super(list: points);
 
   /// If true, the icon will be visible even if it collides with other
   /// previously drawn symbols.

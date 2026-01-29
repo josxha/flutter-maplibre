@@ -6,16 +6,14 @@ import 'dart:ui_web';
 
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/layer/layer_manager.dart';
-import 'package:maplibre/src/map_state.dart';
+import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 import 'package:maplibre_web/src/extensions.dart';
-import 'package:maplibre/src/platform/web/interop/interop.dart' as interop;
-import 'package:maplibre/src/platform/web/interop/json.dart';
-import 'package:maplibre/src/platform/web/interop/pmtiles.dart' as pmtiles;
+import 'package:maplibre_web/src/interop/interop.dart' as interop;
+import 'package:maplibre_web/src/interop/json.dart';
+import 'package:maplibre_web/src/interop/pmtiles.dart' as pmtiles;
 import 'package:web/web.dart';
 
-part '../../../maplibre/lib/src/platform/web/style_controller.dart';
+part 'style_controller.dart';
 
 /// The web specific implementation of the [MapLibreMap] widget.
 final class MapLibreMapStateWeb extends MapLibreMapState {

@@ -1,7 +1,7 @@
 import 'package:ffi/ffi.dart';
-import 'package:maplibre/src/platform/android/functions.dart';
-import 'package:maplibre/src/platform/android/jni.g.dart' as jni;
-import 'package:maplibre/src/platform/android/registry.dart';
+import 'package:maplibre_android/src/functions.dart';
+import 'package:maplibre_android/src/jni.g.dart' as jni;
+import 'package:maplibre_android/src/registry.dart';
 
 /// The members of this class are called by the native Android code.
 final class FlutterApi with jni.$FlutterApi {

@@ -7,20 +7,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart' hide Layer;
 import 'package:flutter/services.dart';
 import 'package:jni/jni.dart';
-import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/layer/layer_manager.dart';
 import 'package:maplibre_android/src/extensions.dart';
-import 'package:maplibre/src/platform/android/flutter_api.dart';
-import 'package:maplibre/src/platform/android/functions.dart';
-import 'package:maplibre/src/platform/android/jni.g.dart' as jni;
-import 'package:maplibre/src/platform/android/registry.dart';
-import 'package:maplibre/src/platform/map_state_native.dart';
+import 'package:maplibre_android/src/flutter_api.dart';
+import 'package:maplibre_android/src/functions.dart';
+import 'package:maplibre_android/src/jni.g.dart' as jni;
+import 'package:maplibre_android/src/registry.dart';
+import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 
 part 'style_controller.dart';
 
 /// The implementation that gets used for state of the [MapLibreMap] widget on
 /// android using JNI and Pigeon as a fallback.
-final class MapLibreMapStateAndroid extends MapLibreMapStateNative
+final class MapLibreMapStateAndroid extends MapLibreMapState
     with
         jni.$OnMapReadyCallback,
         jni.$Style$OnStyleLoaded,

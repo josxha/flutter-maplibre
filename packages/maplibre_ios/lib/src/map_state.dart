@@ -4,20 +4,17 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/layer/layer_manager.dart';
-import 'package:maplibre_android/src/extensions.dart';
 import 'package:maplibre_ios/src/extensions.dart';
-import 'package:maplibre/src/platform/map_state_native.dart';
-import 'package:maplibre/src/platform/pigeon.g.dart' as pigeon;
-import 'package:maplibre_ios/maplibre_ffi.g.dart';
-import 'package:maplibre_ios/objective_c.dart';
+import 'package:maplibre_ios/src/maplibre_ffi.g.dart';
+import 'package:maplibre_ios/src/pigeon.g.dart' as pigeon;
+import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
+import 'package:objective_c/objective_c.dart';
 
 part 'style_controller.dart';
 
 /// The implementation that gets used for state of the [MapLibreMap] widget on
 /// android using JNI and Pigeon as a fallback.
-final class MapLibreMapStateIos extends MapLibreMapStateNative
+final class MapLibreMapStateIos extends MapLibreMapState
     implements pigeon.MapLibreFlutterApi {
   late final pigeon.MapLibreHostApi _hostApi;
   late final int _viewId;

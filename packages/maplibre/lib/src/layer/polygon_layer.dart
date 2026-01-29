@@ -1,5 +1,7 @@
-part of 'layer.dart';
+import 'dart:ui';
 
+import 'package:flutter/foundation.dart';
+import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 /// A [Polygon] layer.
 ///
 /// {@category Layers}
@@ -12,7 +14,7 @@ class PolygonLayer extends Layer<Feature<Polygon>> {
     this.outlineColor = const Color(0xFF000000),
     super.minZoom = 0,
     super.maxZoom = 24,
-  }) : super._(list: polygons);
+  }) : super(list: polygons);
 
   /// The color of the polygon. Defaults to black.
   final Color color;

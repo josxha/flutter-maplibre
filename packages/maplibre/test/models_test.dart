@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:maplibre/maplibre.dart';
+import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 
 import 'shared/mocks.dart';
 

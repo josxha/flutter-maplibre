@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/painting.dart';
-import 'package:maplibre/maplibre.dart';
+import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 
 /// 2*pi
 const double twoPi = pi * 2;

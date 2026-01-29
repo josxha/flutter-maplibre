@@ -1,29 +1,13 @@
 import 'dart:convert';
 import 'package:flutter/rendering.dart';
 import 'package:jni/jni.dart';
-import 'package:maplibre/maplibre.dart';
-import 'package:maplibre/src/platform/android/jni.g.dart' as jni;
-import 'package:maplibre/src/platform/pigeon.g.dart' as pigeon;
+import 'package:maplibre_android/src/jni.g.dart' as jni;
+import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 
 /// Extension methods for the [Geographic] class. Not exported publicly.
 extension GeographicExt on Geographic {
-  /// Convert a [Geographic] to an internal [pigeon.LngLat].
-  pigeon.LngLat toLngLat() => pigeon.LngLat(lng: lon, lat: lat);
-
   /// Convert a [Geographic] to an [jni.LatLng].
   jni.LatLng toLatLng() => jni.LatLng.new$1(lat, lon);
-}
-
-/// Extension methods for the [pigeon.LngLat] class. Not exported publicly.
-extension LngLatExt on pigeon.LngLat {
-  /// Convert an internal [pigeon.LngLat] to a [Geographic].
-  Geographic toGeographic() => Geographic(lon: lng, lat: lat);
-}
-
-/// Extension methods for the [pigeon.Offset] class. Not exported publicly.
-extension PigeonOffsetExt on pigeon.Offset {
-  /// Convert an internal [pigeon.Offset] to a [Offset].
-  Offset toOffset() => Offset(x, y);
 }
 
 /// Extension methods for the [jni.LatLng] class. Not exported publicly.
@@ -48,9 +32,6 @@ extension PointExt on jni.PointF {
 
 /// Extension methods for the [Offset] class. Not exported publicly.
 extension OffsetExt on Offset {
-  /// Convert an [Offset] to an internal [pigeon.Offset].
-  pigeon.Offset toOffset() => pigeon.Offset(x: dx, y: dy);
-
   /// Convert an [Offset] to an [jni.PointF].
   jni.PointF toJPointF({required Arena arena}) =>
       jni.PointF.new$3(dx, dy)..releasedBy(arena);
@@ -58,14 +39,6 @@ extension OffsetExt on Offset {
 
 /// Extension methods for the [LngLatBounds] class. Not exported publicly.
 extension LngLatBoundsExt on LngLatBounds {
-  /// Convert an [LngLatBounds] to an internal [pigeon.LngLatBounds].
-  pigeon.LngLatBounds toLngLatBounds() => pigeon.LngLatBounds(
-    longitudeEast: longitudeEast,
-    longitudeWest: longitudeWest,
-    latitudeNorth: latitudeNorth,
-    latitudeSouth: latitudeSouth,
-  );
-
   /// Convert an [LngLatBounds] to an internal [jni.LatLngBounds].
   jni.LatLngBounds toJLatLngBounds({required Arena arena}) =>
       jni.LatLngBounds.from(
@@ -92,19 +65,8 @@ extension LatLngBounds on jni.LatLngBounds {
 }
 
 /// Extension methods for the [EdgeInsets] class. Not exported publicly.
-extension EdgeInsetsExt on EdgeInsets {
-  /// Convert an [EdgeInsets] to an internal [pigeon.Padding].
-  pigeon.Padding toPadding() => pigeon.Padding(
-    top: top.toInt(),
-    bottom: bottom.toInt(),
-    left: left.toInt(),
-    right: right.toInt(),
-  );
-}
-
-/// Extension methods for the [EdgeInsets] class. Not exported publicly.
 extension OfflineRegionExt on jni.OfflineRegion {
-  /// Convert an [EdgeInsets] to an internal [pigeon.Padding].
+  /// Convert an internal [jni.OfflineRegion] to an [OfflineRegion].
   OfflineRegion toOfflineRegion() => using((arena) {
     final jDefinition = getDefinition()..releasedBy(arena);
     final jMetadata = getMetadata()..releasedBy(arena);
