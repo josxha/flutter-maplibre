@@ -215,24 +215,24 @@ class MapLibreMapStateWebView extends MapLibreMapState {
 
   @override
   void didUpdateWidget(covariant MapLibreMap oldWidget) {
-    if (oldWidget.options == widget.options) return;
-    final gestures = options.gestures;
-    webViewController.evaluateJavascript(
-      source:
-          '''
+    if (oldWidget.options != widget.options) {
+      final gestures = options.gestures;
+      webViewController.evaluateJavascript(
+        source:
+            '''
     window.map.setMinZoom(${options.minZoom});
     window.map.setMaxZoom(${options.maxZoom});
     window.map.setMinPitch(${options.minPitch});
     window.map.setMaxPitch(${options.maxPitch});
    ${switch (options.maxBounds) {
-            final bounds? => '''
+              final bounds? => '''
     window.map.setMaxBounds([
         [${bounds.longitudeWest}, ${bounds.latitudeSouth}],
         [${bounds.longitudeEast}, ${bounds.latitudeNorth}]
     ]);
     ''',
-            _ => 'window.map.setMaxBounds(null);',
-          }}
+              _ => 'window.map.setMaxBounds(null);',
+            }}
     window.map.scrollZoom.${gestures.zoom ? 'enable' : 'disable'}();
     window.map.boxZoom.${gestures.zoom ? 'enable' : 'disable'}();
     window.map.doubleClickZoom.${gestures.zoom ? 'enable' : 'disable'}();
@@ -246,7 +246,8 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     
     window.map.keyboard.${gestures.allEnabled ? 'enable' : 'disable'}();
 ''',
-    );
+      );
+    }
     _layerManager?.updateLayers(widget.layers);
     super.didUpdateWidget(oldWidget);
   }
