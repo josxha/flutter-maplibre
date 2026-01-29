@@ -6,14 +6,14 @@ import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 /// iOS implementation of the federated MapLibre plugin.
 final class MapLibrePlugin extends PlatformInterface {
   /// This static method registers [MapLibrePlugin] when running on iOS.
-  static void registerWith() =>
-      PlatformInterface.instance = MapLibrePlugin();
+  static void registerWith() => PlatformInterface.instance = MapLibrePlugin();
 
   @override
   MapLibreMapState createWidgetState() => MapLibreMapStateIos();
 
   @override
-  Future<OfflineManager> createOfflineManager() => OfflineManagerIos.createInstance();
+  Future<OfflineManager> createOfflineManager() =>
+      OfflineManagerIos.createInstance();
 
   @override
   PermissionManager createPermissionManager() => const PermissionManagerIos();

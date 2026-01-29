@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 
-
 /// Base class for all the events emitted by the [MapLibreMap].
 ///
 /// {@category Events}

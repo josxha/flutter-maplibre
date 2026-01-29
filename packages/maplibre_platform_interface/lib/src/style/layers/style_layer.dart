@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 
-
 part 'background_style_layer.dart';
 part 'circle_style_layer.dart';
 part 'fill_extrusion_style_layer.dart';

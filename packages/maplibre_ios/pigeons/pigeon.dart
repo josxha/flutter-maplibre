@@ -6,8 +6,7 @@ import 'package:pigeon/pigeon.dart';
     dartOptions: DartOptions(),
     dartPackageName: 'maplibre',
     copyrightHeader: 'pigeons/header.txt',
-    swiftOut:
-        'ios/maplibre_ios/Sources/maplibre_ios/Pigeon.g.swift',
+    swiftOut: 'ios/maplibre_ios/Sources/maplibre_ios/Pigeon.g.swift',
     swiftOptions: SwiftOptions(),
   ),
 )
