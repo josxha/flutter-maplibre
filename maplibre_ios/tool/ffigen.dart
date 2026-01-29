@@ -33,6 +33,7 @@ void main(List<String> args) {
       ],
       include: (header) {
         final include = <String>{
+          'MapLibreIos.h',
           'MLNMapProjection.h',
           'MLNStyle.h',
           'MLNSource.h',

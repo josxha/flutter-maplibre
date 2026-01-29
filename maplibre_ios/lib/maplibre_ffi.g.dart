@@ -784,6 +784,87 @@ final class CLLocationCoordinate2D extends ffi.Struct{
 }
 
 
+/// Helpers
+extension type Helpers._(objc.ObjCObject object$) implements objc.ObjCObject,objc.NSObject {
+  /// Constructs a [Helpers] that points to the same underlying object as [other].
+  Helpers.as(objc.ObjCObject other) : object$ = other {
+    assert(isA(object$));
+  }
+
+  /// Constructs a [Helpers] that wraps the given raw object pointer.
+  Helpers.fromPointer(ffi.Pointer<objc.ObjCObjectImpl> other,
+      {bool retain = false, bool release = false}) :
+          object$ = objc.ObjCObject(other, retain: retain, release: release) {
+    assert(isA(object$));
+  }
+
+  /// Returns whether [obj] is an instance of [Helpers].
+  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_Helpers);
+
+  /// addImageToStyleWithTarget:field:expression:
+  static void addImageToStyleWithTarget(objc.NSObject target, {required objc.NSString field,required NSExpression expression}) {
+_objc_msgSend_r8gdi7(_class_Helpers, _sel_addImageToStyleWithTarget_field_expression_, target.ref.pointer, field.ref.pointer, expression.ref.pointer);
+
+  }
+
+
+  /// alloc
+  static Helpers alloc() {
+    final $ret = _objc_msgSend_151sglz(_class_Helpers, _sel_alloc);
+    return Helpers.fromPointer($ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static Helpers allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final $ret = _objc_msgSend_1cwp428(_class_Helpers, _sel_allocWithZone_, zone);
+    return Helpers.fromPointer($ret, retain: false, release: true);
+  }
+
+
+  /// new
+  static Helpers new$() {
+    final $ret = _objc_msgSend_151sglz(_class_Helpers, _sel_new);
+    return Helpers.fromPointer($ret, retain: false, release: true);
+  }
+
+
+  /// parseExpressionWithPropertyName:expression:
+  static NSExpression? parseExpressionWithPropertyName(objc.NSString propertyName, {required objc.NSString expression}) {
+    final $ret = _objc_msgSend_15qeuct(_class_Helpers, _sel_parseExpressionWithPropertyName_expression_, propertyName.ref.pointer, expression.ref.pointer);
+    return $ret.address == 0 ? null : NSExpression.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// parsePredicateWithRaw:
+  static NSPredicate? parsePredicateWithRaw(objc.NSString raw) {
+    final $ret = _objc_msgSend_1sotr3r(_class_Helpers, _sel_parsePredicateWithRaw_, raw.ref.pointer);
+    return $ret.address == 0 ? null : NSPredicate.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// setValueWithTarget:field:value:
+  static void setValueWithTarget(objc.NSObject target, {required objc.NSString field,required objc.NSObject value}) {
+_objc_msgSend_r8gdi7(_class_Helpers, _sel_setValueWithTarget_field_value_, target.ref.pointer, field.ref.pointer, value.ref.pointer);
+
+  }
+  /// Returns a new instance of Helpers constructed with the default `new` method.
+  Helpers() : this.as(new$().object$);
+
+}
+
+extension Helpers$Methods on Helpers {
+
+  /// init
+  Helpers init() {
+  objc.checkOsVersionInternal('Helpers.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
+    final $ret = _objc_msgSend_151sglz(object$.ref.retainAndReturnPointer(), _sel_init);
+    return Helpers.fromPointer($ret, retain: false, release: true);
+  }
+
+}
+
+
 /// The ``MLNActionJournalOptions`` defines action journal properties such as path, log size, etc...
 extension type MLNActionJournalOptions._(objc.ObjCObject object$) implements objc.ObjCObject,objc.NSObject {
   /// Constructs a [MLNActionJournalOptions] that points to the same underlying object as [other].
@@ -31541,6 +31622,94 @@ extension type MTLRenderPassDescriptor._(objc.ObjCObject object$) implements obj
 }
 
 
+/// MapLibreRegistry
+extension type MapLibreRegistry._(objc.ObjCObject object$) implements objc.ObjCObject,objc.NSObject {
+  /// Constructs a [MapLibreRegistry] that points to the same underlying object as [other].
+  MapLibreRegistry.as(objc.ObjCObject other) : object$ = other {
+    assert(isA(object$));
+  }
+
+  /// Constructs a [MapLibreRegistry] that wraps the given raw object pointer.
+  MapLibreRegistry.fromPointer(ffi.Pointer<objc.ObjCObjectImpl> other,
+      {bool retain = false, bool release = false}) :
+          object$ = objc.ObjCObject(other, retain: retain, release: release) {
+    assert(isA(object$));
+  }
+
+  /// Returns whether [obj] is an instance of [MapLibreRegistry].
+  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MapLibreRegistry);
+
+  /// activity
+  static objc.ObjCObject? getActivity() {
+    final $ret = _objc_msgSend_151sglz(_class_MapLibreRegistry, _sel_activity);
+    return $ret.address == 0 ? null : objc.ObjCObject($ret, retain: true, release: true);
+  }
+
+
+  /// alloc
+  static MapLibreRegistry alloc() {
+    final $ret = _objc_msgSend_151sglz(_class_MapLibreRegistry, _sel_alloc);
+    return MapLibreRegistry.fromPointer($ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static MapLibreRegistry allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final $ret = _objc_msgSend_1cwp428(_class_MapLibreRegistry, _sel_allocWithZone_, zone);
+    return MapLibreRegistry.fromPointer($ret, retain: false, release: true);
+  }
+
+
+  /// context
+  static objc.ObjCObject? getContext() {
+    final $ret = _objc_msgSend_151sglz(_class_MapLibreRegistry, _sel_context);
+    return $ret.address == 0 ? null : objc.ObjCObject($ret, retain: true, release: true);
+  }
+
+
+  /// getMapWithViewId:
+  static objc.ObjCObject? getMapWithViewId(int viewId) {
+    final $ret = _objc_msgSend_1ya1kjn(_class_MapLibreRegistry, _sel_getMapWithViewId_, viewId);
+    return $ret.address == 0 ? null : objc.ObjCObject($ret, retain: true, release: true);
+  }
+
+
+  /// new
+  static MapLibreRegistry new$() {
+    final $ret = _objc_msgSend_151sglz(_class_MapLibreRegistry, _sel_new);
+    return MapLibreRegistry.fromPointer($ret, retain: false, release: true);
+  }
+
+
+  /// setActivity:
+  static void setActivity(objc.ObjCObject? value) {
+_objc_msgSend_xtuoz7(_class_MapLibreRegistry, _sel_setActivity_, value?.ref.pointer ?? ffi.nullptr);
+
+  }
+
+
+  /// setContext:
+  static void setContext(objc.ObjCObject? value) {
+_objc_msgSend_xtuoz7(_class_MapLibreRegistry, _sel_setContext_, value?.ref.pointer ?? ffi.nullptr);
+
+  }
+  /// Returns a new instance of MapLibreRegistry constructed with the default `new` method.
+  MapLibreRegistry() : this.as(new$().object$);
+
+}
+
+extension MapLibreRegistry$Methods on MapLibreRegistry {
+
+  /// init
+  MapLibreRegistry init() {
+  objc.checkOsVersionInternal('MapLibreRegistry.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
+    final $ret = _objc_msgSend_151sglz(object$.ref.retainAndReturnPointer(), _sel_init);
+    return MapLibreRegistry.fromPointer($ret, retain: false, release: true);
+  }
+
+}
+
+
 /// NSExpression
 extension type NSExpression._(objc.ObjCObject object$) implements objc.ObjCObject,objc.NSObject,objc.NSSecureCoding,objc.NSCopying {
   /// Constructs a [NSExpression] that points to the same underlying object as [other].
@@ -43773,6 +43942,7 @@ _objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_updateFocusIfNeeded);
 
 }
 
+late final _class_Helpers = objc.getClass("Helpers");
 late final _class_MLNActionJournalOptions = objc.getClass("MLNActionJournalOptions");
 late final _class_MLNAnnotationImage = objc.getClass("MLNAnnotationImage");
 late final _class_MLNAnnotationView = objc.getClass("MLNAnnotationView");
@@ -43830,6 +44000,7 @@ late final _class_MLNUserLocation = objc.getClass("MLNUserLocation");
 late final _class_MLNUserLocationAnnotationViewStyle = objc.getClass("MLNUserLocationAnnotationViewStyle");
 late final _class_MLNVectorStyleLayer = objc.getClass("MLNVectorStyleLayer");
 late final _class_MLNVectorTileSource = objc.getClass("MLNVectorTileSource");
+late final _class_MapLibreRegistry = objc.getClass("MapLibreRegistry");
 late final _class_NSExpression = objc.getClass("NSExpression");
 late final _class_UIAction = objc.getClass("UIAction");
 late final _class_UIHoverStyle = objc.getClass("UIHoverStyle");
@@ -43956,6 +44127,7 @@ final _objc_msgSend_1wvd2xm = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Vo
 final _objc_msgSend_1xsl7ae = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Uint64 )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int )>();
 final _objc_msgSend_1xt2lpz = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Bool )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , bool )>();
 final _objc_msgSend_1xvojq9 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.UnsignedLong , ffi.Bool )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int , bool )>();
+final _objc_msgSend_1ya1kjn = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Int64 )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int )>();
 final _objc_msgSend_1zv0am = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , CLLocationCoordinate2D )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , CLLocationCoordinate2D )>();
 final _objc_msgSend_2556e5 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.UnsignedLong Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_25drz7 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , UIEdgeInsets , ffi.Long , ffi.Double )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , UIEdgeInsets , int , double )>();
@@ -44109,11 +44281,13 @@ late final _sel_actionForLayer_forKey_ = objc.registerName("actionForLayer:forKe
 late final _sel_actionJournalOptions = objc.registerName("actionJournalOptions");
 late final _sel_actionWithHandler_ = objc.registerName("actionWithHandler:");
 late final _sel_actionWithTitle_image_identifier_handler_ = objc.registerName("actionWithTitle:image:identifier:handler:");
+late final _sel_activity = objc.registerName("activity");
 late final _sel_activityType = objc.registerName("activityType");
 late final _sel_addAnnotation_ = objc.registerName("addAnnotation:");
 late final _sel_addAnnotations_ = objc.registerName("addAnnotations:");
 late final _sel_addContentsOfFile_withCompletionHandler_ = objc.registerName("addContentsOfFile:withCompletionHandler:");
 late final _sel_addContentsOfURL_withCompletionHandler_ = objc.registerName("addContentsOfURL:withCompletionHandler:");
+late final _sel_addImageToStyleWithTarget_field_expression_ = objc.registerName("addImageToStyleWithTarget:field:expression:");
 late final _sel_addLayer_ = objc.registerName("addLayer:");
 late final _sel_addOverlay_ = objc.registerName("addOverlay:");
 late final _sel_addOverlays_ = objc.registerName("addOverlays:");
@@ -44402,6 +44576,7 @@ late final _sel_geometryTypeVariableExpression = objc.registerName("geometryType
 late final _sel_getActionJournalLog = objc.registerName("getActionJournalLog");
 late final _sel_getActionJournalLogFiles = objc.registerName("getActionJournalLogFiles");
 late final _sel_getCoordinates_range_ = objc.registerName("getCoordinates:range:");
+late final _sel_getMapWithViewId_ = objc.registerName("getMapWithViewId:");
 late final _sel_haloFillColor = objc.registerName("haloFillColor");
 late final _sel_hasBaseline = objc.registerName("hasBaseline");
 late final _sel_heading = objc.registerName("heading");
@@ -44756,6 +44931,8 @@ late final _sel_overscanCompensationInsets = objc.registerName("overscanCompensa
 late final _sel_packs = objc.registerName("packs");
 late final _sel_panScrollingMode = objc.registerName("panScrollingMode");
 late final _sel_parentFocusEnvironment = objc.registerName("parentFocusEnvironment");
+late final _sel_parseExpressionWithPropertyName_expression_ = objc.registerName("parseExpressionWithPropertyName:expression:");
+late final _sel_parsePredicateWithRaw_ = objc.registerName("parsePredicateWithRaw:");
 late final _sel_pasteAndGo_ = objc.registerName("pasteAndGo:");
 late final _sel_pasteAndMatchStyle_ = objc.registerName("pasteAndMatchStyle:");
 late final _sel_pasteAndSearch_ = objc.registerName("pasteAndSearch:");
@@ -44885,6 +45062,7 @@ late final _sel_sender = objc.registerName("sender");
 late final _sel_setAccessories_ = objc.registerName("setAccessories:");
 late final _sel_setActionJournalOptions_ = objc.registerName("setActionJournalOptions:");
 late final _sel_setActivityType_ = objc.registerName("setActivityType:");
+late final _sel_setActivity_ = objc.registerName("setActivity:");
 late final _sel_setAdjustsImageWhenAncestorFocused_ = objc.registerName("setAdjustsImageWhenAncestorFocused:");
 late final _sel_setAltitude_ = objc.registerName("setAltitude:");
 late final _sel_setAnchorRotateOrZoomGesturesToCenterCoordinate_ = objc.registerName("setAnchorRotateOrZoomGesturesToCenterCoordinate:");
@@ -44953,6 +45131,7 @@ late final _sel_setCompassVisibility_ = objc.registerName("setCompassVisibility:
 late final _sel_setContentInset_ = objc.registerName("setContentInset:");
 late final _sel_setContentInset_animated_ = objc.registerName("setContentInset:animated:");
 late final _sel_setContentInset_animated_completionHandler_ = objc.registerName("setContentInset:animated:completionHandler:");
+late final _sel_setContext_ = objc.registerName("setContext:");
 late final _sel_setContext_completionHandler_ = objc.registerName("setContext:completionHandler:");
 late final _sel_setCoordinate_ = objc.registerName("setCoordinate:");
 late final _sel_setCoordinates_ = objc.registerName("setCoordinates:");
@@ -45276,6 +45455,7 @@ late final _sel_setUserTrackingMode_ = objc.registerName("setUserTrackingMode:")
 late final _sel_setUserTrackingMode_animated_ = objc.registerName("setUserTrackingMode:animated:");
 late final _sel_setUserTrackingMode_animated_completionHandler_ = objc.registerName("setUserTrackingMode:animated:completionHandler:");
 late final _sel_setUsesMetricSystem_ = objc.registerName("setUsesMetricSystem:");
+late final _sel_setValueWithTarget_field_value_ = objc.registerName("setValueWithTarget:field:value:");
 late final _sel_setVersion_ = objc.registerName("setVersion:");
 late final _sel_setViewingDistance_ = objc.registerName("setViewingDistance:");
 late final _sel_setVisibleCoordinateBounds_ = objc.registerName("setVisibleCoordinateBounds:");
