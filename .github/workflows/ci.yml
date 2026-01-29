@@ -92,7 +92,7 @@ jobs:
       - name: "Get Flutter dependencies"
         run: flutter pub get
       - name: "Run unit tests in package"
-        working-directory: packages/${{ matrix.sdk == '' }}
+        working-directory: packages/${{ matrix.package }}
         run: flutter test --timeout=600s --coverage
       - name: "Run Codecov"
         uses: codecov/codecov-action@v5
