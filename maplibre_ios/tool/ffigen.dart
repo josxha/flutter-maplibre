@@ -32,7 +32,7 @@ void main(List<String> args) {
         '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk',
       ],
       include: (header) {
-        final include = <String>{
+        const include = <String>{
           'MapLibreIos.h',
           'MLNMapProjection.h',
           'MLNStyle.h',
@@ -61,7 +61,7 @@ void main(List<String> args) {
           'MLNFeature.h',
         };
         for (final path in include) {
-          if (header.path.contains(path)) return true;
+          if (header.path.endsWith(path)) return true;
         }
         return false;
       },
