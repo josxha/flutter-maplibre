@@ -29,3 +29,4 @@ flutter:
     platforms:
       android:
         dartPluginClass: MapLibrePlugin
+        dartFileName: 'src/maplibre_plugin.dart'

@@ -3,10 +3,10 @@ import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 import 'package:maplibre_web/src/map_state.dart';
 
 /// Web implementation of the federated MapLibre plugin.
-final class MapLibrePlugin extends PlatformInterface {
+final class MapLibrePlugin extends MapLibrePlatform {
   /// This static method registers [MapLibrePlugin] when running on web.
   static void registerWith(Registrar registrar) =>
-      PlatformInterface.instance = MapLibrePlugin();
+      MapLibrePlatform.instance = MapLibrePlugin();
 
   @override
   MapLibreMapState createWidgetState() => MapLibreMapStateWeb();

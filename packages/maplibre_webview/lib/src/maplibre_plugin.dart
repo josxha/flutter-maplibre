@@ -2,9 +2,9 @@ import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 import 'package:maplibre_webview/src/map_state.dart';
 
 /// WebView implementation of the federated MapLibre plugin.
-final class MapLibrePlugin extends PlatformInterface {
+class MapLibrePlugin extends MapLibrePlatform {
   /// This static method registers [MapLibrePlugin] when running in a webview.
-  static void registerWith() => PlatformInterface.instance = MapLibrePlugin();
+  static void registerWith() => MapLibrePlatform.instance = MapLibrePlugin();
 
   @override
   MapLibreMapState createWidgetState() => MapLibreMapStateWebView();

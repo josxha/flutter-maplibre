@@ -43,3 +43,4 @@ flutter:
     platforms:
       ios:
         dartPluginClass: MapLibrePlugin
+        dartFileName: 'src/maplibre_plugin.dart'

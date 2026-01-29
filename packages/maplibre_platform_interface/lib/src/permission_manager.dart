@@ -8,7 +8,7 @@ import 'package:maplibre_platform_interface/src/platform_interface.dart';
 /// {@category Basic}
 abstract interface class PermissionManager {
   factory PermissionManager() =>
-      PlatformInterface.instance.createPermissionManager();
+      MapLibrePlatform.instance.createPermissionManager();
 
   /// Returns true if access to background location is granted.
   bool get backgroundLocationPermissionGranted;

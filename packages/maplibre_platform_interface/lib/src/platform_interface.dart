@@ -1,16 +1,30 @@
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-/// https://pub.dev/packages/plugin_platform_interface#a-note-about-base
-abstract base class PlatformInterface {
-  /// Constructs a MapLibrePlatform.
-  const PlatformInterface();
+abstract class MapLibrePlatform extends PlatformInterface {
+  MapLibrePlatform() : super(token: _token);
 
-  /// The instance of [PlatformInterface] to use.
-  ///
-  /// Platform-specific implementations should set this with their own
-  /// platform-specific class that extends [PlatformInterface] when
-  /// they register themselves.
-  static late PlatformInterface instance;
+  static final Object _token = Object();
+
+  // A plugin can have a default implementation, as shown here, or `instance`
+  // can be nullable, and the default instance can be null.
+  static MapLibrePlatform? _instance;
+
+  static MapLibrePlatform get instance =>
+      _instance ??
+      (throw UnsupportedError(
+        'No MapLibrePlatform instance has been registered. '
+        'This usually means that the MapLibre plugin has not been '
+        'added as a dependency in pubspec.yaml.',
+      ));
+
+  /// Platform-specific implementations should set this to their own
+  /// platform-specific class that extends [MapLibrePlatform] when they
+  /// register themselves.
+  static set instance(MapLibrePlatform instance) {
+    PlatformInterface.verify(instance, _token);
+    _instance = instance;
+  }
 
   /// Return a platform specific [State<MapLibreMap>] object.
   MapLibreMapState createWidgetState();
@@ -20,4 +34,7 @@ abstract base class PlatformInterface {
 
   /// Return a platform specific [PermissionManager] object.
   PermissionManager createPermissionManager();
+
+  // Methods for the plugin's platform interface would go here, often with
+  // implementations that throw UnimplementedError.
 }

@@ -10,7 +10,7 @@ abstract interface class OfflineManager {
   ///
   /// You'll have to call [dispose] to free resources once no longer needed.
   static Future<OfflineManager> createInstance() async =>
-      PlatformInterface.instance.createOfflineManager();
+      MapLibrePlatform.instance.createOfflineManager();
 
   /// Call to free resources when the [OfflineManager] is no longer needed.
   void dispose();

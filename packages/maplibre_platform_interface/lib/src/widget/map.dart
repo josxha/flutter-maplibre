@@ -68,7 +68,7 @@ class MapLibreMap extends StatefulWidget {
   @override
   State<MapLibreMap> createState() =>
       // ignore: no_logic_in_create_state
-      PlatformInterface.instance.createWidgetState();
+      MapLibrePlatform.instance.createWidgetState();
 }
 
 /// Callback that fires once the native MapLibre map has been created for a

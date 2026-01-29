@@ -27,7 +27,15 @@ dev_dependencies:
 flutter:
   plugin:
     platforms:
-      android: { dartPluginClass: MapLibrePlugin }
-      ios: { dartPluginClass: MapLibrePlugin }
-      macos: { dartPluginClass: MapLibrePlugin }
-      windows: { dartPluginClass: MapLibrePlugin }
+      android:
+        dartPluginClass: MapLibrePlugin
+        dartFileName: 'src/maplibre_plugin.dart'
+      ios:
+        dartPluginClass: MapLibrePlugin
+        dartFileName: 'src/maplibre_plugin.dart'
+      macos:
+        dartPluginClass: MapLibrePlugin
+        dartFileName: 'src/maplibre_plugin.dart'
+      windows:
+        dartPluginClass: MapLibrePlugin
+        dartFileName: 'src/maplibre_plugin.dart'
