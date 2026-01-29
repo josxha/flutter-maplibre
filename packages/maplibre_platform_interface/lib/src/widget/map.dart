@@ -27,11 +27,11 @@ class MapLibreMap extends StatefulWidget {
   /// Flutter widgets that get displayed on top on the map and are within the
   /// [MapLibreMap] context.
   ///
-  /// You can use the following included UI elements:
-  /// - [MapCompass]
-  /// - [MapControlButtons]
-  /// - [MapScalebar]
-  /// - [SourceAttribution].
+  /// You can use the following included UI elements or build your own:
+  /// - MapCompass
+  /// - MapControlButtons
+  /// - MapScalebar
+  /// - SourceAttribution.
   final List<Widget> children;
 
   /// Which gestures should be consumed by the map.

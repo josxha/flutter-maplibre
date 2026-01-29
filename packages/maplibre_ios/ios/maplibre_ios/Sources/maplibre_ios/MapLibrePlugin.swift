@@ -7,7 +7,7 @@ public class MapLibrePlugin: NSObject, FlutterPlugin {
         let channel = FlutterMethodChannel(
             name: "maplibre_ios", binaryMessenger: registrar.messenger()
         )
-        let instance = MapLibreIosPlugin()
+        let instance = MapLibrePlugin()
         registrar.addMethodCallDelegate(instance, channel: channel)
 
         // register MapLibre view factory

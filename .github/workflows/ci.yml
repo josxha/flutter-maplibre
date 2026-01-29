@@ -81,10 +81,8 @@ jobs:
       fail-fast: false
       matrix:
         sdk: [ '' ] # option to use a matrix test with the lower supported flutter version
+        package: ['maplibre', 'maplibre_webview' ]
     timeout-minutes: 30
-    defaults:
-      run:
-        working-directory: maplibre
     steps:
       - uses: actions/checkout@v6
       - name: "Setup Flutter SDK"
@@ -93,7 +91,8 @@ jobs:
           cache: true
       - name: "Get Flutter dependencies"
         run: flutter pub get
-      - name: "Run unit tests"
+      - name: "Run unit tests in package"
+        working-directory: packages/${{ matrix.sdk == '' }}
         run: flutter test --timeout=600s --coverage
       - name: "Run Codecov"
         uses: codecov/codecov-action@v5
@@ -284,7 +283,7 @@ jobs:
       - name: Build web
         run: flutter build windows --debug
   build-macos:
-    name: "[Windows] Build"
+    name: "[macOS] Build"
     runs-on: macos-latest
     defaults:
       run:
