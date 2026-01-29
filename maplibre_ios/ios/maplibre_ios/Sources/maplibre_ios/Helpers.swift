@@ -55,7 +55,9 @@ public class Helpers: NSObject {
                                 {
                                     return NSExpression(
                                         forConstantValue: NSValue(
-                                            cgVector: CGVector(dx: x, dy: y)))
+                                            cgVector: CGVector(dx: x, dy: y)
+                                        )
+                                    )
                                 }
                             }
                         }
