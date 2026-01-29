@@ -8,25 +8,11 @@ import UIKit
 
 @objc(Helpers)
 public class Helpers: NSObject {
-    @objc public static func addImageToStyle(
-        target: NSObject, field: String, expression: NSExpression
-    ) {
-        do {
-            target.setValue(expression, forKey: field)
-        } catch {
-            print("Couldn't set expression in Helpers.addImageToStyle()")
-        }
-    }
-
     @objc public static func setValue(
         target: NSObject, field: String, value: NSObject
     ) {
-        do {
-            // https://developer.apple.com/documentation/objectivec/nsobject/1418139-setvalue
-            try target.setValue(value, forKey: field)
-        } catch {
-            print("Couldn't set value in Helpers.setValue()")
-        }
+        // https://developer.apple.com/documentation/objectivec/nsobject/1418139-setvalue
+        target.setValue(value, forKey: field)
     }
 
     @objc public static func parsePredicate(raw: String) -> NSPredicate? {
@@ -69,7 +55,9 @@ public class Helpers: NSObject {
                                 {
                                     return NSExpression(
                                         forConstantValue: NSValue(
-                                            cgVector: CGVector(dx: x, dy: y)))
+                                            cgVector: CGVector(dx: x, dy: y)
+                                        )
+                                    )
                                 }
                             }
                         }

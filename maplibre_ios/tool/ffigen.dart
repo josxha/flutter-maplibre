@@ -4,7 +4,7 @@ import 'package:ffigen/ffigen.dart';
 
 void main(List<String> args) {
   final packageRoot = Platform.script.resolve('../');
-
+  // final frameworkPath = packageRoot.resolve('.dart_tool/maplibre_xcframework/MapLibre.xcframework/ios-arm64/');
   final generator = FfiGenerator(
     output: Output(
       dartFile: packageRoot.resolve('lib/maplibre_ffi.g.dart'),
@@ -18,19 +18,61 @@ void main(List<String> args) {
         packageRoot.resolve(
           'ios/maplibre_ios/Sources/maplibre_ios/MapLibreIos.h',
         ),
-        packageRoot.resolve('MapLibre.h'),
+        packageRoot.resolve(
+          'ios/.build/MapLibre.xcframework/ios-arm64/MapLibre.framework/Headers/MapLibre.h',
+        ),
       ],
       compilerOptions: [
+        // TODO cannot use the headers from SPM, because of missing debug symbols
+        // https://github.com/maplibre/maplibre-native/issues/3155
+        // '-F$frameworkPath', '-I${frameworkPath}MapLibre.framework/Headers',
         '-Fios/.build/MapLibre.xcframework/ios-arm64/',
         '-Iios/.build/MapLibre.xcframework/ios-arm64/MapLibre.framework/Headers',
         '-isysroot',
         '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk',
       ],
+      include: (header) {
+        const include = <String>{
+          'MapLibreIos.h',
+          'MLNMapProjection.h',
+          'MLNStyle.h',
+          'MLNSource.h',
+          'MLNVectorTileSource.h',
+          'MLNShapeSource.h',
+          'MLNImageSource.h',
+          'MLNRasterTileSource.h',
+          'MLNRasterDEMSource.h',
+          'MLNBackgroundStyleLayer.h',
+          'MLNCircleStyleLayer.h',
+          'MLNFillExtrusionStyleLayer.h',
+          'MLNFillStyleLayer.h',
+          'MLNHeatmapStyleLayer.h',
+          'MLNHillshadeStyleLayer.h',
+          'MLNLineStyleLayer.h',
+          'MLNRasterStyleLayer.h',
+          'MLNSymbolStyleLayer.h',
+          'MLNVectorStyleLayer.h',
+          'MLNAttributionInfo.h',
+          'NSExpression+MLNAdditions.h',
+          'MLNOfflineStorage.h',
+          'MLNOfflinePack.h',
+          'MLNOfflineRegion.h',
+          'MLNTilePyramidOfflineRegion.h',
+          'MLNFeature.h',
+        };
+        for (final path in include) {
+          if (header.path.endsWith(path)) return true;
+        }
+        return false;
+      },
     ),
     objectiveC: ObjectiveC(
       interfaces: Interfaces(
+        includeMember: (decl, member) {
+          return true;
+        },
         include: (decl) {
-          const set = {
+          const include = {
             'NSString',
             'CLLocationCoordinate2D',
             'NSAttributedString',
@@ -49,46 +91,30 @@ void main(List<String> args) {
             'Helpers',
             'MapLibreRegistry',
             'Extensions',
-            'MLN.*',
           };
-          if (set.contains(decl.originalName)) return true;
+          if (include.contains(decl.originalName)) return true;
           return decl.originalName.startsWith('MLN');
         },
       ),
       protocols: Protocols(
-        include: (decl) => decl.originalName.startsWith('MLN'),
-        module: (decl) => const {
-          'MapLibreRegistry': 'maplibre_ios',
-          'Helpers': 'maplibre_ios',
-          'Extensions': 'maplibre_ios',
-          'MLNMapView': 'MapLibre',
-          'MLNMapCamera': 'MapLibre',
-          'MLNVectorTileSource': 'MapLibre',
-          'MLNSymbolStyleLayer': 'MapLibre',
-          'MLNOfflinePack': 'MapLibre',
-          'MLNOfflineRegion': 'MapLibre',
-          'UIImage': 'UIKit',
-          'UIScreen': 'UIKit',
-        }[decl.originalName],
+        include: (decl) {
+          return decl.originalName.startsWith('MLN');
+        },
         includeMember: (declaration, member) => true,
       ),
-      /*memberFilterMap: {
-        'UIResponder': MemberFilter(exclude: ['copy:']),
-        'MLNMapView': MemberFilter(exclude: ['initWithFrame:']),
-      },
-      memberRenameMap: {
-        'MLNSource': {'initWithIdentifier:': 'initWithIdentifier_'},
-        'MLNMapView': {
-          'convertPoint:toCoordinateFromView:': 'convertPoint_',
-          'convertRect:toCoordinateBoundsFromView:': 'convertRect_',
-        },
-        'UIPointerStyle': {
-          'styleWithShape:constrainedAxes:': 'styleWithShape_',
-        },
-      },*/
     ),
     enums: Enums(style: (decl, suggestedStyle) => EnumStyle.intConstants),
   );
 
   generator.generate();
+
+  // workaround because we use a local MapLibre build during codegen
+  final mFile = File('${generator.output.dartFile.toFilePath()}.m');
+  final mContent = mFile.readAsStringSync();
+  mFile.writeAsStringSync(
+    mContent.replaceAll(
+      '../ios/.build/MapLibre.xcframework/ios-arm64/MapLibre.framework/Headers/',
+      '',
+    ),
+  );
 }
