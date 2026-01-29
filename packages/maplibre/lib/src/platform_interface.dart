@@ -1,6 +1,6 @@
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/map_state.dart';
-import 'package:maplibre/src/platform/platform_web.dart'
+import 'package:maplibre_web/src/platform_web.dart'
     if (dart.library.io) 'package:maplibre/src/platform/platform_native.dart';
 
 /// https://pub.dev/packages/plugin_platform_interface#a-note-about-base

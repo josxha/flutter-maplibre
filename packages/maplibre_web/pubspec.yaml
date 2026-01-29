@@ -6,6 +6,8 @@ issue_tracker: https://github.com/josxha/flutter-maplibre/issues
 homepage: https://flutter-maplibre.pages.dev
 documentation: https://flutter-maplibre.pages.dev/docs/index/
 
+platforms: { web: }
+
 environment:
   sdk: '>=3.9.0 <4.0.0'
   flutter: '>=3.35.0'
@@ -17,6 +19,7 @@ dependencies:
   flutter_web_plugins: { sdk: flutter }
   geobase: ^1.5.0
   html: ^0.15.4
+  maplibre_platform_interface: ^0.3.3+2
   pointer_interceptor: ^0.10.1+2
   web: ^1.0.0
 
@@ -28,3 +31,4 @@ flutter:
     platforms:
       web:
         pluginClass: MapLibrePlugin
+        fileName: src/maplibre_plugin.dart

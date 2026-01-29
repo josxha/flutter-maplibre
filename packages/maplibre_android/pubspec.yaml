@@ -6,6 +6,8 @@ issue_tracker: https://github.com/josxha/flutter-maplibre/issues
 homepage: https://flutter-maplibre.pages.dev
 documentation: https://flutter-maplibre.pages.dev/docs/index/
 
+platforms: { android: }
+
 environment:
   sdk: '>=3.9.0 <4.0.0'
   flutter: '>=3.35.0'
@@ -26,5 +28,5 @@ dev_dependencies:
 flutter:
   plugin:
     platforms:
-      web:
+      android:
         pluginClass: MapLibrePlugin

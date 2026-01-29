@@ -6,6 +6,8 @@ issue_tracker: https://github.com/josxha/flutter-maplibre/issues
 homepage: https://flutter-maplibre.pages.dev
 documentation: https://flutter-maplibre.pages.dev/docs/index/
 
+platforms: { android: , ios: , macos: , windows: }
+
 environment:
   sdk: '>=3.9.0 <4.0.0'
   flutter: '>=3.35.0'
@@ -15,7 +17,7 @@ resolution: workspace
 dependencies:
   flutter: { sdk: flutter }
   geobase: ^1.5.0
-  maplibre_webview: ^0.3.3+2
+  maplibre_platform_interface: ^0.3.3+2
 
 dev_dependencies:
   very_good_analysis: ^10.0.0
@@ -23,8 +25,8 @@ dev_dependencies:
 flutter:
   plugin:
     platforms:
-      android:
-        pluginClass: MapLibrePlugin
+#      android:
+#        pluginClass: MapLibrePlugin
       ios:
         pluginClass: MapLibrePlugin
       macos:

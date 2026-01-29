@@ -14,12 +14,7 @@ funding:
 
 resolution: workspace
 
-platforms:
-  android:
-  ios:
-  macos:
-  web:
-  windows:
+platforms: { android: , ios: , macos: , web: , windows: }
 
 environment:
   sdk: '>=3.9.0 <4.0.0'
@@ -32,6 +27,7 @@ dependencies:
   maplibre_ios: ^0.3.3+2
   maplibre_platform_interface: ^0.3.3+2
   maplibre_web: ^0.3.3+2
+  maplibre_webview: ^0.3.3+2
   url_launcher: ^6.3.0
 
 dev_dependencies:
