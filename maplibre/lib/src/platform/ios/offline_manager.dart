@@ -25,8 +25,11 @@ class OfflineManagerIos extends OfflineManagerNative {
     final completer = Completer<void>();
     _storage.clearAmbientCacheWithCompletionHandler(
       ObjCBlock_ffiVoid_NSError.listener((error) {
-        if (error != null) completer.completeError(error);
-        completer.complete();
+        if (error != null) {
+          completer.completeError(error);
+        } else {
+          completer.complete();
+        }
       }),
     );
     return completer.future;

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:ffigen/ffigen.dart';
@@ -23,9 +24,9 @@ void main(List<String> args) {
         ),
       ],
       compilerOptions: [
-        // TODO cannot use the headers from SPM, maybe because of missing debug symbols
-        // '-F$frameworkPath',
-        // '-I${frameworkPath}MapLibre.framework/Headers',
+        // TODO cannot use the headers from SPM, because of missing debug symbols
+        // https://github.com/maplibre/maplibre-native/issues/3155
+        // '-F$frameworkPath', '-I${frameworkPath}MapLibre.framework/Headers',
         '-Fios/.build/MapLibre.xcframework/ios-arm64/',
         '-Iios/.build/MapLibre.xcframework/ios-arm64/MapLibre.framework/Headers',
         '-isysroot',

@@ -52,9 +52,17 @@ Future<String> _getMapLibreFrameworkPath({
   }
   final version = match.group(1)!;
 
+  final homeDir = Platform.environment['HOME'];
+  if (homeDir == null || homeDir.isEmpty) {
+    throw Exception(
+      'Environment variable HOME is not set. Cannot locate the Swift Package '
+      'Manager artifacts cache at the default location. Please ensure HOME is '
+      'defined in the build environment, or configure a custom artifacts path.',
+    );
+  }
   // Find the ZIP file for the detected version.
   final zipPath = p.join(
-    Platform.environment['HOME'] ?? '',
+    homeDir,
     'Library/Caches/org.swift.swiftpm/artifacts',
     'https___github_com_maplibre_maplibre_native_releases_download_ios_v${version.replaceAll('.', '_')}_MapLibre_dynamic_xcframework_zip',
   );
@@ -105,6 +113,7 @@ Future<String> _getMapLibreFrameworkPath({
 }
 
 String _getResolvedSpmPackagePath() {
+  // Determine the root of the app the package is used in
   final root = Platform.script.resolve('../../../../');
   const packageResolvedLocation =
       'ios/Runner.xcworkspace/xcshareddata/swiftpm/Package.resolved';
