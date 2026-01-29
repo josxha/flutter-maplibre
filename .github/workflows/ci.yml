@@ -182,14 +182,14 @@ jobs:
       - name: Get dependencies
         run: flutter pub get
       - name: Check package score
-        working-directory: maplibre
+        working-directory: packages/maplibre
         run: pana --exit-code-threshold 70 --no-dartdoc .
   build-android:
     name: "[Android] Build APK"
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: example
+        working-directory: examples
     strategy:
       fail-fast: false
       matrix:
@@ -214,14 +214,14 @@ jobs:
         if: ${{ matrix.sdk == '' }}
         with:
           name: maplibre-flutter-demo.apk
-          path: example/build/app/outputs/flutter-apk/app-release.apk
+          path: examples/build/app/outputs/flutter-apk/app-release.apk
   build-ios:
     name: "[iOS] Build package"
     runs-on: macos-latest
     timeout-minutes: 30
     defaults:
       run:
-        working-directory: example
+        working-directory: examples
     strategy:
       fail-fast: false
       matrix:
@@ -242,13 +242,13 @@ jobs:
         uses: actions/upload-artifact@v6
         with:
           name: maplibre-flutter-demo.app
-          path: build/ios/iphoneos/Runner.app
+          path: examples/build/ios/iphoneos/Runner.app
   build-web:
     name: "[Web] Build"
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: example
+        working-directory: examples
     strategy:
       fail-fast: false
       matrix:
@@ -263,12 +263,52 @@ jobs:
         run: dart pub get
       - name: Build web
         run: flutter build web
+  build-windows:
+    name: "[Windows] Build"
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: examples
+    strategy:
+      fail-fast: false
+      matrix:
+        sdk: [ '' ] # option to use a matrix test with the lower supported flutter version
+    steps:
+      - uses: actions/checkout@v6
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ matrix.sdk }}
+          cache: true
+      - name: "Get Flutter dependencies"
+        run: dart pub get
+      - name: Build web
+        run: flutter build windows --debug
+  build-macos:
+    name: "[Windows] Build"
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: examples
+    strategy:
+      fail-fast: false
+      matrix:
+        sdk: [ '' ] # option to use a matrix test with the lower supported flutter version
+    steps:
+      - uses: actions/checkout@v6
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ matrix.sdk }}
+          cache: true
+      - name: "Get Flutter dependencies"
+        run: dart pub get
+      - name: Build web
+        run: flutter build macos --debug
   build-web-wasm:
     name: "[Web] Build WASM"
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: example
+        working-directory: examples
     strategy:
       fail-fast: false
       matrix:
@@ -286,6 +326,9 @@ jobs:
   codegen-pigeon:
     name: "[Pigeon] Check codegen"
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/maplibre_ios
     steps:
       - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
@@ -322,13 +365,13 @@ jobs:
       - name: "Get Flutter dependencies"
         run: dart pub get
       - name: Build example APK
-        working-directory: example
+        working-directory: examples
         run: flutter build apk
       - name: Run jnigen
-        working-directory: maplibre
+        working-directory: packages/maplibre_android
         run: dart run tool/jnigen.dart
       - name: Format code
-        run: dart format maplibre/lib/src/platform/android/jni.g.dart
+        run: dart format packages/maplibre_android/lib/src/platform/android/jni.g.dart
       - name: Check changes
         run: |
           if [[ -n "$(git status --porcelain)" ]]; then
@@ -363,18 +406,15 @@ jobs:
 #          cache: true
 #      - run: flutter config --enable-swift-package-manager
 #      - name: "Get Flutter dependencies"
-#        working-directory: maplibre_ios/example
+#        working-directory: packages/maplibre_ios
 #        run: dart pub get
-#      - name: "Build iOS package"
-#        working-directory: maplibre_ios/example
-#        run: flutter build ios --release --no-codesign
 #      - name: Build MapLibre Native
-#        working-directory: maplibre_ios/ios
+#        working-directory: packages/maplibre_ios/ios
 #        run: ./build_maplibre.sh
 #      - name: Prepare ffigen
 #        run: echo TODO modify swift dependencies
 #      - name: Run ffigen
-#        working-directory: maplibre_ios
+#        working-directory: packages/maplibre_ios
 #        run: dart run ffigen
 #      - name: Check changes
 #        run: |
