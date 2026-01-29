@@ -1,5 +1,5 @@
-name: maplibre_web
-description: "WebView implementation of the Flutter MapLibre plugin."
+name: maplibre_android
+description: "Android implementation of the Flutter MapLibre plugin."
 version: 0.3.3+2
 repository: https://github.com/josxha/flutter-maplibre
 issue_tracker: https://github.com/josxha/flutter-maplibre/issues

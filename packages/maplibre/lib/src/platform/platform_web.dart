@@ -2,7 +2,7 @@ import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:maplibre/src/map_state.dart';
 import 'package:maplibre/src/offline/offline_manager.dart';
 import 'package:maplibre/src/permission_manager.dart';
-import 'package:maplibre/src/platform/web/map_state.dart';
+import 'package:maplibre_web/src/map_state.dart';
 import 'package:maplibre/src/platform_interface.dart';
 
 /// A web implementation of the MapLibrePlatform of the MapLibre plugin.

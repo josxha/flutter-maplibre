@@ -1,1 +1,1 @@
-maplibre/CHANGELOG.md
+packages/maplibre/CHANGELOG.md
