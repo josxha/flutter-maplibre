@@ -17,6 +17,9 @@ const actionFitBounds = 3;
 /// Action type for [StyleControllerWebView.addImage].
 const actionAddImage = 4;
 
+/// Action type for [MapLibreMapStateWebView.setStyle].
+const actionSetStyle = 5;
+
 /// Event type for [MapLibreMapStateWebView._test].
 const eventTest = 0;
 

@@ -60,6 +60,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     <meta charset="utf-8" />
     <script src="https://unpkg.com/maplibre-gl@^5.15.0/dist/maplibre-gl.js"></script>
     <link href="https://unpkg.com/maplibre-gl@^5.15.0/dist/maplibre-gl.css" rel="stylesheet"/>
+    <script src='https://unpkg.com/pmtiles@^4.0/dist/pmtiles.js'></script>
     <style>
       html, body, #map { margin: 0; height: 100%; width: 100%; }
     </style>
@@ -152,6 +153,24 @@ class MapLibreMapStateWebView extends MapLibreMapState {
             createImageBitmap(blob).then((img) => {
                 window.map.addImage(id, img);
             }).catch((err) => console.warn('addImage decode failed', err));
+            break;
+          case $actionSetStyle:
+            const styleLength = buffer.byteLength - 1;
+            let style = '';
+            for (let i = 0; i < styleLength; i++) {
+                style += String.fromCharCode(view.getUint8(1 + i));
+            }
+            window.map.once('style.load', () => {
+                const buf = new ArrayBuffer(1);
+                const view = new DataView(buf);
+                view.setUint8(0, $eventStyleLoad);
+                window.ws.send(buf);
+            });
+            if (style.startsWith('{')) {
+              window.map.setStyle(JSON.parse(style));
+            } else {
+              window.map.setStyle(style);
+            }
             break;
           default:
             console.warn(`WebSocket error: Unknown WS binary message type: \${view.getUint8(0)}`);
@@ -356,18 +375,14 @@ class MapLibreMapStateWebView extends MapLibreMapState {
 
   @override
   Future<void> setStyle(String style) async {
-    await webViewController.evaluateJavascript(
-      source:
-          '''
-  window.map.once('style.load', () => {
-      const buf = new ArrayBuffer(1);
-      const view = new DataView(buf);
-      view.setUint8(0, $eventStyleLoad);
-      window.ws.send(buf);
-  });
-  window.map.setStyle('${(await _prepareStyleString(style)).replaceAll("'", r"\'")}');
-''',
-    );
+    final prepared = await _prepareStyleString(style);
+    final bytes = prepared.codeUnits;
+    final data = ByteData(1 + bytes.length);
+    data.setUint8(0, actionSetStyle);
+    for (var i = 0; i < bytes.length; i++) {
+      data.setUint8(1 + i, bytes[i]);
+    }
+    _webSocket?.sendBytes(data);
   }
 
   @override
@@ -425,19 +440,19 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     final trimmed = style.trim();
     if (trimmed.startsWith('{')) {
       // Raw JSON
-      return trimmed.replaceAll("'", r"\'").replaceAll('\n', r'\n');
+      return trimmed;
     } else if (trimmed.startsWith('/')) {
       // path
-      return trimmed.replaceAll("'", r"\'");
+      return trimmed;
     } else if (!trimmed.startsWith('http://') &&
         !trimmed.startsWith('https://') &&
         !trimmed.startsWith('mapbox://')) {
       // flutter asset
       final style = await DefaultAssetBundle.of(context).loadString(trimmed);
-      return style.replaceAll("'", r"\'").replaceAll('\n', r'\n');
+      return style;
     } else {
       // URI
-      return trimmed.replaceAll("'", r"\'");
+      return trimmed;
     }
   }
 
@@ -502,12 +517,15 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     final gestures = options.gestures;
     final ws = await _futureWebSocket;
     debugPrint('WebSocket server listening on ws://${ws.address}:${ws.port}');
+    final preparedStyle = await _prepareStyleString(options.initStyle);
     await controller.evaluateJavascript(
       source:
           '''
+    let protocol = new pmtiles.Protocol();
+    maplibregl.addProtocol("pmtiles",protocol.tile);
     const map = new maplibregl.Map({
         container: 'map',
-        style: '${(await _prepareStyleString(options.initStyle)).replaceAll("'", r"\'")}',
+        style: ${preparedStyle.startsWith('{') ? preparedStyle : '"$preparedStyle"'},
         ${switch (options.initCenter) {
             final center? => 'center: [${center.lon}, ${center.lat}],',
             _ => '',

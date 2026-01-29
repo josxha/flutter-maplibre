@@ -23,15 +23,15 @@ class StyleControllerWebView extends StyleController {
 
   @override
   Future<void> addImage(String id, Uint8List bytes) async {
-    final idBytes = Uint8List.fromList(id.codeUnits);
-    final data = ByteData(2 + idBytes.lengthInBytes + bytes.lengthInBytes);
+    final idBytes = id.codeUnits;
+    final data = ByteData(2 + idBytes.length + bytes.lengthInBytes);
     data.setUint8(0, actionAddImage);
-    data.setUint8(1, idBytes.lengthInBytes);
-    for (var i = 0; i < idBytes.lengthInBytes; i++) {
+    data.setUint8(1, idBytes.length);
+    for (var i = 0; i < idBytes.length; i++) {
       data.setUint8(2 + i, idBytes[i]);
     }
     for (var i = 0; i < bytes.lengthInBytes; i++) {
-      data.setUint8(2 + idBytes.lengthInBytes + i, bytes[i]);
+      data.setUint8(2 + idBytes.length + i, bytes[i]);
     }
     webSocket.sendBytes(data);
   }
