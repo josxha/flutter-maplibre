@@ -23,7 +23,9 @@ jobs:
       - name: "Install SwiftFormat"
         run: brew install swiftformat
       - name: "Format Swift code"
-        run: swiftformat --verbose . --reporter github-actions-log --swiftversion 6 --disable trailingCommas
+        run: |
+          swiftformat --version
+          swiftformat --verbose . --reporter github-actions-log --swiftversion 6 --disable trailingCommas
       - name: "Install ktlint"
         run: brew install ktlint
       - name: Run ktlint

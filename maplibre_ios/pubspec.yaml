@@ -27,11 +27,12 @@ dev_dependencies:
   ffigen: 20.1.1
   very_good_analysis: ^10.0.0
 
+# TODO remove once ffigen is released
 dependency_overrides:
   ffigen:
     git:
       url: https://github.com/dart-lang/native
-      ref: ffigen_2935
+      ref: f67abb73ee5867fa0808e5dc96f692647de25241
       path: pkgs/ffigen
 
 flutter:

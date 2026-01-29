@@ -23,9 +23,8 @@ final class MapLibreMapStateIos extends MapLibreMapStateNative
   late final int _viewId;
   MLNMapView? _cachedMapView;
 
-  MLNMapView get _mapView => _cachedMapView ??= MLNMapView.as(
-    MapLibreRegistry.getMapWithViewId(_viewId)!,
-  );
+  MLNMapView get _mapView =>
+      _cachedMapView ??= MapLibreRegistry.getMapWithViewId(_viewId)!;
 
   @override
   StyleControllerIos? style;
