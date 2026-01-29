@@ -91,7 +91,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
         const view = new DataView(buffer);
         const actionType = view.getUint8(0);
         switch (actionType) {
-          case $actionTest:
+          case $actionTest: {
             const ts = view.getBigInt64(1, true);
             const buffer2 = new ArrayBuffer(1+8);
             const view2 = new DataView(buffer2);
@@ -99,7 +99,8 @@ class MapLibreMapStateWebView extends MapLibreMapState {
             view2.setBigInt64(1, ts, true);
             window.ws.send(buffer2);
             break;
-          case $actionMoveCamera:
+          }
+          case $actionMoveCamera: {
             window.map.jumpTo({
                 center: [
                     view.getFloat64(1, true),
@@ -110,7 +111,8 @@ class MapLibreMapStateWebView extends MapLibreMapState {
                 bearing: view.getFloat64(33, true),
             });
             break;
-          case $actionAnimateCamera:
+          }
+          case $actionAnimateCamera: {
             window.map.flyTo({
                 center: [
                     view.getFloat64(1, true),
@@ -121,8 +123,9 @@ class MapLibreMapStateWebView extends MapLibreMapState {
                 bearing: view.getFloat64(33, true),
             });
             break;
-          case $actionFitBounds:
-          const maxZoom = view.getFloat64(65, true);
+          }
+          case $actionFitBounds: {
+            const maxZoom = view.getFloat64(65, true);
             window.map.fitBounds([
                 [view.getFloat64(1, true), view.getFloat64(9, true)],
                 [view.getFloat64(17, true), view.getFloat64(25, true)]
@@ -139,7 +142,8 @@ class MapLibreMapStateWebView extends MapLibreMapState {
                 },
             });
             break;
-          case $actionAddImage:
+          }
+          case $actionAddImage: {
             const idLength = view.getUint8(1);
             let id = '';
             for (let i = 0; i < idLength; i++) {
@@ -154,7 +158,8 @@ class MapLibreMapStateWebView extends MapLibreMapState {
                 window.map.addImage(id, img);
             }).catch((err) => console.warn('addImage decode failed', err));
             break;
-          case $actionSetStyle:
+          }
+          case $actionSetStyle: {
             const styleLength = buffer.byteLength - 1;
             let style = '';
             for (let i = 0; i < styleLength; i++) {
@@ -172,8 +177,27 @@ class MapLibreMapStateWebView extends MapLibreMapState {
               window.map.setStyle(style);
             }
             break;
-          default:
+          }
+          case $actionUpdateGeoJson: {
+            const idLength = view.getUint8(1);
+            let id = '';
+            for (let i = 0; i < idLength; i++) {
+                id += String.fromCharCode(view.getUint8(2 + i));
+            }
+            let data = '';
+            for (let i = 0; i < buffer.byteLength - 2 - idLength; i++) {
+                data += String.fromCharCode(view.getUint8(2 + idLength + i));
+            }
+            const source = window.map.getSource(id);
+            if (!source) {
+              console.warn('WebSocket error: Source with id "' + id + '" does not exist.');
+            }
+            source.setData(JSON.parse(data));
+            break;
+          }
+          default: {
             console.warn(`WebSocket error: Unknown WS binary message type: \${view.getUint8(0)}`);
+          }
         }
     };
     </script>
@@ -245,14 +269,12 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     Offset point, {
     List<String>? layerIds,
   }) {
-    debugPrint('featuresAtPoint is not supported on webview yet.');
-    return const [];
+    throw Exception('featuresAtPoint is not supported on webview yet.');
   }
 
   @override
   List<RenderedFeature> featuresInRect(Rect rect, {List<String>? layerIds}) {
-    debugPrint('featuresInRect is not supported on webview yet.');
-    return const [];
+    throw Exception('featuresInRect is not supported on webview yet.');
   }
 
   @override
@@ -369,8 +391,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
 
   @override
   List<QueriedLayer> queryLayers(Offset screenLocation) {
-    debugPrint('queryLayers is not supported on webview yet.');
-    return const [];
+    throw Exception('queryLayers is not supported on webview yet.');
   }
 
   @override

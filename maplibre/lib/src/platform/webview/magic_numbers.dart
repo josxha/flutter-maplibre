@@ -20,6 +20,9 @@ const actionAddImage = 4;
 /// Action type for [MapLibreMapStateWebView.setStyle].
 const actionSetStyle = 5;
 
+/// Action type for [StyleControllerWebView.updateGeoJsonSource].
+const actionUpdateGeoJson = 6;
+
 /// Event type for [MapLibreMapStateWebView._test].
 const eventTest = 0;
 

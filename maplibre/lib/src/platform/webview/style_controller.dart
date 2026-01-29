@@ -237,15 +237,17 @@ class StyleControllerWebView extends StyleController {
     required String id,
     required String data,
   }) async {
-    await webViewController.callAsyncJavaScript(
-      functionBody:
-          '''
-      const source = window.map.getSource("${id.replaceAll('"', r'\"')}");
-      if (!source) {
-        throw new Error('Source with id "${id.replaceAll('"', r'\"')}" does not exist.');
-      }
-      source.setData(JSON.parse(`$data`));
-''',
-    );
+    final dataBytes = data.codeUnits;
+    final idBytes = id.codeUnits;
+    final bytes = ByteData(1 + 1 + idBytes.length + dataBytes.length);
+    bytes.setUint8(0, actionUpdateGeoJson);
+    bytes.setUint8(1, idBytes.length);
+    for (var i = 0; i < idBytes.length; i++) {
+      bytes.setUint8(2 + i, idBytes[i]);
+    }
+    for (var i = 0; i < dataBytes.length; i++) {
+      bytes.setUint8(2 + idBytes.length + i, dataBytes[i]);
+    }
+    webSocket.sendBytes(bytes);
   }
 }
