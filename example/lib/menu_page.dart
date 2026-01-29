@@ -100,19 +100,22 @@ class MenuPage extends StatelessWidget {
                   iconData: Icons.animation,
                   location: AnimationPage.location,
                 ),
-                if (!kIsWeb)
+                if (!kIsWeb && !Platform.isWindows && !Platform.isMacOS)
                   const ItemCard(
                     label: 'User Location',
                     iconData: Icons.gps_fixed,
                     location: UserLocationPage.location,
                   ),
-                if (!kIsWeb)
+                if (!kIsWeb && !Platform.isWindows && !Platform.isMacOS)
                   const ItemCard(
                     label: 'Offline',
                     iconData: Icons.wifi_off,
                     location: OfflinePage.location,
                   ),
-                if (!kIsWeb && !Platform.isIOS)
+                if (!kIsWeb &&
+                    !Platform.isIOS &&
+                    !Platform.isWindows &&
+                    !Platform.isMacOS)
                   const ItemCard(
                     label: 'Permissions',
                     iconData: Icons.key,

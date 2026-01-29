@@ -8,6 +8,7 @@ import 'package:maplibre/src/platform/android/permission_manager.dart';
 import 'package:maplibre/src/platform/ios/map_state.dart';
 import 'package:maplibre/src/platform/ios/offline_manager.dart';
 import 'package:maplibre/src/platform/ios/permission_manager.dart';
+import 'package:maplibre/src/platform/webview/map_state.dart';
 import 'package:maplibre/src/platform_interface.dart';
 
 /// An implementation of [PlatformInterface] that uses method channels and ffi.
@@ -16,7 +17,7 @@ final class PlatformImpl extends PlatformInterface {
   MapLibreMapState createWidgetState() => switch (defaultTargetPlatform) {
     TargetPlatform.android => MapLibreMapStateAndroid(),
     TargetPlatform.iOS => MapLibreMapStateIos(),
-    _ => throw UnimplementedError('Unsupported platform'),
+    _ => MapLibreMapStateWebView(),
   };
 
   @override
