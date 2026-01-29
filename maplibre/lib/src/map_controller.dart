@@ -42,7 +42,7 @@ abstract interface class MapController {
   List<Geographic> toLngLats(List<Offset> screenLocations);
 
   /// Instantly move the map camera to a new location.
-  Future<void> moveCamera({
+  void moveCamera({
     Geographic? center,
     double? zoom,
     double? bearing,

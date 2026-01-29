@@ -139,6 +139,11 @@ extension type JsMap._(Camera _) implements Camera {
     JSArray<Point> rect,
     JSAny? options,
   );
+
+  /// Get the current map projection.
+  ///
+  /// https://maplibre.org/maplibre-gl-js/docs/API/classes/Map/#getprojection
+  external ProjectionSpecification getProjection();
 }
 
 /// Anonymous MapOptions for the MapLibre JavaScript [JsMap].
@@ -260,6 +265,8 @@ extension type ProjectionSpecification._(JSObject _) implements JSObject {
     /// transition state, or an expression.
     required String type,
   });
+
+  external String type;
 }
 
 /// StyleSwapOptions

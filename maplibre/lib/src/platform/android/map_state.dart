@@ -347,12 +347,12 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative
   });
 
   @override
-  Future<void> moveCamera({
+  void moveCamera({
     Geographic? center,
     double? zoom,
     double? bearing,
     double? pitch,
-  }) async => using((arena) {
+  }) => using((arena) {
     assert(_jMap != null, '_jMapLibreMap needs to be not null.');
     final cameraPosBuilder = jni.CameraPosition$Builder()..releasedBy(arena);
     if (center != null) cameraPosBuilder.target(center.toLatLng());
@@ -364,14 +364,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapStateNative
     final cameraUpdate = jni.CameraUpdateFactory.newCameraPosition(
       cameraPosition,
     )..releasedBy(arena);
-    final completer = Completer<void>();
-    _jMap?.moveCamera$1(
-      cameraUpdate,
-      jni.MapLibreMap$CancelableCallback.implement(
-        _CameraMovementCallback(WeakReference(completer)),
-      )..releasedBy(arena),
-    );
-    return completer.future;
+    _jMap?.moveCamera(cameraUpdate);
   });
 
   @override
