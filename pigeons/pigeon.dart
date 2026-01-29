@@ -2,24 +2,12 @@ import 'package:pigeon/pigeon.dart';
 
 @ConfigurePigeon(
   PigeonOptions(
-    dartOut: 'maplibre/lib/src/platform/pigeon.g.dart',
+    dartOut: 'packages/maplibre/lib/src/platform/pigeon.g.dart',
     dartOptions: DartOptions(),
     dartPackageName: 'maplibre',
     copyrightHeader: 'pigeons/header.txt',
-    // linux
-    // gobjectHeaderOut: 'linux/pigeon.g.h',
-    // gobjectSourceOut: 'linux/pigeon.g.cc',
-    // gobjectOptions: GObjectOptions(),
-    // windows
-    // cppOptions: CppOptions(namespace: 'pigeon_maplibre'),
-    // cppHeaderOut: 'windows/runner/pigeon.g.h',
-    // cppSourceOut: 'windows/runner/pigeon.g.cpp',
-    // android
-    // kotlinOut: 'android/src/main/kotlin/com/github/josxha/maplibre/Pigeon.g.kt',
-    // kotlinOptions: KotlinOptions(),
-    // ios
     swiftOut:
-        'maplibre_ios/ios/maplibre_ios/Sources/maplibre_ios/Pigeon.g.swift',
+        'packages/maplibre_ios/ios/maplibre_ios/Sources/maplibre_ios/Pigeon.g.swift',
     swiftOptions: SwiftOptions(),
   ),
 )
