@@ -801,13 +801,6 @@ extension type Helpers._(objc.ObjCObject object$) implements objc.ObjCObject,obj
   /// Returns whether [obj] is an instance of [Helpers].
   static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_Helpers);
 
-  /// addImageToStyleWithTarget:field:expression:
-  static void addImageToStyleWithTarget(objc.NSObject target, {required objc.NSString field,required NSExpression expression}) {
-_objc_msgSend_r8gdi7(_class_Helpers, _sel_addImageToStyleWithTarget_field_expression_, target.ref.pointer, field.ref.pointer, expression.ref.pointer);
-
-  }
-
-
   /// alloc
   static Helpers alloc() {
     final $ret = _objc_msgSend_151sglz(_class_Helpers, _sel_alloc);
@@ -11545,42 +11538,7 @@ _objc_msgSend_vmuxgq(object$.ref.pointer, _sel_setVisibleCoordinateBounds_edgePa
 }
 
 
-/// An interactive, customizable map view with an interface similar to the one
-/// provided by Apple’s MapKit.
-/// 
-/// Using ``MLNMapView``, you can embed the map inside a view, allow users to
-/// manipulate it with standard gestures, animate the map between different
-/// viewpoints, and present information in the form of annotations and overlays.
-/// 
-/// The map view loads scalable vector tiles that conform to the
-/// <a href="https://github.com/mapbox/vector-tile-spec">Mapbox Vector Tile Specification</a>.
-/// It styles them with a style that conforms to the
-/// <a href="https://maplibre.org/maplibre-style-spec/">MapLibre Style Spec</a>.
-/// Such styles can be designed with
-/// <a href="https://maplibre.org/maputnik/">Maputnik</a>.
-/// 
-/// 
-/// Because ``MLNMapView`` loads asynchronously, several delegate methods are available
-/// for receiving map-related updates. These methods can be used to ensure that certain operations
-/// have completed before taking any additional actions. Information on these methods is located
-/// in the ``MLNMapViewDelegate`` protocol documentation.
-/// 
-/// Adding your own gesture recognizer to ``MLNMapView`` will block the corresponding
-/// gesture recognizer built into ``MLNMapView``. To avoid conflicts, define which
-/// gesture takes precedence. For example, you can create your own
-/// `UITapGestureRecognizer` that will be invoked only if the default ``MLNMapView``
-/// tap gesture fails:
-/// 
-/// ```swift
-/// let mapTapGestureRecognizer = UITapGestureRecognizer(target: self, action:
-/// #selector(myCustomFunction)) for recognizer in mapView.gestureRecognizers! where recognizer is
-/// UITapGestureRecognizer { mapTapGestureRecognizer.require(toFail: recognizer)
-/// }
-/// mapView.addGestureRecognizer(mapTapGestureRecognizer)
-/// ```
-/// 
-/// > Note: You are responsible for getting permission to use the map data and for
-/// ensuring that your use adheres to the relevant terms of use.
+/// MLNMapView
 extension type MLNMapView._(objc.ObjCObject object$) implements objc.ObjCObject,UIView,MLNStylable {
   /// Constructs a [MLNMapView] that points to the same underlying object as [other].
   MLNMapView.as(objc.ObjCObject other) : object$ = other {
@@ -31668,9 +31626,9 @@ extension type MapLibreRegistry._(objc.ObjCObject object$) implements objc.ObjCO
 
 
   /// getMapWithViewId:
-  static objc.ObjCObject? getMapWithViewId(int viewId) {
+  static MLNMapView? getMapWithViewId(int viewId) {
     final $ret = _objc_msgSend_1ya1kjn(_class_MapLibreRegistry, _sel_getMapWithViewId_, viewId);
-    return $ret.address == 0 ? null : objc.ObjCObject($ret, retain: true, release: true);
+    return $ret.address == 0 ? null : MLNMapView.fromPointer($ret, retain: true, release: true);
   }
 
 
@@ -44287,7 +44245,6 @@ late final _sel_addAnnotation_ = objc.registerName("addAnnotation:");
 late final _sel_addAnnotations_ = objc.registerName("addAnnotations:");
 late final _sel_addContentsOfFile_withCompletionHandler_ = objc.registerName("addContentsOfFile:withCompletionHandler:");
 late final _sel_addContentsOfURL_withCompletionHandler_ = objc.registerName("addContentsOfURL:withCompletionHandler:");
-late final _sel_addImageToStyleWithTarget_field_expression_ = objc.registerName("addImageToStyleWithTarget:field:expression:");
 late final _sel_addLayer_ = objc.registerName("addLayer:");
 late final _sel_addOverlay_ = objc.registerName("addOverlay:");
 late final _sel_addOverlays_ = objc.registerName("addOverlays:");

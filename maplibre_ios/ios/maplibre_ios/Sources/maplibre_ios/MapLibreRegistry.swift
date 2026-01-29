@@ -8,15 +8,15 @@ import UIKit
 
 @objc(MapLibreRegistry)
 public class MapLibreRegistry: NSObject {
-    private static var mapRegistry: [Int64: AnyObject] = [:]
+    private static var mapRegistry: [Int64: MLNMapView] = [:]
 
     // Method to get the map for a given viewId
-    @objc public static func getMap(viewId: Int64) -> AnyObject? {
+    @objc public static func getMap(viewId: Int64) -> MLNMapView? {
         mapRegistry[viewId]
     }
 
     // Method to add a map to the registry
-    public static func addMap(viewId: Int64, map: AnyObject) {
+    public static func addMap(viewId: Int64, map: MLNMapView) {
         mapRegistry[viewId] = map
     }
 
