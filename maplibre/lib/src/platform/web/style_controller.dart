@@ -41,7 +41,7 @@ class StyleControllerWeb extends StyleController {
   }
 
   @override
-  Future<List<String>> getAttributions() async => getAttributions();
+  Future<List<String>> getAttributions() async => getAttributionsSync();
 
   @override
   List<String> getAttributionsSync() {
@@ -217,6 +217,7 @@ class StyleControllerWeb extends StyleController {
             tileSize: source.tileSize,
             attribution: source.attribution,
             url: source.url,
+            tiles: source.tiles.jsify(),
           ),
         );
       case RasterSource():
@@ -227,6 +228,7 @@ class StyleControllerWeb extends StyleController {
             attribution: source.attribution,
             tileSize: source.tileSize,
             tiles: source.tiles.jsify(),
+            url: source.url,
           ),
         );
       case VectorSource():

@@ -26,6 +26,7 @@ class MapOptions {
     this.androidMode = AndroidPlatformViewMode.tlhc_vd,
     this.androidTranslucentTextureSurface = false,
     this.androidForegroundLoadColor = Colors.transparent,
+    this.webviewDebugMode = false,
   }) : initPitch = pitch ?? initPitch;
 
   /// Find the [MapOptions] of the closest [MapLibreMap] in the widget tree.
@@ -105,4 +106,10 @@ class MapOptions {
 
   /// The MapView foreground color that is used when the map surface is being created.
   final Color androidForegroundLoadColor;
+
+  /// Enable webview debug mode. This enables additional logging if the map is
+  /// rendered using a webview. Also, it allows to show the webview devtools
+  /// by pressing F12 while the map has focus.
+  /// Defaults to false.
+  final bool webviewDebugMode;
 }

@@ -19,7 +19,7 @@ class _WidgetLayerPageState extends State<WidgetLayerPage> {
       body: const MapLibreMap(
         options: MapOptions(
           initZoom: 3,
-          initCenter: Geographic(lon: 0, lat: 0),
+          initCenter: Geographic(lon: 0, lat: -10),
         ),
         children: [
           WidgetLayer(
