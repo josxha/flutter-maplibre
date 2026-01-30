@@ -419,8 +419,9 @@ final class MapLibreMapStateIos extends MapLibreMapState
       _mapView!.styleJSON = NSString.as(prepared);
     } else if (NSURL.isA(prepared)) {
       _mapView!.styleURL = NSURL.as(prepared);
+    } else {
+      throw UnsupportedError('Unsupported style format');
     }
-    throw UnsupportedError('Unsupported style format');
   }
 
   Future<NSObject> _prepareStyle(String style) async {
@@ -454,35 +455,7 @@ final class MapLibreMapStateIos extends MapLibreMapState
     setState(() {});
   }
 
-  @override
-  void onMoveCamera(pigeon.MapCamera camera) {
-    final mapCamera = MapCamera(
-      center: camera.center.toGeographic(),
-      zoom: camera.zoom,
-      pitch: camera.pitch,
-      bearing: camera.bearing,
-    );
-    setState(() => this.camera = mapCamera);
-    widget.onEvent?.call(MapEventMoveCamera(camera: mapCamera));
-  }
-
-  @override
-  void onStartMoveCamera(pigeon.CameraChangeReason reason) {
-    final changeReason = switch (reason) {
-      pigeon.CameraChangeReason.apiAnimation => CameraChangeReason.apiAnimation,
-      pigeon.CameraChangeReason.apiGesture => CameraChangeReason.apiGesture,
-      pigeon.CameraChangeReason.developerAnimation =>
-        CameraChangeReason.developerAnimation,
-    };
-    widget.onEvent?.call(MapEventStartMoveCamera(reason: changeReason));
-  }
-
-  @override
-  void onIdle() => widget.onEvent?.call(const MapEventIdle());
-
-  @override
-  void onCameraIdle() => widget.onEvent?.call(const MapEventCameraIdle());
-
+/* TODO
   @override
   void onDoubleClick(pigeon.LngLat point, pigeon.Offset screenPoint) {
     final position = point.toGeographic();
@@ -518,6 +491,7 @@ final class MapLibreMapStateIos extends MapLibreMapState
       MapEventLongClick(point: position, screenPoint: screenOffset),
     );
   }
+*/
 
   /// MLNMapViewDelegate method called when camera is about to start changing
   void _regionWillChangeWithReason(

@@ -6,14 +6,14 @@ class MapLibreView: NSObject, FlutterPlatformView, UIGestureRecognizerDelegate
     private var _view: UIView = .init()
     private var _mapView: MLNMapView!
 
-    init(frame _: CGRect, viewId: Int64) {
+    init(frame: CGRect, viewId: Int64) {
         super.init() // self can be used after calling super.init()
         self._mapView = MLNMapView(frame: frame)
         MapLibreRegistry.addMap(viewId: viewId, map: self._mapView)
         self._view.addSubview(self._mapView)
     }
 
-    @objc func onTap(sender: UITapGestureRecognizer) {
+    /*@objc func onTap(sender: UITapGestureRecognizer) {
         var screenPosition = sender.location(in: _mapView)
         var point = _mapView.convert(screenPosition, toCoordinateFrom: _mapView)
         _flutterApi.onClick(
@@ -48,7 +48,7 @@ class MapLibreView: NSObject, FlutterPlatformView, UIGestureRecognizerDelegate
             point: LngLat(lng: point.longitude, lat: point.latitude),
             screenPoint: Offset(x: screenPosition.x, y: screenPosition.y)
         ) { _ in }
-    }
+    }*/
 
     func view() -> UIView {
         _view

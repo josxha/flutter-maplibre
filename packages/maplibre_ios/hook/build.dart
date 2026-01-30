@@ -21,7 +21,7 @@ void main(List<String> args) async {
     final headersDir = p.join(frameworkPath, 'MapLibre.framework', 'Headers');
     final builder = CBuilder.library(
       name: 'maplibre_ffi',
-      assetName: 'maplibre_ffi.g.dart',
+      assetName: 'src/maplibre_ffi.g.dart',
       sources: ['lib/src/maplibre_ffi.g.dart.m'],
       language: Language.objectiveC,
       includes: [headersDir],
