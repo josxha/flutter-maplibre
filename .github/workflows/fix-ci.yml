@@ -48,7 +48,7 @@ jobs:
           echo $status && \
           echo "GIT_STATUS=${status//$'\n'/\\n}" >> $GITHUB_ENV
       - name: Push changes
-        if: "env.GIT_STATUS.length > 0"
+        if: env.GIT_STATUS != ''
         run: |
           git config --global user.email "action@github.com" && \
           git config --global user.name "Github CI" && \
