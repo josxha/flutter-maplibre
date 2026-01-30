@@ -15,7 +15,7 @@ echo "▶ Fetching Flutter SDK (stable)"
 git clone -b stable --depth 1 https://github.com/flutter/flutter.git
 
 echo "▶ Building Flutter web"
-cd example
+cd examples
 ../flutter/bin/flutter build web --wasm \
   --base-href /demo/ \
   -o ../website/build/demo

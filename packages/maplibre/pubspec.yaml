@@ -1,0 +1,56 @@
+name: maplibre
+description: "Permissive and performant mapping library that supports Mapbox Vector Tiles (MVT) powered by MapLibre SDKs."
+version: 0.3.3+2
+repository: https://github.com/josxha/flutter-maplibre
+issue_tracker: https://github.com/josxha/flutter-maplibre/issues
+homepage: https://flutter-maplibre.pages.dev
+documentation: https://flutter-maplibre.pages.dev/docs/index/
+
+topics: [ map, maplibre, mvt ]
+
+funding:
+  - https://paypal.me/joschaeckert
+  - https://github.com/sponsors/josxha
+
+resolution: workspace
+
+platforms: { android: , ios: , macos: , web: , windows: }
+
+environment:
+  sdk: '>=3.9.0 <4.0.0'
+  flutter: '>=3.35.0'
+
+dependencies:
+  flutter: { sdk: flutter }
+  geobase: ^1.5.0
+  html: ^0.15.6
+  maplibre_android: ^0.3.3+2
+  maplibre_ios: ^0.3.3+2
+  maplibre_platform_interface: ^0.3.3+2
+  maplibre_web: ^0.3.3+2
+  maplibre_webview: ^0.3.3+2
+  pointer_interceptor: ^0.10.1+2
+  url_launcher: ^6.3.0
+
+dev_dependencies:
+  flutter_test: { sdk: flutter }
+  mocktail: ^1.0.4
+  very_good_analysis: ^10.0.0
+
+screenshots:
+  - description: 'MapLibre Logo'
+    path: 'doc/logo_rounded.png'
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        default_package: maplibre_android
+      ios:
+        default_package: maplibre_ios
+      macos:
+        default_package: maplibre_webview
+      web:
+        default_package: maplibre_web
+      windows:
+        default_package: maplibre_webview

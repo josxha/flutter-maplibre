@@ -31,12 +31,13 @@ jobs:
       - name: Run ktlint
         run: ktlint -F
       - name: Run pigeon
+        working-directory: packages/maplibre_ios
         run: sh ./pigeons/run_code_gen.sh
       - name: Build example APK
-        working-directory: example
+        working-directory: examples
         run: flutter build apk
       - name: Run jnigen
-        working-directory: maplibre
+        working-directory: packages/maplibre_android
         run: dart run tool/jnigen.dart
       - name: dart format
         run: dart format .
@@ -47,7 +48,7 @@ jobs:
           echo $status && \
           echo "GIT_STATUS=${status//$'\n'/\\n}" >> $GITHUB_ENV
       - name: Push changes
-        if: "contains(env.GIT_STATUS, 'bodensee_navigator-v')"
+        if: env.GIT_STATUS != ''
         run: |
           git config --global user.email "action@github.com" && \
           git config --global user.name "Github CI" && \

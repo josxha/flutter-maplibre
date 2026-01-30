@@ -1,0 +1,47 @@
+name: maplibre_ios
+description: "iOS implementation of the Flutter MapLibre plugin."
+version: 0.3.3+2
+repository: https://github.com/josxha/flutter-maplibre
+issue_tracker: https://github.com/josxha/flutter-maplibre/issues
+homepage: https://flutter-maplibre.pages.dev
+documentation: https://flutter-maplibre.pages.dev/docs/index/
+
+platforms: { ios: }
+
+environment:
+  sdk: '>=3.9.0 <4.0.0'
+  flutter: '>=3.35.0'
+
+resolution: workspace
+
+dependencies:
+  code_assets: ^1.0.0
+  ffi: ^2.1.3
+  flutter: { sdk: flutter }
+  hooks: ^1.0.0
+  maplibre_platform_interface: ^0.3.3+2
+  native_toolchain_c: ^0.17.4
+  objective_c: ^9.0.0+1
+  path: ^1.9.1
+  pubspec_parse: ^1.5.0
+
+dev_dependencies:
+  ffigen: 20.1.1
+  pigeon: 26.1.5
+  very_good_analysis: ^10.0.0
+
+# TODO remove once ffigen is released
+dependency_overrides:
+  ffigen:
+    git:
+      url: https://github.com/dart-lang/native
+      ref: f67abb73ee5867fa0808e5dc96f692647de25241
+      path: pkgs/ffigen
+
+flutter:
+  plugin:
+    platforms:
+      ios:
+        dartPluginClass: MapLibrePlugin
+        dartFileName: 'src/maplibre_plugin.dart'
+        pluginClass: MapLibrePlugin
