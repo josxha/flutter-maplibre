@@ -27,9 +27,9 @@ dev_dependencies:
 flutter:
   plugin:
     platforms:
-      android:
-        dartPluginClass: MapLibrePlugin
-        dartFileName: 'src/maplibre_plugin.dart'
+#      android:
+#        dartPluginClass: MapLibrePlugin
+#        dartFileName: 'src/maplibre_plugin.dart'
 #      ios:
 #        dartPluginClass: MapLibrePlugin
 #        dartFileName: 'src/maplibre_plugin.dart'
