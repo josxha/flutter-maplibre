@@ -9,6 +9,7 @@ class MapLibreView: NSObject, FlutterPlatformView, UIGestureRecognizerDelegate
     init(frame: CGRect, viewId: Int64) {
         super.init() // self can be used after calling super.init()
         self._mapView = MLNMapView(frame: frame)
+        self._mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         MapLibreRegistry.addMap(viewId: viewId, map: self._mapView)
         self._view.addSubview(self._mapView)
     }

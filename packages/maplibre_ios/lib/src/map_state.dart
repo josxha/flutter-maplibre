@@ -39,16 +39,16 @@ final class MapLibreMapStateIos extends MapLibreMapState
     _viewId = viewId;
     final mapView = MapLibreRegistry.getMapWithViewId(viewId)!;
     _mapView = mapView;
-    setStyle(options.initStyle);
+    // setStyle(options.initStyle);
     mapView.automaticallyAdjustsContentInset = true;
-    mapView.delegate = MLNMapViewDelegate$Builder.implement(
+    /*TODO mapView.delegate = MLNMapViewDelegate$Builder.implement(
       mapView_didFinishLoadingStyle_: _didFinishLoadingStyle,
       mapView_regionWillChangeWithReason_animated_: _regionWillChangeWithReason,
       mapView_regionDidChangeWithReason_animated_: _regionDidChangeWithReason,
       mapView_regionDidChangeAnimated_: _regionDidChange,
       mapViewRegionIsChanging_: _regionIsChanging,
       mapViewDidBecomeIdle_: _didBecomeIdle,
-    );
+    );*/
     // disable the default UI because they are rebuilt in Flutter
     mapView.showsCompassView = false;
     mapView.showsAttributionButton = false;
