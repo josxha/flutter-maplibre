@@ -307,7 +307,7 @@ extension ObjectExt on Object? {
 
 /// Extension methods for the [Geographic] class. Not exported publicly.
 extension GeographicExt on Geographic {
-  /// Convert a [Geographic] to an internal [pigeon.LngLat].
+  /// Convert a [Geographic] to an internal [CLLocationCoordinate2D].
   CLLocationCoordinate2D toLngLat() => Struct.create<CLLocationCoordinate2D>()
     ..longitude = lon
     ..latitude = lat;

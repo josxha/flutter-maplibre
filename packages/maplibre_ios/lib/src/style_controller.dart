@@ -8,12 +8,9 @@ class StyleControllerIos extends StyleController {
 
   @override
   Future<void> addImage(String id, Uint8List bytes) async {
-    // TODO Unhandled Exception: FailedToLoadClassException: Failed to load Objective-C class: NSImage
-    // https://developer.apple.com/documentation/foundation/nsitemproviderreading/2919479-objectwithitemproviderdata
-    /*final image = UIImage.imageWithData(bytes.toNSData());
+    final image = UIImage.imageWithData(bytes.toNSData());
     if (image == null) return;
-    _ffiStyle.setImage(image, forName: id.toNSString());*/
-    await _hostApi.addImage(id, bytes);
+    _ffiStyle.setImage(image, forName: id.toNSString());
   }
 
   @override
@@ -215,7 +212,7 @@ class StyleControllerIos extends StyleController {
           URL: source.url.toNSURL()!,
         );
       case VideoSource():
-        throw UnimplementedError('Video source is only supported on web.');
+        throw UnsupportedError('Video source is only supported on web.');
       default:
         throw UnimplementedError(
           'The Source is not supported: ${source.runtimeType}',

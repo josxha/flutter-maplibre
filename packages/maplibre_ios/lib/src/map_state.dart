@@ -25,7 +25,7 @@ final class MapLibreMapStateIos extends MapLibreMapState {
 
   @override
   Widget buildPlatformWidget(BuildContext context) {
-    // print('buildPlatformWidget');
+    MapLibreRegistry.setFlutterApi();
     const viewType = 'plugins.flutter.io/maplibre';
     return UiKitView(
       viewType: viewType,
@@ -40,6 +40,7 @@ final class MapLibreMapStateIos extends MapLibreMapState {
   // ignore: use_setters_to_change_properties
   void _onPlatformViewCreated(int viewId) {
     _viewId = viewId;
+    MapLibreRegistry.;
   }
 
   @override
@@ -175,6 +176,7 @@ final class MapLibreMapStateIos extends MapLibreMapState {
     }
 
     // gestures
+    // TODO implement gesture enabling/disabling (maybe bug in upstream?)
     /*if (options.gestures.rotate != oldOptions.gestures.rotate) {
       _mapView.rotateEnabled = options.gestures.rotate;
     }

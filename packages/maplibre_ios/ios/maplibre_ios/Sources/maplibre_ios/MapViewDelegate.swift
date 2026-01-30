@@ -2,12 +2,11 @@ import Flutter
 import MapLibre
 
 class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
-    MapLibreHostApi, UIGestureRecognizerDelegate
+    UIGestureRecognizerDelegate
 {
     private var _view: UIView = .init()
     private var _mapView: MLNMapView!
     private var _viewId: Int64
-    private var _flutterApi: MapLibreFlutterApi
     private var _mapOptions: MapOptions?
 
     init(
@@ -18,15 +17,7 @@ class MapLibreView: NSObject, FlutterPlatformView, MLNMapViewDelegate,
         // print("### init new MapViewDelegate ### \(viewId) ###")
         var channelSuffix = String(viewId)
         _viewId = viewId
-        _flutterApi = MapLibreFlutterApi(
-            binaryMessenger: binaryMessenger,
-            messageChannelSuffix: channelSuffix
-        )
         super.init() // self can be used after calling super.init()
-        MapLibreHostApiSetup.setUp(
-            binaryMessenger: binaryMessenger, api: self,
-            messageChannelSuffix: channelSuffix
-        )
         // get and apply the MapOptions from Flutter
         _flutterApi.getOptions { result in
             switch result {
