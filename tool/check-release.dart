@@ -70,8 +70,7 @@ void main(List<String> arguments) {
   final examplePubspec = File('examples/pubspec.yaml');
   if (examplePubspec.existsSync()) {
     final exampleYaml = _loadYamlFile(examplePubspec);
-    final exampleDependencies =
-        _readDependencyMap(exampleYaml, 'dependencies');
+    final exampleDependencies = _readDependencyMap(exampleYaml, 'dependencies');
     if (exampleDependencies.containsKey('maplibre')) {
       _ensure(
         exampleDependencies['maplibre'] == expectedConstraint,
@@ -202,10 +201,7 @@ List<PackageInfo> _collectPackages(Directory root) {
   if (!root.existsSync()) {
     _fail('Missing packages directory: ${root.path}');
   }
-  final directories = root
-      .listSync()
-      .whereType<Directory>()
-      .toList()
+  final directories = root.listSync().whereType<Directory>().toList()
     ..sort((a, b) => a.path.compareTo(b.path));
 
   final packages = <PackageInfo>[];
@@ -220,11 +216,7 @@ List<PackageInfo> _collectPackages(Directory root) {
       _fail('Missing package name in ${pubspecFile.path}');
     }
     packages.add(
-      PackageInfo(
-        name: name.trim(),
-        directory: directory,
-        pubspec: pubspec,
-      ),
+      PackageInfo(name: name.trim(), directory: directory, pubspec: pubspec),
     );
   }
 
@@ -241,9 +233,7 @@ Map<String, Object?> _readDependencyMap(YamlMap pubspec, String key) {
     return <String, Object?>{};
   }
   return Map<String, Object?>.fromEntries(
-    value.entries.map(
-      (entry) => MapEntry(entry.key.toString(), entry.value),
-    ),
+    value.entries.map((entry) => MapEntry(entry.key.toString(), entry.value)),
   );
 }
 
