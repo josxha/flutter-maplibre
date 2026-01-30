@@ -10,6 +10,10 @@ abstract interface class PermissionManager {
   factory PermissionManager() =>
       MapLibrePlatform.instance.createPermissionManager();
 
+  /// Whether the permission manager is supported on the current platform.
+  static bool get isSupported =>
+      MapLibrePlatform.instance.permissionManagerIsSupported;
+
   /// Returns true if access to background location is granted.
   bool get backgroundLocationPermissionGranted;
 

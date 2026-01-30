@@ -10,20 +10,16 @@ environment:
 resolution: workspace
 
 dependencies:
-  flutter:
-    sdk: flutter
-  flutter_web_plugins:
-    sdk: flutter
+  flutter: { sdk: flutter }
+  flutter_web_plugins: { sdk: flutter }
   go_router: ^17.0.0
   http: ^1.2.2
   maplibre: ^0.3.3+2
 
 dev_dependencies:
   flutter_launcher_icons: ^0.14.3
-  flutter_test:
-    sdk: flutter
-  integration_test:
-    sdk: flutter
+  flutter_test: { sdk: flutter }
+  integration_test: { sdk: flutter }
   mocktail: ^1.0.4
   very_good_analysis: ^10.0.0
 

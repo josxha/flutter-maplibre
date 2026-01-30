@@ -18,6 +18,9 @@ abstract interface class MapController {
       maybeOf(context) ??
       (throw StateError('Unable to find an instance of MapController'));
 
+  static bool get userLocationIsSupported =>
+      MapLibrePlatform.instance.userLocationIsSupported;
+
   /// Get the [MapOptions] from [MapLibreMap.options].
   MapOptions get options;
 

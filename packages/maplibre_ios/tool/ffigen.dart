@@ -113,7 +113,7 @@ void main(List<String> args) {
   final mContent = mFile.readAsStringSync();
   mFile.writeAsStringSync(
     mContent.replaceAll(
-      '../ios/.build/MapLibre.xcframework/ios-arm64/MapLibre.framework/Headers/',
+      '../../ios/.build/MapLibre.xcframework/ios-arm64/MapLibre.framework/Headers/',
       '',
     ),
   );

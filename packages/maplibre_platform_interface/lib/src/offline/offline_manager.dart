@@ -12,6 +12,10 @@ abstract interface class OfflineManager {
   static Future<OfflineManager> createInstance() async =>
       MapLibrePlatform.instance.createOfflineManager();
 
+  /// Whether the offline manager is supported on the current platform.
+  static bool get isSupported =>
+      MapLibrePlatform.instance.offlineManagerIsSupported;
+
   /// Call to free resources when the [OfflineManager] is no longer needed.
   void dispose();
 

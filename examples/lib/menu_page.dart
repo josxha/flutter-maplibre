@@ -1,7 +1,5 @@
-import 'dart:io';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:maplibre/maplibre.dart';
 import 'package:maplibre_example/animation_page.dart';
 import 'package:maplibre_example/controller_page.dart';
 import 'package:maplibre_example/events_page.dart';
@@ -100,22 +98,19 @@ class MenuPage extends StatelessWidget {
                   iconData: Icons.animation,
                   location: AnimationPage.location,
                 ),
-                if (!kIsWeb && !Platform.isWindows && !Platform.isMacOS)
+                if (MapController.userLocationIsSupported)
                   const ItemCard(
                     label: 'User Location',
                     iconData: Icons.gps_fixed,
                     location: UserLocationPage.location,
                   ),
-                if (!kIsWeb && !Platform.isWindows && !Platform.isMacOS)
+                if (OfflineManager.isSupported)
                   const ItemCard(
                     label: 'Offline',
                     iconData: Icons.wifi_off,
                     location: OfflinePage.location,
                   ),
-                if (!kIsWeb &&
-                    !Platform.isIOS &&
-                    !Platform.isWindows &&
-                    !Platform.isMacOS)
+                if (PermissionManager.isSupported)
                   const ItemCard(
                     label: 'Permissions',
                     iconData: Icons.key,

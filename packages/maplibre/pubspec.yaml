@@ -48,9 +48,9 @@ flutter:
         default_package: maplibre_android
       ios:
         default_package: maplibre_ios
-#      macos:
-#        default_package: maplibre_webview
+      macos:
+        default_package: maplibre_webview
       web:
         default_package: maplibre_web
-#      windows:
-#        default_package: maplibre_webview
+      windows:
+        default_package: maplibre_webview

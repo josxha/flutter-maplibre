@@ -17,4 +17,13 @@ class MapLibrePlugin extends MapLibrePlatform {
   PermissionManager createPermissionManager() {
     throw Exception('The PermissionManager can not be used on webview.');
   }
+
+  @override
+  bool get offlineManagerIsSupported => false;
+
+  @override
+  bool get permissionManagerIsSupported => false;
+
+  @override
+  bool get userLocationIsSupported => false;
 }

@@ -11,7 +11,7 @@ set -e
 
 mkdir -p .build
 script_dir=$(pwd)
-cd ../../../maplibre-native
+cd ../../../../maplibre-native
 bazel build //platform/ios:MapLibre.dynamic \
     --compilation_mode=dbg \
     --copt=-Wno-unused-but-set-variable \

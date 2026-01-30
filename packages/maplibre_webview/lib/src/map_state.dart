@@ -499,7 +499,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
 ''',
     );
     final map = result?.toMap() ?? <String, Object?>{};
-    final data = map['value'] as Map<String, dynamic>?;
+    final data = map['value'] as Map?;
     if (data == null) {
       throw Exception('Failed to get camera data from web view. Result: $map');
     }

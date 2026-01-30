@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
@@ -47,12 +46,8 @@ class _MapControlButtonsState extends State<MapControlButtons> {
   _TrackLocationState _trackState = _TrackLocationState.gpsNotFixed;
   late bool _trackLocationButtonInitialized = false;
 
-  bool get _showLocationButton {
-    const locationPlatforms = {TargetPlatform.android, TargetPlatform.iOS};
-    return !kIsWeb &&
-        widget.showTrackLocation &&
-        locationPlatforms.contains(defaultTargetPlatform);
-  }
+  bool get _showLocationButton =>
+      MapController.userLocationIsSupported && widget.showTrackLocation;
 
   @override
   void initState() {

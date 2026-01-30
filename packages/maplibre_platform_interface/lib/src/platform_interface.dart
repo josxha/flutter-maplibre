@@ -35,6 +35,12 @@ abstract class MapLibrePlatform extends PlatformInterface {
   /// Return a platform specific [PermissionManager] object.
   PermissionManager createPermissionManager();
 
-  // Methods for the plugin's platform interface would go here, often with
-  // implementations that throw UnimplementedError.
+  /// Return whether offline manager is supported on the current platform.
+  bool get offlineManagerIsSupported => true;
+
+  /// Return whether permission manager is supported on the current platform.
+  bool get permissionManagerIsSupported => true;
+
+  /// Return whether user location is supported on the current platform.
+  bool get userLocationIsSupported => true;
 }
