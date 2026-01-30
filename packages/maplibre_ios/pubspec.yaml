@@ -1,6 +1,6 @@
 name: maplibre_ios
 description: "iOS implementation of the Flutter MapLibre plugin."
-version: 0.3.3+2
+version: 0.3.4
 repository: https://github.com/josxha/flutter-maplibre
 issue_tracker: https://github.com/josxha/flutter-maplibre/issues
 homepage: https://flutter-maplibre.pages.dev
@@ -19,7 +19,7 @@ dependencies:
   ffi: ^2.1.3
   flutter: { sdk: flutter }
   hooks: ^1.0.0
-  maplibre_platform_interface: ^0.3.3+2
+  maplibre_platform_interface: ^0.3.4
   native_toolchain_c: ^0.17.4
   objective_c: ^9.0.0+1
   path: ^1.9.1
