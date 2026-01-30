@@ -1,1 +1,1 @@
-maplibre/README.md
+packages/maplibre/README.md
