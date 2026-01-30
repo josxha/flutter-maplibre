@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:maplibre_ios/src/extensions.dart';
 import 'package:maplibre_ios/src/maplibre_ffi.g.dart';
-import 'package:maplibre_ios/src/pigeon.g.dart' as pigeon;
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 import 'package:objective_c/objective_c.dart';
 
@@ -14,9 +13,7 @@ part 'style_controller.dart';
 
 /// The implementation that gets used for state of the [MapLibreMap] widget on
 /// android using JNI and Pigeon as a fallback.
-final class MapLibreMapStateIos extends MapLibreMapState
-    implements pigeon.MapLibreFlutterApi {
-  late final pigeon.MapLibreHostApi _hostApi;
+final class MapLibreMapStateIos extends MapLibreMapState {
   late final int _viewId;
   MLNMapView? _cachedMapView;
 
@@ -40,10 +37,8 @@ final class MapLibreMapStateIos extends MapLibreMapState
 
   /// This method gets called when the platform view is created. It is not
   /// guaranteed that the map is ready.
+  // ignore: use_setters_to_change_properties
   void _onPlatformViewCreated(int viewId) {
-    final channelSuffix = viewId.toString();
-    _hostApi = pigeon.MapLibreHostApi(messageChannelSuffix: channelSuffix);
-    pigeon.MapLibreFlutterApi.setUp(this, messageChannelSuffix: channelSuffix);
     _viewId = viewId;
   }
 
@@ -138,7 +133,7 @@ final class MapLibreMapStateIos extends MapLibreMapState
   void onStyleLoaded() {
     // We need to refresh the cached style for when the style reloads.
     style?.dispose();
-    final styleCtrl = style = StyleControllerIos._(_mapView.style!, _hostApi);
+    final styleCtrl = style = StyleControllerIos._(_mapView.style!);
 
     widget.onEvent?.call(MapEventStyleLoaded(styleCtrl));
     widget.onStyleLoaded?.call(styleCtrl);
