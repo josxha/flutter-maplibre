@@ -1,6 +1,6 @@
 name: maplibre_web
 description: "iOS implementation for the maplibre package"
-version: 0.3.3+2
+version: 0.3.4
 repository: https://github.com/josxha/flutter-maplibre
 issue_tracker: https://github.com/josxha/flutter-maplibre/issues
 homepage: https://flutter-maplibre.pages.dev
@@ -18,7 +18,7 @@ dependencies:
   flutter: { sdk: flutter }
   flutter_web_plugins: { sdk: flutter }
   html: ^0.15.4
-  maplibre_platform_interface: ^0.3.3+2
+  maplibre_platform_interface: ^0.3.4
   pointer_interceptor: ^0.10.1+2
   web: ^1.0.0
 

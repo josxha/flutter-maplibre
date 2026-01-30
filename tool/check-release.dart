@@ -5,6 +5,21 @@ import 'package:args/args.dart';
 import 'package:pub_semver/pub_semver.dart';
 import 'package:yaml/yaml.dart';
 
+class PackageInfo {
+  PackageInfo({
+    required this.name,
+    required this.directory,
+    required this.pubspec,
+  });
+
+  final String name;
+  final Directory directory;
+  final YamlMap pubspec;
+
+  File get pubspecFile => File('${directory.path}/pubspec.yaml');
+  File get changelogFile => File('${directory.path}/CHANGELOG.md');
+}
+
 void main(List<String> arguments) {
   final parser = ArgParser()
     ..addOption(
@@ -28,38 +43,48 @@ void main(List<String> arguments) {
   final version = _parseVersion(versionString);
   final expectedConstraint = '^$versionString';
 
-  final maplibrePubspec = _loadYamlFile(File('maplibre/pubspec.yaml'));
-  _ensure(
-    maplibrePubspec['version'] == versionString,
-    'maplibre/pubspec.yaml version must be $versionString',
-  );
-  final maplibreDependencies =
-      (maplibrePubspec['dependencies'] as YamlMap?) ?? <Object?, Object?>{};
-  _ensure(
-    maplibreDependencies['maplibre_ios'] == expectedConstraint,
-    'maplibre -> maplibre_ios constraint must be $expectedConstraint',
-  );
+  final packages = _collectPackages(Directory('packages'));
+  final packageNames = packages.map((package) => package.name).toSet();
 
-  final maplibreIosPubspec = _loadYamlFile(File('maplibre_ios/pubspec.yaml'));
-  _ensure(
-    maplibreIosPubspec['version'] == versionString,
-    'maplibre_ios/pubspec.yaml version must be $versionString',
-  );
+  for (final package in packages) {
+    _ensure(
+      package.pubspec['version'] == versionString,
+      '${package.pubspecFile.path} version must be $versionString',
+    );
 
-  final examplePubspec = _loadYamlFile(File('example/pubspec.yaml'));
-  final exampleDependencies =
-      (examplePubspec['dependencies'] as YamlMap?) ?? <Object?, Object?>{};
-  _ensure(
-    exampleDependencies['maplibre'] == expectedConstraint,
-    'example/pubspec.yaml maplibre constraint must be $expectedConstraint',
-  );
+    final dependencies = _readDependencyMap(package.pubspec, 'dependencies');
+    for (final entry in dependencies.entries) {
+      if (!packageNames.contains(entry.key)) {
+        continue;
+      }
+      final constraint = entry.value;
+      _ensure(
+        constraint is String && constraint == expectedConstraint,
+        '${package.name} -> ${entry.key} constraint must be $expectedConstraint',
+      );
+    }
 
-  _ensureChangelogEntry(File('maplibre/CHANGELOG.md'), versionString);
-  _ensureChangelogEntry(File('maplibre_ios/CHANGELOG.md'), versionString);
+    _ensureChangelogEntry(package.changelogFile, versionString);
+  }
+
+  final examplePubspec = File('examples/pubspec.yaml');
+  if (examplePubspec.existsSync()) {
+    final exampleYaml = _loadYamlFile(examplePubspec);
+    final exampleDependencies =
+        _readDependencyMap(exampleYaml, 'dependencies');
+    if (exampleDependencies.containsKey('maplibre')) {
+      _ensure(
+        exampleDependencies['maplibre'] == expectedConstraint,
+        '${examplePubspec.path} maplibre constraint must be $expectedConstraint',
+      );
+    }
+  }
+
   _ensureDocumentationVersion(File('website/versions.json'), version);
 
+  final releaseNotesPackage = _selectReleaseNotesPackage(packages);
   final releaseNotes = _buildReleaseNotes(
-    File('maplibre/CHANGELOG.md'),
+    releaseNotesPackage.changelogFile,
     version,
   );
   final notesPath = 'build/release_notes.txt';
@@ -95,6 +120,9 @@ void _ensure(bool condition, String message) {
 }
 
 void _ensureChangelogEntry(File changelog, String version) {
+  if (!changelog.existsSync()) {
+    _fail('Missing file: ${changelog.path}');
+  }
   final content = changelog.readAsStringSync();
   final headerPattern = RegExp(
     '^##\\s+${RegExp.escape(version)}\\b',
@@ -168,6 +196,64 @@ void _writeReleaseNotes(String path, String content) {
   final file = File(path);
   file.createSync(recursive: true);
   file.writeAsStringSync(content);
+}
+
+List<PackageInfo> _collectPackages(Directory root) {
+  if (!root.existsSync()) {
+    _fail('Missing packages directory: ${root.path}');
+  }
+  final directories = root
+      .listSync()
+      .whereType<Directory>()
+      .toList()
+    ..sort((a, b) => a.path.compareTo(b.path));
+
+  final packages = <PackageInfo>[];
+  for (final directory in directories) {
+    final pubspecFile = File('${directory.path}/pubspec.yaml');
+    if (!pubspecFile.existsSync()) {
+      continue;
+    }
+    final pubspec = _loadYamlFile(pubspecFile);
+    final name = pubspec['name'];
+    if (name is! String || name.trim().isEmpty) {
+      _fail('Missing package name in ${pubspecFile.path}');
+    }
+    packages.add(
+      PackageInfo(
+        name: name.trim(),
+        directory: directory,
+        pubspec: pubspec,
+      ),
+    );
+  }
+
+  if (packages.isEmpty) {
+    _fail('No packages found under ${root.path}');
+  }
+
+  return packages;
+}
+
+Map<String, Object?> _readDependencyMap(YamlMap pubspec, String key) {
+  final value = pubspec[key];
+  if (value is! YamlMap) {
+    return <String, Object?>{};
+  }
+  return Map<String, Object?>.fromEntries(
+    value.entries.map(
+      (entry) => MapEntry(entry.key.toString(), entry.value),
+    ),
+  );
+}
+
+PackageInfo _selectReleaseNotesPackage(List<PackageInfo> packages) {
+  for (final package in packages) {
+    if (package.name == 'maplibre') {
+      return package;
+    }
+  }
+  return packages.first;
 }
 
 Never _fail(String message) {
