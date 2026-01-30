@@ -17,4 +17,13 @@ final class MapLibrePlugin extends MapLibrePlatform {
 
   @override
   PermissionManager createPermissionManager() => PermissionManagerAndroid();
+
+  @override
+  bool get offlineManagerIsSupported => true;
+
+  @override
+  bool get permissionManagerIsSupported => true;
+
+  @override
+  bool get userLocationIsSupported => true;
 }

@@ -370,7 +370,7 @@ jobs:
         working-directory: packages/maplibre_android
         run: dart run tool/jnigen.dart
       - name: Format code
-        run: dart format packages/maplibre_android/lib/src/platform/android/jni.g.dart
+        run: dart format packages/maplibre_android/lib/src/jni.g.dart
       - name: Check changes
         run: |
           if [[ -n "$(git status --porcelain)" ]]; then

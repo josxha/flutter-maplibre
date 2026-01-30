@@ -36,11 +36,11 @@ abstract class MapLibrePlatform extends PlatformInterface {
   PermissionManager createPermissionManager();
 
   /// Return whether offline manager is supported on the current platform.
-  bool get offlineManagerIsSupported => true;
+  bool get offlineManagerIsSupported => false;
 
   /// Return whether permission manager is supported on the current platform.
-  bool get permissionManagerIsSupported => true;
+  bool get permissionManagerIsSupported => false;
 
   /// Return whether user location is supported on the current platform.
-  bool get userLocationIsSupported => true;
+  bool get userLocationIsSupported => false;
 }
