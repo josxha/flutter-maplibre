@@ -30,12 +30,13 @@ flutter:
       android:
         dartPluginClass: MapLibrePlugin
         dartFileName: 'src/maplibre_plugin.dart'
-      ios:
+#      ios:
+#        dartPluginClass: MapLibrePlugin
+#        dartFileName: 'src/maplibre_plugin.dart'
+      macos:
         dartPluginClass: MapLibrePlugin
         dartFileName: 'src/maplibre_plugin.dart'
-#      macos:
-#        dartPluginClass: MapLibrePlugin
-#        dartFileName: 'src/maplibre_plugin.dart'
-#      windows:
-#        dartPluginClass: MapLibrePlugin
-#        dartFileName: 'src/maplibre_plugin.dart'
+      windows:
+        dartPluginClass: MapLibrePlugin
+        dartFileName: 'src/maplibre_plugin.dart'
+#
