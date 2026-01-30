@@ -316,13 +316,12 @@ SWIFT_CLASS_NAMED("Helpers")
 @class MLNMapView;
 SWIFT_CLASS_NAMED("MapLibreRegistry")
 @interface MapLibreRegistry : NSObject
+/// Method to get the map for a given viewId
 + (MLNMapView * _Nullable)getMapWithViewId:(int64_t)viewId SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) id _Nullable activity;)
-+ (id _Nullable)activity SWIFT_WARN_UNUSED_RESULT;
-+ (void)setActivity:(id _Nullable)value;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) id _Nullable context;)
-+ (id _Nullable)context SWIFT_WARN_UNUSED_RESULT;
-+ (void)setContext:(id _Nullable)value;
+/// Method to add a map to the registry
++ (void)addMapWithViewId:(int64_t)viewId map:(MLNMapView * _Nonnull)map;
+/// Method to remove a map to the registry
++ (void)removeMapWithViewId:(int64_t)viewId;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 

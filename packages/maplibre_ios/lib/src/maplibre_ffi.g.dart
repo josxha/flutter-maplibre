@@ -31597,10 +31597,10 @@ extension type MapLibreRegistry._(objc.ObjCObject object$) implements objc.ObjCO
   /// Returns whether [obj] is an instance of [MapLibreRegistry].
   static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MapLibreRegistry);
 
-  /// activity
-  static objc.ObjCObject? getActivity() {
-    final $ret = _objc_msgSend_151sglz(_class_MapLibreRegistry, _sel_activity);
-    return $ret.address == 0 ? null : objc.ObjCObject($ret, retain: true, release: true);
+  /// Method to add a map to the registry
+  static void addMapWithViewId(int viewId, {required MLNMapView map}) {
+_objc_msgSend_mpxix1(_class_MapLibreRegistry, _sel_addMapWithViewId_map_, viewId, map.ref.pointer);
+
   }
 
 
@@ -31618,14 +31618,7 @@ extension type MapLibreRegistry._(objc.ObjCObject object$) implements objc.ObjCO
   }
 
 
-  /// context
-  static objc.ObjCObject? getContext() {
-    final $ret = _objc_msgSend_151sglz(_class_MapLibreRegistry, _sel_context);
-    return $ret.address == 0 ? null : objc.ObjCObject($ret, retain: true, release: true);
-  }
-
-
-  /// getMapWithViewId:
+  /// Method to get the map for a given viewId
   static MLNMapView? getMapWithViewId(int viewId) {
     final $ret = _objc_msgSend_1ya1kjn(_class_MapLibreRegistry, _sel_getMapWithViewId_, viewId);
     return $ret.address == 0 ? null : MLNMapView.fromPointer($ret, retain: true, release: true);
@@ -31639,16 +31632,9 @@ extension type MapLibreRegistry._(objc.ObjCObject object$) implements objc.ObjCO
   }
 
 
-  /// setActivity:
-  static void setActivity(objc.ObjCObject? value) {
-_objc_msgSend_xtuoz7(_class_MapLibreRegistry, _sel_setActivity_, value?.ref.pointer ?? ffi.nullptr);
-
-  }
-
-
-  /// setContext:
-  static void setContext(objc.ObjCObject? value) {
-_objc_msgSend_xtuoz7(_class_MapLibreRegistry, _sel_setContext_, value?.ref.pointer ?? ffi.nullptr);
+  /// Method to remove a map to the registry
+  static void removeMapWithViewId(int viewId) {
+_objc_msgSend_17gvxvj(_class_MapLibreRegistry, _sel_removeMapWithViewId_, viewId);
 
   }
   /// Returns a new instance of MapLibreRegistry constructed with the default `new` method.
@@ -43994,6 +43980,7 @@ final _objc_msgSend_16go90j = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Po
 final _objc_msgSend_16hia13 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Bool , ffi.Double , ffi.Double )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , bool , double , double )>();
 final _objc_msgSend_16il6gh = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Long Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_16lja1o = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , UIEdgeInsets , ffi.Bool , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , UIEdgeInsets , bool , ffi.Pointer<objc.ObjCBlockImpl> )>();
+final _objc_msgSend_17gvxvj = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Int64 )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int )>();
 final _objc_msgSend_17i4wqy = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Double , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , double , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_17wuhyd = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.UnsignedLong , ffi.UnsignedLong )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , int , int )>();
 final _objc_msgSend_18hv5gj = objc.msgSendPointer.cast<ffi.NativeFunction<objc.CGRect Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , MLNCoordinateBounds , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<objc.CGRect Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , MLNCoordinateBounds , ffi.Pointer<objc.ObjCObjectImpl> )>();
@@ -44164,6 +44151,7 @@ final _objc_msgSend_l9p60w = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Boo
 final _objc_msgSend_lxcnyc = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , UIEdgeInsets , ffi.Double )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , UIEdgeInsets , double )>();
 final _objc_msgSend_mabicu = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Double Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<double Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_mabicuFpret = objc.msgSendFpretPointer.cast<ffi.NativeFunction<ffi.Double Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<double Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>();
+final _objc_msgSend_mpxix1 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Int64 , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_mus1wv = objc.msgSendPointer.cast<ffi.NativeFunction<objc.CGPoint Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , CLLocationCoordinate2D , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<objc.CGPoint Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , CLLocationCoordinate2D , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_mus1wvStret = objc.msgSendStretPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.CGPoint> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , CLLocationCoordinate2D , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<void Function(ffi.Pointer<objc.CGPoint> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , CLLocationCoordinate2D , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_na2nx0 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Bool , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , bool , ffi.Pointer<objc.ObjCBlockImpl> )>();
@@ -44239,13 +44227,13 @@ late final _sel_actionForLayer_forKey_ = objc.registerName("actionForLayer:forKe
 late final _sel_actionJournalOptions = objc.registerName("actionJournalOptions");
 late final _sel_actionWithHandler_ = objc.registerName("actionWithHandler:");
 late final _sel_actionWithTitle_image_identifier_handler_ = objc.registerName("actionWithTitle:image:identifier:handler:");
-late final _sel_activity = objc.registerName("activity");
 late final _sel_activityType = objc.registerName("activityType");
 late final _sel_addAnnotation_ = objc.registerName("addAnnotation:");
 late final _sel_addAnnotations_ = objc.registerName("addAnnotations:");
 late final _sel_addContentsOfFile_withCompletionHandler_ = objc.registerName("addContentsOfFile:withCompletionHandler:");
 late final _sel_addContentsOfURL_withCompletionHandler_ = objc.registerName("addContentsOfURL:withCompletionHandler:");
 late final _sel_addLayer_ = objc.registerName("addLayer:");
+late final _sel_addMapWithViewId_map_ = objc.registerName("addMapWithViewId:map:");
 late final _sel_addOverlay_ = objc.registerName("addOverlay:");
 late final _sel_addOverlays_ = objc.registerName("addOverlays:");
 late final _sel_addPackForRegion_withContext_completionHandler_ = objc.registerName("addPackForRegion:withContext:completionHandler:");
@@ -44967,6 +44955,7 @@ late final _sel_removeAnnotations_ = objc.registerName("removeAnnotations:");
 late final _sel_removeCoordinatesInRange_ = objc.registerName("removeCoordinatesInRange:");
 late final _sel_removeImageForName_ = objc.registerName("removeImageForName:");
 late final _sel_removeLayer_ = objc.registerName("removeLayer:");
+late final _sel_removeMapWithViewId_ = objc.registerName("removeMapWithViewId:");
 late final _sel_removeOverlay_ = objc.registerName("removeOverlay:");
 late final _sel_removeOverlays_ = objc.registerName("removeOverlays:");
 late final _sel_removePack_withCompletionHandler_ = objc.registerName("removePack:withCompletionHandler:");
@@ -45019,7 +45008,6 @@ late final _sel_sender = objc.registerName("sender");
 late final _sel_setAccessories_ = objc.registerName("setAccessories:");
 late final _sel_setActionJournalOptions_ = objc.registerName("setActionJournalOptions:");
 late final _sel_setActivityType_ = objc.registerName("setActivityType:");
-late final _sel_setActivity_ = objc.registerName("setActivity:");
 late final _sel_setAdjustsImageWhenAncestorFocused_ = objc.registerName("setAdjustsImageWhenAncestorFocused:");
 late final _sel_setAltitude_ = objc.registerName("setAltitude:");
 late final _sel_setAnchorRotateOrZoomGesturesToCenterCoordinate_ = objc.registerName("setAnchorRotateOrZoomGesturesToCenterCoordinate:");
@@ -45088,7 +45076,6 @@ late final _sel_setCompassVisibility_ = objc.registerName("setCompassVisibility:
 late final _sel_setContentInset_ = objc.registerName("setContentInset:");
 late final _sel_setContentInset_animated_ = objc.registerName("setContentInset:animated:");
 late final _sel_setContentInset_animated_completionHandler_ = objc.registerName("setContentInset:animated:completionHandler:");
-late final _sel_setContext_ = objc.registerName("setContext:");
 late final _sel_setContext_completionHandler_ = objc.registerName("setContext:completionHandler:");
 late final _sel_setCoordinate_ = objc.registerName("setCoordinate:");
 late final _sel_setCoordinates_ = objc.registerName("setCoordinates:");

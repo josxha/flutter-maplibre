@@ -24,9 +24,9 @@ echo "✅ Using iOS SDK at: $SDK_PATH"
 
 # --- Compile Swift sources and emit Objective-C headers ---
 swiftc \
-  -c MapLibreRegistry.swift \
   -c Extensions.swift \
   -c Helpers.swift \
+  -c MapLibreRegistry.swift \
   -module-name maplibre_ios \
   -emit-objc-header-path MapLibreIos.h \
   -emit-library -o libmaplibreios.dylib \

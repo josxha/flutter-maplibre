@@ -16,18 +16,12 @@ public class MapLibreRegistry: NSObject {
     }
 
     /// Method to add a map to the registry
-    public static func addMap(viewId: Int64, map: MLNMapView) {
+    @objc public static func addMap(viewId: Int64, map: MLNMapView) {
         mapRegistry[viewId] = map
     }
 
     /// Method to remove a map to the registry
-    public static func removeMap(viewId: Int64) {
+    @objc public static func removeMap(viewId: Int64) {
         mapRegistry.removeValue(forKey: viewId)
     }
-
-    /// Warning: Storing Activity in a static field may lead to memory leaks.
-    @objc public static var activity: AnyObject?
-
-    /// Warning: Storing Context in a static field may lead to memory leaks.
-    @objc public static var context: AnyObject?
 }

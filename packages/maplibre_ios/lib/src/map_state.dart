@@ -13,19 +13,17 @@ part 'style_controller.dart';
 
 /// The implementation that gets used for state of the [MapLibreMap] widget on
 /// android using JNI and Pigeon as a fallback.
-final class MapLibreMapStateIos extends MapLibreMapState {
+final class MapLibreMapStateIos extends MapLibreMapState
+    implements MLNMapViewDelegate$Builder {
+  // ignore: unused_field
   late final int _viewId;
-  MLNMapView? _cachedMapView;
-
-  MLNMapView get _mapView =>
-      _cachedMapView ??= MapLibreRegistry.getMapWithViewId(_viewId)!;
+  MLNMapView? _mapView;
 
   @override
   StyleControllerIos? style;
 
   @override
   Widget buildPlatformWidget(BuildContext context) {
-    MapLibreRegistry.setFlutterApi();
     const viewType = 'plugins.flutter.io/maplibre';
     return UiKitView(
       viewType: viewType,
@@ -37,10 +35,84 @@ final class MapLibreMapStateIos extends MapLibreMapState {
 
   /// This method gets called when the platform view is created. It is not
   /// guaranteed that the map is ready.
-  // ignore: use_setters_to_change_properties
   void _onPlatformViewCreated(int viewId) {
     _viewId = viewId;
-    MapLibreRegistry.;
+    final mapView = MapLibreRegistry.getMapWithViewId(viewId)!;
+    _mapView = mapView;
+    setStyle(options.initStyle);
+    mapView.automaticallyAdjustsContentInset = true;
+    mapView.delegate = MLNMapViewDelegate$Builder.implement(
+      mapView_didFinishLoadingStyle_: _didFinishLoadingStyle,
+      mapView_regionWillChangeWithReason_animated_: _regionWillChangeWithReason,
+      mapView_regionDidChangeWithReason_animated_: _regionDidChangeWithReason,
+      mapView_regionDidChangeAnimated_: _regionDidChange,
+      mapViewRegionIsChanging_: _regionIsChanging,
+      mapViewDidBecomeIdle_: _didBecomeIdle,
+    );
+    // disable the default UI because they are rebuilt in Flutter
+    mapView.showsCompassView = false;
+    mapView.showsAttributionButton = false;
+    mapView.showsLogoView = false;
+
+    // apply initial options
+    mapView.minimumZoomLevel = options.minZoom;
+    mapView.maximumZoomLevel = options.maxZoom;
+    mapView.minimumPitch = options.minPitch;
+    mapView.maximumPitch = options.maxPitch;
+    mapView.isRotateEnabled = options.gestures.rotate;
+    mapView.isScrollEnabled = options.gestures.pan;
+    mapView.isZoomEnabled = options.gestures.zoom;
+    mapView.isPitchEnabled = options.gestures.pitch;
+    if (options.maxBounds case final bounds?) {
+      mapView.maximumScreenBounds = bounds.toMLNCoordinateBounds();
+    }
+    if (options.initCenter case final center?) {
+      mapView.setCenterCoordinate(
+        center.toCLLocationCoordinate2D(),
+        animated: false,
+      );
+    }
+    mapView.zoomLevel = options.initZoom;
+    mapView.direction = options.initBearing;
+    // TODO apply initial pitch
+    widget.onEvent?.call(MapEventMapCreated(mapController: this));
+    widget.onMapCreated?.call(this);
+    setState(() {
+      camera = getCamera();
+      isInitialized = true;
+    });
+    /*
+                let doubleTap = UITapGestureRecognizer(
+                    target: self, action: #selector(self.onDoubleTap(sender:))
+                )
+                doubleTap.numberOfTapsRequired = 2
+                doubleTap.delegate = self
+                self._mapView.addGestureRecognizer(doubleTap)
+
+                let singleTap = UITapGestureRecognizer(target: self, action: #selector(self.onTap(sender:)))
+                singleTap.require(toFail: doubleTap)
+                singleTap.delegate = self
+                if #available(iOS 13.4, *) {
+                    singleTap.buttonMaskRequired = .primary
+                }
+                self._mapView.addGestureRecognizer(singleTap)
+
+                if #available(iOS 13.4, *) {
+                    let secondaryTap = UITapGestureRecognizer(
+                        target: self, action: #selector(self.onSecondaryTap(sender:))
+                    )
+                    secondaryTap.buttonMaskRequired = .secondary
+                    secondaryTap.delegate = self
+                    self._mapView.addGestureRecognizer(secondaryTap)
+                }
+
+                let longPress = UILongPressGestureRecognizer(
+                    target: self,
+                    action: #selector(self.onLongPress(sender:))
+                )
+                longPress.delegate = self
+                self._mapView.addGestureRecognizer(longPress)
+            }*/
   }
 
   @override
@@ -53,14 +125,17 @@ final class MapLibreMapStateIos extends MapLibreMapState {
     double webSpeed = 1.2,
     Duration? webMaxDuration,
   }) async {
-    if (zoom != null) _mapView.zoomLevel = zoom;
-    final ffiCamera = _mapView.camera;
+    final mapView = _mapView;
+    if (mapView == null) return;
+
+    if (zoom != null) mapView.zoomLevel = zoom;
+    final ffiCamera = mapView.camera;
     if (pitch != null) ffiCamera.pitch = pitch;
     if (bearing != null) ffiCamera.heading = bearing;
     if (center != null) {
       ffiCamera.centerCoordinate = center.toCLLocationCoordinate2D();
     }
-    _mapView.flyToCamera$2(
+    mapView.flyToCamera$2(
       ffiCamera,
       withDuration: nativeDuration.inMicroseconds / 1000000,
     );
@@ -76,8 +151,13 @@ final class MapLibreMapStateIos extends MapLibreMapState {
     bool pulse = true,
     BearingRenderMode bearingRenderMode = BearingRenderMode.gps,
   }) async {
-    _mapView.showsUserLocation = true;
+    final mapView = _mapView;
+    if (mapView == null) return;
+
+    mapView.showsUserLocation = true;
     // TODO: apply bearingRenderMode
+    mapView.showsUserHeadingIndicator =
+        bearingRenderMode != BearingRenderMode.none;
   }
 
   @override
@@ -93,9 +173,12 @@ final class MapLibreMapStateIos extends MapLibreMapState {
     bool webLinear = false,
     EdgeInsets padding = EdgeInsets.zero,
   }) async {
+    final mapView = _mapView;
+    if (mapView == null) return;
+
     final ffiBounds = bounds.toMLNCoordinateBounds();
     final ffiPadding = padding.toUIEdgeInsets();
-    _mapView.setVisibleCoordinateBounds$1(
+    mapView.setVisibleCoordinateBounds$1(
       ffiBounds,
       edgePadding: ffiPadding,
       animated: true,
@@ -104,11 +187,12 @@ final class MapLibreMapStateIos extends MapLibreMapState {
 
   @override
   MapCamera getCamera() {
-    final ffiCamera = _mapView.camera;
+    final mapView = _mapView!;
+    final ffiCamera = mapView.camera;
     return MapCamera(
       center: ffiCamera.centerCoordinate.toGeographic(),
-      zoom: _mapView.zoomLevel,
-      bearing: ffiCamera.heading,
+      zoom: mapView.zoomLevel,
+      bearing: mapView.direction,
       pitch: ffiCamera.pitch,
     );
   }
@@ -120,27 +204,16 @@ final class MapLibreMapStateIos extends MapLibreMapState {
     double? bearing,
     double? pitch,
   }) async {
-    if (zoom != null) _mapView.zoomLevel = zoom;
-    final ffiCamera = _mapView.camera;
+    final mapView = _mapView;
+    if (mapView == null) return;
+    if (zoom != null) mapView.zoomLevel = zoom;
+    final ffiCamera = mapView.camera;
     if (pitch != null) ffiCamera.pitch = pitch;
     if (bearing != null) ffiCamera.heading = bearing;
     if (center != null) {
       ffiCamera.centerCoordinate = center.toCLLocationCoordinate2D();
     }
-    _mapView.setCamera(ffiCamera, animated: false);
-  }
-
-  @override
-  void onStyleLoaded() {
-    // We need to refresh the cached style for when the style reloads.
-    style?.dispose();
-    final styleCtrl = style = StyleControllerIos._(_mapView.style!);
-
-    widget.onEvent?.call(MapEventStyleLoaded(styleCtrl));
-    widget.onStyleLoaded?.call(styleCtrl);
-    layerManager = LayerManager(styleCtrl, widget.layers);
-    // setState is needed to refresh the flutter widgets used in MapLibreMap.children.
-    setState(() {});
+    mapView.setCamera(ffiCamera, animated: false);
   }
 
   @override
@@ -157,38 +230,39 @@ final class MapLibreMapStateIos extends MapLibreMapState {
   }
 
   Future<void> _updateOptions(MapLibreMap oldWidget) async {
+    final mapView = _mapView;
+    if (mapView == null) return;
     final oldOptions = oldWidget.options;
     final options = this.options;
-    _mapView.minimumZoomLevel = options.minZoom;
-    _mapView.maximumZoomLevel = options.maxZoom;
-    _mapView.minimumPitch = options.minPitch;
-    _mapView.maximumPitch = options.maxPitch;
+    mapView.minimumZoomLevel = options.minZoom;
+    mapView.maximumZoomLevel = options.maxZoom;
+    mapView.minimumPitch = options.minPitch;
+    mapView.maximumPitch = options.maxPitch;
 
     // map bounds
     final oldBounds = oldOptions.maxBounds;
     final newBounds = options.maxBounds;
     if (oldBounds != null && newBounds == null) {
-      _mapView.maximumScreenBounds = Struct.create<MLNCoordinateBounds>();
+      mapView.maximumScreenBounds = Struct.create<MLNCoordinateBounds>();
     } else if ((oldBounds == null && newBounds != null) ||
         (newBounds != null && oldBounds != newBounds)) {
       final bounds = newBounds.toMLNCoordinateBounds();
-      _mapView.maximumScreenBounds = bounds;
+      mapView.maximumScreenBounds = bounds;
     }
 
     // gestures
-    // TODO implement gesture enabling/disabling (maybe bug in upstream?)
-    /*if (options.gestures.rotate != oldOptions.gestures.rotate) {
-      _mapView.rotateEnabled = options.gestures.rotate;
+    if (options.gestures.rotate != oldOptions.gestures.rotate) {
+      mapView.isRotateEnabled = options.gestures.rotate;
     }
     if (options.gestures.pan != oldOptions.gestures.pan) {
-      _mapView.scrollEnabled = options.gestures.pan;
+      mapView.isScrollEnabled = options.gestures.pan;
     }
     if (options.gestures.zoom != oldOptions.gestures.zoom) {
-      _mapView.zoomEnabled = options.gestures.zoom;
+      mapView.isZoomEnabled = options.gestures.zoom;
     }
     if (options.gestures.pitch != oldOptions.gestures.pitch) {
-      _mapView.pitchEnabled = options.gestures.pitch;
-    }*/
+      mapView.isPitchEnabled = options.gestures.pitch;
+    }
   }
 
   List<RenderedFeature> _nativeQueryToRenderedFeatures(NSArray query) {
@@ -219,7 +293,7 @@ final class MapLibreMapStateIos extends MapLibreMapState {
       return [];
     }
 
-    final query = _mapView.visibleFeaturesAtPoint$1(
+    final query = _mapView!.visibleFeaturesAtPoint$1(
       point.toCGPoint(),
       inStyleLayersWithIdentifiers: layerIds == null
           ? null
@@ -240,7 +314,7 @@ final class MapLibreMapStateIos extends MapLibreMapState {
       return [];
     }
 
-    final query = _mapView.visibleFeaturesInRect$1(
+    final query = _mapView!.visibleFeaturesInRect$1(
       rect.toCGRect(),
       inStyleLayersWithIdentifiers: layerIds == null
           ? null
@@ -260,7 +334,7 @@ final class MapLibreMapStateIos extends MapLibreMapState {
     final queriedLayers = <QueriedLayer>[];
     for (var i = layers.length - 1; i >= 0; i--) {
       final layer = layers[i];
-      final features = _mapView
+      final features = _mapView!
           .visibleFeaturesAtPoint$1(
             point,
             inStyleLayersWithIdentifiers: NSSet.setWithObject(layer.identifier),
@@ -285,11 +359,12 @@ final class MapLibreMapStateIos extends MapLibreMapState {
     bool trackLocation = true,
     BearingTrackMode trackBearing = BearingTrackMode.gps,
   }) async {
+    final mapView = _mapView!;
     if (!trackLocation) {
-      _mapView.userTrackingMode = MLNUserTrackingMode.MLNUserTrackingModeNone;
+      mapView.userTrackingMode = MLNUserTrackingMode.MLNUserTrackingModeNone;
       return;
     }
-    _mapView.userTrackingMode = switch (trackBearing) {
+    mapView.userTrackingMode = switch (trackBearing) {
       BearingTrackMode.none => MLNUserTrackingMode.MLNUserTrackingModeFollow,
       BearingTrackMode.compass =>
         MLNUserTrackingMode.MLNUserTrackingModeFollowWithHeading,
@@ -300,11 +375,11 @@ final class MapLibreMapStateIos extends MapLibreMapState {
 
   @override
   double getMetersPerPixelAtLatitude(double latitude) =>
-      _mapView.metersPerPointAtLatitude(latitude);
+      _mapView?.metersPerPointAtLatitude(latitude) ?? 0;
 
   @override
   LngLatBounds getVisibleRegion() {
-    final bounds = _mapView.visibleCoordinateBounds;
+    final bounds = _mapView!.visibleCoordinateBounds;
     return LngLatBounds(
       longitudeWest: bounds.sw.longitude,
       longitudeEast: bounds.ne.longitude,
@@ -314,7 +389,7 @@ final class MapLibreMapStateIos extends MapLibreMapState {
   }
 
   @override
-  Geographic toLngLat(Offset screenLocation) => _mapView
+  Geographic toLngLat(Offset screenLocation) => _mapView!
       .convertPoint$2(
         screenLocation.toCGPoint(),
         toCoordinateFromView: _mapView,
@@ -326,7 +401,7 @@ final class MapLibreMapStateIos extends MapLibreMapState {
       screenLocations.map(toLngLat).toList(growable: false);
 
   @override
-  Offset toScreenLocation(Geographic lngLat) => _mapView
+  Offset toScreenLocation(Geographic lngLat) => _mapView!
       .convertCoordinate(
         lngLat.toCLLocationCoordinate2D(),
         toPointToView: _mapView,
@@ -339,22 +414,44 @@ final class MapLibreMapStateIos extends MapLibreMapState {
 
   @override
   Future<void> setStyle(String style) async {
+    final prepared = await _prepareStyle(style);
+    if (NSString.isA(prepared)) {
+      _mapView!.styleJSON = NSString.as(prepared);
+    } else if (NSURL.isA(prepared)) {
+      _mapView!.styleURL = NSURL.as(prepared);
+    }
+    throw UnsupportedError('Unsupported style format');
+  }
+
+  Future<NSObject> _prepareStyle(String style) async {
     final trimmed = style.trim();
     if (trimmed.startsWith('{')) {
       // Raw JSON
-      _mapView.styleJSON = trimmed.toNSString();
+      return trimmed.toNSString();
     } else if (trimmed.startsWith('/')) {
-      _mapView.styleURL = 'file://$trimmed'.toNSURL()!;
+      return 'file://$trimmed'.toNSURL()!;
     } else if (!trimmed.startsWith('http://') &&
         !trimmed.startsWith('https://') &&
         !trimmed.startsWith('mapbox://')) {
       // flutter asset
       final content = await rootBundle.loadString(trimmed);
-      _mapView.styleJSON = content.toNSString();
+      return content.toNSString();
     } else {
       // URI
-      _mapView.styleURL = trimmed.toNSURL()!;
+      return trimmed.toNSURL()!;
     }
+  }
+
+  /// MLNMapViewDelegate method called when map has finished loading
+  void _didFinishLoadingStyle(MLNMapView mapView, MLNStyle mlnStyle) {
+    // We need to refresh the cached style for when the style reloads.
+    style?.dispose();
+    final styleCtrl = style = StyleControllerIos._(mlnStyle);
+    widget.onEvent?.call(MapEventStyleLoaded(styleCtrl));
+    widget.onStyleLoaded?.call(styleCtrl);
+    layerManager = LayerManager(styleCtrl, widget.layers);
+    // setState is needed to refresh the flutter widgets used in MapLibreMap.children.
+    setState(() {});
   }
 
   @override
@@ -422,41 +519,63 @@ final class MapLibreMapStateIos extends MapLibreMapState {
     );
   }
 
-  @override
-  void onMapReady() {
-    widget.onEvent?.call(MapEventMapCreated(mapController: this));
-    widget.onMapCreated?.call(this);
-    setState(() {
-      camera = getCamera();
-      isInitialized = true;
-    });
+  /// MLNMapViewDelegate method called when camera is about to start changing
+  void _regionWillChangeWithReason(
+    MLNMapView mapView,
+    int mlnChangeReason,
+    bool animated,
+  ) {
+    const apiReasons = {
+      MLNCameraChangeReason.MLNCameraChangeReasonGestureOneFingerZoom,
+      MLNCameraChangeReason.MLNCameraChangeReasonGesturePan,
+      MLNCameraChangeReason.MLNCameraChangeReasonGesturePinch,
+      MLNCameraChangeReason.MLNCameraChangeReasonGestureRotate,
+      MLNCameraChangeReason.MLNCameraChangeReasonGestureTilt,
+      MLNCameraChangeReason.MLNCameraChangeReasonGestureZoomIn,
+      MLNCameraChangeReason.MLNCameraChangeReasonGestureZoomOut,
+      MLNCameraChangeReason.MLNCameraChangeReasonTransitionCancelled,
+    };
+    final CameraChangeReason reason;
+    if (apiReasons.contains(mlnChangeReason)) {
+      reason = CameraChangeReason.apiGesture;
+    } else if (mlnChangeReason ==
+        MLNCameraChangeReason.MLNCameraChangeReasonProgrammatic) {
+      reason = CameraChangeReason.apiAnimation;
+    } else {
+      reason = CameraChangeReason.developerAnimation;
+    }
+    widget.onEvent?.call(MapEventStartMoveCamera(reason: reason));
   }
 
-  @override
-  pigeon.MapOptions getOptions() => pigeon.MapOptions(
-    style: options.initStyle,
-    bearing: options.initBearing,
-    zoom: options.initZoom,
-    pitch: options.initPitch,
-    center: options.initCenter == null
-        ? null
-        : pigeon.LngLat(
-            lng: options.initCenter!.lon,
-            lat: options.initCenter!.lat,
-          ),
-    minZoom: options.minZoom,
-    maxZoom: options.maxZoom,
-    minPitch: options.minPitch,
-    maxPitch: options.maxPitch,
-    maxBounds: options.maxBounds?.toLngLatBounds(),
-    gestures: pigeon.MapGestures(
-      rotate: options.gestures.rotate,
-      pan: options.gestures.pan,
-      zoom: options.gestures.zoom,
-      tilt: options.gestures.pitch,
-    ),
-    androidTextureMode: options.androidTextureMode,
-    androidTranslucentTextureSurface: options.androidTranslucentTextureSurface,
-    androidForegroundLoadColor: options.androidForegroundLoadColor.toARGB32(),
-  );
+  /// MLNMapViewDelegate method called when camera has finished changing
+  void _regionDidChangeWithReason(
+    MLNMapView mapView,
+    int reason,
+    bool animated,
+  ) {
+    widget.onEvent?.call(const MapEventCameraIdle());
+  }
+
+  /// MLNMapViewDelegate method called when camera has changed
+  void _regionDidChange(MLNMapView mapView, bool animated) =>
+      _onCameraMoved(mapView);
+
+  /// MLNMapViewDelegate method called when camera is changing
+  void _regionIsChanging(MLNMapView mapView) => _onCameraMoved(mapView);
+
+  void _onCameraMoved(MLNMapView mapView) {
+    final ffiCamera = mapView.camera;
+    final mapCamera = MapCamera(
+      center: ffiCamera.centerCoordinate.toGeographic(),
+      zoom: mapView.zoomLevel,
+      pitch: ffiCamera.pitch,
+      bearing: ffiCamera.heading,
+    );
+    widget.onEvent?.call(MapEventMoveCamera(camera: mapCamera));
+  }
+
+  /// MLNMapViewDelegate method called when map becomes idle
+  void _didBecomeIdle(MLNMapView mapView) {
+    widget.onEvent?.call(const MapEventIdle());
+  }
 }
