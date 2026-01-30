@@ -8,15 +8,9 @@ abstract class MapLibrePlatform extends PlatformInterface {
 
   // A plugin can have a default implementation, as shown here, or `instance`
   // can be nullable, and the default instance can be null.
-  static MapLibrePlatform? _instance;
+  static MapLibrePlatform _instance = _MapLibrePluginStub();
 
-  static MapLibrePlatform get instance =>
-      _instance ??
-      (throw UnsupportedError(
-        'No MapLibrePlatform instance has been registered. '
-        'This usually means that the MapLibre plugin has not been '
-        'added as a dependency in pubspec.yaml.',
-      ));
+  static MapLibrePlatform get instance => _instance;
 
   /// Platform-specific implementations should set this to their own
   /// platform-specific class that extends [MapLibrePlatform] when they
@@ -26,14 +20,19 @@ abstract class MapLibrePlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  /// Return a platform specific [State<MapLibreMap>] object.
-  MapLibreMapState createWidgetState();
+  /// Return a platform specific [MapLibreMapState] object.
+  MapLibreMapState createWidgetState() =>
+      throw UnsupportedError('MapLibre is not supported on this platform.');
 
   /// Return a platform specific [OfflineManager] object.
-  Future<OfflineManager> createOfflineManager();
+  Future<OfflineManager> createOfflineManager() => throw UnsupportedError(
+    'MapLibre OfflineManager is not supported on this platform.',
+  );
 
   /// Return a platform specific [PermissionManager] object.
-  PermissionManager createPermissionManager();
+  PermissionManager createPermissionManager() => throw UnsupportedError(
+    'MapLibre PermissionManager is not supported on this platform.',
+  );
 
   /// Return whether offline manager is supported on the current platform.
   bool get offlineManagerIsSupported => false;
@@ -44,3 +43,11 @@ abstract class MapLibrePlatform extends PlatformInterface {
   /// Return whether user location is supported on the current platform.
   bool get userLocationIsSupported => false;
 }
+
+/// A stub implementation of the MapLibrePlatform interface.
+///
+/// This class is used when no actual platform implementation is provided so
+/// that e.g. unit tests can still detect [offlineManagerIsSupported],
+/// [permissionManagerIsSupported], and [userLocationIsSupported] without causing
+/// errors.
+class _MapLibrePluginStub extends MapLibrePlatform {}
