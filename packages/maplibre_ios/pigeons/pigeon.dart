@@ -2,7 +2,7 @@ import 'package:pigeon/pigeon.dart';
 
 @ConfigurePigeon(
   PigeonOptions(
-    dartOut: 'lib/src/platform/pigeon.g.dart',
+    dartOut: 'lib/src/pigeon.g.dart',
     dartOptions: DartOptions(),
     dartPackageName: 'maplibre',
     copyrightHeader: 'pigeons/header.txt',

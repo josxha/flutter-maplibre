@@ -9,7 +9,7 @@ void main(List<String> args) {
     Config(
       outputConfig: OutputConfig(
         dartConfig: DartCodeOutputConfig(
-          path: packageRoot.resolve('lib/src/platform/android/jni.g.dart'),
+          path: packageRoot.resolve('lib/src/jni.g.dart'),
           structure: OutputStructure.singleFile,
         ),
       ),
@@ -19,7 +19,7 @@ void main(List<String> args) {
       ),
       androidSdkConfig: AndroidSdkConfig(
         addGradleDeps: true,
-        androidExample: '../example',
+        androidExample: '../../examples',
       ),
       sourcePath: [packageRoot.resolve('android/src/main')],
       classes: [
