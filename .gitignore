@@ -41,4 +41,3 @@ Package.resolved
 
 .vscode
 ios/maplibre/.build
-maplibre_ios/ios/maplibre_ios/Sources/maplibre_ios/libmaplibreios.dylib

@@ -3,12 +3,11 @@ import 'dart:convert';
 
 import 'package:maplibre_ios/src/extensions.dart';
 import 'package:maplibre_ios/src/maplibre_ffi.g.dart';
-import 'package:maplibre_ios/src/offline_manager_native.dart';
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 import 'package:objective_c/objective_c.dart' as objc;
 
 /// iOS specific implementation of the [OfflineManager].
-class OfflineManagerIos extends OfflineManagerNative {
+class OfflineManagerIos implements OfflineManager {
   /// Create a new iOS specific [OfflineManager] instance.
   OfflineManagerIos(this._storage);
 
@@ -38,7 +37,7 @@ class OfflineManagerIos extends OfflineManagerNative {
   @override
   void dispose() {}
 
-  /*@override
+  @override
   Stream<DownloadProgress> downloadRegion({
     required String mapStyleUrl,
     required LngLatBounds bounds,
@@ -47,30 +46,33 @@ class OfflineManagerIos extends OfflineManagerNative {
     required double pixelDensity,
     Map<String, Object?> metadata = const {},
   }) async* {
-    final region = MLNTilePyramidOfflineRegion.new$()
-        .initWithStyleURL_bounds_fromZoomLevel_toZoomLevel_(
-          mapStyleUrl.toNSURL(),
-          bounds.toMLNCoordinateBounds(),
-          minZoom,
-          maxZoom,
-        );
+    final region = MLNTilePyramidOfflineRegion.new$().initWithStyleURL(
+      mapStyleUrl.toNSURL(),
+      bounds: bounds.toMLNCoordinateBounds(),
+      fromZoomLevel: minZoom,
+      toZoomLevel: maxZoom,
+    );
     final context = utf8.encode(jsonEncode(metadata)).toNSData();
 
     final completer = Completer<MLNOfflinePack>();
-    _storage.addPackForRegion_withContext_completionHandler_(
+    _storage.addPackForRegion(
       region,
-      context,
-      ObjCBlock_ffiVoid_MLNOfflinePack_NSError.listener((pack, error) {
+      withContext: context,
+      completionHandler: ObjCBlock_ffiVoid_MLNOfflinePack_NSError.listener((
+        pack,
+        error,
+      ) {
         if (pack != null) {
           completer.complete(pack);
           pack.resume(); // start downloading
+        } else {
+          completer.completeError(error!);
         }
-        completer.completeError(error!);
       }),
     );
     final _ = await completer.future;
     // TODO: use the NotificationCenter to track the download process: https://maplibre.org/maplibre-native/ios/latest/documentation/maplibre-native-for-ios/offlinepackexample/
-  }*/
+  }
 
   @override
   Future<OfflineRegion> getOfflineRegion({required int regionId}) async {
@@ -97,17 +99,20 @@ class OfflineManagerIos extends OfflineManagerNative {
     throw Exception('Region not found');
   }
 
-  /*@override
+  @override
   Future<void> invalidateAmbientCache() async {
     final completer = Completer<void>();
-    _storage.invalidateAmbientCacheWithCompletionHandler_(
+    _storage.invalidateAmbientCacheWithCompletionHandler(
       ObjCBlock_ffiVoid_NSError.listener((error) {
-        if (error != null) completer.completeError(error);
-        return completer.complete();
+        if (error != null) {
+          completer.completeError(error);
+        } else {
+          completer.complete();
+        }
       }),
     );
     return completer.future;
-  }*/
+  }
 
   @override
   Future<List<OfflineRegion>> listOfflineRegions() async {
@@ -130,30 +135,51 @@ class OfflineManagerIos extends OfflineManagerNative {
     }, growable: false);
   }
 
-  /*@override
+  @override
   Future<void> resetDatabase() async {
     final completer = Completer<void>();
-    _storage.resetDatabaseWithCompletionHandler_(
+    _storage.resetDatabaseWithCompletionHandler(
       ObjCBlock_ffiVoid_NSError.listener((error) {
-        if (error != null) completer.completeError(error);
-        completer.complete();
+        if (error != null) {
+          completer.completeError(error);
+        } else {
+          completer.complete();
+        }
       }),
     );
-  }*/
+  }
 
-  /*@override
+  @override
   Future<void> setMaximumAmbientCacheSize({required int bytes}) async {
     final completer = Completer<void>();
-    _storage.setMaximumAmbientCacheSize_withCompletionHandler_(
+    _storage.setMaximumAmbientCacheSize(
       bytes,
-      ObjCBlock_ffiVoid_NSError.listener((error) {
-        if (error != null) completer.completeError(error);
-        completer.complete();
+      withCompletionHandler: ObjCBlock_ffiVoid_NSError.listener((error) {
+        if (error != null) {
+          completer.completeError(error);
+        } else {
+          completer.complete();
+        }
       }),
     );
-  }*/
+  }
 
   @override
   void setOfflineTileCountLimit({required int amount}) =>
       _storage.setMaximumAllowedMapboxTiles(amount);
+
+  @override
+  Future<List<OfflineRegion>> mergeOfflineRegions({
+    required String path,
+  }) async => throw UnsupportedError(
+    'Importing Offline Regions is not available on iOS.',
+  );
+
+  @override
+  Future<void> packDatabase() async =>
+      throw UnsupportedError('The database cannot be packed on iOS.');
+
+  @override
+  void runPackDatabaseAutomatically({required bool enabled}) =>
+      throw UnsupportedError('The database cannot be packed on iOS.');
 }

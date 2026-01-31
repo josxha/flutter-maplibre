@@ -3,7 +3,6 @@ import 'dart:ffi' hide Size;
 
 import 'package:flutter/cupertino.dart';
 import 'package:maplibre_ios/src/maplibre_ffi.g.dart';
-import 'package:maplibre_ios/src/pigeon.g.dart' as pigeon;
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 import 'package:objective_c/objective_c.dart';
 
@@ -33,9 +32,6 @@ extension OffsetExt on Offset {
     point.y = dy;
     return point;
   }
-
-  /// Convert an [Offset] to an internal [pigeon.Offset].
-  pigeon.Offset toOffset() => pigeon.Offset(x: dx, y: dy);
 }
 
 /// Internal extension on [Size].
@@ -73,14 +69,6 @@ extension LngLatBoundsExt on LngLatBounds {
       ..latitude = latitudeNorth;
     return bounds;
   }
-
-  /// Convert an [LngLatBounds] to an internal [pigeon.LngLatBounds].
-  pigeon.LngLatBounds toLngLatBounds() => pigeon.LngLatBounds(
-    longitudeEast: longitudeEast,
-    longitudeWest: longitudeWest,
-    latitudeNorth: latitudeNorth,
-    latitudeSouth: latitudeSouth,
-  );
 }
 
 /// Internal extensions on [EdgeInsets].
@@ -94,14 +82,6 @@ extension EdgeInsetsExt on EdgeInsets {
       ..right = right;
     return insets;
   }
-
-  /// Convert an [EdgeInsets] to an internal [pigeon.Padding].
-  pigeon.Padding toPadding() => pigeon.Padding(
-    top: top.toInt(),
-    bottom: bottom.toInt(),
-    left: left.toInt(),
-    right: right.toInt(),
-  );
 }
 
 /// Internal extensions on [MLNCoordinateBounds].
@@ -327,20 +307,10 @@ extension ObjectExt on Object? {
 
 /// Extension methods for the [Geographic] class. Not exported publicly.
 extension GeographicExt on Geographic {
-  /// Convert a [Geographic] to an internal [pigeon.LngLat].
-  pigeon.LngLat toLngLat() => pigeon.LngLat(lng: lon, lat: lat);
-}
-
-/// Extension methods for the [pigeon.LngLat] class. Not exported publicly.
-extension LngLatExt on pigeon.LngLat {
-  /// Convert an internal [pigeon.LngLat] to a [Geographic].
-  Geographic toGeographic() => Geographic(lon: lng, lat: lat);
-}
-
-/// Extension methods for the [pigeon.Offset] class. Not exported publicly.
-extension PigeonOffsetExt on pigeon.Offset {
-  /// Convert an internal [pigeon.Offset] to a [Offset].
-  Offset toOffset() => Offset(x, y);
+  /// Convert a [Geographic] to an internal [CLLocationCoordinate2D].
+  CLLocationCoordinate2D toLngLat() => Struct.create<CLLocationCoordinate2D>()
+    ..longitude = lon
+    ..latitude = lat;
 }
 
 /// UTF8 Encoding
