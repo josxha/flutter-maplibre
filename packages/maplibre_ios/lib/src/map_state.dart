@@ -41,16 +41,22 @@ final class MapLibreMapStateIos extends MapLibreMapState
     _mapView = mapView;
     setStyle(options.initStyle);
     mapView.automaticallyAdjustsContentInset = true;
-    print('#1');
-    mapView.delegate = MLNMapViewDelegate$Builder.implement(
+    // Use listener callbacks to marshal onto the Dart isolate.
+    mapView.delegate = MLNMapViewDelegate$Builder.implementAsListener(
       mapView_didFinishLoadingStyle_: _didFinishLoadingStyle,
       mapView_regionWillChangeWithReason_animated_: _regionWillChangeWithReason,
       mapView_regionDidChangeWithReason_animated_: _regionDidChangeWithReason,
       mapView_regionDidChangeAnimated_: _regionDidChange,
       mapViewRegionIsChanging_: _regionIsChanging,
       mapViewDidBecomeIdle_: _didBecomeIdle,
+      mapView_regionIsChangingWithReason_: _regionIsChangingWithReason,
+      mapView_regionWillChangeAnimated_: _regionWillChangeAnimated,
+      mapView_shouldChangeFromCamera_toCamera_reason_:
+          (mapView, fromCamera, toCamera, reason) {
+            debugPrint('shouldChangeFromCamera toCamera reason called');
+            return true;
+          },
     );
-    print('#3');
     // disable the default UI because they are rebuilt in Flutter
     mapView.showsCompassView = false;
     mapView.showsAttributionButton = false;
@@ -447,6 +453,7 @@ final class MapLibreMapStateIos extends MapLibreMapState
 
   /// MLNMapViewDelegate method called when map has finished loading
   void _didFinishLoadingStyle(MLNMapView mapView, MLNStyle mlnStyle) {
+    debugPrint('Style loaded');
     // We need to refresh the cached style for when the style reloads.
     style?.dispose();
     final styleCtrl = style = StyleControllerIos._(mlnStyle);
@@ -501,6 +508,7 @@ final class MapLibreMapStateIos extends MapLibreMapState
     int mlnChangeReason,
     bool animated,
   ) {
+    debugPrint('Region will change with reason: $mlnChangeReason');
     const apiReasons = {
       MLNCameraChangeReason.MLNCameraChangeReasonGestureOneFingerZoom,
       MLNCameraChangeReason.MLNCameraChangeReasonGesturePan,
@@ -529,6 +537,7 @@ final class MapLibreMapStateIos extends MapLibreMapState
     int reason,
     bool animated,
   ) {
+    debugPrint('Region did change with reason: $reason');
     widget.onEvent?.call(const MapEventCameraIdle());
   }
 
@@ -540,6 +549,7 @@ final class MapLibreMapStateIos extends MapLibreMapState
   void _regionIsChanging(MLNMapView mapView) => _onCameraMoved(mapView);
 
   void _onCameraMoved(MLNMapView mapView) {
+    debugPrint('Camera moved');
     final ffiCamera = mapView.camera;
     final mapCamera = MapCamera(
       center: ffiCamera.centerCoordinate.toGeographic(),
@@ -552,6 +562,21 @@ final class MapLibreMapStateIos extends MapLibreMapState
 
   /// MLNMapViewDelegate method called when map becomes idle
   void _didBecomeIdle(MLNMapView mapView) {
+    debugPrint('Map became idle');
     widget.onEvent?.call(const MapEventIdle());
+  }
+
+  void _regionIsChangingWithReason(MLNMapView mapView, int reason) {
+    debugPrint('Region is changing with reason: $reason');
+    _onCameraMoved(mapView);
+  }
+
+  void _regionWillChangeAnimated(MLNMapView mapView, bool animated) {
+    debugPrint('Region will change animated: $animated');
+    widget.onEvent?.call(
+      const MapEventStartMoveCamera(
+        reason: CameraChangeReason.developerAnimation,
+      ),
+    );
   }
 }
