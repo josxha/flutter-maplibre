@@ -39,7 +39,7 @@ final class MapLibreMapStateIos extends MapLibreMapState
     _viewId = viewId;
     final mapView = MapLibreRegistry.getMapWithViewId(viewId)!;
     _mapView = mapView;
-    // setStyle(options.initStyle);
+    setStyle(options.initStyle);
     mapView.automaticallyAdjustsContentInset = true;
     print('#1');
     mapView.delegate = MLNMapViewDelegate$Builder.implement(
