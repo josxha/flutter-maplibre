@@ -41,14 +41,16 @@ final class MapLibreMapStateIos extends MapLibreMapState
     _mapView = mapView;
     // setStyle(options.initStyle);
     mapView.automaticallyAdjustsContentInset = true;
-    /*TODO mapView.delegate = MLNMapViewDelegate$Builder.implement(
+    print('#1');
+    mapView.delegate = MLNMapViewDelegate$Builder.implement(
       mapView_didFinishLoadingStyle_: _didFinishLoadingStyle,
       mapView_regionWillChangeWithReason_animated_: _regionWillChangeWithReason,
       mapView_regionDidChangeWithReason_animated_: _regionDidChangeWithReason,
       mapView_regionDidChangeAnimated_: _regionDidChange,
       mapViewRegionIsChanging_: _regionIsChanging,
       mapViewDidBecomeIdle_: _didBecomeIdle,
-    );*/
+    );
+    print('#3');
     // disable the default UI because they are rebuilt in Flutter
     mapView.showsCompassView = false;
     mapView.showsAttributionButton = false;
@@ -455,7 +457,7 @@ final class MapLibreMapStateIos extends MapLibreMapState
     setState(() {});
   }
 
-/* TODO
+  /* TODO
   @override
   void onDoubleClick(pigeon.LngLat point, pigeon.Offset screenPoint) {
     final position = point.toGeographic();
