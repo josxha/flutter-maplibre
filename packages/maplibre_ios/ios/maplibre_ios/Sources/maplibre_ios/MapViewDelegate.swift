@@ -1,7 +1,7 @@
 import Flutter
 import MapLibre
 
-class MapLibreView: NSObject, FlutterPlatformView, UIGestureRecognizerDelegate, MLNMapViewDelegate
+class MapLibreView: NSObject, FlutterPlatformView, UIGestureRecognizerDelegate
 {
     private var _view: UIView = .init()
     private var _mapView: MLNMapView!
