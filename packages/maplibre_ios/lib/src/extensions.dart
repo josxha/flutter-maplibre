@@ -194,9 +194,9 @@ extension MLNStyleLayerExt on MLNStyleLayer {
       case 'circle-translate':
         (this as MLNCircleStyleLayer).circleTranslation = expression;
       case 'circle-translate-anchor':
-        (this as MLNCircleStyleLayer).circleTranslateAnchor = expression;
+        (this as MLNCircleStyleLayer).circleTranslationAnchor = expression;
       case 'fill-antialias':
-        (this as MLNFillStyleLayer).fillAntialias = expression;
+        (this as MLNFillStyleLayer).isFillAntialiased = expression;
       case 'fill-translate':
         (this as MLNFillStyleLayer).fillTranslation = expression;
       case 'fill-translate-anchor':

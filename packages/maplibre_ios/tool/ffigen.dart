@@ -67,6 +67,7 @@ void main(List<String> args) {
       },
     ),
     objectiveC: ObjectiveC(
+      externalVersions: ExternalVersions(ios: Versions(min: Version(13, 0, 0))),
       interfaces: Interfaces(
         includeMember: (decl, member) {
           return true;
