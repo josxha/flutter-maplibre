@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_underscores
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:ffi';
@@ -39,24 +41,173 @@ final class MapLibreMapStateIos extends MapLibreMapState
     _viewId = viewId;
     final mapView = MapLibreRegistry.getMapWithViewId(viewId)!;
     _mapView = mapView;
-    setStyle(options.initStyle);
+    // setStyle(options.initStyle);
     mapView.automaticallyAdjustsContentInset = true;
     // Use listener callbacks to marshal onto the Dart isolate.
-    mapView.delegate = MLNMapViewDelegate$Builder.implementAsListener(
-      mapView_didFinishLoadingStyle_: _didFinishLoadingStyle,
+    final delegate = MLNMapViewDelegate$Builder.implementAsListener(
+      // Camera & region events
       mapView_regionWillChangeWithReason_animated_: _regionWillChangeWithReason,
       mapView_regionDidChangeWithReason_animated_: _regionDidChangeWithReason,
       mapView_regionDidChangeAnimated_: _regionDidChange,
       mapViewRegionIsChanging_: _regionIsChanging,
-      mapViewDidBecomeIdle_: _didBecomeIdle,
       mapView_regionIsChangingWithReason_: _regionIsChangingWithReason,
       mapView_regionWillChangeAnimated_: _regionWillChangeAnimated,
       mapView_shouldChangeFromCamera_toCamera_reason_:
           (mapView, fromCamera, toCamera, reason) {
-            debugPrint('shouldChangeFromCamera toCamera reason called');
+            print(
+              '[MapDelegate] shouldChangeFromCamera toCamera reason called',
+            );
             return true;
           },
+
+      // Map loading & rendering
+      mapView_didFinishLoadingStyle_: (mapView, style) =>
+          print('[MapDelegate] Style finished loading'),
+      mapViewDidFinishLoadingMap_: (mapView) =>
+          print('[MapDelegate] Map finished loading'),
+      mapViewDidFailLoadingMap_withError_: (mapView, error) => print(
+        '[MapDelegate] Map failed to load: ${error.localizedDescription}',
+      ),
+      mapViewDidFinishRenderingFrame_fullyRendered_: (mapView, fullyRendered) =>
+          print(
+            '[MapDelegate] Finished rendering frame, fullyRendered: $fullyRendered',
+          ),
+      mapViewDidFinishRenderingFrame_fullyRendered_frameEncodingTime_frameRenderingTime_:
+          (
+            mapView,
+            fullyRendered,
+            frameEncodingTime,
+            frameRenderingTime,
+          ) => print(
+            '[MapDelegate] Frame finished, fullyRendered: $fullyRendered, encoding: $frameEncodingTime, rendering: $frameRenderingTime',
+          ),
+      mapViewDidFinishRenderingFrame_fullyRendered_renderingStats_:
+          (mapView, fullyRendered, stats) => print(
+            '[MapDelegate] Frame finished, fullyRendered: $fullyRendered, stats: $stats',
+          ),
+      mapViewDidFinishRenderingMap_fullyRendered_: (mapView, fullyRendered) =>
+          print(
+            '[MapDelegate] Map finished rendering, fullyRendered: $fullyRendered',
+          ),
+      mapViewDidBecomeIdle_: (mapView) =>
+          print('[MapDelegate] Map became idle'),
+      mapViewDidStopLocatingUser_: (mapView) =>
+          print('[MapDelegate] Stopped locating user'),
+
+      // Annotations
+      mapView_didAddAnnotationViews_: (mapView, views) =>
+          print('[MapDelegate] Added annotation views'),
+      mapView_didSelectAnnotation_: (mapView, annotation) =>
+          print('[MapDelegate] Annotation selected'),
+      mapView_didDeselectAnnotation_: (mapView, annotation) =>
+          print('[MapDelegate] Annotation deselected'),
+      mapView_didUpdateUserLocation_: (mapView, location) =>
+          print('[MapDelegate] User location updated'),
+
+      // Callouts
+      mapView_annotation_calloutAccessoryControlTapped_:
+          (mapView, annotation, control) =>
+              print('[MapDelegate] Callout accessory tapped'),
+      mapView_leftCalloutAccessoryViewForAnnotation_: (mapView, annotation) {
+        print('[MapDelegate] Left callout accessory view requested');
+        return null;
+      },
+      mapView_rightCalloutAccessoryViewForAnnotation_: (mapView, annotation) {
+        print('[MapDelegate] Right callout accessory view requested');
+        return null;
+      },
+      mapView_calloutViewForAnnotation_: (mapView, annotation) {
+        print('[MapDelegate] Callout view requested');
+        return null;
+      },
+      mapView_tapOnCalloutForAnnotation_: (mapView, annotation) =>
+          print('[MapDelegate] Callout tapped'),
+
+      // Shapes
+      mapView_alphaForShapeAnnotation_: (mapView, shape) {
+        print('[MapDelegate] Alpha for shape requested');
+        return 1.0;
+      },
+      /*mapView_fillColorForPolygonAnnotation_: (mapView, polygon) {
+        print('[MapDelegate] Fill color for polygon requested');
+        return MLNMapViewDelegate$Builder.mapView_fillColorForPolygonAnnotation_);
+      },
+      mapView_strokeColorForShapeAnnotation_: (mapView, shape) {
+        print('[MapDelegate] Stroke color for shape requested');
+        return UIColor.black;
+      },*/
+      mapView_shapeAnnotationIsEnabled_: (mapView, shape) {
+        print('[MapDelegate] Shape annotation enabled check');
+        return true;
+      },
+      mapView_lineWidthForPolylineAnnotation_: (mapView, polyline) {
+        print('[MapDelegate] Line width for polyline requested');
+        return 2.0;
+      },
+
+      // Images
+      mapView_imageForAnnotation_: (mapView, annotation) {
+        print('[MapDelegate] Image for annotation requested');
+        return null;
+      },
+      mapView_didFailToLoadImage_: (mapView, name) {
+        print('[MapDelegate] Failed to load image: $name');
+        return null;
+      },
+
+      // Sprite & style events
+      mapView_spriteDidLoad_url_: (mapView, url, id) =>
+          print('[MapDelegate] Sprite loaded: $url'),
+      mapView_spriteWillLoad_url_: (mapView, url, id) =>
+          print('[MapDelegate] Sprite will load: $url'),
+      mapView_spriteDidError_url_: (mapView, url, id) =>
+          print('[MapDelegate] Sprite error: $url'),
+      mapView_sourceDidChange_: (mapView, source) =>
+          print('[MapDelegate] Source did change: $source'),
+      mapView_shouldRemoveStyleImage_: (mapView, name) {
+        print('[MapDelegate] Should remove style image: $name');
+        return true;
+      },
+
+      // Shaders
+      mapView_shaderDidCompile_backend_defines_: (mapView, a, b, name) =>
+          print('[MapDelegate] Shader compiled: $name'),
+      mapView_shaderDidFailCompile_backend_defines_: (mapView, a, b, name) =>
+          print('[MapDelegate] Shader failed: $name'),
+      mapView_shaderWillCompile_backend_defines_: (mapView, a, b, name) =>
+          print('[MapDelegate] Shader will compile: $name'),
+
+      // Tiles
+      mapView_tileDidTriggerAction_x_y_z_wrap_overscaledZ_sourceID_:
+          (mapView, x, y, z, wrap, over, scaledZ, sourceID) =>
+              print('[MapDelegate] Tile action triggered: $sourceID'),
+
+      // User location
+      /*mapViewStyleForDefaultUserLocationAnnotationView_: (_) {
+        print('[MapDelegate] Default user location style requested');
+        return mapViewStyleForDefaultUserLocationAnnotationView_;
+      },
+      mapViewUserLocationAnchorPoint_: (_) {
+        print('[MapDelegate] User location anchor point requested');
+        return const objc.CGPoint(x: 0.5, y: 0.5);
+      },*/
+
+      // Rendering lifecycle
+      mapViewWillStartLoadingMap_: (_) =>
+          print('[MapDelegate] Will start loading map'),
+      mapViewWillStartLocatingUser_: (_) =>
+          print('[MapDelegate] Will start locating user'),
+      mapViewWillStartRenderingFrame_: (_) =>
+          print('[MapDelegate] Will start rendering frame'),
+      mapViewWillStartRenderingMap_: (_) =>
+          print('[MapDelegate] Will start rendering map'),
+
+      // Keep isolate alive
+      $keepIsolateAlive: true,
     );
+
+    mapView.delegate = delegate;
+
     // disable the default UI because they are rebuilt in Flutter
     mapView.showsCompassView = false;
     mapView.showsAttributionButton = false;
