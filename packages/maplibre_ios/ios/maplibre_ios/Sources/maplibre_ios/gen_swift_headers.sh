@@ -25,6 +25,7 @@ echo "✅ Using iOS SDK at: $SDK_PATH"
 # --- Compile Swift sources and emit Objective-C headers ---
 swiftc \
   -c Extensions.swift \
+  -c FlutterApi.swift \
   -c Helpers.swift \
   -c MapLibreRegistry.swift \
   -module-name maplibre_ios \

@@ -1,5 +1,3 @@
-// ignore_for_file: unnecessary_underscores
-
 import 'dart:async';
 import 'dart:convert';
 import 'dart:ffi';
@@ -15,11 +13,11 @@ part 'style_controller.dart';
 
 /// The implementation that gets used for state of the [MapLibreMap] widget on
 /// android using JNI and Pigeon as a fallback.
-final class MapLibreMapStateIos extends MapLibreMapState
-    implements MLNMapViewDelegate$Builder {
+final class MapLibreMapStateIos extends MapLibreMapState {
   // ignore: unused_field
   late final int _viewId;
   MLNMapView? _mapView;
+  MLNMapViewDelegate? _delegate;
 
   @override
   StyleControllerIos? style;
@@ -41,10 +39,18 @@ final class MapLibreMapStateIos extends MapLibreMapState
     _viewId = viewId;
     final mapView = MapLibreRegistry.getMapWithViewId(viewId)!;
     _mapView = mapView;
+    final flutterApi = FlutterApi$Builder.implementAsBlocking(
+      onDoubleTap: () {print('On double tap');},
+      onLongPress: () {print('On long press');},
+      onSecondaryTap: () {print('On secondary tap');},
+      onTap: () {print('On tap');},
+    );
+    MapLibreRegistry.addFlutterApiWithViewId(viewId, api: flutterApi);
+
     // setStyle(options.initStyle);
     mapView.automaticallyAdjustsContentInset = true;
     // Use listener callbacks to marshal onto the Dart isolate.
-    final delegate = MLNMapViewDelegate$Builder.implementAsListener(
+    /*final delegate = MLNMapViewDelegate$Builder.implementAsListener(
       // Camera & region events
       mapView_regionWillChangeWithReason_animated_: _regionWillChangeWithReason,
       mapView_regionDidChangeWithReason_animated_: _regionDidChangeWithReason,
@@ -128,14 +134,14 @@ final class MapLibreMapStateIos extends MapLibreMapState
         print('[MapDelegate] Alpha for shape requested');
         return 1.0;
       },
-      /*mapView_fillColorForPolygonAnnotation_: (mapView, polygon) {
+      */ /*mapView_fillColorForPolygonAnnotation_: (mapView, polygon) {
         print('[MapDelegate] Fill color for polygon requested');
         return MLNMapViewDelegate$Builder.mapView_fillColorForPolygonAnnotation_);
       },
       mapView_strokeColorForShapeAnnotation_: (mapView, shape) {
         print('[MapDelegate] Stroke color for shape requested');
         return UIColor.black;
-      },*/
+      },*/ /*
       mapView_shapeAnnotationIsEnabled_: (mapView, shape) {
         print('[MapDelegate] Shape annotation enabled check');
         return true;
@@ -183,14 +189,14 @@ final class MapLibreMapStateIos extends MapLibreMapState
               print('[MapDelegate] Tile action triggered: $sourceID'),
 
       // User location
-      /*mapViewStyleForDefaultUserLocationAnnotationView_: (_) {
+      */ /*mapViewStyleForDefaultUserLocationAnnotationView_: (_) {
         print('[MapDelegate] Default user location style requested');
         return mapViewStyleForDefaultUserLocationAnnotationView_;
       },
       mapViewUserLocationAnchorPoint_: (_) {
         print('[MapDelegate] User location anchor point requested');
         return const objc.CGPoint(x: 0.5, y: 0.5);
-      },*/
+      },*/ /*
 
       // Rendering lifecycle
       mapViewWillStartLoadingMap_: (_) =>
@@ -202,8 +208,8 @@ final class MapLibreMapStateIos extends MapLibreMapState
       mapViewWillStartRenderingMap_: (_) =>
           print('[MapDelegate] Will start rendering map'),
     );
-
-    mapView.delegate = delegate;
+    _delegate = delegate;
+    mapView.delegate = delegate;*/
 
     // disable the default UI because they are rebuilt in Flutter
     mapView.showsCompassView = false;
@@ -237,39 +243,6 @@ final class MapLibreMapStateIos extends MapLibreMapState
       camera = getCamera();
       isInitialized = true;
     });
-    mapView.addGestureRecognizer(gestureRecognizer);
-    /*
-                let doubleTap = UITapGestureRecognizer(
-                    target: self, action: #selector(self.onDoubleTap(sender:))
-                )
-                doubleTap.numberOfTapsRequired = 2
-                doubleTap.delegate = self
-                self._mapView.addGestureRecognizer(doubleTap)
-
-                let singleTap = UITapGestureRecognizer(target: self, action: #selector(self.onTap(sender:)))
-                singleTap.require(toFail: doubleTap)
-                singleTap.delegate = self
-                if #available(iOS 13.4, *) {
-                    singleTap.buttonMaskRequired = .primary
-                }
-                self._mapView.addGestureRecognizer(singleTap)
-
-                if #available(iOS 13.4, *) {
-                    let secondaryTap = UITapGestureRecognizer(
-                        target: self, action: #selector(self.onSecondaryTap(sender:))
-                    )
-                    secondaryTap.buttonMaskRequired = .secondary
-                    secondaryTap.delegate = self
-                    self._mapView.addGestureRecognizer(secondaryTap)
-                }
-
-                let longPress = UILongPressGestureRecognizer(
-                    target: self,
-                    action: #selector(self.onLongPress(sender:))
-                )
-                longPress.delegate = self
-                self._mapView.addGestureRecognizer(longPress)
-            }*/
   }
 
   @override
@@ -547,7 +520,7 @@ final class MapLibreMapStateIos extends MapLibreMapState
 
   @override
   Geographic toLngLat(Offset screenLocation) => _mapView!
-      .convertPoint(
+      .convertPoint$2(
         screenLocation.toCGPoint(),
         toCoordinateFromView: _mapView,
       )

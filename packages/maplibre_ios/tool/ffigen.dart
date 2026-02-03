@@ -59,7 +59,6 @@ void main(List<String> args) {
           'MLNOfflineRegion.h',
           'MLNTilePyramidOfflineRegion.h',
           'MLNFeature.h',
-          '/UIKit.framework/Headers/UIView.h',
         };
         print('Considering header: ${header.path}');
         for (final path in include) {
@@ -71,9 +70,6 @@ void main(List<String> args) {
     objectiveC: ObjectiveC(
       interfaces: Interfaces(
         includeMember: (decl, member) {
-          if (decl.originalName == 'UIView') {
-            return member == 'addGestureRecognizer';
-          }
           return true;
         },
         include: (decl) {
@@ -96,7 +92,6 @@ void main(List<String> args) {
             'Helpers',
             'MapLibreRegistry',
             'Extensions',
-            'UIView',
             'MLNMapView',
             'MLNMapCamera',
             'MLNStyleLayer',
@@ -122,6 +117,7 @@ void main(List<String> args) {
             'MLNBackgroundStyleLayer',
             'MLNImageSource',
             'MLNCoordinateQuad',
+            'UITapGestureRecognizer',
           };
           return include.contains(decl.originalName);
         },
@@ -131,6 +127,7 @@ void main(List<String> args) {
           const include = {
             'MLNMapViewDelegate',
             'MLNFeature',
+            'FlutterApi',
           };
           return include.contains(decl.originalName);
         },

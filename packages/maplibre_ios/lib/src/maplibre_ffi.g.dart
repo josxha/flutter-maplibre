@@ -138,6 +138,11 @@ external CLLocationCoordinate2D _6admjt_protocolTrampoline_neuenc(ffi.Pointer<ob
 ffi.Pointer<ffi.Void> arg0,
 );
 
+@ffi.Native<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> )>()
+external void _6admjt_protocolTrampoline_ovsamd(ffi.Pointer<objc.ObjCObjectImpl> target,
+ffi.Pointer<ffi.Void> arg0,
+);
+
 @ffi.Native<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , objc.NSRange )>()
 external void _6admjt_protocolTrampoline_rgxx3r(ffi.Pointer<objc.ObjCObjectImpl> target,
 ffi.Pointer<ffi.Void> arg0,
@@ -191,12 +196,6 @@ ffi.Pointer<objc.DOBJC_Context> context,
 );
 
 @ffi.Native<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.DOBJC_Context> )>(isLeaf: true)
-external ffi.Pointer<objc.ObjCBlockImpl> _6admjt_wrapBlockingBlock_1s56lr9(ffi.Pointer<objc.ObjCBlockImpl> block,
-ffi.Pointer<objc.ObjCBlockImpl> listnerBlock,
-ffi.Pointer<objc.DOBJC_Context> context,
-);
-
-@ffi.Native<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.DOBJC_Context> )>(isLeaf: true)
 external ffi.Pointer<objc.ObjCBlockImpl> _6admjt_wrapBlockingBlock_1tz5yf(ffi.Pointer<objc.ObjCBlockImpl> block,
 ffi.Pointer<objc.ObjCBlockImpl> listnerBlock,
 ffi.Pointer<objc.DOBJC_Context> context,
@@ -234,6 +233,12 @@ ffi.Pointer<objc.DOBJC_Context> context,
 
 @ffi.Native<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.DOBJC_Context> )>(isLeaf: true)
 external ffi.Pointer<objc.ObjCBlockImpl> _6admjt_wrapBlockingBlock_gl3jxl(ffi.Pointer<objc.ObjCBlockImpl> block,
+ffi.Pointer<objc.ObjCBlockImpl> listnerBlock,
+ffi.Pointer<objc.DOBJC_Context> context,
+);
+
+@ffi.Native<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.DOBJC_Context> )>(isLeaf: true)
+external ffi.Pointer<objc.ObjCBlockImpl> _6admjt_wrapBlockingBlock_ovsamd(ffi.Pointer<objc.ObjCBlockImpl> block,
 ffi.Pointer<objc.ObjCBlockImpl> listnerBlock,
 ffi.Pointer<objc.DOBJC_Context> context,
 );
@@ -285,10 +290,6 @@ external ffi.Pointer<objc.ObjCBlockImpl> _6admjt_wrapListenerBlock_1pl9qdv(ffi.P
 );
 
 @ffi.Native<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> )>(isLeaf: true)
-external ffi.Pointer<objc.ObjCBlockImpl> _6admjt_wrapListenerBlock_1s56lr9(ffi.Pointer<objc.ObjCBlockImpl> block,
-);
-
-@ffi.Native<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> )>(isLeaf: true)
 external ffi.Pointer<objc.ObjCBlockImpl> _6admjt_wrapListenerBlock_1tz5yf(ffi.Pointer<objc.ObjCBlockImpl> block,
 );
 
@@ -317,6 +318,10 @@ external ffi.Pointer<objc.ObjCBlockImpl> _6admjt_wrapListenerBlock_gl3jxl(ffi.Po
 );
 
 @ffi.Native<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> )>(isLeaf: true)
+external ffi.Pointer<objc.ObjCBlockImpl> _6admjt_wrapListenerBlock_ovsamd(ffi.Pointer<objc.ObjCBlockImpl> block,
+);
+
+@ffi.Native<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> )>(isLeaf: true)
 external ffi.Pointer<objc.ObjCBlockImpl> _6admjt_wrapListenerBlock_pfv6jd(ffi.Pointer<objc.ObjCBlockImpl> block,
 );
 
@@ -335,6 +340,21 @@ external ffi.Pointer<objc.ObjCBlockImpl> _6admjt_wrapListenerBlock_xtuoz7(ffi.Po
 @ffi.Native<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> )>(isLeaf: true)
 external ffi.Pointer<objc.ObjCBlockImpl> _6admjt_wrapListenerBlock_zzthnb(ffi.Pointer<objc.ObjCBlockImpl> block,
 );
+
+
+/// WARNING: CAAction is a stub. To generate bindings for this class, include
+/// CAAction in your config's objc-protocols list.
+///
+/// CAAction
+extension type CAAction._(objc.ObjCProtocol object$) implements objc.ObjCProtocol {
+  /// Constructs a [CAAction] that points to the same underlying object as [other].
+  CAAction.as(objc.ObjCObject other) : object$ = other;
+
+  /// Constructs a [CAAction] that wraps the given raw object pointer.
+  CAAction.fromPointer(ffi.Pointer<objc.ObjCObjectImpl> other,
+      {bool retain = false, bool release = false}) :
+      object$ = objc.ObjCProtocol(other, retain: retain, release: release);
+}
 
 
 /// WARNING: CADisplayLink is a stub. To generate bindings for this class, include
@@ -358,6 +378,27 @@ extension type CADisplayLink._(objc.ObjCObject object$) implements objc.ObjCObje
 }
 
 
+/// WARNING: CALayer is a stub. To generate bindings for this class, include
+/// CALayer in your config's objc-interfaces list.
+///
+/// CALayer
+extension type CALayer._(objc.ObjCObject object$) implements objc.ObjCObject,objc.NSObject,objc.NSSecureCoding,CAMediaTiming {
+  /// Constructs a [CALayer] that points to the same underlying object as [other].
+  CALayer.as(objc.ObjCObject other) : object$ = other {
+    objc.checkOsVersionInternal('CALayer', iOS: (false, (2, 0, 0)), macOS: (false, (10, 5, 0)));
+  }
+
+  /// Constructs a [CALayer] that wraps the given raw object pointer.
+  CALayer.fromPointer(ffi.Pointer<objc.ObjCObjectImpl> other,
+      {bool retain = false, bool release = false}) :
+          object$ = objc.ObjCObject(other, retain: retain, release: release) {
+    objc.checkOsVersionInternal('CALayer', iOS: (false, (2, 0, 0)), macOS: (false, (10, 5, 0)));
+  }
+
+
+}
+
+
 /// WARNING: CALayerDelegate is a stub. To generate bindings for this class, include
 /// CALayerDelegate in your config's objc-protocols list.
 ///
@@ -368,6 +409,21 @@ extension type CALayerDelegate._(objc.ObjCProtocol object$) implements objc.ObjC
 
   /// Constructs a [CALayerDelegate] that wraps the given raw object pointer.
   CALayerDelegate.fromPointer(ffi.Pointer<objc.ObjCObjectImpl> other,
+      {bool retain = false, bool release = false}) :
+      object$ = objc.ObjCProtocol(other, retain: retain, release: release);
+}
+
+
+/// WARNING: CAMediaTiming is a stub. To generate bindings for this class, include
+/// CAMediaTiming in your config's objc-protocols list.
+///
+/// CAMediaTiming
+extension type CAMediaTiming._(objc.ObjCProtocol object$) implements objc.ObjCProtocol {
+  /// Constructs a [CAMediaTiming] that points to the same underlying object as [other].
+  CAMediaTiming.as(objc.ObjCObject other) : object$ = other;
+
+  /// Constructs a [CAMediaTiming] that wraps the given raw object pointer.
+  CAMediaTiming.fromPointer(ffi.Pointer<objc.ObjCObjectImpl> other,
       {bool retain = false, bool release = false}) :
       object$ = objc.ObjCProtocol(other, retain: retain, release: release);
 }
@@ -390,57 +446,6 @@ extension type CAMediaTimingFunction._(objc.ObjCObject object$) implements objc.
     objc.checkOsVersionInternal('CAMediaTimingFunction', iOS: (false, (2, 0, 0)), macOS: (false, (10, 5, 0)));
   }
 
-
-}
-
-final class CATransform3D extends ffi.Struct{
-  @ffi.Double()
-  external double m11;
-
-  @ffi.Double()
-  external double m12;
-
-  @ffi.Double()
-  external double m13;
-
-  @ffi.Double()
-  external double m14;
-
-  @ffi.Double()
-  external double m21;
-
-  @ffi.Double()
-  external double m22;
-
-  @ffi.Double()
-  external double m23;
-
-  @ffi.Double()
-  external double m24;
-
-  @ffi.Double()
-  external double m31;
-
-  @ffi.Double()
-  external double m32;
-
-  @ffi.Double()
-  external double m33;
-
-  @ffi.Double()
-  external double m34;
-
-  @ffi.Double()
-  external double m41;
-
-  @ffi.Double()
-  external double m42;
-
-  @ffi.Double()
-  external double m43;
-
-  @ffi.Double()
-  external double m44;
 
 }
 
@@ -495,6 +500,9 @@ sealed class CGBlendMode {
   static const kCGBlendModePlusDarker = 26;
   static const kCGBlendModePlusLighter = 27;}
 
+final class CGContext extends ffi.Opaque{
+}
+
 final class CGImage extends ffi.Opaque{
 }
 
@@ -529,143 +537,192 @@ final class CLLocationCoordinate2D extends ffi.Struct{
 }
 
 
-/// CornerConfiguration
-extension CornerConfiguration on UIView {
+/// FlutterApi
+extension type FlutterApi._(objc.ObjCProtocol object$) implements objc.ObjCProtocol {
+  /// Constructs a [FlutterApi] that points to the same underlying object as [other].
+  FlutterApi.as(objc.ObjCObject other) : object$ = other;
 
-  /// cornerConfiguration
-  UICornerConfiguration get cornerConfiguration {
-  objc.checkOsVersionInternal('UIView.cornerConfiguration', iOS: (false, (26, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_cornerConfiguration);
-    return UICornerConfiguration.fromPointer($ret, retain: true, release: true);
+  /// Constructs a [FlutterApi] that wraps the given raw object pointer.
+  FlutterApi.fromPointer(ffi.Pointer<objc.ObjCObjectImpl> other,
+      {bool retain = false, bool release = false}) :
+      object$ = objc.ObjCProtocol(other, retain: retain, release: release);
+
+  /// Returns whether [obj] is an instance of [FlutterApi].
+  static bool conformsTo(objc.ObjCObject obj) {
+    return _objc_msgSend_e3qsqz(obj.ref.pointer, _sel_conformsToProtocol_, _protocol_FlutterApi);
+  }
+}
+
+extension FlutterApi$Methods on FlutterApi {
+
+  /// onDoubleTap
+  void onDoubleTap() {
+_objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_onDoubleTap);
+
   }
 
 
-  /// effectiveRadiusForCorner:
-  double effectiveRadiusForCorner(int corner) {
-  objc.checkOsVersionInternal('UIView.effectiveRadiusForCorner:', iOS: (false, (26, 0, 0)));
-    return objc.useMsgSendVariants ? _objc_msgSend_8ud30bFpret(object$.ref.pointer, _sel_effectiveRadiusForCorner_, corner) : _objc_msgSend_8ud30b(object$.ref.pointer, _sel_effectiveRadiusForCorner_, corner);
+  /// onLongPress
+  void onLongPress() {
+_objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_onLongPress);
 
   }
 
 
-  /// setCornerConfiguration:
-  set cornerConfiguration(UICornerConfiguration value) {
-  objc.checkOsVersionInternal('UIView.setCornerConfiguration:', iOS: (false, (26, 0, 0)));
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setCornerConfiguration_, value.ref.pointer);
+  /// onSecondaryTap
+  void onSecondaryTap() {
+_objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_onSecondaryTap);
+
+  }
+
+
+  /// onTap
+  void onTap() {
+_objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_onTap);
 
   }
 
 }
 
+  interface class FlutterApi$Builder {
+  
+    /// Returns the [objc.Protocol] object for this protocol.
+  static objc.Protocol get $protocol =>
+      objc.Protocol.fromPointer(_protocol_FlutterApi.cast());
 
-/// DeprecatedAnimations
-extension DeprecatedAnimations on UIView {
-
-  /// beginAnimations:context:
-  static void beginAnimations(objc.NSString? animationID, {required ffi.Pointer<ffi.Void> context}) {
-  objc.checkOsVersionInternal('UIView.beginAnimations:context:', iOS: (false, (2, 0, 0)));
-_objc_msgSend_1lzqwav(_class_UIView, _sel_beginAnimations_context_, animationID?.ref.pointer ?? ffi.nullptr, context);
-
+  /// Builds an object that implements the FlutterApi protocol. To implement
+  /// multiple protocols, use [addToBuilder] or [objc.ObjCProtocolBuilder] directly.
+  ///
+  /// If `$keepIsolateAlive` is true, this protocol will keep this isolate
+  /// alive until it is garbage collected by both Dart and ObjC.
+  static FlutterApi implement({required void Function() onDoubleTap, required void Function() onLongPress, required void Function() onSecondaryTap, required void Function() onTap, bool $keepIsolateAlive = true}) {
+    final builder = objc.ObjCProtocolBuilder(debugName: 'FlutterApi');
+        FlutterApi$Builder.onDoubleTap.implement(builder, onDoubleTap);    FlutterApi$Builder.onLongPress.implement(builder, onLongPress);    FlutterApi$Builder.onSecondaryTap.implement(builder, onSecondaryTap);    FlutterApi$Builder.onTap.implement(builder, onTap);
+    builder.addProtocol($protocol);
+    return FlutterApi.as(builder.build(keepIsolateAlive: $keepIsolateAlive));
   }
 
-
-  /// commitAnimations
-  static void commitAnimations() {
-  objc.checkOsVersionInternal('UIView.commitAnimations', iOS: (false, (2, 0, 0)));
-_objc_msgSend_1pl9qdv(_class_UIView, _sel_commitAnimations);
-
+  /// Adds the implementation of the FlutterApi protocol to an existing
+  /// [objc.ObjCProtocolBuilder].
+  ///
+  /// Note: You cannot call this method after you have called `builder.build`.
+  static void addToBuilder(objc.ObjCProtocolBuilder builder, {required void Function() onDoubleTap, required void Function() onLongPress, required void Function() onSecondaryTap, required void Function() onTap, bool $keepIsolateAlive = true}) {
+        FlutterApi$Builder.onDoubleTap.implement(builder, onDoubleTap);    FlutterApi$Builder.onLongPress.implement(builder, onLongPress);    FlutterApi$Builder.onSecondaryTap.implement(builder, onSecondaryTap);    FlutterApi$Builder.onTap.implement(builder, onTap);
+    builder.addProtocol($protocol);
   }
 
-
-  /// setAnimationBeginsFromCurrentState:
-  static void setAnimationBeginsFromCurrentState(bool fromCurrentState) {
-  objc.checkOsVersionInternal('UIView.setAnimationBeginsFromCurrentState:', iOS: (false, (2, 0, 0)));
-_objc_msgSend_1s56lr9(_class_UIView, _sel_setAnimationBeginsFromCurrentState_, fromCurrentState);
-
+    /// Builds an object that implements the FlutterApi protocol. To implement
+  /// multiple protocols, use [addToBuilder] or [objc.ObjCProtocolBuilder] directly. All
+  /// methods that can be implemented as listeners will be.
+  ///
+  /// If `$keepIsolateAlive` is true, this protocol will keep this isolate
+  /// alive until it is garbage collected by both Dart and ObjC.
+  static FlutterApi implementAsListener({required void Function() onDoubleTap, required void Function() onLongPress, required void Function() onSecondaryTap, required void Function() onTap, bool $keepIsolateAlive = true}) {
+    final builder = objc.ObjCProtocolBuilder(debugName: 'FlutterApi');
+        FlutterApi$Builder.onDoubleTap.implementAsListener(builder, onDoubleTap);    FlutterApi$Builder.onLongPress.implementAsListener(builder, onLongPress);    FlutterApi$Builder.onSecondaryTap.implementAsListener(builder, onSecondaryTap);    FlutterApi$Builder.onTap.implementAsListener(builder, onTap);
+    builder.addProtocol($protocol);
+    return FlutterApi.as(builder.build(keepIsolateAlive: $keepIsolateAlive));
   }
 
-
-  /// setAnimationCurve:
-  static void setAnimationCurve(int curve) {
-  objc.checkOsVersionInternal('UIView.setAnimationCurve:', iOS: (false, (2, 0, 0)));
-_objc_msgSend_up32gn(_class_UIView, _sel_setAnimationCurve_, curve);
-
+  /// Adds the implementation of the FlutterApi protocol to an existing
+  /// [objc.ObjCProtocolBuilder]. All methods that can be implemented as listeners will
+  /// be.
+  ///
+  /// Note: You cannot call this method after you have called `builder.build`.
+  static void addToBuilderAsListener(objc.ObjCProtocolBuilder builder, {required void Function() onDoubleTap, required void Function() onLongPress, required void Function() onSecondaryTap, required void Function() onTap, bool $keepIsolateAlive = true}) {
+        FlutterApi$Builder.onDoubleTap.implementAsListener(builder, onDoubleTap);    FlutterApi$Builder.onLongPress.implementAsListener(builder, onLongPress);    FlutterApi$Builder.onSecondaryTap.implementAsListener(builder, onSecondaryTap);    FlutterApi$Builder.onTap.implementAsListener(builder, onTap);
+    builder.addProtocol($protocol);
   }
 
-
-  /// setAnimationDelay:
-  static void setAnimationDelay(double delay) {
-  objc.checkOsVersionInternal('UIView.setAnimationDelay:', iOS: (false, (2, 0, 0)));
-_objc_msgSend_hwm8nu(_class_UIView, _sel_setAnimationDelay_, delay);
-
+  /// Builds an object that implements the FlutterApi protocol. To implement
+  /// multiple protocols, use [addToBuilder] or [objc.ObjCProtocolBuilder] directly. All
+  /// methods that can be implemented as blocking listeners will be.
+  ///
+  /// If `$keepIsolateAlive` is true, this protocol will keep this isolate
+  /// alive until it is garbage collected by both Dart and ObjC.
+  static FlutterApi implementAsBlocking({required void Function() onDoubleTap, required void Function() onLongPress, required void Function() onSecondaryTap, required void Function() onTap, bool $keepIsolateAlive = true}) {
+    final builder = objc.ObjCProtocolBuilder(debugName: 'FlutterApi');
+        FlutterApi$Builder.onDoubleTap.implementAsBlocking(builder, onDoubleTap);    FlutterApi$Builder.onLongPress.implementAsBlocking(builder, onLongPress);    FlutterApi$Builder.onSecondaryTap.implementAsBlocking(builder, onSecondaryTap);    FlutterApi$Builder.onTap.implementAsBlocking(builder, onTap);
+    builder.addProtocol($protocol);
+    return FlutterApi.as(builder.build(keepIsolateAlive: $keepIsolateAlive));
   }
 
-
-  /// setAnimationDelegate:
-  static void setAnimationDelegate(objc.ObjCObject? delegate) {
-  objc.checkOsVersionInternal('UIView.setAnimationDelegate:', iOS: (false, (2, 0, 0)));
-_objc_msgSend_xtuoz7(_class_UIView, _sel_setAnimationDelegate_, delegate?.ref.pointer ?? ffi.nullptr);
-
+  /// Adds the implementation of the FlutterApi protocol to an existing
+  /// [objc.ObjCProtocolBuilder]. All methods that can be implemented as blocking
+  /// listeners will be.
+  ///
+  /// Note: You cannot call this method after you have called `builder.build`.
+  static void addToBuilderAsBlocking(objc.ObjCProtocolBuilder builder, {required void Function() onDoubleTap, required void Function() onLongPress, required void Function() onSecondaryTap, required void Function() onTap, bool $keepIsolateAlive = true}) {
+        FlutterApi$Builder.onDoubleTap.implementAsBlocking(builder, onDoubleTap);    FlutterApi$Builder.onLongPress.implementAsBlocking(builder, onLongPress);    FlutterApi$Builder.onSecondaryTap.implementAsBlocking(builder, onSecondaryTap);    FlutterApi$Builder.onTap.implementAsBlocking(builder, onTap);
+    builder.addProtocol($protocol);
   }
 
+  /// onDoubleTap
+static final onDoubleTap = objc.ObjCProtocolListenableMethod<void Function()>(
+      _protocol_FlutterApi,
+      _sel_onDoubleTap,
+      ffi.Native.addressOf<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> )>>(_6admjt_protocolTrampoline_ovsamd).cast(),
+      objc.getProtocolMethodSignature(
+          _protocol_FlutterApi,
+          _sel_onDoubleTap,
+          isRequired: true,
+          isInstanceMethod: true,
+      ),
+      (void Function() func) => ObjCBlock_ffiVoid_ffiVoid.fromFunction((ffi.Pointer<ffi.Void> _, ) => func()),
+          (void Function() func) => ObjCBlock_ffiVoid_ffiVoid.listener((ffi.Pointer<ffi.Void> _, ) => func()),
+    (void Function() func) => ObjCBlock_ffiVoid_ffiVoid.blocking((ffi.Pointer<ffi.Void> _, ) => func()),
 
-  /// setAnimationDidStopSelector:
-  static void setAnimationDidStopSelector(ffi.Pointer<objc.ObjCSelector> selector) {
-  objc.checkOsVersionInternal('UIView.setAnimationDidStopSelector:', iOS: (false, (2, 0, 0)));
-_objc_msgSend_1d9e4oe(_class_UIView, _sel_setAnimationDidStopSelector_, selector);
+    );
+/// onLongPress
+static final onLongPress = objc.ObjCProtocolListenableMethod<void Function()>(
+      _protocol_FlutterApi,
+      _sel_onLongPress,
+      ffi.Native.addressOf<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> )>>(_6admjt_protocolTrampoline_ovsamd).cast(),
+      objc.getProtocolMethodSignature(
+          _protocol_FlutterApi,
+          _sel_onLongPress,
+          isRequired: true,
+          isInstanceMethod: true,
+      ),
+      (void Function() func) => ObjCBlock_ffiVoid_ffiVoid.fromFunction((ffi.Pointer<ffi.Void> _, ) => func()),
+          (void Function() func) => ObjCBlock_ffiVoid_ffiVoid.listener((ffi.Pointer<ffi.Void> _, ) => func()),
+    (void Function() func) => ObjCBlock_ffiVoid_ffiVoid.blocking((ffi.Pointer<ffi.Void> _, ) => func()),
 
-  }
+    );
+/// onSecondaryTap
+static final onSecondaryTap = objc.ObjCProtocolListenableMethod<void Function()>(
+      _protocol_FlutterApi,
+      _sel_onSecondaryTap,
+      ffi.Native.addressOf<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> )>>(_6admjt_protocolTrampoline_ovsamd).cast(),
+      objc.getProtocolMethodSignature(
+          _protocol_FlutterApi,
+          _sel_onSecondaryTap,
+          isRequired: true,
+          isInstanceMethod: true,
+      ),
+      (void Function() func) => ObjCBlock_ffiVoid_ffiVoid.fromFunction((ffi.Pointer<ffi.Void> _, ) => func()),
+          (void Function() func) => ObjCBlock_ffiVoid_ffiVoid.listener((ffi.Pointer<ffi.Void> _, ) => func()),
+    (void Function() func) => ObjCBlock_ffiVoid_ffiVoid.blocking((ffi.Pointer<ffi.Void> _, ) => func()),
 
+    );
+/// onTap
+static final onTap = objc.ObjCProtocolListenableMethod<void Function()>(
+      _protocol_FlutterApi,
+      _sel_onTap,
+      ffi.Native.addressOf<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> )>>(_6admjt_protocolTrampoline_ovsamd).cast(),
+      objc.getProtocolMethodSignature(
+          _protocol_FlutterApi,
+          _sel_onTap,
+          isRequired: true,
+          isInstanceMethod: true,
+      ),
+      (void Function() func) => ObjCBlock_ffiVoid_ffiVoid.fromFunction((ffi.Pointer<ffi.Void> _, ) => func()),
+          (void Function() func) => ObjCBlock_ffiVoid_ffiVoid.listener((ffi.Pointer<ffi.Void> _, ) => func()),
+    (void Function() func) => ObjCBlock_ffiVoid_ffiVoid.blocking((ffi.Pointer<ffi.Void> _, ) => func()),
 
-  /// setAnimationDuration:
-  static void setAnimationDuration(double duration) {
-  objc.checkOsVersionInternal('UIView.setAnimationDuration:', iOS: (false, (2, 0, 0)));
-_objc_msgSend_hwm8nu(_class_UIView, _sel_setAnimationDuration_, duration);
-
-  }
-
-
-  /// setAnimationRepeatAutoreverses:
-  static void setAnimationRepeatAutoreverses(bool repeatAutoreverses) {
-  objc.checkOsVersionInternal('UIView.setAnimationRepeatAutoreverses:', iOS: (false, (2, 0, 0)));
-_objc_msgSend_1s56lr9(_class_UIView, _sel_setAnimationRepeatAutoreverses_, repeatAutoreverses);
-
-  }
-
-
-  /// setAnimationRepeatCount:
-  static void setAnimationRepeatCount(double repeatCount) {
-  objc.checkOsVersionInternal('UIView.setAnimationRepeatCount:', iOS: (false, (2, 0, 0)));
-_objc_msgSend_v5hmet(_class_UIView, _sel_setAnimationRepeatCount_, repeatCount);
-
-  }
-
-
-  /// setAnimationStartDate:
-  static void setAnimationStartDate(objc.NSDate startDate) {
-  objc.checkOsVersionInternal('UIView.setAnimationStartDate:', iOS: (false, (2, 0, 0)));
-_objc_msgSend_xtuoz7(_class_UIView, _sel_setAnimationStartDate_, startDate.ref.pointer);
-
-  }
-
-
-  /// setAnimationTransition:forView:cache:
-  static void setAnimationTransition(int transition, {required UIView forView,required bool cache}) {
-  objc.checkOsVersionInternal('UIView.setAnimationTransition:forView:cache:', iOS: (false, (2, 0, 0)));
-_objc_msgSend_1ftk3d5(_class_UIView, _sel_setAnimationTransition_forView_cache_, transition, forView.ref.pointer, cache);
-
-  }
-
-
-  /// setAnimationWillStartSelector:
-  static void setAnimationWillStartSelector(ffi.Pointer<objc.ObjCSelector> selector) {
-  objc.checkOsVersionInternal('UIView.setAnimationWillStartSelector:', iOS: (false, (2, 0, 0)));
-_objc_msgSend_1d9e4oe(_class_UIView, _sel_setAnimationWillStartSelector_, selector);
-
-  }
+    );
 
 }
-
 
 /// Helpers
 extension type Helpers._(objc.ObjCObject object$) implements objc.ObjCObject,objc.NSObject {
@@ -736,45 +793,6 @@ extension Helpers$Methods on Helpers {
   objc.checkOsVersionInternal('Helpers.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
     final $ret = _objc_msgSend_151sglz(object$.ref.retainAndReturnPointer(), _sel_init);
     return Helpers.fromPointer($ret, retain: false, release: true);
-  }
-
-}
-
-
-/// LayoutRegions
-extension LayoutRegions on UIView {
-
-  /// directionalEdgeInsetsForLayoutRegion:
-  NSDirectionalEdgeInsets directionalEdgeInsetsForLayoutRegion(UIViewLayoutRegion layoutRegion) {
-  objc.checkOsVersionInternal('UIView.directionalEdgeInsetsForLayoutRegion:', iOS: (false, (26, 0, 0)));
-    final $ptr = pkg_ffi.calloc<NSDirectionalEdgeInsets>();
-    objc.useMsgSendVariants ? _objc_msgSend_wk01t0Stret($ptr, object$.ref.pointer, _sel_directionalEdgeInsetsForLayoutRegion_, layoutRegion.ref.pointer) : $ptr.ref = _objc_msgSend_wk01t0(object$.ref.pointer, _sel_directionalEdgeInsetsForLayoutRegion_, layoutRegion.ref.pointer);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<NSDirectionalEdgeInsets>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<NSDirectionalEdgeInsets>(
-        $finalizable);
-
-  }
-
-
-  /// edgeInsetsForLayoutRegion:
-  UIEdgeInsets edgeInsetsForLayoutRegion(UIViewLayoutRegion layoutRegion) {
-  objc.checkOsVersionInternal('UIView.edgeInsetsForLayoutRegion:', iOS: (false, (26, 0, 0)));
-    final $ptr = pkg_ffi.calloc<UIEdgeInsets>();
-    objc.useMsgSendVariants ? _objc_msgSend_16w06qxStret($ptr, object$.ref.pointer, _sel_edgeInsetsForLayoutRegion_, layoutRegion.ref.pointer) : $ptr.ref = _objc_msgSend_16w06qx(object$.ref.pointer, _sel_edgeInsetsForLayoutRegion_, layoutRegion.ref.pointer);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<UIEdgeInsets>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<UIEdgeInsets>(
-        $finalizable);
-
-  }
-
-
-  /// layoutGuideForLayoutRegion:
-  UILayoutGuide layoutGuideForLayoutRegion(UIViewLayoutRegion layoutRegion) {
-  objc.checkOsVersionInternal('UIView.layoutGuideForLayoutRegion:', iOS: (false, (26, 0, 0)));
-    final $ret = _objc_msgSend_1sotr3r(object$.ref.pointer, _sel_layoutGuideForLayoutRegion_, layoutRegion.ref.pointer);
-    return UILayoutGuide.fromPointer($ret, retain: true, release: true);
   }
 
 }
@@ -7512,7 +7530,7 @@ _objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_clearActionJournalLog);
 /// 
 /// #### Related examples
 /// - TODO: Point conversion example to learn how to convert a `CGPoint` to a map coordinate.
-  CLLocationCoordinate2D convertPoint(objc.CGPoint point, {UIView? toCoordinateFromView}) {
+  CLLocationCoordinate2D convertPoint$2(objc.CGPoint point, {UIView? toCoordinateFromView}) {
     final $ptr = pkg_ffi.calloc<CLLocationCoordinate2D>();
     objc.useMsgSendVariants ? _objc_msgSend_4xp05xStret($ptr, object$.ref.pointer, _sel_convertPoint_toCoordinateFromView_, point, toCoordinateFromView?.ref.pointer ?? ffi.nullptr) : $ptr.ref = _objc_msgSend_4xp05x(object$.ref.pointer, _sel_convertPoint_toCoordinateFromView_, point, toCoordinateFromView?.ref.pointer ?? ffi.nullptr);
     final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
@@ -7533,7 +7551,7 @@ _objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_clearActionJournalLog);
 /// @param rect The rectangle to convert.
 /// @param view The view in whose coordinate system the rectangle is expressed.
 /// @return The geographic bounding box coextensive with the given rectangle.
-  MLNCoordinateBounds convertRect(objc.CGRect rect, {UIView? toCoordinateBoundsFromView}) {
+  MLNCoordinateBounds convertRect$2(objc.CGRect rect, {UIView? toCoordinateBoundsFromView}) {
     final $ptr = pkg_ffi.calloc<MLNCoordinateBounds>();
     objc.useMsgSendVariants ? _objc_msgSend_1f65wixStret($ptr, object$.ref.pointer, _sel_convertRect_toCoordinateBoundsFromView_, rect, toCoordinateBoundsFromView?.ref.pointer ?? ffi.nullptr) : $ptr.ref = _objc_msgSend_1f65wix(object$.ref.pointer, _sel_convertRect_toCoordinateBoundsFromView_, rect, toCoordinateBoundsFromView?.ref.pointer ?? ffi.nullptr);
     final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
@@ -21168,6 +21186,13 @@ extension type MapLibreRegistry._(objc.ObjCObject object$) implements objc.ObjCO
   /// Returns whether [obj] is an instance of [MapLibreRegistry].
   static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MapLibreRegistry);
 
+  /// Method to add a flutter api to the registry
+  static void addFlutterApiWithViewId(int viewId, {required FlutterApi api}) {
+_objc_msgSend_mpxix1(_class_MapLibreRegistry, _sel_addFlutterApiWithViewId_api_, viewId, api.ref.pointer);
+
+  }
+
+
   /// Method to add a map to the registry
   static void addMapWithViewId(int viewId, {required MLNMapView map}) {
 _objc_msgSend_mpxix1(_class_MapLibreRegistry, _sel_addMapWithViewId_map_, viewId, map.ref.pointer);
@@ -21189,6 +21214,13 @@ _objc_msgSend_mpxix1(_class_MapLibreRegistry, _sel_addMapWithViewId_map_, viewId
   }
 
 
+  /// Method to get the flutter api for a given viewId
+  static FlutterApi? getFlutterApiWithViewId(int viewId) {
+    final $ret = _objc_msgSend_1ya1kjn(_class_MapLibreRegistry, _sel_getFlutterApiWithViewId_, viewId);
+    return $ret.address == 0 ? null : FlutterApi.fromPointer($ret, retain: true, release: true);
+  }
+
+
   /// Method to get the map for a given viewId
   static MLNMapView? getMapWithViewId(int viewId) {
     final $ret = _objc_msgSend_1ya1kjn(_class_MapLibreRegistry, _sel_getMapWithViewId_, viewId);
@@ -21200,6 +21232,13 @@ _objc_msgSend_mpxix1(_class_MapLibreRegistry, _sel_addMapWithViewId_map_, viewId
   static MapLibreRegistry new$() {
     final $ret = _objc_msgSend_151sglz(_class_MapLibreRegistry, _sel_new);
     return MapLibreRegistry.fromPointer($ret, retain: false, release: true);
+  }
+
+
+  /// Method to remove a flutter api to the registry
+  static void removeFlutterApiWithViewId(int viewId) {
+_objc_msgSend_17gvxvj(_class_MapLibreRegistry, _sel_removeFlutterApiWithViewId_, viewId);
+
   }
 
 
@@ -21221,21 +21260,6 @@ extension MapLibreRegistry$Methods on MapLibreRegistry {
     final $ret = _objc_msgSend_151sglz(object$.ref.retainAndReturnPointer(), _sel_init);
     return MapLibreRegistry.fromPointer($ret, retain: false, release: true);
   }
-
-}
-
-final class NSDirectionalEdgeInsets extends ffi.Struct{
-  @ffi.Double()
-  external double top;
-
-  @ffi.Double()
-  external double leading;
-
-  @ffi.Double()
-  external double bottom;
-
-  @ffi.Double()
-  external double trailing;
 
 }
 
@@ -21703,111 +21727,6 @@ sealed class NSExpressionType {
   static const NSAnyKeyExpressionType = 15;
   static const NSBlockExpressionType = 19;
   static const NSConditionalExpressionType = 20;}
-
-
-/// WARNING: NSLayoutAnchor is a stub. To generate bindings for this class, include
-/// NSLayoutAnchor in your config's objc-interfaces list.
-///
-/// NSLayoutAnchor
-extension type NSLayoutAnchor._(objc.ObjCObject object$) implements objc.ObjCObject,objc.NSObject,objc.NSCopying,objc.NSCoding {
-  /// Constructs a [NSLayoutAnchor] that points to the same underlying object as [other].
-  NSLayoutAnchor.as(objc.ObjCObject other) : object$ = other {
-    objc.checkOsVersionInternal('NSLayoutAnchor', iOS: (false, (9, 0, 0)), macOS: (false, (10, 11, 0)));
-  }
-
-  /// Constructs a [NSLayoutAnchor] that wraps the given raw object pointer.
-  NSLayoutAnchor.fromPointer(ffi.Pointer<objc.ObjCObjectImpl> other,
-      {bool retain = false, bool release = false}) :
-          object$ = objc.ObjCObject(other, retain: retain, release: release) {
-    objc.checkOsVersionInternal('NSLayoutAnchor', iOS: (false, (9, 0, 0)), macOS: (false, (10, 11, 0)));
-  }
-
-
-}
-
-
-/// WARNING: NSLayoutConstraint is a stub. To generate bindings for this class, include
-/// NSLayoutConstraint in your config's objc-interfaces list.
-///
-/// NSLayoutConstraint
-extension type NSLayoutConstraint._(objc.ObjCObject object$) implements objc.ObjCObject,objc.NSObject {
-  /// Constructs a [NSLayoutConstraint] that points to the same underlying object as [other].
-  NSLayoutConstraint.as(objc.ObjCObject other) : object$ = other {
-    objc.checkOsVersionInternal('NSLayoutConstraint', iOS: (false, (6, 0, 0)), macOS: (false, (10, 7, 0)));
-  }
-
-  /// Constructs a [NSLayoutConstraint] that wraps the given raw object pointer.
-  NSLayoutConstraint.fromPointer(ffi.Pointer<objc.ObjCObjectImpl> other,
-      {bool retain = false, bool release = false}) :
-          object$ = objc.ObjCObject(other, retain: retain, release: release) {
-    objc.checkOsVersionInternal('NSLayoutConstraint', iOS: (false, (6, 0, 0)), macOS: (false, (10, 7, 0)));
-  }
-
-
-}
-
-
-/// WARNING: NSLayoutDimension is a stub. To generate bindings for this class, include
-/// NSLayoutDimension in your config's objc-interfaces list.
-///
-/// NSLayoutDimension
-extension type NSLayoutDimension._(objc.ObjCObject object$) implements objc.ObjCObject,NSLayoutAnchor {
-  /// Constructs a [NSLayoutDimension] that points to the same underlying object as [other].
-  NSLayoutDimension.as(objc.ObjCObject other) : object$ = other {
-    objc.checkOsVersionInternal('NSLayoutDimension', iOS: (false, (9, 0, 0)), macOS: (false, (10, 11, 0)));
-  }
-
-  /// Constructs a [NSLayoutDimension] that wraps the given raw object pointer.
-  NSLayoutDimension.fromPointer(ffi.Pointer<objc.ObjCObjectImpl> other,
-      {bool retain = false, bool release = false}) :
-          object$ = objc.ObjCObject(other, retain: retain, release: release) {
-    objc.checkOsVersionInternal('NSLayoutDimension', iOS: (false, (9, 0, 0)), macOS: (false, (10, 11, 0)));
-  }
-
-
-}
-
-
-/// WARNING: NSLayoutXAxisAnchor is a stub. To generate bindings for this class, include
-/// NSLayoutXAxisAnchor in your config's objc-interfaces list.
-///
-/// NSLayoutXAxisAnchor
-extension type NSLayoutXAxisAnchor._(objc.ObjCObject object$) implements objc.ObjCObject,NSLayoutAnchor {
-  /// Constructs a [NSLayoutXAxisAnchor] that points to the same underlying object as [other].
-  NSLayoutXAxisAnchor.as(objc.ObjCObject other) : object$ = other {
-    objc.checkOsVersionInternal('NSLayoutXAxisAnchor', iOS: (false, (9, 0, 0)), macOS: (false, (10, 11, 0)));
-  }
-
-  /// Constructs a [NSLayoutXAxisAnchor] that wraps the given raw object pointer.
-  NSLayoutXAxisAnchor.fromPointer(ffi.Pointer<objc.ObjCObjectImpl> other,
-      {bool retain = false, bool release = false}) :
-          object$ = objc.ObjCObject(other, retain: retain, release: release) {
-    objc.checkOsVersionInternal('NSLayoutXAxisAnchor', iOS: (false, (9, 0, 0)), macOS: (false, (10, 11, 0)));
-  }
-
-
-}
-
-
-/// WARNING: NSLayoutYAxisAnchor is a stub. To generate bindings for this class, include
-/// NSLayoutYAxisAnchor in your config's objc-interfaces list.
-///
-/// NSLayoutYAxisAnchor
-extension type NSLayoutYAxisAnchor._(objc.ObjCObject object$) implements objc.ObjCObject,NSLayoutAnchor {
-  /// Constructs a [NSLayoutYAxisAnchor] that points to the same underlying object as [other].
-  NSLayoutYAxisAnchor.as(objc.ObjCObject other) : object$ = other {
-    objc.checkOsVersionInternal('NSLayoutYAxisAnchor', iOS: (false, (9, 0, 0)), macOS: (false, (10, 11, 0)));
-  }
-
-  /// Constructs a [NSLayoutYAxisAnchor] that wraps the given raw object pointer.
-  NSLayoutYAxisAnchor.fromPointer(ffi.Pointer<objc.ObjCObjectImpl> other,
-      {bool retain = false, bool release = false}) :
-          object$ = objc.ObjCObject(other, retain: retain, release: release) {
-    objc.checkOsVersionInternal('NSLayoutYAxisAnchor', iOS: (false, (9, 0, 0)), macOS: (false, (10, 11, 0)));
-  }
-
-
-}
 
 
 /// WARNING: NSPredicate is a stub. To generate bindings for this class, include
@@ -23617,20 +23536,20 @@ extension ObjCBlock_ffiVoid_UIImage$CallExtension on objc.ObjCBlock<ffi.Void Fun
 }
 
 
-/// Construction methods for `objc.ObjCBlock<ffi.Void Function(ffi.Bool)>`.
-abstract final class ObjCBlock_ffiVoid_bool {
+/// Construction methods for `objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>)>`.
+abstract final class ObjCBlock_ffiVoid_ffiVoid {
   /// Returns a block that wraps the given raw block pointer.
-  static objc.ObjCBlock<ffi.Void Function(ffi.Bool)> fromPointer(ffi.Pointer<objc.ObjCBlockImpl> pointer,
+  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>)> fromPointer(ffi.Pointer<objc.ObjCBlockImpl> pointer,
       {bool retain = false, bool release = false}) =>
-      objc.ObjCBlock<ffi.Void Function(ffi.Bool)>(pointer, retain: retain, release: release);
+      objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>)>(pointer, retain: retain, release: release);
 
   /// Creates a block from a C function pointer.
   ///
   /// This block must be invoked by native code running on the same thread as
   /// the isolate that registered it. Invoking the block on the wrong thread
   /// will result in a crash.
-  static objc.ObjCBlock<ffi.Void Function(ffi.Bool)> fromFunctionPointer(ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Bool arg0)>> ptr) =>
-      objc.ObjCBlock<ffi.Void Function(ffi.Bool)>(objc.newPointerBlock(_fnPtrCallable, ptr.cast()),
+  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>)> fromFunctionPointer(ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void> arg0)>> ptr) =>
+      objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>)>(objc.newPointerBlock(_fnPtrCallable, ptr.cast()),
           retain: false, release: true);
 
   /// Creates a block from a Dart function.
@@ -23641,9 +23560,9 @@ abstract final class ObjCBlock_ffiVoid_bool {
   ///
   /// If `keepIsolateAlive` is true, this block will keep this isolate alive
   /// until it is garbage collected by both Dart and ObjC.
-  static objc.ObjCBlock<ffi.Void Function(ffi.Bool)> fromFunction(void Function(bool ) fn,
+  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>)> fromFunction(void Function(ffi.Pointer<ffi.Void> ) fn,
           {bool keepIsolateAlive = true}) =>
-      objc.ObjCBlock<ffi.Void Function(ffi.Bool)>(objc.newClosureBlock(_closureCallable, (bool arg0) => fn(arg0), keepIsolateAlive),
+      objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>)>(objc.newClosureBlock(_closureCallable, (ffi.Pointer<ffi.Void> arg0) => fn(arg0), keepIsolateAlive),
           retain: false, release: true);
 
   /// Creates a listener block from a Dart function.
@@ -23655,13 +23574,13 @@ abstract final class ObjCBlock_ffiVoid_bool {
   ///
   /// If `keepIsolateAlive` is true, this block will keep this isolate alive
   /// until it is garbage collected by both Dart and ObjC.
-  static objc.ObjCBlock<ffi.Void Function(ffi.Bool)> listener(void Function(bool ) fn,
+  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>)> listener(void Function(ffi.Pointer<ffi.Void> ) fn,
           {bool keepIsolateAlive = true}) {
     final raw = objc.newClosureBlock(_listenerCallable.nativeFunction.cast(),
-        (bool arg0) => fn(arg0), keepIsolateAlive);
-    final wrapper = _6admjt_wrapListenerBlock_1s56lr9(raw);
+        (ffi.Pointer<ffi.Void> arg0) => fn(arg0), keepIsolateAlive);
+    final wrapper = _6admjt_wrapListenerBlock_ovsamd(raw);
     objc.objectRelease(raw.cast());
-    return objc.ObjCBlock<ffi.Void Function(ffi.Bool)>(wrapper, retain: false, release: true);
+    return objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>)>(wrapper, retain: false, release: true);
   }
 
   /// Creates a blocking block from a Dart function.
@@ -23674,60 +23593,60 @@ abstract final class ObjCBlock_ffiVoid_bool {
   /// until it is garbage collected by both Dart and ObjC. If the owner isolate
   /// has shut down, and the block is invoked by native code, it may block
   /// indefinitely, or have other undefined behavior.
-  static objc.ObjCBlock<ffi.Void Function(ffi.Bool)> blocking(void Function(bool ) fn,
+  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>)> blocking(void Function(ffi.Pointer<ffi.Void> ) fn,
           {bool keepIsolateAlive = true}) {
     final raw = objc.newClosureBlock(_blockingCallable.nativeFunction.cast(),
-        (bool arg0) => fn(arg0), keepIsolateAlive);
+        (ffi.Pointer<ffi.Void> arg0) => fn(arg0), keepIsolateAlive);
     final rawListener = objc.newClosureBlock(
         _blockingListenerCallable.nativeFunction.cast(),
-        (bool arg0) => fn(arg0), keepIsolateAlive);
-    final wrapper = _6admjt_wrapBlockingBlock_1s56lr9(raw, rawListener, objc.objCContext);
+        (ffi.Pointer<ffi.Void> arg0) => fn(arg0), keepIsolateAlive);
+    final wrapper = _6admjt_wrapBlockingBlock_ovsamd(raw, rawListener, objc.objCContext);
     objc.objectRelease(raw.cast());
     objc.objectRelease(rawListener.cast());
-    return objc.ObjCBlock<ffi.Void Function(ffi.Bool)>(wrapper, retain: false, release: true);
+    return objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>)>(wrapper, retain: false, release: true);
   }
 
   static void _listenerTrampoline(
-      ffi.Pointer<objc.ObjCBlockImpl> block, bool arg0) {
-    (objc.getBlockClosure(block) as void Function(bool ))(arg0);
+      ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0) {
+    (objc.getBlockClosure(block) as void Function(ffi.Pointer<ffi.Void> ))(arg0);
     objc.objectRelease(block.cast());
   }
-  static ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Bool )> _listenerCallable =
-      ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Bool )>.listener(_listenerTrampoline )
+  static ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> )> _listenerCallable =
+      ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> )>.listener(_listenerTrampoline )
           ..keepIsolateAlive = false;
   static void _blockingTrampoline(
-      ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> waiter, bool arg0) {
+      ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> waiter, ffi.Pointer<ffi.Void> arg0) {
     try {
-      (objc.getBlockClosure(block) as void Function(bool ))(arg0);
+      (objc.getBlockClosure(block) as void Function(ffi.Pointer<ffi.Void> ))(arg0);
     } catch (e) {
     } finally {
       objc.signalWaiter(waiter);
       objc.objectRelease(block.cast());
     }
   }
-  static ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Bool )> _blockingCallable =
-      ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Bool )>.isolateLocal(
+  static ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<ffi.Void> )> _blockingCallable =
+      ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<ffi.Void> )>.isolateLocal(
           _blockingTrampoline )..keepIsolateAlive = false;
-  static ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Bool )> _blockingListenerCallable =
-      ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Bool )>.listener(
+  static ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<ffi.Void> )> _blockingListenerCallable =
+      ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<ffi.Void> )>.listener(
           _blockingTrampoline )..keepIsolateAlive = false;
   static void _fnPtrTrampoline(
-      ffi.Pointer<objc.ObjCBlockImpl> block, bool arg0) =>
-          block.ref.target.cast<ffi.NativeFunction<ffi.Void Function(ffi.Bool arg0)>>()
-              .asFunction<void Function(bool )>()(arg0);
+      ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0) =>
+          block.ref.target.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void> arg0)>>()
+              .asFunction<void Function(ffi.Pointer<ffi.Void> )>()(arg0);
   static ffi.Pointer<ffi.Void> _fnPtrCallable = ffi.Pointer.fromFunction<
-      ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Bool )>(_fnPtrTrampoline ).cast();
+      ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> )>(_fnPtrTrampoline ).cast();
   static void _closureTrampoline(
-      ffi.Pointer<objc.ObjCBlockImpl> block, bool arg0) =>
-      (objc.getBlockClosure(block) as void Function(bool ))(arg0);
+      ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0) =>
+      (objc.getBlockClosure(block) as void Function(ffi.Pointer<ffi.Void> ))(arg0);
   static ffi.Pointer<ffi.Void> _closureCallable = ffi.Pointer.fromFunction<
-      ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Bool )>(_closureTrampoline ).cast();
+      ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> )>(_closureTrampoline ).cast();
 }
 
-/// Call operator for `objc.ObjCBlock<ffi.Void Function(ffi.Bool)>`.
-extension ObjCBlock_ffiVoid_bool$CallExtension on objc.ObjCBlock<ffi.Void Function(ffi.Bool)> {
-  void call(bool arg0) =>ref.pointer.ref.invoke.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Bool arg0)>>()
-  .asFunction<void Function(ffi.Pointer<objc.ObjCBlockImpl> , bool )>()(
+/// Call operator for `objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>)>`.
+extension ObjCBlock_ffiVoid_ffiVoid$CallExtension on objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>)> {
+  void call(ffi.Pointer<ffi.Void> arg0) =>ref.pointer.ref.invoke.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0)>>()
+  .asFunction<void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> )>()(
     ref.pointer, arg0);
 }
 
@@ -26816,343 +26735,6 @@ extension type UICommand._(objc.ObjCObject object$) implements objc.ObjCObject,U
 }
 
 
-/// UIConstraintBasedCompatibility
-extension UIConstraintBasedCompatibility on UIView {
-
-  /// setTranslatesAutoresizingMaskIntoConstraints:
-  set translatesAutoresizingMaskIntoConstraints(bool value) {
-  objc.checkOsVersionInternal('UIView.setTranslatesAutoresizingMaskIntoConstraints:', iOS: (false, (6, 0, 0)));
-_objc_msgSend_1s56lr9(object$.ref.pointer, _sel_setTranslatesAutoresizingMaskIntoConstraints_, value);
-
-  }
-
-
-  /// translatesAutoresizingMaskIntoConstraints
-  bool get translatesAutoresizingMaskIntoConstraints {
-  objc.checkOsVersionInternal('UIView.translatesAutoresizingMaskIntoConstraints', iOS: (false, (6, 0, 0)));
-    return _objc_msgSend_91o635(object$.ref.pointer, _sel_translatesAutoresizingMaskIntoConstraints);
-
-  }
-
-
-  /// requiresConstraintBasedLayout
-  static bool getRequiresConstraintBasedLayout() {
-  objc.checkOsVersionInternal('UIView.requiresConstraintBasedLayout', iOS: (false, (6, 0, 0)));
-    return _objc_msgSend_91o635(_class_UIView, _sel_requiresConstraintBasedLayout);
-
-  }
-
-}
-
-
-/// UIConstraintBasedLayoutCoreMethods
-extension UIConstraintBasedLayoutCoreMethods on UIView {
-
-  /// needsUpdateConstraints
-  bool needsUpdateConstraints() {
-  objc.checkOsVersionInternal('UIView.needsUpdateConstraints', iOS: (false, (6, 0, 0)));
-    return _objc_msgSend_91o635(object$.ref.pointer, _sel_needsUpdateConstraints);
-
-  }
-
-
-  /// setNeedsUpdateConstraints
-  void setNeedsUpdateConstraints() {
-  objc.checkOsVersionInternal('UIView.setNeedsUpdateConstraints', iOS: (false, (6, 0, 0)));
-_objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_setNeedsUpdateConstraints);
-
-  }
-
-
-  /// updateConstraints
-  void updateConstraints() {
-  objc.checkOsVersionInternal('UIView.updateConstraints', iOS: (false, (6, 0, 0)));
-_objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_updateConstraints);
-
-  }
-
-
-  /// updateConstraintsIfNeeded
-  void updateConstraintsIfNeeded() {
-  objc.checkOsVersionInternal('UIView.updateConstraintsIfNeeded', iOS: (false, (6, 0, 0)));
-_objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_updateConstraintsIfNeeded);
-
-  }
-
-}
-
-
-/// UIConstraintBasedLayoutDebugging
-extension UIConstraintBasedLayoutDebugging on UIView {
-
-  /// constraintsAffectingLayoutForAxis:
-  objc.NSArray constraintsAffectingLayoutForAxis(int axis) {
-  objc.checkOsVersionInternal('UIView.constraintsAffectingLayoutForAxis:', iOS: (false, (6, 0, 0)));
-    final $ret = _objc_msgSend_5swr7b(object$.ref.pointer, _sel_constraintsAffectingLayoutForAxis_, axis);
-    return objc.NSArray.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// exerciseAmbiguityInLayout
-  void exerciseAmbiguityInLayout() {
-  objc.checkOsVersionInternal('UIView.exerciseAmbiguityInLayout', iOS: (false, (6, 0, 0)));
-_objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_exerciseAmbiguityInLayout);
-
-  }
-
-
-  /// hasAmbiguousLayout
-  bool get hasAmbiguousLayout {
-  objc.checkOsVersionInternal('UIView.hasAmbiguousLayout', iOS: (false, (6, 0, 0)));
-    return _objc_msgSend_91o635(object$.ref.pointer, _sel_hasAmbiguousLayout);
-
-  }
-
-}
-
-
-/// UIConstraintBasedLayoutFittingSize
-extension UIConstraintBasedLayoutFittingSize on UIView {
-
-  /// systemLayoutSizeFittingSize:
-  objc.CGSize systemLayoutSizeFittingSize(objc.CGSize targetSize) {
-  objc.checkOsVersionInternal('UIView.systemLayoutSizeFittingSize:', iOS: (false, (6, 0, 0)));
-    final $ptr = pkg_ffi.calloc<objc.CGSize>();
-    objc.useMsgSendVariants ? _objc_msgSend_1owrp3bStret($ptr, object$.ref.pointer, _sel_systemLayoutSizeFittingSize_, targetSize) : $ptr.ref = _objc_msgSend_1owrp3b(object$.ref.pointer, _sel_systemLayoutSizeFittingSize_, targetSize);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<objc.CGSize>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<objc.CGSize>(
-        $finalizable);
-
-  }
-
-
-  /// systemLayoutSizeFittingSize:withHorizontalFittingPriority:verticalFittingPriority:
-  objc.CGSize systemLayoutSizeFittingSize$1(objc.CGSize targetSize, {required double withHorizontalFittingPriority,required double verticalFittingPriority}) {
-  objc.checkOsVersionInternal('UIView.systemLayoutSizeFittingSize:withHorizontalFittingPriority:verticalFittingPriority:', iOS: (false, (8, 0, 0)));
-    final $ptr = pkg_ffi.calloc<objc.CGSize>();
-    objc.useMsgSendVariants ? _objc_msgSend_3fx2qnStret($ptr, object$.ref.pointer, _sel_systemLayoutSizeFittingSize_withHorizontalFittingPriority_verticalFittingPriority_, targetSize, withHorizontalFittingPriority, verticalFittingPriority) : $ptr.ref = _objc_msgSend_3fx2qn(object$.ref.pointer, _sel_systemLayoutSizeFittingSize_withHorizontalFittingPriority_verticalFittingPriority_, targetSize, withHorizontalFittingPriority, verticalFittingPriority);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<objc.CGSize>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<objc.CGSize>(
-        $finalizable);
-
-  }
-
-}
-
-
-/// UIConstraintBasedLayoutInstallingConstraints
-extension UIConstraintBasedLayoutInstallingConstraints on UIView {
-
-  /// addConstraint:
-  void addConstraint(NSLayoutConstraint constraint) {
-  objc.checkOsVersionInternal('UIView.addConstraint:', iOS: (false, (6, 0, 0)));
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_addConstraint_, constraint.ref.pointer);
-
-  }
-
-
-  /// addConstraints:
-  void addConstraints(objc.NSArray constraints) {
-  objc.checkOsVersionInternal('UIView.addConstraints:', iOS: (false, (6, 0, 0)));
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_addConstraints_, constraints.ref.pointer);
-
-  }
-
-
-  /// constraints
-  objc.NSArray get constraints {
-  objc.checkOsVersionInternal('UIView.constraints', iOS: (false, (6, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_constraints);
-    return objc.NSArray.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// removeConstraint:
-  void removeConstraint(NSLayoutConstraint constraint) {
-  objc.checkOsVersionInternal('UIView.removeConstraint:', iOS: (false, (6, 0, 0)));
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_removeConstraint_, constraint.ref.pointer);
-
-  }
-
-
-  /// removeConstraints:
-  void removeConstraints(objc.NSArray constraints) {
-  objc.checkOsVersionInternal('UIView.removeConstraints:', iOS: (false, (6, 0, 0)));
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_removeConstraints_, constraints.ref.pointer);
-
-  }
-
-}
-
-
-/// UIConstraintBasedLayoutLayering
-extension UIConstraintBasedLayoutLayering on UIView {
-
-  /// alignmentRectForFrame:
-  objc.CGRect alignmentRectForFrame(objc.CGRect frame) {
-  objc.checkOsVersionInternal('UIView.alignmentRectForFrame:', iOS: (false, (6, 0, 0)));
-    final $ptr = pkg_ffi.calloc<objc.CGRect>();
-    objc.useMsgSendVariants ? _objc_msgSend_1gn1s3dStret($ptr, object$.ref.pointer, _sel_alignmentRectForFrame_, frame) : $ptr.ref = _objc_msgSend_1gn1s3d(object$.ref.pointer, _sel_alignmentRectForFrame_, frame);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<objc.CGRect>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<objc.CGRect>(
-        $finalizable);
-
-  }
-
-
-  /// alignmentRectInsets
-  UIEdgeInsets get alignmentRectInsets {
-  objc.checkOsVersionInternal('UIView.alignmentRectInsets', iOS: (false, (6, 0, 0)));
-    final $ptr = pkg_ffi.calloc<UIEdgeInsets>();
-    objc.useMsgSendVariants ? _objc_msgSend_ct4cu5Stret($ptr, object$.ref.pointer, _sel_alignmentRectInsets) : $ptr.ref = _objc_msgSend_ct4cu5(object$.ref.pointer, _sel_alignmentRectInsets);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<UIEdgeInsets>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<UIEdgeInsets>(
-        $finalizable);
-
-  }
-
-
-  /// contentCompressionResistancePriorityForAxis:
-  double contentCompressionResistancePriorityForAxis(int axis) {
-  objc.checkOsVersionInternal('UIView.contentCompressionResistancePriorityForAxis:', iOS: (false, (6, 0, 0)));
-    return objc.useMsgSendVariants ? _objc_msgSend_qigf85Fpret(object$.ref.pointer, _sel_contentCompressionResistancePriorityForAxis_, axis) : _objc_msgSend_qigf85(object$.ref.pointer, _sel_contentCompressionResistancePriorityForAxis_, axis);
-
-  }
-
-
-  /// contentHuggingPriorityForAxis:
-  double contentHuggingPriorityForAxis(int axis) {
-  objc.checkOsVersionInternal('UIView.contentHuggingPriorityForAxis:', iOS: (false, (6, 0, 0)));
-    return objc.useMsgSendVariants ? _objc_msgSend_qigf85Fpret(object$.ref.pointer, _sel_contentHuggingPriorityForAxis_, axis) : _objc_msgSend_qigf85(object$.ref.pointer, _sel_contentHuggingPriorityForAxis_, axis);
-
-  }
-
-
-  /// frameForAlignmentRect:
-  objc.CGRect frameForAlignmentRect(objc.CGRect alignmentRect) {
-  objc.checkOsVersionInternal('UIView.frameForAlignmentRect:', iOS: (false, (6, 0, 0)));
-    final $ptr = pkg_ffi.calloc<objc.CGRect>();
-    objc.useMsgSendVariants ? _objc_msgSend_1gn1s3dStret($ptr, object$.ref.pointer, _sel_frameForAlignmentRect_, alignmentRect) : $ptr.ref = _objc_msgSend_1gn1s3d(object$.ref.pointer, _sel_frameForAlignmentRect_, alignmentRect);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<objc.CGRect>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<objc.CGRect>(
-        $finalizable);
-
-  }
-
-
-  /// intrinsicContentSize
-  objc.CGSize get intrinsicContentSize {
-  objc.checkOsVersionInternal('UIView.intrinsicContentSize', iOS: (false, (6, 0, 0)));
-    final $ptr = pkg_ffi.calloc<objc.CGSize>();
-    objc.useMsgSendVariants ? _objc_msgSend_1vdfkenStret($ptr, object$.ref.pointer, _sel_intrinsicContentSize) : $ptr.ref = _objc_msgSend_1vdfken(object$.ref.pointer, _sel_intrinsicContentSize);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<objc.CGSize>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<objc.CGSize>(
-        $finalizable);
-
-  }
-
-
-  /// invalidateIntrinsicContentSize
-  void invalidateIntrinsicContentSize() {
-  objc.checkOsVersionInternal('UIView.invalidateIntrinsicContentSize', iOS: (false, (6, 0, 0)));
-_objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_invalidateIntrinsicContentSize);
-
-  }
-
-
-  /// setContentCompressionResistancePriority:forAxis:
-  void setContentCompressionResistancePriority(double priority, {required int forAxis}) {
-  objc.checkOsVersionInternal('UIView.setContentCompressionResistancePriority:forAxis:', iOS: (false, (6, 0, 0)));
-_objc_msgSend_wd7esz(object$.ref.pointer, _sel_setContentCompressionResistancePriority_forAxis_, priority, forAxis);
-
-  }
-
-
-  /// setContentHuggingPriority:forAxis:
-  void setContentHuggingPriority(double priority, {required int forAxis}) {
-  objc.checkOsVersionInternal('UIView.setContentHuggingPriority:forAxis:', iOS: (false, (6, 0, 0)));
-_objc_msgSend_wd7esz(object$.ref.pointer, _sel_setContentHuggingPriority_forAxis_, priority, forAxis);
-
-  }
-
-
-  /// viewForBaselineLayout
-  UIView viewForBaselineLayout() {
-  objc.checkOsVersionInternal('UIView.viewForBaselineLayout', iOS: (false, (6, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_viewForBaselineLayout);
-    return UIView.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// viewForFirstBaselineLayout
-  UIView get viewForFirstBaselineLayout {
-  objc.checkOsVersionInternal('UIView.viewForFirstBaselineLayout', iOS: (false, (9, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_viewForFirstBaselineLayout);
-    return UIView.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// viewForLastBaselineLayout
-  UIView get viewForLastBaselineLayout {
-  objc.checkOsVersionInternal('UIView.viewForLastBaselineLayout', iOS: (false, (9, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_viewForLastBaselineLayout);
-    return UIView.fromPointer($ret, retain: true, release: true);
-  }
-
-}
-
-
-/// UIContentSizeCategoryLimit
-extension UIContentSizeCategoryLimit on UIView {
-
-  /// appliedContentSizeCategoryLimitsDescription
-  objc.NSString get appliedContentSizeCategoryLimitsDescription {
-  objc.checkOsVersionInternal('UIView.appliedContentSizeCategoryLimitsDescription', iOS: (false, (15, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_appliedContentSizeCategoryLimitsDescription);
-    return objc.NSString.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// maximumContentSizeCategory
-  objc.NSString? get maximumContentSizeCategory {
-  objc.checkOsVersionInternal('UIView.maximumContentSizeCategory', iOS: (false, (15, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_maximumContentSizeCategory);
-    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// minimumContentSizeCategory
-  objc.NSString? get minimumContentSizeCategory {
-  objc.checkOsVersionInternal('UIView.minimumContentSizeCategory', iOS: (false, (15, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_minimumContentSizeCategory);
-    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// setMaximumContentSizeCategory:
-  set maximumContentSizeCategory(objc.NSString? value) {
-  objc.checkOsVersionInternal('UIView.setMaximumContentSizeCategory:', iOS: (false, (15, 0, 0)));
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setMaximumContentSizeCategory_, value?.ref.pointer ?? ffi.nullptr);
-
-  }
-
-
-  /// setMinimumContentSizeCategory:
-  set minimumContentSizeCategory(objc.NSString? value) {
-  objc.checkOsVersionInternal('UIView.setMinimumContentSizeCategory:', iOS: (false, (15, 0, 0)));
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setMinimumContentSizeCategory_, value?.ref.pointer ?? ffi.nullptr);
-
-  }
-
-}
-
-
 /// WARNING: UIControl is a stub. To generate bindings for this class, include
 /// UIControl in your config's objc-interfaces list.
 ///
@@ -27186,27 +26768,6 @@ extension type UICoordinateSpace._(objc.ObjCProtocol object$) implements objc.Ob
   UICoordinateSpace.fromPointer(ffi.Pointer<objc.ObjCObjectImpl> other,
       {bool retain = false, bool release = false}) :
       object$ = objc.ObjCProtocol(other, retain: retain, release: release);
-}
-
-
-/// WARNING: UICornerConfiguration is a stub. To generate bindings for this class, include
-/// UICornerConfiguration in your config's objc-interfaces list.
-///
-/// UICornerConfiguration
-extension type UICornerConfiguration._(objc.ObjCObject object$) implements objc.ObjCObject,objc.NSObject,objc.NSCopying {
-  /// Constructs a [UICornerConfiguration] that points to the same underlying object as [other].
-  UICornerConfiguration.as(objc.ObjCObject other) : object$ = other {
-    objc.checkOsVersionInternal('UICornerConfiguration', iOS: (false, (26, 0, 0)));
-  }
-
-  /// Constructs a [UICornerConfiguration] that wraps the given raw object pointer.
-  UICornerConfiguration.fromPointer(ffi.Pointer<objc.ObjCObjectImpl> other,
-      {bool retain = false, bool release = false}) :
-          object$ = objc.ObjCObject(other, retain: retain, release: release) {
-    objc.checkOsVersionInternal('UICornerConfiguration', iOS: (false, (26, 0, 0)));
-  }
-
-
 }
 
 
@@ -27266,6 +26827,11 @@ extension type UIDynamicItem._(objc.ObjCProtocol object$) implements objc.ObjCPr
       object$ = objc.ObjCProtocol(other, retain: retain, release: release);
 }
 
+sealed class UIDynamicItemCollisionBoundsType {
+  static const UIDynamicItemCollisionBoundsTypeRectangle = 0;
+  static const UIDynamicItemCollisionBoundsTypeEllipse = 1;
+  static const UIDynamicItemCollisionBoundsTypePath = 2;}
+
 final class UIEdgeInsets extends ffi.Struct{
   @ffi.Double()
   external double top;
@@ -27321,6 +26887,48 @@ sealed class UIEventSubtype {
   static const UIEventSubtypeRemoteControlEndSeekingForward = 109;}
 
 
+/// WARNING: UIFocusAnimationCoordinator is a stub. To generate bindings for this class, include
+/// UIFocusAnimationCoordinator in your config's objc-interfaces list.
+///
+/// UIFocusAnimationCoordinator
+extension type UIFocusAnimationCoordinator._(objc.ObjCObject object$) implements objc.ObjCObject,objc.NSObject {
+  /// Constructs a [UIFocusAnimationCoordinator] that points to the same underlying object as [other].
+  UIFocusAnimationCoordinator.as(objc.ObjCObject other) : object$ = other {
+    objc.checkOsVersionInternal('UIFocusAnimationCoordinator', iOS: (false, (9, 0, 0)));
+  }
+
+  /// Constructs a [UIFocusAnimationCoordinator] that wraps the given raw object pointer.
+  UIFocusAnimationCoordinator.fromPointer(ffi.Pointer<objc.ObjCObjectImpl> other,
+      {bool retain = false, bool release = false}) :
+          object$ = objc.ObjCObject(other, retain: retain, release: release) {
+    objc.checkOsVersionInternal('UIFocusAnimationCoordinator', iOS: (false, (9, 0, 0)));
+  }
+
+
+}
+
+
+/// WARNING: UIFocusEffect is a stub. To generate bindings for this class, include
+/// UIFocusEffect in your config's objc-interfaces list.
+///
+/// UIFocusEffect
+extension type UIFocusEffect._(objc.ObjCObject object$) implements objc.ObjCObject,objc.NSObject,objc.NSCopying {
+  /// Constructs a [UIFocusEffect] that points to the same underlying object as [other].
+  UIFocusEffect.as(objc.ObjCObject other) : object$ = other {
+    objc.checkOsVersionInternal('UIFocusEffect', iOS: (false, (15, 0, 0)));
+  }
+
+  /// Constructs a [UIFocusEffect] that wraps the given raw object pointer.
+  UIFocusEffect.fromPointer(ffi.Pointer<objc.ObjCObjectImpl> other,
+      {bool retain = false, bool release = false}) :
+          object$ = objc.ObjCObject(other, retain: retain, release: release) {
+    objc.checkOsVersionInternal('UIFocusEffect', iOS: (false, (15, 0, 0)));
+  }
+
+
+}
+
+
 /// WARNING: UIFocusEnvironment is a stub. To generate bindings for this class, include
 /// UIFocusEnvironment in your config's objc-protocols list.
 ///
@@ -27363,6 +26971,53 @@ extension type UIFocusItemContainer._(objc.ObjCProtocol object$) implements objc
   UIFocusItemContainer.fromPointer(ffi.Pointer<objc.ObjCObjectImpl> other,
       {bool retain = false, bool release = false}) :
       object$ = objc.ObjCProtocol(other, retain: retain, release: release);
+}
+
+sealed class UIFocusItemDeferralMode {
+  static const UIFocusItemDeferralModeAutomatic = 0;
+  static const UIFocusItemDeferralModeAlways = 1;
+  static const UIFocusItemDeferralModeNever = 2;}
+
+
+/// WARNING: UIFocusMovementHint is a stub. To generate bindings for this class, include
+/// UIFocusMovementHint in your config's objc-interfaces list.
+///
+/// UIFocusMovementHint
+extension type UIFocusMovementHint._(objc.ObjCObject object$) implements objc.ObjCObject,objc.NSObject,objc.NSCopying {
+  /// Constructs a [UIFocusMovementHint] that points to the same underlying object as [other].
+  UIFocusMovementHint.as(objc.ObjCObject other) : object$ = other {
+    objc.checkOsVersionInternal('UIFocusMovementHint', iOS: (false, (12, 0, 0)));
+  }
+
+  /// Constructs a [UIFocusMovementHint] that wraps the given raw object pointer.
+  UIFocusMovementHint.fromPointer(ffi.Pointer<objc.ObjCObjectImpl> other,
+      {bool retain = false, bool release = false}) :
+          object$ = objc.ObjCObject(other, retain: retain, release: release) {
+    objc.checkOsVersionInternal('UIFocusMovementHint', iOS: (false, (12, 0, 0)));
+  }
+
+
+}
+
+
+/// WARNING: UIFocusUpdateContext is a stub. To generate bindings for this class, include
+/// UIFocusUpdateContext in your config's objc-interfaces list.
+///
+/// UIFocusUpdateContext
+extension type UIFocusUpdateContext._(objc.ObjCObject object$) implements objc.ObjCObject,objc.NSObject {
+  /// Constructs a [UIFocusUpdateContext] that points to the same underlying object as [other].
+  UIFocusUpdateContext.as(objc.ObjCObject other) : object$ = other {
+    objc.checkOsVersionInternal('UIFocusUpdateContext', iOS: (false, (9, 0, 0)));
+  }
+
+  /// Constructs a [UIFocusUpdateContext] that wraps the given raw object pointer.
+  UIFocusUpdateContext.fromPointer(ffi.Pointer<objc.ObjCObjectImpl> other,
+      {bool retain = false, bool release = false}) :
+          object$ = objc.ObjCObject(other, retain: retain, release: release) {
+    objc.checkOsVersionInternal('UIFocusUpdateContext', iOS: (false, (9, 0, 0)));
+  }
+
+
 }
 
 
@@ -28317,81 +27972,6 @@ extension type UIImageView._(objc.ObjCObject object$) implements objc.ObjCObject
 }
 
 
-/// WARNING: UIKeyboardLayoutGuide is a stub. To generate bindings for this class, include
-/// UIKeyboardLayoutGuide in your config's objc-interfaces list.
-///
-/// UIKeyboardLayoutGuide
-extension type UIKeyboardLayoutGuide._(objc.ObjCObject object$) implements objc.ObjCObject,UITrackingLayoutGuide {
-  /// Constructs a [UIKeyboardLayoutGuide] that points to the same underlying object as [other].
-  UIKeyboardLayoutGuide.as(objc.ObjCObject other) : object$ = other {
-    objc.checkOsVersionInternal('UIKeyboardLayoutGuide', iOS: (false, (15, 0, 0)));
-  }
-
-  /// Constructs a [UIKeyboardLayoutGuide] that wraps the given raw object pointer.
-  UIKeyboardLayoutGuide.fromPointer(ffi.Pointer<objc.ObjCObjectImpl> other,
-      {bool retain = false, bool release = false}) :
-          object$ = objc.ObjCObject(other, retain: retain, release: release) {
-    objc.checkOsVersionInternal('UIKeyboardLayoutGuide', iOS: (false, (15, 0, 0)));
-  }
-
-
-}
-
-sealed class UILayoutConstraintAxis {
-  static const UILayoutConstraintAxisHorizontal = 0;
-  static const UILayoutConstraintAxisVertical = 1;}
-
-
-/// WARNING: UILayoutGuide is a stub. To generate bindings for this class, include
-/// UILayoutGuide in your config's objc-interfaces list.
-///
-/// UILayoutGuide
-extension type UILayoutGuide._(objc.ObjCObject object$) implements objc.ObjCObject,objc.NSObject,objc.NSCoding {
-  /// Constructs a [UILayoutGuide] that points to the same underlying object as [other].
-  UILayoutGuide.as(objc.ObjCObject other) : object$ = other {
-    objc.checkOsVersionInternal('UILayoutGuide', iOS: (false, (9, 0, 0)));
-  }
-
-  /// Constructs a [UILayoutGuide] that wraps the given raw object pointer.
-  UILayoutGuide.fromPointer(ffi.Pointer<objc.ObjCObjectImpl> other,
-      {bool retain = false, bool release = false}) :
-          object$ = objc.ObjCObject(other, retain: retain, release: release) {
-    objc.checkOsVersionInternal('UILayoutGuide', iOS: (false, (9, 0, 0)));
-  }
-
-
-}
-
-
-/// UILayoutGuideSupport
-extension UILayoutGuideSupport on UIView {
-
-  /// addLayoutGuide:
-  void addLayoutGuide(UILayoutGuide layoutGuide) {
-  objc.checkOsVersionInternal('UIView.addLayoutGuide:', iOS: (false, (9, 0, 0)));
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_addLayoutGuide_, layoutGuide.ref.pointer);
-
-  }
-
-
-  /// layoutGuides
-  objc.NSArray get layoutGuides {
-  objc.checkOsVersionInternal('UIView.layoutGuides', iOS: (false, (9, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_layoutGuides);
-    return objc.NSArray.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// removeLayoutGuide:
-  void removeLayoutGuide(UILayoutGuide layoutGuide) {
-  objc.checkOsVersionInternal('UIView.removeLayoutGuide:', iOS: (false, (9, 0, 0)));
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_removeLayoutGuide_, layoutGuide.ref.pointer);
-
-  }
-
-}
-
-
 /// UIMenu
 extension type UIMenu._(objc.ObjCObject object$) implements objc.ObjCObject,UIMenuElement {
   /// Constructs a [UIMenu] that points to the same underlying object as [other].
@@ -28742,27 +28322,6 @@ sealed class UIMenuOptions {
   static const UIMenuOptionsDisplayAsPalette = 128;}
 
 
-/// WARNING: UIMotionEffect is a stub. To generate bindings for this class, include
-/// UIMotionEffect in your config's objc-interfaces list.
-///
-/// UIMotionEffect
-extension type UIMotionEffect._(objc.ObjCObject object$) implements objc.ObjCObject,objc.NSObject,objc.NSCopying,objc.NSCoding {
-  /// Constructs a [UIMotionEffect] that points to the same underlying object as [other].
-  UIMotionEffect.as(objc.ObjCObject other) : object$ = other {
-    objc.checkOsVersionInternal('UIMotionEffect', iOS: (false, (7, 0, 0)));
-  }
-
-  /// Constructs a [UIMotionEffect] that wraps the given raw object pointer.
-  UIMotionEffect.fromPointer(ffi.Pointer<objc.ObjCObjectImpl> other,
-      {bool retain = false, bool release = false}) :
-          object$ = objc.ObjCObject(other, retain: retain, release: release) {
-    objc.checkOsVersionInternal('UIMotionEffect', iOS: (false, (7, 0, 0)));
-  }
-
-
-}
-
-
 /// UIPointerEffect
 extension type UIPointerEffect._(objc.ObjCObject object$) implements objc.ObjCObject,objc.NSObject,objc.NSCopying,UIHoverEffect {
   /// Constructs a [UIPointerEffect] that points to the same underlying object as [other].
@@ -29074,13 +28633,6 @@ extension type UIPressesEvent._(objc.ObjCObject object$) implements objc.ObjCObj
 
 
 }
-
-sealed class UIRectCorner {
-  static const UIRectCornerTopLeft = 1;
-  static const UIRectCornerTopRight = 2;
-  static const UIRectCornerBottomLeft = 4;
-  static const UIRectCornerBottomRight = 8;
-  static const UIRectCornerAllCorners = -1;}
 
 
 /// UIResponder
@@ -30172,75 +29724,6 @@ extension type UIShapeProvider._(objc.ObjCProtocol object$) implements objc.ObjC
 }
 
 
-/// UISnapshotting
-extension UISnapshotting on UIView {
-
-  /// drawViewHierarchyInRect:afterScreenUpdates:
-  bool drawViewHierarchyInRect(objc.CGRect rect, {required bool afterScreenUpdates}) {
-  objc.checkOsVersionInternal('UIView.drawViewHierarchyInRect:afterScreenUpdates:', iOS: (false, (7, 0, 0)));
-    return _objc_msgSend_19ljaqg(object$.ref.pointer, _sel_drawViewHierarchyInRect_afterScreenUpdates_, rect, afterScreenUpdates);
-
-  }
-
-
-  /// resizableSnapshotViewFromRect:afterScreenUpdates:withCapInsets:
-  UIView? resizableSnapshotViewFromRect(objc.CGRect rect, {required bool afterScreenUpdates,required UIEdgeInsets withCapInsets}) {
-  objc.checkOsVersionInternal('UIView.resizableSnapshotViewFromRect:afterScreenUpdates:withCapInsets:', iOS: (false, (7, 0, 0)));
-    final $ret = _objc_msgSend_qvletk(object$.ref.pointer, _sel_resizableSnapshotViewFromRect_afterScreenUpdates_withCapInsets_, rect, afterScreenUpdates, withCapInsets);
-    return $ret.address == 0 ? null : UIView.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// snapshotViewAfterScreenUpdates:
-  UIView? snapshotViewAfterScreenUpdates(bool afterUpdates) {
-  objc.checkOsVersionInternal('UIView.snapshotViewAfterScreenUpdates:', iOS: (false, (7, 0, 0)));
-    final $ret = _objc_msgSend_1t6aok9(object$.ref.pointer, _sel_snapshotViewAfterScreenUpdates_, afterUpdates);
-    return $ret.address == 0 ? null : UIView.fromPointer($ret, retain: true, release: true);
-  }
-
-}
-
-
-/// UIStateRestoration
-extension UIStateRestoration on UIView {
-
-  /// decodeRestorableStateWithCoder:
-  void decodeRestorableStateWithCoder(objc.NSCoder coder) {
-  objc.checkOsVersionInternal('UIView.decodeRestorableStateWithCoder:', iOS: (false, (6, 0, 0)));
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_decodeRestorableStateWithCoder_, coder.ref.pointer);
-
-  }
-
-
-  /// encodeRestorableStateWithCoder:
-  void encodeRestorableStateWithCoder(objc.NSCoder coder) {
-  objc.checkOsVersionInternal('UIView.encodeRestorableStateWithCoder:', iOS: (false, (6, 0, 0)));
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_encodeRestorableStateWithCoder_, coder.ref.pointer);
-
-  }
-
-
-  /// restorationIdentifier
-  objc.NSString? get restorationIdentifier {
-  objc.checkOsVersionInternal('UIView.restorationIdentifier', iOS: (false, (6, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_restorationIdentifier);
-    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// setRestorationIdentifier:
-  set restorationIdentifier(objc.NSString? value) {
-  objc.checkOsVersionInternal('UIView.setRestorationIdentifier:', iOS: (false, (6, 0, 0)));
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setRestorationIdentifier_, value?.ref.pointer ?? ffi.nullptr);
-
-  }
-
-}
-
-sealed class UISystemAnimation {
-  static const UISystemAnimationDelete = 0;}
-
-
 /// WARNING: UITargetedPreview is a stub. To generate bindings for this class, include
 /// UITargetedPreview in your config's objc-interfaces list.
 ///
@@ -30259,42 +29742,6 @@ extension type UITargetedPreview._(objc.ObjCObject object$) implements objc.ObjC
   }
 
 
-}
-
-
-/// WARNING: UITrackingLayoutGuide is a stub. To generate bindings for this class, include
-/// UITrackingLayoutGuide in your config's objc-interfaces list.
-///
-/// UITrackingLayoutGuide
-extension type UITrackingLayoutGuide._(objc.ObjCObject object$) implements objc.ObjCObject,UILayoutGuide {
-  /// Constructs a [UITrackingLayoutGuide] that points to the same underlying object as [other].
-  UITrackingLayoutGuide.as(objc.ObjCObject other) : object$ = other {
-    objc.checkOsVersionInternal('UITrackingLayoutGuide', iOS: (false, (15, 0, 0)));
-  }
-
-  /// Constructs a [UITrackingLayoutGuide] that wraps the given raw object pointer.
-  UITrackingLayoutGuide.fromPointer(ffi.Pointer<objc.ObjCObjectImpl> other,
-      {bool retain = false, bool release = false}) :
-          object$ = objc.ObjCObject(other, retain: retain, release: release) {
-    objc.checkOsVersionInternal('UITrackingLayoutGuide', iOS: (false, (15, 0, 0)));
-  }
-
-
-}
-
-
-/// WARNING: UITraitChangeObservable is a stub. To generate bindings for this class, include
-/// UITraitChangeObservable in your config's objc-protocols list.
-///
-/// UITraitChangeObservable
-extension type UITraitChangeObservable._(objc.ObjCProtocol object$) implements objc.ObjCProtocol {
-  /// Constructs a [UITraitChangeObservable] that points to the same underlying object as [other].
-  UITraitChangeObservable.as(objc.ObjCObject other) : object$ = other;
-
-  /// Constructs a [UITraitChangeObservable] that wraps the given raw object pointer.
-  UITraitChangeObservable.fromPointer(ffi.Pointer<objc.ObjCObjectImpl> other,
-      {bool retain = false, bool release = false}) :
-      object$ = objc.ObjCProtocol(other, retain: retain, release: release);
 }
 
 
@@ -30337,11 +29784,6 @@ sealed class UIUserInterfaceLayoutDirection {
   static const UIUserInterfaceLayoutDirectionLeftToRight = 0;
   static const UIUserInterfaceLayoutDirectionRightToLeft = 1;}
 
-sealed class UIUserInterfaceStyle {
-  static const UIUserInterfaceStyleUnspecified = 0;
-  static const UIUserInterfaceStyleLight = 1;
-  static const UIUserInterfaceStyleDark = 2;}
-
 
 /// UIView
 extension type UIView._(objc.ObjCObject object$) implements objc.ObjCObject,UIResponder,objc.NSCoding,UIAppearance,UIAppearanceContainer,UIDynamicItem,UITraitEnvironment,UICoordinateSpace,UIFocusItem,UIFocusItemContainer,CALayerDelegate {
@@ -30362,227 +29804,117 @@ extension type UIView._(objc.ObjCObject object$) implements objc.ObjCObject,UIRe
   /// Returns whether [obj] is an instance of [UIView].
   static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_UIView);
 
+  /// alloc
+  static UIView alloc() {
+    final $ret = _objc_msgSend_151sglz(_class_UIView, _sel_alloc);
+    return UIView.fromPointer($ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static UIView allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final $ret = _objc_msgSend_1cwp428(_class_UIView, _sel_allocWithZone_, zone);
+    return UIView.fromPointer($ret, retain: false, release: true);
+  }
+
+
+  /// appearance
+  static UIView appearance() {
+    final $ret = _objc_msgSend_151sglz(_class_UIView, _sel_appearance);
+    return UIView.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// appearanceForTraitCollection:
+  static UIView appearanceForTraitCollection(UITraitCollection trait) {
+  objc.checkOsVersionInternal('UIView.appearanceForTraitCollection:', iOS: (false, (8, 0, 0)));
+    final $ret = _objc_msgSend_1sotr3r(_class_UIView, _sel_appearanceForTraitCollection_, trait.ref.pointer);
+    return UIView.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// appearanceForTraitCollection:whenContainedIn:
+  static UIView appearanceForTraitCollection$1(UITraitCollection trait, {UIAppearanceContainer? whenContainedIn}) {
+  objc.checkOsVersionInternal('UIView.appearanceForTraitCollection:whenContainedIn:', iOS: (false, (8, 0, 0)));
+    final $ret = _objc_msgSend_15qeuct(_class_UIView, _sel_appearanceForTraitCollection_whenContainedIn_, trait.ref.pointer, whenContainedIn?.ref.pointer ?? ffi.nullptr);
+    return UIView.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// appearanceForTraitCollection:whenContainedInInstancesOfClasses:
+  static UIView appearanceForTraitCollection$2(UITraitCollection trait, {required objc.NSArray whenContainedInInstancesOfClasses}) {
+  objc.checkOsVersionInternal('UIView.appearanceForTraitCollection:whenContainedInInstancesOfClasses:', iOS: (false, (9, 0, 0)));
+    final $ret = _objc_msgSend_15qeuct(_class_UIView, _sel_appearanceForTraitCollection_whenContainedInInstancesOfClasses_, trait.ref.pointer, whenContainedInInstancesOfClasses.ref.pointer);
+    return UIView.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// appearanceWhenContainedIn:
+  static UIView appearanceWhenContainedIn(UIAppearanceContainer? ContainerClass) {
+  objc.checkOsVersionInternal('UIView.appearanceWhenContainedIn:', iOS: (false, (5, 0, 0)));
+    final $ret = _objc_msgSend_1sotr3r(_class_UIView, _sel_appearanceWhenContainedIn_, ContainerClass?.ref.pointer ?? ffi.nullptr);
+    return UIView.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// appearanceWhenContainedInInstancesOfClasses:
+  static UIView appearanceWhenContainedInInstancesOfClasses(objc.NSArray containerTypes) {
+  objc.checkOsVersionInternal('UIView.appearanceWhenContainedInInstancesOfClasses:', iOS: (false, (9, 0, 0)));
+    final $ret = _objc_msgSend_1sotr3r(_class_UIView, _sel_appearanceWhenContainedInInstancesOfClasses_, containerTypes.ref.pointer);
+    return UIView.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// layerClass
+  static objc.ObjCObject getLayerClass() {
+  objc.checkOsVersionInternal('UIView.layerClass', iOS: (false, (2, 0, 0)));
+    final $ret = _objc_msgSend_151sglz(_class_UIView, _sel_layerClass);
+    return objc.ObjCObject($ret, retain: true, release: true);
+  }
+
+
+  /// new
+  static UIView new$() {
+    final $ret = _objc_msgSend_151sglz(_class_UIView, _sel_new);
+    return UIView.fromPointer($ret, retain: false, release: true);
+  }
+
+
+  /// userInterfaceLayoutDirectionForSemanticContentAttribute:
+  static int userInterfaceLayoutDirectionForSemanticContentAttribute(int attribute) {
+  objc.checkOsVersionInternal('UIView.userInterfaceLayoutDirectionForSemanticContentAttribute:', iOS: (false, (9, 0, 0)));
+    return _objc_msgSend_racczx(_class_UIView, _sel_userInterfaceLayoutDirectionForSemanticContentAttribute_, attribute);
+
+  }
+
+
+  /// userInterfaceLayoutDirectionForSemanticContentAttribute:relativeToLayoutDirection:
+  static int userInterfaceLayoutDirectionForSemanticContentAttribute$1(int semanticContentAttribute, {required int relativeToLayoutDirection}) {
+  objc.checkOsVersionInternal('UIView.userInterfaceLayoutDirectionForSemanticContentAttribute:relativeToLayoutDirection:', iOS: (false, (10, 0, 0)));
+    return _objc_msgSend_tz4p54(_class_UIView, _sel_userInterfaceLayoutDirectionForSemanticContentAttribute_relativeToLayoutDirection_, semanticContentAttribute, relativeToLayoutDirection);
+
+  }
+  /// Returns a new instance of UIView constructed with the default `new` method.
+  UIView() : this.as(new$().object$);
+
 }
 
 extension UIView$Methods on UIView {
 
-}
-
-
-/// UIViewAnimation
-extension UIViewAnimation on UIView {
-
-  /// areAnimationsEnabled
-  static bool getAreAnimationsEnabled() {
-  objc.checkOsVersionInternal('UIView.areAnimationsEnabled', iOS: (false, (2, 0, 0)));
-    return _objc_msgSend_91o635(_class_UIView, _sel_areAnimationsEnabled);
-
-  }
-
-
-  /// inheritedAnimationDuration
-  static double getInheritedAnimationDuration() {
-  objc.checkOsVersionInternal('UIView.inheritedAnimationDuration', iOS: (false, (9, 0, 0)));
-    return objc.useMsgSendVariants ? _objc_msgSend_1ukqyt8Fpret(_class_UIView, _sel_inheritedAnimationDuration) : _objc_msgSend_1ukqyt8(_class_UIView, _sel_inheritedAnimationDuration);
-
-  }
-
-
-  /// performWithoutAnimation:
-  static void performWithoutAnimation(objc.ObjCBlock<ffi.Void Function()> actionsWithoutAnimation) {
-  objc.checkOsVersionInternal('UIView.performWithoutAnimation:', iOS: (false, (7, 0, 0)));
-_objc_msgSend_f167m6(_class_UIView, _sel_performWithoutAnimation_, actionsWithoutAnimation.ref.pointer);
-
-  }
-
-
-  /// setAnimationsEnabled:
-  static void setAnimationsEnabled(bool enabled) {
-  objc.checkOsVersionInternal('UIView.setAnimationsEnabled:', iOS: (false, (2, 0, 0)));
-_objc_msgSend_1s56lr9(_class_UIView, _sel_setAnimationsEnabled_, enabled);
-
-  }
-
-}
-
-sealed class UIViewAnimationCurve {
-  static const UIViewAnimationCurveEaseInOut = 0;
-  static const UIViewAnimationCurveEaseIn = 1;
-  static const UIViewAnimationCurveEaseOut = 2;
-  static const UIViewAnimationCurveLinear = 3;}
-
-sealed class UIViewAnimationOptions {
-  static const UIViewAnimationOptionLayoutSubviews = 1;
-  static const UIViewAnimationOptionAllowUserInteraction = 2;
-  static const UIViewAnimationOptionBeginFromCurrentState = 4;
-  static const UIViewAnimationOptionRepeat = 8;
-  static const UIViewAnimationOptionAutoreverse = 16;
-  static const UIViewAnimationOptionOverrideInheritedDuration = 32;
-  static const UIViewAnimationOptionOverrideInheritedCurve = 64;
-  static const UIViewAnimationOptionAllowAnimatedContent = 128;
-  static const UIViewAnimationOptionShowHideTransitionViews = 256;
-  static const UIViewAnimationOptionOverrideInheritedOptions = 512;
-  static const UIViewAnimationOptionCurveEaseInOut = 0;
-  static const UIViewAnimationOptionCurveEaseIn = 65536;
-  static const UIViewAnimationOptionCurveEaseOut = 131072;
-  static const UIViewAnimationOptionCurveLinear = 196608;
-  static const UIViewAnimationOptionTransitionNone = 0;
-  static const UIViewAnimationOptionTransitionFlipFromLeft = 1048576;
-  static const UIViewAnimationOptionTransitionFlipFromRight = 2097152;
-  static const UIViewAnimationOptionTransitionCurlUp = 3145728;
-  static const UIViewAnimationOptionTransitionCurlDown = 4194304;
-  static const UIViewAnimationOptionTransitionCrossDissolve = 5242880;
-  static const UIViewAnimationOptionTransitionFlipFromTop = 6291456;
-  static const UIViewAnimationOptionTransitionFlipFromBottom = 7340032;
-  static const UIViewAnimationOptionPreferredFramesPerSecondDefault = 0;
-  static const UIViewAnimationOptionPreferredFramesPerSecond60 = 50331648;
-  static const UIViewAnimationOptionPreferredFramesPerSecond30 = 117440512;
-  static const UIViewAnimationOptionFlushUpdates = 268435456;}
-
-sealed class UIViewAnimationTransition {
-  static const UIViewAnimationTransitionNone = 0;
-  static const UIViewAnimationTransitionFlipFromLeft = 1;
-  static const UIViewAnimationTransitionFlipFromRight = 2;
-  static const UIViewAnimationTransitionCurlUp = 3;
-  static const UIViewAnimationTransitionCurlDown = 4;}
-
-
-/// UIViewAnimationWithBlocks
-extension UIViewAnimationWithBlocks on UIView {
-
-  /// animateWithDuration:animations:
-  static void animateWithDuration(double duration, {required objc.ObjCBlock<ffi.Void Function()> animations}) {
-  objc.checkOsVersionInternal('UIView.animateWithDuration:animations:', iOS: (false, (4, 0, 0)));
-_objc_msgSend_16dy26p(_class_UIView, _sel_animateWithDuration_animations_, duration, animations.ref.pointer);
-
-  }
-
-
-  /// animateWithDuration:animations:completion:
-  static void animateWithDuration$1(double duration, {required objc.ObjCBlock<ffi.Void Function()> animations,objc.ObjCBlock<ffi.Void Function(ffi.Bool)>? completion}) {
-  objc.checkOsVersionInternal('UIView.animateWithDuration:animations:completion:', iOS: (false, (4, 0, 0)));
-_objc_msgSend_1isavsq(_class_UIView, _sel_animateWithDuration_animations_completion_, duration, animations.ref.pointer, completion?.ref.pointer ?? ffi.nullptr);
-
-  }
-
-
-  /// animateWithDuration:delay:options:animations:completion:
-  static void animateWithDuration$2(double duration, {required double delay,required int options,required objc.ObjCBlock<ffi.Void Function()> animations,objc.ObjCBlock<ffi.Void Function(ffi.Bool)>? completion}) {
-  objc.checkOsVersionInternal('UIView.animateWithDuration:delay:options:animations:completion:', iOS: (false, (4, 0, 0)));
-_objc_msgSend_1pforg(_class_UIView, _sel_animateWithDuration_delay_options_animations_completion_, duration, delay, options, animations.ref.pointer, completion?.ref.pointer ?? ffi.nullptr);
-
-  }
-
-
-  /// animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:
-  static void animateWithDuration$3(double duration, {required double delay,required double usingSpringWithDamping,required double initialSpringVelocity,required int options,required objc.ObjCBlock<ffi.Void Function()> animations,objc.ObjCBlock<ffi.Void Function(ffi.Bool)>? completion}) {
-  objc.checkOsVersionInternal('UIView.animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:', iOS: (false, (7, 0, 0)));
-_objc_msgSend_r4l13g(_class_UIView, _sel_animateWithDuration_delay_usingSpringWithDamping_initialSpringVelocity_options_animations_completion_, duration, delay, usingSpringWithDamping, initialSpringVelocity, options, animations.ref.pointer, completion?.ref.pointer ?? ffi.nullptr);
-
-  }
-
-
-  /// animateWithSpringDuration:bounce:initialSpringVelocity:delay:options:animations:completion:
-  static void animateWithSpringDuration(double duration, {required double bounce,required double initialSpringVelocity,required double delay,required int options,required objc.ObjCBlock<ffi.Void Function()> animations,objc.ObjCBlock<ffi.Void Function(ffi.Bool)>? completion}) {
-  objc.checkOsVersionInternal('UIView.animateWithSpringDuration:bounce:initialSpringVelocity:delay:options:animations:completion:', iOS: (false, (17, 0, 0)));
-_objc_msgSend_r4l13g(_class_UIView, _sel_animateWithSpringDuration_bounce_initialSpringVelocity_delay_options_animations_completion_, duration, bounce, initialSpringVelocity, delay, options, animations.ref.pointer, completion?.ref.pointer ?? ffi.nullptr);
-
-  }
-
-
-  /// modifyAnimationsWithRepeatCount:autoreverses:animations:
-  static void modifyAnimationsWithRepeatCount(double count, {required bool autoreverses,required objc.ObjCBlock<ffi.Void Function()> animations}) {
-  objc.checkOsVersionInternal('UIView.modifyAnimationsWithRepeatCount:autoreverses:animations:', iOS: (false, (13, 0, 0)));
-_objc_msgSend_nxk2e9(_class_UIView, _sel_modifyAnimationsWithRepeatCount_autoreverses_animations_, count, autoreverses, animations.ref.pointer);
-
-  }
-
-
-  /// performSystemAnimation:onViews:options:animations:completion:
-  static void performSystemAnimation(int animation, {required objc.NSArray onViews,required int options,objc.ObjCBlock<ffi.Void Function()>? animations,objc.ObjCBlock<ffi.Void Function(ffi.Bool)>? completion}) {
-  objc.checkOsVersionInternal('UIView.performSystemAnimation:onViews:options:animations:completion:', iOS: (false, (7, 0, 0)));
-_objc_msgSend_fqrtz5(_class_UIView, _sel_performSystemAnimation_onViews_options_animations_completion_, animation, onViews.ref.pointer, options, animations?.ref.pointer ?? ffi.nullptr, completion?.ref.pointer ?? ffi.nullptr);
-
-  }
-
-
-  /// transitionFromView:toView:duration:options:completion:
-  static void transitionFromView(UIView fromView, {required UIView toView,required double duration,required int options,objc.ObjCBlock<ffi.Void Function(ffi.Bool)>? completion}) {
-  objc.checkOsVersionInternal('UIView.transitionFromView:toView:duration:options:completion:', iOS: (false, (4, 0, 0)));
-_objc_msgSend_1eh0loo(_class_UIView, _sel_transitionFromView_toView_duration_options_completion_, fromView.ref.pointer, toView.ref.pointer, duration, options, completion?.ref.pointer ?? ffi.nullptr);
-
-  }
-
-
-  /// transitionWithView:duration:options:animations:completion:
-  static void transitionWithView(UIView view, {required double duration,required int options,objc.ObjCBlock<ffi.Void Function()>? animations,objc.ObjCBlock<ffi.Void Function(ffi.Bool)>? completion}) {
-  objc.checkOsVersionInternal('UIView.transitionWithView:duration:options:animations:completion:', iOS: (false, (4, 0, 0)));
-_objc_msgSend_q6v4dl(_class_UIView, _sel_transitionWithView_duration_options_animations_completion_, view.ref.pointer, duration, options, animations?.ref.pointer ?? ffi.nullptr, completion?.ref.pointer ?? ffi.nullptr);
-
-  }
-
-}
-
-sealed class UIViewAutoresizing {
-  static const UIViewAutoresizingNone = 0;
-  static const UIViewAutoresizingFlexibleLeftMargin = 1;
-  static const UIViewAutoresizingFlexibleWidth = 2;
-  static const UIViewAutoresizingFlexibleRightMargin = 4;
-  static const UIViewAutoresizingFlexibleTopMargin = 8;
-  static const UIViewAutoresizingFlexibleHeight = 16;
-  static const UIViewAutoresizingFlexibleBottomMargin = 32;}
-
-sealed class UIViewContentMode {
-  static const UIViewContentModeScaleToFill = 0;
-  static const UIViewContentModeScaleAspectFit = 1;
-  static const UIViewContentModeScaleAspectFill = 2;
-  static const UIViewContentModeRedraw = 3;
-  static const UIViewContentModeCenter = 4;
-  static const UIViewContentModeTop = 5;
-  static const UIViewContentModeBottom = 6;
-  static const UIViewContentModeLeft = 7;
-  static const UIViewContentModeRight = 8;
-  static const UIViewContentModeTopLeft = 9;
-  static const UIViewContentModeTopRight = 10;
-  static const UIViewContentModeBottomLeft = 11;
-  static const UIViewContentModeBottomRight = 12;}
-
-
-/// UIViewGeometry
-extension UIViewGeometry on UIView {
-
-  /// anchorPoint
-  objc.CGPoint get anchorPoint {
-  objc.checkOsVersionInternal('UIView.anchorPoint', iOS: (false, (16, 0, 0)));
-    final $ptr = pkg_ffi.calloc<objc.CGPoint>();
-    objc.useMsgSendVariants ? _objc_msgSend_1uwdhlkStret($ptr, object$.ref.pointer, _sel_anchorPoint) : $ptr.ref = _objc_msgSend_1uwdhlk(object$.ref.pointer, _sel_anchorPoint);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<objc.CGPoint>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<objc.CGPoint>(
-        $finalizable);
-
-  }
-
-
-  /// autoresizesSubviews
-  bool get autoresizesSubviews {
-  objc.checkOsVersionInternal('UIView.autoresizesSubviews', iOS: (false, (2, 0, 0)));
-    return _objc_msgSend_91o635(object$.ref.pointer, _sel_autoresizesSubviews);
-
-  }
-
-
-  /// autoresizingMask
-  int get autoresizingMask {
-  objc.checkOsVersionInternal('UIView.autoresizingMask', iOS: (false, (2, 0, 0)));
-    return _objc_msgSend_sq30wq(object$.ref.pointer, _sel_autoresizingMask);
-
+  /// actionForLayer:forKey:
+  CAAction? actionForLayer(CALayer layer, {required objc.NSString forKey}) {
+  objc.checkOsVersionInternal('UIView.actionForLayer:forKey:', iOS: (false, (10, 0, 0)), macOS: (false, (10, 12, 0)));
+    if (!objc.respondsToSelector(object$.ref.pointer, _sel_actionForLayer_forKey_)) {
+      throw objc.UnimplementedOptionalMethodException('UIView', 'actionForLayer:forKey:');
+    }
+    final $ret = _objc_msgSend_15qeuct(object$.ref.pointer, _sel_actionForLayer_forKey_, layer.ref.pointer, forKey.ref.pointer);
+    return $ret.address == 0 ? null : CAAction.fromPointer($ret, retain: true, release: true);
   }
 
 
   /// bounds
   objc.CGRect get bounds {
-  objc.checkOsVersionInternal('UIView.bounds', iOS: (false, (2, 0, 0)));
+  objc.checkOsVersionInternal('UIView.bounds', iOS: (false, (8, 0, 0)));
     final $ptr = pkg_ffi.calloc<objc.CGRect>();
     objc.useMsgSendVariants ? _objc_msgSend_bu1hbwStret($ptr, object$.ref.pointer, _sel_bounds) : $ptr.ref = _objc_msgSend_bu1hbw(object$.ref.pointer, _sel_bounds);
     final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
@@ -30593,9 +29925,16 @@ extension UIViewGeometry on UIView {
   }
 
 
+  /// canBecomeFocused
+  bool get canBecomeFocused {
+  objc.checkOsVersionInternal('UIView.canBecomeFocused', iOS: (false, (10, 0, 0)));
+    return _objc_msgSend_91o635(object$.ref.pointer, _sel_canBecomeFocused);
+
+  }
+
+
   /// center
   objc.CGPoint get center {
-  objc.checkOsVersionInternal('UIView.center', iOS: (false, (2, 0, 0)));
     final $ptr = pkg_ffi.calloc<objc.CGPoint>();
     objc.useMsgSendVariants ? _objc_msgSend_1uwdhlkStret($ptr, object$.ref.pointer, _sel_center) : $ptr.ref = _objc_msgSend_1uwdhlk(object$.ref.pointer, _sel_center);
     final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
@@ -30606,19 +29945,33 @@ extension UIViewGeometry on UIView {
   }
 
 
-  /// contentScaleFactor
-  double get contentScaleFactor {
-  objc.checkOsVersionInternal('UIView.contentScaleFactor', iOS: (false, (4, 0, 0)));
-    return objc.useMsgSendVariants ? _objc_msgSend_1ukqyt8Fpret(object$.ref.pointer, _sel_contentScaleFactor) : _objc_msgSend_1ukqyt8(object$.ref.pointer, _sel_contentScaleFactor);
+  /// collisionBoundingPath
+  UIBezierPath get collisionBoundingPath {
+  objc.checkOsVersionInternal('UIView.collisionBoundingPath', iOS: (false, (9, 0, 0)));
+    if (!objc.respondsToSelector(object$.ref.pointer, _sel_collisionBoundingPath)) {
+      throw objc.UnimplementedOptionalMethodException('UIView', 'collisionBoundingPath');
+    }
+    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_collisionBoundingPath);
+    return UIBezierPath.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// collisionBoundsType
+  int get collisionBoundsType {
+  objc.checkOsVersionInternal('UIView.collisionBoundsType', iOS: (false, (9, 0, 0)));
+    if (!objc.respondsToSelector(object$.ref.pointer, _sel_collisionBoundsType)) {
+      throw objc.UnimplementedOptionalMethodException('UIView', 'collisionBoundsType');
+    }
+    return _objc_msgSend_k9iunc(object$.ref.pointer, _sel_collisionBoundsType);
 
   }
 
 
-  /// convertPoint:fromView:
-  objc.CGPoint convertPoint(objc.CGPoint point, {UIView? fromView}) {
-  objc.checkOsVersionInternal('UIView.convertPoint:fromView:', iOS: (false, (2, 0, 0)));
+  /// convertPoint:fromCoordinateSpace:
+  objc.CGPoint convertPoint(objc.CGPoint point, {required UICoordinateSpace fromCoordinateSpace}) {
+  objc.checkOsVersionInternal('UIView.convertPoint:fromCoordinateSpace:', iOS: (false, (8, 0, 0)));
     final $ptr = pkg_ffi.calloc<objc.CGPoint>();
-    objc.useMsgSendVariants ? _objc_msgSend_3l1tu1Stret($ptr, object$.ref.pointer, _sel_convertPoint_fromView_, point, fromView?.ref.pointer ?? ffi.nullptr) : $ptr.ref = _objc_msgSend_3l1tu1(object$.ref.pointer, _sel_convertPoint_fromView_, point, fromView?.ref.pointer ?? ffi.nullptr);
+    objc.useMsgSendVariants ? _objc_msgSend_3l1tu1Stret($ptr, object$.ref.pointer, _sel_convertPoint_fromCoordinateSpace_, point, fromCoordinateSpace.ref.pointer) : $ptr.ref = _objc_msgSend_3l1tu1(object$.ref.pointer, _sel_convertPoint_fromCoordinateSpace_, point, fromCoordinateSpace.ref.pointer);
     final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
         ffi.sizeOf<objc.CGPoint>(), finalizer: pkg_ffi.calloc.nativeFree);
     return ffi.Struct.create<objc.CGPoint>(
@@ -30627,11 +29980,11 @@ extension UIViewGeometry on UIView {
   }
 
 
-  /// convertPoint:toView:
-  objc.CGPoint convertPoint$1(objc.CGPoint point, {UIView? toView}) {
-  objc.checkOsVersionInternal('UIView.convertPoint:toView:', iOS: (false, (2, 0, 0)));
+  /// convertPoint:toCoordinateSpace:
+  objc.CGPoint convertPoint$1(objc.CGPoint point, {required UICoordinateSpace toCoordinateSpace}) {
+  objc.checkOsVersionInternal('UIView.convertPoint:toCoordinateSpace:', iOS: (false, (8, 0, 0)));
     final $ptr = pkg_ffi.calloc<objc.CGPoint>();
-    objc.useMsgSendVariants ? _objc_msgSend_3l1tu1Stret($ptr, object$.ref.pointer, _sel_convertPoint_toView_, point, toView?.ref.pointer ?? ffi.nullptr) : $ptr.ref = _objc_msgSend_3l1tu1(object$.ref.pointer, _sel_convertPoint_toView_, point, toView?.ref.pointer ?? ffi.nullptr);
+    objc.useMsgSendVariants ? _objc_msgSend_3l1tu1Stret($ptr, object$.ref.pointer, _sel_convertPoint_toCoordinateSpace_, point, toCoordinateSpace.ref.pointer) : $ptr.ref = _objc_msgSend_3l1tu1(object$.ref.pointer, _sel_convertPoint_toCoordinateSpace_, point, toCoordinateSpace.ref.pointer);
     final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
         ffi.sizeOf<objc.CGPoint>(), finalizer: pkg_ffi.calloc.nativeFree);
     return ffi.Struct.create<objc.CGPoint>(
@@ -30640,11 +29993,11 @@ extension UIViewGeometry on UIView {
   }
 
 
-  /// convertRect:fromView:
-  objc.CGRect convertRect(objc.CGRect rect, {UIView? fromView}) {
-  objc.checkOsVersionInternal('UIView.convertRect:fromView:', iOS: (false, (2, 0, 0)));
+  /// convertRect:fromCoordinateSpace:
+  objc.CGRect convertRect(objc.CGRect rect, {required UICoordinateSpace fromCoordinateSpace}) {
+  objc.checkOsVersionInternal('UIView.convertRect:fromCoordinateSpace:', iOS: (false, (8, 0, 0)));
     final $ptr = pkg_ffi.calloc<objc.CGRect>();
-    objc.useMsgSendVariants ? _objc_msgSend_2olghrStret($ptr, object$.ref.pointer, _sel_convertRect_fromView_, rect, fromView?.ref.pointer ?? ffi.nullptr) : $ptr.ref = _objc_msgSend_2olghr(object$.ref.pointer, _sel_convertRect_fromView_, rect, fromView?.ref.pointer ?? ffi.nullptr);
+    objc.useMsgSendVariants ? _objc_msgSend_2olghrStret($ptr, object$.ref.pointer, _sel_convertRect_fromCoordinateSpace_, rect, fromCoordinateSpace.ref.pointer) : $ptr.ref = _objc_msgSend_2olghr(object$.ref.pointer, _sel_convertRect_fromCoordinateSpace_, rect, fromCoordinateSpace.ref.pointer);
     final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
         ffi.sizeOf<objc.CGRect>(), finalizer: pkg_ffi.calloc.nativeFree);
     return ffi.Struct.create<objc.CGRect>(
@@ -30653,22 +30006,137 @@ extension UIViewGeometry on UIView {
   }
 
 
-  /// convertRect:toView:
-  objc.CGRect convertRect$1(objc.CGRect rect, {UIView? toView}) {
-  objc.checkOsVersionInternal('UIView.convertRect:toView:', iOS: (false, (2, 0, 0)));
+  /// convertRect:toCoordinateSpace:
+  objc.CGRect convertRect$1(objc.CGRect rect, {required UICoordinateSpace toCoordinateSpace}) {
+  objc.checkOsVersionInternal('UIView.convertRect:toCoordinateSpace:', iOS: (false, (8, 0, 0)));
     final $ptr = pkg_ffi.calloc<objc.CGRect>();
-    objc.useMsgSendVariants ? _objc_msgSend_2olghrStret($ptr, object$.ref.pointer, _sel_convertRect_toView_, rect, toView?.ref.pointer ?? ffi.nullptr) : $ptr.ref = _objc_msgSend_2olghr(object$.ref.pointer, _sel_convertRect_toView_, rect, toView?.ref.pointer ?? ffi.nullptr);
+    objc.useMsgSendVariants ? _objc_msgSend_2olghrStret($ptr, object$.ref.pointer, _sel_convertRect_toCoordinateSpace_, rect, toCoordinateSpace.ref.pointer) : $ptr.ref = _objc_msgSend_2olghr(object$.ref.pointer, _sel_convertRect_toCoordinateSpace_, rect, toCoordinateSpace.ref.pointer);
     final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
         ffi.sizeOf<objc.CGRect>(), finalizer: pkg_ffi.calloc.nativeFree);
     return ffi.Struct.create<objc.CGRect>(
         $finalizable);
 
+  }
+
+
+  /// coordinateSpace
+  UICoordinateSpace get coordinateSpace {
+  objc.checkOsVersionInternal('UIView.coordinateSpace', iOS: (false, (12, 0, 0)));
+    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_coordinateSpace);
+    return UICoordinateSpace.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// didHintFocusMovement:
+  void didHintFocusMovement(UIFocusMovementHint hint) {
+  objc.checkOsVersionInternal('UIView.didHintFocusMovement:', iOS: (false, (12, 0, 0)));
+    if (!objc.respondsToSelector(object$.ref.pointer, _sel_didHintFocusMovement_)) {
+      throw objc.UnimplementedOptionalMethodException('UIView', 'didHintFocusMovement:');
+    }
+_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_didHintFocusMovement_, hint.ref.pointer);
+
+  }
+
+
+  /// didUpdateFocusInContext:withAnimationCoordinator:
+  void didUpdateFocusInContext(UIFocusUpdateContext context, {required UIFocusAnimationCoordinator withAnimationCoordinator}) {
+  objc.checkOsVersionInternal('UIView.didUpdateFocusInContext:withAnimationCoordinator:', iOS: (false, (9, 0, 0)));
+_objc_msgSend_pfv6jd(object$.ref.pointer, _sel_didUpdateFocusInContext_withAnimationCoordinator_, context.ref.pointer, withAnimationCoordinator.ref.pointer);
+
+  }
+
+
+  /// displayLayer:
+  void displayLayer(CALayer layer) {
+  objc.checkOsVersionInternal('UIView.displayLayer:', iOS: (false, (10, 0, 0)), macOS: (false, (10, 12, 0)));
+    if (!objc.respondsToSelector(object$.ref.pointer, _sel_displayLayer_)) {
+      throw objc.UnimplementedOptionalMethodException('UIView', 'displayLayer:');
+    }
+_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_displayLayer_, layer.ref.pointer);
+
+  }
+
+
+  /// drawLayer:inContext:
+  void drawLayer(CALayer layer, {required ffi.Pointer<CGContext> inContext}) {
+  objc.checkOsVersionInternal('UIView.drawLayer:inContext:', iOS: (false, (10, 0, 0)), macOS: (false, (10, 12, 0)));
+    if (!objc.respondsToSelector(object$.ref.pointer, _sel_drawLayer_inContext_)) {
+      throw objc.UnimplementedOptionalMethodException('UIView', 'drawLayer:inContext:');
+    }
+_objc_msgSend_a4xp11(object$.ref.pointer, _sel_drawLayer_inContext_, layer.ref.pointer, inContext);
+
+  }
+
+
+  /// effectiveUserInterfaceLayoutDirection
+  int get effectiveUserInterfaceLayoutDirection {
+  objc.checkOsVersionInternal('UIView.effectiveUserInterfaceLayoutDirection', iOS: (false, (10, 0, 0)));
+    return _objc_msgSend_qj4fey(object$.ref.pointer, _sel_effectiveUserInterfaceLayoutDirection);
+
+  }
+
+
+  /// encodeWithCoder:
+  void encodeWithCoder(objc.NSCoder coder) {
+_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_encodeWithCoder_, coder.ref.pointer);
+
+  }
+
+
+  /// focusEffect
+  UIFocusEffect? get focusEffect {
+  objc.checkOsVersionInternal('UIView.focusEffect', iOS: (false, (15, 0, 0)));
+    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_focusEffect);
+    return $ret.address == 0 ? null : UIFocusEffect.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// focusGroupIdentifier
+  objc.NSString? get focusGroupIdentifier {
+  objc.checkOsVersionInternal('UIView.focusGroupIdentifier', iOS: (false, (14, 0, 0)));
+    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_focusGroupIdentifier);
+    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// focusGroupPriority
+  int get focusGroupPriority {
+  objc.checkOsVersionInternal('UIView.focusGroupPriority', iOS: (false, (15, 0, 0)));
+    return _objc_msgSend_1hz7y9r(object$.ref.pointer, _sel_focusGroupPriority);
+
+  }
+
+
+  /// focusItemContainer
+  UIFocusItemContainer? get focusItemContainer {
+  objc.checkOsVersionInternal('UIView.focusItemContainer', iOS: (false, (12, 0, 0)));
+    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_focusItemContainer);
+    return $ret.address == 0 ? null : UIFocusItemContainer.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// focusItemDeferralMode
+  int get focusItemDeferralMode {
+  objc.checkOsVersionInternal('UIView.focusItemDeferralMode', iOS: (false, (10, 0, 0)));
+    if (!objc.respondsToSelector(object$.ref.pointer, _sel_focusItemDeferralMode)) {
+      throw objc.UnimplementedOptionalMethodException('UIView', 'focusItemDeferralMode');
+    }
+    return _objc_msgSend_1lv2zxu(object$.ref.pointer, _sel_focusItemDeferralMode);
+
+  }
+
+
+  /// focusItemsInRect:
+  objc.NSArray focusItemsInRect(objc.CGRect rect) {
+  objc.checkOsVersionInternal('UIView.focusItemsInRect:', iOS: (false, (12, 0, 0)));
+    final $ret = _objc_msgSend_15yz4e6(object$.ref.pointer, _sel_focusItemsInRect_, rect);
+    return objc.NSArray.fromPointer($ret, retain: true, release: true);
   }
 
 
   /// frame
   objc.CGRect get frame {
-  objc.checkOsVersionInternal('UIView.frame', iOS: (false, (2, 0, 0)));
+  objc.checkOsVersionInternal('UIView.frame', iOS: (false, (12, 0, 0)));
     final $ptr = pkg_ffi.calloc<objc.CGRect>();
     objc.useMsgSendVariants ? _objc_msgSend_bu1hbwStret($ptr, object$.ref.pointer, _sel_frame) : $ptr.ref = _objc_msgSend_bu1hbw(object$.ref.pointer, _sel_frame);
     final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
@@ -30679,146 +30147,236 @@ extension UIViewGeometry on UIView {
   }
 
 
-  /// hitTest:withEvent:
-  UIView? hitTest(objc.CGPoint point, {UIEvent? withEvent}) {
-  objc.checkOsVersionInternal('UIView.hitTest:withEvent:', iOS: (false, (2, 0, 0)));
-    final $ret = _objc_msgSend_u7nfz8(object$.ref.pointer, _sel_hitTest_withEvent_, point, withEvent?.ref.pointer ?? ffi.nullptr);
+  /// init
+  UIView init() {
+  objc.checkOsVersionInternal('UIView.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
+    final $ret = _objc_msgSend_151sglz(object$.ref.retainAndReturnPointer(), _sel_init);
+    return UIView.fromPointer($ret, retain: false, release: true);
+  }
+
+
+  /// initWithCoder:
+  UIView? initWithCoder(objc.NSCoder coder) {
+    final $ret = _objc_msgSend_1sotr3r(object$.ref.retainAndReturnPointer(), _sel_initWithCoder_, coder.ref.pointer);
+    return $ret.address == 0 ? null : UIView.fromPointer($ret, retain: false, release: true);
+  }
+
+
+  /// initWithFrame:
+  UIView initWithFrame(objc.CGRect frame) {
+  objc.checkOsVersionInternal('UIView.initWithFrame:', iOS: (false, (2, 0, 0)));
+    final $ret = _objc_msgSend_15yz4e6(object$.ref.retainAndReturnPointer(), _sel_initWithFrame_, frame);
+    return UIView.fromPointer($ret, retain: false, release: true);
+  }
+
+
+  /// isFocused
+  bool get isFocused {
+  objc.checkOsVersionInternal('UIView.isFocused', iOS: (false, (9, 0, 0)));
+    return _objc_msgSend_91o635(object$.ref.pointer, _sel_isFocused);
+
+  }
+
+
+  /// isTransparentFocusItem
+  bool get isTransparentFocusItem {
+  objc.checkOsVersionInternal('UIView.isTransparentFocusItem', iOS: (false, (15, 0, 0)));
+    if (!objc.respondsToSelector(object$.ref.pointer, _sel_isTransparentFocusItem)) {
+      throw objc.UnimplementedOptionalMethodException('UIView', 'isTransparentFocusItem');
+    }
+    return _objc_msgSend_91o635(object$.ref.pointer, _sel_isTransparentFocusItem);
+
+  }
+
+
+  /// isUserInteractionEnabled
+  bool get isUserInteractionEnabled {
+  objc.checkOsVersionInternal('UIView.isUserInteractionEnabled', iOS: (false, (2, 0, 0)));
+    return _objc_msgSend_91o635(object$.ref.pointer, _sel_isUserInteractionEnabled);
+
+  }
+
+
+  /// layer
+  CALayer get layer {
+  objc.checkOsVersionInternal('UIView.layer', iOS: (false, (2, 0, 0)));
+    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_layer);
+    return CALayer.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// layerWillDraw:
+  void layerWillDraw(CALayer layer) {
+  objc.checkOsVersionInternal('UIView.layerWillDraw:', iOS: (false, (10, 0, 0)), macOS: (false, (10, 12, 0)));
+    if (!objc.respondsToSelector(object$.ref.pointer, _sel_layerWillDraw_)) {
+      throw objc.UnimplementedOptionalMethodException('UIView', 'layerWillDraw:');
+    }
+_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_layerWillDraw_, layer.ref.pointer);
+
+  }
+
+
+  /// layoutSublayersOfLayer:
+  void layoutSublayersOfLayer(CALayer layer) {
+  objc.checkOsVersionInternal('UIView.layoutSublayersOfLayer:', iOS: (false, (10, 0, 0)), macOS: (false, (10, 12, 0)));
+    if (!objc.respondsToSelector(object$.ref.pointer, _sel_layoutSublayersOfLayer_)) {
+      throw objc.UnimplementedOptionalMethodException('UIView', 'layoutSublayersOfLayer:');
+    }
+_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_layoutSublayersOfLayer_, layer.ref.pointer);
+
+  }
+
+
+  /// parentFocusEnvironment
+  UIFocusEnvironment? get parentFocusEnvironment {
+  objc.checkOsVersionInternal('UIView.parentFocusEnvironment', iOS: (false, (12, 0, 0)));
+    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_parentFocusEnvironment);
+    return $ret.address == 0 ? null : UIFocusEnvironment.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// preferredFocusEnvironments
+  objc.NSArray get preferredFocusEnvironments {
+  objc.checkOsVersionInternal('UIView.preferredFocusEnvironments', iOS: (false, (9, 0, 0)));
+    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_preferredFocusEnvironments);
+    return objc.NSArray.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// preferredFocusedView
+  UIView? get preferredFocusedView {
+  objc.checkOsVersionInternal('UIView.preferredFocusedView', iOS: (false, (9, 0, 0)));
+    if (!objc.respondsToSelector(object$.ref.pointer, _sel_preferredFocusedView)) {
+      throw objc.UnimplementedOptionalMethodException('UIView', 'preferredFocusedView');
+    }
+    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_preferredFocusedView);
     return $ret.address == 0 ? null : UIView.fromPointer($ret, retain: true, release: true);
   }
 
 
-  /// isExclusiveTouch
-  bool get isExclusiveTouch {
-    return _objc_msgSend_91o635(object$.ref.pointer, _sel_isExclusiveTouch);
-
-  }
-
-
-  /// isMultipleTouchEnabled
-  bool get isMultipleTouchEnabled {
-    return _objc_msgSend_91o635(object$.ref.pointer, _sel_isMultipleTouchEnabled);
-
-  }
-
-
-  /// pointInside:withEvent:
-  bool pointInside(objc.CGPoint point, {UIEvent? withEvent}) {
-  objc.checkOsVersionInternal('UIView.pointInside:withEvent:', iOS: (false, (2, 0, 0)));
-    return _objc_msgSend_yvwe5y(object$.ref.pointer, _sel_pointInside_withEvent_, point, withEvent?.ref.pointer ?? ffi.nullptr);
-
-  }
-
-
-  /// setAnchorPoint:
-  set anchorPoint(objc.CGPoint value) {
-  objc.checkOsVersionInternal('UIView.setAnchorPoint:', iOS: (false, (16, 0, 0)));
-_objc_msgSend_iy8iz6(object$.ref.pointer, _sel_setAnchorPoint_, value);
-
-  }
-
-
-  /// setAutoresizesSubviews:
-  set autoresizesSubviews(bool value) {
-  objc.checkOsVersionInternal('UIView.setAutoresizesSubviews:', iOS: (false, (2, 0, 0)));
-_objc_msgSend_1s56lr9(object$.ref.pointer, _sel_setAutoresizesSubviews_, value);
-
-  }
-
-
-  /// setAutoresizingMask:
-  set autoresizingMask(int value) {
-  objc.checkOsVersionInternal('UIView.setAutoresizingMask:', iOS: (false, (2, 0, 0)));
-_objc_msgSend_qjq6uk(object$.ref.pointer, _sel_setAutoresizingMask_, value);
-
-  }
-
-
-  /// setBounds:
-  set bounds(objc.CGRect value) {
-  objc.checkOsVersionInternal('UIView.setBounds:', iOS: (false, (2, 0, 0)));
-_objc_msgSend_1okkq16(object$.ref.pointer, _sel_setBounds_, value);
+  /// semanticContentAttribute
+  int get semanticContentAttribute {
+  objc.checkOsVersionInternal('UIView.semanticContentAttribute', iOS: (false, (9, 0, 0)));
+    return _objc_msgSend_i2u4x4(object$.ref.pointer, _sel_semanticContentAttribute);
 
   }
 
 
   /// setCenter:
   set center(objc.CGPoint value) {
-  objc.checkOsVersionInternal('UIView.setCenter:', iOS: (false, (2, 0, 0)));
 _objc_msgSend_iy8iz6(object$.ref.pointer, _sel_setCenter_, value);
 
   }
 
 
-  /// setContentScaleFactor:
-  set contentScaleFactor(double value) {
-  objc.checkOsVersionInternal('UIView.setContentScaleFactor:', iOS: (false, (4, 0, 0)));
-_objc_msgSend_hwm8nu(object$.ref.pointer, _sel_setContentScaleFactor_, value);
+  /// setFocusEffect:
+  set focusEffect(UIFocusEffect? value) {
+  objc.checkOsVersionInternal('UIView.setFocusEffect:', iOS: (false, (15, 0, 0)));
+_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setFocusEffect_, value?.ref.pointer ?? ffi.nullptr);
 
   }
 
 
-  /// setExclusiveTouch:
-  set isExclusiveTouch(bool value) {
-_objc_msgSend_1s56lr9(object$.ref.pointer, _sel_setExclusiveTouch_, value);
+  /// setFocusGroupIdentifier:
+  set focusGroupIdentifier(objc.NSString? value) {
+  objc.checkOsVersionInternal('UIView.setFocusGroupIdentifier:', iOS: (false, (14, 0, 0)));
+_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setFocusGroupIdentifier_, value?.ref.pointer ?? ffi.nullptr);
 
   }
 
 
-  /// setFrame:
-  set frame(objc.CGRect value) {
-  objc.checkOsVersionInternal('UIView.setFrame:', iOS: (false, (2, 0, 0)));
-_objc_msgSend_1okkq16(object$.ref.pointer, _sel_setFrame_, value);
+  /// setFocusGroupPriority:
+  set focusGroupPriority(int value) {
+  objc.checkOsVersionInternal('UIView.setFocusGroupPriority:', iOS: (false, (15, 0, 0)));
+_objc_msgSend_4sp4xj(object$.ref.pointer, _sel_setFocusGroupPriority_, value);
 
   }
 
 
-  /// setMultipleTouchEnabled:
-  set isMultipleTouchEnabled(bool value) {
-_objc_msgSend_1s56lr9(object$.ref.pointer, _sel_setMultipleTouchEnabled_, value);
+  /// setNeedsFocusUpdate
+  void setNeedsFocusUpdate() {
+  objc.checkOsVersionInternal('UIView.setNeedsFocusUpdate', iOS: (false, (9, 0, 0)));
+_objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_setNeedsFocusUpdate);
 
   }
 
 
-  /// setTransform3D:
-  set transform3D(CATransform3D value) {
-  objc.checkOsVersionInternal('UIView.setTransform3D:', iOS: (false, (13, 0, 0)));
-_objc_msgSend_1s50tpz(object$.ref.pointer, _sel_setTransform3D_, value);
+  /// setSemanticContentAttribute:
+  set semanticContentAttribute(int value) {
+  objc.checkOsVersionInternal('UIView.setSemanticContentAttribute:', iOS: (false, (9, 0, 0)));
+_objc_msgSend_162qwxu(object$.ref.pointer, _sel_setSemanticContentAttribute_, value);
+
+  }
+
+
+  /// setTag:
+  set tag(int value) {
+  objc.checkOsVersionInternal('UIView.setTag:', iOS: (false, (2, 0, 0)));
+_objc_msgSend_4sp4xj(object$.ref.pointer, _sel_setTag_, value);
 
   }
 
 
   /// setTransform:
   set transform(CGAffineTransform value) {
-  objc.checkOsVersionInternal('UIView.setTransform:', iOS: (false, (2, 0, 0)));
 _objc_msgSend_qgt66z(object$.ref.pointer, _sel_setTransform_, value);
 
   }
 
 
-  /// sizeThatFits:
-  objc.CGSize sizeThatFits(objc.CGSize size) {
-  objc.checkOsVersionInternal('UIView.sizeThatFits:', iOS: (false, (2, 0, 0)));
-    final $ptr = pkg_ffi.calloc<objc.CGSize>();
-    objc.useMsgSendVariants ? _objc_msgSend_1owrp3bStret($ptr, object$.ref.pointer, _sel_sizeThatFits_, size) : $ptr.ref = _objc_msgSend_1owrp3b(object$.ref.pointer, _sel_sizeThatFits_, size);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<objc.CGSize>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<objc.CGSize>(
-        $finalizable);
+  /// setUserInteractionEnabled:
+  set isUserInteractionEnabled(bool value) {
+  objc.checkOsVersionInternal('UIView.setUserInteractionEnabled:', iOS: (false, (2, 0, 0)));
+_objc_msgSend_1s56lr9(object$.ref.pointer, _sel_setUserInteractionEnabled_, value);
 
   }
 
 
-  /// sizeToFit
-  void sizeToFit() {
-  objc.checkOsVersionInternal('UIView.sizeToFit', iOS: (false, (2, 0, 0)));
-_objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_sizeToFit);
+  /// shouldUpdateFocusInContext:
+  bool shouldUpdateFocusInContext(UIFocusUpdateContext context) {
+  objc.checkOsVersionInternal('UIView.shouldUpdateFocusInContext:', iOS: (false, (9, 0, 0)));
+    return _objc_msgSend_19nvye5(object$.ref.pointer, _sel_shouldUpdateFocusInContext_, context.ref.pointer);
+
+  }
+
+
+  /// soundIdentifierForFocusUpdateInContext:
+  objc.NSString? soundIdentifierForFocusUpdateInContext(UIFocusUpdateContext context) {
+  objc.checkOsVersionInternal('UIView.soundIdentifierForFocusUpdateInContext:', iOS: (true, null));
+    if (!objc.respondsToSelector(object$.ref.pointer, _sel_soundIdentifierForFocusUpdateInContext_)) {
+      throw objc.UnimplementedOptionalMethodException('UIView', 'soundIdentifierForFocusUpdateInContext:');
+    }
+    final $ret = _objc_msgSend_1sotr3r(object$.ref.pointer, _sel_soundIdentifierForFocusUpdateInContext_, context.ref.pointer);
+    return $ret.address == 0 ? null : objc.NSString.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// tag
+  int get tag {
+  objc.checkOsVersionInternal('UIView.tag', iOS: (false, (2, 0, 0)));
+    return _objc_msgSend_1hz7y9r(object$.ref.pointer, _sel_tag);
+
+  }
+
+
+  /// traitCollection
+  UITraitCollection get traitCollection {
+  objc.checkOsVersionInternal('UIView.traitCollection', iOS: (false, (8, 0, 0)));
+    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_traitCollection);
+    return UITraitCollection.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// traitCollectionDidChange:
+  void traitCollectionDidChange(UITraitCollection? previousTraitCollection) {
+  objc.checkOsVersionInternal('UIView.traitCollectionDidChange:', iOS: (false, (8, 0, 0)));
+_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_traitCollectionDidChange_, previousTraitCollection?.ref.pointer ?? ffi.nullptr);
 
   }
 
 
   /// transform
   CGAffineTransform get transform {
-  objc.checkOsVersionInternal('UIView.transform', iOS: (false, (2, 0, 0)));
     final $ptr = pkg_ffi.calloc<CGAffineTransform>();
     objc.useMsgSendVariants ? _objc_msgSend_5qswvjStret($ptr, object$.ref.pointer, _sel_transform) : $ptr.ref = _objc_msgSend_5qswvj(object$.ref.pointer, _sel_transform);
     final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
@@ -30829,859 +30387,10 @@ _objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_sizeToFit);
   }
 
 
-  /// transform3D
-  CATransform3D get transform3D {
-  objc.checkOsVersionInternal('UIView.transform3D', iOS: (false, (13, 0, 0)));
-    final $ptr = pkg_ffi.calloc<CATransform3D>();
-    objc.useMsgSendVariants ? _objc_msgSend_5qlg3jStret($ptr, object$.ref.pointer, _sel_transform3D) : $ptr.ref = _objc_msgSend_5qlg3j(object$.ref.pointer, _sel_transform3D);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<CATransform3D>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<CATransform3D>(
-        $finalizable);
-
-  }
-
-}
-
-
-/// UIViewGestureRecognizers
-extension UIViewGestureRecognizers on UIView {
-
-  /// addGestureRecognizer:
-  void addGestureRecognizer(UIGestureRecognizer gestureRecognizer) {
-  objc.checkOsVersionInternal('UIView.addGestureRecognizer:', iOS: (false, (3, 2, 0)));
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_addGestureRecognizer_, gestureRecognizer.ref.pointer);
-
-  }
-
-
-  /// gestureRecognizerShouldBegin:
-  bool gestureRecognizerShouldBegin(UIGestureRecognizer gestureRecognizer) {
-  objc.checkOsVersionInternal('UIView.gestureRecognizerShouldBegin:', iOS: (false, (6, 0, 0)));
-    return _objc_msgSend_19nvye5(object$.ref.pointer, _sel_gestureRecognizerShouldBegin_, gestureRecognizer.ref.pointer);
-
-  }
-
-
-  /// gestureRecognizers
-  objc.NSArray? get gestureRecognizers {
-  objc.checkOsVersionInternal('UIView.gestureRecognizers', iOS: (false, (3, 2, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_gestureRecognizers);
-    return $ret.address == 0 ? null : objc.NSArray.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// removeGestureRecognizer:
-  void removeGestureRecognizer(UIGestureRecognizer gestureRecognizer) {
-  objc.checkOsVersionInternal('UIView.removeGestureRecognizer:', iOS: (false, (3, 2, 0)));
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_removeGestureRecognizer_, gestureRecognizer.ref.pointer);
-
-  }
-
-
-  /// setGestureRecognizers:
-  set gestureRecognizers(objc.NSArray? value) {
-  objc.checkOsVersionInternal('UIView.setGestureRecognizers:', iOS: (false, (3, 2, 0)));
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setGestureRecognizers_, value?.ref.pointer ?? ffi.nullptr);
-
-  }
-
-}
-
-
-/// UIViewHierarchy
-extension UIViewHierarchy on UIView {
-
-  /// addSubview:
-  void addSubview(UIView view) {
-  objc.checkOsVersionInternal('UIView.addSubview:', iOS: (false, (2, 0, 0)));
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_addSubview_, view.ref.pointer);
-
-  }
-
-
-  /// bringSubviewToFront:
-  void bringSubviewToFront(UIView view) {
-  objc.checkOsVersionInternal('UIView.bringSubviewToFront:', iOS: (false, (2, 0, 0)));
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_bringSubviewToFront_, view.ref.pointer);
-
-  }
-
-
-  /// didAddSubview:
-  void didAddSubview(UIView subview) {
-  objc.checkOsVersionInternal('UIView.didAddSubview:', iOS: (false, (2, 0, 0)));
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_didAddSubview_, subview.ref.pointer);
-
-  }
-
-
-  /// didMoveToSuperview
-  void didMoveToSuperview() {
-  objc.checkOsVersionInternal('UIView.didMoveToSuperview', iOS: (false, (2, 0, 0)));
-_objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_didMoveToSuperview);
-
-  }
-
-
-  /// didMoveToWindow
-  void didMoveToWindow() {
-  objc.checkOsVersionInternal('UIView.didMoveToWindow', iOS: (false, (2, 0, 0)));
-_objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_didMoveToWindow);
-
-  }
-
-
-  /// directionalLayoutMargins
-  NSDirectionalEdgeInsets get directionalLayoutMargins {
-  objc.checkOsVersionInternal('UIView.directionalLayoutMargins', iOS: (false, (11, 0, 0)));
-    final $ptr = pkg_ffi.calloc<NSDirectionalEdgeInsets>();
-    objc.useMsgSendVariants ? _objc_msgSend_12yjd2mStret($ptr, object$.ref.pointer, _sel_directionalLayoutMargins) : $ptr.ref = _objc_msgSend_12yjd2m(object$.ref.pointer, _sel_directionalLayoutMargins);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<NSDirectionalEdgeInsets>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<NSDirectionalEdgeInsets>(
-        $finalizable);
-
-  }
-
-
-  /// exchangeSubviewAtIndex:withSubviewAtIndex:
-  void exchangeSubviewAtIndex(int index1, {required int withSubviewAtIndex}) {
-  objc.checkOsVersionInternal('UIView.exchangeSubviewAtIndex:withSubviewAtIndex:', iOS: (false, (2, 0, 0)));
-_objc_msgSend_1w5k0al(object$.ref.pointer, _sel_exchangeSubviewAtIndex_withSubviewAtIndex_, index1, withSubviewAtIndex);
-
-  }
-
-
-  /// insertSubview:aboveSubview:
-  void insertSubview(UIView view, {required UIView aboveSubview}) {
-  objc.checkOsVersionInternal('UIView.insertSubview:aboveSubview:', iOS: (false, (2, 0, 0)));
-_objc_msgSend_pfv6jd(object$.ref.pointer, _sel_insertSubview_aboveSubview_, view.ref.pointer, aboveSubview.ref.pointer);
-
-  }
-
-
-  /// insertSubview:atIndex:
-  void insertSubview$1(UIView view, {required int atIndex}) {
-  objc.checkOsVersionInternal('UIView.insertSubview:atIndex:', iOS: (false, (2, 0, 0)));
-_objc_msgSend_1nvl641(object$.ref.pointer, _sel_insertSubview_atIndex_, view.ref.pointer, atIndex);
-
-  }
-
-
-  /// insertSubview:belowSubview:
-  void insertSubview$2(UIView view, {required UIView belowSubview}) {
-  objc.checkOsVersionInternal('UIView.insertSubview:belowSubview:', iOS: (false, (2, 0, 0)));
-_objc_msgSend_pfv6jd(object$.ref.pointer, _sel_insertSubview_belowSubview_, view.ref.pointer, belowSubview.ref.pointer);
-
-  }
-
-
-  /// insetsLayoutMarginsFromSafeArea
-  bool get insetsLayoutMarginsFromSafeArea {
-  objc.checkOsVersionInternal('UIView.insetsLayoutMarginsFromSafeArea', iOS: (false, (11, 0, 0)));
-    return _objc_msgSend_91o635(object$.ref.pointer, _sel_insetsLayoutMarginsFromSafeArea);
-
-  }
-
-
-  /// isDescendantOfView:
-  bool isDescendantOfView(UIView view) {
-  objc.checkOsVersionInternal('UIView.isDescendantOfView:', iOS: (false, (2, 0, 0)));
-    return _objc_msgSend_19nvye5(object$.ref.pointer, _sel_isDescendantOfView_, view.ref.pointer);
-
-  }
-
-
-  /// keyboardLayoutGuide
-  UIKeyboardLayoutGuide get keyboardLayoutGuide {
-  objc.checkOsVersionInternal('UIView.keyboardLayoutGuide', iOS: (false, (15, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_keyboardLayoutGuide);
-    return UIKeyboardLayoutGuide.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// layoutIfNeeded
-  void layoutIfNeeded() {
-  objc.checkOsVersionInternal('UIView.layoutIfNeeded', iOS: (false, (2, 0, 0)));
-_objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_layoutIfNeeded);
-
-  }
-
-
-  /// layoutMargins
-  UIEdgeInsets get layoutMargins {
-  objc.checkOsVersionInternal('UIView.layoutMargins', iOS: (false, (8, 0, 0)));
-    final $ptr = pkg_ffi.calloc<UIEdgeInsets>();
-    objc.useMsgSendVariants ? _objc_msgSend_ct4cu5Stret($ptr, object$.ref.pointer, _sel_layoutMargins) : $ptr.ref = _objc_msgSend_ct4cu5(object$.ref.pointer, _sel_layoutMargins);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<UIEdgeInsets>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<UIEdgeInsets>(
-        $finalizable);
-
-  }
-
-
-  /// layoutMarginsDidChange
-  void layoutMarginsDidChange() {
-  objc.checkOsVersionInternal('UIView.layoutMarginsDidChange', iOS: (false, (8, 0, 0)));
-_objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_layoutMarginsDidChange);
-
-  }
-
-
-  /// layoutMarginsGuide
-  UILayoutGuide get layoutMarginsGuide {
-  objc.checkOsVersionInternal('UIView.layoutMarginsGuide', iOS: (false, (9, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_layoutMarginsGuide);
-    return UILayoutGuide.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// layoutSubviews
-  void layoutSubviews() {
-  objc.checkOsVersionInternal('UIView.layoutSubviews', iOS: (false, (2, 0, 0)));
-_objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_layoutSubviews);
-
-  }
-
-
-  /// preservesSuperviewLayoutMargins
-  bool get preservesSuperviewLayoutMargins {
-  objc.checkOsVersionInternal('UIView.preservesSuperviewLayoutMargins', iOS: (false, (8, 0, 0)));
-    return _objc_msgSend_91o635(object$.ref.pointer, _sel_preservesSuperviewLayoutMargins);
-
-  }
-
-
-  /// readableContentGuide
-  UILayoutGuide get readableContentGuide {
-  objc.checkOsVersionInternal('UIView.readableContentGuide', iOS: (false, (9, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_readableContentGuide);
-    return UILayoutGuide.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// removeFromSuperview
-  void removeFromSuperview() {
-  objc.checkOsVersionInternal('UIView.removeFromSuperview', iOS: (false, (2, 0, 0)));
-_objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_removeFromSuperview);
-
-  }
-
-
-  /// safeAreaInsets
-  UIEdgeInsets get safeAreaInsets {
-  objc.checkOsVersionInternal('UIView.safeAreaInsets', iOS: (false, (11, 0, 0)));
-    final $ptr = pkg_ffi.calloc<UIEdgeInsets>();
-    objc.useMsgSendVariants ? _objc_msgSend_ct4cu5Stret($ptr, object$.ref.pointer, _sel_safeAreaInsets) : $ptr.ref = _objc_msgSend_ct4cu5(object$.ref.pointer, _sel_safeAreaInsets);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<UIEdgeInsets>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<UIEdgeInsets>(
-        $finalizable);
-
-  }
-
-
-  /// safeAreaInsetsDidChange
-  void safeAreaInsetsDidChange() {
-  objc.checkOsVersionInternal('UIView.safeAreaInsetsDidChange', iOS: (false, (11, 0, 0)));
-_objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_safeAreaInsetsDidChange);
-
-  }
-
-
-  /// safeAreaLayoutGuide
-  UILayoutGuide get safeAreaLayoutGuide {
-  objc.checkOsVersionInternal('UIView.safeAreaLayoutGuide', iOS: (false, (11, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_safeAreaLayoutGuide);
-    return UILayoutGuide.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// sendSubviewToBack:
-  void sendSubviewToBack(UIView view) {
-  objc.checkOsVersionInternal('UIView.sendSubviewToBack:', iOS: (false, (2, 0, 0)));
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_sendSubviewToBack_, view.ref.pointer);
-
-  }
-
-
-  /// setDirectionalLayoutMargins:
-  set directionalLayoutMargins(NSDirectionalEdgeInsets value) {
-  objc.checkOsVersionInternal('UIView.setDirectionalLayoutMargins:', iOS: (false, (11, 0, 0)));
-_objc_msgSend_s0isf8(object$.ref.pointer, _sel_setDirectionalLayoutMargins_, value);
-
-  }
-
-
-  /// setInsetsLayoutMarginsFromSafeArea:
-  set insetsLayoutMarginsFromSafeArea(bool value) {
-  objc.checkOsVersionInternal('UIView.setInsetsLayoutMarginsFromSafeArea:', iOS: (false, (11, 0, 0)));
-_objc_msgSend_1s56lr9(object$.ref.pointer, _sel_setInsetsLayoutMarginsFromSafeArea_, value);
-
-  }
-
-
-  /// setLayoutMargins:
-  set layoutMargins(UIEdgeInsets value) {
-  objc.checkOsVersionInternal('UIView.setLayoutMargins:', iOS: (false, (8, 0, 0)));
-_objc_msgSend_1g8fos5(object$.ref.pointer, _sel_setLayoutMargins_, value);
-
-  }
-
-
-  /// setNeedsLayout
-  void setNeedsLayout() {
-  objc.checkOsVersionInternal('UIView.setNeedsLayout', iOS: (false, (2, 0, 0)));
-_objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_setNeedsLayout);
-
-  }
-
-
-  /// setNeedsUpdateProperties
-  void setNeedsUpdateProperties() {
-  objc.checkOsVersionInternal('UIView.setNeedsUpdateProperties', iOS: (false, (26, 0, 0)));
-_objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_setNeedsUpdateProperties);
-
-  }
-
-
-  /// setPreservesSuperviewLayoutMargins:
-  set preservesSuperviewLayoutMargins(bool value) {
-  objc.checkOsVersionInternal('UIView.setPreservesSuperviewLayoutMargins:', iOS: (false, (8, 0, 0)));
-_objc_msgSend_1s56lr9(object$.ref.pointer, _sel_setPreservesSuperviewLayoutMargins_, value);
-
-  }
-
-
-  /// subviews
-  objc.NSArray get subviews {
-  objc.checkOsVersionInternal('UIView.subviews', iOS: (false, (2, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_subviews);
-    return objc.NSArray.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// superview
-  UIView? get superview {
-  objc.checkOsVersionInternal('UIView.superview', iOS: (false, (2, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_superview);
-    return $ret.address == 0 ? null : UIView.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// updateProperties
-  void updateProperties() {
-  objc.checkOsVersionInternal('UIView.updateProperties', iOS: (false, (26, 0, 0)));
-_objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_updateProperties);
-
-  }
-
-
-  /// updatePropertiesIfNeeded
-  void updatePropertiesIfNeeded() {
-  objc.checkOsVersionInternal('UIView.updatePropertiesIfNeeded', iOS: (false, (26, 0, 0)));
-_objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_updatePropertiesIfNeeded);
-
-  }
-
-
-  /// viewWithTag:
-  UIView? viewWithTag(int tag) {
-  objc.checkOsVersionInternal('UIView.viewWithTag:', iOS: (false, (2, 0, 0)));
-    final $ret = _objc_msgSend_qugqlf(object$.ref.pointer, _sel_viewWithTag_, tag);
-    return $ret.address == 0 ? null : UIView.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// willMoveToSuperview:
-  void willMoveToSuperview(UIView? newSuperview) {
-  objc.checkOsVersionInternal('UIView.willMoveToSuperview:', iOS: (false, (2, 0, 0)));
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_willMoveToSuperview_, newSuperview?.ref.pointer ?? ffi.nullptr);
-
-  }
-
-
-  /// willMoveToWindow:
-  void willMoveToWindow(UIWindow? newWindow) {
-  objc.checkOsVersionInternal('UIView.willMoveToWindow:', iOS: (false, (2, 0, 0)));
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_willMoveToWindow_, newWindow?.ref.pointer ?? ffi.nullptr);
-
-  }
-
-
-  /// willRemoveSubview:
-  void willRemoveSubview(UIView subview) {
-  objc.checkOsVersionInternal('UIView.willRemoveSubview:', iOS: (false, (2, 0, 0)));
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_willRemoveSubview_, subview.ref.pointer);
-
-  }
-
-
-  /// window
-  UIWindow? get window {
-  objc.checkOsVersionInternal('UIView.window', iOS: (false, (2, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_window);
-    return $ret.address == 0 ? null : UIWindow.fromPointer($ret, retain: true, release: true);
-  }
-
-}
-
-sealed class UIViewKeyframeAnimationOptions {
-  static const UIViewKeyframeAnimationOptionLayoutSubviews = 1;
-  static const UIViewKeyframeAnimationOptionAllowUserInteraction = 2;
-  static const UIViewKeyframeAnimationOptionBeginFromCurrentState = 4;
-  static const UIViewKeyframeAnimationOptionRepeat = 8;
-  static const UIViewKeyframeAnimationOptionAutoreverse = 16;
-  static const UIViewKeyframeAnimationOptionOverrideInheritedDuration = 32;
-  static const UIViewKeyframeAnimationOptionOverrideInheritedOptions = 512;
-  static const UIViewKeyframeAnimationOptionCalculationModeLinear = 0;
-  static const UIViewKeyframeAnimationOptionCalculationModeDiscrete = 1024;
-  static const UIViewKeyframeAnimationOptionCalculationModePaced = 2048;
-  static const UIViewKeyframeAnimationOptionCalculationModeCubic = 3072;
-  static const UIViewKeyframeAnimationOptionCalculationModeCubicPaced = 4096;}
-
-
-/// UIViewKeyframeAnimations
-extension UIViewKeyframeAnimations on UIView {
-
-  /// addKeyframeWithRelativeStartTime:relativeDuration:animations:
-  static void addKeyframeWithRelativeStartTime(double frameStartTime, {required double relativeDuration,required objc.ObjCBlock<ffi.Void Function()> animations}) {
-  objc.checkOsVersionInternal('UIView.addKeyframeWithRelativeStartTime:relativeDuration:animations:', iOS: (false, (7, 0, 0)));
-_objc_msgSend_6jt11a(_class_UIView, _sel_addKeyframeWithRelativeStartTime_relativeDuration_animations_, frameStartTime, relativeDuration, animations.ref.pointer);
-
-  }
-
-
-  /// animateKeyframesWithDuration:delay:options:animations:completion:
-  static void animateKeyframesWithDuration(double duration, {required double delay,required int options,required objc.ObjCBlock<ffi.Void Function()> animations,objc.ObjCBlock<ffi.Void Function(ffi.Bool)>? completion}) {
-  objc.checkOsVersionInternal('UIView.animateKeyframesWithDuration:delay:options:animations:completion:', iOS: (false, (7, 0, 0)));
-_objc_msgSend_ciuhtc(_class_UIView, _sel_animateKeyframesWithDuration_delay_options_animations_completion_, duration, delay, options, animations.ref.pointer, completion?.ref.pointer ?? ffi.nullptr);
-
-  }
-
-}
-
-
-/// UIViewLayoutConstraintCreation
-extension UIViewLayoutConstraintCreation on UIView {
-
-  /// bottomAnchor
-  NSLayoutYAxisAnchor get bottomAnchor {
-  objc.checkOsVersionInternal('UIView.bottomAnchor', iOS: (false, (9, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_bottomAnchor);
-    return NSLayoutYAxisAnchor.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// centerXAnchor
-  NSLayoutXAxisAnchor get centerXAnchor {
-  objc.checkOsVersionInternal('UIView.centerXAnchor', iOS: (false, (9, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_centerXAnchor);
-    return NSLayoutXAxisAnchor.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// centerYAnchor
-  NSLayoutYAxisAnchor get centerYAnchor {
-  objc.checkOsVersionInternal('UIView.centerYAnchor', iOS: (false, (9, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_centerYAnchor);
-    return NSLayoutYAxisAnchor.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// firstBaselineAnchor
-  NSLayoutYAxisAnchor get firstBaselineAnchor {
-  objc.checkOsVersionInternal('UIView.firstBaselineAnchor', iOS: (false, (9, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_firstBaselineAnchor);
-    return NSLayoutYAxisAnchor.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// heightAnchor
-  NSLayoutDimension get heightAnchor {
-  objc.checkOsVersionInternal('UIView.heightAnchor', iOS: (false, (9, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_heightAnchor);
-    return NSLayoutDimension.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// lastBaselineAnchor
-  NSLayoutYAxisAnchor get lastBaselineAnchor {
-  objc.checkOsVersionInternal('UIView.lastBaselineAnchor', iOS: (false, (9, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_lastBaselineAnchor);
-    return NSLayoutYAxisAnchor.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// leadingAnchor
-  NSLayoutXAxisAnchor get leadingAnchor {
-  objc.checkOsVersionInternal('UIView.leadingAnchor', iOS: (false, (9, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_leadingAnchor);
-    return NSLayoutXAxisAnchor.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// leftAnchor
-  NSLayoutXAxisAnchor get leftAnchor {
-  objc.checkOsVersionInternal('UIView.leftAnchor', iOS: (false, (9, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_leftAnchor);
-    return NSLayoutXAxisAnchor.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// rightAnchor
-  NSLayoutXAxisAnchor get rightAnchor {
-  objc.checkOsVersionInternal('UIView.rightAnchor', iOS: (false, (9, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_rightAnchor);
-    return NSLayoutXAxisAnchor.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// topAnchor
-  NSLayoutYAxisAnchor get topAnchor {
-  objc.checkOsVersionInternal('UIView.topAnchor', iOS: (false, (9, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_topAnchor);
-    return NSLayoutYAxisAnchor.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// trailingAnchor
-  NSLayoutXAxisAnchor get trailingAnchor {
-  objc.checkOsVersionInternal('UIView.trailingAnchor', iOS: (false, (9, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_trailingAnchor);
-    return NSLayoutXAxisAnchor.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// widthAnchor
-  NSLayoutDimension get widthAnchor {
-  objc.checkOsVersionInternal('UIView.widthAnchor', iOS: (false, (9, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_widthAnchor);
-    return NSLayoutDimension.fromPointer($ret, retain: true, release: true);
-  }
-
-}
-
-
-/// WARNING: UIViewLayoutRegion is a stub. To generate bindings for this class, include
-/// UIViewLayoutRegion in your config's objc-interfaces list.
-///
-/// UIViewLayoutRegion
-extension type UIViewLayoutRegion._(objc.ObjCObject object$) implements objc.ObjCObject,objc.NSObject {
-  /// Constructs a [UIViewLayoutRegion] that points to the same underlying object as [other].
-  UIViewLayoutRegion.as(objc.ObjCObject other) : object$ = other {
-    objc.checkOsVersionInternal('UIViewLayoutRegion', iOS: (false, (26, 0, 0)));
-  }
-
-  /// Constructs a [UIViewLayoutRegion] that wraps the given raw object pointer.
-  UIViewLayoutRegion.fromPointer(ffi.Pointer<objc.ObjCObjectImpl> other,
-      {bool retain = false, bool release = false}) :
-          object$ = objc.ObjCObject(other, retain: retain, release: release) {
-    objc.checkOsVersionInternal('UIViewLayoutRegion', iOS: (false, (26, 0, 0)));
-  }
-
-
-}
-
-
-/// UIViewMotionEffects
-extension UIViewMotionEffects on UIView {
-
-  /// addMotionEffect:
-  void addMotionEffect(UIMotionEffect effect) {
-  objc.checkOsVersionInternal('UIView.addMotionEffect:', iOS: (false, (7, 0, 0)));
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_addMotionEffect_, effect.ref.pointer);
-
-  }
-
-
-  /// motionEffects
-  objc.NSArray get motionEffects {
-  objc.checkOsVersionInternal('UIView.motionEffects', iOS: (false, (7, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_motionEffects);
-    return objc.NSArray.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// removeMotionEffect:
-  void removeMotionEffect(UIMotionEffect effect) {
-  objc.checkOsVersionInternal('UIView.removeMotionEffect:', iOS: (false, (7, 0, 0)));
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_removeMotionEffect_, effect.ref.pointer);
-
-  }
-
-
-  /// setMotionEffects:
-  set motionEffects(objc.NSArray value) {
-  objc.checkOsVersionInternal('UIView.setMotionEffects:', iOS: (false, (7, 0, 0)));
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setMotionEffects_, value.ref.pointer);
-
-  }
-
-}
-
-
-/// UIViewRendering
-extension UIViewRendering on UIView {
-
-  /// alpha
-  double get alpha {
-  objc.checkOsVersionInternal('UIView.alpha', iOS: (false, (2, 0, 0)));
-    return objc.useMsgSendVariants ? _objc_msgSend_1ukqyt8Fpret(object$.ref.pointer, _sel_alpha) : _objc_msgSend_1ukqyt8(object$.ref.pointer, _sel_alpha);
-
-  }
-
-
-  /// backgroundColor
-  UIColor? get backgroundColor {
-  objc.checkOsVersionInternal('UIView.backgroundColor', iOS: (false, (2, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_backgroundColor);
-    return $ret.address == 0 ? null : UIColor.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// clearsContextBeforeDrawing
-  bool get clearsContextBeforeDrawing {
-  objc.checkOsVersionInternal('UIView.clearsContextBeforeDrawing', iOS: (false, (2, 0, 0)));
-    return _objc_msgSend_91o635(object$.ref.pointer, _sel_clearsContextBeforeDrawing);
-
-  }
-
-
-  /// clipsToBounds
-  bool get clipsToBounds {
-  objc.checkOsVersionInternal('UIView.clipsToBounds', iOS: (false, (2, 0, 0)));
-    return _objc_msgSend_91o635(object$.ref.pointer, _sel_clipsToBounds);
-
-  }
-
-
-  /// contentMode
-  int get contentMode {
-  objc.checkOsVersionInternal('UIView.contentMode', iOS: (false, (2, 0, 0)));
-    return _objc_msgSend_12r2l30(object$.ref.pointer, _sel_contentMode);
-
-  }
-
-
-  /// contentStretch
-  objc.CGRect get contentStretch {
-  objc.checkOsVersionInternal('UIView.contentStretch', iOS: (false, (3, 0, 0)));
-    final $ptr = pkg_ffi.calloc<objc.CGRect>();
-    objc.useMsgSendVariants ? _objc_msgSend_bu1hbwStret($ptr, object$.ref.pointer, _sel_contentStretch) : $ptr.ref = _objc_msgSend_bu1hbw(object$.ref.pointer, _sel_contentStretch);
-    final $finalizable = $ptr.cast<ffi.Uint8>().asTypedList(
-        ffi.sizeOf<objc.CGRect>(), finalizer: pkg_ffi.calloc.nativeFree);
-    return ffi.Struct.create<objc.CGRect>(
-        $finalizable);
-
-  }
-
-
-  /// drawRect:
-  void drawRect(objc.CGRect rect) {
-  objc.checkOsVersionInternal('UIView.drawRect:', iOS: (false, (2, 0, 0)));
-_objc_msgSend_1okkq16(object$.ref.pointer, _sel_drawRect_, rect);
-
-  }
-
-
-  /// isHidden
-  bool get isHidden {
-  objc.checkOsVersionInternal('UIView.isHidden', iOS: (false, (2, 0, 0)));
-    return _objc_msgSend_91o635(object$.ref.pointer, _sel_isHidden);
-
-  }
-
-
-  /// isOpaque
-  bool get isOpaque {
-  objc.checkOsVersionInternal('UIView.isOpaque', iOS: (false, (2, 0, 0)));
-    return _objc_msgSend_91o635(object$.ref.pointer, _sel_isOpaque);
-
-  }
-
-
-  /// maskView
-  UIView? get maskView {
-  objc.checkOsVersionInternal('UIView.maskView', iOS: (false, (8, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_maskView);
-    return $ret.address == 0 ? null : UIView.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// setAlpha:
-  set alpha(double value) {
-  objc.checkOsVersionInternal('UIView.setAlpha:', iOS: (false, (2, 0, 0)));
-_objc_msgSend_hwm8nu(object$.ref.pointer, _sel_setAlpha_, value);
-
-  }
-
-
-  /// setBackgroundColor:
-  set backgroundColor(UIColor? value) {
-  objc.checkOsVersionInternal('UIView.setBackgroundColor:', iOS: (false, (2, 0, 0)));
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setBackgroundColor_, value?.ref.pointer ?? ffi.nullptr);
-
-  }
-
-
-  /// setClearsContextBeforeDrawing:
-  set clearsContextBeforeDrawing(bool value) {
-  objc.checkOsVersionInternal('UIView.setClearsContextBeforeDrawing:', iOS: (false, (2, 0, 0)));
-_objc_msgSend_1s56lr9(object$.ref.pointer, _sel_setClearsContextBeforeDrawing_, value);
-
-  }
-
-
-  /// setClipsToBounds:
-  set clipsToBounds(bool value) {
-  objc.checkOsVersionInternal('UIView.setClipsToBounds:', iOS: (false, (2, 0, 0)));
-_objc_msgSend_1s56lr9(object$.ref.pointer, _sel_setClipsToBounds_, value);
-
-  }
-
-
-  /// setContentMode:
-  set contentMode(int value) {
-  objc.checkOsVersionInternal('UIView.setContentMode:', iOS: (false, (2, 0, 0)));
-_objc_msgSend_26z7iq(object$.ref.pointer, _sel_setContentMode_, value);
-
-  }
-
-
-  /// setContentStretch:
-  set contentStretch(objc.CGRect value) {
-  objc.checkOsVersionInternal('UIView.setContentStretch:', iOS: (false, (3, 0, 0)));
-_objc_msgSend_1okkq16(object$.ref.pointer, _sel_setContentStretch_, value);
-
-  }
-
-
-  /// setHidden:
-  set isHidden(bool value) {
-  objc.checkOsVersionInternal('UIView.setHidden:', iOS: (false, (2, 0, 0)));
-_objc_msgSend_1s56lr9(object$.ref.pointer, _sel_setHidden_, value);
-
-  }
-
-
-  /// setMaskView:
-  set maskView(UIView? value) {
-  objc.checkOsVersionInternal('UIView.setMaskView:', iOS: (false, (8, 0, 0)));
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setMaskView_, value?.ref.pointer ?? ffi.nullptr);
-
-  }
-
-
-  /// setNeedsDisplay
-  void setNeedsDisplay() {
-  objc.checkOsVersionInternal('UIView.setNeedsDisplay', iOS: (false, (2, 0, 0)));
-_objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_setNeedsDisplay);
-
-  }
-
-
-  /// setNeedsDisplayInRect:
-  void setNeedsDisplayInRect(objc.CGRect rect) {
-  objc.checkOsVersionInternal('UIView.setNeedsDisplayInRect:', iOS: (false, (2, 0, 0)));
-_objc_msgSend_1okkq16(object$.ref.pointer, _sel_setNeedsDisplayInRect_, rect);
-
-  }
-
-
-  /// setOpaque:
-  set isOpaque(bool value) {
-  objc.checkOsVersionInternal('UIView.setOpaque:', iOS: (false, (2, 0, 0)));
-_objc_msgSend_1s56lr9(object$.ref.pointer, _sel_setOpaque_, value);
-
-  }
-
-
-  /// setTintAdjustmentMode:
-  set tintAdjustmentMode(int value) {
-  objc.checkOsVersionInternal('UIView.setTintAdjustmentMode:', iOS: (false, (7, 0, 0)));
-_objc_msgSend_15t6owj(object$.ref.pointer, _sel_setTintAdjustmentMode_, value);
-
-  }
-
-
-  /// setTintColor:
-  set tintColor(UIColor value) {
-  objc.checkOsVersionInternal('UIView.setTintColor:', iOS: (false, (7, 0, 0)));
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setTintColor_, value.ref.pointer);
-
-  }
-
-
-  /// tintAdjustmentMode
-  int get tintAdjustmentMode {
-  objc.checkOsVersionInternal('UIView.tintAdjustmentMode', iOS: (false, (7, 0, 0)));
-    return _objc_msgSend_1tlsbkb(object$.ref.pointer, _sel_tintAdjustmentMode);
-
-  }
-
-
-  /// tintColor
-  UIColor get tintColor {
-  objc.checkOsVersionInternal('UIView.tintColor', iOS: (false, (7, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_tintColor);
-    return UIColor.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// tintColorDidChange
-  void tintColorDidChange() {
-  objc.checkOsVersionInternal('UIView.tintColorDidChange', iOS: (false, (7, 0, 0)));
-_objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_tintColorDidChange);
-
-  }
-
-}
-
-sealed class UIViewTintAdjustmentMode {
-  static const UIViewTintAdjustmentModeAutomatic = 0;
-  static const UIViewTintAdjustmentModeNormal = 1;
-  static const UIViewTintAdjustmentModeDimmed = 2;}
-
-
-/// WARNING: UIWindow is a stub. To generate bindings for this class, include
-/// UIWindow in your config's objc-interfaces list.
-///
-/// UIWindow
-extension type UIWindow._(objc.ObjCObject object$) implements objc.ObjCObject,UIView {
-  /// Constructs a [UIWindow] that points to the same underlying object as [other].
-  UIWindow.as(objc.ObjCObject other) : object$ = other {
-    objc.checkOsVersionInternal('UIWindow', iOS: (false, (2, 0, 0)));
-  }
-
-  /// Constructs a [UIWindow] that wraps the given raw object pointer.
-  UIWindow.fromPointer(ffi.Pointer<objc.ObjCObjectImpl> other,
-      {bool retain = false, bool release = false}) :
-          object$ = objc.ObjCObject(other, retain: retain, release: release) {
-    objc.checkOsVersionInternal('UIWindow', iOS: (false, (2, 0, 0)));
-  }
-
-
-}
-
-
-/// UserInterfaceStyle
-extension UserInterfaceStyle on UIView {
-
-  /// overrideUserInterfaceStyle
-  int get overrideUserInterfaceStyle {
-  objc.checkOsVersionInternal('UIView.overrideUserInterfaceStyle', iOS: (false, (13, 0, 0)));
-    return _objc_msgSend_2x5ago(object$.ref.pointer, _sel_overrideUserInterfaceStyle);
-
-  }
-
-
-  /// setOverrideUserInterfaceStyle:
-  set overrideUserInterfaceStyle(int value) {
-  objc.checkOsVersionInternal('UIView.setOverrideUserInterfaceStyle:', iOS: (false, (13, 0, 0)));
-_objc_msgSend_15dz1ky(object$.ref.pointer, _sel_setOverrideUserInterfaceStyle_, value);
+  /// updateFocusIfNeeded
+  void updateFocusIfNeeded() {
+  objc.checkOsVersionInternal('UIView.updateFocusIfNeeded', iOS: (false, (9, 0, 0)));
+_objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_updateFocusIfNeeded);
 
   }
 
@@ -31729,26 +30438,19 @@ late final _class_UIScreen = objc.getClass("UIScreen");
 late final _class_UIView = objc.getClass("UIView");
 final _objc_msgSend_11spmsz = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_12kir0d = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Long , ffi.Long , ffi.Long , ffi.Long , ffi.Long , ffi.Long , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , int , int , int , int , int , int , ffi.Pointer<objc.ObjCObjectImpl> )>();
-final _objc_msgSend_12r2l30 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Long Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
-final _objc_msgSend_12yjd2m = objc.msgSendPointer.cast<ffi.NativeFunction<NSDirectionalEdgeInsets Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<NSDirectionalEdgeInsets Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
-final _objc_msgSend_12yjd2mStret = objc.msgSendStretPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<NSDirectionalEdgeInsets> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<void Function(ffi.Pointer<NSDirectionalEdgeInsets> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_13oxpc5 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Long Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_148tmbg = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , MLNCoordinateBounds , ffi.Bool )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , MLNCoordinateBounds , bool )>();
 final _objc_msgSend_14hpxwa = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.UnsignedLong )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int )>();
 final _objc_msgSend_151sglz = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
-final _objc_msgSend_15dz1ky = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Long )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int )>();
 final _objc_msgSend_15gm1s5 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Long )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , int )>();
 final _objc_msgSend_15pfzxv = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Long Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_15qeuct = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>();
-final _objc_msgSend_15t6owj = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Long )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int )>();
 final _objc_msgSend_15yz4e6 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGRect )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGRect )>();
-final _objc_msgSend_16dy26p = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Double , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , double , ffi.Pointer<objc.ObjCBlockImpl> )>();
+final _objc_msgSend_162qwxu = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Long )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int )>();
 final _objc_msgSend_16go90j = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<CGImage> , ffi.Double , ffi.Long )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<CGImage> , double , int )>();
 final _objc_msgSend_16hia13 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Bool , ffi.Double , ffi.Double )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , bool , double , double )>();
 final _objc_msgSend_16il6gh = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Long Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_16lja1o = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , UIEdgeInsets , ffi.Bool , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , UIEdgeInsets , bool , ffi.Pointer<objc.ObjCBlockImpl> )>();
-final _objc_msgSend_16w06qx = objc.msgSendPointer.cast<ffi.NativeFunction<UIEdgeInsets Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<UIEdgeInsets Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>();
-final _objc_msgSend_16w06qxStret = objc.msgSendStretPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<UIEdgeInsets> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<void Function(ffi.Pointer<UIEdgeInsets> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_17gvxvj = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Int64 )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int )>();
 final _objc_msgSend_17i4wqy = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Double , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , double , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_17wuhyd = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.UnsignedLong , ffi.UnsignedLong )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , int , int )>();
@@ -31760,7 +30462,6 @@ final _objc_msgSend_18o5nokStret = objc.msgSendStretPointer.cast<ffi.NativeFunct
 final _objc_msgSend_18qun1e = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCBlockImpl> )>();
 final _objc_msgSend_18wcmvu = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , MLNCoordinateBounds , UIEdgeInsets , ffi.Bool )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , MLNCoordinateBounds , UIEdgeInsets , bool )>();
 final _objc_msgSend_19l1l5m = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGPoint , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGPoint , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>();
-final _objc_msgSend_19ljaqg = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Bool Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGRect , ffi.Bool )>>().asFunction<bool Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGRect , bool )>();
 final _objc_msgSend_19nvye5 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Bool Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<bool Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_1a5ayri = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , MLNCoordinateBounds , UIEdgeInsets )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , MLNCoordinateBounds , UIEdgeInsets )>();
 final _objc_msgSend_1awx4w = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGSize , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGSize , ffi.Pointer<objc.ObjCBlockImpl> )>();
@@ -31768,57 +30469,44 @@ final _objc_msgSend_1c2zpn3 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Po
 final _objc_msgSend_1c31cvt = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.UnsignedLong Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_1cwp428 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.NSZone> )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.NSZone> )>();
 final _objc_msgSend_1cz0z8u = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.UnsignedLong Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
-final _objc_msgSend_1d9e4oe = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCSelector> )>();
-final _objc_msgSend_1eh0loo = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Double , ffi.UnsignedLong , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , double , int , ffi.Pointer<objc.ObjCBlockImpl> )>();
 final _objc_msgSend_1evryr5 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<CLLocationCoordinate2D> , ffi.UnsignedLong , UIEdgeInsets , ffi.Bool )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<CLLocationCoordinate2D> , int , UIEdgeInsets , bool )>();
 final _objc_msgSend_1f04296 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Bool Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<bool Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_1f4zv7b = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , UIEdgeInsets , ffi.Bool )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , UIEdgeInsets , bool )>();
 final _objc_msgSend_1f65wix = objc.msgSendPointer.cast<ffi.NativeFunction<MLNCoordinateBounds Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGRect , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<MLNCoordinateBounds Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGRect , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_1f65wixStret = objc.msgSendStretPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<MLNCoordinateBounds> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGRect , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<void Function(ffi.Pointer<MLNCoordinateBounds> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGRect , ffi.Pointer<objc.ObjCObjectImpl> )>();
-final _objc_msgSend_1ftk3d5 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Long , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Bool )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int , ffi.Pointer<objc.ObjCObjectImpl> , bool )>();
 final _objc_msgSend_1g8fos5 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , UIEdgeInsets )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , UIEdgeInsets )>();
 final _objc_msgSend_1ggt4c3 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGRect , ffi.Int32 , ffi.Double )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGRect , int , double )>();
-final _objc_msgSend_1gn1s3d = objc.msgSendPointer.cast<ffi.NativeFunction<objc.CGRect Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGRect )>>().asFunction<objc.CGRect Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGRect )>();
-final _objc_msgSend_1gn1s3dStret = objc.msgSendStretPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.CGRect> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGRect )>>().asFunction<void Function(ffi.Pointer<objc.CGRect> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGRect )>();
 final _objc_msgSend_1hz7y9r = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Long Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_1i0p3hy = objc.msgSendPointer.cast<ffi.NativeFunction<MLNTransition Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<MLNTransition Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_1i0p3hyStret = objc.msgSendStretPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<MLNTransition> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<void Function(ffi.Pointer<MLNTransition> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
-final _objc_msgSend_1isavsq = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Double , ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , double , ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.ObjCBlockImpl> )>();
 final _objc_msgSend_1iu40ms = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.UnsignedLong , ffi.Bool , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int , bool , ffi.Pointer<objc.ObjCBlockImpl> )>();
 final _objc_msgSend_1k439hd = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGRect , ffi.Double )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGRect , double )>();
 final _objc_msgSend_1kwkjor = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.UnsignedLong Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_1lsax7n = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Bool Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<bool Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>();
-final _objc_msgSend_1lzqwav = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> )>();
+final _objc_msgSend_1lv2zxu = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Long Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_1m9zum6 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.UnsignedLong Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_1mhd1pt = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , UIEdgeInsets )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , UIEdgeInsets )>();
 final _objc_msgSend_1mpyy6y = objc.msgSendPointer.cast<ffi.NativeFunction<objc.CGPoint Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<objc.CGPoint Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_1mpyy6yStret = objc.msgSendStretPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.CGPoint> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<void Function(ffi.Pointer<objc.CGPoint> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_1mz4wgw = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Long )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int )>();
 final _objc_msgSend_1nomli1 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.UnsignedLong , ffi.Pointer<ffi.Pointer<objc.ObjCObjectImpl>> )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , int , ffi.Pointer<ffi.Pointer<objc.ObjCObjectImpl>> )>();
-final _objc_msgSend_1nvl641 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Long )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , int )>();
 final _objc_msgSend_1o8rmw3 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Long )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int )>();
 final _objc_msgSend_1o8sa9u = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGRect , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGRect , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_1okkq16 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGRect )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGRect )>();
-final _objc_msgSend_1owrp3b = objc.msgSendPointer.cast<ffi.NativeFunction<objc.CGSize Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGSize )>>().asFunction<objc.CGSize Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGSize )>();
-final _objc_msgSend_1owrp3bStret = objc.msgSendStretPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.CGSize> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGSize )>>().asFunction<void Function(ffi.Pointer<objc.CGSize> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGSize )>();
 final _objc_msgSend_1p4gbjy = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.UnsignedLongLong Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_1pbhom5 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , CLLocationCoordinate2D , ffi.Bool , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , CLLocationCoordinate2D , bool , ffi.Pointer<objc.ObjCBlockImpl> )>();
-final _objc_msgSend_1pforg = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Double , ffi.Double , ffi.UnsignedLong , ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , double , double , int , ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.ObjCBlockImpl> )>();
 final _objc_msgSend_1pl9qdv = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_1qddrus = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.UnsignedLong , ffi.Bool )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int , bool )>();
 final _objc_msgSend_1qgnjih = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Long )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int )>();
 final _objc_msgSend_1rz5npq = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.UnsignedLong )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int )>();
 final _objc_msgSend_1s40ged = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Double , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , double , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCBlockImpl> )>();
-final _objc_msgSend_1s50tpz = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , CATransform3D )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , CATransform3D )>();
 final _objc_msgSend_1s56lr9 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Bool )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , bool )>();
 final _objc_msgSend_1sbdo65 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Bool Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.UnsignedLong )>>().asFunction<bool Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , int )>();
 final _objc_msgSend_1sotr3r = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_1sq2aut = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.UnsignedLong , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int , ffi.Pointer<objc.ObjCBlockImpl> )>();
 final _objc_msgSend_1swtepj = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.UnsignedLong Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
-final _objc_msgSend_1t6aok9 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Bool )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , bool )>();
 final _objc_msgSend_1tczmpv = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Double Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Double )>>().asFunction<double Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , double )>();
 final _objc_msgSend_1tczmpvFpret = objc.msgSendFpretPointer.cast<ffi.NativeFunction<ffi.Double Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Double )>>().asFunction<double Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , double )>();
-final _objc_msgSend_1tlsbkb = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Long Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_1ts4niw = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.UnsignedLong Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_1ua371c = objc.msgSendPointer.cast<ffi.NativeFunction<MLNCoordinateQuad Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<MLNCoordinateQuad Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_1ua371cStret = objc.msgSendStretPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<MLNCoordinateQuad> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<void Function(ffi.Pointer<MLNCoordinateQuad> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
@@ -31835,7 +30523,6 @@ final _objc_msgSend_1vdfken = objc.msgSendPointer.cast<ffi.NativeFunction<objc.C
 final _objc_msgSend_1vdfkenStret = objc.msgSendStretPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.CGSize> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<void Function(ffi.Pointer<objc.CGSize> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_1vft1l4 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Double , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , double , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_1vx0lfy = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , UIEdgeInsets , ffi.Bool , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , UIEdgeInsets , bool , ffi.Pointer<objc.ObjCBlockImpl> )>();
-final _objc_msgSend_1w5k0al = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Long , ffi.Long )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int , int )>();
 final _objc_msgSend_1wd735b = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Long Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_1wvd2xm = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , MLNCoordinateQuad )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , MLNCoordinateQuad )>();
 final _objc_msgSend_1xsl7ae = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Uint64 )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int )>();
@@ -31843,7 +30530,6 @@ final _objc_msgSend_1xt2lpz = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Vo
 final _objc_msgSend_1ya1kjn = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Int64 )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int )>();
 final _objc_msgSend_1zv0am = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , CLLocationCoordinate2D )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , CLLocationCoordinate2D )>();
 final _objc_msgSend_25drz7 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , UIEdgeInsets , ffi.Long , ffi.Double )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , UIEdgeInsets , int , double )>();
-final _objc_msgSend_26z7iq = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Long )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int )>();
 final _objc_msgSend_27lb7c = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_2cgrxl = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Float Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<double Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_2cgrxlFpret = objc.msgSendFpretPointer.cast<ffi.NativeFunction<ffi.Float Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<double Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
@@ -31852,10 +30538,7 @@ final _objc_msgSend_2nhnqw = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Voi
 final _objc_msgSend_2olghr = objc.msgSendPointer.cast<ffi.NativeFunction<objc.CGRect Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGRect , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<objc.CGRect Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGRect , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_2olghrStret = objc.msgSendStretPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.CGRect> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGRect , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<void Function(ffi.Pointer<objc.CGRect> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGRect , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_2tjjtl = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<CGImage> )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<CGImage> )>();
-final _objc_msgSend_2x5ago = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Long Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_2xggvt = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Double , ffi.Long )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , double , int )>();
-final _objc_msgSend_3fx2qn = objc.msgSendPointer.cast<ffi.NativeFunction<objc.CGSize Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGSize , ffi.Float , ffi.Float )>>().asFunction<objc.CGSize Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGSize , double , double )>();
-final _objc_msgSend_3fx2qnStret = objc.msgSendStretPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.CGSize> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGSize , ffi.Float , ffi.Float )>>().asFunction<void Function(ffi.Pointer<objc.CGSize> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGSize , double , double )>();
 final _objc_msgSend_3l1tu1 = objc.msgSendPointer.cast<ffi.NativeFunction<objc.CGPoint Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGPoint , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<objc.CGPoint Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGPoint , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_3l1tu1Stret = objc.msgSendStretPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.CGPoint> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGPoint , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<void Function(ffi.Pointer<objc.CGPoint> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGPoint , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_3zczym = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , CLLocationCoordinate2D , ffi.Double , ffi.Double , ffi.Bool )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , CLLocationCoordinate2D , double , double , bool )>();
@@ -31865,15 +30548,11 @@ final _objc_msgSend_4xp05x = objc.msgSendPointer.cast<ffi.NativeFunction<CLLocat
 final _objc_msgSend_4xp05xStret = objc.msgSendStretPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<CLLocationCoordinate2D> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGPoint , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<void Function(ffi.Pointer<CLLocationCoordinate2D> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGPoint , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_53bjzp = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , UIEdgeInsets )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , UIEdgeInsets )>();
 final _objc_msgSend_5pnf8k = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , MLNCoordinateBounds )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , MLNCoordinateBounds )>();
-final _objc_msgSend_5qlg3j = objc.msgSendPointer.cast<ffi.NativeFunction<CATransform3D Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<CATransform3D Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
-final _objc_msgSend_5qlg3jStret = objc.msgSendStretPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<CATransform3D> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<void Function(ffi.Pointer<CATransform3D> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_5qswvj = objc.msgSendPointer.cast<ffi.NativeFunction<CGAffineTransform Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<CGAffineTransform Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_5qswvjStret = objc.msgSendStretPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<CGAffineTransform> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<void Function(ffi.Pointer<CGAffineTransform> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
-final _objc_msgSend_5swr7b = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Long )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int )>();
 final _objc_msgSend_6eozaz = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.UnsignedLong )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , int )>();
 final _objc_msgSend_6gfr3p = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Long Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_6h5ewf = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , objc.NSRange )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , objc.NSRange )>();
-final _objc_msgSend_6jt11a = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Double , ffi.Double , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , double , double , ffi.Pointer<objc.ObjCBlockImpl> )>();
 final _objc_msgSend_6p7ndb = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Bool )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , bool )>();
 final _objc_msgSend_6plvbo = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Double )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , double )>();
 final _objc_msgSend_6ueq99 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , UIEdgeInsets , ffi.Bool )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , UIEdgeInsets , bool )>();
@@ -31882,10 +30561,9 @@ final _objc_msgSend_836y90 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Poi
 final _objc_msgSend_899qho = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Bool , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , bool , ffi.Pointer<objc.ObjCBlockImpl> )>();
 final _objc_msgSend_8fd115 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.UnsignedLong )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int )>();
 final _objc_msgSend_8mvtpi = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Long Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
-final _objc_msgSend_8ud30b = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Double Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.UnsignedLong )>>().asFunction<double Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int )>();
-final _objc_msgSend_8ud30bFpret = objc.msgSendFpretPointer.cast<ffi.NativeFunction<ffi.Double Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.UnsignedLong )>>().asFunction<double Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int )>();
 final _objc_msgSend_91o635 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Bool Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<bool Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_9ay59k = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , MLNCoordinateBounds )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , MLNCoordinateBounds )>();
+final _objc_msgSend_a4xp11 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<CGContext> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<CGContext> )>();
 final _objc_msgSend_a85mgj = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Double , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , double , ffi.Pointer<objc.ObjCBlockImpl> )>();
 final _objc_msgSend_b0p9a0 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Double , ffi.Double , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , double , double , ffi.Pointer<objc.ObjCBlockImpl> )>();
 final _objc_msgSend_b88ef1 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Long )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int )>();
@@ -31893,7 +30571,6 @@ final _objc_msgSend_bhswox = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Voi
 final _objc_msgSend_bpwlds = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCBlockImpl> )>();
 final _objc_msgSend_bu1hbw = objc.msgSendPointer.cast<ffi.NativeFunction<objc.CGRect Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<objc.CGRect Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_bu1hbwStret = objc.msgSendStretPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.CGRect> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<void Function(ffi.Pointer<objc.CGRect> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
-final _objc_msgSend_ciuhtc = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Double , ffi.Double , ffi.UnsignedLong , ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , double , double , int , ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.ObjCBlockImpl> )>();
 final _objc_msgSend_ct4cu5 = objc.msgSendPointer.cast<ffi.NativeFunction<UIEdgeInsets Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<UIEdgeInsets Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_ct4cu5Stret = objc.msgSendStretPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<UIEdgeInsets> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<void Function(ffi.Pointer<UIEdgeInsets> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_d9pvdp = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , CLLocationCoordinate2D , ffi.Double , ffi.Double , ffi.Bool , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , CLLocationCoordinate2D , double , double , bool , ffi.Pointer<objc.ObjCBlockImpl> )>();
@@ -31902,7 +30579,6 @@ final _objc_msgSend_e3qsqz = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Boo
 final _objc_msgSend_ebhzse = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Double , UIEdgeInsets )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , double , UIEdgeInsets )>();
 final _objc_msgSend_f167m6 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCBlockImpl> )>();
 final _objc_msgSend_fkvhxy = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Long Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
-final _objc_msgSend_fqrtz5 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.UnsignedLong , ffi.Pointer<objc.ObjCObjectImpl> , ffi.UnsignedLong , ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int , ffi.Pointer<objc.ObjCObjectImpl> , int , ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.ObjCBlockImpl> )>();
 final _objc_msgSend_ghxo7e = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Double , ffi.Bool )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , double , bool )>();
 final _objc_msgSend_gtxojt = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Bool Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<bool Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_gx50so = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>();
@@ -31910,9 +30586,11 @@ final _objc_msgSend_gxusyk = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Poi
 final _objc_msgSend_h14qyr = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Double , ffi.UnsignedLong )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , double , int )>();
 final _objc_msgSend_hwm8nu = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Double )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , double )>();
 final _objc_msgSend_hzzkpm = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Double )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , double )>();
+final _objc_msgSend_i2u4x4 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Long Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_iy8iz6 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGPoint )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGPoint )>();
 final _objc_msgSend_judg3a = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , MLNCoordinateQuad , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , MLNCoordinateQuad , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_k7jknj = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.UnsignedLong )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int )>();
+final _objc_msgSend_k9iunc = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.UnsignedLong Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_knxebs = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Long Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_kvi515 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Long , ffi.Long , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , int , int , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_kzdfm1 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.UnsignedLong Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
@@ -31925,7 +30603,6 @@ final _objc_msgSend_mus1wv = objc.msgSendPointer.cast<ffi.NativeFunction<objc.CG
 final _objc_msgSend_mus1wvStret = objc.msgSendStretPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.CGPoint> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , CLLocationCoordinate2D , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<void Function(ffi.Pointer<objc.CGPoint> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , CLLocationCoordinate2D , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_na2nx0 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Bool , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , bool , ffi.Pointer<objc.ObjCBlockImpl> )>();
 final _objc_msgSend_nnxkei = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCBlockImpl> )>();
-final _objc_msgSend_nxk2e9 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Double , ffi.Bool , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , double , bool , ffi.Pointer<objc.ObjCBlockImpl> )>();
 final _objc_msgSend_o762yo = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCBlockImpl> )>();
 final _objc_msgSend_o7hjv2 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , CLLocationCoordinate2D , ffi.Bool )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , CLLocationCoordinate2D , bool )>();
 final _objc_msgSend_oa8mke = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Double )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , double )>();
@@ -31934,40 +30611,28 @@ final _objc_msgSend_oftvaStret = objc.msgSendStretPointer.cast<ffi.NativeFunctio
 final _objc_msgSend_pfv6jd = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_pisvbv = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.UnsignedLong )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int )>();
 final _objc_msgSend_pov02z = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Long , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int , ffi.Pointer<objc.ObjCObjectImpl> )>();
-final _objc_msgSend_q6v4dl = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Double , ffi.UnsignedLong , ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , double , int , ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.ObjCBlockImpl> )>();
 final _objc_msgSend_q9b4dz = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.UnsignedLong , ffi.Bool )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , int , bool )>();
 final _objc_msgSend_qgt66z = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , CGAffineTransform )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , CGAffineTransform )>();
-final _objc_msgSend_qigf85 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Float Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Long )>>().asFunction<double Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int )>();
-final _objc_msgSend_qigf85Fpret = objc.msgSendFpretPointer.cast<ffi.NativeFunction<ffi.Float Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Long )>>().asFunction<double Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int )>();
-final _objc_msgSend_qjq6uk = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.UnsignedLong )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int )>();
-final _objc_msgSend_qugqlf = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Long )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int )>();
-final _objc_msgSend_qvletk = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGRect , ffi.Bool , UIEdgeInsets )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGRect , bool , UIEdgeInsets )>();
+final _objc_msgSend_qj4fey = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Long Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_r1s65y = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Double , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , double , ffi.Pointer<objc.ObjCObjectImpl> )>();
-final _objc_msgSend_r4l13g = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Double , ffi.Double , ffi.Double , ffi.Double , ffi.UnsignedLong , ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , double , double , double , double , int , ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.ObjCBlockImpl> )>();
 final _objc_msgSend_r8gdi7 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_racczx = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Long Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Long )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int )>();
 final _objc_msgSend_rnu2c5 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Bool , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , bool , ffi.Pointer<objc.ObjCObjectImpl> )>();
-final _objc_msgSend_s0isf8 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , NSDirectionalEdgeInsets )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , NSDirectionalEdgeInsets )>();
 final _objc_msgSend_s17tgr = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , UIEdgeInsets , ffi.Double , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , UIEdgeInsets , double , ffi.Pointer<objc.ObjCBlockImpl> )>();
 final _objc_msgSend_s2io2v = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Long Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_s3spq = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , MLNCoordinateBounds , ffi.Double , ffi.Double )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , MLNCoordinateBounds , double , double )>();
 final _objc_msgSend_s92gih = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_sbs4d5 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , CLLocationCoordinate2D , ffi.Double , ffi.Bool )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , CLLocationCoordinate2D , double , bool )>();
-final _objc_msgSend_sq30wq = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.UnsignedLong Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_tm3gbn = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Double , ffi.Pointer<objc.ObjCObjectImpl> , UIEdgeInsets , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , double , ffi.Pointer<objc.ObjCObjectImpl> , UIEdgeInsets , ffi.Pointer<objc.ObjCBlockImpl> )>();
 final _objc_msgSend_tuvlta = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.UnsignedLong )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , int )>();
 final _objc_msgSend_tz4p54 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Long Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Long , ffi.Long )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int , int )>();
 final _objc_msgSend_u7nfz8 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGPoint , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGPoint , ffi.Pointer<objc.ObjCObjectImpl> )>();
-final _objc_msgSend_up32gn = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Long )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int )>();
 final _objc_msgSend_uwvaik = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_v2jdd0 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<CLLocationCoordinate2D> , ffi.UnsignedLong , UIEdgeInsets , ffi.Double , ffi.Double , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<CLLocationCoordinate2D> , int , UIEdgeInsets , double , double , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCBlockImpl> )>();
 final _objc_msgSend_v5hmet = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Float )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , double )>();
 final _objc_msgSend_w7r098 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Double Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<double Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_w7r098Fpret = objc.msgSendFpretPointer.cast<ffi.NativeFunction<ffi.Double Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<double Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>();
-final _objc_msgSend_wd7esz = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Float , ffi.Long )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , double , int )>();
 final _objc_msgSend_wgkxx2 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGPoint )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGPoint )>();
-final _objc_msgSend_wk01t0 = objc.msgSendPointer.cast<ffi.NativeFunction<NSDirectionalEdgeInsets Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<NSDirectionalEdgeInsets Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>();
-final _objc_msgSend_wk01t0Stret = objc.msgSendStretPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<NSDirectionalEdgeInsets> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<void Function(ffi.Pointer<NSDirectionalEdgeInsets> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_x3m0f9 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , CLLocationCoordinate2D , ffi.Double , ffi.Double , ffi.Double )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , CLLocationCoordinate2D , double , double , double )>();
 final _objc_msgSend_xjcq8x = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Long Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_xoapar = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.UnsignedLong )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int )>();
@@ -31976,55 +30641,41 @@ final _objc_msgSend_y1izi1 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Poi
 final _objc_msgSend_yg3i7f = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGPoint , ffi.Int32 , ffi.Double )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGPoint , int , double )>();
 final _objc_msgSend_ygoa6a = objc.msgSendPointer.cast<ffi.NativeFunction<MLNCoordinateBounds Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<MLNCoordinateBounds Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_ygoa6aStret = objc.msgSendStretPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<MLNCoordinateBounds> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<void Function(ffi.Pointer<MLNCoordinateBounds> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
-final _objc_msgSend_yvwe5y = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Bool Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGPoint , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<bool Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGPoint , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_z7lywk = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , MLNTransition )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , MLNTransition )>();
 final _objc_msgSend_zjuvxo = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.UnsignedLong , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , int , ffi.Pointer<objc.ObjCObjectImpl> )>();
+late final _protocol_FlutterApi = objc.getProtocol("FlutterApi");
 late final _protocol_MLNFeature = objc.getProtocol("MLNFeature");
 late final _protocol_MLNMapViewDelegate = objc.getProtocol("MLNMapViewDelegate");
 late final _sel_CGImage = objc.registerName("CGImage");
 late final _sel_CIImage = objc.registerName("CIImage");
 late final _sel_URL = objc.registerName("URL");
 late final _sel_accessories = objc.registerName("accessories");
+late final _sel_actionForLayer_forKey_ = objc.registerName("actionForLayer:forKey:");
 late final _sel_actionWithHandler_ = objc.registerName("actionWithHandler:");
 late final _sel_actionWithTitle_image_identifier_handler_ = objc.registerName("actionWithTitle:image:identifier:handler:");
 late final _sel_addAnnotation_ = objc.registerName("addAnnotation:");
 late final _sel_addAnnotations_ = objc.registerName("addAnnotations:");
-late final _sel_addConstraint_ = objc.registerName("addConstraint:");
-late final _sel_addConstraints_ = objc.registerName("addConstraints:");
 late final _sel_addContentsOfFile_withCompletionHandler_ = objc.registerName("addContentsOfFile:withCompletionHandler:");
 late final _sel_addContentsOfURL_withCompletionHandler_ = objc.registerName("addContentsOfURL:withCompletionHandler:");
-late final _sel_addGestureRecognizer_ = objc.registerName("addGestureRecognizer:");
-late final _sel_addKeyframeWithRelativeStartTime_relativeDuration_animations_ = objc.registerName("addKeyframeWithRelativeStartTime:relativeDuration:animations:");
+late final _sel_addFlutterApiWithViewId_api_ = objc.registerName("addFlutterApiWithViewId:api:");
 late final _sel_addLayer_ = objc.registerName("addLayer:");
-late final _sel_addLayoutGuide_ = objc.registerName("addLayoutGuide:");
 late final _sel_addMapWithViewId_map_ = objc.registerName("addMapWithViewId:map:");
-late final _sel_addMotionEffect_ = objc.registerName("addMotionEffect:");
 late final _sel_addOverlay_ = objc.registerName("addOverlay:");
 late final _sel_addOverlays_ = objc.registerName("addOverlays:");
 late final _sel_addPackForRegion_withContext_completionHandler_ = objc.registerName("addPackForRegion:withContext:completionHandler:");
 late final _sel_addPluginLayerType_ = objc.registerName("addPluginLayerType:");
 late final _sel_addSource_ = objc.registerName("addSource:");
-late final _sel_addSubview_ = objc.registerName("addSubview:");
 late final _sel_alignCenter_ = objc.registerName("alignCenter:");
 late final _sel_alignJustified_ = objc.registerName("alignJustified:");
 late final _sel_alignLeft_ = objc.registerName("alignLeft:");
 late final _sel_alignRight_ = objc.registerName("alignRight:");
-late final _sel_alignmentRectForFrame_ = objc.registerName("alignmentRectForFrame:");
 late final _sel_alignmentRectInsets = objc.registerName("alignmentRectInsets");
 late final _sel_alloc = objc.registerName("alloc");
 late final _sel_allocWithZone_ = objc.registerName("allocWithZone:");
 late final _sel_allowEvaluation = objc.registerName("allowEvaluation");
-late final _sel_alpha = objc.registerName("alpha");
 late final _sel_altitude = objc.registerName("altitude");
-late final _sel_anchorPoint = objc.registerName("anchorPoint");
 late final _sel_anchorPointForGesture_ = objc.registerName("anchorPointForGesture:");
 late final _sel_anchorRotateOrZoomGesturesToCenterCoordinate = objc.registerName("anchorRotateOrZoomGesturesToCenterCoordinate");
-late final _sel_animateKeyframesWithDuration_delay_options_animations_completion_ = objc.registerName("animateKeyframesWithDuration:delay:options:animations:completion:");
-late final _sel_animateWithDuration_animations_ = objc.registerName("animateWithDuration:animations:");
-late final _sel_animateWithDuration_animations_completion_ = objc.registerName("animateWithDuration:animations:completion:");
-late final _sel_animateWithDuration_delay_options_animations_completion_ = objc.registerName("animateWithDuration:delay:options:animations:completion:");
-late final _sel_animateWithDuration_delay_usingSpringWithDamping_initialSpringVelocity_options_animations_completion_ = objc.registerName("animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:");
-late final _sel_animateWithSpringDuration_bounce_initialSpringVelocity_delay_options_animations_completion_ = objc.registerName("animateWithSpringDuration:bounce:initialSpringVelocity:delay:options:animations:completion:");
 late final _sel_animatedImageNamed_duration_ = objc.registerName("animatedImageNamed:duration:");
 late final _sel_animatedImageWithImages_duration_ = objc.registerName("animatedImageWithImages:duration:");
 late final _sel_animatedResizableImageNamed_capInsets_duration_ = objc.registerName("animatedResizableImageNamed:capInsets:duration:");
@@ -32037,8 +30688,6 @@ late final _sel_appearanceForTraitCollection_whenContainedIn_ = objc.registerNam
 late final _sel_appearanceWhenContainedInInstancesOfClasses_ = objc.registerName("appearanceWhenContainedInInstancesOfClasses:");
 late final _sel_appearanceWhenContainedIn_ = objc.registerName("appearanceWhenContainedIn:");
 late final _sel_applicationFrame = objc.registerName("applicationFrame");
-late final _sel_appliedContentSizeCategoryLimitsDescription = objc.registerName("appliedContentSizeCategoryLimitsDescription");
-late final _sel_areAnimationsEnabled = objc.registerName("areAnimationsEnabled");
 late final _sel_arguments = objc.registerName("arguments");
 late final _sel_attributeForKey_ = objc.registerName("attributeForKey:");
 late final _sel_attributes = objc.registerName("attributes");
@@ -32049,8 +30698,6 @@ late final _sel_attributionHTMLString = objc.registerName("attributionHTMLString
 late final _sel_attributionInfos = objc.registerName("attributionInfos");
 late final _sel_automaticStyle = objc.registerName("automaticStyle");
 late final _sel_automaticallyAdjustsContentInset = objc.registerName("automaticallyAdjustsContentInset");
-late final _sel_autoresizesSubviews = objc.registerName("autoresizesSubviews");
-late final _sel_autoresizingMask = objc.registerName("autoresizingMask");
 late final _sel_availableModes = objc.registerName("availableModes");
 late final _sel_backendResource = objc.registerName("backendResource");
 late final _sel_backgroundColor = objc.registerName("backgroundColor");
@@ -32062,11 +30709,8 @@ late final _sel_backgroundPatternTransition = objc.registerName("backgroundPatte
 late final _sel_baselineOffsetFromBottom = objc.registerName("baselineOffsetFromBottom");
 late final _sel_beamWithPreferredLength_axis_ = objc.registerName("beamWithPreferredLength:axis:");
 late final _sel_becomeFirstResponder = objc.registerName("becomeFirstResponder");
-late final _sel_beginAnimations_context_ = objc.registerName("beginAnimations:context:");
-late final _sel_bottomAnchor = objc.registerName("bottomAnchor");
 late final _sel_bounds = objc.registerName("bounds");
 late final _sel_brightness = objc.registerName("brightness");
-late final _sel_bringSubviewToFront_ = objc.registerName("bringSubviewToFront:");
 late final _sel_buildMenuWithBuilder_ = objc.registerName("buildMenuWithBuilder:");
 late final _sel_calibratedLatency = objc.registerName("calibratedLatency");
 late final _sel_camera = objc.registerName("camera");
@@ -32081,13 +30725,12 @@ late final _sel_cameraThatFitsShape_direction_edgePadding_ = objc.registerName("
 late final _sel_camera_fittingCoordinateBounds_edgePadding_ = objc.registerName("camera:fittingCoordinateBounds:edgePadding:");
 late final _sel_camera_fittingShape_edgePadding_ = objc.registerName("camera:fittingShape:edgePadding:");
 late final _sel_canBecomeFirstResponder = objc.registerName("canBecomeFirstResponder");
+late final _sel_canBecomeFocused = objc.registerName("canBecomeFocused");
 late final _sel_canPerformAction_withSender_ = objc.registerName("canPerformAction:withSender:");
 late final _sel_canResignFirstResponder = objc.registerName("canResignFirstResponder");
 late final _sel_capInsets = objc.registerName("capInsets");
 late final _sel_center = objc.registerName("center");
 late final _sel_centerCoordinate = objc.registerName("centerCoordinate");
-late final _sel_centerXAnchor = objc.registerName("centerXAnchor");
-late final _sel_centerYAnchor = objc.registerName("centerYAnchor");
 late final _sel_children = objc.registerName("children");
 late final _sel_childrenOfCluster_ = objc.registerName("childrenOfCluster:");
 late final _sel_circleBlur = objc.registerName("circleBlur");
@@ -32115,10 +30758,9 @@ late final _sel_circleTranslationAnchor = objc.registerName("circleTranslationAn
 late final _sel_circleTranslationTransition = objc.registerName("circleTranslationTransition");
 late final _sel_clearActionJournalLog = objc.registerName("clearActionJournalLog");
 late final _sel_clearAmbientCacheWithCompletionHandler_ = objc.registerName("clearAmbientCacheWithCompletionHandler:");
-late final _sel_clearsContextBeforeDrawing = objc.registerName("clearsContextBeforeDrawing");
-late final _sel_clipsToBounds = objc.registerName("clipsToBounds");
 late final _sel_collection = objc.registerName("collection");
-late final _sel_commitAnimations = objc.registerName("commitAnimations");
+late final _sel_collisionBoundingPath = objc.registerName("collisionBoundingPath");
+late final _sel_collisionBoundsType = objc.registerName("collisionBoundsType");
 late final _sel_compassView = objc.registerName("compassView");
 late final _sel_compassViewMargins = objc.registerName("compassViewMargins");
 late final _sel_compassViewPosition = objc.registerName("compassViewPosition");
@@ -32126,28 +30768,20 @@ late final _sel_configuration = objc.registerName("configuration");
 late final _sel_configurationURL = objc.registerName("configurationURL");
 late final _sel_conformsToProtocol_ = objc.registerName("conformsToProtocol:");
 late final _sel_constantValue = objc.registerName("constantValue");
-late final _sel_constraints = objc.registerName("constraints");
-late final _sel_constraintsAffectingLayoutForAxis_ = objc.registerName("constraintsAffectingLayoutForAxis:");
-late final _sel_contentCompressionResistancePriorityForAxis_ = objc.registerName("contentCompressionResistancePriorityForAxis:");
-late final _sel_contentHuggingPriorityForAxis_ = objc.registerName("contentHuggingPriorityForAxis:");
 late final _sel_contentInset = objc.registerName("contentInset");
-late final _sel_contentMode = objc.registerName("contentMode");
-late final _sel_contentScaleFactor = objc.registerName("contentScaleFactor");
-late final _sel_contentStretch = objc.registerName("contentStretch");
 late final _sel_context = objc.registerName("context");
 late final _sel_convertCoordinateBounds_toRectToView_ = objc.registerName("convertCoordinateBounds:toRectToView:");
 late final _sel_convertCoordinate_toPointToView_ = objc.registerName("convertCoordinate:toPointToView:");
-late final _sel_convertPoint_fromView_ = objc.registerName("convertPoint:fromView:");
+late final _sel_convertPoint_fromCoordinateSpace_ = objc.registerName("convertPoint:fromCoordinateSpace:");
 late final _sel_convertPoint_toCoordinateFromView_ = objc.registerName("convertPoint:toCoordinateFromView:");
-late final _sel_convertPoint_toView_ = objc.registerName("convertPoint:toView:");
-late final _sel_convertRect_fromView_ = objc.registerName("convertRect:fromView:");
+late final _sel_convertPoint_toCoordinateSpace_ = objc.registerName("convertPoint:toCoordinateSpace:");
+late final _sel_convertRect_fromCoordinateSpace_ = objc.registerName("convertRect:fromCoordinateSpace:");
 late final _sel_convertRect_toCoordinateBoundsFromView_ = objc.registerName("convertRect:toCoordinateBoundsFromView:");
-late final _sel_convertRect_toView_ = objc.registerName("convertRect:toView:");
+late final _sel_convertRect_toCoordinateSpace_ = objc.registerName("convertRect:toCoordinateSpace:");
 late final _sel_coordinate = objc.registerName("coordinate");
 late final _sel_coordinateSpace = objc.registerName("coordinateSpace");
 late final _sel_coordinates = objc.registerName("coordinates");
 late final _sel_copy_ = objc.registerName("copy:");
-late final _sel_cornerConfiguration = objc.registerName("cornerConfiguration");
 late final _sel_countOfBytesCompleted = objc.registerName("countOfBytesCompleted");
 late final _sel_currentEDRHeadroom = objc.registerName("currentEDRHeadroom");
 late final _sel_currentMode = objc.registerName("currentMode");
@@ -32156,7 +30790,6 @@ late final _sel_databasePath = objc.registerName("databasePath");
 late final _sel_databaseURL = objc.registerName("databaseURL");
 late final _sel_debugMask = objc.registerName("debugMask");
 late final _sel_decelerationRate = objc.registerName("decelerationRate");
-late final _sel_decodeRestorableStateWithCoder_ = objc.registerName("decodeRestorableStateWithCoder:");
 late final _sel_decreaseSize_ = objc.registerName("decreaseSize:");
 late final _sel_defaultStyle = objc.registerName("defaultStyle");
 late final _sel_defaultStyleURL = objc.registerName("defaultStyleURL");
@@ -32165,15 +30798,13 @@ late final _sel_delete_ = objc.registerName("delete:");
 late final _sel_dequeueReusableAnnotationImageWithIdentifier_ = objc.registerName("dequeueReusableAnnotationImageWithIdentifier:");
 late final _sel_dequeueReusableAnnotationViewWithIdentifier_ = objc.registerName("dequeueReusableAnnotationViewWithIdentifier:");
 late final _sel_deselectAnnotation_animated_ = objc.registerName("deselectAnnotation:animated:");
-late final _sel_didAddSubview_ = objc.registerName("didAddSubview:");
-late final _sel_didMoveToSuperview = objc.registerName("didMoveToSuperview");
-late final _sel_didMoveToWindow = objc.registerName("didMoveToWindow");
+late final _sel_didHintFocusMovement_ = objc.registerName("didHintFocusMovement:");
+late final _sel_didUpdateFocusInContext_withAnimationCoordinator_ = objc.registerName("didUpdateFocusInContext:withAnimationCoordinator:");
 late final _sel_direction = objc.registerName("direction");
-late final _sel_directionalEdgeInsetsForLayoutRegion_ = objc.registerName("directionalEdgeInsetsForLayoutRegion:");
-late final _sel_directionalLayoutMargins = objc.registerName("directionalLayoutMargins");
 late final _sel_disableLocationManager = objc.registerName("disableLocationManager");
 late final _sel_discoverabilityTitle = objc.registerName("discoverabilityTitle");
 late final _sel_displayHeadingCalibration = objc.registerName("displayHeadingCalibration");
+late final _sel_displayLayer_ = objc.registerName("displayLayer:");
 late final _sel_displayLinkWithTarget_selector_ = objc.registerName("displayLinkWithTarget:selector:");
 late final _sel_displayPreferences = objc.registerName("displayPreferences");
 late final _sel_drawAsPatternInRect_ = objc.registerName("drawAsPatternInRect:");
@@ -32181,21 +30812,16 @@ late final _sel_drawAtPoint_ = objc.registerName("drawAtPoint:");
 late final _sel_drawAtPoint_blendMode_alpha_ = objc.registerName("drawAtPoint:blendMode:alpha:");
 late final _sel_drawInRect_ = objc.registerName("drawInRect:");
 late final _sel_drawInRect_blendMode_alpha_ = objc.registerName("drawInRect:blendMode:alpha:");
-late final _sel_drawRect_ = objc.registerName("drawRect:");
-late final _sel_drawViewHierarchyInRect_afterScreenUpdates_ = objc.registerName("drawViewHierarchyInRect:afterScreenUpdates:");
+late final _sel_drawLayer_inContext_ = objc.registerName("drawLayer:inContext:");
 late final _sel_duplicate_ = objc.registerName("duplicate:");
 late final _sel_duration = objc.registerName("duration");
 late final _sel_dynamicNavigationCameraAnimationDuration = objc.registerName("dynamicNavigationCameraAnimationDuration");
-late final _sel_edgeInsetsForLayoutRegion_ = objc.registerName("edgeInsetsForLayoutRegion:");
 late final _sel_editingInteractionConfiguration = objc.registerName("editingInteractionConfiguration");
 late final _sel_effect = objc.registerName("effect");
 late final _sel_effectWithPreview_ = objc.registerName("effectWithPreview:");
-late final _sel_effectiveRadiusForCorner_ = objc.registerName("effectiveRadiusForCorner:");
+late final _sel_effectiveUserInterfaceLayoutDirection = objc.registerName("effectiveUserInterfaceLayoutDirection");
 late final _sel_enableRenderingStatsView_ = objc.registerName("enableRenderingStatsView:");
-late final _sel_encodeRestorableStateWithCoder_ = objc.registerName("encodeRestorableStateWithCoder:");
 late final _sel_encodeWithCoder_ = objc.registerName("encodeWithCoder:");
-late final _sel_exchangeSubviewAtIndex_withSubviewAtIndex_ = objc.registerName("exchangeSubviewAtIndex:withSubviewAtIndex:");
-late final _sel_exerciseAmbiguityInLayout = objc.registerName("exerciseAmbiguityInLayout");
 late final _sel_export_ = objc.registerName("export:");
 late final _sel_expressionBlock = objc.registerName("expressionBlock");
 late final _sel_expressionForAggregate_ = objc.registerName("expressionForAggregate:");
@@ -32260,27 +30886,29 @@ late final _sel_findAndReplace_ = objc.registerName("findAndReplace:");
 late final _sel_findNext_ = objc.registerName("findNext:");
 late final _sel_findPrevious_ = objc.registerName("findPrevious:");
 late final _sel_find_ = objc.registerName("find:");
-late final _sel_firstBaselineAnchor = objc.registerName("firstBaselineAnchor");
 late final _sel_fixedCoordinateSpace = objc.registerName("fixedCoordinateSpace");
 late final _sel_flipsForRightToLeftLayoutDirection = objc.registerName("flipsForRightToLeftLayoutDirection");
 late final _sel_flyToCamera_completionHandler_ = objc.registerName("flyToCamera:completionHandler:");
 late final _sel_flyToCamera_edgePadding_withDuration_completionHandler_ = objc.registerName("flyToCamera:edgePadding:withDuration:completionHandler:");
 late final _sel_flyToCamera_withDuration_completionHandler_ = objc.registerName("flyToCamera:withDuration:completionHandler:");
 late final _sel_flyToCamera_withDuration_peakAltitude_completionHandler_ = objc.registerName("flyToCamera:withDuration:peakAltitude:completionHandler:");
+late final _sel_focusEffect = objc.registerName("focusEffect");
+late final _sel_focusGroupIdentifier = objc.registerName("focusGroupIdentifier");
+late final _sel_focusGroupPriority = objc.registerName("focusGroupPriority");
+late final _sel_focusItemContainer = objc.registerName("focusItemContainer");
+late final _sel_focusItemDeferralMode = objc.registerName("focusItemDeferralMode");
+late final _sel_focusItemsInRect_ = objc.registerName("focusItemsInRect:");
 late final _sel_focusedItem = objc.registerName("focusedItem");
 late final _sel_focusedView = objc.registerName("focusedView");
 late final _sel_frame = objc.registerName("frame");
-late final _sel_frameForAlignmentRect_ = objc.registerName("frameForAlignmentRect:");
 late final _sel_function = objc.registerName("function");
 late final _sel_geoJSONDataUsingEncoding_ = objc.registerName("geoJSONDataUsingEncoding:");
 late final _sel_geoJSONDictionary = objc.registerName("geoJSONDictionary");
 late final _sel_geometryTypeVariableExpression = objc.registerName("geometryTypeVariableExpression");
-late final _sel_gestureRecognizerShouldBegin_ = objc.registerName("gestureRecognizerShouldBegin:");
-late final _sel_gestureRecognizers = objc.registerName("gestureRecognizers");
 late final _sel_getActionJournalLog = objc.registerName("getActionJournalLog");
 late final _sel_getActionJournalLogFiles = objc.registerName("getActionJournalLogFiles");
+late final _sel_getFlutterApiWithViewId_ = objc.registerName("getFlutterApiWithViewId:");
 late final _sel_getMapWithViewId_ = objc.registerName("getMapWithViewId:");
-late final _sel_hasAmbiguousLayout = objc.registerName("hasAmbiguousLayout");
 late final _sel_hasBaseline = objc.registerName("hasBaseline");
 late final _sel_heading = objc.registerName("heading");
 late final _sel_heatmapColor = objc.registerName("heatmapColor");
@@ -32292,7 +30920,6 @@ late final _sel_heatmapOpacityTransition = objc.registerName("heatmapOpacityTran
 late final _sel_heatmapRadius = objc.registerName("heatmapRadius");
 late final _sel_heatmapRadiusTransition = objc.registerName("heatmapRadiusTransition");
 late final _sel_heatmapWeight = objc.registerName("heatmapWeight");
-late final _sel_heightAnchor = objc.registerName("heightAnchor");
 late final _sel_hiddenPointerStyle = objc.registerName("hiddenPointerStyle");
 late final _sel_hillshadeAccentColor = objc.registerName("hillshadeAccentColor");
 late final _sel_hillshadeAccentColorTransition = objc.registerName("hillshadeAccentColorTransition");
@@ -32304,7 +30931,6 @@ late final _sel_hillshadeIlluminationAnchor = objc.registerName("hillshadeIllumi
 late final _sel_hillshadeIlluminationDirection = objc.registerName("hillshadeIlluminationDirection");
 late final _sel_hillshadeShadowColor = objc.registerName("hillshadeShadowColor");
 late final _sel_hillshadeShadowColorTransition = objc.registerName("hillshadeShadowColorTransition");
-late final _sel_hitTest_withEvent_ = objc.registerName("hitTest:withEvent:");
 late final _sel_iconAllowOverlap = objc.registerName("iconAllowOverlap");
 late final _sel_iconAllowsOverlap = objc.registerName("iconAllowsOverlap");
 late final _sel_iconAnchor = objc.registerName("iconAnchor");
@@ -32371,7 +30997,6 @@ late final _sel_imageWithoutBaseline = objc.registerName("imageWithoutBaseline")
 late final _sel_images = objc.registerName("images");
 late final _sel_includesIdeographicGlyphs = objc.registerName("includesIdeographicGlyphs");
 late final _sel_increaseSize_ = objc.registerName("increaseSize:");
-late final _sel_inheritedAnimationDuration = objc.registerName("inheritedAnimationDuration");
 late final _sel_init = objc.registerName("init");
 late final _sel_initWithCGImage_ = objc.registerName("initWithCGImage:");
 late final _sel_initWithCGImage_scale_orientation_ = objc.registerName("initWithCGImage:scale:orientation:");
@@ -32402,28 +31027,18 @@ late final _sel_initWithStyleURL_bounds_fromZoomLevel_toZoomLevel_ = objc.regist
 late final _sel_insertLayer_aboveLayer_ = objc.registerName("insertLayer:aboveLayer:");
 late final _sel_insertLayer_atIndex_ = objc.registerName("insertLayer:atIndex:");
 late final _sel_insertLayer_belowLayer_ = objc.registerName("insertLayer:belowLayer:");
-late final _sel_insertSubview_aboveSubview_ = objc.registerName("insertSubview:aboveSubview:");
-late final _sel_insertSubview_atIndex_ = objc.registerName("insertSubview:atIndex:");
-late final _sel_insertSubview_belowSubview_ = objc.registerName("insertSubview:belowSubview:");
-late final _sel_insetsLayoutMarginsFromSafeArea = objc.registerName("insetsLayoutMarginsFromSafeArea");
-late final _sel_intrinsicContentSize = objc.registerName("intrinsicContentSize");
 late final _sel_invalidateAmbientCacheWithCompletionHandler_ = objc.registerName("invalidateAmbientCacheWithCompletionHandler:");
-late final _sel_invalidateIntrinsicContentSize = objc.registerName("invalidateIntrinsicContentSize");
 late final _sel_invalidatePack_withCompletionHandler_ = objc.registerName("invalidatePack:withCompletionHandler:");
 late final _sel_isCaptured = objc.registerName("isCaptured");
-late final _sel_isDescendantOfView_ = objc.registerName("isDescendantOfView:");
 late final _sel_isEnabled = objc.registerName("isEnabled");
 late final _sel_isEqualToMapCamera_ = objc.registerName("isEqualToMapCamera:");
-late final _sel_isExclusiveTouch = objc.registerName("isExclusiveTouch");
 late final _sel_isFillAntialiased = objc.registerName("isFillAntialiased");
 late final _sel_isFirstResponder = objc.registerName("isFirstResponder");
+late final _sel_isFocused = objc.registerName("isFocused");
 late final _sel_isHapticFeedbackEnabled = objc.registerName("isHapticFeedbackEnabled");
-late final _sel_isHidden = objc.registerName("isHidden");
 late final _sel_isHighDynamicRange = objc.registerName("isHighDynamicRange");
 late final _sel_isIconOptional = objc.registerName("isIconOptional");
 late final _sel_isKindOfClass_ = objc.registerName("isKindOfClass:");
-late final _sel_isMultipleTouchEnabled = objc.registerName("isMultipleTouchEnabled");
-late final _sel_isOpaque = objc.registerName("isOpaque");
 late final _sel_isPitchEnabled = objc.registerName("isPitchEnabled");
 late final _sel_isQuickZoomReversed = objc.registerName("isQuickZoomReversed");
 late final _sel_isRenderingStatsViewEnabled = objc.registerName("isRenderingStatsViewEnabled");
@@ -32431,27 +31046,21 @@ late final _sel_isRotateEnabled = objc.registerName("isRotateEnabled");
 late final _sel_isScrollEnabled = objc.registerName("isScrollEnabled");
 late final _sel_isSymbolImage = objc.registerName("isSymbolImage");
 late final _sel_isTextOptional = objc.registerName("isTextOptional");
+late final _sel_isTransparentFocusItem = objc.registerName("isTransparentFocusItem");
+late final _sel_isUserInteractionEnabled = objc.registerName("isUserInteractionEnabled");
 late final _sel_isUserLocationVisible = objc.registerName("isUserLocationVisible");
 late final _sel_isVisible = objc.registerName("isVisible");
 late final _sel_isZoomEnabled = objc.registerName("isZoomEnabled");
 late final _sel_keepsIconUpright = objc.registerName("keepsIconUpright");
 late final _sel_keepsTextUpright = objc.registerName("keepsTextUpright");
 late final _sel_keyPath = objc.registerName("keyPath");
-late final _sel_keyboardLayoutGuide = objc.registerName("keyboardLayoutGuide");
-late final _sel_lastBaselineAnchor = objc.registerName("lastBaselineAnchor");
+late final _sel_layer = objc.registerName("layer");
 late final _sel_layerClass = objc.registerName("layerClass");
+late final _sel_layerWillDraw_ = objc.registerName("layerWillDraw:");
 late final _sel_layerWithIdentifier_ = objc.registerName("layerWithIdentifier:");
 late final _sel_layers = objc.registerName("layers");
-late final _sel_layoutGuideForLayoutRegion_ = objc.registerName("layoutGuideForLayoutRegion:");
-late final _sel_layoutGuides = objc.registerName("layoutGuides");
-late final _sel_layoutIfNeeded = objc.registerName("layoutIfNeeded");
-late final _sel_layoutMargins = objc.registerName("layoutMargins");
-late final _sel_layoutMarginsDidChange = objc.registerName("layoutMarginsDidChange");
-late final _sel_layoutMarginsGuide = objc.registerName("layoutMarginsGuide");
-late final _sel_layoutSubviews = objc.registerName("layoutSubviews");
-late final _sel_leadingAnchor = objc.registerName("leadingAnchor");
+late final _sel_layoutSublayersOfLayer_ = objc.registerName("layoutSublayersOfLayer:");
 late final _sel_leavesOfCluster_offset_limit_ = objc.registerName("leavesOfCluster:offset:limit:");
-late final _sel_leftAnchor = objc.registerName("leftAnchor");
 late final _sel_leftExpression = objc.registerName("leftExpression");
 late final _sel_light = objc.registerName("light");
 late final _sel_lineBlur = objc.registerName("lineBlur");
@@ -32550,8 +31159,6 @@ late final _sel_mapView_strokeColorForShapeAnnotation_ = objc.registerName("mapV
 late final _sel_mapView_tapOnCalloutForAnnotation_ = objc.registerName("mapView:tapOnCalloutForAnnotation:");
 late final _sel_mapView_tileDidTriggerAction_x_y_z_wrap_overscaledZ_sourceID_ = objc.registerName("mapView:tileDidTriggerAction:x:y:z:wrap:overscaledZ:sourceID:");
 late final _sel_mapView_viewForAnnotation_ = objc.registerName("mapView:viewForAnnotation:");
-late final _sel_maskView = objc.registerName("maskView");
-late final _sel_maximumContentSizeCategory = objc.registerName("maximumContentSizeCategory");
 late final _sel_maximumFramesPerSecond = objc.registerName("maximumFramesPerSecond");
 late final _sel_maximumPitch = objc.registerName("maximumPitch");
 late final _sel_maximumRasterBrightness = objc.registerName("maximumRasterBrightness");
@@ -32573,33 +31180,33 @@ late final _sel_mgl_expressionForMatchingExpression_inDictionary_defaultExpressi
 late final _sel_mgl_expressionForSteppingExpression_fromExpression_stops_ = objc.registerName("mgl_expressionForSteppingExpression:fromExpression:stops:");
 late final _sel_mgl_expressionLocalizedIntoLocale_ = objc.registerName("mgl_expressionLocalizedIntoLocale:");
 late final _sel_mgl_jsonExpressionObject = objc.registerName("mgl_jsonExpressionObject");
-late final _sel_minimumContentSizeCategory = objc.registerName("minimumContentSizeCategory");
 late final _sel_minimumPitch = objc.registerName("minimumPitch");
 late final _sel_minimumRasterBrightness = objc.registerName("minimumRasterBrightness");
 late final _sel_minimumRasterBrightnessTransition = objc.registerName("minimumRasterBrightnessTransition");
 late final _sel_minimumZoomLevel = objc.registerName("minimumZoomLevel");
 late final _sel_mirroredScreen = objc.registerName("mirroredScreen");
-late final _sel_modifyAnimationsWithRepeatCount_autoreverses_animations_ = objc.registerName("modifyAnimationsWithRepeatCount:autoreverses:animations:");
 late final _sel_motionBegan_withEvent_ = objc.registerName("motionBegan:withEvent:");
 late final _sel_motionCancelled_withEvent_ = objc.registerName("motionCancelled:withEvent:");
-late final _sel_motionEffects = objc.registerName("motionEffects");
 late final _sel_motionEnded_withEvent_ = objc.registerName("motionEnded:withEvent:");
 late final _sel_move_ = objc.registerName("move:");
 late final _sel_name = objc.registerName("name");
 late final _sel_nativeBounds = objc.registerName("nativeBounds");
 late final _sel_nativeScale = objc.registerName("nativeScale");
-late final _sel_needsUpdateConstraints = objc.registerName("needsUpdateConstraints");
 late final _sel_new = objc.registerName("new");
 late final _sel_newFromPasteboard_ = objc.registerName("newFromPasteboard:");
 late final _sel_nextResponder = objc.registerName("nextResponder");
+late final _sel_onDoubleTap = objc.registerName("onDoubleTap");
+late final _sel_onLongPress = objc.registerName("onLongPress");
+late final _sel_onSecondaryTap = objc.registerName("onSecondaryTap");
+late final _sel_onTap = objc.registerName("onTap");
 late final _sel_operand = objc.registerName("operand");
 late final _sel_options = objc.registerName("options");
 late final _sel_overlays = objc.registerName("overlays");
-late final _sel_overrideUserInterfaceStyle = objc.registerName("overrideUserInterfaceStyle");
 late final _sel_overscanCompensation = objc.registerName("overscanCompensation");
 late final _sel_overscanCompensationInsets = objc.registerName("overscanCompensationInsets");
 late final _sel_packs = objc.registerName("packs");
 late final _sel_panScrollingMode = objc.registerName("panScrollingMode");
+late final _sel_parentFocusEnvironment = objc.registerName("parentFocusEnvironment");
 late final _sel_parseExpressionWithPropertyName_expression_ = objc.registerName("parseExpressionWithPropertyName:expression:");
 late final _sel_parsePredicateWithRaw_ = objc.registerName("parsePredicateWithRaw:");
 late final _sel_pasteAndGo_ = objc.registerName("pasteAndGo:");
@@ -32607,17 +31214,16 @@ late final _sel_pasteAndMatchStyle_ = objc.registerName("pasteAndMatchStyle:");
 late final _sel_pasteAndSearch_ = objc.registerName("pasteAndSearch:");
 late final _sel_paste_ = objc.registerName("paste:");
 late final _sel_performClose_ = objc.registerName("performClose:");
-late final _sel_performSystemAnimation_onViews_options_animations_completion_ = objc.registerName("performSystemAnimation:onViews:options:animations:completion:");
 late final _sel_performWithSender_target_ = objc.registerName("performWithSender:target:");
-late final _sel_performWithoutAnimation_ = objc.registerName("performWithoutAnimation:");
 late final _sel_performsPlacementTransitions = objc.registerName("performsPlacementTransitions");
 late final _sel_pitch = objc.registerName("pitch");
-late final _sel_pointInside_withEvent_ = objc.registerName("pointInside:withEvent:");
 late final _sel_potentialEDRHeadroom = objc.registerName("potentialEDRHeadroom");
 late final _sel_predefinedStyle_ = objc.registerName("predefinedStyle:");
 late final _sel_predefinedStyles = objc.registerName("predefinedStyles");
 late final _sel_predicate = objc.registerName("predicate");
 late final _sel_preferredElementSize = objc.registerName("preferredElementSize");
+late final _sel_preferredFocusEnvironments = objc.registerName("preferredFocusEnvironments");
+late final _sel_preferredFocusedView = objc.registerName("preferredFocusedView");
 late final _sel_preferredFramesPerSecond = objc.registerName("preferredFramesPerSecond");
 late final _sel_preferredMode = objc.registerName("preferredMode");
 late final _sel_prefetchesTiles = objc.registerName("prefetchesTiles");
@@ -32626,7 +31232,6 @@ late final _sel_preloadData_forURL_modificationDate_expirationDate_eTag_mustReva
 late final _sel_prepareForDisplayWithCompletionHandler_ = objc.registerName("prepareForDisplayWithCompletionHandler:");
 late final _sel_prepareThumbnailOfSize_completionHandler_ = objc.registerName("prepareThumbnailOfSize:completionHandler:");
 late final _sel_presentationSourceItem = objc.registerName("presentationSourceItem");
-late final _sel_preservesSuperviewLayoutMargins = objc.registerName("preservesSuperviewLayoutMargins");
 late final _sel_pressesBegan_withEvent_ = objc.registerName("pressesBegan:withEvent:");
 late final _sel_pressesCancelled_withEvent_ = objc.registerName("pressesCancelled:withEvent:");
 late final _sel_pressesChanged_withEvent_ = objc.registerName("pressesChanged:withEvent:");
@@ -32650,7 +31255,6 @@ late final _sel_rasterResampling = objc.registerName("rasterResampling");
 late final _sel_rasterResamplingMode = objc.registerName("rasterResamplingMode");
 late final _sel_rasterSaturation = objc.registerName("rasterSaturation");
 late final _sel_rasterSaturationTransition = objc.registerName("rasterSaturationTransition");
-late final _sel_readableContentGuide = objc.registerName("readableContentGuide");
 late final _sel_referenceDisplayModeStatus = objc.registerName("referenceDisplayModeStatus");
 late final _sel_region = objc.registerName("region");
 late final _sel_reloadPacks = objc.registerName("reloadPacks");
@@ -32658,15 +31262,10 @@ late final _sel_reloadStyle_ = objc.registerName("reloadStyle:");
 late final _sel_remoteControlReceivedWithEvent_ = objc.registerName("remoteControlReceivedWithEvent:");
 late final _sel_removeAnnotation_ = objc.registerName("removeAnnotation:");
 late final _sel_removeAnnotations_ = objc.registerName("removeAnnotations:");
-late final _sel_removeConstraint_ = objc.registerName("removeConstraint:");
-late final _sel_removeConstraints_ = objc.registerName("removeConstraints:");
-late final _sel_removeFromSuperview = objc.registerName("removeFromSuperview");
-late final _sel_removeGestureRecognizer_ = objc.registerName("removeGestureRecognizer:");
+late final _sel_removeFlutterApiWithViewId_ = objc.registerName("removeFlutterApiWithViewId:");
 late final _sel_removeImageForName_ = objc.registerName("removeImageForName:");
 late final _sel_removeLayer_ = objc.registerName("removeLayer:");
-late final _sel_removeLayoutGuide_ = objc.registerName("removeLayoutGuide:");
 late final _sel_removeMapWithViewId_ = objc.registerName("removeMapWithViewId:");
-late final _sel_removeMotionEffect_ = objc.registerName("removeMotionEffect:");
 late final _sel_removeOverlay_ = objc.registerName("removeOverlay:");
 late final _sel_removeOverlays_ = objc.registerName("removeOverlays:");
 late final _sel_removePack_withCompletionHandler_ = objc.registerName("removePack:withCompletionHandler:");
@@ -32676,22 +31275,15 @@ late final _sel_rename_ = objc.registerName("rename:");
 late final _sel_renderingMode = objc.registerName("renderingMode");
 late final _sel_repeatBehavior = objc.registerName("repeatBehavior");
 late final _sel_requestProgress = objc.registerName("requestProgress");
-late final _sel_requiresConstraintBasedLayout = objc.registerName("requiresConstraintBasedLayout");
 late final _sel_resetDatabaseWithCompletionHandler_ = objc.registerName("resetDatabaseWithCompletionHandler:");
 late final _sel_resetNorth = objc.registerName("resetNorth");
 late final _sel_resetPosition = objc.registerName("resetPosition");
 late final _sel_resignFirstResponder = objc.registerName("resignFirstResponder");
 late final _sel_resizableImageWithCapInsets_ = objc.registerName("resizableImageWithCapInsets:");
 late final _sel_resizableImageWithCapInsets_resizingMode_ = objc.registerName("resizableImageWithCapInsets:resizingMode:");
-late final _sel_resizableSnapshotViewFromRect_afterScreenUpdates_withCapInsets_ = objc.registerName("resizableSnapshotViewFromRect:afterScreenUpdates:withCapInsets:");
 late final _sel_resizingMode = objc.registerName("resizingMode");
-late final _sel_restorationIdentifier = objc.registerName("restorationIdentifier");
 late final _sel_resume = objc.registerName("resume");
-late final _sel_rightAnchor = objc.registerName("rightAnchor");
 late final _sel_rightExpression = objc.registerName("rightExpression");
-late final _sel_safeAreaInsets = objc.registerName("safeAreaInsets");
-late final _sel_safeAreaInsetsDidChange = objc.registerName("safeAreaInsetsDidChange");
-late final _sel_safeAreaLayoutGuide = objc.registerName("safeAreaLayoutGuide");
 late final _sel_scale = objc.registerName("scale");
 late final _sel_scaleBar = objc.registerName("scaleBar");
 late final _sel_scaleBarMargins = objc.registerName("scaleBarMargins");
@@ -32707,38 +31299,21 @@ late final _sel_select_ = objc.registerName("select:");
 late final _sel_selectedAnnotations = objc.registerName("selectedAnnotations");
 late final _sel_selectedElements = objc.registerName("selectedElements");
 late final _sel_selectedImage = objc.registerName("selectedImage");
-late final _sel_sendSubviewToBack_ = objc.registerName("sendSubviewToBack:");
+late final _sel_semanticContentAttribute = objc.registerName("semanticContentAttribute");
 late final _sel_sender = objc.registerName("sender");
 late final _sel_setAccessories_ = objc.registerName("setAccessories:");
-late final _sel_setAlpha_ = objc.registerName("setAlpha:");
 late final _sel_setAltitude_ = objc.registerName("setAltitude:");
-late final _sel_setAnchorPoint_ = objc.registerName("setAnchorPoint:");
 late final _sel_setAnchorRotateOrZoomGesturesToCenterCoordinate_ = objc.registerName("setAnchorRotateOrZoomGesturesToCenterCoordinate:");
-late final _sel_setAnimationBeginsFromCurrentState_ = objc.registerName("setAnimationBeginsFromCurrentState:");
-late final _sel_setAnimationCurve_ = objc.registerName("setAnimationCurve:");
-late final _sel_setAnimationDelay_ = objc.registerName("setAnimationDelay:");
-late final _sel_setAnimationDelegate_ = objc.registerName("setAnimationDelegate:");
-late final _sel_setAnimationDidStopSelector_ = objc.registerName("setAnimationDidStopSelector:");
-late final _sel_setAnimationDuration_ = objc.registerName("setAnimationDuration:");
-late final _sel_setAnimationRepeatAutoreverses_ = objc.registerName("setAnimationRepeatAutoreverses:");
-late final _sel_setAnimationRepeatCount_ = objc.registerName("setAnimationRepeatCount:");
-late final _sel_setAnimationStartDate_ = objc.registerName("setAnimationStartDate:");
-late final _sel_setAnimationTransition_forView_cache_ = objc.registerName("setAnimationTransition:forView:cache:");
-late final _sel_setAnimationWillStartSelector_ = objc.registerName("setAnimationWillStartSelector:");
-late final _sel_setAnimationsEnabled_ = objc.registerName("setAnimationsEnabled:");
 late final _sel_setAttributes_ = objc.registerName("setAttributes:");
 late final _sel_setAttributionButtonMargins_ = objc.registerName("setAttributionButtonMargins:");
 late final _sel_setAttributionButtonPosition_ = objc.registerName("setAttributionButtonPosition:");
 late final _sel_setAutomaticallyAdjustsContentInset_ = objc.registerName("setAutomaticallyAdjustsContentInset:");
-late final _sel_setAutoresizesSubviews_ = objc.registerName("setAutoresizesSubviews:");
-late final _sel_setAutoresizingMask_ = objc.registerName("setAutoresizingMask:");
 late final _sel_setBackgroundColorTransition_ = objc.registerName("setBackgroundColorTransition:");
 late final _sel_setBackgroundColor_ = objc.registerName("setBackgroundColor:");
 late final _sel_setBackgroundOpacityTransition_ = objc.registerName("setBackgroundOpacityTransition:");
 late final _sel_setBackgroundOpacity_ = objc.registerName("setBackgroundOpacity:");
 late final _sel_setBackgroundPatternTransition_ = objc.registerName("setBackgroundPatternTransition:");
 late final _sel_setBackgroundPattern_ = objc.registerName("setBackgroundPattern:");
-late final _sel_setBounds_ = objc.registerName("setBounds:");
 late final _sel_setBrightness_ = objc.registerName("setBrightness:");
 late final _sel_setCamera_ = objc.registerName("setCamera:");
 late final _sel_setCamera_animated_ = objc.registerName("setCamera:animated:");
@@ -32774,35 +31349,25 @@ late final _sel_setCircleTranslate_ = objc.registerName("setCircleTranslate:");
 late final _sel_setCircleTranslationAnchor_ = objc.registerName("setCircleTranslationAnchor:");
 late final _sel_setCircleTranslationTransition_ = objc.registerName("setCircleTranslationTransition:");
 late final _sel_setCircleTranslation_ = objc.registerName("setCircleTranslation:");
-late final _sel_setClearsContextBeforeDrawing_ = objc.registerName("setClearsContextBeforeDrawing:");
-late final _sel_setClipsToBounds_ = objc.registerName("setClipsToBounds:");
 late final _sel_setCompassViewMargins_ = objc.registerName("setCompassViewMargins:");
 late final _sel_setCompassViewPosition_ = objc.registerName("setCompassViewPosition:");
-late final _sel_setContentCompressionResistancePriority_forAxis_ = objc.registerName("setContentCompressionResistancePriority:forAxis:");
-late final _sel_setContentHuggingPriority_forAxis_ = objc.registerName("setContentHuggingPriority:forAxis:");
 late final _sel_setContentInset_ = objc.registerName("setContentInset:");
 late final _sel_setContentInset_animated_ = objc.registerName("setContentInset:animated:");
 late final _sel_setContentInset_animated_completionHandler_ = objc.registerName("setContentInset:animated:completionHandler:");
-late final _sel_setContentMode_ = objc.registerName("setContentMode:");
-late final _sel_setContentScaleFactor_ = objc.registerName("setContentScaleFactor:");
-late final _sel_setContentStretch_ = objc.registerName("setContentStretch:");
 late final _sel_setContext_completionHandler_ = objc.registerName("setContext:completionHandler:");
 late final _sel_setCoordinates_ = objc.registerName("setCoordinates:");
-late final _sel_setCornerConfiguration_ = objc.registerName("setCornerConfiguration:");
 late final _sel_setCurrentMode_ = objc.registerName("setCurrentMode:");
 late final _sel_setDebugMask_ = objc.registerName("setDebugMask:");
 late final _sel_setDecelerationRate_ = objc.registerName("setDecelerationRate:");
 late final _sel_setDelegate_ = objc.registerName("setDelegate:");
 late final _sel_setDirection_ = objc.registerName("setDirection:");
 late final _sel_setDirection_animated_ = objc.registerName("setDirection:animated:");
-late final _sel_setDirectionalLayoutMargins_ = objc.registerName("setDirectionalLayoutMargins:");
 late final _sel_setDiscoverabilityTitle_ = objc.registerName("setDiscoverabilityTitle:");
 late final _sel_setDisplayHeadingCalibration_ = objc.registerName("setDisplayHeadingCalibration:");
 late final _sel_setDisplayPreferences_ = objc.registerName("setDisplayPreferences:");
 late final _sel_setDynamicNavigationCameraAnimationDuration_ = objc.registerName("setDynamicNavigationCameraAnimationDuration:");
 late final _sel_setEffect_ = objc.registerName("setEffect:");
 late final _sel_setEnabled_ = objc.registerName("setEnabled:");
-late final _sel_setExclusiveTouch_ = objc.registerName("setExclusiveTouch:");
 late final _sel_setFillAntialias_ = objc.registerName("setFillAntialias:");
 late final _sel_setFillAntialiased_ = objc.registerName("setFillAntialiased:");
 late final _sel_setFillColorTransition_ = objc.registerName("setFillColorTransition:");
@@ -32836,8 +31401,9 @@ late final _sel_setFillTranslate_ = objc.registerName("setFillTranslate:");
 late final _sel_setFillTranslationAnchor_ = objc.registerName("setFillTranslationAnchor:");
 late final _sel_setFillTranslationTransition_ = objc.registerName("setFillTranslationTransition:");
 late final _sel_setFillTranslation_ = objc.registerName("setFillTranslation:");
-late final _sel_setFrame_ = objc.registerName("setFrame:");
-late final _sel_setGestureRecognizers_ = objc.registerName("setGestureRecognizers:");
+late final _sel_setFocusEffect_ = objc.registerName("setFocusEffect:");
+late final _sel_setFocusGroupIdentifier_ = objc.registerName("setFocusGroupIdentifier:");
+late final _sel_setFocusGroupPriority_ = objc.registerName("setFocusGroupPriority:");
 late final _sel_setHapticFeedbackEnabled_ = objc.registerName("setHapticFeedbackEnabled:");
 late final _sel_setHeading_ = objc.registerName("setHeading:");
 late final _sel_setHeatmapColor_ = objc.registerName("setHeatmapColor:");
@@ -32848,7 +31414,6 @@ late final _sel_setHeatmapOpacity_ = objc.registerName("setHeatmapOpacity:");
 late final _sel_setHeatmapRadiusTransition_ = objc.registerName("setHeatmapRadiusTransition:");
 late final _sel_setHeatmapRadius_ = objc.registerName("setHeatmapRadius:");
 late final _sel_setHeatmapWeight_ = objc.registerName("setHeatmapWeight:");
-late final _sel_setHidden_ = objc.registerName("setHidden:");
 late final _sel_setHillshadeAccentColorTransition_ = objc.registerName("setHillshadeAccentColorTransition:");
 late final _sel_setHillshadeAccentColor_ = objc.registerName("setHillshadeAccentColor:");
 late final _sel_setHillshadeExaggerationTransition_ = objc.registerName("setHillshadeExaggerationTransition:");
@@ -32897,11 +31462,9 @@ late final _sel_setIdentifier_ = objc.registerName("setIdentifier:");
 late final _sel_setImage_ = objc.registerName("setImage:");
 late final _sel_setImage_forName_ = objc.registerName("setImage:forName:");
 late final _sel_setIncludesIdeographicGlyphs_ = objc.registerName("setIncludesIdeographicGlyphs:");
-late final _sel_setInsetsLayoutMarginsFromSafeArea_ = objc.registerName("setInsetsLayoutMarginsFromSafeArea:");
 late final _sel_setKeepsIconUpright_ = objc.registerName("setKeepsIconUpright:");
 late final _sel_setKeepsTextUpright_ = objc.registerName("setKeepsTextUpright:");
 late final _sel_setLayers_ = objc.registerName("setLayers:");
-late final _sel_setLayoutMargins_ = objc.registerName("setLayoutMargins:");
 late final _sel_setLight_ = objc.registerName("setLight:");
 late final _sel_setLineBlurTransition_ = objc.registerName("setLineBlurTransition:");
 late final _sel_setLineBlur_ = objc.registerName("setLineBlur:");
@@ -32934,10 +31497,8 @@ late final _sel_setLineWidth_ = objc.registerName("setLineWidth:");
 late final _sel_setLocationManager_ = objc.registerName("setLocationManager:");
 late final _sel_setLogoViewMargins_ = objc.registerName("setLogoViewMargins:");
 late final _sel_setLogoViewPosition_ = objc.registerName("setLogoViewPosition:");
-late final _sel_setMaskView_ = objc.registerName("setMaskView:");
 late final _sel_setMaximumAllowedMapboxTiles_ = objc.registerName("setMaximumAllowedMapboxTiles:");
 late final _sel_setMaximumAmbientCacheSize_withCompletionHandler_ = objc.registerName("setMaximumAmbientCacheSize:withCompletionHandler:");
-late final _sel_setMaximumContentSizeCategory_ = objc.registerName("setMaximumContentSizeCategory:");
 late final _sel_setMaximumPitch_ = objc.registerName("setMaximumPitch:");
 late final _sel_setMaximumRasterBrightnessTransition_ = objc.registerName("setMaximumRasterBrightnessTransition:");
 late final _sel_setMaximumRasterBrightness_ = objc.registerName("setMaximumRasterBrightness:");
@@ -32945,20 +31506,11 @@ late final _sel_setMaximumScreenBounds_ = objc.registerName("setMaximumScreenBou
 late final _sel_setMaximumTextAngle_ = objc.registerName("setMaximumTextAngle:");
 late final _sel_setMaximumTextWidth_ = objc.registerName("setMaximumTextWidth:");
 late final _sel_setMaximumZoomLevel_ = objc.registerName("setMaximumZoomLevel:");
-late final _sel_setMinimumContentSizeCategory_ = objc.registerName("setMinimumContentSizeCategory:");
 late final _sel_setMinimumPitch_ = objc.registerName("setMinimumPitch:");
 late final _sel_setMinimumRasterBrightnessTransition_ = objc.registerName("setMinimumRasterBrightnessTransition:");
 late final _sel_setMinimumRasterBrightness_ = objc.registerName("setMinimumRasterBrightness:");
 late final _sel_setMinimumZoomLevel_ = objc.registerName("setMinimumZoomLevel:");
-late final _sel_setMotionEffects_ = objc.registerName("setMotionEffects:");
-late final _sel_setMultipleTouchEnabled_ = objc.registerName("setMultipleTouchEnabled:");
-late final _sel_setNeedsDisplay = objc.registerName("setNeedsDisplay");
-late final _sel_setNeedsDisplayInRect_ = objc.registerName("setNeedsDisplayInRect:");
-late final _sel_setNeedsLayout = objc.registerName("setNeedsLayout");
-late final _sel_setNeedsUpdateConstraints = objc.registerName("setNeedsUpdateConstraints");
-late final _sel_setNeedsUpdateProperties = objc.registerName("setNeedsUpdateProperties");
-late final _sel_setOpaque_ = objc.registerName("setOpaque:");
-late final _sel_setOverrideUserInterfaceStyle_ = objc.registerName("setOverrideUserInterfaceStyle:");
+late final _sel_setNeedsFocusUpdate = objc.registerName("setNeedsFocusUpdate");
 late final _sel_setOverscanCompensation_ = objc.registerName("setOverscanCompensation:");
 late final _sel_setPanScrollingMode_ = objc.registerName("setPanScrollingMode:");
 late final _sel_setPerformsPlacementTransitions_ = objc.registerName("setPerformsPlacementTransitions:");
@@ -32968,7 +31520,6 @@ late final _sel_setPredicate_ = objc.registerName("setPredicate:");
 late final _sel_setPreferredElementSize_ = objc.registerName("setPreferredElementSize:");
 late final _sel_setPreferredFramesPerSecond_ = objc.registerName("setPreferredFramesPerSecond:");
 late final _sel_setPrefetchesTiles_ = objc.registerName("setPrefetchesTiles:");
-late final _sel_setPreservesSuperviewLayoutMargins_ = objc.registerName("setPreservesSuperviewLayoutMargins:");
 late final _sel_setQuickZoomReversed_ = objc.registerName("setQuickZoomReversed:");
 late final _sel_setRasterBrightnessMax_ = objc.registerName("setRasterBrightnessMax:");
 late final _sel_setRasterBrightnessMin_ = objc.registerName("setRasterBrightnessMin:");
@@ -32985,7 +31536,6 @@ late final _sel_setRasterResampling_ = objc.registerName("setRasterResampling:")
 late final _sel_setRasterSaturationTransition_ = objc.registerName("setRasterSaturationTransition:");
 late final _sel_setRasterSaturation_ = objc.registerName("setRasterSaturation:");
 late final _sel_setRepeatBehavior_ = objc.registerName("setRepeatBehavior:");
-late final _sel_setRestorationIdentifier_ = objc.registerName("setRestorationIdentifier:");
 late final _sel_setRotateEnabled_ = objc.registerName("setRotateEnabled:");
 late final _sel_setScaleBarMargins_ = objc.registerName("setScaleBarMargins:");
 late final _sel_setScaleBarPosition_ = objc.registerName("setScaleBarPosition:");
@@ -32994,6 +31544,7 @@ late final _sel_setScaleBarUsesMetricSystem_ = objc.registerName("setScaleBarUse
 late final _sel_setScrollEnabled_ = objc.registerName("setScrollEnabled:");
 late final _sel_setSelectedAnnotations_ = objc.registerName("setSelectedAnnotations:");
 late final _sel_setSelectedImage_ = objc.registerName("setSelectedImage:");
+late final _sel_setSemanticContentAttribute_ = objc.registerName("setSemanticContentAttribute:");
 late final _sel_setShape_ = objc.registerName("setShape:");
 late final _sel_setShouldRequestAuthorizationToUseLocationServices_ = objc.registerName("setShouldRequestAuthorizationToUseLocationServices:");
 late final _sel_setShowsAttributionButton_ = objc.registerName("setShowsAttributionButton:");
@@ -33015,6 +31566,7 @@ late final _sel_setSymbolScreenSpace_ = objc.registerName("setSymbolScreenSpace:
 late final _sel_setSymbolSortKey_ = objc.registerName("setSymbolSortKey:");
 late final _sel_setSymbolSpacing_ = objc.registerName("setSymbolSpacing:");
 late final _sel_setSymbolZOrder_ = objc.registerName("setSymbolZOrder:");
+late final _sel_setTag_ = objc.registerName("setTag:");
 late final _sel_setTargetCoordinate_ = objc.registerName("setTargetCoordinate:");
 late final _sel_setTargetCoordinate_animated_ = objc.registerName("setTargetCoordinate:animated:");
 late final _sel_setTargetCoordinate_animated_completionHandler_ = objc.registerName("setTargetCoordinate:animated:completionHandler:");
@@ -33069,14 +31621,11 @@ late final _sel_setTileLodMinRadius_ = objc.registerName("setTileLodMinRadius:")
 late final _sel_setTileLodPitchThreshold_ = objc.registerName("setTileLodPitchThreshold:");
 late final _sel_setTileLodScale_ = objc.registerName("setTileLodScale:");
 late final _sel_setTileLodZoomShift_ = objc.registerName("setTileLodZoomShift:");
-late final _sel_setTintAdjustmentMode_ = objc.registerName("setTintAdjustmentMode:");
-late final _sel_setTintColor_ = objc.registerName("setTintColor:");
 late final _sel_setTitle_ = objc.registerName("setTitle:");
-late final _sel_setTransform3D_ = objc.registerName("setTransform3D:");
 late final _sel_setTransform_ = objc.registerName("setTransform:");
 late final _sel_setTransition_ = objc.registerName("setTransition:");
-late final _sel_setTranslatesAutoresizingMaskIntoConstraints_ = objc.registerName("setTranslatesAutoresizingMaskIntoConstraints:");
 late final _sel_setURL_ = objc.registerName("setURL:");
+late final _sel_setUserInteractionEnabled_ = objc.registerName("setUserInteractionEnabled:");
 late final _sel_setUserLocationVerticalAlignment_ = objc.registerName("setUserLocationVerticalAlignment:");
 late final _sel_setUserLocationVerticalAlignment_animated_ = objc.registerName("setUserLocationVerticalAlignment:animated:");
 late final _sel_setUserTrackingMode_ = objc.registerName("setUserTrackingMode:");
@@ -33102,6 +31651,7 @@ late final _sel_shapeWithRoundedRect_ = objc.registerName("shapeWithRoundedRect:
 late final _sel_shapeWithRoundedRect_cornerRadius_ = objc.registerName("shapeWithRoundedRect:cornerRadius:");
 late final _sel_sharedOfflineStorage = objc.registerName("sharedOfflineStorage");
 late final _sel_shouldRequestAuthorizationToUseLocationServices = objc.registerName("shouldRequestAuthorizationToUseLocationServices");
+late final _sel_shouldUpdateFocusInContext_ = objc.registerName("shouldUpdateFocusInContext:");
 late final _sel_showAnnotations_animated_ = objc.registerName("showAnnotations:animated:");
 late final _sel_showAnnotations_edgePadding_animated_ = objc.registerName("showAnnotations:edgePadding:animated:");
 late final _sel_showAnnotations_edgePadding_animated_completionHandler_ = objc.registerName("showAnnotations:edgePadding:animated:completionHandler:");
@@ -33114,9 +31664,7 @@ late final _sel_showsScale = objc.registerName("showsScale");
 late final _sel_showsUserHeadingIndicator = objc.registerName("showsUserHeadingIndicator");
 late final _sel_showsUserLocation = objc.registerName("showsUserLocation");
 late final _sel_size = objc.registerName("size");
-late final _sel_sizeThatFits_ = objc.registerName("sizeThatFits:");
-late final _sel_sizeToFit = objc.registerName("sizeToFit");
-late final _sel_snapshotViewAfterScreenUpdates_ = objc.registerName("snapshotViewAfterScreenUpdates:");
+late final _sel_soundIdentifierForFocusUpdateInContext_ = objc.registerName("soundIdentifierForFocusUpdateInContext:");
 late final _sel_sourceIdentifier = objc.registerName("sourceIdentifier");
 late final _sel_sourceLayerIdentifier = objc.registerName("sourceLayerIdentifier");
 late final _sel_sourceWithIdentifier_ = objc.registerName("sourceWithIdentifier:");
@@ -33129,8 +31677,6 @@ late final _sel_styleWithEffect_shape_ = objc.registerName("styleWithEffect:shap
 late final _sel_styleWithShape_ = objc.registerName("styleWithShape:");
 late final _sel_styleWithShape_constrainedAxes_ = objc.registerName("styleWithShape:constrainedAxes:");
 late final _sel_subtitle = objc.registerName("subtitle");
-late final _sel_subviews = objc.registerName("subviews");
-late final _sel_superview = objc.registerName("superview");
 late final _sel_supportsFocus = objc.registerName("supportsFocus");
 late final _sel_supportsSecureCoding = objc.registerName("supportsSecureCoding");
 late final _sel_suspend = objc.registerName("suspend");
@@ -33146,9 +31692,8 @@ late final _sel_systemImageNamed_ = objc.registerName("systemImageNamed:");
 late final _sel_systemImageNamed_compatibleWithTraitCollection_ = objc.registerName("systemImageNamed:compatibleWithTraitCollection:");
 late final _sel_systemImageNamed_variableValue_withConfiguration_ = objc.registerName("systemImageNamed:variableValue:withConfiguration:");
 late final _sel_systemImageNamed_withConfiguration_ = objc.registerName("systemImageNamed:withConfiguration:");
-late final _sel_systemLayoutSizeFittingSize_ = objc.registerName("systemLayoutSizeFittingSize:");
-late final _sel_systemLayoutSizeFittingSize_withHorizontalFittingPriority_verticalFittingPriority_ = objc.registerName("systemLayoutSizeFittingSize:withHorizontalFittingPriority:verticalFittingPriority:");
 late final _sel_systemPointerStyle = objc.registerName("systemPointerStyle");
+late final _sel_tag = objc.registerName("tag");
 late final _sel_targetCoordinate = objc.registerName("targetCoordinate");
 late final _sel_targetForAction_withSender_ = objc.registerName("targetForAction:withSender:");
 late final _sel_text = objc.registerName("text");
@@ -33201,37 +31746,25 @@ late final _sel_tileLodMinRadius = objc.registerName("tileLodMinRadius");
 late final _sel_tileLodPitchThreshold = objc.registerName("tileLodPitchThreshold");
 late final _sel_tileLodScale = objc.registerName("tileLodScale");
 late final _sel_tileLodZoomShift = objc.registerName("tileLodZoomShift");
-late final _sel_tintAdjustmentMode = objc.registerName("tintAdjustmentMode");
-late final _sel_tintColor = objc.registerName("tintColor");
-late final _sel_tintColorDidChange = objc.registerName("tintColorDidChange");
 late final _sel_title = objc.registerName("title");
 late final _sel_toggleBoldface_ = objc.registerName("toggleBoldface:");
 late final _sel_toggleInspector_ = objc.registerName("toggleInspector:");
 late final _sel_toggleItalics_ = objc.registerName("toggleItalics:");
 late final _sel_toggleSidebar_ = objc.registerName("toggleSidebar:");
 late final _sel_toggleUnderline_ = objc.registerName("toggleUnderline:");
-late final _sel_topAnchor = objc.registerName("topAnchor");
 late final _sel_touchesBegan_withEvent_ = objc.registerName("touchesBegan:withEvent:");
 late final _sel_touchesCancelled_withEvent_ = objc.registerName("touchesCancelled:withEvent:");
 late final _sel_touchesEnded_withEvent_ = objc.registerName("touchesEnded:withEvent:");
 late final _sel_touchesEstimatedPropertiesUpdated_ = objc.registerName("touchesEstimatedPropertiesUpdated:");
 late final _sel_touchesMoved_withEvent_ = objc.registerName("touchesMoved:withEvent:");
-late final _sel_trailingAnchor = objc.registerName("trailingAnchor");
 late final _sel_traitCollection = objc.registerName("traitCollection");
 late final _sel_traitCollectionDidChange_ = objc.registerName("traitCollectionDidChange:");
 late final _sel_transform = objc.registerName("transform");
-late final _sel_transform3D = objc.registerName("transform3D");
 late final _sel_transition = objc.registerName("transition");
-late final _sel_transitionFromView_toView_duration_options_completion_ = objc.registerName("transitionFromView:toView:duration:options:completion:");
-late final _sel_transitionWithView_duration_options_animations_completion_ = objc.registerName("transitionWithView:duration:options:animations:completion:");
-late final _sel_translatesAutoresizingMaskIntoConstraints = objc.registerName("translatesAutoresizingMaskIntoConstraints");
 late final _sel_triggerRepaint = objc.registerName("triggerRepaint");
 late final _sel_trueExpression = objc.registerName("trueExpression");
 late final _sel_undoManager = objc.registerName("undoManager");
-late final _sel_updateConstraints = objc.registerName("updateConstraints");
-late final _sel_updateConstraintsIfNeeded = objc.registerName("updateConstraintsIfNeeded");
-late final _sel_updateProperties = objc.registerName("updateProperties");
-late final _sel_updatePropertiesIfNeeded = objc.registerName("updatePropertiesIfNeeded");
+late final _sel_updateFocusIfNeeded = objc.registerName("updateFocusIfNeeded");
 late final _sel_updateTextAttributesWithConversionHandler_ = objc.registerName("updateTextAttributesWithConversionHandler:");
 late final _sel_updateUserLocationAnnotationView = objc.registerName("updateUserLocationAnnotationView");
 late final _sel_updateUserLocationAnnotationViewAnimatedWithDuration_ = objc.registerName("updateUserLocationAnnotationViewAnimatedWithDuration:");
@@ -33244,10 +31777,6 @@ late final _sel_userTrackingMode = objc.registerName("userTrackingMode");
 late final _sel_validateCommand_ = objc.registerName("validateCommand:");
 late final _sel_variable = objc.registerName("variable");
 late final _sel_viewForAnnotation_ = objc.registerName("viewForAnnotation:");
-late final _sel_viewForBaselineLayout = objc.registerName("viewForBaselineLayout");
-late final _sel_viewForFirstBaselineLayout = objc.registerName("viewForFirstBaselineLayout");
-late final _sel_viewForLastBaselineLayout = objc.registerName("viewForLastBaselineLayout");
-late final _sel_viewWithTag_ = objc.registerName("viewWithTag:");
 late final _sel_viewingDistance = objc.registerName("viewingDistance");
 late final _sel_visibleAnnotations = objc.registerName("visibleAnnotations");
 late final _sel_visibleAnnotationsInRect_ = objc.registerName("visibleAnnotationsInRect:");
@@ -33259,19 +31788,8 @@ late final _sel_visibleFeaturesInRect_ = objc.registerName("visibleFeaturesInRec
 late final _sel_visibleFeaturesInRect_inStyleLayersWithIdentifiers_ = objc.registerName("visibleFeaturesInRect:inStyleLayersWithIdentifiers:");
 late final _sel_visibleFeaturesInRect_inStyleLayersWithIdentifiers_predicate_ = objc.registerName("visibleFeaturesInRect:inStyleLayersWithIdentifiers:predicate:");
 late final _sel_wantsSoftwareDimming = objc.registerName("wantsSoftwareDimming");
-late final _sel_widthAnchor = objc.registerName("widthAnchor");
-late final _sel_willMoveToSuperview_ = objc.registerName("willMoveToSuperview:");
-late final _sel_willMoveToWindow_ = objc.registerName("willMoveToWindow:");
-late final _sel_willRemoveSubview_ = objc.registerName("willRemoveSubview:");
-late final _sel_window = objc.registerName("window");
 late final _sel_zoomLevel = objc.registerName("zoomLevel");
 late final _sel_zoomLevelForExpandingCluster_ = objc.registerName("zoomLevelForExpandingCluster:");
 late final _sel_zoomLevelVariableExpression = objc.registerName("zoomLevelVariableExpression");
 typedef instancetype = ffi.Pointer<objc.ObjCObjectImpl>;
 typedef Dartinstancetype = objc.ObjCObject;
-
-/// 
-extension unnamed on UIView {
-
-}
-

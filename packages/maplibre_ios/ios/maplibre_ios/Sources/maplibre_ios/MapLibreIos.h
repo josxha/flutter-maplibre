@@ -302,6 +302,14 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 #if defined(__OBJC__)
 
+SWIFT_PROTOCOL_NAMED("FlutterApi")
+@protocol FlutterApi
+- (void)onTap;
+- (void)onSecondaryTap;
+- (void)onDoubleTap;
+- (void)onLongPress;
+@end
+
 @class NSString;
 @class NSPredicate;
 @class NSExpression;
@@ -322,6 +330,12 @@ SWIFT_CLASS_NAMED("MapLibreRegistry")
 + (void)addMapWithViewId:(int64_t)viewId map:(MLNMapView * _Nonnull)map;
 /// Method to remove a map to the registry
 + (void)removeMapWithViewId:(int64_t)viewId;
+/// Method to get the flutter api for a given viewId
++ (id <FlutterApi> _Nullable)getFlutterApiWithViewId:(int64_t)viewId SWIFT_WARN_UNUSED_RESULT;
+/// Method to add a flutter api to the registry
++ (void)addFlutterApiWithViewId:(int64_t)viewId api:(id <FlutterApi> _Nonnull)api;
+/// Method to remove a flutter api to the registry
++ (void)removeFlutterApiWithViewId:(int64_t)viewId;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 

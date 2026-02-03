@@ -24,3 +24,12 @@ public class MLNMapViewDelegateStub: NSObject, MLNMapViewDelegate {
         super.init()
     }
 }
+
+/// A stub class to force the linker to include the FlutterApi protocol
+/*
+public class FlutterApiStub: NSObject, FlutterApi {
+    public override init() {
+        super.init()
+    }
+}
+ */
