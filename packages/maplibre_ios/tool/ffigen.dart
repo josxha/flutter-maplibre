@@ -60,7 +60,6 @@ void main(List<String> args) {
           'MLNTilePyramidOfflineRegion.h',
           'MLNFeature.h',
         };
-        print('Considering header: ${header.path}');
         for (final path in include) {
           if (header.path.contains(path)) return true;
         }

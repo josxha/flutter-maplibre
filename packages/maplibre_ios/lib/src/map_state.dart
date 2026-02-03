@@ -69,7 +69,7 @@ final class MapLibreMapStateIos extends MapLibreMapState {
     // setStyle(options.initStyle);
     mapView.automaticallyAdjustsContentInset = true;
     // Use listener callbacks to marshal onto the Dart isolate.
-    /*final delegate = MLNMapViewDelegate$Builder.implementAsListener(
+    final delegate = MLNMapViewDelegate$Builder.implementAsListener(
       // Camera & region events
       mapView_regionWillChangeWithReason_animated_: _regionWillChangeWithReason,
       mapView_regionDidChangeWithReason_animated_: _regionDidChangeWithReason,
@@ -86,8 +86,7 @@ final class MapLibreMapStateIos extends MapLibreMapState {
           },
 
       // Map loading & rendering
-      mapView_didFinishLoadingStyle_: (mapView, style) =>
-          print('[MapDelegate] Style finished loading'),
+      mapView_didFinishLoadingStyle_: _didFinishLoadingStyle,
       mapViewDidFinishLoadingMap_: (mapView) =>
           print('[MapDelegate] Map finished loading'),
       mapViewDidFailLoadingMap_withError_: (mapView, error) => print(
@@ -114,8 +113,7 @@ final class MapLibreMapStateIos extends MapLibreMapState {
           print(
             '[MapDelegate] Map finished rendering, fullyRendered: $fullyRendered',
           ),
-      mapViewDidBecomeIdle_: (mapView) =>
-          print('[MapDelegate] Map became idle'),
+      mapViewDidBecomeIdle_: _didBecomeIdle,
       mapViewDidStopLocatingUser_: (mapView) =>
           print('[MapDelegate] Stopped locating user'),
 
@@ -153,14 +151,14 @@ final class MapLibreMapStateIos extends MapLibreMapState {
         print('[MapDelegate] Alpha for shape requested');
         return 1.0;
       },
-      */ /*mapView_fillColorForPolygonAnnotation_: (mapView, polygon) {
+       /*mapView_fillColorForPolygonAnnotation_: (mapView, polygon) {
         print('[MapDelegate] Fill color for polygon requested');
         return MLNMapViewDelegate$Builder.mapView_fillColorForPolygonAnnotation_);
       },
       mapView_strokeColorForShapeAnnotation_: (mapView, shape) {
         print('[MapDelegate] Stroke color for shape requested');
         return UIColor.black;
-      },*/ /*
+      },*/
       mapView_shapeAnnotationIsEnabled_: (mapView, shape) {
         print('[MapDelegate] Shape annotation enabled check');
         return true;
@@ -203,19 +201,19 @@ final class MapLibreMapStateIos extends MapLibreMapState {
           print('[MapDelegate] Shader will compile: $name'),
 
       // Tiles
-      mapView_tileDidTriggerAction_x_y_z_wrap_overscaledZ_sourceID_:
+      /*mapView_tileDidTriggerAction_x_y_z_wrap_overscaledZ_sourceID_:
           (mapView, x, y, z, wrap, over, scaledZ, sourceID) =>
               print('[MapDelegate] Tile action triggered: $sourceID'),
 
       // User location
-      */ /*mapViewStyleForDefaultUserLocationAnnotationView_: (_) {
+      mapViewStyleForDefaultUserLocationAnnotationView_: (_) {
         print('[MapDelegate] Default user location style requested');
         return mapViewStyleForDefaultUserLocationAnnotationView_;
       },
       mapViewUserLocationAnchorPoint_: (_) {
         print('[MapDelegate] User location anchor point requested');
         return const objc.CGPoint(x: 0.5, y: 0.5);
-      },*/ /*
+      },*/
 
       // Rendering lifecycle
       mapViewWillStartLoadingMap_: (_) =>
@@ -227,8 +225,7 @@ final class MapLibreMapStateIos extends MapLibreMapState {
       mapViewWillStartRenderingMap_: (_) =>
           print('[MapDelegate] Will start rendering map'),
     );
-    _delegate = delegate;
-    mapView.delegate = delegate;*/
+    mapView.delegate = delegate;
 
     // disable the default UI because they are rebuilt in Flutter
     mapView.showsCompassView = false;
