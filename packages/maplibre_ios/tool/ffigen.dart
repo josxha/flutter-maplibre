@@ -91,14 +91,43 @@ void main(List<String> args) {
             'Helpers',
             'MapLibreRegistry',
             'Extensions',
+            'UIView',
+            'MLNMapView',
+            'MLNMapCamera',
+            'MLNStyleLayer',
+            'MLNCircleStyleLayer',
+            'MLNFillExtrusionStyleLayer',
+            'MLNFillStyleLayer',
+            'MLNHeatmapStyleLayer',
+            'MLNHillshadeStyleLayer',
+            'MLNLineStyleLayer',
+            'MLNRasterStyleLayer',
+            'MLNSymbolStyleLayer',
+            'MLNVectorStyleLayer',
+            'MLNSource',
+            'MLNOfflineStorage',
+            'MLNTilePyramidOfflineRegion',
+            'MLNShapeSource',
+            'MLNShape',
+            'MLNTileSource',
+            'MLNOfflinePack',
+            'MLNStyle',
+            'MLNRasterDEMSource',
+            'MLNVectorTileSource',
+            'MLNBackgroundStyleLayer',
+            'MLNImageSource',
+            'MLNCoordinateQuad',
           };
-          if (include.contains(decl.originalName)) return true;
-          return decl.originalName.startsWith('MLN');
+          return include.contains(decl.originalName);
         },
       ),
       protocols: Protocols(
         include: (decl) {
-          return decl.originalName.startsWith('MLN');
+          const include = {
+            'MLNMapViewDelegate',
+            'MLNFeature',
+          };
+          return include.contains(decl.originalName);
         },
         includeMember: (declaration, member) => true,
       ),

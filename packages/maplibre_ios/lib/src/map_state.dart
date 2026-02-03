@@ -201,9 +201,6 @@ final class MapLibreMapStateIos extends MapLibreMapState
           print('[MapDelegate] Will start rendering frame'),
       mapViewWillStartRenderingMap_: (_) =>
           print('[MapDelegate] Will start rendering map'),
-
-      // Keep isolate alive
-      $keepIsolateAlive: true,
     );
 
     mapView.delegate = delegate;
@@ -240,6 +237,7 @@ final class MapLibreMapStateIos extends MapLibreMapState
       camera = getCamera();
       isInitialized = true;
     });
+    UIView().addObserver(observer, forKeyPath: forKeyPath)
     /*
                 let doubleTap = UITapGestureRecognizer(
                     target: self, action: #selector(self.onDoubleTap(sender:))
