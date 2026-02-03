@@ -279,6 +279,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_warning("-Watimport-in-framework-header")
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
+@import CoreFoundation;
 @import ObjectiveC;
 #endif
 
@@ -304,10 +305,10 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 SWIFT_PROTOCOL_NAMED("FlutterApi")
 @protocol FlutterApi
-- (void)onTap;
-- (void)onSecondaryTap;
-- (void)onDoubleTap;
-- (void)onLongPress;
+- (void)onTapWithScreenLocation:(CGPoint)screenLocation;
+- (void)onSecondaryTapWithScreenLocation:(CGPoint)screenLocation;
+- (void)onDoubleTapWithScreenLocation:(CGPoint)screenLocation;
+- (void)onLongPressWithScreenLocation:(CGPoint)screenLocation;
 @end
 
 @class NSString;

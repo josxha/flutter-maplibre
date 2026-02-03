@@ -17,7 +17,6 @@ final class MapLibreMapStateIos extends MapLibreMapState {
   // ignore: unused_field
   late final int _viewId;
   MLNMapView? _mapView;
-  MLNMapViewDelegate? _delegate;
 
   @override
   StyleControllerIos? style;
@@ -39,11 +38,31 @@ final class MapLibreMapStateIos extends MapLibreMapState {
     _viewId = viewId;
     final mapView = MapLibreRegistry.getMapWithViewId(viewId)!;
     _mapView = mapView;
-    final flutterApi = FlutterApi$Builder.implementAsBlocking(
-      onDoubleTap: () {print('On double tap');},
-      onLongPress: () {print('On long press');},
-      onSecondaryTap: () {print('On secondary tap');},
-      onTap: () {print('On tap');},
+    final flutterApi = FlutterApi$Builder.implementAsListener(
+      onDoubleTapWithScreenLocation_: (screenLocation) {
+        final offset = screenLocation.toOffset();
+        final point = toLngLat(offset);
+        final event = MapEventDoubleClick(point: point, screenPoint: offset);
+        widget.onEvent?.call(event);
+      },
+      onLongPressWithScreenLocation_: (screenLocation) {
+        final offset = screenLocation.toOffset();
+        final point = toLngLat(offset);
+        final event = MapEventDoubleClick(point: point, screenPoint: offset);
+        widget.onEvent?.call(event);
+      },
+      onSecondaryTapWithScreenLocation_:  (screenLocation) {
+        final offset = screenLocation.toOffset();
+        final point = toLngLat(offset);
+        final event = MapEventSecondaryClick(point: point, screenPoint: offset);
+        widget.onEvent?.call(event);
+      },
+      onTapWithScreenLocation_:  (screenLocation) {
+        final offset = screenLocation.toOffset();
+        final point = toLngLat(offset);
+        final event = MapEventClick(point: point, screenPoint: offset);
+        widget.onEvent?.call(event);
+      },
     );
     MapLibreRegistry.addFlutterApiWithViewId(viewId, api: flutterApi);
 

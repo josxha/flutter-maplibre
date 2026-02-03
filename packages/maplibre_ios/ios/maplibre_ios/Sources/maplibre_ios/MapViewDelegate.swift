@@ -49,47 +49,29 @@ class MapLibreView: NSObject, FlutterPlatformView, UIGestureRecognizerDelegate
 
     @objc func onTap(sender: UITapGestureRecognizer) {
         var screenPosition = sender.location(in: _mapView)
-        var point = _mapView.convert(screenPosition, toCoordinateFrom: _mapView)
         var api = MapLibreRegistry.getFlutterApi(viewId: self._viewId)
-        api?.onTap()
-        /* _flutterApi.onClick(
-            point: LngLat(lng: point.longitude, lat: point.latitude),
-            // NB: iOS points should be equivalent to Flutter LP
-            screenPoint: Offset(x: screenPosition.x, y: screenPosition.y)
-        ) { _ in } */
+        api?.onTap(screenLocation: screenPosition)
     }
 
     @objc func onSecondaryTap(sender: UITapGestureRecognizer) {
         var screenPosition = sender.location(in: _mapView)
         var point = _mapView.convert(screenPosition, toCoordinateFrom: _mapView)
         var api = MapLibreRegistry.getFlutterApi(viewId: self._viewId)
-        api?.onSecondaryTap()
-        /* _flutterApi.onSecondaryClick(
-            point: LngLat(lng: point.longitude, lat: point.latitude),
-            screenPoint: Offset(x: screenPosition.x, y: screenPosition.y)
-        ) { _ in } */
+        api?.onSecondaryTap(screenLocation: screenPosition)
     }
 
     @objc func onDoubleTap(sender: UITapGestureRecognizer) {
         var screenPosition = sender.location(in: _mapView)
         var point = _mapView.convert(screenPosition, toCoordinateFrom: _mapView)
         var api = MapLibreRegistry.getFlutterApi(viewId: self._viewId)
-        api?.onDoubleTap()
-        /* _flutterApi.onDoubleClick(
-            point: LngLat(lng: point.longitude, lat: point.latitude),
-            screenPoint: Offset(x: screenPosition.x, y: screenPosition.y)
-        ) { _ in } */
+        api?.onDoubleTap(screenLocation: screenPosition)
     }
 
     @objc func onLongPress(sender: UILongPressGestureRecognizer) {
         var screenPosition = sender.location(in: _mapView)
         var point = _mapView.convert(screenPosition, toCoordinateFrom: _mapView)
         var api = MapLibreRegistry.getFlutterApi(viewId: self._viewId)
-        api?.onLongPress()
-        /* _flutterApi.onLongClick(
-            point: LngLat(lng: point.longitude, lat: point.latitude),
-            screenPoint: Offset(x: screenPosition.x, y: screenPosition.y)
-        ) { _ in } */
+        api?.onLongPress(screenLocation: screenPosition)
     }
 
     func view() -> UIView {

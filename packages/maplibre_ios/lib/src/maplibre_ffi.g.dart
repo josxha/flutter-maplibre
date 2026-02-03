@@ -14,6 +14,12 @@ ffi.Pointer<ffi.Void> arg0,
 ffi.Pointer<objc.ObjCObjectImpl> arg1,
 );
 
+@ffi.Native<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> , objc.CGPoint )>()
+external void _6admjt_protocolTrampoline_1bktu2(ffi.Pointer<objc.ObjCObjectImpl> target,
+ffi.Pointer<ffi.Void> arg0,
+objc.CGPoint arg1,
+);
+
 @ffi.Native<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.UnsignedLong , ffi.Bool )>()
 external void _6admjt_protocolTrampoline_1f1ebb3(ffi.Pointer<objc.ObjCObjectImpl> target,
 ffi.Pointer<ffi.Void> arg0,
@@ -138,11 +144,6 @@ external CLLocationCoordinate2D _6admjt_protocolTrampoline_neuenc(ffi.Pointer<ob
 ffi.Pointer<ffi.Void> arg0,
 );
 
-@ffi.Native<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> )>()
-external void _6admjt_protocolTrampoline_ovsamd(ffi.Pointer<objc.ObjCObjectImpl> target,
-ffi.Pointer<ffi.Void> arg0,
-);
-
 @ffi.Native<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , objc.NSRange )>()
 external void _6admjt_protocolTrampoline_rgxx3r(ffi.Pointer<objc.ObjCObjectImpl> target,
 ffi.Pointer<ffi.Void> arg0,
@@ -173,6 +174,12 @@ bool arg2,
 
 @ffi.Native<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.DOBJC_Context> )>(isLeaf: true)
 external ffi.Pointer<objc.ObjCBlockImpl> _6admjt_wrapBlockingBlock_18v1jvf(ffi.Pointer<objc.ObjCBlockImpl> block,
+ffi.Pointer<objc.ObjCBlockImpl> listnerBlock,
+ffi.Pointer<objc.DOBJC_Context> context,
+);
+
+@ffi.Native<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.DOBJC_Context> )>(isLeaf: true)
+external ffi.Pointer<objc.ObjCBlockImpl> _6admjt_wrapBlockingBlock_1bktu2(ffi.Pointer<objc.ObjCBlockImpl> block,
 ffi.Pointer<objc.ObjCBlockImpl> listnerBlock,
 ffi.Pointer<objc.DOBJC_Context> context,
 );
@@ -238,12 +245,6 @@ ffi.Pointer<objc.DOBJC_Context> context,
 );
 
 @ffi.Native<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.DOBJC_Context> )>(isLeaf: true)
-external ffi.Pointer<objc.ObjCBlockImpl> _6admjt_wrapBlockingBlock_ovsamd(ffi.Pointer<objc.ObjCBlockImpl> block,
-ffi.Pointer<objc.ObjCBlockImpl> listnerBlock,
-ffi.Pointer<objc.DOBJC_Context> context,
-);
-
-@ffi.Native<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.DOBJC_Context> )>(isLeaf: true)
 external ffi.Pointer<objc.ObjCBlockImpl> _6admjt_wrapBlockingBlock_pfv6jd(ffi.Pointer<objc.ObjCBlockImpl> block,
 ffi.Pointer<objc.ObjCBlockImpl> listnerBlock,
 ffi.Pointer<objc.DOBJC_Context> context,
@@ -275,6 +276,10 @@ ffi.Pointer<objc.DOBJC_Context> context,
 
 @ffi.Native<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> )>(isLeaf: true)
 external ffi.Pointer<objc.ObjCBlockImpl> _6admjt_wrapListenerBlock_18v1jvf(ffi.Pointer<objc.ObjCBlockImpl> block,
+);
+
+@ffi.Native<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> )>(isLeaf: true)
+external ffi.Pointer<objc.ObjCBlockImpl> _6admjt_wrapListenerBlock_1bktu2(ffi.Pointer<objc.ObjCBlockImpl> block,
 );
 
 @ffi.Native<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> )>(isLeaf: true)
@@ -315,10 +320,6 @@ external ffi.Pointer<objc.ObjCBlockImpl> _6admjt_wrapListenerBlock_g6us7l(ffi.Po
 
 @ffi.Native<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> )>(isLeaf: true)
 external ffi.Pointer<objc.ObjCBlockImpl> _6admjt_wrapListenerBlock_gl3jxl(ffi.Pointer<objc.ObjCBlockImpl> block,
-);
-
-@ffi.Native<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> )>(isLeaf: true)
-external ffi.Pointer<objc.ObjCBlockImpl> _6admjt_wrapListenerBlock_ovsamd(ffi.Pointer<objc.ObjCBlockImpl> block,
 );
 
 @ffi.Native<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> )>(isLeaf: true)
@@ -555,30 +556,30 @@ extension type FlutterApi._(objc.ObjCProtocol object$) implements objc.ObjCProto
 
 extension FlutterApi$Methods on FlutterApi {
 
-  /// onDoubleTap
-  void onDoubleTap() {
-_objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_onDoubleTap);
+  /// onDoubleTapWithScreenLocation:
+  void onDoubleTapWithScreenLocation(objc.CGPoint screenLocation) {
+_objc_msgSend_iy8iz6(object$.ref.pointer, _sel_onDoubleTapWithScreenLocation_, screenLocation);
 
   }
 
 
-  /// onLongPress
-  void onLongPress() {
-_objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_onLongPress);
+  /// onLongPressWithScreenLocation:
+  void onLongPressWithScreenLocation(objc.CGPoint screenLocation) {
+_objc_msgSend_iy8iz6(object$.ref.pointer, _sel_onLongPressWithScreenLocation_, screenLocation);
 
   }
 
 
-  /// onSecondaryTap
-  void onSecondaryTap() {
-_objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_onSecondaryTap);
+  /// onSecondaryTapWithScreenLocation:
+  void onSecondaryTapWithScreenLocation(objc.CGPoint screenLocation) {
+_objc_msgSend_iy8iz6(object$.ref.pointer, _sel_onSecondaryTapWithScreenLocation_, screenLocation);
 
   }
 
 
-  /// onTap
-  void onTap() {
-_objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_onTap);
+  /// onTapWithScreenLocation:
+  void onTapWithScreenLocation(objc.CGPoint screenLocation) {
+_objc_msgSend_iy8iz6(object$.ref.pointer, _sel_onTapWithScreenLocation_, screenLocation);
 
   }
 
@@ -595,9 +596,9 @@ _objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_onTap);
   ///
   /// If `$keepIsolateAlive` is true, this protocol will keep this isolate
   /// alive until it is garbage collected by both Dart and ObjC.
-  static FlutterApi implement({required void Function() onDoubleTap, required void Function() onLongPress, required void Function() onSecondaryTap, required void Function() onTap, bool $keepIsolateAlive = true}) {
+  static FlutterApi implement({required void Function(objc.CGPoint ) onDoubleTapWithScreenLocation_, required void Function(objc.CGPoint ) onLongPressWithScreenLocation_, required void Function(objc.CGPoint ) onSecondaryTapWithScreenLocation_, required void Function(objc.CGPoint ) onTapWithScreenLocation_, bool $keepIsolateAlive = true}) {
     final builder = objc.ObjCProtocolBuilder(debugName: 'FlutterApi');
-        FlutterApi$Builder.onDoubleTap.implement(builder, onDoubleTap);    FlutterApi$Builder.onLongPress.implement(builder, onLongPress);    FlutterApi$Builder.onSecondaryTap.implement(builder, onSecondaryTap);    FlutterApi$Builder.onTap.implement(builder, onTap);
+        FlutterApi$Builder.onDoubleTapWithScreenLocation_.implement(builder, onDoubleTapWithScreenLocation_);    FlutterApi$Builder.onLongPressWithScreenLocation_.implement(builder, onLongPressWithScreenLocation_);    FlutterApi$Builder.onSecondaryTapWithScreenLocation_.implement(builder, onSecondaryTapWithScreenLocation_);    FlutterApi$Builder.onTapWithScreenLocation_.implement(builder, onTapWithScreenLocation_);
     builder.addProtocol($protocol);
     return FlutterApi.as(builder.build(keepIsolateAlive: $keepIsolateAlive));
   }
@@ -606,8 +607,8 @@ _objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_onTap);
   /// [objc.ObjCProtocolBuilder].
   ///
   /// Note: You cannot call this method after you have called `builder.build`.
-  static void addToBuilder(objc.ObjCProtocolBuilder builder, {required void Function() onDoubleTap, required void Function() onLongPress, required void Function() onSecondaryTap, required void Function() onTap, bool $keepIsolateAlive = true}) {
-        FlutterApi$Builder.onDoubleTap.implement(builder, onDoubleTap);    FlutterApi$Builder.onLongPress.implement(builder, onLongPress);    FlutterApi$Builder.onSecondaryTap.implement(builder, onSecondaryTap);    FlutterApi$Builder.onTap.implement(builder, onTap);
+  static void addToBuilder(objc.ObjCProtocolBuilder builder, {required void Function(objc.CGPoint ) onDoubleTapWithScreenLocation_, required void Function(objc.CGPoint ) onLongPressWithScreenLocation_, required void Function(objc.CGPoint ) onSecondaryTapWithScreenLocation_, required void Function(objc.CGPoint ) onTapWithScreenLocation_, bool $keepIsolateAlive = true}) {
+        FlutterApi$Builder.onDoubleTapWithScreenLocation_.implement(builder, onDoubleTapWithScreenLocation_);    FlutterApi$Builder.onLongPressWithScreenLocation_.implement(builder, onLongPressWithScreenLocation_);    FlutterApi$Builder.onSecondaryTapWithScreenLocation_.implement(builder, onSecondaryTapWithScreenLocation_);    FlutterApi$Builder.onTapWithScreenLocation_.implement(builder, onTapWithScreenLocation_);
     builder.addProtocol($protocol);
   }
 
@@ -617,9 +618,9 @@ _objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_onTap);
   ///
   /// If `$keepIsolateAlive` is true, this protocol will keep this isolate
   /// alive until it is garbage collected by both Dart and ObjC.
-  static FlutterApi implementAsListener({required void Function() onDoubleTap, required void Function() onLongPress, required void Function() onSecondaryTap, required void Function() onTap, bool $keepIsolateAlive = true}) {
+  static FlutterApi implementAsListener({required void Function(objc.CGPoint ) onDoubleTapWithScreenLocation_, required void Function(objc.CGPoint ) onLongPressWithScreenLocation_, required void Function(objc.CGPoint ) onSecondaryTapWithScreenLocation_, required void Function(objc.CGPoint ) onTapWithScreenLocation_, bool $keepIsolateAlive = true}) {
     final builder = objc.ObjCProtocolBuilder(debugName: 'FlutterApi');
-        FlutterApi$Builder.onDoubleTap.implementAsListener(builder, onDoubleTap);    FlutterApi$Builder.onLongPress.implementAsListener(builder, onLongPress);    FlutterApi$Builder.onSecondaryTap.implementAsListener(builder, onSecondaryTap);    FlutterApi$Builder.onTap.implementAsListener(builder, onTap);
+        FlutterApi$Builder.onDoubleTapWithScreenLocation_.implementAsListener(builder, onDoubleTapWithScreenLocation_);    FlutterApi$Builder.onLongPressWithScreenLocation_.implementAsListener(builder, onLongPressWithScreenLocation_);    FlutterApi$Builder.onSecondaryTapWithScreenLocation_.implementAsListener(builder, onSecondaryTapWithScreenLocation_);    FlutterApi$Builder.onTapWithScreenLocation_.implementAsListener(builder, onTapWithScreenLocation_);
     builder.addProtocol($protocol);
     return FlutterApi.as(builder.build(keepIsolateAlive: $keepIsolateAlive));
   }
@@ -629,8 +630,8 @@ _objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_onTap);
   /// be.
   ///
   /// Note: You cannot call this method after you have called `builder.build`.
-  static void addToBuilderAsListener(objc.ObjCProtocolBuilder builder, {required void Function() onDoubleTap, required void Function() onLongPress, required void Function() onSecondaryTap, required void Function() onTap, bool $keepIsolateAlive = true}) {
-        FlutterApi$Builder.onDoubleTap.implementAsListener(builder, onDoubleTap);    FlutterApi$Builder.onLongPress.implementAsListener(builder, onLongPress);    FlutterApi$Builder.onSecondaryTap.implementAsListener(builder, onSecondaryTap);    FlutterApi$Builder.onTap.implementAsListener(builder, onTap);
+  static void addToBuilderAsListener(objc.ObjCProtocolBuilder builder, {required void Function(objc.CGPoint ) onDoubleTapWithScreenLocation_, required void Function(objc.CGPoint ) onLongPressWithScreenLocation_, required void Function(objc.CGPoint ) onSecondaryTapWithScreenLocation_, required void Function(objc.CGPoint ) onTapWithScreenLocation_, bool $keepIsolateAlive = true}) {
+        FlutterApi$Builder.onDoubleTapWithScreenLocation_.implementAsListener(builder, onDoubleTapWithScreenLocation_);    FlutterApi$Builder.onLongPressWithScreenLocation_.implementAsListener(builder, onLongPressWithScreenLocation_);    FlutterApi$Builder.onSecondaryTapWithScreenLocation_.implementAsListener(builder, onSecondaryTapWithScreenLocation_);    FlutterApi$Builder.onTapWithScreenLocation_.implementAsListener(builder, onTapWithScreenLocation_);
     builder.addProtocol($protocol);
   }
 
@@ -640,9 +641,9 @@ _objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_onTap);
   ///
   /// If `$keepIsolateAlive` is true, this protocol will keep this isolate
   /// alive until it is garbage collected by both Dart and ObjC.
-  static FlutterApi implementAsBlocking({required void Function() onDoubleTap, required void Function() onLongPress, required void Function() onSecondaryTap, required void Function() onTap, bool $keepIsolateAlive = true}) {
+  static FlutterApi implementAsBlocking({required void Function(objc.CGPoint ) onDoubleTapWithScreenLocation_, required void Function(objc.CGPoint ) onLongPressWithScreenLocation_, required void Function(objc.CGPoint ) onSecondaryTapWithScreenLocation_, required void Function(objc.CGPoint ) onTapWithScreenLocation_, bool $keepIsolateAlive = true}) {
     final builder = objc.ObjCProtocolBuilder(debugName: 'FlutterApi');
-        FlutterApi$Builder.onDoubleTap.implementAsBlocking(builder, onDoubleTap);    FlutterApi$Builder.onLongPress.implementAsBlocking(builder, onLongPress);    FlutterApi$Builder.onSecondaryTap.implementAsBlocking(builder, onSecondaryTap);    FlutterApi$Builder.onTap.implementAsBlocking(builder, onTap);
+        FlutterApi$Builder.onDoubleTapWithScreenLocation_.implementAsBlocking(builder, onDoubleTapWithScreenLocation_);    FlutterApi$Builder.onLongPressWithScreenLocation_.implementAsBlocking(builder, onLongPressWithScreenLocation_);    FlutterApi$Builder.onSecondaryTapWithScreenLocation_.implementAsBlocking(builder, onSecondaryTapWithScreenLocation_);    FlutterApi$Builder.onTapWithScreenLocation_.implementAsBlocking(builder, onTapWithScreenLocation_);
     builder.addProtocol($protocol);
     return FlutterApi.as(builder.build(keepIsolateAlive: $keepIsolateAlive));
   }
@@ -652,73 +653,73 @@ _objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_onTap);
   /// listeners will be.
   ///
   /// Note: You cannot call this method after you have called `builder.build`.
-  static void addToBuilderAsBlocking(objc.ObjCProtocolBuilder builder, {required void Function() onDoubleTap, required void Function() onLongPress, required void Function() onSecondaryTap, required void Function() onTap, bool $keepIsolateAlive = true}) {
-        FlutterApi$Builder.onDoubleTap.implementAsBlocking(builder, onDoubleTap);    FlutterApi$Builder.onLongPress.implementAsBlocking(builder, onLongPress);    FlutterApi$Builder.onSecondaryTap.implementAsBlocking(builder, onSecondaryTap);    FlutterApi$Builder.onTap.implementAsBlocking(builder, onTap);
+  static void addToBuilderAsBlocking(objc.ObjCProtocolBuilder builder, {required void Function(objc.CGPoint ) onDoubleTapWithScreenLocation_, required void Function(objc.CGPoint ) onLongPressWithScreenLocation_, required void Function(objc.CGPoint ) onSecondaryTapWithScreenLocation_, required void Function(objc.CGPoint ) onTapWithScreenLocation_, bool $keepIsolateAlive = true}) {
+        FlutterApi$Builder.onDoubleTapWithScreenLocation_.implementAsBlocking(builder, onDoubleTapWithScreenLocation_);    FlutterApi$Builder.onLongPressWithScreenLocation_.implementAsBlocking(builder, onLongPressWithScreenLocation_);    FlutterApi$Builder.onSecondaryTapWithScreenLocation_.implementAsBlocking(builder, onSecondaryTapWithScreenLocation_);    FlutterApi$Builder.onTapWithScreenLocation_.implementAsBlocking(builder, onTapWithScreenLocation_);
     builder.addProtocol($protocol);
   }
 
-  /// onDoubleTap
-static final onDoubleTap = objc.ObjCProtocolListenableMethod<void Function()>(
+  /// onDoubleTapWithScreenLocation:
+static final onDoubleTapWithScreenLocation_ = objc.ObjCProtocolListenableMethod<void Function(objc.CGPoint )>(
       _protocol_FlutterApi,
-      _sel_onDoubleTap,
-      ffi.Native.addressOf<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> )>>(_6admjt_protocolTrampoline_ovsamd).cast(),
+      _sel_onDoubleTapWithScreenLocation_,
+      ffi.Native.addressOf<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> , objc.CGPoint )>>(_6admjt_protocolTrampoline_1bktu2).cast(),
       objc.getProtocolMethodSignature(
           _protocol_FlutterApi,
-          _sel_onDoubleTap,
+          _sel_onDoubleTapWithScreenLocation_,
           isRequired: true,
           isInstanceMethod: true,
       ),
-      (void Function() func) => ObjCBlock_ffiVoid_ffiVoid.fromFunction((ffi.Pointer<ffi.Void> _, ) => func()),
-          (void Function() func) => ObjCBlock_ffiVoid_ffiVoid.listener((ffi.Pointer<ffi.Void> _, ) => func()),
-    (void Function() func) => ObjCBlock_ffiVoid_ffiVoid.blocking((ffi.Pointer<ffi.Void> _, ) => func()),
+      (void Function(objc.CGPoint ) func) => ObjCBlock_ffiVoid_ffiVoid_CGPoint.fromFunction((ffi.Pointer<ffi.Void> _, objc.CGPoint arg1) => func(arg1)),
+          (void Function(objc.CGPoint ) func) => ObjCBlock_ffiVoid_ffiVoid_CGPoint.listener((ffi.Pointer<ffi.Void> _, objc.CGPoint arg1) => func(arg1)),
+    (void Function(objc.CGPoint ) func) => ObjCBlock_ffiVoid_ffiVoid_CGPoint.blocking((ffi.Pointer<ffi.Void> _, objc.CGPoint arg1) => func(arg1)),
 
     );
-/// onLongPress
-static final onLongPress = objc.ObjCProtocolListenableMethod<void Function()>(
+/// onLongPressWithScreenLocation:
+static final onLongPressWithScreenLocation_ = objc.ObjCProtocolListenableMethod<void Function(objc.CGPoint )>(
       _protocol_FlutterApi,
-      _sel_onLongPress,
-      ffi.Native.addressOf<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> )>>(_6admjt_protocolTrampoline_ovsamd).cast(),
+      _sel_onLongPressWithScreenLocation_,
+      ffi.Native.addressOf<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> , objc.CGPoint )>>(_6admjt_protocolTrampoline_1bktu2).cast(),
       objc.getProtocolMethodSignature(
           _protocol_FlutterApi,
-          _sel_onLongPress,
+          _sel_onLongPressWithScreenLocation_,
           isRequired: true,
           isInstanceMethod: true,
       ),
-      (void Function() func) => ObjCBlock_ffiVoid_ffiVoid.fromFunction((ffi.Pointer<ffi.Void> _, ) => func()),
-          (void Function() func) => ObjCBlock_ffiVoid_ffiVoid.listener((ffi.Pointer<ffi.Void> _, ) => func()),
-    (void Function() func) => ObjCBlock_ffiVoid_ffiVoid.blocking((ffi.Pointer<ffi.Void> _, ) => func()),
+      (void Function(objc.CGPoint ) func) => ObjCBlock_ffiVoid_ffiVoid_CGPoint.fromFunction((ffi.Pointer<ffi.Void> _, objc.CGPoint arg1) => func(arg1)),
+          (void Function(objc.CGPoint ) func) => ObjCBlock_ffiVoid_ffiVoid_CGPoint.listener((ffi.Pointer<ffi.Void> _, objc.CGPoint arg1) => func(arg1)),
+    (void Function(objc.CGPoint ) func) => ObjCBlock_ffiVoid_ffiVoid_CGPoint.blocking((ffi.Pointer<ffi.Void> _, objc.CGPoint arg1) => func(arg1)),
 
     );
-/// onSecondaryTap
-static final onSecondaryTap = objc.ObjCProtocolListenableMethod<void Function()>(
+/// onSecondaryTapWithScreenLocation:
+static final onSecondaryTapWithScreenLocation_ = objc.ObjCProtocolListenableMethod<void Function(objc.CGPoint )>(
       _protocol_FlutterApi,
-      _sel_onSecondaryTap,
-      ffi.Native.addressOf<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> )>>(_6admjt_protocolTrampoline_ovsamd).cast(),
+      _sel_onSecondaryTapWithScreenLocation_,
+      ffi.Native.addressOf<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> , objc.CGPoint )>>(_6admjt_protocolTrampoline_1bktu2).cast(),
       objc.getProtocolMethodSignature(
           _protocol_FlutterApi,
-          _sel_onSecondaryTap,
+          _sel_onSecondaryTapWithScreenLocation_,
           isRequired: true,
           isInstanceMethod: true,
       ),
-      (void Function() func) => ObjCBlock_ffiVoid_ffiVoid.fromFunction((ffi.Pointer<ffi.Void> _, ) => func()),
-          (void Function() func) => ObjCBlock_ffiVoid_ffiVoid.listener((ffi.Pointer<ffi.Void> _, ) => func()),
-    (void Function() func) => ObjCBlock_ffiVoid_ffiVoid.blocking((ffi.Pointer<ffi.Void> _, ) => func()),
+      (void Function(objc.CGPoint ) func) => ObjCBlock_ffiVoid_ffiVoid_CGPoint.fromFunction((ffi.Pointer<ffi.Void> _, objc.CGPoint arg1) => func(arg1)),
+          (void Function(objc.CGPoint ) func) => ObjCBlock_ffiVoid_ffiVoid_CGPoint.listener((ffi.Pointer<ffi.Void> _, objc.CGPoint arg1) => func(arg1)),
+    (void Function(objc.CGPoint ) func) => ObjCBlock_ffiVoid_ffiVoid_CGPoint.blocking((ffi.Pointer<ffi.Void> _, objc.CGPoint arg1) => func(arg1)),
 
     );
-/// onTap
-static final onTap = objc.ObjCProtocolListenableMethod<void Function()>(
+/// onTapWithScreenLocation:
+static final onTapWithScreenLocation_ = objc.ObjCProtocolListenableMethod<void Function(objc.CGPoint )>(
       _protocol_FlutterApi,
-      _sel_onTap,
-      ffi.Native.addressOf<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> )>>(_6admjt_protocolTrampoline_ovsamd).cast(),
+      _sel_onTapWithScreenLocation_,
+      ffi.Native.addressOf<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> , objc.CGPoint )>>(_6admjt_protocolTrampoline_1bktu2).cast(),
       objc.getProtocolMethodSignature(
           _protocol_FlutterApi,
-          _sel_onTap,
+          _sel_onTapWithScreenLocation_,
           isRequired: true,
           isInstanceMethod: true,
       ),
-      (void Function() func) => ObjCBlock_ffiVoid_ffiVoid.fromFunction((ffi.Pointer<ffi.Void> _, ) => func()),
-          (void Function() func) => ObjCBlock_ffiVoid_ffiVoid.listener((ffi.Pointer<ffi.Void> _, ) => func()),
-    (void Function() func) => ObjCBlock_ffiVoid_ffiVoid.blocking((ffi.Pointer<ffi.Void> _, ) => func()),
+      (void Function(objc.CGPoint ) func) => ObjCBlock_ffiVoid_ffiVoid_CGPoint.fromFunction((ffi.Pointer<ffi.Void> _, objc.CGPoint arg1) => func(arg1)),
+          (void Function(objc.CGPoint ) func) => ObjCBlock_ffiVoid_ffiVoid_CGPoint.listener((ffi.Pointer<ffi.Void> _, objc.CGPoint arg1) => func(arg1)),
+    (void Function(objc.CGPoint ) func) => ObjCBlock_ffiVoid_ffiVoid_CGPoint.blocking((ffi.Pointer<ffi.Void> _, objc.CGPoint arg1) => func(arg1)),
 
     );
 
@@ -23536,20 +23537,20 @@ extension ObjCBlock_ffiVoid_UIImage$CallExtension on objc.ObjCBlock<ffi.Void Fun
 }
 
 
-/// Construction methods for `objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>)>`.
-abstract final class ObjCBlock_ffiVoid_ffiVoid {
+/// Construction methods for `objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.CGPoint)>`.
+abstract final class ObjCBlock_ffiVoid_ffiVoid_CGPoint {
   /// Returns a block that wraps the given raw block pointer.
-  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>)> fromPointer(ffi.Pointer<objc.ObjCBlockImpl> pointer,
+  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.CGPoint)> fromPointer(ffi.Pointer<objc.ObjCBlockImpl> pointer,
       {bool retain = false, bool release = false}) =>
-      objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>)>(pointer, retain: retain, release: release);
+      objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.CGPoint)>(pointer, retain: retain, release: release);
 
   /// Creates a block from a C function pointer.
   ///
   /// This block must be invoked by native code running on the same thread as
   /// the isolate that registered it. Invoking the block on the wrong thread
   /// will result in a crash.
-  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>)> fromFunctionPointer(ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void> arg0)>> ptr) =>
-      objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>)>(objc.newPointerBlock(_fnPtrCallable, ptr.cast()),
+  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.CGPoint)> fromFunctionPointer(ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void> arg0, objc.CGPoint arg1)>> ptr) =>
+      objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.CGPoint)>(objc.newPointerBlock(_fnPtrCallable, ptr.cast()),
           retain: false, release: true);
 
   /// Creates a block from a Dart function.
@@ -23560,9 +23561,9 @@ abstract final class ObjCBlock_ffiVoid_ffiVoid {
   ///
   /// If `keepIsolateAlive` is true, this block will keep this isolate alive
   /// until it is garbage collected by both Dart and ObjC.
-  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>)> fromFunction(void Function(ffi.Pointer<ffi.Void> ) fn,
+  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.CGPoint)> fromFunction(void Function(ffi.Pointer<ffi.Void> , objc.CGPoint ) fn,
           {bool keepIsolateAlive = true}) =>
-      objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>)>(objc.newClosureBlock(_closureCallable, (ffi.Pointer<ffi.Void> arg0) => fn(arg0), keepIsolateAlive),
+      objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.CGPoint)>(objc.newClosureBlock(_closureCallable, (ffi.Pointer<ffi.Void> arg0, objc.CGPoint arg1) => fn(arg0, arg1), keepIsolateAlive),
           retain: false, release: true);
 
   /// Creates a listener block from a Dart function.
@@ -23574,13 +23575,13 @@ abstract final class ObjCBlock_ffiVoid_ffiVoid {
   ///
   /// If `keepIsolateAlive` is true, this block will keep this isolate alive
   /// until it is garbage collected by both Dart and ObjC.
-  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>)> listener(void Function(ffi.Pointer<ffi.Void> ) fn,
+  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.CGPoint)> listener(void Function(ffi.Pointer<ffi.Void> , objc.CGPoint ) fn,
           {bool keepIsolateAlive = true}) {
     final raw = objc.newClosureBlock(_listenerCallable.nativeFunction.cast(),
-        (ffi.Pointer<ffi.Void> arg0) => fn(arg0), keepIsolateAlive);
-    final wrapper = _6admjt_wrapListenerBlock_ovsamd(raw);
+        (ffi.Pointer<ffi.Void> arg0, objc.CGPoint arg1) => fn(arg0, arg1), keepIsolateAlive);
+    final wrapper = _6admjt_wrapListenerBlock_1bktu2(raw);
     objc.objectRelease(raw.cast());
-    return objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>)>(wrapper, retain: false, release: true);
+    return objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.CGPoint)>(wrapper, retain: false, release: true);
   }
 
   /// Creates a blocking block from a Dart function.
@@ -23593,61 +23594,61 @@ abstract final class ObjCBlock_ffiVoid_ffiVoid {
   /// until it is garbage collected by both Dart and ObjC. If the owner isolate
   /// has shut down, and the block is invoked by native code, it may block
   /// indefinitely, or have other undefined behavior.
-  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>)> blocking(void Function(ffi.Pointer<ffi.Void> ) fn,
+  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.CGPoint)> blocking(void Function(ffi.Pointer<ffi.Void> , objc.CGPoint ) fn,
           {bool keepIsolateAlive = true}) {
     final raw = objc.newClosureBlock(_blockingCallable.nativeFunction.cast(),
-        (ffi.Pointer<ffi.Void> arg0) => fn(arg0), keepIsolateAlive);
+        (ffi.Pointer<ffi.Void> arg0, objc.CGPoint arg1) => fn(arg0, arg1), keepIsolateAlive);
     final rawListener = objc.newClosureBlock(
         _blockingListenerCallable.nativeFunction.cast(),
-        (ffi.Pointer<ffi.Void> arg0) => fn(arg0), keepIsolateAlive);
-    final wrapper = _6admjt_wrapBlockingBlock_ovsamd(raw, rawListener, objc.objCContext);
+        (ffi.Pointer<ffi.Void> arg0, objc.CGPoint arg1) => fn(arg0, arg1), keepIsolateAlive);
+    final wrapper = _6admjt_wrapBlockingBlock_1bktu2(raw, rawListener, objc.objCContext);
     objc.objectRelease(raw.cast());
     objc.objectRelease(rawListener.cast());
-    return objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>)>(wrapper, retain: false, release: true);
+    return objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.CGPoint)>(wrapper, retain: false, release: true);
   }
 
   static void _listenerTrampoline(
-      ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0) {
-    (objc.getBlockClosure(block) as void Function(ffi.Pointer<ffi.Void> ))(arg0);
+      ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, objc.CGPoint arg1) {
+    (objc.getBlockClosure(block) as void Function(ffi.Pointer<ffi.Void> , objc.CGPoint ))(arg0, arg1);
     objc.objectRelease(block.cast());
   }
-  static ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> )> _listenerCallable =
-      ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> )>.listener(_listenerTrampoline )
+  static ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , objc.CGPoint )> _listenerCallable =
+      ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , objc.CGPoint )>.listener(_listenerTrampoline )
           ..keepIsolateAlive = false;
   static void _blockingTrampoline(
-      ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> waiter, ffi.Pointer<ffi.Void> arg0) {
+      ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> waiter, ffi.Pointer<ffi.Void> arg0, objc.CGPoint arg1) {
     try {
-      (objc.getBlockClosure(block) as void Function(ffi.Pointer<ffi.Void> ))(arg0);
+      (objc.getBlockClosure(block) as void Function(ffi.Pointer<ffi.Void> , objc.CGPoint ))(arg0, arg1);
     } catch (e) {
     } finally {
       objc.signalWaiter(waiter);
       objc.objectRelease(block.cast());
     }
   }
-  static ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<ffi.Void> )> _blockingCallable =
-      ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<ffi.Void> )>.isolateLocal(
+  static ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<ffi.Void> , objc.CGPoint )> _blockingCallable =
+      ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<ffi.Void> , objc.CGPoint )>.isolateLocal(
           _blockingTrampoline )..keepIsolateAlive = false;
-  static ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<ffi.Void> )> _blockingListenerCallable =
-      ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<ffi.Void> )>.listener(
+  static ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<ffi.Void> , objc.CGPoint )> _blockingListenerCallable =
+      ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<ffi.Void> , objc.CGPoint )>.listener(
           _blockingTrampoline )..keepIsolateAlive = false;
   static void _fnPtrTrampoline(
-      ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0) =>
-          block.ref.target.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void> arg0)>>()
-              .asFunction<void Function(ffi.Pointer<ffi.Void> )>()(arg0);
+      ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, objc.CGPoint arg1) =>
+          block.ref.target.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void> arg0, objc.CGPoint arg1)>>()
+              .asFunction<void Function(ffi.Pointer<ffi.Void> , objc.CGPoint )>()(arg0, arg1);
   static ffi.Pointer<ffi.Void> _fnPtrCallable = ffi.Pointer.fromFunction<
-      ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> )>(_fnPtrTrampoline ).cast();
+      ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , objc.CGPoint )>(_fnPtrTrampoline ).cast();
   static void _closureTrampoline(
-      ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0) =>
-      (objc.getBlockClosure(block) as void Function(ffi.Pointer<ffi.Void> ))(arg0);
+      ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, objc.CGPoint arg1) =>
+      (objc.getBlockClosure(block) as void Function(ffi.Pointer<ffi.Void> , objc.CGPoint ))(arg0, arg1);
   static ffi.Pointer<ffi.Void> _closureCallable = ffi.Pointer.fromFunction<
-      ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> )>(_closureTrampoline ).cast();
+      ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , objc.CGPoint )>(_closureTrampoline ).cast();
 }
 
-/// Call operator for `objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>)>`.
-extension ObjCBlock_ffiVoid_ffiVoid$CallExtension on objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>)> {
-  void call(ffi.Pointer<ffi.Void> arg0) =>ref.pointer.ref.invoke.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0)>>()
-  .asFunction<void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> )>()(
-    ref.pointer, arg0);
+/// Call operator for `objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.CGPoint)>`.
+extension ObjCBlock_ffiVoid_ffiVoid_CGPoint$CallExtension on objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.CGPoint)> {
+  void call(ffi.Pointer<ffi.Void> arg0, objc.CGPoint arg1) =>ref.pointer.ref.invoke.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, objc.CGPoint arg1)>>()
+  .asFunction<void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , objc.CGPoint )>()(
+    ref.pointer, arg0, arg1);
 }
 
 
@@ -31195,10 +31196,10 @@ late final _sel_nativeScale = objc.registerName("nativeScale");
 late final _sel_new = objc.registerName("new");
 late final _sel_newFromPasteboard_ = objc.registerName("newFromPasteboard:");
 late final _sel_nextResponder = objc.registerName("nextResponder");
-late final _sel_onDoubleTap = objc.registerName("onDoubleTap");
-late final _sel_onLongPress = objc.registerName("onLongPress");
-late final _sel_onSecondaryTap = objc.registerName("onSecondaryTap");
-late final _sel_onTap = objc.registerName("onTap");
+late final _sel_onDoubleTapWithScreenLocation_ = objc.registerName("onDoubleTapWithScreenLocation:");
+late final _sel_onLongPressWithScreenLocation_ = objc.registerName("onLongPressWithScreenLocation:");
+late final _sel_onSecondaryTapWithScreenLocation_ = objc.registerName("onSecondaryTapWithScreenLocation:");
+late final _sel_onTapWithScreenLocation_ = objc.registerName("onTapWithScreenLocation:");
 late final _sel_operand = objc.registerName("operand");
 late final _sel_options = objc.registerName("options");
 late final _sel_overlays = objc.registerName("overlays");

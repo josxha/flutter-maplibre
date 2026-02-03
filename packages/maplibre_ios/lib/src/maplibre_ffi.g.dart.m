@@ -202,33 +202,33 @@ _ListenerTrampoline_3 _6admjt_wrapBlockingBlock_r8gdi7(
   });
 }
 
-typedef void  (^_ListenerTrampoline_4)(void * arg0);
+typedef void  (^_ListenerTrampoline_4)(void * arg0, struct CGPoint arg1);
 __attribute__((visibility("default"))) __attribute__((used))
-_ListenerTrampoline_4 _6admjt_wrapListenerBlock_ovsamd(_ListenerTrampoline_4 block) NS_RETURNS_RETAINED {
-  return ^void(void * arg0) {
+_ListenerTrampoline_4 _6admjt_wrapListenerBlock_1bktu2(_ListenerTrampoline_4 block) NS_RETURNS_RETAINED {
+  return ^void(void * arg0, struct CGPoint arg1) {
     objc_retainBlock(block);
-    block(arg0);
+    block(arg0, arg1);
   };
 }
 
-typedef void  (^_BlockingTrampoline_4)(void * waiter, void * arg0);
+typedef void  (^_BlockingTrampoline_4)(void * waiter, void * arg0, struct CGPoint arg1);
 __attribute__((visibility("default"))) __attribute__((used))
-_ListenerTrampoline_4 _6admjt_wrapBlockingBlock_ovsamd(
+_ListenerTrampoline_4 _6admjt_wrapBlockingBlock_1bktu2(
     _BlockingTrampoline_4 block, _BlockingTrampoline_4 listenerBlock,
     DOBJC_Context* ctx) NS_RETURNS_RETAINED {
-  BLOCKING_BLOCK_IMPL(ctx, ^void(void * arg0), {
+  BLOCKING_BLOCK_IMPL(ctx, ^void(void * arg0, struct CGPoint arg1), {
     objc_retainBlock(block);
-    block(nil, arg0);
+    block(nil, arg0, arg1);
   }, {
     objc_retainBlock(listenerBlock);
-    listenerBlock(waiter, arg0);
+    listenerBlock(waiter, arg0, arg1);
   });
 }
 
-typedef void  (^_ProtocolTrampoline_9)(void * sel);
+typedef void  (^_ProtocolTrampoline_9)(void * sel, struct CGPoint arg1);
 __attribute__((visibility("default"))) __attribute__((used))
-void  _6admjt_protocolTrampoline_ovsamd(id target, void * sel) {
-  return ((_ProtocolTrampoline_9)((id (*)(id, SEL, SEL))objc_msgSend)(target, @selector(getDOBJCDartProtocolMethodForSelector:), sel))(sel);
+void  _6admjt_protocolTrampoline_1bktu2(id target, void * sel, struct CGPoint arg1) {
+  return ((_ProtocolTrampoline_9)((id (*)(id, SEL, SEL))objc_msgSend)(target, @selector(getDOBJCDartProtocolMethodForSelector:), sel))(sel, arg1);
 }
 
 typedef void  (^_ListenerTrampoline_5)(void * arg0, id arg1);
