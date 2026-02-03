@@ -59,9 +59,11 @@ void main(List<String> args) {
           'MLNOfflineRegion.h',
           'MLNTilePyramidOfflineRegion.h',
           'MLNFeature.h',
+          '/UIKit.framework/Headers/UIView.h',
         };
+        print('Considering header: ${header.path}');
         for (final path in include) {
-          if (header.path.endsWith(path)) return true;
+          if (header.path.contains(path)) return true;
         }
         return false;
       },
@@ -69,6 +71,9 @@ void main(List<String> args) {
     objectiveC: ObjectiveC(
       interfaces: Interfaces(
         includeMember: (decl, member) {
+          if (decl.originalName == 'UIView') {
+            return member == 'addGestureRecognizer';
+          }
           return true;
         },
         include: (decl) {

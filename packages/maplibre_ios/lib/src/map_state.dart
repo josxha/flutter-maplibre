@@ -237,7 +237,7 @@ final class MapLibreMapStateIos extends MapLibreMapState
       camera = getCamera();
       isInitialized = true;
     });
-    UIView().addObserver(observer, forKeyPath: forKeyPath)
+    mapView.addGestureRecognizer(gestureRecognizer);
     /*
                 let doubleTap = UITapGestureRecognizer(
                     target: self, action: #selector(self.onDoubleTap(sender:))
@@ -547,7 +547,7 @@ final class MapLibreMapStateIos extends MapLibreMapState
 
   @override
   Geographic toLngLat(Offset screenLocation) => _mapView!
-      .convertPoint$2(
+      .convertPoint(
         screenLocation.toCGPoint(),
         toCoordinateFromView: _mapView,
       )
