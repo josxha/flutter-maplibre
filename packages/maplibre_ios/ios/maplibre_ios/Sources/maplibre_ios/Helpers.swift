@@ -75,4 +75,42 @@ public class Helpers: NSObject {
         }
         return nil
     }
+    
+    @objc public static func createOfflinePackProgressListener(
+        callbacks: OfflinePackProgressCallbacks
+    ) {
+        NotificationCenter.default.addObserver(
+            callbacks,
+            selector: #selector(OfflinePackProgressCallbacks.onProgressChanged(notification:)),
+            name: NSNotification.Name.MLNOfflinePackProgressChanged,
+            object: nil
+        )
+
+        NotificationCenter.default.addObserver(
+            callbacks,
+            selector: #selector(OfflinePackProgressCallbacks.onError(notification:)),
+            name: NSNotification.Name.MLNOfflinePackError,
+            object: nil
+        )
+
+        NotificationCenter.default.addObserver(
+            callbacks,
+            selector: #selector(OfflinePackProgressCallbacks.onMaximumAllowedTiles(notification:)),
+            name: NSNotification.Name.MLNOfflinePackMaximumMapboxTilesReached,
+            object: nil
+        )
+    }
+
+    @objc public static func removeOfflinePackProgressListener(
+        callbacks: OfflinePackProgressCallbacks
+    ) {
+        NotificationCenter.default.removeObserver(callbacks)
+    }
+}
+
+@objc(OfflinePackProgressCallbacks)
+public protocol OfflinePackProgressCallbacks: AnyObject {
+    @objc func onProgressChanged(notification: NSNotification)
+    @objc func onError(notification: NSNotification)
+    @objc func onMaximumAllowedTiles(notification: NSNotification)
 }

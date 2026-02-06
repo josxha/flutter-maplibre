@@ -321,11 +321,14 @@ SWIFT_PROTOCOL_NAMED("FlutterApi")
 @class NSString;
 @class NSPredicate;
 @class NSExpression;
+@protocol OfflinePackProgressCallbacks;
 SWIFT_CLASS_NAMED("Helpers")
 @interface Helpers : NSObject
 + (void)setValueWithTarget:(NSObject * _Nonnull)target field:(NSString * _Nonnull)field value:(NSObject * _Nonnull)value;
 + (NSPredicate * _Nullable)parsePredicateWithRaw:(NSString * _Nonnull)raw SWIFT_WARN_UNUSED_RESULT;
 + (NSExpression * _Nullable)parseExpressionWithPropertyName:(NSString * _Nonnull)propertyName expression:(NSString * _Nonnull)expression SWIFT_WARN_UNUSED_RESULT;
++ (void)createOfflinePackProgressListenerWithCallbacks:(id <OfflinePackProgressCallbacks> _Nonnull)callbacks;
++ (void)removeOfflinePackProgressListenerWithCallbacks:(id <OfflinePackProgressCallbacks> _Nonnull)callbacks;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -344,6 +347,14 @@ SWIFT_CLASS_NAMED("MapLibreRegistry")
 /// Method to remove a flutter api to the registry
 + (void)removeFlutterApiWithViewId:(int64_t)viewId;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class NSNotification;
+SWIFT_PROTOCOL_NAMED("OfflinePackProgressCallbacks")
+@protocol OfflinePackProgressCallbacks
+- (void)onProgressChangedWithNotification:(NSNotification * _Nonnull)notification;
+- (void)onErrorWithNotification:(NSNotification * _Nonnull)notification;
+- (void)onMaximumAllowedTilesWithNotification:(NSNotification * _Nonnull)notification;
 @end
 
 #endif

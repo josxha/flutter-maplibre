@@ -61,6 +61,7 @@ void main(List<String> args) {
           'MLNFeature.h',
         };
         for (final path in include) {
+          print('Checking header: ${header.path} for $path');
           if (header.path.contains(path)) return true;
         }
         return false;
@@ -123,7 +124,12 @@ void main(List<String> args) {
       ),
       protocols: Protocols(
         include: (decl) {
-          const include = {'MLNMapViewDelegate', 'MLNFeature', 'FlutterApi'};
+          const include = {
+            'MLNMapViewDelegate',
+            'MLNFeature',
+            'FlutterApi',
+            'OfflinePackProgressCallbacks',
+          };
           return include.contains(decl.originalName);
         },
         includeMember: (declaration, member) => true,

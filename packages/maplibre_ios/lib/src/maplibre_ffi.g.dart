@@ -906,6 +906,13 @@ extension type Helpers._(objc.ObjCObject object$) implements objc.ObjCObject,obj
   }
 
 
+  /// createOfflinePackProgressListenerWithCallbacks:
+  static void createOfflinePackProgressListenerWithCallbacks(OfflinePackProgressCallbacks callbacks) {
+_objc_msgSend_xtuoz7(_class_Helpers, _sel_createOfflinePackProgressListenerWithCallbacks_, callbacks.ref.pointer);
+
+  }
+
+
   /// new
   static Helpers new$() {
     final $ret = _objc_msgSend_151sglz(_class_Helpers, _sel_new);
@@ -924,6 +931,13 @@ extension type Helpers._(objc.ObjCObject object$) implements objc.ObjCObject,obj
   static NSPredicate? parsePredicateWithRaw(objc.NSString raw) {
     final $ret = _objc_msgSend_1sotr3r(_class_Helpers, _sel_parsePredicateWithRaw_, raw.ref.pointer);
     return $ret.address == 0 ? null : NSPredicate.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// removeOfflinePackProgressListenerWithCallbacks:
+  static void removeOfflinePackProgressListenerWithCallbacks(OfflinePackProgressCallbacks callbacks) {
+_objc_msgSend_xtuoz7(_class_Helpers, _sel_removeOfflinePackProgressListenerWithCallbacks_, callbacks.ref.pointer);
+
   }
 
 
@@ -26435,6 +26449,121 @@ extension ObjCBlock_ffiVoid_ffiVoid_NSDictionary$CallExtension on objc.ObjCBlock
 }
 
 
+/// Construction methods for `objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSNotification)>`.
+abstract final class ObjCBlock_ffiVoid_ffiVoid_NSNotification {
+  /// Returns a block that wraps the given raw block pointer.
+  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSNotification)> fromPointer(ffi.Pointer<objc.ObjCBlockImpl> pointer,
+      {bool retain = false, bool release = false}) =>
+      objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSNotification)>(pointer, retain: retain, release: release);
+
+  /// Creates a block from a C function pointer.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSNotification)> fromFunctionPointer(ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1)>> ptr) =>
+      objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSNotification)>(objc.newPointerBlock(_fnPtrCallable, ptr.cast()),
+          retain: false, release: true);
+
+  /// Creates a block from a Dart function.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  ///
+  /// If `keepIsolateAlive` is true, this block will keep this isolate alive
+  /// until it is garbage collected by both Dart and ObjC.
+  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSNotification)> fromFunction(void Function(ffi.Pointer<ffi.Void> , objc.NSNotification ) fn,
+          {bool keepIsolateAlive = true}) =>
+      objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSNotification)>(objc.newClosureBlock(_closureCallable, (ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1) => fn(arg0, objc.NSNotification.fromPointer(arg1, retain: true, release: true)), keepIsolateAlive),
+          retain: false, release: true);
+
+  /// Creates a listener block from a Dart function.
+  ///
+  /// This is based on FFI's NativeCallable.listener, and has the same
+  /// capabilities and limitations. This block can be invoked from any thread,
+  /// but only supports void functions, and is not run synchronously. See
+  /// NativeCallable.listener for more details.
+  ///
+  /// If `keepIsolateAlive` is true, this block will keep this isolate alive
+  /// until it is garbage collected by both Dart and ObjC.
+  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSNotification)> listener(void Function(ffi.Pointer<ffi.Void> , objc.NSNotification ) fn,
+          {bool keepIsolateAlive = true}) {
+    final raw = objc.newClosureBlock(_listenerCallable.nativeFunction.cast(),
+        (ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1) => fn(arg0, objc.NSNotification.fromPointer(arg1, retain: false, release: true)), keepIsolateAlive);
+    final wrapper = _6admjt_wrapListenerBlock_18v1jvf(raw);
+    objc.objectRelease(raw.cast());
+    return objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSNotification)>(wrapper, retain: false, release: true);
+  }
+
+  /// Creates a blocking block from a Dart function.
+  ///
+  /// This callback can be invoked from any native thread, and will block the
+  /// caller until the callback is handled by the Dart isolate that created
+  /// the block. Async functions are not supported.
+  ///
+  /// If `keepIsolateAlive` is true, this block will keep this isolate alive
+  /// until it is garbage collected by both Dart and ObjC. If the owner isolate
+  /// has shut down, and the block is invoked by native code, it may block
+  /// indefinitely, or have other undefined behavior.
+  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSNotification)> blocking(void Function(ffi.Pointer<ffi.Void> , objc.NSNotification ) fn,
+          {bool keepIsolateAlive = true}) {
+    final raw = objc.newClosureBlock(_blockingCallable.nativeFunction.cast(),
+        (ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1) => fn(arg0, objc.NSNotification.fromPointer(arg1, retain: false, release: true)), keepIsolateAlive);
+    final rawListener = objc.newClosureBlock(
+        _blockingListenerCallable.nativeFunction.cast(),
+        (ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1) => fn(arg0, objc.NSNotification.fromPointer(arg1, retain: false, release: true)), keepIsolateAlive);
+    final wrapper = _6admjt_wrapBlockingBlock_18v1jvf(raw, rawListener, objc.objCContext);
+    objc.objectRelease(raw.cast());
+    objc.objectRelease(rawListener.cast());
+    return objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSNotification)>(wrapper, retain: false, release: true);
+  }
+
+  static void _listenerTrampoline(
+      ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1) {
+    (objc.getBlockClosure(block) as void Function(ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> ))(arg0, arg1);
+    objc.objectRelease(block.cast());
+  }
+  static ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> )> _listenerCallable =
+      ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> )>.listener(_listenerTrampoline )
+          ..keepIsolateAlive = false;
+  static void _blockingTrampoline(
+      ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> waiter, ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1) {
+    try {
+      (objc.getBlockClosure(block) as void Function(ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> ))(arg0, arg1);
+    } catch (e) {
+    } finally {
+      objc.signalWaiter(waiter);
+      objc.objectRelease(block.cast());
+    }
+  }
+  static ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> )> _blockingCallable =
+      ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> )>.isolateLocal(
+          _blockingTrampoline )..keepIsolateAlive = false;
+  static ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> )> _blockingListenerCallable =
+      ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> )>.listener(
+          _blockingTrampoline )..keepIsolateAlive = false;
+  static void _fnPtrTrampoline(
+      ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1) =>
+          block.ref.target.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1)>>()
+              .asFunction<void Function(ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> )>()(arg0, arg1);
+  static ffi.Pointer<ffi.Void> _fnPtrCallable = ffi.Pointer.fromFunction<
+      ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> )>(_fnPtrTrampoline ).cast();
+  static void _closureTrampoline(
+      ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1) =>
+      (objc.getBlockClosure(block) as void Function(ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> ))(arg0, arg1);
+  static ffi.Pointer<ffi.Void> _closureCallable = ffi.Pointer.fromFunction<
+      ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> )>(_closureTrampoline ).cast();
+}
+
+/// Call operator for `objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSNotification)>`.
+extension ObjCBlock_ffiVoid_ffiVoid_NSNotification$CallExtension on objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, objc.NSNotification)> {
+  void call(ffi.Pointer<ffi.Void> arg0, objc.NSNotification arg1) =>ref.pointer.ref.invoke.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1)>>()
+  .asFunction<void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> )>()(
+    ref.pointer, arg0, arg1.ref.pointer);
+}
+
+
 /// Construction methods for `objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, ffi.Pointer<objc.ObjCObjectImpl>?)>`.
 abstract final class ObjCBlock_ffiVoid_ffiVoid_objcObjCObjectImpl {
   /// Returns a block that wraps the given raw block pointer.
@@ -26755,6 +26884,170 @@ extension ObjCBlock_objcObjCObjectImpl_objcObjCObjectImpl_NSArray_NSMutableDicti
     ref.pointer, arg0?.ref.pointer ?? ffi.nullptr, arg1.ref.pointer, arg2?.ref.pointer ?? ffi.nullptr), retain: true, release: true);
 }
 
+
+/// OfflinePackProgressCallbacks
+extension type OfflinePackProgressCallbacks._(objc.ObjCProtocol object$) implements objc.ObjCProtocol {
+  /// Constructs a [OfflinePackProgressCallbacks] that points to the same underlying object as [other].
+  OfflinePackProgressCallbacks.as(objc.ObjCObject other) : object$ = other;
+
+  /// Constructs a [OfflinePackProgressCallbacks] that wraps the given raw object pointer.
+  OfflinePackProgressCallbacks.fromPointer(ffi.Pointer<objc.ObjCObjectImpl> other,
+      {bool retain = false, bool release = false}) :
+      object$ = objc.ObjCProtocol(other, retain: retain, release: release);
+
+  /// Returns whether [obj] is an instance of [OfflinePackProgressCallbacks].
+  static bool conformsTo(objc.ObjCObject obj) {
+    return _objc_msgSend_e3qsqz(obj.ref.pointer, _sel_conformsToProtocol_, _protocol_OfflinePackProgressCallbacks);
+  }
+}
+
+extension OfflinePackProgressCallbacks$Methods on OfflinePackProgressCallbacks {
+
+  /// onErrorWithNotification:
+  void onErrorWithNotification(objc.NSNotification notification) {
+_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_onErrorWithNotification_, notification.ref.pointer);
+
+  }
+
+
+  /// onMaximumAllowedTilesWithNotification:
+  void onMaximumAllowedTilesWithNotification(objc.NSNotification notification) {
+_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_onMaximumAllowedTilesWithNotification_, notification.ref.pointer);
+
+  }
+
+
+  /// onProgressChangedWithNotification:
+  void onProgressChangedWithNotification(objc.NSNotification notification) {
+_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_onProgressChangedWithNotification_, notification.ref.pointer);
+
+  }
+
+}
+
+  interface class OfflinePackProgressCallbacks$Builder {
+  
+    /// Returns the [objc.Protocol] object for this protocol.
+  static objc.Protocol get $protocol =>
+      objc.Protocol.fromPointer(_protocol_OfflinePackProgressCallbacks.cast());
+
+  /// Builds an object that implements the OfflinePackProgressCallbacks protocol. To implement
+  /// multiple protocols, use [addToBuilder] or [objc.ObjCProtocolBuilder] directly.
+  ///
+  /// If `$keepIsolateAlive` is true, this protocol will keep this isolate
+  /// alive until it is garbage collected by both Dart and ObjC.
+  static OfflinePackProgressCallbacks implement({required void Function(objc.NSNotification ) onErrorWithNotification_, required void Function(objc.NSNotification ) onMaximumAllowedTilesWithNotification_, required void Function(objc.NSNotification ) onProgressChangedWithNotification_, bool $keepIsolateAlive = true}) {
+    final builder = objc.ObjCProtocolBuilder(debugName: 'OfflinePackProgressCallbacks');
+        OfflinePackProgressCallbacks$Builder.onErrorWithNotification_.implement(builder, onErrorWithNotification_);    OfflinePackProgressCallbacks$Builder.onMaximumAllowedTilesWithNotification_.implement(builder, onMaximumAllowedTilesWithNotification_);    OfflinePackProgressCallbacks$Builder.onProgressChangedWithNotification_.implement(builder, onProgressChangedWithNotification_);
+    builder.addProtocol($protocol);
+    return OfflinePackProgressCallbacks.as(builder.build(keepIsolateAlive: $keepIsolateAlive));
+  }
+
+  /// Adds the implementation of the OfflinePackProgressCallbacks protocol to an existing
+  /// [objc.ObjCProtocolBuilder].
+  ///
+  /// Note: You cannot call this method after you have called `builder.build`.
+  static void addToBuilder(objc.ObjCProtocolBuilder builder, {required void Function(objc.NSNotification ) onErrorWithNotification_, required void Function(objc.NSNotification ) onMaximumAllowedTilesWithNotification_, required void Function(objc.NSNotification ) onProgressChangedWithNotification_, bool $keepIsolateAlive = true}) {
+        OfflinePackProgressCallbacks$Builder.onErrorWithNotification_.implement(builder, onErrorWithNotification_);    OfflinePackProgressCallbacks$Builder.onMaximumAllowedTilesWithNotification_.implement(builder, onMaximumAllowedTilesWithNotification_);    OfflinePackProgressCallbacks$Builder.onProgressChangedWithNotification_.implement(builder, onProgressChangedWithNotification_);
+    builder.addProtocol($protocol);
+  }
+
+    /// Builds an object that implements the OfflinePackProgressCallbacks protocol. To implement
+  /// multiple protocols, use [addToBuilder] or [objc.ObjCProtocolBuilder] directly. All
+  /// methods that can be implemented as listeners will be.
+  ///
+  /// If `$keepIsolateAlive` is true, this protocol will keep this isolate
+  /// alive until it is garbage collected by both Dart and ObjC.
+  static OfflinePackProgressCallbacks implementAsListener({required void Function(objc.NSNotification ) onErrorWithNotification_, required void Function(objc.NSNotification ) onMaximumAllowedTilesWithNotification_, required void Function(objc.NSNotification ) onProgressChangedWithNotification_, bool $keepIsolateAlive = true}) {
+    final builder = objc.ObjCProtocolBuilder(debugName: 'OfflinePackProgressCallbacks');
+        OfflinePackProgressCallbacks$Builder.onErrorWithNotification_.implementAsListener(builder, onErrorWithNotification_);    OfflinePackProgressCallbacks$Builder.onMaximumAllowedTilesWithNotification_.implementAsListener(builder, onMaximumAllowedTilesWithNotification_);    OfflinePackProgressCallbacks$Builder.onProgressChangedWithNotification_.implementAsListener(builder, onProgressChangedWithNotification_);
+    builder.addProtocol($protocol);
+    return OfflinePackProgressCallbacks.as(builder.build(keepIsolateAlive: $keepIsolateAlive));
+  }
+
+  /// Adds the implementation of the OfflinePackProgressCallbacks protocol to an existing
+  /// [objc.ObjCProtocolBuilder]. All methods that can be implemented as listeners will
+  /// be.
+  ///
+  /// Note: You cannot call this method after you have called `builder.build`.
+  static void addToBuilderAsListener(objc.ObjCProtocolBuilder builder, {required void Function(objc.NSNotification ) onErrorWithNotification_, required void Function(objc.NSNotification ) onMaximumAllowedTilesWithNotification_, required void Function(objc.NSNotification ) onProgressChangedWithNotification_, bool $keepIsolateAlive = true}) {
+        OfflinePackProgressCallbacks$Builder.onErrorWithNotification_.implementAsListener(builder, onErrorWithNotification_);    OfflinePackProgressCallbacks$Builder.onMaximumAllowedTilesWithNotification_.implementAsListener(builder, onMaximumAllowedTilesWithNotification_);    OfflinePackProgressCallbacks$Builder.onProgressChangedWithNotification_.implementAsListener(builder, onProgressChangedWithNotification_);
+    builder.addProtocol($protocol);
+  }
+
+  /// Builds an object that implements the OfflinePackProgressCallbacks protocol. To implement
+  /// multiple protocols, use [addToBuilder] or [objc.ObjCProtocolBuilder] directly. All
+  /// methods that can be implemented as blocking listeners will be.
+  ///
+  /// If `$keepIsolateAlive` is true, this protocol will keep this isolate
+  /// alive until it is garbage collected by both Dart and ObjC.
+  static OfflinePackProgressCallbacks implementAsBlocking({required void Function(objc.NSNotification ) onErrorWithNotification_, required void Function(objc.NSNotification ) onMaximumAllowedTilesWithNotification_, required void Function(objc.NSNotification ) onProgressChangedWithNotification_, bool $keepIsolateAlive = true}) {
+    final builder = objc.ObjCProtocolBuilder(debugName: 'OfflinePackProgressCallbacks');
+        OfflinePackProgressCallbacks$Builder.onErrorWithNotification_.implementAsBlocking(builder, onErrorWithNotification_);    OfflinePackProgressCallbacks$Builder.onMaximumAllowedTilesWithNotification_.implementAsBlocking(builder, onMaximumAllowedTilesWithNotification_);    OfflinePackProgressCallbacks$Builder.onProgressChangedWithNotification_.implementAsBlocking(builder, onProgressChangedWithNotification_);
+    builder.addProtocol($protocol);
+    return OfflinePackProgressCallbacks.as(builder.build(keepIsolateAlive: $keepIsolateAlive));
+  }
+
+  /// Adds the implementation of the OfflinePackProgressCallbacks protocol to an existing
+  /// [objc.ObjCProtocolBuilder]. All methods that can be implemented as blocking
+  /// listeners will be.
+  ///
+  /// Note: You cannot call this method after you have called `builder.build`.
+  static void addToBuilderAsBlocking(objc.ObjCProtocolBuilder builder, {required void Function(objc.NSNotification ) onErrorWithNotification_, required void Function(objc.NSNotification ) onMaximumAllowedTilesWithNotification_, required void Function(objc.NSNotification ) onProgressChangedWithNotification_, bool $keepIsolateAlive = true}) {
+        OfflinePackProgressCallbacks$Builder.onErrorWithNotification_.implementAsBlocking(builder, onErrorWithNotification_);    OfflinePackProgressCallbacks$Builder.onMaximumAllowedTilesWithNotification_.implementAsBlocking(builder, onMaximumAllowedTilesWithNotification_);    OfflinePackProgressCallbacks$Builder.onProgressChangedWithNotification_.implementAsBlocking(builder, onProgressChangedWithNotification_);
+    builder.addProtocol($protocol);
+  }
+
+  /// onErrorWithNotification:
+static final onErrorWithNotification_ = objc.ObjCProtocolListenableMethod<void Function(objc.NSNotification )>(
+      _protocol_OfflinePackProgressCallbacks,
+      _sel_onErrorWithNotification_,
+      ffi.Native.addressOf<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> )>>(_6admjt_protocolTrampoline_18v1jvf).cast(),
+      objc.getProtocolMethodSignature(
+          _protocol_OfflinePackProgressCallbacks,
+          _sel_onErrorWithNotification_,
+          isRequired: true,
+          isInstanceMethod: true,
+      ),
+      (void Function(objc.NSNotification ) func) => ObjCBlock_ffiVoid_ffiVoid_NSNotification.fromFunction((ffi.Pointer<ffi.Void> _, objc.NSNotification arg1) => func(arg1)),
+          (void Function(objc.NSNotification ) func) => ObjCBlock_ffiVoid_ffiVoid_NSNotification.listener((ffi.Pointer<ffi.Void> _, objc.NSNotification arg1) => func(arg1)),
+    (void Function(objc.NSNotification ) func) => ObjCBlock_ffiVoid_ffiVoid_NSNotification.blocking((ffi.Pointer<ffi.Void> _, objc.NSNotification arg1) => func(arg1)),
+
+    );
+/// onMaximumAllowedTilesWithNotification:
+static final onMaximumAllowedTilesWithNotification_ = objc.ObjCProtocolListenableMethod<void Function(objc.NSNotification )>(
+      _protocol_OfflinePackProgressCallbacks,
+      _sel_onMaximumAllowedTilesWithNotification_,
+      ffi.Native.addressOf<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> )>>(_6admjt_protocolTrampoline_18v1jvf).cast(),
+      objc.getProtocolMethodSignature(
+          _protocol_OfflinePackProgressCallbacks,
+          _sel_onMaximumAllowedTilesWithNotification_,
+          isRequired: true,
+          isInstanceMethod: true,
+      ),
+      (void Function(objc.NSNotification ) func) => ObjCBlock_ffiVoid_ffiVoid_NSNotification.fromFunction((ffi.Pointer<ffi.Void> _, objc.NSNotification arg1) => func(arg1)),
+          (void Function(objc.NSNotification ) func) => ObjCBlock_ffiVoid_ffiVoid_NSNotification.listener((ffi.Pointer<ffi.Void> _, objc.NSNotification arg1) => func(arg1)),
+    (void Function(objc.NSNotification ) func) => ObjCBlock_ffiVoid_ffiVoid_NSNotification.blocking((ffi.Pointer<ffi.Void> _, objc.NSNotification arg1) => func(arg1)),
+
+    );
+/// onProgressChangedWithNotification:
+static final onProgressChangedWithNotification_ = objc.ObjCProtocolListenableMethod<void Function(objc.NSNotification )>(
+      _protocol_OfflinePackProgressCallbacks,
+      _sel_onProgressChangedWithNotification_,
+      ffi.Native.addressOf<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> )>>(_6admjt_protocolTrampoline_18v1jvf).cast(),
+      objc.getProtocolMethodSignature(
+          _protocol_OfflinePackProgressCallbacks,
+          _sel_onProgressChangedWithNotification_,
+          isRequired: true,
+          isInstanceMethod: true,
+      ),
+      (void Function(objc.NSNotification ) func) => ObjCBlock_ffiVoid_ffiVoid_NSNotification.fromFunction((ffi.Pointer<ffi.Void> _, objc.NSNotification arg1) => func(arg1)),
+          (void Function(objc.NSNotification ) func) => ObjCBlock_ffiVoid_ffiVoid_NSNotification.listener((ffi.Pointer<ffi.Void> _, objc.NSNotification arg1) => func(arg1)),
+    (void Function(objc.NSNotification ) func) => ObjCBlock_ffiVoid_ffiVoid_NSNotification.blocking((ffi.Pointer<ffi.Void> _, objc.NSNotification arg1) => func(arg1)),
+
+    );
+
+}
 
 /// UIAction
 extension type UIAction._(objc.ObjCObject object$) implements objc.ObjCObject,UIMenuElement,UIMenuLeaf {
@@ -31016,6 +31309,7 @@ final _objc_msgSend_zjuvxo = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Poi
 late final _protocol_FlutterApi = objc.getProtocol("FlutterApi");
 late final _protocol_MLNFeature = objc.getProtocol("MLNFeature");
 late final _protocol_MLNMapViewDelegate = objc.getProtocol("MLNMapViewDelegate");
+late final _protocol_OfflinePackProgressCallbacks = objc.getProtocol("OfflinePackProgressCallbacks");
 late final _sel_CGImage = objc.registerName("CGImage");
 late final _sel_CIImage = objc.registerName("CIImage");
 late final _sel_URL = objc.registerName("URL");
@@ -31153,6 +31447,7 @@ late final _sel_coordinateSpace = objc.registerName("coordinateSpace");
 late final _sel_coordinates = objc.registerName("coordinates");
 late final _sel_copy_ = objc.registerName("copy:");
 late final _sel_countOfBytesCompleted = objc.registerName("countOfBytesCompleted");
+late final _sel_createOfflinePackProgressListenerWithCallbacks_ = objc.registerName("createOfflinePackProgressListenerWithCallbacks:");
 late final _sel_currentEDRHeadroom = objc.registerName("currentEDRHeadroom");
 late final _sel_currentMode = objc.registerName("currentMode");
 late final _sel_cut_ = objc.registerName("cut:");
@@ -31568,7 +31863,10 @@ late final _sel_new = objc.registerName("new");
 late final _sel_newFromPasteboard_ = objc.registerName("newFromPasteboard:");
 late final _sel_nextResponder = objc.registerName("nextResponder");
 late final _sel_onDoubleTapWithScreenLocation_ = objc.registerName("onDoubleTapWithScreenLocation:");
+late final _sel_onErrorWithNotification_ = objc.registerName("onErrorWithNotification:");
 late final _sel_onLongPressWithScreenLocation_ = objc.registerName("onLongPressWithScreenLocation:");
+late final _sel_onMaximumAllowedTilesWithNotification_ = objc.registerName("onMaximumAllowedTilesWithNotification:");
+late final _sel_onProgressChangedWithNotification_ = objc.registerName("onProgressChangedWithNotification:");
 late final _sel_onSecondaryTapWithScreenLocation_ = objc.registerName("onSecondaryTapWithScreenLocation:");
 late final _sel_onTapWithScreenLocation_ = objc.registerName("onTapWithScreenLocation:");
 late final _sel_operand = objc.registerName("operand");
@@ -31641,6 +31939,7 @@ late final _sel_removeFlutterApiWithViewId_ = objc.registerName("removeFlutterAp
 late final _sel_removeImageForName_ = objc.registerName("removeImageForName:");
 late final _sel_removeLayer_ = objc.registerName("removeLayer:");
 late final _sel_removeMapWithViewId_ = objc.registerName("removeMapWithViewId:");
+late final _sel_removeOfflinePackProgressListenerWithCallbacks_ = objc.registerName("removeOfflinePackProgressListenerWithCallbacks:");
 late final _sel_removeOverlay_ = objc.registerName("removeOverlay:");
 late final _sel_removeOverlays_ = objc.registerName("removeOverlays:");
 late final _sel_removePack_withCompletionHandler_ = objc.registerName("removePack:withCompletionHandler:");

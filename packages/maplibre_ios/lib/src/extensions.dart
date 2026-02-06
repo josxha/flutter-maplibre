@@ -101,6 +101,15 @@ extension CGPointExt on CGPoint {
   Offset toOffset() => Offset(x, y);
 }
 
+/// Internal extensions on [NSData].
+extension NSDataExt on NSData {
+  /// Convert a [NSData] to a UTF8 String.
+  String toUTF8String() => String.fromCharCodes(toList());
+
+  Map<String, Object?> toDartMap() =>
+      jsonDecode(toUTF8String()) as Map<String, Object>;
+}
+
 /// Internal extensions on [String].
 extension StringExt on String {
   /// Convert to a [NSURL].
@@ -311,6 +320,32 @@ extension ObjectExt on Object? {
           'Conversion to NSObject not implemented for type ${obj.runtimeType}',
         );
     }
+  }
+}
+
+/// Internal extensions on [MLNOfflinePack].
+extension MLNOfflinePackExt on MLNOfflinePack {
+  /// Convert a [MLNOfflinePack] to an [DownloadProgress].
+  DownloadProgress toDownloadProgress(OfflineRegion region) => DownloadProgress(
+    loadedBytes: progress.countOfBytesCompleted,
+    loadedTiles: progress.countOfTilesCompleted,
+    totalTilesEstimated:
+        progress.countOfResourcesExpected != progress.countOfResourcesExpected,
+    totalTiles: progress.countOfResourcesExpected,
+    region: region,
+    downloadCompleted:
+        progress.countOfResourcesCompleted >= progress.countOfResourcesExpected,
+  );
+}
+
+/// Internal extensions on [NSNotification].
+extension NSNotificationExt on NSNotification {
+  /// Get a [MLNOfflinePack] from an [NSNotification].
+  MLNOfflinePack? get offlinePack {
+    final obj = object;
+    if (obj == null) return null;
+    if (!MLNOfflinePack.isA(obj)) return null;
+    return MLNOfflinePack.as(obj);
   }
 }
 

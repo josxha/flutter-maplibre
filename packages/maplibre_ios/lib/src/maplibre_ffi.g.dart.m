@@ -636,6 +636,8 @@ __attribute__((visibility("default"))) __attribute__((used))
 void  _6admjt_protocolTrampoline_1v8di4v(id target, void * sel, id arg1, BOOL arg2, double arg3, double arg4) {
   return ((_ProtocolTrampoline_23)((id (*)(id, SEL, SEL))objc_msgSend)(target, @selector(getDOBJCDartProtocolMethodForSelector:), sel))(sel, arg1, arg2, arg3, arg4);
 }
+
+Protocol* _6admjt_OfflinePackProgressCallbacks(void) { return @protocol(OfflinePackProgressCallbacks); }
 #undef BLOCKING_BLOCK_IMPL
 
 #pragma clang diagnostic pop
