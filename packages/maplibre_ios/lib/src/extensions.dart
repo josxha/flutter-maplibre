@@ -129,7 +129,7 @@ NSExpression? parseNSExpression(String propertyName, String json) =>
 
 /// Internal extensions on [MLNFeature].
 extension MLNFeatureExt on MLNFeature {
-  /// Convert a [MLNFeature] to a [MapLibreFeature].
+  /// Convert a [MLNFeature] to a [RenderedFeature].
   RenderedFeature toRenderedFeature() => RenderedFeature(
     id: identifier == null ? null : toDartObject(identifier!),
     properties: attributes.toDartMap().map((k, v) => MapEntry(k.toString(), v)),
