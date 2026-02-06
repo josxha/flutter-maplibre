@@ -22,12 +22,13 @@ class OfflineManagerIos implements OfflineManager {
   @override
   Future<void> clearAmbientCache() async {
     final completer = Completer<void>();
+    final weakCompleter = WeakReference(completer);
     _storage.clearAmbientCacheWithCompletionHandler(
       ObjCBlock_ffiVoid_NSError.listener((error) {
         if (error != null) {
-          completer.completeError(error);
+          weakCompleter.target?.completeError(error);
         } else {
-          completer.complete();
+          weakCompleter.target?.complete();
         }
       }),
     );
@@ -55,6 +56,7 @@ class OfflineManagerIos implements OfflineManager {
     final context = utf8.encode(jsonEncode(metadata)).toNSData();
 
     final completer = Completer<MLNOfflinePack>();
+    final weakCompleter = WeakReference(completer);
     _storage.addPackForRegion(
       region,
       withContext: context,
@@ -63,10 +65,10 @@ class OfflineManagerIos implements OfflineManager {
         error,
       ) {
         if (pack != null) {
-          completer.complete(pack);
+          weakCompleter.target?.complete(pack);
           pack.resume(); // start downloading
         } else {
-          completer.completeError(error!);
+          weakCompleter.target?.completeError(error!);
         }
       }),
     );
@@ -102,12 +104,13 @@ class OfflineManagerIos implements OfflineManager {
   @override
   Future<void> invalidateAmbientCache() async {
     final completer = Completer<void>();
+    final weakCompleter = WeakReference(completer);
     _storage.invalidateAmbientCacheWithCompletionHandler(
       ObjCBlock_ffiVoid_NSError.listener((error) {
         if (error != null) {
-          completer.completeError(error);
+          weakCompleter.target?.completeError(error);
         } else {
-          completer.complete();
+          weakCompleter.target?.complete();
         }
       }),
     );
@@ -138,12 +141,13 @@ class OfflineManagerIos implements OfflineManager {
   @override
   Future<void> resetDatabase() async {
     final completer = Completer<void>();
+    final weakCompleter = WeakReference(completer);
     _storage.resetDatabaseWithCompletionHandler(
       ObjCBlock_ffiVoid_NSError.listener((error) {
         if (error != null) {
-          completer.completeError(error);
+          weakCompleter.target?.completeError(error);
         } else {
-          completer.complete();
+          weakCompleter.target?.complete();
         }
       }),
     );
@@ -152,13 +156,14 @@ class OfflineManagerIos implements OfflineManager {
   @override
   Future<void> setMaximumAmbientCacheSize({required int bytes}) async {
     final completer = Completer<void>();
+    final weakCompleter = WeakReference(completer);
     _storage.setMaximumAmbientCacheSize(
       bytes,
       withCompletionHandler: ObjCBlock_ffiVoid_NSError.listener((error) {
         if (error != null) {
-          completer.completeError(error);
+          weakCompleter.target?.completeError(error);
         } else {
-          completer.complete();
+          weakCompleter.target?.complete();
         }
       }),
     );

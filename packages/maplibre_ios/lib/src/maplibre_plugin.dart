@@ -22,7 +22,7 @@ final class MapLibrePlugin extends MapLibrePlatform {
   bool get offlineManagerIsSupported => true;
 
   @override
-  bool get permissionManagerIsSupported => true;
+  bool get permissionManagerIsSupported => false;
 
   @override
   bool get userLocationIsSupported => true;

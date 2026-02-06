@@ -39,42 +39,8 @@ final class MapLibreMapStateIos extends MapLibreMapState {
     _viewId = viewId;
     final mapView = MapLibreRegistry.getMapWithViewId(viewId)!;
     _mapView = mapView;
-    final flutterApi = FlutterApi$Builder.implementAsListener(
-      // Gesture callbacks
-      onDoubleTapWithScreenLocation_: (screenLocation) {
-        final offset = screenLocation.toOffset();
-        final point = toLngLat(offset);
-        final event = MapEventDoubleClick(point: point, screenPoint: offset);
-        widget.onEvent?.call(event);
-      },
-      onLongPressWithScreenLocation_: (screenLocation) {
-        final offset = screenLocation.toOffset();
-        final point = toLngLat(offset);
-        final event = MapEventDoubleClick(point: point, screenPoint: offset);
-        widget.onEvent?.call(event);
-      },
-      onSecondaryTapWithScreenLocation_: (screenLocation) {
-        final offset = screenLocation.toOffset();
-        final point = toLngLat(offset);
-        final event = MapEventSecondaryClick(point: point, screenPoint: offset);
-        widget.onEvent?.call(event);
-      },
-      onTapWithScreenLocation_: (screenLocation) {
-        final offset = screenLocation.toOffset();
-        final point = toLngLat(offset);
-        final event = MapEventClick(point: point, screenPoint: offset);
-        widget.onEvent?.call(event);
-      },
-      // MLNMapViewDelegate callbacks
-      didBecomeIdleWithMapView_: _didBecomeIdle,
-      didFinishLoadingStyleWithMapView_style_: _didFinishLoadingStyle,
-      regionDidChangeWithReasonWithMapView_reason_animated_:
-          _regionDidChangeWithReason,
-      regionIsChangingWithReasonWithMapView_reason_:
-          _regionIsChangingWithReason,
-      regionWillChangeWithReasonWithMapView_reason_animated_:
-          _regionWillChangeWithReason,
-    );
+    final weakThis = WeakReference(this);
+    final flutterApi = _createFlutterApi(viewId, weakThis);
     MapLibreRegistry.addFlutterApiWithViewId(viewId, api: flutterApi);
 
     mapView.automaticallyAdjustsContentInset = true;
@@ -265,15 +231,15 @@ final class MapLibreMapStateIos extends MapLibreMapState {
     }
   }
 
-  List<RenderedFeature> _nativeQueryToRenderedFeatures(NSArray query) => query
-      .asDart()
-      .map(MLNFeature.as)
-      .map((f) => f.toRenderedFeature())
-      .toList(growable: false);
+  List<RenderedFeature> _nativeQueryToRenderedFeatures(NSArray query) =>
+      query
+          .asDart()
+          .map(MLNFeature.as)
+          .map((f) => f.toRenderedFeature())
+          .toList(growable: false);
 
   @override
-  List<RenderedFeature> featuresAtPoint(
-    Offset point, {
+  List<RenderedFeature> featuresAtPoint(Offset point, {
     List<String>? layerIds,
   }) {
     final style = this.style;
@@ -328,9 +294,9 @@ final class MapLibreMapStateIos extends MapLibreMapState {
       final layer = layers[i];
       final features = _mapView!
           .visibleFeaturesAtPoint$1(
-            point,
-            inStyleLayersWithIdentifiers: NSSet.setWithObject(layer.identifier),
-          )
+        point,
+        inStyleLayersWithIdentifiers: NSSet.setWithObject(layer.identifier),
+      )
           .asDart();
       if (features.isEmpty) continue;
       if (features.isNotEmpty && MLNVectorStyleLayer.isA(layer)) {
@@ -359,9 +325,9 @@ final class MapLibreMapStateIos extends MapLibreMapState {
     mapView.userTrackingMode = switch (trackBearing) {
       BearingTrackMode.none => MLNUserTrackingMode.MLNUserTrackingModeFollow,
       BearingTrackMode.compass =>
-        MLNUserTrackingMode.MLNUserTrackingModeFollowWithHeading,
+      MLNUserTrackingMode.MLNUserTrackingModeFollowWithHeading,
       BearingTrackMode.gps =>
-        MLNUserTrackingMode.MLNUserTrackingModeFollowWithCourse,
+      MLNUserTrackingMode.MLNUserTrackingModeFollowWithCourse,
     };
   }
 
@@ -381,24 +347,26 @@ final class MapLibreMapStateIos extends MapLibreMapState {
   }
 
   @override
-  Geographic toLngLat(Offset screenLocation) => _mapView!
-      .convertPoint$2(
+  Geographic toLngLat(Offset screenLocation) =>
+      _mapView!
+          .convertPoint$2(
         screenLocation.toCGPoint(),
         toCoordinateFromView: _mapView,
       )
-      .toGeographic();
+          .toGeographic();
 
   @override
   List<Geographic> toLngLats(List<Offset> screenLocations) =>
       screenLocations.map(toLngLat).toList(growable: false);
 
   @override
-  Offset toScreenLocation(Geographic lngLat) => _mapView!
-      .convertCoordinate(
+  Offset toScreenLocation(Geographic lngLat) =>
+      _mapView!
+          .convertCoordinate(
         lngLat.toCLLocationCoordinate2D(),
         toPointToView: _mapView,
       )
-      .toOffset();
+          .toOffset();
 
   @override
   List<Offset> toScreenLocations(List<Geographic> lngLats) =>
@@ -448,11 +416,9 @@ final class MapLibreMapStateIos extends MapLibreMapState {
   }
 
   /// MLNMapViewDelegate method called when camera is about to start changing
-  void _regionWillChangeWithReason(
-    MLNMapView mapView,
-    int mlnChangeReason,
-    bool animated,
-  ) {
+  void _regionWillChangeWithReason(MLNMapView mapView,
+      int mlnChangeReason,
+      bool animated,) {
     const apiReasons = {
       MLNCameraChangeReason.MLNCameraChangeReasonGestureOneFingerZoom,
       MLNCameraChangeReason.MLNCameraChangeReasonGesturePan,
@@ -476,11 +442,9 @@ final class MapLibreMapStateIos extends MapLibreMapState {
   }
 
   /// MLNMapViewDelegate method called when camera has finished changing
-  void _regionDidChangeWithReason(
-    MLNMapView mapView,
-    int reason,
-    bool animated,
-  ) {
+  void _regionDidChangeWithReason(MLNMapView mapView,
+      int reason,
+      bool animated,) {
     _onCameraMoved(mapView);
     widget.onEvent?.call(const MapEventCameraIdle());
   }
@@ -504,4 +468,58 @@ final class MapLibreMapStateIos extends MapLibreMapState {
   void _regionIsChangingWithReason(MLNMapView mapView, int reason) {
     _onCameraMoved(mapView);
   }
+
+  static FlutterApi _createFlutterApi(int viewId,
+      WeakReference<MapLibreMapStateIos> weakThis) =>
+      FlutterApi$Builder.implementAsListener(
+        // Gesture callbacks
+        onDoubleTapWithScreenLocation_: (screenLocation) {
+          final state = weakThis.target;
+          if (state == null) return;
+          final offset = screenLocation.toOffset();
+          final point = state.toLngLat(offset);
+          final event = MapEventDoubleClick(point: point, screenPoint: offset);
+          state.widget.onEvent?.call(event);
+        },
+        onLongPressWithScreenLocation_: (screenLocation) {
+          final state = weakThis.target;
+          if (state == null) return;
+          final offset = screenLocation.toOffset();
+          final point = state.toLngLat(offset);
+          final event = MapEventDoubleClick(point: point, screenPoint: offset);
+          state.widget.onEvent?.call(event);
+        },
+        onSecondaryTapWithScreenLocation_: (screenLocation) {
+          final state = weakThis.target;
+          if (state == null) return;
+          final offset = screenLocation.toOffset();
+          final point = state.toLngLat(offset);
+          final event = MapEventSecondaryClick(
+              point: point, screenPoint: offset);
+          state.widget.onEvent?.call(event);
+        },
+        onTapWithScreenLocation_: (screenLocation) {
+          final state = weakThis.target;
+          if (state == null) return;
+          final offset = screenLocation.toOffset();
+          final point = state.toLngLat(offset);
+          final event = MapEventClick(point: point, screenPoint: offset);
+          state.widget.onEvent?.call(event);
+        },
+        // MLNMapViewDelegate callbacks
+        didBecomeIdleWithMapView_: (mapView) =>
+            weakThis.target?._didBecomeIdle(mapView),
+        didFinishLoadingStyleWithMapView_style_: (mapView, style) =>
+            weakThis.target?._didFinishLoadingStyle(mapView, style),
+        regionDidChangeWithReasonWithMapView_reason_animated_: (mapView, reason,
+            animated) =>
+            weakThis.target?._regionDidChangeWithReason(
+                mapView, reason, animated),
+        regionIsChangingWithReasonWithMapView_reason_: (mapView, reason) =>
+            weakThis.target?._regionIsChangingWithReason(mapView, reason),
+        regionWillChangeWithReasonWithMapView_reason_animated_: (mapView,
+            reason, animated) =>
+            weakThis.target?._regionWillChangeWithReason(
+                mapView, reason, animated),
+      );
 }
