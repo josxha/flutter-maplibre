@@ -28,6 +28,8 @@ final class MapLibreMapStateIos extends MapLibreMapState {
       layoutDirection: TextDirection.ltr,
       gestureRecognizers: widget.gestureRecognizers,
       onPlatformViewCreated: _onPlatformViewCreated,
+      creationParams: options.initStyle,
+      creationParamsCodec: const StandardMessageCodec(),
     );
   }
 
@@ -75,7 +77,6 @@ final class MapLibreMapStateIos extends MapLibreMapState {
     );
     MapLibreRegistry.addFlutterApiWithViewId(viewId, api: flutterApi);
 
-    // setStyle(options.initStyle);
     mapView.automaticallyAdjustsContentInset = true;
 
     // disable the default UI because they are rebuilt in Flutter

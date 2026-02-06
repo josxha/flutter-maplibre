@@ -6,11 +6,33 @@ class MapLibreView: NSObject, FlutterPlatformView, UIGestureRecognizerDelegate, 
     private var _view: UIView = .init()
     private var _viewId: Int64
     private var _mapView: MLNMapView!
+    private var _registrar: FlutterPluginRegistrar
 
-    init(frame: CGRect, viewId: Int64) {
+    init(registrar: FlutterPluginRegistrar, frame: CGRect, viewId: Int64, initStyle: String?) {
+        _registrar = registrar
         _viewId = viewId
         super.init() // self can be used after calling super.init()
-        self._mapView = MLNMapView(frame: frame)
+        
+        if let initStyle = initStyle {
+            let trimmed = initStyle.trimmingCharacters(in: .whitespacesAndNewlines);
+            if (trimmed.starts(with: "{")) {
+                // Raw JSON
+                self._mapView = MLNMapView(frame: frame, styleJSON: trimmed)
+            } else if (trimmed.starts(with: "/")) {
+                self._mapView = MLNMapView(frame: frame, styleURL: URL(string: "file://\(trimmed)")!)
+            } else if (!trimmed.starts(with: "http://") &&
+                !trimmed.starts(with: "https://") &&
+                !trimmed.starts(with: "mapbox://")) {
+              // flutter asset
+                let assetPath = self._registrar.lookupKey(forAsset: initStyle)
+                let url =  URL(string: assetPath, relativeTo: Bundle.main.resourceURL)!
+                self._mapView = MLNMapView(frame: frame, styleURL: url)
+            } else {
+              // URI
+                self._mapView = MLNMapView(frame: frame, styleURL: URL(string: trimmed)!)
+            }
+        }
+                                
         self._mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         MapLibreRegistry.addMap(viewId: viewId, map: self._mapView)
         self._view.addSubview(self._mapView)
