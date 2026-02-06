@@ -322,32 +322,6 @@ jobs:
         run: dart pub get
       - name: Build web
         run: flutter build web --wasm
-  codegen-pigeon:
-    name: "[Pigeon] Check codegen"
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: packages/maplibre_ios
-    steps:
-      - uses: actions/checkout@v6
-      - uses: subosito/flutter-action@v2
-        with:
-          cache: true
-      - name: "Get Flutter dependencies"
-        run: dart pub get
-      - name: Run pigeon
-        run: sh ./pigeons/run_code_gen.sh
-      - name: Format code
-        run: dart format .
-      - name: Check changes
-        run: |
-          if [[ -n "$(git status --porcelain)" ]]; then
-            echo "❌ Uncommitted changes detected in files:"
-            git diff --name-only
-            exit 1
-          else
-            echo "✅ No uncommitted changes"
-          fi
   codegen-android:
     name: "[Android] Check codegen"
     runs-on: ubuntu-latest
@@ -368,7 +342,7 @@ jobs:
         run: flutter build apk
       - name: Run jnigen
         working-directory: packages/maplibre_android
-        run: dart run tool/jnigen.dart
+        run: dart tool/jnigen.dart
       - name: Format code
         run: dart format packages/maplibre_android/lib/src/jni.g.dart
       - name: Check changes
@@ -380,47 +354,43 @@ jobs:
           else
             echo "✅ No uncommitted changes"
           fi
-#  codegen-ios:
-#    name: "[iOS] Check codegen"
-#    runs-on: macos-latest
-#    timeout-minutes: 30
-#    strategy:
-#      fail-fast: false
-#      matrix:
-#        sdk: [ '' ] # option to use a matrix test with the lower supported flutter version
-#    steps:
-#      - uses: actions/checkout@v6
-#      - name: Clone maplibre-native with shallow submodules
-#        run: |
-#          git clone \
-#            --depth 1 \
-#            --filter=blob:none \
-#            --recurse-submodules \
-#            --shallow-submodules \
-#            --jobs 8 \
-#            https://github.com/maplibre/maplibre-native ../maplibre-native
-#      - uses: subosito/flutter-action@v2
-#        with:
-#          flutter-version: ${{ matrix.sdk }}
-#          cache: true
-#      - run: flutter config --enable-swift-package-manager
-#      - name: "Get Flutter dependencies"
-#        working-directory: packages/maplibre_ios
-#        run: dart pub get
-#      - name: Build MapLibre Native
-#        working-directory: packages/maplibre_ios/ios
-#        run: ./build_maplibre.sh
-#      - name: Prepare ffigen
-#        run: echo TODO modify swift dependencies
-#      - name: Run ffigen
-#        working-directory: packages/maplibre_ios
-#        run: dart run ffigen
-#      - name: Check changes
-#        run: |
-#          if [[ -n "$(git status --porcelain)" ]]; then
-#            echo "❌ Uncommitted changes detected in files:"
-#            git diff --name-only
-#            exit 1
-#          else
-#            echo "✅ No uncommitted changes"
-#          fi
+  codegen-ios:
+    name: "[iOS] Check codegen"
+    runs-on: macos-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+      - name: Clone maplibre-native with shallow submodules
+        run: |
+          git clone \
+            --depth 1 \
+            --filter=blob:none \
+            --recurse-submodules \
+            --shallow-submodules \
+            --jobs 8 \
+            https://github.com/maplibre/maplibre-native ../maplibre-native
+      - uses: subosito/flutter-action@v2
+        with:
+          cache: true
+      - run: flutter config --enable-swift-package-manager
+      - name: "Get Flutter dependencies"
+        working-directory: packages/maplibre_ios
+        run: dart pub get
+      - name: Build MapLibre Native
+        working-directory: packages/maplibre_ios/ios
+        run: ./build_maplibre.sh
+      - name: Generate headers for Swift code
+        working-directory: packages/maplibre_ios/ios/maplibre_ios/Sources/maplibre_ios
+        run: ./gen_swift_headers.sh
+      - name: Run ffigen
+        working-directory: packages/maplibre_ios
+        run: dart tool/ffigen.dart
+      - name: Check changes
+        run: |
+          if [[ -n "$(git status --porcelain)" ]]; then
+            echo "❌ Uncommitted changes detected in files:"
+            git diff --name-only
+            exit 1
+          else
+            echo "✅ No uncommitted changes"
+          fi
