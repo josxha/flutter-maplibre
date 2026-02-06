@@ -17,19 +17,3 @@ public class MapLibrePlugin: NSObject, FlutterPlugin {
 
     public func handle(_: FlutterMethodCall, result _: @escaping FlutterResult) {}
 }
-
-/// A stub class to force the linker to include the MLNMapViewDelegate protocol
-public class MLNMapViewDelegateStub: NSObject, MLNMapViewDelegate {
-    public override init() {
-        super.init()
-    }
-}
-
-/// A stub class to force the linker to include the FlutterApi protocol
-/*
-public class FlutterApiStub: NSObject, FlutterApi {
-    public override init() {
-        super.init()
-    }
-}
- */

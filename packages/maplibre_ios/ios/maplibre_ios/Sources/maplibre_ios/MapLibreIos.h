@@ -303,12 +303,19 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 #if defined(__OBJC__)
 
+@class MLNMapView;
+@class MLNStyle;
 SWIFT_PROTOCOL_NAMED("FlutterApi")
 @protocol FlutterApi
 - (void)onTapWithScreenLocation:(CGPoint)screenLocation;
 - (void)onSecondaryTapWithScreenLocation:(CGPoint)screenLocation;
 - (void)onDoubleTapWithScreenLocation:(CGPoint)screenLocation;
 - (void)onLongPressWithScreenLocation:(CGPoint)screenLocation;
+- (void)didFinishLoadingStyleWithMapView:(MLNMapView * _Nonnull)mapView style:(MLNStyle * _Nonnull)style;
+- (void)regionWillChangeWithReasonWithMapView:(MLNMapView * _Nonnull)mapView reason:(NSUInteger)reason animated:(BOOL)animated;
+- (void)regionIsChangingWithReasonWithMapView:(MLNMapView * _Nonnull)mapView reason:(NSUInteger)reason;
+- (void)regionDidChangeWithReasonWithMapView:(MLNMapView * _Nonnull)mapView reason:(NSUInteger)reason animated:(BOOL)animated;
+- (void)didBecomeIdleWithMapView:(MLNMapView * _Nonnull)mapView;
 @end
 
 @class NSString;
@@ -322,7 +329,6 @@ SWIFT_CLASS_NAMED("Helpers")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class MLNMapView;
 SWIFT_CLASS_NAMED("MapLibreRegistry")
 @interface MapLibreRegistry : NSObject
 /// Method to get the map for a given viewId

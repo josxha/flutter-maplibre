@@ -54,6 +54,14 @@ external ffi.Pointer<objc.ObjCObjectImpl> _6admjt_protocolTrampoline_1mbt9g9(ffi
 ffi.Pointer<ffi.Void> arg0,
 );
 
+@ffi.Native<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.UnsignedLong , ffi.Bool )>()
+external void _6admjt_protocolTrampoline_1nyrrbs(ffi.Pointer<objc.ObjCObjectImpl> target,
+ffi.Pointer<ffi.Void> arg0,
+ffi.Pointer<objc.ObjCObjectImpl> arg1,
+int arg2,
+bool arg3,
+);
+
 @ffi.Native<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>()
 external void _6admjt_protocolTrampoline_1tz5yf(ffi.Pointer<objc.ObjCObjectImpl> target,
 ffi.Pointer<ffi.Void> arg0,
@@ -152,6 +160,13 @@ ffi.Pointer<objc.ObjCObjectImpl> arg2,
 objc.NSRange arg3,
 );
 
+@ffi.Native<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.UnsignedLong )>()
+external void _6admjt_protocolTrampoline_wy9lus(ffi.Pointer<objc.ObjCObjectImpl> target,
+ffi.Pointer<ffi.Void> arg0,
+ffi.Pointer<objc.ObjCObjectImpl> arg1,
+int arg2,
+);
+
 @ffi.Native<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> )>()
 external ffi.Pointer<objc.ObjCObjectImpl> _6admjt_protocolTrampoline_xr62hr(ffi.Pointer<objc.ObjCObjectImpl> target,
 ffi.Pointer<ffi.Void> arg0,
@@ -192,6 +207,12 @@ ffi.Pointer<objc.DOBJC_Context> context,
 
 @ffi.Native<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.DOBJC_Context> )>(isLeaf: true)
 external ffi.Pointer<objc.ObjCBlockImpl> _6admjt_wrapBlockingBlock_1llhjbh(ffi.Pointer<objc.ObjCBlockImpl> block,
+ffi.Pointer<objc.ObjCBlockImpl> listnerBlock,
+ffi.Pointer<objc.DOBJC_Context> context,
+);
+
+@ffi.Native<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.DOBJC_Context> )>(isLeaf: true)
+external ffi.Pointer<objc.ObjCBlockImpl> _6admjt_wrapBlockingBlock_1nyrrbs(ffi.Pointer<objc.ObjCBlockImpl> block,
 ffi.Pointer<objc.ObjCBlockImpl> listnerBlock,
 ffi.Pointer<objc.DOBJC_Context> context,
 );
@@ -263,6 +284,12 @@ ffi.Pointer<objc.DOBJC_Context> context,
 );
 
 @ffi.Native<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.DOBJC_Context> )>(isLeaf: true)
+external ffi.Pointer<objc.ObjCBlockImpl> _6admjt_wrapBlockingBlock_wy9lus(ffi.Pointer<objc.ObjCBlockImpl> block,
+ffi.Pointer<objc.ObjCBlockImpl> listnerBlock,
+ffi.Pointer<objc.DOBJC_Context> context,
+);
+
+@ffi.Native<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.DOBJC_Context> )>(isLeaf: true)
 external ffi.Pointer<objc.ObjCBlockImpl> _6admjt_wrapBlockingBlock_xtuoz7(ffi.Pointer<objc.ObjCBlockImpl> block,
 ffi.Pointer<objc.ObjCBlockImpl> listnerBlock,
 ffi.Pointer<objc.DOBJC_Context> context,
@@ -288,6 +315,10 @@ external ffi.Pointer<objc.ObjCBlockImpl> _6admjt_wrapListenerBlock_1f1ebb3(ffi.P
 
 @ffi.Native<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> )>(isLeaf: true)
 external ffi.Pointer<objc.ObjCBlockImpl> _6admjt_wrapListenerBlock_1llhjbh(ffi.Pointer<objc.ObjCBlockImpl> block,
+);
+
+@ffi.Native<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> )>(isLeaf: true)
+external ffi.Pointer<objc.ObjCBlockImpl> _6admjt_wrapListenerBlock_1nyrrbs(ffi.Pointer<objc.ObjCBlockImpl> block,
 );
 
 @ffi.Native<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> )>(isLeaf: true)
@@ -332,6 +363,10 @@ external ffi.Pointer<objc.ObjCBlockImpl> _6admjt_wrapListenerBlock_r8gdi7(ffi.Po
 
 @ffi.Native<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> )>(isLeaf: true)
 external ffi.Pointer<objc.ObjCBlockImpl> _6admjt_wrapListenerBlock_rgxx3r(ffi.Pointer<objc.ObjCBlockImpl> block,
+);
+
+@ffi.Native<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> )>(isLeaf: true)
+external ffi.Pointer<objc.ObjCBlockImpl> _6admjt_wrapListenerBlock_wy9lus(ffi.Pointer<objc.ObjCBlockImpl> block,
 );
 
 @ffi.Native<ffi.Pointer<objc.ObjCBlockImpl> Function(ffi.Pointer<objc.ObjCBlockImpl> )>(isLeaf: true)
@@ -556,6 +591,20 @@ extension type FlutterApi._(objc.ObjCProtocol object$) implements objc.ObjCProto
 
 extension FlutterApi$Methods on FlutterApi {
 
+  /// didBecomeIdleWithMapView:
+  void didBecomeIdleWithMapView(MLNMapView mapView) {
+_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_didBecomeIdleWithMapView_, mapView.ref.pointer);
+
+  }
+
+
+  /// didFinishLoadingStyleWithMapView:style:
+  void didFinishLoadingStyleWithMapView(MLNMapView mapView, {required MLNStyle style}) {
+_objc_msgSend_pfv6jd(object$.ref.pointer, _sel_didFinishLoadingStyleWithMapView_style_, mapView.ref.pointer, style.ref.pointer);
+
+  }
+
+
   /// onDoubleTapWithScreenLocation:
   void onDoubleTapWithScreenLocation(objc.CGPoint screenLocation) {
 _objc_msgSend_iy8iz6(object$.ref.pointer, _sel_onDoubleTapWithScreenLocation_, screenLocation);
@@ -583,6 +632,27 @@ _objc_msgSend_iy8iz6(object$.ref.pointer, _sel_onTapWithScreenLocation_, screenL
 
   }
 
+
+  /// regionDidChangeWithReasonWithMapView:reason:animated:
+  void regionDidChangeWithReasonWithMapView(MLNMapView mapView, {required int reason,required bool animated}) {
+_objc_msgSend_lxwoc0(object$.ref.pointer, _sel_regionDidChangeWithReasonWithMapView_reason_animated_, mapView.ref.pointer, reason, animated);
+
+  }
+
+
+  /// regionIsChangingWithReasonWithMapView:reason:
+  void regionIsChangingWithReasonWithMapView(MLNMapView mapView, {required int reason}) {
+_objc_msgSend_djsa9o(object$.ref.pointer, _sel_regionIsChangingWithReasonWithMapView_reason_, mapView.ref.pointer, reason);
+
+  }
+
+
+  /// regionWillChangeWithReasonWithMapView:reason:animated:
+  void regionWillChangeWithReasonWithMapView(MLNMapView mapView, {required int reason,required bool animated}) {
+_objc_msgSend_lxwoc0(object$.ref.pointer, _sel_regionWillChangeWithReasonWithMapView_reason_animated_, mapView.ref.pointer, reason, animated);
+
+  }
+
 }
 
   interface class FlutterApi$Builder {
@@ -596,9 +666,9 @@ _objc_msgSend_iy8iz6(object$.ref.pointer, _sel_onTapWithScreenLocation_, screenL
   ///
   /// If `$keepIsolateAlive` is true, this protocol will keep this isolate
   /// alive until it is garbage collected by both Dart and ObjC.
-  static FlutterApi implement({required void Function(objc.CGPoint ) onDoubleTapWithScreenLocation_, required void Function(objc.CGPoint ) onLongPressWithScreenLocation_, required void Function(objc.CGPoint ) onSecondaryTapWithScreenLocation_, required void Function(objc.CGPoint ) onTapWithScreenLocation_, bool $keepIsolateAlive = true}) {
+  static FlutterApi implement({required void Function(MLNMapView ) didBecomeIdleWithMapView_, required void Function(MLNMapView , MLNStyle ) didFinishLoadingStyleWithMapView_style_, required void Function(objc.CGPoint ) onDoubleTapWithScreenLocation_, required void Function(objc.CGPoint ) onLongPressWithScreenLocation_, required void Function(objc.CGPoint ) onSecondaryTapWithScreenLocation_, required void Function(objc.CGPoint ) onTapWithScreenLocation_, required void Function(MLNMapView , int , bool ) regionDidChangeWithReasonWithMapView_reason_animated_, required void Function(MLNMapView , int ) regionIsChangingWithReasonWithMapView_reason_, required void Function(MLNMapView , int , bool ) regionWillChangeWithReasonWithMapView_reason_animated_, bool $keepIsolateAlive = true}) {
     final builder = objc.ObjCProtocolBuilder(debugName: 'FlutterApi');
-        FlutterApi$Builder.onDoubleTapWithScreenLocation_.implement(builder, onDoubleTapWithScreenLocation_);    FlutterApi$Builder.onLongPressWithScreenLocation_.implement(builder, onLongPressWithScreenLocation_);    FlutterApi$Builder.onSecondaryTapWithScreenLocation_.implement(builder, onSecondaryTapWithScreenLocation_);    FlutterApi$Builder.onTapWithScreenLocation_.implement(builder, onTapWithScreenLocation_);
+        FlutterApi$Builder.didBecomeIdleWithMapView_.implement(builder, didBecomeIdleWithMapView_);    FlutterApi$Builder.didFinishLoadingStyleWithMapView_style_.implement(builder, didFinishLoadingStyleWithMapView_style_);    FlutterApi$Builder.onDoubleTapWithScreenLocation_.implement(builder, onDoubleTapWithScreenLocation_);    FlutterApi$Builder.onLongPressWithScreenLocation_.implement(builder, onLongPressWithScreenLocation_);    FlutterApi$Builder.onSecondaryTapWithScreenLocation_.implement(builder, onSecondaryTapWithScreenLocation_);    FlutterApi$Builder.onTapWithScreenLocation_.implement(builder, onTapWithScreenLocation_);    FlutterApi$Builder.regionDidChangeWithReasonWithMapView_reason_animated_.implement(builder, regionDidChangeWithReasonWithMapView_reason_animated_);    FlutterApi$Builder.regionIsChangingWithReasonWithMapView_reason_.implement(builder, regionIsChangingWithReasonWithMapView_reason_);    FlutterApi$Builder.regionWillChangeWithReasonWithMapView_reason_animated_.implement(builder, regionWillChangeWithReasonWithMapView_reason_animated_);
     builder.addProtocol($protocol);
     return FlutterApi.as(builder.build(keepIsolateAlive: $keepIsolateAlive));
   }
@@ -607,8 +677,8 @@ _objc_msgSend_iy8iz6(object$.ref.pointer, _sel_onTapWithScreenLocation_, screenL
   /// [objc.ObjCProtocolBuilder].
   ///
   /// Note: You cannot call this method after you have called `builder.build`.
-  static void addToBuilder(objc.ObjCProtocolBuilder builder, {required void Function(objc.CGPoint ) onDoubleTapWithScreenLocation_, required void Function(objc.CGPoint ) onLongPressWithScreenLocation_, required void Function(objc.CGPoint ) onSecondaryTapWithScreenLocation_, required void Function(objc.CGPoint ) onTapWithScreenLocation_, bool $keepIsolateAlive = true}) {
-        FlutterApi$Builder.onDoubleTapWithScreenLocation_.implement(builder, onDoubleTapWithScreenLocation_);    FlutterApi$Builder.onLongPressWithScreenLocation_.implement(builder, onLongPressWithScreenLocation_);    FlutterApi$Builder.onSecondaryTapWithScreenLocation_.implement(builder, onSecondaryTapWithScreenLocation_);    FlutterApi$Builder.onTapWithScreenLocation_.implement(builder, onTapWithScreenLocation_);
+  static void addToBuilder(objc.ObjCProtocolBuilder builder, {required void Function(MLNMapView ) didBecomeIdleWithMapView_, required void Function(MLNMapView , MLNStyle ) didFinishLoadingStyleWithMapView_style_, required void Function(objc.CGPoint ) onDoubleTapWithScreenLocation_, required void Function(objc.CGPoint ) onLongPressWithScreenLocation_, required void Function(objc.CGPoint ) onSecondaryTapWithScreenLocation_, required void Function(objc.CGPoint ) onTapWithScreenLocation_, required void Function(MLNMapView , int , bool ) regionDidChangeWithReasonWithMapView_reason_animated_, required void Function(MLNMapView , int ) regionIsChangingWithReasonWithMapView_reason_, required void Function(MLNMapView , int , bool ) regionWillChangeWithReasonWithMapView_reason_animated_, bool $keepIsolateAlive = true}) {
+        FlutterApi$Builder.didBecomeIdleWithMapView_.implement(builder, didBecomeIdleWithMapView_);    FlutterApi$Builder.didFinishLoadingStyleWithMapView_style_.implement(builder, didFinishLoadingStyleWithMapView_style_);    FlutterApi$Builder.onDoubleTapWithScreenLocation_.implement(builder, onDoubleTapWithScreenLocation_);    FlutterApi$Builder.onLongPressWithScreenLocation_.implement(builder, onLongPressWithScreenLocation_);    FlutterApi$Builder.onSecondaryTapWithScreenLocation_.implement(builder, onSecondaryTapWithScreenLocation_);    FlutterApi$Builder.onTapWithScreenLocation_.implement(builder, onTapWithScreenLocation_);    FlutterApi$Builder.regionDidChangeWithReasonWithMapView_reason_animated_.implement(builder, regionDidChangeWithReasonWithMapView_reason_animated_);    FlutterApi$Builder.regionIsChangingWithReasonWithMapView_reason_.implement(builder, regionIsChangingWithReasonWithMapView_reason_);    FlutterApi$Builder.regionWillChangeWithReasonWithMapView_reason_animated_.implement(builder, regionWillChangeWithReasonWithMapView_reason_animated_);
     builder.addProtocol($protocol);
   }
 
@@ -618,9 +688,9 @@ _objc_msgSend_iy8iz6(object$.ref.pointer, _sel_onTapWithScreenLocation_, screenL
   ///
   /// If `$keepIsolateAlive` is true, this protocol will keep this isolate
   /// alive until it is garbage collected by both Dart and ObjC.
-  static FlutterApi implementAsListener({required void Function(objc.CGPoint ) onDoubleTapWithScreenLocation_, required void Function(objc.CGPoint ) onLongPressWithScreenLocation_, required void Function(objc.CGPoint ) onSecondaryTapWithScreenLocation_, required void Function(objc.CGPoint ) onTapWithScreenLocation_, bool $keepIsolateAlive = true}) {
+  static FlutterApi implementAsListener({required void Function(MLNMapView ) didBecomeIdleWithMapView_, required void Function(MLNMapView , MLNStyle ) didFinishLoadingStyleWithMapView_style_, required void Function(objc.CGPoint ) onDoubleTapWithScreenLocation_, required void Function(objc.CGPoint ) onLongPressWithScreenLocation_, required void Function(objc.CGPoint ) onSecondaryTapWithScreenLocation_, required void Function(objc.CGPoint ) onTapWithScreenLocation_, required void Function(MLNMapView , int , bool ) regionDidChangeWithReasonWithMapView_reason_animated_, required void Function(MLNMapView , int ) regionIsChangingWithReasonWithMapView_reason_, required void Function(MLNMapView , int , bool ) regionWillChangeWithReasonWithMapView_reason_animated_, bool $keepIsolateAlive = true}) {
     final builder = objc.ObjCProtocolBuilder(debugName: 'FlutterApi');
-        FlutterApi$Builder.onDoubleTapWithScreenLocation_.implementAsListener(builder, onDoubleTapWithScreenLocation_);    FlutterApi$Builder.onLongPressWithScreenLocation_.implementAsListener(builder, onLongPressWithScreenLocation_);    FlutterApi$Builder.onSecondaryTapWithScreenLocation_.implementAsListener(builder, onSecondaryTapWithScreenLocation_);    FlutterApi$Builder.onTapWithScreenLocation_.implementAsListener(builder, onTapWithScreenLocation_);
+        FlutterApi$Builder.didBecomeIdleWithMapView_.implementAsListener(builder, didBecomeIdleWithMapView_);    FlutterApi$Builder.didFinishLoadingStyleWithMapView_style_.implementAsListener(builder, didFinishLoadingStyleWithMapView_style_);    FlutterApi$Builder.onDoubleTapWithScreenLocation_.implementAsListener(builder, onDoubleTapWithScreenLocation_);    FlutterApi$Builder.onLongPressWithScreenLocation_.implementAsListener(builder, onLongPressWithScreenLocation_);    FlutterApi$Builder.onSecondaryTapWithScreenLocation_.implementAsListener(builder, onSecondaryTapWithScreenLocation_);    FlutterApi$Builder.onTapWithScreenLocation_.implementAsListener(builder, onTapWithScreenLocation_);    FlutterApi$Builder.regionDidChangeWithReasonWithMapView_reason_animated_.implementAsListener(builder, regionDidChangeWithReasonWithMapView_reason_animated_);    FlutterApi$Builder.regionIsChangingWithReasonWithMapView_reason_.implementAsListener(builder, regionIsChangingWithReasonWithMapView_reason_);    FlutterApi$Builder.regionWillChangeWithReasonWithMapView_reason_animated_.implementAsListener(builder, regionWillChangeWithReasonWithMapView_reason_animated_);
     builder.addProtocol($protocol);
     return FlutterApi.as(builder.build(keepIsolateAlive: $keepIsolateAlive));
   }
@@ -630,8 +700,8 @@ _objc_msgSend_iy8iz6(object$.ref.pointer, _sel_onTapWithScreenLocation_, screenL
   /// be.
   ///
   /// Note: You cannot call this method after you have called `builder.build`.
-  static void addToBuilderAsListener(objc.ObjCProtocolBuilder builder, {required void Function(objc.CGPoint ) onDoubleTapWithScreenLocation_, required void Function(objc.CGPoint ) onLongPressWithScreenLocation_, required void Function(objc.CGPoint ) onSecondaryTapWithScreenLocation_, required void Function(objc.CGPoint ) onTapWithScreenLocation_, bool $keepIsolateAlive = true}) {
-        FlutterApi$Builder.onDoubleTapWithScreenLocation_.implementAsListener(builder, onDoubleTapWithScreenLocation_);    FlutterApi$Builder.onLongPressWithScreenLocation_.implementAsListener(builder, onLongPressWithScreenLocation_);    FlutterApi$Builder.onSecondaryTapWithScreenLocation_.implementAsListener(builder, onSecondaryTapWithScreenLocation_);    FlutterApi$Builder.onTapWithScreenLocation_.implementAsListener(builder, onTapWithScreenLocation_);
+  static void addToBuilderAsListener(objc.ObjCProtocolBuilder builder, {required void Function(MLNMapView ) didBecomeIdleWithMapView_, required void Function(MLNMapView , MLNStyle ) didFinishLoadingStyleWithMapView_style_, required void Function(objc.CGPoint ) onDoubleTapWithScreenLocation_, required void Function(objc.CGPoint ) onLongPressWithScreenLocation_, required void Function(objc.CGPoint ) onSecondaryTapWithScreenLocation_, required void Function(objc.CGPoint ) onTapWithScreenLocation_, required void Function(MLNMapView , int , bool ) regionDidChangeWithReasonWithMapView_reason_animated_, required void Function(MLNMapView , int ) regionIsChangingWithReasonWithMapView_reason_, required void Function(MLNMapView , int , bool ) regionWillChangeWithReasonWithMapView_reason_animated_, bool $keepIsolateAlive = true}) {
+        FlutterApi$Builder.didBecomeIdleWithMapView_.implementAsListener(builder, didBecomeIdleWithMapView_);    FlutterApi$Builder.didFinishLoadingStyleWithMapView_style_.implementAsListener(builder, didFinishLoadingStyleWithMapView_style_);    FlutterApi$Builder.onDoubleTapWithScreenLocation_.implementAsListener(builder, onDoubleTapWithScreenLocation_);    FlutterApi$Builder.onLongPressWithScreenLocation_.implementAsListener(builder, onLongPressWithScreenLocation_);    FlutterApi$Builder.onSecondaryTapWithScreenLocation_.implementAsListener(builder, onSecondaryTapWithScreenLocation_);    FlutterApi$Builder.onTapWithScreenLocation_.implementAsListener(builder, onTapWithScreenLocation_);    FlutterApi$Builder.regionDidChangeWithReasonWithMapView_reason_animated_.implementAsListener(builder, regionDidChangeWithReasonWithMapView_reason_animated_);    FlutterApi$Builder.regionIsChangingWithReasonWithMapView_reason_.implementAsListener(builder, regionIsChangingWithReasonWithMapView_reason_);    FlutterApi$Builder.regionWillChangeWithReasonWithMapView_reason_animated_.implementAsListener(builder, regionWillChangeWithReasonWithMapView_reason_animated_);
     builder.addProtocol($protocol);
   }
 
@@ -641,9 +711,9 @@ _objc_msgSend_iy8iz6(object$.ref.pointer, _sel_onTapWithScreenLocation_, screenL
   ///
   /// If `$keepIsolateAlive` is true, this protocol will keep this isolate
   /// alive until it is garbage collected by both Dart and ObjC.
-  static FlutterApi implementAsBlocking({required void Function(objc.CGPoint ) onDoubleTapWithScreenLocation_, required void Function(objc.CGPoint ) onLongPressWithScreenLocation_, required void Function(objc.CGPoint ) onSecondaryTapWithScreenLocation_, required void Function(objc.CGPoint ) onTapWithScreenLocation_, bool $keepIsolateAlive = true}) {
+  static FlutterApi implementAsBlocking({required void Function(MLNMapView ) didBecomeIdleWithMapView_, required void Function(MLNMapView , MLNStyle ) didFinishLoadingStyleWithMapView_style_, required void Function(objc.CGPoint ) onDoubleTapWithScreenLocation_, required void Function(objc.CGPoint ) onLongPressWithScreenLocation_, required void Function(objc.CGPoint ) onSecondaryTapWithScreenLocation_, required void Function(objc.CGPoint ) onTapWithScreenLocation_, required void Function(MLNMapView , int , bool ) regionDidChangeWithReasonWithMapView_reason_animated_, required void Function(MLNMapView , int ) regionIsChangingWithReasonWithMapView_reason_, required void Function(MLNMapView , int , bool ) regionWillChangeWithReasonWithMapView_reason_animated_, bool $keepIsolateAlive = true}) {
     final builder = objc.ObjCProtocolBuilder(debugName: 'FlutterApi');
-        FlutterApi$Builder.onDoubleTapWithScreenLocation_.implementAsBlocking(builder, onDoubleTapWithScreenLocation_);    FlutterApi$Builder.onLongPressWithScreenLocation_.implementAsBlocking(builder, onLongPressWithScreenLocation_);    FlutterApi$Builder.onSecondaryTapWithScreenLocation_.implementAsBlocking(builder, onSecondaryTapWithScreenLocation_);    FlutterApi$Builder.onTapWithScreenLocation_.implementAsBlocking(builder, onTapWithScreenLocation_);
+        FlutterApi$Builder.didBecomeIdleWithMapView_.implementAsBlocking(builder, didBecomeIdleWithMapView_);    FlutterApi$Builder.didFinishLoadingStyleWithMapView_style_.implementAsBlocking(builder, didFinishLoadingStyleWithMapView_style_);    FlutterApi$Builder.onDoubleTapWithScreenLocation_.implementAsBlocking(builder, onDoubleTapWithScreenLocation_);    FlutterApi$Builder.onLongPressWithScreenLocation_.implementAsBlocking(builder, onLongPressWithScreenLocation_);    FlutterApi$Builder.onSecondaryTapWithScreenLocation_.implementAsBlocking(builder, onSecondaryTapWithScreenLocation_);    FlutterApi$Builder.onTapWithScreenLocation_.implementAsBlocking(builder, onTapWithScreenLocation_);    FlutterApi$Builder.regionDidChangeWithReasonWithMapView_reason_animated_.implementAsBlocking(builder, regionDidChangeWithReasonWithMapView_reason_animated_);    FlutterApi$Builder.regionIsChangingWithReasonWithMapView_reason_.implementAsBlocking(builder, regionIsChangingWithReasonWithMapView_reason_);    FlutterApi$Builder.regionWillChangeWithReasonWithMapView_reason_animated_.implementAsBlocking(builder, regionWillChangeWithReasonWithMapView_reason_animated_);
     builder.addProtocol($protocol);
     return FlutterApi.as(builder.build(keepIsolateAlive: $keepIsolateAlive));
   }
@@ -653,12 +723,44 @@ _objc_msgSend_iy8iz6(object$.ref.pointer, _sel_onTapWithScreenLocation_, screenL
   /// listeners will be.
   ///
   /// Note: You cannot call this method after you have called `builder.build`.
-  static void addToBuilderAsBlocking(objc.ObjCProtocolBuilder builder, {required void Function(objc.CGPoint ) onDoubleTapWithScreenLocation_, required void Function(objc.CGPoint ) onLongPressWithScreenLocation_, required void Function(objc.CGPoint ) onSecondaryTapWithScreenLocation_, required void Function(objc.CGPoint ) onTapWithScreenLocation_, bool $keepIsolateAlive = true}) {
-        FlutterApi$Builder.onDoubleTapWithScreenLocation_.implementAsBlocking(builder, onDoubleTapWithScreenLocation_);    FlutterApi$Builder.onLongPressWithScreenLocation_.implementAsBlocking(builder, onLongPressWithScreenLocation_);    FlutterApi$Builder.onSecondaryTapWithScreenLocation_.implementAsBlocking(builder, onSecondaryTapWithScreenLocation_);    FlutterApi$Builder.onTapWithScreenLocation_.implementAsBlocking(builder, onTapWithScreenLocation_);
+  static void addToBuilderAsBlocking(objc.ObjCProtocolBuilder builder, {required void Function(MLNMapView ) didBecomeIdleWithMapView_, required void Function(MLNMapView , MLNStyle ) didFinishLoadingStyleWithMapView_style_, required void Function(objc.CGPoint ) onDoubleTapWithScreenLocation_, required void Function(objc.CGPoint ) onLongPressWithScreenLocation_, required void Function(objc.CGPoint ) onSecondaryTapWithScreenLocation_, required void Function(objc.CGPoint ) onTapWithScreenLocation_, required void Function(MLNMapView , int , bool ) regionDidChangeWithReasonWithMapView_reason_animated_, required void Function(MLNMapView , int ) regionIsChangingWithReasonWithMapView_reason_, required void Function(MLNMapView , int , bool ) regionWillChangeWithReasonWithMapView_reason_animated_, bool $keepIsolateAlive = true}) {
+        FlutterApi$Builder.didBecomeIdleWithMapView_.implementAsBlocking(builder, didBecomeIdleWithMapView_);    FlutterApi$Builder.didFinishLoadingStyleWithMapView_style_.implementAsBlocking(builder, didFinishLoadingStyleWithMapView_style_);    FlutterApi$Builder.onDoubleTapWithScreenLocation_.implementAsBlocking(builder, onDoubleTapWithScreenLocation_);    FlutterApi$Builder.onLongPressWithScreenLocation_.implementAsBlocking(builder, onLongPressWithScreenLocation_);    FlutterApi$Builder.onSecondaryTapWithScreenLocation_.implementAsBlocking(builder, onSecondaryTapWithScreenLocation_);    FlutterApi$Builder.onTapWithScreenLocation_.implementAsBlocking(builder, onTapWithScreenLocation_);    FlutterApi$Builder.regionDidChangeWithReasonWithMapView_reason_animated_.implementAsBlocking(builder, regionDidChangeWithReasonWithMapView_reason_animated_);    FlutterApi$Builder.regionIsChangingWithReasonWithMapView_reason_.implementAsBlocking(builder, regionIsChangingWithReasonWithMapView_reason_);    FlutterApi$Builder.regionWillChangeWithReasonWithMapView_reason_animated_.implementAsBlocking(builder, regionWillChangeWithReasonWithMapView_reason_animated_);
     builder.addProtocol($protocol);
   }
 
-  /// onDoubleTapWithScreenLocation:
+  /// didBecomeIdleWithMapView:
+static final didBecomeIdleWithMapView_ = objc.ObjCProtocolListenableMethod<void Function(MLNMapView )>(
+      _protocol_FlutterApi,
+      _sel_didBecomeIdleWithMapView_,
+      ffi.Native.addressOf<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> )>>(_6admjt_protocolTrampoline_18v1jvf).cast(),
+      objc.getProtocolMethodSignature(
+          _protocol_FlutterApi,
+          _sel_didBecomeIdleWithMapView_,
+          isRequired: true,
+          isInstanceMethod: true,
+      ),
+      (void Function(MLNMapView ) func) => ObjCBlock_ffiVoid_ffiVoid_MLNMapView.fromFunction((ffi.Pointer<ffi.Void> _, MLNMapView arg1) => func(arg1)),
+          (void Function(MLNMapView ) func) => ObjCBlock_ffiVoid_ffiVoid_MLNMapView.listener((ffi.Pointer<ffi.Void> _, MLNMapView arg1) => func(arg1)),
+    (void Function(MLNMapView ) func) => ObjCBlock_ffiVoid_ffiVoid_MLNMapView.blocking((ffi.Pointer<ffi.Void> _, MLNMapView arg1) => func(arg1)),
+
+    );
+/// didFinishLoadingStyleWithMapView:style:
+static final didFinishLoadingStyleWithMapView_style_ = objc.ObjCProtocolListenableMethod<void Function(MLNMapView , MLNStyle )>(
+      _protocol_FlutterApi,
+      _sel_didFinishLoadingStyleWithMapView_style_,
+      ffi.Native.addressOf<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>>(_6admjt_protocolTrampoline_fjrv01).cast(),
+      objc.getProtocolMethodSignature(
+          _protocol_FlutterApi,
+          _sel_didFinishLoadingStyleWithMapView_style_,
+          isRequired: true,
+          isInstanceMethod: true,
+      ),
+      (void Function(MLNMapView , MLNStyle ) func) => ObjCBlock_ffiVoid_ffiVoid_MLNMapView_MLNStyle.fromFunction((ffi.Pointer<ffi.Void> _, MLNMapView arg1, MLNStyle arg2) => func(arg1, arg2)),
+          (void Function(MLNMapView , MLNStyle ) func) => ObjCBlock_ffiVoid_ffiVoid_MLNMapView_MLNStyle.listener((ffi.Pointer<ffi.Void> _, MLNMapView arg1, MLNStyle arg2) => func(arg1, arg2)),
+    (void Function(MLNMapView , MLNStyle ) func) => ObjCBlock_ffiVoid_ffiVoid_MLNMapView_MLNStyle.blocking((ffi.Pointer<ffi.Void> _, MLNMapView arg1, MLNStyle arg2) => func(arg1, arg2)),
+
+    );
+/// onDoubleTapWithScreenLocation:
 static final onDoubleTapWithScreenLocation_ = objc.ObjCProtocolListenableMethod<void Function(objc.CGPoint )>(
       _protocol_FlutterApi,
       _sel_onDoubleTapWithScreenLocation_,
@@ -720,6 +822,54 @@ static final onTapWithScreenLocation_ = objc.ObjCProtocolListenableMethod<void F
       (void Function(objc.CGPoint ) func) => ObjCBlock_ffiVoid_ffiVoid_CGPoint.fromFunction((ffi.Pointer<ffi.Void> _, objc.CGPoint arg1) => func(arg1)),
           (void Function(objc.CGPoint ) func) => ObjCBlock_ffiVoid_ffiVoid_CGPoint.listener((ffi.Pointer<ffi.Void> _, objc.CGPoint arg1) => func(arg1)),
     (void Function(objc.CGPoint ) func) => ObjCBlock_ffiVoid_ffiVoid_CGPoint.blocking((ffi.Pointer<ffi.Void> _, objc.CGPoint arg1) => func(arg1)),
+
+    );
+/// regionDidChangeWithReasonWithMapView:reason:animated:
+static final regionDidChangeWithReasonWithMapView_reason_animated_ = objc.ObjCProtocolListenableMethod<void Function(MLNMapView , int , bool )>(
+      _protocol_FlutterApi,
+      _sel_regionDidChangeWithReasonWithMapView_reason_animated_,
+      ffi.Native.addressOf<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.UnsignedLong , ffi.Bool )>>(_6admjt_protocolTrampoline_1nyrrbs).cast(),
+      objc.getProtocolMethodSignature(
+          _protocol_FlutterApi,
+          _sel_regionDidChangeWithReasonWithMapView_reason_animated_,
+          isRequired: true,
+          isInstanceMethod: true,
+      ),
+      (void Function(MLNMapView , int , bool ) func) => ObjCBlock_ffiVoid_ffiVoid_MLNMapView_NSUInteger_bool.fromFunction((ffi.Pointer<ffi.Void> _, MLNMapView arg1, int arg2, bool arg3) => func(arg1, arg2, arg3)),
+          (void Function(MLNMapView , int , bool ) func) => ObjCBlock_ffiVoid_ffiVoid_MLNMapView_NSUInteger_bool.listener((ffi.Pointer<ffi.Void> _, MLNMapView arg1, int arg2, bool arg3) => func(arg1, arg2, arg3)),
+    (void Function(MLNMapView , int , bool ) func) => ObjCBlock_ffiVoid_ffiVoid_MLNMapView_NSUInteger_bool.blocking((ffi.Pointer<ffi.Void> _, MLNMapView arg1, int arg2, bool arg3) => func(arg1, arg2, arg3)),
+
+    );
+/// regionIsChangingWithReasonWithMapView:reason:
+static final regionIsChangingWithReasonWithMapView_reason_ = objc.ObjCProtocolListenableMethod<void Function(MLNMapView , int )>(
+      _protocol_FlutterApi,
+      _sel_regionIsChangingWithReasonWithMapView_reason_,
+      ffi.Native.addressOf<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.UnsignedLong )>>(_6admjt_protocolTrampoline_wy9lus).cast(),
+      objc.getProtocolMethodSignature(
+          _protocol_FlutterApi,
+          _sel_regionIsChangingWithReasonWithMapView_reason_,
+          isRequired: true,
+          isInstanceMethod: true,
+      ),
+      (void Function(MLNMapView , int ) func) => ObjCBlock_ffiVoid_ffiVoid_MLNMapView_NSUInteger.fromFunction((ffi.Pointer<ffi.Void> _, MLNMapView arg1, int arg2) => func(arg1, arg2)),
+          (void Function(MLNMapView , int ) func) => ObjCBlock_ffiVoid_ffiVoid_MLNMapView_NSUInteger.listener((ffi.Pointer<ffi.Void> _, MLNMapView arg1, int arg2) => func(arg1, arg2)),
+    (void Function(MLNMapView , int ) func) => ObjCBlock_ffiVoid_ffiVoid_MLNMapView_NSUInteger.blocking((ffi.Pointer<ffi.Void> _, MLNMapView arg1, int arg2) => func(arg1, arg2)),
+
+    );
+/// regionWillChangeWithReasonWithMapView:reason:animated:
+static final regionWillChangeWithReasonWithMapView_reason_animated_ = objc.ObjCProtocolListenableMethod<void Function(MLNMapView , int , bool )>(
+      _protocol_FlutterApi,
+      _sel_regionWillChangeWithReasonWithMapView_reason_animated_,
+      ffi.Native.addressOf<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.UnsignedLong , ffi.Bool )>>(_6admjt_protocolTrampoline_1nyrrbs).cast(),
+      objc.getProtocolMethodSignature(
+          _protocol_FlutterApi,
+          _sel_regionWillChangeWithReasonWithMapView_reason_animated_,
+          isRequired: true,
+          isInstanceMethod: true,
+      ),
+      (void Function(MLNMapView , int , bool ) func) => ObjCBlock_ffiVoid_ffiVoid_MLNMapView_NSUInteger_bool.fromFunction((ffi.Pointer<ffi.Void> _, MLNMapView arg1, int arg2, bool arg3) => func(arg1, arg2, arg3)),
+          (void Function(MLNMapView , int , bool ) func) => ObjCBlock_ffiVoid_ffiVoid_MLNMapView_NSUInteger_bool.listener((ffi.Pointer<ffi.Void> _, MLNMapView arg1, int arg2, bool arg3) => func(arg1, arg2, arg3)),
+    (void Function(MLNMapView , int , bool ) func) => ObjCBlock_ffiVoid_ffiVoid_MLNMapView_NSUInteger_bool.blocking((ffi.Pointer<ffi.Void> _, MLNMapView arg1, int arg2, bool arg3) => func(arg1, arg2, arg3)),
 
     );
 
@@ -15811,19 +15961,7 @@ extension type MLNStylable._(objc.ObjCProtocol object$) implements objc.ObjCProt
 }
 
 
-/// The proxy object for the current map style.
-/// 
-/// MLNStyle provides a set of convenience methods for changing default styles included
-/// with MapLibre.
-/// 
-/// It is also possible to directly manipulate the current map style
-/// via ``MLNMapView/style`` by updating the style's data sources or layers.
-/// 
-/// > Note: Wait until the map style has finished loading before modifying a map's
-/// style via any of the ``MLNStyle`` instance methods below. You can use the
-/// ``MLNMapViewDelegate/mapView:didFinishLoadingStyle:`` or
-/// ``MLNMapViewDelegate/mapViewDidFinishLoadingMap:`` methods as indicators
-/// that it's safe to modify the map's style.
+/// MLNStyle
 extension type MLNStyle._(objc.ObjCObject object$) implements objc.ObjCObject,objc.NSObject {
   /// Constructs a [MLNStyle] that points to the same underlying object as [other].
   MLNStyle.as(objc.ObjCObject other) : object$ = other {
@@ -25262,6 +25400,236 @@ extension ObjCBlock_ffiVoid_ffiVoid_MLNMapView_NSString_NSString$CallExtension o
 }
 
 
+/// Construction methods for `objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, MLNMapView, ffi.UnsignedLong)>`.
+abstract final class ObjCBlock_ffiVoid_ffiVoid_MLNMapView_NSUInteger {
+  /// Returns a block that wraps the given raw block pointer.
+  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, MLNMapView, ffi.UnsignedLong)> fromPointer(ffi.Pointer<objc.ObjCBlockImpl> pointer,
+      {bool retain = false, bool release = false}) =>
+      objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, MLNMapView, ffi.UnsignedLong)>(pointer, retain: retain, release: release);
+
+  /// Creates a block from a C function pointer.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, MLNMapView, ffi.UnsignedLong)> fromFunctionPointer(ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1, ffi.UnsignedLong arg2)>> ptr) =>
+      objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, MLNMapView, ffi.UnsignedLong)>(objc.newPointerBlock(_fnPtrCallable, ptr.cast()),
+          retain: false, release: true);
+
+  /// Creates a block from a Dart function.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  ///
+  /// If `keepIsolateAlive` is true, this block will keep this isolate alive
+  /// until it is garbage collected by both Dart and ObjC.
+  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, MLNMapView, ffi.UnsignedLong)> fromFunction(void Function(ffi.Pointer<ffi.Void> , MLNMapView , int ) fn,
+          {bool keepIsolateAlive = true}) =>
+      objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, MLNMapView, ffi.UnsignedLong)>(objc.newClosureBlock(_closureCallable, (ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1, int arg2) => fn(arg0, MLNMapView.fromPointer(arg1, retain: true, release: true), arg2), keepIsolateAlive),
+          retain: false, release: true);
+
+  /// Creates a listener block from a Dart function.
+  ///
+  /// This is based on FFI's NativeCallable.listener, and has the same
+  /// capabilities and limitations. This block can be invoked from any thread,
+  /// but only supports void functions, and is not run synchronously. See
+  /// NativeCallable.listener for more details.
+  ///
+  /// If `keepIsolateAlive` is true, this block will keep this isolate alive
+  /// until it is garbage collected by both Dart and ObjC.
+  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, MLNMapView, ffi.UnsignedLong)> listener(void Function(ffi.Pointer<ffi.Void> , MLNMapView , int ) fn,
+          {bool keepIsolateAlive = true}) {
+    final raw = objc.newClosureBlock(_listenerCallable.nativeFunction.cast(),
+        (ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1, int arg2) => fn(arg0, MLNMapView.fromPointer(arg1, retain: false, release: true), arg2), keepIsolateAlive);
+    final wrapper = _6admjt_wrapListenerBlock_wy9lus(raw);
+    objc.objectRelease(raw.cast());
+    return objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, MLNMapView, ffi.UnsignedLong)>(wrapper, retain: false, release: true);
+  }
+
+  /// Creates a blocking block from a Dart function.
+  ///
+  /// This callback can be invoked from any native thread, and will block the
+  /// caller until the callback is handled by the Dart isolate that created
+  /// the block. Async functions are not supported.
+  ///
+  /// If `keepIsolateAlive` is true, this block will keep this isolate alive
+  /// until it is garbage collected by both Dart and ObjC. If the owner isolate
+  /// has shut down, and the block is invoked by native code, it may block
+  /// indefinitely, or have other undefined behavior.
+  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, MLNMapView, ffi.UnsignedLong)> blocking(void Function(ffi.Pointer<ffi.Void> , MLNMapView , int ) fn,
+          {bool keepIsolateAlive = true}) {
+    final raw = objc.newClosureBlock(_blockingCallable.nativeFunction.cast(),
+        (ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1, int arg2) => fn(arg0, MLNMapView.fromPointer(arg1, retain: false, release: true), arg2), keepIsolateAlive);
+    final rawListener = objc.newClosureBlock(
+        _blockingListenerCallable.nativeFunction.cast(),
+        (ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1, int arg2) => fn(arg0, MLNMapView.fromPointer(arg1, retain: false, release: true), arg2), keepIsolateAlive);
+    final wrapper = _6admjt_wrapBlockingBlock_wy9lus(raw, rawListener, objc.objCContext);
+    objc.objectRelease(raw.cast());
+    objc.objectRelease(rawListener.cast());
+    return objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, MLNMapView, ffi.UnsignedLong)>(wrapper, retain: false, release: true);
+  }
+
+  static void _listenerTrampoline(
+      ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1, int arg2) {
+    (objc.getBlockClosure(block) as void Function(ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> , int ))(arg0, arg1, arg2);
+    objc.objectRelease(block.cast());
+  }
+  static ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.UnsignedLong )> _listenerCallable =
+      ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.UnsignedLong )>.listener(_listenerTrampoline )
+          ..keepIsolateAlive = false;
+  static void _blockingTrampoline(
+      ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> waiter, ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1, int arg2) {
+    try {
+      (objc.getBlockClosure(block) as void Function(ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> , int ))(arg0, arg1, arg2);
+    } catch (e) {
+    } finally {
+      objc.signalWaiter(waiter);
+      objc.objectRelease(block.cast());
+    }
+  }
+  static ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.UnsignedLong )> _blockingCallable =
+      ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.UnsignedLong )>.isolateLocal(
+          _blockingTrampoline )..keepIsolateAlive = false;
+  static ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.UnsignedLong )> _blockingListenerCallable =
+      ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.UnsignedLong )>.listener(
+          _blockingTrampoline )..keepIsolateAlive = false;
+  static void _fnPtrTrampoline(
+      ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1, int arg2) =>
+          block.ref.target.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1, ffi.UnsignedLong arg2)>>()
+              .asFunction<void Function(ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> , int )>()(arg0, arg1, arg2);
+  static ffi.Pointer<ffi.Void> _fnPtrCallable = ffi.Pointer.fromFunction<
+      ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.UnsignedLong )>(_fnPtrTrampoline ).cast();
+  static void _closureTrampoline(
+      ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1, int arg2) =>
+      (objc.getBlockClosure(block) as void Function(ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> , int ))(arg0, arg1, arg2);
+  static ffi.Pointer<ffi.Void> _closureCallable = ffi.Pointer.fromFunction<
+      ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.UnsignedLong )>(_closureTrampoline ).cast();
+}
+
+/// Call operator for `objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, MLNMapView, ffi.UnsignedLong)>`.
+extension ObjCBlock_ffiVoid_ffiVoid_MLNMapView_NSUInteger$CallExtension on objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, MLNMapView, ffi.UnsignedLong)> {
+  void call(ffi.Pointer<ffi.Void> arg0, MLNMapView arg1, int arg2) =>ref.pointer.ref.invoke.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1, ffi.UnsignedLong arg2)>>()
+  .asFunction<void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> , int )>()(
+    ref.pointer, arg0, arg1.ref.pointer, arg2);
+}
+
+
+/// Construction methods for `objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, MLNMapView, ffi.UnsignedLong, ffi.Bool)>`.
+abstract final class ObjCBlock_ffiVoid_ffiVoid_MLNMapView_NSUInteger_bool {
+  /// Returns a block that wraps the given raw block pointer.
+  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, MLNMapView, ffi.UnsignedLong, ffi.Bool)> fromPointer(ffi.Pointer<objc.ObjCBlockImpl> pointer,
+      {bool retain = false, bool release = false}) =>
+      objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, MLNMapView, ffi.UnsignedLong, ffi.Bool)>(pointer, retain: retain, release: release);
+
+  /// Creates a block from a C function pointer.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, MLNMapView, ffi.UnsignedLong, ffi.Bool)> fromFunctionPointer(ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1, ffi.UnsignedLong arg2, ffi.Bool arg3)>> ptr) =>
+      objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, MLNMapView, ffi.UnsignedLong, ffi.Bool)>(objc.newPointerBlock(_fnPtrCallable, ptr.cast()),
+          retain: false, release: true);
+
+  /// Creates a block from a Dart function.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  ///
+  /// If `keepIsolateAlive` is true, this block will keep this isolate alive
+  /// until it is garbage collected by both Dart and ObjC.
+  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, MLNMapView, ffi.UnsignedLong, ffi.Bool)> fromFunction(void Function(ffi.Pointer<ffi.Void> , MLNMapView , int , bool ) fn,
+          {bool keepIsolateAlive = true}) =>
+      objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, MLNMapView, ffi.UnsignedLong, ffi.Bool)>(objc.newClosureBlock(_closureCallable, (ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1, int arg2, bool arg3) => fn(arg0, MLNMapView.fromPointer(arg1, retain: true, release: true), arg2, arg3), keepIsolateAlive),
+          retain: false, release: true);
+
+  /// Creates a listener block from a Dart function.
+  ///
+  /// This is based on FFI's NativeCallable.listener, and has the same
+  /// capabilities and limitations. This block can be invoked from any thread,
+  /// but only supports void functions, and is not run synchronously. See
+  /// NativeCallable.listener for more details.
+  ///
+  /// If `keepIsolateAlive` is true, this block will keep this isolate alive
+  /// until it is garbage collected by both Dart and ObjC.
+  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, MLNMapView, ffi.UnsignedLong, ffi.Bool)> listener(void Function(ffi.Pointer<ffi.Void> , MLNMapView , int , bool ) fn,
+          {bool keepIsolateAlive = true}) {
+    final raw = objc.newClosureBlock(_listenerCallable.nativeFunction.cast(),
+        (ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1, int arg2, bool arg3) => fn(arg0, MLNMapView.fromPointer(arg1, retain: false, release: true), arg2, arg3), keepIsolateAlive);
+    final wrapper = _6admjt_wrapListenerBlock_1nyrrbs(raw);
+    objc.objectRelease(raw.cast());
+    return objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, MLNMapView, ffi.UnsignedLong, ffi.Bool)>(wrapper, retain: false, release: true);
+  }
+
+  /// Creates a blocking block from a Dart function.
+  ///
+  /// This callback can be invoked from any native thread, and will block the
+  /// caller until the callback is handled by the Dart isolate that created
+  /// the block. Async functions are not supported.
+  ///
+  /// If `keepIsolateAlive` is true, this block will keep this isolate alive
+  /// until it is garbage collected by both Dart and ObjC. If the owner isolate
+  /// has shut down, and the block is invoked by native code, it may block
+  /// indefinitely, or have other undefined behavior.
+  static objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, MLNMapView, ffi.UnsignedLong, ffi.Bool)> blocking(void Function(ffi.Pointer<ffi.Void> , MLNMapView , int , bool ) fn,
+          {bool keepIsolateAlive = true}) {
+    final raw = objc.newClosureBlock(_blockingCallable.nativeFunction.cast(),
+        (ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1, int arg2, bool arg3) => fn(arg0, MLNMapView.fromPointer(arg1, retain: false, release: true), arg2, arg3), keepIsolateAlive);
+    final rawListener = objc.newClosureBlock(
+        _blockingListenerCallable.nativeFunction.cast(),
+        (ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1, int arg2, bool arg3) => fn(arg0, MLNMapView.fromPointer(arg1, retain: false, release: true), arg2, arg3), keepIsolateAlive);
+    final wrapper = _6admjt_wrapBlockingBlock_1nyrrbs(raw, rawListener, objc.objCContext);
+    objc.objectRelease(raw.cast());
+    objc.objectRelease(rawListener.cast());
+    return objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, MLNMapView, ffi.UnsignedLong, ffi.Bool)>(wrapper, retain: false, release: true);
+  }
+
+  static void _listenerTrampoline(
+      ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1, int arg2, bool arg3) {
+    (objc.getBlockClosure(block) as void Function(ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> , int , bool ))(arg0, arg1, arg2, arg3);
+    objc.objectRelease(block.cast());
+  }
+  static ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.UnsignedLong , ffi.Bool )> _listenerCallable =
+      ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.UnsignedLong , ffi.Bool )>.listener(_listenerTrampoline )
+          ..keepIsolateAlive = false;
+  static void _blockingTrampoline(
+      ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> waiter, ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1, int arg2, bool arg3) {
+    try {
+      (objc.getBlockClosure(block) as void Function(ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> , int , bool ))(arg0, arg1, arg2, arg3);
+    } catch (e) {
+    } finally {
+      objc.signalWaiter(waiter);
+      objc.objectRelease(block.cast());
+    }
+  }
+  static ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.UnsignedLong , ffi.Bool )> _blockingCallable =
+      ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.UnsignedLong , ffi.Bool )>.isolateLocal(
+          _blockingTrampoline )..keepIsolateAlive = false;
+  static ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.UnsignedLong , ffi.Bool )> _blockingListenerCallable =
+      ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.UnsignedLong , ffi.Bool )>.listener(
+          _blockingTrampoline )..keepIsolateAlive = false;
+  static void _fnPtrTrampoline(
+      ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1, int arg2, bool arg3) =>
+          block.ref.target.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1, ffi.UnsignedLong arg2, ffi.Bool arg3)>>()
+              .asFunction<void Function(ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> , int , bool )>()(arg0, arg1, arg2, arg3);
+  static ffi.Pointer<ffi.Void> _fnPtrCallable = ffi.Pointer.fromFunction<
+      ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.UnsignedLong , ffi.Bool )>(_fnPtrTrampoline ).cast();
+  static void _closureTrampoline(
+      ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1, int arg2, bool arg3) =>
+      (objc.getBlockClosure(block) as void Function(ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> , int , bool ))(arg0, arg1, arg2, arg3);
+  static ffi.Pointer<ffi.Void> _closureCallable = ffi.Pointer.fromFunction<
+      ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.UnsignedLong , ffi.Bool )>(_closureTrampoline ).cast();
+}
+
+/// Call operator for `objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, MLNMapView, ffi.UnsignedLong, ffi.Bool)>`.
+extension ObjCBlock_ffiVoid_ffiVoid_MLNMapView_NSUInteger_bool$CallExtension on objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, MLNMapView, ffi.UnsignedLong, ffi.Bool)> {
+  void call(ffi.Pointer<ffi.Void> arg0, MLNMapView arg1, int arg2, bool arg3) =>ref.pointer.ref.invoke.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1, ffi.UnsignedLong arg2, ffi.Bool arg3)>>()
+  .asFunction<void Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> , int , bool )>()(
+    ref.pointer, arg0, arg1.ref.pointer, arg2, arg3);
+}
+
+
 /// Construction methods for `objc.ObjCBlock<ffi.Void Function(ffi.Pointer<ffi.Void>, MLNMapView, ffi.Bool)>`.
 abstract final class ObjCBlock_ffiVoid_ffiVoid_MLNMapView_bool {
   /// Returns a block that wraps the given raw block pointer.
@@ -30597,6 +30965,7 @@ final _objc_msgSend_kvi515 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Voi
 final _objc_msgSend_kzdfm1 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.UnsignedLong Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_l9p60w = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Bool Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Pointer<objc.ObjCObjectImpl>> )>>().asFunction<bool Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<ffi.Pointer<objc.ObjCObjectImpl>> )>();
 final _objc_msgSend_lxcnyc = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , UIEdgeInsets , ffi.Double )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , UIEdgeInsets , double )>();
+final _objc_msgSend_lxwoc0 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.UnsignedLong , ffi.Bool )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , int , bool )>();
 final _objc_msgSend_mabicu = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Double Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<double Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_mabicuFpret = objc.msgSendFpretPointer.cast<ffi.NativeFunction<ffi.Double Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<double Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_mpxix1 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Int64 , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int , ffi.Pointer<objc.ObjCObjectImpl> )>();
@@ -30799,6 +31168,8 @@ late final _sel_delete_ = objc.registerName("delete:");
 late final _sel_dequeueReusableAnnotationImageWithIdentifier_ = objc.registerName("dequeueReusableAnnotationImageWithIdentifier:");
 late final _sel_dequeueReusableAnnotationViewWithIdentifier_ = objc.registerName("dequeueReusableAnnotationViewWithIdentifier:");
 late final _sel_deselectAnnotation_animated_ = objc.registerName("deselectAnnotation:animated:");
+late final _sel_didBecomeIdleWithMapView_ = objc.registerName("didBecomeIdleWithMapView:");
+late final _sel_didFinishLoadingStyleWithMapView_style_ = objc.registerName("didFinishLoadingStyleWithMapView:style:");
 late final _sel_didHintFocusMovement_ = objc.registerName("didHintFocusMovement:");
 late final _sel_didUpdateFocusInContext_withAnimationCoordinator_ = objc.registerName("didUpdateFocusInContext:withAnimationCoordinator:");
 late final _sel_direction = objc.registerName("direction");
@@ -31258,6 +31629,9 @@ late final _sel_rasterSaturation = objc.registerName("rasterSaturation");
 late final _sel_rasterSaturationTransition = objc.registerName("rasterSaturationTransition");
 late final _sel_referenceDisplayModeStatus = objc.registerName("referenceDisplayModeStatus");
 late final _sel_region = objc.registerName("region");
+late final _sel_regionDidChangeWithReasonWithMapView_reason_animated_ = objc.registerName("regionDidChangeWithReasonWithMapView:reason:animated:");
+late final _sel_regionIsChangingWithReasonWithMapView_reason_ = objc.registerName("regionIsChangingWithReasonWithMapView:reason:");
+late final _sel_regionWillChangeWithReasonWithMapView_reason_animated_ = objc.registerName("regionWillChangeWithReasonWithMapView:reason:animated:");
 late final _sel_reloadPacks = objc.registerName("reloadPacks");
 late final _sel_reloadStyle_ = objc.registerName("reloadStyle:");
 late final _sel_remoteControlReceivedWithEvent_ = objc.registerName("remoteControlReceivedWithEvent:");

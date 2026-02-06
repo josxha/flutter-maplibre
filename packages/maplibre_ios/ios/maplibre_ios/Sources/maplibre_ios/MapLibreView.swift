@@ -1,7 +1,7 @@
 import Flutter
 import MapLibre
 
-class MapLibreView: NSObject, FlutterPlatformView, UIGestureRecognizerDelegate
+class MapLibreView: NSObject, FlutterPlatformView, UIGestureRecognizerDelegate, MLNMapViewDelegate
 {
     private var _view: UIView = .init()
     private var _viewId: Int64
@@ -14,6 +14,7 @@ class MapLibreView: NSObject, FlutterPlatformView, UIGestureRecognizerDelegate
         self._mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         MapLibreRegistry.addMap(viewId: viewId, map: self._mapView)
         self._view.addSubview(self._mapView)
+        self._mapView.delegate = self
 
         let doubleTap = UITapGestureRecognizer(
             target: self, action: #selector(self.onDoubleTap(sender:))
@@ -46,31 +47,31 @@ class MapLibreView: NSObject, FlutterPlatformView, UIGestureRecognizerDelegate
         longPress.delegate = self
         self._mapView.addGestureRecognizer(longPress)
     }
+    
+    var api: FlutterApi? {
+        MapLibreRegistry.getFlutterApi(viewId: _viewId)
+    }
 
     @objc func onTap(sender: UITapGestureRecognizer) {
         var screenPosition = sender.location(in: _mapView)
-        var api = MapLibreRegistry.getFlutterApi(viewId: self._viewId)
         api?.onTap(screenLocation: screenPosition)
     }
 
     @objc func onSecondaryTap(sender: UITapGestureRecognizer) {
         var screenPosition = sender.location(in: _mapView)
         var point = _mapView.convert(screenPosition, toCoordinateFrom: _mapView)
-        var api = MapLibreRegistry.getFlutterApi(viewId: self._viewId)
         api?.onSecondaryTap(screenLocation: screenPosition)
     }
 
     @objc func onDoubleTap(sender: UITapGestureRecognizer) {
         var screenPosition = sender.location(in: _mapView)
         var point = _mapView.convert(screenPosition, toCoordinateFrom: _mapView)
-        var api = MapLibreRegistry.getFlutterApi(viewId: self._viewId)
         api?.onDoubleTap(screenLocation: screenPosition)
     }
 
     @objc func onLongPress(sender: UILongPressGestureRecognizer) {
         var screenPosition = sender.location(in: _mapView)
         var point = _mapView.convert(screenPosition, toCoordinateFrom: _mapView)
-        var api = MapLibreRegistry.getFlutterApi(viewId: self._viewId)
         api?.onLongPress(screenLocation: screenPosition)
     }
 
@@ -84,5 +85,25 @@ class MapLibreView: NSObject, FlutterPlatformView, UIGestureRecognizerDelegate
     ) -> Bool {
         // Do not override the default behavior
         true
+    }
+    
+    func mapView(_ mapView: MLNMapView, didFinishLoading style: MLNStyle) {
+        api?.didFinishLoadingStyle(mapView: mapView, style: style)
+    }
+    
+    func mapView(_ mapView: MLNMapView, regionWillChangeWith reason: MLNCameraChangeReason, animated: Bool) {
+        api?.regionWillChangeWithReason(mapView: mapView, reason: reason.rawValue, animated: animated)
+    }
+    
+    func mapView(_ mapView: MLNMapView, regionIsChangingWith reason: MLNCameraChangeReason) {
+        api?.regionIsChangingWithReason(mapView: mapView, reason: reason.rawValue)
+    }
+    
+    func mapView(_ mapView: MLNMapView, regionDidChangeWith reason: MLNCameraChangeReason, animated: Bool) {
+        api?.regionDidChangeWithReason(mapView: mapView, reason: reason.rawValue, animated: animated)
+    }
+    
+    func mapViewDidBecomeIdle(_ mapView: MLNMapView) {
+        api?.didBecomeIdle(mapView: mapView)
     }
 }

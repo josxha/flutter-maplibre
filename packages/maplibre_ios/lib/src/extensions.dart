@@ -127,6 +127,15 @@ NSExpression? parseNSExpression(String propertyName, String json) =>
       expression: json.toNSString(),
     );
 
+/// Internal extensions on [MLNFeature].
+extension MLNFeatureExt on MLNFeature {
+  /// Convert a [MLNFeature] to a [MapLibreFeature].
+  RenderedFeature toRenderedFeature() => RenderedFeature(
+    id: identifier == null ? null : toDartObject(identifier!),
+    properties: attributes.toDartMap().map((k, v) => MapEntry(k.toString(), v)),
+  );
+}
+
 /// Internal extensions on [MLNStyleLayer].
 extension MLNStyleLayerExt on MLNStyleLayer {
   /// Apply all paint or layout properties on the [MLNStyleLayer].
