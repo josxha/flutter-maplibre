@@ -4,14 +4,14 @@ import UIKit
 
 class MapLibreViewFactory: NSObject, FlutterPlatformViewFactory {
     private var _registrar: FlutterPluginRegistrar
-    
+
     init(withRegistrar registrar: FlutterPluginRegistrar) {
-        self._registrar = registrar
+        _registrar = registrar
         super.init()
     }
 
     func createArgsCodec() -> FlutterMessageCodec & NSObjectProtocol {
-        return FlutterStandardMessageCodec.sharedInstance()
+        FlutterStandardMessageCodec.sharedInstance()
     }
 
     func create(
