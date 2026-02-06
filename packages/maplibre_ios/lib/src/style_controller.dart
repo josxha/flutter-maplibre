@@ -14,8 +14,7 @@ class StyleControllerIos extends StyleController {
   }
 
   @override
-  Future<void> addLayer(
-    StyleLayer layer, {
+  Future<void> addLayer(StyleLayer layer, {
     String? belowLayerId,
     String? aboveLayerId,
     int? atIndex,
@@ -80,14 +79,16 @@ class StyleControllerIos extends StyleController {
     ffiLayer.maximumZoomLevel = layer.maxZoom;
     ffiLayer.setProperties(layer.paint);
     ffiLayer.setProperties(layer.layout);
-    if (ffiLayer case MLNVectorStyleLayer()) {
-      final layerWithSource = layer as StyleLayerWithSource;
-      ffiLayer.sourceLayerIdentifier = layerWithSource.sourceLayerId
-          ?.toNSString();
-      if (layerWithSource.filter case final filter?) {
+    if (layer case StyleLayerWithSource()) {
+      if (layer.sourceLayerId case final sourceLayerId?) {
+        final ffiVectorLayer = MLNVectorStyleLayer.as(ffiLayer);
+        ffiVectorLayer.sourceLayerIdentifier = sourceLayerId.toNSString();
+      }
+      if (layer.filter case final filter?) {
         final expression = jsonEncode(filter).toNSString();
         final ffiPredicate = Helpers.parsePredicateWithRaw(expression);
-        ffiLayer.predicate = ffiPredicate;
+        final ffiVectorLayer = MLNVectorStyleLayer.as(ffiId);
+        ffiVectorLayer.predicate = ffiPredicate;
       }
     }
 
@@ -169,7 +170,8 @@ class StyleControllerIos extends StyleController {
             tileSize: source.tileSize.toDouble(),
           );
         } else {
-          final ffiUrls = NSMutableArray.new$()..init();
+          final ffiUrls = NSMutableArray.new$()
+            ..init();
           for (final url in source.tiles ?? <String>[]) {
             ffiUrls.addObject(url.toNSString());
           }
@@ -187,7 +189,8 @@ class StyleControllerIos extends StyleController {
             configurationURLString: url.toNSString(),
           );
         } else {
-          final ffiUrls = NSMutableArray.new$()..init();
+          final ffiUrls = NSMutableArray.new$()
+            ..init();
           for (final url in source.tiles ?? <String>[]) {
             ffiUrls.addObject(url.toNSString());
           }
@@ -268,9 +271,10 @@ class StyleControllerIos extends StyleController {
     );
   }
 
-  List<MLNStyleLayer> _getLayers() => List<MLNStyleLayer>.from(
-    _ffiStyle.layers.toDartList(convertOther: MLNStyleLayer.as),
-  );
+  List<MLNStyleLayer> _getLayers() =>
+      List<MLNStyleLayer>.from(
+        _ffiStyle.layers.toDartList(convertOther: MLNStyleLayer.as),
+      );
 
   @override
   void setProjection(MapProjection projection) {
