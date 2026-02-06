@@ -28,26 +28,46 @@ jobs:
           swiftformat --verbose . --reporter github-actions-log --swiftversion 6 --disable trailingCommas
       - name: "Install ktlint"
         run: brew install ktlint
-      - name: Run ktlint
+      - name: "Run ktlint"
         run: ktlint -F
-      - name: Run pigeon
-        working-directory: packages/maplibre_ios
-        run: sh ./pigeons/run_code_gen.sh
-      - name: Build example APK
+      - name: "Build example APK"
         working-directory: examples
         run: flutter build apk
-      - name: Run jnigen
+      - name: "Run jnigen"
         working-directory: packages/maplibre_android
         run: dart run tool/jnigen.dart
-      - name: dart format
+      - name: "Clone maplibre-native with shallow submodules"
+        run: |
+          git clone \
+             --depth 1 \
+            --filter=blob:none \
+            --recurse-submodules \
+            --shallow-submodules \
+            --jobs 8 \
+            https://github.com/maplibre/maplibre-native ../maplibre-native
+      - name: "Activate Swift Package Manager"
+        run: flutter config --enable-swift-package-manager
+      - name: "Get Flutter dependencies"
+        working-directory: packages/maplibre_ios
+        run: dart pub get
+      - name: "Build MapLibre Native"
+        working-directory: packages/maplibre_ios/ios
+        run: ./build_maplibre.sh
+      - name: "Generate headers for Swift code"
+        working-directory: packages/maplibre_ios/ios/maplibre_ios/Sources/maplibre_ios
+        run: ./gen_swift_headers.sh
+      - name: "Run ffigen"
+        working-directory: packages/maplibre_ios
+        run: dart tool/ffigen.dart
+      - name: "dart format"
         run: dart format .
-      - name: Check difference
+      - name: "Check difference"
         run: |
           git add --all . && \
           status=$(git status -s .) && \
           echo $status && \
           echo "GIT_STATUS=${status//$'\n'/\\n}" >> $GITHUB_ENV
-      - name: Push changes
+      - name: "Push changes"
         if: env.GIT_STATUS != ''
         run: |
           git config --global user.email "action@github.com" && \

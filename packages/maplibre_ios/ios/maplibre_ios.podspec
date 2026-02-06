@@ -17,11 +17,7 @@ Helper package for maplibre that provides iOS FFI bindings
   s.dependency 'Flutter'
 
   # Needs to be the same version as in maplibre_ios/Package.swift
-  # FOR PREBUILT LIBRARY
   s.dependency 'MapLibre', '~> 6.21'
-
-  # FOR LOCAL LIBRARY
-  # s.vendored_frameworks = '.build/MapLibre.xcframework'
 
   s.platform = :ios, '12.0'
 

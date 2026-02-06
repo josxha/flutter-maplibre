@@ -1,18 +1,23 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:maplibre_ios/src/extensions.dart';
 import 'package:maplibre_ios/src/maplibre_ffi.g.dart';
-import 'package:maplibre_ios/src/offline_manager_native.dart';
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 import 'package:objective_c/objective_c.dart' as objc;
 
 /// iOS specific implementation of the [OfflineManager].
-class OfflineManagerIos extends OfflineManagerNative {
+class OfflineManagerIos implements OfflineManager {
   /// Create a new iOS specific [OfflineManager] instance.
   OfflineManagerIos(this._storage);
 
   final MLNOfflineStorage _storage;
+  late final OfflinePackProgressCallbacks _callbacks = _createCallbacks(
+    WeakReference(this),
+  );
+  final _downloadStreamControllers =
+      <int, StreamController<DownloadProgress>>{};
 
   /// Create a new [OfflineManagerIos] instance.
   static Future<OfflineManagerIos> createInstance() async {
@@ -23,12 +28,13 @@ class OfflineManagerIos extends OfflineManagerNative {
   @override
   Future<void> clearAmbientCache() async {
     final completer = Completer<void>();
+    final weakCompleter = WeakReference(completer);
     _storage.clearAmbientCacheWithCompletionHandler(
       ObjCBlock_ffiVoid_NSError.listener((error) {
         if (error != null) {
-          completer.completeError(error);
+          weakCompleter.target?.completeError(error);
         } else {
-          completer.complete();
+          weakCompleter.target?.complete();
         }
       }),
     );
@@ -36,9 +42,11 @@ class OfflineManagerIos extends OfflineManagerNative {
   }
 
   @override
-  void dispose() {}
+  void dispose() {
+    Helpers.removeOfflinePackProgressListenerWithCallbacks(_callbacks);
+  }
 
-  /*@override
+  @override
   Stream<DownloadProgress> downloadRegion({
     required String mapStyleUrl,
     required LngLatBounds bounds,
@@ -47,39 +55,64 @@ class OfflineManagerIos extends OfflineManagerNative {
     required double pixelDensity,
     Map<String, Object?> metadata = const {},
   }) async* {
-    final region = MLNTilePyramidOfflineRegion.new$()
-        .initWithStyleURL_bounds_fromZoomLevel_toZoomLevel_(
-          mapStyleUrl.toNSURL(),
-          bounds.toMLNCoordinateBounds(),
-          minZoom,
-          maxZoom,
-        );
-    final context = utf8.encode(jsonEncode(metadata)).toNSData();
-
-    final completer = Completer<MLNOfflinePack>();
-    _storage.addPackForRegion_withContext_completionHandler_(
-      region,
-      context,
-      ObjCBlock_ffiVoid_MLNOfflinePack_NSError.listener((pack, error) {
-        if (pack != null) {
-          completer.complete(pack);
-          pack.resume(); // start downloading
-        }
-        completer.completeError(error!);
-      }),
+    final ffiRegion = Helpers.createTilePyramidOfflineRegionWithStyleURL(
+      mapStyleUrl.toNSURL(),
+      fromZoomLevel: minZoom,
+      toZoomLevel: maxZoom,
+      east: bounds.longitudeEast,
+      north: bounds.latitudeNorth,
+      west: bounds.longitudeWest,
+      south: bounds.latitudeSouth,
     );
+    final id = DateTime.now().millisecondsSinceEpoch;
+    final context = <String, Object?>{
+      'id': id,
+      'styleUrl': mapStyleUrl,
+      'pixelRatio': pixelDensity,
+      'metadata': metadata,
+      // TODO remove old metadata structure in favor of the new one, but keep it for backwards compatibility for now
+      ...metadata,
+    };
+    final streamCtrl = StreamController<DownloadProgress>();
+    _downloadStreamControllers[id] = streamCtrl;
+    final completer = Completer<MLNOfflinePack>();
+    final region = OfflineRegion(
+      id: id,
+      bounds: bounds,
+      minZoom: minZoom,
+      maxZoom: maxZoom,
+      pixelRatio: 1,
+      styleUrl: mapStyleUrl,
+    );
+    print('### Adding pack for region: $region with context: $context');
+    _storage.addPackForRegion(
+      ffiRegion,
+      withContext: utf8.encode(jsonEncode(context)).toNSData(),
+      completionHandler: _createAddPackCompletionHandler(
+        weakCompleter: WeakReference(completer),
+        weakRegion: WeakReference(region),
+        weakStreamCtrl: WeakReference(streamCtrl),
+      ),
+    );
+    print('### Pack added, waiting for completion handler to be called');
     final _ = await completer.future;
-    // TODO: use the NotificationCenter to track the download process: https://maplibre.org/maplibre-native/ios/latest/documentation/maplibre-native-for-ios/offlinepackexample/
-  }*/
+    await for (final event in streamCtrl.stream) {
+      print('### Download progress event: $event');
+      yield event;
+      if (event.downloadCompleted) {
+        await streamCtrl.close();
+        _downloadStreamControllers.remove(id);
+      }
+    }
+    print('### Download stream closed for region: $region');
+  }
 
   @override
   Future<OfflineRegion> getOfflineRegion({required int regionId}) async {
     final packs = _storage.packs!.asDart();
     for (var i = 0; i < packs.length; i++) {
       final ffiPack = MLNOfflinePack.as(packs[i]);
-      final jsonBytes = ffiPack.context.toList();
-      final json = jsonDecode(utf8.decode(jsonBytes)) as Map<String, Object?>;
-      // print(json);
+      final json = ffiPack.context.toDartMap();
       if (json['id'] == regionId) {
         final ffiRegion = MLNTilePyramidOfflineRegion.as(ffiPack.region);
         return OfflineRegion(
@@ -87,27 +120,31 @@ class OfflineManagerIos extends OfflineManagerNative {
           bounds: ffiRegion.bounds.toLngLatBounds(),
           minZoom: ffiRegion.minimumZoomLevel,
           maxZoom: ffiRegion.maximumZoomLevel,
-          pixelRatio: 1,
-          // TODO
-          styleUrl: 'ffiRegion.styleURL.toString()',
-          metadata: json,
+          pixelRatio: json['pixelRatio'] as double? ?? 1,
+          styleUrl: json['styleUrl'] as String? ?? '',
+          // TODO remove old metadata structure in favor of the new one, but keep it for backwards compatibility for now
+          metadata: json['metadata'] as Map<String, Object?>? ?? json,
         );
       }
     }
     throw Exception('Region not found');
   }
 
-  /*@override
+  @override
   Future<void> invalidateAmbientCache() async {
     final completer = Completer<void>();
-    _storage.invalidateAmbientCacheWithCompletionHandler_(
+    final weakCompleter = WeakReference(completer);
+    _storage.invalidateAmbientCacheWithCompletionHandler(
       ObjCBlock_ffiVoid_NSError.listener((error) {
-        if (error != null) completer.completeError(error);
-        return completer.complete();
+        if (error != null) {
+          weakCompleter.target?.completeError(error);
+        } else {
+          weakCompleter.target?.complete();
+        }
       }),
     );
     return completer.future;
-  }*/
+  }
 
   @override
   Future<List<OfflineRegion>> listOfflineRegions() async {
@@ -122,38 +159,166 @@ class OfflineManagerIos extends OfflineManagerNative {
         bounds: ffiRegion.bounds.toLngLatBounds(),
         minZoom: ffiRegion.minimumZoomLevel,
         maxZoom: ffiRegion.maximumZoomLevel,
-        // TODO ffiPack.pixelRatio,
-        pixelRatio: 1,
-        styleUrl: 'ffiRegion.styleURL.absoluteString!.toDartString()',
+        pixelRatio: json['pixelRatio'] as double? ?? 1,
+        styleUrl: json['styleUrl'] as String? ?? '',
         metadata: json,
       );
     }, growable: false);
   }
 
-  /*@override
+  @override
   Future<void> resetDatabase() async {
     final completer = Completer<void>();
-    _storage.resetDatabaseWithCompletionHandler_(
+    final weakCompleter = WeakReference(completer);
+    final weakStorage = WeakReference(_storage);
+    _storage.resetDatabaseWithCompletionHandler(
       ObjCBlock_ffiVoid_NSError.listener((error) {
-        if (error != null) completer.completeError(error);
-        completer.complete();
+        if (error != null) {
+          weakCompleter.target?.completeError(error);
+          weakStorage.target?.reloadPacks();
+        } else {
+          weakCompleter.target?.complete();
+          weakStorage.target?.reloadPacks();
+        }
       }),
     );
-  }*/
+  }
 
-  /*@override
+  @override
   Future<void> setMaximumAmbientCacheSize({required int bytes}) async {
     final completer = Completer<void>();
-    _storage.setMaximumAmbientCacheSize_withCompletionHandler_(
+    final weakCompleter = WeakReference(completer);
+    _storage.setMaximumAmbientCacheSize(
       bytes,
-      ObjCBlock_ffiVoid_NSError.listener((error) {
-        if (error != null) completer.completeError(error);
-        completer.complete();
+      withCompletionHandler: ObjCBlock_ffiVoid_NSError.listener((error) {
+        if (error != null) {
+          weakCompleter.target?.completeError(error);
+        } else {
+          weakCompleter.target?.complete();
+        }
       }),
     );
-  }*/
+  }
 
   @override
   void setOfflineTileCountLimit({required int amount}) =>
       _storage.setMaximumAllowedMapboxTiles(amount);
+
+  @override
+  Future<List<OfflineRegion>> mergeOfflineRegions({
+    required String path,
+  }) async => throw UnsupportedError(
+    'Importing Offline Regions is not available on iOS.',
+  );
+
+  @override
+  Future<void> packDatabase() async =>
+      throw UnsupportedError('The database cannot be packed on iOS.');
+
+  @override
+  void runPackDatabaseAutomatically({required bool enabled}) =>
+      throw UnsupportedError('The database cannot be packed on iOS.');
+
+  static OfflinePackProgressCallbacks _createCallbacks(
+    WeakReference<OfflineManagerIos> weakManager,
+  ) => OfflinePackProgressCallbacks$Builder.implementAsListener(
+    onErrorWithNotification_: (notification) =>
+        weakManager.target?._onErrorWithNotification(notification),
+    onMaximumAllowedTilesWithNotification_: (notification) =>
+        weakManager.target?._onMaximumAllowedTiles(notification),
+    onProgressChangedWithNotification_: (notification) =>
+        weakManager.target?._onProgressChanged(notification),
+  );
+
+  void _onProgressChanged(objc.NSNotification notification) {
+    print('### Progress changed: ${notification.name}');
+    final pack = notification.offlinePack;
+    if (pack == null) return;
+    final json = pack.context.toDartMap();
+    final regionId = (json['id'] ?? -1) as int;
+    final streamCtrl = _downloadStreamControllers[regionId];
+    if (streamCtrl == null) return;
+    final ffiRegion = MLNTilePyramidOfflineRegion.as(pack.region);
+    final region = OfflineRegion(
+      id: regionId,
+      bounds: ffiRegion.bounds.toLngLatBounds(),
+      minZoom: ffiRegion.minimumZoomLevel,
+      maxZoom: ffiRegion.maximumZoomLevel,
+      pixelRatio: json['pixelRatio'] as double? ?? 1,
+      styleUrl: json['styleUrl'] as String? ?? '',
+      // TODO remove old metadata structure in favor of the new one, but keep it for backwards compatibility for now
+      metadata: json['metadata'] as Map<String, Object?>? ?? json,
+    );
+    streamCtrl.add(pack.toDownloadProgress(region));
+  }
+
+  void _onErrorWithNotification(objc.NSNotification notification) {
+    print('### Error: ${notification.name}');
+    // TODO check if this is the correct way to handle this notification
+    final pack = notification.offlinePack;
+    if (pack == null) return;
+    final json = pack.context.toDartMap();
+    final regionId = (json['id'] ?? -1) as int;
+    final streamCtrl = _downloadStreamControllers[regionId];
+    if (streamCtrl == null) return;
+    final ffiRegion = MLNTilePyramidOfflineRegion.as(pack.region);
+    final region = OfflineRegion(
+      id: regionId,
+      bounds: ffiRegion.bounds.toLngLatBounds(),
+      minZoom: ffiRegion.minimumZoomLevel,
+      maxZoom: ffiRegion.maximumZoomLevel,
+      pixelRatio: json['pixelRatio'] as double? ?? 1,
+      styleUrl: json['styleUrl'] as String? ?? '',
+      // TODO remove old metadata structure in favor of the new one, but keep it for backwards compatibility for now
+      metadata: json['metadata'] as Map<String, Object?>? ?? json,
+    );
+    streamCtrl.add(pack.toDownloadProgress(region));
+  }
+
+  void _onMaximumAllowedTiles(objc.NSNotification notification) {
+    print('### Maximum allowed tiles reached: ${notification.name}');
+    // TODO check if this is the correct way to handle this notification
+    final pack = notification.offlinePack;
+    if (pack == null) return;
+    final json = pack.context.toDartMap();
+    final regionId = (json['id'] ?? -1) as int;
+    final streamCtrl = _downloadStreamControllers[regionId];
+    if (streamCtrl == null) return;
+    final ffiRegion = MLNTilePyramidOfflineRegion.as(pack.region);
+    final region = OfflineRegion(
+      id: regionId,
+      bounds: ffiRegion.bounds.toLngLatBounds(),
+      minZoom: ffiRegion.minimumZoomLevel,
+      maxZoom: ffiRegion.maximumZoomLevel,
+      pixelRatio: json['pixelRatio'] as double? ?? 1,
+      styleUrl: json['styleUrl'] as String? ?? '',
+      // TODO remove old metadata structure in favor of the new one, but keep it for backwards compatibility for now
+      metadata: json['metadata'] as Map<String, Object?>? ?? json,
+    );
+    streamCtrl.add(pack.toDownloadProgress(region));
+  }
+
+  static objc.ObjCBlock<Void Function(MLNOfflinePack?, objc.NSError?)>?
+  _createAddPackCompletionHandler({
+    required WeakReference<OfflineRegion> weakRegion,
+    required WeakReference<Completer<MLNOfflinePack>> weakCompleter,
+    required WeakReference<StreamController<DownloadProgress>> weakStreamCtrl,
+  }) => ObjCBlock_ffiVoid_MLNOfflinePack_NSError.listener((pack, error) {
+    if (error != null) {
+      weakCompleter.target?.completeError(error);
+      return;
+    }
+    if (pack == null) {
+      weakCompleter.target?.completeError(Exception('Pack is null'));
+      return;
+    }
+    final region = weakRegion.target;
+    if (region == null) {
+      weakCompleter.target?.completeError(Exception('Region is null'));
+      return;
+    }
+    weakCompleter.target?.complete(pack);
+    pack.resume(); // start downloading
+    weakStreamCtrl.target?.add(pack.toDownloadProgress(region));
+  });
 }

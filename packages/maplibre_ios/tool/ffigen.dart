@@ -61,7 +61,8 @@ void main(List<String> args) {
           'MLNFeature.h',
         };
         for (final path in include) {
-          if (header.path.endsWith(path)) return true;
+          print('Checking header: ${header.path} for $path');
+          if (header.path.contains(path)) return true;
         }
         return false;
       },
@@ -91,14 +92,46 @@ void main(List<String> args) {
             'Helpers',
             'MapLibreRegistry',
             'Extensions',
+            'MLNMapView',
+            'MLNMapCamera',
+            'MLNStyleLayer',
+            'MLNCircleStyleLayer',
+            'MLNFillExtrusionStyleLayer',
+            'MLNFillStyleLayer',
+            'MLNHeatmapStyleLayer',
+            'MLNHillshadeStyleLayer',
+            'MLNLineStyleLayer',
+            'MLNRasterStyleLayer',
+            'MLNSymbolStyleLayer',
+            'MLNVectorStyleLayer',
+            'MLNSource',
+            'MLNOfflineStorage',
+            'MLNTilePyramidOfflineRegion',
+            'MLNCoordinateBounds',
+            'MLNShapeSource',
+            'MLNShape',
+            'MLNTileSource',
+            'MLNOfflinePack',
+            'MLNStyle',
+            'MLNRasterDEMSource',
+            'MLNVectorTileSource',
+            'MLNBackgroundStyleLayer',
+            'MLNImageSource',
+            'MLNCoordinateQuad',
+            'UITapGestureRecognizer',
           };
-          if (include.contains(decl.originalName)) return true;
-          return decl.originalName.startsWith('MLN');
+          return include.contains(decl.originalName);
         },
       ),
       protocols: Protocols(
         include: (decl) {
-          return decl.originalName.startsWith('MLN');
+          const include = {
+            'MLNMapViewDelegate',
+            'MLNFeature',
+            'FlutterApi',
+            'OfflinePackProgressCallbacks',
+          };
+          return include.contains(decl.originalName);
         },
         includeMember: (declaration, member) => true,
       ),

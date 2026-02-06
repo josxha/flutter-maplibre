@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
@@ -126,7 +127,8 @@ class _MapControlButtonsState extends State<MapControlButtons> {
     bool trackLocation = true,
   }) async {
     try {
-      if (!_permissionManager!.locationPermissionsGranted) {
+      if (!_permissionManager!.locationPermissionsGranted &&
+          defaultTargetPlatform != TargetPlatform.iOS) {
         setState(() => _trackState = _TrackLocationState.loading);
 
         await _permissionManager.requestLocationPermissions(
