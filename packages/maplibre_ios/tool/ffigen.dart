@@ -107,6 +107,7 @@ void main(List<String> args) {
             'MLNSource',
             'MLNOfflineStorage',
             'MLNTilePyramidOfflineRegion',
+            'MLNCoordinateBounds',
             'MLNShapeSource',
             'MLNShape',
             'MLNTileSource',

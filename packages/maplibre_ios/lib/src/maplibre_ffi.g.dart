@@ -913,6 +913,13 @@ _objc_msgSend_xtuoz7(_class_Helpers, _sel_createOfflinePackProgressListenerWithC
   }
 
 
+  /// createTilePyramidOfflineRegionWithStyleURL:south:west:east:north:fromZoomLevel:toZoomLevel:
+  static MLNTilePyramidOfflineRegion createTilePyramidOfflineRegionWithStyleURL(objc.NSURL? styleURL, {required double south,required double west,required double east,required double north,required double fromZoomLevel,required double toZoomLevel}) {
+    final $ret = _objc_msgSend_1enam73(_class_Helpers, _sel_createTilePyramidOfflineRegionWithStyleURL_south_west_east_north_fromZoomLevel_toZoomLevel_, styleURL?.ref.pointer ?? ffi.nullptr, south, west, east, north, fromZoomLevel, toZoomLevel);
+    return MLNTilePyramidOfflineRegion.fromPointer($ret, retain: true, release: true);
+  }
+
+
   /// new
   static Helpers new$() {
     final $ret = _objc_msgSend_151sglz(_class_Helpers, _sel_new);
@@ -20556,26 +20563,7 @@ sealed class MLNTileOperation {
   static const MLNTileOperationNullOp = 8;}
 
 
-/// An offline region defined by a style URL, geographic coordinate bounds, and
-/// range of zoom levels.
-/// 
-/// To minimize the resources required by an irregularly shaped offline region,
-/// use the MLNShapeOfflineRegion class instead.
-/// 
-/// ### Example
-/// ```swift
-/// let northeast = CLLocationCoordinate2D(latitude: 40.989329, longitude: -102.062592)
-/// let southwest = CLLocationCoordinate2D(latitude: 36.986207, longitude: -109.049896)
-/// let bbox = MLNCoordinateBounds(sw: southwest, ne: northeast)
-/// 
-/// let region = MLNTilePyramidOfflineRegion(styleURL: MLNStyle.lightStyleURL, bounds: bbox,
-/// fromZoomLevel: 11, toZoomLevel: 14) let context = "Tile Pyramid Region".data(using: .utf8)
-/// MLNOfflineStorage.shared.addPack(for: region, withContext: context!)
-/// ```
-/// 
-/// #### Related examples
-/// TODO: Download an offline map, learn how to define an offline region
-/// to be downloaded to a user's device.
+/// MLNTilePyramidOfflineRegion
 extension type MLNTilePyramidOfflineRegion._(objc.ObjCObject object$) implements objc.ObjCObject,objc.NSObject,MLNOfflineRegion,objc.NSSecureCoding,objc.NSCopying {
   /// Constructs a [MLNTilePyramidOfflineRegion] that points to the same underlying object as [other].
   MLNTilePyramidOfflineRegion.as(objc.ObjCObject other) : object$ = other {
@@ -31131,6 +31119,7 @@ final _objc_msgSend_1c2zpn3 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Po
 final _objc_msgSend_1c31cvt = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.UnsignedLong Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_1cwp428 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.NSZone> )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.NSZone> )>();
 final _objc_msgSend_1cz0z8u = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.UnsignedLong Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
+final _objc_msgSend_1enam73 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Double , ffi.Double , ffi.Double , ffi.Double , ffi.Double , ffi.Double )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , double , double , double , double , double , double )>();
 final _objc_msgSend_1evryr5 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<CLLocationCoordinate2D> , ffi.UnsignedLong , UIEdgeInsets , ffi.Bool )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<CLLocationCoordinate2D> , int , UIEdgeInsets , bool )>();
 final _objc_msgSend_1f04296 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Bool Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<bool Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_1f4zv7b = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , UIEdgeInsets , ffi.Bool )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , UIEdgeInsets , bool )>();
@@ -31448,6 +31437,7 @@ late final _sel_coordinates = objc.registerName("coordinates");
 late final _sel_copy_ = objc.registerName("copy:");
 late final _sel_countOfBytesCompleted = objc.registerName("countOfBytesCompleted");
 late final _sel_createOfflinePackProgressListenerWithCallbacks_ = objc.registerName("createOfflinePackProgressListenerWithCallbacks:");
+late final _sel_createTilePyramidOfflineRegionWithStyleURL_south_west_east_north_fromZoomLevel_toZoomLevel_ = objc.registerName("createTilePyramidOfflineRegionWithStyleURL:south:west:east:north:fromZoomLevel:toZoomLevel:");
 late final _sel_currentEDRHeadroom = objc.registerName("currentEDRHeadroom");
 late final _sel_currentMode = objc.registerName("currentMode");
 late final _sel_cut_ = objc.registerName("cut:");

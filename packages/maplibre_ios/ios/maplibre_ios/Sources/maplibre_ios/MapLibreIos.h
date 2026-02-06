@@ -322,6 +322,8 @@ SWIFT_PROTOCOL_NAMED("FlutterApi")
 @class NSPredicate;
 @class NSExpression;
 @protocol OfflinePackProgressCallbacks;
+@class NSURL;
+@class MLNTilePyramidOfflineRegion;
 SWIFT_CLASS_NAMED("Helpers")
 @interface Helpers : NSObject
 + (void)setValueWithTarget:(NSObject * _Nonnull)target field:(NSString * _Nonnull)field value:(NSObject * _Nonnull)value;
@@ -329,6 +331,7 @@ SWIFT_CLASS_NAMED("Helpers")
 + (NSExpression * _Nullable)parseExpressionWithPropertyName:(NSString * _Nonnull)propertyName expression:(NSString * _Nonnull)expression SWIFT_WARN_UNUSED_RESULT;
 + (void)createOfflinePackProgressListenerWithCallbacks:(id <OfflinePackProgressCallbacks> _Nonnull)callbacks;
 + (void)removeOfflinePackProgressListenerWithCallbacks:(id <OfflinePackProgressCallbacks> _Nonnull)callbacks;
++ (MLNTilePyramidOfflineRegion * _Nonnull)createTilePyramidOfflineRegionWithStyleURL:(NSURL * _Nullable)styleURL south:(double)south west:(double)west east:(double)east north:(double)north fromZoomLevel:(double)minZoom toZoomLevel:(double)maxZoom SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 

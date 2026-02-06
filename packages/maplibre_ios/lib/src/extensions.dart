@@ -328,13 +328,13 @@ extension MLNOfflinePackExt on MLNOfflinePack {
   /// Convert a [MLNOfflinePack] to an [DownloadProgress].
   DownloadProgress toDownloadProgress(OfflineRegion region) => DownloadProgress(
     loadedBytes: progress.countOfBytesCompleted,
-    loadedTiles: progress.countOfTilesCompleted,
+    loadedTiles: progress.countOfResourcesCompleted,
     totalTilesEstimated:
         progress.countOfResourcesExpected != progress.countOfResourcesExpected,
     totalTiles: progress.countOfResourcesExpected,
     region: region,
     downloadCompleted:
-        progress.countOfResourcesCompleted >= progress.countOfResourcesExpected,
+        progress.countOfResourcesCompleted >= progress.countOfResourcesExpected && progress.countOfResourcesExpected != 0,
   );
 }
 

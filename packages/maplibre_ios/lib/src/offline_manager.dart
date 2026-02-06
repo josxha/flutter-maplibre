@@ -55,17 +55,22 @@ class OfflineManagerIos implements OfflineManager {
     required double pixelDensity,
     Map<String, Object?> metadata = const {},
   }) async* {
-    final ffiRegion = MLNTilePyramidOfflineRegion.new$().initWithStyleURL(
+    final ffiRegion = Helpers.createTilePyramidOfflineRegionWithStyleURL(
       mapStyleUrl.toNSURL(),
-      bounds: bounds.toMLNCoordinateBounds(),
       fromZoomLevel: minZoom,
       toZoomLevel: maxZoom,
+      east: bounds.longitudeEast,
+      north: bounds.latitudeNorth,
+      west: bounds.longitudeWest,
+      south: bounds.latitudeSouth,
     );
     final id = DateTime.now().millisecondsSinceEpoch;
     final context = <String, Object?>{
       'id': id,
       'styleUrl': mapStyleUrl,
       'pixelRatio': pixelDensity,
+      'metadata': metadata,
+      // TODO remove old metadata structure in favor of the new one, but keep it for backwards compatibility for now
       ...metadata,
     };
     final streamCtrl = StreamController<DownloadProgress>();
@@ -79,6 +84,7 @@ class OfflineManagerIos implements OfflineManager {
       pixelRatio: 1,
       styleUrl: mapStyleUrl,
     );
+    print('### Adding pack for region: $region with context: $context');
     _storage.addPackForRegion(
       ffiRegion,
       withContext: utf8.encode(jsonEncode(context)).toNSData(),
@@ -88,8 +94,17 @@ class OfflineManagerIos implements OfflineManager {
         weakStreamCtrl: WeakReference(streamCtrl),
       ),
     );
+    print('### Pack added, waiting for completion handler to be called');
     final _ = await completer.future;
-    yield* streamCtrl.stream;
+    await for (final event in streamCtrl.stream) {
+      print('### Download progress event: $event');
+      yield event;
+      if (event.downloadCompleted) {
+        await streamCtrl.close();
+        _downloadStreamControllers.remove(id);
+      }
+    }
+    print('### Download stream closed for region: $region');
   }
 
   @override
@@ -107,7 +122,8 @@ class OfflineManagerIos implements OfflineManager {
           maxZoom: ffiRegion.maximumZoomLevel,
           pixelRatio: json['pixelRatio'] as double? ?? 1,
           styleUrl: json['styleUrl'] as String? ?? '',
-          metadata: json,
+          // TODO remove old metadata structure in favor of the new one, but keep it for backwards compatibility for now
+          metadata: json['metadata'] as Map<String, Object?>? ?? json,
         );
       }
     }
@@ -154,12 +170,15 @@ class OfflineManagerIos implements OfflineManager {
   Future<void> resetDatabase() async {
     final completer = Completer<void>();
     final weakCompleter = WeakReference(completer);
+    final weakStorage = WeakReference(_storage);
     _storage.resetDatabaseWithCompletionHandler(
       ObjCBlock_ffiVoid_NSError.listener((error) {
         if (error != null) {
           weakCompleter.target?.completeError(error);
+          weakStorage.target?.reloadPacks();
         } else {
           weakCompleter.target?.complete();
+          weakStorage.target?.reloadPacks();
         }
       }),
     );
@@ -212,33 +231,31 @@ class OfflineManagerIos implements OfflineManager {
   );
 
   void _onProgressChanged(objc.NSNotification notification) {
+    print('### Progress changed: ${notification.name}');
     final pack = notification.offlinePack;
     if (pack == null) return;
     final json = pack.context.toDartMap();
     final regionId = (json['id'] ?? -1) as int;
     final streamCtrl = _downloadStreamControllers[regionId];
     if (streamCtrl == null) return;
-    // final ffiRegion = MLNTilePyramidOfflineRegion.as(pack.region);
+    final ffiRegion = MLNTilePyramidOfflineRegion.as(pack.region);
     final region = OfflineRegion(
       id: regionId,
-      /*bounds: ffiRegion.bounds.toLngLatBounds(),
+      bounds: ffiRegion.bounds.toLngLatBounds(),
       minZoom: ffiRegion.minimumZoomLevel,
-      maxZoom: ffiRegion.maximumZoomLevel,*/
-      bounds: LngLatBounds.fromPoints(const [
-        Geographic(lon: 0, lat: 0),
-        Geographic(lon: 60, lat: 60),
-      ]),
-      minZoom: 0,
-      maxZoom: 0,
+      maxZoom: ffiRegion.maximumZoomLevel,
       pixelRatio: json['pixelRatio'] as double? ?? 1,
       styleUrl: json['styleUrl'] as String? ?? '',
-      metadata: json,
+      // TODO remove old metadata structure in favor of the new one, but keep it for backwards compatibility for now
+      metadata: json['metadata'] as Map<String, Object?>? ?? json,
     );
     streamCtrl.add(pack.toDownloadProgress(region));
   }
 
   void _onErrorWithNotification(objc.NSNotification notification) {
-    /*final pack = notification.offlinePack;
+    print('### Error: ${notification.name}');
+    // TODO check if this is the correct way to handle this notification
+    final pack = notification.offlinePack;
     if (pack == null) return;
     final json = pack.context.toDartMap();
     final regionId = (json['id'] ?? -1) as int;
@@ -252,13 +269,16 @@ class OfflineManagerIos implements OfflineManager {
       maxZoom: ffiRegion.maximumZoomLevel,
       pixelRatio: json['pixelRatio'] as double? ?? 1,
       styleUrl: json['styleUrl'] as String? ?? '',
-      metadata: json,
+      // TODO remove old metadata structure in favor of the new one, but keep it for backwards compatibility for now
+      metadata: json['metadata'] as Map<String, Object?>? ?? json,
     );
-    streamCtrl.add(pack.toDownloadProgress(region));*/
+    streamCtrl.add(pack.toDownloadProgress(region));
   }
 
   void _onMaximumAllowedTiles(objc.NSNotification notification) {
-    /*final pack = notification.offlinePack;
+    print('### Maximum allowed tiles reached: ${notification.name}');
+    // TODO check if this is the correct way to handle this notification
+    final pack = notification.offlinePack;
     if (pack == null) return;
     final json = pack.context.toDartMap();
     final regionId = (json['id'] ?? -1) as int;
@@ -272,9 +292,10 @@ class OfflineManagerIos implements OfflineManager {
       maxZoom: ffiRegion.maximumZoomLevel,
       pixelRatio: json['pixelRatio'] as double? ?? 1,
       styleUrl: json['styleUrl'] as String? ?? '',
-      metadata: json,
+      // TODO remove old metadata structure in favor of the new one, but keep it for backwards compatibility for now
+      metadata: json['metadata'] as Map<String, Object?>? ?? json,
     );
-    streamCtrl.add(pack.toDownloadProgress(region));*/
+    streamCtrl.add(pack.toDownloadProgress(region));
   }
 
   static objc.ObjCBlock<Void Function(MLNOfflinePack?, objc.NSError?)>?
