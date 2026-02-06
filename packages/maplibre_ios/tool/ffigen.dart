@@ -123,11 +123,7 @@ void main(List<String> args) {
       ),
       protocols: Protocols(
         include: (decl) {
-          const include = {
-            'MLNMapViewDelegate',
-            'MLNFeature',
-            'FlutterApi',
-          };
+          const include = {'MLNMapViewDelegate', 'MLNFeature', 'FlutterApi'};
           return include.contains(decl.originalName);
         },
         includeMember: (declaration, member) => true,
