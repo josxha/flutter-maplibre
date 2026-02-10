@@ -7,30 +7,28 @@ class MapLibreView: NSObject, FlutterPlatformView, UIGestureRecognizerDelegate, 
     private var _mapView: MLNMapView!
     private var _registrar: FlutterPluginRegistrar
 
-    init(registrar: FlutterPluginRegistrar, frame: CGRect, viewId: Int64, initStyle: String?) {
+    init(registrar: FlutterPluginRegistrar, frame: CGRect, viewId: Int64, initStyle: String) {
         _registrar = registrar
         _viewId = viewId
         super.init() // self can be used after calling super.init()
 
-        if let initStyle {
-            let trimmed = initStyle.trimmingCharacters(in: .whitespacesAndNewlines)
-            if trimmed.starts(with: "{") {
-                // Raw JSON
-                _mapView = MLNMapView(frame: frame, styleJSON: trimmed)
-            } else if trimmed.starts(with: "/") {
-                _mapView = MLNMapView(frame: frame, styleURL: URL(string: "file://\(trimmed)")!)
-            } else if !trimmed.starts(with: "http://"),
-                      !trimmed.starts(with: "https://"),
-                      !trimmed.starts(with: "mapbox://")
-            {
-                // flutter asset
-                let assetPath = _registrar.lookupKey(forAsset: initStyle)
-                let url = URL(string: assetPath, relativeTo: Bundle.main.resourceURL)!
-                _mapView = MLNMapView(frame: frame, styleURL: url)
-            } else {
-                // URI
-                _mapView = MLNMapView(frame: frame, styleURL: URL(string: trimmed)!)
-            }
+        let trimmed = initStyle.trimmingCharacters(in: .whitespacesAndNewlines)
+        if trimmed.starts(with: "{") {
+            // Raw JSON
+            _mapView = MLNMapView(frame: frame, styleJSON: trimmed)
+        } else if trimmed.starts(with: "/") {
+            _mapView = MLNMapView(frame: frame, styleURL: URL(string: "file://\(trimmed)")!)
+        } else if !trimmed.starts(with: "http://"),
+                  !trimmed.starts(with: "https://"),
+                  !trimmed.starts(with: "mapbox://")
+        {
+            // flutter asset
+            let assetPath = _registrar.lookupKey(forAsset: initStyle)
+            let url = URL(string: assetPath, relativeTo: Bundle.main.resourceURL)!
+            _mapView = MLNMapView(frame: frame, styleURL: url)
+        } else {
+            // URI
+            _mapView = MLNMapView(frame: frame, styleURL: URL(string: trimmed)!)
         }
 
         _mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -110,19 +108,16 @@ class MapLibreView: NSObject, FlutterPlatformView, UIGestureRecognizerDelegate, 
         }
 
         var screenPosition = sender.location(in: _mapView)
-        var point = _mapView.convert(screenPosition, toCoordinateFrom: _mapView)
         api?.onSecondaryTap(screenLocation: screenPosition)
     }
 
     @objc func onDoubleTap(sender: UITapGestureRecognizer) {
         var screenPosition = sender.location(in: _mapView)
-        var point = _mapView.convert(screenPosition, toCoordinateFrom: _mapView)
         api?.onDoubleTap(screenLocation: screenPosition)
     }
 
     @objc func onLongPress(sender: UILongPressGestureRecognizer) {
         var screenPosition = sender.location(in: _mapView)
-        var point = _mapView.convert(screenPosition, toCoordinateFrom: _mapView)
         api?.onLongPress(screenLocation: screenPosition)
     }
 

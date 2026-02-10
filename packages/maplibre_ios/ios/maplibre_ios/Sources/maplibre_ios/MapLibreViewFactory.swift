@@ -23,7 +23,7 @@ class MapLibreViewFactory: NSObject, FlutterPlatformViewFactory {
             registrar: _registrar,
             frame: frame,
             viewId: viewId,
-            initStyle: args as! String?,
+            initStyle: args as! String,
         )
     }
 }

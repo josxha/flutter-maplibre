@@ -490,7 +490,7 @@ final class MapLibreMapStateIos extends MapLibreMapState {
       if (state == null) return;
       final offset = screenLocation.toOffset();
       final point = state.toLngLat(offset);
-      final event = MapEventDoubleClick(point: point, screenPoint: offset);
+      final event = MapEventLongClick(point: point, screenPoint: offset);
       state.widget.onEvent?.call(event);
     },
     onSecondaryTapWithScreenLocation_: (screenLocation) {

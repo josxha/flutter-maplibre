@@ -1,6 +1,6 @@
 part of 'map_state.dart';
 
-/// Android specific implementation of the [StyleController].
+/// iOS specific implementation of the [StyleController].
 class StyleControllerIos extends StyleController {
   StyleControllerIos._(this._ffiStyle);
 
@@ -88,7 +88,7 @@ class StyleControllerIos extends StyleController {
       if (layer.filter case final filter?) {
         final expression = jsonEncode(filter).toNSString();
         final ffiPredicate = Helpers.parsePredicateWithRaw(expression);
-        final ffiVectorLayer = MLNVectorStyleLayer.as(ffiId);
+        final ffiVectorLayer = MLNVectorStyleLayer.as(ffiLayer);
         ffiVectorLayer.predicate = ffiPredicate;
       }
     }

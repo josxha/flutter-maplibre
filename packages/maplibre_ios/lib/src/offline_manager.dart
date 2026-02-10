@@ -49,6 +49,7 @@ class OfflineManagerIos implements OfflineManager {
     for (final controller in _downloadStreamControllers.values) {
       if (!controller.isClosed) controller.close();
     }
+    _downloadStreamControllers.clear();
   }
 
   @override
@@ -189,6 +190,7 @@ class OfflineManagerIos implements OfflineManager {
         }
       }),
     );
+    await completer.future;
   }
 
   @override
@@ -240,6 +242,10 @@ class OfflineManagerIos implements OfflineManager {
     );
     final progress = pack.toDownloadProgress(region);
     streamCtrl.add(progress);
+    if (progress.downloadCompleted) {
+      streamCtrl.close();
+      _downloadStreamControllers.remove(regionId);
+    }
   }
 
   void _onErrorWithNotification(objc.NSNotification notification) {
