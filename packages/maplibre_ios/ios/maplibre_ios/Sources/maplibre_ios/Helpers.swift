@@ -75,7 +75,7 @@ public class Helpers: NSObject {
         }
         return nil
     }
-    
+
     @objc public static func createOfflinePackProgressListener(
         callbacks: OfflinePackProgressCallbacks
     ) {
@@ -106,7 +106,7 @@ public class Helpers: NSObject {
     ) {
         NotificationCenter.default.removeObserver(callbacks)
     }
-    
+
     @objc public static func createTilePyramidOfflineRegion(styleURL: URL?, south: Double, west: Double, east: Double, north: Double, fromZoomLevel minZoom: Double, toZoomLevel maxZoom: Double) -> MLNTilePyramidOfflineRegion {
         MLNTilePyramidOfflineRegion(styleURL: styleURL, bounds: MLNCoordinateBounds(sw: CLLocationCoordinate2D(latitude: south, longitude: west), ne: CLLocationCoordinate2D(latitude: north, longitude: east)), fromZoomLevel: minZoom, toZoomLevel: maxZoom)
     }

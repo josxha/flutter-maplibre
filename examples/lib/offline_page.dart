@@ -129,7 +129,7 @@ class _OfflinePageState extends State<OfflinePage> {
                                         _downloadProgressBregenz = null;
                                       });
                                     } else {
-                                      _print(
+                                      debugPrint(
                                         'region download progress: ${((update.progress ?? 0) * 100).toStringAsFixed(0)}%',
                                       );
                                       setState(() {

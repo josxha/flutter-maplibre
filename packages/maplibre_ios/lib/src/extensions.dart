@@ -107,7 +107,7 @@ extension NSDataExt on NSData {
   String toUTF8String() => String.fromCharCodes(toList());
 
   Map<String, Object?> toDartMap() =>
-      jsonDecode(toUTF8String()) as Map<String, Object>;
+      jsonDecode(toUTF8String()) as Map<String, dynamic>;
 }
 
 /// Internal extensions on [String].
@@ -330,11 +330,11 @@ extension MLNOfflinePackExt on MLNOfflinePack {
     loadedBytes: progress.countOfBytesCompleted,
     loadedTiles: progress.countOfResourcesCompleted,
     totalTilesEstimated:
-        progress.countOfResourcesExpected != progress.countOfResourcesExpected,
+        progress.maximumResourcesExpected != progress.countOfResourcesExpected,
     totalTiles: progress.countOfResourcesExpected,
     region: region,
     downloadCompleted:
-        progress.countOfResourcesCompleted >= progress.countOfResourcesExpected && progress.countOfResourcesExpected != 0,
+        progress.countOfResourcesCompleted >= progress.countOfResourcesExpected,
   );
 }
 
