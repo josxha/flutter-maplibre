@@ -280,7 +280,7 @@ jobs:
           cache: true
       - name: "Get Flutter dependencies"
         run: dart pub get
-      - name: Build web
+      - name: Build windows
         run: flutter build windows --debug
   build-macos:
     name: "[macOS] Build"
@@ -300,7 +300,7 @@ jobs:
           cache: true
       - name: "Get Flutter dependencies"
         run: dart pub get
-      - name: Build web
+      - name: Build macOS
         run: flutter build macos --debug
   build-web-wasm:
     name: "[Web] Build WASM"
