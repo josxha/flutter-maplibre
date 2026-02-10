@@ -61,7 +61,6 @@ void main(List<String> args) {
           'MLNFeature.h',
         };
         for (final path in include) {
-          print('Checking header: ${header.path} for $path');
           if (header.path.contains(path)) return true;
         }
         return false;
