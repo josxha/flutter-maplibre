@@ -85,7 +85,7 @@ class OfflineManagerIos implements OfflineManager {
       bounds: bounds,
       minZoom: minZoom,
       maxZoom: maxZoom,
-      pixelRatio: 1,
+      pixelRatio: pixelDensity,
       styleUrl: mapStyleUrl,
     );
     _storage.addPackForRegion(
@@ -174,6 +174,7 @@ class OfflineManagerIos implements OfflineManager {
         }
       }),
     );
+    return completer.future;
   }
 
   @override

@@ -83,9 +83,17 @@ class StyleControllerIos extends StyleController {
     if (layer case StyleLayerWithSource()) {
       if (layer.sourceLayerId case final sourceLayerId?) {
         final ffiVectorLayer = MLNVectorStyleLayer.as(ffiLayer);
+        if (!MLNVectorStyleLayer.isA(ffiLayer)) {
+          throw Exception(
+            'sourceLayerId is only applicable for vector style layers.',
+          );
+        }
         ffiVectorLayer.sourceLayerIdentifier = sourceLayerId.toNSString();
       }
       if (layer.filter case final filter?) {
+        if (!MLNVectorStyleLayer.isA(ffiLayer)) {
+          throw Exception('filter is only applicable for vector style layers.');
+        }
         final expression = jsonEncode(filter).toNSString();
         final ffiPredicate = Helpers.parsePredicateWithRaw(expression);
         final ffiVectorLayer = MLNVectorStyleLayer.as(ffiLayer);

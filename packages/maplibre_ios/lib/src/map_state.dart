@@ -40,7 +40,7 @@ final class MapLibreMapStateIos extends MapLibreMapState {
     final mapView = MapLibreRegistry.getMapWithViewId(viewId)!;
     _mapView = mapView;
     final weakThis = WeakReference(this);
-    final flutterApi = _createFlutterApi(viewId, weakThis);
+    final flutterApi = _createFlutterApi(weakThis);
     MapLibreRegistry.addFlutterApiWithViewId(viewId, api: flutterApi);
 
     mapView.automaticallyAdjustsContentInset = true;
@@ -473,7 +473,6 @@ final class MapLibreMapStateIos extends MapLibreMapState {
   }
 
   static FlutterApi _createFlutterApi(
-    int viewId,
     WeakReference<MapLibreMapStateIos> weakThis,
   ) => FlutterApi$Builder.implementAsListener(
     // Gesture callbacks
