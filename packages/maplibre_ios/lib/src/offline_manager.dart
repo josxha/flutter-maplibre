@@ -247,47 +247,33 @@ class OfflineManagerIos implements OfflineManager {
   }
 
   void _onErrorWithNotification(objc.NSNotification notification) {
-    // TODO check if this is the correct way to handle this notification
     final pack = notification.offlinePack;
     if (pack == null) return;
     final context = PackContext.fromNSData(pack.context);
     final regionId = context.id;
     final streamCtrl = _downloadStreamControllers[regionId];
     if (streamCtrl == null || streamCtrl.isClosed) return;
-    final ffiRegion = MLNTilePyramidOfflineRegion.as(pack.region);
-    final region = OfflineRegion(
-      id: regionId,
-      bounds: ffiRegion.bounds.toLngLatBounds(),
-      minZoom: ffiRegion.minimumZoomLevel,
-      maxZoom: ffiRegion.maximumZoomLevel,
-      pixelRatio: context.pixelDensity,
-      styleUrl: context.styleUrl,
-      metadata: context.metadata,
-    );
-    final progress = pack.toDownloadProgress(region);
-    streamCtrl.add(progress);
+    final userInfo = notification.userInfo?.toDartMap();
+    // MLNOfflinePackUserInfoKeyError
+    final rawError = userInfo?['Error'] as objc.ObjCObject?;
+    if (rawError == null) return;
+    final error = objc.NSError.as(rawError);
+    streamCtrl.addError(Exception(error.localizedDescription.toDartString()));
   }
 
   void _onMaximumAllowedTiles(objc.NSNotification notification) {
-    // TODO check if this is the correct way to handle this notification
     final pack = notification.offlinePack;
     if (pack == null) return;
     final context = PackContext.fromNSData(pack.context);
     final regionId = context.id;
     final streamCtrl = _downloadStreamControllers[regionId];
     if (streamCtrl == null || streamCtrl.isClosed) return;
-    final ffiRegion = MLNTilePyramidOfflineRegion.as(pack.region);
-    final region = OfflineRegion(
-      id: regionId,
-      bounds: ffiRegion.bounds.toLngLatBounds(),
-      minZoom: ffiRegion.minimumZoomLevel,
-      maxZoom: ffiRegion.maximumZoomLevel,
-      pixelRatio: context.pixelDensity,
-      styleUrl: context.styleUrl,
-      metadata: context.metadata,
-    );
-    final progress = pack.toDownloadProgress(region);
-    streamCtrl.add(progress);
+    final userInfo = notification.userInfo?.toDartMap();
+    // MLNOfflinePackUserInfoKeyMaximumCount
+    final rawError = userInfo?['MaximumCount'] as objc.ObjCObject?;
+    if (rawError == null) return;
+    final error = objc.NSError.as(rawError);
+    streamCtrl.addError(Exception(error.localizedDescription.toDartString()));
   }
 }
 

@@ -334,7 +334,9 @@ extension MLNOfflinePackExt on MLNOfflinePack {
     totalTiles: progress.countOfResourcesExpected,
     region: region,
     downloadCompleted:
-        progress.countOfResourcesCompleted >= progress.countOfResourcesExpected,
+        progress.countOfResourcesCompleted >=
+            progress.countOfResourcesExpected &&
+        progress.countOfResourcesCompleted > 0,
   );
 }
 

@@ -110,6 +110,7 @@ void main(List<String> args) {
             'MLNShapeSource',
             'MLNShape',
             'MLNTileSource',
+            'MLNOfflinePackUserInfoKey',
             'MLNOfflinePack',
             'MLNStyle',
             'MLNRasterDEMSource',
