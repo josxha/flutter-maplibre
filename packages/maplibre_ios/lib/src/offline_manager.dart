@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:ffi';
 
 import 'package:maplibre_ios/src/extensions.dart';
 import 'package:maplibre_ios/src/maplibre_ffi.g.dart';
@@ -15,9 +14,12 @@ class OfflineManagerIos implements OfflineManager {
   }
 
   final MLNOfflineStorage _storage;
-  late final OfflinePackProgressCallbacks _callbacks = _createCallbacks(
-    WeakReference(this),
-  );
+  late final OfflinePackProgressCallbacks _callbacks =
+      OfflinePackProgressCallbacks$Builder.implementAsListener(
+        onErrorWithNotification_: _onErrorWithNotification,
+        onMaximumAllowedTilesWithNotification_: _onMaximumAllowedTiles,
+        onProgressChangedWithNotification_: _onProgressChanged,
+      );
   final _downloadStreamControllers =
       <int, StreamController<DownloadProgress>>{};
 
@@ -30,13 +32,12 @@ class OfflineManagerIos implements OfflineManager {
   @override
   Future<void> clearAmbientCache() async {
     final completer = Completer<void>();
-    final weakCompleter = WeakReference(completer);
     _storage.clearAmbientCacheWithCompletionHandler(
       ObjCBlock_ffiVoid_NSError.listener((error) {
         if (error != null) {
-          weakCompleter.target?.completeError(error);
+          completer.completeError(error);
         } else {
-          weakCompleter.target?.complete();
+          completer.complete();
         }
       }),
     );
@@ -91,11 +92,22 @@ class OfflineManagerIos implements OfflineManager {
     _storage.addPackForRegion(
       ffiRegion,
       withContext: context.toNSData(),
-      completionHandler: _createAddPackCompletionHandler(
-        weakCompleter: WeakReference(completer),
-        weakRegion: WeakReference(region),
-        weakStreamCtrl: WeakReference(streamCtrl),
-      ),
+      completionHandler: ObjCBlock_ffiVoid_MLNOfflinePack_NSError.listener((
+        pack,
+        error,
+      ) {
+        if (error != null) {
+          completer.completeError(error);
+          return;
+        }
+        if (pack == null) {
+          completer.completeError(Exception('Pack is null'));
+          return;
+        }
+        completer.complete(pack);
+        pack.resume(); // start downloading
+        streamCtrl.add(pack.toDownloadProgress(region));
+      }),
     );
     final _ = await completer.future;
     yield* streamCtrl.stream;
@@ -126,13 +138,12 @@ class OfflineManagerIos implements OfflineManager {
   @override
   Future<void> invalidateAmbientCache() async {
     final completer = Completer<void>();
-    final weakCompleter = WeakReference(completer);
     _storage.invalidateAmbientCacheWithCompletionHandler(
       ObjCBlock_ffiVoid_NSError.listener((error) {
         if (error != null) {
-          weakCompleter.target?.completeError(error);
+          completer.completeError(error);
         } else {
-          weakCompleter.target?.complete();
+          completer.complete();
         }
       }),
     );
@@ -161,16 +172,14 @@ class OfflineManagerIos implements OfflineManager {
   @override
   Future<void> resetDatabase() async {
     final completer = Completer<void>();
-    final weakCompleter = WeakReference(completer);
     final weakStorage = WeakReference(_storage);
     _storage.resetDatabaseWithCompletionHandler(
       ObjCBlock_ffiVoid_NSError.listener((error) {
+        weakStorage.target?.reloadPacks();
         if (error != null) {
-          weakCompleter.target?.completeError(error);
-          weakStorage.target?.reloadPacks();
+          completer.completeError(error);
         } else {
-          weakCompleter.target?.complete();
-          weakStorage.target?.reloadPacks();
+          completer.complete();
         }
       }),
     );
@@ -180,14 +189,13 @@ class OfflineManagerIos implements OfflineManager {
   @override
   Future<void> setMaximumAmbientCacheSize({required int bytes}) async {
     final completer = Completer<void>();
-    final weakCompleter = WeakReference(completer);
     _storage.setMaximumAmbientCacheSize(
       bytes,
       withCompletionHandler: ObjCBlock_ffiVoid_NSError.listener((error) {
         if (error != null) {
-          weakCompleter.target?.completeError(error);
+          completer.completeError(error);
         } else {
-          weakCompleter.target?.complete();
+          completer.complete();
         }
       }),
     );
@@ -212,17 +220,6 @@ class OfflineManagerIos implements OfflineManager {
   @override
   void runPackDatabaseAutomatically({required bool enabled}) =>
       throw UnsupportedError('The database cannot be packed on iOS.');
-
-  static OfflinePackProgressCallbacks _createCallbacks(
-    WeakReference<OfflineManagerIos> weakManager,
-  ) => OfflinePackProgressCallbacks$Builder.implementAsListener(
-    onErrorWithNotification_: (notification) =>
-        weakManager.target?._onErrorWithNotification(notification),
-    onMaximumAllowedTilesWithNotification_: (notification) =>
-        weakManager.target?._onMaximumAllowedTiles(notification),
-    onProgressChangedWithNotification_: (notification) =>
-        weakManager.target?._onProgressChanged(notification),
-  );
 
   void _onProgressChanged(objc.NSNotification notification) {
     final pack = notification.offlinePack;
@@ -292,30 +289,6 @@ class OfflineManagerIos implements OfflineManager {
     final progress = pack.toDownloadProgress(region);
     streamCtrl.add(progress);
   }
-
-  static objc.ObjCBlock<Void Function(MLNOfflinePack?, objc.NSError?)>?
-  _createAddPackCompletionHandler({
-    required WeakReference<OfflineRegion> weakRegion,
-    required WeakReference<Completer<MLNOfflinePack>> weakCompleter,
-    required WeakReference<StreamController<DownloadProgress>> weakStreamCtrl,
-  }) => ObjCBlock_ffiVoid_MLNOfflinePack_NSError.listener((pack, error) {
-    if (error != null) {
-      weakCompleter.target?.completeError(error);
-      return;
-    }
-    if (pack == null) {
-      weakCompleter.target?.completeError(Exception('Pack is null'));
-      return;
-    }
-    final region = weakRegion.target;
-    if (region == null) {
-      weakCompleter.target?.completeError(Exception('Region is null'));
-      return;
-    }
-    weakCompleter.target?.complete(pack);
-    pack.resume(); // start downloading
-    weakStreamCtrl.target?.add(pack.toDownloadProgress(region));
-  });
 }
 
 extension type const PackContext(Map<String, Object?> data) {

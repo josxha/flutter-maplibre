@@ -116,6 +116,7 @@ void main(List<String> args) {
             'MLNVectorTileSource',
             'MLNBackgroundStyleLayer',
             'MLNImageSource',
+            'MLNRasterTileSource',
             'MLNCoordinateQuad',
             'UITapGestureRecognizer',
           };
