@@ -126,7 +126,8 @@ class _MapControlButtonsState extends State<MapControlButtons> {
     bool trackLocation = true,
   }) async {
     try {
-      if (!_permissionManager!.locationPermissionsGranted) {
+      if (PermissionManager.isSupported &&
+          !_permissionManager!.locationPermissionsGranted) {
         setState(() => _trackState = _TrackLocationState.loading);
 
         await _permissionManager.requestLocationPermissions(

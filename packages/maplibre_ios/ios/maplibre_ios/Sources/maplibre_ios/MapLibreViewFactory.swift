@@ -3,22 +3,27 @@ import MapLibre
 import UIKit
 
 class MapLibreViewFactory: NSObject, FlutterPlatformViewFactory {
-    private var messenger: FlutterBinaryMessenger
+    private var _registrar: FlutterPluginRegistrar
 
-    init(messenger: FlutterBinaryMessenger) {
-        self.messenger = messenger
+    init(withRegistrar registrar: FlutterPluginRegistrar) {
+        _registrar = registrar
         super.init()
+    }
+
+    func createArgsCodec() -> FlutterMessageCodec & NSObjectProtocol {
+        FlutterStandardMessageCodec.sharedInstance()
     }
 
     func create(
         withFrame frame: CGRect,
         viewIdentifier viewId: Int64,
-        arguments _: Any?
+        arguments args: Any?
     ) -> FlutterPlatformView {
         MapLibreView(
+            registrar: _registrar,
             frame: frame,
             viewId: viewId,
-            binaryMessenger: messenger
+            initStyle: args as! String,
         )
     }
 }

@@ -279,6 +279,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_warning("-Watimport-in-framework-header")
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
+@import CoreFoundation;
 @import ObjectiveC;
 #endif
 
@@ -302,28 +303,61 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 #if defined(__OBJC__)
 
+@class MLNMapView;
+@class MLNStyle;
+SWIFT_PROTOCOL_NAMED("FlutterApi")
+@protocol FlutterApi
+- (void)onTapWithScreenLocation:(CGPoint)screenLocation;
+- (void)onSecondaryTapWithScreenLocation:(CGPoint)screenLocation;
+- (void)onDoubleTapWithScreenLocation:(CGPoint)screenLocation;
+- (void)onLongPressWithScreenLocation:(CGPoint)screenLocation;
+- (void)didFinishLoadingStyleWithMapView:(MLNMapView * _Nonnull)mapView style:(MLNStyle * _Nonnull)style;
+- (void)regionWillChangeWithReasonWithMapView:(MLNMapView * _Nonnull)mapView reason:(NSUInteger)reason animated:(BOOL)animated;
+- (void)regionIsChangingWithReasonWithMapView:(MLNMapView * _Nonnull)mapView reason:(NSUInteger)reason;
+- (void)regionDidChangeWithReasonWithMapView:(MLNMapView * _Nonnull)mapView reason:(NSUInteger)reason animated:(BOOL)animated;
+- (void)didBecomeIdleWithMapView:(MLNMapView * _Nonnull)mapView;
+@end
+
 @class NSString;
 @class NSPredicate;
 @class NSExpression;
+@protocol OfflinePackProgressCallbacks;
+@class NSURL;
+@class MLNTilePyramidOfflineRegion;
 SWIFT_CLASS_NAMED("Helpers")
 @interface Helpers : NSObject
 + (void)setValueWithTarget:(NSObject * _Nonnull)target field:(NSString * _Nonnull)field value:(NSObject * _Nonnull)value;
 + (NSPredicate * _Nullable)parsePredicateWithRaw:(NSString * _Nonnull)raw SWIFT_WARN_UNUSED_RESULT;
 + (NSExpression * _Nullable)parseExpressionWithPropertyName:(NSString * _Nonnull)propertyName expression:(NSString * _Nonnull)expression SWIFT_WARN_UNUSED_RESULT;
++ (void)createOfflinePackProgressListenerWithCallbacks:(id <OfflinePackProgressCallbacks> _Nonnull)callbacks;
++ (void)removeOfflinePackProgressListenerWithCallbacks:(id <OfflinePackProgressCallbacks> _Nonnull)callbacks;
++ (MLNTilePyramidOfflineRegion * _Nonnull)createTilePyramidOfflineRegionWithStyleURL:(NSURL * _Nullable)styleURL south:(double)south west:(double)west east:(double)east north:(double)north fromZoomLevel:(double)minZoom toZoomLevel:(double)maxZoom SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class MLNMapView;
 SWIFT_CLASS_NAMED("MapLibreRegistry")
 @interface MapLibreRegistry : NSObject
+/// Method to get the map for a given viewId
 + (MLNMapView * _Nullable)getMapWithViewId:(int64_t)viewId SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) id _Nullable activity;)
-+ (id _Nullable)activity SWIFT_WARN_UNUSED_RESULT;
-+ (void)setActivity:(id _Nullable)value;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) id _Nullable context;)
-+ (id _Nullable)context SWIFT_WARN_UNUSED_RESULT;
-+ (void)setContext:(id _Nullable)value;
+/// Method to add a map to the registry
++ (void)addMapWithViewId:(int64_t)viewId map:(MLNMapView * _Nonnull)map;
+/// Method to remove a map to the registry
++ (void)removeMapWithViewId:(int64_t)viewId;
+/// Method to get the flutter api for a given viewId
++ (id <FlutterApi> _Nullable)getFlutterApiWithViewId:(int64_t)viewId SWIFT_WARN_UNUSED_RESULT;
+/// Method to add a flutter api to the registry
++ (void)addFlutterApiWithViewId:(int64_t)viewId api:(id <FlutterApi> _Nonnull)api;
+/// Method to remove a flutter api to the registry
++ (void)removeFlutterApiWithViewId:(int64_t)viewId;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class NSNotification;
+SWIFT_PROTOCOL_NAMED("OfflinePackProgressCallbacks")
+@protocol OfflinePackProgressCallbacks
+- (void)onProgressChangedWithNotification:(NSNotification * _Nonnull)notification;
+- (void)onErrorWithNotification:(NSNotification * _Nonnull)notification;
+- (void)onMaximumAllowedTilesWithNotification:(NSNotification * _Nonnull)notification;
 @end
 
 #endif

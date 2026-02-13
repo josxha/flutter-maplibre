@@ -11,11 +11,8 @@ public class MapLibrePlugin: NSObject, FlutterPlugin {
         registrar.addMethodCallDelegate(instance, channel: channel)
 
         // register MapLibre view factory
-        let factory = MapLibreViewFactory(messenger: registrar.messenger())
+        let factory = MapLibreViewFactory(withRegistrar: registrar)
         registrar.register(factory, withId: "plugins.flutter.io/maplibre")
-
-        // setup OfflineManager
-        OfflineManager(messenger: registrar.messenger())
     }
 
     public func handle(_: FlutterMethodCall, result _: @escaping FlutterResult) {}

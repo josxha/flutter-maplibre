@@ -39,4 +39,3 @@ flutter:
       windows:
         dartPluginClass: MapLibrePlugin
         dartFileName: 'src/maplibre_plugin.dart'
-#

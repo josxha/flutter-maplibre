@@ -75,4 +75,46 @@ public class Helpers: NSObject {
         }
         return nil
     }
+
+    @objc public static func createOfflinePackProgressListener(
+        callbacks: OfflinePackProgressCallbacks
+    ) {
+        NotificationCenter.default.addObserver(
+            callbacks,
+            selector: #selector(OfflinePackProgressCallbacks.onProgressChanged(notification:)),
+            name: NSNotification.Name.MLNOfflinePackProgressChanged,
+            object: nil
+        )
+
+        NotificationCenter.default.addObserver(
+            callbacks,
+            selector: #selector(OfflinePackProgressCallbacks.onError(notification:)),
+            name: NSNotification.Name.MLNOfflinePackError,
+            object: nil
+        )
+
+        NotificationCenter.default.addObserver(
+            callbacks,
+            selector: #selector(OfflinePackProgressCallbacks.onMaximumAllowedTiles(notification:)),
+            name: NSNotification.Name.MLNOfflinePackMaximumMapboxTilesReached,
+            object: nil
+        )
+    }
+
+    @objc public static func removeOfflinePackProgressListener(
+        callbacks: OfflinePackProgressCallbacks
+    ) {
+        NotificationCenter.default.removeObserver(callbacks)
+    }
+
+    @objc public static func createTilePyramidOfflineRegion(styleURL: URL?, south: Double, west: Double, east: Double, north: Double, fromZoomLevel minZoom: Double, toZoomLevel maxZoom: Double) -> MLNTilePyramidOfflineRegion {
+        MLNTilePyramidOfflineRegion(styleURL: styleURL, bounds: MLNCoordinateBounds(sw: CLLocationCoordinate2D(latitude: south, longitude: west), ne: CLLocationCoordinate2D(latitude: north, longitude: east)), fromZoomLevel: minZoom, toZoomLevel: maxZoom)
+    }
+}
+
+@objc(OfflinePackProgressCallbacks)
+public protocol OfflinePackProgressCallbacks: AnyObject {
+    @objc func onProgressChanged(notification: NSNotification)
+    @objc func onError(notification: NSNotification)
+    @objc func onMaximumAllowedTiles(notification: NSNotification)
 }

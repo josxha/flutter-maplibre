@@ -1,20 +1,16 @@
 part of 'map_state.dart';
 
-/// Android specific implementation of the [StyleController].
+/// iOS specific implementation of the [StyleController].
 class StyleControllerIos extends StyleController {
-  StyleControllerIos._(this._ffiStyle, this._hostApi);
+  StyleControllerIos._(this._ffiStyle);
 
   final MLNStyle _ffiStyle;
-  final pigeon.MapLibreHostApi _hostApi;
 
   @override
   Future<void> addImage(String id, Uint8List bytes) async {
-    // TODO Unhandled Exception: FailedToLoadClassException: Failed to load Objective-C class: NSImage
-    // https://developer.apple.com/documentation/foundation/nsitemproviderreading/2919479-objectwithitemproviderdata
-    /*final image = UIImage.imageWithData(bytes.toNSData());
+    final image = UIImage.imageWithData(bytes.toNSData());
     if (image == null) return;
-    _ffiStyle.setImage(image, forName: id.toNSString());*/
-    await _hostApi.addImage(id, bytes);
+    _ffiStyle.setImage(image, forName: id.toNSString());
   }
 
   @override
@@ -84,14 +80,24 @@ class StyleControllerIos extends StyleController {
     ffiLayer.maximumZoomLevel = layer.maxZoom;
     ffiLayer.setProperties(layer.paint);
     ffiLayer.setProperties(layer.layout);
-    if (ffiLayer case MLNVectorStyleLayer()) {
-      final layerWithSource = layer as StyleLayerWithSource;
-      ffiLayer.sourceLayerIdentifier = layerWithSource.sourceLayerId
-          ?.toNSString();
-      if (layerWithSource.filter case final filter?) {
+    if (layer case StyleLayerWithSource()) {
+      if (layer.sourceLayerId case final sourceLayerId?) {
+        final ffiVectorLayer = MLNVectorStyleLayer.as(ffiLayer);
+        if (!MLNVectorStyleLayer.isA(ffiLayer)) {
+          throw Exception(
+            'sourceLayerId is only applicable for vector style layers.',
+          );
+        }
+        ffiVectorLayer.sourceLayerIdentifier = sourceLayerId.toNSString();
+      }
+      if (layer.filter case final filter?) {
+        if (!MLNVectorStyleLayer.isA(ffiLayer)) {
+          throw Exception('filter is only applicable for vector style layers.');
+        }
         final expression = jsonEncode(filter).toNSString();
         final ffiPredicate = Helpers.parsePredicateWithRaw(expression);
-        ffiLayer.predicate = ffiPredicate;
+        final ffiVectorLayer = MLNVectorStyleLayer.as(ffiLayer);
+        ffiVectorLayer.predicate = ffiPredicate;
       }
     }
 
@@ -216,7 +222,7 @@ class StyleControllerIos extends StyleController {
           URL: source.url.toNSURL()!,
         );
       case VideoSource():
-        throw UnimplementedError('Video source is only supported on web.');
+        throw UnsupportedError('Video source is only supported on web.');
       default:
         throw UnimplementedError(
           'The Source is not supported: ${source.runtimeType}',
