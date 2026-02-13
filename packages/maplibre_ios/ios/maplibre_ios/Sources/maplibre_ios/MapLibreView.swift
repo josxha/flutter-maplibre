@@ -17,7 +17,7 @@ class MapLibreView: NSObject, FlutterPlatformView, UIGestureRecognizerDelegate, 
             // Raw JSON
             _mapView = MLNMapView(frame: frame, styleJSON: trimmed)
         } else if trimmed.starts(with: "/") {
-            _mapView = MLNMapView(frame: frame, styleURL: URL(string: "file://\(trimmed)")!)
+            _mapView = MLNMapView(frame: frame, styleURL: URL(fileURLWithPath: trimmed))
         } else if !trimmed.starts(with: "http://"),
                   !trimmed.starts(with: "https://"),
                   !trimmed.starts(with: "mapbox://")

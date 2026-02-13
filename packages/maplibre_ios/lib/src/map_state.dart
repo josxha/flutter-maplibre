@@ -422,7 +422,7 @@ final class MapLibreMapStateIos extends MapLibreMapState {
       // Raw JSON
       return trimmed.toNSString();
     } else if (trimmed.startsWith('/')) {
-      return 'file://$trimmed'.toNSURL()!;
+      return trimmed.toPathNSURL()!;
     } else if (!trimmed.startsWith('http://') &&
         !trimmed.startsWith('https://') &&
         !trimmed.startsWith('mapbox://')) {

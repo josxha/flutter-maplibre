@@ -116,6 +116,9 @@ extension StringExt on String {
   NSURL? toNSURL() => NSURL.URLWithString(toNSString());
 
   /// Convert to a [NSURL].
+  NSURL? toPathNSURL() => NSURL.fileURLWithPath(toNSString());
+
+  /// Convert to a [NSURL].
   NSData? toNSDataUTF8() =>
       toNSString().dataUsingEncoding(nsUTF8StringEncoding);
 

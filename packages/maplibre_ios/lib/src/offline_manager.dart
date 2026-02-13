@@ -71,7 +71,7 @@ class OfflineManagerIos implements OfflineManager {
       west: bounds.longitudeWest,
       south: bounds.latitudeSouth,
     );
-    final id = DateTime.now().millisecondsSinceEpoch;
+    final id = DateTime.now().microsecondsSinceEpoch.hashCode;
     final context = PackContext.fromJson(
       id: id,
       styleUrl: mapStyleUrl,
@@ -98,15 +98,17 @@ class OfflineManagerIos implements OfflineManager {
       ) {
         if (error != null) {
           completer.completeError(error);
-          return;
-        }
-        if (pack == null) {
+          _downloadStreamControllers.remove(id);
+          streamCtrl.close();
+        } else if (pack == null) {
           completer.completeError(Exception('Pack is null'));
-          return;
+          _downloadStreamControllers.remove(id);
+          streamCtrl.close();
+        } else {
+          completer.complete(pack);
+          pack.resume(); // start downloading
+          streamCtrl.add(pack.toDownloadProgress(region));
         }
-        completer.complete(pack);
-        pack.resume(); // start downloading
-        streamCtrl.add(pack.toDownloadProgress(region));
       }),
     );
     final _ = await completer.future;
@@ -259,6 +261,8 @@ class OfflineManagerIos implements OfflineManager {
     if (rawError == null) return;
     final error = objc.NSError.as(rawError);
     streamCtrl.addError(Exception(error.localizedDescription.toDartString()));
+    _downloadStreamControllers.remove(regionId);
+    streamCtrl.close();
   }
 
   void _onMaximumAllowedTiles(objc.NSNotification notification) {
@@ -274,6 +278,8 @@ class OfflineManagerIos implements OfflineManager {
     if (rawError == null) return;
     final error = objc.NSError.as(rawError);
     streamCtrl.addError(Exception(error.localizedDescription.toDartString()));
+    _downloadStreamControllers.remove(regionId);
+    streamCtrl.close();
   }
 }
 
