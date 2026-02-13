@@ -19,7 +19,10 @@ void main() {
       final events = <MapEvent>[];
       final app = App(
         onMapCreated: ctrlCompleter.complete,
-        options: const MapOptions(initCenter: Geographic(lon: 1, lat: 2)),
+        options: const MapOptions(
+          initCenter: Geographic(lon: 1, lat: 2),
+          initZoom: 5,
+        ),
         onEvent: events.add,
       );
       await tester.pumpWidget(app);
@@ -28,7 +31,7 @@ void main() {
       await ctrl.moveCamera(
         center: const Geographic(lon: 1, lat: 1),
         bearing: 1,
-        zoom: 1,
+        zoom: 5,
         pitch: 1,
       );
       await tester.pumpAndSettle();

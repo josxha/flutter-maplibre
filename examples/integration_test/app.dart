@@ -7,7 +7,7 @@ void main() {
 
 class App extends StatelessWidget {
   const App({
-    this.options,
+    this.options = const MapOptions(initCenter: Geographic(lon: 0, lat: 0)),
     this.onMapCreated,
     this.onStyleLoaded,
     this.onEvent,
@@ -15,7 +15,7 @@ class App extends StatelessWidget {
     super.key,
   });
 
-  final MapOptions? options;
+  final MapOptions options;
   final MapCreatedCallback? onMapCreated;
   final MapEventCallback? onEvent;
   final StyleLoadedCallback? onStyleLoaded;
@@ -27,9 +27,7 @@ class App extends StatelessWidget {
       title: 'MapLibre Demo',
       home: Scaffold(
         body: MapLibreMap(
-          options:
-              options ??
-              const MapOptions(initCenter: Geographic(lon: 0, lat: 0)),
+          options: options,
           onMapCreated: onMapCreated,
           onStyleLoaded: onStyleLoaded,
           onEvent: onEvent,
