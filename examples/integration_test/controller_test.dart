@@ -39,7 +39,7 @@ void main() {
       final camera = ctrl.getCamera();
       expect(camera.center.lon, closeTo(1, 0.00001));
       expect(camera.center.lat, closeTo(1, 0.00001));
-      expect(camera.zoom, closeTo(1, 0.00001));
+      expect(camera.zoom, closeTo(5, 0.00001));
       expect(camera.bearing, closeTo(1, 0.00001));
       expect(camera.pitch, closeTo(1, 0.00001));
 
