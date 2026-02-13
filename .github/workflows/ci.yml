@@ -112,6 +112,11 @@ jobs:
         run: xcrun simctl bootstatus booted -b
       - name: Run integration tests
         run: flutter test integration_test/main.dart --timeout=1800s -r expanded --coverage --coverage-package maplibre
+      - name: "Run Codecov"
+        uses: codecov/codecov-action@v5
+        if: ${{ matrix.os_version == '26.2' }}
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
   integration-test-android:
     name: "[Android] Integration tests"
     runs-on: ubuntu-latest
