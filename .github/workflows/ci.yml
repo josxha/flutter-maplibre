@@ -58,22 +58,6 @@ jobs:
           filter_mode: nofilter
           file_glob: "!**/*.g.*"
           fail_on_error: true
-#  integration-test-ios:
-#    name: "[iOS] Integration tests"
-#    runs-on: macOS-latest
-#    defaults:
-#      run:
-#        working-directory: example
-#    steps:
-#      - uses: actions/checkout@v6
-#      - uses: futureware-tech/simulator-action@v3
-#        with:
-#          model: 'iPhone 15'
-#      - uses: subosito/flutter-action@v2
-#        with:
-#          cache: true
-#      - run: flutter pub get
-#      - run: flutter test integration_test --no-pub -r expanded
   unit-test:
     name: "Unit tests"
     runs-on: ubuntu-latest
@@ -99,45 +83,68 @@ jobs:
         if: ${{ matrix.sdk == '' }}
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-#  integration-test-android:
-#    name: "[Android] Integration tests"
-#    runs-on: ubuntu-latest
-#    strategy:
-#      fail-fast: false
-#      matrix:
-#        api-level: [ 24, 35 ]
-#    timeout-minutes: 30
-#    steps:
-#      - uses: actions/checkout@v6
-#      - name: "Setup Flutter SDK"
-#        uses: subosito/flutter-action@v2
-#        with:
-#          cache: true
-#      - uses: actions/setup-java@v5
-#        with:
-#          java-version: '21'
-#          distribution: 'temurin'
-#          cache: 'gradle'
-#      - name: "Get Flutter dependencies"
-#        run: flutter pub get
-#        # https://github.com/marketplace/actions/android-emulator-runner#running-hardware-accelerated-emulators-on-linux-runners
-#      - name: "Enable KVM group perms"
-#        run: |
-#          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
-#          sudo udevadm control --reload-rules
-#          sudo udevadm trigger --name-match=kvm
-#      - name: "Run integration tests"
-#        uses: reactivecircus/android-emulator-runner@v2
-#        with:
-#          api-level: ${{ matrix.api-level }}
-#          arch: x86_64
-#          emulator-boot-timeout: 1800 # 30 minutes
-#          script: cd example && flutter test integration_test/main.dart --timeout=1800s -r expanded --coverage --coverage-package maplibre
-#      - name: "Run Codecov"
-#        uses: codecov/codecov-action@v5
-#        if: ${{ matrix.api-level == '35' }}
-#        env:
-#          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+  integration-test-ios:
+    name: "[iOS] Integration tests"
+    runs-on: macOS-latest
+    defaults:
+      run:
+        working-directory: example
+    steps:
+      - uses: actions/checkout@v6
+      - uses: subosito/flutter-action@v2
+        with:
+          cache: true
+      - name: Install dependencies
+        run: flutter pub get
+      - name: Enable Swift Package Manager
+        run: flutter config --enable-swift-package-manager
+      - name: Start iOS simulator
+        uses: futureware-tech/simulator-action@v3
+        with:
+          model: 'iPhone 17 Pro'
+      - name: Wait for simulator
+        run: xcrun simctl bootstatus booted -b
+      - name: Run integration tests
+        run: flutter test integration_test -r expanded
+  integration-test-android:
+    name: "[Android] Integration tests"
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        api-level: [ 24, 35 ]
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+      - name: "Setup Flutter SDK"
+        uses: subosito/flutter-action@v2
+        with:
+          cache: true
+      - uses: actions/setup-java@v5
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: 'gradle'
+      - name: "Get Flutter dependencies"
+        run: flutter pub get
+        # https://github.com/marketplace/actions/android-emulator-runner#running-hardware-accelerated-emulators-on-linux-runners
+      - name: "Enable KVM group perms"
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - name: "Run integration tests"
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ matrix.api-level }}
+          arch: x86_64
+          emulator-boot-timeout: 1800 # 30 minutes
+          script: cd example && flutter test integration_test/main.dart --timeout=1800s -r expanded --coverage --coverage-package maplibre
+      - name: "Run Codecov"
+        uses: codecov/codecov-action@v5
+        if: ${{ matrix.api-level == '35' }}
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 #  integration-test-web:
 #    name: "[Web] Integration tests"
 #    runs-on: ubuntu-latest
