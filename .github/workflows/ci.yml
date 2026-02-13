@@ -88,7 +88,12 @@ jobs:
     runs-on: macOS-latest
     defaults:
       run:
-        working-directory: example
+        working-directory: examples
+    strategy:
+      fail-fast: false
+      matrix:
+        os_version: [ '13.0', '26.3' ]
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
@@ -102,8 +107,8 @@ jobs:
         uses: futureware-tech/simulator-action@v3
         with:
           model: 'iPhone 17 Pro'
-      - name: Wait for simulator
-        run: xcrun simctl bootstatus booted -b
+          wait_for_boot: true
+          os_version: ${{ matrix.os_version }}
       - name: Run integration tests
         run: flutter test integration_test/main.dart --timeout=1800s -r expanded --coverage --coverage-package maplibre
   integration-test-android:
@@ -142,7 +147,7 @@ jobs:
           api-level: ${{ matrix.api-level }}
           arch: x86_64
           emulator-boot-timeout: 1800 # 30 minutes
-          script: flutter test integration_test/main.dart --timeout=1800s -r expanded --coverage --coverage-package maplibre
+          script: cd examples && flutter test integration_test/main.dart --timeout=1800s -r expanded --coverage --coverage-package maplibre
       - name: "Run Codecov"
         uses: codecov/codecov-action@v5
         if: ${{ matrix.api-level == '35' }}
