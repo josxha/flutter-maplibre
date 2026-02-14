@@ -149,6 +149,20 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
     _mapView = jni.MapView.new$4(jContext, jMapOptions)
       ..getMapAsync(jni.OnMapReadyCallback.implement(this));
     _platformView.addView(_mapView);
+
+    // In some environments (notably `integration_test` on Android/CI),
+    // `didChangeAppLifecycleState(AppLifecycleState.resumed)` is not reliably
+    // delivered. MapLibre's `MapView` expects `onStart/onResume` to be called
+    // before certain operations (e.g. projections / feature queries) behave
+    // deterministically.
+    final lifecycleState = WidgetsBinding.instance.lifecycleState;
+    final shouldStartNow =
+        lifecycleState == null || lifecycleState == AppLifecycleState.resumed;
+    if (shouldStartNow && !_mapViewStarted) {
+      _mapView?.onStart();
+      _mapView?.onResume();
+      _mapViewStarted = true;
+    }
   });
 
   @override
