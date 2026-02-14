@@ -173,6 +173,8 @@ jobs:
           echo "$HOME/.cache/puppeteer/chromedriver/linux-*/chromedriver" >> $GITHUB_PATH
       - name: Start chromedriver
         run: chromedriver --port=4444 &
+      - name: Enable headless Chrome
+        run: echo 'CHROME_FLAGS=--headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage' >> $GITHUB_ENV
       - name: Run web integration tests
         run: |
           flutter drive \
