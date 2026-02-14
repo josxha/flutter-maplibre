@@ -6,6 +6,10 @@ import 'app.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+  test();
+}
+
+void test() {
   group('PermissionManager', () {
     testWidgets('backgroundLocationPermissionGranted', (tester) async {
       await tester.pumpWidget(const App());

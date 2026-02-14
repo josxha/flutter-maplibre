@@ -6,6 +6,10 @@ import 'app.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+  test();
+}
+
+void test() {
   group('OfflineManager', () {
     testWidgets('backgroundLocationOfflineGranted', (tester) async {
       await tester.pumpWidget(const App());

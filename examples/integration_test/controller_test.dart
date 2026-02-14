@@ -13,6 +13,10 @@ import 'app.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+  test();
+}
+
+void test() {
   group('controller', () {
     testWidgets('getCamera', (tester) async {
       final ctrlCompleter = Completer<MapController>();

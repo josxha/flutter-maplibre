@@ -6,6 +6,10 @@ import 'app.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+  test();
+}
+
+void test() {
   group('General', () {
     testWidgets('render map with tlhc_vd', (tester) async {
       await tester.pumpWidget(const App());

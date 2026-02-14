@@ -10,11 +10,11 @@ import 'permission_manager_test.dart' as permission;
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-  controller.main();
-  general.main();
-  camera.main();
-  options.main();
-  scalebar.main();
-  offline.main();
-  permission.main();
+  controller.test();
+  general.test();
+  camera.test();
+  options.test();
+  scalebar.test();
+  offline.test();
+  permission.test();
 }

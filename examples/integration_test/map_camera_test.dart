@@ -9,6 +9,10 @@ import 'app.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+  test();
+}
+
+void test() {
   group('MapCamera', () {
     testWidgets('get from map', (tester) async {
       final options = MapOptions(

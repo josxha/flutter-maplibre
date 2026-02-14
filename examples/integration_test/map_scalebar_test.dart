@@ -10,6 +10,10 @@ import 'app.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+  test();
+}
+
+void test() {
   group('MapScalebar', () {
     testWidgets('show and update', (tester) async {
       final ctrlCompleter = Completer<MapController>();
