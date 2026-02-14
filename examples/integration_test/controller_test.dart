@@ -304,7 +304,7 @@ void test() {
         );
         final ctrl = await ctrlCompleter.future;
         final style = await styleCompleter.future;
-        await tester.pumpAndSettle(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 2));
 
         const pointSourceId = 'point_source';
         await style.addSource(
@@ -332,7 +332,7 @@ void test() {
           sourceId: pointSourceId,
           sourceLayer: null,
         );
-        await tester.pumpAndSettle(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 2));
 
         final size = tester.getSize(find.byType(MapLibreMap));
         final centerScreen = Offset(size.width / 2, size.height / 2);
@@ -378,7 +378,7 @@ void test() {
           sourceLayer: null,
         );
 
-        await tester.pumpAndSettle(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 2));
 
         layers = ctrl.queryLayers(centerScreen);
         expect(layers, hasLength(2));
@@ -401,7 +401,7 @@ void test() {
         );
         final ctrl = await ctrlCompleter.future;
         await styleCompleter.future;
-        await tester.pumpAndSettle(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 2));
 
         const oceanExpected = QueriedLayer(
           layerId: 'Water',

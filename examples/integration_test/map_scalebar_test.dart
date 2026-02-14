@@ -23,7 +23,7 @@ void test() {
       );
       await tester.pumpWidget(app);
       final ctrl = await ctrlCompleter.future;
-      await tester.pumpAndSettle(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 2));
 
       // Check if the scalebar is visible.
       final customPaintFinder = find.descendant(
@@ -37,7 +37,7 @@ void test() {
 
       for (final zoom in zoomLevels) {
         await ctrl.moveCamera(zoom: zoom);
-        await tester.pumpAndSettle(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 2));
 
         final size = tester.getSize(customPaintFinder);
         widths.add(size.width);

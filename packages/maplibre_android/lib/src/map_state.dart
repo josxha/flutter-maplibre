@@ -362,14 +362,8 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
     final cameraUpdate = jni.CameraUpdateFactory.newCameraPosition(
       cameraPosition,
     )..releasedBy(arena);
-    final completer = Completer<void>();
-    _jMap?.moveCamera$1(
-      cameraUpdate,
-      jni.MapLibreMap$CancelableCallback.implement(
-        _CameraMovementCallback(WeakReference(completer)),
-      )..releasedBy(arena),
-    );
-    return completer.future;
+    _jMap?.moveCamera(cameraUpdate);
+    return;
   });
 
   @override
