@@ -62,7 +62,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.35.0', '' ]
+        sdk: [ '3.35.6', '' ]
         package: [ 'maplibre', 'maplibre_webview' ]
     timeout-minutes: 30
     steps:
@@ -201,7 +201,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.35.0', '' ]
+        sdk: [ '3.35.6', '' ]
     steps:
       - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
@@ -231,7 +231,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.35.0', '' ]
+        sdk: [ '3.35.6', '' ]
     steps:
       - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
@@ -256,7 +256,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.35.0', '' ]
+        sdk: [ '3.35.6', '' ]
     steps:
       - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
@@ -274,7 +274,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.35.0', '' ]
+        sdk: [ '3.35.6', '' ]
     steps:
       - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
@@ -292,7 +292,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.35.0', '' ]
+        sdk: [ '3.35.6', '' ]
     steps:
       - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
@@ -310,7 +310,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.35.0', '' ]
+        sdk: [ '3.35.6', '' ]
     steps:
       - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
