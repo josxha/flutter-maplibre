@@ -150,37 +150,40 @@ jobs:
         if: ${{ matrix.api-level == '35' }}
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-  integration-test-web:
-    name: "[Web] Integration tests"
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    defaults: { run: { working-directory: examples } }
-    strategy:
-      fail-fast: false
-      matrix:
-        sdk: [ '3.38.10', '' ]
-    steps:
-      - uses: actions/checkout@v6
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: ${{ matrix.sdk }}
-          cache: true
-      - run: flutter pub get
-      - name: Install chromedriver
-        run: |
-          npm install -g @puppeteer/browsers
-          npx @puppeteer/browsers install chromedriver@stable
-          echo "$HOME/.cache/puppeteer/chromedriver/linux-*/chromedriver" >> $GITHUB_PATH
-      - name: Start chromedriver
-        run: chromedriver --port=4444 &
-      - name: Enable headless Chrome
-        run: echo 'CHROME_FLAGS=--headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage' >> $GITHUB_ENV
-      - name: Run web integration tests
-        run: |
-          flutter drive \
-            --driver=test_driver/integration_test.dart \
-            --target=integration_test/main.dart \
-            -d chrome
+integration-test-web:
+  name: "[Web] Integration tests"
+  runs-on: ubuntu-latest
+  timeout-minutes: 30
+  defaults: { run: { working-directory: examples } }
+  strategy:
+    fail-fast: false
+    matrix:
+      sdk: ['3.38.10', '']
+  env:
+    CI: true
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    - name: Setup Flutter SDK
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: ${{ matrix.sdk }}
+        cache: true
+    - name: Enable Flutter web support
+      run: flutter config --enable-web
+    - name: Install Dart & Flutter dependencies
+      run: flutter pub get
+    - name: Install ChromeDriver (matching Chrome)
+      run: |
+        npm install -g @puppeteer/browsers
+        npx @puppeteer/browsers install chromedriver@stable
+        echo "$HOME/.cache/puppeteer/chromedriver/linux-*/chromedriver" >> $GITHUB_PATH
+    - name: Run web integration tests (Chrome via Xvfb)
+      run: |
+        xvfb-run -a flutter drive \
+          --driver=test_driver/integration_test.dart \
+          --target=integration_test/main.dart \
+          -d chrome
   score:
     name: "Package score"
     runs-on: ubuntu-latest
