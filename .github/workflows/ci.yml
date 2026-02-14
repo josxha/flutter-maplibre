@@ -243,6 +243,9 @@ jobs:
         run: dart pub get
       - name: "Build iOS package"
         run: flutter build ios --simulator --no-codesign
+      - name: "Enable native assets"
+        if: ${{ matrix.sdk == '3.35.6' }} # Native assets shipped in Flutter 3.38
+        run: flutter config --enable-native-assets
       - name: Upload Runner.app as artifact
         if: ${{ matrix.sdk == '' }}
         uses: actions/upload-artifact@v6
