@@ -29,6 +29,7 @@ flutter:
     implements: maplibre
     platforms:
       android:
+        package: com.github.josxha.maplibre
+        pluginClass: MapLibrePlugin
         dartPluginClass: MapLibrePlugin
         dartFileName: 'src/maplibre_plugin.dart'
-        pluginClass: MapLibrePlugin
