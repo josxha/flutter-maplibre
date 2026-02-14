@@ -15,7 +15,6 @@ void main() {
       final ctrlCompleter = Completer<MapController>();
       final app = App(
         onMapCreated: ctrlCompleter.complete,
-        options: const MapOptions(initCenter: Geographic(lon: 0, lat: 0)),
         children: const [MapScalebar()],
       );
       await tester.pumpWidget(app);

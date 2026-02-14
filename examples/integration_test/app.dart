@@ -9,13 +9,17 @@ void main() {
 
 class App extends StatelessWidget {
   const App({
-    this.options = const MapOptions(initCenter: Geographic(lon: 0, lat: 0)),
+    this.options = defaultOptions,
     this.onMapCreated,
     this.onStyleLoaded,
     this.onEvent,
     this.children = const [],
     super.key,
   });
+
+  static const defaultOptions = MapOptions(
+    initCenter: Geographic(lon: 0, lat: 0),
+  );
 
   final MapOptions options;
   final MapCreatedCallback? onMapCreated;

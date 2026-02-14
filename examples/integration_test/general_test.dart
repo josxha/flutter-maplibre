@@ -53,7 +53,10 @@ void main() {
     });*/
 
     testWidgets('update map options', (tester) async {
-      const o1 = MapOptions(initCenter: Geographic(lon: 0, lat: 0));
+      const o1 = MapOptions(
+        initCenter: Geographic(lon: 0, lat: 0),
+        maxZoom: 10,
+      );
       await tester.pumpWidget(const App(options: o1));
       await tester.pumpAndSettle();
       await tester.pump();
