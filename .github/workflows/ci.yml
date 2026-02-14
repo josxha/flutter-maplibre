@@ -62,7 +62,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '' ] # option to use a matrix test with the lower supported flutter version
+        sdk: [ '' ]
         package: [ 'maplibre', 'maplibre_webview' ]
     timeout-minutes: 30
     steps:
@@ -78,7 +78,8 @@ jobs:
       - name: "Run Codecov"
         uses: codecov/codecov-action@v5
         if: ${{ matrix.sdk == '' }}
-        env: { CODECOV_TOKEN: ${ { secrets.CODECOV_TOKEN } } }
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
   integration-test-ios:
     name: "[iOS] Integration tests"
     runs-on: macOS-latest
@@ -108,7 +109,8 @@ jobs:
       - name: "Run Codecov"
         uses: codecov/codecov-action@v5
         if: ${{ matrix.os_version == '26.2' }}
-        env: { CODECOV_TOKEN: ${ { secrets.CODECOV_TOKEN } } }
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
   integration-test-android:
     name: "[Android] Integration tests"
     runs-on: ubuntu-latest
@@ -146,7 +148,8 @@ jobs:
       - name: "Run Codecov"
         uses: codecov/codecov-action@v5
         if: ${{ matrix.api-level == '35' }}
-        env: { CODECOV_TOKEN: ${ { secrets.CODECOV_TOKEN } } }
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
   #  integration-test-web:
   #    name: "[Web] Integration tests"
   #    runs-on: ubuntu-latest
@@ -198,7 +201,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '' ] # option to use a matrix test with the lower supported flutter version
+        sdk: [ '' ]
     steps:
       - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
@@ -228,7 +231,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '' ] # option to use a matrix test with the lower supported flutter version
+        sdk: [ '' ]
     steps:
       - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
@@ -253,7 +256,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '' ] # option to use a matrix test with the lower supported flutter version
+        sdk: [ '' ]
     steps:
       - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
@@ -271,7 +274,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '' ] # option to use a matrix test with the lower supported flutter version
+        sdk: [ '' ]
     steps:
       - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
@@ -289,7 +292,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '' ] # option to use a matrix test with the lower supported flutter version
+        sdk: [ '' ]
     steps:
       - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
@@ -307,7 +310,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '' ] # option to use a matrix test with the lower supported flutter version
+        sdk: [ '' ]
     steps:
       - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
