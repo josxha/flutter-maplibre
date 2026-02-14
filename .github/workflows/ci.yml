@@ -178,6 +178,8 @@ jobs:
           npm install -g @puppeteer/browsers
           npx @puppeteer/browsers install chromedriver@stable
           echo "$HOME/.cache/puppeteer/chromedriver/linux-*/chromedriver" >> $GITHUB_PATH
+      - name: "Start ChromeDriver (WebDriver)"
+        run: chromedriver --port=4444 --allowed-ips='' &
       - name: "Run web integration tests (Chrome via Xvfb)"
         run: |
           xvfb-run -a flutter drive \
