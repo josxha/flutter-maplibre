@@ -51,7 +51,7 @@ void test() {
         final scalebarLat = ctrl.toLngLat(scalebarCenter).lat;
         final metersPerPixel = ctrl.getMetersPerPixelAtLatitude(scalebarLat);
         final expected = scaleBarPainter.meters / metersPerPixel;
-        expect(expected, closeTo(size.width, expected * 0.01));
+        expect(size.width, closeTo(expected, 1));
       }
 
       // Ensure that the width of the scalebar is different for each zoom level.
