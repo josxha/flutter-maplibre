@@ -1,23 +1,46 @@
 name: Publish to pub.dev
 
 on:
-  push:
-    tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+*'
+  push: { tags: [ 'v[0-9]+.[0-9]+.[0-9]+*' ] }
 
 jobs:
-  publish-maplibre-ios:
+  maplibre-platform-interface:
+    name: "Publish `maplibre_platform_interface`"
+    permissions: { id-token: write }
+    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
+    with: { working-directory: packages/maplibre_platform_interface }
+  maplibre-android:
+    name: "Publish `maplibre_android`"
+    needs: maplibre-platform-interface
+    permissions: { id-token: write }
+    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
+    with: { working-directory: packages/maplibre_android }
+  maplibre-ios:
     name: "Publish `maplibre_ios`"
-    permissions:
-      id-token: write
+    needs: maplibre-platform-interface
+    permissions: { id-token: write }
     uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
-    with:
-      working-directory: maplibre_ios
-  publish-maplibre:
+    with: { working-directory: packages/maplibre_ios }
+  maplibre-web:
+    name: "Publish `maplibre_web`"
+    needs: maplibre-platform-interface
+    permissions: { id-token: write }
+    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
+    with: { working-directory: packages/maplibre_web }
+  maplibre-webview:
+    name: "Publish `maplibre_webview`"
+    needs: maplibre-platform-interface
+    permissions: { id-token: write }
+    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
+    with: { working-directory: packages/maplibre_webview }
+  maplibre:
     name: "Publish `maplibre`"
-    needs: publish-maplibre-ios
-    permissions:
-      id-token: write
+    needs:
+      - maplibre-platform-interface
+      - maplibre-android
+      - maplibre-ios
+      - maplibre-web
+      - maplibre-webview
+    permissions: { id-token: write }
     uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
-    with:
-      working-directory: maplibre
+    with: { working-directory: packages/maplibre }

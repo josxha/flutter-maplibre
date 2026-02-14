@@ -1,7 +1,7 @@
 name: Flutter Beta CI
 
 on:
-  schedule: [ cron:  '0 0 * * *' ]
+  schedule: [ cron: '0 0 * * */2' ]
   workflow_dispatch:
 
 env:
@@ -11,9 +11,7 @@ jobs:
   build-android:
     name: "Build Android APK"
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: example
+    defaults: { run: { working-directory: examples } }
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-java@v5
@@ -32,34 +30,31 @@ jobs:
         with:
           name: maplibre-flutter-demo.apk
           path: example/build/app/outputs/flutter-apk/app-release.apk
-#  build-iOS:
-#    name: Build iOS package
-#    runs-on: macos-latest
-#    defaults:
-#      run:
-#        working-directory: example
-#    steps:
-#      - uses: actions/checkout@v6
-#      - uses: subosito/flutter-action@v2
-#        with:
-#          channel: ${{ env.FLUTTER_CHANNEL }}
-#          cache: true
-#      - uses: maxim-lobanov/setup-cocoapods@v1
-#        with:
-#          podfile-path: example/ios/Podfile.lock
-#      - name: Build iOS package
-#        run: flutter build ios --simulator
-#      - name: Upload Runner.app as artifact
-#        uses: actions/upload-artifact@v6
-#        with:
-#          name: maplibre-flutter-demo.app
-#          path: example/build/ios/iphonesimulator
+  build-ios:
+    name: "[iOS] Build package"
+    runs-on: macos-latest
+    timeout-minutes: 30
+    defaults: { run: { working-directory: examples } }
+    steps:
+      - uses: actions/checkout@v6
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: ${{ env.FLUTTER_CHANNEL }}
+          cache: true
+      - run: flutter config --enable-swift-package-manager
+      - name: "Get Flutter dependencies"
+        run: dart pub get
+      - name: "Build iOS package"
+        run: flutter build ios --simulator --no-codesign
+      - name: Upload Runner.app as artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: maplibre-flutter-demo.app
+          path: examples/build/ios/iphoneos/Runner.app
   build-web:
     name: "Build Web"
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: example
+    defaults: { run: { working-directory: examples } }
     steps:
       - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
@@ -71,9 +66,7 @@ jobs:
   build-web-wasm:
     name: "Build Web WASM"
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: example
+    defaults: { run: { working-directory: examples } }
     steps:
       - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
@@ -82,3 +75,31 @@ jobs:
           cache: true
       - name: Build web
         run: flutter build web --wasm
+  build-windows:
+    name: "[Windows] Build"
+    runs-on: windows-latest
+    defaults: { run: { working-directory: examples } }
+    steps:
+      - uses: actions/checkout@v6
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: ${{ env.FLUTTER_CHANNEL }}
+          cache: true
+      - name: "Get Flutter dependencies"
+        run: dart pub get
+      - name: Build windows
+        run: flutter build windows --debug
+  build-macos:
+    name: "[macOS] Build"
+    runs-on: macos-latest
+    defaults: { run: { working-directory: examples } }
+    steps:
+      - uses: actions/checkout@v6
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: ${{ env.FLUTTER_CHANNEL }}
+          cache: true
+      - name: "Get Flutter dependencies"
+        run: dart pub get
+      - name: Build macOS
+        run: flutter build macos --debug

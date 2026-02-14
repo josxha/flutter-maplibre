@@ -28,6 +28,7 @@ dev_dependencies:
 flutter:
   plugin:
     platforms:
+      implements: maplibre
       web:
         pluginClass: MapLibrePlugin
         fileName: src/maplibre_plugin.dart

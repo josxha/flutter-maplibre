@@ -22,6 +22,8 @@ cd examples
 cd ..
 
 echo "▶ Copy header configuration"
-cp _headers website/build/
+echo "/*
+        Cross-Origin-Embedder-Policy: credentialless
+        Cross-Origin-Opener-Policy: same-origin" > website/build/_headers
 
 echo "✅ Cloudflare Pages build finished successfully"

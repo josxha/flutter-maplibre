@@ -18,8 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
-        with:
-          cache: true
+        with: { cache: true }
       - name: "Get Flutter dependencies"
         run: dart pub get
       - name: Lint analysis
@@ -39,8 +38,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
-        with:
-          cache: true
+        with: { cache: true }
       - name: "Get Flutter dependencies"
         run: dart pub get
       - name: Lint analysis
@@ -65,14 +63,13 @@ jobs:
       fail-fast: false
       matrix:
         sdk: [ '' ] # option to use a matrix test with the lower supported flutter version
-        package: ['maplibre', 'maplibre_webview' ]
+        package: [ 'maplibre', 'maplibre_webview' ]
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v6
       - name: "Setup Flutter SDK"
         uses: subosito/flutter-action@v2
-        with:
-          cache: true
+        with: { cache: true }
       - name: "Get Flutter dependencies"
         run: flutter pub get
       - name: "Run unit tests in package"
@@ -81,14 +78,11 @@ jobs:
       - name: "Run Codecov"
         uses: codecov/codecov-action@v5
         if: ${{ matrix.sdk == '' }}
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        env: { CODECOV_TOKEN: ${ { secrets.CODECOV_TOKEN } } }
   integration-test-ios:
     name: "[iOS] Integration tests"
     runs-on: macOS-latest
-    defaults:
-      run:
-        working-directory: examples
+    defaults: { run: { working-directory: examples } }
     strategy:
       fail-fast: false
       matrix:
@@ -97,8 +91,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
-        with:
-          cache: true
+        with: { cache: true }
       - name: Install dependencies
         run: flutter pub get
       - name: Enable Swift Package Manager
@@ -115,14 +108,11 @@ jobs:
       - name: "Run Codecov"
         uses: codecov/codecov-action@v5
         if: ${{ matrix.os_version == '26.2' }}
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        env: { CODECOV_TOKEN: ${ { secrets.CODECOV_TOKEN } } }
   integration-test-android:
     name: "[Android] Integration tests"
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: examples
+    defaults: { run: { working-directory: examples } }
     strategy:
       fail-fast: false
       matrix:
@@ -132,8 +122,7 @@ jobs:
       - uses: actions/checkout@v6
       - name: "Setup Flutter SDK"
         uses: subosito/flutter-action@v2
-        with:
-          cache: true
+        with: { cache: true }
       - uses: actions/setup-java@v5
         with:
           java-version: '21'
@@ -157,34 +146,33 @@ jobs:
       - name: "Run Codecov"
         uses: codecov/codecov-action@v5
         if: ${{ matrix.api-level == '35' }}
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-#  integration-test-web:
-#    name: "[Web] Integration tests"
-#    runs-on: ubuntu-latest
-#    timeout-minutes: 30
-#    defaults:
-#      run:
-#        working-directory: example
-#    steps:
-#      - uses: actions/checkout@v6
-#      - name: "Setup Flutter SDK"
-#        uses: subosito/flutter-action@v2
-#        with:
-#          cache: true
-#      - name: "Get Flutter dependencies"
-#        run: flutter pub get
-#      - name: "Start chromedriver"
-#        run: |
-#          sudo chromedriver --enable --port=4444 &
-#      - name: "Run integration tests"
-#        run: |
-#          flutter drive \
-#            --driver=test_driver/integration_test.dart \
-#            --target=integration_test/main.dart \
-#            -d web-server \
-#            --release \
-#            --browser-name=chrome
+        env: { CODECOV_TOKEN: ${ { secrets.CODECOV_TOKEN } } }
+  #  integration-test-web:
+  #    name: "[Web] Integration tests"
+  #    runs-on: ubuntu-latest
+  #    timeout-minutes: 30
+  #    defaults:
+  #      run:
+  #        working-directory: example
+  #    steps:
+  #      - uses: actions/checkout@v6
+  #      - name: "Setup Flutter SDK"
+  #        uses: subosito/flutter-action@v2
+  #        with:
+  #          cache: true
+  #      - name: "Get Flutter dependencies"
+  #        run: flutter pub get
+  #      - name: "Start chromedriver"
+  #        run: |
+  #          sudo chromedriver --enable --port=4444 &
+  #      - name: "Run integration tests"
+  #        run: |
+  #          flutter drive \
+  #            --driver=test_driver/integration_test.dart \
+  #            --target=integration_test/main.dart \
+  #            -d web-server \
+  #            --release \
+  #            --browser-name=chrome
   score:
     name: "Package score"
     runs-on: ubuntu-latest
@@ -193,8 +181,7 @@ jobs:
         uses: actions/checkout@v6
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
-        with:
-          cache: true
+        with: { cache: true }
       - name: Install pana
         run: |
           sudo apt-get install webp && \
@@ -207,9 +194,7 @@ jobs:
   build-android:
     name: "[Android] Build APK"
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: examples
+    defaults: { run: { working-directory: examples } }
     strategy:
       fail-fast: false
       matrix:
@@ -239,9 +224,7 @@ jobs:
     name: "[iOS] Build package"
     runs-on: macos-latest
     timeout-minutes: 30
-    defaults:
-      run:
-        working-directory: examples
+    defaults: { run: { working-directory: examples } }
     strategy:
       fail-fast: false
       matrix:
@@ -266,9 +249,7 @@ jobs:
   build-web:
     name: "[Web] Build"
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: examples
+    defaults: { run: { working-directory: examples } }
     strategy:
       fail-fast: false
       matrix:
@@ -286,9 +267,7 @@ jobs:
   build-windows:
     name: "[Windows] Build"
     runs-on: windows-latest
-    defaults:
-      run:
-        working-directory: examples
+    defaults: { run: { working-directory: examples } }
     strategy:
       fail-fast: false
       matrix:
@@ -306,9 +285,7 @@ jobs:
   build-macos:
     name: "[macOS] Build"
     runs-on: macos-latest
-    defaults:
-      run:
-        working-directory: examples
+    defaults: { run: { working-directory: examples } }
     strategy:
       fail-fast: false
       matrix:
@@ -326,9 +303,7 @@ jobs:
   build-web-wasm:
     name: "[Web] Build WASM"
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: examples
+    defaults: { run: { working-directory: examples } }
     strategy:
       fail-fast: false
       matrix:
@@ -349,8 +324,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
-        with:
-          cache: true
+        with: { cache: true }
       - uses: actions/setup-java@v5
         with:
           java-version: '21'

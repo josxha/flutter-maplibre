@@ -16,12 +16,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
+        with: { fetch-depth: 0 }
       - name: "Setup Flutter SDK"
         uses: subosito/flutter-action@v2
-        with:
-          cache: true
+        with: { cache: true }
       - name: Install dependencies
         run: dart pub get
       - name: Run release checks

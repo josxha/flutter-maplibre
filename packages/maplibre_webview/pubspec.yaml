@@ -26,6 +26,7 @@ dev_dependencies:
 
 flutter:
   plugin:
+    implements: maplibre
     platforms:
 #      android:
 #        dartPluginClass: MapLibrePlugin

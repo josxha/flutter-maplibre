@@ -39,6 +39,7 @@ dependency_overrides:
 
 flutter:
   plugin:
+    implements: maplibre
     platforms:
       ios:
         dartPluginClass: MapLibrePlugin

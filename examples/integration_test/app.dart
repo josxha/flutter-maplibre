@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
 
 void main() {
+  // required if using maplibre is embedded in a WebView (windows, macOS)
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const App());
 }
 
