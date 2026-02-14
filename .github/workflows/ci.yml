@@ -177,11 +177,11 @@ jobs:
         run: flutter clean
       - name: "Install dependencies"
         run: flutter pub get
-      - name: "Install ChromeDriver matching Chrome"
+      - name: "Install ChromeDriver (stable)"
         run: |
-          CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+')
-          npm install -g chromedriver@$CHROME_VERSION
-          echo "$(npm bin -g)/chromedriver" >> $GITHUB_PATH
+          npm install -g @puppeteer/browsers
+          npx @puppeteer/browsers install chromedriver@stable
+          echo "$HOME/.cache/puppeteer/chromedriver/linux-*/chromedriver" >> $GITHUB_PATH
       - name: "Start ChromeDriver"
         run: chromedriver --port=4444 --allowed-ips='' &
       - name: "Run web integration tests with Xvfb"
