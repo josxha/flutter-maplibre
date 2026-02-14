@@ -62,7 +62,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.35.6', '' ]
+        sdk: [ '3.38.10', '' ]
         package: [ 'maplibre', 'maplibre_webview' ]
     timeout-minutes: 30
     steps:
@@ -201,7 +201,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.35.6', '' ]
+        sdk: [ '3.38.10', '' ]
     steps:
       - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
@@ -213,9 +213,6 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: 'gradle'
-      - name: "Enable native assets" # Native assets shipped in Flutter 3.38
-        if: ${{ matrix.sdk == '3.35.6' }}
-        run: flutter config --enable-native-assets
       - name: "Get Flutter dependencies"
         run: dart pub get
       - name: Build example APK
@@ -234,7 +231,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.35.6', '' ]
+        sdk: [ '3.38.10', '' ]
     steps:
       - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
@@ -243,9 +240,6 @@ jobs:
           cache: true
       - name: "Enable Swift Package Manager" # SPM requires config flag
         run: flutter config --enable-swift-package-manager
-      - name: "Enable native assets" # Native assets shipped in Flutter 3.38
-        if: ${{ matrix.sdk == '3.35.6' }}
-        run: flutter config --enable-native-assets
       - name: "Get Flutter dependencies"
         run: dart pub get
       - name: "Build iOS package"
@@ -263,16 +257,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.35.6', '' ]
+        sdk: [ '3.38.10', '' ]
     steps:
       - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ matrix.sdk }}
           cache: true
-      - name: "Enable native assets" # Native assets shipped in Flutter 3.38
-        if: ${{ matrix.sdk == '3.35.6' }}
-        run: flutter config --enable-native-assets
       - name: "Get Flutter dependencies"
         run: dart pub get
       - name: Build web
@@ -284,16 +275,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.35.6', '' ]
+        sdk: [ '3.38.10', '' ]
     steps:
       - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ matrix.sdk }}
           cache: true
-      - name: "Enable native assets" # Native assets shipped in Flutter 3.38
-        if: ${{ matrix.sdk == '3.35.6' }}
-        run: flutter config --enable-native-assets
       - name: "Get Flutter dependencies"
         run: dart pub get
       - name: Build windows
@@ -305,16 +293,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.35.6', '' ]
+        sdk: [ '3.38.10', '' ]
     steps:
       - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ matrix.sdk }}
           cache: true
-      - name: "Enable native assets" # Native assets shipped in Flutter 3.38
-        if: ${{ matrix.sdk == '3.35.6' }}
-        run: flutter config --enable-native-assets
       - name: "Get Flutter dependencies"
         run: dart pub get
       - name: Build macOS
@@ -326,16 +311,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.35.6', '' ]
+        sdk: [ '3.38.10', '' ]
     steps:
       - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ matrix.sdk }}
           cache: true
-      - name: "Enable native assets" # Native assets shipped in Flutter 3.38
-        if: ${{ matrix.sdk == '3.35.6' }}
-        run: flutter config --enable-native-assets
       - name: "Get Flutter dependencies"
         run: dart pub get
       - name: Build web
@@ -352,9 +334,6 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: 'gradle'
-      - name: "Enable native assets" # Native assets shipped in Flutter 3.38
-        if: ${{ matrix.sdk == '3.35.6' }}
-        run: flutter config --enable-native-assets
       - name: "Get Flutter dependencies"
         run: dart pub get
       - name: Build example APK
