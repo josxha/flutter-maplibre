@@ -213,6 +213,9 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: 'gradle'
+      - name: "Enable native assets" # Native assets shipped in Flutter 3.38
+        if: ${{ matrix.sdk == '3.35.6' }}
+        run: flutter config --enable-native-assets
       - name: "Get Flutter dependencies"
         run: dart pub get
       - name: Build example APK
@@ -238,14 +241,15 @@ jobs:
         with:
           flutter-version: ${{ matrix.sdk }}
           cache: true
-      - run: flutter config --enable-swift-package-manager
+      - name: "Enable Swift Package Manager" # SPM requires config flag
+        run: flutter config --enable-swift-package-manager
+      - name: "Enable native assets" # Native assets shipped in Flutter 3.38
+        if: ${{ matrix.sdk == '3.35.6' }}
+        run: flutter config --enable-native-assets
       - name: "Get Flutter dependencies"
         run: dart pub get
       - name: "Build iOS package"
         run: flutter build ios --simulator --no-codesign
-      - name: "Enable native assets"
-        if: ${{ matrix.sdk == '3.35.6' }} # Native assets shipped in Flutter 3.38
-        run: flutter config --enable-native-assets
       - name: Upload Runner.app as artifact
         if: ${{ matrix.sdk == '' }}
         uses: actions/upload-artifact@v6
@@ -266,6 +270,9 @@ jobs:
         with:
           flutter-version: ${{ matrix.sdk }}
           cache: true
+      - name: "Enable native assets" # Native assets shipped in Flutter 3.38
+        if: ${{ matrix.sdk == '3.35.6' }}
+        run: flutter config --enable-native-assets
       - name: "Get Flutter dependencies"
         run: dart pub get
       - name: Build web
@@ -284,6 +291,9 @@ jobs:
         with:
           flutter-version: ${{ matrix.sdk }}
           cache: true
+      - name: "Enable native assets" # Native assets shipped in Flutter 3.38
+        if: ${{ matrix.sdk == '3.35.6' }}
+        run: flutter config --enable-native-assets
       - name: "Get Flutter dependencies"
         run: dart pub get
       - name: Build windows
@@ -302,6 +312,9 @@ jobs:
         with:
           flutter-version: ${{ matrix.sdk }}
           cache: true
+      - name: "Enable native assets" # Native assets shipped in Flutter 3.38
+        if: ${{ matrix.sdk == '3.35.6' }}
+        run: flutter config --enable-native-assets
       - name: "Get Flutter dependencies"
         run: dart pub get
       - name: Build macOS
@@ -320,6 +333,9 @@ jobs:
         with:
           flutter-version: ${{ matrix.sdk }}
           cache: true
+      - name: "Enable native assets" # Native assets shipped in Flutter 3.38
+        if: ${{ matrix.sdk == '3.35.6' }}
+        run: flutter config --enable-native-assets
       - name: "Get Flutter dependencies"
         run: dart pub get
       - name: Build web
@@ -336,6 +352,9 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: 'gradle'
+      - name: "Enable native assets" # Native assets shipped in Flutter 3.38
+        if: ${{ matrix.sdk == '3.35.6' }}
+        run: flutter config --enable-native-assets
       - name: "Get Flutter dependencies"
         run: dart pub get
       - name: Build example APK
