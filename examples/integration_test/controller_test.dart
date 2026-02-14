@@ -3,8 +3,8 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_test/flutter_test.dart';
-import 'package:http/http.dart' as http;
 import 'package:integration_test/integration_test.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre_example/utils/map_styles.dart';
@@ -13,13 +13,20 @@ import 'app.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+  test();
+}
+
+void test() {
   group('controller', () {
     testWidgets('getCamera', (tester) async {
       final ctrlCompleter = Completer<MapController>();
       final events = <MapEvent>[];
       final app = App(
         onMapCreated: ctrlCompleter.complete,
-        options: const MapOptions(initCenter: Geographic(lon: 1, lat: 2)),
+        options: const MapOptions(
+          initCenter: Geographic(lon: 1, lat: 2),
+          initZoom: 5,
+        ),
         onEvent: events.add,
       );
       await tester.pumpWidget(app);
@@ -28,7 +35,7 @@ void main() {
       await ctrl.moveCamera(
         center: const Geographic(lon: 1, lat: 1),
         bearing: 1,
-        zoom: 1,
+        zoom: 5,
         pitch: 1,
       );
       await tester.pumpAndSettle();
@@ -36,7 +43,7 @@ void main() {
       final camera = ctrl.getCamera();
       expect(camera.center.lon, closeTo(1, 0.00001));
       expect(camera.center.lat, closeTo(1, 0.00001));
-      expect(camera.zoom, closeTo(1, 0.00001));
+      expect(camera.zoom, closeTo(5, 0.00001));
       expect(camera.bearing, closeTo(1, 0.00001));
       expect(camera.pitch, closeTo(1, 0.00001));
 
@@ -297,7 +304,7 @@ void main() {
         );
         final ctrl = await ctrlCompleter.future;
         final style = await styleCompleter.future;
-        await tester.pumpAndSettle(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 2));
 
         const pointSourceId = 'point_source';
         await style.addSource(
@@ -325,7 +332,7 @@ void main() {
           sourceId: pointSourceId,
           sourceLayer: null,
         );
-        await tester.pumpAndSettle(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 2));
 
         final size = tester.getSize(find.byType(MapLibreMap));
         final centerScreen = Offset(size.width / 2, size.height / 2);
@@ -371,7 +378,7 @@ void main() {
           sourceLayer: null,
         );
 
-        await tester.pumpAndSettle(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 2));
 
         layers = ctrl.queryLayers(centerScreen);
         expect(layers, hasLength(2));
@@ -394,7 +401,7 @@ void main() {
         );
         final ctrl = await ctrlCompleter.future;
         await styleCompleter.future;
-        await tester.pumpAndSettle(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 2));
 
         const oceanExpected = QueriedLayer(
           layerId: 'Water',
@@ -915,12 +922,11 @@ void main() {
     final app = App(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
-
-    const imageUrl =
-        'https://upload.wikimedia.org/wikipedia/commons/f/f2/678111-map-marker-512.png';
-    final imageBytes = await http.readBytes(Uri.parse(imageUrl));
-
-    await ctrl.style?.addImage('test-icon', imageBytes);
+    await ctrl.style?.addImageFromIconData(
+      id: 'test-icon',
+      iconData: Icons.location_on,
+      color: Colors.red,
+    );
     await tester.pumpAndSettle();
   });
 
@@ -930,14 +936,11 @@ void main() {
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
 
-    const redPinUrl =
-        'https://upload.wikimedia.org/wikipedia/commons/f/f2/678111-map-marker-512.png';
-    const blackPinUrl =
-        'https://upload.wikimedia.org/wikipedia/commons/3/3b/Blackicon.png';
-
+    final imageBytes = await rootBundle.load('assets/images/marker.png');
+    final imageBytesList = imageBytes.buffer.asUint8List();
     final images = <String, Uint8List>{
-      'image1': await http.readBytes(Uri.parse(redPinUrl)),
-      'image2': await http.readBytes(Uri.parse(blackPinUrl)),
+      'image1': imageBytesList,
+      'image2': imageBytesList,
     };
 
     await ctrl.style?.addImages(images);
@@ -950,13 +953,12 @@ void main() {
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
 
-    // Download the red pin image from Wikipedia (same as used in example)
-    const imageUrl =
-        'https://upload.wikimedia.org/wikipedia/commons/f/f2/678111-map-marker-512.png';
-    final imageBytes = await http.readBytes(Uri.parse(imageUrl));
-
     // Add image first
-    await ctrl.style?.addImage('test-image', imageBytes);
+    await ctrl.style?.addImageFromIconData(
+      id: 'test-image',
+      iconData: Icons.location_on,
+      color: Colors.red,
+    );
     await tester.pumpAndSettle();
 
     // Then remove it

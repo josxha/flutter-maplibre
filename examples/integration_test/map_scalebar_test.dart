@@ -10,17 +10,20 @@ import 'app.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+  test();
+}
+
+void test() {
   group('MapScalebar', () {
     testWidgets('show and update', (tester) async {
       final ctrlCompleter = Completer<MapController>();
       final app = App(
         onMapCreated: ctrlCompleter.complete,
-        options: const MapOptions(initCenter: Geographic(lon: 0, lat: 0)),
         children: const [MapScalebar()],
       );
       await tester.pumpWidget(app);
       final ctrl = await ctrlCompleter.future;
-      await tester.pumpAndSettle(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 2));
 
       // Check if the scalebar is visible.
       final customPaintFinder = find.descendant(
@@ -34,7 +37,7 @@ void main() {
 
       for (final zoom in zoomLevels) {
         await ctrl.moveCamera(zoom: zoom);
-        await tester.pumpAndSettle(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 2));
 
         final size = tester.getSize(customPaintFinder);
         widths.add(size.width);
@@ -48,7 +51,7 @@ void main() {
         final scalebarLat = ctrl.toLngLat(scalebarCenter).lat;
         final metersPerPixel = ctrl.getMetersPerPixelAtLatitude(scalebarLat);
         final expected = scaleBarPainter.meters / metersPerPixel;
-        expect(expected, closeTo(size.width, expected * 0.01));
+        expect(size.width, closeTo(expected, 1));
       }
 
       // Ensure that the width of the scalebar is different for each zoom level.

@@ -9,8 +9,8 @@ documentation: https://flutter-maplibre.pages.dev/docs/index/
 platforms: { web: }
 
 environment:
-  sdk: '>=3.9.0 <4.0.0'
-  flutter: '>=3.35.0'
+  sdk: '>=3.10.0 <4.0.0'
+  flutter: '>=3.38.0'
 
 resolution: workspace
 
@@ -28,6 +28,7 @@ dev_dependencies:
 flutter:
   plugin:
     platforms:
+      implements: maplibre
       web:
         pluginClass: MapLibrePlugin
         fileName: src/maplibre_plugin.dart

@@ -7,9 +7,10 @@ comment:
 
 ignore:
   - "**/*.g.dart"
-  - "maplibre/lib/src/platform/android/jni/**"
-  - "example/**"
-  - "maplibre_ios/**"
+  - "**/*.g.dart.m"
+  - "examples/**"
+  - "tool/**"
+  - "packages/**/tool/**"
 
 github_checks:
   annotations: false
