@@ -28,6 +28,7 @@ flutter:
   config:
     enable-swift-package-manager: true
   assets:
+    - assets/images/
     - assets/styles/
     - assets/geojson/
 
