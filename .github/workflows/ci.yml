@@ -68,5 +68,14 @@ jobs:
         run: flutter config --enable-web
       - name: "Install dependencies"
         run: flutter pub get
+      - name: "Install ChromeDriver"
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y chromium-chromedriver
+          echo "/usr/lib/chromium-browser" >> $GITHUB_PATH
+      - name: "Start ChromeDriver"
+        run: |
+          chromedriver --port=4444 &
+          sleep 2
       - name: "Run web integration tests"
         run: xvfb-run -a flutter drive --driver=test_driver/integration_test.dart --target=integration_test/main.dart -d chrome --timeout 120 --dart-define=FLUTTER_WEB_USE_SKIA=true
