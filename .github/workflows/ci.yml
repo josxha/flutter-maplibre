@@ -56,8 +56,6 @@ jobs:
         sdk: ['3.38.10', '']
     env:
       CI: true
-      CHROME_EXECUTABLE: ${{ steps.setup-chrome.outputs.chrome-path }}
-      CHROMEDRIVER_PATH: ${{ steps.setup-chromedriver.outputs.chromedriver-path }}
     steps:
       - name: "Checkout repository"
         uses: actions/checkout@v4
@@ -68,10 +66,14 @@ jobs:
           cache: true
       - name: "Setup Chrome"
         id: setup-chrome
-        uses: browser-actions/setup-chrome@v1
+        uses: browser-actions/setup-chrome@v2
       - name: "Setup ChromeDriver"
         id: setup-chromedriver
-        uses: browser-actions/setup-chromedriver@v1
+        uses: nanasess/setup-chromedriver@v2
+      - name: "Export Chrome paths"
+        run: |
+          echo "CHROME_EXECUTABLE=${{ steps.setup-chrome.outputs.chrome-path }}" >> $GITHUB_ENV
+          echo "CHROMEDRIVER_PATH=$(which chromedriver)" >> $GITHUB_ENV
       - name: "Enable Flutter web support"
         run: flutter config --enable-web
       - name: "Install dependencies"
