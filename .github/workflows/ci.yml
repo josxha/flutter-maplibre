@@ -52,6 +52,7 @@ jobs:
             --driver=test_driver/integration_test.dart \
             --target=integration_test/main.dart \
             -d chrome \
+            --no-headless \
             --web-browser-flag=--enable-webgl \
             --web-browser-flag=--ignore-gpu-blocklist \
             --web-browser-flag=--use-gl=swiftshader \
