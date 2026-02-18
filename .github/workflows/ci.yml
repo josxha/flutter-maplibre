@@ -190,8 +190,6 @@ jobs:
             --driver=test_driver/integration_test.dart \
             --target=integration_test/main.dart \
             -d chrome \
-            --browser-flag="--disable-gpu" \
-            --browser-flag="--use-gl=swiftshader" \
             --timeout 120 \
             --dart-define=FLUTTER_WEB_USE_SKIA=true
   score:
