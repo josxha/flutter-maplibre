@@ -173,11 +173,9 @@ jobs:
           cache: true
       - name: "Enable Flutter web support"
         run: flutter config --enable-web
-      - name: "Clean previous builds"
-        run: flutter clean
       - name: "Install dependencies"
         run: flutter pub get
-      - name: "Install ChromeDriver (stable)"
+      - name: "Install ChromeDriver"
         run: |
           npm install -g @puppeteer/browsers
           npx @puppeteer/browsers install chromedriver@stable
