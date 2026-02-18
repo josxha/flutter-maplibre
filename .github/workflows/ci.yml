@@ -22,7 +22,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: ['3.38.10', '']
+        sdk: ['']
     env:
       CI: true
     steps:
@@ -51,4 +51,8 @@ jobs:
           xvfb-run -a flutter drive \
             --driver=test_driver/integration_test.dart \
             --target=integration_test/main.dart \
-            -d chrome
+            -d chrome \
+            --web-browser-flag=--enable-webgl \
+            --web-browser-flag=--ignore-gpu-blocklist \
+            --web-browser-flag=--use-gl=swiftshader \
+            --web-browser-flag=--use-angle=swiftshader
