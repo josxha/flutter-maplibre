@@ -56,7 +56,6 @@ jobs:
         sdk: ['3.38.10', '']
     env:
       CI: true
-      CHROME_FLAGS: --no-sandbox
     steps:
       - name: "Checkout repository"
         uses: actions/checkout@v4
