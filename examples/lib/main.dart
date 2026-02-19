@@ -27,8 +27,7 @@ Widget _createTestWidget(final BuildContext context) {
             } else if (_control == 1) { // second click will center camera on screen center (green circle)
               _mapController.moveCamera(center: _point2, zoom: 11);
             } else if (_control == 2) { // third click will fit bounds so both points fit on the padded region (red rectangle)
-              final double scaledPadding = View.of(context).devicePixelRatio * _padding; // padding value should not have to be scaled with DPR
-              _mapController.fitBounds(bounds: LngLatBounds.fromPoints([_point1, _point2]), nativeDuration: Durations.medium2, padding: EdgeInsets.only(bottom: scaledPadding));
+              _mapController.fitBounds(bounds: LngLatBounds.fromPoints([_point1, _point2]), nativeDuration: Durations.medium2, padding: EdgeInsets.only(bottom: _padding));
             } else if (_control == 3) { // fourth click should center camera on screen center (green circle), but actually centers camera on padded region (red rectangle)
               _mapController.moveCamera(center: _point2, zoom: 11);
             }
