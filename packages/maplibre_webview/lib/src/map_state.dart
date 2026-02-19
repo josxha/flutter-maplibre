@@ -321,11 +321,10 @@ class MapLibreMapStateWebView extends MapLibreMapState {
       webMaxZoom.isFinite ? webMaxZoom : double.nan,
       Endian.little,
     );
-    final pixelRatio = View.of(context).devicePixelRatio;
-    data.setFloat64(73, padding.top / pixelRatio, Endian.little);
-    data.setFloat64(81, padding.bottom / pixelRatio, Endian.little);
-    data.setFloat64(89, padding.left / pixelRatio, Endian.little);
-    data.setFloat64(97, padding.right / pixelRatio, Endian.little);
+    data.setFloat64(73, padding.top, Endian.little);
+    data.setFloat64(81, padding.bottom, Endian.little);
+    data.setFloat64(89, padding.left, Endian.little);
+    data.setFloat64(97, padding.right, Endian.little);
     data.setFloat64(
       105,
       webMaxDuration != null
@@ -383,11 +382,10 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     data.setFloat64(17, zoom ?? currCamera.zoom, Endian.little);
     data.setFloat64(25, pitch ?? currCamera.pitch, Endian.little);
     data.setFloat64(33, bearing ?? currCamera.bearing, Endian.little);
-    final pixelRatio = View.of(context).devicePixelRatio;
-    data.setFloat64(41, padding.top / pixelRatio, Endian.little);
-    data.setFloat64(49, padding.bottom / pixelRatio, Endian.little);
-    data.setFloat64(57, padding.left / pixelRatio, Endian.little);
-    data.setFloat64(65, padding.right / pixelRatio, Endian.little);
+    data.setFloat64(41, padding.top, Endian.little);
+    data.setFloat64(49, padding.bottom, Endian.little);
+    data.setFloat64(57, padding.left, Endian.little);
+    data.setFloat64(65, padding.right, Endian.little);
     data.setFloat64(
       73,
       webMaxDuration != null ? webMaxDuration.inSeconds.toDouble() : double.nan,
@@ -415,11 +413,10 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     data.setFloat64(17, zoom ?? currCamera.zoom, Endian.little);
     data.setFloat64(25, pitch ?? currCamera.pitch, Endian.little);
     data.setFloat64(33, bearing ?? currCamera.bearing, Endian.little);
-    final pixelRatio = View.of(context).devicePixelRatio;
-    data.setFloat64(41, padding.top / pixelRatio, Endian.little);
-    data.setFloat64(49, padding.bottom / pixelRatio, Endian.little);
-    data.setFloat64(57, padding.left / pixelRatio, Endian.little);
-    data.setFloat64(65, padding.right / pixelRatio, Endian.little);
+    data.setFloat64(41, padding.top, Endian.little);
+    data.setFloat64(49, padding.bottom, Endian.little);
+    data.setFloat64(57, padding.left, Endian.little);
+    data.setFloat64(65, padding.right, Endian.little);
     _webSocket?.sendBytes(data);
   }
 

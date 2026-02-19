@@ -242,14 +242,13 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   }) async {
     _nextGestureCausedByController = true;
     final camera = getCamera();
-    final pixelRatio = View.of(context).devicePixelRatio;
     _map.jumpTo(
       interop.JumpToOptions(
         center: center?.toLngLat() ?? camera.center.toLngLat(),
         zoom: zoom ?? camera.zoom,
         bearing: bearing ?? camera.bearing,
         pitch: pitch ?? camera.pitch,
-        padding: padding.toPaddingOptions(pixelRatio: pixelRatio),
+        padding: padding.toPaddingOptions(),
       ),
     );
   }
@@ -268,7 +267,6 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     final destination = center?.toLngLat();
     _nextGestureCausedByController = true;
     final camera = getCamera();
-    final pixelRatio = View.of(context).devicePixelRatio;
     _map.flyTo(
       interop.FlyToOptions(
         center: destination,
@@ -277,7 +275,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         pitch: pitch ?? camera.pitch,
         speed: webSpeed,
         maxDuration: webMaxDuration?.inMilliseconds,
-        padding: padding.toPaddingOptions(pixelRatio: pixelRatio),
+        padding: padding.toPaddingOptions(),
       ),
     );
     final completer = _movementCompleter = Completer<interop.MapLibreEvent>();
@@ -320,7 +318,6 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     EdgeInsets padding = EdgeInsets.zero,
   }) async {
     final camera = getCamera();
-    final pixelRatio = View.of(context).devicePixelRatio;
     _map.fitBounds(
       bounds.toJsLngLatBounds(),
       interop.FitBoundsOptions(
@@ -328,7 +325,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         maxZoom: webMaxZoom,
         linear: webLinear,
         maxDuration: webMaxDuration?.inMilliseconds,
-        padding: padding.toPaddingOptions(pixelRatio: pixelRatio),
+        padding: padding.toPaddingOptions(),
         speed: webSpeed,
         pitch: pitch ?? camera.pitch,
         bearing: bearing ?? camera.bearing,

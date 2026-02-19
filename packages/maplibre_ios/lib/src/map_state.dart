@@ -134,10 +134,9 @@ final class MapLibreMapStateIos extends MapLibreMapState {
     if (center != null) {
       ffiCamera.centerCoordinate = center.toCLLocationCoordinate2D();
     }
-    final pixelRatio = View.of(context).devicePixelRatio;
     mapView.flyToCamera$1(
       ffiCamera,
-      edgePadding: padding.toUIEdgeInsets(pixelRatio: pixelRatio),
+      edgePadding: padding.toUIEdgeInsets(),
       withDuration: nativeDuration.inSeconds.toDouble(),
     );
   }
@@ -177,10 +176,9 @@ final class MapLibreMapStateIos extends MapLibreMapState {
     final mapView = _mapView;
     if (mapView == null) return;
 
-    final pixelRatio = View.of(context).devicePixelRatio;
     mapView.setVisibleCoordinateBounds$1(
       bounds.toMLNCoordinateBounds(),
-      edgePadding: padding.toUIEdgeInsets(pixelRatio: pixelRatio),
+      edgePadding: padding.toUIEdgeInsets(),
       animated: true,
     );
   }
@@ -214,11 +212,10 @@ final class MapLibreMapStateIos extends MapLibreMapState {
     if (center != null) {
       ffiCamera.centerCoordinate = center.toCLLocationCoordinate2D();
     }
-    final pixelRatio = View.of(context).devicePixelRatio;
     mapView.setCamera$3(
       ffiCamera,
       withDuration: 0,
-      edgePadding: padding.toUIEdgeInsets(pixelRatio: pixelRatio),
+      edgePadding: padding.toUIEdgeInsets(),
     );
   }
 
