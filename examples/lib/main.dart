@@ -1,99 +1,92 @@
 import 'package:flutter/material.dart';
-import 'package:maplibre_example/animation_page.dart';
-import 'package:maplibre_example/controller_page.dart';
-import 'package:maplibre_example/events_page.dart';
-import 'package:maplibre_example/features_query_page.dart';
-import 'package:maplibre_example/gestures_page.dart';
-import 'package:maplibre_example/kiosk_page.dart';
-import 'package:maplibre_example/layers_circle_page.dart';
-import 'package:maplibre_example/layers_marker_page.dart';
-import 'package:maplibre_example/layers_mixed_page.dart';
-import 'package:maplibre_example/layers_polygon_page.dart';
-import 'package:maplibre_example/layers_polyline_page.dart';
-import 'package:maplibre_example/layers_widget_marker_page.dart';
-import 'package:maplibre_example/menu_page.dart';
-import 'package:maplibre_example/offline_page.dart';
-import 'package:maplibre_example/parameters_page.dart';
-import 'package:maplibre_example/permissions_page.dart';
-import 'package:maplibre_example/pmtiles_page.dart';
-import 'package:maplibre_example/style_layers_circle_page.dart';
-import 'package:maplibre_example/style_layers_fill_extrusion_page.dart';
-import 'package:maplibre_example/style_layers_fill_page.dart';
-import 'package:maplibre_example/style_layers_heatmap_page.dart';
-import 'package:maplibre_example/style_layers_hillshade_page.dart';
-import 'package:maplibre_example/style_layers_line_page.dart';
-import 'package:maplibre_example/style_layers_raster_page.dart';
-import 'package:maplibre_example/style_layers_symbol_page.dart';
-import 'package:maplibre_example/style_sources_vector_page.dart';
-import 'package:maplibre_example/styled_map_page.dart';
-import 'package:maplibre_example/translucent_map_page.dart';
-import 'package:maplibre_example/two_maps_page.dart';
-import 'package:maplibre_example/user_location_page.dart';
-import 'package:maplibre_example/widget_layer_interactive_page.dart';
-import 'package:maplibre_example/widget_layer_page.dart';
+import 'package:maplibre/maplibre.dart';
 
 void main() {
-  // required if using maplibre is embedded in a WebView (windows, macOS)
-  WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+  runApp(MaterialApp(
+    builder: (context, child) => _createTestWidget(context),
+  ));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+const Geographic _point1 = Geographic(lat: 43.8, lon: 7.1);
+const Geographic _point2 = Geographic(lat: 43.6, lon: 7.0);
+const double _padding = 400;
+late MapController _mapController;
+int _control = 0;
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'MapLibre Demo',
-      initialRoute: MenuPage.location,
-      theme: ThemeData(colorSchemeSeed: Colors.blue),
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
-        colorSchemeSeed: Colors.blue,
+Widget _createTestWidget(final BuildContext context) {
+  return Stack(
+    children: [
+      MapLibreMap(
+        onMapCreated: (controller) {
+          _mapController = controller;
+        },
+        onEvent: (event) {
+          if (event is MapEventClick) {
+            if (_control == 0) { // first click will fit bounds so both points fit on the entire screen
+              _mapController.fitBounds(bounds: LngLatBounds.fromPoints([_point1, _point2]), nativeDuration: Durations.medium2);
+            } else if (_control == 1) { // second click will center camera on screen center (green circle)
+              _mapController.moveCamera(center: _point2, zoom: 11);
+            } else if (_control == 2) { // third click will fit bounds so both points fit on the padded region (red rectangle)
+              final double scaledPadding = View.of(context).devicePixelRatio * _padding; // padding value should not have to be scaled with DPR
+              _mapController.fitBounds(bounds: LngLatBounds.fromPoints([_point1, _point2]), nativeDuration: Durations.medium2, padding: EdgeInsets.only(bottom: scaledPadding));
+            } else if (_control == 3) { // fourth click should center camera on screen center (green circle), but actually centers camera on padded region (red rectangle)
+              _mapController.moveCamera(center: _point2, zoom: 11);
+            }
+            _control = (_control + 1) % 4;
+          }
+        },
+        options: const MapOptions(
+          initCenter: _point2,
+          initZoom: 11,
+          minZoom: 8,
+          maxZoom: 14,
+          gestures: MapGestures.none(pan: true, zoom: true),
+        ),
+        layers: const [
+          CircleLayer(
+            points: [
+              Feature(geometry: Point(_point1)),
+              Feature(geometry: Point(_point2)),
+            ],
+            color: Colors.black,
+            radius: 20,
+          ),
+        ],
       ),
-      routes: {
-        MenuPage.location: (context) => const MenuPage(),
-        TranslucentMapPage.location: (context) => const TranslucentMapPage(),
-        PmTilesPage.location: (context) => const PmTilesPage(),
-        KioskPage.location: (context) => const KioskPage(),
-        AnimationPage.location: (context) => const AnimationPage(),
-        GesturesPage.location: (context) => const GesturesPage(),
-        EventsPage.location: (context) => const EventsPage(),
-        StyledMapPage.location: (context) => const StyledMapPage(),
-        UserLocationPage.location: (context) => const UserLocationPage(),
-        WidgetLayerPage.location: (context) => const WidgetLayerPage(),
-        WidgetLayerInteractivePage.location: (context) =>
-            const WidgetLayerInteractivePage(),
-        OfflinePage.location: (context) => const OfflinePage(),
-        PermissionsPage.location: (context) => const PermissionsPage(),
-        StyleLayersSymbolPage.location: (context) =>
-            const StyleLayersSymbolPage(),
-        StyleLayersCirclePage.location: (context) =>
-            const StyleLayersCirclePage(),
-        StyleLayersHeatmapPage.location: (context) =>
-            const StyleLayersHeatmapPage(),
-        StyleLayersHillshadePage.location: (context) =>
-            const StyleLayersHillshadePage(),
-        StyleLayersFillPage.location: (context) => const StyleLayersFillPage(),
-        StyleLayersFillExtrusionPage.location: (context) =>
-            const StyleLayersFillExtrusionPage(),
-        StyleLayersRasterPage.location: (context) =>
-            const StyleLayersRasterPage(),
-        StyleSourcesVectorPage.location: (context) =>
-            const StyleSourcesVectorPage(),
-        StyleLayersLinePage.location: (context) => const StyleLayersLinePage(),
-        LayersMixedPage.location: (context) => const LayersMixedPage(),
-        LayersCirclePage.location: (context) => const LayersCirclePage(),
-        LayersMarkerPage.location: (context) => const LayersMarkerPage(),
-        LayersWidgetMarkerPage.location: (context) =>
-            const LayersWidgetMarkerPage(),
-        LayersPolylinePage.location: (context) => const LayersPolylinePage(),
-        LayersPolygonPage.location: (context) => const LayersPolygonPage(),
-        ParametersPage.location: (context) => const ParametersPage(),
-        FeaturesQueryPage.location: (context) => const FeaturesQueryPage(),
-        ControllerPage.location: (context) => const ControllerPage(),
-        TwoMapsPage.location: (context) => const TwoMapsPage(),
-      },
-    );
-  }
+      const IgnorePointer(
+        child: Padding(
+          padding: EdgeInsetsGeometry.only(bottom: _padding),
+          child: DecoratedBox(
+            decoration: BoxDecoration(border: Border.fromBorderSide(BorderSide(width: 3, color: Colors.red))),
+            child: Align(
+              alignment: Alignment.center,
+              child: SizedBox(
+                width: 20,
+                height: 20,
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+      const Align(
+        alignment: Alignment.center,
+        child: SizedBox(
+          width: 20,
+          height: 20,
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              color: Colors.green,
+              shape: BoxShape.circle,
+            ),
+          ),
+        ),
+      ),
+    ],
+  );
 }
