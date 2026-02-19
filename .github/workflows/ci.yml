@@ -56,7 +56,7 @@ jobs:
         sdk: ['3.38.10', '']
     env:
       CI: true
-      CHROME_FLAGS: --no-sandbox --disable-dev-shm-usage
+      CHROME_FLAGS: --no-sandbox
     steps:
       - name: "Checkout repository"
         uses: actions/checkout@v4
@@ -84,4 +84,4 @@ jobs:
           "$CHROMEDRIVER_PATH" --port=4444 &
           sleep 2
       - name: "Run web integration tests"
-        run: xvfb-run -a flutter drive --driver=test_driver/integration_test.dart --target=integration_test/main.dart -d chrome --timeout 600 --dart-define=FLUTTER_WEB_USE_SKIA=true
+        run: xvfb-run -a flutter drive --driver=test_driver/integration_test.dart --target=integration_test/main.dart -d chrome --timeout 120 --dart-define=FLUTTER_WEB_USE_SKIA=true
