@@ -15,6 +15,7 @@ dependencies:
   go_router: ^17.0.0
   http: ^1.2.2
   maplibre: ^0.3.4
+  maplibre_webview: ^0.3.4
 
 dev_dependencies:
   flutter_launcher_icons: ^0.14.3
