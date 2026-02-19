@@ -28,7 +28,6 @@ dependencies:
   maplibre_ios: ^0.3.4
   maplibre_platform_interface: ^0.3.4
   maplibre_web: ^0.3.4
-  maplibre_webview: ^0.3.4
   pointer_interceptor: ^0.10.1+2
   url_launcher: ^6.3.0
 
