@@ -494,6 +494,7 @@ final class MapLibreMapStateIos extends MapLibreMapState {
   }
 
   void _onCameraMoved(MLNMapView mapView) {
+    if (!mounted) return;
     final ffiCamera = mapView.camera;
     final mapCamera = MapCamera(
       center: ffiCamera.centerCoordinate.toGeographic(),
