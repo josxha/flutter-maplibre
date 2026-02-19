@@ -47,6 +47,16 @@ android {
 
     compileSdk = 35
 
+    flavorDimensions += ["maplibre-renderer"]
+    productFlavors {
+        opengl {
+            dimension "maplibre-renderer"
+        }
+        vulkan {
+            dimension "maplibre-renderer"
+        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -65,12 +75,6 @@ android {
         minSdk = 21
     }
 
-    dependencies {
-        api 'org.maplibre.gl:android-sdk:12.3.+'
-        testImplementation "org.jetbrains.kotlin:kotlin-test"
-        testImplementation "org.mockito:mockito-core:5.21.+"
-    }
-
     testOptions {
         unitTests.all {
             useJUnitPlatform()
@@ -82,6 +86,15 @@ android {
             }
         }
     }
+}
+
+dependencies {
+    // Renderer-specific MapLibre SDKs
+    openglApi  "org.maplibre.gl:android-sdk-opengl:12.3.+"
+    vulkanApi  "org.maplibre.gl:android-sdk-vulkan:12.3.+"
+
+    testImplementation "org.jetbrains.kotlin:kotlin-test"
+    testImplementation "org.mockito:mockito-core:5.21.+"
 }
 
 ktlint {
