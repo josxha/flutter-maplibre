@@ -2,19 +2,38 @@ name: Bug Report
 description: Report a bug
 labels: [ "bug" ]
 body:
-  - type: dropdown
-    id: platform
+  - type: checkbox
+    id: platforms
     attributes:
-      label: Platforms
-      description: On what platforms does the bug happen?
-      options: [ "Please Select", "Android", "iOS", "Web", "MacOS", "Windows", "Linux", "All" ]
+      label: Affected Platforms
+      description: Which platforms did you encounter the bug on? Please select all that apply.
+      options:
+        - id: android
+          label: Android
+        - id: ios
+          label: iOS
+        - id: web
+          label: Web
+        - id: windows
+          label: Windows
+        - id: macos
+          label: macOS
+        - id: linux
+          label: Linux
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: Operating System Version
+      description: What Operating System version did you use? (e.g. Windows 10, macOS 12.3, Android 11, iOS 15.4).
     validations:
       required: true
   - type: input
     id: version
     attributes:
       label: Version of flutter-maplibre
-      description: What version of maplibre are you using? (e.g. `0.0.1` or `main branch`)
+      description: What version of maplibre are you using? (e.g. `0.0.1` or `main branch` + commit hash)
     validations:
       required: true
   - type: textarea
