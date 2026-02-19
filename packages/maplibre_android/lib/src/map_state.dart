@@ -364,6 +364,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
     double? zoom,
     double? bearing,
     double? pitch,
+    EdgeInsets padding = EdgeInsets.zero,
   }) async => using((arena) {
     assert(_jMap != null, '_jMapLibreMap needs to be not null.');
     final cameraPosBuilder = jni.CameraPosition$Builder()..releasedBy(arena);
@@ -371,6 +372,13 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
     if (zoom != null) cameraPosBuilder.zoom(zoom);
     if (pitch != null) cameraPosBuilder.tilt(pitch);
     if (bearing != null) cameraPosBuilder.bearing(bearing);
+    final pixelRatio = View.of(context).devicePixelRatio;
+    cameraPosBuilder.padding$1(
+      padding.left * pixelRatio,
+      padding.top * pixelRatio,
+      padding.right * pixelRatio,
+      padding.bottom * pixelRatio,
+    );
 
     final cameraPosition = cameraPosBuilder.build()..releasedBy(arena);
     final cameraUpdate = jni.CameraUpdateFactory.newCameraPosition(
@@ -389,6 +397,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
     Duration? webMaxDuration,
+    EdgeInsets padding = EdgeInsets.zero,
   }) async => using((arena) async {
     final jMap = _jMap!;
     final cameraPosBuilder = jni.CameraPosition$Builder()..releasedBy(arena);
@@ -396,6 +405,13 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
     if (zoom != null) cameraPosBuilder.zoom(zoom);
     if (pitch != null) cameraPosBuilder.tilt(pitch);
     if (bearing != null) cameraPosBuilder.bearing(bearing);
+    final pixelRatio = View.of(context).devicePixelRatio;
+    cameraPosBuilder.padding$1(
+      padding.left * pixelRatio,
+      padding.top * pixelRatio,
+      padding.right * pixelRatio,
+      padding.bottom * pixelRatio,
+    );
 
     final cameraUpdate = jni.CameraUpdateFactory.newCameraPosition(
       cameraPosBuilder.build()..releasedBy(arena),
@@ -426,14 +442,15 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
     EdgeInsets padding = EdgeInsets.zero,
   }) async => using((arena) async {
     final jMap = _jMap!;
+    final pixelRatio = View.of(context).devicePixelRatio;
     final cameraUpdate = jni.CameraUpdateFactory.newLatLngBounds$3(
       bounds.toJLatLngBounds(arena: arena),
       bearing ?? -1.0,
       pitch ?? -1.0,
-      padding.left.toInt(),
-      padding.top.toInt(),
-      padding.right.toInt(),
-      padding.bottom.toInt(),
+      (padding.left * pixelRatio).toInt(),
+      (padding.top * pixelRatio).toInt(),
+      (padding.right * pixelRatio).toInt(),
+      (padding.bottom * pixelRatio).toInt(),
     )..releasedBy(arena);
 
     final completer = Completer<void>();

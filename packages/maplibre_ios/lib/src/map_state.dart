@@ -122,6 +122,7 @@ final class MapLibreMapStateIos extends MapLibreMapState {
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
     Duration? webMaxDuration,
+    EdgeInsets padding = EdgeInsets.zero,
   }) async {
     final mapView = _mapView;
     if (mapView == null) return;
@@ -133,9 +134,11 @@ final class MapLibreMapStateIos extends MapLibreMapState {
     if (center != null) {
       ffiCamera.centerCoordinate = center.toCLLocationCoordinate2D();
     }
-    mapView.flyToCamera$2(
+    final pixelRatio = View.of(context).devicePixelRatio;
+    mapView.flyToCamera$1(
       ffiCamera,
-      withDuration: nativeDuration.inMicroseconds / 1000000,
+      edgePadding: padding.toUIEdgeInsets(pixelRatio: pixelRatio),
+      withDuration: nativeDuration.inSeconds.toDouble(),
     );
   }
 
@@ -174,11 +177,10 @@ final class MapLibreMapStateIos extends MapLibreMapState {
     final mapView = _mapView;
     if (mapView == null) return;
 
-    final ffiBounds = bounds.toMLNCoordinateBounds();
-    final ffiPadding = padding.toUIEdgeInsets();
+    final pixelRatio = View.of(context).devicePixelRatio;
     mapView.setVisibleCoordinateBounds$1(
-      ffiBounds,
-      edgePadding: ffiPadding,
+      bounds.toMLNCoordinateBounds(),
+      edgePadding: padding.toUIEdgeInsets(pixelRatio: pixelRatio),
       animated: true,
     );
   }
@@ -201,6 +203,7 @@ final class MapLibreMapStateIos extends MapLibreMapState {
     double? zoom,
     double? bearing,
     double? pitch,
+    EdgeInsets padding = EdgeInsets.zero,
   }) async {
     final mapView = _mapView;
     if (mapView == null) return;
@@ -211,7 +214,12 @@ final class MapLibreMapStateIos extends MapLibreMapState {
     if (center != null) {
       ffiCamera.centerCoordinate = center.toCLLocationCoordinate2D();
     }
-    mapView.setCamera(ffiCamera, animated: false);
+    final pixelRatio = View.of(context).devicePixelRatio;
+    mapView.setCamera$3(
+      ffiCamera,
+      withDuration: 0,
+      edgePadding: padding.toUIEdgeInsets(pixelRatio: pixelRatio),
+    );
   }
 
   @override

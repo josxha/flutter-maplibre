@@ -34,12 +34,13 @@ extension JsPointExt on interop.Point {
 /// Extension methods for the [EdgeInsets] class. Not exported publicly.
 extension EdgeInsetsExt on EdgeInsets {
   /// Convert a [EdgeInsets] to an internal [interop.PaddingOptions].
-  interop.PaddingOptions toPaddingOptions() => interop.PaddingOptions(
-    right: right,
-    left: left,
-    bottom: bottom,
-    top: top,
-  );
+  interop.PaddingOptions toPaddingOptions({required double pixelRatio}) =>
+      interop.PaddingOptions(
+        right: right / pixelRatio,
+        left: left / pixelRatio,
+        bottom: bottom / pixelRatio,
+        top: top / pixelRatio,
+      );
 }
 
 /// Internal extension to convert JSAny to Map\<String, dynamic\>

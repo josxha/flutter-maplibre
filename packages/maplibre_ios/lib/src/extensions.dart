@@ -74,7 +74,7 @@ extension LngLatBoundsExt on LngLatBounds {
 /// Internal extensions on [EdgeInsets].
 extension EdgeInsetsExt on EdgeInsets {
   /// Convert an [EdgeInsets] to a [UIEdgeInsets].
-  UIEdgeInsets toUIEdgeInsets() {
+  UIEdgeInsets toUIEdgeInsets({required double pixelRatio}) {
     final insets = Struct.create<UIEdgeInsets>()
       ..top = top
       ..left = left

@@ -50,6 +50,7 @@ abstract interface class MapController {
     double? zoom,
     double? bearing,
     double? pitch,
+    EdgeInsets padding = EdgeInsets.zero,
   });
 
   /// Animate the map camera to a new location.
@@ -61,6 +62,7 @@ abstract interface class MapController {
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
     Duration? webMaxDuration,
+    EdgeInsets padding = EdgeInsets.zero,
   });
 
   /// Animate the map camera to a new location.

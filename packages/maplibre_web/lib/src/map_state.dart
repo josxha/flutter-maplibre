@@ -238,15 +238,18 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     double? zoom,
     double? bearing,
     double? pitch,
+    EdgeInsets padding = EdgeInsets.zero,
   }) async {
     _nextGestureCausedByController = true;
     final camera = getCamera();
+    final pixelRatio = View.of(context).devicePixelRatio;
     _map.jumpTo(
       interop.JumpToOptions(
         center: center?.toLngLat() ?? camera.center.toLngLat(),
         zoom: zoom ?? camera.zoom,
         bearing: bearing ?? camera.bearing,
         pitch: pitch ?? camera.pitch,
+        padding: padding.toPaddingOptions(pixelRatio: pixelRatio),
       ),
     );
   }
@@ -260,10 +263,12 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     Duration nativeDuration = const Duration(seconds: 2),
     double webSpeed = 1.2,
     Duration? webMaxDuration,
+    EdgeInsets padding = EdgeInsets.zero,
   }) async {
     final destination = center?.toLngLat();
     _nextGestureCausedByController = true;
     final camera = getCamera();
+    final pixelRatio = View.of(context).devicePixelRatio;
     _map.flyTo(
       interop.FlyToOptions(
         center: destination,
@@ -272,6 +277,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         pitch: pitch ?? camera.pitch,
         speed: webSpeed,
         maxDuration: webMaxDuration?.inMilliseconds,
+        padding: padding.toPaddingOptions(pixelRatio: pixelRatio),
       ),
     );
     final completer = _movementCompleter = Completer<interop.MapLibreEvent>();
@@ -314,6 +320,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     EdgeInsets padding = EdgeInsets.zero,
   }) async {
     final camera = getCamera();
+    final pixelRatio = View.of(context).devicePixelRatio;
     _map.fitBounds(
       bounds.toJsLngLatBounds(),
       interop.FitBoundsOptions(
@@ -321,7 +328,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         maxZoom: webMaxZoom,
         linear: webLinear,
         maxDuration: webMaxDuration?.inMilliseconds,
-        padding: padding.toPaddingOptions(),
+        padding: padding.toPaddingOptions(pixelRatio: pixelRatio),
         speed: webSpeed,
         pitch: pitch ?? camera.pitch,
         bearing: bearing ?? camera.bearing,
