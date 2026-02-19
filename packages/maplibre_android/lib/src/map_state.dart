@@ -175,7 +175,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
               latLng.releasedBy(arena);
               final screenLocation = _jProjection.toScreenLocation(latLng)
                 ..releasedBy(arena);
-              final pixelRatio = 1 / MediaQuery.devicePixelRatioOf(context);
+              final pixelRatio = View.of(context).devicePixelRatio;
               widget.onEvent?.call(
                 MapEventClick(
                   point: latLng.toGeographic(),
@@ -194,7 +194,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
               latLng.releasedBy(arena);
               final screenLocation = _jProjection.toScreenLocation(latLng)
                 ..releasedBy(arena);
-              final pixelRatio = 1 / MediaQuery.devicePixelRatioOf(context);
+              final pixelRatio = View.of(context).devicePixelRatio;
               widget.onEvent?.call(
                 MapEventLongClick(
                   point: latLng.toGeographic(),
@@ -529,7 +529,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
       return [];
     }
 
-    final scaledPoint = point * MediaQuery.devicePixelRatioOf(context);
+    final scaledPoint = point * View.of(context).devicePixelRatio;
 
     final query = map.queryRenderedFeatures(
       jni.PointF.new$3(scaledPoint.dx, scaledPoint.dy),
@@ -553,7 +553,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
       return [];
     }
 
-    final devicePixelRatio = MediaQuery.devicePixelRatioOf(context);
+    final devicePixelRatio = View.of(context).devicePixelRatio;
     final scaledRect = Rect.fromLTRB(
       rect.left * devicePixelRatio,
       rect.top * devicePixelRatio,
@@ -630,7 +630,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
         ..releasedBy(arena)
         ..[0] = jLayerId;
       // query one layer at a time
-      final pixelRatio = MediaQuery.devicePixelRatioOf(context);
+      final pixelRatio = View.of(context).devicePixelRatio;
       final scaledPoint = (screenLocation * pixelRatio).toJPointF(arena: arena);
       final jniFeatures = _jMap!.queryRenderedFeatures(
         scaledPoint,
@@ -732,15 +732,11 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
   }
 
   @override
-  Geographic toLngLat(Offset screenLocation) => using(
-    (arena) => _jProjection
-        .fromScreenLocation(
-          (screenLocation * MediaQuery.devicePixelRatioOf(context)).toJPointF(
-            arena: arena,
-          ),
-        )
-        .toGeographic(),
-  );
+  Geographic toLngLat(Offset screenLocation) => using((arena) {
+    final pixelRatio = View.of(context).devicePixelRatio;
+    final screenPoint = (screenLocation * pixelRatio).toJPointF(arena: arena);
+    return _jProjection.fromScreenLocation(screenPoint).toGeographic();
+  });
 
   @override
   List<Geographic> toLngLats(List<Offset> screenLocations) =>
@@ -751,7 +747,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
     final screenLocation = _jProjection.toScreenLocation(
       lngLat.toLatLng()..releasedBy(arena),
     )..releasedBy(arena);
-    final pixelRatio = MediaQuery.devicePixelRatioOf(context);
+    final pixelRatio = View.of(context).devicePixelRatio;
     return screenLocation.toOffset() / pixelRatio;
   });
 
