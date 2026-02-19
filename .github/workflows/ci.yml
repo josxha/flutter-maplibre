@@ -25,6 +25,7 @@ jobs:
         sdk: ['3.38.10', '']
     env:
       CI: true
+      CHROME_FLAGS: --no-sandbox --disable-dev-shm-usage
     steps:
       - name: "Checkout repository"
         uses: actions/checkout@v4
@@ -33,22 +34,23 @@ jobs:
         with:
           flutter-version: ${{ matrix.sdk }}
           cache: true
+      - name: "Setup Chrome"
+        id: setup-chrome
+        uses: browser-actions/setup-chrome@v2
+      - name: "Setup ChromeDriver"
+        id: setup-chromedriver
+        uses: nanasess/setup-chromedriver@v2
+      - name: "Export Chrome paths"
+        run: |
+          echo "CHROME_EXECUTABLE=${{ steps.setup-chrome.outputs.chrome-path }}" >> $GITHUB_ENV
+          echo "CHROMEDRIVER_PATH=$(which chromedriver)" >> $GITHUB_ENV
       - name: "Enable Flutter web support"
         run: flutter config --enable-web
-      - name: "Clean previous builds"
-        run: flutter clean
       - name: "Install dependencies"
         run: flutter pub get
-      - name: "Install ChromeDriver (stable)"
-        run: |
-          npm install -g @puppeteer/browsers
-          npx @puppeteer/browsers install chromedriver@stable
-          echo "$HOME/.cache/puppeteer/chromedriver/linux-*/chromedriver" >> $GITHUB_PATH
       - name: "Start ChromeDriver"
-        run: chromedriver --port=4444 --allowed-ips='' &
-      - name: "Run web integration tests with Xvfb"
         run: |
-          xvfb-run -a flutter drive \
-            --driver=test_driver/integration_test.dart \
-            --target=integration_test/main.dart \
-            -d chrome
+          "$CHROMEDRIVER_PATH" --port=4444 &
+          sleep 2
+      - name: "Run web integration tests"
+        run: xvfb-run -a flutter drive --driver=test_driver/integration_test.dart --target=integration_test/main.dart -d chrome --timeout 600 --dart-define=FLUTTER_WEB_USE_SKIA=true
