@@ -48,9 +48,10 @@ flutter:
         default_package: maplibre_android
       ios:
         default_package: maplibre_ios
-      macos:
-        default_package: maplibre_webview
       web:
         default_package: maplibre_web
-      windows:
-        default_package: maplibre_webview
+# desktop support is currently still new and experimental, users need to opt in
+#      macos:
+#        default_package: maplibre_webview
+#      windows:
+#        default_package: maplibre_webview
