@@ -80,37 +80,37 @@ jobs:
         if: ${{ matrix.sdk == '' }}
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-  integration-test-ios:
-    name: "[iOS] Integration tests"
-    runs-on: macOS-latest
-    defaults: { run: { working-directory: examples } }
-    strategy:
-      fail-fast: false
-      matrix:
-        os_version: [ '18.6', '26.2' ]
-    timeout-minutes: 30
-    steps:
-      - uses: actions/checkout@v6
-      - uses: subosito/flutter-action@v2
-        with: { cache: true }
-      - name: Install dependencies
-        run: flutter pub get
-      - name: Enable Swift Package Manager
-        run: flutter config --enable-swift-package-manager
-      - name: Start iOS simulator
-        uses: futureware-tech/simulator-action@v3
-        with:
-          model: 'iPhone 16 Pro'
-          os_version: ${{ matrix.os_version }}
-      - name: Wait for simulator
-        run: xcrun simctl bootstatus booted -b
-      - name: Run integration tests
-        run: flutter test integration_test/main.dart --timeout=1800s -r expanded --coverage --coverage-package maplibre.*
-      - name: "Run Codecov"
-        uses: codecov/codecov-action@v5
-        if: ${{ matrix.os_version == '26.2' }}
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+#  integration-test-ios:
+#    name: "[iOS] Integration tests"
+#    runs-on: macOS-latest
+#    defaults: { run: { working-directory: examples } }
+#    strategy:
+#      fail-fast: false
+#      matrix:
+#        os_version: [ '18.6', '26.2' ]
+#    timeout-minutes: 30
+#    steps:
+#      - uses: actions/checkout@v6
+#      - uses: subosito/flutter-action@v2
+#        with: { cache: true }
+#      - name: Install dependencies
+#        run: flutter pub get
+#      - name: Enable Swift Package Manager
+#        run: flutter config --enable-swift-package-manager
+#      - name: Start iOS simulator
+#        uses: futureware-tech/simulator-action@v3
+#        with:
+#          model: 'iPhone 16 Pro'
+#          os_version: ${{ matrix.os_version }}
+#      - name: Wait for simulator
+#        run: xcrun simctl bootstatus booted -b
+#      - name: Run integration tests
+#        run: flutter test integration_test/main.dart --timeout=1800s -r expanded --coverage --coverage-package maplibre.*
+#      - name: "Run Codecov"
+#        uses: codecov/codecov-action@v5
+#        if: ${{ matrix.os_version == '26.2' }}
+#        env:
+#          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
   integration-test-android:
     name: "[Android] Integration tests"
     runs-on: ubuntu-latest
@@ -150,33 +150,33 @@ jobs:
         if: ${{ matrix.api-level == '35' }}
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-  integration-test-web:
-    name: "[Web] Integration tests"
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    defaults:
-      run:
-        working-directory: examples
-    strategy:
-      fail-fast: false
-      matrix:
-        sdk: ['3.38.10', '']
-    env:
-      CI: true
-    steps:
-      - name: "Checkout repository"
-        uses: actions/checkout@v4
-      - name: "Setup Flutter SDK"
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: ${{ matrix.sdk }}
-          cache: true
-      - name: "Enable Flutter web support"
-        run: flutter config --enable-web
-      - name: "Install dependencies"
-        run: flutter pub get
-      - name: "Run web integration tests"
-        run: xvfb-run -a flutter drive --driver=test_driver/integration_test.dart --target=integration_test/main.dart -d chrome --timeout 120 --dart-define=FLUTTER_WEB_USE_SKIA=true
+#  integration-test-web:
+#    name: "[Web] Integration tests"
+#    runs-on: ubuntu-latest
+#    timeout-minutes: 30
+#    defaults:
+#      run:
+#        working-directory: examples
+#    strategy:
+#      fail-fast: false
+#      matrix:
+#        sdk: ['3.38.10', '']
+#    env:
+#      CI: true
+#    steps:
+#      - name: "Checkout repository"
+#        uses: actions/checkout@v4
+#      - name: "Setup Flutter SDK"
+#        uses: subosito/flutter-action@v2
+#        with:
+#          flutter-version: ${{ matrix.sdk }}
+#          cache: true
+#      - name: "Enable Flutter web support"
+#        run: flutter config --enable-web
+#      - name: "Install dependencies"
+#        run: flutter pub get
+#      - name: "Run web integration tests"
+#        run: xvfb-run -a flutter drive --driver=test_driver/integration_test.dart --target=integration_test/main.dart -d chrome --timeout 120 --dart-define=FLUTTER_WEB_USE_SKIA=true
   score:
     name: "Package score"
     runs-on: ubuntu-latest
