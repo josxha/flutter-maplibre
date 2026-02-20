@@ -1,16 +1,15 @@
 ---
 sidebar_position: 1
-title: 'Hillshade'
-description: 'Render elevation on the map.'
+title: 'Raster'
+description: 'Add Raster Tiles on the map.'
 ---
 
-# Hillshade Style Layer
+# Raster Style Layer
 
-The `HillshadeStyleLayer` is either used by the map style or can be added to the map
-programmatically to use DEM tiles. Those tiles are used to render elevation on 
-the map.
+The `RasterStyleLayer` is either used by the map style or can be added to the map
+programmatically to render raster tiles on your map.
 
-[![Hillshade Style Layer](/img/layers/hillshade_layer.jpg)](/demo/#/style-layers/hillshade)
+[![Raster Style Layer](/img/layers/raster_layer.jpg)](/demo/#/style-layers/raster)
 
 ## Basic Usage
 
@@ -24,16 +23,18 @@ Widget build(BuildContext context) {
       onMapCreated: (controller) => _controller = controller,
       onStyleLoaded: (style) async {
         // highlight-start
-        const hillshade = RasterDemSource(
+        const openStreetMap = RasterSource(
           id: _sourceId,
-          url: 'https://demotiles.maplibre.org/terrain-tiles/tiles.json',
+          tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+          maxZoom: 20,
           tileSize: 256,
+          attribution:
+          '<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         );
-        await style.addSource(hillshade);
-        const layer = HillshadeStyleLayer(
+        await style.addSource(openStreetMap);
+        const layer = RasterStyleLayer(
           id: _layerId,
           sourceId: _sourceId,
-          paint: {'hillshade-shadow-color': '#473B24'},
         );
         await style.addLayer(layer);
         // highlight-end
@@ -43,7 +44,7 @@ Widget build(BuildContext context) {
 ```
 
 Check out
-the [example app](https://github.com/josxha/flutter-maplibre/blob/v0.3.3/example/lib/layers_hillshade_page.dart)
+the [example app](https://github.com/josxha/flutter-maplibre/blob/v0.3.4/examples/lib/style-layers_raster_page.dart)
 to learn more.
 
 ## Style & Layout

@@ -1,15 +1,15 @@
 ---
 sidebar_position: 1
-title: 'Heatmap'
-description: 'Add Heatmaps to the map.'
+title: 'Circle'
+description: 'Add Circles to the map.'
 ---
 
-# Heatmap Style Layer
+# Circle Style Layer
 
-The `HeatmapStyleLayer` is either used by the map style or can be added to the map
+The `CircleStyleLayer` is either used by the map style or can be added to the map
 programmatically to symbolize data on the map.
 
-[![Heatmap Layer](/img/layers/heatmap_layer.jpg)](/demo/#/style-layers/heatmap)
+[![Circle Style Layer](/img/layers/circle_layer.jpg)](/demo/#/style-layers/circle)
 
 ## Basic Usage
 
@@ -23,13 +23,16 @@ Widget build(BuildContext context) {
       onMapCreated: (controller) => _controller = controller,
       onStyleLoaded: (style) async {
         // highlight-start
+        // add the source
         const earthquakes = GeoJsonSource(
           id: _sourceId,
           data:
           'https://maplibre.org/maplibre-gl-js/docs/assets/earthquakes.geojson',
         );
         await style.addSource(earthquakes);
-        const layer = HeatmapStyleLayer(id: _layerId, sourceId: _sourceId);
+
+        // add the source with a layer on the map
+        const layer = CircleStyleLayer(id: _layerId, sourceId: _sourceId);
         await style.addLayer(layer);
         // highlight-end
       }
@@ -38,7 +41,7 @@ Widget build(BuildContext context) {
 ```
 
 Check out
-the [example app](https://github.com/josxha/flutter-maplibre/blob/v0.3.3/example/lib/style_layers_heatmap_page.dart)
+the [example app](https://github.com/josxha/flutter-maplibre/blob/v0.3.4/examples/lib/layers_circle_page.dart)
 to learn more.
 
 ## Style & Layout

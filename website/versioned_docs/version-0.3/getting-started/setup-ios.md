@@ -6,7 +6,7 @@ sidebar_position: 30
 
 ## Activate the Swift Package Manager
 
-The Swift Package Manager is available in the `stable` channel since
+The Swift Package Manager is available in the `stable` channel since 
 Flutter 3.24 but needs to be enabled by running the following command:
 
 ```bash
