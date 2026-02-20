@@ -80,7 +80,13 @@ extension type JsMap._(Camera _) implements Camera {
   external void removeSource(String id);
 
   /// Add an image to the map.
-  external void addImage(String id, ImageSpecification data);
+  ///
+  /// https://github.com/maplibre/maplibre-gl-js/blob/42ecfef53c25150227256bb0b5daa29af6efd9e7/src/ui/map.ts#L2530-L2531
+  external void addImage(
+    String id,
+    ImageSpecification image, [
+    StyleImageMetadata? options,
+  ]);
 
   /// Remove an image from the map by its id.
   external void removeImage(String id);
@@ -239,6 +245,8 @@ extension type LayerSpecification._(JSObject _) implements JSObject {
 }
 
 /// Image data used by [JsMap.addImage].
+///
+/// https://github.com/maplibre/maplibre-gl-js/blob/42ecfef53c25150227256bb0b5daa29af6efd9e7/src/style/style_image.ts#L92-L93
 @anonymous
 @JS()
 extension type ImageSpecification._(JSObject _) implements JSObject {
@@ -247,6 +255,22 @@ extension type ImageSpecification._(JSObject _) implements JSObject {
     required int width,
     required int height,
     required JSUint8Array data,
+  });
+}
+
+/// The style's image metadata
+///
+/// https://github.com/maplibre/maplibre-gl-js/blob/42ecfef53c25150227256bb0b5daa29af6efd9e7/src/style/style_image.ts#L58-L59
+@anonymous
+@JS()
+extension type StyleImageMetadata._(JSObject _) implements JSObject {
+  /// Create a new [StyleImageMetadata] object.
+  external StyleImageMetadata({
+    /// The ratio of pixels in the image to physical pixels on the screen
+    double? pixelRatio,
+
+    /// Whether the image should be interpreted as an SDF image
+    bool? sdf,
   });
 }
 

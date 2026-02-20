@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:js_interop';
 import 'dart:math';
+import 'dart:ui';
 import 'dart:ui_web';
 
 import 'package:flutter/services.dart';
