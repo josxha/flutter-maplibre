@@ -11,7 +11,7 @@ view.
 
 Windows requires at least version 0.3.4 of the maplibre package.
 
-:::end
+:::
 
 ## Add the dependency
 

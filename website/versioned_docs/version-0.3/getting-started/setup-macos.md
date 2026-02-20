@@ -11,7 +11,7 @@ view.
 
 macOS requires at least version 0.3.4 of the maplibre package.
 
-:::end
+:::
 
 ## Add the dependency
 
@@ -34,6 +34,7 @@ flutter pub add maplibre_webview
 ## WebView Setup
 
 InAppWebView that is used to display the map on macOS requires some additional
-setup. Please follow the instructions in the
+setup. `maplibre` spins up a local web server to serve the map and its
+resources. Please follow the instructions in the
 [flutter_inappwebview documentation](https://inappwebview.dev/docs/intro#setup-macos)
 to set up the WebView for macOS.
