@@ -4,11 +4,10 @@ sidebar_position: 50
 
 # Setup Windows
 
-Windows support experimental and powered by displaying the map though a web
-view.
-
 :::warning
 
+Windows support is experimental and powered by displaying the map though a web
+view.
 Windows requires at least version 0.3.4 of the maplibre package.
 
 :::

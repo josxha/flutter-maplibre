@@ -4,11 +4,10 @@ sidebar_position: 50
 
 # Setup macOS
 
-macOS support experimental and powered by displaying the map though a web
-view.
-
 :::warning
 
+macOS support is experimental and powered by displaying the map though a web
+view.
 macOS requires at least version 0.3.4 of the maplibre package.
 
 :::
