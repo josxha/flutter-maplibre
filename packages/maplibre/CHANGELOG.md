@@ -1,12 +1,25 @@
 ## 0.3.4
 
+This feature release introduces a complete migration of the iOS platform to FFI and experimental support for Windows and macOS has been added using with web view. 
+The package has also been restructured into a federated plugin with separate packages for each platform.
+
 ### New Features
 
-- TODO
+- iOS: migrate iOS to a complete FFI implementation and remove all pigeon method channel usage.
+- Add experimental Windows and macOS support with a web view.
+- Migrate the package to a complete federated plugin with separate packages for each platform.
+- Add `padding` parameter to `moveCamera()` and `animateCamera()`.
 
 ### Bug Fixes
 
-- TODO
+- Fix `padding` parameter of `fitBounds()` doesn't account for device pixel ratio.
+- iOS: fix don't call `setState()` if widget is not mounted.
+- iOS: fix `listOfflineRegions()` throws exception if region packs are not available yet.
+- Fix gesture callbacks return incorrect screen offset, caused by incorrect device pixel ratio conversion.
+- Android: fix map disposal causes sometimes a crash.
+- Web: fix missing device pixel ratio adjustment on `addImage()`
+
+Full Changelog: [v0.3.3+2...v0.3.4](https://github.com/josxha/flutter-maplibre/compare/v0.3.3+2...v0.3.4)
 
 ## 0.3.3+2
 
