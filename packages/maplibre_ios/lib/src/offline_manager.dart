@@ -155,11 +155,15 @@ class OfflineManagerIos implements OfflineManager {
   @override
   Future<List<OfflineRegion>> listOfflineRegions() async {
     var nsArray = _storage.packs;
-    while (nsArray == null) {
+    final stopwatch = Stopwatch()..start();
+    while (nsArray == null && stopwatch.elapsed < const Duration(seconds: 5)) {
       // Do polling until the packs are loaded. This is a simple alternative to
       // an KVO change notification observer recommended by the SDK.
       await Future<void>.delayed(const Duration(milliseconds: 50));
       nsArray = _storage.packs;
+    }
+    if (nsArray == null) {
+      throw Exception('Loading offline packs timed out');
     }
     final packs = nsArray.asDart();
     return List<OfflineRegion>.generate(packs.length, (i) {

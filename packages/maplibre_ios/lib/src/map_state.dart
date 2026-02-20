@@ -137,7 +137,8 @@ final class MapLibreMapStateIos extends MapLibreMapState {
     mapView.flyToCamera$1(
       ffiCamera,
       edgePadding: padding.toUIEdgeInsets(),
-      withDuration: nativeDuration.inSeconds.toDouble(),
+      // use milliseconds for extra precision
+      withDuration: nativeDuration.inMilliseconds / 1000.0,
     );
   }
 

@@ -2,7 +2,7 @@ name: Bug Report
 description: Report a bug
 labels: [ "bug" ]
 body:
-  - type: checkbox
+  - type: checkboxes
     id: platforms
     attributes:
       label: Affected Platforms
