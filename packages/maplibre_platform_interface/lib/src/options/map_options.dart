@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 import 'package:maplibre_platform_interface/src/widget/inherited_model.dart';
 
+part 'android_platform_view_mode.dart';
+part 'map_gestures.dart';
+
 /// The [MapOptions] class is used to set default values for the [MapLibreMap]
 /// widget.
 ///

@@ -1,11 +1,13 @@
 import 'dart:math';
 
+import 'package:geobase/geobase.dart';
+
 /// pre compiled factor to convert a coordinate in radian to degrees.
 const double degree2Radian = pi / 180;
 
 /// circumference of the Earth
-// TODO replace with earthCircumferenceWgs84 from geobase
-const circumferenceOfEarth = 40075016.686;
+@Deprecated('Use earthCircumferenceWgs84 from geobase instead')
+const double circumferenceOfEarth = earthCircumferenceWgs84;
 
 /// A list of all color names that are listed by the World Wide Web Consortium
 /// (W3C) as valid color names for HTML and CSS.

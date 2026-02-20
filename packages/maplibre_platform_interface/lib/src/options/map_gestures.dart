@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+part of 'map_options.dart';
 
 /// Configure gestures that are enabled on the map.
 ///

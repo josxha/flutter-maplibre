@@ -1,6 +1,8 @@
 // Using an underscore to separate the different abbreviations.
 // ignore_for_file: constant_identifier_names
 
+part of 'map_options.dart';
+
 /// The different ways a MapLibre map can be displayed on Android.
 ///
 /// https://docs.flutter.dev/platform-integration/android/platform-views

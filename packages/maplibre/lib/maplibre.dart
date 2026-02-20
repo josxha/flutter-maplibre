@@ -1,5 +1,6 @@
 // We export the geobase package here so that users don't have to add
 // the dependency themselves.
+// TODO only export the parts of geobase that we use, to avoid polluting the namespace.
 export 'package:geobase/geobase.dart';
 export 'package:maplibre_platform_interface/maplibre_platform_interface.dart'
     show
@@ -62,17 +63,19 @@ export 'package:maplibre_platform_interface/maplibre_platform_interface.dart'
         TileScheme,
         VectorSource,
         VideoSource,
+        // Export deprecated constant for backwards compatibility
+        // ignore: deprecated_member_use
         circumferenceOfEarth,
         degree2Radian,
         earthCircumferenceWgs84,
         htmlColorNames;
 
-export 'src/layer/circle_layer.dart';
-export 'src/layer/marker_layer.dart';
-export 'src/layer/polygon_layer.dart';
-export 'src/layer/polyline_layer.dart';
-export 'src/ui/map_compass.dart';
-export 'src/ui/map_control_buttons.dart';
+export 'src/layer/circle_layer.dart' show CircleLayer;
+export 'src/layer/marker_layer.dart' show IconAnchor, MarkerLayer;
+export 'src/layer/polygon_layer.dart' show PolygonLayer;
+export 'src/layer/polyline_layer.dart' show PolylineLayer;
+export 'src/ui/map_compass.dart' show MapCompass;
+export 'src/ui/map_control_buttons.dart' show MapControlButtons;
 export 'src/ui/map_scalebar.dart' show MapScalebar, ScaleBarUnit;
-export 'src/ui/source_attribution.dart';
-export 'src/widget_layer.dart';
+export 'src/ui/source_attribution.dart' show SourceAttribution;
+export 'src/widget_layer.dart' show Marker, WidgetLayer;

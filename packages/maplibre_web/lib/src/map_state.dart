@@ -345,7 +345,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   /// https://wiki.openstreetmap.org/wiki/Zoom_levels
   @override
   double getMetersPerPixelAtLatitude(double latitude) =>
-      circumferenceOfEarth *
+      earthCircumferenceWgs84 *
       cos(latitude * degree2Radian) /
       pow(2, _map.getZoom() + 9);
 
