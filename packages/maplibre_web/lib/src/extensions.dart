@@ -36,13 +36,12 @@ extension EdgeInsetsExt on EdgeInsets {
   /// Convert a [EdgeInsets] to an internal [interop.PaddingOptions].
   ///
   /// Web does not require pixel ratio conversion.
-  interop.PaddingOptions toPaddingOptions() =>
-      interop.PaddingOptions(
-        right: right,
-        left: left,
-        bottom: bottom,
-        top: top,
-      );
+  interop.PaddingOptions toPaddingOptions() => interop.PaddingOptions(
+    right: right,
+    left: left,
+    bottom: bottom,
+    top: top,
+  );
 }
 
 /// Internal extension to convert JSAny to Map\<String, dynamic\>
