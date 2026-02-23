@@ -37,12 +37,12 @@ class _StyleLayersHillshadePageState extends State<StyleLayersHillshadePage> {
       tileSize: 256,
     );
     await style.addSource(hillshade);
-    await style.addLayer(_hillshadeStyleLayer);
+    final hillshadeLayer = HillshadeStyleLayer(
+      id: _layerId,
+      sourceId: _sourceId,
+      shadowColor: const PropertyValue.value(Color(0xFF473B24)),
+    );
+
+    await style.addLayer(hillshadeLayer);
   }
 }
-
-const _hillshadeStyleLayer = HillshadeStyleLayer(
-  id: _layerId,
-  sourceId: _sourceId,
-  paint: {'hillshade-shadow-color': '#473B24'},
-);

@@ -64,6 +64,8 @@ void main(List<String> args) {
         'org.maplibre.android.style.expressions.Expression',
         'org.maplibre.android.style.layers',
         'org.maplibre.android.style.sources',
+        'org.maplibre.android.style.types.Formatted',
+        'org.maplibre.android.style.types.FormattedSection',
         'org.maplibre.geojson.Feature',
         'com.google.gson.Gson',
         'com.google.gson.JsonObject',

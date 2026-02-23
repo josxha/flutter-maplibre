@@ -42,16 +42,14 @@ class _StyleLayersSymbolPageState extends State<StyleLayersSymbolPage> {
 
             // display the image on the map
             await style.addLayer(
-              const SymbolStyleLayer(
+              SymbolStyleLayer(
                 id: 'images',
                 sourceId: 'points',
-                layout: {
-                  // see https://maplibre.org/maplibre-style-spec/layers/#symbol
-                  'icon-image': 'marker',
-                  'icon-size': 0.08,
-                  'icon-allow-overlap': true,
-                  'icon-anchor': 'bottom',
-                },
+                // see https://maplibre.org/maplibre-style-spec/layers/#symbol
+                iconImage: const PropertyValue.value('marker'),
+                iconSize: const PropertyValue.value(0.2),
+                iconAllowOverlap: const PropertyValue.value(true),
+                iconAnchor: const PropertyValue.value(IconAnchor.bottom),
               ),
             );
           } on Exception catch (error, stacktrace) {

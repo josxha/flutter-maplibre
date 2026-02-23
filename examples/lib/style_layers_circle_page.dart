@@ -36,59 +36,62 @@ class _StyleLayersCirclePageState extends State<StyleLayersCirclePage> {
           'https://maplibre.org/maplibre-gl-js/docs/assets/earthquakes.geojson',
     );
     await style.addSource(earthquakes);
-    await style.addLayer(_circleStyleLayer);
+    final circleLayer = CircleStyleLayer(
+      id: _layerId,
+      sourceId: _sourceId,
+      // Size circle radius by earthquake magnitude and zoom level
+      radius: const PropertyValue.expression(
+        Expression.fromJson([
+          'interpolate',
+          ['linear'],
+          ['zoom'],
+          7,
+          [
+            'interpolate',
+            ['linear'],
+            ['get', 'mag'],
+            1,
+            1,
+            6,
+            50,
+          ],
+        ]),
+      ),
+      // Color circle by earthquake magnitude
+      color: const PropertyValue.expression(
+        Expression.fromJson([
+          'interpolate',
+          ['linear'],
+          ['get', 'mag'],
+          1,
+          'rgba(33,102,172,0)',
+          2,
+          'rgb(103,169,207)',
+          3,
+          'rgb(209,229,240)',
+          4,
+          'rgb(253,219,199)',
+          5,
+          'rgb(239,138,98)',
+          6,
+          'rgb(178,24,43)',
+        ]),
+      ),
+      strokeColor: const PropertyValue.value(Colors.white),
+      strokeWidth: const PropertyValue.value(1),
+      // Transition from heatmap to circle layer by zoom level
+      opacity: const PropertyValue.expression(
+        Expression.fromJson([
+          'interpolate',
+          ['linear'],
+          ['zoom'],
+          7,
+          0,
+          8,
+          1,
+        ]),
+      ),
+    );
+    await style.addLayer(circleLayer);
   }
 }
-
-const _circleStyleLayer = CircleStyleLayer(
-  id: _layerId,
-  sourceId: _sourceId,
-  paint: {
-    // Size circle radius by earthquake magnitude and zoom level
-    'circle-radius': [
-      'interpolate',
-      ['linear'],
-      ['zoom'],
-      7,
-      [
-        'interpolate',
-        ['linear'],
-        ['get', 'mag'],
-        1,
-        1,
-        6,
-        50,
-      ],
-    ],
-    // Color circle by earthquake magnitude
-    'circle-color': [
-      'interpolate',
-      ['linear'],
-      ['get', 'mag'],
-      1,
-      'rgba(33,102,172,0)',
-      2,
-      'rgb(103,169,207)',
-      3,
-      'rgb(209,229,240)',
-      4,
-      'rgb(253,219,199)',
-      5,
-      'rgb(239,138,98)',
-      6,
-      'rgb(178,24,43)',
-    ],
-    'circle-stroke-color': 'white',
-    'circle-stroke-width': 1,
-    // Transition from heatmap to circle layer by zoom level
-    'circle-opacity': [
-      'interpolate',
-      ['linear'],
-      ['zoom'],
-      7,
-      0,
-      8,
-      1,
-    ],
-  },
-);

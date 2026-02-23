@@ -12,6 +12,7 @@ import 'package:maplibre_android/src/flutter_api.dart';
 import 'package:maplibre_android/src/functions.dart';
 import 'package:maplibre_android/src/jni.g.dart' as jni;
 import 'package:maplibre_android/src/registry.dart';
+import 'package:maplibre_android/src/style/layers/style_layer.dart';
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 
 part 'style_controller.dart';

@@ -81,7 +81,7 @@ class _LayersWidgetMarkerPageState extends State<LayersWidgetMarkerPage> {
             iconImage: _imageLoaded ? 'marker' : null,
             iconSize: 0.15,
             iconAnchor: IconAnchor.bottom,
-            textOffset: const [0, 1],
+            textOffset: const Offset(0, 1),
           ),
         ],
       ),

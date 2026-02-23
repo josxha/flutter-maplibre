@@ -1,11 +1,11 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:maplibre_ios/src/extensions.dart';
 import 'package:maplibre_ios/src/maplibre_ffi.g.dart';
+import 'package:maplibre_ios/src/style/layers/style_layer.dart';
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 import 'package:objective_c/objective_c.dart';
 

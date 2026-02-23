@@ -347,7 +347,7 @@ extension MLNOfflinePackExt on MLNOfflinePack {
 extension NSNotificationExt on NSNotification {
   /// Get a [MLNOfflinePack] from an [NSNotification].
   MLNOfflinePack? get offlinePack {
-    final obj = object;
+    final obj = this.object;
     if (obj == null) return null;
     if (!MLNOfflinePack.isA(obj)) return null;
     return MLNOfflinePack.as(obj);

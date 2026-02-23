@@ -44,10 +44,12 @@ class StyleControllerWebView extends StyleController {
     int? atIndex,
   }) async {
     final sourceLayerSnippet =
-        layer is StyleLayerWithSource && layer.sourceLayerId != null
+        layer is StyleLayerWithVectorSource && layer.sourceLayerId != null
         ? '"source-layer": "${layer.sourceLayerId}",'
         : '';
     final belowArg = belowLayerId != null ? "'$belowLayerId'" : 'undefined';
+    const paint = <String, Object>{}; // TODO jsonEncode(layer.paint);
+    const layout = <String, Object>{}; // TODO jsonEncode(layer.layout);
     await webViewController.callAsyncJavaScript(
       functionBody:
           '''
@@ -65,9 +67,9 @@ class StyleControllerWebView extends StyleController {
             BackgroundStyleLayer() => 'background',
             _ => throw UnsupportedError('Unsupported layer type: ${layer.runtimeType}'),
           }}",
-        paint: ${jsonEncode(layer.paint)},
-        layout: ${jsonEncode(layer.layout)},
-        ${layer.filter != null ? 'filter: ${layer.filter},' : ''}
+        paint: $paint,
+        layout: $layout,
+        ${layer is StyleLayerWithVectorSource && layer.filter != null ? 'filter: ${layer.filter},' : ''}
         minzoom: ${layer.minZoom},
         maxzoom: ${layer.maxZoom},
         ${layer is StyleLayerWithSource ? 'source: "${layer.sourceId}",' : ''}

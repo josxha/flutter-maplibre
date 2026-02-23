@@ -49,7 +49,6 @@ class _LayersPolylinePageState extends State<LayersPolylinePage> {
             polylines: _polylines,
             color: Colors.red,
             width: 4,
-            blur: 3,
             dashArray: const [5, 5],
           ),
         ],

@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:maplibre/maplibre.dart';
@@ -241,7 +241,7 @@ void test() {
       // ensure no crash if a layer does not exist
       await ctrl.style?.removeLayer('notExisting');
 
-      const layer = RasterStyleLayer(id: 'rasterLayer', sourceId: 'source');
+      final layer = RasterStyleLayer(id: 'rasterLayer', sourceId: 'source');
       await ctrl.style?.addLayer(layer);
       await ctrl.style?.removeLayer(layer.id);
     });
@@ -321,10 +321,10 @@ void test() {
         );
         const pointLayerId = 'point_layer';
         await style.addLayer(
-          const CircleStyleLayer(
+          CircleStyleLayer(
             id: pointLayerId,
             sourceId: pointSourceId,
-            paint: {'circle-radius': 10, 'circle-color': '#FF0000'},
+            radius: const PropertyValue.value(10),
           ),
         );
         const expectedPoint = QueriedLayer(
@@ -332,7 +332,7 @@ void test() {
           sourceId: pointSourceId,
           sourceLayer: null,
         );
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pumpAndSettle(const Duration(seconds: 2));
 
         final size = tester.getSize(find.byType(MapLibreMap));
         final centerScreen = Offset(size.width / 2, size.height / 2);
@@ -366,10 +366,10 @@ void test() {
         );
         const polygonLayerId = 'polygon_layer';
         await style.addLayer(
-          const FillStyleLayer(
+          FillStyleLayer(
             id: polygonLayerId,
             sourceId: polygonSourceId,
-            paint: {'fill-color': '#00FF00'},
+            color: const PropertyValue.value(Colors.green),
           ),
         );
         const expectedPolygon = QueriedLayer(
@@ -443,11 +443,7 @@ void test() {
         );
         const pointLayerId = 'point_layer';
         await style.addLayer(
-          const CircleStyleLayer(
-            id: pointLayerId,
-            sourceId: pointSourceId,
-            paint: {'circle-radius': 5, 'circle-color': '#FF0000'},
-          ),
+          CircleStyleLayer(id: pointLayerId, sourceId: pointSourceId),
         );
         const polygonSourceId = 'polygon_source';
         await style.addSource(
@@ -472,10 +468,10 @@ void test() {
         );
         const polygonLayerId = 'polygon_layer';
         await style.addLayer(
-          const FillStyleLayer(
+          FillStyleLayer(
             id: polygonLayerId,
             sourceId: polygonSourceId,
-            paint: {'fill-color': '#00FF00'},
+            color: const PropertyValue.value(Colors.green),
           ),
         );
         await tester.pump(const Duration(seconds: 1));
@@ -508,10 +504,10 @@ void test() {
         expect(features.first.properties['poly'], 'gon');
         const pointLayer2Id = 'point_layer_2';
         await style.addLayer(
-          const CircleStyleLayer(
+          CircleStyleLayer(
             id: pointLayer2Id,
             sourceId: pointSourceId,
-            paint: {'circle-radius': 5, 'circle-color': '#FF00FF'},
+            color: const PropertyValue.value(Colors.purple),
           ),
         );
         await tester.pump(const Duration(seconds: 1));
@@ -556,11 +552,7 @@ void test() {
         );
         const pointLayerId = 'point_layer';
         await style.addLayer(
-          const CircleStyleLayer(
-            id: pointLayerId,
-            sourceId: pointSourceId,
-            paint: {'circle-radius': 5, 'circle-color': '#FF0000'},
-          ),
+          CircleStyleLayer(id: pointLayerId, sourceId: pointSourceId),
         );
         const lineSourceId = 'line_source';
         await style.addSource(
@@ -580,10 +572,10 @@ void test() {
         );
         const lineLayerId = 'line_layer';
         await style.addLayer(
-          const LineStyleLayer(
+          LineStyleLayer(
             id: lineLayerId,
             sourceId: lineSourceId,
-            paint: {'line-color': '#0000FF', 'line-width': 5},
+            color: const PropertyValue.value(Colors.blue),
           ),
         );
         const polygonSourceId = 'polygon_source';
@@ -609,10 +601,10 @@ void test() {
         );
         const polygonLayerId = 'polygon_layer';
         await style.addLayer(
-          const FillStyleLayer(
+          FillStyleLayer(
             id: polygonLayerId,
             sourceId: polygonSourceId,
-            paint: {'fill-color': '#00FF00'},
+            color: const PropertyValue.value(Colors.green),
           ),
         );
         await tester.pump(const Duration(seconds: 1));
@@ -831,7 +823,7 @@ void test() {
     final app = App(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
-    const layer = BackgroundStyleLayer(id: '1', color: Colors.black);
+    final layer = BackgroundStyleLayer(id: '1');
     await ctrl.style?.addLayer(layer);
     await tester.pumpAndSettle();
   });
@@ -840,7 +832,7 @@ void test() {
     final app = App(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
-    const layer = FillStyleLayer(id: '1', sourceId: 'source1');
+    final layer = FillStyleLayer(id: '1', sourceId: 'source1');
     await ctrl.style?.addLayer(layer);
     await tester.pumpAndSettle();
   });
@@ -849,7 +841,7 @@ void test() {
     final app = App(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
-    const layer = CircleStyleLayer(id: '1', sourceId: 'source1');
+    final layer = CircleStyleLayer(id: '1', sourceId: 'source1');
     await ctrl.style?.addLayer(layer);
     await tester.pumpAndSettle();
   });
@@ -858,7 +850,7 @@ void test() {
     final app = App(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
-    const layer = FillExtrusionStyleLayer(id: '1', sourceId: 'source1');
+    final layer = FillExtrusionStyleLayer(id: '1', sourceId: 'source1');
     await ctrl.style?.addLayer(layer);
     await tester.pumpAndSettle();
   });
@@ -867,7 +859,7 @@ void test() {
     final app = App(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
-    const layer = HeatmapStyleLayer(id: '1', sourceId: 'source1');
+    final layer = HeatmapStyleLayer(id: '1', sourceId: 'source1');
     await ctrl.style?.addLayer(layer);
     await tester.pumpAndSettle();
   });
@@ -876,7 +868,7 @@ void test() {
     final app = App(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
-    const layer = HillshadeStyleLayer(id: '1', sourceId: 'source1');
+    final layer = HillshadeStyleLayer(id: '1', sourceId: 'source1');
     await ctrl.style?.addLayer(layer);
     await tester.pumpAndSettle();
   });
@@ -885,7 +877,7 @@ void test() {
     final app = App(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
-    const layer = LineStyleLayer(id: '1', sourceId: 'source1');
+    final layer = LineStyleLayer(id: '1', sourceId: 'source1');
     await ctrl.style?.addLayer(layer);
     await tester.pumpAndSettle();
   });
@@ -894,7 +886,7 @@ void test() {
     final app = App(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
-    const layer = RasterStyleLayer(id: '1', sourceId: 'source1');
+    final layer = RasterStyleLayer(id: '1', sourceId: 'source1');
     await ctrl.style?.addLayer(layer);
     await tester.pumpAndSettle();
   });
@@ -903,7 +895,7 @@ void test() {
     final app = App(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
-    const layer = SymbolStyleLayer(id: '1', sourceId: 'source1');
+    final layer = SymbolStyleLayer(id: '1', sourceId: 'source1');
     await ctrl.style?.addLayer(layer);
     await tester.pumpAndSettle();
   });
@@ -912,7 +904,7 @@ void test() {
     final app = App(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
-    const layer = SymbolStyleLayer(id: '1', sourceId: 'source1');
+    final layer = SymbolStyleLayer(id: '1', sourceId: 'source1');
     await ctrl.style?.addLayer(layer);
     await tester.pumpAndSettle();
   });

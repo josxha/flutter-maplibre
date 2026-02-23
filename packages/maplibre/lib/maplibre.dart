@@ -11,11 +11,13 @@ export 'package:maplibre_platform_interface/maplibre_platform_interface.dart'
         CameraChangeReason,
         CircleStyleLayer,
         ColorExtension,
+        Expression,
         FillExtrusionStyleLayer,
         FillStyleLayer,
         GeoJsonSource,
         HeatmapStyleLayer,
         HillshadeStyleLayer,
+        IconAnchor,
         ImageSource,
         Layer,
         LineStyleLayer,
@@ -45,6 +47,7 @@ export 'package:maplibre_platform_interface/maplibre_platform_interface.dart'
         OfflineManager,
         OfflineRegion,
         PermissionManager,
+        PropertyValue,
         QueriedLayer,
         RasterDemCustomEncoding,
         RasterDemEncoding,
@@ -71,7 +74,7 @@ export 'package:maplibre_platform_interface/maplibre_platform_interface.dart'
         htmlColorNames;
 
 export 'src/layer/circle_layer.dart' show CircleLayer;
-export 'src/layer/marker_layer.dart' show IconAnchor, MarkerLayer;
+export 'src/layer/marker_layer.dart' show MarkerLayer;
 export 'src/layer/polygon_layer.dart' show PolygonLayer;
 export 'src/layer/polyline_layer.dart' show PolylineLayer;
 export 'src/ui/map_compass.dart' show MapCompass;

@@ -44,8 +44,7 @@ class _StyleLayersRasterPageState extends State<StyleLayersRasterPage> {
           '<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     );
     await style.addSource(openStreetMap);
-    await style.addLayer(_rasterStyleLayer);
+    final rasterLayer = RasterStyleLayer(id: _layerId, sourceId: _sourceId);
+    await style.addLayer(rasterLayer);
   }
 }
-
-const _rasterStyleLayer = RasterStyleLayer(id: _layerId, sourceId: _sourceId);

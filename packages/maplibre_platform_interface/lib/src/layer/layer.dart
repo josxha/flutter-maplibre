@@ -23,12 +23,6 @@ abstract class Layer<G extends Feature<Geometry>> {
   /// Get a unique layer id.
   String getLayerId(int index) => 'maplibre-layer-$index';
 
-  /// Build the paint properties.
-  Map<String, Object> getPaint();
-
-  /// Build the layout properties.
-  Map<String, Object> getLayout();
-
   /// Add the annotation layer to the map.
   StyleLayer createStyleLayer(int index);
 
