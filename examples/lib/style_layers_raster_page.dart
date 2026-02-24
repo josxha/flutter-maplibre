@@ -11,9 +11,6 @@ class StyleLayersRasterPage extends StatefulWidget {
   State<StyleLayersRasterPage> createState() => _StyleLayersRasterPageState();
 }
 
-const _layerId = 'showcaseLayer';
-const _sourceId = 'openStreetMap';
-
 class _StyleLayersRasterPageState extends State<StyleLayersRasterPage> {
   // If you are looking for just a way how to display OpenStreetMap on the
   // map then this is NOT the right approach. You can create a Style JSON that
@@ -36,7 +33,7 @@ class _StyleLayersRasterPageState extends State<StyleLayersRasterPage> {
 
   Future<void> _onStyleLoaded(StyleController style) async {
     const openStreetMap = RasterSource(
-      id: _sourceId,
+      id: 'openStreetMap',
       tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
       maxZoom: 20,
       tileSize: 256,
@@ -44,7 +41,10 @@ class _StyleLayersRasterPageState extends State<StyleLayersRasterPage> {
           '<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     );
     await style.addSource(openStreetMap);
-    final rasterLayer = RasterStyleLayer(id: _layerId, sourceId: _sourceId);
+    final rasterLayer = RasterStyleLayer(
+      id: 'showcaseLayer',
+      sourceId: 'openStreetMap',
+    );
     await style.addLayer(rasterLayer);
   }
 }

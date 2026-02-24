@@ -84,8 +84,9 @@ class StyleControllerWeb extends StyleController {
       );
     }
 
-    final jsLayer = (layer as StyleLayerWeb).jsLayer;
-    _map.addLayer(jsLayer, belowLayerId);
+    final webLayer = layer as StyleLayerWeb;
+    webLayer.jsMap = _map;
+    _map.addLayer(webLayer.jsLayer, belowLayerId);
   }
 
   @override

@@ -2,8 +2,7 @@ import 'package:flutter/painting.dart';
 import 'package:maplibre_ios/src/map_state.dart';
 import 'package:maplibre_ios/src/offline_manager.dart';
 import 'package:maplibre_ios/src/permission_manager.dart';
-import 'package:maplibre_ios/src/style/layers/background_style_layer.dart';
-import 'package:maplibre_ios/src/style/layers/circle_style_layer.dart';
+import 'package:maplibre_ios/src/style/layers/style_layer.dart';
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 
 /// iOS implementation of the federated MapLibre plugin.
@@ -101,7 +100,6 @@ final class MapLibrePlugin extends MapLibrePlatform {
     required String sourceId,
     required bool visible,
     required PropertyValue<Color>? color,
-    required PropertyValue<String>? pattern,
     required PropertyValue<double> opacity,
     required double minZoom,
     required double maxZoom,

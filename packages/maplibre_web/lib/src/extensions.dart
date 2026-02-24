@@ -46,10 +46,218 @@ extension EdgeInsetsExt on EdgeInsets {
 
 /// Internal extension to convert JSAny to Map\<String, dynamic\>
 extension StringMap on JSAny? {
-  /// Like [JSAny?.dartify], but for the special case of a JSON map.
+  /// Like [dartify], but for the special case of a JSON map.
   Map<String, Object?>? asStringMap() =>
       (dartify() as Map<Object?, Object?>?)?.map(
         (k, v) => MapEntry(k.toString(), v),
       ) ??
       {};
+
+  /// Convert a [JSAny] to a [PropertyValue] of type [V] that can be [double],
+  /// [String], [boolean], [int], or [List<double>].
+  PropertyValue<V>? toPropertyValue<V>() {
+    final property = dartify();
+    if (property == null) {
+      return null;
+    } else if (property is List<Object?> && property.firstOrNull is String) {
+      return PropertyValue.expression(Expression.fromJson(property));
+    } else {
+      return PropertyValue.value(property as V);
+    }
+  }
+
+  /// Convert a [JSAny] to a [PropertyValue] of type [Offset].
+  PropertyValue<Offset>? toOffsetPropertyValue() {
+    final property = dartify();
+    if (property == null) {
+      return null;
+    } else if (property is List<Object?> && property.firstOrNull is String) {
+      return PropertyValue.expression(Expression.fromJson(property));
+    } else if (property is Map<Object?, Object?>) {
+      final map = property.map((k, v) => MapEntry(k.toString(), v));
+      if (map.containsKey('x') && map.containsKey('y')) {
+        return PropertyValue.value(
+          Offset((map['x']! as num).toDouble(), (map['y']! as num).toDouble()),
+        );
+      } else {
+        throw StateError(
+          'Expected a map with keys "x" and "y" for an offset property, but got $property',
+        );
+      }
+    }
+    throw StateError(
+      'Expected a String, List, or Map for an offset property, but got ${property.runtimeType}',
+    );
+  }
+
+  /// Convert a [JSAny] to a [PropertyValue] of type [Color].
+  PropertyValue<Color>? toColorPropertyValue() {
+    final property = dartify();
+    if (property == null) {
+      return null;
+    } else if (property is List<Object?> && property.firstOrNull is String) {
+      return PropertyValue.expression(Expression.fromJson(property));
+    } else if (property is String) {
+      if (property.startsWith('#')) {
+        // hex color string
+        return PropertyValue.value(
+          Color(int.parse(property.replaceFirst('#', '0xff'))),
+        );
+      } else {
+        // rgba color string
+        final regex = RegExp(
+          r'rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d*\.?\d+))?\)',
+        );
+        final match = regex.firstMatch(property);
+        if (match != null) {
+          final r = int.parse(match.group(1)!);
+          final g = int.parse(match.group(2)!);
+          final b = int.parse(match.group(3)!);
+          final a = match.group(4) != null
+              ? (double.parse(match.group(4)!) * 255).round()
+              : 255;
+          return PropertyValue.value(Color.fromARGB(a, r, g, b));
+        } else {
+          throw StateError('Invalid color string: $property');
+        }
+      }
+    }
+    throw StateError(
+      'Expected a String or List for a color property, but got ${property.runtimeType}',
+    );
+  }
+
+  /// Generic helper to convert a JS value to a [PropertyValue] of an enum type.
+  ///
+  /// Supports:
+  /// - `null` -> `null`
+  /// - expression JSON array -> `PropertyValue.expression(...)`
+  /// - string/other -> matched against `enumValues[i].name`
+  PropertyValue<E>? toEnumPropertyValue<E extends Enum>(List<E> enumValues) {
+    final property = dartify();
+    if (property == null) return null;
+    if (property is List<Object?> && property.firstOrNull is String) {
+      return PropertyValue.expression(Expression.fromJson(property));
+    }
+
+    final asString = property.toString();
+    return PropertyValue.value(
+      enumValues.firstWhere(
+        (e) => e.name == asString,
+        orElse: () => throw StateError('Invalid enum value: $property'),
+      ),
+    );
+  }
+
+  /// Convert a [JSAny] to a [PropertyValue] of type [NumberArray].
+  PropertyValue<NumberArray>? toNumberArrayPropertyValue() {
+    final property = dartify();
+    if (property == null) return null;
+    if (property is List<Object?> && property.firstOrNull is String) {
+      return PropertyValue.expression(Expression.fromJson(property));
+    }
+    if (property is num) {
+      return PropertyValue.value(NumberArray.number(property.toDouble()));
+    }
+    if (property is List) {
+      final nums = property.whereType<num>().map((e) => e.toDouble()).toList(growable: false);
+      return PropertyValue.value(NumberArray.array(nums));
+    }
+    throw StateError(
+      'Expected num, List<num>, or expression for NumberArray, got ${property.runtimeType}',
+    );
+  }
+
+  /// Convert a [JSAny] to a [PropertyValue] of type [EdgeInsets].
+  PropertyValue<EdgeInsets>? toEdgeInsetsPropertyValue() {
+    final property = dartify();
+    if (property == null) return null;
+    if (property is List<Object?> && property.firstOrNull is String) {
+      return PropertyValue.expression(Expression.fromJson(property));
+    }
+    if (property is List) {
+      final nums = property.whereType<num>().map((e) => e.toDouble()).toList();
+      if (nums.length != 4) {
+        throw StateError(
+          'Expected 4 numbers for EdgeInsets [top,right,bottom,left], got $property',
+        );
+      }
+      return PropertyValue.value(
+        EdgeInsets.fromLTRB(nums[3], nums[0], nums[1], nums[2]),
+      );
+    }
+    throw StateError(
+      'Expected List<num> or expression for EdgeInsets, got ${property.runtimeType}',
+    );
+  }
+
+  /// Convert a [JSAny] to a [PropertyValue] of `List<E extends Enum>`.
+  PropertyValue<List<E>>? toEnumListPropertyValue<E extends Enum>(
+    List<E> enumValues,
+  ) {
+    final property = dartify();
+    if (property == null) return null;
+    if (property is List<Object?> && property.firstOrNull is String) {
+      return PropertyValue.expression(Expression.fromJson(property));
+    }
+    if (property is List) {
+      final result = property
+          .map((e) => enumValues.firstWhere(
+                (v) => v.name == e.toString(),
+                orElse: () => throw StateError('Invalid enum value: $e'),
+              ))
+          .toList(growable: false);
+      return PropertyValue.value(result);
+    }
+    throw StateError(
+      'Expected List<String> or expression for enum list, got ${property.runtimeType}',
+    );
+  }
+
+  /// Convert a [JSAny] to a [PropertyValue] of `List<OneOf2<String, Offset>>`.
+  ///
+  /// This is used for "text-variable-anchor-offset".
+  PropertyValue<List<OneOf2<String, Offset>>>?
+  toOneOfStringOffsetListPropertyValue() {
+    final property = dartify();
+    if (property == null) return null;
+    if (property is List<Object?> && property.firstOrNull is String) {
+      return PropertyValue.expression(Expression.fromJson(property));
+    }
+    if (property is List) {
+      final parsed = <OneOf2<String, Offset>>[];
+      for (final item in property) {
+        if (item is String) {
+          parsed.add(OneOf2.t1(item));
+        } else if (item is Map) {
+          final map = item.map((k, v) => MapEntry(k.toString(), v));
+          if (map.containsKey('x') && map.containsKey('y')) {
+            parsed.add(
+              OneOf2.t2(
+                Offset(
+                  (map['x']! as num).toDouble(),
+                  (map['y']! as num).toDouble(),
+                ),
+              ),
+            );
+          } else {
+            throw StateError('Expected map with x/y for Offset, got $item');
+          }
+        } else if (item is List) {
+          // Also accept [x,y]
+          final nums = item.whereType<num>().toList();
+          if (nums.length != 2) {
+            throw StateError('Expected [x,y] for Offset, got $item');
+          }
+          parsed.add(OneOf2.t2(Offset(nums[0].toDouble(), nums[1].toDouble())));
+        } else {
+          throw StateError('Invalid OneOf2<String,Offset> item: $item');
+        }
+      }
+      return PropertyValue.value(parsed);
+    }
+    throw StateError(
+      'Expected List for OneOf2<String,Offset> list, got ${property.runtimeType}',
+    );
+  }
 }

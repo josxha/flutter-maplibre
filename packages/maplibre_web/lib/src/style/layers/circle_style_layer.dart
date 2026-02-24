@@ -1,22 +1,7 @@
-import 'dart:js_interop';
-import 'dart:ui';
-
-import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
-import 'package:maplibre_web/src/interop/interop.dart' as js;
-import 'package:maplibre_web/src/style/layers/style_layer.dart';
-
-/// Helper class so that [CircleStyleLayerWeb] can mixing in the
-/// [CircleStyleLayerMixin].
-abstract class _CircleStyleLayerWeb
-    extends StyleLayerWeb<js.LayerSpecification>
-    implements CircleStyleLayer {
-  _CircleStyleLayerWeb.fromNativeLayer(super.jsLayer)
-    : super.fromNativeLayer();
-}
+part of 'style_layer.dart';
 
 /// Web implementation of [CircleStyleLayer].
-class CircleStyleLayerWeb extends _CircleStyleLayerWeb
-    with CircleStyleLayerMixin {
+class CircleStyleLayerWeb extends StyleLayerWeb implements CircleStyleLayer {
   /// Default constructor for a [CircleStyleLayerWeb] instance.
   CircleStyleLayerWeb({
     required String id,
@@ -39,102 +24,193 @@ class CircleStyleLayerWeb extends _CircleStyleLayerWeb
     required PropertyValue<Color> strokeColor,
     required PropertyValue<double> strokeOpacity,
   }) : super.fromNativeLayer(
-         js.LayerSpecification(
+         jsLayer: js.LayerSpecification(
            id: id,
            type: 'circle',
            maxzoom: maxZoom,
            minzoom: minZoom,
+           source: sourceId,
+           layout: createCircleLayout(
+             visible: visible,
+             sortKey: sortKey,
+           ).jsify(),
+           paint: createCirclePaint(
+             color: color,
+             blur: blur,
+             opacity: opacity,
+             pitchScale: pitchScale,
+             pitchAlignment: pitchAlignment,
+             radius: radius,
+             strokeWidth: strokeWidth,
+             strokeColor: strokeColor,
+             strokeOpacity: strokeOpacity,
+             translate: translate,
+             translateAnchor: translateAnchor,
+           ).jsify(),
          ),
        ) {
-    jsLayer.layout = layout.jsify();
-    jsLayer.paint = paint.jsify();
+    if (sourceLayerId case final id?) jsLayer.sourceLayer = id;
+    if (filter case final filter?) jsLayer.filter = filter.json.jsify()!;
   }
 
   @override
-  PropertyValue<double> get blur => throw UnsupportedError('blur');
+  PropertyValue<double> get blur =>
+      requireMap
+          .getPaintProperty(id, 'circle-blur')
+          .toPropertyValue<double>() ??
+      CircleStyleLayer.defaultBlur;
 
   @override
-  set blur(PropertyValue<double> value) => throw UnsupportedError('blur');
+  set blur(PropertyValue<double> value) =>
+      requireMap.setPaintProperty(id, 'circle-blur', value.toJson().jsify());
 
   @override
-  PropertyValue<Color> get color => throw UnsupportedError('color');
+  PropertyValue<Color> get color =>
+      requireMap
+          .getPaintProperty(id, 'circle-color')
+          .toColorPropertyValue() ??
+      CircleStyleLayer.defaultColor;
 
   @override
-  set color(PropertyValue<Color> value) => throw UnsupportedError('color');
+  set color(PropertyValue<Color> value) =>
+      requireMap.setPaintProperty(id, 'circle-color', value.toJson().jsify());
 
   @override
-  Expression? get filter => throw UnsupportedError('filter');
+  Expression? get filter =>
+      Expression.fromJson(jsLayer.filter.dartify()! as List<Object?>);
 
   @override
-  set filter(Expression? value) => throw UnsupportedError('filter');
+  set filter(Expression value) => jsLayer.filter = value!.json.jsify()!;
 
   @override
-  PropertyValue<double> get opacity => throw UnsupportedError('opacity');
+  PropertyValue<double> get opacity =>
+      requireMap
+          .getPaintProperty(id, 'circle-opacity')
+          .toPropertyValue<double>() ??
+      CircleStyleLayer.defaultOpacity;
 
   @override
-  set opacity(PropertyValue<double> value) => throw UnsupportedError('opacity');
+  set opacity(PropertyValue<double> value) =>
+      requireMap.setPaintProperty(id, 'circle-opacity', value.toJson().jsify());
 
   @override
-  PropertyValue<ReferenceSpace> get pitchAlignment => throw UnsupportedError('pitchAlignment');
+  PropertyValue<ReferenceSpace> get pitchAlignment =>
+      requireMap
+              .getPaintProperty(id, 'circle-pitch-alignment')
+              .toEnumPropertyValue(ReferenceSpace.values) ??
+      CircleStyleLayer.defaultPitchAlignment;
 
   @override
-  set pitchAlignment(PropertyValue<ReferenceSpace> value) => throw UnsupportedError('pitchAlignment');
+  set pitchAlignment(PropertyValue<ReferenceSpace> value) => requireMap
+      .setPaintProperty(id, 'circle-pitch-alignment', value.toJson().jsify());
 
   @override
-  PropertyValue<ReferenceSpace> get pitchScale => throw UnsupportedError('pitchScale');
+  PropertyValue<ReferenceSpace> get pitchScale =>
+      requireMap
+              .getPaintProperty(id, 'circle-pitch-scale')
+              .toEnumPropertyValue(ReferenceSpace.values) ??
+      CircleStyleLayer.defaultPitchScale;
 
   @override
-  set pitchScale(PropertyValue<ReferenceSpace> value) => throw UnsupportedError('pitchScale');
+  set pitchScale(PropertyValue<ReferenceSpace> value) => requireMap
+      .setPaintProperty(id, 'circle-pitch-scale', value.toJson().jsify());
 
   @override
-  PropertyValue<double> get radius => throw UnsupportedError('radius');
+  PropertyValue<double> get radius =>
+      requireMap
+          .getPaintProperty(id, 'circle-radius')
+          .toPropertyValue<double>() ??
+      CircleStyleLayer.defaultRadius;
 
   @override
-  set radius(PropertyValue<double> value) => throw UnsupportedError('radius');
+  set radius(PropertyValue<double> value) =>
+      requireMap.setPaintProperty(id, 'circle-radius', value.toJson().jsify());
 
   @override
-  PropertyValue<double>? get sortKey => throw UnsupportedError('sortKey');
+  PropertyValue<double>? get sortKey => requireMap
+      .getLayoutProperty(id, 'circle-sort-key')
+      .toPropertyValue<double>();
 
   @override
-  set sortKey(PropertyValue<double>? value) => throw UnsupportedError('sortKey');
+  set sortKey(PropertyValue<double>? value) => requireMap.setLayoutProperty(
+    id,
+    'circle-sort-key',
+    value?.toJson().jsify(),
+  );
 
   @override
-  String? get sourceLayerId => throw UnsupportedError('sourceLayerId');
+  String? get sourceLayerId => jsLayer.sourceLayer;
 
   @override
-  set sourceLayerId(String? value) => throw UnsupportedError('sourceLayerId');
+  set sourceLayerId(String? value) => jsLayer.sourceLayer = value;
 
   @override
-  PropertyValue<Color> get strokeColor => throw UnsupportedError('strokeColor');
+  PropertyValue<Color> get strokeColor =>
+      requireMap
+          .getPaintProperty(id, 'circle-stroke-color')
+          .toColorPropertyValue() ??
+      CircleStyleLayer.defaultStrokeColor;
 
   @override
-  set strokeColor(PropertyValue<Color> value) => throw UnsupportedError('strokeColor');
+  set strokeColor(PropertyValue<Color> value) => requireMap.setPaintProperty(
+    id,
+    'circle-stroke-color',
+    value.toJson().jsify(),
+  );
 
   @override
-  PropertyValue<double> get strokeOpacity => throw UnsupportedError('strokeOpacity');
+  PropertyValue<double> get strokeOpacity =>
+      requireMap
+          .getPaintProperty(id, 'circle-stroke-opacity')
+          .toPropertyValue<double>() ??
+      CircleStyleLayer.defaultStrokeOpacity;
 
   @override
-  set strokeOpacity(PropertyValue<double> value) => throw UnsupportedError('strokeOpacity');
+  set strokeOpacity(PropertyValue<double> value) => requireMap.setPaintProperty(
+    id,
+    'circle-stroke-opacity',
+    value.toJson().jsify(),
+  );
 
   @override
-  PropertyValue<double> get strokeWidth => throw UnsupportedError('strokeWidth');
+  PropertyValue<double> get strokeWidth =>
+      requireMap
+          .getPaintProperty(id, 'circle-stroke-width')
+          .toPropertyValue<double>() ??
+      CircleStyleLayer.defaultStrokeWidth;
 
   @override
-  set strokeWidth(PropertyValue<double> value) => throw UnsupportedError('strokeWidth');
+  set strokeWidth(PropertyValue<double> value) => requireMap.setPaintProperty(
+    id,
+    'circle-stroke-width',
+    value.toJson().jsify(),
+  );
 
   @override
-  PropertyValue<Offset> get translate => throw UnsupportedError('translate');
+  PropertyValue<Offset> get translate =>
+      requireMap
+          .getPaintProperty(id, 'circle-translate')
+          .toOffsetPropertyValue() ??
+      StyleLayerWithTranslate.defaultTranslate;
 
   @override
-  set translate(PropertyValue<Offset> value) => throw UnsupportedError('translate');
+  set translate(PropertyValue<Offset> value) => requireMap.setPaintProperty(
+    id,
+    'circle-translate',
+    value.toJson().jsify(),
+  );
 
   @override
-  PropertyValue<ReferenceSpace> get translateAnchor => throw UnsupportedError('translateAnchor');
+  PropertyValue<ReferenceSpace> get translateAnchor =>
+      requireMap
+              .getPaintProperty(id, 'circle-translate-anchor')
+              .toEnumPropertyValue(ReferenceSpace.values) ??
+      StyleLayerWithTranslate.defaultTranslateAnchor;
 
   @override
-  set translateAnchor(PropertyValue<ReferenceSpace> value) => throw UnsupportedError('translateAnchor');
+  set translateAnchor(PropertyValue<ReferenceSpace> value) => requireMap
+      .setPaintProperty(id, 'circle-translate-anchor', value.toJson().jsify());
 
   @override
-  String get sourceId => throw UnsupportedError('sourceId');
-
+  String get sourceId => jsLayer.source!;
 }

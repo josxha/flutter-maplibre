@@ -1,22 +1,8 @@
-import 'dart:js_interop';
-import 'dart:ui';
-
-import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
-import 'package:maplibre_web/src/interop/interop.dart' as js;
-import 'package:maplibre_web/src/style/layers/style_layer.dart';
-
-/// Helper class so that [BackgroundStyleLayerWeb] can mixing in the
-/// [BackgroundStyleLayerMixin].
-abstract class _BackgroundStyleLayerWeb
-    extends StyleLayerWeb<js.LayerSpecification>
-    implements BackgroundStyleLayer {
-  _BackgroundStyleLayerWeb.fromNativeLayer(super.jsLayer)
-    : super.fromNativeLayer();
-}
+part of 'style_layer.dart';
 
 /// Web implementation of [BackgroundStyleLayer].
-class BackgroundStyleLayerWeb extends _BackgroundStyleLayerWeb
-    with BackgroundStyleLayerMixin {
+class BackgroundStyleLayerWeb extends StyleLayerWeb
+    implements BackgroundStyleLayer {
   /// Default constructor for a [BackgroundStyleLayerWeb] instance.
   BackgroundStyleLayerWeb({
     required String id,
@@ -27,42 +13,55 @@ class BackgroundStyleLayerWeb extends _BackgroundStyleLayerWeb
     required PropertyValue<double> opacity,
     required bool visible,
   }) : super.fromNativeLayer(
-         js.LayerSpecification(
+         jsLayer: js.LayerSpecification(
            id: id,
            type: 'background',
            maxzoom: maxZoom,
            minzoom: minZoom,
+           layout: createBackgroundLayout(visible: visible).jsify(),
+           paint: createBackgroundPaint(
+             color: color,
+             pattern: pattern,
+             opacity: opacity,
+           ).jsify(),
          ),
-       ) {
-    this.color = color;
-    this.opacity = opacity;
-    this.visible = visible;
-    this.pattern = pattern;
-    jsLayer.layout = layout.jsify();
-    jsLayer.paint = paint.jsify();
-  }
+       );
 
   @override
-  PropertyValue<Color> get color => throw UnimplementedError();
+  PropertyValue<Color> get color =>
+      requireMap
+          .getPaintProperty(id, 'background-color')
+          .toPropertyValue<Color>() ??
+      BackgroundStyleLayer.defaultColor;
 
   @override
   set color(PropertyValue<Color> value) {
-    // TODO handle
+    requireMap.setPaintProperty(id, 'background-color', value.toJson().jsify());
   }
 
   @override
-  PropertyValue<double> get opacity => throw UnimplementedError();
+  PropertyValue<double> get opacity =>
+      requireMap
+          .getPaintProperty(id, 'background-opacity')
+          .toPropertyValue<double>() ??
+      BackgroundStyleLayer.defaultOpacity;
 
   @override
-  set opacity(PropertyValue<double> value) {
-    // TODO handle
-  }
+  set opacity(PropertyValue<double> value) => requireMap.setPaintProperty(
+    id,
+    'background-opacity',
+    value.toJson().jsify(),
+  );
 
   @override
-  PropertyValue<String>? get pattern => throw UnimplementedError();
+  PropertyValue<String>? get pattern => requireMap
+      .getPaintProperty(id, 'background-pattern')
+      .toPropertyValue<String>();
 
   @override
-  set pattern(PropertyValue<String>? value) {
-    // TODO handle
-  }
+  set pattern(PropertyValue<String>? value) => requireMap.setPaintProperty(
+    id,
+    'background-pattern',
+    value?.toJson().jsify(),
+  );
 }

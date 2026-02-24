@@ -12,9 +12,6 @@ class StyleLayersHillshadePage extends StatefulWidget {
       _StyleLayersHillshadePageState();
 }
 
-const _layerId = 'showcaseLayer';
-const _sourceId = 'hills';
-
 class _StyleLayersHillshadePageState extends State<StyleLayersHillshadePage> {
   @override
   Widget build(BuildContext context) {
@@ -31,15 +28,16 @@ class _StyleLayersHillshadePageState extends State<StyleLayersHillshadePage> {
   }
 
   Future<void> _onStyleLoaded(StyleController style) async {
+    const sourceId = 'hills';
     const hillshade = RasterDemSource(
-      id: _sourceId,
+      id: sourceId,
       url: 'https://demotiles.maplibre.org/terrain-tiles/tiles.json',
       tileSize: 256,
     );
     await style.addSource(hillshade);
     final hillshadeLayer = HillshadeStyleLayer(
-      id: _layerId,
-      sourceId: _sourceId,
+      id: 'showcaseLayer',
+      sourceId: sourceId,
       shadowColor: const PropertyValue.value(Color(0xFF473B24)),
     );
 

@@ -165,6 +165,24 @@ extension type JsMap._(Camera _) implements Camera {
   ///    [MapLibre Style Specification](https://maplibre.org/maplibre-style-spec/).
   ///  * Pass `null` to unset the existing value.
   external void setLayoutProperty(String layerId, String name, JSAny? value);
+
+  /// Get the value of a paint property in the specified style layer.
+  ///
+  /// [layerId] - The ID of the layer to get the paint property from.
+  /// [name] - The name of the paint property to get.
+  /// Returns the value of the paint property, or `null` if it is not set.
+  ///
+  /// https://maplibre.org/maplibre-gl-js/docs/API/classes/Map/#getpaintproperty
+  external JSAny? getPaintProperty(String layerId, String name);
+
+  /// Get the value of a layout property in the specified style layer.
+  ///
+  /// [layerId] - The ID of the layer to get the layout property from.
+  /// [name] - The name of the layout property to get.
+  /// Returns the value of the layout property, or `null` if it is not set.
+  ///
+  /// https://maplibre.org/maplibre-gl-js/docs/API/classes/Map/#getlayoutproperty
+  external JSAny? getLayoutProperty(String layerId, String name);
 }
 
 /// Anonymous MapOptions for the MapLibre JavaScript [JsMap].

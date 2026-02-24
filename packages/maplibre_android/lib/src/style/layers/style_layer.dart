@@ -18,7 +18,7 @@ part 'symbol_style_layer.dart';
 
 /// Android implementation of [StyleLayer].
 abstract class StyleLayerAndroid<JLayer extends jni.Layer>
-    extends StyleLayer {
+    implements StyleLayer {
   /// Construct an [StyleLayerAndroid] from a JNI layer.
   StyleLayerAndroid.fromNativeLayer(this.jLayer) {
     final finalizer = Finalizer<jni.Layer>((j) => j.release());

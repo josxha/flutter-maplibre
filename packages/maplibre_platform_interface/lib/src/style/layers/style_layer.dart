@@ -8,7 +8,7 @@ part 'fill_extrusion_style_layer.dart';
 part 'fill_style_layer.dart';
 part 'heatmap_style_layer.dart';
 part 'hillshade_style_layer.dart';
-part 'layout_paint_mixins.dart';
+part 'layout_paint_helpers.dart';
 part 'line_style_layer.dart';
 part 'raster_style_layer.dart';
 part 'symbol_style_layer.dart';

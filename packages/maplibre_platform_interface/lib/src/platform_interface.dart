@@ -88,7 +88,6 @@ class MapLibrePlatform extends PlatformInterface {
     required String sourceId,
     required bool visible,
     required PropertyValue<Color>? color,
-    required PropertyValue<String>? pattern,
     required PropertyValue<double> opacity,
     required double minZoom,
     required double maxZoom,

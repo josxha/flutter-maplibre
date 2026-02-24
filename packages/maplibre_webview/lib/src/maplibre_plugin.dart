@@ -1,5 +1,7 @@
+import 'package:flutter/painting.dart';
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 import 'package:maplibre_webview/src/map_state.dart';
+import 'package:maplibre_webview/src/style/layers/style_layer.dart';
 
 /// WebView implementation of the federated MapLibre plugin.
 class MapLibrePlugin extends MapLibrePlatform {
@@ -18,7 +20,7 @@ class MapLibrePlugin extends MapLibrePlatform {
     throw Exception('The PermissionManager can not be used on webview.');
   }
 
-  /*/// Create a platform specific [BackgroundStyleLayer] object.
+  /// Create a platform specific [BackgroundStyleLayer] object.
   @override
   BackgroundStyleLayer createBackgroundStyleLayer({
     required String id,
@@ -89,12 +91,17 @@ class MapLibrePlugin extends MapLibrePlatform {
     required String sourceId,
     required bool visible,
     required PropertyValue<Color>? color,
-    required PropertyValue<String>? pattern,
     required PropertyValue<double> opacity,
     required double minZoom,
     required double maxZoom,
-  }) => throw UnsupportedError(
-    'ColorReliefStyleLayer is not supported on this platform.',
+  }) => ColorReliefStyleLayerWebView(
+    id: id,
+    sourceId: sourceId,
+    visible: visible,
+    color: color,
+    opacity: opacity,
+    minZoom: minZoom,
+    maxZoom: maxZoom,
   );
 
   /// Create a platform specific [FillExtrusionStyleLayer] object.
@@ -179,9 +186,6 @@ class MapLibrePlugin extends MapLibrePlatform {
     required bool visible,
     required double minZoom,
     required double maxZoom,
-    required PropertyValue<Offset> translate,
-    required PropertyValue<ReferenceSpace> translateAnchor,
-    required PropertyValue<double>? sortKey,
     required PropertyValue<double> radius,
     required PropertyValue<double> weight,
     required PropertyValue<double> intensity,
@@ -195,9 +199,6 @@ class MapLibrePlugin extends MapLibrePlatform {
     visible: visible,
     minZoom: minZoom,
     maxZoom: maxZoom,
-    translate: translate,
-    translateAnchor: translateAnchor,
-    sortKey: sortKey,
     radius: radius,
     weight: weight,
     intensity: intensity,
@@ -210,8 +211,6 @@ class MapLibrePlugin extends MapLibrePlatform {
   HillshadeStyleLayer createHillshadeStyleLayer({
     required String id,
     required String sourceId,
-    required String? sourceLayerId,
-    required Expression? filter,
     required bool visible,
     required double minZoom,
     required double maxZoom,
@@ -226,8 +225,6 @@ class MapLibrePlugin extends MapLibrePlatform {
   }) => HillshadeStyleLayerWebView(
     id: id,
     sourceId: sourceId,
-    sourceLayerId: sourceLayerId,
-    filter: filter,
     visible: visible,
     minZoom: minZoom,
     maxZoom: maxZoom,
@@ -459,5 +456,5 @@ class MapLibrePlugin extends MapLibrePlatform {
     textHaloBlur: textHaloBlur,
     textTranslate: textTranslate,
     textTranslateAnchor: textTranslateAnchor,
-  );*/
+  );
 }
