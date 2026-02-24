@@ -211,6 +211,15 @@ abstract class StyleController {
     await addImage(id, bytes.buffer.asUint8List());
   }
 
+  /// Set or clear the filter expression on an existing layer.
+  ///
+  /// [layerId] The ID of the layer to update.
+  /// [filter] A MapLibre filter expression (e.g. `['!=', ['\$id'], 42]`).
+  /// Pass `null` to clear the filter.
+  ///
+  /// Only supported for vector style layers (symbol, fill, line, circle, etc.).
+  Future<void> setFilter(String layerId, List<Object>? filter);
+
   /// Removes an image from the map
   Future<void> removeImage(String id);
 

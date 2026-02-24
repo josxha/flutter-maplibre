@@ -244,6 +244,24 @@ class StyleControllerIos extends StyleController {
   }
 
   @override
+  Future<void> setFilter(String layerId, List<Object>? filter) async {
+    final ffiLayer = _ffiStyle.layerWithIdentifier(layerId.toNSString());
+    if (ffiLayer == null) {
+      throw Exception('Layer "$layerId" does not exist.');
+    }
+    if (!MLNVectorStyleLayer.isA(ffiLayer)) {
+      throw Exception('Layer "$layerId" does not support filters.');
+    }
+    final vectorLayer = MLNVectorStyleLayer.as(ffiLayer);
+    if (filter == null) {
+      vectorLayer.predicate = null;
+    } else {
+      final expression = jsonEncode(filter).toNSString();
+      vectorLayer.predicate = Helpers.parsePredicateWithRaw(expression);
+    }
+  }
+
+  @override
   Future<void> removeImage(String id) async {
     final ffiId = id.toNSString();
     _ffiStyle.removeImageForName(ffiId);

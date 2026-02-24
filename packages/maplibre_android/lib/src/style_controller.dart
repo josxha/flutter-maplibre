@@ -245,6 +245,61 @@ class StyleControllerAndroid extends StyleController {
   });
 
   @override
+  Future<void> setFilter(String layerId, List<Object>? filter) async =>
+      using((arena) {
+        final jLayer = _jStyle.getLayer(layerId.toJString()..releasedBy(arena));
+        if (jLayer == null) {
+          throw Exception('Layer "$layerId" does not exist.');
+        }
+        if (filter == null) {
+          // Clear filter by setting an "all" expression (match everything)
+          final jAll = jni.Expression$Converter.convert$2(
+            '["all"]'.toJString()..releasedBy(arena),
+          )!
+            ..releasedBy(arena);
+          // Try each supported layer type
+          if (jni.SymbolLayer.isA(jLayer)) {
+            jni.SymbolLayer.as(jLayer).setFilter(jAll);
+          } else if (jni.FillLayer.isA(jLayer)) {
+            jni.FillLayer.as(jLayer).setFilter(jAll);
+          } else if (jni.LineLayer.isA(jLayer)) {
+            jni.LineLayer.as(jLayer).setFilter(jAll);
+          } else if (jni.CircleLayer.isA(jLayer)) {
+            jni.CircleLayer.as(jLayer).setFilter(jAll);
+          } else if (jni.FillExtrusionLayer.isA(jLayer)) {
+            jni.FillExtrusionLayer.as(jLayer).setFilter(jAll);
+          } else if (jni.HeatmapLayer.isA(jLayer)) {
+            jni.HeatmapLayer.as(jLayer).setFilter(jAll);
+          } else {
+            throw Exception('Layer "$layerId" does not support filters.');
+          }
+        } else {
+          final jFilterString = jsonEncode(filter).toJString()
+            ..releasedBy(arena);
+          final jFilter = jni.Expression$Converter.convert$2(jFilterString);
+          if (jFilter == null) {
+            throw Exception('Invalid filter expression: $filter');
+          }
+          jFilter.releasedBy(arena);
+          if (jni.SymbolLayer.isA(jLayer)) {
+            jni.SymbolLayer.as(jLayer).setFilter(jFilter);
+          } else if (jni.FillLayer.isA(jLayer)) {
+            jni.FillLayer.as(jLayer).setFilter(jFilter);
+          } else if (jni.LineLayer.isA(jLayer)) {
+            jni.LineLayer.as(jLayer).setFilter(jFilter);
+          } else if (jni.CircleLayer.isA(jLayer)) {
+            jni.CircleLayer.as(jLayer).setFilter(jFilter);
+          } else if (jni.FillExtrusionLayer.isA(jLayer)) {
+            jni.FillExtrusionLayer.as(jLayer).setFilter(jFilter);
+          } else if (jni.HeatmapLayer.isA(jLayer)) {
+            jni.HeatmapLayer.as(jLayer).setFilter(jFilter);
+          } else {
+            throw Exception('Layer "$layerId" does not support filters.');
+          }
+        }
+      });
+
+  @override
   Future<void> removeImage(String id) async =>
       _jStyle.removeImage(id.toJString());
 
