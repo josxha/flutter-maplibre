@@ -247,56 +247,57 @@ class StyleControllerAndroid extends StyleController {
   @override
   Future<void> setFilter(String layerId, List<Object>? filter) async =>
       using((arena) {
-        final jLayer = _jStyle.getLayer(layerId.toJString()..releasedBy(arena));
-        if (jLayer == null) {
-          throw Exception('Layer "$layerId" does not exist.');
-        }
+        final jId = layerId.toJString()..releasedBy(arena);
+
+        final jni.Expression jExpr;
         if (filter == null) {
-          // Clear filter by setting an "all" expression (match everything)
-          final jAll = jni.Expression$Converter.convert$2(
+          jExpr = jni.Expression$Converter.convert$2(
             '["all"]'.toJString()..releasedBy(arena),
           )!
             ..releasedBy(arena);
-          // Try each supported layer type
-          if (jni.SymbolLayer.isA(jLayer)) {
-            jni.SymbolLayer.as(jLayer).setFilter(jAll);
-          } else if (jni.FillLayer.isA(jLayer)) {
-            jni.FillLayer.as(jLayer).setFilter(jAll);
-          } else if (jni.LineLayer.isA(jLayer)) {
-            jni.LineLayer.as(jLayer).setFilter(jAll);
-          } else if (jni.CircleLayer.isA(jLayer)) {
-            jni.CircleLayer.as(jLayer).setFilter(jAll);
-          } else if (jni.FillExtrusionLayer.isA(jLayer)) {
-            jni.FillExtrusionLayer.as(jLayer).setFilter(jAll);
-          } else if (jni.HeatmapLayer.isA(jLayer)) {
-            jni.HeatmapLayer.as(jLayer).setFilter(jAll);
-          } else {
-            throw Exception('Layer "$layerId" does not support filters.');
-          }
         } else {
-          final jFilterString = jsonEncode(filter).toJString()
-            ..releasedBy(arena);
-          final jFilter = jni.Expression$Converter.convert$2(jFilterString);
-          if (jFilter == null) {
+          final parsed = jni.Expression$Converter.convert$2(
+            jsonEncode(filter).toJString()..releasedBy(arena),
+          );
+          if (parsed == null) {
             throw Exception('Invalid filter expression: $filter');
           }
-          jFilter.releasedBy(arena);
-          if (jni.SymbolLayer.isA(jLayer)) {
-            jni.SymbolLayer.as(jLayer).setFilter(jFilter);
-          } else if (jni.FillLayer.isA(jLayer)) {
-            jni.FillLayer.as(jLayer).setFilter(jFilter);
-          } else if (jni.LineLayer.isA(jLayer)) {
-            jni.LineLayer.as(jLayer).setFilter(jFilter);
-          } else if (jni.CircleLayer.isA(jLayer)) {
-            jni.CircleLayer.as(jLayer).setFilter(jFilter);
-          } else if (jni.FillExtrusionLayer.isA(jLayer)) {
-            jni.FillExtrusionLayer.as(jLayer).setFilter(jFilter);
-          } else if (jni.HeatmapLayer.isA(jLayer)) {
-            jni.HeatmapLayer.as(jLayer).setFilter(jFilter);
-          } else {
-            throw Exception('Layer "$layerId" does not support filters.');
-          }
+          jExpr = parsed..releasedBy(arena);
         }
+
+        // getLayerAs로 각 타입 시도 (null이면 타입 불일치)
+        final symbol = _jStyle.getLayerAs(jId, T: jni.SymbolLayer.type);
+        if (symbol != null) {
+          symbol.setFilter(jExpr);
+          return;
+        }
+        final fill = _jStyle.getLayerAs(jId, T: jni.FillLayer.type);
+        if (fill != null) {
+          fill.setFilter(jExpr);
+          return;
+        }
+        final line = _jStyle.getLayerAs(jId, T: jni.LineLayer.type);
+        if (line != null) {
+          line.setFilter(jExpr);
+          return;
+        }
+        final circle = _jStyle.getLayerAs(jId, T: jni.CircleLayer.type);
+        if (circle != null) {
+          circle.setFilter(jExpr);
+          return;
+        }
+        final fillExt =
+            _jStyle.getLayerAs(jId, T: jni.FillExtrusionLayer.type);
+        if (fillExt != null) {
+          fillExt.setFilter(jExpr);
+          return;
+        }
+        final heatmap = _jStyle.getLayerAs(jId, T: jni.HeatmapLayer.type);
+        if (heatmap != null) {
+          heatmap.setFilter(jExpr);
+          return;
+        }
+        throw Exception('Layer "$layerId" does not exist or support filters.');
       });
 
   @override
