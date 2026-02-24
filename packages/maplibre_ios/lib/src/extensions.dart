@@ -142,10 +142,22 @@ NSExpression? parseNSExpression(String propertyName, String json) =>
 /// Internal extensions on [MLNFeature].
 extension MLNFeatureExt on MLNFeature {
   /// Convert a [MLNFeature] to a [RenderedFeature].
-  RenderedFeature toRenderedFeature() => RenderedFeature(
-    id: identifier == null ? null : toDartObject(identifier!),
-    properties: attributes.toDartMap().map((k, v) => MapEntry(k.toString(), v)),
-  );
+  RenderedFeature toRenderedFeature() {
+    Map<String, Object?>? geometry;
+    try {
+      final coord = coordinate;
+      geometry = {
+        'type': 'Point',
+        'coordinates': [coord.longitude, coord.latitude],
+      };
+    } catch (_) {}
+    return RenderedFeature(
+      id: identifier == null ? null : toDartObject(identifier!),
+      properties:
+          attributes.toDartMap().map((k, v) => MapEntry(k.toString(), v)),
+      geometry: geometry,
+    );
+  }
 }
 
 /// Internal extensions on [MLNStyleLayer].

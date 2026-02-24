@@ -528,14 +528,28 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
     final gson = jni.Gson();
     return features
         .map(
-          (feature) => RenderedFeature(
-            id: feature.id()?.toDartString(releaseOriginal: true),
-            properties:
-                jsonDecode(
-                      gson.toJson(feature.properties())?.toString() ?? '{}',
-                    )
-                    as Map<String, Object?>,
-          ),
+          (feature) {
+            Map<String, Object?>? geometry;
+            try {
+              final geomJson =
+                  gson.toJson(feature.geometry())?.toString();
+              if (geomJson != null && geomJson.isNotEmpty) {
+                final decoded = jsonDecode(geomJson);
+                if (decoded is Map<String, Object?>) {
+                  geometry = decoded;
+                }
+              }
+            } catch (_) {}
+            return RenderedFeature(
+              id: feature.id()?.toDartString(releaseOriginal: true),
+              properties:
+                  jsonDecode(
+                        gson.toJson(feature.properties())?.toString() ?? '{}',
+                      )
+                      as Map<String, Object?>,
+              geometry: geometry,
+            );
+          },
         )
         .toList(growable: false);
   }
