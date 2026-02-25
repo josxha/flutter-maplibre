@@ -456,7 +456,7 @@ final class MapLibreMapStateIos extends MapLibreMapState {
   void _didFinishLoadingStyle(MLNMapView mapView, MLNStyle mlnStyle) {
     if (!_pendingStyleLoaded) return;
     _pendingStyleLoaded = false;
-    
+
     // We need to refresh the cached style for when the style reloads.
     style?.dispose();
     final styleCtrl = style = StyleControllerIos._(mlnStyle);
