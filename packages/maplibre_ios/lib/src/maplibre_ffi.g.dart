@@ -953,6 +953,13 @@ _objc_msgSend_xtuoz7(_class_Helpers, _sel_removeOfflinePackProgressListenerWithC
 _objc_msgSend_r8gdi7(_class_Helpers, _sel_setValueWithTarget_field_value_, target.ref.pointer, field.ref.pointer, value.ref.pointer);
 
   }
+
+
+  /// zoomLevelToAltitudeWithZoomLevel:pitch:latitude:size:
+  static double zoomLevelToAltitudeWithZoomLevel(double zoomLevel, {required double pitch,required double latitude,required objc.CGSize size}) {
+    return objc.useMsgSendVariants ? _objc_msgSend_1aulivdFpret(_class_Helpers, _sel_zoomLevelToAltitudeWithZoomLevel_pitch_latitude_size_, zoomLevel, pitch, latitude, size) : _objc_msgSend_1aulivd(_class_Helpers, _sel_zoomLevelToAltitudeWithZoomLevel_pitch_latitude_size_, zoomLevel, pitch, latitude, size);
+
+  }
   /// Returns a new instance of Helpers constructed with the default `new` method.
   Helpers() : this.as(new$().object$);
 
@@ -31114,6 +31121,8 @@ final _objc_msgSend_18wcmvu = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Vo
 final _objc_msgSend_19l1l5m = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGPoint , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGPoint , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_19nvye5 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Bool Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<bool Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_1a5ayri = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , MLNCoordinateBounds , UIEdgeInsets )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , MLNCoordinateBounds , UIEdgeInsets )>();
+final _objc_msgSend_1aulivd = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Double Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Double , ffi.Double , ffi.Double , objc.CGSize )>>().asFunction<double Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , double , double , double , objc.CGSize )>();
+final _objc_msgSend_1aulivdFpret = objc.msgSendFpretPointer.cast<ffi.NativeFunction<ffi.Double Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Double , ffi.Double , ffi.Double , objc.CGSize )>>().asFunction<double Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , double , double , double , objc.CGSize )>();
 final _objc_msgSend_1awx4w = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGSize , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGSize , ffi.Pointer<objc.ObjCBlockImpl> )>();
 final _objc_msgSend_1c2zpn3 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGSize )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGSize )>();
 final _objc_msgSend_1c31cvt = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.UnsignedLong Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
@@ -32454,6 +32463,7 @@ late final _sel_visibleFeaturesInRect_inStyleLayersWithIdentifiers_predicate_ = 
 late final _sel_wantsSoftwareDimming = objc.registerName("wantsSoftwareDimming");
 late final _sel_zoomLevel = objc.registerName("zoomLevel");
 late final _sel_zoomLevelForExpandingCluster_ = objc.registerName("zoomLevelForExpandingCluster:");
+late final _sel_zoomLevelToAltitudeWithZoomLevel_pitch_latitude_size_ = objc.registerName("zoomLevelToAltitudeWithZoomLevel:pitch:latitude:size:");
 late final _sel_zoomLevelVariableExpression = objc.registerName("zoomLevelVariableExpression");
 typedef instancetype = ffi.Pointer<objc.ObjCObjectImpl>;
 typedef Dartinstancetype = objc.ObjCObject;
