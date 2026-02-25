@@ -1,7 +1,8 @@
 import 'dart:convert';
 import 'dart:ffi' hide Size;
 
-import 'package:flutter/cupertino.dart';
+import 'package:ffi/ffi.dart';
+import 'package:flutter/material.dart';
 import 'package:maplibre_ios/src/maplibre_ffi.g.dart';
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 import 'package:objective_c/objective_c.dart';
@@ -365,8 +366,7 @@ extension GeographicExt on Geographic {
 /// Extension methods for the [Color] class. Not exported publicly.
 extension ColorExt on Color {
   /// Convert a [Color] to a [UIColor].
-  UIColor toUIColor() =>
-      UIColor.colorWithRed(r, green: g, blue: b, alpha: a);
+  UIColor toUIColor() => UIColor.colorWithRed(r, green: g, blue: b, alpha: a);
 }
 
 /// UTF8 Encoding
@@ -375,21 +375,189 @@ const nsUTF8StringEncoding = 4;
 /// Internal extensions on [Expression]. Not exported publicly.
 extension ExpressionExt on Expression {
   /// Convert a [PropertyValue] to a [NSExpression].
-  NSExpression? toNSExpression() {
+  NSExpression toNSExpression() {
     final nsArray = this.json.toNSArray();
     return NSExpression.expressionWithMLNJSONObject(nsArray);
   }
 
   /// Convert a [PropertyValue] to a [NSPredicate].
-  NSPredicate? toNSPredicate() {
+  NSPredicate toNSPredicate() {
     final nsArray = this.json.toNSArray();
-    return Helpers.createPredicateWithData(nsArray);
+    return NSPredicate.predicateWithMLNJSONObject(nsArray);
   }
 }
 
 /// Internal extensions on [List<Object?>]. Not exported publicly.
 extension DartListToNSArray on List<Object?> {
-  /// Alternative to [toNSArray] that allows [Object?].
+  /// Alternative to [DartListToNSArray] that allows [Object?].
   NSArray toNSArray() =>
       NSArray.of(map((e) => toObjCObject(e, convertOther: toObjCObject)));
+}
+
+/// Extension to convert between [UIColor] and Dart's [Color].
+extension UIColorExt on UIColor {
+  /// Converts a [UIColor] to a Dart [Color].
+  Color toDartColor() {
+    final rPtr = calloc.allocate<Double>(sizeOf<Double>());
+    final gPtr = calloc.allocate<Double>(sizeOf<Double>());
+    final bPtr = calloc.allocate<Double>(sizeOf<Double>());
+    final aPtr = calloc.allocate<Double>(sizeOf<Double>());
+    try {
+      final success = getRed(rPtr, green: gPtr, blue: bPtr, alpha: aPtr);
+      if (!success) {
+        debugPrint(
+          'Failed to convert UIColor to Color. Falling back to transparent.',
+        );
+        return Colors.transparent;
+      }
+      return Color.fromARGB(
+        (aPtr.value * 255).round(),
+        (rPtr.value * 255).round(),
+        (gPtr.value * 255).round(),
+        (bPtr.value * 255).round(),
+      );
+    } finally {
+      calloc.free(rPtr);
+      calloc.free(gPtr);
+      calloc.free(bPtr);
+      calloc.free(aPtr);
+    }
+  }
+}
+
+/// Internal extensions on [NSExpression]. Not exported publicly.
+extension NSExpressionExt on NSExpression {
+  /// To [Expression]
+  Expression toExpression() {
+    final json = toDartObject(
+      mgl_jsonExpressionObject,
+      convertOther: toDartObject,
+    );
+    return Expression.fromJson(json as List<Object?>);
+  }
+
+  /// Convert a [NSExpression] to a Dart [PropertyValue] of type [V].
+  PropertyValue<V>? toPropertyValue<V extends Object?>() {
+    if (expressionType == NSExpressionType.NSConstantValueExpressionType) {
+      final ffiValue = constantValue;
+      if (ffiValue == null) return null;
+      final value = toDartObject(ffiValue) as V;
+      return PropertyValue.value(value);
+    } else {
+      return PropertyValue.expression(toExpression());
+    }
+  }
+
+  /// Convert a [NSExpression] to a Dart [PropertyValue] of type [Color].
+  PropertyValue<Color>? toColorPropertyValue() {
+    if (expressionType == NSExpressionType.NSConstantValueExpressionType) {
+      final ffiValue = constantValue;
+      if (ffiValue == null) return null;
+      final value = UIColor.as(ffiValue).toDartColor();
+      return PropertyValue.value(value);
+    } else {
+      return PropertyValue.expression(toExpression());
+    }
+  }
+
+  /// Convert a [NSExpression] to a Dart [PropertyValue] of type [E].
+  PropertyValue<E>? toEnumPropertyValue<E extends Enum>(List<E> enumValues) {
+    if (expressionType == NSExpressionType.NSConstantValueExpressionType) {
+      final ffiValue = constantValue;
+      if (ffiValue == null) return null;
+      final value = NSString.as(ffiValue).toDartString();
+      return PropertyValue.value(
+        enumValues.firstWhere(
+          (e) => e.name == value,
+          orElse: () => throw StateError('Invalid enum value: $value'),
+        ),
+      );
+    } else {
+      return PropertyValue.expression(toExpression());
+    }
+  }
+
+  /// Convert a [NSExpression] to a Dart [PropertyValue] of type [Offset].
+  PropertyValue<Offset>? toOffsetPropertyValue() {
+    if (expressionType == NSExpressionType.NSConstantValueExpressionType) {
+      final ffiValue = constantValue;
+      if (ffiValue == null) return null;
+      final nsArray = NSArray.as(ffiValue);
+      final offset = Offset(
+        NSNumber.as(nsArray.objectAtIndex(0)).doubleValue,
+        NSNumber.as(nsArray.objectAtIndex(1)).doubleValue,
+      );
+      return PropertyValue.value(offset);
+    } else {
+      return PropertyValue.expression(toExpression());
+    }
+  }
+
+  /// Convert a [NSExpression] to a Dart [PropertyValue] of type [EdgeInsets].
+  PropertyValue<EdgeInsets>? toEdgeInsetsPropertyValue() {
+    if (expressionType == NSExpressionType.NSConstantValueExpressionType) {
+      final ffiValue = constantValue;
+      if (ffiValue == null) return null;
+      final nsArray = NSArray.as(ffiValue);
+      final offset = EdgeInsets.only(
+        top: NSNumber.as(nsArray.objectAtIndex(0)).doubleValue,
+        left: NSNumber.as(nsArray.objectAtIndex(1)).doubleValue,
+        bottom: NSNumber.as(nsArray.objectAtIndex(2)).doubleValue,
+        right: NSNumber.as(nsArray.objectAtIndex(3)).doubleValue,
+      );
+      return PropertyValue.value(offset);
+    } else {
+      return PropertyValue.expression(toExpression());
+    }
+  }
+}
+
+/// Internal extensions on [NSPredicate]. Not exported publicly.
+extension NSPredicateExt on NSPredicate {
+  /// Convert a [NSPredicate] to a Dart [Expression].
+  Expression toExpression() {
+    final json = toDartObject(
+      mgl_jsonExpressionObject,
+      convertOther: toDartObject,
+    );
+    return Expression.fromJson(json as List<Object?>);
+  }
+}
+
+/// Internal extensions on [bool].
+extension BoolExt on bool {
+  /// Convert a [bool] to a [NSNumber].
+  NSNumber toNSNumber() => NSNumberCreation.numberWithBool(this);
+}
+
+/// Internal extensions on [PropertyValue].
+extension PropertyValueExt<V extends Object?> on PropertyValue<V> {
+  /// Convert a [PropertyValue] to a [NSExpression].
+  NSExpression toNSExpression() {
+    if (isExpression) {
+      return expression.toNSExpression();
+    } else {
+      final value = this.value;
+      final ObjCObject objcObject;
+      switch (value) {
+        case Color():
+          objcObject = value.toUIColor();
+        case Offset():
+          final nsArray = NSMutableArray.new$()..init();
+          nsArray.addObject(value.dx.toNSNumber());
+          nsArray.addObject(value.dy.toNSNumber());
+          objcObject = nsArray;
+        case EdgeInsets():
+          final nsArray = NSMutableArray.new$()..init();
+          nsArray.addObject(value.top.toNSNumber());
+          nsArray.addObject(value.left.toNSNumber());
+          nsArray.addObject(value.bottom.toNSNumber());
+          nsArray.addObject(value.right.toNSNumber());
+          objcObject = nsArray;
+        default:
+          objcObject = value.toNSObject();
+      }
+      return NSExpression.expressionForConstantValue(objcObject);
+    }
+  }
 }

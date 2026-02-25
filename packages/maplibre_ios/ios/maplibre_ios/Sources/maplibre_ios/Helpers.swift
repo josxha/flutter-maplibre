@@ -15,24 +15,6 @@ public class Helpers: NSObject {
         target.setValue(value, forKey: field)
     }
 
-    @objc public static func createPredicate(data: [Any]) -> NSPredicate? {
-        do {
-            return NSPredicate(mglJSONObject: data)
-        } catch let e {
-            print("Couldn't parse NSPredicate from JSON: \(e)")
-            return nil
-        }
-    }
-
-    @objc public static func createExpression(data: [Any]) -> NSExpression? {
-        do {
-            return NSExpression(mglJSONObject: data)
-        } catch let e {
-            print("Couldn't create JSONSerialization \(e)")
-            return nil
-        }
-    }
-
     @objc public static func parseExpression(
         propertyName: String, expression: String
     ) -> NSExpression? {

@@ -107,7 +107,7 @@ final class MapLibrePlugin extends MapLibrePlatform {
     'ColorReliefStyleLayer is not supported on this platform.',
   );
 
-  /*/// Create a platform specific [FillExtrusionStyleLayer] object.
+  /// Create a platform specific [FillExtrusionStyleLayer] object.
   @override
   FillExtrusionStyleLayer createFillExtrusionStyleLayer({
     required String id,
@@ -189,9 +189,6 @@ final class MapLibrePlugin extends MapLibrePlatform {
     required bool visible,
     required double minZoom,
     required double maxZoom,
-    required PropertyValue<Offset> translate,
-    required PropertyValue<ReferenceSpace> translateAnchor,
-    required PropertyValue<double>? sortKey,
     required PropertyValue<double> radius,
     required PropertyValue<double> weight,
     required PropertyValue<double> intensity,
@@ -205,9 +202,6 @@ final class MapLibrePlugin extends MapLibrePlatform {
     visible: visible,
     minZoom: minZoom,
     maxZoom: maxZoom,
-    translate: translate,
-    translateAnchor: translateAnchor,
-    sortKey: sortKey,
     radius: radius,
     weight: weight,
     intensity: intensity,
@@ -220,8 +214,6 @@ final class MapLibrePlugin extends MapLibrePlatform {
   HillshadeStyleLayer createHillshadeStyleLayer({
     required String id,
     required String sourceId,
-    required String? sourceLayerId,
-    required Expression? filter,
     required bool visible,
     required double minZoom,
     required double maxZoom,
@@ -236,19 +228,17 @@ final class MapLibrePlugin extends MapLibrePlatform {
   }) => HillshadeStyleLayerIos(
     id: id,
     sourceId: sourceId,
-    sourceLayerId: sourceLayerId,
-    filter: filter,
     visible: visible,
     minZoom: minZoom,
     maxZoom: maxZoom,
     illuminationDirection: illuminationDirection,
-    illuminationAltitude: illuminationAltitude,
+    // illuminationAltitude: illuminationAltitude,
     illuminationAnchor: illuminationAnchor,
     exaggeration: exaggeration,
     shadowColor: shadowColor,
     highlightColor: highlightColor,
     accentColor: accentColor,
-    method: method,
+    // method: method,
   );
 
   /// Create a platform specific [LineStyleLayer] object.
@@ -376,7 +366,8 @@ final class MapLibrePlugin extends MapLibrePlatform {
     required PropertyValue<TextJustify> textJustify,
     required PropertyValue<double> textRadialOffset,
     required PropertyValue<List<IconAnchor>>? textVariableAnchor,
-    required PropertyValue<List<OneOf2<String, Offset>>>? textVariableAnchorOffset,
+    required PropertyValue<List<OneOf2<String, Offset>>>?
+    textVariableAnchorOffset,
     required PropertyValue<TextAnchor> textAnchor,
     required PropertyValue<double> textMaxAngle,
     required PropertyValue<List<TextWritingMode>>? textWritingMode,
@@ -469,5 +460,5 @@ final class MapLibrePlugin extends MapLibrePlatform {
     textHaloBlur: textHaloBlur,
     textTranslate: textTranslate,
     textTranslateAnchor: textTranslateAnchor,
-  );*/
+  );
 }

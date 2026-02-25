@@ -17,63 +17,67 @@ class HeatmapStyleLayerWeb extends StyleLayerWeb implements HeatmapStyleLayer {
     required PropertyValue<Color>? color,
     required PropertyValue<double> opacity,
   }) : super.fromNativeLayer(
-          jsLayer: js.LayerSpecification(
-            id: id,
-            type: 'heatmap',
-            maxzoom: maxZoom,
-            minzoom: minZoom,
-            source: sourceId,
-            layout: createHeatmapLayout(visible: visible).jsify(),
-            paint: createHeatmapPaint(
-              radius: radius,
-              weight: weight,
-              intensity: intensity,
-              color: color,
-              opacity: opacity,
-            ).jsify(),
-          ),
-        ) {
+         jsLayer: js.LayerSpecification(
+           id: id,
+           type: 'heatmap',
+           maxzoom: maxZoom,
+           minzoom: minZoom,
+           source: sourceId,
+           layout: createHeatmapLayout(visible: visible).jsify(),
+           paint: createHeatmapPaint(
+             radius: radius,
+             weight: weight,
+             intensity: intensity,
+             color: color,
+             opacity: opacity,
+           ).jsify(),
+         ),
+       ) {
     if (sourceLayerId case final id?) jsLayer.sourceLayer = id;
     if (filter case final filter?) jsLayer.filter = filter.json.jsify()!;
   }
 
   @override
   PropertyValue<double> get radius =>
-      requireMap.getPaintProperty(id, 'heatmap-radius').toPropertyValue<double>() ??
+      requireMap
+          .getPaintProperty(id, 'heatmap-radius')
+          .toPropertyValue<double>() ??
       HeatmapStyleLayer.defaultRadius;
 
   @override
   set radius(PropertyValue<double> property) => requireMap.setPaintProperty(
-        id,
-        'heatmap-radius',
-        property.toJson().jsify(),
-      );
+    id,
+    'heatmap-radius',
+    property.toJson().jsify(),
+  );
 
   @override
   PropertyValue<double> get weight =>
-      requireMap.getPaintProperty(id, 'heatmap-weight').toPropertyValue<double>() ??
+      requireMap
+          .getPaintProperty(id, 'heatmap-weight')
+          .toPropertyValue<double>() ??
       HeatmapStyleLayer.defaultWeight;
 
   @override
   set weight(PropertyValue<double> property) => requireMap.setPaintProperty(
-        id,
-        'heatmap-weight',
-        property.toJson().jsify(),
-      );
+    id,
+    'heatmap-weight',
+    property.toJson().jsify(),
+  );
 
   @override
   PropertyValue<double> get intensity =>
       requireMap
-              .getPaintProperty(id, 'heatmap-intensity')
-              .toPropertyValue<double>() ??
+          .getPaintProperty(id, 'heatmap-intensity')
+          .toPropertyValue<double>() ??
       HeatmapStyleLayer.defaultIntensity;
 
   @override
   set intensity(PropertyValue<double> property) => requireMap.setPaintProperty(
-        id,
-        'heatmap-intensity',
-        property.toJson().jsify(),
-      );
+    id,
+    'heatmap-intensity',
+    property.toJson().jsify(),
+  );
 
   @override
   PropertyValue<Color>? get color =>
@@ -81,22 +85,24 @@ class HeatmapStyleLayerWeb extends StyleLayerWeb implements HeatmapStyleLayer {
 
   @override
   set color(PropertyValue<Color>? property) => requireMap.setPaintProperty(
-        id,
-        'heatmap-color',
-        property?.toJson().jsify(),
-      );
+    id,
+    'heatmap-color',
+    property?.toJson().jsify(),
+  );
 
   @override
   PropertyValue<double> get opacity =>
-      requireMap.getPaintProperty(id, 'heatmap-opacity').toPropertyValue<double>() ??
+      requireMap
+          .getPaintProperty(id, 'heatmap-opacity')
+          .toPropertyValue<double>() ??
       HeatmapStyleLayer.defaultOpacity;
 
   @override
   set opacity(PropertyValue<double> property) => requireMap.setPaintProperty(
-        id,
-        'heatmap-opacity',
-        property.toJson().jsify(),
-      );
+    id,
+    'heatmap-opacity',
+    property.toJson().jsify(),
+  );
 
   @override
   Expression? get filter =>

@@ -1,7 +1,8 @@
 part of 'style_layer.dart';
 
 /// WebView implementation of [FillStyleLayer].
-class FillStyleLayerWebView extends StyleLayerWebView implements FillStyleLayer {
+class FillStyleLayerWebView extends StyleLayerWebView
+    implements FillStyleLayer {
   FillStyleLayerWebView({
     required this.id,
     required this.sourceId,
@@ -80,4 +81,3 @@ class FillStyleLayerWebView extends StyleLayerWebView implements FillStyleLayer 
   @override
   PropertyValue<String>? pattern;
 }
-

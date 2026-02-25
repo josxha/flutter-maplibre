@@ -72,4 +72,3 @@ class HillshadeStyleLayerWebView extends StyleLayerWebView
   @override
   final String sourceId;
 }
-

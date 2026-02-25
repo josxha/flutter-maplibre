@@ -574,7 +574,9 @@ abstract interface class SymbolStyleLayer
   /// be [SymbolPlacement.point]. Supports [interpolate] expressions.
   PropertyValue<List<OneOf2<String, Offset>>>? get textVariableAnchorOffset;
 
-  set textVariableAnchorOffset(PropertyValue<List<OneOf2<String, Offset>>>? property);
+  set textVariableAnchorOffset(
+    PropertyValue<List<OneOf2<String, Offset>>>? property,
+  );
 
   /// {@macro text-anchor}
   ///

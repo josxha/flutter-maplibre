@@ -161,5 +161,4 @@ abstract interface class CircleStyleLayer
 
   /// The default value of [strokeOpacity].
   static const defaultStrokeOpacity = PropertyValue<double>.value(1);
-
 }

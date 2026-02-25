@@ -86,7 +86,7 @@ final class MapLibrePlugin extends MapLibrePlatform {
     strokeOpacity: strokeOpacity,
   );
 
-/// Create a platform specific [ColorReliefStyleLayer] object.
+  /// Create a platform specific [ColorReliefStyleLayer] object.
   @override
   ColorReliefStyleLayer createColorReliefStyleLayer({
     required String id,
@@ -365,7 +365,8 @@ final class MapLibrePlugin extends MapLibrePlatform {
     required PropertyValue<TextJustify> textJustify,
     required PropertyValue<double> textRadialOffset,
     required PropertyValue<List<IconAnchor>>? textVariableAnchor,
-    required PropertyValue<List<OneOf2<String, Offset>>>? textVariableAnchorOffset,
+    required PropertyValue<List<OneOf2<String, Offset>>>?
+    textVariableAnchorOffset,
     required PropertyValue<TextAnchor> textAnchor,
     required PropertyValue<double> textMaxAngle,
     required PropertyValue<List<TextWritingMode>>? textWritingMode,

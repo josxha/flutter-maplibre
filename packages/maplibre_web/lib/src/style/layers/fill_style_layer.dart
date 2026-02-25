@@ -20,40 +20,41 @@ class FillStyleLayerWeb extends StyleLayerWeb implements FillStyleLayer {
     required PropertyValue<Color> outlineColor,
     required PropertyValue<String>? pattern,
   }) : super.fromNativeLayer(
-          jsLayer: js.LayerSpecification(
-            id: id,
-            type: 'fill',
-            maxzoom: maxZoom,
-            minzoom: minZoom,
-            source: sourceId,
-            layout:
-                createFillLayout(visible: visible, sortKey: sortKey).jsify(),
-            paint: createFillPaint(
-              antialias: antialias,
-              color: color,
-              opacity: opacity,
-              outlineColor: outlineColor,
-              pattern: pattern,
-              translate: translate,
-              translateAnchor: translateAnchor,
-            ).jsify(),
-          ),
-        ) {
+         jsLayer: js.LayerSpecification(
+           id: id,
+           type: 'fill',
+           maxzoom: maxZoom,
+           minzoom: minZoom,
+           source: sourceId,
+           layout: createFillLayout(visible: visible, sortKey: sortKey).jsify(),
+           paint: createFillPaint(
+             antialias: antialias,
+             color: color,
+             opacity: opacity,
+             outlineColor: outlineColor,
+             pattern: pattern,
+             translate: translate,
+             translateAnchor: translateAnchor,
+           ).jsify(),
+         ),
+       ) {
     if (sourceLayerId case final id?) jsLayer.sourceLayer = id;
     if (filter case final filter?) jsLayer.filter = filter.json.jsify()!;
   }
 
   @override
   PropertyValue<bool> get antialias =>
-      requireMap.getPaintProperty(id, 'fill-antialias').toPropertyValue<bool>() ??
+      requireMap
+          .getPaintProperty(id, 'fill-antialias')
+          .toPropertyValue<bool>() ??
       FillStyleLayer.defaultAntialias;
 
   @override
   set antialias(PropertyValue<bool> property) => requireMap.setPaintProperty(
-        id,
-        'fill-antialias',
-        property.toJson().jsify(),
-      );
+    id,
+    'fill-antialias',
+    property.toJson().jsify(),
+  );
 
   @override
   PropertyValue<Color> get color =>
@@ -61,49 +62,44 @@ class FillStyleLayerWeb extends StyleLayerWeb implements FillStyleLayer {
       FillStyleLayer.defaultColor;
 
   @override
-  set color(PropertyValue<Color> property) => requireMap.setPaintProperty(
-        id,
-        'fill-color',
-        property.toJson().jsify(),
-      );
+  set color(PropertyValue<Color> property) =>
+      requireMap.setPaintProperty(id, 'fill-color', property.toJson().jsify());
 
   @override
   PropertyValue<double> get opacity =>
-      requireMap.getPaintProperty(id, 'fill-opacity').toPropertyValue<double>() ??
+      requireMap
+          .getPaintProperty(id, 'fill-opacity')
+          .toPropertyValue<double>() ??
       FillStyleLayer.defaultOpacity;
 
   @override
   set opacity(PropertyValue<double> property) => requireMap.setPaintProperty(
-        id,
-        'fill-opacity',
-        property.toJson().jsify(),
-      );
+    id,
+    'fill-opacity',
+    property.toJson().jsify(),
+  );
 
   @override
   PropertyValue<Color> get outlineColor =>
       requireMap
-              .getPaintProperty(id, 'fill-outline-color')
-              .toColorPropertyValue() ??
+          .getPaintProperty(id, 'fill-outline-color')
+          .toColorPropertyValue() ??
       FillStyleLayer.defaultOutlineColor;
 
   @override
-  set outlineColor(PropertyValue<Color> property) => requireMap.setPaintProperty(
-        id,
-        'fill-outline-color',
-        property.toJson().jsify(),
-      );
+  set outlineColor(PropertyValue<Color> property) => requireMap
+      .setPaintProperty(id, 'fill-outline-color', property.toJson().jsify());
 
   @override
-  PropertyValue<String>? get pattern => requireMap
-      .getPaintProperty(id, 'fill-pattern')
-      .toPropertyValue<String>();
+  PropertyValue<String>? get pattern =>
+      requireMap.getPaintProperty(id, 'fill-pattern').toPropertyValue<String>();
 
   @override
   set pattern(PropertyValue<String>? property) => requireMap.setPaintProperty(
-        id,
-        'fill-pattern',
-        property?.toJson().jsify(),
-      );
+    id,
+    'fill-pattern',
+    property?.toJson().jsify(),
+  );
 
   @override
   Expression? get filter =>
@@ -113,15 +109,16 @@ class FillStyleLayerWeb extends StyleLayerWeb implements FillStyleLayer {
   set filter(Expression? value) => jsLayer.filter = value!.json.jsify()!;
 
   @override
-  PropertyValue<double>? get sortKey =>
-      requireMap.getLayoutProperty(id, 'fill-sort-key').toPropertyValue<double>();
+  PropertyValue<double>? get sortKey => requireMap
+      .getLayoutProperty(id, 'fill-sort-key')
+      .toPropertyValue<double>();
 
   @override
   set sortKey(PropertyValue<double>? value) => requireMap.setLayoutProperty(
-        id,
-        'fill-sort-key',
-        value?.toJson().jsify(),
-      );
+    id,
+    'fill-sort-key',
+    value?.toJson().jsify(),
+  );
 
   @override
   String? get sourceLayerId => jsLayer.sourceLayer;
@@ -131,18 +128,18 @@ class FillStyleLayerWeb extends StyleLayerWeb implements FillStyleLayer {
 
   @override
   PropertyValue<Offset> get translate =>
-      requireMap.getPaintProperty(id, 'fill-translate').toOffsetPropertyValue() ??
+      requireMap
+          .getPaintProperty(id, 'fill-translate')
+          .toOffsetPropertyValue() ??
       StyleLayerWithTranslate.defaultTranslate;
 
   @override
-  set translate(PropertyValue<Offset> value) => requireMap.setPaintProperty(
-        id,
-        'fill-translate',
-        value.toJson().jsify(),
-      );
+  set translate(PropertyValue<Offset> value) =>
+      requireMap.setPaintProperty(id, 'fill-translate', value.toJson().jsify());
 
   @override
-  PropertyValue<ReferenceSpace> get translateAnchor => requireMap
+  PropertyValue<ReferenceSpace> get translateAnchor =>
+      requireMap
           .getPaintProperty(id, 'fill-translate-anchor')
           .toEnumPropertyValue(ReferenceSpace.values) ??
       StyleLayerWithTranslate.defaultTranslateAnchor;

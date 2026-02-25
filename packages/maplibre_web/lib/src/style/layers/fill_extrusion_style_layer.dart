@@ -144,8 +144,8 @@ class FillExtrusionStyleLayerWeb extends StyleLayerWeb
   @override
   PropertyValue<ReferenceSpace> get translateAnchor =>
       requireMap
-              .getPaintProperty(id, 'fill-extrusion-translate-anchor')
-              .toEnumPropertyValue(ReferenceSpace.values) ??
+          .getPaintProperty(id, 'fill-extrusion-translate-anchor')
+          .toEnumPropertyValue(ReferenceSpace.values) ??
       StyleLayerWithTranslate.defaultTranslateAnchor;
 
   @override

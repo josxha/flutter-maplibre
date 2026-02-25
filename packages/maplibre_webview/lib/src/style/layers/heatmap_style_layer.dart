@@ -66,4 +66,3 @@ class HeatmapStyleLayerWebView extends StyleLayerWebView
   @override
   PropertyValue<double> opacity;
 }
-

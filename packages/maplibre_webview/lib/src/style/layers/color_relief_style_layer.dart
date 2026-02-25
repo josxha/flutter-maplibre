@@ -13,14 +13,11 @@ class ColorReliefStyleLayerWebView extends StyleLayerWebView
   });
 
   @override
-  Map<String, Object?> get layout =>
-      createColorReliefLayout(visible: visible);
+  Map<String, Object?> get layout => createColorReliefLayout(visible: visible);
 
   @override
-  Map<String, Object?> get paint => createColorReliefPaint(
-    color: color,
-    opacity: opacity,
-  );
+  Map<String, Object?> get paint =>
+      createColorReliefPaint(color: color, opacity: opacity);
 
   @override
   bool visible;
@@ -43,4 +40,3 @@ class ColorReliefStyleLayerWebView extends StyleLayerWebView
   @override
   final String sourceId;
 }
-

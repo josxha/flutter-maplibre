@@ -1,6 +1,7 @@
 part of 'style_layer.dart';
 
-class LineStyleLayerWebView extends StyleLayerWebView implements LineStyleLayer {
+class LineStyleLayerWebView extends StyleLayerWebView
+    implements LineStyleLayer {
   LineStyleLayerWebView({
     required this.id,
     required this.sourceId,
@@ -121,4 +122,3 @@ class LineStyleLayerWebView extends StyleLayerWebView implements LineStyleLayer 
   @override
   final String sourceId;
 }
-

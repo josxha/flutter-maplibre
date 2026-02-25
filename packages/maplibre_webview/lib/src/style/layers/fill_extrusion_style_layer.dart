@@ -82,4 +82,3 @@ class FillExtrusionStyleLayerWebView extends StyleLayerWebView
   @override
   PropertyValue<ReferenceSpace> translateAnchor;
 }
-

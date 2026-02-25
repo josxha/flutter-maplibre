@@ -66,9 +66,7 @@ class CircleStyleLayerWeb extends StyleLayerWeb implements CircleStyleLayer {
 
   @override
   PropertyValue<Color> get color =>
-      requireMap
-          .getPaintProperty(id, 'circle-color')
-          .toColorPropertyValue() ??
+      requireMap.getPaintProperty(id, 'circle-color').toColorPropertyValue() ??
       CircleStyleLayer.defaultColor;
 
   @override
@@ -96,8 +94,8 @@ class CircleStyleLayerWeb extends StyleLayerWeb implements CircleStyleLayer {
   @override
   PropertyValue<ReferenceSpace> get pitchAlignment =>
       requireMap
-              .getPaintProperty(id, 'circle-pitch-alignment')
-              .toEnumPropertyValue(ReferenceSpace.values) ??
+          .getPaintProperty(id, 'circle-pitch-alignment')
+          .toEnumPropertyValue(ReferenceSpace.values) ??
       CircleStyleLayer.defaultPitchAlignment;
 
   @override
@@ -107,8 +105,8 @@ class CircleStyleLayerWeb extends StyleLayerWeb implements CircleStyleLayer {
   @override
   PropertyValue<ReferenceSpace> get pitchScale =>
       requireMap
-              .getPaintProperty(id, 'circle-pitch-scale')
-              .toEnumPropertyValue(ReferenceSpace.values) ??
+          .getPaintProperty(id, 'circle-pitch-scale')
+          .toEnumPropertyValue(ReferenceSpace.values) ??
       CircleStyleLayer.defaultPitchScale;
 
   @override
@@ -203,8 +201,8 @@ class CircleStyleLayerWeb extends StyleLayerWeb implements CircleStyleLayer {
   @override
   PropertyValue<ReferenceSpace> get translateAnchor =>
       requireMap
-              .getPaintProperty(id, 'circle-translate-anchor')
-              .toEnumPropertyValue(ReferenceSpace.values) ??
+          .getPaintProperty(id, 'circle-translate-anchor')
+          .toEnumPropertyValue(ReferenceSpace.values) ??
       StyleLayerWithTranslate.defaultTranslateAnchor;
 
   @override

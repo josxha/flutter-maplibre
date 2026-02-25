@@ -114,16 +114,16 @@ class _FeaturesQueryPageState extends State<FeaturesQueryPage> {
     );
 
     await style.addLayer(
-       FillStyleLayer(
+      FillStyleLayer(
         id: 'polygons',
         sourceId: 'polygons',
-         color: const PropertyValue.value(Color(0xFF429EF5)),
-         opacity: const PropertyValue.value(0.6),
+        color: const PropertyValue.value(Color(0xFF429EF5)),
+        opacity: const PropertyValue.value(0.6),
       ),
     );
 
     await style.addLayer(
-       CircleStyleLayer(
+      CircleStyleLayer(
         id: 'points',
         sourceId: 'points',
         color: const PropertyValue.value(Color(0xFFF54242)),

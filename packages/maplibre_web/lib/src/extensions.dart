@@ -160,7 +160,10 @@ extension StringMap on JSAny? {
       return PropertyValue.value(NumberArray.number(property.toDouble()));
     }
     if (property is List) {
-      final nums = property.whereType<num>().map((e) => e.toDouble()).toList(growable: false);
+      final nums = property
+          .whereType<num>()
+          .map((e) => e.toDouble())
+          .toList(growable: false);
       return PropertyValue.value(NumberArray.array(nums));
     }
     throw StateError(
@@ -202,10 +205,12 @@ extension StringMap on JSAny? {
     }
     if (property is List) {
       final result = property
-          .map((e) => enumValues.firstWhere(
-                (v) => v.name == e.toString(),
-                orElse: () => throw StateError('Invalid enum value: $e'),
-              ))
+          .map(
+            (e) => enumValues.firstWhere(
+              (v) => v.name == e.toString(),
+              orElse: () => throw StateError('Invalid enum value: $e'),
+            ),
+          )
           .toList(growable: false);
       return PropertyValue.value(result);
     }

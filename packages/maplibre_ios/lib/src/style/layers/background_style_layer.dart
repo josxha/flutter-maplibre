@@ -29,19 +29,14 @@ class BackgroundStyleLayerIos extends StyleLayerIos<MLNBackgroundStyleLayer>
     : super.fromNativeLayer();
 
   @override
-  PropertyValue<Color> get color {
-    throw UnimplementedError();
-    /*final nsExpression = ffiLayer.backgroundColor;
-    if (nsExpression.expressionType == NSExpressionType.NSConstantValueExpressionType) {
-      final colorValue = UIColor.as(nsExpression.constantValue!);
-      return PropertyValue(colorValue.toDartColor());
-    }*/
-  }
+  PropertyValue<Color> get color =>
+      ffiLayer.backgroundColor.toColorPropertyValue() ??
+      BackgroundStyleLayer.defaultColor;
 
   @override
   set color(PropertyValue<Color> property) {
     if (property.isExpression) {
-      ffiLayer.backgroundColor = property.expression.toNSExpression()!;
+      ffiLayer.backgroundColor = property.expression.toNSExpression();
     } else {
       ffiLayer.backgroundColor = NSExpression.expressionForConstantValue(
         property.value.toUIColor(),
@@ -50,12 +45,14 @@ class BackgroundStyleLayerIos extends StyleLayerIos<MLNBackgroundStyleLayer>
   }
 
   @override
-  PropertyValue<double> get opacity => throw UnimplementedError();
+  PropertyValue<double> get opacity =>
+      ffiLayer.backgroundOpacity.toPropertyValue() ??
+      BackgroundStyleLayer.defaultOpacity;
 
   @override
   set opacity(PropertyValue<double> property) {
     if (property.isExpression) {
-      ffiLayer.backgroundOpacity = property.expression.toNSExpression()!;
+      ffiLayer.backgroundOpacity = property.expression.toNSExpression();
     } else {
       ffiLayer.backgroundOpacity = NSExpression.expressionForConstantValue(
         property.value.toNSNumber(),
@@ -64,7 +61,8 @@ class BackgroundStyleLayerIos extends StyleLayerIos<MLNBackgroundStyleLayer>
   }
 
   @override
-  PropertyValue<String>? get pattern => throw UnimplementedError();
+  PropertyValue<String>? get pattern =>
+      ffiLayer.backgroundPattern.toPropertyValue();
 
   @override
   set pattern(PropertyValue<String>? property) {
@@ -73,7 +71,7 @@ class BackgroundStyleLayerIos extends StyleLayerIos<MLNBackgroundStyleLayer>
         null,
       );
     } else if (property.isExpression) {
-      ffiLayer.backgroundPattern = property.expression.toNSExpression()!;
+      ffiLayer.backgroundPattern = property.expression.toNSExpression();
     } else {
       ffiLayer.backgroundPattern = NSExpression.expressionForConstantValue(
         property.value.toNSString(),

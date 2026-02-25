@@ -72,4 +72,3 @@ class RasterStyleLayerWebView extends StyleLayerWebView
   @override
   final String sourceId;
 }
-

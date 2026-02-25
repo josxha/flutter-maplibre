@@ -53,6 +53,7 @@ void main(List<String> args) {
           'MLNVectorStyleLayer.h',
           'MLNAttributionInfo.h',
           'NSExpression+MLNAdditions.h',
+          'NSPredicate+MLNAdditions.h',
           'MLNOfflineStorage.h',
           'MLNOfflinePack.h',
           'MLNOfflineRegion.h',

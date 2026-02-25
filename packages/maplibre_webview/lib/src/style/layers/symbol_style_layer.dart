@@ -237,8 +237,7 @@ class SymbolStyleLayerWebView extends StyleLayerWebView
   PropertyValue<List<IconAnchor>>? textVariableAnchor;
 
   @override
-  PropertyValue<List<OneOf2<String, Offset>>>?
-  textVariableAnchorOffset;
+  PropertyValue<List<OneOf2<String, Offset>>>? textVariableAnchorOffset;
 
   @override
   PropertyValue<TextAnchor> textAnchor;
@@ -333,5 +332,3 @@ class SymbolStyleLayerWebView extends StyleLayerWebView
   @override
   final String sourceId;
 }
-
-

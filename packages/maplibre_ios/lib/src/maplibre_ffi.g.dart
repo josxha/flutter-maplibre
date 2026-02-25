@@ -930,24 +930,10 @@ extension type Helpers._(objc.ObjCObject object$) implements objc.ObjCObject,obj
   }
 
 
-  /// createExpressionWithData:
-  static NSExpression? createExpressionWithData(objc.NSArray data) {
-    final $ret = _objc_msgSend_1sotr3r(_class_Helpers, _sel_createExpressionWithData_, data.ref.pointer);
-    return $ret.address == 0 ? null : NSExpression.fromPointer($ret, retain: true, release: true);
-  }
-
-
   /// createOfflinePackProgressListenerWithCallbacks:
   static void createOfflinePackProgressListenerWithCallbacks(OfflinePackProgressCallbacks callbacks) {
 _objc_msgSend_xtuoz7(_class_Helpers, _sel_createOfflinePackProgressListenerWithCallbacks_, callbacks.ref.pointer);
 
-  }
-
-
-  /// createPredicateWithData:
-  static NSPredicate? createPredicateWithData(objc.NSArray data) {
-    final $ret = _objc_msgSend_1sotr3r(_class_Helpers, _sel_createPredicateWithData_, data.ref.pointer);
-    return $ret.address == 0 ? null : NSPredicate.fromPointer($ret, retain: true, release: true);
   }
 
 
@@ -1001,10 +987,33 @@ extension Helpers$Methods on Helpers {
 }
 
 
+/// MLNAdditions
+extension MLNAdditions on NSPredicate {
+
+  /// An equivalent Foundation object that can be serialized as JSON.
+/// 
+/// The Foundation object conforms to the
+/// [MapLibre Style Spec](https://maplibre.org/maplibre-style-spec/expressions/).
+/// See the
+/// “[Predicates and Expressions](../predicates-and-expressions.html)”
+/// guide for a correspondence of operators and types between the style
+/// specification and the `NSPredicate` representation used by this SDK.
+/// 
+/// You can use `NSJSONSerialization` to serialize the Foundation object as data to
+/// write to a file.
+  objc.ObjCObject get mgl_jsonExpressionObject {
+  objc.checkOsVersionInternal('NSPredicate.mgl_jsonExpressionObject', iOS: (false, (3, 0, 0)), macOS: (false, (10, 4, 0)));
+    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_mgl_jsonExpressionObject);
+    return objc.ObjCObject($ret, retain: true, release: true);
+  }
+
+}
+
+
 /// Methods for creating expressions that use Mapbox-specific functionality and for
 /// converting to and from the JSON format defined in the
 /// <a href="https://maplibre.org/maplibre-style-spec/expressions/">MapLibre Style Spec</a>.
-extension MLNAdditions on NSExpression {
+extension MLNAdditions$1 on NSExpression {
 
   /// Returns a copy of the receiver localized into the given locale.
 /// 
@@ -21973,6 +21982,27 @@ extension type NSPredicate._(objc.ObjCObject object$) implements objc.ObjCObject
   }
 
 
+  /// Returns a predicate equivalent to the given Foundation object deserialized
+/// from JSON data.
+/// 
+/// The Foundation object is interpreted according to the
+/// [MapLibre Style Spec](https://maplibre.org/maplibre-style-spec/expressions/).
+/// See the
+/// “[Predicates and Expressions](../predicates-and-expressions.html)”
+/// guide for a correspondence of operators and types between the style
+/// specification and the `NSPredicate` representation used by this SDK.
+/// 
+/// @param object A Foundation object deserialized from JSON data, for example
+/// using `NSJSONSerialization`.
+/// @return An initialized predicate equivalent to `object`, suitable for use
+/// with the ``MLNVectorStyleLayer/predicate`` property.
+  static NSPredicate predicateWithMLNJSONObject(objc.ObjCObject object) {
+  objc.checkOsVersionInternal('NSPredicate.predicateWithMLNJSONObject:', iOS: (false, (3, 0, 0)), macOS: (false, (10, 4, 0)));
+    final $ret = _objc_msgSend_1sotr3r(_class_NSPredicate, _sel_predicateWithMLNJSONObject_, object.ref.pointer);
+    return NSPredicate.fromPointer($ret, retain: true, release: true);
+  }
+
+
   /// predicateWithValue:
   static NSPredicate predicateWithValue(bool value) {
   objc.checkOsVersionInternal('NSPredicate.predicateWithValue:', iOS: (false, (3, 0, 0)), macOS: (false, (10, 4, 0)));
@@ -32094,9 +32124,7 @@ late final _sel_coordinateSpace = objc.registerName("coordinateSpace");
 late final _sel_coordinates = objc.registerName("coordinates");
 late final _sel_copy_ = objc.registerName("copy:");
 late final _sel_countOfBytesCompleted = objc.registerName("countOfBytesCompleted");
-late final _sel_createExpressionWithData_ = objc.registerName("createExpressionWithData:");
 late final _sel_createOfflinePackProgressListenerWithCallbacks_ = objc.registerName("createOfflinePackProgressListenerWithCallbacks:");
-late final _sel_createPredicateWithData_ = objc.registerName("createPredicateWithData:");
 late final _sel_createTilePyramidOfflineRegionWithStyleURL_south_west_east_north_fromZoomLevel_toZoomLevel_ = objc.registerName("createTilePyramidOfflineRegionWithStyleURL:south:west:east:north:fromZoomLevel:toZoomLevel:");
 late final _sel_currentEDRHeadroom = objc.registerName("currentEDRHeadroom");
 late final _sel_currentMode = objc.registerName("currentMode");
@@ -32567,6 +32595,7 @@ late final _sel_predicateFromMetadataQueryString_ = objc.registerName("predicate
 late final _sel_predicateWithBlock_ = objc.registerName("predicateWithBlock:");
 late final _sel_predicateWithFormat_ = objc.registerName("predicateWithFormat:");
 late final _sel_predicateWithFormat_argumentArray_ = objc.registerName("predicateWithFormat:argumentArray:");
+late final _sel_predicateWithMLNJSONObject_ = objc.registerName("predicateWithMLNJSONObject:");
 late final _sel_predicateWithSubstitutionVariables_ = objc.registerName("predicateWithSubstitutionVariables:");
 late final _sel_predicateWithValue_ = objc.registerName("predicateWithValue:");
 late final _sel_preferredElementSize = objc.registerName("preferredElementSize");
