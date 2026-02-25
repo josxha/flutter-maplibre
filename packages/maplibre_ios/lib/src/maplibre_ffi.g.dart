@@ -906,6 +906,13 @@ extension type Helpers._(objc.ObjCObject object$) implements objc.ObjCObject,obj
   }
 
 
+  /// altitudeToZoomLevelWithZoomLevel:pitch:latitude:size:
+  static double altitudeToZoomLevelWithZoomLevel(double zoomLevel, {required double pitch,required double latitude,required objc.CGSize size}) {
+    return objc.useMsgSendVariants ? _objc_msgSend_1aulivdFpret(_class_Helpers, _sel_altitudeToZoomLevelWithZoomLevel_pitch_latitude_size_, zoomLevel, pitch, latitude, size) : _objc_msgSend_1aulivd(_class_Helpers, _sel_altitudeToZoomLevelWithZoomLevel_pitch_latitude_size_, zoomLevel, pitch, latitude, size);
+
+  }
+
+
   /// createOfflinePackProgressListenerWithCallbacks:
   static void createOfflinePackProgressListenerWithCallbacks(OfflinePackProgressCallbacks callbacks) {
 _objc_msgSend_xtuoz7(_class_Helpers, _sel_createOfflinePackProgressListenerWithCallbacks_, callbacks.ref.pointer);
@@ -31114,6 +31121,8 @@ final _objc_msgSend_18wcmvu = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Vo
 final _objc_msgSend_19l1l5m = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGPoint , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGPoint , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_19nvye5 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Bool Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<bool Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_1a5ayri = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , MLNCoordinateBounds , UIEdgeInsets )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , MLNCoordinateBounds , UIEdgeInsets )>();
+final _objc_msgSend_1aulivd = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Double Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Double , ffi.Double , ffi.Double , objc.CGSize )>>().asFunction<double Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , double , double , double , objc.CGSize )>();
+final _objc_msgSend_1aulivdFpret = objc.msgSendFpretPointer.cast<ffi.NativeFunction<ffi.Double Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Double , ffi.Double , ffi.Double , objc.CGSize )>>().asFunction<double Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , double , double , double , objc.CGSize )>();
 final _objc_msgSend_1awx4w = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGSize , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGSize , ffi.Pointer<objc.ObjCBlockImpl> )>();
 final _objc_msgSend_1c2zpn3 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGSize )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGSize )>();
 final _objc_msgSend_1c31cvt = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.UnsignedLong Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
@@ -31327,6 +31336,7 @@ late final _sel_alloc = objc.registerName("alloc");
 late final _sel_allocWithZone_ = objc.registerName("allocWithZone:");
 late final _sel_allowEvaluation = objc.registerName("allowEvaluation");
 late final _sel_altitude = objc.registerName("altitude");
+late final _sel_altitudeToZoomLevelWithZoomLevel_pitch_latitude_size_ = objc.registerName("altitudeToZoomLevelWithZoomLevel:pitch:latitude:size:");
 late final _sel_anchorPointForGesture_ = objc.registerName("anchorPointForGesture:");
 late final _sel_anchorRotateOrZoomGesturesToCenterCoordinate = objc.registerName("anchorRotateOrZoomGesturesToCenterCoordinate");
 late final _sel_animatedImageNamed_duration_ = objc.registerName("animatedImageNamed:duration:");
