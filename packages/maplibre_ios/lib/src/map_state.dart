@@ -16,6 +16,7 @@ part 'style_controller.dart';
 final class MapLibreMapStateIos extends MapLibreMapState {
   late final int _viewId;
   MLNMapView? _mapView;
+  bool _pendingStyleLoaded = true;
 
   @override
   StyleControllerIos? style;
@@ -111,6 +112,15 @@ final class MapLibreMapStateIos extends MapLibreMapState {
       camera = getCamera();
       isInitialized = true;
     });
+
+    /// The style may have already finished loading before FlutterApi is
+    /// registered, e.g. if the style is provided via JSON directly. In that
+    /// case, we can directly call the style loaded callback here.
+    if (_pendingStyleLoaded) {
+      if (mapView.style case final style?) {
+        _didFinishLoadingStyle(mapView, style);
+      }
+    }
   }
 
   @override
@@ -412,6 +422,7 @@ final class MapLibreMapStateIos extends MapLibreMapState {
 
   @override
   Future<void> setStyle(String style) async {
+    _pendingStyleLoaded = true;
     final prepared = await _prepareStyle(style);
     if (NSString.isA(prepared)) {
       _mapView!.styleJSON = NSString.as(prepared);
@@ -443,6 +454,7 @@ final class MapLibreMapStateIos extends MapLibreMapState {
 
   /// MLNMapViewDelegate method called when map has finished loading
   void _didFinishLoadingStyle(MLNMapView mapView, MLNStyle mlnStyle) {
+    _pendingStyleLoaded = false;
     // We need to refresh the cached style for when the style reloads.
     style?.dispose();
     final styleCtrl = style = StyleControllerIos._(mlnStyle);
