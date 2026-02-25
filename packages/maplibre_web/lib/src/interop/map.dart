@@ -180,21 +180,73 @@ extension type SourceSpecification._(JSObject _) implements JSObject {
   });
 
   /// Create a new raster DEM source.
-  external factory SourceSpecification.rasterDem({
+  factory SourceSpecification.rasterDem({
     required String type,
     required int tileSize,
     required String? attribution,
     String? url,
     JSAny? tiles,
+  }) => url != null
+      ? SourceSpecification._rasterDemUrl(
+          type: type,
+          tileSize: tileSize,
+          attribution: attribution,
+          url: url,
+        )
+      : SourceSpecification._rasterDemTiles(
+          type: type,
+          tileSize: tileSize,
+          attribution: attribution,
+          tiles: tiles!,
+        );
+
+  external factory SourceSpecification._rasterDemUrl({
+    required String type,
+    required int tileSize,
+    required String? attribution,
+    required String url,
+  });
+
+  external factory SourceSpecification._rasterDemTiles({
+    required String type,
+    required int tileSize,
+    required String? attribution,
+    required JSAny tiles,
   });
 
   /// Create a new raster source.
-  external factory SourceSpecification.raster({
+  factory SourceSpecification.raster({
     required String type,
     required int tileSize,
     required String? attribution,
     JSAny? tiles,
     String? url,
+  }) => url != null
+      ? SourceSpecification._rasterUrl(
+          type: type,
+          tileSize: tileSize,
+          attribution: attribution,
+          url: url,
+        )
+      : SourceSpecification._rasterTiles(
+          type: type,
+          tileSize: tileSize,
+          attribution: attribution,
+          tiles: tiles!,
+        );
+
+  external factory SourceSpecification._rasterUrl({
+    required String type,
+    required int tileSize,
+    required String? attribution,
+    required String url,
+  });
+
+  external factory SourceSpecification._rasterTiles({
+    required String type,
+    required int tileSize,
+    required String? attribution,
+    required JSAny tiles,
   });
 
   /// Create a new vector source.
