@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
+import 'dart:ui';
 
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
@@ -24,14 +25,19 @@ class StyleControllerWebView extends StyleController {
   @override
   Future<void> addImage(String id, Uint8List bytes) async {
     final idBytes = id.codeUnits;
-    final data = ByteData(2 + idBytes.length + bytes.lengthInBytes);
+    const headerSize = 7;
+    final data = ByteData(headerSize + idBytes.length + bytes.lengthInBytes);
     data.setUint8(0, actionAddImage);
-    data.setUint8(1, idBytes.length);
+    data.setUint16(1, idBytes.length, Endian.little);
+    final pixelRatio = PlatformDispatcher.instance.views.first.devicePixelRatio;
+    data.setFloat32(3, pixelRatio, Endian.little);
+    // write id
     for (var i = 0; i < idBytes.length; i++) {
-      data.setUint8(2 + i, idBytes[i]);
+      data.setUint8(headerSize + i, idBytes[i]);
     }
+    // write image
     for (var i = 0; i < bytes.lengthInBytes; i++) {
-      data.setUint8(2 + idBytes.length + i, bytes[i]);
+      data.setUint8(headerSize + idBytes.length + i, bytes[i]);
     }
     webSocket.sendBytes(data);
   }
