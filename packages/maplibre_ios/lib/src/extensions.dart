@@ -362,5 +362,34 @@ extension GeographicExt on Geographic {
     ..latitude = lat;
 }
 
+/// Extension methods for the [Color] class. Not exported publicly.
+extension ColorExt on Color {
+  /// Convert a [Color] to a [UIColor].
+  UIColor toUIColor() =>
+      UIColor.colorWithRed(r, green: g, blue: b, alpha: a);
+}
+
 /// UTF8 Encoding
 const nsUTF8StringEncoding = 4;
+
+/// Internal extensions on [Expression]. Not exported publicly.
+extension ExpressionExt on Expression {
+  /// Convert a [PropertyValue] to a [NSExpression].
+  NSExpression? toNSExpression() {
+    final nsArray = this.json.toNSArray();
+    return NSExpression.expressionWithMLNJSONObject(nsArray);
+  }
+
+  /// Convert a [PropertyValue] to a [NSPredicate].
+  NSPredicate? toNSPredicate() {
+    final nsArray = this.json.toNSArray();
+    return Helpers.createPredicateWithData(nsArray);
+  }
+}
+
+/// Internal extensions on [List<Object?>]. Not exported publicly.
+extension DartListToNSArray on List<Object?> {
+  /// Alternative to [toNSArray] that allows [Object?].
+  NSArray toNSArray() =>
+      NSArray.of(map((e) => toObjCObject(e, convertOther: toObjCObject)));
+}

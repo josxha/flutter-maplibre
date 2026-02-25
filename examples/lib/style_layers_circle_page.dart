@@ -11,9 +11,6 @@ class StyleLayersCirclePage extends StatefulWidget {
   State<StyleLayersCirclePage> createState() => _StyleLayersCirclePageState();
 }
 
-const _layerId = 'showcaseLayer';
-const _sourceId = 'earthquakes';
-
 class _StyleLayersCirclePageState extends State<StyleLayersCirclePage> {
   @override
   Widget build(BuildContext context) {
@@ -30,15 +27,16 @@ class _StyleLayersCirclePageState extends State<StyleLayersCirclePage> {
   }
 
   Future<void> _onStyleLoaded(StyleController style) async {
+    const sourceId = 'earthquakes';
     const earthquakes = GeoJsonSource(
-      id: _sourceId,
+      id: sourceId,
       data:
           'https://maplibre.org/maplibre-gl-js/docs/assets/earthquakes.geojson',
     );
     await style.addSource(earthquakes);
     final circleLayer = CircleStyleLayer(
-      id: _layerId,
-      sourceId: _sourceId,
+      id: 'showcaseLayer',
+      sourceId: sourceId,
       // Size circle radius by earthquake magnitude and zoom level
       radius: const PropertyValue.expression(
         Expression.fromJson([

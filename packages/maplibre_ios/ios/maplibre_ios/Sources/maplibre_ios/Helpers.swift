@@ -15,16 +15,20 @@ public class Helpers: NSObject {
         target.setValue(value, forKey: field)
     }
 
-    @objc public static func parsePredicate(raw: String) -> NSPredicate? {
-        if let data = raw.data(using: .utf8) {
-            do {
-                let json = try JSONSerialization.jsonObject(with: data, options: [])
-                return NSPredicate(mglJSONObject: json)
-            } catch let e {
-                print("Couldn't parse NSPredicate from JSON: \(e)")
-                return nil
-            }
-        } else {
+    @objc public static func createPredicate(data: [Any]) -> NSPredicate? {
+        do {
+            return NSPredicate(mglJSONObject: data)
+        } catch let e {
+            print("Couldn't parse NSPredicate from JSON: \(e)")
+            return nil
+        }
+    }
+
+    @objc public static func createExpression(data: [Any]) -> NSExpression? {
+        do {
+            return NSExpression(mglJSONObject: data)
+        } catch let e {
+            print("Couldn't create JSONSerialization \(e)")
             return nil
         }
     }

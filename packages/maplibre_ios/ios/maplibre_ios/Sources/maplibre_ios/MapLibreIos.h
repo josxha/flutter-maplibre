@@ -280,6 +280,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
 @import CoreFoundation;
+@import Foundation;
 @import ObjectiveC;
 #endif
 
@@ -327,7 +328,8 @@ SWIFT_PROTOCOL_NAMED("FlutterApi")
 SWIFT_CLASS_NAMED("Helpers")
 @interface Helpers : NSObject
 + (void)setValueWithTarget:(NSObject * _Nonnull)target field:(NSString * _Nonnull)field value:(NSObject * _Nonnull)value;
-+ (NSPredicate * _Nullable)parsePredicateWithRaw:(NSString * _Nonnull)raw SWIFT_WARN_UNUSED_RESULT;
++ (NSPredicate * _Nullable)createPredicateWithData:(NSArray * _Nonnull)data SWIFT_WARN_UNUSED_RESULT;
++ (NSExpression * _Nullable)createExpressionWithData:(NSArray * _Nonnull)data SWIFT_WARN_UNUSED_RESULT;
 + (NSExpression * _Nullable)parseExpressionWithPropertyName:(NSString * _Nonnull)propertyName expression:(NSString * _Nonnull)expression SWIFT_WARN_UNUSED_RESULT;
 + (void)createOfflinePackProgressListenerWithCallbacks:(id <OfflinePackProgressCallbacks> _Nonnull)callbacks;
 + (void)removeOfflinePackProgressListenerWithCallbacks:(id <OfflinePackProgressCallbacks> _Nonnull)callbacks;

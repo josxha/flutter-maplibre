@@ -41,16 +41,11 @@ class BackgroundStyleLayerIos extends StyleLayerIos<MLNBackgroundStyleLayer>
   @override
   set color(PropertyValue<Color> property) {
     if (property.isExpression) {
-      ffiLayer.backgroundColor = Helpers.parseExpressionWithPropertyName(
-        'background-color'.toNSString(),
-        expression: jsonEncode(property.expression).toNSString(),
-      )!;
+      ffiLayer.backgroundColor = property.expression.toNSExpression()!;
     } else {
-      // UIColor
-      ffiLayer.backgroundColor = Helpers.parseExpressionWithPropertyName(
-        'background-color'.toNSString(),
-        expression: property.value.toHexString().toNSString(),
-      )!;
+      ffiLayer.backgroundColor = NSExpression.expressionForConstantValue(
+        property.value.toUIColor(),
+      );
     }
   }
 
@@ -60,12 +55,9 @@ class BackgroundStyleLayerIos extends StyleLayerIos<MLNBackgroundStyleLayer>
   @override
   set opacity(PropertyValue<double> property) {
     if (property.isExpression) {
-      ffiLayer.backgroundColor = Helpers.parseExpressionWithPropertyName(
-        'background-opacity'.toNSString(),
-        expression: jsonEncode(property.expression).toNSString(),
-      )!;
+      ffiLayer.backgroundOpacity = property.expression.toNSExpression()!;
     } else {
-      ffiLayer.backgroundColor = NSExpression.expressionForConstantValue(
+      ffiLayer.backgroundOpacity = NSExpression.expressionForConstantValue(
         property.value.toNSNumber(),
       );
     }
@@ -81,12 +73,9 @@ class BackgroundStyleLayerIos extends StyleLayerIos<MLNBackgroundStyleLayer>
         null,
       );
     } else if (property.isExpression) {
-      ffiLayer.backgroundColor = Helpers.parseExpressionWithPropertyName(
-        'background-opacity'.toNSString(),
-        expression: jsonEncode(property.expression).toNSString(),
-      )!;
+      ffiLayer.backgroundPattern = property.expression.toNSExpression()!;
     } else {
-      ffiLayer.backgroundColor = NSExpression.expressionForConstantValue(
+      ffiLayer.backgroundPattern = NSExpression.expressionForConstantValue(
         property.value.toNSString(),
       );
     }

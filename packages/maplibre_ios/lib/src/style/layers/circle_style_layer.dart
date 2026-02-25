@@ -65,10 +65,7 @@ class CircleStyleLayerIos extends StyleLayerIos<MLNCircleStyleLayer>
   @override
   set blur(PropertyValue<double> property) {
     if (property.isExpression) {
-      ffiLayer.circleBlur = Helpers.parseExpressionWithPropertyName(
-        'circle-blur'.toNSString(),
-        expression: jsonEncode(property.expression).toNSString(),
-      )!;
+      ffiLayer.circleBlur = property.expression.toNSExpression()!;
     } else {
       ffiLayer.circleBlur = NSExpression.expressionForConstantValue(
         property.value.toNSNumber(),
@@ -84,16 +81,11 @@ class CircleStyleLayerIos extends StyleLayerIos<MLNCircleStyleLayer>
   @override
   set color(PropertyValue<Color> property) {
     if (property.isExpression) {
-      ffiLayer.circleColor = Helpers.parseExpressionWithPropertyName(
-        'circle-color'.toNSString(),
-        expression: jsonEncode(property.expression).toNSString(),
-      )!;
+      ffiLayer.circleColor = property.expression.toNSExpression()!;
     } else {
-      // UIColor
-      ffiLayer.circleColor = Helpers.parseExpressionWithPropertyName(
-        'circle-color'.toNSString(),
-        expression: property.value.toHexString().toNSString(),
-      )!;
+      ffiLayer.circleColor = NSExpression.expressionForConstantValue(
+        property.value.toUIColor(),
+      );
     }
   }
 
@@ -104,9 +96,7 @@ class CircleStyleLayerIos extends StyleLayerIos<MLNCircleStyleLayer>
 
   @override
   set filter(Expression expression) {
-    ffiLayer.predicate = Helpers.parsePredicateWithRaw(
-      jsonEncode(expression.json).toNSString(),
-    );
+    ffiLayer.predicate = expression.toNSPredicate();
   }
 
   @override
@@ -117,10 +107,7 @@ class CircleStyleLayerIos extends StyleLayerIos<MLNCircleStyleLayer>
   @override
   set opacity(PropertyValue<double> property) {
     if (property.isExpression) {
-      ffiLayer.circleOpacity = Helpers.parseExpressionWithPropertyName(
-        'circle-opacity'.toNSString(),
-        expression: jsonEncode(property.expression).toNSString(),
-      )!;
+      ffiLayer.circleOpacity = property.expression.toNSExpression()!;
     } else {
       ffiLayer.circleOpacity = NSExpression.expressionForConstantValue(
         property.value.toNSNumber(),
@@ -136,12 +123,9 @@ class CircleStyleLayerIos extends StyleLayerIos<MLNCircleStyleLayer>
   @override
   set pitchAlignment(PropertyValue<ReferenceSpace> property) {
     if (property.isExpression) {
-      ffiLayer.circleOpacity = Helpers.parseExpressionWithPropertyName(
-        'circle-pitch-alignment'.toNSString(),
-        expression: jsonEncode(property.expression).toNSString(),
-      )!;
+      ffiLayer.circlePitchAlignment = property.expression.toNSExpression()!;
     } else {
-      ffiLayer.circleOpacity = NSExpression.expressionForConstantValue(
+      ffiLayer.circlePitchAlignment = NSExpression.expressionForConstantValue(
         property.value.name.toNSString(),
       );
     }
@@ -155,12 +139,9 @@ class CircleStyleLayerIos extends StyleLayerIos<MLNCircleStyleLayer>
   @override
   set pitchScale(PropertyValue<ReferenceSpace> property) {
     if (property.isExpression) {
-      ffiLayer.circleOpacity = Helpers.parseExpressionWithPropertyName(
-        'circle-pitch-scale'.toNSString(),
-        expression: jsonEncode(property.expression).toNSString(),
-      )!;
+      ffiLayer.circlePitchScale = property.expression.toNSExpression()!;
     } else {
-      ffiLayer.circleOpacity = NSExpression.expressionForConstantValue(
+      ffiLayer.circlePitchScale = NSExpression.expressionForConstantValue(
         property.value.name.toNSString(),
       );
     }
@@ -174,10 +155,7 @@ class CircleStyleLayerIos extends StyleLayerIos<MLNCircleStyleLayer>
   @override
   set radius(PropertyValue<double> property) {
     if (property.isExpression) {
-      ffiLayer.circleRadius = Helpers.parseExpressionWithPropertyName(
-        'circle-radius'.toNSString(),
-        expression: jsonEncode(property.expression).toNSString(),
-      )!;
+      ffiLayer.circleRadius = property.expression.toNSExpression()!;
     } else {
       ffiLayer.circleRadius = NSExpression.expressionForConstantValue(
         property.value.toNSNumber(),
@@ -195,10 +173,7 @@ class CircleStyleLayerIos extends StyleLayerIos<MLNCircleStyleLayer>
     if (property == null) {
       ffiLayer.circleSortKey = NSExpression.expressionForConstantValue(null);
     } else if (property.isExpression) {
-      ffiLayer.circleSortKey = Helpers.parseExpressionWithPropertyName(
-        'circle-sort-key'.toNSString(),
-        expression: jsonEncode(property.expression).toNSString(),
-      )!;
+      ffiLayer.circleSortKey = property.expression.toNSExpression()!;
     } else {
       ffiLayer.circleSortKey = NSExpression.expressionForConstantValue(
         property.value.toNSNumber(),
@@ -207,17 +182,11 @@ class CircleStyleLayerIos extends StyleLayerIos<MLNCircleStyleLayer>
   }
 
   @override
-  String? get sourceLayerId {
-    throw UnimplementedError();
-  }
+  String? get sourceLayerId => ffiLayer.sourceLayerIdentifier?.toDartString();
 
   @override
   set sourceLayerId(String? property) {
-    if (property == null) {
-      ffiLayer.sourceLayerIdentifier = null;
-    } else {
-      ffiLayer.sourceLayerIdentifier = property.toNSString();
-    }
+    ffiLayer.sourceLayerIdentifier = property?.toNSString();
   }
 
   @override
@@ -228,16 +197,11 @@ class CircleStyleLayerIos extends StyleLayerIos<MLNCircleStyleLayer>
   @override
   set strokeColor(PropertyValue<Color> property) {
     if (property.isExpression) {
-      ffiLayer.circleStrokeColor = Helpers.parseExpressionWithPropertyName(
-        'circle-stroke-color'.toNSString(),
-        expression: jsonEncode(property.expression).toNSString(),
-      )!;
+      ffiLayer.circleStrokeColor = property.expression.toNSExpression()!;
     } else {
-      // UIColor
-      ffiLayer.circleStrokeColor = Helpers.parseExpressionWithPropertyName(
-        'circle-stroke-color'.toNSString(),
-        expression: property.value.toHexString().toNSString(),
-      )!;
+      ffiLayer.circleStrokeColor = NSExpression.expressionForConstantValue(
+        property.value.toUIColor(),
+      );
     }
   }
 
@@ -249,10 +213,7 @@ class CircleStyleLayerIos extends StyleLayerIos<MLNCircleStyleLayer>
   @override
   set strokeOpacity(PropertyValue<double> property) {
     if (property.isExpression) {
-      ffiLayer.circleStrokeOpacity = Helpers.parseExpressionWithPropertyName(
-        'circle-stroke-opacity'.toNSString(),
-        expression: jsonEncode(property.expression).toNSString(),
-      )!;
+      ffiLayer.circleStrokeOpacity = property.expression.toNSExpression()!;
     } else {
       ffiLayer.circleStrokeOpacity = NSExpression.expressionForConstantValue(
         property.value.toNSNumber(),
@@ -268,10 +229,7 @@ class CircleStyleLayerIos extends StyleLayerIos<MLNCircleStyleLayer>
   @override
   set strokeWidth(PropertyValue<double> property) {
     if (property.isExpression) {
-      ffiLayer.circleStrokeWidth = Helpers.parseExpressionWithPropertyName(
-        'circle-stroke-width'.toNSString(),
-        expression: jsonEncode(property.expression).toNSString(),
-      )!;
+      ffiLayer.circleStrokeWidth = property.expression.toNSExpression()!;
     } else {
       ffiLayer.circleStrokeWidth = NSExpression.expressionForConstantValue(
         property.value.toNSNumber(),
@@ -287,10 +245,7 @@ class CircleStyleLayerIos extends StyleLayerIos<MLNCircleStyleLayer>
   @override
   set translate(PropertyValue<Offset> property) {
     if (property.isExpression) {
-      ffiLayer.circleTranslate = Helpers.parseExpressionWithPropertyName(
-        'circle-translate'.toNSString(),
-        expression: jsonEncode(property.expression).toNSString(),
-      )!;
+      ffiLayer.circleTranslate = property.expression.toNSExpression()!;
     } else {
       ffiLayer.circleTranslate = NSExpression.expressionForConstantValue(
         [property.value.dx, property.value.dy].toNSArray(),
@@ -306,10 +261,7 @@ class CircleStyleLayerIos extends StyleLayerIos<MLNCircleStyleLayer>
   @override
   set translateAnchor(PropertyValue<ReferenceSpace> property) {
     if (property.isExpression) {
-      ffiLayer.circleTranslateAnchor = Helpers.parseExpressionWithPropertyName(
-        'circle-translate-anchor'.toNSString(),
-        expression: jsonEncode(property.expression).toNSString(),
-      )!;
+      ffiLayer.circleTranslateAnchor = property.expression.toNSExpression()!;
     } else {
       ffiLayer.circleTranslateAnchor = NSExpression.expressionForConstantValue(
         property.value.name.toNSString(),
