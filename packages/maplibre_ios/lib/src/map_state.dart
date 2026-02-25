@@ -134,7 +134,7 @@ final class MapLibreMapStateIos extends MapLibreMapState {
       ffiCamera.centerCoordinate = center.toCLLocationCoordinate2D();
     }
     if (zoom != null) {
-      ffiCamera.altitude = Helpers.altitudeToZoomLevelWithZoomLevel(
+      ffiCamera.altitude = Helpers.zoomLevelToAltitudeWithZoomLevel(
         zoom,
         pitch: ffiCamera.pitch,
         latitude: ffiCamera.centerCoordinate.latitude,

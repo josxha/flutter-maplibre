@@ -906,13 +906,6 @@ extension type Helpers._(objc.ObjCObject object$) implements objc.ObjCObject,obj
   }
 
 
-  /// altitudeToZoomLevelWithZoomLevel:pitch:latitude:size:
-  static double altitudeToZoomLevelWithZoomLevel(double zoomLevel, {required double pitch,required double latitude,required objc.CGSize size}) {
-    return objc.useMsgSendVariants ? _objc_msgSend_1aulivdFpret(_class_Helpers, _sel_altitudeToZoomLevelWithZoomLevel_pitch_latitude_size_, zoomLevel, pitch, latitude, size) : _objc_msgSend_1aulivd(_class_Helpers, _sel_altitudeToZoomLevelWithZoomLevel_pitch_latitude_size_, zoomLevel, pitch, latitude, size);
-
-  }
-
-
   /// createOfflinePackProgressListenerWithCallbacks:
   static void createOfflinePackProgressListenerWithCallbacks(OfflinePackProgressCallbacks callbacks) {
 _objc_msgSend_xtuoz7(_class_Helpers, _sel_createOfflinePackProgressListenerWithCallbacks_, callbacks.ref.pointer);
@@ -958,6 +951,13 @@ _objc_msgSend_xtuoz7(_class_Helpers, _sel_removeOfflinePackProgressListenerWithC
   /// setValueWithTarget:field:value:
   static void setValueWithTarget(objc.NSObject target, {required objc.NSString field,required objc.NSObject value}) {
 _objc_msgSend_r8gdi7(_class_Helpers, _sel_setValueWithTarget_field_value_, target.ref.pointer, field.ref.pointer, value.ref.pointer);
+
+  }
+
+
+  /// zoomLevelToAltitudeWithZoomLevel:pitch:latitude:size:
+  static double zoomLevelToAltitudeWithZoomLevel(double zoomLevel, {required double pitch,required double latitude,required objc.CGSize size}) {
+    return objc.useMsgSendVariants ? _objc_msgSend_1aulivdFpret(_class_Helpers, _sel_zoomLevelToAltitudeWithZoomLevel_pitch_latitude_size_, zoomLevel, pitch, latitude, size) : _objc_msgSend_1aulivd(_class_Helpers, _sel_zoomLevelToAltitudeWithZoomLevel_pitch_latitude_size_, zoomLevel, pitch, latitude, size);
 
   }
   /// Returns a new instance of Helpers constructed with the default `new` method.
@@ -31336,7 +31336,6 @@ late final _sel_alloc = objc.registerName("alloc");
 late final _sel_allocWithZone_ = objc.registerName("allocWithZone:");
 late final _sel_allowEvaluation = objc.registerName("allowEvaluation");
 late final _sel_altitude = objc.registerName("altitude");
-late final _sel_altitudeToZoomLevelWithZoomLevel_pitch_latitude_size_ = objc.registerName("altitudeToZoomLevelWithZoomLevel:pitch:latitude:size:");
 late final _sel_anchorPointForGesture_ = objc.registerName("anchorPointForGesture:");
 late final _sel_anchorRotateOrZoomGesturesToCenterCoordinate = objc.registerName("anchorRotateOrZoomGesturesToCenterCoordinate");
 late final _sel_animatedImageNamed_duration_ = objc.registerName("animatedImageNamed:duration:");
@@ -32464,6 +32463,7 @@ late final _sel_visibleFeaturesInRect_inStyleLayersWithIdentifiers_predicate_ = 
 late final _sel_wantsSoftwareDimming = objc.registerName("wantsSoftwareDimming");
 late final _sel_zoomLevel = objc.registerName("zoomLevel");
 late final _sel_zoomLevelForExpandingCluster_ = objc.registerName("zoomLevelForExpandingCluster:");
+late final _sel_zoomLevelToAltitudeWithZoomLevel_pitch_latitude_size_ = objc.registerName("zoomLevelToAltitudeWithZoomLevel:pitch:latitude:size:");
 late final _sel_zoomLevelVariableExpression = objc.registerName("zoomLevelVariableExpression");
 typedef instancetype = ffi.Pointer<objc.ObjCObjectImpl>;
 typedef Dartinstancetype = objc.ObjCObject;

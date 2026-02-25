@@ -332,7 +332,7 @@ SWIFT_CLASS_NAMED("Helpers")
 + (void)createOfflinePackProgressListenerWithCallbacks:(id <OfflinePackProgressCallbacks> _Nonnull)callbacks;
 + (void)removeOfflinePackProgressListenerWithCallbacks:(id <OfflinePackProgressCallbacks> _Nonnull)callbacks;
 + (MLNTilePyramidOfflineRegion * _Nonnull)createTilePyramidOfflineRegionWithStyleURL:(NSURL * _Nullable)styleURL south:(double)south west:(double)west east:(double)east north:(double)north fromZoomLevel:(double)minZoom toZoomLevel:(double)maxZoom SWIFT_WARN_UNUSED_RESULT;
-+ (double)altitudeToZoomLevelWithZoomLevel:(double)zoomLevel pitch:(CGFloat)pitch latitude:(double)latitude size:(CGSize)size SWIFT_WARN_UNUSED_RESULT;
++ (double)zoomLevelToAltitudeWithZoomLevel:(double)zoomLevel pitch:(CGFloat)pitch latitude:(double)latitude size:(CGSize)size SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 

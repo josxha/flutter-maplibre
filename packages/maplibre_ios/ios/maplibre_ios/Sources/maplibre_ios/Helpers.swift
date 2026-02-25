@@ -111,7 +111,7 @@ public class Helpers: NSObject {
         MLNTilePyramidOfflineRegion(styleURL: styleURL, bounds: MLNCoordinateBounds(sw: CLLocationCoordinate2D(latitude: south, longitude: west), ne: CLLocationCoordinate2D(latitude: north, longitude: east)), fromZoomLevel: minZoom, toZoomLevel: maxZoom)
     }
 
-    @objc public static func altitudeToZoomLevel(zoomLevel: Double, pitch: CGFloat, latitude: Double, size: CGSize) -> Double {
+    @objc public static func zoomLevelToAltitude(zoomLevel: Double, pitch: CGFloat, latitude: Double, size: CGSize) -> Double {
         MLNAltitudeForZoomLevel(zoomLevel, pitch, latitude, size)
     }
 }
