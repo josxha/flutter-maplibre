@@ -158,19 +158,17 @@ class MapLibreMapStateWebView extends MapLibreMapState {
             break;
           }
           case $actionAddImage: {
-            const idLength = view.getUint8(1);
-            let id = '';
-            for (let i = 0; i < idLength; i++) {
-                id += String.fromCharCode(view.getUint8(2 + i));
-            }
-            const imageBytes = new Uint8Array(buffer.byteLength - 2 - idLength);
-            for (let i = 0; i < imageBytes.length; i++) {
-                imageBytes[i] = view.getUint8(2 + idLength + i);
-            }
+            const idLength = view.getUint16(1, true);
+            const pixelRatio = view.getFloat32(3, true);
+            const idBytes = new Uint8Array(buffer, 7, idLength);
+            const id = new TextDecoder().decode(idBytes);
+            const imageBytes = new Uint8Array(buffer, 7 + idLength);
             const blob = new Blob([imageBytes], { type: 'image/png' });
-            createImageBitmap(blob).then((img) => {
-                window.map.addImage(id, img);
-            }).catch((err) => console.warn('addImage decode failed', err));
+            createImageBitmap(blob)
+              .then(img => {
+                window.map.addImage(id, img, { pixelRatio });
+              })
+              .catch(err => console.warn('addImage decode failed', err));
             break;
           }
           case $actionSetStyle: {
