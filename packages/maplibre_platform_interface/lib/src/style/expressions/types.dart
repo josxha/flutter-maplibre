@@ -1,10 +1,10 @@
 part of 'expressions.dart';
 
-/// A literal expression that represents a constant value.
 /// Provides a literal array or object value.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#literal
-Expression literal(Object? value) => Expression.fromJson(['literal', value]);
+Expression<T> literal<T extends Object>(T value) =>
+    Expression.fromJson(['literal', value]);
 
 /// Asserts that the input is an array (optionally with a specific item type
 /// and length). If, when the input expression is evaluated, it is not of the
@@ -12,8 +12,11 @@ Expression literal(Object? value) => Expression.fromJson(['literal', value]);
 /// expression to be aborted.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#array
-Expression array(Expression expression, {ArrayType? type, int? length}) =>
-    Expression.fromJson(['array', ?type?.name, ?length, expression]);
+Expression<List<T>> array<T extends Object>(
+  Expression<List<T>> expression, {
+  ArrayType? type,
+  int? length,
+}) => Expression.fromJson(['array', ?type?.name, ?length, expression]);
 
 /// The asserted items type in an [array] expression.
 enum ArrayType {
@@ -35,7 +38,7 @@ enum ArrayType {
 /// Returns a string describing the type of the given value.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#typeof
-Expression typeOf(Expression expression) =>
+Expression<String> typeOf(Expression expression) =>
     Expression.fromJson(['typeof', expression]);
 
 /// Asserts that the input value is a string. If multiple values are provided,
@@ -43,15 +46,8 @@ Expression typeOf(Expression expression) =>
 /// inputs are strings, the expression is an error.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#string
-Expression string(OneOf2<Expression, List<Expression>> input) {
-  if (input is List<Expression>) {
-    final values = input as List<Expression>;
-    return Expression.fromJson(['string', ...values]);
-  }
-  if (input is Expression) {
-    return Expression.fromJson(['string', input]);
-  }
-  throw StateError('Unreachable');
+Expression<String> string(List<Expression> inputs) {
+  return Expression.fromJson(['string', ...inputs]);
 }
 
 /// Asserts that the input value is a number. If multiple values are provided,
@@ -59,15 +55,8 @@ Expression string(OneOf2<Expression, List<Expression>> input) {
 /// inputs are numbers, the expression is an error.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#number
-Expression number(OneOf2<Expression, List<Expression>> input) {
-  if (input is List<Expression>) {
-    final values = input as List<Expression>;
-    return Expression.fromJson(['number', ...values]);
-  }
-  if (input is Expression) {
-    return Expression.fromJson(['number', input]);
-  }
-  throw StateError('Unreachable');
+Expression<num> number(List<Expression> inputs) {
+  return Expression.fromJson(['number', ...inputs]);
 }
 
 /// Asserts that the input value is a boolean. If multiple values are provided,
@@ -75,15 +64,8 @@ Expression number(OneOf2<Expression, List<Expression>> input) {
 /// inputs are booleans, the expression is an error.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#boolean
-Expression boolean(OneOf2<Expression, List<Expression>> input) {
-  if (input is List<Expression>) {
-    final values = input as List<Expression>;
-    return Expression.fromJson(['boolean', ...values]);
-  }
-  if (input is Expression) {
-    return Expression.fromJson(['boolean', input]);
-  }
-  throw StateError('Unreachable');
+Expression<bool> boolean(List<Expression> inputs) {
+  return Expression.fromJson(['boolean', ...inputs]);
 }
 
 /// Asserts that the input value is a [Map]. If multiple values are provided,
@@ -91,15 +73,8 @@ Expression boolean(OneOf2<Expression, List<Expression>> input) {
 /// inputs are objects, the expression is an error.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#object
-Expression object(OneOf2<Expression, List<Expression>> input) {
-  if (input is List<Expression>) {
-    final values = input as List<Expression>;
-    return Expression.fromJson(['object', ...values]);
-  }
-  if (input is Expression) {
-    return Expression.fromJson(['object', input]);
-  }
-  throw StateError('Unreachable');
+Expression<Map<String, Object?>> object(List<Expression> inputs) {
+  return Expression.fromJson(['object', ...inputs]);
 }
 
 /// Returns a `collator` for use in locale-dependent comparison operations. Use
@@ -107,9 +82,9 @@ Expression object(OneOf2<Expression, List<Expression>> input) {
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#collator
 Expression collator({
-  OneOf2<bool, Expression>? caseSensitive,
-  OneOf2<bool, Expression>? diacriticSensitive,
-  OneOf2<Locale, Expression>? locale,
+  OneOf2<bool, Expression<bool>>? caseSensitive,
+  OneOf2<bool, Expression<bool>>? diacriticSensitive,
+  OneOf2<Locale, Expression<String>>? locale,
 }) => Expression.fromJson([
   'collator',
   <String, Object?>{
@@ -118,7 +93,7 @@ Expression collator({
     if (locale != null)
       'locale': switch (locale) {
         final Locale locale => locale.toString(),
-        final Expression expr => expr,
+        final Expression expr => expr.json,
         _ => throw StateError('Unreachable'),
       },
   },
@@ -130,15 +105,23 @@ Expression collator({
 /// followed by a style override object.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#format
-Expression format(Map<String, StyleOverrides> overrides) =>
-    Expression.fromJson([
-      'format',
-      for (final entry in overrides.entries) ...[entry.key, entry.value.json],
-    ]);
+Expression<Formatted> format(
+  Map<OneOf2<String, Expression<String>>, StyleOverrides> overrides,
+) => Expression.fromJson([
+  'format',
+  for (final entry in overrides.entries) ...[
+    switch (entry.key) {
+      final String str => str,
+      final Expression expr => expr.json,
+      _ => throw StateError('Unreachable'),
+    },
+    entry.value.json,
+  ],
+]);
 
 /// An object defining style overrides for a section of text in a [format]
 /// expression.
-extension type StyleOverrides._(Map<String, Object> json) {
+extension type StyleOverrides.fromJson(Map<String, Object> json) {
   /// Create a new [StyleOverrides] object.
   ///
   /// - [textFont]: Overrides the font stack specified by the root
@@ -180,29 +163,31 @@ enum VerticalAlign {
   top,
 }
 
-/// Returns an image type for use in icon-image, *-pattern entries and as a
-/// section in the format expression. If set, the image argument will check that
-/// the requested image exists in the style and will return either the resolved
-/// image name or null, depending on whether or not the image is currently in
-/// the style. This validation process is synchronous and requires the image to
-/// have been added to the style before requesting it in the image argument.
+/// Returns an image type for use in `icon-image`, `*-pattern` entries and as a
+/// section in the [format] expression. If set, the image argument will check
+/// that the requested image exists in the style and will return either the
+/// resolved image name or `null`, depending on whether or not the image is
+/// currently in the style. This validation process is synchronous and requires
+/// the image to have been added to the style before requesting it in the image
+/// argument.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#image
-Expression image(OneOf2<String, Expression> input) => Expression.fromJson([
-  'image',
-  switch (input) {
-    final String imageName => imageName,
-    final Expression expression => expression,
-    _ => throw StateError('Unreachable'),
-  },
-]);
+Expression image(OneOf2<String, Expression<String>> input) =>
+    Expression.fromJson([
+      'image',
+      switch (input) {
+        final String imageName => imageName,
+        final Expression expression => expression,
+        _ => throw StateError('Unreachable'),
+      },
+    ]);
 
 /// Converts the input number into a string representation using the provided
 /// format_options.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#number-format
-Expression numberFormat({
-  required OneOf2<double, Expression> input,
+Expression<String> numberFormat({
+  required OneOf2<double, Expression<num>> input,
   required String? locale,
   required String? currency,
   required int? minFractionDigits,
@@ -234,7 +219,7 @@ Expression numberFormat({
 /// of the ECMAScript Language Specification.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#to-string
-Expression toString(Expression input) =>
+Expression<String> toString(Expression input) =>
     Expression.fromJson(['to-string', input]);
 
 /// Converts the input value to a number, if possible. If the input is null or
@@ -246,7 +231,7 @@ Expression toString(Expression input) =>
 /// inputs can be converted, the expression is an error.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#to-number
-Expression toNumber(OneOf2<Expression, List<Expression>> input) {
+Expression<num> toNumber(OneOf2<Expression, List<Expression>> input) {
   if (input is List<Expression>) {
     final values = input as List<Expression>;
     return Expression.fromJson(['to-number', ...values]);
@@ -261,7 +246,7 @@ Expression toNumber(OneOf2<Expression, List<Expression>> input) {
 /// an empty string, 0, false, null, or NaN; otherwise it is true.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#to-boolean
-Expression toBoolean(Expression input) =>
+Expression<bool> toBoolean(Expression input) =>
     Expression.fromJson(['to-boolean', input]);
 
 /// Converts the input value to a color. If multiple values are provided, each
@@ -269,13 +254,6 @@ Expression toBoolean(Expression input) =>
 /// If none of the inputs can be converted, the expression is an error.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#to-color
-Expression toColor(OneOf2<Expression, List<Expression>> input) {
-  if (input is List<Expression>) {
-    final values = input as List<Expression>;
-    return Expression.fromJson(['to-color', ...values]);
-  }
-  if (input is Expression) {
-    return Expression.fromJson(['to-color', input]);
-  }
-  throw StateError('Unreachable');
+Expression<Color_> toColor(List<Expression> inputs) {
+  return Expression.fromJson(['to-color', ...inputs]);
 }

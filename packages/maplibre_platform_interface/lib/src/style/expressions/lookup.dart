@@ -3,16 +3,18 @@ part of 'expressions.dart';
 /// Retrieves an item from an array.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#at
-Expression at({required int index, required Expression list}) =>
-    Expression.fromJson(['at', index, list]);
+Expression<T> at<T extends Object?>({
+  required OneOf2<int, Expression<num>> index,
+  required Expression<T> list,
+}) => Expression.fromJson(['at', index, list]);
 
 /// Determines whether an item exists in an array or a substring exists in a
 /// string.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#in
-Expression in_({
-  required OneOf3<num, String, Expression> item,
-  required OneOf2<String, Expression> list,
+Expression<bool> in_<T extends Object?>({
+  required OneOf3<num, String, Expression<T>> item,
+  required OneOf2<String, Expression<T>> list,
 }) => Expression.fromJson(['in', item, list]);
 
 /// Returns the first position at which an item can be found in an array or a
@@ -21,10 +23,10 @@ Expression in_({
 /// UTF-16 surrogate pair counts as a single position.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#index-of
-Expression indexOf({
-  required OneOf3<num, String, Expression> item,
+Expression<num> indexOf<T extends Object?>({
+  required OneOf3<num, String, Expression<T>> item,
   required OneOf2<String, Expression> list,
-  OneOf2<int, Expression>? fromIndex,
+  OneOf2<int, Expression<num>>? fromIndex,
 }) => Expression.fromJson(['index-of', item, list, ?fromIndex]);
 
 /// Returns a subarray from an array or a substring from a string from a
@@ -33,10 +35,10 @@ Expression indexOf({
 /// In a string, a UTF-16 surrogate pair counts as a single position.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#slice
-Expression slice({
-  required OneOf2<String, Expression> input,
-  required OneOf2<int, Expression> start,
-  OneOf2<int, Expression>? end,
+Expression<T> slice<T extends Object?>({
+  required OneOf2<String, Expression<T>> input,
+  required OneOf2<int, Expression<num>> start,
+  OneOf2<int, Expression<num>>? end,
 }) => Expression.fromJson(['slice', input, start, ?end]);
 
 /// Retrieves a property value from global state that can be set with
@@ -45,7 +47,7 @@ Expression slice({
 /// retrieved property.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#global-state
-Expression globalState(String propertyName) =>
+Expression<T> globalState<T extends Object>(String propertyName) =>
     Expression.fromJson(['global-state', propertyName]);
 
 /// Retrieves a property value from the current feature's properties, or from
@@ -53,19 +55,19 @@ Expression globalState(String propertyName) =>
 /// requested property is missing.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#get
-Expression get(String propertyName, {Expression? object}) =>
+Expression get(String propertyName, {Map<String, Object?>? object}) =>
     Expression.fromJson(['get', propertyName, ?object]);
 
 /// Tests for the presence of a property value in the current feature's
 /// properties, or from another object if a second argument is provided.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#has
-Expression has(String propertyName, {Expression? object}) =>
+Expression<bool> has(String propertyName, {Map<String, Object?>? object}) =>
     Expression.fromJson(['has', propertyName, ?object]);
 
 /// Gets the length of an array or string. In a string, a UTF-16 surrogate pair
 /// counts as a single position.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#length
-Expression length(OneOf2<String, Expression> input) =>
+Expression<num> length(OneOf2<String, Expression> input) =>
     Expression.fromJson(['length', input]);

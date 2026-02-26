@@ -2,49 +2,20 @@ import 'dart:ui';
 
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 
+part 'color.dart';
+part 'color_relief.dart';
 part 'decision.dart';
+part 'feature_data.dart';
+part 'heatmap.dart';
 part 'lookup.dart';
+part 'math.dart';
+part 'ramps_scales_curves.dart';
+part 'string.dart';
 part 'types.dart';
 part 'variable_binding.dart';
+part 'zoom.dart';
 
 /// Base class for expressions.
-extension type const Expression.fromJson(List<Object?> json) {}
-
-/// Retrieves a property value from the current feature's state. Returns null if
-/// the requested property is not present on the feature's state. A feature's
-/// state is not part of the GeoJSON or vector tile data, and must be set
-/// programmatically on each feature. When source.promoteId is not provided,
-/// features are identified by their id attribute, which must be an integer or a
-/// string that can be cast to an integer. When source.promoteId is provided,
-/// features are identified by their promoteId property, which may be a number,
-/// string, or any primitive data type. Note that ["feature-state"] can only be
-/// used with paint properties that support data-driven styling.
-@Deprecated('Rework this expression')
-extension type const FeatureState<T extends Object?>._(List<Object?> json)
-    implements Expression {
-  /// Create a new feature-state expression.
-  @Deprecated('Rework this expression')
-  FeatureState(String key) : json = [op, key];
-
-  /// The operator for [featureState] expressions.
-  static const String op = 'feature-state';
-}
-
-/// Produces continuous, smooth results by interpolating between pairs of input
-/// and output values ("stops"). The `input` may be any numeric expression
-/// (e.g., `["get", "population"]`). Stop inputs must be numeric literals in
-/// strictly ascending order. The output type must be `number`, `array<number>`,
-/// `color`, `array<color>`, or `projection`.
-@Deprecated('Rework this expression')
-extension type const Interpolate<T extends Object?>._(List<Object?> json)
-    implements Expression {
-  /// Create a new interpolate expression.
-  @Deprecated('Rework this expression')
-  Interpolate(String key) : json = [op, key];
-
-  /// The operator for [interpolate] expressions.
-  static const String op = 'interpolate';
-
-  /// The key of the feature state to retrieve.
-  T get value => json[1] as T;
-}
+extension type const Expression<T extends Object?>.fromJson(
+  List<Object?> json
+) {}

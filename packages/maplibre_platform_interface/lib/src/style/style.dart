@@ -5,147 +5,17 @@ export 'expressions/expressions.dart';
 export 'layers/style_layer.dart';
 export 'sources/source.dart';
 
-/// Create a union type with two possible types [T1] and [T2].
-extension type const OneOf2<T1, T2>._(dynamic _) {
-  /// Create a new instance of [OneOf2] with a value of type [T1].
-  const OneOf2.t1(T1 value) : this._(value);
+/// https://maplibre.org/maplibre-style-spec/types/#color
+// ignore: camel_case_types
+extension type const Color_(String color) {}
 
-  /// Create a new instance of [OneOf2] with a value of type [T2].
-  const OneOf2.t2(T2 value) : this._(value);
-
-  /// Get the value as type [T1].
-  T1 get asT1 => this as T1;
-
-  /// Get the value as type [T2].
-  T2 get asT2 => this as T2;
-}
-
-/// Create a union type with three possible types [T1], [T2] and [T3].
-extension type const OneOf3<T1, T2, T3>._(dynamic _) {
-  /// Create a new instance of [OneOf3] with a value of type [T1].
-  const OneOf3.t1(T1 value) : this._(value);
-
-  /// Create a new instance of [OneOf3] with a value of type [T2].
-  const OneOf3.t2(T2 value) : this._(value);
-
-  /// Create a new instance of [OneOf3] with a value of type [T3].
-  const OneOf3.t3(T3 value) : this._(value);
-
-  /// Get the value as type [T1].
-  T1 get asT1 => this as T1;
-
-  /// Get the value as type [T2].
-  T2 get asT2 => this as T2;
-
-  /// Get the value as type [T3].
-  T3 get asT3 => this as T3;
-}
-
-/// Create a union type with three possible types [T1], [T2], [T3] and [T4].
-extension type const OneOf4<T1, T2, T3, T4>._(dynamic _) {
-  /// Create a new instance of [OneOf4] with a value of type [T1].
-  const OneOf4.t1(T1 value) : this._(value);
-
-  /// Create a new instance of [OneOf4] with a value of type [T2].
-  const OneOf4.t2(T2 value) : this._(value);
-
-  /// Create a new instance of [OneOf4] with a value of type [T3].
-  const OneOf4.t3(T3 value) : this._(value);
-
-  /// Create a new instance of [OneOf4] with a value of type [T4].
-  const OneOf4.t4(T4 value) : this._(value);
-
-  /// Get the value as type [T1].
-  T1 get asT1 => this as T1;
-
-  /// Get the value as type [T2].
-  T2 get asT2 => this as T2;
-
-  /// Get the value as type [T3].
-  T3 get asT3 => this as T3;
-
-  /// Get the value as type [T4].
-  T4 get asT4 => this as T4;
-}
-
-/// Create a union type with three possible types : [String], [double], [bool],
-/// [Map<String, Object?>] and [List<Object?>].
-extension type const OneOf._(dynamic _) {
-  /// Create a new instance of [OneOf] with a value of type [String].
-  const OneOf.string(String value) : this._(value);
-
-  /// Create a new instance of [OneOf] with a value of type [double].
-  const OneOf.double(double value) : this._(value);
-
-  /// Create a new instance of [OneOf] with a value of type [bool].
-  // ignore: avoid_positional_boolean_parameters
-  const OneOf.bool(bool value) : this._(value);
-
-  /// Create a new instance of [OneOf] with a value of type
-  /// [Map<String, Object?>].
-  const OneOf.map(Map<String, Object?> value) : this._(value);
-
-  /// Create a new instance of [OneOf] with a value of type [List<Object?>].
-  const OneOf.list(List<Object?> value) : this._(value);
-
-  /// Get the value as type [String].
-  String get asString => this as String;
-
-  /// Get the value as type [double].
-  double get asDouble => this as double;
-
-  /// Get the value as type [bool].
-  bool get asBool => this as bool;
-
-  /// Get the value as type [Map<String, Object?>].
-  Map<String, Object?> get asMap => this as Map<String, Object?>;
-
-  /// Get the value as type [List<Object?>].
-  List<Object?> get asList => this as List<Object?>;
-}
-
-/// [PropertyValue] is a simple wrapper around a value that can either be a
-/// literal value of type [V] or an [Expression] that evaluates to a value of
-/// type [V].
-///
-/// It is used so that style properties can be created in a type-safe way.
-extension type const PropertyValue<V extends Object?>._(dynamic object) {
-  /// Creates a [PropertyValue] from an [Expression].
-  const PropertyValue.expression(Expression expression) : object = expression;
-
-  /// Creates a [PropertyValue] from a literal value.
-  const PropertyValue.value(V value) : object = value;
-
-  /// Get the value as type [V].
-  V get value => object as V;
-
-  /// Get the value as an [Expression].
-  Expression get expression => object as Expression;
-
-  /// Indicates whether the [PropertyValue] is an expression.
-  bool get isExpression => switch (object) {
-    // In addition to checking if the object is an Expression / List, we also
-    // have to check if the first element is a String that represents the
-    // operator of the expression, otherwise we might have a
-    // NumArray / List<double> that is not an expression.
-    final Expression expression => expression.json.firstOrNull is String,
-    _ => false,
-  };
-
-  Object? toJson() => switch (object) {
-    final Expression expression => expression.json,
-    null => null,
-    final Color color => color.toHexString(),
-    final Enum object => object.name,
-    final Offset offset => [offset.dx, offset.dy],
-    final EdgeInsets edgeInsets => [
-      edgeInsets.top,
-      edgeInsets.right,
-      edgeInsets.bottom,
-      edgeInsets.left,
-    ],
-    _ => object,
-  };
+/// https://maplibre.org/maplibre-style-spec/types/#formatted
+extension type const Formatted.fromJson(List<Object?> json) {
+  Formatted(Map<String, Map<String, Object?>> sections)
+    : this.fromJson([
+        'format',
+        for (final entry in sections.entries) ...[entry.key, entry.value],
+      ]);
 }
 
 /// A single [double] value, or an [List] of [double] values.
@@ -200,4 +70,27 @@ extension type const ColorArray._(Object object) {
 
   /// Indicates whether the [ColorArray] is a [List].
   bool get isArray => object is List<Color>;
+}
+
+/// The interpolation type for [interpolate] and [interpolateHcl].
+extension type const InterpolationType.fromJson(List<Object?> json) {
+  /// Interpolates linearly between the pair of stops just less than and just greater than the input.
+  InterpolationType.linear() : this.fromJson(['linear']);
+
+  /// Interpolates exponentially between the stops just less than and just greater than the input.
+  /// - [base]: rate at which the output increases in f(x) = x^r. Values higher than 1 increase, close to one behaves linearly, and below one decrease.
+  InterpolationType.exponential(double base)
+    : this.fromJson(['exponential', base]);
+
+  /// Interpolates using the cubic bézier curve defined by the given control points.
+  /// - [x1]: X-coordinate of the first control point. Must be between zero and one for a valid monotonic easing curve. Controls how quickly the curve speeds up at the beginning.
+  /// - [y1]: Y-coordinate of the first control point. Typically between zero and one, but may exceed this range for overshoot effects. Influences the starting slope of the curve.
+  /// - [x2]: X-coordinate of the second control point. Must be between zero and one for a valid monotonic easing curve. Controls when the curve begins to decelerate toward the end.
+  /// - [y2]: Y-coordinate of the second control point. Typically between zero and one, but may exceed this range for overshoot effects. Influences the ending slope of the curve.
+  InterpolationType.cubicBezier({
+    required double x1,
+    required double y1,
+    required double x2,
+    required double y2,
+  }) : this.fromJson(['cubic-bezier', x1, y1, x2, y2]);
 }

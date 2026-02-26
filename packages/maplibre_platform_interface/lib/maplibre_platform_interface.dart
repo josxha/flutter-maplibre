@@ -16,6 +16,8 @@ export 'src/options/map_options.dart';
 export 'src/permission_manager.dart';
 export 'src/platform_interface.dart';
 export 'src/queried_layer.dart';
+export 'src/style/one_of.dart';
+export 'src/style/property_value.dart';
 export 'src/style/style.dart';
 export 'src/style_controller.dart';
 export 'src/utils.dart';
