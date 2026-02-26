@@ -36,7 +36,7 @@ class FillExtrusionStyleLayerIos
     if (sourceLayerId != null) layer.sourceLayerId = sourceLayerId;
     layer.opacity = opacity;
     layer.color = color;
-    layer.pattern = pattern;
+    if (pattern != null) layer.pattern = pattern;
     layer.height = height;
     layer.base = base;
     layer.verticalGradient = verticalGradient;
@@ -88,8 +88,8 @@ class FillExtrusionStyleLayerIos
   @override
   set pattern(PropertyValue<String>? property) {
     if (property == null) {
-      ffiLayer.fillExtrusionPattern = NSExpression.expressionForConstantValue(
-        null,
+      throw UnsupportedError(
+        'Removing the pattern property is not supported on iOS',
       );
     } else if (property.isExpression) {
       ffiLayer.fillExtrusionPattern = property.expression.toNSExpression();

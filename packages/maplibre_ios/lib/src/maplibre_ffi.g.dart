@@ -944,6 +944,13 @@ _objc_msgSend_xtuoz7(_class_Helpers, _sel_createOfflinePackProgressListenerWithC
   }
 
 
+  /// createUIEdgeInsetsNSExpressionWithPadding:
+  static NSExpression createUIEdgeInsetsNSExpressionWithPadding(objc.NSArray padding) {
+    final $ret = _objc_msgSend_1sotr3r(_class_Helpers, _sel_createUIEdgeInsetsNSExpressionWithPadding_, padding.ref.pointer);
+    return NSExpression.fromPointer($ret, retain: true, release: true);
+  }
+
+
   /// new
   static Helpers new$() {
     final $ret = _objc_msgSend_151sglz(_class_Helpers, _sel_new);
@@ -32135,6 +32142,7 @@ late final _sel_copy_ = objc.registerName("copy:");
 late final _sel_countOfBytesCompleted = objc.registerName("countOfBytesCompleted");
 late final _sel_createOfflinePackProgressListenerWithCallbacks_ = objc.registerName("createOfflinePackProgressListenerWithCallbacks:");
 late final _sel_createTilePyramidOfflineRegionWithStyleURL_south_west_east_north_fromZoomLevel_toZoomLevel_ = objc.registerName("createTilePyramidOfflineRegionWithStyleURL:south:west:east:north:fromZoomLevel:toZoomLevel:");
+late final _sel_createUIEdgeInsetsNSExpressionWithPadding_ = objc.registerName("createUIEdgeInsetsNSExpressionWithPadding:");
 late final _sel_currentEDRHeadroom = objc.registerName("currentEDRHeadroom");
 late final _sel_currentMode = objc.registerName("currentMode");
 late final _sel_cut_ = objc.registerName("cut:");

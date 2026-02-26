@@ -68,7 +68,7 @@ class HillshadeStyleLayerIos extends StyleLayerIos<MLNHillshadeStyleLayer>
   );
 
   @override
-  set illuminationAltitude(PropertyValue<NumberArray> value) {
+  set illuminationAltitude(PropertyValue<NumberArray> property) {
     throw UnsupportedError(
       'Setting illuminationAltitude is not supported on iOS '
       'https://github.com/maplibre/maplibre-native/issues/3396',
@@ -165,7 +165,7 @@ class HillshadeStyleLayerIos extends StyleLayerIos<MLNHillshadeStyleLayer>
   );
 
   @override
-  set method(PropertyValue<HillshadeMethod> value) {
+  set method(PropertyValue<HillshadeMethod> property) {
     throw UnsupportedError(
       'Setting method is not supported on iOS '
       'https://github.com/maplibre/maplibre-native/issues/3396',

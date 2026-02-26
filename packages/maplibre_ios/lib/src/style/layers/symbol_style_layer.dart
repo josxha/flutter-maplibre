@@ -84,7 +84,6 @@ class SymbolStyleLayerIos extends StyleLayerIos<MLNSymbolStyleLayer>
     layer.visible = visible;
     if (filter != null) layer.filter = filter;
     if (sourceLayerId != null) layer.sourceLayerId = sourceLayerId;
-
     layer.sortKey = sortKey;
     layer.placement = placement;
     layer.spacing = spacing;
@@ -143,7 +142,6 @@ class SymbolStyleLayerIos extends StyleLayerIos<MLNSymbolStyleLayer>
     layer.textHaloBlur = textHaloBlur;
     layer.textTranslate = textTranslate;
     layer.textTranslateAnchor = textTranslateAnchor;
-
     return layer;
   }
 
@@ -354,14 +352,7 @@ class SymbolStyleLayerIos extends StyleLayerIos<MLNSymbolStyleLayer>
     if (property.isExpression) {
       ffiLayer.iconTextFitPadding = property.expression.toNSExpression();
     } else {
-      ffiLayer.iconTextFitPadding = NSExpression.expressionForConstantValue(
-        [
-          property.value.top,
-          property.value.left,
-          property.value.bottom,
-          property.value.right,
-        ].toNSArray(),
-      );
+      ffiLayer.iconTextFitPadding = property.value.toNSExpression();
     }
   }
 
@@ -408,14 +399,7 @@ class SymbolStyleLayerIos extends StyleLayerIos<MLNSymbolStyleLayer>
     if (property.isExpression) {
       ffiLayer.iconPadding = property.expression.toNSExpression();
     } else {
-      ffiLayer.iconPadding = NSExpression.expressionForConstantValue(
-        [
-          property.value.top,
-          property.value.left,
-          property.value.bottom,
-          property.value.right,
-        ].toNSArray(),
-      );
+      ffiLayer.iconPadding = property.value.toNSExpression();
     }
   }
 

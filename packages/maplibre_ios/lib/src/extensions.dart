@@ -83,6 +83,11 @@ extension EdgeInsetsExt on EdgeInsets {
       ..right = right;
     return insets;
   }
+
+  NSExpression toNSExpression() {
+    final nsArray = [top, left, bottom, right].toNSArray();
+    return Helpers.createUIEdgeInsetsNSExpressionWithPadding(nsArray);
+  }
 }
 
 /// Internal extensions on [MLNCoordinateBounds].

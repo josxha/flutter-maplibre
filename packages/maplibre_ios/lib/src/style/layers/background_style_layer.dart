@@ -67,8 +67,8 @@ class BackgroundStyleLayerIos extends StyleLayerIos<MLNBackgroundStyleLayer>
   @override
   set pattern(PropertyValue<String>? property) {
     if (property == null) {
-      ffiLayer.backgroundPattern = NSExpression.expressionForConstantValue(
-        null,
+      throw UnsupportedError(
+        'Removing the pattern property is not supported on iOS',
       );
     } else if (property.isExpression) {
       ffiLayer.backgroundPattern = property.expression.toNSExpression();

@@ -40,7 +40,7 @@ class FillStyleLayerIos extends StyleLayerIos<MLNFillStyleLayer>
     layer.color = color;
     layer.opacity = opacity;
     layer.outlineColor = outlineColor;
-    layer.pattern = pattern;
+    if (pattern != null) layer.pattern = pattern;
     return layer;
   }
 
@@ -115,7 +115,9 @@ class FillStyleLayerIos extends StyleLayerIos<MLNFillStyleLayer>
   @override
   set pattern(PropertyValue<String>? property) {
     if (property == null) {
-      ffiLayer.fillPattern = NSExpression.expressionForConstantValue(null);
+      throw UnsupportedError(
+        'Removing the pattern property is not supported on iOS',
+      );
     } else if (property.isExpression) {
       ffiLayer.fillPattern = property.expression.toNSExpression();
     } else {

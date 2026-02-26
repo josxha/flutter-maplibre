@@ -55,7 +55,7 @@ class LineStyleLayerIos extends StyleLayerIos<MLNLineStyleLayer>
     layer.offset = offset;
     layer.blur = blur;
     layer.dashArray = dashArray;
-    layer.pattern = pattern;
+    if (pattern != null) layer.pattern = pattern;
     layer.gradient = gradient;
     return layer;
   }
@@ -253,7 +253,9 @@ class LineStyleLayerIos extends StyleLayerIos<MLNLineStyleLayer>
   @override
   set pattern(PropertyValue<String>? property) {
     if (property == null) {
-      ffiLayer.linePattern = NSExpression.expressionForConstantValue(null);
+      throw UnsupportedError(
+        'Removing the pattern property is not supported on iOS',
+      );
     } else if (property.isExpression) {
       ffiLayer.linePattern = property.expression.toNSExpression();
     } else {

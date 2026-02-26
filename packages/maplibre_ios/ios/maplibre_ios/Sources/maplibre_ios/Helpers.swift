@@ -100,6 +100,11 @@ public class Helpers: NSObject {
     @objc public static func zoomLevelToAltitude(zoomLevel: Double, pitch: CGFloat, latitude: Double, size: CGSize) -> Double {
         MLNAltitudeForZoomLevel(zoomLevel, pitch, latitude, size)
     }
+
+    @objc public static func createUIEdgeInsetsNSExpression(padding: [Double]) -> NSExpression {
+        let edgeInsets = UIEdgeInsets(top: CGFloat(padding[0]), left: CGFloat(padding[1]), bottom: CGFloat(padding[2]), right: CGFloat(padding[3]))
+        return NSExpression(forConstantValue: edgeInsets)
+    }
 }
 
 @objc(OfflinePackProgressCallbacks)
