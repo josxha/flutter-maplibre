@@ -46,14 +46,12 @@ https://tiles.example.com/{z}/{x}/{y}.pbf?api_key={your_key}
 
 Every tile provider provides map styles that you can use.
 
-:::warning
+!!! warning
 
-Note, that the style
-needs to be compatible with the tile schema used by the tile server.
-For example OpenMapTiles styles used by MapTiler are not compatible with
-Protomaps tiles.
-
-:::
+      Note, that the style
+      needs to be compatible with the tile schema used by the tile server.
+      For example OpenMapTiles styles used by MapTiler are not compatible with
+      Protomaps tiles.
 
 Have a look at
 the [awesome-maplibre](https://github.com/maplibre/awesome-maplibre#maptile-providers)
@@ -67,4 +65,4 @@ called [Maputnik](https://maplibre.org/maputnik)
 that allows to customize existing styles or create a new style from scratch.
 Other tile providers like MapBox have own editors you can use.
 
-![Maputnik Editor](/assets/images/maputnik.jpg)
+![Maputnik Editor](../assets/images/maputnik.jpg)

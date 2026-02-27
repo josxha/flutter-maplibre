@@ -4,11 +4,9 @@ icon: lucide/database
 
 # Offline & Cache
 
-:::warning
+!!! warning
 
-The `OfflineManager` is not available on web.
-
-:::
+    The `OfflineManager` is not available on web.
 
 The `OfflineManager` provides a set of tools to manage the cache and handle
 offline maps. It enables users to download and interact with map data in areas

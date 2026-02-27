@@ -1,8 +1,9 @@
 ---
-hide: [ navigation ]
+hide: [ toc ]
+icon: lucide/compass
 ---
 
-# Architecture
+# Architecture Overview
 
 This page gives a small introduction in the architecture that is used
 for `maplibre`.
