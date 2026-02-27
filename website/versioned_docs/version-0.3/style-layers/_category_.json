@@ -1,8 +1,0 @@
-{
-  "label": "Style Layers",
-  "position": 70,
-  "link": {
-    "type": "generated-index",
-    "description": "Style Layers are a direct and powerful way to directly interact with the Layers on the loaded Map Style."
-  }
-}
