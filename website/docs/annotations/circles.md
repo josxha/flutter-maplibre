@@ -1,7 +1,7 @@
 ---
-sidebar_position: 2
 title: 'Circle'
 description: 'Add Circles to the map.'
+icon: lucide/circle
 ---
 
 # Circle Annotations
@@ -9,19 +9,18 @@ description: 'Add Circles to the map.'
 Circles are a simple way to show data on the map.
 
 <a href="/demo/#/layers/circle">
-<img src="/img/annotations/annotations-circles.jpg" 
+<img src="/assets/images/annotations/annotations-circles.jpg" 
      alt="Circles" />
 </a>
 
 ## Basic Usage
 
-```dart
+```dart linenums="1" hl_lines="6-17"
 @override
 Widget build(BuildContext context) {
   return MapLibreMap(
     options: MapOptions(center: Geographic(lon: 9.17, lat: 47.68)),
     layers: [
-      // highlight-start
       CircleLayer(
         points: <Point>[
           Point(Geographic(lon: 9.17, lat: 47.68)),
@@ -34,7 +33,6 @@ Widget build(BuildContext context) {
         strokeColor: Colors.red,
         strokeWidth: 2,
       ),
-      // highlight-end
     ],
   );
 }

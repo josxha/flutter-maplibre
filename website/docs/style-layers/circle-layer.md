@@ -1,5 +1,4 @@
 ---
-sidebar_position: 1
 title: 'Circle'
 description: 'Add Circles to the map.'
 icon: lucide/circle
@@ -10,11 +9,11 @@ icon: lucide/circle
 The `CircleStyleLayer` is either used by the map style or can be added to the map
 programmatically to symbolize data on the map.
 
-[![Circle Style Layer](/img/layers/circle_layer.jpg)](/demo/#/style-layers/circle)
+[![Circle Style Layer](../../assets/images/layers/circle_layer.jpg)](/demo/#/style-layers/circle)
 
 ## Basic Usage
 
-```dart
+```dart linenums="1" hl_lines="10-15 18-19"
 late final MapController _controller;
 
 @override
@@ -23,7 +22,6 @@ Widget build(BuildContext context) {
       options: MapOptions(center: Geographic(lon: 9.17, lat: 47.68)),
       onMapCreated: (controller) => _controller = controller,
       onStyleLoaded: (style) async {
-        // highlight-start
         // add the source
         const earthquakes = GeoJsonSource(
           id: _sourceId,
@@ -35,7 +33,6 @@ Widget build(BuildContext context) {
         // add the source with a layer on the map
         const layer = CircleStyleLayer(id: _layerId, sourceId: _sourceId);
         await style.addLayer(layer);
-        // highlight-end
       }
   );
 }

@@ -1,12 +1,13 @@
 ---
 hide: [ toc ]
+icon: lucide/star
 ---
 
 # Compare Features
 
 This page gives a brief comparison between `maplibre` and similar solutions.
 
-### General
+## General
 
 | **Topic**   | maplibre       | maplibre_gl    | flutter_map    | mapbox_maps_flutter | google_maps_flutter |
 |-------------|----------------|----------------|----------------|---------------------|---------------------|
@@ -14,7 +15,7 @@ This page gives a brief comparison between `maplibre` and similar solutions.
 | Vendor-Free | ✅ yes          | ✅ yes          | ✅ yes          | ❌ Mapbox only       | ❌ Google API only   |
 | Costs       | ✅ None         | ✅ None         | ✅ None         | ❌ Per user, per use | ❌ Per Use           |
 
-### Core Functionality
+## Core Functionality
 
 | **Feature**               | maplibre | maplibre_gl | flutter_map | mapbox_maps_flutter | google_maps_flutter |
 |---------------------------|----------|-------------|-------------|---------------------|---------------------|
@@ -30,7 +31,7 @@ This page gives a brief comparison between `maplibre` and similar solutions.
 | Gestures                  | ✅        | ✅           | ✅           | ✅                   | ✅                   |
 | Events                    | ✅        |             | ✅           | ✅                   |                     |
 
-### Annotation Layers
+## Annotation Layers
 
 | **Layer** | maplibre | maplibre_gl | flutter_map | mapbox_maps_flutter | google_maps_flutter |
 |-----------|----------|-------------|-------------|---------------------|---------------------|
@@ -41,7 +42,7 @@ This page gives a brief comparison between `maplibre` and similar solutions.
 | Markers   | ✅        | ✅           | ✅           | ✅                   | ✅                   |
 | Heatmap   | ✅        | ✅           | ✅ [^1]      | ✅                   | ✅ [^1]              |
 
-### Platform Support
+## Platform Support
 
 | **Platform** | maplibre | maplibre_gl | flutter_map | mapbox_maps_flutter | google_maps_flutter |
 |--------------|----------|-------------|-------------|---------------------|---------------------|

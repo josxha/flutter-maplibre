@@ -1,6 +1,5 @@
 ---
 title: Features
-weight: 10
 hide: [ navigation ]
 ---
 

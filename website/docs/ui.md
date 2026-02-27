@@ -1,5 +1,5 @@
 ---
-sidebar_position: 35
+icon: lucide/gamepad-directional
 ---
 
 # User Interface
@@ -42,21 +42,21 @@ Many sources require proper attribution to comply with their licensing or terms
 of service. Use the `SourceAttribution` widget that fetches the attached
 attributions and displays them on the map.
 
-![Attribution](/img/ui/attribution.jpg)
+![Attribution](/assets/images/ui/attribution.jpg)
 
 ## Map Compass
 
 The `MapCompass` widget helps the user orientating by indicating north and
 gives the user the open to reset the map rotation with a click on the compass.
 
-![Compass](/img/ui/compass.jpg)
+![Compass](/assets/images/ui/compass.jpg)
 
 ## Map Scalebar
 
 The `MapScalebar` widget shows the current scale of the map center for the
 current latitude and zoom level.
 
-![Scalebar](/img/ui/scalebar.jpg)
+![Scalebar](/assets/images/ui/scalebar.jpg)
 
 ## Map Control Buttons
 
@@ -69,4 +69,4 @@ additional button to let the user display and track its own position.
 The `showTrackLocation` flag will be ignored on web as web has currently not the
 same location functionality as other platforms provide.
 
-![Zoom Control Buttons](/img/ui/zoom-buttons.jpg)
+![Zoom Control Buttons](/assets/images/ui/zoom-buttons.jpg)

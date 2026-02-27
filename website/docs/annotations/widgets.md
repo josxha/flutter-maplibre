@@ -1,7 +1,7 @@
 ---
-sidebar_position: 10
 title: 'Widget'
 description: 'Add Flutter Widget to the map.'
+icon: lucide/layout-grid
 ---
 
 # Widget Annotations
@@ -21,7 +21,7 @@ annotation layers.
 
 ## Basic Usage
 
-```dart
+```dart linenums="1" hl_lines="11-29"
 @override
 Widget build(BuildContext context) {
   return Scaffold(
@@ -32,7 +32,6 @@ Widget build(BuildContext context) {
         initCenter: Geographic(lon: 0, lat: 0),
       ),
       children: [
-        // highlight-start
         WidgetLayer(
           markers: [
             Marker(
@@ -52,7 +51,6 @@ Widget build(BuildContext context) {
             ),
           ],
         ),
-        // highlight-end
         // display the UI widgets above the widget markers.
         const SourceAttribution(),
       ],

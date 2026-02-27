@@ -1,7 +1,7 @@
 ---
-sidebar_position: 3
 title: 'Polyline'
 description: 'Add Polylines to the map.'
+icon: lucide/line-squiggle
 ---
 
 # Polyline Annotations
@@ -9,19 +9,18 @@ description: 'Add Polylines to the map.'
 Polylines are way to show paths or similar on the map.
 
 <a href="/demo/#/layers/polyline">
-<img src="/img/layers/annotations-polyline.jpg" 
+<img src="/assets/images/annotations/annotations-polyline.jpg" 
      alt="Polylines" />
 </a>
 
 ## Basic Usage
 
-```dart
+```dart linenums="1" hl_lines="6-20"
 @override
 Widget build(BuildContext context) {
   return MapLibreMap(
     options: MapOptions(zoom: 7, center: Geographic(lon: 9.17, lat: 47.68)),
     layers: [
-      // highlight-start
       PolylineLayer(
         polylines: <LineString>[
           LineString(
@@ -37,7 +36,6 @@ Widget build(BuildContext context) {
         blur: 3,
         dashArray: const [5, 5],
       ),
-      // highlight-end
     ],
   );
 }

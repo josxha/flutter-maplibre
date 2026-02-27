@@ -1,8 +1,8 @@
 ---
-sidebar_position: 100
 title: 'Paint & Layout'
 description: 'Paint and Layout properties can be used to style your layers and change their behaviors.'
 icon: lucide/paintbrush
+weight: 100
 ---
 
 # Paint & Layout Properties
@@ -21,4 +21,4 @@ Creating these maps can be a bit tricky. In case you are not experienced, it is
 recommended to build and test your paint and layout properties
 in [Maputnik](https://maplibre.org/maputnik) first and copy it over.
 
-[![Maputnik Paint Properties](/img/maputnik-paint.jpg)](https://maplibre.org/maputnik)
+[![Maputnik Paint Properties](../../assets/images/maputnik-paint.jpg)](https://maplibre.org/maputnik)

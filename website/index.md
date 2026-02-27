@@ -1,6 +1,5 @@
 ---
 title: Home
-weight: 1
 hide: [ navigation, toc ]
 ---
 

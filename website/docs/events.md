@@ -1,5 +1,5 @@
 ---
-sidebar_position: 40
+icon: lucide/send
 ---
 
 # Events

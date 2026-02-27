@@ -1,5 +1,4 @@
 ---
-sidebar_position: 1
 title: 'Fill Extrusion'
 description: 'Add 3D building outlines to the map.'
 icon: lucide/cuboid
@@ -10,11 +9,11 @@ icon: lucide/cuboid
 The `FillExtrusionStyleLayer` is either used by the map style or can be added to the
 map programmatically to symbolize data on the map.
 
-[![Fill Extrusion Style Layer](/img/layers/fill_extrusion_layer.jpg)](/demo/#/style-layers/fill-extrusion)
+[![Fill Extrusion Style Layer](../../assets/images/layers/fill_extrusion_layer.jpg)](/demo/#/style-layers/fill-extrusion)
 
 ## Basic Usage
 
-```dart
+```dart linenums="1" hl_lines="10-16 30"
 late final MapController _controller;
 
 @override
@@ -24,7 +23,6 @@ Widget build(BuildContext context) {
       onMapCreated: (controller) => _controller = controller,
       onStyleLoaded: (style) async {
         // add the tile source
-        // highlight-start
         await style.addSource(
           const GeoJsonSource(
             id: _sourceId,
@@ -32,7 +30,6 @@ Widget build(BuildContext context) {
             'https://maplibre.org/maplibre-gl-js/docs/assets/indoor-3d-map.geojson',
           ),
         );
-        // highlight-end
         const layer = FillExtrusionStyleLayer(
           id: 'room-extrusion',
           sourceId: _sourceId,
@@ -46,16 +43,14 @@ Widget build(BuildContext context) {
           },
         );
         // add the layer
-        // highlight-start
         await style.addLayer(layer);
-        // highlight-end
       }
   );
 }
 ```
 
 Check out
-the [example app](https://github.com/josxha/flutter-maplibre/blob/v0.3.4/examples/lib/style-layers_fill_extrusion_page.dart)
+the [example app](https://github.com/josxha/flutter-maplibre/blob/v0.3.4/examples/lib/style_layers_fill_extrusion_page.dart)
 to learn more.
 
 ## Style & Layout

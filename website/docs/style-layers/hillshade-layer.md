@@ -1,5 +1,4 @@
 ---
-sidebar_position: 1
 title: 'Hillshade'
 description: 'Render elevation on the map.'
 icon: lucide/mountain
@@ -11,11 +10,11 @@ The `HillshadeStyleLayer` is either used by the map style or can be added to the
 programmatically to use DEM tiles. Those tiles are used to render elevation on 
 the map.
 
-[![Hillshade Style Layer](/img/layers/hillshade_layer.jpg)](/demo/#/style-layers/hillshade)
+[![Hillshade Style Layer](../../assets/images/layers/hillshade_layer.jpg)](/demo/#/style-layers/hillshade)
 
 ## Basic Usage
 
-```dart
+```dart linenums="1" hl_lines="9-20"
 late final MapController _controller;
 
 @override
@@ -24,7 +23,6 @@ Widget build(BuildContext context) {
       options: MapOptions(center: Geographic(lon: 9.17, lat: 47.68)),
       onMapCreated: (controller) => _controller = controller,
       onStyleLoaded: (style) async {
-        // highlight-start
         const hillshade = RasterDemSource(
           id: _sourceId,
           url: 'https://demotiles.maplibre.org/terrain-tiles/tiles.json',
@@ -37,7 +35,6 @@ Widget build(BuildContext context) {
           paint: {'hillshade-shadow-color': '#473B24'},
         );
         await style.addLayer(layer);
-        // highlight-end
       }
   );
 }

@@ -1,6 +1,10 @@
+---
+icon: lucide/map
+---
+
 # Similar Packages
 
-### maplibre_gl
+## maplibre_gl
 
 The [maplibre_gl](https://pub.dev/packages/maplibre_gl) package,
 or [flutter-maplibre-gl](https://github.com/maplibre/flutter-maplibre-gl/) on
@@ -57,7 +61,7 @@ I decided to start fresh and started a new package.
   relatively simple solution that allows to support Windows and macOS with a
   single implementation.
 
-### mapbox_maps_flutter
+## mapbox_maps_flutter
 
 `mapbox_maps_flutter` is the official Mapbox package for Flutter. It is a
 wrapper around the native Mapbox SDKs for Android and iOS, providing a Flutter
@@ -68,7 +72,7 @@ suitable for all projects.
 MapLibre SDKs are a fork of the Mapbox SDKs when MapBox stopped with their open
 source efforts. The MapLibre SDKs are still very similar to the Mapbox SDKs.
 
-### flutter_map
+## flutter_map
 
 `flutter_map` likely offers the best cross-platform experience and is published
 under a permissive license. Written in pure Dart, it can be used on every

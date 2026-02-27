@@ -1,8 +1,7 @@
 ---
-sidebar_position: 20
 title: 'flutter_map'
 description: 'Check this guide if you worked with flutter_map before and want to migrate to maplibre.'
-icon: lucide/map
+icon: lucide/box
 ---
 
 # Migrate from flutter_map

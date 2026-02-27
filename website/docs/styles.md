@@ -1,5 +1,5 @@
 ---
-sidebar_position: 30
+icon: lucide/map
 ---
 
 # Styles
@@ -67,4 +67,4 @@ called [Maputnik](https://maplibre.org/maputnik)
 that allows to customize existing styles or create a new style from scratch.
 Other tile providers like MapBox have own editors you can use.
 
-![Maputnik Editor](/img/maputnik.jpg)
+![Maputnik Editor](/assets/images/maputnik.jpg)

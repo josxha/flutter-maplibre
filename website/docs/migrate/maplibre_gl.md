@@ -1,8 +1,7 @@
 ---
-sidebar_position: 10
 title: 'maplibre_gl'
 description: 'Check this guide if you worked with maplibre_gl before and want to migrate to maplibre.'
-icon: lucide/map
+icon: lucide/box
 ---
 
 # Migrate from maplibre_gl

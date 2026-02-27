@@ -1,7 +1,7 @@
 ---
-sidebar_position: 1
 title: 'Marker'
 description: 'Add Markers to the map.'
+icon: lucide/map-pin
 ---
 
 # Marker Annotations
@@ -9,13 +9,13 @@ description: 'Add Markers to the map.'
 Markers are a way to show data on the map with labels and/or icons.
 
 <a href="/demo/#/layers/marker">
-<img src="/img/annotations/annotations-markers.jpg" 
+<img src="/assets/images/annotations/annotations-markers.jpg" 
      alt="Markers" />
 </a>
 
 ## Basic Usage
 
-```dart
+```dart linenums="1" hl_lines="13-16 28-41"
 late final MapController _controller;
 
 @override
@@ -28,12 +28,10 @@ Widget build(BuildContext context) {
           _controller = event.mapController;
         case MapEventStyleLoaded():
           // add marker image to map
-          // highlight-start
           final response =
           await http.get(Uri.parse(LayersSymbolPage.imageUrl));
           final bytes = response.bodyBytes;
           await _controller.addImage('marker', bytes);
-          // highlight-end
         case MapEventClick():
         // add a new marker on click
           setState(() {
@@ -45,7 +43,6 @@ Widget build(BuildContext context) {
       }
     },
     layers: [
-      // highlight-start
       MarkerLayer(
         points: <Point>[
           Point(Geographic(lon: 9.17, lat: 47.68)),
@@ -60,7 +57,6 @@ Widget build(BuildContext context) {
         iconAnchor: IconAnchor.bottom,
         textOffset: const [0, 1],
       ),
-      // highlight-end
     ],
   );
 }

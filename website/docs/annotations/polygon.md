@@ -1,7 +1,7 @@
 ---
-sidebar_position: 4
 title: 'Polygon'
 description: 'Add Polygons to the map.'
+icon: lucide/square
 ---
 
 # Polygon Annotations
@@ -9,19 +9,18 @@ description: 'Add Polygons to the map.'
 Polygons are way to highlight an area on the map.
 
 <a href="/demo/#/layers/polygon">
-<img src="/img/annotations/annotations-polygon.jpg" 
+<img src="/assets/images/annotations/annotations-polygon.jpg" 
      alt="Polygons" />
 </a>
 
 ## Basic Usage
 
-```dart
+```dart linenums="1" hl_lines="6-23"
 @override
 Widget build(BuildContext context) {
   return MapLibreMap(
     options: MapOptions(zoom: 7, center: Geographic(lon: 9.17, lat: 47.68)),
     layers: [
-      // highlight-start
       PolygonLayer(
         polygons: <Polygon>[
           Polygon(
@@ -40,7 +39,6 @@ Widget build(BuildContext context) {
         color: Colors.lightBlueAccent.withOpacity(0.6),
         outlineColor: Colors.blue,
       ),
-      // highlight-end
     ],
   );
 }

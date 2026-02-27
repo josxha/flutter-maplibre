@@ -10,10 +10,12 @@ docs_dir: website
 #nav:
 #  - Home: index.md
 #  - Docs:
-#      - Getting Started: docs/getting-started/add-dependency.md
-#      - Usage: docs/usage.md
-#  - Features: features.md
-#  - Compare: compare.md
+#      - Index: docs/index.md
+#  - features/
+#  - Compare:
+#      - Features: compare/features/
+#      - Similar Packages: compare/similar-packages/
+#  - Architecture: architecture/
 #  - API: https://pub.dev/documentation/maplibre/latest/maplibre/
 #  - Demo: /demo/
 #  - pub.dev: https://pub.dev/packages/maplibre
@@ -73,7 +75,6 @@ extra:
       link: "https://stackoverflow.com/questions/tagged/maplibre-gl"
 
 markdown_extensions:
-  - pymdownx.superfences
   - pymdownx.tabbed:
       alternate_style: true
       slugify: !!python/object/apply:pymdownx.slugs.slugify
@@ -89,3 +90,6 @@ markdown_extensions:
   - footnotes
   - pymdownx.tasklist:
       custom_checkbox: true
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences

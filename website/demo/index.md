@@ -1,6 +1,5 @@
 ---
 title: Demo
-weight: 50
 hide: [ navigation, toc ]
 ---
 

@@ -1,5 +1,4 @@
 ---
-sidebar_position: 1
 title: 'Raster'
 description: 'Add Raster Tiles on the map.'
 icon: lucide/image
@@ -10,11 +9,11 @@ icon: lucide/image
 The `RasterStyleLayer` is either used by the map style or can be added to the map
 programmatically to render raster tiles on your map.
 
-[![Raster Style Layer](/img/layers/raster_layer.jpg)](/demo/#/style-layers/raster)
+[![Raster Style Layer](../../assets/images/layers/raster_layer.jpg)](/demo/#/style-layers/raster)
 
 ## Basic Usage
 
-```dart
+```dart linenums="1" hl_lines="9-23"
 late final MapController _controller;
 
 @override
@@ -23,7 +22,6 @@ Widget build(BuildContext context) {
       options: MapOptions(center: Geographic(lon: 9.17, lat: 47.68)),
       onMapCreated: (controller) => _controller = controller,
       onStyleLoaded: (style) async {
-        // highlight-start
         const openStreetMap = RasterSource(
           id: _sourceId,
           tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
@@ -38,14 +36,13 @@ Widget build(BuildContext context) {
           sourceId: _sourceId,
         );
         await style.addLayer(layer);
-        // highlight-end
       }
   );
 }
 ```
 
 Check out
-the [example app](https://github.com/josxha/flutter-maplibre/blob/v0.3.4/examples/lib/style-layers_raster_page.dart)
+the [example app](https://github.com/josxha/flutter-maplibre/blob/v0.3.4/examples/lib/style_layers_raster_page.dart)
 to learn more.
 
 ## Style & Layout

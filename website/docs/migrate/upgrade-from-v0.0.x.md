@@ -1,5 +1,4 @@
 ---
-sidebar_position: 100
 title: 'Upgrade from 0.0.x'
 icon: lucide/arrow-up-right
 ---

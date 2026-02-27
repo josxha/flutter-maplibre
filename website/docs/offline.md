@@ -1,5 +1,5 @@
 ---
-sidebar_position: 45
+icon: lucide/database
 ---
 
 # Offline & Cache
