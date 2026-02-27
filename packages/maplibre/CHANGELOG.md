@@ -1,3 +1,19 @@
+## 0.3.4+1
+
+## Bug Fixes
+
+- Web: fix `addSource()` with raster and raster-dem source throws exception.
+- WebView: fix `addImage()` results in image with wrong pixel ratio.
+- iOS: fix `animateCamera()` causes the zoom level to jumps to the target zoom level.
+- iOS: fix `onStyleLoaded()` callback is not called when style loads immediately.
+
+## Maintenance
+
+- Migrate website to zensical and update documentation.
+- Improve pub.dev scores of packages.
+
+Full Changelog: [v0.3.4...v0.3.4+1](https://github.com/josxha/flutter-maplibre/compare/v0.3.4...v0.3.4+1)
+
 ## 0.3.4
 
 This feature release introduces a complete migration of the iOS platform to FFI and experimental support for Windows and macOS has been added using with web view. 
