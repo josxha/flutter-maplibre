@@ -1,13 +1,13 @@
 ## 0.3.4+1
 
-## Bug Fixes
+### Bug Fixes
 
 - Web: fix `addSource()` with raster and raster-dem source throws exception.
 - WebView: fix `addImage()` results in image with wrong pixel ratio.
 - iOS: fix `animateCamera()` causes the zoom level to jumps to the target zoom level.
 - iOS: fix `onStyleLoaded()` callback is not called when style loads immediately.
 
-## Maintenance
+### Maintenance
 
 - Migrate website to zensical and update documentation.
 - Improve pub.dev scores of packages.
