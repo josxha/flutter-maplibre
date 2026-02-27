@@ -17,6 +17,6 @@ cd ..
 echo "▶ Copy header configuration"
 echo "/*
         Cross-Origin-Embedder-Policy: credentialless
-        Cross-Origin-Opener-Policy: same-origin" > website/build/_headers
+        Cross-Origin-Opener-Policy: same-origin" > site/_headers
 
 echo "✅ Cloudflare Pages build finished successfully"
