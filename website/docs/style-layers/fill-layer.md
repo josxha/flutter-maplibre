@@ -48,5 +48,5 @@ to learn more.
 Use the `paint` property to change the style and the `layout`
 property to change the behavior on the map.
 
-Read the [Paint & Layout](./paint-and-layout) chapter to learn more on this
+Read the [Paint & Layout](./z-paint-and-layout) chapter to learn more on this
 topic. 
