@@ -6,30 +6,27 @@ import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 /// type [V].
 ///
 /// It is used so that style properties can be created in a type-safe way.
-extension type const PropertyValue<V extends Object?>._(dynamic object) {
+class PropertyValue<V extends Object?> {
   /// Creates a [PropertyValue] from an [Expression].
-  const PropertyValue.expression(Expression expression) : object = expression;
+  const PropertyValue.expression(Expression expression)
+    : _object = expression,
+      isExpression = true;
 
   /// Creates a [PropertyValue] from a literal value.
-  const PropertyValue.value(V value) : object = value;
+  const PropertyValue.value(V value) : _object = value, isExpression = false;
 
-  /// Get the value as type [V].
-  V get value => object as V;
-
-  /// Get the value as an [Expression].
-  Expression get expression => object as Expression;
+  final dynamic _object;
 
   /// Indicates whether the [PropertyValue] is an expression.
-  bool get isExpression => switch (object) {
-    // In addition to checking if the object is an Expression / List, we also
-    // have to check if the first element is a String that represents the
-    // operator of the expression, otherwise we might have a
-    // NumArray / List<double> that is not an expression.
-    final Expression expression => expression.json.firstOrNull is String,
-    _ => false,
-  };
+  final bool isExpression;
 
-  Object? toJson() => switch (object) {
+  /// Get the value as type [V].
+  V get value => _object as V;
+
+  /// Get the value as an [Expression].
+  Expression<V> get expression => _object as Expression<V>;
+
+  Object? toJson() => switch (_object) {
     final Expression expression => expression.json,
     null => null,
     final Color color => color.toHexString(),
@@ -41,6 +38,6 @@ extension type const PropertyValue<V extends Object?>._(dynamic object) {
       edgeInsets.bottom,
       edgeInsets.left,
     ],
-    _ => object,
+    _ => _object,
   };
 }

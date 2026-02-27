@@ -272,7 +272,7 @@ Map<String, Object?> createSymbolLayout({
   if (sortKey case final sortKey?) 'symbol-sort-key': sortKey.toJson(),
   'symbol-z-order': zOrder.toJson(),
   'icon-allow-overlap': iconAllowOverlap.toJson(),
-  if (iconOverlap case final iconOverlap?) 'icon-overlap': iconOverlap.toJson(),
+  'icon-overlap': iconOverlap.toJson(),
   'icon-ignore-placement': iconIgnorePlacement.toJson(),
   'icon-optional': iconOptional.toJson(),
   'icon-rotation-alignment': iconRotationAlignment.toJson(),
