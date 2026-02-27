@@ -1,4 +1,3 @@
-
 /// Create a union type with two possible types [T1] and [T2].
 extension type const OneOf2<T1, T2>._(dynamic _) {
   /// Create a new instance of [OneOf2] with a value of type [T1].

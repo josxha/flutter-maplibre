@@ -36,8 +36,7 @@ Expression<T?> id_<T extends Object>() => const Expression.fromJson(['id']);
 /// Can only be used in the [LineStyleLayer.gradient] property.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#line-progress
-Expression<num> lineProgress() =>
-    const Expression.fromJson(['line-progress']);
+Expression<num> lineProgress() => const Expression.fromJson(['line-progress']);
 
 /// Gets the value of a cluster property accumulated so far. Can only be used in the clusterProperties option of a clustered GeoJSON source.
 ///

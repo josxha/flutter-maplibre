@@ -21,10 +21,10 @@ extension type const PropertyValue<V extends Object?>._(dynamic object) {
 
   /// Indicates whether the [PropertyValue] is an expression.
   bool get isExpression => switch (object) {
-  // In addition to checking if the object is an Expression / List, we also
-  // have to check if the first element is a String that represents the
-  // operator of the expression, otherwise we might have a
-  // NumArray / List<double> that is not an expression.
+    // In addition to checking if the object is an Expression / List, we also
+    // have to check if the first element is a String that represents the
+    // operator of the expression, otherwise we might have a
+    // NumArray / List<double> that is not an expression.
     final Expression expression => expression.json.firstOrNull is String,
     _ => false,
   };

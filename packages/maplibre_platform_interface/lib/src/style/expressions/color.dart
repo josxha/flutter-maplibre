@@ -11,8 +11,11 @@ Expression<List<num>> toRgba(Expression<Color_> color) =>
 /// out of range, the expression is an error.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#rgb
-Expression<Color_> rgb(Expression<num> red, Expression<num> green, Expression<num> blue) =>
-    Expression.fromJson(['rgb', red, green, blue]);
+Expression<Color_> rgb(
+  Expression<num> red,
+  Expression<num> green,
+  Expression<num> blue,
+) => Expression.fromJson(['rgb', red, green, blue]);
 
 /// Creates a color value from red, green, blue components, which must range
 /// between 0 and 255, and an alpha component which must range between zero and

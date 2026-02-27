@@ -188,10 +188,11 @@ Expression image(OneOf2<String, Expression<String>> input) =>
 /// https://maplibre.org/maplibre-style-spec/expressions/#number-format
 Expression<String> numberFormat({
   required OneOf2<double, Expression<num>> input,
-  required String? locale,
-  required String? currency,
-  required int? minFractionDigits,
-  required int? maxFractionDigits,
+  String? locale,
+  String? currency,
+  String? unit,
+  int? minFractionDigits,
+  int? maxFractionDigits,
 }) => Expression.fromJson([
   'number-format',
   switch (input) {
@@ -202,6 +203,7 @@ Expression<String> numberFormat({
   <String, Object?>{
     'locale': ?locale,
     'currency': ?currency,
+    'unit': ?unit,
     'min-fraction-digits': ?minFractionDigits,
     'max-fraction-digits': ?maxFractionDigits,
   },

@@ -5,4 +5,5 @@ part of 'expressions.dart';
 /// pixel. Can only be used in the [HeatmapStyleLayer.color] property.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#heatmap-density
-Expression<num> heatmapDensity() => const Expression.fromJson(['heatmap-density']);
+Expression<num> heatmapDensity() =>
+    const Expression.fromJson(['heatmap-density']);

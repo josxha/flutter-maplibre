@@ -13,7 +13,8 @@ Expression<bool> isSupportedScript(Expression<String> input) =>
 /// Returns the input string converted to uppercase. Follows the Unicode Default Case Conversion algorithm and the locale-insensitive case mappings in the Unicode Character Database.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#upcase
-Expression<String> upcase(Expression<String> input) => Expression.fromJson(['upcase', input]);
+Expression<String> upcase(Expression<String> input) =>
+    Expression.fromJson(['upcase', input]);
 
 /// Returns the input string converted to lowercase. Follows the Unicode Default Case Conversion algorithm and the locale-insensitive case mappings in the Unicode Character Database.
 ///
@@ -40,12 +41,16 @@ Expression<String> resolvedLocale(Expression collator) =>
 /// separator string.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#split
-Expression<List<String>> split_(Expression<String> input, Expression<String> separator) =>
-    Expression.fromJson(['split', input, separator]);
+Expression<List<String>> split_(
+  Expression<String> input,
+  Expression<String> separator,
+) => Expression.fromJson(['split', input, separator]);
 
 /// Returns a string formed by concatenating the elements of the input array,
 /// inserting a separator between each element.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#join
-Expression<String> join(List<Expression<String>> input, Expression<String> separator) =>
-    Expression.fromJson(['join', input, separator]);
+Expression<String> join(
+  List<OneOf2<String, Expression<String>>> input,
+  OneOf2<String, Expression<String>> separator,
+) => Expression.fromJson(['join', input, separator]);
