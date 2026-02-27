@@ -41,3 +41,8 @@ Package.resolved
 
 .vscode
 ios/maplibre/.build
+
+# Zensical website
+site/
+.venv/
+.cache/

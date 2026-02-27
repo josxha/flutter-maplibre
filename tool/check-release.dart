@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:args/args.dart';
@@ -79,7 +78,7 @@ void main(List<String> arguments) {
     }
   }
 
-  _ensureDocumentationVersion(File('website/versions.json'), version);
+  _ensureDocumentationVersion(version);
 
   final releaseNotesPackage = _selectReleaseNotesPackage(packages);
   final releaseNotes = _buildReleaseNotes(
@@ -132,17 +131,13 @@ void _ensureChangelogEntry(File changelog, String version) {
   }
 }
 
-void _ensureDocumentationVersion(File versionsFile, Version version) {
-  if (!versionsFile.existsSync()) {
-    _fail('Missing file: ${versionsFile.path}');
-  }
-  final entries = jsonDecode(versionsFile.readAsStringSync());
-  if (entries is! List) {
-    _fail('Unexpected versions.json format');
-  }
-  final majorMinorX = '${version.major}.${version.minor}.x';
-  if (!entries.contains(majorMinorX)) {
-    _fail('${versionsFile.path} missing entry $majorMinorX');
+void _ensureDocumentationVersion(Version version) {
+  final versionFormatted = 'v${version.major}.${version.minor - 1}.x';
+  final upgradeFile = File(
+    'website/docs/migrate/upgrade-from-$versionFormatted.md',
+  );
+  if (!upgradeFile.existsSync()) {
+    _fail('Missing file: ${upgradeFile.path}');
   }
 }
 

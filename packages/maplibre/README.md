@@ -41,7 +41,7 @@ Many features of the package are showcased in the example app.
 💻 <a href="https://flutter-maplibre.pages.dev/demo">Hosted Example App</a>
 </td>
 <td>
-🗒️ <a href="https://github.com/josxha/flutter-maplibre/tree/main/example/lib">Code of the Example App</a>
+🗒️ <a href="https://github.com/josxha/flutter-maplibre/tree/main/examples/lib">Code of the Example App</a>
 </td>
 </tr>
 </table>
