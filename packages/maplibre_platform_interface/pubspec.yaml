@@ -1,10 +1,10 @@
 name: maplibre_platform_interface
 description: "Shared interfaces for the Flutter MapLibre plugin."
-version: 0.3.4
+version: 0.3.4+1
 repository: https://github.com/josxha/flutter-maplibre
 issue_tracker: https://github.com/josxha/flutter-maplibre/issues
 homepage: https://flutter-maplibre.pages.dev
-documentation: https://flutter-maplibre.pages.dev/docs/index/
+documentation: https://flutter-maplibre.pages.dev/docs/
 
 platforms: { android: ,ios: , linux: , macos: , web: , windows: }
 

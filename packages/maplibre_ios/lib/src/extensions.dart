@@ -109,9 +109,10 @@ extension CGPointExt on CGPoint {
 
 /// Internal extensions on [NSData].
 extension NSDataExt on NSData {
-  /// Convert a [NSData] to a UTF8 String.
+  /// Convert a [NSData] to a UTF8 [String].
   String toUTF8String() => String.fromCharCodes(toList());
 
+  /// Convert a [NSData] to a Dart [Map].
   Map<String, Object?> toDartMap() =>
       jsonDecode(toUTF8String()) as Map<String, dynamic>;
 }

@@ -1,5 +1,1 @@
 include: ../maplibre/analysis_options.yaml
-
-linter:
-  rules:
-    public_member_api_docs: false

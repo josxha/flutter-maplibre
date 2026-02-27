@@ -6,6 +6,8 @@ import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 /// {@category Layers}
 @immutable
 abstract class Layer<G extends Feature<Geometry>> {
+  /// Creates a [Layer] with the given list of geometry features and optional
+  /// zoom levels.
   const Layer({required this.list, this.minZoom = 0, this.maxZoom = 24});
 
   /// The [List] of geometry features.

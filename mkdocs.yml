@@ -1,0 +1,127 @@
+site_name: "MapLibre Flutter"
+site_description: "Permissive and performant mapping library that supports Mapbox Vector Tiles (MVT) powered by MapLibre SDKs."
+site_author: "josxha"
+site_url: "https://flutter-maplibre.pages.dev/"
+use_directory_urls: true
+repo_url: https://github.com/josxha/flutter-maplibre
+edit_uri: edit/main/website/
+docs_dir: website
+
+nav:
+  - Home: index.md
+  - Docs:
+      - Index: docs/index.md
+      - Getting Started:
+          - How to setup: docs/getting-started/setup.md
+          - How to use: docs/getting-started/usage.md
+      - Styles: docs/styles.md
+      - User Interface: docs/ui.md
+      - Events: docs/events.md
+      - Offline & Cache: docs/offline.md
+      - Annotations:
+          - Index: docs/annotations/index.md
+          - Circles: docs/annotations/circles.md
+          - Markers: docs/annotations/markers.md
+          - Polygons: docs/annotations/polygons.md
+          - Polylines: docs/annotations/polylines.md
+          - Widgets: docs/annotations/widgets.md
+      - Sources:
+          - Sources: docs/sources.md
+      - Style Layers:
+          - Index: docs/style-layers/index.md
+          - Circle Layer: docs/style-layers/circle-layer.md
+          - Fill Layer: docs/style-layers/fill-layer.md
+          - Heatmap Layer: docs/style-layers/heatmap-layer.md
+          - Hillshade Layer: docs/style-layers/hillshade-layer.md
+          - Line Layer: docs/style-layers/line-layer.md
+          - Raster Layer: docs/style-layers/raster-layer.md
+          - Symbol Layer: docs/style-layers/symbol-layer.md
+          - Paint & Layout: docs/style-layers/paint-and-layout.md
+      - Architecture:
+          - Architecture: docs/architecture.md
+      - Migrate:
+          - maplibre_gl: docs/migrate/maplibre_gl.md
+          - flutter_map: docs/migrate/flutter_map.md
+          - Upgrade from 0.0.x: docs/migrate/upgrade-from-v0.0.x.md
+          - Upgrade from 0.1.x: docs/migrate/upgrade-from-v0.1.x.md
+          - Upgrade from 0.2.x: docs/migrate/upgrade-from-v0.2.x.md
+  - Features: features/index.md
+  - Compare:
+      - Features: compare/features.md
+      - Similar Packages: compare/similar-packages.md
+  - API: https://pub.dev/documentation/maplibre/latest/maplibre/
+  - Demo: /demo/
+  - pub.dev: https://pub.dev/packages/maplibre
+
+theme:
+  name: "material"
+  logo: "assets/images/logo.svg"
+  favicon: "assets/images/favicon-32x32.png"
+  icon:
+    repo: fontawesome/brands/github
+  language: "en"
+  features:
+    - announce.dismiss
+    - content.action.edit
+    - content.code.annotate
+    - content.code.copy
+    - content.code.select
+    - content.footnote.tooltips
+    - content.tabs.link
+    - content.tooltips
+    - navigation.footer
+    - navigation.indexes
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.path
+    - navigation.sections
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top
+    - navigation.tracking
+    - search.highlight
+    - toc.follow
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: "lucide/sun-moon"
+        name: "Switch to light mode"
+    - media: "(prefers-color-scheme: light)"
+      scheme: "default"
+      toggle:
+        icon: "lucide/sun"
+        name: "Switch to dark mode"
+    - media: "(prefers-color-scheme: dark)"
+      scheme: "slate"
+      toggle:
+        icon: "lucide/moon"
+        name: "Switch to system preference"
+
+extra:
+  generator: false
+  social:
+    - icon: "fontawesome/brands/github"
+      link: "https://github.com/josxha/flutter-maplibre"
+    - icon: "fontawesome/brands/slack"
+      link: "https://slack.openstreetmap.us/"
+    - icon: "fontawesome/brands/stack-overflow"
+      link: "https://stackoverflow.com/questions/tagged/maplibre-gl"
+
+markdown_extensions:
+  - pymdownx.tabbed:
+      alternate_style: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - attr_list
+  - md_in_html
+  - footnotes
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - admonition
+  - pymdownx.details

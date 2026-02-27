@@ -41,5 +41,11 @@ Package.resolved
 
 .vscode
 ios/maplibre/.build
+
 packages/maplibre_ios/example/ios/Flutter/flutter_export_environment.sh
 packages/maplibre_ios/example/ios/Flutter/Generated.xcconfig
+
+# Zensical website
+site/
+.venv/
+.cache/

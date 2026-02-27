@@ -72,7 +72,7 @@ class OfflineManagerIos implements OfflineManager {
       south: bounds.latitudeSouth,
     );
     final id = DateTime.now().microsecondsSinceEpoch.hashCode;
-    final context = PackContext.fromJson(
+    final context = _PackContext.fromJson(
       id: id,
       styleUrl: mapStyleUrl,
       pixelDensity: pixelDensity,
@@ -120,7 +120,7 @@ class OfflineManagerIos implements OfflineManager {
     final packs = _storage.packs!.asDart();
     for (var i = 0; i < packs.length; i++) {
       final ffiPack = MLNOfflinePack.as(packs[i]);
-      final json = PackContext.fromNSData(ffiPack.context);
+      final json = _PackContext.fromNSData(ffiPack.context);
       if (json.id == regionId) {
         final ffiRegion = MLNTilePyramidOfflineRegion.as(ffiPack.region);
         return OfflineRegion(
@@ -169,7 +169,7 @@ class OfflineManagerIos implements OfflineManager {
     return List<OfflineRegion>.generate(packs.length, (i) {
       final ffiPack = MLNOfflinePack.as(packs[i]);
       final ffiRegion = MLNTilePyramidOfflineRegion.as(ffiPack.region);
-      final context = PackContext.fromNSData(ffiPack.context);
+      final context = _PackContext.fromNSData(ffiPack.context);
       return OfflineRegion(
         id: context.id,
         bounds: ffiRegion.bounds.toLngLatBounds(),
@@ -237,7 +237,7 @@ class OfflineManagerIos implements OfflineManager {
   void _onProgressChanged(objc.NSNotification notification) {
     final pack = notification.offlinePack;
     if (pack == null) return;
-    final context = PackContext.fromNSData(pack.context);
+    final context = _PackContext.fromNSData(pack.context);
     final regionId = context.id;
     final streamCtrl = _downloadStreamControllers[regionId];
     if (streamCtrl == null || streamCtrl.isClosed) return;
@@ -262,7 +262,7 @@ class OfflineManagerIos implements OfflineManager {
   void _onErrorWithNotification(objc.NSNotification notification) {
     final pack = notification.offlinePack;
     if (pack == null) return;
-    final context = PackContext.fromNSData(pack.context);
+    final context = _PackContext.fromNSData(pack.context);
     final regionId = context.id;
     final streamCtrl = _downloadStreamControllers[regionId];
     if (streamCtrl == null || streamCtrl.isClosed) return;
@@ -279,7 +279,7 @@ class OfflineManagerIos implements OfflineManager {
   void _onMaximumAllowedTiles(objc.NSNotification notification) {
     final pack = notification.offlinePack;
     if (pack == null) return;
-    final context = PackContext.fromNSData(pack.context);
+    final context = _PackContext.fromNSData(pack.context);
     final regionId = context.id;
     final streamCtrl = _downloadStreamControllers[regionId];
     if (streamCtrl == null || streamCtrl.isClosed) return;
@@ -294,8 +294,8 @@ class OfflineManagerIos implements OfflineManager {
   }
 }
 
-extension type const PackContext(Map<String, Object?> data) {
-  PackContext.fromJson({
+extension type const _PackContext(Map<String, Object?> data) {
+  _PackContext.fromJson({
     required int id,
     required String styleUrl,
     required double pixelDensity,
@@ -307,7 +307,7 @@ extension type const PackContext(Map<String, Object?> data) {
          'metadata': metadata,
        });
 
-  PackContext.fromNSData(objc.NSData data) : this(data.toDartMap());
+  _PackContext.fromNSData(objc.NSData data) : this(data.toDartMap());
 
   int get id => data['id'] as int? ?? -1;
 
