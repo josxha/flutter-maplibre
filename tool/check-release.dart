@@ -132,9 +132,9 @@ void _ensureChangelogEntry(File changelog, String version) {
 }
 
 void _ensureDocumentationVersion(Version version) {
-  final versionFormatted = 'v${version.major}.${version.minor}.x';
+  final versionFormatted = 'v${version.major}.${version.minor-1}.x';
   final upgradeFile = File(
-    'website/docs/migrate/upgrade-from-$versionFormatted',
+    'website/docs/migrate/upgrade-from-$versionFormatted.md',
   );
   if (!upgradeFile.existsSync()) {
     _fail('Missing file: ${upgradeFile.path}');

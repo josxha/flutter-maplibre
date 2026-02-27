@@ -13,7 +13,7 @@ programmatically to symbolize data on the map.
 
 ## Basic Usage
 
-```dart linenums="1" hl_lines="9-20"
+```dart linenums="1" hl_lines="11-20"
 late final MapController _controller;
 
 @override

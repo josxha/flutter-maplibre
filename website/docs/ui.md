@@ -9,7 +9,7 @@ platforms, the package has some flutter widgets, that are rendered above the
 map. These UI elements are just like every other Flutter widgets and can be used
 in the `children` List of the `MapLibreMap` widget.
 
-```dart
+```dart hl_lines="6-9"
 @override
 Widget build(BuildContext context) {
   return MapLibreMap(

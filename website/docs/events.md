@@ -12,14 +12,12 @@ state changes on the map.
 To listen to map events, implement a callback function for the `onEvent`
 parameter.
 
-```dart
-  @override
+```dart hl_lines="5 13-15 18-25"
+@override
 Widget build(BuildContext context) {
   return MapLibreMap(
     options: MapOptions(center: Geographic(lon: 9.17, lat: 47.68)),
-    // highlight-start
     onEvent: _onEvent,
-    // highlight-end
   );
 }
 
@@ -27,14 +25,11 @@ void _onEvent(event) {
   print(event.runtimeType);
 
   // check for the event type
-  // highlight-start
   if (event is MapEventClicked) {
     print('The map has been clicked at ${event.point.lng}, ${event.point.lat}');
   }
-  // highlight-end
 
   // or use a switch statement to listen to all the events you are interested in
-  // highlight-start
   switch (event) {
     case MapEventMapCreated():
       print('map created');
@@ -43,7 +38,6 @@ void _onEvent(event) {
     default:
     // ignore all other events
   }
-  // highlight-end
 }
 ```
 

@@ -68,14 +68,12 @@ plugins {
 }
 ```
 
-??? info "In case you can't find the `plugins {}` block your app still uses the
-old apply script method. Click here to view the instructions."
+??? info "In case you can't find the `plugins {}` block your app still uses the old apply script method. Click here to view the instructions."
 
     Open `android/app/build.gradle` and set the Kotlin version like this:
     
-    ```gradle title="android/app/build.gradle"
+    ```gradle title="android/app/build.gradle" hl_lines="2"
     buildscript {
-        // highlight-next-line
         ext.kotlin_version = '1.9.0'
         // ...
     }

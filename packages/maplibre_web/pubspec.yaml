@@ -1,10 +1,10 @@
 name: maplibre_web
-description: "iOS implementation of the Flutter MapLibre plugin."
+description: "Web implementation of the Flutter MapLibre plugin."
 version: 0.3.4+1
 repository: https://github.com/josxha/flutter-maplibre
 issue_tracker: https://github.com/josxha/flutter-maplibre/issues
 homepage: https://flutter-maplibre.pages.dev
-documentation: https://flutter-maplibre.pages.dev/docs/index/
+documentation: https://flutter-maplibre.pages.dev/docs/
 
 platforms: { web: }
 

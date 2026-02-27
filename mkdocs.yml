@@ -56,7 +56,7 @@ nav:
 theme:
   name: "material"
   logo: "assets/images/logo.svg"
-  favicon: "assets/images/favicon32x32.png"
+  favicon: "assets/images/favicon-32x32.png"
   icon:
     repo: fontawesome/brands/github
   language: "en"
@@ -125,4 +125,3 @@ markdown_extensions:
       custom_checkbox: true
   - admonition
   - pymdownx.details
-  - pymdownx.superfences

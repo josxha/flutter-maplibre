@@ -9,8 +9,8 @@ title: 'Annotations'
 -   __Marker Annotations__
     [![Marker Annotations](../../assets/images/annotations/annotations-markers.jpg)](markers)
 -   __Polygon Annotations__
-    [![Polygon Annotations](../../assets/images/annotations/annotations-polygon.jpg)](polygon)
+    [![Polygon Annotations](../../assets/images/annotations/annotations-polygon.jpg)](polygons)
 -   __Polyline Annotations__
-    [![Polyline Annotations](../../assets/images/annotations/annotations-polyline.jpg)](polyline)
+    [![Polyline Annotations](../../assets/images/annotations/annotations-polyline.jpg)](polylines)
   </div>
 </div>

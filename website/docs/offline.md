@@ -25,10 +25,9 @@ Future<OfflineManager> futureManager = OfflineManager.createInstance();
 Don't forget to call `manager.dispose()` when you no longer need it. You
 can do this for example in the `dispose` override of a flutter widget:
 
-```dart
+```dart hl_lines="3"
 @override
 void dispose() {
-  // highlight-next-line
   manager.dispose();
   super.dispose();
 }

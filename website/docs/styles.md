@@ -11,12 +11,11 @@ style.
 Custom map styles can be used by setting the `style` parameter of the map
 options like so:
 
-```dart
+```dart hl_lines="5"
 Widget build() {
   return MapLibreMap(
       options: MapOptions(
         center: Geographic(lon: 9.17, lat: 47.68),
-        // highlight-next-line
         style: 'https://demotiles.maplibre.org/style.json',
       )
   );

@@ -10,7 +10,7 @@ icon: lucide/gamepad-2
 Import the maplibre package and use the `MapLibreMap` widget to display a
 map.
 
-```dart title="map_screen.dart" linenums="1" hl_lines="3 18-27"
+```dart title="map_screen.dart" linenums="1" hl_lines="3 18-28"
 import 'package:flutter/material.dart';
 
 import 'package:maplibre/maplibre.dart';
@@ -115,9 +115,8 @@ by listening in the `onEvent` callback for the `MapEventMapCreated` event type.
 
 You can store the `MapController` in a field variable for later use.
 
-```dart linenums="1" hl_lines="14"
+```dart linenums="1" hl_lines="2 13"
 class _MyMapWidget extends State<GesturesPage> {
-  // highlight-next-line
   MapController? _mapController;
 
   @override
