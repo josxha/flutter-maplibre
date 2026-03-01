@@ -217,7 +217,7 @@ jobs:
       - name: Build example APK
         run: flutter build apk
       - name: Upload apk as artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         if: ${{ matrix.sdk == '' }}
         with:
           name: maplibre-flutter-demo.apk
@@ -245,7 +245,7 @@ jobs:
         run: flutter build ios --simulator --no-codesign
       - name: Upload Runner.app as artifact
         if: ${{ matrix.sdk == '' }}
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: maplibre-flutter-demo.app
           path: examples/build/ios/iphoneos/Runner.app
