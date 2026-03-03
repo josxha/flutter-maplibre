@@ -8,7 +8,8 @@ class StyleControllerIos extends StyleController {
 
   @override
   Future<void> addImage(String id, Uint8List bytes) async {
-    final image = UIImage.imageWithData(bytes.toNSData());
+    final pixelRatio = PlatformDispatcher.instance.views.first.devicePixelRatio;
+    final image = UIImage.imageWithData$1(bytes.toNSData(), scale: pixelRatio);
     if (image == null) return;
     _ffiStyle.setImage(image, forName: id.toNSString());
   }
