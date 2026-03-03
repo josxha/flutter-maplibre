@@ -3,6 +3,7 @@ part of 'style_layer.dart';
 /// WebView implementation of [HeatmapStyleLayer].
 class HeatmapStyleLayerWebView extends StyleLayerWebView
     implements HeatmapStyleLayer {
+  /// Creates a heatmap style layer.
   HeatmapStyleLayerWebView({
     required this.id,
     required this.sourceId,

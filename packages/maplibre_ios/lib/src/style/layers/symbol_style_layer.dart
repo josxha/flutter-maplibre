@@ -43,8 +43,7 @@ class SymbolStyleLayerIos extends StyleLayerIos<MLNSymbolStyleLayer>
     required PropertyValue<TextJustify> textJustify,
     required PropertyValue<double> textRadialOffset,
     required PropertyValue<List<IconAnchor>>? textVariableAnchor,
-    required PropertyValue<List<OneOf2<String, Offset>>>?
-    textVariableAnchorOffset,
+    required PropertyValue<Map<String, Offset>>? textVariableAnchorOffset,
     required PropertyValue<TextAnchor> textAnchor,
     required PropertyValue<double> textMaxAngle,
     required PropertyValue<List<TextWritingMode>>? textWritingMode,
@@ -656,13 +655,11 @@ class SymbolStyleLayerIos extends StyleLayerIos<MLNSymbolStyleLayer>
   }
 
   @override
-  PropertyValue<List<OneOf2<String, Offset>>>? get textVariableAnchorOffset =>
+  PropertyValue<Map<String, Offset>>? get textVariableAnchorOffset =>
       throw UnimplementedError();
 
   @override
-  set textVariableAnchorOffset(
-    PropertyValue<List<OneOf2<String, Offset>>>? property,
-  ) {
+  set textVariableAnchorOffset(PropertyValue<Map<String, Offset>>? property) {
     if (property == null) {
       ffiLayer.textVariableAnchorOffset =
           NSExpression.expressionForConstantValue(null);

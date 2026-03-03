@@ -1,7 +1,9 @@
 part of 'style_layer.dart';
 
+/// WebView implementation of [SymbolStyleLayer].
 class SymbolStyleLayerWebView extends StyleLayerWebView
     implements SymbolStyleLayer {
+  /// Creates a symbol style layer.
   SymbolStyleLayerWebView({
     required this.id,
     required this.sourceId,
@@ -237,7 +239,7 @@ class SymbolStyleLayerWebView extends StyleLayerWebView
   PropertyValue<List<IconAnchor>>? textVariableAnchor;
 
   @override
-  PropertyValue<List<OneOf2<String, Offset>>>? textVariableAnchorOffset;
+  PropertyValue<Map<String, Offset>>? textVariableAnchorOffset;
 
   @override
   PropertyValue<TextAnchor> textAnchor;

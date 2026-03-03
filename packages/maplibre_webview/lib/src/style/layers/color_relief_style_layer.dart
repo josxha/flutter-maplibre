@@ -1,7 +1,9 @@
 part of 'style_layer.dart';
 
+/// WebView implementation of [ColorReliefStyleLayer].
 class ColorReliefStyleLayerWebView extends StyleLayerWebView
     implements ColorReliefStyleLayer {
+  /// Creates a color relief style layer.
   ColorReliefStyleLayerWebView({
     required this.id,
     required this.sourceId,

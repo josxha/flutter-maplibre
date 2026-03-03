@@ -219,50 +219,28 @@ extension StringMap on JSAny? {
     );
   }
 
-  /// Convert a [JSAny] to a [PropertyValue] of `List<OneOf2<String, Offset>>`.
+  /// Convert a [JSAny] to a [PropertyValue] of `Map<String, Offset>`.
   ///
   /// This is used for "text-variable-anchor-offset".
-  PropertyValue<List<OneOf2<String, Offset>>>?
-  toOneOfStringOffsetListPropertyValue() {
+  PropertyValue<Map<String, Offset>>? toStringOffsetMapPropertyValue() {
     final property = dartify();
     if (property == null) return null;
     if (property is List<Object?> && property.firstOrNull is String) {
       return PropertyValue.expression(Expression.fromJson(property));
     }
-    if (property is List) {
-      final parsed = <OneOf2<String, Offset>>[];
-      for (final item in property) {
-        if (item is String) {
-          parsed.add(OneOf2.t1(item));
-        } else if (item is Map) {
-          final map = item.map((k, v) => MapEntry(k.toString(), v));
-          if (map.containsKey('x') && map.containsKey('y')) {
-            parsed.add(
-              OneOf2.t2(
-                Offset(
-                  (map['x']! as num).toDouble(),
-                  (map['y']! as num).toDouble(),
-                ),
-              ),
-            );
-          } else {
-            throw StateError('Expected map with x/y for Offset, got $item');
-          }
-        } else if (item is List) {
-          // Also accept [x,y]
-          final nums = item.whereType<num>().toList();
-          if (nums.length != 2) {
-            throw StateError('Expected [x,y] for Offset, got $item');
-          }
-          parsed.add(OneOf2.t2(Offset(nums[0].toDouble(), nums[1].toDouble())));
-        } else {
-          throw StateError('Invalid OneOf2<String,Offset> item: $item');
-        }
-      }
-      return PropertyValue.value(parsed);
+    if (property is! List) {
+      throw StateError(
+        'Expected List for OneOf2<String,Offset> list, got ${property.runtimeType}',
+      );
     }
-    throw StateError(
-      'Expected List for OneOf2<String,Offset> list, got ${property.runtimeType}',
-    );
+    final values = <String, Offset>{};
+    for (var i = 0; i < property.length; i += 2) {
+      final key = property[i] as String;
+      final item = property[i + 1] as List;
+      final nums = item.whereType<num>().toList();
+      final value = Offset(nums[0].toDouble(), nums[1].toDouble());
+      values[key] = value;
+    }
+    return PropertyValue.value(values);
   }
 }

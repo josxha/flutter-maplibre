@@ -16,6 +16,5 @@ part 'variable_binding.dart';
 part 'zoom.dart';
 
 /// Base class for expressions.
-extension type const Expression<T extends Object?>.fromJson(
-  List<Object?> json
-) {}
+extension type const Expression<T extends Object?>.fromJson(List<Object?> json)
+    implements List<Object?> {}

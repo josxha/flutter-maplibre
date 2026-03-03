@@ -363,8 +363,7 @@ class MapLibrePlugin extends MapLibrePlatform {
     required PropertyValue<TextJustify> textJustify,
     required PropertyValue<double> textRadialOffset,
     required PropertyValue<List<IconAnchor>>? textVariableAnchor,
-    required PropertyValue<List<OneOf2<String, Offset>>>?
-    textVariableAnchorOffset,
+    required PropertyValue<Map<String, Offset>>? textVariableAnchorOffset,
     required PropertyValue<TextAnchor> textAnchor,
     required PropertyValue<double> textMaxAngle,
     required PropertyValue<List<TextWritingMode>>? textWritingMode,

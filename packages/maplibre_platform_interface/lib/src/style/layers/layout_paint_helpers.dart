@@ -1,9 +1,12 @@
 part of 'style_layer.dart';
 
+/// Helper functions to create layout and paint properties for different layer
+/// types.
 Map<String, Object?> createBackgroundLayout({required bool visible}) => {
   'visibility': visible ? 'visible' : 'none',
 };
 
+/// Creates a map of paint properties for a [BackgroundStyleLayer].
 Map<String, Object?> createBackgroundPaint({
   required PropertyValue<Color> color,
   required PropertyValue<String>? pattern,
@@ -14,6 +17,7 @@ Map<String, Object?> createBackgroundPaint({
   'background-opacity': opacity.toJson(),
 };
 
+/// Creates a map of layout properties for a [CircleStyleLayer].
 Map<String, Object?> createCircleLayout({
   required bool visible,
   required PropertyValue<double>? sortKey,
@@ -22,6 +26,7 @@ Map<String, Object?> createCircleLayout({
   'visibility': visible ? 'visible' : 'none',
 };
 
+/// Creates a map of paint properties for a [CircleStyleLayer].
 Map<String, Object?> createCirclePaint({
   required PropertyValue<double> radius,
   required PropertyValue<Color> color,
@@ -48,10 +53,12 @@ Map<String, Object?> createCirclePaint({
   'circle-stroke-opacity': strokeOpacity.toJson(),
 };
 
+/// Creates a map of layout properties for a [ColorReliefStyleLayer].
 Map<String, Object?> createColorReliefLayout({required bool visible}) => {
   'visibility': visible ? 'visible' : 'none',
 };
 
+/// Creates a map of paint properties for a [ColorReliefStyleLayer].
 Map<String, Object?> createColorReliefPaint({
   required PropertyValue<Color>? color,
   required PropertyValue<double> opacity,
@@ -60,10 +67,12 @@ Map<String, Object?> createColorReliefPaint({
   'color-relief-opacity': opacity.toJson(),
 };
 
+/// Creates a map of layout properties for a [FillExtrusionStyleLayer].
 Map<String, Object?> createFillExtrusionLayout({required bool visible}) => {
   'visibility': visible ? 'visible' : 'none',
 };
 
+/// Creates a map of paint properties for a [FillExtrusionStyleLayer].
 Map<String, Object?> createFillExtrusionPaint({
   required PropertyValue<double> opacity,
   required PropertyValue<Color> color,
@@ -84,6 +93,7 @@ Map<String, Object?> createFillExtrusionPaint({
   'fill-extrusion-vertical-gradient': verticalGradient.toJson(),
 };
 
+/// Creates a map of layout properties for a [FillStyleLayer].
 Map<String, Object?> createFillLayout({
   required bool visible,
   required PropertyValue<double>? sortKey,
@@ -92,6 +102,7 @@ Map<String, Object?> createFillLayout({
   'visibility': visible ? 'visible' : 'none',
 };
 
+/// Creates a map of paint properties for a [FillStyleLayer].
 Map<String, Object?> createFillPaint({
   required PropertyValue<bool> antialias,
   required PropertyValue<Color> color,
@@ -110,10 +121,12 @@ Map<String, Object?> createFillPaint({
   if (pattern case final pattern?) 'fill-pattern': pattern.toJson(),
 };
 
+/// Creates a map of layout properties for a [HeatmapStyleLayer].
 Map<String, Object?> createHeatmapLayout({required bool visible}) => {
   'visibility': visible ? 'visible' : 'none',
 };
 
+/// Creates a map of paint properties for a [HeatmapStyleLayer].
 Map<String, Object?> createHeatmapPaint({
   required PropertyValue<double> radius,
   required PropertyValue<double> weight,
@@ -128,10 +141,12 @@ Map<String, Object?> createHeatmapPaint({
   'heatmap-opacity': opacity.toJson(),
 };
 
+/// Creates a map of layout properties for a [HillshadeStyleLayer].
 Map<String, Object?> createHillshadeLayout({required bool visible}) => {
   'visibility': visible ? 'visible' : 'none',
 };
 
+/// Creates a map of paint properties for a [HillshadeStyleLayer].
 Map<String, Object?> createHillshadePaint({
   required PropertyValue<NumberArray> illuminationDirection,
   required PropertyValue<NumberArray> illuminationAltitude,
@@ -152,6 +167,7 @@ Map<String, Object?> createHillshadePaint({
   'hillshade-method': method.toJson(),
 };
 
+/// Creates a map of layout properties for a [LineStyleLayer].
 Map<String, Object?> createLineLayout({
   required bool visible,
   required PropertyValue<LineCap> cap,
@@ -168,6 +184,7 @@ Map<String, Object?> createLineLayout({
   'visibility': visible ? 'visible' : 'none',
 };
 
+/// Creates a map of paint properties for a [LineStyleLayer].
 Map<String, Object?> createLinePaint({
   required PropertyValue<double> opacity,
   required PropertyValue<Color> color,
@@ -194,10 +211,12 @@ Map<String, Object?> createLinePaint({
   if (gradient case final gradient?) 'line-gradient': gradient.toJson(),
 };
 
+/// Creates a map of layout properties for a [RasterStyleLayer].
 Map<String, Object?> createRasterLayout({required bool visible}) => {
   'visibility': visible ? 'visible' : 'none',
 };
 
+/// Creates a map of paint properties for a [RasterStyleLayer].
 Map<String, Object?> createRasterPaint({
   required PropertyValue<double> opacity,
   required PropertyValue<double> hueRotate,
@@ -218,6 +237,7 @@ Map<String, Object?> createRasterPaint({
   'raster-fade-duration': fadeDuration.toJson(),
 };
 
+/// Creates a map of layout properties for a [SymbolStyleLayer].
 Map<String, Object?> createSymbolLayout({
   required bool visible,
   required PropertyValue<double>? sortKey,
@@ -251,7 +271,7 @@ Map<String, Object?> createSymbolLayout({
   required PropertyValue<TextJustify> textJustify,
   required PropertyValue<double> textRadialOffset,
   required PropertyValue<List<IconAnchor>>? textVariableAnchor,
-  required PropertyValue<List<OneOf2<String, Offset>>>?
+  required PropertyValue<Map<String, Offset>>?
   textVariableAnchorOffset,
   required PropertyValue<TextAnchor> textAnchor,
   required PropertyValue<double> textMaxAngle,
@@ -316,6 +336,7 @@ Map<String, Object?> createSymbolLayout({
   'visibility': visible ? 'visible' : 'none',
 };
 
+/// Creates a map of paint properties for a [SymbolStyleLayer].
 Map<String, Object?> createSymbolPaint({
   required PropertyValue<double> iconOpacity,
   required PropertyValue<Color> iconColor,

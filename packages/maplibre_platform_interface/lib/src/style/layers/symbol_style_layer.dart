@@ -52,7 +52,7 @@ abstract interface class SymbolStyleLayer
     PropertyValue<TextJustify> textJustify = defaultTextJustify,
     PropertyValue<double> textRadialOffset = defaultTextRadialOffset,
     PropertyValue<List<IconAnchor>>? textVariableAnchor,
-    PropertyValue<List<OneOf2<String, Offset>>>? textVariableAnchorOffset,
+    PropertyValue<Map<String, Offset>>? textVariableAnchorOffset,
     PropertyValue<TextAnchor> textAnchor = defaultTextAnchor,
     PropertyValue<double> textMaxAngle = defaultTextMaxAngle,
     PropertyValue<List<TextWritingMode>>? textWritingMode,
@@ -572,11 +572,9 @@ abstract interface class SymbolStyleLayer
   ///
   /// Layout property. Optional. Requires [textField]. Requires [placement] to
   /// be [SymbolPlacement.point]. Supports [interpolate] expressions.
-  PropertyValue<List<OneOf2<String, Offset>>>? get textVariableAnchorOffset;
+  PropertyValue<Map<String, Offset>>? get textVariableAnchorOffset;
 
-  set textVariableAnchorOffset(
-    PropertyValue<List<OneOf2<String, Offset>>>? property,
-  );
+  set textVariableAnchorOffset(PropertyValue<Map<String, Offset>>? property);
 
   /// {@macro text-anchor}
   ///

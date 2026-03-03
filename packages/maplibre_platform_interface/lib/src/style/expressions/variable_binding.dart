@@ -5,7 +5,7 @@ part of 'expressions.dart';
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#let
 Expression let({
-  required Map<String, OneOf?> variables,
+  required Map<String, Object?> variables,
   required Expression expression,
 }) => Expression.fromJson([
   'let',
@@ -16,7 +16,7 @@ Expression let({
 /// References variable bound using [let].
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#var
-Expression<T> var_<T extends Object?>(OneOf2<String, Expression> variable) =>
+Expression<T> var_<T extends Object?>(Object variable) =>
     Expression.fromJson([
       'var',
       switch (variable) {

@@ -79,6 +79,7 @@ abstract interface class StyleLayerWithSource implements StyleLayer {
   String get sourceId;
 }
 
+/// A [StyleLayerWithSource] that has a [sourceLayerId] and [filter] property.
 abstract interface class StyleLayerWithVectorSource
     implements StyleLayerWithSource {
   /// Layer to use from a vector tile source. Required for [VectorSource];

@@ -1,7 +1,9 @@
 part of 'style_layer.dart';
 
+/// WebView implementation of [BackgroundStyleLayer].
 class BackgroundStyleLayerWebView extends StyleLayerWebView
     implements BackgroundStyleLayer {
+  /// Creates a background style layer.
   BackgroundStyleLayerWebView({
     required this.id,
     required this.color,

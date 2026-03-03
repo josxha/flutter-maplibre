@@ -1,7 +1,9 @@
 part of 'style_layer.dart';
 
+/// Web implementation of [CircleStyleLayer].
 class CircleStyleLayerWebView extends StyleLayerWebView
     implements CircleStyleLayer {
+  /// Construct a [CircleStyleLayerWebView] with the given properties.
   CircleStyleLayerWebView({
     required this.id,
     required this.sourceId,

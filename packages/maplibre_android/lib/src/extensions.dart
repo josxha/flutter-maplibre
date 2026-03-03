@@ -99,6 +99,7 @@ extension LatLngBounds on jni.LatLngBounds {
   }
 }
 
+/// Extension methods for the [List<double>] class. Not exported publicly.
 extension DoubleListExt on List<double> {
   /// Convert a [List<double>] to a [JArray<JDouble>].
   JArray<JFloat?> toJFloatArray(Arena arena) {
@@ -110,6 +111,7 @@ extension DoubleListExt on List<double> {
   }
 }
 
+/// Extension methods for the [List<String>] class. Not exported publicly.
 extension StringListExt on List<String> {
   /// Convert a [List<String>] to a [JArray<JString>].
   JArray<JString?> toJStringArray(Arena arena) {
@@ -371,7 +373,9 @@ extension PropertyValueExt<V> on PropertyValue<V>? {
   }
 }
 
+/// Extension methods for the [jni.PropertyValue] class. Not exported publicly.
 extension JPropertyValueStringExt on jni.PropertyValue<JString?> {
+  /// Convert a [jni.PropertyValue] to a [PropertyValue<T>] where T is an enum.
   PropertyValue<T>? toDartEnum<T extends Enum>({
     required List<T> values,
     bool releaseOriginal = false,

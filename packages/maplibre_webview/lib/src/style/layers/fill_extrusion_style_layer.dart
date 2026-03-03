@@ -3,6 +3,7 @@ part of 'style_layer.dart';
 /// WebView implementation of [FillExtrusionStyleLayer].
 class FillExtrusionStyleLayerWebView extends StyleLayerWebView
     implements FillExtrusionStyleLayer {
+  /// Creates a fill extrusion style layer.
   FillExtrusionStyleLayerWebView({
     required this.id,
     required this.sourceId,

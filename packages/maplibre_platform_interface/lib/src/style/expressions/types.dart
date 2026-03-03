@@ -82,22 +82,40 @@ Expression<Map<String, Object?>> object(List<Expression> inputs) {
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#collator
 Expression collator({
-  OneOf2<bool, Expression<bool>>? caseSensitive,
-  OneOf2<bool, Expression<bool>>? diacriticSensitive,
-  OneOf2<Locale, Expression<String>>? locale,
-}) => Expression.fromJson([
-  'collator',
-  <String, Object?>{
-    'case-sensitive': ?caseSensitive,
-    'diacritic-sensitive': ?diacriticSensitive,
-    if (locale != null)
-      'locale': switch (locale) {
-        final Locale locale => locale.toString(),
-        final Expression expr => expr.json,
-        _ => throw StateError('Unreachable'),
-      },
-  },
-]);
+  Object? caseSensitive,
+  Object? diacriticSensitive,
+  Object? locale,
+}) {
+  assert(
+    caseSensitive == null ||
+        caseSensitive is bool ||
+        caseSensitive is Expression<bool>,
+    'caseSensitive must be a bool or an Expression<bool>',
+  );
+  assert(
+    diacriticSensitive == null ||
+        diacriticSensitive is bool ||
+        diacriticSensitive is Expression<bool>,
+    'diacriticSensitive must be a bool or an Expression<bool>',
+  );
+  assert(
+    locale == null || locale is String || locale is Expression<String>,
+    'locale must be a String or an Expression<String>',
+  );
+  return Expression.fromJson([
+    'collator',
+    <String, Object?>{
+      'case-sensitive': ?caseSensitive,
+      'diacritic-sensitive': ?diacriticSensitive,
+      if (locale != null)
+        'locale': switch (locale) {
+          final Locale locale => locale.toString(),
+          final Expression expr => expr.json,
+          _ => throw StateError('Unreachable'),
+        },
+    },
+  ]);
+}
 
 /// Returns a `formatted` string for displaying mixed-format text in the
 /// [SymbolStyleLayer.textField] property. The input may contain a string
@@ -105,19 +123,22 @@ Expression collator({
 /// followed by a style override object.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#format
-Expression<Formatted> format(
-  Map<OneOf2<String, Expression<String>>, StyleOverrides> overrides,
-) => Expression.fromJson([
-  'format',
-  for (final entry in overrides.entries) ...[
-    switch (entry.key) {
-      final String str => str,
-      final Expression expr => expr.json,
-      _ => throw StateError('Unreachable'),
-    },
-    entry.value.json,
-  ],
-]);
+Expression<Formatted> format(Map<Object, StyleOverrides> overrides) =>
+    Expression.fromJson([
+      'format',
+      for (final entry in overrides.entries) ...[
+        switch (entry.key) {
+          final String str => str,
+          final Expression expr => expr.json,
+          _ => throw ArgumentError.value(
+            entry.key,
+            'overrides',
+            'Keys must be either String or Expression',
+          ),
+        },
+        entry.value.json,
+      ],
+    ]);
 
 /// An object defining style overrides for a section of text in a [format]
 /// expression.
@@ -172,22 +193,25 @@ enum VerticalAlign {
 /// argument.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#image
-Expression image(OneOf2<String, Expression<String>> input) =>
-    Expression.fromJson([
-      'image',
-      switch (input) {
-        final String imageName => imageName,
-        final Expression expression => expression,
-        _ => throw StateError('Unreachable'),
-      },
-    ]);
+Expression image(Object input) => Expression.fromJson([
+  'image',
+  switch (input) {
+    final String imageName => imageName,
+    final Expression expression => expression,
+    _ => throw ArgumentError.value(
+      input,
+      'input',
+      'Input must be either a String or an Expression',
+    ),
+  },
+]);
 
 /// Converts the input number into a string representation using the provided
 /// format_options.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#number-format
 Expression<String> numberFormat({
-  required OneOf2<double, Expression<num>> input,
+  required Object input,
   String? locale,
   String? currency,
   String? unit,
@@ -198,7 +222,11 @@ Expression<String> numberFormat({
   switch (input) {
     final double value => value,
     final Expression expr => expr,
-    _ => throw StateError('Unreachable'),
+    _ => throw ArgumentError.value(
+      input,
+      'input',
+      'Input must be either a num or an Expression',
+    ),
   },
   <String, Object?>{
     'locale': ?locale,
@@ -233,16 +261,15 @@ Expression<String> toString(Expression input) =>
 /// inputs can be converted, the expression is an error.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#to-number
-Expression<num> toNumber(OneOf2<Expression, List<Expression>> input) {
-  if (input is List<Expression>) {
-    final values = input as List<Expression>;
-    return Expression.fromJson(['to-number', ...values]);
-  }
-  if (input is Expression) {
-    return Expression.fromJson(['to-number', input]);
-  }
-  throw StateError('Unreachable');
-}
+Expression<num> toNumber(Object input) => switch (input) {
+  final List<Expression> list => Expression.fromJson(['to-number', ...list]),
+  final Expression expr => Expression.fromJson(['to-number', expr]),
+  _ => throw ArgumentError.value(
+    input,
+    'input',
+    'Input must be either an Expression or a List<Expression>',
+  ),
+};
 
 /// Converts the input value to a boolean. The result is false when the input is
 /// an empty string, 0, false, null, or NaN; otherwise it is true.

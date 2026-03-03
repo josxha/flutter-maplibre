@@ -1,7 +1,9 @@
 part of 'style_layer.dart';
 
+/// WebView implementation of [HillshadeStyleLayer].
 class HillshadeStyleLayerWebView extends StyleLayerWebView
     implements HillshadeStyleLayer {
+  /// Creates a hillshade style layer.
   HillshadeStyleLayerWebView({
     required this.id,
     required this.sourceId,

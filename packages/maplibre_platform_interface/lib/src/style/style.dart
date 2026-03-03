@@ -11,6 +11,7 @@ extension type const Color_(String color) {}
 
 /// https://maplibre.org/maplibre-style-spec/types/#formatted
 extension type const Formatted.fromJson(List<Object?> json) {
+  /// Creates a [Formatted] from a [List] of sections.
   Formatted(Map<String, Map<String, Object?>> sections)
     : this.fromJson([
         'format',

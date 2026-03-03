@@ -50,7 +50,14 @@ Expression<List<String>> split_(
 /// inserting a separator between each element.
 ///
 /// https://maplibre.org/maplibre-style-spec/expressions/#join
-Expression<String> join(
-  List<OneOf2<String, Expression<String>>> input,
-  OneOf2<String, Expression<String>> separator,
-) => Expression.fromJson(['join', input, separator]);
+Expression<String> join(List<Object> input, Object separator) {
+  assert(
+    input.every((element) => element is Expression || element is String),
+    'Input must be a list of Expressions or Strings',
+  );
+  assert(
+    separator is Expression || separator is String,
+    'Separator must be an Expression or a String',
+  );
+  return Expression.fromJson(['join', input, separator]);
+}

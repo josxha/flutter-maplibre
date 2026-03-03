@@ -1,7 +1,9 @@
 part of 'style_layer.dart';
 
+/// WebView implementation of [RasterStyleLayer].
 class RasterStyleLayerWebView extends StyleLayerWebView
     implements RasterStyleLayer {
+  /// Creates a raster style layer.
   RasterStyleLayerWebView({
     required this.id,
     required this.sourceId,

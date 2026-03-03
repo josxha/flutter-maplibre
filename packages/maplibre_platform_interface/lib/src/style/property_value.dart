@@ -26,6 +26,7 @@ class PropertyValue<V extends Object?> {
   /// Get the value as an [Expression].
   Expression<V> get expression => _object as Expression<V>;
 
+  /// Converts the [PropertyValue] to a JSON-compatible format.
   Object? toJson() => switch (_object) {
     final Expression expression => expression.json,
     null => null,

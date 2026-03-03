@@ -41,7 +41,7 @@ Expression<T> interpolate<T extends Object?>({
   required InterpolationType type,
   required Expression<num> input,
   required List<double> stopInputs,
-  required List<OneOf> stopOutputs,
+  required List<Object> stopOutputs,
 }) => Expression.fromJson([
   'interpolate',
   [type, input, ...stopInputs, ...stopOutputs],
@@ -61,7 +61,7 @@ Expression<T> interpolateHcl<T extends Object>({
   required InterpolationType type,
   required Expression<num> input,
   required List<double> stopInputs,
-  required List<OneOf2<Color_, Expression>> stopOutputs,
+  required List<Object> stopOutputs,
 }) => Expression.fromJson([
   'interpolate-hcl',
   [type, input, ...stopInputs, ...stopOutputs],

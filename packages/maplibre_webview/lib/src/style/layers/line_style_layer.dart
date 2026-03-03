@@ -1,7 +1,9 @@
 part of 'style_layer.dart';
 
+/// A line style layer.
 class LineStyleLayerWebView extends StyleLayerWebView
     implements LineStyleLayer {
+  /// Creates a line style layer.
   LineStyleLayerWebView({
     required this.id,
     required this.sourceId,

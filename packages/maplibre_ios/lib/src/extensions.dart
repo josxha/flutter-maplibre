@@ -84,6 +84,7 @@ extension EdgeInsetsExt on EdgeInsets {
     return insets;
   }
 
+  /// Convert an [EdgeInsets] to a [NSExpression] representing a padding array.
   NSExpression toNSExpression() {
     final nsArray = [top, left, bottom, right].toNSArray();
     return Helpers.createUIEdgeInsetsNSExpressionWithPadding(nsArray);

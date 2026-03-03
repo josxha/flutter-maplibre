@@ -78,7 +78,7 @@ class CircleStyleLayerWeb extends StyleLayerWeb implements CircleStyleLayer {
       Expression.fromJson(jsLayer.filter.dartify()! as List<Object?>);
 
   @override
-  set filter(Expression value) => jsLayer.filter = value!.json.jsify()!;
+  set filter(Expression value) => jsLayer.filter = value.json.jsify()!;
 
   @override
   PropertyValue<double> get opacity =>

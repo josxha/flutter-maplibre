@@ -24,8 +24,10 @@ abstract class StyleLayerWeb implements StyleLayer {
   /// The JavaScript layer instance.
   final js.LayerSpecification jsLayer;
 
+  /// The JavaScript map instance, if attached to a map.
   js.JsMap? jsMap;
 
+  /// Gets the JavaScript map instance, throwing if not attached to a map.
   js.JsMap get requireMap =>
       jsMap ?? (throw StateError('Map is not attached to the layer'));
 

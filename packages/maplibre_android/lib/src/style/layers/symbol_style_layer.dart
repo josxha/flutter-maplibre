@@ -43,8 +43,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
     required PropertyValue<TextJustify> textJustify,
     required PropertyValue<double> textRadialOffset,
     required PropertyValue<List<IconAnchor>>? textVariableAnchor,
-    required PropertyValue<List<OneOf2<String, Offset>>>?
-    textVariableAnchorOffset,
+    required PropertyValue<Map<String, Offset>>? textVariableAnchorOffset,
     required PropertyValue<TextAnchor> textAnchor,
     required PropertyValue<double> textMaxAngle,
     required PropertyValue<List<TextWritingMode>>? textWritingMode,
@@ -792,65 +791,53 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
       });
 
   @override
-  PropertyValue<List<OneOf2<String, Offset>>>? get textVariableAnchorOffset =>
-      using((arena) {
-        final jProperty = jLayer.getTextVariableAnchorOffset()
-          ..releasedBy(arena);
-        if (jProperty.isNull$1()) return null;
-        if (jProperty.isExpression()) {
-          final jExpression = jProperty.getExpression()?..releasedBy(arena);
-          final expression = jExpression?.toDart(releaseOriginal: true);
-          return expression == null
-              ? null
-              : PropertyValue.expression(expression);
-        }
-        final jArray = jProperty.getValue()?..releasedBy(arena);
-        if (jArray == null) return null;
-        final values = <OneOf2<String, Offset>>[];
-        for (var i = 0; i < jArray.length; i++) {
-          final entry = jArray[i]?..releasedBy(arena);
-          if (entry == null) continue;
-          if (entry.isA(JString.type)) {
-            final str = entry
-                .as(JString.type)
-                .toDartString(releaseOriginal: true);
-            values.add(OneOf2.t1(str));
-          } else if (entry.isA(JArray.type(JFloat.nullableType))) {
-            final jOffset = entry.as(JArray.type(JFloat.nullableType));
-            if (jOffset.length < 2) continue;
-            final offset = jOffset.toOffset(releaseOriginal: true);
-            values.add(OneOf2.t2(offset));
-          }
-        }
-        return PropertyValue.value(values);
-      });
+  PropertyValue<Map<String, Offset>>? get textVariableAnchorOffset => using((
+    arena,
+  ) {
+    final jProperty = jLayer.getTextVariableAnchorOffset()..releasedBy(arena);
+    if (jProperty.isNull$1()) return null;
+    if (jProperty.isExpression()) {
+      final jExpression = jProperty.getExpression()?..releasedBy(arena);
+      final expression = jExpression?.toDart(releaseOriginal: true);
+      if (expression == null) return null;
+      return PropertyValue.expression(expression);
+    }
+    final jArray = jProperty.getValue()?..releasedBy(arena);
+    if (jArray == null) return null;
+    final values = <String, Offset>{};
+    for (var i = 0; i < jArray.length; i += 2) {
+      final entry0 = jArray[i]?..releasedBy(arena);
+      final entry1 = jArray[i + 1]?..releasedBy(arena);
+      if (entry0 == null || entry1 == null) continue;
+      final key = entry0.as(JString.type).toDartString(releaseOriginal: true);
+      final jOffset = entry1.as(JArray.type(JFloat.nullableType));
+      final offset = jOffset.toOffset(releaseOriginal: true);
+      values[key] = offset;
+    }
+    return PropertyValue.value(values);
+  });
 
   @override
-  set textVariableAnchorOffset(
-    PropertyValue<List<OneOf2<String, Offset>>>? value,
-  ) => using((arena) {
-    final jProperty = value.apply(
-      arena: arena,
-      onExpression: jni.PropertyFactory.textVariableAnchorOffset$1,
-      onValue: (value) {
-        final jArray = JArray(JObject.nullableType, value.length);
-        for (var i = 0; i < value.length; i++) {
-          final entry = value[i];
-          switch (entry) {
-            case final String s:
-              jArray[i] = s.toJString()..releasedBy(arena);
-            case final Offset o:
-              final jOffset = o.toJFloatArray(arena);
-              jArray[i] = jOffset..releasedBy(arena);
-          }
-        }
-        return jni.PropertyFactory.textVariableAnchorOffset(jArray);
-      },
-      onNull: () => jni.PropertyFactory.textVariableAnchorOffset(null),
-    );
-    jProperty?.releasedBy(arena);
-    jLayer.setProperty(jProperty);
-  });
+  set textVariableAnchorOffset(PropertyValue<Map<String, Offset>>? value) =>
+      using((arena) {
+        final jProperty = value.apply(
+          arena: arena,
+          onExpression: jni.PropertyFactory.textVariableAnchorOffset$1,
+          onValue: (value) {
+            final jArray = JArray(JObject.nullableType, value.length * 2);
+            var i = 0;
+            for (final entry in value.entries) {
+              jArray[i++] = entry.key.toJString()..releasedBy(arena);
+              final jOffset = entry.value.toJFloatArray(arena);
+              jArray[i++] = jOffset..releasedBy(arena);
+            }
+            return jni.PropertyFactory.textVariableAnchorOffset(jArray);
+          },
+          onNull: () => jni.PropertyFactory.textVariableAnchorOffset(null),
+        );
+        jProperty?.releasedBy(arena);
+        jLayer.setProperty(jProperty);
+      });
 
   @override
   PropertyValue<TextAnchor> get textAnchor =>
