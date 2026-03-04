@@ -54,7 +54,7 @@ extension StringMap on JSAny? {
       {};
 
   /// Convert a [JSAny] to a [PropertyValue] of type [V] that can be [double],
-  /// [String], [boolean], [int], or [List<double>].
+  /// [String], [bool], [int], or [List<double>].
   PropertyValue<V>? toPropertyValue<V>() {
     final property = dartify();
     if (property == null) {

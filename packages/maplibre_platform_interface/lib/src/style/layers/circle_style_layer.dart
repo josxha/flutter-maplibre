@@ -58,7 +58,7 @@ abstract interface class CircleStyleLayer
   /// The radius of the circle.
   ///
   /// Paint property. Optional number in range `[0, ∞)`. Units in pixels.
-  /// Defaults to `5`. Supports [featureState] and [interpolate] expressions.
+  /// Defaults to `5`. Supports [Expression.featureState] and [Expression.interpolate] expressions.
   /// Transitionable.
   PropertyValue<double> get radius;
 
@@ -70,7 +70,7 @@ abstract interface class CircleStyleLayer
   /// The fill color of the circle.
   ///
   /// Paint property. Optional [Color]. Defaults to `"#000000"` (black).
-  /// Supports [featureState] and [interpolate] expressions. Transitionable.
+  /// Supports [Expression.featureState] and [Expression.interpolate] expressions. Transitionable.
   PropertyValue<Color> get color;
 
   set color(PropertyValue<Color> property);
@@ -81,8 +81,8 @@ abstract interface class CircleStyleLayer
   /// Amount to blur the circle. 1 blurs the circle such that only the
   /// centerpoint is full opacity.
   ///
-  /// Paint property. Optional number. Defaults to `0`. Supports [featureState]
-  /// and [interpolate] expressions. Transitionable.
+  /// Paint property. Optional number. Defaults to `0`. Supports [Expression.featureState]
+  /// and [Expression.interpolate] expressions. Transitionable.
   PropertyValue<double> get blur;
 
   set blur(PropertyValue<double> property);
@@ -93,7 +93,7 @@ abstract interface class CircleStyleLayer
   /// The opacity at which the circle will be drawn.
   ///
   /// Paint property. Optional number in range `[0, 1]`. Defaults to `1`.
-  /// Supports [featureState] and [interpolate] expressions. Transitionable.
+  /// Supports [Expression.featureState] and [Expression.interpolate] expressions. Transitionable.
   PropertyValue<double> get opacity;
 
   set opacity(PropertyValue<double> property);
@@ -129,7 +129,7 @@ abstract interface class CircleStyleLayer
   /// the [radius].
   ///
   /// Paint property. Optional number in range `[0, ∞)`. Units in pixels.
-  /// Defaults to `0`. Supports [featureState] and [interpolate] expressions.
+  /// Defaults to `0`. Supports [Expression.featureState] and [Expression.interpolate] expressions.
   /// Transitionable.
   PropertyValue<double> get strokeWidth;
 
@@ -141,7 +141,8 @@ abstract interface class CircleStyleLayer
   /// The stroke color of the circle.
   ///
   /// Paint property. Optional [Color]. Defaults to `"#000000"`. Supports
-  /// [featureState] and [interpolate] expressions. Transitionable.
+  /// [Expression.featureState] and [Expression.interpolate] expressions.
+  /// Transitionable.
   PropertyValue<Color> get strokeColor;
 
   set strokeColor(PropertyValue<Color> property);
@@ -154,7 +155,7 @@ abstract interface class CircleStyleLayer
   /// The opacity of the circle's stroke.
   ///
   /// Paint property. Optional number in range `[0, 1]`. Defaults to `1`.
-  /// Supports [featureState] and [interpolate] expressions. Transitionable.
+  /// Supports [Expression.featureState] and [Expression.interpolate] expressions. Transitionable.
   PropertyValue<double> get strokeOpacity;
 
   set strokeOpacity(PropertyValue<double> property);

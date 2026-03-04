@@ -164,7 +164,7 @@ abstract interface class SymbolStyleLayer
   /// Distance between two symbol anchors.
   ///
   /// Layout property. Optional number in range `[1, ∞)`. Units in pixels.
-  /// Defaults to `250`. Requires [placement] to be line. Supports [interpolate]
+  /// Defaults to `250`. Requires [placement] to be line. Supports [Expression.interpolate]
   /// expressions.
   PropertyValue<double> get spacing;
 
@@ -266,7 +266,7 @@ abstract interface class SymbolStyleLayer
   ///
   /// Layout property. Optional number in range `[0, ∞)`. Units in factor of
   /// the original icon size. Defaults to `1`. Requires [iconImage]. Supports
-  /// [interpolate] expressions.
+  /// [Expression.interpolate] expressions.
   PropertyValue<double> get iconSize;
 
   set iconSize(PropertyValue<double> property);
@@ -293,7 +293,7 @@ abstract interface class SymbolStyleLayer
   /// Layout property. Optional array. Units in pixels. Defaults to
   /// [EdgeInsets.zero]. Requires [iconImage]. Requires [textField]. Requires
   /// [iconTextFit] to be one of [IconTextFit.both], [IconTextFit.width],
-  /// [IconTextFit.height]. Supports [interpolate] expressions.
+  /// [IconTextFit.height]. Supports [Expression.interpolate] expressions.
   PropertyValue<EdgeInsets> get iconTextFitPadding;
 
   set iconTextFitPadding(PropertyValue<EdgeInsets> property);
@@ -313,7 +313,7 @@ abstract interface class SymbolStyleLayer
   /// Rotates the icon clockwise.
   ///
   /// Layout property. Optional number. Units in degrees. Defaults to `0`.
-  /// Requires [iconImage]. Supports [interpolate] expressions.
+  /// Requires [iconImage]. Supports [Expression.interpolate] expressions.
   PropertyValue<double> get iconRotate;
 
   set iconRotate(PropertyValue<double> property);
@@ -325,7 +325,7 @@ abstract interface class SymbolStyleLayer
   /// symbol collisions.
   ///
   /// Layout property. Optional padding. Units in pixels. Defaults to `[2]`.
-  /// Requires [iconImage]. Supports [interpolate] expressions.
+  /// Requires [iconImage]. Supports [Expression.interpolate] expressions.
   PropertyValue<EdgeInsets> get iconPadding;
 
   set iconPadding(PropertyValue<EdgeInsets> property);
@@ -356,7 +356,7 @@ abstract interface class SymbolStyleLayer
   /// rotated direction was up.
   ///
   /// Layout property. Optional array. Defaults to [Offset.zero]. Requires
-  /// [iconImage]. Supports [interpolate] expressions.
+  /// [iconImage]. Supports [Expression.interpolate] expressions.
   PropertyValue<Offset> get iconOffset;
 
   set iconOffset(PropertyValue<Offset> property);
@@ -444,7 +444,7 @@ abstract interface class SymbolStyleLayer
   /// Font size.
   ///
   /// Layout property. Optional `number` in range `[0, ∞)`. Units in pixels.
-  /// Defaults to `16`. Requires [textField]. Supports [interpolate]
+  /// Defaults to `16`. Requires [textField]. Supports [Expression.interpolate]
   /// expressions.
   PropertyValue<double> get textSize;
 
@@ -456,7 +456,7 @@ abstract interface class SymbolStyleLayer
   /// The maximum line width for text wrapping.
   ///
   /// Layout property. Optional `number` in range `[0, ∞)`. Units in ems.
-  /// Defaults to `10`. Requires [textField]. Supports [interpolate]
+  /// Defaults to `10`. Requires [textField]. Supports [Expression.interpolate]
   /// expressions.
   PropertyValue<double> get textMaxWidth;
 
@@ -468,7 +468,7 @@ abstract interface class SymbolStyleLayer
   /// Text leading value for multi-line text.
   ///
   /// Layout property. Optional `number`. Units in ems. Defaults to `1.2`.
-  /// Requires [textField]. Supports [interpolate] expressions.
+  /// Requires [textField]. Supports [Expression.interpolate] expressions.
   PropertyValue<double> get textLineHeight;
 
   set textLineHeight(PropertyValue<double> property);
@@ -479,7 +479,7 @@ abstract interface class SymbolStyleLayer
   /// Text tracking amount.
   ///
   /// Layout property. Optional `number`. Units in ems. Defaults to `0`.
-  /// Requires [textField]. Supports [interpolate] expressions.
+  /// Requires [textField]. Supports [Expression.interpolate] expressions.
   PropertyValue<double> get textLetterSpacing;
 
   set textLetterSpacing(PropertyValue<double> property);
@@ -505,7 +505,7 @@ abstract interface class SymbolStyleLayer
   /// two-dimensional [textOffset] if present.
   ///
   /// Layout property. Optional `number`. Units in ems. Defaults to `0`.
-  /// Requires [textField]. Supports [interpolate] expressions.
+  /// Requires [textField]. Supports [Expression.interpolate] expressions.
   PropertyValue<double> get textRadialOffset;
 
   set textRadialOffset(PropertyValue<double> property);
@@ -571,7 +571,7 @@ abstract interface class SymbolStyleLayer
   /// ```
   ///
   /// Layout property. Optional. Requires [textField]. Requires [placement] to
-  /// be [SymbolPlacement.point]. Supports [interpolate] expressions.
+  /// be [SymbolPlacement.point]. Supports [Expression.interpolate] expressions.
   PropertyValue<Map<String, Offset>>? get textVariableAnchorOffset;
 
   set textVariableAnchorOffset(PropertyValue<Map<String, Offset>>? property);
@@ -594,7 +594,7 @@ abstract interface class SymbolStyleLayer
   /// Layout property. Optional `number`. Units in degrees. Defaults to `45`.
   /// Requires [textField]. Requires [placement] to be one of
   /// [SymbolPlacement.line], [SymbolPlacement.lineCenter]. Supports
-  /// [interpolate] expressions.
+  /// [Expression.interpolate] expressions.
   PropertyValue<double> get textMaxAngle;
 
   set textMaxAngle(PropertyValue<double> property);
@@ -621,7 +621,7 @@ abstract interface class SymbolStyleLayer
   /// Rotates the text clockwise.
   ///
   /// Layout property. Optional number. Units in degrees. Defaults to `0`.
-  /// Requires [textField]. Supports [interpolate] expressions.
+  /// Requires [textField]. Supports [Expression.interpolate] expressions.
   PropertyValue<double> get textRotate;
 
   set textRotate(PropertyValue<double> property);
@@ -633,7 +633,7 @@ abstract interface class SymbolStyleLayer
   /// detecting symbol collisions.
   ///
   /// Layout property. Optional number in range `[0, ∞)`. Units in pixels.
-  /// Defaults to `2`. Requires [textField]. Supports [interpolate] expressions.
+  /// Defaults to `2`. Requires [textField]. Supports [Expression.interpolate] expressions.
   PropertyValue<double> get textPadding;
 
   set textPadding(PropertyValue<double> property);
@@ -677,7 +677,7 @@ abstract interface class SymbolStyleLayer
   ///
   /// Layout property. Optional array. Units in ems. Defaults to [Offset.zero].
   /// Requires [textField]. Disabled by [textRadialOffset]. Supports
-  /// [interpolate] expressions.
+  /// [Expression.interpolate] expressions.
   PropertyValue<Offset> get textOffset;
 
   set textOffset(PropertyValue<Offset> property);
@@ -733,7 +733,7 @@ abstract interface class SymbolStyleLayer
   /// The opacity at which the icon will be drawn.
   ///
   /// Paint property. Optional number in range `[0, 1]`. Defaults to `1`.
-  /// Requires [iconImage]. Supports [featureState] and [interpolate]
+  /// Requires [iconImage]. Supports [Expression.featureState] and [Expression.interpolate]
   /// expressions. Transitionable.
   PropertyValue<double> get iconOpacity;
 
@@ -745,8 +745,8 @@ abstract interface class SymbolStyleLayer
   /// The color of the icon. This can only be used with SDF icons.
   ///
   /// Paint property. Optional [Color]. Defaults to `"#000000"`. Requires
-  /// [iconImage]. Supports [featureState] and [interpolate] expressions.
-  /// Transitionable.
+  /// [iconImage]. Supports [Expression.featureState] and
+  /// [Expression.interpolate] expressions. Transitionable.
   PropertyValue<Color> get iconColor;
 
   set iconColor(PropertyValue<Color> property);
@@ -757,8 +757,8 @@ abstract interface class SymbolStyleLayer
   /// The color of the icon's halo. Icon halos can only be used with SDF icons.
   ///
   /// Paint property. Optional [Color]. Defaults to `"rgba(0, 0, 0, 0)"`.
-  /// Requires iconImage. Supports [featureState] and [interpolate]
-  /// expressions. Transitionable.
+  /// Requires iconImage. Supports [Expression.featureState] and
+  /// [Expression.interpolate] expressions. Transitionable.
   PropertyValue<Color> get iconHaloColor;
 
   set iconHaloColor(PropertyValue<Color> property);
@@ -775,8 +775,8 @@ abstract interface class SymbolStyleLayer
   /// be 16 for @2x sprites, etc.
   ///
   /// Paint property. Optional `number` in range `[0, ∞)`. Units in pixels.
-  /// Defaults to `0`. Requires [iconImage]. Supports [featureState] and
-  /// [interpolate] expressions. Transitionable.
+  /// Defaults to `0`. Requires [iconImage]. Supports [Expression.featureState] and
+  /// [Expression.interpolate] expressions. Transitionable.
   PropertyValue<double> get iconHaloWidth;
 
   set iconHaloWidth(PropertyValue<double> property);
@@ -787,8 +787,8 @@ abstract interface class SymbolStyleLayer
   /// Fade out the halo towards the outside.
   ///
   /// Paint property. Optional `number` in range `[0, ∞)`. Units in pixels.
-  /// Defaults to `0`. Requires [iconImage]. Supports [featureState] and
-  /// [interpolate] expressions. Transitionable.
+  /// Defaults to `0`. Requires [iconImage]. Supports [Expression.featureState] and
+  /// [Expression.interpolate] expressions. Transitionable.
   PropertyValue<double> get iconHaloBlur;
 
   set iconHaloBlur(PropertyValue<double> property);
@@ -801,7 +801,7 @@ abstract interface class SymbolStyleLayer
   /// left and up.
   ///
   /// Paint property. Optional array. Units in pixels. Defaults to [Offset.zero].
-  /// Requires [iconImage]. Supports [interpolate] expressions. Transitionable.
+  /// Requires [iconImage]. Supports [Expression.interpolate] expressions. Transitionable.
   PropertyValue<Offset> get iconTranslate;
 
   set iconTranslate(PropertyValue<Offset> property);
@@ -825,8 +825,8 @@ abstract interface class SymbolStyleLayer
   /// The opacity at which the text will be drawn.
   ///
   /// Paint property. Optional number in range `[0, 1]`. Defaults to `1`.
-  /// Requires [textField]. Supports [featureState] and [interpolate]
-  /// expressions. Transitionable.
+  /// Requires [textField]. Supports [Expression.featureState] and
+  /// [Expression.interpolate] expressions. Transitionable.
   PropertyValue<double> get textOpacity;
 
   set textOpacity(PropertyValue<double> property);
@@ -837,7 +837,8 @@ abstract interface class SymbolStyleLayer
   /// The color with which the text will be drawn.
   ///
   /// Paint property. Optional [Color]. Defaults to `"#000000"`. Requires
-  /// [textField]. Supports [featureState] and [interpolate] expressions.
+  /// [textField]. Supports [Expression.featureState] and
+  /// [Expression.interpolate] expressions.
   /// Transitionable.
   PropertyValue<Color> get textColor;
 
@@ -849,8 +850,8 @@ abstract interface class SymbolStyleLayer
   /// The color of the text's halo, which helps it stand out from backgrounds.
   ///
   /// Paint property. Optional color. Defaults to "rgba(0, 0, 0, 0)". Requires
-  /// [textField]. Supports [featureState] and [interpolate] expressions.
-  /// Transitionable.
+  /// [textField]. Supports [Expression.featureState] and
+  /// [Expression.interpolate] expressions. Transitionable.
   PropertyValue<Color> get textHaloColor;
 
   set textHaloColor(PropertyValue<Color> property);
@@ -864,8 +865,8 @@ abstract interface class SymbolStyleLayer
   /// [textSize].
   ///
   /// Paint property. Optional number in range `[0, ∞)`. Units in pixels.
-  /// Defaults to `0`. Requires [textField]. Supports [featureState] and
-  /// [interpolate] expressions. Transitionable.
+  /// Defaults to `0`. Requires [textField]. Supports [Expression.featureState]
+  /// and [Expression.interpolate] expressions. Transitionable.
   PropertyValue<double> get textHaloWidth;
 
   set textHaloWidth(PropertyValue<double> property);
@@ -876,8 +877,8 @@ abstract interface class SymbolStyleLayer
   /// The halo's fadeout distance towards the outside.
   ///
   /// Paint property. Optional number in range `[0, ∞)`. Units in pixels.
-  /// Defaults to `0`. Requires [textField]. Supports [featureState] and
-  /// [interpolate] expressions. Transitionable.
+  /// Defaults to `0`. Requires [textField]. Supports [Expression.featureState]
+  /// and [Expression.interpolate] expressions. Transitionable.
   PropertyValue<double> get textHaloBlur;
 
   set textHaloBlur(PropertyValue<double> property);
@@ -890,7 +891,7 @@ abstract interface class SymbolStyleLayer
   /// left and up.
   ///
   /// Paint property. Optional array. Units in pixels. Defaults to [Offset].
-  /// Requires [textField]. Supports [interpolate] expressions. Transitionable.
+  /// Requires [textField]. Supports [Expression.interpolate] expressions. Transitionable.
   PropertyValue<Offset> get textTranslate;
 
   set textTranslate(PropertyValue<Offset> property);

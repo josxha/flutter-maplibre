@@ -52,7 +52,7 @@ abstract interface class HillshadeStyleLayer implements StyleLayerWithSource {
   /// {@endtemplate}
   ///
   /// Paint property. Optional [NumberArray] with value(s) in range `[0, 359]`.
-  /// Defaults to `335`. Supports [interpolate] expressions.
+  /// Defaults to `335`. Supports [Expression.interpolate] expressions.
   PropertyValue<NumberArray> get illuminationDirection;
 
   set illuminationDirection(PropertyValue<NumberArray> property);
@@ -92,7 +92,7 @@ abstract interface class HillshadeStyleLayer implements StyleLayerWithSource {
   /// Intensity of the hillshade
   ///
   /// Paint property. Optional number in range `[0, 1]`. Defaults to `0.5`.
-  /// Supports [interpolate] expressions. Transitionable.
+  /// Supports [Expression.interpolate] expressions. Transitionable.
   PropertyValue<double> get exaggeration;
 
   set exaggeration(PropertyValue<double> property);
@@ -105,7 +105,7 @@ abstract interface class HillshadeStyleLayer implements StyleLayerWithSource {
   /// {@macro multiple-light-sources-notice}
   ///
   /// Paint property. Optional [ColorArray]. Defaults to `"#000000"`.
-  /// Supports [interpolate] expressions. Transitionable.
+  /// Supports [Expression.interpolate] expressions. Transitionable.
   PropertyValue<Color> get shadowColor;
 
   set shadowColor(PropertyValue<Color> property);
@@ -120,7 +120,7 @@ abstract interface class HillshadeStyleLayer implements StyleLayerWithSource {
   /// {@macro multiple-light-sources-notice}
   ///
   /// Paint property. Optional [ColorArray]. Defaults to `"#FFFFFF"`.
-  /// Supports [interpolate] expressions. Transitionable.
+  /// Supports [Expression.interpolate] expressions. Transitionable.
   PropertyValue<Color> get highlightColor;
 
   set highlightColor(PropertyValue<Color> property);
@@ -134,7 +134,7 @@ abstract interface class HillshadeStyleLayer implements StyleLayerWithSource {
   /// gorges.
   ///
   /// Paint property. Optional [Color]. Defaults to `"#000000"`.
-  /// Supports [interpolate] expressions. Transitionable.
+  /// Supports [Expression.interpolate] expressions. Transitionable.
   PropertyValue<Color> get accentColor;
 
   set accentColor(PropertyValue<Color> property);

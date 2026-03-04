@@ -36,7 +36,7 @@ void main() {
       const layer1 = CircleLayer(
         points: [Feature(geometry: Point(Geographic(lon: 0, lat: 0)))],
       );
-
+      MapLibrePlatform.instance = MockPlatformInterface();
       manager.updateLayers([layer1]);
       verify(() => style.addSource(any(that: isA<GeoJsonSource>()))).called(1);
       verify(

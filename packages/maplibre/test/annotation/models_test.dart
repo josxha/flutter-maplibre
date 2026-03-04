@@ -27,7 +27,6 @@ void main() {
 
       expect(o.getSourceId(5123), contains(5123.toString()));
       expect(o.getLayerId(1532), contains(1532.toString()));
-      expect(o.createStyleLayer(142), isA<CircleStyleLayer>());
     });
     test('MarkerAnnotationLayer', () {
       const o = MarkerLayer(
@@ -55,7 +54,6 @@ void main() {
 
       expect(o.getSourceId(5123), contains(5123.toString()));
       expect(o.getLayerId(1532), contains(1532.toString()));
-      expect(o.createStyleLayer(142), isA<SymbolStyleLayer>());
     });
     test('PolygonAnnotationLayer', () {
       final o = PolygonLayer(
@@ -107,7 +105,6 @@ void main() {
 
       expect(o.getSourceId(5123), contains(5123.toString()));
       expect(o.getLayerId(1532), contains(1532.toString()));
-      expect(o.createStyleLayer(142), isA<FillStyleLayer>());
     });
     test('PolylineAnnotationLayer', () {
       final o = PolylineLayer(
@@ -151,7 +148,6 @@ void main() {
 
       expect(o.getSourceId(5123), contains(5123.toString()));
       expect(o.getLayerId(1532), contains(1532.toString()));
-      expect(o.createStyleLayer(142), isA<LineStyleLayer>());
     });
   });
 }

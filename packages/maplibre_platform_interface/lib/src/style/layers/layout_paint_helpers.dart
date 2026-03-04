@@ -271,8 +271,7 @@ Map<String, Object?> createSymbolLayout({
   required PropertyValue<TextJustify> textJustify,
   required PropertyValue<double> textRadialOffset,
   required PropertyValue<List<IconAnchor>>? textVariableAnchor,
-  required PropertyValue<Map<String, Offset>>?
-  textVariableAnchorOffset,
+  required PropertyValue<Map<String, Offset>>? textVariableAnchorOffset,
   required PropertyValue<TextAnchor> textAnchor,
   required PropertyValue<double> textMaxAngle,
   required PropertyValue<List<TextWritingMode>>? textWritingMode,

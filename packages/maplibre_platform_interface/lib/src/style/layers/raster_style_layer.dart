@@ -41,7 +41,7 @@ abstract interface class RasterStyleLayer implements StyleLayerWithSource {
   /// The opacity at which the image will be drawn.
   ///
   /// Paint property. Optional number in range `[0, 1]`. Defaults to `1`.
-  /// Supports [interpolate] expressions. Transitionable.
+  /// Supports [Expression.interpolate] expressions. Transitionable.
   PropertyValue<double> get opacity;
 
   set opacity(PropertyValue<double> property);
@@ -52,7 +52,7 @@ abstract interface class RasterStyleLayer implements StyleLayerWithSource {
   /// Rotates hues around the color wheel.
   ///
   /// Paint property. Optional number. Units in degrees. Defaults to `0`.
-  /// Supports [interpolate] expressions. Transitionable.
+  /// Supports [Expression.interpolate] expressions. Transitionable.
   PropertyValue<double> get hueRotate;
 
   set hueRotate(PropertyValue<double> property);
@@ -64,7 +64,7 @@ abstract interface class RasterStyleLayer implements StyleLayerWithSource {
   /// brightness.
   ///
   /// Paint property. Optional number in range `[0, 1]`. Defaults to `0`.
-  /// Supports [interpolate] expressions. Transitionable.
+  /// Supports [Expression.interpolate] expressions. Transitionable.
   PropertyValue<double> get brightnessMin;
 
   set brightnessMin(PropertyValue<double> property);
@@ -76,7 +76,7 @@ abstract interface class RasterStyleLayer implements StyleLayerWithSource {
   /// brightness.
   ///
   /// Paint property. Optional number in range `[0, 1]`. Defaults to `1`.
-  /// Supports [interpolate] expressions. Transitionable.
+  /// Supports [Expression.interpolate] expressions. Transitionable.
   PropertyValue<double> get brightnessMax;
 
   set brightnessMax(PropertyValue<double> property);
@@ -87,7 +87,7 @@ abstract interface class RasterStyleLayer implements StyleLayerWithSource {
   /// Increase or reduce the saturation of the image.
   ///
   /// Paint property. Optional number in range `[-1, 1]`. Defaults to `0`.
-  /// Supports [interpolate] expressions. Transitionable.
+  /// Supports [Expression.interpolate] expressions. Transitionable.
   PropertyValue<double> get saturation;
 
   set saturation(PropertyValue<double> property);
@@ -98,7 +98,7 @@ abstract interface class RasterStyleLayer implements StyleLayerWithSource {
   /// Increase or reduce the contrast of the image.
   ///
   /// Paint property. Optional number in range `[-1, 1]`. Defaults to `0`.
-  /// Supports [interpolate] expressions. Transitionable.
+  /// Supports [Expression.interpolate] expressions. Transitionable.
   PropertyValue<double> get contrast;
 
   set contrast(PropertyValue<double> property);
@@ -122,7 +122,7 @@ abstract interface class RasterStyleLayer implements StyleLayerWithSource {
   /// coordinates are updated.
   ///
   /// Paint property. Optional number in range `[0, ∞)`. Units in milliseconds.
-  /// Defaults to `300`. Supports [interpolate] expressions.
+  /// Defaults to `300`. Supports [Expression.interpolate] expressions.
   PropertyValue<double> get fadeDuration;
 
   set fadeDuration(PropertyValue<double> property);

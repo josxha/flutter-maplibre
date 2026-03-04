@@ -65,7 +65,7 @@ abstract interface class FillExtrusionStyleLayer
   /// opacity.
   ///
   /// Paint property. Optional color. Defaults to `"#000000"` (black).
-  /// Disabled by [pattern]. Supports [featureState] and [interpolate]
+  /// Disabled by [pattern]. Supports [Expression.featureState] and [Expression.interpolate]
   /// expressions. Transitionable.
   PropertyValue<Color> get color;
 
@@ -89,7 +89,7 @@ abstract interface class FillExtrusionStyleLayer
   /// The height with which to extrude this layer.
   ///
   /// Paint property. Optional number in range `[0, ∞)`. Units in meters.
-  /// Defaults to `0`. Supports [featureState] and [interpolate] expressions.
+  /// Defaults to `0`. Supports [Expression.featureState] and [Expression.interpolate] expressions.
   /// Transitionable.
   PropertyValue<double> get height;
 
@@ -103,8 +103,8 @@ abstract interface class FillExtrusionStyleLayer
   /// than or equal to [height].
   ///
   /// Paint property. Optional number in range `[0, ∞)`. Units in meters.
-  /// Defaults to `0`. Requires [height]. Supports [featureState] and
-  /// [interpolate] expressions. Transitionable.
+  /// Defaults to `0`. Requires [height]. Supports [Expression.featureState] and
+  /// [Expression.interpolate] expressions. Transitionable.
   PropertyValue<double> get base;
 
   set base(PropertyValue<double> property);

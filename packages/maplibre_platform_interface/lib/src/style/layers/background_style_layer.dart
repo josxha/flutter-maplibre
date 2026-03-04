@@ -29,7 +29,7 @@ abstract interface class BackgroundStyleLayer implements StyleLayer {
   /// The color with which the background will be drawn.
   ///
   /// Paint property. Optional color. Defaults to `#000000` (black).
-  /// Disabled by [pattern]. Supports [interpolate] expressions. Transitionable.
+  /// Disabled by [pattern]. Supports [Expression.interpolate] expressions. Transitionable.
   PropertyValue<Color> get color;
 
   set color(PropertyValue<Color> property);
@@ -50,7 +50,7 @@ abstract interface class BackgroundStyleLayer implements StyleLayer {
   /// The opacity at which the background will be drawn.
   ///
   /// Paint property. Optional number in range `0,1`. Defaults to `1.0`.
-  /// Supports [interpolate] expressions. Transitionable.
+  /// Supports [Expression.interpolate] expressions. Transitionable.
   PropertyValue<double> get opacity;
 
   set opacity(PropertyValue<double> property);

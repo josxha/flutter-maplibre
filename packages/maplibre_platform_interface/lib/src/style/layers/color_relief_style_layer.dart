@@ -29,7 +29,7 @@ abstract interface class ColorReliefStyleLayer implements StyleLayerWithSource {
   /// The opacity at which the color-relief will be drawn.
   ///
   /// Paint property. Optional number in range `[0, 1]`. Defaults to `1`.
-  /// Supports [interpolate] expressions. Transitionable.
+  /// Supports [Expression.interpolate] expressions. Transitionable.
   PropertyValue<double> get opacity;
 
   set opacity(PropertyValue<double> property);
@@ -51,7 +51,7 @@ abstract interface class ColorReliefStyleLayer implements StyleLayerWithSource {
   /// ]
   /// ```
   ///
-  /// Paint property. Optional [Color]. Supports [interpolate] expressions.
+  /// Paint property. Optional [Color]. Supports [Expression.interpolate] expressions.
   PropertyValue<Color>? get color;
 
   set color(PropertyValue<Color>? property);

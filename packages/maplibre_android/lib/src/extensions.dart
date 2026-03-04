@@ -103,8 +103,8 @@ extension LatLngBounds on jni.LatLngBounds {
 extension DoubleListExt on List<double> {
   /// Convert a [List<double>] to a [JArray<JDouble>].
   JArray<JFloat?> toJFloatArray(Arena arena) {
-    final jArray = JArray(JFloat.nullableType, this.length)..releasedBy(arena);
-    for (var i = 0; i < this.length; i++) {
+    final jArray = JArray(JFloat.nullableType, length)..releasedBy(arena);
+    for (var i = 0; i < length; i++) {
       jArray[i] = this[i].toJFloat()..releasedBy(arena);
     }
     return jArray;
@@ -115,8 +115,8 @@ extension DoubleListExt on List<double> {
 extension StringListExt on List<String> {
   /// Convert a [List<String>] to a [JArray<JString>].
   JArray<JString?> toJStringArray(Arena arena) {
-    final jArray = JArray(JString.nullableType, this.length)..releasedBy(arena);
-    for (var i = 0; i < this.length; i++) {
+    final jArray = JArray(JString.nullableType, length)..releasedBy(arena);
+    for (var i = 0; i < length; i++) {
       jArray[i] = this[i].toJString()..releasedBy(arena);
     }
     return jArray;

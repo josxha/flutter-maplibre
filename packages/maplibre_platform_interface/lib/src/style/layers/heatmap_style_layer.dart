@@ -41,7 +41,7 @@ abstract interface class HeatmapStyleLayer
   /// makes the heatmap smoother, but less detailed.
   ///
   /// Paint property. Optional number in range `[1, ∞)`. Units in pixels.
-  /// Defaults to `30`. Supports [featureState] and [interpolate] expressions.
+  /// Defaults to `30`. Supports [Expression.featureState] and [Expression.interpolate] expressions.
   /// Transitionable.
   PropertyValue<double> get radius;
 
@@ -55,7 +55,7 @@ abstract interface class HeatmapStyleLayer
   /// same spot. Especially useful when combined with clustering.
   ///
   /// Paint property. Optional number in range `[0, ∞)`. Defaults to `1`.
-  /// Supports [featureState] and [interpolate] expressions.
+  /// Supports [Expression.featureState] and [Expression.interpolate] expressions.
   PropertyValue<double> get weight;
 
   set weight(PropertyValue<double> property);
@@ -67,7 +67,7 @@ abstract interface class HeatmapStyleLayer
   /// Primarily used for adjusting the heatmap based on zoom level.
   ///
   /// Paint property. Optional number in range `[0, ∞)`. Defaults to `1`.
-  /// Supports [interpolate] expressions. Transitionable.
+  /// Supports [Expression.interpolate] expressions. Transitionable.
   PropertyValue<double> get intensity;
 
   set intensity(PropertyValue<double> property);
@@ -92,7 +92,7 @@ abstract interface class HeatmapStyleLayer
   ///   1,"red"
   /// ]
   /// ```
-  /// Supports [interpolate] expressions.
+  /// Supports [Expression.interpolate] expressions.
   PropertyValue<Color>? get color;
 
   set color(PropertyValue<Color>? property);
@@ -100,7 +100,7 @@ abstract interface class HeatmapStyleLayer
   /// The global opacity at which the heatmap layer will be drawn.
   ///
   /// Paint property. Optional number in range `[0, 1]`. Defaults to `1`.
-  /// Supports [interpolate] expressions. Transitionable.
+  /// Supports [Expression.interpolate] expressions. Transitionable.
   PropertyValue<double> get opacity;
 
   set opacity(PropertyValue<double> property);

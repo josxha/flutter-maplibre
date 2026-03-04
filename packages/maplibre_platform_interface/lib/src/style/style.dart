@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
+import 'package:maplibre_platform_interface/expressions.dart';
 
 export 'expressions/expressions.dart';
 export 'layers/style_layer.dart';
@@ -73,7 +73,8 @@ extension type const ColorArray._(Object object) {
   bool get isArray => object is List<Color>;
 }
 
-/// The interpolation type for [interpolate] and [interpolateHcl].
+/// The interpolation type for [Expression.interpolate] and
+/// [Expression.interpolateHcl].
 extension type const InterpolationType.fromJson(List<Object?> json) {
   /// Interpolates linearly between the pair of stops just less than and just greater than the input.
   InterpolationType.linear() : this.fromJson(['linear']);

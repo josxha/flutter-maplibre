@@ -49,11 +49,11 @@ class _StyleLayersFillExtrusionPageState
       // https://maplibre.org/maplibre-style-spec/expressions/
 
       // Get the fill-extrusion-color from the source 'color' property.
-      color: PropertyValue.expression(get('color')),
+      color: PropertyValue.expression(Expression.get('color')),
       // Get fill-extrusion-height from the source 'height' property.
-      height: PropertyValue.expression(get('height')),
+      height: PropertyValue.expression(Expression.get('height')),
       // Get fill-extrusion-base from the source 'base_height' property.
-      base: PropertyValue.expression(get('base_height')),
+      base: PropertyValue.expression(Expression.get('base_height')),
       // Make extrusions slightly opaque for see through indoor walls.
       opacity: const PropertyValue.value(0.5),
     );

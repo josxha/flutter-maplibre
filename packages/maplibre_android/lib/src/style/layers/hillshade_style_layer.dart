@@ -70,7 +70,7 @@ class HillshadeStyleLayerAndroid extends StyleLayerAndroid<jni.HillshadeLayer>
           onExpression: jni.PropertyFactory.hillshadeIlluminationDirection$1,
           onValue: (value) {
             if (value.isArray) {
-              final expression = literal(value.array);
+              final expression = Expression.literal(value.array);
               final jExpr = expression.toJExpression(arena);
               return jni.PropertyFactory.hillshadeIlluminationAnchor$1(jExpr);
             } else {

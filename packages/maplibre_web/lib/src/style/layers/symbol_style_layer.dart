@@ -42,8 +42,7 @@ class SymbolStyleLayerWeb extends StyleLayerWeb implements SymbolStyleLayer {
     required PropertyValue<TextJustify> textJustify,
     required PropertyValue<double> textRadialOffset,
     required PropertyValue<List<IconAnchor>>? textVariableAnchor,
-    required PropertyValue<Map<String, Offset>>?
-    textVariableAnchorOffset,
+    required PropertyValue<Map<String, Offset>>? textVariableAnchorOffset,
     required PropertyValue<TextAnchor> textAnchor,
     required PropertyValue<double> textMaxAngle,
     required PropertyValue<List<TextWritingMode>>? textWritingMode,
@@ -512,19 +511,17 @@ class SymbolStyleLayerWeb extends StyleLayerWeb implements SymbolStyleLayer {
       );
 
   @override
-  PropertyValue<Map<String, Offset>>? get textVariableAnchorOffset =>
-      requireMap
-          .getLayoutProperty(id, 'text-variable-anchor-offset')
-          .toStringOffsetMapPropertyValue();
+  PropertyValue<Map<String, Offset>>? get textVariableAnchorOffset => requireMap
+      .getLayoutProperty(id, 'text-variable-anchor-offset')
+      .toStringOffsetMapPropertyValue();
 
   @override
-  set textVariableAnchorOffset(
-      PropertyValue<Map<String, Offset>>? property,
-  ) => requireMap.setLayoutProperty(
-    id,
-    'text-variable-anchor-offset',
-    property?.toJson().jsify(),
-  );
+  set textVariableAnchorOffset(PropertyValue<Map<String, Offset>>? property) =>
+      requireMap.setLayoutProperty(
+        id,
+        'text-variable-anchor-offset',
+        property?.toJson().jsify(),
+      );
 
   @override
   PropertyValue<TextAnchor> get textAnchor =>

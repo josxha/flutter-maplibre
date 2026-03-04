@@ -86,7 +86,7 @@ abstract interface class LineStyleLayer
   /// Used to automatically convert miter joins to bevel joins for sharp angles.
   ///
   /// Layout property. Optional number. Defaults to 2. Requires [join] to be
-  /// miter. Supports [interpolate] expressions.
+  /// miter. Supports [Expression.interpolate] expressions.
   PropertyValue<double> get miterLimit;
 
   set miterLimit(PropertyValue<double> property);
@@ -98,7 +98,7 @@ abstract interface class LineStyleLayer
   /// angles.
   ///
   /// Layout property. Optional number. Defaults to `1.05`. Requires [join] to
-  /// be [LineJoin.round]. Supports [interpolate] expressions.
+  /// be [LineJoin.round]. Supports [Expression.interpolate] expressions.
   PropertyValue<double> get roundLimit;
 
   set roundLimit(PropertyValue<double> property);
@@ -109,7 +109,7 @@ abstract interface class LineStyleLayer
   /// The opacity at which the line will be drawn.
   ///
   /// Paint property. Optional number in range `[0, 1]`. Defaults to `1`.
-  /// Supports [featureState] and [interpolate] expressions. Transitionable.
+  /// Supports [Expression.featureState] and [Expression.interpolate] expressions. Transitionable.
   PropertyValue<double> get opacity;
 
   set opacity(PropertyValue<double> property);
@@ -120,7 +120,7 @@ abstract interface class LineStyleLayer
   /// The color with which the line will be drawn.
   ///
   /// Paint property. Optional [Color]. Defaults to `"#000000"` (black).
-  /// Disabled by [pattern]. Supports [featureState] and [interpolate]
+  /// Disabled by [pattern]. Supports [Expression.featureState] and [Expression.interpolate]
   /// expressions. Transitionable.
   PropertyValue<Color> get color;
 
@@ -132,7 +132,7 @@ abstract interface class LineStyleLayer
   /// Stroke thickness.
   ///
   /// Paint property. Optional number in range `[0, ∞)`. Units in pixels.
-  /// Defaults to `1`. Supports [featureState] and [interpolate] expressions.
+  /// Defaults to `1`. Supports [Expression.featureState] and [Expression.interpolate] expressions.
   /// Transitionable.
   PropertyValue<double> get width;
 
@@ -145,7 +145,7 @@ abstract interface class LineStyleLayer
   /// width of the inner gap.
   ///
   /// Paint property. Optional number in range `[0, ∞)`. Units in pixels.
-  /// Defaults to `0`. Supports [featureState] and [interpolate] expressions.
+  /// Defaults to `0`. Supports [Expression.featureState] and [Expression.interpolate] expressions.
   /// Transitionable.
   PropertyValue<double> get gapWidth;
 
@@ -160,7 +160,7 @@ abstract interface class LineStyleLayer
   /// and a negative value results in an outset.
   ///
   /// Paint property. Optional number. Units in pixels. Defaults to `0`.
-  /// Supports [featureState] and [interpolate] expressions. Transitionable.
+  /// Supports [Expression.featureState] and [Expression.interpolate] expressions. Transitionable.
   PropertyValue<double> get offset;
 
   set offset(PropertyValue<double> property);
@@ -208,7 +208,7 @@ abstract interface class LineStyleLayer
   /// with GeoJSON sources that specify "lineMetrics": true.
   ///
   /// Paint property. Optional [Color]. Disabled by [dashArray]. Disabled by
-  /// [pattern]. Requires source to be geojson. Supports [interpolate]
+  /// [pattern]. Requires source to be geojson. Supports [Expression.interpolate]
   /// expressions.
   PropertyValue<Color>? get gradient;
 

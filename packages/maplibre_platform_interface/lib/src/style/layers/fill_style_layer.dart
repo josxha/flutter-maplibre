@@ -62,7 +62,7 @@ abstract interface class FillStyleLayer
   /// the opacity of the 1px stroke, if it is used.
   ///
   /// Paint property. Optional color. Defaults to `#000000` (black).
-  /// Disabled by [pattern]. Supports [featureState] and [interpolate]
+  /// Disabled by [pattern]. Supports [Expression.featureState] and [Expression.interpolate]
   /// expressions. Transitionable.
   PropertyValue<Color> get color;
 
@@ -76,7 +76,7 @@ abstract interface class FillStyleLayer
   /// used.
   ///
   /// Paint property. Optional number in range `0,1`. Defaults to `1.0`.
-  /// Supports [featureState] and [interpolate] expressions. Transitionable.
+  /// Supports [Expression.featureState] and [Expression.interpolate] expressions. Transitionable.
   PropertyValue<double> get opacity;
 
   set opacity(PropertyValue<double> property);
@@ -88,7 +88,7 @@ abstract interface class FillStyleLayer
   /// unspecified.
   ///
   /// Paint property. Optional color. Disabled by [pattern]. Requires
-  /// [antialias] to be `true`. Supports [featureState] and [interpolate]
+  /// [antialias] to be `true`. Supports [Expression.featureState] and [Expression.interpolate]
   /// expressions. Transitionable.
   PropertyValue<Color> get outlineColor;
 
