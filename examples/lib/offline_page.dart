@@ -32,6 +32,8 @@ class _OfflinePageState extends State<OfflinePage> {
     latitudeNorth: 47.574776,
   );
 
+  List<OfflineRegion> _offlineRegions = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -235,16 +237,43 @@ class _OfflinePageState extends State<OfflinePage> {
                 ),
                 ListTile(
                   title: const Text('List Offline Regions'),
-                  onTap: () async {
-                    try {
-                      final regions = await manager.listOfflineRegions();
-                      _print('offline regions:\n${regions.join('\n')}');
-                    } on Exception catch (error, stacktrace) {
-                      _print(error.toString());
-                      debugPrintStack(stackTrace: stacktrace);
-                    }
-                  },
+                  trailing: IconButton(
+                    onPressed: () async {
+                      try {
+                        final regions = await manager.listOfflineRegions();
+                        if (mounted) {
+                          setState(() {
+                            _offlineRegions = regions;
+                          });
+                        }
+                        // _print('offline regions:\n${regions.join('\n')}');
+                      } on Exception catch (error, stacktrace) {
+                        _print(error.toString());
+                        debugPrintStack(stackTrace: stacktrace);
+                      }
+                    },
+                    icon: const Icon(Icons.refresh),
+                  ),
                 ),
+                if (_offlineRegions.isNotEmpty)
+                  ListOfRegions(
+                    offlineRegions: _offlineRegions,
+                    onDeleteRegion: (regionId) async {
+                      try {
+                        await manager.deleteRegion(regionId: regionId);
+                        _print('region $regionId deleted');
+                        final regions = await manager.listOfflineRegions();
+                        if (mounted) {
+                          setState(() {
+                            _offlineRegions = regions;
+                          });
+                        }
+                      } on Exception catch (error, stacktrace) {
+                        _print(error.toString());
+                        debugPrintStack(stackTrace: stacktrace);
+                      }
+                    },
+                  ),
                 if (!Platform.isIOS)
                   ListTile(
                     title: const Text('Pack Database'),
@@ -369,6 +398,42 @@ class _OfflineMapPage extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class ListOfRegions extends StatelessWidget {
+  const ListOfRegions({
+    super.key,
+    this.offlineRegions = const [],
+    this.onDeleteRegion,
+  });
+
+  final List<OfflineRegion> offlineRegions;
+  final void Function(int regionId)? onDeleteRegion;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        if (offlineRegions.isEmpty)
+          Text('no regions', style: Theme.of(context).textTheme.bodyMedium),
+        ...offlineRegions.map(
+          (region) => ListTile(
+            leading: const Icon(Icons.chevron_right),
+            title: Text('Region: ${region.id}'),
+            subtitle: Text(region.metadata.toString()),
+            trailing: IconButton(
+              onPressed: () {
+                onDeleteRegion?.call(region.id);
+              },
+              icon: const Icon(Icons.delete),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

@@ -138,6 +138,30 @@ class OfflineManagerIos implements OfflineManager {
   }
 
   @override
+  Future<void> deleteRegion({required int regionId}) async {
+    final packs = _storage.packs!.asDart();
+    for (var i = 0; i < packs.length; i++) {
+      final ffiPack = MLNOfflinePack.as(packs[i]);
+      final json = _PackContext.fromNSData(ffiPack.context);
+      if (json.id == regionId) {
+        final completer = Completer<void>();
+        _storage.removePack(
+          ffiPack,
+          withCompletionHandler: ObjCBlock_ffiVoid_NSError.listener((error) {
+            if (error != null) {
+              completer.completeError(error);
+            } else {
+              completer.complete();
+            }
+          }),
+        );
+        return completer.future;
+      }
+    }
+    throw Exception('Region not found');
+  }
+
+  @override
   Future<void> invalidateAmbientCache() async {
     final completer = Completer<void>();
     _storage.invalidateAmbientCacheWithCompletionHandler(
