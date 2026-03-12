@@ -418,8 +418,6 @@ class ListOfRegions extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        if (offlineRegions.isEmpty)
-          Text('no regions', style: Theme.of(context).textTheme.bodyMedium),
         ...offlineRegions.map(
           (region) => ListTile(
             leading: const Icon(Icons.chevron_right),
