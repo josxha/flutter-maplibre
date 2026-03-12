@@ -247,7 +247,7 @@ class OfflineManagerIos implements OfflineManager {
   void runPackDatabaseAutomatically({required bool enabled}) =>
       throw UnsupportedError('The database cannot be packed on iOS.');
 
-  /// Polls [MLNOfflineStorage.packs] until available and returns the
+  /// Polls MLNOfflineStorage.packs until available and returns the
   /// Dart representation of the NSArray.
   Future<List<objc.ObjCObject>> _getPacks() async {
     var nsArray = _storage.packs;
