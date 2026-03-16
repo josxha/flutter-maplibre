@@ -36,8 +36,28 @@ class _StyleLayersSymbolPageState extends State<StyleLayersSymbolPage> {
             await style.addImage('marker', bytes);
 
             // add some points as GeoJSON source to the map
+            final geoJson = FeatureCollection(
+              const [
+                Feature(
+                  geometry: Point(Geographic(lon: 7.448871, lat: 46.947792)),
+                  properties: {'name': 'Bern'},
+                ),
+                Feature(
+                  geometry: Point(Geographic(lon: -0.110273, lat: 51.549851)),
+                  properties: {'name': 'London'},
+                ),
+                Feature(
+                  geometry: Point(Geographic(lon: 13.352826, lat: 52.572783)),
+                  properties: {'name': 'Berlin'},
+                ),
+                Feature(
+                  geometry: Point(Geographic(lon: 12.483543, lat: 41.940751)),
+                  properties: {'name': 'Rome'},
+                ),
+              ]
+            ).toText();
             await style.addSource(
-              const GeoJsonSource(id: 'points', data: _geoJsonString),
+              GeoJsonSource(id: 'points', data: geoJson),
             );
 
             // display the image on the map
@@ -50,6 +70,8 @@ class _StyleLayersSymbolPageState extends State<StyleLayersSymbolPage> {
                 iconSize: const PropertyValue.value(0.2),
                 iconAllowOverlap: const PropertyValue.value(true),
                 iconAnchor: const PropertyValue.value(IconAnchor.bottom),
+                textField: const PropertyValue.value('{name}'),
+                textOffset: const PropertyValue.value(Offset(0, 1)),
               ),
             );
           } on Exception catch (error, stacktrace) {
@@ -61,54 +83,3 @@ class _StyleLayersSymbolPageState extends State<StyleLayersSymbolPage> {
     );
   }
 }
-
-const _geoJsonString = '''
-{
-  "type": "FeatureCollection",
-  "features": [
-    {
-      "type": "Feature",
-      "properties": {},
-      "geometry": {
-        "coordinates": [
-          8.532443386754125,
-          47.381666653596795
-        ],
-        "type": "Point"
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {},
-      "geometry": {
-        "coordinates": [
-          -0.11027386926130589,
-          51.5498511494217
-        ],
-        "type": "Point"
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {},
-      "geometry": {
-        "coordinates": [
-          13.352826080643723,
-          52.57278382732386
-        ],
-        "type": "Point"
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {},
-      "geometry": {
-        "coordinates": [
-          12.483543026945483,
-          41.94075185567311
-        ],
-        "type": "Point"
-      }
-    }
-  ]
-}''';
