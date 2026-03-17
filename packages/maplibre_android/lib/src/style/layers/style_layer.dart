@@ -54,8 +54,8 @@ abstract class StyleLayerAndroid<JLayer extends jni.Layer>
   set visible(bool newValue) => using((arena) {
     final stringValue = newValue ? 'visible' : 'none';
     final jValue = stringValue.toJString()..releasedBy(arena);
-    jLayer.as(jni.Layer.type).setProperty(
-      jni.PropertyFactory.visibility(jValue),
-    );
+    jLayer
+        .as(jni.Layer.type)
+        .setProperty(jni.PropertyFactory.visibility(jValue));
   });
 }
