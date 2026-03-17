@@ -5,7 +5,7 @@ import 'package:integration_test/integration_test.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre_example/utils/map_styles.dart';
 
-import 'app.dart';
+import '../apps/map_app.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -13,7 +13,7 @@ void main() {
     testWidgets('Load JSON', (tester) async {
       final controller = Completer<MapController>();
       final style = Completer<StyleController>();
-      final app = App(
+      final app = MapApp(
         onMapCreated: controller.complete,
         onStyleLoaded: style.complete,
         options: MapOptions(
@@ -31,7 +31,7 @@ void main() {
     testWidgets('Load URL', (tester) async {
       final controller = Completer<MapController>();
       final style = Completer<StyleController>();
-      final app = App(
+      final app = MapApp(
         onMapCreated: controller.complete,
         onStyleLoaded: style.complete,
         options: MapOptions(

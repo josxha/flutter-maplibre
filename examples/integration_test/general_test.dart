@@ -2,24 +2,20 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:maplibre/maplibre.dart';
 
-import 'app.dart';
+import 'apps/map_app.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-  test();
-}
-
-void test() {
   group('General', () {
     testWidgets('render map with tlhc_vd', (tester) async {
-      await tester.pumpWidget(const App());
+      await tester.pumpWidget(const MapApp());
       await tester.pumpAndSettle();
       expect(tester.allWidgets.any((w) => w is MapLibreMap), isTrue);
     });
 
     testWidgets('render map with tlhc_hc', (tester) async {
       await tester.pumpWidget(
-        const App(
+        const MapApp(
           options: MapOptions(
             initCenter: Geographic(lon: 0, lat: 0),
             androidMode: AndroidPlatformViewMode.tlhc_hc,
@@ -61,7 +57,7 @@ void test() {
         initCenter: Geographic(lon: 0, lat: 0),
         maxZoom: 10,
       );
-      await tester.pumpWidget(const App(options: o1));
+      await tester.pumpWidget(const MapApp(options: o1));
       await tester.pumpAndSettle();
       await tester.pump();
       expect(tester.allWidgets.any((w) => w is MapLibreMap), isTrue);
@@ -70,7 +66,7 @@ void test() {
         initCenter: Geographic(lon: 0, lat: 0),
         maxPitch: 0,
       );
-      await tester.pumpWidget(const App(options: o2));
+      await tester.pumpWidget(const MapApp(options: o2));
       await tester.pump();
     });
   });

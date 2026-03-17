@@ -9,19 +9,15 @@ import 'package:integration_test/integration_test.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre_example/utils/map_styles.dart';
 
-import 'app.dart';
+import 'apps/map_app.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-  test();
-}
-
-void test() {
   group('controller', () {
     testWidgets('getCamera', (tester) async {
       final ctrlCompleter = Completer<MapController>();
       final events = <MapEvent>[];
-      final app = App(
+      final app = MapApp(
         onMapCreated: ctrlCompleter.complete,
         options: const MapOptions(
           initCenter: Geographic(lon: 1, lat: 2),
@@ -54,7 +50,7 @@ void test() {
 
     testWidgets('toScreenLocation', (tester) async {
       final ctrlCompleter = Completer<MapController>();
-      final app = App(
+      final app = MapApp(
         onMapCreated: ctrlCompleter.complete,
         options: const MapOptions(initCenter: Geographic(lon: 1, lat: 2)),
       );
@@ -91,7 +87,7 @@ void test() {
 
     testWidgets('toScreenLocations', (tester) async {
       final ctrlCompleter = Completer<MapController>();
-      final app = App(
+      final app = MapApp(
         onMapCreated: ctrlCompleter.complete,
         options: const MapOptions(initCenter: Geographic(lon: 1, lat: 2)),
       );
@@ -122,7 +118,7 @@ void test() {
 
     testWidgets('toLngLat', (tester) async {
       final ctrlCompleter = Completer<MapController>();
-      final app = App(
+      final app = MapApp(
         onMapCreated: ctrlCompleter.complete,
         options: const MapOptions(initCenter: Geographic(lon: 1, lat: 2)),
       );
@@ -150,7 +146,7 @@ void test() {
 
     testWidgets('toLngLats', (tester) async {
       final ctrlCompleter = Completer<MapController>();
-      final app = App(
+      final app = MapApp(
         onMapCreated: ctrlCompleter.complete,
         options: const MapOptions(initCenter: Geographic(lon: 1, lat: 2)),
       );
@@ -181,7 +177,7 @@ void test() {
 
     testWidgets('getMetersPerPixelAtLatitude', (tester) async {
       final ctrlCompleter = Completer<MapController>();
-      final app = App(
+      final app = MapApp(
         onMapCreated: ctrlCompleter.complete,
         options: const MapOptions(
           initCenter: Geographic(lon: 111.6513, lat: 35.1983),
@@ -205,7 +201,7 @@ void test() {
 
     testWidgets('getVisibleRegion', (tester) async {
       final ctrlCompleter = Completer<MapController>();
-      final app = App(
+      final app = MapApp(
         onMapCreated: ctrlCompleter.complete,
         options: const MapOptions(
           initCenter: Geographic(lon: 0, lat: 0),
@@ -229,7 +225,7 @@ void test() {
 
     testWidgets('removeLayer', (tester) async {
       final ctrlCompleter = Completer<MapController>();
-      final app = App(
+      final app = MapApp(
         onMapCreated: ctrlCompleter.complete,
         options: const MapOptions(
           initCenter: Geographic(lon: 0, lat: 0),
@@ -248,7 +244,7 @@ void test() {
 
     testWidgets('removeSource', (tester) async {
       final ctrlCompleter = Completer<MapController>();
-      final app = App(
+      final app = MapApp(
         onMapCreated: ctrlCompleter.complete,
         options: const MapOptions(
           initCenter: Geographic(lon: 0, lat: 0),
@@ -268,7 +264,7 @@ void test() {
 
     testWidgets('updateGeoJsonSource', (tester) async {
       final ctrlCompleter = Completer<MapController>();
-      final app = App(
+      final app = MapApp(
         onMapCreated: ctrlCompleter.complete,
         options: const MapOptions(
           initCenter: Geographic(lon: 0, lat: 0),
@@ -293,7 +289,7 @@ void test() {
         final ctrlCompleter = Completer<MapController>();
         final styleCompleter = Completer<StyleController>();
         await tester.pumpWidget(
-          App(
+          MapApp(
             onMapCreated: ctrlCompleter.complete,
             onStyleLoaded: styleCompleter.complete,
             options: const MapOptions(
@@ -389,7 +385,7 @@ void test() {
         final ctrlCompleter = Completer<MapController>();
         final styleCompleter = Completer<StyleController>();
         await tester.pumpWidget(
-          App(
+          MapApp(
             onMapCreated: ctrlCompleter.complete,
             onStyleLoaded: styleCompleter.complete,
             options: MapOptions(
@@ -417,7 +413,7 @@ void test() {
         final ctrlCompleter = Completer<MapController>();
         final styleCompleter = Completer<StyleController>();
         await tester.pumpWidget(
-          App(
+          MapApp(
             onMapCreated: ctrlCompleter.complete,
             onStyleLoaded: styleCompleter.complete,
             options: const MapOptions(
@@ -526,7 +522,7 @@ void test() {
         final ctrlCompleter = Completer<MapController>();
         final styleCompleter = Completer<StyleController>();
         await tester.pumpWidget(
-          App(
+          MapApp(
             onMapCreated: ctrlCompleter.complete,
             onStyleLoaded: styleCompleter.complete,
             options: const MapOptions(
@@ -684,7 +680,7 @@ void test() {
     testWidgets('getAttributions', (tester) async {
       final ctrlCompleter = Completer<MapController>();
       final styleCompleter = Completer<StyleController>();
-      final app = App(
+      final app = MapApp(
         onMapCreated: ctrlCompleter.complete,
         onStyleLoaded: styleCompleter.complete,
         options: MapOptions(
@@ -703,7 +699,7 @@ void test() {
 
     testWidgets('moveCamera', (tester) async {
       final ctrlCompleter = Completer<MapController>();
-      final app = App(onMapCreated: ctrlCompleter.complete);
+      final app = MapApp(onMapCreated: ctrlCompleter.complete);
       await tester.pumpWidget(app);
       final ctrl = await ctrlCompleter.future;
       await ctrl.moveCamera(
@@ -724,7 +720,7 @@ void test() {
 
   testWidgets('add ImageSource', (tester) async {
     final ctrlCompleter = Completer<MapController>();
-    final app = App(onMapCreated: ctrlCompleter.complete);
+    final app = MapApp(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
     const source = ImageSource(
@@ -744,7 +740,7 @@ void test() {
 
   testWidgets('add GeoJsonSource', (tester) async {
     final ctrlCompleter = Completer<MapController>();
-    final app = App(onMapCreated: ctrlCompleter.complete);
+    final app = MapApp(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
     final source = GeoJsonSource(
@@ -760,7 +756,7 @@ void test() {
   testWidgets('add VideoSource', (tester) async {
     if (!kIsWeb) return; // VideoSource is only supported on web.
     final ctrlCompleter = Completer<MapController>();
-    final app = App(onMapCreated: ctrlCompleter.complete);
+    final app = MapApp(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
     const source = VideoSource(
@@ -776,7 +772,7 @@ void test() {
 
   testWidgets('add RasterDemSource', (tester) async {
     final ctrlCompleter = Completer<MapController>();
-    final app = App(onMapCreated: ctrlCompleter.complete);
+    final app = MapApp(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
     const source = RasterDemSource(
@@ -790,7 +786,7 @@ void test() {
 
   testWidgets('add RasterSource', (tester) async {
     final ctrlCompleter = Completer<MapController>();
-    final app = App(onMapCreated: ctrlCompleter.complete);
+    final app = MapApp(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
     const source = RasterSource(
@@ -807,7 +803,7 @@ void test() {
 
   testWidgets('add VectorSource', (tester) async {
     final ctrlCompleter = Completer<MapController>();
-    final app = App(onMapCreated: ctrlCompleter.complete);
+    final app = MapApp(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
     const source = VectorSource(
@@ -820,7 +816,7 @@ void test() {
 
   testWidgets('add BackgroundLayer', (tester) async {
     final ctrlCompleter = Completer<MapController>();
-    final app = App(onMapCreated: ctrlCompleter.complete);
+    final app = MapApp(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
     final layer = BackgroundStyleLayer(id: '1');
@@ -829,7 +825,7 @@ void test() {
   });
   testWidgets('add FillLayer', (tester) async {
     final ctrlCompleter = Completer<MapController>();
-    final app = App(onMapCreated: ctrlCompleter.complete);
+    final app = MapApp(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
     final layer = FillStyleLayer(id: '1', sourceId: 'source1');
@@ -838,7 +834,7 @@ void test() {
   });
   testWidgets('add CircleLayer', (tester) async {
     final ctrlCompleter = Completer<MapController>();
-    final app = App(onMapCreated: ctrlCompleter.complete);
+    final app = MapApp(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
     final layer = CircleStyleLayer(id: '1', sourceId: 'source1');
@@ -847,7 +843,7 @@ void test() {
   });
   testWidgets('add FillExtrusionLayer', (tester) async {
     final ctrlCompleter = Completer<MapController>();
-    final app = App(onMapCreated: ctrlCompleter.complete);
+    final app = MapApp(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
     final layer = FillExtrusionStyleLayer(id: '1', sourceId: 'source1');
@@ -856,7 +852,7 @@ void test() {
   });
   testWidgets('add HeatmapLayer', (tester) async {
     final ctrlCompleter = Completer<MapController>();
-    final app = App(onMapCreated: ctrlCompleter.complete);
+    final app = MapApp(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
     final layer = HeatmapStyleLayer(id: '1', sourceId: 'source1');
@@ -865,7 +861,7 @@ void test() {
   });
   testWidgets('add HillshadeLayer', (tester) async {
     final ctrlCompleter = Completer<MapController>();
-    final app = App(onMapCreated: ctrlCompleter.complete);
+    final app = MapApp(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
     final layer = HillshadeStyleLayer(id: '1', sourceId: 'source1');
@@ -874,7 +870,7 @@ void test() {
   });
   testWidgets('add LineLayer', (tester) async {
     final ctrlCompleter = Completer<MapController>();
-    final app = App(onMapCreated: ctrlCompleter.complete);
+    final app = MapApp(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
     final layer = LineStyleLayer(id: '1', sourceId: 'source1');
@@ -883,7 +879,7 @@ void test() {
   });
   testWidgets('add RasterLayer', (tester) async {
     final ctrlCompleter = Completer<MapController>();
-    final app = App(onMapCreated: ctrlCompleter.complete);
+    final app = MapApp(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
     final layer = RasterStyleLayer(id: '1', sourceId: 'source1');
@@ -892,7 +888,7 @@ void test() {
   });
   testWidgets('add SymbolLayer', (tester) async {
     final ctrlCompleter = Completer<MapController>();
-    final app = App(onMapCreated: ctrlCompleter.complete);
+    final app = MapApp(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
     final layer = SymbolStyleLayer(id: '1', sourceId: 'source1');
@@ -901,7 +897,7 @@ void test() {
   });
   testWidgets('add unknown Layer', (tester) async {
     final ctrlCompleter = Completer<MapController>();
-    final app = App(onMapCreated: ctrlCompleter.complete);
+    final app = MapApp(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
     final layer = SymbolStyleLayer(id: '1', sourceId: 'source1');
@@ -911,7 +907,7 @@ void test() {
 
   testWidgets('addImage', (tester) async {
     final ctrlCompleter = Completer<MapController>();
-    final app = App(onMapCreated: ctrlCompleter.complete);
+    final app = MapApp(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
     await ctrl.style?.addImageFromIconData(
@@ -924,7 +920,7 @@ void test() {
 
   testWidgets('addImages', (tester) async {
     final ctrlCompleter = Completer<MapController>();
-    final app = App(onMapCreated: ctrlCompleter.complete);
+    final app = MapApp(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
 
@@ -941,7 +937,7 @@ void test() {
 
   testWidgets('removeImage', (tester) async {
     final ctrlCompleter = Completer<MapController>();
-    final app = App(onMapCreated: ctrlCompleter.complete);
+    final app = MapApp(onMapCreated: ctrlCompleter.complete);
     await tester.pumpWidget(app);
     final ctrl = await ctrlCompleter.future;
 

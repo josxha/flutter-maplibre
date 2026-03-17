@@ -4,11 +4,11 @@ import 'package:maplibre/maplibre.dart';
 void main() {
   // required if using maplibre is embedded in a WebView (windows, macOS)
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const App());
+  runApp(const MapApp());
 }
 
-class App extends StatelessWidget {
-  const App({
+class MapApp extends StatelessWidget {
+  const MapApp({
     this.options = defaultOptions,
     this.onMapCreated,
     this.onStyleLoaded,
@@ -30,7 +30,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'MapLibre Demo',
+      title: 'App with MapLibre map',
       home: Scaffold(
         body: MapLibreMap(
           options: options,
