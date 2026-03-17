@@ -79,7 +79,7 @@ class _StyleSourcesVectorPageState extends State<StyleSourcesVectorPage> {
               iconImage: const PropertyValue.value('marker'),
               iconSize: const PropertyValue.value(0.18),
               iconAllowOverlap: const PropertyValue.value(true),
-              iconAnchor: const PropertyValue.value(IconAnchor.bottom),
+              iconAnchor: const PropertyValue.value(.bottom),
             );
             await style.addLayer(symbolLayer);
           } on Exception catch (error, stacktrace) {

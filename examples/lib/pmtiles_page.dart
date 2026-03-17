@@ -50,7 +50,7 @@ class _PmTilesPageState extends State<PmTilesPage> {
               MapCompass(),
             ],
             onStyleLoaded: (style) {
-              style.setProjection(MapProjection.globe);
+              style.setProjection(.globe);
             },
           ),
         );

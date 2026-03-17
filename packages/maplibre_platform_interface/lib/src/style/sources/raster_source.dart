@@ -16,7 +16,7 @@ final class RasterSource extends Source {
     this.minZoom = 0,
     this.maxZoom = 2,
     this.tileSize = 512,
-    this.scheme = TileScheme.xyz,
+    this.scheme = .xyz,
     this.attribution,
     this.volatile = false,
   });

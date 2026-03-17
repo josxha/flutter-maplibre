@@ -56,7 +56,7 @@ void main() {
       final expression = Expression.array(
         Expression.literal(["a", "b", "c"]),
         length: 3,
-        type: ArrayType.string,
+        type: .string,
       );
       expect(expression.json, equals(expected));
     });
@@ -140,10 +140,7 @@ void main() {
         FormatSection(content: '\n\n'),
         FormatSection(
           content: Expression.downcase(Expression.get('Comments')),
-          style: StyleOverrides(
-            fontScale: 0.6,
-            verticalAlign: VerticalAlign.center,
-          ),
+          style: StyleOverrides(fontScale: 0.6, verticalAlign: .center),
         ),
       ]);
       expect(expression.json, equals(expected));

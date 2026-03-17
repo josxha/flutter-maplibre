@@ -18,7 +18,7 @@ void main() {
         const MapApp(
           options: MapOptions(
             initCenter: Geographic(lon: 0, lat: 0),
-            androidMode: AndroidPlatformViewMode.tlhc_hc,
+            androidMode: .tlhc_hc,
           ),
         ),
       );
@@ -31,7 +31,7 @@ void main() {
         App(
           options: MapOptions(
             initCenter: Geographic(lon: 0, lat: 0),
-            androidMode: AndroidPlatformViewMode.hc,
+            androidMode: .hc,
           ),
         ),
       );
@@ -44,7 +44,7 @@ void main() {
         App(
           options: MapOptions(
             initCenter: Geographic(lon: 0, lat: 0),
-            androidMode: AndroidPlatformViewMode.vd,
+            androidMode: .vd,
           ),
         ),
       );

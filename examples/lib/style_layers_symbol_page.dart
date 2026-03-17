@@ -65,7 +65,7 @@ class _StyleLayersSymbolPageState extends State<StyleLayersSymbolPage> {
                 iconImage: const PropertyValue.value('marker'),
                 iconSize: const PropertyValue.value(0.2),
                 iconAllowOverlap: const PropertyValue.value(true),
-                iconAnchor: const PropertyValue.value(IconAnchor.bottom),
+                iconAnchor: const PropertyValue.value(.bottom),
                 textField: const PropertyValue.value('{name}'),
                 textOffset: const PropertyValue.value(Offset(0, 1)),
               ),

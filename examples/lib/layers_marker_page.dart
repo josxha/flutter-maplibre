@@ -71,7 +71,7 @@ class _LayersMarkerPageState extends State<LayersMarkerPage> {
             textAllowOverlap: true,
             iconImage: _imageLoaded ? 'marker' : null,
             iconSize: 0.5,
-            iconAnchor: IconAnchor.bottom,
+            iconAnchor: .bottom,
             textOffset: const Offset(0, 1.7),
           ),
         ],

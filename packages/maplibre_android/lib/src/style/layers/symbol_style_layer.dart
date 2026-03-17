@@ -895,7 +895,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
       final name = entry.toDartString(releaseOriginal: true);
       final match = TextWritingMode.values.firstWhere(
         (e) => e.name == name,
-        orElse: () => TextWritingMode.horizontal,
+        orElse: () => .horizontal,
       );
       values.add(match);
     }

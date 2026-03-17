@@ -793,6 +793,9 @@ enum ArrayType {
 
   /// The name of the array type.
   final String name;
+
+  @override
+  String toString() => name;
 }
 
 /// An object defining a section of text in a [Expression.format] expression, along with
@@ -846,5 +849,8 @@ enum VerticalAlign {
   /// Align the top of this section with the top of other sections.
   ///
   /// ![Preview](https://github.com/user-attachments/assets/45dccb28-d977-4abb-a006-4ea9792b7c53)
-  top,
+  top;
+
+  @override
+  String toString() => name;
 }

@@ -109,9 +109,7 @@ abstract interface class CircleStyleLayer
   set pitchScale(PropertyValue<ReferenceSpace> property);
 
   /// The default value of [pitchScale].
-  static const defaultPitchScale = PropertyValue<ReferenceSpace>.value(
-    ReferenceSpace.map,
-  );
+  static const defaultPitchScale = PropertyValue<ReferenceSpace>.value(.map);
 
   /// Orientation of circle when map is pitched.
   ///
@@ -122,7 +120,7 @@ abstract interface class CircleStyleLayer
 
   /// The default value of [pitchAlignment].
   static const defaultPitchAlignment = PropertyValue<ReferenceSpace>.value(
-    ReferenceSpace.viewport,
+    .viewport,
   );
 
   /// The width of the circle's stroke. Strokes are placed outside of

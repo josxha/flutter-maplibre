@@ -87,7 +87,7 @@ abstract interface class HillshadeStyleLayer implements StyleLayerWithSource {
 
   /// Default value of [illuminationAnchor].
   static const defaultIlluminationAnchor =
-      PropertyValue<IlluminationAnchor>.value(IlluminationAnchor.viewport);
+      PropertyValue<IlluminationAnchor>.value(.viewport);
 
   /// Intensity of the hillshade
   ///
@@ -152,9 +152,7 @@ abstract interface class HillshadeStyleLayer implements StyleLayerWithSource {
   set method(PropertyValue<HillshadeMethod> property);
 
   /// Default value of [method].
-  static const defaultMethod = PropertyValue<HillshadeMethod>.value(
-    HillshadeMethod.standard,
-  );
+  static const defaultMethod = PropertyValue<HillshadeMethod>.value(.standard);
 }
 
 /// {@template illumination-anchor}
@@ -165,7 +163,10 @@ enum IlluminationAnchor {
   map,
 
   /// The hillshade illumination is relative to the top of the viewport.
-  viewport,
+  viewport;
+
+  @override
+  String toString() => name;
 }
 
 /// {@template hillshade-method}
@@ -192,5 +193,8 @@ enum HillshadeMethod {
 
   /// Hillshade with multiple illumination directions. Uses the basic hillshade
   /// model with multiple independent light sources.
-  multidirectional,
+  multidirectional;
+
+  @override
+  String toString() => name;
 }

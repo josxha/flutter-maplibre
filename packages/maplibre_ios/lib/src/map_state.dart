@@ -168,15 +168,14 @@ final class MapLibreMapStateIos extends MapLibreMapState {
     bool accuracyAnimation = true,
     bool compassAnimation = true,
     bool pulse = true,
-    BearingRenderMode bearingRenderMode = BearingRenderMode.gps,
+    BearingRenderMode bearingRenderMode = .gps,
   }) async {
     final mapView = _mapView;
     if (mapView == null) return;
 
     mapView.showsUserLocation = true;
     // TODO: apply bearingRenderMode
-    mapView.showsUserHeadingIndicator =
-        bearingRenderMode != BearingRenderMode.none;
+    mapView.showsUserHeadingIndicator = bearingRenderMode != .none;
   }
 
   @override
@@ -373,7 +372,7 @@ final class MapLibreMapStateIos extends MapLibreMapState {
   @override
   Future<void> trackLocation({
     bool trackLocation = true,
-    BearingTrackMode trackBearing = BearingTrackMode.gps,
+    BearingTrackMode trackBearing = .gps,
   }) async {
     final mapView = _mapView!;
     if (!trackLocation) {
@@ -381,11 +380,9 @@ final class MapLibreMapStateIos extends MapLibreMapState {
       return;
     }
     mapView.userTrackingMode = switch (trackBearing) {
-      BearingTrackMode.none => MLNUserTrackingMode.MLNUserTrackingModeFollow,
-      BearingTrackMode.compass =>
-        MLNUserTrackingMode.MLNUserTrackingModeFollowWithHeading,
-      BearingTrackMode.gps =>
-        MLNUserTrackingMode.MLNUserTrackingModeFollowWithCourse,
+      .none => MLNUserTrackingMode.MLNUserTrackingModeFollow,
+      .compass => MLNUserTrackingMode.MLNUserTrackingModeFollowWithHeading,
+      .gps => MLNUserTrackingMode.MLNUserTrackingModeFollowWithCourse,
     };
   }
 
@@ -493,12 +490,12 @@ final class MapLibreMapStateIos extends MapLibreMapState {
     };
     final CameraChangeReason reason;
     if (apiReasons.contains(mlnChangeReason)) {
-      reason = CameraChangeReason.apiGesture;
+      reason = .apiGesture;
     } else if (mlnChangeReason ==
         MLNCameraChangeReason.MLNCameraChangeReasonProgrammatic) {
-      reason = CameraChangeReason.apiAnimation;
+      reason = .apiAnimation;
     } else {
-      reason = CameraChangeReason.developerAnimation;
+      reason = .developerAnimation;
     }
     widget.onEvent?.call(MapEventStartMoveCamera(reason: reason));
   }

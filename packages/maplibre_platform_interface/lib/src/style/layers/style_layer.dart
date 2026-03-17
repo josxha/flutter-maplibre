@@ -20,7 +20,10 @@ enum ReferenceSpace {
   map,
 
   /// Relative to the viewport / screen.
-  viewport,
+  viewport;
+
+  @override
+  String toString() => name;
 }
 
 /// The base Layer class that can't be used directly.
@@ -138,6 +141,6 @@ abstract interface class StyleLayerWithTranslate extends StyleLayerWithSource {
 
   /// The default value of [translateAnchor].
   static const defaultTranslateAnchor = PropertyValue<ReferenceSpace>.value(
-    ReferenceSpace.map,
+    .map,
   );
 }

@@ -1,4 +1,4 @@
-import 'package:flutter/painting.dart';
+import 'package:flutter/widgets.dart';
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 
 /// [PropertyValue] is a simple wrapper around a value that can either be a
@@ -6,6 +6,7 @@ import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 /// type [V].
 ///
 /// It is used so that style properties can be created in a type-safe way.
+@immutable
 class PropertyValue<V extends Object?> {
   /// Creates a [PropertyValue] from an [Expression].
   const PropertyValue.expression(Expression expression)
@@ -41,4 +42,19 @@ class PropertyValue<V extends Object?> {
     ],
     _ => _object,
   };
+
+  @override
+  String toString() =>
+      'PropertyValue{_object: $_object, isExpression: $isExpression}';
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is PropertyValue &&
+          runtimeType == other.runtimeType &&
+          _object == other._object &&
+          isExpression == other.isExpression;
+
+  @override
+  int get hashCode => Object.hash(_object, isExpression);
 }

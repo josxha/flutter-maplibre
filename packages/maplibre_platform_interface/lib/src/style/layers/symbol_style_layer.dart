@@ -157,9 +157,7 @@ abstract interface class SymbolStyleLayer
   set placement(PropertyValue<SymbolPlacement> property);
 
   /// Default value for [spacing].
-  static const defaultPlacement = PropertyValue<SymbolPlacement>.value(
-    SymbolPlacement.point,
-  );
+  static const defaultPlacement = PropertyValue<SymbolPlacement>.value(.point);
 
   /// Distance between two symbol anchors.
   ///
@@ -196,9 +194,7 @@ abstract interface class SymbolStyleLayer
   set zOrder(PropertyValue<SymbolZOrder> property);
 
   /// Default value for [zOrder].
-  static const defaultZOrder = PropertyValue<SymbolZOrder>.value(
-    SymbolZOrder.auto,
-  );
+  static const defaultZOrder = PropertyValue<SymbolZOrder>.value(.auto);
 
   /// If true, the icon will be visible even if it collides with other
   /// previously drawn symbols.
@@ -222,9 +218,7 @@ abstract interface class SymbolStyleLayer
   set iconOverlap(PropertyValue<SymbolOverlap> property);
 
   /// Default value for [iconOverlap].
-  static const defaultIconOverlap = PropertyValue<SymbolOverlap>.value(
-    SymbolOverlap.never,
-  );
+  static const defaultIconOverlap = PropertyValue<SymbolOverlap>.value(.never);
 
   /// If true, other symbols can be visible even if they collide with the icon.
   ///
@@ -258,7 +252,7 @@ abstract interface class SymbolStyleLayer
 
   /// Default value for [iconRotationAlignment].
   static const defaultIconRotationAlignment =
-      PropertyValue<IconRotationAlignment>.value(IconRotationAlignment.auto);
+      PropertyValue<IconRotationAlignment>.value(.auto);
 
   /// Scales the original size of the icon by the provided factor. The new
   /// pixel size of the image will be the original pixel size multiplied by
@@ -283,9 +277,7 @@ abstract interface class SymbolStyleLayer
   set iconTextFit(PropertyValue<IconTextFit> property);
 
   /// Default value for [iconTextFit].
-  static const defaultIconTextFit = PropertyValue<IconTextFit>.value(
-    IconTextFit.none,
-  );
+  static const defaultIconTextFit = PropertyValue<IconTextFit>.value(.none);
 
   /// Size of the additional area added to dimensions determined by
   /// [iconTextFit], in clockwise order: top, right, bottom, left.
@@ -373,9 +365,7 @@ abstract interface class SymbolStyleLayer
   set iconAnchor(PropertyValue<IconAnchor> property);
 
   /// Default value for [iconAnchor].
-  static const defaultIconAnchor = PropertyValue<IconAnchor>.value(
-    IconAnchor.center,
-  );
+  static const defaultIconAnchor = PropertyValue<IconAnchor>.value(.center);
 
   /// {@macro icon-pitch-alignment}
   ///
@@ -387,7 +377,7 @@ abstract interface class SymbolStyleLayer
 
   /// Default value for [iconPitchAlignment].
   static const defaultIconPitchAlignment =
-      PropertyValue<IconPitchAlignment>.value(IconPitchAlignment.auto);
+      PropertyValue<IconPitchAlignment>.value(.auto);
 
   /// {@macro text-pitch-alignment}
   ///
@@ -399,7 +389,7 @@ abstract interface class SymbolStyleLayer
 
   /// Default value for [textPitchAlignment].
   static const defaultTextPitchAlignment =
-      PropertyValue<TextPitchAlignment>.value(TextPitchAlignment.auto);
+      PropertyValue<TextPitchAlignment>.value(.auto);
 
   /// {@macro text-rotation-alignment}
   ///
@@ -411,7 +401,7 @@ abstract interface class SymbolStyleLayer
 
   /// Default value for [textRotationAlignment].
   static const defaultTextRotationAlignment =
-      PropertyValue<TextRotationAlignment>.value(TextRotationAlignment.auto);
+      PropertyValue<TextRotationAlignment>.value(.auto);
 
   /// Value to use for a text label. If a plain `string` is provided, it will be
   /// treated as a `formatted` with default/inherited formatting options.
@@ -496,9 +486,7 @@ abstract interface class SymbolStyleLayer
   set textJustify(PropertyValue<TextJustify> property);
 
   /// Default value for [textJustify].
-  static const defaultTextJustify = PropertyValue<TextJustify>.value(
-    TextJustify.center,
-  );
+  static const defaultTextJustify = PropertyValue<TextJustify>.value(.center);
 
   /// Radial offset of text, in the direction of the symbol's anchor. Useful in
   /// combination with [textVariableAnchor], which defaults to using the
@@ -585,9 +573,7 @@ abstract interface class SymbolStyleLayer
   set textAnchor(PropertyValue<TextAnchor> property);
 
   /// Default value for [textAnchor].
-  static const defaultTextAnchor = PropertyValue<TextAnchor>.value(
-    TextAnchor.center,
-  );
+  static const defaultTextAnchor = PropertyValue<TextAnchor>.value(.center);
 
   /// Maximum angle change between adjacent characters.
   ///
@@ -665,9 +651,7 @@ abstract interface class SymbolStyleLayer
   set textTransform(PropertyValue<TextTransform> property);
 
   /// Default value for [textTransform].
-  static const defaultTextTransform = PropertyValue<TextTransform>.value(
-    TextTransform.none,
-  );
+  static const defaultTextTransform = PropertyValue<TextTransform>.value(.none);
 
   /// Offset distance of text from its anchor. Positive values indicate right
   /// and down, while negative values indicate left and up. If used with
@@ -819,7 +803,7 @@ abstract interface class SymbolStyleLayer
 
   /// Default value for [iconTranslateAnchor].
   static const defaultIconTranslateAnchor = PropertyValue<ReferenceSpace>.value(
-    ReferenceSpace.map,
+    .map,
   );
 
   /// The opacity at which the text will be drawn.
@@ -909,7 +893,7 @@ abstract interface class SymbolStyleLayer
 
   /// Default value for [textTranslateAnchor].
   static const defaultTextTranslateAnchor = PropertyValue<ReferenceSpace>.value(
-    ReferenceSpace.map,
+    .map,
   );
 }
 
@@ -933,6 +917,9 @@ enum SymbolPlacement {
 
   /// The MapLibre Style spec compatible name.
   final String name;
+
+  @override
+  String toString() => name;
 }
 
 /// {@template symbol-z-order}
@@ -963,6 +950,9 @@ enum SymbolZOrder {
 
   /// The MapLibre Style spec compatible name.
   final String name;
+
+  @override
+  String toString() => name;
 }
 
 /// {@template icon-overlap}
@@ -984,7 +974,10 @@ enum SymbolOverlap {
   /// never overlap mode, the new icon is hidden. If the previous symbol was
   /// placed using [always] or [cooperative] overlap mode, the new icon is
   /// visible.
-  cooperative,
+  cooperative;
+
+  @override
+  String toString() => name;
 }
 
 /// {@template icon-rotation-alignment}
@@ -1006,7 +999,10 @@ enum IconRotationAlignment {
   /// is equivalent to [viewport]. When [SymbolStyleLayer.placement] is set to
   /// [SymbolPlacement.line] or [SymbolPlacement.lineCenter], this is
   /// equivalent to [map].
-  auto,
+  auto;
+
+  @override
+  String toString() => name;
 }
 
 /// {@template icon-text-fit}
@@ -1023,7 +1019,10 @@ enum IconTextFit {
   height,
 
   /// The icon is scaled in both x- and y-dimensions.
-  both,
+  both;
+
+  @override
+  String toString() => name;
 }
 
 /// {@template icon-anchor}
@@ -1061,6 +1060,9 @@ enum IconAnchor {
 
   /// The MapLibre Style spec compatible name.
   final String name;
+
+  @override
+  String toString() => name;
 }
 
 /// {@template icon-pitch-alignment}
@@ -1075,7 +1077,10 @@ enum IconPitchAlignment {
 
   /// Automatically matches the value of
   /// [SymbolStyleLayer.iconRotationAlignment].
-  auto,
+  auto;
+
+  @override
+  String toString() => name;
 }
 
 /// {@template text-pitch-alignment}
@@ -1090,7 +1095,10 @@ enum TextPitchAlignment {
 
   /// Automatically matches the value of
   /// [SymbolStyleLayer.textRotationAlignment].
-  auto,
+  auto;
+
+  @override
+  String toString() => name;
 }
 
 /// {@template text-rotation-alignment}
@@ -1124,6 +1132,9 @@ enum TextRotationAlignment {
 
   /// The MapLibre Style spec compatible name.
   final String name;
+
+  @override
+  String toString() => name;
 }
 
 /// {@template text-justify}
@@ -1140,7 +1151,10 @@ enum TextJustify {
   center,
 
   /// The text is aligned to the right.
-  right,
+  right;
+
+  @override
+  String toString() => name;
 }
 
 /// {@template text-anchor}
@@ -1178,6 +1192,9 @@ enum TextAnchor {
 
   /// The MapLibre Style spec compatible name.
   final String name;
+
+  @override
+  String toString() => name;
 }
 
 /// {@template text-writing-mode}
@@ -1190,7 +1207,10 @@ enum TextWritingMode {
 
   /// If a text's language supports vertical writing mode, symbols with point
   /// placement would be laid out vertically.
-  vertical,
+  vertical;
+
+  @override
+  String toString() => name;
 }
 
 /// {@template text-transform}
@@ -1206,5 +1226,8 @@ enum TextTransform {
   uppercase,
 
   /// Forces all letters to be displayed in lowercase.
-  lowercase,
+  lowercase;
+
+  @override
+  String toString() => name;
 }

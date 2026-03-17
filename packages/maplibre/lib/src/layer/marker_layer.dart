@@ -46,7 +46,7 @@ class MarkerLayer extends Layer<Feature<Point>> {
     this.textHaloWidth = 0,
     this.textHaloBlur = 0,
     this.textTranslate = Offset.zero,
-    this.iconAnchor = IconAnchor.center,
+    this.iconAnchor = .center,
     super.minZoom = 0,
     super.maxZoom = 24,
   }) : super(list: points);

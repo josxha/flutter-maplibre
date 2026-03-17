@@ -80,7 +80,7 @@ class _LayersWidgetMarkerPageState extends State<LayersWidgetMarkerPage> {
             textAllowOverlap: true,
             iconImage: _imageLoaded ? 'marker' : null,
             iconSize: 0.15,
-            iconAnchor: IconAnchor.bottom,
+            iconAnchor: .bottom,
             textOffset: const Offset(0, 1),
           ),
         ],

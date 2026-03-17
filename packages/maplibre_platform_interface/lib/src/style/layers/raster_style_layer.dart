@@ -115,7 +115,7 @@ abstract interface class RasterStyleLayer implements StyleLayerWithSource {
 
   /// Default value for [resampling] property.
   static const defaultResampling = PropertyValue<RasterResampling>.value(
-    RasterResampling.linear,
+    .linear,
   );
 
   /// Fade duration when a new tile is added, or when a video is started or its
@@ -143,5 +143,8 @@ enum RasterResampling {
 
   /// Nearest neighbor filtering interpolates pixel values using the nearest
   /// original source pixel creating a sharp but pixelated look when overscaled.
-  nearest,
+  nearest;
+
+  @override
+  String toString() => name;
 }

@@ -76,11 +76,7 @@ void main() {
         camera: camera,
         controller: controller,
         children: const [
-          MapScalebar(
-            alignment: alignment,
-            padding: padding,
-            units: ScaleBarUnit.imperial,
-          ),
+          MapScalebar(alignment: alignment, padding: padding, units: .imperial),
         ],
       );
       await tester.pumpWidget(app);
@@ -170,7 +166,7 @@ void main() {
       final app = App(
         camera: camera,
         controller: controller,
-        children: const [MapScalebar(units: ScaleBarUnit.imperial)],
+        children: const [MapScalebar(units: .imperial)],
       );
       await tester.pumpWidget(app);
       // give some time for getMetersPerPixelAtLatitude

@@ -127,7 +127,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
       jni.FlutterApi.implement(const FlutterApi()),
     );
 
-    if (options.androidMode == AndroidPlatformViewMode.tlhc_vd) {
+    if (options.androidMode == .tlhc_vd) {
       return AndroidView(
         viewType: viewType,
         onPlatformViewCreated: _onPlatformViewCreated,
@@ -153,29 +153,26 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
           // the mode used by initExpensiveAndroidView.
           // https://api.flutter.dev/flutter/services/PlatformViewsService/initSurfaceAndroidView.html
           // https://github.com/flutter/flutter/blob/master/docs/platforms/android/Android-Platform-Views.md#selecting-a-mode
-          AndroidPlatformViewMode.tlhc_hc =>
-            PlatformViewsService.initSurfaceAndroidView(
-              id: params.id,
-              viewType: viewType,
-              layoutDirection: TextDirection.ltr,
-              onFocus: () => params.onFocusChanged(true),
-            ),
-          AndroidPlatformViewMode.tlhc_vd =>
-            PlatformViewsService.initAndroidView(
-              id: params.id,
-              viewType: viewType,
-              layoutDirection: TextDirection.ltr,
-              onFocus: () => params.onFocusChanged(true),
-            ),
-          AndroidPlatformViewMode.hc =>
-            PlatformViewsService.initExpensiveAndroidView(
-              id: params.id,
-              viewType: viewType,
-              layoutDirection: TextDirection.ltr,
-              onFocus: () => params.onFocusChanged(true),
-            ),
+          .tlhc_hc => PlatformViewsService.initSurfaceAndroidView(
+            id: params.id,
+            viewType: viewType,
+            layoutDirection: TextDirection.ltr,
+            onFocus: () => params.onFocusChanged(true),
+          ),
+          .tlhc_vd => PlatformViewsService.initAndroidView(
+            id: params.id,
+            viewType: viewType,
+            layoutDirection: TextDirection.ltr,
+            onFocus: () => params.onFocusChanged(true),
+          ),
+          .hc => PlatformViewsService.initExpensiveAndroidView(
+            id: params.id,
+            viewType: viewType,
+            layoutDirection: TextDirection.ltr,
+            onFocus: () => params.onFocusChanged(true),
+          ),
           // https://github.com/flutter/flutter/blob/master/docs/platforms/android/Virtual-Display.md
-          AndroidPlatformViewMode.vd => PlatformViewsService.initAndroidView(
+          .vd => PlatformViewsService.initAndroidView(
             id: params.id,
             viewType: viewType,
             layoutDirection: TextDirection.ltr,
@@ -682,16 +679,16 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
     bool accuracyAnimation = true,
     bool compassAnimation = true,
     bool pulse = true,
-    BearingRenderMode bearingRenderMode = BearingRenderMode.gps,
+    BearingRenderMode bearingRenderMode = .gps,
   }) async => using((arena) {
     // https://maplibre.org/maplibre-native/docs/book/android/location-component-guide.html
     final style = this.style;
     if (style == null) return;
 
     final bearing = switch (bearingRenderMode) {
-      BearingRenderMode.none => jni.RenderMode.NORMAL,
-      BearingRenderMode.compass => jni.RenderMode.COMPASS,
-      BearingRenderMode.gps => jni.RenderMode.GPS,
+      .none => jni.RenderMode.NORMAL,
+      .compass => jni.RenderMode.COMPASS,
+      .gps => jni.RenderMode.GPS,
     };
     final jniContext = getJContext();
     final locOptionsBuilder =
@@ -730,24 +727,24 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
   @override
   Future<void> trackLocation({
     bool trackLocation = true,
-    BearingTrackMode trackBearing = BearingTrackMode.gps,
+    BearingTrackMode trackBearing = .gps,
   }) async {
     final mode = switch (trackBearing) {
-      BearingTrackMode.none =>
+      .none =>
         trackLocation
             // only location
             ? jni.CameraMode.TRACKING
             // neither location nor bearing
             : jni.CameraMode.NONE,
 
-      BearingTrackMode.compass =>
+      .compass =>
         trackLocation
             // location with compass bearing
             ? jni.CameraMode.TRACKING_COMPASS
             // only compass bearing
             : jni.CameraMode.NONE_COMPASS,
 
-      BearingTrackMode.gps =>
+      .gps =>
         trackLocation
             // location with gps bearing
             ? jni.CameraMode.TRACKING_GPS

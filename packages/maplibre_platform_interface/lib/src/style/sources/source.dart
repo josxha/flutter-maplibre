@@ -30,5 +30,8 @@ enum TileScheme {
   xyz,
 
   /// OSGeo spec scheme.
-  tms,
+  tms;
+
+  @override
+  String toString() => name;
 }

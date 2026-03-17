@@ -71,7 +71,7 @@ abstract interface class LineStyleLayer
   set cap(PropertyValue<LineCap> property);
 
   /// Default value for [cap].
-  static const defaultCap = PropertyValue<LineCap>.value(LineCap.butt);
+  static const defaultCap = PropertyValue<LineCap>.value(.butt);
 
   /// {@macro line-join}
   ///
@@ -81,7 +81,7 @@ abstract interface class LineStyleLayer
   set join(PropertyValue<LineJoin> property);
 
   /// Default value for [join].
-  static const defaultJoin = PropertyValue<LineJoin>.value(LineJoin.miter);
+  static const defaultJoin = PropertyValue<LineJoin>.value(.miter);
 
   /// Used to automatically convert miter joins to bevel joins for sharp angles.
   ///
@@ -226,7 +226,10 @@ enum LineCap {
   round,
 
   /// A cap with a squared-off end which is drawn beyond the endpoint of the line at a distance of one-half of the line's width.
-  square,
+  square;
+
+  @override
+  String toString() => name;
 }
 
 /// {@template line-join}
@@ -244,5 +247,8 @@ enum LineJoin {
 
   /// A join with a sharp, angled corner which is drawn with the outer sides
   /// beyond the endpoint of the path until they meet.
-  miter,
+  miter;
+
+  @override
+  String toString() => name;
 }
