@@ -36,7 +36,7 @@ class ColorReliefStyleLayerWeb extends StyleLayerWeb
   PropertyValue<double> get opacity =>
       requireMap
           .getPaintProperty(id, 'color-relief-opacity')
-          .toPropertyValue() ??
+          .toPropertyValue<double>() ??
       ColorReliefStyleLayer.defaultOpacity;
 
   @override

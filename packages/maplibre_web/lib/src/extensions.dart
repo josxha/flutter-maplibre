@@ -78,7 +78,6 @@ extension StringMap on JSAny? {
         v = property;
       }
       return PropertyValue.value(v as V);
-      return PropertyValue.value(property as V);
     }
   }
 

@@ -74,8 +74,10 @@ class CircleStyleLayerWeb extends StyleLayerWeb implements CircleStyleLayer {
       requireMap.setPaintProperty(id, 'circle-color', value.toJson().jsify());
 
   @override
-  Expression? get filter =>
-      Expression.fromJson(jsLayer.filter.dartify()! as List<Object?>);
+  Expression? get filter => switch (jsLayer.filter.dartify()) {
+    final List<Object?> json => Expression.fromJson(json),
+    _ => null,
+  };
 
   @override
   set filter(Expression value) => jsLayer.filter = value.json.jsify();

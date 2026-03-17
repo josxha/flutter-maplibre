@@ -18,7 +18,7 @@ part 'symbol_style_layer.dart';
 
 /// Web implementation of [StyleLayer].
 abstract class StyleLayerWeb implements StyleLayer {
-  /// Construct an [StyleLayerWeb] from a JNI layer.
+  /// Construct an [StyleLayerWeb] from a JavaScript layer specification.
   StyleLayerWeb.fromNativeLayer({required this.jsLayer, this.jsMap});
 
   /// The JavaScript layer instance.

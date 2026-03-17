@@ -405,10 +405,10 @@ extension DartListToNSArray on List<Object?> {
 extension UIColorExt on UIColor {
   /// Converts a [UIColor] to a Dart [Color].
   Color toDartColor() {
-    final rPtr = calloc.allocate<Double>(sizeOf<Double>());
-    final gPtr = calloc.allocate<Double>(sizeOf<Double>());
-    final bPtr = calloc.allocate<Double>(sizeOf<Double>());
-    final aPtr = calloc.allocate<Double>(sizeOf<Double>());
+    final rPtr = calloc<Double>();
+    final gPtr = calloc<Double>();
+    final bPtr = calloc<Double>();
+    final aPtr = calloc<Double>();
     try {
       final success = getRed(rPtr, green: gPtr, blue: bPtr, alpha: aPtr);
       if (!success) {

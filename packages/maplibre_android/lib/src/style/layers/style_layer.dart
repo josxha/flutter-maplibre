@@ -52,10 +52,10 @@ abstract class StyleLayerAndroid<JLayer extends jni.Layer>
 
   @override
   set visible(bool newValue) => using((arena) {
-    final jni.PropertyValue? jProperty;
     final stringValue = newValue ? 'visible' : 'none';
     final jValue = stringValue.toJString()..releasedBy(arena);
-    jProperty = jni.PropertyFactory.visibility(jValue);
-    jLayer.as(jni.Layer.type).setProperty(jProperty);
+    jLayer.as(jni.Layer.type).setProperty(
+      jni.PropertyFactory.visibility(jValue),
+    );
   });
 }
