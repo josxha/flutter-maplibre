@@ -31,7 +31,7 @@ class BackgroundStyleLayerWeb extends StyleLayerWeb
   PropertyValue<Color> get color =>
       requireMap
           .getPaintProperty(id, 'background-color')
-          .toPropertyValue<Color>() ??
+          .toColorPropertyValue() ??
       BackgroundStyleLayer.defaultColor;
 
   @override

@@ -1,6 +1,7 @@
 part of 'style_layer.dart';
 
-/// A layer that contains markers.
+/// A layer that renders elevation-based color gradients (color relief) from a
+/// raster or DEM source.
 ///
 /// https://maplibre.org/maplibre-style-spec/layers/#color-relief
 ///

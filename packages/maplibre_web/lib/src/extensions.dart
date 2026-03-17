@@ -86,8 +86,20 @@ extension StringMap on JSAny? {
     final property = dartify();
     if (property == null) {
       return null;
-    } else if (property is List<Object?> && property.firstOrNull is String) {
-      return PropertyValue.expression(Expression.fromJson(property));
+    } else if (property is List) {
+      if (property.firstOrNull is String) {
+        // Expression list, e.g. ['interpolate', ...]
+        return PropertyValue.expression(Expression.fromJson(property));
+      } else if (property.length == 2 &&
+          property.first is num &&
+          property.last is num) {
+        // Literal offset list, e.g. [x, y]
+        final offset = Offset(
+          (property.first as num).toDouble(),
+          (property.last as num).toDouble(),
+        );
+        return PropertyValue.value(offset);
+      }
     } else if (property is Map<Object?, Object?>) {
       final map = property.map((k, v) => MapEntry(k.toString(), v));
       if (map.containsKey('x') && map.containsKey('y')) {
