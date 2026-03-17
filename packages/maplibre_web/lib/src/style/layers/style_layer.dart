@@ -47,11 +47,13 @@ abstract class StyleLayerWeb implements StyleLayer {
   set minZoom(double value) => jsLayer.minzoom = value;
 
   @override
-  bool get visible =>
-      requireMap.getPaintProperty(id, 'visibility').toString() == 'visible';
+  bool get visible {
+    final visibility = requireMap.getLayoutProperty(id, 'visibility');
+    return visibility == null || visibility.toString() == 'visible';
+  }
 
   @override
-  set visible(bool value) => requireMap.setPaintProperty(
+  set visible(bool value) => requireMap.setLayoutProperty(
     id,
     'visibility',
     (value ? 'visible' : 'none').toJS,

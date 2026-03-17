@@ -142,7 +142,7 @@ class SymbolStyleLayerWeb extends StyleLayerWeb implements SymbolStyleLayer {
          ),
        ) {
     if (sourceLayerId case final id?) jsLayer.sourceLayer = id;
-    if (filter case final filter?) jsLayer.filter = filter.json.jsify()!;
+    if (filter case final filter?) jsLayer.filter = filter.json.jsify();
   }
 
   @override
@@ -812,7 +812,7 @@ class SymbolStyleLayerWeb extends StyleLayerWeb implements SymbolStyleLayer {
       Expression.fromJson(jsLayer.filter.dartify()! as List<Object?>);
 
   @override
-  set filter(Expression? value) => jsLayer.filter = value!.json.jsify()!;
+  set filter(Expression? value) => jsLayer.filter = value!.json.jsify();
 
   @override
   String? get sourceLayerId => jsLayer.sourceLayer;

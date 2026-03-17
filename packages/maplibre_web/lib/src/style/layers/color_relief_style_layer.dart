@@ -40,7 +40,7 @@ class ColorReliefStyleLayerWeb extends StyleLayerWeb
       ColorReliefStyleLayer.defaultOpacity;
 
   @override
-  String get sourceId => jsLayer.sourceLayer!;
+  String get sourceId => jsLayer.source!;
 
   @override
   set color(PropertyValue<Color>? property) => requireMap.setPaintProperty(

@@ -43,8 +43,31 @@ class HillshadeStyleLayerIos extends StyleLayerIos<MLNHillshadeStyleLayer>
     : super.fromNativeLayer();
 
   @override
-  PropertyValue<NumberArray> get illuminationDirection =>
-      throw UnimplementedError();
+  PropertyValue<NumberArray> get illuminationDirection {
+    final expression = ffiLayer.hillshadeIlluminationDirection;
+    if (expression.expressionType ==
+        NSExpressionType.NSConstantValueExpressionType) {
+      final value = expression.constantValue;
+      if (value == null) {
+        return HillshadeStyleLayer.defaultIlluminationDirection;
+      }
+      if (NSArray.isA(value)) {
+        final nsArray = NSArray.as(value);
+        final list = List.generate(
+          nsArray.count,
+          growable: false,
+          (index) =>
+              NSNumber.as(nsArray.objectAtIndex(index)).numValue.toDouble(),
+        );
+        return PropertyValue.value(NumberArray.array(list));
+      } else {
+        final number = NSNumber.as(value).numValue.toDouble();
+        return PropertyValue.value(NumberArray.number(number));
+      }
+    }
+    return expression.toPropertyValue() ??
+        HillshadeStyleLayer.defaultIlluminationDirection;
+  }
 
   @override
   set illuminationDirection(PropertyValue<NumberArray> property) {

@@ -36,29 +36,25 @@ class _StyleLayersSymbolPageState extends State<StyleLayersSymbolPage> {
             await style.addImage('marker', bytes);
 
             // add some points as GeoJSON source to the map
-            final geoJson = FeatureCollection(
-              const [
-                Feature(
-                  geometry: Point(Geographic(lon: 7.448871, lat: 46.947792)),
-                  properties: {'name': 'Bern'},
-                ),
-                Feature(
-                  geometry: Point(Geographic(lon: -0.110273, lat: 51.549851)),
-                  properties: {'name': 'London'},
-                ),
-                Feature(
-                  geometry: Point(Geographic(lon: 13.352826, lat: 52.572783)),
-                  properties: {'name': 'Berlin'},
-                ),
-                Feature(
-                  geometry: Point(Geographic(lon: 12.483543, lat: 41.940751)),
-                  properties: {'name': 'Rome'},
-                ),
-              ]
-            ).toText();
-            await style.addSource(
-              GeoJsonSource(id: 'points', data: geoJson),
-            );
+            final geoJson = FeatureCollection(const [
+              Feature(
+                geometry: Point(Geographic(lon: 7.448871, lat: 46.947792)),
+                properties: {'name': 'Bern'},
+              ),
+              Feature(
+                geometry: Point(Geographic(lon: -0.110273, lat: 51.549851)),
+                properties: {'name': 'London'},
+              ),
+              Feature(
+                geometry: Point(Geographic(lon: 13.352826, lat: 52.572783)),
+                properties: {'name': 'Berlin'},
+              ),
+              Feature(
+                geometry: Point(Geographic(lon: 12.483543, lat: 41.940751)),
+                properties: {'name': 'Rome'},
+              ),
+            ]).toText();
+            await style.addSource(GeoJsonSource(id: 'points', data: geoJson));
 
             // display the image on the map
             await style.addLayer(

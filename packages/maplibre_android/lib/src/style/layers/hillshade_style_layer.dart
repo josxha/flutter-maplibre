@@ -63,25 +63,26 @@ class HillshadeStyleLayerAndroid extends StyleLayerAndroid<jni.HillshadeLayer>
   });
 
   @override
-  set illuminationDirection(PropertyValue<NumberArray> property) =>
-      using((arena) {
-        final jProperty = property.apply(
-          arena: arena,
-          onExpression: jni.PropertyFactory.hillshadeIlluminationDirection$1,
-          onValue: (value) {
-            if (value.isArray) {
-              final expression = Expression.literal(value.array);
-              final jExpr = expression.toJExpression(arena);
-              return jni.PropertyFactory.hillshadeIlluminationAnchor$1(jExpr);
-            } else {
-              final jFloat = value.number.toJFloat();
-              return jni.PropertyFactory.hillshadeIlluminationDirection(jFloat);
-            }
-          },
-        );
-        jProperty?.releasedBy(arena);
-        jLayer.setProperty(jProperty);
-      });
+  set illuminationDirection(PropertyValue<NumberArray> property) => using((
+    arena,
+  ) {
+    final jProperty = property.apply(
+      arena: arena,
+      onExpression: jni.PropertyFactory.hillshadeIlluminationDirection$1,
+      onValue: (value) {
+        if (value.isArray) {
+          final expression = Expression.literal(value.array);
+          final jExpr = expression.toJExpression(arena);
+          return jni.PropertyFactory.hillshadeIlluminationDirection$1(jExpr);
+        } else {
+          final jFloat = value.number.toJFloat();
+          return jni.PropertyFactory.hillshadeIlluminationDirection(jFloat);
+        }
+      },
+    );
+    jProperty?.releasedBy(arena);
+    jLayer.setProperty(jProperty);
+  });
 
   @override
   PropertyValue<NumberArray> get illuminationAltitude => throw UnsupportedError(

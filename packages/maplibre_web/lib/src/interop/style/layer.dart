@@ -27,7 +27,10 @@ extension type LayerSpecification._(JSObject _) implements JSObject {
   /// The source id.
   external String? source;
 
-  external JSAny filter;
+  /// The filter expression of the layer.
+  external JSAny? filter;
+
+  /// The source layer id (for vector tile sources).
   @JS('source-layer')
   external String? sourceLayer;
 

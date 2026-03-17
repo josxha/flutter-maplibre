@@ -55,13 +55,29 @@ extension StringMap on JSAny? {
 
   /// Convert a [JSAny] to a [PropertyValue] of type [V] that can be [double],
   /// [String], [bool], [int], or [List<double>].
-  PropertyValue<V>? toPropertyValue<V>() {
+  PropertyValue<V>? toPropertyValue<V extends Object?>() {
     final property = dartify();
     if (property == null) {
       return null;
     } else if (property is List<Object?> && property.firstOrNull is String) {
       return PropertyValue.expression(Expression.fromJson(property));
     } else {
+      final Object? v;
+      if (V == double && property is num) {
+        // JS numbers may dartify to int for whole values. If the caller expects
+        // a double, convert any num to double.
+        v = property.toDouble();
+      } else if ((V == List<double>) && property is List) {
+        // Similarly, JS arrays of numbers may dartify to List<num>/List<int>.
+        // When the caller expects a List<double>, convert each element.
+        v = property
+            .map((e) => (e as num).toDouble())
+            .cast<double>()
+            .toList(growable: false);
+      } else {
+        v = property;
+      }
+      return PropertyValue.value(v as V);
       return PropertyValue.value(property as V);
     }
   }

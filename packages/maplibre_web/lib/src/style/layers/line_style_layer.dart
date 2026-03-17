@@ -58,7 +58,7 @@ class LineStyleLayerWeb extends StyleLayerWeb implements LineStyleLayer {
          ),
        ) {
     if (sourceLayerId case final id?) jsLayer.sourceLayer = id;
-    if (filter case final filter?) jsLayer.filter = filter.json.jsify()!;
+    if (filter case final filter?) jsLayer.filter = filter.json.jsify();
   }
 
   @override
@@ -237,11 +237,13 @@ class LineStyleLayerWeb extends StyleLayerWeb implements LineStyleLayer {
       .setPaintProperty(id, 'line-translate-anchor', value.toJson().jsify());
 
   @override
-  Expression? get filter =>
-      Expression.fromJson(jsLayer.filter.dartify()! as List<Object?>);
+  Expression? get filter => switch (jsLayer.filter.dartify()) {
+    final List<Object?> json => Expression.fromJson(json),
+    _ => null,
+  };
 
   @override
-  set filter(Expression? value) => jsLayer.filter = value!.json.jsify()!;
+  set filter(Expression? value) => jsLayer.filter = value?.json.jsify();
 
   @override
   String? get sourceLayerId => jsLayer.sourceLayer;
