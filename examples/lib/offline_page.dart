@@ -337,7 +337,7 @@ class _OfflineMapPage extends StatelessWidget {
       body: MapLibreMap(
         options: MapOptions(
           initStyle: MapStyles.protomapsLight.uri,
-          maxBounds: bounds,
+          // maxBounds: bounds,
           initCenter: Geographic(
             lon: (bounds.longitudeEast + bounds.longitudeWest) / 2,
             lat: (bounds.latitudeNorth + bounds.latitudeSouth) / 2,
@@ -377,6 +377,14 @@ class _OfflineMapPage extends StatelessWidget {
             ],
           ),
         ],
+        onMapCreated: (controller) {
+          Future.delayed(const Duration(seconds: 1), () {
+            controller.fitBounds(
+              bounds: bounds,
+              padding: const EdgeInsets.all(50),
+            );
+          });
+        },
       ),
     );
   }
