@@ -2,7 +2,7 @@
 
 import 'package:flutter_test/flutter_test.dart'
     show equals, expect, group, test;
-import 'package:maplibre/expressions.dart';
+import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 
 void main() {
   group('Style Expressions', () {

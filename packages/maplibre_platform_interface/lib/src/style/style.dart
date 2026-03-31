@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:maplibre_platform_interface/expressions.dart';
+import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 
 export 'expressions/expressions.dart';
 export 'layers/style_layer.dart';
+export 'property_value.dart';
 export 'sources/source.dart';
 
 /// https://maplibre.org/maplibre-style-spec/types/#color

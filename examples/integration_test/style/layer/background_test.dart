@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:maplibre/expressions.dart';
+import 'package:maplibre/maplibre.dart';
 
 import '../../apps/blank_app.dart';
 
@@ -18,7 +18,7 @@ void main() {
       await tester.pumpAndSettle();
       _testLayer(
         visible: false,
-        color: const PropertyValue.value(Colors.red),
+        color: PropertyValue.value(Colors.red.shade500),
         opacity: const PropertyValue.value(0.5),
         pattern: const PropertyValue.value('pattern'),
         minZoom: 1,
@@ -35,7 +35,7 @@ void main() {
             type: InterpolationType.linear(),
             input: Expression.zoom(),
             stopInputs: [0, 10],
-            stopOutputs: [Colors.red, Colors.blue],
+            stopOutputs: ['#FF0000', '#0000FF'],
           ),
         ),
         opacity: PropertyValue.expression(

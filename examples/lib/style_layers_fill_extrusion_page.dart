@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:maplibre/expressions.dart';
+import 'package:maplibre/maplibre.dart';
 import 'package:maplibre_example/utils/map_styles.dart';
 
 @immutable

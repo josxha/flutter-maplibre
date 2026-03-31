@@ -12,7 +12,7 @@ class BlankApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'Blank App',
-      home: Scaffold(body: Placeholder()),
+      home: Scaffold(body: Text('Blank App')),
     );
   }
 }

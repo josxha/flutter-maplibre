@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:maplibre/expressions.dart';
+import 'package:maplibre/maplibre.dart';
 
 import '../../apps/blank_app.dart';
 
@@ -18,7 +18,7 @@ void main() {
       await tester.pumpAndSettle();
       _testLayer(
         visible: false,
-        color: const PropertyValue.value(Colors.red),
+        color: PropertyValue.value(Colors.red.shade500),
         opacity: const PropertyValue.value(0.5),
         minZoom: 1,
         maxZoom: 10,
@@ -30,7 +30,7 @@ void main() {
         pitchScale: const PropertyValue.value(.viewport),
         pitchAlignment: const PropertyValue.value(.map),
         strokeWidth: const PropertyValue.value(1.5),
-        strokeColor: const PropertyValue.value(Colors.blue),
+        strokeColor: PropertyValue.value(Colors.blue.shade500),
         strokeOpacity: const PropertyValue.value(0.8),
       );
     });
@@ -44,7 +44,7 @@ void main() {
             type: InterpolationType.linear(),
             input: Expression.zoom(),
             stopInputs: [0, 10],
-            stopOutputs: [Colors.red, Colors.blue],
+            stopOutputs: ['#FF0000', '#0000FF'],
           ),
         ),
         opacity: PropertyValue.expression(
@@ -62,7 +62,7 @@ void main() {
             type: InterpolationType.linear(),
             input: Expression.zoom(),
             stopInputs: const [0, 10],
-            stopOutputs: const [Offset.zero, Offset(10, 20)],
+            stopOutputs: const [[0, 0], [10, 20]],
           ),
         ),
         translateAnchor: PropertyValue.expression(
@@ -70,7 +70,7 @@ void main() {
             type: InterpolationType.linear(),
             input: Expression.zoom(),
             stopInputs: const [0, 10],
-            stopOutputs: const <ReferenceSpace>[.map, .viewport],
+            stopOutputs: const ['map', 'viewport'],
           ),
         ),
         sortKey: PropertyValue.expression(
@@ -126,7 +126,7 @@ void main() {
             type: InterpolationType.linear(),
             input: Expression.zoom(),
             stopInputs: const [0, 10],
-            stopOutputs: const [Colors.red, Colors.blue],
+            stopOutputs: [Colors.red.shade500, Colors.blue.shade500],
           ),
         ),
         strokeOpacity: PropertyValue.expression(
@@ -207,5 +207,34 @@ void _testLayer({
   expect(layer.pitchAlignment, equals(pitchAlignment));
   expect(layer.strokeWidth, equals(strokeWidth));
   expect(layer.strokeColor, equals(strokeColor));
-  expect(layer.strokeOpacity, equals(strokeOpacity));
+  expect(layer.strokeOpacity, matchesPropertyValue(strokeOpacity));
+}
+
+/// Returns a [Matcher] which matches if the match argument is a
+/// [PropertyValue].
+Matcher matchesPropertyValue(PropertyValue property) =>
+    _MatchesPropertyValue(property);
+
+class _MatchesPropertyValue extends TypeMatcher<PropertyValue> {
+  const _MatchesPropertyValue(this._property);
+
+  final PropertyValue _property;
+
+  @override
+  bool matches(Object? item, Map<dynamic, dynamic> matchState) {
+    if (item is! PropertyValue) return false;
+    if (_property.isExpression) {
+      return item.isExpression && item.expression == _property.expression;
+    } else {
+      if (item.isExpression) return false;
+      switch (_property.value) {
+        case final num value:
+          final itemValue = item.value;
+          if (itemValue is! num) return false;
+          return (itemValue - value).abs() < 0.0001;
+        default:
+          return item.value == _property.value;
+      }
+    }
+  }
 }

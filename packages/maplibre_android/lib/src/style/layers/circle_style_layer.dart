@@ -201,8 +201,10 @@ class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
       jLayer.getSourceId().toDartString(releaseOriginal: true);
 
   @override
-  String? get sourceLayerId =>
-      jLayer.getSourceLayer().toDartString(releaseOriginal: true);
+  String? get sourceLayerId {
+    final id = jLayer.getSourceLayer().toDartString(releaseOriginal: true);
+    return id.isEmpty ? null : id;
+  }
 
   @override
   set sourceLayerId(String value) => using((arena) {

@@ -25,7 +25,7 @@ void main() {
       await tester.pumpAndSettle();
 
       final styleC = await style.future;
-      expect(styleC.getLayerIds().contains('water_red'), isTrue);
+      expect(styleC.getLayerIds().contains('countries-fill'), isTrue);
     });
 
     testWidgets('Load URL', (tester) async {
