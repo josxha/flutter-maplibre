@@ -223,9 +223,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
       ..camera(cameraBuilder.build()..releasedBy(arena));
     _mapView = jni.MapView.new$4(jContext, jMapOptions)
       ..getMapAsync(
-        jni.OnMapReadyCallback.implement(
-          _MapReadyCallback(WeakReference(_onMapReady)),
-        ),
+        jni.OnMapReadyCallback.implement(_MapReadyCallback(_onMapReady)),
       );
     _platformView.addView(_mapView);
 
@@ -446,7 +444,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
       cameraUpdate,
       nativeDuration.inMilliseconds,
       jni.MapLibreMap$CancelableCallback.implement(
-        _CameraMovementCallback(WeakReference(completer)),
+        _CameraMovementCallback(completer),
       )..releasedBy(arena),
     );
     return completer.future;
@@ -484,7 +482,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
       cameraUpdate,
       nativeDuration.inMilliseconds,
       jni.MapLibreMap$CancelableCallback.implement(
-        _CameraMovementCallback(WeakReference(completer)),
+        _CameraMovementCallback(completer),
       )..releasedBy(arena),
     );
     return completer.future;
@@ -819,17 +817,16 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
 }
 
 final class _CameraMovementCallback with jni.$MapLibreMap$CancelableCallback {
-  const _CameraMovementCallback(this.weakCompleter);
+  const _CameraMovementCallback(this.completer);
 
-  final WeakReference<Completer<void>> weakCompleter;
-
-  @override
-  void onCancel() => weakCompleter.target?.completeError(
-    Exception('Map camera movement cancelled.'),
-  );
+  final Completer<void> completer;
 
   @override
-  void onFinish() => weakCompleter.target?.complete();
+  void onCancel() =>
+      completer.completeError(Exception('Map camera movement cancelled.'));
+
+  @override
+  void onFinish() => completer.complete();
 
   @override
   bool get onCancel$async => true;
@@ -850,12 +847,12 @@ final class _StyleLoadedCallback with jni.$Style$OnStyleLoaded {
 }
 
 final class _MapReadyCallback with jni.$OnMapReadyCallback {
-  const _MapReadyCallback(this.weakCallback);
+  const _MapReadyCallback(this.callback);
 
-  final WeakReference<void Function(jni.MapLibreMap jMap)> weakCallback;
+  final void Function(jni.MapLibreMap jMap) callback;
 
   @override
   void onMapReady(jni.MapLibreMap jMap) {
-    weakCallback.target?.call(jMap);
+    callback.call(jMap);
   }
 }
