@@ -23,7 +23,7 @@ class OfflineManagerAndroid implements OfflineManager {
 
   @override
   void dispose() {
-    _jManager.release();
+    if (!_jManager.isReleased) _jManager.release();
   }
 
   @override
@@ -34,7 +34,7 @@ class OfflineManagerAndroid implements OfflineManager {
     _jManager.mergeOfflineRegions(
       path.toJString()..releasedBy(arena),
       jni.OfflineManager$MergeOfflineRegionsCallback.implement(
-        _MergeOfflineRegionsCallback(WeakReference(completer)),
+        _MergeOfflineRegionsCallback(completer),
       ),
     );
     return completer.future;
@@ -46,7 +46,7 @@ class OfflineManagerAndroid implements OfflineManager {
     _jManager.getOfflineRegion(
       regionId,
       jni.OfflineManager$GetOfflineRegionCallback.implement(
-        _GetOfflineRegionCallback(WeakReference(completer)),
+        _GetOfflineRegionCallback(completer),
       ),
     );
     return completer.future;
@@ -62,7 +62,7 @@ class OfflineManagerAndroid implements OfflineManager {
     _jManager.setMaximumAmbientCacheSize(
       bytes,
       jni.OfflineManager$FileSourceCallback.implement(
-        _FileSourceCallback(WeakReference(completer)),
+        _FileSourceCallback(completer),
       ),
     );
     return completer.future;
@@ -73,7 +73,7 @@ class OfflineManagerAndroid implements OfflineManager {
     final completer = Completer<void>();
     _jManager.clearAmbientCache(
       jni.OfflineManager$FileSourceCallback.implement(
-        _FileSourceCallback(WeakReference(completer)),
+        _FileSourceCallback(completer),
       ),
     );
     return completer.future;
@@ -84,7 +84,7 @@ class OfflineManagerAndroid implements OfflineManager {
     final completer = Completer<void>();
     _jManager.invalidateAmbientCache(
       jni.OfflineManager$FileSourceCallback.implement(
-        _FileSourceCallback(WeakReference(completer)),
+        _FileSourceCallback(completer),
       ),
     );
     return completer.future;
@@ -95,7 +95,7 @@ class OfflineManagerAndroid implements OfflineManager {
     final completer = Completer<void>();
     _jManager.packDatabase(
       jni.OfflineManager$FileSourceCallback.implement(
-        _FileSourceCallback(WeakReference(completer)),
+        _FileSourceCallback(completer),
       ),
     );
     return completer.future;
@@ -106,7 +106,7 @@ class OfflineManagerAndroid implements OfflineManager {
     final completer = Completer<void>();
     _jManager.resetDatabase(
       jni.OfflineManager$FileSourceCallback.implement(
-        _FileSourceCallback(WeakReference(completer)),
+        _FileSourceCallback(completer),
       ),
     );
     return completer.future;
@@ -121,7 +121,7 @@ class OfflineManagerAndroid implements OfflineManager {
     final completer = Completer<List<OfflineRegion>>();
     _jManager.listOfflineRegions(
       jni.OfflineManager$ListOfflineRegionsCallback.implement(
-        _ListOfflineRegionsCallback(WeakReference(completer)),
+        _ListOfflineRegionsCallback(completer),
       ),
     );
     return completer.future;
@@ -173,21 +173,19 @@ class OfflineManagerAndroid implements OfflineManager {
 
 final class _MergeOfflineRegionsCallback
     with jni.$OfflineManager$MergeOfflineRegionsCallback {
-  const _MergeOfflineRegionsCallback(this.weakCompleter);
+  const _MergeOfflineRegionsCallback(this.completer);
 
-  final WeakReference<Completer<List<OfflineRegion>>> weakCompleter;
+  final Completer<List<OfflineRegion>> completer;
 
   @override
   void onError(JString string) {
-    weakCompleter.target?.completeError(
-      string.toDartString(releaseOriginal: true),
-    );
+    completer.completeError(string.toDartString(releaseOriginal: true));
   }
 
   @override
   void onMerge(JArray<jni.OfflineRegion>? jRegions) => using((arena) {
     if (jRegions == null) {
-      weakCompleter.target?.complete([]);
+      completer.complete([]);
       return;
     }
     jRegions.releasedBy(arena);
@@ -195,7 +193,7 @@ final class _MergeOfflineRegionsCallback
       final jRegion = jRegions[index]..releasedBy(arena);
       return jRegion.toOfflineRegion();
     });
-    weakCompleter.target?.complete(regions);
+    completer.complete(regions);
   });
 
   @override
@@ -207,25 +205,25 @@ final class _MergeOfflineRegionsCallback
 
 final class _GetOfflineRegionCallback
     with jni.$OfflineManager$GetOfflineRegionCallback {
-  const _GetOfflineRegionCallback(this.weakCompleter);
+  const _GetOfflineRegionCallback(this.completer);
 
-  final WeakReference<Completer<OfflineRegion>> weakCompleter;
+  final Completer<OfflineRegion> completer;
 
   @override
   void onError(JString error) {
-    weakCompleter.target?.completeError(
+    completer.completeError(
       Exception(error.toDartString(releaseOriginal: true)),
     );
   }
 
   @override
   void onRegion(jni.OfflineRegion jRegion) {
-    weakCompleter.target?.complete(jRegion.toOfflineRegion());
+    completer.complete(jRegion.toOfflineRegion());
   }
 
   @override
   void onRegionNotFound() {
-    weakCompleter.target?.completeError(Exception('Region not found'));
+    completer.completeError(Exception('Region not found'));
   }
 
   @override
@@ -301,20 +299,20 @@ final class _DeleteOfflineRegionCallback
 }
 
 final class _FileSourceCallback with jni.$OfflineManager$FileSourceCallback {
-  const _FileSourceCallback(this.weakCompleter);
+  const _FileSourceCallback(this.completer);
 
-  final WeakReference<Completer<void>> weakCompleter;
+  final Completer<void> completer;
 
   @override
   void onError(JString error) {
-    weakCompleter.target?.completeError(
+    completer.completeError(
       Exception(error.toDartString(releaseOriginal: true)),
     );
   }
 
   @override
   void onSuccess() {
-    weakCompleter.target?.complete();
+    completer.complete();
   }
 
   @override
@@ -326,13 +324,13 @@ final class _FileSourceCallback with jni.$OfflineManager$FileSourceCallback {
 
 final class _ListOfflineRegionsCallback
     with jni.$OfflineManager$ListOfflineRegionsCallback {
-  const _ListOfflineRegionsCallback(this.weakCompleter);
+  const _ListOfflineRegionsCallback(this.completer);
 
-  final WeakReference<Completer<List<OfflineRegion>>> weakCompleter;
+  final Completer<List<OfflineRegion>> completer;
 
   @override
   void onError(JString error) {
-    weakCompleter.target?.completeError(
+    completer.completeError(
       Exception(error.toDartString(releaseOriginal: true)),
     );
   }
@@ -340,7 +338,7 @@ final class _ListOfflineRegionsCallback
   @override
   void onList(JArray<jni.OfflineRegion>? jRegions) => using((arena) {
     if (jRegions == null) {
-      weakCompleter.target?.complete([]);
+      completer.complete([]);
       return;
     }
     jRegions.releasedBy(arena);
@@ -348,7 +346,7 @@ final class _ListOfflineRegionsCallback
       final jRegion = jRegions[index]..releasedBy(arena);
       return jRegion.toOfflineRegion();
     });
-    weakCompleter.target?.complete(regions);
+    completer.complete(regions);
   });
 
   @override

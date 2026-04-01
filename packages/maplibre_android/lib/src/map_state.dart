@@ -19,10 +19,7 @@ part 'style_controller.dart';
 /// The implementation that gets used for state of the [MapLibreMap] widget on
 /// android using JNI and Pigeon as a fallback.
 final class MapLibreMapStateAndroid extends MapLibreMapState
-    with
-        jni.$OnMapReadyCallback,
-        jni.$Style$OnStyleLoaded,
-        WidgetsBindingObserver {
+    with WidgetsBindingObserver {
   late final int _viewId;
   jni.MapView? _mapView;
   jni.MapLibreMap? _jMap;
@@ -225,7 +222,9 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
       ..tiltGesturesEnabled(options.gestures.pitch)
       ..camera(cameraBuilder.build()..releasedBy(arena));
     _mapView = jni.MapView.new$4(jContext, jMapOptions)
-      ..getMapAsync(jni.OnMapReadyCallback.implement(this));
+      ..getMapAsync(
+        jni.OnMapReadyCallback.implement(_MapReadyCallback(_onMapReady)),
+      );
     _platformView.addView(_mapView);
 
     // In some environments (notably `integration_test` on Android/CI),
@@ -243,8 +242,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
     }
   });
 
-  @override
-  void onMapReady(jni.MapLibreMap jMap) => using((arena) {
+  void _onMapReady(jni.MapLibreMap jMap) => using((arena) {
     _jMap = jMap
       ..addOnMapClickListener(_mapClickListener)
       ..addOnMapLongClickListener(_mapLongClickListener)
@@ -446,7 +444,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
       cameraUpdate,
       nativeDuration.inMilliseconds,
       jni.MapLibreMap$CancelableCallback.implement(
-        _CameraMovementCallback(WeakReference(completer)),
+        _CameraMovementCallback(completer),
       )..releasedBy(arena),
     );
     return completer.future;
@@ -484,14 +482,13 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
       cameraUpdate,
       nativeDuration.inMilliseconds,
       jni.MapLibreMap$CancelableCallback.implement(
-        _CameraMovementCallback(WeakReference(completer)),
+        _CameraMovementCallback(completer),
       )..releasedBy(arena),
     );
     return completer.future;
   });
 
-  @override
-  void onStyleLoaded(jni.Style jStyle) {
+  void _onStyleLoaded(jni.Style jStyle) {
     // We need to refresh the cached style for when the style reloads.
     style?.dispose();
     final styleCtrl = StyleControllerAndroid._(jStyle);
@@ -813,25 +810,23 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
     }
     _jMap?.setStyle$3(
       builder,
-      jni.Style$OnStyleLoaded.implement(
-        _StyleLoadedCallback(WeakReference(onStyleLoaded)),
-      )..releasedBy(arena),
+      jni.Style$OnStyleLoaded.implement(_StyleLoadedCallback(_onStyleLoaded))
+        ..releasedBy(arena),
     );
   });
 }
 
 final class _CameraMovementCallback with jni.$MapLibreMap$CancelableCallback {
-  const _CameraMovementCallback(this.weakCompleter);
+  const _CameraMovementCallback(this.completer);
 
-  final WeakReference<Completer<void>> weakCompleter;
-
-  @override
-  void onCancel() => weakCompleter.target?.completeError(
-    Exception('Map camera movement cancelled.'),
-  );
+  final Completer<void> completer;
 
   @override
-  void onFinish() => weakCompleter.target?.complete();
+  void onCancel() =>
+      completer.completeError(Exception('Map camera movement cancelled.'));
+
+  @override
+  void onFinish() => completer.complete();
 
   @override
   bool get onCancel$async => true;
@@ -841,12 +836,23 @@ final class _CameraMovementCallback with jni.$MapLibreMap$CancelableCallback {
 }
 
 final class _StyleLoadedCallback with jni.$Style$OnStyleLoaded {
-  const _StyleLoadedCallback(this.weakCallback);
+  const _StyleLoadedCallback(this.callback);
 
-  final WeakReference<void Function(jni.Style jStyle)> weakCallback;
+  final void Function(jni.Style jStyle) callback;
 
   @override
   void onStyleLoaded(jni.Style style) {
-    weakCallback.target?.call(style);
+    callback.call(style);
+  }
+}
+
+final class _MapReadyCallback with jni.$OnMapReadyCallback {
+  const _MapReadyCallback(this.callback);
+
+  final void Function(jni.MapLibreMap jMap) callback;
+
+  @override
+  void onMapReady(jni.MapLibreMap jMap) {
+    callback.call(jMap);
   }
 }
