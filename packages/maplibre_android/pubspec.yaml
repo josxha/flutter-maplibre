@@ -17,11 +17,12 @@ resolution: workspace
 dependencies:
   ffi: ^2.1.3
   flutter: { sdk: flutter }
-  jni: ^0.15.2
+  jni: ^1.0.0
+  jni_flutter: ^1.0.0
   maplibre_platform_interface: ^0.3.5
 
 dev_dependencies:
-  jnigen: 0.15.0
+  jnigen: 0.16.0
   very_good_analysis: ^10.0.0
 
 flutter:

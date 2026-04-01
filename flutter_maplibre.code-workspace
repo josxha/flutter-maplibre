@@ -27,6 +27,6 @@
         {
             "name": "maplibre_webview",
             "path": "./packages/maplibre_webview"
-        },
+        }
     ]
 }
