@@ -128,6 +128,18 @@ class OfflineManagerAndroid implements OfflineManager {
   }
 
   @override
+  Future<void> deleteRegion({required int regionId}) async {
+    final completer = Completer<void>();
+    _jManager.getOfflineRegion(
+      regionId,
+      jni.OfflineManager$GetOfflineRegionCallback.implement(
+        _GetAndDeleteOfflineRegionCallback(WeakReference(completer)),
+      ),
+    );
+    return completer.future;
+  }
+
+  @override
   Stream<DownloadProgress> downloadRegion({
     required String mapStyleUrl,
     required LngLatBounds bounds,
@@ -222,6 +234,68 @@ final class _GetOfflineRegionCallback
 
   @override
   bool get onRegionNotFound$async => true;
+}
+
+final class _GetAndDeleteOfflineRegionCallback
+    with jni.$OfflineManager$GetOfflineRegionCallback {
+  const _GetAndDeleteOfflineRegionCallback(this.weakCompleter);
+
+  final WeakReference<Completer<void>> weakCompleter;
+
+  @override
+  void onError(JString error) {
+    weakCompleter.target?.completeError(
+      Exception(error.toDartString(releaseOriginal: true)),
+    );
+  }
+
+  @override
+  void onRegion(jni.OfflineRegion jRegion) {
+    jRegion.delete(
+      jni.OfflineRegion$OfflineRegionDeleteCallback.implement(
+        _DeleteOfflineRegionCallback(weakCompleter),
+      ),
+    );
+  }
+
+  @override
+  void onRegionNotFound() {
+    weakCompleter.target?.completeError(Exception('Region not found'));
+  }
+
+  @override
+  bool get onError$async => true;
+
+  @override
+  bool get onRegion$async => true;
+
+  @override
+  bool get onRegionNotFound$async => true;
+}
+
+final class _DeleteOfflineRegionCallback
+    with jni.$OfflineRegion$OfflineRegionDeleteCallback {
+  const _DeleteOfflineRegionCallback(this.weakCompleter);
+
+  final WeakReference<Completer<void>> weakCompleter;
+
+  @override
+  void onDelete() {
+    weakCompleter.target?.complete();
+  }
+
+  @override
+  void onError(JString string) {
+    weakCompleter.target?.completeError(
+      Exception(string.toDartString(releaseOriginal: true)),
+    );
+  }
+
+  @override
+  bool get onDelete$async => true;
+
+  @override
+  bool get onError$async => true;
 }
 
 final class _FileSourceCallback with jni.$OfflineManager$FileSourceCallback {

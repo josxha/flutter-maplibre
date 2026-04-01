@@ -117,7 +117,7 @@ class OfflineManagerIos implements OfflineManager {
 
   @override
   Future<OfflineRegion> getOfflineRegion({required int regionId}) async {
-    final packs = _storage.packs!.asDart();
+    final packs = await _getPacks();
     for (var i = 0; i < packs.length; i++) {
       final ffiPack = MLNOfflinePack.as(packs[i]);
       final json = _PackContext.fromNSData(ffiPack.context);
@@ -132,6 +132,30 @@ class OfflineManagerIos implements OfflineManager {
           styleUrl: json.styleUrl,
           metadata: json.metadata,
         );
+      }
+    }
+    throw Exception('Region not found');
+  }
+
+  @override
+  Future<void> deleteRegion({required int regionId}) async {
+    final packs = await _getPacks();
+    for (var i = 0; i < packs.length; i++) {
+      final ffiPack = MLNOfflinePack.as(packs[i]);
+      final json = _PackContext.fromNSData(ffiPack.context);
+      if (json.id == regionId) {
+        final completer = Completer<void>();
+        _storage.removePack(
+          ffiPack,
+          withCompletionHandler: ObjCBlock_ffiVoid_NSError.listener((error) {
+            if (error != null) {
+              completer.completeError(error);
+            } else {
+              completer.complete();
+            }
+          }),
+        );
+        return completer.future;
       }
     }
     throw Exception('Region not found');
@@ -154,18 +178,7 @@ class OfflineManagerIos implements OfflineManager {
 
   @override
   Future<List<OfflineRegion>> listOfflineRegions() async {
-    var nsArray = _storage.packs;
-    final stopwatch = Stopwatch()..start();
-    while (nsArray == null && stopwatch.elapsed < const Duration(seconds: 5)) {
-      // Do polling until the packs are loaded. This is a simple alternative to
-      // a KVO change notification observer recommended by the SDK.
-      await Future<void>.delayed(const Duration(milliseconds: 50));
-      nsArray = _storage.packs;
-    }
-    if (nsArray == null) {
-      throw TimeoutException('Loading offline packs timed out');
-    }
-    final packs = nsArray.asDart();
+    final packs = await _getPacks();
     return List<OfflineRegion>.generate(packs.length, (i) {
       final ffiPack = MLNOfflinePack.as(packs[i]);
       final ffiRegion = MLNTilePyramidOfflineRegion.as(ffiPack.region);
@@ -233,6 +246,23 @@ class OfflineManagerIos implements OfflineManager {
   @override
   void runPackDatabaseAutomatically({required bool enabled}) =>
       throw UnsupportedError('The database cannot be packed on iOS.');
+
+  /// Polls MLNOfflineStorage.packs until available and returns the
+  /// Dart representation of the NSArray.
+  Future<List<objc.ObjCObject>> _getPacks() async {
+    var nsArray = _storage.packs;
+    final stopwatch = Stopwatch()..start();
+    while (nsArray == null && stopwatch.elapsed < const Duration(seconds: 5)) {
+      // Do polling until the packs are loaded. This is a simple alternative to
+      // a KVO change notification observer recommended by the SDK.
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+      nsArray = _storage.packs;
+    }
+    if (nsArray == null) {
+      throw TimeoutException('Loading offline packs timed out');
+    }
+    return nsArray.asDart();
+  }
 
   void _onProgressChanged(objc.NSNotification notification) {
     final pack = notification.offlinePack;
