@@ -41,47 +41,47 @@ class StyleControllerAndroid extends StyleController {
         switch (layer) {
           case FillStyleLayer():
             final jFillLayer = jni.FillLayer(jId, jSourceId);
-            if (jFilter != null) jFillLayer.setFilter(jFilter);
-            if (jSourceLayer != null) jFillLayer.setSourceLayer(jSourceLayer);
+            if (jFilter != null) jFillLayer.filter = jFilter;
+            if (jSourceLayer != null) jFillLayer.sourceLayer = jSourceLayer;
             jLayer = jFillLayer;
           case CircleStyleLayer():
             final jCircleLayer = jni.CircleLayer(jId, jSourceId);
-            if (jFilter != null) jCircleLayer.setFilter(jFilter);
-            if (jSourceLayer != null) jCircleLayer.setSourceLayer(jSourceLayer);
+            if (jFilter != null) jCircleLayer.filter = jFilter;
+            if (jSourceLayer != null) jCircleLayer.sourceLayer = jSourceLayer;
             jLayer = jCircleLayer;
           case FillExtrusionStyleLayer():
             final jFillExtrusionLayer = jni.FillExtrusionLayer(jId, jSourceId);
-            if (jFilter != null) jFillExtrusionLayer.setFilter(jFilter);
+            if (jFilter != null) jFillExtrusionLayer.filter = jFilter;
             if (jSourceLayer != null) {
-              jFillExtrusionLayer.setSourceLayer(jSourceLayer);
+              jFillExtrusionLayer.sourceLayer = jSourceLayer;
             }
             jLayer = jFillExtrusionLayer;
           case HeatmapStyleLayer():
             final jHeatmapLayer = jni.HeatmapLayer(jId, jSourceId);
-            if (jFilter != null) jHeatmapLayer.setFilter(jFilter);
+            if (jFilter != null) jHeatmapLayer.filter = jFilter;
             if (jSourceLayer != null) {
-              jHeatmapLayer.setSourceLayer(jSourceLayer);
+              jHeatmapLayer.sourceLayer = jSourceLayer;
             }
             jLayer = jHeatmapLayer;
           case HillshadeStyleLayer():
             final jHillshadeLayer = jni.HillshadeLayer(jId, jSourceId);
             if (jSourceLayer != null) {
-              jHillshadeLayer.setSourceLayer(jSourceLayer);
+              jHillshadeLayer.sourceLayer = jSourceLayer;
             }
             jLayer = jHillshadeLayer;
           case LineStyleLayer():
             final jLineLayer = jni.LineLayer(jId, jSourceId);
-            if (jFilter != null) jLineLayer.setFilter(jFilter);
-            if (jSourceLayer != null) jLineLayer.setSourceLayer(jSourceLayer);
+            if (jFilter != null) jLineLayer.filter = jFilter;
+            if (jSourceLayer != null) jLineLayer.sourceLayer = jSourceLayer;
             jLayer = jLineLayer;
           case RasterStyleLayer():
             final jRasterLayer = jni.RasterLayer(jId, jSourceId);
-            if (jSourceLayer != null) jRasterLayer.setSourceLayer(jSourceLayer);
+            if (jSourceLayer != null) jRasterLayer.sourceLayer = jSourceLayer;
             jLayer = jRasterLayer;
           case SymbolStyleLayer():
             final jSymbolLayer = jni.SymbolLayer(jId, jSourceId);
-            if (jFilter != null) jSymbolLayer.setFilter(jFilter);
-            if (jSourceLayer != null) jSymbolLayer.setSourceLayer(jSourceLayer);
+            if (jFilter != null) jSymbolLayer.filter = jFilter;
+            if (jSourceLayer != null) jSymbolLayer.sourceLayer = jSourceLayer;
             jLayer = jSymbolLayer;
           default:
             throw UnimplementedError(
@@ -99,34 +99,32 @@ class StyleControllerAndroid extends StyleController {
         }
     }
 
-    jLayer.setMinZoom(layer.minZoom);
-    jLayer.setMaxZoom(layer.maxZoom);
+    jLayer.minZoom = layer.minZoom;
+    jLayer.maxZoom = layer.maxZoom;
 
     // paint and layout properties
     final layoutEntries = layer.layout.entries.toList(growable: false);
     final paintEntries = layer.paint.entries.toList(growable: false);
-    final props = JArray(
-      jni.PropertyValue.nullableType(JObject.nullableType),
+    final props = JArray.withLength(
+      jni.PropertyValue.type,
       layoutEntries.length + paintEntries.length,
     )..releasedBy(arena);
     for (var i = 0; i < paintEntries.length; i++) {
       final entry = paintEntries[i];
-      props[i] = jni.PaintPropertyValue(
+      props[i] = jni.PaintPropertyValue<JObject?>(
         entry.key.toJString()..releasedBy(arena),
         entry.value.toJObject()..releasedBy(arena),
-        T: JObject.type,
       )..releasedBy(arena);
     }
     for (var i = 0; i < layoutEntries.length; i++) {
       final entry = layoutEntries[i];
-      props[paintEntries.length + i] = jni.LayoutPropertyValue(
+      props[paintEntries.length + i] = jni.LayoutPropertyValue<JObject?>(
         entry.key.toJString()..releasedBy(arena),
         entry.value.toJObject()..releasedBy(arena),
-        T: JObject.type,
       )..releasedBy(arena);
     }
     jLayer.releasedBy(arena);
-    jLayer.setProperties(props);
+    jLayer.properties = props;
 
     // add to style
     if (belowLayerId case final String belowId) {
@@ -168,7 +166,7 @@ class StyleControllerAndroid extends StyleController {
           source.tileSize,
         );
         // TODO apply other properties
-        jSource.setVolatile(source.volatile.toJBoolean()..releasedBy(arena));
+        jSource.volatile = (source.volatile.toJBoolean()..releasedBy(arena));
       case RasterSource():
         if (source.url case final String url) {
           jSource = jni.RasterSource.new$4(
@@ -180,27 +178,26 @@ class StyleControllerAndroid extends StyleController {
           final tiles = source.tiles!.map(
             (e) => e.toJString()..releasedBy(arena),
           );
-          final tilesArray = JArray.of(JString.nullableType, tiles)
-            ..releasedBy(arena);
+          final tilesArray = JArray.of(JString.type, tiles)..releasedBy(arena);
           final tileSet =
               jni.TileSet(
                   '{}'.toJString()..releasedBy(arena),
                   tilesArray.as(JArray.type(JString.type))..releasedBy(arena),
                 )
                 ..releasedBy(arena)
-                ..setMaxZoom(source.maxZoom)
-                ..setMinZoom(source.minZoom);
+                ..maxZoom = source.maxZoom.toJFloat()
+                ..minZoom = source.minZoom.toJFloat();
           jSource = jni.RasterSource.new$6(jId, tileSet, source.tileSize);
         }
         // TODO apply other properties
-        jSource.setVolatile(source.volatile.toJBoolean()..releasedBy(arena));
+        jSource.volatile = (source.volatile.toJBoolean()..releasedBy(arena));
       case VectorSource():
         jSource = jni.VectorSource.new$3(
           jId,
           source.url!.toJString()..releasedBy(arena),
         );
         // TODO apply other properties
-        jSource.setVolatile(source.volatile.toJBoolean()..releasedBy(arena));
+        jSource.volatile = (source.volatile.toJBoolean()..releasedBy(arena));
       case ImageSource():
         // https://maplibre.org/maplibre-native/android/api/-map-libre%20-native%20-android/org.maplibre.android.geometry/-lat-lng-quad/index.html
         final jniQuad = jni.LatLngQuad(
@@ -235,7 +232,7 @@ class StyleControllerAndroid extends StyleController {
   Future<void> addImage(String id, Uint8List bytes) async => using((arena) {
     final jId = id.toJString()..releasedBy(arena);
     final jBitmap = jni.BitmapFactory.decodeByteArray(
-      JByteArray.from(bytes)..releasedBy(arena),
+      JByteArray.of(bytes)..releasedBy(arena),
       0,
       bytes.length,
     );
@@ -253,11 +250,8 @@ class StyleControllerAndroid extends StyleController {
     required String id,
     required String data,
   }) async {
-    final source = _jStyle.getSourceAs(
-      id.toJString(),
-      T: jni.GeoJsonSource.type,
-    )!;
-    source.setGeoJson$3(data.toJString());
+    final source = _jStyle.getSourceAs<jni.GeoJsonSource>(id.toJString());
+    source?.geoJson$3 = data.toJString();
   }
 
   @override
@@ -266,10 +260,11 @@ class StyleControllerAndroid extends StyleController {
   @override
   List<String> getAttributionsSync() => using((arena) {
     try {
-      final jSources = _jStyle.getSources()..releasedBy(arena);
+      final jSources = _jStyle.sources..releasedBy(arena);
       final attributions = <String>[];
-      for (final jSource in jSources) {
-        final jAttribution = jSource?.getAttribution();
+      for (var i = 0; i < jSources.size(); i++) {
+        final jSource = jSources.get(i);
+        final jAttribution = jSource?.attribution;
         if (jAttribution == null) continue;
         final attribution = jAttribution.toDartString(releaseOriginal: true);
         if (attribution.trim().isEmpty) continue;
@@ -284,9 +279,10 @@ class StyleControllerAndroid extends StyleController {
 
   @override
   List<String> getLayerIds() {
-    final layers = _jStyle.getLayers();
+    final layers = _jStyle.layers;
     return layers
-        .map((e) => e?.getId().toDartString(releaseOriginal: true))
+        .asDart()
+        .map((e) => e?.id.toDartString(releaseOriginal: true))
         .nonNulls
         .toList(growable: false);
   }
@@ -296,7 +292,7 @@ class StyleControllerAndroid extends StyleController {
     if (!_jStyle.isReleased) _jStyle.release();
   }
 
-  JList<jni.Layer?> _getLayers() => _jStyle.getLayers();
+  JList<jni.Layer?> _getLayers() => _jStyle.layers;
 
   @override
   void setProjection(MapProjection projection) {

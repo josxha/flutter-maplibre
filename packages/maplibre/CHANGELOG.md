@@ -1,3 +1,10 @@
+## 0.3.5
+
+- Add `deleteRegion()` to `OfflineManager` by @BartoszStasiurka
+- Android: fix `onStyleLoaded()` unreliable if not loaded immediately
+
+Full Changelog: [v0.3.4+1...v0.3.5](https://github.com/josxha/flutter-maplibre/compare/v0.3.4+1...v0.3.5)
+
 ## 0.3.4+1
 
 ### Bug Fixes

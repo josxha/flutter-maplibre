@@ -14,7 +14,7 @@ extension GeographicExt on Geographic {
 extension JniLatLngExt on jni.LatLng {
   /// Convert an internal [jni.LatLng] to a [Geographic].
   Geographic toGeographic({bool releaseOriginal = false}) {
-    final point = Geographic(lon: getLongitude(), lat: getLatitude());
+    final point = Geographic(lon: longitude, lat: latitude);
     if (releaseOriginal) release();
     return point;
   }
@@ -68,20 +68,20 @@ extension LatLngBounds on jni.LatLngBounds {
 extension OfflineRegionExt on jni.OfflineRegion {
   /// Convert an internal [jni.OfflineRegion] to an [OfflineRegion].
   OfflineRegion toOfflineRegion() => using((arena) {
-    final jDefinition = getDefinition()..releasedBy(arena);
-    final jMetadata = getMetadata()..releasedBy(arena);
-    final metadataBytes = jMetadata.toList();
+    final jDefinition = definition..releasedBy(arena);
+    final jMetadata = metadata..releasedBy(arena);
+    final metadataBytes = jMetadata.asDart();
     final metadataJson = utf8.decode(metadataBytes);
-    final metadata = jsonDecode(metadataJson) as Map<String, Object?>;
+    final dartMetadata = jsonDecode(metadataJson) as Map<String, Object?>;
 
     return OfflineRegion(
-      id: getId(),
+      id: id,
       bounds: jDefinition.getBounds()!.toLngLatBounds(releaseOriginal: true),
       minZoom: jDefinition.getMinZoom(),
       maxZoom: jDefinition.getMaxZoom(),
       pixelRatio: jDefinition.getPixelRatio(),
       styleUrl: jDefinition.getStyleURL()!.toDartString(releaseOriginal: true),
-      metadata: metadata,
+      metadata: dartMetadata,
     );
   });
 }
@@ -92,10 +92,7 @@ extension ObjectExt on Object {
   JObject toJObject() {
     switch (this) {
       case final Map<String, Object?> value:
-        final jMap = jni.HashMap(
-          K: JObject.nullableType,
-          V: JObject.nullableType,
-        );
+        final jMap = jni.HashMap<JObject?, JObject?>();
         for (final entry in value.entries) {
           final jKey = entry.key.toJObject();
           final jValue = entry.value?.toJObject();
@@ -105,7 +102,7 @@ extension ObjectExt on Object {
         }
         return jMap;
       case final List<Object?> value:
-        final jArray = JArray(JObject.nullableType, value.length);
+        final jArray = JArray.withLength(JObject.type, value.length);
         for (var i = 0; i < value.length; i++) {
           final jElement = value[i]?.toJObject();
           jArray[i] = jElement;
