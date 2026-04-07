@@ -1,7 +1,14 @@
 ## 0.3.5
 
+Thanks to @BartoszStasiurka for his contribution in this release!
+
 - Add `deleteRegion()` to `OfflineManager` by @BartoszStasiurka
-- Android: fix `onStyleLoaded()` unreliable if not loaded immediately
+- Android: fix `onStyleLoaded()` unreliable if style not loaded immediately
+- Android: fix `featuresAtPoint` causes `ClassNotFoundException` in release builds
+- Android: update MapLibre Native to 13.0
+- iOS: update MapLibre Native to 6.25
+- Android: update `jni` to v1.0.0, `jnigen` to 0.16.0
+- fix: set default `maxZoom` to 22 for `RasterSource`, `RasterDemSource` and `VectorSource`.
 
 Full Changelog: [v0.3.4+1...v0.3.5](https://github.com/josxha/flutter-maplibre/compare/v0.3.4+1...v0.3.5)
 

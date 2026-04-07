@@ -212,6 +212,12 @@ extension MLNStyleLayerExt on MLNStyleLayer {
       case 'fill-extrusion-translate-anchor':
         (this as MLNFillExtrusionStyleLayer).fillExtrusionTranslationAnchor =
             expression;
+      case 'hillshade-shadow-color':
+        (this as MLNHillshadeStyleLayer).hillshadeShadowColor = expression;
+      case 'hillshade-accent-color':
+        (this as MLNHillshadeStyleLayer).hillshadeAccentColor = expression;
+      case 'hillshade-highlight-color':
+        (this as MLNHillshadeStyleLayer).hillshadeHighlightColor = expression;
       case 'line-dasharray':
         (this as MLNLineStyleLayer).lineDashPattern = expression;
       case 'line-translate':
