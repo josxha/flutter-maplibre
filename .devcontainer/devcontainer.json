@@ -1,0 +1,12 @@
+{
+  "image": "ghcr.io/cirruslabs/flutter",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "Dart-Code.dart-code",
+        "Dart-Code.flutter",
+        "redhat.vscode-yaml"
+      ]
+    }
+  }
+}

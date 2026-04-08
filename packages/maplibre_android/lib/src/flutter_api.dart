@@ -14,7 +14,7 @@ final class FlutterApi with jni.$FlutterApi {
 
     // MapLibre.getInstance needs to be called before creating the map.
     jni.MapLibre.getInstance(jContext);
-    jni.Logger.setVerbosity(jni.Logger.WARN);
+    jni.Logger.verbosity = jni.Logger.WARN;
 
     final view = jni.FrameLayout(jContext);
     Registry.platformViews[viewId] = view;
