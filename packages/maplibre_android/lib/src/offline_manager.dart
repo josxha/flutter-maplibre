@@ -54,7 +54,7 @@ class OfflineManagerAndroid implements OfflineManager {
 
   @override
   void setOfflineTileCountLimit({required int amount}) =>
-      _jManager.setOfflineMapboxTileCountLimit(amount);
+      _jManager.offlineMapboxTileCountLimit = amount;
 
   @override
   Future<void> setMaximumAmbientCacheSize({required int bytes}) async {
@@ -162,7 +162,7 @@ class OfflineManagerAndroid implements OfflineManager {
 
     _jManager.createOfflineRegion(
       jDefinition.as(jni.OfflineRegionDefinition.type)..releasedBy(arena),
-      JByteArray.from(utf8.encode(metadataJson))..releasedBy(arena),
+      JByteArray.of(utf8.encode(metadataJson))..releasedBy(arena),
       jni.OfflineManager$CreateOfflineRegionCallback.implement(
         _CreateOfflineRegionCallback(stream, arena),
       )..releasedBy(arena),
@@ -369,8 +369,8 @@ final class _CreateOfflineRegionCallback
     final jObserver = jni.OfflineRegion$OfflineRegionObserver.implement(
       _OfflineRegionObserver(stream, WeakReference(jRegion), arena),
     )..releasedBy(arena);
-    jRegion.setObserver(jObserver);
-    jRegion.setDownloadState(jni.OfflineRegion.STATE_ACTIVE);
+    jRegion.observer = jObserver;
+    jRegion.downloadState = jni.OfflineRegion.STATE_ACTIVE;
   }
 
   @override
@@ -399,19 +399,19 @@ final class _OfflineRegionObserver
     if (!stream.isClosed) {
       stream.add(
         DownloadProgress(
-          loadedBytes: jStatus.getCompletedResourceSize(),
-          loadedTiles: jStatus.getCompletedResourceCount(),
-          totalTiles: jStatus.getRequiredResourceCount(),
-          totalTilesEstimated: !jStatus.isRequiredResourceCountPrecise(),
+          loadedBytes: jStatus.completedResourceSize,
+          loadedTiles: jStatus.completedResourceCount,
+          totalTiles: jStatus.requiredResourceCount,
+          totalTilesEstimated: !jStatus.isRequiredResourceCountPrecise,
           region: region,
-          downloadCompleted: jStatus.isComplete(),
+          downloadCompleted: jStatus.isComplete,
         ),
       );
     }
 
     // end download if status is complete
-    if (jStatus.isComplete()) {
-      weakJRegion.target?.setDownloadState(jni.OfflineRegion.STATE_INACTIVE);
+    if (jStatus.isComplete) {
+      weakJRegion.target?.downloadState = jni.OfflineRegion.STATE_INACTIVE;
       // This can be called multiple times, check if already completed
       if (!stream.isClosed) {
         stream.close();
@@ -423,15 +423,15 @@ final class _OfflineRegionObserver
   @override
   void onError(jni.OfflineRegionError error) {
     error.releasedBy(arena);
-    weakJRegion.target?.setDownloadState(jni.OfflineRegion.STATE_INACTIVE);
+    weakJRegion.target?.downloadState = jni.OfflineRegion.STATE_INACTIVE;
     stream.addError(
-      Exception(error.getMessage().toDartString(releaseOriginal: true)),
+      Exception(error.message.toDartString(releaseOriginal: true)),
     );
   }
 
   @override
   void mapboxTileCountLimitExceeded(int limit) {
-    weakJRegion.target?.setDownloadState(jni.OfflineRegion.STATE_INACTIVE);
+    weakJRegion.target?.downloadState = jni.OfflineRegion.STATE_INACTIVE;
     stream.addError(Exception('Tile count limit exceeded: $limit'));
   }
 

@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:jnigen/jnigen.dart';
-import 'package:jnigen/src/elements/j_elements.dart' as j show Method, Visitor;
 
 void main(List<String> args) {
   final packageRoot = Platform.script.resolve('../');
@@ -68,18 +67,6 @@ void main(List<String> args) {
         'com.google.gson.Gson',
         'com.google.gson.JsonObject',
       ],
-      visitors: [_RenameVisitor()],
     ),
   );
-}
-
-class _RenameVisitor extends j.Visitor {
-  @override
-  void visitMethod(j.Method method) {
-    super.visitMethod(method);
-    // https://github.com/dart-lang/native/issues/2903#issuecomment-3695196951
-    if (method.originalName == 'bool') {
-      method.name = 'bool_';
-    }
-  }
 }

@@ -18,7 +18,7 @@ final class VectorSource extends Source {
     this.bounds = const [-180, -85.051129, 180, 85.051129],
     this.scheme = TileScheme.xyz,
     this.minZoom = 0,
-    this.maxZoom = 2,
+    this.maxZoom = 22,
     this.attribution,
     this.volatile = false,
     @Deprecated(

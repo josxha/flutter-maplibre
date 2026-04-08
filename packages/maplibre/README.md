@@ -52,7 +52,7 @@ Many features of the package are showcased in the example app.
 <tr>
 <td>
 Visit the docs to learn how to get started with maplibre in your
-project: <a href="https://flutter-maplibre.pages.dev/docs/category/getting-started">Get Started</a>.
+project: <a href="https://flutter-maplibre.pages.dev/docs/getting-started/setup/">Get Started</a>.
 </td>
 <td>
 If you want to know more about the classes and properties of the package, have
