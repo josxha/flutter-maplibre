@@ -123,9 +123,7 @@ class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
 
   @override
   PropertyValue<ReferenceSpace> get pitchAlignment =>
-      jLayer.circlePitchAlignment.toDartReferenceSpace(
-        releaseOriginal: true,
-      ) ??
+      jLayer.circlePitchAlignment.toDartReferenceSpace(releaseOriginal: true) ??
       CircleStyleLayer.defaultPitchAlignment;
 
   @override
@@ -143,9 +141,7 @@ class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
 
   @override
   PropertyValue<ReferenceSpace> get pitchScale =>
-      jLayer.circlePitchScale.toDartReferenceSpace(
-        releaseOriginal: true,
-      ) ??
+      jLayer.circlePitchScale.toDartReferenceSpace(releaseOriginal: true) ??
       CircleStyleLayer.defaultPitchScale;
 
   @override
@@ -197,8 +193,7 @@ class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
   });
 
   @override
-  String get sourceId =>
-      jLayer.sourceId.toDartString(releaseOriginal: true);
+  String get sourceId => jLayer.sourceId.toDartString(releaseOriginal: true);
 
   @override
   String? get sourceLayerId {

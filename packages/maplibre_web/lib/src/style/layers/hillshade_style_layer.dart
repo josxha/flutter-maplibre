@@ -107,11 +107,12 @@ class HillshadeStyleLayerWeb extends StyleLayerWeb
       HillshadeStyleLayer.defaultShadowColor;
 
   @override
-  set shadowColor(PropertyValue<List<Color>> property) => requireMap.setPaintProperty(
-    id,
-    'hillshade-shadow-color',
-    property.toJson().jsify(),
-  );
+  set shadowColor(PropertyValue<List<Color>> property) =>
+      requireMap.setPaintProperty(
+        id,
+        'hillshade-shadow-color',
+        property.toJson().jsify(),
+      );
 
   @override
   PropertyValue<List<Color>> get highlightColor =>

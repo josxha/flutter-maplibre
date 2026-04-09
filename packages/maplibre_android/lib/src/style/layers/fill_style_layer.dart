@@ -153,9 +153,7 @@ class FillStyleLayerAndroid extends StyleLayerAndroid<jni.FillLayer>
 
   @override
   PropertyValue<ReferenceSpace> get translateAnchor =>
-      jLayer.fillTranslateAnchor.toDartReferenceSpace(
-        releaseOriginal: true,
-      ) ??
+      jLayer.fillTranslateAnchor.toDartReferenceSpace(releaseOriginal: true) ??
       StyleLayerWithTranslate.defaultTranslateAnchor;
 
   @override
@@ -188,8 +186,7 @@ class FillStyleLayerAndroid extends StyleLayerAndroid<jni.FillLayer>
       jLayer.fillSortKey.toDart(releaseOriginal: true);
 
   @override
-  String get sourceId =>
-      jLayer.sourceId.toDartString(releaseOriginal: true);
+  String get sourceId => jLayer.sourceId.toDartString(releaseOriginal: true);
 
   @override
   Expression? get filter => using((arena) {

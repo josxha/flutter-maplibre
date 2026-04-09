@@ -149,8 +149,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
     : super.fromNativeLayer();
 
   @override
-  String get sourceId =>
-      jLayer.sourceId.toDartString(releaseOriginal: true);
+  String get sourceId => jLayer.sourceId.toDartString(releaseOriginal: true);
 
   @override
   String? get sourceLayerId =>
@@ -1186,9 +1185,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<ReferenceSpace> get iconTranslateAnchor =>
-      jLayer.iconTranslateAnchor.toDartReferenceSpace(
-        releaseOriginal: true,
-      ) ??
+      jLayer.iconTranslateAnchor.toDartReferenceSpace(releaseOriginal: true) ??
       SymbolStyleLayer.defaultIconTranslateAnchor;
 
   @override
@@ -1312,9 +1309,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<ReferenceSpace> get textTranslateAnchor =>
-      jLayer.textTranslateAnchor.toDartReferenceSpace(
-        releaseOriginal: true,
-      ) ??
+      jLayer.textTranslateAnchor.toDartReferenceSpace(releaseOriginal: true) ??
       SymbolStyleLayer.defaultTextTranslateAnchor;
 
   @override

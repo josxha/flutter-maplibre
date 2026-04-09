@@ -219,6 +219,5 @@ class FillExtrusionStyleLayerAndroid
   });
 
   @override
-  String get sourceId =>
-      jLayer.sourceId.toDartString(releaseOriginal: true);
+  String get sourceId => jLayer.sourceId.toDartString(releaseOriginal: true);
 }

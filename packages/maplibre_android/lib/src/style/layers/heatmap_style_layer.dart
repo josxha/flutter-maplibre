@@ -144,8 +144,7 @@ class HeatmapStyleLayerAndroid extends StyleLayerAndroid<jni.HeatmapLayer>
   });
 
   @override
-  String get sourceId =>
-      jLayer.sourceId.toDartString(releaseOriginal: true);
+  String get sourceId => jLayer.sourceId.toDartString(releaseOriginal: true);
 
   @override
   String? get sourceLayerId =>

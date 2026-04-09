@@ -62,7 +62,10 @@ void main() {
             type: InterpolationType.linear(),
             input: Expression.zoom(),
             stopInputs: const [0, 10],
-            stopOutputs: const [[0, 0], [10, 20]],
+            stopOutputs: const [
+              [0, 0],
+              [10, 20],
+            ],
           ),
         ),
         translateAnchor: PropertyValue.expression(

@@ -66,8 +66,7 @@ class BackgroundStyleLayerAndroid extends StyleLayerAndroid<jni.BackgroundLayer>
 
   @override
   PropertyValue<Color> get color =>
-      jLayer.backgroundColor.toDartColor() ??
-      BackgroundStyleLayer.defaultColor;
+      jLayer.backgroundColor.toDartColor() ?? BackgroundStyleLayer.defaultColor;
 
   @override
   set color(PropertyValue<Color> property) => using((arena) {

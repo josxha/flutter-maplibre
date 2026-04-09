@@ -316,9 +316,7 @@ class LineStyleLayerAndroid extends StyleLayerAndroid<jni.LineLayer>
 
   @override
   PropertyValue<ReferenceSpace> get translateAnchor =>
-      jLayer.lineTranslateAnchor.toDartReferenceSpace(
-        releaseOriginal: true,
-      ) ??
+      jLayer.lineTranslateAnchor.toDartReferenceSpace(releaseOriginal: true) ??
       StyleLayerWithTranslate.defaultTranslateAnchor;
 
   @override
@@ -365,8 +363,7 @@ class LineStyleLayerAndroid extends StyleLayerAndroid<jni.LineLayer>
   });
 
   @override
-  String get sourceId =>
-      jLayer.sourceId.toDartString(releaseOriginal: true);
+  String get sourceId => jLayer.sourceId.toDartString(releaseOriginal: true);
 
   @override
   String? get sourceLayerId =>

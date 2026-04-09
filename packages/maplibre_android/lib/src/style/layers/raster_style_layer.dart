@@ -190,6 +190,5 @@ class RasterStyleLayerAndroid extends StyleLayerAndroid<jni.RasterLayer>
   });
 
   @override
-  String get sourceId =>
-      jLayer.sourceId.toDartString(releaseOriginal: true);
+  String get sourceId => jLayer.sourceId.toDartString(releaseOriginal: true);
 }
