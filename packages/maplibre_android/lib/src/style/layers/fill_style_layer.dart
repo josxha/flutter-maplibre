@@ -48,7 +48,7 @@ class FillStyleLayerAndroid extends StyleLayerAndroid<jni.FillLayer>
 
   @override
   PropertyValue<bool> get antialias =>
-      jLayer.getFillAntialias().toDart(releaseOriginal: true) ??
+      jLayer.fillAntialias.toDart(releaseOriginal: true) ??
       FillStyleLayer.defaultAntialias;
 
   @override
@@ -66,7 +66,7 @@ class FillStyleLayerAndroid extends StyleLayerAndroid<jni.FillLayer>
 
   @override
   PropertyValue<Color> get color =>
-      jLayer.getFillColor().toDartColor(releaseOriginal: true) ??
+      jLayer.fillColor.toDartColor(releaseOriginal: true) ??
       FillStyleLayer.defaultColor;
 
   @override
@@ -84,7 +84,7 @@ class FillStyleLayerAndroid extends StyleLayerAndroid<jni.FillLayer>
 
   @override
   PropertyValue<double> get opacity =>
-      jLayer.getFillOpacity().toDart(releaseOriginal: true) ??
+      jLayer.fillOpacity.toDart(releaseOriginal: true) ??
       FillStyleLayer.defaultOpacity;
 
   @override
@@ -101,7 +101,7 @@ class FillStyleLayerAndroid extends StyleLayerAndroid<jni.FillLayer>
 
   @override
   PropertyValue<Color> get outlineColor =>
-      jLayer.getFillOutlineColor().toDartColor(releaseOriginal: true) ??
+      jLayer.fillOutlineColor.toDartColor(releaseOriginal: true) ??
       FillStyleLayer.defaultOutlineColor;
 
   @override
@@ -119,7 +119,7 @@ class FillStyleLayerAndroid extends StyleLayerAndroid<jni.FillLayer>
 
   @override
   PropertyValue<String>? get pattern =>
-      jLayer.getFillPattern().toDart(releaseOriginal: true);
+      jLayer.fillPattern.toDart(releaseOriginal: true);
 
   @override
   set pattern(PropertyValue<String>? property) => using((arena) {
@@ -136,7 +136,7 @@ class FillStyleLayerAndroid extends StyleLayerAndroid<jni.FillLayer>
 
   @override
   PropertyValue<Offset> get translate =>
-      jLayer.getFillTranslate().toDartOffset(releaseOriginal: true) ??
+      jLayer.fillTranslate.toDartOffset(releaseOriginal: true) ??
       StyleLayerWithTranslate.defaultTranslate;
 
   @override
@@ -153,7 +153,7 @@ class FillStyleLayerAndroid extends StyleLayerAndroid<jni.FillLayer>
 
   @override
   PropertyValue<ReferenceSpace> get translateAnchor =>
-      jLayer.getFillTranslateAnchor().toDartReferenceSpace(
+      jLayer.fillTranslateAnchor.toDartReferenceSpace(
         releaseOriginal: true,
       ) ??
       StyleLayerWithTranslate.defaultTranslateAnchor;
@@ -174,26 +174,26 @@ class FillStyleLayerAndroid extends StyleLayerAndroid<jni.FillLayer>
 
   @override
   String? get sourceLayerId =>
-      jLayer.getSourceLayer().toDartString(releaseOriginal: true);
+      jLayer.sourceLayer.toDartString(releaseOriginal: true);
 
   @override
   set sourceLayerId(String? value) => using((arena) {
     final jValue = value?.toJString();
     jValue?.releasedBy(arena);
-    jLayer.setSourceLayer(jValue);
+    jLayer.sourceLayer = jValue;
   });
 
   @override
   PropertyValue<double>? get sortKey =>
-      jLayer.getFillSortKey().toDart(releaseOriginal: true);
+      jLayer.fillSortKey.toDart(releaseOriginal: true);
 
   @override
   String get sourceId =>
-      jLayer.getSourceId().toDartString(releaseOriginal: true);
+      jLayer.sourceId.toDartString(releaseOriginal: true);
 
   @override
   Expression? get filter => using((arena) {
-    final jFilter = jLayer.getFilter()?..releasedBy(arena);
+    final jFilter = jLayer.filter?..releasedBy(arena);
     if (jFilter == null) return null;
     return jFilter.toDart(releaseOriginal: true);
   });
@@ -214,6 +214,6 @@ class FillStyleLayerAndroid extends StyleLayerAndroid<jni.FillLayer>
   @override
   set filter(Expression expression) => using((arena) {
     final jFilter = expression.toJExpression(arena)?..releasedBy(arena);
-    if (jFilter != null) jLayer.setFilter(jFilter);
+    if (jFilter != null) jLayer.filter = jFilter;
   });
 }

@@ -150,20 +150,20 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   String get sourceId =>
-      jLayer.getSourceId().toDartString(releaseOriginal: true);
+      jLayer.sourceId.toDartString(releaseOriginal: true);
 
   @override
   String? get sourceLayerId =>
-      jLayer.getSourceLayer().toDartString(releaseOriginal: true);
+      jLayer.sourceLayer.toDartString(releaseOriginal: true);
 
   @override
   set sourceLayerId(String value) => using((arena) {
-    jLayer.setSourceLayer(value.toJString()..releasedBy(arena));
+    jLayer.sourceLayer = (value.toJString()..releasedBy(arena));
   });
 
   @override
   Expression? get filter => using((arena) {
-    final jFilter = jLayer.getFilter()?..releasedBy(arena);
+    final jFilter = jLayer.filter?..releasedBy(arena);
     return jFilter?.toDart(releaseOriginal: true);
   });
 
@@ -171,12 +171,12 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
   set filter(Expression expression) => using((arena) {
     final jFilter = expression.toJExpression(arena);
     if (jFilter == null) return;
-    jLayer.setFilter(jFilter);
+    jLayer.filter = jFilter;
   });
 
   @override
   PropertyValue<double>? get sortKey =>
-      jLayer.getSymbolSortKey().toDart(releaseOriginal: true);
+      jLayer.symbolSortKey.toDart(releaseOriginal: true);
 
   @override
   set sortKey(PropertyValue<double>? property) => using((arena) {
@@ -194,7 +194,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<SymbolPlacement> get placement =>
-      jLayer.getSymbolPlacement().toDartEnum(
+      jLayer.symbolPlacement.toDartEnum(
         values: SymbolPlacement.values,
         releaseOriginal: true,
       ) ??
@@ -215,7 +215,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<double> get spacing =>
-      jLayer.getSymbolSpacing().toDart(releaseOriginal: true) ??
+      jLayer.symbolSpacing.toDart(releaseOriginal: true) ??
       SymbolStyleLayer.defaultSpacing;
 
   @override
@@ -233,7 +233,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<bool> get avoidEdges =>
-      jLayer.getSymbolAvoidEdges().toDart(releaseOriginal: true) ??
+      jLayer.symbolAvoidEdges.toDart(releaseOriginal: true) ??
       SymbolStyleLayer.defaultAvoidEdges;
 
   @override
@@ -251,7 +251,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<SymbolZOrder> get zOrder =>
-      jLayer.getSymbolZOrder().toDartEnum(
+      jLayer.symbolZOrder.toDartEnum(
         values: SymbolZOrder.values,
         releaseOriginal: true,
       ) ??
@@ -272,7 +272,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<bool> get iconAllowOverlap =>
-      jLayer.getIconAllowOverlap().toDart(releaseOriginal: true) ??
+      jLayer.iconAllowOverlap.toDart(releaseOriginal: true) ??
       SymbolStyleLayer.defaultIconAllowOverlap;
 
   @override
@@ -304,7 +304,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<bool> get iconIgnorePlacement =>
-      jLayer.getIconIgnorePlacement().toDart(releaseOriginal: true) ??
+      jLayer.iconIgnorePlacement.toDart(releaseOriginal: true) ??
       SymbolStyleLayer.defaultIconIgnorePlacement;
 
   @override
@@ -322,7 +322,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<bool> get iconOptional =>
-      jLayer.getIconOptional().toDart(releaseOriginal: true) ??
+      jLayer.iconOptional.toDart(releaseOriginal: true) ??
       SymbolStyleLayer.defaultIconOptional;
 
   @override
@@ -340,7 +340,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<IconRotationAlignment> get iconRotationAlignment =>
-      jLayer.getIconRotationAlignment().toDartEnum(
+      jLayer.iconRotationAlignment.toDartEnum(
         values: IconRotationAlignment.values,
         releaseOriginal: true,
       ) ??
@@ -362,7 +362,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<double> get iconSize =>
-      jLayer.getIconSize().toDart(releaseOriginal: true) ??
+      jLayer.iconSize.toDart(releaseOriginal: true) ??
       SymbolStyleLayer.defaultIconSize;
 
   @override
@@ -379,7 +379,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<IconTextFit> get iconTextFit =>
-      jLayer.getIconTextFit().toDartEnum(
+      jLayer.iconTextFit.toDartEnum(
         values: IconTextFit.values,
         releaseOriginal: true,
       ) ??
@@ -400,7 +400,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<EdgeInsets> get iconTextFitPadding =>
-      jLayer.getIconTextFitPadding().toDartEdgeInsets(releaseOriginal: true) ??
+      jLayer.iconTextFitPadding.toDartEdgeInsets(releaseOriginal: true) ??
       SymbolStyleLayer.defaultIconTextFitPadding;
 
   @override
@@ -418,7 +418,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<String>? get iconImage =>
-      jLayer.getIconImage().toDart(releaseOriginal: true);
+      jLayer.iconImage.toDart(releaseOriginal: true);
 
   @override
   set iconImage(PropertyValue<String>? property) => using((arena) {
@@ -435,7 +435,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<double> get iconRotate =>
-      jLayer.getIconRotate().toDart(releaseOriginal: true) ??
+      jLayer.iconRotate.toDart(releaseOriginal: true) ??
       SymbolStyleLayer.defaultIconRotate;
 
   @override
@@ -452,7 +452,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<EdgeInsets> get iconPadding =>
-      jLayer.getIconPadding().toDartEdgeInsets(releaseOriginal: true) ??
+      jLayer.iconPadding.toDartEdgeInsets(releaseOriginal: true) ??
       SymbolStyleLayer.defaultIconPadding;
 
   @override
@@ -470,7 +470,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<bool> get iconKeepUpright =>
-      jLayer.getIconKeepUpright().toDart(releaseOriginal: true) ??
+      jLayer.iconKeepUpright.toDart(releaseOriginal: true) ??
       SymbolStyleLayer.defaultIconKeepUpright;
 
   @override
@@ -488,7 +488,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<Offset> get iconOffset =>
-      jLayer.getIconOffset().toDartOffset(releaseOriginal: true) ??
+      jLayer.iconOffset.toDartOffset(releaseOriginal: true) ??
       SymbolStyleLayer.defaultIconOffset;
 
   @override
@@ -507,7 +507,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<IconAnchor> get iconAnchor =>
-      jLayer.getIconAnchor().toDartEnum(
+      jLayer.iconAnchor.toDartEnum(
         values: IconAnchor.values,
         releaseOriginal: true,
       ) ??
@@ -528,7 +528,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<IconPitchAlignment> get iconPitchAlignment =>
-      jLayer.getIconPitchAlignment().toDartEnum(
+      jLayer.iconPitchAlignment.toDartEnum(
         values: IconPitchAlignment.values,
         releaseOriginal: true,
       ) ??
@@ -550,7 +550,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<TextPitchAlignment> get textPitchAlignment =>
-      jLayer.getTextPitchAlignment().toDartEnum(
+      jLayer.textPitchAlignment.toDartEnum(
         values: TextPitchAlignment.values,
         releaseOriginal: true,
       ) ??
@@ -572,7 +572,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<TextRotationAlignment> get textRotationAlignment =>
-      jLayer.getTextRotationAlignment().toDartEnum(
+      jLayer.textRotationAlignment.toDartEnum(
         values: TextRotationAlignment.values,
         releaseOriginal: true,
       ) ??
@@ -594,9 +594,9 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<String> get textField => using((arena) {
-    final jProperty = jLayer.getTextField()..releasedBy(arena);
-    if (jProperty.isExpression()) {
-      final jExpression = jProperty.getExpression()?..releasedBy(arena);
+    final jProperty = jLayer.textField..releasedBy(arena);
+    if (jProperty.isExpression) {
+      final jExpression = jProperty.expression?..releasedBy(arena);
       final expression = jExpression!.toDart(releaseOriginal: true);
       return PropertyValue.expression(expression);
     }
@@ -620,7 +620,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<List<String>> get textFont =>
-      jLayer.getTextFont().toDartStringList(releaseOriginal: true) ??
+      jLayer.textFont.toDartStringList(releaseOriginal: true) ??
       SymbolStyleLayer.defaultTextFont;
 
   @override
@@ -639,7 +639,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<double> get textSize =>
-      jLayer.getTextSize().toDart(releaseOriginal: true) ??
+      jLayer.textSize.toDart(releaseOriginal: true) ??
       SymbolStyleLayer.defaultTextSize;
 
   @override
@@ -656,7 +656,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<double> get textMaxWidth =>
-      jLayer.getTextMaxWidth().toDart(releaseOriginal: true) ??
+      jLayer.textMaxWidth.toDart(releaseOriginal: true) ??
       SymbolStyleLayer.defaultTextMaxWidth;
 
   @override
@@ -673,7 +673,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<double> get textLineHeight =>
-      jLayer.getTextLineHeight().toDart(releaseOriginal: true) ??
+      jLayer.textLineHeight.toDart(releaseOriginal: true) ??
       SymbolStyleLayer.defaultTextLineHeight;
 
   @override
@@ -691,7 +691,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<double> get textLetterSpacing =>
-      jLayer.getTextLetterSpacing().toDart(releaseOriginal: true) ??
+      jLayer.textLetterSpacing.toDart(releaseOriginal: true) ??
       SymbolStyleLayer.defaultTextLetterSpacing;
 
   @override
@@ -709,7 +709,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<TextJustify> get textJustify =>
-      jLayer.getTextJustify().toDartEnum(
+      jLayer.textJustify.toDartEnum(
         values: TextJustify.values,
         releaseOriginal: true,
       ) ??
@@ -730,7 +730,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<double> get textRadialOffset =>
-      jLayer.getTextRadialOffset().toDart(releaseOriginal: true) ??
+      jLayer.textRadialOffset.toDart(releaseOriginal: true) ??
       SymbolStyleLayer.defaultTextRadialOffset;
 
   @override
@@ -748,14 +748,14 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<List<IconAnchor>>? get textVariableAnchor => using((arena) {
-    final jProperty = jLayer.getTextVariableAnchor()..releasedBy(arena);
-    if (jProperty.isNull$1()) return null;
-    if (jProperty.isExpression()) {
-      final jExpression = jProperty.getExpression()?..releasedBy(arena);
+    final jProperty = jLayer.textVariableAnchor..releasedBy(arena);
+    if (jProperty.isNull$1) return null;
+    if (jProperty.isExpression) {
+      final jExpression = jProperty.expression?..releasedBy(arena);
       final expression = jExpression?.toDart(releaseOriginal: true);
       return expression == null ? null : PropertyValue.expression(expression);
     }
-    final jArray = jProperty.getValue();
+    final jArray = jProperty.value;
     if (jArray == null) return null;
     final values = <IconAnchor>[];
     for (var i = 0; i < jArray.length; i++) {
@@ -778,7 +778,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
           arena: arena,
           onExpression: jni.PropertyFactory.textVariableAnchor$1,
           onValue: (value) {
-            final jArray = JArray(JString.nullableType, value.length);
+            final jArray = JArray.withLength(JString.type, value.length);
             for (var i = 0; i < value.length; i++) {
               jArray[i] = value[i].name.toJString()..releasedBy(arena);
             }
@@ -794,15 +794,15 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
   PropertyValue<Map<String, Offset>>? get textVariableAnchorOffset => using((
     arena,
   ) {
-    final jProperty = jLayer.getTextVariableAnchorOffset()..releasedBy(arena);
-    if (jProperty.isNull$1()) return null;
-    if (jProperty.isExpression()) {
-      final jExpression = jProperty.getExpression()?..releasedBy(arena);
+    final jProperty = jLayer.textVariableAnchorOffset..releasedBy(arena);
+    if (jProperty.isNull$1) return null;
+    if (jProperty.isExpression) {
+      final jExpression = jProperty.expression?..releasedBy(arena);
       final expression = jExpression?.toDart(releaseOriginal: true);
       if (expression == null) return null;
       return PropertyValue.expression(expression);
     }
-    final jArray = jProperty.getValue()?..releasedBy(arena);
+    final jArray = jProperty.value?..releasedBy(arena);
     if (jArray == null) return null;
     final values = <String, Offset>{};
     for (var i = 0; i < jArray.length; i += 2) {
@@ -810,7 +810,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
       final entry1 = jArray[i + 1]?..releasedBy(arena);
       if (entry0 == null || entry1 == null) continue;
       final key = entry0.as(JString.type).toDartString(releaseOriginal: true);
-      final jOffset = entry1.as(JArray.type(JFloat.nullableType));
+      final jOffset = entry1.as(JArray.type(JFloat.type));
       final offset = jOffset.toOffset(releaseOriginal: true);
       values[key] = offset;
     }
@@ -824,7 +824,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
           arena: arena,
           onExpression: jni.PropertyFactory.textVariableAnchorOffset$1,
           onValue: (value) {
-            final jArray = JArray(JObject.nullableType, value.length * 2);
+            final jArray = JArray.withLength(JObject.type, value.length * 2);
             var i = 0;
             for (final entry in value.entries) {
               jArray[i++] = entry.key.toJString()..releasedBy(arena);
@@ -841,7 +841,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<TextAnchor> get textAnchor =>
-      jLayer.getTextAnchor().toDartEnum(
+      jLayer.textAnchor.toDartEnum(
         values: TextAnchor.values,
         releaseOriginal: true,
       ) ??
@@ -862,7 +862,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<double> get textMaxAngle =>
-      jLayer.getTextMaxAngle().toDart(releaseOriginal: true) ??
+      jLayer.textMaxAngle.toDart(releaseOriginal: true) ??
       SymbolStyleLayer.defaultTextMaxAngle;
 
   @override
@@ -879,14 +879,14 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<List<TextWritingMode>>? get textWritingMode => using((arena) {
-    final jProperty = jLayer.getTextWritingMode()..releasedBy(arena);
-    if (jProperty.isNull$1()) return null;
-    if (jProperty.isExpression()) {
-      final jExpression = jProperty.getExpression()?..releasedBy(arena);
+    final jProperty = jLayer.textWritingMode..releasedBy(arena);
+    if (jProperty.isNull$1) return null;
+    if (jProperty.isExpression) {
+      final jExpression = jProperty.expression?..releasedBy(arena);
       final expression = jExpression?.toDart(releaseOriginal: true);
       return expression == null ? null : PropertyValue.expression(expression);
     }
-    final jArray = jProperty.getValue();
+    final jArray = jProperty.value;
     if (jArray == null) return null;
     final values = <TextWritingMode>[];
     for (var i = 0; i < jArray.length; i++) {
@@ -909,7 +909,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
           arena: arena,
           onExpression: jni.PropertyFactory.textWritingMode$1,
           onValue: (value) {
-            final jArray = JArray(JString.nullableType, value.length);
+            final jArray = JArray.withLength(JString.type, value.length);
             for (var i = 0; i < value.length; i++) {
               jArray[i] = value[i].name.toJString()..releasedBy(arena);
             }
@@ -923,7 +923,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<double> get textRotate =>
-      jLayer.getTextRotate().toDart(releaseOriginal: true) ??
+      jLayer.textRotate.toDart(releaseOriginal: true) ??
       SymbolStyleLayer.defaultTextRotate;
 
   @override
@@ -940,7 +940,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<double> get textPadding =>
-      jLayer.getTextPadding().toDart(releaseOriginal: true) ??
+      jLayer.textPadding.toDart(releaseOriginal: true) ??
       SymbolStyleLayer.defaultTextPadding;
 
   @override
@@ -957,7 +957,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<bool> get textKeepUpright =>
-      jLayer.getTextKeepUpright().toDart(releaseOriginal: true) ??
+      jLayer.textKeepUpright.toDart(releaseOriginal: true) ??
       SymbolStyleLayer.defaultTextKeepUpright;
 
   @override
@@ -975,7 +975,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<TextTransform> get textTransform =>
-      jLayer.getTextTransform().toDartEnum(
+      jLayer.textTransform.toDartEnum(
         values: TextTransform.values,
         releaseOriginal: true,
       ) ??
@@ -996,7 +996,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<Offset> get textOffset =>
-      jLayer.getTextOffset().toDartOffset(releaseOriginal: true) ??
+      jLayer.textOffset.toDartOffset(releaseOriginal: true) ??
       SymbolStyleLayer.defaultTextOffset;
 
   @override
@@ -1015,7 +1015,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<bool> get textAllowOverlap =>
-      jLayer.getTextAllowOverlap().toDart(releaseOriginal: true) ??
+      jLayer.textAllowOverlap.toDart(releaseOriginal: true) ??
       SymbolStyleLayer.defaultTextAllowOverlap;
 
   @override
@@ -1047,7 +1047,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<bool> get textIgnorePlacement =>
-      jLayer.getTextIgnorePlacement().toDart(releaseOriginal: true) ??
+      jLayer.textIgnorePlacement.toDart(releaseOriginal: true) ??
       SymbolStyleLayer.defaultTextIgnorePlacement;
 
   @override
@@ -1065,7 +1065,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<bool> get textOptional =>
-      jLayer.getTextOptional().toDart(releaseOriginal: true) ??
+      jLayer.textOptional.toDart(releaseOriginal: true) ??
       SymbolStyleLayer.defaultTextOptional;
 
   @override
@@ -1083,7 +1083,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<double> get iconOpacity =>
-      jLayer.getIconOpacity().toDart(releaseOriginal: true) ??
+      jLayer.iconOpacity.toDart(releaseOriginal: true) ??
       SymbolStyleLayer.defaultIconOpacity;
 
   @override
@@ -1100,7 +1100,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<Color> get iconColor =>
-      jLayer.getIconColor().toDartColor(releaseOriginal: true) ??
+      jLayer.iconColor.toDartColor(releaseOriginal: true) ??
       SymbolStyleLayer.defaultIconColor;
 
   @override
@@ -1116,7 +1116,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<Color> get iconHaloColor =>
-      jLayer.getIconHaloColor().toDartColor(releaseOriginal: true) ??
+      jLayer.iconHaloColor.toDartColor(releaseOriginal: true) ??
       SymbolStyleLayer.defaultIconHaloColor;
 
   @override
@@ -1132,7 +1132,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<double> get iconHaloWidth =>
-      jLayer.getIconHaloWidth().toDart(releaseOriginal: true) ??
+      jLayer.iconHaloWidth.toDart(releaseOriginal: true) ??
       SymbolStyleLayer.defaultIconHaloWidth;
 
   @override
@@ -1150,7 +1150,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<double> get iconHaloBlur =>
-      jLayer.getIconHaloBlur().toDart(releaseOriginal: true) ??
+      jLayer.iconHaloBlur.toDart(releaseOriginal: true) ??
       SymbolStyleLayer.defaultIconHaloBlur;
 
   @override
@@ -1167,7 +1167,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<Offset> get iconTranslate =>
-      jLayer.getIconTranslate().toDartOffset(releaseOriginal: true) ??
+      jLayer.iconTranslate.toDartOffset(releaseOriginal: true) ??
       SymbolStyleLayer.defaultIconTranslate;
 
   @override
@@ -1186,7 +1186,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<ReferenceSpace> get iconTranslateAnchor =>
-      jLayer.getIconTranslateAnchor().toDartReferenceSpace(
+      jLayer.iconTranslateAnchor.toDartReferenceSpace(
         releaseOriginal: true,
       ) ??
       SymbolStyleLayer.defaultIconTranslateAnchor;
@@ -1209,7 +1209,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<double> get textOpacity =>
-      jLayer.getTextOpacity().toDart(releaseOriginal: true) ??
+      jLayer.textOpacity.toDart(releaseOriginal: true) ??
       SymbolStyleLayer.defaultTextOpacity;
 
   @override
@@ -1226,7 +1226,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<Color> get textColor =>
-      jLayer.getTextColor().toDartColor(releaseOriginal: true) ??
+      jLayer.textColor.toDartColor(releaseOriginal: true) ??
       SymbolStyleLayer.defaultTextColor;
 
   @override
@@ -1242,7 +1242,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<Color> get textHaloColor =>
-      jLayer.getTextHaloColor().toDartColor(releaseOriginal: true) ??
+      jLayer.textHaloColor.toDartColor(releaseOriginal: true) ??
       SymbolStyleLayer.defaultTextHaloColor;
 
   @override
@@ -1258,7 +1258,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<double> get textHaloWidth =>
-      jLayer.getTextHaloWidth().toDart(releaseOriginal: true) ??
+      jLayer.textHaloWidth.toDart(releaseOriginal: true) ??
       SymbolStyleLayer.defaultTextHaloWidth;
 
   @override
@@ -1276,7 +1276,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<double> get textHaloBlur =>
-      jLayer.getTextHaloBlur().toDart(releaseOriginal: true) ??
+      jLayer.textHaloBlur.toDart(releaseOriginal: true) ??
       SymbolStyleLayer.defaultTextHaloBlur;
 
   @override
@@ -1293,7 +1293,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<Offset> get textTranslate =>
-      jLayer.getTextTranslate().toDartOffset(releaseOriginal: true) ??
+      jLayer.textTranslate.toDartOffset(releaseOriginal: true) ??
       SymbolStyleLayer.defaultTextTranslate;
 
   @override
@@ -1312,7 +1312,7 @@ class SymbolStyleLayerAndroid extends StyleLayerAndroid<jni.SymbolLayer>
 
   @override
   PropertyValue<ReferenceSpace> get textTranslateAnchor =>
-      jLayer.getTextTranslateAnchor().toDartReferenceSpace(
+      jLayer.textTranslateAnchor.toDartReferenceSpace(
         releaseOriginal: true,
       ) ??
       SymbolStyleLayer.defaultTextTranslateAnchor;

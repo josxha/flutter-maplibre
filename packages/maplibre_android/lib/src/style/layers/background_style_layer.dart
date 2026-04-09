@@ -30,7 +30,7 @@ class BackgroundStyleLayerAndroid extends StyleLayerAndroid<jni.BackgroundLayer>
 
   @override
   PropertyValue<double> get opacity =>
-      jLayer.getBackgroundOpacity().toDart(releaseOriginal: true) ??
+      jLayer.backgroundOpacity.toDart(releaseOriginal: true) ??
       BackgroundStyleLayer.defaultOpacity;
 
   @override
@@ -48,7 +48,7 @@ class BackgroundStyleLayerAndroid extends StyleLayerAndroid<jni.BackgroundLayer>
 
   @override
   PropertyValue<String>? get pattern =>
-      jLayer.getBackgroundPattern().toDart(releaseOriginal: true);
+      jLayer.backgroundPattern.toDart(releaseOriginal: true);
 
   @override
   set pattern(PropertyValue<String>? property) => using((arena) {
@@ -66,7 +66,7 @@ class BackgroundStyleLayerAndroid extends StyleLayerAndroid<jni.BackgroundLayer>
 
   @override
   PropertyValue<Color> get color =>
-      jLayer.getBackgroundColor().toDartColor() ??
+      jLayer.backgroundColor.toDartColor() ??
       BackgroundStyleLayer.defaultColor;
 
   @override

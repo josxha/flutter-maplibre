@@ -53,7 +53,7 @@ class StyleControllerAndroid extends StyleController {
           source.tileSize,
         );
         // TODO apply other properties
-        jSource.setVolatile(source.volatile.toJBoolean()..releasedBy(arena));
+        jSource.volatile = source.volatile.toJBoolean()..releasedBy(arena);
       case RasterSource():
         if (source.url case final String url) {
           jSource = jni.RasterSource.new$4(
@@ -65,27 +65,26 @@ class StyleControllerAndroid extends StyleController {
           final tiles = source.tiles!.map(
             (e) => e.toJString()..releasedBy(arena),
           );
-          final tilesArray = JArray.of(JString.nullableType, tiles)
-            ..releasedBy(arena);
+          final tilesArray = JArray.of(JString.type, tiles)..releasedBy(arena);
           final tileSet =
               jni.TileSet(
                   '{}'.toJString()..releasedBy(arena),
                   tilesArray.as(JArray.type(JString.type))..releasedBy(arena),
                 )
                 ..releasedBy(arena)
-                ..setMaxZoom(source.maxZoom)
-                ..setMinZoom(source.minZoom);
+                ..maxZoom = source.maxZoom.toJFloat()
+                ..minZoom = source.minZoom.toJFloat();
           jSource = jni.RasterSource.new$6(jId, tileSet, source.tileSize);
         }
         // TODO apply other properties
-        jSource.setVolatile(source.volatile.toJBoolean()..releasedBy(arena));
+        jSource.volatile = source.volatile.toJBoolean()..releasedBy(arena);
       case VectorSource():
         jSource = jni.VectorSource.new$3(
           jId,
           source.url!.toJString()..releasedBy(arena),
         );
         // TODO apply other properties
-        jSource.setVolatile(source.volatile.toJBoolean()..releasedBy(arena));
+        jSource.volatile = source.volatile.toJBoolean()..releasedBy(arena);
       case ImageSource():
         // https://maplibre.org/maplibre-native/android/api/-map-libre%20-native%20-android/org.maplibre.android.geometry/-lat-lng-quad/index.html
         final jniQuad = jni.LatLngQuad(
@@ -120,7 +119,7 @@ class StyleControllerAndroid extends StyleController {
   Future<void> addImage(String id, Uint8List bytes) async => using((arena) {
     final jId = id.toJString()..releasedBy(arena);
     final jBitmap = jni.BitmapFactory.decodeByteArray(
-      JByteArray.from(bytes)..releasedBy(arena),
+      JByteArray.of(bytes)..releasedBy(arena),
       0,
       bytes.length,
     );
@@ -138,11 +137,8 @@ class StyleControllerAndroid extends StyleController {
     required String id,
     required String data,
   }) async {
-    final source = _jStyle.getSourceAs(
-      id.toJString(),
-      T: jni.GeoJsonSource.type,
-    )!;
-    source.setGeoJson$3(data.toJString());
+    final source = _jStyle.getSourceAs<jni.GeoJsonSource>(id.toJString());
+    source?.geoJson$3 = data.toJString();
   }
 
   @override
@@ -151,10 +147,11 @@ class StyleControllerAndroid extends StyleController {
   @override
   List<String> getAttributionsSync() => using((arena) {
     try {
-      final jSources = _jStyle.getSources()..releasedBy(arena);
+      final jSources = _jStyle.sources..releasedBy(arena);
       final attributions = <String>[];
-      for (final jSource in jSources) {
-        final jAttribution = jSource?.getAttribution();
+      for (var i = 0; i < jSources.size(); i++) {
+        final jSource = jSources.get(i);
+        final jAttribution = jSource?.attribution;
         if (jAttribution == null) continue;
         final attribution = jAttribution.toDartString(releaseOriginal: true);
         if (attribution.trim().isEmpty) continue;
@@ -169,9 +166,10 @@ class StyleControllerAndroid extends StyleController {
 
   @override
   List<String> getLayerIds() {
-    final layers = _jStyle.getLayers();
+    final layers = _jStyle.layers;
     return layers
-        .map((e) => e?.getId().toDartString(releaseOriginal: true))
+        .asDart()
+        .map((e) => e?.id.toDartString(releaseOriginal: true))
         .nonNulls
         .toList(growable: false);
   }
@@ -181,7 +179,7 @@ class StyleControllerAndroid extends StyleController {
     if (!_jStyle.isReleased) _jStyle.release();
   }
 
-  JList<jni.Layer?> _getLayers() => _jStyle.getLayers();
+  JList<jni.Layer?> _getLayers() => _jStyle.layers;
 
   @override
   void setProjection(MapProjection projection) {

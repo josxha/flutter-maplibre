@@ -14,8 +14,8 @@ class HillshadeStyleLayerWeb extends StyleLayerWeb
     required PropertyValue<NumberArray> illuminationAltitude,
     required PropertyValue<IlluminationAnchor> illuminationAnchor,
     required PropertyValue<double> exaggeration,
-    required PropertyValue<Color> shadowColor,
-    required PropertyValue<Color> highlightColor,
+    required PropertyValue<List<Color>> shadowColor,
+    required PropertyValue<List<Color>> highlightColor,
     required PropertyValue<Color> accentColor,
     required PropertyValue<HillshadeMethod> method,
   }) : super.fromNativeLayer(
@@ -100,28 +100,28 @@ class HillshadeStyleLayerWeb extends StyleLayerWeb
       );
 
   @override
-  PropertyValue<Color> get shadowColor =>
+  PropertyValue<List<Color>> get shadowColor =>
       requireMap
           .getPaintProperty(id, 'hillshade-shadow-color')
-          .toColorPropertyValue() ??
+          .toColorListPropertyValue() ??
       HillshadeStyleLayer.defaultShadowColor;
 
   @override
-  set shadowColor(PropertyValue<Color> property) => requireMap.setPaintProperty(
+  set shadowColor(PropertyValue<List<Color>> property) => requireMap.setPaintProperty(
     id,
     'hillshade-shadow-color',
     property.toJson().jsify(),
   );
 
   @override
-  PropertyValue<Color> get highlightColor =>
+  PropertyValue<List<Color>> get highlightColor =>
       requireMap
           .getPaintProperty(id, 'hillshade-highlight-color')
-          .toColorPropertyValue() ??
+          .toColorListPropertyValue() ??
       HillshadeStyleLayer.defaultHighlightColor;
 
   @override
-  set highlightColor(PropertyValue<Color> property) =>
+  set highlightColor(PropertyValue<List<Color>> property) =>
       requireMap.setPaintProperty(
         id,
         'hillshade-highlight-color',

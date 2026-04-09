@@ -50,7 +50,7 @@ class FillExtrusionStyleLayerAndroid
 
   @override
   PropertyValue<double> get base =>
-      jLayer.getFillExtrusionBase().toDart(releaseOriginal: true) ??
+      jLayer.fillExtrusionBase.toDart(releaseOriginal: true) ??
       FillExtrusionStyleLayer.defaultBase;
 
   @override
@@ -68,7 +68,7 @@ class FillExtrusionStyleLayerAndroid
 
   @override
   PropertyValue<Color> get color =>
-      jLayer.getFillExtrusionColor().toDartColor(releaseOriginal: true) ??
+      jLayer.fillExtrusionColor.toDartColor(releaseOriginal: true) ??
       FillExtrusionStyleLayer.defaultColor;
 
   @override
@@ -86,7 +86,7 @@ class FillExtrusionStyleLayerAndroid
 
   @override
   Expression? get filter => using((arena) {
-    final jFilter = jLayer.getFilter()?..releasedBy(arena);
+    final jFilter = jLayer.filter?..releasedBy(arena);
     if (jFilter == null) return null;
     return jFilter.toDart(releaseOriginal: true);
   });
@@ -94,12 +94,12 @@ class FillExtrusionStyleLayerAndroid
   @override
   set filter(Expression expression) => using((arena) {
     final jFilter = expression.toJExpression(arena)?..releasedBy(arena);
-    if (jFilter != null) jLayer.setFilter(jFilter);
+    if (jFilter != null) jLayer.filter = jFilter;
   });
 
   @override
   PropertyValue<double> get height =>
-      jLayer.getFillExtrusionHeight().toDart(releaseOriginal: true) ??
+      jLayer.fillExtrusionHeight.toDart(releaseOriginal: true) ??
       FillExtrusionStyleLayer.defaultHeight;
 
   @override
@@ -117,7 +117,7 @@ class FillExtrusionStyleLayerAndroid
 
   @override
   PropertyValue<double> get opacity =>
-      jLayer.getFillExtrusionOpacity().toDart(releaseOriginal: true) ??
+      jLayer.fillExtrusionOpacity.toDart(releaseOriginal: true) ??
       FillExtrusionStyleLayer.defaultOpacity;
 
   @override
@@ -135,7 +135,7 @@ class FillExtrusionStyleLayerAndroid
 
   @override
   PropertyValue<String>? get pattern =>
-      jLayer.getFillExtrusionPattern().toDart(releaseOriginal: true);
+      jLayer.fillExtrusionPattern.toDart(releaseOriginal: true);
 
   @override
   set pattern(PropertyValue<String>? property) => using((arena) {
@@ -153,18 +153,18 @@ class FillExtrusionStyleLayerAndroid
 
   @override
   String? get sourceLayerId =>
-      jLayer.getSourceLayer().toDartString(releaseOriginal: true);
+      jLayer.sourceLayer.toDartString(releaseOriginal: true);
 
   @override
   set sourceLayerId(String? value) => using((arena) {
     final jValue = value?.toJString();
     jValue?.releasedBy(arena);
-    jLayer.setSourceLayer(jValue);
+    jLayer.sourceLayer = jValue;
   });
 
   @override
   PropertyValue<Offset> get translate =>
-      jLayer.getFillExtrusionTranslate().toDartOffset(releaseOriginal: true) ??
+      jLayer.fillExtrusionTranslate.toDartOffset(releaseOriginal: true) ??
       StyleLayerWithTranslate.defaultTranslate;
 
   @override
@@ -182,7 +182,7 @@ class FillExtrusionStyleLayerAndroid
 
   @override
   PropertyValue<ReferenceSpace> get translateAnchor =>
-      jLayer.getFillExtrusionTranslateAnchor().toDartReferenceSpace(
+      jLayer.fillExtrusionTranslateAnchor.toDartReferenceSpace(
         releaseOriginal: true,
       ) ??
       StyleLayerWithTranslate.defaultTranslateAnchor;
@@ -202,7 +202,7 @@ class FillExtrusionStyleLayerAndroid
 
   @override
   PropertyValue<bool> get verticalGradient =>
-      jLayer.getFillExtrusionVerticalGradient().toDart(releaseOriginal: true) ??
+      jLayer.fillExtrusionVerticalGradient.toDart(releaseOriginal: true) ??
       FillExtrusionStyleLayer.defaultVerticalGradient;
 
   @override
@@ -220,5 +220,5 @@ class FillExtrusionStyleLayerAndroid
 
   @override
   String get sourceId =>
-      jLayer.getSourceId().toDartString(releaseOriginal: true);
+      jLayer.sourceId.toDartString(releaseOriginal: true);
 }

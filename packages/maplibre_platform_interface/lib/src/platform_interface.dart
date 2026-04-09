@@ -172,8 +172,8 @@ class MapLibrePlatform extends PlatformInterface {
     required PropertyValue<NumberArray> illuminationAltitude,
     required PropertyValue<IlluminationAnchor> illuminationAnchor,
     required PropertyValue<double> exaggeration,
-    required PropertyValue<Color> shadowColor,
-    required PropertyValue<Color> highlightColor,
+    required PropertyValue<List<Color>> shadowColor,
+    required PropertyValue<List<Color>> highlightColor,
     required PropertyValue<Color> accentColor,
     required PropertyValue<HillshadeMethod> method,
   }) => throw UnsupportedError(

@@ -14,8 +14,8 @@ class HillshadeStyleLayerIos extends StyleLayerIos<MLNHillshadeStyleLayer>
     // required PropertyValue<NumberArray> illuminationAltitude,
     required PropertyValue<IlluminationAnchor> illuminationAnchor,
     required PropertyValue<double> exaggeration,
-    required PropertyValue<Color> shadowColor,
-    required PropertyValue<Color> highlightColor,
+    required PropertyValue<List<Color>> shadowColor,
+    required PropertyValue<List<Color>> highlightColor,
     required PropertyValue<Color> accentColor,
     // required PropertyValue<HillshadeMethod> method,
   }) {
@@ -135,33 +135,40 @@ class HillshadeStyleLayerIos extends StyleLayerIos<MLNHillshadeStyleLayer>
   }
 
   @override
-  PropertyValue<Color> get shadowColor =>
-      ffiLayer.hillshadeShadowColor.toColorPropertyValue() ??
+  PropertyValue<List<Color>> get shadowColor =>
+      ffiLayer.hillshadeShadowColor.toColorListPropertyValue() ??
       HillshadeStyleLayer.defaultShadowColor;
 
   @override
-  set shadowColor(PropertyValue<Color> property) {
+  set shadowColor(PropertyValue<List<Color>> property) {
     if (property.isExpression) {
       ffiLayer.hillshadeShadowColor = property.expression.toNSExpression();
     } else {
       ffiLayer.hillshadeShadowColor = NSExpression.expressionForConstantValue(
-        property.value.toUIColor(),
+        property.value
+            .map((color) => color.toUIColor())
+            .toList(growable: false)
+            .toNSObject(),
       );
     }
   }
 
   @override
-  PropertyValue<Color> get highlightColor =>
-      ffiLayer.hillshadeHighlightColor.toColorPropertyValue() ??
+  PropertyValue<List<Color>> get highlightColor =>
+      ffiLayer.hillshadeHighlightColor.toColorListPropertyValue() ??
       HillshadeStyleLayer.defaultHighlightColor;
 
   @override
-  set highlightColor(PropertyValue<Color> property) {
+  set highlightColor(PropertyValue<List<Color>> property) {
     if (property.isExpression) {
       ffiLayer.hillshadeHighlightColor = property.expression.toNSExpression();
     } else {
+      final ffiList = property.value
+          .map((color) => color.toUIColor())
+          .toList(growable: false)
+          .toNSObject();
       ffiLayer.hillshadeHighlightColor =
-          NSExpression.expressionForConstantValue(property.value.toUIColor());
+          NSExpression.expressionForConstantValue(ffiList);
     }
   }
 

@@ -132,25 +132,35 @@ extension StringMap on JSAny? {
         );
       } else {
         // rgba color string
-        final regex = RegExp(
-          r'rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d*\.?\d+))?\)',
-        );
-        final match = regex.firstMatch(property);
-        if (match != null) {
-          final r = int.parse(match.group(1)!);
-          final g = int.parse(match.group(2)!);
-          final b = int.parse(match.group(3)!);
-          final a = match.group(4) != null
-              ? (double.parse(match.group(4)!) * 255).round()
-              : 255;
-          return PropertyValue.value(Color.fromARGB(a, r, g, b));
-        } else {
+        final color = property.toColor();
+        if (color == null) {
           throw StateError('Invalid color string: $property');
         }
+        return PropertyValue.value(color);
       }
     }
     throw StateError(
       'Expected a String or List for a color property, but got ${property.runtimeType}',
+    );
+  }
+
+  /// Convert a [JSAny] to a [PropertyValue] of type List [Color].
+  PropertyValue<List<Color>>? toColorListPropertyValue() {
+    final property = dartify();
+    if (property == null) {
+      return null;
+    } else if (property is List<Object?> && property.firstOrNull is String) {
+      return PropertyValue.expression(Expression.fromJson(property));
+    } else if (property is List) {
+      final colors = property
+          .whereType<String>()
+          .map((colorStr) => colorStr.toColor())
+          .nonNulls
+          .toList(growable: false);
+      return PropertyValue.value(colors);
+    }
+    throw StateError(
+      'Expected a String or List for a color list property, but got ${property.runtimeType}',
     );
   }
 

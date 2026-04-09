@@ -38,7 +38,7 @@ class _StyleLayersHillshadePageState extends State<StyleLayersHillshadePage> {
     final hillshadeLayer = HillshadeStyleLayer(
       id: 'showcaseLayer',
       sourceId: sourceId,
-      shadowColor: const PropertyValue.value(Color(0xFF473B24)),
+      shadowColor: const PropertyValue.value([Color(0xFF473B24)]),
     );
 
     await style.addLayer(hillshadeLayer);

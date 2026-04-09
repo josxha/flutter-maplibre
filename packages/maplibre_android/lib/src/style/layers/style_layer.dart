@@ -29,24 +29,24 @@ abstract class StyleLayerAndroid<JLayer extends jni.Layer>
   final JLayer jLayer;
 
   @override
-  String get id => jLayer.getId().toDartString(releaseOriginal: true);
+  String get id => jLayer.id.toDartString(releaseOriginal: true);
 
   @override
-  double get maxZoom => jLayer.getMaxZoom();
+  double get maxZoom => jLayer.maxZoom;
 
   @override
-  set maxZoom(double value) => jLayer.setMaxZoom(value);
+  set maxZoom(double value) => jLayer.maxZoom = value;
 
   @override
-  double get minZoom => jLayer.getMinZoom();
+  double get minZoom => jLayer.minZoom;
 
   @override
-  set minZoom(double value) => jLayer.setMinZoom(value);
+  set minZoom(double value) => jLayer.minZoom = value;
 
   @override
   bool get visible => using((arena) {
-    final jProperty = jLayer.getVisibility()..releasedBy(arena);
-    final value = jProperty.getValue()?.toDartString(releaseOriginal: true);
+    final jProperty = jLayer.visibility..releasedBy(arena);
+    final value = jProperty.value?.toDartString(releaseOriginal: true);
     return !(value == 'none');
   });
 

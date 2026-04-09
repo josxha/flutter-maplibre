@@ -57,7 +57,7 @@ class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
 
   @override
   PropertyValue<double> get opacity =>
-      jLayer.getCircleOpacity().toDart(releaseOriginal: true) ??
+      jLayer.circleOpacity.toDart(releaseOriginal: true) ??
       CircleStyleLayer.defaultOpacity;
 
   @override
@@ -75,7 +75,7 @@ class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
 
   @override
   PropertyValue<Color> get color =>
-      jLayer.getCircleColor().toDartColor(releaseOriginal: true) ??
+      jLayer.circleColor.toDartColor(releaseOriginal: true) ??
       CircleStyleLayer.defaultColor;
 
   @override
@@ -93,7 +93,7 @@ class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
 
   @override
   PropertyValue<double> get blur =>
-      jLayer.getCircleBlur().toDart(releaseOriginal: true) ??
+      jLayer.circleBlur.toDart(releaseOriginal: true) ??
       CircleStyleLayer.defaultBlur;
 
   @override
@@ -110,7 +110,7 @@ class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
 
   @override
   Expression? get filter => using((arena) {
-    final jFilter = jLayer.getFilter();
+    final jFilter = jLayer.filter;
     if (jFilter == null) return null;
     return jFilter.toDart(releaseOriginal: true);
   });
@@ -118,12 +118,12 @@ class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
   @override
   set filter(Expression expression) => using((arena) {
     final jFilter = expression.toJExpression(arena);
-    if (jFilter != null) jLayer.setFilter(jFilter);
+    if (jFilter != null) jLayer.filter = jFilter;
   });
 
   @override
   PropertyValue<ReferenceSpace> get pitchAlignment =>
-      jLayer.getCirclePitchAlignment().toDartReferenceSpace(
+      jLayer.circlePitchAlignment.toDartReferenceSpace(
         releaseOriginal: true,
       ) ??
       CircleStyleLayer.defaultPitchAlignment;
@@ -143,7 +143,7 @@ class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
 
   @override
   PropertyValue<ReferenceSpace> get pitchScale =>
-      jLayer.getCirclePitchScale().toDartReferenceSpace(
+      jLayer.circlePitchScale.toDartReferenceSpace(
         releaseOriginal: true,
       ) ??
       CircleStyleLayer.defaultPitchScale;
@@ -163,7 +163,7 @@ class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
 
   @override
   PropertyValue<double> get radius =>
-      jLayer.getCircleRadius().toDart(releaseOriginal: true) ??
+      jLayer.circleRadius.toDart(releaseOriginal: true) ??
       CircleStyleLayer.defaultRadius;
 
   @override
@@ -180,7 +180,7 @@ class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
 
   @override
   PropertyValue<double>? get sortKey =>
-      jLayer.getCircleSortKey().toDart(releaseOriginal: true);
+      jLayer.circleSortKey.toDart(releaseOriginal: true);
 
   @override
   set sortKey(PropertyValue<double>? property) => using((arena) {
@@ -198,23 +198,23 @@ class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
 
   @override
   String get sourceId =>
-      jLayer.getSourceId().toDartString(releaseOriginal: true);
+      jLayer.sourceId.toDartString(releaseOriginal: true);
 
   @override
   String? get sourceLayerId {
-    final id = jLayer.getSourceLayer().toDartString(releaseOriginal: true);
+    final id = jLayer.sourceLayer.toDartString(releaseOriginal: true);
     return id.isEmpty ? null : id;
   }
 
   @override
   set sourceLayerId(String value) => using((arena) {
     final jValue = value.toJString()..releasedBy(arena);
-    jLayer.setSourceLayer(jValue);
+    jLayer.sourceLayer = jValue;
   });
 
   @override
   PropertyValue<Color> get strokeColor =>
-      jLayer.getCircleStrokeColor().toDartColor(releaseOriginal: true) ??
+      jLayer.circleStrokeColor.toDartColor(releaseOriginal: true) ??
       CircleStyleLayer.defaultStrokeColor;
 
   @override
@@ -232,7 +232,7 @@ class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
 
   @override
   PropertyValue<double> get strokeOpacity =>
-      jLayer.getCircleStrokeOpacity().toDart(releaseOriginal: true) ??
+      jLayer.circleStrokeOpacity.toDart(releaseOriginal: true) ??
       CircleStyleLayer.defaultStrokeOpacity;
 
   @override
@@ -250,7 +250,7 @@ class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
 
   @override
   PropertyValue<double> get strokeWidth =>
-      jLayer.getCircleStrokeWidth().toDart(releaseOriginal: true) ??
+      jLayer.circleStrokeWidth.toDart(releaseOriginal: true) ??
       CircleStyleLayer.defaultStrokeWidth;
 
   @override
@@ -268,7 +268,7 @@ class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
 
   @override
   PropertyValue<Offset> get translate =>
-      jLayer.getCircleTranslate().toDartOffset(releaseOriginal: true) ??
+      jLayer.circleTranslate.toDartOffset(releaseOriginal: true) ??
       StyleLayerWithTranslate.defaultTranslate;
 
   @override
@@ -285,7 +285,7 @@ class CircleStyleLayerAndroid extends StyleLayerAndroid<jni.CircleLayer>
 
   @override
   PropertyValue<ReferenceSpace> get translateAnchor =>
-      jLayer.getCircleTranslateAnchor().toDartReferenceSpace(
+      jLayer.circleTranslateAnchor.toDartReferenceSpace(
         releaseOriginal: true,
       ) ??
       StyleLayerWithTranslate.defaultTranslateAnchor;

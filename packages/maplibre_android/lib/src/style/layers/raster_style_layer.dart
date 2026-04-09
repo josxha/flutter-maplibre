@@ -44,7 +44,7 @@ class RasterStyleLayerAndroid extends StyleLayerAndroid<jni.RasterLayer>
 
   @override
   PropertyValue<double> get opacity =>
-      jLayer.getRasterOpacity().toDart(releaseOriginal: true) ??
+      jLayer.rasterOpacity.toDart(releaseOriginal: true) ??
       RasterStyleLayer.defaultOpacity;
 
   @override
@@ -62,7 +62,7 @@ class RasterStyleLayerAndroid extends StyleLayerAndroid<jni.RasterLayer>
 
   @override
   PropertyValue<double> get hueRotate =>
-      jLayer.getRasterHueRotate().toDart(releaseOriginal: true) ??
+      jLayer.rasterHueRotate.toDart(releaseOriginal: true) ??
       RasterStyleLayer.defaultHueRotate;
 
   @override
@@ -80,7 +80,7 @@ class RasterStyleLayerAndroid extends StyleLayerAndroid<jni.RasterLayer>
 
   @override
   PropertyValue<double> get brightnessMin =>
-      jLayer.getRasterBrightnessMin().toDart(releaseOriginal: true) ??
+      jLayer.rasterBrightnessMin.toDart(releaseOriginal: true) ??
       RasterStyleLayer.defaultBrightnessMin;
 
   @override
@@ -98,7 +98,7 @@ class RasterStyleLayerAndroid extends StyleLayerAndroid<jni.RasterLayer>
 
   @override
   PropertyValue<double> get brightnessMax =>
-      jLayer.getRasterBrightnessMax().toDart(releaseOriginal: true) ??
+      jLayer.rasterBrightnessMax.toDart(releaseOriginal: true) ??
       RasterStyleLayer.defaultBrightnessMax;
 
   @override
@@ -116,7 +116,7 @@ class RasterStyleLayerAndroid extends StyleLayerAndroid<jni.RasterLayer>
 
   @override
   PropertyValue<double> get saturation =>
-      jLayer.getRasterSaturation().toDart(releaseOriginal: true) ??
+      jLayer.rasterSaturation.toDart(releaseOriginal: true) ??
       RasterStyleLayer.defaultSaturation;
 
   @override
@@ -134,7 +134,7 @@ class RasterStyleLayerAndroid extends StyleLayerAndroid<jni.RasterLayer>
 
   @override
   PropertyValue<double> get contrast =>
-      jLayer.getRasterContrast().toDart(releaseOriginal: true) ??
+      jLayer.rasterContrast.toDart(releaseOriginal: true) ??
       RasterStyleLayer.defaultContrast;
 
   @override
@@ -152,7 +152,7 @@ class RasterStyleLayerAndroid extends StyleLayerAndroid<jni.RasterLayer>
 
   @override
   PropertyValue<RasterResampling> get resampling =>
-      jLayer.getRasterResampling().toDartEnum(
+      jLayer.rasterResampling.toDartEnum(
         values: RasterResampling.values,
         releaseOriginal: true,
       ) ??
@@ -173,7 +173,7 @@ class RasterStyleLayerAndroid extends StyleLayerAndroid<jni.RasterLayer>
 
   @override
   PropertyValue<double> get fadeDuration =>
-      jLayer.getRasterFadeDuration().toDart(releaseOriginal: true) ??
+      jLayer.rasterFadeDuration.toDart(releaseOriginal: true) ??
       RasterStyleLayer.defaultFadeDuration;
 
   @override
@@ -191,5 +191,5 @@ class RasterStyleLayerAndroid extends StyleLayerAndroid<jni.RasterLayer>
 
   @override
   String get sourceId =>
-      jLayer.getSourceId().toDartString(releaseOriginal: true);
+      jLayer.sourceId.toDartString(releaseOriginal: true);
 }

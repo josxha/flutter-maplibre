@@ -57,10 +57,10 @@ class HillshadeStyleLayerWebView extends StyleLayerWebView
   PropertyValue<double> exaggeration;
 
   @override
-  PropertyValue<Color> shadowColor;
+  PropertyValue<List<Color>> shadowColor;
 
   @override
-  PropertyValue<Color> highlightColor;
+  PropertyValue<List<Color>> highlightColor;
 
   @override
   PropertyValue<Color> accentColor;

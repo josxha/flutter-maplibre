@@ -14,7 +14,7 @@ final class RasterSource extends Source {
     this.tiles,
     this.bounds = const [-180, -85.051129, 180, 85.051129],
     this.minZoom = 0,
-    this.maxZoom = 2,
+    this.maxZoom = 22,
     this.tileSize = 512,
     this.scheme = .xyz,
     this.attribution,

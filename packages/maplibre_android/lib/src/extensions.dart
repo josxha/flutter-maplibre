@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/rendering.dart';
-import 'package:jni/jni.dart';
 import 'package:jni/jni.dart' as jni;
+import 'package:jni/jni.dart';
 import 'package:maplibre_android/src/jni.g.dart' as jni;
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 
@@ -16,7 +16,7 @@ extension GeographicExt on Geographic {
 extension JniLatLngExt on jni.LatLng {
   /// Convert an internal [jni.LatLng] to a [Geographic].
   Geographic toGeographic({bool releaseOriginal = false}) {
-    final point = Geographic(lon: getLongitude(), lat: getLatitude());
+    final point = Geographic(lon: longitude, lat: latitude);
     if (releaseOriginal) release();
     return point;
   }
@@ -36,8 +36,12 @@ extension PointExt on jni.PointF {
 extension JFloatArrayExt on jni.JArray<jni.JFloat?> {
   /// Convert an [jni.JArray] to a [Offset].
   Offset toOffset({bool releaseOriginal = false}) {
-    final x = this[0]?.floatValue(releaseOriginal: true) ?? 0;
-    final y = this[1]?.floatValue(releaseOriginal: true) ?? 0;
+    final jX = this[0];
+    final x = jX?.floatValue() ?? 0;
+    jX?.release();
+    final jY = this[1];
+    final y = jY?.floatValue() ?? 0;
+    jY?.release();
     final offset = Offset(x, y);
     if (releaseOriginal) release();
     return offset;
@@ -52,7 +56,7 @@ extension OffsetExt on Offset {
 
   /// Convert an [Offset] to a [JArray<JFloat>].
   JArray<JFloat?> toJFloatArray(Arena arena) {
-    final jArray = JArray(JFloat.nullableType, 2)..releasedBy(arena);
+    final jArray = JArray.withLength(JFloat.type, 2)..releasedBy(arena);
     jArray[0] = dx.toJFloat()..releasedBy(arena);
     jArray[1] = dy.toJFloat()..releasedBy(arena);
     return jArray;
@@ -63,7 +67,7 @@ extension OffsetExt on Offset {
 extension EdgeInsetsExt on EdgeInsets {
   /// Convert an [EdgeInsets] to a [JArray<JFloat>].
   JArray<JFloat?> toJFloatArray(Arena arena) {
-    final jArray = JArray(JFloat.nullableType, 4)..releasedBy(arena);
+    final jArray = JArray.withLength(JFloat.type, 4)..releasedBy(arena);
     jArray[0] = top.toJFloat()..releasedBy(arena);
     jArray[1] = right.toJFloat()..releasedBy(arena);
     jArray[2] = bottom.toJFloat()..releasedBy(arena);
@@ -103,7 +107,7 @@ extension LatLngBounds on jni.LatLngBounds {
 extension DoubleListExt on List<double> {
   /// Convert a [List<double>] to a [JArray<JDouble>].
   JArray<JFloat?> toJFloatArray(Arena arena) {
-    final jArray = JArray(JFloat.nullableType, length)..releasedBy(arena);
+    final jArray = JArray.withLength(JFloat.type, length)..releasedBy(arena);
     for (var i = 0; i < length; i++) {
       jArray[i] = this[i].toJFloat()..releasedBy(arena);
     }
@@ -115,7 +119,7 @@ extension DoubleListExt on List<double> {
 extension StringListExt on List<String> {
   /// Convert a [List<String>] to a [JArray<JString>].
   JArray<JString?> toJStringArray(Arena arena) {
-    final jArray = JArray(JString.nullableType, length)..releasedBy(arena);
+    final jArray = JArray.withLength(JString.type, length)..releasedBy(arena);
     for (var i = 0; i < length; i++) {
       jArray[i] = this[i].toJString()..releasedBy(arena);
     }
@@ -127,15 +131,20 @@ extension StringListExt on List<String> {
 extension OfflineRegionExt on jni.OfflineRegion {
   /// Convert an [jni.OfflineRegion] to an [OfflineRegion].
   OfflineRegion toOfflineRegion() => using((arena) {
-    final jDefinition = getDefinition()..releasedBy(arena);
-    // TODO add getMetadata();
+    final jDefinition = definition..releasedBy(arena);
+    final jMetadata = metadata..releasedBy(arena);
+    final metadataBytes = jMetadata.asDart();
+    final metadataJson = utf8.decode(metadataBytes);
+    final dartMetadata = jsonDecode(metadataJson) as Map<String, Object?>;
+
     return OfflineRegion(
-      id: getId(),
+      id: id,
       bounds: jDefinition.getBounds()!.toLngLatBounds(releaseOriginal: true),
       minZoom: jDefinition.getMinZoom(),
       maxZoom: jDefinition.getMaxZoom(),
       pixelRatio: jDefinition.getPixelRatio(),
       styleUrl: jDefinition.getStyleURL()!.toDartString(releaseOriginal: true),
+      metadata: dartMetadata,
     );
   });
 }
@@ -144,11 +153,10 @@ extension OfflineRegionExt on jni.OfflineRegion {
 extension JniLayerExt on jni.Layer {
   /// Set a single property on this layer.
   void setProperty(jni.PropertyValue? property) => using((arena) {
-    final jProperties =
-        JArray(jni.PropertyValue.nullableType(JObject.nullableType), 1)
-          ..releasedBy(arena)
-          ..[0] = property;
-    setProperties(jProperties);
+    final jProperties = JArray.withLength(jni.PropertyValue.type, 1)
+      ..releasedBy(arena)
+      ..[0] = property;
+    properties = jProperties;
   });
 }
 
@@ -180,13 +188,13 @@ extension JStringPropertyValueExt on jni.PropertyValue<JString?> {
   /// Convert a [jni.PropertyValue] to a [PropertyValue<String>].
   PropertyValue<String>? toDart({bool releaseOriginal = false}) =>
       using((arena) {
-        if (isNull$1()) return null;
-        if (isExpression()) {
-          final jExpression = getExpression()?..releasedBy(arena);
+        if (isNull$1) return null;
+        if (isExpression) {
+          final jExpression = expression?..releasedBy(arena);
           if (jExpression == null) return null;
           return PropertyValue.expression(jExpression.toDart());
         }
-        final jValue = getValue();
+        final jValue = this.value;
         if (jValue == null) return null;
         final value = jValue.toDartString(releaseOriginal: true);
         if (releaseOriginal) release();
@@ -196,15 +204,16 @@ extension JStringPropertyValueExt on jni.PropertyValue<JString?> {
   /// Convert a [jni.PropertyValue] to a [PropertyValue<Color>].
   PropertyValue<Color>? toDartColor({bool releaseOriginal = false}) =>
       using((arena) {
-        if (isNull$1()) return null;
-        if (isExpression()) {
-          final jExpression = getExpression()?..releasedBy(arena);
+        if (isNull$1) return null;
+        if (isExpression) {
+          final jExpression = expression?..releasedBy(arena);
           if (jExpression == null) return null;
           return PropertyValue.expression(jExpression.toDart());
         }
-        final jValue = getColorInt();
+        final jValue = colorInt;
         if (jValue == null) return null;
-        final value = jValue.intValue(releaseOriginal: true);
+        final value = jValue.intValue();
+        jValue.release();
         if (releaseOriginal) release();
         return PropertyValue.value(Color(value));
       });
@@ -223,15 +232,16 @@ extension JDoublePropertyValueExt on jni.PropertyValue<JDouble?> {
   /// Convert a [jni.PropertyValue] to a [PropertyValue<double>].
   PropertyValue<double>? toDart({bool releaseOriginal = false}) =>
       using((arena) {
-        if (isNull$1()) return null;
-        if (isExpression()) {
-          final jExpression = getExpression()?..releasedBy(arena);
+        if (isNull$1) return null;
+        if (isExpression) {
+          final jExpression = expression?..releasedBy(arena);
           if (jExpression == null) return null;
           return PropertyValue.expression(jExpression.toDart());
         }
-        final jValue = getValue();
+        final jValue = this.value;
         if (jValue == null) return null;
-        final value = jValue.doubleValue(releaseOriginal: true);
+        final value = jValue.doubleValue();
+        jValue.release();
         if (releaseOriginal) release();
         return PropertyValue.value(value);
       });
@@ -242,15 +252,16 @@ extension JFloatPropertyValueExt on jni.PropertyValue<JFloat?> {
   /// Convert a [jni.PropertyValue] to a [PropertyValue<double>].
   PropertyValue<double>? toDart({bool releaseOriginal = false}) =>
       using((arena) {
-        if (isNull$1()) return null;
-        if (isExpression()) {
-          final jExpression = getExpression()?..releasedBy(arena);
+        if (isNull$1) return null;
+        if (isExpression) {
+          final jExpression = expression?..releasedBy(arena);
           if (jExpression == null) return null;
           return PropertyValue.expression(jExpression.toDart());
         }
-        final jValue = getValue();
+        final jValue = this.value;
         if (jValue == null) return null;
-        final value = jValue.doubleValue(releaseOriginal: true);
+        final value = jValue.doubleValue();
+        jValue.release();
         if (releaseOriginal) release();
         return PropertyValue.value(value);
       });
@@ -260,15 +271,16 @@ extension JFloatPropertyValueExt on jni.PropertyValue<JFloat?> {
 extension JBooleanPropertyValueExt on jni.PropertyValue<JBoolean?> {
   /// Convert a [jni.PropertyValue] to a [PropertyValue<double>].
   PropertyValue<bool>? toDart({bool releaseOriginal = false}) => using((arena) {
-    if (isNull$1()) return null;
-    if (isExpression()) {
-      final jExpression = getExpression()?..releasedBy(arena);
+    if (isNull$1) return null;
+    if (isExpression) {
+      final jExpression = expression?..releasedBy(arena);
       if (jExpression == null) return null;
       return PropertyValue.expression(jExpression.toDart());
     }
-    final jValue = getValue();
+    final jValue = this.value;
     if (jValue == null) return null;
-    final value = jValue.booleanValue(releaseOriginal: true);
+    final value = jValue.booleanValue();
+    jValue.release();
     if (releaseOriginal) release();
     return PropertyValue.value(value);
   });
@@ -280,19 +292,44 @@ extension JStringArrayPropertyValueExt on jni.PropertyValue<JArray<JString?>?> {
   PropertyValue<List<String>>? toDartStringList({
     bool releaseOriginal = false,
   }) => using((arena) {
-    if (isNull$1()) return null;
-    if (isExpression()) {
-      final jExpression = getExpression()!..releasedBy(arena);
+    if (isNull$1) return null;
+    if (isExpression) {
+      final jExpression = this.expression!..releasedBy(arena);
       final expression = jExpression.toDart(releaseOriginal: true);
       return PropertyValue.expression(expression);
     }
-    final jValue = getValue()!..releasedBy(arena);
-    final list = jValue.nonNulls
+    final jValue = value!..releasedBy(arena);
+    final list = jValue
+        .asDart()
+        .nonNulls
         .map((e) => e.toDartString(releaseOriginal: true))
         .toList(growable: true);
     if (releaseOriginal) release();
     return PropertyValue.value(list);
   });
+
+  /// Convert a [jni.PropertyValue] to a [PropertyValue<List<Color>>].
+  PropertyValue<List<Color>>? toDartColorList({bool releaseOriginal = false}) =>
+      using((arena) {
+        if (isNull$1) return null;
+        if (isExpression) {
+          final jExpression = this.expression!..releasedBy(arena);
+          final expression = jExpression.toDart(releaseOriginal: true);
+          return PropertyValue.expression(expression);
+        }
+        final jValue = value!..releasedBy(arena);
+        final list = jValue
+            .asDart()
+            .nonNulls
+            .map((e) {
+              final string = e.toDartString(releaseOriginal: true);
+              final intValue = int.parse(string, radix: 16);
+              return Color(intValue);
+            })
+            .toList(growable: true);
+        if (releaseOriginal) release();
+        return PropertyValue.value(list);
+      });
 }
 
 /// Extension methods for the [jni.PropertyValue] class. Not exported publicly.
@@ -300,15 +337,17 @@ extension JFloatArrayPropertyValueExt on jni.PropertyValue<JArray<JFloat?>?> {
   /// Convert a [jni.PropertyValue] to a [PropertyValue<Offset>].
   PropertyValue<Offset>? toDartOffset({bool releaseOriginal = false}) =>
       using((arena) {
-        if (isNull$1()) return null;
-        if (isExpression()) {
-          final jExpression = getExpression()!..releasedBy(arena);
+        if (isNull$1) return null;
+        if (isExpression) {
+          final jExpression = this.expression!..releasedBy(arena);
           final expression = jExpression.toDart(releaseOriginal: true);
           return PropertyValue.expression(expression);
         }
-        final jValue = getValue()!..releasedBy(arena);
-        final x = jValue[0]!.floatValue(releaseOriginal: true);
-        final y = jValue[1]!.floatValue(releaseOriginal: true);
+        final jValue = value!..releasedBy(arena);
+        final jX = jValue[0]?..releasedBy(arena);
+        final jY = jValue[1]?..releasedBy(arena);
+        final x = jX?.floatValue() ?? 0;
+        final y = jY?.floatValue() ?? 0;
         if (releaseOriginal) release();
         return PropertyValue.value(Offset(x, y));
       });
@@ -316,18 +355,22 @@ extension JFloatArrayPropertyValueExt on jni.PropertyValue<JArray<JFloat?>?> {
   /// Convert a [jni.PropertyValue] to a [PropertyValue<Offset>].
   PropertyValue<EdgeInsets>? toDartEdgeInsets({bool releaseOriginal = false}) =>
       using((arena) {
-        if (isNull$1()) return null;
-        if (isExpression()) {
-          final jExpression = getExpression()!..releasedBy(arena);
+        if (isNull$1) return null;
+        if (isExpression) {
+          final jExpression = this.expression!..releasedBy(arena);
           final expression = jExpression.toDart(releaseOriginal: true);
           return PropertyValue.expression(expression);
         }
-        final jValue = getValue()!..releasedBy(arena);
+        final jValue = value!..releasedBy(arena);
+        final jTop = jValue[0]?..releasedBy(arena);
+        final jRight = jValue[1]?..releasedBy(arena);
+        final jBottom = jValue[2]?..releasedBy(arena);
+        final jLeft = jValue[3]?..releasedBy(arena);
         final padding = EdgeInsets.only(
-          top: jValue[0]?.floatValue(releaseOriginal: true) ?? 0,
-          right: jValue[1]?.floatValue(releaseOriginal: true) ?? 0,
-          bottom: jValue[2]?.floatValue(releaseOriginal: true) ?? 0,
-          left: jValue[3]?.floatValue(releaseOriginal: true) ?? 0,
+          top: jTop?.floatValue() ?? 0,
+          right: jRight?.floatValue() ?? 0,
+          bottom: jBottom?.floatValue() ?? 0,
+          left: jLeft?.floatValue() ?? 0,
         );
         if (releaseOriginal) release();
         return PropertyValue.value(padding);
@@ -337,15 +380,21 @@ extension JFloatArrayPropertyValueExt on jni.PropertyValue<JArray<JFloat?>?> {
   PropertyValue<List<double>>? toDartDoubleList({
     bool releaseOriginal = false,
   }) => using((arena) {
-    if (isNull$1()) return null;
-    if (isExpression()) {
-      final jExpression = getExpression()!..releasedBy(arena);
+    if (isNull$1) return null;
+    if (isExpression) {
+      final jExpression = this.expression!..releasedBy(arena);
       final expression = jExpression.toDart(releaseOriginal: true);
       return PropertyValue.expression(expression);
     }
-    final jValue = getValue()!..releasedBy(arena);
-    final list = jValue.nonNulls
-        .map((e) => e.doubleValue(releaseOriginal: true))
+    final jValue = value!..releasedBy(arena);
+    final list = jValue
+        .asDart()
+        .nonNulls
+        .map((e) {
+          final doubleValue = e.floatValue();
+          e.release();
+          return doubleValue;
+        })
         .toList(growable: true);
     if (releaseOriginal) release();
     return PropertyValue.value(list);
@@ -380,13 +429,13 @@ extension JPropertyValueStringExt on jni.PropertyValue<JString?> {
     required List<T> values,
     bool releaseOriginal = false,
   }) => using((arena) {
-    if (isExpression()) {
-      final jExpression = getExpression()?..releasedBy(arena);
+    if (isExpression) {
+      final jExpression = this.expression?..releasedBy(arena);
       final expression = jExpression?.toDart(releaseOriginal: true);
       if (expression == null) return null;
       return PropertyValue.expression(expression);
     }
-    final jValue = getValue();
+    final jValue = this.value;
     if (jValue == null) return null;
     final value = jValue.toDartString(releaseOriginal: true);
     final match = values.firstWhere((e) => e.name == value);

@@ -42,6 +42,9 @@ abstract interface class OfflineManager {
   /// Retrieve all regions in the offline database.
   Future<List<OfflineRegion>> listOfflineRegions();
 
+  /// Delete an offline region by its [regionId].
+  Future<void> deleteRegion({required int regionId});
+
   /// Packs the existing database file into a minimal amount of disk space.
   ///
   /// Only available on Android.

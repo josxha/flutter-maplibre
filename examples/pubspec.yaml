@@ -14,8 +14,8 @@ dependencies:
   flutter_web_plugins: { sdk: flutter }
   go_router: ^17.0.0
   http: ^1.2.2
-  maplibre: ^0.3.4+1
-  maplibre_webview: ^0.3.4+1
+  maplibre: ^0.3.5
+  maplibre_webview: ^0.3.5
 
 dev_dependencies:
   flutter_launcher_icons: ^0.14.3

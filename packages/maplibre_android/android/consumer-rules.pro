@@ -1,3 +1,4 @@
+-keep class com.google.gson.** { public *; }
 -keep class org.maplibre.android.attribution.** { public *; }
 -keep class org.maplibre.android.camera.** { public *; }
 -keep class org.maplibre.android.constants.** { public *; }

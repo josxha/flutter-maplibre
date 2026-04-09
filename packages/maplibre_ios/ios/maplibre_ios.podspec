@@ -17,7 +17,7 @@ Helper package for maplibre that provides iOS FFI bindings
   s.dependency 'Flutter'
 
   # Needs to be the same version as in maplibre_ios/Package.swift
-  s.dependency 'MapLibre', '~> 6.21'
+  s.dependency 'MapLibre', '~> 6.25'
 
   s.platform = :ios, '12.0'
 

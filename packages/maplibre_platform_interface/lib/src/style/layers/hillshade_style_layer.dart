@@ -21,8 +21,8 @@ abstract interface class HillshadeStyleLayer implements StyleLayerWithSource {
     PropertyValue<IlluminationAnchor> illuminationAnchor =
         defaultIlluminationAnchor,
     PropertyValue<double> exaggeration = defaultExaggeration,
-    PropertyValue<Color> shadowColor = defaultShadowColor,
-    PropertyValue<Color> highlightColor = defaultHighlightColor,
+    PropertyValue<List<Color>> shadowColor = defaultShadowColor,
+    PropertyValue<List<Color>> highlightColor = defaultHighlightColor,
     PropertyValue<Color> accentColor = defaultAccentColor,
     PropertyValue<HillshadeMethod> method = defaultMethod,
   }) => MapLibrePlatform.instance.createHillshadeStyleLayer(
@@ -106,14 +106,14 @@ abstract interface class HillshadeStyleLayer implements StyleLayerWithSource {
   ///
   /// Paint property. Optional [ColorArray]. Defaults to `"#000000"`.
   /// Supports [Expression.interpolate] expressions. Transitionable.
-  PropertyValue<Color> get shadowColor;
+  PropertyValue<List<Color>> get shadowColor;
 
-  set shadowColor(PropertyValue<Color> property);
+  set shadowColor(PropertyValue<List<Color>> property);
 
   /// Default value of [shadowColor].
-  static const defaultShadowColor = PropertyValue<Color>.value(
+  static const defaultShadowColor = PropertyValue<List<Color>>.value([
     Color(0xFF000000),
-  );
+  ]);
 
   /// The shading color of areas that faces towards the light source(s).
   ///
@@ -121,14 +121,14 @@ abstract interface class HillshadeStyleLayer implements StyleLayerWithSource {
   ///
   /// Paint property. Optional [ColorArray]. Defaults to `"#FFFFFF"`.
   /// Supports [Expression.interpolate] expressions. Transitionable.
-  PropertyValue<Color> get highlightColor;
+  PropertyValue<List<Color>> get highlightColor;
 
-  set highlightColor(PropertyValue<Color> property);
+  set highlightColor(PropertyValue<List<Color>> property);
 
   /// Default value of [highlightColor].
-  static const defaultHighlightColor = PropertyValue<Color>.value(
+  static const defaultHighlightColor = PropertyValue<List<Color>>.value([
     Color(0xFFFFFFFF),
-  );
+  ]);
 
   /// The shading color used to accentuate rugged terrain like sharp cliffs and
   /// gorges.

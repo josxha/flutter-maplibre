@@ -43,7 +43,7 @@ class HeatmapStyleLayerAndroid extends StyleLayerAndroid<jni.HeatmapLayer>
 
   @override
   PropertyValue<double> get radius =>
-      jLayer.getHeatmapRadius().toDart(releaseOriginal: true) ??
+      jLayer.heatmapRadius.toDart(releaseOriginal: true) ??
       HeatmapStyleLayer.defaultRadius;
 
   @override
@@ -61,7 +61,7 @@ class HeatmapStyleLayerAndroid extends StyleLayerAndroid<jni.HeatmapLayer>
 
   @override
   PropertyValue<double> get weight =>
-      jLayer.getHeatmapWeight().toDart(releaseOriginal: true) ??
+      jLayer.heatmapWeight.toDart(releaseOriginal: true) ??
       HeatmapStyleLayer.defaultWeight;
 
   @override
@@ -79,7 +79,7 @@ class HeatmapStyleLayerAndroid extends StyleLayerAndroid<jni.HeatmapLayer>
 
   @override
   PropertyValue<double> get intensity =>
-      jLayer.getHeatmapIntensity().toDart(releaseOriginal: true) ??
+      jLayer.heatmapIntensity.toDart(releaseOriginal: true) ??
       HeatmapStyleLayer.defaultIntensity;
 
   @override
@@ -97,7 +97,7 @@ class HeatmapStyleLayerAndroid extends StyleLayerAndroid<jni.HeatmapLayer>
 
   @override
   PropertyValue<Color>? get color =>
-      jLayer.getHeatmapColor().toDartColor(releaseOriginal: true);
+      jLayer.heatmapColor.toDartColor(releaseOriginal: true);
 
   @override
   set color(PropertyValue<Color>? property) => using((arena) {
@@ -114,7 +114,7 @@ class HeatmapStyleLayerAndroid extends StyleLayerAndroid<jni.HeatmapLayer>
 
   @override
   PropertyValue<double> get opacity =>
-      jLayer.getHeatmapOpacity().toDart(releaseOriginal: true) ??
+      jLayer.heatmapOpacity.toDart(releaseOriginal: true) ??
       HeatmapStyleLayer.defaultOpacity;
 
   @override
@@ -132,7 +132,7 @@ class HeatmapStyleLayerAndroid extends StyleLayerAndroid<jni.HeatmapLayer>
 
   @override
   Expression? get filter => using((arena) {
-    final jFilter = jLayer.getFilter()?..releasedBy(arena);
+    final jFilter = jLayer.filter?..releasedBy(arena);
     if (jFilter == null) return null;
     return jFilter.toDart(releaseOriginal: true);
   });
@@ -140,21 +140,21 @@ class HeatmapStyleLayerAndroid extends StyleLayerAndroid<jni.HeatmapLayer>
   @override
   set filter(Expression expression) => using((arena) {
     final jFilter = expression.toJExpression(arena)?..releasedBy(arena);
-    if (jFilter != null) jLayer.setFilter(jFilter);
+    if (jFilter != null) jLayer.filter = jFilter;
   });
 
   @override
   String get sourceId =>
-      jLayer.getSourceId().toDartString(releaseOriginal: true);
+      jLayer.sourceId.toDartString(releaseOriginal: true);
 
   @override
   String? get sourceLayerId =>
-      jLayer.getSourceLayer().toDartString(releaseOriginal: true);
+      jLayer.sourceLayer.toDartString(releaseOriginal: true);
 
   @override
   set sourceLayerId(String? value) => using((arena) {
     final jValue = value?.toJString();
     jValue?.releasedBy(arena);
-    jLayer.setSourceLayer(jValue);
+    jLayer.sourceLayer = jValue;
   });
 }

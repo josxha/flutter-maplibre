@@ -14,8 +14,8 @@ class HillshadeStyleLayerAndroid extends StyleLayerAndroid<jni.HillshadeLayer>
     // required PropertyValue<NumberArray> illuminationAltitude,
     required PropertyValue<IlluminationAnchor> illuminationAnchor,
     required PropertyValue<double> exaggeration,
-    required PropertyValue<Color> shadowColor,
-    required PropertyValue<Color> highlightColor,
+    required PropertyValue<List<Color>> shadowColor,
+    required PropertyValue<List<Color>> highlightColor,
     required PropertyValue<Color> accentColor,
     // required PropertyValue<HillshadeMethod> method,
   }) => using((arena) {
@@ -45,44 +45,58 @@ class HillshadeStyleLayerAndroid extends StyleLayerAndroid<jni.HillshadeLayer>
 
   @override
   PropertyValue<NumberArray> get illuminationDirection => using((arena) {
-    final jProperty = jLayer.getHillshadeIlluminationDirection();
-    if (jProperty.isNull$1()) {
+    final jProperty = jLayer.hillshadeIlluminationDirection;
+    if (jProperty.isNull$1) {
       return HillshadeStyleLayer.defaultIlluminationDirection;
     }
-    if (jProperty.isExpression()) {
-      final jExpression = jProperty.getExpression()!..releasedBy(arena);
+    if (jProperty.isExpression) {
+      final jExpression = jProperty.expression!..releasedBy(arena);
       final expression = jExpression.toDart(releaseOriginal: true);
       return PropertyValue.expression(expression);
     }
-    final jValue = jProperty.getValue()?..releasedBy(arena);
+    final jValue = jProperty.value?..releasedBy(arena);
     if (jValue == null) {
       return HillshadeStyleLayer.defaultIlluminationDirection;
     }
-    final value = jValue.floatValue(releaseOriginal: true);
-    return PropertyValue.value(NumberArray.number(value));
+    final value = jValue
+        .asDart()
+        .nonNulls
+        .map((value) {
+          value.releasedBy(arena);
+          return value.floatValue();
+        })
+        .toList(growable: false);
+    return PropertyValue.value(NumberArray.array(value));
   });
 
   @override
-  set illuminationDirection(PropertyValue<NumberArray> property) => using((
-    arena,
-  ) {
-    final jProperty = property.apply(
-      arena: arena,
-      onExpression: jni.PropertyFactory.hillshadeIlluminationDirection$1,
-      onValue: (value) {
-        if (value.isArray) {
-          final expression = Expression.literal(value.array);
-          final jExpr = expression.toJExpression(arena);
-          return jni.PropertyFactory.hillshadeIlluminationDirection$1(jExpr);
-        } else {
-          final jFloat = value.number.toJFloat();
-          return jni.PropertyFactory.hillshadeIlluminationDirection(jFloat);
-        }
-      },
-    );
-    jProperty?.releasedBy(arena);
-    jLayer.setProperty(jProperty);
-  });
+  set illuminationDirection(PropertyValue<NumberArray> property) =>
+      using((arena) {
+        final jProperty = property.apply(
+          arena: arena,
+          onExpression: jni.PropertyFactory.hillshadeIlluminationDirection$1,
+          onValue: (value) {
+            final JArray<JFloat?> jArray;
+            if (value.isArray) {
+              final jValues = value.array
+                  .map((e) => e.toJFloat()..releasedBy(arena))
+                  .toList(growable: false);
+              jArray = JArray.withLength(JFloat.type, jValues.length);
+              for (var i = 0; i < jValues.length; i++) {
+                jArray[i] = jValues[i];
+              }
+            } else {
+              final jFloat = value.number.toJFloat();
+              jArray = JArray.withLength(JFloat.type, 1);
+              jArray[0] = jFloat..releasedBy(arena);
+            }
+            jArray.releasedBy(arena);
+            return jni.PropertyFactory.hillshadeIlluminationDirection(jArray);
+          },
+        );
+        jProperty?.releasedBy(arena);
+        jLayer.setProperty(jProperty);
+      });
 
   @override
   PropertyValue<NumberArray> get illuminationAltitude => throw UnsupportedError(
@@ -100,7 +114,7 @@ class HillshadeStyleLayerAndroid extends StyleLayerAndroid<jni.HillshadeLayer>
 
   @override
   PropertyValue<IlluminationAnchor> get illuminationAnchor =>
-      jLayer.getHillshadeIlluminationAnchor().toDartEnum(
+      jLayer.hillshadeIlluminationAnchor.toDartEnum(
         values: IlluminationAnchor.values,
         releaseOriginal: true,
       ) ??
@@ -122,7 +136,7 @@ class HillshadeStyleLayerAndroid extends StyleLayerAndroid<jni.HillshadeLayer>
 
   @override
   PropertyValue<double> get exaggeration =>
-      jLayer.getHillshadeExaggeration().toDart(releaseOriginal: true) ??
+      jLayer.hillshadeExaggeration.toDart(releaseOriginal: true) ??
       HillshadeStyleLayer.defaultExaggeration;
 
   @override
@@ -139,36 +153,46 @@ class HillshadeStyleLayerAndroid extends StyleLayerAndroid<jni.HillshadeLayer>
   });
 
   @override
-  PropertyValue<Color> get shadowColor =>
-      jLayer.getHillshadeShadowColor().toDartColor(releaseOriginal: true) ??
+  PropertyValue<List<Color>> get shadowColor =>
+      jLayer.hillshadeShadowColor.toDartColorList(releaseOriginal: true) ??
       HillshadeStyleLayer.defaultShadowColor;
 
   @override
-  set shadowColor(PropertyValue<Color> property) => using((arena) {
+  set shadowColor(PropertyValue<List<Color>> property) => using((arena) {
     final jProperty = property.apply(
       arena: arena,
-      onExpression: jni.PropertyFactory.hillshadeShadowColor$2,
-      onValue: (value) => jni.PropertyFactory.hillshadeShadowColor$1(
-        value.toHexString().toJString()..releasedBy(arena),
-      ),
+      onExpression: jni.PropertyFactory.hillshadeShadowColor$1,
+      onValue: (value) {
+        final jArray = JArray.withLength(JString.type, value.length)
+          ..releasedBy(arena);
+        for (var i = 0; i < value.length; i++) {
+          jArray[i] = value[i].toHexString().toJString()..releasedBy(arena);
+        }
+        return jni.PropertyFactory.hillshadeShadowColor(jArray);
+      },
     );
     jProperty?.releasedBy(arena);
     jLayer.setProperty(jProperty);
   });
 
   @override
-  PropertyValue<Color> get highlightColor =>
-      jLayer.getHillshadeHighlightColor().toDartColor(releaseOriginal: true) ??
+  PropertyValue<List<Color>> get highlightColor =>
+      jLayer.hillshadeHighlightColor.toDartColorList(releaseOriginal: true) ??
       HillshadeStyleLayer.defaultHighlightColor;
 
   @override
-  set highlightColor(PropertyValue<Color> property) => using((arena) {
+  set highlightColor(PropertyValue<List<Color>> property) => using((arena) {
     final jProperty = property.apply(
       arena: arena,
-      onExpression: jni.PropertyFactory.hillshadeHighlightColor$2,
-      onValue: (value) => jni.PropertyFactory.hillshadeHighlightColor$1(
-        value.toHexString().toJString()..releasedBy(arena),
-      ),
+      onExpression: jni.PropertyFactory.hillshadeHighlightColor$1,
+      onValue: (value) {
+        final jArray = JArray.withLength(JString.type, value.length)
+          ..releasedBy(arena);
+        for (var i = 0; i < value.length; i++) {
+          jArray[i] = value[i].toHexString().toJString()..releasedBy(arena);
+        }
+        return jni.PropertyFactory.hillshadeHighlightColor(jArray);
+      },
     );
     jProperty?.releasedBy(arena);
     jLayer.setProperty(jProperty);
@@ -176,7 +200,7 @@ class HillshadeStyleLayerAndroid extends StyleLayerAndroid<jni.HillshadeLayer>
 
   @override
   PropertyValue<Color> get accentColor =>
-      jLayer.getHillshadeAccentColor().toDartColor(releaseOriginal: true) ??
+      jLayer.hillshadeAccentColor.toDartColor(releaseOriginal: true) ??
       HillshadeStyleLayer.defaultAccentColor;
 
   @override
@@ -207,6 +231,5 @@ class HillshadeStyleLayerAndroid extends StyleLayerAndroid<jni.HillshadeLayer>
   }
 
   @override
-  String get sourceId =>
-      jLayer.getSourceId().toDartString(releaseOriginal: true);
+  String get sourceId => jLayer.sourceId.toDartString(releaseOriginal: true);
 }

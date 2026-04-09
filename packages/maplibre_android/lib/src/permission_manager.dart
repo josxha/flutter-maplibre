@@ -35,7 +35,7 @@ class PermissionManagerAndroid implements PermissionManager {
   }) async => using((arena) async {
     final completer = Completer<bool>();
     final listener = jni.PermissionsListener.implement(
-      _PermissionsListener(WeakReference(completer)),
+      _PermissionsListener(completer),
     )..releasedBy(arena);
     final jActivity = getJActivity();
     jni.PermissionsManager(listener)
@@ -46,9 +46,9 @@ class PermissionManagerAndroid implements PermissionManager {
 }
 
 final class _PermissionsListener with jni.$PermissionsListener {
-  const _PermissionsListener(this.weakCompleter);
+  const _PermissionsListener(this.completer);
 
-  final WeakReference<Completer<bool>> weakCompleter;
+  final Completer<bool> completer;
 
   @override
   void onExplanationNeeded(JList<JString?>? permissionsToExplain) {
@@ -58,6 +58,6 @@ final class _PermissionsListener with jni.$PermissionsListener {
 
   @override
   void onPermissionResult(bool result) {
-    weakCompleter.target?.complete(result);
+    completer.complete(result);
   }
 }

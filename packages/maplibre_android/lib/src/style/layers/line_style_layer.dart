@@ -64,7 +64,7 @@ class LineStyleLayerAndroid extends StyleLayerAndroid<jni.LineLayer>
 
   @override
   PropertyValue<LineCap> get cap =>
-      jLayer.getLineCap().toDartEnum(
+      jLayer.lineCap.toDartEnum(
         values: LineCap.values,
         releaseOriginal: true,
       ) ??
@@ -85,7 +85,7 @@ class LineStyleLayerAndroid extends StyleLayerAndroid<jni.LineLayer>
 
   @override
   PropertyValue<LineJoin> get join =>
-      jLayer.getLineJoin().toDartEnum(
+      jLayer.lineJoin.toDartEnum(
         values: LineJoin.values,
         releaseOriginal: true,
       ) ??
@@ -106,7 +106,7 @@ class LineStyleLayerAndroid extends StyleLayerAndroid<jni.LineLayer>
 
   @override
   PropertyValue<double> get miterLimit =>
-      jLayer.getLineMiterLimit().toDart(releaseOriginal: true) ??
+      jLayer.lineMiterLimit.toDart(releaseOriginal: true) ??
       LineStyleLayer.defaultMiterLimit;
 
   @override
@@ -124,7 +124,7 @@ class LineStyleLayerAndroid extends StyleLayerAndroid<jni.LineLayer>
 
   @override
   PropertyValue<double> get roundLimit =>
-      jLayer.getLineRoundLimit().toDart(releaseOriginal: true) ??
+      jLayer.lineRoundLimit.toDart(releaseOriginal: true) ??
       LineStyleLayer.defaultRoundLimit;
 
   @override
@@ -142,7 +142,7 @@ class LineStyleLayerAndroid extends StyleLayerAndroid<jni.LineLayer>
 
   @override
   PropertyValue<double> get opacity =>
-      jLayer.getLineOpacity().toDart(releaseOriginal: true) ??
+      jLayer.lineOpacity.toDart(releaseOriginal: true) ??
       LineStyleLayer.defaultOpacity;
 
   @override
@@ -159,7 +159,7 @@ class LineStyleLayerAndroid extends StyleLayerAndroid<jni.LineLayer>
 
   @override
   PropertyValue<Color> get color =>
-      jLayer.getLineColor().toDartColor(releaseOriginal: true) ??
+      jLayer.lineColor.toDartColor(releaseOriginal: true) ??
       LineStyleLayer.defaultColor;
 
   @override
@@ -177,7 +177,7 @@ class LineStyleLayerAndroid extends StyleLayerAndroid<jni.LineLayer>
 
   @override
   PropertyValue<double> get width =>
-      jLayer.getLineWidth().toDart(releaseOriginal: true) ??
+      jLayer.lineWidth.toDart(releaseOriginal: true) ??
       LineStyleLayer.defaultWidth;
 
   @override
@@ -194,7 +194,7 @@ class LineStyleLayerAndroid extends StyleLayerAndroid<jni.LineLayer>
 
   @override
   PropertyValue<double> get gapWidth =>
-      jLayer.getLineGapWidth().toDart(releaseOriginal: true) ??
+      jLayer.lineGapWidth.toDart(releaseOriginal: true) ??
       LineStyleLayer.defaultGapWidth;
 
   @override
@@ -211,7 +211,7 @@ class LineStyleLayerAndroid extends StyleLayerAndroid<jni.LineLayer>
 
   @override
   PropertyValue<double> get offset =>
-      jLayer.getLineOffset().toDart(releaseOriginal: true) ??
+      jLayer.lineOffset.toDart(releaseOriginal: true) ??
       LineStyleLayer.defaultOffset;
 
   @override
@@ -228,7 +228,7 @@ class LineStyleLayerAndroid extends StyleLayerAndroid<jni.LineLayer>
 
   @override
   PropertyValue<double> get blur =>
-      jLayer.getLineBlur().toDart(releaseOriginal: true) ??
+      jLayer.lineBlur.toDart(releaseOriginal: true) ??
       LineStyleLayer.defaultBlur;
 
   @override
@@ -245,7 +245,7 @@ class LineStyleLayerAndroid extends StyleLayerAndroid<jni.LineLayer>
 
   @override
   PropertyValue<List<double>>? get dashArray =>
-      jLayer.getLineDasharray().toDartDoubleList(releaseOriginal: true);
+      jLayer.lineDasharray.toDartDoubleList(releaseOriginal: true);
 
   @override
   set dashArray(PropertyValue<List<double>>? property) => using((arena) {
@@ -264,7 +264,7 @@ class LineStyleLayerAndroid extends StyleLayerAndroid<jni.LineLayer>
 
   @override
   PropertyValue<String>? get pattern =>
-      jLayer.getLinePattern().toDart(releaseOriginal: true);
+      jLayer.linePattern.toDart(releaseOriginal: true);
 
   @override
   set pattern(PropertyValue<String>? property) => using((arena) {
@@ -281,7 +281,7 @@ class LineStyleLayerAndroid extends StyleLayerAndroid<jni.LineLayer>
 
   @override
   PropertyValue<Color>? get gradient =>
-      jLayer.getLineGradient().toDartColor(releaseOriginal: true);
+      jLayer.lineGradient.toDartColor(releaseOriginal: true);
 
   @override
   set gradient(PropertyValue<Color>? property) => using((arena) {
@@ -299,7 +299,7 @@ class LineStyleLayerAndroid extends StyleLayerAndroid<jni.LineLayer>
 
   @override
   PropertyValue<Offset> get translate =>
-      jLayer.getLineTranslate().toDartOffset(releaseOriginal: true) ??
+      jLayer.lineTranslate.toDartOffset(releaseOriginal: true) ??
       StyleLayerWithTranslate.defaultTranslate;
 
   @override
@@ -316,7 +316,7 @@ class LineStyleLayerAndroid extends StyleLayerAndroid<jni.LineLayer>
 
   @override
   PropertyValue<ReferenceSpace> get translateAnchor =>
-      jLayer.getLineTranslateAnchor().toDartReferenceSpace(
+      jLayer.lineTranslateAnchor.toDartReferenceSpace(
         releaseOriginal: true,
       ) ??
       StyleLayerWithTranslate.defaultTranslateAnchor;
@@ -336,7 +336,7 @@ class LineStyleLayerAndroid extends StyleLayerAndroid<jni.LineLayer>
 
   @override
   PropertyValue<double>? get sortKey =>
-      jLayer.getLineSortKey().toDart(releaseOriginal: true);
+      jLayer.lineSortKey.toDart(releaseOriginal: true);
 
   @override
   set sortKey(PropertyValue<double>? property) => using((arena) {
@@ -353,7 +353,7 @@ class LineStyleLayerAndroid extends StyleLayerAndroid<jni.LineLayer>
 
   @override
   Expression? get filter => using((arena) {
-    final jFilter = jLayer.getFilter()?..releasedBy(arena);
+    final jFilter = jLayer.filter?..releasedBy(arena);
     if (jFilter == null) return null;
     return jFilter.toDart(releaseOriginal: true);
   });
@@ -361,21 +361,21 @@ class LineStyleLayerAndroid extends StyleLayerAndroid<jni.LineLayer>
   @override
   set filter(Expression expression) => using((arena) {
     final jFilter = expression.toJExpression(arena)?..releasedBy(arena);
-    if (jFilter != null) jLayer.setFilter(jFilter);
+    if (jFilter != null) jLayer.filter = jFilter;
   });
 
   @override
   String get sourceId =>
-      jLayer.getSourceId().toDartString(releaseOriginal: true);
+      jLayer.sourceId.toDartString(releaseOriginal: true);
 
   @override
   String? get sourceLayerId =>
-      jLayer.getSourceLayer().toDartString(releaseOriginal: true);
+      jLayer.sourceLayer.toDartString(releaseOriginal: true);
 
   @override
   set sourceLayerId(String? value) => using((arena) {
     final jValue = value?.toJString();
     jValue?.releasedBy(arena);
-    jLayer.setSourceLayer(jValue);
+    jLayer.sourceLayer = jValue;
   });
 }

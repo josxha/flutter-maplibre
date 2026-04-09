@@ -219,6 +219,12 @@ extension MLNStyleLayerExt on MLNStyleLayer {
       case 'fill-extrusion-translate-anchor':
         (this as MLNFillExtrusionStyleLayer).fillExtrusionTranslationAnchor =
             expression;
+      case 'hillshade-shadow-color':
+        (this as MLNHillshadeStyleLayer).hillshadeShadowColor = expression;
+      case 'hillshade-accent-color':
+        (this as MLNHillshadeStyleLayer).hillshadeAccentColor = expression;
+      case 'hillshade-highlight-color':
+        (this as MLNHillshadeStyleLayer).hillshadeHighlightColor = expression;
       case 'line-dasharray':
         (this as MLNLineStyleLayer).lineDashPattern = expression;
       case 'line-translate':
@@ -462,6 +468,23 @@ extension NSExpressionExt on NSExpression {
       if (ffiValue == null) return null;
       final value = UIColor.as(ffiValue).toDartColor();
       return PropertyValue.value(value);
+    } else {
+      return PropertyValue.expression(toExpression());
+    }
+  }
+
+  /// Convert a [NSExpression] to a Dart [PropertyValue] of type list [Color].
+  PropertyValue<List<Color>>? toColorListPropertyValue() {
+    if (expressionType == NSExpressionType.NSConstantValueExpressionType) {
+      final ffiValue = constantValue;
+      if (ffiValue == null) return null;
+      final nsArray = NSArray.as(ffiValue);
+      final list = List.generate(
+        nsArray.count,
+        growable: false,
+        (index) => UIColor.as(nsArray.objectAtIndex(index)).toDartColor(),
+      );
+      return PropertyValue.value(list);
     } else {
       return PropertyValue.expression(toExpression());
     }
