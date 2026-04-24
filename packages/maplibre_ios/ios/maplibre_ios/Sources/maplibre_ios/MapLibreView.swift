@@ -10,7 +10,7 @@ class MapLibreView: NSObject, FlutterPlatformView, UIGestureRecognizerDelegate, 
     init(registrar: FlutterPluginRegistrar, frame: CGRect, viewId: Int64, initStyle: String) {
         _registrar = registrar
         _viewId = viewId
-        super.init()  // self can be used after calling super.init()
+        super.init() // self can be used after calling super.init()
 
         let trimmed = initStyle.trimmingCharacters(in: .whitespacesAndNewlines)
         if trimmed.starts(with: "{") {
@@ -19,8 +19,8 @@ class MapLibreView: NSObject, FlutterPlatformView, UIGestureRecognizerDelegate, 
         } else if trimmed.starts(with: "/") {
             _mapView = MLNMapView(frame: frame, styleURL: URL(fileURLWithPath: trimmed))
         } else if !trimmed.starts(with: "http://"),
-            !trimmed.starts(with: "https://"),
-            !trimmed.starts(with: "mapbox://")
+                  !trimmed.starts(with: "https://"),
+                  !trimmed.starts(with: "mapbox://")
         {
             // flutter asset
             let assetPath = _registrar.lookupKey(forAsset: initStyle)
