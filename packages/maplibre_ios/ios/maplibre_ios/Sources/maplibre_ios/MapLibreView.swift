@@ -42,7 +42,7 @@ class MapLibreView: NSObject, FlutterPlatformView, UIGestureRecognizerDelegate, 
             action: #selector(onLongPress(sender:))
         )
 
-        longPress.minimumPressDuration = 0.35
+        longPress.minimumPressDuration = 0.5
         longPress.allowableMovement = 10
         longPress.cancelsTouchesInView = false
         longPress.delegate = self
