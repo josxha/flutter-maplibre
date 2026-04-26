@@ -118,10 +118,19 @@ class StyleControllerAndroid extends StyleController {
   @override
   Future<void> addImage(String id, Uint8List bytes) async => using((arena) {
     final jId = id.toJString()..releasedBy(arena);
-    final jBitmap = jni.BitmapFactory.decodeByteArray(
+    final pixelRatio = PlatformDispatcher.instance.views.first.devicePixelRatio;
+    final targetDensity = (pixelRatio * 160).round();
+    final jOptions = jni.BitmapFactory$Options()
+      ..releasedBy(arena)
+      ..inScaled = true
+      ..inDensity = 160
+      ..inTargetDensity = targetDensity;
+
+    final jBitmap = jni.BitmapFactory.decodeByteArray$1(
       JByteArray.of(bytes)..releasedBy(arena),
       0,
       bytes.length,
+      jOptions,
     );
     if (jBitmap == null) return;
     jBitmap.releasedBy(arena);

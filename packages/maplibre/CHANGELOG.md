@@ -1,14 +1,17 @@
 ## 0.3.5
 
-Thanks to @BartoszStasiurka for his contribution in this release!
+This release contains a couple of bug fixes and improvements.
+Thanks to @BartoszStasiurka for his contributions in this release!
 
+- fix: set default `maxZoom` to 22 for `RasterSource`, `RasterDemSource` and `VectorSource`.
+- fix: missing export of `DownloadProgress`
 - Add `deleteRegion()` to `OfflineManager` by @BartoszStasiurka
 - Android: fix `onStyleLoaded()` unreliable if style not loaded immediately
 - Android: fix `featuresAtPoint` causes `ClassNotFoundException` in release builds
 - Android: update MapLibre Native to 13.0
-- iOS: update MapLibre Native to 6.25
 - Android: update `jni` to v1.0.0, `jnigen` to 0.16.0
-- fix: set default `maxZoom` to 22 for `RasterSource`, `RasterDemSource` and `VectorSource`.
+- Android: fix symbol icons appear smaller than on other platforms.
+- iOS: update MapLibre Native to 6.25
 
 Full Changelog: [v0.3.4+1...v0.3.5](https://github.com/josxha/flutter-maplibre/compare/v0.3.4+1...v0.3.5)
 

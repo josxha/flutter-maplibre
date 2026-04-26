@@ -12,6 +12,7 @@ export 'package:maplibre_platform_interface/maplibre_platform_interface.dart'
         CircleStyleLayer,
         ColorExtension,
         ColorReliefStyleLayer,
+        DownloadProgress,
         Expression,
         FillExtrusionStyleLayer,
         FillStyleLayer,
