@@ -248,7 +248,7 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: maplibre-flutter-demo.app
-          path: examples/build/ios/iphoneos/Runner.app
+          path: examples/build/ios/iphonesimulator/Runner.app
   build-web:
     name: "[Web] Build"
     runs-on: ubuntu-latest
