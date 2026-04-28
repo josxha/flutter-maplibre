@@ -209,7 +209,11 @@ class StyleControllerWeb extends StyleController {
         }
         _map.addSource(
           source.id,
-          interop.SourceSpecification.geoJson(type: 'geojson', data: data),
+          interop.SourceSpecification.geoJson(
+            type: 'geojson',
+            data: data,
+            tolerance: source.tolerance,
+          ),
         );
       case RasterDemSource():
         _map.addSource(
