@@ -125,7 +125,7 @@ abstract class StyleController {
     Color color = const Color(0xFF000000),
   }) async {
     final pixelSize = (devicePixelRatio * size).round();
-    
+
     await addImageFromCanvas(
       id: id,
       width: pixelSize,
