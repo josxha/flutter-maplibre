@@ -110,28 +110,35 @@ abstract class StyleController {
 
   /// Create an image from [IconData] and add it to the map with the given [id].
   ///
-  /// The [size] parameter defines the width and height of the resulting image
-  /// in pixels.
+  /// The [size] parameter defines the logical width and height of the
+  /// resulting image. Use [devicePixelRatio] to scale correctly the icon based
+  /// on the device's screen. You can use [MediaQuery] to retrieve the
+  /// corresponding value.
   ///
   /// The [color] parameter defines the color of the icon. By default, it is
   /// black.
   Future<void> addImageFromIconData({
     required String id,
     required IconData iconData,
-    int size = 200,
+    double size = 200,
+    double devicePixelRatio = 1.0,
     Color color = const Color(0xFF000000),
   }) async {
+    final pixelSize = (devicePixelRatio * size).round();
+    
     await addImageFromCanvas(
       id: id,
-      width: size,
-      height: size,
+      width: pixelSize,
+      height: pixelSize,
       painter: (canvas) {
+        canvas.scale(devicePixelRatio);
+
         TextPainter(textDirection: TextDirection.ltr)
           ..text = TextSpan(
             text: String.fromCharCode(iconData.codePoint),
             style: TextStyle(
               letterSpacing: 0,
-              fontSize: size.toDouble(),
+              fontSize: size,
               fontFamily: iconData.fontFamily,
               package: iconData.fontPackage,
               color: color,
