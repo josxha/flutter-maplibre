@@ -15,20 +15,6 @@ public class Helpers: NSObject {
         target.setValue(value, forKey: field)
     }
 
-    @objc public static func parsePredicate(raw: String) -> NSPredicate? {
-        if let data = raw.data(using: .utf8) {
-            do {
-                let json = try JSONSerialization.jsonObject(with: data, options: [])
-                return NSPredicate(mglJSONObject: json)
-            } catch let e {
-                print("Couldn't parse NSPredicate from JSON: \(e)")
-                return nil
-            }
-        } else {
-            return nil
-        }
-    }
-
     @objc public static func parseExpression(
         propertyName: String, expression: String
     ) -> NSExpression? {
@@ -113,6 +99,11 @@ public class Helpers: NSObject {
 
     @objc public static func zoomLevelToAltitude(zoomLevel: Double, pitch: CGFloat, latitude: Double, size: CGSize) -> Double {
         MLNAltitudeForZoomLevel(zoomLevel, pitch, latitude, size)
+    }
+
+    @objc public static func createUIEdgeInsetsNSExpression(padding: [Double]) -> NSExpression {
+        let edgeInsets = UIEdgeInsets(top: CGFloat(padding[0]), left: CGFloat(padding[1]), bottom: CGFloat(padding[2]), right: CGFloat(padding[3]))
+        return NSExpression(forConstantValue: edgeInsets)
     }
 }
 

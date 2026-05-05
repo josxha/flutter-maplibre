@@ -231,9 +231,7 @@ void main() {
       expect(moveCamera, isA<MapEvent>());
       expect(moveCamera.camera, equals(camera));
 
-      const startMoveCamera = MapEventStartMoveCamera(
-        reason: CameraChangeReason.apiGesture,
-      );
+      const startMoveCamera = MapEventStartMoveCamera(reason: .apiGesture);
       expect(startMoveCamera, isA<MapEvent>());
       expect(startMoveCamera.reason, equals(CameraChangeReason.apiGesture));
 

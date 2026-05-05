@@ -272,7 +272,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
     bool accuracyAnimation = true,
     bool compassAnimation = true,
     bool pulse = true,
-    BearingRenderMode bearingRenderMode = BearingRenderMode.gps,
+    BearingRenderMode bearingRenderMode = .gps,
   }) async {
     debugPrint("Can't track the user location on web.");
   }
@@ -489,7 +489,7 @@ class MapLibreMapStateWebView extends MapLibreMapState {
   @override
   Future<void> trackLocation({
     bool trackLocation = true,
-    BearingTrackMode trackBearing = BearingTrackMode.gps,
+    BearingTrackMode trackBearing = .gps,
   }) async {
     debugPrint("Can't enable the user location on web programmatically.");
   }
@@ -751,12 +751,10 @@ class MapLibreMapStateWebView extends MapLibreMapState {
             final CameraChangeReason reason;
             if (_nextGestureCausedByController) {
               _nextGestureCausedByController = false;
-              reason = CameraChangeReason.developerAnimation;
+              reason = .developerAnimation;
             } else {
               final hasOriginalEvent = b.getUint8(1) == 1;
-              reason = hasOriginalEvent
-                  ? CameraChangeReason.apiGesture
-                  : CameraChangeReason.apiAnimation;
+              reason = hasOriginalEvent ? .apiGesture : .apiAnimation;
             }
             widget.onEvent?.call(MapEventStartMoveCamera(reason: reason));
           case eventMoveEnd:

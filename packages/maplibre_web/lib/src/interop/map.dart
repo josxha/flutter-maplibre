@@ -38,12 +38,12 @@ extension type JsMap._(Camera _) implements Camera {
   /// https://github.com/maplibre/maplibre-gl-js/blob/41e5b32f5bd6264cbc4a8b38210ec6a410152259/src/ui/map.ts#L1178
   external LngLat unproject(Point point);
 
-  /// Get the [HTMLElement] of the map.
+  /// The [HTMLElement] of the map.
   ///
   /// https://github.com/maplibre/maplibre-gl-js/blob/41e5b32f5bd6264cbc4a8b38210ec6a410152259/src/ui/map.ts#L2891
   external HTMLElement getContainer();
 
-  /// Get the JS canvas of the map.
+  /// The JS canvas of the map.
   ///
   /// https://github.com/maplibre/maplibre-gl-js/blob/41e5b32f5bd6264cbc4a8b38210ec6a410152259/src/ui/map.ts#L2919
   external HTMLCanvasElement getCanvas();
@@ -114,7 +114,7 @@ extension type JsMap._(Camera _) implements Camera {
   /// Get a Source by its id.
   external SourceSpecification? getSource(String id);
 
-  /// Get the loaded style.
+  /// The loaded style.
   external StyleSpecification? getStyle();
 
   external DoubleClickZoomHandler doubleClickZoom;
@@ -145,6 +145,44 @@ extension type JsMap._(Camera _) implements Camera {
     JSArray<Point> rect,
     JSAny? options,
   );
+
+  /// Sets the value of a paint property in the specified style layer.
+  ///
+  /// [layerId] - The ID of the layer to set the paint property in.
+  /// [name] - The name of the paint property to set.
+  /// [value] - The value of the paint property to set.
+  ///  * Must be of a type appropriate for the property, as defined in the
+  ///    [MapLibre Style Specification](https://maplibre.org/maplibre-style-spec/).
+  ///  * Pass `null` to unset the existing value.
+  external void setPaintProperty(String layerId, String name, JSAny? value);
+
+  /// Sets the value of a layout property in the specified style layer.
+  ///
+  /// [layerId] - The ID of the layer to set the layout property in.
+  /// [name] - The name of the layout property to set.
+  /// [value] - The value of the layout property to set.
+  ///  * Must be of a type appropriate for the property, as defined in the
+  ///    [MapLibre Style Specification](https://maplibre.org/maplibre-style-spec/).
+  ///  * Pass `null` to unset the existing value.
+  external void setLayoutProperty(String layerId, String name, JSAny? value);
+
+  /// Get the value of a paint property in the specified style layer.
+  ///
+  /// [layerId] - The ID of the layer to get the paint property from.
+  /// [name] - The name of the paint property to get.
+  /// Returns the value of the paint property, or `null` if it is not set.
+  ///
+  /// https://maplibre.org/maplibre-gl-js/docs/API/classes/Map/#getpaintproperty
+  external JSAny? getPaintProperty(String layerId, String name);
+
+  /// Get the value of a layout property in the specified style layer.
+  ///
+  /// [layerId] - The ID of the layer to get the layout property from.
+  /// [name] - The name of the layout property to get.
+  /// Returns the value of the layout property, or `null` if it is not set.
+  ///
+  /// https://maplibre.org/maplibre-gl-js/docs/API/classes/Map/#getlayoutproperty
+  external JSAny? getLayoutProperty(String layerId, String name);
 }
 
 /// Anonymous MapOptions for the MapLibre JavaScript [JsMap].
@@ -160,197 +198,6 @@ extension type MapOptions._(JSObject _) implements JSObject {
     required double bearing,
     required double pitch,
     required bool attributionControl,
-  });
-}
-
-/// The specifications of map sources.
-@anonymous
-@JS()
-extension type SourceSpecification._(JSObject _) implements JSObject {
-  /// The default constructor for a [SourceSpecification].
-  external SourceSpecification({required String type});
-
-  /// Create a new GeoJSON source.
-  external factory SourceSpecification.geoJson({
-    required String type,
-    required JSAny data,
-    num? maxzoom,
-    String? attribution,
-    num? buffer,
-  });
-
-  /// Create a new raster DEM source.
-  factory SourceSpecification.rasterDem({
-    required String type,
-    required int tileSize,
-    required String? attribution,
-    String? url,
-    JSAny? tiles,
-  }) => url != null
-      ? SourceSpecification._rasterDemUrl(
-          type: type,
-          tileSize: tileSize,
-          attribution: attribution,
-          url: url,
-        )
-      : SourceSpecification._rasterDemTiles(
-          type: type,
-          tileSize: tileSize,
-          attribution: attribution,
-          tiles: tiles!,
-        );
-
-  external factory SourceSpecification._rasterDemUrl({
-    required String type,
-    required int tileSize,
-    required String? attribution,
-    required String url,
-  });
-
-  external factory SourceSpecification._rasterDemTiles({
-    required String type,
-    required int tileSize,
-    required String? attribution,
-    required JSAny tiles,
-  });
-
-  /// Create a new raster source.
-  factory SourceSpecification.raster({
-    required String type,
-    required int tileSize,
-    required String? attribution,
-    JSAny? tiles,
-    String? url,
-  }) => url != null
-      ? SourceSpecification._rasterUrl(
-          type: type,
-          tileSize: tileSize,
-          attribution: attribution,
-          url: url,
-        )
-      : SourceSpecification._rasterTiles(
-          type: type,
-          tileSize: tileSize,
-          attribution: attribution,
-          tiles: tiles!,
-        );
-
-  external factory SourceSpecification._rasterUrl({
-    required String type,
-    required int tileSize,
-    required String? attribution,
-    required String url,
-  });
-
-  external factory SourceSpecification._rasterTiles({
-    required String type,
-    required int tileSize,
-    required String? attribution,
-    required JSAny tiles,
-  });
-
-  /// Create a new vector source.
-  external factory SourceSpecification.vector({
-    required String type,
-    required String? url,
-  });
-
-  /// Create a new image source.
-  external factory SourceSpecification.image({
-    required String type,
-    required String url,
-    required JSAny coordinates,
-  });
-
-  /// Create a new video source.
-  external factory SourceSpecification.video({
-    required String type,
-    required JSAny urls,
-    required JSAny coordinates,
-  });
-
-  /// Used to update the data of a GeoJSON source.
-  external void setData(JSAny data);
-}
-
-/// The specifications of map layers.
-@anonymous
-@JS()
-extension type LayerSpecification._(JSObject _) implements JSObject {
-  /// The default constructor for a [LayerSpecification].
-  external LayerSpecification({
-    required String id,
-    required String type,
-    required JSAny layout,
-    required JSAny paint,
-    required double? minzoom,
-    required double? maxzoom,
-    String? source,
-  });
-
-  /// Get the layer id.
-  external String id;
-
-  external JSAny filter;
-  @JS('source-layer')
-  external String? sourceLayer;
-}
-
-/// Image data used by [JsMap.addImage].
-///
-/// https://github.com/maplibre/maplibre-gl-js/blob/42ecfef53c25150227256bb0b5daa29af6efd9e7/src/style/style_image.ts#L92-L93
-@anonymous
-@JS()
-extension type ImageSpecification._(JSObject _) implements JSObject {
-  /// Create a new [ImageSpecification] object.
-  external ImageSpecification({
-    required int width,
-    required int height,
-    required JSUint8Array data,
-  });
-}
-
-/// The style's image metadata
-///
-/// https://github.com/maplibre/maplibre-gl-js/blob/42ecfef53c25150227256bb0b5daa29af6efd9e7/src/style/style_image.ts#L58-L59
-@anonymous
-@JS()
-extension type StyleImageMetadata._(JSObject _) implements JSObject {
-  /// Create a new [StyleImageMetadata] object.
-  external StyleImageMetadata({
-    /// The ratio of pixels in the image to physical pixels on the screen
-    double? pixelRatio,
-
-    /// Whether the image should be interpreted as an SDF image
-    bool? sdf,
-  });
-}
-
-/// Projection used by [JsMap.setProjection].
-///
-/// Defaults to mercator. Supports interpolate expressions.
-@anonymous
-@JS()
-extension type ProjectionSpecification._(JSObject _) implements JSObject {
-  /// Create a new [ProjectionSpecification] object.
-  external ProjectionSpecification({
-    /// The projection definition type. Can be specified as a string, a
-    /// transition state, or an expression.
-    required String type,
-  });
-}
-
-/// StyleSwapOptions
-///
-/// https://github.com/maplibre/maplibre-gl-js/blob/76410880f81de2582be073bc2d730b3f4b8f254d/src/style/style.ts#L159
-@anonymous
-@JS()
-extension type StyleSwapOptions._(JSObject _) implements JSObject {
-  /// Create a new [StyleSwapOptions] object.
-  external StyleSwapOptions({
-    /// If false, force a 'full' update, removing the current style
-    /// and building the given one instead of attempting a diff-based update.
-    bool? diff,
   });
 }
 

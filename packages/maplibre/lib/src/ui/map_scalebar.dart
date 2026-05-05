@@ -15,7 +15,7 @@ class MapScalebar extends StatelessWidget {
   const MapScalebar({
     this.alignment = Alignment.bottomLeft,
     this.padding = const EdgeInsets.all(12),
-    this.units = ScaleBarUnit.metric,
+    this.units = .metric,
     super.key,
   });
 
@@ -71,7 +71,7 @@ class ScaleBarPainter extends CustomPainter {
     const milesToMeters = 1609.344;
     const feetToMeters = 0.3048;
 
-    if (units == ScaleBarUnit.imperial) {
+    if (units == .imperial) {
       const maxPx = 200.0;
       final candidatesMeters = <double>[
         20 * feetToMeters, // 20 ft
@@ -169,7 +169,7 @@ class ScaleBarPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final unit = units == ScaleBarUnit.imperial
+    final unit = units == .imperial
         ? (meters >= _Unit.mi.meters ? _Unit.mi : _Unit.ft)
         : (meters >= _Unit.km.meters ? _Unit.km : _Unit.m);
     canvas.drawVertices(

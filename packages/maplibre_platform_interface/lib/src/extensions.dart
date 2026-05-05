@@ -15,3 +15,22 @@ extension ColorExtension on Color {
         .toUpperCase();
   }
 }
+
+/// Extension methods on [String].
+extension StringExtension on String {
+  /// Convert the hex string to a [Color] object.
+  Color? toColor() {
+    final regex = RegExp(
+      r'rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d*\.?\d+))?\)',
+    );
+    final match = regex.firstMatch(this);
+    if (match == null) return null;
+    final r = int.parse(match.group(1)!);
+    final g = int.parse(match.group(2)!);
+    final b = int.parse(match.group(3)!);
+    final a = match.group(4) != null
+        ? (double.parse(match.group(4)!) * 255).round()
+        : 255;
+    return Color.fromARGB(a, r, g, b);
+  }
+}

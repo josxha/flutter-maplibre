@@ -536,10 +536,34 @@ sealed class CGBlendMode {
   static const kCGBlendModePlusDarker = 26;
   static const kCGBlendModePlusLighter = 27;}
 
+final class CGColor extends ffi.Opaque{
+}
+
 final class CGContext extends ffi.Opaque{
 }
 
 final class CGImage extends ffi.Opaque{
+}
+
+
+/// WARNING: CIColor is a stub. To generate bindings for this class, include
+/// CIColor in your config's objc-interfaces list.
+///
+/// CIColor
+extension type CIColor._(objc.ObjCObject object$) implements objc.ObjCObject,objc.NSObject,objc.NSSecureCoding,objc.NSCopying {
+  /// Constructs a [CIColor] that points to the same underlying object as [other].
+  CIColor.as(objc.ObjCObject other) : object$ = other {
+    objc.checkOsVersionInternal('CIColor', iOS: (false, (5, 0, 0)));
+  }
+
+  /// Constructs a [CIColor] that wraps the given raw object pointer.
+  CIColor.fromPointer(ffi.Pointer<objc.ObjCObjectImpl> other,
+      {bool retain = false, bool release = false}) :
+          object$ = objc.ObjCObject(other, retain: retain, release: release) {
+    objc.checkOsVersionInternal('CIColor', iOS: (false, (5, 0, 0)));
+  }
+
+
 }
 
 
@@ -920,6 +944,13 @@ _objc_msgSend_xtuoz7(_class_Helpers, _sel_createOfflinePackProgressListenerWithC
   }
 
 
+  /// createUIEdgeInsetsNSExpressionWithPadding:
+  static NSExpression createUIEdgeInsetsNSExpressionWithPadding(objc.NSArray padding) {
+    final $ret = _objc_msgSend_1sotr3r(_class_Helpers, _sel_createUIEdgeInsetsNSExpressionWithPadding_, padding.ref.pointer);
+    return NSExpression.fromPointer($ret, retain: true, release: true);
+  }
+
+
   /// new
   static Helpers new$() {
     final $ret = _objc_msgSend_151sglz(_class_Helpers, _sel_new);
@@ -931,13 +962,6 @@ _objc_msgSend_xtuoz7(_class_Helpers, _sel_createOfflinePackProgressListenerWithC
   static NSExpression? parseExpressionWithPropertyName(objc.NSString propertyName, {required objc.NSString expression}) {
     final $ret = _objc_msgSend_15qeuct(_class_Helpers, _sel_parseExpressionWithPropertyName_expression_, propertyName.ref.pointer, expression.ref.pointer);
     return $ret.address == 0 ? null : NSExpression.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// parsePredicateWithRaw:
-  static NSPredicate? parsePredicateWithRaw(objc.NSString raw) {
-    final $ret = _objc_msgSend_1sotr3r(_class_Helpers, _sel_parsePredicateWithRaw_, raw.ref.pointer);
-    return $ret.address == 0 ? null : NSPredicate.fromPointer($ret, retain: true, release: true);
   }
 
 
@@ -977,10 +1001,33 @@ extension Helpers$Methods on Helpers {
 }
 
 
+/// MLNAdditions
+extension MLNAdditions on NSPredicate {
+
+  /// An equivalent Foundation object that can be serialized as JSON.
+/// 
+/// The Foundation object conforms to the
+/// [MapLibre Style Spec](https://maplibre.org/maplibre-style-spec/expressions/).
+/// See the
+/// “[Predicates and Expressions](../predicates-and-expressions.html)”
+/// guide for a correspondence of operators and types between the style
+/// specification and the `NSPredicate` representation used by this SDK.
+/// 
+/// You can use `NSJSONSerialization` to serialize the Foundation object as data to
+/// write to a file.
+  objc.ObjCObject get mgl_jsonExpressionObject {
+  objc.checkOsVersionInternal('NSPredicate.mgl_jsonExpressionObject', iOS: (false, (3, 0, 0)), macOS: (false, (10, 4, 0)));
+    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_mgl_jsonExpressionObject);
+    return objc.ObjCObject($ret, retain: true, release: true);
+  }
+
+}
+
+
 /// Methods for creating expressions that use Mapbox-specific functionality and for
 /// converting to and from the JSON format defined in the
 /// <a href="https://maplibre.org/maplibre-style-spec/expressions/">MapLibre Style Spec</a>.
-extension MLNAdditions on NSExpression {
+extension MLNAdditions$1 on NSExpression {
 
   /// Returns a copy of the receiver localized into the given locale.
 /// 
@@ -21877,14 +21924,12 @@ sealed class NSExpressionType {
   static const NSConditionalExpressionType = 20;}
 
 
-/// WARNING: NSPredicate is a stub. To generate bindings for this class, include
-/// NSPredicate in your config's objc-interfaces list.
-///
 /// NSPredicate
 extension type NSPredicate._(objc.ObjCObject object$) implements objc.ObjCObject,objc.NSObject,objc.NSSecureCoding,objc.NSCopying {
   /// Constructs a [NSPredicate] that points to the same underlying object as [other].
   NSPredicate.as(objc.ObjCObject other) : object$ = other {
     objc.checkOsVersionInternal('NSPredicate', iOS: (false, (3, 0, 0)), macOS: (false, (10, 4, 0)));
+    assert(isA(object$));
   }
 
   /// Constructs a [NSPredicate] that wraps the given raw object pointer.
@@ -21892,8 +21937,166 @@ extension type NSPredicate._(objc.ObjCObject object$) implements objc.ObjCObject
       {bool retain = false, bool release = false}) :
           object$ = objc.ObjCObject(other, retain: retain, release: release) {
     objc.checkOsVersionInternal('NSPredicate', iOS: (false, (3, 0, 0)), macOS: (false, (10, 4, 0)));
+    assert(isA(object$));
   }
 
+  /// Returns whether [obj] is an instance of [NSPredicate].
+  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_NSPredicate);
+
+  /// alloc
+  static NSPredicate alloc() {
+    final $ret = _objc_msgSend_151sglz(_class_NSPredicate, _sel_alloc);
+    return NSPredicate.fromPointer($ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static NSPredicate allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final $ret = _objc_msgSend_1cwp428(_class_NSPredicate, _sel_allocWithZone_, zone);
+    return NSPredicate.fromPointer($ret, retain: false, release: true);
+  }
+
+
+  /// new
+  static NSPredicate new$() {
+    final $ret = _objc_msgSend_151sglz(_class_NSPredicate, _sel_new);
+    return NSPredicate.fromPointer($ret, retain: false, release: true);
+  }
+
+
+  /// predicateFromMetadataQueryString:
+  static NSPredicate? predicateFromMetadataQueryString(objc.NSString queryString) {
+  objc.checkOsVersionInternal('NSPredicate.predicateFromMetadataQueryString:', iOS: (true, null), macOS: (false, (10, 9, 0)));
+    final $ret = _objc_msgSend_1sotr3r(_class_NSPredicate, _sel_predicateFromMetadataQueryString_, queryString.ref.pointer);
+    return $ret.address == 0 ? null : NSPredicate.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// predicateWithBlock:
+  static NSPredicate predicateWithBlock(objc.ObjCBlock<ffi.Bool Function(ffi.Pointer<objc.ObjCObjectImpl>?, objc.NSDictionary?)> block) {
+  objc.checkOsVersionInternal('NSPredicate.predicateWithBlock:', iOS: (false, (4, 0, 0)), macOS: (false, (10, 6, 0)));
+    final $ret = _objc_msgSend_nnxkei(_class_NSPredicate, _sel_predicateWithBlock_, block.ref.pointer);
+    return NSPredicate.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// predicateWithFormat:
+  static NSPredicate predicateWithFormat(objc.NSString predicateFormat) {
+  objc.checkOsVersionInternal('NSPredicate.predicateWithFormat:', iOS: (false, (3, 0, 0)), macOS: (false, (10, 4, 0)));
+    final $ret = _objc_msgSend_1sotr3r(_class_NSPredicate, _sel_predicateWithFormat_, predicateFormat.ref.pointer);
+    return NSPredicate.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// predicateWithFormat:argumentArray:
+  static NSPredicate predicateWithFormat$1(objc.NSString predicateFormat, {objc.NSArray? argumentArray}) {
+  objc.checkOsVersionInternal('NSPredicate.predicateWithFormat:argumentArray:', iOS: (false, (3, 0, 0)), macOS: (false, (10, 4, 0)));
+    final $ret = _objc_msgSend_15qeuct(_class_NSPredicate, _sel_predicateWithFormat_argumentArray_, predicateFormat.ref.pointer, argumentArray?.ref.pointer ?? ffi.nullptr);
+    return NSPredicate.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// Returns a predicate equivalent to the given Foundation object deserialized
+/// from JSON data.
+/// 
+/// The Foundation object is interpreted according to the
+/// [MapLibre Style Spec](https://maplibre.org/maplibre-style-spec/expressions/).
+/// See the
+/// “[Predicates and Expressions](../predicates-and-expressions.html)”
+/// guide for a correspondence of operators and types between the style
+/// specification and the `NSPredicate` representation used by this SDK.
+/// 
+/// @param object A Foundation object deserialized from JSON data, for example
+/// using `NSJSONSerialization`.
+/// @return An initialized predicate equivalent to `object`, suitable for use
+/// with the ``MLNVectorStyleLayer/predicate`` property.
+  static NSPredicate predicateWithMLNJSONObject(objc.ObjCObject object) {
+  objc.checkOsVersionInternal('NSPredicate.predicateWithMLNJSONObject:', iOS: (false, (3, 0, 0)), macOS: (false, (10, 4, 0)));
+    final $ret = _objc_msgSend_1sotr3r(_class_NSPredicate, _sel_predicateWithMLNJSONObject_, object.ref.pointer);
+    return NSPredicate.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// predicateWithValue:
+  static NSPredicate predicateWithValue(bool value) {
+  objc.checkOsVersionInternal('NSPredicate.predicateWithValue:', iOS: (false, (3, 0, 0)), macOS: (false, (10, 4, 0)));
+    final $ret = _objc_msgSend_1t6aok9(_class_NSPredicate, _sel_predicateWithValue_, value);
+    return NSPredicate.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// supportsSecureCoding
+  static bool getSupportsSecureCoding() {
+    return _objc_msgSend_91o635(_class_NSPredicate, _sel_supportsSecureCoding);
+
+  }
+  /// Returns a new instance of NSPredicate constructed with the default `new` method.
+  NSPredicate() : this.as(new$().object$);
+
+}
+
+extension NSPredicate$Methods on NSPredicate {
+
+  /// allowEvaluation
+  void allowEvaluation() {
+  objc.checkOsVersionInternal('NSPredicate.allowEvaluation', iOS: (false, (7, 0, 0)), macOS: (false, (10, 9, 0)));
+_objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_allowEvaluation);
+
+  }
+
+
+  /// encodeWithCoder:
+  void encodeWithCoder(objc.NSCoder coder) {
+_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_encodeWithCoder_, coder.ref.pointer);
+
+  }
+
+
+  /// evaluateWithObject:
+  bool evaluateWithObject(objc.ObjCObject? object) {
+  objc.checkOsVersionInternal('NSPredicate.evaluateWithObject:', iOS: (false, (3, 0, 0)), macOS: (false, (10, 4, 0)));
+    return _objc_msgSend_19nvye5(object$.ref.pointer, _sel_evaluateWithObject_, object?.ref.pointer ?? ffi.nullptr);
+
+  }
+
+
+  /// evaluateWithObject:substitutionVariables:
+  bool evaluateWithObject$1(objc.ObjCObject? object, {objc.NSDictionary? substitutionVariables}) {
+  objc.checkOsVersionInternal('NSPredicate.evaluateWithObject:substitutionVariables:', iOS: (false, (3, 0, 0)), macOS: (false, (10, 5, 0)));
+    return _objc_msgSend_1lsax7n(object$.ref.pointer, _sel_evaluateWithObject_substitutionVariables_, object?.ref.pointer ?? ffi.nullptr, substitutionVariables?.ref.pointer ?? ffi.nullptr);
+
+  }
+
+
+  /// init
+  NSPredicate init() {
+  objc.checkOsVersionInternal('NSPredicate.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
+    final $ret = _objc_msgSend_151sglz(object$.ref.retainAndReturnPointer(), _sel_init);
+    return NSPredicate.fromPointer($ret, retain: false, release: true);
+  }
+
+
+  /// initWithCoder:
+  NSPredicate? initWithCoder(objc.NSCoder coder) {
+    final $ret = _objc_msgSend_1sotr3r(object$.ref.retainAndReturnPointer(), _sel_initWithCoder_, coder.ref.pointer);
+    return $ret.address == 0 ? null : NSPredicate.fromPointer($ret, retain: false, release: true);
+  }
+
+
+  /// predicateFormat
+  objc.NSString get predicateFormat {
+  objc.checkOsVersionInternal('NSPredicate.predicateFormat', iOS: (false, (3, 0, 0)), macOS: (false, (10, 4, 0)));
+    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_predicateFormat);
+    return objc.NSString.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// predicateWithSubstitutionVariables:
+  NSPredicate predicateWithSubstitutionVariables(objc.NSDictionary variables) {
+  objc.checkOsVersionInternal('NSPredicate.predicateWithSubstitutionVariables:', iOS: (false, (3, 0, 0)), macOS: (false, (10, 4, 0)));
+    final $ret = _objc_msgSend_1sotr3r(object$.ref.pointer, _sel_predicateWithSubstitutionVariables_, variables.ref.pointer);
+    return NSPredicate.fromPointer($ret, retain: true, release: true);
+  }
 
 }
 
@@ -22876,6 +23079,56 @@ extension ObjCBlock_bool_ffiVoid_MLNMapView_idMLNAnnotation$CallExtension on obj
   bool call(ffi.Pointer<ffi.Void> arg0, MLNMapView arg1, MLNAnnotation arg2) =>ref.pointer.ref.invoke.cast<ffi.NativeFunction<ffi.Bool Function(ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1, ffi.Pointer<objc.ObjCObjectImpl> arg2)>>()
   .asFunction<bool Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<ffi.Void> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>()(
     ref.pointer, arg0, arg1.ref.pointer, arg2.ref.pointer);
+}
+
+
+/// Construction methods for `objc.ObjCBlock<ffi.Bool Function(ffi.Pointer<objc.ObjCObjectImpl>?, objc.NSDictionary?)>`.
+abstract final class ObjCBlock_bool_objcObjCObjectImpl_NSDictionary {
+  /// Returns a block that wraps the given raw block pointer.
+  static objc.ObjCBlock<ffi.Bool Function(ffi.Pointer<objc.ObjCObjectImpl>?, objc.NSDictionary?)> fromPointer(ffi.Pointer<objc.ObjCBlockImpl> pointer,
+      {bool retain = false, bool release = false}) =>
+      objc.ObjCBlock<ffi.Bool Function(ffi.Pointer<objc.ObjCObjectImpl>?, objc.NSDictionary?)>(pointer, retain: retain, release: release);
+
+  /// Creates a block from a C function pointer.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  static objc.ObjCBlock<ffi.Bool Function(ffi.Pointer<objc.ObjCObjectImpl>?, objc.NSDictionary?)> fromFunctionPointer(ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(ffi.Pointer<objc.ObjCObjectImpl> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1)>> ptr) =>
+      objc.ObjCBlock<ffi.Bool Function(ffi.Pointer<objc.ObjCObjectImpl>?, objc.NSDictionary?)>(objc.newPointerBlock(_fnPtrCallable, ptr.cast()),
+          retain: false, release: true);
+
+  /// Creates a block from a Dart function.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  ///
+  /// If `keepIsolateAlive` is true, this block will keep this isolate alive
+  /// until it is garbage collected by both Dart and ObjC.
+  static objc.ObjCBlock<ffi.Bool Function(ffi.Pointer<objc.ObjCObjectImpl>?, objc.NSDictionary?)> fromFunction(bool Function(objc.ObjCObject? , objc.NSDictionary? ) fn,
+          {bool keepIsolateAlive = true}) =>
+      objc.ObjCBlock<ffi.Bool Function(ffi.Pointer<objc.ObjCObjectImpl>?, objc.NSDictionary?)>(objc.newClosureBlock(_closureCallable, (ffi.Pointer<objc.ObjCObjectImpl> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1) => fn(arg0.address == 0 ? null : objc.ObjCObject(arg0, retain: true, release: true), arg1.address == 0 ? null : objc.NSDictionary.fromPointer(arg1, retain: true, release: true)), keepIsolateAlive),
+          retain: false, release: true);
+
+  static bool _fnPtrTrampoline(
+      ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<objc.ObjCObjectImpl> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1) =>
+          block.ref.target.cast<ffi.NativeFunction<ffi.Bool Function(ffi.Pointer<objc.ObjCObjectImpl> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1)>>()
+              .asFunction<bool Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>()(arg0, arg1);
+  static ffi.Pointer<ffi.Void> _fnPtrCallable = ffi.Pointer.fromFunction<
+      ffi.Bool Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>(_fnPtrTrampoline , false).cast();
+  static bool _closureTrampoline(
+      ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<objc.ObjCObjectImpl> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1) =>
+      (objc.getBlockClosure(block) as bool Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> ))(arg0, arg1);
+  static ffi.Pointer<ffi.Void> _closureCallable = ffi.Pointer.fromFunction<
+      ffi.Bool Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>(_closureTrampoline , false).cast();
+}
+
+/// Call operator for `objc.ObjCBlock<ffi.Bool Function(ffi.Pointer<objc.ObjCObjectImpl>?, objc.NSDictionary?)>`.
+extension ObjCBlock_bool_objcObjCObjectImpl_NSDictionary$CallExtension on objc.ObjCBlock<ffi.Bool Function(ffi.Pointer<objc.ObjCObjectImpl>?, objc.NSDictionary?)> {
+  bool call(objc.ObjCObject? arg0, objc.NSDictionary? arg1) =>ref.pointer.ref.invoke.cast<ffi.NativeFunction<ffi.Bool Function(ffi.Pointer<objc.ObjCBlockImpl> block, ffi.Pointer<objc.ObjCObjectImpl> arg0, ffi.Pointer<objc.ObjCObjectImpl> arg1)>>()
+  .asFunction<bool Function(ffi.Pointer<objc.ObjCBlockImpl> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>()(
+    ref.pointer, arg0?.ref.pointer ?? ffi.nullptr, arg1?.ref.pointer ?? ffi.nullptr);
 }
 
 
@@ -27350,14 +27603,12 @@ extension type UIButton._(objc.ObjCObject object$) implements objc.ObjCObject,UI
 }
 
 
-/// WARNING: UIColor is a stub. To generate bindings for this class, include
-/// UIColor in your config's objc-interfaces list.
-///
 /// UIColor
 extension type UIColor._(objc.ObjCObject object$) implements objc.ObjCObject,objc.NSObject,objc.NSSecureCoding,objc.NSCopying {
   /// Constructs a [UIColor] that points to the same underlying object as [other].
   UIColor.as(objc.ObjCObject other) : object$ = other {
     objc.checkOsVersionInternal('UIColor', iOS: (false, (2, 0, 0)));
+    assert(isA(object$));
   }
 
   /// Constructs a [UIColor] that wraps the given raw object pointer.
@@ -27365,8 +27616,425 @@ extension type UIColor._(objc.ObjCObject object$) implements objc.ObjCObject,obj
       {bool retain = false, bool release = false}) :
           object$ = objc.ObjCObject(other, retain: retain, release: release) {
     objc.checkOsVersionInternal('UIColor', iOS: (false, (2, 0, 0)));
+    assert(isA(object$));
   }
 
+  /// Returns whether [obj] is an instance of [UIColor].
+  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_UIColor);
+
+  /// alloc
+  static UIColor alloc() {
+    final $ret = _objc_msgSend_151sglz(_class_UIColor, _sel_alloc);
+    return UIColor.fromPointer($ret, retain: false, release: true);
+  }
+
+
+  /// allocWithZone:
+  static UIColor allocWithZone(ffi.Pointer<objc.NSZone> zone) {
+    final $ret = _objc_msgSend_1cwp428(_class_UIColor, _sel_allocWithZone_, zone);
+    return UIColor.fromPointer($ret, retain: false, release: true);
+  }
+
+
+  /// blackColor
+  static UIColor getBlackColor() {
+  objc.checkOsVersionInternal('UIColor.blackColor', iOS: (false, (2, 0, 0)));
+    final $ret = _objc_msgSend_151sglz(_class_UIColor, _sel_blackColor);
+    return UIColor.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// blueColor
+  static UIColor getBlueColor() {
+  objc.checkOsVersionInternal('UIColor.blueColor', iOS: (false, (2, 0, 0)));
+    final $ret = _objc_msgSend_151sglz(_class_UIColor, _sel_blueColor);
+    return UIColor.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// brownColor
+  static UIColor getBrownColor() {
+  objc.checkOsVersionInternal('UIColor.brownColor', iOS: (false, (2, 0, 0)));
+    final $ret = _objc_msgSend_151sglz(_class_UIColor, _sel_brownColor);
+    return UIColor.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// clearColor
+  static UIColor getClearColor() {
+  objc.checkOsVersionInternal('UIColor.clearColor', iOS: (false, (2, 0, 0)));
+    final $ret = _objc_msgSend_151sglz(_class_UIColor, _sel_clearColor);
+    return UIColor.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// colorWithCGColor:
+  static UIColor colorWithCGColor(ffi.Pointer<CGColor> cgColor) {
+  objc.checkOsVersionInternal('UIColor.colorWithCGColor:', iOS: (false, (2, 0, 0)));
+    final $ret = _objc_msgSend_1rsocyz(_class_UIColor, _sel_colorWithCGColor_, cgColor);
+    return UIColor.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// colorWithCIColor:
+  static UIColor colorWithCIColor(CIColor ciColor) {
+  objc.checkOsVersionInternal('UIColor.colorWithCIColor:', iOS: (false, (5, 0, 0)));
+    final $ret = _objc_msgSend_1sotr3r(_class_UIColor, _sel_colorWithCIColor_, ciColor.ref.pointer);
+    return UIColor.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// colorWithDisplayP3Red:green:blue:alpha:
+  static UIColor colorWithDisplayP3Red(double displayP3Red, {required double green,required double blue,required double alpha}) {
+  objc.checkOsVersionInternal('UIColor.colorWithDisplayP3Red:green:blue:alpha:', iOS: (false, (10, 0, 0)));
+    final $ret = _objc_msgSend_q2wq4h(_class_UIColor, _sel_colorWithDisplayP3Red_green_blue_alpha_, displayP3Red, green, blue, alpha);
+    return UIColor.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// colorWithHue:saturation:brightness:alpha:
+  static UIColor colorWithHue(double hue, {required double saturation,required double brightness,required double alpha}) {
+  objc.checkOsVersionInternal('UIColor.colorWithHue:saturation:brightness:alpha:', iOS: (false, (2, 0, 0)));
+    final $ret = _objc_msgSend_q2wq4h(_class_UIColor, _sel_colorWithHue_saturation_brightness_alpha_, hue, saturation, brightness, alpha);
+    return UIColor.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// colorWithPatternImage:
+  static UIColor colorWithPatternImage(UIImage image) {
+  objc.checkOsVersionInternal('UIColor.colorWithPatternImage:', iOS: (false, (2, 0, 0)));
+    final $ret = _objc_msgSend_1sotr3r(_class_UIColor, _sel_colorWithPatternImage_, image.ref.pointer);
+    return UIColor.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// colorWithRed:green:blue:alpha:
+  static UIColor colorWithRed(double red, {required double green,required double blue,required double alpha}) {
+  objc.checkOsVersionInternal('UIColor.colorWithRed:green:blue:alpha:', iOS: (false, (2, 0, 0)));
+    final $ret = _objc_msgSend_q2wq4h(_class_UIColor, _sel_colorWithRed_green_blue_alpha_, red, green, blue, alpha);
+    return UIColor.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// colorWithRed:green:blue:alpha:exposure:
+  static UIColor colorWithRed$1(double red, {required double green,required double blue,required double alpha,required double exposure}) {
+  objc.checkOsVersionInternal('UIColor.colorWithRed:green:blue:alpha:exposure:', iOS: (false, (26, 0, 0)));
+    final $ret = _objc_msgSend_mvjtfi(_class_UIColor, _sel_colorWithRed_green_blue_alpha_exposure_, red, green, blue, alpha, exposure);
+    return UIColor.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// colorWithRed:green:blue:alpha:linearExposure:
+  static UIColor colorWithRed$2(double red, {required double green,required double blue,required double alpha,required double linearExposure}) {
+  objc.checkOsVersionInternal('UIColor.colorWithRed:green:blue:alpha:linearExposure:', iOS: (false, (26, 0, 0)));
+    final $ret = _objc_msgSend_mvjtfi(_class_UIColor, _sel_colorWithRed_green_blue_alpha_linearExposure_, red, green, blue, alpha, linearExposure);
+    return UIColor.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// colorWithWhite:alpha:
+  static UIColor colorWithWhite(double white, {required double alpha}) {
+  objc.checkOsVersionInternal('UIColor.colorWithWhite:alpha:', iOS: (false, (2, 0, 0)));
+    final $ret = _objc_msgSend_1n2vn5t(_class_UIColor, _sel_colorWithWhite_alpha_, white, alpha);
+    return UIColor.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// cyanColor
+  static UIColor getCyanColor() {
+  objc.checkOsVersionInternal('UIColor.cyanColor', iOS: (false, (2, 0, 0)));
+    final $ret = _objc_msgSend_151sglz(_class_UIColor, _sel_cyanColor);
+    return UIColor.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// darkGrayColor
+  static UIColor getDarkGrayColor() {
+  objc.checkOsVersionInternal('UIColor.darkGrayColor', iOS: (false, (2, 0, 0)));
+    final $ret = _objc_msgSend_151sglz(_class_UIColor, _sel_darkGrayColor);
+    return UIColor.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// grayColor
+  static UIColor getGrayColor() {
+  objc.checkOsVersionInternal('UIColor.grayColor', iOS: (false, (2, 0, 0)));
+    final $ret = _objc_msgSend_151sglz(_class_UIColor, _sel_grayColor);
+    return UIColor.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// greenColor
+  static UIColor getGreenColor() {
+  objc.checkOsVersionInternal('UIColor.greenColor', iOS: (false, (2, 0, 0)));
+    final $ret = _objc_msgSend_151sglz(_class_UIColor, _sel_greenColor);
+    return UIColor.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// lightGrayColor
+  static UIColor getLightGrayColor() {
+  objc.checkOsVersionInternal('UIColor.lightGrayColor', iOS: (false, (2, 0, 0)));
+    final $ret = _objc_msgSend_151sglz(_class_UIColor, _sel_lightGrayColor);
+    return UIColor.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// magentaColor
+  static UIColor getMagentaColor() {
+  objc.checkOsVersionInternal('UIColor.magentaColor', iOS: (false, (2, 0, 0)));
+    final $ret = _objc_msgSend_151sglz(_class_UIColor, _sel_magentaColor);
+    return UIColor.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// new
+  static UIColor new$() {
+    final $ret = _objc_msgSend_151sglz(_class_UIColor, _sel_new);
+    return UIColor.fromPointer($ret, retain: false, release: true);
+  }
+
+
+  /// orangeColor
+  static UIColor getOrangeColor() {
+  objc.checkOsVersionInternal('UIColor.orangeColor', iOS: (false, (2, 0, 0)));
+    final $ret = _objc_msgSend_151sglz(_class_UIColor, _sel_orangeColor);
+    return UIColor.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// purpleColor
+  static UIColor getPurpleColor() {
+  objc.checkOsVersionInternal('UIColor.purpleColor', iOS: (false, (2, 0, 0)));
+    final $ret = _objc_msgSend_151sglz(_class_UIColor, _sel_purpleColor);
+    return UIColor.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// redColor
+  static UIColor getRedColor() {
+  objc.checkOsVersionInternal('UIColor.redColor', iOS: (false, (2, 0, 0)));
+    final $ret = _objc_msgSend_151sglz(_class_UIColor, _sel_redColor);
+    return UIColor.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// supportsSecureCoding
+  static bool getSupportsSecureCoding() {
+    return _objc_msgSend_91o635(_class_UIColor, _sel_supportsSecureCoding);
+
+  }
+
+
+  /// whiteColor
+  static UIColor getWhiteColor() {
+  objc.checkOsVersionInternal('UIColor.whiteColor', iOS: (false, (2, 0, 0)));
+    final $ret = _objc_msgSend_151sglz(_class_UIColor, _sel_whiteColor);
+    return UIColor.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// yellowColor
+  static UIColor getYellowColor() {
+  objc.checkOsVersionInternal('UIColor.yellowColor', iOS: (false, (2, 0, 0)));
+    final $ret = _objc_msgSend_151sglz(_class_UIColor, _sel_yellowColor);
+    return UIColor.fromPointer($ret, retain: true, release: true);
+  }
+  /// Returns a new instance of UIColor constructed with the default `new` method.
+  UIColor() : this.as(new$().object$);
+
+}
+
+extension UIColor$Methods on UIColor {
+
+  /// CGColor
+  ffi.Pointer<CGColor> get CGColor$1 {
+  objc.checkOsVersionInternal('UIColor.CGColor', iOS: (false, (2, 0, 0)));
+    return _objc_msgSend_2u9jmz(object$.ref.pointer, _sel_CGColor);
+
+  }
+
+
+  /// CIColor
+  CIColor get CIColor$1 {
+  objc.checkOsVersionInternal('UIColor.CIColor', iOS: (false, (5, 0, 0)));
+    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_CIColor);
+    return CIColor.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// colorByApplyingContentHeadroom:
+  UIColor colorByApplyingContentHeadroom(double contentHeadroom) {
+  objc.checkOsVersionInternal('UIColor.colorByApplyingContentHeadroom:', iOS: (false, (26, 0, 0)));
+    final $ret = _objc_msgSend_oa8mke(object$.ref.pointer, _sel_colorByApplyingContentHeadroom_, contentHeadroom);
+    return UIColor.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// colorWithAlphaComponent:
+  UIColor colorWithAlphaComponent(double alpha) {
+  objc.checkOsVersionInternal('UIColor.colorWithAlphaComponent:', iOS: (false, (2, 0, 0)));
+    final $ret = _objc_msgSend_oa8mke(object$.ref.pointer, _sel_colorWithAlphaComponent_, alpha);
+    return UIColor.fromPointer($ret, retain: true, release: true);
+  }
+
+
+  /// encodeWithCoder:
+  void encodeWithCoder(objc.NSCoder coder) {
+_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_encodeWithCoder_, coder.ref.pointer);
+
+  }
+
+
+  /// getHue:saturation:brightness:alpha:
+  bool getHue(ffi.Pointer<ffi.Double> hue, {required ffi.Pointer<ffi.Double> saturation,required ffi.Pointer<ffi.Double> brightness,required ffi.Pointer<ffi.Double> alpha}) {
+  objc.checkOsVersionInternal('UIColor.getHue:saturation:brightness:alpha:', iOS: (false, (5, 0, 0)));
+    return _objc_msgSend_xmvde7(object$.ref.pointer, _sel_getHue_saturation_brightness_alpha_, hue, saturation, brightness, alpha);
+
+  }
+
+
+  /// getRed:green:blue:alpha:
+  bool getRed(ffi.Pointer<ffi.Double> red, {required ffi.Pointer<ffi.Double> green,required ffi.Pointer<ffi.Double> blue,required ffi.Pointer<ffi.Double> alpha}) {
+  objc.checkOsVersionInternal('UIColor.getRed:green:blue:alpha:', iOS: (false, (5, 0, 0)));
+    return _objc_msgSend_xmvde7(object$.ref.pointer, _sel_getRed_green_blue_alpha_, red, green, blue, alpha);
+
+  }
+
+
+  /// getWhite:alpha:
+  bool getWhite(ffi.Pointer<ffi.Double> white, {required ffi.Pointer<ffi.Double> alpha}) {
+  objc.checkOsVersionInternal('UIColor.getWhite:alpha:', iOS: (false, (5, 0, 0)));
+    return _objc_msgSend_kcpn4z(object$.ref.pointer, _sel_getWhite_alpha_, white, alpha);
+
+  }
+
+
+  /// init
+  UIColor init() {
+  objc.checkOsVersionInternal('UIColor.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
+    final $ret = _objc_msgSend_151sglz(object$.ref.retainAndReturnPointer(), _sel_init);
+    return UIColor.fromPointer($ret, retain: false, release: true);
+  }
+
+
+  /// initWithCGColor:
+  UIColor initWithCGColor(ffi.Pointer<CGColor> cgColor) {
+  objc.checkOsVersionInternal('UIColor.initWithCGColor:', iOS: (false, (2, 0, 0)));
+    final $ret = _objc_msgSend_1rsocyz(object$.ref.retainAndReturnPointer(), _sel_initWithCGColor_, cgColor);
+    return UIColor.fromPointer($ret, retain: false, release: true);
+  }
+
+
+  /// initWithCIColor:
+  UIColor initWithCIColor(CIColor ciColor) {
+  objc.checkOsVersionInternal('UIColor.initWithCIColor:', iOS: (false, (5, 0, 0)));
+    final $ret = _objc_msgSend_1sotr3r(object$.ref.retainAndReturnPointer(), _sel_initWithCIColor_, ciColor.ref.pointer);
+    return UIColor.fromPointer($ret, retain: false, release: true);
+  }
+
+
+  /// initWithCoder:
+  UIColor? initWithCoder(objc.NSCoder coder) {
+    final $ret = _objc_msgSend_1sotr3r(object$.ref.retainAndReturnPointer(), _sel_initWithCoder_, coder.ref.pointer);
+    return $ret.address == 0 ? null : UIColor.fromPointer($ret, retain: false, release: true);
+  }
+
+
+  /// initWithDisplayP3Red:green:blue:alpha:
+  UIColor initWithDisplayP3Red(double displayP3Red, {required double green,required double blue,required double alpha}) {
+  objc.checkOsVersionInternal('UIColor.initWithDisplayP3Red:green:blue:alpha:', iOS: (false, (10, 0, 0)));
+    final $ret = _objc_msgSend_q2wq4h(object$.ref.retainAndReturnPointer(), _sel_initWithDisplayP3Red_green_blue_alpha_, displayP3Red, green, blue, alpha);
+    return UIColor.fromPointer($ret, retain: false, release: true);
+  }
+
+
+  /// initWithHue:saturation:brightness:alpha:
+  UIColor initWithHue(double hue, {required double saturation,required double brightness,required double alpha}) {
+  objc.checkOsVersionInternal('UIColor.initWithHue:saturation:brightness:alpha:', iOS: (false, (2, 0, 0)));
+    final $ret = _objc_msgSend_q2wq4h(object$.ref.retainAndReturnPointer(), _sel_initWithHue_saturation_brightness_alpha_, hue, saturation, brightness, alpha);
+    return UIColor.fromPointer($ret, retain: false, release: true);
+  }
+
+
+  /// initWithPatternImage:
+  UIColor initWithPatternImage(UIImage image) {
+  objc.checkOsVersionInternal('UIColor.initWithPatternImage:', iOS: (false, (2, 0, 0)));
+    final $ret = _objc_msgSend_1sotr3r(object$.ref.retainAndReturnPointer(), _sel_initWithPatternImage_, image.ref.pointer);
+    return UIColor.fromPointer($ret, retain: false, release: true);
+  }
+
+
+  /// initWithRed:green:blue:alpha:
+  UIColor initWithRed(double red, {required double green,required double blue,required double alpha}) {
+  objc.checkOsVersionInternal('UIColor.initWithRed:green:blue:alpha:', iOS: (false, (2, 0, 0)));
+    final $ret = _objc_msgSend_q2wq4h(object$.ref.retainAndReturnPointer(), _sel_initWithRed_green_blue_alpha_, red, green, blue, alpha);
+    return UIColor.fromPointer($ret, retain: false, release: true);
+  }
+
+
+  /// initWithRed:green:blue:alpha:exposure:
+  UIColor initWithRed$1(double red, {required double green,required double blue,required double alpha,required double exposure}) {
+  objc.checkOsVersionInternal('UIColor.initWithRed:green:blue:alpha:exposure:', iOS: (false, (26, 0, 0)));
+    final $ret = _objc_msgSend_mvjtfi(object$.ref.retainAndReturnPointer(), _sel_initWithRed_green_blue_alpha_exposure_, red, green, blue, alpha, exposure);
+    return UIColor.fromPointer($ret, retain: false, release: true);
+  }
+
+
+  /// initWithRed:green:blue:alpha:linearExposure:
+  UIColor initWithRed$2(double red, {required double green,required double blue,required double alpha,required double linearExposure}) {
+  objc.checkOsVersionInternal('UIColor.initWithRed:green:blue:alpha:linearExposure:', iOS: (false, (26, 0, 0)));
+    final $ret = _objc_msgSend_mvjtfi(object$.ref.retainAndReturnPointer(), _sel_initWithRed_green_blue_alpha_linearExposure_, red, green, blue, alpha, linearExposure);
+    return UIColor.fromPointer($ret, retain: false, release: true);
+  }
+
+
+  /// initWithWhite:alpha:
+  UIColor initWithWhite(double white, {required double alpha}) {
+  objc.checkOsVersionInternal('UIColor.initWithWhite:alpha:', iOS: (false, (2, 0, 0)));
+    final $ret = _objc_msgSend_1n2vn5t(object$.ref.retainAndReturnPointer(), _sel_initWithWhite_alpha_, white, alpha);
+    return UIColor.fromPointer($ret, retain: false, release: true);
+  }
+
+
+  /// linearExposure
+  double get linearExposure {
+  objc.checkOsVersionInternal('UIColor.linearExposure', iOS: (false, (26, 0, 0)));
+    return objc.useMsgSendVariants ? _objc_msgSend_1ukqyt8Fpret(object$.ref.pointer, _sel_linearExposure) : _objc_msgSend_1ukqyt8(object$.ref.pointer, _sel_linearExposure);
+
+  }
+
+
+  /// set
+  void set() {
+  objc.checkOsVersionInternal('UIColor.set', iOS: (false, (2, 0, 0)));
+_objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_set);
+
+  }
+
+
+  /// setFill
+  void setFill() {
+  objc.checkOsVersionInternal('UIColor.setFill', iOS: (false, (2, 0, 0)));
+_objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_setFill);
+
+  }
+
+
+  /// setStroke
+  void setStroke() {
+  objc.checkOsVersionInternal('UIColor.setStroke', iOS: (false, (2, 0, 0)));
+_objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_setStroke);
+
+  }
+
+
+  /// standardDynamicRangeColor
+  UIColor get standardDynamicRangeColor {
+  objc.checkOsVersionInternal('UIColor.standardDynamicRangeColor', iOS: (false, (26, 0, 0)));
+    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_standardDynamicRangeColor);
+    return UIColor.fromPointer($ret, retain: true, release: true);
+  }
 
 }
 
@@ -31082,7 +31750,9 @@ late final _class_MLNVectorStyleLayer = objc.getClass("MLNVectorStyleLayer");
 late final _class_MLNVectorTileSource = objc.getClass("MLNVectorTileSource");
 late final _class_MapLibreRegistry = objc.getClass("MapLibreRegistry");
 late final _class_NSExpression = objc.getClass("NSExpression");
+late final _class_NSPredicate = objc.getClass("NSPredicate");
 late final _class_UIAction = objc.getClass("UIAction");
+late final _class_UIColor = objc.getClass("UIColor");
 late final _class_UIHoverStyle = objc.getClass("UIHoverStyle");
 late final _class_UIImage = objc.getClass("UIImage");
 late final _class_UIMenu = objc.getClass("UIMenu");
@@ -31149,6 +31819,7 @@ final _objc_msgSend_1mhd1pt = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Po
 final _objc_msgSend_1mpyy6y = objc.msgSendPointer.cast<ffi.NativeFunction<objc.CGPoint Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<objc.CGPoint Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_1mpyy6yStret = objc.msgSendStretPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.CGPoint> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<void Function(ffi.Pointer<objc.CGPoint> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_1mz4wgw = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Long )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int )>();
+final _objc_msgSend_1n2vn5t = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Double , ffi.Double )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , double , double )>();
 final _objc_msgSend_1nomli1 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.UnsignedLong , ffi.Pointer<ffi.Pointer<objc.ObjCObjectImpl>> )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , int , ffi.Pointer<ffi.Pointer<objc.ObjCObjectImpl>> )>();
 final _objc_msgSend_1o8rmw3 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Long )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int )>();
 final _objc_msgSend_1o8sa9u = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGRect , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGRect , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>();
@@ -31158,6 +31829,7 @@ final _objc_msgSend_1pbhom5 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Vo
 final _objc_msgSend_1pl9qdv = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_1qddrus = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.UnsignedLong , ffi.Bool )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int , bool )>();
 final _objc_msgSend_1qgnjih = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Long )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int )>();
+final _objc_msgSend_1rsocyz = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<CGColor> )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<CGColor> )>();
 final _objc_msgSend_1rz5npq = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.UnsignedLong )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int )>();
 final _objc_msgSend_1s40ged = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Double , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , double , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCBlockImpl> )>();
 final _objc_msgSend_1s56lr9 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Bool )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , bool )>();
@@ -31165,6 +31837,7 @@ final _objc_msgSend_1sbdo65 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Bo
 final _objc_msgSend_1sotr3r = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_1sq2aut = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.UnsignedLong , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int , ffi.Pointer<objc.ObjCBlockImpl> )>();
 final _objc_msgSend_1swtepj = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.UnsignedLong Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
+final _objc_msgSend_1t6aok9 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Bool )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , bool )>();
 final _objc_msgSend_1tczmpv = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Double Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Double )>>().asFunction<double Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , double )>();
 final _objc_msgSend_1tczmpvFpret = objc.msgSendFpretPointer.cast<ffi.NativeFunction<ffi.Double Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Double )>>().asFunction<double Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , double )>();
 final _objc_msgSend_1ts4niw = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.UnsignedLong Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
@@ -31198,6 +31871,7 @@ final _objc_msgSend_2nhnqw = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Voi
 final _objc_msgSend_2olghr = objc.msgSendPointer.cast<ffi.NativeFunction<objc.CGRect Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGRect , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<objc.CGRect Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGRect , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_2olghrStret = objc.msgSendStretPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.CGRect> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGRect , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<void Function(ffi.Pointer<objc.CGRect> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGRect , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_2tjjtl = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<CGImage> )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<CGImage> )>();
+final _objc_msgSend_2u9jmz = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<CGColor> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<ffi.Pointer<CGColor> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_2xggvt = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Double , ffi.Long )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , double , int )>();
 final _objc_msgSend_3l1tu1 = objc.msgSendPointer.cast<ffi.NativeFunction<objc.CGPoint Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGPoint , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<objc.CGPoint Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGPoint , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_3l1tu1Stret = objc.msgSendStretPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.CGPoint> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGPoint , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<void Function(ffi.Pointer<objc.CGPoint> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGPoint , ffi.Pointer<objc.ObjCObjectImpl> )>();
@@ -31251,6 +31925,7 @@ final _objc_msgSend_iy8iz6 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Voi
 final _objc_msgSend_judg3a = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , MLNCoordinateQuad , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , MLNCoordinateQuad , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_k7jknj = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.UnsignedLong )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int )>();
 final _objc_msgSend_k9iunc = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.UnsignedLong Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
+final _objc_msgSend_kcpn4z = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Bool Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<ffi.Double> , ffi.Pointer<ffi.Double> )>>().asFunction<bool Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<ffi.Double> , ffi.Pointer<ffi.Double> )>();
 final _objc_msgSend_knxebs = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Long Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
 final _objc_msgSend_kvi515 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Long , ffi.Long , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , int , int , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_kzdfm1 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.UnsignedLong Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
@@ -31262,6 +31937,7 @@ final _objc_msgSend_mabicuFpret = objc.msgSendFpretPointer.cast<ffi.NativeFuncti
 final _objc_msgSend_mpxix1 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Int64 , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_mus1wv = objc.msgSendPointer.cast<ffi.NativeFunction<objc.CGPoint Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , CLLocationCoordinate2D , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<objc.CGPoint Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , CLLocationCoordinate2D , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_mus1wvStret = objc.msgSendStretPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.CGPoint> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , CLLocationCoordinate2D , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<void Function(ffi.Pointer<objc.CGPoint> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , CLLocationCoordinate2D , ffi.Pointer<objc.ObjCObjectImpl> )>();
+final _objc_msgSend_mvjtfi = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Double , ffi.Double , ffi.Double , ffi.Double , ffi.Double )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , double , double , double , double , double )>();
 final _objc_msgSend_na2nx0 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Bool , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , bool , ffi.Pointer<objc.ObjCBlockImpl> )>();
 final _objc_msgSend_nnxkei = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCBlockImpl> )>();
 final _objc_msgSend_o762yo = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCBlockImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCBlockImpl> )>();
@@ -31272,6 +31948,7 @@ final _objc_msgSend_oftvaStret = objc.msgSendStretPointer.cast<ffi.NativeFunctio
 final _objc_msgSend_pfv6jd = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_pisvbv = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.UnsignedLong )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int )>();
 final _objc_msgSend_pov02z = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Long , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int , ffi.Pointer<objc.ObjCObjectImpl> )>();
+final _objc_msgSend_q2wq4h = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Double , ffi.Double , ffi.Double , ffi.Double )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , double , double , double , double )>();
 final _objc_msgSend_q9b4dz = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , ffi.UnsignedLong , ffi.Bool )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> , int , bool )>();
 final _objc_msgSend_qgt66z = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , CGAffineTransform )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , CGAffineTransform )>();
 final _objc_msgSend_qj4fey = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Long Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
@@ -31296,6 +31973,7 @@ final _objc_msgSend_w7r098Fpret = objc.msgSendFpretPointer.cast<ffi.NativeFuncti
 final _objc_msgSend_wgkxx2 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGPoint )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , objc.CGPoint )>();
 final _objc_msgSend_x3m0f9 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , CLLocationCoordinate2D , ffi.Double , ffi.Double , ffi.Double )>>().asFunction<ffi.Pointer<objc.ObjCObjectImpl> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , CLLocationCoordinate2D , double , double , double )>();
 final _objc_msgSend_xjcq8x = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Long Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<int Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
+final _objc_msgSend_xmvde7 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Bool Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<ffi.Double> , ffi.Pointer<ffi.Double> , ffi.Pointer<ffi.Double> , ffi.Pointer<ffi.Double> )>>().asFunction<bool Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<ffi.Double> , ffi.Pointer<ffi.Double> , ffi.Pointer<ffi.Double> , ffi.Pointer<ffi.Double> )>();
 final _objc_msgSend_xoapar = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.UnsignedLong )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , int )>();
 final _objc_msgSend_xtuoz7 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>>().asFunction<void Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> , ffi.Pointer<objc.ObjCObjectImpl> )>();
 final _objc_msgSend_y1izi1 = objc.msgSendPointer.cast<ffi.NativeFunction<ffi.Pointer<CGImage> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>>().asFunction<ffi.Pointer<CGImage> Function(ffi.Pointer<objc.ObjCObjectImpl> , ffi.Pointer<objc.ObjCSelector> )>();
@@ -31308,7 +31986,9 @@ late final _protocol_FlutterApi = objc.getProtocol("FlutterApi");
 late final _protocol_MLNFeature = objc.getProtocol("MLNFeature");
 late final _protocol_MLNMapViewDelegate = objc.getProtocol("MLNMapViewDelegate");
 late final _protocol_OfflinePackProgressCallbacks = objc.getProtocol("OfflinePackProgressCallbacks");
+late final _sel_CGColor = objc.registerName("CGColor");
 late final _sel_CGImage = objc.registerName("CGImage");
+late final _sel_CIColor = objc.registerName("CIColor");
 late final _sel_CIImage = objc.registerName("CIImage");
 late final _sel_URL = objc.registerName("URL");
 late final _sel_accessories = objc.registerName("accessories");
@@ -31371,8 +32051,11 @@ late final _sel_backgroundPatternTransition = objc.registerName("backgroundPatte
 late final _sel_baselineOffsetFromBottom = objc.registerName("baselineOffsetFromBottom");
 late final _sel_beamWithPreferredLength_axis_ = objc.registerName("beamWithPreferredLength:axis:");
 late final _sel_becomeFirstResponder = objc.registerName("becomeFirstResponder");
+late final _sel_blackColor = objc.registerName("blackColor");
+late final _sel_blueColor = objc.registerName("blueColor");
 late final _sel_bounds = objc.registerName("bounds");
 late final _sel_brightness = objc.registerName("brightness");
+late final _sel_brownColor = objc.registerName("brownColor");
 late final _sel_buildMenuWithBuilder_ = objc.registerName("buildMenuWithBuilder:");
 late final _sel_calibratedLatency = objc.registerName("calibratedLatency");
 late final _sel_camera = objc.registerName("camera");
@@ -31420,9 +32103,21 @@ late final _sel_circleTranslationAnchor = objc.registerName("circleTranslationAn
 late final _sel_circleTranslationTransition = objc.registerName("circleTranslationTransition");
 late final _sel_clearActionJournalLog = objc.registerName("clearActionJournalLog");
 late final _sel_clearAmbientCacheWithCompletionHandler_ = objc.registerName("clearAmbientCacheWithCompletionHandler:");
+late final _sel_clearColor = objc.registerName("clearColor");
 late final _sel_collection = objc.registerName("collection");
 late final _sel_collisionBoundingPath = objc.registerName("collisionBoundingPath");
 late final _sel_collisionBoundsType = objc.registerName("collisionBoundsType");
+late final _sel_colorByApplyingContentHeadroom_ = objc.registerName("colorByApplyingContentHeadroom:");
+late final _sel_colorWithAlphaComponent_ = objc.registerName("colorWithAlphaComponent:");
+late final _sel_colorWithCGColor_ = objc.registerName("colorWithCGColor:");
+late final _sel_colorWithCIColor_ = objc.registerName("colorWithCIColor:");
+late final _sel_colorWithDisplayP3Red_green_blue_alpha_ = objc.registerName("colorWithDisplayP3Red:green:blue:alpha:");
+late final _sel_colorWithHue_saturation_brightness_alpha_ = objc.registerName("colorWithHue:saturation:brightness:alpha:");
+late final _sel_colorWithPatternImage_ = objc.registerName("colorWithPatternImage:");
+late final _sel_colorWithRed_green_blue_alpha_ = objc.registerName("colorWithRed:green:blue:alpha:");
+late final _sel_colorWithRed_green_blue_alpha_exposure_ = objc.registerName("colorWithRed:green:blue:alpha:exposure:");
+late final _sel_colorWithRed_green_blue_alpha_linearExposure_ = objc.registerName("colorWithRed:green:blue:alpha:linearExposure:");
+late final _sel_colorWithWhite_alpha_ = objc.registerName("colorWithWhite:alpha:");
 late final _sel_compassView = objc.registerName("compassView");
 late final _sel_compassViewMargins = objc.registerName("compassViewMargins");
 late final _sel_compassViewPosition = objc.registerName("compassViewPosition");
@@ -31447,9 +32142,12 @@ late final _sel_copy_ = objc.registerName("copy:");
 late final _sel_countOfBytesCompleted = objc.registerName("countOfBytesCompleted");
 late final _sel_createOfflinePackProgressListenerWithCallbacks_ = objc.registerName("createOfflinePackProgressListenerWithCallbacks:");
 late final _sel_createTilePyramidOfflineRegionWithStyleURL_south_west_east_north_fromZoomLevel_toZoomLevel_ = objc.registerName("createTilePyramidOfflineRegionWithStyleURL:south:west:east:north:fromZoomLevel:toZoomLevel:");
+late final _sel_createUIEdgeInsetsNSExpressionWithPadding_ = objc.registerName("createUIEdgeInsetsNSExpressionWithPadding:");
 late final _sel_currentEDRHeadroom = objc.registerName("currentEDRHeadroom");
 late final _sel_currentMode = objc.registerName("currentMode");
 late final _sel_cut_ = objc.registerName("cut:");
+late final _sel_cyanColor = objc.registerName("cyanColor");
+late final _sel_darkGrayColor = objc.registerName("darkGrayColor");
 late final _sel_databasePath = objc.registerName("databasePath");
 late final _sel_databaseURL = objc.registerName("databaseURL");
 late final _sel_debugMask = objc.registerName("debugMask");
@@ -31488,6 +32186,8 @@ late final _sel_effectWithPreview_ = objc.registerName("effectWithPreview:");
 late final _sel_effectiveUserInterfaceLayoutDirection = objc.registerName("effectiveUserInterfaceLayoutDirection");
 late final _sel_enableRenderingStatsView_ = objc.registerName("enableRenderingStatsView:");
 late final _sel_encodeWithCoder_ = objc.registerName("encodeWithCoder:");
+late final _sel_evaluateWithObject_ = objc.registerName("evaluateWithObject:");
+late final _sel_evaluateWithObject_substitutionVariables_ = objc.registerName("evaluateWithObject:substitutionVariables:");
 late final _sel_export_ = objc.registerName("export:");
 late final _sel_expressionBlock = objc.registerName("expressionBlock");
 late final _sel_expressionForAggregate_ = objc.registerName("expressionForAggregate:");
@@ -31574,7 +32274,12 @@ late final _sel_geometryTypeVariableExpression = objc.registerName("geometryType
 late final _sel_getActionJournalLog = objc.registerName("getActionJournalLog");
 late final _sel_getActionJournalLogFiles = objc.registerName("getActionJournalLogFiles");
 late final _sel_getFlutterApiWithViewId_ = objc.registerName("getFlutterApiWithViewId:");
+late final _sel_getHue_saturation_brightness_alpha_ = objc.registerName("getHue:saturation:brightness:alpha:");
 late final _sel_getMapWithViewId_ = objc.registerName("getMapWithViewId:");
+late final _sel_getRed_green_blue_alpha_ = objc.registerName("getRed:green:blue:alpha:");
+late final _sel_getWhite_alpha_ = objc.registerName("getWhite:alpha:");
+late final _sel_grayColor = objc.registerName("grayColor");
+late final _sel_greenColor = objc.registerName("greenColor");
 late final _sel_hasBaseline = objc.registerName("hasBaseline");
 late final _sel_heading = objc.registerName("heading");
 late final _sel_heatmapColor = objc.registerName("heatmapColor");
@@ -31664,19 +32369,23 @@ late final _sel_images = objc.registerName("images");
 late final _sel_includesIdeographicGlyphs = objc.registerName("includesIdeographicGlyphs");
 late final _sel_increaseSize_ = objc.registerName("increaseSize:");
 late final _sel_init = objc.registerName("init");
+late final _sel_initWithCGColor_ = objc.registerName("initWithCGColor:");
 late final _sel_initWithCGImage_ = objc.registerName("initWithCGImage:");
 late final _sel_initWithCGImage_scale_orientation_ = objc.registerName("initWithCGImage:scale:orientation:");
+late final _sel_initWithCIColor_ = objc.registerName("initWithCIColor:");
 late final _sel_initWithCIImage_ = objc.registerName("initWithCIImage:");
 late final _sel_initWithCIImage_scale_orientation_ = objc.registerName("initWithCIImage:scale:orientation:");
 late final _sel_initWithCoder_ = objc.registerName("initWithCoder:");
 late final _sel_initWithContentsOfFile_ = objc.registerName("initWithContentsOfFile:");
 late final _sel_initWithData_ = objc.registerName("initWithData:");
 late final _sel_initWithData_scale_ = objc.registerName("initWithData:scale:");
+late final _sel_initWithDisplayP3Red_green_blue_alpha_ = objc.registerName("initWithDisplayP3Red:green:blue:alpha:");
 late final _sel_initWithExpressionType_ = objc.registerName("initWithExpressionType:");
 late final _sel_initWithFrame_ = objc.registerName("initWithFrame:");
 late final _sel_initWithFrame_options_ = objc.registerName("initWithFrame:options:");
 late final _sel_initWithFrame_styleJSON_ = objc.registerName("initWithFrame:styleJSON:");
 late final _sel_initWithFrame_styleURL_ = objc.registerName("initWithFrame:styleURL:");
+late final _sel_initWithHue_saturation_brightness_alpha_ = objc.registerName("initWithHue:saturation:brightness:alpha:");
 late final _sel_initWithIdentifier_ = objc.registerName("initWithIdentifier:");
 late final _sel_initWithIdentifier_URL_options_ = objc.registerName("initWithIdentifier:URL:options:");
 late final _sel_initWithIdentifier_configurationURLString_ = objc.registerName("initWithIdentifier:configurationURLString:");
@@ -31689,7 +32398,12 @@ late final _sel_initWithIdentifier_shape_options_ = objc.registerName("initWithI
 late final _sel_initWithIdentifier_shapes_options_ = objc.registerName("initWithIdentifier:shapes:options:");
 late final _sel_initWithIdentifier_source_ = objc.registerName("initWithIdentifier:source:");
 late final _sel_initWithIdentifier_tileURLTemplates_options_ = objc.registerName("initWithIdentifier:tileURLTemplates:options:");
+late final _sel_initWithPatternImage_ = objc.registerName("initWithPatternImage:");
+late final _sel_initWithRed_green_blue_alpha_ = objc.registerName("initWithRed:green:blue:alpha:");
+late final _sel_initWithRed_green_blue_alpha_exposure_ = objc.registerName("initWithRed:green:blue:alpha:exposure:");
+late final _sel_initWithRed_green_blue_alpha_linearExposure_ = objc.registerName("initWithRed:green:blue:alpha:linearExposure:");
 late final _sel_initWithStyleURL_bounds_fromZoomLevel_toZoomLevel_ = objc.registerName("initWithStyleURL:bounds:fromZoomLevel:toZoomLevel:");
+late final _sel_initWithWhite_alpha_ = objc.registerName("initWithWhite:alpha:");
 late final _sel_insertLayer_aboveLayer_ = objc.registerName("insertLayer:aboveLayer:");
 late final _sel_insertLayer_atIndex_ = objc.registerName("insertLayer:atIndex:");
 late final _sel_insertLayer_belowLayer_ = objc.registerName("insertLayer:belowLayer:");
@@ -31729,6 +32443,7 @@ late final _sel_layoutSublayersOfLayer_ = objc.registerName("layoutSublayersOfLa
 late final _sel_leavesOfCluster_offset_limit_ = objc.registerName("leavesOfCluster:offset:limit:");
 late final _sel_leftExpression = objc.registerName("leftExpression");
 late final _sel_light = objc.registerName("light");
+late final _sel_lightGrayColor = objc.registerName("lightGrayColor");
 late final _sel_lineBlur = objc.registerName("lineBlur");
 late final _sel_lineBlurTransition = objc.registerName("lineBlurTransition");
 late final _sel_lineCap = objc.registerName("lineCap");
@@ -31758,11 +32473,13 @@ late final _sel_lineTranslationAnchor = objc.registerName("lineTranslationAnchor
 late final _sel_lineTranslationTransition = objc.registerName("lineTranslationTransition");
 late final _sel_lineWidth = objc.registerName("lineWidth");
 late final _sel_lineWidthTransition = objc.registerName("lineWidthTransition");
+late final _sel_linearExposure = objc.registerName("linearExposure");
 late final _sel_localizeLabelsIntoLocale_ = objc.registerName("localizeLabelsIntoLocale:");
 late final _sel_locationManager = objc.registerName("locationManager");
 late final _sel_logoView = objc.registerName("logoView");
 late final _sel_logoViewMargins = objc.registerName("logoViewMargins");
 late final _sel_logoViewPosition = objc.registerName("logoViewPosition");
+late final _sel_magentaColor = objc.registerName("magentaColor");
 late final _sel_mainScreen = objc.registerName("mainScreen");
 late final _sel_makeTextWritingDirectionLeftToRight_ = objc.registerName("makeTextWritingDirectionLeftToRight:");
 late final _sel_makeTextWritingDirectionRightToLeft_ = objc.registerName("makeTextWritingDirectionRightToLeft:");
@@ -31870,6 +32587,7 @@ late final _sel_onSecondaryTapWithScreenLocation_ = objc.registerName("onSeconda
 late final _sel_onTapWithScreenLocation_ = objc.registerName("onTapWithScreenLocation:");
 late final _sel_operand = objc.registerName("operand");
 late final _sel_options = objc.registerName("options");
+late final _sel_orangeColor = objc.registerName("orangeColor");
 late final _sel_overlays = objc.registerName("overlays");
 late final _sel_overscanCompensation = objc.registerName("overscanCompensation");
 late final _sel_overscanCompensationInsets = objc.registerName("overscanCompensationInsets");
@@ -31877,7 +32595,6 @@ late final _sel_packs = objc.registerName("packs");
 late final _sel_panScrollingMode = objc.registerName("panScrollingMode");
 late final _sel_parentFocusEnvironment = objc.registerName("parentFocusEnvironment");
 late final _sel_parseExpressionWithPropertyName_expression_ = objc.registerName("parseExpressionWithPropertyName:expression:");
-late final _sel_parsePredicateWithRaw_ = objc.registerName("parsePredicateWithRaw:");
 late final _sel_pasteAndGo_ = objc.registerName("pasteAndGo:");
 late final _sel_pasteAndMatchStyle_ = objc.registerName("pasteAndMatchStyle:");
 late final _sel_pasteAndSearch_ = objc.registerName("pasteAndSearch:");
@@ -31890,6 +32607,14 @@ late final _sel_potentialEDRHeadroom = objc.registerName("potentialEDRHeadroom")
 late final _sel_predefinedStyle_ = objc.registerName("predefinedStyle:");
 late final _sel_predefinedStyles = objc.registerName("predefinedStyles");
 late final _sel_predicate = objc.registerName("predicate");
+late final _sel_predicateFormat = objc.registerName("predicateFormat");
+late final _sel_predicateFromMetadataQueryString_ = objc.registerName("predicateFromMetadataQueryString:");
+late final _sel_predicateWithBlock_ = objc.registerName("predicateWithBlock:");
+late final _sel_predicateWithFormat_ = objc.registerName("predicateWithFormat:");
+late final _sel_predicateWithFormat_argumentArray_ = objc.registerName("predicateWithFormat:argumentArray:");
+late final _sel_predicateWithMLNJSONObject_ = objc.registerName("predicateWithMLNJSONObject:");
+late final _sel_predicateWithSubstitutionVariables_ = objc.registerName("predicateWithSubstitutionVariables:");
+late final _sel_predicateWithValue_ = objc.registerName("predicateWithValue:");
 late final _sel_preferredElementSize = objc.registerName("preferredElementSize");
 late final _sel_preferredFocusEnvironments = objc.registerName("preferredFocusEnvironments");
 late final _sel_preferredFocusedView = objc.registerName("preferredFocusedView");
@@ -31909,6 +32634,7 @@ late final _sel_preview = objc.registerName("preview");
 late final _sel_print_ = objc.registerName("print:");
 late final _sel_progress = objc.registerName("progress");
 late final _sel_providerForDeferredMenuElement_ = objc.registerName("providerForDeferredMenuElement:");
+late final _sel_purpleColor = objc.registerName("purpleColor");
 late final _sel_putResourceWithUrl_data_modified_expires_etag_mustRevalidate_ = objc.registerName("putResourceWithUrl:data:modified:expires:etag:mustRevalidate:");
 late final _sel_rasterBrightnessMax = objc.registerName("rasterBrightnessMax");
 late final _sel_rasterBrightnessMin = objc.registerName("rasterBrightnessMin");
@@ -31924,6 +32650,7 @@ late final _sel_rasterResampling = objc.registerName("rasterResampling");
 late final _sel_rasterResamplingMode = objc.registerName("rasterResamplingMode");
 late final _sel_rasterSaturation = objc.registerName("rasterSaturation");
 late final _sel_rasterSaturationTransition = objc.registerName("rasterSaturationTransition");
+late final _sel_redColor = objc.registerName("redColor");
 late final _sel_referenceDisplayModeStatus = objc.registerName("referenceDisplayModeStatus");
 late final _sel_region = objc.registerName("region");
 late final _sel_regionDidChangeWithReasonWithMapView_reason_animated_ = objc.registerName("regionDidChangeWithReasonWithMapView:reason:animated:");
@@ -31974,6 +32701,7 @@ late final _sel_selectedElements = objc.registerName("selectedElements");
 late final _sel_selectedImage = objc.registerName("selectedImage");
 late final _sel_semanticContentAttribute = objc.registerName("semanticContentAttribute");
 late final _sel_sender = objc.registerName("sender");
+late final _sel_set = objc.registerName("set");
 late final _sel_setAccessories_ = objc.registerName("setAccessories:");
 late final _sel_setAltitude_ = objc.registerName("setAltitude:");
 late final _sel_setAnchorRotateOrZoomGesturesToCenterCoordinate_ = objc.registerName("setAnchorRotateOrZoomGesturesToCenterCoordinate:");
@@ -32041,6 +32769,7 @@ late final _sel_setDisplayPreferences_ = objc.registerName("setDisplayPreference
 late final _sel_setDynamicNavigationCameraAnimationDuration_ = objc.registerName("setDynamicNavigationCameraAnimationDuration:");
 late final _sel_setEffect_ = objc.registerName("setEffect:");
 late final _sel_setEnabled_ = objc.registerName("setEnabled:");
+late final _sel_setFill = objc.registerName("setFill");
 late final _sel_setFillAntialias_ = objc.registerName("setFillAntialias:");
 late final _sel_setFillAntialiased_ = objc.registerName("setFillAntialiased:");
 late final _sel_setFillColorTransition_ = objc.registerName("setFillColorTransition:");
@@ -32229,6 +32958,7 @@ late final _sel_setShowsUserLocation_ = objc.registerName("setShowsUserLocation:
 late final _sel_setSourceLayerIdentifier_ = objc.registerName("setSourceLayerIdentifier:");
 late final _sel_setSources_ = objc.registerName("setSources:");
 late final _sel_setState_ = objc.registerName("setState:");
+late final _sel_setStroke = objc.registerName("setStroke");
 late final _sel_setStyleJSON_ = objc.registerName("setStyleJSON:");
 late final _sel_setStyleURL_ = objc.registerName("setStyleURL:");
 late final _sel_setSubtitle_ = objc.registerName("setSubtitle:");
@@ -32342,6 +33072,7 @@ late final _sel_sourceIdentifier = objc.registerName("sourceIdentifier");
 late final _sel_sourceLayerIdentifier = objc.registerName("sourceLayerIdentifier");
 late final _sel_sourceWithIdentifier_ = objc.registerName("sourceWithIdentifier:");
 late final _sel_sources = objc.registerName("sources");
+late final _sel_standardDynamicRangeColor = objc.registerName("standardDynamicRangeColor");
 late final _sel_state = objc.registerName("state");
 late final _sel_style = objc.registerName("style");
 late final _sel_styleJSON = objc.registerName("styleJSON");
@@ -32461,6 +33192,8 @@ late final _sel_visibleFeaturesInRect_ = objc.registerName("visibleFeaturesInRec
 late final _sel_visibleFeaturesInRect_inStyleLayersWithIdentifiers_ = objc.registerName("visibleFeaturesInRect:inStyleLayersWithIdentifiers:");
 late final _sel_visibleFeaturesInRect_inStyleLayersWithIdentifiers_predicate_ = objc.registerName("visibleFeaturesInRect:inStyleLayersWithIdentifiers:predicate:");
 late final _sel_wantsSoftwareDimming = objc.registerName("wantsSoftwareDimming");
+late final _sel_whiteColor = objc.registerName("whiteColor");
+late final _sel_yellowColor = objc.registerName("yellowColor");
 late final _sel_zoomLevel = objc.registerName("zoomLevel");
 late final _sel_zoomLevelForExpandingCluster_ = objc.registerName("zoomLevelForExpandingCluster:");
 late final _sel_zoomLevelToAltitudeWithZoomLevel_pitch_latitude_size_ = objc.registerName("zoomLevelToAltitudeWithZoomLevel:pitch:latitude:size:");

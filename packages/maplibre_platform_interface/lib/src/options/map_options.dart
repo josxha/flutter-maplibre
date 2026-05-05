@@ -26,7 +26,7 @@ class MapOptions {
     this.maxBounds,
     this.gestures = const MapGestures.all(),
     this.androidTextureMode = true,
-    this.androidMode = AndroidPlatformViewMode.tlhc_vd,
+    this.androidMode = .tlhc_vd,
     this.androidTranslucentTextureSurface = false,
     this.androidForegroundLoadColor = Colors.transparent,
     this.webviewDebugMode = false,

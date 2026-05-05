@@ -34,7 +34,7 @@ class _TranslucentMapPageState extends State<TranslucentMapPage> {
           ),
           MapLibreMap(
             options: MapOptions(
-              androidMode: AndroidPlatformViewMode.hc,
+              androidMode: .hc,
               androidTranslucentTextureSurface: true,
               androidForegroundLoadColor: Colors.blue,
               initCenter: const Geographic(lon: 9.17, lat: 47.68),
@@ -48,7 +48,7 @@ class _TranslucentMapPageState extends State<TranslucentMapPage> {
               MapCompass(),
             ],
             onStyleLoaded: (style) {
-              style.setProjection(MapProjection.globe);
+              style.setProjection(.globe);
             },
           ),
         ],

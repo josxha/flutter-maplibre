@@ -13,120 +13,7 @@ class StyleControllerAndroid extends StyleController {
     String? aboveLayerId,
     int? atIndex,
   }) async => using((arena) {
-    final jId = layer.id.toJString()..releasedBy(arena);
-    final prevLayer = _jStyle.getLayer(jId);
-    if (prevLayer != null) {
-      throw Exception(
-        'A Layer with the id "${layer.id}" already exists in the map style.',
-      );
-    }
-
-    jni.Expression? jFilter;
-    if (layer.filter case final filter?) {
-      final jFilterString = jsonEncode(filter).toJString()..releasedBy(arena);
-      jFilter = jni.Expression$Converter.convert$2(jFilterString)
-        ?..releasedBy(arena);
-    }
-    JString? jSourceLayer;
-    if (layer is StyleLayerWithSource) {
-      if (layer.sourceLayerId case final String id) {
-        jSourceLayer = id.toJString()..releasedBy(arena);
-      }
-    }
-
-    final jni.Layer jLayer;
-    switch (layer) {
-      case StyleLayerWithSource():
-        final jSourceId = layer.sourceId.toJString()..releasedBy(arena);
-        switch (layer) {
-          case FillStyleLayer():
-            final jFillLayer = jni.FillLayer(jId, jSourceId);
-            if (jFilter != null) jFillLayer.filter = jFilter;
-            if (jSourceLayer != null) jFillLayer.sourceLayer = jSourceLayer;
-            jLayer = jFillLayer;
-          case CircleStyleLayer():
-            final jCircleLayer = jni.CircleLayer(jId, jSourceId);
-            if (jFilter != null) jCircleLayer.filter = jFilter;
-            if (jSourceLayer != null) jCircleLayer.sourceLayer = jSourceLayer;
-            jLayer = jCircleLayer;
-          case FillExtrusionStyleLayer():
-            final jFillExtrusionLayer = jni.FillExtrusionLayer(jId, jSourceId);
-            if (jFilter != null) jFillExtrusionLayer.filter = jFilter;
-            if (jSourceLayer != null) {
-              jFillExtrusionLayer.sourceLayer = jSourceLayer;
-            }
-            jLayer = jFillExtrusionLayer;
-          case HeatmapStyleLayer():
-            final jHeatmapLayer = jni.HeatmapLayer(jId, jSourceId);
-            if (jFilter != null) jHeatmapLayer.filter = jFilter;
-            if (jSourceLayer != null) {
-              jHeatmapLayer.sourceLayer = jSourceLayer;
-            }
-            jLayer = jHeatmapLayer;
-          case HillshadeStyleLayer():
-            final jHillshadeLayer = jni.HillshadeLayer(jId, jSourceId);
-            if (jSourceLayer != null) {
-              jHillshadeLayer.sourceLayer = jSourceLayer;
-            }
-            jLayer = jHillshadeLayer;
-          case LineStyleLayer():
-            final jLineLayer = jni.LineLayer(jId, jSourceId);
-            if (jFilter != null) jLineLayer.filter = jFilter;
-            if (jSourceLayer != null) jLineLayer.sourceLayer = jSourceLayer;
-            jLayer = jLineLayer;
-          case RasterStyleLayer():
-            final jRasterLayer = jni.RasterLayer(jId, jSourceId);
-            if (jSourceLayer != null) jRasterLayer.sourceLayer = jSourceLayer;
-            jLayer = jRasterLayer;
-          case SymbolStyleLayer():
-            final jSymbolLayer = jni.SymbolLayer(jId, jSourceId);
-            if (jFilter != null) jSymbolLayer.filter = jFilter;
-            if (jSourceLayer != null) jSymbolLayer.sourceLayer = jSourceLayer;
-            jLayer = jSymbolLayer;
-          default:
-            throw UnimplementedError(
-              'The Layer is not supported: ${layer.runtimeType}',
-            );
-        }
-      default:
-        switch (layer) {
-          case BackgroundStyleLayer():
-            jLayer = jni.BackgroundLayer(jId);
-          default:
-            throw UnimplementedError(
-              'The Layer is not supported: ${layer.runtimeType}',
-            );
-        }
-    }
-
-    jLayer.minZoom = layer.minZoom;
-    jLayer.maxZoom = layer.maxZoom;
-
-    // paint and layout properties
-    final layoutEntries = layer.layout.entries.toList(growable: false);
-    final paintEntries = layer.paint.entries.toList(growable: false);
-    final props = JArray.withLength(
-      jni.PropertyValue.type,
-      layoutEntries.length + paintEntries.length,
-    )..releasedBy(arena);
-    for (var i = 0; i < paintEntries.length; i++) {
-      final entry = paintEntries[i];
-      props[i] = jni.PaintPropertyValue<JObject?>(
-        entry.key.toJString()..releasedBy(arena),
-        entry.value.toJObject()..releasedBy(arena),
-      )..releasedBy(arena);
-    }
-    for (var i = 0; i < layoutEntries.length; i++) {
-      final entry = layoutEntries[i];
-      props[paintEntries.length + i] = jni.LayoutPropertyValue<JObject?>(
-        entry.key.toJString()..releasedBy(arena),
-        entry.value.toJObject()..releasedBy(arena),
-      )..releasedBy(arena);
-    }
-    jLayer.releasedBy(arena);
-    jLayer.properties = props;
-
-    // add to style
+    final jLayer = (layer as StyleLayerAndroid).jLayer;
     if (belowLayerId case final String belowId) {
       _jStyle.addLayerBelow(jLayer, belowId.toJString()..releasedBy(arena));
     } else if (aboveLayerId case final String aboveId) {
@@ -166,7 +53,7 @@ class StyleControllerAndroid extends StyleController {
           source.tileSize,
         );
         // TODO apply other properties
-        jSource.volatile = (source.volatile.toJBoolean()..releasedBy(arena));
+        jSource.volatile = source.volatile.toJBoolean()..releasedBy(arena);
       case RasterSource():
         if (source.url case final String url) {
           jSource = jni.RasterSource.new$4(
@@ -190,14 +77,14 @@ class StyleControllerAndroid extends StyleController {
           jSource = jni.RasterSource.new$6(jId, tileSet, source.tileSize);
         }
         // TODO apply other properties
-        jSource.volatile = (source.volatile.toJBoolean()..releasedBy(arena));
+        jSource.volatile = source.volatile.toJBoolean()..releasedBy(arena);
       case VectorSource():
         jSource = jni.VectorSource.new$3(
           jId,
           source.url!.toJString()..releasedBy(arena),
         );
         // TODO apply other properties
-        jSource.volatile = (source.volatile.toJBoolean()..releasedBy(arena));
+        jSource.volatile = source.volatile.toJBoolean()..releasedBy(arena);
       case ImageSource():
         // https://maplibre.org/maplibre-native/android/api/-map-libre%20-native%20-android/org.maplibre.android.geometry/-lat-lng-quad/index.html
         final jniQuad = jni.LatLngQuad(

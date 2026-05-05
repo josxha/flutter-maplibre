@@ -28,8 +28,7 @@ void main(List<String> args) {
         // '-F$frameworkPath', '-I${frameworkPath}MapLibre.framework/Headers',
         '-Fios/.build/MapLibre.xcframework/ios-arm64/',
         '-Iios/.build/MapLibre.xcframework/ios-arm64/MapLibre.framework/Headers',
-        '-isysroot',
-        '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk',
+        '-isysroot', iosSdkUri.toFilePath(),
       ],
       include: (header) {
         const include = <String>{
@@ -54,6 +53,7 @@ void main(List<String> args) {
           'MLNVectorStyleLayer.h',
           'MLNAttributionInfo.h',
           'NSExpression+MLNAdditions.h',
+          'NSPredicate+MLNAdditions.h',
           'MLNOfflineStorage.h',
           'MLNOfflinePack.h',
           'MLNOfflineRegion.h',
@@ -76,6 +76,7 @@ void main(List<String> args) {
             'NSString',
             'CLLocationCoordinate2D',
             'NSAttributedString',
+            'UIColor',
             'UIImage',
             'UIScreen',
             'UIAction',
@@ -88,6 +89,7 @@ void main(List<String> args) {
             'UITableViewHeaderFooterView',
             'UIViewConfigurationState',
             'NSExpression',
+            'NSPredicate',
             'Helpers',
             'MapLibreRegistry',
             'Extensions',
