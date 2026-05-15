@@ -5,6 +5,44 @@ import 'package:hooks/hooks.dart';
 import 'package:native_toolchain_c/native_toolchain_c.dart';
 import 'package:pubspec_parse/pubspec_parse.dart';
 
+/// Compare two dotted version strings ("6.25.1" vs "6.25.0"). Positive if a > b.
+int _cmpVersion(String a, String b) {
+  final aParts = a.split('.').map(int.parse).toList();
+  final bParts = b.split('.').map(int.parse).toList();
+  for (var i = 0; i < aParts.length && i < bParts.length; i++) {
+    if (aParts[i] != bParts[i]) return aParts[i] - bParts[i];
+  }
+  return aParts.length - bParts.length;
+}
+
+/// Scan the SwiftPM artifacts cache for an already-downloaded MapLibre
+/// xcframework zip and return its version (or null when none found). SPM
+/// names the cache entry after the URL with `:/.` → `_`, e.g.:
+/// `https___github_com_maplibre_maplibre-native_releases_download_ios_v6_25_1_MapLibre_dynamic_xcframework_zip`.
+String? _scanSpmCacheForMapLibreVersion() {
+  final homeDir = Platform.environment['HOME'];
+  if (homeDir == null || homeDir.isEmpty) return null;
+  final cacheDir = Directory.fromUri(
+    Uri.directory(homeDir).resolve('Library/Caches/org.swift.swiftpm/artifacts/'),
+  );
+  if (!cacheDir.existsSync()) return null;
+  final pattern = RegExp(
+    'maplibre.native_releases_download_ios_v'
+    '([0-9]+_[0-9]+_[0-9]+)'
+    '_MapLibre_dynamic_xcframework_zip',
+  );
+  String? best;
+  for (final entry in cacheDir.listSync(followLinks: false)) {
+    final name = entry.uri.pathSegments.where((s) => s.isNotEmpty).last;
+    final m = pattern.firstMatch(name);
+    if (m != null) {
+      final v = m.group(1)!.replaceAll('_', '.');
+      if (best == null || _cmpVersion(v, best) > 0) best = v;
+    }
+  }
+  return best;
+}
+
 void main(List<String> args) async {
   await build(args, (input, output) async {
     if (!input.config.buildCodeAssets) return;
@@ -37,22 +75,54 @@ Future<Uri> _getMapLibreFrameworkPath({
   required Uri packageRoot,
   required bool useSimulator,
 }) async {
-  // Try to detect desired MapLibre version from Package.resolved in the package.
-  final resolvedSpmPackage = _getResolvedSpmPackagePath();
-  final content = File(resolvedSpmPackage).readAsStringSync();
-  final match = RegExp(
-    r'"identity"\s*:\s*"maplibre-gl-native-distribution"[\s\S]*?"version"\s*:\s*"([0-9.]+)"',
-  ).firstMatch(content);
-
-  if (match == null || match.group(1) == null) {
-    throw Exception(
-      'Failed to detect MapLibre version from Package.resolved at $resolvedSpmPackage',
-    );
+  // Detect the MapLibre version. Preferred source: the app's `Package.resolved`
+  // (it pins the exact version Swift Package Manager resolved). Fallbacks
+  // ensure the hook still works in transient states where Flutter's iOS
+  // pipeline has temporarily emptied that file -- which happens when
+  // `FlutterGeneratedPluginSwiftPackage` declares no SPM dependencies and
+  // `xcodebuild -resolvePackageDependencies` clears `xcshareddata`. In that
+  // case we look at the SwiftPM artifact cache (highest cached version wins),
+  // then fall back to the lower bound pinned in this package's own
+  // `Package.swift`. The fallbacks are diagnostic-friendly: the original
+  // exception is preserved as the cause when all paths fail.
+  String? version;
+  Object? lookupError;
+  try {
+    final resolvedSpmPackage = _getResolvedSpmPackagePath();
+    final content = File(resolvedSpmPackage).readAsStringSync();
+    final match = RegExp(
+      r'"identity"\s*:\s*"maplibre-gl-native-distribution"[\s\S]*?"version"\s*:\s*"([0-9.]+)"',
+    ).firstMatch(content);
+    if (match != null && match.group(1) != null && match.group(1)!.isNotEmpty) {
+      version = match.group(1);
+    }
+  } catch (err) {
+    lookupError = err;
   }
-  final version = match.group(1)!;
-  if (version.isEmpty) {
+
+  // Fallback 1: already-downloaded MapLibre framework zip in the SwiftPM cache.
+  version ??= _scanSpmCacheForMapLibreVersion();
+
+  // Fallback 2: parse this package's own Package.swift lower bound.
+  if (version == null) {
+    final ownPackageSwift = packageRoot.resolve('ios/maplibre_ios/Package.swift');
+    if (File.fromUri(ownPackageSwift).existsSync()) {
+      final swiftContent = File.fromUri(ownPackageSwift).readAsStringSync();
+      final swiftMatch = RegExp(
+        r'maplibre-gl-native-distribution[\s\S]*?upToNextMinor\(from:\s*"([0-9.]+)"\)',
+      ).firstMatch(swiftContent);
+      final pinned = swiftMatch?.group(1);
+      if (pinned != null) {
+        version = pinned;
+      }
+    }
+  }
+
+  if (version == null) {
     throw Exception(
-      'Detected empty MapLibre version from Package.resolved at $resolvedSpmPackage',
+      'Failed to detect MapLibre version. Tried (1) Package.resolved lookup, '
+      '(2) SwiftPM artifacts cache scan, (3) Package.swift lower bound. '
+      'Original Package.resolved error: ${lookupError ?? "(not reached)"}',
     );
   }
 
