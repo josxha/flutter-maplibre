@@ -136,9 +136,16 @@ Future<Uri> _getMapLibreFrameworkPath({
     'https___github_com_maplibre_maplibre_native_releases_download_ios_v${version.replaceAll('.', '_')}_MapLibre_dynamic_xcframework_zip',
   );
   if (!File.fromUri(zipPath).existsSync()) {
-    throw Exception(
-      'Expected MapLibre ZIP not found at ${zipPath.toFilePath()}',
-    );
+    // SwiftPM populates the artifact cache during `xcodebuild build` for a
+    // target that depends on the binary, but Flutter's `dart_build` Run
+    // Script phase fires earlier in the build graph: if the cache is cold
+    // (fresh checkout, `swift package purge-cache`, new MapLibre version)
+    // the hook ran before SwiftPM had a chance to write the ZIP. Fetch
+    // from the same release URL SwiftPM would have used so the first
+    // build no longer requires manual cache-priming. The transitive
+    // build still needs network access; offline failure surfaces as a
+    // clearer download error rather than a stale-cache mystery.
+    await _downloadMapLibreXcframeworkZip(version: version, dest: zipPath);
   }
 
   // extract resolved MapLibre ZIP from SPM artifacts if needed
@@ -179,6 +186,39 @@ Future<Uri> _getMapLibreFrameworkPath({
     );
   }
   return frameworkDir;
+}
+
+Future<void> _downloadMapLibreXcframeworkZip({
+  required String version,
+  required Uri dest,
+}) async {
+  final url = Uri.parse(
+    'https://github.com/maplibre/maplibre-native/releases/download/'
+    'ios-v$version/MapLibre.dynamic.xcframework.zip',
+  );
+  await Directory.fromUri(dest.resolve('./')).create(recursive: true);
+  // Write through a `.part` file and rename atomically so a partial
+  // download from a crashed/interrupted build can't masquerade as a
+  // valid cache entry on the next run.
+  final partFile = File('${dest.toFilePath()}.part');
+  // ignore: avoid_print
+  print('[maplibre_ios] downloading MapLibre xcframework v$version from $url');
+  final client = HttpClient();
+  try {
+    final request = await client.getUrl(url);
+    final response = await request.close();
+    if (response.statusCode != 200) {
+      throw Exception(
+        'Failed to download MapLibre xcframework: '
+        'HTTP ${response.statusCode} from $url',
+      );
+    }
+    final sink = partFile.openWrite();
+    await response.pipe(sink);
+  } finally {
+    client.close(force: true);
+  }
+  await partFile.rename(dest.toFilePath());
 }
 
 String _getResolvedSpmPackagePath() {
