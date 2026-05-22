@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:html' as html;
 import 'dart:js_interop';
 import 'dart:math';
 import 'dart:ui';
@@ -12,13 +13,12 @@ import 'package:maplibre_web/src/extensions.dart';
 import 'package:maplibre_web/src/interop/interop.dart' as interop;
 import 'package:maplibre_web/src/interop/json.dart';
 import 'package:maplibre_web/src/interop/pmtiles.dart' as pmtiles;
-import 'package:web/web.dart';
 
 part 'style_controller.dart';
 
 /// The web specific implementation of the [MapLibreMap] widget.
 final class MapLibreMapStateWeb extends MapLibreMapState {
-  late HTMLDivElement _htmlElement;
+  late html.DivElement _htmlElement;
   late interop.JsMap _map;
   Completer<interop.MapLibreEvent>? _movementCompleter;
   bool _nextGestureCausedByController = false;
@@ -37,11 +37,35 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       int viewId, [
       dynamic params,
     ]) {
-      _htmlElement = HTMLDivElement()
+      _htmlElement = html.DivElement()
         ..style.padding = '0'
         ..style.margin = '0'
         ..style.height = '100%'
         ..style.width = '100%';
+      _htmlElement.addEventListener('pointerdown', (event) {
+        final domEvent = event as dynamic;
+        final rect = _htmlElement.getBoundingClientRect();
+        final offset = Offset(
+          (domEvent.clientX as num).toDouble() - rect.left,
+          (domEvent.clientY as num).toDouble() - rect.top,
+        );
+        final point = toLngLat(offset);
+        widget.onEvent?.call(
+          MapEventUserInput(point: point, screenPoint: offset),
+        );
+      });
+      _htmlElement.addEventListener('wheel', (event) {
+        final domEvent = event as dynamic;
+        final rect = _htmlElement.getBoundingClientRect();
+        final offset = Offset(
+          (domEvent.clientX as num).toDouble() - rect.left,
+          (domEvent.clientY as num).toDouble() - rect.top,
+        );
+        final point = toLngLat(offset);
+        widget.onEvent?.call(
+          MapEventUserInput(point: point, screenPoint: offset),
+        );
+      });
 
       // add pmtiles support
       try {
@@ -53,7 +77,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
 
       _map = interop.JsMap(
         interop.MapOptions(
-          container: _htmlElement,
+          container: JSObject.fromInteropObject(_htmlElement),
           style: _prepareStyleString(options.initStyle),
           zoom: options.initZoom,
           center: options.initCenter?.toLngLat(),
@@ -63,7 +87,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         ),
       );
 
-      document.body?.appendChild(_htmlElement);
+      html.document.body?.append(_htmlElement);
       // Invoke the onMapCreated callback async to avoid getting it called
       // during the widget build.
       WidgetsBinding.instance.addPostFrameCallback((_) {

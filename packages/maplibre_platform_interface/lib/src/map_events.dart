@@ -72,7 +72,7 @@ enum CameraChangeReason {
 /// you don't care about the type of gesture.
 ///
 /// {@category Events}
-sealed class MapEventUserInput extends MapEvent {
+base class MapEventUserInput extends MapEvent {
   /// Create a new [MapEventUserInput] object.
   const MapEventUserInput({required this.point, required this.screenPoint});
 
