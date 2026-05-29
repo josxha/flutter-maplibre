@@ -8,6 +8,8 @@ import 'package:maplibre_ios/src/extensions.dart';
 import 'package:maplibre_ios/src/maplibre_ffi.g.dart';
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 import 'package:objective_c/objective_c.dart';
+import 'dart:ui';
+
 
 part 'style_controller.dart';
 
