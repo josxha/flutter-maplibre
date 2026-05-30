@@ -1,3 +1,10 @@
+## Unreleased
+
+- feat: marker clustering support on all platforms (web, Android, iOS, macOS, Windows) via `MarkerLayer.cluster`.
+- feat: widget marker clustering via `WidgetLayer.cluster` (with `clusterBuilder`, the `MarkerCluster` model and tap-to-zoom via `onClusterTap`).
+- fix: iOS `toNSObject()` crashed when converting a `bool` value (e.g. when passing source options).
+- fix: webview (macOS/Windows) layer `filter`s were serialized with `toString()`, producing invalid JS for string expressions; now encoded as JSON.
+
 ## 0.3.5
 
 This release contains a couple of bug fixes and improvements.

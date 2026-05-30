@@ -134,6 +134,21 @@ class StyleControllerIos extends StyleController {
     switch (source) {
       case GeoJsonSource():
         final shapeSource = MLNShapeSource.new$();
+        // TODO: use generated FFI globals for the MLNShapeSourceOption keys
+        // once the ffigen config exposes them. In this SDK each constant's
+        // NSString value equals its symbol name.
+        final ffiOptions = source.cluster
+            ? NSDictionary.as(
+                <String, Object>{
+                  'MLNShapeSourceOptionClustered': true,
+                  'MLNShapeSourceOptionClusterRadius': source.clusterRadius,
+                  'MLNShapeSourceOptionMaximumZoomLevelForClustering':
+                      source.clusterMaxZoom,
+                  'MLNShapeSourceOptionClusterMinPoints':
+                      source.clusterMinPoints,
+                }.toNSObject(),
+              )
+            : NSDictionary.new$();
         if (source.data.startsWith('{')) {
           shapeSource.initWithIdentifier$3(
             ffiId,
@@ -141,13 +156,13 @@ class StyleControllerIos extends StyleController {
               source.data.toNSDataUTF8()!,
               encoding: nsUTF8StringEncoding,
             ),
-            options: NSDictionary.new$(),
+            options: ffiOptions,
           );
         } else {
           shapeSource.initWithIdentifier$1(
             ffiId,
             URL: source.data.toNSURL()!,
-            options: NSDictionary.new$(),
+            options: ffiOptions,
           );
         }
         ffiSource = shapeSource;
