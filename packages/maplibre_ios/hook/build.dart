@@ -23,7 +23,9 @@ String? _scanSpmCacheForMapLibreVersion() {
   final homeDir = Platform.environment['HOME'];
   if (homeDir == null || homeDir.isEmpty) return null;
   final cacheDir = Directory.fromUri(
-    Uri.directory(homeDir).resolve('Library/Caches/org.swift.swiftpm/artifacts/'),
+    Uri.directory(
+      homeDir,
+    ).resolve('Library/Caches/org.swift.swiftpm/artifacts/'),
   );
   if (!cacheDir.existsSync()) return null;
   final pattern = RegExp(
@@ -105,7 +107,9 @@ Future<Uri> _getMapLibreFrameworkPath({
 
   // Fallback 2: parse this package's own Package.swift lower bound.
   if (version == null) {
-    final ownPackageSwift = packageRoot.resolve('ios/maplibre_ios/Package.swift');
+    final ownPackageSwift = packageRoot.resolve(
+      'ios/maplibre_ios/Package.swift',
+    );
     if (File.fromUri(ownPackageSwift).existsSync()) {
       final swiftContent = File.fromUri(ownPackageSwift).readAsStringSync();
       final swiftMatch = RegExp(
