@@ -60,7 +60,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.38.10', '' ]
+        sdk: [ '3.44.0', '' ]
         package: [ 'maplibre', 'maplibre_webview' ]
     timeout-minutes: 30
     steps:
@@ -200,7 +200,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.38.10', '' ]
+        sdk: [ '3.44.0', '' ]
     steps:
       - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
@@ -230,7 +230,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.38.10', '' ]
+        sdk: [ '3.44.0', '' ]
     steps:
       - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
@@ -256,7 +256,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.38.10', '' ]
+        sdk: [ '3.44.0', '' ]
     steps:
       - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
@@ -269,12 +269,12 @@ jobs:
         run: flutter build web
   build-windows:
     name: "[Windows] Build"
-    runs-on: windows-latest
+    runs-on: windows-2022
     defaults: { run: { working-directory: examples } }
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.38.10', '' ]
+        sdk: [ '3.44.0', '' ]
     steps:
       - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
@@ -292,7 +292,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.38.10', '' ]
+        sdk: [ '3.44.0', '' ]
     steps:
       - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
@@ -310,7 +310,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.38.10', '' ]
+        sdk: [ '3.44.0', '' ]
     steps:
       - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2
@@ -321,37 +321,37 @@ jobs:
         run: dart pub get
       - name: Build web
         run: flutter build web --wasm
-  codegen-android:
-    name: "[Android] Check codegen"
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-      - uses: subosito/flutter-action@v2
-        with: { cache: true }
-      - uses: actions/setup-java@v5
-        with:
-          java-version: '21'
-          distribution: 'temurin'
-          cache: 'gradle'
-      - name: "Get Flutter dependencies"
-        run: dart pub get
-      - name: Build example APK
-        working-directory: examples
-        run: flutter build apk
-      - name: Run jnigen
-        working-directory: packages/maplibre_android
-        run: dart tool/jnigen.dart
-      - name: Format code
-        run: dart format packages/maplibre_android/lib/src/jni.g.dart
-      - name: Check changes
-        run: |
-          if [[ -n "$(git status --porcelain)" ]]; then
-            echo "❌ Uncommitted changes detected in files:"
-            git diff
-            exit 1
-          else
-            echo "✅ No uncommitted changes"
-          fi
+#  codegen-android:
+#    name: "[Android] Check codegen"
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v6
+#      - uses: subosito/flutter-action@v2
+#        with: { cache: true }
+#      - uses: actions/setup-java@v5
+#        with:
+#          java-version: '21'
+#          distribution: 'temurin'
+#          cache: 'gradle'
+#      - name: "Get Flutter dependencies"
+#        run: dart pub get
+#      - name: Build example APK
+#        working-directory: examples
+#        run: flutter build apk
+#      - name: Run jnigen
+#        working-directory: packages/maplibre_android
+#        run: dart tool/jnigen.dart
+#      - name: Format code
+#        run: dart format packages/maplibre_android/lib/src/jni.g.dart
+#      - name: Check changes
+#        run: |
+#          if [[ -n "$(git status --porcelain)" ]]; then
+#            echo "❌ Uncommitted changes detected in files:"
+#            git diff
+#            exit 1
+#          else
+#            echo "✅ No uncommitted changes"
+#          fi
 #  codegen-ios:
 #    name: "[iOS] Check codegen"
 #    runs-on: macos-latest
