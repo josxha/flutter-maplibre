@@ -24,13 +24,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 #      - uses: actions/configure-pages@v5
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: actions/setup-python@v6
         with:
           python-version: 3.x
       - run: pip install zensical
       - run: zensical build --clean
-      - uses: actions/upload-pages-artifact@v4
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: site
 #      - uses: actions/deploy-pages@v4
