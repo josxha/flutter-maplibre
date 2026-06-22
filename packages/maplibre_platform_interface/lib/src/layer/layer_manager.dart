@@ -13,12 +13,10 @@ class LayerManager {
   /// the layers with [_oldLayers] in for the initial creation.
   LayerManager(this.style, List<Layer> layers) {
     for (final (index, layer) in layers.indexed) {
-      final source = GeoJsonSource(
-        id: layer.getSourceId(index),
-        data: FeatureCollection(layer.list).toText(),
-      );
-      unawaited(style.addSource(source));
-      unawaited(style.addLayer(layer.createStyleLayer(index)));
+      unawaited(style.addSource(layer.createSource(index)));
+      for (final styleLayer in layer.createStyleLayers(index)) {
+        unawaited(style.addLayer(styleLayer));
+      }
     }
     _oldLayers = layers;
   }
@@ -37,33 +35,44 @@ class LayerManager {
     for (var index = 0; index < layers.length; index++) {
       final layer = layers[index];
       final oldLayer = index > _oldLayers.length - 1 ? null : _oldLayers[index];
+      final source = layer.createSource(index);
       // update source
       // TODO check if the entities of both lists are equal
-      if (oldLayer case Layer()) {
-        style.updateGeoJsonSource(
-          id: layer.getSourceId(index),
-          data: FeatureCollection(layer.list).toText(),
-        );
+      if (oldLayer case final Layer oldLayer
+          when oldLayer.createSource(index) == source) {
+        // The source definition (e.g. cluster options) is unchanged, only
+        // update the data in place.
+        style.updateGeoJsonSource(id: source.id, data: source.data);
       } else {
-        final source = GeoJsonSource(
-          id: layer.getSourceId(index),
-          data: FeatureCollection(layer.list).toText(),
-        );
+        if (oldLayer != null) {
+          // The source definition changed, recreate it together with its
+          // layers further down.
+          for (final styleLayer in oldLayer.createStyleLayers(index)) {
+            style.removeLayer(styleLayer.id);
+          }
+          style.removeSource(oldLayer.getSourceId(index));
+        }
         style.addSource(source);
       }
       // update layer
       if (layer != oldLayer) {
-        if (oldLayer case Layer()) {
-          style.removeLayer(oldLayer.getLayerId(index));
+        if (oldLayer case final Layer oldLayer
+            when oldLayer.createSource(index) == source) {
+          for (final styleLayer in oldLayer.createStyleLayers(index)) {
+            style.removeLayer(styleLayer.id);
+          }
         }
-        style.addLayer(layer.createStyleLayer(index));
+        layer.createStyleLayers(index).forEach(style.addLayer);
       }
     }
     // remove any left-over sources and layers from the map
     for (var i = 0; i < (_oldLayers.length - layers.length); i++) {
       final index = layers.length + i;
       final oldLayer = _oldLayers[index];
-      style.removeLayer(oldLayer.getLayerId(index));
+      oldLayer
+          .createStyleLayers(index)
+          .map((styleLayer) => styleLayer.id)
+          .forEach(style.removeLayer);
       style.removeSource(oldLayer.getSourceId(index));
     }
     _oldLayers = layers;

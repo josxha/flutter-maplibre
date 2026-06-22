@@ -74,6 +74,37 @@ Check out
 the [example app](https://github.com/josxha/flutter-maplibre/blob/v0.3.4/examples/lib/layers_marker_page.dart)
 if you want to see how things come together.
 
+## Clustering
+
+When you have a lot of markers that are close to each other, you can group them
+into clusters by setting `cluster: true`. Markers that are close together are
+then rendered as a single circle with a label showing how many markers it
+contains. Zooming in splits the clusters apart until the individual markers are
+shown.
+
+```dart
+MarkerLayer(
+  points: _points,
+  iconImage: 'marker',
+  iconSize: 0.08,
+  iconAnchor: IconAnchor.bottom,
+  // enable clustering
+  cluster: true,
+  clusterRadius: 50,
+  clusterMaxZoom: 14,
+  clusterMinPoints: 2,
+  // optional cluster styling
+  clusterColor: const Color(0xFF51BBD6),
+  clusterCircleRadius: 18,
+  clusterTextColor: const Color(0xFFFFFFFF),
+  clusterTextSize: 14,
+),
+```
+
+Clustering is supported on all platforms. Under the hood it enables clustering
+on the underlying GeoJSON source and renders the cluster circles and count
+labels as additional style layers.
+
 ## Style & Layout
 
 The `MarkerLayer` has a lot of parameters you can use for styling.

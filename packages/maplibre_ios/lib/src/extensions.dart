@@ -306,7 +306,7 @@ extension ObjectExt on Object? {
       case double():
         return obj.toNSNumber();
       case bool():
-        return NSNumber.new$().initWithBool(obj);
+        return NSNumberCreation.numberWithBool(obj);
       case List():
         final array = NSMutableArray.new$()..init();
         for (final item in obj) {

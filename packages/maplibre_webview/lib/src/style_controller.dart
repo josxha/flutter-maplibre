@@ -73,7 +73,7 @@ class StyleControllerWebView extends StyleController {
           }}",
         paint: ${jsonEncode(layer.paint)},
         layout: ${jsonEncode(layer.layout)},
-        ${layer.filter != null ? 'filter: ${layer.filter},' : ''}
+        ${layer.filter != null ? 'filter: ${jsonEncode(layer.filter)},' : ''}
         minzoom: ${layer.minZoom},
         maxzoom: ${layer.maxZoom},
         ${layer is StyleLayerWithSource ? 'source: "${layer.sourceId}",' : ''}
@@ -108,6 +108,12 @@ class StyleControllerWebView extends StyleController {
             GeoJsonSource() => '''
             type: 'geojson',
             data: dataVal,
+            ${source.cluster ? '''
+            cluster: true,
+            clusterRadius: ${source.clusterRadius},
+            clusterMaxZoom: ${source.clusterMaxZoom},
+            clusterMinPoints: ${source.clusterMinPoints},
+            ''' : ''}
           ''',
             RasterSource() => '''
             type: 'raster',

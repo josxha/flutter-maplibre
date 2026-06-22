@@ -58,5 +58,34 @@ void main() {
       verify(() => style.removeSource(any())).called(1);
       verifyNoMoreInteractions(style);
     });
+
+    testWidgets('clustered marker layer adds a clustered source and three '
+        'layers', (tester) async {
+      final manager = LayerManager(style, []);
+      const layer = MarkerLayer(
+        points: [Feature(geometry: Point(Geographic(lon: 0, lat: 0)))],
+        cluster: true,
+      );
+
+      manager.updateLayers([layer]);
+      verify(
+        () => style.addSource(
+          any(
+            that: isA<GeoJsonSource>().having(
+              (s) => s.cluster,
+              'cluster',
+              true,
+            ),
+          ),
+        ),
+      ).called(1);
+      verify(() => style.addLayer(any())).called(3);
+      verifyNoMoreInteractions(style);
+
+      manager.updateLayers([]);
+      verify(() => style.removeLayer(any())).called(3);
+      verify(() => style.removeSource(any())).called(1);
+      verifyNoMoreInteractions(style);
+    });
   });
 }

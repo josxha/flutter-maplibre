@@ -151,7 +151,19 @@ class StyleControllerAndroid extends StyleController {
     final jni.Source jSource;
     switch (source) {
       case GeoJsonSource():
-        final jOptions = jni.GeoJsonOptions()..releasedBy(arena);
+        var jOptions = jni.GeoJsonOptions()..releasedBy(arena);
+        if (source.cluster) {
+          // The builder methods return a GeoJsonOptions wrapping the same
+          // native object; reassign so the last reference is the configured
+          // one and let the arena release the intermediate wrappers.
+          jOptions = jOptions.withCluster(true)..releasedBy(arena);
+          jOptions = jOptions.withClusterRadius(source.clusterRadius)
+            ..releasedBy(arena);
+          jOptions = jOptions.withClusterMaxZoom(source.clusterMaxZoom)
+            ..releasedBy(arena);
+          jOptions = jOptions.withClusterMinPoints(source.clusterMinPoints)
+            ..releasedBy(arena);
+        }
         final jData = source.data.toJString()..releasedBy(arena);
         if (source.data.startsWith('{')) {
           jSource = jni.GeoJsonSource.new$4(jId, jData, jOptions);

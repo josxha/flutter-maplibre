@@ -209,7 +209,19 @@ class StyleControllerWeb extends StyleController {
         }
         _map.addSource(
           source.id,
-          interop.SourceSpecification.geoJson(type: 'geojson', data: data),
+          // Only pass the cluster options when clustering is enabled. Passing
+          // them as null otherwise fails the maplibre-gl-js style validation
+          // and the source would not be added.
+          source.cluster
+              ? interop.SourceSpecification.geoJson(
+                  type: 'geojson',
+                  data: data,
+                  cluster: true,
+                  clusterRadius: source.clusterRadius,
+                  clusterMaxZoom: source.clusterMaxZoom,
+                  clusterMinPoints: source.clusterMinPoints,
+                )
+              : interop.SourceSpecification.geoJson(type: 'geojson', data: data),
         );
       case RasterDemSource():
         _map.addSource(
