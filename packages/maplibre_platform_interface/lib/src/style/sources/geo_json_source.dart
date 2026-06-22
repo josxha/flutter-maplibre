@@ -31,7 +31,7 @@ final class GeoJsonSource extends Source {
   final String? attribution;
 
   /// Tolerance for simplifying features. Determines the level of simplification
-  /// geometry must undergo while rendering the layer.
+  /// that the geometry must undergo while rendering the layer.
   ///
   /// Defaults to 0.375 (pixels at zoom 0).
   /// Higher values mean more simplification and better performance.
