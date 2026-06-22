@@ -152,6 +152,7 @@ class StyleControllerAndroid extends StyleController {
     switch (source) {
       case GeoJsonSource():
         final jOptions = jni.GeoJsonOptions()..releasedBy(arena);
+        jOptions.withTolerance(source.tolerance);
         final jData = source.data.toJString()..releasedBy(arena);
         if (source.data.startsWith('{')) {
           jSource = jni.GeoJsonSource.new$4(jId, jData, jOptions);

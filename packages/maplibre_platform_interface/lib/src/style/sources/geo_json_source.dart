@@ -15,6 +15,7 @@ final class GeoJsonSource extends Source {
     required this.data,
     this.maxZoom = 18,
     this.attribution,
+    this.tolerance = 0.375,
   });
 
   /// A URL to a GeoJSON file, or GeoJSON string.
@@ -28,6 +29,15 @@ final class GeoJsonSource extends Source {
 
   /// Contains an attribution to be displayed when the map is shown to a user.
   final String? attribution;
+
+  /// Tolerance for simplifying features. Determines the level of simplification
+  /// that the geometry must undergo while rendering the layer.
+  ///
+  /// Defaults to 0.375 (pixels at zoom 0).
+  /// Higher values mean more simplification and better performance.
+  ///
+  /// Not implemented on desktop (maplibre_webview).
+  final double tolerance;
 
   // TODO add more fields https://maplibre.org/maplibre-style-spec/sources/#buffer
 }
