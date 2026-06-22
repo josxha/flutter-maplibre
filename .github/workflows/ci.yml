@@ -269,7 +269,7 @@ jobs:
         run: flutter build web
   build-windows:
     name: "[Windows] Build"
-    runs-on: windows-latest
+    runs-on: windows-2022
     defaults: { run: { working-directory: examples } }
     strategy:
       fail-fast: false
