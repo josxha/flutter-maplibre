@@ -214,18 +214,19 @@ class StyleControllerWeb extends StyleController {
           // and the source would not be added.
           source.cluster
               ? interop.SourceSpecification.geoJson(
-                  
-            type: 'geojson',
-                 
-            data: data,
-            tolerance: source.tolerance,
-          ,
+                  type: 'geojson',
+
+                  data: data,
+                  tolerance: source.tolerance,
                   cluster: true,
                   clusterRadius: source.clusterRadius,
                   clusterMaxZoom: source.clusterMaxZoom,
                   clusterMinPoints: source.clusterMinPoints,
                 )
-              : interop.SourceSpecification.geoJson(type: 'geojson', data: data),
+              : interop.SourceSpecification.geoJson(
+                  type: 'geojson',
+                  data: data,
+                ),
         );
       case RasterDemSource():
         _map.addSource(
