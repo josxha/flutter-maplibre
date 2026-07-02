@@ -36,6 +36,18 @@ class MapLibreView: NSObject, FlutterPlatformView, UIGestureRecognizerDelegate, 
         _view.addSubview(_mapView)
         _mapView.delegate = self
 
+        // Long press
+        let longPress = UILongPressGestureRecognizer(
+            target: self,
+            action: #selector(onLongPress(sender:))
+        )
+
+        longPress.minimumPressDuration = 0.5
+        longPress.allowableMovement = 10
+        longPress.cancelsTouchesInView = false
+        longPress.delegate = self
+        _mapView.addGestureRecognizer(longPress)
+
         // Double tap
         let doubleTap = UITapGestureRecognizer(
             target: self,
@@ -43,6 +55,7 @@ class MapLibreView: NSObject, FlutterPlatformView, UIGestureRecognizerDelegate, 
         )
         doubleTap.numberOfTapsRequired = 2
         doubleTap.cancelsTouchesInView = false
+        doubleTap.require(toFail: longPress)
         doubleTap.delegate = self
         _mapView.addGestureRecognizer(doubleTap)
 
@@ -53,6 +66,7 @@ class MapLibreView: NSObject, FlutterPlatformView, UIGestureRecognizerDelegate, 
         primaryTap.numberOfTapsRequired = 1
         primaryTap.cancelsTouchesInView = false
         primaryTap.require(toFail: doubleTap)
+        primaryTap.require(toFail: longPress)
         primaryTap.delegate = self
         if #available(iOS 13.4, *) {
             primaryTap.buttonMaskRequired = .primary
@@ -67,27 +81,11 @@ class MapLibreView: NSObject, FlutterPlatformView, UIGestureRecognizerDelegate, 
             secondaryTap.numberOfTapsRequired = 1
             secondaryTap.cancelsTouchesInView = false
             secondaryTap.require(toFail: doubleTap)
+            secondaryTap.require(toFail: longPress)
             secondaryTap.delegate = self
             secondaryTap.buttonMaskRequired = .secondary
             _mapView.addGestureRecognizer(secondaryTap)
         }
-
-        // Long press
-        let longPress = UILongPressGestureRecognizer(
-            target: self,
-            action: #selector(onLongPress(sender:))
-        )
-
-        longPress.minimumPressDuration = 0.5
-        longPress.allowableMovement = 10
-        longPress.cancelsTouchesInView = false
-
-        // Long press waits for taps
-        longPress.require(toFail: primaryTap)
-        longPress.require(toFail: doubleTap)
-
-        longPress.delegate = self
-        _mapView.addGestureRecognizer(longPress)
     }
 
     var api: FlutterApi? {
@@ -105,13 +103,13 @@ class MapLibreView: NSObject, FlutterPlatformView, UIGestureRecognizerDelegate, 
     }
 
     @objc func onDoubleTap(sender: UITapGestureRecognizer) {
-        var screenPosition = sender.location(in: _mapView)
+        let screenPosition = sender.location(in: _mapView)
         api?.onDoubleTap(screenLocation: screenPosition)
     }
 
     @objc func onLongPress(sender: UILongPressGestureRecognizer) {
         guard sender.state == .began else { return }
-        var screenPosition = sender.location(in: _mapView)
+        let screenPosition = sender.location(in: _mapView)
         api?.onLongPress(screenLocation: screenPosition)
     }
 
@@ -131,16 +129,24 @@ class MapLibreView: NSObject, FlutterPlatformView, UIGestureRecognizerDelegate, 
         api?.didFinishLoadingStyle(mapView: mapView, style: style)
     }
 
-    func mapView(_ mapView: MLNMapView, regionWillChangeWith reason: MLNCameraChangeReason, animated: Bool) {
-        api?.regionWillChangeWithReason(mapView: mapView, reason: reason.rawValue, animated: animated)
+    func mapView(
+        _ mapView: MLNMapView, regionWillChangeWith reason: MLNCameraChangeReason, animated: Bool
+    ) {
+        api?.regionWillChangeWithReason(
+            mapView: mapView, reason: reason.rawValue, animated: animated
+        )
     }
 
     func mapView(_ mapView: MLNMapView, regionIsChangingWith reason: MLNCameraChangeReason) {
         api?.regionIsChangingWithReason(mapView: mapView, reason: reason.rawValue)
     }
 
-    func mapView(_ mapView: MLNMapView, regionDidChangeWith reason: MLNCameraChangeReason, animated: Bool) {
-        api?.regionDidChangeWithReason(mapView: mapView, reason: reason.rawValue, animated: animated)
+    func mapView(
+        _ mapView: MLNMapView, regionDidChangeWith reason: MLNCameraChangeReason, animated: Bool
+    ) {
+        api?.regionDidChangeWithReason(
+            mapView: mapView, reason: reason.rawValue, animated: animated
+        )
     }
 
     func mapViewDidBecomeIdle(_ mapView: MLNMapView) {

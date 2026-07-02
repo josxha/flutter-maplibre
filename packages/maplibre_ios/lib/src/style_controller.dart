@@ -149,6 +149,13 @@ class StyleControllerIos extends StyleController {
                 }.toNSObject(),
               )
             : NSDictionary.new$();
+        final ffiOptions = NSMutableDictionary.new$()..init();
+        ffiOptions.setObject(
+          source.tolerance.toNSNumber(),
+          forKey: NSCopying.as(
+            'MLNShapeSourceOptionSimplificationTolerance'.toNSString(),
+          ),
+        );
         if (source.data.startsWith('{')) {
           shapeSource.initWithIdentifier$3(
             ffiId,

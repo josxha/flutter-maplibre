@@ -517,19 +517,28 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
     JList<jni.Feature?> query,
   ) {
     final features = query.asDart().where((f) => f != null).map((f) => f!);
-
-    final gson = jni.Gson();
     return features
-        .map(
-          (feature) => RenderedFeature(
+        .map((feature) {
+          final decodedFeature =
+              jsonDecode(
+                    feature.toJson()?.toDartString(releaseOriginal: true) ??
+                        '{}',
+                  )
+                  as Map<String, Object?>;
+
+          final decodedProperties = decodedFeature['properties'];
+          final decodedGeometry = decodedFeature['geometry'];
+
+          return RenderedFeature(
             id: feature.id()?.toDartString(releaseOriginal: true),
-            properties:
-                jsonDecode(
-                      gson.toJson(feature.properties())?.toString() ?? '{}',
-                    )
-                    as Map<String, Object?>,
-          ),
-        )
+            properties: decodedProperties is Map
+                ? decodedProperties.map((k, v) => MapEntry(k.toString(), v))
+                : {},
+            geometry: decodedGeometry is Map
+                ? decodedGeometry.map((k, v) => MapEntry(k.toString(), v))
+                : null,
+          );
+        })
         .toList(growable: false);
   }
 

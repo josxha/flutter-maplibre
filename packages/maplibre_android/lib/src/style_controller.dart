@@ -164,6 +164,7 @@ class StyleControllerAndroid extends StyleController {
           jOptions = jOptions.withClusterMinPoints(source.clusterMinPoints)
             ..releasedBy(arena);
         }
+        jOptions.withTolerance(source.tolerance);
         final jData = source.data.toJString()..releasedBy(arena);
         if (source.data.startsWith('{')) {
           jSource = jni.GeoJsonSource.new$4(jId, jData, jOptions);

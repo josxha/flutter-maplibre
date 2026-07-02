@@ -214,8 +214,12 @@ class StyleControllerWeb extends StyleController {
           // and the source would not be added.
           source.cluster
               ? interop.SourceSpecification.geoJson(
-                  type: 'geojson',
-                  data: data,
+                  
+            type: 'geojson',
+                 
+            data: data,
+            tolerance: source.tolerance,
+          ,
                   cluster: true,
                   clusterRadius: source.clusterRadius,
                   clusterMaxZoom: source.clusterMaxZoom,

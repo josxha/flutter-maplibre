@@ -181,6 +181,7 @@ extension type SourceSpecification._(JSObject _) implements JSObject {
     num? clusterRadius,
     num? clusterMaxZoom,
     num? clusterMinPoints,
+    num? tolerance,
   });
 
   /// Create a new raster DEM source.

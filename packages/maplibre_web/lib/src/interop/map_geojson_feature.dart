@@ -9,6 +9,7 @@ extension type GeoJSONFeature._(JSObject _) implements JSObject {
 /// https://maplibre.org/maplibre-gl-js/docs/API/type-aliases/MapGeoJSONFeature/
 extension type MapGeoJSONFeature._(JSObject _)
     implements JSObject, GeoJSONFeature {
+  external JSObject geometry;
   external LayerSpecification layer;
   external String source;
   external String? sourceLayer;
