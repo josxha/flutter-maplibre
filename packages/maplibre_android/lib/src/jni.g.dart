@@ -62862,6 +62862,41 @@ extension MapLibreMapOptions$$Methods on MapLibreMapOptions {
     ).object<MapLibreMapOptions>();
   }
 
+  static final _id_asyncRendererCleanup = MapLibreMapOptions._class
+      .instanceMethodId(
+        r'asyncRendererCleanup',
+        r'(Z)Lorg/maplibre/android/maps/MapLibreMapOptions;',
+      );
+
+  static final _asyncRendererCleanup =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              core$_.int,
+            )
+          >();
+
+  /// from: `public org.maplibre.android.maps.MapLibreMapOptions asyncRendererCleanup(boolean z)`
+  /// The returned object must be released after use, by calling the [release] method.
+  MapLibreMapOptions asyncRendererCleanup(core$_.bool z) {
+    final _$$selfRef = reference;
+    return _asyncRendererCleanup(
+      _$$selfRef.pointer,
+      _id_asyncRendererCleanup.pointer,
+      z ? 1 : 0,
+    ).object<MapLibreMapOptions>();
+  }
+
   static final _id_localIdeographFontFamilyEnabled = MapLibreMapOptions._class
       .instanceMethodId(
         r'localIdeographFontFamilyEnabled',
@@ -63231,6 +63266,34 @@ extension MapLibreMapOptions$$Methods on MapLibreMapOptions {
       _$$selfRef.pointer,
       _id_get$actionJournalRenderingReportInterval$1.pointer,
     ).integer;
+  }
+
+  static final _id_get$asyncRendererCleanup$1 = MapLibreMapOptions._class
+      .instanceMethodId(r'getAsyncRendererCleanup', r'()Z');
+
+  static final _get$asyncRendererCleanup$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public boolean getAsyncRendererCleanup()`
+  core$_.bool get asyncRendererCleanup$1 {
+    final _$$selfRef = reference;
+    return _get$asyncRendererCleanup$1(
+      _$$selfRef.pointer,
+      _id_get$asyncRendererCleanup$1.pointer,
+    ).boolean;
   }
 
   static final _id_renderSurfaceOnTop = MapLibreMapOptions._class
@@ -67043,6 +67106,153 @@ final class $MapView$OnPreCompileShaderListener$Type$
   @core$_.override
   String get signature =>
       r'Lorg/maplibre/android/maps/MapView$OnPreCompileShaderListener;';
+}
+
+/// from: `org.maplibre.android.maps.MapView$OnRenderErrorListener`
+extension type MapView$OnRenderErrorListener._(jni$_.JObject _$this)
+    implements jni$_.JObject {
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/maps/MapView$OnRenderErrorListener',
+  );
+
+  /// The type which includes information such as the signature of this class.
+  static const jni$_.JType<MapView$OnRenderErrorListener> type =
+      $MapView$OnRenderErrorListener$Type$();
+
+  /// Maps a specific port to the implemented interface.
+  static final core$_.Map<core$_.int, $MapView$OnRenderErrorListener> _$impls =
+      {};
+  static jni$_.JObjectPtr _$invoke(
+    core$_.int port,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+    );
+  }
+
+  static final jni$_.Pointer<
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
+    core$_.int $p,
+    jni$_.MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onRenderError()V') {
+        _$impls[$p]!.onRenderError();
+        return jni$_.nullptr;
+      }
+    } catch (e) {
+      return jni$_.ProtectedJniExtensions.newDartException(e);
+    }
+    return jni$_.nullptr;
+  }
+
+  static void implementIn(
+    jni$_.JImplementer implementer,
+    $MapView$OnRenderErrorListener $impl,
+  ) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = jni$_.MethodInvocation.fromMessage($m);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    implementer.add(
+      r'org.maplibre.android.maps.MapView$OnRenderErrorListener',
+      $p,
+      _$invokePointer,
+      [if ($impl.onRenderError$async) r'onRenderError()V'],
+    );
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+  }
+
+  factory MapView$OnRenderErrorListener.implement(
+    $MapView$OnRenderErrorListener $impl,
+  ) {
+    final $i = jni$_.JImplementer();
+    implementIn($i, $impl);
+    return $i.implement<MapView$OnRenderErrorListener>();
+  }
+}
+
+extension MapView$OnRenderErrorListener$$Methods
+    on MapView$OnRenderErrorListener {
+  static final _id_onRenderError = MapView$OnRenderErrorListener._class
+      .instanceMethodId(r'onRenderError', r'()V');
+
+  static final _onRenderError =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public abstract void onRenderError()`
+  void onRenderError() {
+    final _$$selfRef = reference;
+    _onRenderError(_$$selfRef.pointer, _id_onRenderError.pointer).check();
+  }
+}
+
+abstract base mixin class $MapView$OnRenderErrorListener {
+  factory $MapView$OnRenderErrorListener({
+    required void Function() onRenderError,
+    core$_.bool onRenderError$async,
+  }) = _$MapView$OnRenderErrorListener;
+
+  void onRenderError();
+  core$_.bool get onRenderError$async => false;
+}
+
+final class _$MapView$OnRenderErrorListener
+    with $MapView$OnRenderErrorListener {
+  _$MapView$OnRenderErrorListener({
+    required void Function() onRenderError,
+    this.onRenderError$async = false,
+  }) : _onRenderError = onRenderError;
+
+  final void Function() _onRenderError;
+  final core$_.bool onRenderError$async;
+
+  void onRenderError() {
+    return _onRenderError();
+  }
+}
+
+final class $MapView$OnRenderErrorListener$Type$
+    extends jni$_.JType<MapView$OnRenderErrorListener> {
+  @jni$_.internal
+  const $MapView$OnRenderErrorListener$Type$();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/maps/MapView$OnRenderErrorListener;';
 }
 
 /// from: `org.maplibre.android.maps.MapView$OnShaderCompileFailedListener`
@@ -71617,6 +71827,81 @@ extension MapView$$Methods on MapView {
     ).check();
   }
 
+  static final _id_addOnRenderErrorListener = MapView._class.instanceMethodId(
+    r'addOnRenderErrorListener',
+    r'(Lorg/maplibre/android/maps/MapView$OnRenderErrorListener;)V',
+  );
+
+  static final _addOnRenderErrorListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public void addOnRenderErrorListener(org.maplibre.android.maps.MapView$OnRenderErrorListener onRenderErrorListener)`
+  void addOnRenderErrorListener(
+    MapView$OnRenderErrorListener? onRenderErrorListener,
+  ) {
+    final _$$selfRef = reference;
+    final _$onRenderErrorListener =
+        onRenderErrorListener?.reference ?? jni$_.jNullReference;
+    _addOnRenderErrorListener(
+      _$$selfRef.pointer,
+      _id_addOnRenderErrorListener.pointer,
+      _$onRenderErrorListener.pointer,
+    ).check();
+  }
+
+  static final _id_removeOnRenderErrorListener = MapView._class
+      .instanceMethodId(
+        r'removeOnRenderErrorListener',
+        r'(Lorg/maplibre/android/maps/MapView$OnRenderErrorListener;)V',
+      );
+
+  static final _removeOnRenderErrorListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public void removeOnRenderErrorListener(org.maplibre.android.maps.MapView$OnRenderErrorListener onRenderErrorListener)`
+  void removeOnRenderErrorListener(
+    MapView$OnRenderErrorListener? onRenderErrorListener,
+  ) {
+    final _$$selfRef = reference;
+    final _$onRenderErrorListener =
+        onRenderErrorListener?.reference ?? jni$_.jNullReference;
+    _removeOnRenderErrorListener(
+      _$$selfRef.pointer,
+      _id_removeOnRenderErrorListener.pointer,
+      _$onRenderErrorListener.pointer,
+    ).check();
+  }
+
   static final _id_getMapAsync = MapView._class.instanceMethodId(
     r'getMapAsync',
     r'(Lorg/maplibre/android/maps/OnMapReadyCallback;)V',
@@ -71937,6 +72222,34 @@ extension NativeMapOptions$$Methods on NativeMapOptions {
       _$$selfRef.pointer,
       _id_actionJournalRenderingReportInterval.pointer,
     ).integer;
+  }
+
+  static final _id_asyncRendererCleanup = NativeMapOptions._class
+      .instanceMethodId(r'asyncRendererCleanup', r'()Z');
+
+  static final _asyncRendererCleanup =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public boolean asyncRendererCleanup()`
+  core$_.bool asyncRendererCleanup() {
+    final _$$selfRef = reference;
+    return _asyncRendererCleanup(
+      _$$selfRef.pointer,
+      _id_asyncRendererCleanup.pointer,
+    ).boolean;
   }
 }
 
@@ -126262,64 +126575,6 @@ extension CustomGeometrySourceOptions$$Methods on CustomGeometrySourceOptions {
     ).object<jni$_.JObject?>();
   }
 
-  static final _id_get$entries = CustomGeometrySourceOptions._class
-      .instanceMethodId(r'getEntries', r'()Ljava/util/Set;');
-
-  static final _get$entries =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public bridge java.util.Set<java.util.Map$Entry<java.lang.String, java.lang.Object>> getEntries()`
-  /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JSet<Map$$Entry?>? get entries {
-    final _$$selfRef = reference;
-    return _get$entries(
-      _$$selfRef.pointer,
-      _id_get$entries.pointer,
-    ).object<jni$_.JSet<Map$$Entry?>?>();
-  }
-
-  static final _id_entrySet = CustomGeometrySourceOptions._class
-      .instanceMethodId(r'entrySet', r'()Ljava/util/Set;');
-
-  static final _entrySet =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public final bridge java.util.Set<java.util.Map$Entry<java.lang.String, java.lang.Object>> entrySet()`
-  /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JSet<Map$$Entry?>? entrySet() {
-    final _$$selfRef = reference;
-    return _entrySet(
-      _$$selfRef.pointer,
-      _id_entrySet.pointer,
-    ).object<jni$_.JSet<Map$$Entry?>?>();
-  }
-
   static final _id_get$keys = CustomGeometrySourceOptions._class
       .instanceMethodId(r'getKeys', r'()Ljava/util/Set;');
 
@@ -126378,6 +126633,64 @@ extension CustomGeometrySourceOptions$$Methods on CustomGeometrySourceOptions {
       _$$selfRef.pointer,
       _id_keySet.pointer,
     ).object<jni$_.JSet<jni$_.JString?>?>();
+  }
+
+  static final _id_get$entries = CustomGeometrySourceOptions._class
+      .instanceMethodId(r'getEntries', r'()Ljava/util/Set;');
+
+  static final _get$entries =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public bridge java.util.Set<java.util.Map$Entry<java.lang.String, java.lang.Object>> getEntries()`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JSet<Map$$Entry?>? get entries {
+    final _$$selfRef = reference;
+    return _get$entries(
+      _$$selfRef.pointer,
+      _id_get$entries.pointer,
+    ).object<jni$_.JSet<Map$$Entry?>?>();
+  }
+
+  static final _id_entrySet = CustomGeometrySourceOptions._class
+      .instanceMethodId(r'entrySet', r'()Ljava/util/Set;');
+
+  static final _entrySet =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public final bridge java.util.Set<java.util.Map$Entry<java.lang.String, java.lang.Object>> entrySet()`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JSet<Map$$Entry?>? entrySet() {
+    final _$$selfRef = reference;
+    return _entrySet(
+      _$$selfRef.pointer,
+      _id_entrySet.pointer,
+    ).object<jni$_.JSet<Map$$Entry?>?>();
   }
 }
 
@@ -127306,68 +127619,6 @@ extension GeoJsonOptions$$Methods on GeoJsonOptions {
     ).object<jni$_.JObject?>();
   }
 
-  static final _id_get$entries = GeoJsonOptions._class.instanceMethodId(
-    r'getEntries',
-    r'()Ljava/util/Set;',
-  );
-
-  static final _get$entries =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public bridge java.util.Set<java.util.Map$Entry<java.lang.String, java.lang.Object>> getEntries()`
-  /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JSet<Map$$Entry?>? get entries {
-    final _$$selfRef = reference;
-    return _get$entries(
-      _$$selfRef.pointer,
-      _id_get$entries.pointer,
-    ).object<jni$_.JSet<Map$$Entry?>?>();
-  }
-
-  static final _id_entrySet = GeoJsonOptions._class.instanceMethodId(
-    r'entrySet',
-    r'()Ljava/util/Set;',
-  );
-
-  static final _entrySet =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public final bridge java.util.Set<java.util.Map$Entry<java.lang.String, java.lang.Object>> entrySet()`
-  /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JSet<Map$$Entry?>? entrySet() {
-    final _$$selfRef = reference;
-    return _entrySet(
-      _$$selfRef.pointer,
-      _id_entrySet.pointer,
-    ).object<jni$_.JSet<Map$$Entry?>?>();
-  }
-
   static final _id_get$keys = GeoJsonOptions._class.instanceMethodId(
     r'getKeys',
     r'()Ljava/util/Set;',
@@ -127428,6 +127679,68 @@ extension GeoJsonOptions$$Methods on GeoJsonOptions {
       _$$selfRef.pointer,
       _id_keySet.pointer,
     ).object<jni$_.JSet<jni$_.JString?>?>();
+  }
+
+  static final _id_get$entries = GeoJsonOptions._class.instanceMethodId(
+    r'getEntries',
+    r'()Ljava/util/Set;',
+  );
+
+  static final _get$entries =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public bridge java.util.Set<java.util.Map$Entry<java.lang.String, java.lang.Object>> getEntries()`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JSet<Map$$Entry?>? get entries {
+    final _$$selfRef = reference;
+    return _get$entries(
+      _$$selfRef.pointer,
+      _id_get$entries.pointer,
+    ).object<jni$_.JSet<Map$$Entry?>?>();
+  }
+
+  static final _id_entrySet = GeoJsonOptions._class.instanceMethodId(
+    r'entrySet',
+    r'()Ljava/util/Set;',
+  );
+
+  static final _entrySet =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public final bridge java.util.Set<java.util.Map$Entry<java.lang.String, java.lang.Object>> entrySet()`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JSet<Map$$Entry?>? entrySet() {
+    final _$$selfRef = reference;
+    return _entrySet(
+      _$$selfRef.pointer,
+      _id_entrySet.pointer,
+    ).object<jni$_.JSet<Map$$Entry?>?>();
   }
 }
 
