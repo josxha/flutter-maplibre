@@ -194,7 +194,7 @@ final class MapLibreMapStateIos extends MapLibreMapState {
     final mapView = _mapView;
     if (mapView == null) return;
 
-    mapView.setVisibleCoordinateBounds$1(
+    mapView.setVisibleCoordinateBounds$2(
       bounds.toMLNCoordinateBounds(),
       edgePadding: padding.toUIEdgeInsets(),
       animated: true,
