@@ -745,7 +745,6 @@ class MapLibreMapStateWebView extends MapLibreMapState {
             final end = DateTime.now().microsecondsSinceEpoch;
             final diff = end - start;
             debugPrint('WebSocket test round-trip time: $diff µs');
-            break;
           case eventMove:
             final newCamera = MapCamera(
               center: Geographic(
@@ -772,7 +771,6 @@ class MapLibreMapStateWebView extends MapLibreMapState {
               _mapSize = newMapSize;
             });
             widget.onEvent?.call(MapEventMoveCamera(camera: newCamera));
-            break;
           case eventMoveStart:
             final CameraChangeReason reason;
             if (_nextGestureCausedByController) {
@@ -785,15 +783,12 @@ class MapLibreMapStateWebView extends MapLibreMapState {
                   : CameraChangeReason.apiAnimation;
             }
             widget.onEvent?.call(MapEventStartMoveCamera(reason: reason));
-            break;
           case eventMoveEnd:
             widget.onEvent?.call(const MapEventCameraIdle());
             widget.onEvent?.call(const MapEventIdle());
-            break;
           // setStyle and initial loading
           case eventStyleLoad || eventLoad:
             _onStyleLoaded();
-            break;
           case eventUserInput:
             widget.onEvent?.call(
               MapEventUserInput(
@@ -807,7 +802,6 @@ class MapLibreMapStateWebView extends MapLibreMapState {
                 ),
               ),
             );
-            break;
           case eventClick:
             widget.onEvent?.call(
               MapEventClick(
@@ -821,7 +815,6 @@ class MapLibreMapStateWebView extends MapLibreMapState {
                 ),
               ),
             );
-            break;
           case eventDblClick:
             widget.onEvent?.call(
               MapEventDoubleClick(
@@ -835,7 +828,6 @@ class MapLibreMapStateWebView extends MapLibreMapState {
                 ),
               ),
             );
-            break;
           case eventContextMenu:
             widget.onEvent?.call(
               MapEventSecondaryClick(
@@ -849,11 +841,9 @@ class MapLibreMapStateWebView extends MapLibreMapState {
                 ),
               ),
             );
-            break;
           default:
             throw Exception('Unknown WS binary message type: ${b.getUint8(0)}');
         }
-        break;
       default:
         throw Exception('Unknown WS message type: ${data.runtimeType}');
     }
