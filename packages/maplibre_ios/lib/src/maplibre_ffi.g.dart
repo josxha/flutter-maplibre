@@ -504,6 +504,22 @@ final class CGAffineTransform extends ffi.Struct{
   @ffi.Double()
   external double ty;
 
+ static ffi.Pointer<CGAffineTransform> $allocate(
+ ffi.Allocator $allocator, {
+ required double a,
+ required double b,
+ required double c,
+ required double d,
+ required double tx,
+ required double ty,
+ }) => $allocator<CGAffineTransform>()
+ ..ref.a = a
+ ..ref.b = b
+ ..ref.c = c
+ ..ref.d = d
+ ..ref.tx = tx
+ ..ref.ty = ty;
+
 }
 
 sealed class CGBlendMode {
@@ -569,6 +585,14 @@ final class CLLocationCoordinate2D extends ffi.Struct{
 
   @ffi.Double()
   external double longitude;
+
+ static ffi.Pointer<CLLocationCoordinate2D> $allocate(
+ ffi.Allocator $allocator, {
+ required double latitude,
+ required double longitude,
+ }) => $allocator<CLLocationCoordinate2D>()
+ ..ref.latitude = latitude
+ ..ref.longitude = longitude;
 
 }
 
@@ -890,7 +914,9 @@ extension type Helpers._(objc.ObjCObject object$) implements objc.ObjCObject,obj
   }
 
   /// Returns whether [obj] is an instance of [Helpers].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_Helpers);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_Helpers);
 
   /// alloc
   static Helpers alloc() {
@@ -1051,6 +1077,7 @@ extension MLNAdditions on NSExpression {
 
 
   /// featurePropertiesVariableExpression
+  @Deprecated('Deprecated')
   static NSExpression getFeaturePropertiesVariableExpression() {
   objc.checkOsVersionInternal('NSExpression.featurePropertiesVariableExpression', iOS: (false, (3, 0, 0)), macOS: (false, (10, 4, 0)));
     final $ret = _objc_msgSend_151sglz(_class_NSExpression, _sel_featurePropertiesVariableExpression);
@@ -1250,7 +1277,9 @@ extension type MLNBackgroundStyleLayer._(objc.ObjCObject object$) implements obj
   }
 
   /// Returns whether [obj] is an instance of [MLNBackgroundStyleLayer].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNBackgroundStyleLayer);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNBackgroundStyleLayer);
 
   /// alloc
   static MLNBackgroundStyleLayer alloc() {
@@ -1384,14 +1413,6 @@ extension MLNBackgroundStyleLayer$Methods on MLNBackgroundStyleLayer {
     return ffi.Struct.create<MLNTransition>(
         $finalizable);
 
-  }
-
-
-  /// init
-  MLNBackgroundStyleLayer init() {
-  objc.checkOsVersionInternal('MLNBackgroundStyleLayer.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.retainAndReturnPointer(), _sel_init);
-    return MLNBackgroundStyleLayer.fromPointer($ret, retain: false, release: true);
   }
 
 
@@ -1624,7 +1645,9 @@ extension type MLNCircleStyleLayer._(objc.ObjCObject object$) implements objc.Ob
   }
 
   /// Returns whether [obj] is an instance of [MLNCircleStyleLayer].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNCircleStyleLayer);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNCircleStyleLayer);
 
   /// alloc
   static MLNCircleStyleLayer alloc() {
@@ -1774,13 +1797,6 @@ extension MLNCircleStyleLayer$Methods on MLNCircleStyleLayer {
 /// attributes.
   NSExpression get circlePitchAlignment {
     final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_circlePitchAlignment);
-    return NSExpression.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// circlePitchScale
-  NSExpression get circlePitchScale {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_circlePitchScale);
     return NSExpression.fromPointer($ret, retain: true, release: true);
   }
 
@@ -1970,20 +1986,6 @@ extension MLNCircleStyleLayer$Methods on MLNCircleStyleLayer {
   }
 
 
-  /// circleTranslate
-  NSExpression get circleTranslate {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_circleTranslate);
-    return NSExpression.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// circleTranslateAnchor
-  NSExpression get circleTranslateAnchor {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_circleTranslateAnchor);
-    return NSExpression.fromPointer($ret, retain: true, release: true);
-  }
-
-
   /// The geometry's offset.
 /// 
 /// This property is measured in points.
@@ -2055,14 +2057,6 @@ extension MLNCircleStyleLayer$Methods on MLNCircleStyleLayer {
     return ffi.Struct.create<MLNTransition>(
         $finalizable);
 
-  }
-
-
-  /// init
-  MLNCircleStyleLayer init() {
-  objc.checkOsVersionInternal('MLNCircleStyleLayer.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.retainAndReturnPointer(), _sel_init);
-    return MLNCircleStyleLayer.fromPointer($ret, retain: false, release: true);
   }
 
 
@@ -2190,13 +2184,6 @@ _objc_msgSend_z7lywk(object$.ref.pointer, _sel_setCircleOpacityTransition_, valu
 /// attributes.
   set circlePitchAlignment(NSExpression value) {
 _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setCirclePitchAlignment_, value.ref.pointer);
-
-  }
-
-
-  /// setCirclePitchScale:
-  set circlePitchScale(NSExpression value) {
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setCirclePitchScale_, value.ref.pointer);
 
   }
 
@@ -2362,20 +2349,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setCircleStrokeWidth_, value.ref.
 /// This property corresponds to the `circle-stroke-width-transition` property in the style JSON file format.
   set circleStrokeWidthTransition(MLNTransition value) {
 _objc_msgSend_z7lywk(object$.ref.pointer, _sel_setCircleStrokeWidthTransition_, value);
-
-  }
-
-
-  /// setCircleTranslate:
-  set circleTranslate(NSExpression value) {
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setCircleTranslate_, value.ref.pointer);
-
-  }
-
-
-  /// setCircleTranslateAnchor:
-  set circleTranslateAnchor(NSExpression value) {
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setCircleTranslateAnchor_, value.ref.pointer);
 
   }
 
@@ -3284,7 +3257,9 @@ extension type MLNFillExtrusionStyleLayer._(objc.ObjCObject object$) implements 
   }
 
   /// Returns whether [obj] is an instance of [MLNFillExtrusionStyleLayer].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNFillExtrusionStyleLayer);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNFillExtrusionStyleLayer);
 
   /// alloc
   static MLNFillExtrusionStyleLayer alloc() {
@@ -3521,20 +3496,6 @@ extension MLNFillExtrusionStyleLayer$Methods on MLNFillExtrusionStyleLayer {
   }
 
 
-  /// fillExtrusionTranslate
-  NSExpression get fillExtrusionTranslate {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_fillExtrusionTranslate);
-    return NSExpression.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// fillExtrusionTranslateAnchor
-  NSExpression get fillExtrusionTranslateAnchor {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_fillExtrusionTranslateAnchor);
-    return NSExpression.fromPointer($ret, retain: true, release: true);
-  }
-
-
   /// The geometry's offset.
 /// 
 /// This property is measured in points.
@@ -3606,21 +3567,6 @@ extension MLNFillExtrusionStyleLayer$Methods on MLNFillExtrusionStyleLayer {
     return ffi.Struct.create<MLNTransition>(
         $finalizable);
 
-  }
-
-
-  /// fillExtrusionVerticalGradient
-  NSExpression get fillExtrusionVerticalGradient {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_fillExtrusionVerticalGradient);
-    return NSExpression.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// init
-  MLNFillExtrusionStyleLayer init() {
-  objc.checkOsVersionInternal('MLNFillExtrusionStyleLayer.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.retainAndReturnPointer(), _sel_init);
-    return MLNFillExtrusionStyleLayer.fromPointer($ret, retain: false, release: true);
   }
 
 
@@ -3825,20 +3771,6 @@ _objc_msgSend_z7lywk(object$.ref.pointer, _sel_setFillExtrusionPatternTransition
   }
 
 
-  /// setFillExtrusionTranslate:
-  set fillExtrusionTranslate(NSExpression value) {
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setFillExtrusionTranslate_, value.ref.pointer);
-
-  }
-
-
-  /// setFillExtrusionTranslateAnchor:
-  set fillExtrusionTranslateAnchor(NSExpression value) {
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setFillExtrusionTranslateAnchor_, value.ref.pointer);
-
-  }
-
-
   /// The geometry's offset.
 /// 
 /// This property is measured in points.
@@ -3907,13 +3839,6 @@ _objc_msgSend_z7lywk(object$.ref.pointer, _sel_setFillExtrusionTranslationTransi
 
   }
 
-
-  /// setFillExtrusionVerticalGradient:
-  set fillExtrusionVerticalGradient(NSExpression value) {
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setFillExtrusionVerticalGradient_, value.ref.pointer);
-
-  }
-
 }
 
 
@@ -3959,7 +3884,9 @@ extension type MLNFillStyleLayer._(objc.ObjCObject object$) implements objc.ObjC
   }
 
   /// Returns whether [obj] is an instance of [MLNFillStyleLayer].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNFillStyleLayer);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNFillStyleLayer);
 
   /// alloc
   static MLNFillStyleLayer alloc() {
@@ -3986,13 +3913,6 @@ extension type MLNFillStyleLayer._(objc.ObjCObject object$) implements objc.ObjC
 }
 
 extension MLNFillStyleLayer$Methods on MLNFillStyleLayer {
-
-  /// fillAntialias
-  NSExpression get fillAntialias {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_fillAntialias);
-    return NSExpression.fromPointer($ret, retain: true, release: true);
-  }
-
 
   /// The color of the filled part of this layer.
 /// 
@@ -4148,20 +4068,6 @@ extension MLNFillStyleLayer$Methods on MLNFillStyleLayer {
   }
 
 
-  /// fillTranslate
-  NSExpression get fillTranslate {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_fillTranslate);
-    return NSExpression.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// fillTranslateAnchor
-  NSExpression get fillTranslateAnchor {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_fillTranslateAnchor);
-    return NSExpression.fromPointer($ret, retain: true, release: true);
-  }
-
-
   /// The geometry's offset.
 /// 
 /// This property is measured in points.
@@ -4236,14 +4142,6 @@ extension MLNFillStyleLayer$Methods on MLNFillStyleLayer {
   }
 
 
-  /// init
-  MLNFillStyleLayer init() {
-  objc.checkOsVersionInternal('MLNFillStyleLayer.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.retainAndReturnPointer(), _sel_init);
-    return MLNFillStyleLayer.fromPointer($ret, retain: false, release: true);
-  }
-
-
   /// Returns a fill style layer initialized with an identifier and source.
 /// 
 /// After initializing and configuring the style layer, add it to a map view’s
@@ -4284,13 +4182,6 @@ extension MLNFillStyleLayer$Methods on MLNFillStyleLayer {
   NSExpression get isFillAntialiased {
     final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_isFillAntialiased);
     return NSExpression.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// setFillAntialias:
-  set fillAntialias(NSExpression value) {
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setFillAntialias_, value.ref.pointer);
-
   }
 
 
@@ -4454,20 +4345,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setFillSortKey_, value.ref.pointe
   }
 
 
-  /// setFillTranslate:
-  set fillTranslate(NSExpression value) {
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setFillTranslate_, value.ref.pointer);
-
-  }
-
-
-  /// setFillTranslateAnchor:
-  set fillTranslateAnchor(NSExpression value) {
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setFillTranslateAnchor_, value.ref.pointer);
-
-  }
-
-
   /// The geometry's offset.
 /// 
 /// This property is measured in points.
@@ -4561,7 +4438,9 @@ extension type MLNForegroundStyleLayer._(objc.ObjCObject object$) implements obj
   }
 
   /// Returns whether [obj] is an instance of [MLNForegroundStyleLayer].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNForegroundStyleLayer);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNForegroundStyleLayer);
 
   /// alloc
   static MLNForegroundStyleLayer alloc() {
@@ -4588,14 +4467,6 @@ extension type MLNForegroundStyleLayer._(objc.ObjCObject object$) implements obj
 }
 
 extension MLNForegroundStyleLayer$Methods on MLNForegroundStyleLayer {
-
-  /// init
-  MLNForegroundStyleLayer init() {
-  objc.checkOsVersionInternal('MLNForegroundStyleLayer.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.retainAndReturnPointer(), _sel_init);
-    return MLNForegroundStyleLayer.fromPointer($ret, retain: false, release: true);
-  }
-
 
   /// Identifier of the source from which the receiver obtains the data to style.
   objc.NSString? get sourceIdentifier {
@@ -4654,7 +4525,9 @@ extension type MLNHeatmapStyleLayer._(objc.ObjCObject object$) implements objc.O
   }
 
   /// Returns whether [obj] is an instance of [MLNHeatmapStyleLayer].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNHeatmapStyleLayer);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNHeatmapStyleLayer);
 
   /// alloc
   static MLNHeatmapStyleLayer alloc() {
@@ -4831,14 +4704,6 @@ extension MLNHeatmapStyleLayer$Methods on MLNHeatmapStyleLayer {
   NSExpression get heatmapWeight {
     final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_heatmapWeight);
     return NSExpression.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// init
-  MLNHeatmapStyleLayer init() {
-  objc.checkOsVersionInternal('MLNHeatmapStyleLayer.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.retainAndReturnPointer(), _sel_init);
-    return MLNHeatmapStyleLayer.fromPointer($ret, retain: false, release: true);
   }
 
 
@@ -5037,7 +4902,9 @@ extension type MLNHillshadeStyleLayer._(objc.ObjCObject object$) implements objc
   }
 
   /// Returns whether [obj] is an instance of [MLNHillshadeStyleLayer].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNHillshadeStyleLayer);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNHillshadeStyleLayer);
 
   /// alloc
   static MLNHillshadeStyleLayer alloc() {
@@ -5256,14 +5123,6 @@ extension MLNHillshadeStyleLayer$Methods on MLNHillshadeStyleLayer {
     return ffi.Struct.create<MLNTransition>(
         $finalizable);
 
-  }
-
-
-  /// init
-  MLNHillshadeStyleLayer init() {
-  objc.checkOsVersionInternal('MLNHillshadeStyleLayer.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.retainAndReturnPointer(), _sel_init);
-    return MLNHillshadeStyleLayer.fromPointer($ret, retain: false, release: true);
   }
 
 
@@ -5510,7 +5369,9 @@ extension type MLNImageSource._(objc.ObjCObject object$) implements objc.ObjCObj
   }
 
   /// Returns whether [obj] is an instance of [MLNImageSource].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNImageSource);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNImageSource);
 
   /// alloc
   static MLNImageSource alloc() {
@@ -5567,14 +5428,6 @@ extension MLNImageSource$Methods on MLNImageSource {
   UIImage? get image {
     final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_image);
     return $ret.address == 0 ? null : UIImage.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// init
-  MLNImageSource init() {
-  objc.checkOsVersionInternal('MLNImageSource.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.retainAndReturnPointer(), _sel_init);
-    return MLNImageSource.fromPointer($ret, retain: false, release: true);
   }
 
 
@@ -5722,7 +5575,9 @@ extension type MLNLineStyleLayer._(objc.ObjCObject object$) implements objc.ObjC
   }
 
   /// Returns whether [obj] is an instance of [MLNLineStyleLayer].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNLineStyleLayer);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNLineStyleLayer);
 
   /// alloc
   static MLNLineStyleLayer alloc() {
@@ -5749,14 +5604,6 @@ extension type MLNLineStyleLayer._(objc.ObjCObject object$) implements objc.ObjC
 }
 
 extension MLNLineStyleLayer$Methods on MLNLineStyleLayer {
-
-  /// init
-  MLNLineStyleLayer init() {
-  objc.checkOsVersionInternal('MLNLineStyleLayer.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.retainAndReturnPointer(), _sel_init);
-    return MLNLineStyleLayer.fromPointer($ret, retain: false, release: true);
-  }
-
 
   /// Returns a line style layer initialized with an identifier and source.
 /// 
@@ -5921,13 +5768,6 @@ extension MLNLineStyleLayer$Methods on MLNLineStyleLayer {
     return ffi.Struct.create<MLNTransition>(
         $finalizable);
 
-  }
-
-
-  /// lineDasharray
-  NSExpression get lineDasharray {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_lineDasharray);
-    return NSExpression.fromPointer($ret, retain: true, release: true);
   }
 
 
@@ -6185,20 +6025,6 @@ extension MLNLineStyleLayer$Methods on MLNLineStyleLayer {
   }
 
 
-  /// lineTranslate
-  NSExpression get lineTranslate {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_lineTranslate);
-    return NSExpression.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// lineTranslateAnchor
-  NSExpression get lineTranslateAnchor {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_lineTranslateAnchor);
-    return NSExpression.fromPointer($ret, retain: true, release: true);
-  }
-
-
   /// The geometry's offset.
 /// 
 /// This property is measured in points.
@@ -6442,13 +6268,6 @@ _objc_msgSend_z7lywk(object$.ref.pointer, _sel_setLineDashPatternTransition_, va
   }
 
 
-  /// setLineDasharray:
-  set lineDasharray(NSExpression value) {
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setLineDasharray_, value.ref.pointer);
-
-  }
-
-
   /// Draws a line casing outside of a line's actual path. Value indicates the width
 /// of the inner gap.
 /// 
@@ -6683,20 +6502,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setLineSortKey_, value.ref.pointe
   }
 
 
-  /// setLineTranslate:
-  set lineTranslate(NSExpression value) {
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setLineTranslate_, value.ref.pointer);
-
-  }
-
-
-  /// setLineTranslateAnchor:
-  set lineTranslateAnchor(NSExpression value) {
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setLineTranslateAnchor_, value.ref.pointer);
-
-  }
-
-
   /// The geometry's offset.
 /// 
 /// This property is measured in points.
@@ -6844,7 +6649,9 @@ extension type MLNMapCamera._(objc.ObjCObject object$) implements objc.ObjCObjec
   }
 
   /// Returns whether [obj] is an instance of [MLNMapCamera].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNMapCamera);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNMapCamera);
 
   /// alloc
   static MLNMapCamera alloc() {
@@ -6916,6 +6723,7 @@ extension type MLNMapCamera._(objc.ObjCObject object$) implements objc.ObjCObjec
 /// method. To specify the altitude of the viewpoint, use the
 /// ``cameraLookingAtCenterCoordinate:altitude:pitch:heading:`` method, which has
 /// the same behavior as this initializer.
+  @Deprecated('Use -cameraLookingAtCenterCoordinate:acrossDistance:pitch:heading: or -cameraLookingAtCenterCoordinate:altitude:pitch:heading:.')
   static MLNMapCamera cameraLookingAtCenterCoordinate$2(CLLocationCoordinate2D centerCoordinate, {required double fromDistance,required double pitch,required double heading}) {
     final $ret = _objc_msgSend_x3m0f9(_class_MLNMapCamera, _sel_cameraLookingAtCenterCoordinate_fromDistance_pitch_heading_, centerCoordinate, fromDistance, pitch, heading);
     return MLNMapCamera.fromPointer($ret, retain: true, release: true);
@@ -7172,7 +6980,9 @@ extension type MLNMapView._(objc.ObjCObject object$) implements objc.ObjCObject,
   }
 
   /// Returns whether [obj] is an instance of [MLNMapView].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNMapView);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNMapView);
 
   /// alloc
   static MLNMapView alloc() {
@@ -7204,6 +7014,7 @@ extension type MLNMapView._(objc.ObjCObject object$) implements objc.ObjCObject,
 
 
   /// appearanceForTraitCollection:whenContainedIn:
+  @Deprecated('Deprecated')
   static MLNMapView appearanceForTraitCollection$1(UITraitCollection trait, {UIAppearanceContainer? whenContainedIn}) {
   objc.checkOsVersionInternal('MLNMapView.appearanceForTraitCollection:whenContainedIn:', iOS: (false, (8, 0, 0)));
     final $ret = _objc_msgSend_15qeuct(_class_MLNMapView, _sel_appearanceForTraitCollection_whenContainedIn_, trait.ref.pointer, whenContainedIn?.ref.pointer ?? ffi.nullptr);
@@ -7220,6 +7031,7 @@ extension type MLNMapView._(objc.ObjCObject object$) implements objc.ObjCObject,
 
 
   /// appearanceWhenContainedIn:
+  @Deprecated('Deprecated')
   static MLNMapView appearanceWhenContainedIn(UIAppearanceContainer? ContainerClass) {
   objc.checkOsVersionInternal('MLNMapView.appearanceWhenContainedIn:', iOS: (false, (5, 0, 0)));
     final $ret = _objc_msgSend_1sotr3r(_class_MLNMapView, _sel_appearanceWhenContainedIn_, ContainerClass?.ref.pointer ?? ffi.nullptr);
@@ -8504,6 +8316,7 @@ _objc_msgSend_1pl9qdv(object$.ref.pointer, _sel_resetPosition);
 /// 
 /// > Note: In versions prior to `4.0.0` selecting an offscreen annotation did not
 /// change the camera.
+  @Deprecated('Use `-selectAnnotation:animated:completionHandler:` instead.')
   void selectAnnotation(MLNAnnotation annotation, {required bool animated}) {
 _objc_msgSend_6p7ndb(object$.ref.pointer, _sel_selectAnnotation_animated_, annotation.ref.pointer, animated);
 
@@ -8848,6 +8661,7 @@ _objc_msgSend_1g8fos5(object$.ref.pointer, _sel_setContentInset_, value);
 /// @param animated Specify `YES` if you want the map view to animate the change to
 /// the content inset or `NO` if you want the map to inset the content
 /// immediately.
+  @Deprecated('Use `-setContentInset:animated:completionHandler:` instead.')
   void setContentInset(UIEdgeInsets contentInset, {required bool animated}) {
 _objc_msgSend_6ueq99(object$.ref.pointer, _sel_setContentInset_animated_, contentInset, animated);
 
@@ -9409,6 +9223,7 @@ _objc_msgSend_1zv0am(object$.ref.pointer, _sel_setTargetCoordinate_, value);
 /// @param targetCoordinate The target coordinate to fit within the viewport.
 /// @param animated If `YES`, the map animates to fit the target within the map
 /// view. If `NO`, the map fits the target instantaneously.
+  @Deprecated('Use `-setTargetCoordinate:animated:completionHandler:` instead.')
   void setTargetCoordinate(CLLocationCoordinate2D targetCoordinate, {required bool animated}) {
 _objc_msgSend_o7hjv2(object$.ref.pointer, _sel_setTargetCoordinate_animated_, targetCoordinate, animated);
 
@@ -9507,6 +9322,7 @@ _objc_msgSend_hwm8nu(object$.ref.pointer, _sel_setTileLodZoomShift_, value);
 /// Changing the value of this property updates the map view with an animated
 /// transition. If you don’t want to animate the change, use the
 /// `-setUserLocationVerticalAlignment:animated:` method instead.
+  @Deprecated('Use ``MLNMapViewDelegate/mapViewUserLocationAnchorPoint:`` instead.')
   set userLocationVerticalAlignment(int value) {
 _objc_msgSend_47doj4(object$.ref.pointer, _sel_setUserLocationVerticalAlignment_, value);
 
@@ -9520,6 +9336,7 @@ _objc_msgSend_47doj4(object$.ref.pointer, _sel_setUserLocationVerticalAlignment_
 /// @param animated If `YES`, the user location annotation animates to its new
 /// position within the map view. If `NO`, the user location annotation
 /// instantaneously moves to its new position.
+  @Deprecated('Use ``MLNMapViewDelegate/mapViewUserLocationAnchorPoint:`` instead.')
   void setUserLocationVerticalAlignment(int alignment, {required bool animated}) {
 _objc_msgSend_1qddrus(object$.ref.pointer, _sel_setUserLocationVerticalAlignment_animated_, alignment, animated);
 
@@ -9553,6 +9370,7 @@ _objc_msgSend_xoapar(object$.ref.pointer, _sel_setUserTrackingMode_, value);
 /// map view instantaneously changes to the new viewport. This parameter only
 /// affects the initial transition; subsequent changes to the user location or
 /// heading are always animated.
+  @Deprecated('Use `-setUserTrackingMode:animated:completionHandler:` instead.')
   void setUserTrackingMode(int mode, {required bool animated}) {
 _objc_msgSend_7oa3sf(object$.ref.pointer, _sel_setUserTrackingMode_animated_, mode, animated);
 
@@ -9624,6 +9442,7 @@ _objc_msgSend_148tmbg(object$.ref.pointer, _sel_setVisibleCoordinateBounds_anima
 /// around the given coordinate bounds.
 /// @param animated Specify `YES` to animate the change by smoothly scrolling and
 /// zooming or `NO` to immediately display the given bounds.
+  @Deprecated('Use `-setVisibleCoordinateBounds:edgePadding:animated:completionHandler:` instead.')
   void setVisibleCoordinateBounds$1(MLNCoordinateBounds bounds, {required UIEdgeInsets edgePadding,required bool animated}) {
 _objc_msgSend_18wcmvu(object$.ref.pointer, _sel_setVisibleCoordinateBounds_edgePadding_animated_, bounds, edgePadding, animated);
 
@@ -9785,6 +9604,7 @@ _objc_msgSend_6p7ndb(object$.ref.pointer, _sel_showAnnotations_animated_, annota
 /// map view to keep clear of annotations.
 /// @param animated `YES` if you want the map region change to be animated, or `NO`
 /// if you want the map to display the new region immediately without animations.
+  @Deprecated('Use `-showAnnotations:edgePadding:animated:completionHandler:` instead.')
   void showAnnotations$1(objc.NSArray annotations, {required UIEdgeInsets edgePadding,required bool animated}) {
 _objc_msgSend_1f4zv7b(object$.ref.pointer, _sel_showAnnotations_edgePadding_animated_, annotations.ref.pointer, edgePadding, animated);
 
@@ -10080,6 +9900,7 @@ _objc_msgSend_hwm8nu(object$.ref.pointer, _sel_updateUserLocationAnnotationViewA
 /// Changing the value of this property updates the map view with an animated
 /// transition. If you don’t want to animate the change, use the
 /// `-setUserLocationVerticalAlignment:animated:` method instead.
+  @Deprecated('Use ``MLNMapViewDelegate/mapViewUserLocationAnchorPoint:`` instead.')
   int get userLocationVerticalAlignment {
     return _objc_msgSend_1m9zum6(object$.ref.pointer, _sel_userLocationVerticalAlignment);
 
@@ -13273,7 +13094,9 @@ extension type MLNOfflinePack._(objc.ObjCObject object$) implements objc.ObjCObj
   }
 
   /// Returns whether [obj] is an instance of [MLNOfflinePack].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNOfflinePack);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNOfflinePack);
 
   /// alloc
   static MLNOfflinePack alloc() {
@@ -13467,6 +13290,22 @@ final class MLNOfflinePackProgress extends ffi.Struct{
   @ffi.Uint64()
   external int maximumResourcesExpected;
 
+ static ffi.Pointer<MLNOfflinePackProgress> $allocate(
+ ffi.Allocator $allocator, {
+ required int countOfResourcesCompleted,
+ required int countOfBytesCompleted,
+ required int countOfTilesCompleted,
+ required int countOfTileBytesCompleted,
+ required int countOfResourcesExpected,
+ required int maximumResourcesExpected,
+ }) => $allocator<MLNOfflinePackProgress>()
+ ..ref.countOfResourcesCompleted = countOfResourcesCompleted
+ ..ref.countOfBytesCompleted = countOfBytesCompleted
+ ..ref.countOfTilesCompleted = countOfTilesCompleted
+ ..ref.countOfTileBytesCompleted = countOfTileBytesCompleted
+ ..ref.countOfResourcesExpected = countOfResourcesExpected
+ ..ref.maximumResourcesExpected = maximumResourcesExpected;
+
 }
 
 /// The state an offline pack is currently in.
@@ -13545,7 +13384,9 @@ extension type MLNOfflineStorage._(objc.ObjCObject object$) implements objc.ObjC
   }
 
   /// Returns whether [obj] is an instance of [MLNOfflineStorage].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNOfflineStorage);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNOfflineStorage);
 
   /// alloc
   static MLNOfflineStorage alloc() {
@@ -13812,6 +13653,7 @@ _objc_msgSend_899qho(object$.ref.pointer, _sel_preloadData_forURL_modificationDa
 
 
   /// putResourceWithUrl:data:modified:expires:etag:mustRevalidate:
+  @Deprecated('Deprecated')
   void putResourceWithUrl(objc.NSURL url, {required objc.NSData data,objc.NSDate? modified,objc.NSDate? expires,objc.NSString? etag,required bool mustRevalidate}) {
 _objc_msgSend_1xt2lpz(object$.ref.pointer, _sel_putResourceWithUrl_data_modified_expires_etag_mustRevalidate_, url.ref.pointer, data.ref.pointer, modified?.ref.pointer ?? ffi.nullptr, expires?.ref.pointer ?? ffi.nullptr, etag?.ref.pointer ?? ffi.nullptr, mustRevalidate);
 
@@ -14266,7 +14108,9 @@ extension type MLNRasterDEMSource._(objc.ObjCObject object$) implements objc.Obj
   }
 
   /// Returns whether [obj] is an instance of [MLNRasterDEMSource].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNRasterDEMSource);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNRasterDEMSource);
 
   /// alloc
   static MLNRasterDEMSource alloc() {
@@ -14293,14 +14137,6 @@ extension type MLNRasterDEMSource._(objc.ObjCObject object$) implements objc.Obj
 }
 
 extension MLNRasterDEMSource$Methods on MLNRasterDEMSource {
-
-  /// init
-  MLNRasterDEMSource init() {
-  objc.checkOsVersionInternal('MLNRasterDEMSource.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.retainAndReturnPointer(), _sel_init);
-    return MLNRasterDEMSource.fromPointer($ret, retain: false, release: true);
-  }
-
 
   /// Returns a source initialized with an identifier.
 /// 
@@ -14441,7 +14277,9 @@ extension type MLNRasterStyleLayer._(objc.ObjCObject object$) implements objc.Ob
   }
 
   /// Returns whether [obj] is an instance of [MLNRasterStyleLayer].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNRasterStyleLayer);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNRasterStyleLayer);
 
   /// alloc
   static MLNRasterStyleLayer alloc() {
@@ -14468,14 +14306,6 @@ extension type MLNRasterStyleLayer._(objc.ObjCObject object$) implements objc.Ob
 }
 
 extension MLNRasterStyleLayer$Methods on MLNRasterStyleLayer {
-
-  /// init
-  MLNRasterStyleLayer init() {
-  objc.checkOsVersionInternal('MLNRasterStyleLayer.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.retainAndReturnPointer(), _sel_init);
-    return MLNRasterStyleLayer.fromPointer($ret, retain: false, release: true);
-  }
-
 
   /// Returns a raster style layer initialized with an identifier and source.
 /// 
@@ -14574,20 +14404,6 @@ extension MLNRasterStyleLayer$Methods on MLNRasterStyleLayer {
   }
 
 
-  /// rasterBrightnessMax
-  NSExpression get rasterBrightnessMax {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_rasterBrightnessMax);
-    return NSExpression.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// rasterBrightnessMin
-  NSExpression get rasterBrightnessMin {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_rasterBrightnessMin);
-    return NSExpression.fromPointer($ret, retain: true, release: true);
-  }
-
-
   /// Increase or reduce the contrast of the image.
 /// 
 /// The default value of this property is an expression that evaluates to the float
@@ -14643,13 +14459,6 @@ extension MLNRasterStyleLayer$Methods on MLNRasterStyleLayer {
 /// feature attributes.
   NSExpression get rasterFadeDuration {
     final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_rasterFadeDuration);
-    return NSExpression.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// rasterHueRotate
-  NSExpression get rasterHueRotate {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_rasterHueRotate);
     return NSExpression.fromPointer($ret, retain: true, release: true);
   }
 
@@ -14727,13 +14536,6 @@ extension MLNRasterStyleLayer$Methods on MLNRasterStyleLayer {
     return ffi.Struct.create<MLNTransition>(
         $finalizable);
 
-  }
-
-
-  /// rasterResampling
-  NSExpression get rasterResampling {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_rasterResampling);
-    return NSExpression.fromPointer($ret, retain: true, release: true);
   }
 
 
@@ -14876,20 +14678,6 @@ _objc_msgSend_z7lywk(object$.ref.pointer, _sel_setMinimumRasterBrightnessTransit
   }
 
 
-  /// setRasterBrightnessMax:
-  set rasterBrightnessMax(NSExpression value) {
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setRasterBrightnessMax_, value.ref.pointer);
-
-  }
-
-
-  /// setRasterBrightnessMin:
-  set rasterBrightnessMin(NSExpression value) {
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setRasterBrightnessMin_, value.ref.pointer);
-
-  }
-
-
   /// Increase or reduce the contrast of the image.
 /// 
 /// The default value of this property is an expression that evaluates to the float
@@ -14940,13 +14728,6 @@ _objc_msgSend_z7lywk(object$.ref.pointer, _sel_setRasterContrastTransition_, val
 /// feature attributes.
   set rasterFadeDuration(NSExpression value) {
 _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setRasterFadeDuration_, value.ref.pointer);
-
-  }
-
-
-  /// setRasterHueRotate:
-  set rasterHueRotate(NSExpression value) {
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setRasterHueRotate_, value.ref.pointer);
 
   }
 
@@ -15013,13 +14794,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setRasterOpacity_, value.ref.poin
 /// This property corresponds to the `raster-opacity-transition` property in the style JSON file format.
   set rasterOpacityTransition(MLNTransition value) {
 _objc_msgSend_z7lywk(object$.ref.pointer, _sel_setRasterOpacityTransition_, value);
-
-  }
-
-
-  /// setRasterResampling:
-  set rasterResampling(NSExpression value) {
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setRasterResampling_, value.ref.pointer);
 
   }
 
@@ -15138,7 +14912,9 @@ extension type MLNRasterTileSource._(objc.ObjCObject object$) implements objc.Ob
   }
 
   /// Returns whether [obj] is an instance of [MLNRasterTileSource].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNRasterTileSource);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNRasterTileSource);
 
   /// alloc
   static MLNRasterTileSource alloc() {
@@ -15165,14 +14941,6 @@ extension type MLNRasterTileSource._(objc.ObjCObject object$) implements objc.Ob
 }
 
 extension MLNRasterTileSource$Methods on MLNRasterTileSource {
-
-  /// init
-  MLNRasterTileSource init() {
-  objc.checkOsVersionInternal('MLNRasterTileSource.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.retainAndReturnPointer(), _sel_init);
-    return MLNRasterTileSource.fromPointer($ret, retain: false, release: true);
-  }
-
 
   /// Returns a source initialized with an identifier.
 /// 
@@ -15350,7 +15118,9 @@ extension type MLNShape._(objc.ObjCObject object$) implements objc.ObjCObject,ob
   }
 
   /// Returns whether [obj] is an instance of [MLNShape].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNShape);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNShape);
 
   /// alloc
   static MLNShape alloc() {
@@ -15574,7 +15344,9 @@ extension type MLNShapeSource._(objc.ObjCObject object$) implements objc.ObjCObj
   }
 
   /// Returns whether [obj] is an instance of [MLNShapeSource].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNShapeSource);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNShapeSource);
 
   /// alloc
   static MLNShapeSource alloc() {
@@ -15659,14 +15431,6 @@ extension MLNShapeSource$Methods on MLNShapeSource {
   objc.NSArray featuresMatchingPredicate(NSPredicate? predicate) {
     final $ret = _objc_msgSend_1sotr3r(object$.ref.pointer, _sel_featuresMatchingPredicate_, predicate?.ref.pointer ?? ffi.nullptr);
     return objc.NSArray.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// init
-  MLNShapeSource init() {
-  objc.checkOsVersionInternal('MLNShapeSource.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.retainAndReturnPointer(), _sel_init);
-    return MLNShapeSource.fromPointer($ret, retain: false, release: true);
   }
 
 
@@ -15907,7 +15671,9 @@ extension type MLNSource._(objc.ObjCObject object$) implements objc.ObjCObject,o
   }
 
   /// Returns whether [obj] is an instance of [MLNSource].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNSource);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNSource);
 
   /// alloc
   static MLNSource alloc() {
@@ -15939,14 +15705,6 @@ extension MLNSource$Methods on MLNSource {
   objc.NSString get identifier {
     final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_identifier);
     return objc.NSString.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// init
-  MLNSource init() {
-  objc.checkOsVersionInternal('MLNSource.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.retainAndReturnPointer(), _sel_init);
-    return MLNSource.fromPointer($ret, retain: false, release: true);
   }
 
 
@@ -16004,7 +15762,9 @@ extension type MLNStyle._(objc.ObjCObject object$) implements objc.ObjCObject,ob
   }
 
   /// Returns whether [obj] is an instance of [MLNStyle].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNStyle);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNStyle);
 
   /// alloc
   static MLNStyle alloc() {
@@ -16437,7 +16197,9 @@ extension type MLNStyleLayer._(objc.ObjCObject object$) implements objc.ObjCObje
   }
 
   /// Returns whether [obj] is an instance of [MLNStyleLayer].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNStyleLayer);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNStyleLayer);
 
   /// alloc
   static MLNStyleLayer alloc() {
@@ -16470,14 +16232,6 @@ extension MLNStyleLayer$Methods on MLNStyleLayer {
   objc.NSString get identifier {
     final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_identifier);
     return objc.NSString.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// init
-  MLNStyleLayer init() {
-  objc.checkOsVersionInternal('MLNStyleLayer.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.retainAndReturnPointer(), _sel_init);
-    return MLNStyleLayer.fromPointer($ret, retain: false, release: true);
   }
 
 
@@ -16577,7 +16331,9 @@ extension type MLNSymbolStyleLayer._(objc.ObjCObject object$) implements objc.Ob
   }
 
   /// Returns whether [obj] is an instance of [MLNSymbolStyleLayer].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNSymbolStyleLayer);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNSymbolStyleLayer);
 
   /// alloc
   static MLNSymbolStyleLayer alloc() {
@@ -16604,13 +16360,6 @@ extension type MLNSymbolStyleLayer._(objc.ObjCObject object$) implements objc.Ob
 }
 
 extension MLNSymbolStyleLayer$Methods on MLNSymbolStyleLayer {
-
-  /// iconAllowOverlap
-  NSExpression get iconAllowOverlap {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_iconAllowOverlap);
-    return NSExpression.fromPointer($ret, retain: true, release: true);
-  }
-
 
   /// If true, the icon will be visible even if it collides with other previously
 /// drawn symbols.
@@ -16833,13 +16582,6 @@ extension MLNSymbolStyleLayer$Methods on MLNSymbolStyleLayer {
   }
 
 
-  /// iconIgnorePlacement
-  NSExpression get iconIgnorePlacement {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_iconIgnorePlacement);
-    return NSExpression.fromPointer($ret, retain: true, release: true);
-  }
-
-
   /// If true, other symbols can be visible even if they collide with the icon.
 /// 
 /// The default value of this property is an expression that evaluates to `NO`. Set
@@ -16865,13 +16607,6 @@ extension MLNSymbolStyleLayer$Methods on MLNSymbolStyleLayer {
 /// attributes.
   NSExpression get iconIgnoresPlacement {
     final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_iconIgnoresPlacement);
-    return NSExpression.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// iconImage
-  NSExpression get iconImage {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_iconImage);
     return NSExpression.fromPointer($ret, retain: true, release: true);
   }
 
@@ -16906,13 +16641,6 @@ extension MLNSymbolStyleLayer$Methods on MLNSymbolStyleLayer {
 /// icons with an expression.
   NSExpression get iconImageName {
     final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_iconImageName);
-    return NSExpression.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// iconKeepUpright
-  NSExpression get iconKeepUpright {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_iconKeepUpright);
     return NSExpression.fromPointer($ret, retain: true, release: true);
   }
 
@@ -17031,13 +16759,6 @@ extension MLNSymbolStyleLayer$Methods on MLNSymbolStyleLayer {
   }
 
 
-  /// iconRotate
-  NSExpression get iconRotate {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_iconRotate);
-    return NSExpression.fromPointer($ret, retain: true, release: true);
-  }
-
-
   /// Rotates the icon clockwise.
 /// 
 /// This property is measured in degrees.
@@ -17131,13 +16852,6 @@ extension MLNSymbolStyleLayer$Methods on MLNSymbolStyleLayer {
   }
 
 
-  /// iconSize
-  NSExpression get iconSize {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_iconSize);
-    return NSExpression.fromPointer($ret, retain: true, release: true);
-  }
-
-
   /// The directions in which the icon stretches to fit around the text. If the icon
 /// image is a resizable image, the resizable areas may be stretched, while the cap
 /// insets are always drawn at the original scale.
@@ -17197,20 +16911,6 @@ extension MLNSymbolStyleLayer$Methods on MLNSymbolStyleLayer {
 /// feature attributes.
   NSExpression get iconTextFitPadding {
     final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_iconTextFitPadding);
-    return NSExpression.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// iconTranslate
-  NSExpression get iconTranslate {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_iconTranslate);
-    return NSExpression.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// iconTranslateAnchor
-  NSExpression get iconTranslateAnchor {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_iconTranslateAnchor);
     return NSExpression.fromPointer($ret, retain: true, release: true);
   }
 
@@ -17289,14 +16989,6 @@ extension MLNSymbolStyleLayer$Methods on MLNSymbolStyleLayer {
     return ffi.Struct.create<MLNTransition>(
         $finalizable);
 
-  }
-
-
-  /// init
-  MLNSymbolStyleLayer init() {
-  objc.checkOsVersionInternal('MLNSymbolStyleLayer.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.retainAndReturnPointer(), _sel_init);
-    return MLNSymbolStyleLayer.fromPointer($ret, retain: false, release: true);
   }
 
 
@@ -17491,13 +17183,6 @@ extension MLNSymbolStyleLayer$Methods on MLNSymbolStyleLayer {
   NSExpression get maximumTextWidth {
     final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_maximumTextWidth);
     return NSExpression.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// setIconAllowOverlap:
-  set iconAllowOverlap(NSExpression value) {
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setIconAllowOverlap_, value.ref.pointer);
-
   }
 
 
@@ -17702,13 +17387,6 @@ _objc_msgSend_z7lywk(object$.ref.pointer, _sel_setIconHaloWidthTransition_, valu
   }
 
 
-  /// setIconIgnorePlacement:
-  set iconIgnorePlacement(NSExpression value) {
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setIconIgnorePlacement_, value.ref.pointer);
-
-  }
-
-
   /// If true, other symbols can be visible even if they collide with the icon.
 /// 
 /// The default value of this property is an expression that evaluates to `NO`. Set
@@ -17734,13 +17412,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setIconIgnorePlacement_, value.re
 /// attributes.
   set iconIgnoresPlacement(NSExpression value) {
 _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setIconIgnoresPlacement_, value.ref.pointer);
-
-  }
-
-
-  /// setIconImage:
-  set iconImage(NSExpression value) {
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setIconImage_, value.ref.pointer);
 
   }
 
@@ -17775,13 +17446,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setIconImage_, value.ref.pointer)
 /// icons with an expression.
   set iconImageName(NSExpression value) {
 _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setIconImageName_, value.ref.pointer);
-
-  }
-
-
-  /// setIconKeepUpright:
-  set iconKeepUpright(NSExpression value) {
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setIconKeepUpright_, value.ref.pointer);
 
   }
 
@@ -17921,13 +17585,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setIconPitchAlignment_, value.ref
   }
 
 
-  /// setIconRotate:
-  set iconRotate(NSExpression value) {
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setIconRotate_, value.ref.pointer);
-
-  }
-
-
   /// Rotates the icon clockwise.
 /// 
 /// This property is measured in degrees.
@@ -18021,13 +17678,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setIconScale_, value.ref.pointer)
   }
 
 
-  /// setIconSize:
-  set iconSize(NSExpression value) {
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setIconSize_, value.ref.pointer);
-
-  }
-
-
   /// The directions in which the icon stretches to fit around the text. If the icon
 /// image is a resizable image, the resizable areas may be stretched, while the cap
 /// insets are always drawn at the original scale.
@@ -18087,20 +17737,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setIconTextFit_, value.ref.pointe
 /// feature attributes.
   set iconTextFitPadding(NSExpression value) {
 _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setIconTextFitPadding_, value.ref.pointer);
-
-  }
-
-
-  /// setIconTranslate:
-  set iconTranslate(NSExpression value) {
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setIconTranslate_, value.ref.pointer);
-
-  }
-
-
-  /// setIconTranslateAnchor:
-  set iconTranslateAnchor(NSExpression value) {
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setIconTranslateAnchor_, value.ref.pointer);
 
   }
 
@@ -18298,13 +17934,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setMaximumTextAngle_, value.ref.p
 /// feature attributes
   set maximumTextWidth(NSExpression value) {
 _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setMaximumTextWidth_, value.ref.pointer);
-
-  }
-
-
-  /// setSymbolAvoidEdges:
-  set symbolAvoidEdges(NSExpression value) {
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setSymbolAvoidEdges_, value.ref.pointer);
 
   }
 
@@ -18513,13 +18142,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setText_, value.ref.pointer);
   }
 
 
-  /// setTextAllowOverlap:
-  set textAllowOverlap(NSExpression value) {
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setTextAllowOverlap_, value.ref.pointer);
-
-  }
-
-
   /// If true, the text will be visible even if it collides with other previously
 /// drawn symbols.
 /// 
@@ -18614,20 +18236,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setTextColor_, value.ref.pointer)
 /// This property corresponds to the `text-color-transition` property in the style JSON file format.
   set textColorTransition(MLNTransition value) {
 _objc_msgSend_z7lywk(object$.ref.pointer, _sel_setTextColorTransition_, value);
-
-  }
-
-
-  /// setTextField:
-  set textField(NSExpression value) {
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setTextField_, value.ref.pointer);
-
-  }
-
-
-  /// setTextFont:
-  set textFont(NSExpression value) {
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setTextFont_, value.ref.pointer);
 
   }
 
@@ -18793,13 +18401,6 @@ _objc_msgSend_z7lywk(object$.ref.pointer, _sel_setTextHaloWidthTransition_, valu
   }
 
 
-  /// setTextIgnorePlacement:
-  set textIgnorePlacement(NSExpression value) {
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setTextIgnorePlacement_, value.ref.pointer);
-
-  }
-
-
   /// If true, other symbols can be visible even if they collide with the text.
 /// 
 /// The default value of this property is an expression that evaluates to `NO`. Set
@@ -18860,20 +18461,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setTextJustification_, value.ref.
   }
 
 
-  /// setTextJustify:
-  set textJustify(NSExpression value) {
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setTextJustify_, value.ref.pointer);
-
-  }
-
-
-  /// setTextKeepUpright:
-  set textKeepUpright(NSExpression value) {
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setTextKeepUpright_, value.ref.pointer);
-
-  }
-
-
   /// Text tracking amount.
 /// 
 /// This property is measured in ems.
@@ -18920,20 +18507,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setTextLetterSpacing_, value.ref.
 /// feature attributes.
   set textLineHeight(NSExpression value) {
 _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setTextLineHeight_, value.ref.pointer);
-
-  }
-
-
-  /// setTextMaxAngle:
-  set textMaxAngle(NSExpression value) {
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setTextMaxAngle_, value.ref.pointer);
-
-  }
-
-
-  /// setTextMaxWidth:
-  set textMaxWidth(NSExpression value) {
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setTextMaxWidth_, value.ref.pointer);
 
   }
 
@@ -19102,13 +18675,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setTextRadialOffset_, value.ref.p
   }
 
 
-  /// setTextRotate:
-  set textRotate(NSExpression value) {
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setTextRotate_, value.ref.pointer);
-
-  }
-
-
   /// Rotates the text clockwise.
 /// 
 /// This property is measured in degrees.
@@ -19172,13 +18738,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setTextRotationAlignment_, value.
   }
 
 
-  /// setTextSize:
-  set textSize(NSExpression value) {
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setTextSize_, value.ref.pointer);
-
-  }
-
-
   /// Specifies how to capitalize text.
 /// 
 /// The default value of this property is an expression that evaluates to `none`.
@@ -19201,20 +18760,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setTextSize_, value.ref.pointer);
 /// feature attributes
   set textTransform(NSExpression value) {
 _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setTextTransform_, value.ref.pointer);
-
-  }
-
-
-  /// setTextTranslate:
-  set textTranslate(NSExpression value) {
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setTextTranslate_, value.ref.pointer);
-
-  }
-
-
-  /// setTextTranslateAnchor:
-  set textTranslateAnchor(NSExpression value) {
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setTextTranslateAnchor_, value.ref.pointer);
 
   }
 
@@ -19378,13 +18923,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setTextVariableAnchorOffset_, val
   }
 
 
-  /// setTextWritingMode:
-  set textWritingMode(NSExpression value) {
-_objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setTextWritingMode_, value.ref.pointer);
-
-  }
-
-
   /// The property allows control over a symbol's orientation. Note that the property
 /// values act as a hint, so that a symbol whose language doesn’t support the
 /// provided orientation will be laid out in its natural orientation. Example:
@@ -19420,13 +18958,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setTextWritingMode_, value.ref.po
   set textWritingModes(NSExpression value) {
 _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setTextWritingModes_, value.ref.pointer);
 
-  }
-
-
-  /// symbolAvoidEdges
-  NSExpression get symbolAvoidEdges {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_symbolAvoidEdges);
-    return NSExpression.fromPointer($ret, retain: true, release: true);
   }
 
 
@@ -19634,13 +19165,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setTextWritingModes_, value.ref.p
   }
 
 
-  /// textAllowOverlap
-  NSExpression get textAllowOverlap {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_textAllowOverlap);
-    return NSExpression.fromPointer($ret, retain: true, release: true);
-  }
-
-
   /// If true, the text will be visible even if it collides with other previously
 /// drawn symbols.
 /// 
@@ -19741,20 +19265,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setTextWritingModes_, value.ref.p
     return ffi.Struct.create<MLNTransition>(
         $finalizable);
 
-  }
-
-
-  /// textField
-  NSExpression get textField {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_textField);
-    return NSExpression.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// textFont
-  NSExpression get textFont {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_textFont);
-    return NSExpression.fromPointer($ret, retain: true, release: true);
   }
 
 
@@ -19934,13 +19444,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setTextWritingModes_, value.ref.p
   }
 
 
-  /// textIgnorePlacement
-  NSExpression get textIgnorePlacement {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_textIgnorePlacement);
-    return NSExpression.fromPointer($ret, retain: true, release: true);
-  }
-
-
   /// If true, other symbols can be visible even if they collide with the text.
 /// 
 /// The default value of this property is an expression that evaluates to `NO`. Set
@@ -20001,20 +19504,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setTextWritingModes_, value.ref.p
   }
 
 
-  /// textJustify
-  NSExpression get textJustify {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_textJustify);
-    return NSExpression.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// textKeepUpright
-  NSExpression get textKeepUpright {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_textKeepUpright);
-    return NSExpression.fromPointer($ret, retain: true, release: true);
-  }
-
-
   /// Text tracking amount.
 /// 
 /// This property is measured in ems.
@@ -20061,20 +19550,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setTextWritingModes_, value.ref.p
 /// feature attributes.
   NSExpression get textLineHeight {
     final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_textLineHeight);
-    return NSExpression.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// textMaxAngle
-  NSExpression get textMaxAngle {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_textMaxAngle);
-    return NSExpression.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// textMaxWidth
-  NSExpression get textMaxWidth {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_textMaxWidth);
     return NSExpression.fromPointer($ret, retain: true, release: true);
   }
 
@@ -20222,13 +19697,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setTextWritingModes_, value.ref.p
   }
 
 
-  /// textRotate
-  NSExpression get textRotate {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_textRotate);
-    return NSExpression.fromPointer($ret, retain: true, release: true);
-  }
-
-
   /// Rotates the text clockwise.
 /// 
 /// This property is measured in degrees.
@@ -20292,13 +19760,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setTextWritingModes_, value.ref.p
   }
 
 
-  /// textSize
-  NSExpression get textSize {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_textSize);
-    return NSExpression.fromPointer($ret, retain: true, release: true);
-  }
-
-
   /// Specifies how to capitalize text.
 /// 
 /// The default value of this property is an expression that evaluates to `none`.
@@ -20321,20 +19782,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setTextWritingModes_, value.ref.p
 /// feature attributes
   NSExpression get textTransform {
     final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_textTransform);
-    return NSExpression.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// textTranslate
-  NSExpression get textTranslate {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_textTranslate);
-    return NSExpression.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// textTranslateAnchor
-  NSExpression get textTranslateAnchor {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_textTranslateAnchor);
     return NSExpression.fromPointer($ret, retain: true, release: true);
   }
 
@@ -20503,13 +19950,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_setTextWritingModes_, value.ref.p
   }
 
 
-  /// textWritingMode
-  NSExpression get textWritingMode {
-    final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_textWritingMode);
-    return NSExpression.fromPointer($ret, retain: true, release: true);
-  }
-
-
   /// The property allows control over a symbol's orientation. Note that the property
 /// values act as a hint, so that a symbol whose language doesn’t support the
 /// provided orientation will be laid out in its natural orientation. Example:
@@ -20585,7 +20025,9 @@ extension type MLNTilePyramidOfflineRegion._(objc.ObjCObject object$) implements
   }
 
   /// Returns whether [obj] is an instance of [MLNTilePyramidOfflineRegion].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNTilePyramidOfflineRegion);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNTilePyramidOfflineRegion);
 
   /// alloc
   static MLNTilePyramidOfflineRegion alloc() {
@@ -20652,14 +20094,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_encodeWithCoder_, coder.ref.point
   bool get includesIdeographicGlyphs {
     return _objc_msgSend_91o635(object$.ref.pointer, _sel_includesIdeographicGlyphs);
 
-  }
-
-
-  /// init
-  MLNTilePyramidOfflineRegion init() {
-  objc.checkOsVersionInternal('MLNTilePyramidOfflineRegion.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.retainAndReturnPointer(), _sel_init);
-    return MLNTilePyramidOfflineRegion.fromPointer($ret, retain: false, release: true);
   }
 
 
@@ -20777,7 +20211,9 @@ extension type MLNTileSource._(objc.ObjCObject object$) implements objc.ObjCObje
   }
 
   /// Returns whether [obj] is an instance of [MLNTileSource].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNTileSource);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNTileSource);
 
   /// alloc
   static MLNTileSource alloc() {
@@ -20839,14 +20275,6 @@ extension MLNTileSource$Methods on MLNTileSource {
   }
 
 
-  /// init
-  MLNTileSource init() {
-  objc.checkOsVersionInternal('MLNTileSource.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.retainAndReturnPointer(), _sel_init);
-    return MLNTileSource.fromPointer($ret, retain: false, release: true);
-  }
-
-
   /// Returns a source initialized with an identifier.
 /// 
 /// After initializing and configuring the source, add it to a map view’s style
@@ -20871,6 +20299,14 @@ final class MLNTransition extends ffi.Struct{
   /// The amount of time in seconds to wait before beginning the animation.
   @ffi.Double()
   external double delay;
+
+ static ffi.Pointer<MLNTransition> $allocate(
+ ffi.Allocator $allocator, {
+ required double duration,
+ required double delay,
+ }) => $allocator<MLNTransition>()
+ ..ref.duration = duration
+ ..ref.delay = delay;
 
 }
 
@@ -20977,7 +20413,9 @@ extension type MLNVectorStyleLayer._(objc.ObjCObject object$) implements objc.Ob
   }
 
   /// Returns whether [obj] is an instance of [MLNVectorStyleLayer].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNVectorStyleLayer);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNVectorStyleLayer);
 
   /// alloc
   static MLNVectorStyleLayer alloc() {
@@ -21004,14 +20442,6 @@ extension type MLNVectorStyleLayer._(objc.ObjCObject object$) implements objc.Ob
 }
 
 extension MLNVectorStyleLayer$Methods on MLNVectorStyleLayer {
-
-  /// init
-  MLNVectorStyleLayer init() {
-  objc.checkOsVersionInternal('MLNVectorStyleLayer.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.retainAndReturnPointer(), _sel_init);
-    return MLNVectorStyleLayer.fromPointer($ret, retain: false, release: true);
-  }
-
 
   /// The style layer’s predicate.
 /// 
@@ -21156,7 +20586,9 @@ extension type MLNVectorTileSource._(objc.ObjCObject object$) implements objc.Ob
   }
 
   /// Returns whether [obj] is an instance of [MLNVectorTileSource].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNVectorTileSource);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MLNVectorTileSource);
 
   /// alloc
   static MLNVectorTileSource alloc() {
@@ -21220,14 +20652,6 @@ extension MLNVectorTileSource$Methods on MLNVectorTileSource {
   objc.NSArray featuresInSourceLayersWithIdentifiers(objc.NSSet sourceLayerIdentifiers, {NSPredicate? predicate}) {
     final $ret = _objc_msgSend_15qeuct(object$.ref.pointer, _sel_featuresInSourceLayersWithIdentifiers_predicate_, sourceLayerIdentifiers.ref.pointer, predicate?.ref.pointer ?? ffi.nullptr);
     return objc.NSArray.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// init
-  MLNVectorTileSource init() {
-  objc.checkOsVersionInternal('MLNVectorTileSource.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.retainAndReturnPointer(), _sel_init);
-    return MLNVectorTileSource.fromPointer($ret, retain: false, release: true);
   }
 
 
@@ -21332,7 +20756,9 @@ extension type MapLibreRegistry._(objc.ObjCObject object$) implements objc.ObjCO
   }
 
   /// Returns whether [obj] is an instance of [MapLibreRegistry].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MapLibreRegistry);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_MapLibreRegistry);
 
   /// Method to add a flutter api to the registry
   static void addFlutterApiWithViewId(int viewId, {required FlutterApi api}) {
@@ -21429,7 +20855,9 @@ extension type NSExpression._(objc.ObjCObject object$) implements objc.ObjCObjec
   }
 
   /// Returns whether [obj] is an instance of [NSExpression].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_NSExpression);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_NSExpression);
 
   /// alloc
   static NSExpression alloc() {
@@ -27061,7 +26489,9 @@ extension type UIAction._(objc.ObjCObject object$) implements objc.ObjCObject,UI
   }
 
   /// Returns whether [obj] is an instance of [UIAction].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_UIAction);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_UIAction);
 
   /// actionWithHandler:
   static UIAction actionWithHandler(objc.ObjCBlock<ffi.Void Function(UIAction)> handler) {
@@ -27092,20 +26522,11 @@ extension type UIAction._(objc.ObjCObject object$) implements objc.ObjCObject,UI
   }
 
 
-  /// new
-  static UIAction new$() {
-    final $ret = _objc_msgSend_151sglz(_class_UIAction, _sel_new);
-    return UIAction.fromPointer($ret, retain: false, release: true);
-  }
-
-
   /// supportsSecureCoding
   static bool getSupportsSecureCoding() {
     return _objc_msgSend_91o635(_class_UIAction, _sel_supportsSecureCoding);
 
   }
-  /// Returns a new instance of UIAction constructed with the default `new` method.
-  UIAction() : this.as(new$().object$);
 
 }
 
@@ -27140,14 +26561,6 @@ extension UIAction$Methods on UIAction {
   objc.checkOsVersionInternal('UIAction.image', iOS: (false, (16, 0, 0)));
     final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_image);
     return $ret.address == 0 ? null : UIImage.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// init
-  UIAction init() {
-  objc.checkOsVersionInternal('UIAction.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.retainAndReturnPointer(), _sel_init);
-    return UIAction.fromPointer($ret, retain: false, release: true);
   }
 
 
@@ -27502,6 +26915,18 @@ final class UIEdgeInsets extends ffi.Struct{
   @ffi.Double()
   external double right;
 
+ static ffi.Pointer<UIEdgeInsets> $allocate(
+ ffi.Allocator $allocator, {
+ required double top,
+ required double left,
+ required double bottom,
+ required double right,
+ }) => $allocator<UIEdgeInsets>()
+ ..ref.top = top
+ ..ref.left = left
+ ..ref.bottom = bottom
+ ..ref.right = right;
+
 }
 
 sealed class UIEditingInteractionConfiguration {
@@ -27773,7 +27198,9 @@ extension type UIHoverStyle._(objc.ObjCObject object$) implements objc.ObjCObjec
   }
 
   /// Returns whether [obj] is an instance of [UIHoverStyle].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_UIHoverStyle);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_UIHoverStyle);
 
   /// alloc
   static UIHoverStyle alloc() {
@@ -27797,13 +27224,6 @@ extension type UIHoverStyle._(objc.ObjCObject object$) implements objc.ObjCObjec
   }
 
 
-  /// new
-  static UIHoverStyle new$() {
-    final $ret = _objc_msgSend_151sglz(_class_UIHoverStyle, _sel_new);
-    return UIHoverStyle.fromPointer($ret, retain: false, release: true);
-  }
-
-
   /// styleWithEffect:shape:
   static UIHoverStyle styleWithEffect(UIHoverEffect effect, {UIShape? shape}) {
   objc.checkOsVersionInternal('UIHoverStyle.styleWithEffect:shape:', iOS: (false, (17, 0, 0)));
@@ -27818,8 +27238,6 @@ extension type UIHoverStyle._(objc.ObjCObject object$) implements objc.ObjCObjec
     final $ret = _objc_msgSend_1sotr3r(_class_UIHoverStyle, _sel_styleWithShape_, shape?.ref.pointer ?? ffi.nullptr);
     return UIHoverStyle.fromPointer($ret, retain: true, release: true);
   }
-  /// Returns a new instance of UIHoverStyle constructed with the default `new` method.
-  UIHoverStyle() : this.as(new$().object$);
 
 }
 
@@ -27830,14 +27248,6 @@ extension UIHoverStyle$Methods on UIHoverStyle {
   objc.checkOsVersionInternal('UIHoverStyle.effect', iOS: (false, (17, 0, 0)));
     final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_effect);
     return UIHoverEffect.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// init
-  UIHoverStyle init() {
-  objc.checkOsVersionInternal('UIHoverStyle.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.retainAndReturnPointer(), _sel_init);
-    return UIHoverStyle.fromPointer($ret, retain: false, release: true);
   }
 
 
@@ -27900,7 +27310,9 @@ extension type UIImage._(objc.ObjCObject object$) implements objc.ObjCObject,obj
   }
 
   /// Returns whether [obj] is an instance of [UIImage].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_UIImage);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_UIImage);
 
   /// alloc
   static UIImage alloc() {
@@ -28646,7 +28058,9 @@ extension type UIMenu._(objc.ObjCObject object$) implements objc.ObjCObject,UIMe
   }
 
   /// Returns whether [obj] is an instance of [UIMenu].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_UIMenu);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_UIMenu);
 
   /// alloc
   static UIMenu alloc() {
@@ -28684,20 +28098,11 @@ extension type UIMenu._(objc.ObjCObject object$) implements objc.ObjCObject,UIMe
   }
 
 
-  /// new
-  static UIMenu new$() {
-    final $ret = _objc_msgSend_151sglz(_class_UIMenu, _sel_new);
-    return UIMenu.fromPointer($ret, retain: false, release: true);
-  }
-
-
   /// supportsSecureCoding
   static bool getSupportsSecureCoding() {
     return _objc_msgSend_91o635(_class_UIMenu, _sel_supportsSecureCoding);
 
   }
-  /// Returns a new instance of UIMenu constructed with the default `new` method.
-  UIMenu() : this.as(new$().object$);
 
 }
 
@@ -28724,14 +28129,6 @@ extension UIMenu$Methods on UIMenu {
   objc.checkOsVersionInternal('UIMenu.identifier', iOS: (false, (13, 0, 0)));
     final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_identifier);
     return objc.NSString.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// init
-  UIMenu init() {
-  objc.checkOsVersionInternal('UIMenu.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.retainAndReturnPointer(), _sel_init);
-    return UIMenu.fromPointer($ret, retain: false, release: true);
   }
 
 
@@ -28845,7 +28242,9 @@ extension type UIMenuElement._(objc.ObjCObject object$) implements objc.ObjCObje
   }
 
   /// Returns whether [obj] is an instance of [UIMenuElement].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_UIMenuElement);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_UIMenuElement);
 
   /// alloc
   static UIMenuElement alloc() {
@@ -28861,20 +28260,11 @@ extension type UIMenuElement._(objc.ObjCObject object$) implements objc.ObjCObje
   }
 
 
-  /// new
-  static UIMenuElement new$() {
-    final $ret = _objc_msgSend_151sglz(_class_UIMenuElement, _sel_new);
-    return UIMenuElement.fromPointer($ret, retain: false, release: true);
-  }
-
-
   /// supportsSecureCoding
   static bool getSupportsSecureCoding() {
     return _objc_msgSend_91o635(_class_UIMenuElement, _sel_supportsSecureCoding);
 
   }
-  /// Returns a new instance of UIMenuElement constructed with the default `new` method.
-  UIMenuElement() : this.as(new$().object$);
 
 }
 
@@ -28892,14 +28282,6 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_encodeWithCoder_, coder.ref.point
   objc.checkOsVersionInternal('UIMenuElement.image', iOS: (false, (13, 0, 0)));
     final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_image);
     return $ret.address == 0 ? null : UIImage.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// init
-  UIMenuElement init() {
-  objc.checkOsVersionInternal('UIMenuElement.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.retainAndReturnPointer(), _sel_init);
-    return UIMenuElement.fromPointer($ret, retain: false, release: true);
   }
 
 
@@ -28996,7 +28378,9 @@ extension type UIPointerEffect._(objc.ObjCObject object$) implements objc.ObjCOb
   }
 
   /// Returns whether [obj] is an instance of [UIPointerEffect].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_UIPointerEffect);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_UIPointerEffect);
 
   /// alloc
   static UIPointerEffect alloc() {
@@ -29019,26 +28403,9 @@ extension type UIPointerEffect._(objc.ObjCObject object$) implements objc.ObjCOb
     return UIPointerEffect.fromPointer($ret, retain: true, release: true);
   }
 
-
-  /// new
-  static UIPointerEffect new$() {
-    final $ret = _objc_msgSend_151sglz(_class_UIPointerEffect, _sel_new);
-    return UIPointerEffect.fromPointer($ret, retain: false, release: true);
-  }
-  /// Returns a new instance of UIPointerEffect constructed with the default `new` method.
-  UIPointerEffect() : this.as(new$().object$);
-
 }
 
 extension UIPointerEffect$Methods on UIPointerEffect {
-
-  /// init
-  UIPointerEffect init() {
-  objc.checkOsVersionInternal('UIPointerEffect.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.retainAndReturnPointer(), _sel_init);
-    return UIPointerEffect.fromPointer($ret, retain: false, release: true);
-  }
-
 
   /// preview
   UITargetedPreview get preview {
@@ -29067,7 +28434,9 @@ extension type UIPointerShape._(objc.ObjCObject object$) implements objc.ObjCObj
   }
 
   /// Returns whether [obj] is an instance of [UIPointerShape].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_UIPointerShape);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_UIPointerShape);
 
   /// alloc
   static UIPointerShape alloc() {
@@ -29088,13 +28457,6 @@ extension type UIPointerShape._(objc.ObjCObject object$) implements objc.ObjCObj
   objc.checkOsVersionInternal('UIPointerShape.beamWithPreferredLength:axis:', iOS: (false, (13, 4, 0)));
     final $ret = _objc_msgSend_h14qyr(_class_UIPointerShape, _sel_beamWithPreferredLength_axis_, length, axis);
     return UIPointerShape.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// new
-  static UIPointerShape new$() {
-    final $ret = _objc_msgSend_151sglz(_class_UIPointerShape, _sel_new);
-    return UIPointerShape.fromPointer($ret, retain: false, release: true);
   }
 
 
@@ -29120,19 +28482,10 @@ extension type UIPointerShape._(objc.ObjCObject object$) implements objc.ObjCObj
     final $ret = _objc_msgSend_1k439hd(_class_UIPointerShape, _sel_shapeWithRoundedRect_cornerRadius_, rect, cornerRadius);
     return UIPointerShape.fromPointer($ret, retain: true, release: true);
   }
-  /// Returns a new instance of UIPointerShape constructed with the default `new` method.
-  UIPointerShape() : this.as(new$().object$);
 
 }
 
 extension UIPointerShape$Methods on UIPointerShape {
-
-  /// init
-  UIPointerShape init() {
-  objc.checkOsVersionInternal('UIPointerShape.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.retainAndReturnPointer(), _sel_init);
-    return UIPointerShape.fromPointer($ret, retain: false, release: true);
-  }
 
 }
 
@@ -29154,7 +28507,9 @@ extension type UIPointerStyle._(objc.ObjCObject object$) implements objc.ObjCObj
   }
 
   /// Returns whether [obj] is an instance of [UIPointerStyle].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_UIPointerStyle);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_UIPointerStyle);
 
   /// alloc
   static UIPointerStyle alloc() {
@@ -29183,13 +28538,6 @@ extension type UIPointerStyle._(objc.ObjCObject object$) implements objc.ObjCObj
   objc.checkOsVersionInternal('UIPointerStyle.hiddenPointerStyle', iOS: (false, (13, 4, 0)));
     final $ret = _objc_msgSend_151sglz(_class_UIPointerStyle, _sel_hiddenPointerStyle);
     return UIPointerStyle.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// new
-  static UIPointerStyle new$() {
-    final $ret = _objc_msgSend_151sglz(_class_UIPointerStyle, _sel_new);
-    return UIPointerStyle.fromPointer($ret, retain: false, release: true);
   }
 
 
@@ -29223,8 +28571,6 @@ extension type UIPointerStyle._(objc.ObjCObject object$) implements objc.ObjCObj
     final $ret = _objc_msgSend_151sglz(_class_UIPointerStyle, _sel_systemPointerStyle);
     return UIPointerStyle.fromPointer($ret, retain: true, release: true);
   }
-  /// Returns a new instance of UIPointerStyle constructed with the default `new` method.
-  UIPointerStyle() : this.as(new$().object$);
 
 }
 
@@ -29235,14 +28581,6 @@ extension UIPointerStyle$Methods on UIPointerStyle {
   objc.checkOsVersionInternal('UIPointerStyle.accessories', iOS: (false, (15, 0, 0)));
     final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_accessories);
     return objc.NSArray.fromPointer($ret, retain: true, release: true);
-  }
-
-
-  /// init
-  UIPointerStyle init() {
-  objc.checkOsVersionInternal('UIPointerStyle.init', iOS: (false, (2, 0, 0)), macOS: (false, (10, 0, 0)));
-    final $ret = _objc_msgSend_151sglz(object$.ref.retainAndReturnPointer(), _sel_init);
-    return UIPointerStyle.fromPointer($ret, retain: false, release: true);
   }
 
 
@@ -29309,7 +28647,9 @@ extension type UIResponder._(objc.ObjCObject object$) implements objc.ObjCObject
   }
 
   /// Returns whether [obj] is an instance of [UIResponder].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_UIResponder);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_UIResponder);
 
   /// alloc
   static UIResponder alloc() {
@@ -29983,7 +29323,9 @@ extension type UIScreen._(objc.ObjCObject object$) implements objc.ObjCObject,ob
   }
 
   /// Returns whether [obj] is an instance of [UIScreen].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_UIScreen);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_UIScreen);
 
   /// alloc
   static UIScreen alloc() {
@@ -30000,6 +29342,7 @@ extension type UIScreen._(objc.ObjCObject object$) implements objc.ObjCObject,ob
 
 
   /// mainScreen
+  @Deprecated('Use a UIScreen instance found through context instead (i.e, view.window.windowScene.screen), or for properties like UIScreen.scale with trait equivalents, use a traitCollection found through context.')
   static UIScreen getMainScreen() {
   objc.checkOsVersionInternal('UIScreen.mainScreen', iOS: (false, (2, 0, 0)));
     final $ret = _objc_msgSend_151sglz(_class_UIScreen, _sel_mainScreen);
@@ -30015,6 +29358,7 @@ extension type UIScreen._(objc.ObjCObject object$) implements objc.ObjCObject,ob
 
 
   /// screens
+  @Deprecated('Use UIApplication.shared.openSessions to find open sessions with scenes from other screens')
   static objc.NSArray getScreens() {
   objc.checkOsVersionInternal('UIScreen.screens', iOS: (false, (3, 2, 0)));
     final $ret = _objc_msgSend_151sglz(_class_UIScreen, _sel_screens);
@@ -30028,6 +29372,7 @@ extension type UIScreen._(objc.ObjCObject object$) implements objc.ObjCObject,ob
 extension UIScreen$Methods on UIScreen {
 
   /// applicationFrame
+  @Deprecated('Deprecated')
   objc.CGRect get applicationFrame {
   objc.checkOsVersionInternal('UIScreen.applicationFrame', iOS: (false, (2, 0, 0)));
     final $ptr = pkg_ffi.calloc<objc.CGRect>();
@@ -30118,6 +29463,7 @@ extension UIScreen$Methods on UIScreen {
 
 
   /// focusedItem
+  @Deprecated('Use -[UIWindowScene focusSystem].focusedItem instead')
   UIFocusItem? get focusedItem {
   objc.checkOsVersionInternal('UIScreen.focusedItem', iOS: (false, (10, 0, 0)));
     final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_focusedItem);
@@ -30126,6 +29472,7 @@ extension UIScreen$Methods on UIScreen {
 
 
   /// focusedView
+  @Deprecated('Use -[UIWindowScene focusSystem].focusedItem instead')
   UIView? get focusedView {
   objc.checkOsVersionInternal('UIScreen.focusedView', iOS: (false, (9, 0, 0)));
     final $ret = _objc_msgSend_151sglz(object$.ref.pointer, _sel_focusedView);
@@ -30142,6 +29489,7 @@ extension UIScreen$Methods on UIScreen {
 
 
   /// isCaptured
+  @Deprecated('Use the sceneCaptureState in UITraitCollection instead.')
   bool get isCaptured {
   objc.checkOsVersionInternal('UIScreen.isCaptured', iOS: (false, (11, 0, 0)));
     return _objc_msgSend_91o635(object$.ref.pointer, _sel_isCaptured);
@@ -30272,6 +29620,7 @@ _objc_msgSend_1s56lr9(object$.ref.pointer, _sel_setWantsSoftwareDimming_, value)
 
 
   /// supportsFocus
+  @Deprecated('Use -[UIWindowScene focusSystem] != nil instead')
   bool get supportsFocus {
   objc.checkOsVersionInternal('UIScreen.supportsFocus', iOS: (false, (9, 0, 0)));
     return _objc_msgSend_91o635(object$.ref.pointer, _sel_supportsFocus);
@@ -30288,6 +29637,7 @@ _objc_msgSend_1s56lr9(object$.ref.pointer, _sel_setWantsSoftwareDimming_, value)
 
 
   /// traitCollectionDidChange:
+  @Deprecated('Use the trait change registration APIs declared in the UITraitChangeObservable protocol')
   void traitCollectionDidChange(UITraitCollection? previousTraitCollection) {
   objc.checkOsVersionInternal('UIScreen.traitCollectionDidChange:', iOS: (false, (8, 0, 0)));
 _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_traitCollectionDidChange_, previousTraitCollection?.ref.pointer ?? ffi.nullptr);
@@ -30459,7 +29809,9 @@ extension type UIView._(objc.ObjCObject object$) implements objc.ObjCObject,UIRe
   }
 
   /// Returns whether [obj] is an instance of [UIView].
-  static bool isA(objc.ObjCObject obj) => _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_UIView);
+  static bool isA(objc.ObjCObject? obj) => obj == null 
+      ? false 
+      : _objc_msgSend_19nvye5(obj.ref.pointer, _sel_isKindOfClass_, _class_UIView);
 
   /// alloc
   static UIView alloc() {
@@ -30491,6 +29843,7 @@ extension type UIView._(objc.ObjCObject object$) implements objc.ObjCObject,UIRe
 
 
   /// appearanceForTraitCollection:whenContainedIn:
+  @Deprecated('Deprecated')
   static UIView appearanceForTraitCollection$1(UITraitCollection trait, {UIAppearanceContainer? whenContainedIn}) {
   objc.checkOsVersionInternal('UIView.appearanceForTraitCollection:whenContainedIn:', iOS: (false, (8, 0, 0)));
     final $ret = _objc_msgSend_15qeuct(_class_UIView, _sel_appearanceForTraitCollection_whenContainedIn_, trait.ref.pointer, whenContainedIn?.ref.pointer ?? ffi.nullptr);
@@ -30507,6 +29860,7 @@ extension type UIView._(objc.ObjCObject object$) implements objc.ObjCObject,UIRe
 
 
   /// appearanceWhenContainedIn:
+  @Deprecated('Deprecated')
   static UIView appearanceWhenContainedIn(UIAppearanceContainer? ContainerClass) {
   objc.checkOsVersionInternal('UIView.appearanceWhenContainedIn:', iOS: (false, (5, 0, 0)));
     final $ret = _objc_msgSend_1sotr3r(_class_UIView, _sel_appearanceWhenContainedIn_, ContainerClass?.ref.pointer ?? ffi.nullptr);
@@ -30901,6 +30255,7 @@ _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_layoutSublayersOfLayer_, layer.re
 
 
   /// preferredFocusedView
+  @Deprecated('Deprecated')
   UIView? get preferredFocusedView {
   objc.checkOsVersionInternal('UIView.preferredFocusedView', iOS: (false, (9, 0, 0)));
     if (!objc.respondsToSelector(object$.ref.pointer, _sel_preferredFocusedView)) {
@@ -31025,6 +30380,7 @@ _objc_msgSend_1s56lr9(object$.ref.pointer, _sel_setUserInteractionEnabled_, valu
 
 
   /// traitCollectionDidChange:
+  @Deprecated('Use the trait change registration APIs declared in the UITraitChangeObservable protocol')
   void traitCollectionDidChange(UITraitCollection? previousTraitCollection) {
   objc.checkOsVersionInternal('UIView.traitCollectionDidChange:', iOS: (false, (8, 0, 0)));
 _objc_msgSend_xtuoz7(object$.ref.pointer, _sel_traitCollectionDidChange_, previousTraitCollection?.ref.pointer ?? ffi.nullptr);
@@ -31402,7 +30758,6 @@ late final _sel_circleColorTransition = objc.registerName("circleColorTransition
 late final _sel_circleOpacity = objc.registerName("circleOpacity");
 late final _sel_circleOpacityTransition = objc.registerName("circleOpacityTransition");
 late final _sel_circlePitchAlignment = objc.registerName("circlePitchAlignment");
-late final _sel_circlePitchScale = objc.registerName("circlePitchScale");
 late final _sel_circleRadius = objc.registerName("circleRadius");
 late final _sel_circleRadiusTransition = objc.registerName("circleRadiusTransition");
 late final _sel_circleScaleAlignment = objc.registerName("circleScaleAlignment");
@@ -31413,8 +30768,6 @@ late final _sel_circleStrokeOpacity = objc.registerName("circleStrokeOpacity");
 late final _sel_circleStrokeOpacityTransition = objc.registerName("circleStrokeOpacityTransition");
 late final _sel_circleStrokeWidth = objc.registerName("circleStrokeWidth");
 late final _sel_circleStrokeWidthTransition = objc.registerName("circleStrokeWidthTransition");
-late final _sel_circleTranslate = objc.registerName("circleTranslate");
-late final _sel_circleTranslateAnchor = objc.registerName("circleTranslateAnchor");
 late final _sel_circleTranslation = objc.registerName("circleTranslation");
 late final _sel_circleTranslationAnchor = objc.registerName("circleTranslationAnchor");
 late final _sel_circleTranslationTransition = objc.registerName("circleTranslationTransition");
@@ -31516,7 +30869,6 @@ late final _sel_featureIdentifierVariableExpression = objc.registerName("feature
 late final _sel_featurePropertiesVariableExpression = objc.registerName("featurePropertiesVariableExpression");
 late final _sel_featuresInSourceLayersWithIdentifiers_predicate_ = objc.registerName("featuresInSourceLayersWithIdentifiers:predicate:");
 late final _sel_featuresMatchingPredicate_ = objc.registerName("featuresMatchingPredicate:");
-late final _sel_fillAntialias = objc.registerName("fillAntialias");
 late final _sel_fillColor = objc.registerName("fillColor");
 late final _sel_fillColorTransition = objc.registerName("fillColorTransition");
 late final _sel_fillExtrusionBase = objc.registerName("fillExtrusionBase");
@@ -31530,12 +30882,9 @@ late final _sel_fillExtrusionOpacity = objc.registerName("fillExtrusionOpacity")
 late final _sel_fillExtrusionOpacityTransition = objc.registerName("fillExtrusionOpacityTransition");
 late final _sel_fillExtrusionPattern = objc.registerName("fillExtrusionPattern");
 late final _sel_fillExtrusionPatternTransition = objc.registerName("fillExtrusionPatternTransition");
-late final _sel_fillExtrusionTranslate = objc.registerName("fillExtrusionTranslate");
-late final _sel_fillExtrusionTranslateAnchor = objc.registerName("fillExtrusionTranslateAnchor");
 late final _sel_fillExtrusionTranslation = objc.registerName("fillExtrusionTranslation");
 late final _sel_fillExtrusionTranslationAnchor = objc.registerName("fillExtrusionTranslationAnchor");
 late final _sel_fillExtrusionTranslationTransition = objc.registerName("fillExtrusionTranslationTransition");
-late final _sel_fillExtrusionVerticalGradient = objc.registerName("fillExtrusionVerticalGradient");
 late final _sel_fillOpacity = objc.registerName("fillOpacity");
 late final _sel_fillOpacityTransition = objc.registerName("fillOpacityTransition");
 late final _sel_fillOutlineColor = objc.registerName("fillOutlineColor");
@@ -31543,8 +30892,6 @@ late final _sel_fillOutlineColorTransition = objc.registerName("fillOutlineColor
 late final _sel_fillPattern = objc.registerName("fillPattern");
 late final _sel_fillPatternTransition = objc.registerName("fillPatternTransition");
 late final _sel_fillSortKey = objc.registerName("fillSortKey");
-late final _sel_fillTranslate = objc.registerName("fillTranslate");
-late final _sel_fillTranslateAnchor = objc.registerName("fillTranslateAnchor");
 late final _sel_fillTranslation = objc.registerName("fillTranslation");
 late final _sel_fillTranslationAnchor = objc.registerName("fillTranslationAnchor");
 late final _sel_fillTranslationTransition = objc.registerName("fillTranslationTransition");
@@ -31597,7 +30944,6 @@ late final _sel_hillshadeIlluminationAnchor = objc.registerName("hillshadeIllumi
 late final _sel_hillshadeIlluminationDirection = objc.registerName("hillshadeIlluminationDirection");
 late final _sel_hillshadeShadowColor = objc.registerName("hillshadeShadowColor");
 late final _sel_hillshadeShadowColorTransition = objc.registerName("hillshadeShadowColorTransition");
-late final _sel_iconAllowOverlap = objc.registerName("iconAllowOverlap");
 late final _sel_iconAllowsOverlap = objc.registerName("iconAllowsOverlap");
 late final _sel_iconAnchor = objc.registerName("iconAnchor");
 late final _sel_iconColor = objc.registerName("iconColor");
@@ -31608,25 +30954,18 @@ late final _sel_iconHaloColor = objc.registerName("iconHaloColor");
 late final _sel_iconHaloColorTransition = objc.registerName("iconHaloColorTransition");
 late final _sel_iconHaloWidth = objc.registerName("iconHaloWidth");
 late final _sel_iconHaloWidthTransition = objc.registerName("iconHaloWidthTransition");
-late final _sel_iconIgnorePlacement = objc.registerName("iconIgnorePlacement");
 late final _sel_iconIgnoresPlacement = objc.registerName("iconIgnoresPlacement");
-late final _sel_iconImage = objc.registerName("iconImage");
 late final _sel_iconImageName = objc.registerName("iconImageName");
-late final _sel_iconKeepUpright = objc.registerName("iconKeepUpright");
 late final _sel_iconOffset = objc.registerName("iconOffset");
 late final _sel_iconOpacity = objc.registerName("iconOpacity");
 late final _sel_iconOpacityTransition = objc.registerName("iconOpacityTransition");
 late final _sel_iconPadding = objc.registerName("iconPadding");
 late final _sel_iconPitchAlignment = objc.registerName("iconPitchAlignment");
-late final _sel_iconRotate = objc.registerName("iconRotate");
 late final _sel_iconRotation = objc.registerName("iconRotation");
 late final _sel_iconRotationAlignment = objc.registerName("iconRotationAlignment");
 late final _sel_iconScale = objc.registerName("iconScale");
-late final _sel_iconSize = objc.registerName("iconSize");
 late final _sel_iconTextFit = objc.registerName("iconTextFit");
 late final _sel_iconTextFitPadding = objc.registerName("iconTextFitPadding");
-late final _sel_iconTranslate = objc.registerName("iconTranslate");
-late final _sel_iconTranslateAnchor = objc.registerName("iconTranslateAnchor");
 late final _sel_iconTranslation = objc.registerName("iconTranslation");
 late final _sel_iconTranslationAnchor = objc.registerName("iconTranslationAnchor");
 late final _sel_iconTranslationTransition = objc.registerName("iconTranslationTransition");
@@ -31736,7 +31075,6 @@ late final _sel_lineColor = objc.registerName("lineColor");
 late final _sel_lineColorTransition = objc.registerName("lineColorTransition");
 late final _sel_lineDashPattern = objc.registerName("lineDashPattern");
 late final _sel_lineDashPatternTransition = objc.registerName("lineDashPatternTransition");
-late final _sel_lineDasharray = objc.registerName("lineDasharray");
 late final _sel_lineGapWidth = objc.registerName("lineGapWidth");
 late final _sel_lineGapWidthTransition = objc.registerName("lineGapWidthTransition");
 late final _sel_lineGradient = objc.registerName("lineGradient");
@@ -31751,8 +31089,6 @@ late final _sel_linePatternTransition = objc.registerName("linePatternTransition
 late final _sel_lineProgressVariableExpression = objc.registerName("lineProgressVariableExpression");
 late final _sel_lineRoundLimit = objc.registerName("lineRoundLimit");
 late final _sel_lineSortKey = objc.registerName("lineSortKey");
-late final _sel_lineTranslate = objc.registerName("lineTranslate");
-late final _sel_lineTranslateAnchor = objc.registerName("lineTranslateAnchor");
 late final _sel_lineTranslation = objc.registerName("lineTranslation");
 late final _sel_lineTranslationAnchor = objc.registerName("lineTranslationAnchor");
 late final _sel_lineTranslationTransition = objc.registerName("lineTranslationTransition");
@@ -31910,17 +31246,13 @@ late final _sel_print_ = objc.registerName("print:");
 late final _sel_progress = objc.registerName("progress");
 late final _sel_providerForDeferredMenuElement_ = objc.registerName("providerForDeferredMenuElement:");
 late final _sel_putResourceWithUrl_data_modified_expires_etag_mustRevalidate_ = objc.registerName("putResourceWithUrl:data:modified:expires:etag:mustRevalidate:");
-late final _sel_rasterBrightnessMax = objc.registerName("rasterBrightnessMax");
-late final _sel_rasterBrightnessMin = objc.registerName("rasterBrightnessMin");
 late final _sel_rasterContrast = objc.registerName("rasterContrast");
 late final _sel_rasterContrastTransition = objc.registerName("rasterContrastTransition");
 late final _sel_rasterFadeDuration = objc.registerName("rasterFadeDuration");
-late final _sel_rasterHueRotate = objc.registerName("rasterHueRotate");
 late final _sel_rasterHueRotation = objc.registerName("rasterHueRotation");
 late final _sel_rasterHueRotationTransition = objc.registerName("rasterHueRotationTransition");
 late final _sel_rasterOpacity = objc.registerName("rasterOpacity");
 late final _sel_rasterOpacityTransition = objc.registerName("rasterOpacityTransition");
-late final _sel_rasterResampling = objc.registerName("rasterResampling");
 late final _sel_rasterResamplingMode = objc.registerName("rasterResamplingMode");
 late final _sel_rasterSaturation = objc.registerName("rasterSaturation");
 late final _sel_rasterSaturationTransition = objc.registerName("rasterSaturationTransition");
@@ -32006,7 +31338,6 @@ late final _sel_setCircleColor_ = objc.registerName("setCircleColor:");
 late final _sel_setCircleOpacityTransition_ = objc.registerName("setCircleOpacityTransition:");
 late final _sel_setCircleOpacity_ = objc.registerName("setCircleOpacity:");
 late final _sel_setCirclePitchAlignment_ = objc.registerName("setCirclePitchAlignment:");
-late final _sel_setCirclePitchScale_ = objc.registerName("setCirclePitchScale:");
 late final _sel_setCircleRadiusTransition_ = objc.registerName("setCircleRadiusTransition:");
 late final _sel_setCircleRadius_ = objc.registerName("setCircleRadius:");
 late final _sel_setCircleScaleAlignment_ = objc.registerName("setCircleScaleAlignment:");
@@ -32017,8 +31348,6 @@ late final _sel_setCircleStrokeOpacityTransition_ = objc.registerName("setCircle
 late final _sel_setCircleStrokeOpacity_ = objc.registerName("setCircleStrokeOpacity:");
 late final _sel_setCircleStrokeWidthTransition_ = objc.registerName("setCircleStrokeWidthTransition:");
 late final _sel_setCircleStrokeWidth_ = objc.registerName("setCircleStrokeWidth:");
-late final _sel_setCircleTranslateAnchor_ = objc.registerName("setCircleTranslateAnchor:");
-late final _sel_setCircleTranslate_ = objc.registerName("setCircleTranslate:");
 late final _sel_setCircleTranslationAnchor_ = objc.registerName("setCircleTranslationAnchor:");
 late final _sel_setCircleTranslationTransition_ = objc.registerName("setCircleTranslationTransition:");
 late final _sel_setCircleTranslation_ = objc.registerName("setCircleTranslation:");
@@ -32041,7 +31370,6 @@ late final _sel_setDisplayPreferences_ = objc.registerName("setDisplayPreference
 late final _sel_setDynamicNavigationCameraAnimationDuration_ = objc.registerName("setDynamicNavigationCameraAnimationDuration:");
 late final _sel_setEffect_ = objc.registerName("setEffect:");
 late final _sel_setEnabled_ = objc.registerName("setEnabled:");
-late final _sel_setFillAntialias_ = objc.registerName("setFillAntialias:");
 late final _sel_setFillAntialiased_ = objc.registerName("setFillAntialiased:");
 late final _sel_setFillColorTransition_ = objc.registerName("setFillColorTransition:");
 late final _sel_setFillColor_ = objc.registerName("setFillColor:");
@@ -32056,12 +31384,9 @@ late final _sel_setFillExtrusionOpacityTransition_ = objc.registerName("setFillE
 late final _sel_setFillExtrusionOpacity_ = objc.registerName("setFillExtrusionOpacity:");
 late final _sel_setFillExtrusionPatternTransition_ = objc.registerName("setFillExtrusionPatternTransition:");
 late final _sel_setFillExtrusionPattern_ = objc.registerName("setFillExtrusionPattern:");
-late final _sel_setFillExtrusionTranslateAnchor_ = objc.registerName("setFillExtrusionTranslateAnchor:");
-late final _sel_setFillExtrusionTranslate_ = objc.registerName("setFillExtrusionTranslate:");
 late final _sel_setFillExtrusionTranslationAnchor_ = objc.registerName("setFillExtrusionTranslationAnchor:");
 late final _sel_setFillExtrusionTranslationTransition_ = objc.registerName("setFillExtrusionTranslationTransition:");
 late final _sel_setFillExtrusionTranslation_ = objc.registerName("setFillExtrusionTranslation:");
-late final _sel_setFillExtrusionVerticalGradient_ = objc.registerName("setFillExtrusionVerticalGradient:");
 late final _sel_setFillOpacityTransition_ = objc.registerName("setFillOpacityTransition:");
 late final _sel_setFillOpacity_ = objc.registerName("setFillOpacity:");
 late final _sel_setFillOutlineColorTransition_ = objc.registerName("setFillOutlineColorTransition:");
@@ -32069,8 +31394,6 @@ late final _sel_setFillOutlineColor_ = objc.registerName("setFillOutlineColor:")
 late final _sel_setFillPatternTransition_ = objc.registerName("setFillPatternTransition:");
 late final _sel_setFillPattern_ = objc.registerName("setFillPattern:");
 late final _sel_setFillSortKey_ = objc.registerName("setFillSortKey:");
-late final _sel_setFillTranslateAnchor_ = objc.registerName("setFillTranslateAnchor:");
-late final _sel_setFillTranslate_ = objc.registerName("setFillTranslate:");
 late final _sel_setFillTranslationAnchor_ = objc.registerName("setFillTranslationAnchor:");
 late final _sel_setFillTranslationTransition_ = objc.registerName("setFillTranslationTransition:");
 late final _sel_setFillTranslation_ = objc.registerName("setFillTranslation:");
@@ -32097,7 +31420,6 @@ late final _sel_setHillshadeIlluminationAnchor_ = objc.registerName("setHillshad
 late final _sel_setHillshadeIlluminationDirection_ = objc.registerName("setHillshadeIlluminationDirection:");
 late final _sel_setHillshadeShadowColorTransition_ = objc.registerName("setHillshadeShadowColorTransition:");
 late final _sel_setHillshadeShadowColor_ = objc.registerName("setHillshadeShadowColor:");
-late final _sel_setIconAllowOverlap_ = objc.registerName("setIconAllowOverlap:");
 late final _sel_setIconAllowsOverlap_ = objc.registerName("setIconAllowsOverlap:");
 late final _sel_setIconAnchor_ = objc.registerName("setIconAnchor:");
 late final _sel_setIconColorTransition_ = objc.registerName("setIconColorTransition:");
@@ -32108,26 +31430,19 @@ late final _sel_setIconHaloColorTransition_ = objc.registerName("setIconHaloColo
 late final _sel_setIconHaloColor_ = objc.registerName("setIconHaloColor:");
 late final _sel_setIconHaloWidthTransition_ = objc.registerName("setIconHaloWidthTransition:");
 late final _sel_setIconHaloWidth_ = objc.registerName("setIconHaloWidth:");
-late final _sel_setIconIgnorePlacement_ = objc.registerName("setIconIgnorePlacement:");
 late final _sel_setIconIgnoresPlacement_ = objc.registerName("setIconIgnoresPlacement:");
 late final _sel_setIconImageName_ = objc.registerName("setIconImageName:");
-late final _sel_setIconImage_ = objc.registerName("setIconImage:");
-late final _sel_setIconKeepUpright_ = objc.registerName("setIconKeepUpright:");
 late final _sel_setIconOffset_ = objc.registerName("setIconOffset:");
 late final _sel_setIconOpacityTransition_ = objc.registerName("setIconOpacityTransition:");
 late final _sel_setIconOpacity_ = objc.registerName("setIconOpacity:");
 late final _sel_setIconOptional_ = objc.registerName("setIconOptional:");
 late final _sel_setIconPadding_ = objc.registerName("setIconPadding:");
 late final _sel_setIconPitchAlignment_ = objc.registerName("setIconPitchAlignment:");
-late final _sel_setIconRotate_ = objc.registerName("setIconRotate:");
 late final _sel_setIconRotationAlignment_ = objc.registerName("setIconRotationAlignment:");
 late final _sel_setIconRotation_ = objc.registerName("setIconRotation:");
 late final _sel_setIconScale_ = objc.registerName("setIconScale:");
-late final _sel_setIconSize_ = objc.registerName("setIconSize:");
 late final _sel_setIconTextFitPadding_ = objc.registerName("setIconTextFitPadding:");
 late final _sel_setIconTextFit_ = objc.registerName("setIconTextFit:");
-late final _sel_setIconTranslateAnchor_ = objc.registerName("setIconTranslateAnchor:");
-late final _sel_setIconTranslate_ = objc.registerName("setIconTranslate:");
 late final _sel_setIconTranslationAnchor_ = objc.registerName("setIconTranslationAnchor:");
 late final _sel_setIconTranslationTransition_ = objc.registerName("setIconTranslationTransition:");
 late final _sel_setIconTranslation_ = objc.registerName("setIconTranslation:");
@@ -32146,7 +31461,6 @@ late final _sel_setLineColorTransition_ = objc.registerName("setLineColorTransit
 late final _sel_setLineColor_ = objc.registerName("setLineColor:");
 late final _sel_setLineDashPatternTransition_ = objc.registerName("setLineDashPatternTransition:");
 late final _sel_setLineDashPattern_ = objc.registerName("setLineDashPattern:");
-late final _sel_setLineDasharray_ = objc.registerName("setLineDasharray:");
 late final _sel_setLineGapWidthTransition_ = objc.registerName("setLineGapWidthTransition:");
 late final _sel_setLineGapWidth_ = objc.registerName("setLineGapWidth:");
 late final _sel_setLineGradient_ = objc.registerName("setLineGradient:");
@@ -32160,8 +31474,6 @@ late final _sel_setLinePatternTransition_ = objc.registerName("setLinePatternTra
 late final _sel_setLinePattern_ = objc.registerName("setLinePattern:");
 late final _sel_setLineRoundLimit_ = objc.registerName("setLineRoundLimit:");
 late final _sel_setLineSortKey_ = objc.registerName("setLineSortKey:");
-late final _sel_setLineTranslateAnchor_ = objc.registerName("setLineTranslateAnchor:");
-late final _sel_setLineTranslate_ = objc.registerName("setLineTranslate:");
 late final _sel_setLineTranslationAnchor_ = objc.registerName("setLineTranslationAnchor:");
 late final _sel_setLineTranslationTransition_ = objc.registerName("setLineTranslationTransition:");
 late final _sel_setLineTranslation_ = objc.registerName("setLineTranslation:");
@@ -32194,18 +31506,14 @@ late final _sel_setPreferredElementSize_ = objc.registerName("setPreferredElemen
 late final _sel_setPreferredFramesPerSecond_ = objc.registerName("setPreferredFramesPerSecond:");
 late final _sel_setPrefetchesTiles_ = objc.registerName("setPrefetchesTiles:");
 late final _sel_setQuickZoomReversed_ = objc.registerName("setQuickZoomReversed:");
-late final _sel_setRasterBrightnessMax_ = objc.registerName("setRasterBrightnessMax:");
-late final _sel_setRasterBrightnessMin_ = objc.registerName("setRasterBrightnessMin:");
 late final _sel_setRasterContrastTransition_ = objc.registerName("setRasterContrastTransition:");
 late final _sel_setRasterContrast_ = objc.registerName("setRasterContrast:");
 late final _sel_setRasterFadeDuration_ = objc.registerName("setRasterFadeDuration:");
-late final _sel_setRasterHueRotate_ = objc.registerName("setRasterHueRotate:");
 late final _sel_setRasterHueRotationTransition_ = objc.registerName("setRasterHueRotationTransition:");
 late final _sel_setRasterHueRotation_ = objc.registerName("setRasterHueRotation:");
 late final _sel_setRasterOpacityTransition_ = objc.registerName("setRasterOpacityTransition:");
 late final _sel_setRasterOpacity_ = objc.registerName("setRasterOpacity:");
 late final _sel_setRasterResamplingMode_ = objc.registerName("setRasterResamplingMode:");
-late final _sel_setRasterResampling_ = objc.registerName("setRasterResampling:");
 late final _sel_setRasterSaturationTransition_ = objc.registerName("setRasterSaturationTransition:");
 late final _sel_setRasterSaturation_ = objc.registerName("setRasterSaturation:");
 late final _sel_setRepeatBehavior_ = objc.registerName("setRepeatBehavior:");
@@ -32232,7 +31540,6 @@ late final _sel_setState_ = objc.registerName("setState:");
 late final _sel_setStyleJSON_ = objc.registerName("setStyleJSON:");
 late final _sel_setStyleURL_ = objc.registerName("setStyleURL:");
 late final _sel_setSubtitle_ = objc.registerName("setSubtitle:");
-late final _sel_setSymbolAvoidEdges_ = objc.registerName("setSymbolAvoidEdges:");
 late final _sel_setSymbolAvoidsEdges_ = objc.registerName("setSymbolAvoidsEdges:");
 late final _sel_setSymbolPlacement_ = objc.registerName("setSymbolPlacement:");
 late final _sel_setSymbolScreenSpace_ = objc.registerName("setSymbolScreenSpace:");
@@ -32243,30 +31550,22 @@ late final _sel_setTag_ = objc.registerName("setTag:");
 late final _sel_setTargetCoordinate_ = objc.registerName("setTargetCoordinate:");
 late final _sel_setTargetCoordinate_animated_ = objc.registerName("setTargetCoordinate:animated:");
 late final _sel_setTargetCoordinate_animated_completionHandler_ = objc.registerName("setTargetCoordinate:animated:completionHandler:");
-late final _sel_setTextAllowOverlap_ = objc.registerName("setTextAllowOverlap:");
 late final _sel_setTextAllowsOverlap_ = objc.registerName("setTextAllowsOverlap:");
 late final _sel_setTextAnchor_ = objc.registerName("setTextAnchor:");
 late final _sel_setTextColorTransition_ = objc.registerName("setTextColorTransition:");
 late final _sel_setTextColor_ = objc.registerName("setTextColor:");
-late final _sel_setTextField_ = objc.registerName("setTextField:");
 late final _sel_setTextFontNames_ = objc.registerName("setTextFontNames:");
 late final _sel_setTextFontSize_ = objc.registerName("setTextFontSize:");
-late final _sel_setTextFont_ = objc.registerName("setTextFont:");
 late final _sel_setTextHaloBlurTransition_ = objc.registerName("setTextHaloBlurTransition:");
 late final _sel_setTextHaloBlur_ = objc.registerName("setTextHaloBlur:");
 late final _sel_setTextHaloColorTransition_ = objc.registerName("setTextHaloColorTransition:");
 late final _sel_setTextHaloColor_ = objc.registerName("setTextHaloColor:");
 late final _sel_setTextHaloWidthTransition_ = objc.registerName("setTextHaloWidthTransition:");
 late final _sel_setTextHaloWidth_ = objc.registerName("setTextHaloWidth:");
-late final _sel_setTextIgnorePlacement_ = objc.registerName("setTextIgnorePlacement:");
 late final _sel_setTextIgnoresPlacement_ = objc.registerName("setTextIgnoresPlacement:");
 late final _sel_setTextJustification_ = objc.registerName("setTextJustification:");
-late final _sel_setTextJustify_ = objc.registerName("setTextJustify:");
-late final _sel_setTextKeepUpright_ = objc.registerName("setTextKeepUpright:");
 late final _sel_setTextLetterSpacing_ = objc.registerName("setTextLetterSpacing:");
 late final _sel_setTextLineHeight_ = objc.registerName("setTextLineHeight:");
-late final _sel_setTextMaxAngle_ = objc.registerName("setTextMaxAngle:");
-late final _sel_setTextMaxWidth_ = objc.registerName("setTextMaxWidth:");
 late final _sel_setTextOffset_ = objc.registerName("setTextOffset:");
 late final _sel_setTextOpacityTransition_ = objc.registerName("setTextOpacityTransition:");
 late final _sel_setTextOpacity_ = objc.registerName("setTextOpacity:");
@@ -32274,19 +31573,14 @@ late final _sel_setTextOptional_ = objc.registerName("setTextOptional:");
 late final _sel_setTextPadding_ = objc.registerName("setTextPadding:");
 late final _sel_setTextPitchAlignment_ = objc.registerName("setTextPitchAlignment:");
 late final _sel_setTextRadialOffset_ = objc.registerName("setTextRadialOffset:");
-late final _sel_setTextRotate_ = objc.registerName("setTextRotate:");
 late final _sel_setTextRotationAlignment_ = objc.registerName("setTextRotationAlignment:");
 late final _sel_setTextRotation_ = objc.registerName("setTextRotation:");
-late final _sel_setTextSize_ = objc.registerName("setTextSize:");
 late final _sel_setTextTransform_ = objc.registerName("setTextTransform:");
-late final _sel_setTextTranslateAnchor_ = objc.registerName("setTextTranslateAnchor:");
-late final _sel_setTextTranslate_ = objc.registerName("setTextTranslate:");
 late final _sel_setTextTranslationAnchor_ = objc.registerName("setTextTranslationAnchor:");
 late final _sel_setTextTranslationTransition_ = objc.registerName("setTextTranslationTransition:");
 late final _sel_setTextTranslation_ = objc.registerName("setTextTranslation:");
 late final _sel_setTextVariableAnchorOffset_ = objc.registerName("setTextVariableAnchorOffset:");
 late final _sel_setTextVariableAnchor_ = objc.registerName("setTextVariableAnchor:");
-late final _sel_setTextWritingMode_ = objc.registerName("setTextWritingMode:");
 late final _sel_setTextWritingModes_ = objc.registerName("setTextWritingModes:");
 late final _sel_setText_ = objc.registerName("setText:");
 late final _sel_setTileCacheEnabled_ = objc.registerName("setTileCacheEnabled:");
@@ -32353,7 +31647,6 @@ late final _sel_subtitle = objc.registerName("subtitle");
 late final _sel_supportsFocus = objc.registerName("supportsFocus");
 late final _sel_supportsSecureCoding = objc.registerName("supportsSecureCoding");
 late final _sel_suspend = objc.registerName("suspend");
-late final _sel_symbolAvoidEdges = objc.registerName("symbolAvoidEdges");
 late final _sel_symbolAvoidsEdges = objc.registerName("symbolAvoidsEdges");
 late final _sel_symbolConfiguration = objc.registerName("symbolConfiguration");
 late final _sel_symbolPlacement = objc.registerName("symbolPlacement");
@@ -32370,13 +31663,10 @@ late final _sel_tag = objc.registerName("tag");
 late final _sel_targetCoordinate = objc.registerName("targetCoordinate");
 late final _sel_targetForAction_withSender_ = objc.registerName("targetForAction:withSender:");
 late final _sel_text = objc.registerName("text");
-late final _sel_textAllowOverlap = objc.registerName("textAllowOverlap");
 late final _sel_textAllowsOverlap = objc.registerName("textAllowsOverlap");
 late final _sel_textAnchor = objc.registerName("textAnchor");
 late final _sel_textColor = objc.registerName("textColor");
 late final _sel_textColorTransition = objc.registerName("textColorTransition");
-late final _sel_textField = objc.registerName("textField");
-late final _sel_textFont = objc.registerName("textFont");
 late final _sel_textFontNames = objc.registerName("textFontNames");
 late final _sel_textFontSize = objc.registerName("textFontSize");
 late final _sel_textHaloBlur = objc.registerName("textHaloBlur");
@@ -32385,34 +31675,24 @@ late final _sel_textHaloColor = objc.registerName("textHaloColor");
 late final _sel_textHaloColorTransition = objc.registerName("textHaloColorTransition");
 late final _sel_textHaloWidth = objc.registerName("textHaloWidth");
 late final _sel_textHaloWidthTransition = objc.registerName("textHaloWidthTransition");
-late final _sel_textIgnorePlacement = objc.registerName("textIgnorePlacement");
 late final _sel_textIgnoresPlacement = objc.registerName("textIgnoresPlacement");
 late final _sel_textJustification = objc.registerName("textJustification");
-late final _sel_textJustify = objc.registerName("textJustify");
-late final _sel_textKeepUpright = objc.registerName("textKeepUpright");
 late final _sel_textLetterSpacing = objc.registerName("textLetterSpacing");
 late final _sel_textLineHeight = objc.registerName("textLineHeight");
-late final _sel_textMaxAngle = objc.registerName("textMaxAngle");
-late final _sel_textMaxWidth = objc.registerName("textMaxWidth");
 late final _sel_textOffset = objc.registerName("textOffset");
 late final _sel_textOpacity = objc.registerName("textOpacity");
 late final _sel_textOpacityTransition = objc.registerName("textOpacityTransition");
 late final _sel_textPadding = objc.registerName("textPadding");
 late final _sel_textPitchAlignment = objc.registerName("textPitchAlignment");
 late final _sel_textRadialOffset = objc.registerName("textRadialOffset");
-late final _sel_textRotate = objc.registerName("textRotate");
 late final _sel_textRotation = objc.registerName("textRotation");
 late final _sel_textRotationAlignment = objc.registerName("textRotationAlignment");
-late final _sel_textSize = objc.registerName("textSize");
 late final _sel_textTransform = objc.registerName("textTransform");
-late final _sel_textTranslate = objc.registerName("textTranslate");
-late final _sel_textTranslateAnchor = objc.registerName("textTranslateAnchor");
 late final _sel_textTranslation = objc.registerName("textTranslation");
 late final _sel_textTranslationAnchor = objc.registerName("textTranslationAnchor");
 late final _sel_textTranslationTransition = objc.registerName("textTranslationTransition");
 late final _sel_textVariableAnchor = objc.registerName("textVariableAnchor");
 late final _sel_textVariableAnchorOffset = objc.registerName("textVariableAnchorOffset");
-late final _sel_textWritingMode = objc.registerName("textWritingMode");
 late final _sel_textWritingModes = objc.registerName("textWritingModes");
 late final _sel_tileCacheEnabled = objc.registerName("tileCacheEnabled");
 late final _sel_tileLodMinRadius = objc.registerName("tileLodMinRadius");
