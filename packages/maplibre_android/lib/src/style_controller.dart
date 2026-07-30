@@ -294,15 +294,16 @@ class StyleControllerAndroid extends StyleController {
 
   @override
   List<String> getLayerIds() => using((arena) {
+    // Indexed access instead of an iterator: JList.iterator leaks the
+    // java.util.Iterator global ref (dart-lang/native jlist.dart).
     final layers = _jStyle.layers..releasedBy(arena);
-    return layers
-        .asDart()
-        .map((e) {
-          e?.releasedBy(arena);
-          return e?.id.toDartString(releaseOriginal: true);
-        })
-        .nonNulls
-        .toList(growable: false);
+    final ids = <String>[];
+    for (var i = 0; i < layers.size(); i++) {
+      final layer = layers.get(i)?..releasedBy(arena);
+      final id = layer?.id.toDartString(releaseOriginal: true);
+      if (id != null) ids.add(id);
+    }
+    return ids;
   });
 
   @override

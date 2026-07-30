@@ -516,32 +516,35 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
   List<RenderedFeature> _nativeQueryToRenderedFeatures(
     JList<jni.Feature?> query,
   ) => using((arena) {
-    final features = query.asDart().where((f) => f != null).map((f) => f!);
-    return features
-        .map((feature) {
-          final decodedFeature =
-              jsonDecode(
-                    feature.toJson()?.toDartString(releaseOriginal: true) ??
-                        '{}',
-                  )
-                  as Map<String, Object?>;
+    // Indexed access instead of an iterator: JList.iterator leaks the
+    // java.util.Iterator global ref (dart-lang/native jlist.dart).
+    final renderedFeatures = <RenderedFeature>[];
+    for (var i = 0; i < query.size(); i++) {
+      final feature = query.get(i)?..releasedBy(arena);
+      if (feature == null) continue;
 
-          final decodedProperties = decodedFeature['properties'];
-          final decodedGeometry = decodedFeature['geometry'];
+      final decodedFeature =
+          jsonDecode(
+                feature.toJson()?.toDartString(releaseOriginal: true) ?? '{}',
+              )
+              as Map<String, Object?>;
 
-          final renderedFeature = RenderedFeature(
-            id: feature.id()?.toDartString(releaseOriginal: true),
-            properties: decodedProperties is Map
-                ? decodedProperties.map((k, v) => MapEntry(k.toString(), v))
-                : {},
-            geometry: decodedGeometry is Map
-                ? decodedGeometry.map((k, v) => MapEntry(k.toString(), v))
-                : null,
-          );
-          feature.releasedBy(arena);
-          return renderedFeature;
-        })
-        .toList(growable: false);
+      final decodedProperties = decodedFeature['properties'];
+      final decodedGeometry = decodedFeature['geometry'];
+
+      renderedFeatures.add(
+        RenderedFeature(
+          id: feature.id()?.toDartString(releaseOriginal: true),
+          properties: decodedProperties is Map
+              ? decodedProperties.map((k, v) => MapEntry(k.toString(), v))
+              : {},
+          geometry: decodedGeometry is Map
+              ? decodedGeometry.map((k, v) => MapEntry(k.toString(), v))
+              : null,
+        ),
+      );
+    }
+    return renderedFeatures;
   });
 
   @override
