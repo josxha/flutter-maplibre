@@ -1,3 +1,12 @@
+## unreleased
+
+### Bug Fixes
+
+- Android: fix `StyleController` and several map query methods
+  (`updateGeoJsonSource`, `removeLayer`/`removeSource`/`removeImage`,
+  `getLayerIds`, `getAttributionsSync`, `featuresAtPoint`/`featuresInRect`)
+  leak JNI global references on every call.
+
 ## 0.3.5
 
 This release contains a couple of bug fixes and improvements.
