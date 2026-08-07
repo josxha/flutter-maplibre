@@ -222,7 +222,8 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
       ..camera(cameraBuilder.build()..releasedBy(arena));
     _mapView = jni.MapView.new$4(jContext, jMapOptions)
       ..getMapAsync(
-        jni.OnMapReadyCallback.implement(_MapReadyCallback(_onMapReady)),
+        jni.OnMapReadyCallback.implement(_MapReadyCallback(_onMapReady))
+          ..releasedBy(arena),
       );
     _platformView.addView(_mapView);
 
@@ -242,6 +243,13 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
   });
 
   void _onMapReady(jni.MapLibreMap jMap) => using((arena) {
+    // The map can become ready after this state is disposed; without the
+    // guard the fresh listeners would pin global refs nothing releases (and
+    // re-attach listener wrappers dispose() already released).
+    if (!mounted) {
+      jMap.release();
+      return;
+    }
     _jMap = jMap
       ..addOnMapClickListener(_mapClickListener)
       ..addOnMapLongClickListener(_mapLongClickListener)
@@ -297,6 +305,10 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
       _cachedJLocationComponent = null;
       jLocationComponent.release();
     }
+    if (style case final styleController?) {
+      style = null;
+      styleController.dispose();
+    }
     if (_mapView case final mapView?) {
       _mapView = null;
       if (_mapViewStarted) {
@@ -306,6 +318,10 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
       }
       mapView.onDestroy();
       mapView.release();
+      // Detach the destroyed MapView from its container so the native map
+      // can be collected even while the engine still holds the FrameLayout
+      // (the platform view is disposed after this widget state).
+      Registry.platformViews[_viewId]?.removeAllViews();
     }
     super.dispose();
   }
@@ -488,6 +504,12 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
   });
 
   void _onStyleLoaded(jni.Style jStyle) {
+    // A style can finish loading after this state is disposed; without the
+    // guard the fresh controller would pin a global ref nothing releases.
+    if (!mounted) {
+      jStyle.release();
+      return;
+    }
     // We need to refresh the cached style for when the style reloads.
     style?.dispose();
     final styleCtrl = StyleControllerAndroid._(jStyle);

@@ -1,3 +1,14 @@
+## unreleased
+
+### Bug Fixes
+
+- Android: fix platform views are never removed from the internal registry,
+  leaking a `FrameLayout` and its native map state per map create/dispose
+  cycle.
+- Android: `StyleController` now releases its native style reference when
+  the owning `MapLibreMap` is disposed, instead of staying technically
+  usable on a torn-down map.
+
 ## 0.3.5
 
 This release contains a couple of bug fixes and improvements.
