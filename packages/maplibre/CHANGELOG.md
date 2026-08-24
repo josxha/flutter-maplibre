@@ -1,3 +1,10 @@
+## unreleased
+
+### Bug Fixes
+
+- Android: camera listeners no longer block the calling Java thread on every
+  camera event.
+
 ## 0.3.5
 
 This release contains a couple of bug fixes and improvements.
