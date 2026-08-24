@@ -31203,7 +31203,8 @@ final class $URL$Type$ extends jni$_.JType<URL> {
 /// from: `java.util.HashMap`
 extension type HashMap<$K extends jni$_.JObject?, $V extends jni$_.JObject?>._(
   jni$_.JObject _$this
-) implements AbstractMap, Cloneable, jni$_.JMap<$K?, $V?>, Serializable {
+)
+    implements AbstractMap, Cloneable, jni$_.JMap<$K?, $V?>, Serializable {
   static final _class = jni$_.JClass.forName(r'java/util/HashMap');
 
   /// The type which includes information such as the signature of this class.
@@ -32232,7 +32233,8 @@ final class $HashMap$Type$ extends jni$_.JType<HashMap> {
 /// from: `io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding$OnSaveInstanceStateListener`
 extension type ActivityPluginBinding$OnSaveInstanceStateListener._(
   jni$_.JObject _$this
-) implements jni$_.JObject {
+)
+    implements jni$_.JObject {
   static final _class = jni$_.JClass.forName(
     r'io/flutter/embedding/engine/plugins/activity/ActivityPluginBinding$OnSaveInstanceStateListener',
   );
@@ -33848,7 +33850,8 @@ final class $PluginRegistry$NewIntentListener$Type$
 /// from: `io.flutter.plugin.common.PluginRegistry$RequestPermissionsResultListener`
 extension type PluginRegistry$RequestPermissionsResultListener._(
   jni$_.JObject _$this
-) implements jni$_.JObject {
+)
+    implements jni$_.JObject {
   static final _class = jni$_.JClass.forName(
     r'io/flutter/plugin/common/PluginRegistry$RequestPermissionsResultListener',
   );
@@ -45891,7 +45894,8 @@ final class $LocationComponent$Type$ extends jni$_.JType<LocationComponent> {
 /// from: `org.maplibre.android.location.LocationComponentActivationOptions$Builder`
 extension type LocationComponentActivationOptions$Builder._(
   jni$_.JObject _$this
-) implements jni$_.JObject {
+)
+    implements jni$_.JObject {
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/location/LocationComponentActivationOptions$Builder',
   );
@@ -64897,7 +64901,8 @@ final class $MapView$OnCameraWillChangeListener$Type$
 /// from: `org.maplibre.android.maps.MapView$OnCanRemoveUnusedStyleImageListener`
 extension type MapView$OnCanRemoveUnusedStyleImageListener._(
   jni$_.JObject _$this
-) implements jni$_.JObject {
+)
+    implements jni$_.JObject {
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/maps/MapView$OnCanRemoveUnusedStyleImageListener',
   );
@@ -65852,7 +65857,8 @@ final class $MapView$OnDidFinishRenderingFrameListener$Type$
 /// from: `org.maplibre.android.maps.MapView$OnDidFinishRenderingFrameWithStatsListener`
 extension type MapView$OnDidFinishRenderingFrameWithStatsListener._(
   jni$_.JObject _$this
-) implements jni$_.JObject {
+)
+    implements jni$_.JObject {
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/maps/MapView$OnDidFinishRenderingFrameWithStatsListener',
   );
@@ -83443,7 +83449,8 @@ final class $MapLibreGLSurfaceView$Type$
 /// from: `org.maplibre.android.maps.renderer.surfaceview.MapLibreSurfaceView$OnSurfaceViewDetachedListener`
 extension type MapLibreSurfaceView$OnSurfaceViewDetachedListener._(
   jni$_.JObject _$this
-) implements jni$_.JObject {
+)
+    implements jni$_.JObject {
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/maps/renderer/surfaceview/MapLibreSurfaceView$OnSurfaceViewDetachedListener',
   );
@@ -86298,7 +86305,8 @@ final class $OfflineManager$Companion$Type$
 /// from: `org.maplibre.android.offline.OfflineManager$CreateOfflineRegionCallback`
 extension type OfflineManager$CreateOfflineRegionCallback._(
   jni$_.JObject _$this
-) implements jni$_.JObject {
+)
+    implements jni$_.JObject {
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/offline/OfflineManager$CreateOfflineRegionCallback',
   );
@@ -87162,7 +87170,8 @@ final class $OfflineManager$ListOfflineRegionsCallback$Type$
 /// from: `org.maplibre.android.offline.OfflineManager$MergeOfflineRegionsCallback`
 extension type OfflineManager$MergeOfflineRegionsCallback._(
   jni$_.JObject _$this
-) implements jni$_.JObject {
+)
+    implements jni$_.JObject {
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/offline/OfflineManager$MergeOfflineRegionsCallback',
   );
@@ -88313,7 +88322,8 @@ final class $OfflineRegion$OfflineRegionDeleteCallback$Type$
 /// from: `org.maplibre.android.offline.OfflineRegion$OfflineRegionInvalidateCallback`
 extension type OfflineRegion$OfflineRegionInvalidateCallback._(
   jni$_.JObject _$this
-) implements jni$_.JObject {
+)
+    implements jni$_.JObject {
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/offline/OfflineRegion$OfflineRegionInvalidateCallback',
   );
@@ -88998,7 +89008,8 @@ final class $OfflineRegion$OfflineRegionStatusCallback$Type$
 /// from: `org.maplibre.android.offline.OfflineRegion$OfflineRegionUpdateMetadataCallback`
 extension type OfflineRegion$OfflineRegionUpdateMetadataCallback._(
   jni$_.JObject _$this
-) implements jni$_.JObject {
+)
+    implements jni$_.JObject {
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/offline/OfflineRegion$OfflineRegionUpdateMetadataCallback',
   );
@@ -90656,7 +90667,8 @@ final class $OfflineRegionStatus$Type$
 /// from: `org.maplibre.android.offline.OfflineTilePyramidRegionDefinition$Companion`
 extension type OfflineTilePyramidRegionDefinition$Companion._(
   jni$_.JObject _$this
-) implements jni$_.JObject {
+)
+    implements jni$_.JObject {
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/offline/OfflineTilePyramidRegionDefinition$Companion',
   );
@@ -105523,7 +105535,8 @@ final class $Layer$Type$ extends jni$_.JType<Layer> {
 /// from: `org.maplibre.android.style.layers.LayoutPropertyValue`
 extension type LayoutPropertyValue<$T extends jni$_.JObject?>._(
   jni$_.JObject _$this
-) implements PropertyValue<$T?> {
+)
+    implements PropertyValue<$T?> {
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/style/layers/LayoutPropertyValue',
   );
@@ -107063,7 +107076,8 @@ final class $LineLayer$Type$ extends jni$_.JType<LineLayer> {
 /// from: `org.maplibre.android.style.layers.PaintPropertyValue`
 extension type PaintPropertyValue<$T extends jni$_.JObject?>._(
   jni$_.JObject _$this
-) implements PropertyValue<$T?> {
+)
+    implements PropertyValue<$T?> {
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/style/layers/PaintPropertyValue',
   );
@@ -138127,7 +138141,8 @@ final class $ViewManager$Type$ extends jni$_.JType<ViewManager> {
 ///
 extension type LayoutAnimationController$$AnimationParameters._(
   jni$_.JObject _$this
-) implements jni$_.JObject {
+)
+    implements jni$_.JObject {
   static const jni$_.JType<LayoutAnimationController$$AnimationParameters>
   type = $LayoutAnimationController$$AnimationParameters$Type$();
 }

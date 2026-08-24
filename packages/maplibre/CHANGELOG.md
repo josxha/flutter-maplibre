@@ -8,6 +8,8 @@
 - Android: `StyleController` now releases its native style reference when
   the owning `MapLibreMap` is disposed, instead of staying technically
   usable on a torn-down map.
+- Android: camera listeners no longer block the calling Java thread on every
+  camera event.
 
 ## 0.3.5
 

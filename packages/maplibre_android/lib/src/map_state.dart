@@ -82,6 +82,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
               widget.onEvent?.call(MapEventMoveCamera(camera: mapCamera));
             }
           }),
+          onCameraMove$async: true,
         ),
       );
   late final _mapCameraIdleListener =
@@ -90,6 +91,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
           onCameraIdle: () => using((arena) {
             widget.onEvent?.call(const MapEventCameraIdle());
           }),
+          onCameraIdle$async: true,
         ),
       );
   late final _cameraMoveStartedListener =
@@ -112,6 +114,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
             if (moveReason == null) return;
             widget.onEvent?.call(MapEventStartMoveCamera(reason: moveReason));
           }),
+          onCameraMoveStarted$async: true,
         ),
       );
 
