@@ -6,6 +6,8 @@
   (`updateGeoJsonSource`, `removeLayer`/`removeSource`/`removeImage`,
   `getLayerIds`, `getAttributionsSync`, `featuresAtPoint`/`featuresInRect`)
   leak JNI global references on every call.
+- Android: camera listeners no longer block the calling Java thread on every
+  camera event.
 
 ## 0.3.5
 
