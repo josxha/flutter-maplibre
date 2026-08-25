@@ -101,6 +101,7 @@ extension type Activity$ScreenCaptureCallback._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -454,6 +455,7 @@ extension Activity$$Methods on Activity {
           >();
 
   /// from: `public final void dismissDialog(int i)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void dismissDialog(core$_.int i) {
     final _$$selfRef = reference;
     _dismissDialog(_$$selfRef.pointer, _id_dismissDialog.pointer, i).check();
@@ -773,6 +775,7 @@ extension Activity$$Methods on Activity {
           >();
 
   /// from: `public void enterPictureInPictureMode()`
+  @core$_.Deprecated('This Java method is deprecated.')
   void enterPictureInPictureMode() {
     final _$$selfRef = reference;
     _enterPictureInPictureMode(
@@ -931,6 +934,7 @@ extension Activity$$Methods on Activity {
           >();
 
   /// from: `public void finishActivityFromChild(android.app.Activity activity, int i)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void finishActivityFromChild(Activity? activity, core$_.int i) {
     final _$$selfRef = reference;
     final _$activity = activity?.reference ?? jni$_.jNullReference;
@@ -1053,6 +1057,7 @@ extension Activity$$Methods on Activity {
           >();
 
   /// from: `public void finishFromChild(android.app.Activity activity)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void finishFromChild(Activity? activity) {
     final _$$selfRef = reference;
     final _$activity = activity?.reference ?? jni$_.jNullReference;
@@ -1425,6 +1430,7 @@ extension Activity$$Methods on Activity {
 
   /// from: `public android.app.FragmentManager getFragmentManager()`
   /// The returned object must be released after use, by calling the [release] method.
+  @core$_.Deprecated('This Java method is deprecated.')
   FragmentManager? get fragmentManager {
     final _$$selfRef = reference;
     return _get$fragmentManager(
@@ -1642,6 +1648,7 @@ extension Activity$$Methods on Activity {
 
   /// from: `public android.app.LoaderManager getLoaderManager()`
   /// The returned object must be released after use, by calling the [release] method.
+  @core$_.Deprecated('This Java method is deprecated.')
   LoaderManager? get loaderManager {
     final _$$selfRef = reference;
     return _get$loaderManager(
@@ -1826,6 +1833,7 @@ extension Activity$$Methods on Activity {
 
   /// from: `public final android.app.Activity getParent()`
   /// The returned object must be released after use, by calling the [release] method.
+  @core$_.Deprecated('This Java method is deprecated.')
   Activity? get parent {
     final _$$selfRef = reference;
     return _get$parent(
@@ -2406,6 +2414,7 @@ extension Activity$$Methods on Activity {
           >();
 
   /// from: `public final boolean isChild()`
+  @core$_.Deprecated('This Java method is deprecated.')
   core$_.bool get isChild {
     final _$$selfRef = reference;
     return _get$isChild(_$$selfRef.pointer, _id_get$isChild.pointer).boolean;
@@ -2742,6 +2751,7 @@ extension Activity$$Methods on Activity {
 
   /// from: `public final android.database.Cursor managedQuery(android.net.Uri uri, java.lang.String[] strings, java.lang.String string, java.lang.String[] strings1, java.lang.String string1)`
   /// The returned object must be released after use, by calling the [release] method.
+  @core$_.Deprecated('This Java method is deprecated.')
   Cursor? managedQuery(
     Uri? uri,
     jni$_.JArray<jni$_.JString?>? strings,
@@ -2860,6 +2870,7 @@ extension Activity$$Methods on Activity {
           >();
 
   /// from: `public boolean navigateUpToFromChild(android.app.Activity activity, android.content.Intent intent)`
+  @core$_.Deprecated('This Java method is deprecated.')
   core$_.bool navigateUpToFromChild(Activity? activity, Intent? intent) {
     final _$$selfRef = reference;
     final _$activity = activity?.reference ?? jni$_.jNullReference;
@@ -3054,6 +3065,7 @@ extension Activity$$Methods on Activity {
           >();
 
   /// from: `public void onAttachFragment(android.app.Fragment fragment)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void onAttachFragment(Fragment$1? fragment) {
     final _$$selfRef = reference;
     final _$fragment = fragment?.reference ?? jni$_.jNullReference;
@@ -3116,6 +3128,7 @@ extension Activity$$Methods on Activity {
           >();
 
   /// from: `public void onBackPressed()`
+  @core$_.Deprecated('This Java method is deprecated.')
   void onBackPressed() {
     final _$$selfRef = reference;
     _onBackPressed(_$$selfRef.pointer, _id_onBackPressed.pointer).check();
@@ -3539,6 +3552,7 @@ extension Activity$$Methods on Activity {
           >();
 
   /// from: `public boolean onCreateThumbnail(android.graphics.Bitmap bitmap, android.graphics.Canvas canvas)`
+  @core$_.Deprecated('This Java method is deprecated.')
   core$_.bool onCreateThumbnail(Bitmap? bitmap, Canvas? canvas) {
     final _$$selfRef = reference;
     final _$bitmap = bitmap?.reference ?? jni$_.jNullReference;
@@ -4158,6 +4172,7 @@ extension Activity$$Methods on Activity {
           >();
 
   /// from: `public void onMultiWindowModeChanged(boolean z)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void onMultiWindowModeChanged(core$_.bool z) {
     final _$$selfRef = reference;
     _onMultiWindowModeChanged(
@@ -4255,6 +4270,7 @@ extension Activity$$Methods on Activity {
           >();
 
   /// from: `public boolean onNavigateUpFromChild(android.app.Activity activity)`
+  @core$_.Deprecated('This Java method is deprecated.')
   core$_.bool onNavigateUpFromChild(Activity? activity) {
     final _$$selfRef = reference;
     final _$activity = activity?.reference ?? jni$_.jNullReference;
@@ -4487,6 +4503,7 @@ extension Activity$$Methods on Activity {
           >();
 
   /// from: `public void onPictureInPictureModeChanged(boolean z)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void onPictureInPictureModeChanged(core$_.bool z) {
     final _$$selfRef = reference;
     _onPictureInPictureModeChanged(
@@ -5214,6 +5231,7 @@ extension Activity$$Methods on Activity {
           >();
 
   /// from: `public void onStateNotSaved()`
+  @core$_.Deprecated('This Java method is deprecated.')
   void onStateNotSaved() {
     final _$$selfRef = reference;
     _onStateNotSaved(_$$selfRef.pointer, _id_onStateNotSaved.pointer).check();
@@ -5399,6 +5417,7 @@ extension Activity$$Methods on Activity {
           >();
 
   /// from: `public void onVisibleBehindCanceled()`
+  @core$_.Deprecated('This Java method is deprecated.')
   void onVisibleBehindCanceled() {
     final _$$selfRef = reference;
     _onVisibleBehindCanceled(
@@ -5716,6 +5735,7 @@ extension Activity$$Methods on Activity {
           >();
 
   /// from: `public void overridePendingTransition(int i, int i1)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void overridePendingTransition(core$_.int i, core$_.int i1) {
     final _$$selfRef = reference;
     _overridePendingTransition(
@@ -5750,6 +5770,7 @@ extension Activity$$Methods on Activity {
           >();
 
   /// from: `public void overridePendingTransition(int i, int i1, int i2)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void overridePendingTransition$1(core$_.int i, core$_.int i1, core$_.int i2) {
     final _$$selfRef = reference;
     _overridePendingTransition$1(
@@ -6023,6 +6044,7 @@ extension Activity$$Methods on Activity {
           >();
 
   /// from: `public final void removeDialog(int i)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void removeDialog(core$_.int i) {
     final _$$selfRef = reference;
     _removeDialog(_$$selfRef.pointer, _id_removeDialog.pointer, i).check();
@@ -6288,6 +6310,7 @@ extension Activity$$Methods on Activity {
           >();
 
   /// from: `public boolean requestVisibleBehind(boolean z)`
+  @core$_.Deprecated('This Java method is deprecated.')
   core$_.bool requestVisibleBehind(core$_.bool z) {
     final _$$selfRef = reference;
     return _requestVisibleBehind(
@@ -7157,6 +7180,7 @@ extension Activity$$Methods on Activity {
           >();
 
   /// from: `public final void setProgress(int i)`
+  @core$_.Deprecated('This Java method is deprecated.')
   set progress(core$_.int i) {
     final _$$selfRef = reference;
     _set$progress(_$$selfRef.pointer, _id_set$progress.pointer, i).check();
@@ -7184,6 +7208,7 @@ extension Activity$$Methods on Activity {
           >();
 
   /// from: `public final void setProgressBarIndeterminate(boolean z)`
+  @core$_.Deprecated('This Java method is deprecated.')
   set progressBarIndeterminate(core$_.bool z) {
     final _$$selfRef = reference;
     _set$progressBarIndeterminate(
@@ -7215,6 +7240,7 @@ extension Activity$$Methods on Activity {
           >();
 
   /// from: `public final void setProgressBarIndeterminateVisibility(boolean z)`
+  @core$_.Deprecated('This Java method is deprecated.')
   set progressBarIndeterminateVisibility(core$_.bool z) {
     final _$$selfRef = reference;
     _set$progressBarIndeterminateVisibility(
@@ -7248,6 +7274,7 @@ extension Activity$$Methods on Activity {
           >();
 
   /// from: `public final void setProgressBarVisibility(boolean z)`
+  @core$_.Deprecated('This Java method is deprecated.')
   set progressBarVisibility(core$_.bool z) {
     final _$$selfRef = reference;
     _set$progressBarVisibility(
@@ -7410,6 +7437,7 @@ extension Activity$$Methods on Activity {
           >();
 
   /// from: `public final void setSecondaryProgress(int i)`
+  @core$_.Deprecated('This Java method is deprecated.')
   set secondaryProgress(core$_.int i) {
     final _$$selfRef = reference;
     _set$secondaryProgress(
@@ -7636,6 +7664,7 @@ extension Activity$$Methods on Activity {
           >();
 
   /// from: `public void setTitleColor(int i)`
+  @core$_.Deprecated('This Java method is deprecated.')
   set titleColor(core$_.int i) {
     final _$$selfRef = reference;
     _set$titleColor(_$$selfRef.pointer, _id_set$titleColor.pointer, i).check();
@@ -8006,6 +8035,7 @@ extension Activity$$Methods on Activity {
           >();
 
   /// from: `public final void showDialog(int i)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void showDialog(core$_.int i) {
     final _$$selfRef = reference;
     _showDialog(_$$selfRef.pointer, _id_showDialog.pointer, i).check();
@@ -8036,6 +8066,7 @@ extension Activity$$Methods on Activity {
           >();
 
   /// from: `public final boolean showDialog(int i, android.os.Bundle bundle)`
+  @core$_.Deprecated('This Java method is deprecated.')
   core$_.bool showDialog$1(core$_.int i, Bundle? bundle) {
     final _$$selfRef = reference;
     final _$bundle = bundle?.reference ?? jni$_.jNullReference;
@@ -8408,6 +8439,7 @@ extension Activity$$Methods on Activity {
           >();
 
   /// from: `public void startActivityFromChild(android.app.Activity activity, android.content.Intent intent, int i)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void startActivityFromChild(
     Activity? activity,
     Intent? intent,
@@ -8459,6 +8491,7 @@ extension Activity$$Methods on Activity {
           >();
 
   /// from: `public void startActivityFromChild(android.app.Activity activity, android.content.Intent intent, int i, android.os.Bundle bundle)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void startActivityFromChild$1(
     Activity? activity,
     Intent? intent,
@@ -8511,6 +8544,7 @@ extension Activity$$Methods on Activity {
           >();
 
   /// from: `public void startActivityFromFragment(android.app.Fragment fragment, android.content.Intent intent, int i)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void startActivityFromFragment(
     Fragment$1? fragment,
     Intent? intent,
@@ -8563,6 +8597,7 @@ extension Activity$$Methods on Activity {
           >();
 
   /// from: `public void startActivityFromFragment(android.app.Fragment fragment, android.content.Intent intent, int i, android.os.Bundle bundle)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void startActivityFromFragment$1(
     Fragment$1? fragment,
     Intent? intent,
@@ -8955,6 +8990,7 @@ extension Activity$$Methods on Activity {
           >();
 
   /// from: `public void startIntentSenderFromChild(android.app.Activity activity, android.content.IntentSender intentSender, int i, android.content.Intent intent, int i1, int i2, int i3)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void startIntentSenderFromChild(
     Activity? activity,
     IntentSender? intentSender,
@@ -9023,6 +9059,7 @@ extension Activity$$Methods on Activity {
           >();
 
   /// from: `public void startIntentSenderFromChild(android.app.Activity activity, android.content.IntentSender intentSender, int i, android.content.Intent intent, int i1, int i2, int i3, android.os.Bundle bundle)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void startIntentSenderFromChild$1(
     Activity? activity,
     IntentSender? intentSender,
@@ -9138,6 +9175,7 @@ extension Activity$$Methods on Activity {
           >();
 
   /// from: `public void startManagingCursor(android.database.Cursor cursor)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void startManagingCursor(Cursor? cursor) {
     final _$$selfRef = reference;
     final _$cursor = cursor?.reference ?? jni$_.jNullReference;
@@ -9384,6 +9422,7 @@ extension Activity$$Methods on Activity {
           >();
 
   /// from: `public void stopManagingCursor(android.database.Cursor cursor)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void stopManagingCursor(Cursor? cursor) {
     final _$$selfRef = reference;
     final _$cursor = cursor?.reference ?? jni$_.jNullReference;
@@ -11894,6 +11933,7 @@ extension Context$$Methods on Context {
           >();
 
   /// from: `public abstract void clearWallpaper()`
+  @core$_.Deprecated('This Java method is deprecated.')
   void clearWallpaper() {
     final _$$selfRef = reference;
     _clearWallpaper(_$$selfRef.pointer, _id_clearWallpaper.pointer).check();
@@ -13475,6 +13515,7 @@ extension Context$$Methods on Context {
 
   /// from: `public abstract java.io.File[] getExternalMediaDirs()`
   /// The returned object must be released after use, by calling the [release] method.
+  @core$_.Deprecated('This Java method is deprecated.')
   jni$_.JArray<File?>? get externalMediaDirs {
     final _$$selfRef = reference;
     return _get$externalMediaDirs(
@@ -14057,7 +14098,7 @@ extension Context$$Methods on Context {
 
   /// from: `public final T getSystemService(java.lang.Class<T> class)`
   /// The returned object must be released after use, by calling the [release] method.
-  $T? getSystemService<$T extends jni$_.JObject?>(Class? class$) {
+  $T? getSystemService<$T extends jni$_.JObject?>(jni$_.JClass? class$) {
     final _$$selfRef = reference;
     final _$class$ = class$?.reference ?? jni$_.jNullReference;
     return _getSystemService(
@@ -14127,7 +14168,7 @@ extension Context$$Methods on Context {
 
   /// from: `public abstract java.lang.String getSystemServiceName(java.lang.Class<?> class)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JString? getSystemServiceName(Class? class$) {
+  jni$_.JString? getSystemServiceName(jni$_.JClass? class$) {
     final _$$selfRef = reference;
     final _$class$ = class$?.reference ?? jni$_.jNullReference;
     return _getSystemServiceName(
@@ -14225,6 +14266,7 @@ extension Context$$Methods on Context {
 
   /// from: `public abstract android.graphics.drawable.Drawable getWallpaper()`
   /// The returned object must be released after use, by calling the [release] method.
+  @core$_.Deprecated('This Java method is deprecated.')
   Drawable? get wallpaper {
     final _$$selfRef = reference;
     return _get$wallpaper(
@@ -14253,6 +14295,7 @@ extension Context$$Methods on Context {
           >();
 
   /// from: `public abstract int getWallpaperDesiredMinimumHeight()`
+  @core$_.Deprecated('This Java method is deprecated.')
   core$_.int get wallpaperDesiredMinimumHeight {
     final _$$selfRef = reference;
     return _get$wallpaperDesiredMinimumHeight(
@@ -14281,6 +14324,7 @@ extension Context$$Methods on Context {
           >();
 
   /// from: `public abstract int getWallpaperDesiredMinimumWidth()`
+  @core$_.Deprecated('This Java method is deprecated.')
   core$_.int get wallpaperDesiredMinimumWidth {
     final _$$selfRef = reference;
     return _get$wallpaperDesiredMinimumWidth(
@@ -14873,6 +14917,7 @@ extension Context$$Methods on Context {
 
   /// from: `public abstract android.graphics.drawable.Drawable peekWallpaper()`
   /// The returned object must be released after use, by calling the [release] method.
+  @core$_.Deprecated('This Java method is deprecated.')
   Drawable? peekWallpaper() {
     final _$$selfRef = reference;
     return _peekWallpaper(
@@ -15196,6 +15241,7 @@ extension Context$$Methods on Context {
           >();
 
   /// from: `public abstract void removeStickyBroadcast(android.content.Intent intent)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void removeStickyBroadcast(Intent? intent) {
     final _$$selfRef = reference;
     final _$intent = intent?.reference ?? jni$_.jNullReference;
@@ -15234,6 +15280,7 @@ extension Context$$Methods on Context {
           >();
 
   /// from: `public abstract void removeStickyBroadcastAsUser(android.content.Intent intent, android.os.UserHandle userHandle)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void removeStickyBroadcastAsUser(Intent? intent, UserHandle? userHandle) {
     final _$$selfRef = reference;
     final _$intent = intent?.reference ?? jni$_.jNullReference;
@@ -15305,7 +15352,9 @@ extension Context$$Methods on Context {
           >();
 
   /// from: `public void revokeSelfPermissionsOnKill(java.util.Collection<java.lang.String> collection)`
-  void revokeSelfPermissionsOnKill(Collection? collection) {
+  void revokeSelfPermissionsOnKill(
+    jni$_.JCollection<jni$_.JString?>? collection,
+  ) {
     final _$$selfRef = reference;
     final _$collection = collection?.reference ?? jni$_.jNullReference;
     _revokeSelfPermissionsOnKill(
@@ -16055,6 +16104,7 @@ extension Context$$Methods on Context {
           >();
 
   /// from: `public abstract void sendStickyBroadcast(android.content.Intent intent)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void sendStickyBroadcast(Intent? intent) {
     final _$$selfRef = reference;
     final _$intent = intent?.reference ?? jni$_.jNullReference;
@@ -16092,6 +16142,7 @@ extension Context$$Methods on Context {
           >();
 
   /// from: `public void sendStickyBroadcast(android.content.Intent intent, android.os.Bundle bundle)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void sendStickyBroadcast$1(Intent? intent, Bundle? bundle) {
     final _$$selfRef = reference;
     final _$intent = intent?.reference ?? jni$_.jNullReference;
@@ -16131,6 +16182,7 @@ extension Context$$Methods on Context {
           >();
 
   /// from: `public abstract void sendStickyBroadcastAsUser(android.content.Intent intent, android.os.UserHandle userHandle)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void sendStickyBroadcastAsUser(Intent? intent, UserHandle? userHandle) {
     final _$$selfRef = reference;
     final _$intent = intent?.reference ?? jni$_.jNullReference;
@@ -16181,6 +16233,7 @@ extension Context$$Methods on Context {
           >();
 
   /// from: `public abstract void sendStickyOrderedBroadcast(android.content.Intent intent, android.content.BroadcastReceiver broadcastReceiver, android.os.Handler handler, int i, java.lang.String string, android.os.Bundle bundle)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void sendStickyOrderedBroadcast(
     Intent? intent,
     BroadcastReceiver? broadcastReceiver,
@@ -16249,6 +16302,7 @@ extension Context$$Methods on Context {
           >();
 
   /// from: `public abstract void sendStickyOrderedBroadcastAsUser(android.content.Intent intent, android.os.UserHandle userHandle, android.content.BroadcastReceiver broadcastReceiver, android.os.Handler handler, int i, java.lang.String string, android.os.Bundle bundle)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void sendStickyOrderedBroadcastAsUser(
     Intent? intent,
     UserHandle? userHandle,
@@ -16332,6 +16386,7 @@ extension Context$$Methods on Context {
           >();
 
   /// from: `public abstract void setWallpaper(android.graphics.Bitmap bitmap)`
+  @core$_.Deprecated('This Java method is deprecated.')
   set wallpaper$1(Bitmap? bitmap) {
     final _$$selfRef = reference;
     final _$bitmap = bitmap?.reference ?? jni$_.jNullReference;
@@ -16366,6 +16421,7 @@ extension Context$$Methods on Context {
           >();
 
   /// from: `public abstract void setWallpaper(java.io.InputStream inputStream)`
+  @core$_.Deprecated('This Java method is deprecated.')
   set wallpaper$2(InputStream? inputStream) {
     final _$$selfRef = reference;
     final _$inputStream = inputStream?.reference ?? jni$_.jNullReference;
@@ -17346,6 +17402,7 @@ extension BitmapFactory$Options$$Methods on BitmapFactory$Options {
           >();
 
   /// from: `public void requestCancelDecode()`
+  @core$_.Deprecated('This Java method is deprecated.')
   void requestCancelDecode() {
     final _$$selfRef = reference;
     _requestCancelDecode(
@@ -20051,6 +20108,7 @@ extension Location$$Methods on Location {
           >();
 
   /// from: `public void dump(android.util.Printer printer, java.lang.String string)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void dump(Printer? printer, jni$_.JString? string) {
     final _$$selfRef = reference;
     final _$printer = printer?.reference ?? jni$_.jNullReference;
@@ -21011,6 +21069,7 @@ extension Location$$Methods on Location {
           >();
 
   /// from: `public boolean isFromMockProvider()`
+  @core$_.Deprecated('This Java method is deprecated.')
   core$_.bool get isFromMockProvider {
     final _$$selfRef = reference;
     return _get$isFromMockProvider(
@@ -22512,6 +22571,7 @@ extension FrameLayout$$Methods on FrameLayout {
           >();
 
   /// from: `public boolean getConsiderGoneChildrenWhenMeasuring()`
+  @core$_.Deprecated('This Java method is deprecated.')
   core$_.bool get considerGoneChildrenWhenMeasuring {
     final _$$selfRef = reference;
     return _get$considerGoneChildrenWhenMeasuring(
@@ -23425,6 +23485,7 @@ extension type ViewGroup$OnHierarchyChangeListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -23685,7 +23746,7 @@ extension ViewGroup$$Methods on ViewGroup {
           >();
 
   /// from: `public void addChildrenForAccessibility(java.util.ArrayList<android.view.View> arrayList)`
-  void addChildrenForAccessibility(ArrayList? arrayList) {
+  void addChildrenForAccessibility(jni$_.JArrayList<View?>? arrayList) {
     final _$$selfRef = reference;
     final _$arrayList = arrayList?.reference ?? jni$_.jNullReference;
     _addChildrenForAccessibility(
@@ -23775,7 +23836,11 @@ extension ViewGroup$$Methods on ViewGroup {
           >();
 
   /// from: `public void addFocusables(java.util.ArrayList<android.view.View> arrayList, int i, int i1)`
-  void addFocusables(ArrayList? arrayList, core$_.int i, core$_.int i1) {
+  void addFocusables(
+    jni$_.JArrayList<View?>? arrayList,
+    core$_.int i,
+    core$_.int i1,
+  ) {
     final _$$selfRef = reference;
     final _$arrayList = arrayList?.reference ?? jni$_.jNullReference;
     _addFocusables(
@@ -23813,7 +23878,10 @@ extension ViewGroup$$Methods on ViewGroup {
           >();
 
   /// from: `public void addKeyboardNavigationClusters(java.util.Collection<android.view.View> collection, int i)`
-  void addKeyboardNavigationClusters(Collection? collection, core$_.int i) {
+  void addKeyboardNavigationClusters(
+    jni$_.JCollection<View?>? collection,
+    core$_.int i,
+  ) {
     final _$$selfRef = reference;
     final _$collection = collection?.reference ?? jni$_.jNullReference;
     _addKeyboardNavigationClusters(
@@ -23878,7 +23946,7 @@ extension ViewGroup$$Methods on ViewGroup {
           >();
 
   /// from: `public void addTouchables(java.util.ArrayList<android.view.View> arrayList)`
-  void addTouchables(ArrayList? arrayList) {
+  void addTouchables(jni$_.JArrayList<View?>? arrayList) {
     final _$$selfRef = reference;
     final _$arrayList = arrayList?.reference ?? jni$_.jNullReference;
     _addTouchables(
@@ -24941,6 +25009,7 @@ extension ViewGroup$$Methods on ViewGroup {
           >();
 
   /// from: `public void dispatchSystemUiVisibilityChanged(int i)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void dispatchSystemUiVisibilityChanged(core$_.int i) {
     final _$$selfRef = reference;
     _dispatchSystemUiVisibilityChanged(
@@ -25272,6 +25341,7 @@ extension ViewGroup$$Methods on ViewGroup {
           >();
 
   /// from: `public void dispatchWindowSystemUiVisiblityChanged(int i)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void dispatchWindowSystemUiVisiblityChanged(core$_.int i) {
     final _$$selfRef = reference;
     _dispatchWindowSystemUiVisiblityChanged(
@@ -25454,7 +25524,7 @@ extension ViewGroup$$Methods on ViewGroup {
 
   /// from: `public void findViewsWithText(java.util.ArrayList<android.view.View> arrayList, java.lang.CharSequence charSequence, int i)`
   void findViewsWithText(
-    ArrayList? arrayList,
+    jni$_.JArrayList<View?>? arrayList,
     CharSequence? charSequence,
     core$_.int i,
   ) {
@@ -26109,6 +26179,7 @@ extension ViewGroup$$Methods on ViewGroup {
           >();
 
   /// from: `public int getPersistentDrawingCache()`
+  @core$_.Deprecated('This Java method is deprecated.')
   core$_.int get persistentDrawingCache {
     final _$$selfRef = reference;
     return _get$persistentDrawingCache(
@@ -26263,6 +26334,7 @@ extension ViewGroup$$Methods on ViewGroup {
           >();
 
   /// from: `public final void invalidateChild(android.view.View view, android.graphics.Rect rect)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void invalidateChild(View? view, Rect? rect) {
     final _$$selfRef = reference;
     final _$view = view?.reference ?? jni$_.jNullReference;
@@ -26303,6 +26375,7 @@ extension ViewGroup$$Methods on ViewGroup {
 
   /// from: `public android.view.ViewParent invalidateChildInParent(int[] is, android.graphics.Rect rect)`
   /// The returned object must be released after use, by calling the [release] method.
+  @core$_.Deprecated('This Java method is deprecated.')
   ViewParent? invalidateChildInParent(jni$_.JIntArray? is$, Rect? rect) {
     final _$$selfRef = reference;
     final _$is$ = is$?.reference ?? jni$_.jNullReference;
@@ -26335,6 +26408,7 @@ extension ViewGroup$$Methods on ViewGroup {
           >();
 
   /// from: `public boolean isAlwaysDrawnWithCacheEnabled()`
+  @core$_.Deprecated('This Java method is deprecated.')
   core$_.bool get isAlwaysDrawnWithCacheEnabled {
     final _$$selfRef = reference;
     return _get$isAlwaysDrawnWithCacheEnabled(
@@ -26363,6 +26437,7 @@ extension ViewGroup$$Methods on ViewGroup {
           >();
 
   /// from: `public boolean isAnimationCacheEnabled()`
+  @core$_.Deprecated('This Java method is deprecated.')
   core$_.bool get isAnimationCacheEnabled {
     final _$$selfRef = reference;
     return _get$isAnimationCacheEnabled(
@@ -27915,6 +27990,7 @@ extension ViewGroup$$Methods on ViewGroup {
           >();
 
   /// from: `public void setAlwaysDrawnWithCacheEnabled(boolean z)`
+  @core$_.Deprecated('This Java method is deprecated.')
   set alwaysDrawnWithCacheEnabled(core$_.bool z) {
     final _$$selfRef = reference;
     _set$alwaysDrawnWithCacheEnabled(
@@ -27946,6 +28022,7 @@ extension ViewGroup$$Methods on ViewGroup {
           >();
 
   /// from: `public void setAnimationCacheEnabled(boolean z)`
+  @core$_.Deprecated('This Java method is deprecated.')
   set animationCacheEnabled(core$_.bool z) {
     final _$$selfRef = reference;
     _set$animationCacheEnabled(
@@ -28278,6 +28355,7 @@ extension ViewGroup$$Methods on ViewGroup {
           >();
 
   /// from: `public void setPersistentDrawingCache(int i)`
+  @core$_.Deprecated('This Java method is deprecated.')
   set persistentDrawingCache(core$_.int i) {
     final _$$selfRef = reference;
     _set$persistentDrawingCache(
@@ -28828,6 +28906,7 @@ extension type FlutterApi._(jni$_.JObject _$this) implements jni$_.JObject {
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -30661,7 +30740,7 @@ extension URL$$Methods on URL {
 
   /// from: `public java.lang.Object getContent(java.lang.Class[] classs)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? getContent(jni$_.JArray<Class?>? classs) {
+  jni$_.JObject? getContent(jni$_.JArray<jni$_.JClass?>? classs) {
     final _$$selfRef = reference;
     final _$classs = classs?.reference ?? jni$_.jNullReference;
     return _getContent(
@@ -31200,1039 +31279,11 @@ final class $URL$Type$ extends jni$_.JType<URL> {
   String get signature => r'Ljava/net/URL;';
 }
 
-/// from: `java.util.HashMap`
-extension type HashMap<$K extends jni$_.JObject?, $V extends jni$_.JObject?>._(
-  jni$_.JObject _$this
-) implements AbstractMap, Cloneable, jni$_.JMap<$K?, $V?>, Serializable {
-  static final _class = jni$_.JClass.forName(r'java/util/HashMap');
-
-  /// The type which includes information such as the signature of this class.
-  static const jni$_.JType<HashMap> type = $HashMap$Type$();
-  static final _id_new$ = _class.constructorId(r'()V');
-
-  static final _new$ =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_NewObject')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public void <init>()`
-  /// The returned object must be released after use, by calling the [release] method.
-  factory HashMap() {
-    final _$$classRef = _class.reference;
-    return _new$(
-      _$$classRef.pointer,
-      _id_new$.pointer,
-    ).object<HashMap<$K, $V>>();
-  }
-
-  static final _id_new$1 = _class.constructorId(r'(I)V');
-
-  static final _new$1 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Int32,)>,
-              )
-            >
-          >('globalEnv_NewObject')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              core$_.int,
-            )
-          >();
-
-  /// from: `public void <init>(int i)`
-  /// The returned object must be released after use, by calling the [release] method.
-  factory HashMap.new$1(core$_.int i) {
-    final _$$classRef = _class.reference;
-    return _new$1(
-      _$$classRef.pointer,
-      _id_new$1.pointer,
-      i,
-    ).object<HashMap<$K, $V>>();
-  }
-
-  static final _id_new$2 = _class.constructorId(r'(IF)V');
-
-  static final _new$2 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Int32, jni$_.Double)>,
-              )
-            >
-          >('globalEnv_NewObject')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              core$_.int,
-              core$_.double,
-            )
-          >();
-
-  /// from: `public void <init>(int i, float f)`
-  /// The returned object must be released after use, by calling the [release] method.
-  factory HashMap.new$2(core$_.int i, core$_.double f) {
-    final _$$classRef = _class.reference;
-    return _new$2(
-      _$$classRef.pointer,
-      _id_new$2.pointer,
-      i,
-      f,
-    ).object<HashMap<$K, $V>>();
-  }
-
-  static final _id_new$3 = _class.constructorId(r'(Ljava/util/Map;)V');
-
-  static final _new$3 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_NewObject')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public void <init>(java.util.Map<? extends K, ? extends V> map)`
-  /// The returned object must be released after use, by calling the [release] method.
-  factory HashMap.new$3(jni$_.JMap<$K?, $V?>? map) {
-    final _$$classRef = _class.reference;
-    final _$map = map?.reference ?? jni$_.jNullReference;
-    return _new$3(
-      _$$classRef.pointer,
-      _id_new$3.pointer,
-      _$map.pointer,
-    ).object<HashMap<$K, $V>>();
-  }
-
-  static final _id_newHashMap = _class.staticMethodId(
-    r'newHashMap',
-    r'(I)Ljava/util/HashMap;',
-  );
-
-  static final _newHashMap =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Int32,)>,
-              )
-            >
-          >('globalEnv_CallStaticObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              core$_.int,
-            )
-          >();
-
-  /// from: `static public java.util.HashMap<K, V> newHashMap(int i)`
-  /// The returned object must be released after use, by calling the [release] method.
-  static HashMap<$K?, $V?>? newHashMap<
-    $K extends jni$_.JObject?,
-    $V extends jni$_.JObject?
-  >(core$_.int i) {
-    final _$$classRef = _class.reference;
-    return _newHashMap(
-      _$$classRef.pointer,
-      _id_newHashMap.pointer,
-      i,
-    ).object<HashMap<$K?, $V?>?>();
-  }
-}
-
-extension HashMap$$Methods<$K extends jni$_.JObject?, $V extends jni$_.JObject?>
-    on HashMap<$K, $V> {
-  static final _id_clear = HashMap._class.instanceMethodId(r'clear', r'()V');
-
-  static final _clear =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public void clear()`
-  void clear() {
-    final _$$selfRef = reference;
-    _clear(_$$selfRef.pointer, _id_clear.pointer).check();
-  }
-
-  static final _id_clone = HashMap._class.instanceMethodId(
-    r'clone',
-    r'()Ljava/lang/Object;',
-  );
-
-  static final _clone =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public java.lang.Object clone()`
-  /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? clone() {
-    final _$$selfRef = reference;
-    return _clone(
-      _$$selfRef.pointer,
-      _id_clone.pointer,
-    ).object<jni$_.JObject?>();
-  }
-
-  static final _id_compute = HashMap._class.instanceMethodId(
-    r'compute',
-    r'(Ljava/lang/Object;Ljava/util/function/BiFunction;)Ljava/lang/Object;',
-  );
-
-  static final _compute =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<
-                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
-                >,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public V compute(K object, java.util.function.BiFunction<? super K, ? super V, ? extends V> biFunction)`
-  /// The returned object must be released after use, by calling the [release] method.
-  $V? compute($K? object, BiFunction? biFunction) {
-    final _$$selfRef = reference;
-    final _$object = object?.reference ?? jni$_.jNullReference;
-    final _$biFunction = biFunction?.reference ?? jni$_.jNullReference;
-    return _compute(
-      _$$selfRef.pointer,
-      _id_compute.pointer,
-      _$object.pointer,
-      _$biFunction.pointer,
-    ).object<$V?>();
-  }
-
-  static final _id_computeIfAbsent = HashMap._class.instanceMethodId(
-    r'computeIfAbsent',
-    r'(Ljava/lang/Object;Ljava/util/function/Function;)Ljava/lang/Object;',
-  );
-
-  static final _computeIfAbsent =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<
-                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
-                >,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public V computeIfAbsent(K object, java.util.function.Function<? super K, ? extends V> function)`
-  /// The returned object must be released after use, by calling the [release] method.
-  $V? computeIfAbsent($K? object, Function$? function) {
-    final _$$selfRef = reference;
-    final _$object = object?.reference ?? jni$_.jNullReference;
-    final _$function = function?.reference ?? jni$_.jNullReference;
-    return _computeIfAbsent(
-      _$$selfRef.pointer,
-      _id_computeIfAbsent.pointer,
-      _$object.pointer,
-      _$function.pointer,
-    ).object<$V?>();
-  }
-
-  static final _id_computeIfPresent = HashMap._class.instanceMethodId(
-    r'computeIfPresent',
-    r'(Ljava/lang/Object;Ljava/util/function/BiFunction;)Ljava/lang/Object;',
-  );
-
-  static final _computeIfPresent =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<
-                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
-                >,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public V computeIfPresent(K object, java.util.function.BiFunction<? super K, ? super V, ? extends V> biFunction)`
-  /// The returned object must be released after use, by calling the [release] method.
-  $V? computeIfPresent($K? object, BiFunction? biFunction) {
-    final _$$selfRef = reference;
-    final _$object = object?.reference ?? jni$_.jNullReference;
-    final _$biFunction = biFunction?.reference ?? jni$_.jNullReference;
-    return _computeIfPresent(
-      _$$selfRef.pointer,
-      _id_computeIfPresent.pointer,
-      _$object.pointer,
-      _$biFunction.pointer,
-    ).object<$V?>();
-  }
-
-  static final _id_containsKey = HashMap._class.instanceMethodId(
-    r'containsKey',
-    r'(Ljava/lang/Object;)Z',
-  );
-
-  static final _containsKey =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public boolean containsKey(java.lang.Object object)`
-  core$_.bool containsKey(jni$_.JObject? object) {
-    final _$$selfRef = reference;
-    final _$object = object?.reference ?? jni$_.jNullReference;
-    return _containsKey(
-      _$$selfRef.pointer,
-      _id_containsKey.pointer,
-      _$object.pointer,
-    ).boolean;
-  }
-
-  static final _id_containsValue = HashMap._class.instanceMethodId(
-    r'containsValue',
-    r'(Ljava/lang/Object;)Z',
-  );
-
-  static final _containsValue =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public boolean containsValue(java.lang.Object object)`
-  core$_.bool containsValue(jni$_.JObject? object) {
-    final _$$selfRef = reference;
-    final _$object = object?.reference ?? jni$_.jNullReference;
-    return _containsValue(
-      _$$selfRef.pointer,
-      _id_containsValue.pointer,
-      _$object.pointer,
-    ).boolean;
-  }
-
-  static final _id_entrySet = HashMap._class.instanceMethodId(
-    r'entrySet',
-    r'()Ljava/util/Set;',
-  );
-
-  static final _entrySet =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public java.util.Set<java.util.Map$Entry<K, V>> entrySet()`
-  /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JSet<Map$$Entry?>? entrySet() {
-    final _$$selfRef = reference;
-    return _entrySet(
-      _$$selfRef.pointer,
-      _id_entrySet.pointer,
-    ).object<jni$_.JSet<Map$$Entry?>?>();
-  }
-
-  static final _id_forEach = HashMap._class.instanceMethodId(
-    r'forEach',
-    r'(Ljava/util/function/BiConsumer;)V',
-  );
-
-  static final _forEach =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public void forEach(java.util.function.BiConsumer<? super K, ? super V> biConsumer)`
-  void forEach(BiConsumer? biConsumer) {
-    final _$$selfRef = reference;
-    final _$biConsumer = biConsumer?.reference ?? jni$_.jNullReference;
-    _forEach(
-      _$$selfRef.pointer,
-      _id_forEach.pointer,
-      _$biConsumer.pointer,
-    ).check();
-  }
-
-  static final _id_get = HashMap._class.instanceMethodId(
-    r'get',
-    r'(Ljava/lang/Object;)Ljava/lang/Object;',
-  );
-
-  static final _get =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public V get(java.lang.Object object)`
-  /// The returned object must be released after use, by calling the [release] method.
-  $V? get(jni$_.JObject? object) {
-    final _$$selfRef = reference;
-    final _$object = object?.reference ?? jni$_.jNullReference;
-    return _get(
-      _$$selfRef.pointer,
-      _id_get.pointer,
-      _$object.pointer,
-    ).object<$V?>();
-  }
-
-  static final _id_getOrDefault = HashMap._class.instanceMethodId(
-    r'getOrDefault',
-    r'(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;',
-  );
-
-  static final _getOrDefault =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<
-                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
-                >,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public V getOrDefault(java.lang.Object object, V object1)`
-  /// The returned object must be released after use, by calling the [release] method.
-  $V? getOrDefault(jni$_.JObject? object, $V? object1) {
-    final _$$selfRef = reference;
-    final _$object = object?.reference ?? jni$_.jNullReference;
-    final _$object1 = object1?.reference ?? jni$_.jNullReference;
-    return _getOrDefault(
-      _$$selfRef.pointer,
-      _id_getOrDefault.pointer,
-      _$object.pointer,
-      _$object1.pointer,
-    ).object<$V?>();
-  }
-
-  static final _id_get$isEmpty = HashMap._class.instanceMethodId(
-    r'isEmpty',
-    r'()Z',
-  );
-
-  static final _get$isEmpty =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public boolean isEmpty()`
-  core$_.bool get isEmpty {
-    final _$$selfRef = reference;
-    return _get$isEmpty(_$$selfRef.pointer, _id_get$isEmpty.pointer).boolean;
-  }
-
-  static final _id_keySet = HashMap._class.instanceMethodId(
-    r'keySet',
-    r'()Ljava/util/Set;',
-  );
-
-  static final _keySet =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public java.util.Set<K> keySet()`
-  /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JSet<$K?>? keySet() {
-    final _$$selfRef = reference;
-    return _keySet(
-      _$$selfRef.pointer,
-      _id_keySet.pointer,
-    ).object<jni$_.JSet<$K?>?>();
-  }
-
-  static final _id_merge = HashMap._class.instanceMethodId(
-    r'merge',
-    r'(Ljava/lang/Object;Ljava/lang/Object;Ljava/util/function/BiFunction;)Ljava/lang/Object;',
-  );
-
-  static final _merge =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<
-                  (
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.Pointer<jni$_.Void>,
-                  )
-                >,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public V merge(K object, V object1, java.util.function.BiFunction<? super V, ? super V, ? extends V> biFunction)`
-  /// The returned object must be released after use, by calling the [release] method.
-  $V? merge($K? object, $V? object1, BiFunction? biFunction) {
-    final _$$selfRef = reference;
-    final _$object = object?.reference ?? jni$_.jNullReference;
-    final _$object1 = object1?.reference ?? jni$_.jNullReference;
-    final _$biFunction = biFunction?.reference ?? jni$_.jNullReference;
-    return _merge(
-      _$$selfRef.pointer,
-      _id_merge.pointer,
-      _$object.pointer,
-      _$object1.pointer,
-      _$biFunction.pointer,
-    ).object<$V?>();
-  }
-
-  static final _id_put = HashMap._class.instanceMethodId(
-    r'put',
-    r'(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;',
-  );
-
-  static final _put =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<
-                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
-                >,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public V put(K object, V object1)`
-  /// The returned object must be released after use, by calling the [release] method.
-  $V? put($K? object, $V? object1) {
-    final _$$selfRef = reference;
-    final _$object = object?.reference ?? jni$_.jNullReference;
-    final _$object1 = object1?.reference ?? jni$_.jNullReference;
-    return _put(
-      _$$selfRef.pointer,
-      _id_put.pointer,
-      _$object.pointer,
-      _$object1.pointer,
-    ).object<$V?>();
-  }
-
-  static final _id_putAll = HashMap._class.instanceMethodId(
-    r'putAll',
-    r'(Ljava/util/Map;)V',
-  );
-
-  static final _putAll =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public void putAll(java.util.Map<? extends K, ? extends V> map)`
-  void putAll(jni$_.JMap<$K?, $V?>? map) {
-    final _$$selfRef = reference;
-    final _$map = map?.reference ?? jni$_.jNullReference;
-    _putAll(_$$selfRef.pointer, _id_putAll.pointer, _$map.pointer).check();
-  }
-
-  static final _id_putIfAbsent = HashMap._class.instanceMethodId(
-    r'putIfAbsent',
-    r'(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;',
-  );
-
-  static final _putIfAbsent =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<
-                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
-                >,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public V putIfAbsent(K object, V object1)`
-  /// The returned object must be released after use, by calling the [release] method.
-  $V? putIfAbsent($K? object, $V? object1) {
-    final _$$selfRef = reference;
-    final _$object = object?.reference ?? jni$_.jNullReference;
-    final _$object1 = object1?.reference ?? jni$_.jNullReference;
-    return _putIfAbsent(
-      _$$selfRef.pointer,
-      _id_putIfAbsent.pointer,
-      _$object.pointer,
-      _$object1.pointer,
-    ).object<$V?>();
-  }
-
-  static final _id_remove = HashMap._class.instanceMethodId(
-    r'remove',
-    r'(Ljava/lang/Object;)Ljava/lang/Object;',
-  );
-
-  static final _remove =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public V remove(java.lang.Object object)`
-  /// The returned object must be released after use, by calling the [release] method.
-  $V? remove(jni$_.JObject? object) {
-    final _$$selfRef = reference;
-    final _$object = object?.reference ?? jni$_.jNullReference;
-    return _remove(
-      _$$selfRef.pointer,
-      _id_remove.pointer,
-      _$object.pointer,
-    ).object<$V?>();
-  }
-
-  static final _id_remove$1 = HashMap._class.instanceMethodId(
-    r'remove',
-    r'(Ljava/lang/Object;Ljava/lang/Object;)Z',
-  );
-
-  static final _remove$1 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<
-                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
-                >,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public boolean remove(java.lang.Object object, java.lang.Object object1)`
-  core$_.bool remove$1(jni$_.JObject? object, jni$_.JObject? object1) {
-    final _$$selfRef = reference;
-    final _$object = object?.reference ?? jni$_.jNullReference;
-    final _$object1 = object1?.reference ?? jni$_.jNullReference;
-    return _remove$1(
-      _$$selfRef.pointer,
-      _id_remove$1.pointer,
-      _$object.pointer,
-      _$object1.pointer,
-    ).boolean;
-  }
-
-  static final _id_replace = HashMap._class.instanceMethodId(
-    r'replace',
-    r'(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;',
-  );
-
-  static final _replace =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<
-                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
-                >,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public V replace(K object, V object1)`
-  /// The returned object must be released after use, by calling the [release] method.
-  $V? replace($K? object, $V? object1) {
-    final _$$selfRef = reference;
-    final _$object = object?.reference ?? jni$_.jNullReference;
-    final _$object1 = object1?.reference ?? jni$_.jNullReference;
-    return _replace(
-      _$$selfRef.pointer,
-      _id_replace.pointer,
-      _$object.pointer,
-      _$object1.pointer,
-    ).object<$V?>();
-  }
-
-  static final _id_replace$1 = HashMap._class.instanceMethodId(
-    r'replace',
-    r'(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Z',
-  );
-
-  static final _replace$1 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<
-                  (
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.Pointer<jni$_.Void>,
-                    jni$_.Pointer<jni$_.Void>,
-                  )
-                >,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public boolean replace(K object, V object1, V object2)`
-  core$_.bool replace$1($K? object, $V? object1, $V? object2) {
-    final _$$selfRef = reference;
-    final _$object = object?.reference ?? jni$_.jNullReference;
-    final _$object1 = object1?.reference ?? jni$_.jNullReference;
-    final _$object2 = object2?.reference ?? jni$_.jNullReference;
-    return _replace$1(
-      _$$selfRef.pointer,
-      _id_replace$1.pointer,
-      _$object.pointer,
-      _$object1.pointer,
-      _$object2.pointer,
-    ).boolean;
-  }
-
-  static final _id_replaceAll = HashMap._class.instanceMethodId(
-    r'replaceAll',
-    r'(Ljava/util/function/BiFunction;)V',
-  );
-
-  static final _replaceAll =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public void replaceAll(java.util.function.BiFunction<? super K, ? super V, ? extends V> biFunction)`
-  void replaceAll(BiFunction? biFunction) {
-    final _$$selfRef = reference;
-    final _$biFunction = biFunction?.reference ?? jni$_.jNullReference;
-    _replaceAll(
-      _$$selfRef.pointer,
-      _id_replaceAll.pointer,
-      _$biFunction.pointer,
-    ).check();
-  }
-
-  static final _id_size = HashMap._class.instanceMethodId(r'size', r'()I');
-
-  static final _size =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallIntMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public int size()`
-  core$_.int size() {
-    final _$$selfRef = reference;
-    return _size(_$$selfRef.pointer, _id_size.pointer).integer;
-  }
-
-  static final _id_values = HashMap._class.instanceMethodId(
-    r'values',
-    r'()Ljava/util/Collection;',
-  );
-
-  static final _values =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public java.util.Collection<V> values()`
-  /// The returned object must be released after use, by calling the [release] method.
-  Collection? values() {
-    final _$$selfRef = reference;
-    return _values(
-      _$$selfRef.pointer,
-      _id_values.pointer,
-    ).object<Collection?>();
-  }
-}
-
-final class $HashMap$Type$ extends jni$_.JType<HashMap> {
-  @jni$_.internal
-  const $HashMap$Type$();
-
-  @jni$_.internal
-  @core$_.override
-  String get signature => r'Ljava/util/HashMap;';
-}
-
 /// from: `io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding$OnSaveInstanceStateListener`
 extension type ActivityPluginBinding$OnSaveInstanceStateListener._(
   jni$_.JObject _$this
-) implements jni$_.JObject {
+)
+    implements jni$_.JObject {
   static final _class = jni$_.JClass.forName(
     r'io/flutter/embedding/engine/plugins/activity/ActivityPluginBinding$OnSaveInstanceStateListener',
   );
@@ -32299,6 +31350,7 @@ extension type ActivityPluginBinding$OnSaveInstanceStateListener._(
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -32604,6 +31656,7 @@ extension type ActivityPluginBinding._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -33597,6 +32650,7 @@ extension type PluginRegistry$ActivityResultListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -33757,6 +32811,7 @@ extension type PluginRegistry$NewIntentListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -33848,7 +32903,8 @@ final class $PluginRegistry$NewIntentListener$Type$
 /// from: `io.flutter.plugin.common.PluginRegistry$RequestPermissionsResultListener`
 extension type PluginRegistry$RequestPermissionsResultListener._(
   jni$_.JObject _$this
-) implements jni$_.JObject {
+)
+    implements jni$_.JObject {
   static final _class = jni$_.JClass.forName(
     r'io/flutter/plugin/common/PluginRegistry$RequestPermissionsResultListener',
   );
@@ -33915,6 +32971,7 @@ extension type PluginRegistry$RequestPermissionsResultListener._(
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -34106,6 +33163,7 @@ extension type PluginRegistry$UserLeaveHintListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -34258,6 +33316,7 @@ extension type PluginRegistry$WindowFocusChangedListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -34407,6 +33466,7 @@ extension type PluginRegistry._(jni$_.JObject _$this) implements jni$_.JObject {
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -34523,6 +33583,7 @@ extension type PlatformView._(jni$_.JObject _$this) implements jni$_.JObject {
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -35000,19 +34061,74 @@ extension type MapLibre._(jni$_.JObject _$this) implements jni$_.JObject {
   static MapLibre getInstance$1(
     Context context,
     jni$_.JString? string,
-    WellKnownTileServer? wellKnownTileServer,
+    WellKnownTileServer wellKnownTileServer,
   ) {
     final _$$classRef = _class.reference;
     final _$context = context.reference;
     final _$string = string?.reference ?? jni$_.jNullReference;
-    final _$wellKnownTileServer =
-        wellKnownTileServer?.reference ?? jni$_.jNullReference;
+    final _$wellKnownTileServer = wellKnownTileServer.reference;
     return _getInstance$1(
       _$$classRef.pointer,
       _id_getInstance$1.pointer,
       _$context.pointer,
       _$string.pointer,
       _$wellKnownTileServer.pointer,
+    ).object<MapLibre>();
+  }
+
+  static final _id_getInstance$2 = _class.staticMethodId(
+    r'getInstance',
+    r'(Landroid/content/Context;Ljava/lang/String;Lorg/maplibre/android/WellKnownTileServer;Lorg/maplibre/android/RenderingEngine$Type;)Lorg/maplibre/android/MapLibre;',
+  );
+
+  static final _getInstance$2 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `static public org.maplibre.android.MapLibre getInstance(android.content.Context context, java.lang.String string, org.maplibre.android.WellKnownTileServer wellKnownTileServer, org.maplibre.android.RenderingEngine$Type type)`
+  /// The returned object must be released after use, by calling the [release] method.
+  static MapLibre getInstance$2(
+    Context context,
+    jni$_.JString? string,
+    WellKnownTileServer wellKnownTileServer,
+    RenderingEngine$$Type? type,
+  ) {
+    final _$$classRef = _class.reference;
+    final _$context = context.reference;
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$wellKnownTileServer = wellKnownTileServer.reference;
+    final _$type = type?.reference ?? jni$_.jNullReference;
+    return _getInstance$2(
+      _$$classRef.pointer,
+      _id_getInstance$2.pointer,
+      _$context.pointer,
+      _$string.pointer,
+      _$wellKnownTileServer.pointer,
+      _$type.pointer,
     ).object<MapLibre>();
   }
 
@@ -36523,6 +35639,7 @@ extension type CameraUpdate._(jni$_.JObject _$this) implements jni$_.JObject {
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -37492,6 +36609,7 @@ extension type CameraUpdateFactory$ZoomUpdate$Type._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -42939,6 +42057,7 @@ extension type PermissionsListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -43441,6 +42560,7 @@ extension type CameraMode$Mode._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -43574,6 +42694,7 @@ extension type RenderMode$Mode._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -45891,7 +45012,8 @@ final class $LocationComponent$Type$ extends jni$_.JType<LocationComponent> {
 /// from: `org.maplibre.android.location.LocationComponentActivationOptions$Builder`
 extension type LocationComponentActivationOptions$Builder._(
   jni$_.JObject _$this
-) implements jni$_.JObject {
+)
+    implements jni$_.JObject {
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/location/LocationComponentActivationOptions$Builder',
   );
@@ -47382,6 +46504,7 @@ extension LocationComponentOptions$Builder$$Methods
 
   /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder padding(int[] is)`
   /// The returned object must be released after use, by calling the [release] method.
+  @core$_.Deprecated('This Java method is deprecated.')
   LocationComponentOptions$Builder padding(jni$_.JIntArray? is$) {
     final _$$selfRef = reference;
     final _$is$ = is$?.reference ?? jni$_.jNullReference;
@@ -47679,6 +46802,41 @@ extension LocationComponentOptions$Builder$$Methods
       _$$selfRef.pointer,
       _id_layerBelow.pointer,
       _$string.pointer,
+    ).object<LocationComponentOptions$Builder>();
+  }
+
+  static final _id_bearingOnTop = LocationComponentOptions$Builder._class
+      .instanceMethodId(
+        r'bearingOnTop',
+        r'(Z)Lorg/maplibre/android/location/LocationComponentOptions$Builder;',
+      );
+
+  static final _bearingOnTop =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              core$_.int,
+            )
+          >();
+
+  /// from: `public org.maplibre.android.location.LocationComponentOptions$Builder bearingOnTop(boolean z)`
+  /// The returned object must be released after use, by calling the [release] method.
+  LocationComponentOptions$Builder bearingOnTop(core$_.bool z) {
+    final _$$selfRef = reference;
+    return _bearingOnTop(
+      _$$selfRef.pointer,
+      _id_bearingOnTop.pointer,
+      z ? 1 : 0,
     ).object<LocationComponentOptions$Builder>();
   }
 
@@ -48079,7 +47237,7 @@ extension type LocationComponentOptions._(jni$_.JObject _$this)
           as Parcelable$$Creator?;
 
   static final _id_new$ = _class.constructorId(
-    r'(FIILjava/lang/String;ILjava/lang/String;ILjava/lang/String;ILjava/lang/String;ILjava/lang/String;ILjava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;FZJ[IFFZFFLandroid/graphics/RectF;Ljava/lang/String;Ljava/lang/String;FZZLjava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;FFFLandroid/view/animation/Interpolator;)V',
+    r'(FIILjava/lang/String;ILjava/lang/String;ILjava/lang/String;ILjava/lang/String;ILjava/lang/String;ILjava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;FZJ[IFFZFFLandroid/graphics/RectF;Ljava/lang/String;Ljava/lang/String;ZFZZLjava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;FFFLandroid/view/animation/Interpolator;)V',
   );
 
   static final _new$ =
@@ -48121,6 +47279,7 @@ extension type LocationComponentOptions._(jni$_.JObject _$this)
                     jni$_.Pointer<jni$_.Void>,
                     jni$_.Pointer<jni$_.Void>,
                     jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
                     jni$_.Double,
                     jni$_.Int32,
                     jni$_.Int32,
@@ -48171,6 +47330,7 @@ extension type LocationComponentOptions._(jni$_.JObject _$this)
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
               jni$_.Pointer<jni$_.Void>,
+              core$_.int,
               core$_.double,
               core$_.int,
               core$_.int,
@@ -48184,7 +47344,7 @@ extension type LocationComponentOptions._(jni$_.JObject _$this)
             )
           >();
 
-  /// from: `public void <init>(float f, int i, int i1, java.lang.String string, int i2, java.lang.String string1, int i3, java.lang.String string2, int i4, java.lang.String string3, int i5, java.lang.String string4, int i6, java.lang.String string5, java.lang.Integer integer, java.lang.Integer integer1, java.lang.Integer integer2, java.lang.Integer integer3, java.lang.Integer integer4, float f1, boolean z, long j, int[] is, float f2, float f3, boolean z1, float f4, float f5, android.graphics.RectF rectF, java.lang.String string6, java.lang.String string7, float f6, boolean z2, boolean z3, java.lang.Boolean boolean, java.lang.Boolean boolean1, java.lang.Integer integer5, float f7, float f8, float f9, android.view.animation.Interpolator interpolator)`
+  /// from: `public void <init>(float f, int i, int i1, java.lang.String string, int i2, java.lang.String string1, int i3, java.lang.String string2, int i4, java.lang.String string3, int i5, java.lang.String string4, int i6, java.lang.String string5, java.lang.Integer integer, java.lang.Integer integer1, java.lang.Integer integer2, java.lang.Integer integer3, java.lang.Integer integer4, float f1, boolean z, long j, int[] is, float f2, float f3, boolean z1, float f4, float f5, android.graphics.RectF rectF, java.lang.String string6, java.lang.String string7, boolean z2, float f6, boolean z3, boolean z4, java.lang.Boolean boolean, java.lang.Boolean boolean1, java.lang.Integer integer5, float f7, float f8, float f9, android.view.animation.Interpolator interpolator)`
   /// The returned object must be released after use, by calling the [release] method.
   factory LocationComponentOptions(
     core$_.double f,
@@ -48218,9 +47378,10 @@ extension type LocationComponentOptions._(jni$_.JObject _$this)
     RectF? rectF,
     jni$_.JString? string6,
     jni$_.JString? string7,
-    core$_.double f6,
     core$_.bool z2,
+    core$_.double f6,
     core$_.bool z3,
+    core$_.bool z4,
     jni$_.JBoolean? boolean,
     jni$_.JBoolean? boolean1,
     jni$_.JInteger? integer5,
@@ -48283,9 +47444,10 @@ extension type LocationComponentOptions._(jni$_.JObject _$this)
       _$rectF.pointer,
       _$string6.pointer,
       _$string7.pointer,
-      f6,
       z2 ? 1 : 0,
+      f6,
       z3 ? 1 : 0,
+      z4 ? 1 : 0,
       _$boolean.pointer,
       _$boolean1.pointer,
       _$integer5.pointer,
@@ -49289,6 +48451,31 @@ extension LocationComponentOptions$$Methods on LocationComponentOptions {
     ).object<jni$_.JString?>();
   }
 
+  static final _id_bearingOnTop = LocationComponentOptions._class
+      .instanceMethodId(r'bearingOnTop', r'()Z');
+
+  static final _bearingOnTop =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public boolean bearingOnTop()`
+  core$_.bool bearingOnTop() {
+    final _$$selfRef = reference;
+    return _bearingOnTop(_$$selfRef.pointer, _id_bearingOnTop.pointer).boolean;
+  }
+
   static final _id_trackingAnimationDurationMultiplier =
       LocationComponentOptions._class.instanceMethodId(
         r'trackingAnimationDurationMultiplier',
@@ -49794,6 +48981,7 @@ extension type Logger$LogLevel._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -50666,6 +49854,7 @@ extension type FocalPointChangeListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -51361,6 +50550,7 @@ extension type MapFragment$OnMapViewReadyCallback._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -52099,6 +51289,7 @@ extension type MapLibreMap$CancelableCallback._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -52292,6 +51483,7 @@ extension type MapLibreMap$InfoWindowAdapter._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -52446,6 +51638,7 @@ extension type MapLibreMap$OnCameraIdleListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -52593,6 +51786,7 @@ extension type MapLibreMap$OnCameraMoveCanceledListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -52746,6 +51940,7 @@ extension type MapLibreMap$OnCameraMoveListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -52904,6 +52099,7 @@ extension type MapLibreMap$OnCameraMoveStartedListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -53062,6 +52258,7 @@ extension type MapLibreMap$OnCompassAnimationListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -53261,6 +52458,7 @@ extension type MapLibreMap$OnDeveloperAnimationListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -53417,6 +52615,7 @@ extension type MapLibreMap$OnFlingListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -53564,6 +52763,7 @@ extension type MapLibreMap$OnFpsChangedListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -53714,6 +52914,7 @@ extension type MapLibreMap$OnInfoWindowClickListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -53869,6 +53070,7 @@ extension type MapLibreMap$OnInfoWindowCloseListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -54034,6 +53236,7 @@ extension type MapLibreMap$OnInfoWindowLongClickListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -54194,6 +53397,7 @@ extension type MapLibreMap$OnMapClickListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -54347,6 +53551,7 @@ extension type MapLibreMap$OnMapLongClickListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -54500,6 +53705,7 @@ extension type MapLibreMap$OnMarkerClickListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -54663,6 +53869,7 @@ extension type MapLibreMap$OnMoveListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -54921,6 +54128,7 @@ extension type MapLibreMap$OnPolygonClickListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -55082,6 +54290,7 @@ extension type MapLibreMap$OnPolylineClickListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -55253,6 +54462,7 @@ extension type MapLibreMap$OnRotateListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -55530,6 +54740,7 @@ extension type MapLibreMap$OnScaleListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -55823,6 +55034,7 @@ extension type MapLibreMap$OnShoveListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -56085,6 +55297,7 @@ extension type MapLibreMap$SnapshotReadyCallback._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -56433,6 +55646,7 @@ extension MapLibreMap$$Methods on MapLibreMap {
           >();
 
   /// from: `public void setPrefetchesTiles(boolean z)`
+  @core$_.Deprecated('This Java method is deprecated.')
   set prefetchesTiles(core$_.bool z) {
     final _$$selfRef = reference;
     _set$prefetchesTiles(
@@ -56464,6 +55678,7 @@ extension MapLibreMap$$Methods on MapLibreMap {
           >();
 
   /// from: `public boolean getPrefetchesTiles()`
+  @core$_.Deprecated('This Java method is deprecated.')
   core$_.bool get prefetchesTiles {
     final _$$selfRef = reference;
     return _get$prefetchesTiles(
@@ -58169,6 +57384,7 @@ extension MapLibreMap$$Methods on MapLibreMap {
           >();
 
   /// from: `public void cycleDebugOptions()`
+  @core$_.Deprecated('This Java method is deprecated.')
   void cycleDebugOptions() {
     final _$$selfRef = reference;
     _cycleDebugOptions(
@@ -58438,6 +57654,7 @@ extension MapLibreMap$$Methods on MapLibreMap {
 
   /// from: `public org.maplibre.android.annotations.Marker addMarker(org.maplibre.android.annotations.MarkerOptions markerOptions)`
   /// The returned object must be released after use, by calling the [release] method.
+  @core$_.Deprecated('This Java method is deprecated.')
   Marker addMarker(MarkerOptions markerOptions) {
     final _$$selfRef = reference;
     final _$markerOptions = markerOptions.reference;
@@ -58473,6 +57690,7 @@ extension MapLibreMap$$Methods on MapLibreMap {
 
   /// from: `public org.maplibre.android.annotations.Marker addMarker(org.maplibre.android.annotations.BaseMarkerOptions baseMarkerOptions)`
   /// The returned object must be released after use, by calling the [release] method.
+  @core$_.Deprecated('This Java method is deprecated.')
   Marker addMarker$1(BaseMarkerOptions baseMarkerOptions) {
     final _$$selfRef = reference;
     final _$baseMarkerOptions = baseMarkerOptions.reference;
@@ -58508,6 +57726,7 @@ extension MapLibreMap$$Methods on MapLibreMap {
 
   /// from: `public java.util.List<org.maplibre.android.annotations.Marker> addMarkers(java.util.List<? extends org.maplibre.android.annotations.BaseMarkerOptions> list)`
   /// The returned object must be released after use, by calling the [release] method.
+  @core$_.Deprecated('This Java method is deprecated.')
   jni$_.JList<Marker?> addMarkers(jni$_.JList<BaseMarkerOptions?> list) {
     final _$$selfRef = reference;
     final _$list = list.reference;
@@ -58542,6 +57761,7 @@ extension MapLibreMap$$Methods on MapLibreMap {
           >();
 
   /// from: `public void updateMarker(org.maplibre.android.annotations.Marker marker)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void updateMarker(Marker marker) {
     final _$$selfRef = reference;
     final _$marker = marker.reference;
@@ -58577,6 +57797,7 @@ extension MapLibreMap$$Methods on MapLibreMap {
 
   /// from: `public org.maplibre.android.annotations.Polyline addPolyline(org.maplibre.android.annotations.PolylineOptions polylineOptions)`
   /// The returned object must be released after use, by calling the [release] method.
+  @core$_.Deprecated('This Java method is deprecated.')
   Polyline addPolyline(PolylineOptions polylineOptions) {
     final _$$selfRef = reference;
     final _$polylineOptions = polylineOptions.reference;
@@ -58612,6 +57833,7 @@ extension MapLibreMap$$Methods on MapLibreMap {
 
   /// from: `public java.util.List<org.maplibre.android.annotations.Polyline> addPolylines(java.util.List<org.maplibre.android.annotations.PolylineOptions> list)`
   /// The returned object must be released after use, by calling the [release] method.
+  @core$_.Deprecated('This Java method is deprecated.')
   jni$_.JList<Polyline?> addPolylines(jni$_.JList<PolylineOptions?> list) {
     final _$$selfRef = reference;
     final _$list = list.reference;
@@ -58646,6 +57868,7 @@ extension MapLibreMap$$Methods on MapLibreMap {
           >();
 
   /// from: `public void updatePolyline(org.maplibre.android.annotations.Polyline polyline)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void updatePolyline(Polyline polyline) {
     final _$$selfRef = reference;
     final _$polyline = polyline.reference;
@@ -58681,6 +57904,7 @@ extension MapLibreMap$$Methods on MapLibreMap {
 
   /// from: `public org.maplibre.android.annotations.Polygon addPolygon(org.maplibre.android.annotations.PolygonOptions polygonOptions)`
   /// The returned object must be released after use, by calling the [release] method.
+  @core$_.Deprecated('This Java method is deprecated.')
   Polygon addPolygon(PolygonOptions polygonOptions) {
     final _$$selfRef = reference;
     final _$polygonOptions = polygonOptions.reference;
@@ -58716,6 +57940,7 @@ extension MapLibreMap$$Methods on MapLibreMap {
 
   /// from: `public java.util.List<org.maplibre.android.annotations.Polygon> addPolygons(java.util.List<org.maplibre.android.annotations.PolygonOptions> list)`
   /// The returned object must be released after use, by calling the [release] method.
+  @core$_.Deprecated('This Java method is deprecated.')
   jni$_.JList<Polygon?> addPolygons(jni$_.JList<PolygonOptions?> list) {
     final _$$selfRef = reference;
     final _$list = list.reference;
@@ -58750,6 +57975,7 @@ extension MapLibreMap$$Methods on MapLibreMap {
           >();
 
   /// from: `public void updatePolygon(org.maplibre.android.annotations.Polygon polygon)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void updatePolygon(Polygon polygon) {
     final _$$selfRef = reference;
     final _$polygon = polygon.reference;
@@ -58784,6 +58010,7 @@ extension MapLibreMap$$Methods on MapLibreMap {
           >();
 
   /// from: `public void removeMarker(org.maplibre.android.annotations.Marker marker)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void removeMarker(Marker marker) {
     final _$$selfRef = reference;
     final _$marker = marker.reference;
@@ -58818,6 +58045,7 @@ extension MapLibreMap$$Methods on MapLibreMap {
           >();
 
   /// from: `public void removePolyline(org.maplibre.android.annotations.Polyline polyline)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void removePolyline(Polyline polyline) {
     final _$$selfRef = reference;
     final _$polyline = polyline.reference;
@@ -58852,6 +58080,7 @@ extension MapLibreMap$$Methods on MapLibreMap {
           >();
 
   /// from: `public void removePolygon(org.maplibre.android.annotations.Polygon polygon)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void removePolygon(Polygon polygon) {
     final _$$selfRef = reference;
     final _$polygon = polygon.reference;
@@ -58886,6 +58115,7 @@ extension MapLibreMap$$Methods on MapLibreMap {
           >();
 
   /// from: `public void removeAnnotation(org.maplibre.android.annotations.Annotation annotation)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void removeAnnotation(Annotation$1 annotation) {
     final _$$selfRef = reference;
     final _$annotation = annotation.reference;
@@ -58920,6 +58150,7 @@ extension MapLibreMap$$Methods on MapLibreMap {
           >();
 
   /// from: `public void removeAnnotation(long j)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void removeAnnotation$1(core$_.int j) {
     final _$$selfRef = reference;
     _removeAnnotation$1(
@@ -58953,6 +58184,7 @@ extension MapLibreMap$$Methods on MapLibreMap {
           >();
 
   /// from: `public void removeAnnotations(java.util.List<? extends org.maplibre.android.annotations.Annotation> list)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void removeAnnotations(jni$_.JList<Annotation$1?> list) {
     final _$$selfRef = reference;
     final _$list = list.reference;
@@ -58985,6 +58217,7 @@ extension MapLibreMap$$Methods on MapLibreMap {
           >();
 
   /// from: `public void removeAnnotations()`
+  @core$_.Deprecated('This Java method is deprecated.')
   void removeAnnotations$1() {
     final _$$selfRef = reference;
     _removeAnnotations$1(
@@ -59015,6 +58248,7 @@ extension MapLibreMap$$Methods on MapLibreMap {
           >();
 
   /// from: `public void clear()`
+  @core$_.Deprecated('This Java method is deprecated.')
   void clear() {
     final _$$selfRef = reference;
     _clear(_$$selfRef.pointer, _id_clear.pointer).check();
@@ -59045,6 +58279,7 @@ extension MapLibreMap$$Methods on MapLibreMap {
 
   /// from: `public org.maplibre.android.annotations.Annotation getAnnotation(long j)`
   /// The returned object must be released after use, by calling the [release] method.
+  @core$_.Deprecated('This Java method is deprecated.')
   Annotation$1? getAnnotation(core$_.int j) {
     final _$$selfRef = reference;
     return _getAnnotation(
@@ -59077,6 +58312,7 @@ extension MapLibreMap$$Methods on MapLibreMap {
 
   /// from: `public java.util.List<org.maplibre.android.annotations.Annotation> getAnnotations()`
   /// The returned object must be released after use, by calling the [release] method.
+  @core$_.Deprecated('This Java method is deprecated.')
   jni$_.JList<Annotation$1?> get annotations {
     final _$$selfRef = reference;
     return _get$annotations(
@@ -59108,6 +58344,7 @@ extension MapLibreMap$$Methods on MapLibreMap {
 
   /// from: `public java.util.List<org.maplibre.android.annotations.Marker> getMarkers()`
   /// The returned object must be released after use, by calling the [release] method.
+  @core$_.Deprecated('This Java method is deprecated.')
   jni$_.JList<Marker?> get markers {
     final _$$selfRef = reference;
     return _get$markers(
@@ -59139,6 +58376,7 @@ extension MapLibreMap$$Methods on MapLibreMap {
 
   /// from: `public java.util.List<org.maplibre.android.annotations.Polygon> getPolygons()`
   /// The returned object must be released after use, by calling the [release] method.
+  @core$_.Deprecated('This Java method is deprecated.')
   jni$_.JList<Polygon?> get polygons {
     final _$$selfRef = reference;
     return _get$polygons(
@@ -59170,6 +58408,7 @@ extension MapLibreMap$$Methods on MapLibreMap {
 
   /// from: `public java.util.List<org.maplibre.android.annotations.Polyline> getPolylines()`
   /// The returned object must be released after use, by calling the [release] method.
+  @core$_.Deprecated('This Java method is deprecated.')
   jni$_.JList<Polyline?> get polylines {
     final _$$selfRef = reference;
     return _get$polylines(
@@ -59203,6 +58442,7 @@ extension MapLibreMap$$Methods on MapLibreMap {
           >();
 
   /// from: `public void setOnMarkerClickListener(org.maplibre.android.maps.MapLibreMap$OnMarkerClickListener onMarkerClickListener)`
+  @core$_.Deprecated('This Java method is deprecated.')
   set onMarkerClickListener(
     MapLibreMap$OnMarkerClickListener? onMarkerClickListener,
   ) {
@@ -59241,6 +58481,7 @@ extension MapLibreMap$$Methods on MapLibreMap {
           >();
 
   /// from: `public void setOnPolygonClickListener(org.maplibre.android.maps.MapLibreMap$OnPolygonClickListener onPolygonClickListener)`
+  @core$_.Deprecated('This Java method is deprecated.')
   set onPolygonClickListener(
     MapLibreMap$OnPolygonClickListener? onPolygonClickListener,
   ) {
@@ -59279,6 +58520,7 @@ extension MapLibreMap$$Methods on MapLibreMap {
           >();
 
   /// from: `public void setOnPolylineClickListener(org.maplibre.android.maps.MapLibreMap$OnPolylineClickListener onPolylineClickListener)`
+  @core$_.Deprecated('This Java method is deprecated.')
   set onPolylineClickListener(
     MapLibreMap$OnPolylineClickListener? onPolylineClickListener,
   ) {
@@ -59316,6 +58558,7 @@ extension MapLibreMap$$Methods on MapLibreMap {
           >();
 
   /// from: `public void selectMarker(org.maplibre.android.annotations.Marker marker)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void selectMarker(Marker marker) {
     final _$$selfRef = reference;
     final _$marker = marker.reference;
@@ -59348,6 +58591,7 @@ extension MapLibreMap$$Methods on MapLibreMap {
           >();
 
   /// from: `public void deselectMarkers()`
+  @core$_.Deprecated('This Java method is deprecated.')
   void deselectMarkers() {
     final _$$selfRef = reference;
     _deselectMarkers(_$$selfRef.pointer, _id_deselectMarkers.pointer).check();
@@ -59377,6 +58621,7 @@ extension MapLibreMap$$Methods on MapLibreMap {
           >();
 
   /// from: `public void deselectMarker(org.maplibre.android.annotations.Marker marker)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void deselectMarker(Marker marker) {
     final _$$selfRef = reference;
     final _$marker = marker.reference;
@@ -59410,6 +58655,7 @@ extension MapLibreMap$$Methods on MapLibreMap {
 
   /// from: `public java.util.List<org.maplibre.android.annotations.Marker> getSelectedMarkers()`
   /// The returned object must be released after use, by calling the [release] method.
+  @core$_.Deprecated('This Java method is deprecated.')
   jni$_.JList<Marker?> get selectedMarkers {
     final _$$selfRef = reference;
     return _get$selectedMarkers(
@@ -59442,6 +58688,7 @@ extension MapLibreMap$$Methods on MapLibreMap {
           >();
 
   /// from: `public void setInfoWindowAdapter(org.maplibre.android.maps.MapLibreMap$InfoWindowAdapter infoWindowAdapter)`
+  @core$_.Deprecated('This Java method is deprecated.')
   set infoWindowAdapter(MapLibreMap$InfoWindowAdapter? infoWindowAdapter) {
     final _$$selfRef = reference;
     final _$infoWindowAdapter =
@@ -59476,6 +58723,7 @@ extension MapLibreMap$$Methods on MapLibreMap {
 
   /// from: `public org.maplibre.android.maps.MapLibreMap$InfoWindowAdapter getInfoWindowAdapter()`
   /// The returned object must be released after use, by calling the [release] method.
+  @core$_.Deprecated('This Java method is deprecated.')
   MapLibreMap$InfoWindowAdapter? get infoWindowAdapter {
     final _$$selfRef = reference;
     return _get$infoWindowAdapter(
@@ -59507,6 +58755,7 @@ extension MapLibreMap$$Methods on MapLibreMap {
           >();
 
   /// from: `public void setAllowConcurrentMultipleOpenInfoWindows(boolean z)`
+  @core$_.Deprecated('This Java method is deprecated.')
   set allowConcurrentMultipleOpenInfoWindows(core$_.bool z) {
     final _$$selfRef = reference;
     _set$allowConcurrentMultipleOpenInfoWindows(
@@ -59537,6 +58786,7 @@ extension MapLibreMap$$Methods on MapLibreMap {
           >();
 
   /// from: `public boolean isAllowConcurrentMultipleOpenInfoWindows()`
+  @core$_.Deprecated('This Java method is deprecated.')
   core$_.bool get isAllowConcurrentMultipleOpenInfoWindows {
     final _$$selfRef = reference;
     return _get$isAllowConcurrentMultipleOpenInfoWindows(
@@ -59963,6 +59213,7 @@ extension MapLibreMap$$Methods on MapLibreMap {
           >();
 
   /// from: `public void setPadding(int i, int i1, int i2, int i3)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void setPadding(core$_.int i, core$_.int i1, core$_.int i2, core$_.int i3) {
     final _$$selfRef = reference;
     _setPadding(
@@ -59998,6 +59249,7 @@ extension MapLibreMap$$Methods on MapLibreMap {
 
   /// from: `public int[] getPadding()`
   /// The returned object must be released after use, by calling the [release] method.
+  @core$_.Deprecated('This Java method is deprecated.')
   jni$_.JIntArray get padding {
     final _$$selfRef = reference;
     return _get$padding(
@@ -61560,6 +60812,7 @@ extension MapLibreMapOptions$$Methods on MapLibreMapOptions {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions apiBaseUrl(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
+  @core$_.Deprecated('This Java method is deprecated.')
   MapLibreMapOptions apiBaseUrl(jni$_.JString? string) {
     final _$$selfRef = reference;
     final _$string = string?.reference ?? jni$_.jNullReference;
@@ -62606,6 +61859,7 @@ extension MapLibreMapOptions$$Methods on MapLibreMapOptions {
 
   /// from: `public org.maplibre.android.maps.MapLibreMapOptions setPrefetchesTiles(boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
+  @core$_.Deprecated('This Java method is deprecated.')
   MapLibreMapOptions setPrefetchesTiles(core$_.bool z) {
     final _$$selfRef = reference;
     return _setPrefetchesTiles(
@@ -62897,6 +62151,40 @@ extension MapLibreMapOptions$$Methods on MapLibreMapOptions {
     ).object<MapLibreMapOptions>();
   }
 
+  static final _id_fastPFOREnabled = MapLibreMapOptions._class.instanceMethodId(
+    r'fastPFOREnabled',
+    r'(Z)Lorg/maplibre/android/maps/MapLibreMapOptions;',
+  );
+
+  static final _fastPFOREnabled =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              core$_.int,
+            )
+          >();
+
+  /// from: `public org.maplibre.android.maps.MapLibreMapOptions fastPFOREnabled(boolean z)`
+  /// The returned object must be released after use, by calling the [release] method.
+  MapLibreMapOptions fastPFOREnabled(core$_.bool z) {
+    final _$$selfRef = reference;
+    return _fastPFOREnabled(
+      _$$selfRef.pointer,
+      _id_fastPFOREnabled.pointer,
+      z ? 1 : 0,
+    ).object<MapLibreMapOptions>();
+  }
+
   static final _id_localIdeographFontFamilyEnabled = MapLibreMapOptions._class
       .instanceMethodId(
         r'localIdeographFontFamilyEnabled',
@@ -63060,6 +62348,7 @@ extension MapLibreMapOptions$$Methods on MapLibreMapOptions {
           >();
 
   /// from: `public boolean getPrefetchesTiles()`
+  @core$_.Deprecated('This Java method is deprecated.')
   core$_.bool get prefetchesTiles {
     final _$$selfRef = reference;
     return _get$prefetchesTiles(
@@ -63296,6 +62585,34 @@ extension MapLibreMapOptions$$Methods on MapLibreMapOptions {
     ).boolean;
   }
 
+  static final _id_get$fastPFOREnabled$1 = MapLibreMapOptions._class
+      .instanceMethodId(r'getFastPFOREnabled', r'()Z');
+
+  static final _get$fastPFOREnabled$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public boolean getFastPFOREnabled()`
+  core$_.bool get fastPFOREnabled$1 {
+    final _$$selfRef = reference;
+    return _get$fastPFOREnabled$1(
+      _$$selfRef.pointer,
+      _id_get$fastPFOREnabled$1.pointer,
+    ).boolean;
+  }
+
   static final _id_renderSurfaceOnTop = MapLibreMapOptions._class
       .instanceMethodId(r'renderSurfaceOnTop', r'(Z)V');
 
@@ -63376,6 +62693,7 @@ extension MapLibreMapOptions$$Methods on MapLibreMapOptions {
 
   /// from: `public java.lang.String getApiBaseUrl()`
   /// The returned object must be released after use, by calling the [release] method.
+  @core$_.Deprecated('This Java method is deprecated.')
   jni$_.JString? get apiBaseUrl$1 {
     final _$$selfRef = reference;
     return _get$apiBaseUrl$1(
@@ -64496,6 +63814,7 @@ extension type MapView$OnCameraDidChangeListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -64649,6 +63968,7 @@ extension type MapView$OnCameraIsChangingListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -64802,6 +64122,7 @@ extension type MapView$OnCameraWillChangeListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -64897,7 +64218,8 @@ final class $MapView$OnCameraWillChangeListener$Type$
 /// from: `org.maplibre.android.maps.MapView$OnCanRemoveUnusedStyleImageListener`
 extension type MapView$OnCanRemoveUnusedStyleImageListener._(
   jni$_.JObject _$this
-) implements jni$_.JObject {
+)
+    implements jni$_.JObject {
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/maps/MapView$OnCanRemoveUnusedStyleImageListener',
   );
@@ -64962,6 +64284,7 @@ extension type MapView$OnCanRemoveUnusedStyleImageListener._(
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -65117,6 +64440,7 @@ extension type MapView$OnDidBecomeIdleListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -65264,6 +64588,7 @@ extension type MapView$OnDidFailLoadingMapListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -65422,6 +64747,7 @@ extension type MapView$OnDidFinishLoadingMapListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -65573,6 +64899,7 @@ extension type MapView$OnDidFinishLoadingStyleListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -65733,6 +65060,7 @@ extension type MapView$OnDidFinishRenderingFrameListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -65852,7 +65180,8 @@ final class $MapView$OnDidFinishRenderingFrameListener$Type$
 /// from: `org.maplibre.android.maps.MapView$OnDidFinishRenderingFrameWithStatsListener`
 extension type MapView$OnDidFinishRenderingFrameWithStatsListener._(
   jni$_.JObject _$this
-) implements jni$_.JObject {
+)
+    implements jni$_.JObject {
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/maps/MapView$OnDidFinishRenderingFrameWithStatsListener',
   );
@@ -65919,6 +65248,7 @@ extension type MapView$OnDidFinishRenderingFrameWithStatsListener._(
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -66093,6 +65423,7 @@ extension type MapView$OnDidFinishRenderingMapListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -66253,6 +65584,7 @@ extension type MapView$OnGlyphsErrorListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -66444,6 +65776,7 @@ extension type MapView$OnGlyphsLoadedListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -66638,6 +65971,7 @@ extension type MapView$OnGlyphsRequestedListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -66832,6 +66166,7 @@ extension type MapView$OnPostCompileShaderListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -67003,6 +66338,7 @@ extension type MapView$OnPreCompileShaderListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -67170,6 +66506,7 @@ extension type MapView$OnRenderErrorListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -67321,6 +66658,7 @@ extension type MapView$OnShaderCompileFailedListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -67500,6 +66838,7 @@ extension type MapView$OnSourceChangedListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -67661,6 +67000,7 @@ extension type MapView$OnSpriteErrorListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -67832,6 +67172,7 @@ extension type MapView$OnSpriteLoadedListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -68003,6 +67344,7 @@ extension type MapView$OnSpriteRequestedListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -68171,6 +67513,7 @@ extension type MapView$OnStyleImageMissingListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -68267,6 +67610,161 @@ final class $MapView$OnStyleImageMissingListener$Type$
       r'Lorg/maplibre/android/maps/MapView$OnStyleImageMissingListener;';
 }
 
+/// from: `org.maplibre.android.maps.MapView$OnSymbolErrorListener`
+extension type MapView$OnSymbolErrorListener._(jni$_.JObject _$this)
+    implements jni$_.JObject {
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/maps/MapView$OnSymbolErrorListener',
+  );
+
+  /// The type which includes information such as the signature of this class.
+  static const jni$_.JType<MapView$OnSymbolErrorListener> type =
+      $MapView$OnSymbolErrorListener$Type$();
+
+  /// Maps a specific port to the implemented interface.
+  static final core$_.Map<core$_.int, $MapView$OnSymbolErrorListener> _$impls =
+      {};
+  static jni$_.JObjectPtr _$invoke(
+    core$_.int port,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+    );
+  }
+
+  static final jni$_.Pointer<
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
+    core$_.int $p,
+    jni$_.MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onSymbolError(Ljava/lang/String;)V') {
+        _$impls[$p]!.onSymbolError(($a![0] as jni$_.JString));
+        return jni$_.nullptr;
+      }
+    } catch (e) {
+      return jni$_.ProtectedJniExtensions.newDartException(e);
+    }
+    return jni$_.nullptr;
+  }
+
+  static void implementIn(
+    jni$_.JImplementer implementer,
+    $MapView$OnSymbolErrorListener $impl,
+  ) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = jni$_.MethodInvocation.fromMessage($m);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    implementer.add(
+      r'org.maplibre.android.maps.MapView$OnSymbolErrorListener',
+      $p,
+      _$invokePointer,
+      [if ($impl.onSymbolError$async) r'onSymbolError(Ljava/lang/String;)V'],
+    );
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+  }
+
+  factory MapView$OnSymbolErrorListener.implement(
+    $MapView$OnSymbolErrorListener $impl,
+  ) {
+    final $i = jni$_.JImplementer();
+    implementIn($i, $impl);
+    return $i.implement<MapView$OnSymbolErrorListener>();
+  }
+}
+
+extension MapView$OnSymbolErrorListener$$Methods
+    on MapView$OnSymbolErrorListener {
+  static final _id_onSymbolError = MapView$OnSymbolErrorListener._class
+      .instanceMethodId(r'onSymbolError', r'(Ljava/lang/String;)V');
+
+  static final _onSymbolError =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public abstract void onSymbolError(java.lang.String string)`
+  void onSymbolError(jni$_.JString string) {
+    final _$$selfRef = reference;
+    final _$string = string.reference;
+    _onSymbolError(
+      _$$selfRef.pointer,
+      _id_onSymbolError.pointer,
+      _$string.pointer,
+    ).check();
+  }
+}
+
+abstract base mixin class $MapView$OnSymbolErrorListener {
+  factory $MapView$OnSymbolErrorListener({
+    required void Function(jni$_.JString string) onSymbolError,
+    core$_.bool onSymbolError$async,
+  }) = _$MapView$OnSymbolErrorListener;
+
+  void onSymbolError(jni$_.JString string);
+  core$_.bool get onSymbolError$async => false;
+}
+
+final class _$MapView$OnSymbolErrorListener
+    with $MapView$OnSymbolErrorListener {
+  _$MapView$OnSymbolErrorListener({
+    required void Function(jni$_.JString string) onSymbolError,
+    this.onSymbolError$async = false,
+  }) : _onSymbolError = onSymbolError;
+
+  final void Function(jni$_.JString string) _onSymbolError;
+  final core$_.bool onSymbolError$async;
+
+  void onSymbolError(jni$_.JString string) {
+    return _onSymbolError(string);
+  }
+}
+
+final class $MapView$OnSymbolErrorListener$Type$
+    extends jni$_.JType<MapView$OnSymbolErrorListener> {
+  @jni$_.internal
+  const $MapView$OnSymbolErrorListener$Type$();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/maps/MapView$OnSymbolErrorListener;';
+}
+
 /// from: `org.maplibre.android.maps.MapView$OnTileActionListener`
 extension type MapView$OnTileActionListener._(jni$_.JObject _$this)
     implements jni$_.JObject {
@@ -68338,6 +67836,7 @@ extension type MapView$OnTileActionListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -68571,6 +68070,7 @@ extension type MapView$OnWillStartLoadingMapListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -68725,6 +68225,7 @@ extension type MapView$OnWillStartRenderingFrameListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -68881,6 +68382,7 @@ extension type MapView$OnWillStartRenderingMapListener._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -71902,6 +71404,81 @@ extension MapView$$Methods on MapView {
     ).check();
   }
 
+  static final _id_addOnSymbolErrorListener = MapView._class.instanceMethodId(
+    r'addOnSymbolErrorListener',
+    r'(Lorg/maplibre/android/maps/MapView$OnSymbolErrorListener;)V',
+  );
+
+  static final _addOnSymbolErrorListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public void addOnSymbolErrorListener(org.maplibre.android.maps.MapView$OnSymbolErrorListener onSymbolErrorListener)`
+  void addOnSymbolErrorListener(
+    MapView$OnSymbolErrorListener? onSymbolErrorListener,
+  ) {
+    final _$$selfRef = reference;
+    final _$onSymbolErrorListener =
+        onSymbolErrorListener?.reference ?? jni$_.jNullReference;
+    _addOnSymbolErrorListener(
+      _$$selfRef.pointer,
+      _id_addOnSymbolErrorListener.pointer,
+      _$onSymbolErrorListener.pointer,
+    ).check();
+  }
+
+  static final _id_removeOnSymbolErrorListener = MapView._class
+      .instanceMethodId(
+        r'removeOnSymbolErrorListener',
+        r'(Lorg/maplibre/android/maps/MapView$OnSymbolErrorListener;)V',
+      );
+
+  static final _removeOnSymbolErrorListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public void removeOnSymbolErrorListener(org.maplibre.android.maps.MapView$OnSymbolErrorListener onSymbolErrorListener)`
+  void removeOnSymbolErrorListener(
+    MapView$OnSymbolErrorListener? onSymbolErrorListener,
+  ) {
+    final _$$selfRef = reference;
+    final _$onSymbolErrorListener =
+        onSymbolErrorListener?.reference ?? jni$_.jNullReference;
+    _removeOnSymbolErrorListener(
+      _$$selfRef.pointer,
+      _id_removeOnSymbolErrorListener.pointer,
+      _$onSymbolErrorListener.pointer,
+    ).check();
+  }
+
   static final _id_getMapAsync = MapView._class.instanceMethodId(
     r'getMapAsync',
     r'(Lorg/maplibre/android/maps/OnMapReadyCallback;)V',
@@ -72251,6 +71828,36 @@ extension NativeMapOptions$$Methods on NativeMapOptions {
       _id_asyncRendererCleanup.pointer,
     ).boolean;
   }
+
+  static final _id_fastPFOREnabled = NativeMapOptions._class.instanceMethodId(
+    r'fastPFOREnabled',
+    r'()Z',
+  );
+
+  static final _fastPFOREnabled =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public boolean fastPFOREnabled()`
+  core$_.bool fastPFOREnabled() {
+    final _$$selfRef = reference;
+    return _fastPFOREnabled(
+      _$$selfRef.pointer,
+      _id_fastPFOREnabled.pointer,
+    ).boolean;
+  }
 }
 
 final class $NativeMapOptions$Type$ extends jni$_.JType<NativeMapOptions> {
@@ -72327,6 +71934,7 @@ extension type NativeMapView$ViewCallback._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -72470,6 +72078,7 @@ extension type OnMapReadyCallback._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -72592,6 +72201,7 @@ extension Projection$$Methods on Projection {
           >();
 
   /// from: `public void invalidateContentPadding()`
+  @core$_.Deprecated('This Java method is deprecated.')
   void invalidateContentPadding() {
     final _$$selfRef = reference;
     _invalidateContentPadding(
@@ -73590,7 +73200,7 @@ extension type Style$Builder$ImageWrapper._(jni$_.JObject _$this)
   /// from: `static public org.maplibre.android.maps.Style$Builder$ImageWrapper[] convertToImageArray(java.util.HashMap<java.lang.String, android.graphics.Bitmap> hashMap, boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JArray<Style$Builder$ImageWrapper?>? convertToImageArray(
-    HashMap<jni$_.JString?, Bitmap?>? hashMap,
+    jni$_.JHashMap<jni$_.JString?, Bitmap?>? hashMap,
     core$_.bool z,
   ) {
     final _$$classRef = _class.reference;
@@ -73641,7 +73251,7 @@ extension type Style$Builder$ImageWrapper._(jni$_.JObject _$this)
   /// from: `static public org.maplibre.android.maps.Style$Builder$ImageWrapper[] convertToImageArray(java.util.HashMap<java.lang.String, android.graphics.Bitmap> hashMap, boolean z, java.util.List<org.maplibre.android.maps.ImageStretches> list, java.util.List<org.maplibre.android.maps.ImageStretches> list1, org.maplibre.android.maps.ImageContent imageContent)`
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JArray<Style$Builder$ImageWrapper?>? convertToImageArray$1(
-    HashMap<jni$_.JString?, Bitmap?>? hashMap,
+    jni$_.JHashMap<jni$_.JString?, Bitmap?>? hashMap,
     core$_.bool z,
     jni$_.JList<ImageStretches?>? list,
     jni$_.JList<ImageStretches?>? list1,
@@ -74130,6 +73740,7 @@ extension Style$Builder$$Methods on Style$Builder {
 
   /// from: `public org.maplibre.android.maps.Style$Builder fromUrl(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
+  @core$_.Deprecated('This Java method is deprecated.')
   Style$Builder fromUrl(jni$_.JString string) {
     final _$$selfRef = reference;
     final _$string = string.reference;
@@ -75304,6 +74915,7 @@ extension type Style$OnStyleLoaded._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -75530,6 +75142,7 @@ extension Style$$Methods on Style {
 
   /// from: `public java.lang.String getUrl()`
   /// The returned object must be released after use, by calling the [release] method.
+  @core$_.Deprecated('This Java method is deprecated.')
   jni$_.JString get url {
     final _$$selfRef = reference;
     return _get$url(
@@ -76791,7 +76404,7 @@ extension Style$$Methods on Style {
           >();
 
   /// from: `public void addImages(java.util.HashMap<java.lang.String, android.graphics.Bitmap> hashMap)`
-  void addImages(HashMap<jni$_.JString?, Bitmap?> hashMap) {
+  void addImages(jni$_.JHashMap<jni$_.JString?, Bitmap?> hashMap) {
     final _$$selfRef = reference;
     final _$hashMap = hashMap.reference;
     _addImages(
@@ -76836,7 +76449,7 @@ extension Style$$Methods on Style {
 
   /// from: `public void addImages(java.util.HashMap<java.lang.String, android.graphics.Bitmap> hashMap, java.util.List<org.maplibre.android.maps.ImageStretches> list, java.util.List<org.maplibre.android.maps.ImageStretches> list1, org.maplibre.android.maps.ImageContent imageContent)`
   void addImages$1(
-    HashMap<jni$_.JString?, Bitmap?> hashMap,
+    jni$_.JHashMap<jni$_.JString?, Bitmap?> hashMap,
     jni$_.JList<ImageStretches?> list,
     jni$_.JList<ImageStretches?> list1,
     ImageContent? imageContent,
@@ -76881,7 +76494,10 @@ extension Style$$Methods on Style {
           >();
 
   /// from: `public void addImages(java.util.HashMap<java.lang.String, android.graphics.Bitmap> hashMap, boolean z)`
-  void addImages$2(HashMap<jni$_.JString?, Bitmap?> hashMap, core$_.bool z) {
+  void addImages$2(
+    jni$_.JHashMap<jni$_.JString?, Bitmap?> hashMap,
+    core$_.bool z,
+  ) {
     final _$$selfRef = reference;
     final _$hashMap = hashMap.reference;
     _addImages$2(
@@ -76929,7 +76545,7 @@ extension Style$$Methods on Style {
 
   /// from: `public void addImages(java.util.HashMap<java.lang.String, android.graphics.Bitmap> hashMap, boolean z, java.util.List<org.maplibre.android.maps.ImageStretches> list, java.util.List<org.maplibre.android.maps.ImageStretches> list1, org.maplibre.android.maps.ImageContent imageContent)`
   void addImages$3(
-    HashMap<jni$_.JString?, Bitmap?> hashMap,
+    jni$_.JHashMap<jni$_.JString?, Bitmap?> hashMap,
     core$_.bool z,
     jni$_.JList<ImageStretches?> list,
     jni$_.JList<ImageStretches?> list1,
@@ -76975,7 +76591,7 @@ extension Style$$Methods on Style {
           >();
 
   /// from: `public void addImagesAsync(java.util.HashMap<java.lang.String, android.graphics.Bitmap> hashMap)`
-  void addImagesAsync(HashMap<jni$_.JString?, Bitmap?> hashMap) {
+  void addImagesAsync(jni$_.JHashMap<jni$_.JString?, Bitmap?> hashMap) {
     final _$$selfRef = reference;
     final _$hashMap = hashMap.reference;
     _addImagesAsync(
@@ -77020,7 +76636,7 @@ extension Style$$Methods on Style {
 
   /// from: `public void addImagesAsync(java.util.HashMap<java.lang.String, android.graphics.Bitmap> hashMap, java.util.List<org.maplibre.android.maps.ImageStretches> list, java.util.List<org.maplibre.android.maps.ImageStretches> list1, org.maplibre.android.maps.ImageContent imageContent)`
   void addImagesAsync$1(
-    HashMap<jni$_.JString?, Bitmap?> hashMap,
+    jni$_.JHashMap<jni$_.JString?, Bitmap?> hashMap,
     jni$_.JList<ImageStretches?> list,
     jni$_.JList<ImageStretches?> list1,
     ImageContent? imageContent,
@@ -77066,7 +76682,7 @@ extension Style$$Methods on Style {
 
   /// from: `public void addImagesAsync(java.util.HashMap<java.lang.String, android.graphics.Bitmap> hashMap, boolean z)`
   void addImagesAsync$2(
-    HashMap<jni$_.JString?, Bitmap?> hashMap,
+    jni$_.JHashMap<jni$_.JString?, Bitmap?> hashMap,
     core$_.bool z,
   ) {
     final _$$selfRef = reference;
@@ -77116,7 +76732,7 @@ extension Style$$Methods on Style {
 
   /// from: `public void addImagesAsync(java.util.HashMap<java.lang.String, android.graphics.Bitmap> hashMap, boolean z, java.util.List<org.maplibre.android.maps.ImageStretches> list, java.util.List<org.maplibre.android.maps.ImageStretches> list1, org.maplibre.android.maps.ImageContent imageContent)`
   void addImagesAsync$3(
-    HashMap<jni$_.JString?, Bitmap?> hashMap,
+    jni$_.JHashMap<jni$_.JString?, Bitmap?> hashMap,
     core$_.bool z,
     jni$_.JList<ImageStretches?> list,
     jni$_.JList<ImageStretches?> list1,
@@ -80096,6 +79712,7 @@ extension UiSettings$$Methods on UiSettings {
           >();
 
   /// from: `public boolean isIncreaseRotateThresholdWhenScaling()`
+  @core$_.Deprecated('This Java method is deprecated.')
   core$_.bool get isIncreaseRotateThresholdWhenScaling {
     final _$$selfRef = reference;
     return _get$isIncreaseRotateThresholdWhenScaling(
@@ -80126,6 +79743,7 @@ extension UiSettings$$Methods on UiSettings {
           >();
 
   /// from: `public void setIncreaseRotateThresholdWhenScaling(boolean z)`
+  @core$_.Deprecated('This Java method is deprecated.')
   set increaseRotateThresholdWhenScaling(core$_.bool z) {
     final _$$selfRef = reference;
     _set$increaseRotateThresholdWhenScaling(
@@ -81084,34 +80702,6 @@ extension type MapRendererFactory._(jni$_.JObject _$this)
   /// The type which includes information such as the signature of this class.
   static const jni$_.JType<MapRendererFactory> type =
       $MapRendererFactory$Type$();
-  static final _id_new$ = _class.constructorId(r'()V');
-
-  static final _new$ =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_NewObject')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public void <init>()`
-  /// The returned object must be released after use, by calling the [release] method.
-  factory MapRendererFactory() {
-    final _$$classRef = _class.reference;
-    return _new$(
-      _$$classRef.pointer,
-      _id_new$.pointer,
-    ).object<MapRendererFactory>();
-  }
-
   static final _id_newTextureViewMapRenderer = _class.staticMethodId(
     r'newTextureViewMapRenderer',
     r'(Landroid/content/Context;Landroid/view/TextureView;Ljava/lang/String;ZLjava/lang/Runnable;)Lorg/maplibre/android/maps/renderer/textureview/TextureViewMapRenderer;',
@@ -81307,6 +80897,7 @@ extension type MapRendererScheduler._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -83443,7 +83034,8 @@ final class $MapLibreGLSurfaceView$Type$
 /// from: `org.maplibre.android.maps.renderer.surfaceview.MapLibreSurfaceView$OnSurfaceViewDetachedListener`
 extension type MapLibreSurfaceView$OnSurfaceViewDetachedListener._(
   jni$_.JObject _$this
-) implements jni$_.JObject {
+)
+    implements jni$_.JObject {
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/maps/renderer/surfaceview/MapLibreSurfaceView$OnSurfaceViewDetachedListener',
   );
@@ -83506,6 +83098,7 @@ extension type MapLibreSurfaceView$OnSurfaceViewDetachedListener._(
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -83970,6 +83563,7 @@ extension MapLibreSurfaceView$$Methods on MapLibreSurfaceView {
           >();
 
   /// from: `public void surfaceRedrawNeeded(android.view.SurfaceHolder surfaceHolder)`
+  @core$_.Deprecated('This Java method is deprecated.')
   void surfaceRedrawNeeded(SurfaceHolder? surfaceHolder) {
     final _$$selfRef = reference;
     final _$surfaceHolder = surfaceHolder?.reference ?? jni$_.jNullReference;
@@ -86298,7 +85892,8 @@ final class $OfflineManager$Companion$Type$
 /// from: `org.maplibre.android.offline.OfflineManager$CreateOfflineRegionCallback`
 extension type OfflineManager$CreateOfflineRegionCallback._(
   jni$_.JObject _$this
-) implements jni$_.JObject {
+)
+    implements jni$_.JObject {
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/offline/OfflineManager$CreateOfflineRegionCallback',
   );
@@ -86365,6 +85960,7 @@ extension type OfflineManager$CreateOfflineRegionCallback._(
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -86571,6 +86167,7 @@ extension type OfflineManager$FileSourceCallback._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -86770,6 +86367,7 @@ extension type OfflineManager$GetOfflineRegionCallback._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -87019,6 +86617,7 @@ extension type OfflineManager$ListOfflineRegionsCallback._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -87162,7 +86761,8 @@ final class $OfflineManager$ListOfflineRegionsCallback$Type$
 /// from: `org.maplibre.android.offline.OfflineManager$MergeOfflineRegionsCallback`
 extension type OfflineManager$MergeOfflineRegionsCallback._(
   jni$_.JObject _$this
-) implements jni$_.JObject {
+)
+    implements jni$_.JObject {
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/offline/OfflineManager$MergeOfflineRegionsCallback',
   );
@@ -87229,6 +86829,7 @@ extension type OfflineManager$MergeOfflineRegionsCallback._(
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -88072,6 +87673,7 @@ extension type OfflineRegion$DownloadState._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -88181,6 +87783,7 @@ extension type OfflineRegion$OfflineRegionDeleteCallback._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -88313,7 +87916,8 @@ final class $OfflineRegion$OfflineRegionDeleteCallback$Type$
 /// from: `org.maplibre.android.offline.OfflineRegion$OfflineRegionInvalidateCallback`
 extension type OfflineRegion$OfflineRegionInvalidateCallback._(
   jni$_.JObject _$this
-) implements jni$_.JObject {
+)
+    implements jni$_.JObject {
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/offline/OfflineRegion$OfflineRegionInvalidateCallback',
   );
@@ -88380,6 +87984,7 @@ extension type OfflineRegion$OfflineRegionInvalidateCallback._(
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -88585,6 +88190,7 @@ extension type OfflineRegion$OfflineRegionObserver._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -88854,6 +88460,7 @@ extension type OfflineRegion$OfflineRegionStatusCallback._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -88998,7 +88605,8 @@ final class $OfflineRegion$OfflineRegionStatusCallback$Type$
 /// from: `org.maplibre.android.offline.OfflineRegion$OfflineRegionUpdateMetadataCallback`
 extension type OfflineRegion$OfflineRegionUpdateMetadataCallback._(
   jni$_.JObject _$this
-) implements jni$_.JObject {
+)
+    implements jni$_.JObject {
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/offline/OfflineRegion$OfflineRegionUpdateMetadataCallback',
   );
@@ -89065,6 +88673,7 @@ extension type OfflineRegion$OfflineRegionUpdateMetadataCallback._(
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -89703,6 +89312,7 @@ extension type OfflineRegionDefinition._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -90124,6 +89734,7 @@ extension type OfflineRegionError$ErrorReason._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -90656,7 +90267,8 @@ final class $OfflineRegionStatus$Type$
 /// from: `org.maplibre.android.offline.OfflineTilePyramidRegionDefinition$Companion`
 extension type OfflineTilePyramidRegionDefinition$Companion._(
   jni$_.JObject _$this
-) implements jni$_.JObject {
+)
+    implements jni$_.JObject {
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/offline/OfflineTilePyramidRegionDefinition$Companion',
   );
@@ -94522,6 +94134,41 @@ extension type Expression._(jni$_.JObject _$this) implements jni$_.JObject {
   static Expression? id() {
     final _$$classRef = _class.reference;
     return _id(_$$classRef.pointer, _id_id.pointer).object<Expression?>();
+  }
+
+  static final _id_featureState = _class.staticMethodId(
+    r'featureState',
+    r'(Ljava/lang/String;)Lorg/maplibre/android/style/expressions/Expression;',
+  );
+
+  static final _featureState =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `static public org.maplibre.android.style.expressions.Expression featureState(java.lang.String string)`
+  /// The returned object must be released after use, by calling the [release] method.
+  static Expression? featureState(jni$_.JString string) {
+    final _$$classRef = _class.reference;
+    final _$string = string.reference;
+    return _featureState(
+      _$$classRef.pointer,
+      _id_featureState.pointer,
+      _$string.pointer,
+    ).object<Expression?>();
   }
 
   static final _id_accumulated = _class.staticMethodId(
@@ -101743,6 +101390,7 @@ extension CustomLayer$$Methods on CustomLayer {
           >();
 
   /// from: `public void update()`
+  @core$_.Deprecated('This Java method is deprecated.')
   void update() {
     final _$$selfRef = reference;
     _update(_$$selfRef.pointer, _id_update.pointer).check();
@@ -102074,6 +101722,39 @@ extension FillExtrusionLayer$$Methods on FillExtrusionLayer {
       _id_withProperties.pointer,
       _$propertyValues.pointer,
     ).object<FillExtrusionLayer>();
+  }
+
+  static final _id_get$fillExtrusionRoundedCornerDistance = FillExtrusionLayer
+      ._class
+      .instanceMethodId(
+        r'getFillExtrusionRoundedCornerDistance',
+        r'()Lorg/maplibre/android/style/layers/PropertyValue;',
+      );
+
+  static final _get$fillExtrusionRoundedCornerDistance =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public org.maplibre.android.style.layers.PropertyValue<java.lang.Float> getFillExtrusionRoundedCornerDistance()`
+  /// The returned object must be released after use, by calling the [release] method.
+  PropertyValue<jni$_.JFloat?> get fillExtrusionRoundedCornerDistance {
+    final _$$selfRef = reference;
+    return _get$fillExtrusionRoundedCornerDistance(
+      _$$selfRef.pointer,
+      _id_get$fillExtrusionRoundedCornerDistance.pointer,
+    ).object<PropertyValue<jni$_.JFloat?>>();
   }
 
   static final _id_get$fillExtrusionOpacity = FillExtrusionLayer._class
@@ -105523,7 +105204,8 @@ final class $Layer$Type$ extends jni$_.JType<Layer> {
 /// from: `org.maplibre.android.style.layers.LayoutPropertyValue`
 extension type LayoutPropertyValue<$T extends jni$_.JObject?>._(
   jni$_.JObject _$this
-) implements PropertyValue<$T?> {
+)
+    implements PropertyValue<$T?> {
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/style/layers/LayoutPropertyValue',
   );
@@ -107063,7 +106745,8 @@ final class $LineLayer$Type$ extends jni$_.JType<LineLayer> {
 /// from: `org.maplibre.android.style.layers.PaintPropertyValue`
 extension type PaintPropertyValue<$T extends jni$_.JObject?>._(
   jni$_.JObject _$this
-) implements PropertyValue<$T?> {
+)
+    implements PropertyValue<$T?> {
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/style/layers/PaintPropertyValue',
   );
@@ -107177,6 +106860,7 @@ extension type Property$ANCHOR._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -107272,6 +106956,7 @@ extension type Property$CIRCLE_PITCH_ALIGNMENT._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -107372,6 +107057,7 @@ extension type Property$CIRCLE_PITCH_SCALE._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -107470,6 +107156,7 @@ extension type Property$CIRCLE_TRANSLATE_ANCHOR._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -107570,6 +107257,7 @@ extension type Property$FILL_EXTRUSION_TRANSLATE_ANCHOR._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -107670,6 +107358,7 @@ extension type Property$FILL_TRANSLATE_ANCHOR._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -107769,6 +107458,7 @@ extension type Property$HILLSHADE_ILLUMINATION_ANCHOR._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -107868,6 +107558,7 @@ extension type Property$HILLSHADE_METHOD._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -107965,6 +107656,7 @@ extension type Property$ICON_ANCHOR._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -108061,6 +107753,7 @@ extension type Property$ICON_PITCH_ALIGNMENT._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -108160,6 +107853,7 @@ extension type Property$ICON_ROTATION_ALIGNMENT._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -108259,6 +107953,7 @@ extension type Property$ICON_TEXT_FIT._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -108355,6 +108050,7 @@ extension type Property$ICON_TRANSLATE_ANCHOR._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -108452,6 +108148,7 @@ extension type Property$LINE_CAP._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -108546,6 +108243,7 @@ extension type Property$LINE_JOIN._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -108641,6 +108339,7 @@ extension type Property$LINE_TRANSLATE_ANCHOR._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -108739,6 +108438,7 @@ extension type Property$RASTER_RESAMPLING._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -108836,6 +108536,7 @@ extension type Property$SYMBOL_PLACEMENT._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -108933,6 +108634,7 @@ extension type Property$SYMBOL_Z_ORDER._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -109028,6 +108730,7 @@ extension type Property$TEXT_ANCHOR._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -109123,6 +108826,7 @@ extension type Property$TEXT_JUSTIFY._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -109219,6 +108923,7 @@ extension type Property$TEXT_PITCH_ALIGNMENT._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -109318,6 +109023,7 @@ extension type Property$TEXT_ROTATION_ALIGNMENT._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -109417,6 +109123,7 @@ extension type Property$TEXT_TRANSFORM._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -109513,6 +109220,7 @@ extension type Property$TEXT_TRANSLATE_ANCHOR._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -109611,6 +109319,7 @@ extension type Property$TEXT_WRITING_MODE._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -109708,6 +109417,7 @@ extension type Property$VISIBILITY._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -120466,6 +120176,80 @@ extension type PropertyFactory._(jni$_.JObject _$this)
       _$expression.pointer,
     ).object<PropertyValue<Expression?>?>();
   }
+
+  static final _id_fillExtrusionRoundedCornerDistance = _class.staticMethodId(
+    r'fillExtrusionRoundedCornerDistance',
+    r'(Ljava/lang/Float;)Lorg/maplibre/android/style/layers/PropertyValue;',
+  );
+
+  static final _fillExtrusionRoundedCornerDistance =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `static public org.maplibre.android.style.layers.PropertyValue<java.lang.Float> fillExtrusionRoundedCornerDistance(java.lang.Float float)`
+  /// The returned object must be released after use, by calling the [release] method.
+  static PropertyValue<jni$_.JFloat?>? fillExtrusionRoundedCornerDistance(
+    jni$_.JFloat? float,
+  ) {
+    final _$$classRef = _class.reference;
+    final _$float = float?.reference ?? jni$_.jNullReference;
+    return _fillExtrusionRoundedCornerDistance(
+      _$$classRef.pointer,
+      _id_fillExtrusionRoundedCornerDistance.pointer,
+      _$float.pointer,
+    ).object<PropertyValue<jni$_.JFloat?>?>();
+  }
+
+  static final _id_fillExtrusionRoundedCornerDistance$1 = _class.staticMethodId(
+    r'fillExtrusionRoundedCornerDistance',
+    r'(Lorg/maplibre/android/style/expressions/Expression;)Lorg/maplibre/android/style/layers/PropertyValue;',
+  );
+
+  static final _fillExtrusionRoundedCornerDistance$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `static public org.maplibre.android.style.layers.PropertyValue<org.maplibre.android.style.expressions.Expression> fillExtrusionRoundedCornerDistance(org.maplibre.android.style.expressions.Expression expression)`
+  /// The returned object must be released after use, by calling the [release] method.
+  static PropertyValue<Expression?>? fillExtrusionRoundedCornerDistance$1(
+    Expression? expression,
+  ) {
+    final _$$classRef = _class.reference;
+    final _$expression = expression?.reference ?? jni$_.jNullReference;
+    return _fillExtrusionRoundedCornerDistance$1(
+      _$$classRef.pointer,
+      _id_fillExtrusionRoundedCornerDistance$1.pointer,
+      _$expression.pointer,
+    ).object<PropertyValue<Expression?>?>();
+  }
 }
 
 final class $PropertyFactory$Type$ extends jni$_.JType<PropertyFactory> {
@@ -124803,6 +124587,7 @@ extension type TransitionOptions._(jni$_.JObject _$this)
 
   /// from: `static public org.maplibre.android.style.layers.TransitionOptions fromTransitionOptions(long j, long j1)`
   /// The returned object must be released after use, by calling the [release] method.
+  @core$_.Deprecated('This Java method is deprecated.')
   static TransitionOptions? fromTransitionOptions(core$_.int j, core$_.int j1) {
     final _$$classRef = _class.reference;
     return _fromTransitionOptions(
@@ -125857,7 +125642,7 @@ final class $CustomGeometrySource$Type$
 
 /// from: `org.maplibre.android.style.sources.CustomGeometrySourceOptions`
 extension type CustomGeometrySourceOptions._(jni$_.JObject _$this)
-    implements HashMap<jni$_.JString?, jni$_.JObject?> {
+    implements jni$_.JHashMap<jni$_.JString?, jni$_.JObject?> {
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/style/sources/CustomGeometrySourceOptions',
   );
@@ -126105,10 +125890,10 @@ extension CustomGeometrySourceOptions$$Methods on CustomGeometrySourceOptions {
     ).object<CustomGeometrySourceOptions>();
   }
 
-  static final _id_get$size$1 = CustomGeometrySourceOptions._class
+  static final _id_get$size = CustomGeometrySourceOptions._class
       .instanceMethodId(r'getSize', r'()I');
 
-  static final _get$size$1 =
+  static final _get$size =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
@@ -126125,17 +125910,17 @@ extension CustomGeometrySourceOptions$$Methods on CustomGeometrySourceOptions {
           >();
 
   /// from: `public bridge int getSize()`
-  core$_.int get size$1 {
+  core$_.int get size {
     final _$$selfRef = reference;
-    return _get$size$1(_$$selfRef.pointer, _id_get$size$1.pointer).integer;
+    return _get$size(_$$selfRef.pointer, _id_get$size.pointer).integer;
   }
 
-  static final _id_size = CustomGeometrySourceOptions._class.instanceMethodId(
+  static final _id_size$1 = CustomGeometrySourceOptions._class.instanceMethodId(
     r'size',
     r'()I',
   );
 
-  static final _size =
+  static final _size$1 =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
@@ -126152,49 +125937,14 @@ extension CustomGeometrySourceOptions$$Methods on CustomGeometrySourceOptions {
           >();
 
   /// from: `public final bridge int size()`
-  core$_.int size() {
+  core$_.int size$1() {
     final _$$selfRef = reference;
-    return _size(_$$selfRef.pointer, _id_size.pointer).integer;
-  }
-
-  static final _id_get$1 = CustomGeometrySourceOptions._class.instanceMethodId(
-    r'get',
-    r'(Ljava/lang/String;)Ljava/lang/Object;',
-  );
-
-  static final _get$1 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public bridge java.lang.Object get(java.lang.String string)`
-  /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? get$1(jni$_.JString? string) {
-    final _$$selfRef = reference;
-    final _$string = string?.reference ?? jni$_.jNullReference;
-    return _get$1(
-      _$$selfRef.pointer,
-      _id_get$1.pointer,
-      _$string.pointer,
-    ).object<jni$_.JObject?>();
+    return _size$1(_$$selfRef.pointer, _id_size$1.pointer).integer;
   }
 
   static final _id_get = CustomGeometrySourceOptions._class.instanceMethodId(
     r'get',
-    r'(Ljava/lang/Object;)Ljava/lang/Object;',
+    r'(Ljava/lang/String;)Ljava/lang/Object;',
   );
 
   static final _get =
@@ -126215,22 +125965,24 @@ extension CustomGeometrySourceOptions$$Methods on CustomGeometrySourceOptions {
             )
           >();
 
-  /// from: `public final bridge java.lang.Object get(java.lang.Object object)`
+  /// from: `public bridge java.lang.Object get(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? get(jni$_.JObject? object) {
+  jni$_.JObject? get(jni$_.JString? string) {
     final _$$selfRef = reference;
-    final _$object = object?.reference ?? jni$_.jNullReference;
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _get(
       _$$selfRef.pointer,
       _id_get.pointer,
-      _$object.pointer,
+      _$string.pointer,
     ).object<jni$_.JObject?>();
   }
 
-  static final _id_containsKey$1 = CustomGeometrySourceOptions._class
-      .instanceMethodId(r'containsKey', r'(Ljava/lang/String;)Z');
+  static final _id_get$1 = CustomGeometrySourceOptions._class.instanceMethodId(
+    r'get',
+    r'(Ljava/lang/Object;)Ljava/lang/Object;',
+  );
 
-  static final _containsKey$1 =
+  static final _get$1 =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
@@ -126239,7 +125991,7 @@ extension CustomGeometrySourceOptions$$Methods on CustomGeometrySourceOptions {
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
               )
             >
-          >('globalEnv_CallBooleanMethod')
+          >('globalEnv_CallObjectMethod')
           .asFunction<
             jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
@@ -126248,19 +126000,20 @@ extension CustomGeometrySourceOptions$$Methods on CustomGeometrySourceOptions {
             )
           >();
 
-  /// from: `public bridge boolean containsKey(java.lang.String string)`
-  core$_.bool containsKey$1(jni$_.JString? string) {
+  /// from: `public final bridge java.lang.Object get(java.lang.Object object)`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JObject? get$1(jni$_.JObject? object) {
     final _$$selfRef = reference;
-    final _$string = string?.reference ?? jni$_.jNullReference;
-    return _containsKey$1(
+    final _$object = object?.reference ?? jni$_.jNullReference;
+    return _get$1(
       _$$selfRef.pointer,
-      _id_containsKey$1.pointer,
-      _$string.pointer,
-    ).boolean;
+      _id_get$1.pointer,
+      _$object.pointer,
+    ).object<jni$_.JObject?>();
   }
 
   static final _id_containsKey = CustomGeometrySourceOptions._class
-      .instanceMethodId(r'containsKey', r'(Ljava/lang/Object;)Z');
+      .instanceMethodId(r'containsKey', r'(Ljava/lang/String;)Z');
 
   static final _containsKey =
       jni$_.ProtectedJniExtensions.lookup<
@@ -126280,21 +126033,21 @@ extension CustomGeometrySourceOptions$$Methods on CustomGeometrySourceOptions {
             )
           >();
 
-  /// from: `public final bridge boolean containsKey(java.lang.Object object)`
-  core$_.bool containsKey(jni$_.JObject? object) {
+  /// from: `public bridge boolean containsKey(java.lang.String string)`
+  core$_.bool containsKey(jni$_.JString? string) {
     final _$$selfRef = reference;
-    final _$object = object?.reference ?? jni$_.jNullReference;
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _containsKey(
       _$$selfRef.pointer,
       _id_containsKey.pointer,
-      _$object.pointer,
+      _$string.pointer,
     ).boolean;
   }
 
-  static final _id_remove$2 = CustomGeometrySourceOptions._class
-      .instanceMethodId(r'remove', r'(Ljava/lang/String;)Ljava/lang/Object;');
+  static final _id_containsKey$1 = CustomGeometrySourceOptions._class
+      .instanceMethodId(r'containsKey', r'(Ljava/lang/Object;)Z');
 
-  static final _remove$2 =
+  static final _containsKey$1 =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
@@ -126303,7 +126056,7 @@ extension CustomGeometrySourceOptions$$Methods on CustomGeometrySourceOptions {
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
               )
             >
-          >('globalEnv_CallObjectMethod')
+          >('globalEnv_CallBooleanMethod')
           .asFunction<
             jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
@@ -126312,21 +126065,20 @@ extension CustomGeometrySourceOptions$$Methods on CustomGeometrySourceOptions {
             )
           >();
 
-  /// from: `public bridge java.lang.Object remove(java.lang.String string)`
-  /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? remove$2(jni$_.JString? string) {
+  /// from: `public final bridge boolean containsKey(java.lang.Object object)`
+  core$_.bool containsKey$1(jni$_.JObject? object) {
     final _$$selfRef = reference;
-    final _$string = string?.reference ?? jni$_.jNullReference;
-    return _remove$2(
+    final _$object = object?.reference ?? jni$_.jNullReference;
+    return _containsKey$1(
       _$$selfRef.pointer,
-      _id_remove$2.pointer,
-      _$string.pointer,
-    ).object<jni$_.JObject?>();
+      _id_containsKey$1.pointer,
+      _$object.pointer,
+    ).boolean;
   }
 
   static final _id_remove = CustomGeometrySourceOptions._class.instanceMethodId(
     r'remove',
-    r'(Ljava/lang/Object;)Ljava/lang/Object;',
+    r'(Ljava/lang/String;)Ljava/lang/Object;',
   );
 
   static final _remove =
@@ -126347,20 +126099,90 @@ extension CustomGeometrySourceOptions$$Methods on CustomGeometrySourceOptions {
             )
           >();
 
-  /// from: `public final bridge java.lang.Object remove(java.lang.Object object)`
+  /// from: `public bridge java.lang.Object remove(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? remove(jni$_.JObject? object) {
+  jni$_.JObject? remove(jni$_.JString? string) {
     final _$$selfRef = reference;
-    final _$object = object?.reference ?? jni$_.jNullReference;
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _remove(
       _$$selfRef.pointer,
       _id_remove.pointer,
+      _$string.pointer,
+    ).object<jni$_.JObject?>();
+  }
+
+  static final _id_remove$1 = CustomGeometrySourceOptions._class
+      .instanceMethodId(r'remove', r'(Ljava/lang/Object;)Ljava/lang/Object;');
+
+  static final _remove$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public final bridge java.lang.Object remove(java.lang.Object object)`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JObject? remove$1(jni$_.JObject? object) {
+    final _$$selfRef = reference;
+    final _$object = object?.reference ?? jni$_.jNullReference;
+    return _remove$1(
+      _$$selfRef.pointer,
+      _id_remove$1.pointer,
       _$object.pointer,
     ).object<jni$_.JObject?>();
   }
 
-  static final _id_remove$3 = CustomGeometrySourceOptions._class
+  static final _id_remove$2 = CustomGeometrySourceOptions._class
       .instanceMethodId(r'remove', r'(Ljava/lang/String;Ljava/lang/Object;)Z');
+
+  static final _remove$2 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public bridge boolean remove(java.lang.String string, java.lang.Object object)`
+  core$_.bool remove$2(jni$_.JString? string, jni$_.JObject? object) {
+    final _$$selfRef = reference;
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$object = object?.reference ?? jni$_.jNullReference;
+    return _remove$2(
+      _$$selfRef.pointer,
+      _id_remove$2.pointer,
+      _$string.pointer,
+      _$object.pointer,
+    ).boolean;
+  }
+
+  static final _id_remove$3 = CustomGeometrySourceOptions._class
+      .instanceMethodId(r'remove', r'(Ljava/lang/Object;Ljava/lang/Object;)Z');
 
   static final _remove$3 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -126383,60 +126205,23 @@ extension CustomGeometrySourceOptions$$Methods on CustomGeometrySourceOptions {
             )
           >();
 
-  /// from: `public bridge boolean remove(java.lang.String string, java.lang.Object object)`
-  core$_.bool remove$3(jni$_.JString? string, jni$_.JObject? object) {
-    final _$$selfRef = reference;
-    final _$string = string?.reference ?? jni$_.jNullReference;
-    final _$object = object?.reference ?? jni$_.jNullReference;
-    return _remove$3(
-      _$$selfRef.pointer,
-      _id_remove$3.pointer,
-      _$string.pointer,
-      _$object.pointer,
-    ).boolean;
-  }
-
-  static final _id_remove1 = CustomGeometrySourceOptions._class
-      .instanceMethodId(r'remove', r'(Ljava/lang/Object;Ljava/lang/Object;)Z');
-
-  static final _remove1 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<
-                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
-                >,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
   /// from: `public final bridge boolean remove(java.lang.Object object, java.lang.Object object1)`
-  core$_.bool remove1(jni$_.JObject? object, jni$_.JObject? object1) {
+  core$_.bool remove$3(jni$_.JObject? object, jni$_.JObject? object1) {
     final _$$selfRef = reference;
     final _$object = object?.reference ?? jni$_.jNullReference;
     final _$object1 = object1?.reference ?? jni$_.jNullReference;
-    return _remove1(
+    return _remove$3(
       _$$selfRef.pointer,
-      _id_remove1.pointer,
+      _id_remove$3.pointer,
       _$object.pointer,
       _$object1.pointer,
     ).boolean;
   }
 
-  static final _id_get$values$1 = CustomGeometrySourceOptions._class
+  static final _id_get$values = CustomGeometrySourceOptions._class
       .instanceMethodId(r'getValues', r'()Ljava/util/Collection;');
 
-  static final _get$values$1 =
+  static final _get$values =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
@@ -126454,20 +126239,18 @@ extension CustomGeometrySourceOptions$$Methods on CustomGeometrySourceOptions {
 
   /// from: `public bridge java.util.Collection<java.lang.Object> getValues()`
   /// The returned object must be released after use, by calling the [release] method.
-  Collection? get values$1 {
+  jni$_.JCollection<jni$_.JObject?>? get values {
     final _$$selfRef = reference;
-    return _get$values$1(
+    return _get$values(
       _$$selfRef.pointer,
-      _id_get$values$1.pointer,
-    ).object<Collection?>();
+      _id_get$values.pointer,
+    ).object<jni$_.JCollection<jni$_.JObject?>?>();
   }
 
-  static final _id_values = CustomGeometrySourceOptions._class.instanceMethodId(
-    r'values',
-    r'()Ljava/util/Collection;',
-  );
+  static final _id_values$1 = CustomGeometrySourceOptions._class
+      .instanceMethodId(r'values', r'()Ljava/util/Collection;');
 
-  static final _values =
+  static final _values$1 =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
@@ -126485,59 +126268,18 @@ extension CustomGeometrySourceOptions$$Methods on CustomGeometrySourceOptions {
 
   /// from: `public final bridge java.util.Collection<java.lang.Object> values()`
   /// The returned object must be released after use, by calling the [release] method.
-  Collection? values() {
+  jni$_.JCollection<jni$_.JObject?>? values$1() {
     final _$$selfRef = reference;
-    return _values(
+    return _values$1(
       _$$selfRef.pointer,
-      _id_values.pointer,
-    ).object<Collection?>();
-  }
-
-  static final _id_getOrDefault$1 = CustomGeometrySourceOptions._class
-      .instanceMethodId(
-        r'getOrDefault',
-        r'(Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/Object;',
-      );
-
-  static final _getOrDefault$1 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<
-                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
-                >,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public bridge java.lang.Object getOrDefault(java.lang.String string, java.lang.Object object)`
-  /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? getOrDefault$1(jni$_.JString? string, jni$_.JObject? object) {
-    final _$$selfRef = reference;
-    final _$string = string?.reference ?? jni$_.jNullReference;
-    final _$object = object?.reference ?? jni$_.jNullReference;
-    return _getOrDefault$1(
-      _$$selfRef.pointer,
-      _id_getOrDefault$1.pointer,
-      _$string.pointer,
-      _$object.pointer,
-    ).object<jni$_.JObject?>();
+      _id_values$1.pointer,
+    ).object<jni$_.JCollection<jni$_.JObject?>?>();
   }
 
   static final _id_getOrDefault = CustomGeometrySourceOptions._class
       .instanceMethodId(
         r'getOrDefault',
-        r'(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;',
+        r'(Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/Object;',
       );
 
   static final _getOrDefault =
@@ -126561,15 +126303,56 @@ extension CustomGeometrySourceOptions$$Methods on CustomGeometrySourceOptions {
             )
           >();
 
-  /// from: `public final bridge java.lang.Object getOrDefault(java.lang.Object object, java.lang.Object object1)`
+  /// from: `public bridge java.lang.Object getOrDefault(java.lang.String string, java.lang.Object object)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? getOrDefault(jni$_.JObject? object, jni$_.JObject? object1) {
+  jni$_.JObject? getOrDefault(jni$_.JString? string, jni$_.JObject? object) {
     final _$$selfRef = reference;
+    final _$string = string?.reference ?? jni$_.jNullReference;
     final _$object = object?.reference ?? jni$_.jNullReference;
-    final _$object1 = object1?.reference ?? jni$_.jNullReference;
     return _getOrDefault(
       _$$selfRef.pointer,
       _id_getOrDefault.pointer,
+      _$string.pointer,
+      _$object.pointer,
+    ).object<jni$_.JObject?>();
+  }
+
+  static final _id_getOrDefault$1 = CustomGeometrySourceOptions._class
+      .instanceMethodId(
+        r'getOrDefault',
+        r'(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;',
+      );
+
+  static final _getOrDefault$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public final bridge java.lang.Object getOrDefault(java.lang.Object object, java.lang.Object object1)`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JObject? getOrDefault$1(jni$_.JObject? object, jni$_.JObject? object1) {
+    final _$$selfRef = reference;
+    final _$object = object?.reference ?? jni$_.jNullReference;
+    final _$object1 = object1?.reference ?? jni$_.jNullReference;
+    return _getOrDefault$1(
+      _$$selfRef.pointer,
+      _id_getOrDefault$1.pointer,
       _$object.pointer,
       _$object1.pointer,
     ).object<jni$_.JObject?>();
@@ -126705,9 +126488,813 @@ final class $CustomGeometrySourceOptions$Type$
       r'Lorg/maplibre/android/style/sources/CustomGeometrySourceOptions;';
 }
 
+/// from: `org.maplibre.android.style.sources.CustomVectorSource$TileID`
+extension type CustomVectorSource$TileID._(jni$_.JObject _$this)
+    implements jni$_.JObject {
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/style/sources/CustomVectorSource$TileID',
+  );
+
+  /// The type which includes information such as the signature of this class.
+  static const jni$_.JType<CustomVectorSource$TileID> type =
+      $CustomVectorSource$TileID$Type$();
+  static final _id_new$ = _class.constructorId(r'(III)V');
+
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32, jni$_.Int32, jni$_.Int32)>,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              core$_.int,
+              core$_.int,
+              core$_.int,
+            )
+          >();
+
+  /// from: `public void <init>(int i, int i1, int i2)`
+  /// The returned object must be released after use, by calling the [release] method.
+  factory CustomVectorSource$TileID(
+    core$_.int i,
+    core$_.int i1,
+    core$_.int i2,
+  ) {
+    final _$$classRef = _class.reference;
+    return _new$(
+      _$$classRef.pointer,
+      _id_new$.pointer,
+      i,
+      i1,
+      i2,
+    ).object<CustomVectorSource$TileID>();
+  }
+}
+
+extension CustomVectorSource$TileID$$Methods on CustomVectorSource$TileID {
+  static final _id_get$z = CustomVectorSource$TileID._class.instanceMethodId(
+    r'getZ',
+    r'()I',
+  );
+
+  static final _get$z =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public final int getZ()`
+  core$_.int get z {
+    final _$$selfRef = reference;
+    return _get$z(_$$selfRef.pointer, _id_get$z.pointer).integer;
+  }
+
+  static final _id_get$x = CustomVectorSource$TileID._class.instanceMethodId(
+    r'getX',
+    r'()I',
+  );
+
+  static final _get$x =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public final int getX()`
+  core$_.int get x {
+    final _$$selfRef = reference;
+    return _get$x(_$$selfRef.pointer, _id_get$x.pointer).integer;
+  }
+
+  static final _id_get$y = CustomVectorSource$TileID._class.instanceMethodId(
+    r'getY',
+    r'()I',
+  );
+
+  static final _get$y =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public final int getY()`
+  core$_.int get y {
+    final _$$selfRef = reference;
+    return _get$y(_$$selfRef.pointer, _id_get$y.pointer).integer;
+  }
+
+  static final _id_component1 = CustomVectorSource$TileID._class
+      .instanceMethodId(r'component1', r'()I');
+
+  static final _component1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public operator fun component1(): kotlin.Int`
+  core$_.int component1() {
+    final _$$selfRef = reference;
+    return _component1(_$$selfRef.pointer, _id_component1.pointer).integer;
+  }
+
+  static final _id_component2 = CustomVectorSource$TileID._class
+      .instanceMethodId(r'component2', r'()I');
+
+  static final _component2 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public operator fun component2(): kotlin.Int`
+  core$_.int component2() {
+    final _$$selfRef = reference;
+    return _component2(_$$selfRef.pointer, _id_component2.pointer).integer;
+  }
+
+  static final _id_component3 = CustomVectorSource$TileID._class
+      .instanceMethodId(r'component3', r'()I');
+
+  static final _component3 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public operator fun component3(): kotlin.Int`
+  core$_.int component3() {
+    final _$$selfRef = reference;
+    return _component3(_$$selfRef.pointer, _id_component3.pointer).integer;
+  }
+
+  static final _id_copy = CustomVectorSource$TileID._class.instanceMethodId(
+    r'copy',
+    r'(III)Lorg/maplibre/android/style/sources/CustomVectorSource$TileID;',
+  );
+
+  static final _copy =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32, jni$_.Int32, jni$_.Int32)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              core$_.int,
+              core$_.int,
+              core$_.int,
+            )
+          >();
+
+  /// from: `public fun copy(z: kotlin.Int, x: kotlin.Int, y: kotlin.Int): org.maplibre.android.style.sources.CustomVectorSource.TileID`
+  /// The returned object must be released after use, by calling the [release] method.
+  CustomVectorSource$TileID copy(core$_.int i, core$_.int i1, core$_.int i2) {
+    final _$$selfRef = reference;
+    return _copy(
+      _$$selfRef.pointer,
+      _id_copy.pointer,
+      i,
+      i1,
+      i2,
+    ).object<CustomVectorSource$TileID>();
+  }
+
+  static final _id_toString$1 = CustomVectorSource$TileID._class
+      .instanceMethodId(r'toString', r'()Ljava/lang/String;');
+
+  static final _toString$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public fun toString(): kotlin.String`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JString toString$1() {
+    final _$$selfRef = reference;
+    return _toString$1(
+      _$$selfRef.pointer,
+      _id_toString$1.pointer,
+    ).object<jni$_.JString>();
+  }
+
+  static final _id_hashCode$1 = CustomVectorSource$TileID._class
+      .instanceMethodId(r'hashCode', r'()I');
+
+  static final _hashCode$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public fun hashCode(): kotlin.Int`
+  core$_.int hashCode$1() {
+    final _$$selfRef = reference;
+    return _hashCode$1(_$$selfRef.pointer, _id_hashCode$1.pointer).integer;
+  }
+
+  static final _id_equals = CustomVectorSource$TileID._class.instanceMethodId(
+    r'equals',
+    r'(Ljava/lang/Object;)Z',
+  );
+
+  static final _equals =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public operator fun equals(other: kotlin.Any?): kotlin.Boolean`
+  core$_.bool equals(jni$_.JObject? object) {
+    final _$$selfRef = reference;
+    final _$object = object?.reference ?? jni$_.jNullReference;
+    return _equals(
+      _$$selfRef.pointer,
+      _id_equals.pointer,
+      _$object.pointer,
+    ).boolean;
+  }
+}
+
+final class $CustomVectorSource$TileID$Type$
+    extends jni$_.JType<CustomVectorSource$TileID> {
+  @jni$_.internal
+  const $CustomVectorSource$TileID$Type$();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/style/sources/CustomVectorSource$TileID;';
+}
+
+/// from: `org.maplibre.android.style.sources.CustomVectorSource`
+extension type CustomVectorSource._(jni$_.JObject _$this) implements Source {
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/style/sources/CustomVectorSource',
+  );
+
+  /// The type which includes information such as the signature of this class.
+  static const jni$_.JType<CustomVectorSource> type =
+      $CustomVectorSource$Type$();
+  static final _id_new$ = _class.constructorId(
+    r'(Ljava/lang/String;Lorg/maplibre/android/style/sources/CustomVectorTileProvider;Lkotlinx/coroutines/CoroutineScope;II)V',
+  );
+
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                    jni$_.Int32,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              core$_.int,
+              core$_.int,
+            )
+          >();
+
+  /// from: `public void <init>(java.lang.String string, org.maplibre.android.style.sources.CustomVectorTileProvider customVectorTileProvider, kotlinx.coroutines.CoroutineScope coroutineScope, int i, int i1)`
+  /// The returned object must be released after use, by calling the [release] method.
+  factory CustomVectorSource(
+    jni$_.JString string,
+    CustomVectorTileProvider customVectorTileProvider,
+    CoroutineScope coroutineScope,
+    core$_.int i,
+    core$_.int i1,
+  ) {
+    final _$$classRef = _class.reference;
+    final _$string = string.reference;
+    final _$customVectorTileProvider = customVectorTileProvider.reference;
+    final _$coroutineScope = coroutineScope.reference;
+    return _new$(
+      _$$classRef.pointer,
+      _id_new$.pointer,
+      _$string.pointer,
+      _$customVectorTileProvider.pointer,
+      _$coroutineScope.pointer,
+      i,
+      i1,
+    ).object<CustomVectorSource>();
+  }
+
+  static final _id_new$1 = _class.constructorId(
+    r'(Ljava/lang/String;Lorg/maplibre/android/style/sources/CustomVectorTileProvider;Lkotlinx/coroutines/CoroutineScope;IIILkotlin/jvm/internal/DefaultConstructorMarker;)V',
+  );
+
+  static final _new$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Int32,
+                    jni$_.Int32,
+                    jni$_.Int32,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              core$_.int,
+              core$_.int,
+              core$_.int,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `synthetic public void <init>(java.lang.String string, org.maplibre.android.style.sources.CustomVectorTileProvider customVectorTileProvider, kotlinx.coroutines.CoroutineScope coroutineScope, int i, int i1, int i2, kotlin.jvm.internal.DefaultConstructorMarker defaultConstructorMarker)`
+  /// The returned object must be released after use, by calling the [release] method.
+  factory CustomVectorSource.new$1(
+    jni$_.JString? string,
+    CustomVectorTileProvider? customVectorTileProvider,
+    CoroutineScope? coroutineScope,
+    core$_.int i,
+    core$_.int i1,
+    core$_.int i2,
+    DefaultConstructorMarker? defaultConstructorMarker,
+  ) {
+    final _$$classRef = _class.reference;
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$customVectorTileProvider =
+        customVectorTileProvider?.reference ?? jni$_.jNullReference;
+    final _$coroutineScope = coroutineScope?.reference ?? jni$_.jNullReference;
+    final _$defaultConstructorMarker =
+        defaultConstructorMarker?.reference ?? jni$_.jNullReference;
+    return _new$1(
+      _$$classRef.pointer,
+      _id_new$1.pointer,
+      _$string.pointer,
+      _$customVectorTileProvider.pointer,
+      _$coroutineScope.pointer,
+      i,
+      i1,
+      i2,
+      _$defaultConstructorMarker.pointer,
+    ).object<CustomVectorSource>();
+  }
+}
+
+extension CustomVectorSource$$Methods on CustomVectorSource {
+  static final _id_setTileData = CustomVectorSource._class.instanceMethodId(
+    r'setTileData',
+    r'(IIILorg/maplibre/android/style/sources/TileData;)V',
+  );
+
+  static final _setTileData =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Int32,
+                    jni$_.Int32,
+                    jni$_.Int32,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              core$_.int,
+              core$_.int,
+              core$_.int,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public fun setTileData(z: kotlin.Int, x: kotlin.Int, y: kotlin.Int, data: org.maplibre.android.style.sources.TileData): kotlin.Unit`
+  void setTileData(
+    core$_.int i,
+    core$_.int i1,
+    core$_.int i2,
+    TileData tileData,
+  ) {
+    final _$$selfRef = reference;
+    final _$tileData = tileData.reference;
+    _setTileData(
+      _$$selfRef.pointer,
+      _id_setTileData.pointer,
+      i,
+      i1,
+      i2,
+      _$tileData.pointer,
+    ).check();
+  }
+
+  static final _id_invalidateTile = CustomVectorSource._class.instanceMethodId(
+    r'invalidateTile',
+    r'(III)V',
+  );
+
+  static final _invalidateTile =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32, jni$_.Int32, jni$_.Int32)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              core$_.int,
+              core$_.int,
+              core$_.int,
+            )
+          >();
+
+  /// from: `public fun invalidateTile(z: kotlin.Int, x: kotlin.Int, y: kotlin.Int): kotlin.Unit`
+  void invalidateTile(core$_.int i, core$_.int i1, core$_.int i2) {
+    final _$$selfRef = reference;
+    _invalidateTile(
+      _$$selfRef.pointer,
+      _id_invalidateTile.pointer,
+      i,
+      i1,
+      i2,
+    ).check();
+  }
+}
+
+final class $CustomVectorSource$Type$ extends jni$_.JType<CustomVectorSource> {
+  @jni$_.internal
+  const $CustomVectorSource$Type$();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/style/sources/CustomVectorSource;';
+}
+
+/// from: `org.maplibre.android.style.sources.CustomVectorTileProvider`
+extension type CustomVectorTileProvider._(jni$_.JObject _$this)
+    implements jni$_.JObject {
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/style/sources/CustomVectorTileProvider',
+  );
+
+  /// The type which includes information such as the signature of this class.
+  static const jni$_.JType<CustomVectorTileProvider> type =
+      $CustomVectorTileProvider$Type$();
+
+  /// Maps a specific port to the implemented interface.
+  static final core$_.Map<core$_.int, $CustomVectorTileProvider> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
+    core$_.int port,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+    );
+  }
+
+  static final jni$_.Pointer<
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
+    core$_.int $p,
+    jni$_.MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d ==
+          r'fetchTile(IIILkotlin/coroutines/Continuation;)Ljava/lang/Object;') {
+        final _$$contRef = ($a![3] as Continuation).reference;
+        final $r = jni$_.KotlinContinuation.fromReference(_$$contRef)
+            .resumeWithFuture(
+              _$impls[$p]!.fetchTile(
+                ($a![0] as jni$_.JInteger).toDartInt(releaseOriginal: true),
+                ($a![1] as jni$_.JInteger).toDartInt(releaseOriginal: true),
+                ($a![2] as jni$_.JInteger).toDartInt(releaseOriginal: true),
+              ),
+            );
+        return ($r as jni$_.JObject?)
+                ?.as(const jni$_.$JObject$Type$())
+                .reference
+                .toPointer() ??
+            jni$_.nullptr;
+      }
+    } catch (e) {
+      return jni$_.ProtectedJniExtensions.newDartException(e);
+    }
+    return jni$_.nullptr;
+  }
+
+  static void implementIn(
+    jni$_.JImplementer implementer,
+    $CustomVectorTileProvider $impl,
+  ) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = jni$_.MethodInvocation.fromMessage($m);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    implementer.add(
+      r'org.maplibre.android.style.sources.CustomVectorTileProvider',
+      $p,
+      _$invokePointer,
+      [],
+    );
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+  }
+
+  factory CustomVectorTileProvider.implement($CustomVectorTileProvider $impl) {
+    final $i = jni$_.JImplementer();
+    implementIn($i, $impl);
+    return $i.implement<CustomVectorTileProvider>();
+  }
+}
+
+extension CustomVectorTileProvider$$Methods on CustomVectorTileProvider {
+  static final _id_fetchTile = CustomVectorTileProvider._class.instanceMethodId(
+    r'fetchTile',
+    r'(IIILkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _fetchTile =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Int32,
+                    jni$_.Int32,
+                    jni$_.Int32,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              core$_.int,
+              core$_.int,
+              core$_.int,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public suspend fun fetchTile(z: kotlin.Int, x: kotlin.Int, y: kotlin.Int): org.maplibre.android.style.sources.TileData`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<TileData> fetchTile(
+    core$_.int i,
+    core$_.int i1,
+    core$_.int i2,
+  ) async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+    final _$$selfRef = reference;
+    final $r = _fetchTile(
+      _$$selfRef.pointer,
+      _id_fetchTile.pointer,
+      i,
+      i1,
+      i2,
+      _$continuation.pointer,
+    ).object<jni$_.JObject>();
+    _$continuation.release();
+    jni$_.JObject $o;
+    if ($r.isInstanceOf(jni$_.coroutineSingletonsClass)) {
+      $r.release();
+      final $a = await $p.first;
+      $o = jni$_.JObject.fromReference(
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress($a)),
+      );
+      if ($o.isInstanceOf(jni$_.result$Class)) {
+        $o = jni$_.resultValueField.get($o, const jni$_.$JObject$Type$());
+      } else if ($o.isInstanceOf(jni$_.result$FailureClass)) {
+        final $e = jni$_.failureExceptionField.get(
+          $o,
+          const jni$_.$JObject$Type$(),
+        );
+        $o.release();
+        jni$_.Jni.throwException($e.reference.toPointer());
+      }
+    } else {
+      $o = $r;
+    }
+    return $o.as<TileData>(TileData.type, releaseOriginal: true);
+  }
+}
+
+abstract base mixin class $CustomVectorTileProvider {
+  factory $CustomVectorTileProvider({
+    required core$_.Future<TileData> Function(
+      core$_.int i,
+      core$_.int i1,
+      core$_.int i2,
+    )
+    fetchTile,
+  }) = _$CustomVectorTileProvider;
+
+  core$_.Future<TileData> fetchTile(core$_.int i, core$_.int i1, core$_.int i2);
+}
+
+final class _$CustomVectorTileProvider with $CustomVectorTileProvider {
+  _$CustomVectorTileProvider({
+    required core$_.Future<TileData> Function(
+      core$_.int i,
+      core$_.int i1,
+      core$_.int i2,
+    )
+    fetchTile,
+  }) : _fetchTile = fetchTile;
+
+  final core$_.Future<TileData> Function(
+    core$_.int i,
+    core$_.int i1,
+    core$_.int i2,
+  )
+  _fetchTile;
+
+  core$_.Future<TileData> fetchTile(
+    core$_.int i,
+    core$_.int i1,
+    core$_.int i2,
+  ) {
+    return _fetchTile(i, i1, i2);
+  }
+}
+
+final class $CustomVectorTileProvider$Type$
+    extends jni$_.JType<CustomVectorTileProvider> {
+  @jni$_.internal
+  const $CustomVectorTileProvider$Type$();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/style/sources/CustomVectorTileProvider;';
+}
+
 /// from: `org.maplibre.android.style.sources.GeoJsonOptions`
 extension type GeoJsonOptions._(jni$_.JObject _$this)
-    implements HashMap<jni$_.JString?, jni$_.JObject?> {
+    implements jni$_.JHashMap<jni$_.JString?, jni$_.JObject?> {
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/style/sources/GeoJsonOptions',
   );
@@ -127137,12 +127724,12 @@ extension GeoJsonOptions$$Methods on GeoJsonOptions {
     ).object<GeoJsonOptions>();
   }
 
-  static final _id_get$size$1 = GeoJsonOptions._class.instanceMethodId(
+  static final _id_get$size = GeoJsonOptions._class.instanceMethodId(
     r'getSize',
     r'()I',
   );
 
-  static final _get$size$1 =
+  static final _get$size =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
@@ -127159,17 +127746,17 @@ extension GeoJsonOptions$$Methods on GeoJsonOptions {
           >();
 
   /// from: `public bridge int getSize()`
-  core$_.int get size$1 {
+  core$_.int get size {
     final _$$selfRef = reference;
-    return _get$size$1(_$$selfRef.pointer, _id_get$size$1.pointer).integer;
+    return _get$size(_$$selfRef.pointer, _id_get$size.pointer).integer;
   }
 
-  static final _id_size = GeoJsonOptions._class.instanceMethodId(
+  static final _id_size$1 = GeoJsonOptions._class.instanceMethodId(
     r'size',
     r'()I',
   );
 
-  static final _size =
+  static final _size$1 =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
@@ -127186,49 +127773,14 @@ extension GeoJsonOptions$$Methods on GeoJsonOptions {
           >();
 
   /// from: `public final bridge int size()`
-  core$_.int size() {
+  core$_.int size$1() {
     final _$$selfRef = reference;
-    return _size(_$$selfRef.pointer, _id_size.pointer).integer;
-  }
-
-  static final _id_get$1 = GeoJsonOptions._class.instanceMethodId(
-    r'get',
-    r'(Ljava/lang/String;)Ljava/lang/Object;',
-  );
-
-  static final _get$1 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public bridge java.lang.Object get(java.lang.String string)`
-  /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? get$1(jni$_.JString? string) {
-    final _$$selfRef = reference;
-    final _$string = string?.reference ?? jni$_.jNullReference;
-    return _get$1(
-      _$$selfRef.pointer,
-      _id_get$1.pointer,
-      _$string.pointer,
-    ).object<jni$_.JObject?>();
+    return _size$1(_$$selfRef.pointer, _id_size$1.pointer).integer;
   }
 
   static final _id_get = GeoJsonOptions._class.instanceMethodId(
     r'get',
-    r'(Ljava/lang/Object;)Ljava/lang/Object;',
+    r'(Ljava/lang/String;)Ljava/lang/Object;',
   );
 
   static final _get =
@@ -127249,24 +127801,24 @@ extension GeoJsonOptions$$Methods on GeoJsonOptions {
             )
           >();
 
-  /// from: `public final bridge java.lang.Object get(java.lang.Object object)`
+  /// from: `public bridge java.lang.Object get(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? get(jni$_.JObject? object) {
+  jni$_.JObject? get(jni$_.JString? string) {
     final _$$selfRef = reference;
-    final _$object = object?.reference ?? jni$_.jNullReference;
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _get(
       _$$selfRef.pointer,
       _id_get.pointer,
-      _$object.pointer,
+      _$string.pointer,
     ).object<jni$_.JObject?>();
   }
 
-  static final _id_containsKey$1 = GeoJsonOptions._class.instanceMethodId(
-    r'containsKey',
-    r'(Ljava/lang/String;)Z',
+  static final _id_get$1 = GeoJsonOptions._class.instanceMethodId(
+    r'get',
+    r'(Ljava/lang/Object;)Ljava/lang/Object;',
   );
 
-  static final _containsKey$1 =
+  static final _get$1 =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
@@ -127275,7 +127827,7 @@ extension GeoJsonOptions$$Methods on GeoJsonOptions {
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
               )
             >
-          >('globalEnv_CallBooleanMethod')
+          >('globalEnv_CallObjectMethod')
           .asFunction<
             jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
@@ -127284,20 +127836,21 @@ extension GeoJsonOptions$$Methods on GeoJsonOptions {
             )
           >();
 
-  /// from: `public bridge boolean containsKey(java.lang.String string)`
-  core$_.bool containsKey$1(jni$_.JString? string) {
+  /// from: `public final bridge java.lang.Object get(java.lang.Object object)`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JObject? get$1(jni$_.JObject? object) {
     final _$$selfRef = reference;
-    final _$string = string?.reference ?? jni$_.jNullReference;
-    return _containsKey$1(
+    final _$object = object?.reference ?? jni$_.jNullReference;
+    return _get$1(
       _$$selfRef.pointer,
-      _id_containsKey$1.pointer,
-      _$string.pointer,
-    ).boolean;
+      _id_get$1.pointer,
+      _$object.pointer,
+    ).object<jni$_.JObject?>();
   }
 
   static final _id_containsKey = GeoJsonOptions._class.instanceMethodId(
     r'containsKey',
-    r'(Ljava/lang/Object;)Z',
+    r'(Ljava/lang/String;)Z',
   );
 
   static final _containsKey =
@@ -127318,23 +127871,23 @@ extension GeoJsonOptions$$Methods on GeoJsonOptions {
             )
           >();
 
-  /// from: `public final bridge boolean containsKey(java.lang.Object object)`
-  core$_.bool containsKey(jni$_.JObject? object) {
+  /// from: `public bridge boolean containsKey(java.lang.String string)`
+  core$_.bool containsKey(jni$_.JString? string) {
     final _$$selfRef = reference;
-    final _$object = object?.reference ?? jni$_.jNullReference;
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _containsKey(
       _$$selfRef.pointer,
       _id_containsKey.pointer,
-      _$object.pointer,
+      _$string.pointer,
     ).boolean;
   }
 
-  static final _id_remove$2 = GeoJsonOptions._class.instanceMethodId(
-    r'remove',
-    r'(Ljava/lang/String;)Ljava/lang/Object;',
+  static final _id_containsKey$1 = GeoJsonOptions._class.instanceMethodId(
+    r'containsKey',
+    r'(Ljava/lang/Object;)Z',
   );
 
-  static final _remove$2 =
+  static final _containsKey$1 =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
@@ -127343,7 +127896,7 @@ extension GeoJsonOptions$$Methods on GeoJsonOptions {
                 jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
               )
             >
-          >('globalEnv_CallObjectMethod')
+          >('globalEnv_CallBooleanMethod')
           .asFunction<
             jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
@@ -127352,21 +127905,20 @@ extension GeoJsonOptions$$Methods on GeoJsonOptions {
             )
           >();
 
-  /// from: `public bridge java.lang.Object remove(java.lang.String string)`
-  /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? remove$2(jni$_.JString? string) {
+  /// from: `public final bridge boolean containsKey(java.lang.Object object)`
+  core$_.bool containsKey$1(jni$_.JObject? object) {
     final _$$selfRef = reference;
-    final _$string = string?.reference ?? jni$_.jNullReference;
-    return _remove$2(
+    final _$object = object?.reference ?? jni$_.jNullReference;
+    return _containsKey$1(
       _$$selfRef.pointer,
-      _id_remove$2.pointer,
-      _$string.pointer,
-    ).object<jni$_.JObject?>();
+      _id_containsKey$1.pointer,
+      _$object.pointer,
+    ).boolean;
   }
 
   static final _id_remove = GeoJsonOptions._class.instanceMethodId(
     r'remove',
-    r'(Ljava/lang/Object;)Ljava/lang/Object;',
+    r'(Ljava/lang/String;)Ljava/lang/Object;',
   );
 
   static final _remove =
@@ -127387,21 +127939,95 @@ extension GeoJsonOptions$$Methods on GeoJsonOptions {
             )
           >();
 
-  /// from: `public final bridge java.lang.Object remove(java.lang.Object object)`
+  /// from: `public bridge java.lang.Object remove(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? remove(jni$_.JObject? object) {
+  jni$_.JObject? remove(jni$_.JString? string) {
     final _$$selfRef = reference;
-    final _$object = object?.reference ?? jni$_.jNullReference;
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _remove(
       _$$selfRef.pointer,
       _id_remove.pointer,
+      _$string.pointer,
+    ).object<jni$_.JObject?>();
+  }
+
+  static final _id_remove$1 = GeoJsonOptions._class.instanceMethodId(
+    r'remove',
+    r'(Ljava/lang/Object;)Ljava/lang/Object;',
+  );
+
+  static final _remove$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public final bridge java.lang.Object remove(java.lang.Object object)`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JObject? remove$1(jni$_.JObject? object) {
+    final _$$selfRef = reference;
+    final _$object = object?.reference ?? jni$_.jNullReference;
+    return _remove$1(
+      _$$selfRef.pointer,
+      _id_remove$1.pointer,
       _$object.pointer,
     ).object<jni$_.JObject?>();
   }
 
-  static final _id_remove$3 = GeoJsonOptions._class.instanceMethodId(
+  static final _id_remove$2 = GeoJsonOptions._class.instanceMethodId(
     r'remove',
     r'(Ljava/lang/String;Ljava/lang/Object;)Z',
+  );
+
+  static final _remove$2 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public bridge boolean remove(java.lang.String string, java.lang.Object object)`
+  core$_.bool remove$2(jni$_.JString? string, jni$_.JObject? object) {
+    final _$$selfRef = reference;
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$object = object?.reference ?? jni$_.jNullReference;
+    return _remove$2(
+      _$$selfRef.pointer,
+      _id_remove$2.pointer,
+      _$string.pointer,
+      _$object.pointer,
+    ).boolean;
+  }
+
+  static final _id_remove$3 = GeoJsonOptions._class.instanceMethodId(
+    r'remove',
+    r'(Ljava/lang/Object;Ljava/lang/Object;)Z',
   );
 
   static final _remove$3 =
@@ -127425,64 +128051,25 @@ extension GeoJsonOptions$$Methods on GeoJsonOptions {
             )
           >();
 
-  /// from: `public bridge boolean remove(java.lang.String string, java.lang.Object object)`
-  core$_.bool remove$3(jni$_.JString? string, jni$_.JObject? object) {
-    final _$$selfRef = reference;
-    final _$string = string?.reference ?? jni$_.jNullReference;
-    final _$object = object?.reference ?? jni$_.jNullReference;
-    return _remove$3(
-      _$$selfRef.pointer,
-      _id_remove$3.pointer,
-      _$string.pointer,
-      _$object.pointer,
-    ).boolean;
-  }
-
-  static final _id_remove1 = GeoJsonOptions._class.instanceMethodId(
-    r'remove',
-    r'(Ljava/lang/Object;Ljava/lang/Object;)Z',
-  );
-
-  static final _remove1 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<
-                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
-                >,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
   /// from: `public final bridge boolean remove(java.lang.Object object, java.lang.Object object1)`
-  core$_.bool remove1(jni$_.JObject? object, jni$_.JObject? object1) {
+  core$_.bool remove$3(jni$_.JObject? object, jni$_.JObject? object1) {
     final _$$selfRef = reference;
     final _$object = object?.reference ?? jni$_.jNullReference;
     final _$object1 = object1?.reference ?? jni$_.jNullReference;
-    return _remove1(
+    return _remove$3(
       _$$selfRef.pointer,
-      _id_remove1.pointer,
+      _id_remove$3.pointer,
       _$object.pointer,
       _$object1.pointer,
     ).boolean;
   }
 
-  static final _id_get$values$1 = GeoJsonOptions._class.instanceMethodId(
+  static final _id_get$values = GeoJsonOptions._class.instanceMethodId(
     r'getValues',
     r'()Ljava/util/Collection;',
   );
 
-  static final _get$values$1 =
+  static final _get$values =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
@@ -127500,20 +128087,20 @@ extension GeoJsonOptions$$Methods on GeoJsonOptions {
 
   /// from: `public bridge java.util.Collection<java.lang.Object> getValues()`
   /// The returned object must be released after use, by calling the [release] method.
-  Collection? get values$1 {
+  jni$_.JCollection<jni$_.JObject?>? get values {
     final _$$selfRef = reference;
-    return _get$values$1(
+    return _get$values(
       _$$selfRef.pointer,
-      _id_get$values$1.pointer,
-    ).object<Collection?>();
+      _id_get$values.pointer,
+    ).object<jni$_.JCollection<jni$_.JObject?>?>();
   }
 
-  static final _id_values = GeoJsonOptions._class.instanceMethodId(
+  static final _id_values$1 = GeoJsonOptions._class.instanceMethodId(
     r'values',
     r'()Ljava/util/Collection;',
   );
 
-  static final _values =
+  static final _values$1 =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
@@ -127531,57 +128118,17 @@ extension GeoJsonOptions$$Methods on GeoJsonOptions {
 
   /// from: `public final bridge java.util.Collection<java.lang.Object> values()`
   /// The returned object must be released after use, by calling the [release] method.
-  Collection? values() {
+  jni$_.JCollection<jni$_.JObject?>? values$1() {
     final _$$selfRef = reference;
-    return _values(
+    return _values$1(
       _$$selfRef.pointer,
-      _id_values.pointer,
-    ).object<Collection?>();
-  }
-
-  static final _id_getOrDefault$1 = GeoJsonOptions._class.instanceMethodId(
-    r'getOrDefault',
-    r'(Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/Object;',
-  );
-
-  static final _getOrDefault$1 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<
-                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
-                >,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public bridge java.lang.Object getOrDefault(java.lang.String string, java.lang.Object object)`
-  /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? getOrDefault$1(jni$_.JString? string, jni$_.JObject? object) {
-    final _$$selfRef = reference;
-    final _$string = string?.reference ?? jni$_.jNullReference;
-    final _$object = object?.reference ?? jni$_.jNullReference;
-    return _getOrDefault$1(
-      _$$selfRef.pointer,
-      _id_getOrDefault$1.pointer,
-      _$string.pointer,
-      _$object.pointer,
-    ).object<jni$_.JObject?>();
+      _id_values$1.pointer,
+    ).object<jni$_.JCollection<jni$_.JObject?>?>();
   }
 
   static final _id_getOrDefault = GeoJsonOptions._class.instanceMethodId(
     r'getOrDefault',
-    r'(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;',
+    r'(Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/Object;',
   );
 
   static final _getOrDefault =
@@ -127605,15 +128152,55 @@ extension GeoJsonOptions$$Methods on GeoJsonOptions {
             )
           >();
 
-  /// from: `public final bridge java.lang.Object getOrDefault(java.lang.Object object, java.lang.Object object1)`
+  /// from: `public bridge java.lang.Object getOrDefault(java.lang.String string, java.lang.Object object)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? getOrDefault(jni$_.JObject? object, jni$_.JObject? object1) {
+  jni$_.JObject? getOrDefault(jni$_.JString? string, jni$_.JObject? object) {
     final _$$selfRef = reference;
+    final _$string = string?.reference ?? jni$_.jNullReference;
     final _$object = object?.reference ?? jni$_.jNullReference;
-    final _$object1 = object1?.reference ?? jni$_.jNullReference;
     return _getOrDefault(
       _$$selfRef.pointer,
       _id_getOrDefault.pointer,
+      _$string.pointer,
+      _$object.pointer,
+    ).object<jni$_.JObject?>();
+  }
+
+  static final _id_getOrDefault$1 = GeoJsonOptions._class.instanceMethodId(
+    r'getOrDefault',
+    r'(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;',
+  );
+
+  static final _getOrDefault$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public final bridge java.lang.Object getOrDefault(java.lang.Object object, java.lang.Object object1)`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JObject? getOrDefault$1(jni$_.JObject? object, jni$_.JObject? object1) {
+    final _$$selfRef = reference;
+    final _$object = object?.reference ?? jni$_.jNullReference;
+    final _$object1 = object1?.reference ?? jni$_.jNullReference;
+    return _getOrDefault$1(
+      _$$selfRef.pointer,
+      _id_getOrDefault$1.pointer,
       _$object.pointer,
       _$object1.pointer,
     ).object<jni$_.JObject?>();
@@ -128735,6 +129322,186 @@ extension GeoJsonSource$$Methods on GeoJsonSource {
     ).object<jni$_.JString?>();
   }
 
+  static final _id_setFeatureState = GeoJsonSource._class.instanceMethodId(
+    r'setFeatureState',
+    r'(Ljava/lang/String;Lcom/google/gson/JsonObject;)Z',
+  );
+
+  static final _setFeatureState =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public fun setFeatureState(featureId: kotlin.String, state: com.google.gson.JsonObject): kotlin.Boolean`
+  core$_.bool setFeatureState(jni$_.JString string, JsonObject jsonObject) {
+    final _$$selfRef = reference;
+    final _$string = string.reference;
+    final _$jsonObject = jsonObject.reference;
+    return _setFeatureState(
+      _$$selfRef.pointer,
+      _id_setFeatureState.pointer,
+      _$string.pointer,
+      _$jsonObject.pointer,
+    ).boolean;
+  }
+
+  static final _id_getFeatureState = GeoJsonSource._class.instanceMethodId(
+    r'getFeatureState',
+    r'(Ljava/lang/String;)Lcom/google/gson/JsonObject;',
+  );
+
+  static final _getFeatureState =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public fun getFeatureState(featureId: kotlin.String): com.google.gson.JsonObject?`
+  /// The returned object must be released after use, by calling the [release] method.
+  JsonObject? getFeatureState(jni$_.JString string) {
+    final _$$selfRef = reference;
+    final _$string = string.reference;
+    return _getFeatureState(
+      _$$selfRef.pointer,
+      _id_getFeatureState.pointer,
+      _$string.pointer,
+    ).object<JsonObject?>();
+  }
+
+  static final _id_removeFeatureState = GeoJsonSource._class.instanceMethodId(
+    r'removeFeatureState',
+    r'(Ljava/lang/String;Ljava/lang/String;)Z',
+  );
+
+  static final _removeFeatureState =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public fun removeFeatureState(featureId: kotlin.String?, stateKey: kotlin.String?): kotlin.Boolean`
+  core$_.bool removeFeatureState(
+    jni$_.JString? string,
+    jni$_.JString? string1,
+  ) {
+    final _$$selfRef = reference;
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$string1 = string1?.reference ?? jni$_.jNullReference;
+    return _removeFeatureState(
+      _$$selfRef.pointer,
+      _id_removeFeatureState.pointer,
+      _$string.pointer,
+      _$string1.pointer,
+    ).boolean;
+  }
+
+  static final _id_removeFeatureState$1 = GeoJsonSource._class.instanceMethodId(
+    r'removeFeatureState',
+    r'(Ljava/lang/String;)Z',
+  );
+
+  static final _removeFeatureState$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public fun removeFeatureState(featureId: kotlin.String): kotlin.Boolean`
+  core$_.bool removeFeatureState$1(jni$_.JString string) {
+    final _$$selfRef = reference;
+    final _$string = string.reference;
+    return _removeFeatureState$1(
+      _$$selfRef.pointer,
+      _id_removeFeatureState$1.pointer,
+      _$string.pointer,
+    ).boolean;
+  }
+
+  static final _id_resetFeatureStates = GeoJsonSource._class.instanceMethodId(
+    r'resetFeatureStates',
+    r'()Z',
+  );
+
+  static final _resetFeatureStates =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public fun resetFeatureStates(): kotlin.Boolean`
+  core$_.bool resetFeatureStates() {
+    final _$$selfRef = reference;
+    return _resetFeatureStates(
+      _$$selfRef.pointer,
+      _id_resetFeatureStates.pointer,
+    ).boolean;
+  }
+
   static final _id_querySourceFeatures = GeoJsonSource._class.instanceMethodId(
     r'querySourceFeatures',
     r'(Lorg/maplibre/android/style/expressions/Expression;)Ljava/util/List;',
@@ -128884,6 +129651,37 @@ extension GeoJsonSource$$Methods on GeoJsonSource {
       _$feature.pointer,
     ).integer;
   }
+
+  static final _id_set$overrideSynchronousUpdate = GeoJsonSource._class
+      .instanceMethodId(r'setOverrideSynchronousUpdate', r'(Z)V');
+
+  static final _set$overrideSynchronousUpdate =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              core$_.int,
+            )
+          >();
+
+  /// from: `public fun setOverrideSynchronousUpdate(override: kotlin.Boolean): kotlin.Unit`
+  set overrideSynchronousUpdate(core$_.bool z) {
+    final _$$selfRef = reference;
+    _set$overrideSynchronousUpdate(
+      _$$selfRef.pointer,
+      _id_set$overrideSynchronousUpdate.pointer,
+      z ? 1 : 0,
+    ).check();
+  }
 }
 
 final class $GeoJsonSource$Type$ extends jni$_.JType<GeoJsonSource> {
@@ -128964,6 +129762,7 @@ extension type GeometryTileProvider._(jni$_.JObject _$this)
       }
       final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      $i.args?.release();
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
@@ -130880,6 +131679,178 @@ final class $Source$Type$ extends jni$_.JType<Source> {
   String get signature => r'Lorg/maplibre/android/style/sources/Source;';
 }
 
+/// from: `org.maplibre.android.style.sources.TileData$Companion`
+extension type TileData$Companion._(jni$_.JObject _$this)
+    implements jni$_.JObject {
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/style/sources/TileData$Companion',
+  );
+
+  /// The type which includes information such as the signature of this class.
+  static const jni$_.JType<TileData$Companion> type =
+      $TileData$Companion$Type$();
+  static final _id_new$ = _class.constructorId(
+    r'(Lkotlin/jvm/internal/DefaultConstructorMarker;)V',
+  );
+
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `synthetic public void <init>(kotlin.jvm.internal.DefaultConstructorMarker defaultConstructorMarker)`
+  /// The returned object must be released after use, by calling the [release] method.
+  factory TileData$Companion(
+    DefaultConstructorMarker? defaultConstructorMarker,
+  ) {
+    final _$$classRef = _class.reference;
+    final _$defaultConstructorMarker =
+        defaultConstructorMarker?.reference ?? jni$_.jNullReference;
+    return _new$(
+      _$$classRef.pointer,
+      _id_new$.pointer,
+      _$defaultConstructorMarker.pointer,
+    ).object<TileData$Companion>();
+  }
+}
+
+final class $TileData$Companion$Type$ extends jni$_.JType<TileData$Companion> {
+  @jni$_.internal
+  const $TileData$Companion$Type$();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/style/sources/TileData$Companion;';
+}
+
+/// from: `org.maplibre.android.style.sources.TileData$Mvt`
+extension type TileData$Mvt._(jni$_.JObject _$this) implements TileData {
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/style/sources/TileData$Mvt',
+  );
+
+  /// The type which includes information such as the signature of this class.
+  static const jni$_.JType<TileData$Mvt> type = $TileData$Mvt$Type$();
+  static final _id_new$ = _class.constructorId(r'([B)V');
+
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public void <init>(byte[] bs)`
+  /// The returned object must be released after use, by calling the [release] method.
+  factory TileData$Mvt(jni$_.JByteArray bs) {
+    final _$$classRef = _class.reference;
+    final _$bs = bs.reference;
+    return _new$(
+      _$$classRef.pointer,
+      _id_new$.pointer,
+      _$bs.pointer,
+    ).object<TileData$Mvt>();
+  }
+}
+
+extension TileData$Mvt$$Methods on TileData$Mvt {
+  static final _id_get$data = TileData$Mvt._class.instanceMethodId(
+    r'getData',
+    r'()[B',
+  );
+
+  static final _get$data =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public final byte[] getData()`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JByteArray get data {
+    final _$$selfRef = reference;
+    return _get$data(
+      _$$selfRef.pointer,
+      _id_get$data.pointer,
+    ).object<jni$_.JByteArray>();
+  }
+}
+
+final class $TileData$Mvt$Type$ extends jni$_.JType<TileData$Mvt> {
+  @jni$_.internal
+  const $TileData$Mvt$Type$();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lorg/maplibre/android/style/sources/TileData$Mvt;';
+}
+
+/// from: `org.maplibre.android.style.sources.TileData`
+extension type TileData._(jni$_.JObject _$this) implements jni$_.JObject {
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/style/sources/TileData',
+  );
+
+  /// The type which includes information such as the signature of this class.
+  static const jni$_.JType<TileData> type = $TileData$Type$();
+  static final _id_Companion = _class.staticFieldId(
+    r'Companion',
+    r'Lorg/maplibre/android/style/sources/TileData$Companion;',
+  );
+
+  /// from: `static public final org.maplibre.android.style.sources.TileData$Companion Companion`
+  /// The returned object must be released after use, by calling the [release] method.
+  static TileData$Companion get Companion =>
+      _id_Companion.get(_class, TileData$Companion.type) as TileData$Companion;
+
+  /// from: `static public final int FORMAT_MVT`
+  static const FORMAT_MVT = 0;
+}
+
+final class $TileData$Type$ extends jni$_.JType<TileData> {
+  @jni$_.internal
+  const $TileData$Type$();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lorg/maplibre/android/style/sources/TileData;';
+}
+
 /// from: `org.maplibre.android.style.sources.TileSet`
 extension type TileSet._(jni$_.JObject _$this) implements jni$_.JObject {
   static final _class = jni$_.JClass.forName(
@@ -132348,6 +133319,222 @@ extension type VectorSource._(jni$_.JObject _$this) implements Source {
 }
 
 extension VectorSource$$Methods on VectorSource {
+  static final _id_setFeatureState = VectorSource._class.instanceMethodId(
+    r'setFeatureState',
+    r'(Ljava/lang/String;Ljava/lang/String;Lcom/google/gson/JsonObject;)Z',
+  );
+
+  static final _setFeatureState =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public fun setFeatureState(sourceLayerId: kotlin.String, featureId: kotlin.String, state: com.google.gson.JsonObject): kotlin.Boolean`
+  core$_.bool setFeatureState(
+    jni$_.JString string,
+    jni$_.JString string1,
+    JsonObject jsonObject,
+  ) {
+    final _$$selfRef = reference;
+    final _$string = string.reference;
+    final _$string1 = string1.reference;
+    final _$jsonObject = jsonObject.reference;
+    return _setFeatureState(
+      _$$selfRef.pointer,
+      _id_setFeatureState.pointer,
+      _$string.pointer,
+      _$string1.pointer,
+      _$jsonObject.pointer,
+    ).boolean;
+  }
+
+  static final _id_getFeatureState = VectorSource._class.instanceMethodId(
+    r'getFeatureState',
+    r'(Ljava/lang/String;Ljava/lang/String;)Lcom/google/gson/JsonObject;',
+  );
+
+  static final _getFeatureState =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public fun getFeatureState(sourceLayerId: kotlin.String, featureId: kotlin.String): com.google.gson.JsonObject?`
+  /// The returned object must be released after use, by calling the [release] method.
+  JsonObject? getFeatureState(jni$_.JString string, jni$_.JString string1) {
+    final _$$selfRef = reference;
+    final _$string = string.reference;
+    final _$string1 = string1.reference;
+    return _getFeatureState(
+      _$$selfRef.pointer,
+      _id_getFeatureState.pointer,
+      _$string.pointer,
+      _$string1.pointer,
+    ).object<JsonObject?>();
+  }
+
+  static final _id_removeFeatureState = VectorSource._class.instanceMethodId(
+    r'removeFeatureState',
+    r'(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Z',
+  );
+
+  static final _removeFeatureState =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public fun removeFeatureState(sourceLayerId: kotlin.String, featureId: kotlin.String?, stateKey: kotlin.String?): kotlin.Boolean`
+  core$_.bool removeFeatureState(
+    jni$_.JString string,
+    jni$_.JString? string1,
+    jni$_.JString? string2,
+  ) {
+    final _$$selfRef = reference;
+    final _$string = string.reference;
+    final _$string1 = string1?.reference ?? jni$_.jNullReference;
+    final _$string2 = string2?.reference ?? jni$_.jNullReference;
+    return _removeFeatureState(
+      _$$selfRef.pointer,
+      _id_removeFeatureState.pointer,
+      _$string.pointer,
+      _$string1.pointer,
+      _$string2.pointer,
+    ).boolean;
+  }
+
+  static final _id_removeFeatureState$1 = VectorSource._class.instanceMethodId(
+    r'removeFeatureState',
+    r'(Ljava/lang/String;Ljava/lang/String;)Z',
+  );
+
+  static final _removeFeatureState$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public fun removeFeatureState(sourceLayerId: kotlin.String, featureId: kotlin.String): kotlin.Boolean`
+  core$_.bool removeFeatureState$1(
+    jni$_.JString string,
+    jni$_.JString string1,
+  ) {
+    final _$$selfRef = reference;
+    final _$string = string.reference;
+    final _$string1 = string1.reference;
+    return _removeFeatureState$1(
+      _$$selfRef.pointer,
+      _id_removeFeatureState$1.pointer,
+      _$string.pointer,
+      _$string1.pointer,
+    ).boolean;
+  }
+
+  static final _id_resetFeatureStates = VectorSource._class.instanceMethodId(
+    r'resetFeatureStates',
+    r'(Ljava/lang/String;)Z',
+  );
+
+  static final _resetFeatureStates =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public fun resetFeatureStates(sourceLayerId: kotlin.String): kotlin.Boolean`
+  core$_.bool resetFeatureStates(jni$_.JString string) {
+    final _$$selfRef = reference;
+    final _$string = string.reference;
+    return _resetFeatureStates(
+      _$$selfRef.pointer,
+      _id_resetFeatureStates.pointer,
+      _$string.pointer,
+    ).boolean;
+  }
+
   static final _id_querySourceFeatures = VectorSource._class.instanceMethodId(
     r'querySourceFeatures',
     r'([Ljava/lang/String;Lorg/maplibre/android/style/expressions/Expression;)Ljava/util/List;',
@@ -133492,6 +134679,9 @@ extension Feature$$Methods on Feature {
   ///@deprecated This method was passing the call to JsonElement::getAsCharacter()
   ///   which is in turn deprecated because of misleading nature, as it
   ///   does not get this element as a char but rather as a string's first character.
+  @core$_.Deprecated(
+    'This method was passing the call to JsonElement::getAsCharacter()\nwhich is in turn deprecated because of misleading nature, as it\ndoes not get this element as a char but rather as a string\'s first character.',
+  )
   jni$_.JCharacter? getCharacterProperty(jni$_.JString? key) {
     final _$$selfRef = reference;
     final _$key = key?.reference ?? jni$_.jNullReference;
@@ -133849,6 +135039,7 @@ extension Gson$$Methods on Gson {
 
   /// from: `public com.google.gson.internal.Excluder excluder()`
   /// The returned object must be released after use, by calling the [release] method.
+  @core$_.Deprecated('This Java method is deprecated.')
   Excluder? excluder() {
     final _$$selfRef = reference;
     return _excluder(
@@ -134046,7 +135237,7 @@ extension Gson$$Methods on Gson {
 
   /// from: `public com.google.gson.TypeAdapter<T> getAdapter(java.lang.Class<T> class)`
   /// The returned object must be released after use, by calling the [release] method.
-  TypeAdapter? getAdapter$1<$T extends jni$_.JObject?>(Class? class$) {
+  TypeAdapter? getAdapter$1<$T extends jni$_.JObject?>(jni$_.JClass? class$) {
     final _$$selfRef = reference;
     final _$class$ = class$?.reference ?? jni$_.jNullReference;
     return _getAdapter$1(
@@ -134550,7 +135741,7 @@ extension Gson$$Methods on Gson {
   /// The returned object must be released after use, by calling the [release] method.
   $T? fromJson<$T extends jni$_.JObject?>(
     jni$_.JString? string,
-    Class? class$,
+    jni$_.JClass? class$,
   ) {
     final _$$selfRef = reference;
     final _$string = string?.reference ?? jni$_.jNullReference;
@@ -134674,7 +135865,10 @@ extension Gson$$Methods on Gson {
 
   /// from: `public T fromJson(java.io.Reader reader, java.lang.Class<T> class)`
   /// The returned object must be released after use, by calling the [release] method.
-  $T? fromJson$3<$T extends jni$_.JObject?>(Reader? reader, Class? class$) {
+  $T? fromJson$3<$T extends jni$_.JObject?>(
+    Reader? reader,
+    jni$_.JClass? class$,
+  ) {
     final _$$selfRef = reference;
     final _$reader = reader?.reference ?? jni$_.jNullReference;
     final _$class$ = class$?.reference ?? jni$_.jNullReference;
@@ -134885,7 +136079,7 @@ extension Gson$$Methods on Gson {
   /// The returned object must be released after use, by calling the [release] method.
   $T? fromJson$8<$T extends jni$_.JObject?>(
     JsonElement? jsonElement,
-    Class? class$,
+    jni$_.JClass? class$,
   ) {
     final _$$selfRef = reference;
     final _$jsonElement = jsonElement?.reference ?? jni$_.jNullReference;
@@ -137320,24 +138514,6 @@ final class $Resources$Type$ extends jni$_.JType<Resources> {
   String get signature => r'Landroid/content/res/Resources;';
 }
 
-/// from: `java.lang.Class`
-///
-/// WARNING: Class is a stub. To generate bindings for this class, include
-/// java.lang.Class in your config's classes list.
-///
-extension type Class._(jni$_.JObject _$this) implements jni$_.JObject {
-  static const jni$_.JType<Class> type = $Class$Type$();
-}
-
-final class $Class$Type$ extends jni$_.JType<Class> {
-  @jni$_.internal
-  const $Class$Type$();
-
-  @jni$_.internal
-  @core$_.override
-  String get signature => r'Ljava/lang/Class;';
-}
-
 /// from: `android.content.res.Resources$Theme`
 ///
 /// WARNING: Resources$$Theme is a stub. To generate bindings for this class, include
@@ -137547,24 +138723,6 @@ final class $Handler$Type$ extends jni$_.JType<Handler> {
   String get signature => r'Landroid/os/Handler;';
 }
 
-/// from: `java.util.Collection`
-///
-/// WARNING: Collection is a stub. To generate bindings for this class, include
-/// java.util.Collection in your config's classes list.
-///
-extension type Collection._(jni$_.JObject _$this) implements jni$_.JObject {
-  static const jni$_.JType<Collection> type = $Collection$Type$();
-}
-
-final class $Collection$Type$ extends jni$_.JType<Collection> {
-  @jni$_.internal
-  const $Collection$Type$();
-
-  @jni$_.internal
-  @core$_.override
-  String get signature => r'Ljava/util/Collection;';
-}
-
 /// from: `java.io.InputStream`
 ///
 /// WARNING: InputStream is a stub. To generate bindings for this class, include
@@ -137746,24 +138904,6 @@ final class $Printer$Type$ extends jni$_.JType<Printer> {
   @jni$_.internal
   @core$_.override
   String get signature => r'Landroid/util/Printer;';
-}
-
-/// from: `java.util.ArrayList`
-///
-/// WARNING: ArrayList is a stub. To generate bindings for this class, include
-/// java.util.ArrayList in your config's classes list.
-///
-extension type ArrayList._(jni$_.JObject _$this) implements jni$_.JObject {
-  static const jni$_.JType<ArrayList> type = $ArrayList$Type$();
-}
-
-final class $ArrayList$Type$ extends jni$_.JType<ArrayList> {
-  @jni$_.internal
-  const $ArrayList$Type$();
-
-  @jni$_.internal
-  @core$_.override
-  String get signature => r'Ljava/util/ArrayList;';
 }
 
 /// from: `android.view.accessibility.AccessibilityNodeInfo`
@@ -138127,7 +139267,8 @@ final class $ViewManager$Type$ extends jni$_.JType<ViewManager> {
 ///
 extension type LayoutAnimationController$$AnimationParameters._(
   jni$_.JObject _$this
-) implements jni$_.JObject {
+)
+    implements jni$_.JObject {
   static const jni$_.JType<LayoutAnimationController$$AnimationParameters>
   type = $LayoutAnimationController$$AnimationParameters$Type$();
 }
@@ -138255,114 +139396,6 @@ final class $URLStreamHandlerFactory$Type$
   String get signature => r'Ljava/net/URLStreamHandlerFactory;';
 }
 
-/// from: `java.util.AbstractMap`
-///
-/// WARNING: AbstractMap is a stub. To generate bindings for this class, include
-/// java.util.AbstractMap in your config's classes list.
-///
-extension type AbstractMap._(jni$_.JObject _$this) implements jni$_.JObject {
-  static const jni$_.JType<AbstractMap> type = $AbstractMap$Type$();
-}
-
-final class $AbstractMap$Type$ extends jni$_.JType<AbstractMap> {
-  @jni$_.internal
-  const $AbstractMap$Type$();
-
-  @jni$_.internal
-  @core$_.override
-  String get signature => r'Ljava/util/AbstractMap;';
-}
-
-/// from: `java.util.function.BiFunction`
-///
-/// WARNING: BiFunction is a stub. To generate bindings for this class, include
-/// java.util.function.BiFunction in your config's classes list.
-///
-extension type BiFunction._(jni$_.JObject _$this) implements jni$_.JObject {
-  static const jni$_.JType<BiFunction> type = $BiFunction$Type$();
-}
-
-final class $BiFunction$Type$ extends jni$_.JType<BiFunction> {
-  @jni$_.internal
-  const $BiFunction$Type$();
-
-  @jni$_.internal
-  @core$_.override
-  String get signature => r'Ljava/util/function/BiFunction;';
-}
-
-/// from: `java.util.function.Function`
-///
-/// WARNING: Function$ is a stub. To generate bindings for this class, include
-/// java.util.function.Function in your config's classes list.
-///
-extension type Function$._(jni$_.JObject _$this) implements jni$_.JObject {
-  static const jni$_.JType<Function$> type = $Function$$Type$();
-}
-
-final class $Function$$Type$ extends jni$_.JType<Function$> {
-  @jni$_.internal
-  const $Function$$Type$();
-
-  @jni$_.internal
-  @core$_.override
-  String get signature => r'Ljava/util/function/Function;';
-}
-
-/// from: `java.util.Map$Entry`
-///
-/// WARNING: Map$$Entry is a stub. To generate bindings for this class, include
-/// java.util.Map$Entry in your config's classes list.
-///
-extension type Map$$Entry._(jni$_.JObject _$this) implements jni$_.JObject {
-  static const jni$_.JType<Map$$Entry> type = $Map$$Entry$Type$();
-}
-
-final class $Map$$Entry$Type$ extends jni$_.JType<Map$$Entry> {
-  @jni$_.internal
-  const $Map$$Entry$Type$();
-
-  @jni$_.internal
-  @core$_.override
-  String get signature => r'Ljava/util/Map$Entry;';
-}
-
-/// from: `java.util.function.BiConsumer`
-///
-/// WARNING: BiConsumer is a stub. To generate bindings for this class, include
-/// java.util.function.BiConsumer in your config's classes list.
-///
-extension type BiConsumer._(jni$_.JObject _$this) implements jni$_.JObject {
-  static const jni$_.JType<BiConsumer> type = $BiConsumer$Type$();
-}
-
-final class $BiConsumer$Type$ extends jni$_.JType<BiConsumer> {
-  @jni$_.internal
-  const $BiConsumer$Type$();
-
-  @jni$_.internal
-  @core$_.override
-  String get signature => r'Ljava/util/function/BiConsumer;';
-}
-
-/// from: `java.lang.Cloneable`
-///
-/// WARNING: Cloneable is a stub. To generate bindings for this class, include
-/// java.lang.Cloneable in your config's classes list.
-///
-extension type Cloneable._(jni$_.JObject _$this) implements jni$_.JObject {
-  static const jni$_.JType<Cloneable> type = $Cloneable$Type$();
-}
-
-final class $Cloneable$Type$ extends jni$_.JType<Cloneable> {
-  @jni$_.internal
-  const $Cloneable$Type$();
-
-  @jni$_.internal
-  @core$_.override
-  String get signature => r'Ljava/lang/Cloneable;';
-}
-
 /// from: `io.flutter.plugin.common.MessageCodec`
 ///
 /// WARNING: MessageCodec is a stub. To generate bindings for this class, include
@@ -138400,6 +139433,27 @@ final class $WellKnownTileServer$Type$
   @jni$_.internal
   @core$_.override
   String get signature => r'Lorg/maplibre/android/WellKnownTileServer;';
+}
+
+/// from: `org.maplibre.android.RenderingEngine$Type`
+///
+/// WARNING: RenderingEngine$$Type is a stub. To generate bindings for this class, include
+/// org.maplibre.android.RenderingEngine$Type in your config's classes list.
+///
+extension type RenderingEngine$$Type._(jni$_.JObject _$this)
+    implements jni$_.JObject {
+  static const jni$_.JType<RenderingEngine$$Type> type =
+      $RenderingEngine$$Type$Type$();
+}
+
+final class $RenderingEngine$$Type$Type$
+    extends jni$_.JType<RenderingEngine$$Type> {
+  @jni$_.internal
+  const $RenderingEngine$$Type$Type$();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lorg/maplibre/android/RenderingEngine$Type;';
 }
 
 /// from: `org.maplibre.android.util.TileServerOptions`
@@ -139609,6 +140663,60 @@ final class $AtomicBoolean$Type$ extends jni$_.JType<AtomicBoolean> {
   @jni$_.internal
   @core$_.override
   String get signature => r'Ljava/util/concurrent/atomic/AtomicBoolean;';
+}
+
+/// from: `java.util.Map$Entry`
+///
+/// WARNING: Map$$Entry is a stub. To generate bindings for this class, include
+/// java.util.Map$Entry in your config's classes list.
+///
+extension type Map$$Entry._(jni$_.JObject _$this) implements jni$_.JObject {
+  static const jni$_.JType<Map$$Entry> type = $Map$$Entry$Type$();
+}
+
+final class $Map$$Entry$Type$ extends jni$_.JType<Map$$Entry> {
+  @jni$_.internal
+  const $Map$$Entry$Type$();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Ljava/util/Map$Entry;';
+}
+
+/// from: `kotlinx.coroutines.CoroutineScope`
+///
+/// WARNING: CoroutineScope is a stub. To generate bindings for this class, include
+/// kotlinx.coroutines.CoroutineScope in your config's classes list.
+///
+extension type CoroutineScope._(jni$_.JObject _$this) implements jni$_.JObject {
+  static const jni$_.JType<CoroutineScope> type = $CoroutineScope$Type$();
+}
+
+final class $CoroutineScope$Type$ extends jni$_.JType<CoroutineScope> {
+  @jni$_.internal
+  const $CoroutineScope$Type$();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lkotlinx/coroutines/CoroutineScope;';
+}
+
+/// from: `kotlin.coroutines.Continuation`
+///
+/// WARNING: Continuation is a stub. To generate bindings for this class, include
+/// kotlin.coroutines.Continuation in your config's classes list.
+///
+extension type Continuation._(jni$_.JObject _$this) implements jni$_.JObject {
+  static const jni$_.JType<Continuation> type = $Continuation$Type$();
+}
+
+final class $Continuation$Type$ extends jni$_.JType<Continuation> {
+  @jni$_.internal
+  const $Continuation$Type$();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lkotlin/coroutines/Continuation;';
 }
 
 /// from: `org.maplibre.geojson.BoundingBox`

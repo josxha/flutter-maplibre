@@ -38,12 +38,21 @@ class LayerManager {
       final layer = layers[index];
       final oldLayer = index > _oldLayers.length - 1 ? null : _oldLayers[index];
       // update source
-      // TODO check if the entities of both lists are equal
       if (oldLayer case Layer()) {
-        style.updateGeoJsonSource(
-          id: layer.getSourceId(index),
-          data: FeatureCollection(layer.list).toText(),
-        );
+        // Only re-serialise a source whose layer actually changed. Building
+        // the FeatureCollection text is the expensive half of this call, and
+        // it ran on every rebuild for every layer even when nothing about the
+        // layer had moved.
+        //
+        // `Layer.==` is the same test already applied to the style layer a few
+        // lines below, so this uses one condition rather than introducing a
+        // second notion of "changed".
+        if (layer != oldLayer) {
+          style.updateGeoJsonSource(
+            id: layer.getSourceId(index),
+            data: FeatureCollection(layer.list).toText(),
+          );
+        }
       } else {
         final source = GeoJsonSource(
           id: layer.getSourceId(index),
