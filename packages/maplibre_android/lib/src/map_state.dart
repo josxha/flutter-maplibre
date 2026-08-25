@@ -518,32 +518,37 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
 
   List<RenderedFeature> _nativeQueryToRenderedFeatures(
     JList<jni.Feature?> query,
-  ) {
-    final features = query.asDart().where((f) => f != null).map((f) => f!);
-    return features
-        .map((feature) {
-          final decodedFeature =
-              jsonDecode(
-                    feature.toJson()?.toDartString(releaseOriginal: true) ??
-                        '{}',
-                  )
-                  as Map<String, Object?>;
+  ) => using((arena) {
+    // Indexed access instead of an iterator: JList.iterator leaks the
+    // java.util.Iterator global ref (dart-lang/native jlist.dart).
+    final renderedFeatures = <RenderedFeature>[];
+    for (var i = 0; i < query.size(); i++) {
+      final feature = query.get(i)?..releasedBy(arena);
+      if (feature == null) continue;
 
-          final decodedProperties = decodedFeature['properties'];
-          final decodedGeometry = decodedFeature['geometry'];
+      final decodedFeature =
+          jsonDecode(
+                feature.toJson()?.toDartString(releaseOriginal: true) ?? '{}',
+              )
+              as Map<String, Object?>;
 
-          return RenderedFeature(
-            id: feature.id()?.toDartString(releaseOriginal: true),
-            properties: decodedProperties is Map
-                ? decodedProperties.map((k, v) => MapEntry(k.toString(), v))
-                : {},
-            geometry: decodedGeometry is Map
-                ? decodedGeometry.map((k, v) => MapEntry(k.toString(), v))
-                : null,
-          );
-        })
-        .toList(growable: false);
-  }
+      final decodedProperties = decodedFeature['properties'];
+      final decodedGeometry = decodedFeature['geometry'];
+
+      renderedFeatures.add(
+        RenderedFeature(
+          id: feature.id()?.toDartString(releaseOriginal: true),
+          properties: decodedProperties is Map
+              ? decodedProperties.map((k, v) => MapEntry(k.toString(), v))
+              : {},
+          geometry: decodedGeometry is Map
+              ? decodedGeometry.map((k, v) => MapEntry(k.toString(), v))
+              : null,
+        ),
+      );
+    }
+    return renderedFeatures;
+  });
 
   @override
   List<RenderedFeature> featuresAtPoint(
@@ -562,14 +567,20 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
 
     final scaledPoint = point * View.of(context).devicePixelRatio;
 
-    final query = map.queryRenderedFeatures(
-      jni.PointF.new$3(scaledPoint.dx, scaledPoint.dy),
-      layerIds != null
-          ? JArray.of(JString.type, layerIds.map((s) => s.toJString()))
-          : null,
-    );
+    return using((arena) {
+      final jPoint = jni.PointF.new$3(scaledPoint.dx, scaledPoint.dy)
+        ..releasedBy(arena);
+      final jLayerIds = layerIds != null
+          ? (JArray.of(
+              JString.type,
+              layerIds.map((s) => s.toJString()..releasedBy(arena)),
+            )..releasedBy(arena))
+          : null;
+      final query = map.queryRenderedFeatures(jPoint, jLayerIds)
+        ..releasedBy(arena);
 
-    return _nativeQueryToRenderedFeatures(query);
+      return _nativeQueryToRenderedFeatures(query);
+    });
   }
 
   @override
@@ -592,19 +603,24 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
       rect.bottom * devicePixelRatio,
     );
 
-    final query = map.queryRenderedFeatures$2(
-      jni.RectF.new$3(
+    return using((arena) {
+      final jRect = jni.RectF.new$3(
         scaledRect.left,
         scaledRect.top,
         scaledRect.right,
         scaledRect.bottom,
-      ),
-      layerIds != null
-          ? JArray.of(JString.type, layerIds.map((s) => s.toJString()))
-          : null,
-    );
+      )..releasedBy(arena);
+      final jLayerIds = layerIds != null
+          ? (JArray.of(
+              JString.type,
+              layerIds.map((s) => s.toJString()..releasedBy(arena)),
+            )..releasedBy(arena))
+          : null;
+      final query = map.queryRenderedFeatures$2(jRect, jLayerIds)
+        ..releasedBy(arena);
 
-    return _nativeQueryToRenderedFeatures(query);
+      return _nativeQueryToRenderedFeatures(query);
+    });
   }
 
   @override
