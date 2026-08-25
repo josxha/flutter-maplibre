@@ -8,6 +8,10 @@
 - Android: `StyleController` now releases its native style reference when
   the owning `MapLibreMap` is disposed, instead of staying technically
   usable on a torn-down map.
+- Android: fix `StyleController` and several map query methods
+  (`updateGeoJsonSource`, `removeLayer`/`removeSource`/`removeImage`,
+  `getLayerIds`, `getAttributionsSync`, `featuresAtPoint`/`featuresInRect`)
+  leak JNI global references on every call.
 - Android: camera listeners no longer block the calling Java thread on every
   camera event.
 
