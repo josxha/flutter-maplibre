@@ -16,6 +16,19 @@ import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 
 part 'style_controller.dart';
 
+final class _MoveGestureDetector {
+  static final JClass _class = JClass.forName(
+    'org/maplibre/android/gestures/MoveGestureDetector',
+  );
+  static final JInstanceMethodId _getFocalPointId = _class.instanceMethodId(
+    'getFocalPoint',
+    '()Landroid/graphics/PointF;',
+  );
+
+  static jni.PointF getFocalPoint(JObject detector) =>
+      _getFocalPointId.call(detector, jni.PointF.type, []);
+}
+
 /// The implementation that gets used for state of the [MapLibreMap] widget on
 /// android using JNI and Pigeon as a fallback.
 final class MapLibreMapStateAndroid extends MapLibreMapState
@@ -94,6 +107,32 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
           onCameraIdle$async: true,
         ),
       );
+  late final _mapMoveListener = jni.MapLibreMap$OnMoveListener.implement(
+    jni.$MapLibreMap$OnMoveListener(
+      onMoveBegin: (moveGestureDetector) => using((arena) {
+        if (!mounted) return;
+        final focalPoint = _MoveGestureDetector.getFocalPoint(
+          moveGestureDetector,
+        );
+        final x = focalPoint.x;
+        final y = focalPoint.y;
+        focalPoint.releasedBy(arena);
+
+        final pixelRatio = View.of(context).devicePixelRatio;
+        widget.onEvent?.call(
+          MapEventUserInput(
+            point: _jProjection
+                .fromScreenLocation(jni.PointF.new$3(x, y)..releasedBy(arena))
+                .toGeographic(),
+            screenPoint: Offset(x, y) / pixelRatio,
+          ),
+        );
+      }),
+      onMove: (_) {},
+      onMoveEnd: (_) {},
+    ),
+  );
+
   late final _cameraMoveStartedListener =
       jni.MapLibreMap$OnCameraMoveStartedListener.implement(
         jni.$MapLibreMap$OnCameraMoveStartedListener(
@@ -256,6 +295,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
     _jMap = jMap
       ..addOnMapClickListener(_mapClickListener)
       ..addOnMapLongClickListener(_mapLongClickListener)
+      ..addOnMoveListener(_mapMoveListener)
       ..addOnCameraMoveListener(_mapCameraMoveListener)
       ..addOnCameraIdleListener(_mapCameraIdleListener)
       ..addOnCameraMoveStartedListener(_cameraMoveStartedListener)
@@ -289,6 +329,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
     if (_jMap case final jMap?) {
       jMap.removeOnMapClickListener(_mapClickListener);
       jMap.removeOnMapLongClickListener(_mapLongClickListener);
+      jMap.removeOnMoveListener(_mapMoveListener);
       jMap.removeOnCameraMoveListener(_mapCameraMoveListener);
       jMap.removeOnCameraIdleListener(_mapCameraIdleListener);
       jMap.removeOnCameraMoveStartedListener(_cameraMoveStartedListener);

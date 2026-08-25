@@ -49,3 +49,6 @@ const eventDblClick = 7;
 
 /// Action type for [MapEventSecondaryClick].
 const eventContextMenu = 8;
+
+/// Action type for [MapEventUserInput].
+const eventUserInput = 9;

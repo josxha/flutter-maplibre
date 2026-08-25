@@ -86,6 +86,45 @@ class MapLibreView: NSObject, FlutterPlatformView, UIGestureRecognizerDelegate, 
             secondaryTap.buttonMaskRequired = .secondary
             _mapView.addGestureRecognizer(secondaryTap)
         }
+        let panGesture = UIPanGestureRecognizer(
+            target: self,
+            action: #selector(onUserInput(sender:))
+        )
+        panGesture.cancelsTouchesInView = false
+        panGesture.delegate = self
+        _mapView.addGestureRecognizer(panGesture)
+
+        let pinchGesture = UIPinchGestureRecognizer(
+            target: self,
+            action: #selector(onUserInput(sender:))
+        )
+        pinchGesture.cancelsTouchesInView = false
+        pinchGesture.delegate = self
+        _mapView.addGestureRecognizer(pinchGesture)
+
+        let rotationGesture = UIRotationGestureRecognizer(
+            target: self,
+            action: #selector(onUserInput(sender:))
+        )
+        rotationGesture.cancelsTouchesInView = false
+        rotationGesture.delegate = self
+        _mapView.addGestureRecognizer(rotationGesture)
+    }
+
+    private var _userInputGestureActive = false
+
+    @objc private func onUserInput(sender: UIGestureRecognizer) {
+        switch sender.state {
+        case .began:
+            guard !_userInputGestureActive else { return }
+            _userInputGestureActive = true
+            let screenPosition = sender.location(in: _mapView)
+            api?.onUserInput(screenLocation: screenPosition)
+        case .ended, .cancelled, .failed:
+            _userInputGestureActive = false
+        default:
+            break
+        }
     }
 
     var api: FlutterApi? {

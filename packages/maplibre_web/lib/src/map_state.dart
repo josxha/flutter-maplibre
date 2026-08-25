@@ -42,6 +42,36 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         ..style.margin = '0'
         ..style.height = '100%'
         ..style.width = '100%';
+      _htmlElement.addEventListener(
+        'pointerdown',
+        (Event event) {
+          final domEvent = event as MouseEvent;
+          final rect = _htmlElement.getBoundingClientRect();
+          final offset = Offset(
+            domEvent.clientX.toDouble() - rect.left,
+            domEvent.clientY.toDouble() - rect.top,
+          );
+          final point = toLngLat(offset);
+          widget.onEvent?.call(
+            MapEventUserInput(point: point, screenPoint: offset),
+          );
+        }.toJS,
+      );
+      _htmlElement.addEventListener(
+        'wheel',
+        (Event event) {
+          final domEvent = event as MouseEvent;
+          final rect = _htmlElement.getBoundingClientRect();
+          final offset = Offset(
+            domEvent.clientX.toDouble() - rect.left,
+            domEvent.clientY.toDouble() - rect.top,
+          );
+          final point = toLngLat(offset);
+          widget.onEvent?.call(
+            MapEventUserInput(point: point, screenPoint: offset),
+          );
+        }.toJS,
+      );
 
       // add pmtiles support
       try {
@@ -53,7 +83,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
 
       _map = interop.JsMap(
         interop.MapOptions(
-          container: _htmlElement,
+          container: JSObject.fromInteropObject(_htmlElement),
           style: _prepareStyleString(options.initStyle),
           zoom: options.initZoom,
           center: options.initCenter?.toLngLat(),
@@ -63,7 +93,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         ),
       );
 
-      document.body?.appendChild(_htmlElement);
+      document.body?.append(_htmlElement);
       // Invoke the onMapCreated callback async to avoid getting it called
       // during the widget build.
       WidgetsBinding.instance.addPostFrameCallback((_) {
