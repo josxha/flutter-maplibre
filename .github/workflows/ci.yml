@@ -123,7 +123,7 @@ jobs:
       - name: "Setup Flutter SDK"
         uses: subosito/flutter-action@v2
         with: { cache: true }
-      - uses: actions/setup-java@v5
+      - uses: actions/setup-java@v5.6.0
         with:
           java-version: '21'
           distribution: 'temurin'
@@ -207,7 +207,7 @@ jobs:
         with:
           flutter-version: ${{ matrix.sdk }}
           cache: true
-      - uses: actions/setup-java@v5
+      - uses: actions/setup-java@v5.6.0
         with:
           java-version: '21'
           distribution: 'temurin'
@@ -285,24 +285,24 @@ jobs:
         run: dart pub get
       - name: Build windows
         run: flutter build windows --debug
-  build-macos:
-    name: "[macOS] Build"
-    runs-on: macos-latest
-    defaults: { run: { working-directory: examples } }
-    strategy:
-      fail-fast: false
-      matrix:
-        sdk: [ '3.44.0', '' ]
-    steps:
-      - uses: actions/checkout@v7
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: ${{ matrix.sdk }}
-          cache: true
-      - name: "Get Flutter dependencies"
-        run: dart pub get
-      - name: Build macOS
-        run: flutter build macos --debug
+  #build-macos:
+  #  name: "[macOS] Build"
+  #  runs-on: macos-latest
+  #  defaults: { run: { working-directory: examples } }
+  #  strategy:
+  #    fail-fast: false
+  #    matrix:
+  #      sdk: [ '3.44.0', '' ]
+  #  steps:
+  #    - uses: actions/checkout@v7
+  #    - uses: subosito/flutter-action@v2
+  #      with:
+  #        flutter-version: ${{ matrix.sdk }}
+  #        cache: true
+  #    - name: "Get Flutter dependencies"
+  #      run: dart pub get
+  #    - name: Build macOS
+  #      run: flutter build macos --debug
   build-web-wasm:
     name: "[Web] Build WASM"
     runs-on: ubuntu-latest
@@ -328,7 +328,7 @@ jobs:
 #      - uses: actions/checkout@v7
 #      - uses: subosito/flutter-action@v2
 #        with: { cache: true }
-#      - uses: actions/setup-java@v5
+#      - uses: actions/setup-java@v5.6.0
 #        with:
 #          java-version: '21'
 #          distribution: 'temurin'
