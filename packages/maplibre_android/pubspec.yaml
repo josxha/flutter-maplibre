@@ -1,6 +1,6 @@
 name: maplibre_android
 description: "Android implementation of the Flutter MapLibre plugin."
-version: 0.3.5
+version: 0.3.6
 repository: https://github.com/josxha/flutter-maplibre
 issue_tracker: https://github.com/josxha/flutter-maplibre/issues
 homepage: https://flutter-maplibre.pages.dev
@@ -19,7 +19,7 @@ dependencies:
   flutter: { sdk: flutter }
   jni: ^1.0.0
   jni_flutter: ^1.0.0
-  maplibre_platform_interface: ^0.3.5
+  maplibre_platform_interface: ^0.3.6
 
 dev_dependencies:
   jnigen: 0.17.0

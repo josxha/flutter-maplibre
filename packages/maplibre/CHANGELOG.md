@@ -1,4 +1,10 @@
-## unreleased
+## 0.3.6
+
+Thanks for everyone who contributed in this release!
+
+### Features
+
+- MapLibre Native Android 
 
 ### Bug Fixes
 
