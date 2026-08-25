@@ -45,7 +45,7 @@ android {
     }
 
     dependencies {
-        api("org.maplibre.gl:android-sdk-opengl:13.3.+")
+        api("org.maplibre.gl:android-sdk-opengl:13.5.+")
         testImplementation("org.jetbrains.kotlin:kotlin-test")
         testImplementation("org.mockito:mockito-core:5.21.+")
     }
