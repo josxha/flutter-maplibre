@@ -31,7 +31,7 @@ Thanks for everyone who contributed in this release!
 - iOS: fix SPM package resolved bootstrap
 - iOS: fix GeoJSON rendering failure in obfuscated releases
 - Android: fix proguard rules for obfuscated release builds
-- 
+- skip re-serializing a GeoJSON source whose layer is unchanged.
 
 ## 0.3.5
 
