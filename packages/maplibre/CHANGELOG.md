@@ -1,3 +1,10 @@
+## unreleased
+
+### Bug Fixes
+
+- Android: calls on a `StyleController` whose native style was already released
+  are ignored instead of aborting the process with a JNI error.
+
 ## 0.3.6
 
 Thanks for everyone who contributed in this release!
