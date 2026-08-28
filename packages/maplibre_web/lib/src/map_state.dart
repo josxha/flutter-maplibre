@@ -8,6 +8,7 @@ import 'dart:ui_web';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
+import 'package:maplibre_web/src/camera_padding_reset.dart';
 import 'package:maplibre_web/src/extensions.dart';
 import 'package:maplibre_web/src/interop/interop.dart' as interop;
 import 'package:maplibre_web/src/interop/json.dart';
@@ -21,6 +22,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   late HTMLDivElement _htmlElement;
   late interop.JsMap _map;
   Completer<interop.MapLibreEvent>? _movementCompleter;
+  final _cameraPaddingReset = CameraPaddingReset();
   bool _nextGestureCausedByController = false;
   LayerManager? _layerManager;
 
@@ -130,6 +132,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       _map.on(
         interop.MapEventType.moveStart,
         (interop.MapLibreEvent event) {
+          if (!_cameraPaddingReset.shouldForward(event)) return;
           final CameraChangeReason reason;
           if (_nextGestureCausedByController) {
             _nextGestureCausedByController = false;
@@ -145,6 +148,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       _map.on(
         interop.MapEventType.move,
         (interop.MapLibreEvent event) {
+          if (!_cameraPaddingReset.shouldForward(event)) return;
           final mapCamera = MapCamera(
             center: _map.getCenter().toGeographic(),
             zoom: _map.getZoom().toDouble(),
@@ -158,6 +162,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       _map.on(
         interop.MapEventType.moveEnd,
         (interop.MapLibreEvent event) {
+          if (!_cameraPaddingReset.shouldForward(event)) return;
           widget.onEvent?.call(const MapEventCameraIdle());
           if (!(_movementCompleter?.isCompleted ?? true)) {
             _movementCompleter?.complete(event);
@@ -318,6 +323,13 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     bool webLinear = false,
     EdgeInsets padding = EdgeInsets.zero,
   }) async {
+    // MapLibre GL JS calculates bounds using the transform's current padding
+    // and then discards the padding option before moving the camera. Reset the
+    // transform first so padding from an earlier camera move is not reused.
+    _cameraPaddingReset.run(
+      camera: _map,
+      padding: EdgeInsets.zero.toPaddingOptions(),
+    );
     final camera = getCamera();
     _map.fitBounds(
       bounds.toJsLngLatBounds(),

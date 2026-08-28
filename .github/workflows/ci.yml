@@ -78,6 +78,31 @@ jobs:
         if: ${{ matrix.sdk == '' }}
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+  unit-test-web:
+    name: "[Web] Unit tests"
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        sdk: [ '3.44.0', '' ]
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - name: "Setup Flutter SDK"
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ matrix.sdk }}
+          cache: true
+      - name: "Get Flutter dependencies"
+        run: flutter pub get
+      - name: "Run web implementation tests"
+        working-directory: packages/maplibre_web
+        run: flutter test --platform chrome --coverage
+      - name: "Run Codecov"
+        uses: codecov/codecov-action@v7
+        if: ${{ matrix.sdk == '' }}
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 #  integration-test-ios:
 #    name: "[iOS] Integration tests"
 #    runs-on: macOS-latest
