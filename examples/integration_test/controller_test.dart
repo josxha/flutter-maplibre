@@ -797,20 +797,24 @@ void test() {
   });
 
   testWidgets('add RasterSource', (tester) async {
-    final ctrlCompleter = Completer<MapController>();
-    final app = App(onMapCreated: ctrlCompleter.complete);
+    final styleCompleter = Completer<StyleController>();
+    final app = App(onStyleLoaded: styleCompleter.complete);
     await tester.pumpWidget(app);
-    final ctrl = await ctrlCompleter.future;
+    final style = await styleCompleter.future;
     const source = RasterSource(
       id: '1',
       tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
-      maxZoom: 20,
+      minZoom: 4,
+      maxZoom: 4,
       tileSize: 256,
       attribution:
           '<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     );
-    await ctrl.style?.addSource(source);
+    await style.addSource(source);
     await tester.pumpAndSettle();
+    if (!kIsWeb && defaultTargetPlatform == TargetPlatform.iOS) {
+      expect(await style.getAttributions(), contains(source.attribution));
+    }
   });
 
   testWidgets('add VectorSource', (tester) async {
