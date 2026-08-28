@@ -14,6 +14,9 @@ extension type Camera._(JSObject _) implements JSObject {
 
   /// Animate the viewport of the map to fit [LngLatBounds].
   external void fitBounds(LngLatBounds bounds, [FitBoundsOptions? options]);
+
+  /// Stop any animated transition underway.
+  external void stop();
 }
 
 /// Options used for [Camera.jumpTo].

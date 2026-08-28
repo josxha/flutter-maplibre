@@ -1,3 +1,9 @@
+## Unreleased
+
+### Bug Fixes
+
+- Web: `fitBounds()` no longer reuses padding from a previous camera move.
+
 ## 0.3.6
 
 Thanks for everyone who contributed in this release!
