@@ -27,6 +27,7 @@ dependencies:
 
 dev_dependencies:
   ffigen: ^21.0.0
+  flutter_test: { sdk: flutter }
   very_good_analysis: ^10.0.0
 
 flutter:

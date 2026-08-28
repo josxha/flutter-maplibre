@@ -1,3 +1,10 @@
+## unreleased
+
+### Bug Fixes
+
+- iOS: preserve zoom levels, attribution, raster tile size, and supported DEM
+  encoding when adding tile-template sources at runtime.
+
 ## 0.3.6
 
 Thanks for everyone who contributed in this release!
