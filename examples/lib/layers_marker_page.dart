@@ -49,6 +49,7 @@ class _LayersMarkerPageState extends State<LayersMarkerPage> {
               await event.style.addImageFromIconData(
                 id: 'marker',
                 iconData: Icons.location_on,
+                devicePixelRatio: MediaQuery.of(context).devicePixelRatio,
                 color: Colors.red,
               );
               setState(() {
