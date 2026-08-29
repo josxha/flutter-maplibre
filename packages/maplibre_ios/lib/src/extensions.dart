@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:ffi' hide Size;
 
 import 'package:flutter/cupertino.dart';
-import 'package:maplibre_ios/src/maplibre_ffi.g.dart';
+import 'package:maplibre_ios/src/maplibre_ffi.g.dart' hide CGPoint;
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 import 'package:objective_c/objective_c.dart';
 

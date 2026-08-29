@@ -5,6 +5,41 @@
 - fix: iOS `toNSObject()` crashed when converting a `bool` value (e.g. when passing source options).
 - fix: webview (macOS/Windows) layer `filter`s were serialized with `toString()`, producing invalid JS for string expressions; now encoded as JSON.
 
+## 0.3.6
+
+Thanks for everyone who contributed in this release!
+@emanuelesenis, @BartoszStasiurka, @D3CK3R, @Mazen-Embaby, @teamacco, @lukeboyden
+
+### Features
+
+- Android: MapLibre Native Android 13.5
+- iOS: MapLibre Native iOS 6.29
+- Android: jnigen 0.17
+- iOS: hooks v2, native_toolchain_c 0.19
+- Android: Migrate Plugin to Built-in Kotlin
+- Support for the tolerance parameter in GeoJsonSource
+- Add geometry field to RenderedFeature
+
+### Bug Fixes
+
+- Android: fix platform views are never removed from the internal registry,
+  leaking a `FrameLayout` and its native map state per map create/dispose
+  cycle.
+- Android: `StyleController` now releases its native style reference when
+  the owning `MapLibreMap` is disposed, instead of staying technically
+  usable on a torn-down map.
+- Android: fix `StyleController` and several map query methods
+  (`updateGeoJsonSource`, `removeLayer`/`removeSource`/`removeImage`,
+  `getLayerIds`, `getAttributionsSync`, `featuresAtPoint`/`featuresInRect`)
+  leak JNI global references on every call.
+- Android: camera listeners no longer block the calling Java thread on
+  camera events.
+- iOS: fix long tab took a long time to be registered
+- iOS: fix SPM package resolved bootstrap
+- iOS: fix GeoJSON rendering failure in obfuscated releases
+- Android: fix proguard rules for obfuscated release builds
+- skip re-serializing a GeoJSON source whose layer is unchanged.
+
 ## 0.3.5
 
 This release contains a couple of bug fixes and improvements.

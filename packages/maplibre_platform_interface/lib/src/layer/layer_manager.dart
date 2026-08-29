@@ -35,18 +35,25 @@ class LayerManager {
     for (var index = 0; index < layers.length; index++) {
       final layer = layers[index];
       final oldLayer = index > _oldLayers.length - 1 ? null : _oldLayers[index];
+      // Skip entirely when nothing changed. `Layer.==` covers every field
+      // that feeds into `createSource`/`createStyleLayers`, so this also
+      // avoids re-serialising the (potentially large) FeatureCollection for
+      // a layer that didn't move.
+      if (layer == oldLayer) continue;
       final source = layer.createSource(index);
       // update source
       // TODO check if the entities of both lists are equal
       if (oldLayer case final Layer oldLayer
-          when oldLayer.createSource(index) == source) {
-        // The source definition (e.g. cluster options) is unchanged, only
-        // update the data in place.
+          when _sameSourceConfig(oldLayer.createSource(index), source)) {
+        // The source configuration (e.g. cluster options) is unchanged, only
+        // the data changed - update it in place instead of recreating the
+        // source (which would mean tearing down and rebuilding its style
+        // layers too).
         style.updateGeoJsonSource(id: source.id, data: source.data);
       } else {
         if (oldLayer != null) {
-          // The source definition changed, recreate it together with its
-          // layers further down.
+          // The source configuration changed (e.g. clustering was toggled),
+          // recreate it together with its layers further down.
           for (final styleLayer in oldLayer.createStyleLayers(index)) {
             style.removeLayer(styleLayer.id);
           }
@@ -55,15 +62,13 @@ class LayerManager {
         style.addSource(source);
       }
       // update layer
-      if (layer != oldLayer) {
-        if (oldLayer case final Layer oldLayer
-            when oldLayer.createSource(index) == source) {
-          for (final styleLayer in oldLayer.createStyleLayers(index)) {
-            style.removeLayer(styleLayer.id);
-          }
+      if (oldLayer case final Layer oldLayer
+          when _sameSourceConfig(oldLayer.createSource(index), source)) {
+        for (final styleLayer in oldLayer.createStyleLayers(index)) {
+          style.removeLayer(styleLayer.id);
         }
-        layer.createStyleLayers(index).forEach(style.addLayer);
       }
+      layer.createStyleLayers(index).forEach(style.addLayer);
     }
     // remove any left-over sources and layers from the map
     for (var i = 0; i < (_oldLayers.length - layers.length); i++) {
@@ -77,4 +82,18 @@ class LayerManager {
     }
     _oldLayers = layers;
   }
+
+  /// Whether [a] and [b] are the same [GeoJsonSource] configuration, ignoring
+  /// [GeoJsonSource.data]. The data changes on practically every rebuild
+  /// (points moving); only a real configuration change (e.g. toggling
+  /// clustering) requires recreating the source.
+  static bool _sameSourceConfig(GeoJsonSource a, GeoJsonSource b) =>
+      a.id == b.id &&
+      a.maxZoom == b.maxZoom &&
+      a.attribution == b.attribution &&
+      a.cluster == b.cluster &&
+      a.clusterRadius == b.clusterRadius &&
+      a.clusterMaxZoom == b.clusterMaxZoom &&
+      a.clusterMinPoints == b.clusterMinPoints &&
+      a.tolerance == b.tolerance;
 }

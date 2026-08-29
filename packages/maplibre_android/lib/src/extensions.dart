@@ -92,7 +92,7 @@ extension ObjectExt on Object {
   JObject toJObject() {
     switch (this) {
       case final Map<String, Object?> value:
-        final jMap = jni.HashMap<JObject?, JObject?>();
+        final jMap = JHashMap<JObject?, JObject?>();
         for (final entry in value.entries) {
           final jKey = entry.key.toJObject();
           final jValue = entry.value?.toJObject();

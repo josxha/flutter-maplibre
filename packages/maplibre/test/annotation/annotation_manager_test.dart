@@ -36,6 +36,9 @@ void main() {
       const layer1 = CircleLayer(
         points: [Feature(geometry: Point(Geographic(lon: 0, lat: 0)))],
       );
+      const layer2 = CircleLayer(
+        points: [Feature(geometry: Point(Geographic(lon: 1, lat: 1)))],
+      );
 
       manager.updateLayers([layer1]);
       verify(() => style.addSource(any(that: isA<GeoJsonSource>()))).called(1);
@@ -44,12 +47,28 @@ void main() {
       ).called(1);
       verifyNoMoreInteractions(style);
 
+      // An unchanged layer keeps its source: `Layer.==` compares `list` by
+      // identity, so passing the same instance back must not re-serialise it.
       manager.updateLayers([layer1]);
+      verifyNever(
+        () => style.updateGeoJsonSource(
+          id: any(named: 'id'),
+          data: any(named: 'data'),
+        ),
+      );
+      verifyNoMoreInteractions(style);
+
+      // A layer that did change still updates, so nothing real is skipped.
+      manager.updateLayers([layer2]);
       verify(
         () => style.updateGeoJsonSource(
           id: any(named: 'id'),
           data: any(named: 'data'),
         ),
+      ).called(1);
+      verify(() => style.removeLayer(any())).called(1);
+      verify(
+        () => style.addLayer(any(that: isA<CircleStyleLayer>())),
       ).called(1);
       verifyNoMoreInteractions(style);
 
