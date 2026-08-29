@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 
 part 'geo_json_source.dart';

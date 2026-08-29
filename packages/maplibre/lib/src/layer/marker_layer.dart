@@ -48,6 +48,14 @@ class MarkerLayer extends Layer<Feature<Point>> {
     this.textHaloBlur = 0,
     this.textTranslate = const [0, 0],
     this.iconAnchor = IconAnchor.center,
+    this.cluster = false,
+    this.clusterRadius = 50,
+    this.clusterMaxZoom = 14,
+    this.clusterMinPoints = 2,
+    this.clusterColor = const Color(0xFF51BBD6),
+    this.clusterCircleRadius = 18,
+    this.clusterTextColor = const Color(0xFFFFFFFF),
+    this.clusterTextSize = 14,
     super.minZoom = 0,
     super.maxZoom = 24,
   }) : super(list: points);
@@ -191,6 +199,49 @@ class MarkerLayer extends Layer<Feature<Point>> {
   /// Part of the icon placed closest to the anchor.
   final IconAnchor iconAnchor;
 
+  /// If true, markers that are close to each other are grouped together into
+  /// clusters. Each cluster is rendered as a circle (see [clusterColor] and
+  /// [clusterCircleRadius]) with a label showing the number of markers it
+  /// contains (see [clusterTextColor] and [clusterTextSize]).
+  ///
+  /// Defaults to false.
+  final bool cluster;
+
+  /// Radius of each cluster when clustering markers, measured in pixels.
+  ///
+  /// Only applies when [cluster] is true. Defaults to 50.
+  final int clusterRadius;
+
+  /// Maximum zoom level at which to cluster markers.
+  ///
+  /// Only applies when [cluster] is true. Defaults to 14.
+  final int clusterMaxZoom;
+
+  /// Minimum number of markers necessary to form a cluster.
+  ///
+  /// Only applies when [cluster] is true. Defaults to 2.
+  final int clusterMinPoints;
+
+  /// The fill color of the circle drawn for a cluster.
+  ///
+  /// Only applies when [cluster] is true.
+  final Color clusterColor;
+
+  /// The radius of the circle drawn for a cluster, measured in pixels.
+  ///
+  /// Only applies when [cluster] is true. Defaults to 18.
+  final int clusterCircleRadius;
+
+  /// The color of the cluster count label.
+  ///
+  /// Only applies when [cluster] is true.
+  final Color clusterTextColor;
+
+  /// The font size of the cluster count label, measured in pixels.
+  ///
+  /// Only applies when [cluster] is true. Defaults to 14.
+  final int clusterTextSize;
+
   @override
   Map<String, Object> getPaint() => {
     'icon-opacity': iconOpacity,
@@ -243,7 +294,62 @@ class MarkerLayer extends Layer<Feature<Point>> {
     layout: getLayout(),
     minZoom: minZoom,
     maxZoom: maxZoom,
+    // When clustering, only render markers that are not part of a cluster.
+    filter: cluster
+        ? const <Object>[
+            '!',
+            <Object>['has', 'point_count'],
+          ]
+        : null,
   );
+
+  @override
+  GeoJsonSource createSource(int index) => GeoJsonSource(
+    id: getSourceId(index),
+    data: FeatureCollection(list).toText(),
+    cluster: cluster,
+    clusterRadius: clusterRadius,
+    clusterMaxZoom: clusterMaxZoom,
+    clusterMinPoints: clusterMinPoints,
+  );
+
+  @override
+  List<StyleLayer> createStyleLayers(int index) {
+    final markerLayer = createStyleLayer(index);
+    if (!cluster) return [markerLayer];
+    const clusterFilter = <Object>['has', 'point_count'];
+    return [
+      markerLayer,
+      // The circle rendered behind a cluster.
+      CircleStyleLayer(
+        id: '${getLayerId(index)}-clusters',
+        sourceId: getSourceId(index),
+        paint: {
+          'circle-color': clusterColor.toHexString(),
+          'circle-radius': clusterCircleRadius,
+        },
+        minZoom: minZoom,
+        maxZoom: maxZoom,
+        filter: clusterFilter,
+      ),
+      // The label showing the number of markers in a cluster.
+      SymbolStyleLayer(
+        id: '${getLayerId(index)}-cluster-count',
+        sourceId: getSourceId(index),
+        paint: {'text-color': clusterTextColor.toHexString()},
+        layout: {
+          'text-field': const <Object>['get', 'point_count_abbreviated'],
+          'text-font': textFont,
+          'text-size': clusterTextSize,
+          'text-allow-overlap': true,
+          'text-ignore-placement': true,
+        },
+        minZoom: minZoom,
+        maxZoom: maxZoom,
+        filter: clusterFilter,
+      ),
+    ];
+  }
 
   @override
   bool operator ==(Object other) =>
@@ -287,7 +393,15 @@ class MarkerLayer extends Layer<Feature<Point>> {
           textHaloWidth == other.textHaloWidth &&
           textHaloBlur == other.textHaloBlur &&
           textTranslate == other.textTranslate &&
-          iconAnchor == other.iconAnchor;
+          iconAnchor == other.iconAnchor &&
+          cluster == other.cluster &&
+          clusterRadius == other.clusterRadius &&
+          clusterMaxZoom == other.clusterMaxZoom &&
+          clusterMinPoints == other.clusterMinPoints &&
+          clusterColor == other.clusterColor &&
+          clusterCircleRadius == other.clusterCircleRadius &&
+          clusterTextColor == other.clusterTextColor &&
+          clusterTextSize == other.clusterTextSize;
 
   @override
   int get hashCode => Object.hashAll([
@@ -329,6 +443,14 @@ class MarkerLayer extends Layer<Feature<Point>> {
     textHaloBlur,
     textTranslate,
     iconAnchor,
+    cluster,
+    clusterRadius,
+    clusterMaxZoom,
+    clusterMinPoints,
+    clusterColor,
+    clusterCircleRadius,
+    clusterTextColor,
+    clusterTextSize,
   ]);
 }
 

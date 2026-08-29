@@ -63,6 +63,55 @@ By default, widgets in the `WidgetLayer` will stay upright when the map gets
 rotated or pitched. You are able to change this behavior with the `flat`
 and `rotate` flags.
 
+## Clustering
+
+Set `cluster: true` to group markers that are close to each other on screen
+into clusters. Unlike the native clustering of the
+[`MarkerLayer`](markers.md#clustering), widget marker clustering is computed in
+Dart based on the on-screen distance between markers, so clusters split apart as
+you zoom in.
+
+```dart
+WidgetLayer(
+  markers: _markers,
+  cluster: true,
+  // markers within 80 logical pixels are grouped together
+  clusterRadius: 80,
+  // at least 2 markers are needed to form a cluster
+  clusterMinPoints: 2,
+  // the size of the cluster widget (used for positioning)
+  clusterSize: const Size.square(40),
+  // optional: provide your own cluster widget
+  clusterBuilder: (context, cluster) => GestureDetector(
+    onTap: () {
+      // e.g. animate the camera to cluster.point
+    },
+    child: DecoratedBox(
+      decoration: const BoxDecoration(
+        color: Colors.blue,
+        shape: BoxShape.circle,
+      ),
+      child: Center(child: Text('${cluster.markers.length}')),
+    ),
+  ),
+),
+```
+
+If you don't provide a `clusterBuilder`, a default circular badge showing the
+number of markers is used. The `MarkerCluster` passed to the builder contains
+the grouped `markers` and their geographic center `point`.
+
+Tapping a cluster animates the camera to the cluster and zooms in by two levels
+(which usually splits it apart). Provide an `onClusterTap` callback to customize
+this behavior, e.g. to fit all of the cluster's markers into view.
+
+!!! note
+
+    Widget marker clustering recomputes on every camera movement and compares
+    every marker with every other marker. It is intended for a moderate number
+    of markers. For large datasets prefer the native clustering of the
+    [`MarkerLayer`](markers.md#clustering).
+
 ## Update
 
 To add, remove or alter annotation layers, just use `setState()` like you'd do
