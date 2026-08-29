@@ -137,24 +137,17 @@ class StyleControllerIos extends StyleController {
         // TODO: use generated FFI globals for the MLNShapeSourceOption keys
         // once the ffigen config exposes them. In this SDK each constant's
         // NSString value equals its symbol name.
-        final ffiOptions = source.cluster
-            ? NSDictionary.as(
-                <String, Object>{
-                  'MLNShapeSourceOptionClustered': true,
-                  'MLNShapeSourceOptionClusterRadius': source.clusterRadius,
-                  'MLNShapeSourceOptionMaximumZoomLevelForClustering':
-                      source.clusterMaxZoom,
-                  'MLNShapeSourceOptionClusterMinPoints':
-                      source.clusterMinPoints,
-                }.toNSObject(),
-              )
-            : NSDictionary.new$();
-        final ffiOptions = NSMutableDictionary.new$()..init();
-        ffiOptions.setObject(
-          source.tolerance.toNSNumber(),
-          forKey: NSCopying.as(
-            'MLNShapeSourceOptionSimplificationTolerance'.toNSString(),
-          ),
+        final ffiOptions = NSDictionary.as(
+          <String, Object>{
+            'MLNShapeSourceOptionSimplificationTolerance': source.tolerance,
+            if (source.cluster) ...{
+              'MLNShapeSourceOptionClustered': true,
+              'MLNShapeSourceOptionClusterRadius': source.clusterRadius,
+              'MLNShapeSourceOptionMaximumZoomLevelForClustering':
+                  source.clusterMaxZoom,
+              'MLNShapeSourceOptionClusterMinPoints': source.clusterMinPoints,
+            },
+          }.toNSObject(),
         );
         if (source.data.startsWith('{')) {
           shapeSource.initWithIdentifier$3(
