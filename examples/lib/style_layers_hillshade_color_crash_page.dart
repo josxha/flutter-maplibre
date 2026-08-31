@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
 
-/// Minimal reproduction for the iOS crash
+/// Regression page for the iOS crash
 /// `-[UIDeviceRGBColor count]: unrecognized selector sent to instance`
-/// triggered by setting `hillshade-shadow-color` / `hillshade-highlight-color`
-/// (style-spec type `colorArray`) from a hex string, and for the same crash on
-/// the two `numberArray` properties of the layer.
+/// that used to be triggered by setting `hillshade-shadow-color` /
+/// `hillshade-highlight-color` (style-spec type `colorArray`) from a hex
+/// string, and by the two `numberArray` properties of the layer.
+///
+/// Every variant below must add its layer without aborting the process.
 ///
 /// See the commit message that introduced this page for the full analysis.
 ///
@@ -43,9 +45,10 @@ const _paints = <String, Map<String, Object>>{
   'none': <String, Object>{},
   // `hillshade-accent-color` is a scalar `color` in the style spec: control.
   'accent': <String, Object>{'hillshade-accent-color': '#5A5A5A'},
-  // `hillshade-shadow-color` is a `colorArray` in the style spec: crashes.
+  // `hillshade-shadow-color` is a `colorArray` in the style spec: used to
+  // crash.
   'shadow': <String, Object>{'hillshade-shadow-color': '#727C83'},
-  // `hillshade-highlight-color` is a `colorArray` too: crashes.
+  // `hillshade-highlight-color` is a `colorArray` too: used to crash.
   'highlight': <String, Object>{'hillshade-highlight-color': '#FFFFE4'},
   'all': <String, Object>{
     'hillshade-accent-color': '#5A5A5A',
@@ -133,8 +136,8 @@ class _StyleLayersHillshadeColorCrashPageState
     if (mounted) {
       setState(() => _status = 'adding hillshade layer with paint: $paint');
     }
-    // On iOS this call aborts the process for `shadow`, `highlight`, `all`,
-    // `direction` and `altitude`.
+    // Before the fix, on iOS this call aborted the process for `shadow`,
+    // `highlight`, `all`, `direction` and `altitude`.
     await style.addLayer(
       HillshadeStyleLayer(id: _layerId, sourceId: _sourceId, paint: paint),
     );

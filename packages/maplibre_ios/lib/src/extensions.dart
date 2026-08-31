@@ -162,6 +162,27 @@ extension MLNFeatureExt on MLNFeature {
   }
 }
 
+/// Style spec properties whose value is an array of variable length. MapLibre
+/// iOS backs them with a `std::vector<T>` and its transformer sends `count` to
+/// whatever constant it is handed, without a type check
+/// (`MLNStyleValue_Private.h`). Handing one a scalar therefore aborts the
+/// process with an `unrecognized selector` exception, even though the style
+/// spec allows a scalar for most of them (`hillshade-shadow-color` defaults to
+/// `#000000`, `hillshade-illumination-direction` to `335`).
+///
+/// Array properties of a fixed length (`*-translate`, `*-offset`,
+/// `icon-text-fit-padding`) are not affected: MapLibre type checks those.
+const _variableLengthArrayProperties = <String>{
+  'hillshade-highlight-color',
+  'hillshade-illumination-altitude',
+  'hillshade-illumination-direction',
+  'hillshade-shadow-color',
+  'line-dasharray',
+  'text-font',
+  'text-variable-anchor',
+  'text-writing-mode',
+};
+
 /// Internal extensions on [MLNStyleLayer].
 extension MLNStyleLayerExt on MLNStyleLayer {
   /// Apply all paint or layout properties on the [MLNStyleLayer].
@@ -180,16 +201,22 @@ extension MLNStyleLayerExt on MLNStyleLayer {
 
   /// Set a layout or paint property for a [MLNStyleLayer].
   void setProperty(String key, Object value) {
-    // convert to a String
-    var rawValue = switch (value) {
-      List() || Map() => jsonEncode(value),
-      String() => value,
-      _ => value.toString(),
-    };
+    var rawObject = value;
     // convert html color names to hex strings
-    if (key.contains('color')) {
-      rawValue = htmlColorNames[rawValue] ?? rawValue;
+    if (key.contains('color') && rawObject is String) {
+      rawObject = htmlColorNames[rawObject] ?? rawObject;
     }
+    // wrap a scalar in a single element list for properties that MapLibre iOS
+    // reads as an array, see [_variableLengthArrayProperties].
+    if (rawObject is! List && _variableLengthArrayProperties.contains(key)) {
+      rawObject = <Object>[rawObject];
+    }
+    // convert to a String
+    final rawValue = switch (rawObject) {
+      List() || Map() => jsonEncode(rawObject),
+      String() => rawObject,
+      _ => rawObject.toString(),
+    };
     final NSExpression? expression;
     try {
       expression = parseNSExpression(key, rawValue);
