@@ -8,10 +8,12 @@ documentation: https://flutter-maplibre.pages.dev/docs/
 
 environment:
   sdk: ^3.13.2
-  flutter: '>=3.3.0'
+  flutter: '>=3.44.0'
 
 dependencies:
   flutter: { sdk: flutter }
+  maplibre_native_ffi:
+    path: vendor/maplibre-native-ffi/bindings/dart
 
 dev_dependencies:
   flutter_test: { sdk: flutter }
