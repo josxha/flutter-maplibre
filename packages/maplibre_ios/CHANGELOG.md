@@ -1,3 +1,9 @@
+## Unreleased
+
+### Bug Fixes
+
+- iOS: fix `animateCamera()` crash when called before the native view has a layout size
+
 ## 0.3.6
 
 [Check the maplibre changelog](https://pub.dev/packages/maplibre/changelog#036)
