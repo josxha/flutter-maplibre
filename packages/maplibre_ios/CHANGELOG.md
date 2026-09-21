@@ -1,3 +1,9 @@
+## Unreleased
+
+### Bug Fixes
+
+- iOS: fix `MLNMapView` not torn down on dispose
+
 ## 0.3.6
 
 [Check the maplibre changelog](https://pub.dev/packages/maplibre/changelog#036)
