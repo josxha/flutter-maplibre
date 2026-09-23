@@ -1,6 +1,5 @@
 plugins {
     id("com.android.library")
-    id("org.jlleitschuh.gradle.ktlint")
 }
 
 group = "com.github.josxha.maplibre"
@@ -54,22 +53,5 @@ android {
 kotlin {
     compilerOptions {
         jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
-    }
-}
-
-ktlint {
-    version.set("1.7.1")
-    android.set(true)
-    ignoreFailures.set(false)
-    reporters {
-        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.PLAIN)
-        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
-    }
-    dependencies {
-        // noinspection GradleDynamicVersion
-        ktlintRuleset("io.nlopez.compose.rules:ktlint:0.5.3")
-    }
-    filter {
-        exclude("**/*.g.kt")
     }
 }
