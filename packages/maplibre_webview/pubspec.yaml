@@ -1,6 +1,6 @@
 name: maplibre_webview
 description: "WebView implementation of the Flutter MapLibre plugin."
-version: 0.3.5
+version: 0.3.6
 repository: https://github.com/josxha/flutter-maplibre
 issue_tracker: https://github.com/josxha/flutter-maplibre/issues
 homepage: https://flutter-maplibre.pages.dev
@@ -9,8 +9,8 @@ documentation: https://flutter-maplibre.pages.dev/docs/
 platforms: { android: , ios: , macos: , windows: }
 
 environment:
-  sdk: ^3.12.0
-  flutter: ">=3.44.0"
+  sdk: ^3.13.0
+  flutter: ">=3.47.0"
 
 resolution: workspace
 
@@ -18,7 +18,7 @@ dependencies:
   flutter: { sdk: flutter }
   flutter_inappwebview: ^6.2.0-beta.3
   geobase: ^1.5.0
-  maplibre_platform_interface: ^0.3.5
+  maplibre_platform_interface: ^0.3.6
 
 dev_dependencies:
   flutter_test: { sdk: flutter }

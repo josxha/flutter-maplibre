@@ -23,7 +23,13 @@ final class FlutterApi with jni.$FlutterApi {
         getView: () => view,
         onFlutterViewAttached: (view) {},
         onFlutterViewDetached: () {},
-        dispose: () {},
+        // The engine guarantees no further calls into this platform view
+        // after dispose, so this is the last point where the container can
+        // be unpinned. Without it the Registry entry keeps the FrameLayout
+        // (and the destroyed MapView it contains) alive forever.
+        dispose: () {
+          Registry.platformViews.remove(viewId)?.release();
+        },
         onInputConnectionLocked: () {},
         onInputConnectionUnlocked: () {},
       ),
