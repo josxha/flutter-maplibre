@@ -3,6 +3,7 @@
 ### Bug Fixes
 
 - iOS: fix `animateCamera()` crash when called before the native view has a layout size
+- iOS: fix `MLNMapView` not torn down on dispose
 
 ## 0.3.6
 

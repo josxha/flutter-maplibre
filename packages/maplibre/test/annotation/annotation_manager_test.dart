@@ -42,9 +42,8 @@ void main() {
 
       manager.updateLayers([layer1]);
       verify(() => style.addSource(any(that: isA<GeoJsonSource>()))).called(1);
-      verify(
-        () => style.addLayer(any(that: isA<CircleStyleLayer>())),
-      ).called(1);
+      verify(() => style.addLayer(any(that: isA<CircleStyleLayer>())))
+          .called(1);
       verifyNoMoreInteractions(style);
 
       // An unchanged layer keeps its source: `Layer.==` compares `list` by
@@ -67,9 +66,8 @@ void main() {
         ),
       ).called(1);
       verify(() => style.removeLayer(any())).called(1);
-      verify(
-        () => style.addLayer(any(that: isA<CircleStyleLayer>())),
-      ).called(1);
+      verify(() => style.addLayer(any(that: isA<CircleStyleLayer>())))
+          .called(1);
       verifyNoMoreInteractions(style);
 
       manager.updateLayers([]);
