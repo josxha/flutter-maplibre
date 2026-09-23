@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:ffigen/ffigen.dart';
 
-
 const includedInterfaces = <String>{
   'NSString',
   'CLLocationCoordinate2D',

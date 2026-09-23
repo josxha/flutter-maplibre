@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:flutter/rendering.dart';
 import 'package:jni/jni.dart';
 import 'package:maplibre_android/src/jni.g.dart' as jni;
