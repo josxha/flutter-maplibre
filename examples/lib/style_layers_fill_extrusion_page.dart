@@ -38,8 +38,7 @@ class _StyleLayersFillExtrusionPageState
     await style.addSource(
       const GeoJsonSource(
         id: _sourceId,
-        data:
-            'https://maplibre.org/maplibre-gl-js/docs/assets/indoor-3d-map.geojson',
+        data: 'https://maplibre.org/maplibre-gl-js/docs/assets/indoor-3d-map.geojson',
       ),
     );
     await style.addLayer(_fillExtrusionStyleLayer);
