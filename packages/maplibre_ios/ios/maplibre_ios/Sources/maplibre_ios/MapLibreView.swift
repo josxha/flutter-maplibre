@@ -7,6 +7,13 @@ class MapLibreView: NSObject, FlutterPlatformView, UIGestureRecognizerDelegate, 
     private var _mapView: MLNMapView!
     private var _registrar: FlutterPluginRegistrar
 
+    // References to the self-added gesture recognizers, so they can be
+    // removed again in deinit() (see comment there).
+    private var _longPress: UILongPressGestureRecognizer?
+    private var _doubleTap: UITapGestureRecognizer?
+    private var _primaryTap: UITapGestureRecognizer?
+    private var _secondaryTap: UITapGestureRecognizer?
+
     init(registrar: FlutterPluginRegistrar, frame: CGRect, viewId: Int64, initStyle: String) {
         _registrar = registrar
         _viewId = viewId
@@ -36,42 +43,6 @@ class MapLibreView: NSObject, FlutterPlatformView, UIGestureRecognizerDelegate, 
         _view.addSubview(_mapView)
         _mapView.delegate = self
 
-        // Double tap
-        let doubleTap = UITapGestureRecognizer(
-            target: self,
-            action: #selector(onDoubleTap(sender:))
-        )
-        doubleTap.numberOfTapsRequired = 2
-        doubleTap.cancelsTouchesInView = false
-        doubleTap.delegate = self
-        _mapView.addGestureRecognizer(doubleTap)
-
-        let primaryTap = UITapGestureRecognizer(
-            target: self,
-            action: #selector(onTap(_:))
-        )
-        primaryTap.numberOfTapsRequired = 1
-        primaryTap.cancelsTouchesInView = false
-        primaryTap.require(toFail: doubleTap)
-        primaryTap.delegate = self
-        if #available(iOS 13.4, *) {
-            primaryTap.buttonMaskRequired = .primary
-        }
-        _mapView.addGestureRecognizer(primaryTap)
-
-        if #available(iOS 13.4, *) {
-            let secondaryTap = UITapGestureRecognizer(
-                target: self,
-                action: #selector(onSecondaryTap(_:))
-            )
-            secondaryTap.numberOfTapsRequired = 1
-            secondaryTap.cancelsTouchesInView = false
-            secondaryTap.require(toFail: doubleTap)
-            secondaryTap.delegate = self
-            secondaryTap.buttonMaskRequired = .secondary
-            _mapView.addGestureRecognizer(secondaryTap)
-        }
-
         // Long press
         let longPress = UILongPressGestureRecognizer(
             target: self,
@@ -81,13 +52,77 @@ class MapLibreView: NSObject, FlutterPlatformView, UIGestureRecognizerDelegate, 
         longPress.minimumPressDuration = 0.5
         longPress.allowableMovement = 10
         longPress.cancelsTouchesInView = false
-
-        // Long press waits for taps
-        longPress.require(toFail: primaryTap)
-        longPress.require(toFail: doubleTap)
-
         longPress.delegate = self
         _mapView.addGestureRecognizer(longPress)
+        _longPress = longPress
+
+        // Double tap
+        let doubleTap = UITapGestureRecognizer(
+            target: self,
+            action: #selector(onDoubleTap(sender:))
+        )
+        doubleTap.numberOfTapsRequired = 2
+        doubleTap.cancelsTouchesInView = false
+        doubleTap.require(toFail: longPress)
+        doubleTap.delegate = self
+        _mapView.addGestureRecognizer(doubleTap)
+        _doubleTap = doubleTap
+
+        let primaryTap = UITapGestureRecognizer(
+            target: self,
+            action: #selector(onTap(_:))
+        )
+        primaryTap.numberOfTapsRequired = 1
+        primaryTap.cancelsTouchesInView = false
+        primaryTap.require(toFail: doubleTap)
+        primaryTap.require(toFail: longPress)
+        primaryTap.delegate = self
+        if #available(iOS 13.4, *) {
+            primaryTap.buttonMaskRequired = .primary
+        }
+        _mapView.addGestureRecognizer(primaryTap)
+        _primaryTap = primaryTap
+
+        if #available(iOS 13.4, *) {
+            let secondaryTap = UITapGestureRecognizer(
+                target: self,
+                action: #selector(onSecondaryTap(_:))
+            )
+            secondaryTap.numberOfTapsRequired = 1
+            secondaryTap.cancelsTouchesInView = false
+            secondaryTap.require(toFail: doubleTap)
+            secondaryTap.require(toFail: longPress)
+            secondaryTap.delegate = self
+            secondaryTap.buttonMaskRequired = .secondary
+            _mapView.addGestureRecognizer(secondaryTap)
+            _secondaryTap = secondaryTap
+        }
+    }
+
+    /// FlutterPlatformView has no guaranteed, synchronous native dispose
+    /// callback on iOS - teardown currently depends entirely on ARC. Without
+    /// this deinit, an old MLNMapView can remain partially alive (delegate
+    /// callbacks, background tile loading/rendering threads) while a new one
+    /// is created for a different screen/route, which can crash the app
+    /// natively (std::domain_error) when both touch shared native background
+    /// threads at the same time. Mirrors the equivalent fix in
+    /// maplibre/flutter-maplibre-gl (PR #837).
+    deinit {
+        guard let mapView = _mapView else { return }
+        mapView.delegate = nil
+        if let recognizer = _longPress {
+            mapView.removeGestureRecognizer(recognizer)
+        }
+        if let recognizer = _doubleTap {
+            mapView.removeGestureRecognizer(recognizer)
+        }
+        if let recognizer = _primaryTap {
+            mapView.removeGestureRecognizer(recognizer)
+        }
+        if let recognizer = _secondaryTap {
+            mapView.removeGestureRecognizer(recognizer)
+        }
+        mapView.removeFromSuperview()
     }
 
     var api: FlutterApi? {
@@ -105,13 +140,13 @@ class MapLibreView: NSObject, FlutterPlatformView, UIGestureRecognizerDelegate, 
     }
 
     @objc func onDoubleTap(sender: UITapGestureRecognizer) {
-        var screenPosition = sender.location(in: _mapView)
+        let screenPosition = sender.location(in: _mapView)
         api?.onDoubleTap(screenLocation: screenPosition)
     }
 
     @objc func onLongPress(sender: UILongPressGestureRecognizer) {
         guard sender.state == .began else { return }
-        var screenPosition = sender.location(in: _mapView)
+        let screenPosition = sender.location(in: _mapView)
         api?.onLongPress(screenLocation: screenPosition)
     }
 
@@ -131,16 +166,24 @@ class MapLibreView: NSObject, FlutterPlatformView, UIGestureRecognizerDelegate, 
         api?.didFinishLoadingStyle(mapView: mapView, style: style)
     }
 
-    func mapView(_ mapView: MLNMapView, regionWillChangeWith reason: MLNCameraChangeReason, animated: Bool) {
-        api?.regionWillChangeWithReason(mapView: mapView, reason: reason.rawValue, animated: animated)
+    func mapView(
+        _ mapView: MLNMapView, regionWillChangeWith reason: MLNCameraChangeReason, animated: Bool
+    ) {
+        api?.regionWillChangeWithReason(
+            mapView: mapView, reason: reason.rawValue, animated: animated
+        )
     }
 
     func mapView(_ mapView: MLNMapView, regionIsChangingWith reason: MLNCameraChangeReason) {
         api?.regionIsChangingWithReason(mapView: mapView, reason: reason.rawValue)
     }
 
-    func mapView(_ mapView: MLNMapView, regionDidChangeWith reason: MLNCameraChangeReason, animated: Bool) {
-        api?.regionDidChangeWithReason(mapView: mapView, reason: reason.rawValue, animated: animated)
+    func mapView(
+        _ mapView: MLNMapView, regionDidChangeWith reason: MLNCameraChangeReason, animated: Bool
+    ) {
+        api?.regionDidChangeWithReason(
+            mapView: mapView, reason: reason.rawValue, animated: animated
+        )
     }
 
     func mapViewDidBecomeIdle(_ mapView: MLNMapView) {

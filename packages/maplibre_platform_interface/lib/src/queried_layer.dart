@@ -7,7 +7,11 @@ import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 @immutable
 class RenderedFeature {
   /// Create a new [RenderedFeature].
-  const RenderedFeature({required this.id, required this.properties});
+  const RenderedFeature({
+    required this.id,
+    required this.properties,
+    this.geometry,
+  });
 
   /// If present, an object uniquely identifying the feature in the vector
   /// source. May be either a string or an integer.
@@ -30,15 +34,24 @@ class RenderedFeature {
   /// The properties of the feature as provided by its source.
   final Map<String, Object?> properties;
 
+  /// The GeoJSON geometry of the feature as provided by its source.
+  ///
+  /// The map usually contains `type` and `coordinates` keys.
+  ///
+  /// This field may be null if the platform does not expose geometry in query
+  /// results.
+  final Map<String, Object?>? geometry;
+
   @override
-  String toString() => 'RenderedFeature(id: $id, properties: $properties)';
+  String toString() =>
+      'RenderedFeature(id: $id, properties: $properties, geometry: $geometry)';
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) || other is RenderedFeature && id == other.id;
 
   @override
-  int get hashCode => Object.hash(id, properties);
+  int get hashCode => Object.hash(id, properties, geometry);
 }
 
 /// Return used for [MapController.queryLayers].

@@ -278,9 +278,8 @@ void main() {
       await ctrl.style?.addSource(source);
       await ctrl.style?.updateGeoJsonSource(
         id: source.id,
-        data: GeometryCollection(const [
-          Point(Geographic(lon: 0, lat: 0)),
-        ]).toText(),
+        data: GeometryCollection(const [Point(Geographic(lon: 0, lat: 0))])
+            .toText(),
       );
     });
 
@@ -725,8 +724,7 @@ void main() {
     final ctrl = await ctrlCompleter.future;
     const source = ImageSource(
       id: '1',
-      url:
-          'https://raw.githubusercontent.com/josxha/flutter-maplibre/57396548693857a80083303f56aa83b4901dad48/docs/static/img/favicon-32x32.png',
+      url: 'https://raw.githubusercontent.com/josxha/flutter-maplibre/57396548693857a80083303f56aa83b4901dad48/docs/static/img/favicon-32x32.png',
       coordinates: LngLatQuad(
         bottomLeft: Geographic(lon: 0, lat: 0),
         bottomRight: Geographic(lon: 1, lat: 0),
@@ -745,9 +743,8 @@ void main() {
     final ctrl = await ctrlCompleter.future;
     final source = GeoJsonSource(
       id: '1',
-      data: GeometryCollection(const [
-        Point(Geographic(lon: 12, lat: 2)),
-      ]).toText(),
+      data: GeometryCollection(const [Point(Geographic(lon: 12, lat: 2))])
+          .toText(),
     );
     await ctrl.style?.addSource(source);
     await tester.pumpAndSettle();

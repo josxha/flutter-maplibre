@@ -83,6 +83,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
               widget.onEvent?.call(MapEventMoveCamera(camera: mapCamera));
             }
           }),
+          onCameraMove$async: true,
         ),
       );
   late final _mapCameraIdleListener =
@@ -91,6 +92,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
           onCameraIdle: () => using((arena) {
             widget.onEvent?.call(const MapEventCameraIdle());
           }),
+          onCameraIdle$async: true,
         ),
       );
   late final _cameraMoveStartedListener =
@@ -113,6 +115,7 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
             if (moveReason == null) return;
             widget.onEvent?.call(MapEventStartMoveCamera(reason: moveReason));
           }),
+          onCameraMoveStarted$async: true,
         ),
       );
 
@@ -220,7 +223,8 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
       ..camera(cameraBuilder.build()..releasedBy(arena));
     _mapView = jni.MapView.new$4(jContext, jMapOptions)
       ..getMapAsync(
-        jni.OnMapReadyCallback.implement(_MapReadyCallback(_onMapReady)),
+        jni.OnMapReadyCallback.implement(_MapReadyCallback(_onMapReady))
+          ..releasedBy(arena),
       );
     _platformView.addView(_mapView);
 
@@ -240,6 +244,13 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
   });
 
   void _onMapReady(jni.MapLibreMap jMap) => using((arena) {
+    // The map can become ready after this state is disposed; without the
+    // guard the fresh listeners would pin global refs nothing releases (and
+    // re-attach listener wrappers dispose() already released).
+    if (!mounted) {
+      jMap.release();
+      return;
+    }
     _jMap = jMap
       ..addOnMapClickListener(_mapClickListener)
       ..addOnMapLongClickListener(_mapLongClickListener)
@@ -295,6 +306,10 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
       _cachedJLocationComponent = null;
       jLocationComponent.release();
     }
+    if (style case final styleController?) {
+      style = null;
+      styleController.dispose();
+    }
     if (_mapView case final mapView?) {
       _mapView = null;
       if (_mapViewStarted) {
@@ -304,6 +319,10 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
       }
       mapView.onDestroy();
       mapView.release();
+      // Detach the destroyed MapView from its container so the native map
+      // can be collected even while the engine still holds the FrameLayout
+      // (the platform view is disposed after this widget state).
+      Registry.platformViews[_viewId]?.removeAllViews();
     }
     super.dispose();
   }
@@ -486,6 +505,12 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
   });
 
   void _onStyleLoaded(jni.Style jStyle) {
+    // A style can finish loading after this state is disposed; without the
+    // guard the fresh controller would pin a global ref nothing releases.
+    if (!mounted) {
+      jStyle.release();
+      return;
+    }
     // We need to refresh the cached style for when the style reloads.
     style?.dispose();
     final styleCtrl = StyleControllerAndroid._(jStyle);
@@ -513,23 +538,35 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
 
   List<RenderedFeature> _nativeQueryToRenderedFeatures(
     JList<jni.Feature?> query,
-  ) {
-    final features = query.asDart().where((f) => f != null).map((f) => f!);
+  ) => using((arena) {
+    // Indexed access instead of an iterator: JList.iterator leaks the
+    // java.util.Iterator global ref (dart-lang/native jlist.dart).
+    final renderedFeatures = <RenderedFeature>[];
+    for (var i = 0; i < query.size(); i++) {
+      final feature = query.get(i)?..releasedBy(arena);
+      if (feature == null) continue;
 
-    final gson = jni.Gson();
-    return features
-        .map(
-          (feature) => RenderedFeature(
-            id: feature.id()?.toDartString(releaseOriginal: true),
-            properties:
-                jsonDecode(
-                      gson.toJson(feature.properties())?.toString() ?? '{}',
-                    )
-                    as Map<String, Object?>,
-          ),
-        )
-        .toList(growable: false);
-  }
+      final decodedFeature = jsonDecode(
+        feature.toJson()?.toDartString(releaseOriginal: true) ?? '{}',
+      ) as Map<String, Object?>;
+
+      final decodedProperties = decodedFeature['properties'];
+      final decodedGeometry = decodedFeature['geometry'];
+
+      renderedFeatures.add(
+        RenderedFeature(
+          id: feature.id()?.toDartString(releaseOriginal: true),
+          properties: decodedProperties is Map
+              ? decodedProperties.map((k, v) => MapEntry(k.toString(), v))
+              : {},
+          geometry: decodedGeometry is Map
+              ? decodedGeometry.map((k, v) => MapEntry(k.toString(), v))
+              : null,
+        ),
+      );
+    }
+    return renderedFeatures;
+  });
 
   @override
   List<RenderedFeature> featuresAtPoint(
@@ -548,14 +585,20 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
 
     final scaledPoint = point * View.of(context).devicePixelRatio;
 
-    final query = map.queryRenderedFeatures(
-      jni.PointF.new$3(scaledPoint.dx, scaledPoint.dy),
-      layerIds != null
-          ? JArray.of(JString.type, layerIds.map((s) => s.toJString()))
-          : null,
-    );
+    return using((arena) {
+      final jPoint = jni.PointF.new$3(scaledPoint.dx, scaledPoint.dy)
+        ..releasedBy(arena);
+      final jLayerIds = layerIds != null
+          ? (JArray.of(
+              JString.type,
+              layerIds.map((s) => s.toJString()..releasedBy(arena)),
+            )..releasedBy(arena))
+          : null;
+      final query = map.queryRenderedFeatures(jPoint, jLayerIds)
+        ..releasedBy(arena);
 
-    return _nativeQueryToRenderedFeatures(query);
+      return _nativeQueryToRenderedFeatures(query);
+    });
   }
 
   @override
@@ -578,19 +621,24 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
       rect.bottom * devicePixelRatio,
     );
 
-    final query = map.queryRenderedFeatures$2(
-      jni.RectF.new$3(
+    return using((arena) {
+      final jRect = jni.RectF.new$3(
         scaledRect.left,
         scaledRect.top,
         scaledRect.right,
         scaledRect.bottom,
-      ),
-      layerIds != null
-          ? JArray.of(JString.type, layerIds.map((s) => s.toJString()))
-          : null,
-    );
+      )..releasedBy(arena);
+      final jLayerIds = layerIds != null
+          ? (JArray.of(
+              JString.type,
+              layerIds.map((s) => s.toJString()..releasedBy(arena)),
+            )..releasedBy(arena))
+          : null;
+      final query = map.queryRenderedFeatures$2(jRect, jLayerIds)
+        ..releasedBy(arena);
 
-    return _nativeQueryToRenderedFeatures(query);
+      return _nativeQueryToRenderedFeatures(query);
+    });
   }
 
   @override

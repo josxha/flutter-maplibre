@@ -435,12 +435,13 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         )
         .toDart;
     return features
-        .map(
-          (f) => RenderedFeature(
+        .map((f) {
+          return RenderedFeature(
             id: f.id.dartify(),
             properties: f.properties.asStringMap() ?? {},
-          ),
-        )
+            geometry: f.geometry.asStringMap(),
+          );
+        })
         .toList(growable: false);
   }
 
@@ -455,12 +456,13 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         )
         .toDart;
     return features
-        .map(
-          (f) => RenderedFeature(
+        .map((f) {
+          return RenderedFeature(
             id: f.id.dartify(),
             properties: f.properties.asStringMap() ?? {},
-          ),
-        )
+            geometry: f.geometry.asStringMap(),
+          );
+        })
         .toList(growable: false);
   }
 

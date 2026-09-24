@@ -3,7 +3,7 @@ import 'dart:ffi' hide Size;
 
 import 'package:ffi/ffi.dart';
 import 'package:flutter/material.dart';
-import 'package:maplibre_ios/src/maplibre_ffi.g.dart';
+import 'package:maplibre_ios/src/maplibre_ffi.g.dart' hide CGPoint;
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 import 'package:objective_c/objective_c.dart';
 
@@ -150,10 +150,23 @@ NSExpression? parseNSExpression(String propertyName, String json) =>
 /// Internal extensions on [MLNFeature].
 extension MLNFeatureExt on MLNFeature {
   /// Convert a [MLNFeature] to a [RenderedFeature].
-  RenderedFeature toRenderedFeature() => RenderedFeature(
-    id: identifier == null ? null : toDartObject(identifier!),
-    properties: attributes.toDartMap().map((k, v) => MapEntry(k.toString(), v)),
-  );
+  RenderedFeature toRenderedFeature() {
+    final geoJson = geoJSONDictionary().toDartMap().map(
+      (k, v) => MapEntry(k.toString(), v),
+    );
+    final rawProperties = geoJson['properties'];
+    final rawGeometry = geoJson['geometry'];
+
+    return RenderedFeature(
+      id: identifier == null ? null : toDartObject(identifier!),
+      properties: rawProperties is Map
+          ? rawProperties.map((k, v) => MapEntry(k.toString(), v))
+          : {},
+      geometry: rawGeometry is Map
+          ? rawGeometry.map((k, v) => MapEntry(k.toString(), v))
+          : null,
+    );
+  }
 }
 
 /// Internal extensions on [MLNStyleLayer].
@@ -203,9 +216,9 @@ extension MLNStyleLayerExt on MLNStyleLayer {
       case 'circle-translate':
         (this as MLNCircleStyleLayer).circleTranslation = expression;
       case 'circle-translate-anchor':
-        (this as MLNCircleStyleLayer).circleTranslateAnchor = expression;
+        (this as MLNCircleStyleLayer).circleTranslationAnchor = expression;
       case 'fill-antialias':
-        (this as MLNFillStyleLayer).fillAntialias = expression;
+        (this as MLNFillStyleLayer).isFillAntialiased = expression;
       case 'fill-translate':
         (this as MLNFillStyleLayer).fillTranslation = expression;
       case 'fill-translate-anchor':

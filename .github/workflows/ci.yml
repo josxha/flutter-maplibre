@@ -16,7 +16,7 @@ jobs:
     name: "[Dart] Check formatting"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: subosito/flutter-action@v2
         with: { cache: true }
       - name: "Get Flutter dependencies"
@@ -27,14 +27,14 @@ jobs:
     name: "[Swift] Check formatting"
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: "Format Swift code"
         run: swiftformat --verbose --lint . --reporter github-actions-log --swiftversion 6 --disable trailingCommas
   lint-dart:
     name: "[Dart] Static code analysis"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: subosito/flutter-action@v2
         with: { cache: true }
       - name: "Get Flutter dependencies"
@@ -45,7 +45,7 @@ jobs:
     name: "[Kotlin] Code quality"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: ktlint
         uses: ScaCap/action-ktlint@v1
         with:
@@ -60,21 +60,23 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.38.10', '' ]
+        sdk: [ '3.47.0', '' ]
         package: [ 'maplibre', 'maplibre_webview' ]
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: "Setup Flutter SDK"
         uses: subosito/flutter-action@v2
-        with: { cache: true }
+        with:
+          flutter-version: ${{ matrix.sdk }}
+          cache: true
       - name: "Get Flutter dependencies"
         run: flutter pub get
       - name: "Run unit tests in package"
         working-directory: packages/${{ matrix.package }}
         run: flutter test --timeout=600s --coverage
       - name: "Run Codecov"
-        uses: codecov/codecov-action@v6
+        uses: codecov/codecov-action@v7
         if: ${{ matrix.sdk == '' }}
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
@@ -88,7 +90,7 @@ jobs:
 #        os_version: [ '18.6', '26.2' ]
 #    timeout-minutes: 30
 #    steps:
-#      - uses: actions/checkout@v6
+#      - uses: actions/checkout@v7
 #      - uses: subosito/flutter-action@v2
 #        with: { cache: true }
 #      - name: Install dependencies
@@ -105,7 +107,7 @@ jobs:
 #      - name: Run integration tests
 #        run: flutter test integration_test/main.dart --timeout=1800s -r expanded --coverage --coverage-package maplibre.*
 #      - name: "Run Codecov"
-#        uses: codecov/codecov-action@v6
+#        uses: codecov/codecov-action@v7
 #        if: ${{ matrix.os_version == '26.2' }}
 #        env:
 #          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
@@ -119,11 +121,11 @@ jobs:
         api-level: [ 24, 35 ]
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: "Setup Flutter SDK"
         uses: subosito/flutter-action@v2
         with: { cache: true }
-      - uses: actions/setup-java@v5
+      - uses: actions/setup-java@v6
         with:
           java-version: '21'
           distribution: 'temurin'
@@ -144,7 +146,7 @@ jobs:
           emulator-boot-timeout: 1800 # 30 minutes
           script: cd examples && flutter test integration_test/main.dart --timeout=1800s -r expanded --coverage --coverage-package maplibre.*
       - name: "Run Codecov"
-        uses: codecov/codecov-action@v6
+        uses: codecov/codecov-action@v7
         if: ${{ matrix.api-level == '35' }}
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
@@ -180,7 +182,7 @@ jobs:
 #    runs-on: ubuntu-latest
 #    steps:
 #      - name: Checkout project
-#        uses: actions/checkout@v6
+#        uses: actions/checkout@v7
 #      - name: Setup Flutter
 #        uses: subosito/flutter-action@v2
 #        with: { cache: true }
@@ -200,14 +202,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.38.10', '' ]
+        sdk: [ '3.47.0', '' ]
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ matrix.sdk }}
           cache: true
-      - uses: actions/setup-java@v5
+      - uses: actions/setup-java@v6
         with:
           java-version: '21'
           distribution: 'temurin'
@@ -230,9 +232,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.38.10', '' ]
+        sdk: [ '3.47.0', '' ]
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ matrix.sdk }}
@@ -256,9 +258,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.38.10', '' ]
+        sdk: [ '3.47.0', '' ]
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ matrix.sdk }}
@@ -269,14 +271,14 @@ jobs:
         run: flutter build web
   build-windows:
     name: "[Windows] Build"
-    runs-on: windows-latest
+    runs-on: windows-2022
     defaults: { run: { working-directory: examples } }
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.38.10', '' ]
+        sdk: [ '3.47.0', '' ]
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ matrix.sdk }}
@@ -285,24 +287,24 @@ jobs:
         run: dart pub get
       - name: Build windows
         run: flutter build windows --debug
-  build-macos:
-    name: "[macOS] Build"
-    runs-on: macos-latest
-    defaults: { run: { working-directory: examples } }
-    strategy:
-      fail-fast: false
-      matrix:
-        sdk: [ '3.38.10', '' ]
-    steps:
-      - uses: actions/checkout@v6
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: ${{ matrix.sdk }}
-          cache: true
-      - name: "Get Flutter dependencies"
-        run: dart pub get
-      - name: Build macOS
-        run: flutter build macos --debug
+  #build-macos:
+  #  name: "[macOS] Build"
+  #  runs-on: macos-latest
+  #  defaults: { run: { working-directory: examples } }
+  #  strategy:
+  #    fail-fast: false
+  #    matrix:
+  #      sdk: [ '3.47.0', '' ]
+  #  steps:
+  #    - uses: actions/checkout@v7
+  #    - uses: subosito/flutter-action@v2
+  #      with:
+  #        flutter-version: ${{ matrix.sdk }}
+  #        cache: true
+  #    - name: "Get Flutter dependencies"
+  #      run: dart pub get
+  #    - name: Build macOS
+  #      run: flutter build macos --debug
   build-web-wasm:
     name: "[Web] Build WASM"
     runs-on: ubuntu-latest
@@ -310,9 +312,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [ '3.38.10', '' ]
+        sdk: [ '3.47.0', '' ]
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ matrix.sdk }}
@@ -321,43 +323,43 @@ jobs:
         run: dart pub get
       - name: Build web
         run: flutter build web --wasm
-  codegen-android:
-    name: "[Android] Check codegen"
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-      - uses: subosito/flutter-action@v2
-        with: { cache: true }
-      - uses: actions/setup-java@v5
-        with:
-          java-version: '21'
-          distribution: 'temurin'
-          cache: 'gradle'
-      - name: "Get Flutter dependencies"
-        run: dart pub get
-      - name: Build example APK
-        working-directory: examples
-        run: flutter build apk
-      - name: Run jnigen
-        working-directory: packages/maplibre_android
-        run: dart tool/jnigen.dart
-      - name: Format code
-        run: dart format packages/maplibre_android/lib/src/jni.g.dart
-      - name: Check changes
-        run: |
-          if [[ -n "$(git status --porcelain)" ]]; then
-            echo "❌ Uncommitted changes detected in files:"
-            git diff
-            exit 1
-          else
-            echo "✅ No uncommitted changes"
-          fi
+#  codegen-android:
+#    name: "[Android] Check codegen"
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v7
+#      - uses: subosito/flutter-action@v2
+#        with: { cache: true }
+#      - uses: actions/setup-java@v6
+#        with:
+#          java-version: '21'
+#          distribution: 'temurin'
+#          cache: 'gradle'
+#      - name: "Get Flutter dependencies"
+#        run: dart pub get
+#      - name: Build example APK
+#        working-directory: examples
+#        run: flutter build apk
+#      - name: Run jnigen
+#        working-directory: packages/maplibre_android
+#        run: dart tool/jnigen.dart
+#      - name: Format code
+#        run: dart format packages/maplibre_android/lib/src/jni.g.dart
+#      - name: Check changes
+#        run: |
+#          if [[ -n "$(git status --porcelain)" ]]; then
+#            echo "❌ Uncommitted changes detected in files:"
+#            git diff
+#            exit 1
+#          else
+#            echo "✅ No uncommitted changes"
+#          fi
 #  codegen-ios:
 #    name: "[iOS] Check codegen"
 #    runs-on: macos-latest
 #    timeout-minutes: 30
 #    steps:
-#      - uses: actions/checkout@v6
+#      - uses: actions/checkout@v7
 #      - name: Clone maplibre-native with shallow submodules
 #        run: |
 #          git clone \

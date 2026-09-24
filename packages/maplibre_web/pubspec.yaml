@@ -1,6 +1,6 @@
 name: maplibre_web
 description: "Web implementation of the Flutter MapLibre plugin."
-version: 0.3.5
+version: 0.3.6
 repository: https://github.com/josxha/flutter-maplibre
 issue_tracker: https://github.com/josxha/flutter-maplibre/issues
 homepage: https://flutter-maplibre.pages.dev
@@ -9,8 +9,8 @@ documentation: https://flutter-maplibre.pages.dev/docs/
 platforms: { web: }
 
 environment:
-  sdk: '>=3.10.0 <4.0.0'
-  flutter: '>=3.38.0'
+  sdk: ^3.13.0
+  flutter: ">=3.47.0"
 
 resolution: workspace
 
@@ -18,7 +18,7 @@ dependencies:
   flutter: { sdk: flutter }
   flutter_web_plugins: { sdk: flutter }
   html: ^0.15.4
-  maplibre_platform_interface: ^0.3.5
+  maplibre_platform_interface: ^0.3.6
   pointer_interceptor: ^0.10.1+2
   web: ^1.0.0
 
