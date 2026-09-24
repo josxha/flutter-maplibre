@@ -4,6 +4,8 @@
 
 - Android: calls on a `StyleController` whose native style was already released
   are ignored instead of aborting the process with a JNI error.
+- iOS: preserve zoom levels, attribution, raster tile size, and supported DEM
+  encoding when adding tile-template sources at runtime.
 
 ## 0.3.6
 

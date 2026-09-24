@@ -1,5 +1,24 @@
 part of 'map_state.dart';
 
+NSMutableArray _toNativeTileUrls(List<String> urls) {
+  final ffiUrls = NSMutableArray.new$()..init();
+  for (final url in urls) {
+    ffiUrls.addObject(url.toNSString());
+  }
+  return ffiUrls;
+}
+
+NSMutableDictionary _toNativeTileSourceOptions(Map<String, Object> options) {
+  final ffiOptions = NSMutableDictionary.new$()..init();
+  for (final option in options.entries) {
+    ffiOptions.setObject(
+      option.value.toNSObject(),
+      forKey: NSCopying.as(option.key.toNSString()),
+    );
+  }
+  return ffiOptions;
+}
+
 /// iOS specific implementation of the [StyleController].
 class StyleControllerIos extends StyleController {
   StyleControllerIos._(this._ffiStyle);
@@ -160,58 +179,55 @@ class StyleControllerIos extends StyleController {
         ffiSource = shapeSource;
       case RasterDemSource():
         final demSource = ffiSource = MLNRasterDEMSource.new$();
-        if (source.url case final String url) {
+        final configuration = buildTileSourceConfiguration(source);
+        if (configuration.url case final String url) {
           demSource.initWithIdentifier$2(
             ffiId,
             configurationURL: url.toNSURL()!,
             tileSize: source.tileSize.toDouble(),
           );
         } else {
-          final ffiUrls = NSMutableArray.new$();
-          for (final url in source.tiles ?? <String>[]) {
-            ffiUrls.addObject(url.toNSString());
-          }
           demSource.initWithIdentifier$3(
             ffiId,
-            tileURLTemplates: ffiUrls,
-            options: NSDictionary.new$(),
+            tileURLTemplates: _toNativeTileUrls(
+              configuration.tileUrlTemplates!,
+            ),
+            options: _toNativeTileSourceOptions(configuration.options),
           );
         }
       case RasterSource():
         final rasterSource = ffiSource = MLNRasterTileSource.new$();
-        if (source.url case final String url) {
+        final configuration = buildTileSourceConfiguration(source);
+        if (configuration.url case final String url) {
           rasterSource.initWithIdentifier$2(
             ffiId,
             configurationURL: url.toNSURL()!,
             tileSize: source.tileSize.toDouble(),
           );
         } else {
-          final ffiUrls = NSMutableArray.new$()..init();
-          for (final url in source.tiles ?? <String>[]) {
-            ffiUrls.addObject(url.toNSString());
-          }
           rasterSource.initWithIdentifier$3(
             ffiId,
-            tileURLTemplates: ffiUrls,
-            options: NSDictionary.new$(),
+            tileURLTemplates: _toNativeTileUrls(
+              configuration.tileUrlTemplates!,
+            ),
+            options: _toNativeTileSourceOptions(configuration.options),
           );
         }
       case VectorSource():
         final vectorSource = ffiSource = MLNVectorTileSource.new$();
-        if (source.url case final String url) {
+        final configuration = buildTileSourceConfiguration(source);
+        if (configuration.url case final String url) {
           vectorSource.initWithIdentifier$2(
             ffiId,
             configurationURLString: url.toNSString(),
           );
         } else {
-          final ffiUrls = NSMutableArray.new$()..init();
-          for (final url in source.tiles ?? <String>[]) {
-            ffiUrls.addObject(url.toNSString());
-          }
           vectorSource.initWithIdentifier$3(
             ffiId,
-            tileURLTemplates: ffiUrls,
-            options: NSDictionary.new$(),
+            tileURLTemplates: _toNativeTileUrls(
+              configuration.tileUrlTemplates!,
+            ),
+            options: _toNativeTileSourceOptions(configuration.options),
           );
         }
       case ImageSource():
