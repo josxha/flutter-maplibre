@@ -40,6 +40,17 @@ abstract class MapLibrePlatform extends PlatformInterface {
     'MapLibre PermissionManager is not supported on this platform.',
   );
 
+  /// Replaces all MapLibre request headers configured for an exact [host].
+  Future<void> setRequestHeaders(String host, Map<String, String> headers) =>
+      throw UnsupportedError(
+        'MapLibre request headers are not supported on this platform.',
+      );
+
+  /// Clears all MapLibre request headers configured for an exact [host].
+  Future<void> clearRequestHeaders(String host) => throw UnsupportedError(
+    'MapLibre request headers are not supported on this platform.',
+  );
+
   /// Return whether offline manager is supported on the current platform.
   bool get offlineManagerIsSupported => false;
 

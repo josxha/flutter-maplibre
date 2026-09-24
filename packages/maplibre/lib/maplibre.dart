@@ -41,6 +41,7 @@ export 'package:maplibre_platform_interface/maplibre_platform_interface.dart'
         MapGestures,
         MapLibreMap,
         MapLibreMapState,
+        MapLibreRequestHeaders,
         MapOptions,
         MapProjection,
         OfflineManager,

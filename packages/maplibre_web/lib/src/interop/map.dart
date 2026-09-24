@@ -160,7 +160,16 @@ extension type MapOptions._(JSObject _) implements JSObject {
     required double bearing,
     required double pitch,
     required bool attributionControl,
+    JSFunction? transformRequest,
   });
+}
+
+/// A transformed MapLibre resource request.
+@anonymous
+@JS()
+extension type RequestParameters._(JSObject _) implements JSObject {
+  /// Create transformed request parameters.
+  external factory RequestParameters({required String url, JSObject? headers});
 }
 
 /// The specifications of map sources.

@@ -1,19 +1,34 @@
 package com.github.josxha.maplibre
 
-/*import io.flutter.plugin.common.MethodCall
-import io.flutter.plugin.common.MethodChannel
+import android.content.Context
+import io.flutter.plugin.platform.PlatformView
+import org.mockito.Mockito.mock
 import kotlin.test.Test
-import org.mockito.Mockito*/
+import kotlin.test.assertEquals
+import kotlin.test.assertSame
 
 internal class MapLibrePluginTest {
-    /*@Test
-    fun onMethodCall_getPlatformVersion_returnsExpectedValue() {
-      val plugin = MaplibrePlugin()
+    @Test
+    fun create_initializesMapLibreBeforeInstallingRequestInterceptor() {
+        val calls = mutableListOf<String>()
+        val platformView = mock(PlatformView::class.java)
+        val factory =
+            MapLibreMapFactory(
+                createPlatformView = {
+                    calls += "initialize_maplibre"
+                    platformView
+                },
+                installRequestHeadersInterceptor = {
+                    calls += "install_request_interceptor"
+                },
+            )
 
-      val call = MethodCall("getPlatformVersion", null)
-      val mockResult: MethodChannel.Result = Mockito.mock(MethodChannel.Result::class.java)
-      plugin.onMethodCall(call, mockResult)
+        val result = factory.create(mock(Context::class.java), 7, null)
 
-      Mockito.verify(mockResult).success("Android " + android.os.Build.VERSION.RELEASE)
-    }*/
+        assertSame(platformView, result)
+        assertEquals(
+            listOf("initialize_maplibre", "install_request_interceptor"),
+            calls,
+        )
+    }
 }
