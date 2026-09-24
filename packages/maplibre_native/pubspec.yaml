@@ -6,9 +6,11 @@ issue_tracker: https://github.com/josxha/flutter-maplibre/issues
 homepage: https://flutter-maplibre.pages.dev
 documentation: https://flutter-maplibre.pages.dev/docs/
 
+platforms: { android: , ios: , linux: , macos: , windows: }
+
 environment:
-  sdk: ^3.13.2
-  flutter: '>=3.44.0'
+  sdk: ^3.13.0
+  flutter: ">=3.47.0"
 
 dependencies:
   flutter: { sdk: flutter }
