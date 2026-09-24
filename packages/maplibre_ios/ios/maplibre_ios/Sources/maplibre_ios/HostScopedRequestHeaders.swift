@@ -16,6 +16,26 @@ public class HostScopedRequestHeaders: NSObject, MLNNetworkConfigurationDelegate
         configuration.delegate = self
     }
 
+    /// MapLibre calls these optional methods only when the current delegate
+    /// responds to them. Forwarding without implementing them keeps MapLibre's
+    /// own session when no earlier delegate supplied one.
+    override public func responds(to aSelector: Selector!) -> Bool {
+        if Self.forwardedSelectors.contains(aSelector) {
+            return (previousDelegate as? NSObject)?.responds(to: aSelector) ?? false
+        }
+        return super.responds(to: aSelector)
+    }
+
+    override public func forwardingTarget(for aSelector: Selector!) -> Any? {
+        if Self.forwardedSelectors.contains(aSelector),
+           let previous = previousDelegate as? NSObject,
+           previous.responds(to: aSelector)
+        {
+            return previous
+        }
+        return super.forwardingTarget(for: aSelector)
+    }
+
     @objc(replaceWithHost:headers:)
     public static func replaceWithHost(_ host: String, headers: NSDictionary) {
         var converted: [String: String] = [:]
@@ -66,4 +86,9 @@ public class HostScopedRequestHeaders: NSObject, MLNNetworkConfigurationDelegate
         }
         return transformedRequest
     }
+
+    private static let forwardedSelectors: Set<Selector> = [
+        NSSelectorFromString("sessionForNetworkConfiguration:"),
+        NSSelectorFromString("didReceiveResponse:"),
+    ]
 }

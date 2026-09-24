@@ -6,6 +6,12 @@ import 'package:maplibre_platform_interface/src/platform_interface.dart';
 /// request host. Callers should await updates before creating a map or changing
 /// its style. Calling [setHeaders] again replaces all headers for that host,
 /// which makes this API suitable for rotating short-lived tokens.
+///
+/// Android applies that host scope again on each redirect hop, and removes
+/// these header names when the new host has none configured. iOS and web see
+/// the request before it is sent. MapLibre Native's network delegate and
+/// MapLibre GL JS `transformRequest` cannot change a redirect those platforms
+/// follow afterwards.
 abstract final class MapLibreRequestHeaders {
   /// Replaces the headers for [host].
   ///
@@ -55,8 +61,8 @@ abstract final class MapLibreRequestHeaders {
 
   static void _validateHeader(String name, String value) {
     final validName = name.isNotEmpty && _headerName.hasMatch(name);
-    final validValue = !value.codeUnits.any(
-      (codeUnit) => codeUnit == 0x0A || codeUnit == 0x0D || codeUnit == 0x00,
+    final validValue = value.codeUnits.every(
+      (codeUnit) => codeUnit == 0x09 || (codeUnit >= 0x20 && codeUnit <= 0x7E),
     );
     if (!validName) {
       throw ArgumentError.value(name, 'headers', 'Invalid header name.');

@@ -3,8 +3,10 @@ package com.github.josxha.maplibre;
 import androidx.annotation.Keep;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -36,5 +38,13 @@ public final class HostScopedRequestHeaders {
 
     public static Map<String, String> headersForHost(String host) {
         return headersByHost.get(host.toLowerCase(Locale.ROOT));
+    }
+
+    static Set<String> configuredHeaderNames() {
+        final Set<String> names = new HashSet<>();
+        for (Map<String, String> headers : headersByHost.values()) {
+            names.addAll(headers.keySet());
+        }
+        return names;
     }
 }

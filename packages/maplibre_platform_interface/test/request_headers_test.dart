@@ -76,7 +76,27 @@ void main() {
       }),
       throwsArgumentError,
     );
+    expect(
+      () => MapLibreRequestHeaders.setHeaders('maps.example.com', {
+        'X-Token': 'token\u0001value',
+      }),
+      throwsArgumentError,
+    );
+    expect(
+      () => MapLibreRequestHeaders.setHeaders('maps.example.com', {
+        'X-Token': 'café',
+      }),
+      throwsArgumentError,
+    );
     expect(platform.setCalls, 0);
+  });
+
+  test('accepts tab and printable ASCII header values', () async {
+    await MapLibreRequestHeaders.setHeaders('maps.example.com', {
+      'X-Token': 'tab\t and spaces',
+    });
+
+    expect(platform.headers, {'X-Token': 'tab\t and spaces'});
   });
 }
 

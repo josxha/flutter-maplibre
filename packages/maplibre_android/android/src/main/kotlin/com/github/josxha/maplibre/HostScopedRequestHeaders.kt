@@ -9,13 +9,19 @@ import org.maplibre.android.module.http.HttpRequestUtil
 import java.util.concurrent.atomic.AtomicBoolean
 
 internal fun applyHostScopedRequestHeaders(request: Request): Request {
-    val headers =
-        HostScopedRequestHeaders.headersForHost(request.url.host) ?: return request
-    return request
-        .newBuilder()
-        .apply {
-            headers.forEach { (name, value) -> header(name, value) }
-        }.build()
+    val headers = HostScopedRequestHeaders.headersForHost(request.url.host)
+    val managedNames = HostScopedRequestHeaders.configuredHeaderNames()
+    if (headers == null && managedNames.none { request.header(it) != null }) {
+        return request
+    }
+    val builder = request.newBuilder()
+    for (name in managedNames) {
+        if (headers == null || !headers.containsKey(name)) {
+            builder.removeHeader(name)
+        }
+    }
+    headers?.forEach { (name, value) -> builder.header(name, value) }
+    return builder.build()
 }
 
 internal object HostScopedRequestHeadersInterceptor : Interceptor {
@@ -29,7 +35,9 @@ internal fun installHostScopedRequestHeadersInterceptor() {
         OkHttpClient
             .Builder()
             .dispatcher(dispatcher)
-            .addInterceptor(HostScopedRequestHeadersInterceptor)
+            // Network interceptors run on each redirect hop, so a header for one
+            // host is removed when OkHttp follows a redirect to another host.
+            .addNetworkInterceptor(HostScopedRequestHeadersInterceptor)
             .build()
     HttpRequestUtil.setOkHttpClient(client)
 }

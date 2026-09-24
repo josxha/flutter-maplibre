@@ -53,6 +53,41 @@ internal class HostScopedRequestHeadersTest {
     }
 
     @Test
+    fun `removes configured headers when the host changes`() {
+        HostScopedRequestHeaders.replace(
+            "maps.example.com",
+            mapOf("X-Firebase-AppCheck" to "token"),
+        )
+        val redirected =
+            request("https://example.com/tile.pbf")
+                .newBuilder()
+                .header("X-Firebase-AppCheck", "token")
+                .build()
+
+        assertNull(
+            applyHostScopedRequestHeaders(redirected).header("X-Firebase-AppCheck"),
+        )
+    }
+
+    @Test
+    fun `keeps configured headers when the host stays the same`() {
+        HostScopedRequestHeaders.replace(
+            "maps.example.com",
+            mapOf("X-Firebase-AppCheck" to "token"),
+        )
+        val redirected =
+            request("https://maps.example.com/other.pbf")
+                .newBuilder()
+                .header("X-Firebase-AppCheck", "token")
+                .build()
+
+        assertEquals(
+            "token",
+            applyHostScopedRequestHeaders(redirected).header("X-Firebase-AppCheck"),
+        )
+    }
+
+    @Test
     fun `clear stops injecting headers`() {
         HostScopedRequestHeaders.replace(
             "maps.example.com",
