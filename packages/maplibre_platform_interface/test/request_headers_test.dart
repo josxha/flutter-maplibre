@@ -53,6 +53,7 @@ void main() {
       'maps.example.com/tiles',
       'maps.example.com?token=value',
       'user@maps.example.com',
+      'münchen.de',
     ]) {
       expect(
         () => MapLibreRequestHeaders.clearHeaders(host),
@@ -61,6 +62,14 @@ void main() {
       );
     }
     expect(platform.clearCalls, 0);
+  });
+
+  test('accepts a punycode host', () async {
+    await MapLibreRequestHeaders.setHeaders('XN--mnchen-3ya.de', {
+      'X-Token': 'token',
+    });
+
+    expect(platform.host, 'xn--mnchen-3ya.de');
   });
 
   test('rejects unsafe header names and values', () {

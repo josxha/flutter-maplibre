@@ -16,9 +16,10 @@ abstract final class MapLibreRequestHeaders {
   /// Replaces the headers for [host].
   ///
   /// [host] must contain only a hostname or IP address, without a scheme, port,
-  /// path, query, or fragment. Host matching is case-insensitive and does not
-  /// include subdomains. An empty [headers] map has the same effect as
-  /// [clearHeaders].
+  /// path, query, or fragment. International names must use their punycode
+  /// form, such as `xn--mnchen-3ya.de`, because Android matches that ASCII
+  /// host. Host matching is case-insensitive and does not include subdomains.
+  /// An empty [headers] map has the same effect as [clearHeaders].
   static Future<void> setHeaders(String host, Map<String, String> headers) {
     final normalizedHost = _normalizeHost(host);
     final validatedHeaders = Map<String, String>.unmodifiable(
@@ -56,7 +57,15 @@ abstract final class MapLibreRequestHeaders {
         uri.hasFragment) {
       throw ArgumentError.value(host, 'host', 'Must be an exact host only.');
     }
-    return uri.host.toLowerCase();
+    final normalizedHost = uri.host.toLowerCase();
+    if (normalizedHost.contains('%')) {
+      throw ArgumentError.value(
+        host,
+        'host',
+        'Must be an ASCII host. Use punycode for international names.',
+      );
+    }
+    return normalizedHost;
   }
 
   static void _validateHeader(String name, String value) {
