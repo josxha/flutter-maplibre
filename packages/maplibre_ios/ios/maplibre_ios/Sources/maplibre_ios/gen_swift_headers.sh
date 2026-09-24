@@ -38,6 +38,7 @@ swiftc \
   -c Extensions.swift \
   -c FlutterApi.swift \
   -c Helpers.swift \
+  -c HostScopedRequestHeaders.swift \
   -c MapLibreRegistry.swift \
   -module-name maplibre_ios \
   -emit-objc-header-path MapLibreIos.h \

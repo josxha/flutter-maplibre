@@ -1,2 +1,3 @@
 -keep class com.google.gson.** { *; }
 -keep class org.maplibre.** { *; }
+-keep class com.github.josxha.maplibre.HostScopedRequestHeaders { *; }

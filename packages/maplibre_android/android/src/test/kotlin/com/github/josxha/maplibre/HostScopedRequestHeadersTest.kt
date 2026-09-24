@@ -26,10 +26,10 @@ internal class HostScopedRequestHeadersTest {
 
         assertEquals(
             "token",
-            HostScopedRequestHeaders.applyTo(matching).header("X-Firebase-AppCheck"),
+            applyHostScopedRequestHeaders(matching).header("X-Firebase-AppCheck"),
         )
-        assertSame(subdomain, HostScopedRequestHeaders.applyTo(subdomain))
-        assertSame(unrelated, HostScopedRequestHeaders.applyTo(unrelated))
+        assertSame(subdomain, applyHostScopedRequestHeaders(subdomain))
+        assertSame(unrelated, applyHostScopedRequestHeaders(unrelated))
     }
 
     @Test
@@ -44,7 +44,7 @@ internal class HostScopedRequestHeadersTest {
         )
 
         val request =
-            HostScopedRequestHeaders.applyTo(
+            applyHostScopedRequestHeaders(
                 request("https://maps.example.com/tile.pbf"),
             )
 
@@ -61,7 +61,7 @@ internal class HostScopedRequestHeadersTest {
         HostScopedRequestHeaders.clear("MAPS.EXAMPLE.COM")
         val request = request("https://maps.example.com/tile.pbf")
 
-        assertSame(request, HostScopedRequestHeaders.applyTo(request))
+        assertSame(request, applyHostScopedRequestHeaders(request))
     }
 
     private fun request(url: String) = Request.Builder().url(url).build()

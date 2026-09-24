@@ -89,6 +89,7 @@ void main(List<String> args) {
             'UIViewConfigurationState',
             'NSExpression',
             'Helpers',
+            'HostScopedRequestHeaders',
             'MapLibreRegistry',
             'Extensions',
             'MLNMapView',
