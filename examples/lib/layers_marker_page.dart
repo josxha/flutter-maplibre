@@ -60,8 +60,7 @@ class _LayersMarkerPageState extends State<LayersMarkerPage> {
                 _points.add(Feature(geometry: Point(event.point)));
               });
             default:
-              // ignore all other events
-              break;
+            // ignore all other events
           }
         },
         layers: [

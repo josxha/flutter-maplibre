@@ -14,7 +14,11 @@ void main(List<String> args) {
       ),
       preamble: '// ignore_for_file: type=lint',
       mavenDownloads: MavenDownloads(
-        sourceDeps: ['org.maplibre.gl:android-sdk-geojson:6.0.1'],
+        sourceDeps: [
+          'org.maplibre.gl:android-sdk-geojson:6.0.1',
+          'org.maplibre.gl:android-sdk-opengl:13.3.0',
+          'org.maplibre.gl:maplibre-android-gestures:0.0.4',
+        ],
       ),
       androidSdkConfig: AndroidSdkConfig(
         addGradleDeps: true,

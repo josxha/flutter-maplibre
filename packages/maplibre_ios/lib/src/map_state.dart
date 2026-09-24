@@ -66,6 +66,13 @@ final class MapLibreMapStateIos extends MapLibreMapState {
         final event = MapEventClick(point: point, screenPoint: offset);
         widget.onEvent?.call(event);
       },
+      onUserInputWithScreenLocation_: (screenLocation) {
+        final offset = screenLocation.toOffset();
+        final point = toLngLat(offset);
+        widget.onEvent?.call(
+          MapEventUserInput(point: point, screenPoint: offset),
+        );
+      },
       // MLNMapViewDelegate callbacks
       didBecomeIdleWithMapView_: _didBecomeIdle,
       didFinishLoadingStyleWithMapView_style_: _didFinishLoadingStyle,
