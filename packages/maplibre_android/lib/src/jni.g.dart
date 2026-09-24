@@ -5947,10 +5947,11 @@ extension Activity$$Methods on Activity {
     ).check();
   }
 
-  static final _id_registerScreenCaptureCallback = Activity._class.instanceMethodId(
-    r'registerScreenCaptureCallback',
-    r'(Ljava/util/concurrent/Executor;Landroid/app/Activity$ScreenCaptureCallback;)V',
-  );
+  static final _id_registerScreenCaptureCallback = Activity._class
+      .instanceMethodId(
+        r'registerScreenCaptureCallback',
+        r'(Ljava/util/concurrent/Executor;Landroid/app/Activity$ScreenCaptureCallback;)V',
+      );
 
   static final _registerScreenCaptureCallback =
       jni$_.ProtectedJniExtensions.lookup<
@@ -8884,10 +8885,11 @@ extension Activity$$Methods on Activity {
     ).check();
   }
 
-  static final _id_startIntentSenderForResult$1 = Activity._class.instanceMethodId(
-    r'startIntentSenderForResult',
-    r'(Landroid/content/IntentSender;ILandroid/content/Intent;IIILandroid/os/Bundle;)V',
-  );
+  static final _id_startIntentSenderForResult$1 = Activity._class
+      .instanceMethodId(
+        r'startIntentSenderForResult',
+        r'(Landroid/content/IntentSender;ILandroid/content/Intent;IIILandroid/os/Bundle;)V',
+      );
 
   static final _startIntentSenderForResult$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -8950,10 +8952,11 @@ extension Activity$$Methods on Activity {
     ).check();
   }
 
-  static final _id_startIntentSenderFromChild = Activity._class.instanceMethodId(
-    r'startIntentSenderFromChild',
-    r'(Landroid/app/Activity;Landroid/content/IntentSender;ILandroid/content/Intent;III)V',
-  );
+  static final _id_startIntentSenderFromChild = Activity._class
+      .instanceMethodId(
+        r'startIntentSenderFromChild',
+        r'(Landroid/app/Activity;Landroid/content/IntentSender;ILandroid/content/Intent;III)V',
+      );
 
   static final _startIntentSenderFromChild =
       jni$_.ProtectedJniExtensions.lookup<
@@ -9017,10 +9020,11 @@ extension Activity$$Methods on Activity {
     ).check();
   }
 
-  static final _id_startIntentSenderFromChild$1 = Activity._class.instanceMethodId(
-    r'startIntentSenderFromChild',
-    r'(Landroid/app/Activity;Landroid/content/IntentSender;ILandroid/content/Intent;IIILandroid/os/Bundle;)V',
-  );
+  static final _id_startIntentSenderFromChild$1 = Activity._class
+      .instanceMethodId(
+        r'startIntentSenderFromChild',
+        r'(Landroid/app/Activity;Landroid/content/IntentSender;ILandroid/content/Intent;IIILandroid/os/Bundle;)V',
+      );
 
   static final _startIntentSenderFromChild$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -9995,10 +9999,9 @@ extension type Context._(jni$_.JObject _$this) implements jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get CONNECTIVITY_DIAGNOSTICS_SERVICE =>
       _id_CONNECTIVITY_DIAGNOSTICS_SERVICE.getNullable(
-            _class,
-            jni$_.JString.type,
-          )
-          as jni$_.JString?;
+        _class,
+        jni$_.JString.type,
+      ) as jni$_.JString?;
 
   static final _id_CONNECTIVITY_SERVICE = _class.staticFieldId(
     r'CONNECTIVITY_SERVICE',
@@ -22861,12 +22864,10 @@ extension ViewGroup$LayoutParams$$Methods on ViewGroup$LayoutParams {
   /// from: `public android.view.animation.LayoutAnimationController$AnimationParameters layoutAnimationParameters`
   /// The returned object must be released after use, by calling the [release] method.
   LayoutAnimationController$$AnimationParameters?
-  get layoutAnimationParameters =>
-      _id_layoutAnimationParameters.getNullable(
-            this,
-            LayoutAnimationController$$AnimationParameters.type,
-          )
-          as LayoutAnimationController$$AnimationParameters?;
+  get layoutAnimationParameters => _id_layoutAnimationParameters.getNullable(
+    this,
+    LayoutAnimationController$$AnimationParameters.type,
+  ) as LayoutAnimationController$$AnimationParameters?;
 
   /// from: `public android.view.animation.LayoutAnimationController$AnimationParameters layoutAnimationParameters`
   /// The returned object must be released after use, by calling the [release] method.
@@ -24843,10 +24844,11 @@ extension ViewGroup$$Methods on ViewGroup {
     ).check();
   }
 
-  static final _id_dispatchScrollCaptureSearch = ViewGroup._class.instanceMethodId(
-    r'dispatchScrollCaptureSearch',
-    r'(Landroid/graphics/Rect;Landroid/graphics/Point;Ljava/util/function/Consumer;)V',
-  );
+  static final _id_dispatchScrollCaptureSearch = ViewGroup._class
+      .instanceMethodId(
+        r'dispatchScrollCaptureSearch',
+        r'(Landroid/graphics/Rect;Landroid/graphics/Point;Ljava/util/function/Consumer;)V',
+      );
 
   static final _dispatchScrollCaptureSearch =
       jni$_.ProtectedJniExtensions.lookup<
@@ -28647,10 +28649,11 @@ extension ViewGroup$$Methods on ViewGroup {
     ).object<ActionMode?>();
   }
 
-  static final _id_startActionModeForChild$1 = ViewGroup._class.instanceMethodId(
-    r'startActionModeForChild',
-    r'(Landroid/view/View;Landroid/view/ActionMode$Callback;I)Landroid/view/ActionMode;',
-  );
+  static final _id_startActionModeForChild$1 = ViewGroup._class
+      .instanceMethodId(
+        r'startActionModeForChild',
+        r'(Landroid/view/View;Landroid/view/ActionMode$Callback;I)Landroid/view/ActionMode;',
+      );
 
   static final _startActionModeForChild$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -31376,9 +31379,8 @@ final class $URL$Type$ extends jni$_.JType<URL> {
 
 /// from: `io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding$OnSaveInstanceStateListener`
 extension type ActivityPluginBinding$OnSaveInstanceStateListener._(
-  jni$_.JObject _$this
-)
-    implements jni$_.JObject {
+  jni$_.JObject _$this,
+) implements jni$_.JObject {
   static final _class = jni$_.JClass.forName(
     r'io/flutter/embedding/engine/plugins/activity/ActivityPluginBinding$OnSaveInstanceStateListener',
   );
@@ -31759,30 +31761,18 @@ extension type ActivityPluginBinding._(jni$_.JObject _$this)
       $p,
       _$invokePointer,
       [
-        if ($impl.addRequestPermissionsResultListener$async)
-          r'addRequestPermissionsResultListener(Lio/flutter/plugin/common/PluginRegistry$RequestPermissionsResultListener;)V',
-        if ($impl.removeRequestPermissionsResultListener$async)
-          r'removeRequestPermissionsResultListener(Lio/flutter/plugin/common/PluginRegistry$RequestPermissionsResultListener;)V',
-        if ($impl.addActivityResultListener$async)
-          r'addActivityResultListener(Lio/flutter/plugin/common/PluginRegistry$ActivityResultListener;)V',
-        if ($impl.removeActivityResultListener$async)
-          r'removeActivityResultListener(Lio/flutter/plugin/common/PluginRegistry$ActivityResultListener;)V',
-        if ($impl.addOnNewIntentListener$async)
-          r'addOnNewIntentListener(Lio/flutter/plugin/common/PluginRegistry$NewIntentListener;)V',
-        if ($impl.removeOnNewIntentListener$async)
-          r'removeOnNewIntentListener(Lio/flutter/plugin/common/PluginRegistry$NewIntentListener;)V',
-        if ($impl.addOnUserLeaveHintListener$async)
-          r'addOnUserLeaveHintListener(Lio/flutter/plugin/common/PluginRegistry$UserLeaveHintListener;)V',
-        if ($impl.removeOnUserLeaveHintListener$async)
-          r'removeOnUserLeaveHintListener(Lio/flutter/plugin/common/PluginRegistry$UserLeaveHintListener;)V',
-        if ($impl.addOnWindowFocusChangedListener$async)
-          r'addOnWindowFocusChangedListener(Lio/flutter/plugin/common/PluginRegistry$WindowFocusChangedListener;)V',
-        if ($impl.removeOnWindowFocusChangedListener$async)
-          r'removeOnWindowFocusChangedListener(Lio/flutter/plugin/common/PluginRegistry$WindowFocusChangedListener;)V',
-        if ($impl.addOnSaveStateListener$async)
-          r'addOnSaveStateListener(Lio/flutter/embedding/engine/plugins/activity/ActivityPluginBinding$OnSaveInstanceStateListener;)V',
-        if ($impl.removeOnSaveStateListener$async)
-          r'removeOnSaveStateListener(Lio/flutter/embedding/engine/plugins/activity/ActivityPluginBinding$OnSaveInstanceStateListener;)V',
+        if ($impl.addRequestPermissionsResultListener$async) r'addRequestPermissionsResultListener(Lio/flutter/plugin/common/PluginRegistry$RequestPermissionsResultListener;)V',
+        if ($impl.removeRequestPermissionsResultListener$async) r'removeRequestPermissionsResultListener(Lio/flutter/plugin/common/PluginRegistry$RequestPermissionsResultListener;)V',
+        if ($impl.addActivityResultListener$async) r'addActivityResultListener(Lio/flutter/plugin/common/PluginRegistry$ActivityResultListener;)V',
+        if ($impl.removeActivityResultListener$async) r'removeActivityResultListener(Lio/flutter/plugin/common/PluginRegistry$ActivityResultListener;)V',
+        if ($impl.addOnNewIntentListener$async) r'addOnNewIntentListener(Lio/flutter/plugin/common/PluginRegistry$NewIntentListener;)V',
+        if ($impl.removeOnNewIntentListener$async) r'removeOnNewIntentListener(Lio/flutter/plugin/common/PluginRegistry$NewIntentListener;)V',
+        if ($impl.addOnUserLeaveHintListener$async) r'addOnUserLeaveHintListener(Lio/flutter/plugin/common/PluginRegistry$UserLeaveHintListener;)V',
+        if ($impl.removeOnUserLeaveHintListener$async) r'removeOnUserLeaveHintListener(Lio/flutter/plugin/common/PluginRegistry$UserLeaveHintListener;)V',
+        if ($impl.addOnWindowFocusChangedListener$async) r'addOnWindowFocusChangedListener(Lio/flutter/plugin/common/PluginRegistry$WindowFocusChangedListener;)V',
+        if ($impl.removeOnWindowFocusChangedListener$async) r'removeOnWindowFocusChangedListener(Lio/flutter/plugin/common/PluginRegistry$WindowFocusChangedListener;)V',
+        if ($impl.addOnSaveStateListener$async) r'addOnSaveStateListener(Lio/flutter/embedding/engine/plugins/activity/ActivityPluginBinding$OnSaveInstanceStateListener;)V',
+        if ($impl.removeOnSaveStateListener$async) r'removeOnSaveStateListener(Lio/flutter/embedding/engine/plugins/activity/ActivityPluginBinding$OnSaveInstanceStateListener;)V',
       ],
     );
     final $a = $p.sendPort.nativePort;
@@ -32997,9 +32987,8 @@ final class $PluginRegistry$NewIntentListener$Type$
 
 /// from: `io.flutter.plugin.common.PluginRegistry$RequestPermissionsResultListener`
 extension type PluginRegistry$RequestPermissionsResultListener._(
-  jni$_.JObject _$this
-)
-    implements jni$_.JObject {
+  jni$_.JObject _$this,
+) implements jni$_.JObject {
   static final _class = jni$_.JClass.forName(
     r'io/flutter/plugin/common/PluginRegistry$RequestPermissionsResultListener',
   );
@@ -45106,9 +45095,8 @@ final class $LocationComponent$Type$ extends jni$_.JType<LocationComponent> {
 
 /// from: `org.maplibre.android.location.LocationComponentActivationOptions$Builder`
 extension type LocationComponentActivationOptions$Builder._(
-  jni$_.JObject _$this
-)
-    implements jni$_.JObject {
+  jni$_.JObject _$this,
+) implements jni$_.JObject {
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/location/LocationComponentActivationOptions$Builder',
   );
@@ -54565,12 +54553,10 @@ extension type MapLibreMap$OnRotateListener._(jni$_.JObject _$this)
       $p,
       _$invokePointer,
       [
-        if ($impl.onRotateBegin$async)
-          r'onRotateBegin(Lorg/maplibre/android/gestures/RotateGestureDetector;)V',
+        if ($impl.onRotateBegin$async) r'onRotateBegin(Lorg/maplibre/android/gestures/RotateGestureDetector;)V',
         if ($impl.onRotate$async)
           r'onRotate(Lorg/maplibre/android/gestures/RotateGestureDetector;)V',
-        if ($impl.onRotateEnd$async)
-          r'onRotateEnd(Lorg/maplibre/android/gestures/RotateGestureDetector;)V',
+        if ($impl.onRotateEnd$async) r'onRotateEnd(Lorg/maplibre/android/gestures/RotateGestureDetector;)V',
       ],
     );
     final $a = $p.sendPort.nativePort;
@@ -54843,12 +54829,9 @@ extension type MapLibreMap$OnScaleListener._(jni$_.JObject _$this)
       $p,
       _$invokePointer,
       [
-        if ($impl.onScaleBegin$async)
-          r'onScaleBegin(Lorg/maplibre/android/gestures/StandardScaleGestureDetector;)V',
-        if ($impl.onScale$async)
-          r'onScale(Lorg/maplibre/android/gestures/StandardScaleGestureDetector;)V',
-        if ($impl.onScaleEnd$async)
-          r'onScaleEnd(Lorg/maplibre/android/gestures/StandardScaleGestureDetector;)V',
+        if ($impl.onScaleBegin$async) r'onScaleBegin(Lorg/maplibre/android/gestures/StandardScaleGestureDetector;)V',
+        if ($impl.onScale$async) r'onScale(Lorg/maplibre/android/gestures/StandardScaleGestureDetector;)V',
+        if ($impl.onScaleEnd$async) r'onScaleEnd(Lorg/maplibre/android/gestures/StandardScaleGestureDetector;)V',
       ],
     );
     final $a = $p.sendPort.nativePort;
@@ -55137,8 +55120,7 @@ extension type MapLibreMap$OnShoveListener._(jni$_.JObject _$this)
       $p,
       _$invokePointer,
       [
-        if ($impl.onShoveBegin$async)
-          r'onShoveBegin(Lorg/maplibre/android/gestures/ShoveGestureDetector;)V',
+        if ($impl.onShoveBegin$async) r'onShoveBegin(Lorg/maplibre/android/gestures/ShoveGestureDetector;)V',
         if ($impl.onShove$async)
           r'onShove(Lorg/maplibre/android/gestures/ShoveGestureDetector;)V',
         if ($impl.onShoveEnd$async)
@@ -57352,10 +57334,11 @@ extension MapLibreMap$$Methods on MapLibreMap {
     ).check();
   }
 
-  static final _id_setOfflineRegionDefinition = MapLibreMap._class.instanceMethodId(
-    r'setOfflineRegionDefinition',
-    r'(Lorg/maplibre/android/offline/OfflineRegionDefinition;Lorg/maplibre/android/maps/Style$OnStyleLoaded;)V',
-  );
+  static final _id_setOfflineRegionDefinition = MapLibreMap._class
+      .instanceMethodId(
+        r'setOfflineRegionDefinition',
+        r'(Lorg/maplibre/android/offline/OfflineRegionDefinition;Lorg/maplibre/android/maps/Style$OnStyleLoaded;)V',
+      );
 
   static final _setOfflineRegionDefinition =
       jni$_.ProtectedJniExtensions.lookup<
@@ -58925,10 +58908,11 @@ extension MapLibreMap$$Methods on MapLibreMap {
     ).check();
   }
 
-  static final _id_getCameraForLatLngBounds = MapLibreMap._class.instanceMethodId(
-    r'getCameraForLatLngBounds',
-    r'(Lorg/maplibre/android/geometry/LatLngBounds;)Lorg/maplibre/android/camera/CameraPosition;',
-  );
+  static final _id_getCameraForLatLngBounds = MapLibreMap._class
+      .instanceMethodId(
+        r'getCameraForLatLngBounds',
+        r'(Lorg/maplibre/android/geometry/LatLngBounds;)Lorg/maplibre/android/camera/CameraPosition;',
+      );
 
   static final _getCameraForLatLngBounds =
       jni$_.ProtectedJniExtensions.lookup<
@@ -58960,10 +58944,11 @@ extension MapLibreMap$$Methods on MapLibreMap {
     ).object<CameraPosition?>();
   }
 
-  static final _id_getCameraForLatLngBounds$1 = MapLibreMap._class.instanceMethodId(
-    r'getCameraForLatLngBounds',
-    r'(Lorg/maplibre/android/geometry/LatLngBounds;[I)Lorg/maplibre/android/camera/CameraPosition;',
-  );
+  static final _id_getCameraForLatLngBounds$1 = MapLibreMap._class
+      .instanceMethodId(
+        r'getCameraForLatLngBounds',
+        r'(Lorg/maplibre/android/geometry/LatLngBounds;[I)Lorg/maplibre/android/camera/CameraPosition;',
+      );
 
   static final _getCameraForLatLngBounds$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -59003,10 +58988,11 @@ extension MapLibreMap$$Methods on MapLibreMap {
     ).object<CameraPosition?>();
   }
 
-  static final _id_getCameraForLatLngBounds$2 = MapLibreMap._class.instanceMethodId(
-    r'getCameraForLatLngBounds',
-    r'(Lorg/maplibre/android/geometry/LatLngBounds;DD)Lorg/maplibre/android/camera/CameraPosition;',
-  );
+  static final _id_getCameraForLatLngBounds$2 = MapLibreMap._class
+      .instanceMethodId(
+        r'getCameraForLatLngBounds',
+        r'(Lorg/maplibre/android/geometry/LatLngBounds;DD)Lorg/maplibre/android/camera/CameraPosition;',
+      );
 
   static final _getCameraForLatLngBounds$2 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -59048,10 +59034,11 @@ extension MapLibreMap$$Methods on MapLibreMap {
     ).object<CameraPosition?>();
   }
 
-  static final _id_getCameraForLatLngBounds$3 = MapLibreMap._class.instanceMethodId(
-    r'getCameraForLatLngBounds',
-    r'(Lorg/maplibre/android/geometry/LatLngBounds;[IDD)Lorg/maplibre/android/camera/CameraPosition;',
-  );
+  static final _id_getCameraForLatLngBounds$3 = MapLibreMap._class
+      .instanceMethodId(
+        r'getCameraForLatLngBounds',
+        r'(Lorg/maplibre/android/geometry/LatLngBounds;[IDD)Lorg/maplibre/android/camera/CameraPosition;',
+      );
 
   static final _getCameraForLatLngBounds$3 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -60566,10 +60553,11 @@ extension MapLibreMap$$Methods on MapLibreMap {
     ).object<jni$_.JList<Feature?>>();
   }
 
-  static final _id_queryRenderedFeatures$1 = MapLibreMap._class.instanceMethodId(
-    r'queryRenderedFeatures',
-    r'(Landroid/graphics/PointF;Lorg/maplibre/android/style/expressions/Expression;[Ljava/lang/String;)Ljava/util/List;',
-  );
+  static final _id_queryRenderedFeatures$1 = MapLibreMap._class
+      .instanceMethodId(
+        r'queryRenderedFeatures',
+        r'(Landroid/graphics/PointF;Lorg/maplibre/android/style/expressions/Expression;[Ljava/lang/String;)Ljava/util/List;',
+      );
 
   static final _queryRenderedFeatures$1 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -60661,10 +60649,11 @@ extension MapLibreMap$$Methods on MapLibreMap {
     ).object<jni$_.JList<Feature?>>();
   }
 
-  static final _id_queryRenderedFeatures$3 = MapLibreMap._class.instanceMethodId(
-    r'queryRenderedFeatures',
-    r'(Landroid/graphics/RectF;Lorg/maplibre/android/style/expressions/Expression;[Ljava/lang/String;)Ljava/util/List;',
-  );
+  static final _id_queryRenderedFeatures$3 = MapLibreMap._class
+      .instanceMethodId(
+        r'queryRenderedFeatures',
+        r'(Landroid/graphics/RectF;Lorg/maplibre/android/style/expressions/Expression;[Ljava/lang/String;)Ljava/util/List;',
+      );
 
   static final _queryRenderedFeatures$3 =
       jni$_.ProtectedJniExtensions.lookup<
@@ -64312,9 +64301,8 @@ final class $MapView$OnCameraWillChangeListener$Type$
 
 /// from: `org.maplibre.android.maps.MapView$OnCanRemoveUnusedStyleImageListener`
 extension type MapView$OnCanRemoveUnusedStyleImageListener._(
-  jni$_.JObject _$this
-)
-    implements jni$_.JObject {
+  jni$_.JObject _$this,
+) implements jni$_.JObject {
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/maps/MapView$OnCanRemoveUnusedStyleImageListener',
   );
@@ -65274,9 +65262,8 @@ final class $MapView$OnDidFinishRenderingFrameListener$Type$
 
 /// from: `org.maplibre.android.maps.MapView$OnDidFinishRenderingFrameWithStatsListener`
 extension type MapView$OnDidFinishRenderingFrameWithStatsListener._(
-  jni$_.JObject _$this
-)
-    implements jni$_.JObject {
+  jni$_.JObject _$this,
+) implements jni$_.JObject {
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/maps/MapView$OnDidFinishRenderingFrameWithStatsListener',
   );
@@ -65351,8 +65338,7 @@ extension type MapView$OnDidFinishRenderingFrameWithStatsListener._(
       $p,
       _$invokePointer,
       [
-        if ($impl.onDidFinishRenderingFrame$async)
-          r'onDidFinishRenderingFrame(ZLorg/maplibre/android/maps/RenderingStats;)V',
+        if ($impl.onDidFinishRenderingFrame$async) r'onDidFinishRenderingFrame(ZLorg/maplibre/android/maps/RenderingStats;)V',
       ],
     );
     final $a = $p.sendPort.nativePort;
@@ -67939,8 +67925,7 @@ extension type MapView$OnTileActionListener._(jni$_.JObject _$this)
       $p,
       _$invokePointer,
       [
-        if ($impl.onTileAction$async)
-          r'onTileAction(Lorg/maplibre/android/tile/TileOperation;IIIIILjava/lang/String;)V',
+        if ($impl.onTileAction$async) r'onTileAction(Lorg/maplibre/android/tile/TileOperation;IIIIILjava/lang/String;)V',
       ],
     );
     final $a = $p.sendPort.nativePort;
@@ -72305,10 +72290,11 @@ extension Projection$$Methods on Projection {
     ).check();
   }
 
-  static final _id_getProjectedMetersForLatLng = Projection._class.instanceMethodId(
-    r'getProjectedMetersForLatLng',
-    r'(Lorg/maplibre/android/geometry/LatLng;)Lorg/maplibre/android/geometry/ProjectedMeters;',
-  );
+  static final _id_getProjectedMetersForLatLng = Projection._class
+      .instanceMethodId(
+        r'getProjectedMetersForLatLng',
+        r'(Lorg/maplibre/android/geometry/LatLng;)Lorg/maplibre/android/geometry/ProjectedMeters;',
+      );
 
   static final _getProjectedMetersForLatLng =
       jni$_.ProtectedJniExtensions.lookup<
@@ -72340,10 +72326,11 @@ extension Projection$$Methods on Projection {
     ).object<ProjectedMeters>();
   }
 
-  static final _id_getLatLngForProjectedMeters = Projection._class.instanceMethodId(
-    r'getLatLngForProjectedMeters',
-    r'(Lorg/maplibre/android/geometry/ProjectedMeters;)Lorg/maplibre/android/geometry/LatLng;',
-  );
+  static final _id_getLatLngForProjectedMeters = Projection._class
+      .instanceMethodId(
+        r'getLatLngForProjectedMeters',
+        r'(Lorg/maplibre/android/geometry/ProjectedMeters;)Lorg/maplibre/android/geometry/LatLng;',
+      );
 
   static final _getLatLngForProjectedMeters =
       jni$_.ProtectedJniExtensions.lookup<
@@ -80521,10 +80508,11 @@ extension MapRenderer$$Methods on MapRenderer {
     _onDestroy(_$$selfRef.pointer, _id_onDestroy.pointer).check();
   }
 
-  static final _id_set$renderingRefreshMode = MapRenderer._class.instanceMethodId(
-    r'setRenderingRefreshMode',
-    r'(Lorg/maplibre/android/maps/renderer/MapRenderer$RenderingRefreshMode;)V',
-  );
+  static final _id_set$renderingRefreshMode = MapRenderer._class
+      .instanceMethodId(
+        r'setRenderingRefreshMode',
+        r'(Lorg/maplibre/android/maps/renderer/MapRenderer$RenderingRefreshMode;)V',
+      );
 
   static final _set$renderingRefreshMode =
       jni$_.ProtectedJniExtensions.lookup<
@@ -80558,10 +80546,11 @@ extension MapRenderer$$Methods on MapRenderer {
     ).check();
   }
 
-  static final _id_get$renderingRefreshMode = MapRenderer._class.instanceMethodId(
-    r'getRenderingRefreshMode',
-    r'()Lorg/maplibre/android/maps/renderer/MapRenderer$RenderingRefreshMode;',
-  );
+  static final _id_get$renderingRefreshMode = MapRenderer._class
+      .instanceMethodId(
+        r'getRenderingRefreshMode',
+        r'()Lorg/maplibre/android/maps/renderer/MapRenderer$RenderingRefreshMode;',
+      );
 
   static final _get$renderingRefreshMode =
       jni$_.ProtectedJniExtensions.lookup<
@@ -81694,10 +81683,11 @@ extension EGLLogWrapper$$Methods on EGLLogWrapper {
     ).object<EGLContext?>();
   }
 
-  static final _id_eglCreatePbufferSurface = EGLLogWrapper._class.instanceMethodId(
-    r'eglCreatePbufferSurface',
-    r'(Ljavax/microedition/khronos/egl/EGLDisplay;Ljavax/microedition/khronos/egl/EGLConfig;[I)Ljavax/microedition/khronos/egl/EGLSurface;',
-  );
+  static final _id_eglCreatePbufferSurface = EGLLogWrapper._class
+      .instanceMethodId(
+        r'eglCreatePbufferSurface',
+        r'(Ljavax/microedition/khronos/egl/EGLDisplay;Ljavax/microedition/khronos/egl/EGLConfig;[I)Ljavax/microedition/khronos/egl/EGLSurface;',
+      );
 
   static final _eglCreatePbufferSurface =
       jni$_.ProtectedJniExtensions.lookup<
@@ -81745,10 +81735,11 @@ extension EGLLogWrapper$$Methods on EGLLogWrapper {
     ).object<EGLSurface?>();
   }
 
-  static final _id_eglCreatePixmapSurface = EGLLogWrapper._class.instanceMethodId(
-    r'eglCreatePixmapSurface',
-    r'(Ljavax/microedition/khronos/egl/EGLDisplay;Ljavax/microedition/khronos/egl/EGLConfig;Ljava/lang/Object;[I)Ljavax/microedition/khronos/egl/EGLSurface;',
-  );
+  static final _id_eglCreatePixmapSurface = EGLLogWrapper._class
+      .instanceMethodId(
+        r'eglCreatePixmapSurface',
+        r'(Ljavax/microedition/khronos/egl/EGLDisplay;Ljavax/microedition/khronos/egl/EGLConfig;Ljava/lang/Object;[I)Ljavax/microedition/khronos/egl/EGLSurface;',
+      );
 
   static final _eglCreatePixmapSurface =
       jni$_.ProtectedJniExtensions.lookup<
@@ -81801,10 +81792,11 @@ extension EGLLogWrapper$$Methods on EGLLogWrapper {
     ).object<EGLSurface?>();
   }
 
-  static final _id_eglCreateWindowSurface = EGLLogWrapper._class.instanceMethodId(
-    r'eglCreateWindowSurface',
-    r'(Ljavax/microedition/khronos/egl/EGLDisplay;Ljavax/microedition/khronos/egl/EGLConfig;Ljava/lang/Object;[I)Ljavax/microedition/khronos/egl/EGLSurface;',
-  );
+  static final _id_eglCreateWindowSurface = EGLLogWrapper._class
+      .instanceMethodId(
+        r'eglCreateWindowSurface',
+        r'(Ljavax/microedition/khronos/egl/EGLDisplay;Ljavax/microedition/khronos/egl/EGLConfig;Ljava/lang/Object;[I)Ljavax/microedition/khronos/egl/EGLSurface;',
+      );
 
   static final _eglCreateWindowSurface =
       jni$_.ProtectedJniExtensions.lookup<
@@ -82690,10 +82682,11 @@ extension EGLWindowSurfaceFactory$$Methods on EGLWindowSurfaceFactory {
     ).object<EGLSurface?>();
   }
 
-  static final _id_destroySurface = EGLWindowSurfaceFactory._class.instanceMethodId(
-    r'destroySurface',
-    r'(Ljavax/microedition/khronos/egl/EGL10;Ljavax/microedition/khronos/egl/EGLDisplay;Ljavax/microedition/khronos/egl/EGLSurface;)V',
-  );
+  static final _id_destroySurface = EGLWindowSurfaceFactory._class
+      .instanceMethodId(
+        r'destroySurface',
+        r'(Ljavax/microedition/khronos/egl/EGL10;Ljavax/microedition/khronos/egl/EGLDisplay;Ljavax/microedition/khronos/egl/EGLSurface;)V',
+      );
 
   static final _destroySurface =
       jni$_.ProtectedJniExtensions.lookup<
@@ -83128,9 +83121,8 @@ final class $MapLibreGLSurfaceView$Type$
 
 /// from: `org.maplibre.android.maps.renderer.surfaceview.MapLibreSurfaceView$OnSurfaceViewDetachedListener`
 extension type MapLibreSurfaceView$OnSurfaceViewDetachedListener._(
-  jni$_.JObject _$this
-)
-    implements jni$_.JObject {
+  jni$_.JObject _$this,
+) implements jni$_.JObject {
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/maps/renderer/surfaceview/MapLibreSurfaceView$OnSurfaceViewDetachedListener',
   );
@@ -85937,10 +85929,11 @@ extension type OfflineManager$Companion._(jni$_.JObject _$this)
 }
 
 extension OfflineManager$Companion$$Methods on OfflineManager$Companion {
-  static final _id_getInstance = OfflineManager$Companion._class.instanceMethodId(
-    r'getInstance',
-    r'(Landroid/content/Context;)Lorg/maplibre/android/offline/OfflineManager;',
-  );
+  static final _id_getInstance = OfflineManager$Companion._class
+      .instanceMethodId(
+        r'getInstance',
+        r'(Landroid/content/Context;)Lorg/maplibre/android/offline/OfflineManager;',
+      );
 
   static final _getInstance =
       jni$_.ProtectedJniExtensions.lookup<
@@ -85986,9 +85979,8 @@ final class $OfflineManager$Companion$Type$
 
 /// from: `org.maplibre.android.offline.OfflineManager$CreateOfflineRegionCallback`
 extension type OfflineManager$CreateOfflineRegionCallback._(
-  jni$_.JObject _$this
-)
-    implements jni$_.JObject {
+  jni$_.JObject _$this,
+) implements jni$_.JObject {
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/offline/OfflineManager$CreateOfflineRegionCallback',
   );
@@ -86855,9 +86847,8 @@ final class $OfflineManager$ListOfflineRegionsCallback$Type$
 
 /// from: `org.maplibre.android.offline.OfflineManager$MergeOfflineRegionsCallback`
 extension type OfflineManager$MergeOfflineRegionsCallback._(
-  jni$_.JObject _$this
-)
-    implements jni$_.JObject {
+  jni$_.JObject _$this,
+) implements jni$_.JObject {
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/offline/OfflineManager$MergeOfflineRegionsCallback',
   );
@@ -88010,9 +88001,8 @@ final class $OfflineRegion$OfflineRegionDeleteCallback$Type$
 
 /// from: `org.maplibre.android.offline.OfflineRegion$OfflineRegionInvalidateCallback`
 extension type OfflineRegion$OfflineRegionInvalidateCallback._(
-  jni$_.JObject _$this
-)
-    implements jni$_.JObject {
+  jni$_.JObject _$this,
+) implements jni$_.JObject {
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/offline/OfflineRegion$OfflineRegionInvalidateCallback',
   );
@@ -88293,8 +88283,7 @@ extension type OfflineRegion$OfflineRegionObserver._(jni$_.JObject _$this)
       $p,
       _$invokePointer,
       [
-        if ($impl.onStatusChanged$async)
-          r'onStatusChanged(Lorg/maplibre/android/offline/OfflineRegionStatus;)V',
+        if ($impl.onStatusChanged$async) r'onStatusChanged(Lorg/maplibre/android/offline/OfflineRegionStatus;)V',
         if ($impl.onError$async)
           r'onError(Lorg/maplibre/android/offline/OfflineRegionError;)V',
         if ($impl.mapboxTileCountLimitExceeded$async)
@@ -88699,9 +88688,8 @@ final class $OfflineRegion$OfflineRegionStatusCallback$Type$
 
 /// from: `org.maplibre.android.offline.OfflineRegion$OfflineRegionUpdateMetadataCallback`
 extension type OfflineRegion$OfflineRegionUpdateMetadataCallback._(
-  jni$_.JObject _$this
-)
-    implements jni$_.JObject {
+  jni$_.JObject _$this,
+) implements jni$_.JObject {
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/offline/OfflineRegion$OfflineRegionUpdateMetadataCallback',
   );
@@ -90361,9 +90349,8 @@ final class $OfflineRegionStatus$Type$
 
 /// from: `org.maplibre.android.offline.OfflineTilePyramidRegionDefinition$Companion`
 extension type OfflineTilePyramidRegionDefinition$Companion._(
-  jni$_.JObject _$this
-)
-    implements jni$_.JObject {
+  jni$_.JObject _$this,
+) implements jni$_.JObject {
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/offline/OfflineTilePyramidRegionDefinition$Companion',
   );
@@ -90439,10 +90426,9 @@ extension type OfflineTilePyramidRegionDefinition._(jni$_.JObject _$this)
   /// The returned object must be released after use, by calling the [release] method.
   static OfflineTilePyramidRegionDefinition$Companion get Companion =>
       _id_Companion.get(
-            _class,
-            OfflineTilePyramidRegionDefinition$Companion.type,
-          )
-          as OfflineTilePyramidRegionDefinition$Companion;
+        _class,
+        OfflineTilePyramidRegionDefinition$Companion.type,
+      ) as OfflineTilePyramidRegionDefinition$Companion;
 
   static final _id_CREATOR = _class.staticFieldId(
     r'CREATOR',
@@ -105298,9 +105284,8 @@ final class $Layer$Type$ extends jni$_.JType<Layer> {
 
 /// from: `org.maplibre.android.style.layers.LayoutPropertyValue`
 extension type LayoutPropertyValue<$T extends jni$_.JObject?>._(
-  jni$_.JObject _$this
-)
-    implements PropertyValue<$T?> {
+  jni$_.JObject _$this,
+) implements PropertyValue<$T?> {
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/style/layers/LayoutPropertyValue',
   );
@@ -106839,9 +106824,8 @@ final class $LineLayer$Type$ extends jni$_.JType<LineLayer> {
 
 /// from: `org.maplibre.android.style.layers.PaintPropertyValue`
 extension type PaintPropertyValue<$T extends jni$_.JObject?>._(
-  jni$_.JObject _$this
-)
-    implements PropertyValue<$T?> {
+  jni$_.JObject _$this,
+) implements PropertyValue<$T?> {
   static final _class = jni$_.JClass.forName(
     r'org/maplibre/android/style/layers/PaintPropertyValue',
   );
@@ -109728,10 +109712,9 @@ extension type Property._(jni$_.JObject _$this) implements jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get ICON_ROTATION_ALIGNMENT_VIEWPORT =>
       _id_ICON_ROTATION_ALIGNMENT_VIEWPORT.getNullable(
-            _class,
-            jni$_.JString.type,
-          )
-          as jni$_.JString?;
+        _class,
+        jni$_.JString.type,
+      ) as jni$_.JString?;
 
   static final _id_ICON_ROTATION_ALIGNMENT_AUTO = _class.staticFieldId(
     r'ICON_ROTATION_ALIGNMENT_AUTO',
@@ -109973,10 +109956,9 @@ extension type Property._(jni$_.JObject _$this) implements jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get TEXT_ROTATION_ALIGNMENT_VIEWPORT =>
       _id_TEXT_ROTATION_ALIGNMENT_VIEWPORT.getNullable(
-            _class,
-            jni$_.JString.type,
-          )
-          as jni$_.JString?;
+        _class,
+        jni$_.JString.type,
+      ) as jni$_.JString?;
 
   static final _id_TEXT_ROTATION_ALIGNMENT_AUTO = _class.staticFieldId(
     r'TEXT_ROTATION_ALIGNMENT_AUTO',
@@ -110273,10 +110255,9 @@ extension type Property._(jni$_.JObject _$this) implements jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get CIRCLE_TRANSLATE_ANCHOR_VIEWPORT =>
       _id_CIRCLE_TRANSLATE_ANCHOR_VIEWPORT.getNullable(
-            _class,
-            jni$_.JString.type,
-          )
-          as jni$_.JString?;
+        _class,
+        jni$_.JString.type,
+      ) as jni$_.JString?;
 
   static final _id_CIRCLE_PITCH_SCALE_MAP = _class.staticFieldId(
     r'CIRCLE_PITCH_SCALE_MAP',
@@ -110320,10 +110301,9 @@ extension type Property._(jni$_.JObject _$this) implements jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get CIRCLE_PITCH_ALIGNMENT_VIEWPORT =>
       _id_CIRCLE_PITCH_ALIGNMENT_VIEWPORT.getNullable(
-            _class,
-            jni$_.JString.type,
-          )
-          as jni$_.JString?;
+        _class,
+        jni$_.JString.type,
+      ) as jni$_.JString?;
 
   static final _id_FILL_EXTRUSION_TRANSLATE_ANCHOR_MAP = _class.staticFieldId(
     r'FILL_EXTRUSION_TRANSLATE_ANCHOR_MAP',
@@ -110334,10 +110314,9 @@ extension type Property._(jni$_.JObject _$this) implements jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get FILL_EXTRUSION_TRANSLATE_ANCHOR_MAP =>
       _id_FILL_EXTRUSION_TRANSLATE_ANCHOR_MAP.getNullable(
-            _class,
-            jni$_.JString.type,
-          )
-          as jni$_.JString?;
+        _class,
+        jni$_.JString.type,
+      ) as jni$_.JString?;
 
   static final _id_FILL_EXTRUSION_TRANSLATE_ANCHOR_VIEWPORT = _class
       .staticFieldId(
@@ -110349,10 +110328,9 @@ extension type Property._(jni$_.JObject _$this) implements jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get FILL_EXTRUSION_TRANSLATE_ANCHOR_VIEWPORT =>
       _id_FILL_EXTRUSION_TRANSLATE_ANCHOR_VIEWPORT.getNullable(
-            _class,
-            jni$_.JString.type,
-          )
-          as jni$_.JString?;
+        _class,
+        jni$_.JString.type,
+      ) as jni$_.JString?;
 
   static final _id_RASTER_RESAMPLING_LINEAR = _class.staticFieldId(
     r'RASTER_RESAMPLING_LINEAR',
@@ -110385,10 +110363,9 @@ extension type Property._(jni$_.JObject _$this) implements jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get HILLSHADE_ILLUMINATION_ANCHOR_MAP =>
       _id_HILLSHADE_ILLUMINATION_ANCHOR_MAP.getNullable(
-            _class,
-            jni$_.JString.type,
-          )
-          as jni$_.JString?;
+        _class,
+        jni$_.JString.type,
+      ) as jni$_.JString?;
 
   static final _id_HILLSHADE_ILLUMINATION_ANCHOR_VIEWPORT = _class
       .staticFieldId(
@@ -110400,10 +110377,9 @@ extension type Property._(jni$_.JObject _$this) implements jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get HILLSHADE_ILLUMINATION_ANCHOR_VIEWPORT =>
       _id_HILLSHADE_ILLUMINATION_ANCHOR_VIEWPORT.getNullable(
-            _class,
-            jni$_.JString.type,
-          )
-          as jni$_.JString?;
+        _class,
+        jni$_.JString.type,
+      ) as jni$_.JString?;
 
   static final _id_HILLSHADE_METHOD_STANDARD = _class.staticFieldId(
     r'HILLSHADE_METHOD_STANDARD',
@@ -110458,10 +110434,9 @@ extension type Property._(jni$_.JObject _$this) implements jni$_.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JString? get HILLSHADE_METHOD_MULTIDIRECTIONAL =>
       _id_HILLSHADE_METHOD_MULTIDIRECTIONAL.getNullable(
-            _class,
-            jni$_.JString.type,
-          )
-          as jni$_.JString?;
+        _class,
+        jni$_.JString.type,
+      ) as jni$_.JString?;
 
   static final _id_ANCHOR_MAP = _class.staticFieldId(
     r'ANCHOR_MAP',
@@ -139361,9 +139336,8 @@ final class $ViewManager$Type$ extends jni$_.JType<ViewManager> {
 /// android.view.animation.LayoutAnimationController$AnimationParameters in your config's classes list.
 ///
 extension type LayoutAnimationController$$AnimationParameters._(
-  jni$_.JObject _$this
-)
-    implements jni$_.JObject {
+  jni$_.JObject _$this,
+) implements jni$_.JObject {
   static const jni$_.JType<LayoutAnimationController$$AnimationParameters>
   type = $LayoutAnimationController$$AnimationParameters$Type$();
 }
