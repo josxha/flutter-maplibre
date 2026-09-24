@@ -144,11 +144,23 @@ final class MapLibreMapStateIos extends MapLibreMapState {
       ffiCamera.centerCoordinate = center.toCLLocationCoordinate2D();
     }
     if (zoom != null) {
+      // zoomLevelToAltitudeWithZoomLevel() divides internally by the map
+      // view's native frame size. If this is called before the native
+      // UIKitView has actually been laid out (frame still zero-size), it
+      // produces a non-finite altitude that crashes natively with an
+      // uncaught std::domain_error deep in MapLibre's camera/projection
+      // code. Skip the update in that case; callers can retry once the map
+      // is idle/laid out. `ffiCamera` is a local value not yet applied, so
+      // returning here has no side effect on the real camera.
+      final frameSize = mapView.frame.size;
+      if (frameSize.width <= 0 || frameSize.height <= 0) {
+        return;
+      }
       ffiCamera.altitude = Helpers.zoomLevelToAltitudeWithZoomLevel(
         zoom,
         pitch: ffiCamera.pitch,
         latitude: ffiCamera.centerCoordinate.latitude,
-        size: mapView.frame.size,
+        size: frameSize,
       );
     }
     mapView.flyToCamera$1(

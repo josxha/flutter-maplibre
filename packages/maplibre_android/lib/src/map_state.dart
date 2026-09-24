@@ -548,11 +548,9 @@ final class MapLibreMapStateAndroid extends MapLibreMapState
       final feature = query.get(i)?..releasedBy(arena);
       if (feature == null) continue;
 
-      final decodedFeature =
-          jsonDecode(
-                feature.toJson()?.toDartString(releaseOriginal: true) ?? '{}',
-              )
-              as Map<String, Object?>;
+      final decodedFeature = jsonDecode(
+        feature.toJson()?.toDartString(releaseOriginal: true) ?? '{}',
+      ) as Map<String, Object?>;
 
       final decodedProperties = decodedFeature['properties'];
       final decodedGeometry = decodedFeature['geometry'];

@@ -23,9 +23,8 @@ String? _scanSpmCacheForMapLibreVersion() {
   final homeDir = Platform.environment['HOME'];
   if (homeDir == null || homeDir.isEmpty) return null;
   final cacheDir = Directory.fromUri(
-    Uri.directory(
-      homeDir,
-    ).resolve('Library/Caches/org.swift.swiftpm/artifacts/'),
+    Uri.directory(homeDir)
+        .resolve('Library/Caches/org.swift.swiftpm/artifacts/'),
   );
   if (!cacheDir.existsSync()) return null;
   final pattern = RegExp(
