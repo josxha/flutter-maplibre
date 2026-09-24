@@ -19,7 +19,6 @@ import 'package:maplibre_example/style_layers_circle_page.dart';
 import 'package:maplibre_example/style_layers_fill_extrusion_page.dart';
 import 'package:maplibre_example/style_layers_fill_page.dart';
 import 'package:maplibre_example/style_layers_heatmap_page.dart';
-import 'package:maplibre_example/style_layers_hillshade_color_crash_page.dart';
 import 'package:maplibre_example/style_layers_hillshade_page.dart';
 import 'package:maplibre_example/style_layers_line_page.dart';
 import 'package:maplibre_example/style_layers_raster_page.dart';
@@ -207,11 +206,6 @@ class MenuPage extends StatelessWidget {
                   label: 'Hillshade',
                   iconData: Icons.landscape,
                   location: StyleLayersHillshadePage.location,
-                ),
-                ItemCard(
-                  label: 'Hillshade crash',
-                  iconData: Icons.bug_report,
-                  location: StyleLayersHillshadeColorCrashPage.location,
                 ),
                 ItemCard(
                   label: 'Line',
