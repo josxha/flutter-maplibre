@@ -12,7 +12,9 @@ part 'gesture_handlers.dart';
 part 'map.dart';
 part 'map_geojson_feature.dart';
 part 'marker.dart';
-part 'style_specification.dart';
+part 'style/style.dart';
+part 'style/layer.dart';
+part 'style/source.dart';
 
 /// A simple x/y [Point] class for JavaScript.
 @anonymous

@@ -143,7 +143,7 @@ abstract interface class MapController {
     bool accuracyAnimation = true,
     bool compassAnimation = true,
     bool pulse = true,
-    BearingRenderMode bearingRenderMode = BearingRenderMode.gps,
+    BearingRenderMode bearingRenderMode = .gps,
   });
 
   /// Track the user location on the map
@@ -155,7 +155,7 @@ abstract interface class MapController {
   /// the GPS location, compass direction or ignored.
   Future<void> trackLocation({
     bool trackLocation = true,
-    BearingTrackMode trackBearing = BearingTrackMode.gps,
+    BearingTrackMode trackBearing = .gps,
   });
 
   /// Asynchronously change the style of the map. [style] can be a JSON string

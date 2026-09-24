@@ -8,7 +8,8 @@ class StyleControllerIos extends StyleController {
 
   @override
   Future<void> addImage(String id, Uint8List bytes) async {
-    final image = UIImage.imageWithData(bytes.toNSData());
+    final pixelRatio = PlatformDispatcher.instance.views.first.devicePixelRatio;
+    final image = UIImage.imageWithData$1(bytes.toNSData(), scale: pixelRatio);
     if (image == null) return;
     _ffiStyle.setImage(image, forName: id.toNSString());
   }
@@ -20,87 +21,7 @@ class StyleControllerIos extends StyleController {
     String? aboveLayerId,
     int? atIndex,
   }) async {
-    final ffiId = layer.id.toNSString();
-    final prevStyleLayer = _ffiStyle.layerWithIdentifier(ffiId);
-    if (prevStyleLayer != null) {
-      throw Exception(
-        'A Layer with the id "${layer.id}" already exists in the map style.',
-      );
-    }
-
-    MLNStyleLayer? ffiLayer;
-    switch (layer) {
-      case BackgroundStyleLayer():
-        ffiLayer = MLNBackgroundStyleLayer.new$()
-          ..initWithIdentifier(ffiId)
-          ..backgroundColor = NSExpression.expressionWithFormat(
-            layer.color.toHexString().toNSString(),
-          );
-      case StyleLayerWithSource():
-        final ffiSource = _ffiStyle.sourceWithIdentifier(
-          layer.sourceId.toNSString(),
-        );
-        if (ffiSource == null) {
-          throw Exception('Source "${layer.sourceId}" does not exist.');
-        }
-        switch (layer) {
-          case FillStyleLayer():
-            ffiLayer = MLNFillStyleLayer.new$()
-              ..initWithIdentifier(ffiId, source: ffiSource);
-          case CircleStyleLayer():
-            ffiLayer = MLNCircleStyleLayer.new$()
-              ..initWithIdentifier(ffiId, source: ffiSource);
-          case FillExtrusionStyleLayer():
-            ffiLayer = MLNFillExtrusionStyleLayer.new$()
-              ..initWithIdentifier(ffiId, source: ffiSource);
-          case HeatmapStyleLayer():
-            ffiLayer = MLNHeatmapStyleLayer.new$()
-              ..initWithIdentifier(ffiId, source: ffiSource);
-          case HillshadeStyleLayer():
-            ffiLayer = MLNHillshadeStyleLayer.new$()
-              ..initWithIdentifier(ffiId, source: ffiSource);
-          case LineStyleLayer():
-            ffiLayer = MLNLineStyleLayer.new$()
-              ..initWithIdentifier(ffiId, source: ffiSource);
-          case RasterStyleLayer():
-            ffiLayer = MLNRasterStyleLayer.new$()
-              ..initWithIdentifier(ffiId, source: ffiSource);
-          case SymbolStyleLayer():
-            ffiLayer = MLNSymbolStyleLayer.new$()
-              ..initWithIdentifier(ffiId, source: ffiSource);
-        }
-    }
-
-    if (ffiLayer == null) {
-      throw UnimplementedError(
-        'The Layer is not supported: ${layer.runtimeType}',
-      );
-    }
-    ffiLayer.minimumZoomLevel = layer.minZoom;
-    ffiLayer.maximumZoomLevel = layer.maxZoom;
-    ffiLayer.setProperties(layer.paint);
-    ffiLayer.setProperties(layer.layout);
-    if (layer case StyleLayerWithSource()) {
-      if (layer.sourceLayerId case final sourceLayerId?) {
-        final ffiVectorLayer = MLNVectorStyleLayer.as(ffiLayer);
-        if (!MLNVectorStyleLayer.isA(ffiLayer)) {
-          throw Exception(
-            'sourceLayerId is only applicable for vector style layers.',
-          );
-        }
-        ffiVectorLayer.sourceLayerIdentifier = sourceLayerId.toNSString();
-      }
-      if (layer.filter case final filter?) {
-        if (!MLNVectorStyleLayer.isA(ffiLayer)) {
-          throw Exception('filter is only applicable for vector style layers.');
-        }
-        final expression = jsonEncode(filter).toNSString();
-        final ffiPredicate = Helpers.parsePredicateWithRaw(expression);
-        final ffiVectorLayer = MLNVectorStyleLayer.as(ffiLayer);
-        ffiVectorLayer.predicate = ffiPredicate;
-      }
-    }
-
+    final ffiLayer = (layer as StyleLayerIos).ffiLayer;
     if (belowLayerId case final String id) {
       final belowLayer = _ffiStyle.layerWithIdentifier(id.toNSString());
       if (belowLayer == null) {

@@ -2,66 +2,62 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:maplibre/maplibre.dart';
 
-import 'app.dart';
+import 'apps/blank_app.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-  test();
-}
-
-void test() {
   group('OfflineManager', () {
     testWidgets('backgroundLocationOfflineGranted', (tester) async {
-      await tester.pumpWidget(const App());
+      await tester.pumpWidget(const BlankApp());
       await tester.pumpAndSettle();
       final manager = await OfflineManager.createInstance();
       manager.setOfflineTileCountLimit(amount: 1000);
       manager.dispose();
     });
     testWidgets('setMaximumAmbientCacheSize', (tester) async {
-      await tester.pumpWidget(const App());
+      await tester.pumpWidget(const BlankApp());
       await tester.pumpAndSettle();
       final manager = await OfflineManager.createInstance();
       await manager.setMaximumAmbientCacheSize(bytes: 1000);
       manager.dispose();
     });
     testWidgets('clearAmbientCache', (tester) async {
-      await tester.pumpWidget(const App());
+      await tester.pumpWidget(const BlankApp());
       await tester.pumpAndSettle();
       final manager = await OfflineManager.createInstance();
       await manager.clearAmbientCache();
       manager.dispose();
     });
     testWidgets('invalidateAmbientCache', (tester) async {
-      await tester.pumpWidget(const App());
+      await tester.pumpWidget(const BlankApp());
       await tester.pumpAndSettle();
       final manager = await OfflineManager.createInstance();
       await manager.invalidateAmbientCache();
       manager.dispose();
     });
     testWidgets('packDatabase', (tester) async {
-      await tester.pumpWidget(const App());
+      await tester.pumpWidget(const BlankApp());
       await tester.pumpAndSettle();
       final manager = await OfflineManager.createInstance();
       await manager.packDatabase();
       manager.dispose();
     });
     testWidgets('resetDatabase', (tester) async {
-      await tester.pumpWidget(const App());
+      await tester.pumpWidget(const BlankApp());
       await tester.pumpAndSettle();
       final manager = await OfflineManager.createInstance();
       await manager.resetDatabase();
       manager.dispose();
     });
     testWidgets('runPackDatabaseAutomatically', (tester) async {
-      await tester.pumpWidget(const App());
+      await tester.pumpWidget(const BlankApp());
       await tester.pumpAndSettle();
       final manager = await OfflineManager.createInstance();
       manager.runPackDatabaseAutomatically(enabled: true);
       manager.dispose();
     });
     testWidgets('getOfflineRegion', (tester) async {
-      await tester.pumpWidget(const App());
+      await tester.pumpWidget(const BlankApp());
       await tester.pumpAndSettle();
       final manager = await OfflineManager.createInstance();
       expect(
@@ -71,7 +67,7 @@ void test() {
       manager.dispose();
     });
     testWidgets('listOfflineRegions', (tester) async {
-      await tester.pumpWidget(const App());
+      await tester.pumpWidget(const BlankApp());
       await tester.pumpAndSettle();
       final manager = await OfflineManager.createInstance();
       expect(await manager.listOfflineRegions(), isEmpty);

@@ -50,6 +50,8 @@ const includedInterfaces = <String>{
   'MLNRasterTileSource',
   'MLNCoordinateQuad',
   'UITapGestureRecognizer',
+  'UIColor',
+  'NSPredicate',
 };
 const includedProtocols = <String>{
   'MLNMapViewDelegate',
@@ -84,6 +86,7 @@ const includedHeaders = <String>{
   'MLNOfflineRegion.h',
   'MLNTilePyramidOfflineRegion.h',
   'MLNFeature.h',
+  'NSPredicate+MLNAdditions.h',
 };
 
 Future<void> main(List<String> args) async {
@@ -128,8 +131,7 @@ Future<void> main(List<String> args) async {
         // '-F$frameworkPath', '-I${frameworkPath}MapLibre.framework/Headers',
         '-Fios/.build/MapLibre.xcframework/ios-arm64/',
         '-Iios/.build/MapLibre.xcframework/ios-arm64/MapLibre.framework/Headers',
-        '-isysroot',
-        '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk',
+        '-isysroot', iosSdkUri.toFilePath(),
       ],
       include: (header) {
         return includedHeaders.any((path) => header.path.contains(path));

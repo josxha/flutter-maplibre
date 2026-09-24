@@ -280,6 +280,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
 @import CoreFoundation;
+@import Foundation;
 @import ObjectiveC;
 #endif
 
@@ -319,7 +320,6 @@ SWIFT_PROTOCOL_NAMED("FlutterApi")
 @end
 
 @class NSString;
-@class NSPredicate;
 @class NSExpression;
 @protocol OfflinePackProgressCallbacks;
 @class NSURL;
@@ -327,12 +327,12 @@ SWIFT_PROTOCOL_NAMED("FlutterApi")
 SWIFT_CLASS_NAMED("Helpers")
 @interface Helpers : NSObject
 + (void)setValueWithTarget:(NSObject * _Nonnull)target field:(NSString * _Nonnull)field value:(NSObject * _Nonnull)value;
-+ (NSPredicate * _Nullable)parsePredicateWithRaw:(NSString * _Nonnull)raw SWIFT_WARN_UNUSED_RESULT;
 + (NSExpression * _Nullable)parseExpressionWithPropertyName:(NSString * _Nonnull)propertyName expression:(NSString * _Nonnull)expression SWIFT_WARN_UNUSED_RESULT;
 + (void)createOfflinePackProgressListenerWithCallbacks:(id <OfflinePackProgressCallbacks> _Nonnull)callbacks;
 + (void)removeOfflinePackProgressListenerWithCallbacks:(id <OfflinePackProgressCallbacks> _Nonnull)callbacks;
 + (MLNTilePyramidOfflineRegion * _Nonnull)createTilePyramidOfflineRegionWithStyleURL:(NSURL * _Nullable)styleURL south:(double)south west:(double)west east:(double)east north:(double)north fromZoomLevel:(double)minZoom toZoomLevel:(double)maxZoom SWIFT_WARN_UNUSED_RESULT;
 + (double)zoomLevelToAltitudeWithZoomLevel:(double)zoomLevel pitch:(CGFloat)pitch latitude:(double)latitude size:(CGSize)size SWIFT_WARN_UNUSED_RESULT;
++ (NSExpression * _Nonnull)createUIEdgeInsetsNSExpressionWithPadding:(NSArray<NSNumber *> * _Nonnull)padding SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 

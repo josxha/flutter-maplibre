@@ -6,18 +6,14 @@ import 'package:integration_test/integration_test.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/ui/map_scalebar.dart';
 
-import 'app.dart';
+import 'apps/map_app.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-  test();
-}
-
-void test() {
   group('MapScalebar', () {
     testWidgets('show and update', (tester) async {
       final ctrlCompleter = Completer<MapController>();
-      final app = App(
+      final app = MapApp(
         onMapCreated: ctrlCompleter.complete,
         children: const [MapScalebar()],
       );

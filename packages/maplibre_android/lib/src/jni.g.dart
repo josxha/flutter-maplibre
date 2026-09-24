@@ -133625,6 +133625,805 @@ final class $VectorSource$Type$ extends jni$_.JType<VectorSource> {
   String get signature => r'Lorg/maplibre/android/style/sources/VectorSource;';
 }
 
+/// from: `org.maplibre.android.style.types.Formatted`
+extension type Formatted._(jni$_.JObject _$this) implements jni$_.JObject {
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/style/types/Formatted',
+  );
+
+  /// The type which includes information such as the signature of this class.
+  static const jni$_.JType<Formatted> type = $Formatted$Type$();
+  static final _id_new$ = _class.constructorId(
+    r'([Lorg/maplibre/android/style/types/FormattedSection;)V',
+  );
+
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public void <init>(org.maplibre.android.style.types.FormattedSection[] formattedSections)`
+  /// The returned object must be released after use, by calling the [release] method.
+  factory Formatted(jni$_.JArray<FormattedSection> formattedSections) {
+    final _$$classRef = _class.reference;
+    final _$formattedSections = formattedSections.reference;
+    return _new$(
+      _$$classRef.pointer,
+      _id_new$.pointer,
+      _$formattedSections.pointer,
+    ).object<Formatted>();
+  }
+}
+
+extension Formatted$$Methods on Formatted {
+  static final _id_get$formattedSections = Formatted._class.instanceMethodId(
+    r'getFormattedSections',
+    r'()[Lorg/maplibre/android/style/types/FormattedSection;',
+  );
+
+  static final _get$formattedSections =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public final org.maplibre.android.style.types.FormattedSection[] getFormattedSections()`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JArray<FormattedSection> get formattedSections {
+    final _$$selfRef = reference;
+    return _get$formattedSections(
+      _$$selfRef.pointer,
+      _id_get$formattedSections.pointer,
+    ).object<jni$_.JArray<FormattedSection>>();
+  }
+
+  static final _id_toArray = Formatted._class.instanceMethodId(
+    r'toArray',
+    r'()[Ljava/lang/Object;',
+  );
+
+  static final _toArray =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public fun toArray(): kotlin.Array<kotlin.Any?>`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JArray<jni$_.JObject?> toArray() {
+    final _$$selfRef = reference;
+    return _toArray(
+      _$$selfRef.pointer,
+      _id_toArray.pointer,
+    ).object<jni$_.JArray<jni$_.JObject?>>();
+  }
+
+  static final _id_equals = Formatted._class.instanceMethodId(
+    r'equals',
+    r'(Ljava/lang/Object;)Z',
+  );
+
+  static final _equals =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public operator fun equals(o: kotlin.Any?): kotlin.Boolean`
+  core$_.bool equals(jni$_.JObject? object) {
+    final _$$selfRef = reference;
+    final _$object = object?.reference ?? jni$_.jNullReference;
+    return _equals(
+      _$$selfRef.pointer,
+      _id_equals.pointer,
+      _$object.pointer,
+    ).boolean;
+  }
+
+  static final _id_hashCode$1 = Formatted._class.instanceMethodId(
+    r'hashCode',
+    r'()I',
+  );
+
+  static final _hashCode$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public fun hashCode(): kotlin.Int`
+  core$_.int hashCode$1() {
+    final _$$selfRef = reference;
+    return _hashCode$1(_$$selfRef.pointer, _id_hashCode$1.pointer).integer;
+  }
+
+  static final _id_toString$1 = Formatted._class.instanceMethodId(
+    r'toString',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _toString$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public fun toString(): kotlin.String`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JString toString$1() {
+    final _$$selfRef = reference;
+    return _toString$1(
+      _$$selfRef.pointer,
+      _id_toString$1.pointer,
+    ).object<jni$_.JString>();
+  }
+}
+
+final class $Formatted$Type$ extends jni$_.JType<Formatted> {
+  @jni$_.internal
+  const $Formatted$Type$();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lorg/maplibre/android/style/types/Formatted;';
+}
+
+/// from: `org.maplibre.android.style.types.FormattedSection`
+extension type FormattedSection._(jni$_.JObject _$this)
+    implements jni$_.JObject {
+  static final _class = jni$_.JClass.forName(
+    r'org/maplibre/android/style/types/FormattedSection',
+  );
+
+  /// The type which includes information such as the signature of this class.
+  static const jni$_.JType<FormattedSection> type = $FormattedSection$Type$();
+  static final _id_new$ = _class.constructorId(r'(Ljava/lang/String;)V');
+
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public void <init>(java.lang.String string)`
+  /// The returned object must be released after use, by calling the [release] method.
+  factory FormattedSection(jni$_.JString string) {
+    final _$$classRef = _class.reference;
+    final _$string = string.reference;
+    return _new$(
+      _$$classRef.pointer,
+      _id_new$.pointer,
+      _$string.pointer,
+    ).object<FormattedSection>();
+  }
+
+  static final _id_new$1 = _class.constructorId(
+    r'(Ljava/lang/String;Ljava/lang/Number;[Ljava/lang/String;Ljava/lang/String;)V',
+  );
+
+  static final _new$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public void <init>(java.lang.String string, java.lang.Number number, java.lang.String[] strings, java.lang.String string1)`
+  /// The returned object must be released after use, by calling the [release] method.
+  factory FormattedSection.new$1(
+    jni$_.JString string,
+    jni$_.JNumber? number,
+    jni$_.JArray<jni$_.JString?>? strings,
+    jni$_.JString? string1,
+  ) {
+    final _$$classRef = _class.reference;
+    final _$string = string.reference;
+    final _$number = number?.reference ?? jni$_.jNullReference;
+    final _$strings = strings?.reference ?? jni$_.jNullReference;
+    final _$string1 = string1?.reference ?? jni$_.jNullReference;
+    return _new$1(
+      _$$classRef.pointer,
+      _id_new$1.pointer,
+      _$string.pointer,
+      _$number.pointer,
+      _$strings.pointer,
+      _$string1.pointer,
+    ).object<FormattedSection>();
+  }
+
+  static final _id_new$2 = _class.constructorId(
+    r'(Ljava/lang/String;Ljava/lang/Number;[Ljava/lang/String;)V',
+  );
+
+  static final _new$2 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public void <init>(java.lang.String string, java.lang.Number number, java.lang.String[] strings)`
+  /// The returned object must be released after use, by calling the [release] method.
+  factory FormattedSection.new$2(
+    jni$_.JString string,
+    jni$_.JNumber? number,
+    jni$_.JArray<jni$_.JString?>? strings,
+  ) {
+    final _$$classRef = _class.reference;
+    final _$string = string.reference;
+    final _$number = number?.reference ?? jni$_.jNullReference;
+    final _$strings = strings?.reference ?? jni$_.jNullReference;
+    return _new$2(
+      _$$classRef.pointer,
+      _id_new$2.pointer,
+      _$string.pointer,
+      _$number.pointer,
+      _$strings.pointer,
+    ).object<FormattedSection>();
+  }
+
+  static final _id_new$3 = _class.constructorId(
+    r'(Ljava/lang/String;Ljava/lang/Number;)V',
+  );
+
+  static final _new$3 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public void <init>(java.lang.String string, java.lang.Number number)`
+  /// The returned object must be released after use, by calling the [release] method.
+  factory FormattedSection.new$3(jni$_.JString string, jni$_.JNumber? number) {
+    final _$$classRef = _class.reference;
+    final _$string = string.reference;
+    final _$number = number?.reference ?? jni$_.jNullReference;
+    return _new$3(
+      _$$classRef.pointer,
+      _id_new$3.pointer,
+      _$string.pointer,
+      _$number.pointer,
+    ).object<FormattedSection>();
+  }
+
+  static final _id_new$4 = _class.constructorId(
+    r'(Ljava/lang/String;[Ljava/lang/String;)V',
+  );
+
+  static final _new$4 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public void <init>(java.lang.String string, java.lang.String[] strings)`
+  /// The returned object must be released after use, by calling the [release] method.
+  factory FormattedSection.new$4(
+    jni$_.JString string,
+    jni$_.JArray<jni$_.JString?>? strings,
+  ) {
+    final _$$classRef = _class.reference;
+    final _$string = string.reference;
+    final _$strings = strings?.reference ?? jni$_.jNullReference;
+    return _new$4(
+      _$$classRef.pointer,
+      _id_new$4.pointer,
+      _$string.pointer,
+      _$strings.pointer,
+    ).object<FormattedSection>();
+  }
+}
+
+extension FormattedSection$$Methods on FormattedSection {
+  static final _id_get$text = FormattedSection._class.instanceMethodId(
+    r'getText',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _get$text =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public java.lang.String getText()`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JString get text {
+    final _$$selfRef = reference;
+    return _get$text(
+      _$$selfRef.pointer,
+      _id_get$text.pointer,
+    ).object<jni$_.JString>();
+  }
+
+  static final _id_get$fontScale = FormattedSection._class.instanceMethodId(
+    r'getFontScale',
+    r'()Ljava/lang/Number;',
+  );
+
+  static final _get$fontScale =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public java.lang.Number getFontScale()`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JNumber? get fontScale {
+    final _$$selfRef = reference;
+    return _get$fontScale(
+      _$$selfRef.pointer,
+      _id_get$fontScale.pointer,
+    ).object<jni$_.JNumber?>();
+  }
+
+  static final _id_get$fontStack = FormattedSection._class.instanceMethodId(
+    r'getFontStack',
+    r'()[Ljava/lang/String;',
+  );
+
+  static final _get$fontStack =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public java.lang.String[] getFontStack()`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JArray<jni$_.JString?>? get fontStack {
+    final _$$selfRef = reference;
+    return _get$fontStack(
+      _$$selfRef.pointer,
+      _id_get$fontStack.pointer,
+    ).object<jni$_.JArray<jni$_.JString?>?>();
+  }
+
+  static final _id_get$textColor = FormattedSection._class.instanceMethodId(
+    r'getTextColor',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _get$textColor =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public java.lang.String getTextColor()`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JString? get textColor {
+    final _$$selfRef = reference;
+    return _get$textColor(
+      _$$selfRef.pointer,
+      _id_get$textColor.pointer,
+    ).object<jni$_.JString?>();
+  }
+
+  static final _id_set$fontScale = FormattedSection._class.instanceMethodId(
+    r'setFontScale',
+    r'(Ljava/lang/Number;)V',
+  );
+
+  static final _set$fontScale =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public void setFontScale(java.lang.Number number)`
+  set fontScale(jni$_.JNumber? number) {
+    final _$$selfRef = reference;
+    final _$number = number?.reference ?? jni$_.jNullReference;
+    _set$fontScale(
+      _$$selfRef.pointer,
+      _id_set$fontScale.pointer,
+      _$number.pointer,
+    ).check();
+  }
+
+  static final _id_set$fontStack = FormattedSection._class.instanceMethodId(
+    r'setFontStack',
+    r'([Ljava/lang/String;)V',
+  );
+
+  static final _set$fontStack =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public void setFontStack(java.lang.String[] strings)`
+  set fontStack(jni$_.JArray<jni$_.JString?>? strings) {
+    final _$$selfRef = reference;
+    final _$strings = strings?.reference ?? jni$_.jNullReference;
+    _set$fontStack(
+      _$$selfRef.pointer,
+      _id_set$fontStack.pointer,
+      _$strings.pointer,
+    ).check();
+  }
+
+  static final _id_set$textColor = FormattedSection._class.instanceMethodId(
+    r'setTextColor',
+    r'(Ljava/lang/String;)V',
+  );
+
+  static final _set$textColor =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public void setTextColor(java.lang.String string)`
+  set textColor(jni$_.JString? string) {
+    final _$$selfRef = reference;
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    _set$textColor(
+      _$$selfRef.pointer,
+      _id_set$textColor.pointer,
+      _$string.pointer,
+    ).check();
+  }
+
+  static final _id_set$textColor$1 = FormattedSection._class.instanceMethodId(
+    r'setTextColor',
+    r'(I)V',
+  );
+
+  static final _set$textColor$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              core$_.int,
+            )
+          >();
+
+  /// from: `public void setTextColor(int i)`
+  set textColor$1(core$_.int i) {
+    final _$$selfRef = reference;
+    _set$textColor$1(
+      _$$selfRef.pointer,
+      _id_set$textColor$1.pointer,
+      i,
+    ).check();
+  }
+
+  static final _id_equals = FormattedSection._class.instanceMethodId(
+    r'equals',
+    r'(Ljava/lang/Object;)Z',
+  );
+
+  static final _equals =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public boolean equals(java.lang.Object object)`
+  core$_.bool equals(jni$_.JObject? object) {
+    final _$$selfRef = reference;
+    final _$object = object?.reference ?? jni$_.jNullReference;
+    return _equals(
+      _$$selfRef.pointer,
+      _id_equals.pointer,
+      _$object.pointer,
+    ).boolean;
+  }
+
+  static final _id_hashCode$1 = FormattedSection._class.instanceMethodId(
+    r'hashCode',
+    r'()I',
+  );
+
+  static final _hashCode$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public int hashCode()`
+  core$_.int hashCode$1() {
+    final _$$selfRef = reference;
+    return _hashCode$1(_$$selfRef.pointer, _id_hashCode$1.pointer).integer;
+  }
+
+  static final _id_toString$1 = FormattedSection._class.instanceMethodId(
+    r'toString',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _toString$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public java.lang.String toString()`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JString? toString$1() {
+    final _$$selfRef = reference;
+    return _toString$1(
+      _$$selfRef.pointer,
+      _id_toString$1.pointer,
+    ).object<jni$_.JString?>();
+  }
+}
+
+final class $FormattedSection$Type$ extends jni$_.JType<FormattedSection> {
+  @jni$_.internal
+  const $FormattedSection$Type$();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lorg/maplibre/android/style/types/FormattedSection;';
+}
+
 /// from: `org.maplibre.geojson.Feature`
 ///
 /// This defines a GeoJson Feature object which represents a spatially bound thing. Every Feature
@@ -140582,24 +141381,6 @@ final class $JsonElement$Type$ extends jni$_.JType<JsonElement> {
   @jni$_.internal
   @core$_.override
   String get signature => r'Lcom/google/gson/JsonElement;';
-}
-
-/// from: `org.maplibre.android.style.types.Formatted`
-///
-/// WARNING: Formatted is a stub. To generate bindings for this class, include
-/// org.maplibre.android.style.types.Formatted in your config's classes list.
-///
-extension type Formatted._(jni$_.JObject _$this) implements jni$_.JObject {
-  static const jni$_.JType<Formatted> type = $Formatted$Type$();
-}
-
-final class $Formatted$Type$ extends jni$_.JType<Formatted> {
-  @jni$_.internal
-  const $Formatted$Type$();
-
-  @jni$_.internal
-  @core$_.override
-  String get signature => r'Lorg/maplibre/android/style/types/Formatted;';
 }
 
 /// from: `org.maplibre.geojson.FeatureCollection`

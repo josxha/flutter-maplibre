@@ -38,12 +38,12 @@ extension type JsMap._(Camera _) implements Camera {
   /// https://github.com/maplibre/maplibre-gl-js/blob/41e5b32f5bd6264cbc4a8b38210ec6a410152259/src/ui/map.ts#L1178
   external LngLat unproject(Point point);
 
-  /// Get the [HTMLElement] of the map.
+  /// The [HTMLElement] of the map.
   ///
   /// https://github.com/maplibre/maplibre-gl-js/blob/41e5b32f5bd6264cbc4a8b38210ec6a410152259/src/ui/map.ts#L2891
   external HTMLElement getContainer();
 
-  /// Get the JS canvas of the map.
+  /// The JS canvas of the map.
   ///
   /// https://github.com/maplibre/maplibre-gl-js/blob/41e5b32f5bd6264cbc4a8b38210ec6a410152259/src/ui/map.ts#L2919
   external HTMLCanvasElement getCanvas();
@@ -114,7 +114,7 @@ extension type JsMap._(Camera _) implements Camera {
   /// Get a Source by its id.
   external SourceSpecification? getSource(String id);
 
-  /// Get the loaded style.
+  /// The loaded style.
   external StyleSpecification? getStyle();
 
   external DoubleClickZoomHandler doubleClickZoom;
@@ -145,6 +145,44 @@ extension type JsMap._(Camera _) implements Camera {
     JSArray<Point> rect,
     JSAny? options,
   );
+
+  /// Sets the value of a paint property in the specified style layer.
+  ///
+  /// [layerId] - The ID of the layer to set the paint property in.
+  /// [name] - The name of the paint property to set.
+  /// [value] - The value of the paint property to set.
+  ///  * Must be of a type appropriate for the property, as defined in the
+  ///    [MapLibre Style Specification](https://maplibre.org/maplibre-style-spec/).
+  ///  * Pass `null` to unset the existing value.
+  external void setPaintProperty(String layerId, String name, JSAny? value);
+
+  /// Sets the value of a layout property in the specified style layer.
+  ///
+  /// [layerId] - The ID of the layer to set the layout property in.
+  /// [name] - The name of the layout property to set.
+  /// [value] - The value of the layout property to set.
+  ///  * Must be of a type appropriate for the property, as defined in the
+  ///    [MapLibre Style Specification](https://maplibre.org/maplibre-style-spec/).
+  ///  * Pass `null` to unset the existing value.
+  external void setLayoutProperty(String layerId, String name, JSAny? value);
+
+  /// Get the value of a paint property in the specified style layer.
+  ///
+  /// [layerId] - The ID of the layer to get the paint property from.
+  /// [name] - The name of the paint property to get.
+  /// Returns the value of the paint property, or `null` if it is not set.
+  ///
+  /// https://maplibre.org/maplibre-gl-js/docs/API/classes/Map/#getpaintproperty
+  external JSAny? getPaintProperty(String layerId, String name);
+
+  /// Get the value of a layout property in the specified style layer.
+  ///
+  /// [layerId] - The ID of the layer to get the layout property from.
+  /// [name] - The name of the layout property to get.
+  /// Returns the value of the layout property, or `null` if it is not set.
+  ///
+  /// https://maplibre.org/maplibre-gl-js/docs/API/classes/Map/#getlayoutproperty
+  external JSAny? getLayoutProperty(String layerId, String name);
 }
 
 /// Anonymous MapOptions for the MapLibre JavaScript [JsMap].

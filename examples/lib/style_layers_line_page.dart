@@ -78,17 +78,19 @@ class _StyleLayersLinePageState extends State<StyleLayersLinePage> {
     );
 
     await style.addLayer(
-      const LineStyleLayer(
-        id: 'geojson-line-1',
-        sourceId: 'Path1',
-        paint: {'line-color': '#F00', 'line-width': 3},
+      LineStyleLayer(
+        id: 'geojson-line',
+        sourceId: 'Path',
+        color: const PropertyValue.value(Colors.red),
+        width: const PropertyValue.value(3),
       ),
     );
     await style.addLayer(
-      const LineStyleLayer(
+      LineStyleLayer(
         id: 'geojson-line-2',
         sourceId: 'Path2',
-        paint: {'line-color': '#F00', 'line-width': 3},
+        color: const PropertyValue.value(Colors.red),
+        width: const PropertyValue.value(3),
       ),
     );
   }

@@ -48,7 +48,7 @@ class _StyledMapPageState extends State<StyledMapPage> {
         ],
         onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: (style) {
-          style.setProjection(MapProjection.globe);
+          style.setProjection(.globe);
         },
       ),
     );

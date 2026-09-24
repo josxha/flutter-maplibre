@@ -5,14 +5,10 @@ import 'package:integration_test/integration_test.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre_example/utils/map_styles.dart';
 
-import 'app.dart';
+import 'apps/map_app.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-  test();
-}
-
-void test() {
   group('MapCamera', () {
     testWidgets('get from map', (tester) async {
       final options = MapOptions(
@@ -24,7 +20,7 @@ void test() {
       );
       final completer = Completer<MapController>();
       await tester.pumpWidget(
-        App(options: options, onMapCreated: completer.complete),
+        MapApp(options: options, onMapCreated: completer.complete),
       );
       await tester.pumpAndSettle();
       final ctrl = await completer.future;

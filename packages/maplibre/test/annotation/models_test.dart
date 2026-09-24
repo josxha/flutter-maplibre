@@ -27,9 +27,6 @@ void main() {
 
       expect(o.getSourceId(5123), contains(5123.toString()));
       expect(o.getLayerId(1532), contains(1532.toString()));
-      expect(o.createStyleLayer(142), isA<CircleStyleLayer>());
-      expect(o.getLayout(), isA<Map<String, Object>>());
-      expect(o.getPaint(), isA<Map<String, Object>>());
     });
     test('MarkerAnnotationLayer', () {
       const o = MarkerLayer(
@@ -41,7 +38,7 @@ void main() {
         textHaloColor: Colors.greenAccent,
         iconHaloColor: Colors.amber,
         iconColor: Colors.yellow,
-        textOffset: [2, 4],
+        textOffset: Offset(2, 4),
         iconImage: 'test.png',
         textAllowOverlap: true,
         textSize: 23,
@@ -57,9 +54,6 @@ void main() {
 
       expect(o.getSourceId(5123), contains(5123.toString()));
       expect(o.getLayerId(1532), contains(1532.toString()));
-      expect(o.createStyleLayer(142), isA<SymbolStyleLayer>());
-      expect(o.getLayout(), isA<Map<String, Object>>());
-      expect(o.getPaint(), isA<Map<String, Object>>());
     });
     test('PolygonAnnotationLayer', () {
       final o = PolygonLayer(
@@ -111,9 +105,6 @@ void main() {
 
       expect(o.getSourceId(5123), contains(5123.toString()));
       expect(o.getLayerId(1532), contains(1532.toString()));
-      expect(o.createStyleLayer(142), isA<FillStyleLayer>());
-      expect(o.getLayout(), isA<Map<String, Object>>());
-      expect(o.getPaint(), isA<Map<String, Object>>());
     });
     test('PolylineAnnotationLayer', () {
       final o = PolylineLayer(
@@ -157,9 +148,6 @@ void main() {
 
       expect(o.getSourceId(5123), contains(5123.toString()));
       expect(o.getLayerId(1532), contains(1532.toString()));
-      expect(o.createStyleLayer(142), isA<LineStyleLayer>());
-      expect(o.getLayout(), isA<Map<String, Object>>());
-      expect(o.getPaint(), isA<Map<String, Object>>());
     });
   });
 }

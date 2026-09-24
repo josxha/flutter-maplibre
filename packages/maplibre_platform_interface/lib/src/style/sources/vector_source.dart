@@ -16,7 +16,7 @@ final class VectorSource extends Source {
     this.url,
     this.tiles,
     this.bounds = const [-180, -85.051129, 180, 85.051129],
-    this.scheme = TileScheme.xyz,
+    this.scheme = .xyz,
     this.minZoom = 0,
     this.maxZoom = 22,
     this.attribution,

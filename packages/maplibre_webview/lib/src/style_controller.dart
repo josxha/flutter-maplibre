@@ -6,6 +6,7 @@ import 'dart:ui';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 import 'package:maplibre_webview/src/magic_numbers.dart';
+import 'package:maplibre_webview/src/style/layers/style_layer.dart';
 import 'package:maplibre_webview/src/websocket.dart';
 
 /// Implementation of the [StyleController] for platforms using a web view.
@@ -49,11 +50,20 @@ class StyleControllerWebView extends StyleController {
     String? aboveLayerId,
     int? atIndex,
   }) async {
-    final sourceLayerSnippet =
-        layer is StyleLayerWithSource && layer.sourceLayerId != null
-        ? '"source-layer": "${layer.sourceLayerId}",'
-        : '';
+    final sourceLayerSnippet = switch (layer) {
+      StyleLayerWithSource() => 'source: "${layer.sourceId}",',
+      _ => '',
+    };
+    final vectorLayerSnippet = switch (layer) {
+      StyleLayerWithVectorSource() when layer.sourceLayerId != null =>
+        '''
+        "source-layer": "${layer.sourceLayerId}",
+        ${layer.filter != null ? 'filter: ${layer.filter},' : ''}
+''',
+      _ => '',
+    };
     final belowArg = belowLayerId != null ? "'$belowLayerId'" : 'undefined';
+    final layerWebView = layer as StyleLayerWebView;
     await webViewController.callAsyncJavaScript(
       functionBody:
           '''
@@ -71,13 +81,12 @@ class StyleControllerWebView extends StyleController {
             BackgroundStyleLayer() => 'background',
             _ => throw UnsupportedError('Unsupported layer type: ${layer.runtimeType}'),
           }}",
-        paint: ${jsonEncode(layer.paint)},
-        layout: ${jsonEncode(layer.layout)},
-        ${layer.filter != null ? 'filter: ${layer.filter},' : ''}
+        layout: ${jsonEncode(layerWebView.layout)},
+        paint: ${jsonEncode(layerWebView.paint)},
         minzoom: ${layer.minZoom},
         maxzoom: ${layer.maxZoom},
-        ${layer is StyleLayerWithSource ? 'source: "${layer.sourceId}",' : ''}
         $sourceLayerSnippet
+        $vectorLayerSnippet
       };
       if (${layer is StyleLayerWithSource ? 'true' : 'false'} && !window.map.getSource(layer.source)) {
         throw new Error(`Source "\${layer.source}" not found for layer "${layer.id}"`);
