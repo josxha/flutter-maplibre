@@ -99,12 +99,7 @@ jobs:
         run: flutter pub get
       - name: "Run web implementation tests"
         working-directory: packages/maplibre_web
-        run: flutter test --platform chrome --coverage
-      - name: "Run Codecov"
-        uses: codecov/codecov-action@v7
-        if: ${{ matrix.sdk == '' }}
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        run: flutter test --platform chrome
 #  integration-test-ios:
 #    name: "[iOS] Integration tests"
 #    runs-on: macOS-latest

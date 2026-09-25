@@ -69,4 +69,45 @@ void main() {
     _eval('cameraEvents.push({});');
     expect(paddingReset.shouldForward(_cameraEvents.toDart.last), isTrue);
   });
+
+  test('leaves movement intact when fit padding exceeds the viewport', () {
+    final paddingReset = CameraPaddingReset();
+
+    final canFit = paddingReset.runBeforeFitBounds(
+      camera: interop.Camera(interop.CameraOptions()),
+      viewportWidth: 100,
+      viewportHeight: 80,
+      fitPadding: interop.PaddingOptions(
+        top: 30,
+        bottom: 20,
+        right: 60,
+        left: 50,
+      ),
+    );
+
+    expect(canFit, isFalse);
+    expect(_cameraCalls.toDart, isEmpty);
+  });
+
+  test('resets movement when fit padding leaves nonnegative space', () {
+    final paddingReset = CameraPaddingReset();
+
+    final canFit = paddingReset.runBeforeFitBounds(
+      camera: interop.Camera(interop.CameraOptions()),
+      viewportWidth: 100,
+      viewportHeight: 80,
+      fitPadding: interop.PaddingOptions(
+        top: 30,
+        bottom: 20,
+        right: 40,
+        left: 60,
+      ),
+    );
+
+    expect(canFit, isTrue);
+    expect(_cameraCalls.toDart.map((value) => value.toDart), [
+      'stop',
+      'jumpTo',
+    ]);
+  });
 }

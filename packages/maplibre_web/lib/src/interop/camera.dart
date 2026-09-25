@@ -77,6 +77,18 @@ extension type FitBoundsOptions._(FlyToOptions _) implements FlyToOptions {
 extension type PaddingOptions._(JSObject _) implements JSObject {
   /// Create a new JS [PaddingOptions].
   external factory PaddingOptions({num top, num bottom, num right, num left});
+
+  /// Top padding in CSS pixels.
+  external num get top;
+
+  /// Bottom padding in CSS pixels.
+  external num get bottom;
+
+  /// Right padding in CSS pixels.
+  external num get right;
+
+  /// Left padding in CSS pixels.
+  external num get left;
 }
 
 /// https://github.com/maplibre/maplibre-gl-js/blob/41e5b32f5bd6264cbc4a8b38210ec6a410152259/src/ui/camera.ts#L57

@@ -326,10 +326,15 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     // MapLibre GL JS calculates bounds using the transform's current padding
     // and then discards the padding option before moving the camera. Reset the
     // transform first so padding from an earlier camera move is not reused.
-    _cameraPaddingReset.run(
+    final container = _map.getContainer();
+    if (!_cameraPaddingReset.runBeforeFitBounds(
       camera: _map,
-      padding: EdgeInsets.zero.toPaddingOptions(),
-    );
+      viewportWidth: container.clientWidth,
+      viewportHeight: container.clientHeight,
+      fitPadding: padding.toPaddingOptions(),
+    )) {
+      return;
+    }
     final camera = getCamera();
     _map.fitBounds(
       bounds.toJsLngLatBounds(),
