@@ -79,4 +79,4 @@ export 'src/ui/map_compass.dart' show MapCompass;
 export 'src/ui/map_control_buttons.dart' show MapControlButtons;
 export 'src/ui/map_scalebar.dart' show MapScalebar, ScaleBarUnit;
 export 'src/ui/source_attribution.dart' show SourceAttribution;
-export 'src/widget_layer.dart' show Marker, WidgetLayer;
+export 'src/widget_layer.dart' show Marker, MarkerCluster, WidgetLayer;

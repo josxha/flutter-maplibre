@@ -31,8 +31,20 @@ abstract class Layer<G extends Feature<Geometry>> {
   /// Build the layout properties.
   Map<String, Object> getLayout();
 
+  /// Create the [Source] that backs this layer. Override this to customize the
+  /// source, e.g. to enable clustering on a [GeoJsonSource].
+  GeoJsonSource createSource(int index) => GeoJsonSource(
+    id: getSourceId(index),
+    data: FeatureCollection(list).toText(),
+  );
+
   /// Add the annotation layer to the map.
   StyleLayer createStyleLayer(int index);
+
+  /// Create all [StyleLayer]s that render this layer. Defaults to a single
+  /// layer created by [createStyleLayer]. Override this to render multiple
+  /// layers from a single source, e.g. clustered markers.
+  List<StyleLayer> createStyleLayers(int index) => [createStyleLayer(index)];
 
   @override
   bool operator ==(Object other) =>

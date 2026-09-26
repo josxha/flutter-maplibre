@@ -32,11 +32,22 @@ class _LayersMarkerPageState extends State<LayersMarkerPage> {
   ];
 
   bool _imageLoaded = false;
+  bool _cluster = false;
+  MapController? _controller;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Marker Layers')),
+      appBar: AppBar(
+        title: const Text('Marker Layers'),
+        actions: [
+          IconButton(
+            tooltip: _cluster ? 'Disable clustering' : 'Enable clustering',
+            icon: Icon(_cluster ? Icons.scatter_plot : Icons.bubble_chart),
+            onPressed: () => setState(() => _cluster = !_cluster),
+          ),
+        ],
+      ),
       body: MapLibreMap(
         options: const MapOptions(
           initZoom: 7,
@@ -44,6 +55,8 @@ class _LayersMarkerPageState extends State<LayersMarkerPage> {
         ),
         onEvent: (event) async {
           switch (event) {
+            case MapEventMapCreated():
+              _controller = event.mapController;
             case MapEventStyleLoaded():
               // add marker image to map
               await event.style.addImageFromIconData(
@@ -54,11 +67,33 @@ class _LayersMarkerPageState extends State<LayersMarkerPage> {
               setState(() {
                 _imageLoaded = true;
               });
-            case MapEventClick():
-              // add a new marker on click
-              setState(() {
-                _points.add(Feature(geometry: Point(event.point)));
-              });
+            case MapEventClick(:final point, :final screenPoint):
+              final controller = _controller;
+              // When a cluster is tapped, zoom into it instead of adding a
+              // marker. Clusters carry a `point_count` property.
+              var tappedCluster = false;
+              if (controller != null && _cluster) {
+                try {
+                  tappedCluster = controller
+                      .featuresAtPoint(screenPoint)
+                      .any((f) => f.properties.containsKey('point_count'));
+                } on Exception {
+                  // featuresAtPoint is not supported on all platforms (e.g.
+                  // the webview backend used on macOS and Windows).
+                  tappedCluster = false;
+                }
+              }
+              if (tappedCluster && controller != null) {
+                await controller.animateCamera(
+                  center: point,
+                  zoom: controller.getCamera().zoom + 2,
+                );
+              } else {
+                // add a new marker on click
+                setState(() {
+                  _points.add(Feature(geometry: Point(point)));
+                });
+              }
             default:
               // ignore all other events
               break;
@@ -67,12 +102,13 @@ class _LayersMarkerPageState extends State<LayersMarkerPage> {
         layers: [
           MarkerLayer(
             points: _points,
-            textField: '{name}',
+            textField: _cluster ? '' : '{name}',
             textAllowOverlap: true,
             iconImage: _imageLoaded ? 'marker' : null,
             iconSize: 0.15,
             iconAnchor: IconAnchor.bottom,
             textOffset: const [0, 1],
+            cluster: _cluster,
           ),
         ],
       ),
