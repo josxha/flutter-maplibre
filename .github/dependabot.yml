@@ -6,7 +6,7 @@ updates:
     schedule:
       interval: "monthly"
   - package-ecosystem: "pub"
-    directories: [ "/example", "/maplibre", "/maplibre_ios", "/" ]
+    directories: [ "/examples", "/packages/**", "/" ]
     schedule:
       interval: "monthly"
     ignore:
