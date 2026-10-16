@@ -2,6 +2,9 @@
 
 ### Bug Fixes
 
+- Android: `OfflineManager.downloadRegion` no longer leaks a JNI global
+  reference per status event, which aborted the process with a global
+  reference table overflow partway through a large region download.
 - Android: calls on a `StyleController` whose native style was already released
   are ignored instead of aborting the process with a JNI error.
 

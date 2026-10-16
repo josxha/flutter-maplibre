@@ -393,40 +393,52 @@ final class _OfflineRegionObserver
 
   @override
   void onStatusChanged(jni.OfflineRegionStatus jStatus) {
-    jStatus.releasedBy(arena);
-    final region = weakJRegion.target?.toOfflineRegion();
-    if (region == null) return;
-    if (!stream.isClosed) {
-      stream.add(
-        DownloadProgress(
-          loadedBytes: jStatus.completedResourceSize,
-          loadedTiles: jStatus.completedResourceCount,
-          totalTiles: jStatus.requiredResourceCount,
-          totalTilesEstimated: !jStatus.isRequiredResourceCountPrecise,
-          region: region,
-          downloadCompleted: jStatus.isComplete,
-        ),
-      );
-    }
-
-    // end download if status is complete
-    if (jStatus.isComplete) {
-      weakJRegion.target?.downloadState = jni.OfflineRegion.STATE_INACTIVE;
-      // This can be called multiple times, check if already completed
+    // Released here rather than into `arena`: this callback is async, so it
+    // runs long after the `using` block in downloadRegion returned the
+    // stream and closed that arena. Registering with a closed arena never
+    // releases, and a long download leaks one global reference per status
+    // event until the table overflows.
+    try {
+      final region = weakJRegion.target?.toOfflineRegion();
+      if (region == null) return;
       if (!stream.isClosed) {
-        stream.close();
+        stream.add(
+          DownloadProgress(
+            loadedBytes: jStatus.completedResourceSize,
+            loadedTiles: jStatus.completedResourceCount,
+            totalTiles: jStatus.requiredResourceCount,
+            totalTilesEstimated: !jStatus.isRequiredResourceCountPrecise,
+            region: region,
+            downloadCompleted: jStatus.isComplete,
+          ),
+        );
       }
-      return;
+
+      // end download if status is complete
+      if (jStatus.isComplete) {
+        weakJRegion.target?.downloadState = jni.OfflineRegion.STATE_INACTIVE;
+        // This can be called multiple times, check if already completed
+        if (!stream.isClosed) {
+          stream.close();
+        }
+        return;
+      }
+    } finally {
+      jStatus.release();
     }
   }
 
   @override
   void onError(jni.OfflineRegionError error) {
-    error.releasedBy(arena);
-    weakJRegion.target?.downloadState = jni.OfflineRegion.STATE_INACTIVE;
-    stream.addError(
-      Exception(error.message.toDartString(releaseOriginal: true)),
-    );
+    // Same closed arena as onStatusChanged.
+    try {
+      weakJRegion.target?.downloadState = jni.OfflineRegion.STATE_INACTIVE;
+      stream.addError(
+        Exception(error.message.toDartString(releaseOriginal: true)),
+      );
+    } finally {
+      error.release();
+    }
   }
 
   @override
