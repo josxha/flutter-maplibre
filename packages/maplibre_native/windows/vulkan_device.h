@@ -12,7 +12,10 @@ namespace maplibre_native {
 
 // The process-wide Vulkan instance, device, and graphics queue that MapLibre
 // render sessions borrow. Each session submits to the queue from its own core
-// worker, so nothing else in the plugin submits to it.
+// worker. The C library serializes the submissions and presents of every
+// session on one queue, so maps share it without a queue lock as long as
+// nothing else in the plugin uses the queue. Code that does needs
+// mln_queue_lock, which the Dart binding does not expose yet.
 class VulkanDevice {
  public:
   // Returns the shared device, creating it on first use on the physical

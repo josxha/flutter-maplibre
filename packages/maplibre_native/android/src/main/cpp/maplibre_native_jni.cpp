@@ -56,6 +56,11 @@ void ThrowIllegalState(JNIEnv* env, const std::string& message) {
 // Creates the process-wide device: Vulkan 1.1 with the surface extensions,
 // the features the C API's test fixture enables, and VK_KHR_swapchain, which
 // surface sessions need.
+//
+// Every map's session submits to and presents on the one queue. The C library
+// serializes that across sessions, so they need no queue lock as long as this
+// plugin never uses the queue itself. Code that does needs mln_queue_lock,
+// which the Dart binding does not expose yet.
 bool CreateVulkan(std::string* error) {
   const char* instance_extensions[] = {VK_KHR_SURFACE_EXTENSION_NAME,
                                        VK_KHR_ANDROID_SURFACE_EXTENSION_NAME};
