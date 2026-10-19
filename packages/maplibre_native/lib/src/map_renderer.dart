@@ -141,12 +141,25 @@ final class MapRenderer {
   /// Receives every runtime event the map queues.
   void Function(RuntimeEvent event)? onEvent;
 
+  /// Receives the projection and extent generation of each frame once
+  /// Flutter can show it, so overlays can follow what is on screen rather than
+  /// the latest camera, which the map image reaches a frame or two later. The
+  /// receiver owns the projection.
+  ///
+  /// On Windows Flutter shows the frame in its next frame. On Android the
+  /// frame went to the Surface, and Flutter takes the newest image there,
+  /// which is nearly always the same one.
+  void Function(MapProjectionHandle projection, BigInt extentGeneration)?
+  onFrameShown;
+
   /// Creates a renderer of [extent]. When [styleUrl] is given, the map loads
   /// it before the first frame.
   static Future<MapRenderer> create({
     required LogicalExtent extent,
     String? styleUrl,
     void Function(RuntimeEvent event)? onEvent,
+    void Function(MapProjectionHandle projection, BigInt extentGeneration)?
+    onFrameShown,
   }) async {
     _channel.setMethodCallHandler(_handlePluginCall);
     final context = await _getVulkanContext();
@@ -190,6 +203,7 @@ final class MapRenderer {
         ),
         attachment,
         onEvent,
+        onFrameShown,
       );
     }
 
@@ -237,6 +251,7 @@ final class MapRenderer {
       ),
       attachment,
       onEvent,
+      onFrameShown,
     );
   }
 
@@ -244,8 +259,12 @@ final class MapRenderer {
     MapRenderer renderer,
     RenderSessionAttachment attachment,
     void Function(RuntimeEvent event)? onEvent,
+    void Function(MapProjectionHandle projection, BigInt extentGeneration)?
+    onFrameShown,
   ) async {
-    renderer.onEvent = onEvent;
+    renderer
+      ..onEvent = onEvent
+      ..onFrameShown = onFrameShown;
     _renderers[renderer.textureId] = renderer;
     await attachment.completed;
     renderer
@@ -412,13 +431,17 @@ final class MapRenderer {
     if (result == null) return;
     _pendingToken = null;
     if (result.disposition == RenderResult.rendered) {
+      // Taken before the next demand, so it is this frame's transform.
+      final projection = _renderedProjection();
+      final extentGeneration = result.extentGeneration;
       switch (_target) {
         case _Target.gpuTexture:
-          unawaited(_onGpuQueue(_present));
+          unawaited(_onGpuQueue(() => _present(projection, extentGeneration)));
         case _Target.pixelBuffer:
-          unawaited(_readBack());
+          unawaited(_readBack(projection, extentGeneration));
         case _Target.surface:
           // The session presented the frame to the Surface.
+          _showFrame(projection, extentGeneration);
           _demandFrame();
       }
     } else if (result.disposition == RenderResult.targetNotReady) {
@@ -431,7 +454,11 @@ final class MapRenderer {
   /// Hands the latest frame to Flutter. The frame's GPU writes completed
   /// before it became acquirable, and the plugin copies it on the GPU before
   /// the call returns, so the frame is released right after.
-  Future<void> _present() async {
+  Future<void> _present(
+    MapProjectionHandle? projection,
+    BigInt extentGeneration,
+  ) async {
+    var shown = false;
     try {
       if (_disposed) return;
       final frame = _session.acquireFrame();
@@ -442,17 +469,24 @@ final class MapRenderer {
           'textureId': textureId,
           'slot': slot,
         });
+        _showFrame(projection, extentGeneration);
+        shown = true;
       } finally {
         frame.release(gpuSyncDefault());
       }
     } on Object catch (error) {
       debugPrint('maplibre_native: present failed: $error');
     } finally {
+      if (!shown) projection?.close();
       _demandFrame();
     }
   }
 
-  Future<void> _readBack() async {
+  Future<void> _readBack(
+    MapProjectionHandle? projection,
+    BigInt extentGeneration,
+  ) async {
+    var shown = false;
     try {
       final image = await _session.readTexture();
       if (_disposed) return;
@@ -463,11 +497,36 @@ final class MapRenderer {
         'stride': image.info.stride,
         'pixels': image.data,
       });
+      _showFrame(projection, extentGeneration);
+      shown = true;
     } on MaplibreException catch (error) {
       debugPrint('maplibre_native: readback failed: $error');
     } finally {
+      if (!shown) projection?.close();
       _demandFrame();
     }
+  }
+
+  /// The transform of the frame the session drew last, or null when it has
+  /// none, as right after a resize.
+  MapProjectionHandle? _renderedProjection() {
+    if (onFrameShown == null) return null;
+    try {
+      return _session.createProjection();
+    } on MaplibreException {
+      return null;
+    }
+  }
+
+  /// Hands [projection] to [onFrameShown] once its frame reached Flutter.
+  void _showFrame(MapProjectionHandle? projection, BigInt extentGeneration) {
+    if (projection == null) return;
+    final onFrameShown = this.onFrameShown;
+    if (_disposed || onFrameShown == null) {
+      projection.close();
+      return;
+    }
+    onFrameShown(projection, extentGeneration);
   }
 
   void _drainEvents() {

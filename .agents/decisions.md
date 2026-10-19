@@ -50,6 +50,13 @@ Each entry: the decision, then why.
   presents per queue (`vulkan_queue_access.cpp`). A lock is only needed if
   host code uses the queue, and none does. The Dart binding doesn't expose
   `queue_lock` yet.
+- **Widgets over the map follow the frame on screen, not the latest camera.**
+  Each rendered frame's `session.createProjection()` (taken before the next
+  demand) reaches the map state when Flutter can show that frame. `camera`
+  and screen locations come from it, so widget layers rebuild in the same
+  Flutter frame as the map image. Camera events still report the latest
+  camera. Exact on Windows. On Android Flutter takes the newest Surface
+  image itself, so it can be off by a frame.
 - **Sessions use the core-worker driver, with wakes drained on the Dart
   isolate.** Frame demands use `ifNeeded | waitForUpdate` (plus `present` on
   Android), so idle maps don't render.

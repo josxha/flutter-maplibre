@@ -40,6 +40,18 @@ class MapLibreMapStateNative extends MapLibreMapState {
   /// or extent changes, because a projection never sees later map changes.
   mln.MapProjectionHandle? _projection;
 
+  /// The projection of the map frame on screen. The map image trails the
+  /// latest camera by a frame or two, so [camera] and screen locations follow
+  /// this one, and widgets over the map stay on what they mark.
+  mln.MapProjectionHandle? _shownProjection;
+
+  /// The session extent generation of the frame on screen. Screen locations
+  /// move with the extent even while the camera stays.
+  BigInt? _shownExtentGeneration;
+
+  /// The camera of the last camera event, to report each change once.
+  MapCamera? _eventCamera;
+
   var _gestureActive = false;
   var _nextChangeByController = false;
   var _cameraMoving = false;
@@ -105,6 +117,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
       final renderer = await MapRenderer.create(
         extent: extent,
         onEvent: _onRuntimeEvent,
+        onFrameShown: _onFrameShown,
       );
       if (_disposed) {
         await renderer.dispose();
@@ -131,7 +144,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
       await setStyle(options.initStyle);
       if (_disposed) return;
       setState(() {
-        camera = _readCamera();
+        camera ??= _readCamera();
         isInitialized = true;
       });
       widget.onEvent?.call(MapEventMapCreated(mapController: this));
@@ -185,6 +198,8 @@ class MapLibreMapStateNative extends MapLibreMapState {
     _disposed = true;
     style?.dispose();
     _invalidateProjection();
+    _shownProjection?.close();
+    _shownProjection = null;
     unawaited(_renderer?.dispose());
     super.dispose();
   }
@@ -223,12 +238,33 @@ class MapLibreMapStateNative extends MapLibreMapState {
     }
   }
 
+  /// Reports the map's latest camera. [camera] instead follows the frame on
+  /// screen, see [_onFrameShown].
   void _onCameraChanged() {
     _invalidateProjection();
     final newCamera = _readCamera();
-    if (newCamera == null || newCamera == camera) return;
-    setState(() => camera = newCamera);
+    if (newCamera == null || newCamera == _eventCamera) return;
+    _eventCamera = newCamera;
     widget.onEvent?.call(MapEventMoveCamera(camera: newCamera));
+  }
+
+  /// Moves [camera] and screen locations to the frame that Flutter shows
+  /// next, so widgets over the map rebuild in the same frame as the map.
+  void _onFrameShown(
+    mln.MapProjectionHandle projection,
+    BigInt extentGeneration,
+  ) {
+    if (_disposed) {
+      projection.close();
+      return;
+    }
+    _shownProjection?.close();
+    _shownProjection = projection;
+    final shown = _toMapCamera(projection.getCamera());
+    final resized = extentGeneration != _shownExtentGeneration;
+    _shownExtentGeneration = extentGeneration;
+    if (shown == camera && !resized) return;
+    setState(() => camera = shown);
   }
 
   void _onCameraIdle() {
@@ -258,7 +294,10 @@ class MapLibreMapStateNative extends MapLibreMapState {
   MapCamera? _readCamera() {
     final map = _map;
     if (map == null || map.isClosed) return null;
-    final native = map.getSnapshot().camera;
+    return _toMapCamera(map.getSnapshot().camera);
+  }
+
+  static MapCamera _toMapCamera(mln.CameraOptions native) {
     final center = native.center;
     return MapCamera(
       center: center == null
@@ -515,12 +554,14 @@ class MapLibreMapStateNative extends MapLibreMapState {
 
   // MapController
 
+  /// The projection of the frame on screen, so that screen locations match
+  /// the map image, or of the latest camera before the first frame.
   mln.MapProjectionHandle _currentProjection() {
     final map = _map;
     if (map == null) {
       throw StateError('The map has not been created yet.');
     }
-    return _projection ??= map.createProjection();
+    return _shownProjection ?? (_projection ??= map.createProjection());
   }
 
   void _invalidateProjection() {
