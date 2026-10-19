@@ -16,6 +16,8 @@ workspace:
   - packages/maplibre_android
   - packages/maplibre_ios
   - packages/maplibre_ios/example
+  - packages/maplibre_native
+  - packages/maplibre_native/example
   - packages/maplibre_platform_interface
   - packages/maplibre_web
   - packages/maplibre_webview
@@ -24,3 +26,9 @@ dev_dependencies:
   pub_semver: ^2.2.0
   yaml: ^3.1.2
   args: ^2.7.0
+
+dependency_overrides:
+  # maplibre_native_ffi (sargunv/binding-codegen) pins code_assets ^1.2.1 and
+  # hooks <2.2.0, while maplibre_ios needs code_assets 2, which needs hooks 2.2.
+  code_assets: ^2.0.0
+  hooks: ^2.2.0

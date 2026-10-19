@@ -1,0 +1,661 @@
+import 'dart:async';
+import 'dart:convert';
+import 'dart:math';
+import 'dart:typed_data';
+
+import 'package:flutter/gestures.dart';
+import 'package:flutter/widgets.dart';
+import 'package:maplibre_native/src/command.dart';
+import 'package:maplibre_native/src/map_renderer.dart';
+import 'package:maplibre_native/src/style_controller.dart';
+import 'package:maplibre_native_ffi/maplibre_native_ffi.dart' as mln;
+import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
+
+/// Zoom levels per logical pixel of mouse wheel scroll, as MapLibre GL JS
+/// uses for wheel zoom.
+const double _wheelZoomRate = 1 / 450;
+
+/// Degrees of bearing and pitch per logical pixel of a secondary-button drag.
+const _rotateDegreesPerPixel = 0.5;
+const _pitchDegreesPerPixel = 0.5;
+
+const _doubleTapZoomDuration = Duration(milliseconds: 300);
+
+/// MapLibre Native, rendered through its C API into a Flutter texture.
+class MapLibreMapStateNative extends MapLibreMapState {
+  MapRenderer? _renderer;
+  Future<void>? _creating;
+  var _disposed = false;
+
+  @override
+  StyleControllerNative? style;
+
+  LayerManager? _layerManager;
+
+  /// A projection of the latest published camera. Closed whenever the camera
+  /// or extent changes, because a projection never sees later map changes.
+  mln.MapProjectionHandle? _projection;
+
+  var _gestureActive = false;
+  var _nextChangeByController = false;
+  var _cameraMoving = false;
+
+  // Scale gesture state, relative to the previous update.
+  var _lastScale = 1.0;
+  var _lastRotation = 0.0;
+
+  // Secondary-button drag state, for rotating and tilting with a mouse.
+  int? _secondaryPointer;
+
+  mln.MapHandle? get _map => _renderer?.map;
+
+  @override
+  Widget buildPlatformWidget(BuildContext context) {
+    final pixelRatio = MediaQuery.devicePixelRatioOf(context);
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final extent = mln.LogicalExtent(
+          width: constraints.maxWidth.isFinite
+              ? constraints.maxWidth.floor().clamp(1, 16384)
+              : 256,
+          height: constraints.maxHeight.isFinite
+              ? constraints.maxHeight.floor().clamp(1, 16384)
+              : 256,
+          scaleFactor: pixelRatio,
+        );
+        final renderer = _renderer;
+        if (renderer == null) {
+          _creating ??= _create(extent, pixelRatio);
+          return const SizedBox.expand();
+        }
+        if (renderer.extent != extent) {
+          renderer.resize(extent);
+          _invalidateProjection();
+        }
+        return _gestureDetector(Texture(textureId: renderer.textureId));
+      },
+    );
+  }
+
+  Future<void> _create(mln.LogicalExtent extent, double pixelRatio) async {
+    try {
+      final renderer = await MapRenderer.create(
+        extent: extent,
+        onEvent: _onRuntimeEvent,
+      );
+      if (_disposed) {
+        await renderer.dispose();
+        return;
+      }
+      _renderer = renderer;
+      await _applyOptions();
+      final options = this.options;
+      await checkCommand(
+        renderer.map.updateCamera(
+          mln.CameraUpdate(
+            camera: mln.CameraOptions(
+              center: switch (options.initCenter) {
+                final center? => mln.LatLng(center.lat, center.lon),
+                null => null,
+              },
+              zoom: options.initZoom,
+              bearing: options.initBearing,
+              pitch: options.initPitch,
+            ),
+          ),
+        ),
+      );
+      await setStyle(options.initStyle);
+      if (_disposed) return;
+      setState(() {
+        camera = _readCamera();
+        isInitialized = true;
+      });
+      widget.onEvent?.call(MapEventMapCreated(mapController: this));
+      widget.onMapCreated?.call(this);
+    } on Object catch (error, stackTrace) {
+      FlutterError.reportError(
+        FlutterErrorDetails(
+          exception: error,
+          stack: stackTrace,
+          library: 'maplibre_native',
+          context: ErrorDescription('while creating the map'),
+        ),
+      );
+    }
+  }
+
+  /// Applies the camera constraints of [MapOptions].
+  Future<void> _applyOptions() async {
+    final map = _map;
+    if (map == null) return;
+    final options = this.options;
+    await checkCommand(
+      map.setBounds(
+        mln.BoundOptions(
+          bounds: switch (options.maxBounds) {
+            final bounds? => mln.LatLngBounds(
+              southwest: mln.LatLng(bounds.latitudeSouth, bounds.longitudeWest),
+              northeast: mln.LatLng(bounds.latitudeNorth, bounds.longitudeEast),
+            ),
+            null => null,
+          },
+          unbounded: options.maxBounds == null,
+          minZoom: options.minZoom,
+          maxZoom: options.maxZoom,
+          minPitch: options.minPitch,
+          maxPitch: options.maxPitch,
+        ),
+      ),
+    );
+  }
+
+  @override
+  void didUpdateWidget(covariant MapLibreMap oldWidget) {
+    if (oldWidget.options != widget.options) unawaited(_applyOptions());
+    _layerManager?.updateLayers(widget.layers);
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  void dispose() {
+    _disposed = true;
+    style?.dispose();
+    _invalidateProjection();
+    unawaited(_renderer?.dispose());
+    super.dispose();
+  }
+
+  // Events
+
+  void _onRuntimeEvent(mln.RuntimeEvent event) {
+    if (_disposed) return;
+    switch (event.type) {
+      case mln.RuntimeEventType.mapCameraWillChange:
+        if (_cameraMoving) return;
+        _cameraMoving = true;
+        final CameraChangeReason reason;
+        if (_gestureActive) {
+          reason = CameraChangeReason.apiGesture;
+        } else if (_nextChangeByController) {
+          reason = CameraChangeReason.developerAnimation;
+        } else {
+          reason = CameraChangeReason.apiAnimation;
+        }
+        _nextChangeByController = false;
+        widget.onEvent?.call(MapEventStartMoveCamera(reason: reason));
+      case mln.RuntimeEventType.mapCameraIsChanging:
+        _onCameraChanged();
+      case mln.RuntimeEventType.mapCameraDidChange:
+        _onCameraChanged();
+        // A gesture publishes one change per pointer update; it ends with the
+        // gesture instead.
+        if (!_gestureActive) _onCameraIdle();
+      case mln.RuntimeEventType.mapStyleLoaded:
+        unawaited(_onStyleLoaded());
+      case mln.RuntimeEventType.mapIdle:
+        widget.onEvent?.call(const MapEventIdle());
+      default:
+        break;
+    }
+  }
+
+  void _onCameraChanged() {
+    _invalidateProjection();
+    final newCamera = _readCamera();
+    if (newCamera == null || newCamera == camera) return;
+    setState(() => camera = newCamera);
+    widget.onEvent?.call(MapEventMoveCamera(camera: newCamera));
+  }
+
+  void _onCameraIdle() {
+    if (!_cameraMoving) return;
+    _cameraMoving = false;
+    widget.onEvent?.call(const MapEventCameraIdle());
+  }
+
+  Future<void> _onStyleLoaded() async {
+    final map = _map;
+    if (map == null) return;
+    style?.dispose();
+    final styleController = StyleControllerNative(
+      map,
+      MediaQuery.devicePixelRatioOf(context),
+    );
+    style = styleController;
+    await styleController.refresh();
+    if (_disposed || style != styleController) return;
+    widget.onEvent?.call(MapEventStyleLoaded(styleController));
+    widget.onStyleLoaded?.call(styleController);
+    _layerManager = LayerManager(styleController, widget.layers);
+    // Refresh the widgets in MapLibreMap.children.
+    setState(() {});
+  }
+
+  MapCamera? _readCamera() {
+    final map = _map;
+    if (map == null || map.isClosed) return null;
+    final native = map.getSnapshot().camera;
+    final center = native.center;
+    return MapCamera(
+      center: center == null
+          ? const Geographic(lon: 0, lat: 0)
+          : Geographic(lon: center.longitude, lat: center.latitude),
+      zoom: native.zoom ?? 0,
+      bearing: native.bearing ?? 0,
+      pitch: native.pitch ?? 0,
+    );
+  }
+
+  // Gestures
+
+  Widget _gestureDetector(Widget child) {
+    final gestures = options.gestures;
+    return Listener(
+      onPointerSignal: _onPointerSignal,
+      onPointerDown: _onPointerDown,
+      onPointerMove: _onPointerMove,
+      onPointerUp: _onPointerEnd,
+      onPointerCancel: _onPointerEnd,
+      child: GestureDetector(
+        onTapUp: (details) => _emitUserInput(details.localPosition, _click),
+        onSecondaryTapUp: (details) =>
+            _emitUserInput(details.localPosition, _secondaryClick),
+        onLongPressStart: (details) =>
+            _emitUserInput(details.localPosition, _longClick),
+        onDoubleTapDown: _onDoubleTapDown,
+        onScaleStart: gestures.pan || gestures.zoom || gestures.rotate
+            ? _onScaleStart
+            : null,
+        onScaleUpdate: gestures.pan || gestures.zoom || gestures.rotate
+            ? _onScaleUpdate
+            : null,
+        onScaleEnd: gestures.pan || gestures.zoom || gestures.rotate
+            ? _onScaleEnd
+            : null,
+        child: child,
+      ),
+    );
+  }
+
+  static MapEventUserInput _click(Geographic point, Offset screenPoint) =>
+      MapEventClick(point: point, screenPoint: screenPoint);
+
+  static MapEventUserInput _secondaryClick(
+    Geographic point,
+    Offset screenPoint,
+  ) => MapEventSecondaryClick(point: point, screenPoint: screenPoint);
+
+  static MapEventUserInput _longClick(Geographic point, Offset screenPoint) =>
+      MapEventLongClick(point: point, screenPoint: screenPoint);
+
+  void _emitUserInput(
+    Offset position,
+    MapEventUserInput Function(Geographic point, Offset screenPoint) create,
+  ) {
+    if (_map == null) return;
+    widget.onEvent?.call(create(toLngLat(position), position));
+  }
+
+  void _onDoubleTapDown(TapDownDetails details) {
+    _emitUserInput(
+      details.localPosition,
+      (point, screenPoint) =>
+          MapEventDoubleClick(point: point, screenPoint: screenPoint),
+    );
+    if (!options.gestures.zoom) return;
+    _applyDelta(
+      mln.CameraDelta(
+        scale: 2,
+        anchor: _screenPoint(details.localPosition),
+        animation: mln.AnimationOptions(
+          durationMs: _doubleTapZoomDuration.inMilliseconds.toDouble(),
+        ),
+      ),
+    );
+  }
+
+  void _onPointerSignal(PointerSignalEvent event) {
+    if (event is! PointerScrollEvent || !options.gestures.zoom) return;
+    final zoomDelta = -event.scrollDelta.dy * _wheelZoomRate;
+    if (zoomDelta == 0) return;
+    _applyDelta(
+      mln.CameraDelta(
+        scale: pow(2, zoomDelta).toDouble(),
+        anchor: _screenPoint(event.localPosition),
+      ),
+    );
+  }
+
+  void _onPointerDown(PointerDownEvent event) {
+    if (event.kind == PointerDeviceKind.mouse &&
+        event.buttons & kSecondaryMouseButton != 0 &&
+        (options.gestures.rotate || options.gestures.pitch)) {
+      _secondaryPointer = event.pointer;
+      _beginGesture();
+    }
+  }
+
+  void _onPointerMove(PointerMoveEvent event) {
+    if (event.pointer != _secondaryPointer) return;
+    final gestures = options.gestures;
+    final size = context.size;
+    _applyDelta(
+      mln.CameraDelta(
+        bearing: gestures.rotate
+            ? -event.delta.dx * _rotateDegreesPerPixel
+            : null,
+        pitch: gestures.pitch ? -event.delta.dy * _pitchDegreesPerPixel : null,
+        anchor: size == null ? null : _screenPoint(size.center(Offset.zero)),
+        gesturePhase: mln.GesturePhase.update,
+      ),
+    );
+  }
+
+  void _onPointerEnd(PointerEvent event) {
+    if (event.pointer != _secondaryPointer) return;
+    _secondaryPointer = null;
+    _endGesture();
+  }
+
+  void _onScaleStart(ScaleStartDetails details) {
+    _lastScale = 1;
+    _lastRotation = 0;
+    _beginGesture();
+  }
+
+  void _onScaleUpdate(ScaleUpdateDetails details) {
+    final gestures = options.gestures;
+    final scale = details.scale / _lastScale;
+    final rotation = details.rotation - _lastRotation;
+    _lastScale = details.scale;
+    _lastRotation = details.rotation;
+
+    final pan = details.focalPointDelta;
+    final zooms = gestures.zoom && scale != 1 && scale.isFinite && scale > 0;
+    final rotates = gestures.rotate && rotation != 0;
+    _applyDelta(
+      mln.CameraDelta(
+        offset: gestures.pan && pan != Offset.zero ? _screenPoint(pan) : null,
+        scale: zooms ? scale : null,
+        bearing: rotates ? rotation * 180 / pi : null,
+        anchor: zooms || rotates ? _screenPoint(details.localFocalPoint) : null,
+        gesturePhase: mln.GesturePhase.update,
+      ),
+    );
+  }
+
+  void _onScaleEnd(ScaleEndDetails details) => _endGesture();
+
+  void _beginGesture() {
+    _gestureActive = true;
+    _applyDelta(const mln.CameraDelta(gesturePhase: mln.GesturePhase.begin));
+  }
+
+  void _endGesture() {
+    if (!_gestureActive) return;
+    _gestureActive = false;
+    _applyDelta(const mln.CameraDelta(gesturePhase: mln.GesturePhase.end));
+    _onCameraIdle();
+  }
+
+  void _applyDelta(mln.CameraDelta delta) {
+    final map = _map;
+    if (map == null) return;
+    unawaited(checkCommand(map.applyCameraDelta(delta)));
+  }
+
+  static mln.ScreenPoint _screenPoint(Offset offset) =>
+      mln.ScreenPoint(offset.dx, offset.dy);
+
+  // MapController
+
+  mln.MapProjectionHandle _currentProjection() {
+    final map = _map;
+    if (map == null) {
+      throw StateError('The map has not been created yet.');
+    }
+    return _projection ??= map.createProjection();
+  }
+
+  void _invalidateProjection() {
+    _projection?.close();
+    _projection = null;
+  }
+
+  @override
+  MapCamera getCamera() =>
+      camera ??
+      _readCamera() ??
+      (throw StateError('The map has not been created yet.'));
+
+  @override
+  Offset toScreenLocation(Geographic lngLat) =>
+      toScreenLocations([lngLat]).single;
+
+  @override
+  Geographic toLngLat(Offset screenLocation) =>
+      toLngLats([screenLocation]).single;
+
+  @override
+  List<Offset> toScreenLocations(List<Geographic> lngLats) =>
+      _currentProjection()
+          .pixelsForLatLngs([
+            for (final lngLat in lngLats) mln.LatLng(lngLat.lat, lngLat.lon),
+          ])
+          .map((point) => Offset(point.x, point.y))
+          .toList(growable: false);
+
+  @override
+  List<Geographic> toLngLats(List<Offset> screenLocations) =>
+      _currentProjection()
+          .latLngsForPixels(screenLocations.map(_screenPoint).toList())
+          .map(
+            (latLng) => Geographic(lon: latLng.longitude, lat: latLng.latitude),
+          )
+          .toList(growable: false);
+
+  @override
+  double getMetersPerPixelAtLatitude(double latitude) =>
+      _currentProjection().metersPerPixelAtLatitude(latitude);
+
+  @override
+  LngLatBounds getVisibleRegion() {
+    final size = context.size ?? Size.zero;
+    final corners = toLngLats([
+      Offset.zero,
+      Offset(size.width, 0),
+      Offset(0, size.height),
+      Offset(size.width, size.height),
+    ]);
+    return LngLatBounds(
+      longitudeWest: corners.map((c) => c.lon).reduce(min),
+      longitudeEast: corners.map((c) => c.lon).reduce(max),
+      latitudeSouth: corners.map((c) => c.lat).reduce(min),
+      latitudeNorth: corners.map((c) => c.lat).reduce(max),
+    );
+  }
+
+  @override
+  Future<void> moveCamera({
+    Geographic? center,
+    double? zoom,
+    double? bearing,
+    double? pitch,
+    EdgeInsets padding = EdgeInsets.zero,
+  }) => _updateCamera(
+    mln.CameraUpdateMode.jump,
+    center: center,
+    zoom: zoom,
+    bearing: bearing,
+    pitch: pitch,
+    padding: padding,
+  );
+
+  @override
+  Future<void> animateCamera({
+    Geographic? center,
+    double? zoom,
+    double? bearing,
+    double? pitch,
+    Duration nativeDuration = const Duration(seconds: 2),
+    double webSpeed = 1.2,
+    Duration? webMaxDuration,
+    EdgeInsets padding = EdgeInsets.zero,
+  }) => _updateCamera(
+    mln.CameraUpdateMode.fly,
+    center: center,
+    zoom: zoom,
+    bearing: bearing,
+    pitch: pitch,
+    padding: padding,
+    duration: nativeDuration,
+  );
+
+  @override
+  Future<void> fitBounds({
+    required LngLatBounds bounds,
+    double? bearing,
+    double? pitch,
+    Duration nativeDuration = const Duration(seconds: 2),
+    double webSpeed = 1.2,
+    Duration? webMaxDuration,
+    Offset offset = Offset.zero,
+    double webMaxZoom = double.maxFinite,
+    bool webLinear = false,
+    EdgeInsets padding = EdgeInsets.zero,
+  }) async {
+    final map = _map;
+    if (map == null) return;
+    final target = await map.cameraForLatLngBounds(
+      mln.LatLngBounds(
+        southwest: mln.LatLng(bounds.latitudeSouth, bounds.longitudeWest),
+        northeast: mln.LatLng(bounds.latitudeNorth, bounds.longitudeEast),
+      ),
+      fitOptions: mln.CameraFitOptions(
+        padding: _edgeInsets(padding),
+        bearing: bearing,
+        pitch: pitch,
+      ),
+    );
+    _nextChangeByController = true;
+    await checkCommand(
+      map.updateCamera(
+        mln.CameraUpdate(
+          mode: mln.CameraUpdateMode.fly,
+          camera: target,
+          animation: mln.AnimationOptions(
+            durationMs: nativeDuration.inMilliseconds.toDouble(),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Future<void> _updateCamera(
+    mln.CameraUpdateMode mode, {
+    required Geographic? center,
+    required double? zoom,
+    required double? bearing,
+    required double? pitch,
+    required EdgeInsets padding,
+    Duration? duration,
+  }) async {
+    final map = _map;
+    if (map == null) return;
+    _nextChangeByController = true;
+    await checkCommand(
+      map.updateCamera(
+        mln.CameraUpdate(
+          mode: mode,
+          camera: mln.CameraOptions(
+            center: center == null ? null : mln.LatLng(center.lat, center.lon),
+            zoom: zoom,
+            bearing: bearing,
+            pitch: pitch,
+            padding: padding == EdgeInsets.zero ? null : _edgeInsets(padding),
+          ),
+          animation: mln.AnimationOptions(
+            durationMs: duration?.inMilliseconds.toDouble(),
+          ),
+        ),
+      ),
+    );
+  }
+
+  static mln.EdgeInsets _edgeInsets(EdgeInsets padding) => mln.EdgeInsets(
+    top: padding.top,
+    left: padding.left,
+    bottom: padding.bottom,
+    right: padding.right,
+  );
+
+  @override
+  Future<void> setStyle(String style) async {
+    final map = _map;
+    if (map == null) return;
+    final trimmed = style.trim();
+    if (trimmed.startsWith('{')) {
+      await checkCommand(map.setStyleJson(_utf8(trimmed)));
+    } else if (trimmed.startsWith('http://') ||
+        trimmed.startsWith('https://') ||
+        trimmed.startsWith('mapbox://') ||
+        trimmed.startsWith('file://') ||
+        trimmed.startsWith('asset://')) {
+      await checkCommand(map.setStyleUrl(trimmed));
+    } else if (trimmed.startsWith('/') ||
+        RegExp(r'^[a-zA-Z]:[/\\]').hasMatch(trimmed)) {
+      await checkCommand(map.setStyleUrl(Uri.file(trimmed).toString()));
+    } else {
+      // A Flutter asset.
+      final json = await DefaultAssetBundle.of(context).loadString(trimmed);
+      await checkCommand(map.setStyleJson(_utf8(json)));
+    }
+  }
+
+  @override
+  List<QueriedLayer> queryLayers(Offset screenLocation) =>
+      throw UnimplementedError(
+        'queryLayers is synchronous, but the MapLibre Native C API only '
+        'queries rendered features asynchronously.',
+      );
+
+  @override
+  List<RenderedFeature> featuresAtPoint(
+    Offset point, {
+    List<String>? layerIds,
+  }) => throw UnimplementedError(
+    'featuresAtPoint is synchronous, but the MapLibre Native C API only '
+    'queries rendered features asynchronously.',
+  );
+
+  @override
+  List<RenderedFeature> featuresInRect(Rect rect, {List<String>? layerIds}) =>
+      throw UnimplementedError(
+        'featuresInRect is synchronous, but the MapLibre Native C API only '
+        'queries rendered features asynchronously.',
+      );
+
+  @override
+  Future<void> enableLocation({
+    Duration fastestInterval = const Duration(milliseconds: 750),
+    Duration maxWaitTime = const Duration(seconds: 1),
+    bool pulseFade = true,
+    bool accuracyAnimation = true,
+    bool compassAnimation = true,
+    bool pulse = true,
+    BearingRenderMode bearingRenderMode = BearingRenderMode.gps,
+  }) => throw UnimplementedError(
+    'The user location is not supported by maplibre_native yet.',
+  );
+
+  @override
+  Future<void> trackLocation({
+    bool trackLocation = true,
+    BearingTrackMode trackBearing = BearingTrackMode.gps,
+  }) => throw UnimplementedError(
+    'The user location is not supported by maplibre_native yet.',
+  );
+}
+
+Uint8List _utf8(String value) => Uint8List.fromList(utf8.encode(value));

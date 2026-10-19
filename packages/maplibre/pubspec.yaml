@@ -54,3 +54,6 @@ flutter:
 #        default_package: maplibre_webview
 #      windows:
 #        default_package: maplibre_webview
+# experimental: MapLibre Native through its C API (packages/maplibre_native)
+#      windows:
+#        default_package: maplibre_native

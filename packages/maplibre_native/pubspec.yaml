@@ -1,6 +1,7 @@
 name: maplibre_native
-description: "A new Flutter plugin project."
+description: "MapLibre Native implementation of the Flutter MapLibre plugin, rendering through the MapLibre Native C API."
 version: 0.4.0
+publish_to: none
 repository: https://github.com/josxha/flutter-maplibre
 issue_tracker: https://github.com/josxha/flutter-maplibre/issues
 homepage: https://flutter-maplibre.pages.dev
@@ -8,14 +9,18 @@ documentation: https://flutter-maplibre.pages.dev/docs/
 
 platforms: { android: , ios: , linux: , macos: , windows: }
 
+resolution: workspace
+
 environment:
   sdk: ^3.13.0
   flutter: ">=3.47.0"
 
 dependencies:
+  ffi: ^2.1.4
   flutter: { sdk: flutter }
   maplibre_native_ffi:
     path: vendor/maplibre-native-ffi/bindings/dart
+  maplibre_platform_interface: ^0.3.6
 
 dev_dependencies:
   flutter_test: { sdk: flutter }
@@ -23,9 +28,14 @@ dev_dependencies:
 
 flutter:
   plugin:
+    implements: maplibre
     platforms:
       android:
         package: com.example.maplibre_native
         pluginClass: MaplibreNativePlugin
       ios:
         pluginClass: MaplibreNativePlugin
+      windows:
+        pluginClass: MaplibreNativePluginCApi
+        dartPluginClass: MapLibrePluginNative
+        dartFileName: 'src/maplibre_plugin.dart'
