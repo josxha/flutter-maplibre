@@ -16,6 +16,8 @@ Flutter MapLibre: a federated plugin in a Dart pub workspace.
   - `android/`: Kotlin plugin and JNI shim (Vulkan device, SurfaceProducer
     surfaces). Its API is `MaplibreNativeApi.kt`, bound in
     `lib/src/android/bindings.g.dart`.
+  - `upstream/`: patches proposed to maplibre-native-ffi, against the pinned
+    commit. Apply them in the submodule only to test, never commit them there.
 - `examples/`: the reference app.
 - `tool/codegen/`: ffigen and jnigen scripts. A separate package outside the
   workspace, because the generators need newer native-asset packages than the
@@ -44,7 +46,8 @@ one target per prefix, so build Android one ABI at a time
   widget, never through platform views.
 - Never use method channels. Dart calls native code through ffigen (C/C++)
   or jnigen (Kotlin/Java) bindings.
-- Never edit the submodule. Note API gaps in `.agents/decisions.md` instead.
+- Never edit the submodule. Note API gaps in `.agents/decisions.md` instead,
+  and put proposed fixes in `packages/maplibre_native/upstream/`.
 - Use conventional commits (`feat(native): …`, `fix: …`, `ci: …`).
 - Read `.agents/decisions.md` before changing rendering, threading, or the
   native build.
