@@ -25,6 +25,13 @@ const _doubleTapZoomDuration = Duration(milliseconds: 300);
 /// zoom.
 const _quickZoomPixelsPerLevel = 150.0;
 
+/// Degrees of pitch per logical pixel that two fingers move vertically.
+const _shoveDegreesPerPixel = 0.25;
+
+/// Logical pixels both fingers move vertically before a two-finger drag
+/// tilts the map.
+const _shoveSlop = 10.0;
+
 /// MapLibre Native, rendered through its C API into a Flutter texture.
 class MapLibreMapStateNative extends MapLibreMapState {
   MapRenderer? _renderer;
@@ -81,6 +88,14 @@ class MapLibreMapStateNative extends MapLibreMapState {
 
   /// Where the second tap of a double tap went down.
   Offset? _doubleTapPosition;
+
+  // Two-finger tilt ("shove"): where each of the two fingers was when the
+  // second went down, where it is now, and whether the gesture tilts, or was
+  // found to be a pinch or rotation instead.
+  final _shoveStart = <int, Offset>{};
+  final _shovePosition = <int, Offset>{};
+  var _shoving = false;
+  var _shoveRejected = false;
 
   mln.MapHandle? get _map => _renderer?.map;
 
@@ -408,10 +423,12 @@ class MapLibreMapStateNative extends MapLibreMapState {
     if (event.kind != PointerDeviceKind.touch) return;
 
     _touchPointers.add(event.pointer);
+    _shovePosition[event.pointer] = event.localPosition;
     if (_touchPointers.length > 1) {
-      // A second finger makes it a pinch, not a tap or a quick zoom.
+      // A second finger makes it a pinch or tilt, not a tap or a quick zoom.
       _touchDownPosition = null;
       _stopQuickZoom();
+      _startShove();
       return;
     }
     _touchDownPosition = event.localPosition;
@@ -432,6 +449,10 @@ class MapLibreMapStateNative extends MapLibreMapState {
       _onQuickZoomMove(event);
       return;
     }
+    if (_shovePosition.containsKey(event.pointer)) {
+      _shovePosition[event.pointer] = event.localPosition;
+      if (_shoveStart.containsKey(event.pointer)) _onShoveMove(event);
+    }
     if (event.pointer != _secondaryPointer) return;
     final gestures = options.gestures;
     final size = context.size;
@@ -448,6 +469,8 @@ class MapLibreMapStateNative extends MapLibreMapState {
   }
 
   void _onPointerEnd(PointerEvent event) {
+    _shovePosition.remove(event.pointer);
+    if (_shoveStart.containsKey(event.pointer)) _stopShove();
     if (_touchPointers.remove(event.pointer)) _onTouchEnd(event);
     if (event.pointer != _secondaryPointer) return;
     _secondaryPointer = null;
@@ -497,6 +520,66 @@ class MapLibreMapStateNative extends MapLibreMapState {
     if (zoomed) _endGesture();
   }
 
+  /// Watches a two-finger touch for a tilt, as long as exactly two fingers
+  /// are down.
+  void _startShove() {
+    _stopShove();
+    if (_touchPointers.length != 2 || !options.gestures.pitch) return;
+    for (final pointer in _touchPointers) {
+      _shoveStart[pointer] = _shovePosition[pointer]!;
+    }
+  }
+
+  /// Tilts while two fingers side by side move vertically together: up tilts
+  /// further, down back toward straight down, as on MapLibre Android.
+  void _onShoveMove(PointerMoveEvent event) {
+    if (_shoveRejected) return;
+    if (!_shoving) {
+      final [a, b] = _shoveStart.keys.toList();
+      final moveA = _shovePosition[a]! - _shoveStart[a]!;
+      final moveB = _shovePosition[b]! - _shoveStart[b]!;
+      final between = _shovePosition[a]! - _shovePosition[b]!;
+      final vertical =
+          moveA.dy.sign == moveB.dy.sign &&
+          moveA.dy.abs() > moveA.dx.abs() &&
+          moveB.dy.abs() > moveB.dx.abs();
+      final sideBySide = between.dy.abs() < between.dx.abs();
+      if (vertical &&
+          sideBySide &&
+          moveA.dy.abs() >= _shoveSlop &&
+          moveB.dy.abs() >= _shoveSlop) {
+        _shoving = true;
+        if (!_gestureActive) _beginGesture();
+      } else if (!vertical ||
+          !sideBySide ||
+          moveA.distance > kTouchSlop * 2 ||
+          moveB.distance > kTouchSlop * 2) {
+        // Moving apart, around, or sideways: a pinch or rotation.
+        _shoveRejected =
+            moveA.distance > _shoveSlop || moveB.distance > _shoveSlop;
+        return;
+      } else {
+        return;
+      }
+    }
+    if (event.delta.dy == 0) return;
+    // Each finger's move counts half, so both together tilt by their mean.
+    _applyDelta(
+      mln.CameraDelta(
+        pitch: -event.delta.dy / 2 * _shoveDegreesPerPixel,
+        gesturePhase: mln.GesturePhase.update,
+      ),
+    );
+  }
+
+  void _stopShove() {
+    final tilted = _shoving;
+    _shoveStart.clear();
+    _shoving = false;
+    _shoveRejected = false;
+    if (tilted) _endGesture();
+  }
+
   void _onScaleStart(ScaleStartDetails details) {
     _lastScale = 1;
     _lastRotation = 0;
@@ -504,14 +587,14 @@ class MapLibreMapStateNative extends MapLibreMapState {
   }
 
   void _onScaleUpdate(ScaleUpdateDetails details) {
-    // The quick zoom drives the camera while its drag also reaches the scale
-    // recognizer as a pan.
-    if (_quickZooming) return;
-    final gestures = options.gestures;
     final scale = details.scale / _lastScale;
     final rotation = details.rotation - _lastRotation;
     _lastScale = details.scale;
     _lastRotation = details.rotation;
+    // A quick zoom or tilt drives the camera while its fingers also reach the
+    // scale recognizer.
+    if (_quickZooming || _shoving) return;
+    final gestures = options.gestures;
 
     final pan = details.focalPointDelta;
     final zooms = gestures.zoom && scale != 1 && scale.isFinite && scale > 0;
