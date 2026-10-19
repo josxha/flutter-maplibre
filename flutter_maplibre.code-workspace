@@ -9,12 +9,8 @@
             "path": "./packages/maplibre"
         },
         {
-            "name": "maplibre_android",
-            "path": "./packages/maplibre_android"
-        },
-        {
-            "name": "maplibre_ios",
-            "path": "./packages/maplibre_ios"
+            "name": "maplibre_native",
+            "path": "./packages/maplibre_native"
         },
         {
             "name": "maplibre_platform_interface",
@@ -23,10 +19,6 @@
         {
             "name": "maplibre_web",
             "path": "./packages/maplibre_web"
-        },
-        {
-            "name": "maplibre_webview",
-            "path": "./packages/maplibre_webview"
         }
     ]
 }

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:maplibre_native/src/map_state.dart';
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 
@@ -8,8 +10,22 @@ class MapLibrePluginNative extends MapLibrePlatform {
   static void registerWith() =>
       MapLibrePlatform.instance = MapLibrePluginNative();
 
+  /// Whether maplibre_native can render on the current platform.
+  ///
+  /// The plugin registers on every native platform, but only Windows has a
+  /// texture integration so far.
+  static bool get isPlatformSupported => Platform.isWindows;
+
   @override
-  MapLibreMapState createWidgetState() => MapLibreMapStateNative();
+  MapLibreMapState createWidgetState() {
+    if (!isPlatformSupported) {
+      throw UnsupportedError(
+        'maplibre_native does not render on ${Platform.operatingSystem} yet. '
+        'Only Windows is supported so far.',
+      );
+    }
+    return MapLibreMapStateNative();
+  }
 
   @override
   Future<OfflineManager> createOfflineManager() => throw UnsupportedError(

@@ -10,10 +10,11 @@ for `maplibre`.
 
 ## Abstraction Layers
 
-### Android, iOS and Web
-
-Android, iOS and Web use native interop to connect the Flutter/Dart code with
-the native MapLibre code.
+`maplibre` is a federated plugin with two implementations: `maplibre_web`
+uses MapLibre GL JS in the browser, and `maplibre_native` uses MapLibre Native
+through its C API everywhere else. `maplibre_native` renders each map into a
+GPU texture and shows it with Flutter's `Texture` widget, so maps compose with
+other widgets like any other part of the widget tree.
 
 ```mermaid
 flowchart TB
@@ -30,14 +31,12 @@ flowchart TB
     end
 
     subgraph Interop["Platform Bindings"]
-        MapLibreMapStateAndroid
-        MapLibreMapStateIos
+        MapLibreMapStateNative
         MapLibreMapStateWeb
     end
 
     subgraph Native["Native Code"]
-       Android["MapLibre Native Android"]
-       iOS["MapLibre Native iOS"]
+       C["MapLibre Native C API"]
        Web["MapLibre GL JS"]
     end
 
@@ -45,51 +44,10 @@ flowchart TB
     MapLibreMap --[uses]--> MapLibreMapState
     MapController --[implemented by]--> MapLibreMapState
     StyleController --[implemented by]--> MapLibreMapState
-    MapLibreMapState --[extends]--> MapLibreMapStateAndroid
-    MapLibreMapState --[extends]--> MapLibreMapStateIos
+    MapLibreMapState --[extends]--> MapLibreMapStateNative
     MapLibreMapState --[extends]--> MapLibreMapStateWeb
-    MapLibreMapStateAndroid --[jni]--> Android
-    MapLibreMapStateIos --[ffi]--> iOS
+    MapLibreMapStateNative --[ffi]--> C
     MapLibreMapStateWeb --[interop]--> Web
-```
-
-### Windows and MacOS (using a WebView)
-
-The experimental Windows and MacOS implementations use a WebView to render the
-map. The architecture is a bit different, because the WebView is used as a
-platform view and the communication with the WebView is done using the
-`flutter_inappwebview` package.
-
-```mermaid
-flowchart TB
-    subgraph User["User Implementation"]
-    end
-    subgraph Public["Public API"]
-        MapLibreMap
-        MapController
-        StyleController
-    end
-
-    subgraph Widget["StatefulWidget"]
-        MapLibreMapState
-    end
-
-    subgraph Interop["Platform Bindings"]
-        MapLibreMapStateWebView
-        flutter_inappwebview
-    end
-
-    subgraph Native["Native Code"]
-       Web["MapLibre GL JS"]
-    end
-
-    User --[invoke method]--> MapLibreMap
-    MapLibreMap --[uses]--> MapLibreMapState
-    MapController --[implemented by]--> MapLibreMapState
-    StyleController --[implemented by]--> MapLibreMapState
-    MapLibreMapState --[extends]--> MapLibreMapStateWebView
-    MapLibreMapStateWebView --[uses]--> flutter_inappwebview
-    flutter_inappwebview --[method channel, ws]--> Web
 ```
 
 ### 1. Public API
@@ -102,20 +60,21 @@ package that users are in contact with.
 `MapLibreMapState` is an abstract base class for the `State<MapLibreMap`> and
 contains implementations that are completely platform invariant.
 
-### 3. MapLibreMapStateAndroid, -Ios, -Web
+### 3. MapLibreMapStateNative, -Web
 
 This is the last Flutter/Dart layer. These classes contain missing
 implementations that haven't previously been implemented on an higher level.
 
 This layer has the connection with the Native Code Layer using
 
-- Method Channels with the Pigeon code generator
-- JNI using JNIGEN to interop with Kotlin on Android
-- FFI using FFIGEN to interop with Swift on iOS
+- FFI through the generated `maplibre_native_ffi` binding of the MapLibre
+  Native C API, plus a small platform plugin that registers the Flutter
+  texture.
 - The WASM compatible interop with JavaScript using js_interop and package:web
   on Web.
 
 ### 4. Native Layer
 
-The last and most low level layer that package uses. This layer handles Platform
-View registration and the native implementation of Pigeon.
+The last and most low level layer that package uses: the MapLibre Native C
+library, which renders into a texture that the platform plugin registers with
+Flutter, or MapLibre GL JS on web.

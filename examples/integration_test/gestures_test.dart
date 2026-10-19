@@ -64,10 +64,7 @@ void test() {
       final pointer = TestPointer(1, PointerDeviceKind.mouse);
       await tester.sendEventToBinding(pointer.hover(center));
       await tester.sendEventToBinding(pointer.scroll(const Offset(0, -450)));
-      await waitForCamera(
-        tester,
-        (camera) => camera.zoom > before.zoom + 0.9,
-      );
+      await waitForCamera(tester, (camera) => camera.zoom > before.zoom + 0.9);
     });
 
     testWidgets('double tap zooms in', (tester) async {
@@ -76,10 +73,7 @@ void test() {
       await tester.tapAt(center);
       await tester.pump(const Duration(milliseconds: 50));
       await tester.tapAt(center);
-      await waitForCamera(
-        tester,
-        (camera) => camera.zoom > before.zoom + 0.9,
-      );
+      await waitForCamera(tester, (camera) => camera.zoom > before.zoom + 0.9);
     });
 
     testWidgets('secondary drag rotates and tilts', (tester) async {

@@ -17,13 +17,11 @@ performance.
 
 - For web, it uses [maplibre-gl-js](https://github.com/maplibre/maplibre-gl-js),
   a fork of [mapbox-gl-js](https://github.com/mapbox/mapbox-gl-js).
-- For Android and iOS, it
-  uses [maplibre-native](https://github.com/maplibre/maplibre-native) (formerly
-  maplibre-gl), a fork
-  of [mapbox-gl-native](https://github.com/mapbox/mapbox-gl-native).
-- Windows and macOS
-  use [maplibre-gl-js](https://github.com/maplibre/maplibre-gl-js) through a
-  WebView.
+- Windows uses [maplibre-native](https://github.com/maplibre/maplibre-native)
+  through its experimental
+  [C API](https://github.com/maplibre/maplibre-native-ffi), rendering into a
+  Flutter texture. Android, iOS, macOS and Linux will follow on the same
+  implementation.
 
 MapLibre is a permissive, open-source implementation of the Mapbox Vector Tile
 (MVT) standard. By leveraging native SDKs, this package enables high-performance

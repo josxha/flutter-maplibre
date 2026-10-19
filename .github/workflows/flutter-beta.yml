@@ -14,6 +14,7 @@ jobs:
     defaults: { run: { working-directory: examples } }
     steps:
       - uses: actions/checkout@v7
+        with: { submodules: true }
       - uses: actions/setup-java@v6
         with:
           java-version: '21'
@@ -37,6 +38,7 @@ jobs:
     defaults: { run: { working-directory: examples } }
     steps:
       - uses: actions/checkout@v7
+        with: { submodules: true }
       - uses: subosito/flutter-action@v2
         with:
           channel: ${{ env.FLUTTER_CHANNEL }}
@@ -57,6 +59,7 @@ jobs:
     defaults: { run: { working-directory: examples } }
     steps:
       - uses: actions/checkout@v7
+        with: { submodules: true }
       - uses: subosito/flutter-action@v2
         with:
           channel: ${{ env.FLUTTER_CHANNEL }}
@@ -69,6 +72,7 @@ jobs:
     defaults: { run: { working-directory: examples } }
     steps:
       - uses: actions/checkout@v7
+        with: { submodules: true }
       - uses: subosito/flutter-action@v2
         with:
           channel: ${{ env.FLUTTER_CHANNEL }}
@@ -81,6 +85,7 @@ jobs:
     defaults: { run: { working-directory: examples } }
     steps:
       - uses: actions/checkout@v7
+        with: { submodules: true }
       - uses: subosito/flutter-action@v2
         with:
           channel: ${{ env.FLUTTER_CHANNEL }}
@@ -95,6 +100,7 @@ jobs:
     defaults: { run: { working-directory: examples } }
     steps:
       - uses: actions/checkout@v7
+        with: { submodules: true }
       - uses: subosito/flutter-action@v2
         with:
           channel: ${{ env.FLUTTER_CHANNEL }}

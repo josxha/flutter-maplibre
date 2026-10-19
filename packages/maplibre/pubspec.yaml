@@ -24,8 +24,7 @@ dependencies:
   flutter: { sdk: flutter }
   geobase: ^1.5.0
   html: ^0.15.6
-  maplibre_android: ^0.3.6
-  maplibre_ios: ^0.3.6
+  maplibre_native: ^0.4.0
   maplibre_platform_interface: ^0.3.6
   maplibre_web: ^0.3.6
   pointer_interceptor: ^0.10.1+2
@@ -44,16 +43,14 @@ flutter:
   plugin:
     platforms:
       android:
-        default_package: maplibre_android
+        default_package: maplibre_native
       ios:
-        default_package: maplibre_ios
+        default_package: maplibre_native
+      linux:
+        default_package: maplibre_native
+      macos:
+        default_package: maplibre_native
       web:
         default_package: maplibre_web
-# desktop support is currently still new and experimental, users need to opt in
-#      macos:
-#        default_package: maplibre_webview
-#      windows:
-#        default_package: maplibre_webview
-# experimental: MapLibre Native through its C API (packages/maplibre_native)
-#      windows:
-#        default_package: maplibre_native
+      windows:
+        default_package: maplibre_native

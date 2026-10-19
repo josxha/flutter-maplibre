@@ -13,6 +13,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v7
+        with: { submodules: true }
       - uses: subosito/flutter-action@v2
         with: { cache: true }
       - name: "Get Flutter dependencies"
@@ -29,37 +30,8 @@ jobs:
         run: brew install ktlint
       - name: "Run ktlint"
         run: ktlint -F
-      - name: "Build example APK"
-        working-directory: examples
-        run: flutter build apk
-      - name: "Run jnigen"
-        working-directory: packages/maplibre_android
-        run: dart run tool/jnigen.dart
-      - name: "Clone maplibre-native with shallow submodules"
-        run: |
-          git clone \
-             --depth 1 \
-            --filter=blob:none \
-            --recurse-submodules \
-            --shallow-submodules \
-            --jobs 8 \
-            https://github.com/maplibre/maplibre-native ../maplibre-native
-      - name: "Activate Swift Package Manager"
-        run: flutter config --enable-swift-package-manager
-      - name: "Get Flutter dependencies"
-        working-directory: packages/maplibre_ios
-        run: dart pub get
-      - name: "Build MapLibre Native"
-        working-directory: packages/maplibre_ios/ios
-        run: ./build_maplibre.sh
-      - name: "Generate headers for Swift code"
-        working-directory: packages/maplibre_ios/ios/maplibre_ios/Sources/maplibre_ios
-        run: ./gen_swift_headers.sh
-      - name: "Run ffigen"
-        working-directory: packages/maplibre_ios
-        run: dart tool/ffigen.dart
       - name: "dart format"
-        run: dart format .
+        run: dart format $(git ls-files '*.dart')
       - name: "Check difference"
         run: |
           git add --all . && \
