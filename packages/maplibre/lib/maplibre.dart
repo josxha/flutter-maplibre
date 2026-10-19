@@ -4,7 +4,6 @@
 export 'package:geobase/geobase.dart';
 export 'package:maplibre_platform_interface/maplibre_platform_interface.dart'
     show
-        AndroidPlatformViewMode,
         BackgroundStyleLayer,
         BearingRenderMode,
         BearingTrackMode,
