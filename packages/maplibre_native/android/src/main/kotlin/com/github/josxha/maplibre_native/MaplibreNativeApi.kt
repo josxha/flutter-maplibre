@@ -99,7 +99,9 @@ object MaplibreNativeApi {
         producer.setCallback(
             object : TextureRegistry.SurfaceProducer.Callback {
                 override fun onSurfaceAvailable() {
-                    val old = texture.refresh() ?: return
+                    // Reported even when the Surface stayed the same (old is
+                    // then 0), because Dart paused rendering on cleanup.
+                    val old = texture.refresh() ?: 0L
                     listener.onSurfaceChanged(texture.vkSurface, old)
                 }
 

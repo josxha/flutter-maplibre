@@ -331,16 +331,17 @@ final class MapRenderer {
     }
   }
 
-  /// Flutter recreated the Surface, e.g. when the app returned from the
-  /// background: rendering moves there and resumes.
+  /// The Surface is available again, e.g. when the app returned from the
+  /// background: rendering moves to [surface] when Flutter recreated it
+  /// ([oldSurface] is 0 when it did not) and resumes.
   Future<void> _onSurfaceChanged(int surface, int oldSurface) async {
     if (_disposed) {
       // Nothing presents to the old surface anymore.
-      AndroidPlugin.releaseSurface(oldSurface);
+      if (oldSurface != 0) AndroidPlugin.releaseSurface(oldSurface);
       return;
     }
     await _onGpuQueue(() async {
-      await _replaceSurface(surface, oldSurface);
+      if (oldSurface != 0) await _replaceSurface(surface, oldSurface);
       _surfaceAvailable = true;
       _demandFrame();
     });
