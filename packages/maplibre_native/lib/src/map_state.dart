@@ -21,6 +21,10 @@ const _pitchDegreesPerPixel = 0.5;
 
 const _doubleTapZoomDuration = Duration(milliseconds: 300);
 
+/// Logical pixels of vertical drag per zoom level in a double-tap-and-drag
+/// zoom.
+const _quickZoomPixelsPerLevel = 150.0;
+
 /// MapLibre Native, rendered through its C API into a Flutter texture.
 class MapLibreMapStateNative extends MapLibreMapState {
   MapRenderer? _renderer;
@@ -46,6 +50,25 @@ class MapLibreMapStateNative extends MapLibreMapState {
 
   // Secondary-button drag state, for rotating and tilting with a mouse.
   int? _secondaryPointer;
+
+  // Touch pointers that are down, and where the only one went down, to tell
+  // a tap from a drag.
+  final _touchPointers = <int>{};
+  Offset? _touchDownPosition;
+
+  // The last tap's release, which a second touch nearby starts a quick zoom
+  // from.
+  Duration? _lastTapUpTime;
+  Offset? _lastTapUpPosition;
+
+  // Double-tap-and-drag zoom: the second tap's pointer and position, and
+  // whether it has moved far enough to zoom.
+  int? _quickZoomPointer;
+  Offset? _quickZoomAnchor;
+  var _quickZooming = false;
+
+  /// Where the second tap of a double tap went down.
+  Offset? _doubleTapPosition;
 
   mln.MapHandle? get _map => _renderer?.map;
 
@@ -264,6 +287,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
         onLongPressStart: (details) =>
             _emitUserInput(details.localPosition, _longClick),
         onDoubleTapDown: _onDoubleTapDown,
+        onDoubleTap: _onDoubleTap,
         onScaleStart: gestures.pan || gestures.zoom || gestures.rotate
             ? _onScaleStart
             : null,
@@ -298,16 +322,24 @@ class MapLibreMapStateNative extends MapLibreMapState {
   }
 
   void _onDoubleTapDown(TapDownDetails details) {
+    _doubleTapPosition = details.localPosition;
     _emitUserInput(
       details.localPosition,
       (point, screenPoint) =>
           MapEventDoubleClick(point: point, screenPoint: screenPoint),
     );
-    if (!options.gestures.zoom) return;
+  }
+
+  /// Zooms in on the second release of a double tap. A second tap that drags
+  /// instead is a quick zoom, which the double tap recognizer rejects.
+  void _onDoubleTap() {
+    final position = _doubleTapPosition;
+    _doubleTapPosition = null;
+    if (position == null || !options.gestures.zoom) return;
     _applyDelta(
       mln.CameraDelta(
         scale: 2,
-        anchor: _screenPoint(details.localPosition),
+        anchor: _screenPoint(position),
         animation: mln.AnimationOptions(
           durationMs: _doubleTapZoomDuration.inMilliseconds.toDouble(),
         ),
@@ -334,9 +366,33 @@ class MapLibreMapStateNative extends MapLibreMapState {
       _secondaryPointer = event.pointer;
       _beginGesture();
     }
+    if (event.kind != PointerDeviceKind.touch) return;
+
+    _touchPointers.add(event.pointer);
+    if (_touchPointers.length > 1) {
+      // A second finger makes it a pinch, not a tap or a quick zoom.
+      _touchDownPosition = null;
+      _stopQuickZoom();
+      return;
+    }
+    _touchDownPosition = event.localPosition;
+    final lastTime = _lastTapUpTime;
+    final lastPosition = _lastTapUpPosition;
+    if (options.gestures.zoom &&
+        lastTime != null &&
+        lastPosition != null &&
+        event.timeStamp - lastTime <= kDoubleTapTimeout &&
+        (event.localPosition - lastPosition).distance <= kDoubleTapSlop) {
+      _quickZoomPointer = event.pointer;
+      _quickZoomAnchor = event.localPosition;
+    }
   }
 
   void _onPointerMove(PointerMoveEvent event) {
+    if (event.pointer == _quickZoomPointer) {
+      _onQuickZoomMove(event);
+      return;
+    }
     if (event.pointer != _secondaryPointer) return;
     final gestures = options.gestures;
     final size = context.size;
@@ -353,18 +409,65 @@ class MapLibreMapStateNative extends MapLibreMapState {
   }
 
   void _onPointerEnd(PointerEvent event) {
+    if (_touchPointers.remove(event.pointer)) _onTouchEnd(event);
     if (event.pointer != _secondaryPointer) return;
     _secondaryPointer = null;
     _endGesture();
   }
 
+  void _onTouchEnd(PointerEvent event) {
+    final down = _touchDownPosition;
+    final tapped =
+        event is PointerUpEvent &&
+        event.pointer != _quickZoomPointer &&
+        down != null &&
+        (event.localPosition - down).distance <= kTouchSlop;
+    // A tap arms a quick zoom for the next touch. The second tap of a double
+    // tap does not, so a third tap starts afresh.
+    _lastTapUpTime = tapped ? event.timeStamp : null;
+    _lastTapUpPosition = tapped ? event.localPosition : null;
+    _touchDownPosition = null;
+    if (event.pointer == _quickZoomPointer) _stopQuickZoom();
+  }
+
+  /// Zooms by the vertical drag of a double tap's second touch: down zooms
+  /// in and up zooms out, around where that touch went down.
+  void _onQuickZoomMove(PointerMoveEvent event) {
+    final anchor = _quickZoomAnchor!;
+    if (!_quickZooming) {
+      if ((event.localPosition - anchor).distance <= kTouchSlop) return;
+      _quickZooming = true;
+      _doubleTapPosition = null;
+      if (!_gestureActive) _beginGesture();
+    }
+    if (event.delta.dy == 0) return;
+    _applyDelta(
+      mln.CameraDelta(
+        scale: pow(2, event.delta.dy / _quickZoomPixelsPerLevel).toDouble(),
+        anchor: _screenPoint(anchor),
+        gesturePhase: mln.GesturePhase.update,
+      ),
+    );
+  }
+
+  void _stopQuickZoom() {
+    final zoomed = _quickZooming;
+    _quickZoomPointer = null;
+    _quickZoomAnchor = null;
+    _quickZooming = false;
+    if (zoomed) _endGesture();
+  }
+
   void _onScaleStart(ScaleStartDetails details) {
     _lastScale = 1;
     _lastRotation = 0;
-    _beginGesture();
+    if (!_gestureActive) _beginGesture();
   }
 
   void _onScaleUpdate(ScaleUpdateDetails details) {
+    // The quick zoom drives the camera while its drag also reaches the scale
+    // recognizer as a pan.
+    if (_quickZooming) return;
     final gestures = options.gestures;
     final scale = details.scale / _lastScale;
     final rotation = details.rotation - _lastRotation;
