@@ -1,0 +1,5 @@
+analyzer:
+  exclude:
+    # A separate package outside the workspace, resolved only to regenerate
+    # bindings, so CI does not fetch its dependencies.
+    - tool/codegen/**
