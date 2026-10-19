@@ -2,7 +2,7 @@
 #define FLUTTER_PLUGIN_MAPLIBRE_NATIVE_PLUGIN_H_
 
 #include <d3d11.h>
-#include <flutter/method_channel.h>
+#include <dxgi.h>
 #include <flutter/plugin_registrar_windows.h>
 #include <flutter/texture_registrar.h>
 #include <wrl/client.h>
@@ -51,9 +51,17 @@ class PixelTexture {
   FlutterDesktopPixelBuffer buffer_{};
 };
 
+// Owns the textures and devices behind the C API in
+// include/maplibre_native/maplibre_native_api.h. Dart reaches the one
+// registered instance through that API, never through a channel.
 class MaplibreNativePlugin : public flutter::Plugin {
  public:
   static void RegisterWithRegistrar(flutter::PluginRegistrarWindows* registrar);
+
+  // The registered plugin, or null before registration and after shutdown.
+  // Callers hold the lock from Lock() while they use it.
+  static MaplibreNativePlugin* Instance();
+  static std::unique_lock<std::mutex> Lock();
 
   explicit MaplibreNativePlugin(flutter::PluginRegistrarWindows* registrar);
 
@@ -63,19 +71,29 @@ class MaplibreNativePlugin : public flutter::Plugin {
   MaplibreNativePlugin(const MaplibreNativePlugin&) = delete;
   MaplibreNativePlugin& operator=(const MaplibreNativePlugin&) = delete;
 
-  // Called when a method is called on this plugin's channel from Dart.
-  void HandleMethodCall(
-      const flutter::MethodCall<flutter::EncodableValue>& method_call,
-      std::unique_ptr<flutter::MethodResult<flutter::EncodableValue>> result);
-
- private:
   // The Vulkan device on Flutter's GPU, or null with |error| set.
   VulkanDevice* GetVulkan(std::string* error);
+
+  int64_t CreatePixelTexture();
+  bool UpdatePixelTexture(int64_t id, size_t width, size_t height,
+                          size_t stride, const uint8_t* pixels, size_t length,
+                          std::string* error);
+
+  // Returns null with |error| set when D3D11 and Vulkan cannot share
+  // textures, and Dart falls back to a pixel buffer texture.
+  GpuTexture* CreateGpuTexture(uint32_t width, uint32_t height,
+                               uint32_t slot_count, std::string* error);
+  GpuTexture* FindGpuTexture(int64_t id);
+
+  void DisposeTexture(int64_t id);
+
+ private:
   // A D3D11 device on Flutter's GPU, or null with |error| set.
   ID3D11Device* GetD3D11(std::string* error);
 
-  flutter::PluginRegistrarWindows* registrar_;
   flutter::TextureRegistrar* textures_;
+  // Flutter's adapter, taken on the platform thread at registration.
+  Microsoft::WRL::ComPtr<IDXGIAdapter> adapter_;
   Microsoft::WRL::ComPtr<ID3D11Device> d3d_;
   LUID adapter_luid_{};
   bool has_adapter_luid_ = false;

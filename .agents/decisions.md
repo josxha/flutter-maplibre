@@ -15,6 +15,13 @@ Each entry: the decision, then why.
 - **Every native platform renders through Vulkan.** WGL needs one pinned
   thread, which Dart can't guarantee, and the binding's surface and texture
   APIs are Vulkan-first.
+- **Dart reaches the platform plugins through ffigen (Windows) and jnigen
+  (Android), never method channels.** Calls are synchronous and typed, with
+  no message encoding. The Windows plugin DLL exports a C API and keeps its
+  one registered instance behind a mutex. On Android a Kotlin
+  `MaplibreNativeApi` object holds the engine's texture registry, and
+  SurfaceProducer callbacks reach Dart through a `SurfaceListener` that Dart
+  implements as async listeners.
 
 ## Windows
 
@@ -57,15 +64,32 @@ Each entry: the decision, then why.
   Flutter frame as the map image. Camera events still report the latest
   camera. Exact on Windows. On Android Flutter takes the newest Surface
   image itself, so it can be off by a frame.
+- **Dart calls the plugins on its UI thread.** Flutter's Windows texture
+  registrar functions may be called from any thread. On Android the UI
+  thread is the main thread, which SurfaceProducer needs.
 - **Sessions use the core-worker driver, with wakes drained on the Dart
   isolate.** Frame demands use `ifNeeded | waitForUpdate` (plus `present` on
   Android), so idle maps don't render.
+
+## Gestures
+
+- **Gestures are recognized in Dart and applied as camera deltas.** A
+  two-finger twist turns the map with the fingers (negated bearing). Double
+  tap and drag zooms (down zooms in, 150 px per level). Two fingers side by
+  side dragged vertically tilt, as on MapLibre Android. Right-mouse drag
+  rotates and tilts on desktop.
 
 ## Build and CI
 
 - **`tool/use_native_build.dart` points the build hook at a local C build.**
   The hook takes one prefix and checks its target. The tool runs from the
   repo root so the hook doesn't run first for the host.
+- **ffigen and jnigen run from `tool/codegen`, a package outside the
+  workspace.** ffigen 23 and jnigen 1.0.1 need `code_assets ^2`, while the
+  binding pins `^1.2`. Outside the workspace, the binding's build hook doesn't
+  run either. jnigen uses the example app's Gradle classpath.
+- **`package:jni` is also an FFI plugin on Windows and Linux.** It builds
+  there but stays unused.
 - **The Windows CI job builds the C library from the submodule and caches it
   by submodule commit.** Other jobs use the upstream snapshot from the
   binding's main branch, not PR #760.
@@ -75,3 +99,7 @@ Each entry: the decision, then why.
 - Missing on native: globe projection, user location and permissions, and
   feature queries (the C API only has async queries).
 - The Dart binding lacks `queue_lock`. The Python binding has it.
+- The binding's build hook takes one local install prefix and rejects other
+  targets, so it can't pick a preset per target (needed for multi-ABI
+  Android builds). That needs a change upstream in the hook.
+- Touch tilt and double-tap-drag are not tested on Windows touchscreens.

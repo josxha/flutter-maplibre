@@ -1,58 +1,21 @@
 #include "maplibre_native_plugin.h"
 
-#include <dxgi.h>
-#include <flutter/method_channel.h>
 #include <flutter/plugin_registrar_windows.h>
-#include <flutter/standard_method_codec.h>
 
+#include <algorithm>
 #include <cstring>
 #include <memory>
-#include <variant>
+
+#include "include/maplibre_native/maplibre_native_api.h"
 
 namespace maplibre_native {
 
-using flutter::EncodableList;
-using flutter::EncodableMap;
-using flutter::EncodableValue;
 using Microsoft::WRL::ComPtr;
 
 namespace {
 
-template <typename T>
-const T* GetArgument(const EncodableMap& arguments, const char* key) {
-  const auto it = arguments.find(EncodableValue(key));
-  if (it == arguments.end()) {
-    return nullptr;
-  }
-  return std::get_if<T>(&it->second);
-}
-
-int64_t GetInteger(const EncodableMap& arguments, const char* key) {
-  const auto it = arguments.find(EncodableValue(key));
-  if (it == arguments.end()) {
-    return -1;
-  }
-  return it->second.LongValue();
-}
-
-EncodableValue Handle(const void* handle) {
-  return EncodableValue(static_cast<int64_t>(reinterpret_cast<intptr_t>(handle)));
-}
-
-EncodableValue Handle(uint64_t handle) {
-  return EncodableValue(static_cast<int64_t>(handle));
-}
-
-EncodableValue SlotList(const std::vector<SharedSlot>& slots) {
-  EncodableList list;
-  for (const auto& slot : slots) {
-    list.push_back(EncodableValue(EncodableList{
-        Handle(reinterpret_cast<uint64_t>(slot.image)),
-        Handle(reinterpret_cast<uint64_t>(slot.view)),
-    }));
-  }
-  return EncodableValue(list);
-}
+std::mutex g_mutex;
+MaplibreNativePlugin* g_plugin = nullptr;
 
 }  // namespace
 
@@ -112,34 +75,34 @@ const FlutterDesktopPixelBuffer* PixelTexture::CopyPixelBuffer(size_t width,
 // static
 void MaplibreNativePlugin::RegisterWithRegistrar(
     flutter::PluginRegistrarWindows* registrar) {
-  auto channel = std::make_unique<flutter::MethodChannel<EncodableValue>>(
-      registrar->messenger(), "maplibre_native",
-      &flutter::StandardMethodCodec::GetInstance());
+  registrar->AddPlugin(std::make_unique<MaplibreNativePlugin>(registrar));
+}
 
-  auto plugin = std::make_unique<MaplibreNativePlugin>(registrar);
+// static
+MaplibreNativePlugin* MaplibreNativePlugin::Instance() { return g_plugin; }
 
-  channel->SetMethodCallHandler(
-      [plugin_pointer = plugin.get()](const auto& call, auto result) {
-        plugin_pointer->HandleMethodCall(call, std::move(result));
-      });
-
-  registrar->AddPlugin(std::move(plugin));
+// static
+std::unique_lock<std::mutex> MaplibreNativePlugin::Lock() {
+  return std::unique_lock<std::mutex>(g_mutex);
 }
 
 MaplibreNativePlugin::MaplibreNativePlugin(
     flutter::PluginRegistrarWindows* registrar)
-    : registrar_(registrar), textures_(registrar->texture_registrar()) {
-  ComPtr<IDXGIAdapter> adapter;
-  if (registrar_->GetGraphicsAdapter(&adapter) && adapter) {
+    : textures_(registrar->texture_registrar()) {
+  if (registrar->GetGraphicsAdapter(&adapter_) && adapter_) {
     DXGI_ADAPTER_DESC desc{};
-    if (SUCCEEDED(adapter->GetDesc(&desc))) {
+    if (SUCCEEDED(adapter_->GetDesc(&desc))) {
       adapter_luid_ = desc.AdapterLuid;
       has_adapter_luid_ = true;
     }
   }
+  std::lock_guard<std::mutex> lock(g_mutex);
+  g_plugin = this;
 }
 
 MaplibreNativePlugin::~MaplibreNativePlugin() {
+  std::lock_guard<std::mutex> lock(g_mutex);
+  if (g_plugin == this) g_plugin = nullptr;
   for (auto& [id, texture] : pixel_textures_) {
     PixelTexture::Dispose(std::move(texture));
   }
@@ -154,15 +117,14 @@ VulkanDevice* MaplibreNativePlugin::GetVulkan(std::string* error) {
 
 ID3D11Device* MaplibreNativePlugin::GetD3D11(std::string* error) {
   if (d3d_) return d3d_.Get();
-  ComPtr<IDXGIAdapter> adapter;
-  if (!registrar_->GetGraphicsAdapter(&adapter) || !adapter) {
+  if (!adapter_) {
     *error = "Flutter does not render through a DXGI adapter.";
     return nullptr;
   }
   const D3D_FEATURE_LEVEL levels[] = {D3D_FEATURE_LEVEL_11_1,
                                       D3D_FEATURE_LEVEL_11_0};
   HRESULT result = D3D11CreateDevice(
-      adapter.Get(), D3D_DRIVER_TYPE_UNKNOWN, nullptr, 0, levels,
+      adapter_.Get(), D3D_DRIVER_TYPE_UNKNOWN, nullptr, 0, levels,
       static_cast<UINT>(std::size(levels)), D3D11_SDK_VERSION, &d3d_, nullptr,
       nullptr);
   if (FAILED(result)) {
@@ -172,142 +134,232 @@ ID3D11Device* MaplibreNativePlugin::GetD3D11(std::string* error) {
   return d3d_.Get();
 }
 
-void MaplibreNativePlugin::HandleMethodCall(
-    const flutter::MethodCall<EncodableValue>& method_call,
-    std::unique_ptr<flutter::MethodResult<EncodableValue>> result) {
-  const auto& method = method_call.method_name();
+int64_t MaplibreNativePlugin::CreatePixelTexture() {
+  auto texture = std::make_unique<PixelTexture>(textures_);
+  const int64_t id = texture->id();
+  pixel_textures_.emplace(id, std::move(texture));
+  return id;
+}
 
-  if (method == "vulkanContext") {
-    std::string error;
-    VulkanDevice* vulkan = GetVulkan(&error);
-    if (vulkan == nullptr) {
-      result->Error("vulkan-unavailable", error);
-      return;
-    }
-    result->Success(EncodableValue(EncodableMap{
-        {EncodableValue("instance"), Handle(vulkan->instance())},
-        {EncodableValue("physicalDevice"), Handle(vulkan->physical_device())},
-        {EncodableValue("device"), Handle(vulkan->device())},
-        {EncodableValue("queue"), Handle(vulkan->queue())},
-        {EncodableValue("queueFamilyIndex"),
-         EncodableValue(static_cast<int64_t>(vulkan->queue_family_index()))},
-        {EncodableValue("getInstanceProcAddr"),
-         Handle(reinterpret_cast<void*>(vulkan->get_instance_proc_addr()))},
-        {EncodableValue("getDeviceProcAddr"),
-         Handle(reinterpret_cast<void*>(vulkan->get_device_proc_addr()))},
-    }));
-    return;
+bool MaplibreNativePlugin::UpdatePixelTexture(int64_t id, size_t width,
+                                              size_t height, size_t stride,
+                                              const uint8_t* pixels,
+                                              size_t length,
+                                              std::string* error) {
+  const auto texture = pixel_textures_.find(id);
+  if (texture == pixel_textures_.end()) {
+    *error = "No pixel buffer texture with this id.";
+    return false;
   }
-
-  if (method == "createTexture") {
-    auto texture = std::make_unique<PixelTexture>(textures_);
-    const int64_t id = texture->id();
-    pixel_textures_.emplace(id, std::move(texture));
-    result->Success(EncodableValue(id));
-    return;
+  if (pixels == nullptr || width == 0 || height == 0 || stride < width * 4 ||
+      length < stride * (height - 1) + width * 4) {
+    *error = "Pixel data does not match its size.";
+    return false;
   }
+  texture->second->Update(width, height, pixels, stride);
+  return true;
+}
 
-  const auto* arguments =
-      std::get_if<EncodableMap>(method_call.arguments());
-  if (arguments == nullptr) {
-    result->Error("bad-arguments", "Expected a map of arguments.");
-    return;
+GpuTexture* MaplibreNativePlugin::CreateGpuTexture(uint32_t width,
+                                                   uint32_t height,
+                                                   uint32_t slot_count,
+                                                   std::string* error) {
+  // Lets the CPU readback path be tested on hardware that shares textures.
+  char disable[2] = {};
+  if (GetEnvironmentVariableA("MAPLIBRE_NATIVE_DISABLE_ZERO_COPY", disable,
+                              sizeof(disable)) > 0) {
+    *error = "MAPLIBRE_NATIVE_DISABLE_ZERO_COPY is set.";
+    return nullptr;
   }
+  VulkanDevice* vulkan = GetVulkan(error);
+  ID3D11Device* d3d = vulkan == nullptr ? nullptr : GetD3D11(error);
+  if (d3d == nullptr) return nullptr;
+  auto texture = GpuTexture::Create(textures_, vulkan, d3d, width, height,
+                                    slot_count, error);
+  if (!texture) return nullptr;
+  GpuTexture* raw = texture.get();
+  gpu_textures_.emplace(raw->id(), std::move(texture));
+  return raw;
+}
 
-  if (method == "createGpuTexture") {
-    std::string error;
-    VulkanDevice* vulkan = GetVulkan(&error);
-    ID3D11Device* d3d = vulkan == nullptr ? nullptr : GetD3D11(&error);
-    std::unique_ptr<GpuTexture> texture;
-    // Lets the CPU readback path be tested on hardware that shares textures.
-    char disable[2] = {};
-    if (GetEnvironmentVariableA("MAPLIBRE_NATIVE_DISABLE_ZERO_COPY", disable,
-                                sizeof(disable)) > 0) {
-      d3d = nullptr;
-      error = "MAPLIBRE_NATIVE_DISABLE_ZERO_COPY is set.";
-    }
-    if (d3d != nullptr) {
-      texture = GpuTexture::Create(
-          textures_, vulkan, d3d,
-          static_cast<uint32_t>(GetInteger(*arguments, "width")),
-          static_cast<uint32_t>(GetInteger(*arguments, "height")),
-          static_cast<uint32_t>(GetInteger(*arguments, "slotCount")), &error);
-    }
-    if (!texture) {
-      // Dart falls back to the pixel buffer path.
-      result->Success(EncodableValue(EncodableMap{
-          {EncodableValue("error"), EncodableValue(error)},
-      }));
-      return;
-    }
-    const int64_t id = texture->id();
-    EncodableValue slots = SlotList(texture->slots());
-    gpu_textures_.emplace(id, std::move(texture));
-    result->Success(EncodableValue(EncodableMap{
-        {EncodableValue("textureId"), EncodableValue(id)},
-        {EncodableValue("format"),
-         EncodableValue(static_cast<int64_t>(GpuTexture::kVulkanFormat))},
-        {EncodableValue("slots"), slots},
-    }));
-    return;
-  }
+GpuTexture* MaplibreNativePlugin::FindGpuTexture(int64_t id) {
+  const auto texture = gpu_textures_.find(id);
+  return texture == gpu_textures_.end() ? nullptr : texture->second.get();
+}
 
-  const int64_t texture_id = GetInteger(*arguments, "textureId");
-  const auto gpu = gpu_textures_.find(texture_id);
-  const auto pixel = pixel_textures_.find(texture_id);
-  if (gpu == gpu_textures_.end() && pixel == pixel_textures_.end()) {
-    result->Error("unknown-texture", "No texture with this id.");
-    return;
-  }
-
-  if (method == "presentGpuTexture" && gpu != gpu_textures_.end()) {
-    std::string error;
-    if (!gpu->second->Present(
-            static_cast<uint32_t>(GetInteger(*arguments, "slot")), &error)) {
-      result->Error("present-failed", error);
-      return;
-    }
-    result->Success();
-  } else if (method == "resizeGpuTexture" && gpu != gpu_textures_.end()) {
-    std::string error;
-    if (!gpu->second->Resize(
-            static_cast<uint32_t>(GetInteger(*arguments, "width")),
-            static_cast<uint32_t>(GetInteger(*arguments, "height")),
-            &error)) {
-      result->Error("resize-failed", error);
-      return;
-    }
-    result->Success(SlotList(gpu->second->slots()));
-  } else if (method == "releaseRetiredSlots" && gpu != gpu_textures_.end()) {
-    gpu->second->ReleaseRetiredSlots();
-    result->Success();
-  } else if (method == "updateTexture" && pixel != pixel_textures_.end()) {
-    const auto* pixels = GetArgument<std::vector<uint8_t>>(*arguments, "pixels");
-    const int64_t width = GetInteger(*arguments, "width");
-    const int64_t height = GetInteger(*arguments, "height");
-    const int64_t stride = GetInteger(*arguments, "stride");
-    if (pixels == nullptr || width <= 0 || height <= 0 || stride < width * 4 ||
-        pixels->size() <
-            static_cast<size_t>(stride * (height - 1) + width * 4)) {
-      result->Error("bad-arguments", "Pixel data does not match its size.");
-      return;
-    }
-    pixel->second->Update(static_cast<size_t>(width),
-                          static_cast<size_t>(height), pixels->data(),
-                          static_cast<size_t>(stride));
-    result->Success();
-  } else if (method == "disposeTexture") {
-    if (gpu != gpu_textures_.end()) {
-      GpuTexture::Dispose(std::move(gpu->second));
-      gpu_textures_.erase(gpu);
-    } else {
-      PixelTexture::Dispose(std::move(pixel->second));
-      pixel_textures_.erase(pixel);
-    }
-    result->Success();
-  } else {
-    result->NotImplemented();
+void MaplibreNativePlugin::DisposeTexture(int64_t id) {
+  if (const auto gpu = gpu_textures_.find(id); gpu != gpu_textures_.end()) {
+    GpuTexture::Dispose(std::move(gpu->second));
+    gpu_textures_.erase(gpu);
+  } else if (const auto pixel = pixel_textures_.find(id);
+             pixel != pixel_textures_.end()) {
+    PixelTexture::Dispose(std::move(pixel->second));
+    pixel_textures_.erase(pixel);
   }
 }
 
 }  // namespace maplibre_native
+
+// C API
+
+using maplibre_native::GpuTexture;
+using maplibre_native::MaplibreNativePlugin;
+using maplibre_native::SharedSlot;
+
+namespace {
+
+void WriteError(const std::string& message, char* error, size_t error_size) {
+  if (error == nullptr || error_size == 0) return;
+  const size_t length = std::min(message.size(), error_size - 1);
+  std::memcpy(error, message.data(), length);
+  error[length] = '\0';
+}
+
+uint64_t Bits(const void* handle) {
+  return static_cast<uint64_t>(reinterpret_cast<uintptr_t>(handle));
+}
+
+void WriteSlots(const std::vector<SharedSlot>& slots,
+                MaplibreNativeGpuSlot* out_slots, uint32_t slot_capacity) {
+  const size_t count = std::min<size_t>(slots.size(), slot_capacity);
+  for (size_t i = 0; i < count; ++i) {
+    out_slots[i].image = reinterpret_cast<uint64_t>(slots[i].image);
+    out_slots[i].view = reinterpret_cast<uint64_t>(slots[i].view);
+  }
+}
+
+// Finds a GPU texture of the registered plugin; the caller holds the lock.
+GpuTexture* FindGpuTexture(int64_t texture_id, char* error,
+                           size_t error_size) {
+  MaplibreNativePlugin* plugin = MaplibreNativePlugin::Instance();
+  GpuTexture* texture =
+      plugin == nullptr ? nullptr : plugin->FindGpuTexture(texture_id);
+  if (texture == nullptr) {
+    WriteError("No GPU texture with this id.", error, error_size);
+  }
+  return texture;
+}
+
+constexpr const char* kNotRegistered =
+    "The maplibre_native Windows plugin is not registered.";
+
+}  // namespace
+
+bool maplibre_native_vulkan_context(MaplibreNativeVulkanContext* out_context,
+                                    char* error, size_t error_size) {
+  auto lock = MaplibreNativePlugin::Lock();
+  MaplibreNativePlugin* plugin = MaplibreNativePlugin::Instance();
+  if (plugin == nullptr) {
+    WriteError(kNotRegistered, error, error_size);
+    return false;
+  }
+  std::string message;
+  maplibre_native::VulkanDevice* vulkan = plugin->GetVulkan(&message);
+  if (vulkan == nullptr) {
+    WriteError(message, error, error_size);
+    return false;
+  }
+  *out_context = MaplibreNativeVulkanContext{
+      Bits(vulkan->instance()),
+      Bits(vulkan->physical_device()),
+      Bits(vulkan->device()),
+      Bits(vulkan->queue()),
+      vulkan->queue_family_index(),
+      Bits(reinterpret_cast<void*>(vulkan->get_instance_proc_addr())),
+      Bits(reinterpret_cast<void*>(vulkan->get_device_proc_addr())),
+  };
+  return true;
+}
+
+int64_t maplibre_native_create_pixel_texture(void) {
+  auto lock = MaplibreNativePlugin::Lock();
+  MaplibreNativePlugin* plugin = MaplibreNativePlugin::Instance();
+  return plugin == nullptr ? -1 : plugin->CreatePixelTexture();
+}
+
+bool maplibre_native_update_pixel_texture(int64_t texture_id, uint32_t width,
+                                          uint32_t height, uint32_t stride,
+                                          const uint8_t* pixels, size_t length,
+                                          char* error, size_t error_size) {
+  auto lock = MaplibreNativePlugin::Lock();
+  MaplibreNativePlugin* plugin = MaplibreNativePlugin::Instance();
+  if (plugin == nullptr) {
+    WriteError(kNotRegistered, error, error_size);
+    return false;
+  }
+  std::string message;
+  if (!plugin->UpdatePixelTexture(texture_id, width, height, stride, pixels,
+                                  length, &message)) {
+    WriteError(message, error, error_size);
+    return false;
+  }
+  return true;
+}
+
+int64_t maplibre_native_create_gpu_texture(uint32_t width, uint32_t height,
+                                           uint32_t slot_count,
+                                           uint32_t* out_format,
+                                           MaplibreNativeGpuSlot* out_slots,
+                                           uint32_t slot_capacity, char* error,
+                                           size_t error_size) {
+  auto lock = MaplibreNativePlugin::Lock();
+  MaplibreNativePlugin* plugin = MaplibreNativePlugin::Instance();
+  if (plugin == nullptr) {
+    WriteError(kNotRegistered, error, error_size);
+    return -1;
+  }
+  std::string message;
+  GpuTexture* texture =
+      plugin->CreateGpuTexture(width, height, slot_count, &message);
+  if (texture == nullptr) {
+    WriteError(message, error, error_size);
+    return -1;
+  }
+  *out_format = static_cast<uint32_t>(GpuTexture::kVulkanFormat);
+  WriteSlots(texture->slots(), out_slots, slot_capacity);
+  return texture->id();
+}
+
+bool maplibre_native_resize_gpu_texture(int64_t texture_id, uint32_t width,
+                                        uint32_t height,
+                                        MaplibreNativeGpuSlot* out_slots,
+                                        uint32_t slot_capacity, char* error,
+                                        size_t error_size) {
+  auto lock = MaplibreNativePlugin::Lock();
+  GpuTexture* texture = FindGpuTexture(texture_id, error, error_size);
+  if (texture == nullptr) return false;
+  std::string message;
+  if (!texture->Resize(width, height, &message)) {
+    WriteError(message, error, error_size);
+    return false;
+  }
+  WriteSlots(texture->slots(), out_slots, slot_capacity);
+  return true;
+}
+
+void maplibre_native_release_retired_slots(int64_t texture_id) {
+  auto lock = MaplibreNativePlugin::Lock();
+  if (GpuTexture* texture = FindGpuTexture(texture_id, nullptr, 0)) {
+    texture->ReleaseRetiredSlots();
+  }
+}
+
+bool maplibre_native_present_gpu_texture(int64_t texture_id, uint32_t slot,
+                                         char* error, size_t error_size) {
+  auto lock = MaplibreNativePlugin::Lock();
+  GpuTexture* texture = FindGpuTexture(texture_id, error, error_size);
+  if (texture == nullptr) return false;
+  std::string message;
+  if (!texture->Present(slot, &message)) {
+    WriteError(message, error, error_size);
+    return false;
+  }
+  return true;
+}
+
+void maplibre_native_dispose_texture(int64_t texture_id) {
+  auto lock = MaplibreNativePlugin::Lock();
+  if (MaplibreNativePlugin* plugin = MaplibreNativePlugin::Instance()) {
+    plugin->DisposeTexture(texture_id);
+  }
+}

@@ -2,10 +2,9 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
+import 'package:maplibre_native/src/android/android_plugin.dart';
+import 'package:maplibre_native/src/windows/windows_plugin.dart';
 import 'package:maplibre_native_ffi/maplibre_native_ffi.dart';
-
-const _channel = MethodChannel('maplibre_native');
 
 /// Ring depth of a zero-copy texture: one slot Flutter shows, one MapLibre
 /// renders into, and one spare.
@@ -31,58 +30,13 @@ enum _Target {
   surface,
 }
 
-/// Renderers by texture id, for the plugin's callbacks.
-final _renderers = <int, MapRenderer>{};
-
-Future<Object?> _handlePluginCall(MethodCall call) async {
-  final arguments = call.arguments as Map<Object?, Object?>;
-  final renderer = _renderers[arguments['textureId']];
-  switch (call.method) {
-    case 'surfaceCleanup':
-      // Flutter releases the Surface, e.g. in the background. Rendering
-      // resumes on the next surfaceChanged.
-      renderer?._surfaceAvailable = false;
-    case 'surfaceChanged':
-      final oldSurface = arguments['oldSurface']! as int;
-      if (renderer == null) {
-        // The renderer is gone, so nothing presents to the old surface.
-        await _channel.invokeMethod<void>('releaseSurface', {
-          'surface': oldSurface,
-        });
-        return null;
-      }
-      await renderer._onGpuQueue(() async {
-        await renderer._replaceSurface(
-          arguments['surface']! as int,
-          oldSurface,
-        );
-        renderer
-          .._surfaceAvailable = true
-          .._demandFrame();
-      });
-  }
-  return null;
-}
-
 VulkanContextDescriptor? _vulkanContext;
 
 /// The Vulkan device that the platform plugin created for MapLibre.
-Future<VulkanContextDescriptor> _getVulkanContext() async {
-  if (_vulkanContext case final context?) return context;
-  final values = (await _channel.invokeMapMethod<String, int>(
-    'vulkanContext',
-  ))!;
-  NativePointer pointer(String key) => NativePointer(values[key]!);
-  return _vulkanContext = VulkanContextDescriptor(
-    instance: pointer('instance'),
-    physicalDevice: pointer('physicalDevice'),
-    device: pointer('device'),
-    graphicsQueue: pointer('queue'),
-    graphicsQueueFamilyIndex: values['queueFamilyIndex']!,
-    getInstanceProcAddr: pointer('getInstanceProcAddr'),
-    getDeviceProcAddr: pointer('getDeviceProcAddr'),
-  );
-}
+VulkanContextDescriptor _getVulkanContext() =>
+    _vulkanContext ??= Platform.isAndroid
+    ? AndroidPlugin.vulkanContext()
+    : WindowsPlugin.vulkanContext();
 
 /// Renders one MapLibre map into a Flutter texture.
 ///
@@ -103,6 +57,7 @@ final class MapRenderer {
     this._extent,
     this._target, {
     this._format = 0,
+    this._surfaceTexture,
   });
 
   /// The Flutter texture id to show in a `Texture` widget.
@@ -113,6 +68,9 @@ final class MapRenderer {
   final RenderSessionHandle _session;
   final _Target _target;
   final int _format;
+
+  /// The SurfaceProducer texture on Android.
+  final SurfaceTexture? _surfaceTexture;
 
   /// Whether frames reach Flutter without a CPU copy.
   bool get isZeroCopy => _target != _Target.pixelBuffer;
@@ -161,8 +119,7 @@ final class MapRenderer {
     void Function(MapProjectionHandle projection, BigInt extentGeneration)?
     onFrameShown,
   }) async {
-    _channel.setMethodCallHandler(_handlePluginCall);
-    final context = await _getVulkanContext();
+    final context = _getVulkanContext();
 
     // Wakes can arrive before the renderer exists; their work waits for the
     // next wake then.
@@ -180,26 +137,36 @@ final class MapRenderer {
     final (width, height) = _physicalSize(extent);
 
     if (Platform.isAndroid) {
-      final texture = (await _channel.invokeMapMethod<String, int>(
-        'createSurfaceTexture',
-        {'width': width, 'height': height},
-      ))!;
+      final texture = AndroidPlugin.createSurfaceTexture(
+        width,
+        height,
+        onSurfaceChanged: (surface, oldSurface) {
+          if (renderer case final renderer?) {
+            unawaited(renderer._onSurfaceChanged(surface, oldSurface));
+          } else {
+            // Nothing presents to the old surface yet.
+            AndroidPlugin.releaseSurface(oldSurface);
+          }
+        },
+        onSurfaceCleanup: () => renderer?._surfaceAvailable = false,
+      );
       final attachment = map.attachVulkanSurface(
         VulkanSurfaceDescriptor(
           extent: extent,
           context: context,
-          surface: BigInt.from(texture['surface']!).toUnsigned(64),
+          surface: BigInt.from(texture.surface).toUnsigned(64),
         ),
         options,
       );
       return _finishCreate(
         renderer = MapRenderer._(
-          texture['textureId']!,
+          texture.textureId,
           runtime,
           map,
           attachment.session,
           extent,
           _Target.surface,
+          surfaceTexture: texture,
         ),
         attachment,
         onEvent,
@@ -207,32 +174,28 @@ final class MapRenderer {
       );
     }
 
-    final gpu = (await _channel.invokeMapMethod<String, Object?>(
-      'createGpuTexture',
-      {'width': width, 'height': height, 'slotCount': _gpuSlotCount},
-    ))!;
+    final (gpu, unavailable) = WindowsPlugin.createGpuTexture(
+      width,
+      height,
+      _gpuSlotCount,
+    );
 
     final int textureId;
     final RenderSessionAttachment attachment;
     var format = 0;
-    if (gpu['textureId'] case final int id) {
-      textureId = id;
-      format = gpu['format']! as int;
+    if (gpu != null) {
+      textureId = gpu.textureId;
+      format = gpu.format;
       attachment = map.attachVulkanBorrowedTexture(
-        _borrowedDescriptor(
-          context,
-          extent,
-          format,
-          gpu['slots']! as List<Object?>,
-        ),
+        _borrowedDescriptor(context, extent, format, gpu.slots),
         options,
       );
     } else {
       debugPrint(
         'maplibre_native: zero-copy textures are unavailable '
-        '(${gpu['error']}), falling back to CPU readback.',
+        '($unavailable), falling back to CPU readback.',
       );
-      textureId = (await _channel.invokeMethod<int>('createTexture'))!;
+      textureId = WindowsPlugin.createPixelTexture();
       attachment = map.attachVulkanOwnedTexture(
         VulkanOwnedTextureDescriptor(extent: extent, context: context),
         options,
@@ -265,7 +228,6 @@ final class MapRenderer {
     renderer
       ..onEvent = onEvent
       ..onFrameShown = onFrameShown;
-    _renderers[renderer.textureId] = renderer;
     await attachment.completed;
     renderer
       .._drainEvents()
@@ -277,7 +239,7 @@ final class MapRenderer {
     VulkanContextDescriptor context,
     LogicalExtent extent,
     int format,
-    List<Object?> slots,
+    List<VulkanBorrowedTexture> slots,
   ) {
     final (width, height) = _physicalSize(extent);
     return VulkanBorrowedTextureDescriptor(
@@ -285,13 +247,7 @@ final class MapRenderer {
       physicalWidth: width,
       physicalHeight: height,
       context: context,
-      textures: [
-        for (final slot in slots.cast<List<Object?>>())
-          VulkanBorrowedTexture(
-            image: BigInt.from(slot[0]! as int).toUnsigned(64),
-            imageView: BigInt.from(slot[1]! as int).toUnsigned(64),
-          ),
-      ],
+      textures: slots,
       format: format,
       finalLayout: _vkImageLayoutGeneral,
     );
@@ -346,17 +302,16 @@ final class MapRenderer {
   Future<void> _replaceGpuTarget(LogicalExtent extent) async {
     if (_disposed) return;
     final (width, height) = _physicalSize(extent);
-    final slots = (await _channel.invokeListMethod<Object?>(
-      'resizeGpuTexture',
-      {'textureId': textureId, 'width': width, 'height': height},
-    ))!;
-    final context = await _getVulkanContext();
-    await _session.setVulkanBorrowedTextureTarget(
-      _borrowedDescriptor(context, extent, _format, slots),
+    final slots = WindowsPlugin.resizeGpuTexture(
+      textureId,
+      width,
+      height,
+      _gpuSlotCount,
     );
-    await _channel.invokeMethod<void>('releaseRetiredSlots', {
-      'textureId': textureId,
-    });
+    await _session.setVulkanBorrowedTextureTarget(
+      _borrowedDescriptor(_getVulkanContext(), extent, _format, slots),
+    );
+    WindowsPlugin.releaseRetiredSlots(textureId);
   }
 
   /// Sizes the SurfaceProducer's buffers and the swapchain. Flutter may hand
@@ -364,15 +319,31 @@ final class MapRenderer {
   Future<void> _resizeSurface(LogicalExtent extent) async {
     if (_disposed) return;
     final (width, height) = _physicalSize(extent);
-    final result = (await _channel.invokeMapMethod<String, int?>(
-      'resizeSurfaceTexture',
-      {'textureId': textureId, 'width': width, 'height': height},
-    ))!;
-    if (result['oldSurface'] case final int old) {
-      await _replaceSurface(result['surface']!, old, extent: extent);
+    final (surface, oldSurface) = AndroidPlugin.resizeSurfaceTexture(
+      textureId,
+      width,
+      height,
+    );
+    if (oldSurface != null) {
+      await _replaceSurface(surface, oldSurface, extent: extent);
     } else {
       await _session.resize(extent);
     }
+  }
+
+  /// Flutter recreated the Surface, e.g. when the app returned from the
+  /// background: rendering moves there and resumes.
+  Future<void> _onSurfaceChanged(int surface, int oldSurface) async {
+    if (_disposed) {
+      // Nothing presents to the old surface anymore.
+      AndroidPlugin.releaseSurface(oldSurface);
+      return;
+    }
+    await _onGpuQueue(() async {
+      await _replaceSurface(surface, oldSurface);
+      _surfaceAvailable = true;
+      _demandFrame();
+    });
   }
 
   /// Moves the session to [surface] and releases [oldSurface] once it no
@@ -382,18 +353,18 @@ final class MapRenderer {
     int oldSurface, {
     LogicalExtent? extent,
   }) async {
-    if (_disposed) return;
+    if (_disposed) {
+      AndroidPlugin.releaseSurface(oldSurface);
+      return;
+    }
     await _session.setVulkanSurfaceTarget(
       VulkanSurfaceDescriptor(
         extent: extent ?? _extent,
-        context: await _getVulkanContext(),
+        context: _getVulkanContext(),
         surface: BigInt.from(surface).toUnsigned(64),
       ),
     );
-    await _channel.invokeMethod<void>('releaseSurface', {
-      'textureId': textureId,
-      'surface': oldSurface,
-    });
+    AndroidPlugin.releaseSurface(oldSurface);
   }
 
   /// Arms a demand that renders the map's next update, and waits for one
@@ -465,10 +436,7 @@ final class MapRenderer {
       if (frame == null) return;
       try {
         final slot = frame.getVulkanTexture().withView((view) => view.slot);
-        await _channel.invokeMethod<void>('presentGpuTexture', {
-          'textureId': textureId,
-          'slot': slot,
-        });
+        WindowsPlugin.presentGpuTexture(textureId, slot);
         _showFrame(projection, extentGeneration);
         shown = true;
       } finally {
@@ -490,13 +458,13 @@ final class MapRenderer {
     try {
       final image = await _session.readTexture();
       if (_disposed) return;
-      await _channel.invokeMethod<void>('updateTexture', {
-        'textureId': textureId,
-        'width': image.info.width,
-        'height': image.info.height,
-        'stride': image.info.stride,
-        'pixels': image.data,
-      });
+      WindowsPlugin.updatePixelTexture(
+        textureId,
+        width: image.info.width,
+        height: image.info.height,
+        stride: image.info.stride,
+        pixels: image.data,
+      );
       _showFrame(projection, extentGeneration);
       shown = true;
     } on MaplibreException catch (error) {
@@ -550,7 +518,6 @@ final class MapRenderer {
   Future<void> dispose() async {
     if (_disposed) return;
     _disposed = true;
-    _renderers.remove(textureId);
     // A frame in presentation is released before the session goes.
     await _gpuQueue;
     var quarantined = false;
@@ -562,10 +529,11 @@ final class MapRenderer {
     _session.close();
     await _map.close();
     await _runtime.close();
-    await _channel.invokeMethod<void>('disposeTexture', {
-      'textureId': textureId,
+    if (_surfaceTexture case final texture?) {
       // A swapchain kept until process exit needs its VkSurfaceKHR as long.
-      'keepSurface': quarantined,
-    });
+      AndroidPlugin.disposeTexture(texture, keepSurface: quarantined);
+    } else {
+      WindowsPlugin.disposeTexture(textureId);
+    }
   }
 }
