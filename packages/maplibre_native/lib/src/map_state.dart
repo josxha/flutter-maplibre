@@ -378,7 +378,9 @@ class MapLibreMapStateNative extends MapLibreMapState {
       mln.CameraDelta(
         offset: gestures.pan && pan != Offset.zero ? _screenPoint(pan) : null,
         scale: zooms ? scale : null,
-        bearing: rotates ? rotation * 180 / pi : null,
+        // A clockwise twist is a positive rotation in Flutter and turns the
+        // map clockwise, which lowers the bearing.
+        bearing: rotates ? -rotation * 180 / pi : null,
         anchor: zooms || rotates ? _screenPoint(details.localFocalPoint) : null,
         gesturePhase: mln.GesturePhase.update,
       ),
