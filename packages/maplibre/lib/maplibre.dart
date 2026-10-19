@@ -45,7 +45,6 @@ export 'package:maplibre_platform_interface/maplibre_platform_interface.dart'
         OfflineManager,
         OfflineRegion,
         PermissionManager,
-        QueriedLayer,
         RasterDemCustomEncoding,
         RasterDemEncoding,
         RasterDemMapboxEncoding,

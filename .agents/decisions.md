@@ -71,6 +71,15 @@ Each entry: the decision, then why.
   isolate.** Frame demands use `ifNeeded | waitForUpdate` (plus `present` on
   Android), so idle maps don't render.
 
+## Public API
+
+- **Feature queries are async on every platform, and there is no
+  `queryLayers`.** The C API only queries asynchronously, and its features
+  carry their source and source layer but not their style layer, so
+  `RenderedFeature` has `sourceId` and `sourceLayer`, and layer membership is
+  queried with `layerIds`. The webview's `*Async` overloads went with the
+  webview package.
+
 ## Gestures
 
 - **Gestures are recognized in Dart and applied as camera deltas.** A
@@ -96,8 +105,7 @@ Each entry: the decision, then why.
 
 ## Known gaps
 
-- Missing on native: globe projection, user location and permissions, and
-  feature queries (the C API only has async queries).
+- Missing on native: globe projection, user location and permissions.
 - The Dart binding lacks `queue_lock`. The Python binding has it.
 - The binding's build hook takes one local install prefix and rejects other
   targets, so it can't pick a preset per target (needed for multi-ABI

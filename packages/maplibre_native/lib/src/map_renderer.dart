@@ -93,6 +93,18 @@ final class MapRenderer {
   /// The map, for camera, style, and projection calls.
   MapHandle get map => _map;
 
+  /// Queries the features rendered at [geometry], in logical pixels. The
+  /// C API answers asynchronously from the session's latest frame.
+  Future<List<QueriedFeature>> queryRenderedFeatures(
+    RenderedQueryGeometry geometry, {
+    List<String>? layerIds,
+  }) => _session.queryRenderedFeatures(
+    geometry,
+    options: layerIds == null
+        ? null
+        : RenderedFeatureQueryOptions(layerIds: layerIds),
+  );
+
   /// The current logical extent of the map.
   LogicalExtent get extent => _pendingExtent ?? _extent;
 

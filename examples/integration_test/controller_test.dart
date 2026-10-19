@@ -288,7 +288,7 @@ void test() {
     });
 
     group('feature queries', () {
-      testWidgets('queryLayers GeoJSON', (tester) async {
+      testWidgets('featuresAtPoint reports GeoJSON sources', (tester) async {
         final ctrlCompleter = Completer<MapController>();
         final styleCompleter = Completer<StyleController>();
         await tester.pumpWidget(
@@ -326,22 +326,18 @@ void test() {
             paint: {'circle-radius': 10, 'circle-color': '#FF0000'},
           ),
         );
-        const expectedPoint = QueriedLayer(
-          layerId: pointLayerId,
-          sourceId: pointSourceId,
-          sourceLayer: null,
-        );
         await tester.pump(const Duration(seconds: 2));
 
         final size = tester.getSize(find.byType(MapLibreMap));
         final centerScreen = Offset(size.width / 2, size.height / 2);
 
-        var layers = ctrl.queryLayers(Offset.zero);
-        expect(layers, isEmpty);
+        var features = await ctrl.featuresAtPoint(Offset.zero);
+        expect(features, isEmpty);
 
-        layers = ctrl.queryLayers(centerScreen);
-        expect(layers, hasLength(1));
-        expect(layers.first, expectedPoint);
+        features = await ctrl.featuresAtPoint(centerScreen);
+        expect(features, hasLength(1));
+        expect(features.first.sourceId, pointSourceId);
+        expect(features.first.sourceLayer, isNull);
 
         const polygonSourceId = 'polygon_source';
         await style.addSource(
@@ -371,20 +367,23 @@ void test() {
             paint: {'fill-color': '#00FF00'},
           ),
         );
-        const expectedPolygon = QueriedLayer(
-          layerId: polygonLayerId,
-          sourceId: polygonSourceId,
-          sourceLayer: null,
-        );
-
         await tester.pump(const Duration(seconds: 2));
 
-        layers = ctrl.queryLayers(centerScreen);
-        expect(layers, hasLength(2));
-        expect(layers, containsAll([expectedPoint, expectedPolygon]));
+        features = await ctrl.featuresAtPoint(centerScreen);
+        expect(features.map((feature) => feature.sourceId).toSet(), {
+          pointSourceId,
+          polygonSourceId,
+        });
+        features = await ctrl.featuresAtPoint(
+          centerScreen,
+          layerIds: [polygonLayerId],
+        );
+        expect(features.single.sourceId, polygonSourceId);
       });
 
-      testWidgets('queryLayers MVT', (tester) async {
+      testWidgets('featuresAtPoint reports vector source layers', (
+        tester,
+      ) async {
         final ctrlCompleter = Completer<MapController>();
         final styleCompleter = Completer<StyleController>();
         await tester.pumpWidget(
@@ -402,14 +401,15 @@ void test() {
         await styleCompleter.future;
         await tester.pump(const Duration(seconds: 2));
 
-        const oceanExpected = QueriedLayer(
-          layerId: 'Water',
-          sourceId: 'maptiler_planet',
-          sourceLayer: 'water',
+        final features = await ctrl.featuresAtPoint(
+          Offset.zero,
+          layerIds: ['Water'],
         );
-        final layers = ctrl.queryLayers(Offset.zero);
-        expect(layers, hasLength(1));
-        expect(layers.first, oceanExpected);
+        expect(features, isNotEmpty);
+        expect(
+          features.map((feature) => (feature.sourceId, feature.sourceLayer)),
+          everyElement(('maptiler_planet', 'water')),
+        );
       });
 
       testWidgets('featuresAtPoint', (tester) async {
@@ -480,9 +480,9 @@ void test() {
         await tester.pump(const Duration(seconds: 1));
         final size = tester.getSize(find.byType(MapLibreMap));
         final centerScreen = Offset(size.width / 2, size.height / 2);
-        var features = ctrl.featuresAtPoint(Offset.zero);
+        var features = await ctrl.featuresAtPoint(Offset.zero);
         expect(features, isEmpty);
-        features = ctrl.featuresAtPoint(centerScreen);
+        features = await ctrl.featuresAtPoint(centerScreen);
         expect(features, hasLength(2));
         final pointFeature = features.firstWhere(
           (f) => f.id == 1 || f.id == '1',
@@ -494,11 +494,14 @@ void test() {
         );
         expect(polygonFeature.properties['poly'], 'gon');
 
-        features = ctrl.featuresAtPoint(centerScreen, layerIds: [pointLayerId]);
+        features = await ctrl.featuresAtPoint(
+          centerScreen,
+          layerIds: [pointLayerId],
+        );
         expect(features, hasLength(1));
         expect(features.first.id, isIn([1, '1']));
         expect(features.first.properties['foo'], 'bar');
-        features = ctrl.featuresAtPoint(
+        features = await ctrl.featuresAtPoint(
           centerScreen,
           layerIds: [polygonLayerId],
         );
@@ -514,14 +517,14 @@ void test() {
           ),
         );
         await tester.pump(const Duration(seconds: 1));
-        features = ctrl.featuresAtPoint(centerScreen);
+        features = await ctrl.featuresAtPoint(centerScreen);
         expect(features, hasLength(3));
-        features = ctrl.featuresAtPoint(
+        features = await ctrl.featuresAtPoint(
           centerScreen,
           layerIds: [pointLayerId, pointLayer2Id],
         );
         expect(features, hasLength(2));
-        features = ctrl.featuresAtPoint(centerScreen, layerIds: []);
+        features = await ctrl.featuresAtPoint(centerScreen, layerIds: []);
         expect(features, isEmpty);
       });
 
@@ -616,10 +619,12 @@ void test() {
         );
         await tester.pump(const Duration(seconds: 1));
         final size = tester.getSize(find.byType(MapLibreMap));
-        var features = ctrl.featuresInRect(const Rect.fromLTWH(0, 0, 10, 10));
+        var features = await ctrl.featuresInRect(
+          const Rect.fromLTWH(0, 0, 10, 10),
+        );
         expect(features, isEmpty);
         final pointScreen = Offset(size.width / 2, size.height / 2);
-        features = ctrl.featuresInRect(
+        features = await ctrl.featuresInRect(
           Rect.fromCenter(center: pointScreen, width: 2, height: 2),
         );
         expect(features, hasLength(2));
@@ -637,7 +642,7 @@ void test() {
         final lineEndScreen = ctrl.toScreenLocation(
           const Geographic(lon: 0.11, lat: 0.11),
         );
-        features = ctrl.featuresInRect(
+        features = await ctrl.featuresInRect(
           Rect.fromPoints(lineStartScreen, lineEndScreen),
         );
         // FIXME: blocked on https://github.com/josxha/flutter-maplibre/issues/317
@@ -645,7 +650,7 @@ void test() {
         //   features.firstWhere((f) => f.id == 2 || f.id == '2').properties['line'],
         //   'string',
         // );
-        features = ctrl.featuresInRect(
+        features = await ctrl.featuresInRect(
           Rect.fromLTWH(0, 0, size.width, size.height),
         );
         expect(features, hasLength(3));
@@ -665,7 +670,7 @@ void test() {
         );
         expect(polygonFeature2.properties['poly'], 'gon');
 
-        features = ctrl.featuresInRect(
+        features = await ctrl.featuresInRect(
           Rect.fromLTWH(0, 0, size.width, size.height),
           layerIds: [pointLayerId, lineLayerId],
         );
@@ -680,7 +685,7 @@ void test() {
           (f) => f.id == 2 || f.id == '2',
         );
         expect(lineFeature2.properties['line'], 'string');
-        features = ctrl.featuresInRect(
+        features = await ctrl.featuresInRect(
           Rect.fromLTWH(0, 0, size.width, size.height),
           layerIds: [],
         );

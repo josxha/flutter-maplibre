@@ -5,12 +5,19 @@
 - Removed `maplibre_android`, `maplibre_ios` and `maplibre_webview`. `maplibre`
   now uses `maplibre_web` in the browser and `maplibre_native`, built on the
   MapLibre Native C API, on every other platform. `maplibre_native` renders on
-  Windows so far; on Android, iOS, Linux and macOS creating a map throws an
+  Windows and Android so far; on iOS, Linux and macOS creating a map throws an
   `UnsupportedError` for now.
 - Removed the `MapOptions` properties of the removed packages:
   `androidMode`, `androidTextureMode`, `androidTranslucentTextureSurface`,
   `androidForegroundLoadColor` and `webviewDebugMode`, and the
   `AndroidPlatformViewMode` enum.
+- `MapController.featuresAtPoint` and `MapController.featuresInRect` return a
+  `Future`, because MapLibre Native answers feature queries asynchronously.
+- Removed `MapController.queryLayers` and `QueriedLayer`. Use
+  `featuresAtPoint` with `layerIds` to test layers, and the new
+  `RenderedFeature.sourceId` and `RenderedFeature.sourceLayer` for the source.
+- `RenderedFeature` equality and `hashCode` compare `id`, `sourceId` and
+  `sourceLayer`.
 
 ### Bug Fixes
 

@@ -5,25 +5,32 @@ import 'shared/mocks.dart';
 
 void main() {
   group('Model Classes', () {
-    test('QueriedLayer', () {
-      const o = QueriedLayer(
-        layerId: 'layerId',
+    test('RenderedFeature', () {
+      const o = RenderedFeature(
+        id: 1,
+        properties: {'name': 'feature'},
         sourceId: 'sourceId',
         sourceLayer: 'sourceLayer',
       );
-      final o2 = QueriedLayer(
-        layerId: o.layerId,
+      final o2 = RenderedFeature(
+        id: o.id,
+        properties: const {'name': 'other properties'},
         sourceId: o.sourceId,
         sourceLayer: o.sourceLayer,
+      );
+      const other = RenderedFeature(
+        id: 1,
+        properties: {},
+        sourceId: 'otherSource',
       );
 
       expect(o, equals(o2));
       expect(o.hashCode, equals(o2.hashCode));
+      expect(o, isNot(equals(other)));
 
       final oString = o.toString();
-      expect(oString, contains(o.layerId));
-      expect(oString, contains(o.sourceId));
-      expect(oString, contains(o.sourceLayer));
+      expect(oString, contains('sourceId'));
+      expect(oString, contains('sourceLayer'));
     });
     test('MapGestures', () {
       const all = MapGestures.all();

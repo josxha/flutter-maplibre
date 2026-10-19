@@ -843,27 +843,60 @@ class MapLibreMapStateNative extends MapLibreMapState {
   }
 
   @override
-  List<QueriedLayer> queryLayers(Offset screenLocation) =>
-      throw UnimplementedError(
-        'queryLayers is synchronous, but the MapLibre Native C API only '
-        'queries rendered features asynchronously.',
-      );
-
-  @override
-  List<RenderedFeature> featuresAtPoint(
+  Future<List<RenderedFeature>> featuresAtPoint(
     Offset point, {
     List<String>? layerIds,
-  }) => throw UnimplementedError(
-    'featuresAtPoint is synchronous, but the MapLibre Native C API only '
-    'queries rendered features asynchronously.',
+  }) => _queryRenderedFeatures(
+    mln.renderedQueryGeometryPoint(_screenPoint(point)),
+    layerIds,
   );
 
   @override
-  List<RenderedFeature> featuresInRect(Rect rect, {List<String>? layerIds}) =>
-      throw UnimplementedError(
-        'featuresInRect is synchronous, but the MapLibre Native C API only '
-        'queries rendered features asynchronously.',
-      );
+  Future<List<RenderedFeature>> featuresInRect(
+    Rect rect, {
+    List<String>? layerIds,
+  }) => _queryRenderedFeatures(
+    mln.renderedQueryGeometryBox(
+      mln.ScreenBox(
+        min: _screenPoint(rect.topLeft),
+        max: _screenPoint(rect.bottomRight),
+      ),
+    ),
+    layerIds,
+  );
+
+  Future<List<RenderedFeature>> _queryRenderedFeatures(
+    mln.RenderedQueryGeometry geometry,
+    List<String>? layerIds,
+  ) async {
+    final renderer = _renderer;
+    // No layers to query matches nothing, as on web.
+    if (renderer == null || (layerIds != null && layerIds.isEmpty)) {
+      return const [];
+    }
+    final features = await renderer.queryRenderedFeatures(
+      geometry,
+      layerIds: layerIds,
+    );
+    return [
+      for (final queried in features)
+        if (jsonDecode(utf8.decode(queried.feature))
+            case final Map<String, Object?> feature)
+          RenderedFeature(
+            id: feature['id'],
+            properties: switch (feature['properties']) {
+              final Map<String, Object?> properties => properties,
+              _ => const {},
+            },
+            geometry: switch (feature['geometry']) {
+              final Map<String, Object?> geometry => geometry,
+              _ => null,
+            },
+            sourceId: queried.sourceId,
+            sourceLayer: queried.sourceLayerId,
+          ),
+    ];
+  }
 
   @override
   Future<void> enableLocation({

@@ -15,7 +15,7 @@ export 'src/offline/offline_region.dart';
 export 'src/options/map_options.dart';
 export 'src/permission_manager.dart';
 export 'src/platform_interface.dart';
-export 'src/queried_layer.dart';
+export 'src/rendered_feature.dart';
 export 'src/style/style.dart';
 export 'src/style_controller.dart';
 export 'src/utils.dart';

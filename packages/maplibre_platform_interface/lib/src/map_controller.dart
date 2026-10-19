@@ -97,10 +97,6 @@ abstract interface class MapController {
   /// The smallest bounding box that includes the visible region.
   LngLatBounds getVisibleRegion();
 
-  /// Queries the map for layers containing rendered features which intersect
-  /// with a given [screenLocation] measured in logical pixels.
-  List<QueriedLayer> queryLayers(Offset screenLocation);
-
   /// Returns an array of rendered map features that intersect with a given
   /// screen location measured in logical pixels.
   ///
@@ -116,7 +112,10 @@ abstract interface class MapController {
   //
   // [filter] is an array of filter expressions. If provided, only features
   // that match all of the filters will be returned.
-  List<RenderedFeature> featuresAtPoint(Offset point, {List<String>? layerIds});
+  Future<List<RenderedFeature>> featuresAtPoint(
+    Offset point, {
+    List<String>? layerIds,
+  });
 
   /// Returns an array of rendered map features that intersect with a given
   /// on-screen rectangle measured in logical pixels.
@@ -133,7 +132,10 @@ abstract interface class MapController {
   //
   // [filter] is an array of filter expressions. If provided, only features
   // that match all of the filters will be returned.
-  List<RenderedFeature> featuresInRect(Rect rect, {List<String>? layerIds});
+  Future<List<RenderedFeature>> featuresInRect(
+    Rect rect, {
+    List<String>? layerIds,
+  });
 
   /// Show the user location on the map
   Future<void> enableLocation({

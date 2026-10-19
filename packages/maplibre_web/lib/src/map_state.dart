@@ -421,66 +421,43 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   }
 
   @override
-  List<RenderedFeature> featuresAtPoint(
+  Future<List<RenderedFeature>> featuresAtPoint(
     Offset point, {
     List<String>? layerIds,
-  }) {
-    final features = _map
-        .queryRenderedFeatures(
-          point.toJsPoint(),
-          interop.QueryRenderedFeaturesOptions(
-            layers: layerIds?.map((l) => l.toJS).toList(growable: false).toJS,
-          ),
-        )
-        .toDart;
-    return features
-        .map((f) {
-          return RenderedFeature(
-            id: f.id.dartify(),
-            properties: f.properties.asStringMap() ?? {},
-            geometry: f.geometry.asStringMap(),
-          );
-        })
-        .toList(growable: false);
-  }
+  }) async => _renderedFeatures(
+    _map.queryRenderedFeatures(point.toJsPoint(), _queryOptions(layerIds)),
+  );
 
   @override
-  List<RenderedFeature> featuresInRect(Rect rect, {List<String>? layerIds}) {
-    final features = _map
-        .queryRenderedFeaturesRect(
-          [rect.bottomLeft.toJsPoint(), rect.topRight.toJsPoint()].toJS,
-          interop.QueryRenderedFeaturesOptions(
-            layers: layerIds?.map((l) => l.toJS).toList(growable: false).toJS,
-          ),
-        )
-        .toDart;
-    return features
-        .map((f) {
-          return RenderedFeature(
-            id: f.id.dartify(),
-            properties: f.properties.asStringMap() ?? {},
-            geometry: f.geometry.asStringMap(),
-          );
-        })
-        .toList(growable: false);
-  }
+  Future<List<RenderedFeature>> featuresInRect(
+    Rect rect, {
+    List<String>? layerIds,
+  }) async => _renderedFeatures(
+    _map.queryRenderedFeaturesRect(
+      [rect.bottomLeft.toJsPoint(), rect.topRight.toJsPoint()].toJS,
+      _queryOptions(layerIds),
+    ),
+  );
 
-  @override
-  List<QueriedLayer> queryLayers(Offset screenLocation) {
-    final features = _map.queryRenderedFeatures(
-      screenLocation.toJsPoint(),
-      null,
-    );
-    return features.toDart
-        .map(
-          (e) => QueriedLayer(
-            layerId: e.layer.id,
-            sourceId: e.source,
-            sourceLayer: e.sourceLayer,
-          ),
-        )
-        .toList(growable: false);
-  }
+  static interop.QueryRenderedFeaturesOptions _queryOptions(
+    List<String>? layerIds,
+  ) => interop.QueryRenderedFeaturesOptions(
+    layers: layerIds?.map((l) => l.toJS).toList(growable: false).toJS,
+  );
+
+  static List<RenderedFeature> _renderedFeatures(
+    JSArray<interop.MapGeoJSONFeature> features,
+  ) => features.toDart
+      .map(
+        (f) => RenderedFeature(
+          id: f.id.dartify(),
+          properties: f.properties.asStringMap() ?? {},
+          geometry: f.geometry.asStringMap(),
+          sourceId: f.source,
+          sourceLayer: f.sourceLayer,
+        ),
+      )
+      .toList(growable: false);
 
   JSAny _prepareStyleString(String style) {
     final trimmed = style.trim();
