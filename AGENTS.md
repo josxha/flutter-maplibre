@@ -33,7 +33,11 @@ one target per prefix, so build Android one ABI at a time
 
 - Maps render only through Flutter's texture registry and the `Texture`
   widget, never through platform views.
+- Never use method channels. Dart calls native code through ffigen (C/C++)
+  or jnigen (Kotlin/Java) bindings.
 - Never edit the submodule. Note API gaps in `.agents/decisions.md` instead.
 - Use conventional commits (`feat(native): …`, `fix: …`, `ci: …`).
 - Read `.agents/decisions.md` before changing rendering, threading, or the
-  native build. Add an entry when you make a decision of that kind.
+  native build.
+- Keep this file and `.agents/decisions.md` up to date in the same commit as
+  the change: new commands, rules, layout, decisions, and known gaps.
