@@ -28,8 +28,13 @@ struct SharedSlot {
 
 // A Flutter GPU surface texture that shows MapLibre frames without a CPU
 // copy. MapLibre renders into a ring of shared D3D11 textures through Vulkan;
-// each presented frame is copied on the GPU into one of two textures that
+// each presented frame is copied on the GPU into one of three textures that
 // Flutter opens through a DXGI shared handle.
+//
+// Flutter's engine takes no keyed mutex or fence for such a texture, so the
+// copy cannot wait for Flutter's reads. Instead it never targets the texture
+// Flutter shows or fetched last: the texture it overwrites was last fetched
+// at least one Flutter frame earlier.
 class GpuTexture {
  public:
   // The VkFormat and DXGI format of every image.
@@ -103,8 +108,12 @@ class GpuTexture {
 
   // Guards what the raster thread reads in Descriptor.
   std::mutex mutex_;
-  PresentTexture present_[2];
+  static constexpr int kPresentCount = 3;
+  PresentTexture present_[kPresentCount];
+  // The texture of the latest presented frame.
   int front_ = -1;
+  // The texture Flutter fetched last, which it may still be reading.
+  int fetched_ = -1;
   FlutterDesktopGpuSurfaceDescriptor descriptor_{};
   // Present textures of earlier sizes, kept until Flutter has had a frame to
   // move on to the current ones.

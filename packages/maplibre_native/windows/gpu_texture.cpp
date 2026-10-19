@@ -237,7 +237,7 @@ void GpuTexture::DestroySlot(SharedSlot* slot) {
 
 bool GpuTexture::CreatePresentTextures(uint32_t width, uint32_t height,
                                        std::string* error) {
-  PresentTexture created[2];
+  PresentTexture created[kPresentCount];
   for (auto& present : created) {
     D3D11_TEXTURE2D_DESC desc{};
     desc.Width = width;
@@ -261,13 +261,14 @@ bool GpuTexture::CreatePresentTextures(uint32_t width, uint32_t height,
     }
   }
   std::lock_guard<std::mutex> lock(mutex_);
-  for (int i = 0; i < 2; ++i) {
+  for (int i = 0; i < kPresentCount; ++i) {
     if (present_[i].texture) {
       retired_present_.emplace_back(0, std::move(present_[i]));
     }
     present_[i] = std::move(created[i]);
   }
   front_ = -1;
+  fetched_ = -1;
   return true;
 }
 
@@ -301,7 +302,8 @@ bool GpuTexture::Present(uint32_t slot, std::string* error) {
   int back;
   {
     std::lock_guard<std::mutex> lock(mutex_);
-    back = front_ == 0 ? 1 : 0;
+    back = 0;
+    while (back == front_ || back == fetched_) ++back;
   }
   context_->CopyResource(present_[back].texture.Get(),
                          slots_[slot].texture.Get());
@@ -330,6 +332,7 @@ const FlutterDesktopGpuSurfaceDescriptor* GpuTexture::Descriptor(
     size_t width, size_t height) {
   std::lock_guard<std::mutex> lock(mutex_);
   if (front_ < 0) return nullptr;
+  fetched_ = front_;
   D3D11_TEXTURE2D_DESC desc{};
   present_[front_].texture->GetDesc(&desc);
   descriptor_.handle = present_[front_].handle;
