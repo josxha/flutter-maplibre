@@ -1,0 +1,4 @@
+# The certificate verifier is vendored verbatim from maplibre-native-ffi, so it
+# keeps upstream's formatting.
+[src/main/kotlin/org/maplibre/nativeffi/**.kt]
+ktlint_standard = disabled

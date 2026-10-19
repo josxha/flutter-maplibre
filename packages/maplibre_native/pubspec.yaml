@@ -29,9 +29,11 @@ flutter:
   plugin:
     implements: maplibre
     platforms:
-      # Only Windows renders so far. The other platforms register the Dart
+      # Windows and Android render. The other platforms register the Dart
       # plugin, which reports them as unsupported when a map is created.
       android:
+        package: com.github.josxha.maplibre_native
+        pluginClass: MaplibreNativePlugin
         dartPluginClass: MapLibrePluginNative
         dartFileName: 'src/maplibre_plugin.dart'
       ios:

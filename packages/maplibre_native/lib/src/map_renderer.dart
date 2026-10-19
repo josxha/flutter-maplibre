@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -16,9 +17,56 @@ const _gpuSlotCount = 3;
 /// transition.
 const _vkImageLayoutGeneral = 1;
 
+/// How frames reach Flutter.
+enum _Target {
+  /// Windows: a ring of D3D11 textures shared with Flutter, without a CPU
+  /// copy.
+  gpuTexture,
+
+  /// Windows: CPU readback into a pixel buffer texture, where textures cannot
+  /// be shared.
+  pixelBuffer,
+
+  /// Android: a Vulkan swapchain on the Surface of a Flutter SurfaceProducer.
+  surface,
+}
+
+/// Renderers by texture id, for the plugin's callbacks.
+final _renderers = <int, MapRenderer>{};
+
+Future<Object?> _handlePluginCall(MethodCall call) async {
+  final arguments = call.arguments as Map<Object?, Object?>;
+  final renderer = _renderers[arguments['textureId']];
+  switch (call.method) {
+    case 'surfaceCleanup':
+      // Flutter releases the Surface, e.g. in the background. Rendering
+      // resumes on the next surfaceChanged.
+      renderer?._surfaceAvailable = false;
+    case 'surfaceChanged':
+      final oldSurface = arguments['oldSurface']! as int;
+      if (renderer == null) {
+        // The renderer is gone, so nothing presents to the old surface.
+        await _channel.invokeMethod<void>('releaseSurface', {
+          'surface': oldSurface,
+        });
+        return null;
+      }
+      await renderer._onGpuQueue(() async {
+        await renderer._replaceSurface(
+          arguments['surface']! as int,
+          oldSurface,
+        );
+        renderer
+          .._surfaceAvailable = true
+          .._demandFrame();
+      });
+  }
+  return null;
+}
+
 VulkanContextDescriptor? _vulkanContext;
 
-/// The Vulkan device that the Windows plugin created on Flutter's GPU.
+/// The Vulkan device that the platform plugin created for MapLibre.
 Future<VulkanContextDescriptor> _getVulkanContext() async {
   if (_vulkanContext case final context?) return context;
   final values = (await _channel.invokeMapMethod<String, int>(
@@ -38,10 +86,14 @@ Future<VulkanContextDescriptor> _getVulkanContext() async {
 
 /// Renders one MapLibre map into a Flutter texture.
 ///
-/// The map renders on its session's core worker through Vulkan. When the GPU
-/// shares textures between Vulkan and D3D11, the session renders into a ring
-/// of shared textures that Flutter composites without a CPU copy. Otherwise
-/// each frame is read back as RGBA8 into a pixel buffer texture.
+/// The map renders on its session's core worker through Vulkan.
+///
+/// - On Windows, when the GPU shares textures between Vulkan and D3D11, the
+///   session renders into a ring of shared textures that Flutter composites
+///   without a CPU copy. Otherwise each frame is read back as RGBA8 into a
+///   pixel buffer texture.
+/// - On Android, the session presents to a Vulkan swapchain on the Surface of
+///   a Flutter SurfaceProducer texture.
 final class MapRenderer {
   MapRenderer._(
     this.textureId,
@@ -49,20 +101,21 @@ final class MapRenderer {
     this._map,
     this._session,
     this._extent,
-    this._format, {
-    required this.isZeroCopy,
+    this._target, {
+    this._format = 0,
   });
 
   /// The Flutter texture id to show in a `Texture` widget.
   final int textureId;
 
-  /// Whether frames reach Flutter without a CPU copy.
-  final bool isZeroCopy;
-
   final RuntimeHandle _runtime;
   final MapHandle _map;
   final RenderSessionHandle _session;
+  final _Target _target;
   final int _format;
+
+  /// Whether frames reach Flutter without a CPU copy.
+  bool get isZeroCopy => _target != _Target.pixelBuffer;
 
   var _nextToken = 1;
   BigInt? _pendingToken;
@@ -70,6 +123,10 @@ final class MapRenderer {
   LogicalExtent _extent;
   LogicalExtent? _pendingExtent;
   var _resizing = false;
+
+  /// Whether the Android Surface accepts frames. Flutter takes it away while
+  /// the app is in the background.
+  var _surfaceAvailable = true;
 
   /// Serializes frame presentation and target replacement, because a frame
   /// must not be acquired while the session replaces its target.
@@ -91,6 +148,7 @@ final class MapRenderer {
     String? styleUrl,
     void Function(RuntimeEvent event)? onEvent,
   }) async {
+    _channel.setMethodCallHandler(_handlePluginCall);
     final context = await _getVulkanContext();
 
     // Wakes can arrive before the renderer exists; their work waits for the
@@ -107,6 +165,34 @@ final class MapRenderer {
       frameWake: Wake(callback: () => renderer?._drainFrames()),
     );
     final (width, height) = _physicalSize(extent);
+
+    if (Platform.isAndroid) {
+      final texture = (await _channel.invokeMapMethod<String, int>(
+        'createSurfaceTexture',
+        {'width': width, 'height': height},
+      ))!;
+      final attachment = map.attachVulkanSurface(
+        VulkanSurfaceDescriptor(
+          extent: extent,
+          context: context,
+          surface: BigInt.from(texture['surface']!).toUnsigned(64),
+        ),
+        options,
+      );
+      return _finishCreate(
+        renderer = MapRenderer._(
+          texture['textureId']!,
+          runtime,
+          map,
+          attachment.session,
+          extent,
+          _Target.surface,
+        ),
+        attachment,
+        onEvent,
+      );
+    }
+
     final gpu = (await _channel.invokeMapMethod<String, Object?>(
       'createGpuTexture',
       {'width': width, 'height': height, 'slotCount': _gpuSlotCount},
@@ -139,20 +225,33 @@ final class MapRenderer {
       );
     }
 
-    final created = renderer = MapRenderer._(
-      textureId,
-      runtime,
-      map,
-      attachment.session,
-      extent,
-      format,
-      isZeroCopy: format != 0,
-    )..onEvent = onEvent;
+    return _finishCreate(
+      renderer = MapRenderer._(
+        textureId,
+        runtime,
+        map,
+        attachment.session,
+        extent,
+        format != 0 ? _Target.gpuTexture : _Target.pixelBuffer,
+        format: format,
+      ),
+      attachment,
+      onEvent,
+    );
+  }
+
+  static Future<MapRenderer> _finishCreate(
+    MapRenderer renderer,
+    RenderSessionAttachment attachment,
+    void Function(RuntimeEvent event)? onEvent,
+  ) async {
+    renderer.onEvent = onEvent;
+    _renderers[renderer.textureId] = renderer;
     await attachment.completed;
-    created
+    renderer
       .._drainEvents()
       .._demandFrame();
-    return created;
+    return renderer;
   }
 
   static VulkanBorrowedTextureDescriptor _borrowedDescriptor(
@@ -207,10 +306,13 @@ final class MapRenderer {
         final extent = _pendingExtent!;
         _pendingExtent = null;
         _extent = extent;
-        if (isZeroCopy) {
-          await _onGpuQueue(() => _replaceGpuTarget(extent));
-        } else {
-          await _session.resize(extent);
+        switch (_target) {
+          case _Target.gpuTexture:
+            await _onGpuQueue(() => _replaceGpuTarget(extent));
+          case _Target.surface:
+            await _onGpuQueue(() => _resizeSurface(extent));
+          case _Target.pixelBuffer:
+            await _session.resize(extent);
         }
       }
     } on Object catch (error) {
@@ -238,15 +340,56 @@ final class MapRenderer {
     });
   }
 
+  /// Sizes the SurfaceProducer's buffers and the swapchain. Flutter may hand
+  /// out a new Surface for the new size, which the session then moves to.
+  Future<void> _resizeSurface(LogicalExtent extent) async {
+    if (_disposed) return;
+    final (width, height) = _physicalSize(extent);
+    final result = (await _channel.invokeMapMethod<String, int?>(
+      'resizeSurfaceTexture',
+      {'textureId': textureId, 'width': width, 'height': height},
+    ))!;
+    if (result['oldSurface'] case final int old) {
+      await _replaceSurface(result['surface']!, old, extent: extent);
+    } else {
+      await _session.resize(extent);
+    }
+  }
+
+  /// Moves the session to [surface] and releases [oldSurface] once it no
+  /// longer presents there.
+  Future<void> _replaceSurface(
+    int surface,
+    int oldSurface, {
+    LogicalExtent? extent,
+  }) async {
+    if (_disposed) return;
+    await _session.setVulkanSurfaceTarget(
+      VulkanSurfaceDescriptor(
+        extent: extent ?? _extent,
+        context: await _getVulkanContext(),
+        surface: BigInt.from(surface).toUnsigned(64),
+      ),
+    );
+    await _channel.invokeMethod<void>('releaseSurface', {
+      'textureId': textureId,
+      'surface': oldSurface,
+    });
+  }
+
   /// Arms a demand that renders the map's next update, and waits for one
   /// when there is none yet.
   void _demandFrame() {
-    if (_disposed || _pendingToken != null) return;
+    if (_disposed || _pendingToken != null || !_surfaceAvailable) return;
     final token = BigInt.from(_nextToken++);
     _pendingToken = token;
     _session.requestFrame(
       FrameDemand(
-        flags: FrameDemandFlag.ifNeeded | FrameDemandFlag.waitForUpdate,
+        flags: _target == _Target.surface
+            ? FrameDemandFlag.ifNeeded |
+                  FrameDemandFlag.waitForUpdate |
+                  FrameDemandFlag.present
+            : FrameDemandFlag.ifNeeded | FrameDemandFlag.waitForUpdate,
         token: token,
         coalescingBoundary: BigInt.zero,
         timeoutNs: BigInt.zero,
@@ -269,7 +412,15 @@ final class MapRenderer {
     if (result == null) return;
     _pendingToken = null;
     if (result.disposition == RenderResult.rendered) {
-      unawaited(isZeroCopy ? _onGpuQueue(_present) : _readBack());
+      switch (_target) {
+        case _Target.gpuTexture:
+          unawaited(_onGpuQueue(_present));
+        case _Target.pixelBuffer:
+          unawaited(_readBack());
+        case _Target.surface:
+          // The session presented the frame to the Surface.
+          _demandFrame();
+      }
     } else if (result.disposition == RenderResult.targetNotReady) {
       Timer(const Duration(milliseconds: 16), _demandFrame);
     } else {
@@ -340,10 +491,12 @@ final class MapRenderer {
   Future<void> dispose() async {
     if (_disposed) return;
     _disposed = true;
+    _renderers.remove(textureId);
     // A frame in presentation is released before the session goes.
     await _gpuQueue;
+    var quarantined = false;
     try {
-      _session.abandon();
+      quarantined = _session.abandon().quarantinedResourceCount > 0;
     } on MaplibreException {
       // A session that already let go of its target has nothing to abandon.
     }
@@ -352,6 +505,8 @@ final class MapRenderer {
     await _runtime.close();
     await _channel.invokeMethod<void>('disposeTexture', {
       'textureId': textureId,
+      // A swapchain kept until process exit needs its VkSurfaceKHR as long.
+      'keepSurface': quarantined,
     });
   }
 }

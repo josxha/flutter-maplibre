@@ -23,3 +23,10 @@ dev_dependencies:
   yaml: ^3.1.2
   args: ^2.7.0
 
+
+hooks:
+  user_defines:
+    # maplibre_native renders through Vulkan on every platform it supports,
+    # while the downloaded Android library would default to OpenGL ES.
+    maplibre_native_ffi:
+      backend: vulkan

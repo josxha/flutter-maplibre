@@ -1,0 +1,23 @@
+This product includes software from the rustls-platform-verifier project
+(https://github.com/rustls/rustls-platform-verifier), licensed under the
+Apache License, Version 2.0 or the MIT license, at your option.
+
+The MapLibre Native FFI project modified that software. Changes against
+upstream `v/0.6.2` (commit 1099f161bfc5e3ac7f90aad88b1bf788e72906cb):
+
+- `android/rustls-platform-verifier/src/main/java/org/rustls/platformverifier/CertificateVerifier.kt`
+  moved to the `org.maplibre.nativeffi.internal.rustlsplatformverifier` package so
+  it can coexist with the upstream helper, and dropped its additional
+  `PKIXRevocationChecker` pass so Android's trust-manager policy decides
+  revocation.
+- `rustls-platform-verifier/src/verification/android.rs` and
+  `rustls-platform-verifier/src/tests/ffi.rs` point their JNI class descriptors
+  and exported symbol names at the package above.
+- `android/rustls-platform-verifier/build.gradle`,
+  `android/rustls-platform-verifier/proguard-rules.pro`,
+  `android/rustls-platform-verifier/src/androidTest/java/org/rustls/platformverifier/CertificateVerifierTests.kt`,
+  and `README.md` follow the same package rename.
+
+The complete modifications are published as patch files under
+`patches/rustls-platform-verifier/` in the MapLibre Native FFI source
+repository (https://github.com/maplibre/maplibre-native-ffi).
