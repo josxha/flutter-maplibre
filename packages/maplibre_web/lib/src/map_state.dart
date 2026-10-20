@@ -33,6 +33,10 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   /// The next camera move comes from a scroll wheel or double tap.
   var _nextMoveByUser = false;
 
+  /// Camera writes that only work out a gesture's target camera, and that
+  /// the camera events don't report.
+  var _silentCamera = false;
+
   /// A pointer that may open the browser's context menu went down on the
   /// map, which rotates and tilts with it instead.
   var _suppressContextMenu = false;
@@ -123,6 +127,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       _map.on(
         interop.MapEventType.moveStart,
         (interop.MapLibreEvent event) {
+          if (_silentCamera) return;
           // A gesture moves the camera in many steps but reports one move.
           if (_gestureMoving) {
             if (_gestureMoveStarted) return;
@@ -144,6 +149,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       _map.on(
         interop.MapEventType.move,
         (interop.MapLibreEvent event) {
+          if (_silentCamera) return;
           final mapCamera = MapCamera(
             center: _map.getCenter().toGeographic(),
             zoom: _map.getZoom().toDouble(),
@@ -157,7 +163,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       _map.on(
         interop.MapEventType.moveEnd,
         (interop.MapLibreEvent event) {
-          if (_gestureMoving) return;
+          if (_silentCamera || _gestureMoving) return;
           widget.onEvent?.call(const MapEventCameraIdle());
           if (!(_movementCompleter?.isCompleted ?? true)) {
             _movementCompleter?.complete(event);
@@ -525,16 +531,71 @@ class _WebGestureCamera implements GestureCameraSink {
       return;
     }
     final around = update.around;
-    _map.easeTo(
-      interop.EaseToOptions(
-        zoom: _map.getZoom() + update.zoomBy,
-        bearing: _map.getBearing() + update.rotateBy,
-        pitch: _map.getPitch() + update.pitchBy,
-        around: around == null ? null : _map.unproject(around.toJsPoint()),
-        duration: 0,
-      ),
+    if (around == null) {
+      _map.jumpTo(
+        interop.JumpToOptions(
+          zoom: _map.getZoom() + update.zoomBy,
+          bearing: _map.getBearing() + update.rotateBy,
+          pitch: _map.getPitch() + update.pitchBy,
+        ),
+      );
+      return;
+    }
+    _map.jumpTo(
+      _cameraAround(
+        around,
+        zoomBy: update.zoomBy,
+        rotateBy: update.rotateBy,
+        pitchBy: update.pitchBy,
+      ).options,
     );
   }
+
+  /// The camera after zooming, rotating and tilting by the given amounts
+  /// while the location at [around] stays there.
+  ///
+  /// GL JS's `around` drifts by hundreds of pixels on the globe. Changing the
+  /// camera first and then putting the location back with the pan step stays
+  /// exact in every projection. Those writes only work out the target and
+  /// are undone, so a step is one camera write and can be animated.
+  _WebCamera _cameraAround(
+    Offset around, {
+    double zoomBy = 0,
+    double rotateBy = 0,
+    double pitchBy = 0,
+  }) {
+    final location = _map.unproject(around.toJsPoint());
+    final before = _camera();
+    _state._silentCamera = true;
+    try {
+      _map
+        ..jumpTo(
+          interop.JumpToOptions(
+            zoom: before.zoom + zoomBy,
+            bearing: before.bearing + rotateBy,
+            pitch: before.pitch + pitchBy,
+          ),
+        )
+        ..easeTo(
+          interop.EaseToOptions(
+            center: location,
+            offset: (around - _mapCenter).toJsPoint(),
+            duration: 0,
+          ),
+        );
+      return _camera();
+    } finally {
+      _map.jumpTo(before.options);
+      _state._silentCamera = false;
+    }
+  }
+
+  _WebCamera _camera() => (
+    center: _map.getCenter(),
+    zoom: _map.getZoom(),
+    bearing: _map.getBearing(),
+    pitch: _map.getPitch(),
+  );
 
   @override
   void gestureEnd({Velocity velocity = Velocity.zero}) {
@@ -576,11 +637,15 @@ class _WebGestureCamera implements GestureCameraSink {
     Offset around, {
     Duration duration = Duration.zero,
   }) {
+    // Ends a running animation before working out the target, so that its
+    // end is reported.
+    _map.stop();
+    final target = _cameraAround(around, zoomBy: levels);
     _state._nextMoveByUser = true;
     _map.easeTo(
       interop.EaseToOptions(
-        zoom: _map.getZoom() + levels,
-        around: _map.unproject(around.toJsPoint()),
+        center: target.center,
+        zoom: target.zoom,
         duration: duration.inMilliseconds,
         essential: true,
       ),
@@ -591,6 +656,22 @@ class _WebGestureCamera implements GestureCameraSink {
     final canvas = _map.getCanvas();
     return Offset(canvas.clientWidth / 2, canvas.clientHeight / 2);
   }
+}
+
+typedef _WebCamera = ({
+  interop.LngLat center,
+  num zoom,
+  num bearing,
+  num pitch,
+});
+
+extension on _WebCamera {
+  interop.JumpToOptions get options => interop.JumpToOptions(
+    center: center,
+    zoom: zoom,
+    bearing: bearing,
+    pitch: pitch,
+  );
 }
 
 // The pan inertia of MapLibre GL JS.
