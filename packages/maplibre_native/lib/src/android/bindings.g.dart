@@ -88,9 +88,37 @@ extension type MaplibreNativeApi._(jni$_.JObject _$this)
     ).object<jni$_.JLongArray>();
   }
 
+  static final _id_eglContext = _class.staticMethodId(r'eglContext', r'()[J');
+
+  static final _eglContext =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public fun eglContext(): kotlin.LongArray`
+  /// The returned object must be released after use, by calling the [release] method.
+  static jni$_.JLongArray eglContext() {
+    final _$$classRef = _class.reference;
+    return _eglContext(
+      _$$classRef.pointer,
+      _id_eglContext.pointer,
+    ).object<jni$_.JLongArray>();
+  }
+
   static final _id_createSurfaceTexture = _class.staticMethodId(
     r'createSurfaceTexture',
-    r'(IILcom/github/josxha/maplibre_native/SurfaceListener;)[J',
+    r'(IIZLcom/github/josxha/maplibre_native/SurfaceListener;)[J',
   );
 
   static final _createSurfaceTexture =
@@ -100,7 +128,12 @@ extension type MaplibreNativeApi._(jni$_.JObject _$this)
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<
-                  (jni$_.Int32, jni$_.Int32, jni$_.Pointer<jni$_.Void>)
+                  (
+                    jni$_.Int32,
+                    jni$_.Int32,
+                    jni$_.Int32,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
                 >,
               )
             >
@@ -111,15 +144,17 @@ extension type MaplibreNativeApi._(jni$_.JObject _$this)
               jni$_.JMethodIDPtr,
               core$_.int,
               core$_.int,
+              core$_.int,
               jni$_.Pointer<jni$_.Void>,
             )
           >();
 
-  /// from: `public fun createSurfaceTexture(width: kotlin.Int, height: kotlin.Int, listener: com.github.josxha.maplibre_native.SurfaceListener): kotlin.LongArray`
+  /// from: `public fun createSurfaceTexture(width: kotlin.Int, height: kotlin.Int, opengl: kotlin.Boolean, listener: com.github.josxha.maplibre_native.SurfaceListener): kotlin.LongArray`
   /// The returned object must be released after use, by calling the [release] method.
   static jni$_.JLongArray createSurfaceTexture(
     core$_.int i,
     core$_.int i1,
+    core$_.bool z,
     SurfaceListener surfaceListener,
   ) {
     final _$$classRef = _class.reference;
@@ -129,6 +164,7 @@ extension type MaplibreNativeApi._(jni$_.JObject _$this)
       _id_createSurfaceTexture.pointer,
       i,
       i1,
+      z ? 1 : 0,
       _$surfaceListener.pointer,
     ).object<jni$_.JLongArray>();
   }
@@ -177,7 +213,7 @@ extension type MaplibreNativeApi._(jni$_.JObject _$this)
 
   static final _id_releaseSurface = _class.staticMethodId(
     r'releaseSurface',
-    r'(J)V',
+    r'(JZ)V',
   );
 
   static final _releaseSurface =
@@ -186,7 +222,7 @@ extension type MaplibreNativeApi._(jni$_.JObject _$this)
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Int64,)>,
+                jni$_.VarArgs<(jni$_.Int64, jni$_.Int32)>,
               )
             >
           >('globalEnv_CallStaticVoidMethod')
@@ -195,13 +231,19 @@ extension type MaplibreNativeApi._(jni$_.JObject _$this)
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               core$_.int,
+              core$_.int,
             )
           >();
 
-  /// from: `public fun releaseSurface(surface: kotlin.Long): kotlin.Unit`
-  static void releaseSurface(core$_.int j) {
+  /// from: `public fun releaseSurface(surface: kotlin.Long, opengl: kotlin.Boolean): kotlin.Unit`
+  static void releaseSurface(core$_.int j, core$_.bool z) {
     final _$$classRef = _class.reference;
-    _releaseSurface(_$$classRef.pointer, _id_releaseSurface.pointer, j).check();
+    _releaseSurface(
+      _$$classRef.pointer,
+      _id_releaseSurface.pointer,
+      j,
+      z ? 1 : 0,
+    ).check();
   }
 
   static final _id_disposeTexture = _class.staticMethodId(
@@ -236,6 +278,105 @@ extension type MaplibreNativeApi._(jni$_.JObject _$this)
       _id_disposeTexture.pointer,
       j,
       z ? 1 : 0,
+    ).check();
+  }
+
+  static final _id_startRenderThread = _class.staticMethodId(
+    r'startRenderThread',
+    r'(J)J',
+  );
+
+  static final _startRenderThread =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int64,)>,
+              )
+            >
+          >('globalEnv_CallStaticLongMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              core$_.int,
+            )
+          >();
+
+  /// from: `public fun startRenderThread(session: kotlin.Long): kotlin.Long`
+  static core$_.int startRenderThread(core$_.int j) {
+    final _$$classRef = _class.reference;
+    return _startRenderThread(
+      _$$classRef.pointer,
+      _id_startRenderThread.pointer,
+      j,
+    ).long;
+  }
+
+  static final _id_wakeRenderThread = _class.staticMethodId(
+    r'wakeRenderThread',
+    r'(J)V',
+  );
+
+  static final _wakeRenderThread =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int64,)>,
+              )
+            >
+          >('globalEnv_CallStaticVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              core$_.int,
+            )
+          >();
+
+  /// from: `public fun wakeRenderThread(thread: kotlin.Long): kotlin.Unit`
+  static void wakeRenderThread(core$_.int j) {
+    final _$$classRef = _class.reference;
+    _wakeRenderThread(
+      _$$classRef.pointer,
+      _id_wakeRenderThread.pointer,
+      j,
+    ).check();
+  }
+
+  static final _id_stopRenderThread = _class.staticMethodId(
+    r'stopRenderThread',
+    r'(J)V',
+  );
+
+  static final _stopRenderThread =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int64,)>,
+              )
+            >
+          >('globalEnv_CallStaticVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              core$_.int,
+            )
+          >();
+
+  /// from: `public fun stopRenderThread(thread: kotlin.Long): kotlin.Unit`
+  static void stopRenderThread(core$_.int j) {
+    final _$$classRef = _class.reference;
+    _stopRenderThread(
+      _$$classRef.pointer,
+      _id_stopRenderThread.pointer,
+      j,
     ).check();
   }
 }

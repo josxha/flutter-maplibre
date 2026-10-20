@@ -1,18 +1,25 @@
 // JNI side of the maplibre_native Android plugin: initializes the MapLibre
-// Native C library for Android, creates the Vulkan device that render
-// sessions borrow, and wraps Flutter's surfaces as Vulkan surfaces.
+// Native C library for Android and wraps Flutter's surfaces for the backend
+// the library was built with. For Vulkan it creates the device that render
+// sessions borrow and wraps surfaces as VkSurfaceKHRs. For OpenGL ES it
+// initializes EGL, wraps surfaces as EGLSurfaces, and runs one render thread
+// per map that services the map's caller-graphics-thread session.
 
 #define VK_USE_PLATFORM_ANDROID_KHR
+#include <EGL/egl.h>
+#include <EGL/eglext.h>
 #include <android/log.h>
 #include <android/native_window_jni.h>
 #include <dlfcn.h>
 #include <jni.h>
 #include <vulkan/vulkan.h>
 
+#include <condition_variable>
 #include <cstring>
 #include <map>
 #include <mutex>
 #include <string>
+#include <thread>
 #include <vector>
 
 namespace {
@@ -26,6 +33,13 @@ struct MlnDiagnostic {
 };
 using MlnAndroidInit = int32_t (*)(void* jni_env, void* context,
                                    MlnDiagnostic* out_diagnostic);
+// mln_render_session_service_driver_work from maplibre_native_c.
+using MlnServiceDriverWork = int32_t (*)(uint64_t session, size_t max_work,
+                                         size_t* out_serviced,
+                                         MlnDiagnostic* out_diagnostic);
+// mln_status values from maplibre_native_c/base.h.
+constexpr int32_t kMlnStatusOk = 0;
+constexpr int32_t kMlnStatusBusy = -7;
 
 struct Vulkan {
   VkInstance instance = VK_NULL_HANDLE;
@@ -35,10 +49,19 @@ struct Vulkan {
   uint32_t queue_family_index = 0;
 };
 
+struct Egl {
+  EGLDisplay display = EGL_NO_DISPLAY;
+  EGLConfig config = nullptr;
+};
+
 std::mutex g_mutex;
+void* g_library = nullptr;
 Vulkan g_vulkan;
 std::string g_vulkan_error;
 std::map<VkSurfaceKHR, ANativeWindow*> g_surfaces;
+Egl g_egl;
+std::string g_egl_error;
+std::map<EGLSurface, ANativeWindow*> g_egl_surfaces;
 
 bool HasExtension(const std::vector<VkExtensionProperties>& extensions,
                   const char* name) {
@@ -131,6 +154,137 @@ bool CreateVulkan(std::string* error) {
   return false;
 }
 
+EGLint ConfigAttribute(EGLConfig config, EGLint attribute) {
+  EGLint value = 0;
+  eglGetConfigAttrib(g_egl.display, config, attribute, &value);
+  return value;
+}
+
+// Initializes the default display for the rest of the process and picks an
+// RGBA8888 OpenGL ES 3 window config with depth and stencil, which sessions
+// create their dedicated contexts from. EGL is never terminated: Flutter
+// shares the display, and the C API needs it to outlive every session.
+bool CreateEgl(std::string* error) {
+  EGLDisplay display = eglGetDisplay(EGL_DEFAULT_DISPLAY);
+  if (display == EGL_NO_DISPLAY ||
+      eglInitialize(display, nullptr, nullptr) == EGL_FALSE) {
+    *error = "eglInitialize failed.";
+    return false;
+  }
+  g_egl.display = display;
+  const EGLint attributes[] = {
+      EGL_RENDERABLE_TYPE, EGL_OPENGL_ES3_BIT_KHR,
+      EGL_SURFACE_TYPE,    EGL_WINDOW_BIT,
+      EGL_RED_SIZE,        8,
+      EGL_GREEN_SIZE,      8,
+      EGL_BLUE_SIZE,       8,
+      EGL_ALPHA_SIZE,      8,
+      EGL_DEPTH_SIZE,      16,
+      EGL_STENCIL_SIZE,    8,
+      EGL_NONE,
+  };
+  EGLint count = 0;
+  eglChooseConfig(display, attributes, nullptr, 0, &count);
+  std::vector<EGLConfig> configs(count);
+  eglChooseConfig(display, attributes, configs.data(), count, &count);
+  configs.resize(count);
+  // eglChooseConfig ranks deeper color first, so take the first exact
+  // RGBA8888 config, preferring one that also offers pbuffers: a session
+  // tears down through a pbuffer when it cannot use its window surface.
+  EGLConfig fallback = nullptr;
+  for (EGLConfig config : configs) {
+    if (ConfigAttribute(config, EGL_RED_SIZE) != 8 ||
+        ConfigAttribute(config, EGL_GREEN_SIZE) != 8 ||
+        ConfigAttribute(config, EGL_BLUE_SIZE) != 8 ||
+        ConfigAttribute(config, EGL_ALPHA_SIZE) != 8) {
+      continue;
+    }
+    if (ConfigAttribute(config, EGL_SURFACE_TYPE) & EGL_PBUFFER_BIT) {
+      g_egl.config = config;
+      return true;
+    }
+    if (fallback == nullptr) fallback = config;
+  }
+  if (fallback == nullptr) {
+    *error = "No RGBA8888 OpenGL ES 3 EGL config with depth and stencil.";
+    return false;
+  }
+  g_egl.config = fallback;
+  return true;
+}
+
+// Services one caller-graphics-thread session on a thread of its own. Dart
+// wakes it whenever the session reports driver work. The C API binds the
+// session to the first thread that services it, and the session's dedicated
+// EGL context stays current there between renders, so every map has one.
+class RenderThread {
+ public:
+  RenderThread(MlnServiceDriverWork service, uint64_t session)
+      : service_(service), session_(session), thread_([this] { Run(); }) {}
+
+  // Ends the thread after the work in flight. The session was detached
+  // before, so no work is left behind.
+  ~RenderThread() {
+    {
+      std::lock_guard<std::mutex> lock(mutex_);
+      stop_ = true;
+    }
+    wake_.notify_one();
+    thread_.join();
+  }
+
+  void Wake() {
+    {
+      std::lock_guard<std::mutex> lock(mutex_);
+      pending_ = true;
+    }
+    wake_.notify_one();
+  }
+
+ private:
+  void Run() {
+    int32_t last_status = kMlnStatusOk;
+    for (;;) {
+      {
+        std::unique_lock<std::mutex> lock(mutex_);
+        wake_.wait(lock, [this] { return pending_ || stop_; });
+        if (stop_) break;
+        pending_ = false;
+      }
+      // Services everything queued. Work queued during the call wakes the
+      // thread again.
+      size_t serviced = 0;
+      MlnDiagnostic diagnostic{sizeof(MlnDiagnostic), {}};
+      const int32_t status = service_(session_, 0, &serviced, &diagnostic);
+      if (status != kMlnStatusOk && status != kMlnStatusBusy &&
+          status != last_status) {
+        __android_log_print(ANDROID_LOG_ERROR, kTag,
+                            "Servicing the render session failed (%d): %s",
+                            status, diagnostic.message);
+      }
+      last_status = status;
+    }
+    eglReleaseThread();
+  }
+
+  const MlnServiceDriverWork service_;
+  const uint64_t session_;
+  std::mutex mutex_;
+  std::condition_variable wake_;
+  bool pending_ = false;
+  bool stop_ = false;
+  // Last, so the thread starts once the fields above are initialized.
+  std::thread thread_;
+};
+
+ANativeWindow* WindowOf(JNIEnv* env, jobject surface) {
+  ANativeWindow* window = ANativeWindow_fromSurface(env, surface);
+  if (window == nullptr) {
+    ThrowIllegalState(env, "The Surface has no native window.");
+  }
+  return window;
+}
+
 jlong Handle(const void* handle) {
   return static_cast<jlong>(reinterpret_cast<intptr_t>(handle));
 }
@@ -144,6 +298,10 @@ Java_com_github_josxha_maplibre_1native_NativeBridge_nativeInit(
   void* library = dlopen("libmaplibre-native-c.so", RTLD_NOW);
   if (library == nullptr) {
     return env->NewStringUTF(dlerror());
+  }
+  {
+    std::lock_guard<std::mutex> lock(g_mutex);
+    g_library = library;
   }
   auto init =
       reinterpret_cast<MlnAndroidInit>(dlsym(library, "mln_android_init"));
@@ -191,11 +349,8 @@ Java_com_github_josxha_maplibre_1native_NativeBridge_nativeCreateSurface(
     ThrowIllegalState(env, "The Vulkan device has not been created.");
     return 0;
   }
-  ANativeWindow* window = ANativeWindow_fromSurface(env, surface);
-  if (window == nullptr) {
-    ThrowIllegalState(env, "The Surface has no native window.");
-    return 0;
-  }
+  ANativeWindow* window = WindowOf(env, surface);
+  if (window == nullptr) return 0;
   VkAndroidSurfaceCreateInfoKHR info{
       VK_STRUCTURE_TYPE_ANDROID_SURFACE_CREATE_INFO_KHR};
   info.window = window;
@@ -229,4 +384,93 @@ Java_com_github_josxha_maplibre_1native_NativeBridge_nativeDestroySurface(
   vkDestroySurfaceKHR(g_vulkan.instance, vk_surface, nullptr);
   ANativeWindow_release(it->second);
   g_surfaces.erase(it);
+}
+
+extern "C" JNIEXPORT jlongArray JNICALL
+Java_com_github_josxha_maplibre_1native_NativeBridge_nativeEglContext(
+    JNIEnv* env, jclass) {
+  std::lock_guard<std::mutex> lock(g_mutex);
+  if (g_egl.config == nullptr && g_egl_error.empty() &&
+      !CreateEgl(&g_egl_error) && g_egl_error.empty()) {
+    g_egl_error = "EGL is unavailable.";
+  }
+  if (g_egl.config == nullptr) {
+    ThrowIllegalState(env, g_egl_error);
+    return nullptr;
+  }
+  const jlong values[] = {Handle(g_egl.display), Handle(g_egl.config)};
+  jlongArray array = env->NewLongArray(2);
+  env->SetLongArrayRegion(array, 0, 2, values);
+  return array;
+}
+
+extern "C" JNIEXPORT jlong JNICALL
+Java_com_github_josxha_maplibre_1native_NativeBridge_nativeCreateEglSurface(
+    JNIEnv* env, jclass, jobject surface) {
+  std::lock_guard<std::mutex> lock(g_mutex);
+  if (g_egl.config == nullptr) {
+    ThrowIllegalState(env, "EGL has not been initialized.");
+    return 0;
+  }
+  ANativeWindow* window = WindowOf(env, surface);
+  if (window == nullptr) return 0;
+  EGLSurface egl_surface =
+      eglCreateWindowSurface(g_egl.display, g_egl.config, window, nullptr);
+  if (egl_surface == EGL_NO_SURFACE) {
+    const EGLint error = eglGetError();
+    ANativeWindow_release(window);
+    ThrowIllegalState(
+        env, "eglCreateWindowSurface failed with error " +
+                 std::to_string(error) + ".");
+    return 0;
+  }
+  g_egl_surfaces[egl_surface] = window;
+  return Handle(egl_surface);
+}
+
+// A surface that is still current on a render thread goes once that thread
+// releases it: EGL defers destroying current surfaces.
+extern "C" JNIEXPORT void JNICALL
+Java_com_github_josxha_maplibre_1native_NativeBridge_nativeDestroyEglSurface(
+    JNIEnv*, jclass, jlong handle) {
+  std::lock_guard<std::mutex> lock(g_mutex);
+  auto egl_surface =
+      reinterpret_cast<EGLSurface>(static_cast<intptr_t>(handle));
+  const auto it = g_egl_surfaces.find(egl_surface);
+  if (it == g_egl_surfaces.end()) return;
+  eglDestroySurface(g_egl.display, egl_surface);
+  ANativeWindow_release(it->second);
+  g_egl_surfaces.erase(it);
+}
+
+extern "C" JNIEXPORT jlong JNICALL
+Java_com_github_josxha_maplibre_1native_NativeBridge_nativeStartRenderThread(
+    JNIEnv* env, jclass, jlong session) {
+  MlnServiceDriverWork service = nullptr;
+  {
+    std::lock_guard<std::mutex> lock(g_mutex);
+    if (g_library != nullptr) {
+      service = reinterpret_cast<MlnServiceDriverWork>(
+          dlsym(g_library, "mln_render_session_service_driver_work"));
+    }
+  }
+  if (service == nullptr) {
+    ThrowIllegalState(env,
+                      "libmaplibre-native-c.so lacks "
+                      "mln_render_session_service_driver_work.");
+    return 0;
+  }
+  return Handle(new RenderThread(service, static_cast<uint64_t>(session)));
+}
+
+extern "C" JNIEXPORT void JNICALL
+Java_com_github_josxha_maplibre_1native_NativeBridge_nativeWakeRenderThread(
+    JNIEnv*, jclass, jlong thread) {
+  reinterpret_cast<RenderThread*>(static_cast<intptr_t>(thread))->Wake();
+}
+
+extern "C" JNIEXPORT void JNICALL
+Java_com_github_josxha_maplibre_1native_NativeBridge_nativeStopRenderThread(
+    JNIEnv*, jclass, jlong thread) {
+  delete reinterpret_cast<RenderThread*>(static_cast<intptr_t>(thread));
 }

@@ -32,4 +32,31 @@ internal object NativeBridge {
     /** Destroys a VkSurfaceKHR from [nativeCreateSurface]. */
     @JvmStatic
     external fun nativeDestroySurface(surface: Long)
+
+    /**
+     * Returns the EGLDisplay and EGLConfig that OpenGL ES sessions use,
+     * initializing EGL on first use.
+     */
+    @JvmStatic
+    external fun nativeEglContext(): LongArray
+
+    /** Wraps [surface] in an EGLSurface and returns its handle. */
+    @JvmStatic
+    external fun nativeCreateEglSurface(surface: Surface): Long
+
+    /** Destroys an EGLSurface from [nativeCreateEglSurface]. */
+    @JvmStatic
+    external fun nativeDestroyEglSurface(surface: Long)
+
+    /** Starts a thread that services the render session [session]. */
+    @JvmStatic
+    external fun nativeStartRenderThread(session: Long): Long
+
+    /** Makes a render thread service its session's queued driver work. */
+    @JvmStatic
+    external fun nativeWakeRenderThread(thread: Long)
+
+    /** Ends a render thread once its work in flight is done. */
+    @JvmStatic
+    external fun nativeStopRenderThread(thread: Long)
 }

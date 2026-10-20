@@ -14,8 +14,9 @@ Flutter MapLibre: a federated plugin in a Dart pub workspace.
   - `windows/`: C++ plugin (Vulkan device, D3D11 shared textures). Its C API
     is `windows/include/maplibre_native/maplibre_native_api.h`, bound in
     `lib/src/windows/bindings.g.dart`.
-  - `android/`: Kotlin plugin and JNI shim (Vulkan device, SurfaceProducer
-    surfaces). Its API is `MaplibreNativeApi.kt`, bound in
+  - `android/`: Kotlin plugin and JNI shim (SurfaceProducer surfaces as EGL
+    surfaces with a render thread per map, or as Vulkan surfaces of its own
+    device). Its API is `MaplibreNativeApi.kt`, bound in
     `lib/src/android/bindings.g.dart`.
   - `upstream/`: patches proposed to maplibre-native-ffi, against the pinned
     commit. Apply them in the submodule only to test, never commit them there.
@@ -32,7 +33,7 @@ Run these from the repo root unless noted:
 dart format $(git ls-files '*.dart')
 dart analyze --fatal-warnings --fatal-infos
 flutter test                                  # inside a package
-dart tool/use_native_build.dart <preset>      # local C library: windows-x64-vulkan, android-arm64-vulkan, android-x64-vulkan, --download
+dart tool/use_native_build.dart <preset>      # local C library: windows-x64-vulkan, android-arm64-egl, android-x64-egl, android-*-vulkan, --download
 cd tool/codegen && dart run ffigen.dart       # after changing the Windows C API header
 cd tool/codegen && dart run jnigen.dart       # after changing MaplibreNativeApi.kt; build examples for Android in release first
 ```

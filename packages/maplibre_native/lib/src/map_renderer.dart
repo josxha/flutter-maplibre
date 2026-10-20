@@ -26,7 +26,8 @@ enum _Target {
   /// be shared.
   pixelBuffer,
 
-  /// Android: a Vulkan swapchain on the Surface of a Flutter SurfaceProducer.
+  /// Android: an EGL window surface or a Vulkan swapchain on the Surface of a
+  /// Flutter SurfaceProducer.
   surface,
 }
 
@@ -38,16 +39,57 @@ VulkanContextDescriptor _getVulkanContext() =>
     ? AndroidPlugin.vulkanContext()
     : WindowsPlugin.vulkanContext();
 
+OpenglContextDescriptor? _eglContext;
+
+/// The EGL display and config that Android sessions create their contexts
+/// from.
+OpenglContextDescriptor _getEglContext() =>
+    _eglContext ??= AndroidPlugin.eglContext();
+
+/// Whether Android maps render through OpenGL ES rather than Vulkan. The C
+/// library carries one backend, which the build hook picked: OpenGL ES unless
+/// the app selected Vulkan.
+final bool _androidUsesOpenGl =
+    Platform.isAndroid &&
+    supportedRenderBackendMask().contains(RenderBackendFlag.opengl);
+
+/// The native thread that services an OpenGL ES session on Android.
+///
+/// EGL surface sessions use the caller-graphics-thread driver, so their
+/// rendering runs where it is serviced. That is a plugin thread rather than
+/// the Dart isolate, which runs on Android's main thread. The session asks for
+/// service through its driver work wake, which the isolate forwards here.
+final class _RenderThread {
+  int? _handle;
+
+  void start(RenderSessionHandle session) {
+    _handle = AndroidPlugin.startRenderThread(session);
+    // A wake that arrived before the thread existed found nothing to wake.
+    wake();
+  }
+
+  void wake() {
+    if (_handle case final handle?) AndroidPlugin.wakeRenderThread(handle);
+  }
+
+  /// Ends the thread once its work in flight is done.
+  void stop() {
+    if (_handle case final handle?) AndroidPlugin.stopRenderThread(handle);
+    _handle = null;
+  }
+}
+
 /// Renders one MapLibre map into a Flutter texture.
 ///
-/// The map renders on its session's core worker through Vulkan.
-///
-/// - On Windows, when the GPU shares textures between Vulkan and D3D11, the
-///   session renders into a ring of shared textures that Flutter composites
-///   without a CPU copy. Otherwise each frame is read back as RGBA8 into a
-///   pixel buffer texture.
-/// - On Android, the session presents to a Vulkan swapchain on the Surface of
-///   a Flutter SurfaceProducer texture.
+/// - On Windows, the map renders on its session's core worker through Vulkan.
+///   When the GPU shares textures between Vulkan and D3D11, the session
+///   renders into a ring of shared textures that Flutter composites without a
+///   CPU copy. Otherwise each frame is read back as RGBA8 into a pixel buffer
+///   texture.
+/// - On Android, the session presents to the Surface of a Flutter
+///   SurfaceProducer texture: through an EGL window surface on a plugin render
+///   thread (OpenGL ES, the default), or through a Vulkan swapchain on its
+///   core worker.
 final class MapRenderer {
   MapRenderer._(
     this.textureId,
@@ -58,6 +100,7 @@ final class MapRenderer {
     this._target, {
     this._format = 0,
     this._surfaceTexture,
+    this._renderThread,
   });
 
   /// The Flutter texture id to show in a `Texture` widget.
@@ -71,6 +114,12 @@ final class MapRenderer {
 
   /// The SurfaceProducer texture on Android.
   final SurfaceTexture? _surfaceTexture;
+
+  /// The thread that services the session of an OpenGL ES map on Android.
+  final _RenderThread? _renderThread;
+
+  /// Whether the session renders through OpenGL ES.
+  bool get _opengl => _renderThread != null;
 
   /// Whether frames reach Flutter without a CPU copy.
   bool get isZeroCopy => _target != _Target.pixelBuffer;
@@ -131,7 +180,10 @@ final class MapRenderer {
     void Function(MapProjectionHandle projection, RenderFrameResult frame)?
     onFrameShown,
   }) async {
-    final context = _getVulkanContext();
+    // Also initializes the C library for Android, before its first use.
+    final opengl = _androidUsesOpenGl;
+    final eglContext = opengl ? _getEglContext() : null;
+    final vulkanContext = opengl ? null : _getVulkanContext();
 
     // Wakes can arrive before the renderer exists; their work waits for the
     // next wake then.
@@ -142,9 +194,10 @@ final class MapRenderer {
     final map = await runtime.createMap(MapOptions(initialExtent: extent));
     if (styleUrl != null) await map.setStyleUrl(styleUrl);
 
+    final frameWake = Wake(callback: () => renderer?._drainFrames());
     final options = RenderSessionAttachOptions(
       driver: RenderDriverKind.coreWorker,
-      frameWake: Wake(callback: () => renderer?._drainFrames()),
+      frameWake: frameWake,
     );
     final (width, height) = _physicalSize(extent);
 
@@ -152,24 +205,45 @@ final class MapRenderer {
       final texture = AndroidPlugin.createSurfaceTexture(
         width,
         height,
+        opengl: opengl,
         onSurfaceChanged: (surface, oldSurface) {
           if (renderer case final renderer?) {
             unawaited(renderer._onSurfaceChanged(surface, oldSurface));
-          } else {
+          } else if (oldSurface != 0) {
             // Nothing presents to the old surface yet.
-            AndroidPlugin.releaseSurface(oldSurface);
+            AndroidPlugin.releaseSurface(oldSurface, opengl: opengl);
           }
         },
         onSurfaceCleanup: () => renderer?._surfaceAvailable = false,
       );
-      final attachment = map.attachVulkanSurface(
-        VulkanSurfaceDescriptor(
-          extent: extent,
-          context: context,
-          surface: BigInt.from(texture.surface).toUnsigned(64),
-        ),
-        options,
-      );
+      final RenderSessionAttachment attachment;
+      _RenderThread? renderThread;
+      if (eglContext != null) {
+        // Attachment and every frame are driver work, so the thread starts
+        // before the attachment completes.
+        final thread = renderThread = _RenderThread();
+        attachment = map.attachOpenglSurface(
+          OpenglSurfaceDescriptor(
+            extent: extent,
+            context: eglContext,
+            surface: NativePointer(texture.surface),
+          ),
+          RenderSessionAttachOptions(
+            frameWake: frameWake,
+            driverWorkWake: Wake(callback: thread.wake),
+          ),
+        );
+        thread.start(attachment.session);
+      } else {
+        attachment = map.attachVulkanSurface(
+          VulkanSurfaceDescriptor(
+            extent: extent,
+            context: vulkanContext!,
+            surface: BigInt.from(texture.surface).toUnsigned(64),
+          ),
+          options,
+        );
+      }
       return _finishCreate(
         renderer = MapRenderer._(
           texture.textureId,
@@ -179,6 +253,7 @@ final class MapRenderer {
           extent,
           _Target.surface,
           surfaceTexture: texture,
+          renderThread: renderThread,
         ),
         attachment,
         onEvent,
@@ -199,7 +274,7 @@ final class MapRenderer {
       textureId = gpu.textureId;
       format = gpu.format;
       attachment = map.attachVulkanBorrowedTexture(
-        _borrowedDescriptor(context, extent, format, gpu.slots),
+        _borrowedDescriptor(vulkanContext!, extent, format, gpu.slots),
         options,
       );
     } else {
@@ -209,7 +284,7 @@ final class MapRenderer {
       );
       textureId = WindowsPlugin.createPixelTexture();
       attachment = map.attachVulkanOwnedTexture(
-        VulkanOwnedTextureDescriptor(extent: extent, context: context),
+        VulkanOwnedTextureDescriptor(extent: extent, context: vulkanContext!),
         options,
       );
     }
@@ -326,7 +401,7 @@ final class MapRenderer {
     WindowsPlugin.releaseRetiredSlots(textureId);
   }
 
-  /// Sizes the SurfaceProducer's buffers and the swapchain. Flutter may hand
+  /// Sizes the SurfaceProducer's buffers and the session. Flutter may hand
   /// out a new Surface for the new size, which the session then moves to.
   Future<void> _resizeSurface(LogicalExtent extent) async {
     if (_disposed) return;
@@ -349,7 +424,9 @@ final class MapRenderer {
   Future<void> _onSurfaceChanged(int surface, int oldSurface) async {
     if (_disposed) {
       // Nothing presents to the old surface anymore.
-      if (oldSurface != 0) AndroidPlugin.releaseSurface(oldSurface);
+      if (oldSurface != 0) {
+        AndroidPlugin.releaseSurface(oldSurface, opengl: _opengl);
+      }
       return;
     }
     await _onGpuQueue(() async {
@@ -367,17 +444,29 @@ final class MapRenderer {
     LogicalExtent? extent,
   }) async {
     if (_disposed) {
-      AndroidPlugin.releaseSurface(oldSurface);
+      AndroidPlugin.releaseSurface(oldSurface, opengl: _opengl);
       return;
     }
-    await _session.setVulkanSurfaceTarget(
-      VulkanSurfaceDescriptor(
-        extent: extent ?? _extent,
-        context: _getVulkanContext(),
-        surface: BigInt.from(surface).toUnsigned(64),
-      ),
-    );
-    AndroidPlugin.releaseSurface(oldSurface);
+    if (_opengl) {
+      // The old EGLSurface stays current on the render thread until the next
+      // frame, but EGL defers destroying it until then.
+      await _session.setOpenglSurfaceTarget(
+        OpenglSurfaceDescriptor(
+          extent: extent ?? _extent,
+          context: _getEglContext(),
+          surface: NativePointer(surface),
+        ),
+      );
+    } else {
+      await _session.setVulkanSurfaceTarget(
+        VulkanSurfaceDescriptor(
+          extent: extent ?? _extent,
+          context: _getVulkanContext(),
+          surface: BigInt.from(surface).toUnsigned(64),
+        ),
+      );
+    }
+    AndroidPlugin.releaseSurface(oldSurface, opengl: _opengl);
   }
 
   /// Arms a demand that renders the map's next update, and waits for one
@@ -534,10 +623,21 @@ final class MapRenderer {
     // A frame in presentation is released before the session goes.
     await _gpuQueue;
     var quarantined = false;
-    try {
-      quarantined = _session.abandon().quarantinedResourceCount > 0;
-    } on MaplibreException {
-      // A session that already let go of its target has nothing to abandon.
+    if (_renderThread case final thread?) {
+      // Only the render thread may destroy the session's GL objects, which
+      // abandon would keep until process exit, so the session detaches there
+      // first.
+      var detached = false;
+      try {
+        await _session.detach();
+        detached = true;
+      } on MaplibreException catch (error) {
+        debugPrint('maplibre_native: detach failed: $error');
+      }
+      thread.stop();
+      if (!detached) _abandon();
+    } else {
+      quarantined = _abandon();
     }
     _session.close();
     await _map.close();
@@ -547,6 +647,17 @@ final class MapRenderer {
       AndroidPlugin.disposeTexture(texture, keepSurface: quarantined);
     } else {
       WindowsPlugin.disposeTexture(textureId);
+    }
+  }
+
+  /// Ends the session's work. Returns whether it kept graphics objects that
+  /// need their parents until process exit.
+  bool _abandon() {
+    try {
+      return _session.abandon().quarantinedResourceCount > 0;
+    } on MaplibreException {
+      // A session that already let go of its target has nothing to abandon.
+      return false;
     }
   }
 }

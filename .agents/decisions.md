@@ -12,9 +12,16 @@ Each entry: the decision, then why.
   `maplibre` can't publish until the binding is on pub.dev.
 - **Rendering goes only through the texture registry, never platform views.**
   This keeps Flutter composition, transforms, and overlays working.
-- **Every native platform renders through Vulkan.** WGL needs one pinned
-  thread, which Dart can't guarantee, and the binding's surface and texture
-  APIs are Vulkan-first.
+- **Windows renders through Vulkan. Android renders through OpenGL ES by
+  default, and through Vulkan when the app selects the Vulkan build.** WGL
+  needs one pinned thread, which Dart can't guarantee, and the binding's
+  texture APIs are Vulkan-first. On Android, OpenGL ES runs on every device,
+  while Vulkan 1.1 drivers are missing or unreliable on many older ones.
+- **The C library carries one backend, and Dart follows it at runtime.** The
+  binding's build hook picks it per target (OpenGL ES on Android, Vulkan on
+  Windows) unless `hooks.user_defines.maplibre_native_ffi.backend` names one,
+  and `mln_supported_render_backend_mask()` tells `MapRenderer` which path to
+  take. The workspace sets no backend.
 - **Dart reaches the platform plugins through ffigen (Windows) and jnigen
   (Android), never method channels.** Calls are synchronous and typed, with
   no message encoding. The Windows plugin DLL exports a C API and keeps its
@@ -34,21 +41,43 @@ Each entry: the decision, then why.
 
 ## Android
 
-- **MapLibre presents through a Vulkan swapchain on the Surface of a Flutter
-  `SurfaceProducer`.** This is zero-copy, works with Impeller and the
-  ImageReader backend, and needs no Android-specific code in the C API.
+- **MapLibre presents to the Surface of a Flutter `SurfaceProducer`, through
+  an EGL window surface (OpenGL ES) or a Vulkan swapchain.** This is
+  zero-copy, works with Impeller and the ImageReader backend, and needs no
+  Android-specific code in the C API.
+- **OpenGL ES sessions own a dedicated EGL context
+  (`MLN_OPENGL_CONTEXT_OWNERSHIP_DEDICATED`, GLES client API, no share
+  context).** Nothing samples their output in GL, so they need no share
+  group with Flutter. The plugin initializes `EGL_DEFAULT_DISPLAY` once and
+  never terminates it, as Flutter shares the display and the C API needs it
+  through teardown. It picks an RGBA8888 ES 3 window config with depth and
+  stencil, with pbuffer support where offered for the session's teardown
+  fallback.
+- **Each OpenGL ES map has a plugin-owned native render thread that services
+  its caller-graphics-thread session.** EGL surface targets require
+  `MLN_RENDER_DRIVER_CALLER_GRAPHICS_THREAD`, so rendering runs where
+  `mln_render_session_service_driver_work` is called, and the Dart isolate
+  runs on the Android main thread. The session's `driverWorkWake` reaches the
+  isolate, which wakes the thread through jnigen; the Dart binding only takes
+  Dart wakes. `RenderSessionHandle.id` is the raw `mln_render_session`, so the
+  JNI shim calls the C function it resolves with `dlsym`. One thread per map,
+  because the C API binds a session to the first thread that services it and
+  a dedicated context stays current there between renders. Teardown detaches
+  on that thread (abandon would keep the GL objects until process exit), then
+  stops it.
 - **The plugin creates its own Vulkan 1.1 device (graphics queue +
-  `VK_KHR_swapchain`).** Flutter doesn't share its device with plugins.
+  `VK_KHR_swapchain`) for the Vulkan build.** Flutter doesn't share its
+  device with plugins.
 - **`onSurfaceCleanup` pauses frame demands, and `onSurfaceAvailable` moves the
   session to the new Surface.** The old `VkSurfaceKHR` is destroyed only after
-  the session has left it.
+  the session has left it. An old `EGLSurface` is destroyed once
+  `set_opengl_surface_target` completes; it can still be current on the render
+  thread until the next frame, and EGL defers destroying it until then.
 - **A VkSurfaceKHR stays alive when `abandon` quarantines its swapchain.** The
   C API requires the parent to outlive kept children.
 - **The patched rustls-platform-verifier `CertificateVerifier.kt` is vendored
   verbatim, along with its licenses and keep rules.** The C library calls it
   over JNI for TLS. ktlint skips it.
-- **The workspace sets `hooks.user_defines.maplibre_native_ffi.backend:
-  vulkan`.** The downloaded Android library defaults to OpenGL ES.
 
 ## Threading and GPU
 
@@ -70,7 +99,8 @@ Each entry: the decision, then why.
 - **Dart calls the plugins on its UI thread.** Flutter's Windows texture
   registrar functions may be called from any thread. On Android the UI
   thread is the main thread, which SurfaceProducer needs.
-- **Sessions use the core-worker driver, with wakes drained on the Dart
+- **Vulkan sessions use the core-worker driver, OpenGL ES sessions a render
+  thread of the plugin, with frame and event wakes drained on the Dart
   isolate.** Frame demands use `ifNeeded | waitForUpdate` (plus `present` on
   Android), so idle maps don't render.
 
@@ -179,10 +209,15 @@ Each entry: the decision, then why.
   pointer name `build/` and picks `build/<preset>/install` per target. Once
   it lands upstream, `tool/use_native_build.dart` can write `build/` once.
 - Touch tilt and double-tap-drag are not tested on Windows touchscreens.
-- The `backend: vulkan` user-define applies to every target, but iOS only
-  has Metal builds of the C library, so an app that targets iOS can't build
-  with it. The binding's hook would need a backend per platform. CI's iOS job
-  drops the define, since `maplibre_native` doesn't render on iOS yet.
+- The `backend: vulkan` user-define that opts Android into Vulkan applies to
+  every target, but iOS only has Metal builds of the C library, so an app
+  that targets iOS can't build with it. The binding's hook would need a
+  backend per platform.
+- An OpenGL ES map wakes its render thread through the Dart isolate, a hop a
+  native wake would save. The binding only accepts Dart callbacks as wakes.
+- Two OpenGL ES maps render on two threads with two contexts. A shared
+  thread would need the session to make its dedicated context current again
+  after another session's render, which it skips.
 - Web lost gl-js's keyboard navigation and shift-drag box zoom, which the
   shared recognizer doesn't offer, and its grab cursor. Zoom and rotation
   don't fling, only pans.
