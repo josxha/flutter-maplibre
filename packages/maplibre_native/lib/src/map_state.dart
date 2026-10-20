@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:maplibre_native/src/command.dart';
@@ -10,28 +9,6 @@ import 'package:maplibre_native/src/map_renderer.dart';
 import 'package:maplibre_native/src/style_controller.dart';
 import 'package:maplibre_native_ffi/maplibre_native_ffi.dart' as mln;
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
-
-/// Zoom levels per logical pixel of mouse wheel scroll, as MapLibre GL JS
-/// uses for wheel zoom.
-const double _wheelZoomRate = 1 / 450;
-
-/// Degrees of bearing per logical pixel of horizontal mouse drag, and of
-/// pitch per pixel of vertical drag, as in MapLibre GL JS.
-const _rotateDegreesPerPixel = 0.8;
-const _pitchDegreesPerPixel = 0.5;
-
-const _doubleTapZoomDuration = Duration(milliseconds: 300);
-
-/// Logical pixels of vertical drag per zoom level in a double-tap-and-drag
-/// zoom.
-const _quickZoomPixelsPerLevel = 150.0;
-
-/// Degrees of pitch per logical pixel that two fingers move vertically.
-const _shoveDegreesPerPixel = 0.25;
-
-/// Logical pixels both fingers move vertically before a two-finger drag
-/// tilts the map.
-const _shoveSlop = 10.0;
 
 /// MapLibre Native, rendered through its C API into a Flutter texture.
 class MapLibreMapStateNative extends MapLibreMapState {
@@ -68,40 +45,8 @@ class MapLibreMapStateNative extends MapLibreMapState {
   var _nextChangeByController = false;
   var _cameraMoving = false;
 
-  // Scale gesture state, relative to the previous update.
-  var _lastScale = 1.0;
-  var _lastRotation = 0.0;
-
-  // The mouse pointer that rotates and tilts: a right-button or Ctrl and
-  // left-button drag.
-  int? _secondaryPointer;
-
-  // Touch pointers that are down, and where the only one went down, to tell
-  // a tap from a drag.
-  final _touchPointers = <int>{};
-  Offset? _touchDownPosition;
-
-  // The last tap's release, which a second touch nearby starts a quick zoom
-  // from.
-  Duration? _lastTapUpTime;
-  Offset? _lastTapUpPosition;
-
-  // Double-tap-and-drag zoom: the second tap's pointer and position, and
-  // whether it has moved far enough to zoom.
-  int? _quickZoomPointer;
-  Offset? _quickZoomAnchor;
-  var _quickZooming = false;
-
-  /// Where the second tap of a double tap went down.
-  Offset? _doubleTapPosition;
-
-  // Two-finger tilt ("shove"): where each of the two fingers was when the
-  // second went down, where it is now, and whether the gesture tilts, or was
-  // found to be a pinch or rotation instead.
-  final _shoveStart = <int, Offset>{};
-  final _shovePosition = <int, Offset>{};
-  var _shoving = false;
-  var _shoveRejected = false;
+  @override
+  late final GestureCameraSink gestureCamera = _NativeGestureCamera(this);
 
   mln.MapHandle? get _map => _renderer?.map;
 
@@ -128,7 +73,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
           renderer.resize(extent);
           _invalidateProjection();
         }
-        return _gestureDetector(Texture(textureId: renderer.textureId));
+        return Texture(textureId: renderer.textureId);
       },
     );
   }
@@ -339,315 +284,6 @@ class MapLibreMapStateNative extends MapLibreMapState {
   }
 
   // Gestures
-
-  Widget _gestureDetector(Widget child) {
-    final gestures = options.gestures;
-    return Listener(
-      onPointerSignal: _onPointerSignal,
-      onPointerDown: _onPointerDown,
-      onPointerMove: _onPointerMove,
-      onPointerUp: _onPointerEnd,
-      onPointerCancel: _onPointerEnd,
-      child: GestureDetector(
-        onTapUp: (details) => _emitUserInput(details.localPosition, _click),
-        onSecondaryTapUp: (details) =>
-            _emitUserInput(details.localPosition, _secondaryClick),
-        onLongPressStart: (details) =>
-            _emitUserInput(details.localPosition, _longClick),
-        onDoubleTapDown: _onDoubleTapDown,
-        onDoubleTap: _onDoubleTap,
-        onScaleStart: gestures.pan || gestures.zoom || gestures.rotate
-            ? _onScaleStart
-            : null,
-        onScaleUpdate: gestures.pan || gestures.zoom || gestures.rotate
-            ? _onScaleUpdate
-            : null,
-        onScaleEnd: gestures.pan || gestures.zoom || gestures.rotate
-            ? _onScaleEnd
-            : null,
-        child: child,
-      ),
-    );
-  }
-
-  static MapEventUserInput _click(Geographic point, Offset screenPoint) =>
-      MapEventClick(point: point, screenPoint: screenPoint);
-
-  static MapEventUserInput _secondaryClick(
-    Geographic point,
-    Offset screenPoint,
-  ) => MapEventSecondaryClick(point: point, screenPoint: screenPoint);
-
-  static MapEventUserInput _longClick(Geographic point, Offset screenPoint) =>
-      MapEventLongClick(point: point, screenPoint: screenPoint);
-
-  void _emitUserInput(
-    Offset position,
-    MapEventUserInput Function(Geographic point, Offset screenPoint) create,
-  ) {
-    if (_map == null) return;
-    widget.onEvent?.call(create(toLngLat(position), position));
-  }
-
-  void _onDoubleTapDown(TapDownDetails details) {
-    _doubleTapPosition = details.localPosition;
-    _emitUserInput(
-      details.localPosition,
-      (point, screenPoint) =>
-          MapEventDoubleClick(point: point, screenPoint: screenPoint),
-    );
-  }
-
-  /// Zooms in on the second release of a double tap. A second tap that drags
-  /// instead is a quick zoom, which the double tap recognizer rejects.
-  void _onDoubleTap() {
-    final position = _doubleTapPosition;
-    _doubleTapPosition = null;
-    if (position == null || !options.gestures.zoom) return;
-    _applyDelta(
-      mln.CameraDelta(
-        scale: 2,
-        anchor: _screenPoint(position),
-        animation: mln.AnimationOptions(
-          durationMs: _doubleTapZoomDuration.inMilliseconds.toDouble(),
-        ),
-      ),
-    );
-  }
-
-  void _onPointerSignal(PointerSignalEvent event) {
-    if (event is! PointerScrollEvent || !options.gestures.zoom) return;
-    final zoomDelta = -event.scrollDelta.dy * _wheelZoomRate;
-    if (zoomDelta == 0) return;
-    _applyDelta(
-      mln.CameraDelta(
-        scale: pow(2, zoomDelta).toDouble(),
-        anchor: _screenPoint(event.localPosition),
-      ),
-    );
-  }
-
-  void _onPointerDown(PointerDownEvent event) {
-    // Rotate and tilt with the right button or Ctrl and the left button, as in
-    // MapLibre GL JS.
-    if (event.kind == PointerDeviceKind.mouse &&
-        (event.buttons & kSecondaryMouseButton != 0 ||
-            (event.buttons & kPrimaryMouseButton != 0 &&
-                HardwareKeyboard.instance.isControlPressed)) &&
-        (options.gestures.rotate || options.gestures.pitch)) {
-      _secondaryPointer = event.pointer;
-      _beginGesture();
-    }
-    if (event.kind != PointerDeviceKind.touch) return;
-
-    _touchPointers.add(event.pointer);
-    _shovePosition[event.pointer] = event.localPosition;
-    if (_touchPointers.length > 1) {
-      // A second finger makes it a pinch or tilt, not a tap or a quick zoom.
-      _touchDownPosition = null;
-      _stopQuickZoom();
-      _startShove();
-      return;
-    }
-    _touchDownPosition = event.localPosition;
-    final lastTime = _lastTapUpTime;
-    final lastPosition = _lastTapUpPosition;
-    if (options.gestures.zoom &&
-        lastTime != null &&
-        lastPosition != null &&
-        event.timeStamp - lastTime <= kDoubleTapTimeout &&
-        (event.localPosition - lastPosition).distance <= kDoubleTapSlop) {
-      _quickZoomPointer = event.pointer;
-      _quickZoomAnchor = event.localPosition;
-    }
-  }
-
-  void _onPointerMove(PointerMoveEvent event) {
-    if (event.pointer == _quickZoomPointer) {
-      _onQuickZoomMove(event);
-      return;
-    }
-    if (_shovePosition.containsKey(event.pointer)) {
-      _shovePosition[event.pointer] = event.localPosition;
-      if (_shoveStart.containsKey(event.pointer)) _onShoveMove(event);
-    }
-    if (event.pointer != _secondaryPointer) return;
-    final gestures = options.gestures;
-    final center = context.size?.center(Offset.zero);
-    // Dragging right raises the bearing below the center and lowers it above,
-    // so the map follows the pointer around the center like a wheel.
-    var bearing = event.delta.dx * _rotateDegreesPerPixel;
-    if (center != null && event.localPosition.dy < center.dy) {
-      bearing = -bearing;
-    }
-    _applyDelta(
-      mln.CameraDelta(
-        bearing: gestures.rotate ? bearing : null,
-        // Dragging up tilts further.
-        pitch: gestures.pitch ? -event.delta.dy * _pitchDegreesPerPixel : null,
-        anchor: center == null ? null : _screenPoint(center),
-        gesturePhase: mln.GesturePhase.update,
-      ),
-    );
-  }
-
-  void _onPointerEnd(PointerEvent event) {
-    _shovePosition.remove(event.pointer);
-    if (_shoveStart.containsKey(event.pointer)) _stopShove();
-    if (_touchPointers.remove(event.pointer)) _onTouchEnd(event);
-    if (event.pointer != _secondaryPointer) return;
-    _secondaryPointer = null;
-    _endGesture();
-  }
-
-  void _onTouchEnd(PointerEvent event) {
-    final down = _touchDownPosition;
-    final tapped =
-        event is PointerUpEvent &&
-        event.pointer != _quickZoomPointer &&
-        down != null &&
-        (event.localPosition - down).distance <= kTouchSlop;
-    // A tap arms a quick zoom for the next touch. The second tap of a double
-    // tap does not, so a third tap starts afresh.
-    _lastTapUpTime = tapped ? event.timeStamp : null;
-    _lastTapUpPosition = tapped ? event.localPosition : null;
-    _touchDownPosition = null;
-    if (event.pointer == _quickZoomPointer) _stopQuickZoom();
-  }
-
-  /// Zooms by the vertical drag of a double tap's second touch: down zooms
-  /// in and up zooms out, around where that touch went down.
-  void _onQuickZoomMove(PointerMoveEvent event) {
-    final anchor = _quickZoomAnchor!;
-    if (!_quickZooming) {
-      if ((event.localPosition - anchor).distance <= kTouchSlop) return;
-      _quickZooming = true;
-      _doubleTapPosition = null;
-      if (!_gestureActive) _beginGesture();
-    }
-    if (event.delta.dy == 0) return;
-    _applyDelta(
-      mln.CameraDelta(
-        scale: pow(2, event.delta.dy / _quickZoomPixelsPerLevel).toDouble(),
-        anchor: _screenPoint(anchor),
-        gesturePhase: mln.GesturePhase.update,
-      ),
-    );
-  }
-
-  void _stopQuickZoom() {
-    final zoomed = _quickZooming;
-    _quickZoomPointer = null;
-    _quickZoomAnchor = null;
-    _quickZooming = false;
-    if (zoomed) _endGesture();
-  }
-
-  /// Watches a two-finger touch for a tilt, as long as exactly two fingers
-  /// are down.
-  void _startShove() {
-    _stopShove();
-    if (_touchPointers.length != 2 || !options.gestures.pitch) return;
-    for (final pointer in _touchPointers) {
-      _shoveStart[pointer] = _shovePosition[pointer]!;
-    }
-  }
-
-  /// Tilts while two fingers side by side move vertically together: up tilts
-  /// further, down back toward straight down, as on MapLibre Android.
-  void _onShoveMove(PointerMoveEvent event) {
-    if (_shoveRejected) return;
-    if (!_shoving) {
-      final [a, b] = _shoveStart.keys.toList();
-      final moveA = _shovePosition[a]! - _shoveStart[a]!;
-      final moveB = _shovePosition[b]! - _shoveStart[b]!;
-      final between = _shovePosition[a]! - _shovePosition[b]!;
-      final vertical =
-          moveA.dy.sign == moveB.dy.sign &&
-          moveA.dy.abs() > moveA.dx.abs() &&
-          moveB.dy.abs() > moveB.dx.abs();
-      final sideBySide = between.dy.abs() < between.dx.abs();
-      if (vertical &&
-          sideBySide &&
-          moveA.dy.abs() >= _shoveSlop &&
-          moveB.dy.abs() >= _shoveSlop) {
-        _shoving = true;
-        if (!_gestureActive) _beginGesture();
-      } else if (!vertical ||
-          !sideBySide ||
-          moveA.distance > kTouchSlop * 2 ||
-          moveB.distance > kTouchSlop * 2) {
-        // Moving apart, around, or sideways: a pinch or rotation.
-        _shoveRejected =
-            moveA.distance > _shoveSlop || moveB.distance > _shoveSlop;
-        return;
-      } else {
-        return;
-      }
-    }
-    if (event.delta.dy == 0) return;
-    // Each finger's move counts half, so both together tilt by their mean.
-    _applyDelta(
-      mln.CameraDelta(
-        pitch: -event.delta.dy / 2 * _shoveDegreesPerPixel,
-        gesturePhase: mln.GesturePhase.update,
-      ),
-    );
-  }
-
-  void _stopShove() {
-    final tilted = _shoving;
-    _shoveStart.clear();
-    _shoving = false;
-    _shoveRejected = false;
-    if (tilted) _endGesture();
-  }
-
-  void _onScaleStart(ScaleStartDetails details) {
-    _lastScale = 1;
-    _lastRotation = 0;
-    if (!_gestureActive) _beginGesture();
-  }
-
-  void _onScaleUpdate(ScaleUpdateDetails details) {
-    final scale = details.scale / _lastScale;
-    final rotation = details.rotation - _lastRotation;
-    _lastScale = details.scale;
-    _lastRotation = details.rotation;
-    // A quick zoom, tilt, or mouse rotation drives the camera while its
-    // pointers also reach the scale recognizer.
-    if (_quickZooming || _shoving || _secondaryPointer != null) return;
-    final gestures = options.gestures;
-
-    final pan = details.focalPointDelta;
-    final zooms = gestures.zoom && scale != 1 && scale.isFinite && scale > 0;
-    final rotates = gestures.rotate && rotation != 0;
-    _applyDelta(
-      mln.CameraDelta(
-        offset: gestures.pan && pan != Offset.zero ? _screenPoint(pan) : null,
-        scale: zooms ? scale : null,
-        // A clockwise twist is a positive rotation in Flutter and turns the
-        // map clockwise, which lowers the bearing.
-        bearing: rotates ? -rotation * 180 / pi : null,
-        anchor: zooms || rotates ? _screenPoint(details.localFocalPoint) : null,
-        gesturePhase: mln.GesturePhase.update,
-      ),
-    );
-  }
-
-  void _onScaleEnd(ScaleEndDetails details) => _endGesture();
-
-  void _beginGesture() {
-    _gestureActive = true;
-    _applyDelta(const mln.CameraDelta(gesturePhase: mln.GesturePhase.begin));
-  }
-
-  void _endGesture() {
-    if (!_gestureActive) return;
-    _gestureActive = false;
-    _applyDelta(const mln.CameraDelta(gesturePhase: mln.GesturePhase.end));
-    _onCameraIdle();
-  }
 
   void _applyDelta(mln.CameraDelta delta) {
     final map = _map;
@@ -946,3 +582,73 @@ class MapLibreMapStateNative extends MapLibreMapState {
 }
 
 Uint8List _utf8(String value) => Uint8List.fromList(utf8.encode(value));
+
+/// Applies gestures with the map's projection-aware camera deltas, which
+/// move, scale, rotate and tilt around a screen point.
+class _NativeGestureCamera implements GestureCameraSink {
+  _NativeGestureCamera(this._state);
+
+  final MapLibreMapStateNative _state;
+
+  @override
+  void gestureStart() {
+    _state._gestureActive = true;
+    _state._applyDelta(
+      const mln.CameraDelta(gesturePhase: mln.GesturePhase.begin),
+    );
+  }
+
+  @override
+  void gestureUpdate(GestureCameraUpdate update) {
+    final scales = update.zoomBy != 0;
+    final rotates = update.rotateBy != 0;
+    final tilts = update.pitchBy != 0;
+    final around = update.around;
+    _state._applyDelta(
+      mln.CameraDelta(
+        offset: update.pans
+            ? MapLibreMapStateNative._screenPoint(
+                update.panTo! - update.panFrom!,
+              )
+            : null,
+        scale: scales ? pow(2, update.zoomBy).toDouble() : null,
+        bearing: rotates ? update.rotateBy : null,
+        pitch: tilts ? update.pitchBy : null,
+        // The C API rejects an anchor without a scale, bearing or pitch.
+        anchor: around != null && (scales || rotates || tilts)
+            ? MapLibreMapStateNative._screenPoint(around)
+            : null,
+        gesturePhase: mln.GesturePhase.update,
+      ),
+    );
+  }
+
+  /// Ends the gesture. Native maps don't fling yet, so [velocity] is unused.
+  @override
+  void gestureEnd({Velocity velocity = Velocity.zero}) {
+    if (!_state._gestureActive) return;
+    _state
+      .._gestureActive = false
+      .._applyDelta(const mln.CameraDelta(gesturePhase: mln.GesturePhase.end))
+      .._onCameraIdle();
+  }
+
+  @override
+  void zoomBy(
+    double levels,
+    Offset around, {
+    Duration duration = Duration.zero,
+  }) {
+    _state._applyDelta(
+      mln.CameraDelta(
+        scale: pow(2, levels).toDouble(),
+        anchor: MapLibreMapStateNative._screenPoint(around),
+        animation: duration == Duration.zero
+            ? const mln.AnimationOptions()
+            : mln.AnimationOptions(
+                durationMs: duration.inMilliseconds.toDouble(),
+              ),
+      ),
+    );
+  }
+}

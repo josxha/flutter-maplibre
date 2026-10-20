@@ -5,7 +5,8 @@ Flutter MapLibre: a federated plugin in a Dart pub workspace.
 ## Layout
 
 - `packages/maplibre`: the app-facing package.
-- `packages/maplibre_platform_interface`: shared API that the platform packages implement.
+- `packages/maplibre_platform_interface`: shared API that the platform packages
+  implement, and the shared gesture recognizer (`lib/src/gestures/`).
 - `packages/maplibre_web`: browser, via maplibre-gl-js.
 - `packages/maplibre_native`: every other platform, on the MapLibre Native C API.
   - `vendor/maplibre-native-ffi`: git submodule with the C API and its Dart binding.
@@ -44,6 +45,9 @@ one target per prefix, so build Android one ABI at a time
 
 - Maps render only through Flutter's texture registry and the `Texture`
   widget, never through platform views.
+- Gestures are recognized once, in `MapGestureDetector`. Platforms only
+  implement `GestureCameraSink`, applying screen-space steps with their own
+  camera engine.
 - Never use method channels. Dart calls native code through ffigen (C/C++)
   or jnigen (Kotlin/Java) bindings.
 - Never edit the submodule. Note API gaps in `.agents/decisions.md` instead,

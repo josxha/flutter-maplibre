@@ -3,6 +3,8 @@
 export 'package:geobase/geobase.dart';
 
 export 'src/extensions.dart';
+export 'src/gestures/gesture_camera_sink.dart';
+export 'src/gestures/map_gesture_detector.dart';
 export 'src/layer/layer.dart';
 export 'src/layer/layer_manager.dart';
 export 'src/lng_lat_bounds.dart';

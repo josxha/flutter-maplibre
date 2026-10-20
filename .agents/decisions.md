@@ -85,16 +85,38 @@ Each entry: the decision, then why.
 
 ## Gestures
 
-- **Gestures are recognized in Dart and applied as camera deltas.** A
-  two-finger twist turns the map with the fingers (negated bearing). Double
-  tap and drag zooms (down zooms in, 150 px per level). Two fingers side by
-  side dragged vertically tilt, as on MapLibre Android. A right-button or
-  Ctrl + left-button drag rotates and tilts as in MapLibre GL JS: 0.8Â°
-  bearing per horizontal pixel, flipped above the center so the map turns
-  like a wheel, and 0.5Â° pitch per vertical pixel, up tilting further.
+- **One gesture recognizer in Dart serves every platform:
+  `MapGestureDetector` in `maplibre_platform_interface`.** It sits there, not
+  in `maplibre`, because the platform packages need it and `maplibre` depends
+  on them. `MapLibreMapState.build` wraps the platform widget in it when the
+  state returns a `gestureCamera`. Flutter hit-tests every pointer, so
+  widgets over the map keep theirs.
+- **The recognizer hands the platforms screen-space intents through
+  `GestureCameraSink`, never map centers.** A step (`GestureCameraUpdate`)
+  pans the content under one screen point to another, then zooms, rotates
+  and tilts around a screen point. Each platform applies it with its own
+  projection-aware camera engine, so a new projection (globe) needs no Dart
+  change. `gestureEnd` carries the pan's release velocity; fling inertia
+  runs in the platform. Discrete zooms (wheel, double tap) use `zoomBy`.
+- **Native applies steps with `mln_map_apply_camera_delta`**, the C API's
+  equivalent of mbgl's moveBy/scaleBy/rotateBy/pitchBy, one atomic delta per
+  step with the gesture phase. Native maps don't fling yet.
+- **The gestures follow the platform conventions.** A two-finger twist turns
+  the map with the fingers (negated bearing). Double tap and drag zooms
+  (down zooms in, 150 px per level). Two fingers side by side dragged
+  vertically tilt, as on MapLibre Android. A right-button or Ctrl +
+  left-button drag rotates and tilts as in MapLibre GL JS: 0.8° bearing per
+  horizontal pixel, flipped above the center so the map turns like a wheel,
+  and 0.5° pitch per vertical pixel, up tilting further. A scroll wheel zooms
+  1/450 level per pixel, as GL JS; a trackpad pinch that arrives as a scale
+  signal zooms by its scale.
 
 ## Tests
 
+- **The recognizer is unit tested against a recording `GestureCameraSink`**
+  (`maplibre_platform_interface/test`). The integration tests in
+  `examples/integration_test/gestures_test.dart` check each platform's
+  camera end to end.
 - **Projection integration tests run at zoom 4.** At the minimum zoom of a
   wide desktop window the world is narrower than the window, and screen
   corners wrap to the neighbouring world copy.
@@ -124,3 +146,6 @@ Each entry: the decision, then why.
   pointer name `build/` and picks `build/<preset>/install` per target. Once
   it lands upstream, `tool/use_native_build.dart` can write `build/` once.
 - Touch tilt and double-tap-drag are not tested on Windows touchscreens.
+- Native maps ignore the fling velocity of `gestureEnd`: a released pan
+  stops dead. The C API has no inertia, so it would run in Dart over
+  animated camera deltas.
