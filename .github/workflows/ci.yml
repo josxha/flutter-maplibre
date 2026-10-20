@@ -32,7 +32,8 @@ jobs:
       - uses: actions/checkout@v7
         with: { submodules: true }
       - name: "Format Swift code"
-        run: swiftformat --verbose --lint . --reporter github-actions-log --swiftversion 6 --disable trailingCommas
+        # The vendored submodule keeps upstream's formatting.
+        run: swiftformat --verbose --lint . --exclude packages/maplibre_native/vendor --reporter github-actions-log --swiftversion 6 --disable trailingCommas
   lint-dart:
     name: "[Dart] Static code analysis"
     runs-on: ubuntu-latest
