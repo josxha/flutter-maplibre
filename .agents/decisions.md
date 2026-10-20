@@ -101,13 +101,33 @@ Each entry: the decision, then why.
 - **Native applies steps with `mln_map_apply_camera_delta`**, the C API's
   equivalent of mbgl's moveBy/scaleBy/rotateBy/pitchBy, one atomic delta per
   step with the gesture phase. Native maps don't fling yet.
+- **On web, Flutter is the only hit-tester.** The gl-js map is created with
+  `interactive: false` and its container has `pointer-events: none`, so the
+  browser hands every pointer to Flutter, and widgets over the map no longer
+  leak taps and drags to gl-js. Clicks, double, secondary and long clicks
+  come from `MapGestureDetector`. A right click or Ctrl + click that starts
+  on the map suppresses the browser's context menu once.
+- **Web applies steps with public gl-js camera calls, each an `easeTo` of
+  duration 0.** A pan puts `unproject(panFrom)` at `panTo` through
+  `center` + `offset`, so the grabbed location stays under the pointer in
+  every projection; zoom, rotation and pitch use `around`. One gesture
+  reports one camera move, although gl-js fires movestart/moveend per step.
+  A released pan flings with gl-js's own pan inertia constants (linearity
+  0.3, max speed 1400 px/s, deceleration 2500 px/s², ease-out bezier).
+- **Globe on web needs no forwarding to gl-js handlers.** Measured with
+  gl-js 5.24 at 1024×768: the grabbed point stays within 0.1 px at zoom 2 and
+  above, also at 80° N and pitched 45°. At zoom 1 a drag from the center to
+  near the globe's edge ends 8.6 px off, and one that starts near the pole
+  98 px off. gl-js's own globe drag drifts as much or more (3–86 px over the
+  same drags), so the fallback of forwarding pointer events to its handlers
+  would not be better.
 - **The gestures follow the platform conventions.** A two-finger twist turns
   the map with the fingers (negated bearing). Double tap and drag zooms
   (down zooms in, 150 px per level). Two fingers side by side dragged
   vertically tilt, as on MapLibre Android. A right-button or Ctrl +
-  left-button drag rotates and tilts as in MapLibre GL JS: 0.8� bearing per
+  left-button drag rotates and tilts as in MapLibre GL JS: 0.8° bearing per
   horizontal pixel, flipped above the center so the map turns like a wheel,
-  and 0.5� pitch per vertical pixel, up tilting further. A scroll wheel zooms
+  and 0.5° pitch per vertical pixel, up tilting further. A scroll wheel zooms
   1/450 level per pixel, as GL JS; a trackpad pinch that arrives as a scale
   signal zooms by its scale.
 
@@ -146,6 +166,12 @@ Each entry: the decision, then why.
   pointer name `build/` and picks `build/<preset>/install` per target. Once
   it lands upstream, `tool/use_native_build.dart` can write `build/` once.
 - Touch tilt and double-tap-drag are not tested on Windows touchscreens.
+- Web lost gl-js's keyboard navigation and shift-drag box zoom, which the
+  shared recognizer doesn't offer, and its grab cursor. Zoom and rotation
+  don't fling, only pans.
+- The wheel zooms 1/450 level per logical pixel everywhere. Flutter web
+  divides Chrome's wheel delta by the device pixel ratio, so on a 2x screen
+  a wheel notch zooms half as far as in plain gl-js.
 - Native maps ignore the fling velocity of `gestureEnd`: a released pan
   stops dead. The C API has no inertia, so it would run in Dart over
   animated camera deltas.

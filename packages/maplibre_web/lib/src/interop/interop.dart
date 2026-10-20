@@ -8,7 +8,6 @@ import 'package:web/web.dart';
 
 part 'camera.dart';
 part 'events.dart';
-part 'gesture_handlers.dart';
 part 'map.dart';
 part 'map_geojson_feature.dart';
 part 'marker.dart';

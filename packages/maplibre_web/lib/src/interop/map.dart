@@ -117,20 +117,6 @@ extension type JsMap._(Camera _) implements Camera {
   /// Get the loaded style.
   external StyleSpecification? getStyle();
 
-  external DoubleClickZoomHandler doubleClickZoom;
-  external DragPanHandler dragPan;
-  external DragRotateHandler dragRotate;
-  external KeyboardHandler keyboard;
-  external ScrollZoomHandler scrollZoom;
-
-  /// Shift and drag to draw a box to zoom in
-  external BoxZoomHandler boxZoom;
-
-  /// Pitch with rotate
-  external bool pitchWithRotate;
-  external TwoFingersTouchPitchHandler touchPitch;
-  external TwoFingersTouchZoomRotateHandler touchZoomRotate;
-
   /// Returns an array of MapGeoJSONFeature objects representing visible
   /// features that satisfy the query parameters.
   external JSArray<MapGeoJSONFeature> queryRenderedFeatures(
@@ -160,6 +146,7 @@ extension type MapOptions._(JSObject _) implements JSObject {
     required double bearing,
     required double pitch,
     required bool attributionControl,
+    bool? interactive,
   });
 }
 

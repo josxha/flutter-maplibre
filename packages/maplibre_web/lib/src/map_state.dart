@@ -5,6 +5,7 @@ import 'dart:math';
 import 'dart:ui';
 import 'dart:ui_web';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
@@ -12,7 +13,7 @@ import 'package:maplibre_web/src/extensions.dart';
 import 'package:maplibre_web/src/interop/interop.dart' as interop;
 import 'package:maplibre_web/src/interop/json.dart';
 import 'package:maplibre_web/src/interop/pmtiles.dart' as pmtiles;
-import 'package:web/web.dart';
+import 'package:web/web.dart' hide PointerEvent;
 
 part 'style_controller.dart';
 
@@ -23,6 +24,27 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   Completer<interop.MapLibreEvent>? _movementCompleter;
   bool _nextGestureCausedByController = false;
   LayerManager? _layerManager;
+
+  /// A gesture or its fling moves the camera; [_gestureMoveStarted] once it
+  /// has reported the start of the move.
+  var _gestureMoving = false;
+  var _gestureMoveStarted = false;
+
+  /// The next camera move comes from a scroll wheel or double tap.
+  var _nextMoveByUser = false;
+
+  /// A pointer that may open the browser's context menu went down on the
+  /// map, which rotates and tilts with it instead.
+  var _suppressContextMenu = false;
+  Timer? _contextMenuTimer;
+  late final JSFunction _onContextMenu = ((Event event) {
+    if (!_suppressContextMenu) return;
+    _suppressContextMenu = false;
+    event.preventDefault();
+  }).toJS;
+
+  @override
+  late final GestureCameraSink gestureCamera = _WebGestureCamera(this);
 
   /// Get the [MapOptions] from [MapLibreMap.options].
   @override
@@ -41,7 +63,10 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         ..style.padding = '0'
         ..style.margin = '0'
         ..style.height = '100%'
-        ..style.width = '100%';
+        ..style.width = '100%'
+        // Flutter hit-tests every pointer and recognizes the gestures, so
+        // widgets over the map keep theirs.
+        ..style.pointerEvents = 'none';
 
       // add pmtiles support
       try {
@@ -60,6 +85,8 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
           bearing: options.initBearing,
           pitch: options.initPitch,
           attributionControl: false,
+          // MapGestureDetector handles the input.
+          interactive: false,
         ),
       );
 
@@ -79,46 +106,12 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       _map.setMinPitch(options.minPitch);
       _map.setMaxPitch(options.maxPitch);
       _map.setMaxBounds(options.maxBounds?.toJsLngLatBounds());
-      _updateGestures(options.gestures);
 
       // add callbacks
       _map.on(
         interop.MapEventType.load,
         (interop.MapMouseEvent event) {
           _onStyleLoaded();
-        }.toJS,
-      );
-      _map.on(
-        interop.MapEventType.click,
-        (interop.MapMouseEvent event) {
-          final point = event.lngLat.toGeographic();
-          widget.onEvent?.call(
-            MapEventClick(point: point, screenPoint: event.point.toOffset()),
-          );
-        }.toJS,
-      );
-      _map.on(
-        interop.MapEventType.dblclick,
-        (interop.MapMouseEvent event) {
-          final point = event.lngLat.toGeographic();
-          widget.onEvent?.call(
-            MapEventDoubleClick(
-              point: point,
-              screenPoint: event.point.toOffset(),
-            ),
-          );
-        }.toJS,
-      );
-      _map.on(
-        interop.MapEventType.contextmenu,
-        (interop.MapMouseEvent event) {
-          final point = event.lngLat.toGeographic();
-          widget.onEvent?.call(
-            MapEventSecondaryClick(
-              point: point,
-              screenPoint: event.point.toOffset(),
-            ),
-          );
         }.toJS,
       );
       _map.on(
@@ -130,12 +123,18 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       _map.on(
         interop.MapEventType.moveStart,
         (interop.MapLibreEvent event) {
+          // A gesture moves the camera in many steps but reports one move.
+          if (_gestureMoving) {
+            if (_gestureMoveStarted) return;
+            _gestureMoveStarted = true;
+          }
           final CameraChangeReason reason;
-          if (_nextGestureCausedByController) {
+          if (_gestureMoving || _nextMoveByUser) {
+            _nextMoveByUser = false;
+            reason = CameraChangeReason.apiGesture;
+          } else if (_nextGestureCausedByController) {
             _nextGestureCausedByController = false;
             reason = CameraChangeReason.developerAnimation;
-          } else if (event.originalEvent != null) {
-            reason = CameraChangeReason.apiGesture;
           } else {
             reason = CameraChangeReason.apiAnimation;
           }
@@ -158,6 +157,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       _map.on(
         interop.MapEventType.moveEnd,
         (interop.MapLibreEvent event) {
+          if (_gestureMoving) return;
           widget.onEvent?.call(const MapEventCameraIdle());
           if (!(_movementCompleter?.isCompleted ?? true)) {
             _movementCompleter?.complete(event);
@@ -167,12 +167,36 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
 
       return _htmlElement;
     });
+    document.addEventListener('contextmenu', _onContextMenu);
     super.initState();
   }
 
   @override
-  Widget buildPlatformWidget(BuildContext context) =>
-      HtmlElementView(viewType: viewName);
+  Widget buildPlatformWidget(BuildContext context) => Listener(
+    onPointerDown: _onPointerDown,
+    onPointerUp: _onPointerEnd,
+    onPointerCancel: _onPointerEnd,
+    child: HtmlElementView(viewType: viewName),
+  );
+
+  /// The browser opens its context menu for a right click, or Ctrl + click
+  /// on macOS, which rotate and tilt the map instead.
+  void _onPointerDown(PointerDownEvent event) {
+    _contextMenuTimer?.cancel();
+    _suppressContextMenu =
+        event.kind == PointerDeviceKind.mouse &&
+        (event.buttons & kSecondaryMouseButton != 0 ||
+            HardwareKeyboard.instance.isControlPressed);
+  }
+
+  /// Some platforms open the context menu on the release.
+  void _onPointerEnd(PointerEvent _) {
+    _contextMenuTimer?.cancel();
+    _contextMenuTimer = Timer(
+      const Duration(milliseconds: 500),
+      () => _suppressContextMenu = false,
+    );
+  }
 
   void _resizeMap() {
     final jsContainer = _map.getContainer();
@@ -185,6 +209,8 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
 
   @override
   void dispose() {
+    document.removeEventListener('contextmenu', _onContextMenu);
+    _contextMenuTimer?.cancel();
     style?.dispose();
     _map.remove();
     _htmlElement.remove();
@@ -207,9 +233,6 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     }
     if (options.maxBounds != oldWidget.options.maxBounds) {
       _map.setMaxBounds(options.maxBounds?.toJsLngLatBounds());
-    }
-    if (options.gestures != oldWidget.options.gestures) {
-      _updateGestures(options.gestures);
     }
     _layerManager?.updateLayers(widget.layers);
     super.didUpdateWidget(oldWidget);
@@ -360,45 +383,6 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     );
   }
 
-  void _updateGestures(MapGestures gestures) {
-    if (gestures.pan) {
-      _map.dragPan.enable();
-    } else {
-      _map.dragPan.disable();
-    }
-    if (gestures.zoom) {
-      _map.touchZoomRotate.enable();
-      _map.doubleClickZoom.enable();
-      _map.scrollZoom.enable();
-      _map.boxZoom.enable();
-    } else {
-      _map.touchZoomRotate.disable(); // this disables rotation as well
-      _map.doubleClickZoom.disable();
-      _map.scrollZoom.disable();
-      _map.boxZoom.disable();
-    }
-    if (gestures.rotate) {
-      _map.dragRotate.enable();
-      _map.touchZoomRotate.enableRotation();
-    } else {
-      _map.touchZoomRotate.disableRotation();
-      _map.dragRotate.disable();
-    }
-    if (gestures.pitch) {
-      // TODO dragRotate allows to pitch too but has no option to disable pitch.
-      _map.touchPitch.enable();
-    } else {
-      _map.touchPitch.disable();
-    }
-    // It's not possible to disable just some gestures for the KeyboardHandler.
-    // That's why we disable it completely if not all gestures are enabled.
-    if (gestures.allEnabled) {
-      _map.keyboard.enable();
-    } else {
-      _map.keyboard.disable();
-    }
-  }
-
   @override
   Future<void> enableLocation({
     Duration fastestInterval = const Duration(milliseconds: 750),
@@ -505,3 +489,112 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     setState(() {});
   }
 }
+
+/// Applies gestures with MapLibre GL JS camera methods. Its own handlers are
+/// off, as Flutter recognizes the gestures.
+class _WebGestureCamera implements GestureCameraSink {
+  _WebGestureCamera(this._state);
+
+  final MapLibreMapStateWeb _state;
+
+  interop.JsMap get _map => _state._map;
+
+  @override
+  void gestureStart() {
+    // Catches a fling, whose end then reports the end of its move.
+    _map.stop();
+    _state
+      .._gestureMoving = true
+      .._gestureMoveStarted = false;
+  }
+
+  @override
+  void gestureUpdate(GestureCameraUpdate update) {
+    if (update.pans) {
+      // Puts the location under the pointer where the pointer is now, which
+      // keeps it under the pointer in every projection.
+      _map.easeTo(
+        interop.EaseToOptions(
+          center: _map.unproject(update.panFrom!.toJsPoint()),
+          offset: (update.panTo! - _mapCenter).toJsPoint(),
+          duration: 0,
+        ),
+      );
+    }
+    if (update.zoomBy == 0 && update.rotateBy == 0 && update.pitchBy == 0) {
+      return;
+    }
+    final around = update.around;
+    _map.easeTo(
+      interop.EaseToOptions(
+        zoom: _map.getZoom() + update.zoomBy,
+        bearing: _map.getBearing() + update.rotateBy,
+        pitch: _map.getPitch() + update.pitchBy,
+        around: around == null ? null : _map.unproject(around.toJsPoint()),
+        duration: 0,
+      ),
+    );
+  }
+
+  @override
+  void gestureEnd({Velocity velocity = Velocity.zero}) {
+    if (!_state._gestureMoving) return;
+    _state._gestureMoving = false;
+    if (!_state._gestureMoveStarted) return;
+    if (!_fling(velocity.pixelsPerSecond)) {
+      _state.widget.onEvent?.call(const MapEventCameraIdle());
+    }
+  }
+
+  /// Pans on after a release at [velocity] as GL JS does, slowing down. The
+  /// fling's end reports the end of the move.
+  bool _fling(Offset velocity) {
+    final speed = min(velocity.distance * _flingLinearity, _flingMaxSpeed);
+    if (speed == 0) return false;
+    final seconds = speed / (_flingDeceleration * _flingLinearity);
+    final distance = speed * seconds / 2;
+    // The move already started with the gesture.
+    _state
+      .._gestureMoving = true
+      .._gestureMoveStarted = true;
+    _map.easeTo(
+      interop.EaseToOptions(
+        center: _map.getCenter(),
+        offset: (velocity / velocity.distance * distance).toJsPoint(),
+        duration: seconds * 1000,
+        easing: _flingCurve.transform.toJS,
+        essential: true,
+      ),
+    );
+    _state._gestureMoving = false;
+    return true;
+  }
+
+  @override
+  void zoomBy(
+    double levels,
+    Offset around, {
+    Duration duration = Duration.zero,
+  }) {
+    _state._nextMoveByUser = true;
+    _map.easeTo(
+      interop.EaseToOptions(
+        zoom: _map.getZoom() + levels,
+        around: _map.unproject(around.toJsPoint()),
+        duration: duration.inMilliseconds,
+        essential: true,
+      ),
+    );
+  }
+
+  Offset get _mapCenter {
+    final canvas = _map.getCanvas();
+    return Offset(canvas.clientWidth / 2, canvas.clientHeight / 2);
+  }
+}
+
+// The pan inertia of MapLibre GL JS.
+const _flingLinearity = 0.3;
+const _flingMaxSpeed = 1400.0;
+const _flingDeceleration = 2500.0;
+const _flingCurve = Cubic(0, 0, 0.3, 1);
