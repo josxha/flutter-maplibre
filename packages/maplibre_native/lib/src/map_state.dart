@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
-import 'dart:typed_data';
 
 import 'package:flutter/gestures.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:maplibre_native/src/command.dart';
 import 'package:maplibre_native/src/map_renderer.dart';
@@ -15,8 +15,9 @@ import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 /// uses for wheel zoom.
 const double _wheelZoomRate = 1 / 450;
 
-/// Degrees of bearing and pitch per logical pixel of a secondary-button drag.
-const _rotateDegreesPerPixel = 0.5;
+/// Degrees of bearing per logical pixel of horizontal mouse drag, and of
+/// pitch per pixel of vertical drag, as in MapLibre GL JS.
+const _rotateDegreesPerPixel = 0.8;
 const _pitchDegreesPerPixel = 0.5;
 
 const _doubleTapZoomDuration = Duration(milliseconds: 300);
@@ -56,6 +57,10 @@ class MapLibreMapStateNative extends MapLibreMapState {
   /// move with the extent even while the camera stays.
   BigInt? _shownExtentGeneration;
 
+  /// Frames that drew an older map update than this are not shown as the
+  /// camera: they still travel to Flutter after the initial camera was set.
+  BigInt _firstShownUpdate = BigInt.zero;
+
   /// The camera of the last camera event, to report each change once.
   MapCamera? _eventCamera;
 
@@ -67,7 +72,8 @@ class MapLibreMapStateNative extends MapLibreMapState {
   var _lastScale = 1.0;
   var _lastRotation = 0.0;
 
-  // Secondary-button drag state, for rotating and tilting with a mouse.
+  // The mouse pointer that rotates and tilts: a right-button or Ctrl and
+  // left-button drag.
   int? _secondaryPointer;
 
   // Touch pointers that are down, and where the only one went down, to tell
@@ -159,7 +165,15 @@ class MapLibreMapStateNative extends MapLibreMapState {
       await setStyle(options.initStyle);
       if (_disposed) return;
       setState(() {
-        camera ??= _readCamera();
+        // The initial camera is set, but the frame that shows it may not have
+        // reached Flutter yet, and onMapCreated callers expect it.
+        camera = _readCamera();
+        _firstShownUpdate = renderer.map
+            .getSnapshot()
+            .latestRenderUpdateGeneration;
+        // Screen locations follow the latest camera until such a frame.
+        _shownProjection?.close();
+        _shownProjection = null;
         isInitialized = true;
       });
       widget.onEvent?.call(MapEventMapCreated(mapController: this));
@@ -267,17 +281,17 @@ class MapLibreMapStateNative extends MapLibreMapState {
   /// next, so widgets over the map rebuild in the same frame as the map.
   void _onFrameShown(
     mln.MapProjectionHandle projection,
-    BigInt extentGeneration,
+    mln.RenderFrameResult frame,
   ) {
-    if (_disposed) {
+    if (_disposed || frame.mapUpdateGeneration < _firstShownUpdate) {
       projection.close();
       return;
     }
     _shownProjection?.close();
     _shownProjection = projection;
     final shown = _toMapCamera(projection.getCamera());
-    final resized = extentGeneration != _shownExtentGeneration;
-    _shownExtentGeneration = extentGeneration;
+    final resized = frame.extentGeneration != _shownExtentGeneration;
+    _shownExtentGeneration = frame.extentGeneration;
     if (shown == camera && !resized) return;
     setState(() => camera = shown);
   }
@@ -414,8 +428,12 @@ class MapLibreMapStateNative extends MapLibreMapState {
   }
 
   void _onPointerDown(PointerDownEvent event) {
+    // Rotate and tilt with the right button or Ctrl and the left button, as in
+    // MapLibre GL JS.
     if (event.kind == PointerDeviceKind.mouse &&
-        event.buttons & kSecondaryMouseButton != 0 &&
+        (event.buttons & kSecondaryMouseButton != 0 ||
+            (event.buttons & kPrimaryMouseButton != 0 &&
+                HardwareKeyboard.instance.isControlPressed)) &&
         (options.gestures.rotate || options.gestures.pitch)) {
       _secondaryPointer = event.pointer;
       _beginGesture();
@@ -455,14 +473,19 @@ class MapLibreMapStateNative extends MapLibreMapState {
     }
     if (event.pointer != _secondaryPointer) return;
     final gestures = options.gestures;
-    final size = context.size;
+    final center = context.size?.center(Offset.zero);
+    // Dragging right raises the bearing below the center and lowers it above,
+    // so the map follows the pointer around the center like a wheel.
+    var bearing = event.delta.dx * _rotateDegreesPerPixel;
+    if (center != null && event.localPosition.dy < center.dy) {
+      bearing = -bearing;
+    }
     _applyDelta(
       mln.CameraDelta(
-        bearing: gestures.rotate
-            ? -event.delta.dx * _rotateDegreesPerPixel
-            : null,
+        bearing: gestures.rotate ? bearing : null,
+        // Dragging up tilts further.
         pitch: gestures.pitch ? -event.delta.dy * _pitchDegreesPerPixel : null,
-        anchor: size == null ? null : _screenPoint(size.center(Offset.zero)),
+        anchor: center == null ? null : _screenPoint(center),
         gesturePhase: mln.GesturePhase.update,
       ),
     );
@@ -591,9 +614,9 @@ class MapLibreMapStateNative extends MapLibreMapState {
     final rotation = details.rotation - _lastRotation;
     _lastScale = details.scale;
     _lastRotation = details.rotation;
-    // A quick zoom or tilt drives the camera while its fingers also reach the
-    // scale recognizer.
-    if (_quickZooming || _shoving) return;
+    // A quick zoom, tilt, or mouse rotation drives the camera while its
+    // pointers also reach the scale recognizer.
+    if (_quickZooming || _shoving || _secondaryPointer != null) return;
     final gestures = options.gestures;
 
     final pan = details.focalPointDelta;

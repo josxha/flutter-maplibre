@@ -111,7 +111,7 @@ final class MapRenderer {
   /// Receives every runtime event the map queues.
   void Function(RuntimeEvent event)? onEvent;
 
-  /// Receives the projection and extent generation of each frame once
+  /// Receives the projection and render result of each frame once
   /// Flutter can show it, so overlays can follow what is on screen rather than
   /// the latest camera, which the map image reaches a frame or two later. The
   /// receiver owns the projection.
@@ -119,7 +119,7 @@ final class MapRenderer {
   /// On Windows Flutter shows the frame in its next frame. On Android the
   /// frame went to the Surface, and Flutter takes the newest image there,
   /// which is nearly always the same one.
-  void Function(MapProjectionHandle projection, BigInt extentGeneration)?
+  void Function(MapProjectionHandle projection, RenderFrameResult frame)?
   onFrameShown;
 
   /// Creates a renderer of [extent]. When [styleUrl] is given, the map loads
@@ -128,7 +128,7 @@ final class MapRenderer {
     required LogicalExtent extent,
     String? styleUrl,
     void Function(RuntimeEvent event)? onEvent,
-    void Function(MapProjectionHandle projection, BigInt extentGeneration)?
+    void Function(MapProjectionHandle projection, RenderFrameResult frame)?
     onFrameShown,
   }) async {
     final context = _getVulkanContext();
@@ -234,7 +234,7 @@ final class MapRenderer {
     MapRenderer renderer,
     RenderSessionAttachment attachment,
     void Function(RuntimeEvent event)? onEvent,
-    void Function(MapProjectionHandle projection, BigInt extentGeneration)?
+    void Function(MapProjectionHandle projection, RenderFrameResult frame)?
     onFrameShown,
   ) async {
     renderer
@@ -417,15 +417,15 @@ final class MapRenderer {
     if (result.disposition == RenderResult.rendered) {
       // Taken before the next demand, so it is this frame's transform.
       final projection = _renderedProjection();
-      final extentGeneration = result.extentGeneration;
+      final frame = result;
       switch (_target) {
         case _Target.gpuTexture:
-          unawaited(_onGpuQueue(() => _present(projection, extentGeneration)));
+          unawaited(_onGpuQueue(() => _present(projection, frame)));
         case _Target.pixelBuffer:
-          unawaited(_readBack(projection, extentGeneration));
+          unawaited(_readBack(projection, frame));
         case _Target.surface:
           // The session presented the frame to the Surface.
-          _showFrame(projection, extentGeneration);
+          _showFrame(projection, frame);
           _demandFrame();
       }
     } else if (result.disposition == RenderResult.targetNotReady) {
@@ -440,7 +440,7 @@ final class MapRenderer {
   /// the call returns, so the frame is released right after.
   Future<void> _present(
     MapProjectionHandle? projection,
-    BigInt extentGeneration,
+    RenderFrameResult result,
   ) async {
     var shown = false;
     try {
@@ -450,7 +450,7 @@ final class MapRenderer {
       try {
         final slot = frame.getVulkanTexture().withView((view) => view.slot);
         WindowsPlugin.presentGpuTexture(textureId, slot);
-        _showFrame(projection, extentGeneration);
+        _showFrame(projection, result);
         shown = true;
       } finally {
         frame.release(gpuSyncDefault());
@@ -465,7 +465,7 @@ final class MapRenderer {
 
   Future<void> _readBack(
     MapProjectionHandle? projection,
-    BigInt extentGeneration,
+    RenderFrameResult result,
   ) async {
     var shown = false;
     try {
@@ -478,7 +478,7 @@ final class MapRenderer {
         stride: image.info.stride,
         pixels: image.data,
       );
-      _showFrame(projection, extentGeneration);
+      _showFrame(projection, result);
       shown = true;
     } on MaplibreException catch (error) {
       debugPrint('maplibre_native: readback failed: $error');
@@ -500,14 +500,14 @@ final class MapRenderer {
   }
 
   /// Hands [projection] to [onFrameShown] once its frame reached Flutter.
-  void _showFrame(MapProjectionHandle? projection, BigInt extentGeneration) {
+  void _showFrame(MapProjectionHandle? projection, RenderFrameResult frame) {
     if (projection == null) return;
     final onFrameShown = this.onFrameShown;
     if (_disposed || onFrameShown == null) {
       projection.close();
       return;
     }
-    onFrameShown(projection, extentGeneration);
+    onFrameShown(projection, frame);
   }
 
   void _drainEvents() {

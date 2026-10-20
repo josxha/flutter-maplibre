@@ -63,7 +63,9 @@ Each entry: the decision, then why.
   and screen locations come from it, so widget layers rebuild in the same
   Flutter frame as the map image. Camera events still report the latest
   camera. Exact on Windows. On Android Flutter takes the newest Surface
-  image itself, so it can be off by a frame.
+  image itself, so it can be off by a frame. Frames that drew a map update
+  older than the initial camera are skipped, because they can reach Flutter
+  after `onMapCreated`.
 - **Dart calls the plugins on its UI thread.** Flutter's Windows texture
   registrar functions may be called from any thread. On Android the UI
   thread is the main thread, which SurfaceProducer needs.
@@ -85,8 +87,10 @@ Each entry: the decision, then why.
 - **Gestures are recognized in Dart and applied as camera deltas.** A
   two-finger twist turns the map with the fingers (negated bearing). Double
   tap and drag zooms (down zooms in, 150 px per level). Two fingers side by
-  side dragged vertically tilt, as on MapLibre Android. Right-mouse drag
-  rotates and tilts on desktop.
+  side dragged vertically tilt, as on MapLibre Android. A right-button or
+  Ctrl + left-button drag rotates and tilts as in MapLibre GL JS: 0.8°
+  bearing per horizontal pixel, flipped above the center so the map turns
+  like a wheel, and 0.5° pitch per vertical pixel, up tilting further.
 
 ## Build and CI
 
@@ -113,3 +117,7 @@ Each entry: the decision, then why.
   pointer name `build/` and picks `build/<preset>/install` per target. Once
   it lands upstream, `tool/use_native_build.dart` can write `build/` once.
 - Touch tilt and double-tap-drag are not tested on Windows touchscreens.
+- The integration tests `toScreenLocation(s)` and `toLngLat(s)` fail in a
+  wide Windows window: at the minimum zoom the world is narrower than the
+  window, so screen corners wrap to the other world copy. They assume a view
+  that the world fills, as on a phone.
