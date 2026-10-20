@@ -113,11 +113,18 @@ Each entry: the decision, then why.
   element; the map's element takes no pointers anymore. Non-interactive
   `WidgetLayer` markers still use `TranslucentPointer`, so drags that start
   on them pan the map on every platform.
-- **Web applies steps with public gl-js camera calls, each an `easeTo` of
-  duration 0.** A pan puts `unproject(panFrom)` at `panTo` through
-  `center` + `offset`, so the grabbed location stays under the pointer in
-  every projection; zoom, rotation and pitch use `around`. One gesture
-  reports one camera move, although gl-js fires movestart/moveend per step.
+- **Web applies steps with public gl-js camera calls of duration 0.** A pan
+  puts `unproject(panFrom)` at `panTo` through `easeTo`'s `center` +
+  `offset`, so the grabbed location stays under the pointer in every
+  projection. gl-js's `around` drifts by up to 325 px on the globe (zoom 3,
+  cursor in a corner), so zoom, rotation and pitch around a point don't use
+  it: the web sink changes the camera, puts the location back with the pan
+  step, reads the result and restores the camera, all without reporting
+  events, and then applies the result in one `jumpTo`, or one animated
+  `easeTo` for a double tap. Wheel, pinch and double-tap zoom then keep the
+  location under the cursor within 0.01 px on the globe and on Mercator.
+  One gesture reports one camera move, although gl-js fires
+  movestart/moveend per step.
   A released pan flings with gl-js's own pan inertia constants (linearity
   0.3, max speed 1400 px/s, deceleration 2500 px/s², ease-out bezier).
 - **Globe on web needs no forwarding to gl-js handlers.** Measured with
@@ -172,6 +179,10 @@ Each entry: the decision, then why.
   pointer name `build/` and picks `build/<preset>/install` per target. Once
   it lands upstream, `tool/use_native_build.dart` can write `build/` once.
 - Touch tilt and double-tap-drag are not tested on Windows touchscreens.
+- The `backend: vulkan` user-define applies to every target, but iOS only
+  has Metal builds of the C library, so an app that targets iOS can't build
+  with it. The binding's hook would need a backend per platform. CI's iOS job
+  drops the define, since `maplibre_native` doesn't render on iOS yet.
 - Web lost gl-js's keyboard navigation and shift-drag box zoom, which the
   shared recognizer doesn't offer, and its grab cursor. Zoom and rotation
   don't fling, only pans.
