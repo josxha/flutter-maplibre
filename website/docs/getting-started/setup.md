@@ -87,19 +87,16 @@ platform, so widgets over the map keep their own taps and drags without a
         path: ../flutter-maplibre/packages/maplibre_web
     ```
 
-    If your app targets Android, also add the
-    [Vulkan backend setting](#setup-android) to the same `pubspec.yaml`.
-
 ## Platform support
 
-| Platform | Implementation    | Renderer                        | Status       |
-|----------|-------------------|---------------------------------|--------------|
-| Web      | `maplibre_web`    | MapLibre GL JS                  | Supported    |
-| Windows  | `maplibre_native` | MapLibre Native (C API, Vulkan) | Experimental |
-| Android  | `maplibre_native` | MapLibre Native (C API, Vulkan) | Experimental |
-| iOS      | `maplibre_native` | MapLibre Native (C API)         | Planned      |
-| macOS    | `maplibre_native` | MapLibre Native (C API)         | Planned      |
-| Linux    | `maplibre_native` | MapLibre Native (C API)         | Planned      |
+| Platform | Implementation    | Renderer                                     | Status       |
+|----------|-------------------|----------------------------------------------|--------------|
+| Web      | `maplibre_web`    | MapLibre GL JS                               | Supported    |
+| Windows  | `maplibre_native` | MapLibre Native (C API, Vulkan)              | Experimental |
+| Android  | `maplibre_native` | MapLibre Native (C API, OpenGL ES or Vulkan) | Experimental |
+| iOS      | `maplibre_native` | MapLibre Native (C API)                      | Planned      |
+| macOS    | `maplibre_native` | MapLibre Native (C API)                      | Planned      |
+| Linux    | `maplibre_native` | MapLibre Native (C API)                      | Planned      |
 
 On a platform marked as planned, the app builds, but creating a `MapLibreMap`
 throws an `UnsupportedError`.
@@ -158,12 +155,13 @@ No further setup is needed.
 
 ## Setup Android
 
-The map renders with Vulkan into the surface of a Flutter texture, so the
-device needs Vulkan 1.1 and Android 7.0 (API level 24) or newer.
+The map renders with OpenGL ES into the surface of a Flutter texture, so the
+device needs OpenGL ES 3.0 and Android 7.0 (API level 24) or newer. No further
+setup is needed.
 
-The downloaded Android library defaults to OpenGL ES, so select its Vulkan
-build in the root `pubspec.yaml` of your app, or of your workspace if your
-app is part of one:
+To render with Vulkan instead, which needs a device with Vulkan 1.1, select
+the Vulkan build of the C library in the root `pubspec.yaml` of your app, or of
+your workspace if your app is part of one:
 
 ```yaml title="pubspec.yaml"
 hooks:

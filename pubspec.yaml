@@ -23,10 +23,13 @@ dev_dependencies:
   yaml: ^3.1.2
   args: ^2.7.0
 
-
-hooks:
-  user_defines:
-    # maplibre_native renders through Vulkan on every platform it supports,
-    # while the downloaded Android library would default to OpenGL ES.
-    maplibre_native_ffi:
-      backend: vulkan
+# The build hook of maplibre_native_ffi picks the C library's render backend
+# per target: OpenGL ES on Android, Vulkan on Windows, and maplibre_native
+# renders through whichever one it got. To render through Vulkan on Android,
+# select it here. The define applies to every target, so iOS, which only has
+# Metal builds, can't build with it.
+#
+# hooks:
+#   user_defines:
+#     maplibre_native_ffi:
+#       backend: vulkan

@@ -253,12 +253,6 @@ jobs:
           cache: true
       - name: "Enable Swift Package Manager" # SPM requires config flag
         run: flutter config --enable-swift-package-manager
-      # The workspace selects the Vulkan build of the MapLibre Native C
-      # library for every target, but iOS only has Metal builds, and the
-      # binding's hook takes one backend for all targets.
-      - name: "Use the default backend on iOS"
-        working-directory: .
-        run: sed -i '' '/^hooks:$/,$d' pubspec.yaml
       - name: "Get Flutter dependencies"
         run: dart pub get
       - name: "Build iOS package"

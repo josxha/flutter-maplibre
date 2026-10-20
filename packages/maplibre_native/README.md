@@ -7,18 +7,18 @@ It renders through the experimental
 vendored as a submodule in `vendor/maplibre-native-ffi`, and shows each map as
 a Flutter `Texture`.
 
-| Platform | Rendering                                                                  |
-|----------|----------------------------------------------------------------------------|
-| Windows  | Vulkan into D3D11 textures shared with Flutter, or CPU readback            |
-| Android  | Vulkan swapchain on the Surface of a Flutter `SurfaceProducer`             |
-| Others   | Registered, but creating a map throws `UnsupportedError`                   |
+| Platform | Rendering                                                                   |
+|----------|-----------------------------------------------------------------------------|
+| Windows  | Vulkan into D3D11 textures shared with Flutter, or CPU readback             |
+| Android  | OpenGL ES (default) or Vulkan on the Surface of a Flutter `SurfaceProducer` |
+| Others   | Registered, but creating a map throws `UnsupportedError`                    |
 
 ## Android
 
-- Needs a device with Vulkan 1.1 and API level 24 or later.
-- The app has to select the Vulkan build of the C library, because the
-  downloaded Android library defaults to OpenGL ES. In the root `pubspec.yaml`
-  of the app or workspace:
+- Renders with OpenGL ES 3.0 by default, and needs API level 24 or later.
+- To render with Vulkan instead, which needs Vulkan 1.1, select the Vulkan
+  build of the C library in the root `pubspec.yaml` of the app or workspace.
+  The setting applies to every target, and iOS only has Metal builds.
 
   ```yaml
   hooks:
@@ -38,10 +38,11 @@ build of the submodule instead, build its preset (see the submodule's
 `CONTRIBUTING.md`) and point the hook at it from the repository root:
 
 ```bash
-dart tool/use_native_build.dart android-arm64-vulkan
+dart tool/use_native_build.dart android-arm64-egl
 ```
 
 The hook takes one install prefix at a time, so build one ABI per run, e.g.
 `flutter build apk --target-platform android-arm64`. Use
-`android-x64-vulkan` for emulators, `windows-x64-vulkan` for Windows, and
+`android-x64-egl` for emulators, `android-*-vulkan` for the Vulkan opt-in,
+`windows-x64-vulkan` for Windows, and
 `--download` to go back to the snapshot.

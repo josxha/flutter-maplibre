@@ -5,9 +5,11 @@
 // target, so switch it to the preset of the platform you build for next:
 //
 //   dart tool/use_native_build.dart windows-x64-vulkan
-//   dart tool/use_native_build.dart android-arm64-vulkan  # devices
-//   dart tool/use_native_build.dart android-x64-vulkan    # emulators
+//   dart tool/use_native_build.dart android-arm64-egl  # devices
+//   dart tool/use_native_build.dart android-x64-egl    # emulators
 //   dart tool/use_native_build.dart --download
+//
+// The android-*-vulkan presets build the Vulkan opt-in.
 //
 // Run it from the repository root, whose package does not depend on the
 // binding, so the hook does not run for the host first and reject a prefix

@@ -46,13 +46,10 @@ flutter run -d windows   # or chrome, or an Android device
 ```
 
 On Windows, Flutter's own requirements apply: Visual Studio 2022 with the
-*Desktop development with C++* workload. On Windows and Android, the device
-needs a Vulkan 1.1 driver.
-
-The root `pubspec.yaml` already selects the Vulkan build of the C library for
-Android (`hooks.user_defines.maplibre_native_ffi.backend: vulkan`). To build
-the example for iOS, remove that `hooks:` block locally, because the C library
-only has Metal builds for iOS.
+*Desktop development with C++* workload. On Windows, the device needs a Vulkan
+1.1 driver. Android renders with OpenGL ES 3.0 by default; to try the Vulkan
+build there, uncomment the `hooks:` block at the end of the root
+`pubspec.yaml`.
 
 ## The MapLibre Native C library
 
@@ -97,11 +94,11 @@ library's tests, which would also need the Vulkan SDK.
 ### Build for Android
 
 The Android presets build against the Android SDK and NDK from
-`ANDROID_HOME`. Build `android-arm64-vulkan` for devices or
-`android-x64-vulkan` for emulators, the same way as the Windows preset above.
-The submodule's
+`ANDROID_HOME`. Build `android-arm64-egl` for devices or `android-x64-egl` for
+emulators, the same way as the Windows preset above. The
 [development overview](https://github.com/maplibre/maplibre-native-ffi/blob/main/docs/src/content/docs/development/overview.md)
-lists the requirements and how to install the pinned SDK with mise.
+of the submodule lists the requirements and how to install the pinned SDK
+with mise. The `android-*-vulkan` presets build the Vulkan opt-in.
 
 ### Use the local build
 
@@ -109,16 +106,18 @@ Point the build hook at a build from the repository root:
 
 ```bash
 dart tool/use_native_build.dart windows-x64-vulkan
-dart tool/use_native_build.dart android-arm64-vulkan  # devices
-dart tool/use_native_build.dart android-x64-vulkan    # emulators
-dart tool/use_native_build.dart --download            # back to the snapshot
+dart tool/use_native_build.dart android-arm64-egl  # devices
+dart tool/use_native_build.dart android-x64-egl    # emulators
+dart tool/use_native_build.dart --download         # back to the snapshot
 ```
 
 The tool writes the install prefix to
 `bindings/dart/.dart_tool/maplibre_native_install_dir` in the submodule. The
 hook takes one prefix at a time and rejects other targets, so switch it to the
 platform you build for next. On Android, build the matching ABI only, for
-example `flutter build apk --target-platform android-arm64`.
+example `flutter build apk --target-platform android-arm64`. Without a backend
+user-define, the hook takes the backend of the prefix, so pointing it at an
+`android-*-vulkan` build is enough to run the Vulkan path.
 
 ## Tests
 
