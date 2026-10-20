@@ -16,6 +16,15 @@ void main() {
   test();
 }
 
+/// Map options for the projection tests. At zoom 4 the world is 8192 logical
+/// pixels wide, so every screen corner lies on the same world copy, however
+/// wide the window is. At the minimum zoom of a wide desktop window the
+/// corners would wrap to the neighbouring copies.
+const _projectionOptions = MapOptions(
+  initCenter: Geographic(lon: 1, lat: 2),
+  initZoom: 4,
+);
+
 void test() {
   group('controller', () {
     testWidgets('getCamera', (tester) async {
@@ -56,7 +65,7 @@ void test() {
       final ctrlCompleter = Completer<MapController>();
       final app = App(
         onMapCreated: ctrlCompleter.complete,
-        options: const MapOptions(initCenter: Geographic(lon: 1, lat: 2)),
+        options: _projectionOptions,
       );
       await tester.pumpWidget(app);
       final ctrl = await ctrlCompleter.future;
@@ -93,7 +102,7 @@ void test() {
       final ctrlCompleter = Completer<MapController>();
       final app = App(
         onMapCreated: ctrlCompleter.complete,
-        options: const MapOptions(initCenter: Geographic(lon: 1, lat: 2)),
+        options: _projectionOptions,
       );
       await tester.pumpWidget(app);
       final ctrl = await ctrlCompleter.future;
@@ -124,7 +133,7 @@ void test() {
       final ctrlCompleter = Completer<MapController>();
       final app = App(
         onMapCreated: ctrlCompleter.complete,
-        options: const MapOptions(initCenter: Geographic(lon: 1, lat: 2)),
+        options: _projectionOptions,
       );
       await tester.pumpWidget(app);
       final ctrl = await ctrlCompleter.future;
@@ -152,7 +161,7 @@ void test() {
       final ctrlCompleter = Completer<MapController>();
       final app = App(
         onMapCreated: ctrlCompleter.complete,
-        options: const MapOptions(initCenter: Geographic(lon: 1, lat: 2)),
+        options: _projectionOptions,
       );
       await tester.pumpWidget(app);
       final ctrl = await ctrlCompleter.future;

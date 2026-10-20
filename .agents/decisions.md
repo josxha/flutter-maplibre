@@ -61,8 +61,9 @@ Each entry: the decision, then why.
   Each rendered frame's `session.createProjection()` (taken before the next
   demand) reaches the map state when Flutter can show that frame. `camera`
   and screen locations come from it, so widget layers rebuild in the same
-  Flutter frame as the map image. Camera events still report the latest
-  camera. Exact on Windows. On Android Flutter takes the newest Surface
+  Flutter frame as the map image. Camera events and `getCamera()` still
+  report the latest camera, so `await moveCamera(...)` is followed by the new
+  one. Exact on Windows. On Android Flutter takes the newest Surface
   image itself, so it can be off by a frame. Frames that drew a map update
   older than the initial camera are skipped, because they can reach Flutter
   after `onMapCreated`.
@@ -92,6 +93,12 @@ Each entry: the decision, then why.
   bearing per horizontal pixel, flipped above the center so the map turns
   like a wheel, and 0.5° pitch per vertical pixel, up tilting further.
 
+## Tests
+
+- **Projection integration tests run at zoom 4.** At the minimum zoom of a
+  wide desktop window the world is narrower than the window, and screen
+  corners wrap to the neighbouring world copy.
+
 ## Build and CI
 
 - **`tool/use_native_build.dart` points the build hook at a local C build.**
@@ -117,7 +124,3 @@ Each entry: the decision, then why.
   pointer name `build/` and picks `build/<preset>/install` per target. Once
   it lands upstream, `tool/use_native_build.dart` can write `build/` once.
 - Touch tilt and double-tap-drag are not tested on Windows touchscreens.
-- The integration tests `toScreenLocation(s)` and `toLngLat(s)` fail in a
-  wide Windows window: at the minimum zoom the world is narrower than the
-  window, so screen corners wrap to the other world copy. They assume a view
-  that the world fills, as on a phone.

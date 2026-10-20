@@ -675,10 +675,12 @@ class MapLibreMapStateNative extends MapLibreMapState {
     _projection = null;
   }
 
+  // The map's latest camera, so it reflects a completed moveCamera. [camera]
+  // instead follows the frame on screen, for widgets over the map.
   @override
   MapCamera getCamera() =>
-      camera ??
       _readCamera() ??
+      camera ??
       (throw StateError('The map has not been created yet.'));
 
   @override
