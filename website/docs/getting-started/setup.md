@@ -4,6 +4,24 @@ icon: lucide/sparkles
 
 # How to setup
 
+## Packages
+
+You only depend on `maplibre`. It endorses one implementation per platform,
+so Flutter picks the right one without any further dependency:
+
+| Package                       | Used for                                                                                   |
+|-------------------------------|--------------------------------------------------------------------------------------------|
+| `maplibre`                    | The widgets and API your app uses                                                          |
+| `maplibre_web`                | Web, through [MapLibre GL JS](https://github.com/maplibre/maplibre-gl-js)                  |
+| `maplibre_native`             | Every other platform, through the [MapLibre Native C API](https://github.com/maplibre/maplibre-native-ffi) |
+| `maplibre_platform_interface` | The interface both implementations share, including the gesture recognizer                |
+
+Every map is shown as a Flutter `Texture` (or as an HTML element on web), never
+as a platform view, so transforms, clipping and widgets on top of the map work
+like with any other widget. Map gestures are recognized in Flutter on every
+platform, so widgets over the map keep their own taps and drags without a
+`PointerInterceptor`.
+
 ## Add the dependency
 
 === "Run command"
@@ -28,42 +46,75 @@ icon: lucide/sparkles
     flutter pub get
     ```
 
+!!! warning "The MapLibre Native implementation is not published yet"
+
+    `maplibre_native` depends on the Dart binding of the MapLibre Native C API
+    by path, from a Git submodule, until that binding is on pub.dev. Until
+    then, the releases on pub.dev are older versions that don't use
+    `maplibre_native`, and the version described here is only available from
+    a local clone of the repository.
+
 ??? info "Using the development version"
 
-    If you want to have access to the latest features and changes, you
-    can use the package directly from GitHub.
+    The development version needs the repository and its submodule on your
+    disk, because pub doesn't check out Git submodules of Git dependencies.
 
     !!! warning
 
-        Note, that the development version is not considered stable and shouldn't be
+        The development version is not considered stable and shouldn't be
         used in production systems.
 
-    This is how you include the package directly from GitHub. Either use it in your
-    `dependecies:` or temporarily override it inside the `dependency_overrides:`
-    list.
-    
-    ```yaml title="pubspec.yaml" hl_lines="2-5"
+    Clone the repository with its submodule:
+
+    ```bash
+    git clone --recurse-submodules https://github.com/josxha/flutter-maplibre
+    ```
+
+    Then point your app at the packages in the clone. `maplibre` depends on
+    the other packages by version, so override them with the local ones, too:
+
+    ```yaml title="pubspec.yaml" hl_lines="2-3 6-12"
     dependencies:
       maplibre:
-        git:
-          url: https://github.com/josxha/flutter-maplibre
-          ref: main # or a specific commit hash 
+        path: ../flutter-maplibre/packages/maplibre
+
+    dependency_overrides:
+      maplibre_native:
+        path: ../flutter-maplibre/packages/maplibre_native
+      maplibre_platform_interface:
+        path: ../flutter-maplibre/packages/maplibre_platform_interface
+      maplibre_web:
+        path: ../flutter-maplibre/packages/maplibre_web
     ```
+
+    If your app targets Android, also add the
+    [Vulkan backend setting](#setup-android) to the same `pubspec.yaml`.
 
 ## Platform support
 
-| Platform | Implementation    | Renderer                                       | Status       |
-|----------|-------------------|------------------------------------------------|--------------|
-| Web      | `maplibre_web`    | MapLibre GL JS                                 | Supported    |
-| Windows  | `maplibre_native` | MapLibre Native (C API, Vulkan)                | Experimental |
-| Android  | `maplibre_native` | MapLibre Native (C API)                        | Planned      |
-| iOS      | `maplibre_native` | MapLibre Native (C API)                        | Planned      |
-| macOS    | `maplibre_native` | MapLibre Native (C API)                        | Planned      |
-| Linux    | `maplibre_native` | MapLibre Native (C API)                        | Planned      |
+| Platform | Implementation    | Renderer                        | Status       |
+|----------|-------------------|---------------------------------|--------------|
+| Web      | `maplibre_web`    | MapLibre GL JS                  | Supported    |
+| Windows  | `maplibre_native` | MapLibre Native (C API, Vulkan) | Experimental |
+| Android  | `maplibre_native` | MapLibre Native (C API, Vulkan) | Experimental |
+| iOS      | `maplibre_native` | MapLibre Native (C API)         | Planned      |
+| macOS    | `maplibre_native` | MapLibre Native (C API)         | Planned      |
+| Linux    | `maplibre_native` | MapLibre Native (C API)         | Planned      |
 
-Both implementations are endorsed by `maplibre`, so no extra dependency is
-needed. On a platform marked as planned, creating a `MapLibreMap` throws an
-`UnsupportedError`.
+On a platform marked as planned, the app builds, but creating a `MapLibreMap`
+throws an `UnsupportedError`.
+
+!!! warning
+
+    The native implementation renders through the experimental
+    [MapLibre Native C API](https://github.com/maplibre/maplibre-native-ffi),
+    whose ABI is not stable yet. Globe projection, the user location and
+    location permissions are not available on native platforms yet.
+
+The MapLibre Native library reaches your app as a Dart
+[native asset](https://dart.dev/tools/hooks): the build hook of its Dart
+binding downloads a prebuilt library, and Flutter bundles it with your app.
+The packages need Flutter 3.47 or newer.
 
 ## Setup Web
 
@@ -86,8 +137,7 @@ your `web/index.html` file:
 
 `^5.0` ensures that your app will always use the latest version of
 [maplibre-gl-js](https://github.com/maplibre/maplibre-gl-js) version 5 but not
-suddenly
-use an incompatible version.
+suddenly use an incompatible version.
 
 If you want to always use the latest version use `latest` or use the full
 version number like `5.0.0` if you want to use a specific version.
@@ -95,18 +145,39 @@ version number like `5.0.0` if you want to use a specific version.
 You can read about changes in maplibre-gl-js in
 the [changelog file](https://github.com/maplibre/maplibre-gl-js/blob/main/CHANGELOG.md).
 
+Gestures on web are handled by Flutter, not by MapLibre GL JS, so GL JS's
+keyboard navigation and Shift + drag box zoom are not available.
+
 ## Setup Windows
-
-!!! warning
-
-    Windows support is experimental. It renders through the experimental
-    [MapLibre Native C API](https://github.com/maplibre/maplibre-native-ffi),
-    whose ABI is not stable yet.
 
 The map renders with Vulkan into a Flutter texture, so the device needs a GPU
 driver with Vulkan 1.1 support (`vulkan-1.dll`). Recent drivers from AMD,
 Intel and NVIDIA include it.
 
-The MapLibre Native library reaches your app as a Dart native asset, which
-Flutter bundles next to the executable when it builds the app. No further
-setup is needed.
+No further setup is needed.
+
+## Setup Android
+
+The map renders with Vulkan into the surface of a Flutter texture, so the
+device needs Vulkan 1.1 and Android 7.0 (API level 24) or newer.
+
+The downloaded Android library defaults to OpenGL ES, so select its Vulkan
+build in the root `pubspec.yaml` of your app, or of your workspace if your
+app is part of one:
+
+```yaml title="pubspec.yaml"
+hooks:
+  user_defines:
+    maplibre_native_ffi:
+      backend: vulkan
+```
+
+!!! note
+
+    This setting applies to every platform your app builds for. The C library
+    only has Metal builds for iOS, so remove the setting when you build for
+    iOS. iOS doesn't render maps yet anyway.
+
+The plugin ships the Android TLS certificate verifier that the C library
+calls, together with the R8 rules that keep it, so no ProGuard setup is
+needed.

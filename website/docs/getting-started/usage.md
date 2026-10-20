@@ -19,7 +19,7 @@ class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
 
   @override
-  State createState() => FullMapState();
+  State<MapScreen> createState() => MapScreenState();
 }
 
 class MapScreenState extends State<MapScreen> {
@@ -73,9 +73,9 @@ class MyMapWidget extends StatefulWidget {
   State<MyMapWidget> createState() => _MyMapWidget();
 }
 
-class _MyMapWidget extends State<GesturesPage> {
+class _MyMapWidget extends State<MyMapWidget> {
   // Using this field to store the widget state
-  bool _gesturesEnabed = true;
+  bool _gesturesEnabled = true;
 
   @override
   Widget build(BuildContext context) {
@@ -93,9 +93,9 @@ class _MyMapWidget extends State<GesturesPage> {
           onEvent: (event) {
             if (event case MapEventClick()) {
               // update the map widget using Flutters' state management
-              setState() {
-                _gesturesEnabed = !_gesturesEnabed;
-              }
+              setState(() {
+                _gesturesEnabled = !_gesturesEnabled;
+              });
             }
           }
       ),
@@ -116,7 +116,7 @@ by listening in the `onEvent` callback for the `MapEventMapCreated` event type.
 You can store the `MapController` in a field variable for later use.
 
 ```dart linenums="1" hl_lines="2 13"
-class _MyMapWidget extends State<GesturesPage> {
+class _MyMapWidget extends State<MyMapWidget> {
   MapController? _mapController;
 
   @override
@@ -147,7 +147,7 @@ After it has loaded you can access the `StyleController` at any time
 from the `style` getter of `MapController`.
 
 ```dart linenums="1" hl_lines="11-12"
-class _MyMapWidget extends State<GesturesPage> {
+class _MyMapWidget extends State<MyMapWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
