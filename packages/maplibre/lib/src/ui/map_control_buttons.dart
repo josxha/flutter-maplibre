@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:pointer_interceptor/pointer_interceptor.dart';
 
 /// Display a zoom-in and zoom-out button to the [MapLibreMap] by using it in
 /// [MapLibreMap.children].
@@ -77,45 +76,43 @@ class _MapControlButtonsState extends State<MapControlButtons> {
       child: Container(
         alignment: widget.alignment,
         padding: widget.padding,
-        child: PointerInterceptor(
-          child: Column(
-            spacing: 8,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              FloatingActionButton(
-                heroTag: 'MapLibreZoomInButton',
-                onPressed: () => controller.animateCamera(
-                  zoom: controller.getCamera().zoom + 1,
-                  nativeDuration: const Duration(milliseconds: 200),
-                ),
-                child: const Icon(Icons.add),
+        child: Column(
+          spacing: 8,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            FloatingActionButton(
+              heroTag: 'MapLibreZoomInButton',
+              onPressed: () => controller.animateCamera(
+                zoom: controller.getCamera().zoom + 1,
+                nativeDuration: const Duration(milliseconds: 200),
               ),
-              FloatingActionButton(
-                heroTag: 'MapLibreZoomOutButton',
-                onPressed: () => controller.animateCamera(
-                  zoom: controller.getCamera().zoom - 1,
-                  nativeDuration: const Duration(milliseconds: 200),
-                ),
-                child: const Icon(Icons.remove),
+              child: const Icon(Icons.add),
+            ),
+            FloatingActionButton(
+              heroTag: 'MapLibreZoomOutButton',
+              onPressed: () => controller.animateCamera(
+                zoom: controller.getCamera().zoom - 1,
+                nativeDuration: const Duration(milliseconds: 200),
               ),
-              if (_showLocationButton) ...[
-                FloatingActionButton(
-                  heroTag: 'MapLibreTrackLocationButton',
-                  onPressed: () async => _initializeLocation(controller),
-                  child: _trackState == _TrackLocationState.loading
-                      ? const SizedBox.square(
-                          dimension: kDefaultFontSize,
-                          child: CircularProgressIndicator(),
-                        )
-                      : Icon(
-                          _trackState == _TrackLocationState.gpsFixed
-                              ? Icons.gps_fixed
-                              : Icons.gps_not_fixed,
-                        ),
-                ),
-              ],
+              child: const Icon(Icons.remove),
+            ),
+            if (_showLocationButton) ...[
+              FloatingActionButton(
+                heroTag: 'MapLibreTrackLocationButton',
+                onPressed: () async => _initializeLocation(controller),
+                child: _trackState == _TrackLocationState.loading
+                    ? const SizedBox.square(
+                        dimension: kDefaultFontSize,
+                        child: CircularProgressIndicator(),
+                      )
+                    : Icon(
+                        _trackState == _TrackLocationState.gpsFixed
+                            ? Icons.gps_fixed
+                            : Icons.gps_not_fixed,
+                      ),
+              ),
             ],
-          ),
+          ],
         ),
       ),
     );

@@ -107,6 +107,12 @@ Each entry: the decision, then why.
   leak taps and drags to gl-js. Clicks, double, secondary and long clicks
   come from `MapGestureDetector`. A right click or Ctrl + click that starts
   on the map suppresses the browser's context menu once.
+- **Widgets over the map need no `PointerInterceptor`, so `maplibre` and
+  `maplibre_web` dropped the package.** It only put an invisible HTML element
+  under its child, so the browser would not route the pointer to the map's
+  element; the map's element takes no pointers anymore. Non-interactive
+  `WidgetLayer` markers still use `TranslucentPointer`, so drags that start
+  on them pan the map on every platform.
 - **Web applies steps with public gl-js camera calls, each an `easeTo` of
   duration 0.** A pan puts `unproject(panFrom)` at `panTo` through
   `center` + `offset`, so the grabbed location stays under the pointer in

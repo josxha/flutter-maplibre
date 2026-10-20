@@ -27,7 +27,6 @@ dependencies:
   maplibre_native: ^0.4.0
   maplibre_platform_interface: ^0.3.6
   maplibre_web: ^0.3.6
-  pointer_interceptor: ^0.10.1+2
   url_launcher: ^6.3.0
 
 dev_dependencies:

@@ -18,9 +18,22 @@
   `RenderedFeature.sourceId` and `RenderedFeature.sourceLayer` for the source.
 - `RenderedFeature` equality and `hashCode` compare `id`, `sourceId` and
   `sourceLayer`.
+- Web: map gestures are recognized in Flutter, as on every other platform,
+  instead of by MapLibre GL JS. Its keyboard navigation and shift-drag box
+  zoom are gone, and the scroll wheel zooms by Flutter's logical scroll delta.
+- Removed the `pointer_interceptor` dependency. Widgets over the map no longer
+  need a `PointerInterceptor` on web; `WidgetLayer.allowInteraction` works the
+  same on every platform.
+
+### Features
+
+- Gestures are shared by all platforms: drag, pinch and twist, scroll wheel,
+  double tap, double tap and drag, two-finger tilt, and right-button or
+  Ctrl + left-button rotate and tilt.
 
 ### Bug Fixes
 
+- Web: widgets over the map no longer let taps and drags through to the map.
 - Android: calls on a `StyleController` whose native style was already released
   are ignored instead of aborting the process with a JNI error.
 
