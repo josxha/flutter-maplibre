@@ -63,6 +63,7 @@ class _EventsPageState extends State<EventsPage> {
       'secondary clicked: ${_formatGeographic(event.point)}, screen: ${_formatOffset(event.screenPoint)}',
     MapEventIdle() => 'idle',
     MapEventCameraIdle() => 'camera idle',
+    MapEventUserInput() => 'Map user event: ${_formatGeographic(event.point)}',
   };
 
   void _onEvent(MapEvent event) {

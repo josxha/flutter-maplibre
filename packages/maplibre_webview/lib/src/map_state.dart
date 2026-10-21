@@ -644,6 +644,30 @@ class MapLibreMapStateWebView extends MapLibreMapState {
         viewContextMenu.setFloat64(25, e.point.y, true);
         window.ws.send(bufContextMenu);
     });
+    const bufUserInput = new ArrayBuffer(1 + 8*4);
+    const viewUserInput = new DataView(bufUserInput);
+    viewUserInput.setUint8(0, $eventUserInput);
+    window.map.on('mousedown', (e) => {
+        viewUserInput.setFloat64(1, e.lngLat.lng, true);
+        viewUserInput.setFloat64(9, e.lngLat.lat, true);
+        viewUserInput.setFloat64(17, e.point.x, true);
+        viewUserInput.setFloat64(25, e.point.y, true);
+        window.ws.send(bufUserInput);
+    });
+    window.map.on('touchstart', (e) => {
+        viewUserInput.setFloat64(1, e.lngLat.lng, true);
+        viewUserInput.setFloat64(9, e.lngLat.lat, true);
+        viewUserInput.setFloat64(17, e.point.x, true);
+        viewUserInput.setFloat64(25, e.point.y, true);
+        window.ws.send(bufUserInput);
+    });
+    window.map.on('wheel', (e) => {
+        viewUserInput.setFloat64(1, e.lngLat.lng, true);
+        viewUserInput.setFloat64(9, e.lngLat.lat, true);
+        viewUserInput.setFloat64(17, e.point.x, true);
+        viewUserInput.setFloat64(25, e.point.y, true);
+        window.ws.send(bufUserInput);
+    });
     /*window.map.on('idle', () => {
         const center = window.map.getCenter();
         window.flutter_inappwebview.callHandler(
@@ -765,6 +789,19 @@ class MapLibreMapStateWebView extends MapLibreMapState {
           // setStyle and initial loading
           case eventStyleLoad || eventLoad:
             _onStyleLoaded();
+          case eventUserInput:
+            widget.onEvent?.call(
+              MapEventUserInput(
+                point: Geographic(
+                  lon: b.getFloat64(1, Endian.little),
+                  lat: b.getFloat64(9, Endian.little),
+                ),
+                screenPoint: Offset(
+                  b.getFloat64(17, Endian.little),
+                  b.getFloat64(25, Endian.little),
+                ),
+              ),
+            );
           case eventClick:
             widget.onEvent?.call(
               MapEventClick(

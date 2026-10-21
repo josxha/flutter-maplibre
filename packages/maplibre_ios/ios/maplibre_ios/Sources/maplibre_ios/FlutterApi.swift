@@ -8,6 +8,7 @@ public protocol FlutterApi: AnyObject {
     @objc func onSecondaryTap(screenLocation: CGPoint)
     @objc func onDoubleTap(screenLocation: CGPoint)
     @objc func onLongPress(screenLocation: CGPoint)
+    @objc func onUserInput(screenLocation: CGPoint)
 
     // MLNMapViewDelegate
     @objc func didFinishLoadingStyle(mapView: MLNMapView, style: MLNStyle)
