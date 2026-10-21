@@ -246,9 +246,7 @@ Each entry: the decision, then why.
 - The Dart binding lacks `queue_lock`. The Python binding has it.
 - The binding's build hook takes one local install prefix and rejects other
   targets, so it can't pick a preset per target (needed for multi-ABI
-  Android builds). `upstream/0001-dart-hook-build-root.patch` lets the
-  pointer name `build/` and picks `build/<preset>/install` per target. Once
-  it lands upstream, `tool/use_native_build.dart` can write `build/` once.
+  Android builds).
 - Touch tilt and double-tap-drag are not tested on Windows touchscreens.
 - The `backend: vulkan` user-define that opts Android into Vulkan applies to
   every target, but iOS only has Metal builds of the C library, so an app
