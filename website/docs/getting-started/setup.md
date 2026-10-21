@@ -173,8 +173,8 @@ your dependency list.
 
     ```yaml title="pubspec.yaml" hl_lines="3"
     dependencies:
-      maplibre: ^0.3.4
-      maplibre_webview: ^0.3.4
+      maplibre: ^0.3.7
+      maplibre_webview: ^0.3.7-beta.1
     ```
 
 ### flutter_inappwebview Setup
