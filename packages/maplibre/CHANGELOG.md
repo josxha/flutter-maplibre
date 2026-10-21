@@ -1,7 +1,7 @@
 ## 0.3.7
 
 Thanks for everyone who contributed in this release!
-@ethicnology-agent, @glandais, @miakh, @teamacco, @Mazen-Embaby, @fmt-Println-MKO, @BartoszStasiurka
+@glandais, @miakh, @teamacco, @Mazen-Embaby, @fmt-Println-MKO, @BartoszStasiurka
 
 ### Features
 
