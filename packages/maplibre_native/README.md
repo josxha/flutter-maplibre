@@ -36,6 +36,8 @@ a Flutter `Texture`.
 ## iOS and macOS
 
 - Render with Metal, on iOS 13 and macOS 10.15 or later.
+- The plugin is a Swift Package Manager package only, without a podspec, so
+  apps need `flutter config --enable-swift-package-manager`.
 - The C library is published for arm64 only: devices, arm64 simulators, and
   Apple silicon Macs. Apps exclude x86_64 with `EXCLUDED_ARCHS`, as the
   example's xcconfigs do.

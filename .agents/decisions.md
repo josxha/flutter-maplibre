@@ -83,8 +83,11 @@ Each entry: the decision, then why.
 ## iOS and macOS
 
 - **One Objective-C plugin in `darwin/` serves both, with
-  `sharedDarwinSource`, as a CocoaPods pod and a SwiftPM package.** The Metal
-  and CoreVideo code is the same on both; only the Flutter import differs.
+  `sharedDarwinSource`, as a SwiftPM package only.** The Metal and CoreVideo
+  code is the same on both; only the Flutter import differs. CocoaPods is
+  deprecated and being phased out of Flutter, so there is no podspec, and the
+  example's iOS and macOS projects are deintegrated from it. Apps need
+  `flutter config --enable-swift-package-manager`.
 - **Sessions render into a borrowed ring of three private BGRA8 Metal
   textures, and each acquired frame is blitted into a pixel buffer from an
   IOSurface-backed `CVPixelBufferPool`, which the `FlutterTexture` returns

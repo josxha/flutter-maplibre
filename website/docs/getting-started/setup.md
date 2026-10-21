@@ -180,6 +180,15 @@ The plugin ships the Android TLS certificate verifier that the C library
 calls, together with the R8 rules that keep it, so no ProGuard setup is
 needed.
 
+## Setup iOS and macOS
+
+The plugin is a Swift Package Manager package only and has no CocoaPods
+podspec, so enable Swift Package Manager for Flutter:
+
+```bash
+flutter config --enable-swift-package-manager
+```
+
 ## Setup iOS
 
 The map renders with Metal into a Flutter texture, on iOS 13 or newer. The C

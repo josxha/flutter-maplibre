@@ -18,7 +18,7 @@ Flutter MapLibre: a federated plugin in a Dart pub workspace.
     surfaces with a render thread per map, or as Vulkan surfaces of its own
     device). Its API is `MaplibreNativeApi.kt`, bound in
     `lib/src/android/bindings.g.dart`.
-  - `darwin/`: Objective-C plugin for iOS and macOS, for CocoaPods and SwiftPM
+  - `darwin/`: Objective-C plugin for iOS and macOS, a SwiftPM package only
     (Metal texture ring copied into IOSurface pixel buffers). Its C API is
     `darwin/maplibre_native/Sources/maplibre_native/include/maplibre_native/maplibre_native_api.h`,
     bound in `lib/src/darwin/bindings.g.dart`.
