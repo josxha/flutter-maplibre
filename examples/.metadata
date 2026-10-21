@@ -27,6 +27,9 @@ migration:
     - platform: web
       create_revision: 3b62efc2a3da49882f43c372e0bc53daef7295a6
       base_revision: 3b62efc2a3da49882f43c372e0bc53daef7295a6
+    - platform: linux
+      create_revision: 6a19cca56475dbfba1478ee68d7bd0c2ef891da1
+      base_revision: 6a19cca56475dbfba1478ee68d7bd0c2ef891da1
     - platform: windows
       create_revision: 3b62efc2a3da49882f43c372e0bc53daef7295a6
       base_revision: 3b62efc2a3da49882f43c372e0bc53daef7295a6

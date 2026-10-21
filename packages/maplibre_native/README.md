@@ -13,7 +13,7 @@ a Flutter `Texture`.
 | Android  | OpenGL ES (default) or Vulkan on the Surface of a Flutter `SurfaceProducer` |
 | iOS      | Metal into a texture ring, copied on the GPU into IOSurface pixel buffers   |
 | macOS    | Metal into a texture ring, copied on the GPU into IOSurface pixel buffers   |
-| Linux    | Registered, but creating a map throws `UnsupportedError`                    |
+| Linux    | Vulkan into memory imported by OpenGL for Flutter, or CPU readback          |
 
 ## Android
 
@@ -44,6 +44,18 @@ a Flutter `Texture`.
 - Sandboxed macOS apps need the `com.apple.security.network.client`
   entitlement to load styles and tiles.
 
+## Linux
+
+- Renders with Vulkan 1.1. Frames reach Flutter without a CPU copy when
+  OpenGL has `GL_EXT_memory_object_fd` and runs on the same GPU and driver as
+  Vulkan, and when Dart runs on the GTK main thread. Otherwise they are read
+  back into a pixel buffer texture.
+- Building needs the GTK and libepoxy development packages
+  (`libgtk-3-dev libepoxy-dev` on Debian and Ubuntu), and running needs a
+  Vulkan driver.
+- `MAPLIBRE_NATIVE_DISABLE_ZERO_COPY=1` forces the CPU readback, on Linux and
+  Windows.
+
 ## Building the C library locally
 
 By default the build hook of `maplibre_native_ffi` downloads a published
@@ -58,5 +70,5 @@ dart tool/use_native_build.dart android-arm64-egl
 The hook takes one install prefix at a time, so build one ABI per run, e.g.
 `flutter build apk --target-platform android-arm64`. Use
 `android-x64-egl` for emulators, `android-*-vulkan` for the Vulkan opt-in,
-`windows-x64-vulkan` for Windows, and
+`windows-x64-vulkan` for Windows, `linux-gnu-x64-vulkan` for Linux, and
 `--download` to go back to the snapshot.

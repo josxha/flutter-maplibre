@@ -5,6 +5,7 @@
 // target, so switch it to the preset of the platform you build for next:
 //
 //   dart tool/use_native_build.dart windows-x64-vulkan
+//   dart tool/use_native_build.dart linux-gnu-x64-vulkan
 //   dart tool/use_native_build.dart android-arm64-egl  # devices
 //   dart tool/use_native_build.dart android-x64-egl    # emulators
 //   dart tool/use_native_build.dart --download

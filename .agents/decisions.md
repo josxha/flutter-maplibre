@@ -53,6 +53,29 @@ Each entry: the decision, then why.
   Tearing is unlikely but possible.
 - **The C library is built with MSVC 14.37.** 14.44 needs LLVM 19 or newer.
 
+## Linux
+
+- **Frames reach Flutter as an `FlTextureGL`. MapLibre renders through
+  Vulkan into a ring of RGBA8 images with exportable memory, which OpenGL
+  imports as opaque file descriptors (`GL_EXT_memory_object_fd`); each frame
+  is blitted into one of three plain GL textures that Flutter samples.** This
+  mirrors the D3D11 copy on Windows: the ring is free once the copy returns,
+  and the copy never targets the texture Flutter shows or fetched last, since
+  Flutter takes no fence for external textures. The plugin waits for the
+  copy with `glFinish`. Opaque memory needs one GPU and driver on both sides,
+  so the plugin creates its Vulkan device on the OpenGL device UUID and
+  checks the driver UUIDs. Otherwise frames are read back into an
+  `FlPixelBufferTexture`, as on Windows.
+- **The plugin copies in its own GDK OpenGL context, created from Flutter's
+  window, so it shares textures with Flutter's contexts.** GDK contexts may
+  only be used on the GTK main thread, so zero-copy textures need Dart's UI
+  thread to be the main thread (merged threads); the plugin checks
+  `g_main_context_is_owner` and falls back to the pixel buffer otherwise. It
+  restores the context that was current after each use. OpenGL goes through
+  libepoxy, which GTK already loads.
+- **The plugin lives as long as the process.** Linux plugins get no
+  shutdown call, and sessions on core workers can outlive the engine.
+
 ## Android
 
 - **MapLibre presents to the Surface of a Flutter `SurfaceProducer`, through
@@ -226,6 +249,12 @@ Each entry: the decision, then why.
   (`maplibre_platform_interface/test`). The integration tests in
   `examples/integration_test/gestures_test.dart` check each platform's
   camera end to end.
+- **`linux/test/gl_texture_test.cc` checks the Linux zero-copy path without
+  Flutter**, against stand-ins for the few Flutter functions the plugin
+  calls: a GDK context of a real window, the device on its UUID, exported
+  images that OpenGL imports, and the present copy, read back through
+  `populate`, also across a resize. It passes on Mesa's lavapipe and
+  llvmpipe, which share memory, so it runs without a GPU.
 - **Projection integration tests run at zoom 4.** At the minimum zoom of a
   wide desktop window the world is narrower than the window, and screen
   corners wrap to the neighbouring world copy.
@@ -249,6 +278,17 @@ Each entry: the decision, then why.
 
 - Missing on native: globe projection, user location and permissions.
 - iOS and macOS were written without a Mac and have not been built or run.
+- Linux has not been built through Flutter or run on a Linux machine: the
+  plugin compiles with `-Wall -Werror` and `gl_texture_test` passes in WSL,
+  which had no network for a Flutter build. The zero-copy path assumes that
+  Flutter's OpenGL contexts share textures with GDK contexts of its window,
+  that Flutter on Linux renders with OpenGL (an `FlTextureGL` does nothing
+  for a Vulkan renderer), and that Dart's UI thread is the GTK main thread.
+  To check it: build `linux-gnu-x64-vulkan` (the snapshot lags the pinned
+  binding), `dart tool/use_native_build.dart linux-gnu-x64-vulkan`, run
+  `flutter test integration_test/main.dart -d linux` in `examples` with and
+  without `MAPLIBRE_NATIVE_DISABLE_ZERO_COPY=1`, and look for the
+  "falling back to CPU readback" log line.
 - Intel Macs and x86_64 simulators have no published C library.
 - The backend user-define applies to every target, and the macOS presets
   also offer Vulkan and OpenGL. With either, a macOS map throws
