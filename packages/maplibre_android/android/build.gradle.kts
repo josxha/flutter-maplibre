@@ -43,8 +43,14 @@ android {
         minSdk = 21
     }
 
+    testOptions {
+        unitTests.all { it.useJUnitPlatform() }
+    }
+
     dependencies {
         api("org.maplibre.gl:android-sdk-opengl:13.5.+")
+        implementation("com.squareup.okhttp3:okhttp:4.12.0")
+        testImplementation("org.junit.jupiter:junit-jupiter:5.12.2")
         testImplementation("org.jetbrains.kotlin:kotlin-test")
         testImplementation("org.mockito:mockito-core:5.21.+")
     }

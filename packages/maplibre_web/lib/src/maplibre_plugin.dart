@@ -1,5 +1,6 @@
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
+import 'package:maplibre_web/src/host_scoped_request_headers.dart';
 import 'package:maplibre_web/src/map_state.dart';
 
 /// Web implementation of the federated MapLibre plugin.
@@ -18,5 +19,18 @@ final class MapLibrePlugin extends MapLibrePlatform {
   @override
   PermissionManager createPermissionManager() {
     throw Exception('The PermissionManager can not be used on web.');
+  }
+
+  @override
+  Future<void> setRequestHeaders(
+    String host,
+    Map<String, String> headers,
+  ) async {
+    HostScopedRequestHeaders.replace(host, headers);
+  }
+
+  @override
+  Future<void> clearRequestHeaders(String host) async {
+    HostScopedRequestHeaders.clear(host);
   }
 }

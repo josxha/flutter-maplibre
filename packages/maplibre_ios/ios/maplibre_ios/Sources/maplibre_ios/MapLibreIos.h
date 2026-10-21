@@ -336,6 +336,14 @@ SWIFT_CLASS_NAMED("Helpers")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class NSDictionary;
+SWIFT_CLASS_NAMED("HostScopedRequestHeaders")
+@interface HostScopedRequestHeaders : NSObject
++ (void)replaceWithHost:(NSString * _Nonnull)host headers:(NSDictionary * _Nonnull)headers;
++ (void)clearWithHost:(NSString * _Nonnull)host;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
 SWIFT_CLASS_NAMED("MapLibreRegistry")
 @interface MapLibreRegistry : NSObject
 /// Method to get the map for a given viewId

@@ -19,6 +19,7 @@ const includedInterfaces = <String>{
   'UIViewConfigurationState',
   'NSExpression',
   'Helpers',
+  'HostScopedRequestHeaders',
   'MapLibreRegistry',
   'Extensions',
   'MLNMapView',

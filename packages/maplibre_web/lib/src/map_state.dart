@@ -10,6 +10,7 @@ import 'package:flutter/widgets.dart';
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 import 'package:maplibre_web/src/camera_padding_reset.dart';
 import 'package:maplibre_web/src/extensions.dart';
+import 'package:maplibre_web/src/host_scoped_request_headers.dart';
 import 'package:maplibre_web/src/interop/interop.dart' as interop;
 import 'package:maplibre_web/src/interop/json.dart';
 import 'package:maplibre_web/src/interop/pmtiles.dart' as pmtiles;
@@ -62,6 +63,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
           bearing: options.initBearing,
           pitch: options.initPitch,
           attributionControl: false,
+          transformRequest: _transformRequest.toJS,
         ),
       );
 
@@ -173,6 +175,16 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       return _htmlElement;
     });
     super.initState();
+  }
+
+  JSAny? _transformRequest(JSString url, JSString? _) {
+    final dartUrl = url.toDart;
+    final headers = HostScopedRequestHeaders.forUrl(dartUrl);
+    if (headers == null) return null;
+    return interop.RequestParameters(
+      url: dartUrl,
+      headers: headers.jsify()! as JSObject,
+    );
   }
 
   @override

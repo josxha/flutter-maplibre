@@ -28994,6 +28994,101 @@ final class $FlutterApi$Type$ extends jni$_.JType<FlutterApi> {
   String get signature => r'Lcom/github/josxha/maplibre/FlutterApi;';
 }
 
+/// from: `com.github.josxha.maplibre.HostScopedRequestHeaders`
+extension type HostScopedRequestHeaders._(jni$_.JObject _$this)
+    implements jni$_.JObject {
+  static final _class = jni$_.JClass.forName(
+    r'com/github/josxha/maplibre/HostScopedRequestHeaders',
+  );
+
+  /// The type which includes information such as the signature of this class.
+  static const jni$_.JType<HostScopedRequestHeaders> type =
+      $HostScopedRequestHeaders$Type$();
+  static final _id_clear = _class.staticMethodId(
+    r'clear',
+    r'(Ljava/lang/String;)V',
+  );
+
+  static final _clear =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `static public void clear(java.lang.String host)`
+  static void clear(jni$_.JString host) {
+    final _$$classRef = _class.reference;
+    _clear(
+      _$$classRef.pointer,
+      _id_clear.pointer,
+      host.reference.pointer,
+    ).check();
+  }
+
+  static final _id_replace = _class.staticMethodId(
+    r'replace',
+    r'(Ljava/lang/String;Ljava/util/Map;)V',
+  );
+
+  static final _replace =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallStaticVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `static public void replace(java.lang.String host, java.util.Map headers)`
+  static void replace(
+    jni$_.JString host,
+    jni$_.JMap<jni$_.JString, jni$_.JString> headers,
+  ) {
+    final _$$classRef = _class.reference;
+    _replace(
+      _$$classRef.pointer,
+      _id_replace.pointer,
+      host.reference.pointer,
+      headers.reference.pointer,
+    ).check();
+  }
+}
+
+final class $HostScopedRequestHeaders$Type$
+    extends jni$_.JType<HostScopedRequestHeaders> {
+  @jni$_.internal
+  const $HostScopedRequestHeaders$Type$();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lcom/github/josxha/maplibre/HostScopedRequestHeaders;';
+}
+
 /// from: `com.github.josxha.maplibre.MapLibreRegistry`
 extension type MapLibreRegistry._(jni$_.JObject _$this)
     implements jni$_.JObject {

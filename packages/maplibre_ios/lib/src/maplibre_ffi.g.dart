@@ -21235,6 +21235,25 @@ final _$$ref$3 = options?.ref;    final $ret = _objc_msgSend_11spmsz(_$$ref.reta
 }
 
 
+/// HostScopedRequestHeaders
+extension type HostScopedRequestHeaders._(objc.ObjCObject object$) implements objc.ObjCObject,objc.NSObject {
+  /// replaceWithHost:headers:
+  static void replaceWithHost(objc.NSString host, {required objc.NSDictionary headers}) {
+final _$$ref = host.ref;
+final _$$ref$1 = headers.ref;_objc_msgSend_pfv6jd(_class_HostScopedRequestHeaders, _sel_replaceWithHost_headers_, _$$ref.pointer, _$$ref$1.pointer);
+
+  }
+
+
+  /// clearWithHost:
+  static void clearWithHost(objc.NSString host) {
+final _$$ref = host.ref;_objc_msgSend_xtuoz7(_class_HostScopedRequestHeaders, _sel_clearWithHost_, _$$ref.pointer);
+
+  }
+
+}
+
+
 /// MapLibreRegistry
 extension type MapLibreRegistry._(objc.ObjCObject object$) implements objc.ObjCObject,objc.NSObject {
   /// Constructs a [MapLibreRegistry] that points to the same underlying object as [other].
@@ -32125,6 +32144,7 @@ final _class_MLNVectorTileSource = objc.getClass("MLNVectorTileSource", () => ff
 @ffi.Native<ffi.Pointer<objc.ObjCObjectImpl>>(symbol: 'OBJC_CLASS_\$_MapLibreRegistry')
 external ffi.Pointer<objc.ObjCObjectImpl> _class_MapLibreRegistry_raw;
 final _class_MapLibreRegistry = objc.getClass("MapLibreRegistry", () => ffi.Native.addressOf<ffi.Pointer<objc.ObjCObjectImpl>>(_class_MapLibreRegistry_raw).cast());
+final _class_HostScopedRequestHeaders = objc.getClass("HostScopedRequestHeaders");
 @ffi.Native<ffi.Pointer<objc.ObjCObjectImpl>>(symbol: 'OBJC_CLASS_\$_NSExpression')
 external ffi.Pointer<objc.ObjCObjectImpl> _class_NSExpression_raw;
 final _class_NSExpression = objc.getClass("NSExpression", () => ffi.Native.addressOf<ffi.Pointer<objc.ObjCObjectImpl>>(_class_NSExpression_raw).cast());
@@ -32605,6 +32625,7 @@ late final _sel_circleStrokeWidthTransition = objc.registerName("circleStrokeWid
 late final _sel_circleTranslation = objc.registerName("circleTranslation");
 late final _sel_circleTranslationAnchor = objc.registerName("circleTranslationAnchor");
 late final _sel_circleTranslationTransition = objc.registerName("circleTranslationTransition");
+late final _sel_clearWithHost_ = objc.registerName("clearWithHost:");
 late final _sel_clearActionJournalLog = objc.registerName("clearActionJournalLog");
 late final _sel_clearAmbientCacheWithCompletionHandler_ = objc.registerName("clearAmbientCacheWithCompletionHandler:");
 late final _sel_collection = objc.registerName("collection");
@@ -33113,6 +33134,7 @@ late final _sel_removeSource_error_ = objc.registerName("removeSource:error:");
 late final _sel_rename_ = objc.registerName("rename:");
 late final _sel_renderingMode = objc.registerName("renderingMode");
 late final _sel_repeatBehavior = objc.registerName("repeatBehavior");
+late final _sel_replaceWithHost_headers_ = objc.registerName("replaceWithHost:headers:");
 late final _sel_requestProgress = objc.registerName("requestProgress");
 late final _sel_resetDatabaseWithCompletionHandler_ = objc.registerName("resetDatabaseWithCompletionHandler:");
 late final _sel_resetNorth = objc.registerName("resetNorth");

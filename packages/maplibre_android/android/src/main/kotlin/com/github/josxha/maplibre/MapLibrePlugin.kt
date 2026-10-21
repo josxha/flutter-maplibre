@@ -5,7 +5,6 @@ package com.github.josxha.maplibre
 // - open example/android/build.gradle.kts as project
 // - sync project to download dependencies
 
-import android.app.Activity
 import android.content.Context
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
@@ -64,10 +63,23 @@ class MapLibrePlugin :
     }
 }
 
-class MapLibreMapFactory : PlatformViewFactory(StandardMessageCodec.INSTANCE) {
+internal class MapLibreMapFactory(
+    private val createPlatformView: (Int) -> PlatformView = {
+        MapLibreRegistry.flutterApi!!.createPlatformView(it)
+    },
+    private val installRequestHeadersInterceptor: () -> Unit = {
+        installHostScopedRequestHeadersInterceptor()
+    },
+) : PlatformViewFactory(StandardMessageCodec.INSTANCE) {
     override fun create(
         context: Context,
         viewId: Int,
         args: Any?,
-    ): PlatformView = MapLibreRegistry.flutterApi!!.createPlatformView(viewId)
+    ): PlatformView {
+        // The Flutter callback initializes MapLibre; HttpRequestUtil requires
+        // that initialization before accepting a custom OkHttp client.
+        val platformView = createPlatformView(viewId)
+        installRequestHeadersInterceptor()
+        return platformView
+    }
 }
