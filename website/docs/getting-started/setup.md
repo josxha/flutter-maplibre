@@ -119,29 +119,49 @@ flutter:
 ## Setup Web
 
 Include the following JavaScript and CSS files in the `<head>` tag of
-your `web/index.html` file:
+your `web/index.html` file and load `flutter_bootstrap.js` with `defer`
+instead of `async`:
 
-```html title="web/index.html" hl_lines="5-7 9"
+```html title="web/index.html" hl_lines="5-11 13 16"
 <!DOCTYPE html>
 <html>
 <head>
     <!-- other html -->
-    <script src='https://unpkg.com/maplibre-gl@^5.0/dist/maplibre-gl.js'></script>
-    <link href='https://unpkg.com/maplibre-gl@^5.0/dist/maplibre-gl.css'
+    <script type="module">
+        import * as maplibregl from 'https://unpkg.com/maplibre-gl@^6.0/dist/maplibre-gl.mjs';
+        window.maplibregl = maplibregl;
+    </script>
+    <link href='https://unpkg.com/maplibre-gl@^6.0/dist/maplibre-gl.css'
           rel='stylesheet'/>
     <!-- Next line only required if you want to use PMTiles as source. -->
     <script src='https://unpkg.com/pmtiles@^4.0/dist/pmtiles.js'></script>
 </head>
+<body>
+    <script src="flutter_bootstrap.js" defer></script>
+</body>
 </html>
 ```
 
-`^5.0` ensures that your app will always use the latest version of
-[maplibre-gl-js](https://github.com/maplibre/maplibre-gl-js) version 5 but not
-suddenly
-use an incompatible version.
+Starting with version 6,
+[maplibre-gl-js](https://github.com/maplibre/maplibre-gl-js) is only published
+as an ES module. The module script above loads it and exposes it as the global
+`maplibregl` object that this package uses. Module scripts and `defer` scripts
+run in document order, so `defer` on `flutter_bootstrap.js` makes sure that
+MapLibre is loaded before your app starts.
 
-If you want to always use the latest version use `latest` or use the full
-version number like `5.0.0` if you want to use a specific version.
+`^6.0` ensures that your app will always use the latest version of
+maplibre-gl-js version 6 but not suddenly use an incompatible version. Use the
+full version number like `6.15.0` if you want to use a specific version. Don't
+use `latest`, a future major version can break your app without warning.
+
+??? info "Still using maplibre-gl-js version 5?"
+
+    Version 5 is still supported. If your `web/index.html` loads
+    `maplibre-gl@^5.0/dist/maplibre-gl.js` with a normal `<script>` tag, it
+    keeps working. Replace it with the snippet above to upgrade to version 6.
+    See the
+    [maplibre-gl-js v5 to v6 migration guide](https://github.com/maplibre/maplibre-gl-js/blob/main/docs/guides/v5-to-v6-migration-guide.md)
+    for the rendering changes that come with it.
 
 You can read about changes in maplibre-gl-js in
 the [changelog file](https://github.com/maplibre/maplibre-gl-js/blob/main/CHANGELOG.md).

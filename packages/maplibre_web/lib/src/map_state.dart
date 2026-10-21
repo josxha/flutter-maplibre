@@ -17,6 +17,10 @@ import 'package:web/web.dart';
 
 part 'style_controller.dart';
 
+/// The global maplibre-gl-js object, `null` if maplibre-gl-js isn't loaded.
+@JS('maplibregl')
+external JSObject? get _maplibregl;
+
 /// The web specific implementation of the [MapLibreMap] widget.
 final class MapLibreMapStateWeb extends MapLibreMapState {
   late HTMLDivElement _htmlElement;
@@ -44,6 +48,15 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         ..style.margin = '0'
         ..style.height = '100%'
         ..style.width = '100%';
+
+      if (_maplibregl == null) {
+        throw StateError(
+          '[MapLibre] maplibre-gl-js is not loaded. Make sure that your '
+          'web/index.html imports maplibre-gl-js, sets window.maplibregl and '
+          'loads flutter_bootstrap.js with defer. See '
+          'https://flutter-maplibre.pages.dev/docs/getting-started/setup#setup-web',
+        );
+      }
 
       // add pmtiles support
       try {
