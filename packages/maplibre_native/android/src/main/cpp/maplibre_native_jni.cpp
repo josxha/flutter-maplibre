@@ -34,8 +34,7 @@ struct MlnDiagnostic {
 using MlnAndroidInit = int32_t (*)(void* jni_env, void* context,
                                    MlnDiagnostic* out_diagnostic);
 // mln_render_session_service_driver_work from maplibre_native_c.
-using MlnServiceDriverWork = int32_t (*)(uint64_t session, size_t max_work,
-                                         size_t* out_serviced,
+using MlnServiceDriverWork = int32_t (*)(uint64_t session,
                                          MlnDiagnostic* out_diagnostic);
 // mln_status values from maplibre_native_c/base.h.
 constexpr int32_t kMlnStatusOk = 0;
@@ -253,9 +252,8 @@ class RenderThread {
       }
       // Services everything queued. Work queued during the call wakes the
       // thread again.
-      size_t serviced = 0;
       MlnDiagnostic diagnostic{sizeof(MlnDiagnostic), {}};
-      const int32_t status = service_(session_, 0, &serviced, &diagnostic);
+      const int32_t status = service_(session_, &diagnostic);
       if (status != kMlnStatusOk && status != kMlnStatusBusy &&
           status != last_status) {
         __android_log_print(ANDROID_LOG_ERROR, kTag,

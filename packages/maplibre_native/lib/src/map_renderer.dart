@@ -130,15 +130,21 @@ final class MapRenderer implements FrameTargetHost {
     final target = _createTarget(extent);
 
     // Wakes can arrive before the renderer exists; their work waits for the
-    // next wake then.
+    // next wake then. Events are delivered once, so the ones that arrive
+    // before the renderer is ready are kept until then.
     MapRenderer? renderer;
+    MapRenderer? ready;
+    final early = <RuntimeEvent>[];
     final RuntimeHandle runtime;
     final MapHandle map;
     final RenderSessionAttachment attachment;
     try {
-      runtime = runtimeCreate(
-        RuntimeOptions(
-          eventWake: Wake(callback: () => renderer?._drainEvents()),
+      runtime = runtimeCreate(RuntimeOptions());
+      await runtime.setEventHandler(
+        RuntimeEventHandler(
+          callback: (batch) => ready == null
+              ? early.addAll(batch.events)
+              : ready._onEvents(batch.events),
         ),
       );
       map = await runtime.createMap(MapOptions(initialExtent: extent));
@@ -157,8 +163,8 @@ final class MapRenderer implements FrameTargetHost {
       ..onEvent = onEvent
       ..onFrameShown = onFrameShown;
     await attachment.completed;
-    renderer
-      .._drainEvents()
+    ready = renderer
+      .._onEvents(early)
       ..demandFrame();
     return renderer;
   }
@@ -206,12 +212,7 @@ final class MapRenderer implements FrameTargetHost {
     final token = BigInt.from(_nextToken++);
     _pendingToken = token;
     _session.requestFrame(
-      FrameDemand(
-        flags: _target.demandFlags,
-        token: token,
-        coalescingBoundary: BigInt.zero,
-        timeoutNs: BigInt.zero,
-      ),
+      FrameDemand(flags: _target.demandFlags, token: token),
     );
   }
 
@@ -284,20 +285,14 @@ final class MapRenderer implements FrameTargetHost {
     onFrameShown(projection, frame);
   }
 
-  void _drainEvents() {
+  void _onEvents(List<RuntimeEvent> events) {
     if (_disposed) return;
-    final batch = _runtime.drainEvents();
-    if (batch == null) return;
-    try {
-      for (final event in batch.getValue().events) {
-        if (event.type == RuntimeEventType.mapLoadingFailed ||
-            event.type == RuntimeEventType.mapRenderError) {
-          debugPrint('maplibre_native: ${event.message}');
-        }
-        onEvent?.call(event);
+    for (final event in events) {
+      if (event.type == RuntimeEventType.mapLoadingFailed ||
+          event.type == RuntimeEventType.mapRenderError) {
+        debugPrint('maplibre_native: ${event.message}');
       }
-    } finally {
-      batch.close();
+      onEvent?.call(event);
     }
   }
 

@@ -8,7 +8,7 @@ Each entry: the decision, then why.
   for everything else.** One C API serves every native platform, so the
   per-platform packages (android, ios, webview) were removed.
 - **The C API comes from `maplibre/maplibre-native-ffi` PR #760, as a
-  submodule pinned to `16e9efc2a`.** The binding is a path dependency, so
+  submodule pinned to `ff99652db`.** The binding is a path dependency, so
   `maplibre` can't publish until the binding is on pub.dev.
 - **Rendering goes only through the texture registry, never platform views.**
   This keeps Flutter composition, transforms, and overlays working.
@@ -169,9 +169,10 @@ Each entry: the decision, then why.
   texture registrar functions may be called from any thread. On Android the UI
   thread is the main thread, which SurfaceProducer needs.
 - **Vulkan sessions use the core-worker driver, OpenGL ES sessions a render
-  thread of the plugin, with frame and event wakes drained on the Dart
-  isolate.** Frame demands use `ifNeeded | waitForUpdate` (plus `present` on
-  Android), so idle maps don't render.
+  thread of the plugin, with frame wakes drained on the Dart isolate.** Frame demands use `ifNeeded | waitForUpdate` (plus `present` on
+  Android), so idle maps don't render. Runtime events arrive through
+  `RuntimeHandle.setEventHandler`, which the binding calls on the isolate.
+  Events that arrive before the first frame demand are kept until then.
 
 ## Public API
 

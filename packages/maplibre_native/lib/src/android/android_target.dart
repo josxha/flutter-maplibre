@@ -126,7 +126,7 @@ final class _SurfaceTarget extends FrameTarget {
     LogicalExtent extent,
   ) => OpenglSurfaceDescriptor(
     extent: extent,
-    context: _eglContext!,
+    context: _eglContext,
     surface: NativePointer(surface),
   );
 
@@ -135,7 +135,7 @@ final class _SurfaceTarget extends FrameTarget {
     LogicalExtent extent,
   ) => VulkanSurfaceDescriptor(
     extent: extent,
-    context: _vulkanContext!,
+    context: _vulkanContext,
     surface: BigInt.from(surface).toUnsigned(64),
   );
 

@@ -97,7 +97,10 @@ class MapLibreMapStateNative extends MapLibreMapState {
           mln.CameraUpdate(
             camera: mln.CameraOptions(
               center: switch (options.initCenter) {
-                final center? => mln.LatLng(center.lat, center.lon),
+                final center? => mln.LatLng(
+                  latitude: center.lat,
+                  longitude: center.lon,
+                ),
                 null => null,
               },
               zoom: options.initZoom,
@@ -145,8 +148,14 @@ class MapLibreMapStateNative extends MapLibreMapState {
         mln.BoundOptions(
           bounds: switch (options.maxBounds) {
             final bounds? => mln.LatLngBounds(
-              southwest: mln.LatLng(bounds.latitudeSouth, bounds.longitudeWest),
-              northeast: mln.LatLng(bounds.latitudeNorth, bounds.longitudeEast),
+              southwest: mln.LatLng(
+                latitude: bounds.latitudeSouth,
+                longitude: bounds.longitudeWest,
+              ),
+              northeast: mln.LatLng(
+                latitude: bounds.latitudeNorth,
+                longitude: bounds.longitudeEast,
+              ),
             ),
             null => null,
           },
@@ -235,8 +244,8 @@ class MapLibreMapStateNative extends MapLibreMapState {
     _shownProjection?.close();
     _shownProjection = projection;
     final shown = _toMapCamera(projection.getCamera());
-    final resized = frame.extentGeneration != _shownExtentGeneration;
-    _shownExtentGeneration = frame.extentGeneration;
+    final resized = frame.generation != _shownExtentGeneration;
+    _shownExtentGeneration = frame.generation;
     if (shown == camera && !resized) return;
     setState(() => camera = shown);
   }
@@ -267,7 +276,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
 
   MapCamera? _readCamera() {
     final map = _map;
-    if (map == null || map.isClosed) return null;
+    if (map == null || _renderer!.disposed) return null;
     return _toMapCamera(map.getSnapshot().camera);
   }
 
@@ -292,7 +301,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
   }
 
   static mln.ScreenPoint _screenPoint(Offset offset) =>
-      mln.ScreenPoint(offset.dx, offset.dy);
+      mln.ScreenPoint(x: offset.dx, y: offset.dy);
 
   // MapController
 
@@ -328,22 +337,31 @@ class MapLibreMapStateNative extends MapLibreMapState {
       toLngLats([screenLocation]).single;
 
   @override
-  List<Offset> toScreenLocations(List<Geographic> lngLats) =>
-      _currentProjection()
-          .pixelsForLatLngs([
-            for (final lngLat in lngLats) mln.LatLng(lngLat.lat, lngLat.lon),
-          ])
-          .map((point) => Offset(point.x, point.y))
-          .toList(growable: false);
+  List<Offset> toScreenLocations(List<Geographic> lngLats) {
+    final projection = _currentProjection();
+    return [
+      for (final lngLat in lngLats)
+        _offset(
+          projection.pixelForLatLng(
+            mln.LatLng(latitude: lngLat.lat, longitude: lngLat.lon),
+          ),
+        ),
+    ];
+  }
 
   @override
-  List<Geographic> toLngLats(List<Offset> screenLocations) =>
-      _currentProjection()
-          .latLngsForPixels(screenLocations.map(_screenPoint).toList())
-          .map(
-            (latLng) => Geographic(lon: latLng.longitude, lat: latLng.latitude),
-          )
-          .toList(growable: false);
+  List<Geographic> toLngLats(List<Offset> screenLocations) {
+    final projection = _currentProjection();
+    return [
+      for (final screenLocation in screenLocations)
+        _geographic(projection.latLngForPixel(_screenPoint(screenLocation))),
+    ];
+  }
+
+  static Offset _offset(mln.ScreenPoint point) => Offset(point.x, point.y);
+
+  static Geographic _geographic(mln.LatLng latLng) =>
+      Geographic(lon: latLng.longitude, lat: latLng.latitude);
 
   @override
   double getMetersPerPixelAtLatitude(double latitude) =>
@@ -419,8 +437,14 @@ class MapLibreMapStateNative extends MapLibreMapState {
     if (map == null) return;
     final target = await map.cameraForLatLngBounds(
       mln.LatLngBounds(
-        southwest: mln.LatLng(bounds.latitudeSouth, bounds.longitudeWest),
-        northeast: mln.LatLng(bounds.latitudeNorth, bounds.longitudeEast),
+        southwest: mln.LatLng(
+          latitude: bounds.latitudeSouth,
+          longitude: bounds.longitudeWest,
+        ),
+        northeast: mln.LatLng(
+          latitude: bounds.latitudeNorth,
+          longitude: bounds.longitudeEast,
+        ),
       ),
       fitOptions: mln.CameraFitOptions(
         padding: _edgeInsets(padding),
@@ -459,7 +483,9 @@ class MapLibreMapStateNative extends MapLibreMapState {
         mln.CameraUpdate(
           mode: mode,
           camera: mln.CameraOptions(
-            center: center == null ? null : mln.LatLng(center.lat, center.lon),
+            center: center == null
+                ? null
+                : mln.LatLng(latitude: center.lat, longitude: center.lon),
             zoom: zoom,
             bearing: bearing,
             pitch: pitch,
@@ -508,7 +534,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
     Offset point, {
     List<String>? layerIds,
   }) => _queryRenderedFeatures(
-    mln.renderedQueryGeometryPoint(_screenPoint(point)),
+    mln.RenderedQueryGeometry.point(_screenPoint(point)),
     layerIds,
   );
 
@@ -517,7 +543,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
     Rect rect, {
     List<String>? layerIds,
   }) => _queryRenderedFeatures(
-    mln.renderedQueryGeometryBox(
+    mln.RenderedQueryGeometry.box(
       mln.ScreenBox(
         min: _screenPoint(rect.topLeft),
         max: _screenPoint(rect.bottomRight),
@@ -593,9 +619,7 @@ class _NativeGestureCamera implements GestureCameraSink {
   @override
   void gestureStart() {
     _state._gestureActive = true;
-    _state._applyDelta(
-      const mln.CameraDelta(gesturePhase: mln.GesturePhase.begin),
-    );
+    _state._applyDelta(mln.CameraDelta(gesturePhase: mln.GesturePhase.begin));
   }
 
   @override
@@ -629,7 +653,7 @@ class _NativeGestureCamera implements GestureCameraSink {
     if (!_state._gestureActive) return;
     _state
       .._gestureActive = false
-      .._applyDelta(const mln.CameraDelta(gesturePhase: mln.GesturePhase.end))
+      .._applyDelta(mln.CameraDelta(gesturePhase: mln.GesturePhase.end))
       .._onCameraIdle();
   }
 
@@ -644,7 +668,7 @@ class _NativeGestureCamera implements GestureCameraSink {
         scale: pow(2, levels).toDouble(),
         anchor: MapLibreMapStateNative._screenPoint(around),
         animation: duration == Duration.zero
-            ? const mln.AnimationOptions()
+            ? mln.AnimationOptions()
             : mln.AnimationOptions(
                 durationMs: duration.inMilliseconds.toDouble(),
               ),

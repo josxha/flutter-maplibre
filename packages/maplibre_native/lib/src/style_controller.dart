@@ -226,7 +226,7 @@ class StyleControllerNative extends StyleController {
   Future<void> removeImage(String id) async {
     // Removing an image the style lacks is not an error on other platforms.
     final completion = await _map.removeStyleImage(id);
-    if (completion.status == mln.MaplibreStatus.notFound) return;
+    if (completion.status == mln.Status.notFound) return;
     await checkCommand(Future.value(completion));
   }
 
