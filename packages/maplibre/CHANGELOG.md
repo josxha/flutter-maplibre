@@ -7,6 +7,7 @@
   reference table overflow partway through a large region download.
 - Android: calls on a `StyleController` whose native style was already released
   are ignored instead of aborting the process with a JNI error.
+- Web: `fitBounds()` no longer reuses padding from a previous camera move.
 - iOS: preserve zoom levels, attribution, raster tile size, and supported DEM
   encoding when adding tile-template sources at runtime.
 
