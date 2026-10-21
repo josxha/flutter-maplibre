@@ -36,6 +36,7 @@
 - Web: widgets over the map no longer let taps and drags through to the map.
 - Android: calls on a `StyleController` whose native style was already released
   are ignored instead of aborting the process with a JNI error.
+- Web: `fitBounds()` no longer reuses padding from a previous camera move.
 
 ## 0.3.6
 
