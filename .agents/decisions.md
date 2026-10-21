@@ -12,24 +12,37 @@ Each entry: the decision, then why.
   `maplibre` can't publish until the binding is on pub.dev.
 - **Rendering goes only through the texture registry, never platform views.**
   This keeps Flutter composition, transforms, and overlays working.
-- **Windows renders through Vulkan. Android renders through OpenGL ES by
-  default, and through Vulkan when the app selects the Vulkan build. iOS and
-  macOS render through Metal.** WGL
-  needs one pinned thread, which Dart can't guarantee, and the binding's
-  texture APIs are Vulkan-first. On Android, OpenGL ES runs on every device,
+- **Windows and Linux render through Vulkan. Android renders through OpenGL
+  ES by default, and through Vulkan when the app selects the Vulkan build.
+  iOS and macOS render through Metal.** WGL and GLX/EGL need one pinned
+  thread, which Dart can't guarantee, and the binding's texture APIs are
+  Vulkan-first. On Android, OpenGL ES runs on every device,
   while Vulkan 1.1 drivers are missing or unreliable on many older ones.
 - **The C library carries one backend, and Dart follows it at runtime.** The
   binding's build hook picks it per target (OpenGL ES on Android, Vulkan on
-  Windows) unless `hooks.user_defines.maplibre_native_ffi.backend` names one,
-  and `mln_supported_render_backend_mask()` tells `MapRenderer` which path to
-  take. The workspace sets no backend.
-- **Dart reaches the platform plugins through ffigen (Windows, iOS, macOS)
-  and jnigen (Android), never method channels.** Calls are synchronous and typed, with
-  no message encoding. The Windows plugin DLL exports a C API and keeps its
-  one registered instance behind a mutex. On Android a Kotlin
+  Windows and Linux) unless `hooks.user_defines.maplibre_native_ffi.backend`
+  names one, and `mln_supported_render_backend_mask()` tells `MapRenderer`
+  which path to take. The workspace sets no backend.
+- **Dart reaches the platform plugins through ffigen (Windows, Linux, iOS,
+  macOS) and jnigen (Android), never method channels.** Calls are synchronous
+  and typed, with no message encoding. The Windows and Linux plugin libraries
+  export one C API, implemented once in `desktop/`, and keep their one
+  registered instance behind a mutex. On Android a Kotlin
   `MaplibreNativeApi` object holds the engine's texture registry, and
   SurfaceProducer callbacks reach Dart through a `SurfaceListener` that Dart
   implements as async listeners.
+- **`MapRenderer` drives every platform the same way, and a `FrameTarget`
+  per platform owns the texture and plugin calls.** The renderer demands a
+  frame, hands each rendered one to the target on one serial GPU queue, and
+  demands the next; targets attach the session, resize, present, end the
+  session, and dispose the texture. Windows, Linux, iOS, and macOS share
+  `BorrowedRingTarget` (a plugin-owned ring of three images, replaced on
+  resize, each frame copied on the GPU before release).
+- **Windows and Linux share the Vulkan device code and the C API
+  implementation in `desktop/`; only the texture interop differs.** The
+  device matches Flutter's GPU by adapter LUID on Windows and by the OpenGL
+  device UUID on Linux, and enables `VK_KHR_external_memory_win32` or
+  `_fd`.
 
 ## Windows
 
@@ -129,8 +142,8 @@ Each entry: the decision, then why.
   image itself, so it can be off by a frame. Frames that drew a map update
   older than the initial camera are skipped, because they can reach Flutter
   after `onMapCreated`.
-- **Dart calls the plugins on its UI thread.** Flutter's Windows texture
-  registrar functions may be called from any thread. On Android the UI
+- **Dart calls the plugins on its UI thread.** Flutter's Windows and Linux
+  texture registrar functions may be called from any thread. On Android the UI
   thread is the main thread, which SurfaceProducer needs.
 - **Vulkan sessions use the core-worker driver, OpenGL ES sessions a render
   thread of the plugin, with frame and event wakes drained on the Dart

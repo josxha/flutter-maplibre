@@ -1,5 +1,5 @@
-#ifndef FLUTTER_PLUGIN_MAPLIBRE_NATIVE_GPU_TEXTURE_H_
-#define FLUTTER_PLUGIN_MAPLIBRE_NATIVE_GPU_TEXTURE_H_
+#ifndef FLUTTER_PLUGIN_MAPLIBRE_NATIVE_D3D11_TEXTURE_H_
+#define FLUTTER_PLUGIN_MAPLIBRE_NATIVE_D3D11_TEXTURE_H_
 
 #include <d3d11.h>
 #include <flutter/texture_registrar.h>
@@ -12,6 +12,7 @@
 #include <string>
 #include <vector>
 
+#include "desktop_plugin.h"
 #include "vulkan_device.h"
 
 namespace maplibre_native {
@@ -26,16 +27,16 @@ struct SharedSlot {
   VkImageView view = VK_NULL_HANDLE;
 };
 
-// A Flutter GPU surface texture that shows MapLibre frames without a CPU
-// copy. MapLibre renders into a ring of shared D3D11 textures through Vulkan;
-// each presented frame is copied on the GPU into one of three textures that
-// Flutter opens through a DXGI shared handle.
+// The Windows GpuTexture, a Flutter GPU surface texture. MapLibre renders
+// into a ring of shared D3D11 textures through Vulkan; each presented frame is
+// copied on the GPU into one of three textures that Flutter opens through a
+// DXGI shared handle.
 //
 // Flutter's engine takes no keyed mutex or fence for such a texture, so the
 // copy cannot wait for Flutter's reads. Instead it never targets the texture
 // Flutter shows or fetched last: the texture it overwrites was last fetched
 // at least one Flutter frame earlier.
-class GpuTexture {
+class D3D11Texture : public GpuTexture {
  public:
   // The VkFormat and DXGI format of every image.
   static constexpr VkFormat kVulkanFormat = VK_FORMAT_B8G8R8A8_UNORM;
@@ -44,39 +45,29 @@ class GpuTexture {
   // Creates a texture of |width| x |height| device pixels with |slot_count|
   // ring images. Returns null and sets |error| when D3D11 and Vulkan cannot
   // share textures on this device.
-  static std::unique_ptr<GpuTexture> Create(flutter::TextureRegistrar* registrar,
-                                            VulkanDevice* vulkan,
-                                            ID3D11Device* d3d,
-                                            uint32_t width, uint32_t height,
-                                            uint32_t slot_count,
-                                            std::string* error);
+  static std::unique_ptr<D3D11Texture> Create(
+      flutter::TextureRegistrar* registrar, VulkanDevice* vulkan,
+      ID3D11Device* d3d, uint32_t width, uint32_t height, uint32_t slot_count,
+      std::string* error);
 
   // Unregisters |texture| and destroys it once Flutter stops using it.
-  static void Dispose(std::unique_ptr<GpuTexture> texture);
+  static void Dispose(std::unique_ptr<D3D11Texture> texture);
 
-  ~GpuTexture();
+  ~D3D11Texture() override;
 
-  GpuTexture(const GpuTexture&) = delete;
-  GpuTexture& operator=(const GpuTexture&) = delete;
+  D3D11Texture(const D3D11Texture&) = delete;
+  D3D11Texture& operator=(const D3D11Texture&) = delete;
 
-  int64_t id() const { return id_; }
-  const std::vector<SharedSlot>& slots() const { return slots_; }
-
-  // Replaces the ring with one of the new size. The previous ring stays
-  // valid until ReleaseRetiredSlots, because the session renders into it
-  // until its target replacement completes.
-  bool Resize(uint32_t width, uint32_t height, std::string* error);
-
-  // Releases the rings that Resize replaced.
-  void ReleaseRetiredSlots();
-
-  // Copies the frame in |slot| into the texture Flutter shows and marks it
-  // available. The frame's GPU writes must be complete.
-  bool Present(uint32_t slot, std::string* error);
+  int64_t id() const override { return id_; }
+  VkFormat format() const override { return kVulkanFormat; }
+  std::vector<VulkanSlot> slots() const override;
+  bool Resize(uint32_t width, uint32_t height, std::string* error) override;
+  void ReleaseRetiredSlots() override;
+  bool Present(uint32_t slot, std::string* error) override;
 
  private:
-  GpuTexture(flutter::TextureRegistrar* registrar, VulkanDevice* vulkan,
-             ID3D11Device* d3d);
+  D3D11Texture(flutter::TextureRegistrar* registrar, VulkanDevice* vulkan,
+               ID3D11Device* d3d);
 
   bool CreateSlots(uint32_t width, uint32_t height, uint32_t count,
                    std::vector<SharedSlot>* slots, std::string* error);
@@ -122,4 +113,4 @@ class GpuTexture {
 
 }  // namespace maplibre_native
 
-#endif  // FLUTTER_PLUGIN_MAPLIBRE_NATIVE_GPU_TEXTURE_H_
+#endif  // FLUTTER_PLUGIN_MAPLIBRE_NATIVE_D3D11_TEXTURE_H_

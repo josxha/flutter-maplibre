@@ -1,6 +1,9 @@
-// C API of the maplibre_native Windows plugin, which Dart calls through the
-// ffigen bindings in lib/src/windows/bindings.g.dart. Regenerate them with
-// `dart run ffigen --config ffigen.yaml` after changing this file.
+// C API of the maplibre_native Windows and Linux plugins, which Dart calls
+// through the ffigen bindings in lib/src/desktop/bindings.g.dart. Regenerate
+// them with `cd tool/codegen && dart run ffigen.dart` after changing this file.
+//
+// Both plugins render MapLibre through Vulkan. Zero-copy textures share their
+// images with D3D11 on Windows and with OpenGL on Linux.
 //
 // Functions that can fail return false or -1 and write a null-terminated
 // message to |error|, of |error_size| bytes, when it is not null. Dart calls
@@ -13,10 +16,14 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#if defined(_WIN32)
 #ifdef FLUTTER_PLUGIN_IMPL
 #define MAPLIBRE_NATIVE_EXPORT __declspec(dllexport)
 #else
 #define MAPLIBRE_NATIVE_EXPORT __declspec(dllimport)
+#endif
+#else
+#define MAPLIBRE_NATIVE_EXPORT __attribute__((visibility("default")))
 #endif
 
 #if defined(__cplusplus)
@@ -54,9 +61,9 @@ MAPLIBRE_NATIVE_EXPORT bool maplibre_native_update_pixel_texture(
     const uint8_t* pixels, size_t length, char* error, size_t error_size);
 
 // Registers a zero-copy texture of |width| x |height| device pixels with a
-// ring of |slot_count| images shared between Vulkan and D3D11. Writes the
-// VkFormat and up to |slot_capacity| slots. Returns its Flutter texture id, or
-// -1 when the GPU cannot share textures.
+// ring of |slot_count| images that Vulkan shares with Flutter's graphics API.
+// Writes the VkFormat and up to |slot_capacity| slots. Returns its Flutter
+// texture id, or -1 when the GPU cannot share textures.
 MAPLIBRE_NATIVE_EXPORT int64_t maplibre_native_create_gpu_texture(
     uint32_t width, uint32_t height, uint32_t slot_count, uint32_t* out_format,
     MaplibreNativeGpuSlot* out_slots, uint32_t slot_capacity, char* error,

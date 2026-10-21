@@ -11,9 +11,14 @@ Flutter MapLibre: a federated plugin in a Dart pub workspace.
 - `packages/maplibre_native`: every other platform, on the MapLibre Native C API.
   - `vendor/maplibre-native-ffi`: git submodule with the C API and its Dart binding.
     Treat it as read-only.
-  - `windows/`: C++ plugin (Vulkan device, D3D11 shared textures). Its C API
-    is `windows/include/maplibre_native/maplibre_native_api.h`, bound in
-    `lib/src/windows/bindings.g.dart`.
+  - `lib/src/frame_target.dart`: how frames reach Flutter. `MapRenderer`
+    drives the session the same way everywhere; each platform's
+    `FrameTarget` (`lib/src/<platform>/*_target.dart`) owns its texture and
+    plugin calls.
+  - `desktop/`: C++ shared by the Windows and Linux plugins: the Vulkan device
+    and the C API `desktop/include/maplibre_native/maplibre_native_api.h`,
+    bound in `lib/src/desktop/bindings.g.dart`.
+  - `windows/`: C++ plugin (D3D11 shared textures).
   - `android/`: Kotlin plugin and JNI shim (SurfaceProducer surfaces as EGL
     surfaces with a render thread per map, or as Vulkan surfaces of its own
     device). Its API is `MaplibreNativeApi.kt`, bound in
@@ -36,7 +41,7 @@ dart format $(git ls-files '*.dart')
 dart analyze --fatal-warnings --fatal-infos
 flutter test                                  # inside a package
 dart tool/use_native_build.dart <preset>      # local C library: windows-x64-vulkan, android-arm64-egl, android-x64-egl, android-*-vulkan, --download
-cd tool/codegen && dart run ffigen.dart       # after changing the Windows or Darwin C API header
+cd tool/codegen && dart run ffigen.dart       # after changing the desktop or Darwin C API header
 cd tool/codegen && dart run jnigen.dart       # after changing MaplibreNativeApi.kt; build examples for Android in release first
 ```
 

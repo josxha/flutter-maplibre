@@ -1,5 +1,9 @@
 #include "vulkan_device.h"
 
+#if !defined(_WIN32)
+#include <dlfcn.h>
+#endif
+
 #include <cstring>
 #include <mutex>
 #include <vector>
@@ -7,6 +11,48 @@
 namespace maplibre_native {
 
 namespace {
+
+#if defined(_WIN32)
+constexpr const char* kExternalMemoryExtension =
+    VK_KHR_EXTERNAL_MEMORY_WIN32_EXTENSION_NAME;
+#else
+constexpr const char* kExternalMemoryExtension =
+    VK_KHR_EXTERNAL_MEMORY_FD_EXTENSION_NAME;
+#endif
+
+// Opens the Vulkan loader, which the plugin loads at runtime so that apps
+// start without one.
+void* OpenLoader() {
+#if defined(_WIN32)
+  return LoadLibraryW(L"vulkan-1.dll");
+#else
+  void* library = dlopen("libvulkan.so.1", RTLD_NOW | RTLD_LOCAL);
+  return library != nullptr ? library
+                            : dlopen("libvulkan.so", RTLD_NOW | RTLD_LOCAL);
+#endif
+}
+
+PFN_vkGetInstanceProcAddr LoaderEntry(void* library) {
+#if defined(_WIN32)
+  return reinterpret_cast<PFN_vkGetInstanceProcAddr>(GetProcAddress(
+      static_cast<HMODULE>(library), "vkGetInstanceProcAddr"));
+#else
+  return reinterpret_cast<PFN_vkGetInstanceProcAddr>(
+      dlsym(library, "vkGetInstanceProcAddr"));
+#endif
+}
+
+// Whether |id| belongs to the GPU that |gpu| identifies.
+bool MatchesGpu(const VkPhysicalDeviceIDProperties& id, const GpuId* gpu) {
+  if (gpu == nullptr || gpu->size == 0) return false;
+#if defined(_WIN32)
+  return id.deviceLUIDValid && gpu->size == VK_LUID_SIZE &&
+         std::memcmp(id.deviceLUID, gpu->bytes, VK_LUID_SIZE) == 0;
+#else
+  return gpu->size == VK_UUID_SIZE &&
+         std::memcmp(id.deviceUUID, gpu->bytes, VK_UUID_SIZE) == 0;
+#endif
+}
 
 bool HasExtension(const std::vector<VkExtensionProperties>& extensions,
                   const char* name) {
@@ -19,7 +65,7 @@ bool HasExtension(const std::vector<VkExtensionProperties>& extensions,
 }  // namespace
 
 // static
-VulkanDevice* VulkanDevice::Get(const LUID* adapter_luid, std::string* error) {
+VulkanDevice* VulkanDevice::Get(const GpuId* gpu, std::string* error) {
   static std::mutex mutex;
   static VulkanDevice* shared = nullptr;
   static std::string creation_error;
@@ -28,7 +74,7 @@ VulkanDevice* VulkanDevice::Get(const LUID* adapter_luid, std::string* error) {
     // The device lives as long as the process: sessions on core workers may
     // outlive any one plugin instance.
     auto* device = new VulkanDevice();
-    if (device->Create(adapter_luid, &creation_error)) {
+    if (device->Create(gpu, &creation_error)) {
       shared = device;
     } else {
       delete device;
@@ -39,14 +85,14 @@ VulkanDevice* VulkanDevice::Get(const LUID* adapter_luid, std::string* error) {
   return shared;
 }
 
-bool VulkanDevice::Create(const LUID* adapter_luid, std::string* error) {
-  library_ = LoadLibraryW(L"vulkan-1.dll");
+bool VulkanDevice::Create(const GpuId* gpu, std::string* error) {
+  library_ = OpenLoader();
   if (library_ == nullptr) {
-    *error = "vulkan-1.dll was not found. Install a GPU driver with Vulkan.";
+    *error = "The Vulkan loader was not found. Install a GPU driver with "
+             "Vulkan.";
     return false;
   }
-  get_instance_proc_addr_ = reinterpret_cast<PFN_vkGetInstanceProcAddr>(
-      GetProcAddress(library_, "vkGetInstanceProcAddr"));
+  get_instance_proc_addr_ = LoaderEntry(library_);
   if (get_instance_proc_addr_ == nullptr) {
     *error = "The Vulkan loader lacks vkGetInstanceProcAddr.";
     return false;
@@ -96,8 +142,8 @@ bool VulkanDevice::Create(const LUID* adapter_luid, std::string* error) {
     return false;
   }
 
-  // Prefer the GPU that Flutter composites on, because D3D11 textures only
-  // share between devices of one adapter.
+  // Prefer the GPU that Flutter composites on, because memory only shares
+  // between devices of one GPU.
   std::vector<VkPhysicalDevice> ordered;
   for (auto device : devices) {
     VkPhysicalDeviceIDProperties id{
@@ -106,10 +152,7 @@ bool VulkanDevice::Create(const LUID* adapter_luid, std::string* error) {
         VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2};
     properties.pNext = &id;
     vkGetPhysicalDeviceProperties2(device, &properties);
-    const bool matches = adapter_luid != nullptr && id.deviceLUIDValid &&
-                         std::memcmp(id.deviceLUID, adapter_luid,
-                                     sizeof(LUID)) == 0;
-    if (matches) {
+    if (MatchesGpu(id, gpu)) {
       ordered.insert(ordered.begin(), device);
     } else {
       ordered.push_back(device);
@@ -130,11 +173,9 @@ bool VulkanDevice::Create(const LUID* adapter_luid, std::string* error) {
     vkEnumerateDeviceExtensionProperties(physical_device, nullptr,
                                          &extension_count, extensions.data());
     std::vector<const char*> enabled;
-    const bool external_memory = HasExtension(
-        extensions, VK_KHR_EXTERNAL_MEMORY_WIN32_EXTENSION_NAME);
-    if (external_memory) {
-      enabled.push_back(VK_KHR_EXTERNAL_MEMORY_WIN32_EXTENSION_NAME);
-    }
+    const bool external_memory =
+        HasExtension(extensions, kExternalMemoryExtension);
+    if (external_memory) enabled.push_back(kExternalMemoryExtension);
 
     // The features that the C API's own test fixture enables.
     VkPhysicalDeviceFeatures supported{};
@@ -167,16 +208,15 @@ bool VulkanDevice::Create(const LUID* adapter_luid, std::string* error) {
       vkGetDeviceQueue(device_, family, 0, &queue_);
       physical_device_ = physical_device;
       queue_family_index_ = family;
-      imports_d3d11_textures_ = external_memory;
+      shares_memory_ = external_memory;
       VkPhysicalDeviceIDProperties id{
           VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES};
       VkPhysicalDeviceProperties2 properties{
           VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2};
       properties.pNext = &id;
       vkGetPhysicalDeviceProperties2(physical_device, &properties);
-      matches_adapter_ = adapter_luid != nullptr && id.deviceLUIDValid &&
-                         std::memcmp(id.deviceLUID, adapter_luid,
-                                     sizeof(LUID)) == 0;
+      matches_gpu_ = MatchesGpu(id, gpu);
+      std::memcpy(driver_uuid_, id.driverUUID, VK_UUID_SIZE);
       break;
     }
     if (device_ != VK_NULL_HANDLE) break;
@@ -196,9 +236,14 @@ bool VulkanDevice::Create(const LUID* adapter_luid, std::string* error) {
   MLN_LOAD_DEVICE(vkBindImageMemory);
   MLN_LOAD_DEVICE(vkCreateImageView);
   MLN_LOAD_DEVICE(vkDestroyImageView);
-  if (imports_d3d11_textures_) {
+  if (shares_memory_) {
+#if defined(_WIN32)
     MLN_LOAD_DEVICE(vkGetMemoryWin32HandlePropertiesKHR);
-    imports_d3d11_textures_ = vkGetMemoryWin32HandlePropertiesKHR != nullptr;
+    shares_memory_ = vkGetMemoryWin32HandlePropertiesKHR != nullptr;
+#else
+    MLN_LOAD_DEVICE(vkGetMemoryFdKHR);
+    shares_memory_ = vkGetMemoryFdKHR != nullptr;
+#endif
   }
 #undef MLN_LOAD_DEVICE
   return true;

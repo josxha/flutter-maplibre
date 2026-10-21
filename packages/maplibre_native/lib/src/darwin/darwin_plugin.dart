@@ -2,10 +2,8 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 import 'package:maplibre_native/src/darwin/bindings.g.dart';
+import 'package:maplibre_native/src/plugin_error.dart';
 import 'package:maplibre_native_ffi/maplibre_native_ffi.dart';
-
-/// Capacity of the error messages that the plugin writes.
-const _errorSize = 1024;
 
 /// The most ring slots a GPU texture has, the C API's deepest ring.
 const _maxSlots = 3;
@@ -80,7 +78,7 @@ final class DarwinPlugin {
     int slotCount,
   ) => using((arena) {
     final slots = arena<Uint64>(_maxSlots);
-    final error = arena<Char>(_errorSize);
+    final error = arena<Char>(pluginErrorSize);
     final id = _bindings.maplibre_native_create_gpu_texture(
       width,
       height,
@@ -88,7 +86,7 @@ final class DarwinPlugin {
       slots,
       _maxSlots,
       error,
-      _errorSize,
+      pluginErrorSize,
     );
     if (id < 0) throw StateError(_message(error));
     return (textureId: id, slots: _slots(slots, slotCount));
@@ -103,7 +101,7 @@ final class DarwinPlugin {
     int slotCount,
   ) => using((arena) {
     final slots = arena<Uint64>(_maxSlots);
-    final error = arena<Char>(_errorSize);
+    final error = arena<Char>(pluginErrorSize);
     if (!_bindings.maplibre_native_resize_gpu_texture(
       textureId,
       width,
@@ -111,7 +109,7 @@ final class DarwinPlugin {
       slots,
       _maxSlots,
       error,
-      _errorSize,
+      pluginErrorSize,
     )) {
       throw StateError(_message(error));
     }
@@ -125,12 +123,12 @@ final class DarwinPlugin {
   /// Copies the finished frame in [slot] into the pixel buffer Flutter shows
   /// next, and waits for the copy.
   static void presentGpuTexture(int textureId, int slot) => using((arena) {
-    final error = arena<Char>(_errorSize);
+    final error = arena<Char>(pluginErrorSize);
     if (!_bindings.maplibre_native_present_gpu_texture(
       textureId,
       slot,
       error,
-      _errorSize,
+      pluginErrorSize,
     )) {
       throw StateError(_message(error));
     }
@@ -146,6 +144,5 @@ final class DarwinPlugin {
           MetalBorrowedTexture(texture: NativePointer(slots[i])),
       ];
 
-  static String _message(Pointer<Char> error) =>
-      error.cast<Utf8>().toDartString();
+  static String _message(Pointer<Char> error) => pluginErrorMessage(error);
 }

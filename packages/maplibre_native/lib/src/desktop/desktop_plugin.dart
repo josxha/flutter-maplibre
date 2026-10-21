@@ -1,12 +1,11 @@
 import 'dart:ffi';
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
-import 'package:maplibre_native/src/windows/bindings.g.dart';
+import 'package:maplibre_native/src/desktop/bindings.g.dart';
+import 'package:maplibre_native/src/plugin_error.dart';
 import 'package:maplibre_native_ffi/maplibre_native_ffi.dart';
-
-/// Capacity of the error messages that the plugin writes.
-const _errorSize = 1024;
 
 /// The most ring slots a GPU texture has.
 const _maxSlots = 8;
@@ -19,22 +18,30 @@ typedef GpuTexture = ({
   List<VulkanBorrowedTexture> slots,
 });
 
-/// The maplibre_native Windows plugin, called through its C API.
-///
-/// The plugin DLL exports the functions in
-/// `windows/include/maplibre_native/maplibre_native_api.h`.
-final class WindowsPlugin {
-  WindowsPlugin._();
+/// The maplibre_native Windows or Linux plugin, called through the C API in
+/// `desktop/include/maplibre_native/maplibre_native_api.h`, which both
+/// plugin libraries export.
+final class DesktopPlugin {
+  DesktopPlugin._();
 
-  static final _bindings = MaplibreNativeWindowsBindings(
-    DynamicLibrary.open('maplibre_native_plugin.dll'),
+  static final _bindings = MaplibreNativeDesktopBindings(
+    // The app links the plugin, so the library is loaded already.
+    DynamicLibrary.open(
+      Platform.isWindows
+          ? 'maplibre_native_plugin.dll'
+          : 'libmaplibre_native_plugin.so',
+    ),
   );
 
   /// The Vulkan device on Flutter's GPU, created on first use.
   static VulkanContextDescriptor vulkanContext() => using((arena) {
     final context = arena<MaplibreNativeVulkanContext>();
-    final error = arena<Char>(_errorSize);
-    if (!_bindings.maplibre_native_vulkan_context(context, error, _errorSize)) {
+    final error = arena<Char>(pluginErrorSize);
+    if (!_bindings.maplibre_native_vulkan_context(
+      context,
+      error,
+      pluginErrorSize,
+    )) {
       throw StateError(_message(error));
     }
     final value = context.ref;
@@ -53,7 +60,7 @@ final class WindowsPlugin {
   static int createPixelTexture() {
     final id = _bindings.maplibre_native_create_pixel_texture();
     if (id < 0) {
-      throw StateError('The maplibre_native Windows plugin is not registered.');
+      throw StateError('The maplibre_native plugin is not registered.');
     }
     return id;
   }
@@ -68,7 +75,7 @@ final class WindowsPlugin {
   }) => using((arena) {
     final buffer = arena<Uint8>(pixels.length)
       ..asTypedList(pixels.length).setAll(0, pixels);
-    final error = arena<Char>(_errorSize);
+    final error = arena<Char>(pluginErrorSize);
     if (!_bindings.maplibre_native_update_pixel_texture(
       textureId,
       width,
@@ -77,14 +84,15 @@ final class WindowsPlugin {
       buffer,
       pixels.length,
       error,
-      _errorSize,
+      pluginErrorSize,
     )) {
       throw StateError(_message(error));
     }
   });
 
   /// Registers a zero-copy texture of [width] x [height] device pixels, or
-  /// returns the reason it is unavailable on this GPU.
+  /// returns the reason it is unavailable on this GPU. Its images are shared
+  /// with D3D11 on Windows and with OpenGL on Linux.
   static (GpuTexture?, String?) createGpuTexture(
     int width,
     int height,
@@ -92,7 +100,7 @@ final class WindowsPlugin {
   ) => using((arena) {
     final format = arena<Uint32>();
     final slots = arena<MaplibreNativeGpuSlot>(_maxSlots);
-    final error = arena<Char>(_errorSize);
+    final error = arena<Char>(pluginErrorSize);
     final id = _bindings.maplibre_native_create_gpu_texture(
       width,
       height,
@@ -101,7 +109,7 @@ final class WindowsPlugin {
       slots,
       _maxSlots,
       error,
-      _errorSize,
+      pluginErrorSize,
     );
     if (id < 0) return (null, _message(error));
     return (
@@ -119,7 +127,7 @@ final class WindowsPlugin {
     int slotCount,
   ) => using((arena) {
     final slots = arena<MaplibreNativeGpuSlot>(_maxSlots);
-    final error = arena<Char>(_errorSize);
+    final error = arena<Char>(pluginErrorSize);
     if (!_bindings.maplibre_native_resize_gpu_texture(
       textureId,
       width,
@@ -127,7 +135,7 @@ final class WindowsPlugin {
       slots,
       _maxSlots,
       error,
-      _errorSize,
+      pluginErrorSize,
     )) {
       throw StateError(_message(error));
     }
@@ -140,12 +148,12 @@ final class WindowsPlugin {
 
   /// Copies the finished frame in [slot] into the texture Flutter shows next.
   static void presentGpuTexture(int textureId, int slot) => using((arena) {
-    final error = arena<Char>(_errorSize);
+    final error = arena<Char>(pluginErrorSize);
     if (!_bindings.maplibre_native_present_gpu_texture(
       textureId,
       slot,
       error,
-      _errorSize,
+      pluginErrorSize,
     )) {
       throw StateError(_message(error));
     }
@@ -166,6 +174,5 @@ final class WindowsPlugin {
       ),
   ];
 
-  static String _message(Pointer<Char> error) =>
-      error.cast<Utf8>().toDartString();
+  static String _message(Pointer<Char> error) => pluginErrorMessage(error);
 }

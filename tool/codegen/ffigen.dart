@@ -1,5 +1,5 @@
-// Generates the Dart bindings to the C APIs of the maplibre_native Windows
-// plugin and of the iOS and macOS plugin. Run it after changing a header:
+// Generates the Dart bindings to the C APIs of the maplibre_native Windows and
+// Linux plugins and of the iOS and macOS plugin. Run it after changing a header:
 //
 //   cd tool/codegen && dart run ffigen.dart
 
@@ -11,13 +11,13 @@ Future<void> main() async {
   final package = Platform.script.resolve('../../packages/maplibre_native/');
   await _generate(
     header: package.resolve(
-      'windows/include/maplibre_native/maplibre_native_api.h',
+      'desktop/include/maplibre_native/maplibre_native_api.h',
     ),
-    output: package.resolve('lib/src/windows/bindings.g.dart'),
-    wrapperName: 'MaplibreNativeWindowsBindings',
+    output: package.resolve('lib/src/desktop/bindings.g.dart'),
+    wrapperName: 'MaplibreNativeDesktopBindings',
     wrapperDocComment:
-        'Bindings to the C API of the maplibre_native Windows plugin, '
-        'in `windows/include/maplibre_native/maplibre_native_api.h`.',
+        'Bindings to the C API of the maplibre_native Windows and Linux '
+        'plugins, in `desktop/include/maplibre_native/maplibre_native_api.h`.',
   );
   await _generate(
     header: package.resolve(

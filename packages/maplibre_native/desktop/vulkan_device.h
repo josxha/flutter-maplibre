@@ -2,13 +2,24 @@
 #define FLUTTER_PLUGIN_MAPLIBRE_NATIVE_VULKAN_DEVICE_H_
 
 #define VK_NO_PROTOTYPES
+#if defined(_WIN32)
 #define VK_USE_PLATFORM_WIN32_KHR
-#include <vulkan/vulkan.h>
 #include <windows.h>
+#endif
+#include <vulkan/vulkan.h>
 
+#include <cstddef>
+#include <cstdint>
 #include <string>
 
 namespace maplibre_native {
+
+// Identifies the GPU that Flutter composites on: the adapter LUID on Windows,
+// the device UUID that OpenGL reports on Linux.
+struct GpuId {
+  uint8_t bytes[VK_UUID_SIZE] = {};
+  size_t size = 0;
+};
 
 // The process-wide Vulkan instance, device, and graphics queue that MapLibre
 // render sessions borrow. Each session submits to the queue from its own core
@@ -19,9 +30,9 @@ namespace maplibre_native {
 class VulkanDevice {
  public:
   // Returns the shared device, creating it on first use on the physical
-  // device whose LUID matches |adapter_luid| when there is one. Returns null
-  // and sets |error| when no Vulkan device is available.
-  static VulkanDevice* Get(const LUID* adapter_luid, std::string* error);
+  // device that |gpu| identifies when there is one. Returns null and sets
+  // |error| when no Vulkan device is available.
+  static VulkanDevice* Get(const GpuId* gpu, std::string* error);
 
   VkInstance instance() const { return instance_; }
   VkPhysicalDevice physical_device() const { return physical_device_; }
@@ -35,14 +46,20 @@ class VulkanDevice {
     return get_device_proc_addr_;
   }
 
-  // Whether the device imports D3D11 textures through
-  // VK_KHR_external_memory_win32, which zero-copy textures need.
-  bool imports_d3d11_textures() const { return imports_d3d11_textures_; }
+  // Whether the device shares image memory with Flutter's graphics API, which
+  // zero-copy textures need: it imports D3D11 textures through
+  // VK_KHR_external_memory_win32 on Windows, and exports memory to OpenGL
+  // through VK_KHR_external_memory_fd on Linux.
+  bool shares_memory() const { return shares_memory_; }
 
-  // Whether the device runs on the adapter that was asked for.
-  bool matches_adapter() const { return matches_adapter_; }
+  // Whether the device runs on the GPU that was asked for.
+  bool matches_gpu() const { return matches_gpu_; }
 
-  // Device functions for images that import D3D11 memory.
+  // The VkPhysicalDeviceIDProperties::driverUUID of the device. Memory
+  // exported to OpenGL needs the same driver on both sides.
+  const uint8_t* driver_uuid() const { return driver_uuid_; }
+
+  // Device functions for images whose memory is shared.
   PFN_vkCreateImage vkCreateImage = nullptr;
   PFN_vkDestroyImage vkDestroyImage = nullptr;
   PFN_vkGetImageMemoryRequirements vkGetImageMemoryRequirements = nullptr;
@@ -51,8 +68,12 @@ class VulkanDevice {
   PFN_vkBindImageMemory vkBindImageMemory = nullptr;
   PFN_vkCreateImageView vkCreateImageView = nullptr;
   PFN_vkDestroyImageView vkDestroyImageView = nullptr;
+#if defined(_WIN32)
   PFN_vkGetMemoryWin32HandlePropertiesKHR vkGetMemoryWin32HandlePropertiesKHR =
       nullptr;
+#else
+  PFN_vkGetMemoryFdKHR vkGetMemoryFdKHR = nullptr;
+#endif
   PFN_vkGetPhysicalDeviceMemoryProperties vkGetPhysicalDeviceMemoryProperties =
       nullptr;
   PFN_vkGetPhysicalDeviceImageFormatProperties2
@@ -60,9 +81,9 @@ class VulkanDevice {
 
  private:
   VulkanDevice() = default;
-  bool Create(const LUID* adapter_luid, std::string* error);
+  bool Create(const GpuId* gpu, std::string* error);
 
-  HMODULE library_ = nullptr;
+  void* library_ = nullptr;
   PFN_vkGetInstanceProcAddr get_instance_proc_addr_ = nullptr;
   PFN_vkGetDeviceProcAddr get_device_proc_addr_ = nullptr;
   VkInstance instance_ = VK_NULL_HANDLE;
@@ -70,8 +91,9 @@ class VulkanDevice {
   VkDevice device_ = VK_NULL_HANDLE;
   VkQueue queue_ = VK_NULL_HANDLE;
   uint32_t queue_family_index_ = 0;
-  bool imports_d3d11_textures_ = false;
-  bool matches_adapter_ = false;
+  bool shares_memory_ = false;
+  bool matches_gpu_ = false;
+  uint8_t driver_uuid_[VK_UUID_SIZE] = {};
 };
 
 }  // namespace maplibre_native

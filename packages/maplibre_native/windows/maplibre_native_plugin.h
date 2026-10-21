@@ -14,7 +14,8 @@
 #include <string>
 #include <vector>
 
-#include "gpu_texture.h"
+#include "d3d11_texture.h"
+#include "desktop_plugin.h"
 #include "vulkan_device.h"
 
 namespace maplibre_native {
@@ -51,41 +52,25 @@ class PixelTexture {
   FlutterDesktopPixelBuffer buffer_{};
 };
 
-// Owns the textures and devices behind the C API in
-// include/maplibre_native/maplibre_native_api.h. Dart reaches the one
-// registered instance through that API, never through a channel.
-class MaplibreNativePlugin : public flutter::Plugin {
+// The Windows DesktopPlugin: owns the textures, and the D3D11 device that
+// shares them with Flutter's adapter.
+class MaplibreNativePlugin : public flutter::Plugin, public DesktopPlugin {
  public:
   static void RegisterWithRegistrar(flutter::PluginRegistrarWindows* registrar);
 
-  // The registered plugin, or null before registration and after shutdown.
-  // Callers hold the lock from Lock() while they use it.
-  static MaplibreNativePlugin* Instance();
-  static std::unique_lock<std::mutex> Lock();
-
   explicit MaplibreNativePlugin(flutter::PluginRegistrarWindows* registrar);
 
-  virtual ~MaplibreNativePlugin();
+  ~MaplibreNativePlugin() override;
 
-  // Disallow copy and assign.
-  MaplibreNativePlugin(const MaplibreNativePlugin&) = delete;
-  MaplibreNativePlugin& operator=(const MaplibreNativePlugin&) = delete;
-
-  // The Vulkan device on Flutter's GPU, or null with |error| set.
-  VulkanDevice* GetVulkan(std::string* error);
-
-  int64_t CreatePixelTexture();
+  VulkanDevice* GetVulkan(std::string* error) override;
+  int64_t CreatePixelTexture() override;
   bool UpdatePixelTexture(int64_t id, size_t width, size_t height,
-                          size_t stride, const uint8_t* pixels, size_t length,
-                          std::string* error);
-
-  // Returns null with |error| set when D3D11 and Vulkan cannot share
-  // textures, and Dart falls back to a pixel buffer texture.
+                          size_t stride, const uint8_t* pixels) override;
   GpuTexture* CreateGpuTexture(uint32_t width, uint32_t height,
-                               uint32_t slot_count, std::string* error);
-  GpuTexture* FindGpuTexture(int64_t id);
-
-  void DisposeTexture(int64_t id);
+                               uint32_t slot_count,
+                               std::string* error) override;
+  GpuTexture* FindGpuTexture(int64_t id) override;
+  void DisposeTexture(int64_t id) override;
 
  private:
   // A D3D11 device on Flutter's GPU, or null with |error| set.
@@ -95,10 +80,9 @@ class MaplibreNativePlugin : public flutter::Plugin {
   // Flutter's adapter, taken on the platform thread at registration.
   Microsoft::WRL::ComPtr<IDXGIAdapter> adapter_;
   Microsoft::WRL::ComPtr<ID3D11Device> d3d_;
-  LUID adapter_luid_{};
-  bool has_adapter_luid_ = false;
+  GpuId adapter_luid_;
   std::map<int64_t, std::unique_ptr<PixelTexture>> pixel_textures_;
-  std::map<int64_t, std::unique_ptr<GpuTexture>> gpu_textures_;
+  std::map<int64_t, std::unique_ptr<D3D11Texture>> gpu_textures_;
 };
 
 }  // namespace maplibre_native

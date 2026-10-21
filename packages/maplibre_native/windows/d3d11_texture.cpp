@@ -1,4 +1,4 @@
-#include "gpu_texture.h"
+#include "d3d11_texture.h"
 
 #include <dxgi1_2.h>
 
@@ -23,19 +23,19 @@ std::string HResultError(const char* what, HRESULT result) {
 }  // namespace
 
 // static
-std::unique_ptr<GpuTexture> GpuTexture::Create(
+std::unique_ptr<D3D11Texture> D3D11Texture::Create(
     flutter::TextureRegistrar* registrar, VulkanDevice* vulkan,
     ID3D11Device* d3d, uint32_t width, uint32_t height, uint32_t slot_count,
     std::string* error) {
-  if (!vulkan->imports_d3d11_textures()) {
+  if (!vulkan->shares_memory()) {
     *error = "The Vulkan device cannot import D3D11 textures.";
     return nullptr;
   }
-  if (!vulkan->matches_adapter()) {
+  if (!vulkan->matches_gpu()) {
     *error = "The Vulkan device runs on another GPU than Flutter.";
     return nullptr;
   }
-  std::unique_ptr<GpuTexture> texture(new GpuTexture(registrar, vulkan, d3d));
+  std::unique_ptr<D3D11Texture> texture(new D3D11Texture(registrar, vulkan, d3d));
   D3D11_QUERY_DESC query_desc{D3D11_QUERY_EVENT, 0};
   HRESULT result = d3d->CreateQuery(&query_desc, &texture->query_);
   if (FAILED(result)) {
@@ -50,7 +50,7 @@ std::unique_ptr<GpuTexture> GpuTexture::Create(
   texture->width_ = width;
   texture->height_ = height;
 
-  GpuTexture* raw = texture.get();
+  D3D11Texture* raw = texture.get();
   texture->texture_ =
       std::make_unique<flutter::TextureVariant>(flutter::GpuSurfaceTexture(
           kFlutterDesktopGpuSurfaceTypeDxgiSharedHandle,
@@ -61,8 +61,8 @@ std::unique_ptr<GpuTexture> GpuTexture::Create(
   return texture;
 }
 
-GpuTexture::GpuTexture(flutter::TextureRegistrar* registrar,
-                       VulkanDevice* vulkan, ID3D11Device* d3d)
+D3D11Texture::D3D11Texture(flutter::TextureRegistrar* registrar,
+                           VulkanDevice* vulkan, ID3D11Device* d3d)
     : registrar_(registrar), vulkan_(vulkan), d3d_(d3d) {
   d3d_->GetImmediateContext(&context_);
   descriptor_.struct_size = sizeof(FlutterDesktopGpuSurfaceDescriptor);
@@ -70,14 +70,14 @@ GpuTexture::GpuTexture(flutter::TextureRegistrar* registrar,
 }
 
 // static
-void GpuTexture::Dispose(std::unique_ptr<GpuTexture> texture) {
-  GpuTexture* raw = texture.release();
+void D3D11Texture::Dispose(std::unique_ptr<D3D11Texture> texture) {
+  D3D11Texture* raw = texture.release();
   // Flutter may call Descriptor until unregistration completes, so the
   // texture lives until then.
   raw->registrar_->UnregisterTexture(raw->id_, [raw] { delete raw; });
 }
 
-GpuTexture::~GpuTexture() {
+D3D11Texture::~D3D11Texture() {
   // The session that rendered into the slots released them before the
   // texture was disposed. Present textures hold legacy shared handles, which
   // are not closed.
@@ -85,7 +85,13 @@ GpuTexture::~GpuTexture() {
   ReleaseRetiredSlots();
 }
 
-bool GpuTexture::CreateSlots(uint32_t width, uint32_t height, uint32_t count,
+std::vector<VulkanSlot> D3D11Texture::slots() const {
+  std::vector<VulkanSlot> slots;
+  for (const auto& slot : slots_) slots.push_back({slot.image, slot.view});
+  return slots;
+}
+
+bool D3D11Texture::CreateSlots(uint32_t width, uint32_t height, uint32_t count,
                              std::vector<SharedSlot>* slots,
                              std::string* error) {
   slots->resize(count);
@@ -99,7 +105,7 @@ bool GpuTexture::CreateSlots(uint32_t width, uint32_t height, uint32_t count,
   return true;
 }
 
-bool GpuTexture::CreateSlot(uint32_t width, uint32_t height, SharedSlot* slot,
+bool D3D11Texture::CreateSlot(uint32_t width, uint32_t height, SharedSlot* slot,
                             std::string* error) {
   D3D11_TEXTURE2D_DESC desc{};
   desc.Width = width;
@@ -220,7 +226,7 @@ bool GpuTexture::CreateSlot(uint32_t width, uint32_t height, SharedSlot* slot,
   return true;
 }
 
-void GpuTexture::DestroySlot(SharedSlot* slot) {
+void D3D11Texture::DestroySlot(SharedSlot* slot) {
   VkDevice device = vulkan_->device();
   if (slot->view != VK_NULL_HANDLE) {
     vulkan_->vkDestroyImageView(device, slot->view, nullptr);
@@ -235,7 +241,7 @@ void GpuTexture::DestroySlot(SharedSlot* slot) {
   *slot = SharedSlot{};
 }
 
-bool GpuTexture::CreatePresentTextures(uint32_t width, uint32_t height,
+bool D3D11Texture::CreatePresentTextures(uint32_t width, uint32_t height,
                                        std::string* error) {
   PresentTexture created[kPresentCount];
   for (auto& present : created) {
@@ -272,7 +278,7 @@ bool GpuTexture::CreatePresentTextures(uint32_t width, uint32_t height,
   return true;
 }
 
-bool GpuTexture::Resize(uint32_t width, uint32_t height, std::string* error) {
+bool D3D11Texture::Resize(uint32_t width, uint32_t height, std::string* error) {
   std::vector<SharedSlot> slots;
   if (!CreateSlots(width, height, static_cast<uint32_t>(slots_.size()), &slots,
                    error) ||
@@ -287,14 +293,14 @@ bool GpuTexture::Resize(uint32_t width, uint32_t height, std::string* error) {
   return true;
 }
 
-void GpuTexture::ReleaseRetiredSlots() {
+void D3D11Texture::ReleaseRetiredSlots() {
   for (auto& slots : retired_slots_) {
     for (auto& slot : slots) DestroySlot(&slot);
   }
   retired_slots_.clear();
 }
 
-bool GpuTexture::Present(uint32_t slot, std::string* error) {
+bool D3D11Texture::Present(uint32_t slot, std::string* error) {
   if (slot >= slots_.size()) {
     *error = "The slot does not exist.";
     return false;
@@ -328,7 +334,7 @@ bool GpuTexture::Present(uint32_t slot, std::string* error) {
   return true;
 }
 
-const FlutterDesktopGpuSurfaceDescriptor* GpuTexture::Descriptor(
+const FlutterDesktopGpuSurfaceDescriptor* D3D11Texture::Descriptor(
     size_t width, size_t height) {
   std::lock_guard<std::mutex> lock(mutex_);
   if (front_ < 0) return nullptr;
