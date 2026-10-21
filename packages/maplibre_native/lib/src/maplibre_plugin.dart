@@ -12,17 +12,20 @@ class MapLibrePluginNative extends MapLibrePlatform {
 
   /// Whether maplibre_native can render on the current platform.
   ///
-  /// The plugin registers on every native platform, but only Windows and
-  /// Android have a texture integration so far.
+  /// The plugin registers on every native platform, but Linux has no texture
+  /// integration yet.
   static bool get isPlatformSupported =>
-      Platform.isWindows || Platform.isAndroid;
+      Platform.isWindows ||
+      Platform.isAndroid ||
+      Platform.isIOS ||
+      Platform.isMacOS;
 
   @override
   MapLibreMapState createWidgetState() {
     if (!isPlatformSupported) {
       throw UnsupportedError(
         'maplibre_native does not render on ${Platform.operatingSystem} yet. '
-        'Only Windows and Android are supported so far.',
+        'Only Windows, Android, iOS, and macOS are supported so far.',
       );
     }
     return MapLibreMapStateNative();

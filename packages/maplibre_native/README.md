@@ -11,14 +11,17 @@ a Flutter `Texture`.
 |----------|-----------------------------------------------------------------------------|
 | Windows  | Vulkan into D3D11 textures shared with Flutter, or CPU readback             |
 | Android  | OpenGL ES (default) or Vulkan on the Surface of a Flutter `SurfaceProducer` |
-| Others   | Registered, but creating a map throws `UnsupportedError`                    |
+| iOS      | Metal into a texture ring, copied on the GPU into IOSurface pixel buffers   |
+| macOS    | Metal into a texture ring, copied on the GPU into IOSurface pixel buffers   |
+| Linux    | Registered, but creating a map throws `UnsupportedError`                    |
 
 ## Android
 
 - Renders with OpenGL ES 3.0 by default, and needs API level 24 or later.
 - To render with Vulkan instead, which needs Vulkan 1.1, select the Vulkan
   build of the C library in the root `pubspec.yaml` of the app or workspace.
-  The setting applies to every target, and iOS only has Metal builds.
+  The setting applies to every target, and iOS and macOS render through
+  Metal only, so remove it when building for them.
 
   ```yaml
   hooks:
@@ -29,6 +32,15 @@ a Flutter `Texture`.
 
 - The plugin ships the Android TLS certificate verifier that the C library
   calls over JNI, and keeps it from R8 with its consumer rules.
+
+## iOS and macOS
+
+- Render with Metal, on iOS 13 and macOS 10.15 or later.
+- The C library is published for arm64 only: devices, arm64 simulators, and
+  Apple silicon Macs. Apps exclude x86_64 with `EXCLUDED_ARCHS`, as the
+  example's xcconfigs do.
+- Sandboxed macOS apps need the `com.apple.security.network.client`
+  entitlement to load styles and tiles.
 
 ## Building the C library locally
 

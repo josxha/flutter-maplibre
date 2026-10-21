@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:maplibre_native/src/android/android_plugin.dart';
+import 'package:maplibre_native/src/darwin/darwin_plugin.dart';
 import 'package:maplibre_native/src/windows/windows_plugin.dart';
 import 'package:maplibre_native_ffi/maplibre_native_ffi.dart';
 
@@ -29,6 +30,10 @@ enum _Target {
   /// Android: an EGL window surface or a Vulkan swapchain on the Surface of a
   /// Flutter SurfaceProducer.
   surface,
+
+  /// iOS and macOS: a ring of Metal textures, each frame copied on the GPU
+  /// into an IOSurface-backed pixel buffer that Flutter shows.
+  metalTexture,
 }
 
 VulkanContextDescriptor? _vulkanContext;
@@ -52,6 +57,9 @@ OpenglContextDescriptor _getEglContext() =>
 final bool _androidUsesOpenGl =
     Platform.isAndroid &&
     supportedRenderBackendMask().contains(RenderBackendFlag.opengl);
+
+/// Whether maps render through Metal, on iOS and macOS.
+final bool _metal = Platform.isIOS || Platform.isMacOS;
 
 /// The native thread that services an OpenGL ES session on Android.
 ///
@@ -90,6 +98,10 @@ final class _RenderThread {
 ///   SurfaceProducer texture: through an EGL window surface on a plugin render
 ///   thread (OpenGL ES, the default), or through a Vulkan swapchain on its
 ///   core worker.
+/// - On iOS and macOS, the map renders on its session's core worker through
+///   Metal into a ring of BGRA8 textures. The plugin copies each frame on the
+///   GPU into an IOSurface-backed pixel buffer, which Flutter samples without
+///   a CPU copy.
 final class MapRenderer {
   MapRenderer._(
     this.textureId,
@@ -165,9 +177,9 @@ final class MapRenderer {
   /// the latest camera, which the map image reaches a frame or two later. The
   /// receiver owns the projection.
   ///
-  /// On Windows Flutter shows the frame in its next frame. On Android the
-  /// frame went to the Surface, and Flutter takes the newest image there,
-  /// which is nearly always the same one.
+  /// On Windows, iOS, and macOS Flutter shows the frame in its next frame. On
+  /// Android the frame went to the Surface, and Flutter takes the newest image
+  /// there, which is nearly always the same one.
   void Function(MapProjectionHandle projection, RenderFrameResult frame)?
   onFrameShown;
 
@@ -180,10 +192,18 @@ final class MapRenderer {
     void Function(MapProjectionHandle projection, RenderFrameResult frame)?
     onFrameShown,
   }) async {
+    if (_metal &&
+        !supportedRenderBackendMask().contains(RenderBackendFlag.metal)) {
+      throw UnsupportedError(
+        'maplibre_native renders through Metal on ${Platform.operatingSystem}, '
+        'but the MapLibre Native C library was built for another backend. '
+        'Remove hooks.user_defines.maplibre_native_ffi.backend for this build.',
+      );
+    }
     // Also initializes the C library for Android, before its first use.
     final opengl = _androidUsesOpenGl;
     final eglContext = opengl ? _getEglContext() : null;
-    final vulkanContext = opengl ? null : _getVulkanContext();
+    final vulkanContext = opengl || _metal ? null : _getVulkanContext();
 
     // Wakes can arrive before the renderer exists; their work waits for the
     // next wake then.
@@ -254,6 +274,37 @@ final class MapRenderer {
           _Target.surface,
           surfaceTexture: texture,
           renderThread: renderThread,
+        ),
+        attachment,
+        onEvent,
+        onFrameShown,
+      );
+    }
+
+    if (_metal) {
+      final texture = DarwinPlugin.createGpuTexture(
+        width,
+        height,
+        _gpuSlotCount,
+      );
+      final RenderSessionAttachment attachment;
+      try {
+        attachment = map.attachMetalBorrowedTexture(
+          _metalDescriptor(extent, texture.slots),
+          options,
+        );
+      } on Object {
+        DarwinPlugin.disposeTexture(texture.textureId);
+        rethrow;
+      }
+      return _finishCreate(
+        renderer = MapRenderer._(
+          texture.textureId,
+          runtime,
+          map,
+          attachment.session,
+          extent,
+          _Target.metalTexture,
         ),
         attachment,
         onEvent,
@@ -340,6 +391,19 @@ final class MapRenderer {
     );
   }
 
+  static MetalBorrowedTextureDescriptor _metalDescriptor(
+    LogicalExtent extent,
+    List<MetalBorrowedTexture> slots,
+  ) {
+    final (width, height) = _physicalSize(extent);
+    return MetalBorrowedTextureDescriptor(
+      extent: extent,
+      physicalWidth: width,
+      physicalHeight: height,
+      textures: slots,
+    );
+  }
+
   static (int, int) _physicalSize(LogicalExtent extent) => (
     (extent.width * extent.scaleFactor).round().clamp(1, 16384),
     (extent.height * extent.scaleFactor).round().clamp(1, 16384),
@@ -371,6 +435,8 @@ final class MapRenderer {
         switch (_target) {
           case _Target.gpuTexture:
             await _onGpuQueue(() => _replaceGpuTarget(extent));
+          case _Target.metalTexture:
+            await _onGpuQueue(() => _replaceMetalTarget(extent));
           case _Target.surface:
             await _onGpuQueue(() => _resizeSurface(extent));
           case _Target.pixelBuffer:
@@ -399,6 +465,23 @@ final class MapRenderer {
       _borrowedDescriptor(_getVulkanContext(), extent, _format, slots),
     );
     WindowsPlugin.releaseRetiredSlots(textureId);
+  }
+
+  /// Gives the session a Metal ring of the new size, as [_replaceGpuTarget]
+  /// does on Windows.
+  Future<void> _replaceMetalTarget(LogicalExtent extent) async {
+    if (_disposed) return;
+    final (width, height) = _physicalSize(extent);
+    final slots = DarwinPlugin.resizeGpuTexture(
+      textureId,
+      width,
+      height,
+      _gpuSlotCount,
+    );
+    await _session.setMetalBorrowedTextureTarget(
+      _metalDescriptor(extent, slots),
+    );
+    DarwinPlugin.releaseRetiredSlots(textureId);
   }
 
   /// Sizes the SurfaceProducer's buffers and the session. Flutter may hand
@@ -508,7 +591,7 @@ final class MapRenderer {
       final projection = _renderedProjection();
       final frame = result;
       switch (_target) {
-        case _Target.gpuTexture:
+        case _Target.gpuTexture || _Target.metalTexture:
           unawaited(_onGpuQueue(() => _present(projection, frame)));
         case _Target.pixelBuffer:
           unawaited(_readBack(projection, frame));
@@ -537,8 +620,13 @@ final class MapRenderer {
       final frame = _session.acquireFrame();
       if (frame == null) return;
       try {
-        final slot = frame.getVulkanTexture().withView((view) => view.slot);
-        WindowsPlugin.presentGpuTexture(textureId, slot);
+        if (_target == _Target.metalTexture) {
+          final slot = frame.getMetalTexture().withView((view) => view.slot);
+          DarwinPlugin.presentGpuTexture(textureId, slot);
+        } else {
+          final slot = frame.getVulkanTexture().withView((view) => view.slot);
+          WindowsPlugin.presentGpuTexture(textureId, slot);
+        }
         _showFrame(projection, result);
         shown = true;
       } finally {
@@ -645,6 +733,10 @@ final class MapRenderer {
     if (_surfaceTexture case final texture?) {
       // A swapchain kept until process exit needs its VkSurfaceKHR as long.
       AndroidPlugin.disposeTexture(texture, keepSurface: quarantined);
+    } else if (_target == _Target.metalTexture) {
+      // Abandon destroyed the session's Metal objects, and the ring is the
+      // plugin's.
+      DarwinPlugin.disposeTexture(textureId);
     } else {
       WindowsPlugin.disposeTexture(textureId);
     }

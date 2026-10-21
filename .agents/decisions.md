@@ -13,7 +13,8 @@ Each entry: the decision, then why.
 - **Rendering goes only through the texture registry, never platform views.**
   This keeps Flutter composition, transforms, and overlays working.
 - **Windows renders through Vulkan. Android renders through OpenGL ES by
-  default, and through Vulkan when the app selects the Vulkan build.** WGL
+  default, and through Vulkan when the app selects the Vulkan build. iOS and
+  macOS render through Metal.** WGL
   needs one pinned thread, which Dart can't guarantee, and the binding's
   texture APIs are Vulkan-first. On Android, OpenGL ES runs on every device,
   while Vulkan 1.1 drivers are missing or unreliable on many older ones.
@@ -22,8 +23,8 @@ Each entry: the decision, then why.
   Windows) unless `hooks.user_defines.maplibre_native_ffi.backend` names one,
   and `mln_supported_render_backend_mask()` tells `MapRenderer` which path to
   take. The workspace sets no backend.
-- **Dart reaches the platform plugins through ffigen (Windows) and jnigen
-  (Android), never method channels.** Calls are synchronous and typed, with
+- **Dart reaches the platform plugins through ffigen (Windows, iOS, macOS)
+  and jnigen (Android), never method channels.** Calls are synchronous and typed, with
   no message encoding. The Windows plugin DLL exports a C API and keeps its
   one registered instance behind a mutex. On Android a Kotlin
   `MaplibreNativeApi` object holds the engine's texture registry, and
@@ -78,6 +79,35 @@ Each entry: the decision, then why.
 - **The patched rustls-platform-verifier `CertificateVerifier.kt` is vendored
   verbatim, along with its licenses and keep rules.** The C library calls it
   over JNI for TLS. ktlint skips it.
+
+## iOS and macOS
+
+- **One Objective-C plugin in `darwin/` serves both, with
+  `sharedDarwinSource`, as a CocoaPods pod and a SwiftPM package.** The Metal
+  and CoreVideo code is the same on both; only the Flutter import differs.
+- **Sessions render into a borrowed ring of three private BGRA8 Metal
+  textures, and each acquired frame is blitted into a pixel buffer from an
+  IOSurface-backed `CVPixelBufferPool`, which the `FlutterTexture` returns
+  from `copyPixelBuffer`.** BGRA8 is what Flutter's pixel buffer textures
+  read, and the session-owned ring is RGBA8, which a blit can't swizzle.
+  Copying keeps the ring free while Flutter still samples the previous frame,
+  as the D3D11 copy does on Windows; the pool only reuses a buffer once
+  Flutter has let go of it. The plugin waits for the blit before the frame is
+  released with CPU-complete sync, because Flutter samples on its own command
+  queue, which Metal doesn't order with ours.
+- **Dart finds the C API through `+[MaplibreNativePlugin symbols]`, called
+  with `objc_msgSend`, not `DynamicLibrary.process()`.** SwiftPM links the
+  plugin statically into the app, and release builds strip global symbols
+  (Flutter's FFI docs ask apps to change `STRIP_STYLE` for this). The
+  Objective-C runtime finds the class by name regardless, and the table keeps
+  the functions from dead stripping. All of it lives in one `.m` file, which
+  the generated plugin registrant pulls into the link.
+- **Texture registration and unregistration run on the main thread, inline
+  when Dart's UI thread is the main thread.** `textureFrameAvailable` runs on
+  the calling thread.
+- **The example excludes x86_64 (macOS and the iOS simulator) and has the
+  `network.client` entitlement on macOS.** The C library is published for
+  arm64 only, and the sandbox blocks tile downloads without it.
 
 ## Threading and GPU
 
@@ -202,6 +232,14 @@ Each entry: the decision, then why.
 ## Known gaps
 
 - Missing on native: globe projection, user location and permissions.
+- iOS and macOS were written without a Mac and have not been built or run.
+- Intel Macs and x86_64 simulators have no published C library.
+- The backend user-define applies to every target, and the macOS presets
+  also offer Vulkan and OpenGL. With either, a macOS map throws
+  `UnsupportedError`, since the plugin only integrates Metal.
+- The Metal path copies every frame on the GPU and waits for the copy on the
+  Dart UI thread. Holding the shown frame acquired, or a shared event, could
+  drop the copy or the wait.
 - The Dart binding lacks `queue_lock`. The Python binding has it.
 - The binding's build hook takes one local install prefix and rejects other
   targets, so it can't pick a preset per target (needed for multi-ABI

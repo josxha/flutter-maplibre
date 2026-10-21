@@ -31,22 +31,26 @@ flutter:
   plugin:
     implements: maplibre
     platforms:
-      # Windows and Android render. The other platforms register the Dart
-      # plugin, which reports them as unsupported when a map is created.
+      # Windows, Android, iOS, and macOS render. Linux registers the Dart
+      # plugin, which reports it as unsupported when a map is created.
       android:
         package: com.github.josxha.maplibre_native
         pluginClass: MaplibreNativePlugin
         dartPluginClass: MapLibrePluginNative
         dartFileName: 'src/maplibre_plugin.dart'
       ios:
+        pluginClass: MaplibreNativePlugin
         dartPluginClass: MapLibrePluginNative
         dartFileName: 'src/maplibre_plugin.dart'
+        sharedDarwinSource: true
       linux:
         dartPluginClass: MapLibrePluginNative
         dartFileName: 'src/maplibre_plugin.dart'
       macos:
+        pluginClass: MaplibreNativePlugin
         dartPluginClass: MapLibrePluginNative
         dartFileName: 'src/maplibre_plugin.dart'
+        sharedDarwinSource: true
       windows:
         pluginClass: MaplibreNativePluginCApi
         dartPluginClass: MapLibrePluginNative

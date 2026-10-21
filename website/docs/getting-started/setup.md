@@ -94,8 +94,8 @@ platform, so widgets over the map keep their own taps and drags without a
 | Web      | `maplibre_web`    | MapLibre GL JS                               | Supported    |
 | Windows  | `maplibre_native` | MapLibre Native (C API, Vulkan)              | Experimental |
 | Android  | `maplibre_native` | MapLibre Native (C API, OpenGL ES or Vulkan) | Experimental |
-| iOS      | `maplibre_native` | MapLibre Native (C API)                      | Planned      |
-| macOS    | `maplibre_native` | MapLibre Native (C API)                      | Planned      |
+| iOS      | `maplibre_native` | MapLibre Native (C API, Metal)               | Experimental |
+| macOS    | `maplibre_native` | MapLibre Native (C API, Metal)               | Experimental |
 | Linux    | `maplibre_native` | MapLibre Native (C API)                      | Planned      |
 
 On a platform marked as planned, the app builds, but creating a `MapLibreMap`
@@ -172,10 +172,41 @@ hooks:
 
 !!! note
 
-    This setting applies to every platform your app builds for. The C library
-    only has Metal builds for iOS, so remove the setting when you build for
-    iOS. iOS doesn't render maps yet anyway.
+    This setting applies to every platform your app builds for, but iOS and
+    macOS render through Metal only, so remove the setting when you build for
+    them.
 
 The plugin ships the Android TLS certificate verifier that the C library
 calls, together with the R8 rules that keep it, so no ProGuard setup is
 needed.
+
+## Setup iOS
+
+The map renders with Metal into a Flutter texture, on iOS 13 or newer. The C
+library is published for devices and for arm64 simulators, so exclude the
+x86_64 simulator slice in `ios/Flutter/Debug.xcconfig` and
+`ios/Flutter/Release.xcconfig`:
+
+```text title="ios/Flutter/Debug.xcconfig"
+EXCLUDED_ARCHS[sdk=iphonesimulator*] = x86_64
+```
+
+## Setup macOS
+
+The map renders with Metal into a Flutter texture. The C library is published
+for Apple silicon only, so exclude x86_64 in
+`macos/Flutter/Flutter-Debug.xcconfig` and
+`macos/Flutter/Flutter-Release.xcconfig`:
+
+```text title="macos/Flutter/Flutter-Debug.xcconfig"
+EXCLUDED_ARCHS = x86_64
+```
+
+Sandboxed apps need the outgoing network entitlement to load styles and tiles.
+Add it to `macos/Runner/DebugProfile.entitlements` and
+`macos/Runner/Release.entitlements`:
+
+```xml
+<key>com.apple.security.network.client</key>
+<true/>
+```

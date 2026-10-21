@@ -5,7 +5,7 @@
 - Removed `maplibre_android`, `maplibre_ios` and `maplibre_webview`. `maplibre`
   now uses `maplibre_web` in the browser and `maplibre_native`, built on the
   MapLibre Native C API, on every other platform. `maplibre_native` renders on
-  Windows and Android so far; on iOS, Linux and macOS creating a map throws an
+  Windows, Android, iOS and macOS so far; on Linux creating a map throws an
   `UnsupportedError` for now.
 - Removed the `MapOptions` properties of the removed packages:
   `androidMode`, `androidTextureMode`, `androidTranslucentTextureSurface`,
