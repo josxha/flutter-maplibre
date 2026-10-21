@@ -156,15 +156,18 @@ Each entry: the decision, then why.
   host code uses the queue, and none does. The Dart binding doesn't expose
   `queue_lock` yet.
 - **Widgets over the map follow the frame on screen, not the latest camera.**
-  Each rendered frame's `session.createProjection()` (taken before the next
-  demand) reaches the map state when Flutter can show that frame. `camera`
-  and screen locations come from it, so widget layers rebuild in the same
+  Each rendered frame result carries the view it drew; when Flutter can show
+  that frame, the renderer creates its projection (`mapProjectionCreate`) and
+  hands both to the map state. `camera` and screen locations come from it,
+  so widget layers rebuild in the same
   Flutter frame as the map image. Camera events and `getCamera()` still
   report the latest camera, so `await moveCamera(...)` is followed by the new
   one. Exact on Windows. On Android Flutter takes the newest Surface
   image itself, so it can be off by a frame. Frames that drew a map update
   older than the initial camera are skipped, because they can reach Flutter
-  after `onMapCreated`.
+  after `onMapCreated`. The native camera center is unwrapped to the visible
+  world copy; projections keep it, while `MapCamera` wraps the longitude
+  into [-180, 180).
 - **Dart calls the plugins on its UI thread.** Flutter's Windows and Linux
   texture registrar functions may be called from any thread. On Android the UI
   thread is the main thread, which SurfaceProducer needs.

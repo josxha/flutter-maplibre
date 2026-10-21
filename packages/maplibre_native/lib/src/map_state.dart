@@ -243,7 +243,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
     }
     _shownProjection?.close();
     _shownProjection = projection;
-    final shown = _toMapCamera(projection.getCamera());
+    final shown = _toMapCamera(frame.view.camera);
     final resized = frame.generation != _shownExtentGeneration;
     _shownExtentGeneration = frame.generation;
     if (shown == camera && !resized) return;
@@ -277,15 +277,20 @@ class MapLibreMapStateNative extends MapLibreMapState {
   MapCamera? _readCamera() {
     final map = _map;
     if (map == null || _renderer!.disposed) return null;
-    return _toMapCamera(map.getSnapshot().camera);
+    return _toMapCamera(map.getSnapshot().view.camera);
   }
 
+  /// The native center is unwrapped to the visible world copy; the public
+  /// camera wraps its longitude into [-180, 180).
   static MapCamera _toMapCamera(mln.CameraOptions native) {
     final center = native.center;
     return MapCamera(
       center: center == null
           ? const Geographic(lon: 0, lat: 0)
-          : Geographic(lon: center.longitude, lat: center.latitude),
+          : Geographic(
+              lon: (center.longitude + 180) % 360 - 180,
+              lat: center.latitude,
+            ),
       zoom: native.zoom ?? 0,
       bearing: native.bearing ?? 0,
       pitch: native.pitch ?? 0,
@@ -312,7 +317,8 @@ class MapLibreMapStateNative extends MapLibreMapState {
     if (map == null) {
       throw StateError('The map has not been created yet.');
     }
-    return _shownProjection ?? (_projection ??= map.createProjection());
+    return _shownProjection ??
+        (_projection ??= mln.mapProjectionCreate(map.getSnapshot().view));
   }
 
   void _invalidateProjection() {

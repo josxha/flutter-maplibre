@@ -108,7 +108,8 @@ final class MapRenderer implements FrameTargetHost {
   /// Receives the projection and render result of each frame once
   /// Flutter can show it, so overlays can follow what is on screen rather than
   /// the latest camera, which the map image reaches a frame or two later. The
-  /// receiver owns the projection.
+  /// projection converts for the view the frame drew, and the receiver owns
+  /// it.
   ///
   /// On Windows, Linux, iOS, and macOS Flutter shows the frame in its next
   /// frame. On Android the frame went to the Surface, and Flutter takes the
@@ -231,10 +232,8 @@ final class MapRenderer implements FrameTargetHost {
     if (result == null) return;
     _pendingToken = null;
     if (result.disposition == RenderResult.rendered) {
-      // Taken before the next demand, so it is this frame's transform.
-      final projection = _renderedProjection();
       final frame = result;
-      unawaited(onGpuQueue(() => _present(projection, frame)));
+      unawaited(onGpuQueue(() => _present(frame)));
     } else if (result.disposition == RenderResult.targetNotReady) {
       Timer(const Duration(milliseconds: 16), demandFrame);
     } else {
@@ -244,45 +243,23 @@ final class MapRenderer implements FrameTargetHost {
 
   /// Hands the latest frame to Flutter through the target, then demands the
   /// next one.
-  Future<void> _present(
-    MapProjectionHandle? projection,
-    RenderFrameResult result,
-  ) async {
-    var shown = false;
+  Future<void> _present(RenderFrameResult result) async {
     try {
       if (_disposed) return;
-      if (await _target.present(_session) && !_disposed) {
-        _showFrame(projection, result);
-        shown = true;
-      }
+      if (await _target.present(_session) && !_disposed) _showFrame(result);
     } on Object catch (error) {
       debugPrint('maplibre_native: present failed: $error');
     } finally {
-      if (!shown) projection?.close();
       demandFrame();
     }
   }
 
-  /// The transform of the frame the session drew last, or null when it has
-  /// none, as right after a resize.
-  MapProjectionHandle? _renderedProjection() {
-    if (onFrameShown == null) return null;
-    try {
-      return _session.createProjection();
-    } on MaplibreException {
-      return null;
-    }
-  }
-
-  /// Hands [projection] to [onFrameShown] once its frame reached Flutter.
-  void _showFrame(MapProjectionHandle? projection, RenderFrameResult frame) {
-    if (projection == null) return;
+  /// Hands [frame] and the projection of the view it drew to [onFrameShown]
+  /// once the frame reached Flutter.
+  void _showFrame(RenderFrameResult frame) {
     final onFrameShown = this.onFrameShown;
-    if (_disposed || onFrameShown == null) {
-      projection.close();
-      return;
-    }
-    onFrameShown(projection, frame);
+    if (_disposed || onFrameShown == null) return;
+    onFrameShown(mapProjectionCreate(frame.view), frame);
   }
 
   void _onEvents(List<RuntimeEvent> events) {
