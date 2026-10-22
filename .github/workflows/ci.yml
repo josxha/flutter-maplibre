@@ -54,6 +54,8 @@ jobs:
           filter_mode: nofilter
           file_glob: "!**/*.g.*"
           fail_on_error: true
+          # Pinned: downloading "latest" returned "Not Found" and broke the job.
+          ktlint_version: "1.8.0"
   unit-test:
     name: "Unit tests"
     runs-on: ubuntu-latest
