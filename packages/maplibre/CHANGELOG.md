@@ -34,8 +34,35 @@
 ### Bug Fixes
 
 - Web: widgets over the map no longer let taps and drags through to the map.
+
+## 0.3.7
+
+Thanks for everyone who contributed in this release!
+@glandais, @miakh, @teamacco, @Mazen-Embaby, @fmt-Println-MKO, @BartoszStasiurka
+
+### Features
+
+- Requires Dart 3.13 and Flutter 3.47 or newer.
+- iOS: ffigen v22, code_assets v2, objective_c 9.5
+
+### Bug Fixes
+
+- Android: `OfflineManager.downloadRegion` no longer leaks a JNI global
+  reference per status event, which aborted the process with a global
+  reference table overflow partway through a large region download.
 - Android: calls on a `StyleController` whose native style was already released
   are ignored instead of aborting the process with a JNI error.
+- Android: remove the ktlint Gradle plugin, which broke builds of apps that
+  depend on `maplibre_android`.
+- Android: add a missing proguard rule for obfuscated release builds.
+- iOS: fix a crash when setting hillshade `colorArray` and `numberArray` paint
+  properties.
+- iOS: fix `animateCamera()` crash when called before the native view has a
+  layout size.
+- iOS: tear down `MLNMapView` and its gesture recognizers when the map is
+  disposed.
+- iOS: preserve zoom levels, attribution, raster tile size, and supported DEM
+  encoding when adding tile-template sources at runtime.
 - Web: `fitBounds()` no longer reuses padding from a previous camera move.
 
 ## 0.3.6

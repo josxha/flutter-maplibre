@@ -7,6 +7,10 @@
   `webviewDebugMode`, and the `AndroidPlatformViewMode` enum, whose
   implementations were removed.
 
+## 0.3.7
+
+[Check the maplibre changelog](https://pub.dev/packages/maplibre/changelog#037)
+
 ## 0.3.6
 
 [Check the maplibre changelog](https://pub.dev/packages/maplibre/changelog#036)
