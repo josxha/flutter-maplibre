@@ -43,6 +43,12 @@ class StyleControllerWeb extends StyleController {
   }
 
   @override
+  Future<void> setPlacementTransitions({required bool enabled}) async {
+    // No-op: MapLibre GL JS only offers `fadeDuration` as a map construction
+    // option.
+  }
+
+  @override
   Future<List<String>> getAttributions() async => getAttributionsSync();
 
   @override

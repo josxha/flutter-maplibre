@@ -301,6 +301,11 @@ class StyleControllerIos extends StyleController {
     );
   }
 
+  @override
+  Future<void> setPlacementTransitions({required bool enabled}) async {
+    _ffiStyle.performsPlacementTransitions = enabled;
+  }
+
   List<MLNStyleLayer> _getLayers() => List<MLNStyleLayer>.from(
     _ffiStyle.layers.toDartList(convertOther: MLNStyleLayer.as),
   );

@@ -8,6 +8,13 @@ Thanks for everyone who contributed in this release!
 - Requires Dart 3.13 and Flutter 3.47 or newer.
 - iOS: ffigen v22, code_assets v2, objective_c 9.5
 
+### Features
+
+- Add `StyleController.setPlacementTransitions({required bool enabled})` to
+  switch MapLibre's symbol placement transitions on Android and iOS.
+  Disabling them lets the map render one frame per source update instead of
+  re-rendering for the whole 300 ms fade window.
+
 ### Bug Fixes
 
 - Android: `OfflineManager.downloadRegion` no longer leaks a JNI global

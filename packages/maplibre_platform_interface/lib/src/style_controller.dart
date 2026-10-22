@@ -47,6 +47,25 @@ abstract class StyleController {
   /// Update the data of a GeoJSON source.
   Future<void> updateGeoJsonSource({required String id, required String data});
 
+  /// Enable or disable MapLibre's symbol placement transitions (the 300 ms
+  /// fade when labels and icons appear, disappear or are re-placed after a
+  /// camera change or a source update).
+  ///
+  /// Disabling them avoids re-rendering for the duration of the fade after
+  /// every source update or camera change, which matters for apps that update
+  /// sources several times per second.
+  ///
+  /// The setting belongs to the current style and has to be applied again
+  /// after a style (re)load.
+  ///
+  /// Android: `Style.setTransition`; the flag is written together with the
+  /// style's current duration and delay, and an unset duration is written as
+  /// 300 ms, which makes runtime paint property changes animate on Android.
+  /// Calling it with the value that is already set does nothing. iOS:
+  /// `MLNStyle.performsPlacementTransitions`. Web: no-op (MapLibre GL JS only
+  /// offers `fadeDuration` as a map construction option).
+  Future<void> setPlacementTransitions({required bool enabled});
+
   /// Removes the layer with the given [id] from the map's style.
   Future<void> removeLayer(String id);
 

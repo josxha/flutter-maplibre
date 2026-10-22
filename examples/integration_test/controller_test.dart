@@ -287,6 +287,24 @@ void test() {
       );
     });
 
+    testWidgets('setPlacementTransitions', (tester) async {
+      final styleCompleter = Completer<StyleController>();
+      final app = App(
+        onStyleLoaded: styleCompleter.complete,
+        options: const MapOptions(
+          initCenter: Geographic(lon: 0, lat: 0),
+          initZoom: 10,
+        ),
+      );
+      await tester.pumpWidget(app);
+      final style = await styleCompleter.future;
+
+      await style.setPlacementTransitions(enabled: false);
+      // setting the value that is already set does nothing
+      await style.setPlacementTransitions(enabled: false);
+      await style.setPlacementTransitions(enabled: true);
+    });
+
     group('feature queries', () {
       testWidgets('queryLayers GeoJSON', (tester) async {
         final ctrlCompleter = Completer<MapController>();

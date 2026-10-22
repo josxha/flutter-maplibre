@@ -256,4 +256,9 @@ class StyleControllerWebView extends StyleController {
     }
     webSocket.sendBytes(bytes);
   }
+
+  @override
+  Future<void> setPlacementTransitions({required bool enabled}) async {
+    // Not supported in the web view implementation.
+  }
 }

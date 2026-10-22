@@ -15,17 +15,40 @@ class StyleLayersSymbolPage extends StatefulWidget {
 }
 
 class _StyleLayersSymbolPageState extends State<StyleLayersSymbolPage> {
+  StyleController? _style;
+  bool _placementTransitions = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Symbol Style Layer')),
+      appBar: AppBar(
+        title: const Text('Symbol Style Layer'),
+        actions: [
+          // Symbols fade in and out over 300 ms when they are placed. Switch
+          // the fade off to see labels and icons appear instantly.
+          Tooltip(
+            message: 'Placement transitions',
+            child: Switch(
+              value: _placementTransitions,
+              onChanged: (value) async {
+                setState(() => _placementTransitions = value);
+                await _style?.setPlacementTransitions(enabled: value);
+              },
+            ),
+          ),
+        ],
+      ),
       body: MapLibreMap(
         options: const MapOptions(
           initZoom: 3,
           initCenter: Geographic(lon: 9.17, lat: 47.68),
         ),
         onStyleLoaded: (style) async {
+          _style = style;
           try {
+            // the setting belongs to the style, apply it after every load
+            await style.setPlacementTransitions(enabled: _placementTransitions);
+
             // load the image data
             final response = await http.get(
               Uri.parse(StyleLayersSymbolPage.imageUrl),
