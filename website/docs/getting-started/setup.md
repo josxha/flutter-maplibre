@@ -20,7 +20,7 @@ icon: lucide/sparkles
     
     ```yaml title="pubspec.yaml" hl_lines="2"
     dependencies:
-      maplibre: ^0.3.0
+      maplibre: ^0.3.7
     ```
     and then run `flutter pub get` to install the package.
     
@@ -154,6 +154,12 @@ the [changelog file](https://github.com/maplibre/maplibre-gl-js/blob/main/CHANGE
     though a web view.
     It requires at least version 0.3.4 of the `maplibre` package.
 
+!!! info "Pre-release"
+
+    `maplibre_webview` is published as a pre-release (e.g. `0.3.7-beta.1`)
+    because it depends on a pre-release of `flutter_inappwebview`. Pub doesn't
+    pick pre-releases by default, so request the pre-release version explicitly.
+
 ### Add the dependency
 
 To enable Windows support, make sure to add the `maplibre_webview` dependency to
@@ -164,7 +170,7 @@ your dependency list.
      Run the following command in your terminal:
     
     ```bash
-    flutter pub add maplibre_webview
+    flutter pub add maplibre_webview:^0.3.7-beta.1
     ```
 
 === "Edit `pubspec.yaml`"
@@ -173,8 +179,8 @@ your dependency list.
 
     ```yaml title="pubspec.yaml" hl_lines="3"
     dependencies:
-      maplibre: ^0.3.4
-      maplibre_webview: ^0.3.4
+      maplibre: ^0.3.7
+      maplibre_webview: ^0.3.7-beta.1
     ```
 
 ### flutter_inappwebview Setup
