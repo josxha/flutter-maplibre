@@ -281,7 +281,16 @@ Each entry: the decision, then why.
 ## Known gaps
 
 - Missing on native: globe projection, user location and permissions.
-- iOS and macOS were written without a Mac and have not been built or run.
+- iOS and macOS are built and run on an arm64 Mac (Xcode 27.1, macOS 27,
+  iOS 26.4 simulator) only against a local C build, and not yet on an iOS
+  device. The published snapshot lags the pinned binding's headers, and the
+  native smoke test segfaults against it on macOS.
+- The C library's Apple presets target macOS 14.3 and iOS 15.0, above the
+  plugin's `Package.swift` minimums (macOS 10.15, iOS 13).
+- `MapScalebar show and update` fails on the iOS simulator (iPhone 17) by
+  about 1.3 px at zoom 4: the scalebar takes its latitude at the corner of its
+  padded area, the test at the bar's center, and near 60° S on a tall screen
+  that changes the Mercator scale by 2%.
 - Linux has not been built through Flutter or run on a Linux machine: the
   plugin compiles with `-Wall -Werror` and `gl_texture_test` passes in WSL,
   which had no network for a Flutter build. The zero-copy path assumes that

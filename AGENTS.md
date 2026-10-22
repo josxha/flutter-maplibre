@@ -42,7 +42,7 @@ Run these from the repo root unless noted:
 dart format $(git ls-files '*.dart')
 dart analyze --fatal-warnings --fatal-infos
 flutter test                                  # inside a package
-dart tool/use_native_build.dart <preset>      # local C library: windows-x64-vulkan, linux-gnu-x64-vulkan, android-arm64-egl, android-x64-egl, android-*-vulkan, --download
+dart tool/use_native_build.dart <preset>      # local C library: windows-x64-vulkan, linux-gnu-x64-vulkan, android-arm64-egl, android-x64-egl, android-*-vulkan, macos-arm64-metal, ios-simulator-arm64-metal, ios-arm64-metal, --download
 cd tool/codegen && dart run ffigen.dart       # after changing the desktop or Darwin C API header
 cd tool/codegen && dart run jnigen.dart       # after changing MaplibreNativeApi.kt; build examples for Android in release first
 packages/maplibre_native/linux/test/run_gl_texture_test.sh  # Linux zero-copy check, no Flutter build needed

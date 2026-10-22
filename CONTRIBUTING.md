@@ -83,3 +83,17 @@ The MSVC standard library requires a matching Clang version; an older LLVM
 works with an older MSVC toolset (load its `vcvars64.bat` instead of sourcing
 `windows-msvc-env.sh`). Delete the `maplibre_native_install_dir` file to go
 back to the prebuilt library.
+
+On an arm64 Mac, install Xcode, CMake, and Ninja (`brew install cmake ninja`);
+the Apple presets need no Rust. Then, from
+`packages/maplibre_native/vendor/maplibre-native-ffi`, build the preset of the
+target you run next (`macos-arm64-metal`, `ios-simulator-arm64-metal`, or
+`ios-arm64-metal` for devices) and point the build hook at it from the repo
+root:
+
+```bash
+bash .mise/bin/sync-submodules
+cmake --preset macos-arm64-metal -DBUILD_TESTING=OFF
+cmake --build --preset macos-arm64-metal
+cd ../../../.. && dart tool/use_native_build.dart macos-arm64-metal
+```

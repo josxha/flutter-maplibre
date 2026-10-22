@@ -8,6 +8,9 @@
 //   dart tool/use_native_build.dart linux-gnu-x64-vulkan
 //   dart tool/use_native_build.dart android-arm64-egl  # devices
 //   dart tool/use_native_build.dart android-x64-egl    # emulators
+//   dart tool/use_native_build.dart macos-arm64-metal
+//   dart tool/use_native_build.dart ios-simulator-arm64-metal
+//   dart tool/use_native_build.dart ios-arm64-metal    # iOS devices
 //   dart tool/use_native_build.dart --download
 //
 // The android-*-vulkan presets build the Vulkan opt-in.
