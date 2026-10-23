@@ -187,6 +187,20 @@ Each entry: the decision, then why.
   `RenderedFeature` has `sourceId` and `sourceLayer`, and layer membership is
   queried with `layerIds`. The webview's `*Async` overloads went with the
   webview package.
+- **Every native map and the `OfflineManager` use one database,
+  `maplibre_native.db` in the app support directory (`path_provider`).**
+  Each map and the offline manager have a runtime of their own, and runtimes
+  with the same `cache_path` share one database file source in the C
+  library, so maps cache resources on disk and show downloaded regions.
+  Without a cache path the C library keeps an in-memory database per
+  runtime. On Android the offline manager initializes the C library through
+  `MaplibreNativeApi.initialize`, as it creates no render target.
+- **Offline downloads report their progress through the offline manager's
+  runtime events.** A download observes its region and sets it active; the
+  stream reports `offlineRegionStatusChanged` as progress and response
+  errors as `OfflineDownloadException`s, which the download retries.
+  Cancelling the subscription sets the region inactive, and
+  `resumeDownload` continues it. Metadata is UTF-8 JSON (#581).
 
 ## Gestures
 
@@ -308,8 +322,9 @@ Each entry: the decision, then why.
 
 - MapLibre Native reports no attribution for GeoJSON sources, so
   `getAttributions` lists them on web only.
-- The `OfflineManager` is not implemented on native, although the C API has
-  offline regions.
+- The C API has no setter for the offline tile count limit and no automatic
+  database packing, so `setOfflineTileCountLimit` and
+  `runPackDatabaseAutomatically` were removed from the `OfflineManager`.
 
 - Missing on native: globe projection, user location and permissions.
 - iOS and macOS were built and run on an arm64 Mac (Xcode 27.1, macOS 27,

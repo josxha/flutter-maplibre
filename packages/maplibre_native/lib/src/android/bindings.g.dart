@@ -57,6 +57,30 @@ extension type MaplibreNativeApi._(jni$_.JObject _$this)
   static MaplibreNativeApi get INSTANCE =>
       _id_INSTANCE.get(_class, MaplibreNativeApi.type) as MaplibreNativeApi;
 
+  static final _id_initialize = _class.staticMethodId(r'initialize', r'()V');
+
+  static final _initialize =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallStaticVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public fun initialize(): kotlin.Unit`
+  static void initialize() {
+    final _$$classRef = _class.reference;
+    _initialize(_$$classRef.pointer, _id_initialize.pointer).check();
+  }
+
   static final _id_vulkanContext = _class.staticMethodId(
     r'vulkanContext',
     r'()[J',

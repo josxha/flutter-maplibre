@@ -82,7 +82,8 @@ object MaplibreNativeApi {
     }
 
     /** Initializes the C library for Android once. */
-    private fun initialize() {
+    @JvmStatic
+    fun initialize() {
         if (initialized) return
         val context = checkNotNull(context) { "maplibre_native is not attached to an engine." }
         NativeBridge.nativeInit(context)?.let {

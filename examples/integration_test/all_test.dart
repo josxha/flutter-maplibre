@@ -5,6 +5,7 @@ import 'features_test.dart' as features;
 import 'gestures_test.dart' as gestures;
 import 'layers_test.dart' as layers;
 import 'map_test.dart' as map;
+import 'offline_test.dart' as offline;
 import 'projection_test.dart' as projection;
 import 'style_test.dart' as style;
 import 'ui_test.dart' as ui;
@@ -22,5 +23,6 @@ void main() {
   layers.runTests();
   gestures.runTests();
   ui.runTests();
+  offline.runTests();
   unsupported.runTests();
 }

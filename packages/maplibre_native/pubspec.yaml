@@ -21,6 +21,7 @@ dependencies:
   jni: ^1.1.0
   maplibre_native_ffi: ^0.202610.2
   maplibre_platform_interface: ^0.3.6
+  path_provider: ^2.1.5
 
 dev_dependencies:
   flutter_test: { sdk: flutter }

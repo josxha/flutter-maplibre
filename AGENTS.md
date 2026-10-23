@@ -15,6 +15,8 @@ Flutter MapLibre: a federated plugin in a Dart pub workspace.
     drives the session the same way everywhere; each platform's
     `FrameTarget` (`lib/src/<platform>/*_target.dart`) owns its texture and
     plugin calls.
+  - `lib/src/database.dart`: the database that every map and the
+    `OfflineManager` (`lib/src/offline_manager.dart`) share.
   - `desktop/`: C++ shared by the Windows and Linux plugins: the Vulkan device
     and the C API `desktop/include/maplibre_native/maplibre_native_api.h`,
     bound in `lib/src/desktop/bindings.g.dart`.

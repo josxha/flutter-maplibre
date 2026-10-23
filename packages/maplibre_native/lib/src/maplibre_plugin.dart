@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:maplibre_native/src/map_state.dart';
+import 'package:maplibre_native/src/offline_manager.dart';
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 
 /// MapLibre Native implementation of the federated MapLibre plugin, rendering
@@ -29,9 +30,17 @@ class MapLibrePluginNative extends MapLibrePlatform {
   }
 
   @override
-  Future<OfflineManager> createOfflineManager() => throw UnsupportedError(
-    'The OfflineManager is not supported by maplibre_native yet.',
-  );
+  Future<OfflineManager> createOfflineManager() async {
+    if (!isPlatformSupported) {
+      throw UnsupportedError(
+        'maplibre_native does not run on ${Platform.operatingSystem}.',
+      );
+    }
+    return OfflineManagerNative.create();
+  }
+
+  @override
+  bool get offlineManagerIsSupported => isPlatformSupported;
 
   @override
   PermissionManager createPermissionManager() => throw UnsupportedError(

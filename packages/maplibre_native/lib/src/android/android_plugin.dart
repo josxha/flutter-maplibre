@@ -15,6 +15,10 @@ typedef SurfaceTexture = ({
 final class AndroidPlugin {
   AndroidPlugin._();
 
+  /// Initializes the C library for Android once, for runtimes that render
+  /// no map.
+  static void initialize() => MaplibreNativeApi.initialize();
+
   /// Initializes the C library for Android once, and returns the Vulkan
   /// device that render sessions borrow.
   static VulkanContextDescriptor vulkanContext() {

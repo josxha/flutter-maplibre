@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:maplibre_native/src/android/android_target.dart';
 import 'package:maplibre_native/src/darwin/darwin_target.dart';
+import 'package:maplibre_native/src/database.dart';
 import 'package:maplibre_native/src/desktop/desktop_target.dart';
 import 'package:maplibre_native/src/frame_target.dart';
 import 'package:maplibre_native_ffi/maplibre_native_ffi.dart';
@@ -140,7 +141,7 @@ final class MapRenderer implements FrameTargetHost {
     final MapHandle map;
     final RenderSessionAttachment attachment;
     try {
-      runtime = runtimeCreate(RuntimeOptions());
+      runtime = await createRuntime();
       await runtime.setEventHandler(
         RuntimeEventHandler(
           callback: (batch) => ready == null

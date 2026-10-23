@@ -28,8 +28,6 @@ Known gaps are tracked in detail in [`.agents/decisions.md`](.agents/decisions.m
 - iOS simulator: `MapScalebar show and update` is off by about 1.3 px at
   zoom 4, because the scalebar and the test take their latitude at
   different points.
-- `OfflineManager` is not implemented on native, though the C API has
-  offline regions.
 - `PermissionManager`, user location and globe projection are missing on
   native.
 - Shared gestures: native pans stop dead on release (no fling), and zoom and
@@ -110,12 +108,8 @@ Known gaps are tracked in detail in [`.agents/decisions.md`](.agents/decisions.m
 
 ### Offline support
 
-- Implement `OfflineManager` on native over the C API's offline regions,
-  replacing the old Android and iOS implementations.
-- Cover download, list, merge, delete and progress events with integration
-  tests on a local style and tiles.
-- Carry over the fixes for #581 (non-ASCII metadata) and #535 (glyph URL
-  `regex_error`), and test both cases.
+- `OfflineManager` runs on native over the C API's offline regions, tested
+  against a local tile server. Merging a database is not tested yet.
 - Keep MBTiles (`mbtiles://`) as the simple offline path, now supported on
   every native platform.
 - Web stays unsupported; document a service worker cache as the
@@ -188,5 +182,4 @@ Known gaps are tracked in detail in [`.agents/decisions.md`](.agents/decisions.m
 3. Layer and source CRUD.
 4. Typed expressions.
 5. User location as a Flutter layer, with the permission decision above.
-6. Offline on native.
-7. Custom tile loading and request transforms.
+6. Custom tile loading and request transforms.

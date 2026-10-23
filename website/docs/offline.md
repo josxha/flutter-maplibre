@@ -4,10 +4,15 @@ icon: lucide/database
 
 # Offline & Cache
 
-!!! warning
+!!! note
 
-    The `OfflineManager` is not available yet: `maplibre_native` and web
-    throw an `UnsupportedError` when it is created.
+    The `OfflineManager` runs on Android, iOS, macOS, Windows and Linux. On
+    web, `OfflineManager.createInstance()` throws an `UnsupportedError`; a
+    service worker cache is the alternative there.
+
+Maps and the `OfflineManager` share one database, `maplibre_native.db` in the
+app support directory. Maps cache the resources they load in it, and show the
+regions you downloaded without network access.
 
 The `OfflineManager` provides a set of tools to manage the cache and handle
 offline maps. It enables users to download and interact with map data in areas
@@ -48,7 +53,7 @@ access.
 
 ```dart
 Future<void> downloadMyMap() async {
-  final stream = await manager.downloadRegion(
+  final stream = manager.downloadRegion(
     minZoom: 10,
     maxZoom: 14,
     bounds: LngLatBounds(/* ... */),
@@ -68,6 +73,9 @@ Future<void> downloadMyMap() async {
 }
 ```
 
+Resources that fail to load arrive as `OfflineDownloadException` errors on the
+stream, and the download retries them. Cancelling the subscription pauses the
+download; `manager.resumeDownload(regionId: id)` continues it.
 ## Managing Offline Regions
 
 After regions are downloaded, they can be managed using methods to list, merge,
@@ -81,7 +89,8 @@ using `manager.listOfflineRegions()`.
 ### Retrieving a Specific Region
 
 Fetch a region’s details with `manager.getOfflineRegion(regionId: 1)`, which is
-useful for managing or displaying region-specific data.
+useful for managing or displaying region-specific data. It returns null when
+there is no region with that id.
 
 ### Merging Regions
 
@@ -89,3 +98,10 @@ Use `manager.mergeOfflineRegions(path: 'path/to/database')` to merge offline
 regions from a secondary MapLibre Native database into the main offline database.
 This is typically used when you have multiple MapLibre offline databases that you
 want to consolidate.
+
+### Updating and Deleting Regions
+
+`manager.updateRegionMetadata(regionId: 1, metadata: {...})` replaces the
+metadata of a region, `manager.invalidateRegion(regionId: 1)` loads its
+resources again once they are needed, and `manager.deleteRegion(regionId: 1)`
+removes it.

@@ -23,12 +23,22 @@
 - Removed the `pointer_interceptor` dependency. Widgets over the map no longer
   need a `PointerInterceptor` on web; `WidgetLayer.allowInteraction` works the
   same on every platform.
+- `OfflineManager.getOfflineRegion` returns null for an unknown region.
+  `setOfflineTileCountLimit` and `runPackDatabaseAutomatically` were removed,
+  as MapLibre Native offers neither.
 
 ### Features
 
 - Gestures are shared by all platforms: drag, pinch and twist, scroll wheel,
   double tap, double tap and drag, two-finger tilt, and right-button or
   Ctrl + left-button rotate and tilt.
+- Native: the `OfflineManager` downloads, lists, merges, updates and deletes
+  regions, and maintains the ambient cache. New `updateRegionMetadata`,
+  `invalidateRegion`, `resumeDownload` and `includeIdeographs`; failed
+  resources are reported as `OfflineDownloadException`s on the download
+  stream.
+- Native: maps cache resources in `maplibre_native.db` in the app support
+  directory, which also holds the offline regions.
 
 ### Bug Fixes
 
@@ -41,7 +51,7 @@
 - Native: removing a layer or source that does not exist is not an error.
 - Native: attributions of tile sources are reported once they load.
 - Web: `OfflineManager.createInstance` and `PermissionManager()` throw an
-  `UnsupportedError`, as on native.
+  `UnsupportedError`.
 
 ## 0.3.7
 
