@@ -18,13 +18,5 @@ void runTests() {
         throwsA(isA<UnsupportedError>()),
       );
     }, skip: !kIsWeb);
-
-    test('PermissionManager', () {
-      expect(PermissionManager.new, throwsA(isA<UnsupportedError>()));
-    });
-
-    test('user location', () {
-      expect(MapController.userLocationIsSupported, isFalse);
-    });
   });
 }

@@ -41,9 +41,4 @@ class MapLibrePluginNative extends MapLibrePlatform {
 
   @override
   bool get offlineManagerIsSupported => isPlatformSupported;
-
-  @override
-  PermissionManager createPermissionManager() => throw UnsupportedError(
-    'The PermissionManager is not supported by maplibre_native.',
-  );
 }

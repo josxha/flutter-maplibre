@@ -13,6 +13,7 @@ environment:
 workspace:
   - examples
   - packages/maplibre
+  - packages/maplibre_geolocator
   - packages/maplibre_native
   - packages/maplibre_platform_interface
   - packages/maplibre_web

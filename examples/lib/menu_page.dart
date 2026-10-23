@@ -13,7 +13,6 @@ import 'package:maplibre_example/layers_polyline_page.dart';
 import 'package:maplibre_example/layers_widget_marker_page.dart';
 import 'package:maplibre_example/offline_page.dart';
 import 'package:maplibre_example/parameters_page.dart';
-import 'package:maplibre_example/permissions_page.dart';
 import 'package:maplibre_example/pmtiles_page.dart';
 import 'package:maplibre_example/style_layers_circle_page.dart';
 import 'package:maplibre_example/style_layers_fill_extrusion_page.dart';
@@ -98,23 +97,16 @@ class MenuPage extends StatelessWidget {
                   iconData: Icons.animation,
                   location: AnimationPage.location,
                 ),
-                if (MapController.userLocationIsSupported)
-                  const ItemCard(
-                    label: 'User Location',
-                    iconData: Icons.gps_fixed,
-                    location: UserLocationPage.location,
-                  ),
+                const ItemCard(
+                  label: 'User Location',
+                  iconData: Icons.gps_fixed,
+                  location: UserLocationPage.location,
+                ),
                 if (OfflineManager.isSupported)
                   const ItemCard(
                     label: 'Offline',
                     iconData: Icons.wifi_off,
                     location: OfflinePage.location,
-                  ),
-                if (PermissionManager.isSupported)
-                  const ItemCard(
-                    label: 'Permissions',
-                    iconData: Icons.key,
-                    location: PermissionsPage.location,
                   ),
               ],
             ),

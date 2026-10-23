@@ -26,9 +26,18 @@
 - `OfflineManager.getOfflineRegion` returns null for an unknown region.
   `setOfflineTileCountLimit` and `runPackDatabaseAutomatically` were removed,
   as MapLibre Native offers neither.
+- Removed `PermissionManager`, `MapController.enableLocation`,
+  `MapController.trackLocation`, `MapController.userLocationIsSupported`,
+  `BearingRenderMode` and `BearingTrackMode`. Show the user location with a
+  `UserLocationLayer`, and ask for permissions with `geolocator` or
+  `permission_handler`. `MapControlButtons` takes `tracking` and
+  `onTrackingPressed` instead of `showTrackLocation`.
 
 ### Features
 
+- `UserLocationLayer` shows a stream of `UserLocation`s on every platform
+  and can track them; the new `maplibre_geolocator` package adapts
+  `geolocator` positions.
 - Gestures are shared by all platforms: drag, pinch and twist, scroll wheel,
   double tap, double tap and drag, two-finger tilt, and right-button or
   Ctrl + left-button rotate and tilt.

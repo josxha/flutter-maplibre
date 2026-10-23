@@ -35,25 +35,13 @@ abstract class MapLibrePlatform extends PlatformInterface {
     'MapLibre OfflineManager is not supported on this platform.',
   );
 
-  /// Return a platform specific [PermissionManager] object.
-  PermissionManager createPermissionManager() => throw UnsupportedError(
-    'MapLibre PermissionManager is not supported on this platform.',
-  );
-
   /// Return whether offline manager is supported on the current platform.
   bool get offlineManagerIsSupported => false;
-
-  /// Return whether permission manager is supported on the current platform.
-  bool get permissionManagerIsSupported => false;
-
-  /// Return whether user location is supported on the current platform.
-  bool get userLocationIsSupported => false;
 }
 
 /// A stub implementation of the MapLibrePlatform interface.
 ///
 /// This class is used when no actual platform implementation is provided so
-/// that e.g. unit tests can still detect [offlineManagerIsSupported],
-/// [permissionManagerIsSupported], and [userLocationIsSupported] without causing
-/// errors.
+/// that e.g. unit tests can still detect [offlineManagerIsSupported] without
+/// causing errors.
 class _MapLibrePluginStub extends MapLibrePlatform {}

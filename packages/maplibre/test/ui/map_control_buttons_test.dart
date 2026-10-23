@@ -48,7 +48,7 @@ void main() {
       await pump(tester);
       expect(find.byIcon(Icons.add), findsOneWidget);
       expect(find.byIcon(Icons.remove), findsOneWidget);
-      // No platform offers the user location yet.
+      // The location button shows only with onTrackingPressed.
       expect(find.byIcon(Icons.gps_not_fixed), findsNothing);
       expect(
         tester.getTopLeft(find.byType(FloatingActionButton).first),
@@ -76,6 +76,30 @@ void main() {
           nativeDuration: const Duration(milliseconds: 200),
         ),
       ).called(1);
+    });
+
+    testWidgets('shows the tracking and reports a press', (tester) async {
+      var presses = 0;
+      Future<void> pumpTracking(UserLocationTracking tracking) =>
+          tester.pumpWidget(
+            App(
+              camera: camera,
+              controller: controller,
+              children: [
+                MapControlButtons(
+                  tracking: tracking,
+                  onTrackingPressed: () => presses++,
+                ),
+              ],
+            ),
+          );
+      await pumpTracking(UserLocationTracking.none);
+      await tester.tap(find.byIcon(Icons.gps_not_fixed));
+      expect(presses, 1);
+      await pumpTracking(UserLocationTracking.position);
+      expect(find.byIcon(Icons.gps_fixed), findsOneWidget);
+      await pumpTracking(UserLocationTracking.positionAndHeading);
+      expect(find.byIcon(Icons.explore), findsOneWidget);
     });
   });
 }

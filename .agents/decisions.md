@@ -202,6 +202,13 @@ Each entry: the decision, then why.
   Cancelling the subscription sets the region inactive, and
   `resumeDownload` continues it. Metadata is UTF-8 JSON (#581).
 
+- **User location is a Flutter layer, `UserLocationLayer`, fed by a
+  `Stream<UserLocation>`; there is no `PermissionManager`.** It paints in
+  Dart, so it works the same on every platform, and tracking runs in Dart
+  over `animateCamera`. A translucent `Listener` stops the tracking on a drag
+  or wheel. Permissions are left to `geolocator` or `permission_handler`;
+  `maplibre_geolocator` adapts `geolocator` positions.
+
 ## Gestures
 
 - **One gesture recognizer in Dart serves every platform:
@@ -326,7 +333,7 @@ Each entry: the decision, then why.
   database packing, so `setOfflineTileCountLimit` and
   `runPackDatabaseAutomatically` were removed from the `OfflineManager`.
 
-- Missing on native: globe projection, user location and permissions.
+- Missing on native: globe projection.
 - iOS and macOS were built and run on an arm64 Mac (Xcode 27.1, macOS 27,
   iOS 26.4 simulator) only against a local C build of an earlier binding
   commit, and not yet on an iOS device or against the 0.202610.2 release

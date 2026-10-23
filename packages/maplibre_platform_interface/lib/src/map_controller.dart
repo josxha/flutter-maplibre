@@ -18,10 +18,6 @@ abstract interface class MapController {
       maybeOf(context) ??
       (throw StateError('Unable to find an instance of MapController'));
 
-  /// Check if the user location is supported on the current platform.
-  static bool get userLocationIsSupported =>
-      MapLibrePlatform.instance.userLocationIsSupported;
-
   /// Get the [MapOptions] from [MapLibreMap.options].
   MapOptions get options;
 
@@ -137,29 +133,6 @@ abstract interface class MapController {
     List<String>? layerIds,
   });
 
-  /// Show the user location on the map
-  Future<void> enableLocation({
-    Duration fastestInterval = const Duration(milliseconds: 750),
-    Duration maxWaitTime = const Duration(seconds: 1),
-    bool pulseFade = true,
-    bool accuracyAnimation = true,
-    bool compassAnimation = true,
-    bool pulse = true,
-    BearingRenderMode bearingRenderMode = BearingRenderMode.gps,
-  });
-
-  /// Track the user location on the map
-  ///
-  /// Set [trackLocation] to false if only the bearing should get tracked
-  /// (defaults to true).
-  ///
-  /// Use [trackBearing] to set if the bearing should get tracked according to
-  /// the GPS location, compass direction or ignored.
-  Future<void> trackLocation({
-    bool trackLocation = true,
-    BearingTrackMode trackBearing = BearingTrackMode.gps,
-  });
-
   /// Asynchronously change the style of the map. [style] can be a JSON string
   /// representing a valid MapLibre style document, or a URL pointing to such a
   /// document.
@@ -172,34 +145,4 @@ abstract interface class MapController {
   /// You can apply them again after the style has been loaded.
   // TODO(mhernz): what kind of URLs?
   void setStyle(String style);
-}
-
-/// The mode how the bearing should get tracked on the map.
-/// Used in [MapController.trackLocation].
-///
-/// {@category Basic}
-enum BearingTrackMode {
-  /// No bearing tracking.
-  none,
-
-  /// Use the bearing provided by the compass sensor.
-  compass,
-
-  /// Use the bearing provided by the GPS location (normalized).
-  gps,
-}
-
-/// The mode how render the location on the map.
-/// Used in [MapController.enableLocation].
-///
-/// {@category Basic}
-enum BearingRenderMode {
-  /// Do not display the current bearing.
-  none,
-
-  /// Use the device compass to render the bearing.
-  compass,
-
-  /// Use the GPS location data to render the bearing.
-  gps,
 }

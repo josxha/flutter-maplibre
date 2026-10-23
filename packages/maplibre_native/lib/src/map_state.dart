@@ -615,27 +615,6 @@ class MapLibreMapStateNative extends MapLibreMapState {
           ),
     ];
   }
-
-  @override
-  Future<void> enableLocation({
-    Duration fastestInterval = const Duration(milliseconds: 750),
-    Duration maxWaitTime = const Duration(seconds: 1),
-    bool pulseFade = true,
-    bool accuracyAnimation = true,
-    bool compassAnimation = true,
-    bool pulse = true,
-    BearingRenderMode bearingRenderMode = BearingRenderMode.gps,
-  }) => throw UnimplementedError(
-    'The user location is not supported by maplibre_native yet.',
-  );
-
-  @override
-  Future<void> trackLocation({
-    bool trackLocation = true,
-    BearingTrackMode trackBearing = BearingTrackMode.gps,
-  }) => throw UnimplementedError(
-    'The user location is not supported by maplibre_native yet.',
-  );
 }
 
 Uint8List _utf8(String value) => Uint8List.fromList(utf8.encode(value));

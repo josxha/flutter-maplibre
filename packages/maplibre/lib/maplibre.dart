@@ -5,8 +5,6 @@ export 'package:geobase/geobase.dart';
 export 'package:maplibre_platform_interface/maplibre_platform_interface.dart'
     show
         BackgroundStyleLayer,
-        BearingRenderMode,
-        BearingTrackMode,
         CameraChangeReason,
         CircleStyleLayer,
         ColorExtension,
@@ -45,7 +43,6 @@ export 'package:maplibre_platform_interface/maplibre_platform_interface.dart'
         OfflineDownloadException,
         OfflineManager,
         OfflineRegion,
-        PermissionManager,
         RasterDemCustomEncoding,
         RasterDemEncoding,
         RasterDemMapboxEncoding,
@@ -74,6 +71,9 @@ export 'src/layer/circle_layer.dart' show CircleLayer;
 export 'src/layer/marker_layer.dart' show IconAnchor, MarkerLayer;
 export 'src/layer/polygon_layer.dart' show PolygonLayer;
 export 'src/layer/polyline_layer.dart' show PolylineLayer;
+export 'src/location/user_location.dart'
+    show UserLocation, UserLocationTracking;
+export 'src/location/user_location_layer.dart' show UserLocationLayer;
 export 'src/ui/map_compass.dart' show MapCompass;
 export 'src/ui/map_control_buttons.dart' show MapControlButtons;
 export 'src/ui/map_scalebar.dart' show MapScalebar, ScaleBarUnit;

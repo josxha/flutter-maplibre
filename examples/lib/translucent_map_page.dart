@@ -38,12 +38,7 @@ class _TranslucentMapPageState extends State<TranslucentMapPage> {
               initStyle: MapStyles.translucent.uri,
               initZoom: 2,
             ),
-            children: const [
-              MapScalebar(),
-              SourceAttribution(),
-              MapControlButtons(showTrackLocation: true),
-              MapCompass(),
-            ],
+            children: const [MapScalebar(), SourceAttribution(), MapCompass()],
             onStyleLoaded: (style) {
               style.setProjection(MapProjection.globe);
             },

@@ -28,8 +28,8 @@ Known gaps are tracked in detail in [`.agents/decisions.md`](.agents/decisions.m
 - iOS simulator: `MapScalebar show and update` is off by about 1.3 px at
   zoom 4, because the scalebar and the test take their latitude at
   different points.
-- `PermissionManager`, user location and globe projection are missing on
-  native.
+- Globe projection is missing on native. User location is a Flutter layer
+  (`UserLocationLayer`), not yet run in the integration tests.
 - Shared gestures: native pans stop dead on release (no fling), and zoom and
   rotation don't fling anywhere. The C API has no inertia, so it would run in
   Dart over animated camera deltas.

@@ -8,6 +8,7 @@ dartdoc:
     "Style Sources": { markdown: "doc/style.md" }
     "UI": { markdown: "doc/ui.md" }
     "Offline": { markdown: "doc/offline.md" }
+    "Location": { markdown: "doc/location.md" }
   categoryOrder:
     - "Basic"
     - "Events"
@@ -17,5 +18,6 @@ dartdoc:
     - "Style Sources"
     - "UI"
     - "Offline"
+    - "Location"
   showUndocumentedCategories: true
   favicon: "doc/favicon-32x32.png"

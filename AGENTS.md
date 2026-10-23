@@ -8,6 +8,8 @@ Flutter MapLibre: a federated plugin in a Dart pub workspace.
 - `packages/maplibre_platform_interface`: shared API that the platform packages
   implement, and the shared gesture recognizer (`lib/src/gestures/`).
 - `packages/maplibre_web`: browser, via maplibre-gl-js.
+- `packages/maplibre_geolocator`: optional adapter from `geolocator` positions
+  to the `UserLocationLayer` of `maplibre`.
 - `packages/maplibre_native`: every other platform, on the MapLibre Native C API.
   - The C API and its Dart binding come from `maplibre_native_ffi` on pub.dev,
     whose build hook downloads the prebuilt C library of its release.
