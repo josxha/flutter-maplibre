@@ -102,10 +102,9 @@ class StyleControllerNative extends StyleController {
       },
     };
     await checkCommand(_map.addStyleSourceJson(source.id, _encode(json)));
-    // A TileJSON source learns its attribution once its TileJSON loads.
-    unawaited(
-      Future<void>.delayed(const Duration(seconds: 1), getAttributions),
-    );
+    // Sources with inline tiles know their attribution now; a TileJSON source
+    // reports it with a source change once its TileJSON loads.
+    await getAttributions();
   }
 
   @override
@@ -186,13 +185,15 @@ class StyleControllerNative extends StyleController {
 
   @override
   Future<void> removeLayer(String id) async {
-    await checkCommand(_map.removeStyleLayer(id));
+    await _checkUnlessMissing(_map.removeStyleLayer(id));
     await _fetchLayerIds();
   }
 
   @override
-  Future<void> removeSource(String id) =>
-      checkCommand(_map.removeStyleSource(id));
+  Future<void> removeSource(String id) async {
+    await _checkUnlessMissing(_map.removeStyleSource(id));
+    await getAttributions();
+  }
 
   @override
   Future<void> addImage(String id, Uint8List bytes) async {
@@ -224,8 +225,14 @@ class StyleControllerNative extends StyleController {
 
   @override
   Future<void> removeImage(String id) async {
-    // Removing an image the style lacks is not an error on other platforms.
-    final completion = await _map.removeStyleImage(id);
+    await _checkUnlessMissing(_map.removeStyleImage(id));
+  }
+
+  /// Removing what the style lacks is not an error on other platforms.
+  Future<void> _checkUnlessMissing(
+    Future<mln.CommandCompletion> command,
+  ) async {
+    final completion = await command;
     if (completion.status == mln.Status.notFound) return;
     await checkCommand(Future.value(completion));
   }

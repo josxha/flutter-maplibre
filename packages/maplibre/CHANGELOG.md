@@ -5,8 +5,7 @@
 - Removed `maplibre_android`, `maplibre_ios` and `maplibre_webview`. `maplibre`
   now uses `maplibre_web` in the browser and `maplibre_native`, built on the
   MapLibre Native C API, on every other platform. `maplibre_native` renders on
-  Windows, Android, iOS and macOS so far; on Linux creating a map throws an
-  `UnsupportedError` for now.
+  Android, iOS, macOS, Windows and Linux.
 - Removed the `MapOptions` properties of the removed packages:
   `androidMode`, `androidTextureMode`, `androidTranslucentTextureSurface`,
   `androidForegroundLoadColor` and `webviewDebugMode`, and the
@@ -34,6 +33,15 @@
 ### Bug Fixes
 
 - Web: widgets over the map no longer let taps and drags through to the map.
+- `MarkerLayer` applies `textOpacity` (it used `iconOpacity`) and
+  `iconTranslate`, and `PolylineLayer` applies `blur`.
+- Native: `animateCamera` and `fitBounds` complete when the animation ends.
+- Native: a camera move from a short gesture is reported with
+  `CameraChangeReason.apiGesture`.
+- Native: removing a layer or source that does not exist is not an error.
+- Native: attributions of tile sources are reported once they load.
+- Web: `OfflineManager.createInstance` and `PermissionManager()` throw an
+  `UnsupportedError`, as on native.
 
 ## 0.3.7
 

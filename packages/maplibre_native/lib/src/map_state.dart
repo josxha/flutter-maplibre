@@ -42,8 +42,15 @@ class MapLibreMapStateNative extends MapLibreMapState {
   MapCamera? _eventCamera;
 
   var _gestureActive = false;
-  var _nextChangeByController = false;
   var _cameraMoving = false;
+
+  /// Why the camera changes next. Runtime events arrive after the change was
+  /// submitted, possibly after a short gesture already ended, so the reason
+  /// is taken when the change is made.
+  CameraChangeReason? _nextChangeReason;
+
+  /// Completes once the running camera animation ends.
+  Completer<void>? _animation;
 
   @override
   late final GestureCameraSink gestureCamera = _NativeGestureCamera(this);
@@ -195,15 +202,12 @@ class MapLibreMapStateNative extends MapLibreMapState {
       case mln.RuntimeEventType.mapCameraWillChange:
         if (_cameraMoving) return;
         _cameraMoving = true;
-        final CameraChangeReason reason;
-        if (_gestureActive) {
-          reason = CameraChangeReason.apiGesture;
-        } else if (_nextChangeByController) {
-          reason = CameraChangeReason.developerAnimation;
-        } else {
-          reason = CameraChangeReason.apiAnimation;
-        }
-        _nextChangeByController = false;
+        final reason =
+            _nextChangeReason ??
+            (_gestureActive
+                ? CameraChangeReason.apiGesture
+                : CameraChangeReason.apiAnimation);
+        _nextChangeReason = null;
         widget.onEvent?.call(MapEventStartMoveCamera(reason: reason));
       case mln.RuntimeEventType.mapCameraIsChanging:
         _onCameraChanged();
@@ -216,6 +220,9 @@ class MapLibreMapStateNative extends MapLibreMapState {
         unawaited(_onStyleLoaded());
       case mln.RuntimeEventType.mapIdle:
         widget.onEvent?.call(const MapEventIdle());
+      case mln.RuntimeEventType.mapSourceChanged:
+        // A source learns its attribution once its tile set loads.
+        unawaited(style?.getAttributions());
       default:
         break;
     }
@@ -251,9 +258,31 @@ class MapLibreMapStateNative extends MapLibreMapState {
   }
 
   void _onCameraIdle() {
+    _endAnimation();
     if (!_cameraMoving) return;
     _cameraMoving = false;
     widget.onEvent?.call(const MapEventCameraIdle());
+  }
+
+  void _endAnimation() {
+    final animation = _animation;
+    _animation = null;
+    if (animation != null && !animation.isCompleted) animation.complete();
+  }
+
+  /// Submits [update] and, for an animation, waits until it ends: the camera
+  /// comes to rest, another change replaces it, or its duration has passed.
+  Future<void> _submitCamera(mln.MapHandle map, mln.CameraUpdate update) async {
+    _nextChangeReason = CameraChangeReason.developerAnimation;
+    _endAnimation();
+    final duration = update.animation.durationMs ?? 0;
+    final animates = update.mode != mln.CameraUpdateMode.jump && duration > 0;
+    final animation = animates ? _animation = Completer<void>() : null;
+    await checkCommand(map.updateCamera(update));
+    await animation?.future.timeout(
+      Duration(milliseconds: duration.ceil() + 1000),
+      onTimeout: () {},
+    );
   }
 
   Future<void> _onStyleLoaded() async {
@@ -458,15 +487,13 @@ class MapLibreMapStateNative extends MapLibreMapState {
         pitch: pitch,
       ),
     );
-    _nextChangeByController = true;
-    await checkCommand(
-      map.updateCamera(
-        mln.CameraUpdate(
-          mode: mln.CameraUpdateMode.fly,
-          camera: target,
-          animation: mln.AnimationOptions(
-            durationMs: nativeDuration.inMilliseconds.toDouble(),
-          ),
+    await _submitCamera(
+      map,
+      mln.CameraUpdate(
+        mode: mln.CameraUpdateMode.fly,
+        camera: target,
+        animation: mln.AnimationOptions(
+          durationMs: nativeDuration.inMilliseconds.toDouble(),
         ),
       ),
     );
@@ -483,23 +510,21 @@ class MapLibreMapStateNative extends MapLibreMapState {
   }) async {
     final map = _map;
     if (map == null) return;
-    _nextChangeByController = true;
-    await checkCommand(
-      map.updateCamera(
-        mln.CameraUpdate(
-          mode: mode,
-          camera: mln.CameraOptions(
-            center: center == null
-                ? null
-                : mln.LatLng(latitude: center.lat, longitude: center.lon),
-            zoom: zoom,
-            bearing: bearing,
-            pitch: pitch,
-            padding: padding == EdgeInsets.zero ? null : _edgeInsets(padding),
-          ),
-          animation: mln.AnimationOptions(
-            durationMs: duration?.inMilliseconds.toDouble(),
-          ),
+    await _submitCamera(
+      map,
+      mln.CameraUpdate(
+        mode: mode,
+        camera: mln.CameraOptions(
+          center: center == null
+              ? null
+              : mln.LatLng(latitude: center.lat, longitude: center.lon),
+          zoom: zoom,
+          bearing: bearing,
+          pitch: pitch,
+          padding: padding == EdgeInsets.zero ? null : _edgeInsets(padding),
+        ),
+        animation: mln.AnimationOptions(
+          durationMs: duration?.inMilliseconds.toDouble(),
         ),
       ),
     );
@@ -624,7 +649,10 @@ class _NativeGestureCamera implements GestureCameraSink {
 
   @override
   void gestureStart() {
-    _state._gestureActive = true;
+    _state
+      .._gestureActive = true
+      .._nextChangeReason = CameraChangeReason.apiGesture
+      .._endAnimation();
     _state._applyDelta(mln.CameraDelta(gesturePhase: mln.GesturePhase.begin));
   }
 
@@ -669,6 +697,7 @@ class _NativeGestureCamera implements GestureCameraSink {
     Offset around, {
     Duration duration = Duration.zero,
   }) {
+    _state._nextChangeReason = CameraChangeReason.apiGesture;
     _state._applyDelta(
       mln.CameraDelta(
         scale: pow(2, levels).toDouble(),

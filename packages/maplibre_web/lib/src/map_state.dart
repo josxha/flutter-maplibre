@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:js_interop';
+import 'dart:js_interop_unsafe';
 import 'dart:math';
 import 'dart:ui';
 import 'dart:ui_web';
@@ -302,6 +303,9 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     final destination = center?.toLngLat();
     _nextGestureCausedByController = true;
     final camera = getCamera();
+    // flyTo ends synchronously when it jumps, for example if the browser
+    // prefers reduced motion, so wait for the end before starting it.
+    final completer = _movementCompleter = Completer<interop.MapLibreEvent>();
     _map.flyTo(
       interop.FlyToOptions(
         center: destination,
@@ -313,7 +317,6 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         padding: padding.toPaddingOptions(),
       ),
     );
-    final completer = _movementCompleter = Completer<interop.MapLibreEvent>();
     final _ = await completer.future;
     _movementCompleter = null;
 
