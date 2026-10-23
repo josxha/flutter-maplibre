@@ -127,15 +127,12 @@ jobs:
       - name: "Get Flutter dependencies"
         run: flutter pub get
       - name: "Run integration tests"
-        # Flutter starts the Chrome that setup-chrome installed, which matches
-        # its chromedriver, instead of the runner's own.
-        env:
-          CHROME_EXECUTABLE: ${{ steps.chrome.outputs.chrome-path }}
         run: |
           chromedriver --port=4444 &
           flutter drive --driver test_driver/integration_test.dart \
             --target integration_test/all_test.dart \
-            -d web-server --browser-name chrome --headless
+            -d web-server --browser-name chrome --headless \
+            --chrome-binary "${{ steps.chrome.outputs.chrome-path }}"
   integration-test-linux:
     name: "[Linux] Integration tests"
     runs-on: ubuntu-latest
@@ -323,11 +320,11 @@ jobs:
       - name: "Get Flutter dependencies"
         run: flutter pub get
       - name: "Run integration tests"
-        # In pwsh the | of the package regex reaches cmd through flutter.bat.
-        shell: bash
+        # flutter.bat hands the arguments to cmd, which would split the
+        # package regex at a |, so this one matches the same packages without.
         run: >
           flutter test integration_test/all_test.dart -d windows
-          --coverage --coverage-package '^maplibre(_native|_platform_interface|_web)?$'
+          --coverage --coverage-package '^maplibre(_native)?(_platform_interface)?(_web)?$'
       # lcov names the packages relative to examples; Codecov needs them
       # relative to the repository.
       - name: "Make the coverage paths relative to the repository"
