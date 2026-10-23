@@ -13,10 +13,15 @@ import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 /// them in.
 class StyleControllerNative extends StyleController {
   /// Creates a style controller for a map.
-  StyleControllerNative(this._map, this._pixelRatio);
+  StyleControllerNative(this._map, this._pixelRatio, {String? styleJson})
+    : _sourceAttributions = sourceAttributionsOf(styleJson);
 
   final mln.MapHandle _map;
   final double _pixelRatio;
+
+  /// The attributions that the style and [addSource] gave sources, by id.
+  /// MapLibre Native drops those of GeoJSON sources, so they come from here.
+  final Map<String, String> _sourceAttributions;
 
   List<String> _cachedAttributions = const [];
   List<String> _cachedLayerIds = const [];
@@ -102,6 +107,11 @@ class StyleControllerNative extends StyleController {
       },
     };
     await checkCommand(_map.addStyleSourceJson(source.id, _encode(json)));
+    if (json['attribution'] case final String attribution) {
+      _sourceAttributions[source.id] = attribution;
+    } else {
+      _sourceAttributions.remove(source.id);
+    }
     // Sources with inline tiles know their attribution now; a TileJSON source
     // reports it with a source change once its TileJSON loads.
     await getAttributions();
@@ -192,6 +202,7 @@ class StyleControllerNative extends StyleController {
   @override
   Future<void> removeSource(String id) async {
     await _checkUnlessMissing(_map.removeStyleSource(id));
+    _sourceAttributions.remove(id);
     await getAttributions();
   }
 
@@ -243,8 +254,12 @@ class StyleControllerNative extends StyleController {
     final sources = await _map.listStyleSources();
     return _cachedAttributions = [
       for (final source in sources)
-        if (source.attribution case final String attribution
-            when attribution.isNotEmpty)
+        if (switch (source.attribution) {
+              final String attribution when attribution.isNotEmpty =>
+                attribution,
+              _ => _sourceAttributions[source.id],
+            }
+            case final String attribution when attribution.isNotEmpty)
           attribution,
     ];
   }
@@ -284,4 +299,21 @@ class StyleControllerNative extends StyleController {
 
   static Uint8List _encode(Object json) =>
       Uint8List.fromList(utf8.encode(jsonEncode(json)));
+}
+
+/// The attributions of the sources in [styleJson], by source id.
+Map<String, String> sourceAttributionsOf(String? styleJson) {
+  if (styleJson == null) return {};
+  try {
+    if (jsonDecode(styleJson) case {'sources': final Map<String, Object?> s}) {
+      return {
+        for (final MapEntry(:key, :value) in s.entries)
+          if (value case {'attribution': final String attribution})
+            key: attribution,
+      };
+    }
+  } on FormatException {
+    // MapLibre Native reports the invalid style.
+  }
+  return {};
 }

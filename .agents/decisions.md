@@ -329,8 +329,10 @@ Each entry: the decision, then why.
 
 ## Known gaps
 
-- MapLibre Native reports no attribution for GeoJSON sources, so
-  `getAttributions` lists them on web only.
+- MapLibre Native drops the attribution of GeoJSON sources, so
+  `StyleControllerNative` takes it from the style JSON and from `addSource`.
+  For a style loaded from an http(s), `mapbox://` or `asset://` URL the JSON
+  is not at hand, so its GeoJSON attributions are missing on native.
 - The C API has no setter for the offline tile count limit and no automatic
   database packing, so `setOfflineTileCountLimit` and
   `runPackDatabaseAutomatically` were removed from the `OfflineManager`.

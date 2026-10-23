@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -254,6 +256,58 @@ void runTests() {
       await map.style.removeSource('src');
       await map.pumpUntil(
         () => map.style.getAttributionsSync().isEmpty,
+        reason: () => 'attributions: ${map.style.getAttributionsSync()}',
+      );
+    });
+
+    testWidgets('reports the attributions of GeoJSON sources', (tester) async {
+      final map = await pumpMap(
+        tester,
+        options: MapOptions(
+          initCenter: const Geographic(lon: 0, lat: 0),
+          initStyle: jsonEncode({
+            'version': 8,
+            'sources': {
+              'style-points': {
+                'type': 'geojson',
+                'data': {'type': 'FeatureCollection', 'features': <Object>[]},
+                'attribution': '© Style Points',
+              },
+            },
+            'layers': [
+              {
+                'id': 'style-circles',
+                'type': 'circle',
+                'source': 'style-points',
+              },
+            ],
+          }),
+        ),
+      );
+      await map.pumpUntil(
+        () => map.style.getAttributionsSync().contains('© Style Points'),
+        reason: () => 'attributions: ${map.style.getAttributionsSync()}',
+      );
+
+      await map.style.addSource(
+        const GeoJsonSource(
+          id: 'points',
+          data: '{"type":"FeatureCollection","features":[]}',
+          attribution: '© Points',
+        ),
+      );
+      await map.pumpUntil(
+        () => map.style.getAttributionsSync().contains('© Points'),
+        reason: () => 'attributions: ${map.style.getAttributionsSync()}',
+      );
+      expect(
+        await map.style.getAttributions(),
+        unorderedEquals(['© Style Points', '© Points']),
+      );
+
+      await map.style.removeSource('points');
+      await map.pumpUntil(
+        () => !map.style.getAttributionsSync().contains('© Points'),
         reason: () => 'attributions: ${map.style.getAttributionsSync()}',
       );
     });

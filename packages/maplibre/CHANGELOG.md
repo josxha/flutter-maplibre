@@ -59,6 +59,8 @@
   `CameraChangeReason.apiGesture`.
 - Native: removing a layer or source that does not exist is not an error.
 - Native: attributions of tile sources are reported once they load.
+- Native: GeoJSON sources report their attributions, from the style JSON
+  and from `addSource`.
 - Web: `OfflineManager.createInstance` and `PermissionManager()` throw an
   `UnsupportedError`.
 

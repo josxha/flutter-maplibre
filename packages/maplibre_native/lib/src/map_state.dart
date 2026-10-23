@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/services.dart';
@@ -18,6 +19,9 @@ class MapLibreMapStateNative extends MapLibreMapState {
 
   @override
   StyleControllerNative? style;
+
+  /// The JSON of the style the map loads, when it is at hand.
+  String? _styleJson;
 
   LayerManager? _layerManager;
 
@@ -292,6 +296,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
     final styleController = StyleControllerNative(
       map,
       MediaQuery.devicePixelRatioOf(context),
+      styleJson: _styleJson,
     );
     style = styleController;
     await styleController.refresh();
@@ -542,21 +547,39 @@ class MapLibreMapStateNative extends MapLibreMapState {
     final map = _map;
     if (map == null) return;
     final trimmed = style.trim();
+    // The style JSON where it is at hand, for the attributions that MapLibre
+    // Native drops.
+    _styleJson = null;
     if (trimmed.startsWith('{')) {
+      _styleJson = trimmed;
       await checkCommand(map.setStyleJson(_utf8(trimmed)));
     } else if (trimmed.startsWith('http://') ||
         trimmed.startsWith('https://') ||
         trimmed.startsWith('mapbox://') ||
         trimmed.startsWith('file://') ||
         trimmed.startsWith('asset://')) {
+      if (trimmed.startsWith('file://')) {
+        _styleJson = await _readStyleFile(Uri.parse(trimmed).toFilePath());
+      }
       await checkCommand(map.setStyleUrl(trimmed));
     } else if (trimmed.startsWith('/') ||
         RegExp(r'^[a-zA-Z]:[/\\]').hasMatch(trimmed)) {
+      _styleJson = await _readStyleFile(trimmed);
       await checkCommand(map.setStyleUrl(Uri.file(trimmed).toString()));
     } else {
       // A Flutter asset.
       final json = await DefaultAssetBundle.of(context).loadString(trimmed);
+      _styleJson = json;
       await checkCommand(map.setStyleJson(_utf8(json)));
+    }
+  }
+
+  /// The style JSON in the file at [path], or null if it can't be read.
+  static Future<String?> _readStyleFile(String path) async {
+    try {
+      return await File(path).readAsString();
+    } on Object {
+      return null;
     }
   }
 
