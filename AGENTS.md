@@ -26,7 +26,7 @@ Flutter MapLibre: a federated plugin in a Dart pub workspace.
   - `linux/`: C++ GTK plugin (Vulkan memory imported into OpenGL for an
     `FlTextureGL`).
   - `android/`: Kotlin plugin and JNI shim (SurfaceProducer surfaces as EGL
-    surfaces with a render thread per map, or as Vulkan surfaces of its own
+    surfaces on one shared render thread, or as Vulkan surfaces of its own
     device). Its API is `MaplibreNativeApi.kt`, bound in
     `lib/src/android/bindings.g.dart`.
   - `darwin/`: Objective-C plugin for iOS and macOS, a SwiftPM package only

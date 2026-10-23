@@ -92,18 +92,20 @@ Each entry: the decision, then why.
   through teardown. It picks an RGBA8888 ES 3 window config with depth and
   stencil, with pbuffer support where offered for the session's teardown
   fallback.
-- **Each OpenGL ES map has a plugin-owned native render thread that services
-  its caller-graphics-thread session.** EGL surface targets require
-  `MLN_RENDER_DRIVER_CALLER_GRAPHICS_THREAD`, so rendering runs where
-  `mln_render_session_service_driver_work` is called, and the Dart isolate
-  runs on the Android main thread. The session's `driverWorkWake` reaches the
-  isolate, which wakes the thread through jnigen; the Dart binding only takes
-  Dart wakes. `RenderSessionHandle.id` is the raw `mln_render_session`, so the
-  JNI shim calls the C function it resolves with `dlsym`. One thread per map,
-  because the C API binds a session to the first thread that services it and
-  a dedicated context stays current there between renders. Teardown detaches
-  on that thread (abandon would keep the GL objects until process exit), then
-  stops it.
+- **One plugin-owned native render thread services the caller-graphics-thread
+  sessions of all OpenGL ES maps, each with its dedicated context.** EGL
+  surface targets require `MLN_RENDER_DRIVER_CALLER_GRAPHICS_THREAD`, so
+  rendering runs where `mln_render_session_service_driver_work` is called,
+  and the Dart isolate runs on the Android main thread. Each map registers a
+  render client whose `Wake.native` (callback and release from the JNI shim,
+  the client as user data) wakes the thread directly, without a hop through
+  the isolate; the release frees the client once the C library drops the
+  wake. `RenderSessionHandle.id` is the raw `mln_render_session`, so the
+  shim calls the C function it resolves with `dlsym`. The C API binds a
+  session to the first thread that services it, and lets dedicated sessions
+  share it; the thread services pending sessions in turn. Teardown detaches
+  the session there (abandon would keep the GL objects until process exit),
+  then removes the client. The thread lives as long as the process.
 - **The plugin creates its own Vulkan 1.1 device (graphics queue +
   `VK_KHR_swapchain`) for the Vulkan build.** Flutter doesn't share its
   device with plugins.
@@ -173,7 +175,7 @@ Each entry: the decision, then why.
 - **Dart calls the plugins on its UI thread.** Flutter's Windows and Linux
   texture registrar functions may be called from any thread. On Android the UI
   thread is the main thread, which SurfaceProducer needs.
-- **Vulkan sessions use the core-worker driver, OpenGL ES sessions a render
+- **Vulkan sessions use the core-worker driver, OpenGL ES sessions the render
   thread of the plugin, with frame wakes drained on the Dart isolate.** Frame demands use `ifNeeded | waitForUpdate` (plus `present` on
   Android), so idle maps don't render. Runtime events arrive through
   `RuntimeHandle.setEventHandler`, which the binding calls on the isolate.
@@ -362,12 +364,6 @@ Each entry: the decision, then why.
   Dart UI thread. Holding the shown frame acquired, or a shared event, could
   drop the copy or the wait.
 - Touch tilt and double-tap-drag are not tested on Windows touchscreens.
-- An OpenGL ES map wakes its render thread through the Dart isolate, a hop a
-  native wake would save. The binding now takes `Wake.native`, so the JNI
-  shim could supply the wake itself.
-- Two OpenGL ES maps render on two threads with two contexts. The C library
-  now lets dedicated OpenGL sessions share a graphics thread, so one render
-  thread could serve every map.
 - Web lost gl-js's keyboard navigation and shift-drag box zoom, which the
   shared recognizer doesn't offer, and its grab cursor. Zoom and rotation
   don't fling, only pans.

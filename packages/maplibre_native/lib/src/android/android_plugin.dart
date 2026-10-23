@@ -127,16 +127,35 @@ final class AndroidPlugin {
     texture.listener.release();
   }
 
-  /// Starts the native thread that services the caller-graphics-thread
-  /// [session] of an OpenGL ES map, and returns its handle.
-  static int startRenderThread(RenderSessionHandle session) =>
-      MaplibreNativeApi.startRenderThread(session.id.toSigned(64).toInt());
+  /// Registers a client of the native thread that services the
+  /// caller-graphics-thread sessions of all OpenGL ES maps. Returns its
+  /// handle and the driver work wake for its session, which wakes the thread
+  /// natively and owns the client until the C library releases it.
+  static (int client, Wake wake) addRenderClient() {
+    final client = MaplibreNativeApi.addRenderClient();
+    final callbacks = MaplibreNativeApi.renderClientWake();
+    try {
+      return (
+        client,
+        Wake.native(
+          callback: NativePointer(callbacks[0]),
+          userData: NativePointer(client),
+          releaseUserData: NativePointer(callbacks[1]),
+        ),
+      );
+    } finally {
+      callbacks.release();
+    }
+  }
 
-  /// Makes a render thread service its session's queued driver work.
-  static void wakeRenderThread(int thread) =>
-      MaplibreNativeApi.wakeRenderThread(thread);
+  /// Hands a render client its [session], which the thread then services.
+  static void setRenderClientSession(int client, RenderSessionHandle session) =>
+      MaplibreNativeApi.setRenderClientSession(
+        client,
+        session.id.toSigned(64).toInt(),
+      );
 
-  /// Ends a render thread after its work in flight.
-  static void stopRenderThread(int thread) =>
-      MaplibreNativeApi.stopRenderThread(thread);
+  /// Stops servicing a render client after its work in flight.
+  static void removeRenderClient(int client) =>
+      MaplibreNativeApi.removeRenderClient(client);
 }

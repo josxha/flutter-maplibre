@@ -305,18 +305,17 @@ extension type MaplibreNativeApi._(jni$_.JObject _$this)
     ).check();
   }
 
-  static final _id_startRenderThread = _class.staticMethodId(
-    r'startRenderThread',
-    r'(J)J',
+  static final _id_addRenderClient = _class.staticMethodId(
+    r'addRenderClient',
+    r'()J',
   );
 
-  static final _startRenderThread =
+  static final _addRenderClient =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Int64,)>,
               )
             >
           >('globalEnv_CallStaticLongMethod')
@@ -324,32 +323,61 @@ extension type MaplibreNativeApi._(jni$_.JObject _$this)
             jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
-              core$_.int,
             )
           >();
 
-  /// from: `public fun startRenderThread(session: kotlin.Long): kotlin.Long`
-  static core$_.int startRenderThread(core$_.int j) {
+  /// from: `public fun addRenderClient(): kotlin.Long`
+  static core$_.int addRenderClient() {
     final _$$classRef = _class.reference;
-    return _startRenderThread(
+    return _addRenderClient(
       _$$classRef.pointer,
-      _id_startRenderThread.pointer,
-      j,
+      _id_addRenderClient.pointer,
     ).long;
   }
 
-  static final _id_wakeRenderThread = _class.staticMethodId(
-    r'wakeRenderThread',
-    r'(J)V',
+  static final _id_renderClientWake = _class.staticMethodId(
+    r'renderClientWake',
+    r'()[J',
   );
 
-  static final _wakeRenderThread =
+  static final _renderClientWake =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public fun renderClientWake(): kotlin.LongArray`
+  /// The returned object must be released after use, by calling the [release] method.
+  static jni$_.JLongArray renderClientWake() {
+    final _$$classRef = _class.reference;
+    return _renderClientWake(
+      _$$classRef.pointer,
+      _id_renderClientWake.pointer,
+    ).object<jni$_.JLongArray>();
+  }
+
+  static final _id_setRenderClientSession = _class.staticMethodId(
+    r'setRenderClientSession',
+    r'(JJ)V',
+  );
+
+  static final _setRenderClientSession =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Int64,)>,
+                jni$_.VarArgs<(jni$_.Int64, jni$_.Int64)>,
               )
             >
           >('globalEnv_CallStaticVoidMethod')
@@ -358,25 +386,27 @@ extension type MaplibreNativeApi._(jni$_.JObject _$this)
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               core$_.int,
+              core$_.int,
             )
           >();
 
-  /// from: `public fun wakeRenderThread(thread: kotlin.Long): kotlin.Unit`
-  static void wakeRenderThread(core$_.int j) {
+  /// from: `public fun setRenderClientSession(client: kotlin.Long, session: kotlin.Long): kotlin.Unit`
+  static void setRenderClientSession(core$_.int j, core$_.int j1) {
     final _$$classRef = _class.reference;
-    _wakeRenderThread(
+    _setRenderClientSession(
       _$$classRef.pointer,
-      _id_wakeRenderThread.pointer,
+      _id_setRenderClientSession.pointer,
       j,
+      j1,
     ).check();
   }
 
-  static final _id_stopRenderThread = _class.staticMethodId(
-    r'stopRenderThread',
+  static final _id_removeRenderClient = _class.staticMethodId(
+    r'removeRenderClient',
     r'(J)V',
   );
 
-  static final _stopRenderThread =
+  static final _removeRenderClient =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
@@ -394,12 +424,12 @@ extension type MaplibreNativeApi._(jni$_.JObject _$this)
             )
           >();
 
-  /// from: `public fun stopRenderThread(thread: kotlin.Long): kotlin.Unit`
-  static void stopRenderThread(core$_.int j) {
+  /// from: `public fun removeRenderClient(client: kotlin.Long): kotlin.Unit`
+  static void removeRenderClient(core$_.int j) {
     final _$$classRef = _class.reference;
-    _stopRenderThread(
+    _removeRenderClient(
       _$$classRef.pointer,
-      _id_stopRenderThread.pointer,
+      _id_removeRenderClient.pointer,
       j,
     ).check();
   }

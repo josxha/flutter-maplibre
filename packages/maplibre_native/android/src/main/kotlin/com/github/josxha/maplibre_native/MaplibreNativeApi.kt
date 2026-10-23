@@ -193,24 +193,36 @@ object MaplibreNativeApi {
     }
 
     /**
-     * Starts the thread that services the OpenGL ES render session [session],
-     * a caller-graphics-thread session, and returns its handle.
+     * Registers a client of the render thread that services every OpenGL ES
+     * render session, a caller-graphics-thread session, and returns its
+     * handle. The client's session wakes the thread through the callbacks of
+     * [renderClientWake] with the handle as their user data.
      */
     @JvmStatic
-    fun startRenderThread(session: Long): Long = NativeBridge.nativeStartRenderThread(session)
+    fun addRenderClient(): Long = NativeBridge.nativeAddRenderClient()
 
-    /** Makes a render thread service its session's queued driver work. */
+    /**
+     * Returns the `mln_wake_callback` and the `mln_user_data_release` of a
+     * render client's driver work wake.
+     */
     @JvmStatic
-    fun wakeRenderThread(thread: Long) {
-        NativeBridge.nativeWakeRenderThread(thread)
+    fun renderClientWake(): LongArray = NativeBridge.nativeRenderClientWake()
+
+    /** Hands a render client [session], which the thread then services. */
+    @JvmStatic
+    fun setRenderClientSession(
+        client: Long,
+        session: Long,
+    ) {
+        NativeBridge.nativeSetRenderClientSession(client, session)
     }
 
     /**
-     * Ends a render thread after its work in flight. Its session must be
-     * detached or have no work left.
+     * Stops servicing a render client after its work in flight. Its session
+     * must be detached or have no work left.
      */
     @JvmStatic
-    fun stopRenderThread(thread: Long) {
-        NativeBridge.nativeStopRenderThread(thread)
+    fun removeRenderClient(client: Long) {
+        NativeBridge.nativeRemoveRenderClient(client)
     }
 }

@@ -48,15 +48,22 @@ internal object NativeBridge {
     @JvmStatic
     external fun nativeDestroyEglSurface(surface: Long)
 
-    /** Starts a thread that services the render session [session]. */
+    /** Registers a client of the render thread, which starts on first use. */
     @JvmStatic
-    external fun nativeStartRenderThread(session: Long): Long
+    external fun nativeAddRenderClient(): Long
 
-    /** Makes a render thread service its session's queued driver work. */
+    /** The wake and release callbacks of a render client's wake. */
     @JvmStatic
-    external fun nativeWakeRenderThread(thread: Long)
+    external fun nativeRenderClientWake(): LongArray
 
-    /** Ends a render thread once its work in flight is done. */
+    /** Hands a render client the session that it services. */
     @JvmStatic
-    external fun nativeStopRenderThread(thread: Long)
+    external fun nativeSetRenderClientSession(
+        client: Long,
+        session: Long,
+    )
+
+    /** Stops servicing a render client once its work in flight is done. */
+    @JvmStatic
+    external fun nativeRemoveRenderClient(client: Long)
 }

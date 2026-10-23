@@ -27,29 +27,34 @@ FrameTarget createAndroidTarget(LogicalExtent extent) {
   return _SurfaceTarget(extent, opengl: opengl);
 }
 
-/// The native thread that services an OpenGL ES session on Android.
+/// An OpenGL ES session's place on the plugin's render thread.
 ///
 /// EGL surface sessions use the caller-graphics-thread driver, so their
-/// rendering runs where it is serviced. That is a plugin thread rather than
-/// the Dart isolate, which runs on Android's main thread. The session asks for
-/// service through its driver work wake, which the isolate forwards here.
-final class _RenderThread {
-  int? _handle;
-
-  void start(RenderSessionHandle session) {
-    _handle = AndroidPlugin.startRenderThread(session);
-    // A wake that arrived before the thread existed found nothing to wake.
-    wake();
+/// rendering runs where it is serviced. That is one plugin thread for all
+/// maps rather than the Dart isolate, which runs on Android's main thread.
+/// The session asks for service through its driver work [wake], which wakes
+/// the thread natively.
+final class _RenderClient {
+  factory _RenderClient() {
+    final (handle, wake) = AndroidPlugin.addRenderClient();
+    return _RenderClient._(handle, wake);
   }
 
-  void wake() {
-    if (_handle case final handle?) AndroidPlugin.wakeRenderThread(handle);
-  }
+  _RenderClient._(this._handle, this.wake);
 
-  /// Ends the thread once its work in flight is done.
+  final int _handle;
+  final Wake wake;
+  var _removed = false;
+
+  /// Starts servicing [session], also for work it queued before.
+  void start(RenderSessionHandle session) =>
+      AndroidPlugin.setRenderClientSession(_handle, session);
+
+  /// Stops servicing the session once its work in flight is done.
   void stop() {
-    if (_handle case final handle?) AndroidPlugin.stopRenderThread(handle);
-    _handle = null;
+    if (_removed) return;
+    _removed = true;
+    AndroidPlugin.removeRenderClient(_handle);
   }
 }
 
@@ -70,8 +75,8 @@ final class _SurfaceTarget extends FrameTarget {
 
   late final SurfaceTexture _texture;
 
-  /// The thread that services the session of an OpenGL ES map.
-  _RenderThread? _renderThread;
+  /// Where the render thread services the session of an OpenGL ES map.
+  _RenderClient? _renderClient;
 
   RenderSessionHandle? _session;
 
@@ -97,17 +102,23 @@ final class _SurfaceTarget extends FrameTarget {
   ) {
     final RenderSessionAttachment attachment;
     if (opengl) {
-      // Attachment and every frame are driver work, so the thread starts
-      // before the attachment completes.
-      final thread = _renderThread = _RenderThread();
-      attachment = map.attachOpenglSurface(
-        _openglDescriptor(_texture.surface, extent),
-        RenderSessionAttachOptions(
-          frameWake: frameWake,
-          driverWorkWake: Wake(callback: thread.wake),
-        ),
-      );
-      thread.start(attachment.session);
+      // Attachment and every frame are driver work, which the client wakes
+      // the render thread for from the start.
+      final client = _renderClient = _RenderClient();
+      try {
+        attachment = map.attachOpenglSurface(
+          _openglDescriptor(_texture.surface, extent),
+          RenderSessionAttachOptions(
+            frameWake: frameWake,
+            driverWorkWake: client.wake,
+          ),
+        );
+      } on Object {
+        client.stop();
+        _renderClient = null;
+        rethrow;
+      }
+      client.start(attachment.session);
     } else {
       attachment = map.attachVulkanSurface(
         _vulkanDescriptor(_texture.surface, extent),
@@ -208,8 +219,8 @@ final class _SurfaceTarget extends FrameTarget {
 
   @override
   Future<bool> endSession(RenderSessionHandle session) async {
-    final thread = _renderThread;
-    if (thread == null) return abandonSession(session);
+    final client = _renderClient;
+    if (client == null) return abandonSession(session);
     // Only the render thread may destroy the session's GL objects, which
     // abandon would keep until process exit, so the session detaches there
     // first.
@@ -220,7 +231,7 @@ final class _SurfaceTarget extends FrameTarget {
     } on MaplibreException catch (error) {
       debugPrint('maplibre_native: detach failed: $error');
     }
-    thread.stop();
+    client.stop();
     if (!detached) abandonSession(session);
     return false;
   }

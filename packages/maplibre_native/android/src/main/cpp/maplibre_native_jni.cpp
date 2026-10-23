@@ -2,8 +2,8 @@
 // Native C library for Android and wraps Flutter's surfaces for the backend
 // the library was built with. For Vulkan it creates the device that render
 // sessions borrow and wraps surfaces as VkSurfaceKHRs. For OpenGL ES it
-// initializes EGL, wraps surfaces as EGLSurfaces, and runs one render thread
-// per map that services the map's caller-graphics-thread session.
+// initializes EGL, wraps surfaces as EGLSurfaces, and runs the render thread
+// that services the caller-graphics-thread sessions of all maps.
 
 #define VK_USE_PLATFORM_ANDROID_KHR
 #include <EGL/egl.h>
@@ -14,6 +14,7 @@
 #include <jni.h>
 #include <vulkan/vulkan.h>
 
+#include <algorithm>
 #include <condition_variable>
 #include <cstring>
 #include <map>
@@ -212,68 +213,138 @@ bool CreateEgl(std::string* error) {
   return true;
 }
 
-// Services one caller-graphics-thread session on a thread of its own. Dart
-// wakes it whenever the session reports driver work. The C API binds the
-// session to the first thread that services it, and the session's dedicated
-// EGL context stays current there between renders, so every map has one.
+// The one thread that services every caller-graphics-thread session, so all
+// OpenGL ES maps render on one thread, each with its dedicated EGL context.
+// The C API binds a session to the first thread that services it.
+//
+// Each map registers a RenderClient, whose session's driver work wake calls
+// WakeClient on whatever thread the C library reports work from, without a
+// hop through the Dart isolate. The wake registration owns the client: the C
+// library releases it with ReleaseClient once the session no longer wakes
+// it, which may come after the map removed the client.
+class RenderThread;
+
+struct RenderClient {
+  RenderThread* thread;
+  uint64_t session = 0;  // 0 until the attachment returned the session.
+  bool pending = false;
+  bool removed = false;
+  bool released = false;  // The C library dropped the wake registration.
+  int32_t last_status = kMlnStatusOk;
+};
+
 class RenderThread {
  public:
-  RenderThread(MlnServiceDriverWork service, uint64_t session)
-      : service_(service), session_(session), thread_([this] { Run(); }) {}
+  explicit RenderThread(MlnServiceDriverWork service)
+      : service_(service), thread_([this] { Run(); }) {}
 
-  // Ends the thread after the work in flight. The session was detached
-  // before, so no work is left behind.
-  ~RenderThread() {
-    {
-      std::lock_guard<std::mutex> lock(mutex_);
-      stop_ = true;
-    }
-    wake_.notify_one();
-    thread_.join();
+  // Lives as long as the process, like the EGL display it renders with.
+  ~RenderThread() = delete;
+
+  RenderClient* AddClient() {
+    std::lock_guard<std::mutex> lock(mutex_);
+    auto* client = new RenderClient{this};
+    clients_.push_back(client);
+    return client;
   }
 
-  void Wake() {
+  // Wakes for work that arrived before the session was known.
+  void SetSession(RenderClient* client, uint64_t session) {
     {
       std::lock_guard<std::mutex> lock(mutex_);
-      pending_ = true;
+      client->session = session;
+      client->pending = true;
     }
     wake_.notify_one();
+  }
+
+  void Wake(RenderClient* client) {
+    {
+      std::lock_guard<std::mutex> lock(mutex_);
+      if (client->removed) return;
+      client->pending = true;
+    }
+    wake_.notify_one();
+  }
+
+  // Stops servicing the client's session once the call in flight returns.
+  // The session was detached before, so no work is left behind.
+  void RemoveClient(RenderClient* client) {
+    std::unique_lock<std::mutex> lock(mutex_);
+    client->removed = true;
+    clients_.erase(std::remove(clients_.begin(), clients_.end(), client),
+                   clients_.end());
+    idle_.wait(lock, [this, client] { return servicing_ != client; });
+    if (client->released) delete client;
+  }
+
+  void Release(RenderClient* client) {
+    std::lock_guard<std::mutex> lock(mutex_);
+    client->released = true;
+    if (client->removed) delete client;
   }
 
  private:
   void Run() {
-    int32_t last_status = kMlnStatusOk;
+    std::unique_lock<std::mutex> lock(mutex_);
     for (;;) {
-      {
-        std::unique_lock<std::mutex> lock(mutex_);
-        wake_.wait(lock, [this] { return pending_ || stop_; });
-        if (stop_) break;
-        pending_ = false;
-      }
-      // Services everything queued. Work queued during the call wakes the
-      // thread again.
+      RenderClient* client = nullptr;
+      wake_.wait(lock, [this, &client] {
+        for (auto* candidate : clients_) {
+          if (candidate->pending && candidate->session != 0) {
+            client = candidate;
+            return true;
+          }
+        }
+        return false;
+      });
+      // Services everything queued for the session. Work queued during the
+      // call wakes it again. Other sessions take their turn after it, so
+      // they share the thread fairly.
+      client->pending = false;
+      servicing_ = client;
+      std::rotate(clients_.begin(),
+                  std::find(clients_.begin(), clients_.end(), client) + 1,
+                  clients_.end());
+      const uint64_t session = client->session;
+      lock.unlock();
       MlnDiagnostic diagnostic{sizeof(MlnDiagnostic), {}};
-      const int32_t status = service_(session_, &diagnostic);
+      const int32_t status = service_(session, &diagnostic);
+      lock.lock();
+      servicing_ = nullptr;
       if (status != kMlnStatusOk && status != kMlnStatusBusy &&
-          status != last_status) {
+          status != client->last_status) {
         __android_log_print(ANDROID_LOG_ERROR, kTag,
-                            "Servicing the render session failed (%d): %s",
+                            "Servicing a render session failed (%d): %s",
                             status, diagnostic.message);
       }
-      last_status = status;
+      client->last_status = status;
+      idle_.notify_all();
     }
-    eglReleaseThread();
   }
 
   const MlnServiceDriverWork service_;
-  const uint64_t session_;
   std::mutex mutex_;
   std::condition_variable wake_;
-  bool pending_ = false;
-  bool stop_ = false;
+  std::condition_variable idle_;
+  std::vector<RenderClient*> clients_;
+  RenderClient* servicing_ = nullptr;
   // Last, so the thread starts once the fields above are initialized.
   std::thread thread_;
 };
+
+RenderThread* g_render_thread = nullptr;
+
+// mln_wake_callback and mln_user_data_release of a client's driver work wake.
+void WakeClient(void* user_data) {
+  auto* client = static_cast<RenderClient*>(user_data);
+  client->thread->Wake(client);
+}
+
+void ReleaseClient(void* user_data) {
+  auto* client = static_cast<RenderClient*>(user_data);
+  client->thread->Release(client);
+}
 
 ANativeWindow* WindowOf(JNIEnv* env, jobject surface) {
   ANativeWindow* window = ANativeWindow_fromSurface(env, surface);
@@ -442,33 +513,50 @@ Java_com_github_josxha_maplibre_1native_NativeBridge_nativeDestroyEglSurface(
 }
 
 extern "C" JNIEXPORT jlong JNICALL
-Java_com_github_josxha_maplibre_1native_NativeBridge_nativeStartRenderThread(
-    JNIEnv* env, jclass, jlong session) {
-  MlnServiceDriverWork service = nullptr;
+Java_com_github_josxha_maplibre_1native_NativeBridge_nativeAddRenderClient(
+    JNIEnv* env, jclass) {
+  RenderThread* thread = nullptr;
   {
     std::lock_guard<std::mutex> lock(g_mutex);
-    if (g_library != nullptr) {
-      service = reinterpret_cast<MlnServiceDriverWork>(
+    if (g_render_thread == nullptr && g_library != nullptr) {
+      auto service = reinterpret_cast<MlnServiceDriverWork>(
           dlsym(g_library, "mln_render_session_service_driver_work"));
+      if (service != nullptr) g_render_thread = new RenderThread(service);
     }
+    thread = g_render_thread;
   }
-  if (service == nullptr) {
+  if (thread == nullptr) {
     ThrowIllegalState(env,
                       "libmaplibre-native-c.so lacks "
                       "mln_render_session_service_driver_work.");
     return 0;
   }
-  return Handle(new RenderThread(service, static_cast<uint64_t>(session)));
+  return Handle(thread->AddClient());
+}
+
+extern "C" JNIEXPORT jlongArray JNICALL
+Java_com_github_josxha_maplibre_1native_NativeBridge_nativeRenderClientWake(
+    JNIEnv* env, jclass) {
+  const jlong values[] = {Handle(reinterpret_cast<void*>(&WakeClient)),
+                          Handle(reinterpret_cast<void*>(&ReleaseClient))};
+  jlongArray array = env->NewLongArray(2);
+  env->SetLongArrayRegion(array, 0, 2, values);
+  return array;
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_com_github_josxha_maplibre_1native_NativeBridge_nativeWakeRenderThread(
-    JNIEnv*, jclass, jlong thread) {
-  reinterpret_cast<RenderThread*>(static_cast<intptr_t>(thread))->Wake();
+Java_com_github_josxha_maplibre_1native_NativeBridge_nativeSetRenderClientSession(
+    JNIEnv*, jclass, jlong client, jlong session) {
+  auto* render_client =
+      reinterpret_cast<RenderClient*>(static_cast<intptr_t>(client));
+  render_client->thread->SetSession(render_client,
+                                    static_cast<uint64_t>(session));
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_com_github_josxha_maplibre_1native_NativeBridge_nativeStopRenderThread(
-    JNIEnv*, jclass, jlong thread) {
-  delete reinterpret_cast<RenderThread*>(static_cast<intptr_t>(thread));
+Java_com_github_josxha_maplibre_1native_NativeBridge_nativeRemoveRenderClient(
+    JNIEnv*, jclass, jlong client) {
+  auto* render_client =
+      reinterpret_cast<RenderClient*>(static_cast<intptr_t>(client));
+  render_client->thread->RemoveClient(render_client);
 }

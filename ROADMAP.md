@@ -35,10 +35,6 @@ Known gaps are tracked in detail in [`.agents/decisions.md`](.agents/decisions.m
   Dart over animated camera deltas.
 - Web lost gl-js keyboard navigation, shift-drag box zoom and the grab
   cursor, which the shared recognizer doesn't offer.
-- Android frame sync: an OpenGL ES map wakes its render thread through the
-  Dart isolate; the binding now takes `Wake.native`, so the JNI shim could
-  wake it directly. Two OpenGL ES maps still use two threads and contexts,
-  though the C library can now share one graphics thread.
 - Metal copies every frame on the GPU and waits on the Dart UI thread.
 - MapLibre Native reports no GeoJSON source attributions, so
   `getAttributions` lists them on web only.
