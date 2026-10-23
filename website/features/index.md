@@ -19,7 +19,7 @@ yet tested on a Linux machine.
 | Offline       | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
 | Events        | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
 | Annotations   | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
-| MBTiles       | ❌   | ✅       | ✅   | ❌       | ❌     | ❌     |
+| MBTiles       | ❌   | ✅       | ✅   | ✅       | ✅     | ✅     |
 | PMTiles       | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
 
 ### Layers
