@@ -161,6 +161,31 @@ Known gaps are tracked in detail in [`.agents/decisions.md`](.agents/decisions.m
 - Build it after layer CRUD, so the setters take typed values from the
   start.
 
+### Custom tile loading
+
+- Both platforms support it:
+  - Web: gl-js `addProtocol(scheme, loadFn)` serves any request on a custom
+    scheme (`mytiles://…`) from a JS function returning bytes. We already use
+    it internally for `pmtiles://`. `transformRequest` rewrites URLs and
+    headers.
+  - Native: the ffi runtime's `setResourceProvider` takes routes (URL or
+    glob patterns per resource kind) and a callback that answers each request
+    with `ResourceRequestHandle.complete(response)`, hands it back with
+    `passThrough()`, and can watch for cancellation.
+    `setResourceTransform` rewrites URLs. Neither is used by
+    `maplibre_native` yet.
+- Public API: a `TileProvider`-style callback, registered per scheme or URL
+  pattern, that gets the URL and resource kind and returns bytes, an error,
+  or "not handled" so the request goes through the network loader. Make it
+  async, and cancel it when the map drops the request.
+- A URL transform on the same API covers custom headers and auth tokens
+  (#383, PR #573) on both platforms.
+- Check whether the native provider sees requests on custom schemes, or
+  only on http(s) URLs. If only http(s), document routes on a placeholder
+  host instead of a scheme, so one style works on web and native.
+- Use cases: tiles from a local database or app bundle, encrypted tiles,
+  signed URLs, and generated tiles.
+
 ### Suggested order
 
 1. Ship the native rewrite (#585) as 0.4.0-dev.
@@ -169,3 +194,4 @@ Known gaps are tracked in detail in [`.agents/decisions.md`](.agents/decisions.m
 4. Typed expressions.
 5. User location as a Flutter layer, with the permission decision above.
 6. Offline on native.
+7. Custom tile loading and request transforms.
