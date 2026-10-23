@@ -122,6 +122,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with: { cache: true }
       - uses: browser-actions/setup-chrome@v2
+        id: chrome
         with: { install-chromedriver: true }
       - name: "Get Flutter dependencies"
         run: flutter pub get
@@ -130,7 +131,8 @@ jobs:
           chromedriver --port=4444 &
           flutter drive --driver test_driver/integration_test.dart \
             --target integration_test/all_test.dart \
-            -d web-server --browser-name chrome --headless
+            -d web-server --browser-name chrome --headless \
+            --chrome-binary "${{ steps.chrome.outputs.chrome-path }}"
   integration-test-linux:
     name: "[Linux] Integration tests"
     runs-on: ubuntu-latest
@@ -144,7 +146,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y ninja-build libgtk-3-dev libepoxy-dev \
-            libvulkan1 mesa-vulkan-drivers xvfb
+            libvulkan1 libvulkan-dev mesa-vulkan-drivers xvfb
       - name: "Check the zero-copy texture path without Flutter"
         working-directory: .
         run: xvfb-run -a packages/maplibre_native/linux/test/run_gl_texture_test.sh
@@ -162,17 +164,33 @@ jobs:
           flags: unit
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      # After all tests pass on Linux, flutter_tools deletes its test listener
+      # directory a second time and exits with a PathNotFoundException, before
+      # it writes the coverage. That one error passes; any failed test or other
+      # error still fails the step.
       - name: "Run integration tests"
-        run: >
-          xvfb-run -a flutter test integration_test/all_test.dart -d linux
-          --coverage --coverage-package '^maplibre(_native|_platform_interface|_web)?$'
+        shell: bash
+        run: |
+          set +e
+          coverage=(--coverage --coverage-package '^maplibre(_native|_platform_interface|_web)?$')
+          xvfb-run -a flutter test integration_test/all_test.dart -d linux "${coverage[@]}" 2>&1 | tee test.log
+          status=${PIPESTATUS[0]}
+          set -e
+          if [ "$status" -ne 0 ]; then
+            grep -q 'Deletion failed, path = .*flutter_test_listener' test.log || exit "$status"
+            ! grep -q '(failed)' test.log || exit "$status"
+            grep -q 'Passing tests' test.log || exit "$status"
+            echo "::warning::flutter_tools failed to clean up after the passing tests."
+          fi
       # lcov names the packages relative to examples; Codecov needs them
       # relative to the repository.
       - name: "Make the coverage paths relative to the repository"
+        if: hashFiles('examples/coverage/lcov.info') != ''
         shell: bash
         working-directory: .
         run: sed -i -E 's#^SF:(\.\./)+#SF:#' examples/coverage/lcov.info
       - uses: codecov/codecov-action@v7
+        if: hashFiles('examples/coverage/lcov.info') != ''
         with:
           files: examples/coverage/lcov.info
           flags: integration-linux
@@ -318,9 +336,11 @@ jobs:
       - name: "Get Flutter dependencies"
         run: flutter pub get
       - name: "Run integration tests"
+        # flutter.bat hands the arguments to cmd, which would split the
+        # package regex at a |, so this one matches the same packages without.
         run: >
           flutter test integration_test/all_test.dart -d windows
-          --coverage --coverage-package '^maplibre(_native|_platform_interface|_web)?$'
+          --coverage --coverage-package '^maplibre(_native)?(_platform_interface)?(_web)?$'
       # lcov names the packages relative to examples; Codecov needs them
       # relative to the repository.
       - name: "Make the coverage paths relative to the repository"

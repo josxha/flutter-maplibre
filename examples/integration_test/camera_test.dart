@@ -148,12 +148,15 @@ void runTests() {
         center: const Geographic(lon: 0, lat: 0),
         padding: const EdgeInsets.only(top: 200),
       );
-      await map.waitForLatestFrame();
-      final center = map.controller.toScreenLocation(
-        const Geographic(lon: 0, lat: 0),
+      // Padding is not part of MapCamera, so waitForLatestFrame can't tell a
+      // frame with it from the earlier frame at the same center.
+      Offset center() =>
+          map.controller.toScreenLocation(const Geographic(lon: 0, lat: 0));
+      await map.pumpUntil(
+        () => (center().dy - map.center.dy - 100).abs() < 1,
+        reason: () => 'center at ${center()}, map center at ${map.center}',
       );
-      expect(center.dx, closeTo(map.center.dx, 1));
-      expect(center.dy, closeTo(map.center.dy + 100, 1));
+      expect(center().dx, closeTo(map.center.dx, 1));
     });
 
     testWidgets('fitBounds replaces padding from a previous camera move', (
