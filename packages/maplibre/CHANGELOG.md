@@ -58,6 +58,10 @@
 - Native: a camera move from a short gesture is reported with
   `CameraChangeReason.apiGesture`.
 - Native: removing a layer or source that does not exist is not an error.
+- Native: `setProjection(MapProjection.globe)` keeps Mercator and logs once
+  instead of throwing, as MapLibre Native has no globe projection.
+- Native: adding a `VideoSource` throws an `UnsupportedError` (it threw an
+  `UnimplementedError`), as MapLibre Native has no video sources.
 - Native: attributions of tile sources are reported once they load.
 - Native: GeoJSON sources report their attributions, from the style JSON
   and from `addSource`.

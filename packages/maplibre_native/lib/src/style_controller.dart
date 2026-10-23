@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:typed_data';
 import 'dart:ui' as ui;
 
+import 'package:flutter/foundation.dart';
 import 'package:maplibre_native/src/command.dart';
 import 'package:maplibre_native_ffi/maplibre_native_ffi.dart' as mln;
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
@@ -98,8 +98,9 @@ class StyleControllerNative extends StyleController {
             source.coordinates.bottomLeft,
           ].map((point) => [point.lon, point.lat]).toList(),
         },
-        VideoSource() => throw UnimplementedError(
-          'Video sources are not supported by MapLibre Native.',
+        VideoSource() => throw UnsupportedError(
+          'MapLibre Native has no video sources; they are only supported on '
+          'web.',
         ),
         _ => throw UnimplementedError(
           'The source is not supported: ${source.runtimeType}',
@@ -270,14 +271,18 @@ class StyleControllerNative extends StyleController {
   @override
   List<String> getLayerIds() => _cachedLayerIds;
 
+  /// MapLibre Native has no globe projection, so the map stays on Mercator.
   @override
   void setProjection(MapProjection projection) {
-    if (projection == MapProjection.mercator) return;
-    throw UnimplementedError(
-      'The globe projection is not available through the MapLibre Native C '
-      'API yet.',
+    if (projection == MapProjection.mercator || _warnedGlobe) return;
+    _warnedGlobe = true;
+    debugPrint(
+      'maplibre_native: the globe projection is not supported by MapLibre '
+      'Native; the map stays on Mercator.',
     );
   }
+
+  static var _warnedGlobe = false;
 
   @override
   void dispose() => _disposed = true;

@@ -344,7 +344,13 @@ Each entry: the decision, then why.
   database packing, so `setOfflineTileCountLimit` and
   `runPackDatabaseAutomatically` were removed from the `OfflineManager`.
 
-- Missing on native: globe projection.
+- Missing on native: the globe projection and video sources. MapLibre Native
+  implements neither, and the C API has no setting for them
+  (`mln_map_set_projection_mode` only sets axonometric and skew;
+  `MLN_STYLE_SOURCE_TYPE_VIDEO` only names the type). `setProjection(globe)`
+  logs once and keeps Mercator, so pages that ask for a globe still show a
+  map; adding a `VideoSource` throws an `UnsupportedError`, as a layer on it
+  could not render.
 - iOS and macOS were built and run on an arm64 Mac (Xcode 27.1, macOS 27,
   iOS 26.4 simulator) only against a local C build of an earlier binding
   commit, and not yet on an iOS device or against the 0.202610.2 release
