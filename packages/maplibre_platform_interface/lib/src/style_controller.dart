@@ -216,7 +216,8 @@ abstract class StyleController {
 
   /// Set the map projection.
   ///
-  /// [MapProjection.globe] is currently on supported on web.
+  /// [MapProjection.globe] is only supported on web. MapLibre Native has no
+  /// globe projection, so native maps ignore it and stay on Mercator.
   void setProjection(MapProjection projection);
 
   /// Clean up resources.

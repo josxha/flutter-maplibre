@@ -13,14 +13,26 @@ environment:
 workspace:
   - examples
   - packages/maplibre
-  - packages/maplibre_android
-  - packages/maplibre_ios
-  - packages/maplibre_ios/example
+  - packages/maplibre_geolocator
+  - packages/maplibre_native
   - packages/maplibre_platform_interface
   - packages/maplibre_web
-  - packages/maplibre_webview
 
 dev_dependencies:
   pub_semver: ^2.2.0
   yaml: ^3.1.2
   args: ^2.7.0
+
+# The build hook of maplibre_native_ffi downloads the C library for each
+# target and picks its render backend: OpenGL ES on Android, Metal on iOS and
+# macOS, Vulkan on Windows and Linux. maplibre_native renders through whichever
+# one it got. To render through Vulkan on Android, select it here. To use a
+# local build of maplibre-native-ffi, name its CMake build root (holding
+# <preset>/install for each target) in local_build; see CONTRIBUTING.md.
+#
+# hooks:
+#   user_defines:
+#     maplibre_native_ffi:
+#       backend:
+#         android: vulkan
+#       local_build: ../maplibre-native-ffi/build

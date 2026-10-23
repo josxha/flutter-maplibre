@@ -117,20 +117,6 @@ extension type JsMap._(Camera _) implements Camera {
   /// Get the loaded style.
   external StyleSpecification? getStyle();
 
-  external DoubleClickZoomHandler doubleClickZoom;
-  external DragPanHandler dragPan;
-  external DragRotateHandler dragRotate;
-  external KeyboardHandler keyboard;
-  external ScrollZoomHandler scrollZoom;
-
-  /// Shift and drag to draw a box to zoom in
-  external BoxZoomHandler boxZoom;
-
-  /// Pitch with rotate
-  external bool pitchWithRotate;
-  external TwoFingersTouchPitchHandler touchPitch;
-  external TwoFingersTouchZoomRotateHandler touchZoomRotate;
-
   /// Returns an array of MapGeoJSONFeature objects representing visible
   /// features that satisfy the query parameters.
   external JSArray<MapGeoJSONFeature> queryRenderedFeatures(
@@ -160,6 +146,7 @@ extension type MapOptions._(JSObject _) implements JSObject {
     required double bearing,
     required double pitch,
     required bool attributionControl,
+    bool? interactive,
   });
 }
 
@@ -169,92 +156,6 @@ extension type MapOptions._(JSObject _) implements JSObject {
 extension type SourceSpecification._(JSObject _) implements JSObject {
   /// The default constructor for a [SourceSpecification].
   external SourceSpecification({required String type});
-
-  /// Create a new GeoJSON source.
-  external factory SourceSpecification.geoJson({
-    required String type,
-    required JSAny data,
-    num? maxzoom,
-    String? attribution,
-    num? buffer,
-    num? tolerance,
-  });
-
-  /// Create a new raster DEM source.
-  factory SourceSpecification.rasterDem({
-    required String type,
-    required int tileSize,
-    required String? attribution,
-    String? url,
-    JSAny? tiles,
-  }) => url != null
-      ? SourceSpecification._rasterDemUrl(
-          type: type,
-          tileSize: tileSize,
-          attribution: attribution,
-          url: url,
-        )
-      : SourceSpecification._rasterDemTiles(
-          type: type,
-          tileSize: tileSize,
-          attribution: attribution,
-          tiles: tiles!,
-        );
-
-  external factory SourceSpecification._rasterDemUrl({
-    required String type,
-    required int tileSize,
-    required String? attribution,
-    required String url,
-  });
-
-  external factory SourceSpecification._rasterDemTiles({
-    required String type,
-    required int tileSize,
-    required String? attribution,
-    required JSAny tiles,
-  });
-
-  /// Create a new raster source.
-  factory SourceSpecification.raster({
-    required String type,
-    required int tileSize,
-    required String? attribution,
-    JSAny? tiles,
-    String? url,
-  }) => url != null
-      ? SourceSpecification._rasterUrl(
-          type: type,
-          tileSize: tileSize,
-          attribution: attribution,
-          url: url,
-        )
-      : SourceSpecification._rasterTiles(
-          type: type,
-          tileSize: tileSize,
-          attribution: attribution,
-          tiles: tiles!,
-        );
-
-  external factory SourceSpecification._rasterUrl({
-    required String type,
-    required int tileSize,
-    required String? attribution,
-    required String url,
-  });
-
-  external factory SourceSpecification._rasterTiles({
-    required String type,
-    required int tileSize,
-    required String? attribution,
-    required JSAny tiles,
-  });
-
-  /// Create a new vector source.
-  external factory SourceSpecification.vector({
-    required String type,
-    required String? url,
-  });
 
   /// Create a new image source.
   external factory SourceSpecification.image({

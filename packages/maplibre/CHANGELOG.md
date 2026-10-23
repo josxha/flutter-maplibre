@@ -1,3 +1,73 @@
+## unreleased
+
+### Breaking Changes
+
+- Removed `maplibre_android`, `maplibre_ios` and `maplibre_webview`. `maplibre`
+  now uses `maplibre_web` in the browser and `maplibre_native`, built on the
+  MapLibre Native C API, on every other platform. `maplibre_native` renders on
+  Android, iOS, macOS, Windows and Linux.
+- Removed the `MapOptions` properties of the removed packages:
+  `androidMode`, `androidTextureMode`, `androidTranslucentTextureSurface`,
+  `androidForegroundLoadColor` and `webviewDebugMode`, and the
+  `AndroidPlatformViewMode` enum.
+- `MapController.featuresAtPoint` and `MapController.featuresInRect` return a
+  `Future`, because MapLibre Native answers feature queries asynchronously.
+- Removed `MapController.queryLayers` and `QueriedLayer`. Use
+  `featuresAtPoint` with `layerIds` to test layers, and the new
+  `RenderedFeature.sourceId` and `RenderedFeature.sourceLayer` for the source.
+- `RenderedFeature` equality and `hashCode` compare `id`, `sourceId` and
+  `sourceLayer`.
+- Web: map gestures are recognized in Flutter, as on every other platform,
+  instead of by MapLibre GL JS. Its keyboard navigation and shift-drag box
+  zoom are gone. A wheel notch zooms as far as in MapLibre GL JS.
+- Removed the `pointer_interceptor` dependency. Widgets over the map no longer
+  need a `PointerInterceptor` on web; `WidgetLayer.allowInteraction` works the
+  same on every platform.
+- `OfflineManager.getOfflineRegion` returns null for an unknown region.
+  `setOfflineTileCountLimit` and `runPackDatabaseAutomatically` were removed,
+  as MapLibre Native offers neither.
+- Removed `PermissionManager`, `MapController.enableLocation`,
+  `MapController.trackLocation`, `MapController.userLocationIsSupported`,
+  `BearingRenderMode` and `BearingTrackMode`. Show the user location with a
+  `UserLocationLayer`, and ask for permissions with `geolocator` or
+  `permission_handler`. `MapControlButtons` takes `tracking` and
+  `onTrackingPressed` instead of `showTrackLocation`.
+
+### Features
+
+- `UserLocationLayer` shows a stream of `UserLocation`s on every platform
+  and can track them; the new `maplibre_geolocator` package adapts
+  `geolocator` positions.
+- Gestures are shared by all platforms: drag, pinch and twist, scroll wheel,
+  double tap, double tap and drag, two-finger tilt, and right-button or
+  Ctrl + left-button rotate and tilt.
+- Native: the `OfflineManager` downloads, lists, merges, updates and deletes
+  regions, and maintains the ambient cache. New `updateRegionMetadata`,
+  `invalidateRegion`, `resumeDownload` and `includeIdeographs`; failed
+  resources are reported as `OfflineDownloadException`s on the download
+  stream.
+- Native: maps cache resources in `maplibre_native.db` in the app support
+  directory, which also holds the offline regions.
+
+### Bug Fixes
+
+- Web: widgets over the map no longer let taps and drags through to the map.
+- `MarkerLayer` applies `textOpacity` (it used `iconOpacity`) and
+  `iconTranslate`, and `PolylineLayer` applies `blur`.
+- Native: `animateCamera` and `fitBounds` complete when the animation ends.
+- Native: a camera move from a short gesture is reported with
+  `CameraChangeReason.apiGesture`.
+- Native: removing a layer or source that does not exist is not an error.
+- Native: `setProjection(MapProjection.globe)` keeps Mercator and logs once
+  instead of throwing, as MapLibre Native has no globe projection.
+- Native: adding a `VideoSource` throws an `UnsupportedError` (it threw an
+  `UnimplementedError`), as MapLibre Native has no video sources.
+- Native: attributions of tile sources are reported once they load.
+- Native: GeoJSON sources report their attributions, from the style JSON
+  and from `addSource`.
+- Web: `OfflineManager.createInstance` and `PermissionManager()` throw an
+  `UnsupportedError`.
+
 ## 0.3.7
 
 Thanks for everyone who contributed in this release!

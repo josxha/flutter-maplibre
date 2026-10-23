@@ -9,33 +9,16 @@ jobs:
     permissions: { id-token: write }
     uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
     with: { working-directory: packages/maplibre_platform_interface }
-  maplibre-android:
-    name: "Publish `maplibre_android`"
-    needs: maplibre-platform-interface
-    permissions: { id-token: write }
-    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
-    with: { working-directory: packages/maplibre_android }
-  maplibre-ios:
-    name: "Publish `maplibre_ios`"
-    needs: maplibre-platform-interface
-    permissions: { id-token: write }
-    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
-    with: { working-directory: packages/maplibre_ios }
   maplibre-web:
     name: "Publish `maplibre_web`"
     needs: maplibre-platform-interface
     permissions: { id-token: write }
     uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
     with: { working-directory: packages/maplibre_web }
-  # maplibre_webview is not published here: it depends on a pre-release of
-  # flutter_inappwebview and therefore is released manually as a pre-release
-  # version, which doesn't match the release tag that pub.dev requires.
   maplibre:
     name: "Publish `maplibre`"
     needs:
       - maplibre-platform-interface
-      - maplibre-android
-      - maplibre-ios
       - maplibre-web
     permissions: { id-token: write }
     uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1

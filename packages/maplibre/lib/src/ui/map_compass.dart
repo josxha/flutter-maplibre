@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:pointer_interceptor/pointer_interceptor.dart';
 
 /// A compass for flutter_map that shows the map rotation and allows to reset
 /// the rotation back to 0.
@@ -88,16 +87,14 @@ class MapCompass extends StatelessWidget {
       padding: padding,
       child: Transform.rotate(
         angle: (-camera.bearing + rotationOffset) * degree2Radian,
-        child: PointerInterceptor(
-          child: InkWell(
-            onTap: () => _onTap(controller),
-            child:
-                child ??
-                CustomPaint(
-                  painter: _CompassPainter(radius: radius),
-                  child: SizedBox.square(dimension: radius * 2),
-                ),
-          ),
+        child: InkWell(
+          onTap: () => _onTap(controller),
+          child:
+              child ??
+              CustomPaint(
+                painter: _CompassPainter(radius: radius),
+                child: SizedBox.square(dimension: radius * 2),
+              ),
         ),
       ),
     );

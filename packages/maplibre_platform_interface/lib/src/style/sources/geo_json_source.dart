@@ -35,8 +35,6 @@ final class GeoJsonSource extends Source {
   ///
   /// Defaults to 0.375 (pixels at zoom 0).
   /// Higher values mean more simplification and better performance.
-  ///
-  /// Not implemented on desktop (maplibre_webview).
   final double tolerance;
 
   // TODO add more fields https://maplibre.org/maplibre-style-spec/sources/#buffer

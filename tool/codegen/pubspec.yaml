@@ -1,0 +1,14 @@
+name: codegen
+description: Generates the ffigen and jnigen bindings of maplibre_native.
+publish_to: none
+
+# Not part of the workspace, which keeps the build hook of the MapLibre Native
+# binding out of code generation.
+
+environment:
+  sdk: ^3.13.0
+
+dev_dependencies:
+  ffigen: ^23.0.0
+  jni: ^1.1.0
+  jnigen: ^1.0.1

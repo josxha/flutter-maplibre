@@ -1,2 +1,4 @@
-#include? "Pods/Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"
 #include "ephemeral/Flutter-Generated.xcconfig"
+
+// The MapLibre Native C library is published for arm64 Macs only.
+EXCLUDED_ARCHS = x86_64

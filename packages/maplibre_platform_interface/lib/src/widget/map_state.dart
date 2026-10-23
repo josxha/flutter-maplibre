@@ -26,11 +26,27 @@ abstract class MapLibreMapState extends State<MapLibreMap>
   /// is set.
   bool isInitialized = false;
 
+  /// Applies the camera changes of the map gestures that
+  /// [MapGestureDetector] recognizes over [buildPlatformWidget], or null if
+  /// the platform handles gestures itself.
+  GestureCameraSink? get gestureCamera => null;
+
   @override
   Widget build(BuildContext context) {
+    final gestureCamera = this.gestureCamera;
+    final platformWidget = buildPlatformWidget(context);
     return Stack(
       children: [
-        buildPlatformWidget(context),
+        if (gestureCamera == null)
+          platformWidget
+        else
+          MapGestureDetector(
+            gestures: options.gestures,
+            camera: gestureCamera,
+            toLngLat: (point) => isInitialized ? toLngLat(point) : null,
+            onEvent: widget.onEvent,
+            child: platformWidget,
+          ),
         MapLibreInheritedModel(
           mapController: this,
           mapCamera: camera,

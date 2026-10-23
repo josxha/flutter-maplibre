@@ -13,10 +13,5 @@ final class MapLibrePlugin extends MapLibrePlatform {
 
   @override
   Future<OfflineManager> createOfflineManager() =>
-      throw Exception('The OfflineManager can not be used on web.');
-
-  @override
-  PermissionManager createPermissionManager() {
-    throw Exception('The PermissionManager can not be used on web.');
-  }
+      throw UnsupportedError('The OfflineManager can not be used on web.');
 }

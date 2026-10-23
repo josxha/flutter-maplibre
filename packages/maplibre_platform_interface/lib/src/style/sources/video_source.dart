@@ -13,7 +13,8 @@ part of 'source.dart';
 /// paused and resumed, or when the video's coordinates are updated. To avoid
 /// this behavior, set the layer's raster-fade-duration property to 0.
 ///
-/// Only supported on web.
+/// Only supported on web. MapLibre Native has no video sources, so adding one
+/// to a native map throws an [UnsupportedError].
 ///
 /// https://maplibre.org/maplibre-style-spec/sources/#video
 ///

@@ -54,12 +54,11 @@ I decided to start fresh and started a new package.
   unit tests, widget tests, and integration tests.
 - An example app showcasing a variety of features and use cases is available as
   a [hosted example application](https://flutter-maplibre.pages.dev/demo/).
-- To avoid bottlenecks caused by platform channels, the package utilizes FFI
-  interoperability with Objective-C and Swift, as well as a combination of JNI
-  and FFI for Java and Kotlin.
-- Desktop platforms are supported by rendering the map in a WebView. This is a
-  relatively simple solution that allows to support Windows and macOS with a
-  single implementation.
+- To avoid bottlenecks caused by platform channels, the package calls the
+  [MapLibre Native C API](https://github.com/maplibre/maplibre-native-ffi)
+  through FFI on Android, iOS, macOS, Windows and Linux. One implementation
+  serves all of them, and each map renders into a Flutter `Texture` instead of
+  a platform view.
 
 ## mapbox_maps_flutter
 

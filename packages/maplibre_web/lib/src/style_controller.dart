@@ -30,7 +30,10 @@ class StyleControllerWeb extends StyleController {
   Future<void> removeLayer(String id) async => _map.removeLayer(id);
 
   @override
-  Future<void> removeSource(String id) async => _map.removeSource(id);
+  Future<void> removeSource(String id) async {
+    // Removing a source the style lacks is not an error on other platforms.
+    if (_map.getSource(id) != null) _map.removeSource(id);
+  }
 
   @override
   Future<void> updateGeoJsonSource({
@@ -209,38 +212,55 @@ class StyleControllerWeb extends StyleController {
         }
         _map.addSource(
           source.id,
-          interop.SourceSpecification.geoJson(
-            type: 'geojson',
-            data: data,
-            tolerance: source.tolerance,
-          ),
+          _sourceSpecification({
+            'type': 'geojson',
+            'maxzoom': source.maxZoom,
+            'tolerance': source.tolerance,
+            'attribution': source.attribution,
+          }, data: data),
         );
       case RasterDemSource():
         _map.addSource(
           source.id,
-          interop.SourceSpecification.rasterDem(
-            type: 'raster-dem',
-            tileSize: source.tileSize,
-            attribution: source.attribution,
-            url: source.url,
-            tiles: source.tiles.jsify(),
-          ),
+          _sourceSpecification({
+            'type': 'raster-dem',
+            'url': source.url,
+            'tiles': source.tiles,
+            'bounds': source.bounds,
+            'minzoom': source.minZoom,
+            'maxzoom': source.maxZoom,
+            'tileSize': source.tileSize,
+            'attribution': source.attribution,
+          }),
         );
       case RasterSource():
         _map.addSource(
           source.id,
-          interop.SourceSpecification.raster(
-            type: 'raster',
-            attribution: source.attribution,
-            tileSize: source.tileSize,
-            tiles: source.tiles.jsify(),
-            url: source.url,
-          ),
+          _sourceSpecification({
+            'type': 'raster',
+            'url': source.url,
+            'tiles': source.tiles,
+            'bounds': source.bounds,
+            'minzoom': source.minZoom,
+            'maxzoom': source.maxZoom,
+            'tileSize': source.tileSize,
+            'scheme': source.scheme.name,
+            'attribution': source.attribution,
+          }),
         );
       case VectorSource():
         _map.addSource(
           source.id,
-          interop.SourceSpecification.vector(type: 'vector', url: source.url),
+          _sourceSpecification({
+            'type': 'vector',
+            'url': source.url,
+            'tiles': source.tiles,
+            'bounds': source.bounds,
+            'minzoom': source.minZoom,
+            'maxzoom': source.maxZoom,
+            'scheme': source.scheme.name,
+            'attribution': source.attribution,
+          }),
         );
       case ImageSource():
         _map.addSource(
@@ -290,4 +310,17 @@ class StyleControllerWeb extends StyleController {
   void setProjection(MapProjection projection) => _map.setProjection(
     interop.ProjectionSpecification(type: projection.name),
   );
+}
+
+/// A source specification of the [properties] that are set. MapLibre GL JS
+/// rejects a property that is present but null.
+interop.SourceSpecification _sourceSpecification(
+  Map<String, Object?> properties, {
+  JSAny? data,
+}) {
+  final spec =
+      ({...properties}..removeWhere((key, value) => value == null)).jsify()!
+          as JSObject;
+  if (data != null) spec.setProperty('data'.toJS, data);
+  return spec as interop.SourceSpecification;
 }

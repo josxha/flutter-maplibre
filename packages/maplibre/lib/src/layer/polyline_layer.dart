@@ -45,6 +45,7 @@ class PolylineLayer extends Layer<Feature<LineString>> {
     'line-opacity': opacity,
     'line-width': width,
     'line-gap-width': gapWidth,
+    'line-blur': blur,
     if (dashArray case final List<int> dashArray) 'line-dasharray': dashArray,
   };
 

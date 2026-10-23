@@ -1,0 +1,56 @@
+name: maplibre_native
+description: "MapLibre Native implementation of the Flutter MapLibre plugin for all non-web platforms, rendering through the MapLibre Native C API."
+version: 0.4.0
+publish_to: none
+repository: https://github.com/josxha/flutter-maplibre
+issue_tracker: https://github.com/josxha/flutter-maplibre/issues
+homepage: https://flutter-maplibre.pages.dev
+documentation: https://flutter-maplibre.pages.dev/docs/
+
+platforms: { android: , ios: , linux: , macos: , windows: }
+
+resolution: workspace
+
+environment:
+  sdk: ^3.13.0
+  flutter: ">=3.47.0"
+
+dependencies:
+  ffi: ^2.1.4
+  flutter: { sdk: flutter }
+  jni: ^1.1.0
+  maplibre_native_ffi: ^0.202610.2
+  maplibre_platform_interface: ^0.3.6
+  path_provider: ^2.1.5
+
+dev_dependencies:
+  flutter_test: { sdk: flutter }
+  very_good_analysis: ^10.0.0
+
+flutter:
+  plugin:
+    implements: maplibre
+    platforms:
+      android:
+        package: com.github.josxha.maplibre_native
+        pluginClass: MaplibreNativePlugin
+        dartPluginClass: MapLibrePluginNative
+        dartFileName: 'src/maplibre_plugin.dart'
+      ios:
+        pluginClass: MaplibreNativePlugin
+        dartPluginClass: MapLibrePluginNative
+        dartFileName: 'src/maplibre_plugin.dart'
+        sharedDarwinSource: true
+      linux:
+        pluginClass: MaplibreNativePlugin
+        dartPluginClass: MapLibrePluginNative
+        dartFileName: 'src/maplibre_plugin.dart'
+      macos:
+        pluginClass: MaplibreNativePlugin
+        dartPluginClass: MapLibrePluginNative
+        dartFileName: 'src/maplibre_plugin.dart'
+        sharedDarwinSource: true
+      windows:
+        pluginClass: MaplibreNativePluginCApi
+        dartPluginClass: MapLibrePluginNative
+        dartFileName: 'src/maplibre_plugin.dart'

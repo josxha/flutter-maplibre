@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
-import 'package:pointer_interceptor/pointer_interceptor.dart';
 
 /// Display a zoom-in and zoom-out button to the [MapLibreMap] by using it in
 /// [MapLibreMap.children].
@@ -11,16 +10,15 @@ import 'package:pointer_interceptor/pointer_interceptor.dart';
 ///
 /// {@category UI}
 @immutable
-class MapControlButtons extends StatefulWidget {
+class MapControlButtons extends StatelessWidget {
   /// Display a zoom-in and zoom-out button to the [MapLibreMap] by using it in
   /// [MapLibreMap.children].
   const MapControlButtons({
     super.key,
     this.padding = const EdgeInsets.symmetric(vertical: 50, horizontal: 12),
     this.alignment = Alignment.bottomRight,
-    this.showTrackLocation = false,
-    this.requestPermissionsExplanation =
-        'We need your location to show it on the map.',
+    this.tracking,
+    this.onTrackingPressed,
   });
 
   /// The padding.
@@ -29,143 +27,57 @@ class MapControlButtons extends StatefulWidget {
   /// The alignment of the buttons.
   final Alignment alignment;
 
-  /// Whether to show the track location button.
-  ///
-  /// This button is currently not available on web.
-  final bool showTrackLocation;
+  /// The tracking of the [UserLocationLayer], which the location button
+  /// shows.
+  final UserLocationTracking? tracking;
 
-  /// The explanation to show when requesting location permissions.
-  final String requestPermissionsExplanation;
-
-  @override
-  State<MapControlButtons> createState() => _MapControlButtonsState();
-}
-
-class _MapControlButtonsState extends State<MapControlButtons> {
-  late final PermissionManager? _permissionManager;
-  _TrackLocationState _trackState = _TrackLocationState.gpsNotFixed;
-  late bool _trackLocationButtonInitialized = false;
-
-  bool get _showLocationButton =>
-      MapController.userLocationIsSupported && widget.showTrackLocation;
-
-  @override
-  void initState() {
-    super.initState();
-    if (_showLocationButton) {
-      _permissionManager = PermissionManager();
-    }
-  }
+  /// Called when the location button is pressed, usually to start tracking
+  /// the user location with a [UserLocationLayer]. The button shows only
+  /// when this is set.
+  final VoidCallback? onTrackingPressed;
 
   @override
   Widget build(BuildContext context) {
     final controller = MapController.maybeOf(context);
     if (controller == null) return const SizedBox.shrink();
 
-    if (_showLocationButton) {
-      if (!_trackLocationButtonInitialized) {
-        _trackLocationButtonInitialized = true;
-        if (_permissionManager?.locationPermissionsGranted ?? false) {
-          WidgetsBinding.instance.addPostFrameCallback((_) async {
-            await _initializeLocation(controller, trackLocation: false);
-          });
-        }
-      }
-    }
-
     return SafeArea(
       child: Container(
-        alignment: widget.alignment,
-        padding: widget.padding,
-        child: PointerInterceptor(
-          child: Column(
-            spacing: 8,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              FloatingActionButton(
-                heroTag: 'MapLibreZoomInButton',
-                onPressed: () => controller.animateCamera(
-                  zoom: controller.getCamera().zoom + 1,
-                  nativeDuration: const Duration(milliseconds: 200),
-                ),
-                child: const Icon(Icons.add),
+        alignment: alignment,
+        padding: padding,
+        child: Column(
+          spacing: 8,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            FloatingActionButton(
+              heroTag: 'MapLibreZoomInButton',
+              onPressed: () => controller.animateCamera(
+                zoom: controller.getCamera().zoom + 1,
+                nativeDuration: const Duration(milliseconds: 200),
               ),
-              FloatingActionButton(
-                heroTag: 'MapLibreZoomOutButton',
-                onPressed: () => controller.animateCamera(
-                  zoom: controller.getCamera().zoom - 1,
-                  nativeDuration: const Duration(milliseconds: 200),
-                ),
-                child: const Icon(Icons.remove),
+              child: const Icon(Icons.add),
+            ),
+            FloatingActionButton(
+              heroTag: 'MapLibreZoomOutButton',
+              onPressed: () => controller.animateCamera(
+                zoom: controller.getCamera().zoom - 1,
+                nativeDuration: const Duration(milliseconds: 200),
               ),
-              if (_showLocationButton) ...[
-                FloatingActionButton(
-                  heroTag: 'MapLibreTrackLocationButton',
-                  onPressed: () async => _initializeLocation(controller),
-                  child: _trackState == _TrackLocationState.loading
-                      ? const SizedBox.square(
-                          dimension: kDefaultFontSize,
-                          child: CircularProgressIndicator(),
-                        )
-                      : Icon(
-                          _trackState == _TrackLocationState.gpsFixed
-                              ? Icons.gps_fixed
-                              : Icons.gps_not_fixed,
-                        ),
-                ),
-              ],
-            ],
-          ),
+              child: const Icon(Icons.remove),
+            ),
+            if (onTrackingPressed case final VoidCallback onPressed)
+              FloatingActionButton(
+                heroTag: 'MapLibreTrackLocationButton',
+                onPressed: onPressed,
+                child: Icon(switch (tracking) {
+                  UserLocationTracking.position => Icons.gps_fixed,
+                  UserLocationTracking.positionAndHeading => Icons.explore,
+                  UserLocationTracking.none || null => Icons.gps_not_fixed,
+                }),
+              ),
+          ],
         ),
       ),
     );
   }
-
-  Future<void> _initializeLocation(
-    MapController controller, {
-    bool trackLocation = true,
-  }) async {
-    try {
-      if (PermissionManager.isSupported &&
-          !_permissionManager!.locationPermissionsGranted) {
-        setState(() => _trackState = _TrackLocationState.loading);
-
-        await _permissionManager.requestLocationPermissions(
-          explanation: widget.requestPermissionsExplanation,
-        );
-      }
-    } finally {
-      await _enableLocationServices(controller, trackLocation: trackLocation);
-    }
-  }
-
-  Future<void> _enableLocationServices(
-    MapController controller, {
-    bool trackLocation = true,
-  }) async {
-    if (!_permissionManager!.locationPermissionsGranted) {
-      setState(() => _trackState = _TrackLocationState.gpsNotFixed);
-    }
-
-    try {
-      await controller.enableLocation();
-      setState(() => _trackState = _TrackLocationState.gpsFixed);
-
-      if (trackLocation) await controller.trackLocation();
-    } on Exception {
-      setState(() => _trackState = _TrackLocationState.gpsNotFixed);
-    }
-  }
-}
-
-/// Location tracking state.
-enum _TrackLocationState {
-  /// Whether the permission is currently being fetched.
-  loading,
-
-  /// The permission is granted.
-  gpsFixed,
-
-  /// The permission is denied.
-  gpsNotFixed,
 }

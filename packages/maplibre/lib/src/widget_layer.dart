@@ -1,8 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre/src/translucent_pointer.dart';
-import 'package:pointer_interceptor/pointer_interceptor.dart';
 
 /// Use the [WidgetLayer] to display [Widget]s on the [MapLibreMap]
 /// by using it in [MapLibreMap.children].
@@ -19,9 +17,8 @@ class WidgetLayer extends StatelessWidget {
   /// The list of [Marker]s.
   final List<Marker> markers;
 
-  /// Allow gestures on [Marker]s on iOS and Android. The flag is not a
-  /// requirement on web but it mimics the same behaviour from other platforms
-  /// when set.
+  /// Let [Marker]s take pointers, so they can handle gestures. Otherwise
+  /// pointers pass through them to the map.
   final bool allowInteraction;
 
   @override
@@ -47,9 +44,7 @@ class WidgetLayer extends StatelessWidget {
               child: Transform(
                 transform: matrix,
                 alignment: m.alignment,
-                child: (allowInteraction && kIsWeb)
-                    ? PointerInterceptor(child: m.child)
-                    : m.child,
+                child: m.child,
               ),
             );
           })
@@ -62,8 +57,7 @@ class WidgetLayer extends StatelessWidget {
     if (allowInteraction) {
       return buildChild(offsets);
     } else {
-      // Android and iOS needs a TranslucentPointer so that the widgets don't prevent
-      // panning on the map.
+      // The markers must not keep pointers from the map's gestures.
       return TranslucentPointer(child: buildChild(offsets));
     }
   }

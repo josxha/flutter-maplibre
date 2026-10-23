@@ -1,0 +1,4 @@
+analyzer:
+  exclude:
+    - build/**
+include: ../maplibre/analysis_options.yaml

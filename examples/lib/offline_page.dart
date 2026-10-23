@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre_example/utils/map_styles.dart';
@@ -184,18 +182,6 @@ class _OfflinePageState extends State<OfflinePage> {
                   },
                 ),
                 ListTile(
-                  title: const Text('Set Offline Tile Count Limit'),
-                  onTap: () async {
-                    try {
-                      manager.setOfflineTileCountLimit(amount: 5000);
-                      _print('offline tile count limit set');
-                    } on Exception catch (error, stacktrace) {
-                      _print(error.toString());
-                      debugPrintStack(stackTrace: stacktrace);
-                    }
-                  },
-                ),
-                ListTile(
                   title: const Text('Set Maximum Ambient Cache Size'),
                   onTap: () async {
                     try {
@@ -231,19 +217,18 @@ class _OfflinePageState extends State<OfflinePage> {
                     }
                   },
                 ),
-                if (!Platform.isIOS)
-                  ListTile(
-                    title: const Text('Pack Database'),
-                    onTap: () async {
-                      try {
-                        await manager.packDatabase();
-                        _print('database optimized');
-                      } on Exception catch (error, stacktrace) {
-                        _print(error.toString());
-                        debugPrintStack(stackTrace: stacktrace);
-                      }
-                    },
-                  ),
+                ListTile(
+                  title: const Text('Pack Database'),
+                  onTap: () async {
+                    try {
+                      await manager.packDatabase();
+                      _print('database optimized');
+                    } on Exception catch (error, stacktrace) {
+                      _print(error.toString());
+                      debugPrintStack(stackTrace: stacktrace);
+                    }
+                  },
+                ),
                 ListTile(
                   title: const Text('Reset Database'),
                   onTap: () async {
@@ -256,19 +241,6 @@ class _OfflinePageState extends State<OfflinePage> {
                     }
                   },
                 ),
-                if (!Platform.isIOS)
-                  ListTile(
-                    title: const Text('Run Pack Database Automatically'),
-                    onTap: () async {
-                      try {
-                        manager.runPackDatabaseAutomatically(enabled: true);
-                        _print('enable automatic database optimization');
-                      } on Exception catch (error, stacktrace) {
-                        _print(error.toString());
-                        debugPrintStack(stackTrace: stacktrace);
-                      }
-                    },
-                  ),
               ],
             );
           }
