@@ -164,10 +164,24 @@ jobs:
           flags: unit
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      # After all tests pass on Linux, flutter_tools deletes its test listener
+      # directory a second time and exits with a PathNotFoundException. That
+      # one error passes; any failed test or other error still fails the step.
       - name: "Run integration tests"
-        run: >
-          xvfb-run -a flutter test integration_test/all_test.dart -d linux
-          --coverage --coverage-package '^maplibre(_native|_platform_interface|_web)?$'
+        shell: bash
+        run: |
+          set +e
+          coverage=(--coverage --coverage-package '^maplibre(_native|_platform_interface|_web)?$')
+          xvfb-run -a flutter test integration_test/all_test.dart -d linux "${coverage[@]}" 2>&1 | tee test.log
+          status=${PIPESTATUS[0]}
+          set -e
+          if [ "$status" -ne 0 ]; then
+            grep -q 'Deletion failed, path = .*flutter_test_listener' test.log || exit "$status"
+            ! grep -q '(failed)' test.log || exit "$status"
+            grep -q 'Passing tests' test.log || exit "$status"
+            test -s coverage/lcov.info || exit "$status"
+            echo "::warning::flutter_tools failed to clean up after the passing tests."
+          fi
       # lcov names the packages relative to examples; Codecov needs them
       # relative to the repository.
       - name: "Make the coverage paths relative to the repository"
