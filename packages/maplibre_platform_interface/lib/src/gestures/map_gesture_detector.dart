@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -61,6 +62,20 @@ class MapGestureDetector extends StatefulWidget {
 
   /// The map.
   final Widget child;
+
+  /// Logical pixels per pixel of a wheel event's scroll delta, so that a
+  /// wheel notch zooms as far as in MapLibre GL JS.
+  ///
+  /// Flutter web takes the CSS pixels of a browser wheel event as physical
+  /// pixels and divides them by the device pixel ratio, except on macOS,
+  /// where it multiplies them first. So on a 2x screen a wheel notch would
+  /// zoom half as far.
+  @visibleForTesting
+  static double wheelPixelScale({
+    required bool isWeb,
+    required TargetPlatform platform,
+    required double devicePixelRatio,
+  }) => isWeb && platform != TargetPlatform.macOS ? devicePixelRatio : 1;
 
   @override
   State<MapGestureDetector> createState() => _MapGestureDetectorState();
@@ -188,7 +203,12 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
     final double levels;
     switch (event) {
       case PointerScrollEvent(:final scrollDelta):
-        levels = -scrollDelta.dy * _wheelZoomRate;
+        final scale = MapGestureDetector.wheelPixelScale(
+          isWeb: kIsWeb,
+          platform: defaultTargetPlatform,
+          devicePixelRatio: View.of(context).devicePixelRatio,
+        );
+        levels = -scrollDelta.dy * scale * _wheelZoomRate;
       // A trackpad pinch where the platform reports it as a signal, as on
       // the web.
       case PointerScaleEvent(:final scale) when scale > 0:

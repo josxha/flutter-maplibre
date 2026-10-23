@@ -37,8 +37,6 @@ Known gaps are tracked in detail in [`.agents/decisions.md`](.agents/decisions.m
   Dart over animated camera deltas.
 - Web lost gl-js keyboard navigation, shift-drag box zoom and the grab
   cursor, which the shared recognizer doesn't offer.
-- The wheel zooms half as far on 2x screens on web, since Flutter divides
-  Chrome's wheel delta by the device pixel ratio.
 - Android frame sync: an OpenGL ES map wakes its render thread through the
   Dart isolate; the binding now takes `Wake.native`, so the JNI shim could
   wake it directly. Two OpenGL ES maps still use two threads and contexts,

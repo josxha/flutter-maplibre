@@ -249,8 +249,10 @@ Each entry: the decision, then why.
   left-button drag rotates and tilts as in MapLibre GL JS: 0.8° bearing per
   horizontal pixel, flipped above the center so the map turns like a wheel,
   and 0.5° pitch per vertical pixel, up tilting further. A scroll wheel zooms
-  1/450 level per pixel, as GL JS; a trackpad pinch that arrives as a scale
-  signal zooms by its scale.
+  1/450 level per CSS pixel, as GL JS (Flutter web divides the browser's
+  wheel delta by the device pixel ratio except on macOS, so the recognizer
+  multiplies it back); a trackpad pinch that arrives as a scale signal
+  zooms by its scale.
 
 ## Tests
 
@@ -347,9 +349,6 @@ Each entry: the decision, then why.
 - Web lost gl-js's keyboard navigation and shift-drag box zoom, which the
   shared recognizer doesn't offer, and its grab cursor. Zoom and rotation
   don't fling, only pans.
-- The wheel zooms 1/450 level per logical pixel everywhere. Flutter web
-  divides Chrome's wheel delta by the device pixel ratio, so on a 2x screen
-  a wheel notch zooms half as far as in plain gl-js.
 - Native maps ignore the fling velocity of `gestureEnd`: a released pan
   stops dead. The C API has no inertia, so it would run in Dart over
   animated camera deltas.

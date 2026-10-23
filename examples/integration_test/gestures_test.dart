@@ -78,12 +78,17 @@ void runTests() {
       final before = map.controller.getCamera();
       final pointer = TestPointer(1, PointerDeviceKind.mouse);
       await tester.sendEventToBinding(pointer.hover(map.toGlobal(map.center)));
-      // 450 px is one zoom level, as in MapLibre GL JS.
+      // 450 CSS px is one zoom level, as in MapLibre GL JS. The test sends
+      // logical pixels, which Flutter web would have divided by the device
+      // pixel ratio.
       await tester.sendEventToBinding(pointer.scroll(const Offset(0, -450)));
+      final levels = kIsWeb && defaultTargetPlatform != TargetPlatform.macOS
+          ? tester.view.devicePixelRatio
+          : 1.0;
       final after = await map.waitForCamera(
-        (camera) => camera.zoom > before.zoom + 0.9,
+        (camera) => camera.zoom > before.zoom + levels - 0.1,
       );
-      expect(after.zoom, closeTo(before.zoom + 1, 0.05));
+      expect(after.zoom, closeTo(before.zoom + levels, 0.05));
     });
 
     testWidgets('double tap zooms in and is reported', (tester) async {

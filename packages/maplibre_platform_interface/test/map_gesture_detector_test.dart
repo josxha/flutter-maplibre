@@ -159,6 +159,22 @@ void main() {
       expect(camera.calls, ['zoomBy']);
     });
 
+    test('wheel deltas are scaled back to CSS pixels on web', () {
+      double scale(TargetPlatform platform, {bool isWeb = true}) =>
+          MapGestureDetector.wheelPixelScale(
+            isWeb: isWeb,
+            platform: platform,
+            devicePixelRatio: 2,
+          );
+      expect(scale(TargetPlatform.windows), 2);
+      expect(scale(TargetPlatform.linux), 2);
+      expect(scale(TargetPlatform.android), 2);
+      // Flutter web already keeps macOS deltas in CSS pixels.
+      expect(scale(TargetPlatform.macOS), 1);
+      expect(scale(TargetPlatform.windows, isWeb: false), 1);
+      expect(scale(TargetPlatform.iOS, isWeb: false), 1);
+    });
+
     testWidgets('double tap zooms in', (tester) async {
       await pumpMap(tester);
       await tester.tapAt(_center);
