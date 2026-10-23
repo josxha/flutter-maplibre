@@ -19,18 +19,18 @@ performance.
   a fork of [mapbox-gl-js](https://github.com/mapbox/mapbox-gl-js).
 - Every other platform uses
   [maplibre-native](https://github.com/maplibre/maplibre-native) through its
-  experimental [C API](https://github.com/maplibre/maplibre-native-ffi) and
+  [C API](https://github.com/maplibre/maplibre-native-ffi) and
   the [maplibre_native_ffi](https://pub.dev/packages/maplibre_native_ffi)
   binding, rendering into a Flutter `Texture`. No platform views are used.
 
-| Platform | Implementation    | Rendering backend                      | Status       |
-|----------|-------------------|----------------------------------------|--------------|
-| Web      | `maplibre_web`    | WebGL (MapLibre GL JS)                 | Supported    |
-| Android  | `maplibre_native` | OpenGL ES 3.0 (default) or Vulkan      | Experimental |
-| iOS      | `maplibre_native` | Metal                                  | Experimental |
-| macOS    | `maplibre_native` | Metal                                  | Experimental |
-| Windows  | `maplibre_native` | Vulkan, shared with Flutter via D3D11  | Experimental |
-| Linux    | `maplibre_native` | Vulkan, shared with Flutter via OpenGL | Experimental |
+| Platform | Implementation    | Rendering backend                      |
+|----------|-------------------|----------------------------------------|
+| Web      | `maplibre_web`    | WebGL (MapLibre GL JS)                 |
+| Android  | `maplibre_native` | OpenGL ES 3.0 (default) or Vulkan      |
+| iOS      | `maplibre_native` | Metal                                  |
+| macOS    | `maplibre_native` | Metal                                  |
+| Windows  | `maplibre_native` | Vulkan, shared with Flutter via D3D11  |
+| Linux    | `maplibre_native` | Vulkan, shared with Flutter via OpenGL |
 
 MapLibre is a permissive, open-source implementation of the Mapbox Vector Tile
 (MVT) standard. By leveraging native SDKs, this package enables high-performance

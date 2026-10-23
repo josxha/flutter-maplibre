@@ -86,14 +86,14 @@ platform, so widgets over the map keep their own taps and drags without a
 
 ## Platform support
 
-| Platform | Implementation    | Renderer        | Rendering backend                      | Status       |
-|----------|-------------------|-----------------|----------------------------------------|--------------|
-| Web      | `maplibre_web`    | MapLibre GL JS  | WebGL                                  | Supported    |
-| Android  | `maplibre_native` | MapLibre Native | OpenGL ES 3.0 (default) or Vulkan      | Experimental |
-| iOS      | `maplibre_native` | MapLibre Native | Metal                                  | Experimental |
-| macOS    | `maplibre_native` | MapLibre Native | Metal                                  | Experimental |
-| Windows  | `maplibre_native` | MapLibre Native | Vulkan, shared with Flutter via D3D11  | Experimental |
-| Linux    | `maplibre_native` | MapLibre Native | Vulkan, shared with Flutter via OpenGL | Experimental |
+| Platform | Implementation    | Renderer        | Rendering backend                      |
+|----------|-------------------|-----------------|----------------------------------------|
+| Web      | `maplibre_web`    | MapLibre GL JS  | WebGL                                  |
+| Android  | `maplibre_native` | MapLibre Native | OpenGL ES 3.0 (default) or Vulkan      |
+| iOS      | `maplibre_native` | MapLibre Native | Metal                                  |
+| macOS    | `maplibre_native` | MapLibre Native | Metal                                  |
+| Windows  | `maplibre_native` | MapLibre Native | Vulkan, shared with Flutter via D3D11  |
+| Linux    | `maplibre_native` | MapLibre Native | Vulkan, shared with Flutter via OpenGL |
 
 Linux is implemented but not yet tested on a Linux machine.
 

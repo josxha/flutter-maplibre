@@ -29,7 +29,10 @@ Flutter MapLibre: a federated plugin in a Dart pub workspace.
     (Metal texture ring copied into IOSurface pixel buffers). Its C API is
     `darwin/maplibre_native/Sources/maplibre_native/include/maplibre_native/maplibre_native_api.h`,
     bound in `lib/src/darwin/bindings.g.dart`.
-- `examples/`: the reference app.
+- `examples/`: the reference app, which also runs the integration tests on
+  every platform. `integration_test/all_test.dart` runs them all in one
+  launch; `integration_test/shared/test_map.dart` pumps a map and waits for
+  its events, frames and features.
 - `tool/codegen/`: ffigen and jnigen scripts. A separate package outside the
   workspace, because the generators need newer native-asset packages than the
   binding allows.
@@ -42,6 +45,8 @@ Run these from the repo root unless noted:
 dart format $(git ls-files '*.dart')
 dart analyze --fatal-warnings --fatal-infos
 flutter test                                  # inside a package
+cd examples && flutter test integration_test/all_test.dart -d windows  # or linux, macos, an iOS simulator, an Android device
+cd examples && flutter drive --driver test_driver/integration_test.dart --target integration_test/all_test.dart -d web-server --browser-name chrome  # needs chromedriver on port 4444
 cd tool/codegen && dart run ffigen.dart       # after changing the desktop or Darwin C API header
 cd tool/codegen && dart run jnigen.dart       # after changing MaplibreNativeApi.kt; build examples for Android in release first
 packages/maplibre_native/linux/test/run_gl_texture_test.sh  # Linux zero-copy check, no Flutter build needed
@@ -59,6 +64,11 @@ build root of a maplibre-native-ffi clone in
 - Gestures are recognized once, in `MapGestureDetector`. Platforms only
   implement `GestureCameraSink`, applying screen-space steps with their own
   camera engine.
+- Test what needs no platform with unit tests in the packages, against
+  mocked controllers. Integration tests in `examples/integration_test` cover
+  what each platform implements. Prefer local styles and GeoJSON over the network, wait
+  with the `TestMap` helpers instead of fixed delays, and assert what the
+  map shows (camera, frame, features), not only that a call returns.
 - Never use method channels. Dart calls native code through ffigen (C/C++)
   or jnigen (Kotlin/Java) bindings.
 - Note API gaps of `maplibre_native_ffi` in `.agents/decisions.md`.

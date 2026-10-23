@@ -14,7 +14,6 @@ workspace:
   - examples
   - packages/maplibre
   - packages/maplibre_native
-  - packages/maplibre_native/example
   - packages/maplibre_platform_interface
   - packages/maplibre_web
 

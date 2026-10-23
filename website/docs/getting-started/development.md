@@ -19,7 +19,7 @@ One `flutter pub get` in its root resolves every package:
 | `packages/maplibre_platform_interface`  | The platform interface and the shared gesture recognizer       |
 | `packages/maplibre_web`                 | The web implementation on MapLibre GL JS                       |
 | `packages/maplibre_native`              | The implementation for every other platform                    |
-| `examples`                              | The example app, also used for the integration tests           |
+| `examples`                              | The example app, which also runs the integration tests         |
 | `tool`                                  | Scripts for code generation and releases                       |
 | `website`                               | This documentation                                             |
 
@@ -126,12 +126,17 @@ cd packages/maplibre && flutter test
 # Loads the C library and opens a runtime and a map
 cd packages/maplibre_native && flutter test
 
-# Integration tests on a device, e.g. Windows
-cd examples && flutter test integration_test/main.dart -d windows
+# Integration tests on a device: windows, linux, macos, an iOS simulator or
+# an Android device
+cd examples && flutter test integration_test/all_test.dart -d windows
+
+# Integration tests on web, with chromedriver running on port 4444
+cd examples && flutter drive --driver test_driver/integration_test.dart \
+  --target integration_test/all_test.dart -d web-server --browser-name chrome
 ```
 
-The integration tests need a device with a GPU. CI runners have none, so CI
-only runs the unit tests and builds the apps.
+CI runs the integration tests on every platform. Its runners have no GPU, so
+the maps render in software there.
 
 ## Code generation
 

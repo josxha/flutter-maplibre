@@ -251,10 +251,27 @@ Each entry: the decision, then why.
 
 ## Tests
 
+- **One Flutter app, `examples`, runs the integration tests.** Its platform
+  folders are already set up for the C library (arm64 only, the macOS
+  network entitlement, Swift Package Manager), so a second app would only
+  duplicate them. The packages have no example apps. `all_test.dart` runs
+  the suite in one launch, as each launch builds and starts the app.
+- **Unit tests cover what needs no platform** (models, annotation layers,
+  the UI widgets against a mocked `MapController`, the gesture recognizer).
+  Integration tests cover what each platform implements: rendering,
+  camera, projection, style, queries, gestures.
+- **Integration tests wait for what they assert.** Map commands and runtime
+  events are asynchronous and screen locations follow the frame on screen,
+  so the `TestMap` helpers pump until an event, a camera, a shown frame or a
+  feature query matches, with a timeout, instead of fixed delays. Styles are
+  inline JSON or assets; only tests named "(network)" load remote styles.
+- **CI runs the integration tests on every platform, rendering in software**
+  (SwiftShader in the Android emulator, lavapipe on Linux and Windows, the
+  macOS VMs' paravirtualized Metal), and uploads their coverage per
+  platform. On Windows the map then falls back to CPU readback.
 - **The recognizer is unit tested against a recording `GestureCameraSink`**
-  (`maplibre_platform_interface/test`). The integration tests in
-  `examples/integration_test/gestures_test.dart` check each platform's
-  camera end to end.
+  (`maplibre_platform_interface/test`). `examples/integration_test/gestures_test.dart`
+  checks each platform's camera end to end.
 - **`linux/test/gl_texture_test.cc` checks the Linux zero-copy path without
   Flutter**, against stand-ins for the few Flutter functions the plugin
   calls: a GDK context of a real window, the device on its UUID, exported
@@ -278,8 +295,21 @@ Each entry: the decision, then why.
   there but stays unused.
 - **CI builds and tests against the published C library.** No job builds it
   from source.
+- **CI has no build-only jobs for platforms the integration tests run on.**
+  Each integration test job builds the example app for its platform. Only
+  the web wasm build has its own job, as the tests run the JavaScript build.
 
 ## Known gaps
+
+- In the web integration tests a single tap or secondary tap reports no
+  click, while double taps and long presses do. The tap recognizer never
+  wins the gesture arena there; whether real clicks are affected is not
+  checked yet. Those two tests are skipped on web.
+
+- MapLibre Native reports no attribution for GeoJSON sources, so
+  `getAttributions` lists them on web only.
+- The `OfflineManager` is not implemented on native, although the C API has
+  offline regions.
 
 - Missing on native: globe projection, user location and permissions.
 - iOS and macOS were built and run on an arm64 Mac (Xcode 27.1, macOS 27,
@@ -299,7 +329,7 @@ Each entry: the decision, then why.
   that Flutter on Linux renders with OpenGL (an `FlTextureGL` does nothing
   for a Vulkan renderer), and that Dart's UI thread is the GTK main thread.
   To check it: run
-  `flutter test integration_test/main.dart -d linux` in `examples` with and
+  `flutter test integration_test/all_test.dart -d linux` in `examples` with and
   without `MAPLIBRE_NATIVE_DISABLE_ZERO_COPY=1`, and look for the
   "falling back to CPU readback" log line.
 - Intel Macs and x86_64 simulators have no published C library.

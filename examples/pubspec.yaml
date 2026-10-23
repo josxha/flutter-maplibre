@@ -20,7 +20,6 @@ dev_dependencies:
   flutter_launcher_icons: ^0.14.3
   flutter_test: { sdk: flutter }
   integration_test: { sdk: flutter }
-  mocktail: ^1.0.4
   very_good_analysis: ^10.0.0
 
 flutter:
