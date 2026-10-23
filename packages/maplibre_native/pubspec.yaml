@@ -19,8 +19,7 @@ dependencies:
   ffi: ^2.1.4
   flutter: { sdk: flutter }
   jni: ^1.1.0
-  maplibre_native_ffi:
-    path: vendor/maplibre-native-ffi/bindings/dart
+  maplibre_native_ffi: ^0.202610.2
   maplibre_platform_interface: ^0.3.6
 
 dev_dependencies:

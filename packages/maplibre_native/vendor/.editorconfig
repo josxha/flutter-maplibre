@@ -1,3 +1,0 @@
-# The vendored maplibre-native-ffi submodule keeps upstream's formatting.
-[*.{kt,kts}]
-ktlint_standard = disabled

@@ -23,13 +23,16 @@ dev_dependencies:
   yaml: ^3.1.2
   args: ^2.7.0
 
-# The build hook of maplibre_native_ffi picks the C library's render backend
-# per target: OpenGL ES on Android, Vulkan on Windows, and maplibre_native
-# renders through whichever one it got. To render through Vulkan on Android,
-# select it here. The define applies to every target, so iOS, which only has
-# Metal builds, can't build with it.
+# The build hook of maplibre_native_ffi downloads the C library for each
+# target and picks its render backend: OpenGL ES on Android, Metal on iOS and
+# macOS, Vulkan on Windows and Linux. maplibre_native renders through whichever
+# one it got. To render through Vulkan on Android, select it here. To use a
+# local build of maplibre-native-ffi, name its CMake build root (holding
+# <preset>/install for each target) in local_build; see CONTRIBUTING.md.
 #
 # hooks:
 #   user_defines:
 #     maplibre_native_ffi:
-#       backend: vulkan
+#       backend:
+#         android: vulkan
+#       local_build: ../maplibre-native-ffi/build

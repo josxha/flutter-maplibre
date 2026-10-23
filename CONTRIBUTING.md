@@ -58,42 +58,40 @@ Thanks for every contribution you make to the project.
 
 ## MapLibre Native C library
 
-`maplibre_native` uses the MapLibre Native C API from the
-[maplibre-native-ffi](https://github.com/maplibre/maplibre-native-ffi)
-submodule in `packages/maplibre_native/vendor/maplibre-native-ffi`. Clone with
-`--recurse-submodules`, or run `git submodule update --init` once.
+`maplibre_native` uses the MapLibre Native C API through
+[maplibre_native_ffi](https://pub.dev/packages/maplibre_native_ffi), whose
+build hook downloads the prebuilt library of its release for each target.
 
-Without further setup, the build hook of its Dart binding downloads a prebuilt
-library. To build and use a local one on Windows, install Visual Studio 2022
-with C++, standalone LLVM (`clang-cl`), CMake, Ninja, Rust, and
-`cargo install cargo-about --version 0.9.2 --locked --features cli`. Then, in
-Git Bash from `packages/maplibre_native/vendor/maplibre-native-ffi`:
+To use a local build instead, clone
+[maplibre-native-ffi](https://github.com/maplibre/maplibre-native-ffi) at the
+release tag the pubspec resolves to (e.g. next to this repository) and build
+the presets you need, as its development docs describe. On Windows, install
+Visual Studio 2022 with C++, standalone LLVM (`clang-cl`), CMake, Ninja, Rust,
+and `cargo install cargo-about --version 0.9.2 --locked --features cli`. Then,
+in Git Bash from the clone:
 
 ```bash
 bash .mise/bin/sync-submodules
-powershell -ExecutionPolicy Bypass -File .mise/bin/sync-rustls-platform-verifier.ps1
 source .mise/bin/windows-msvc-env.sh
 cmake --preset windows-x64-vulkan -DBUILD_TESTING=OFF
 cmake --build --preset windows-x64-vulkan
-mkdir -p bindings/dart/.dart_tool
-echo "$(pwd -W)/build/windows-x64-vulkan/install" > bindings/dart/.dart_tool/maplibre_native_install_dir
 ```
 
 The MSVC standard library requires a matching Clang version; an older LLVM
 works with an older MSVC toolset (load its `vcvars64.bat` instead of sourcing
-`windows-msvc-env.sh`). Delete the `maplibre_native_install_dir` file to go
-back to the prebuilt library.
+`windows-msvc-env.sh`). On an arm64 Mac, install Xcode, CMake, and Ninja
+(`brew install cmake ninja`) and build `macos-arm64-metal`,
+`ios-simulator-arm64-metal`, or `ios-arm64-metal` the same way; the Apple
+presets need no Rust.
 
-On an arm64 Mac, install Xcode, CMake, and Ninja (`brew install cmake ninja`);
-the Apple presets need no Rust. Then, from
-`packages/maplibre_native/vendor/maplibre-native-ffi`, build the preset of the
-target you run next (`macos-arm64-metal`, `ios-simulator-arm64-metal`, or
-`ios-arm64-metal` for devices) and point the build hook at it from the repo
-root:
+Then name the clone's build root in the root `pubspec.yaml`. The hook takes
+`<preset>/install` under it for each target:
 
-```bash
-bash .mise/bin/sync-submodules
-cmake --preset macos-arm64-metal -DBUILD_TESTING=OFF
-cmake --build --preset macos-arm64-metal
-cd ../../../.. && dart tool/use_native_build.dart macos-arm64-metal
+```yaml
+hooks:
+  user_defines:
+    maplibre_native_ffi:
+      local_build: ../maplibre-native-ffi/build
 ```
+
+Remove the setting to go back to the prebuilt library.

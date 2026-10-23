@@ -17,29 +17,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-        with: { submodules: true }
       - uses: subosito/flutter-action@v2
         with: { cache: true }
       - name: "Get Flutter dependencies"
         run: dart pub get
       - name: Lint analysis
-        # git ls-files leaves out the vendored maplibre-native-ffi submodule.
         run: dart format --set-exit-if-changed $(git ls-files '*.dart')
   lints-swift:
     name: "[Swift] Check formatting"
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v7
-        with: { submodules: true }
       - name: "Format Swift code"
-        # The vendored submodule keeps upstream's formatting.
-        run: swiftformat --verbose --lint . --exclude packages/maplibre_native/vendor --reporter github-actions-log --swiftversion 6 --disable trailingCommas
+        run: swiftformat --verbose --lint . --reporter github-actions-log --swiftversion 6 --disable trailingCommas
   lint-dart:
     name: "[Dart] Static code analysis"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-        with: { submodules: true }
       - uses: subosito/flutter-action@v2
         with: { cache: true }
       - name: "Get Flutter dependencies"
@@ -51,7 +46,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-        with: { submodules: true }
       - name: ktlint
         uses: ScaCap/action-ktlint@v1
         with:
@@ -72,7 +66,6 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v7
-        with: { submodules: true }
       - name: "Setup Flutter SDK"
         uses: subosito/flutter-action@v2
         with:
@@ -98,8 +91,6 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
-        # The workspace resolves maplibre_native's binding from the submodule.
-        with: { submodules: true }
       - name: "Setup Flutter SDK"
         uses: subosito/flutter-action@v2
         with:
@@ -121,7 +112,6 @@ jobs:
 #    timeout-minutes: 30
 #    steps:
 #      - uses: actions/checkout@v7
-        with: { submodules: true }
 #      - uses: subosito/flutter-action@v2
 #        with: { cache: true }
 #      - name: Install dependencies
@@ -154,8 +144,7 @@ jobs:
 #    timeout-minutes: 30
 #    steps:
 #      - uses: actions/checkout@v7
-#        with: { submodules: true }
-#      - name: "Setup Flutter SDK"
+##      - name: "Setup Flutter SDK"
 #        uses: subosito/flutter-action@v2
 #        with: { cache: true }
 #      - uses: actions/setup-java@v6
@@ -238,7 +227,6 @@ jobs:
         sdk: [ '3.47.0', '' ]
     steps:
       - uses: actions/checkout@v7
-        with: { submodules: true }
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ matrix.sdk }}
@@ -269,7 +257,6 @@ jobs:
         sdk: [ '3.47.0', '' ]
     steps:
       - uses: actions/checkout@v7
-        with: { submodules: true }
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ matrix.sdk }}
@@ -296,7 +283,6 @@ jobs:
         sdk: [ '3.47.0', '' ]
     steps:
       - uses: actions/checkout@v7
-        with: { submodules: true }
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ matrix.sdk }}
@@ -305,89 +291,15 @@ jobs:
         run: dart pub get
       - name: Build web
         run: flutter build web
-  native-windows:
-    name: "[Windows] Build MapLibre Native C library"
-    runs-on: windows-2022
-    timeout-minutes: 120
-    env:
-      FFI_DIR: packages/maplibre_native/vendor/maplibre-native-ffi
-    steps:
-      - name: "Enable Git long paths"
-        run: git config --global core.longpaths true
-      - uses: actions/checkout@v7
-        with: { submodules: true }
-      - name: "Read the pinned maplibre-native-ffi commit"
-        id: ffi
-        shell: bash
-        run: echo "sha=$(git -C "$FFI_DIR" rev-parse HEAD)" >> "$GITHUB_OUTPUT"
-      # The library only changes with the submodule commit, and a cold build
-      # takes most of an hour.
-      - name: "Restore the built library"
-        id: cache
-        uses: actions/cache@v6
-        with:
-          path: ${{ env.FFI_DIR }}/build/windows-x64-vulkan/install
-          key: maplibre-native-c-windows-x64-vulkan-${{ steps.ffi.outputs.sha }}
-      - name: "Sync the MapLibre Native sources and patches"
-        if: steps.cache.outputs.cache-hit != 'true'
-        shell: bash
-        working-directory: ${{ env.FFI_DIR }}
-        run: bash .mise/bin/sync-submodules
-      - name: "Sync the Rust platform verifier"
-        if: steps.cache.outputs.cache-hit != 'true'
-        shell: pwsh
-        working-directory: ${{ env.FFI_DIR }}
-        run: ./.mise/bin/sync-rustls-platform-verifier.ps1
-      - name: "Install Ninja"
-        if: steps.cache.outputs.cache-hit != 'true'
-        uses: seanmiddleditch/gha-setup-ninja@v6
-      - name: "Install cargo-about"
-        if: steps.cache.outputs.cache-hit != 'true'
-        uses: taiki-e/install-action@v2
-        with: { tool: cargo-about@0.9.2 }
-      # windows-msvc-env.sh loads the newest Visual Studio 2022 environment and
-      # puts the runner's standalone LLVM (clang-cl) first on PATH. The tests,
-      # and with them a Vulkan SDK, are left out.
-      - name: "Build the C library"
-        if: steps.cache.outputs.cache-hit != 'true'
-        shell: bash
-        working-directory: ${{ env.FFI_DIR }}
-        run: |
-          export MLN_FFI_WINDOWS_HOST_ARCHITECTURE=x64
-          source .mise/bin/windows-msvc-env.sh
-          clang-cl --version
-          cmake --preset windows-x64-vulkan -DBUILD_TESTING=OFF
-          cmake --build --preset windows-x64-vulkan
-      - uses: actions/upload-artifact@v7
-        with:
-          name: maplibre-native-c-windows-x64-vulkan
-          path: ${{ env.FFI_DIR }}/build/windows-x64-vulkan/install
-          if-no-files-found: error
   build-windows:
     name: "[Windows] Build"
-    needs: native-windows
     runs-on: windows-2022
-    env:
-      FFI_DIR: packages/maplibre_native/vendor/maplibre-native-ffi
     strategy:
       fail-fast: false
       matrix:
         sdk: [ '3.47.0', '' ]
     steps:
       - uses: actions/checkout@v7
-        with: { submodules: true }
-      - uses: actions/download-artifact@v8
-        with:
-          name: maplibre-native-c-windows-x64-vulkan
-          path: ${{ env.FFI_DIR }}/build/windows-x64-vulkan/install
-      # Points the build hook of the Dart binding at the library built above
-      # instead of the published snapshot, which lags the pinned binding.
-      - name: "Use the built library"
-        shell: bash
-        run: |
-          mkdir -p "$FFI_DIR/bindings/dart/.dart_tool"
-          echo "$(cd "$FFI_DIR" && pwd -W)/build/windows-x64-vulkan/install" \
-            > "$FFI_DIR/bindings/dart/.dart_tool/maplibre_native_install_dir"
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ matrix.sdk }}
@@ -433,7 +345,6 @@ jobs:
         sdk: [ '3.47.0', '' ]
     steps:
       - uses: actions/checkout@v7
-        with: { submodules: true }
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ matrix.sdk }}

@@ -7,9 +7,11 @@ Each entry: the decision, then why.
 - **Two platform packages: `maplibre_web` for the browser and `maplibre_native`
   for everything else.** One C API serves every native platform, so the
   per-platform packages (android, ios, webview) were removed.
-- **The C API comes from `maplibre/maplibre-native-ffi` PR #760, as a
-  submodule pinned to `ff99652db`.** The binding is a path dependency, so
-  `maplibre` can't publish until the binding is on pub.dev.
+- **The C API comes from the `maplibre_native_ffi` package on pub.dev
+  (0.202610.2), whose build hook downloads the prebuilt C library of its
+  release, checked against digests pinned in the package.** No submodule and
+  no local C build are needed; `local_build` (see Build and CI) points the
+  hook at one when the C library changes.
 - **Rendering goes only through the texture registry, never platform views.**
   This keeps Flutter composition, transforms, and overlays working.
 - **Windows and Linux render through Vulkan. Android renders through OpenGL
@@ -19,9 +21,9 @@ Each entry: the decision, then why.
   Vulkan-first. On Android, OpenGL ES runs on every device,
   while Vulkan 1.1 drivers are missing or unreliable on many older ones.
 - **The C library carries one backend, and Dart follows it at runtime.** The
-  binding's build hook picks it per target (OpenGL ES on Android, Vulkan on
-  Windows and Linux) unless `hooks.user_defines.maplibre_native_ffi.backend`
-  names one, and `mln_supported_render_backend_mask()` tells `MapRenderer`
+  binding's build hook picks it per target (OpenGL ES on Android, Metal on
+  iOS and macOS, Vulkan on Windows and Linux) unless
+  `hooks.user_defines.maplibre_native_ffi.backend.<os>` names one, and `mln_supported_render_backend_mask()` tells `MapRenderer`
   which path to take. The workspace sets no backend.
 - **Dart reaches the platform plugins through ffigen (Windows, Linux, iOS,
   macOS) and jnigen (Android), never method channels.** Calls are synchronous
@@ -112,9 +114,9 @@ Each entry: the decision, then why.
   thread until the next frame, and EGL defers destroying it until then.
 - **A VkSurfaceKHR stays alive when `abandon` quarantines its swapchain.** The
   C API requires the parent to outlive kept children.
-- **The patched rustls-platform-verifier `CertificateVerifier.kt` is vendored
-  verbatim, along with its licenses and keep rules.** The C library calls it
-  over JNI for TLS. ktlint skips it.
+- **The plugin ships no TLS verifier code.** The C library embeds the dex of
+  its rustls-platform-verifier helper and loads it in `mln_android_init`, so
+  the APK needs no Java classes or keep rules for it.
 
 ## iOS and macOS
 
@@ -153,8 +155,8 @@ Each entry: the decision, then why.
 - **One process-wide VkDevice and VkQueue are shared by every map, without
   `mln_queue_lock`.** The C library serializes every session's submits and
   presents per queue (`vulkan_queue_access.cpp`). A lock is only needed if
-  host code uses the queue, and none does. The Dart binding doesn't expose
-  `queue_lock` yet.
+  host code uses the queue, and none does. The binding takes one as
+  `QueueLock.native` from host native code.
 - **Widgets over the map follow the frame on screen, not the latest camera.**
   Each rendered frame result carries the view it drew; when Flutter can show
   that frame, the renderer creates its projection (`mapProjectionCreate`) and
@@ -265,26 +267,25 @@ Each entry: the decision, then why.
 
 ## Build and CI
 
-- **`tool/use_native_build.dart` points the build hook at a local C build.**
-  The hook takes one prefix and checks its target. The tool runs from the
-  repo root so the hook doesn't run first for the host.
+- **A local C build is named in the root `pubspec.yaml` as
+  `hooks.user_defines.maplibre_native_ffi.local_build`, a maplibre-native-ffi
+  CMake build root.** The hook takes `<preset>/install` under it for each
+  target, so one setting serves every platform and Android ABI.
 - **ffigen and jnigen run from `tool/codegen`, a package outside the
-  workspace.** ffigen 23 and jnigen 1.0.1 need `code_assets ^2`, while the
-  binding pins `^1.2`. Outside the workspace, the binding's build hook doesn't
-  run either. jnigen uses the example app's Gradle classpath.
+  workspace.** Outside the workspace, the binding's build hook doesn't run
+  during code generation. jnigen uses the example app's Gradle classpath.
 - **`package:jni` is also an FFI plugin on Windows and Linux.** It builds
   there but stays unused.
-- **The Windows CI job builds the C library from the submodule and caches it
-  by submodule commit.** Other jobs use the upstream snapshot from the
-  binding's main branch, not PR #760.
+- **CI builds and tests against the published C library.** No job builds it
+  from source.
 
 ## Known gaps
 
 - Missing on native: globe projection, user location and permissions.
-- iOS and macOS are built and run on an arm64 Mac (Xcode 27.1, macOS 27,
-  iOS 26.4 simulator) only against a local C build, and not yet on an iOS
-  device. The published snapshot lags the pinned binding's headers, and the
-  native smoke test segfaults against it on macOS.
+- iOS and macOS were built and run on an arm64 Mac (Xcode 27.1, macOS 27,
+  iOS 26.4 simulator) only against a local C build of an earlier binding
+  commit, and not yet on an iOS device or against the 0.202610.2 release
+  library. Windows passes the smoke test against the release library.
 - The C library's Apple presets target macOS 14.3 and iOS 15.0, above the
   plugin's `Package.swift` minimums (macOS 10.15, iOS 13).
 - `MapScalebar show and update` fails on the iOS simulator (iPhone 17) by
@@ -297,32 +298,24 @@ Each entry: the decision, then why.
   Flutter's OpenGL contexts share textures with GDK contexts of its window,
   that Flutter on Linux renders with OpenGL (an `FlTextureGL` does nothing
   for a Vulkan renderer), and that Dart's UI thread is the GTK main thread.
-  To check it: build `linux-gnu-x64-vulkan` (the snapshot lags the pinned
-  binding), `dart tool/use_native_build.dart linux-gnu-x64-vulkan`, run
+  To check it: run
   `flutter test integration_test/main.dart -d linux` in `examples` with and
   without `MAPLIBRE_NATIVE_DISABLE_ZERO_COPY=1`, and look for the
   "falling back to CPU readback" log line.
 - Intel Macs and x86_64 simulators have no published C library.
-- The backend user-define applies to every target, and the macOS presets
-  also offer Vulkan and OpenGL. With either, a macOS map throws
-  `UnsupportedError`, since the plugin only integrates Metal.
+- The macOS presets also offer Vulkan and OpenGL. Selecting either with
+  `backend.macos` makes a macOS map throw `UnsupportedError`, since the
+  plugin only integrates Metal.
 - The Metal path copies every frame on the GPU and waits for the copy on the
   Dart UI thread. Holding the shown frame acquired, or a shared event, could
   drop the copy or the wait.
-- The Dart binding lacks `queue_lock`. The Python binding has it.
-- The binding's build hook takes one local install prefix and rejects other
-  targets, so it can't pick a preset per target (needed for multi-ABI
-  Android builds).
 - Touch tilt and double-tap-drag are not tested on Windows touchscreens.
-- The `backend: vulkan` user-define that opts Android into Vulkan applies to
-  every target, but iOS only has Metal builds of the C library, so an app
-  that targets iOS can't build with it. The binding's hook would need a
-  backend per platform.
 - An OpenGL ES map wakes its render thread through the Dart isolate, a hop a
-  native wake would save. The binding only accepts Dart callbacks as wakes.
-- Two OpenGL ES maps render on two threads with two contexts. A shared
-  thread would need the session to make its dedicated context current again
-  after another session's render, which it skips.
+  native wake would save. The binding now takes `Wake.native`, so the JNI
+  shim could supply the wake itself.
+- Two OpenGL ES maps render on two threads with two contexts. The C library
+  now lets dedicated OpenGL sessions share a graphics thread, so one render
+  thread could serve every map.
 - Web lost gl-js's keyboard navigation and shift-drag box zoom, which the
   shared recognizer doesn't offer, and its grab cursor. Zoom and rotation
   don't fling, only pans.

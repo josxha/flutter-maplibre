@@ -1,4 +1,0 @@
-[submodule "packages/maplibre_native/vendor/maplibre-native-ffi"]
-	path = packages/maplibre_native/vendor/maplibre-native-ffi
-	url = https://github.com/maplibre/maplibre-native-ffi
-	branch = sargunv/binding-codegen

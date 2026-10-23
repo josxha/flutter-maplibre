@@ -2,9 +2,8 @@ name: codegen
 description: Generates the ffigen and jnigen bindings of maplibre_native.
 publish_to: none
 
-# Not part of the workspace: the generators need newer native-asset packages
-# than the MapLibre Native binding allows, and running them here keeps that
-# binding's build hook out of code generation.
+# Not part of the workspace, which keeps the build hook of the MapLibre Native
+# binding out of code generation.
 
 environment:
   sdk: ^3.13.0

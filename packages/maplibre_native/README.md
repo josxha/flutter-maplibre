@@ -3,9 +3,11 @@
 MapLibre Native implementation for [maplibre](https://pub.dev/packages/maplibre).
 
 It renders through the experimental
-[MapLibre Native C API](https://github.com/maplibre/maplibre-native-ffi),
-vendored as a submodule in `vendor/maplibre-native-ffi`, and shows each map as
-a Flutter `Texture`.
+[MapLibre Native C API](https://github.com/maplibre/maplibre-native-ffi)
+through its Dart binding
+[maplibre_native_ffi](https://pub.dev/packages/maplibre_native_ffi), whose
+build hook downloads the prebuilt C library, and shows each map as a Flutter
+`Texture`.
 
 | Platform | Rendering                                                                   |
 |----------|-----------------------------------------------------------------------------|
@@ -19,19 +21,16 @@ a Flutter `Texture`.
 
 - Renders with OpenGL ES 3.0 by default, and needs API level 24 or later.
 - To render with Vulkan instead, which needs Vulkan 1.1, select the Vulkan
-  build of the C library in the root `pubspec.yaml` of the app or workspace.
-  The setting applies to every target, and iOS and macOS render through
-  Metal only, so remove it when building for them.
+  build of the C library for Android in the root `pubspec.yaml` of the app or
+  workspace:
 
   ```yaml
   hooks:
     user_defines:
       maplibre_native_ffi:
-        backend: vulkan
+        backend:
+          android: vulkan
   ```
-
-- The plugin ships the Android TLS certificate verifier that the C library
-  calls over JNI, and keeps it from R8 with its consumer rules.
 
 ## iOS and macOS
 
@@ -58,17 +57,16 @@ a Flutter `Texture`.
 
 ## Building the C library locally
 
-By default the build hook of `maplibre_native_ffi` downloads a published
-snapshot of the C library, which can lag the pinned submodule. To use a local
-build of the submodule instead, build its preset (see the submodule's
-`CONTRIBUTING.md`) and point the hook at it from the repository root:
+By default the build hook of `maplibre_native_ffi` downloads the C library of
+the release it was published with. To use a local build of
+[maplibre-native-ffi](https://github.com/maplibre/maplibre-native-ffi)
+instead, name its CMake build root in the root `pubspec.yaml`. The hook takes
+`<preset>/install` under it for each target, so one setting serves every
+platform and Android ABI you have built:
 
-```bash
-dart tool/use_native_build.dart android-arm64-egl
+```yaml
+hooks:
+  user_defines:
+    maplibre_native_ffi:
+      local_build: ../maplibre-native-ffi/build
 ```
-
-The hook takes one install prefix at a time, so build one ABI per run, e.g.
-`flutter build apk --target-platform android-arm64`. Use
-`android-x64-egl` for emulators, `android-*-vulkan` for the Vulkan opt-in,
-`windows-x64-vulkan` for Windows, `linux-gnu-x64-vulkan` for Linux, and
-`--download` to go back to the snapshot.

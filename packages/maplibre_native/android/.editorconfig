@@ -1,8 +1,3 @@
 [*.{kt,kts}]
 # The plugin's package follows the Flutter plugin name, maplibre_native.
 ktlint_standard_package-name = disabled
-
-# The certificate verifier is vendored verbatim from maplibre-native-ffi, so it
-# keeps upstream's formatting.
-[src/main/kotlin/org/maplibre/nativeffi/**.kt]
-ktlint_standard = disabled

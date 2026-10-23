@@ -1,7 +1,6 @@
 analyzer:
   exclude:
     - build/**
-    - vendor/**
     - android/**
     - ios/**
     - web/**

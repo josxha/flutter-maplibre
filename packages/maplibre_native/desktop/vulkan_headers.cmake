@@ -1,8 +1,7 @@
 # Vulkan headers, for the device that render sessions borrow and for the
 # memory that zero-copy textures share. The loader is opened at runtime, so no
-# Vulkan SDK is needed. The headers come from a pinned release rather than the
-# vendored submodule, whose path through Flutter's plugin symlinks passes
-# MAX_PATH on Windows. Sets MLN_VULKAN_HEADERS_DIR.
+# Vulkan SDK is needed. The headers come from a pinned release. Sets
+# MLN_VULKAN_HEADERS_DIR.
 include(FetchContent)
 FetchContent_Declare(
   mln_vulkan_headers

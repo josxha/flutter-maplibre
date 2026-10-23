@@ -19,24 +19,20 @@ One `flutter pub get` in its root resolves every package:
 | `packages/maplibre_platform_interface`  | The platform interface and the shared gesture recognizer       |
 | `packages/maplibre_web`                 | The web implementation on MapLibre GL JS                       |
 | `packages/maplibre_native`              | The implementation for every other platform                    |
-| `packages/maplibre_native/vendor/maplibre-native-ffi` | The MapLibre Native C API and its Dart binding, as a Git submodule |
 | `examples`                              | The example app, also used for the integration tests           |
-| `tool`                                  | Scripts for the native build and code generation               |
+| `tool`                                  | Scripts for code generation and releases                       |
 | `website`                               | This documentation                                             |
 
 ## Get started
 
-You need Flutter 3.47 or newer. Clone the repository with its submodule and
-get the dependencies:
+You need Flutter 3.47 or newer. Clone the repository and get the
+dependencies:
 
 ```bash
-git clone --recurse-submodules https://github.com/josxha/flutter-maplibre
+git clone https://github.com/josxha/flutter-maplibre
 cd flutter-maplibre
 flutter pub get
 ```
-
-In an existing clone, run `git submodule update --init` once, and again
-whenever the pinned submodule commit changes.
 
 Then run the example app:
 
@@ -49,19 +45,21 @@ On Windows, Flutter's own requirements apply: Visual Studio 2022 with the
 *Desktop development with C++* workload. On Windows, the device needs a Vulkan
 1.1 driver. Android renders with OpenGL ES 3.0 by default; to try the Vulkan
 build there, uncomment the `hooks:` block at the end of the root
-`pubspec.yaml`.
+`pubspec.yaml` and keep only its `backend` entry.
 
 ## The MapLibre Native C library
 
-By default, the build hook of the Dart binding `maplibre_native_ffi` downloads
-a prebuilt snapshot of the C library. That snapshot is built from the
-binding's main branch and can lag the pinned submodule. If the build fails on
-missing or mismatching symbols, or you change the C library, build it from the
-submodule.
+The Dart binding
+[maplibre_native_ffi](https://pub.dev/packages/maplibre_native_ffi) comes
+from pub.dev, and its build hook downloads the prebuilt C library of its
+release for each target. You only need to build the library yourself to
+change it or to try an unreleased version.
 
 ### Build on Windows
 
-Install:
+Clone [maplibre-native-ffi](https://github.com/maplibre/maplibre-native-ffi),
+for example next to this repository, at the release tag that the workspace
+resolves to. Install:
 
 - Visual Studio 2022 with the *Desktop development with C++* workload
 - Standalone [LLVM](https://github.com/llvm/llvm-project/releases), so that
@@ -70,11 +68,10 @@ Install:
 - Rust, and `cargo install cargo-about --version 0.9.2 --locked --features cli`
 - Git for Windows, for Git Bash
 
-Then, in Git Bash from `packages/maplibre_native/vendor/maplibre-native-ffi`:
+Then, in Git Bash from the clone:
 
 ```bash
 bash .mise/bin/sync-submodules
-powershell -ExecutionPolicy Bypass -File .mise/bin/sync-rustls-platform-verifier.ps1
 source .mise/bin/windows-msvc-env.sh
 cmake --preset windows-x64-vulkan -DBUILD_TESTING=OFF
 cmake --build --preset windows-x64-vulkan
@@ -97,27 +94,25 @@ The Android presets build against the Android SDK and NDK from
 `ANDROID_HOME`. Build `android-arm64-egl` for devices or `android-x64-egl` for
 emulators, the same way as the Windows preset above. The
 [development overview](https://github.com/maplibre/maplibre-native-ffi/blob/main/docs/src/content/docs/development/overview.md)
-of the submodule lists the requirements and how to install the pinned SDK
-with mise. The `android-*-vulkan` presets build the Vulkan opt-in.
+lists the requirements and how to install the pinned SDK with mise. The
+`android-*-vulkan` presets build the Vulkan opt-in.
 
 ### Use the local build
 
-Point the build hook at a build from the repository root:
+Name the clone's build root in the root `pubspec.yaml`:
 
-```bash
-dart tool/use_native_build.dart windows-x64-vulkan
-dart tool/use_native_build.dart android-arm64-egl  # devices
-dart tool/use_native_build.dart android-x64-egl    # emulators
-dart tool/use_native_build.dart --download         # back to the snapshot
+```yaml
+hooks:
+  user_defines:
+    maplibre_native_ffi:
+      local_build: ../maplibre-native-ffi/build
 ```
 
-The tool writes the install prefix to
-`bindings/dart/.dart_tool/maplibre_native_install_dir` in the submodule. The
-hook takes one prefix at a time and rejects other targets, so switch it to the
-platform you build for next. On Android, build the matching ABI only, for
-example `flutter build apk --target-platform android-arm64`. Without a backend
-user-define, the hook takes the backend of the prefix, so pointing it at an
-`android-*-vulkan` build is enough to run the Vulkan path.
+The hook takes `<preset>/install` under it for each target, so one setting
+serves every platform and Android ABI you have built. Without a `backend`
+entry it takes the platform's default preset (`-egl` on Android); select
+`backend: { android: vulkan }` to use an `android-*-vulkan` build. Remove
+`local_build` to go back to the prebuilt library.
 
 ## Tests
 
@@ -142,8 +137,7 @@ only runs the unit tests and builds the apps.
 
 `maplibre_native` reaches its platform plugins through ffigen on Windows and
 jnigen on Android. The generators run from `tool/codegen`, a package outside
-the workspace, because they need newer native-asset packages than the
-binding allows:
+the workspace, which keeps the binding's build hook out of code generation:
 
 ```bash
 cd tool/codegen
