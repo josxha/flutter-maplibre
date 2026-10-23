@@ -1,6 +1,7 @@
 #import "MaplibreNativePlugin.h"
 
 #import <CoreVideo/CoreVideo.h>
+#import <IOSurface/IOSurfaceRef.h>
 #import <Metal/Metal.h>
 #import <os/lock.h>
 
@@ -26,215 +27,227 @@ static void RunOnMain(dispatch_block_t block) {
   }
 }
 
-/// A Flutter texture fed by a ring of Metal textures that MapLibre renders
-/// into. Each presented frame is copied on the GPU into an IOSurface-backed
-/// pixel buffer, which Flutter samples without a CPU copy. The copy keeps the
-/// ring free for MapLibre while Flutter still shows the previous frame.
+/// One ring of IOSurface-backed BGRA8 pixel buffers and the Metal textures
+/// that MapLibre renders into them.
+@interface MLNRing : NSObject
+
+@property(nonatomic, readonly) NSArray<id<MTLTexture>> *textures;
+
+- (nullable instancetype)initWithCache:(CVMetalTextureCacheRef)cache
+                                 width:(uint32_t)width
+                                height:(uint32_t)height
+                                 count:(uint32_t)count
+                                 error:(NSString *_Nullable *_Nonnull)error;
+
+- (CVPixelBufferRef)bufferAt:(uint32_t)slot;
+
+@end
+
+@implementation MLNRing {
+  CVPixelBufferRef _buffers[kMaxSlots];
+  CVMetalTextureRef _bufferTextures[kMaxSlots];
+  uint32_t _count;
+}
+
+- (nullable instancetype)initWithCache:(CVMetalTextureCacheRef)cache
+                                 width:(uint32_t)width
+                                height:(uint32_t)height
+                                 count:(uint32_t)count
+                                 error:(NSString *_Nullable *_Nonnull)error {
+  if ((self = [super init])) {
+    // BGRA8 is the layout of Flutter's pixel buffer textures, so Flutter
+    // samples the frames as MapLibre rendered them.
+    NSDictionary *attributes = @{
+      (id)kCVPixelBufferPixelFormatTypeKey : @(kCVPixelFormatType_32BGRA),
+      (id)kCVPixelBufferWidthKey : @(width),
+      (id)kCVPixelBufferHeightKey : @(height),
+      (id)kCVPixelBufferIOSurfacePropertiesKey : @{},
+      (id)kCVPixelBufferMetalCompatibilityKey : @YES,
+    };
+    // MapLibre renders into the textures, and Flutter samples them.
+    NSDictionary *textureAttributes = @{
+      (id)kCVMetalTextureUsage : @(MTLTextureUsageRenderTarget | MTLTextureUsageShaderRead),
+    };
+    NSMutableArray<id<MTLTexture>> *textures = [NSMutableArray arrayWithCapacity:count];
+    for (uint32_t i = 0; i < count; i++) {
+      CVReturn status = CVPixelBufferCreate(kCFAllocatorDefault, width, height,
+                                            kCVPixelFormatType_32BGRA,
+                                            (__bridge CFDictionaryRef)attributes, &_buffers[i]);
+      if (status != kCVReturnSuccess) {
+        *error = [NSString stringWithFormat:@"CVPixelBufferCreate failed (%d)", status];
+        return nil;
+      }
+      _count = i + 1;
+      status = CVMetalTextureCacheCreateTextureFromImage(
+          kCFAllocatorDefault, cache, _buffers[i], (__bridge CFDictionaryRef)textureAttributes,
+          MTLPixelFormatBGRA8Unorm, width, height, 0, &_bufferTextures[i]);
+      if (status != kCVReturnSuccess) {
+        *error = [NSString
+            stringWithFormat:@"CVMetalTextureCacheCreateTextureFromImage failed (%d)", status];
+        return nil;
+      }
+      [textures addObject:CVMetalTextureGetTexture(_bufferTextures[i])];
+    }
+    _textures = textures;
+  }
+  return self;
+}
+
+- (void)dealloc {
+  for (uint32_t i = 0; i < _count; i++) {
+    if (_bufferTextures[i] != NULL) CFRelease(_bufferTextures[i]);
+    CVPixelBufferRelease(_buffers[i]);
+  }
+}
+
+- (CVPixelBufferRef)bufferAt:(uint32_t)slot {
+  return _buffers[slot];
+}
+
+@end
+
+/// A Flutter texture fed by a ring of IOSurface-backed Metal textures that
+/// MapLibre renders into. Flutter samples the slot of the presented frame
+/// directly, without a copy: Dart keeps that frame acquired, so MapLibre
+/// renders into the other slots, and releases a frame it replaced once
+/// -isSlotInUse: reports that Flutter no longer samples its slot.
 @interface MLNGpuTexture : NSObject <FlutterTexture>
 
 @property(nonatomic) int64_t textureId;
 @property(nonatomic, readonly) NSArray<id<MTLTexture>> *slots;
 
 - (nullable instancetype)initWithDevice:(id<MTLDevice>)device
-                                  queue:(id<MTLCommandQueue>)queue
                                   width:(uint32_t)width
                                  height:(uint32_t)height
-                              slotCount:(uint32_t)slotCount
+                             slotCount:(uint32_t)slotCount
                                   error:(NSString *_Nullable *_Nonnull)error;
 
-/// Replaces the ring and the pixel buffers with ones of the new size. The old
-/// ring stays alive until -releaseRetiredSlots.
+/// Replaces the ring with one of the new size. The old ring stays alive until
+/// -releaseRetiredSlots, and its buffers as long as Flutter holds them.
 - (BOOL)resizeToWidth:(uint32_t)width
                height:(uint32_t)height
                 error:(NSString *_Nullable *_Nonnull)error;
 
 - (void)releaseRetiredSlots;
 
-/// Copies the frame in |slot| into a new pixel buffer, waits for the copy, and
-/// makes the buffer the one Flutter shows next.
+/// Makes the finished frame in |slot| the one Flutter shows next.
 - (BOOL)presentSlot:(uint32_t)slot error:(NSString *_Nullable *_Nonnull)error;
+
+/// Whether Flutter may still sample |slot|: it is the presented slot, the one
+/// Flutter took last, or its IOSurface is in use, as it is while the GPU
+/// reads it.
+- (BOOL)isSlotInUse:(uint32_t)slot;
 
 @end
 
 @implementation MLNGpuTexture {
-  id<MTLDevice> _device;
-  id<MTLCommandQueue> _queue;
-  NSMutableArray<NSArray<id<MTLTexture>> *> *_retired;
-  CVPixelBufferPoolRef _pool;
   CVMetalTextureCacheRef _cache;
-  /// Guards _latest, which Flutter's raster thread reads.
+  NSMutableArray<MLNRing *> *_retired;
+  MLNRing *_ring;
+  /// Guard the fields below, which Flutter's raster thread reads.
   os_unfair_lock _lock;
+  /// The buffer of the presented frame, retained, and its slot, or -1.
   CVPixelBufferRef _latest;
+  int64_t _latestSlot;
+  /// The slot that Flutter took last, whose buffer it holds until it takes
+  /// the next one.
+  int64_t _takenSlot;
 }
 
 - (nullable instancetype)initWithDevice:(id<MTLDevice>)device
-                                  queue:(id<MTLCommandQueue>)queue
                                   width:(uint32_t)width
                                  height:(uint32_t)height
-                              slotCount:(uint32_t)slotCount
+                             slotCount:(uint32_t)slotCount
                                   error:(NSString *_Nullable *_Nonnull)error {
   if ((self = [super init])) {
-    _device = device;
-    _queue = queue;
     _retired = [NSMutableArray array];
     _lock = OS_UNFAIR_LOCK_INIT;
+    _latestSlot = -1;
+    _takenSlot = -1;
     CVReturn status = CVMetalTextureCacheCreate(kCFAllocatorDefault, nil, device, nil, &_cache);
     if (status != kCVReturnSuccess) {
       *error = [NSString stringWithFormat:@"CVMetalTextureCacheCreate failed (%d)", status];
       return nil;
     }
-    NSArray<id<MTLTexture>> *slots = [self makeRingOfWidth:width
-                                                    height:height
-                                                     count:slotCount
-                                                     error:error];
-    if (slots == nil || ![self makePoolOfWidth:width height:height error:error]) return nil;
-    _slots = slots;
+    _ring = [[MLNRing alloc] initWithCache:_cache
+                                     width:width
+                                    height:height
+                                     count:slotCount
+                                     error:error];
+    if (_ring == nil) return nil;
   }
   return self;
 }
 
 - (void)dealloc {
   if (_latest != NULL) CVPixelBufferRelease(_latest);
-  if (_pool != NULL) CVPixelBufferPoolRelease(_pool);
   if (_cache != NULL) CFRelease(_cache);
 }
 
-- (nullable NSArray<id<MTLTexture>> *)makeRingOfWidth:(uint32_t)width
-                                               height:(uint32_t)height
-                                                count:(uint32_t)count
-                                                error:(NSString *_Nullable *_Nonnull)error {
-  // BGRA8 is the layout of Flutter's pixel buffer textures, so the frames copy
-  // into them without a conversion.
-  MTLTextureDescriptor *descriptor =
-      [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatBGRA8Unorm
-                                                         width:width
-                                                        height:height
-                                                     mipmapped:NO];
-  descriptor.usage = MTLTextureUsageRenderTarget | MTLTextureUsageShaderRead;
-  descriptor.storageMode = MTLStorageModePrivate;
-  NSMutableArray<id<MTLTexture>> *slots = [NSMutableArray arrayWithCapacity:count];
-  for (uint32_t i = 0; i < count; i++) {
-    id<MTLTexture> texture = [_device newTextureWithDescriptor:descriptor];
-    if (texture == nil) {
-      *error = [NSString stringWithFormat:@"Could not create a %ux%u Metal texture", width, height];
-      return nil;
-    }
-    [slots addObject:texture];
-  }
-  return slots;
-}
-
-- (BOOL)makePoolOfWidth:(uint32_t)width
-                 height:(uint32_t)height
-                  error:(NSString *_Nullable *_Nonnull)error {
-  NSDictionary *poolAttributes = @{(id)kCVPixelBufferPoolMinimumBufferCountKey : @(kMaxSlots)};
-  NSDictionary *bufferAttributes = @{
-    (id)kCVPixelBufferPixelFormatTypeKey : @(kCVPixelFormatType_32BGRA),
-    (id)kCVPixelBufferWidthKey : @(width),
-    (id)kCVPixelBufferHeightKey : @(height),
-    (id)kCVPixelBufferIOSurfacePropertiesKey : @{},
-    (id)kCVPixelBufferMetalCompatibilityKey : @YES,
-  };
-  CVPixelBufferPoolRef pool = NULL;
-  CVReturn status =
-      CVPixelBufferPoolCreate(kCFAllocatorDefault, (__bridge CFDictionaryRef)poolAttributes,
-                              (__bridge CFDictionaryRef)bufferAttributes, &pool);
-  if (status != kCVReturnSuccess) {
-    *error = [NSString stringWithFormat:@"CVPixelBufferPoolCreate failed (%d)", status];
-    return NO;
-  }
-  // Buffers of the old pool that Flutter still holds stay valid; the pool
-  // only stops handing them out.
-  if (_pool != NULL) CVPixelBufferPoolRelease(_pool);
-  _pool = pool;
-  return YES;
+- (NSArray<id<MTLTexture>> *)slots {
+  return _ring.textures;
 }
 
 - (BOOL)resizeToWidth:(uint32_t)width
                height:(uint32_t)height
                 error:(NSString *_Nullable *_Nonnull)error {
-  NSArray<id<MTLTexture>> *slots = [self makeRingOfWidth:width
-                                                  height:height
-                                                   count:(uint32_t)_slots.count
-                                                   error:error];
-  if (slots == nil || ![self makePoolOfWidth:width height:height error:error]) return NO;
-  [_retired addObject:_slots];
-  _slots = slots;
+  MLNRing *ring = [[MLNRing alloc] initWithCache:_cache
+                                           width:width
+                                          height:height
+                                           count:(uint32_t)_ring.textures.count
+                                           error:error];
+  if (ring == nil) return NO;
+  [_retired addObject:_ring];
+  os_unfair_lock_lock(&_lock);
+  _ring = ring;
+  // Slots of the new ring: Flutter keeps showing the old ring's buffer,
+  // which it retains, until a frame of the new ring is presented.
+  _latestSlot = -1;
+  _takenSlot = -1;
+  os_unfair_lock_unlock(&_lock);
   return YES;
 }
 
 - (void)releaseRetiredSlots {
-  // Command buffers retain the textures they use, so work in flight keeps
-  // them alive.
+  // Command buffers retain the textures they use, and Flutter the buffer it
+  // shows, so work in flight keeps them alive.
   [_retired removeAllObjects];
+  CVMetalTextureCacheFlush(_cache, 0);
 }
 
 - (BOOL)presentSlot:(uint32_t)slot error:(NSString *_Nullable *_Nonnull)error {
-  if (slot >= _slots.count) {
+  if (slot >= _ring.textures.count) {
     *error = [NSString stringWithFormat:@"Slot %u is not in the ring", slot];
     return NO;
   }
-  id<MTLTexture> source = _slots[slot];
-
-  CVPixelBufferRef buffer = NULL;
-  CVReturn status = CVPixelBufferPoolCreatePixelBuffer(kCFAllocatorDefault, _pool, &buffer);
-  if (status != kCVReturnSuccess) {
-    *error = [NSString stringWithFormat:@"CVPixelBufferPoolCreatePixelBuffer failed (%d)", status];
-    return NO;
-  }
-  const size_t width = CVPixelBufferGetWidth(buffer);
-  const size_t height = CVPixelBufferGetHeight(buffer);
-  CVMetalTextureRef bufferTexture = NULL;
-  status = CVMetalTextureCacheCreateTextureFromImage(kCFAllocatorDefault, _cache, buffer, nil,
-                                                     MTLPixelFormatBGRA8Unorm, width, height, 0,
-                                                     &bufferTexture);
-  if (status != kCVReturnSuccess) {
-    CVPixelBufferRelease(buffer);
-    *error = [NSString
-        stringWithFormat:@"CVMetalTextureCacheCreateTextureFromImage failed (%d)", status];
-    return NO;
-  }
-  id<MTLTexture> target = CVMetalTextureGetTexture(bufferTexture);
-
-  id<MTLCommandBuffer> commands = [_queue commandBuffer];
-  id<MTLBlitCommandEncoder> blit = [commands blitCommandEncoder];
-  [blit copyFromTexture:source
-            sourceSlice:0
-            sourceLevel:0
-           sourceOrigin:MTLOriginMake(0, 0, 0)
-             sourceSize:MTLSizeMake(MIN(source.width, width), MIN(source.height, height), 1)
-              toTexture:target
-       destinationSlice:0
-       destinationLevel:0
-      destinationOrigin:MTLOriginMake(0, 0, 0)];
-  [blit endEncoding];
-  [commands commit];
-  // MapLibre may render into the slot again once its frame is released.
-  [commands waitUntilCompleted];
-  CFRelease(bufferTexture);
-  CVMetalTextureCacheFlush(_cache, 0);
-
-  if (commands.status == MTLCommandBufferStatusError) {
-    CVPixelBufferRelease(buffer);
-    *error = [NSString stringWithFormat:@"The frame copy failed: %@", commands.error];
-    return NO;
-  }
-
+  // The frame's GPU writes completed before it became acquirable.
+  CVPixelBufferRef buffer = CVPixelBufferRetain([_ring bufferAt:slot]);
   os_unfair_lock_lock(&_lock);
   CVPixelBufferRef previous = _latest;
   _latest = buffer;
+  _latestSlot = slot;
   os_unfair_lock_unlock(&_lock);
   if (previous != NULL) CVPixelBufferRelease(previous);
   return YES;
 }
 
+- (BOOL)isSlotInUse:(uint32_t)slot {
+  if (slot >= _ring.textures.count) return NO;
+  os_unfair_lock_lock(&_lock);
+  const BOOL held = slot == _latestSlot || slot == _takenSlot;
+  os_unfair_lock_unlock(&_lock);
+  if (held) return YES;
+  IOSurfaceRef surface = CVPixelBufferGetIOSurface([_ring bufferAt:slot]);
+  return surface != NULL && IOSurfaceIsInUse(surface);
+}
+
 // Runs on Flutter's raster thread. Flutter keeps the buffer it gets until it
-// takes the next one, and the pool doesn't hand out a buffer while anyone
-// still retains it.
+// takes the next one.
 - (CVPixelBufferRef _Nullable)copyPixelBuffer {
   os_unfair_lock_lock(&_lock);
   CVPixelBufferRef buffer = _latest;
   if (buffer != NULL) CVPixelBufferRetain(buffer);
+  _takenSlot = _latestSlot;
   os_unfair_lock_unlock(&_lock);
   return buffer;
 }
@@ -246,7 +259,6 @@ static void RunOnMain(dispatch_block_t block) {
 static NSLock *gLock;
 static __weak NSObject<FlutterTextureRegistry> *gRegistry;
 static id<MTLDevice> gDevice;
-static id<MTLCommandQueue> gQueue;
 static NSMutableDictionary<NSNumber *, MLNGpuTexture *> *gTextures;
 
 /// The registry and the device, created on first use, or nil with |error|.
@@ -259,9 +271,7 @@ static NSObject<FlutterTextureRegistry> *_Nullable AcquireRegistry(char *error,
   }
   if (gDevice == nil) {
     gDevice = MTLCreateSystemDefaultDevice();
-    gQueue = [gDevice newCommandQueue];
-    if (gDevice == nil || gQueue == nil) {
-      gDevice = nil;
+    if (gDevice == nil) {
       WriteError(@"Metal is unavailable.", error, error_size);
       return nil;
     }
@@ -298,7 +308,6 @@ int64_t maplibre_native_create_gpu_texture(uint32_t width, uint32_t height, uint
   NSString *message = nil;
   if (registry != nil) {
     texture = [[MLNGpuTexture alloc] initWithDevice:gDevice
-                                              queue:gQueue
                                               width:width
                                              height:height
                                           slotCount:slot_count
@@ -366,6 +375,14 @@ bool maplibre_native_present_gpu_texture(int64_t texture_id, uint32_t slot, char
   return true;
 }
 
+bool maplibre_native_gpu_texture_slot_in_use(int64_t texture_id, uint32_t slot) {
+  [gLock lock];
+  MLNGpuTexture *texture = gTextures[@(texture_id)];
+  const BOOL inUse = texture != nil && [texture isSlotInUse:slot];
+  [gLock unlock];
+  return inUse;
+}
+
 void maplibre_native_dispose_texture(int64_t texture_id) {
   [gLock lock];
   MLNGpuTexture *texture = gTextures[@(texture_id)];
@@ -384,6 +401,8 @@ static const MaplibreNativeSymbol kSymbols[] = {
     {"maplibre_native_resize_gpu_texture", (void *)&maplibre_native_resize_gpu_texture},
     {"maplibre_native_release_retired_slots", (void *)&maplibre_native_release_retired_slots},
     {"maplibre_native_present_gpu_texture", (void *)&maplibre_native_present_gpu_texture},
+    {"maplibre_native_gpu_texture_slot_in_use",
+     (void *)&maplibre_native_gpu_texture_slot_in_use},
     {"maplibre_native_dispose_texture", (void *)&maplibre_native_dispose_texture},
     {NULL, NULL},
 };

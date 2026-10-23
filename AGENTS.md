@@ -30,8 +30,8 @@ Flutter MapLibre: a federated plugin in a Dart pub workspace.
     device). Its API is `MaplibreNativeApi.kt`, bound in
     `lib/src/android/bindings.g.dart`.
   - `darwin/`: Objective-C plugin for iOS and macOS, a SwiftPM package only
-    (Metal texture ring copied into IOSurface pixel buffers). Its C API is
-    `darwin/maplibre_native/Sources/maplibre_native/include/maplibre_native/maplibre_native_api.h`,
+    (a ring of IOSurface-backed Metal textures that Flutter samples). Its C
+    API is `darwin/maplibre_native/Sources/maplibre_native/include/maplibre_native/maplibre_native_api.h`,
     bound in `lib/src/darwin/bindings.g.dart`.
 - `examples/`: the reference app, which also runs the integration tests on
   every platform. `integration_test/all_test.dart` runs them all in one

@@ -78,6 +78,18 @@ class MaplibreNativeDarwinBindings {
   late final _maplibre_native_dispose_texture =
       _maplibre_native_dispose_texturePtr.asFunction<void Function(int)>();
 
+  bool maplibre_native_gpu_texture_slot_in_use(int texture_id, int slot) {
+    return _maplibre_native_gpu_texture_slot_in_use(texture_id, slot);
+  }
+
+  late final _maplibre_native_gpu_texture_slot_in_usePtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Int64, ffi.Uint32)>>(
+        'maplibre_native_gpu_texture_slot_in_use',
+      );
+  late final _maplibre_native_gpu_texture_slot_in_use =
+      _maplibre_native_gpu_texture_slot_in_usePtr
+          .asFunction<bool Function(int, int)>();
+
   bool maplibre_native_present_gpu_texture(
     int texture_id,
     int slot,

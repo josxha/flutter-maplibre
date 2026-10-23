@@ -39,7 +39,8 @@ Each entry: the decision, then why.
   demands the next; targets attach the session, resize, present, end the
   session, and dispose the texture. Windows, Linux, iOS, and macOS share
   `BorrowedRingTarget` (a plugin-owned ring of three images, replaced on
-  resize, each frame copied on the GPU before release).
+  resize). Windows and Linux copy each frame on the GPU before releasing it;
+  iOS and macOS keep it acquired while Flutter samples its slot.
 - **Windows and Linux share the Vulkan device code and the C API
   implementation in `desktop/`; only the texture interop differs.** The
   device matches Flutter's GPU by adapter LUID on Windows and by the OpenGL
@@ -128,16 +129,22 @@ Each entry: the decision, then why.
   deprecated and being phased out of Flutter, so there is no podspec, and the
   example's iOS and macOS projects are deintegrated from it. Apps need
   `flutter config --enable-swift-package-manager`.
-- **Sessions render into a borrowed ring of three private BGRA8 Metal
-  textures, and each acquired frame is blitted into a pixel buffer from an
-  IOSurface-backed `CVPixelBufferPool`, which the `FlutterTexture` returns
-  from `copyPixelBuffer`.** BGRA8 is what Flutter's pixel buffer textures
-  read, and the session-owned ring is RGBA8, which a blit can't swizzle.
-  Copying keeps the ring free while Flutter still samples the previous frame,
-  as the D3D11 copy does on Windows; the pool only reuses a buffer once
-  Flutter has let go of it. The plugin waits for the blit before the frame is
-  released with CPU-complete sync, because Flutter samples on its own command
-  queue, which Metal doesn't order with ours.
+- **Sessions render into a borrowed ring of three IOSurface-backed BGRA8
+  pixel buffers, whose Metal textures come from a `CVMetalTextureCache`, and
+  the `FlutterTexture` returns the presented slot's buffer from
+  `copyPixelBuffer`, without a copy or a wait.** BGRA8 is what Flutter's
+  pixel buffer textures read. The frame's GPU writes completed before it
+  became acquirable, so Flutter can sample it at once. Dart keeps the frame on
+  screen acquired, so MapLibre renders into the other slots, and releases a
+  frame it replaced once `maplibre_native_gpu_texture_slot_in_use` reports
+  its slot free: not the presented slot, not the one Flutter took last (it
+  holds that buffer until it takes the next), and an IOSurface that is not in
+  use, which covers Flutter's GPU reads. It checks on each present and every
+  4 ms while a replaced frame is held. A resize releases every held frame once
+  the session moved to the new ring; Flutter keeps the old buffer it shows.
+  This replaced a blit into a `CVPixelBufferPool` buffer that the Dart UI
+  thread waited for on every frame. It is a prototype, written on Windows and
+  not yet built or run on a Mac.
 - **Dart finds the C API through `+[MaplibreNativePlugin symbols]`, called
   with `objc_msgSend`, not `DynamicLibrary.process()`.** SwiftPM links the
   plugin statically into the app, and release builds strip global symbols
@@ -362,9 +369,11 @@ Each entry: the decision, then why.
 - The macOS presets also offer Vulkan and OpenGL. Selecting either with
   `backend.macos` makes a macOS map throw `UnsupportedError`, since the
   plugin only integrates Metal.
-- The Metal path copies every frame on the GPU and waits for the copy on the
-  Dart UI thread. Holding the shown frame acquired, or a shared event, could
-  drop the copy or the wait.
+- The zero-copy Metal path is untested: build and run the integration tests
+  on macOS and an iOS simulator, and check that MapLibre keeps rendering
+  while two frames are held (the ring then has one free slot), that
+  `IOSurfaceIsInUse` covers Flutter's sampling (no tearing), and that
+  shared-storage render targets work on iOS devices.
 - Touch tilt and double-tap-drag are not tested on Windows touchscreens.
 - Web lost gl-js's keyboard navigation and shift-drag box zoom, which the
   shared recognizer doesn't offer, and its grab cursor. Zoom and rotation

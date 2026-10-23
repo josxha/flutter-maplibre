@@ -35,7 +35,8 @@ Known gaps are tracked in detail in [`.agents/decisions.md`](.agents/decisions.m
   Dart over animated camera deltas.
 - Web lost gl-js keyboard navigation, shift-drag box zoom and the grab
   cursor, which the shared recognizer doesn't offer.
-- Metal copies every frame on the GPU and waits on the Dart UI thread.
+- Metal: test the zero-copy prototype (no copy, no wait on the UI thread) on
+  macOS, an iOS simulator and a device.
 - Native lists no GeoJSON attributions of styles loaded from a network or
   `asset://` URL, as MapLibre Native drops them and the JSON is not at hand.
 - The C library's Apple presets target macOS 14.3 and iOS 15.0, above the

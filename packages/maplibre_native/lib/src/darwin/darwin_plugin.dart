@@ -120,8 +120,8 @@ final class DarwinPlugin {
   static void releaseRetiredSlots(int textureId) =>
       _bindings.maplibre_native_release_retired_slots(textureId);
 
-  /// Copies the finished frame in [slot] into the pixel buffer Flutter shows
-  /// next, and waits for the copy.
+  /// Makes the finished frame in [slot] the one Flutter shows next, without a
+  /// copy. The frame stays acquired until [slotInUse] reports its slot free.
   static void presentGpuTexture(int textureId, int slot) => using((arena) {
     final error = arena<Char>(pluginErrorSize);
     if (!_bindings.maplibre_native_present_gpu_texture(
@@ -133,6 +133,10 @@ final class DarwinPlugin {
       throw StateError(_message(error));
     }
   });
+
+  /// Whether Flutter may still sample [slot] of a texture.
+  static bool slotInUse(int textureId, int slot) =>
+      _bindings.maplibre_native_gpu_texture_slot_in_use(textureId, slot);
 
   /// Unregisters a texture.
   static void disposeTexture(int textureId) =>

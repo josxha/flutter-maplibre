@@ -30,7 +30,8 @@ typedef struct MaplibreNativeSymbol {
 } MaplibreNativeSymbol;
 
 // Registers a zero-copy texture of |width| x |height| device pixels with a
-// ring of |slot_count| BGRA8 Metal textures that MapLibre renders into, and
+// ring of |slot_count| IOSurface-backed BGRA8 Metal textures that MapLibre
+// renders into and Flutter samples, and
 // writes up to |slot_capacity| `id<MTLTexture>` pointers, which stay owned by
 // the plugin. Returns its Flutter texture id, or -1 on failure.
 int64_t maplibre_native_create_gpu_texture(uint32_t width, uint32_t height,
@@ -49,10 +50,17 @@ bool maplibre_native_resize_gpu_texture(int64_t texture_id, uint32_t width,
 // Releases the rings that resizes replaced.
 void maplibre_native_release_retired_slots(int64_t texture_id);
 
-// Copies the finished frame in |slot| into the pixel buffer Flutter shows next
-// and waits for the copy, so the frame can be released right after.
+// Makes the finished frame in |slot| the one Flutter shows next, without a
+// copy. Its frame stays acquired until
+// maplibre_native_gpu_texture_slot_in_use reports the slot free.
 bool maplibre_native_present_gpu_texture(int64_t texture_id, uint32_t slot,
                                          char* error, size_t error_size);
+
+// Whether Flutter may still sample |slot|, so its frame must stay acquired:
+// the slot is the presented one, the one Flutter took last, or its IOSurface
+// is in use.
+bool maplibre_native_gpu_texture_slot_in_use(int64_t texture_id,
+                                             uint32_t slot);
 
 // Unregisters a texture.
 void maplibre_native_dispose_texture(int64_t texture_id);
