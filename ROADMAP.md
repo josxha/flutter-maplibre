@@ -25,9 +25,6 @@ Known gaps are tracked in detail in [`.agents/decisions.md`](.agents/decisions.m
 
 ### Known gaps to close
 
-- Web tests: a single tap or secondary tap never reaches the map (double
-  taps and long presses do). Find out whether real browser clicks are
-  affected; the two tests are skipped on web.
 - iOS simulator: `MapScalebar show and update` is off by about 1.3 px at
   zoom 4, because the scalebar and the test take their latitude at
   different points.

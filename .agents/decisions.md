@@ -210,8 +210,11 @@ Each entry: the decision, then why.
   `interactive: false` and its container has `pointer-events: none`, so the
   browser hands every pointer to Flutter, and widgets over the map no longer
   leak taps and drags to gl-js. Clicks, double, secondary and long clicks
-  come from `MapGestureDetector`. A right click or Ctrl + click that starts
-  on the map suppresses the browser's context menu once.
+  come from `MapGestureDetector`. The `HtmlElementView` hit-tests as
+  transparent: an opaque platform view joins the gesture arena first and
+  wins every pointer the arena sweeps, so single and secondary taps (in real
+  browsers too) never reached the tap recognizer. A right click or Ctrl +
+  click that starts on the map suppresses the browser's context menu once.
 - **Widgets over the map need no `PointerInterceptor`, so `maplibre` and
   `maplibre_web` dropped the package.** It only put an invisible HTML element
   under its child, so the browser would not route the pointer to the map's
@@ -300,11 +303,6 @@ Each entry: the decision, then why.
   the web wasm build has its own job, as the tests run the JavaScript build.
 
 ## Known gaps
-
-- In the web integration tests a single tap or secondary tap reports no
-  click, while double taps and long presses do. The tap recognizer never
-  wins the gesture arena there; whether real clicks are affected is not
-  checked yet. Those two tests are skipped on web.
 
 - MapLibre Native reports no attribution for GeoJSON sources, so
   `getAttributions` lists them on web only.

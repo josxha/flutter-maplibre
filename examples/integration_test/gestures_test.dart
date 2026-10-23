@@ -112,9 +112,7 @@ void runTests() {
       final expected = map.controller.toLngLat(point);
       expect(click.point.lon, closeTo(expected.lon, 1e-3));
       expect(click.point.lat, closeTo(expected.lat, 1e-3));
-      // On web, tests never see a single tap win the gesture arena from the
-      // HtmlElementView; see the known gaps in .agents/decisions.md.
-    }, skip: kIsWeb);
+    });
 
     testWidgets('long press is reported', (tester) async {
       final map = await pumpMap(tester, options: _options());
@@ -136,9 +134,7 @@ void runTests() {
         since: since,
       );
       expect(event.point.lat, closeTo(50, 0.5));
-      // On web, tests never see a single tap win the gesture arena from the
-      // HtmlElementView; see the known gaps in .agents/decisions.md.
-    }, skip: kIsWeb);
+    });
 
     testWidgets('right drag below the center raises the bearing', (
       tester,

@@ -7,6 +7,7 @@ import 'dart:ui';
 import 'dart:ui_web';
 
 import 'package:flutter/gestures.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
@@ -185,10 +186,17 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
 
   @override
   Widget buildPlatformWidget(BuildContext context) => Listener(
+    behavior: HitTestBehavior.opaque,
     onPointerDown: _onPointerDown,
     onPointerUp: _onPointerEnd,
     onPointerCancel: _onPointerEnd,
-    child: HtmlElementView(viewType: viewName),
+    // An opaque platform view joins the gesture arena first and wins every
+    // pointer the arena sweeps, as a single tap is, so taps would never reach
+    // the map's gesture detector.
+    child: HtmlElementView(
+      viewType: viewName,
+      hitTestBehavior: PlatformViewHitTestBehavior.transparent,
+    ),
   );
 
   /// The browser opens its context menu for a right click, or Ctrl + click
