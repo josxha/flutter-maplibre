@@ -6,7 +6,8 @@ icon: lucide/database
 
 !!! warning
 
-    The `OfflineManager` is not available on web.
+    The `OfflineManager` is not available yet: `maplibre_native` and web
+    throw an `UnsupportedError` when it is created.
 
 The `OfflineManager` provides a set of tools to manage the cache and handle
 offline maps. It enables users to download and interact with map data in areas

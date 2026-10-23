@@ -46,71 +46,69 @@ platform, so widgets over the map keep their own taps and drags without a
     flutter pub get
     ```
 
-!!! warning "The MapLibre Native implementation is not published yet"
+!!! warning "The MapLibre Native implementation is not released yet"
 
-    `maplibre_native` depends on the Dart binding of the MapLibre Native C API
-    by path, from a Git submodule, until that binding is on pub.dev. Until
-    then, the releases on pub.dev are older versions that don't use
-    `maplibre_native`, and the version described here is only available from
-    a local clone of the repository.
+    The releases of `maplibre` on pub.dev up to 0.3.x don't use
+    `maplibre_native` yet. Until its first release, the version described
+    here is only available from the repository.
 
 ??? info "Using the development version"
-
-    The development version needs the repository and its submodule on your
-    disk, because pub doesn't check out Git submodules of Git dependencies.
 
     !!! warning
 
         The development version is not considered stable and shouldn't be
         used in production systems.
 
-    Clone the repository with its submodule:
+    Depend on the packages from the Git repository. `maplibre` depends on
+    the other packages by version, so override them, too:
 
-    ```bash
-    git clone --recurse-submodules https://github.com/josxha/flutter-maplibre
-    ```
-
-    Then point your app at the packages in the clone. `maplibre` depends on
-    the other packages by version, so override them with the local ones, too:
-
-    ```yaml title="pubspec.yaml" hl_lines="2-3 6-12"
+    ```yaml title="pubspec.yaml"
     dependencies:
       maplibre:
-        path: ../flutter-maplibre/packages/maplibre
+        git:
+          url: https://github.com/josxha/flutter-maplibre
+          path: packages/maplibre
 
     dependency_overrides:
       maplibre_native:
-        path: ../flutter-maplibre/packages/maplibre_native
+        git:
+          url: https://github.com/josxha/flutter-maplibre
+          path: packages/maplibre_native
       maplibre_platform_interface:
-        path: ../flutter-maplibre/packages/maplibre_platform_interface
+        git:
+          url: https://github.com/josxha/flutter-maplibre
+          path: packages/maplibre_platform_interface
       maplibre_web:
-        path: ../flutter-maplibre/packages/maplibre_web
+        git:
+          url: https://github.com/josxha/flutter-maplibre
+          path: packages/maplibre_web
     ```
 
 ## Platform support
 
-| Platform | Implementation    | Renderer                                     | Status       |
-|----------|-------------------|----------------------------------------------|--------------|
-| Web      | `maplibre_web`    | MapLibre GL JS                               | Supported    |
-| Windows  | `maplibre_native` | MapLibre Native (C API, Vulkan)              | Experimental |
-| Android  | `maplibre_native` | MapLibre Native (C API, OpenGL ES or Vulkan) | Experimental |
-| iOS      | `maplibre_native` | MapLibre Native (C API, Metal)               | Experimental |
-| macOS    | `maplibre_native` | MapLibre Native (C API, Metal)               | Experimental |
-| Linux    | `maplibre_native` | MapLibre Native (C API)                      | Planned      |
+| Platform | Implementation    | Renderer        | Rendering backend                      | Status       |
+|----------|-------------------|-----------------|----------------------------------------|--------------|
+| Web      | `maplibre_web`    | MapLibre GL JS  | WebGL                                  | Supported    |
+| Android  | `maplibre_native` | MapLibre Native | OpenGL ES 3.0 (default) or Vulkan      | Experimental |
+| iOS      | `maplibre_native` | MapLibre Native | Metal                                  | Experimental |
+| macOS    | `maplibre_native` | MapLibre Native | Metal                                  | Experimental |
+| Windows  | `maplibre_native` | MapLibre Native | Vulkan, shared with Flutter via D3D11  | Experimental |
+| Linux    | `maplibre_native` | MapLibre Native | Vulkan, shared with Flutter via OpenGL | Experimental |
 
-On a platform marked as planned, the app builds, but creating a `MapLibreMap`
-throws an `UnsupportedError`.
+Linux is implemented but not yet tested on a Linux machine.
 
 !!! warning
 
     The native implementation renders through the experimental
     [MapLibre Native C API](https://github.com/maplibre/maplibre-native-ffi),
-    whose ABI is not stable yet. Globe projection, the user location and
-    location permissions are not available on native platforms yet.
+    whose ABI is not stable yet. Globe projection, offline regions, the user
+    location and location permissions are not available on native platforms
+    yet.
 
 The MapLibre Native library reaches your app as a Dart
-[native asset](https://dart.dev/tools/hooks): the build hook of its Dart
-binding downloads a prebuilt library, and Flutter bundles it with your app.
+[native asset](https://dart.dev/tools/hooks): the build hook of
+[maplibre_native_ffi](https://pub.dev/packages/maplibre_native_ffi) downloads
+the prebuilt library for each target, and Flutter bundles it with your app.
 The packages need Flutter 3.47 or newer.
 
 ## Setup Web
@@ -147,7 +145,7 @@ keyboard navigation and Shift + drag box zoom are not available.
 
 ## Setup Windows
 
-The map renders with Vulkan into a Flutter texture, so the device needs a GPU
+The map renders with Vulkan into textures shared with Flutter through D3D11, so the device needs a GPU
 driver with Vulkan 1.1 support (`vulkan-1.dll`). Recent drivers from AMD,
 Intel and NVIDIA include it.
 
@@ -167,18 +165,12 @@ your workspace if your app is part of one:
 hooks:
   user_defines:
     maplibre_native_ffi:
-      backend: vulkan
+      backend:
+        android: vulkan
 ```
 
-!!! note
-
-    This setting applies to every platform your app builds for, but iOS and
-    macOS render through Metal only, so remove the setting when you build for
-    them.
-
-The plugin ships the Android TLS certificate verifier that the C library
-calls, together with the R8 rules that keep it, so no ProGuard setup is
-needed.
+The C library carries the Java code its TLS verification needs, so no
+ProGuard setup is needed.
 
 ## Setup iOS and macOS
 
@@ -218,4 +210,15 @@ Add it to `macos/Runner/DebugProfile.entitlements` and
 ```xml
 <key>com.apple.security.network.client</key>
 <true/>
+```
+
+## Setup Linux
+
+The map renders with Vulkan 1.1. Frames reach Flutter without a CPU copy when
+OpenGL supports `GL_EXT_memory_object_fd` on the same GPU and driver;
+otherwise they are read back into a pixel buffer texture. Building needs the
+GTK and libepoxy development packages:
+
+```bash
+sudo apt install libgtk-3-dev libepoxy-dev
 ```

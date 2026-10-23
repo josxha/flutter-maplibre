@@ -6,63 +6,65 @@ hide: [ navigation ]
 # Supported Features
 
 This side provides a broad orientation about what functionality could and what
-functionality is already added.
+functionality is already added. Android, iOS, macOS, Windows and Linux share
+one implementation on the MapLibre Native C API. Linux is implemented but not
+yet tested on a Linux machine.
 
 ### General Functionality
 
 | Feature       | Web | Android | iOS | Windows | macOS | Linux |
 |---------------|-----|---------|-----|---------|-------|-------|
-| Map           | ✅   | ✅       | ✅   | ✅       | ✅     | ❌     |
-| MapController | ✅   | ✅       | ✅   | ✅       | ✅     | ❌     |
-| Offline       | ❌   | ✅       | ✅   | ❌       | ❌     | ❌     |
-| Events        | ✅   | ✅       | ✅   | ✅       | ✅     | ❌     |
-| Annotations   | ✅   | ✅       | ✅   | ✅       | ✅     | ❌     |
+| Map           | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
+| MapController | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
+| Offline       | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
+| Events        | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
+| Annotations   | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
 | MBTiles       | ❌   | ✅       | ✅   | ❌       | ❌     | ❌     |
-| PMTiles       | ✅   | ✅       | ✅   | ✅       | ✅     | ❌     |
+| PMTiles       | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
 
 ### Layers
 
 | Feature              | Web | Android | iOS | Windows | macOS | Linux |
 |----------------------|-----|---------|-----|---------|-------|-------|
-| Circle Layer         | ✅   | ✅       | ✅   | ✅       | ✅     | ❌     |
-| Fill Layer           | ✅   | ✅       | ✅   | ✅       | ✅     | ❌     |
-| Fill Extrusion Layer | ✅   | ✅       | ✅   | ✅       | ✅     | ❌     |
-| Heatmap Layer        | ✅   | ✅       | ✅   | ✅       | ✅     | ❌     |
-| Hillshade Layer      | ✅   | ✅       | ✅   | ✅       | ✅     | ❌     |
-| Line Layer           | ✅   | ✅       | ✅   | ✅       | ✅     | ❌     |
-| Raster Layer         | ✅   | ✅       | ✅   | ✅       | ✅     | ❌     |
-| Symbol Layer         | ✅   | ✅       | ✅   | ✅       | ✅     | ❌     |
+| Circle Layer         | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
+| Fill Layer           | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
+| Fill Extrusion Layer | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
+| Heatmap Layer        | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
+| Hillshade Layer      | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
+| Line Layer           | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
+| Raster Layer         | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
+| Symbol Layer         | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
 
 ### Sources
 
 | Feature        | Web | Android | iOS | Windows | macOS | Linux |
 |----------------|-----|---------|-----|---------|-------|-------|
-| GeoJSON Source | ✅   | ✅       | ✅   | ✅       | ✅     | ❌     |
-| Image Source   | ✅   | ✅       | ✅   | ✅       | ✅     | ❌     | 
-| Video Source   | ✅   | ❌       | ❌   | ✅       | ✅     | ❌     |
-| Raster Source  | ✅   | ✅       | ✅   | ✅       | ✅     | ❌     |
-| Vector Source  | ✅   | ✅       | ✅   | ✅       | ✅     | ❌     |
+| GeoJSON Source | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
+| Image Source   | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
+| Video Source   | ✅   | ❌       | ❌   | ❌       | ❌     | ❌     |
+| Raster Source  | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
+| Vector Source  | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
 
 ### User Gestures
 
 | Feature         | Web | Android | iOS | Windows | macOS | Linux |
 |-----------------|-----|---------|-----|---------|-------|-------|
-| click           | ✅   | ✅       | ✅   | ✅       | ✅     | ❌     |
-| double click    | ✅   | ❌       | ❌   | ✅       | ✅     | ❌     |
-| secondary click | ✅   | ❌       | ✅   | ✅       | ✅     | ❌     |
-| long click      | ❌   | ✅       | ✅   | ✅       | ✅     | ❌     |
+| click           | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
+| double click    | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
+| secondary click | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
+| long click      | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
 
 ### Programmatic Control
 
 | Feature                                | Web | Android | iOS | Windows | macOS | Linux |
 |----------------------------------------|-----|---------|-----|---------|-------|-------|
-| Move Map Camera                        | ✅   | ✅       | ✅   | ✅       | ✅     | ❌     |
-| Animate Map Camera                     | ✅   | ✅       | ✅   | ✅       | ✅     | ❌     |
-| Add or remove a Map Source             | ✅   | ✅       | ✅   | ✅       | ✅     | ❌     |
-| Add or remove a Map Layer              | ✅   | ✅       | ✅   | ✅       | ✅     | ❌     |
-| Show the User Location                 | ❌   | ✅       | ✅   | ❌       | ❌     | ❌     |
-| Track the User Location                | ❌   | ✅       | ✅   | ❌       | ❌     | ❌     |
-| Convert Coordinates to Screen Position | ✅   | ✅       | ✅   | ✅       | ✅     | ❌     |
-| Convert Screen Position to Coordinates | ✅   | ✅       | ✅   | ✅       | ✅     | ❌     |
-| Get Meters per Pixel                   | ✅   | ✅       | ✅   | ✅       | ✅     | ❌     |
-| Get the currently visible Region       | ✅   | ✅       | ✅   | ✅       | ✅     | ❌     |
+| Move Map Camera                        | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
+| Animate Map Camera                     | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
+| Add or remove a Map Source             | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
+| Add or remove a Map Layer              | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
+| Show the User Location                 | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
+| Track the User Location                | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
+| Convert Coordinates to Screen Position | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
+| Convert Screen Position to Coordinates | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
+| Get Meters per Pixel                   | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
+| Get the currently visible Region       | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |

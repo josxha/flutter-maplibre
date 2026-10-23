@@ -51,7 +51,7 @@ This page gives a brief comparison between `maplibre` and similar solutions.
 | Web          | ✅        | ✅           | ✅           | ❌                   | ✅                   |
 | Windows      | ✅        | ❌           | ✅           | ❌                   | ❌                   |
 | macOS        | ✅        | ❌           | ✅           | ❌                   | ❌                   |
-| Linux        | ❌        | ❌           | ✅           | ❌                   | ❌                   |
+| Linux        | ✅        | ❌           | ✅           | ❌                   | ❌                   |
 
 [^1]: Only with third party extensions
 [^2]: Performance implications
