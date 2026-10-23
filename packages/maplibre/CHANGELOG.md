@@ -19,7 +19,7 @@
   `sourceLayer`.
 - Web: map gestures are recognized in Flutter, as on every other platform,
   instead of by MapLibre GL JS. Its keyboard navigation and shift-drag box
-  zoom are gone, and the scroll wheel zooms by Flutter's logical scroll delta.
+  zoom are gone. A wheel notch zooms as far as in MapLibre GL JS.
 - Removed the `pointer_interceptor` dependency. Widgets over the map no longer
   need a `PointerInterceptor` on web; `WidgetLayer.allowInteraction` works the
   same on every platform.
