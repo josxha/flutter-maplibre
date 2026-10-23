@@ -165,8 +165,9 @@ jobs:
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       # After all tests pass on Linux, flutter_tools deletes its test listener
-      # directory a second time and exits with a PathNotFoundException. That
-      # one error passes; any failed test or other error still fails the step.
+      # directory a second time and exits with a PathNotFoundException, before
+      # it writes the coverage. That one error passes; any failed test or other
+      # error still fails the step.
       - name: "Run integration tests"
         shell: bash
         run: |
@@ -179,16 +180,17 @@ jobs:
             grep -q 'Deletion failed, path = .*flutter_test_listener' test.log || exit "$status"
             ! grep -q '(failed)' test.log || exit "$status"
             grep -q 'Passing tests' test.log || exit "$status"
-            test -s coverage/lcov.info || exit "$status"
             echo "::warning::flutter_tools failed to clean up after the passing tests."
           fi
       # lcov names the packages relative to examples; Codecov needs them
       # relative to the repository.
       - name: "Make the coverage paths relative to the repository"
+        if: hashFiles('examples/coverage/lcov.info') != ''
         shell: bash
         working-directory: .
         run: sed -i -E 's#^SF:(\.\./)+#SF:#' examples/coverage/lcov.info
       - uses: codecov/codecov-action@v7
+        if: hashFiles('examples/coverage/lcov.info') != ''
         with:
           files: examples/coverage/lcov.info
           flags: integration-linux
