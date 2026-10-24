@@ -41,7 +41,6 @@ jobs:
         with:
           channel: ${{ env.FLUTTER_CHANNEL }}
           cache: true
-      - run: flutter config --enable-swift-package-manager
       - name: "Get Flutter dependencies"
         run: dart pub get
       - name: "Build iOS package"

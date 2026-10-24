@@ -175,11 +175,11 @@ ProGuard setup is needed.
 ## Setup iOS and macOS
 
 The plugin is a Swift Package Manager package only and has no CocoaPods
-podspec, so enable Swift Package Manager for Flutter:
-
-```bash
-flutter config --enable-swift-package-manager
-```
+podspec. Flutter uses Swift Package Manager by default since 3.44, and the
+plugin requires Flutter 3.47 or newer, so no setup is needed. Apps that still
+have a `Podfile` from older Flutter versions can remove CocoaPods with
+`pod deintegrate` and delete the `Podfile`, `Podfile.lock` and the
+`#include? "Pods/..."` lines of their xcconfigs.
 
 ## Setup iOS
 
