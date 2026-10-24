@@ -5,8 +5,8 @@ import PackageDescription
 let package = Package(
     name: "maplibre_native",
     platforms: [
-        .iOS("13.0"),
-        .macOS("10.15"),
+        .iOS("15.0"),
+        .macOS("14.3"),
     ],
     products: [
         .library(name: "maplibre-native", targets: ["maplibre_native"]),

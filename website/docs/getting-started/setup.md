@@ -183,7 +183,7 @@ flutter config --enable-swift-package-manager
 
 ## Setup iOS
 
-The map renders with Metal into a Flutter texture, on iOS 13 or newer. The C
+The map renders with Metal into a Flutter texture, on iOS 15 or newer. The C
 library is published for devices and for arm64 simulators, so exclude the
 x86_64 simulator slice in `ios/Flutter/Debug.xcconfig` and
 `ios/Flutter/Release.xcconfig`:
@@ -194,8 +194,10 @@ EXCLUDED_ARCHS[sdk=iphonesimulator*] = x86_64
 
 ## Setup macOS
 
-The map renders with Metal into a Flutter texture. The C library is published
-for Apple silicon only, so exclude x86_64 in
+The map renders with Metal into a Flutter texture, on macOS 14.3 or newer.
+Raise `MACOSX_DEPLOYMENT_TARGET` of the Runner target in
+`macos/Runner.xcodeproj` to 14.3, as Flutter's template sets an older one. The
+C library is published for Apple silicon only, so exclude x86_64 in
 `macos/Flutter/Flutter-Debug.xcconfig` and
 `macos/Flutter/Flutter-Release.xcconfig`:
 

@@ -34,7 +34,8 @@ build hook downloads the prebuilt C library, and shows each map as a Flutter
 
 ## iOS and macOS
 
-- Render with Metal, on iOS 13 and macOS 10.15 or later.
+- Render with Metal, on iOS 15 and macOS 14.3 or later, the
+  minimums of the C library.
 - The plugin is a Swift Package Manager package only, without a podspec, so
   apps need `flutter config --enable-swift-package-manager`.
 - The C library is published for arm64 only: devices, arm64 simulators, and

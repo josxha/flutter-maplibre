@@ -36,9 +36,6 @@ Known gaps are tracked in detail in [`.agents/decisions.md`](.agents/decisions.m
   last two slots Flutter took. Look for tearing on a device under load.
 - Native lists no GeoJSON attributions of styles loaded from a network or
   `asset://` URL, as MapLibre Native drops them and the JSON is not at hand.
-- The C library's Apple presets target macOS 14.3 and iOS 15.0, above the
-  plugin's `Package.swift` minimums (10.15 and 13). Raise the minimums or
-  get the presets lowered.
 - Intel Macs and x86_64 simulators have no published C library.
 - Touch tilt and double-tap-drag are untested on Windows touchscreens.
 

@@ -158,6 +158,9 @@ Each entry: the decision, then why.
 - **Texture registration and unregistration run on the main thread, inline
   when Dart's UI thread is the main thread.** `textureFrameAvailable` runs on
   the calling thread.
+- **`Package.swift` requires iOS 15.0 and macOS 14.3**, the deployment
+  targets of the C library's Apple presets, so an app can't target systems
+  where the library fails to load. The example's macOS target is 14.3.
 - **The example excludes x86_64 (macOS and the iOS simulator) and has the
   `network.client` entitlement on macOS.** The C library is published for
   arm64 only, and the sandbox blocks tile downloads without it.
@@ -357,8 +360,6 @@ Each entry: the decision, then why.
 - iOS and macOS pass the integration tests on an arm64 Mac (Xcode 27.1,
   macOS 27.0.1, iPhone 17 simulator on iOS 27.0) against the 0.202610.2
   release library, but have not run on an iOS device.
-- The C library's Apple presets target macOS 14.3 and iOS 15.0, above the
-  plugin's `Package.swift` minimums (macOS 10.15, iOS 13).
 - Linux has not been built through Flutter or run on a Linux machine: the
   plugin compiles with `-Wall -Werror` and `gl_texture_test` passes in WSL,
   which had no network for a Flutter build. The zero-copy path assumes that
