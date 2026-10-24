@@ -258,11 +258,19 @@ jobs:
           xcrun simctl boot "$udid"
           xcrun simctl bootstatus "$udid" -b
           echo "udid=$udid" >> "$GITHUB_OUTPUT"
+      # The expanded reporter prints each test as it starts, so a stalled
+      # test shows by name; the app's own log goes to a file for the summary.
       - name: "Run integration tests"
-        run: >
-          flutter test integration_test/all_test.dart
-          -d ${{ steps.simulator.outputs.udid }}
-          --coverage --coverage-package '^maplibre(_native|_platform_interface|_web)?$'
+        timeout-minutes: 25
+        run: |
+          xcrun simctl spawn ${{ steps.simulator.outputs.udid }} log stream \
+            --style compact --predicate 'process == "Runner"' > "$RUNNER_TEMP/app.log" 2>&1 &
+          flutter test integration_test/all_test.dart -r expanded \
+            -d ${{ steps.simulator.outputs.udid }} \
+            --coverage --coverage-package '^maplibre(_native|_platform_interface|_web)?$'
+      - name: "Show the app log"
+        if: ${{ !cancelled() && failure() }}
+        run: tail -n 400 "$RUNNER_TEMP/app.log"
       # lcov names the packages relative to examples; Codecov needs them
       # relative to the repository.
       - name: "Make the coverage paths relative to the repository"
@@ -313,7 +321,9 @@ jobs:
         with: { cache: true }
       # The runner has no GPU and no Vulkan loader. The Vulkan runtime
       # components bring the loader and Mesa's lavapipe a software driver;
-      # the map then reads its frames back to the CPU.
+      # the map then reads its frames back to the CPU. Steps run elevated,
+      # and an elevated loader ignores VK_DRIVER_FILES, so lavapipe is
+      # registered in the registry as well.
       - name: "Install Vulkan (lavapipe)"
         shell: pwsh
         run: |
@@ -329,13 +339,17 @@ jobs:
           $icd = Get-ChildItem "$dir\mesa\x64" -Filter lvp_icd.x86_64.json | Select-Object -First 1
           Add-Content $env:GITHUB_PATH $loader.DirectoryName
           Add-Content $env:GITHUB_ENV "VK_DRIVER_FILES=$($icd.FullName)"
+          $drivers = 'HKLM:\SOFTWARE\Khronos\Vulkan\Drivers'
+          New-Item -Force $drivers | Out-Null
+          New-ItemProperty -Force -Path $drivers -Name $icd.FullName -PropertyType DWord -Value 0 | Out-Null
       - name: "Get Flutter dependencies"
         run: flutter pub get
       - name: "Run integration tests"
         # flutter.bat hands the arguments to cmd, which would split the
         # package regex at a |, so this one matches the same packages without.
+        timeout-minutes: 25
         run: >
-          flutter test integration_test/all_test.dart -d windows
+          flutter test integration_test/all_test.dart -d windows -r expanded
           --coverage --coverage-package '^maplibre(_native)?(_platform_interface)?(_web)?$'
       # lcov names the packages relative to examples; Codecov needs them
       # relative to the repository.

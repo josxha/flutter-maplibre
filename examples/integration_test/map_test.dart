@@ -145,9 +145,11 @@ void runTests() {
           ),
         ),
       );
-      final left = await controllers[0].future;
-      final right = await controllers[1].future;
-      await Future.wait(styles.map((style) => style.future));
+      final left = await controllers[0].future.timeout(defaultTimeout);
+      final right = await controllers[1].future.timeout(defaultTimeout);
+      await Future.wait(
+        styles.map((style) => style.future),
+      ).timeout(defaultTimeout);
 
       expect(left.getCamera().center.lon, closeTo(-40, 1e-6));
       expect(right.getCamera().center.lon, closeTo(40, 1e-6));
