@@ -11,13 +11,13 @@ Known gaps are tracked in detail in [`.agents/decisions.md`](.agents/decisions.m
 
 - Push the local commits (`5464acdc` fixes, `df4bbc54` test rework) so CI
   runs the integration tests on all six platforms for the first time.
-- Run the integration tests on Linux, macOS and iOS. Only Windows, an
-  Android emulator and web have passed so far.
+- Run the integration tests on Linux. Windows, macOS, an iOS simulator,
+  an Android emulator and web have passed.
 - Run on a Linux machine through Flutter: check the zero-copy path against
   `MAPLIBRE_NATIVE_DISABLE_ZERO_COPY=1` and look for the CPU readback
   fallback log line.
-- Run iOS and macOS against the 0.202610.2 release library (they were only
-  run against a local C build), and on a real iOS device.
+- Run on a real iOS device, which also checks shared-storage render targets
+  of the Metal ring.
 - Check the software-Vulkan setup on the Windows CI runner.
 - Check the `maplibre_web` unit tests, which hung locally under
   `--platform chrome`.
@@ -25,9 +25,6 @@ Known gaps are tracked in detail in [`.agents/decisions.md`](.agents/decisions.m
 
 ### Known gaps to close
 
-- iOS simulator: `MapScalebar show and update` is off by about 1.3 px at
-  zoom 4, because the scalebar and the test take their latitude at
-  different points.
 - Globe projection is missing on native. User location is a Flutter layer
   (`UserLocationLayer`), not yet run in the integration tests.
 - Shared gestures: native pans stop dead on release (no fling), and zoom and
@@ -35,8 +32,8 @@ Known gaps are tracked in detail in [`.agents/decisions.md`](.agents/decisions.m
   Dart over animated camera deltas.
 - Web lost gl-js keyboard navigation, shift-drag box zoom and the grab
   cursor, which the shared recognizer doesn't offer.
-- Metal: test the zero-copy prototype (no copy, no wait on the UI thread) on
-  macOS, an iOS simulator and a device.
+- Metal: no check sees Flutter's GPU reads of a slot, so the ring holds the
+  last two slots Flutter took. Look for tearing on a device under load.
 - Native lists no GeoJSON attributions of styles loaded from a network or
   `asset://` URL, as MapLibre Native drops them and the JSON is not at hand.
 - The C library's Apple presets target macOS 14.3 and iOS 15.0, above the

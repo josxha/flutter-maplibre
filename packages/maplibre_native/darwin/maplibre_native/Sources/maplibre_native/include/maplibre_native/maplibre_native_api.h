@@ -57,8 +57,7 @@ bool maplibre_native_present_gpu_texture(int64_t texture_id, uint32_t slot,
                                          char* error, size_t error_size);
 
 // Whether Flutter may still sample |slot|, so its frame must stay acquired:
-// the slot is the presented one, the one Flutter took last, or its IOSurface
-// is in use.
+// the slot is the presented one, or one of the last two that Flutter took.
 bool maplibre_native_gpu_texture_slot_in_use(int64_t texture_id,
                                              uint32_t slot);
 

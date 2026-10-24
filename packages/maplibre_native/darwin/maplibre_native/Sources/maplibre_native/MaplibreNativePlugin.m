@@ -1,14 +1,13 @@
 #import "MaplibreNativePlugin.h"
 
 #import <CoreVideo/CoreVideo.h>
-#import <IOSurface/IOSurfaceRef.h>
 #import <Metal/Metal.h>
 #import <os/lock.h>
 
 #include <string.h>
 
 /// The deepest ring the C API takes.
-static const uint32_t kMaxSlots = 3;
+enum { kMaxSlots = 3 };
 
 /// Writes |message| into the caller's |error| buffer, when there is one.
 static void WriteError(NSString *message, char *error, size_t error_size) {
@@ -133,9 +132,8 @@ static void RunOnMain(dispatch_block_t block) {
 /// Makes the finished frame in |slot| the one Flutter shows next.
 - (BOOL)presentSlot:(uint32_t)slot error:(NSString *_Nullable *_Nonnull)error;
 
-/// Whether Flutter may still sample |slot|: it is the presented slot, the one
-/// Flutter took last, or its IOSurface is in use, as it is while the GPU
-/// reads it.
+/// Whether Flutter may still sample |slot|: it is the presented slot, or one
+/// of the last two that Flutter took.
 - (BOOL)isSlotInUse:(uint32_t)slot;
 
 @end
@@ -150,8 +148,12 @@ static void RunOnMain(dispatch_block_t block) {
   CVPixelBufferRef _latest;
   int64_t _latestSlot;
   /// The slot that Flutter took last, whose buffer it holds until it takes
-  /// the next one.
+  /// the next one, and the slot it took before, which a frame still on the
+  /// GPU may read. Neither IOSurfaceIsInUse nor the use count see Flutter's
+  /// reads: the ring's own buffer and texture keep the surface in use, and
+  /// Flutter's texture adds nothing.
   int64_t _takenSlot;
+  int64_t _previousTakenSlot;
 }
 
 - (nullable instancetype)initWithDevice:(id<MTLDevice>)device
@@ -164,6 +166,7 @@ static void RunOnMain(dispatch_block_t block) {
     _lock = OS_UNFAIR_LOCK_INIT;
     _latestSlot = -1;
     _takenSlot = -1;
+    _previousTakenSlot = -1;
     CVReturn status = CVMetalTextureCacheCreate(kCFAllocatorDefault, nil, device, nil, &_cache);
     if (status != kCVReturnSuccess) {
       *error = [NSString stringWithFormat:@"CVMetalTextureCacheCreate failed (%d)", status];
@@ -204,6 +207,7 @@ static void RunOnMain(dispatch_block_t block) {
   // which it retains, until a frame of the new ring is presented.
   _latestSlot = -1;
   _takenSlot = -1;
+  _previousTakenSlot = -1;
   os_unfair_lock_unlock(&_lock);
   return YES;
 }
@@ -234,11 +238,9 @@ static void RunOnMain(dispatch_block_t block) {
 - (BOOL)isSlotInUse:(uint32_t)slot {
   if (slot >= _ring.textures.count) return NO;
   os_unfair_lock_lock(&_lock);
-  const BOOL held = slot == _latestSlot || slot == _takenSlot;
+  const BOOL held = slot == _latestSlot || slot == _takenSlot || slot == _previousTakenSlot;
   os_unfair_lock_unlock(&_lock);
-  if (held) return YES;
-  IOSurfaceRef surface = CVPixelBufferGetIOSurface([_ring bufferAt:slot]);
-  return surface != NULL && IOSurfaceIsInUse(surface);
+  return held;
 }
 
 // Runs on Flutter's raster thread. Flutter keeps the buffer it gets until it
@@ -247,7 +249,10 @@ static void RunOnMain(dispatch_block_t block) {
   os_unfair_lock_lock(&_lock);
   CVPixelBufferRef buffer = _latest;
   if (buffer != NULL) CVPixelBufferRetain(buffer);
-  _takenSlot = _latestSlot;
+  if (_latestSlot != _takenSlot) {
+    _previousTakenSlot = _takenSlot;
+    _takenSlot = _latestSlot;
+  }
   os_unfair_lock_unlock(&_lock);
   return buffer;
 }

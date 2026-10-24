@@ -137,14 +137,17 @@ Each entry: the decision, then why.
   became acquirable, so Flutter can sample it at once. Dart keeps the frame on
   screen acquired, so MapLibre renders into the other slots, and releases a
   frame it replaced once `maplibre_native_gpu_texture_slot_in_use` reports
-  its slot free: not the presented slot, not the one Flutter took last (it
-  holds that buffer until it takes the next), and an IOSurface that is not in
-  use, which covers Flutter's GPU reads. It checks on each present and every
+  its slot free: not the presented slot, and neither of the last two slots
+  Flutter took (it holds the last buffer until it takes the next, and a frame
+  still on the GPU may read the one before). So MapLibre renders into one
+  free slot while Flutter keeps up. `IOSurfaceIsInUse` can't tell: the ring's
+  own buffer and texture keep every surface in use (use count 2), Flutter's
+  texture raises nothing, and Flutter has dropped the buffer by the time it
+  takes the next. It checks on each present and every
   4 ms while a replaced frame is held. A resize releases every held frame once
   the session moved to the new ring; Flutter keeps the old buffer it shows.
   This replaced a blit into a `CVPixelBufferPool` buffer that the Dart UI
-  thread waited for on every frame. It is a prototype, written on Windows and
-  not yet built or run on a Mac.
+  thread waited for on every frame.
 - **Dart finds the C API through `+[MaplibreNativePlugin symbols]`, called
   with `objc_msgSend`, not `DynamicLibrary.process()`.** SwiftPM links the
   plugin statically into the app, and release builds strip global symbols
@@ -351,16 +354,11 @@ Each entry: the decision, then why.
   logs once and keeps Mercator, so pages that ask for a globe still show a
   map; adding a `VideoSource` throws an `UnsupportedError`, as a layer on it
   could not render.
-- iOS and macOS were built and run on an arm64 Mac (Xcode 27.1, macOS 27,
-  iOS 26.4 simulator) only against a local C build of an earlier binding
-  commit, and not yet on an iOS device or against the 0.202610.2 release
-  library. Windows passes the smoke test against the release library.
+- iOS and macOS pass the integration tests on an arm64 Mac (Xcode 27.1,
+  macOS 27.0.1, iPhone 17 simulator on iOS 27.0) against the 0.202610.2
+  release library, but have not run on an iOS device.
 - The C library's Apple presets target macOS 14.3 and iOS 15.0, above the
   plugin's `Package.swift` minimums (macOS 10.15, iOS 13).
-- `MapScalebar show and update` fails on the iOS simulator (iPhone 17) by
-  about 1.3 px at zoom 4: the scalebar takes its latitude at the corner of its
-  padded area, the test at the bar's center, and near 60° S on a tall screen
-  that changes the Mercator scale by 2%.
 - Linux has not been built through Flutter or run on a Linux machine: the
   plugin compiles with `-Wall -Werror` and `gl_texture_test` passes in WSL,
   which had no network for a Flutter build. The zero-copy path assumes that
@@ -375,11 +373,10 @@ Each entry: the decision, then why.
 - The macOS presets also offer Vulkan and OpenGL. Selecting either with
   `backend.macos` makes a macOS map throw `UnsupportedError`, since the
   plugin only integrates Metal.
-- The zero-copy Metal path is untested: build and run the integration tests
-  on macOS and an iOS simulator, and check that MapLibre keeps rendering
-  while two frames are held (the ring then has one free slot), that
-  `IOSurfaceIsInUse` covers Flutter's sampling (no tearing), and that
-  shared-storage render targets work on iOS devices.
+- The zero-copy Metal path passes on macOS and the iOS simulator, with
+  MapLibre rendering into the one free slot. Not checked: shared-storage
+  render targets on iOS devices, and whether a GPU read of Flutter outlasts
+  the two slots the ring holds for it (tearing; none seen).
 - Touch tilt and double-tap-drag are not tested on Windows touchscreens.
 - Web lost gl-js's keyboard navigation and shift-drag box zoom, which the
   shared recognizer doesn't offer, and its grab cursor. Zoom and rotation
