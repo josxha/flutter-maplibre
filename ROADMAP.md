@@ -37,6 +37,8 @@ Known gaps are tracked in detail in [`.agents/decisions.md`](.agents/decisions.m
 - Native lists no GeoJSON attributions of styles loaded from a network or
   `asset://` URL, as MapLibre Native drops them and the JSON is not at hand.
 - Intel Macs and x86_64 simulators have no published C library.
+- macOS needs 14.3, above Flutter 3.47's 12.0, because of the C library's
+  preset. Ask `maplibre_native_ffi` to target 12.0.
 - Touch tilt and double-tap-drag are untested on Windows touchscreens.
 
 ### Upstream (maplibre-native-ffi)

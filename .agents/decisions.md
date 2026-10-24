@@ -160,7 +160,8 @@ Each entry: the decision, then why.
   the calling thread.
 - **`Package.swift` requires iOS 15.0 and macOS 14.3**, the deployment
   targets of the C library's Apple presets, so an app can't target systems
-  where the library fails to load. The example's macOS target is 14.3.
+  where the library fails to load. The example's macOS target is 14.3. iOS
+  matches Flutter 3.47's minimum; macOS is above its 12.0.
 - **The example excludes x86_64 (macOS and the iOS simulator) and has the
   `network.client` entitlement on macOS.** The C library is published for
   arm64 only, and the sandbox blocks tile downloads without it.
@@ -371,6 +372,9 @@ Each entry: the decision, then why.
   without `MAPLIBRE_NATIVE_DISABLE_ZERO_COPY=1`, and look for the
   "falling back to CPU readback" log line.
 - Intel Macs and x86_64 simulators have no published C library.
+- The C library's macOS preset targets 14.3, above Flutter 3.47's minimum of
+  12.0, so apps must raise their macOS target. Lowering it is up to
+  `maplibre_native_ffi`.
 - The macOS presets also offer Vulkan and OpenGL. Selecting either with
   `backend.macos` makes a macOS map throw `UnsupportedError`, since the
   plugin only integrates Metal.
