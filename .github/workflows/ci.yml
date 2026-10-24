@@ -246,8 +246,11 @@ jobs:
     defaults: { run: { working-directory: examples } }
     steps:
       - uses: actions/checkout@v7
+      # Flutter 3.47.8 never attaches to the app on the simulator: the app
+      # starts its VM service, and flutter test waits without output. 3.47.7
+      # runs the suite.
       - uses: subosito/flutter-action@v2
-        with: { cache: true }
+        with: { cache: true, flutter-version: 3.47.7 }
       - name: "Get Flutter dependencies"
         run: flutter pub get
       - name: "Start an iOS simulator"
