@@ -17,6 +17,9 @@ are tracked in detail in [`.agents/decisions.md`](.agents/decisions.md).
   preset.
 - Intel Macs and x86_64 simulators have no published C library.
 - Touch tilt and double-tap-drag are untested on Windows touchscreens.
+- The iOS integration tests stall on the macOS CI runners but pass on an
+  arm64 Mac (Xcode 27.1, Flutter 3.47.7, headless simulator, with
+  coverage). The watchdog's annotations should show where.
 - The `maplibre_web` unit tests hang locally under `--platform chrome`.
 
 ## Known gaps

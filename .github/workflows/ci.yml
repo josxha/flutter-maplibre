@@ -260,12 +260,16 @@ jobs:
           echo "udid=$udid" >> "$GITHUB_OUTPUT"
       # The expanded reporter prints each test as it starts, so a stalled
       # test shows by name; the app's own log goes to a file for the summary.
+      # After 10 minutes without output (the Xcode build is the longest
+      # silence), the watchdog annotates the stalled test, the app's stacks
+      # and its log, and stops the run.
       - name: "Run integration tests"
         timeout-minutes: 25
         run: |
           xcrun simctl spawn ${{ steps.simulator.outputs.udid }} log stream \
             --style compact --predicate 'process == "Runner"' > "$RUNNER_TEMP/app.log" 2>&1 &
-          flutter test integration_test/all_test.dart -r expanded \
+          ../.github/scripts/watchdog.sh 600 Runner "$RUNNER_TEMP/app.log" -- \
+            flutter test integration_test/all_test.dart -r expanded \
             -d ${{ steps.simulator.outputs.udid }} \
             --coverage --coverage-package '^maplibre(_native|_platform_interface|_web)?$'
       - name: "Show the app log"

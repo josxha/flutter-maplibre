@@ -311,7 +311,10 @@ Each entry: the decision, then why.
 - **CI runs the integration tests on every platform, rendering in software**
   (SwiftShader in the Android emulator, lavapipe on Linux and Windows, the
   macOS VMs' paravirtualized Metal), and uploads their coverage per
-  platform. On Windows the map then falls back to CPU readback.
+  platform. On Windows the map then falls back to CPU readback. The iOS
+  run goes through `.github/scripts/watchdog.sh`, which stops it after 10
+  minutes without output and reports the stall as annotations, because the
+  job log needs a sign-in and annotations don't.
 - **The recognizer is unit tested against a recording `GestureCameraSink`**
   (`maplibre_platform_interface/test`). `examples/integration_test/gestures_test.dart`
   checks each platform's camera end to end.
