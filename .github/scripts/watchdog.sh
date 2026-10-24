@@ -3,6 +3,11 @@
 # error annotations, which anyone can read without the job log: the last test
 # that started, the stacks of the app process and the tail of the app's log.
 #
+# flutter test sometimes never attaches to the app on the simulator: the app
+# logs its VM service and then waits, while no test starts. Once that has
+# lasted two minutes, the watchdog stops the run and exits with 75, so the
+# caller can start it again.
+#
 # Usage: watchdog.sh <stall seconds> <app process> <app log> -- <command...>
 set -uo pipefail
 
@@ -22,8 +27,27 @@ annotate() {
   echo "::error title=$title::$body"
 }
 
+# Stops the command and the output tail.
+stop() {
+  pkill -P "$pid"
+  kill "$pid"
+  kill "$tail_pid"
+}
+
+attach_wait=0
 while kill -0 "$pid" 2>/dev/null; do
   sleep 10
+  # A test has started once the reporter names anything but the loading.
+  if ! grep -vE ': loading ' "$out" | grep -qE '^[0-9]+:[0-9]+ \+[0-9]+'; then
+    if grep -q 'Dart VM service is listening' "$app_log"; then
+      attach_wait=$(( attach_wait + 10 ))
+      if (( attach_wait >= 120 )); then
+        echo "::warning title=flutter test did not attach::The app's VM service has listened for ${attach_wait}s without a test starting."
+        stop
+        exit 75
+      fi
+    fi
+  fi
   idle=$(( $(date +%s) - $(stat -f %m "$out") ))
   (( idle < stall )) && continue
 
@@ -50,9 +74,7 @@ while kill -0 "$pid" 2>/dev/null; do
     | grep -v SecTrustReportNetworkingAnalytics | tail -n 60 | cut -c 1-200 \
     | annotate "Tail of the app log"
 
-  pkill -P "$pid"
-  kill "$pid"
-  kill "$tail_pid"
+  stop
   exit 1
 done
 

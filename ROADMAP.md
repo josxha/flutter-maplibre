@@ -17,9 +17,10 @@ are tracked in detail in [`.agents/decisions.md`](.agents/decisions.md).
   preset.
 - Intel Macs and x86_64 simulators have no published C library.
 - Touch tilt and double-tap-drag are untested on Windows touchscreens.
-- The iOS integration tests run on Flutter 3.47.7 in CI: with 3.47.8,
-  flutter test never attaches to the app on the simulator. Drop the pin once
-  a newer Flutter release runs them.
+- On the iOS simulator in CI, flutter test sometimes never attaches to the
+  app (3.47.7 and 3.47.8): the app logs its VM service, and no test starts.
+  The watchdog restarts such a run, up to three times; the cause in
+  flutter_tools is open.
 - The `maplibre_web` unit tests hang locally under `--platform chrome`.
 
 ## Known gaps

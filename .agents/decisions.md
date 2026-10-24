@@ -314,7 +314,13 @@ Each entry: the decision, then why.
   platform. On Windows the map then falls back to CPU readback. The iOS
   run goes through `.github/scripts/watchdog.sh`, which stops it after 10
   minutes without output and reports the stall as annotations, because the
-  job log needs a sign-in and annotations don't.
+  job log needs a sign-in and annotations don't. flutter test sometimes
+  never attaches to the app on the CI simulator (Flutter 3.47.7 and 3.47.8;
+  the app logs its VM service and waits, no MapLibre thread exists), so the
+  watchdog stops a run once the VM service has listened for two minutes
+  without a test starting, and CI starts it again, up to three times. The
+  Windows runner runs elevated, and an elevated Vulkan loader ignores
+  `VK_DRIVER_FILES`, so CI registers lavapipe in the registry.
 - **The recognizer is unit tested against a recording `GestureCameraSink`**
   (`maplibre_platform_interface/test`). `examples/integration_test/gestures_test.dart`
   checks each platform's camera end to end.

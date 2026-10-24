@@ -246,11 +246,8 @@ jobs:
     defaults: { run: { working-directory: examples } }
     steps:
       - uses: actions/checkout@v7
-      # Flutter 3.47.8 never attaches to the app on the simulator: the app
-      # starts its VM service, and flutter test waits without output. 3.47.7
-      # runs the suite.
       - uses: subosito/flutter-action@v2
-        with: { cache: true, flutter-version: 3.47.7 }
+        with: { cache: true }
       - name: "Get Flutter dependencies"
         run: flutter pub get
       - name: "Start an iOS simulator"
@@ -265,16 +262,28 @@ jobs:
       # test shows by name; the app's own log goes to a file for the summary.
       # After 10 minutes without output (the Xcode build is the longest
       # silence), the watchdog annotates the stalled test, the app's stacks
-      # and its log, and stops the run.
+      # and its log, and stops the run. When flutter test never attaches to
+      # the app (exit 75), the run starts again, up to three times.
       - name: "Run integration tests"
-        timeout-minutes: 25
+        timeout-minutes: 35
         run: |
-          xcrun simctl spawn ${{ steps.simulator.outputs.udid }} log stream \
-            --style compact --predicate 'process == "Runner"' > "$RUNNER_TEMP/app.log" 2>&1 &
-          ../.github/scripts/watchdog.sh 600 Runner "$RUNNER_TEMP/app.log" -- \
-            flutter test integration_test/all_test.dart -r expanded \
-            -d ${{ steps.simulator.outputs.udid }} \
-            --coverage --coverage-package '^maplibre(_native|_platform_interface|_web)?$'
+          for attempt in 1 2 3; do
+            : > "$RUNNER_TEMP/app.log"
+            xcrun simctl spawn ${{ steps.simulator.outputs.udid }} log stream \
+              --style compact --predicate 'process == "Runner"' > "$RUNNER_TEMP/app.log" 2>&1 &
+            log_pid=$!
+            status=0
+            ../.github/scripts/watchdog.sh 600 Runner "$RUNNER_TEMP/app.log" -- \
+              flutter test integration_test/all_test.dart -r expanded \
+              -d ${{ steps.simulator.outputs.udid }} \
+              --coverage --coverage-package '^maplibre(_native|_platform_interface|_web)?$' \
+              || status=$?
+            kill "$log_pid" 2>/dev/null
+            [[ $status -ne 75 ]] && exit "$status"
+            xcrun simctl terminate ${{ steps.simulator.outputs.udid }} com.github.josxha.maplibre-example || true
+            echo "flutter test did not attach to the app, attempt $attempt"
+          done
+          exit 1
       - name: "Show the app log"
         if: ${{ !cancelled() && failure() }}
         run: tail -n 400 "$RUNNER_TEMP/app.log"

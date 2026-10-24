@@ -38,7 +38,8 @@ Flutter MapLibre: a federated plugin in a Dart pub workspace.
   launch; `integration_test/shared/test_map.dart` pumps a map and waits for
   its events, frames and features.
 - `.github/scripts/watchdog.sh`: stops a CI test run once its output stalls
-  and reports the last test, the app's stacks and its log as annotations.
+  and reports the last test, the app's stacks and its log as annotations;
+  exits with 75 when flutter test never attached to the app, so CI retries.
 - `tool/codegen/`: ffigen and jnigen scripts. A separate package outside the
   workspace, because the generators need newer native-asset packages than the
   binding allows.
