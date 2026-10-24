@@ -1,82 +1,69 @@
 # Roadmap
 
-Open work for flutter-maplibre, as of October 2026. The native rewrite on
-the MapLibre Native C API lives on the `maplibre-native-ffi` branch
-([#585](https://github.com/josxha/flutter-maplibre/pull/585), draft).
-Known gaps are tracked in detail in [`.agents/decisions.md`](.agents/decisions.md).
+Open work on the flutter-maplibre packages, as of October 2026. Known gaps
+are tracked in detail in [`.agents/decisions.md`](.agents/decisions.md).
 
-## Finish the native rewrite (#585)
+## Native platforms
 
-### Ship the branch
+- Linux: run the integration tests through Flutter on a Linux machine, and
+  check the zero-copy path against `MAPLIBRE_NATIVE_DISABLE_ZERO_COPY=1`
+  (look for the CPU readback fallback log line). Windows, macOS, an iOS
+  simulator, an Android emulator and web pass.
+- iOS devices: run the integration tests on one, which also checks
+  shared-storage render targets of the Metal ring.
+- Metal: no check sees Flutter's GPU reads of a slot, so the ring holds the
+  last two slots Flutter took. Look for tearing on a device under load.
+- macOS needs 14.3, above Flutter 3.47's 12.0, because of the C library's
+  preset.
+- Intel Macs and x86_64 simulators have no published C library.
+- Touch tilt and double-tap-drag are untested on Windows touchscreens.
+- The `maplibre_web` unit tests hang locally under `--platform chrome`.
 
-- Push the local commits (`5464acdc` fixes, `df4bbc54` test rework) so CI
-  runs the integration tests on all six platforms for the first time.
-- Run the integration tests on Linux. Windows, macOS, an iOS simulator,
-  an Android emulator and web have passed.
-- Run on a Linux machine through Flutter: check the zero-copy path against
-  `MAPLIBRE_NATIVE_DISABLE_ZERO_COPY=1` and look for the CPU readback
-  fallback log line.
-- Run on a real iOS device, which also checks shared-storage render targets
-  of the Metal ring.
-- Check the software-Vulkan setup on the Windows CI runner.
-- Check the `maplibre_web` unit tests, which hung locally under
-  `--platform chrome`.
-- Mark #585 ready for review once CI is green.
+## Known gaps
 
-### Known gaps to close
-
-- Globe projection is missing on native. User location is a Flutter layer
-  (`UserLocationLayer`), not yet run in the integration tests.
+- Globe projection is missing on native.
+- `UserLocationLayer` is not covered by the integration tests yet.
 - Shared gestures: native pans stop dead on release (no fling), and zoom and
   rotation don't fling anywhere. The C API has no inertia, so it would run in
   Dart over animated camera deltas.
 - Web lost gl-js keyboard navigation, shift-drag box zoom and the grab
   cursor, which the shared recognizer doesn't offer.
-- Metal: no check sees Flutter's GPU reads of a slot, so the ring holds the
-  last two slots Flutter took. Look for tearing on a device under load.
 - Native lists no GeoJSON attributions of styles loaded from a network or
   `asset://` URL, as MapLibre Native drops them and the JSON is not at hand.
-- Intel Macs and x86_64 simulators have no published C library.
-- macOS needs 14.3, above Flutter 3.47's 12.0, because of the C library's
-  preset. Ask `maplibre_native_ffi` to target 12.0.
-- Touch tilt and double-tap-drag are untested on Windows touchscreens.
+- Offline: merging a database (`mergeOfflineRegions`) is not tested. Web has
+  no offline support; document a service worker cache as the alternative.
 
-### Upstream (maplibre-native-ffi)
+## Upstream (maplibre_native_ffi)
 
-- Pick up the unreleased hook fix on main (the hook no longer forces a
-  second build after its download) with the next release.
+- The unreleased hook fix on main (the hook no longer forces a second build
+  after its download) comes with the next release.
+- A macOS preset that targets 12.0, Flutter's minimum.
+- Libraries for x86_64 macOS and simulators.
 - 15 of our 16 feedback points are still open; frame sync (#1) is only
   partly addressed.
-- Note new API gaps in `.agents/decisions.md` as they come up.
 
 ## Open issues
 
-- v0.4.0 milestone: static typed expressions (#72), initial bounds fit in
-  the constructor (#500), `ImageSource` from a local file (#502),
-  miscellaneous changes (#402).
-- Location: expose a user location stream (#528), unify location and
-  support it on web (#233), `MapEventTrackingModeChanged` (#430).
+- Static typed expressions (#72), initial bounds fit in the constructor
+  (#500), `ImageSource` from a local file (#502), miscellaneous changes
+  (#402).
 - Features: custom HTTP headers for tile requests (#383, PR #573 open),
   feature tap and drag events (#151), animated marker position (#311), map
   centering offset (#246), static map configurations (#236).
 - Bugs to recheck against the native rewrite, since most were filed against
   the old Android and iOS packages: #581, #535 (offline), #555 (Android
   source updates), #544 (`MapEventUserInput` on drags), #499 and #498 (iOS),
-  #301 (Android `ImageReader`). #477 (Vulkan on Android) is done on the
-  branch.
+  #301 (Android `ImageReader`).
 
-## Way forward
+## Features
 
 ### maplibre-gl-js v6
 
-- PR #586 was closed unmerged: v6 is breaking for apps (gl-js is ESM-only,
-  so `index.html` must import it as a module), so it is planned for 0.4.0.
-  The branch `web/maplibre-gl-js-v6` still exists.
-- Rebase it onto the native rewrite rather than main, as both change the
-  setup docs and the release tooling.
-- Keep the clear `StateError` when `maplibregl` isn't loaded, and document
-  that v5 keeps working.
-- Run the web integration tests against v6 in CI.
+- v6 is breaking for apps: gl-js is ESM-only, so `index.html` must import
+  it as a module. Earlier work is on the `web/maplibre-gl-js-v6` branch.
+- Keep the clear `StateError` when `maplibregl` isn't loaded, and keep v5
+  working.
+- Run the web integration tests against v6.
 
 ### CRUD on layers and sources
 
@@ -98,34 +85,6 @@ Known gaps are tracked in detail in [`.agents/decisions.md`](.agents/decisions.m
   one frame.
 - Give the style classes `==` and `hashCode`, so the declarative layers can
   diff properties and update in place instead of removing and re-adding.
-
-### Offline support
-
-- `OfflineManager` runs on native over the C API's offline regions, tested
-  against a local tile server. Merging a database is not tested yet.
-- Keep MBTiles (`mbtiles://`) as the simple offline path, now supported on
-  every native platform.
-- Web stays unsupported; document a service worker cache as the
-  alternative.
-
-### User location and permissions
-
-- The native plugins have no location component today (the old Android
-  and iOS SDKs had one). A Flutter layer fed by a position stream would
-  work the same on every platform including web (#233, #528).
-- Built-in permissions: no extra dependency for users, but we would
-  maintain Kotlin, Objective-C and desktop code for every OS's permission
-  model, outside what a map library should own.
-- Recommend `permission_handler` and `geolocator`: both are widely used and
-  many apps already depend on them. `geolocator` covers mobile, web and
-  desktop; `permission_handler` covers mobile, web and Windows, while
-  `geolocator` itself can ask for location permission elsewhere.
-- Recommendation: drop `PermissionManager` from the interface. Take a
-  `Stream` of positions (or a small `LocationProvider` interface), and ship
-  an optional `geolocator` adapter so it works with one line. Document
-  `permission_handler` for asking permissions.
-- Tracking modes and `MapEventTrackingModeChanged` (#430) then live in Dart
-  and behave the same everywhere.
 
 ### Statically typed expressions (#72)
 
@@ -170,9 +129,7 @@ Known gaps are tracked in detail in [`.agents/decisions.md`](.agents/decisions.m
 
 ### Suggested order
 
-1. Ship the native rewrite (#585) as 0.4.0-dev.
-2. maplibre-gl-js v6 on top of it.
-3. Layer and source CRUD.
-4. Typed expressions.
-5. User location as a Flutter layer, with the permission decision above.
-6. Custom tile loading and request transforms.
+1. maplibre-gl-js v6.
+2. Layer and source CRUD.
+3. Typed expressions.
+4. Custom tile loading and request transforms.
