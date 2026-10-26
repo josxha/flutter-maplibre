@@ -17,6 +17,7 @@ export 'package:maplibre_platform_interface/maplibre_platform_interface.dart'
         ImageSource,
         Layer,
         LineStyleLayer,
+        LineStyleLayerController,
         LngLatBounds,
         LngLatQuad,
         MapCamera,

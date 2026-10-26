@@ -226,6 +226,20 @@ Each entry: the decision, then why.
   or wheel. Permissions are left to `geolocator` or `permission_handler`;
   `maplibre_geolocator` adapts `geolocator` positions.
 
+- **Layer properties are read and updated through per-type controllers with
+  getters and setters** (`StyleController.getLineLayer` returns a
+  `LineStyleLayerController`). The lookup fetches the properties the
+  controller models, so getters are synchronous on every platform although
+  native queries are async; setters update that cache and send the change
+  without waiting (native: a discarding `setStyleLayerProperty` command), so
+  an animation can set one every frame. Only `line-gradient` is modeled so
+  far; more properties and layer types follow the same pattern.
+- **Animations change paint, not data.** The animation page adds its path
+  once and moves a `step` on `line-progress` in `line-gradient`. A GeoJSON
+  update per frame re-encodes the data in Dart, parses and indexes it on the
+  UI thread (`geojsonSourceDataCreate` is synchronous) and re-tiles the
+  source; a paint change does none of that.
+
 ## Gestures
 
 - **One gesture recognizer in Dart serves every platform:
@@ -357,6 +371,18 @@ Each entry: the decision, then why.
   `StyleControllerNative` takes it from the style JSON and from `addSource`.
   For a style loaded from an http(s), `mapbox://` or `asset://` URL the JSON
   is not at hand, so its GeoJSON attributions are missing on native.
+- In profile and release builds (AOT) of `maplibre_native_ffi` 0.202610.2,
+  a native map stops showing frames after about 30. The write-only
+  `NativeHandleState._callbackRoots` (`lib/src/internal/lifecycle/lifecycle.dart`)
+  is tree-shaken, so callback registrations such as the render session's
+  frame wake are collected and wakes are dropped. `@pragma('vm:entry-point')`
+  on the field fixes it (checked on Windows through a local override); the
+  write-only `_parent` fields of the handles look alike. Needs an upstream
+  fix; debug builds are unaffected.
+- `geojsonSourceDataCreate` parses and indexes GeoJSON on the calling
+  thread, so large GeoJSON updates block the UI thread. An async variant
+  would move it off. `synchronous_tiling` only decides whether tiles are cut
+  inline on update or on a worker afterwards.
 - The C API has no setter for the offline tile count limit and no automatic
   database packing, so `setOfflineTileCountLimit` and
   `runPackDatabaseAutomatically` were removed from the `OfflineManager`.

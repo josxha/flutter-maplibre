@@ -201,6 +201,69 @@ void runTests() {
       );
     });
 
+    testWidgets('reads and updates the paint of a line layer', (tester) async {
+      final map = await pumpMap(tester, options: offlineOptions(zoom: 8));
+      String line(double lon) => featureCollection([
+        Feature(
+          geometry: LineString.from(
+            const [
+              Geographic(lon: -1, lat: 0),
+              Geographic(lon: 1, lat: 0),
+            ].map((p) => Geographic(lon: p.lon + lon, lat: p.lat)),
+          ),
+        ),
+      ]);
+      List<Object> gradient(double progress) => [
+        'step',
+        ['line-progress'],
+        '#ff0000',
+        progress,
+        'rgba(0, 0, 0, 0)',
+      ];
+      await map.style.addSource(
+        GeoJsonSource(id: 'src', data: line(0), lineMetrics: true),
+      );
+      await map.style.addLayer(
+        LineStyleLayer(
+          id: 'line',
+          sourceId: 'src',
+          paint: {'line-width': 10, 'line-gradient': gradient(0.25)},
+        ),
+      );
+      // Tiles clip a line with line metrics into one feature each.
+      await map.waitForFeatures(map.center, (features) => features.isNotEmpty);
+
+      // Platforms may read colors back in another notation, such as
+      // ['rgba', 255, 0, 0, 1] on MapLibre Native, so compare the stop only.
+      void expectStep(List<Object>? actual, double progress) {
+        expect(actual, hasLength(5));
+        expect(actual!.take(2), [
+          'step',
+          ['line-progress'],
+        ]);
+        expect(actual[3], progress);
+      }
+
+      final layer = await map.style.getLineLayer('line');
+      expect(layer, isNotNull);
+      expectStep(layer!.lineGradient, 0.25);
+
+      layer.lineGradient = gradient(0.75);
+      expect(layer.lineGradient, gradient(0.75));
+      final reread = await map.style.getLineLayer('line');
+      expectStep(reread!.lineGradient, 0.75);
+
+      // Data for a source with line metrics is prepared with them.
+      await map.style.updateGeoJsonSource(id: 'src', data: line(0.5));
+      await map.waitForFeatures(
+        map.controller.toScreenLocation(const Geographic(lon: -0.75, lat: 0)),
+        (features) => features.isEmpty,
+      );
+
+      expect(await map.style.getLineLayer('missing'), isNull);
+      expect(await map.style.getLineLayer('background'), isNull);
+    });
+
     testWidgets('adds images that symbol layers draw', (tester) async {
       final map = await pumpMap(tester, options: offlineOptions(zoom: 8));
       final bytes = (await rootBundle.load('assets/images/marker.png')).buffer

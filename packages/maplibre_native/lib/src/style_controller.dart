@@ -27,6 +27,10 @@ class StyleControllerNative extends StyleController {
   List<String> _cachedLayerIds = const [];
   var _disposed = false;
 
+  /// The options that [addSource] gave GeoJSON sources, by id. Data for a
+  /// source must be prepared with the options of the source.
+  final _geoJsonOptions = <String, mln.GeojsonSourceOptions>{};
+
   /// Refreshes the cached layer ids and attributions from the map.
   Future<void> refresh() async {
     await Future.wait([_fetchLayerIds(), getAttributions()]);
@@ -41,6 +45,7 @@ class StyleControllerNative extends StyleController {
           'data': _geoJsonData(source.data),
           'maxzoom': source.maxZoom,
           'tolerance': source.tolerance,
+          'lineMetrics': source.lineMetrics,
           'attribution': ?source.attribution,
         },
         RasterSource() => {
@@ -108,6 +113,13 @@ class StyleControllerNative extends StyleController {
       },
     };
     await checkCommand(_map.addStyleSourceJson(source.id, _encode(json)));
+    if (source is GeoJsonSource) {
+      _geoJsonOptions[source.id] = mln.GeojsonSourceOptions(
+        maxZoom: source.maxZoom,
+        tolerance: source.tolerance,
+        lineMetrics: source.lineMetrics,
+      );
+    }
     if (json['attribution'] case final String attribution) {
       _sourceAttributions[source.id] = attribution;
     } else {
@@ -185,7 +197,8 @@ class StyleControllerNative extends StyleController {
       return;
     }
     final handle = mln.geojsonSourceDataCreate(
-      Uint8List.fromList(utf8.encode(trimmed)),
+      utf8.encode(trimmed),
+      options: _geoJsonOptions[id],
     );
     try {
       await checkCommand(_map.setGeojsonSourceData(id, handle));
@@ -204,7 +217,27 @@ class StyleControllerNative extends StyleController {
   Future<void> removeSource(String id) async {
     await _checkUnlessMissing(_map.removeStyleSource(id));
     _sourceAttributions.remove(id);
+    _geoJsonOptions.remove(id);
     await getAttributions();
+  }
+
+  @override
+  Future<LineStyleLayerController?> getLineLayer(String id) async {
+    final info = await _map.getStyleLayer(id);
+    if (info?.type != 'line') return null;
+    final paint = <String, Object?>{};
+    for (final name in LineStyleLayerController.paintProperties) {
+      final value = await _map.getStyleLayerProperty(id, name);
+      paint[name] = value == null ? null : jsonDecode(utf8.decode(value));
+    }
+    return LineStyleLayerController(
+      id: id,
+      paint: paint,
+      // The command runs in order with later ones, so an animation doesn't
+      // wait for each frame's update.
+      setPaintProperty: (name, value) =>
+          _map.discarding.setStyleLayerProperty(id, name, _encode(value)),
+    );
   }
 
   @override
@@ -302,7 +335,7 @@ class StyleControllerNative extends StyleController {
     return trimmed;
   }
 
-  static Uint8List _encode(Object json) =>
+  static Uint8List _encode(Object? json) =>
       Uint8List.fromList(utf8.encode(jsonEncode(json)));
 }
 

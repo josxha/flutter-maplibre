@@ -16,6 +16,7 @@ final class GeoJsonSource extends Source {
     this.maxZoom = 18,
     this.attribution,
     this.tolerance = 0.375,
+    this.lineMetrics = false,
   });
 
   /// A URL to a GeoJSON file, or GeoJSON string.
@@ -36,6 +37,12 @@ final class GeoJsonSource extends Source {
   /// Defaults to 0.375 (pixels at zoom 0).
   /// Higher values mean more simplification and better performance.
   final double tolerance;
+
+  /// Whether to calculate line distance metrics, which `line-progress`
+  /// expressions such as [LineStyleLayerController.lineGradient] need.
+  ///
+  /// Defaults to false.
+  final bool lineMetrics;
 
   // TODO add more fields https://maplibre.org/maplibre-style-spec/sources/#buffer
 }

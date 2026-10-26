@@ -48,6 +48,10 @@
   stream.
 - Native: maps cache resources in `maplibre_native.db` in the app support
   directory, which also holds the offline regions.
+- `StyleController.getLineLayer` returns a `LineStyleLayerController`, whose
+  getters and setters read and update the layer's paint, starting with
+  `lineGradient`. Setters don't wait for the map, so they can animate a
+  layer every frame. `GeoJsonSource.lineMetrics` enables `line-progress`.
 
 ### Bug Fixes
 

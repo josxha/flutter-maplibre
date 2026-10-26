@@ -36,6 +36,22 @@ class StyleControllerWeb extends StyleController {
   }
 
   @override
+  Future<LineStyleLayerController?> getLineLayer(String id) async {
+    final layer = _map.getLayer(id);
+    if (layer == null) return null;
+    if ((layer['type'] as JSString?)?.toDart != 'line') return null;
+    return LineStyleLayerController(
+      id: id,
+      paint: {
+        for (final name in LineStyleLayerController.paintProperties)
+          name: _map.getPaintProperty(id, name).dartify(),
+      },
+      setPaintProperty: (name, value) =>
+          _map.setPaintProperty(id, name, value.jsify()),
+    );
+  }
+
+  @override
   Future<void> updateGeoJsonSource({
     required String id,
     required String data,
@@ -216,6 +232,7 @@ class StyleControllerWeb extends StyleController {
             'type': 'geojson',
             'maxzoom': source.maxZoom,
             'tolerance': source.tolerance,
+            'lineMetrics': source.lineMetrics,
             'attribution': source.attribution,
           }, data: data),
         );

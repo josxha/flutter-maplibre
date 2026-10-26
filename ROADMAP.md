@@ -39,6 +39,12 @@ are tracked in detail in [`.agents/decisions.md`](.agents/decisions.md).
 
 ## Upstream (maplibre_native_ffi)
 
+- Profile and release maps freeze after about 30 frames: AOT drops the
+  write-only `NativeHandleState._callbackRoots`, so the frame wake is
+  collected. Needs `@pragma('vm:entry-point')` or a read of the field (also
+  check the `_parent` fields). Seen on Windows; likely every native platform.
+- `geojsonSourceDataCreate` parses and indexes GeoJSON on the UI thread; an
+  async variant would keep large source updates out of the frame.
 - The unreleased hook fix on main (the hook no longer forces a second build
   after its download) comes with the next release.
 - A macOS preset that targets 12.0, Flutter's minimum.
@@ -71,8 +77,10 @@ are tracked in detail in [`.agents/decisions.md`](.agents/decisions.md).
 
 ### CRUD on layers and sources
 
-- Today `StyleController` can only add and remove layers and sources,
-  update GeoJSON data and list layer ids.
+- Today `StyleController` can add and remove layers and sources, update
+  GeoJSON data, list layer ids, and read and set a line layer's
+  `lineGradient` through `getLineLayer`. More properties and layer types
+  follow the getter/setter pattern of `LineStyleLayerController`.
 - The ffi binding already offers introspection (`listStyleLayers`,
   `getStyleLayer`, `getStyleLayerJson`, `listStyleSources`,
   `getStyleSource`) and updates (`setStyleLayerProperty` for paint, layout,

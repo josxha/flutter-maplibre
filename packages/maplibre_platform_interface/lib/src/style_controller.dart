@@ -44,6 +44,12 @@ abstract class StyleController {
     int? atIndex,
   });
 
+  /// Looks up the line layer [id] of the style. Its getters read the layer's
+  /// properties and its setters update them.
+  ///
+  /// Returns null when the style has no line layer with that id.
+  Future<LineStyleLayerController?> getLineLayer(String id);
+
   /// Update the data of a GeoJSON source.
   Future<void> updateGeoJsonSource({required String id, required String data});
 
