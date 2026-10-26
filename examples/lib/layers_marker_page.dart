@@ -45,10 +45,13 @@ class _LayersMarkerPageState extends State<LayersMarkerPage> {
         onEvent: (event) async {
           switch (event) {
             case MapEventStyleLoaded():
-              // add marker image to map
+              // Add the marker image in physical pixels, so that it shows
+              // 48 logical pixels tall at icon size 1 on every platform.
+              final pixelRatio = MediaQuery.devicePixelRatioOf(context);
               await event.style.addImageFromIconData(
                 id: 'marker',
                 iconData: Icons.location_on,
+                size: (48 * pixelRatio).round(),
                 color: Colors.red,
               );
               setState(() {
@@ -69,8 +72,8 @@ class _LayersMarkerPageState extends State<LayersMarkerPage> {
             points: _points,
             textField: '{name}',
             textAllowOverlap: true,
+            iconAllowOverlap: true,
             iconImage: _imageLoaded ? 'marker' : null,
-            iconSize: 0.15,
             iconAnchor: IconAnchor.bottom,
             textOffset: const [0, 1],
           ),

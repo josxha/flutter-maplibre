@@ -45,7 +45,7 @@ class _LayersWidgetMarkerPageState extends State<LayersWidgetMarkerPage> {
         onEvent: (event) async {
           switch (event) {
             case MapEventStyleLoaded():
-              // add marker image to map
+              // The image has the card's logical size at icon size 1.
               await event.style.addImageFromWidget(
                 id: 'marker',
                 widget: Card(
@@ -78,8 +78,8 @@ class _LayersWidgetMarkerPageState extends State<LayersWidgetMarkerPage> {
             points: _points,
             textField: '{name}',
             textAllowOverlap: true,
+            iconAllowOverlap: true,
             iconImage: _imageLoaded ? 'marker' : null,
-            iconSize: 0.15,
             iconAnchor: IconAnchor.bottom,
             textOffset: const [0, 1],
           ),
