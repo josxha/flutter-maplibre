@@ -274,8 +274,15 @@ void runTests() {
         iconData: Icons.location_on,
         color: Colors.red,
       );
+      await map.style.addImageFromWidget(
+        id: 'widget',
+        widget: const SizedBox.square(
+          dimension: 24,
+          child: ColoredBox(color: Colors.red),
+        ),
+      );
       await map.style.addSource(GeoJsonSource(id: 'src', data: _pointData()));
-      for (final image in ['marker', 'marker-2', 'icon']) {
+      for (final image in ['marker', 'marker-2', 'icon', 'widget']) {
         await map.style.addLayer(
           SymbolStyleLayer(
             id: 'symbols',

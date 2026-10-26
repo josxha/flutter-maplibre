@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/widgets.dart' hide Image;
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 
 /// The [StyleController] can be used to manipulate the style of
@@ -86,6 +86,17 @@ abstract class StyleController {
     images.entries.map((e) => addImage(e.key, e.value, pixelRatio: pixelRatio)),
   );
 
+  /// Add a [dart:ui Image](Image) to the map. See [addImage] for
+  /// [pixelRatio].
+  ///
+  /// The pixels of [image] go to the map as they are, without an encoding to
+  /// PNG. The caller keeps [image] and disposes it.
+  Future<void> addImageFromUiImage({
+    required String id,
+    required Image image,
+    double pixelRatio = 1,
+  });
+
   /// Load an image from the Flutter assets to the map by its [asset] path.
   /// See [addImage] for [pixelRatio].
   Future<void> addImageFromAssets({
@@ -122,15 +133,11 @@ abstract class StyleController {
       (height * pixelRatio).ceil(),
     );
     picture.dispose();
-    final bytes = await image.toByteData(format: ImageByteFormat.png);
-    image.dispose();
-    if (bytes == null) {
-      debugPrint(
-        'addImageFromCanvas: Failed to convert image to bytes for id "$id".',
-      );
-      return;
+    try {
+      await addImageFromUiImage(id: id, image: image, pixelRatio: pixelRatio);
+    } finally {
+      image.dispose();
     }
-    await addImage(id, bytes.buffer.asUint8List(), pixelRatio: pixelRatio);
   }
 
   /// Create an image from [IconData] and add it to the map with the given [id].
@@ -227,16 +234,12 @@ abstract class StyleController {
 
     final pixelRatio = imageSize.width / logicalSize.width;
     final image = await repaintBoundary.toImage(pixelRatio: pixelRatio);
-    final bytes = await image.toByteData(format: ImageByteFormat.png);
     buildOwner.finalizeTree();
-    if (bytes == null) {
-      debugPrint(
-        'StyleController.addWidgetImage: failed to convert widget to '
-        'image bytes for id "$id".',
-      );
-      return;
+    try {
+      await addImageFromUiImage(id: id, image: image, pixelRatio: pixelRatio);
+    } finally {
+      image.dispose();
     }
-    await addImage(id, bytes.buffer.asUint8List(), pixelRatio: pixelRatio);
   }
 
   /// Removes an image from the map

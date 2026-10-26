@@ -63,10 +63,15 @@
   getters and setters read and update the layer's paint, starting with
   `lineGradient`. Setters don't wait for the map, so they can animate a
   layer every frame. `GeoJsonSource.lineMetrics` enables `line-progress`.
+- `StyleController.addImageFromUiImage` adds a `dart:ui` `Image` to the
+  map from its pixels, without encoding it.
 
 ### Bug Fixes
 
 - Web: widgets over the map no longer let taps and drags through to the map.
+- Web: images added with `addImage`, `addImageFromIconData` and
+  `addImageFromWidget` keep their size with the skwasm renderer
+  (`--wasm`), which decoded and encoded them at the size of the view.
 - `MarkerLayer` applies `textOpacity` (it used `iconOpacity`) and
   `iconTranslate`, and `PolylineLayer` applies `blur`.
 - Native: `animateCamera` and `fitBounds` complete when the animation ends.

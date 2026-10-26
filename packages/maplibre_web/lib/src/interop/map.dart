@@ -84,7 +84,7 @@ extension type JsMap._(Camera _) implements Camera {
   /// https://github.com/maplibre/maplibre-gl-js/blob/42ecfef53c25150227256bb0b5daa29af6efd9e7/src/ui/map.ts#L2530-L2531
   external void addImage(
     String id,
-    ImageSpecification image, [
+    JSObject image, [
     StyleImageMetadata? options,
   ]);
 
@@ -208,7 +208,8 @@ extension type LayerSpecification._(JSObject _) implements JSObject {
   external String? sourceLayer;
 }
 
-/// Image data used by [JsMap.addImage].
+/// Raw image data used by [JsMap.addImage], RGBA8 without premultiplied
+/// alpha.
 ///
 /// https://github.com/maplibre/maplibre-gl-js/blob/42ecfef53c25150227256bb0b5daa29af6efd9e7/src/style/style_image.ts#L92-L93
 @anonymous

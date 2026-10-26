@@ -247,23 +247,36 @@ class StyleControllerNative extends StyleController {
   }) async {
     final codec = await ui.instantiateImageCodec(bytes);
     final frame = await codec.getNextFrame();
-    final image = frame.image;
+    codec.dispose();
+    try {
+      await addImageFromUiImage(
+        id: id,
+        image: frame.image,
+        pixelRatio: pixelRatio,
+      );
+    } finally {
+      frame.image.dispose();
+    }
+  }
+
+  @override
+  Future<void> addImageFromUiImage({
+    required String id,
+    required ui.Image image,
+    double pixelRatio = 1,
+  }) async {
     // rawRgba is premultiplied RGBA8, the form the C API takes.
     final data = await image.toByteData();
-    final width = image.width;
-    final height = image.height;
-    image.dispose();
-    codec.dispose();
     if (data == null) {
-      throw StateError('Failed to decode the image "$id".');
+      throw StateError('Failed to read the pixels of the image "$id".');
     }
     await checkCommand(
       _map.setStyleImage(
         id,
         mln.PremultipliedRgba8Image(
-          width: width,
-          height: height,
-          stride: width * 4,
+          width: image.width,
+          height: image.height,
+          stride: image.width * 4,
           pixels: data.buffer.asUint8List(),
         ),
         options: mln.StyleImageOptions(pixelRatio: pixelRatio),

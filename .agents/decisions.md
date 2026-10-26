@@ -240,6 +240,12 @@ Each entry: the decision, then why.
   passes it to `map.addImage` on web and to `StyleImageOptions` on native.
   The canvas, icon and widget helpers take logical sizes, render at the
   device pixel ratio and pass it on, so callers never scale by it.
+- **Images don't go through Flutter's image codecs on web.** The skwasm
+  renderer (`--wasm`) gives a decoded image the size of the view, and
+  encodes a layer's image (`addImageFromWidget`) to a PNG of that size.
+  Web `addImage` decodes bytes with the browser's `createImageBitmap`, and
+  the helpers hand their `ui.Image` to `addImageFromUiImage`, which passes
+  its raw pixels (straight RGBA on web, premultiplied on native).
 - **Animations change paint, not data.** The animation page adds its path
   once and moves a `step` on `line-progress` in `line-gradient`. A GeoJSON
   update per frame re-encodes the data in Dart, parses and indexes it on the

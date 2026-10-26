@@ -13,14 +13,37 @@ class StyleControllerWeb extends StyleController {
     Uint8List bytes, {
     double pixelRatio = 1,
   }) async {
-    final image = await decodeImageFromList(bytes);
-    final byteData = await image.toByteData();
+    // The browser decodes the image: Flutter's skwasm renderer gives decoded
+    // images the size of the view.
+    final blob = Blob([bytes.toJS].toJS);
+    final bitmap = await window.createImageBitmap(blob).toDart;
+    _map.addImage(
+      id,
+      bitmap,
+      interop.StyleImageMetadata(pixelRatio: pixelRatio),
+    );
+  }
+
+  @override
+  Future<void> addImageFromUiImage({
+    required String id,
+    required ui.Image image,
+    double pixelRatio = 1,
+  }) async {
+    // Raw pixels, as Flutter's skwasm renderer encodes some images to PNG at
+    // the size of the view.
+    final data = await image.toByteData(
+      format: ImageByteFormat.rawStraightRgba,
+    );
+    if (data == null) {
+      throw StateError('Failed to read the pixels of the image "$id".');
+    }
     _map.addImage(
       id,
       interop.ImageSpecification(
         width: image.width,
         height: image.height,
-        data: byteData!.buffer.asUint8List().toJS,
+        data: data.buffer.asUint8List().toJS,
       ),
       interop.StyleImageMetadata(pixelRatio: pixelRatio),
     );
