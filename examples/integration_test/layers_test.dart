@@ -71,6 +71,35 @@ void runTests() {
       expect(map.style.getLayerIds(), ['background']);
     });
 
+    testWidgets('draws a feature added to the same list in place', (
+      tester,
+    ) async {
+      final options = offlineOptions(zoom: 10);
+      // The example pages add a tapped point to their list and rebuild with
+      // the same list instance.
+      const first = Geographic(lon: 0.2, lat: 0);
+      final points = [const Feature(geometry: Point(first))];
+      final map = await pumpMap(
+        tester,
+        options: options,
+        layers: [CircleLayer(points: points, radius: 10)],
+      );
+      await map.waitForFeatures(
+        map.controller.toScreenLocation(first),
+        (features) => features.length == 1,
+      );
+      expect(await map.controller.featuresAtPoint(map.center), isEmpty);
+
+      points.add(const Feature(geometry: Point(_point)));
+      await tester.pumpWidget(
+        MapApp(
+          options: options,
+          layers: [CircleLayer(points: points, radius: 10)],
+        ),
+      );
+      await map.waitForFeatures(map.center, (features) => features.length == 1);
+    });
+
     testWidgets('MarkerLayer draws an image of the style', (tester) async {
       final options = offlineOptions(zoom: 10);
       final map = await pumpMap(tester, options: options);
