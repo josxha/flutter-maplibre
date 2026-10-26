@@ -70,61 +70,80 @@ abstract class StyleController {
   List<String> getLayerIds();
 
   /// Add an image to the map.
-  Future<void> addImage(String id, Uint8List bytes);
+  ///
+  /// [pixelRatio] is the number of image pixels per logical pixel. An image
+  /// that is N pixels wide shows N / [pixelRatio] logical pixels wide at an
+  /// icon size of 1, on every platform and screen. Pass 2 for an image made
+  /// for screens with a device pixel ratio of 2.
+  Future<void> addImage(String id, Uint8List bytes, {double pixelRatio = 1});
 
   /// Add multiple images to the map where the key is the image ID and the
-  /// value is the image bytes.
-  Future<void> addImages(Map<String, Uint8List> images) =>
-      Future.wait(images.entries.map((e) => addImage(e.key, e.value)));
+  /// value is the image bytes. See [addImage] for [pixelRatio].
+  Future<void> addImages(
+    Map<String, Uint8List> images, {
+    double pixelRatio = 1,
+  }) => Future.wait(
+    images.entries.map((e) => addImage(e.key, e.value, pixelRatio: pixelRatio)),
+  );
 
   /// Load an image from the Flutter assets to the map by its [asset] path.
+  /// See [addImage] for [pixelRatio].
   Future<void> addImageFromAssets({
     required String id,
     required String asset,
+    double pixelRatio = 1,
   }) async {
     final byteData = await rootBundle.load(asset);
     final bytes = byteData.buffer.asUint8List();
-    await addImage(id, bytes);
+    await addImage(id, bytes, pixelRatio: pixelRatio);
   }
 
   /// Create an image from a [Canvas] and add it to the map with the given [id].
   ///
-  /// The [painter] function receives a [Canvas] to draw on.
+  /// The [painter] function receives a [Canvas] to draw on, in logical
+  /// pixels.
   ///
-  /// The [width] and [height] defines the size of the resulting image
-  /// in pixels.
+  /// The [width] and [height] define the size of the image in logical
+  /// pixels, which it has on the map at an icon size of 1. The image is
+  /// rendered at the device pixel ratio, so that it stays sharp.
   Future<void> addImageFromCanvas({
     required String id,
     required void Function(Canvas canvas) painter,
-    int width = 200,
-    int height = 200,
+    required double width,
+    required double height,
   }) async {
+    final pixelRatio = PlatformDispatcher.instance.views.first.devicePixelRatio;
     final pictureRecorder = PictureRecorder();
-    final canvas = Canvas(pictureRecorder);
+    final canvas = Canvas(pictureRecorder)..scale(pixelRatio);
     painter(canvas);
     final picture = pictureRecorder.endRecording();
-    final image = await picture.toImage(width, height);
+    final image = await picture.toImage(
+      (width * pixelRatio).ceil(),
+      (height * pixelRatio).ceil(),
+    );
+    picture.dispose();
     final bytes = await image.toByteData(format: ImageByteFormat.png);
+    image.dispose();
     if (bytes == null) {
       debugPrint(
         'addImageFromCanvas: Failed to convert image to bytes for id "$id".',
       );
       return;
     }
-    await addImage(id, bytes.buffer.asUint8List());
+    await addImage(id, bytes.buffer.asUint8List(), pixelRatio: pixelRatio);
   }
 
   /// Create an image from [IconData] and add it to the map with the given [id].
   ///
-  /// The [size] parameter defines the width and height of the resulting image
-  /// in pixels.
+  /// The [size] parameter defines the width and height of the image in
+  /// logical pixels, which it has on the map at an icon size of 1.
   ///
   /// The [color] parameter defines the color of the icon. By default, it is
   /// black.
   Future<void> addImageFromIconData({
     required String id,
     required IconData iconData,
-    int size = 200,
+    double size = 48,
     Color color = const Color(0xFF000000),
   }) async {
     await addImageFromCanvas(
@@ -137,7 +156,7 @@ abstract class StyleController {
             text: String.fromCharCode(iconData.codePoint),
             style: TextStyle(
               letterSpacing: 0,
-              fontSize: size.toDouble(),
+              fontSize: size,
               fontFamily: iconData.fontFamily,
               package: iconData.fontPackage,
               color: color,
@@ -150,6 +169,10 @@ abstract class StyleController {
   }
 
   /// Create an image from a [Widget] and add it to the map with the given [id].
+  ///
+  /// The image has the logical size of the [widget], which it has on the map
+  /// at an icon size of 1. It is rendered at [imageSize] / [logicalSize],
+  /// the device pixel ratio by default, so that it stays sharp.
   ///
   /// This method is inspired by the
   /// [widget_to_marker](https://pub.dev/packages/widget_to_marker) package.
@@ -202,9 +225,8 @@ abstract class StyleController {
     pipelineOwner.flushCompositingBits();
     pipelineOwner.flushPaint();
 
-    final image = await repaintBoundary.toImage(
-      pixelRatio: imageSize.width / logicalSize.width,
-    );
+    final pixelRatio = imageSize.width / logicalSize.width;
+    final image = await repaintBoundary.toImage(pixelRatio: pixelRatio);
     final bytes = await image.toByteData(format: ImageByteFormat.png);
     buildOwner.finalizeTree();
     if (bytes == null) {
@@ -214,7 +236,7 @@ abstract class StyleController {
       );
       return;
     }
-    await addImage(id, bytes.buffer.asUint8List());
+    await addImage(id, bytes.buffer.asUint8List(), pixelRatio: pixelRatio);
   }
 
   /// Removes an image from the map

@@ -33,6 +33,17 @@
   `permission_handler`. `MapControlButtons` takes `tracking` and
   `onTrackingPressed` instead of `showTrackLocation`.
 
+- `StyleController.addImage`, `addImages` and `addImageFromAssets` take a
+  `pixelRatio` of image pixels per logical pixel, 1 by default, instead of
+  using the device pixel ratio. An image of N pixels shows N logical pixels
+  wide at an icon size of 1 on every platform and screen, so images grow by
+  the device pixel ratio on high-DPI screens; pass the ratio the image was
+  made for to keep their size.
+- `addImageFromCanvas` and `addImageFromIconData` take their sizes in
+  logical pixels and render at the device pixel ratio. `addImageFromCanvas`
+  requires `width` and `height` as doubles, the `painter` draws in logical
+  pixels, and `addImageFromIconData` makes a 48 pixel icon by default.
+
 ### Features
 
 - `UserLocationLayer` shows a stream of `UserLocation`s on every platform

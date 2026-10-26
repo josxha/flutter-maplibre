@@ -6,6 +6,8 @@
   `androidTranslucentTextureSurface`, `androidForegroundLoadColor` and
   `webviewDebugMode`, and the `AndroidPlatformViewMode` enum, whose
   implementations were removed.
+- The image methods of `StyleController` take sizes in logical pixels and a
+  `pixelRatio`; see the maplibre changelog.
 
 ## 0.3.7
 

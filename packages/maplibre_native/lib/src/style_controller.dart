@@ -13,11 +13,10 @@ import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 /// them in.
 class StyleControllerNative extends StyleController {
   /// Creates a style controller for a map.
-  StyleControllerNative(this._map, this._pixelRatio, {String? styleJson})
+  StyleControllerNative(this._map, {String? styleJson})
     : _sourceAttributions = sourceAttributionsOf(styleJson);
 
   final mln.MapHandle _map;
-  final double _pixelRatio;
 
   /// The attributions that the style and [addSource] gave sources, by id.
   /// MapLibre Native drops those of GeoJSON sources, so they come from here.
@@ -241,7 +240,11 @@ class StyleControllerNative extends StyleController {
   }
 
   @override
-  Future<void> addImage(String id, Uint8List bytes) async {
+  Future<void> addImage(
+    String id,
+    Uint8List bytes, {
+    double pixelRatio = 1,
+  }) async {
     final codec = await ui.instantiateImageCodec(bytes);
     final frame = await codec.getNextFrame();
     final image = frame.image;
@@ -263,7 +266,7 @@ class StyleControllerNative extends StyleController {
           stride: width * 4,
           pixels: data.buffer.asUint8List(),
         ),
-        options: mln.StyleImageOptions(pixelRatio: _pixelRatio),
+        options: mln.StyleImageOptions(pixelRatio: pixelRatio),
       ),
     );
   }

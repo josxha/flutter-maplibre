@@ -8,10 +8,13 @@ class StyleControllerWeb extends StyleController {
   final interop.JsMap _map;
 
   @override
-  Future<void> addImage(String id, Uint8List bytes) async {
+  Future<void> addImage(
+    String id,
+    Uint8List bytes, {
+    double pixelRatio = 1,
+  }) async {
     final image = await decodeImageFromList(bytes);
     final byteData = await image.toByteData();
-    final pixelRatio = PlatformDispatcher.instance.views.first.devicePixelRatio;
     _map.addImage(
       id,
       interop.ImageSpecification(

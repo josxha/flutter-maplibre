@@ -234,6 +234,12 @@ Each entry: the decision, then why.
   without waiting (native: a discarding `setStyleLayerProperty` command), so
   an animation can set one every frame. Only `line-gradient` is modeled so
   far; more properties and layer types follow the same pattern.
+- **Style images have a size in logical pixels that the package keeps the
+  same on every platform and screen.** `addImage` takes a `pixelRatio` of
+  image pixels per logical pixel, 1 by default as in MapLibre GL JS, and
+  passes it to `map.addImage` on web and to `StyleImageOptions` on native.
+  The canvas, icon and widget helpers take logical sizes, render at the
+  device pixel ratio and pass it on, so callers never scale by it.
 - **Animations change paint, not data.** The animation page adds its path
   once and moves a `step` on `line-progress` in `line-gradient`. A GeoJSON
   update per frame re-encodes the data in Dart, parses and indexes it on the

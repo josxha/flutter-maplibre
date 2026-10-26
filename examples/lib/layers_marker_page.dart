@@ -45,13 +45,10 @@ class _LayersMarkerPageState extends State<LayersMarkerPage> {
         onEvent: (event) async {
           switch (event) {
             case MapEventStyleLoaded():
-              // Add the marker image in physical pixels, so that it shows
-              // 48 logical pixels tall at icon size 1 on every platform.
-              final pixelRatio = MediaQuery.devicePixelRatioOf(context);
+              // add a marker image of 48 logical pixels to the map
               await event.style.addImageFromIconData(
                 id: 'marker',
                 iconData: Icons.location_on,
-                size: (48 * pixelRatio).round(),
                 color: Colors.red,
               );
               setState(() {

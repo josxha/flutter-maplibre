@@ -293,11 +293,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
     final map = _map;
     if (map == null) return;
     style?.dispose();
-    final styleController = StyleControllerNative(
-      map,
-      MediaQuery.devicePixelRatioOf(context),
-      styleJson: _styleJson,
-    );
+    final styleController = StyleControllerNative(map, styleJson: _styleJson);
     style = styleController;
     await styleController.refresh();
     if (_disposed || style != styleController) return;
