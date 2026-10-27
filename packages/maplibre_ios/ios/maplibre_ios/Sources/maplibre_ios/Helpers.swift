@@ -32,7 +32,6 @@ public class Helpers: NSObject {
     @objc public static func parseExpression(
         propertyName: String, expression: String
     ) -> NSExpression? {
-        print("\(propertyName): \(expression)")
         do {
             // can't create an Expression using the default method if the data is a hex string
             if propertyName.contains("color"), expression.first == "#" {

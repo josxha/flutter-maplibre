@@ -2,6 +2,7 @@
 
 - Android: dispatch style-loaded callbacks asynchronously so the Android UI
   thread does not wait for the Dart listener to return.
+- iOS: remove verbose per-expression style parsing logs from `parseExpression`.
 
 ## 0.3.7
 
