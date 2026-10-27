@@ -48,18 +48,15 @@ public class Helpers: NSObject {
                 // print("json: \(json)")
                 if let offset = json as? [Any] {
                     if offset.count == 2, offset.first as? String == "literal" {
-                        if let vector = offset.last as? [Any] {
-                            if vector.count == 2 {
-                                if let x = vector.first as? Double,
-                                   let y = vector.last as? Double
-                                {
-                                    return NSExpression(
-                                        forConstantValue: NSValue(
-                                            cgVector: CGVector(dx: x, dy: y)
-                                        )
-                                    )
-                                }
-                            }
+                        if let vector = offset.last as? [Any], vector.count == 2,
+                           let x = vector.first as? Double,
+                           let y = vector.last as? Double
+                        {
+                            return NSExpression(
+                                forConstantValue: NSValue(
+                                    cgVector: CGVector(dx: x, dy: y)
+                                )
+                            )
                         }
                     } else if let first = offset.first, !(first is String) {
                         return NSExpression(forConstantValue: offset)
