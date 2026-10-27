@@ -1,3 +1,8 @@
+## Unreleased
+
+- Android: dispatch style-loaded callbacks asynchronously so the Android UI
+  thread does not wait for the Dart listener to return.
+
 ## 0.3.7
 
 Thanks for everyone who contributed in this release!

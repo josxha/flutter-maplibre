@@ -888,6 +888,9 @@ final class _StyleLoadedCallback with jni.$Style$OnStyleLoaded {
   void onStyleLoaded(jni.Style style) {
     callback.call(style);
   }
+
+  @override
+  bool get onStyleLoaded$async => true;
 }
 
 final class _MapReadyCallback with jni.$OnMapReadyCallback {
