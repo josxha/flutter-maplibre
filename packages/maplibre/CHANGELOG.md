@@ -1,5 +1,7 @@
 ## 0.3.7+1
 
+This bug fix release is the last planned release for the v0.3 series. The focus now will be on replacing the MapLibre Android and iOS SDK as well as the WebView desktop integration with [unified C bindings](https://github.com/maplibre/maplibre-native-ffi). Stay tuned!
+
 ### Bug Fixes
 
 - Android: dispatch style-loaded callbacks asynchronously so the Android UI
