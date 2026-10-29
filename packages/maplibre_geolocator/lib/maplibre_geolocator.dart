@@ -11,12 +11,11 @@ import 'package:maplibre/maplibre.dart'
 /// The positions of `Geolocator.getPositionStream` as [UserLocation]s, for a
 /// [UserLocationLayer].
 ///
-/// When the stream starts listening, it asks for the location permission if
-/// it was not granted yet, and reports a [PermissionDeniedException] if it was
-/// denied or a [LocationServiceDisabledException] if the location services
-/// are off. It starts with the current position, because some platforms,
-/// such as Windows, report a position only when it changes, so a device that
-/// does not move would show none.
+/// It asks for no permission: request it first, with
+/// `Geolocator.requestPermission`. On Windows, positions arrive only after
+/// the app asked. The stream starts with the current position, because some
+/// platforms, such as Windows, report a position only when it changes, so a
+/// device that does not move would show none.
 Stream<UserLocation> geolocatorUserLocations({
   LocationSettings? locationSettings,
 }) {
@@ -25,15 +24,6 @@ Stream<UserLocation> geolocatorUserLocations({
   var canceled = false;
 
   Future<void> start() async {
-    try {
-      await _requestPermission();
-    } on Object catch (error, stackTrace) {
-      if (canceled) return;
-      controller.addError(error, stackTrace);
-      await controller.close();
-      return;
-    }
-    if (canceled) return;
     var streamed = false;
     subscription =
         Geolocator.getPositionStream(locationSettings: locationSettings).listen(
@@ -63,26 +53,6 @@ Stream<UserLocation> geolocatorUserLocations({
     },
   );
   return controller.stream;
-}
-
-/// Asks for the location permission if it was not granted yet.
-///
-/// On Windows, the position stream gets no positions until the app asked for
-/// the access, which `checkPermission` and `requestPermission` do.
-Future<void> _requestPermission() async {
-  if (!await Geolocator.isLocationServiceEnabled()) {
-    throw const LocationServiceDisabledException();
-  }
-  var permission = await Geolocator.checkPermission();
-  if (permission == LocationPermission.denied) {
-    permission = await Geolocator.requestPermission();
-  }
-  if (permission == LocationPermission.denied ||
-      permission == LocationPermission.deniedForever) {
-    throw const PermissionDeniedException(
-      'The location permission was denied.',
-    );
-  }
 }
 
 /// Converts a `geolocator` [Position] to a [UserLocation].

@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre_example/utils/map_styles.dart';
 import 'package:maplibre_geolocator/maplibre_geolocator.dart';
@@ -14,17 +17,50 @@ class UserLocationPage extends StatefulWidget {
 }
 
 class _UserLocationPageState extends State<UserLocationPage> {
-  // Asks for the location permission when the layer listens.
-  late final Stream<UserLocation> _locations = geolocatorUserLocations()
-      .handleError((Object error) {
-        if (!mounted) return;
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text('$error')));
-      });
+  /// The user locations, once the location permission was granted.
+  Stream<UserLocation>? _locations;
   UserLocationTracking _tracking = UserLocationTracking.position;
 
   @override
+  void initState() {
+    super.initState();
+    unawaited(_requestPermission());
+  }
+
+  /// Asks for the location permission. On Windows, geolocator gets no
+  /// positions until the app asked, and permission_handler does not ask there.
+  Future<void> _requestPermission() async {
+    String? error;
+    if (!await Geolocator.isLocationServiceEnabled()) {
+      error = 'The location services are turned off.';
+    } else {
+      var permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+      }
+      if (permission == LocationPermission.denied ||
+          permission == LocationPermission.deniedForever) {
+        error = 'The location permission was denied.';
+      }
+    }
+    if (!mounted) return;
+    if (error != null) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(error)));
+      return;
+    }
+    setState(
+      () => _locations = geolocatorUserLocations().handleError((Object error) {
+        if (!mounted) return;
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text('$error')));
+      }),
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final locations = _locations;
     return Scaffold(
       appBar: AppBar(title: const Text('User Location')),
       body: MapLibreMap(
@@ -34,13 +70,14 @@ class _UserLocationPageState extends State<UserLocationPage> {
           initStyle: MapStyles.protomapsLight.uri,
         ),
         children: [
-          UserLocationLayer(
-            locations: _locations,
-            tracking: _tracking,
-            trackingZoom: 15,
-            onTrackingChanged: (tracking) =>
-                setState(() => _tracking = tracking),
-          ),
+          if (locations != null)
+            UserLocationLayer(
+              locations: locations,
+              tracking: _tracking,
+              trackingZoom: 15,
+              onTrackingChanged: (tracking) =>
+                  setState(() => _tracking = tracking),
+            ),
           MapControlButtons(
             tracking: _tracking,
             // Cycles through the tracking modes.

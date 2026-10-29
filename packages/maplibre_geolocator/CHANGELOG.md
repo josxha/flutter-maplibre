@@ -1,9 +1,8 @@
 ## Unreleased
 
-- `geolocatorUserLocations` asks for the location permission and starts with
-  the current position, so the user location shows on Windows. It reports a
-  `PermissionDeniedException` or `LocationServiceDisabledException` instead
-  of staying silent.
+- `geolocatorUserLocations` starts with the current position, so a device
+  that does not move shows its location on Windows, where geolocator reports
+  only changed positions.
 
 ## 0.1.0
 
