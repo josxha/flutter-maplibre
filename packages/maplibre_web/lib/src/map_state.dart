@@ -30,7 +30,6 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   final _cameraPaddingReset = CameraPaddingReset();
   bool _nextGestureCausedByController = false;
   LayerManager? _layerManager;
-  MapFrameSync? _frameSync;
 
   /// A gesture or its fling moves the camera; [_gestureMoveStarted] once it
   /// has reported the start of the move.
@@ -55,7 +54,10 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   }).toJS;
 
   @override
-  late final GestureCameraSink gestureCamera = _WebGestureCamera(this);
+  late final GestureCameraSink gestureCamera =
+      FrameAlignedGestureCamera.isNeeded
+      ? FrameAlignedGestureCamera(_WebGestureCamera(this))
+      : _WebGestureCamera(this);
 
   /// Get the [MapOptions] from [MapLibreMap.options].
   @override
@@ -100,16 +102,6 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
           interactive: false,
         ),
       );
-
-      if (MapFrameSync.isNeeded) {
-        final frameSync = _frameSync = MapFrameSync(_map.getCanvas());
-        _map.on(
-          interop.MapEventType.render,
-          (JSAny _) {
-            frameSync.glRendered();
-          }.toJS,
-        );
-      }
 
       document.body?.appendChild(_htmlElement);
       // Invoke the onMapCreated callback async to avoid getting it called
@@ -175,7 +167,6 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
             pitch: _map.getPitch().toDouble(),
             bearing: _map.getBearing().toDouble(),
           );
-          _frameSync?.cameraChanged();
           setState(() => camera = mapCamera);
           widget.onEvent?.call(MapEventMoveCamera(camera: mapCamera));
         }.toJS,
@@ -246,7 +237,6 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     document.removeEventListener('contextmenu', _onContextMenu);
     _contextMenuTimer?.cancel();
     style?.dispose();
-    _frameSync?.dispose();
     _map.remove();
     _htmlElement.remove();
     super.dispose();

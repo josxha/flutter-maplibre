@@ -57,9 +57,6 @@ abstract class MapEventType {
   // All fade/transition animations have completed
   static const idle = 'idle';
 
-  /// Fired whenever the map is drawn to the screen.
-  static const render = 'render';
-
   /// Called once the style has loaded.
   static const styleLoad = 'style.load';
 }
