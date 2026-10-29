@@ -1,8 +1,14 @@
-## Unreleased
+## 0.3.7+1
+
+This bug fix release is the last planned release for the v0.3 series. The focus now will be on replacing the MapLibre Android and iOS SDK as well as the WebView desktop integration with [unified C bindings](https://github.com/maplibre/maplibre-native-ffi). Stay tuned!
+
+### Bug Fixes
 
 - Android: dispatch style-loaded callbacks asynchronously so the Android UI
   thread does not wait for the Dart listener to return.
 - iOS: remove verbose per-expression style parsing logs from `parseExpression`.
+
+Full Changelog: [v0.3.7...v0.3.7+1](https://github.com/josxha/flutter-maplibre/compare/v0.3.7...v0.3.7+1)
 
 ## 0.3.7
 

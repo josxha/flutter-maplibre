@@ -1,7 +1,8 @@
-## 0.3.7-beta.1
+## 0.3.7+1
 
-Published as a pre-release because it depends on a pre-release of
-`flutter_inappwebview`.
+[Check the maplibre changelog](https://pub.dev/packages/maplibre/changelog#0371)
+
+## 0.3.7
 
 [Check the maplibre changelog](https://pub.dev/packages/maplibre/changelog#037)
 
@@ -15,7 +16,7 @@ Published as a pre-release because it depends on a pre-release of
 
 ## 0.3.4+1
 
-[Check the maplibre changelog](https://pub.dev/packages/maplibre/changelog#034+1)
+[Check the maplibre changelog](https://pub.dev/packages/maplibre/changelog#0341)
 
 ## 0.3.4
 
