@@ -6,10 +6,6 @@
   thread does not wait for the Dart listener to return.
 - iOS: remove verbose per-expression style parsing logs from `parseExpression`.
 
-### Maintenance
-
-- WebView: `maplibre_webview` is published as a regular release again.
-
 Full Changelog: [v0.3.7...v0.3.7+1](https://github.com/josxha/flutter-maplibre/compare/v0.3.7...v0.3.7+1)
 
 ## 0.3.7
