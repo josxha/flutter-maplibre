@@ -94,6 +94,9 @@
 ### Bug Fixes
 
 - Web: widgets over the map no longer let taps and drags through to the map.
+- Web: widgets over the map keep up with it in wasm builds on cross-origin
+  isolated pages, where skwasm draws Flutter's frames on a web worker and
+  showed them a frame or more after the map.
 - Web: images added with `addImage`, `addImageFromIconData` and
   `addImageFromWidget` keep their size with the skwasm renderer
   (`--wasm`), which decoded and encoded them at the size of the view.

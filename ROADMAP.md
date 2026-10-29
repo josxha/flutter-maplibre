@@ -43,6 +43,11 @@ are tracked in detail in [`.agents/decisions.md`](.agents/decisions.md).
   Dart over animated camera deltas.
 - Web lost gl-js keyboard navigation, shift-drag box zoom and the grab
   cursor, which the shared recognizer doesn't offer.
+- Web, wasm on cross-origin isolated pages: skwasm shows Flutter's frames
+  late, so the map's frames wait for them on a copy of the GL JS canvas. It
+  learns when skwasm shows a frame by wrapping
+  `ImageBitmapRenderingContext.transferFromImageBitmap`; switch to an engine
+  API once Flutter has one.
 - Native lists no GeoJSON attributions of styles loaded from a network or
   `asset://` URL, as MapLibre Native drops them and the JSON is not at hand.
 - Offline: merging a database (`mergeOfflineRegions`) and resuming a paused
