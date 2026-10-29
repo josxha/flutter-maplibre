@@ -63,6 +63,8 @@ class _EventsPageState extends State<EventsPage> {
       'secondary clicked: ${_formatGeographic(event.point)}, screen: ${_formatOffset(event.screenPoint)}',
     MapEventIdle() => 'idle',
     MapEventCameraIdle() => 'camera idle',
+    MapEventRenderingChanged() =>
+      event.paused ? 'rendering paused' : 'rendering resumed',
   };
 
   void _onEvent(MapEvent event) {

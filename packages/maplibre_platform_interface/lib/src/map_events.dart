@@ -169,3 +169,14 @@ final class MapEventCameraIdle extends MapEvent {
   /// Create a new [MapEventCameraIdle] object.
   const MapEventCameraIdle();
 }
+
+/// Emitted when the map stops or resumes rendering, see [MapLibreMap.paused].
+///
+/// {@category Events}
+final class MapEventRenderingChanged extends MapEvent {
+  /// Create a new [MapEventRenderingChanged] object.
+  const MapEventRenderingChanged({required this.paused});
+
+  /// Whether the map stopped rendering.
+  final bool paused;
+}

@@ -59,6 +59,10 @@ class MapLibreMapStateNative extends MapLibreMapState {
   var _gestureActive = false;
   var _cameraMoving = false;
 
+  /// The camera that the running camera animation ends at, to jump there
+  /// when the map pauses.
+  mln.CameraOptions? _animationTarget;
+
   /// Why the camera changes next. Runtime events arrive after the change was
   /// submitted, possibly after a short gesture already ended, so the reason
   /// is taken when the change is made.
@@ -110,7 +114,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
         await renderer.dispose();
         return;
       }
-      _renderer = renderer;
+      _renderer = renderer..paused = isRenderingPaused;
       setState(() {
         camera = _readCamera();
         isInitialized = true;
@@ -185,6 +189,18 @@ class MapLibreMapStateNative extends MapLibreMapState {
         maxPitch: options.maxPitch,
       ),
     );
+  }
+
+  @override
+  void setRenderingPaused({required bool paused}) {
+    _renderer?.paused = paused;
+    // Camera animations advance only while the map renders. One that runs
+    // now ends at its target, so its caller does not wait for the resume.
+    final target = _animationTarget;
+    final map = _map;
+    if (!paused || target == null || map == null) return;
+    _animationTarget = null;
+    unawaited(map.updateCamera(mln.CameraUpdate(camera: target)));
   }
 
   @override
@@ -285,11 +301,19 @@ class MapLibreMapStateNative extends MapLibreMapState {
   /// another change cancels them, or the map closes.
   Future<void> _submitCamera(mln.MapHandle map, mln.CameraUpdate update) async {
     _nextChangeReason = CameraChangeReason.developerAnimation;
+    final target = update.camera;
+    final animates =
+        update.mode != mln.CameraUpdateMode.jump && !isRenderingPaused;
+    // A later camera write replaces the animation, whether or not it animates.
+    _animationTarget = animates ? target : null;
     final ended = Completer<void>();
     await map.updateCamera(
       update.copyWith(
+        // A paused map does not advance animations, so it jumps.
+        mode: isRenderingPaused ? mln.CameraUpdateMode.jump : null,
         animation: update.animation.copyWith(
           endHandler: (_) {
+            if (identical(_animationTarget, target)) _animationTarget = null;
             if (!ended.isCompleted) ended.complete();
           },
         ),

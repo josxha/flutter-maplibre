@@ -230,11 +230,28 @@ final class MapRenderer implements FrameTargetHost {
     }
   }
 
+  /// Whether the renderer stops demanding frames. The map, its session and
+  /// the texture stay, and the texture keeps the last frame. A demand that is
+  /// already armed still renders one more frame. On resume, the next frame
+  /// shows the map's latest update.
+  bool get paused => _paused;
+  var _paused = false;
+  set paused(bool paused) {
+    if (paused == _paused) return;
+    _paused = paused;
+    if (!paused) demandFrame();
+  }
+
   /// Arms a demand that renders the map's next update, and waits for one
   /// when there is none yet.
   @override
   void demandFrame() {
-    if (_disposed || _pendingToken != null || !_target.acceptsFrames) return;
+    if (_disposed ||
+        _paused ||
+        _pendingToken != null ||
+        !_target.acceptsFrames) {
+      return;
+    }
     final token = _nextToken++;
     _pendingToken = token;
     _session.requestFrame(

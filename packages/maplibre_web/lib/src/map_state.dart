@@ -252,6 +252,11 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     super.dispose();
   }
 
+  /// maplibre-gl-js renders only when the map changes, and the browser skips
+  /// hidden elements, so a hidden map costs little.
+  @override
+  bool get canPauseRendering => false;
+
   @override
   void didUpdateWidget(covariant MapLibreMap oldWidget) {
     if (options.minZoom != oldWidget.options.minZoom) {

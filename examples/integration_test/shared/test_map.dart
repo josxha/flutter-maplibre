@@ -195,6 +195,7 @@ Future<TestMap> pumpMap(
   MapOptions? options,
   List<Layer> layers = const [],
   List<Widget> children = const [],
+  bool paused = false,
 }) async {
   final events = <MapEvent>[];
   final controller = Completer<MapController>();
@@ -208,6 +209,7 @@ Future<TestMap> pumpMap(
         if (!style.isCompleted) style.complete(style_);
       },
       onEvent: events.add,
+      paused: paused,
       children: children,
     ),
   );
@@ -236,6 +238,7 @@ class MapApp extends StatelessWidget {
     this.onStyleLoaded,
     this.onEvent,
     this.children = const [],
+    this.paused = false,
     super.key,
   });
 
@@ -245,6 +248,7 @@ class MapApp extends StatelessWidget {
   final StyleLoadedCallback? onStyleLoaded;
   final MapEventCallback? onEvent;
   final List<Widget> children;
+  final bool paused;
 
   @override
   Widget build(BuildContext context) => MaterialApp(
@@ -256,6 +260,7 @@ class MapApp extends StatelessWidget {
         onMapCreated: onMapCreated,
         onStyleLoaded: onStyleLoaded,
         onEvent: onEvent,
+        paused: paused,
         children: children,
       ),
     ),
