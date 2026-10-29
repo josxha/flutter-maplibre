@@ -43,47 +43,27 @@ void main(List<String> arguments) {
   final expectedConstraint = '^$versionString';
 
   final packages = _collectPackages(Directory('packages'));
+  final packageNames = packages.map((package) => package.name).toSet();
 
-  // Packages may be published manually as a pre-release of the release
-  // version (e.g. maplibre_webview 0.3.7-beta.1 for release 0.3.7), because
-  // they depend on a pre-release of a third-party package.
-  final packageVersions = <String, String>{};
   for (final package in packages) {
-    final packageVersion = package.pubspec['version'];
     _ensure(
-      packageVersion is String &&
-          (packageVersion == versionString ||
-              _isPreReleaseOf(_parseVersion(packageVersion), version)),
-      '${package.pubspecFile.path} version must be $versionString '
-      'or a pre-release of it',
+      package.pubspec['version'] == versionString,
+      '${package.pubspecFile.path} version must be $versionString',
     );
-    packageVersions[package.name] = packageVersion as String;
-    if (packageVersion != versionString) {
-      stdout.writeln(
-        'Note: ${package.name} $packageVersion is a pre-release and needs to '
-        'be published manually.',
-      );
-    }
-  }
 
-  for (final package in packages) {
     final dependencies = _readDependencyMap(package.pubspec, 'dependencies');
     for (final entry in dependencies.entries) {
-      final dependencyVersion = packageVersions[entry.key];
-      if (dependencyVersion == null) {
+      if (!packageNames.contains(entry.key)) {
         continue;
       }
       final constraint = entry.value;
       _ensure(
-        constraint is String && constraint == '^$dependencyVersion',
-        '${package.name} -> ${entry.key} constraint must be ^$dependencyVersion',
+        constraint is String && constraint == expectedConstraint,
+        '${package.name} -> ${entry.key} constraint must be $expectedConstraint',
       );
     }
 
-    _ensureChangelogEntry(
-      package.changelogFile,
-      packageVersions[package.name]!,
-    );
+    _ensureChangelogEntry(package.changelogFile, versionString);
   }
 
   final examplePubspec = File('examples/pubspec.yaml');
@@ -118,12 +98,6 @@ Version _parseVersion(String value) {
     _fail('Invalid version format: ${error.message}');
   }
 }
-
-bool _isPreReleaseOf(Version candidate, Version release) =>
-    candidate.isPreRelease &&
-    candidate.major == release.major &&
-    candidate.minor == release.minor &&
-    candidate.patch == release.patch;
 
 YamlMap _loadYamlFile(File file) {
   if (!file.existsSync()) {
