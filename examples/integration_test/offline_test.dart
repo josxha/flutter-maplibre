@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -31,6 +32,10 @@ class _TileServer {
 
   final HttpServer _server;
   final requests = <String, int>{};
+
+  /// Whether tile requests fail with a server error. MapLibre stores tiles
+  /// that are not found as empty, so a 404 is no error.
+  bool failTiles = false;
 
   String get _origin => 'http://127.0.0.1:${_server.port}';
 
@@ -82,6 +87,8 @@ class _TileServer {
     if (path == '/style.json') {
       response.headers.contentType = ContentType.json;
       response.write(_style);
+    } else if (kind == 'tiles' && failTiles) {
+      response.statusCode = HttpStatus.internalServerError;
     } else if (kind == 'tiles') {
       response.headers.contentType = ContentType('image', 'png');
       response.add(_tile);
@@ -104,19 +111,24 @@ const _world = LngLatBounds(
   latitudeNorth: 85,
 );
 
-/// Downloads [server]'s style over the world up to zoom 1, and returns every
-/// progress update.
+/// Downloads [server]'s style over the world up to zoom 1, or [definition],
+/// and returns every progress update.
 Future<List<DownloadProgress>> _download(
   OfflineManager manager,
   _TileServer server, {
+  OfflineRegionDefinition? definition,
   Map<String, Object?> metadata = const {},
 }) => manager
     .downloadRegion(
-      mapStyleUrl: server.styleUrl,
-      bounds: _world,
-      minZoom: 0,
-      maxZoom: 1,
-      pixelDensity: 1,
+      definition:
+          definition ??
+          OfflineTilePyramidRegionDefinition(
+            styleUrl: server.styleUrl,
+            bounds: _world,
+            minZoom: 0,
+            maxZoom: 1,
+            pixelRatio: 1,
+          ),
       metadata: metadata,
     )
     .toList()
@@ -152,22 +164,102 @@ void runTests() {
       expect(updates.where((update) => update.downloadCompleted), hasLength(1));
       // MapLibre Native covers zoom 0 and 1 with the four 256 px tiles of zoom
       // 1, as 256 px tiles show one zoom level below 512 px ones.
-      expect(last.totalTiles, 4);
-      expect(last.loadedTiles, 4);
+      expect(last.status.requiredTileCount, 4);
+      expect(last.status.completedTileCount, 4);
+      expect(last.status.requiredResourceCountIsPrecise, isTrue);
+      expect(
+        last.status.completedResourceCount,
+        last.status.requiredResourceCount,
+      );
       expect(last.progress, 1);
-      expect(last.loadedBytes, greaterThan(0));
+      expect(last.status.completedResourceSize, greaterThan(0));
+      expect(last.status.completedTileSize, greaterThan(0));
       expect(server.requests['tiles'], 4);
       expect(server.requests['fonts'], greaterThan(0));
 
       final region = last.region;
-      expect(region.styleUrl, server.styleUrl);
-      expect(region.bounds, _world);
-      expect(region.minZoom, 0);
-      expect(region.maxZoom, 1);
-      expect(region.pixelRatio, 1);
+      expect(
+        region.definition,
+        OfflineTilePyramidRegionDefinition(
+          styleUrl: server.styleUrl,
+          bounds: _world,
+          minZoom: 0,
+          maxZoom: 1,
+          pixelRatio: 1,
+        ),
+      );
       expect(region.metadata, metadata);
       expect(await manager.listOfflineRegions(), [region]);
       expect(await manager.getOfflineRegion(regionId: region.id), region);
+
+      final status = await manager.getRegionStatus(regionId: region.id);
+      expect(status.complete, isTrue);
+      expect(status.downloadState, OfflineRegionDownloadState.inactive);
+      expect(status.completedTileCount, 4);
+      expect(status.progress, 1);
+    });
+
+    test('downloads only the tiles a geometry touches', () async {
+      // A triangle within the north-east tile of zoom 1.
+      final definition = OfflineGeometryRegionDefinition(
+        styleUrl: server.styleUrl,
+        geometry: Polygon.from(const [
+          [
+            Geographic(lon: 10, lat: 10),
+            Geographic(lon: 20, lat: 10),
+            Geographic(lon: 20, lat: 20),
+            Geographic(lon: 10, lat: 10),
+          ],
+        ]),
+        minZoom: 0,
+        maxZoom: 1,
+        pixelRatio: 1,
+      );
+      final updates = await _download(manager, server, definition: definition);
+      final last = updates.last;
+      expect(last.downloadCompleted, isTrue);
+      expect(last.status.requiredTileCount, 1);
+      expect(server.requests['tiles'], 1);
+      expect(last.region.definition, definition);
+      expect(await manager.listOfflineRegions(), [last.region]);
+    });
+
+    test('reports resources that fail to load', () async {
+      server.failTiles = true;
+      final errors = Completer<Object>();
+      final subscription = manager
+          .downloadRegion(
+            definition: OfflineTilePyramidRegionDefinition(
+              styleUrl: server.styleUrl,
+              bounds: _world,
+              minZoom: 0,
+              maxZoom: 1,
+              pixelRatio: 1,
+            ),
+          )
+          .listen(
+            (_) {},
+            onError: (Object error) {
+              if (!errors.isCompleted) errors.complete(error);
+            },
+          );
+      final error = await errors.future.timeout(const Duration(seconds: 60));
+      // Cancelling pauses the download, which retries the tiles otherwise.
+      await subscription.cancel();
+      expect(
+        error,
+        isA<OfflineResourceException>().having(
+          (e) => e.reason,
+          'reason',
+          OfflineResourceErrorReason.server,
+        ),
+      );
+      final regions = await manager.listOfflineRegions();
+      expect(regions, hasLength(1));
+      expect((error as OfflineResourceException).regionId, regions.single.id);
+      final status = await manager.getRegionStatus(regionId: regions.single.id);
+      expect(status.complete, isFalse);
+      expect(status.downloadState, OfflineRegionDownloadState.inactive);
     });
 
     test('updates metadata and deletes regions', () async {

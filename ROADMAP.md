@@ -42,11 +42,17 @@ are tracked in detail in [`.agents/decisions.md`](.agents/decisions.md).
   cursor, which the shared recognizer doesn't offer.
 - Native lists no GeoJSON attributions of styles loaded from a network or
   `asset://` URL, as MapLibre Native drops them and the JSON is not at hand.
-- Offline: merging a database (`mergeOfflineRegions`) is not tested. Web has
-  no offline support; document a service worker cache as the alternative.
+- Offline: merging a database (`mergeOfflineRegions`) and resuming a paused
+  download are not tested. Web has no offline support; document a service
+  worker cache as the alternative.
 
 ## Upstream (maplibre_native_ffi)
 
+- Offline regions with a `maxZoom` of infinity download no tiles at all
+  (tile pyramid and geometry, 0.202610.3 on Linux), although the C API
+  documents infinity as "each tile source's own maximum zoom". The docs of
+  `OfflineRegionDefinition.maxZoom` ask for a finite value; report it
+  upstream.
 - Profile and release maps freeze after about 30 frames, still in
   0.202610.3: AOT drops the write-only `NativeHandleState._callbackRoots`,
   which alone roots a render session's frame wake. `maplibre_native` works

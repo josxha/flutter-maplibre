@@ -15,20 +15,6 @@ class OfflinePage extends StatefulWidget {
 class _OfflinePageState extends State<OfflinePage> {
   late Future<OfflineManager> _futureOfflineManager;
 
-  final _boundsWorld = const LngLatBounds(
-    longitudeWest: -180,
-    longitudeEast: 180,
-    latitudeSouth: -90,
-    latitudeNorth: 90,
-  );
-
-  final _boundsBregenz = const LngLatBounds(
-    longitudeWest: 9.589786,
-    longitudeEast: 9.766498,
-    latitudeSouth: 47.446159,
-    latitudeNorth: 47.574776,
-  );
-
   late List<_OfflineRegionConfig> _regionConfigs;
 
   @override
@@ -36,19 +22,49 @@ class _OfflinePageState extends State<OfflinePage> {
     super.initState();
     _regionConfigs = [
       _OfflineRegionConfig(
-        bounds: _boundsWorld,
         name: 'World',
-        mapStyleUrl: MapStyles.protomapsLight.uri,
-        maxZoom: 2,
-        pixelDensity: 1,
+        definition: OfflineTilePyramidRegionDefinition(
+          bounds: const LngLatBounds(
+            longitudeWest: -180,
+            longitudeEast: 180,
+            latitudeSouth: -90,
+            latitudeNorth: 90,
+          ),
+          styleUrl: MapStyles.protomapsLight.uri,
+          minZoom: 0,
+          maxZoom: 2,
+          pixelRatio: 1,
+        ),
       ),
       _OfflineRegionConfig(
-        bounds: _boundsBregenz,
         name: 'Bregenz',
-        mapStyleUrl: MapStyles.protomapsLight.uri,
-        minZoom: 10,
-        maxZoom: 14,
-        pixelDensity: 1,
+        definition: OfflineTilePyramidRegionDefinition(
+          bounds: const LngLatBounds(
+            longitudeWest: 9.589786,
+            longitudeEast: 9.766498,
+            latitudeSouth: 47.446159,
+            latitudeNorth: 47.574776,
+          ),
+          styleUrl: MapStyles.protomapsLight.uri,
+          minZoom: 10,
+          maxZoom: 14,
+          pixelRatio: 1,
+        ),
+      ),
+      // A geometry region downloads only the tiles along the route.
+      _OfflineRegionConfig(
+        name: 'Route Bregenz - Lindau',
+        definition: OfflineGeometryRegionDefinition(
+          geometry: LineString.from(const [
+            Geographic(lon: 9.7471, lat: 47.5031),
+            Geographic(lon: 9.7167, lat: 47.5142),
+            Geographic(lon: 9.6838, lat: 47.5459),
+          ]),
+          styleUrl: MapStyles.protomapsLight.uri,
+          minZoom: 10,
+          maxZoom: 15,
+          pixelRatio: 1,
+        ),
       ),
     ];
 
@@ -66,7 +82,7 @@ class _OfflinePageState extends State<OfflinePage> {
 
   void _mergeRegion(OfflineRegion region) {
     final index = _regionConfigs.indexWhere(
-      (config) => config.bounds == region.bounds,
+      (config) => config.definition == region.definition,
     );
 
     if (index != -1) {
@@ -75,13 +91,10 @@ class _OfflinePageState extends State<OfflinePage> {
     } else {
       _regionConfigs.add(
         _OfflineRegionConfig(
-          bounds: region.bounds,
+          definition: region.definition,
           offlineRegion: region,
           progress: 1,
           name: 'ID ${region.id}',
-          mapStyleUrl: region.styleUrl,
-          minZoom: region.minZoom,
-          maxZoom: region.maxZoom,
           metadata: region.metadata,
         ),
       );
@@ -113,11 +126,7 @@ class _OfflinePageState extends State<OfflinePage> {
                     },
                     onDownload: () {
                       final stream = manager.downloadRegion(
-                        minZoom: config.minZoom,
-                        maxZoom: config.maxZoom,
-                        bounds: config.bounds,
-                        mapStyleUrl: config.mapStyleUrl,
-                        pixelDensity: config.pixelDensity ?? 1,
+                        definition: config.definition,
                         metadata: config.metadata,
                       );
                       try {
@@ -146,8 +155,7 @@ class _OfflinePageState extends State<OfflinePage> {
                         MaterialPageRoute<void>(
                           builder: (context) => _OfflineMapPage(
                             title: config.name,
-                            bounds: config.bounds,
-                            zoom: 1,
+                            definition: config.definition,
                           ),
                         ),
                       );
@@ -158,7 +166,10 @@ class _OfflinePageState extends State<OfflinePage> {
                           final region = await manager.getOfflineRegion(
                             regionId: regionId,
                           );
-                          _print('offline region: $region');
+                          final status = await manager.getRegionStatus(
+                            regionId: regionId,
+                          );
+                          _print('offline region: $region, status: $status');
                         } on Exception catch (error, stacktrace) {
                           _print(error.toString());
                           debugPrintStack(stackTrace: stacktrace);
@@ -269,52 +280,39 @@ class _OfflinePageState extends State<OfflinePage> {
 
 class _OfflineRegionConfig {
   _OfflineRegionConfig({
-    required this.bounds,
+    required this.definition,
     required this.name,
-    required this.mapStyleUrl,
     this.offlineRegion,
     this.progress,
-    this.minZoom = 0,
-    this.maxZoom = 20,
-    this.pixelDensity,
     this.metadata = const {},
   });
 
-  LngLatBounds bounds;
+  OfflineRegionDefinition definition;
   OfflineRegion? offlineRegion;
   double? progress;
   String name;
-  double minZoom = 0;
-  double maxZoom = 20;
-  double? pixelDensity;
-  String mapStyleUrl;
   Map<String, dynamic> metadata;
 }
 
 class _OfflineMapPage extends StatelessWidget {
-  const _OfflineMapPage({
-    required this.title,
-    required this.bounds,
-    required this.zoom,
-  });
+  const _OfflineMapPage({required this.title, required this.definition});
 
   final String title;
-  final LngLatBounds bounds;
-  final double zoom;
+  final OfflineRegionDefinition definition;
 
   @override
   Widget build(BuildContext context) {
+    final bounds = definition.bounds;
     return Scaffold(
       appBar: AppBar(title: Text('Offline Map "$title"')),
       body: MapLibreMap(
         options: MapOptions(
-          initStyle: MapStyles.protomapsLight.uri,
-          // maxBounds: bounds,
+          initStyle: definition.styleUrl,
           initCenter: Geographic(
             lon: (bounds.longitudeEast + bounds.longitudeWest) / 2,
             lat: (bounds.latitudeNorth + bounds.latitudeSouth) / 2,
           ),
-          initZoom: zoom,
+          initZoom: 1,
           maxZoom: 20,
         ),
         layers: [
@@ -323,28 +321,34 @@ class _OfflineMapPage extends StatelessWidget {
             width: 3,
             polylines: [
               Feature(
-                geometry: LineString.from([
-                  Geographic(
-                    lon: bounds.longitudeWest,
-                    lat: bounds.latitudeSouth,
-                  ),
-                  Geographic(
-                    lon: bounds.longitudeWest,
-                    lat: bounds.latitudeNorth,
-                  ),
-                  Geographic(
-                    lon: bounds.longitudeEast,
-                    lat: bounds.latitudeNorth,
-                  ),
-                  Geographic(
-                    lon: bounds.longitudeEast,
-                    lat: bounds.latitudeSouth,
-                  ),
-                  Geographic(
-                    lon: bounds.longitudeWest,
-                    lat: bounds.latitudeSouth,
-                  ),
-                ]),
+                geometry: switch (definition) {
+                  OfflineGeometryRegionDefinition(
+                    geometry: final LineString line,
+                  ) =>
+                    line,
+                  _ => LineString.from([
+                    Geographic(
+                      lon: bounds.longitudeWest,
+                      lat: bounds.latitudeSouth,
+                    ),
+                    Geographic(
+                      lon: bounds.longitudeWest,
+                      lat: bounds.latitudeNorth,
+                    ),
+                    Geographic(
+                      lon: bounds.longitudeEast,
+                      lat: bounds.latitudeNorth,
+                    ),
+                    Geographic(
+                      lon: bounds.longitudeEast,
+                      lat: bounds.latitudeSouth,
+                    ),
+                    Geographic(
+                      lon: bounds.longitudeWest,
+                      lat: bounds.latitudeSouth,
+                    ),
+                  ]),
+                },
               ),
             ],
           ),

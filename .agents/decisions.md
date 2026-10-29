@@ -231,10 +231,19 @@ Each entry: the decision, then why.
   `MaplibreNativeApi.initialize`, as it creates no render target.
 - **Offline downloads report their progress through the offline manager's
   runtime events.** A download observes its region and sets it active; the
-  stream reports `offlineRegionStatusChanged` as progress and response
-  errors as `OfflineDownloadException`s, which the download retries.
+  stream reports `offlineRegionStatusChanged` as progress, response errors
+  as `OfflineResourceException`s, which the download retries, and an
+  exceeded tile count limit as an `OfflineTileCountLimitException`.
   Cancelling the subscription sets the region inactive, and
   `resumeDownload` continues it. Metadata is UTF-8 JSON (#581).
+- **Offline regions mirror the C API's definitions.**
+  `OfflineRegionDefinition` is sealed, with a tile pyramid (bounds) and a
+  geometry (a geobase `Geometry`, passed to the C API as decoded GeoJSON)
+  variant, and `OfflineRegionStatus` carries every field of the C API's
+  status. Geometry definitions compare by coordinates, since geobase
+  geometries compare their coordinate lists by identity. MapLibre stores a
+  tile that is not found (404) as empty, so only other failures reach the
+  stream as errors.
 
 - **User location is a Flutter layer, `UserLocationLayer`, fed by a
   `Stream<UserLocation>`; there is no `PermissionManager`.** It paints in

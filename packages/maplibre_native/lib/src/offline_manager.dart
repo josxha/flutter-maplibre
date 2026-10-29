@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:maplibre_native/src/database.dart';
@@ -55,25 +54,25 @@ final class OfflineManagerNative implements OfflineManager {
 
   @override
   Future<List<OfflineRegion>> listOfflineRegions() async =>
-      (await _runtime.listOfflineRegions()).map(_toRegion).toList();
+      (await _runtime.listOfflineRegions()).map(toOfflineRegion).toList();
 
   @override
   Future<OfflineRegion?> getOfflineRegion({required int regionId}) async {
     final info = await _runtime.getOfflineRegion(regionId);
-    return info == null ? null : _toRegion(info);
+    return info == null ? null : toOfflineRegion(info);
   }
 
   @override
   Future<List<OfflineRegion>> mergeOfflineRegions({
     required String path,
   }) async =>
-      (await _runtime.mergeOfflineRegions(path)).map(_toRegion).toList();
+      (await _runtime.mergeOfflineRegions(path)).map(toOfflineRegion).toList();
 
   @override
   Future<OfflineRegion> updateRegionMetadata({
     required int regionId,
     required Map<String, Object?> metadata,
-  }) async => _toRegion(
+  }) async => toOfflineRegion(
     await _runtime.updateOfflineRegionMetadata(
       regionId,
       encodeRegionMetadata(metadata),
@@ -117,38 +116,19 @@ final class OfflineManagerNative implements OfflineManager {
   }
 
   @override
+  Future<OfflineRegionStatus> getRegionStatus({required int regionId}) async =>
+      toRegionStatus(await _runtime.getOfflineRegionStatus(regionId));
+
+  @override
   Stream<DownloadProgress> downloadRegion({
-    required String mapStyleUrl,
-    required LngLatBounds bounds,
-    required double minZoom,
-    required double maxZoom,
-    required double pixelDensity,
+    required OfflineRegionDefinition definition,
     Map<String, Object?> metadata = const {},
-    bool includeIdeographs = false,
   }) => _download(() async {
     final info = await _runtime.createOfflineRegion(
-      mln.OfflineRegionDefinition.tilePyramid(
-        mln.OfflineTilePyramidRegionDefinition(
-          styleUrl: mapStyleUrl,
-          bounds: mln.LatLngBounds(
-            southwest: mln.LatLng(
-              latitude: bounds.latitudeSouth,
-              longitude: bounds.longitudeWest,
-            ),
-            northeast: mln.LatLng(
-              latitude: bounds.latitudeNorth,
-              longitude: bounds.longitudeEast,
-            ),
-          ),
-          minZoom: minZoom,
-          maxZoom: maxZoom,
-          pixelRatio: pixelDensity,
-          includeIdeographs: includeIdeographs,
-        ),
-      ),
+      toNativeDefinition(definition),
       encodeRegionMetadata(metadata),
     );
-    return _toRegion(info);
+    return toOfflineRegion(info);
   });
 
   @override
@@ -220,25 +200,29 @@ final class OfflineManagerNative implements OfflineManager {
         case mln.RuntimeEventPayloadOfflineRegionStatus(:final value):
           final download = _downloads[value.regionId];
           if (download == null) continue;
-          final progress = toDownloadProgress(download.region, value.status);
+          final progress = DownloadProgress(
+            region: download.region,
+            status: toRegionStatus(value.status),
+          );
           download.controller.add(progress);
           if (progress.downloadCompleted) {
             unawaited(_stopDownload(value.regionId));
           }
         case mln.RuntimeEventPayloadOfflineRegionResponseError(:final value):
           _downloads[value.regionId]?.controller.addError(
-            OfflineDownloadException(
-              'A resource of offline region ${value.regionId} failed to '
-              'load (${value.reason}): ${event.message}',
+            OfflineResourceException(
+              regionId: value.regionId,
+              reason: _toErrorReason(value.reason),
+              details: event.message,
             ),
           );
         case mln.RuntimeEventPayloadOfflineRegionTileCountLimit(:final value):
           final download = _downloads[value.regionId];
           if (download == null) continue;
           download.controller.addError(
-            OfflineDownloadException(
-              'Offline region ${value.regionId} exceeds the tile count limit '
-              'of ${value.limit} tiles.',
+            OfflineTileCountLimitException(
+              regionId: value.regionId,
+              limit: value.limit,
             ),
           );
           unawaited(_stopDownload(value.regionId));
@@ -274,92 +258,101 @@ Map<String, Object?> decodeRegionMetadata(Uint8List bytes) {
   return const {};
 }
 
-/// The progress of a download of [region] at [status].
-DownloadProgress toDownloadProgress(
-  OfflineRegion region,
-  mln.OfflineRegionStatus status,
-) => DownloadProgress(
-  loadedBytes: status.completedResourceSize,
-  loadedTiles: status.completedTileCount,
-  totalTiles: status.requiredTileCount,
-  totalTilesEstimated: !status.requiredResourceCountIsPrecise,
-  region: region,
-  downloadCompleted: status.complete,
+/// The status of the C API as an [OfflineRegionStatus].
+OfflineRegionStatus toRegionStatus(mln.OfflineRegionStatus status) =>
+    OfflineRegionStatus(
+      downloadState:
+          status.downloadState == mln.OfflineRegionDownloadState.active
+          ? OfflineRegionDownloadState.active
+          : OfflineRegionDownloadState.inactive,
+      completedResourceCount: status.completedResourceCount,
+      completedResourceSize: status.completedResourceSize,
+      completedTileCount: status.completedTileCount,
+      completedTileSize: status.completedTileSize,
+      requiredResourceCount: status.requiredResourceCount,
+      requiredTileCount: status.requiredTileCount,
+      requiredResourceCountIsPrecise: status.requiredResourceCountIsPrecise,
+      complete: status.complete,
+    );
+
+OfflineResourceErrorReason _toErrorReason(mln.ResourceErrorReason reason) =>
+    switch (reason) {
+      mln.ResourceErrorReason.notFound => OfflineResourceErrorReason.notFound,
+      mln.ResourceErrorReason.server => OfflineResourceErrorReason.server,
+      mln.ResourceErrorReason.connection =>
+        OfflineResourceErrorReason.connection,
+      mln.ResourceErrorReason.rateLimit => OfflineResourceErrorReason.rateLimit,
+      _ => OfflineResourceErrorReason.other,
+    };
+
+mln.LatLngBounds _toNativeBounds(LngLatBounds bounds) => mln.LatLngBounds(
+  southwest: mln.LatLng(
+    latitude: bounds.latitudeSouth,
+    longitude: bounds.longitudeWest,
+  ),
+  northeast: mln.LatLng(
+    latitude: bounds.latitudeNorth,
+    longitude: bounds.longitudeEast,
+  ),
 );
 
-OfflineRegion _toRegion(mln.OfflineRegionInfo info) {
-  final metadata = decodeRegionMetadata(info.metadata);
-  switch (info.definition) {
-    case mln.OfflineRegionDefinitionUnknown(:final tag):
-      throw UnsupportedError(
-        'Offline region ${info.id} has a definition of unknown type $tag.',
-      );
-    case mln.OfflineRegionDefinitionTilePyramid(:final value):
-      return OfflineRegion(
-        id: info.id,
+/// The region definition of the C API for [definition].
+mln.OfflineRegionDefinition toNativeDefinition(
+  OfflineRegionDefinition definition,
+) => switch (definition) {
+  OfflineTilePyramidRegionDefinition() =>
+    mln.OfflineRegionDefinition.tilePyramid(
+      mln.OfflineTilePyramidRegionDefinition(
+        styleUrl: definition.styleUrl,
+        bounds: _toNativeBounds(definition.bounds),
+        minZoom: definition.minZoom,
+        maxZoom: definition.maxZoom,
+        pixelRatio: definition.pixelRatio,
+        includeIdeographs: definition.includeIdeographs,
+      ),
+    ),
+  OfflineGeometryRegionDefinition() => mln.OfflineRegionDefinition.geometry(
+    mln.OfflineGeometryRegionDefinition(
+      styleUrl: definition.styleUrl,
+      geometry: jsonDecode(definition.geometry.toText()),
+      minZoom: definition.minZoom,
+      maxZoom: definition.maxZoom,
+      pixelRatio: definition.pixelRatio,
+      includeIdeographs: definition.includeIdeographs,
+    ),
+  ),
+};
+
+/// The [OfflineRegion] of a region of the C API.
+OfflineRegion toOfflineRegion(mln.OfflineRegionInfo info) => OfflineRegion(
+  id: info.id,
+  definition: switch (info.definition) {
+    mln.OfflineRegionDefinitionUnknown(:final tag) => throw UnsupportedError(
+      'Offline region ${info.id} has a definition of unknown type $tag.',
+    ),
+    mln.OfflineRegionDefinitionTilePyramid(:final value) =>
+      OfflineTilePyramidRegionDefinition(
         bounds: LngLatBounds(
           longitudeWest: value.bounds.southwest.longitude,
           longitudeEast: value.bounds.northeast.longitude,
           latitudeSouth: value.bounds.southwest.latitude,
           latitudeNorth: value.bounds.northeast.latitude,
         ),
+        styleUrl: value.styleUrl,
         minZoom: value.minZoom,
         maxZoom: value.maxZoom,
         pixelRatio: value.pixelRatio,
+        includeIdeographs: value.includeIdeographs,
+      ),
+    mln.OfflineRegionDefinitionGeometry(:final value) =>
+      OfflineGeometryRegionDefinition(
+        geometry: GeometryBuilder.parse(jsonEncode(value.geometry)),
         styleUrl: value.styleUrl,
-        metadata: metadata,
-      );
-    case mln.OfflineRegionDefinitionGeometry(:final value):
-      return OfflineRegion(
-        id: info.id,
-        bounds: geometryBounds(value.geometry),
         minZoom: value.minZoom,
         maxZoom: value.maxZoom,
         pixelRatio: value.pixelRatio,
-        styleUrl: value.styleUrl,
-        metadata: metadata,
-      );
-  }
-}
-
-/// The bounds of a GeoJSON geometry, which regions that other apps created
-/// can be defined by.
-LngLatBounds geometryBounds(Object? geometry) {
-  var west = double.infinity;
-  var east = double.negativeInfinity;
-  var south = double.infinity;
-  var north = double.negativeInfinity;
-  void visit(Object? coordinates) {
-    if (coordinates is! List || coordinates.isEmpty) return;
-    if (coordinates case [final num lon, final num lat, ...]) {
-      west = min(west, lon.toDouble());
-      east = max(east, lon.toDouble());
-      south = min(south, lat.toDouble());
-      north = max(north, lat.toDouble());
-      return;
-    }
-    coordinates.forEach(visit);
-  }
-
-  void visitGeometry(Object? json) {
-    if (json is! Map) return;
-    visit(json['coordinates']);
-    (json['geometries'] as List?)?.forEach(visitGeometry);
-  }
-
-  visitGeometry(geometry);
-  if (!west.isFinite) {
-    return const LngLatBounds(
-      longitudeWest: 0,
-      longitudeEast: 0,
-      latitudeSouth: 0,
-      latitudeNorth: 0,
-    );
-  }
-  return LngLatBounds(
-    longitudeWest: west,
-    longitudeEast: east,
-    latitudeSouth: south,
-    latitudeNorth: north,
-  );
-}
+        includeIdeographs: value.includeIdeographs,
+      ),
+  },
+  metadata: decodeRegionMetadata(info.metadata),
+);

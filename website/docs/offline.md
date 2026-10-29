@@ -49,33 +49,64 @@ to learn more.
 ## Downloading Map Regions
 
 Using OfflineManager, you can bulk-download specific map regions for offline
-access.
+access. An `OfflineRegionDefinition` says what a region covers:
+
+- `OfflineTilePyramidRegionDefinition` downloads every tile within
+  `LngLatBounds`.
+- `OfflineGeometryRegionDefinition` downloads only the tiles that a geometry
+  touches, such as a route as a `LineString` or an area as a `Polygon`. It
+  needs far fewer tiles than the bounding box of a long or diagonal route.
+
+Both download the tiles from `minZoom` to `maxZoom`, or to the maximum zoom
+level of each tile source if that is lower.
 
 ```dart
 Future<void> downloadMyMap() async {
   final stream = manager.downloadRegion(
-    minZoom: 10,
-    maxZoom: 14,
-    bounds: LngLatBounds(/* ... */),
-    mapStyleUrl: '...',
-    pixelDensity: 1,
+    definition: OfflineTilePyramidRegionDefinition(
+      bounds: LngLatBounds(/* ... */),
+      styleUrl: '...',
+      minZoom: 10,
+      maxZoom: 14,
+      pixelRatio: 1,
+    ),
+    metadata: {'name': 'Bregenz'},
   );
   await for (final update in stream) {
     if (update.downloadCompleted) {
       print('region downloaded: ${update.region}');
     } else {
+      final status = update.status;
       print(
-        '${update.loadedTiles} / ${update.totalTiles} '
+        '${status.completedResourceCount} / ${status.requiredResourceCount} '
             '(${((update.progress ?? 0) * 100).toStringAsFixed(0)}%)',
       );
     }
   }
 }
+
+final route = OfflineGeometryRegionDefinition(
+  geometry: LineString.from(const [
+    Geographic(lon: 9.7471, lat: 47.5031),
+    Geographic(lon: 9.6838, lat: 47.5459),
+  ]),
+  styleUrl: '...',
+  minZoom: 10,
+  maxZoom: 15,
+  pixelRatio: 1,
+);
 ```
 
-Resources that fail to load arrive as `OfflineDownloadException` errors on the
-stream, and the download retries them. Cancelling the subscription pauses the
+Resources that fail to load arrive as `OfflineResourceException` errors on
+the stream, with the `reason` they failed, and the download retries them. A
+region with more tiles than MapLibre Native allows stops with an
+`OfflineTileCountLimitException`. Cancelling the subscription pauses the
 download; `manager.resumeDownload(regionId: id)` continues it.
+
+`manager.getRegionStatus(regionId: id)` reports how far the download of a
+region got, also while no download runs: the downloaded and required resources
+and tiles, their size, and whether it is complete.
+
 ## Managing Offline Regions
 
 After regions are downloaded, they can be managed using methods to list, merge,

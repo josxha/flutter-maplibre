@@ -211,58 +211,125 @@ void main() {
   });
 
   group('offline models', () {
-    const region = OfflineRegion(
-      id: 23,
-      bounds: LngLatBounds(
-        longitudeWest: 1,
-        longitudeEast: 3,
-        latitudeSouth: -3,
-        latitudeNorth: 3,
-      ),
+    const bounds = LngLatBounds(
+      longitudeWest: 1,
+      longitudeEast: 3,
+      latitudeSouth: -3,
+      latitudeNorth: 3,
+    );
+    const definition = OfflineTilePyramidRegionDefinition(
+      bounds: bounds,
       minZoom: 2,
       maxZoom: 4,
       pixelRatio: 1,
       styleUrl: 'https://example.com/style.json',
     );
+    const region = OfflineRegion(id: 23, definition: definition);
 
     test('OfflineRegion compares by value', () {
       const same = OfflineRegion(
         id: 23,
-        bounds: LngLatBounds(
-          longitudeWest: 1,
-          longitudeEast: 3,
-          latitudeSouth: -3,
-          latitudeNorth: 3,
+        definition: OfflineTilePyramidRegionDefinition(
+          bounds: bounds,
+          minZoom: 2,
+          maxZoom: 4,
+          pixelRatio: 1,
+          styleUrl: 'https://example.com/style.json',
         ),
-        minZoom: 2,
-        maxZoom: 4,
-        pixelRatio: 1,
-        styleUrl: 'https://example.com/style.json',
       );
       expect(region, same);
       expect(region.hashCode, same.hashCode);
-      expect(region.toString(), contains('styleUrl: ${region.styleUrl}'));
+      expect(
+        region,
+        isNot(const OfflineRegion(id: 24, definition: definition)),
+      );
+      expect(region.toString(), contains('styleUrl: ${definition.styleUrl}'));
+      expect(definition.includeIdeographs, isFalse);
+    });
+
+    test('a geometry definition has the bounds of its geometry', () {
+      OfflineGeometryRegionDefinition route() =>
+          OfflineGeometryRegionDefinition(
+            geometry: LineString.from(const [
+              Geographic(lon: 1, lat: 3),
+              Geographic(lon: 3, lat: -3),
+              Geographic(lon: 2, lat: 0),
+            ]),
+            minZoom: 2,
+            maxZoom: double.infinity,
+            pixelRatio: 1,
+            styleUrl: 'https://example.com/style.json',
+          );
+      expect(route().bounds, bounds);
+      // Geometries with the same coordinates are equal.
+      expect(route(), route());
+      expect(route().hashCode, route().hashCode);
+      expect(
+        route(),
+        isNot(
+          OfflineGeometryRegionDefinition(
+            geometry: LineString.from(const [
+              Geographic(lon: 1, lat: 3),
+              Geographic(lon: 3, lat: -3),
+            ]),
+            minZoom: 2,
+            maxZoom: double.infinity,
+            pixelRatio: 1,
+            styleUrl: 'https://example.com/style.json',
+          ),
+        ),
+      );
+      expect(route().toString(), contains('"type":"LineString"'));
     });
 
     test('DownloadProgress reports its progress', () {
       DownloadProgress progress({
-        int loaded = 1,
-        int total = 4,
-        bool estimated = false,
+        int completed = 1,
+        int required = 4,
+        bool precise = true,
+        bool complete = false,
       }) => DownloadProgress(
-        loadedBytes: 100,
-        loadedTiles: loaded,
-        totalTiles: total,
-        totalTilesEstimated: estimated,
         region: region,
-        downloadCompleted: loaded == total,
+        status: OfflineRegionStatus(
+          downloadState: OfflineRegionDownloadState.active,
+          completedResourceCount: completed,
+          completedResourceSize: 100,
+          completedTileCount: completed,
+          completedTileSize: 80,
+          requiredResourceCount: required,
+          requiredTileCount: required,
+          requiredResourceCountIsPrecise: precise,
+          complete: complete,
+        ),
       );
       expect(progress().progress, 0.25);
-      expect(progress(loaded: 0, total: 0).progress, 1);
-      expect(progress(estimated: true).progress, isNull);
+      expect(progress().downloadCompleted, isFalse);
+      expect(progress(completed: 0, required: 0).progress, 1);
+      expect(progress(precise: false).progress, isNull);
+      expect(progress(precise: false, complete: true).progress, 1);
+      expect(progress(complete: true).downloadCompleted, isTrue);
       expect(progress(), progress());
-      expect(progress(), isNot(progress(loaded: 2)));
-      expect(progress().toString(), contains('loadedTiles: 1'));
+      expect(progress().hashCode, progress().hashCode);
+      expect(progress(), isNot(progress(completed: 2)));
+      expect(progress().toString(), contains('completedTileCount: 1'));
+      expect(progress().toString(), contains('downloadState: active'));
+    });
+
+    test('download exceptions describe the problem', () {
+      const resource = OfflineResourceException(
+        regionId: 3,
+        reason: OfflineResourceErrorReason.notFound,
+        details: 'HTTP 404',
+      );
+      expect(
+        resource.toString(),
+        'OfflineDownloadException: A resource of offline region 3 failed to '
+        'load (notFound): HTTP 404',
+      );
+      const limit = OfflineTileCountLimitException(regionId: 3, limit: 6000);
+      expect(limit.message, contains('6000 tiles'));
+      expect(limit, isA<OfflineDownloadException>());
+      expect(limit.regionId, 3);
     });
   });
 

@@ -24,6 +24,18 @@
 - Removed the `pointer_interceptor` dependency. Widgets over the map no longer
   need a `PointerInterceptor` on web; `WidgetLayer.allowInteraction` works the
   same on every platform.
+- `OfflineManager.downloadRegion` takes an `OfflineRegionDefinition`, either
+  an `OfflineTilePyramidRegionDefinition` of bounds or the new
+  `OfflineGeometryRegionDefinition` of a geometry, instead of `mapStyleUrl`,
+  `bounds`, `minZoom`, `maxZoom`, `pixelDensity` and `includeIdeographs`.
+  `OfflineRegion` holds that `definition` instead of its own `bounds`,
+  `minZoom`, `maxZoom`, `pixelRatio` and `styleUrl`.
+- `DownloadProgress` holds an `OfflineRegionStatus` as `status` instead of
+  `loadedBytes`, `loadedTiles`, `totalTiles` and `totalTilesEstimated`, and its
+  `progress` counts every resource, not only tiles.
+- `OfflineDownloadException` is sealed: download streams report an
+  `OfflineResourceException` with its `reason`, or an
+  `OfflineTileCountLimitException`, both with the `regionId`.
 - `OfflineManager.getOfflineRegion` returns null for an unknown region.
   `setOfflineTileCountLimit` and `runPackDatabaseAutomatically` were removed,
   as MapLibre Native offers neither.
@@ -58,6 +70,9 @@
   `invalidateRegion`, `resumeDownload` and `includeIdeographs`; failed
   resources are reported as `OfflineDownloadException`s on the download
   stream.
+- Native: `OfflineGeometryRegionDefinition` downloads only the tiles that a
+  geometry such as a route touches, and `OfflineManager.getRegionStatus`
+  reports how far the download of a region got.
 - Native: maps cache resources in `maplibre_native.db` in the app support
   directory, which also holds the offline regions.
 - `StyleController.getLineLayer` returns a `LineStyleLayerController`, whose

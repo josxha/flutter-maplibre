@@ -65,20 +65,20 @@ abstract interface class OfflineManager {
   /// Delete existing database and re-initialize.
   Future<void> resetDatabase();
 
-  /// Downloads a map region, and reports its progress until the download
-  /// completes.
+  /// Retrieve how far the download of a region got.
+  Future<OfflineRegionStatus> getRegionStatus({required int regionId});
+
+  /// Creates a region of [definition], downloads it, and reports its progress
+  /// until the download completes.
   ///
-  /// The stream reports resources that fail to load as errors; the download
-  /// retries them. Cancelling the subscription pauses the download, which
-  /// [resumeDownload] continues.
+  /// The stream reports resources that fail to load as
+  /// [OfflineResourceException]s; the download retries them. A region with
+  /// more tiles than MapLibre allows stops with an
+  /// [OfflineTileCountLimitException]. Cancelling the subscription pauses the
+  /// download, which [resumeDownload] continues.
   Stream<DownloadProgress> downloadRegion({
-    required String mapStyleUrl,
-    required LngLatBounds bounds,
-    required double minZoom,
-    required double maxZoom,
-    required double pixelDensity,
+    required OfflineRegionDefinition definition,
     Map<String, Object?> metadata = const {},
-    bool includeIdeographs = false,
   });
 
   /// Continues the download of a region that is in the database, and
@@ -86,17 +86,82 @@ abstract interface class OfflineManager {
   Stream<DownloadProgress> resumeDownload({required int regionId});
 }
 
-/// Reported by the stream of [OfflineManager.downloadRegion] when a resource
-/// of the region fails to load, or the region exceeds the tile count limit.
+/// Reported by the stream of [OfflineManager.downloadRegion] and
+/// [OfflineManager.resumeDownload] when the download of a region runs into a
+/// problem.
 ///
 /// {@category Offline}
-final class OfflineDownloadException implements Exception {
-  /// Creates an exception with [message].
-  const OfflineDownloadException(this.message);
+sealed class OfflineDownloadException implements Exception {
+  const OfflineDownloadException({required this.regionId});
+
+  /// The id of the region whose download reported the problem.
+  final int regionId;
 
   /// What went wrong.
-  final String message;
+  String get message;
 
   @override
   String toString() => 'OfflineDownloadException: $message';
+}
+
+/// Why a resource of an offline region failed to load.
+///
+/// {@category Offline}
+enum OfflineResourceErrorReason {
+  /// The server has no such resource.
+  notFound,
+
+  /// The server answered with an error.
+  server,
+
+  /// The server could not be reached.
+  connection,
+
+  /// The server limits the rate of requests.
+  rateLimit,
+
+  /// Something else went wrong.
+  other,
+}
+
+/// A resource of an offline region failed to load. The download retries it.
+///
+/// {@category Offline}
+final class OfflineResourceException extends OfflineDownloadException {
+  /// Creates an exception for a resource of [regionId] that failed to load.
+  const OfflineResourceException({
+    required super.regionId,
+    required this.reason,
+    this.details = '',
+  });
+
+  /// Why the resource failed to load.
+  final OfflineResourceErrorReason reason;
+
+  /// The error message of MapLibre, if there is one.
+  final String details;
+
+  @override
+  String get message =>
+      'A resource of offline region $regionId failed to load '
+      '(${reason.name})${details.isEmpty ? '' : ': $details'}';
+}
+
+/// An offline region needs more tiles than MapLibre allows, so its download
+/// stopped.
+///
+/// {@category Offline}
+final class OfflineTileCountLimitException extends OfflineDownloadException {
+  /// Creates an exception for [regionId], which exceeds [limit] tiles.
+  const OfflineTileCountLimitException({
+    required super.regionId,
+    required this.limit,
+  });
+
+  /// The maximum number of tiles of a region.
+  final int limit;
+
+  @override
+  String get message =>
+      'Offline region $regionId exceeds the tile count limit of $limit tiles';
 }

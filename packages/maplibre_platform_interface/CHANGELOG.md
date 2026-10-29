@@ -6,6 +6,9 @@
   `androidTranslucentTextureSurface`, `androidForegroundLoadColor` and
   `webviewDebugMode`, and the `AndroidPlatformViewMode` enum, whose
   implementations were removed.
+- `OfflineManager.downloadRegion` takes an `OfflineRegionDefinition`, and
+  `OfflineRegion`, `DownloadProgress` and `OfflineDownloadException` changed;
+  `OfflineManager.getRegionStatus` is new. See the maplibre changelog.
 - The image methods of `StyleController` take sizes in logical pixels and a
   `pixelRatio`; see the maplibre changelog.
 
