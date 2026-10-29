@@ -13,8 +13,9 @@ are tracked in detail in [`.agents/decisions.md`](.agents/decisions.md).
   shared-storage render targets of the Metal ring.
 - Metal: no check sees Flutter's GPU reads of a slot, so the ring holds the
   last two slots Flutter took. Look for tearing on a device under load.
-- macOS needs 14.3, above Flutter 3.47's 12.0, because of the C library's
-  preset (0.202610.3 still builds for 14.3).
+- macOS needs 14.3, above Flutter 3.47's 12.0: MapLibre Native itself
+  refuses to build for less (its `CMakeLists.txt` fails below 14.3), so the
+  C library can't lower it.
 - Intel Macs: 0.202610.3 publishes a macOS x64 library and the example
   builds universal apps, but no Intel Mac has run the tests. x86_64 iOS
   simulators still have no library.
@@ -48,27 +49,35 @@ are tracked in detail in [`.agents/decisions.md`](.agents/decisions.md).
 
 ## Upstream (maplibre_native_ffi)
 
-- Offline regions with a `maxZoom` of infinity download no tiles at all
-  (tile pyramid and geometry, 0.202610.3 on Linux), although the C API
-  documents infinity as "each tile source's own maximum zoom". The docs of
-  `OfflineRegionDefinition.maxZoom` ask for a finite value; report it
-  upstream.
-- Profile and release maps freeze after about 30 frames, still in
-  0.202610.3: AOT drops the write-only `NativeHandleState._callbackRoots`,
-  which alone roots a render session's frame wake. `maplibre_native` works
-  around it with a frame wake of its own; drop that once upstream adds
-  `@pragma('vm:entry-point')` or reads the field (also check the `_parent`
-  fields). Report it upstream.
-- `GeoJsonSourceDataHandle.create` parses and indexes GeoJSON on the UI
-  thread, and since 0.202610.3 takes a decoded value, so a GeoJSON string is
-  decoded in Dart and encoded again; an async variant that takes the text
-  would keep large source updates out of the frame.
-- Check that 0.202610.3 carries the hook fix (no second build after its
-  download).
-- A macOS preset that targets 12.0, Flutter's minimum.
-- Libraries for x86_64 iOS simulators.
-- 15 of our 16 feedback points are still open; frame sync (#1) is only
-  partly addressed.
+Checked against the 0.202610.3 release (Dart package, C headers and the
+pinned MapLibre Native commit `36132b0`); none is fixed on upstream main
+yet. Report each with its evidence.
+
+- Offline regions with a `maxZoom` of infinity download no tiles on x86-64
+  (tile pyramid and geometry), although the C API documents infinity as
+  "each tile source's own maximum zoom". The ffi passes infinity through to
+  MapLibre Native, whose `util::coveringZoomLevel` casts the zoom to
+  `int32_t`: undefined behavior that gives `INT32_MIN` on x86-64, so the
+  zoom range ends below its start. Seen in our Linux integration tests and
+  reproduced with the same cast; arm64 saturates and may work. Until it is
+  fixed, the docs of `OfflineRegionDefinition.maxZoom` ask for a finite
+  value.
+- Profile and release maps freeze after about 30 frames. A render
+  session's callback registrations (its frame wake) are kept only in
+  `NativeHandleState._callbackRoots`, a field that is written and never
+  read (`// ignore: unused_field`), so AOT drops it and the wake is
+  collected. `@pragma('vm:entry-point')` on the field fixed it in a profile
+  build on Windows (165 of 165 frames shown); `lifecycle.dart` is unchanged
+  in 0.202610.3. `maplibre_native` works around it with a frame wake of its
+  own; drop that once upstream fixes it.
+- `GeoJsonSourceDataHandle.create` is synchronous: the C API prepares the
+  data before it returns, so large GeoJSON updates block the calling (UI)
+  thread. The Dart binding also always `jsonEncode`s its argument, so a
+  GeoJSON string must be decoded in Dart and is encoded again. The C API
+  allows preparing on another thread, so an async variant that takes the
+  text would keep large updates out of the frame.
+- No library for x86_64 iOS simulators: 0.202610.3 publishes only
+  `ios-simulator-arm64`, and there is no preset for x86_64.
 
 ## Open issues
 

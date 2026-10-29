@@ -449,10 +449,12 @@ Each entry: the decision, then why.
   `flutter test integration_test/all_test.dart -d linux` in `examples` with and
   without `MAPLIBRE_NATIVE_DISABLE_ZERO_COPY=1`, and look for the
   "falling back to CPU readback" log line.
-- Intel Macs and x86_64 simulators have no published C library.
-- The C library's macOS preset targets 14.3, above Flutter 3.47's minimum of
-  12.0, so apps must raise their macOS target. Lowering it is up to
-  `maplibre_native_ffi`.
+- x86_64 iOS simulators have no published C library (0.202610.3 publishes a
+  macOS x64 one).
+- The C library targets macOS 14.3, above Flutter 3.47's minimum of 12.0,
+  so apps must raise their macOS target. MapLibre Native itself requires
+  14.3 (its `CMakeLists.txt` fails below it), so `maplibre_native_ffi`
+  can't lower it.
 - The macOS presets also offer Vulkan and OpenGL. Selecting either with
   `backend.macos` makes a macOS map throw `UnsupportedError`, since the
   plugin only integrates Metal.
