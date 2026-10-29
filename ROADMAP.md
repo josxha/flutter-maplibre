@@ -26,6 +26,10 @@ are tracked in detail in [`.agents/decisions.md`](.agents/decisions.md).
 - Profile and release builds: check on a device that maps keep rendering
   with the package's own frame wake (see Upstream).
 - Touch tilt and double-tap-drag are untested on Windows touchscreens.
+- Paused rendering (`MapLibreMap.paused`, auto-pause under `IndexedStack`,
+  `Visibility` and `TickerMode`): run `paused_test.dart` on Android, macOS
+  and iOS, and check with a GPU profiler that a paused Android map stays
+  idle.
 - On the iOS simulator in CI, flutter test sometimes never attaches to the
   app (3.47.7 and 3.47.8): the app logs its VM service, and no test starts.
   The watchdog restarts such a run, up to three times; the cause in
@@ -48,6 +52,8 @@ are tracked in detail in [`.agents/decisions.md`](.agents/decisions.md).
   learns when skwasm shows a frame by wrapping
   `ImageBitmapRenderingContext.transferFromImageBitmap`; switch to an engine
   API once Flutter has one.
+- A paused native map still renders the one frame it demanded before the
+  pause, at the next map update. The C API has no way to withdraw a demand.
 - Native lists no GeoJSON attributions of styles loaded from a network or
   `asset://` URL, as MapLibre Native drops them and the JSON is not at hand.
 - Offline: merging a database (`mergeOfflineRegions`) and resuming a paused
