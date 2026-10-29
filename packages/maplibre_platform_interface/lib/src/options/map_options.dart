@@ -15,8 +15,7 @@ class MapOptions {
     this.initStyle = 'https://demotiles.maplibre.org/style.json',
     this.initZoom = 0,
     this.initCenter,
-    @Deprecated('Renamed to initPitch') double? pitch,
-    double initPitch = 0,
+    this.initPitch = 0,
     this.initBearing = 0,
     this.minZoom = 0,
     this.maxZoom = 22,
@@ -24,7 +23,7 @@ class MapOptions {
     this.maxPitch = 60,
     this.maxBounds,
     this.gestures = const MapGestures.all(),
-  }) : initPitch = pitch ?? initPitch;
+  });
 
   /// Find the [MapOptions] of the closest [MapLibreMap] in the widget tree.
   /// Returns null if called outside of the [MapLibreMap.children].

@@ -70,9 +70,6 @@ export 'package:maplibre_platform_interface/maplibre_platform_interface.dart'
         TileScheme,
         VectorSource,
         VideoSource,
-        // Export deprecated constant for backwards compatibility
-        // ignore: deprecated_member_use
-        circumferenceOfEarth,
         degree2Radian,
         earthCircumferenceWgs84,
         htmlColorNames;

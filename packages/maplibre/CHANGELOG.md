@@ -65,6 +65,11 @@
   cleartext traffic for their hosts.
 - Web: `OfflineManager.createInstance` throws an `UnsupportedError` instead of
   an `Exception`.
+- Removed the deprecated `MapOptions.pitch` (use `initPitch`),
+  `circumferenceOfEarth` (use `earthCircumferenceWgs84`) and
+  `VectorSource.sourceLayer`, which had no effect.
+- `VideoSource.coordinates` is a `LngLatQuad`, like `ImageSource.coordinates`,
+  instead of a list of four `Geographic`s.
 
 ### Features
 
