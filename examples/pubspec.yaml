@@ -15,7 +15,7 @@ dependencies:
   geolocator: ^14.0.2
   go_router: ^18.0.0
   http: ^1.2.2
-  maplibre: ^0.3.7
+  maplibre: ^0.3.7+1
   maplibre_geolocator: ^0.1.0
 
 dev_dependencies:

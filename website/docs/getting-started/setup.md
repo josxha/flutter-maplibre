@@ -38,7 +38,7 @@ platform, so widgets over the map keep their own taps and drags without a
     
     ```yaml title="pubspec.yaml" hl_lines="2"
     dependencies:
-      maplibre: ^0.3.7
+      maplibre: ^0.3.7+1
     ```
     and then run `flutter pub get` to install the package.
     
