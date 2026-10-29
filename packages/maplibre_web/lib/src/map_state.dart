@@ -453,6 +453,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
           geometry: f.geometry.asStringMap(),
           sourceId: f.source,
           sourceLayer: f.sourceLayer,
+          layerId: f.layer.id,
         ),
       )
       .toList(growable: false);

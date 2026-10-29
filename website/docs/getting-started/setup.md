@@ -197,13 +197,8 @@ EXCLUDED_ARCHS[sdk=iphonesimulator*] = x86_64
 The map renders with Metal into a Flutter texture, on macOS 14.3 or newer.
 Raise `MACOSX_DEPLOYMENT_TARGET` of the Runner target in
 `macos/Runner.xcodeproj` to 14.3, as Flutter's template sets an older one. The
-C library is published for Apple silicon only, so exclude x86_64 in
-`macos/Flutter/Flutter-Debug.xcconfig` and
-`macos/Flutter/Flutter-Release.xcconfig`:
-
-```text title="macos/Flutter/Flutter-Debug.xcconfig"
-EXCLUDED_ARCHS = x86_64
-```
+C library is published for Apple silicon and Intel Macs, so apps build for
+both.
 
 Sandboxed apps need the outgoing network entitlement to load styles and tiles.
 Add it to `macos/Runner/DebugProfile.entitlements` and

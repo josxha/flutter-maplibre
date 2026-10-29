@@ -41,9 +41,9 @@ abstract base class FrameTarget {
   /// Whether frames reach Flutter without a CPU copy.
   bool get isZeroCopy => true;
 
-  /// The frame demand flags of the session.
-  FrameDemandFlag get demandFlags =>
-      FrameDemandFlag.ifNeeded | FrameDemandFlag.waitForUpdate;
+  /// The frame demand flags of the session. A demand renders only a newer
+  /// map update, and waits for one when there is none yet.
+  FrameDemandFlag get demandFlags => FrameDemandFlag.waitForUpdate;
 
   /// Whether the target takes frames now. A target can stop taking them for
   /// a while, as Android does while the app is in the background.
@@ -51,11 +51,7 @@ abstract base class FrameTarget {
 
   /// Attaches a render session of [map] to this target. Frames wake through
   /// [frameWake]. When this throws, the renderer disposes the target.
-  RenderSessionAttachment attach(
-    MapHandle map,
-    LogicalExtent extent,
-    Wake frameWake,
-  );
+  NewRenderSession attach(MapHandle map, LogicalExtent extent, Wake frameWake);
 
   /// Sizes the target and the session to [extent].
   Future<void> resize(RenderSessionHandle session, LogicalExtent extent);
@@ -64,25 +60,13 @@ abstract base class FrameTarget {
   /// there was none to hand over.
   Future<bool> present(RenderSessionHandle session);
 
-  /// Ends the session's work before it closes. Returns whether it kept
-  /// graphics objects that need their parents until process exit.
-  Future<bool> endSession(RenderSessionHandle session) async =>
-      abandonSession(session);
+  /// Closes the session. A core-worker session detaches from its target
+  /// there, off the UI thread, and the returned future completes once no
+  /// library thread touches the target's graphics objects anymore.
+  Future<void> endSession(RenderSessionHandle session) => session.close();
 
   /// Releases the texture once the session, map, and runtime are closed.
-  /// [quarantined] is what [endSession] returned.
-  void dispose({required bool quarantined});
-}
-
-/// Abandons [session]. Returns whether it kept graphics objects that need
-/// their parents until process exit.
-bool abandonSession(RenderSessionHandle session) {
-  try {
-    return session.abandon().quarantinedResourceCount > 0;
-  } on MaplibreException {
-    // A session that already let go of its target has nothing to abandon.
-    return false;
-  }
+  void dispose();
 }
 
 /// A target whose texture the plugin backs with a ring of [gpuSlotCount]
@@ -102,7 +86,7 @@ abstract base class BorrowedRingTarget<Slot> extends FrameTarget {
   List<Slot> slots;
 
   /// Attaches the session to the ring [slots] at [extent].
-  RenderSessionAttachment attachRing(
+  NewRenderSession attachRing(
     MapHandle map,
     LogicalExtent extent,
     RenderSessionAttachOptions options,
@@ -127,7 +111,7 @@ abstract base class BorrowedRingTarget<Slot> extends FrameTarget {
   void disposeTexture();
 
   @override
-  RenderSessionAttachment attach(
+  NewRenderSession attach(
     MapHandle map,
     LogicalExtent extent,
     Wake frameWake,
@@ -159,11 +143,11 @@ abstract base class BorrowedRingTarget<Slot> extends FrameTarget {
       presentSlot(slotOf(frame));
       return true;
     } finally {
-      frame.release(gpuSyncDefault());
+      frame.release();
     }
   }
 
-  /// Abandon destroyed the session's objects, and the ring is the plugin's.
+  /// The session no longer touches the ring, which is the plugin's.
   @override
-  void dispose({required bool quarantined}) => disposeTexture();
+  void dispose() => disposeTexture();
 }

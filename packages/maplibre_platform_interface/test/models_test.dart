@@ -134,7 +134,7 @@ void main() {
   });
 
   group('RenderedFeature', () {
-    test('compares by ID and source, not by properties', () {
+    test('compares by ID, source, and layer, not by properties', () {
       const feature = RenderedFeature(
         id: 1,
         properties: {'name': 'a'},
@@ -157,6 +157,18 @@ void main() {
         feature,
         isNot(const RenderedFeature(id: 1, properties: {}, sourceId: 'other')),
       );
+      expect(
+        feature,
+        isNot(
+          const RenderedFeature(
+            id: 1,
+            properties: {},
+            sourceId: 'source',
+            sourceLayer: 'layer',
+            layerId: 'roads',
+          ),
+        ),
+      );
     });
 
     test('toString names every value', () {
@@ -168,7 +180,7 @@ void main() {
       expect(
         feature.toString(),
         'RenderedFeature(id: x, properties: {name: a}, geometry: null, '
-        'sourceId: source, sourceLayer: null)',
+        'sourceId: source, sourceLayer: null, layerId: null)',
       );
     });
   });

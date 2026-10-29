@@ -40,16 +40,16 @@ final class AndroidPlugin {
 
   /// Initializes the C library for Android once, and returns the EGL display
   /// and config that OpenGL ES sessions create their dedicated contexts from.
-  static OpenglContextDescriptor eglContext() {
+  static OpenGlContextDescriptor eglContext() {
     final values = MaplibreNativeApi.eglContext();
     try {
-      return OpenglContextDescriptor(
-        ownership: OpenglContextOwnership.dedicated,
-        data: OpenglContextDescriptorDataEgl(
+      return OpenGlContextDescriptor(
+        ownership: OpenGlContextOwnership.dedicated,
+        data: OpenGlContextDescriptorDataEgl(
           EglContextDescriptor(
             display: NativePointer(values[0]),
             config: NativePointer(values[1]),
-            clientApi: OpenglClientApi.gles,
+            clientApi: OpenGlClientApi.gles,
           ),
         ),
       );
@@ -117,13 +117,9 @@ final class AndroidPlugin {
   static void releaseSurface(int surface, {required bool opengl}) =>
       MaplibreNativeApi.releaseSurface(surface, opengl);
 
-  /// Releases a texture and its listener. [keepSurface] keeps the surface,
-  /// which a Vulkan swapchain that abandon quarantined still needs.
-  static void disposeTexture(
-    SurfaceTexture texture, {
-    required bool keepSurface,
-  }) {
-    MaplibreNativeApi.disposeTexture(texture.textureId, keepSurface);
+  /// Releases a texture, its surface, and its listener.
+  static void disposeTexture(SurfaceTexture texture) {
+    MaplibreNativeApi.disposeTexture(texture.textureId, false);
     texture.listener.release();
   }
 
@@ -150,10 +146,7 @@ final class AndroidPlugin {
 
   /// Hands a render client its [session], which the thread then services.
   static void setRenderClientSession(int client, RenderSessionHandle session) =>
-      MaplibreNativeApi.setRenderClientSession(
-        client,
-        session.id.toSigned(64).toInt(),
-      );
+      MaplibreNativeApi.setRenderClientSession(client, session.id);
 
   /// Stops servicing a render client after its work in flight.
   static void removeRenderClient(int client) =>

@@ -31,5 +31,5 @@ Future<RuntimeHandle> createRuntime() async {
   final path = await databasePath();
   // Android needs the C library initialized before its first use.
   if (Platform.isAndroid) AndroidPlugin.initialize();
-  return runtimeCreate(RuntimeOptions(cachePath: path));
+  return RuntimeHandle.create(RuntimeOptions(cachePath: path));
 }

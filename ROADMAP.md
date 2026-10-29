@@ -14,8 +14,16 @@ are tracked in detail in [`.agents/decisions.md`](.agents/decisions.md).
 - Metal: no check sees Flutter's GPU reads of a slot, so the ring holds the
   last two slots Flutter took. Look for tearing on a device under load.
 - macOS needs 14.3, above Flutter 3.47's 12.0, because of the C library's
-  preset.
-- Intel Macs and x86_64 simulators have no published C library.
+  preset (0.202610.3 still builds for 14.3).
+- Intel Macs: 0.202610.3 publishes a macOS x64 library and the example
+  builds universal apps, but no Intel Mac has run the tests. x86_64 iOS
+  simulators still have no library.
+- Linux in a cloud container (Xvfb, llvmpipe and lavapipe): the integration
+  tests crash Flutter's raster thread after a few tests, before and after
+  the 0.202610.3 update, on the zero-copy and the CPU path. Check whether
+  it is the container's GL or our GL texture.
+- Profile and release builds: check on a device that maps keep rendering
+  with the package's own frame wake (see Upstream).
 - Touch tilt and double-tap-drag are untested on Windows touchscreens.
 - On the iOS simulator in CI, flutter test sometimes never attaches to the
   app (3.47.7 and 3.47.8): the app logs its VM service, and no test starts.
@@ -39,16 +47,20 @@ are tracked in detail in [`.agents/decisions.md`](.agents/decisions.md).
 
 ## Upstream (maplibre_native_ffi)
 
-- Profile and release maps freeze after about 30 frames: AOT drops the
-  write-only `NativeHandleState._callbackRoots`, so the frame wake is
-  collected. Needs `@pragma('vm:entry-point')` or a read of the field (also
-  check the `_parent` fields). Seen on Windows; likely every native platform.
-- `geojsonSourceDataCreate` parses and indexes GeoJSON on the UI thread; an
-  async variant would keep large source updates out of the frame.
-- The unreleased hook fix on main (the hook no longer forces a second build
-  after its download) comes with the next release.
+- Profile and release maps freeze after about 30 frames, still in
+  0.202610.3: AOT drops the write-only `NativeHandleState._callbackRoots`,
+  which alone roots a render session's frame wake. `maplibre_native` works
+  around it with a frame wake of its own; drop that once upstream adds
+  `@pragma('vm:entry-point')` or reads the field (also check the `_parent`
+  fields). Report it upstream.
+- `GeoJsonSourceDataHandle.create` parses and indexes GeoJSON on the UI
+  thread, and since 0.202610.3 takes a decoded value, so a GeoJSON string is
+  decoded in Dart and encoded again; an async variant that takes the text
+  would keep large source updates out of the frame.
+- Check that 0.202610.3 carries the hook fix (no second build after its
+  download).
 - A macOS preset that targets 12.0, Flutter's minimum.
-- Libraries for x86_64 macOS and simulators.
+- Libraries for x86_64 iOS simulators.
 - 15 of our 16 feedback points are still open; frame sync (#1) is only
   partly addressed.
 
@@ -94,7 +106,8 @@ are tracked in detail in [`.agents/decisions.md`](.agents/decisions.md).
 - Read layers back into the typed `Layer`/`Source` classes; fall back to
   raw JSON for properties they don't model.
 - Batch changes on native with command groups, so a set of edits shows in
-  one frame.
+  one frame. Use `MapHandle.discarding` for setters that need no result, as
+  gesture deltas and `LineStyleLayerController` already do.
 - Give the style classes `==` and `hashCode`, so the declarative layers can
   diff properties and update in place instead of removing and re-adding.
 
@@ -113,6 +126,9 @@ are tracked in detail in [`.agents/decisions.md`](.agents/decisions.md).
   raw JSON as an escape hatch.
 - Build it after layer CRUD, so the setters take typed values from the
   start.
+- Native tests can check the builder against MapLibre itself:
+  `StyleExpressionHandle` (0.202610.3) parses and evaluates an expression
+  without a map.
 
 ### Custom tile loading
 

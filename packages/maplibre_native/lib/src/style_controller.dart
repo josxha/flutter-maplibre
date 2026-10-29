@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'dart:ui' as ui;
 
 import 'package:flutter/foundation.dart';
-import 'package:maplibre_native/src/command.dart';
 import 'package:maplibre_native_ffi/maplibre_native_ffi.dart' as mln;
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 
@@ -28,7 +27,7 @@ class StyleControllerNative extends StyleController {
 
   /// The options that [addSource] gave GeoJSON sources, by id. Data for a
   /// source must be prepared with the options of the source.
-  final _geoJsonOptions = <String, mln.GeojsonSourceOptions>{};
+  final _geoJsonOptions = <String, mln.GeoJsonSourceOptions>{};
 
   /// Refreshes the cached layer ids and attributions from the map.
   Future<void> refresh() async {
@@ -111,9 +110,9 @@ class StyleControllerNative extends StyleController {
         ),
       },
     };
-    await checkCommand(_map.addStyleSourceJson(source.id, _encode(json)));
+    await _map.addStyleSourceJson(source.id, json);
     if (source is GeoJsonSource) {
-      _geoJsonOptions[source.id] = mln.GeojsonSourceOptions(
+      _geoJsonOptions[source.id] = mln.GeoJsonSourceOptions(
         maxZoom: source.maxZoom,
         tolerance: source.tolerance,
         lineMetrics: source.lineMetrics,
@@ -179,9 +178,8 @@ class StyleControllerNative extends StyleController {
       }
     }
 
-    await checkCommand(
-      _map.addStyleLayerJson(_encode(json), beforeLayerId: beforeLayerId),
-    );
+    // An empty id appends the layer.
+    await _map.addStyleLayerJson(json, beforeLayerId ?? '');
     await _fetchLayerIds();
   }
 
@@ -192,15 +190,15 @@ class StyleControllerNative extends StyleController {
   }) async {
     final trimmed = data.trim();
     if (!trimmed.startsWith('{') && !trimmed.startsWith('[')) {
-      await checkCommand(_map.setGeojsonSourceUrl(id, trimmed));
+      await _map.setGeoJsonSourceUrl(id, trimmed);
       return;
     }
-    final handle = mln.geojsonSourceDataCreate(
-      utf8.encode(trimmed),
+    final handle = mln.GeoJsonSourceDataHandle.create(
+      jsonDecode(trimmed),
       options: _geoJsonOptions[id],
     );
     try {
-      await checkCommand(_map.setGeojsonSourceData(id, handle));
+      await _map.setGeoJsonSourceData(id, handle);
     } finally {
       handle.close();
     }
@@ -226,8 +224,7 @@ class StyleControllerNative extends StyleController {
     if (info?.type != 'line') return null;
     final paint = <String, Object?>{};
     for (final name in LineStyleLayerController.paintProperties) {
-      final value = await _map.getStyleLayerProperty(id, name);
-      paint[name] = value == null ? null : jsonDecode(utf8.decode(value));
+      paint[name] = await _map.getStyleLayerProperty(id, name);
     }
     return LineStyleLayerController(
       id: id,
@@ -235,7 +232,7 @@ class StyleControllerNative extends StyleController {
       // The command runs in order with later ones, so an animation doesn't
       // wait for each frame's update.
       setPaintProperty: (name, value) =>
-          _map.discarding.setStyleLayerProperty(id, name, _encode(value)),
+          _map.discarding.setStyleLayerProperty(id, name, value),
     );
   }
 
@@ -270,17 +267,15 @@ class StyleControllerNative extends StyleController {
     if (data == null) {
       throw StateError('Failed to read the pixels of the image "$id".');
     }
-    await checkCommand(
-      _map.setStyleImage(
-        id,
-        mln.PremultipliedRgba8Image(
-          width: image.width,
-          height: image.height,
-          stride: image.width * 4,
-          pixels: data.buffer.asUint8List(),
-        ),
-        options: mln.StyleImageOptions(pixelRatio: pixelRatio),
+    await _map.setStyleImage(
+      id,
+      mln.PremultipliedRgba8Image(
+        width: image.width,
+        height: image.height,
+        stride: image.width * 4,
+        pixels: data.buffer.asUint8List(),
       ),
+      options: mln.StyleImageOptions(pixelRatio: pixelRatio),
     );
   }
 
@@ -293,9 +288,11 @@ class StyleControllerNative extends StyleController {
   Future<void> _checkUnlessMissing(
     Future<mln.CommandCompletion> command,
   ) async {
-    final completion = await command;
-    if (completion.status == mln.Status.notFound) return;
-    await checkCommand(Future.value(completion));
+    try {
+      await command;
+    } on mln.MaplibreException catch (error) {
+      if (error.status != mln.Status.notFound) rethrow;
+    }
   }
 
   @override
@@ -350,9 +347,6 @@ class StyleControllerNative extends StyleController {
     }
     return trimmed;
   }
-
-  static Uint8List _encode(Object? json) =>
-      Uint8List.fromList(utf8.encode(jsonEncode(json)));
 }
 
 /// The attributions of the sources in [styleJson], by source id.

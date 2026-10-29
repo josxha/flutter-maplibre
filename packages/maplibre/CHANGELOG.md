@@ -14,9 +14,10 @@
   `Future`, because MapLibre Native answers feature queries asynchronously.
 - Removed `MapController.queryLayers` and `QueriedLayer`. Use
   `featuresAtPoint` with `layerIds` to test layers, and the new
-  `RenderedFeature.sourceId` and `RenderedFeature.sourceLayer` for the source.
-- `RenderedFeature` equality and `hashCode` compare `id`, `sourceId` and
-  `sourceLayer`.
+  `RenderedFeature.sourceId`, `RenderedFeature.sourceLayer` and
+  `RenderedFeature.layerId` for the source and the style layer.
+- `RenderedFeature` equality and `hashCode` compare `id`, `sourceId`,
+  `sourceLayer` and `layerId`.
 - Web: map gestures are recognized in Flutter, as on every other platform,
   instead of by MapLibre GL JS. Its keyboard navigation and shift-drag box
   zoom are gone. A wheel notch zooms as far as in MapLibre GL JS.
@@ -65,6 +66,14 @@
   layer every frame. `GeoJsonSource.lineMetrics` enables `line-progress`.
 - `StyleController.addImageFromUiImage` adds a `dart:ui` `Image` to the
   map from its pixels, without encoding it.
+- Native: built on `maplibre_native_ffi` 0.202610.3. Intel Macs are
+  supported, maps share glyphs, readback on discrete GPUs is faster, and
+  Android loads tiles through `HttpURLConnection`, which follows the app's
+  network security config.
+- Native: a map shows its initial camera and style in its first frame.
+- Native: closing a map no longer blocks the UI thread while its tiles and
+  GPU work finish.
+- Native: glyph and sprite load errors are logged.
 
 ### Bug Fixes
 
@@ -74,7 +83,12 @@
   (`--wasm`), which decoded and encoded them at the size of the view.
 - `MarkerLayer` applies `textOpacity` (it used `iconOpacity`) and
   `iconTranslate`, and `PolylineLayer` applies `blur`.
-- Native: `animateCamera` and `fitBounds` complete when the animation ends.
+- Native: `animateCamera`, `moveCamera` and `fitBounds` complete when the
+  camera's transitions end, including when another move cancels them.
+- Native: maps keep rendering in profile and release builds, where they
+  stopped after about 30 frames.
+- Native: `MapEventCameraIdle` follows the last transition of an
+  animation.
 - Native: a camera move from a short gesture is reported with
   `CameraChangeReason.apiGesture`.
 - Native: removing a layer or source that does not exist is not an error.

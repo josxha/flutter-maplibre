@@ -168,10 +168,7 @@ final class DesktopPlugin {
     int count,
   ) => [
     for (var i = 0; i < count; i++)
-      VulkanBorrowedTexture(
-        image: BigInt.from(slots[i].image).toUnsigned(64),
-        imageView: BigInt.from(slots[i].view).toUnsigned(64),
-      ),
+      VulkanBorrowedTexture(image: slots[i].image, imageView: slots[i].view),
   ];
 
   static String _message(Pointer<Char> error) => pluginErrorMessage(error);

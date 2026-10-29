@@ -7,10 +7,10 @@ import 'package:maplibre_native/src/database.dart';
 import 'package:maplibre_native_ffi/maplibre_native_ffi.dart' as mln;
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 
-final mln.RuntimeEventMask _offlineEvents =
-    mln.RuntimeEventMask.offlineRegionStatusChanged |
-    mln.RuntimeEventMask.offlineRegionResponseError |
-    mln.RuntimeEventMask.offlineRegionTileCountLimitExceeded;
+final mln.RuntimeEventFlag _offlineEvents =
+    mln.RuntimeEventFlag.offlineRegionStatusChanged |
+    mln.RuntimeEventFlag.offlineRegionResponseError |
+    mln.RuntimeEventFlag.offlineRegionTileCountLimitExceeded;
 
 /// The [OfflineManager] of maplibre_native, over the offline regions of the
 /// C API in the database that every map caches its resources in.
@@ -25,12 +25,9 @@ final class OfflineManagerNative implements OfflineManager {
     final runtime = await createRuntime();
     final manager = OfflineManagerNative._(runtime);
     try {
-      await runtime.setEventHandler(
-        mln.RuntimeEventHandler(
-          callback: (batch) => manager._onEvents(batch.events),
-        ),
-      );
-      runtime.setEventMask(runtime.getEventMask() | _offlineEvents);
+      await runtime.setEventHandler(manager._onEvents);
+      // The runtime renders no map, so it queues only offline events.
+      runtime.setEventMask(_offlineEvents);
     } on Object {
       await runtime.close();
       rethrow;
@@ -95,7 +92,7 @@ final class OfflineManagerNative implements OfflineManager {
 
   @override
   Future<void> setMaximumAmbientCacheSize({required int bytes}) =>
-      _runtime.setMaximumAmbientCacheSize(BigInt.from(bytes));
+      _runtime.setMaximumAmbientCacheSize(bytes);
 
   @override
   Future<void> clearAmbientCache() =>
@@ -282,9 +279,9 @@ DownloadProgress toDownloadProgress(
   OfflineRegion region,
   mln.OfflineRegionStatus status,
 ) => DownloadProgress(
-  loadedBytes: status.completedResourceSize.toInt(),
-  loadedTiles: status.completedTileCount.toInt(),
-  totalTiles: status.requiredTileCount.toInt(),
+  loadedBytes: status.completedResourceSize,
+  loadedTiles: status.completedTileCount,
+  totalTiles: status.requiredTileCount,
   totalTilesEstimated: !status.requiredResourceCountIsPrecise,
   region: region,
   downloadCompleted: status.complete,
@@ -293,6 +290,10 @@ DownloadProgress toDownloadProgress(
 OfflineRegion _toRegion(mln.OfflineRegionInfo info) {
   final metadata = decodeRegionMetadata(info.metadata);
   switch (info.definition) {
+    case mln.OfflineRegionDefinitionUnknown(:final tag):
+      throw UnsupportedError(
+        'Offline region ${info.id} has a definition of unknown type $tag.',
+      );
     case mln.OfflineRegionDefinitionTilePyramid(:final value):
       return OfflineRegion(
         id: info.id,
@@ -323,7 +324,7 @@ OfflineRegion _toRegion(mln.OfflineRegionInfo info) {
 
 /// The bounds of a GeoJSON geometry, which regions that other apps created
 /// can be defined by.
-LngLatBounds geometryBounds(Uint8List geometry) {
+LngLatBounds geometryBounds(Object? geometry) {
   var west = double.infinity;
   var east = double.negativeInfinity;
   var south = double.infinity;
@@ -346,11 +347,7 @@ LngLatBounds geometryBounds(Uint8List geometry) {
     (json['geometries'] as List?)?.forEach(visitGeometry);
   }
 
-  try {
-    visitGeometry(jsonDecode(utf8.decode(geometry)));
-  } on FormatException {
-    // Not GeoJSON; the bounds stay empty.
-  }
+  visitGeometry(geometry);
   if (!west.isFinite) {
     return const LngLatBounds(
       longitudeWest: 0,

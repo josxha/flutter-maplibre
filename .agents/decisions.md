@@ -8,7 +8,7 @@ Each entry: the decision, then why.
   for everything else.** One C API serves every native platform, so the
   per-platform packages (android, ios, webview) were removed.
 - **The C API comes from the `maplibre_native_ffi` package on pub.dev
-  (0.202610.2), whose build hook downloads the prebuilt C library of its
+  (0.202610.3), whose build hook downloads the prebuilt C library of its
   release, checked against digests pinned in the package.** No submodule and
   no local C build are needed; `local_build` (see Build and CI) points the
   hook at one when the C library changes.
@@ -105,8 +105,9 @@ Each entry: the decision, then why.
   shim calls the C function it resolves with `dlsym`. The C API binds a
   session to the first thread that services it, and lets dedicated sessions
   share it; the thread services pending sessions in turn. Teardown detaches
-  the session there (abandon would keep the GL objects until process exit),
-  then removes the client. The thread lives as long as the process.
+  the session there (disposing an attached caller-thread session abandons
+  it, which keeps the GL objects until process exit), then removes the
+  client and closes the session. The thread lives as long as the process.
 - **The plugin creates its own Vulkan 1.1 device (graphics queue +
   `VK_KHR_swapchain`) for the Vulkan build.** Flutter doesn't share its
   device with plugins.
@@ -115,8 +116,12 @@ Each entry: the decision, then why.
   the session has left it. An old `EGLSurface` is destroyed once
   `set_opengl_surface_target` completes; it can still be current on the render
   thread until the next frame, and EGL defers destroying it until then.
-- **A VkSurfaceKHR stays alive when `abandon` quarantines its swapchain.** The
-  C API requires the parent to outlive kept children.
+- **Sessions end with `RenderSessionHandle.close()`, not `abandon()`.** Close
+  detaches a core-worker session off the UI thread and completes once no
+  library thread touches the target, after which the plugin frees its
+  texture or surface. Abandon blocked the UI thread on the map's tile work
+  and GPU queue. Close reports nothing about kept objects; a Vulkan swapchain
+  is kept only when the process exits or its queue fails to drain.
 - **The plugin ships no TLS verifier code.** The C library embeds the dex of
   its rustls-platform-verifier helper and loads it in `mln_android_init`, so
   the APK needs no Java classes or keep rules for it.
@@ -182,17 +187,23 @@ Each entry: the decision, then why.
   Flutter frame as the map image. Camera events and `getCamera()` still
   report the latest camera, so `await moveCamera(...)` is followed by the new
   one. Exact on Windows. On Android Flutter takes the newest Surface
-  image itself, so it can be off by a frame. Frames that drew a map update
-  older than the initial camera are skipped, because they can reach Flutter
-  after `onMapCreated`. The native camera center is unwrapped to the visible
+  image itself, so it can be off by a frame. The map takes its bounds,
+  initial camera and style before the session attaches (`MapRenderer.create`
+  `setUp`, which map creation runs once the map is ready), so the first frame
+  already shows them. Events that arrive meanwhile wait for
+  `MapRenderer.start()`, after `onMapCreated`. The native camera center is unwrapped to the visible
   world copy; projections keep it, while `MapCamera` wraps the longitude
   into [-180, 180).
 - **Dart calls the plugins on its UI thread.** Flutter's Windows and Linux
   texture registrar functions may be called from any thread. On Android the UI
   thread is the main thread, which SurfaceProducer needs.
 - **Vulkan sessions use the core-worker driver, OpenGL ES sessions the render
-  thread of the plugin, with frame wakes drained on the Dart isolate.** Frame demands use `ifNeeded | waitForUpdate` (plus `present` on
-  Android), so idle maps don't render. Runtime events arrive through
+  thread of the plugin, with frame wakes drained on the Dart isolate.** Frame demands use `waitForUpdate` (plus `present` on
+  Android); since 0.202610.3 a demand without `force` renders only a newer
+  map update, so idle maps don't render. The frame wake is a `Wake.native`
+  over two `NativeCallable.listener`s that the package owns (see Known
+  gaps). A map's `MapOptions.eventMask` limits its events to the ones the
+  state handles, so per-frame render events are never queued. Runtime events arrive through
   `RuntimeHandle.setEventHandler`, which the binding calls on the isolate.
   Events that arrive before the first frame demand are kept until then.
 
@@ -202,7 +213,9 @@ Each entry: the decision, then why.
   `queryLayers`.** The C API only queries asynchronously, and its features
   carry their source and source layer but not their style layer, so
   `RenderedFeature` has `sourceId` and `sourceLayer`, and layer membership is
-  queried with `layerIds`. The webview's `*Async` overloads went with the
+  queried with `layerIds`. Since 0.202610.3 query results also name their
+  style layer, `RenderedFeature.layerId`; on web it comes from the gl-js
+  feature's `layer.id`. The webview's `*Async` overloads went with the
   webview package.
 - **Every native map and the `OfflineManager` use one database,
   `maplibre_native.db` in the app support directory (`path_provider`).**
@@ -383,15 +396,18 @@ Each entry: the decision, then why.
   `StyleControllerNative` takes it from the style JSON and from `addSource`.
   For a style loaded from an http(s), `mapbox://` or `asset://` URL the JSON
   is not at hand, so its GeoJSON attributions are missing on native.
-- In profile and release builds (AOT) of `maplibre_native_ffi` 0.202610.2,
-  a native map stops showing frames after about 30. The write-only
-  `NativeHandleState._callbackRoots` (`lib/src/internal/lifecycle/lifecycle.dart`)
-  is tree-shaken, so callback registrations such as the render session's
-  frame wake are collected and wakes are dropped. `@pragma('vm:entry-point')`
-  on the field fixes it (checked on Windows through a local override); the
-  write-only `_parent` fields of the handles look alike. Needs an upstream
-  fix; debug builds are unaffected.
-- `geojsonSourceDataCreate` parses and indexes GeoJSON on the calling
+- In profile and release builds (AOT) of `maplibre_native_ffi` 0.202610.2
+  and 0.202610.3, a native map stopped showing frames after about 30. The
+  write-only `NativeHandleState._callbackRoots`
+  (`lib/src/internal/lifecycle/lifecycle.dart`) is tree-shaken, and a
+  render session's queued registrations are rooted only there, so its frame
+  wake was collected and wakes were dropped. `@pragma('vm:entry-point')` on
+  the field fixes it (checked on Windows through a local override). Until
+  upstream fixes it, `MapRenderer` attaches with its own `_FrameWake`:
+  listener callables that it owns, closed by the wake's release. Map and
+  runtime registrations (event handler, camera transition ends) are rooted
+  through fields the binding reads, so they are not affected.
+- `GeoJsonSourceDataHandle.create` parses and indexes GeoJSON on the calling
   thread, so large GeoJSON updates block the UI thread. An async variant
   would move it off. `synchronous_tiling` only decides whether tiles are cut
   inline on update or on a worker afterwards.
@@ -408,7 +424,8 @@ Each entry: the decision, then why.
   could not render.
 - iOS and macOS pass the integration tests on an arm64 Mac (Xcode 27.1,
   macOS 27.0.1, iPhone 17 simulator on iOS 27.0) against the 0.202610.2
-  release library, but have not run on an iOS device.
+  release library, but have not run on an iOS device. 0.202610.3 adds a
+  macOS x64 library, so Intel Macs build; none has run the tests.
 - Linux has not been built through Flutter or run on a Linux machine: the
   plugin compiles with `-Wall -Werror` and `gl_texture_test` passes in WSL,
   which had no network for a Flutter build. The zero-copy path assumes that

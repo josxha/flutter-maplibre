@@ -40,7 +40,7 @@ final class _MetalTextureTarget
   }
 
   @override
-  RenderSessionAttachment attachRing(
+  NewRenderSession attachRing(
     MapHandle map,
     LogicalExtent extent,
     RenderSessionAttachOptions options,
@@ -67,7 +67,7 @@ final class _MetalTextureTarget
 
   @override
   int slotOf(AcquiredFrameHandle frame) =>
-      frame.getMetalTexture().withView((view) => view.slot);
+      frame.withMetalTexture((view) => view.slot);
 
   @override
   void presentSlot(int slot) => DarwinPlugin.presentGpuTexture(textureId, slot);
@@ -85,7 +85,7 @@ final class _MetalTextureTarget
       slot = slotOf(frame);
       presentSlot(slot);
     } on Object {
-      frame.release(gpuSyncDefault());
+      frame.release();
       rethrow;
     }
     _held.add((slot, frame));
@@ -101,7 +101,7 @@ final class _MetalTextureTarget
       final (slot, frame) = held;
       final onScreen = index == _held.length - 1;
       if (all || (!onScreen && !DarwinPlugin.slotInUse(textureId, slot))) {
-        frame.release(gpuSyncDefault());
+        frame.release();
       } else {
         keep.add(held);
       }
@@ -130,7 +130,7 @@ final class _MetalTextureTarget
   }
 
   @override
-  Future<bool> endSession(RenderSessionHandle session) async {
+  Future<void> endSession(RenderSessionHandle session) {
     _recycler?.cancel();
     _recycler = null;
     _releaseHeld(all: true);

@@ -4,13 +4,13 @@ import 'package:maplibre_native/src/frame_target.dart';
 import 'package:maplibre_native_ffi/maplibre_native_ffi.dart';
 
 VulkanContextDescriptor? _vulkanContext;
-OpenglContextDescriptor? _eglContext;
+OpenGlContextDescriptor? _eglContext;
 
 /// Whether Android maps render through OpenGL ES rather than Vulkan. The C
 /// library carries one backend, which the build hook picked: OpenGL ES unless
 /// the app selected Vulkan.
 bool get _usesOpenGl =>
-    supportedRenderBackendMask().contains(RenderBackendFlag.opengl);
+    supportedRenderBackendMask().contains(RenderBackendFlag.openGl);
 
 /// Creates the target of an Android map, which presents to the Surface of a
 /// Flutter SurfaceProducer texture: through an EGL window surface on a plugin
@@ -95,20 +95,17 @@ final class _SurfaceTarget extends FrameTarget {
   bool get acceptsFrames => _surfaceAvailable;
 
   @override
-  RenderSessionAttachment attach(
-    MapHandle map,
-    LogicalExtent extent,
-    Wake frameWake,
-  ) {
-    final RenderSessionAttachment attachment;
+  NewRenderSession attach(MapHandle map, LogicalExtent extent, Wake frameWake) {
+    final NewRenderSession attachment;
     if (opengl) {
       // Attachment and every frame are driver work, which the client wakes
       // the render thread for from the start.
       final client = _renderClient = _RenderClient();
       try {
-        attachment = map.attachOpenglSurface(
+        attachment = map.attachOpenGlSurface(
           _openglDescriptor(_texture.surface, extent),
           RenderSessionAttachOptions(
+            driver: RenderDriverKind.callerGraphicsThread,
             frameWake: frameWake,
             driverWorkWake: client.wake,
           ),
@@ -132,12 +129,12 @@ final class _SurfaceTarget extends FrameTarget {
     return attachment;
   }
 
-  OpenglSurfaceDescriptor _openglDescriptor(
+  OpenGlSurfaceDescriptor _openglDescriptor(
     int surface,
     LogicalExtent extent,
-  ) => OpenglSurfaceDescriptor(
+  ) => OpenGlSurfaceDescriptor(
     extent: extent,
-    context: _eglContext,
+    context: _eglContext!,
     surface: NativePointer(surface),
   );
 
@@ -146,8 +143,8 @@ final class _SurfaceTarget extends FrameTarget {
     LogicalExtent extent,
   ) => VulkanSurfaceDescriptor(
     extent: extent,
-    context: _vulkanContext,
-    surface: BigInt.from(surface).toUnsigned(64),
+    context: _vulkanContext!,
+    surface: surface,
   );
 
   /// Sizes the SurfaceProducer's buffers and the session. Flutter may hand
@@ -205,7 +202,7 @@ final class _SurfaceTarget extends FrameTarget {
       if (opengl) {
         // The old EGLSurface stays current on the render thread until the
         // next frame, but EGL defers destroying it until then.
-        await session.setOpenglSurfaceTarget(
+        await session.setOpenGlSurfaceTarget(
           _openglDescriptor(surface, extent),
         );
       } else {
@@ -218,26 +215,23 @@ final class _SurfaceTarget extends FrameTarget {
   }
 
   @override
-  Future<bool> endSession(RenderSessionHandle session) async {
+  Future<void> endSession(RenderSessionHandle session) async {
     final client = _renderClient;
-    if (client == null) return abandonSession(session);
-    // Only the render thread may destroy the session's GL objects, which
-    // abandon would keep until process exit, so the session detaches there
-    // first.
-    var detached = false;
-    try {
-      await session.detach();
-      detached = true;
-    } on MaplibreException catch (error) {
-      debugPrint('maplibre_native: detach failed: $error');
+    if (client != null) {
+      // Only the render thread may destroy the session's GL objects, which
+      // closing an attached caller-thread session would keep until process
+      // exit, so the session detaches there first.
+      try {
+        await session.detach();
+      } on MaplibreException catch (error) {
+        debugPrint('maplibre_native: detach failed: $error');
+      }
+      client.stop();
     }
-    client.stop();
-    if (!detached) abandonSession(session);
-    return false;
+    await session.close();
   }
 
-  /// A swapchain kept until process exit needs its VkSurfaceKHR as long.
+  /// The session closed, so nothing presents to the surface anymore.
   @override
-  void dispose({required bool quarantined}) =>
-      AndroidPlugin.disposeTexture(_texture, keepSurface: quarantined);
+  void dispose() => AndroidPlugin.disposeTexture(_texture);
 }

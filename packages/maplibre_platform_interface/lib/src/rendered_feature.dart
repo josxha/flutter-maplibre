@@ -12,6 +12,7 @@ class RenderedFeature {
     this.geometry,
     this.sourceId,
     this.sourceLayer,
+    this.layerId,
   });
 
   /// If present, an object uniquely identifying the feature in the vector
@@ -46,10 +47,13 @@ class RenderedFeature {
   /// The source layer that provided the feature, for vector tile sources.
   final String? sourceLayer;
 
+  /// The ID of the style layer that rendered the feature.
+  final String? layerId;
+
   @override
   String toString() =>
       'RenderedFeature(id: $id, properties: $properties, geometry: $geometry, '
-      'sourceId: $sourceId, sourceLayer: $sourceLayer)';
+      'sourceId: $sourceId, sourceLayer: $sourceLayer, layerId: $layerId)';
 
   @override
   bool operator ==(Object other) =>
@@ -57,8 +61,9 @@ class RenderedFeature {
       other is RenderedFeature &&
           id == other.id &&
           sourceId == other.sourceId &&
-          sourceLayer == other.sourceLayer;
+          sourceLayer == other.sourceLayer &&
+          layerId == other.layerId;
 
   @override
-  int get hashCode => Object.hash(id, sourceId, sourceLayer);
+  int get hashCode => Object.hash(id, sourceId, sourceLayer, layerId);
 }

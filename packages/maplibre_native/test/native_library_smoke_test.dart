@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:typed_data';
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:maplibre_native_ffi/maplibre_native_ffi.dart';
 
@@ -13,11 +10,19 @@ void main() {
   });
 
   test('creates and closes a runtime and a map', () async {
-    final runtime = runtimeCreate(runtimeOptionsDefault());
-    final map = await runtime.createMap(mapOptionsDefault());
-    await map.setStyleJson(
-      Uint8List.fromList(utf8.encode('{"version":8,"sources":{},"layers":[]}')),
+    final runtime = RuntimeHandle.create(const RuntimeOptions());
+    final created = runtime.createMap(
+      const MapOptions(
+        initialExtent: LogicalExtent(width: 256, height: 256, scaleFactor: 1),
+      ),
     );
+    final map = created.map;
+    await created.ready;
+    await map.setStyleJson({
+      'version': 8,
+      'sources': <String, Object?>{},
+      'layers': <Object?>[],
+    });
     await map.close();
     await runtime.close();
   });

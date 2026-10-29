@@ -39,9 +39,9 @@ build hook downloads the prebuilt C library, and shows each map as a Flutter
 - The plugin is a Swift Package Manager package only, without a podspec.
   Flutter uses Swift Package Manager by default since 3.44, so apps need no
   setup for it.
-- The C library is published for arm64 only: devices, arm64 simulators, and
-  Apple silicon Macs. Apps exclude x86_64 with `EXCLUDED_ARCHS`, as the
-  example's xcconfigs do.
+- The C library is published for iOS devices, arm64 simulators, and Macs
+  (Apple silicon and Intel). iOS apps exclude the x86_64 simulator slice
+  with `EXCLUDED_ARCHS`, as the example's xcconfigs do.
 - Sandboxed macOS apps need the `com.apple.security.network.client`
   entitlement to load styles and tiles.
 

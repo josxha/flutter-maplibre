@@ -64,7 +64,7 @@ final class _VulkanTextureTarget
   }
 
   @override
-  RenderSessionAttachment attachRing(
+  NewRenderSession attachRing(
     MapHandle map,
     LogicalExtent extent,
     RenderSessionAttachOptions options,
@@ -83,7 +83,7 @@ final class _VulkanTextureTarget
 
   @override
   int slotOf(AcquiredFrameHandle frame) =>
-      frame.getVulkanTexture().withView((view) => view.slot);
+      frame.withVulkanTexture((view) => view.slot);
 
   @override
   void presentSlot(int slot) =>
@@ -107,7 +107,7 @@ final class _PixelBufferTarget extends FrameTarget {
   bool get isZeroCopy => false;
 
   @override
-  RenderSessionAttachment attach(
+  NewRenderSession attach(
     MapHandle map,
     LogicalExtent extent,
     Wake frameWake,
@@ -137,6 +137,5 @@ final class _PixelBufferTarget extends FrameTarget {
   }
 
   @override
-  void dispose({required bool quarantined}) =>
-      DesktopPlugin.disposeTexture(textureId);
+  void dispose() => DesktopPlugin.disposeTexture(textureId);
 }

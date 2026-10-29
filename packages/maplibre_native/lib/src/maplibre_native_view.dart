@@ -46,25 +46,29 @@ class _MapLibreNativeViewState extends State<MapLibreNativeView> {
       return;
     }
     if (_creating != null) return;
-    _creating = MapRenderer.create(styleUrl: widget.styleUrl, extent: extent)
-      ..then(
-        (renderer) {
-          if (_disposed) {
-            unawaited(renderer.dispose());
-            return;
-          }
-          setState(() => _renderer = renderer);
-        },
-        onError: (Object error, StackTrace stackTrace) {
-          FlutterError.reportError(
-            FlutterErrorDetails(
-              exception: error,
-              stack: stackTrace,
-              library: 'maplibre_native',
-            ),
-          );
-        },
-      );
+    final styleUrl = widget.styleUrl;
+    _creating =
+        MapRenderer.create(
+          extent: extent,
+          setUp: (map) => map.setStyleUrl(styleUrl),
+        )..then(
+          (renderer) {
+            if (_disposed) {
+              unawaited(renderer.dispose());
+              return;
+            }
+            setState(() => _renderer = renderer..start());
+          },
+          onError: (Object error, StackTrace stackTrace) {
+            FlutterError.reportError(
+              FlutterErrorDetails(
+                exception: error,
+                stack: stackTrace,
+                library: 'maplibre_native',
+              ),
+            );
+          },
+        );
   }
 
   @override

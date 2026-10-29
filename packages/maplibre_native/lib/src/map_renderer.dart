@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
@@ -14,7 +15,7 @@ import 'package:maplibre_native_ffi/maplibre_native_ffi.dart';
 Map<String, RenderBackendFlag> _pluginBackends() {
   if (Platform.isAndroid) {
     return {
-      'OpenGL ES': RenderBackendFlag.opengl,
+      'OpenGL ES': RenderBackendFlag.openGl,
       'Vulkan': RenderBackendFlag.vulkan,
     };
   }
@@ -71,7 +72,7 @@ final class MapRenderer implements FrameTargetHost {
   bool get isZeroCopy => _target.isZeroCopy;
 
   var _nextToken = 1;
-  BigInt? _pendingToken;
+  int? _pendingToken;
   var _disposed = false;
   LogicalExtent _extent;
   LogicalExtent? _pendingExtent;
@@ -86,7 +87,7 @@ final class MapRenderer implements FrameTargetHost {
 
   /// Queries the features rendered at [geometry], in logical pixels. The
   /// C API answers asynchronously from the session's latest frame.
-  Future<List<QueriedFeature>> queryRenderedFeatures(
+  Future<List<RenderedFeature>> queryRenderedFeatures(
     RenderedQueryGeometry geometry, {
     List<String>? layerIds,
   }) => _session.queryRenderedFeatures(
@@ -118,11 +119,14 @@ final class MapRenderer implements FrameTargetHost {
   void Function(MapProjectionHandle projection, RenderFrameResult frame)?
   onFrameShown;
 
-  /// Creates a renderer of [extent]. When [styleUrl] is given, the map loads
-  /// it before the first frame.
+  /// Creates a renderer of [extent] whose map queues the events of
+  /// [eventMask]. [setUp] submits the map's first commands, such as its
+  /// camera and style, which the map runs once it is created and before the
+  /// session renders its first frame.
   static Future<MapRenderer> create({
     required LogicalExtent extent,
-    String? styleUrl,
+    RuntimeEventFlag? eventMask,
+    Future<void> Function(MapHandle map)? setUp,
     void Function(RuntimeEvent event)? onEvent,
     void Function(MapProjectionHandle projection, RenderFrameResult frame)?
     onFrameShown,
@@ -133,42 +137,62 @@ final class MapRenderer implements FrameTargetHost {
 
     // Wakes can arrive before the renderer exists; their work waits for the
     // next wake then. Events are delivered once, so the ones that arrive
-    // before the renderer is ready are kept until then.
+    // before the renderer starts are kept until then.
     MapRenderer? renderer;
-    MapRenderer? ready;
     final early = <RuntimeEvent>[];
-    final RuntimeHandle runtime;
-    final MapHandle map;
-    final RenderSessionAttachment attachment;
+    RuntimeHandle? runtime;
+    MapHandle? map;
+    final RenderSessionHandle session;
     try {
       runtime = await createRuntime();
       await runtime.setEventHandler(
-        RuntimeEventHandler(
-          callback: (batch) => ready == null
-              ? early.addAll(batch.events)
-              : ready._onEvents(batch.events),
-        ),
+        (events) => renderer?._started ?? false
+            ? renderer!._onEvents(events)
+            : early.addAll(events),
       );
-      map = await runtime.createMap(MapOptions(initialExtent: extent));
-      if (styleUrl != null) await map.setStyleUrl(styleUrl);
-      attachment = target.attach(
+      final created = runtime.createMap(
+        MapOptions(initialExtent: extent, eventMask: eventMask),
+      );
+      map = created.map;
+      // Commands run once the map is created, so they need not wait for it.
+      await Future.wait([created.ready, ?setUp?.call(map)]);
+      final attachment = target.attach(
         map,
         extent,
-        Wake(callback: () => renderer?._drainFrames()),
+        _FrameWake(() => renderer?._drainFrames()).wake,
       );
+      session = attachment.session;
+      try {
+        await attachment.ready;
+      } on Object {
+        await target.endSession(session);
+        rethrow;
+      }
     } on Object {
-      target.dispose(quarantined: false);
+      await map?.close();
+      await runtime?.close();
+      target.dispose();
       rethrow;
     }
 
-    renderer = MapRenderer._(runtime, map, attachment.session, target, extent)
+    return renderer = MapRenderer._(runtime, map, session, target, extent)
       ..onEvent = onEvent
-      ..onFrameShown = onFrameShown;
-    await attachment.completed;
-    ready = renderer
-      .._onEvents(early)
+      ..onFrameShown = onFrameShown
+      .._early = early
       ..demandFrame();
-    return renderer;
+  }
+
+  var _started = false;
+  List<RuntimeEvent> _early = const [];
+
+  /// Delivers the events that arrived before the renderer existed to
+  /// [onEvent], and from then on every event as it arrives.
+  void start() {
+    if (_started) return;
+    _started = true;
+    final early = _early;
+    _early = const [];
+    _onEvents(early);
   }
 
   /// Runs [action] after every earlier queued GPU action.
@@ -211,7 +235,7 @@ final class MapRenderer implements FrameTargetHost {
   @override
   void demandFrame() {
     if (_disposed || _pendingToken != null || !_target.acceptsFrames) return;
-    final token = BigInt.from(_nextToken++);
+    final token = _nextToken++;
     _pendingToken = token;
     _session.requestFrame(
       FrameDemand(flags: _target.demandFlags, token: token),
@@ -220,15 +244,9 @@ final class MapRenderer implements FrameTargetHost {
 
   void _drainFrames() {
     if (_disposed) return;
-    final batch = _session.drainFrameResults();
-    if (batch == null) return;
     RenderFrameResult? result;
-    try {
-      for (final candidate in batch.getValue().results) {
-        if (candidate.token == _pendingToken) result = candidate;
-      }
-    } finally {
-      batch.close();
+    for (final candidate in _session.drainFrameResults()) {
+      if (candidate.token == _pendingToken) result = candidate;
     }
     if (result == null) return;
     _pendingToken = null;
@@ -260,14 +278,16 @@ final class MapRenderer implements FrameTargetHost {
   void _showFrame(RenderFrameResult frame) {
     final onFrameShown = this.onFrameShown;
     if (_disposed || onFrameShown == null) return;
-    onFrameShown(mapProjectionCreate(frame.view), frame);
+    onFrameShown(MapProjectionHandle.create(frame.view), frame);
   }
 
   void _onEvents(List<RuntimeEvent> events) {
     if (_disposed) return;
     for (final event in events) {
       if (event.type == RuntimeEventType.mapLoadingFailed ||
-          event.type == RuntimeEventType.mapRenderError) {
+          event.type == RuntimeEventType.mapRenderError ||
+          event.type == RuntimeEventType.mapGlyphsError ||
+          event.type == RuntimeEventType.mapSpriteError) {
         debugPrint('maplibre_native: ${event.message}');
       }
       onEvent?.call(event);
@@ -280,10 +300,42 @@ final class MapRenderer implements FrameTargetHost {
     _disposed = true;
     // A frame in presentation is released before the session goes.
     await _gpuQueue;
-    final quarantined = await _target.endSession(_session);
-    _session.close();
+    await _target.endSession(_session);
     await _map.close();
     await _runtime.close();
-    _target.dispose(quarantined: quarantined);
+    _target.dispose();
+  }
+}
+
+/// The frame wake of a session, which runs [_onWake] on the isolate.
+///
+/// The binding roots a session's queued wake only through a field that it
+/// never reads, which AOT builds drop, so in profile and release builds the
+/// wake is collected and the map stops after a few frames. This wake is held
+/// by its own callables instead, which native code calls from any thread and
+/// which close once the C library releases the wake.
+final class _FrameWake {
+  _FrameWake(this._onWake) {
+    _callback = NativeCallable<Void Function(Pointer<Void>)>.listener(
+      (Pointer<Void> _) => _onWake(),
+    )..keepIsolateAlive = false;
+    _release = NativeCallable<Void Function(Pointer<Void>)>.listener(
+      (Pointer<Void> _) => _close(),
+    )..keepIsolateAlive = false;
+  }
+
+  final void Function() _onWake;
+  late final NativeCallable<Void Function(Pointer<Void>)> _callback;
+  late final NativeCallable<Void Function(Pointer<Void>)> _release;
+
+  /// The wake to attach the session with, which consumes it.
+  Wake get wake => Wake.native(
+    callback: NativePointer(_callback.nativeFunction.address),
+    releaseUserData: NativePointer(_release.nativeFunction.address),
+  );
+
+  void _close() {
+    _callback.close();
+    _release.close();
   }
 }
