@@ -36,6 +36,8 @@ are tracked in detail in [`.agents/decisions.md`](.agents/decisions.md).
 
 - Globe projection is missing on native.
 - `UserLocationLayer` is not covered by the integration tests yet.
+- Windows: `geolocator_windows` reports an unmeasured heading as 0, so the
+  heading cone of a resting PC points north.
 - Shared gestures: native pans stop dead on release (no fling), and zoom and
   rotation don't fling anywhere. The C API has no inertia, so it would run in
   Dart over animated camera deltas.

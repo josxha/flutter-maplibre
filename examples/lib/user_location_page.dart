@@ -14,8 +14,13 @@ class UserLocationPage extends StatefulWidget {
 }
 
 class _UserLocationPageState extends State<UserLocationPage> {
-  // geolocator asks for the location permission when the layer listens.
-  final Stream<UserLocation> _locations = geolocatorUserLocations();
+  // Asks for the location permission when the layer listens.
+  late final Stream<UserLocation> _locations = geolocatorUserLocations()
+      .handleError((Object error) {
+        if (!mounted) return;
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text('$error')));
+      });
   UserLocationTracking _tracking = UserLocationTracking.position;
 
   @override
