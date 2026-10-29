@@ -35,8 +35,10 @@ class _AnimationPageState extends State<AnimationPage>
       appBar: AppBar(title: const Text('Animation')),
       body: MapLibreMap(
         options: const MapOptions(
-          initZoom: 14,
-          initCenter: Geographic(lon: -122.01971, lat: 45.632472),
+          initCamera: InitialCamera.position(
+            zoom: 14,
+            center: Geographic(lon: -122.01971, lat: 45.632472),
+          ),
         ),
         onStyleLoaded: _onStyleLoaded,
       ),

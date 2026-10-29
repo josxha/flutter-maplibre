@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -69,7 +71,7 @@ void runTests() {
     ) async {
       final map = await pumpMap(tester, options: offlineOptions(zoom: 3));
       final updated = offlineOptions(zoom: 3, maxZoom: 5);
-      await tester.pumpWidget(MapApp(options: updated));
+      map.options = updated;
       await tester.pump();
 
       expect(map.controller.options, updated);
@@ -84,12 +86,11 @@ void runTests() {
       final map = await pumpMap(
         tester,
         options: MapOptions(
-          initStyle: offlineStyle,
-          initCenter: const Geographic(lon: 0, lat: 0),
-          initZoom: 3,
+          style: MapStyle.json(offlineStyle),
           minZoom: 2,
           maxZoom: 6,
           maxPitch: 30,
+          initCamera: const InitialCamera.position(zoom: 3),
         ),
       );
       await map.controller.moveCamera(zoom: 10, pitch: 60);
@@ -105,12 +106,96 @@ void runTests() {
     testWidgets('loads a style set at runtime', (tester) async {
       final map = await pumpMap(tester);
       final since = map.events.length;
-      map.controller.setStyle(
-        '{"version":8,"sources":{},"layers":[{"id":"other",'
-        '"type":"background","paint":{"background-color":"#000000"}}]}',
+      map.options = const MapOptions(
+        style: MapStyle.json(
+          '{"version":8,"sources":{},"layers":[{"id":"other",'
+          '"type":"background","paint":{"background-color":"#000000"}}]}',
+        ),
       );
       await map.waitForEvent<MapEventStyleLoaded>(since: since);
       expect(map.controller.style?.getLayerIds(), ['other']);
+    });
+
+    testWidgets('keeps its style when other options change', (tester) async {
+      final map = await pumpMap(tester);
+      final since = map.events.length;
+      map.options = offlineOptions(maxZoom: 10);
+      await tester.pump(const Duration(milliseconds: 500));
+      expect(map.events.skip(since).whereType<MapEventStyleLoaded>(), isEmpty);
+    });
+
+    testWidgets('starts at the camera of its style', (tester) async {
+      final map = await pumpMap(
+        tester,
+        options: MapOptions(style: MapStyle.json(_styleWithCamera)),
+      );
+      final camera = map.controller.getCamera();
+      expect(camera.center.lon, closeTo(10, 1e-6));
+      expect(camera.center.lat, closeTo(20, 1e-6));
+      expect(camera.zoom, closeTo(5, 1e-6));
+      expect(camera.bearing, closeTo(30, 1e-6));
+      expect(camera.pitch, closeTo(20, 1e-6));
+    });
+
+    testWidgets('clamps the camera of its style to the zoom limits', (
+      tester,
+    ) async {
+      final map = await pumpMap(
+        tester,
+        options: MapOptions(style: MapStyle.json(_styleWithCamera), maxZoom: 3),
+      );
+      final camera = await map.waitForCamera((camera) => camera.zoom < 5);
+      expect(camera.zoom, closeTo(3, 1e-6));
+      expect(camera.center.lon, closeTo(10, 1e-6));
+    });
+
+    testWidgets('prefers its initial camera over the style camera', (
+      tester,
+    ) async {
+      final map = await pumpMap(
+        tester,
+        options: MapOptions(
+          style: MapStyle.json(_styleWithCamera),
+          initCamera: const InitialCamera.position(
+            center: Geographic(lon: -3, lat: 4),
+            zoom: 2,
+          ),
+        ),
+      );
+      final camera = map.controller.getCamera();
+      expect(camera.center.lon, closeTo(-3, 1e-6));
+      expect(camera.center.lat, closeTo(4, 1e-6));
+      expect(camera.zoom, closeTo(2, 1e-6));
+      expect(camera.bearing, closeTo(0, 1e-6));
+      expect(camera.pitch, closeTo(0, 1e-6));
+    });
+
+    testWidgets('starts fitted to its initial bounds', (tester) async {
+      const bounds = GeoBox(west: -10, south: -5, east: 10, north: 5);
+      final map = await pumpMap(
+        tester,
+        options: MapOptions(
+          style: MapStyle.json(_styleWithCamera),
+          initCamera: const InitialCamera.bounds(
+            bounds,
+            padding: EdgeInsets.all(20),
+          ),
+        ),
+      );
+      // The first frame already shows the fitted camera.
+      final shown = map.controller.camera!;
+      expect(shown.center.lon, closeTo(0, 1e-6));
+      expect(shown.center.lat, closeTo(0, 1e-6));
+      final visible = map.controller.getVisibleRegion();
+      expect(visible.west, lessThanOrEqualTo(bounds.west));
+      expect(visible.east, greaterThanOrEqualTo(bounds.east));
+      expect(visible.south, lessThanOrEqualTo(bounds.south));
+      expect(visible.north, greaterThanOrEqualTo(bounds.north));
+      // The bounds fill the map on one axis, up to the padding.
+      final corner = map.controller.toScreenLocation(
+        Geographic(lon: bounds.west, lat: bounds.north),
+      );
+      expect(min(corner.dx, corner.dy), closeTo(20, 1));
     });
 
     testWidgets('can be removed and shown again', (tester) async {
@@ -159,3 +244,20 @@ void runTests() {
     });
   });
 }
+
+/// A style without network resources that stores a camera.
+final String _styleWithCamera = jsonEncode({
+  'version': 8,
+  'center': [10, 20],
+  'zoom': 5,
+  'bearing': 30,
+  'pitch': 20,
+  'sources': <String, Object>{},
+  'layers': [
+    {
+      'id': 'background',
+      'type': 'background',
+      'paint': {'background-color': '#dddddd'},
+    },
+  ],
+});

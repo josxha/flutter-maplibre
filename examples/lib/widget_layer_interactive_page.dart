@@ -42,9 +42,8 @@ class _WidgetLayerPageState extends State<WidgetLayerInteractivePage> {
             child: MapLibreMap(
               key: _mapKey,
               options: MapOptions(
-                initZoom: 3,
-                initCenter: const Geographic(lon: 0, lat: 0),
                 gestures: _mapGestures,
+                initCamera: const InitialCamera.position(zoom: 3),
               ),
               onMapCreated: (controller) => _controller = controller,
               onEvent: (event) async {

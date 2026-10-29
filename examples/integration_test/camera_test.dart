@@ -108,12 +108,7 @@ void runTests() {
 
     testWidgets('fitBounds shows the bounds', (tester) async {
       final map = await pumpMap(tester, options: offlineOptions(zoom: 1));
-      const bounds = LngLatBounds(
-        longitudeWest: 10,
-        longitudeEast: 20,
-        latitudeSouth: 40,
-        latitudeNorth: 50,
-      );
+      const bounds = GeoBox(west: 10, east: 20, south: 40, north: 50);
       await map.pumpFuture(
         map.controller.fitBounds(
           bounds: bounds,
@@ -124,10 +119,10 @@ void runTests() {
       );
       await map.waitForLatestFrame();
       final region = map.controller.getVisibleRegion();
-      expect(region.longitudeWest, lessThanOrEqualTo(10 + 1e-3));
-      expect(region.longitudeEast, greaterThanOrEqualTo(20 - 1e-3));
-      expect(region.latitudeSouth, lessThanOrEqualTo(40 + 1e-3));
-      expect(region.latitudeNorth, greaterThanOrEqualTo(50 - 1e-3));
+      expect(region.west, lessThanOrEqualTo(10 + 1e-3));
+      expect(region.east, greaterThanOrEqualTo(20 - 1e-3));
+      expect(region.south, lessThanOrEqualTo(40 + 1e-3));
+      expect(region.north, greaterThanOrEqualTo(50 - 1e-3));
       // The bounds fill the map in at least one direction.
       final west = map.controller.toScreenLocation(
         const Geographic(lon: 10, lat: 45),
@@ -169,12 +164,7 @@ void runTests() {
       );
       await map.pumpFuture(
         map.controller.fitBounds(
-          bounds: const LngLatBounds(
-            longitudeWest: -10,
-            longitudeEast: 10,
-            latitudeSouth: -10,
-            latitudeNorth: 10,
-          ),
+          bounds: const GeoBox(west: -10, east: 10, south: -10, north: 10),
           nativeDuration: const Duration(milliseconds: 100),
           webMaxDuration: const Duration(milliseconds: 100),
         ),

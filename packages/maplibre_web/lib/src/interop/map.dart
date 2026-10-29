@@ -151,10 +151,6 @@ extension type MapOptions._(JSObject _) implements JSObject {
   external factory MapOptions({
     required JSAny style,
     required JSObject container,
-    required double zoom,
-    required LngLat? center,
-    required double bearing,
-    required double pitch,
     required bool attributionControl,
     bool? interactive,
   });

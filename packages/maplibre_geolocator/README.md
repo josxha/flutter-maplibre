@@ -5,7 +5,7 @@ the `UserLocationLayer` of [maplibre](https://pub.dev/packages/maplibre).
 
 ```dart
 MapLibreMap(
-  options: MapOptions(initStyle: '...'),
+  options: MapOptions(style: MapStyle.url('...')),
   children: [
     UserLocationLayer(locations: geolocatorUserLocations()),
   ],

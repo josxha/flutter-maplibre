@@ -195,8 +195,10 @@ void runTests() {
       final map = await pumpMap(
         tester,
         options: const MapOptions(
-          initCenter: Geographic(lon: 10, lat: 50),
-          initZoom: 4,
+          initCamera: InitialCamera.position(
+            center: Geographic(lon: 10, lat: 50),
+            zoom: 4,
+          ),
         ),
       );
       final features = await map.waitForFeatures(

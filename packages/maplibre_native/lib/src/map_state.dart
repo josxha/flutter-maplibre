@@ -38,6 +38,10 @@ class MapLibreMapStateNative extends MapLibreMapState {
   /// The JSON of the style the map loads, when it is at hand.
   String? _styleJson;
 
+  /// Whether the camera constraints of [MapOptions] wait for the first
+  /// style, see [_setUp].
+  var _constraintsAfterStyle = false;
+
   LayerManager? _layerManager;
 
   /// A projection of the latest published camera. Closed whenever the camera
@@ -140,46 +144,52 @@ class MapLibreMapStateNative extends MapLibreMapState {
   Future<void> _setUp(mln.MapHandle map) async {
     _map = map;
     final options = this.options;
+    final initCamera = options.initCamera;
+    // Without an initial camera, MapLibre Native moves to the camera of the
+    // style once it loads, but only while no camera change happened. Setting
+    // camera constraints is one, so they follow the first style.
+    _constraintsAfterStyle = initCamera == null;
     await Future.wait([
-      _applyOptions(),
-      map.updateCamera(
-        mln.CameraUpdate(
-          camera: mln.CameraOptions(
-            center: switch (options.initCenter) {
-              final center? => mln.LatLng(
-                latitude: center.lat,
-                longitude: center.lon,
-              ),
-              null => null,
-            },
-            zoom: options.initZoom,
-            bearing: options.initBearing,
-            pitch: options.initPitch,
-          ),
+      if (initCamera != null) ...[
+        _applyOptions(),
+        _applyInitialCamera(map, initCamera),
+      ],
+      _setStyle(options.style),
+    ]);
+  }
+
+  Future<void> _applyInitialCamera(
+    mln.MapHandle map,
+    InitialCamera initCamera,
+  ) async {
+    final camera = switch (initCamera) {
+      InitialCameraPosition() => mln.CameraOptions(
+        center: _latLng(initCamera.center),
+        zoom: initCamera.zoom,
+        bearing: initCamera.bearing,
+        pitch: initCamera.pitch,
+      ),
+      InitialCameraBounds() => await map.cameraForLatLngBounds(
+        _latLngBounds(initCamera.bounds),
+        fitOptions: mln.CameraFitOptions(
+          padding: _edgeInsets(initCamera.padding),
+          bearing: initCamera.bearing,
+          pitch: initCamera.pitch,
         ),
       ),
-      setStyle(options.initStyle),
-    ]);
+    };
+    await map.updateCamera(mln.CameraUpdate(camera: camera));
   }
 
   /// Applies the camera constraints of [MapOptions].
   Future<void> _applyOptions() async {
     final map = _map;
-    if (map == null) return;
+    if (map == null || _constraintsAfterStyle) return;
     final options = this.options;
     await map.setBounds(
       mln.BoundOptions(
         bounds: switch (options.maxBounds) {
-          final bounds? => mln.LatLngBounds(
-            southwest: mln.LatLng(
-              latitude: bounds.latitudeSouth,
-              longitude: bounds.longitudeWest,
-            ),
-            northeast: mln.LatLng(
-              latitude: bounds.latitudeNorth,
-              longitude: bounds.longitudeEast,
-            ),
-          ),
+          final bounds? => _latLngBounds(bounds),
           null => null,
         },
         unbounded: options.maxBounds == null,
@@ -205,7 +215,11 @@ class MapLibreMapStateNative extends MapLibreMapState {
 
   @override
   void didUpdateWidget(covariant MapLibreMap oldWidget) {
-    if (oldWidget.options != widget.options) unawaited(_applyOptions());
+    final options = widget.options;
+    if (oldWidget.options != options) unawaited(_applyOptions());
+    if (oldWidget.options.style != options.style) {
+      unawaited(_setStyle(options.style));
+    }
     _layerManager?.updateLayers(widget.layers);
     super.didUpdateWidget(oldWidget);
   }
@@ -325,6 +339,10 @@ class MapLibreMapStateNative extends MapLibreMapState {
   Future<void> _onStyleLoaded() async {
     final map = _map;
     if (map == null) return;
+    if (_constraintsAfterStyle) {
+      _constraintsAfterStyle = false;
+      await _applyOptions();
+    }
     style?.dispose();
     final styleController = StyleControllerNative(map, styleJson: _styleJson);
     style = styleController;
@@ -432,7 +450,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
       _currentProjection().metersPerPixelAtLatitude(latitude);
 
   @override
-  LngLatBounds getVisibleRegion() {
+  GeoBox getVisibleRegion() {
     final size = context.size ?? Size.zero;
     final corners = toLngLats([
       Offset.zero,
@@ -440,11 +458,11 @@ class MapLibreMapStateNative extends MapLibreMapState {
       Offset(0, size.height),
       Offset(size.width, size.height),
     ]);
-    return LngLatBounds(
-      longitudeWest: corners.map((c) => c.lon).reduce(min),
-      longitudeEast: corners.map((c) => c.lon).reduce(max),
-      latitudeSouth: corners.map((c) => c.lat).reduce(min),
-      latitudeNorth: corners.map((c) => c.lat).reduce(max),
+    return GeoBox(
+      west: corners.map((c) => c.lon).reduce(min),
+      east: corners.map((c) => c.lon).reduce(max),
+      south: corners.map((c) => c.lat).reduce(min),
+      north: corners.map((c) => c.lat).reduce(max),
     );
   }
 
@@ -486,7 +504,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
 
   @override
   Future<void> fitBounds({
-    required LngLatBounds bounds,
+    required GeoBox bounds,
     double? bearing,
     double? pitch,
     Duration nativeDuration = const Duration(seconds: 2),
@@ -500,16 +518,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
     final map = _map;
     if (map == null) return;
     final target = await map.cameraForLatLngBounds(
-      mln.LatLngBounds(
-        southwest: mln.LatLng(
-          latitude: bounds.latitudeSouth,
-          longitude: bounds.longitudeWest,
-        ),
-        northeast: mln.LatLng(
-          latitude: bounds.latitudeNorth,
-          longitude: bounds.longitudeEast,
-        ),
-      ),
+      _latLngBounds(bounds),
       fitOptions: mln.CameraFitOptions(
         padding: _edgeInsets(padding),
         bearing: bearing,
@@ -544,9 +553,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
       mln.CameraUpdate(
         mode: mode,
         camera: mln.CameraOptions(
-          center: center == null
-              ? null
-              : mln.LatLng(latitude: center.lat, longitude: center.lon),
+          center: center == null ? null : _latLng(center),
           zoom: zoom,
           bearing: bearing,
           pitch: pitch,
@@ -559,6 +566,14 @@ class MapLibreMapStateNative extends MapLibreMapState {
     );
   }
 
+  static mln.LatLng _latLng(Geographic position) =>
+      mln.LatLng(latitude: position.lat, longitude: position.lon);
+
+  static mln.LatLngBounds _latLngBounds(GeoBox bounds) => mln.LatLngBounds(
+    southwest: mln.LatLng(latitude: bounds.south, longitude: bounds.west),
+    northeast: mln.LatLng(latitude: bounds.north, longitude: bounds.east),
+  );
+
   static mln.EdgeInsets _edgeInsets(EdgeInsets padding) => mln.EdgeInsets(
     top: padding.top,
     left: padding.left,
@@ -566,35 +581,30 @@ class MapLibreMapStateNative extends MapLibreMapState {
     right: padding.right,
   );
 
-  @override
-  Future<void> setStyle(String style) async {
+  /// Loads [style], see [MapOptions.style].
+  Future<void> _setStyle(MapStyle style) async {
     final map = _map;
     if (map == null) return;
-    final trimmed = style.trim();
     // The style JSON where it is at hand, for the attributions that MapLibre
     // Native drops.
     _styleJson = null;
-    if (trimmed.startsWith('{')) {
-      _styleJson = trimmed;
-      await map.setStyleJson(jsonDecode(trimmed));
-    } else if (trimmed.startsWith('http://') ||
-        trimmed.startsWith('https://') ||
-        trimmed.startsWith('mapbox://') ||
-        trimmed.startsWith('file://') ||
-        trimmed.startsWith('asset://')) {
-      if (trimmed.startsWith('file://')) {
-        _styleJson = await _readStyleFile(Uri.parse(trimmed).toFilePath());
-      }
-      await map.setStyleUrl(trimmed);
-    } else if (trimmed.startsWith('/') ||
-        RegExp(r'^[a-zA-Z]:[/\\]').hasMatch(trimmed)) {
-      _styleJson = await _readStyleFile(trimmed);
-      await map.setStyleUrl(Uri.file(trimmed).toString());
-    } else {
-      // A Flutter asset.
-      final json = await DefaultAssetBundle.of(context).loadString(trimmed);
-      _styleJson = json;
-      await map.setStyleJson(jsonDecode(json));
+    switch (style) {
+      case MapStyleJson(:final json):
+        _styleJson = json;
+        await map.setStyleJson(jsonDecode(json));
+      case MapStyleUrl(:final url):
+        if (url.startsWith('file://')) {
+          _styleJson = await _readStyleFile(Uri.parse(url).toFilePath());
+        }
+        await map.setStyleUrl(url);
+      case MapStyleFile(:final path):
+        _styleJson = await _readStyleFile(path);
+        await map.setStyleUrl(Uri.file(path).toString());
+      case MapStyleAsset(:final asset):
+        final json = await DefaultAssetBundle.of(context).loadString(asset);
+        if (_map != map) return;
+        _styleJson = json;
+        await map.setStyleJson(jsonDecode(json));
     }
   }
 

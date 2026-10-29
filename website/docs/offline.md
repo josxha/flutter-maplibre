@@ -51,8 +51,8 @@ to learn more.
 Using OfflineManager, you can bulk-download specific map regions for offline
 access. An `OfflineRegionDefinition` says what a region covers:
 
-- `OfflineTilePyramidRegionDefinition` downloads every tile within
-  `LngLatBounds`.
+- `OfflineTilePyramidRegionDefinition` downloads every tile within a
+  `GeoBox`.
 - `OfflineGeometryRegionDefinition` downloads only the tiles that a geometry
   touches, such as a route as a `LineString` or an area as a `Polygon`. It
   needs far fewer tiles than the bounding box of a long or diagonal route.
@@ -64,7 +64,7 @@ level of each tile source if that is lower.
 Future<void> downloadMyMap() async {
   final stream = manager.downloadRegion(
     definition: OfflineTilePyramidRegionDefinition(
-      bounds: LngLatBounds(/* ... */),
+      bounds: GeoBox(/* ... */),
       styleUrl: '...',
       minZoom: 10,
       maxZoom: 14,

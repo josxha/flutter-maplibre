@@ -12,12 +12,7 @@ OfflineRegionDefinition _roundTrip(OfflineRegionDefinition definition) =>
 void main() {
   test('converts tile pyramid definitions', () {
     const definition = OfflineTilePyramidRegionDefinition(
-      bounds: LngLatBounds(
-        longitudeWest: 1,
-        longitudeEast: 3,
-        latitudeSouth: -3,
-        latitudeNorth: 3,
-      ),
+      bounds: GeoBox(west: 1, east: 3, south: -3, north: 3),
       styleUrl: 'https://example.com/style.json',
       minZoom: 2,
       maxZoom: double.infinity,

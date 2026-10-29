@@ -22,7 +22,9 @@ class _EventsPageState extends State<EventsPage> {
         children: [
           MapLibreMap(
             options: const MapOptions(
-              initCenter: Geographic(lon: 9.17, lat: 47.68),
+              initCamera: InitialCamera.position(
+                center: Geographic(lon: 9.17, lat: 47.68),
+              ),
             ),
             onEvent: _onEvent,
           ),

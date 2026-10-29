@@ -3,76 +3,85 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 
 void main() {
-  group('LngLatBounds', () {
-    const bounds = LngLatBounds(
-      longitudeWest: -10,
-      longitudeEast: 10,
-      latitudeSouth: -5,
-      latitudeNorth: 5,
-    );
+  group('MapStyle', () {
+    test('compares by type and value', () {
+      expect(const MapStyle.url('a'), const MapStyle.url('a'));
+      expect(
+        const MapStyle.url('a').hashCode,
+        const MapStyle.url('a').hashCode,
+      );
+      expect(const MapStyle.url('a'), isNot(const MapStyle.url('b')));
+      expect(const MapStyle.url('a'), isNot(const MapStyle.asset('a')));
+      expect(const MapStyle.asset('a'), isNot(const MapStyle.file('a')));
+      expect(const MapStyle.json('{}'), const MapStyle.json('{}'));
+    });
 
+    test('demo is the MapLibre demo style', () {
+      expect(
+        MapStyle.demo,
+        isA<MapStyleUrl>().having(
+          (style) => style.url,
+          'url',
+          'https://demotiles.maplibre.org/style.json',
+        ),
+      );
+      expect(const MapOptions().style, MapStyle.demo);
+    });
+  });
+
+  group('InitialCamera', () {
+    const bounds = GeoBox(west: -10, south: -5, east: 10, north: 5);
+
+    test('position defaults to zoom 0 at 0, 0', () {
+      expect(const InitialCamera.position(), const InitialCameraPosition());
+      expect(
+        const InitialCamera.position(zoom: 3),
+        isNot(const InitialCamera.position(zoom: 4)),
+      );
+    });
+
+    test('bounds compares by value', () {
+      expect(
+        const InitialCamera.bounds(bounds, padding: EdgeInsets.all(8)),
+        const InitialCamera.bounds(bounds, padding: EdgeInsets.all(8)),
+      );
+      expect(
+        const InitialCamera.bounds(bounds),
+        isNot(const InitialCamera.bounds(bounds, pitch: 30)),
+      );
+      expect(
+        const InitialCamera.bounds(bounds),
+        isNot(
+          const InitialCamera.bounds(
+            GeoBox(west: -10, south: -5, east: 10, north: 6),
+          ),
+        ),
+      );
+    });
+
+    test('is not set by default, so the style camera applies', () {
+      expect(const MapOptions().initCamera, isNull);
+    });
+  });
+
+  group('MapOptions', () {
     test('compares by value', () {
       expect(
-        bounds,
-        const LngLatBounds(
-          longitudeWest: -10,
-          longitudeEast: 10,
-          latitudeSouth: -5,
-          latitudeNorth: 5,
+        const MapOptions(
+          style: MapStyle.asset('style.json'),
+          initCamera: InitialCamera.position(zoom: 3),
+          maxBounds: GeoBox(west: 0, south: 0, east: 1, north: 1),
+        ),
+        const MapOptions(
+          style: MapStyle.asset('style.json'),
+          initCamera: InitialCamera.position(zoom: 3),
+          maxBounds: GeoBox(west: 0, south: 0, east: 1, north: 1),
         ),
       );
-      expect(bounds.hashCode, bounds.copyWith().hashCode);
-      expect(bounds, isNot(bounds.copyWith(longitudeEast: 15)));
-    });
-
-    test('copyWith replaces only the given edges', () {
-      final copy = bounds.copyWith(longitudeWest: -20, latitudeNorth: 8);
-      expect(copy.longitudeWest, -20);
-      expect(copy.longitudeEast, 10);
-      expect(copy.latitudeSouth, -5);
-      expect(copy.latitudeNorth, 8);
-    });
-
-    test('toString names every edge', () {
       expect(
-        bounds.toString(),
-        'LngLatBounds(longitudeWest: -10.0, longitudeEast: 10.0, '
-        'latitudeSouth: -5.0, latitudeNorth: 5.0)',
+        const MapOptions(),
+        isNot(const MapOptions(style: MapStyle.asset('style.json'))),
       );
-    });
-
-    test('fromPoints spans the points', () {
-      final spanned = LngLatBounds.fromPoints(const [
-        Geographic(lon: 10, lat: 20),
-        Geographic(lon: -5, lat: 30),
-        Geographic(lon: 15, lat: 10),
-        Geographic(lon: 0, lat: 0),
-      ]);
-      expect(
-        spanned,
-        const LngLatBounds(
-          longitudeWest: -5,
-          longitudeEast: 15,
-          latitudeSouth: 0,
-          latitudeNorth: 30,
-        ),
-      );
-    });
-
-    test('fromPoints of one point is that point', () {
-      expect(
-        LngLatBounds.fromPoints(const [Geographic(lon: 5.5, lat: -5.5)]),
-        const LngLatBounds(
-          longitudeWest: 5.5,
-          longitudeEast: 5.5,
-          latitudeSouth: -5.5,
-          latitudeNorth: -5.5,
-        ),
-      );
-    });
-
-    test('fromPoints rejects no points', () {
-      expect(() => LngLatBounds.fromPoints(const []), throwsAssertionError);
     });
   });
 
@@ -211,12 +220,7 @@ void main() {
   });
 
   group('offline models', () {
-    const bounds = LngLatBounds(
-      longitudeWest: 1,
-      longitudeEast: 3,
-      latitudeSouth: -3,
-      latitudeNorth: 3,
-    );
+    const bounds = GeoBox(west: 1, east: 3, south: -3, north: 3);
     const definition = OfflineTilePyramidRegionDefinition(
       bounds: bounds,
       minZoom: 2,

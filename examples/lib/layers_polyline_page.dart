@@ -28,8 +28,10 @@ class _LayersPolylinePageState extends State<LayersPolylinePage> {
       appBar: AppBar(title: const Text('Polyline Layers')),
       body: MapLibreMap(
         options: const MapOptions(
-          initZoom: 7,
-          initCenter: Geographic(lon: 9.17, lat: 47.68),
+          initCamera: InitialCamera.position(
+            zoom: 7,
+            center: Geographic(lon: 9.17, lat: 47.68),
+          ),
         ),
         onEvent: (event) {
           if (event case MapEventClick()) {

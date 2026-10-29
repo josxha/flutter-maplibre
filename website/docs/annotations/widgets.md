@@ -21,15 +21,17 @@ annotation layers.
 
 ## Basic Usage
 
-```dart linenums="1" hl_lines="11-29"
+```dart linenums="1" hl_lines="14-32"
 @override
 Widget build(BuildContext context) {
   return Scaffold(
     appBar: AppBar(title: const Text('Widget Layer')),
     body: MapLibreMap(
       options: MapOptions(
-        initZoom: 3,
-        initCenter: Geographic(lon: 0, lat: 0),
+        initCamera: InitialCamera.position(
+          center: Geographic(lon: 0, lat: 0),
+          zoom: 3,
+        ),
       ),
       children: [
         WidgetLayer(

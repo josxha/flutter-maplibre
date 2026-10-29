@@ -25,7 +25,9 @@ class _TwoMapsPageState extends State<TwoMapsPage> {
           Expanded(
             child: MapLibreMap(
               options: const MapOptions(
-                initCenter: Geographic(lon: 9.17, lat: 47.68),
+                initCamera: InitialCamera.position(
+                  center: Geographic(lon: 9.17, lat: 47.68),
+                ),
               ),
               onMapCreated: (controller) {
                 WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -38,7 +40,9 @@ class _TwoMapsPageState extends State<TwoMapsPage> {
           Expanded(
             child: MapLibreMap(
               options: const MapOptions(
-                initCenter: Geographic(lon: 9.17, lat: 47.68),
+                initCamera: InitialCamera.position(
+                  center: Geographic(lon: 9.17, lat: 47.68),
+                ),
               ),
               onMapCreated: (controller) {
                 WidgetsBinding.instance.addPostFrameCallback((_) {

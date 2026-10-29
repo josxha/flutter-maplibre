@@ -1,3 +1,5 @@
+import 'package:maplibre/maplibre.dart';
+
 enum MapStyles {
   openMapTilesLiberty(
     name: 'OpenMapTiles Liberty',
@@ -153,6 +155,12 @@ enum MapStyles {
 
   final String name;
   final String uri;
+
+  MapStyle get style => switch (uri.trim()) {
+    final json when json.startsWith('{') => MapStyle.json(json),
+    final asset when asset.startsWith('assets/') => MapStyle.asset(asset),
+    final url => MapStyle.url(url),
+  };
 }
 
 /// **Use your own key for your project!**

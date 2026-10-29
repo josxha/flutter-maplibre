@@ -65,13 +65,33 @@
   cleartext traffic for their hosts.
 - Web: `OfflineManager.createInstance` throws an `UnsupportedError` instead of
   an `Exception`.
-- Removed the deprecated `MapOptions.pitch` (use `initPitch`),
+- Removed the deprecated `MapOptions.pitch` (use `initCamera`),
   `circumferenceOfEarth` (use `earthCircumferenceWgs84`) and
   `VectorSource.sourceLayer`, which had no effect.
 - `VideoSource.coordinates` is a `LngLatQuad`, like `ImageSource.coordinates`,
   instead of a list of four `Geographic`s.
+- `MapOptions.initStyle` (a `String`) is replaced by `MapOptions.style`, a
+  `MapStyle`: `MapStyle.url`, `MapStyle.json`, `MapStyle.asset` or
+  `MapStyle.file` (not on web), so the style is no longer guessed from the
+  string. The map loads a new style when `style` changes, and
+  `MapController.setStyle` was removed.
+- `MapOptions.initCenter`, `initZoom`, `initBearing` and `initPitch` are
+  replaced by `MapOptions.initCamera`, an `InitialCamera.position` or
+  `InitialCamera.bounds`. Without `initCamera` the map starts at the camera
+  stored in its style instead of at zoom 0.
+- `LngLatBounds` is replaced by geobase's `GeoBox` (`west`, `south`, `east`,
+  `north`; `GeoBox.from` replaces `LngLatBounds.fromPoints`) in
+  `MapController.fitBounds`, `MapController.getVisibleRegion`,
+  `MapOptions.maxBounds` and the offline region definitions.
+- `maplibre` exports only the geobase types of its API (`Geographic`,
+  `Position`, `PositionSeries`, `GeoBox`, the geometries, `Feature`,
+  `FeatureCollection` and `earthCircumferenceWgs84`) instead of all of
+  geobase. Import `package:geobase/geobase.dart` for the others.
 
 ### Features
+
+- `InitialCamera.bounds` starts a map fitted to bounds, with padding,
+  bearing and pitch, from its first frame.
 
 - `MapLibreMap.paused` stops a map from rendering while it stays mounted, and
   maps hidden by an `IndexedStack`, a `Visibility` or a disabled `TickerMode`

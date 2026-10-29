@@ -64,7 +64,7 @@ initial values. Parameters that don't begin with `init*` can be updated in a
 declarative way just like any other Flutter Widget. The most simple way is to
 use the `MapLibreMap` widget in a `StatefulWidget` and calling `setState()`.
 
-```dart linenums="1" hl_lines="11 22-24 29-31"
+```dart linenums="1" hl_lines="11 27-29 34-36"
 @immutable
 class MyMapWidget extends StatefulWidget {
   const MyMapWidget({super.key});
@@ -82,10 +82,14 @@ class _MyMapWidget extends State<MyMapWidget> {
     return Scaffold(
       body: MapLibreMap(
           options: MapOptions(
-            // parameters that start with init* can't be updated
-            initCenter: Geographic(lon: 9.17, lat: 47.68),
-            initZoom: 3,
-            // other parameters can be updated
+            // initCamera can't be updated, move the camera with the
+            // MapController instead
+            initCamera: InitialCamera.position(
+              center: Geographic(lon: 9.17, lat: 47.68),
+              zoom: 3,
+            ),
+            // other parameters can be updated, a new style loads
+            style: MapStyle.url('https://demotiles.maplibre.org/style.json'),
             gestures: _gesturesEnabled
                 ? MapGestures.all()
                 : MapGestures.none(),
@@ -115,7 +119,7 @@ by listening in the `onEvent` callback for the `MapEventMapCreated` event type.
 
 You can store the `MapController` in a field variable for later use.
 
-```dart linenums="1" hl_lines="2 13"
+```dart linenums="1" hl_lines="2 18"
 class _MyMapWidget extends State<MyMapWidget> {
   MapController? _mapController;
 
@@ -123,7 +127,12 @@ class _MyMapWidget extends State<MyMapWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: MapLibreMap(
-          options: MapOptions(initCenter: Geographic(lon: 9.17, lat: 47.68), initZoom: 3),
+          options: MapOptions(
+            initCamera: InitialCamera.position(
+              center: Geographic(lon: 9.17, lat: 47.68),
+              zoom: 3,
+            ),
+          ),
           onEvent: (event) {
             // check if the MapEvent type is a MapEventMapCreated
             if (event case MapEventMapCreated()) {
@@ -146,13 +155,18 @@ the `onStyleLoaded` callback.
 After it has loaded you can access the `StyleController` at any time
 from the `style` getter of `MapController`.
 
-```dart linenums="1" hl_lines="11-12"
+```dart linenums="1" hl_lines="16-17"
 class _MyMapWidget extends State<MyMapWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: MapLibreMap(
-          options: MapOptions(initCenter: Geographic(lon: 9.17, lat: 47.68), initZoom: 3),
+          options: MapOptions(
+            initCamera: InitialCamera.position(
+              center: Geographic(lon: 9.17, lat: 47.68),
+              zoom: 3,
+            ),
+          ),
           onEvent: (event) {
             // check if the MapEvent type is a MapEventStyleLoaded
             if (event case MapEventStyleLoaded()) {

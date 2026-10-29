@@ -28,14 +28,16 @@ MapOptions offlineOptions({
   double maxZoom = 22,
   MapGestures gestures = const MapGestures.all(),
 }) => MapOptions(
-  initStyle: offlineStyle,
-  initCenter: center,
-  initZoom: zoom,
-  initBearing: bearing,
-  initPitch: pitch,
+  style: MapStyle.json(offlineStyle),
   minZoom: minZoom,
   maxZoom: maxZoom,
   gestures: gestures,
+  initCamera: InitialCamera.position(
+    center: center,
+    zoom: zoom,
+    bearing: bearing,
+    pitch: pitch,
+  ),
 );
 
 /// The default timeout of the `waitFor…` helpers.
@@ -44,11 +46,17 @@ const Duration defaultTimeout = Duration(seconds: 15);
 /// A map shown by [pumpMap], with its controller, style and every event it
 /// reported.
 class TestMap {
-  TestMap._(this.tester, this.controller, this.events);
+  TestMap._(this.tester, this.controller, this.events, this._options);
 
   final WidgetTester tester;
   final MapController controller;
   final List<MapEvent> events;
+  final ValueNotifier<MapOptions> _options;
+
+  /// The options of the map. Setting them rebuilds the map widget with them.
+  MapOptions get options => _options.value;
+
+  set options(MapOptions options) => _options.value = options;
 
   /// The style of the map, replaced whenever a style loads.
   StyleController get style => controller.style!;
@@ -200,23 +208,29 @@ Future<TestMap> pumpMap(
   final events = <MapEvent>[];
   final controller = Completer<MapController>();
   final style = Completer<StyleController>();
+  final mapOptions = ValueNotifier(options ?? offlineOptions());
+  addTearDown(mapOptions.dispose);
   await tester.pumpWidget(
-    MapApp(
-      options: options ?? offlineOptions(),
-      layers: layers,
-      onMapCreated: controller.complete,
-      onStyleLoaded: (style_) {
-        if (!style.isCompleted) style.complete(style_);
-      },
-      onEvent: events.add,
-      paused: paused,
-      children: children,
+    ValueListenableBuilder(
+      valueListenable: mapOptions,
+      builder: (context, options, _) => MapApp(
+        options: options,
+        layers: layers,
+        onMapCreated: controller.complete,
+        onStyleLoaded: (style_) {
+          if (!style.isCompleted) style.complete(style_);
+        },
+        onEvent: events.add,
+        paused: paused,
+        children: children,
+      ),
     ),
   );
   final map = TestMap._(
     tester,
     await controller.future.timeout(defaultTimeout),
     events,
+    mapOptions,
   );
   await style.future.timeout(defaultTimeout);
   // Let the first frame reach Flutter, so projections follow the camera.

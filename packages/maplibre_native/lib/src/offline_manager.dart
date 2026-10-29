@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:geobase/geobase.dart' show GeometryBuilder;
 import 'package:maplibre_native/src/database.dart';
 import 'package:maplibre_native_ffi/maplibre_native_ffi.dart' as mln;
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
@@ -285,15 +286,9 @@ OfflineResourceErrorReason _toErrorReason(mln.ResourceErrorReason reason) =>
       _ => OfflineResourceErrorReason.other,
     };
 
-mln.LatLngBounds _toNativeBounds(LngLatBounds bounds) => mln.LatLngBounds(
-  southwest: mln.LatLng(
-    latitude: bounds.latitudeSouth,
-    longitude: bounds.longitudeWest,
-  ),
-  northeast: mln.LatLng(
-    latitude: bounds.latitudeNorth,
-    longitude: bounds.longitudeEast,
-  ),
+mln.LatLngBounds _toNativeBounds(GeoBox bounds) => mln.LatLngBounds(
+  southwest: mln.LatLng(latitude: bounds.south, longitude: bounds.west),
+  northeast: mln.LatLng(latitude: bounds.north, longitude: bounds.east),
 );
 
 /// The region definition of the C API for [definition].
@@ -332,11 +327,11 @@ OfflineRegion toOfflineRegion(mln.OfflineRegionInfo info) => OfflineRegion(
     ),
     mln.OfflineRegionDefinitionTilePyramid(:final value) =>
       OfflineTilePyramidRegionDefinition(
-        bounds: LngLatBounds(
-          longitudeWest: value.bounds.southwest.longitude,
-          longitudeEast: value.bounds.northeast.longitude,
-          latitudeSouth: value.bounds.southwest.latitude,
-          latitudeNorth: value.bounds.northeast.latitude,
+        bounds: GeoBox(
+          west: value.bounds.southwest.longitude,
+          south: value.bounds.southwest.latitude,
+          east: value.bounds.northeast.longitude,
+          north: value.bounds.northeast.latitude,
         ),
         styleUrl: value.styleUrl,
         minZoom: value.minZoom,

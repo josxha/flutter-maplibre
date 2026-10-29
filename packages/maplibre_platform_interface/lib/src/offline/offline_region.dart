@@ -81,7 +81,7 @@ sealed class OfflineRegionDefinition {
   final bool includeIdeographs;
 
   /// The bounding box of the region.
-  LngLatBounds get bounds;
+  GeoBox get bounds;
 }
 
 /// An [OfflineRegionDefinition] of every tile within a rectangle.
@@ -99,7 +99,7 @@ final class OfflineTilePyramidRegionDefinition extends OfflineRegionDefinition {
   });
 
   @override
-  final LngLatBounds bounds;
+  final GeoBox bounds;
 
   @override
   bool operator ==(Object other) =>
@@ -152,23 +152,10 @@ final class OfflineGeometryRegionDefinition extends OfflineRegionDefinition {
 
   /// The bounding box of [geometry].
   @override
-  LngLatBounds get bounds {
-    final box = geometry.calculateBounds();
-    if (box == null) {
-      return const LngLatBounds(
-        longitudeWest: 0,
-        longitudeEast: 0,
-        latitudeSouth: 0,
-        latitudeNorth: 0,
-      );
-    }
-    return LngLatBounds(
-      longitudeWest: box.minX,
-      longitudeEast: box.maxX,
-      latitudeSouth: box.minY,
-      latitudeNorth: box.maxY,
-    );
-  }
+  GeoBox get bounds => switch (geometry.calculateBounds()) {
+    final box? => GeoBox.fromBox(box),
+    null => const GeoBox(west: 0, south: 0, east: 0, north: 0),
+  };
 
   @override
   bool operator ==(Object other) =>

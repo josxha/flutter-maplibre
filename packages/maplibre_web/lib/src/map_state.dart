@@ -92,11 +92,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       _map = interop.JsMap(
         interop.MapOptions(
           container: _htmlElement,
-          style: _prepareStyleString(options.initStyle),
-          zoom: options.initZoom,
-          center: options.initCenter?.toLngLat(),
-          bearing: options.initBearing,
-          pitch: options.initPitch,
+          style: _jsStyle(options.style),
           attributionControl: false,
           // MapGestureDetector handles the input.
           interactive: false,
@@ -119,6 +115,11 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       _map.setMinPitch(options.minPitch);
       _map.setMaxPitch(options.maxPitch);
       _map.setMaxBounds(options.maxBounds?.toJsLngLatBounds());
+      // Without an initial camera, the map takes the style's camera once it
+      // loads.
+      if (options.initCamera case final initCamera?) {
+        _applyInitialCamera(initCamera);
+      }
 
       // add callbacks
       _map.on(
@@ -264,6 +265,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     if (options.maxBounds != oldWidget.options.maxBounds) {
       _map.setMaxBounds(options.maxBounds?.toJsLngLatBounds());
     }
+    if (options.style != oldWidget.options.style) _setStyle(options.style);
     _layerManager?.updateLayers(widget.layers);
     super.didUpdateWidget(oldWidget);
   }
@@ -362,7 +364,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
 
   @override
   Future<void> fitBounds({
-    required LngLatBounds bounds,
+    required GeoBox bounds,
     double? bearing,
     double? pitch,
     Duration nativeDuration = const Duration(seconds: 2),
@@ -417,13 +419,13 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       pow(2, _map.getZoom() + 9);
 
   @override
-  LngLatBounds getVisibleRegion() {
+  GeoBox getVisibleRegion() {
     final bounds = _map.getBounds();
-    return LngLatBounds(
-      longitudeWest: bounds.getWest().toDouble(),
-      longitudeEast: bounds.getEast().toDouble(),
-      latitudeSouth: bounds.getSouth().toDouble(),
-      latitudeNorth: bounds.getNorth().toDouble(),
+    return GeoBox(
+      west: bounds.getWest().toDouble(),
+      south: bounds.getSouth().toDouble(),
+      east: bounds.getEast().toDouble(),
+      north: bounds.getNorth().toDouble(),
     );
   }
 
@@ -467,39 +469,52 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       )
       .toList(growable: false);
 
-  JSAny _prepareStyleString(String style) {
-    final trimmed = style.trim();
-    if (trimmed.startsWith('{')) {
-      // Raw JSON
-      final json = jsonDecode(trimmed) as Map<String, dynamic>;
-      final jsified = json.jsify();
-      if (jsified == null) {
-        throw StateError('Failed to convert style JSON to JS object.');
-      }
-      return jsified;
-    } else if (trimmed.startsWith('/')) {
-      // path
-      return trimmed.toJS;
-    } else if (!trimmed.startsWith('http://') &&
-        !trimmed.startsWith('https://') &&
-        !trimmed.startsWith('mapbox://')) {
-      // flutter asset
-      return AssetManager().getAssetUrl(trimmed).toJS;
-    } else {
-      // URI
-      return trimmed.toJS;
+  /// Moves the camera of the new map to [initCamera] before its first frame.
+  void _applyInitialCamera(InitialCamera initCamera) {
+    switch (initCamera) {
+      case InitialCameraPosition():
+        _map.jumpTo(
+          interop.JumpToOptions(
+            center: initCamera.center.toLngLat(),
+            zoom: initCamera.zoom,
+            bearing: initCamera.bearing,
+            pitch: initCamera.pitch,
+          ),
+        );
+      case InitialCameraBounds():
+        _map.fitBounds(
+          initCamera.bounds.toJsLngLatBounds(),
+          interop.FitBoundsOptions(
+            animate: false,
+            padding: initCamera.padding.toPaddingOptions(),
+            bearing: initCamera.bearing,
+            pitch: initCamera.pitch,
+          ),
+        );
     }
   }
 
-  @override
-  void setStyle(String style) {
+  JSAny _jsStyle(MapStyle style) => switch (style) {
+    MapStyleJson(:final json) =>
+      (jsonDecode(json) as Map<String, dynamic>).jsify() ??
+          (throw StateError('Failed to convert style JSON to JS object.')),
+    MapStyleUrl(:final url) => url.toJS,
+    MapStyleAsset(:final asset) => AssetManager().getAssetUrl(asset).toJS,
+    MapStyleFile() => throw UnsupportedError(
+      'MapStyle.file is not supported on web, use MapStyle.url or '
+      'MapStyle.asset.',
+    ),
+  };
+
+  /// Loads [style], see [MapOptions.style].
+  void _setStyle(MapStyle style) {
     _map.once(
       interop.MapEventType.styleLoad,
       (JSAny _) {
         _onStyleLoaded();
       }.toJS,
     );
-    _map.setStyle(_prepareStyleString(style));
+    _map.setStyle(_jsStyle(style));
   }
 
   void _onStyleLoaded() {

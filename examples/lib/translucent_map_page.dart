@@ -34,9 +34,11 @@ class _TranslucentMapPageState extends State<TranslucentMapPage> {
           ),
           MapLibreMap(
             options: MapOptions(
-              initCenter: const Geographic(lon: 9.17, lat: 47.68),
-              initStyle: MapStyles.translucent.uri,
-              initZoom: 2,
+              style: MapStyles.translucent.style,
+              initCamera: const InitialCamera.position(
+                center: Geographic(lon: 9.17, lat: 47.68),
+                zoom: 2,
+              ),
             ),
             children: const [MapScalebar(), SourceAttribution(), MapCompass()],
             onStyleLoaded: (style) {

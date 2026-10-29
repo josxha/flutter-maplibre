@@ -146,7 +146,9 @@ class _RotatingMapState extends State<_RotatingMap> {
     return Stack(
       children: [
         MapLibreMap(
-          options: MapOptions(initCenter: widget.center, initZoom: 5),
+          options: MapOptions(
+            initCamera: InitialCamera.position(center: widget.center, zoom: 5),
+          ),
           paused: widget.paused,
           onMapCreated: _onMapCreated,
           onEvent: (event) {

@@ -41,21 +41,12 @@ void runTests() {
       final size = map.size;
       final region = map.controller.getVisibleRegion();
       final corners = {
-        Offset.zero: Geographic(
-          lon: region.longitudeWest,
-          lat: region.latitudeNorth,
-        ),
-        Offset(size.width, 0): Geographic(
-          lon: region.longitudeEast,
-          lat: region.latitudeNorth,
-        ),
-        Offset(0, size.height): Geographic(
-          lon: region.longitudeWest,
-          lat: region.latitudeSouth,
-        ),
+        Offset.zero: Geographic(lon: region.west, lat: region.north),
+        Offset(size.width, 0): Geographic(lon: region.east, lat: region.north),
+        Offset(0, size.height): Geographic(lon: region.west, lat: region.south),
         Offset(size.width, size.height): Geographic(
-          lon: region.longitudeEast,
-          lat: region.latitudeSouth,
+          lon: region.east,
+          lat: region.south,
         ),
       };
       for (final MapEntry(key: screen, value: lngLat) in corners.entries) {
@@ -146,19 +137,16 @@ void runTests() {
     testWidgets('getVisibleRegion surrounds the center', (tester) async {
       final map = await pumpMap(tester, options: offlineOptions(zoom: 10));
       final region = map.controller.getVisibleRegion();
-      expect(region.longitudeWest, inExclusiveRange(-10, 0));
-      expect(region.longitudeEast, inExclusiveRange(0, 10));
-      expect(region.latitudeSouth, inExclusiveRange(-10, 0));
-      expect(region.latitudeNorth, inExclusiveRange(0, 10));
+      expect(region.west, inExclusiveRange(-10, 0));
+      expect(region.east, inExclusiveRange(0, 10));
+      expect(region.south, inExclusiveRange(-10, 0));
+      expect(region.north, inExclusiveRange(0, 10));
       // A zoom level out doubles the visible longitudes.
-      final width = region.longitudeEast - region.longitudeWest;
+      final width = region.east - region.west;
       await map.controller.moveCamera(zoom: 9);
       await map.waitForLatestFrame();
       final wider = map.controller.getVisibleRegion();
-      expect(
-        wider.longitudeEast - wider.longitudeWest,
-        closeTo(width * 2, width * 0.01),
-      );
+      expect(wider.east - wider.west, closeTo(width * 2, width * 0.01));
     });
   });
 }
