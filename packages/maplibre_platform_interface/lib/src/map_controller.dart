@@ -82,6 +82,10 @@ abstract interface class MapController {
   /// Get the current camera position on the map.
   MapCamera? get camera;
 
+  /// Whether the map stopped rendering, because [MapLibreMap.paused] is set
+  /// or the map is hidden. See [MapLibreMap.paused].
+  bool get isRenderingPaused;
+
   /// Returns the distance spanned by one logical pixel at the specified
   /// latitude and current zoom level.
   ///

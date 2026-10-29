@@ -26,6 +26,52 @@ abstract class MapLibreMapState extends State<MapLibreMap>
   /// is set.
   bool isInitialized = false;
 
+  @override
+  bool get isRenderingPaused => _renderingPaused;
+  var _renderingPaused = false;
+
+  /// Stops or resumes rendering, see [MapLibreMap.paused]. Called whenever
+  /// [isRenderingPaused] changes, including when the map starts out paused.
+  /// The map keeps its style, camera and tiles meanwhile.
+  @protected
+  void setRenderingPaused({required bool paused}) {}
+
+  /// Whether the platform stops rendering a paused map. Where it does not,
+  /// [isRenderingPaused] stays false.
+  @protected
+  bool get canPauseRendering => true;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _updateRenderingPaused();
+  }
+
+  @override
+  void didUpdateWidget(covariant MapLibreMap oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.paused != widget.paused) _updateRenderingPaused();
+  }
+
+  /// Pauses the map while [MapLibreMap.paused] is set, while a [Visibility]
+  /// or an [IndexedStack] hides it, or while [TickerMode] is disabled.
+  void _updateRenderingPaused() {
+    final paused =
+        canPauseRendering &&
+        (widget.paused ||
+            !TickerMode.valuesOf(context).enabled ||
+            !Visibility.of(context));
+    if (paused == _renderingPaused) return;
+    _renderingPaused = paused;
+    setRenderingPaused(paused: paused);
+    // This runs while the tree builds, where listeners must not rebuild.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted && _renderingPaused == paused) {
+        widget.onEvent?.call(MapEventRenderingChanged(paused: paused));
+      }
+    });
+  }
+
   /// Applies the camera changes of the map gestures that
   /// [MapGestureDetector] recognizes over [buildPlatformWidget], or null if
   /// the platform handles gestures itself.

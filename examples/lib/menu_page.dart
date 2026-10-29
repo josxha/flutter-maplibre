@@ -13,6 +13,7 @@ import 'package:maplibre_example/layers_polyline_page.dart';
 import 'package:maplibre_example/layers_widget_marker_page.dart';
 import 'package:maplibre_example/offline_page.dart';
 import 'package:maplibre_example/parameters_page.dart';
+import 'package:maplibre_example/paused_rendering_page.dart';
 import 'package:maplibre_example/pmtiles_page.dart';
 import 'package:maplibre_example/style_layers_circle_page.dart';
 import 'package:maplibre_example/style_layers_fill_extrusion_page.dart';
@@ -106,6 +107,11 @@ class MenuPage extends StatelessWidget {
                           label: 'User Location',
                           iconData: Icons.gps_fixed,
                           location: UserLocationPage.location,
+                        ),
+                        const ItemCard(
+                          label: 'Paused Rendering',
+                          iconData: Icons.pause_circle,
+                          location: PausedRenderingPage.location,
                         ),
                         if (OfflineManager.isSupported)
                           const ItemCard(
