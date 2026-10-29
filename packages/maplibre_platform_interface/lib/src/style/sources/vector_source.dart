@@ -21,11 +21,6 @@ final class VectorSource extends Source {
     this.maxZoom = 22,
     this.attribution,
     this.volatile = false,
-    @Deprecated(
-      'This property has no effect. Specify the source layer in the style '
-      'layer that uses this source instead.',
-    )
-    this.sourceLayer,
   });
 
   /// A URL to a TileJSON resource. Supported protocols are `http:` and
@@ -68,12 +63,4 @@ final class VectorSource extends Source {
   ///
   /// Defaults to false. Not available on web.
   final bool volatile;
-
-  /// Layer to use from a vector tile source. Required for vector tile sources;
-  /// prohibited for all other source types, including GeoJSON sources.
-  @Deprecated(
-    'This property has no effect. Specify the source layer in the style '
-    'layer that uses this source instead.',
-  )
-  final String? sourceLayer;
 }

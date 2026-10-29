@@ -337,10 +337,12 @@ class StyleControllerWeb extends StyleController {
           interop.SourceSpecification.video(
             type: 'video',
             urls: source.urls.jsify()!,
-            coordinates: source.coordinates
-                .map((e) => [e.lon, e.lat])
-                .toList(growable: false)
-                .jsify()!,
+            coordinates: [
+              source.coordinates.topLeft,
+              source.coordinates.topRight,
+              source.coordinates.bottomRight,
+              source.coordinates.bottomLeft,
+            ].map((e) => [e.lon, e.lat]).toList(growable: false).jsify()!,
           ),
         );
     }

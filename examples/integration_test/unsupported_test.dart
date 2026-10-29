@@ -48,12 +48,12 @@ void runTests() {
           const VideoSource(
             id: 'video',
             urls: ['https://example.com/video.mp4'],
-            coordinates: [
-              Geographic(lon: -10, lat: 10),
-              Geographic(lon: 10, lat: 10),
-              Geographic(lon: 10, lat: -10),
-              Geographic(lon: -10, lat: -10),
-            ],
+            coordinates: LngLatQuad(
+              bottomLeft: Geographic(lon: -10, lat: -10),
+              bottomRight: Geographic(lon: 10, lat: -10),
+              topLeft: Geographic(lon: -10, lat: 10),
+              topRight: Geographic(lon: 10, lat: 10),
+            ),
           ),
         ),
         throwsA(isA<UnsupportedError>()),
