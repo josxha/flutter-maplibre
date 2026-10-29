@@ -82,7 +82,7 @@ build root of a maplibre-native-ffi clone in
 - Use conventional commits (`feat(native): …`, `fix: …`, `ci: …`).
 - Read `.agents/decisions.md` before changing rendering, threading, or the
   native build.
-- Keep this file, `.agents/decisions.md` and `ROADMAP.md` up to date in the
-  same commit as the change: new commands, rules, layout, decisions, known
-  gaps, and open work that was done or found. `ROADMAP.md` lists open work
-  on the packages, not process steps such as pushing, merging or releasing.
+- Keep this file and `.agents/decisions.md` up to date in the same commit as
+  the change: new commands, rules, layout and decisions.
+- Bugs, features and other open work are tracked in GitHub issues, not in
+  files in the repository.
