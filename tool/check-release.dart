@@ -157,13 +157,44 @@ String _buildReleaseNotes(File changelog, Version version) {
   final section = nextHeaderIndex == -1
       ? remaining
       : remaining.substring(0, nextHeaderIndex);
-  final trimmed = section.trim();
+  final trimmed = _unwrapListItems(section.trim());
   final buffer = StringBuffer(trimmed);
   if (trimmed.isNotEmpty) {
     buffer.write('\n');
   }
   buffer.writeln('Contributors: @josxha');
   return buffer.toString();
+}
+
+/// Joins wrapped list items onto a single line, because GitHub releases keep
+/// the line breaks of the changelog.
+String _unwrapListItems(String content) {
+  final listItemPattern = RegExp(r'^\s*([-*+]|\d+\.)\s');
+  final continuationPattern = RegExp(r'^\s+\S');
+  final lines = <String>[];
+  var inCodeBlock = false;
+  var inListItem = false;
+  for (final line in content.split('\n')) {
+    if (line.trimLeft().startsWith('```')) {
+      inCodeBlock = !inCodeBlock;
+      inListItem = false;
+      lines.add(line);
+      continue;
+    }
+    if (inCodeBlock) {
+      lines.add(line);
+      continue;
+    }
+    if (inListItem &&
+        continuationPattern.hasMatch(line) &&
+        !listItemPattern.hasMatch(line)) {
+      lines[lines.length - 1] = '${lines.last.trimRight()} ${line.trim()}';
+      continue;
+    }
+    inListItem = listItemPattern.hasMatch(line);
+    lines.add(line);
+  }
+  return lines.join('\n');
 }
 
 void _writeGithubMultilineOutput(String key, String value) {
