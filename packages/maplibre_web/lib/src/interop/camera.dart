@@ -12,11 +12,15 @@ extension type Camera._(JSObject _) implements JSObject {
   /// Animate the viewport of the map to a new location.
   external void flyTo(FlyToOptions options, [JSAny? eventData]);
 
+  /// Change the viewport of the map, animated over a duration that may be
+  /// zero.
+  external void easeTo(EaseToOptions options, [JSAny? eventData]);
+
+  /// Stop any running camera animation.
+  external void stop();
+
   /// Animate the viewport of the map to fit [LngLatBounds].
   external void fitBounds(LngLatBounds bounds, [FitBoundsOptions? options]);
-
-  /// Stop any animated transition underway.
-  external void stop();
 }
 
 /// Options used for [Camera.jumpTo].
@@ -31,6 +35,27 @@ extension type JumpToOptions._(CameraOptions _) implements CameraOptions {
     LngLat? center,
     num? zoom,
     num? bearing,
+  });
+}
+
+/// Options used for [Camera.easeTo].
+@anonymous
+@JS()
+extension type EaseToOptions._(CameraOptions _) implements CameraOptions {
+  /// Create a new JS [EaseToOptions].
+  ///
+  /// `offset` puts `center` that far from the middle of the map, and
+  /// `around` keeps its location in place while zooming and rotating.
+  external factory EaseToOptions({
+    LngLat? center,
+    num? zoom,
+    num? bearing,
+    num? pitch,
+    LngLat? around,
+    Point? offset,
+    num? duration,
+    JSFunction? easing,
+    bool? essential,
   });
 }
 

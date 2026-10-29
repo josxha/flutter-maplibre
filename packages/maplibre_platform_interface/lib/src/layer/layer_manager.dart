@@ -21,6 +21,7 @@ class LayerManager {
       unawaited(style.addLayer(layer.createStyleLayer(index)));
     }
     _oldLayers = layers;
+    _oldFeatures = [for (final layer in layers) List.of(layer.list)];
   }
 
   /// The [StyleController] of the [MapLibreMap].
@@ -29,6 +30,20 @@ class LayerManager {
   /// The saved [Layer]s from before `setState()` gets called and the
   /// layers get changed.
   late List<Layer> _oldLayers;
+
+  /// Copies of the features of [_oldLayers] as they were when the sources
+  /// were last written. `Layer.==` compares `list` by identity, and an app
+  /// that adds to its list in place hands back the same instance, so only a
+  /// copy shows what changed.
+  late List<List<Feature>> _oldFeatures;
+
+  static bool _sameFeatures(List<Feature> a, List<Feature> b) {
+    if (a.length != b.length) return false;
+    for (var i = 0; i < a.length; i++) {
+      if (!identical(a[i], b[i]) && a[i] != b[i]) return false;
+    }
+    return true;
+  }
 
   /// Called when `setState()` gets called and the widget rebuilds. This method
   /// translates the declarative layer definition of [MapLibreMap.layers] to
@@ -44,10 +59,10 @@ class LayerManager {
         // it ran on every rebuild for every layer even when nothing about the
         // layer had moved.
         //
-        // `Layer.==` is the same test already applied to the style layer a few
-        // lines below, so this uses one condition rather than introducing a
-        // second notion of "changed".
-        if (layer != oldLayer) {
+        // `Layer.==` alone misses features added to the same list in place,
+        // so the features are also compared with the copy taken last time.
+        if (layer != oldLayer ||
+            !_sameFeatures(_oldFeatures[index], layer.list)) {
           style.updateGeoJsonSource(
             id: layer.getSourceId(index),
             data: FeatureCollection(layer.list).toText(),
@@ -76,5 +91,6 @@ class LayerManager {
       style.removeSource(oldLayer.getSourceId(index));
     }
     _oldLayers = layers;
+    _oldFeatures = [for (final layer in layers) List.of(layer.list)];
   }
 }

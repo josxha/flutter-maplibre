@@ -1,3 +1,113 @@
+## unreleased
+
+### Breaking Changes
+
+- Removed `maplibre_android`, `maplibre_ios` and `maplibre_webview`. `maplibre`
+  now uses `maplibre_web` in the browser and `maplibre_native`, built on the
+  MapLibre Native C API, on every other platform. `maplibre_native` renders on
+  Android, iOS, macOS, Windows and Linux.
+- Requires Android 7.0 (API level 24) with OpenGL ES 3.0, iOS 15 and macOS
+  14.3. On iOS and macOS the plugin supports only Swift Package Manager, not
+  CocoaPods.
+- Removed the `MapOptions` properties of the removed packages:
+  `androidMode`, `androidTextureMode`, `androidTranslucentTextureSurface`,
+  `androidForegroundLoadColor` and `webviewDebugMode`, and the
+  `AndroidPlatformViewMode` enum.
+- `MapController.featuresAtPoint` and `MapController.featuresInRect` return a
+  `Future`, because MapLibre Native answers feature queries asynchronously.
+- Removed `MapController.queryLayers` and `QueriedLayer`. Use
+  `featuresAtPoint` with `layerIds` to test layers, and the new
+  `RenderedFeature.sourceId`, `RenderedFeature.sourceLayer` and
+  `RenderedFeature.layerId` for the source and the style layer.
+- `RenderedFeature` equality and `hashCode` compare `id`, `sourceId`,
+  `sourceLayer` and `layerId`.
+- Web: map gestures are recognized in Flutter, as on every other platform,
+  instead of by MapLibre GL JS. Its keyboard navigation and shift-drag box
+  zoom are gone.
+- Removed the `pointer_interceptor` dependency. Widgets over the map no longer
+  need a `PointerInterceptor` on web; `WidgetLayer.allowInteraction` works the
+  same on every platform.
+- `OfflineManager.downloadRegion` takes an `OfflineRegionDefinition`, either
+  an `OfflineTilePyramidRegionDefinition` of bounds or the new
+  `OfflineGeometryRegionDefinition` of a geometry, instead of `mapStyleUrl`,
+  `bounds`, `minZoom`, `maxZoom`, `pixelDensity` and `includeIdeographs`.
+  `OfflineRegion` holds that `definition` instead of its own `bounds`,
+  `minZoom`, `maxZoom`, `pixelRatio` and `styleUrl`.
+- `DownloadProgress` holds an `OfflineRegionStatus` as `status` instead of
+  `loadedBytes`, `loadedTiles`, `totalTiles` and `totalTilesEstimated`, and its
+  `progress` counts every resource, not only tiles.
+- `OfflineDownloadException` is sealed: download streams report an
+  `OfflineResourceException` with its `reason`, or an
+  `OfflineTileCountLimitException`, both with the `regionId`.
+- `OfflineManager.getOfflineRegion` returns null for an unknown region.
+  `setOfflineTileCountLimit` and `runPackDatabaseAutomatically` were removed,
+  as MapLibre Native offers neither.
+- Removed `PermissionManager`, `MapController.enableLocation`,
+  `MapController.trackLocation`, `MapController.userLocationIsSupported`,
+  `BearingRenderMode` and `BearingTrackMode`. Show the user location with a
+  `UserLocationLayer`, and ask for permissions with `geolocator` or
+  `permission_handler`. `MapControlButtons` takes `tracking` and
+  `onTrackingPressed` instead of `showTrackLocation`.
+- `StyleController.addImage`, `addImages` and `addImageFromAssets` take a
+  `pixelRatio` of image pixels per logical pixel, 1 by default, instead of
+  using the device pixel ratio. An image of N pixels shows N logical pixels
+  wide at an icon size of 1 on every platform and screen, so images grow by
+  the device pixel ratio on high-DPI screens; pass the ratio the image was
+  made for to keep their size.
+- `addImageFromCanvas` and `addImageFromIconData` take their sizes in
+  logical pixels and render at the device pixel ratio. `addImageFromCanvas`
+  requires `width` and `height` as doubles, the `painter` draws in logical
+  pixels, and `addImageFromIconData` makes a 48 pixel icon by default.
+- Android, iOS and desktop: MapLibre Native has no globe projection, so
+  `setProjection(MapProjection.globe)` keeps Mercator, and adding a
+  `VideoSource` throws an `UnsupportedError`.
+- Android: plain `http://` URLs need a `network-security-config` that permits
+  cleartext traffic for their hosts.
+- Web: `OfflineManager.createInstance` throws an `UnsupportedError` instead of
+  an `Exception`.
+
+### Features
+
+- `MapLibreMap.paused` stops a map from rendering while it stays mounted, and
+  maps hidden by an `IndexedStack`, a `Visibility` or a disabled `TickerMode`
+  pause on their own. `MapController.isRenderingPaused` and
+  `MapEventRenderingChanged` report the state.
+- `UserLocationLayer` shows a stream of `UserLocation`s on every platform
+  and can track them; the new `maplibre_geolocator` package adapts
+  `geolocator` positions.
+- Gestures are the same on every platform: drag, pinch and twist, scroll
+  wheel, double tap, double tap and drag, two-finger tilt, and right-button or
+  Ctrl + left-button rotate and tilt.
+- `OfflineGeometryRegionDefinition` downloads only the tiles that a geometry
+  such as a route touches. New `OfflineManager.getRegionStatus`,
+  `updateRegionMetadata`, `invalidateRegion` and `resumeDownload`.
+- Maps cache resources in `maplibre_native.db` in the app support directory,
+  which also holds the offline regions.
+- `StyleController.getLineLayer` returns a `LineStyleLayerController`, whose
+  getters and setters read and update the layer's paint, starting with
+  `lineGradient`. Setters don't wait for the map, so they can animate a
+  layer every frame. `GeoJsonSource.lineMetrics` enables `line-progress`.
+- `StyleController.addImageFromUiImage` adds a `dart:ui` `Image` to the
+  map from its pixels, without encoding it.
+- Windows, macOS and Linux are supported out of the box, rendered by MapLibre
+  Native instead of the opt-in `maplibre_webview`.
+
+### Bug Fixes
+
+- Layers show features added to their list in place.
+- `MarkerLayer` applies `textOpacity` (it used `iconOpacity`) and
+  `iconTranslate`, and `PolylineLayer` applies `blur`.
+- Web: widgets over the map no longer let taps and drags through to the map.
+- Web: widgets over the map keep up with map gestures in wasm builds on
+  cross-origin isolated pages.
+- Web: images added with `addImage`, `addImageFromIconData` and
+  `addImageFromWidget` keep their size with the skwasm renderer (`--wasm`).
+- Web: wheel, pinch and double-tap zoom on the globe zoom toward the pointer.
+- Web: `animateCamera` no longer hangs when the animation ends at once, and
+  removing a source that does not exist is not an error.
+
+Full Changelog: [v0.3.7+1...v0.4.0](https://github.com/josxha/flutter-maplibre/compare/v0.3.7+1...v0.4.0)
+
 ## 0.3.7+1
 
 This bug fix release is the last planned release for the v0.3 series. The focus now will be on replacing the MapLibre Android and iOS SDK as well as the WebView desktop integration with [unified C bindings](https://github.com/maplibre/maplibre-native-ffi). Stay tuned!

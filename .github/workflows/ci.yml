@@ -22,7 +22,7 @@ jobs:
       - name: "Get Flutter dependencies"
         run: dart pub get
       - name: Lint analysis
-        run: dart format --set-exit-if-changed .
+        run: dart format --set-exit-if-changed $(git ls-files '*.dart')
   lints-swift:
     name: "[Swift] Check formatting"
     runs-on: macos-latest
@@ -63,7 +63,7 @@ jobs:
       fail-fast: false
       matrix:
         sdk: [ '3.47.0', '' ]
-        package: [ 'maplibre', 'maplibre_ios', 'maplibre_webview' ]
+        package: [ 'maplibre', 'maplibre_platform_interface' ]
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v7
@@ -77,9 +77,15 @@ jobs:
       - name: "Run unit tests in package"
         working-directory: packages/${{ matrix.package }}
         run: flutter test --timeout=600s --coverage
+      - name: "Make the coverage paths relative to the repository"
+        if: ${{ matrix.sdk == '' }}
+        run: sed -i 's#^SF:#SF:packages/${{ matrix.package }}/#' packages/${{ matrix.package }}/coverage/lcov.info
       - name: "Run Codecov"
         uses: codecov/codecov-action@v7
         if: ${{ matrix.sdk == '' }}
+        with:
+          files: packages/${{ matrix.package }}/coverage/lcov.info
+          flags: unit
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
   unit-test-web:
@@ -102,50 +108,101 @@ jobs:
       - name: "Run web implementation tests"
         working-directory: packages/maplibre_web
         run: flutter test --platform chrome
-#  integration-test-ios:
-#    name: "[iOS] Integration tests"
-#    runs-on: macOS-latest
-#    defaults: { run: { working-directory: examples } }
-#    strategy:
-#      fail-fast: false
-#      matrix:
-#        os_version: [ '18.6', '26.2' ]
-#    timeout-minutes: 30
-#    steps:
-#      - uses: actions/checkout@v7
-#      - uses: subosito/flutter-action@v2
-#        with: { cache: true }
-#      - name: Install dependencies
-#        run: flutter pub get
-#      - name: Enable Swift Package Manager
-#        run: flutter config --enable-swift-package-manager
-#      - name: Start iOS simulator
-#        uses: futureware-tech/simulator-action@v3
-#        with:
-#          model: 'iPhone 16 Pro'
-#          os_version: ${{ matrix.os_version }}
-#      - name: Wait for simulator
-#        run: xcrun simctl bootstatus booted -b
-#      - name: Run integration tests
-#        run: flutter test integration_test/main.dart --timeout=1800s -r expanded --coverage --coverage-package maplibre.*
-#      - name: "Run Codecov"
-#        uses: codecov/codecov-action@v7
-#        if: ${{ matrix.os_version == '26.2' }}
-#        env:
-#          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+  # The integration tests in examples/integration_test run on every platform. Runners
+  # have no GPU, so maps render in software: SwiftShader on the Android
+  # emulator, Mesa's lavapipe on Linux and Windows, and the paravirtualized
+  # Metal device of the macOS VMs.
+  integration-test-web:
+    name: "[Web] Integration tests"
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults: { run: { working-directory: examples } }
+    steps:
+      - uses: actions/checkout@v7
+      - uses: subosito/flutter-action@v2
+        with: { cache: true }
+      - uses: browser-actions/setup-chrome@v2
+        id: chrome
+        with: { install-chromedriver: true }
+      - name: "Get Flutter dependencies"
+        run: flutter pub get
+      - name: "Run integration tests"
+        run: |
+          chromedriver --port=4444 &
+          flutter drive --driver test_driver/integration_test.dart \
+            --target integration_test/all_test.dart \
+            -d web-server --browser-name chrome --headless \
+            --chrome-binary "${{ steps.chrome.outputs.chrome-path }}"
+  integration-test-linux:
+    name: "[Linux] Integration tests"
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    defaults: { run: { working-directory: examples } }
+    steps:
+      - uses: actions/checkout@v7
+      - uses: subosito/flutter-action@v2
+        with: { cache: true }
+      - name: "Install GTK, Vulkan (lavapipe) and a virtual display"
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build libgtk-3-dev libepoxy-dev \
+            libvulkan1 libvulkan-dev mesa-vulkan-drivers xvfb
+      - name: "Check the zero-copy texture path without Flutter"
+        working-directory: .
+        run: xvfb-run -a packages/maplibre_native/linux/test/run_gl_texture_test.sh
+      - name: "Get Flutter dependencies"
+        run: flutter pub get
+      # Loads the C library and opens a runtime and a map.
+      - name: "Run maplibre_native unit tests"
+        working-directory: packages/maplibre_native
+        run: |
+          flutter test --coverage
+          sed -i 's#^SF:#SF:packages/maplibre_native/#' coverage/lcov.info
+      - uses: codecov/codecov-action@v7
+        with:
+          files: packages/maplibre_native/coverage/lcov.info
+          flags: unit
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      # After all tests pass on Linux, flutter_tools deletes its test listener
+      # directory a second time and exits with a PathNotFoundException, before
+      # it writes the coverage. That one error passes; any failed test or other
+      # error still fails the step.
+      - name: "Run integration tests"
+        shell: bash
+        run: |
+          set +e
+          coverage=(--coverage --coverage-package '^maplibre(_native|_platform_interface|_web)?$')
+          xvfb-run -a flutter test integration_test/all_test.dart -d linux "${coverage[@]}" 2>&1 | tee test.log
+          status=${PIPESTATUS[0]}
+          set -e
+          if [ "$status" -ne 0 ]; then
+            grep -q 'Deletion failed, path = .*flutter_test_listener' test.log || exit "$status"
+            ! grep -q '(failed)' test.log || exit "$status"
+            grep -q 'Passing tests' test.log || exit "$status"
+            echo "::warning::flutter_tools failed to clean up after the passing tests."
+          fi
+      # lcov names the packages relative to examples; Codecov needs them
+      # relative to the repository.
+      - name: "Make the coverage paths relative to the repository"
+        if: hashFiles('examples/coverage/lcov.info') != ''
+        shell: bash
+        working-directory: .
+        run: sed -i -E 's#^SF:(\.\./)+#SF:#' examples/coverage/lcov.info
+      - uses: codecov/codecov-action@v7
+        if: hashFiles('examples/coverage/lcov.info') != ''
+        with:
+          files: examples/coverage/lcov.info
+          flags: integration-linux
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
   integration-test-android:
     name: "[Android] Integration tests"
     runs-on: ubuntu-latest
-    defaults: { run: { working-directory: examples } }
-    strategy:
-      fail-fast: false
-      matrix:
-        api-level: [ 24, 35 ]
-    timeout-minutes: 30
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v7
-      - name: "Setup Flutter SDK"
-        uses: subosito/flutter-action@v2
+      - uses: subosito/flutter-action@v2
         with: { cache: true }
       - uses: actions/setup-java@v6
         with:
@@ -163,170 +220,168 @@ jobs:
       - name: "Run integration tests"
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: ${{ matrix.api-level }}
+          api-level: 34
+          target: google_apis
           arch: x86_64
-          emulator-boot-timeout: 1800 # 30 minutes
-          script: cd examples && flutter test integration_test/main.dart --timeout=1800s -r expanded --coverage --coverage-package maplibre.*
-      - name: "Run Codecov"
-        uses: codecov/codecov-action@v7
-        if: ${{ matrix.api-level == '35' }}
+          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
+          emulator-boot-timeout: 1800
+          working-directory: examples
+          script: flutter test integration_test/all_test.dart -d emulator-5554 --coverage --coverage-package '^maplibre(_native|_platform_interface|_web)?$'
+      # lcov names the packages relative to examples; Codecov needs them
+      # relative to the repository.
+      - name: "Make the coverage paths relative to the repository"
+        shell: bash
+        working-directory: .
+        run: sed -i -E 's#^SF:(\.\./)+#SF:#' examples/coverage/lcov.info
+      - uses: codecov/codecov-action@v7
+        with:
+          files: examples/coverage/lcov.info
+          flags: integration-android
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-#  integration-test-web:
-#    name: "[Web] Integration tests"
-#    runs-on: ubuntu-latest
-#    timeout-minutes: 30
-#    defaults:
-#      run:
-#        working-directory: examples
-#    strategy:
-#      fail-fast: false
-#      matrix:
-#        sdk: ['3.38.10', '']
-#    env:
-#      CI: true
-#    steps:
-#      - name: "Checkout repository"
-#        uses: actions/checkout@v4
-#      - name: "Setup Flutter SDK"
-#        uses: subosito/flutter-action@v2
-#        with:
-#          flutter-version: ${{ matrix.sdk }}
-#          cache: true
-#      - name: "Enable Flutter web support"
-#        run: flutter config --enable-web
-#      - name: "Install dependencies"
-#        run: flutter pub get
-#      - name: "Run web integration tests"
-#        run: xvfb-run -a flutter drive --driver=test_driver/integration_test.dart --target=integration_test/main.dart -d chrome --timeout 120 --dart-define=FLUTTER_WEB_USE_SKIA=true
-#  score:
-#    name: "Package score"
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout project
-#        uses: actions/checkout@v7
-#      - name: Setup Flutter
-#        uses: subosito/flutter-action@v2
-#        with: { cache: true }
-#      - name: Install pana
-#        run: |
-#          sudo apt-get install webp && \
-#          dart pub global activate pana
-#      - name: Get dependencies
-#        run: flutter pub get
-#      - name: Check package score
-#        working-directory: packages/maplibre
-#        run: pana --exit-code-threshold 70 --no-dartdoc .
-  build-android:
-    name: "[Android] Build APK"
-    runs-on: ubuntu-latest
-    defaults: { run: { working-directory: examples } }
-    strategy:
-      fail-fast: false
-      matrix:
-        sdk: [ '3.47.0', '' ]
-    steps:
-      - uses: actions/checkout@v7
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: ${{ matrix.sdk }}
-          cache: true
-      - uses: actions/setup-java@v6
-        with:
-          java-version: '21'
-          distribution: 'temurin'
-          cache: 'gradle'
-      - name: "Get Flutter dependencies"
-        run: dart pub get
-      - name: Build example APK
-        run: flutter build apk
-      - name: Upload apk as artifact
-        uses: actions/upload-artifact@v7
-        if: ${{ matrix.sdk == '' }}
-        with:
-          name: maplibre-flutter-demo.apk
-          path: examples/build/app/outputs/flutter-apk/app-release.apk
-  build-ios:
-    name: "[iOS] Build package"
+  integration-test-ios:
+    name: "[iOS] Integration tests"
     runs-on: macos-latest
-    timeout-minutes: 30
+    timeout-minutes: 60
     defaults: { run: { working-directory: examples } }
-    strategy:
-      fail-fast: false
-      matrix:
-        sdk: [ '3.47.0', '' ]
     steps:
       - uses: actions/checkout@v7
       - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: ${{ matrix.sdk }}
-          cache: true
-      - name: "Enable Swift Package Manager" # SPM requires config flag
-        run: flutter config --enable-swift-package-manager
+        with: { cache: true }
       - name: "Get Flutter dependencies"
-        run: dart pub get
-      - name: "Build iOS package"
-        run: flutter build ios --simulator --no-codesign
-      - name: Upload Runner.app as artifact
-        if: ${{ matrix.sdk == '' }}
-        uses: actions/upload-artifact@v7
+        run: flutter pub get
+      - name: "Start an iOS simulator"
+        id: simulator
+        run: |
+          udid=$(xcrun simctl list devices available -j \
+            | jq -r '[.devices | to_entries[] | select(.key | contains("iOS")) | .value[] | select(.name | startswith("iPhone"))][0].udid')
+          xcrun simctl boot "$udid"
+          xcrun simctl bootstatus "$udid" -b
+          echo "udid=$udid" >> "$GITHUB_OUTPUT"
+      # The expanded reporter prints each test as it starts, so a stalled
+      # test shows by name; the app's own log goes to a file for the summary.
+      # After 10 minutes without output (the Xcode build is the longest
+      # silence), the watchdog annotates the stalled test, the app's stacks
+      # and its log, and stops the run. When flutter test never attaches to
+      # the app (exit 75), the run starts again, up to three times.
+      - name: "Run integration tests"
+        timeout-minutes: 35
+        run: |
+          for attempt in 1 2 3; do
+            : > "$RUNNER_TEMP/app.log"
+            xcrun simctl spawn ${{ steps.simulator.outputs.udid }} log stream \
+              --style compact --predicate 'process == "Runner"' > "$RUNNER_TEMP/app.log" 2>&1 &
+            log_pid=$!
+            status=0
+            ../.github/scripts/watchdog.sh 600 Runner "$RUNNER_TEMP/app.log" -- \
+              flutter test integration_test/all_test.dart -r expanded \
+              -d ${{ steps.simulator.outputs.udid }} \
+              --coverage --coverage-package '^maplibre(_native|_platform_interface|_web)?$' \
+              || status=$?
+            kill "$log_pid" 2>/dev/null
+            [[ $status -ne 75 ]] && exit "$status"
+            xcrun simctl terminate ${{ steps.simulator.outputs.udid }} com.github.josxha.maplibre-example || true
+            echo "flutter test did not attach to the app, attempt $attempt"
+          done
+          exit 1
+      - name: "Show the app log"
+        if: ${{ !cancelled() && failure() }}
+        run: tail -n 400 "$RUNNER_TEMP/app.log"
+      # lcov names the packages relative to examples; Codecov needs them
+      # relative to the repository.
+      - name: "Make the coverage paths relative to the repository"
+        shell: bash
+        working-directory: .
+        run: sed -i -E 's#^SF:(\.\./)+#SF:#' examples/coverage/lcov.info
+      - uses: codecov/codecov-action@v7
         with:
-          name: maplibre-flutter-demo.app
-          path: examples/build/ios/iphonesimulator/Runner.app
-  build-web:
-    name: "[Web] Build"
-    runs-on: ubuntu-latest
+          files: examples/coverage/lcov.info
+          flags: integration-ios
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+  integration-test-macos:
+    name: "[macOS] Integration tests"
+    runs-on: macos-latest
+    timeout-minutes: 45
     defaults: { run: { working-directory: examples } }
-    strategy:
-      fail-fast: false
-      matrix:
-        sdk: [ '3.47.0', '' ]
     steps:
       - uses: actions/checkout@v7
       - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: ${{ matrix.sdk }}
-          cache: true
+        with: { cache: true }
       - name: "Get Flutter dependencies"
-        run: dart pub get
-      - name: Build web
-        run: flutter build web
-  build-windows:
-    name: "[Windows] Build"
+        run: flutter pub get
+      - name: "Run integration tests"
+        run: >
+          flutter test integration_test/all_test.dart -d macos
+          --coverage --coverage-package '^maplibre(_native|_platform_interface|_web)?$'
+      # lcov names the packages relative to examples; Codecov needs them
+      # relative to the repository.
+      - name: "Make the coverage paths relative to the repository"
+        shell: bash
+        working-directory: .
+        run: sed -i -E 's#^SF:(\.\./)+#SF:#' examples/coverage/lcov.info
+      - uses: codecov/codecov-action@v7
+        with:
+          files: examples/coverage/lcov.info
+          flags: integration-macos
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+  integration-test-windows:
+    name: "[Windows] Integration tests"
     runs-on: windows-2022
+    timeout-minutes: 45
     defaults: { run: { working-directory: examples } }
-    strategy:
-      fail-fast: false
-      matrix:
-        sdk: [ '3.47.0', '' ]
     steps:
       - uses: actions/checkout@v7
       - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: ${{ matrix.sdk }}
-          cache: true
+        with: { cache: true }
+      # The runner has no GPU and no Vulkan loader. The Vulkan runtime
+      # components bring the loader and Mesa's lavapipe a software driver;
+      # the map then reads its frames back to the CPU. Steps run elevated,
+      # and an elevated loader ignores VK_DRIVER_FILES, so lavapipe is
+      # registered in the registry as well.
+      - name: "Install Vulkan (lavapipe)"
+        shell: pwsh
+        run: |
+          $dir = "$env:RUNNER_TEMP\vulkan"
+          New-Item -ItemType Directory -Force $dir | Out-Null
+          Invoke-WebRequest https://sdk.lunarg.com/sdk/download/latest/windows/vulkan-runtime-components.zip -OutFile "$dir\runtime.zip"
+          Expand-Archive "$dir\runtime.zip" "$dir\runtime"
+          $loader = Get-ChildItem "$dir\runtime" -Recurse -Filter vulkan-1.dll | Where-Object { $_.DirectoryName -match 'x64' } | Select-Object -First 1
+          $release = Invoke-RestMethod https://api.github.com/repos/pal1000/mesa-dist-win/releases/latest -Headers @{ Authorization = "Bearer ${{ github.token }}" }
+          $asset = $release.assets | Where-Object { $_.name -match '^mesa3d-.*-release-msvc\.7z$' } | Select-Object -First 1
+          Invoke-WebRequest $asset.browser_download_url -OutFile "$dir\mesa.7z"
+          7z x "$dir\mesa.7z" "-o$dir\mesa" | Out-Null
+          $icd = Get-ChildItem "$dir\mesa\x64" -Filter lvp_icd.x86_64.json | Select-Object -First 1
+          Add-Content $env:GITHUB_PATH $loader.DirectoryName
+          Add-Content $env:GITHUB_ENV "VK_DRIVER_FILES=$($icd.FullName)"
+          $drivers = 'HKLM:\SOFTWARE\Khronos\Vulkan\Drivers'
+          New-Item -Force $drivers | Out-Null
+          New-ItemProperty -Force -Path $drivers -Name $icd.FullName -PropertyType DWord -Value 0 | Out-Null
       - name: "Get Flutter dependencies"
-        run: dart pub get
-      - name: Build windows
-        run: flutter build windows --debug
-  #build-macos:
-  #  name: "[macOS] Build"
-  #  runs-on: macos-latest
-  #  defaults: { run: { working-directory: examples } }
-  #  strategy:
-  #    fail-fast: false
-  #    matrix:
-  #      sdk: [ '3.47.0', '' ]
-  #  steps:
-  #    - uses: actions/checkout@v7
-  #    - uses: subosito/flutter-action@v2
-  #      with:
-  #        flutter-version: ${{ matrix.sdk }}
-  #        cache: true
-  #    - name: "Get Flutter dependencies"
-  #      run: dart pub get
-  #    - name: Build macOS
-  #      run: flutter build macos --debug
+        run: flutter pub get
+      - name: "Run integration tests"
+        # flutter.bat hands the arguments to cmd, which would split the
+        # package regex at a |, so this one matches the same packages without.
+        timeout-minutes: 25
+        run: >
+          flutter test integration_test/all_test.dart -d windows -r expanded
+          --coverage --coverage-package '^maplibre(_native)?(_platform_interface)?(_web)?$'
+      # lcov names the packages relative to examples; Codecov needs them
+      # relative to the repository.
+      - name: "Make the coverage paths relative to the repository"
+        shell: pwsh
+        run: |
+          (Get-Content coverage/lcov.info) -replace '\\', '/' -replace '^SF:(\.\./)+', 'SF:' |
+            Set-Content coverage/lcov.info
+      - uses: codecov/codecov-action@v7
+        with:
+          files: examples/coverage/lcov.info
+          flags: integration-windows
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+  # The integration tests build the app on every platform; only the wasm
+  # build, which they don't cover, has a job of its own.
   build-web-wasm:
     name: "[Web] Build WASM"
     runs-on: ubuntu-latest
@@ -345,74 +400,3 @@ jobs:
         run: dart pub get
       - name: Build web
         run: flutter build web --wasm
-#  codegen-android:
-#    name: "[Android] Check codegen"
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v7
-#      - uses: subosito/flutter-action@v2
-#        with: { cache: true }
-#      - uses: actions/setup-java@v6
-#        with:
-#          java-version: '21'
-#          distribution: 'temurin'
-#          cache: 'gradle'
-#      - name: "Get Flutter dependencies"
-#        run: dart pub get
-#      - name: Build example APK
-#        working-directory: examples
-#        run: flutter build apk
-#      - name: Run jnigen
-#        working-directory: packages/maplibre_android
-#        run: dart tool/jnigen.dart
-#      - name: Format code
-#        run: dart format packages/maplibre_android/lib/src/jni.g.dart
-#      - name: Check changes
-#        run: |
-#          if [[ -n "$(git status --porcelain)" ]]; then
-#            echo "❌ Uncommitted changes detected in files:"
-#            git diff
-#            exit 1
-#          else
-#            echo "✅ No uncommitted changes"
-#          fi
-#  codegen-ios:
-#    name: "[iOS] Check codegen"
-#    runs-on: macos-latest
-#    timeout-minutes: 30
-#    steps:
-#      - uses: actions/checkout@v7
-#      - name: Clone maplibre-native with shallow submodules
-#        run: |
-#          git clone \
-#            --depth 1 \
-#            --filter=blob:none \
-#            --recurse-submodules \
-#            --shallow-submodules \
-#            --jobs 8 \
-#            https://github.com/maplibre/maplibre-native ../maplibre-native
-#      - uses: subosito/flutter-action@v2
-#        with:
-#          cache: true
-#      - run: flutter config --enable-swift-package-manager
-#      - name: "Get Flutter dependencies"
-#        working-directory: packages/maplibre_ios
-#        run: dart pub get
-#      - name: Build MapLibre Native
-#        working-directory: packages/maplibre_ios/ios
-#        run: ./build_maplibre.sh
-#      - name: Generate headers for Swift code
-#        working-directory: packages/maplibre_ios/ios/maplibre_ios/Sources/maplibre_ios
-#        run: ./gen_swift_headers.sh
-#      - name: Run ffigen
-#        working-directory: packages/maplibre_ios
-#        run: dart tool/ffigen.dart
-#      - name: Check changes
-#        run: |
-#          if [[ -n "$(git status --porcelain)" ]]; then
-#            echo "❌ Uncommitted changes detected in files:"
-#            git diff --name-only
-#            exit 1
-#          else
-#            echo "✅ No uncommitted changes"
-#          fi

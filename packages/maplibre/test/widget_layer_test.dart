@@ -3,8 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:mocktail/mocktail.dart';
 
-import 'shared/annotation_app.dart';
 import 'shared/mocks.dart';
+import 'shared/ui_app.dart';
 
 void main() {
   group('WidgetLayer', () {

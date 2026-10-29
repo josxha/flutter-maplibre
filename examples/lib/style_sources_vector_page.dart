@@ -79,7 +79,7 @@ class _StyleSourcesVectorPageState extends State<StyleSourcesVectorPage> {
               sourceLayerId: 'centroids',
               layout: {
                 'icon-image': 'marker',
-                'icon-size': 0.18,
+                'icon-size': 0.08,
                 'icon-allow-overlap': true,
                 'icon-anchor': 'bottom',
               },

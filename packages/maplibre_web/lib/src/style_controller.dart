@@ -8,16 +8,42 @@ class StyleControllerWeb extends StyleController {
   final interop.JsMap _map;
 
   @override
-  Future<void> addImage(String id, Uint8List bytes) async {
-    final image = await decodeImageFromList(bytes);
-    final byteData = await image.toByteData();
-    final pixelRatio = PlatformDispatcher.instance.views.first.devicePixelRatio;
+  Future<void> addImage(
+    String id,
+    Uint8List bytes, {
+    double pixelRatio = 1,
+  }) async {
+    // The browser decodes the image: Flutter's skwasm renderer gives decoded
+    // images the size of the view.
+    final blob = Blob([bytes.toJS].toJS);
+    final bitmap = await window.createImageBitmap(blob).toDart;
+    _map.addImage(
+      id,
+      bitmap,
+      interop.StyleImageMetadata(pixelRatio: pixelRatio),
+    );
+  }
+
+  @override
+  Future<void> addImageFromUiImage({
+    required String id,
+    required ui.Image image,
+    double pixelRatio = 1,
+  }) async {
+    // Raw pixels, as Flutter's skwasm renderer encodes some images to PNG at
+    // the size of the view.
+    final data = await image.toByteData(
+      format: ImageByteFormat.rawStraightRgba,
+    );
+    if (data == null) {
+      throw StateError('Failed to read the pixels of the image "$id".');
+    }
     _map.addImage(
       id,
       interop.ImageSpecification(
         width: image.width,
         height: image.height,
-        data: byteData!.buffer.asUint8List().toJS,
+        data: data.buffer.asUint8List().toJS,
       ),
       interop.StyleImageMetadata(pixelRatio: pixelRatio),
     );
@@ -30,7 +56,26 @@ class StyleControllerWeb extends StyleController {
   Future<void> removeLayer(String id) async => _map.removeLayer(id);
 
   @override
-  Future<void> removeSource(String id) async => _map.removeSource(id);
+  Future<void> removeSource(String id) async {
+    // Removing a source the style lacks is not an error on other platforms.
+    if (_map.getSource(id) != null) _map.removeSource(id);
+  }
+
+  @override
+  Future<LineStyleLayerController?> getLineLayer(String id) async {
+    final layer = _map.getLayer(id);
+    if (layer == null) return null;
+    if ((layer['type'] as JSString?)?.toDart != 'line') return null;
+    return LineStyleLayerController(
+      id: id,
+      paint: {
+        for (final name in LineStyleLayerController.paintProperties)
+          name: _map.getPaintProperty(id, name).dartify(),
+      },
+      setPaintProperty: (name, value) =>
+          _map.setPaintProperty(id, name, value.jsify()),
+    );
+  }
 
   @override
   Future<void> updateGeoJsonSource({
@@ -209,38 +254,56 @@ class StyleControllerWeb extends StyleController {
         }
         _map.addSource(
           source.id,
-          interop.SourceSpecification.geoJson(
-            type: 'geojson',
-            data: data,
-            tolerance: source.tolerance,
-          ),
+          _sourceSpecification({
+            'type': 'geojson',
+            'maxzoom': source.maxZoom,
+            'tolerance': source.tolerance,
+            'lineMetrics': source.lineMetrics,
+            'attribution': source.attribution,
+          }, data: data),
         );
       case RasterDemSource():
         _map.addSource(
           source.id,
-          interop.SourceSpecification.rasterDem(
-            type: 'raster-dem',
-            tileSize: source.tileSize,
-            attribution: source.attribution,
-            url: source.url,
-            tiles: source.tiles.jsify(),
-          ),
+          _sourceSpecification({
+            'type': 'raster-dem',
+            'url': source.url,
+            'tiles': source.tiles,
+            'bounds': source.bounds,
+            'minzoom': source.minZoom,
+            'maxzoom': source.maxZoom,
+            'tileSize': source.tileSize,
+            'attribution': source.attribution,
+          }),
         );
       case RasterSource():
         _map.addSource(
           source.id,
-          interop.SourceSpecification.raster(
-            type: 'raster',
-            attribution: source.attribution,
-            tileSize: source.tileSize,
-            tiles: source.tiles.jsify(),
-            url: source.url,
-          ),
+          _sourceSpecification({
+            'type': 'raster',
+            'url': source.url,
+            'tiles': source.tiles,
+            'bounds': source.bounds,
+            'minzoom': source.minZoom,
+            'maxzoom': source.maxZoom,
+            'tileSize': source.tileSize,
+            'scheme': source.scheme.name,
+            'attribution': source.attribution,
+          }),
         );
       case VectorSource():
         _map.addSource(
           source.id,
-          interop.SourceSpecification.vector(type: 'vector', url: source.url),
+          _sourceSpecification({
+            'type': 'vector',
+            'url': source.url,
+            'tiles': source.tiles,
+            'bounds': source.bounds,
+            'minzoom': source.minZoom,
+            'maxzoom': source.maxZoom,
+            'scheme': source.scheme.name,
+            'attribution': source.attribution,
+          }),
         );
       case ImageSource():
         _map.addSource(
@@ -290,4 +353,17 @@ class StyleControllerWeb extends StyleController {
   void setProjection(MapProjection projection) => _map.setProjection(
     interop.ProjectionSpecification(type: projection.name),
   );
+}
+
+/// A source specification of the [properties] that are set. MapLibre GL JS
+/// rejects a property that is present but null.
+interop.SourceSpecification _sourceSpecification(
+  Map<String, Object?> properties, {
+  JSAny? data,
+}) {
+  final spec =
+      ({...properties}..removeWhere((key, value) => value == null)).jsify()!
+          as JSObject;
+  if (data != null) spec.setProperty('data'.toJS, data);
+  return spec as interop.SourceSpecification;
 }

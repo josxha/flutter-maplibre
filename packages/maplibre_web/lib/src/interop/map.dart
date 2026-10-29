@@ -84,7 +84,7 @@ extension type JsMap._(Camera _) implements Camera {
   /// https://github.com/maplibre/maplibre-gl-js/blob/42ecfef53c25150227256bb0b5daa29af6efd9e7/src/ui/map.ts#L2530-L2531
   external void addImage(
     String id,
-    ImageSpecification image, [
+    JSObject image, [
     StyleImageMetadata? options,
   ]);
 
@@ -114,22 +114,18 @@ extension type JsMap._(Camera _) implements Camera {
   /// Get a Source by its id.
   external SourceSpecification? getSource(String id);
 
+  /// Sets the value of a paint property of the layer [layerId].
+  ///
+  /// https://maplibre.org/maplibre-gl-js/docs/API/classes/Map/#setpaintproperty
+  external void setPaintProperty(String layerId, String name, JSAny? value);
+
+  /// Returns the value of a paint property of the layer [layerId].
+  ///
+  /// https://maplibre.org/maplibre-gl-js/docs/API/classes/Map/#getpaintproperty
+  external JSAny? getPaintProperty(String layerId, String name);
+
   /// Get the loaded style.
   external StyleSpecification? getStyle();
-
-  external DoubleClickZoomHandler doubleClickZoom;
-  external DragPanHandler dragPan;
-  external DragRotateHandler dragRotate;
-  external KeyboardHandler keyboard;
-  external ScrollZoomHandler scrollZoom;
-
-  /// Shift and drag to draw a box to zoom in
-  external BoxZoomHandler boxZoom;
-
-  /// Pitch with rotate
-  external bool pitchWithRotate;
-  external TwoFingersTouchPitchHandler touchPitch;
-  external TwoFingersTouchZoomRotateHandler touchZoomRotate;
 
   /// Returns an array of MapGeoJSONFeature objects representing visible
   /// features that satisfy the query parameters.
@@ -160,6 +156,7 @@ extension type MapOptions._(JSObject _) implements JSObject {
     required double bearing,
     required double pitch,
     required bool attributionControl,
+    bool? interactive,
   });
 }
 
@@ -169,92 +166,6 @@ extension type MapOptions._(JSObject _) implements JSObject {
 extension type SourceSpecification._(JSObject _) implements JSObject {
   /// The default constructor for a [SourceSpecification].
   external SourceSpecification({required String type});
-
-  /// Create a new GeoJSON source.
-  external factory SourceSpecification.geoJson({
-    required String type,
-    required JSAny data,
-    num? maxzoom,
-    String? attribution,
-    num? buffer,
-    num? tolerance,
-  });
-
-  /// Create a new raster DEM source.
-  factory SourceSpecification.rasterDem({
-    required String type,
-    required int tileSize,
-    required String? attribution,
-    String? url,
-    JSAny? tiles,
-  }) => url != null
-      ? SourceSpecification._rasterDemUrl(
-          type: type,
-          tileSize: tileSize,
-          attribution: attribution,
-          url: url,
-        )
-      : SourceSpecification._rasterDemTiles(
-          type: type,
-          tileSize: tileSize,
-          attribution: attribution,
-          tiles: tiles!,
-        );
-
-  external factory SourceSpecification._rasterDemUrl({
-    required String type,
-    required int tileSize,
-    required String? attribution,
-    required String url,
-  });
-
-  external factory SourceSpecification._rasterDemTiles({
-    required String type,
-    required int tileSize,
-    required String? attribution,
-    required JSAny tiles,
-  });
-
-  /// Create a new raster source.
-  factory SourceSpecification.raster({
-    required String type,
-    required int tileSize,
-    required String? attribution,
-    JSAny? tiles,
-    String? url,
-  }) => url != null
-      ? SourceSpecification._rasterUrl(
-          type: type,
-          tileSize: tileSize,
-          attribution: attribution,
-          url: url,
-        )
-      : SourceSpecification._rasterTiles(
-          type: type,
-          tileSize: tileSize,
-          attribution: attribution,
-          tiles: tiles!,
-        );
-
-  external factory SourceSpecification._rasterUrl({
-    required String type,
-    required int tileSize,
-    required String? attribution,
-    required String url,
-  });
-
-  external factory SourceSpecification._rasterTiles({
-    required String type,
-    required int tileSize,
-    required String? attribution,
-    required JSAny tiles,
-  });
-
-  /// Create a new vector source.
-  external factory SourceSpecification.vector({
-    required String type,
-    required String? url,
-  });
 
   /// Create a new image source.
   external factory SourceSpecification.image({
@@ -297,7 +208,8 @@ extension type LayerSpecification._(JSObject _) implements JSObject {
   external String? sourceLayer;
 }
 
-/// Image data used by [JsMap.addImage].
+/// Raw image data used by [JsMap.addImage], RGBA8 without premultiplied
+/// alpha.
 ///
 /// https://github.com/maplibre/maplibre-gl-js/blob/42ecfef53c25150227256bb0b5daa29af6efd9e7/src/style/style_image.ts#L92-L93
 @anonymous

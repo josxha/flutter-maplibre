@@ -13,6 +13,8 @@ class StyleLayersFillPage extends StatefulWidget {
 }
 
 class _StyleLayersFillPageState extends State<StyleLayersFillPage> {
+  static const _layerId = 'LakeConstance-Layer';
+
   late final MapController _controller;
 
   @override
@@ -29,10 +31,9 @@ class _StyleLayersFillPageState extends State<StyleLayersFillPage> {
         onEvent: (event) async {
           if (event case MapEventClick()) {
             final screenPoint = _controller.toScreenLocation(event.point);
-            final features = _controller.queryLayers(screenPoint);
-            debugPrint(
-              '${features.length} layers clicked\n'
-              '${features.join('\n')}',
+            final features = await _controller.featuresAtPoint(
+              screenPoint,
+              layerIds: [_layerId],
             );
             if (context.mounted) {
               ScaffoldMessenger.of(context)
@@ -40,8 +41,9 @@ class _StyleLayersFillPageState extends State<StyleLayersFillPage> {
                 ..showSnackBar(
                   SnackBar(
                     content: Text(
-                      '${features.length} layers clicked: '
-                      '${features.map((e) => e.layerId).join(', ')}',
+                      features.isEmpty
+                          ? 'Clicked outside of Lake Constance'
+                          : 'Clicked on Lake Constance',
                     ),
                   ),
                 );
@@ -61,7 +63,7 @@ class _StyleLayersFillPageState extends State<StyleLayersFillPage> {
     );
     await style.addLayer(
       const FillStyleLayer(
-        id: 'LakeConstance-Layer',
+        id: _layerId,
         sourceId: 'LakeConstance-Source',
         paint: {'fill-color': '#429ef5'},
       ),

@@ -43,12 +43,7 @@ class _PmTilesPageState extends State<PmTilesPage> {
               initZoom: 10,
               initStyle: MapStyles.protomapsLightPmTiles.uri,
             ),
-            children: const [
-              MapScalebar(),
-              SourceAttribution(),
-              MapControlButtons(showTrackLocation: true),
-              MapCompass(),
-            ],
+            children: const [MapScalebar(), SourceAttribution(), MapCompass()],
             onStyleLoaded: (style) {
               style.setProjection(MapProjection.globe);
             },

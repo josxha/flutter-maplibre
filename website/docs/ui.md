@@ -66,7 +66,7 @@ the default zoom buttons on the map.
 
 You are able to toggle an optional `showTrackLocation` flag to display an
 additional button to let the user display and track its own position.
-The `showTrackLocation` flag will be ignored on web as web has currently not the
-same location functionality as other platforms provide.
+The `showTrackLocation` flag is ignored for now, because neither web nor
+`maplibre_native` provides the user location yet.
 
 ![Zoom Control Buttons](../assets/images/ui/zoom-buttons.jpg)

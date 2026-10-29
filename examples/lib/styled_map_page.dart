@@ -40,12 +40,7 @@ class _StyledMapPageState extends State<StyledMapPage> {
           initZoom: 2,
           initStyle: _style.uri,
         ),
-        children: const [
-          MapScalebar(),
-          SourceAttribution(),
-          MapControlButtons(showTrackLocation: true),
-          MapCompass(),
-        ],
+        children: const [MapScalebar(), SourceAttribution(), MapCompass()],
         onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: (style) {
           style.setProjection(MapProjection.globe);

@@ -2,83 +2,157 @@ import 'package:flutter/widgets.dart';
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 
 /// This model class is used to stream the download progress in
-/// [OfflineManager.downloadRegion].
+/// [OfflineManager.downloadRegion] and [OfflineManager.resumeDownload].
 ///
 /// {@category Offline}
 @immutable
 class DownloadProgress {
   /// Create a new [DownloadProgress] instance.
-  const DownloadProgress({
-    required this.loadedBytes,
-    required this.loadedTiles,
-    required this.totalTilesEstimated,
-    required this.totalTiles,
-    required this.region,
-    required this.downloadCompleted,
-  });
-
-  /// The amount of bytes that are already downloaded.
-  final int loadedBytes;
-
-  /// The amount of tiles that are already downloaded.
-  final int loadedTiles;
-
-  /// The total amount of tiles in this region.
-  ///
-  /// If the precise number of tiles is not known yet, this field gives merely
-  /// a lower bound.
-  final int totalTiles;
-
-  /// Weather the [totalTiles] value is an estimated or precise value.
-  ///
-  /// It is set to false during early phases of an offline download.
-  /// Once style and tile sources have been downloaded, it is possible to
-  /// calculate the precise number of required resources, at which point it is
-  /// set to true.
-  final bool totalTilesEstimated;
+  const DownloadProgress({required this.region, required this.status});
 
   /// The [OfflineRegion] object.
   final OfflineRegion region;
 
-  /// Set to true once the download has completed sucessfully.
-  final bool downloadCompleted;
+  /// The download status of [region].
+  final OfflineRegionStatus status;
 
-  /// The current progress, returns null if [totalTiles] is unknown.
-  double? get progress {
-    if (totalTilesEstimated) return null;
-    if (totalTiles == 0) return 1;
-    return loadedTiles / totalTiles;
-  }
+  /// Set to true once the download has completed sucessfully.
+  bool get downloadCompleted => status.complete;
+
+  /// The current progress, see [OfflineRegionStatus.progress].
+  double? get progress => status.progress;
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is DownloadProgress &&
           runtimeType == other.runtimeType &&
-          loadedBytes == other.loadedBytes &&
-          loadedTiles == other.loadedTiles &&
-          totalTiles == other.totalTiles &&
-          totalTilesEstimated == other.totalTilesEstimated &&
           region == other.region &&
-          downloadCompleted == other.downloadCompleted;
+          status == other.status;
+
+  @override
+  int get hashCode => Object.hash(region, status);
+
+  @override
+  String toString() => 'DownloadProgress(region: $region, status: $status)';
+}
+
+/// Whether an offline region downloads.
+///
+/// {@category Offline}
+enum OfflineRegionDownloadState {
+  /// The region does not download.
+  inactive,
+
+  /// The region downloads the resources it is missing.
+  active,
+}
+
+/// How far the download of an offline region got, from
+/// [OfflineManager.getRegionStatus] or [DownloadProgress.status].
+///
+/// Resources are every file a region needs: its style, sources, sprites,
+/// glyphs and tiles.
+///
+/// {@category Offline}
+@immutable
+class OfflineRegionStatus {
+  /// Create a new [OfflineRegionStatus] instance.
+  const OfflineRegionStatus({
+    required this.downloadState,
+    required this.completedResourceCount,
+    required this.completedResourceSize,
+    required this.completedTileCount,
+    required this.completedTileSize,
+    required this.requiredResourceCount,
+    required this.requiredTileCount,
+    required this.requiredResourceCountIsPrecise,
+    required this.complete,
+  });
+
+  /// Whether the region downloads.
+  final OfflineRegionDownloadState downloadState;
+
+  /// The number of resources that are already downloaded.
+  final int completedResourceCount;
+
+  /// The size of the resources that are already downloaded, in bytes.
+  final int completedResourceSize;
+
+  /// The number of tiles that are already downloaded.
+  final int completedTileCount;
+
+  /// The size of the tiles that are already downloaded, in bytes.
+  final int completedTileSize;
+
+  /// The number of resources the region needs.
+  ///
+  /// It is a lower bound until [requiredResourceCountIsPrecise] is true.
+  final int requiredResourceCount;
+
+  /// The number of tiles the region needs.
+  ///
+  /// It is a lower bound until [requiredResourceCountIsPrecise] is true.
+  final int requiredTileCount;
+
+  /// Whether [requiredResourceCount] and [requiredTileCount] are precise.
+  ///
+  /// It is false during early phases of a download. Once the style and tile
+  /// sources have been downloaded, the precise number of required resources
+  /// is known, and it becomes true.
+  final bool requiredResourceCountIsPrecise;
+
+  /// Whether every resource of the region is downloaded.
+  final bool complete;
+
+  /// The share of the required resources that are downloaded, from 0 to 1,
+  /// or null while the number of required resources is not precise.
+  double? get progress {
+    if (complete) return 1;
+    if (!requiredResourceCountIsPrecise) return null;
+    if (requiredResourceCount == 0) return 1;
+    return completedResourceCount / requiredResourceCount;
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is OfflineRegionStatus &&
+          runtimeType == other.runtimeType &&
+          downloadState == other.downloadState &&
+          completedResourceCount == other.completedResourceCount &&
+          completedResourceSize == other.completedResourceSize &&
+          completedTileCount == other.completedTileCount &&
+          completedTileSize == other.completedTileSize &&
+          requiredResourceCount == other.requiredResourceCount &&
+          requiredTileCount == other.requiredTileCount &&
+          requiredResourceCountIsPrecise ==
+              other.requiredResourceCountIsPrecise &&
+          complete == other.complete;
 
   @override
   int get hashCode => Object.hash(
-    loadedBytes,
-    loadedTiles,
-    totalTiles,
-    totalTilesEstimated,
-    region,
-    downloadCompleted,
+    downloadState,
+    completedResourceCount,
+    completedResourceSize,
+    completedTileCount,
+    completedTileSize,
+    requiredResourceCount,
+    requiredTileCount,
+    requiredResourceCountIsPrecise,
+    complete,
   );
 
   @override
   String toString() =>
-      'DownloadProgress('
-      'loadedBytes: $loadedBytes, '
-      'loadedTiles: $loadedTiles, '
-      'totalTiles: $totalTiles, '
-      'totalTilesEstimated: $totalTilesEstimated, '
-      'region: $region, '
-      'downloadCompleted: $downloadCompleted)';
+      'OfflineRegionStatus('
+      'downloadState: ${downloadState.name}, '
+      'completedResourceCount: $completedResourceCount, '
+      'completedResourceSize: $completedResourceSize, '
+      'completedTileCount: $completedTileCount, '
+      'completedTileSize: $completedTileSize, '
+      'requiredResourceCount: $requiredResourceCount, '
+      'requiredTileCount: $requiredTileCount, '
+      'requiredResourceCountIsPrecise: $requiredResourceCountIsPrecise, '
+      'complete: $complete)';
 }

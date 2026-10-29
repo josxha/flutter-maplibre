@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The integration tests serve styles and tiles over plain HTTP from the
+     test host. MapLibre Native loads them through HttpURLConnection, which
+     follows this config, so debug builds allow cleartext to the loopback
+     addresses only. -->
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="false">127.0.0.1</domain>
+        <domain includeSubdomains="false">localhost</domain>
+    </domain-config>
+</network-security-config>

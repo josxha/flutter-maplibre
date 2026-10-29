@@ -12,22 +12,20 @@ resolution: workspace
 dependencies:
   flutter: { sdk: flutter }
   flutter_web_plugins: { sdk: flutter }
+  geolocator: ^14.0.2
   go_router: ^18.0.0
   http: ^1.2.2
   maplibre: ^0.3.7+1
-  maplibre_webview: ^0.3.7+1
+  maplibre_geolocator: ^0.1.0
 
 dev_dependencies:
   flutter_launcher_icons: ^0.14.3
   flutter_test: { sdk: flutter }
   integration_test: { sdk: flutter }
-  mocktail: ^1.0.4
   very_good_analysis: ^10.0.0
 
 flutter:
   uses-material-design: true
-  config:
-    enable-swift-package-manager: true
   assets:
     - assets/images/
     - assets/styles/

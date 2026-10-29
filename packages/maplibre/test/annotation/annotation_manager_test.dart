@@ -75,5 +75,32 @@ void main() {
       verify(() => style.removeSource(any())).called(1);
       verifyNoMoreInteractions(style);
     });
+
+    testWidgets('updates a source whose list grew in place', (tester) async {
+      final points = [
+        const Feature(geometry: Point(Geographic(lon: 0, lat: 0))),
+      ];
+      final manager = LayerManager(style, [CircleLayer(points: points)]);
+      clearInteractions(style);
+
+      // The example pages add a tapped point to the same list and rebuild,
+      // so the new layer equals the old one by `Layer.==`.
+      points.add(const Feature(geometry: Point(Geographic(lon: 1, lat: 1))));
+      manager.updateLayers([CircleLayer(points: points)]);
+      final data =
+          verify(
+                () => style.updateGeoJsonSource(
+                  id: any(named: 'id'),
+                  data: captureAny(named: 'data'),
+                ),
+              ).captured.single
+              as String;
+      expect(data, contains('[1,1]'));
+      // Only the data changed, so the style layer stays.
+      verifyNoMoreInteractions(style);
+
+      manager.updateLayers([CircleLayer(points: points)]);
+      verifyNoMoreInteractions(style);
+    });
   });
 }

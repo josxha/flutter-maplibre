@@ -45,7 +45,7 @@ class _LayersMarkerPageState extends State<LayersMarkerPage> {
         onEvent: (event) async {
           switch (event) {
             case MapEventStyleLoaded():
-              // add marker image to map
+              // add a marker image of 48 logical pixels to the map
               await event.style.addImageFromIconData(
                 id: 'marker',
                 iconData: Icons.location_on,
@@ -69,8 +69,8 @@ class _LayersMarkerPageState extends State<LayersMarkerPage> {
             points: _points,
             textField: '{name}',
             textAllowOverlap: true,
+            iconAllowOverlap: true,
             iconImage: _imageLoaded ? 'marker' : null,
-            iconSize: 0.15,
             iconAnchor: IconAnchor.bottom,
             textOffset: const [0, 1],
           ),

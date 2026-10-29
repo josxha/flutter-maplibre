@@ -18,6 +18,7 @@ class MapLibreMap extends StatefulWidget {
     this.onEvent,
     this.layers = const [],
     this.children = const [],
+    this.paused = false,
     super.key,
   });
 
@@ -64,6 +65,27 @@ class MapLibreMap extends StatefulWidget {
 
   /// Declarative layers that get displayed.
   final List<Layer> layers;
+
+  /// Whether the map stops rendering while it stays mounted, for example
+  /// while it is in a tab that is not shown.
+  ///
+  /// A paused map keeps its style, camera, sources and cached tiles. Changes
+  /// made while it is paused, such as camera moves or new layers, show once
+  /// it resumes. Tiles load and camera animations advance only while the map
+  /// renders, so a camera animation that runs when the map pauses ends at
+  /// its target right away.
+  ///
+  /// The map also pauses on its own while it is hidden by an [IndexedStack]
+  /// or a [Visibility] that keeps its state, or while [TickerMode] is
+  /// disabled, as for a route that another route covers. Set [paused] for
+  /// the cases Flutter does not report, such as a kept-alive page of a
+  /// [PageView] or `TabBarView` while another page shows.
+  /// [MapController.isRenderingPaused] and [MapEventRenderingChanged] tell
+  /// whether the map renders.
+  ///
+  /// On the web the browser already skips hidden maps, and the map only
+  /// renders when it changes, so the flag has no effect there.
+  final bool paused;
 
   @override
   State<MapLibreMap> createState() =>

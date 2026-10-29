@@ -1,19 +1,24 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:js_interop';
+import 'dart:js_interop_unsafe';
 import 'dart:math';
 import 'dart:ui';
+import 'dart:ui' as ui;
 import 'dart:ui_web';
 
+import 'package:flutter/gestures.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 import 'package:maplibre_web/src/camera_padding_reset.dart';
 import 'package:maplibre_web/src/extensions.dart';
+import 'package:maplibre_web/src/frame_sync.dart';
 import 'package:maplibre_web/src/interop/interop.dart' as interop;
 import 'package:maplibre_web/src/interop/json.dart';
 import 'package:maplibre_web/src/interop/pmtiles.dart' as pmtiles;
-import 'package:web/web.dart';
+import 'package:web/web.dart' hide PointerEvent;
 
 part 'style_controller.dart';
 
@@ -25,6 +30,34 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   final _cameraPaddingReset = CameraPaddingReset();
   bool _nextGestureCausedByController = false;
   LayerManager? _layerManager;
+
+  /// A gesture or its fling moves the camera; [_gestureMoveStarted] once it
+  /// has reported the start of the move.
+  var _gestureMoving = false;
+  var _gestureMoveStarted = false;
+
+  /// The next camera move comes from a scroll wheel or double tap.
+  var _nextMoveByUser = false;
+
+  /// Camera writes that only work out a gesture's target camera, and that
+  /// the camera events don't report.
+  var _silentCamera = false;
+
+  /// A pointer that may open the browser's context menu went down on the
+  /// map, which rotates and tilts with it instead.
+  var _suppressContextMenu = false;
+  Timer? _contextMenuTimer;
+  late final JSFunction _onContextMenu = ((Event event) {
+    if (!_suppressContextMenu) return;
+    _suppressContextMenu = false;
+    event.preventDefault();
+  }).toJS;
+
+  @override
+  late final GestureCameraSink gestureCamera =
+      FrameAlignedGestureCamera.isNeeded
+      ? FrameAlignedGestureCamera(_WebGestureCamera(this))
+      : _WebGestureCamera(this);
 
   /// Get the [MapOptions] from [MapLibreMap.options].
   @override
@@ -43,7 +76,10 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         ..style.padding = '0'
         ..style.margin = '0'
         ..style.height = '100%'
-        ..style.width = '100%';
+        ..style.width = '100%'
+        // Flutter hit-tests every pointer and recognizes the gestures, so
+        // widgets over the map keep theirs.
+        ..style.pointerEvents = 'none';
 
       // add pmtiles support
       try {
@@ -62,6 +98,8 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
           bearing: options.initBearing,
           pitch: options.initPitch,
           attributionControl: false,
+          // MapGestureDetector handles the input.
+          interactive: false,
         ),
       );
 
@@ -81,46 +119,12 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       _map.setMinPitch(options.minPitch);
       _map.setMaxPitch(options.maxPitch);
       _map.setMaxBounds(options.maxBounds?.toJsLngLatBounds());
-      _updateGestures(options.gestures);
 
       // add callbacks
       _map.on(
         interop.MapEventType.load,
         (interop.MapMouseEvent event) {
           _onStyleLoaded();
-        }.toJS,
-      );
-      _map.on(
-        interop.MapEventType.click,
-        (interop.MapMouseEvent event) {
-          final point = event.lngLat.toGeographic();
-          widget.onEvent?.call(
-            MapEventClick(point: point, screenPoint: event.point.toOffset()),
-          );
-        }.toJS,
-      );
-      _map.on(
-        interop.MapEventType.dblclick,
-        (interop.MapMouseEvent event) {
-          final point = event.lngLat.toGeographic();
-          widget.onEvent?.call(
-            MapEventDoubleClick(
-              point: point,
-              screenPoint: event.point.toOffset(),
-            ),
-          );
-        }.toJS,
-      );
-      _map.on(
-        interop.MapEventType.contextmenu,
-        (interop.MapMouseEvent event) {
-          final point = event.lngLat.toGeographic();
-          widget.onEvent?.call(
-            MapEventSecondaryClick(
-              point: point,
-              screenPoint: event.point.toOffset(),
-            ),
-          );
         }.toJS,
       );
       _map.on(
@@ -133,12 +137,19 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         interop.MapEventType.moveStart,
         (interop.MapLibreEvent event) {
           if (!_cameraPaddingReset.shouldForward(event)) return;
+          if (_silentCamera) return;
+          // A gesture moves the camera in many steps but reports one move.
+          if (_gestureMoving) {
+            if (_gestureMoveStarted) return;
+            _gestureMoveStarted = true;
+          }
           final CameraChangeReason reason;
-          if (_nextGestureCausedByController) {
+          if (_gestureMoving || _nextMoveByUser) {
+            _nextMoveByUser = false;
+            reason = CameraChangeReason.apiGesture;
+          } else if (_nextGestureCausedByController) {
             _nextGestureCausedByController = false;
             reason = CameraChangeReason.developerAnimation;
-          } else if (event.originalEvent != null) {
-            reason = CameraChangeReason.apiGesture;
           } else {
             reason = CameraChangeReason.apiAnimation;
           }
@@ -149,6 +160,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         interop.MapEventType.move,
         (interop.MapLibreEvent event) {
           if (!_cameraPaddingReset.shouldForward(event)) return;
+          if (_silentCamera) return;
           final mapCamera = MapCamera(
             center: _map.getCenter().toGeographic(),
             zoom: _map.getZoom().toDouble(),
@@ -163,6 +175,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         interop.MapEventType.moveEnd,
         (interop.MapLibreEvent event) {
           if (!_cameraPaddingReset.shouldForward(event)) return;
+          if (_silentCamera || _gestureMoving) return;
           widget.onEvent?.call(const MapEventCameraIdle());
           if (!(_movementCompleter?.isCompleted ?? true)) {
             _movementCompleter?.complete(event);
@@ -172,12 +185,43 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
 
       return _htmlElement;
     });
+    document.addEventListener('contextmenu', _onContextMenu);
     super.initState();
   }
 
   @override
-  Widget buildPlatformWidget(BuildContext context) =>
-      HtmlElementView(viewType: viewName);
+  Widget buildPlatformWidget(BuildContext context) => Listener(
+    behavior: HitTestBehavior.opaque,
+    onPointerDown: _onPointerDown,
+    onPointerUp: _onPointerEnd,
+    onPointerCancel: _onPointerEnd,
+    // An opaque platform view joins the gesture arena first and wins every
+    // pointer the arena sweeps, as a single tap is, so taps would never reach
+    // the map's gesture detector.
+    child: HtmlElementView(
+      viewType: viewName,
+      hitTestBehavior: PlatformViewHitTestBehavior.transparent,
+    ),
+  );
+
+  /// The browser opens its context menu for a right click, or Ctrl + click
+  /// on macOS, which rotate and tilt the map instead.
+  void _onPointerDown(PointerDownEvent event) {
+    _contextMenuTimer?.cancel();
+    _suppressContextMenu =
+        event.kind == PointerDeviceKind.mouse &&
+        (event.buttons & kSecondaryMouseButton != 0 ||
+            HardwareKeyboard.instance.isControlPressed);
+  }
+
+  /// Some platforms open the context menu on the release.
+  void _onPointerEnd(PointerEvent _) {
+    _contextMenuTimer?.cancel();
+    _contextMenuTimer = Timer(
+      const Duration(milliseconds: 500),
+      () => _suppressContextMenu = false,
+    );
+  }
 
   void _resizeMap() {
     final jsContainer = _map.getContainer();
@@ -190,11 +234,18 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
 
   @override
   void dispose() {
+    document.removeEventListener('contextmenu', _onContextMenu);
+    _contextMenuTimer?.cancel();
     style?.dispose();
     _map.remove();
     _htmlElement.remove();
     super.dispose();
   }
+
+  /// maplibre-gl-js renders only when the map changes, and the browser skips
+  /// hidden elements, so a hidden map costs little.
+  @override
+  bool get canPauseRendering => false;
 
   @override
   void didUpdateWidget(covariant MapLibreMap oldWidget) {
@@ -212,9 +263,6 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     }
     if (options.maxBounds != oldWidget.options.maxBounds) {
       _map.setMaxBounds(options.maxBounds?.toJsLngLatBounds());
-    }
-    if (options.gestures != oldWidget.options.gestures) {
-      _updateGestures(options.gestures);
     }
     _layerManager?.updateLayers(widget.layers);
     super.didUpdateWidget(oldWidget);
@@ -273,6 +321,9 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     final destination = center?.toLngLat();
     _nextGestureCausedByController = true;
     final camera = getCamera();
+    // flyTo ends synchronously when it jumps, for example if the browser
+    // prefers reduced motion, so wait for the end before starting it.
+    final completer = _movementCompleter = Completer<interop.MapLibreEvent>();
     _map.flyTo(
       interop.FlyToOptions(
         center: destination,
@@ -284,7 +335,6 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         padding: padding.toPaddingOptions(),
       ),
     );
-    final completer = _movementCompleter = Completer<interop.MapLibreEvent>();
     final _ = await completer.future;
     _movementCompleter = null;
 
@@ -377,127 +427,45 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     );
   }
 
-  void _updateGestures(MapGestures gestures) {
-    if (gestures.pan) {
-      _map.dragPan.enable();
-    } else {
-      _map.dragPan.disable();
-    }
-    if (gestures.zoom) {
-      _map.touchZoomRotate.enable();
-      _map.doubleClickZoom.enable();
-      _map.scrollZoom.enable();
-      _map.boxZoom.enable();
-    } else {
-      _map.touchZoomRotate.disable(); // this disables rotation as well
-      _map.doubleClickZoom.disable();
-      _map.scrollZoom.disable();
-      _map.boxZoom.disable();
-    }
-    if (gestures.rotate) {
-      _map.dragRotate.enable();
-      _map.touchZoomRotate.enableRotation();
-    } else {
-      _map.touchZoomRotate.disableRotation();
-      _map.dragRotate.disable();
-    }
-    if (gestures.pitch) {
-      // TODO dragRotate allows to pitch too but has no option to disable pitch.
-      _map.touchPitch.enable();
-    } else {
-      _map.touchPitch.disable();
-    }
-    // It's not possible to disable just some gestures for the KeyboardHandler.
-    // That's why we disable it completely if not all gestures are enabled.
-    if (gestures.allEnabled) {
-      _map.keyboard.enable();
-    } else {
-      _map.keyboard.disable();
-    }
-  }
-
   @override
-  Future<void> enableLocation({
-    Duration fastestInterval = const Duration(milliseconds: 750),
-    Duration maxWaitTime = const Duration(seconds: 1),
-    bool pulseFade = true,
-    bool accuracyAnimation = true,
-    bool compassAnimation = true,
-    bool pulse = true,
-    BearingRenderMode bearingRenderMode = BearingRenderMode.gps,
-  }) async {
-    debugPrint("Can't enable the user location on web programmatically.");
-  }
-
-  @override
-  Future<void> trackLocation({
-    bool trackLocation = true,
-    BearingTrackMode trackBearing = BearingTrackMode.gps,
-  }) async {
-    debugPrint("Can't track the user location on web.");
-  }
-
-  @override
-  List<RenderedFeature> featuresAtPoint(
+  Future<List<RenderedFeature>> featuresAtPoint(
     Offset point, {
     List<String>? layerIds,
-  }) {
-    final features = _map
-        .queryRenderedFeatures(
-          point.toJsPoint(),
-          interop.QueryRenderedFeaturesOptions(
-            layers: layerIds?.map((l) => l.toJS).toList(growable: false).toJS,
-          ),
-        )
-        .toDart;
-    return features
-        .map((f) {
-          return RenderedFeature(
-            id: f.id.dartify(),
-            properties: f.properties.asStringMap() ?? {},
-            geometry: f.geometry.asStringMap(),
-          );
-        })
-        .toList(growable: false);
-  }
+  }) async => _renderedFeatures(
+    _map.queryRenderedFeatures(point.toJsPoint(), _queryOptions(layerIds)),
+  );
 
   @override
-  List<RenderedFeature> featuresInRect(Rect rect, {List<String>? layerIds}) {
-    final features = _map
-        .queryRenderedFeaturesRect(
-          [rect.bottomLeft.toJsPoint(), rect.topRight.toJsPoint()].toJS,
-          interop.QueryRenderedFeaturesOptions(
-            layers: layerIds?.map((l) => l.toJS).toList(growable: false).toJS,
-          ),
-        )
-        .toDart;
-    return features
-        .map((f) {
-          return RenderedFeature(
-            id: f.id.dartify(),
-            properties: f.properties.asStringMap() ?? {},
-            geometry: f.geometry.asStringMap(),
-          );
-        })
-        .toList(growable: false);
-  }
+  Future<List<RenderedFeature>> featuresInRect(
+    Rect rect, {
+    List<String>? layerIds,
+  }) async => _renderedFeatures(
+    _map.queryRenderedFeaturesRect(
+      [rect.bottomLeft.toJsPoint(), rect.topRight.toJsPoint()].toJS,
+      _queryOptions(layerIds),
+    ),
+  );
 
-  @override
-  List<QueriedLayer> queryLayers(Offset screenLocation) {
-    final features = _map.queryRenderedFeatures(
-      screenLocation.toJsPoint(),
-      null,
-    );
-    return features.toDart
-        .map(
-          (e) => QueriedLayer(
-            layerId: e.layer.id,
-            sourceId: e.source,
-            sourceLayer: e.sourceLayer,
-          ),
-        )
-        .toList(growable: false);
-  }
+  static interop.QueryRenderedFeaturesOptions _queryOptions(
+    List<String>? layerIds,
+  ) => interop.QueryRenderedFeaturesOptions(
+    layers: layerIds?.map((l) => l.toJS).toList(growable: false).toJS,
+  );
+
+  static List<RenderedFeature> _renderedFeatures(
+    JSArray<interop.MapGeoJSONFeature> features,
+  ) => features.toDart
+      .map(
+        (f) => RenderedFeature(
+          id: f.id.dartify(),
+          properties: f.properties.asStringMap() ?? {},
+          geometry: f.geometry.asStringMap(),
+          sourceId: f.source,
+          sourceLayer: f.sourceLayer,
+          layerId: f.layer.id,
+        ),
+      )
+      .toList(growable: false);
 
   JSAny _prepareStyleString(String style) {
     final trimmed = style.trim();
@@ -545,3 +513,187 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     setState(() {});
   }
 }
+
+/// Applies gestures with MapLibre GL JS camera methods. Its own handlers are
+/// off, as Flutter recognizes the gestures.
+class _WebGestureCamera implements GestureCameraSink {
+  _WebGestureCamera(this._state);
+
+  final MapLibreMapStateWeb _state;
+
+  interop.JsMap get _map => _state._map;
+
+  @override
+  void gestureStart() {
+    // Catches a fling, whose end then reports the end of its move.
+    _map.stop();
+    _state
+      .._gestureMoving = true
+      .._gestureMoveStarted = false;
+  }
+
+  @override
+  void gestureUpdate(GestureCameraUpdate update) {
+    if (update.pans) {
+      // Puts the location under the pointer where the pointer is now, which
+      // keeps it under the pointer in every projection.
+      _map.easeTo(
+        interop.EaseToOptions(
+          center: _map.unproject(update.panFrom!.toJsPoint()),
+          offset: (update.panTo! - _mapCenter).toJsPoint(),
+          duration: 0,
+        ),
+      );
+    }
+    if (update.zoomBy == 0 && update.rotateBy == 0 && update.pitchBy == 0) {
+      return;
+    }
+    final around = update.around;
+    if (around == null) {
+      _map.jumpTo(
+        interop.JumpToOptions(
+          zoom: _map.getZoom() + update.zoomBy,
+          bearing: _map.getBearing() + update.rotateBy,
+          pitch: _map.getPitch() + update.pitchBy,
+        ),
+      );
+      return;
+    }
+    _map.jumpTo(
+      _cameraAround(
+        around,
+        zoomBy: update.zoomBy,
+        rotateBy: update.rotateBy,
+        pitchBy: update.pitchBy,
+      ).options,
+    );
+  }
+
+  /// The camera after zooming, rotating and tilting by the given amounts
+  /// while the location at [around] stays there.
+  ///
+  /// GL JS's `around` drifts by hundreds of pixels on the globe. Changing the
+  /// camera first and then putting the location back with the pan step stays
+  /// exact in every projection. Those writes only work out the target and
+  /// are undone, so a step is one camera write and can be animated.
+  _WebCamera _cameraAround(
+    Offset around, {
+    double zoomBy = 0,
+    double rotateBy = 0,
+    double pitchBy = 0,
+  }) {
+    final location = _map.unproject(around.toJsPoint());
+    final before = _camera();
+    _state._silentCamera = true;
+    try {
+      _map
+        ..jumpTo(
+          interop.JumpToOptions(
+            zoom: before.zoom + zoomBy,
+            bearing: before.bearing + rotateBy,
+            pitch: before.pitch + pitchBy,
+          ),
+        )
+        ..easeTo(
+          interop.EaseToOptions(
+            center: location,
+            offset: (around - _mapCenter).toJsPoint(),
+            duration: 0,
+          ),
+        );
+      return _camera();
+    } finally {
+      _map.jumpTo(before.options);
+      _state._silentCamera = false;
+    }
+  }
+
+  _WebCamera _camera() => (
+    center: _map.getCenter(),
+    zoom: _map.getZoom(),
+    bearing: _map.getBearing(),
+    pitch: _map.getPitch(),
+  );
+
+  @override
+  void gestureEnd({Velocity velocity = Velocity.zero}) {
+    if (!_state._gestureMoving) return;
+    _state._gestureMoving = false;
+    if (!_state._gestureMoveStarted) return;
+    if (!_fling(velocity.pixelsPerSecond)) {
+      _state.widget.onEvent?.call(const MapEventCameraIdle());
+    }
+  }
+
+  /// Pans on after a release at [velocity] as GL JS does, slowing down. The
+  /// fling's end reports the end of the move.
+  bool _fling(Offset velocity) {
+    final speed = min(velocity.distance * _flingLinearity, _flingMaxSpeed);
+    if (speed == 0) return false;
+    final seconds = speed / (_flingDeceleration * _flingLinearity);
+    final distance = speed * seconds / 2;
+    // The move already started with the gesture.
+    _state
+      .._gestureMoving = true
+      .._gestureMoveStarted = true;
+    _map.easeTo(
+      interop.EaseToOptions(
+        center: _map.getCenter(),
+        offset: (velocity / velocity.distance * distance).toJsPoint(),
+        duration: seconds * 1000,
+        easing: _flingCurve.transform.toJS,
+        essential: true,
+      ),
+    );
+    _state._gestureMoving = false;
+    return true;
+  }
+
+  @override
+  void zoomBy(
+    double levels,
+    Offset around, {
+    Duration duration = Duration.zero,
+  }) {
+    // Ends a running animation before working out the target, so that its
+    // end is reported.
+    _map.stop();
+    final target = _cameraAround(around, zoomBy: levels);
+    _state._nextMoveByUser = true;
+    _map.easeTo(
+      interop.EaseToOptions(
+        center: target.center,
+        zoom: target.zoom,
+        duration: duration.inMilliseconds,
+        essential: true,
+      ),
+    );
+  }
+
+  Offset get _mapCenter {
+    final canvas = _map.getCanvas();
+    return Offset(canvas.clientWidth / 2, canvas.clientHeight / 2);
+  }
+}
+
+typedef _WebCamera = ({
+  interop.LngLat center,
+  num zoom,
+  num bearing,
+  num pitch,
+});
+
+extension on _WebCamera {
+  interop.JumpToOptions get options => interop.JumpToOptions(
+    center: center,
+    zoom: zoom,
+    bearing: bearing,
+    pitch: pitch,
+  );
+}
+
+// The pan inertia of MapLibre GL JS.
+const _flingLinearity = 0.3;
+const _flingMaxSpeed = 1400.0;
+const _flingDeceleration = 2500.0;
+const _flingCurve = Cubic(0, 0, 0.3, 1);

@@ -56,86 +56,42 @@ Thanks for every contribution you make to the project.
 
 # Building
 
-## jnigen
+## MapLibre Native C library
 
-Ensure you have JDK 17 installed and set as the system JDK version:
+`maplibre_native` uses the MapLibre Native C API through
+[maplibre_native_ffi](https://pub.dev/packages/maplibre_native_ffi), whose
+build hook downloads the prebuilt library of its release for each target.
 
-```bash
-apt install openjdk-17-jdk-headless
-sudo update-alternatives --config java
-```  
-or
-```bash
-brew install openjdk@17
-echo 'export JAVA_HOME="$(/usr/libexec/java_home -v 17)"' >> ~/.zshrc
-source ~/.zshrc
-```  
-
-Build the example project to fetch Gradle dependencies:
+To use a local build instead, clone
+[maplibre-native-ffi](https://github.com/maplibre/maplibre-native-ffi) at the
+release tag the pubspec resolves to (e.g. next to this repository) and build
+the presets you need, as its development docs describe. On Windows, install
+Visual Studio 2022 with C++, standalone LLVM (`clang-cl`), CMake, Ninja, Rust,
+and `cargo install cargo-about --version 0.9.2 --locked --features cli`. Then,
+in Git Bash from the clone:
 
 ```bash
-(cd example/ && flutter build apk)
+bash .mise/bin/sync-submodules
+source .mise/bin/windows-msvc-env.sh
+cmake --preset windows-x64-vulkan -DBUILD_TESTING=OFF
+cmake --build --preset windows-x64-vulkan
 ```
 
-Run jnigen:
+The MSVC standard library requires a matching Clang version; an older LLVM
+works with an older MSVC toolset (load its `vcvars64.bat` instead of sourcing
+`windows-msvc-env.sh`). On an arm64 Mac, install Xcode, CMake, and Ninja
+(`brew install cmake ninja`) and build `macos-arm64-metal`,
+`ios-simulator-arm64-metal`, or `ios-arm64-metal` the same way; the Apple
+presets need no Rust.
 
-```bash
-./run_jnigen.sh
+Then name the clone's build root in the root `pubspec.yaml`. The hook takes
+`<preset>/install` under it for each target:
+
+```yaml
+hooks:
+  user_defines:
+    maplibre_native_ffi:
+      local_build: ../maplibre-native-ffi/build
 ```
 
-This script runs `dart run jnigen --config jnigen.yaml` and applies some manual
-fixes to the generated code.
-
-## ffigen (macOS only)
-
-Build the example project:
-
-```bash
-(cd example/ && flutter build ios --release --no-codesign)
-```
-
-### \<optional> build MapLibre Native with debugging symbols
-
-Clone maplibre-native as a sibling to flutter-maplibre:
-
-```bash
-git clone https://github.com/maplibre/maplibre-native \
-    --filter=blob:none \
-    --no-checkout \
-    ../maplibre-native
-cd ../maplibre-native
-git checkout ios-v6.19.2
-git submodule update --init --recursive --depth 1
-```
-
-Then build MapLibre (this will take a while):
-
-```bash
-cd maplibre_ios/ios
-./build_maplibre.sh
-```
-
-This will output a copy of MapLibre.xcframework in `maplibre_ios/.build`.
-
-Finally, modify `maplibre_ios/ios/maplibre_ios.podspec` and 
-`maplibre_ios/ios/maplibre_ios/Package.swift` to use your local copy of 
-MapLibre. Comment out lines marked `// FOR PREBUILT LIBRARY` and
-uncomment lines marked `// FOR LOCAL LIBRARY`.
-
-### \</optional>
-
-Generate Obj-C headers for the library's native Swift layer:
-
-```bash
-(cd maplibre_ios/ios/maplibre_ios/Sources/maplibre_ios && ./gen_swift_headers.sh)
-```
-
-Finally, run ffigen from the `maplibre_ios` directory:
-
-```bash
-cd maplibre_ios
-dart run tool/ffigen.dart
-```
-
-The script runs ffigen on the relevant version of MapLibre.framework in the 
-Swift build cache.
+Remove the setting to go back to the prebuilt library.

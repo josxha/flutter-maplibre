@@ -1,0 +1,32 @@
+{
+  "version": 8,
+  "sources": {
+    "points": {
+      "type": "geojson",
+      "data": {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "id": 1,
+            "geometry": { "type": "Point", "coordinates": [0, 0] },
+            "properties": { "name": "origin" }
+          }
+        ]
+      }
+    }
+  },
+  "layers": [
+    {
+      "id": "background",
+      "type": "background",
+      "paint": { "background-color": "#dddddd" }
+    },
+    {
+      "id": "points",
+      "type": "circle",
+      "source": "points",
+      "paint": { "circle-radius": 10, "circle-color": "#ff0000" }
+    }
+  ]
+}
