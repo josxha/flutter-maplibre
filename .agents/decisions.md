@@ -122,6 +122,10 @@ Each entry: the decision, then why.
   texture or surface. Abandon blocked the UI thread on the map's tile work
   and GPU queue. Close reports nothing about kept objects; a Vulkan swapchain
   is kept only when the process exits or its queue fails to drain.
+- **HTTP follows the app's network security config (0.202610.3), so
+  cleartext needs the app's permission.** The example permits it for
+  127.0.0.1 and localhost in its debug source set only, for the local test
+  server of the integration tests.
 - **The plugin ships no TLS verifier code.** The C library embeds the dex of
   its rustls-platform-verifier helper and loads it in `mln_android_init`, so
   the APK needs no Java classes or keep rules for it.

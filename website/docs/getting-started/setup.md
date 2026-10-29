@@ -157,6 +157,11 @@ The map renders with OpenGL ES into the surface of a Flutter texture, so the
 device needs OpenGL ES 3.0 and Android 7.0 (API level 24) or newer. No further
 setup is needed.
 
+Styles and tiles load through Android's `HttpURLConnection`, which follows
+your app's network security config. Android blocks plain `http://` URLs by
+default; permit cleartext for the hosts that need it in a
+[network security config](https://developer.android.com/privacy-and-security/security-config).
+
 To render with Vulkan instead, which needs a device with Vulkan 1.1, select
 the Vulkan build of the C library in the root `pubspec.yaml` of your app, or of
 your workspace if your app is part of one:

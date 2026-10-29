@@ -68,8 +68,9 @@
   map from its pixels, without encoding it.
 - Native: built on `maplibre_native_ffi` 0.202610.3. Intel Macs are
   supported, maps share glyphs, readback on discrete GPUs is faster, and
-  Android loads tiles through `HttpURLConnection`, which follows the app's
-  network security config.
+  Android loads styles and tiles through `HttpURLConnection`, which follows
+  the app's network security config: plain `http://` URLs need a
+  `network-security-config` that permits cleartext for their hosts.
 - Native: a map shows its initial camera and style in its first frame.
 - Native: closing a map no longer blocks the UI thread while its tiles and
   GPU work finish.
