@@ -146,20 +146,15 @@ your `web/index.html` file. Every option is optional:
 | `pmtilesVersion`    | `^4.0.0`   | The npm version range of PMTiles.                                                            |
 | `pmtilesBaseUrl`    | jsDelivr   | The URL of a folder with `pmtiles.js`. Takes precedence over `pmtilesVersion`.               |
 
+Only maplibre-gl-js v6 is supported. If you upgrade from an earlier version
+of this package, remove the maplibre-gl-js and PMTiles `<script>` and `<link>`
+tags from your `web/index.html`.
+
 If your `web/index.html` already loads maplibre-gl-js, which sets
-`window.maplibregl`, or PMTiles, which sets `window.pmtiles`, that version is
-used and nothing is loaded. This way you can keep using maplibre-gl-js v5:
-
-```html title="web/index.html"
-<script src='https://unpkg.com/maplibre-gl@^5.0/dist/maplibre-gl.js'></script>
-<link href='https://unpkg.com/maplibre-gl@^5.0/dist/maplibre-gl.css'
-      rel='stylesheet'/>
-```
-
-maplibre-gl-js v6 is published only as an ES module. To load it in your
-`web/index.html` yourself, import it in a module script, and load
-`flutter_bootstrap.js` with `defer` instead of `async`, so that the app starts
-after it:
+`window.maplibregl`, or PMTiles, which sets `window.pmtiles`, that copy is
+used and nothing is loaded. maplibre-gl-js v6 is published only as an ES
+module, so import it in a module script, and load `flutter_bootstrap.js` with
+`defer` instead of `async`, so that the app starts after it:
 
 ```html title="web/index.html"
 <script type="module">

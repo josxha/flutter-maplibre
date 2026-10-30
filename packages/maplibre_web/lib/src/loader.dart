@@ -19,8 +19,8 @@ const defaultPmtilesVersion = '^4.0.0';
 /// The CDN that serves npm packages and resolves npm version ranges.
 const _cdn = 'https://cdn.jsdelivr.net/npm';
 
-/// The major versions of maplibre-gl-js that maplibre_web supports.
-const _supportedMajorVersions = {5, 6};
+/// The major version of maplibre-gl-js that maplibre_web supports.
+const _supportedMajorVersion = 6;
 
 const _setupDocs =
     'https://flutter-maplibre.pages.dev/docs/getting-started/setup#setup-web';
@@ -96,10 +96,10 @@ Future<void> _loadMapLibreGl() async {
   }
   final version = interop.getVersion();
   final major = int.tryParse(version.split('.').first);
-  if (!_supportedMajorVersions.contains(major)) {
+  if (major != _supportedMajorVersion) {
     debugPrint(
       '[MapLibre] maplibre-gl-js $version is loaded, but maplibre_web '
-      'supports only the major versions $_supportedMajorVersions.',
+      'supports only v$_supportedMajorVersion.',
     );
   }
 }
