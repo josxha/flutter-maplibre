@@ -299,7 +299,10 @@ void runTests() {
           initCamera: const InitialCamera.position(zoom: 1),
         ),
       );
-      expect(map.style.getLayerIds(), ['raster', 'label']);
+      expect(map.style.layers.map((layer) => layer.id).toList(), [
+        'raster',
+        'label',
+      ]);
       await map.waitForLatestFrame();
     });
   }, skip: kIsWeb);

@@ -27,9 +27,9 @@ Widget build(BuildContext context) {
           url:
           'https://maplibre.org/maplibre-gl-js/docs/assets/earthquakes.geojson',
         );
-        await style.addSource(earthquakes);
-        const layer = HeatmapStyleLayer(id: _layerId, sourceId: _sourceId);
-        await style.addLayer(layer);
+        await style.sources.add(earthquakes);
+        final layer = HeatmapStyleLayer(id: _layerId, sourceId: _sourceId);
+        await style.layers.add(layer);
       }
   );
 }

@@ -218,7 +218,7 @@ class MarkerLayer extends Layer<Feature<Point>> {
     'icon-padding': iconPadding,
     'icon-keep-upright': iconKeepUpright,
     'icon-offset': iconOffset,
-    'icon-anchor': iconAnchor.name,
+    'icon-anchor': iconAnchor.value,
     'text-field': textField,
     'text-font': textFont,
     'text-size': textSize,
@@ -331,39 +331,4 @@ class MarkerLayer extends Layer<Feature<Point>> {
     textTranslate,
     iconAnchor,
   ]);
-}
-
-/// Part of the icon placed closest to the anchor.
-enum IconAnchor {
-  /// The center of the icon is placed closest to the anchor.
-  center('center'),
-
-  /// The left side of the icon is placed closest to the anchor.
-  left('left'),
-
-  /// The right side of the icon is placed closest to the anchor.
-  right('right'),
-
-  /// The top of the icon is placed closest to the anchor.
-  top('top'),
-
-  /// The bottom of the icon is placed closest to the anchor.
-  bottom('bottom'),
-
-  /// The top left corner of the icon is placed closest to the anchor.
-  topLeft('top-left'),
-
-  /// The top right corner of the icon is placed closest to the anchor.
-  topRight('top-right'),
-
-  /// The bottom left corner of the icon is placed closest to the anchor.
-  bottomLeft('bottom-left'),
-
-  /// The bottom right corner of the icon is placed closest to the anchor.
-  bottomRight('bottom-right');
-
-  const IconAnchor(this.name);
-
-  /// The MapLibre Style spec compatible name.
-  final String name;
 }

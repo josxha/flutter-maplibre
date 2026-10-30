@@ -28,13 +28,13 @@ Widget build(BuildContext context) {
           url: 'https://demotiles.maplibre.org/terrain-tiles/tiles.json',
           tileSize: 256,
         );
-        await style.addSource(hillshade);
-        const layer = HillshadeStyleLayer(
+        await style.sources.add(hillshade);
+        final layer = HillshadeStyleLayer(
           id: _layerId,
           sourceId: _sourceId,
           paint: {'hillshade-shadow-color': '#473B24'},
         );
-        await style.addLayer(layer);
+        await style.layers.add(layer);
       }
   );
 }

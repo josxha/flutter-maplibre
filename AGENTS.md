@@ -7,6 +7,12 @@ Flutter MapLibre: a federated plugin in a Dart pub workspace.
 - `packages/maplibre`: the app-facing package.
 - `packages/maplibre_platform_interface`: shared API that the platform packages
   implement, and the shared gesture recognizer (`lib/src/gestures/`).
+  - `lib/src/style/expressions/`: typed style expressions.
+  - `lib/src/style/layers/`: `StyleLayer`, the `StyleLayers` collection, and
+    `style_layers.g.dart`, generated from the style spec.
+  - `lib/src/style/sources/`: sources and the `StyleSources` collection.
+  - `lib/src/style/style_backend.dart`: what those collections need from a
+    platform.
 - `packages/maplibre_web`: browser, via maplibre-gl-js.
 - `packages/maplibre_geolocator`: optional adapter from `geolocator` positions
   to the `UserLocationLayer` of `maplibre`.
@@ -40,7 +46,7 @@ Flutter MapLibre: a federated plugin in a Dart pub workspace.
 - `.github/scripts/watchdog.sh`: stops a CI test run once its output stalls
   and reports the last test, the app's stacks and its log as annotations;
   exits with 75 when flutter test never attached to the app, so CI retries.
-- `tool/codegen/`: ffigen and jnigen scripts. A separate package outside the
+- `tool/codegen/`: ffigen, jnigen and style layer scripts. A separate package outside the
   workspace, because the generators need newer native-asset packages than the
   binding allows.
 
@@ -56,6 +62,7 @@ cd examples && flutter test integration_test/all_test.dart -d windows  # or linu
 cd examples && flutter drive --driver test_driver/integration_test.dart --target integration_test/all_test.dart -d web-server --browser-name chrome  # needs chromedriver on port 4444
 cd tool/codegen && dart run ffigen.dart       # after changing the desktop or Darwin C API header
 cd tool/codegen && dart run jnigen.dart       # after changing MaplibreNativeApi.kt; build examples for Android in release first
+cd tool/codegen && dart run style_layers.dart # after raising the style spec version in the script
 packages/maplibre_native/linux/test/run_gl_texture_test.sh  # Linux zero-copy check, no Flutter build needed
 ```
 
@@ -79,6 +86,7 @@ build root of a maplibre-native-ffi clone in
 - Never use method channels. Dart calls native code through ffigen (C/C++)
   or jnigen (Kotlin/Java) bindings.
 - Note API gaps of `maplibre_native_ffi` in `.agents/decisions.md`.
+- Never edit `*.g.dart` by hand. Change the generator in `tool/codegen/`.
 - Use conventional commits (`feat(native): …`, `fix: …`, `ci: …`).
 - Read `.agents/decisions.md` before changing rendering, threading, or the
   native build.

@@ -37,12 +37,12 @@ class _StyleLayersHeatmapPageState extends State<StyleLayersHeatmapPage> {
       url:
           'https://maplibre.org/maplibre-gl-js/docs/assets/earthquakes.geojson',
     );
-    await style.addSource(earthquakes);
-    await style.addLayer(_heatmapStyleLayer);
+    await style.sources.add(earthquakes);
+    await style.layers.add(_heatmapStyleLayer);
   }
 }
 
-const _heatmapStyleLayer = HeatmapStyleLayer(
+final _heatmapStyleLayer = HeatmapStyleLayer(
   id: _layerId,
   sourceId: _sourceId,
   paint: {

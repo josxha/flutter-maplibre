@@ -27,7 +27,9 @@ void runTests() {
       expect(loaded, greaterThan(created));
       await tester.pump(const Duration(seconds: 1));
       expect(map.events.whereType<MapEventStyleLoaded>(), hasLength(1));
-      expect(map.style.getLayerIds(), ['background']);
+      expect(map.style.layers.map((layer) => layer.id).toList(), [
+        'background',
+      ]);
     });
 
     testWidgets('renders into a texture on native platforms', (tester) async {
@@ -115,7 +117,9 @@ void runTests() {
         ),
       );
       await map.waitForEvent<MapEventStyleLoaded>(since: since);
-      expect(map.controller.style?.getLayerIds(), ['other']);
+      expect(map.controller.style?.layers.map((layer) => layer.id).toList(), [
+        'other',
+      ]);
     });
 
     testWidgets('keeps its style when other options change', (tester) async {
@@ -242,7 +246,9 @@ void runTests() {
       await tester.pumpWidget(const SizedBox.shrink());
       await tester.pump(const Duration(milliseconds: 100));
       final map = await pumpMap(tester);
-      expect(map.style.getLayerIds(), ['background']);
+      expect(map.style.layers.map((layer) => layer.id).toList(), [
+        'background',
+      ]);
     });
 
     testWidgets('shows two maps with independent cameras', (tester) async {

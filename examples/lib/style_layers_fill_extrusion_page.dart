@@ -37,17 +37,17 @@ class _StyleLayersFillExtrusionPageState
   }
 
   Future<void> _onStyleLoaded(StyleController style) async {
-    await style.addSource(
+    await style.sources.add(
       const GeoJsonSource.url(
         id: _sourceId,
         url: 'https://maplibre.org/maplibre-gl-js/docs/assets/indoor-3d-map.geojson',
       ),
     );
-    await style.addLayer(_fillExtrusionStyleLayer);
+    await style.layers.add(_fillExtrusionStyleLayer);
   }
 }
 
-const _fillExtrusionStyleLayer = FillExtrusionStyleLayer(
+final _fillExtrusionStyleLayer = FillExtrusionStyleLayer(
   id: 'room-extrusion',
   sourceId: _sourceId,
   paint: {

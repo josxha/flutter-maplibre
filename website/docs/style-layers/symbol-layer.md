@@ -31,7 +31,7 @@ Widget build(BuildContext context) {
         await style.addImage('marker', bytes);
 
         // add some points as GeoJSON source to the map
-        await style.addSource(
+        await style.sources.add(
           const GeoJsonSource.data(
             id: 'points',
             data: _geoJsonString,
@@ -39,8 +39,8 @@ Widget build(BuildContext context) {
         );
 
         // display the image on the map
-        await style.addLayer(
-          const SymbolStyleLayer(
+        await style.layers.add(
+          SymbolStyleLayer(
             id: 'images',
             sourceId: 'points',
             layout: {

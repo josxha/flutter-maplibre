@@ -44,7 +44,7 @@ void runTests() {
     testWidgets('video sources on native', (tester) async {
       final map = await pumpMap(tester);
       await expectLater(
-        map.style.addSource(
+        map.style.sources.add(
           const VideoSource.urls(
             id: 'video',
             urls: ['https://example.com/video.mp4'],

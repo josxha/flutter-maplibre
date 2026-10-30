@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/widgets.dart';
@@ -34,9 +33,6 @@ class MapLibreMapStateNative extends MapLibreMapState {
 
   @override
   StyleControllerNative? style;
-
-  /// The JSON of the style the map loads, when it is at hand.
-  String? _styleJson;
 
   /// Whether the camera constraints of [MapOptions] wait for the first
   /// style, see [_setUp].
@@ -347,7 +343,6 @@ class MapLibreMapStateNative extends MapLibreMapState {
     late final StyleControllerNative styleController;
     styleController = StyleControllerNative(
       map,
-      styleJson: _styleJson,
       // Rebuilds the widgets in MapLibreMap.children, such as
       // SourceAttribution.
       onAttributionsChanged: () {
@@ -355,7 +350,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
       },
     );
     style = styleController;
-    await styleController.refresh();
+    await styleController.load();
     if (_disposed || style != styleController) return;
     widget.onEvent?.call(MapEventStyleLoaded(styleController));
     widget.onStyleLoaded?.call(styleController);
@@ -600,39 +595,17 @@ class MapLibreMapStateNative extends MapLibreMapState {
     if (map == null) return;
     final request = ++_styleRequest;
     bool stale() => _map != map || request != _styleRequest;
-    // The style JSON where it is at hand, for the attributions that MapLibre
-    // Native drops.
-    _styleJson = null;
     switch (style) {
       case MapStyleJson(:final json):
-        _styleJson = json;
         await map.setStyleJson(jsonDecode(json));
       case MapStyleUrl(:final url):
-        if (url.startsWith('file://')) {
-          final json = await _readStyleFile(Uri.parse(url).toFilePath());
-          if (stale()) return;
-          _styleJson = json;
-        }
         await map.setStyleUrl(url);
       case MapStyleFile(:final path):
-        final json = await _readStyleFile(path);
-        if (stale()) return;
-        _styleJson = json;
         await map.setStyleUrl(Uri.file(path).toString());
       case MapStyleAsset(:final asset):
         final json = await DefaultAssetBundle.of(context).loadString(asset);
         if (stale()) return;
-        _styleJson = json;
         await map.setStyleJson(jsonDecode(json));
-    }
-  }
-
-  /// The style JSON in the file at [path], or null if it can't be read.
-  static Future<String?> _readStyleFile(String path) async {
-    try {
-      return await File(path).readAsString();
-    } on Object {
-      return null;
     }
   }
 

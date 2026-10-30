@@ -60,11 +60,11 @@ class _StyleLayersFillPageState extends State<StyleLayersFillPage> {
     final geojsonPolygon = await rootBundle.loadString(
       'assets/geojson/lake-constance.json',
     );
-    await style.addSource(
+    await style.sources.add(
       GeoJsonSource.data(id: 'LakeConstance-Source', data: geojsonPolygon),
     );
-    await style.addLayer(
-      const FillStyleLayer(
+    await style.layers.add(
+      FillStyleLayer(
         id: _layerId,
         sourceId: 'LakeConstance-Source',
         paint: {'fill-color': '#429ef5'},

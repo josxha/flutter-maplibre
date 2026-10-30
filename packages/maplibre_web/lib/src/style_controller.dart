@@ -1,11 +1,54 @@
 part of 'map_state.dart';
 
 /// Web specific implementation of the [StyleController].
-class StyleControllerWeb extends StyleController {
+class StyleControllerWeb extends StyleController implements StyleBackend {
   /// Create a new [StyleControllerWeb] instance.
   StyleControllerWeb(this._map);
 
   final interop.JsMap _map;
+
+  @override
+  late final StyleSources sources = StyleSources(this);
+
+  @override
+  late final StyleLayers layers = StyleLayers(this, sources: sources);
+
+  /// Fills [layers] and [sources] from the style that the map loaded.
+  void load() {
+    final style = _map.getStyle();
+    if (style == null) return;
+    final json = jsonDecode(stringify(style)) as Map<String, Object?>;
+    if (json case {'sources': final Map<String, Object?> styleSources}) {
+      sources.load(styleSources);
+    }
+    if (json case {'layers': final List<Object?> styleLayers}) {
+      layers.load(styleLayers.whereType<Map<String, Object?>>());
+    }
+  }
+
+  /// Reads what the tile sources of the map learned from their TileJSON into
+  /// [sources].
+  void refreshTileJson() {
+    for (final source in sources.toList()) {
+      final js = _map.getSource(source.id);
+      if (js == null) continue;
+      sources.applyTileJson(
+        source.id,
+        attribution: js['attribution'].dartify()?.toString(),
+        minZoom: (js['minzoom'].dartify() as num?)?.toDouble(),
+        maxZoom: (js['maxzoom'].dartify() as num?)?.toDouble(),
+        bounds: switch (js['bounds'].dartify()) {
+          final List<Object?> bounds when bounds.length == 4 => [
+            for (final value in bounds) (value! as num).toDouble(),
+          ],
+          _ => null,
+        },
+      );
+    }
+  }
+
+  @override
+  void batch(void Function() updates) => updates();
 
   /// The blob URLs of image and video sources from bytes or an
   /// [ImageProvider], by source id. They are revoked when their source is
@@ -58,7 +101,33 @@ class StyleControllerWeb extends StyleController {
   Future<void> removeImage(String id) async => _map.removeImage(id);
 
   @override
+  Future<void> addLayer(
+    Map<String, Object?> json, {
+    String? belowLayerId,
+  }) async => _map.addLayer(json.jsify()!, belowLayerId);
+
+  @override
   Future<void> removeLayer(String id) async => _map.removeLayer(id);
+
+  @override
+  void moveLayer(String id, {String? belowLayerId}) =>
+      _map.moveLayer(id, belowLayerId);
+
+  @override
+  void setPaintProperty(String layerId, String name, Object? value) =>
+      _map.setPaintProperty(layerId, name, value.jsify());
+
+  @override
+  void setLayoutProperty(String layerId, String name, Object? value) =>
+      _map.setLayoutProperty(layerId, name, value.jsify());
+
+  @override
+  void setFilter(String layerId, Object? filter) =>
+      _map.setFilter(layerId, filter.jsify());
+
+  @override
+  void setZoomRange(String layerId, double minZoom, double maxZoom) =>
+      _map.setLayerZoomRange(layerId, minZoom, maxZoom);
 
   @override
   Future<void> removeSource(String id) async {
@@ -70,30 +139,30 @@ class StyleControllerWeb extends StyleController {
   }
 
   @override
-  Future<LineStyleLayerController?> getLineLayer(String id) async {
-    final layer = _map.getLayer(id);
-    if (layer == null) return null;
-    if ((layer['type'] as JSString?)?.toDart != 'line') return null;
-    return LineStyleLayerController(
-      id: id,
-      paint: {
-        for (final name in LineStyleLayerController.paintProperties)
-          name: _map.getPaintProperty(id, name).dartify(),
-      },
-      setPaintProperty: (name, value) =>
-          _map.setPaintProperty(id, name, value.jsify()),
-    );
-  }
+  Future<void> setGeoJsonData(String id, String data) async =>
+      _map.getSource(id)!.setData(parse(data));
 
   @override
-  Future<void> updateGeoJsonSource({
-    required String id,
-    required String data,
-  }) async {
-    final source = _map.getSource(id);
-    if (source == null) throw Exception('Source with id "$id" does not exist.');
-    source.setData(parse(data));
-  }
+  Future<void> setGeoJsonUrl(String id, String url) async =>
+      _map.getSource(id)!.setData(url.toJS);
+
+  @override
+  Future<void> setImageCoordinates(String id, LngLatQuad coordinates) async =>
+      _map.getSource(id)!.setCoordinates(coordinates.toJson().jsify()!);
+
+  @override
+  Future<void> setTiles(
+    String id,
+    List<String> tiles,
+    Map<String, Object?> specification,
+  ) async => _map.getSource(id)!.setTiles(tiles.jsify()!);
+
+  @override
+  Future<void> setTileJsonUrl(
+    String id,
+    String url,
+    Map<String, Object?> specification,
+  ) async => _map.getSource(id)!.setUrl(url);
 
   @override
   List<String> get attributions {
@@ -115,145 +184,10 @@ class StyleControllerWeb extends StyleController {
   }
 
   @override
-  List<String> getLayerIds() {
-    final layers = _map.getStyle()?.layers.dartify() as List<Object?>?;
-    if (layers == null) return const [];
-    return layers
-        .map((l) => (l as Map<Object?, Object?>?)?['id'])
-        .whereType<String>()
-        .toList();
-  }
-
-  @override
-  Future<void> addLayer(
-    StyleLayer layer, {
-    String? belowLayerId,
-    String? aboveLayerId,
-    int? atIndex,
-  }) async {
-    if (_map.getLayer(layer.id) != null) {
-      throw Exception(
-        'A Layer with the id "${layer.id}" already exists in the map style.',
-      );
-    }
-
-    final interop.LayerSpecification jsLayer;
-    switch (layer) {
-      case FillStyleLayer():
-        jsLayer = interop.LayerSpecification(
-          id: layer.id,
-          type: 'fill',
-          source: layer.sourceId,
-          layout: layer.layout.jsify()!,
-          paint: layer.paint.jsify()!,
-          minzoom: layer.minZoom,
-          maxzoom: layer.maxZoom,
-        );
-      case CircleStyleLayer():
-        jsLayer = interop.LayerSpecification(
-          id: layer.id,
-          type: 'circle',
-          source: layer.sourceId,
-          layout: layer.layout.jsify()!,
-          paint: layer.paint.jsify()!,
-          minzoom: layer.minZoom,
-          maxzoom: layer.maxZoom,
-        );
-      case BackgroundStyleLayer():
-        jsLayer = interop.LayerSpecification(
-          id: layer.id,
-          type: 'background',
-          layout: layer.layout.jsify()!,
-          paint: layer.paint.jsify()!,
-          minzoom: layer.minZoom,
-          maxzoom: layer.maxZoom,
-        );
-      case FillExtrusionStyleLayer():
-        jsLayer = interop.LayerSpecification(
-          id: layer.id,
-          type: 'fill-extrusion',
-          source: layer.sourceId,
-          layout: layer.layout.jsify()!,
-          paint: layer.paint.jsify()!,
-          minzoom: layer.minZoom,
-          maxzoom: layer.maxZoom,
-        );
-      case HeatmapStyleLayer():
-        jsLayer = interop.LayerSpecification(
-          id: layer.id,
-          type: 'heatmap',
-          source: layer.sourceId,
-          layout: layer.layout.jsify()!,
-          paint: layer.paint.jsify()!,
-          minzoom: layer.minZoom,
-          maxzoom: layer.maxZoom,
-        );
-      case HillshadeStyleLayer():
-        jsLayer = interop.LayerSpecification(
-          id: layer.id,
-          type: 'hillshade',
-          source: layer.sourceId,
-          layout: layer.layout.jsify()!,
-          paint: layer.paint.jsify()!,
-          minzoom: layer.minZoom,
-          maxzoom: layer.maxZoom,
-        );
-      case LineStyleLayer():
-        jsLayer = interop.LayerSpecification(
-          id: layer.id,
-          type: 'line',
-          source: layer.sourceId,
-          layout: layer.layout.jsify()!,
-          paint: layer.paint.jsify()!,
-          minzoom: layer.minZoom,
-          maxzoom: layer.maxZoom,
-        );
-      case RasterStyleLayer():
-        jsLayer = interop.LayerSpecification(
-          id: layer.id,
-          type: 'raster',
-          source: layer.sourceId,
-          layout: layer.layout.jsify()!,
-          paint: layer.paint.jsify()!,
-          minzoom: layer.minZoom,
-          maxzoom: layer.maxZoom,
-        );
-      case SymbolStyleLayer():
-        jsLayer = interop.LayerSpecification(
-          id: layer.id,
-          type: 'symbol',
-          source: layer.sourceId,
-          layout: layer.layout.jsify()!,
-          paint: layer.paint.jsify()!,
-          minzoom: layer.minZoom,
-          maxzoom: layer.maxZoom,
-        );
-      default:
-        throw UnimplementedError(
-          'Layer type "${layer.runtimeType}" is not implemented for Web.',
-        );
-    }
-    if (layer.filter case final filter?) {
-      final jsFilter = filter.jsify();
-      if (jsFilter != null) {
-        jsLayer.filter = jsFilter;
-      }
-    }
-    if (layer is StyleLayerWithSource && layer.sourceLayerId != null) {
-      jsLayer.sourceLayer = layer.sourceLayerId;
-    }
-    _map.addLayer(jsLayer, belowLayerId);
-  }
-
-  @override
   Future<void> addSource(Source source) async {
-    if (_map.getSource(source.id) != null) {
-      throw Exception(
-        'A Source with the id "${source.id}" already exists in the map style.',
-      );
-    }
     switch (source) {
       case GeoJsonSource():
+        // The browser parses the data, which is faster than Dart.
         final data = switch (source) {
           GeoJsonSourceUrl(:final url) => url.toJS,
           GeoJsonSourceData(:final data) => parse(data),
@@ -268,45 +202,11 @@ class StyleControllerWeb extends StyleController {
             'attribution': source.attribution,
           }, data: data),
         );
-      case RasterDemSource():
+      case RasterDemSource() || RasterSource() || VectorSource():
+        // gl-js has no volatile sources.
         _map.addSource(
           source.id,
-          _sourceSpecification({
-            'type': 'raster-dem',
-            ...tilesetOf(source),
-            'bounds': source.bounds,
-            'minzoom': source.minZoom,
-            'maxzoom': source.maxZoom,
-            'tileSize': source.tileSize,
-            'attribution': source.attribution,
-          }),
-        );
-      case RasterSource():
-        _map.addSource(
-          source.id,
-          _sourceSpecification({
-            'type': 'raster',
-            ...tilesetOf(source),
-            'bounds': source.bounds,
-            'minzoom': source.minZoom,
-            'maxzoom': source.maxZoom,
-            'tileSize': source.tileSize,
-            'scheme': source.scheme.name,
-            'attribution': source.attribution,
-          }),
-        );
-      case VectorSource():
-        _map.addSource(
-          source.id,
-          _sourceSpecification({
-            'type': 'vector',
-            ...tilesetOf(source),
-            'bounds': source.bounds,
-            'minzoom': source.minZoom,
-            'maxzoom': source.maxZoom,
-            'scheme': source.scheme.name,
-            'attribution': source.attribution,
-          }),
+          _sourceSpecification(source.toJson()!..remove('volatile')),
         );
       case ImageSource():
         // MapLibre GL JS loads image sources only from a URL.
@@ -326,21 +226,7 @@ class StyleControllerWeb extends StyleController {
             // The coordinates start at the top left corner of the image and
             // proceed in clockwise order.
             // https://github.com/maplibre/maplibre-gl-js/blob/87486a5ef2085e600e8fa4e31252629dd8488dcd/src/source/image_source.ts#L24
-            coordinates: [
-              [source.coordinates.topLeft.lon, source.coordinates.topLeft.lat],
-              [
-                source.coordinates.topRight.lon,
-                source.coordinates.topRight.lat,
-              ],
-              [
-                source.coordinates.bottomRight.lon,
-                source.coordinates.bottomRight.lat,
-              ],
-              [
-                source.coordinates.bottomLeft.lon,
-                source.coordinates.bottomLeft.lat,
-              ],
-            ].jsify()!,
+            coordinates: source.coordinates.toJson().jsify()!,
           ),
         );
       case VideoSource():
@@ -361,12 +247,7 @@ class StyleControllerWeb extends StyleController {
           interop.SourceSpecification.video(
             type: 'video',
             urls: urls.jsify()!,
-            coordinates: [
-              source.coordinates.topLeft,
-              source.coordinates.topRight,
-              source.coordinates.bottomRight,
-              source.coordinates.bottomLeft,
-            ].map((e) => [e.lon, e.lat]).toList(growable: false).jsify()!,
+            coordinates: source.coordinates.toJson().jsify()!,
           ),
         );
     }
@@ -391,6 +272,8 @@ class StyleControllerWeb extends StyleController {
 
   @override
   void dispose() {
+    layers.dispose();
+    sources.dispose();
     // Interop members can't be torn off for forEach.
     // ignore: prefer_foreach
     for (final url in _blobUrls.values) {

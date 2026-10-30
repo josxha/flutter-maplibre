@@ -24,11 +24,11 @@ Widget build(BuildContext context) {
       onStyleLoaded: (style) async {
         final geojsonPolygon =
         await rootBundle.loadString('assets/geojson/lake-constance.json');
-        await style.addSource(
+        await style.sources.add(
           GeoJsonSource.data(id: 'LakeConstance', data: geojsonPolygon),
         );
-        await style.addLayer(
-          const FillStyleLayer(
+        await style.layers.add(
+          FillStyleLayer(
             id: 'geojson-fill',
             sourceId: 'LakeConstance',
             paint: {'fill-color': '#429ef5'},

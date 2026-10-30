@@ -7,3 +7,8 @@ import 'dart:js_interop';
 /// parsing in Dart.
 @JS('parse')
 external JSAny parse(String json);
+
+/// Convert a JavaScript object to a JSON string, for values that Dart reads
+/// as plain JSON.
+@JS('stringify')
+external String stringify(JSAny value);

@@ -146,6 +146,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
               event.sourceDataType == 'visibility') {
             _onAttributionsMaybeChanged();
           }
+          if (event.sourceDataType == 'metadata') style?.refreshTileJson();
         }.toJS,
       );
       _map.on(
@@ -562,7 +563,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
 
   void _onStyleLoaded() {
     style?.dispose();
-    final styleCtrl = StyleControllerWeb(_map);
+    final styleCtrl = StyleControllerWeb(_map)..load();
     style = styleCtrl;
     widget.onEvent?.call(MapEventStyleLoaded(styleCtrl));
     widget.onStyleLoaded?.call(styleCtrl);

@@ -68,7 +68,64 @@ void runTests() {
 
       await tester.pumpWidget(MapApp(options: options));
       await map.waitForFeatures(map.center, (features) => features.isEmpty);
-      expect(map.style.getLayerIds(), ['background']);
+      expect(map.style.layers.map((layer) => layer.id).toList(), [
+        'background',
+      ]);
+    });
+
+    testWidgets('updates a changed layer in place and keeps the order', (
+      tester,
+    ) async {
+      final options = offlineOptions(zoom: 10);
+      const points = [Feature(geometry: Point(_point))];
+      final map = await pumpMap(
+        tester,
+        options: options,
+        layers: const [
+          CircleLayer(points: points, radius: 40),
+          CircleLayer(points: points),
+        ],
+      );
+      final beside = map.center + const Offset(25, 0);
+      await map.waitForFeatures(beside, (features) => features.length == 1);
+      final bottom = map.style.layers['maplibre-layer-0'];
+
+      await tester.pumpWidget(
+        MapApp(
+          options: options,
+          layers: const [
+            CircleLayer(points: points),
+            CircleLayer(points: points),
+          ],
+        ),
+      );
+      await map.waitForFeatures(beside, (features) => features.isEmpty);
+      expect(map.style.layers['maplibre-layer-0'], same(bottom));
+      expect(map.style.layers.map((layer) => layer.id), [
+        'background',
+        'maplibre-layer-0',
+        'maplibre-layer-1',
+      ]);
+
+      // Another kind of layer takes the place of the old one.
+      await tester.pumpWidget(
+        MapApp(
+          options: options,
+          layers: [
+            PolylineLayer(polylines: [Feature(geometry: _line)], width: 4),
+            const CircleLayer(points: points),
+          ],
+        ),
+      );
+      await map.waitForFeatures(
+        map.center,
+        (features) => features.any((f) => f.geometry?['type'] == 'LineString'),
+      );
+      expect(map.style.layers.map((layer) => layer.id), [
+        'background',
+        'maplibre-layer-0',
+        'maplibre-layer-1',
+      ]);
     });
 
     testWidgets('draws a feature added to the same list in place', (

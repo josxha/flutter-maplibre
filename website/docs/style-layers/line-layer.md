@@ -23,11 +23,11 @@ Widget build(BuildContext context) {
       onMapCreated: (controller) => _controller = controller,
       onStyleLoaded: (style) async {
         final geojsonLine = await rootBundle.loadString('assets/geojson/path.json');
-        await style.addSource(
+        await style.sources.add(
           GeoJsonSource.data(id: 'Path', data: geojsonLine),
         );
-        await style.addLayer(
-          const LineStyleLayer(
+        await style.layers.add(
+          LineStyleLayer(
             id: 'geojson-line',
             sourceId: 'Path',
             paint: {'line-color': '#F00', 'line-width': 3},

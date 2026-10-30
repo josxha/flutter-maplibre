@@ -37,7 +37,7 @@ class MapOptions {
   /// ([MapStyle.demo]).
   ///
   /// The map loads a new style when this changes, which removes the layers
-  /// added with [StyleController.addLayer]. [MapLibreMap.onStyleLoaded] and
+  /// added with [StyleLayers.add]. [MapLibreMap.onStyleLoaded] and
   /// [MapEventStyleLoaded] report each loaded style.
   final MapStyle style;
 

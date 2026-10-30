@@ -1,5 +1,7 @@
 name: codegen
-description: Generates the ffigen and jnigen bindings of maplibre_native.
+description: >-
+  Generates the ffigen and jnigen bindings of maplibre_native and the typed
+  style layers of maplibre_platform_interface.
 publish_to: none
 
 # Not part of the workspace, which keeps the build hook of the MapLibre Native

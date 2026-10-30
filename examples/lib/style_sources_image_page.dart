@@ -30,7 +30,7 @@ class _StyleSourcesImagePageState extends State<StyleSourcesImagePage> {
 
   Future<void> _onStyleLoaded(StyleController style) async {
     // An image that the map loads from a URL.
-    await style.addSource(
+    await style.sources.add(
       const ImageSource.url(
         id: 'radar',
         url: 'https://maplibre.org/maplibre-gl-js/docs/assets/radar.gif',
@@ -42,8 +42,8 @@ class _StyleSourcesImagePageState extends State<StyleSourcesImagePage> {
         ),
       ),
     );
-    await style.addLayer(
-      const RasterStyleLayer(
+    await style.layers.add(
+      RasterStyleLayer(
         id: 'radar',
         sourceId: 'radar',
         paint: {'raster-opacity': 0.8},
@@ -53,7 +53,7 @@ class _StyleSourcesImagePageState extends State<StyleSourcesImagePage> {
     // An image from a Flutter ImageProvider, here an asset. FileImage,
     // NetworkImage and MemoryImage work the same way, and ImageSource.bytes
     // takes the encoded image directly.
-    await style.addSource(
+    await style.sources.add(
       const ImageSource.provider(
         id: 'asset',
         image: AssetImage('assets/images/marker.png'),
@@ -65,8 +65,6 @@ class _StyleSourcesImagePageState extends State<StyleSourcesImagePage> {
         ),
       ),
     );
-    await style.addLayer(
-      const RasterStyleLayer(id: 'asset', sourceId: 'asset'),
-    );
+    await style.layers.add(RasterStyleLayer(id: 'asset', sourceId: 'asset'));
   }
 }

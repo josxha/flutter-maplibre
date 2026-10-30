@@ -2,6 +2,37 @@
 
 ### Breaking Changes
 
+- Style layers are typed and generated from the style spec: every paint and
+  layout property is a constructor parameter and a getter and setter of type
+  `Expression<T>`, without the prefix of the layer type (`line-width` is
+  `LineStyleLayer.width`, `icon-` and `text-` stay). Raw `paint` and `layout`
+  maps keep working. Style layers can no longer be `const`. On
+  `BackgroundStyleLayer`, `color` and `opacity` are expressions now:
+  `color: const .literal(Colors.black)`.
+- `StyleLayer.filter` is an `Expression<bool>?`. Use `Expression.raw([...])` for
+  a filter in JSON.
+- `StyleController.layers` and `StyleController.sources` replace `addLayer`,
+  `removeLayer`, `addSource`, `removeSource`, `updateGeoJsonSource`,
+  `getLineLayer` and `getLayerIds`:
+  - `style.addLayer(layer)` is `style.layers.add(layer)`, which only takes
+    `belowLayerId`. `aboveLayerId` and `atIndex` are gone; use
+    `StyleLayers.move`, or the order of `style.layers` to find the layer above.
+  - `style.removeLayer(id)` is `style.layers.remove(id)`.
+  - `style.addSource(source)` is `style.sources.add(source)`, and
+    `style.removeSource(id)` is `style.sources.remove(id)`.
+  - `style.updateGeoJsonSource(id: id, data: data)` is
+    `style.sources.updateGeoJsonData(id, data)`, or `updateGeoJsonUrl` for a
+    URL.
+  - `style.getLineLayer(id)` is `style.layers[id] as LineStyleLayer?`, and
+    `LineStyleLayerController.lineGradient` is `LineStyleLayer.gradient`. The
+    `LineStyleLayerController` class is gone.
+  - `style.getLayerIds()` is `style.layers.map((layer) => layer.id)`.
+- `style.layers.add` and `style.sources.add` throw an `ArgumentError` for an id
+  that is taken, and `style.layers.add` also for a missing source or
+  `belowLayerId`, on every platform.
+- `MarkerLayer` uses the generated `IconAnchor`, whose spec string is `value`
+  instead of `name`.
+
 - Web: requires [maplibre-gl-js v6](https://github.com/maplibre/maplibre-gl-js/releases/tag/v6.0.0),
   which now loads on its own. Remove the maplibre-gl-js and PMTiles `<script>`
   and `<link>` tags from your `web/index.html`. With v6, WebGL2 is required,
@@ -126,10 +157,24 @@
   `updateRegionMetadata`, `invalidateRegion` and `resumeDownload`.
 - Maps cache resources in `maplibre_native.db` in the app support directory,
   which also holds the offline regions.
-- `StyleController.getLineLayer` returns a `LineStyleLayerController`, whose
-  getters and setters read and update the layer's paint, starting with
-  `lineGradient`. Setters don't wait for the map, so they can animate a
-  layer every frame. `GeoJsonSource.lineMetrics` enables `line-progress`.
+- Typed style expressions: `Expression<T>` covers every expression of the style
+  spec, with static members such as `Expression.get` and `Expression.interpolate`,
+  operators on number and string expressions, and `Expression.raw` for JSON.
+- New `ColorReliefStyleLayer`.
+- `StyleController.layers` reads the layers of the style synchronously, from
+  bottom to top, as typed objects: `style.layers['route']`. `StyleLayers.move`
+  and `StyleLayer.moveBelow` move a layer.
+- A style layer on the map is its own controller: its setters also update the
+  map, fire-and-forget and in order, so they can animate a layer every frame.
+  Also for `minZoom`, `maxZoom`, `filter` and `visible`. `getProperty` and
+  `setProperty` reach what the typed properties don't cover.
+- `StyleController.sources` reads the sources of the style synchronously and
+  updates them: `updateGeoJsonData`, `updateGeoJsonUrl`,
+  `updateImageCoordinates`, `updateTiles` and `updateTileJsonUrl`.
+- `StyleController.batch` shows several changes in one frame on native maps.
+- `GeoJsonSource.lineMetrics` enables `line-progress`.
+- `MapLibreMap.layers` sets only the properties of a layer that changed, instead
+  of adding the layer again on top of all others.
 - `ImageSource.bytes` and `ImageSource.provider` show images from encoded
   bytes or any Flutter `ImageProvider`, such as an `AssetImage` or a
   `FileImage`, not only from a URL.

@@ -23,14 +23,14 @@ Widget build(BuildContext context) {
       onMapCreated: (controller) => _controller = controller,
       onStyleLoaded: (style) async {
         // add the tile source
-        await style.addSource(
+        await style.sources.add(
           const GeoJsonSource.url(
             id: _sourceId,
             url:
             'https://maplibre.org/maplibre-gl-js/docs/assets/indoor-3d-map.geojson',
           ),
         );
-        const layer = FillExtrusionStyleLayer(
+        final layer = FillExtrusionStyleLayer(
           id: 'room-extrusion',
           sourceId: _sourceId,
           paint: {
@@ -43,7 +43,7 @@ Widget build(BuildContext context) {
           },
         );
         // add the layer
-        await style.addLayer(layer);
+        await style.layers.add(layer);
       }
   );
 }

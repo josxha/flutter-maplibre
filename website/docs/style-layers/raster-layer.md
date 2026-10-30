@@ -30,12 +30,12 @@ Widget build(BuildContext context) {
           attribution:
           '<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         );
-        await style.addSource(openStreetMap);
-        const layer = RasterStyleLayer(
+        await style.sources.add(openStreetMap);
+        final layer = RasterStyleLayer(
           id: _layerId,
           sourceId: _sourceId,
         );
-        await style.addLayer(layer);
+        await style.layers.add(layer);
       }
   );
 }

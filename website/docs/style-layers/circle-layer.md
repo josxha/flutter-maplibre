@@ -28,11 +28,11 @@ Widget build(BuildContext context) {
           url:
           'https://maplibre.org/maplibre-gl-js/docs/assets/earthquakes.geojson',
         );
-        await style.addSource(earthquakes);
+        await style.sources.add(earthquakes);
 
         // add the source with a layer on the map
-        const layer = CircleStyleLayer(id: _layerId, sourceId: _sourceId);
-        await style.addLayer(layer);
+        final layer = CircleStyleLayer(id: _layerId, sourceId: _sourceId);
+        await style.layers.add(layer);
       }
   );
 }

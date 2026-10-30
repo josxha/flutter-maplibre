@@ -41,27 +41,27 @@ class _StyleSourcesVectorPageState extends State<StyleSourcesVectorPage> {
               id: sourceId,
               url: 'https://demotiles.maplibre.org/tiles/tiles.json',
             );
-            await style.addSource(vectorSource);
+            await style.sources.add(vectorSource);
 
-            const fillLayer = FillStyleLayer(
+            final fillLayer = FillStyleLayer(
               id: 'fill_layer',
               sourceId: sourceId,
               sourceLayerId: 'countries',
               paint: {'fill-color': '#429ef5', 'fill-opacity': 0.6},
             );
 
-            await style.addLayer(fillLayer);
+            await style.layers.add(fillLayer);
 
-            const lineLayer = LineStyleLayer(
+            final lineLayer = LineStyleLayer(
               id: 'line_layer',
               sourceId: sourceId,
               sourceLayerId: 'countries',
               paint: {'line-color': '#00F', 'line-width': 3},
             );
 
-            await style.addLayer(lineLayer);
+            await style.layers.add(lineLayer);
 
-            const circleLayer = CircleStyleLayer(
+            final circleLayer = CircleStyleLayer(
               id: 'circle_layer',
               sourceId: sourceId,
               sourceLayerId: 'centroids',
@@ -73,9 +73,9 @@ class _StyleSourcesVectorPageState extends State<StyleSourcesVectorPage> {
                 'circle-stroke-width': 2,
               },
             );
-            await style.addLayer(circleLayer);
+            await style.layers.add(circleLayer);
 
-            const symbolLayer = SymbolStyleLayer(
+            final symbolLayer = SymbolStyleLayer(
               id: 'images_layer',
               sourceId: sourceId,
               sourceLayerId: 'centroids',
@@ -86,7 +86,7 @@ class _StyleSourcesVectorPageState extends State<StyleSourcesVectorPage> {
                 'icon-anchor': 'bottom',
               },
             );
-            await style.addLayer(symbolLayer);
+            await style.layers.add(symbolLayer);
           } on Exception catch (error, stacktrace) {
             debugPrint(error.toString());
             debugPrintStack(stackTrace: stacktrace);

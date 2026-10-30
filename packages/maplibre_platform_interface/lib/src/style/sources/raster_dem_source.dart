@@ -19,6 +19,49 @@ sealed class RasterDemSource extends Source {
     this.volatile = false,
   });
 
+  factory RasterDemSource._fromJson(String id, Map<String, Object?> json) {
+    final bounds = _boundsOf(json);
+    final minZoom = _doubleOf(json['minzoom']) ?? 0;
+    final maxZoom = _doubleOf(json['maxzoom']) ?? 22;
+    final tileSize = (json['tileSize'] as num?)?.toInt() ?? 512;
+    final attribution = json['attribution'] as String?;
+    final volatile = json['volatile'] as bool? ?? false;
+    final encoding = switch (json['encoding']) {
+      'terrarium' => const RasterDemTerrariumEncoding(),
+      'custom' => RasterDemCustomEncoding(
+        redFactor: _doubleOf(json['redFactor']) ?? 1,
+        blueFactor: _doubleOf(json['blueFactor']) ?? 1,
+        greenFactor: _doubleOf(json['greenFactor']) ?? 1,
+        baseShift: _doubleOf(json['baseShift']) ?? 0,
+      ),
+      _ => const RasterDemMapboxEncoding(),
+    };
+    return switch (json['tiles']) {
+      final List<Object?> tiles => RasterDemSourceTiles(
+        id: id,
+        tiles: tiles.cast<String>(),
+        bounds: bounds,
+        minZoom: minZoom,
+        maxZoom: maxZoom,
+        tileSize: tileSize,
+        attribution: attribution,
+        encoding: encoding,
+        volatile: volatile,
+      ),
+      _ => RasterDemSourceUrl(
+        id: id,
+        url: json['url'] as String? ?? '',
+        bounds: bounds,
+        minZoom: minZoom,
+        maxZoom: maxZoom,
+        tileSize: tileSize,
+        attribution: attribution,
+        encoding: encoding,
+        volatile: volatile,
+      ),
+    };
+  }
+
   /// A raster DEM source whose tiles are described by the TileJSON resource at
   /// [url]. Supported protocols are `http:` and `https:`, and `pmtiles://`
   /// in front of the URL of a PMTiles archive.
@@ -84,6 +127,29 @@ sealed class RasterDemSource extends Source {
   ///
   /// Defaults to false. Not available on web.
   final bool volatile;
+
+  @override
+  Map<String, Object?> toJson() => {
+    'type': 'raster-dem',
+    ...tilesetOf(this),
+    'bounds': bounds,
+    'minzoom': minZoom,
+    'maxzoom': maxZoom,
+    'tileSize': tileSize,
+    'attribution': ?attribution,
+    'volatile': volatile,
+    ...switch (encoding) {
+      RasterDemTerrariumEncoding() => {'encoding': 'terrarium'},
+      RasterDemMapboxEncoding() => {'encoding': 'mapbox'},
+      final RasterDemCustomEncoding encoding => {
+        'encoding': 'custom',
+        'redFactor': encoding.redFactor,
+        'greenFactor': encoding.greenFactor,
+        'blueFactor': encoding.blueFactor,
+        'baseShift': encoding.baseShift,
+      },
+    },
+  };
 }
 
 /// A [RasterDemSource] whose tiles are described by a TileJSON resource.
