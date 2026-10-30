@@ -20,11 +20,18 @@ jobs:
     permissions: { id-token: write }
     uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
     with: { working-directory: packages/maplibre_web }
+  maplibre-native:
+    name: "Publish `maplibre_native`"
+    needs: maplibre-platform-interface
+    permissions: { id-token: write }
+    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
+    with: { working-directory: packages/maplibre_native }
   maplibre:
     name: "Publish `maplibre`"
     needs:
       - maplibre-platform-interface
       - maplibre-web
+      - maplibre-native
     permissions: { id-token: write }
     uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
     with: { working-directory: packages/maplibre }

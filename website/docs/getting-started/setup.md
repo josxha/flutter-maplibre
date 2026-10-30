@@ -43,26 +43,14 @@ icon: lucide/sparkles
 The version constraint `^0.4.0-pre.1` also accepts the later 0.4 pre-releases
 and 0.4.0 itself once it is out.
 
-The packages need Dart 3.13 and Flutter 3.47 or newer. Most platforms need a
-few setup steps, see [Platform setup](platforms.md).
+The packages need Dart 3.13 and Flutter 3.47 or newer. Some platforms need
+setup steps, see [Platform setup](platforms.md).
 
-## Packages
+## Plugins
 
-You only depend on `maplibre`. It endorses one implementation per platform,
-so Flutter picks the right one without any further dependency:
-
-| Package                       | Used for                                                                                                    |
-|-------------------------------|-------------------------------------------------------------------------------------------------------------|
-| `maplibre`                    | The widgets and API your app uses                                                                           |
-| `maplibre_web`                | Web, through [MapLibre GL JS](https://github.com/maplibre/maplibre-gl-js)                                   |
-| `maplibre_native`             | Android, iOS, macOS, Windows and Linux, through the [MapLibre Native C API](https://github.com/maplibre/maplibre-native-ffi) |
-| `maplibre_platform_interface` | The interface both implementations share, including the gesture recognizer                                 |
-| `maplibre_geolocator`         | Optional: shows the positions of [geolocator](https://pub.dev/packages/geolocator) as [user location](../user-location.md) |
-
-On native platforms every map is shown as a Flutter `Texture`, never as a
-platform view, so transforms, clipping and widgets on top of the map work like
-with any other widget. Map gestures are recognized in Flutter on every
-platform, so widgets over the map keep their own taps and drags.
+| Package               | Used for                                                                                                    |
+|-----------------------|-------------------------------------------------------------------------------------------------------------|
+| `maplibre_geolocator` | Shows the positions of [geolocator](https://pub.dev/packages/geolocator) as [user location](../user-location.md) |
 
 ## Platform support
 
@@ -80,11 +68,6 @@ platform, so widgets over the map keep their own taps and drags.
     MapLibre Native has no globe projection, so
     `setProjection(MapProjection.globe)` keeps Mercator there. `VideoSource`
     is only supported on web.
-
-The MapLibre Native library reaches your app as a Dart
-[native asset](https://dart.dev/tools/hooks): the build hook of
-[maplibre_native_ffi](https://pub.dev/packages/maplibre_native_ffi) downloads
-the prebuilt library for each target, and Flutter bundles it with your app.
 
 ## Development version
 

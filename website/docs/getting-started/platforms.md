@@ -5,21 +5,17 @@ icon: lucide/monitor-smartphone
 
 # Platform setup
 
-`maplibre` picks its implementation per platform on its own. This page lists
-the steps each platform needs, marked **Required** or **Optional**. See
-[Installation](setup.md) for the minimum versions.
+This page lists the setup steps that platforms need, marked **Required** or
+**Optional**. See [Installation](setup.md) for the minimum versions.
 
 ## Web
 
-**Required:** nothing. The first map loads the latest
-[maplibre-gl-js](https://github.com/maplibre/maplibre-gl-js) v6 and
-[PMTiles](https://github.com/protomaps/PMTiles) v4 from the
-[jsDelivr](https://www.jsdelivr.com/) CDN. A new major version, which may
-break your app, is never loaded unless you ask for it.
-
 ??? note "Optional: choose the version or host maplibre-gl-js yourself"
 
-    Set `window.flutterMapLibre` in the `<head>` tag of your `web/index.html`
+    The first map loads the latest
+    [maplibre-gl-js](https://github.com/maplibre/maplibre-gl-js) v6 and
+    [PMTiles](https://github.com/protomaps/PMTiles) v4 from the
+    [jsDelivr](https://www.jsdelivr.com/) CDN. To change that, set `window.flutterMapLibre` in the `<head>` tag of your `web/index.html`
     file. Every option is optional:
 
     ```html title="web/index.html" hl_lines="5-12"
@@ -48,8 +44,6 @@ break your app, is never loaded unless you ask for it.
 
 ## Android
 
-**Required:** nothing for maps that load over `https://`.
-
 **Required for `http://` URLs:** Android blocks plain `http://` by default.
 Permit cleartext for the hosts that need it in a
 [network security config](https://developer.android.com/privacy-and-security/security-config).
@@ -71,17 +65,17 @@ Permit cleartext for the hosts that need it in a
 
 ## iOS
 
-**Required:**
+**Required:** raise `IPHONEOS_DEPLOYMENT_TARGET` of the Runner target in
+`ios/Runner.xcodeproj` to 15.0 if your app targets an older version.
 
-1. Raise `IPHONEOS_DEPLOYMENT_TARGET` of the Runner target in
-   `ios/Runner.xcodeproj` to 15.0 if your app targets an older version.
-2. The C library is published for devices and arm64 simulators only, so
-   exclude the x86_64 simulator slice in `ios/Flutter/Debug.xcconfig` and
-   `ios/Flutter/Release.xcconfig`:
+**Optional:** the C library is published for devices and arm64 simulators
+only, so simulators run only on Apple Silicon Macs. If a simulator build
+fails to link the x86_64 slice, exclude it in `ios/Flutter/Debug.xcconfig`
+and `ios/Flutter/Release.xcconfig`:
 
-    ```text title="ios/Flutter/Debug.xcconfig"
-    EXCLUDED_ARCHS[sdk=iphonesimulator*] = x86_64
-    ```
+```text title="ios/Flutter/Debug.xcconfig"
+EXCLUDED_ARCHS[sdk=iphonesimulator*] = x86_64
+```
 
 The plugin supports only Swift Package Manager, Flutter's default.
 
@@ -102,11 +96,6 @@ The plugin supports only Swift Package Manager, Flutter's default.
 
 The plugin supports only Swift Package Manager, Flutter's default.
 
-## Windows
-
-**Required:** nothing. The device needs a GPU driver with Vulkan 1.1 support
-(`vulkan-1.dll`), which recent drivers from AMD, Intel and NVIDIA include.
-
 ## Linux
 
 **Required:** building needs the GTK and libepoxy development packages:
@@ -114,5 +103,3 @@ The plugin supports only Swift Package Manager, Flutter's default.
 ```bash
 sudo apt install libgtk-3-dev libepoxy-dev
 ```
-
-The device needs a GPU driver with Vulkan 1.1 support.
