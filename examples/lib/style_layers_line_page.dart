@@ -53,8 +53,10 @@ class _StyleLayersLinePageState extends State<StyleLayersLinePage> {
           Expanded(
             child: MapLibreMap(
               options: const MapOptions(
-                initZoom: 7,
-                initCenter: Geographic(lon: 9.17, lat: 47.68),
+                initCamera: InitialCamera.position(
+                  zoom: 7,
+                  center: Geographic(lon: 9.17, lat: 47.68),
+                ),
               ),
               onStyleLoaded: _onStyleLoaded,
               onMapCreated: (controller) => _controller = controller,

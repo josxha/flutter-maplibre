@@ -104,12 +104,7 @@ class _TileServer {
   Future<void> close() => _server.close(force: true);
 }
 
-const _world = LngLatBounds(
-  longitudeWest: -180,
-  longitudeEast: 180,
-  latitudeSouth: -85,
-  latitudeNorth: 85,
-);
+const _world = GeoBox(west: -180, east: 180, south: -85, north: 85);
 
 /// Downloads [server]'s style over the world up to zoom 1, or [definition],
 /// and returns every progress update.
@@ -299,7 +294,10 @@ void runTests() {
       await tester.runAsync(server.close);
       final map = await pumpMap(
         tester,
-        options: MapOptions(initStyle: styleUrl, initZoom: 1),
+        options: MapOptions(
+          style: MapStyle.url(styleUrl),
+          initCamera: const InitialCamera.position(zoom: 1),
+        ),
       );
       expect(map.style.getLayerIds(), ['raster', 'label']);
       await map.waitForLatestFrame();

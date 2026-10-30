@@ -31,9 +31,8 @@ void runTests() {
       final map = await pumpMap(
         tester,
         options: const MapOptions(
-          initStyle: 'assets/styles/test_style.json',
-          initCenter: _point,
-          initZoom: 4,
+          style: MapStyle.asset('assets/styles/test_style.json'),
+          initCamera: InitialCamera.position(zoom: 4),
         ),
       );
       expect(map.style.getLayerIds(), ['background', 'points']);
@@ -46,7 +45,7 @@ void runTests() {
     testWidgets('loads a style from a URL (network)', (tester) async {
       final map = await pumpMap(
         tester,
-        options: const MapOptions(initCenter: _point),
+        options: const MapOptions(initCamera: InitialCamera.position()),
       );
       expect(map.style.getLayerIds(), contains('countries-fill'));
     });
@@ -334,24 +333,26 @@ void runTests() {
       final map = await pumpMap(
         tester,
         options: MapOptions(
-          initCenter: const Geographic(lon: 0, lat: 0),
-          initStyle: jsonEncode({
-            'version': 8,
-            'sources': {
-              'style-points': {
-                'type': 'geojson',
-                'data': {'type': 'FeatureCollection', 'features': <Object>[]},
-                'attribution': '© Style Points',
+          style: MapStyle.json(
+            jsonEncode({
+              'version': 8,
+              'sources': {
+                'style-points': {
+                  'type': 'geojson',
+                  'data': {'type': 'FeatureCollection', 'features': <Object>[]},
+                  'attribution': '© Style Points',
+                },
               },
-            },
-            'layers': [
-              {
-                'id': 'style-circles',
-                'type': 'circle',
-                'source': 'style-points',
-              },
-            ],
-          }),
+              'layers': [
+                {
+                  'id': 'style-circles',
+                  'type': 'circle',
+                  'source': 'style-points',
+                },
+              ],
+            }),
+          ),
+          initCamera: const InitialCamera.position(),
         ),
       );
       await map.pumpUntil(

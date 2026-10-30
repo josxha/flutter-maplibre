@@ -72,11 +72,11 @@ class _ControllerPageState extends State<ControllerPage> {
                     debugPrint('fitBounds start');
                     try {
                       await _controller.fitBounds(
-                        bounds: const LngLatBounds(
-                          longitudeWest: 5.894357,
-                          longitudeEast: 10.560848,
-                          latitudeSouth: 45.806154,
-                          latitudeNorth: 47.902069,
+                        bounds: const GeoBox(
+                          west: 5.894357,
+                          east: 10.560848,
+                          south: 45.806154,
+                          north: 47.902069,
                         ),
                         padding: const EdgeInsets.all(50),
                       );
@@ -206,8 +206,10 @@ pitch: ${camera.pitch}'''),
           Expanded(
             child: MapLibreMap(
               options: const MapOptions(
-                initCenter: Geographic(lon: 9.17, lat: 47.68),
-                initZoom: 3,
+                initCamera: InitialCamera.position(
+                  center: Geographic(lon: 9.17, lat: 47.68),
+                  zoom: 3,
+                ),
               ),
               onMapCreated: (controller) => _controller = controller,
             ),

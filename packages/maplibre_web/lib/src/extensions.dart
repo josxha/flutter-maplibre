@@ -10,12 +10,12 @@ extension PositionExt on Geographic {
   interop.LngLat toLngLat() => interop.LngLat.fromGeographic(this);
 }
 
-/// Extension methods for the [Geographic] class. Not exported publicly.
-extension LngLatBoundsExt on LngLatBounds {
-  /// Convert a [Geographic] to an internal [interop.LngLat].
+/// Extension methods for the [GeoBox] class. Not exported publicly.
+extension GeoBoxExt on GeoBox {
+  /// Convert a [GeoBox] to an internal [interop.LngLatBounds].
   interop.LngLatBounds toJsLngLatBounds() => interop.LngLatBounds(
-    interop.LngLat(lng: longitudeWest, lat: latitudeSouth),
-    interop.LngLat(lng: longitudeEast, lat: latitudeNorth),
+    interop.LngLat(lng: west, lat: south),
+    interop.LngLat(lng: east, lat: north),
   );
 }
 

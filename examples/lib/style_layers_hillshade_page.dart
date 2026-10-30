@@ -22,8 +22,10 @@ class _StyleLayersHillshadePageState extends State<StyleLayersHillshadePage> {
       appBar: AppBar(title: const Text('Hillshade Style Layer')),
       body: MapLibreMap(
         options: const MapOptions(
-          initCenter: Geographic(lon: 11.39085, lat: 47.27574),
-          initZoom: 10,
+          initCamera: InitialCamera.position(
+            center: Geographic(lon: 11.39085, lat: 47.27574),
+            zoom: 10,
+          ),
         ),
         onStyleLoaded: _onStyleLoaded,
       ),

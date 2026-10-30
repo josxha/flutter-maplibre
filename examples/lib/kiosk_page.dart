@@ -37,8 +37,8 @@ class _KioskPageState extends State<KioskPage> {
     return Scaffold(
       body: MapLibreMap(
         options: const MapOptions(
-          initStyle: _styleUrl,
-          initCenter: Geographic(lon: 0, lat: 0),
+          style: MapStyle.url(_styleUrl),
+          initCamera: InitialCamera.position(),
         ),
         onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: (_) {

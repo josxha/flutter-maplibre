@@ -25,9 +25,11 @@ class _FeaturesQueryPageState extends State<FeaturesQueryPage> {
       appBar: AppBar(title: const Text('Query Features')),
       body: MapLibreMap(
         options: MapOptions(
-          initZoom: 7,
-          initCenter: const Geographic(lon: 0.1, lat: 0.1),
-          initStyle: MapStyles.openMapTilesLiberty.uri,
+          style: MapStyles.openMapTilesLiberty.style,
+          initCamera: const InitialCamera.position(
+            zoom: 7,
+            center: Geographic(lon: 0.1, lat: 0.1),
+          ),
         ),
         onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: _onStyleLoaded,

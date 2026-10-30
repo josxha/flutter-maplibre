@@ -1,7 +1,22 @@
-// We export the geobase package here so that users don't have to add
-// the dependency themselves.
-// TODO only export the parts of geobase that we use, to avoid polluting the namespace.
-export 'package:geobase/geobase.dart';
+// The geobase types of the public API, so that apps don't have to add the
+// dependency themselves. Apps that use other geobase types import geobase.
+export 'package:geobase/geobase.dart'
+    show
+        Feature,
+        FeatureCollection,
+        GeoBox,
+        Geographic,
+        Geometry,
+        GeometryCollection,
+        LineString,
+        MultiLineString,
+        MultiPoint,
+        MultiPolygon,
+        Point,
+        Polygon,
+        Position,
+        PositionSeries,
+        earthCircumferenceWgs84;
 export 'package:maplibre_platform_interface/maplibre_platform_interface.dart'
     show
         BackgroundStyleLayer,
@@ -15,10 +30,12 @@ export 'package:maplibre_platform_interface/maplibre_platform_interface.dart'
         HeatmapStyleLayer,
         HillshadeStyleLayer,
         ImageSource,
+        InitialCamera,
+        InitialCameraBounds,
+        InitialCameraPosition,
         Layer,
         LineStyleLayer,
         LineStyleLayerController,
-        LngLatBounds,
         LngLatQuad,
         MapCamera,
         MapController,
@@ -42,6 +59,11 @@ export 'package:maplibre_platform_interface/maplibre_platform_interface.dart'
         MapLibreMapState,
         MapOptions,
         MapProjection,
+        MapStyle,
+        MapStyleAsset,
+        MapStyleFile,
+        MapStyleJson,
+        MapStyleUrl,
         OfflineDownloadException,
         OfflineGeometryRegionDefinition,
         OfflineManager,
@@ -71,7 +93,6 @@ export 'package:maplibre_platform_interface/maplibre_platform_interface.dart'
         VectorSource,
         VideoSource,
         degree2Radian,
-        earthCircumferenceWgs84,
         htmlColorNames;
 
 export 'src/layer/circle_layer.dart' show CircleLayer;

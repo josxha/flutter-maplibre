@@ -64,7 +64,7 @@ abstract interface class MapController {
 
   /// Animate the map camera to a new location.
   Future<void> fitBounds({
-    required LngLatBounds bounds,
+    required GeoBox bounds,
     double? bearing,
     double? pitch,
     Duration nativeDuration = const Duration(seconds: 2),
@@ -95,7 +95,7 @@ abstract interface class MapController {
   double getMetersPerPixelAtLatitude(double latitude);
 
   /// The smallest bounding box that includes the visible region.
-  LngLatBounds getVisibleRegion();
+  GeoBox getVisibleRegion();
 
   /// Returns an array of rendered map features that intersect with a given
   /// screen location measured in logical pixels.
@@ -136,17 +136,4 @@ abstract interface class MapController {
     Rect rect, {
     List<String>? layerIds,
   });
-
-  /// Asynchronously change the style of the map. [style] can be a JSON string
-  /// representing a valid MapLibre style document, or a URL pointing to such a
-  /// document.
-  ///
-  /// To know when the style has been loaded, you can listen to the
-  /// [MapLibreMap.onStyleLoaded] callback or wait for a [MapEventStyleLoaded]
-  /// event.
-  ///
-  /// All layers added with [StyleController.addLayer] will be removed.
-  /// You can apply them again after the style has been loaded.
-  // TODO(mhernz): what kind of URLs?
-  void setStyle(String style);
 }

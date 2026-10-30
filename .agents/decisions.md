@@ -213,6 +213,20 @@ Each entry: the decision, then why.
 
 ## Public API
 
+- **`MapOptions.style` is a sealed `MapStyle` and declarative; there is no
+  `setStyle`.** Backends switch on the type instead of guessing from the
+  string, and a changed `style` loads the new style.
+- **`MapOptions.initCamera` is a sealed `InitialCamera` (position or bounds),
+  null by default.** Null keeps the style's camera; a set camera replaces it
+  as a whole, as both MapLibre Native and gl-js ignore the style camera once
+  the camera changed. Bounds are fitted before the first frame (native:
+  `cameraForLatLngBounds` in `setUp`; web: `fitBounds` with `animate: false`
+  right after the map is created, and again in the first post-frame callback,
+  when the element has the size of its platform view).
+- **Bounds are geobase's `GeoBox`, and only the geobase types of the API are
+  re-exported** (`show` lists in `maplibre` and
+  `maplibre_platform_interface`). Backends import other geobase types from
+  geobase directly.
 - **Feature queries are async on every platform, and there is no
   `queryLayers`.** The C API only queries asynchronously, and its features
   carry their source and source layer but not their style layer, so
@@ -405,6 +419,11 @@ Each entry: the decision, then why.
 
 ## Known gaps
 
+- MapLibre Native moves to the style's camera on load only while no camera
+  change happened, and `mln_map_set_bounds` counts as one (it always passes
+  bounds, even `unbounded`). The C API has no getter for the style's camera.
+  So a map without `MapOptions.initCamera` sets its camera constraints after
+  the first style loaded, and frames before that are unconstrained.
 - MapLibre Native drops the attribution of GeoJSON sources, so
   `StyleControllerNative` takes it from the style JSON and from `addSource`.
   For a style loaded from an http(s), `mapbox://` or `asset://` URL the JSON

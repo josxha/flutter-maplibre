@@ -16,11 +16,11 @@ class _ParametersPageState extends State<ParametersPage> {
   double _maxZoom = 22;
   double _minPitch = 0;
   double _maxPitch = 60;
-  LngLatBounds _lngLatBounds = const LngLatBounds(
-    longitudeWest: -180,
-    longitudeEast: 179,
-    latitudeSouth: -90,
-    latitudeNorth: 90,
+  GeoBox _lngLatBounds = const GeoBox(
+    west: -180,
+    east: 179,
+    south: -90,
+    north: 90,
   );
 
   @override
@@ -55,27 +55,31 @@ class _ParametersPageState extends State<ParametersPage> {
                 ),
                 _SliderWidget(
                   label: 'Longitude',
-                  start: _lngLatBounds.longitudeWest,
-                  end: _lngLatBounds.longitudeEast,
+                  start: _lngLatBounds.west,
+                  end: _lngLatBounds.east,
                   min: -180,
                   max: 179,
                   onChanged: (range) => setState(() {
-                    _lngLatBounds = _lngLatBounds.copyWith(
-                      longitudeWest: range.start,
-                      longitudeEast: range.end,
+                    _lngLatBounds = GeoBox(
+                      west: range.start,
+                      south: _lngLatBounds.south,
+                      east: range.end,
+                      north: _lngLatBounds.north,
                     );
                   }),
                 ),
                 _SliderWidget(
                   label: 'Latitude',
-                  start: _lngLatBounds.latitudeSouth,
-                  end: _lngLatBounds.latitudeNorth,
+                  start: _lngLatBounds.south,
+                  end: _lngLatBounds.north,
                   min: -90,
                   max: 90,
                   onChanged: (range) => setState(() {
-                    _lngLatBounds = _lngLatBounds.copyWith(
-                      latitudeSouth: range.start,
-                      latitudeNorth: range.end,
+                    _lngLatBounds = GeoBox(
+                      west: _lngLatBounds.west,
+                      south: range.start,
+                      east: _lngLatBounds.east,
+                      north: range.end,
                     );
                   }),
                 ),
@@ -85,13 +89,12 @@ class _ParametersPageState extends State<ParametersPage> {
           Expanded(
             child: MapLibreMap(
               options: MapOptions(
-                initCenter: const Geographic(lon: 0, lat: 0),
-                initZoom: 3,
                 minZoom: _minZoom,
                 maxZoom: _maxZoom,
                 minPitch: _minPitch,
                 maxPitch: _maxPitch,
                 maxBounds: _lngLatBounds,
+                initCamera: const InitialCamera.position(zoom: 3),
               ),
             ),
           ),

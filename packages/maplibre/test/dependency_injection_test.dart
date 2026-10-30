@@ -14,7 +14,7 @@ void main() {
       bearing: 0,
       pitch: 0,
     );
-    const options = MapOptions(initZoom: 3);
+    const options = MapOptions(initCamera: InitialCamera.position(zoom: 3));
 
     Future<BuildContext> pumpChild(
       WidgetTester tester,

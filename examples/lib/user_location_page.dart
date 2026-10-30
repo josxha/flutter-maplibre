@@ -65,9 +65,8 @@ class _UserLocationPageState extends State<UserLocationPage> {
       appBar: AppBar(title: const Text('User Location')),
       body: MapLibreMap(
         options: MapOptions(
-          initZoom: 1,
-          initCenter: const Geographic(lon: 0, lat: 0),
-          initStyle: MapStyles.protomapsLight.uri,
+          style: MapStyles.protomapsLight.style,
+          initCamera: const InitialCamera.position(zoom: 1),
         ),
         children: [
           if (locations != null)

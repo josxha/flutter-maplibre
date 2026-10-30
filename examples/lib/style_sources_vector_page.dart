@@ -20,8 +20,10 @@ class _StyleSourcesVectorPageState extends State<StyleSourcesVectorPage> {
       appBar: AppBar(title: const Text('Vector Source')),
       body: MapLibreMap(
         options: const MapOptions(
-          initZoom: 2,
-          initCenter: Geographic(lon: 9.17, lat: 47.68),
+          initCamera: InitialCamera.position(
+            zoom: 2,
+            center: Geographic(lon: 9.17, lat: 47.68),
+          ),
         ),
         onStyleLoaded: (style) async {
           try {

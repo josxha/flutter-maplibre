@@ -23,11 +23,13 @@ class _StyleLayersFillExtrusionPageState
       appBar: AppBar(title: const Text('Fill Extrusion Style Layer')),
       body: MapLibreMap(
         options: MapOptions(
-          initCenter: const Geographic(lon: -87.61694, lat: 41.86625),
-          initZoom: 15.99,
-          initPitch: 40,
-          initBearing: 20,
-          initStyle: MapStyles.protomapsLight.uri,
+          style: MapStyles.protomapsLight.style,
+          initCamera: const InitialCamera.position(
+            center: Geographic(lon: -87.61694, lat: 41.86625),
+            zoom: 15.99,
+            pitch: 40,
+            bearing: 20,
+          ),
         ),
         onStyleLoaded: _onStyleLoaded,
       ),

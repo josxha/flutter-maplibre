@@ -26,8 +26,10 @@ class _StyleLayersRasterPageState extends State<StyleLayersRasterPage> {
       appBar: AppBar(title: const Text('Raster Style Layer')),
       body: MapLibreMap(
         options: const MapOptions(
-          initCenter: Geographic(lon: 9, lat: 48),
-          initZoom: 7,
+          initCamera: InitialCamera.position(
+            center: Geographic(lon: 9, lat: 48),
+            zoom: 7,
+          ),
         ),
         onStyleLoaded: _onStyleLoaded,
       ),

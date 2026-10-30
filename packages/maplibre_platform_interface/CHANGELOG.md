@@ -11,6 +11,11 @@
   `OfflineManager.getRegionStatus` is new. See the maplibre changelog.
 - The image methods of `StyleController` take sizes in logical pixels and a
   `pixelRatio`; see the maplibre changelog.
+- `MapOptions.style` (a `MapStyle`) replaces `initStyle` and
+  `MapController.setStyle`, `MapOptions.initCamera` (an `InitialCamera`)
+  replaces `initCenter`, `initZoom`, `initBearing` and `initPitch`, and
+  geobase's `GeoBox` replaces `LngLatBounds`. Only the geobase types of the
+  API are exported. See the maplibre changelog.
 
 ## 0.3.7+1
 

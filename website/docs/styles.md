@@ -15,21 +15,24 @@ options like so:
 Widget build() {
   return MapLibreMap(
       options: MapOptions(
-        center: Geographic(lon: 9.17, lat: 47.68),
-        style: 'https://demotiles.maplibre.org/style.json',
+        style: MapStyle.url('https://demotiles.maplibre.org/style.json'),
       )
   );
 }
 ```
 
-The following formats are supported:
+The map loads a new style when `style` changes. The following formats are
+supported:
 
-1. Passing the URL of the map style. This should be a custom map style served
+1. `MapStyle.url`: the URL of a map style, such as a custom map style served
    remotely using a URL that starts with `http(s)://`.
-2. Passing the style as a local file. Create a JSON file in the app directory
-   (e.g. ApplicationDocumentsDirectory). Then, set the style string to
-   the absolute path of this JSON file.
-3. Passing the raw JSON of the map style.
+2. `MapStyle.asset`: a JSON file in the Flutter assets of the app.
+3. `MapStyle.file`: the absolute path of a JSON file, for example in the
+   ApplicationDocumentsDirectory. Not supported on web.
+4. `MapStyle.json`: the raw JSON of the map style.
+
+Without `MapOptions.initCamera`, the map starts at the camera stored in the
+style (its `center`, `zoom`, `bearing` and `pitch`).
 
 ## Tile sources that require an API key
 

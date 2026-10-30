@@ -12,11 +12,8 @@ part 'map_gestures.dart';
 class MapOptions {
   /// Creates a new [MapOptions] instance. See fields for more information.
   const MapOptions({
-    this.initStyle = 'https://demotiles.maplibre.org/style.json',
-    this.initZoom = 0,
-    this.initCenter,
-    this.initPitch = 0,
-    this.initBearing = 0,
+    this.style = MapStyle.demo,
+    this.initCamera,
     this.minZoom = 0,
     this.maxZoom = 22,
     this.minPitch = 0,
@@ -36,29 +33,21 @@ class MapOptions {
       maybeOf(context) ??
       (throw StateError('Unable to find an instance of MapOptions'));
 
-  /// A JSON string representing a valid MapLibre style document, or a URL
-  /// pointing to such a document.
+  /// The style of the map. Defaults to the MapLibre demo style
+  /// ([MapStyle.demo]).
   ///
-  /// If not set, the default MapLibre style is used
-  /// (https://demotiles.maplibre.org/style.json).
+  /// The map loads a new style when this changes, which removes the layers
+  /// added with [StyleController.addLayer]. [MapLibreMap.onStyleLoaded] and
+  /// [MapEventStyleLoaded] report each loaded style.
+  final MapStyle style;
+
+  /// The camera that the map starts with, at a position
+  /// ([InitialCamera.position]) or fitted to bounds ([InitialCamera.bounds]).
   ///
-  /// If you need to change to a different map style later on,
-  /// use [MapController.setStyle].
-  final String initStyle;
-
-  /// The initial zoom level.
-  final double initZoom;
-
-  /// The initial pitch level. Minimum is 0 and maximum is 85 on web and 60 on
-  /// other platforms.
-  final double initPitch;
-
-  /// The initial bearing of the map. Defaults to 0 (north on top).
-  /// 360 is exactly one loop.
-  final double initBearing;
-
-  /// The initial center on the map.
-  final Geographic? initCenter;
+  /// If null, the map starts at the camera of its style (the style's
+  /// `center`, `zoom`, `bearing` and `pitch`). Changes after the map was
+  /// created have no effect; move the camera with [MapController] instead.
+  final InitialCamera? initCamera;
 
   /// The minimum zoom level. Allowed values are 0-24. Defaults to 0.
   final double minZoom;
@@ -78,8 +67,33 @@ class MapOptions {
 
   /// The maximum bounding box of the map camera. No constraints are in place
   /// if set to `null`.
-  final LngLatBounds? maxBounds;
+  final GeoBox? maxBounds;
 
   /// Enable and disable some or all map gestures.
   final MapGestures gestures;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is MapOptions &&
+          style == other.style &&
+          initCamera == other.initCamera &&
+          minZoom == other.minZoom &&
+          maxZoom == other.maxZoom &&
+          minPitch == other.minPitch &&
+          maxPitch == other.maxPitch &&
+          maxBounds == other.maxBounds &&
+          gestures == other.gestures;
+
+  @override
+  int get hashCode => Object.hash(
+    style,
+    initCamera,
+    minZoom,
+    maxZoom,
+    minPitch,
+    maxPitch,
+    maxBounds,
+    gestures,
+  );
 }

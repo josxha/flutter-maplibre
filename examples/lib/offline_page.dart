@@ -24,12 +24,7 @@ class _OfflinePageState extends State<OfflinePage> {
       _OfflineRegionConfig(
         name: 'World',
         definition: OfflineTilePyramidRegionDefinition(
-          bounds: const LngLatBounds(
-            longitudeWest: -180,
-            longitudeEast: 180,
-            latitudeSouth: -90,
-            latitudeNorth: 90,
-          ),
+          bounds: const GeoBox(west: -180, east: 180, south: -90, north: 90),
           styleUrl: MapStyles.protomapsLight.uri,
           minZoom: 0,
           maxZoom: 2,
@@ -39,11 +34,11 @@ class _OfflinePageState extends State<OfflinePage> {
       _OfflineRegionConfig(
         name: 'Bregenz',
         definition: OfflineTilePyramidRegionDefinition(
-          bounds: const LngLatBounds(
-            longitudeWest: 9.589786,
-            longitudeEast: 9.766498,
-            latitudeSouth: 47.446159,
-            latitudeNorth: 47.574776,
+          bounds: const GeoBox(
+            west: 9.589786,
+            east: 9.766498,
+            south: 47.446159,
+            north: 47.574776,
           ),
           styleUrl: MapStyles.protomapsLight.uri,
           minZoom: 10,
@@ -307,13 +302,15 @@ class _OfflineMapPage extends StatelessWidget {
       appBar: AppBar(title: Text('Offline Map "$title"')),
       body: MapLibreMap(
         options: MapOptions(
-          initStyle: definition.styleUrl,
-          initCenter: Geographic(
-            lon: (bounds.longitudeEast + bounds.longitudeWest) / 2,
-            lat: (bounds.latitudeNorth + bounds.latitudeSouth) / 2,
-          ),
-          initZoom: 1,
+          style: MapStyle.url(definition.styleUrl),
           maxZoom: 20,
+          initCamera: InitialCamera.position(
+            center: Geographic(
+              lon: (bounds.east + bounds.west) / 2,
+              lat: (bounds.north + bounds.south) / 2,
+            ),
+            zoom: 1,
+          ),
         ),
         layers: [
           PolylineLayer(
@@ -327,26 +324,11 @@ class _OfflineMapPage extends StatelessWidget {
                   ) =>
                     line,
                   _ => LineString.from([
-                    Geographic(
-                      lon: bounds.longitudeWest,
-                      lat: bounds.latitudeSouth,
-                    ),
-                    Geographic(
-                      lon: bounds.longitudeWest,
-                      lat: bounds.latitudeNorth,
-                    ),
-                    Geographic(
-                      lon: bounds.longitudeEast,
-                      lat: bounds.latitudeNorth,
-                    ),
-                    Geographic(
-                      lon: bounds.longitudeEast,
-                      lat: bounds.latitudeSouth,
-                    ),
-                    Geographic(
-                      lon: bounds.longitudeWest,
-                      lat: bounds.latitudeSouth,
-                    ),
+                    Geographic(lon: bounds.west, lat: bounds.south),
+                    Geographic(lon: bounds.west, lat: bounds.north),
+                    Geographic(lon: bounds.east, lat: bounds.north),
+                    Geographic(lon: bounds.east, lat: bounds.south),
+                    Geographic(lon: bounds.west, lat: bounds.south),
                   ]),
                 },
               ),

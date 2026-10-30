@@ -85,6 +85,7 @@ extension type FlyToOptions._(CameraOptions _) implements CameraOptions {
 extension type FitBoundsOptions._(FlyToOptions _) implements FlyToOptions {
   /// Create a new JS [FitBoundsOptions] object.
   external FitBoundsOptions({
+    bool? animate,
     bool? linear,
     Point? offset,
     num? maxZoom,
