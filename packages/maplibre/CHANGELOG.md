@@ -2,37 +2,12 @@
 
 ### Breaking Changes
 
-- Style layers take typed properties instead of `paint` and `layout` maps:
-  `paint: {'line-width': 3}` is `width: const .literal(3)`. Property names drop
-  the layer type prefix (`line-width` is `LineStyleLayer.width`; `icon-` and
-  `text-` stay). Use `Expression.raw` for a property in JSON. Style layers can
-  no longer be `const`. On `BackgroundStyleLayer`, `color` and `opacity` are
-  expressions: `color: const .literal(Colors.black)`.
-- `StyleLayer.filter` is an `Expression<bool>?`. Use `Expression.raw([...])` for
-  a filter in JSON.
-- Annotation layers (`CircleLayer`, `MarkerLayer`, `PolygonLayer`,
-  `PolylineLayer`) take expressions for their style fields: `radius: 10` is
-  `radius: const .literal(10)`. `opacity` and `strokeOpacity` are parameters
-  instead of being read from the alpha of the color. The offsets of
-  `MarkerLayer` are `Expression<Offset>` and its `iconPadding` is
-  `Expression<List<num>>`. `getPaint` and `getLayout` are removed.
-- `MarkerLayer.iconAnchor` uses the new `IconAnchor` of the style layers.
-- `StyleController.layers` and `StyleController.sources` replace these methods:
-  - `style.addLayer(layer)` is `style.layers.add(layer)`. It takes only
-    `belowLayerId`; `aboveLayerId` and `atIndex` are removed, use
-    `style.layers.move` instead.
-  - `style.removeLayer(id)` is `style.layers.remove(id)`.
-  - `style.addSource(source)` is `style.sources.add(source)`, and
-    `style.removeSource(id)` is `style.sources.remove(id)`.
-  - `style.updateGeoJsonSource(id: id, data: data)` is
-    `style.sources.updateGeoJsonData(id, data)`, or `updateGeoJsonUrl` for a
-    URL.
-  - `style.getLayerIds()` is `style.layers.map((layer) => layer.id)`.
-- `style.layers.add`, `style.layers.move` and `style.sources.add` throw an
-  `ArgumentError` for an id that is taken or doesn't exist.
-- `style.sources.remove` throws a `StateError` while layers still use the
-  source. Remove those layers first.
-
+- Style layers take typed properties and expressions instead of `paint` and
+  `layout` maps, for example `width: const .literal(3)` instead of
+  `paint: {'line-width': 3}`. Annotation layers take expressions too.
+- `style.layers` and `style.sources` replace the layer and source methods of
+  `StyleController`: `style.addLayer(layer)` is `style.layers.add(layer)`,
+  `style.updateGeoJsonSource(...)` is `style.sources.updateGeoJsonData(...)`.
 - Web: requires [maplibre-gl-js v6](https://github.com/maplibre/maplibre-gl-js/releases/tag/v6.0.0),
   which now loads on its own. Remove the maplibre-gl-js and PMTiles `<script>`
   and `<link>` tags from your `web/index.html`. With v6, WebGL2 is required,
@@ -157,20 +132,10 @@
   `updateRegionMetadata`, `invalidateRegion` and `resumeDownload`.
 - Maps cache resources in `maplibre_native.db` in the app support directory,
   which also holds the offline regions.
-- Typed style expressions: `Expression<T>` covers every expression of the style
-  spec, such as `Expression.get` and `Expression.interpolate`.
-- New `ColorReliefStyleLayer`.
-- `style.layers` lists the layers of the style from bottom to top, and
-  `style.layers['id']` returns one. Setting a property of a layer updates the
-  map, also every frame for animations. `style.layers.move` and
-  `StyleLayer.moveBelow` change the order.
-- `style.sources` lists the sources of the style and updates them with
-  `updateGeoJsonData`, `updateGeoJsonUrl`, `updateImageCoordinates`,
-  `updateTiles` and `updateTileJsonUrl`.
-- `StyleController.batch` shows several style changes in the same frame.
-- Annotation layers can style each feature differently, for example
-  `radius: .get('size').asNumber()`.
-- `GeoJsonSource.lineMetrics` enables `line-progress`.
+- Typed style expressions, typed style layers and `ColorReliefStyleLayer`.
+- `style.layers` and `style.sources` list, add, update, move and remove the
+  layers and sources of the style. Setting a property of a layer updates the
+  map, also every frame for animations.
 - Changing a layer in `MapLibreMap.layers` no longer moves it above all other
   layers.
 - `ImageSource.bytes` and `ImageSource.provider` show images from encoded
