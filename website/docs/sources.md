@@ -70,9 +70,36 @@ The most common way to use a tile source is by an URL. This can either be
 - the URL of a [TileJSON](https://github.com/mapbox/tilejson-spec) that provides
   a tile server with additional metadata, e.g. `https://example.com/tiles.json`,
   with the `.url` constructor
-- a PMTiles file by adding `pmtiles://` in front of your url, e.g.
-  `pmtiles://https://example.com/tiles.pmtiles` or
-  `pmtiles://files://path/tiles.pmtiles`
+- a [PMTiles](#pmtiles) archive, with `pmtiles://` in front of its URL and
+  the `.url` constructor
+
+### PMTiles
+
+A [PMTiles](https://docs.protomaps.com/pmtiles/) archive holds all tiles of a
+tileset in one file. Pass its URL with `pmtiles://` in front to the `.url`
+constructor of a `VectorSource`, `RasterSource` or `RasterDemSource`, or use
+it as the `url` of a source in a style JSON. The archive replaces the
+TileJSON, so don't use the `.tiles` constructor for it.
+
+```dart
+await style.addSource(
+  const VectorSource.url(
+    id: 'protomaps',
+    url: 'pmtiles://https://example.com/tiles.pmtiles',
+  ),
+);
+```
+
+- **Android, iOS, macOS, Windows and Linux**: MapLibre Native reads PMTiles
+  itself, nothing to set up. Use `pmtiles://https://…` for a remote archive
+  and `pmtiles://file:///absolute/path/tiles.pmtiles` for a file on the
+  device.
+- **Web**: MapLibre GL JS needs the `pmtiles` script in `web/index.html`, see
+  [Setup](getting-started/setup). Only `pmtiles://https://…` works, since
+  a browser can't read local files.
+
+The server must answer HTTP range requests, since the map reads only the parts
+of the archive it needs. On web, it must also send CORS headers.
 
 ### Raster Tiles
 
