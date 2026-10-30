@@ -1,11 +1,13 @@
 part of 'interop.dart';
 
+/// The camera API of the map.
+///
+/// Since maplibre-gl-js v6, `Map` composes a camera instead of extending it
+/// and forwards the camera methods. `Camera` itself is no longer exported.
+///
 /// https://github.com/maplibre/maplibre-gl-js/blob/main/src/ui/camera.ts
 @JS()
 extension type Camera._(JSObject _) implements JSObject {
-  /// Create a new JS [Camera].
-  external Camera(CameraOptions options);
-
   /// Move the viewport of the map to a new location without animation.
   external void jumpTo(JumpToOptions options, [JSAny? eventData]);
 

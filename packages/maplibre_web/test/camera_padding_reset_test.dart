@@ -16,6 +16,9 @@ external JSArray<JSString> get _cameraCalls;
 @JS('cameraEvents')
 external JSArray<JSObject> get _cameraEvents;
 
+@JS('mockCamera')
+external interop.Camera get _mockCamera;
+
 void main() {
   setUp(() {
     _eval('''
@@ -23,18 +26,16 @@ void main() {
       globalThis.cameraEvents = [];
       globalThis.pendingResetEvent = null;
       globalThis.throwOnJump = false;
-      globalThis.maplibregl = {
-        Camera: class {
-          stop() {
-            cameraCalls.push('stop');
-            cameraEvents.push({});
-          }
-          jumpTo(options, eventData) {
-            cameraCalls.push('jumpTo');
-            pendingResetEvent = eventData;
-            if (throwOnJump) throw new Error('failed');
-          }
-        }
+      globalThis.mockCamera = {
+        stop() {
+          cameraCalls.push('stop');
+          cameraEvents.push({});
+        },
+        jumpTo(options, eventData) {
+          cameraCalls.push('jumpTo');
+          pendingResetEvent = eventData;
+          if (throwOnJump) throw new Error('failed');
+        },
       };
     ''');
   });
@@ -43,7 +44,7 @@ void main() {
     final paddingReset = CameraPaddingReset();
 
     paddingReset.run(
-      camera: interop.Camera(interop.CameraOptions()),
+      camera: _mockCamera,
       padding: interop.PaddingOptions(top: 0, bottom: 0, right: 0, left: 0),
     );
 
@@ -61,7 +62,7 @@ void main() {
 
     expect(
       () => paddingReset.run(
-        camera: interop.Camera(interop.CameraOptions()),
+        camera: _mockCamera,
         padding: interop.PaddingOptions(top: 0, bottom: 0, right: 0, left: 0),
       ),
       throwsA(anything),
@@ -74,7 +75,7 @@ void main() {
     final paddingReset = CameraPaddingReset();
 
     final canFit = paddingReset.runBeforeFitBounds(
-      camera: interop.Camera(interop.CameraOptions()),
+      camera: _mockCamera,
       viewportWidth: 100,
       viewportHeight: 80,
       fitPadding: interop.PaddingOptions(
@@ -93,7 +94,7 @@ void main() {
     final paddingReset = CameraPaddingReset();
 
     final canFit = paddingReset.runBeforeFitBounds(
-      camera: interop.Camera(interop.CameraOptions()),
+      camera: _mockCamera,
       viewportWidth: 100,
       viewportHeight: 80,
       fitPadding: interop.PaddingOptions(
