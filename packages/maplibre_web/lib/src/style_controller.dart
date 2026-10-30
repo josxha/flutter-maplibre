@@ -252,18 +252,6 @@ class StyleControllerWeb extends StyleController {
         'A Source with the id "${source.id}" already exists in the map style.',
       );
     }
-    try {
-      await _addSource(source);
-    } catch (_) {
-      // The map never uses the blob URL of a source it rejected.
-      if (_blobUrls.remove(source.id) case final String url) {
-        URL.revokeObjectURL(url);
-      }
-      rethrow;
-    }
-  }
-
-  Future<void> _addSource(Source source) async {
     switch (source) {
       case GeoJsonSource():
         final data = switch (source) {
@@ -329,9 +317,9 @@ class StyleControllerWeb extends StyleController {
           ),
           ImageSourceProvider(:final image) => await _blobUrlOfProvider(image),
         };
-        if (source is! ImageSourceUrl) _blobUrls[source.id] = url;
-        _map.addSource(
+        _addBlobSource(
           source.id,
+          source is ImageSourceUrl ? null : url,
           interop.SourceSpecification.image(
             type: 'image',
             url: url,
@@ -356,15 +344,20 @@ class StyleControllerWeb extends StyleController {
           ),
         );
       case VideoSource():
+        final blobUrl = switch (source) {
+          VideoSourceBytes(:final bytes) => URL.createObjectURL(
+            Blob([bytes.toJS].toJS),
+          ),
+          _ => null,
+        };
         final urls = switch (source) {
           VideoSourceUrls(:final urls) => urls,
-          VideoSourceBytes(:final bytes) => [
-            _blobUrls[source.id] = URL.createObjectURL(Blob([bytes.toJS].toJS)),
-          ],
+          VideoSourceBytes() => [blobUrl!],
           VideoSourceAsset(:final asset) => [AssetManager().getAssetUrl(asset)],
         };
-        _map.addSource(
+        _addBlobSource(
           source.id,
+          blobUrl,
           interop.SourceSpecification.video(
             type: 'video',
             urls: urls.jsify()!,
@@ -377,6 +370,23 @@ class StyleControllerWeb extends StyleController {
           ),
         );
     }
+  }
+
+  /// Adds the source [specification], whose content comes from [blobUrl]
+  /// if it isn't null. The blob URL is kept for [removeSource] once the map
+  /// accepts the source, and revoked if it rejects it.
+  void _addBlobSource(
+    String id,
+    String? blobUrl,
+    interop.SourceSpecification specification,
+  ) {
+    try {
+      _map.addSource(id, specification);
+    } catch (_) {
+      if (blobUrl != null) URL.revokeObjectURL(blobUrl);
+      rethrow;
+    }
+    if (blobUrl != null) _blobUrls[id] = blobUrl;
   }
 
   @override
