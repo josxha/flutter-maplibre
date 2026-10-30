@@ -1,10 +1,3 @@
-## Unreleased
+## 0.4.0-pre.1
 
-- `geolocatorUserLocations` starts with the current position, so a device
-  that does not move shows its location on Windows, where geolocator reports
-  only changed positions.
-
-## 0.1.0
-
-- `geolocatorUserLocations` and `Position.toUserLocation` turn `geolocator`
-  positions into the `UserLocation`s of a `UserLocationLayer`.
+[Check the maplibre changelog](https://pub.dev/packages/maplibre/changelog#040-pre1)

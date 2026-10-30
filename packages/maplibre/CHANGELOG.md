@@ -1,4 +1,4 @@
-## unreleased
+## 0.4.0-pre.1
 
 This pre-release replaces the MapLibre Android and iOS SDKs and the WebView
 desktop integration with one implementation on the
@@ -181,7 +181,7 @@ a profile or release build, please comment on
 - Web: `animateCamera` no longer hangs when the animation ends at once, and
   removing a source that does not exist is not an error.
 
-Full Changelog: [v0.3.7+1...v0.4.0](https://github.com/josxha/flutter-maplibre/compare/v0.3.7+1...v0.4.0)
+Full Changelog: [v0.3.7+1...v0.4.0-pre.1](https://github.com/josxha/flutter-maplibre/compare/v0.3.7+1...v0.4.0-pre.1)
 
 ## 0.3.7+1
 
