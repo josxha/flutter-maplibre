@@ -46,17 +46,17 @@ const Duration defaultTimeout = Duration(seconds: 15);
 /// A map shown by [pumpMap], with its controller, style and every event it
 /// reported.
 class TestMap {
-  TestMap._(this.tester, this.controller, this.events, this._options);
+  TestMap._(this.tester, this.controller, this.events, this._app);
 
   final WidgetTester tester;
   final MapController controller;
   final List<MapEvent> events;
-  final ValueNotifier<MapOptions> _options;
+  final MapApp Function(MapOptions options) _app;
 
-  /// The options of the map. Setting them rebuilds the map widget with them.
-  MapOptions get options => _options.value;
-
-  set options(MapOptions options) => _options.value = options;
+  /// Shows the map with new [options], keeping its callbacks and layers.
+  Future<void> setOptions(MapOptions options) async {
+    await tester.pumpWidget(_app(options));
+  }
 
   /// The style of the map, replaced whenever a style loads.
   StyleController get style => controller.style!;
@@ -208,29 +208,23 @@ Future<TestMap> pumpMap(
   final events = <MapEvent>[];
   final controller = Completer<MapController>();
   final style = Completer<StyleController>();
-  final mapOptions = ValueNotifier(options ?? offlineOptions());
-  addTearDown(mapOptions.dispose);
-  await tester.pumpWidget(
-    ValueListenableBuilder(
-      valueListenable: mapOptions,
-      builder: (context, options, _) => MapApp(
-        options: options,
-        layers: layers,
-        onMapCreated: controller.complete,
-        onStyleLoaded: (style_) {
-          if (!style.isCompleted) style.complete(style_);
-        },
-        onEvent: events.add,
-        paused: paused,
-        children: children,
-      ),
-    ),
+  MapApp app(MapOptions options) => MapApp(
+    options: options,
+    layers: layers,
+    onMapCreated: controller.complete,
+    onStyleLoaded: (style_) {
+      if (!style.isCompleted) style.complete(style_);
+    },
+    onEvent: events.add,
+    paused: paused,
+    children: children,
   );
+  await tester.pumpWidget(app(options ?? offlineOptions()));
   final map = TestMap._(
     tester,
     await controller.future.timeout(defaultTimeout),
     events,
-    mapOptions,
+    app,
   );
   await style.future.timeout(defaultTimeout);
   // Let the first frame reach Flutter, so projections follow the camera.

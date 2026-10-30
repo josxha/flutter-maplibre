@@ -71,7 +71,7 @@ void runTests() {
     ) async {
       final map = await pumpMap(tester, options: offlineOptions(zoom: 3));
       final updated = offlineOptions(zoom: 3, maxZoom: 5);
-      map.options = updated;
+      await map.setOptions(updated);
       await tester.pump();
 
       expect(map.controller.options, updated);
@@ -106,10 +106,12 @@ void runTests() {
     testWidgets('loads a style set at runtime', (tester) async {
       final map = await pumpMap(tester);
       final since = map.events.length;
-      map.options = const MapOptions(
-        style: MapStyle.json(
-          '{"version":8,"sources":{},"layers":[{"id":"other",'
-          '"type":"background","paint":{"background-color":"#000000"}}]}',
+      await map.setOptions(
+        const MapOptions(
+          style: MapStyle.json(
+            '{"version":8,"sources":{},"layers":[{"id":"other",'
+            '"type":"background","paint":{"background-color":"#000000"}}]}',
+          ),
         ),
       );
       await map.waitForEvent<MapEventStyleLoaded>(since: since);
@@ -119,7 +121,7 @@ void runTests() {
     testWidgets('keeps its style when other options change', (tester) async {
       final map = await pumpMap(tester);
       final since = map.events.length;
-      map.options = offlineOptions(maxZoom: 10);
+      await map.setOptions(offlineOptions(maxZoom: 10));
       await tester.pump(const Duration(milliseconds: 500));
       expect(map.events.skip(since).whereType<MapEventStyleLoaded>(), isEmpty);
     });
