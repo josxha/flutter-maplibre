@@ -314,8 +314,8 @@ class _OfflineMapPage extends StatelessWidget {
         ),
         layers: [
           PolylineLayer(
-            color: Colors.red,
-            width: 3,
+            color: const .literal(Colors.red),
+            width: const .literal(3),
             polylines: [
               Feature(
                 geometry: switch (definition) {

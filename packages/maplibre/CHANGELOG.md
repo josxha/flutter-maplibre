@@ -12,7 +12,15 @@
   property. `StyleLayer.fromJson` takes the JSON of a whole layer. Style layers
   can no longer be `const`. On `BackgroundStyleLayer`, `color` and `opacity` are
   expressions now: `color: const .literal(Colors.black)`.
-- Removed `getPaint` and `getLayout` from the annotation layers.
+- Annotation layers (`CircleLayer`, `MarkerLayer`, `PolygonLayer`,
+  `PolylineLayer`) take expressions for their style fields, so that a field can
+  depend on the feature: `radius: 10` is `radius: const .literal(10)`, and
+  `radius: .get('size').asNumber()` sizes each circle by its feature.
+  `opacity` and `strokeOpacity` are parameters instead of getters that read the
+  alpha of the color; a translucent color still draws translucent. The offsets
+  and translations of `MarkerLayer` are `Expression<Offset>`, and its
+  `iconPadding` is an `Expression<List<num>>`. `getPaint` and `getLayout` are
+  gone.
 - `StyleLayer.filter` is an `Expression<bool>?`. Use `Expression.raw([...])` for
   a filter in JSON.
 - `StyleController.layers` and `StyleController.sources` replace `addLayer`,

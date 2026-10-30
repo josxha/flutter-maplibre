@@ -53,8 +53,8 @@ class _LayersPolygonPageState extends State<LayersPolygonPage> {
         layers: [
           PolygonLayer(
             polygons: _polygons,
-            color: Colors.lightBlueAccent.withValues(alpha: 0.6),
-            outlineColor: Colors.blue,
+            color: .literal(Colors.lightBlueAccent.withValues(alpha: 0.6)),
+            outlineColor: const .literal(Colors.blue),
           ),
         ],
       ),

@@ -455,7 +455,9 @@ void runTests() {
       layer.maxZoom = 24;
       await expectShown(shown: true);
 
-      // A transition that is far from done keeps the circle large.
+      // A transition that is far from done keeps the circle large. Waiting past
+      // the default transition of 300 ms is the point of the delay: without the
+      // long one, the circle would have shrunk by then, and no event marks that.
       layer.radiusTransition = const StyleTransition(
         duration: Duration(minutes: 1),
       );

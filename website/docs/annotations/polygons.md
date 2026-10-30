@@ -36,8 +36,8 @@ Widget build(BuildContext context) {
             ],
           ),
         ],
-        color: Colors.lightBlueAccent.withOpacity(0.6),
-        outlineColor: Colors.blue,
+        color: .literal(Colors.lightBlueAccent.withOpacity(0.6)),
+        outlineColor: .literal(Colors.blue),
       ),
     ],
   );

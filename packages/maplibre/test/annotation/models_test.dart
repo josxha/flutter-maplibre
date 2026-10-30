@@ -17,22 +17,28 @@ void main() {
     });
 
     test('compares its features by identity', () {
-      const layer = CircleLayer(points: points, radius: 3);
-      expect(layer, const CircleLayer(points: points, radius: 3));
-      expect(layer, isNot(const CircleLayer(points: points, radius: 4)));
+      const layer = CircleLayer(points: points, radius: .literal(3));
+      expect(layer, const CircleLayer(points: points, radius: .literal(3)));
+      expect(
+        layer,
+        isNot(const CircleLayer(points: points, radius: .literal(4))),
+      );
       // An equal, but new list counts as a change.
-      expect(layer, isNot(CircleLayer(points: List.of(points), radius: 3)));
+      expect(
+        layer,
+        isNot(CircleLayer(points: List.of(points), radius: const .literal(3))),
+      );
     });
   });
 
   group('CircleLayer', () {
     const layer = CircleLayer(
       points: points,
-      radius: 10,
-      color: Color(0x80FF0000),
-      blur: 0.5,
-      strokeWidth: 2,
-      strokeColor: Color(0xFF00FF00),
+      radius: .literal(10),
+      color: .literal(Color(0x80FF0000)),
+      blur: .literal(0.5),
+      strokeWidth: .literal(2),
+      strokeColor: .literal(Color(0xFF00FF00)),
       minZoom: 3,
       maxZoom: 12,
     );
@@ -50,31 +56,63 @@ void main() {
     test('maps its properties to the style spec', () {
       expect(layer.createStyleLayer(0).toJson()['paint'], {
         'circle-radius': 10,
-        'circle-color': '#ff0000',
+        'circle-color': startsWith('rgba(255, 0, 0, 0.5'),
         'circle-blur': 0.5,
-        'circle-opacity': closeTo(0.5, 0.01),
+        'circle-opacity': 1,
         'circle-stroke-width': 2,
         'circle-stroke-color': '#00ff00',
-        'circle-stroke-opacity': 1.0,
+        'circle-stroke-opacity': 1,
       });
       expect(layer.createStyleLayer(0).toJson(), isNot(contains('layout')));
+    });
+  });
+
+  group('expressions', () {
+    test('reach the style layer for per feature styling', () {
+      final layer = CircleLayer(
+        points: points,
+        radius: Expression.get('size').asNumber(),
+        color: Expression.get('color').convertToColor(),
+      );
+      expect(
+        layer.createStyleLayer(0).toJson()['paint'],
+        containsPair('circle-radius', [
+          'number',
+          ['get', 'size'],
+        ]),
+      );
+      expect(
+        layer.createStyleLayer(0).toJson()['paint'],
+        containsPair('circle-color', [
+          'to-color',
+          ['get', 'color'],
+        ]),
+      );
+    });
+
+    test('compare deeply', () {
+      CircleLayer layerOf(String name) =>
+          CircleLayer(points: points, radius: Expression.get(name).asNumber());
+      expect(layerOf('a'), layerOf('a'));
+      expect(layerOf('a').hashCode, layerOf('a').hashCode);
+      expect(layerOf('a'), isNot(layerOf('b')));
     });
   });
 
   group('MarkerLayer', () {
     const layer = MarkerLayer(
       points: points,
-      iconImage: 'marker',
-      iconSize: 2,
-      iconOpacity: 0.5,
-      iconTranslate: [1, 2],
-      iconAnchor: IconAnchor.bottomLeft,
-      textField: 'label',
-      textSize: 23,
-      textOpacity: 0.8,
-      textColor: Colors.purple,
-      textOffset: [2, 4],
-      textAllowOverlap: true,
+      iconImage: .literal('marker'),
+      iconSize: .literal(2),
+      iconOpacity: .literal(0.5),
+      iconTranslate: .literal(Offset(1, 2)),
+      iconAnchor: .literal(IconAnchor.bottomLeft),
+      textField: .literal('label'),
+      textSize: .literal(23),
+      textOpacity: .literal(0.8),
+      textColor: .literal(Colors.purple),
+      textOffset: .literal(Offset(2, 4)),
+      textAllowOverlap: .literal(true),
     );
 
     test('creates a symbol style layer', () {
@@ -125,7 +163,7 @@ void main() {
           ]),
         ),
       ],
-      color: const Color(0x4000FF00),
+      color: const .literal(Color(0x4000FF00)),
     );
 
     test('creates a fill style layer', () {
@@ -134,8 +172,8 @@ void main() {
 
     test('maps its properties to the style spec', () {
       expect(layer.createStyleLayer(0).toJson()['paint'], {
-        'fill-color': '#00ff00',
-        'fill-opacity': closeTo(0.25, 0.01),
+        'fill-color': startsWith('rgba(0, 255, 0, 0.2'),
+        'fill-opacity': 1,
         'fill-outline-color': '#000000',
       });
     });
@@ -151,11 +189,11 @@ void main() {
           ]),
         ),
       ],
-      color: Colors.blue,
-      width: 4,
-      gapWidth: 1,
-      blur: 2,
-      dashArray: const [2, 1],
+      color: const .literal(Colors.blue),
+      width: const .literal(4),
+      gapWidth: const .literal(1),
+      blur: const .literal(2),
+      dashArray: const .literal([2, 1]),
     );
 
     test('creates a line style layer', () {
@@ -165,7 +203,7 @@ void main() {
     test('maps its properties to the style spec', () {
       expect(layer.createStyleLayer(0).toJson()['paint'], {
         'line-color': Colors.blue.toHexString().toLowerCase(),
-        'line-opacity': 1.0,
+        'line-opacity': 1,
         'line-width': 4,
         'line-gap-width': 1,
         'line-blur': 2,

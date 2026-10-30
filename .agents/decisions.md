@@ -309,8 +309,12 @@ Each entry: the decision, then why.
   it, so one rebuild shows in one frame.
 - **`LayerManager` keeps the style layers it added and sets only what changed,
   compared by JSON (`StyleLayer.updateFrom`).** It re-creates a layer only when its type or source
-  changes, below the next declarative layer, so the order stays. Annotation
-  layers keep plain Dart fields for now.
+  changes, below the next declarative layer, so the order stays.
+- **Annotation layers take `Expression<T>` for their style fields, with const
+  `.literal` defaults, and pass them on to their style layer.** That allows
+  per feature styling and keeps the layers `const`. `==` works as expressions
+  compare deeply. Colors keep their alpha in the CSS color, so `opacity` is a
+  field of its own that multiplies it.
 - **Style images have a size in logical pixels that the package keeps the
   same on every platform and screen.** `addImage` takes a `pixelRatio` of
   image pixels per logical pixel, 1 by default as in MapLibre GL JS, and

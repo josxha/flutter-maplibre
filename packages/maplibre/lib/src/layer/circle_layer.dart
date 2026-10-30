@@ -11,36 +11,40 @@ class CircleLayer extends Layer<Feature<Point>> {
   /// Create a new [CircleLayer] instance.
   const CircleLayer({
     required List<Feature<Point>> points,
-    this.radius = 5,
-    this.color = const Color(0xFF000000),
-    this.blur = 0,
-    this.strokeWidth = 0,
-    this.strokeColor = const Color(0xFF000000),
+    this.radius = const .literal(5),
+    this.color = const .literal(Color(0xFF000000)),
+    this.blur = const .literal(0),
+    this.opacity = const .literal(1),
+    this.strokeWidth = const .literal(0),
+    this.strokeColor = const .literal(Color(0xFF000000)),
+    this.strokeOpacity = const .literal(1),
     super.minZoom = 0,
     super.maxZoom = 24,
   }) : super(list: points);
 
   /// Circle radius in pixels. Defaults to 5px.
-  final int radius;
+  final Expression<num> radius;
 
   /// The color of the circle. Defaults to black.
-  final Color color;
+  final Expression<Color> color;
 
   /// Amount to blur the circle. 1 blurs the circle such that only the
   /// centerpoint is full opacity.
-  final double blur;
+  final Expression<num> blur;
 
-  /// The opacity at which the circle will be drawn.
-  double get opacity => color.a;
+  /// The opacity at which the circle will be drawn, on top of the alpha of
+  /// [color]. Defaults to 1.
+  final Expression<num> opacity;
 
   /// The outline width
-  final int strokeWidth;
+  final Expression<num> strokeWidth;
 
   /// The outline color
-  final Color strokeColor;
+  final Expression<Color> strokeColor;
 
-  /// The opacity of the circle's stroke.
-  double get strokeOpacity => strokeColor.a;
+  /// The opacity of the circle's stroke, on top of the alpha of [strokeColor].
+  /// Defaults to 1.
+  final Expression<num> strokeOpacity;
 
   @override
   StyleLayer createStyleLayer(int index) => CircleStyleLayer(
@@ -48,13 +52,13 @@ class CircleLayer extends Layer<Feature<Point>> {
     sourceId: getSourceId(index),
     minZoom: minZoom,
     maxZoom: maxZoom,
-    radius: .literal(radius),
-    color: .literal(color.withValues(alpha: 1)),
-    blur: .literal(blur),
-    opacity: .literal(opacity),
-    strokeWidth: .literal(strokeWidth),
-    strokeColor: .literal(strokeColor.withValues(alpha: 1)),
-    strokeOpacity: .literal(strokeOpacity),
+    radius: radius,
+    color: color,
+    blur: blur,
+    opacity: opacity,
+    strokeWidth: strokeWidth,
+    strokeColor: strokeColor,
+    strokeOpacity: strokeOpacity,
   );
 
   @override
@@ -66,8 +70,10 @@ class CircleLayer extends Layer<Feature<Point>> {
           radius == other.radius &&
           color == other.color &&
           blur == other.blur &&
+          opacity == other.opacity &&
           strokeWidth == other.strokeWidth &&
-          strokeColor == other.strokeColor;
+          strokeColor == other.strokeColor &&
+          strokeOpacity == other.strokeOpacity;
 
   @override
   int get hashCode => Object.hash(
@@ -75,7 +81,9 @@ class CircleLayer extends Layer<Feature<Point>> {
     radius,
     color,
     blur,
+    opacity,
     strokeWidth,
     strokeColor,
+    strokeOpacity,
   );
 }
