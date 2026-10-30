@@ -55,7 +55,7 @@ Widget build(BuildContext context) {
         iconImage: .literal('marker'),
         iconSize: .literal(0.08),
         iconAnchor: .literal(IconAnchor.bottom),
-        textOffset: .literal(const [0, 1]),
+        textOffset: .literal(const Offset(0, 1)),
       ),
     ],
   );
