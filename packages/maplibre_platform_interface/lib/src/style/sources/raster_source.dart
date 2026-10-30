@@ -18,6 +18,40 @@ sealed class RasterSource extends Source {
     this.volatile = false,
   });
 
+  factory RasterSource._fromJson(String id, Map<String, Object?> json) {
+    final bounds = _boundsOf(json);
+    final minZoom = _doubleOf(json['minzoom']) ?? 0;
+    final maxZoom = _doubleOf(json['maxzoom']) ?? 22;
+    final tileSize = (json['tileSize'] as num?)?.toInt() ?? 512;
+    final scheme = json['scheme'] == 'tms' ? TileScheme.tms : TileScheme.xyz;
+    final attribution = json['attribution'] as String?;
+    final volatile = json['volatile'] as bool? ?? false;
+    return switch (json['tiles']) {
+      final List<Object?> tiles => RasterSourceTiles(
+        id: id,
+        tiles: tiles.cast<String>(),
+        bounds: bounds,
+        minZoom: minZoom,
+        maxZoom: maxZoom,
+        tileSize: tileSize,
+        scheme: scheme,
+        attribution: attribution,
+        volatile: volatile,
+      ),
+      _ => RasterSourceUrl(
+        id: id,
+        url: json['url'] as String? ?? '',
+        bounds: bounds,
+        minZoom: minZoom,
+        maxZoom: maxZoom,
+        tileSize: tileSize,
+        scheme: scheme,
+        attribution: attribution,
+        volatile: volatile,
+      ),
+    };
+  }
+
   /// A raster source whose tiles are described by the TileJSON resource at
   /// [url]. Supported protocols are `http:` and `https:`, and `pmtiles://`
   /// in front of the URL of a PMTiles archive.
@@ -86,6 +120,19 @@ sealed class RasterSource extends Source {
   ///
   /// Defaults to false. Not available on web.
   final bool volatile;
+
+  @override
+  Map<String, Object?> toJson() => {
+    'type': 'raster',
+    ...tilesetOf(this),
+    'bounds': bounds,
+    'minzoom': minZoom,
+    'maxzoom': maxZoom,
+    'tileSize': tileSize,
+    'scheme': scheme.name,
+    'attribution': ?attribution,
+    'volatile': volatile,
+  };
 }
 
 /// A [RasterSource] whose tiles are described by a TileJSON resource.

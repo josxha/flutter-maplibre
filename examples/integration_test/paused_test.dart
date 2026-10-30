@@ -53,7 +53,9 @@ void runTests() {
 
       await setPaused(map, paused: false);
       await map.waitForFrame((camera) => (camera.zoom - 7).abs() < 1e-6);
-      expect(map.style.getLayerIds(), ['background']);
+      expect(map.style.layers.map((layer) => layer.id).toList(), [
+        'background',
+      ]);
     });
 
     testWidgets('ends a running camera animation at its target', (

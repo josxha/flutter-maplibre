@@ -38,12 +38,12 @@ class _StyleLayersHillshadePageState extends State<StyleLayersHillshadePage> {
       url: 'https://demotiles.maplibre.org/terrain-tiles/tiles.json',
       tileSize: 256,
     );
-    await style.addSource(hillshade);
-    await style.addLayer(_hillshadeStyleLayer);
+    await style.sources.add(hillshade);
+    await style.layers.add(_hillshadeStyleLayer);
   }
 }
 
-const _hillshadeStyleLayer = HillshadeStyleLayer(
+final _hillshadeStyleLayer = HillshadeStyleLayer(
   id: _layerId,
   sourceId: _sourceId,
 );

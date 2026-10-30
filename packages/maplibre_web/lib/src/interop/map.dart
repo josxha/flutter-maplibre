@@ -16,6 +16,11 @@ extension type JsMap._(Camera _) implements Camera {
   /// https://github.com/maplibre/maplibre-gl-js/blob/02103f820a524ed359d94a81015e2d8e966f2c2a/src/ui/map.ts#L1593
   external void once(String type, JSExportedDartFunction listener);
 
+  /// Remove a callback that [on] registered.
+  ///
+  /// https://maplibre.org/maplibre-gl-js/docs/API/classes/Map/#off
+  external void off(String type, JSExportedDartFunction listener);
+
   /// https://github.com/maplibre/maplibre-gl-js/blob/76410880f81de2582be073bc2d730b3f4b8f254d/src/ui/map.ts#L1685
   external void setStyle(JSAny style, [StyleSwapOptions? options]);
 
@@ -23,10 +28,7 @@ extension type JsMap._(Camera _) implements Camera {
   external void addSource(String id, SourceSpecification source);
 
   /// https://github.com/maplibre/maplibre-gl-js/blob/41e5b32f5bd6264cbc4a8b38210ec6a410152259/src/ui/map.ts#L2412
-  external void addLayer(LayerSpecification layer, [String? beforeId]);
-
-  /// https://github.com/maplibre/maplibre-gl-js/blob/41e5b32f5bd6264cbc4a8b38210ec6a410152259/src/ui/map.ts#L2467
-  external JSObject? getLayer(String id);
+  external void addLayer(JSAny layer, [String? beforeId]);
 
   /// Convert a coordinate to a screen location.
   ///
@@ -119,10 +121,29 @@ extension type JsMap._(Camera _) implements Camera {
   /// https://maplibre.org/maplibre-gl-js/docs/API/classes/Map/#setpaintproperty
   external void setPaintProperty(String layerId, String name, JSAny? value);
 
-  /// Returns the value of a paint property of the layer [layerId].
+  /// Sets the value of a layout property of the layer [layerId].
   ///
-  /// https://maplibre.org/maplibre-gl-js/docs/API/classes/Map/#getpaintproperty
-  external JSAny? getPaintProperty(String layerId, String name);
+  /// https://maplibre.org/maplibre-gl-js/docs/API/classes/Map/#setlayoutproperty
+  external void setLayoutProperty(String layerId, String name, JSAny? value);
+
+  /// Sets the filter of the layer [layerId].
+  ///
+  /// https://maplibre.org/maplibre-gl-js/docs/API/classes/Map/#setfilter
+  external void setFilter(String layerId, JSAny? filter);
+
+  /// Sets the zoom range of the layer [layerId].
+  ///
+  /// https://maplibre.org/maplibre-gl-js/docs/API/classes/Map/#setlayerzoomrange
+  external void setLayerZoomRange(
+    String layerId,
+    double minZoom,
+    double maxZoom,
+  );
+
+  /// Moves the layer [id] below the layer [beforeId], or to the top.
+  ///
+  /// https://maplibre.org/maplibre-gl-js/docs/API/classes/Map/#movelayer
+  external void moveLayer(String id, [String? beforeId]);
 
   /// Get the loaded style.
   external StyleSpecification? getStyle();
@@ -179,29 +200,34 @@ extension type SourceSpecification._(JSObject _) implements JSObject {
 
   /// Used to update the data of a GeoJSON source.
   external void setData(JSAny data);
+
+  /// Used to update the corners of an image source.
+  external void setCoordinates(JSAny coordinates);
+
+  /// Used to update the tile URLs of a raster or vector source.
+  external void setTiles(JSAny tiles);
+
+  /// Used to update the TileJSON URL of a raster or vector source.
+  external void setUrl(String url);
+
+  /// Used to load a new image into an image source.
+  external void updateImage(UpdateImageOptions options);
+}
+
+/// The options of [SourceSpecification.updateImage].
+@anonymous
+@JS()
+extension type UpdateImageOptions._(JSObject _) implements JSObject {
+  /// Options that load the image from [url] and keep the coordinates.
+  external factory UpdateImageOptions({required String url});
 }
 
 /// The specifications of map layers.
 @anonymous
 @JS()
 extension type LayerSpecification._(JSObject _) implements JSObject {
-  /// The default constructor for a [LayerSpecification].
-  external LayerSpecification({
-    required String id,
-    required String type,
-    required JSAny layout,
-    required JSAny paint,
-    required double? minzoom,
-    required double? maxzoom,
-    String? source,
-  });
-
   /// Get the layer id.
   external String id;
-
-  external JSAny filter;
-  @JS('source-layer')
-  external String? sourceLayer;
 }
 
 /// Raw image data used by [JsMap.addImage], RGBA8 without premultiplied

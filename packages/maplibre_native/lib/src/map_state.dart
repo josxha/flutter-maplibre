@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/widgets.dart';
@@ -34,9 +33,6 @@ class MapLibreMapStateNative extends MapLibreMapState {
 
   @override
   StyleControllerNative? style;
-
-  /// The JSON of the style the map loads, when it is at hand.
-  String? _styleJson;
 
   /// Whether the camera constraints of [MapOptions] wait for the first
   /// style, see [_setUp].
@@ -228,6 +224,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
   void dispose() {
     _disposed = true;
     style?.dispose();
+    _loadingStyle?.dispose();
     _invalidateProjection();
     _shownProjection?.close();
     _shownProjection = null;
@@ -336,6 +333,10 @@ class MapLibreMapStateNative extends MapLibreMapState {
     await ended.future;
   }
 
+  /// The style controller that [_onStyleLoaded] is filling, until it becomes
+  /// [style].
+  StyleControllerNative? _loadingStyle;
+
   Future<void> _onStyleLoaded() async {
     final map = _map;
     if (map == null) return;
@@ -343,20 +344,29 @@ class MapLibreMapStateNative extends MapLibreMapState {
       _constraintsAfterStyle = false;
       await _applyOptions();
     }
+    // Only the next LayerManager sees MapLibreMap.layers: the layers of the
+    // old one are gone.
+    _layerManager = null;
     style?.dispose();
+    style = null;
     late final StyleControllerNative styleController;
     styleController = StyleControllerNative(
       map,
-      styleJson: _styleJson,
       // Rebuilds the widgets in MapLibreMap.children, such as
       // SourceAttribution.
       onAttributionsChanged: () {
         if (mounted && style == styleController) setState(() {});
       },
     );
+    _loadingStyle = styleController;
+    // The style is only handed out once its layers and sources are known.
+    await styleController.load();
+    if (_disposed || _loadingStyle != styleController) {
+      styleController.dispose();
+      return;
+    }
+    _loadingStyle = null;
     style = styleController;
-    await styleController.refresh();
-    if (_disposed || style != styleController) return;
     widget.onEvent?.call(MapEventStyleLoaded(styleController));
     widget.onStyleLoaded?.call(styleController);
     _layerManager = LayerManager(styleController, widget.layers);
@@ -600,39 +610,18 @@ class MapLibreMapStateNative extends MapLibreMapState {
     if (map == null) return;
     final request = ++_styleRequest;
     bool stale() => _map != map || request != _styleRequest;
-    // The style JSON where it is at hand, for the attributions that MapLibre
-    // Native drops.
-    _styleJson = null;
+    _layerManager = null;
     switch (style) {
       case MapStyleJson(:final json):
-        _styleJson = json;
         await map.setStyleJson(jsonDecode(json));
       case MapStyleUrl(:final url):
-        if (url.startsWith('file://')) {
-          final json = await _readStyleFile(Uri.parse(url).toFilePath());
-          if (stale()) return;
-          _styleJson = json;
-        }
         await map.setStyleUrl(url);
       case MapStyleFile(:final path):
-        final json = await _readStyleFile(path);
-        if (stale()) return;
-        _styleJson = json;
         await map.setStyleUrl(Uri.file(path).toString());
       case MapStyleAsset(:final asset):
         final json = await DefaultAssetBundle.of(context).loadString(asset);
         if (stale()) return;
-        _styleJson = json;
         await map.setStyleJson(jsonDecode(json));
-    }
-  }
-
-  /// The style JSON in the file at [path], or null if it can't be read.
-  static Future<String?> _readStyleFile(String path) async {
-    try {
-      return await File(path).readAsString();
-    } on Object {
-      return null;
     }
   }
 

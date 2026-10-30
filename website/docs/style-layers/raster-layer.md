@@ -30,12 +30,12 @@ Widget build(BuildContext context) {
           attribution:
           '<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         );
-        await style.addSource(openStreetMap);
-        const layer = RasterStyleLayer(
+        await style.sources.add(openStreetMap);
+        final layer = RasterStyleLayer(
           id: _layerId,
           sourceId: _sourceId,
         );
-        await style.addLayer(layer);
+        await style.layers.add(layer);
       }
   );
 }
@@ -47,8 +47,9 @@ to learn more.
 
 ## Style & Layout
 
-Use the `paint` property to change the style and the `layout`
-property to change the behavior on the map.
+Every property of the style spec is an optional parameter and a getter and
+setter of the layer. See [Paint & Layout](paint-and-layout) and
+[Expressions](expressions).
 
 Read the [Paint & Layout](./paint-and-layout) chapter to learn more on this
 topic. 

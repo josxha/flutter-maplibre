@@ -35,7 +35,7 @@ from a URL, `ImageSource.bytes` takes an encoded image such as a PNG, and
 `AssetImage` or a `FileImage`.
 
 ```dart
-await style.addSource(
+await style.sources.add(
   const ImageSource.provider(
     id: 'radar',
     image: AssetImage('assets/radar.png'),
@@ -85,7 +85,7 @@ for example `RasterDemTerrariumEncoding()` for Terrarium tiles; the default
 is Mapbox Terrain RGB.
 
 ```dart
-await style.addSource(
+await style.sources.add(
   const VectorSource.url(
     id: 'protomaps',
     url: 'pmtiles://https://example.com/tiles.pmtiles',
@@ -129,3 +129,24 @@ Last but not least you can use
 the [VectorSource](https://pub.dev/documentation/maplibre/latest/maplibre/VectorSource-class.html)
 to supply the map with a source of Mapbox Vector Tiles (MVT). The data is then
 shown in a combination of circle, fill, line and symbol layers on the map.
+
+## Read and update sources
+
+`style.sources` holds the sources of the style. It reads synchronously, and is
+filled once the style has loaded. Sources are immutable, so an update replaces
+the object:
+
+```dart
+final source = style.sources['points'];
+
+await style.sources.updateGeoJsonData('points', geoJsonString);
+await style.sources.updateGeoJsonUrl('points', 'https://example.com/data.geojson');
+await style.sources.updateImageCoordinates('radar', coordinates);
+await style.sources.updateTiles('roads', ['https://example.com/{z}/{x}/{y}.pbf']);
+await style.sources.updateTileJsonUrl('roads', 'https://example.com/tiles.json');
+await style.sources.remove('points');
+```
+
+On native maps, `updateTiles` and `updateTileJsonUrl` remove the layers that use
+the source and add them back at their positions in one frame, as MapLibre Native
+can't change them in place.

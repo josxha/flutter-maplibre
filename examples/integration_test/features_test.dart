@@ -16,7 +16,7 @@ const _center = Geographic(lon: 0.1, lat: 0.1);
 /// Adds a point at the center, a line along the top edge of a square around
 /// it and the square itself, each in its own source and layer.
 Future<void> _addFixture(TestMap map) async {
-  await map.style.addSource(
+  await map.style.sources.add(
     GeoJsonSource.data(
       id: 'point_source',
       data: featureCollection(const [
@@ -24,7 +24,7 @@ Future<void> _addFixture(TestMap map) async {
       ]),
     ),
   );
-  await map.style.addSource(
+  await map.style.sources.add(
     GeoJsonSource.data(
       id: 'line_source',
       data: featureCollection([
@@ -39,7 +39,7 @@ Future<void> _addFixture(TestMap map) async {
       ]),
     ),
   );
-  await map.style.addSource(
+  await map.style.sources.add(
     GeoJsonSource.data(
       id: 'polygon_source',
       data: featureCollection([
@@ -59,25 +59,27 @@ Future<void> _addFixture(TestMap map) async {
       ]),
     ),
   );
-  await map.style.addLayer(
-    const FillStyleLayer(
+  await map.style.layers.add(
+    FillStyleLayer(
       id: 'polygon_layer',
       sourceId: 'polygon_source',
-      paint: {'fill-color': '#00FF00'},
+      color: const .literal(Color(0xFF00FF00)),
     ),
   );
-  await map.style.addLayer(
-    const LineStyleLayer(
+  await map.style.layers.add(
+    LineStyleLayer(
       id: 'line_layer',
       sourceId: 'line_source',
-      paint: {'line-color': '#0000FF', 'line-width': 5},
+      color: const .literal(Color(0xFF0000FF)),
+      width: const .literal(5),
     ),
   );
-  await map.style.addLayer(
-    const CircleStyleLayer(
+  await map.style.layers.add(
+    CircleStyleLayer(
       id: 'point_layer',
       sourceId: 'point_source',
-      paint: {'circle-radius': 5, 'circle-color': '#FF0000'},
+      radius: const .literal(5),
+      color: const .literal(Color(0xFFFF0000)),
     ),
   );
   await map.waitForFeatures(map.center, (features) => features.length == 2);
@@ -124,11 +126,11 @@ void runTests() {
       expect(_kinds(features), {'polygon'});
 
       // A second layer on the same source reports the feature again.
-      await map.style.addLayer(
-        const CircleStyleLayer(
+      await map.style.layers.add(
+        CircleStyleLayer(
           id: 'point_layer_2',
           sourceId: 'point_source',
-          paint: {'circle-radius': 5},
+          radius: const .literal(5),
         ),
       );
       features = await map.waitForFeatures(

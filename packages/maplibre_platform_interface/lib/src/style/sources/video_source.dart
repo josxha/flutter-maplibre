@@ -45,6 +45,16 @@ sealed class VideoSource extends Source {
 
   /// The corners of the video.
   final LngLatQuad coordinates;
+
+  @override
+  Map<String, Object?>? toJson() => switch (this) {
+    VideoSourceUrls(:final urls) => {
+      'type': 'video',
+      'urls': urls,
+      'coordinates': coordinates.toJson(),
+    },
+    _ => null,
+  };
 }
 
 /// A [VideoSource] from URLs.

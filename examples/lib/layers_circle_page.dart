@@ -40,10 +40,10 @@ class _LayersCirclePageState extends State<LayersCirclePage> {
         layers: [
           CircleLayer(
             points: _points,
-            color: Colors.orange.withValues(alpha: 0.5),
-            radius: 20,
-            strokeColor: Colors.red,
-            strokeWidth: 2,
+            color: .literal(Colors.orange.withValues(alpha: 0.5)),
+            radius: const .literal(20),
+            strokeColor: const .literal(Colors.red),
+            strokeWidth: const .literal(2),
           ),
         ],
       ),

@@ -42,6 +42,16 @@ sealed class ImageSource extends Source {
 
   /// Corners of image specified in longitude, latitude pairs.
   final LngLatQuad coordinates;
+
+  @override
+  Map<String, Object?>? toJson() => switch (this) {
+    ImageSourceUrl(:final url) => {
+      'type': 'image',
+      'url': url,
+      'coordinates': coordinates.toJson(),
+    },
+    _ => null,
+  };
 }
 
 /// An [ImageSource] that loads its image from a URL.
@@ -102,6 +112,28 @@ class LngLatQuad {
     required this.topRight,
   });
 
+  factory LngLatQuad._fromJson(Object? json) {
+    final points = [
+      for (final point in (json as List<Object?>?) ?? const <Object?>[])
+        switch (point) {
+          [final num lon, final num lat] => Geographic(
+            lon: lon.toDouble(),
+            lat: lat.toDouble(),
+          ),
+          _ => const Geographic(lon: 0, lat: 0),
+        },
+    ];
+    Geographic corner(int index) => index < points.length
+        ? points[index]
+        : const Geographic(lon: 0, lat: 0);
+    return LngLatQuad(
+      topLeft: corner(0),
+      topRight: corner(1),
+      bottomRight: corner(2),
+      bottomLeft: corner(3),
+    );
+  }
+
   /// The position of the bottom left corner.
   final Geographic bottomLeft;
 
@@ -113,4 +145,13 @@ class LngLatQuad {
 
   /// The position of the top right corner.
   final Geographic topRight;
+
+  /// The corners as the `coordinates` of a style source: longitude and
+  /// latitude pairs, clockwise from the top left.
+  List<List<double>> toJson() => [
+    [topLeft.lon, topLeft.lat],
+    [topRight.lon, topRight.lat],
+    [bottomRight.lon, bottomRight.lat],
+    [bottomLeft.lon, bottomLeft.lat],
+  ];
 }

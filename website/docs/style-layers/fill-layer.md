@@ -24,14 +24,14 @@ Widget build(BuildContext context) {
       onStyleLoaded: (style) async {
         final geojsonPolygon =
         await rootBundle.loadString('assets/geojson/lake-constance.json');
-        await style.addSource(
+        await style.sources.add(
           GeoJsonSource.data(id: 'LakeConstance', data: geojsonPolygon),
         );
-        await style.addLayer(
-          const FillStyleLayer(
+        await style.layers.add(
+          FillStyleLayer(
             id: 'geojson-fill',
             sourceId: 'LakeConstance',
-            paint: {'fill-color': '#429ef5'},
+            color: const .literal(Color(0xFF429EF5)),
           ),
         );
       }
@@ -45,8 +45,9 @@ to learn more.
 
 ## Style & Layout
 
-Use the `paint` property to change the style and the `layout`
-property to change the behavior on the map.
+Every property of the style spec is an optional parameter and a getter and
+setter of the layer. See [Paint & Layout](paint-and-layout) and
+[Expressions](expressions).
 
 Read the [Paint & Layout](./paint-and-layout) chapter to learn more on this
 topic. 

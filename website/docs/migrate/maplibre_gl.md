@@ -40,12 +40,11 @@ widget by using `setState()` or any other Flutter state management framework.
 In case you need to display *lots* of annotations, `maplibre` provides you with
 direct access to the style layer using `StyleSource`s and `StyleLayer`s. These
 layers can be applied programmatically for example by using
-methods such as `mapController.style?.addSource()` on the `StyleController`.
+methods such as `mapController.style?.sources.add()` on the `StyleController`.
 
-All Paint and Layout Expressions are supported as they can be applied via raw
-lists. There is
-an [open issue](https://github.com/josxha/flutter-maplibre/issues/72) for static
-typed expressions. So if you are interested in it, consider give it an upvote.
+Paint and layout properties, and the style fields of annotation layers, are
+typed [expressions](../style-layers/expressions), such as `Expression<num>`. Use
+`Expression.raw` for JSON that the typed API doesn't cover.
 
 ## UI Overlays
 

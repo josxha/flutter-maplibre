@@ -96,10 +96,10 @@ class _LayersMixedPageState extends State<LayersMixedPage> {
               layers: [
                 CircleLayer(
                   points: _circlePoints,
-                  color: _circleColor,
-                  radius: 20,
-                  strokeColor: Colors.red,
-                  strokeWidth: 2,
+                  color: .literal(_circleColor),
+                  radius: const .literal(20),
+                  strokeColor: const .literal(Colors.red),
+                  strokeWidth: const .literal(2),
                 ),
                 if (_polylineLayer case final Layer layer) layer,
               ],

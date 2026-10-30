@@ -38,22 +38,20 @@ class _StyleLayersSymbolPageState extends State<StyleLayersSymbolPage> {
             await style.addImage('marker', bytes);
 
             // add some points as GeoJSON source to the map
-            await style.addSource(
+            await style.sources.add(
               const GeoJsonSource.data(id: 'points', data: _geoJsonString),
             );
 
             // display the image on the map
-            await style.addLayer(
-              const SymbolStyleLayer(
+            await style.layers.add(
+              SymbolStyleLayer(
                 id: 'images',
                 sourceId: 'points',
-                layout: {
-                  // see https://maplibre.org/maplibre-style-spec/layers/#symbol
-                  'icon-image': 'marker',
-                  'icon-size': 0.08,
-                  'icon-allow-overlap': true,
-                  'icon-anchor': 'bottom',
-                },
+                // see https://maplibre.org/maplibre-style-spec/layers/#symbol
+                iconImage: const .literal('marker'),
+                iconSize: const .literal(0.08),
+                iconAllowOverlap: const .literal(true),
+                iconAnchor: const .literal(IconAnchor.bottom),
               ),
             );
           } on Exception catch (error, stacktrace) {

@@ -23,27 +23,25 @@ Widget build(BuildContext context) {
       onMapCreated: (controller) => _controller = controller,
       onStyleLoaded: (style) async {
         // add the tile source
-        await style.addSource(
+        await style.sources.add(
           const GeoJsonSource.url(
             id: _sourceId,
             url:
             'https://maplibre.org/maplibre-gl-js/docs/assets/indoor-3d-map.geojson',
           ),
         );
-        const layer = FillExtrusionStyleLayer(
+        final layer = FillExtrusionStyleLayer(
           id: 'room-extrusion',
           sourceId: _sourceId,
-          paint: {
-            // See the MapLibre Style Specification for details on data expressions.
+          // See the MapLibre Style Specification for details on data expressions.
             // https://maplibre.org/maplibre-style-spec/expressions/
-            'fill-extrusion-color': ['get', 'color'],
-            'fill-extrusion-height': ['get', 'height'],
-            'fill-extrusion-base': ['get', 'base_height'],
-            'fill-extrusion-opacity': 0.5
-          },
+            color: .get('color').convertToColor(),
+            height: .get('height').asNumber(),
+            base: .get('base_height').asNumber(),
+            opacity: const .literal(0.5),
         );
         // add the layer
-        await style.addLayer(layer);
+        await style.layers.add(layer);
       }
   );
 }
@@ -55,8 +53,9 @@ to learn more.
 
 ## Style & Layout
 
-Use the `paint` property to change the style and the `layout`
-property to change the behavior on the map.
+Every property of the style spec is an optional parameter and a getter and
+setter of the layer. See [Paint & Layout](paint-and-layout) and
+[Expressions](expressions).
 
 Read the [Paint & Layout](./paint-and-layout) chapter to learn more on this
 topic. 

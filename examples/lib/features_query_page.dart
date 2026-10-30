@@ -80,7 +80,7 @@ class _FeaturesQueryPageState extends State<FeaturesQueryPage> {
 
     final geojson = {'type': 'FeatureCollection', 'features': features};
 
-    await style.addSource(
+    await style.sources.add(
       GeoJsonSource.data(id: 'points', data: jsonEncode(geojson)),
     );
 
@@ -113,23 +113,25 @@ class _FeaturesQueryPageState extends State<FeaturesQueryPage> {
 
     final geojson2 = {'type': 'FeatureCollection', 'features': features};
 
-    await style.addSource(
+    await style.sources.add(
       GeoJsonSource.data(id: 'polygons', data: jsonEncode(geojson2)),
     );
 
-    await style.addLayer(
-      const FillStyleLayer(
+    await style.layers.add(
+      FillStyleLayer(
         id: 'polygons',
         sourceId: 'polygons',
-        paint: {'fill-color': '#429ef5', 'fill-opacity': 0.6},
+        color: const .literal(Color(0xFF429EF5)),
+        opacity: const .literal(0.6),
       ),
     );
 
-    await style.addLayer(
-      const CircleStyleLayer(
+    await style.layers.add(
+      CircleStyleLayer(
         id: 'points',
         sourceId: 'points',
-        paint: {'circle-color': '#f54242', 'circle-radius': 8},
+        color: const .literal(Color(0xFFF54242)),
+        radius: const .literal(8),
       ),
     );
   }

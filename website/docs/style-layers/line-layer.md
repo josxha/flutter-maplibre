@@ -23,14 +23,15 @@ Widget build(BuildContext context) {
       onMapCreated: (controller) => _controller = controller,
       onStyleLoaded: (style) async {
         final geojsonLine = await rootBundle.loadString('assets/geojson/path.json');
-        await style.addSource(
+        await style.sources.add(
           GeoJsonSource.data(id: 'Path', data: geojsonLine),
         );
-        await style.addLayer(
-          const LineStyleLayer(
+        await style.layers.add(
+          LineStyleLayer(
             id: 'geojson-line',
             sourceId: 'Path',
-            paint: {'line-color': '#F00', 'line-width': 3},
+            color: const .literal(Color(0xFFFF0000)),
+            width: const .literal(3),
           ),
         );
       }
@@ -44,8 +45,9 @@ to learn more.
 
 ## Style & Layout
 
-Use the `paint` property to change the style and the `layout`
-property to change the behavior on the map.
+Every property of the style spec is an optional parameter and a getter and
+setter of the layer. See [Paint & Layout](paint-and-layout) and
+[Expressions](expressions).
 
 Read the [Paint & Layout](./paint-and-layout) chapter to learn more on this
 topic. 

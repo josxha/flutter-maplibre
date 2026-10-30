@@ -28,10 +28,10 @@ Widget build(BuildContext context) {
           Point(Geographic(lon: 9, lat: 48)),
           Point(Geographic(lon: 9.5, lat: 48)),
         ],
-        color: Colors.orange.withOpacity(0.5),
-        radius: 20,
-        strokeColor: Colors.red,
-        strokeWidth: 2,
+        color: .literal(Colors.orange.withOpacity(0.5)),
+        radius: .literal(20),
+        strokeColor: .literal(Colors.red),
+        strokeWidth: .literal(2),
       ),
     ],
   );
@@ -40,6 +40,19 @@ Widget build(BuildContext context) {
 
 That's it! You can add multiple `CircleLayer`s with different
 properties.
+
+## Style each feature
+
+Every style field is an [expression](../style-layers/expressions), so it can
+depend on the properties of the feature:
+
+```dart
+CircleLayer(
+  points: points,
+  radius: .get('size').asNumber(),
+  color: .get('color').convertToColor(),
+)
+```
 
 ## Update
 

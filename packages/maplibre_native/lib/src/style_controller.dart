@@ -10,34 +10,72 @@ import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 ///
 /// Sources and layers reach the map as style JSON, the form the C API takes
 /// them in.
-class StyleControllerNative extends StyleController {
+class StyleControllerNative extends StyleController implements StyleBackend {
   /// Creates a style controller for a map.
-  StyleControllerNative(
-    this._map, {
-    String? styleJson,
-    this.onAttributionsChanged,
-  }) : _sourceAttributions = sourceAttributionsOf(styleJson);
+  StyleControllerNative(this._map, {this.onAttributionsChanged});
 
   final mln.MapHandle _map;
 
   /// Called when [refreshAttributions] finds that the attributions changed.
   final VoidCallback? onAttributionsChanged;
 
-  /// The attributions that the style and [addSource] gave sources, by id.
-  /// MapLibre Native drops those of GeoJSON sources, so they come from here.
-  final Map<String, String> _sourceAttributions;
+  @override
+  late final StyleSources sources = StyleSources(this, layers: () => layers);
+
+  @override
+  late final StyleLayers layers = StyleLayers(this, sources: sources);
 
   List<String> _cachedAttributions = const [];
-  List<String> _cachedLayerIds = const [];
   var _disposed = false;
 
-  /// The options that [addSource] gave GeoJSON sources, by id. Data for a
-  /// source must be prepared with the options of the source.
+  /// The options of GeoJSON sources, by id. Data for a source must be prepared
+  /// with the options of the source.
   final _geoJsonOptions = <String, mln.GeoJsonSourceOptions>{};
 
-  /// Refreshes the cached layer ids and attributions from the map.
-  Future<void> refresh() async {
-    await Future.wait([_fetchLayerIds(), refreshAttributions()]);
+  /// Fills [layers] and [sources] from the style that the map loaded, and
+  /// reads its attributions.
+  Future<void> load() async {
+    final style = await _map.getLoadedStyleJson();
+    if (_disposed) return;
+    if (style case {'sources': final Map<String, Object?> styleSources}) {
+      sources.load(styleSources);
+      for (final MapEntry(:key, :value) in styleSources.entries) {
+        if (value case {'type': 'geojson'}) {
+          _geoJsonOptions[key] = _geoJsonOptionsOf(
+            value as Map<String, Object?>,
+          );
+        }
+      }
+    }
+    if (style case {'layers': final List<Object?> styleLayers}) {
+      layers.load(styleLayers.whereType<Map<String, Object?>>());
+    }
+    await refreshAttributions();
+  }
+
+  static mln.GeoJsonSourceOptions _geoJsonOptionsOf(
+    Map<String, Object?> json,
+  ) => mln.GeoJsonSourceOptions(
+    minZoom: (json['minzoom'] as num?)?.toDouble(),
+    maxZoom: (json['maxzoom'] as num?)?.toDouble(),
+    tolerance: (json['tolerance'] as num?)?.toDouble(),
+    buffer: (json['buffer'] as num?)?.toInt(),
+    lineMetrics: json['lineMetrics'] as bool?,
+    cluster: json['cluster'] as bool?,
+    clusterRadius: (json['clusterRadius'] as num?)?.toInt(),
+    clusterMaxZoom: (json['clusterMaxZoom'] as num?)?.toDouble(),
+    clusterMinPoints: (json['clusterMinPoints'] as num?)?.toInt(),
+  );
+
+  @override
+  void batch(void Function() updates) {
+    final discarding = _map.discarding;
+    discarding.beginCommandGroup();
+    try {
+      updates();
+    } finally {
+      discarding.endCommandGroup();
+    }
   }
 
   @override
@@ -45,81 +83,19 @@ class StyleControllerNative extends StyleController {
     if (source is ImageSourceBytes || source is ImageSourceProvider) {
       return _addImageSourceImage(source as ImageSource);
     }
-    final json = <String, Object?>{
-      ...switch (source) {
-        GeoJsonSource() => {
-          'type': 'geojson',
-          'data': switch (source) {
-            GeoJsonSourceUrl(:final url) => url,
-            GeoJsonSourceData(:final data) => jsonDecode(data),
-          },
-          'maxzoom': source.maxZoom,
-          'tolerance': source.tolerance,
-          'lineMetrics': source.lineMetrics,
-          'attribution': ?source.attribution,
-        },
-        RasterSource() => {
-          'type': 'raster',
-          ...tilesetOf(source),
-          'bounds': source.bounds,
-          'minzoom': source.minZoom,
-          'maxzoom': source.maxZoom,
-          'tileSize': source.tileSize,
-          'scheme': source.scheme.name,
-          'attribution': ?source.attribution,
-          'volatile': source.volatile,
-        },
-        RasterDemSource() => {
-          'type': 'raster-dem',
-          ...tilesetOf(source),
-          'bounds': source.bounds,
-          'minzoom': source.minZoom,
-          'maxzoom': source.maxZoom,
-          'tileSize': source.tileSize,
-          'attribution': ?source.attribution,
-          'volatile': source.volatile,
-          ...switch (source.encoding) {
-            RasterDemTerrariumEncoding() => {'encoding': 'terrarium'},
-            RasterDemMapboxEncoding() => {'encoding': 'mapbox'},
-            final RasterDemCustomEncoding encoding => {
-              'encoding': 'custom',
-              'redFactor': encoding.redFactor,
-              'greenFactor': encoding.greenFactor,
-              'blueFactor': encoding.blueFactor,
-              'baseShift': encoding.baseShift,
-            },
-          },
-        },
-        VectorSource() => {
-          'type': 'vector',
-          ...tilesetOf(source),
-          'bounds': source.bounds,
-          'scheme': source.scheme.name,
-          'minzoom': source.minZoom,
-          'maxzoom': source.maxZoom,
-          'attribution': ?source.attribution,
-          'volatile': source.volatile,
-        },
-        ImageSourceUrl() => {
-          'type': 'image',
-          'url': source.url,
-          'coordinates': [
-            source.coordinates.topLeft,
-            source.coordinates.topRight,
-            source.coordinates.bottomRight,
-            source.coordinates.bottomLeft,
-          ].map((point) => [point.lon, point.lat]).toList(),
-        },
-        VideoSource() => throw UnsupportedError(
-          'MapLibre Native has no video sources; they are only supported on '
-          'web.',
-        ),
-        _ => throw UnimplementedError(
-          'The source is not supported: ${source.runtimeType}',
-        ),
-      },
-    };
-    await _map.addStyleSourceJson(source.id, json);
+    if (source is VideoSource) {
+      throw UnsupportedError(
+        'MapLibre Native has no video sources; they are only supported on '
+        'web.',
+      );
+    }
+    final json = source.toJson();
+    if (json == null) {
+      throw UnimplementedError(
+        'The source is not supported: ${source.runtimeType}',
+      );
+    }
+    final added = _map.addStyleSourceJson(source.id, json);
     if (source is GeoJsonSource) {
       _geoJsonOptions[source.id] = mln.GeoJsonSourceOptions(
         maxZoom: source.maxZoom,
@@ -127,110 +103,119 @@ class StyleControllerNative extends StyleController {
         lineMetrics: source.lineMetrics,
       );
     }
-    if (json['attribution'] case final String attribution) {
-      _sourceAttributions[source.id] = attribution;
-    } else {
-      _sourceAttributions.remove(source.id);
-    }
+    await added;
     // Sources with inline tiles know their attribution now; a TileJSON source
     // reports it with a source change once its TileJSON loads.
     await refreshAttributions();
   }
 
   /// Adds an image source with decoded pixels, since the style JSON of an
-  /// image source only takes a URL.
+  /// image source only takes a URL. Decoding takes a while, so the source
+  /// starts with an empty image: calls after this one must find it on the
+  /// map.
   Future<void> _addImageSourceImage(ImageSource source) async {
-    final image = switch (source) {
-      ImageSourceBytes(:final bytes) => await _decodeImage(bytes),
-      ImageSourceProvider(:final image) => await resolveImageProvider(image),
-      ImageSourceUrl() => throw ArgumentError.value(source, 'source'),
+    final quad = source.coordinates;
+    final added = _map.addImageSourceImage(
+      source.id,
+      [
+        quad.topLeft,
+        quad.topRight,
+        quad.bottomRight,
+        quad.bottomLeft,
+      ].map((p) => mln.LatLng(latitude: p.lat, longitude: p.lon)).toList(),
+      _emptyImage,
+    );
+    // Whether the source is still on the map: it may have been removed or
+    // replaced meanwhile. Moving its corners keeps the image.
+    bool current() => switch ((source, sources[source.id])) {
+      (ImageSourceBytes(:final bytes), ImageSourceBytes(bytes: final now)) =>
+        identical(bytes, now),
+      (
+        ImageSourceProvider(:final image),
+        ImageSourceProvider(image: final now),
+      ) =>
+        identical(image, now),
+      _ => false,
     };
+    await added;
+    final mln.PremultipliedRgba8Image pixels;
     try {
-      final pixels = await _premultipliedImage(image, source.id);
-      final quad = source.coordinates;
-      await _map.addImageSourceImage(
-        source.id,
-        [
-          quad.topLeft,
-          quad.topRight,
-          quad.bottomRight,
-          quad.bottomLeft,
-        ].map((p) => mln.LatLng(latitude: p.lat, longitude: p.lon)).toList(),
-        pixels,
-      );
-    } finally {
-      image.dispose();
+      final image = switch (source) {
+        ImageSourceBytes(:final bytes) => await _decodeImage(bytes),
+        ImageSourceProvider(:final image) => await resolveImageProvider(image),
+        ImageSourceUrl() => throw ArgumentError.value(source, 'source'),
+      };
+      try {
+        pixels = await _premultipliedImage(image, source.id);
+      } finally {
+        image.dispose();
+      }
+    } catch (_) {
+      // The collection takes the source out again.
+      if (current()) _map.discarding.removeStyleSource(source.id);
+      rethrow;
     }
-    _sourceAttributions.remove(source.id);
+    if (current()) await _map.setImageSourceImage(source.id, pixels);
   }
+
+  /// A transparent image of one pixel, the image of an image source until
+  /// its image is decoded.
+  static final _emptyImage = mln.PremultipliedRgba8Image(
+    width: 1,
+    height: 1,
+    stride: 4,
+    pixels: Uint8List(4),
+  );
 
   @override
   Future<void> addLayer(
-    StyleLayer layer, {
+    Map<String, Object?> json, {
     String? belowLayerId,
-    String? aboveLayerId,
-    int? atIndex,
   }) async {
-    final json = <String, Object?>{
-      'id': layer.id,
-      'type': switch (layer) {
-        FillStyleLayer() => 'fill',
-        LineStyleLayer() => 'line',
-        SymbolStyleLayer() => 'symbol',
-        CircleStyleLayer() => 'circle',
-        HeatmapStyleLayer() => 'heatmap',
-        FillExtrusionStyleLayer() => 'fill-extrusion',
-        RasterStyleLayer() => 'raster',
-        HillshadeStyleLayer() => 'hillshade',
-        BackgroundStyleLayer() => 'background',
-        _ => throw UnimplementedError(
-          'The layer is not supported: ${layer.runtimeType}',
-        ),
-      },
-      if (layer is StyleLayerWithSource) ...{
-        'source': layer.sourceId,
-        'source-layer': ?layer.sourceLayerId,
-      },
-      'minzoom': layer.minZoom,
-      'maxzoom': layer.maxZoom,
-      'filter': ?layer.filter,
-      'layout': layer.layout,
-      'paint': layer.paint,
-    };
-
-    // The C API inserts below a named layer, so other placements translate
-    // to the layer that ends up above the new one.
-    var beforeLayerId = belowLayerId;
-    if (beforeLayerId == null && (aboveLayerId != null || atIndex != null)) {
-      final ids = await _fetchLayerIds();
-      if (aboveLayerId != null) {
-        final index = ids.indexOf(aboveLayerId);
-        if (index < 0) {
-          throw ArgumentError.value(aboveLayerId, 'aboveLayerId', 'not found');
-        }
-        beforeLayerId = index + 1 < ids.length ? ids[index + 1] : null;
-      } else if (atIndex! < ids.length) {
-        beforeLayerId = ids[atIndex < 0 ? 0 : atIndex];
-      }
-    }
-
     // An empty id appends the layer.
-    await _map.addStyleLayerJson(json, beforeLayerId ?? '');
-    await _fetchLayerIds();
+    await _map.addStyleLayerJson(json, belowLayerId ?? '');
   }
 
   @override
-  Future<void> updateGeoJsonSource({
-    required String id,
-    required String data,
-  }) async {
-    final trimmed = data.trim();
-    if (!trimmed.startsWith('{') && !trimmed.startsWith('[')) {
-      await _map.setGeoJsonSourceUrl(id, trimmed);
-      return;
-    }
+  Future<void> removeLayer(String id) =>
+      _checkUnlessMissing(_map.removeStyleLayer(id));
+
+  @override
+  void moveLayer(String id, {String? belowLayerId}) =>
+      _map.discarding.moveStyleLayer(id, belowLayerId ?? '');
+
+  // The command runs in order with later ones, so an animation doesn't wait
+  // for each frame's update.
+  @override
+  void setLayerProperty(
+    String layerId,
+    String name,
+    Object? value, {
+    required bool layout,
+  }) => _map.discarding.setStyleLayerProperty(layerId, name, value);
+
+  @override
+  void setFilter(String layerId, Object? filter) =>
+      _map.discarding.setStyleLayerProperty(layerId, 'filter', filter);
+
+  @override
+  void setZoomRange(String layerId, double minZoom, double maxZoom) {
+    final discarding = _map.discarding;
+    discarding.setStyleLayerProperty(layerId, 'minzoom', minZoom);
+    discarding.setStyleLayerProperty(layerId, 'maxzoom', maxZoom);
+  }
+
+  @override
+  Future<void> removeSource(String id) async {
+    await _checkUnlessMissing(_map.removeStyleSource(id));
+    _geoJsonOptions.remove(id);
+    await refreshAttributions();
+  }
+
+  @override
+  Future<void> setGeoJsonData(String id, String data) async {
     final handle = mln.GeoJsonSourceDataHandle.create(
-      jsonDecode(trimmed),
+      jsonDecode(data),
       options: _geoJsonOptions[id],
     );
     try {
@@ -241,35 +226,66 @@ class StyleControllerNative extends StyleController {
   }
 
   @override
-  Future<void> removeLayer(String id) async {
-    await _checkUnlessMissing(_map.removeStyleLayer(id));
-    await _fetchLayerIds();
+  Future<void> setGeoJsonUrl(String id, String url) async {
+    await _map.setGeoJsonSourceUrl(id, url);
   }
 
   @override
-  Future<void> removeSource(String id) async {
-    await _checkUnlessMissing(_map.removeStyleSource(id));
-    _sourceAttributions.remove(id);
-    _geoJsonOptions.remove(id);
+  Future<void> setImageCoordinates(String id, LngLatQuad coordinates) async {
+    await _map.setImageSourceCoordinates(id, [
+      for (final corner in [
+        coordinates.topLeft,
+        coordinates.topRight,
+        coordinates.bottomRight,
+        coordinates.bottomLeft,
+      ])
+        mln.LatLng(latitude: corner.lat, longitude: corner.lon),
+    ]);
+  }
+
+  @override
+  Future<void> setTiles(
+    String id,
+    List<String> tiles,
+    Map<String, Object?> specification,
+  ) => _replaceTileSource(id, specification);
+
+  @override
+  Future<void> setTileJsonUrl(
+    String id,
+    String url,
+    Map<String, Object?> specification,
+  ) => _replaceTileSource(id, specification);
+
+  /// The C API can't change the tiles or URL of a source, so this removes the
+  /// layers that use the source, swaps the source and adds the layers back at
+  /// their positions, all in one command group. The layer objects stay
+  /// attached; their JSON is what goes back to the map.
+  Future<void> _replaceTileSource(
+    String id,
+    Map<String, Object?> specification,
+  ) async {
+    final all = layers.toList();
+    bool usesSource(StyleLayer layer) => layer.toJson()['source'] == id;
+    final discarding = _map.discarding;
+    late final Future<void> added;
+    batch(() {
+      for (final layer in all.where(usesSource)) {
+        discarding.removeStyleLayer(layer.id);
+      }
+      discarding.removeStyleSource(id);
+      added = _map.addStyleSourceJson(id, specification);
+      // From the top, so that the layer above each one is already back.
+      for (var index = all.length - 1; index >= 0; index--) {
+        if (!usesSource(all[index])) continue;
+        discarding.addStyleLayerJson(
+          all[index].toJson(),
+          index + 1 < all.length ? all[index + 1].id : '',
+        );
+      }
+    });
+    await added;
     await refreshAttributions();
-  }
-
-  @override
-  Future<LineStyleLayerController?> getLineLayer(String id) async {
-    final info = await _map.getStyleLayer(id);
-    if (info?.type != 'line') return null;
-    final paint = <String, Object?>{};
-    for (final name in LineStyleLayerController.paintProperties) {
-      paint[name] = await _map.getStyleLayerProperty(id, name);
-    }
-    return LineStyleLayerController(
-      id: id,
-      paint: paint,
-      // The command runs in order with later ones, so an animation doesn't
-      // wait for each frame's update.
-      setPaintProperty: (name, value) =>
-          _map.discarding.setStyleLayerProperty(id, name, value),
-    );
   }
 
   @override
@@ -343,21 +359,46 @@ class StyleControllerNative extends StyleController {
     }
   }
 
-  /// Refreshes the cached attributions from the sources of the map.
+  /// Reads what the sources of the map learned from their TileJSON into
+  /// [sources], and refreshes the cached attributions.
   Future<List<String>> refreshAttributions() async {
     if (_disposed) return _cachedAttributions;
-    final sources = await _map.listStyleSources();
+    final infos = await _map.listStyleSources();
+    if (_disposed) return _cachedAttributions;
+    for (final info in infos) {
+      if (info.tileJson case final tileJson?) {
+        final bounds = info.bounds;
+        sources.applyTileJson(
+          info.id,
+          attribution: info.attribution,
+          minZoom: tileJson.minZoom,
+          maxZoom: tileJson.maxZoom,
+          bounds: bounds == null
+              ? null
+              : [
+                  bounds.southwest.longitude,
+                  bounds.southwest.latitude,
+                  bounds.northeast.longitude,
+                  bounds.northeast.latitude,
+                ],
+        );
+      }
+    }
     final attributions = List<String>.unmodifiable([
-      for (final source in sources)
-        if (switch (source.attribution) {
+      for (final info in infos)
+        if (switch (info.attribution) {
               final String attribution when attribution.isNotEmpty =>
                 attribution,
-              _ => _sourceAttributions[source.id],
+              // MapLibre Native drops the attribution of GeoJSON sources.
+              _ => switch (sources[info.id]) {
+                final GeoJsonSource source => source.attribution,
+                _ => null,
+              },
             }
             case final String attribution when attribution.isNotEmpty)
           attribution,
     ]);
-    if (_disposed || listEquals(attributions, _cachedAttributions)) {
+    if (listEquals(attributions, _cachedAttributions)) {
       return _cachedAttributions;
     }
     _cachedAttributions = attributions;
@@ -367,9 +408,6 @@ class StyleControllerNative extends StyleController {
 
   @override
   List<String> get attributions => _cachedAttributions;
-
-  @override
-  List<String> getLayerIds() => _cachedLayerIds;
 
   /// MapLibre Native has no globe projection, so the map stays on Mercator.
   @override
@@ -385,28 +423,9 @@ class StyleControllerNative extends StyleController {
   static var _warnedGlobe = false;
 
   @override
-  void dispose() => _disposed = true;
-
-  Future<List<String>> _fetchLayerIds() async {
-    if (_disposed) return _cachedLayerIds;
-    final layers = await _map.listStyleLayers();
-    return _cachedLayerIds = [for (final layer in layers) layer.id];
+  void dispose() {
+    _disposed = true;
+    layers.dispose();
+    sources.dispose();
   }
-}
-
-/// The attributions of the sources in [styleJson], by source id.
-Map<String, String> sourceAttributionsOf(String? styleJson) {
-  if (styleJson == null) return {};
-  try {
-    if (jsonDecode(styleJson) case {'sources': final Map<String, Object?> s}) {
-      return {
-        for (final MapEntry(:key, :value) in s.entries)
-          if (value case {'attribution': final String attribution})
-            key: attribution,
-      };
-    }
-  } on FormatException {
-    // MapLibre Native reports the invalid style.
-  }
-  return {};
 }

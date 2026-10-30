@@ -74,23 +74,27 @@ class _StyleLayersLinePageState extends State<StyleLayersLinePage> {
     final geojsonLine2 = await rootBundle.loadString(
       'assets/geojson/multiline-path.json',
     );
-    await style.addSource(GeoJsonSource.data(id: 'Path1', data: geojsonLine1));
-    await style.addSource(
+    await style.sources.add(
+      GeoJsonSource.data(id: 'Path1', data: geojsonLine1),
+    );
+    await style.sources.add(
       GeoJsonSource.data(id: 'Path2', data: geojsonLine2, tolerance: 0),
     );
 
-    await style.addLayer(
-      const LineStyleLayer(
+    await style.layers.add(
+      LineStyleLayer(
         id: 'geojson-line-1',
         sourceId: 'Path1',
-        paint: {'line-color': '#F00', 'line-width': 3},
+        color: const .literal(Color(0xFFFF0000)),
+        width: const .literal(3),
       ),
     );
-    await style.addLayer(
-      const LineStyleLayer(
+    await style.layers.add(
+      LineStyleLayer(
         id: 'geojson-line-2',
         sourceId: 'Path2',
-        paint: {'line-color': '#F00', 'line-width': 3},
+        color: const .literal(Color(0xFFFF0000)),
+        width: const .literal(3),
       ),
     );
   }

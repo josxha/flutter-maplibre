@@ -27,7 +27,7 @@ class _AnimationPageState extends State<AnimationPage>
     vsync: this,
     duration: const Duration(seconds: 10),
   )..addListener(_onAnimate);
-  LineStyleLayerController? _line;
+  LineStyleLayer? _line;
 
   @override
   Widget build(BuildContext context) {
@@ -51,34 +51,31 @@ class _AnimationPageState extends State<AnimationPage>
     final response = await get(
       Uri.parse('https://maplibre.org/maplibre-gl-js/docs/assets/hike.geojson'),
     );
-    await style.addSource(
+    await style.sources.add(
       // line-progress needs the line metrics of the source.
       GeoJsonSource.data(id: _sourceId, data: response.body, lineMetrics: true),
     );
-    await style.addLayer(
-      LineStyleLayer(
-        id: _layerId,
-        sourceId: _sourceId,
-        paint: {'line-width': 3, 'line-gradient': _gradient(0)},
-      ),
+    final line = LineStyleLayer(
+      id: _layerId,
+      sourceId: _sourceId,
+      width: const .literal(3),
+      gradient: _gradient(0),
     );
-    final line = await style.getLineLayer(_layerId);
-    if (!mounted || line == null) return;
+    await style.layers.add(line);
+    if (!mounted) return;
     _line = line;
     _animation.forward(from: 0);
   }
 
-  void _onAnimate() => _line?.lineGradient = _gradient(_animation.value);
+  void _onAnimate() => _line?.gradient = _gradient(_animation.value);
 
   /// Colors the line up to [progress], from 0 at its start to 1 at its end,
   /// and hides the rest.
-  static List<Object> _gradient(double progress) => [
-    'step',
-    ['line-progress'],
-    '#F00',
-    progress,
-    'rgba(0, 0, 0, 0)',
-  ];
+  static Expression<Color> _gradient(double progress) => .step(
+    .lineProgress(),
+    const .literal(Color(0xFFFF0000)),
+    {progress: const .literal(Color(0x00000000))},
+  );
 
   @override
   void dispose() {

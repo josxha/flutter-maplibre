@@ -14,60 +14,26 @@ abstract class StyleController {
   /// Abstract base constructor for implementations.
   const StyleController();
 
-  /// Add a new source to the map.
-  Future<void> addSource(Source source);
+  /// The layers of the style, from bottom to top. Get, add, move and remove
+  /// them here, and change their properties on the [StyleLayer] objects.
+  StyleLayers get layers;
 
-  /// Add a new layer to the map. The source must be added before adding it to
-  /// the map.
-  ///
-  /// [belowLayerId] The ID of an existing layer to insert the new layer before,
-  /// resulting in the new layer appearing visually beneath the existing layer.
-  ///
-  /// [aboveLayerId] The ID of an existing layer to insert the new layer after,
-  /// resulting in the new layer appearing visually above the existing layer.
-  /// **This parameter will be ignored on web.**
-  ///
-  /// [atIndex] is the position at which to insert the layer. An index of 0
-  /// would send the layer to the back; an index equal to the number of
-  /// objects in the layers property would bring the layer to the front.
-  /// **This parameter will be ignored on web.**
-  ///
-  /// If more than one positioning parameter is specified, it will first try to
-  /// use [belowLayerId], then [aboveLayerId] and finally [atIndex].
-  /// If no positioning parameter is specified, the layer
-  /// will be appended to the end of the layers array and appear visually
-  /// above all other layers.
-  Future<void> addLayer(
-    StyleLayer layer, {
-    String? belowLayerId,
-    String? aboveLayerId,
-    int? atIndex,
-  });
+  /// The sources of the style. Get, add, update and remove them here.
+  StyleSources get sources;
 
-  /// Looks up the line layer [id] of the style. Its getters read the layer's
-  /// properties and its setters update them.
+  /// Runs [updates], whose changes to the style show in one frame on native
+  /// maps. On web they run as they are, as gl-js only renders in between
+  /// tasks anyway.
   ///
-  /// Returns null when the style has no line layer with that id.
-  Future<LineStyleLayerController?> getLineLayer(String id);
-
-  /// Update the data of a GeoJSON source.
-  Future<void> updateGeoJsonSource({required String id, required String data});
-
-  /// Removes the layer with the given [id] from the map's style.
-  Future<void> removeLayer(String id);
-
-  /// Removes the source with the given [id] from the map's style.
-  Future<void> removeSource(String id);
+  /// [updates] must be synchronous: changes made after an `await` in it are
+  /// not part of the batch.
+  void batch(void Function() updates);
 
   /// The attributions of the sources in the map style.
   ///
   /// The list follows the sources of the style. A source that loads its
   /// attribution from a TileJSON adds it once the TileJSON has loaded.
   List<String> get attributions;
-
-  @visibleForTesting
-  /// For testing purposes only. Will be replaced with a public API.
-  List<String> getLayerIds();
 
   /// Add an image to the map.
   ///

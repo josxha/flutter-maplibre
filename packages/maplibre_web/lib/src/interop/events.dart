@@ -63,6 +63,10 @@ abstract class MapEventType {
   /// Fired when any map data (style, source, tile, etc) begins loading or
   /// changing.
   static const data = 'data';
+
+  /// Fired when an error occurs, such as a style change that fails
+  /// validation.
+  static const error = 'error';
 }
 
 /// A data event of the map, see [MapEventType.data].

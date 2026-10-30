@@ -266,14 +266,55 @@ Each entry: the decision, then why.
   or wheel. Permissions are left to `geolocator` or `permission_handler`;
   `maplibre_geolocator` adapts `geolocator` positions.
 
-- **Layer properties are read and updated through per-type controllers with
-  getters and setters** (`StyleController.getLineLayer` returns a
-  `LineStyleLayerController`). The lookup fetches the properties the
-  controller models, so getters are synchronous on every platform although
-  native queries are async; setters update that cache and send the change
-  without waiting (native: a discarding `setStyleLayerProperty` command), so
-  an animation can set one every frame. Only `line-gradient` is modeled so
-  far; more properties and layer types follow the same pattern.
+- **Expressions are a sealed `Expression<T>` of `Literal`, `Call` and
+  `RawValue`, with static members and extensions, and layer properties take
+  them directly.** The design is in issue #72: `T` is what it evaluates to,
+  numbers are `num` because generics are covariant, overloads are extensions
+  on the receiver type, and keyword clashes are renamed. `==` compares
+  `toJson()` deeply. `RawValue` is an addition for what a style holds but
+  `Call` (a list) can't: legacy function objects and colors the reader doesn't
+  know, such as extended CSS names. They read back unchanged.
+- **`StyleLayer` subclasses are generated from the style spec by
+  `tool/codegen/style_layers.dart`, and the generated Dart is committed.**
+  Every property is a typed getter, setter and optional constructor parameter,
+  and transitions have typed ones (`colorTransition`). There are no `paint` or
+  `layout` maps and no access by property name: names and JSON stay inside
+  the package, except for `Expression.raw` and `StyleLayer.fromJson`/`toJson`,
+  which also keep what a newer style spec adds. Setters can be synchronous
+  because the state is in Dart, so there are no async `setX` methods.
+  Layers keep only style JSON privately, and
+  getters decode it on read, so what a style holds round trips unchanged and
+  anything but a literal stays an `Expression.raw`. A literal list goes to the
+  map in the plain form of the spec, without `literal`, which every property
+  accepts. Colors are written as `#rrggbb`, or `rgba()` when translucent, as
+  MapLibre Native's parser doesn't read hex with alpha.
+- **Layer objects are their own controllers, as in the Android and iOS SDKs.**
+  Once a layer is on a map its setters also send the change, fire-and-forget
+  and in order (native: `MapHandle.discarding.setStyleLayerProperty`, which
+  also takes `filter`, `minzoom`, `maxzoom` and `visibility`; web:
+  `setPaintProperty`, `setLayoutProperty`, `setFilter`, `setLayerZoomRange`).
+  Removing the layer or replacing the style detaches the object.
+- **`StyleController.layers` and `sources` are own classes, not a `Map` or
+  `List`, served synchronously from a cache behind a `StyleBackend` that each
+  platform implements.** The cache and the argument checks are in
+  `maplibre_platform_interface`, so both platforms behave the same and unit
+  tests run against a recording backend. On style load native runs one
+  `getLoadedStyleJson` query and web reads `getStyle()`; after that every
+  change goes through this API. Changes apply to the cache at once and are
+  undone if the map rejects them. What a TileJSON adds to a source comes in on
+  source changes (`applyTileJson`) and is kept apart from the source as
+  specified, so that an update doesn't carry it over.
+- **`StyleController.batch` wraps its synchronous callback in a command group
+  on native, ended in `finally`, and only runs it on web.** `LayerManager` uses
+  it, so one rebuild shows in one frame.
+- **`LayerManager` keeps the style layers it added and sets only what changed,
+  compared by JSON (`StyleLayer.updateFrom`).** It re-creates a layer only when its type or source
+  changes, below the next declarative layer, so the order stays.
+- **Annotation layers take `Expression<T>` for their style fields, with const
+  `.literal` defaults, and pass them on to their style layer.** That allows
+  per feature styling and keeps the layers `const`. `==` works as expressions
+  compare deeply. Colors keep their alpha in the CSS color, so `opacity` is a
+  field of its own that multiplies it.
 - **Style images have a size in logical pixels that the package keeps the
   same on every platform and screen.** `addImage` takes a `pixelRatio` of
   image pixels per logical pixel, 1 by default as in MapLibre GL JS, and
@@ -287,7 +328,7 @@ Each entry: the decision, then why.
   the helpers hand their `ui.Image` to `addImageFromUiImage`, which passes
   its raw pixels (straight RGBA on web, premultiplied on native).
 - **Animations change paint, not data.** The animation page adds its path
-  once and moves a `step` on `line-progress` in `line-gradient`. A GeoJSON
+  once and moves a `step` on `line-progress` in `LineStyleLayer.gradient`. A GeoJSON
   update per frame re-encodes the data in Dart, parses and indexes it on the
   UI thread (`geojsonSourceDataCreate` is synchronous) and re-tiles the
   source; a paint change does none of that.
@@ -406,8 +447,9 @@ Each entry: the decision, then why.
   `hooks.user_defines.maplibre_native_ffi.local_build`, a maplibre-native-ffi
   CMake build root.** The hook takes `<preset>/install` under it for each
   target, so one setting serves every platform and Android ABI.
-- **ffigen and jnigen run from `tool/codegen`, a package outside the
-  workspace.** Outside the workspace, the binding's build hook doesn't run
+- **ffigen, jnigen and the style layer generator run from `tool/codegen`, a
+  package outside the workspace.** The generator pins the npm version of the
+  style spec and downloads its `v8.json`; the spec isn't committed. Outside the workspace, the binding's build hook doesn't run
   during code generation. jnigen uses the example app's Gradle classpath.
 - **`package:jni` is also an FFI plugin on Windows and Linux.** It builds
   there but stays unused.
@@ -425,9 +467,19 @@ Each entry: the decision, then why.
   So a map without `MapOptions.initCamera` sets its camera constraints after
   the first style loaded, and frames before that are unconstrained.
 - MapLibre Native drops the attribution of GeoJSON sources, so
-  `StyleControllerNative` takes it from the style JSON and from `addSource`.
-  For a style loaded from an http(s), `mapbox://` or `asset://` URL the JSON
-  is not at hand, so its GeoJSON attributions are missing on native.
+  `StyleControllerNative` takes it from `StyleSources`, which has it from the
+  loaded style JSON and from `sources.add`.
+- `maplibre_native_ffi` has no call to change the tiles or the TileJSON URL of
+  raster, raster DEM and vector sources. `StyleControllerNative` removes the
+  layers that use the source, swaps the source and adds the layers back at
+  their positions, in one command group. `getStyleSource` is lossy (no
+  `url` for inline tiles, no GeoJSON attribution or data), so sources are read
+  from `getLoadedStyleJson` instead.
+- `getLoadedStyleJson` returns the style document as it was parsed, so it only
+  fills the cache on load.
+- Feature queries on native don't return layers in their order, and layers with
+  the same layout share one symbol placement. So the tests check the order of
+  layers through symbol placement, with icons of slightly different sizes.
 - In profile and release builds (AOT) of `maplibre_native_ffi` 0.202610.2
   and 0.202610.3, a native map stopped showing frames after about 30. The
   write-only `NativeHandleState._callbackRoots`

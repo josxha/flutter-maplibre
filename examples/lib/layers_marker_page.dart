@@ -69,12 +69,12 @@ class _LayersMarkerPageState extends State<LayersMarkerPage> {
         layers: [
           MarkerLayer(
             points: _points,
-            textField: '{name}',
-            textAllowOverlap: true,
-            iconAllowOverlap: true,
-            iconImage: _imageLoaded ? 'marker' : null,
-            iconAnchor: IconAnchor.bottom,
-            textOffset: const [0, 1],
+            textField: const .literal('{name}'),
+            textAllowOverlap: const .literal(true),
+            iconAllowOverlap: const .literal(true),
+            iconImage: _imageLoaded ? const .literal('marker') : null,
+            iconAnchor: const .literal(IconAnchor.bottom),
+            textOffset: const .literal(Offset(0, 1)),
           ),
         ],
       ),

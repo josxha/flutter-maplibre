@@ -171,8 +171,8 @@ class _MyMapWidget extends State<MyMapWidget> {
             // check if the MapEvent type is a MapEventStyleLoaded
             if (event case MapEventStyleLoaded()) {
               // This event gets emitted every time a style finishes loading.
-              event.style.addSource(...);
-              event.style.addLayer(...);
+              event.style.sources.add(...);
+              event.style.layers.add(...);
             }
           }
       ),
@@ -190,6 +190,6 @@ MapController? _mapController;
 
 void doSomething() {
   // only adds the source if the style has finished loading and a source can be added.
-  _mapController?.style?.addSource(...);
+  _mapController?.style?.sources.add(...);
 }
 ```

@@ -20,6 +20,37 @@ sealed class VectorSource extends Source {
     this.volatile = false,
   });
 
+  factory VectorSource._fromJson(String id, Map<String, Object?> json) {
+    final bounds = _boundsOf(json);
+    final scheme = json['scheme'] == 'tms' ? TileScheme.tms : TileScheme.xyz;
+    final minZoom = _doubleOf(json['minzoom']) ?? 0;
+    final maxZoom = _doubleOf(json['maxzoom']) ?? 22;
+    final attribution = json['attribution'] as String?;
+    final volatile = json['volatile'] as bool? ?? false;
+    return switch (json['tiles']) {
+      final List<Object?> tiles => VectorSourceTiles(
+        id: id,
+        tiles: tiles.cast<String>(),
+        bounds: bounds,
+        scheme: scheme,
+        minZoom: minZoom,
+        maxZoom: maxZoom,
+        attribution: attribution,
+        volatile: volatile,
+      ),
+      _ => VectorSourceUrl(
+        id: id,
+        url: json['url'] as String? ?? '',
+        bounds: bounds,
+        scheme: scheme,
+        minZoom: minZoom,
+        maxZoom: maxZoom,
+        attribution: attribution,
+        volatile: volatile,
+      ),
+    };
+  }
+
   /// A vector source whose tiles are described by the TileJSON resource at
   /// [url]. Supported protocols are `http:` and `https:`, and `pmtiles://`
   /// in front of the URL of a PMTiles archive.
@@ -80,6 +111,18 @@ sealed class VectorSource extends Source {
   ///
   /// Defaults to false. Not available on web.
   final bool volatile;
+
+  @override
+  Map<String, Object?> toJson() => {
+    'type': 'vector',
+    ...tilesetOf(this),
+    'bounds': bounds,
+    'scheme': scheme.name,
+    'minzoom': minZoom,
+    'maxzoom': maxZoom,
+    'attribution': ?attribution,
+    'volatile': volatile,
+  };
 }
 
 /// A [VectorSource] whose tiles are described by a TileJSON resource.

@@ -2,6 +2,12 @@
 
 ### Breaking Changes
 
+- Style layers take typed properties and expressions instead of `paint` and
+  `layout` maps, for example `width: const .literal(3)` instead of
+  `paint: {'line-width': 3}`. Annotation layers take expressions too.
+- `style.layers` and `style.sources` replace the layer and source methods of
+  `StyleController`: `style.addLayer(layer)` is `style.layers.add(layer)`,
+  `style.updateGeoJsonSource(...)` is `style.sources.updateGeoJsonData(...)`.
 - Web: requires [maplibre-gl-js v6](https://github.com/maplibre/maplibre-gl-js/releases/tag/v6.0.0),
   which now loads on its own. Remove the maplibre-gl-js and PMTiles `<script>`
   and `<link>` tags from your `web/index.html`. With v6, WebGL2 is required,
@@ -126,10 +132,12 @@
   `updateRegionMetadata`, `invalidateRegion` and `resumeDownload`.
 - Maps cache resources in `maplibre_native.db` in the app support directory,
   which also holds the offline regions.
-- `StyleController.getLineLayer` returns a `LineStyleLayerController`, whose
-  getters and setters read and update the layer's paint, starting with
-  `lineGradient`. Setters don't wait for the map, so they can animate a
-  layer every frame. `GeoJsonSource.lineMetrics` enables `line-progress`.
+- Typed style expressions, typed style layers and `ColorReliefStyleLayer`.
+- `style.layers` and `style.sources` list, add, update, move and remove the
+  layers and sources of the style. Setting a property of a layer updates the
+  map, also every frame for animations.
+- Changing a layer in `MapLibreMap.layers` no longer moves it above all other
+  layers.
 - `ImageSource.bytes` and `ImageSource.provider` show images from encoded
   bytes or any Flutter `ImageProvider`, such as an `AssetImage` or a
   `FileImage`, not only from a URL.

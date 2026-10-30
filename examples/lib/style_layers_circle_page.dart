@@ -37,60 +37,35 @@ class _StyleLayersCirclePageState extends State<StyleLayersCirclePage> {
       url:
           'https://maplibre.org/maplibre-gl-js/docs/assets/earthquakes.geojson',
     );
-    await style.addSource(earthquakes);
-    await style.addLayer(_circleStyleLayer);
+    await style.sources.add(earthquakes);
+    await style.layers.add(_circleStyleLayer);
   }
 }
 
-const _circleStyleLayer = CircleStyleLayer(
+final _circleStyleLayer = CircleStyleLayer(
   id: _layerId,
   sourceId: _sourceId,
-  paint: {
-    // Size circle radius by earthquake magnitude and zoom level
-    'circle-radius': [
-      'interpolate',
-      ['linear'],
-      ['zoom'],
-      7,
-      [
-        'interpolate',
-        ['linear'],
-        ['get', 'mag'],
-        1,
-        1,
-        6,
-        50,
-      ],
-    ],
-    // Color circle by earthquake magnitude
-    'circle-color': [
-      'interpolate',
-      ['linear'],
-      ['get', 'mag'],
-      1,
-      'rgba(33,102,172,0)',
-      2,
-      'rgb(103,169,207)',
-      3,
-      'rgb(209,229,240)',
-      4,
-      'rgb(253,219,199)',
-      5,
-      'rgb(239,138,98)',
-      6,
-      'rgb(178,24,43)',
-    ],
-    'circle-stroke-color': 'white',
-    'circle-stroke-width': 1,
-    // Transition from heatmap to circle layer by zoom level
-    'circle-opacity': [
-      'interpolate',
-      ['linear'],
-      ['zoom'],
-      7,
-      0,
-      8,
-      1,
-    ],
-  },
+  // Size circle radius by earthquake magnitude and zoom level
+  radius: .interpolate(const .linear(), .zoom(), {
+    7: .interpolate(const .linear(), .get('mag').asNumber(), {
+      1: const .literal(1),
+      6: const .literal(50),
+    }),
+  }),
+  // Color circle by earthquake magnitude
+  color: .interpolate(const .linear(), .get('mag').asNumber(), {
+    1: const .literal(Color(0x002166AC)),
+    2: const .literal(Color(0xFF67A9CF)),
+    3: const .literal(Color(0xFFD1E5F0)),
+    4: const .literal(Color(0xFFFDDBC7)),
+    5: const .literal(Color(0xFFEF8A62)),
+    6: const .literal(Color(0xFFB2182B)),
+  }),
+  strokeColor: const .literal(Color(0xFFFFFFFF)),
+  strokeWidth: const .literal(1),
+  // Transition from heatmap to circle layer by zoom level
+  opacity: .interpolate(const .linear(), .zoom(), {
+    7: const .literal(0),
+    8: const .literal(1),
+  }),
 );
