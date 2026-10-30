@@ -32,11 +32,13 @@ const _layerTypes = [
 ];
 
 Future<void> main(List<String> args) async {
-  final spec = jsonDecode(
-    args.isEmpty
-        ? await _download(Uri.parse(_specUrl))
-        : File(args.single).readAsStringSync(),
-  ) as Map<String, Object?>;
+  final spec =
+      jsonDecode(
+            args.isEmpty
+                ? await _download(Uri.parse(_specUrl))
+                : File(args.single).readAsStringSync(),
+          )
+          as Map<String, Object?>;
   final package = Platform.script.resolve(
     '../../packages/maplibre_platform_interface/lib/src/style/',
   );
