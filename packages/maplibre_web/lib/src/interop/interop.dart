@@ -65,3 +65,7 @@ extension type LngLatBounds._(JSObject _) implements JSObject {
 /// https://github.com/maplibre/maplibre-gl-js/blob/1a8ef7ff9848105e49a29e3f5e59a52c14b9fbe2/src/source/protocol_crud.ts#L33
 @JS()
 external void addProtocol(String customProtocol, JSAny loadFn);
+
+/// The version of maplibre-gl-js, for example `6.16.0`.
+@JS()
+external String getVersion();
