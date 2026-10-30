@@ -1,4 +1,4 @@
-## 0.1.0
+## 0.1.0-pre.1
 
 - `geolocatorUserLocations` and `Position.toUserLocation` turn `geolocator`
   positions into the `UserLocation`s of a `UserLocationLayer`.
