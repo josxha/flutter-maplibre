@@ -12,10 +12,16 @@ import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 /// them in.
 class StyleControllerNative extends StyleController {
   /// Creates a style controller for a map.
-  StyleControllerNative(this._map, {String? styleJson})
-    : _sourceAttributions = sourceAttributionsOf(styleJson);
+  StyleControllerNative(
+    this._map, {
+    String? styleJson,
+    this.onAttributionsChanged,
+  }) : _sourceAttributions = sourceAttributionsOf(styleJson);
 
   final mln.MapHandle _map;
+
+  /// Called when [refreshAttributions] finds that the attributions changed.
+  final VoidCallback? onAttributionsChanged;
 
   /// The attributions that the style and [addSource] gave sources, by id.
   /// MapLibre Native drops those of GeoJSON sources, so they come from here.
@@ -299,7 +305,7 @@ class StyleControllerNative extends StyleController {
   Future<List<String>> refreshAttributions() async {
     if (_disposed) return _cachedAttributions;
     final sources = await _map.listStyleSources();
-    return _cachedAttributions = List.unmodifiable([
+    final attributions = List<String>.unmodifiable([
       for (final source in sources)
         if (switch (source.attribution) {
               final String attribution when attribution.isNotEmpty =>
@@ -309,6 +315,12 @@ class StyleControllerNative extends StyleController {
             case final String attribution when attribution.isNotEmpty)
           attribution,
     ]);
+    if (_disposed || listEquals(attributions, _cachedAttributions)) {
+      return _cachedAttributions;
+    }
+    _cachedAttributions = attributions;
+    onAttributionsChanged?.call();
+    return attributions;
   }
 
   @override

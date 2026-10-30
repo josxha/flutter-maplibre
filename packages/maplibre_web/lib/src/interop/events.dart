@@ -59,4 +59,19 @@ abstract class MapEventType {
 
   /// Called once the style has loaded.
   static const styleLoad = 'style.load';
+
+  /// Fired when any map data (style, source, tile, etc) begins loading or
+  /// changing.
+  static const data = 'data';
+}
+
+/// A data event of the map, see [MapEventType.data].
+@JS()
+extension type MapDataEvent._(MapLibreEvent _) implements MapLibreEvent {
+  /// The type of data that has changed, `style` or `source`.
+  external String dataType;
+
+  /// What changed of a source: `metadata`, `content`, `visibility` or
+  /// `idle`.
+  external String? sourceDataType;
 }

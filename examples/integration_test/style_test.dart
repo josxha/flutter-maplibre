@@ -329,6 +329,48 @@ void runTests() {
       );
     });
 
+    testWidgets('updates SourceAttribution when attributions change', (
+      tester,
+    ) async {
+      final map = await pumpMap(
+        tester,
+        children: const [
+          SourceAttribution(showMapLibre: false, keepExpanded: true),
+        ],
+      );
+      bool shown(String text) => find
+          .byWidgetPredicate(
+            (widget) =>
+                widget is RichText && widget.text.toPlainText().contains(text),
+          )
+          .evaluate()
+          .isNotEmpty;
+
+      // The camera stays put, so only the attribution change rebuilds the
+      // widget.
+      await map.style.addSource(
+        const RasterSource(
+          id: 'src',
+          tiles: ['https://example.invalid/{z}/{x}/{y}.png'],
+          attribution: '© Widget Data',
+        ),
+      );
+      await map.style.addLayer(
+        const RasterStyleLayer(id: 'r', sourceId: 'src'),
+      );
+      await map.pumpUntil(
+        () => shown('© Widget Data'),
+        reason: () => 'attributions: ${map.style.getAttributions()}',
+      );
+
+      await map.style.removeLayer('r');
+      await map.style.removeSource('src');
+      await map.pumpUntil(
+        () => !shown('© Widget Data'),
+        reason: () => 'attributions: ${map.style.getAttributions()}',
+      );
+    });
+
     testWidgets('reports the attributions of GeoJSON sources', (tester) async {
       final map = await pumpMap(
         tester,

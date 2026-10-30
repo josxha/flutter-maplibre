@@ -344,7 +344,16 @@ class MapLibreMapStateNative extends MapLibreMapState {
       await _applyOptions();
     }
     style?.dispose();
-    final styleController = StyleControllerNative(map, styleJson: _styleJson);
+    late final StyleControllerNative styleController;
+    styleController = StyleControllerNative(
+      map,
+      styleJson: _styleJson,
+      // Rebuilds the widgets in MapLibreMap.children, such as
+      // SourceAttribution.
+      onAttributionsChanged: () {
+        if (mounted && style == styleController) setState(() {});
+      },
+    );
     style = styleController;
     await styleController.refresh();
     if (_disposed || style != styleController) return;

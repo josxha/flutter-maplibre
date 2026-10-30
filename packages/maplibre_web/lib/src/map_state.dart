@@ -7,6 +7,7 @@ import 'dart:ui';
 import 'dart:ui' as ui;
 import 'dart:ui_web';
 
+import 'package:flutter/foundation.dart' show listEquals;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -30,6 +31,9 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   final _cameraPaddingReset = CameraPaddingReset();
   bool _nextGestureCausedByController = false;
   LayerManager? _layerManager;
+
+  /// The attributions that the widgets in [MapLibreMap.children] last saw.
+  List<String> _attributions = const [];
 
   /// A gesture or its fling moves the camera; [_gestureMoveStarted] once it
   /// has reported the start of the move.
@@ -132,6 +136,17 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         interop.MapEventType.load,
         (interop.MapMouseEvent event) {
           _onStyleLoaded();
+        }.toJS,
+      );
+      _map.on(
+        interop.MapEventType.data,
+        (interop.MapDataEvent event) {
+          // The events on which the gl-js attribution control updates.
+          if (event.dataType == 'style' ||
+              event.sourceDataType == 'metadata' ||
+              event.sourceDataType == 'visibility') {
+            _onAttributionsMaybeChanged();
+          }
         }.toJS,
       );
       _map.on(
@@ -530,8 +545,19 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     widget.onEvent?.call(MapEventStyleLoaded(styleCtrl));
     widget.onStyleLoaded?.call(styleCtrl);
     _layerManager = LayerManager(styleCtrl, widget.layers);
+    _attributions = styleCtrl.getAttributions();
     // setState is needed to refresh the flutter widgets used in MapLibreMap.children.
     setState(() {});
+  }
+
+  /// Rebuilds the widgets in [MapLibreMap.children], such as
+  /// `SourceAttribution`, when the attributions of the style changed.
+  void _onAttributionsMaybeChanged() {
+    final style = this.style;
+    if (style == null || !mounted) return;
+    final attributions = style.getAttributions();
+    if (listEquals(attributions, _attributions)) return;
+    setState(() => _attributions = attributions);
   }
 }
 
