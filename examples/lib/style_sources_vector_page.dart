@@ -47,7 +47,8 @@ class _StyleSourcesVectorPageState extends State<StyleSourcesVectorPage> {
               id: 'fill_layer',
               sourceId: sourceId,
               sourceLayerId: 'countries',
-              paint: {'fill-color': '#429ef5', 'fill-opacity': 0.6},
+              color: const .literal(Color(0xFF429EF5)),
+              opacity: const .literal(0.6),
             );
 
             await style.layers.add(fillLayer);
@@ -56,7 +57,8 @@ class _StyleSourcesVectorPageState extends State<StyleSourcesVectorPage> {
               id: 'line_layer',
               sourceId: sourceId,
               sourceLayerId: 'countries',
-              paint: {'line-color': '#00F', 'line-width': 3},
+              color: const .literal(Color(0xFF0000FF)),
+              width: const .literal(3),
             );
 
             await style.layers.add(lineLayer);
@@ -65,13 +67,11 @@ class _StyleSourcesVectorPageState extends State<StyleSourcesVectorPage> {
               id: 'circle_layer',
               sourceId: sourceId,
               sourceLayerId: 'centroids',
-              paint: {
-                'circle-radius': 18,
-                'circle-color': '#000000',
-                'circle-opacity': 0.5,
-                'circle-stroke-color': '#FFF',
-                'circle-stroke-width': 2,
-              },
+              radius: const .literal(18),
+              color: const .literal(Color(0xFF000000)),
+              opacity: const .literal(0.5),
+              strokeColor: const .literal(Color(0xFFFFFFFF)),
+              strokeWidth: const .literal(2),
             );
             await style.layers.add(circleLayer);
 
@@ -79,12 +79,10 @@ class _StyleSourcesVectorPageState extends State<StyleSourcesVectorPage> {
               id: 'images_layer',
               sourceId: sourceId,
               sourceLayerId: 'centroids',
-              layout: {
-                'icon-image': 'marker',
-                'icon-size': 0.08,
-                'icon-allow-overlap': true,
-                'icon-anchor': 'bottom',
-              },
+              iconImage: const .literal('marker'),
+              iconSize: const .literal(0.08),
+              iconAllowOverlap: const .literal(true),
+              iconAnchor: const .literal(IconAnchor.bottom),
             );
             await style.layers.add(symbolLayer);
           } on Exception catch (error, stacktrace) {

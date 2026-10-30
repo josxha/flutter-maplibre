@@ -256,7 +256,7 @@ void runTests() {
         CircleStyleLayer(
           id: 'circles',
           sourceId: 'src',
-          paint: {'circle-radius': 10},
+          radius: const .literal(10),
         ),
       );
       await map.waitForFeatures(map.center, (features) => features.length == 1);
@@ -455,9 +455,20 @@ void runTests() {
       layer.maxZoom = 24;
       await expectShown(shown: true);
 
-      layer.setProperty('circle-radius', 10);
+      // A transition that is far from done keeps the circle large.
+      layer.radiusTransition = const StyleTransition(
+        duration: Duration(minutes: 1),
+      );
+      layer.radius = const .literal(10);
+      await Future<void>.delayed(const Duration(seconds: 1));
+      await map.waitForFeatures(beside, (features) => features.isNotEmpty);
+      expect(
+        layer.radiusTransition,
+        const StyleTransition(duration: Duration(minutes: 1)),
+      );
+      layer.radiusTransition = const StyleTransition(duration: Duration.zero);
+      layer.radius = const .literal(10.5);
       await map.waitForFeatures(beside, (features) => features.isEmpty);
-      expect(layer.radius, const Literal<num>(10));
     });
 
     testWidgets('moves layers', (tester) async {
@@ -692,7 +703,8 @@ void runTests() {
           SymbolStyleLayer(
             id: 'symbols',
             sourceId: 'src',
-            layout: {'icon-image': image, 'icon-allow-overlap': true},
+            iconImage: .literal(image),
+            iconAllowOverlap: const .literal(true),
           ),
         );
         // A symbol whose image is missing is not drawn, so the query proves

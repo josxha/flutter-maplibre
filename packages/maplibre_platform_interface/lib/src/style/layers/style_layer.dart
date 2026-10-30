@@ -19,21 +19,15 @@ part 'style_layers.g.dart';
 /// {@subCategory Style Layers}
 abstract class StyleLayer {
   /// Creates a layer that is not on a map yet.
-  ///
-  /// The [layout] and [paint] maps take raw style JSON by property name, for
-  /// what the typed properties of the subclasses don't cover. A typed property
-  /// wins over its raw value.
   StyleLayer({
     required this.id,
     this._minZoom = 0,
     this._maxZoom = 24,
     Expression<bool>? filter,
     bool visible = true,
-    Map<String, Object?> layout = const {},
-    Map<String, Object?> paint = const {},
   }) : _filter = filter?.toJson(),
-       _layout = {...layout},
-       _paint = {...paint},
+       _layout = {},
+       _paint = {},
        _extras = const {} {
     if (!visible) _layout['visibility'] = 'none';
   }
@@ -51,7 +45,8 @@ abstract class StyleLayer {
       };
 
   /// Reads a layer from the JSON of a style layer. The class follows its
-  /// `type`.
+  /// `type`. This is the way to a layer with properties that this version of
+  /// the package doesn't know yet; [toJson] writes them back.
   factory StyleLayer.fromJson(Map<String, Object?> json) =>
       _layerFromJson(json);
 
@@ -136,55 +131,30 @@ abstract class StyleLayer {
   /// Defaults to true.
   bool get visible => _layout['visibility'] != 'none';
 
-  set visible(bool value) => setProperty('visibility', value ? null : 'none');
+  set visible(bool value) => _write('visibility', value ? null : 'none');
 
-  /// The layout properties as style JSON, by name in the style spec.
-  Map<String, Object?> get layout => Map.unmodifiable(_layout);
-
-  /// The paint properties as style JSON, by name in the style spec.
-  Map<String, Object?> get paint => Map.unmodifiable(_paint);
-
-  /// The value of the property [name] in the style spec as JSON, or null if it
-  /// isn't set. This is the escape hatch for what the typed properties don't
-  /// cover. It also reads `filter`, `minzoom` and `maxzoom`.
-  Object? getProperty(String name) => switch (name) {
-    'filter' => _filter,
-    'minzoom' => _minZoom,
-    'maxzoom' => _maxZoom,
-    _ => _layout[name] ?? _paint[name],
-  };
-
-  /// Sets the property [name] in the style spec to the JSON [value]. Null
-  /// resets it to its default. This is the escape hatch for what the typed
-  /// properties don't cover, such as the transition `line-color-transition`.
-  /// It also writes `filter`, `minzoom` and `maxzoom`.
-  void setProperty(String name, Object? value) {
-    switch (name) {
-      case 'filter':
-        _filter = value;
-        if (_ownerOrWarn() case final owner?) {
-          owner._backend.setFilter(id, value);
-        }
-        return;
-      case 'minzoom':
-        minZoom = (value as num?)?.toDouble() ?? 0;
-        return;
-      case 'maxzoom':
-        maxZoom = (value as num?)?.toDouble() ?? 24;
-        return;
+  /// Sets every property of this layer that differs from [other] and leaves
+  /// the rest alone. Only the changes reach the map.
+  ///
+  /// [other] must be of the same [type].
+  void updateFrom(StyleLayer other) {
+    if (!jsonEquals(_filter, other._filter)) {
+      _filter = other._filter;
+      if (_ownerOrWarn() case final owner?) {
+        owner._backend.setFilter(id, _filter);
+      }
     }
-    final isLayout = _isLayout(name);
-    final target = isLayout ? _layout : _paint;
-    if (value == null) {
-      target.remove(name);
-    } else {
-      target[name] = value;
+    if (_minZoom != other._minZoom || _maxZoom != other._maxZoom) {
+      _minZoom = other._minZoom;
+      _maxZoom = other._maxZoom;
+      _sendZoomRange();
     }
-    if (_ownerOrWarn() case final owner?) {
-      if (isLayout) {
-        owner._backend.setLayoutProperty(id, name, value);
-      } else {
-        owner._backend.setPaintProperty(id, name, value);
+    for (final (current, next) in [
+      (_layout, other._layout),
+      (_paint, other._paint),
+    ]) {
+      for (final name in {...current.keys, ...next.keys}) {
+        if (!jsonEquals(current[name], next[name])) _write(name, next[name]);
       }
     }
   }
@@ -233,7 +203,33 @@ abstract class StyleLayer {
       };
 
   void _setExpression(String name, Expression<Object?>? value) =>
-      setProperty(name, value == null ? null : encodeProperty(value));
+      _write(name, value == null ? null : encodeProperty(value));
+
+  void _initTransition(String name, StyleTransition? value) {
+    if (value != null) _paint['$name-transition'] = value.toJson();
+  }
+
+  StyleTransition? _transition(String name) =>
+      switch (_paint['$name-transition']) {
+        final Map<String, Object?> json => StyleTransition._fromJson(json),
+        _ => null,
+      };
+
+  void _setTransition(String name, StyleTransition? value) =>
+      _write('$name-transition', value?.toJson());
+
+  void _write(String name, Object? value) {
+    final isLayout = _isLayout(name);
+    final target = isLayout ? _layout : _paint;
+    if (value == null) {
+      target.remove(name);
+    } else {
+      target[name] = value;
+    }
+    if (_ownerOrWarn() case final owner?) {
+      owner._backend.setLayerProperty(id, name, value, layout: isLayout);
+    }
+  }
 
   void _sendZoomRange() {
     if (_ownerOrWarn() case final owner?) {
@@ -258,6 +254,54 @@ abstract class StyleLayer {
   }
 }
 
+/// How a paint property changes to a new value.
+///
+/// https://maplibre.org/maplibre-style-spec/transition/
+///
+/// {@category Style}
+/// {@subCategory Style Layers}
+@immutable
+final class StyleTransition {
+  /// Creates a transition of [duration] that starts after [delay].
+  const StyleTransition({
+    this.duration = const Duration(milliseconds: 300),
+    this.delay = Duration.zero,
+  });
+
+  factory StyleTransition._fromJson(Map<String, Object?> json) =>
+      StyleTransition(
+        duration: Duration(
+          milliseconds: (json['duration'] as num?)?.toInt() ?? 300,
+        ),
+        delay: Duration(milliseconds: (json['delay'] as num?)?.toInt() ?? 0),
+      );
+
+  /// The time allotted for the transition to complete.
+  ///
+  /// Defaults to 300 milliseconds.
+  final Duration duration;
+
+  /// The time before the transition begins.
+  ///
+  /// Defaults to no delay.
+  final Duration delay;
+
+  /// The transition as style JSON.
+  Map<String, Object?> toJson() => {
+    'duration': duration.inMilliseconds,
+    'delay': delay.inMilliseconds,
+  };
+
+  @override
+  bool operator ==(Object other) =>
+      other is StyleTransition &&
+      duration == other.duration &&
+      delay == other.delay;
+
+  @override
+  int get hashCode => Object.hash(duration, delay);
+}
+
 /// A [StyleLayer] that pulls its data from a [Source]. Basically every layer
 /// except [BackgroundStyleLayer].
 ///
@@ -273,8 +317,6 @@ abstract class StyleLayerWithSource extends StyleLayer {
     super.maxZoom,
     super.filter,
     super.visible,
-    super.layout,
-    super.paint,
   });
 
   StyleLayerWithSource._fromJson(super.json)
@@ -296,8 +338,8 @@ abstract class StyleLayerWithSource extends StyleLayer {
   };
 }
 
-/// A layer of a type that this version of the package doesn't know. It keeps
-/// its JSON, which [StyleLayer.getProperty] and [StyleLayer.setProperty] reach.
+/// A layer of a type that this version of the package doesn't know. It has no
+/// typed properties, and [toJson] writes back the JSON it came from.
 ///
 /// {@category Style}
 /// {@subCategory Style Layers}
@@ -305,20 +347,25 @@ final class UnknownStyleLayer extends StyleLayer {
   /// Reads a layer from the JSON of a style layer.
   UnknownStyleLayer.fromJson(super.json)
     : type = json['type'] as String? ?? '',
-      _source = {
-        if (json['source'] case final String source) 'source': source,
-        if (json['source-layer'] case final String layer) 'source-layer': layer,
-      },
+      sourceId = json['source'] as String?,
+      sourceLayerId = json['source-layer'] as String?,
       super._fromJson();
 
   @override
   final String type;
 
-  final Map<String, Object?> _source;
+  /// The id of the source of this layer, if it has one.
+  final String? sourceId;
+
+  /// The layer of a vector tile source, if it has one.
+  final String? sourceLayerId;
 
   @override
-  Map<String, Object?> get _sourceJson => _source;
+  Map<String, Object?> get _sourceJson => {
+    'source': ?sourceId,
+    'source-layer': ?sourceLayerId,
+  };
 
   @override
-  Set<String> get _layoutProperties => _layout.keys.toSet();
+  Set<String> get _layoutProperties => const {};
 }

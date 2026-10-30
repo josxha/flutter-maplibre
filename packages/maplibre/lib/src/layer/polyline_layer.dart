@@ -40,26 +40,17 @@ class PolylineLayer extends Layer<Feature<LineString>> {
   final List<int>? dashArray;
 
   @override
-  Map<String, Object> getPaint() => {
-    'line-color': color.toHexString(),
-    'line-opacity': opacity,
-    'line-width': width,
-    'line-gap-width': gapWidth,
-    'line-blur': blur,
-    if (dashArray case final List<int> dashArray) 'line-dasharray': dashArray,
-  };
-
-  @override
-  Map<String, Object> getLayout() => {};
-
-  @override
   StyleLayer createStyleLayer(int index) => LineStyleLayer(
     id: getLayerId(index),
     sourceId: getSourceId(index),
-    paint: getPaint(),
-    layout: getLayout(),
     minZoom: minZoom,
     maxZoom: maxZoom,
+    color: .literal(color.withValues(alpha: 1)),
+    opacity: .literal(opacity),
+    width: .literal(width),
+    gapWidth: .literal(gapWidth),
+    blur: .literal(blur),
+    dasharray: dashArray == null ? null : .literal(dashArray!),
   );
 
   @override

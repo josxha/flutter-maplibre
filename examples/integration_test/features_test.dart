@@ -63,21 +63,23 @@ Future<void> _addFixture(TestMap map) async {
     FillStyleLayer(
       id: 'polygon_layer',
       sourceId: 'polygon_source',
-      paint: {'fill-color': '#00FF00'},
+      color: const .literal(Color(0xFF00FF00)),
     ),
   );
   await map.style.layers.add(
     LineStyleLayer(
       id: 'line_layer',
       sourceId: 'line_source',
-      paint: {'line-color': '#0000FF', 'line-width': 5},
+      color: const .literal(Color(0xFF0000FF)),
+      width: const .literal(5),
     ),
   );
   await map.style.layers.add(
     CircleStyleLayer(
       id: 'point_layer',
       sourceId: 'point_source',
-      paint: {'circle-radius': 5, 'circle-color': '#FF0000'},
+      radius: const .literal(5),
+      color: const .literal(Color(0xFFFF0000)),
     ),
   );
   await map.waitForFeatures(map.center, (features) => features.length == 2);
@@ -128,7 +130,7 @@ void runTests() {
         CircleStyleLayer(
           id: 'point_layer_2',
           sourceId: 'point_source',
-          paint: {'circle-radius': 5},
+          radius: const .literal(5),
         ),
       );
       features = await map.waitForFeatures(

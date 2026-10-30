@@ -21,12 +21,6 @@ class _TestLayer extends Layer<Feature<Point>> {
   final String? sourceLayerId;
 
   @override
-  Map<String, Object> getLayout() => {};
-
-  @override
-  Map<String, Object> getPaint() => {};
-
-  @override
   StyleLayer createStyleLayer(int index) => type == 'circle'
       ? CircleStyleLayer(
           id: getLayerId(index),
@@ -178,7 +172,9 @@ void main() {
         ..filter = null
         ..minZoom = 1
         ..maxZoom = 2
-        ..width = null;
+        ..width = null
+        ..widthTransition = const StyleTransition(duration: Duration.zero)
+        ..widthTransition = null;
       expect(backend.calls, [
         'setPaint top line-width 2',
         'setLayout top line-cap round',
@@ -189,6 +185,8 @@ void main() {
         'setZoomRange top 1.0 24.0',
         'setZoomRange top 1.0 2.0',
         'setPaint top line-width null',
+        'setPaint top line-width-transition {duration: 0, delay: 0}',
+        'setPaint top line-width-transition null',
       ]);
     });
 

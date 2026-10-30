@@ -134,6 +134,7 @@ export 'package:maplibre_platform_interface/maplibre_platform_interface.dart'
         StyleLayers,
         StyleLoadedCallback,
         StyleSources,
+        StyleTransition,
         SymbolHeightAnchor,
         SymbolPlacement,
         SymbolStyleLayer,

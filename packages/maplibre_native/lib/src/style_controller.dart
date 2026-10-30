@@ -155,12 +155,12 @@ class StyleControllerNative extends StyleController implements StyleBackend {
   // The command runs in order with later ones, so an animation doesn't wait
   // for each frame's update.
   @override
-  void setPaintProperty(String layerId, String name, Object? value) =>
-      _map.discarding.setStyleLayerProperty(layerId, name, value);
-
-  @override
-  void setLayoutProperty(String layerId, String name, Object? value) =>
-      _map.discarding.setStyleLayerProperty(layerId, name, value);
+  void setLayerProperty(
+    String layerId,
+    String name,
+    Object? value, {
+    required bool layout,
+  }) => _map.discarding.setStyleLayerProperty(layerId, name, value);
 
   @override
   void setFilter(String layerId, Object? filter) =>

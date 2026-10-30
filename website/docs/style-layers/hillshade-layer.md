@@ -32,7 +32,7 @@ Widget build(BuildContext context) {
         final layer = HillshadeStyleLayer(
           id: _layerId,
           sourceId: _sourceId,
-          paint: {'hillshade-shadow-color': '#473B24'},
+          shadowColor: const .literal([Color(0xFF473B24)]),
         );
         await style.layers.add(layer);
       }
@@ -46,8 +46,9 @@ to learn more.
 
 ## Style & Layout
 
-Use the `paint` property to change the style and the `layout`
-property to change the behavior on the map.
+Every property of the style spec is an optional parameter and a getter and
+setter of the layer. See [Paint & Layout](paint-and-layout) and
+[Expressions](expressions).
 
 Read the [Paint & Layout](./paint-and-layout) chapter to learn more on this
 topic. 

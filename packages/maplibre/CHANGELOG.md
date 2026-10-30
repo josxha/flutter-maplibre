@@ -5,10 +5,14 @@
 - Style layers are typed and generated from the style spec: every paint and
   layout property is a constructor parameter and a getter and setter of type
   `Expression<T>`, without the prefix of the layer type (`line-width` is
-  `LineStyleLayer.width`, `icon-` and `text-` stay). Raw `paint` and `layout`
-  maps keep working. Style layers can no longer be `const`. On
-  `BackgroundStyleLayer`, `color` and `opacity` are expressions now:
-  `color: const .literal(Colors.black)`.
+  `LineStyleLayer.width`, `icon-` and `text-` stay). A property with a
+  transition also has a typed one, such as `colorTransition`. The `paint` and
+  `layout` maps of the layer constructors are gone: `paint: {'line-width': 3}`
+  is `width: const .literal(3)`, and `Expression.raw` takes the JSON of one
+  property. `StyleLayer.fromJson` takes the JSON of a whole layer. Style layers
+  can no longer be `const`. On `BackgroundStyleLayer`, `color` and `opacity` are
+  expressions now: `color: const .literal(Colors.black)`.
+- Removed `getPaint` and `getLayout` from the annotation layers.
 - `StyleLayer.filter` is an `Expression<bool>?`. Use `Expression.raw([...])` for
   a filter in JSON.
 - `StyleController.layers` and `StyleController.sources` replace `addLayer`,
@@ -166,8 +170,7 @@
   and `StyleLayer.moveBelow` move a layer.
 - A style layer on the map is its own controller: its setters also update the
   map, fire-and-forget and in order, so they can animate a layer every frame.
-  Also for `minZoom`, `maxZoom`, `filter` and `visible`. `getProperty` and
-  `setProperty` reach what the typed properties don't cover.
+  Also for `minZoom`, `maxZoom`, `filter` and `visible`.
 - `StyleController.sources` reads the sources of the style synchronously and
   updates them: `updateGeoJsonData`, `updateGeoJsonUrl`,
   `updateImageCoordinates`, `updateTiles` and `updateTileJsonUrl`.

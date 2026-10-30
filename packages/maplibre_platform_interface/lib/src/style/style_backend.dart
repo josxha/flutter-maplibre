@@ -17,11 +17,15 @@ abstract interface class StyleBackend {
   /// Moves the layer [id] below [belowLayerId] or to the top.
   void moveLayer(String id, {String? belowLayerId});
 
-  /// Sets a paint property of the layer [layerId]. A null [value] resets it.
-  void setPaintProperty(String layerId, String name, Object? value);
-
-  /// Sets a layout property of the layer [layerId]. A null [value] resets it.
-  void setLayoutProperty(String layerId, String name, Object? value);
+  /// Sets the property [name] of the style spec on the layer [layerId]. A null
+  /// [value] resets it. [layout] tells whether it is a layout or a paint
+  /// property.
+  void setLayerProperty(
+    String layerId,
+    String name,
+    Object? value, {
+    required bool layout,
+  });
 
   /// Sets the filter of the layer [layerId]. A null [filter] removes it.
   void setFilter(String layerId, Object? filter);

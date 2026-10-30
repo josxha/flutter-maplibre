@@ -87,8 +87,8 @@ if (line.width case Literal(:final value)) print(value);
 Everything else reads back as an `Expression.raw`. Removing the layer or loading
 a new style detaches the object; its setters then only change the object.
 
-`getProperty` and `setProperty` take the name in the style spec and JSON, for
-what the typed properties don't cover, such as `line-color-transition`.
+A property with a transition has a typed one next to it, such as
+`line.colorTransition = const StyleTransition(duration: Duration(seconds: 1))`.
 
 To show several changes in one frame on native maps, use a batch. The callback
 must be synchronous:

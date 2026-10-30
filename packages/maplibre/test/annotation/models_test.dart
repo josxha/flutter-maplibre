@@ -45,20 +45,19 @@ void main() {
       expect(style.sourceId, 'maplibre-source-1');
       expect(style.minZoom, 3);
       expect(style.maxZoom, 12);
-      expect(style.paint, layer.getPaint());
     });
 
     test('maps its properties to the style spec', () {
-      expect(layer.getPaint(), {
+      expect(layer.createStyleLayer(0).toJson()['paint'], {
         'circle-radius': 10,
-        'circle-color': '#FF0000',
+        'circle-color': '#ff0000',
         'circle-blur': 0.5,
         'circle-opacity': closeTo(0.5, 0.01),
         'circle-stroke-width': 2,
-        'circle-stroke-color': '#00FF00',
+        'circle-stroke-color': '#00ff00',
         'circle-stroke-opacity': 1.0,
       });
-      expect(layer.getLayout(), isEmpty);
+      expect(layer.createStyleLayer(0).toJson(), isNot(contains('layout')));
     });
   });
 
@@ -81,12 +80,10 @@ void main() {
     test('creates a symbol style layer', () {
       final style = layer.createStyleLayer(0);
       expect(style, isA<SymbolStyleLayer>());
-      expect(style.layout, layer.getLayout());
-      expect(style.paint, layer.getPaint());
     });
 
     test('maps its layout to the style spec', () {
-      final layout = layer.getLayout();
+      final layout = layer.createStyleLayer(0).toJson()['layout']! as Map;
       expect(layout['icon-image'], 'marker');
       expect(layout['icon-size'], 2);
       expect(layout['icon-anchor'], 'bottom-left');
@@ -97,16 +94,18 @@ void main() {
     });
 
     test('maps its paint to the style spec', () {
-      final paint = layer.getPaint();
+      final paint = layer.createStyleLayer(0).toJson()['paint']! as Map;
       expect(paint['icon-opacity'], 0.5);
       expect(paint['icon-translate'], [1, 2]);
       expect(paint['text-opacity'], 0.8);
-      expect(paint['text-color'], Colors.purple.toHexString());
+      expect(paint['text-color'], Colors.purple.toHexString().toLowerCase());
     });
 
     test('leaves out the icon without an image', () {
       expect(
-        const MarkerLayer(points: points).getLayout(),
+        const MarkerLayer(points: points)
+            .createStyleLayer(0)
+            .toJson()['layout'],
         isNot(contains('icon-image')),
       );
     });
@@ -134,8 +133,8 @@ void main() {
     });
 
     test('maps its properties to the style spec', () {
-      expect(layer.getPaint(), {
-        'fill-color': '#00FF00',
+      expect(layer.createStyleLayer(0).toJson()['paint'], {
+        'fill-color': '#00ff00',
         'fill-opacity': closeTo(0.25, 0.01),
         'fill-outline-color': '#000000',
       });
@@ -164,8 +163,8 @@ void main() {
     });
 
     test('maps its properties to the style spec', () {
-      expect(layer.getPaint(), {
-        'line-color': Colors.blue.toHexString(),
+      expect(layer.createStyleLayer(0).toJson()['paint'], {
+        'line-color': Colors.blue.toHexString().toLowerCase(),
         'line-opacity': 1.0,
         'line-width': 4,
         'line-gap-width': 1,
@@ -176,7 +175,9 @@ void main() {
 
     test('leaves out the dash array when it has none', () {
       expect(
-        PolylineLayer(polylines: layer.list).getPaint(),
+        PolylineLayer(polylines: layer.list)
+            .createStyleLayer(0)
+            .toJson()['paint'],
         isNot(contains('line-dasharray')),
       );
     });

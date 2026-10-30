@@ -31,15 +31,19 @@ final class BackgroundStyleLayer extends StyleLayer {
     super.maxZoom,
     super.filter,
     super.visible,
-    super.layout,
-    super.paint,
     Expression<Color>? color,
+    StyleTransition? colorTransition,
     Expression<String>? pattern,
+    StyleTransition? patternTransition,
     Expression<num>? opacity,
+    StyleTransition? opacityTransition,
   }) {
     _initProperty('background-color', color);
+    _initTransition('background-color', colorTransition);
     _initProperty('background-pattern', pattern);
+    _initTransition('background-pattern', patternTransition);
     _initProperty('background-opacity', opacity);
+    _initTransition('background-opacity', opacityTransition);
   }
 
   /// Reads a [BackgroundStyleLayer] from the JSON of a style layer.
@@ -64,6 +68,12 @@ final class BackgroundStyleLayer extends StyleLayer {
   set color(Expression<Color>? value) =>
       _setExpression('background-color', value);
 
+  /// How [color] changes to a new value.
+  StyleTransition? get colorTransition => _transition('background-color');
+
+  set colorTransition(StyleTransition? value) =>
+      _setTransition('background-color', value);
+
   /// Name of image in sprite to use for drawing an image background. For seamless
   /// patterns, image width and height must be a factor of two (2, 4, 8, ...,
   /// 512). Note that zoom-dependent expressions will be evaluated only at integer
@@ -73,6 +83,12 @@ final class BackgroundStyleLayer extends StyleLayer {
 
   set pattern(Expression<String>? value) =>
       _setExpression('background-pattern', value);
+
+  /// How [pattern] changes to a new value.
+  StyleTransition? get patternTransition => _transition('background-pattern');
+
+  set patternTransition(StyleTransition? value) =>
+      _setTransition('background-pattern', value);
 
   /// The opacity at which the background will be drawn.
   ///
@@ -84,6 +100,12 @@ final class BackgroundStyleLayer extends StyleLayer {
 
   set opacity(Expression<num>? value) =>
       _setExpression('background-opacity', value);
+
+  /// How [opacity] changes to a new value.
+  StyleTransition? get opacityTransition => _transition('background-opacity');
+
+  set opacityTransition(StyleTransition? value) =>
+      _setTransition('background-opacity', value);
 }
 
 /// A filled circle.
@@ -102,33 +124,47 @@ final class CircleStyleLayer extends StyleLayerWithSource {
     super.maxZoom,
     super.filter,
     super.visible,
-    super.layout,
-    super.paint,
     Expression<num>? sortKey,
     Expression<num>? radius,
+    StyleTransition? radiusTransition,
     Expression<Color>? color,
+    StyleTransition? colorTransition,
     Expression<num>? blur,
+    StyleTransition? blurTransition,
     Expression<num>? opacity,
+    StyleTransition? opacityTransition,
     Expression<Offset>? translate,
+    StyleTransition? translateTransition,
     Expression<CircleTranslateAnchor>? translateAnchor,
     Expression<CirclePitchScale>? pitchScale,
     Expression<CirclePitchAlignment>? pitchAlignment,
     Expression<num>? strokeWidth,
+    StyleTransition? strokeWidthTransition,
     Expression<Color>? strokeColor,
+    StyleTransition? strokeColorTransition,
     Expression<num>? strokeOpacity,
+    StyleTransition? strokeOpacityTransition,
   }) {
     _initProperty('circle-sort-key', sortKey);
     _initProperty('circle-radius', radius);
+    _initTransition('circle-radius', radiusTransition);
     _initProperty('circle-color', color);
+    _initTransition('circle-color', colorTransition);
     _initProperty('circle-blur', blur);
+    _initTransition('circle-blur', blurTransition);
     _initProperty('circle-opacity', opacity);
+    _initTransition('circle-opacity', opacityTransition);
     _initProperty('circle-translate', translate);
+    _initTransition('circle-translate', translateTransition);
     _initProperty('circle-translate-anchor', translateAnchor);
     _initProperty('circle-pitch-scale', pitchScale);
     _initProperty('circle-pitch-alignment', pitchAlignment);
     _initProperty('circle-stroke-width', strokeWidth);
+    _initTransition('circle-stroke-width', strokeWidthTransition);
     _initProperty('circle-stroke-color', strokeColor);
+    _initTransition('circle-stroke-color', strokeColorTransition);
     _initProperty('circle-stroke-opacity', strokeOpacity);
+    _initTransition('circle-stroke-opacity', strokeOpacityTransition);
   }
 
   /// Reads a [CircleStyleLayer] from the JSON of a style layer.
@@ -159,6 +195,12 @@ final class CircleStyleLayer extends StyleLayerWithSource {
 
   set radius(Expression<num>? value) => _setExpression('circle-radius', value);
 
+  /// How [radius] changes to a new value.
+  StyleTransition? get radiusTransition => _transition('circle-radius');
+
+  set radiusTransition(StyleTransition? value) =>
+      _setTransition('circle-radius', value);
+
   /// The fill color of the circle.
   ///
   /// Defaults to `"#000000"`.
@@ -166,6 +208,12 @@ final class CircleStyleLayer extends StyleLayerWithSource {
       _property('circle-color', decodeColor, const Literal(Color(0xFF000000)));
 
   set color(Expression<Color>? value) => _setExpression('circle-color', value);
+
+  /// How [color] changes to a new value.
+  StyleTransition? get colorTransition => _transition('circle-color');
+
+  set colorTransition(StyleTransition? value) =>
+      _setTransition('circle-color', value);
 
   /// Amount to blur the circle. 1 blurs the circle such that only the centerpoint
   /// is full opacity.
@@ -175,6 +223,12 @@ final class CircleStyleLayer extends StyleLayerWithSource {
       _property('circle-blur', decodeNum, const Literal(0));
 
   set blur(Expression<num>? value) => _setExpression('circle-blur', value);
+
+  /// How [blur] changes to a new value.
+  StyleTransition? get blurTransition => _transition('circle-blur');
+
+  set blurTransition(StyleTransition? value) =>
+      _setTransition('circle-blur', value);
 
   /// The opacity at which the circle will be drawn.
   ///
@@ -187,6 +241,12 @@ final class CircleStyleLayer extends StyleLayerWithSource {
   set opacity(Expression<num>? value) =>
       _setExpression('circle-opacity', value);
 
+  /// How [opacity] changes to a new value.
+  StyleTransition? get opacityTransition => _transition('circle-opacity');
+
+  set opacityTransition(StyleTransition? value) =>
+      _setTransition('circle-opacity', value);
+
   /// The geometry's offset. Values are `[x, y]` where negatives indicate left and
   /// up, respectively.
   ///
@@ -198,6 +258,12 @@ final class CircleStyleLayer extends StyleLayerWithSource {
 
   set translate(Expression<Offset>? value) =>
       _setExpression('circle-translate', value);
+
+  /// How [translate] changes to a new value.
+  StyleTransition? get translateTransition => _transition('circle-translate');
+
+  set translateTransition(StyleTransition? value) =>
+      _setTransition('circle-translate', value);
 
   /// Controls the frame of reference for
   /// [`circle-translate`](https://maplibre.org/maplibre-style-spec/layers/#circle-translate).
@@ -250,6 +316,13 @@ final class CircleStyleLayer extends StyleLayerWithSource {
   set strokeWidth(Expression<num>? value) =>
       _setExpression('circle-stroke-width', value);
 
+  /// How [strokeWidth] changes to a new value.
+  StyleTransition? get strokeWidthTransition =>
+      _transition('circle-stroke-width');
+
+  set strokeWidthTransition(StyleTransition? value) =>
+      _setTransition('circle-stroke-width', value);
+
   /// The stroke color of the circle.
   ///
   /// Defaults to `"#000000"`.
@@ -262,6 +335,13 @@ final class CircleStyleLayer extends StyleLayerWithSource {
   set strokeColor(Expression<Color>? value) =>
       _setExpression('circle-stroke-color', value);
 
+  /// How [strokeColor] changes to a new value.
+  StyleTransition? get strokeColorTransition =>
+      _transition('circle-stroke-color');
+
+  set strokeColorTransition(StyleTransition? value) =>
+      _setTransition('circle-stroke-color', value);
+
   /// The opacity of the circle's stroke.
   ///
   /// Between 0 and 1.
@@ -272,6 +352,13 @@ final class CircleStyleLayer extends StyleLayerWithSource {
 
   set strokeOpacity(Expression<num>? value) =>
       _setExpression('circle-stroke-opacity', value);
+
+  /// How [strokeOpacity] changes to a new value.
+  StyleTransition? get strokeOpacityTransition =>
+      _transition('circle-stroke-opacity');
+
+  set strokeOpacityTransition(StyleTransition? value) =>
+      _setTransition('circle-stroke-opacity', value);
 }
 
 /// Client-side elevation coloring based on DEM data. The implementation
@@ -291,13 +378,13 @@ final class ColorReliefStyleLayer extends StyleLayerWithSource {
     super.maxZoom,
     super.filter,
     super.visible,
-    super.layout,
-    super.paint,
     Expression<num>? opacity,
+    StyleTransition? opacityTransition,
     Expression<Color>? color,
     Expression<ColorReliefResampling>? resampling,
   }) {
     _initProperty('color-relief-opacity', opacity);
+    _initTransition('color-relief-opacity', opacityTransition);
     _initProperty('color-relief-color', color);
     _initProperty('resampling', resampling);
   }
@@ -322,6 +409,12 @@ final class ColorReliefStyleLayer extends StyleLayerWithSource {
 
   set opacity(Expression<num>? value) =>
       _setExpression('color-relief-opacity', value);
+
+  /// How [opacity] changes to a new value.
+  StyleTransition? get opacityTransition => _transition('color-relief-opacity');
+
+  set opacityTransition(StyleTransition? value) =>
+      _setTransition('color-relief-opacity', value);
 
   /// Defines the color of each pixel based on its elevation. Should be an
   /// expression that uses the
@@ -365,29 +458,39 @@ final class FillStyleLayer extends StyleLayerWithSource {
     super.maxZoom,
     super.filter,
     super.visible,
-    super.layout,
-    super.paint,
     Expression<num>? sortKey,
     Expression<bool>? antialias,
     Expression<num>? opacity,
+    StyleTransition? opacityTransition,
     Expression<num>? layerOpacity,
+    StyleTransition? layerOpacityTransition,
     Expression<FillLayerBlend>? layerBlend,
     Expression<Color>? color,
+    StyleTransition? colorTransition,
     Expression<Color>? outlineColor,
+    StyleTransition? outlineColorTransition,
     Expression<Offset>? translate,
+    StyleTransition? translateTransition,
     Expression<FillTranslateAnchor>? translateAnchor,
     Expression<String>? pattern,
+    StyleTransition? patternTransition,
   }) {
     _initProperty('fill-sort-key', sortKey);
     _initProperty('fill-antialias', antialias);
     _initProperty('fill-opacity', opacity);
+    _initTransition('fill-opacity', opacityTransition);
     _initProperty('fill-layer-opacity', layerOpacity);
+    _initTransition('fill-layer-opacity', layerOpacityTransition);
     _initProperty('fill-layer-blend', layerBlend);
     _initProperty('fill-color', color);
+    _initTransition('fill-color', colorTransition);
     _initProperty('fill-outline-color', outlineColor);
+    _initTransition('fill-outline-color', outlineColorTransition);
     _initProperty('fill-translate', translate);
+    _initTransition('fill-translate', translateTransition);
     _initProperty('fill-translate-anchor', translateAnchor);
     _initProperty('fill-pattern', pattern);
+    _initTransition('fill-pattern', patternTransition);
   }
 
   /// Reads a [FillStyleLayer] from the JSON of a style layer.
@@ -427,6 +530,12 @@ final class FillStyleLayer extends StyleLayerWithSource {
 
   set opacity(Expression<num>? value) => _setExpression('fill-opacity', value);
 
+  /// How [opacity] changes to a new value.
+  StyleTransition? get opacityTransition => _transition('fill-opacity');
+
+  set opacityTransition(StyleTransition? value) =>
+      _setTransition('fill-opacity', value);
+
   /// Opacity applied to the layer as a whole. Unlike
   /// [`fill-opacity`](https://maplibre.org/maplibre-style-spec/layers/#fill-opacity)
   /// and alpha values in
@@ -450,6 +559,13 @@ final class FillStyleLayer extends StyleLayerWithSource {
 
   set layerOpacity(Expression<num>? value) =>
       _setExpression('fill-layer-opacity', value);
+
+  /// How [layerOpacity] changes to a new value.
+  StyleTransition? get layerOpacityTransition =>
+      _transition('fill-layer-opacity');
+
+  set layerOpacityTransition(StyleTransition? value) =>
+      _setTransition('fill-layer-opacity', value);
 
   /// Controls how the layer is composited with the content already rendered
   /// beneath it. Unlike per-feature opacity properties such as `fill-opacity`,
@@ -481,6 +597,12 @@ final class FillStyleLayer extends StyleLayerWithSource {
 
   set color(Expression<Color>? value) => _setExpression('fill-color', value);
 
+  /// How [color] changes to a new value.
+  StyleTransition? get colorTransition => _transition('fill-color');
+
+  set colorTransition(StyleTransition? value) =>
+      _setTransition('fill-color', value);
+
   /// The outline color of the fill. Matches the value of
   /// [`fill-color`](https://maplibre.org/maplibre-style-spec/layers/#fill-color)
   /// if unspecified.
@@ -489,6 +611,13 @@ final class FillStyleLayer extends StyleLayerWithSource {
 
   set outlineColor(Expression<Color>? value) =>
       _setExpression('fill-outline-color', value);
+
+  /// How [outlineColor] changes to a new value.
+  StyleTransition? get outlineColorTransition =>
+      _transition('fill-outline-color');
+
+  set outlineColorTransition(StyleTransition? value) =>
+      _setTransition('fill-outline-color', value);
 
   /// The geometry's offset. Values are `[x, y]` where negatives indicate left and
   /// up, respectively.
@@ -501,6 +630,12 @@ final class FillStyleLayer extends StyleLayerWithSource {
 
   set translate(Expression<Offset>? value) =>
       _setExpression('fill-translate', value);
+
+  /// How [translate] changes to a new value.
+  StyleTransition? get translateTransition => _transition('fill-translate');
+
+  set translateTransition(StyleTransition? value) =>
+      _setTransition('fill-translate', value);
 
   /// Controls the frame of reference for
   /// [`fill-translate`](https://maplibre.org/maplibre-style-spec/layers/#fill-translate).
@@ -524,6 +659,12 @@ final class FillStyleLayer extends StyleLayerWithSource {
 
   set pattern(Expression<String>? value) =>
       _setExpression('fill-pattern', value);
+
+  /// How [pattern] changes to a new value.
+  StyleTransition? get patternTransition => _transition('fill-pattern');
+
+  set patternTransition(StyleTransition? value) =>
+      _setTransition('fill-pattern', value);
 }
 
 /// An extruded (3D) polygon.
@@ -542,16 +683,20 @@ final class FillExtrusionStyleLayer extends StyleLayerWithSource {
     super.maxZoom,
     super.filter,
     super.visible,
-    super.layout,
-    super.paint,
     Expression<num>? roundedCornerDistance,
     Expression<num>? opacity,
+    StyleTransition? opacityTransition,
     Expression<Color>? color,
+    StyleTransition? colorTransition,
     Expression<Offset>? translate,
+    StyleTransition? translateTransition,
     Expression<FillExtrusionTranslateAnchor>? translateAnchor,
     Expression<String>? pattern,
+    StyleTransition? patternTransition,
     Expression<num>? height,
+    StyleTransition? heightTransition,
     Expression<num>? base,
+    StyleTransition? baseTransition,
     Expression<bool>? verticalGradient,
   }) {
     _initProperty(
@@ -559,12 +704,18 @@ final class FillExtrusionStyleLayer extends StyleLayerWithSource {
       roundedCornerDistance,
     );
     _initProperty('fill-extrusion-opacity', opacity);
+    _initTransition('fill-extrusion-opacity', opacityTransition);
     _initProperty('fill-extrusion-color', color);
+    _initTransition('fill-extrusion-color', colorTransition);
     _initProperty('fill-extrusion-translate', translate);
+    _initTransition('fill-extrusion-translate', translateTransition);
     _initProperty('fill-extrusion-translate-anchor', translateAnchor);
     _initProperty('fill-extrusion-pattern', pattern);
+    _initTransition('fill-extrusion-pattern', patternTransition);
     _initProperty('fill-extrusion-height', height);
+    _initTransition('fill-extrusion-height', heightTransition);
     _initProperty('fill-extrusion-base', base);
+    _initTransition('fill-extrusion-base', baseTransition);
     _initProperty('fill-extrusion-vertical-gradient', verticalGradient);
   }
 
@@ -613,6 +764,13 @@ final class FillExtrusionStyleLayer extends StyleLayerWithSource {
   set opacity(Expression<num>? value) =>
       _setExpression('fill-extrusion-opacity', value);
 
+  /// How [opacity] changes to a new value.
+  StyleTransition? get opacityTransition =>
+      _transition('fill-extrusion-opacity');
+
+  set opacityTransition(StyleTransition? value) =>
+      _setTransition('fill-extrusion-opacity', value);
+
   /// The base color of the extruded fill. The extrusion's surfaces will be shaded
   /// differently based on this color in combination with the root `light`
   /// settings. If this color is specified as `rgba` with an alpha component, the
@@ -630,6 +788,12 @@ final class FillExtrusionStyleLayer extends StyleLayerWithSource {
   set color(Expression<Color>? value) =>
       _setExpression('fill-extrusion-color', value);
 
+  /// How [color] changes to a new value.
+  StyleTransition? get colorTransition => _transition('fill-extrusion-color');
+
+  set colorTransition(StyleTransition? value) =>
+      _setTransition('fill-extrusion-color', value);
+
   /// The geometry's offset. Values are `[x, y]` where negatives indicate left and
   /// up (on the flat plane), respectively.
   ///
@@ -644,6 +808,13 @@ final class FillExtrusionStyleLayer extends StyleLayerWithSource {
 
   set translate(Expression<Offset>? value) =>
       _setExpression('fill-extrusion-translate', value);
+
+  /// How [translate] changes to a new value.
+  StyleTransition? get translateTransition =>
+      _transition('fill-extrusion-translate');
+
+  set translateTransition(StyleTransition? value) =>
+      _setTransition('fill-extrusion-translate', value);
 
   /// Controls the frame of reference for
   /// [`fill-extrusion-translate`](https://maplibre.org/maplibre-style-spec/layers/#fill-extrusion-translate).
@@ -668,6 +839,13 @@ final class FillExtrusionStyleLayer extends StyleLayerWithSource {
   set pattern(Expression<String>? value) =>
       _setExpression('fill-extrusion-pattern', value);
 
+  /// How [pattern] changes to a new value.
+  StyleTransition? get patternTransition =>
+      _transition('fill-extrusion-pattern');
+
+  set patternTransition(StyleTransition? value) =>
+      _setTransition('fill-extrusion-pattern', value);
+
   /// The height with which to extrude this layer. Negative values extrude below
   /// ground level, so a floor that is entirely underground can be expressed.
   ///
@@ -679,6 +857,12 @@ final class FillExtrusionStyleLayer extends StyleLayerWithSource {
 
   set height(Expression<num>? value) =>
       _setExpression('fill-extrusion-height', value);
+
+  /// How [height] changes to a new value.
+  StyleTransition? get heightTransition => _transition('fill-extrusion-height');
+
+  set heightTransition(StyleTransition? value) =>
+      _setTransition('fill-extrusion-height', value);
 
   /// The height with which to extrude the base of this layer. Must be less than
   /// or equal to
@@ -693,6 +877,12 @@ final class FillExtrusionStyleLayer extends StyleLayerWithSource {
 
   set base(Expression<num>? value) =>
       _setExpression('fill-extrusion-base', value);
+
+  /// How [base] changes to a new value.
+  StyleTransition? get baseTransition => _transition('fill-extrusion-base');
+
+  set baseTransition(StyleTransition? value) =>
+      _setTransition('fill-extrusion-base', value);
 
   /// Whether to apply a vertical gradient to the sides of a fill-extrusion layer.
   /// If true, sides will be shaded slightly darker farther down.
@@ -724,19 +914,23 @@ final class HeatmapStyleLayer extends StyleLayerWithSource {
     super.maxZoom,
     super.filter,
     super.visible,
-    super.layout,
-    super.paint,
     Expression<num>? radius,
+    StyleTransition? radiusTransition,
     Expression<num>? weight,
     Expression<num>? intensity,
+    StyleTransition? intensityTransition,
     Expression<Color>? color,
     Expression<num>? opacity,
+    StyleTransition? opacityTransition,
   }) {
     _initProperty('heatmap-radius', radius);
+    _initTransition('heatmap-radius', radiusTransition);
     _initProperty('heatmap-weight', weight);
     _initProperty('heatmap-intensity', intensity);
+    _initTransition('heatmap-intensity', intensityTransition);
     _initProperty('heatmap-color', color);
     _initProperty('heatmap-opacity', opacity);
+    _initTransition('heatmap-opacity', opacityTransition);
   }
 
   /// Reads a [HeatmapStyleLayer] from the JSON of a style layer.
@@ -760,6 +954,12 @@ final class HeatmapStyleLayer extends StyleLayerWithSource {
       _property('heatmap-radius', decodeNum, const Literal(30));
 
   set radius(Expression<num>? value) => _setExpression('heatmap-radius', value);
+
+  /// How [radius] changes to a new value.
+  StyleTransition? get radiusTransition => _transition('heatmap-radius');
+
+  set radiusTransition(StyleTransition? value) =>
+      _setTransition('heatmap-radius', value);
 
   /// A measure of how much an individual point contributes to the heatmap. A
   /// value of 10 would be equivalent to having 10 points of weight 1 in the same
@@ -786,6 +986,12 @@ final class HeatmapStyleLayer extends StyleLayerWithSource {
 
   set intensity(Expression<num>? value) =>
       _setExpression('heatmap-intensity', value);
+
+  /// How [intensity] changes to a new value.
+  StyleTransition? get intensityTransition => _transition('heatmap-intensity');
+
+  set intensityTransition(StyleTransition? value) =>
+      _setTransition('heatmap-intensity', value);
 
   /// Defines the color of each pixel based on its density value in a heatmap.
   /// Should be an expression that uses `["heatmap-density"]` as input.
@@ -826,6 +1032,12 @@ final class HeatmapStyleLayer extends StyleLayerWithSource {
 
   set opacity(Expression<num>? value) =>
       _setExpression('heatmap-opacity', value);
+
+  /// How [opacity] changes to a new value.
+  StyleTransition? get opacityTransition => _transition('heatmap-opacity');
+
+  set opacityTransition(StyleTransition? value) =>
+      _setTransition('heatmap-opacity', value);
 }
 
 /// Client-side hillshading visualization based on DEM data. The implementation
@@ -845,15 +1057,17 @@ final class HillshadeStyleLayer extends StyleLayerWithSource {
     super.maxZoom,
     super.filter,
     super.visible,
-    super.layout,
-    super.paint,
     Expression<List<num>>? illuminationDirection,
     Expression<List<num>>? illuminationAltitude,
     Expression<HillshadeIlluminationAnchor>? illuminationAnchor,
     Expression<num>? exaggeration,
+    StyleTransition? exaggerationTransition,
     Expression<List<Color>>? shadowColor,
+    StyleTransition? shadowColorTransition,
     Expression<List<Color>>? highlightColor,
+    StyleTransition? highlightColorTransition,
     Expression<Color>? accentColor,
+    StyleTransition? accentColorTransition,
     Expression<HillshadeMethod>? method,
     Expression<HillshadeResampling>? resampling,
   }) {
@@ -861,9 +1075,13 @@ final class HillshadeStyleLayer extends StyleLayerWithSource {
     _initProperty('hillshade-illumination-altitude', illuminationAltitude);
     _initProperty('hillshade-illumination-anchor', illuminationAnchor);
     _initProperty('hillshade-exaggeration', exaggeration);
+    _initTransition('hillshade-exaggeration', exaggerationTransition);
     _initProperty('hillshade-shadow-color', shadowColor);
+    _initTransition('hillshade-shadow-color', shadowColorTransition);
     _initProperty('hillshade-highlight-color', highlightColor);
+    _initTransition('hillshade-highlight-color', highlightColorTransition);
     _initProperty('hillshade-accent-color', accentColor);
+    _initTransition('hillshade-accent-color', accentColorTransition);
     _initProperty('hillshade-method', method);
     _initProperty('resampling', resampling);
   }
@@ -938,6 +1156,13 @@ final class HillshadeStyleLayer extends StyleLayerWithSource {
   set exaggeration(Expression<num>? value) =>
       _setExpression('hillshade-exaggeration', value);
 
+  /// How [exaggeration] changes to a new value.
+  StyleTransition? get exaggerationTransition =>
+      _transition('hillshade-exaggeration');
+
+  set exaggerationTransition(StyleTransition? value) =>
+      _setTransition('hillshade-exaggeration', value);
+
   /// The shading color of areas that face away from the light source(s). Only
   /// when
   /// [`hillshade-method`](https://maplibre.org/maplibre-style-spec/layers/#hillshade-method)
@@ -953,6 +1178,13 @@ final class HillshadeStyleLayer extends StyleLayerWithSource {
   set shadowColor(Expression<List<Color>>? value) =>
       _setExpression('hillshade-shadow-color', value);
 
+  /// How [shadowColor] changes to a new value.
+  StyleTransition? get shadowColorTransition =>
+      _transition('hillshade-shadow-color');
+
+  set shadowColorTransition(StyleTransition? value) =>
+      _setTransition('hillshade-shadow-color', value);
+
   /// The shading color of areas that faces towards the light source(s). Only when
   /// [`hillshade-method`](https://maplibre.org/maplibre-style-spec/layers/#hillshade-method)
   /// is set to `multidirectional` can you specify multiple light sources.
@@ -967,6 +1199,13 @@ final class HillshadeStyleLayer extends StyleLayerWithSource {
   set highlightColor(Expression<List<Color>>? value) =>
       _setExpression('hillshade-highlight-color', value);
 
+  /// How [highlightColor] changes to a new value.
+  StyleTransition? get highlightColorTransition =>
+      _transition('hillshade-highlight-color');
+
+  set highlightColorTransition(StyleTransition? value) =>
+      _setTransition('hillshade-highlight-color', value);
+
   /// The shading color used to accentuate rugged terrain like sharp cliffs and
   /// gorges.
   ///
@@ -979,6 +1218,13 @@ final class HillshadeStyleLayer extends StyleLayerWithSource {
 
   set accentColor(Expression<Color>? value) =>
       _setExpression('hillshade-accent-color', value);
+
+  /// How [accentColor] changes to a new value.
+  StyleTransition? get accentColorTransition =>
+      _transition('hillshade-accent-color');
+
+  set accentColorTransition(StyleTransition? value) =>
+      _setTransition('hillshade-accent-color', value);
 
   /// The hillshade algorithm to use, one of `standard`, `basic`, `combined`,
   /// `igor`, or `multidirectional`.
@@ -1027,25 +1273,33 @@ final class LineStyleLayer extends StyleLayerWithSource {
     super.maxZoom,
     super.filter,
     super.visible,
-    super.layout,
-    super.paint,
     Expression<LineCap>? cap,
     Expression<LineJoin>? join,
     Expression<num>? miterLimit,
     Expression<num>? roundLimit,
     Expression<num>? sortKey,
     Expression<num>? opacity,
+    StyleTransition? opacityTransition,
     Expression<num>? layerOpacity,
+    StyleTransition? layerOpacityTransition,
     Expression<LineLayerBlend>? layerBlend,
     Expression<Color>? color,
+    StyleTransition? colorTransition,
     Expression<Offset>? translate,
+    StyleTransition? translateTransition,
     Expression<LineTranslateAnchor>? translateAnchor,
     Expression<num>? width,
+    StyleTransition? widthTransition,
     Expression<num>? gapWidth,
+    StyleTransition? gapWidthTransition,
     Expression<num>? offset,
+    StyleTransition? offsetTransition,
     Expression<num>? blur,
+    StyleTransition? blurTransition,
     Expression<List<num>>? dasharray,
+    StyleTransition? dasharrayTransition,
     Expression<String>? pattern,
+    StyleTransition? patternTransition,
     Expression<Color>? gradient,
   }) {
     _initProperty('line-cap', cap);
@@ -1054,17 +1308,27 @@ final class LineStyleLayer extends StyleLayerWithSource {
     _initProperty('line-round-limit', roundLimit);
     _initProperty('line-sort-key', sortKey);
     _initProperty('line-opacity', opacity);
+    _initTransition('line-opacity', opacityTransition);
     _initProperty('line-layer-opacity', layerOpacity);
+    _initTransition('line-layer-opacity', layerOpacityTransition);
     _initProperty('line-layer-blend', layerBlend);
     _initProperty('line-color', color);
+    _initTransition('line-color', colorTransition);
     _initProperty('line-translate', translate);
+    _initTransition('line-translate', translateTransition);
     _initProperty('line-translate-anchor', translateAnchor);
     _initProperty('line-width', width);
+    _initTransition('line-width', widthTransition);
     _initProperty('line-gap-width', gapWidth);
+    _initTransition('line-gap-width', gapWidthTransition);
     _initProperty('line-offset', offset);
+    _initTransition('line-offset', offsetTransition);
     _initProperty('line-blur', blur);
+    _initTransition('line-blur', blurTransition);
     _initProperty('line-dasharray', dasharray);
+    _initTransition('line-dasharray', dasharrayTransition);
     _initProperty('line-pattern', pattern);
+    _initTransition('line-pattern', patternTransition);
     _initProperty('line-gradient', gradient);
   }
 
@@ -1140,6 +1404,12 @@ final class LineStyleLayer extends StyleLayerWithSource {
 
   set opacity(Expression<num>? value) => _setExpression('line-opacity', value);
 
+  /// How [opacity] changes to a new value.
+  StyleTransition? get opacityTransition => _transition('line-opacity');
+
+  set opacityTransition(StyleTransition? value) =>
+      _setTransition('line-opacity', value);
+
   /// Opacity applied to the layer as a whole. Unlike
   /// [`line-opacity`](https://maplibre.org/maplibre-style-spec/layers/#line-opacity)
   /// and alpha values in
@@ -1162,6 +1432,13 @@ final class LineStyleLayer extends StyleLayerWithSource {
 
   set layerOpacity(Expression<num>? value) =>
       _setExpression('line-layer-opacity', value);
+
+  /// How [layerOpacity] changes to a new value.
+  StyleTransition? get layerOpacityTransition =>
+      _transition('line-layer-opacity');
+
+  set layerOpacityTransition(StyleTransition? value) =>
+      _setTransition('line-layer-opacity', value);
 
   /// Controls how the layer is composited with the content already rendered
   /// beneath it. Unlike per-feature opacity properties such as
@@ -1191,6 +1468,12 @@ final class LineStyleLayer extends StyleLayerWithSource {
 
   set color(Expression<Color>? value) => _setExpression('line-color', value);
 
+  /// How [color] changes to a new value.
+  StyleTransition? get colorTransition => _transition('line-color');
+
+  set colorTransition(StyleTransition? value) =>
+      _setTransition('line-color', value);
+
   /// The geometry's offset. Values are `[x, y]` where negatives indicate left and
   /// up, respectively.
   ///
@@ -1202,6 +1485,12 @@ final class LineStyleLayer extends StyleLayerWithSource {
 
   set translate(Expression<Offset>? value) =>
       _setExpression('line-translate', value);
+
+  /// How [translate] changes to a new value.
+  StyleTransition? get translateTransition => _transition('line-translate');
+
+  set translateTransition(StyleTransition? value) =>
+      _setTransition('line-translate', value);
 
   /// Controls the frame of reference for
   /// [`line-translate`](https://maplibre.org/maplibre-style-spec/layers/#line-translate).
@@ -1228,6 +1517,12 @@ final class LineStyleLayer extends StyleLayerWithSource {
 
   set width(Expression<num>? value) => _setExpression('line-width', value);
 
+  /// How [width] changes to a new value.
+  StyleTransition? get widthTransition => _transition('line-width');
+
+  set widthTransition(StyleTransition? value) =>
+      _setTransition('line-width', value);
+
   /// Draws a line casing outside of a line's actual path. Value indicates the
   /// width of the inner gap.
   ///
@@ -1242,6 +1537,12 @@ final class LineStyleLayer extends StyleLayerWithSource {
   set gapWidth(Expression<num>? value) =>
       _setExpression('line-gap-width', value);
 
+  /// How [gapWidth] changes to a new value.
+  StyleTransition? get gapWidthTransition => _transition('line-gap-width');
+
+  set gapWidthTransition(StyleTransition? value) =>
+      _setTransition('line-gap-width', value);
+
   /// The line's offset. For linear features, a positive value offsets the line to
   /// the right, relative to the direction of the line, and a negative value to
   /// the left. For polygon features, a positive value results in an inset, and a
@@ -1255,6 +1556,12 @@ final class LineStyleLayer extends StyleLayerWithSource {
 
   set offset(Expression<num>? value) => _setExpression('line-offset', value);
 
+  /// How [offset] changes to a new value.
+  StyleTransition? get offsetTransition => _transition('line-offset');
+
+  set offsetTransition(StyleTransition? value) =>
+      _setTransition('line-offset', value);
+
   /// Blur applied to the line, in pixels.
   ///
   /// In pixels.
@@ -1266,6 +1573,12 @@ final class LineStyleLayer extends StyleLayerWithSource {
       _property('line-blur', decodeNum, const Literal(0));
 
   set blur(Expression<num>? value) => _setExpression('line-blur', value);
+
+  /// How [blur] changes to a new value.
+  StyleTransition? get blurTransition => _transition('line-blur');
+
+  set blurTransition(StyleTransition? value) =>
+      _setTransition('line-blur', value);
 
   /// Specifies the lengths of the alternating dashes and gaps that form the dash
   /// pattern. The lengths are later scaled by the line width. To convert a dash
@@ -1284,6 +1597,12 @@ final class LineStyleLayer extends StyleLayerWithSource {
   set dasharray(Expression<List<num>>? value) =>
       _setExpression('line-dasharray', value);
 
+  /// How [dasharray] changes to a new value.
+  StyleTransition? get dasharrayTransition => _transition('line-dasharray');
+
+  set dasharrayTransition(StyleTransition? value) =>
+      _setTransition('line-dasharray', value);
+
   /// Name of image in sprite to use for drawing image lines. For seamless
   /// patterns, image width must be a factor of two (2, 4, 8, ..., 512). Note that
   /// zoom-dependent expressions will be evaluated only at integer zoom levels.
@@ -1292,6 +1611,12 @@ final class LineStyleLayer extends StyleLayerWithSource {
 
   set pattern(Expression<String>? value) =>
       _setExpression('line-pattern', value);
+
+  /// How [pattern] changes to a new value.
+  StyleTransition? get patternTransition => _transition('line-pattern');
+
+  set patternTransition(StyleTransition? value) =>
+      _setTransition('line-pattern', value);
 
   /// Defines a gradient with which to color a line feature. Can only be used with
   /// GeoJSON sources that specify `"lineMetrics": true`.
@@ -1318,24 +1643,34 @@ final class RasterStyleLayer extends StyleLayerWithSource {
     super.maxZoom,
     super.filter,
     super.visible,
-    super.layout,
-    super.paint,
     Expression<num>? opacity,
+    StyleTransition? opacityTransition,
     Expression<num>? hueRotate,
+    StyleTransition? hueRotateTransition,
     Expression<num>? brightnessMin,
+    StyleTransition? brightnessMinTransition,
     Expression<num>? brightnessMax,
+    StyleTransition? brightnessMaxTransition,
     Expression<num>? saturation,
+    StyleTransition? saturationTransition,
     Expression<num>? contrast,
+    StyleTransition? contrastTransition,
     Expression<RasterResampling>? resampling,
     Expression<RasterResampling>? rasterResampling,
     Expression<num>? fadeDuration,
   }) {
     _initProperty('raster-opacity', opacity);
+    _initTransition('raster-opacity', opacityTransition);
     _initProperty('raster-hue-rotate', hueRotate);
+    _initTransition('raster-hue-rotate', hueRotateTransition);
     _initProperty('raster-brightness-min', brightnessMin);
+    _initTransition('raster-brightness-min', brightnessMinTransition);
     _initProperty('raster-brightness-max', brightnessMax);
+    _initTransition('raster-brightness-max', brightnessMaxTransition);
     _initProperty('raster-saturation', saturation);
+    _initTransition('raster-saturation', saturationTransition);
     _initProperty('raster-contrast', contrast);
+    _initTransition('raster-contrast', contrastTransition);
     _initProperty('resampling', resampling);
     _initProperty('raster-resampling', rasterResampling);
     _initProperty('raster-fade-duration', fadeDuration);
@@ -1361,6 +1696,12 @@ final class RasterStyleLayer extends StyleLayerWithSource {
   set opacity(Expression<num>? value) =>
       _setExpression('raster-opacity', value);
 
+  /// How [opacity] changes to a new value.
+  StyleTransition? get opacityTransition => _transition('raster-opacity');
+
+  set opacityTransition(StyleTransition? value) =>
+      _setTransition('raster-opacity', value);
+
   /// Rotates hues around the color wheel.
   ///
   /// In degrees.
@@ -1371,6 +1712,12 @@ final class RasterStyleLayer extends StyleLayerWithSource {
 
   set hueRotate(Expression<num>? value) =>
       _setExpression('raster-hue-rotate', value);
+
+  /// How [hueRotate] changes to a new value.
+  StyleTransition? get hueRotateTransition => _transition('raster-hue-rotate');
+
+  set hueRotateTransition(StyleTransition? value) =>
+      _setTransition('raster-hue-rotate', value);
 
   /// Increase or reduce the brightness of the image. The value is the minimum
   /// brightness.
@@ -1384,6 +1731,13 @@ final class RasterStyleLayer extends StyleLayerWithSource {
   set brightnessMin(Expression<num>? value) =>
       _setExpression('raster-brightness-min', value);
 
+  /// How [brightnessMin] changes to a new value.
+  StyleTransition? get brightnessMinTransition =>
+      _transition('raster-brightness-min');
+
+  set brightnessMinTransition(StyleTransition? value) =>
+      _setTransition('raster-brightness-min', value);
+
   /// Increase or reduce the brightness of the image. The value is the maximum
   /// brightness.
   ///
@@ -1396,6 +1750,13 @@ final class RasterStyleLayer extends StyleLayerWithSource {
   set brightnessMax(Expression<num>? value) =>
       _setExpression('raster-brightness-max', value);
 
+  /// How [brightnessMax] changes to a new value.
+  StyleTransition? get brightnessMaxTransition =>
+      _transition('raster-brightness-max');
+
+  set brightnessMaxTransition(StyleTransition? value) =>
+      _setTransition('raster-brightness-max', value);
+
   /// Increase or reduce the saturation of the image.
   ///
   /// Between -1 and 1.
@@ -1407,6 +1768,12 @@ final class RasterStyleLayer extends StyleLayerWithSource {
   set saturation(Expression<num>? value) =>
       _setExpression('raster-saturation', value);
 
+  /// How [saturation] changes to a new value.
+  StyleTransition? get saturationTransition => _transition('raster-saturation');
+
+  set saturationTransition(StyleTransition? value) =>
+      _setTransition('raster-saturation', value);
+
   /// Increase or reduce the contrast of the image.
   ///
   /// Between -1 and 1.
@@ -1417,6 +1784,12 @@ final class RasterStyleLayer extends StyleLayerWithSource {
 
   set contrast(Expression<num>? value) =>
       _setExpression('raster-contrast', value);
+
+  /// How [contrast] changes to a new value.
+  StyleTransition? get contrastTransition => _transition('raster-contrast');
+
+  set contrastTransition(StyleTransition? value) =>
+      _setTransition('raster-contrast', value);
 
   /// The resampling/interpolation method to use for overscaling, also known as
   /// texture magnification filter.
@@ -1478,8 +1851,6 @@ final class SymbolStyleLayer extends StyleLayerWithSource {
     super.maxZoom,
     super.filter,
     super.visible,
-    super.layout,
-    super.paint,
     Expression<SymbolPlacement>? placement,
     Expression<num>? spacing,
     Expression<bool>? avoidEdges,
@@ -1527,18 +1898,30 @@ final class SymbolStyleLayer extends StyleLayerWithSource {
     Expression<num>? heightOffset,
     Expression<SymbolHeightAnchor>? heightAnchor,
     Expression<num>? iconOpacity,
+    StyleTransition? iconOpacityTransition,
     Expression<Color>? iconColor,
+    StyleTransition? iconColorTransition,
     Expression<Color>? iconHaloColor,
+    StyleTransition? iconHaloColorTransition,
     Expression<num>? iconHaloWidth,
+    StyleTransition? iconHaloWidthTransition,
     Expression<num>? iconHaloBlur,
+    StyleTransition? iconHaloBlurTransition,
     Expression<Offset>? iconTranslate,
+    StyleTransition? iconTranslateTransition,
     Expression<IconTranslateAnchor>? iconTranslateAnchor,
     Expression<num>? textOpacity,
+    StyleTransition? textOpacityTransition,
     Expression<Color>? textColor,
+    StyleTransition? textColorTransition,
     Expression<Color>? textHaloColor,
+    StyleTransition? textHaloColorTransition,
     Expression<num>? textHaloWidth,
+    StyleTransition? textHaloWidthTransition,
     Expression<num>? textHaloBlur,
+    StyleTransition? textHaloBlurTransition,
     Expression<Offset>? textTranslate,
+    StyleTransition? textTranslateTransition,
     Expression<TextTranslateAnchor>? textTranslateAnchor,
   }) {
     _initProperty('symbol-placement', placement);
@@ -1588,18 +1971,30 @@ final class SymbolStyleLayer extends StyleLayerWithSource {
     _initProperty('symbol-height-offset', heightOffset);
     _initProperty('symbol-height-anchor', heightAnchor);
     _initProperty('icon-opacity', iconOpacity);
+    _initTransition('icon-opacity', iconOpacityTransition);
     _initProperty('icon-color', iconColor);
+    _initTransition('icon-color', iconColorTransition);
     _initProperty('icon-halo-color', iconHaloColor);
+    _initTransition('icon-halo-color', iconHaloColorTransition);
     _initProperty('icon-halo-width', iconHaloWidth);
+    _initTransition('icon-halo-width', iconHaloWidthTransition);
     _initProperty('icon-halo-blur', iconHaloBlur);
+    _initTransition('icon-halo-blur', iconHaloBlurTransition);
     _initProperty('icon-translate', iconTranslate);
+    _initTransition('icon-translate', iconTranslateTransition);
     _initProperty('icon-translate-anchor', iconTranslateAnchor);
     _initProperty('text-opacity', textOpacity);
+    _initTransition('text-opacity', textOpacityTransition);
     _initProperty('text-color', textColor);
+    _initTransition('text-color', textColorTransition);
     _initProperty('text-halo-color', textHaloColor);
+    _initTransition('text-halo-color', textHaloColorTransition);
     _initProperty('text-halo-width', textHaloWidth);
+    _initTransition('text-halo-width', textHaloWidthTransition);
     _initProperty('text-halo-blur', textHaloBlur);
+    _initTransition('text-halo-blur', textHaloBlurTransition);
     _initProperty('text-translate', textTranslate);
+    _initTransition('text-translate', textTranslateTransition);
     _initProperty('text-translate-anchor', textTranslateAnchor);
   }
 
@@ -2263,6 +2658,12 @@ final class SymbolStyleLayer extends StyleLayerWithSource {
   set iconOpacity(Expression<num>? value) =>
       _setExpression('icon-opacity', value);
 
+  /// How [iconOpacity] changes to a new value.
+  StyleTransition? get iconOpacityTransition => _transition('icon-opacity');
+
+  set iconOpacityTransition(StyleTransition? value) =>
+      _setTransition('icon-opacity', value);
+
   /// The color of the icon. This can only be used with SDF icons.
   ///
   /// Defaults to `"#000000"`.
@@ -2271,6 +2672,12 @@ final class SymbolStyleLayer extends StyleLayerWithSource {
 
   set iconColor(Expression<Color>? value) =>
       _setExpression('icon-color', value);
+
+  /// How [iconColor] changes to a new value.
+  StyleTransition? get iconColorTransition => _transition('icon-color');
+
+  set iconColorTransition(StyleTransition? value) =>
+      _setTransition('icon-color', value);
 
   /// The color of the icon's halo. Icon halos can only be used with SDF icons.
   ///
@@ -2283,6 +2690,13 @@ final class SymbolStyleLayer extends StyleLayerWithSource {
 
   set iconHaloColor(Expression<Color>? value) =>
       _setExpression('icon-halo-color', value);
+
+  /// How [iconHaloColor] changes to a new value.
+  StyleTransition? get iconHaloColorTransition =>
+      _transition('icon-halo-color');
+
+  set iconHaloColorTransition(StyleTransition? value) =>
+      _setTransition('icon-halo-color', value);
 
   /// Distance of halo to the icon outline.
   ///
@@ -2301,6 +2715,13 @@ final class SymbolStyleLayer extends StyleLayerWithSource {
   set iconHaloWidth(Expression<num>? value) =>
       _setExpression('icon-halo-width', value);
 
+  /// How [iconHaloWidth] changes to a new value.
+  StyleTransition? get iconHaloWidthTransition =>
+      _transition('icon-halo-width');
+
+  set iconHaloWidthTransition(StyleTransition? value) =>
+      _setTransition('icon-halo-width', value);
+
   /// Fade out the halo towards the outside.
   ///
   /// In pixels.
@@ -2314,6 +2735,12 @@ final class SymbolStyleLayer extends StyleLayerWithSource {
   set iconHaloBlur(Expression<num>? value) =>
       _setExpression('icon-halo-blur', value);
 
+  /// How [iconHaloBlur] changes to a new value.
+  StyleTransition? get iconHaloBlurTransition => _transition('icon-halo-blur');
+
+  set iconHaloBlurTransition(StyleTransition? value) =>
+      _setTransition('icon-halo-blur', value);
+
   /// Distance that the icon's anchor is moved from its original placement.
   /// Positive values indicate right and down, while negative values indicate left
   /// and up.
@@ -2326,6 +2753,12 @@ final class SymbolStyleLayer extends StyleLayerWithSource {
 
   set iconTranslate(Expression<Offset>? value) =>
       _setExpression('icon-translate', value);
+
+  /// How [iconTranslate] changes to a new value.
+  StyleTransition? get iconTranslateTransition => _transition('icon-translate');
+
+  set iconTranslateTransition(StyleTransition? value) =>
+      _setTransition('icon-translate', value);
 
   /// Controls the frame of reference for
   /// [`icon-translate`](https://maplibre.org/maplibre-style-spec/layers/#icon-translate).
@@ -2351,6 +2784,12 @@ final class SymbolStyleLayer extends StyleLayerWithSource {
   set textOpacity(Expression<num>? value) =>
       _setExpression('text-opacity', value);
 
+  /// How [textOpacity] changes to a new value.
+  StyleTransition? get textOpacityTransition => _transition('text-opacity');
+
+  set textOpacityTransition(StyleTransition? value) =>
+      _setTransition('text-opacity', value);
+
   /// The color with which the text will be drawn.
   ///
   /// Defaults to `"#000000"`.
@@ -2359,6 +2798,12 @@ final class SymbolStyleLayer extends StyleLayerWithSource {
 
   set textColor(Expression<Color>? value) =>
       _setExpression('text-color', value);
+
+  /// How [textColor] changes to a new value.
+  StyleTransition? get textColorTransition => _transition('text-color');
+
+  set textColorTransition(StyleTransition? value) =>
+      _setTransition('text-color', value);
 
   /// The color of the text's halo, which helps it stand out from backgrounds.
   ///
@@ -2371,6 +2816,13 @@ final class SymbolStyleLayer extends StyleLayerWithSource {
 
   set textHaloColor(Expression<Color>? value) =>
       _setExpression('text-halo-color', value);
+
+  /// How [textHaloColor] changes to a new value.
+  StyleTransition? get textHaloColorTransition =>
+      _transition('text-halo-color');
+
+  set textHaloColorTransition(StyleTransition? value) =>
+      _setTransition('text-halo-color', value);
 
   /// Distance of halo to the font outline. Max text halo width is 1/4 of the
   /// font-size.
@@ -2386,6 +2838,13 @@ final class SymbolStyleLayer extends StyleLayerWithSource {
   set textHaloWidth(Expression<num>? value) =>
       _setExpression('text-halo-width', value);
 
+  /// How [textHaloWidth] changes to a new value.
+  StyleTransition? get textHaloWidthTransition =>
+      _transition('text-halo-width');
+
+  set textHaloWidthTransition(StyleTransition? value) =>
+      _setTransition('text-halo-width', value);
+
   /// The halo's fadeout distance towards the outside.
   ///
   /// In pixels.
@@ -2399,6 +2858,12 @@ final class SymbolStyleLayer extends StyleLayerWithSource {
   set textHaloBlur(Expression<num>? value) =>
       _setExpression('text-halo-blur', value);
 
+  /// How [textHaloBlur] changes to a new value.
+  StyleTransition? get textHaloBlurTransition => _transition('text-halo-blur');
+
+  set textHaloBlurTransition(StyleTransition? value) =>
+      _setTransition('text-halo-blur', value);
+
   /// Distance that the text's anchor is moved from its original placement.
   /// Positive values indicate right and down, while negative values indicate left
   /// and up.
@@ -2411,6 +2876,12 @@ final class SymbolStyleLayer extends StyleLayerWithSource {
 
   set textTranslate(Expression<Offset>? value) =>
       _setExpression('text-translate', value);
+
+  /// How [textTranslate] changes to a new value.
+  StyleTransition? get textTranslateTransition => _transition('text-translate');
+
+  set textTranslateTransition(StyleTransition? value) =>
+      _setTransition('text-translate', value);
 
   /// Controls the frame of reference for
   /// [`text-translate`](https://maplibre.org/maplibre-style-spec/layers/#text-translate).

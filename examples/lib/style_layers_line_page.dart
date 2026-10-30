@@ -85,14 +85,16 @@ class _StyleLayersLinePageState extends State<StyleLayersLinePage> {
       LineStyleLayer(
         id: 'geojson-line-1',
         sourceId: 'Path1',
-        paint: {'line-color': '#F00', 'line-width': 3},
+        color: const .literal(Color(0xFFFF0000)),
+        width: const .literal(3),
       ),
     );
     await style.layers.add(
       LineStyleLayer(
         id: 'geojson-line-2',
         sourceId: 'Path2',
-        paint: {'line-color': '#F00', 'line-width': 3},
+        color: const .literal(Color(0xFFFF0000)),
+        width: const .literal(3),
       ),
     );
   }

@@ -50,20 +50,18 @@ class _StyleLayersFillExtrusionPageState
 final _fillExtrusionStyleLayer = FillExtrusionStyleLayer(
   id: 'room-extrusion',
   sourceId: _sourceId,
-  paint: {
-    // See the MapLibre Style Specification for details on data expressions.
-    // https://maplibre.org/maplibre-style-spec/expressions/
+  // See the MapLibre Style Specification for details on data expressions.
+  // https://maplibre.org/maplibre-style-spec/expressions/
 
-    // Get the fill-extrusion-color from the source 'color' property.
-    'fill-extrusion-color': ['get', 'color'],
+  // Get the color from the source 'color' property.
+  color: .get('color').convertToColor(),
 
-    // Get fill-extrusion-height from the source 'height' property.
-    'fill-extrusion-height': ['get', 'height'],
+  // Get the height from the source 'height' property.
+  height: .get('height').asNumber(),
 
-    // Get fill-extrusion-base from the source 'base_height' property.
-    'fill-extrusion-base': ['get', 'base_height'],
+  // Get the base from the source 'base_height' property.
+  base: .get('base_height').asNumber(),
 
-    // Make extrusions slightly opaque for see through indoor walls.
-    'fill-extrusion-opacity': 0.5,
-  },
+  // Make extrusions slightly opaque for see through indoor walls.
+  opacity: const .literal(0.5),
 );

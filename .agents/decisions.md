@@ -276,7 +276,13 @@ Each entry: the decision, then why.
   know, such as extended CSS names. They read back unchanged.
 - **`StyleLayer` subclasses are generated from the style spec by
   `tool/codegen/style_layers.dart`, and the generated Dart is committed.**
-  Layers keep only style JSON (`layout`, `paint`, filter, zoom range), and
+  Every property is a typed getter, setter and optional constructor parameter,
+  and transitions have typed ones (`colorTransition`). There are no `paint` or
+  `layout` maps and no access by property name: names and JSON stay inside
+  the package, except for `Expression.raw` and `StyleLayer.fromJson`/`toJson`,
+  which also keep what a newer style spec adds. Setters can be synchronous
+  because the state is in Dart, so there are no async `setX` methods.
+  Layers keep only style JSON privately, and
   getters decode it on read, so what a style holds round trips unchanged and
   anything but a literal stays an `Expression.raw`. A literal list goes to the
   map in the plain form of the spec, without `literal`, which every property
@@ -302,7 +308,7 @@ Each entry: the decision, then why.
   on native, ended in `finally`, and only runs it on web.** `LayerManager` uses
   it, so one rebuild shows in one frame.
 - **`LayerManager` keeps the style layers it added and sets only what changed,
-  compared by `toJson`.** It re-creates a layer only when its type or source
+  compared by JSON (`StyleLayer.updateFrom`).** It re-creates a layer only when its type or source
   changes, below the next declarative layer, so the order stays. Annotation
   layers keep plain Dart fields for now.
 - **Style images have a size in logical pixels that the package keeps the

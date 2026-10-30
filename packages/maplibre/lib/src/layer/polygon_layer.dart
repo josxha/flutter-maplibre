@@ -27,23 +27,14 @@ class PolygonLayer extends Layer<Feature<Polygon>> {
   final Color outlineColor;
 
   @override
-  Map<String, Object> getPaint() => {
-    'fill-color': color.toHexString(),
-    'fill-opacity': opacity,
-    'fill-outline-color': outlineColor.toHexString(),
-  };
-
-  @override
-  Map<String, Object> getLayout() => {};
-
-  @override
   StyleLayer createStyleLayer(int index) => FillStyleLayer(
     id: getLayerId(index),
     sourceId: getSourceId(index),
-    paint: getPaint(),
-    layout: getLayout(),
     minZoom: minZoom,
     maxZoom: maxZoom,
+    color: .literal(color.withValues(alpha: 1)),
+    opacity: .literal(opacity),
+    outlineColor: .literal(outlineColor.withValues(alpha: 1)),
   );
 
   @override

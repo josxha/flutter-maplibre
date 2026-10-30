@@ -46,25 +46,16 @@ class CircleLayer extends Layer<Feature<Point>> {
   StyleLayer createStyleLayer(int index) => CircleStyleLayer(
     id: getLayerId(index),
     sourceId: getSourceId(index),
-    paint: getPaint(),
-    layout: getLayout(),
     minZoom: minZoom,
     maxZoom: maxZoom,
+    radius: .literal(radius),
+    color: .literal(color.withValues(alpha: 1)),
+    blur: .literal(blur),
+    opacity: .literal(opacity),
+    strokeWidth: .literal(strokeWidth),
+    strokeColor: .literal(strokeColor.withValues(alpha: 1)),
+    strokeOpacity: .literal(strokeOpacity),
   );
-
-  @override
-  Map<String, Object> getPaint() => {
-    'circle-radius': radius,
-    'circle-color': color.toHexString(),
-    'circle-blur': blur,
-    'circle-opacity': opacity,
-    'circle-stroke-width': strokeWidth,
-    'circle-stroke-color': strokeColor.toHexString(),
-    'circle-stroke-opacity': strokeOpacity,
-  };
-
-  @override
-  Map<String, Object> getLayout() => {};
 
   @override
   bool operator ==(Object other) =>

@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
-import 'package:maplibre_platform_interface/src/style/expressions/expression_json.dart';
 
 /// The layer manager handles the high-level layer API used in
 /// [MapLibreMap.layers]. This is an internal class that doesn't get exposed
@@ -107,7 +106,7 @@ class LayerManager {
     final next = layer.createStyleLayer(index);
     if (current.type == next.type &&
         _sourceOfLayer(current) == _sourceOfLayer(next)) {
-      _applyChanges(current, next);
+      current.updateFrom(next);
       return;
     }
     unawaited(style.layers.remove(current.id));
@@ -127,23 +126,4 @@ class LayerManager {
       layer is StyleLayerWithSource
       ? (layer.sourceId, layer.sourceLayerId)
       : (null, null);
-
-  static void _applyChanges(StyleLayer current, StyleLayer next) {
-    final currentJson = current.toJson();
-    final nextJson = next.toJson();
-    for (final name in const ['filter', 'minzoom', 'maxzoom']) {
-      if (!jsonEquals(currentJson[name], nextJson[name])) {
-        current.setProperty(name, nextJson[name]);
-      }
-    }
-    for (final group in const ['layout', 'paint']) {
-      final currentGroup = currentJson[group] as Map<String, Object?>? ?? {};
-      final nextGroup = nextJson[group] as Map<String, Object?>? ?? {};
-      for (final name in {...currentGroup.keys, ...nextGroup.keys}) {
-        if (!jsonEquals(currentGroup[name], nextGroup[name])) {
-          current.setProperty(name, nextGroup[name]);
-        }
-      }
-    }
-  }
 }

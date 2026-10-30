@@ -60,14 +60,26 @@ void main() {
       });
     });
 
-    test('a typed property wins over its raw value', () {
+    test('writes transitions as the properties of the spec', () {
       final layer = LineStyleLayer(
         id: 'l',
         sourceId: 's',
-        paint: {'line-width': 1, 'line-blur': 2},
-        width: const .literal(3),
+        widthTransition: const StyleTransition(
+          duration: Duration(seconds: 1),
+          delay: Duration(milliseconds: 5),
+        ),
       );
-      expect(layer.paint, {'line-width': 3, 'line-blur': 2});
+      expect(layer.toJson()['paint'], {
+        'line-width-transition': {'duration': 1000, 'delay': 5},
+      });
+      expect(
+        layer.widthTransition,
+        const StyleTransition(
+          duration: Duration(seconds: 1),
+          delay: Duration(milliseconds: 5),
+        ),
+      );
+      expect(layer.colorTransition, isNull);
     });
 
     test('round trips every layer type', () {
@@ -150,7 +162,6 @@ void main() {
       final layer = StyleLayer.fromJson(json);
       expect(layer, isA<UnknownStyleLayer>());
       expect(layer.toJson(), json);
-      expect(layer.getProperty('a'), 1);
     });
   });
 
@@ -305,26 +316,36 @@ void main() {
         ..width = const .literal(3)
         ..width = null;
       expect(line.width, const Literal<num>(1));
-      expect(line.paint, isEmpty);
+      expect(line.toJson(), isNot(contains('paint')));
     });
 
-    test('getProperty and setProperty reach every kind of property', () {
-      final line = LineStyleLayer(id: 'l', sourceId: 's')
-        ..setProperty('line-cap', 'round')
-        ..setProperty('line-color-transition', {'duration': 100})
-        ..setProperty('filter', const ['has', 'a'])
-        ..setProperty('minzoom', 2)
-        ..setProperty('maxzoom', 3);
-      expect(line.layout, {'line-cap': 'round'});
-      expect(line.paint, {
-        'line-color-transition': {'duration': 100},
+    test('updateFrom sets only what differs', () {
+      final layer = LineStyleLayer(
+        id: 'l',
+        sourceId: 's',
+        width: const .literal(1),
+        blur: const .literal(1),
+        cap: const .literal(LineCap.round),
+        filter: Expression.has('a'),
+      );
+      layer.updateFrom(
+        LineStyleLayer(
+          id: 'l',
+          sourceId: 's',
+          width: const .literal(2),
+          blur: const .literal(1),
+          minZoom: 3,
+          filter: Expression.has('b'),
+        ),
+      );
+      expect(layer.toJson(), {
+        'id': 'l',
+        'type': 'line',
+        'source': 's',
+        'minzoom': 3.0,
+        'filter': ['has', 'b'],
+        'paint': {'line-width': 2, 'line-blur': 1},
       });
-      expect(line.getProperty('line-cap'), 'round');
-      expect(line.getProperty('filter'), ['has', 'a']);
-      expect(line.getProperty('minzoom'), 2);
-      expect(line.getProperty('maxzoom'), 3);
-      expect(line.cap, const Literal(LineCap.round));
-      expect(line.minZoom, 2);
     });
   });
 }

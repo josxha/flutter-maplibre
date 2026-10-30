@@ -43,12 +43,9 @@ Widget build(BuildContext context) {
           SymbolStyleLayer(
             id: 'images',
             sourceId: 'points',
-            layout: {
-              // see https://maplibre.org/maplibre-style-spec/layers/#symbol
-              'icon-image': 'marker',
-              'icon-size': 0.08,
-              'icon-anchor': 'bottom',
-            },
+            iconImage: const .literal('marker'),
+            iconSize: const .literal(0.08),
+            iconAnchor: const .literal(IconAnchor.bottom),
           ),
         );
       }
@@ -62,8 +59,9 @@ to learn more.
 
 ## Style & Layout
 
-Use the `paint` property to change the style and the `layout`
-property to change the behavior on the map.
+Every property of the style spec is an optional parameter and a getter and
+setter of the layer. See [Paint & Layout](paint-and-layout) and
+[Expressions](expressions).
 
 Read the [Paint & Layout](./paint-and-layout) chapter to learn more on this
 topic. 

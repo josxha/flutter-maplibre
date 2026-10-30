@@ -114,12 +114,14 @@ class StyleControllerWeb extends StyleController implements StyleBackend {
       _map.moveLayer(id, belowLayerId);
 
   @override
-  void setPaintProperty(String layerId, String name, Object? value) =>
-      _map.setPaintProperty(layerId, name, value.jsify());
-
-  @override
-  void setLayoutProperty(String layerId, String name, Object? value) =>
-      _map.setLayoutProperty(layerId, name, value.jsify());
+  void setLayerProperty(
+    String layerId,
+    String name,
+    Object? value, {
+    required bool layout,
+  }) => layout
+      ? _map.setLayoutProperty(layerId, name, value.jsify())
+      : _map.setPaintProperty(layerId, name, value.jsify());
 
   @override
   void setFilter(String layerId, Object? filter) =>

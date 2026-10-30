@@ -33,12 +33,12 @@ class RecordingStyleBackend implements StyleBackend {
       calls.add('moveLayer $id below $belowLayerId');
 
   @override
-  void setPaintProperty(String layerId, String name, Object? value) =>
-      calls.add('setPaint $layerId $name $value');
-
-  @override
-  void setLayoutProperty(String layerId, String name, Object? value) =>
-      calls.add('setLayout $layerId $name $value');
+  void setLayerProperty(
+    String layerId,
+    String name,
+    Object? value, {
+    required bool layout,
+  }) => calls.add('${layout ? 'setLayout' : 'setPaint'} $layerId $name $value');
 
   @override
   void setFilter(String layerId, Object? filter) =>

@@ -192,59 +192,52 @@ class MarkerLayer extends Layer<Feature<Point>> {
   final IconAnchor iconAnchor;
 
   @override
-  Map<String, Object> getPaint() => {
-    'icon-opacity': iconOpacity,
-    'icon-color': iconColor.toHexString(),
-    'icon-halo-color': iconHaloColor.toHexString(),
-    'icon-halo-width': iconHaloWidth,
-    'icon-halo-blur': iconHaloBlur,
-    'icon-translate': iconTranslate,
-    'text-opacity': textOpacity,
-    'text-color': textColor.toHexString(),
-    'text-halo-color': textHaloColor.toHexString(),
-    'text-halo-width': textHaloWidth,
-    'text-halo-blur': textHaloBlur,
-    'text-translate': textTranslate,
-  };
-
-  @override
-  Map<String, Object> getLayout() => {
-    'icon-allow-overlap': iconAllowOverlap,
-    'icon-ignore-placement': iconIgnorePlacement,
-    'icon-optional': iconOptional,
-    'icon-size': iconSize,
-    if (iconImage case final String image) 'icon-image': image,
-    'icon-rotate': iconRotate,
-    'icon-padding': iconPadding,
-    'icon-keep-upright': iconKeepUpright,
-    'icon-offset': iconOffset,
-    'icon-anchor': iconAnchor.value,
-    'text-field': textField,
-    'text-font': textFont,
-    'text-size': textSize,
-    'text-max-width': textMaxWidth,
-    'text-line-height': textLineHeight,
-    'text-letter-spacing': textLetterSpacing,
-    'text-radial-offset': textRadialOffset,
-    'text-max-angle': textMaxAngle,
-    'text-rotate': textRotate,
-    'text-padding': textPadding,
-    'text-keep-upright': textKeepUpright,
-    'text-offset': textOffset,
-    'text-allow-overlap': textAllowOverlap,
-    'text-ignore-placement': textIgnorePlacement,
-    'text-optional': textOptional,
-  };
-
-  @override
   StyleLayer createStyleLayer(int index) => SymbolStyleLayer(
     id: getLayerId(index),
     sourceId: getSourceId(index),
-    paint: getPaint(),
-    layout: getLayout(),
     minZoom: minZoom,
     maxZoom: maxZoom,
+    iconAllowOverlap: .literal(iconAllowOverlap),
+    iconIgnorePlacement: .literal(iconIgnorePlacement),
+    iconOptional: .literal(iconOptional),
+    iconSize: .literal(iconSize),
+    iconImage: iconImage == null ? null : .literal(iconImage!),
+    iconRotate: .literal(iconRotate),
+    iconPadding: .literal([iconPadding]),
+    iconKeepUpright: .literal(iconKeepUpright),
+    iconOffset: .literal(_offsetOf(iconOffset)),
+    iconAnchor: .literal(iconAnchor),
+    textField: .literal(textField),
+    textFont: .literal(textFont),
+    textSize: .literal(textSize),
+    textMaxWidth: .literal(textMaxWidth),
+    textLineHeight: .literal(textLineHeight),
+    textLetterSpacing: .literal(textLetterSpacing),
+    textRadialOffset: .literal(textRadialOffset),
+    textMaxAngle: .literal(textMaxAngle),
+    textRotate: .literal(textRotate),
+    textPadding: .literal(textPadding),
+    textKeepUpright: .literal(textKeepUpright),
+    textOffset: .literal(_offsetOf(textOffset)),
+    textAllowOverlap: .literal(textAllowOverlap),
+    textIgnorePlacement: .literal(textIgnorePlacement),
+    textOptional: .literal(textOptional),
+    iconOpacity: .literal(iconOpacity),
+    iconColor: .literal(iconColor.withValues(alpha: 1)),
+    iconHaloColor: .literal(iconHaloColor.withValues(alpha: 1)),
+    iconHaloWidth: .literal(iconHaloWidth),
+    iconHaloBlur: .literal(iconHaloBlur),
+    iconTranslate: .literal(_offsetOf(iconTranslate)),
+    textOpacity: .literal(textOpacity),
+    textColor: .literal(textColor.withValues(alpha: 1)),
+    textHaloColor: .literal(textHaloColor.withValues(alpha: 1)),
+    textHaloWidth: .literal(textHaloWidth),
+    textHaloBlur: .literal(textHaloBlur),
+    textTranslate: .literal(_offsetOf(textTranslate)),
   );
+
+  static Offset _offsetOf(List<int> value) =>
+      Offset(value[0].toDouble(), value[1].toDouble());
 
   @override
   bool operator ==(Object other) =>

@@ -168,24 +168,27 @@ $_enumCode
         ..writeln('required super.sourceId,')
         ..writeln('super.sourceLayerId,');
     }
-    out.writeln(
-      'super.minZoom, super.maxZoom, super.filter, super.visible, '
-      'super.layout, super.paint,',
-    );
+    out.writeln('super.minZoom, super.maxZoom, super.filter, super.visible,');
 
     final types = <String, _DartType>{};
     for (final MapEntry(:key, :value) in properties.entries) {
       final dartType = _typeOf(type, key, value! as Map<String, Object?>);
       types[key] = dartType;
       out.writeln('Expression<${dartType.name}>? ${names[key]},');
+      if (_hasTransition(value)) {
+        out.writeln('StyleTransition? ${names[key]}Transition,');
+      }
     }
     out.write('})');
     if (properties.isEmpty) {
       out.writeln(';');
     } else {
       out.writeln(' {');
-      for (final key in properties.keys) {
+      for (final MapEntry(:key, :value) in properties.entries) {
         out.writeln("_initProperty('$key', ${names[key]});");
+        if (_hasTransition(value)) {
+          out.writeln("_initTransition('$key', ${names[key]}Transition);");
+        }
       }
       out.writeln('}');
     }
@@ -232,9 +235,26 @@ $_enumCode
           'set $name(Expression<${dartType.name}>? value) => '
           "_setExpression('$key', value);",
         );
+      if (_hasTransition(property)) {
+        out
+          ..writeln()
+          ..writeln('/// How [$name] changes to a new value.')
+          ..writeln(
+            'StyleTransition? get ${name}Transition => '
+            "_transition('$key');",
+          )
+          ..writeln()
+          ..writeln(
+            'set ${name}Transition(StyleTransition? value) => '
+            "_setTransition('$key', value);",
+          );
+      }
     }
     out.writeln('}\n');
   }
+
+  static bool _hasTransition(Object? property) =>
+      (property! as Map<String, Object?>)['transition'] == true;
 
   /// The Dart names of [properties]: without the prefix of the layer type,
   /// unless that collides with another property of the layer.

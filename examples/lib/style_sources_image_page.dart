@@ -46,7 +46,7 @@ class _StyleSourcesImagePageState extends State<StyleSourcesImagePage> {
       RasterStyleLayer(
         id: 'radar',
         sourceId: 'radar',
-        paint: {'raster-opacity': 0.8},
+        opacity: const .literal(0.8),
       ),
     );
 
