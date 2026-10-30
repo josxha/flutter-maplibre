@@ -71,8 +71,8 @@ flowchart TB
 
 On Android, iOS, macOS, Windows and Linux, MapLibre Native renders each map
 off screen into a GPU texture, and Flutter shows it with a `Texture` widget.
-No platform views are used, so maps compose with other widgets like any
-other part of the widget tree.
+Maps therefore compose with other widgets like any other part of the widget
+tree.
 
 ```mermaid
 flowchart TB
@@ -103,7 +103,7 @@ The C library and its Dart binding come from
 [maplibre_native_ffi](https://pub.dev/packages/maplibre_native_ffi). Its build
 hook downloads the prebuilt library for each target. Dart calls the platform
 plugins through bindings generated with ffigen (C) and jnigen
-(Kotlin), never through method channels.
+(Kotlin).
 
 All maps and the `OfflineManager` share one database for the cache and the
 offline regions.

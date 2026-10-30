@@ -9,10 +9,9 @@ icon: lucide/sparkles
 
 !!! info "Pre-release"
 
-    Version 0.4.0 replaces the MapLibre Android and iOS SDKs and the WebView
-    desktop integration with one implementation on the MapLibre Native C
-    API. It is available as a pre-release, `0.4.0-pre.1`, while it is being
-    tested. Please
+    Version 0.4.0 renders maps on Android, iOS, macOS, Windows and Linux
+    with the MapLibre Native C API. It is available as a pre-release,
+    `0.4.0-pre.1`, while it is being tested. Please
     [report bugs](https://github.com/josxha/flutter-maplibre/issues/new?labels=bug&template=1-bug.yml)
     you find. If you upgrade from 0.3.x, read the
     [migration guide](../migrate/upgrade-from-v0.3.x.md).

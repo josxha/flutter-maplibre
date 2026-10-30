@@ -94,7 +94,7 @@ await style.sources.add(
 ```
 
 - **Android, iOS, macOS, Windows and Linux**: MapLibre Native reads PMTiles
-  itself, nothing to set up. Use `pmtiles://https://…` (or `http://`) for a
+  itself. Use `pmtiles://https://…` (or `http://`) for a
   remote archive and `pmtiles://file:///absolute/path/tiles.pmtiles` for a
   file on the device.
 - **Web**: the plugin loads PMTiles together with MapLibre GL JS, see
