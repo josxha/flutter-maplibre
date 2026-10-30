@@ -54,9 +54,11 @@ sealed class Expression<T> {
   Object? toJson();
 
   /// Asserts nothing and only changes the static type to [R]. Use [asString],
-  /// [asNumber] or [asBoolean] for an assertion that the map checks.
+  /// [asNumber] or [asBoolean] for an assertion that the map checks. A
+  /// [Literal] whose value is not an [R] becomes a [RawValue] of its JSON.
   Expression<R> cast<R>() => switch (this) {
-    Literal(:final value) => Literal<R>(value as R),
+    Literal(:final value) when value is R => Literal<R>(value),
+    Literal() => RawValue<R>(toJson()),
     Call(:final json) => Call<R>(json),
     RawValue(:final json) => RawValue<R>(json),
   };

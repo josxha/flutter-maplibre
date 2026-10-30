@@ -224,6 +224,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
   void dispose() {
     _disposed = true;
     style?.dispose();
+    _loadingStyle?.dispose();
     _invalidateProjection();
     _shownProjection?.close();
     _shownProjection = null;
@@ -332,6 +333,10 @@ class MapLibreMapStateNative extends MapLibreMapState {
     await ended.future;
   }
 
+  /// The style controller that [_onStyleLoaded] is filling, until it becomes
+  /// [style].
+  StyleControllerNative? _loadingStyle;
+
   Future<void> _onStyleLoaded() async {
     final map = _map;
     if (map == null) return;
@@ -339,7 +344,11 @@ class MapLibreMapStateNative extends MapLibreMapState {
       _constraintsAfterStyle = false;
       await _applyOptions();
     }
+    // Only the next LayerManager sees MapLibreMap.layers: the layers of the
+    // old one are gone.
+    _layerManager = null;
     style?.dispose();
+    style = null;
     late final StyleControllerNative styleController;
     styleController = StyleControllerNative(
       map,
@@ -349,9 +358,15 @@ class MapLibreMapStateNative extends MapLibreMapState {
         if (mounted && style == styleController) setState(() {});
       },
     );
-    style = styleController;
+    _loadingStyle = styleController;
+    // The style is only handed out once its layers and sources are known.
     await styleController.load();
-    if (_disposed || style != styleController) return;
+    if (_disposed || _loadingStyle != styleController) {
+      styleController.dispose();
+      return;
+    }
+    _loadingStyle = null;
+    style = styleController;
     widget.onEvent?.call(MapEventStyleLoaded(styleController));
     widget.onStyleLoaded?.call(styleController);
     _layerManager = LayerManager(styleController, widget.layers);
@@ -595,6 +610,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
     if (map == null) return;
     final request = ++_styleRequest;
     bool stale() => _map != map || request != _styleRequest;
+    _layerManager = null;
     switch (style) {
       case MapStyleJson(:final json):
         await map.setStyleJson(jsonDecode(json));

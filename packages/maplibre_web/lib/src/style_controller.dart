@@ -8,7 +8,7 @@ class StyleControllerWeb extends StyleController implements StyleBackend {
   final interop.JsMap _map;
 
   @override
-  late final StyleSources sources = StyleSources(this);
+  late final StyleSources sources = StyleSources(this, layers: () => layers);
 
   @override
   late final StyleLayers layers = StyleLayers(this, sources: sources);
@@ -104,7 +104,8 @@ class StyleControllerWeb extends StyleController implements StyleBackend {
   Future<void> addLayer(
     Map<String, Object?> json, {
     String? belowLayerId,
-  }) async => _map.addLayer(json.jsify()!, belowLayerId);
+  }) async =>
+      _throwErrorEvents(() => _map.addLayer(json.jsify()!, belowLayerId));
 
   @override
   Future<void> removeLayer(String id) async => _map.removeLayer(id);
@@ -194,7 +195,7 @@ class StyleControllerWeb extends StyleController implements StyleBackend {
           GeoJsonSourceUrl(:final url) => url.toJS,
           GeoJsonSourceData(:final data) => parse(data),
         };
-        _map.addSource(
+        _addSource(
           source.id,
           _sourceSpecification({
             'type': 'geojson',
@@ -206,22 +207,24 @@ class StyleControllerWeb extends StyleController implements StyleBackend {
         );
       case RasterDemSource() || RasterSource() || VectorSource():
         // gl-js has no volatile sources.
-        _map.addSource(
+        _addSource(
           source.id,
           _sourceSpecification(source.toJson()!..remove('volatile')),
         );
       case ImageSource():
-        // MapLibre GL JS loads image sources only from a URL.
+        // MapLibre GL JS loads image sources only from a URL. The image of a
+        // provider must be resolved first, so the source starts with an empty
+        // image: calls after this one must find it on the map.
         final url = switch (source) {
           ImageSourceUrl(:final url) => url,
           ImageSourceBytes(:final bytes) => URL.createObjectURL(
             Blob([bytes.toJS].toJS),
           ),
-          ImageSourceProvider(:final image) => await _blobUrlOfProvider(image),
+          ImageSourceProvider() => _emptyImageUrl,
         };
         _addBlobSource(
           source.id,
-          source is ImageSourceUrl ? null : url,
+          source is ImageSourceBytes ? url : null,
           interop.SourceSpecification.image(
             type: 'image',
             url: url,
@@ -231,6 +234,9 @@ class StyleControllerWeb extends StyleController implements StyleBackend {
             coordinates: source.coordinates.toJson().jsify()!,
           ),
         );
+        if (source is ImageSourceProvider) {
+          await _loadProviderImage(source);
+        }
       case VideoSource():
         final blobUrl = switch (source) {
           VideoSourceBytes(:final bytes) => URL.createObjectURL(
@@ -264,12 +270,65 @@ class StyleControllerWeb extends StyleController implements StyleBackend {
     interop.SourceSpecification specification,
   ) {
     try {
-      _map.addSource(id, specification);
+      _addSource(id, specification);
     } catch (_) {
       if (blobUrl != null) URL.revokeObjectURL(blobUrl);
       rethrow;
     }
     if (blobUrl != null) _blobUrls[id] = blobUrl;
+  }
+
+  /// Gives the image source [source], which was added with an empty image,
+  /// the image of its provider.
+  Future<void> _loadProviderImage(ImageSourceProvider source) async {
+    // Whether the source is still on the map: it may have been removed or
+    // replaced meanwhile. Moving its corners keeps the image.
+    bool current() => switch (sources[source.id]) {
+      ImageSourceProvider(:final image) => identical(image, source.image),
+      _ => false,
+    };
+    final String blobUrl;
+    try {
+      blobUrl = await _blobUrlOfProvider(source.image);
+    } catch (_) {
+      // The collection takes the source out again.
+      if (current()) _map.removeSource(source.id);
+      rethrow;
+    }
+    if (!current()) {
+      URL.revokeObjectURL(blobUrl);
+      return;
+    }
+    _blobUrls[source.id] = blobUrl;
+    _map
+        .getSource(source.id)!
+        .updateImage(interop.UpdateImageOptions(url: blobUrl));
+  }
+
+  /// Adds the source [specification] and throws if the map rejects it.
+  void _addSource(String id, interop.SourceSpecification specification) =>
+      _throwErrorEvents(() => _map.addSource(id, specification));
+
+  /// Runs [change] and throws the first error that the map reports meanwhile.
+  /// MapLibre GL JS fires an error event instead of throwing for some changes
+  /// it rejects, such as a layer or source that fails validation.
+  void _throwErrorEvents(void Function() change) {
+    String? error;
+    final listener = (JSObject event) {
+      error ??=
+          event
+              .getProperty<JSObject?>('error'.toJS)
+              ?.getProperty<JSString?>('message'.toJS)
+              ?.toDart ??
+          'The map rejected the change.';
+    }.toJS;
+    _map.on(interop.MapEventType.error, listener);
+    try {
+      change();
+    } finally {
+      _map.off(interop.MapEventType.error, listener);
+    }
+    if (error case final error?) throw StateError(error);
   }
 
   @override
@@ -316,6 +375,11 @@ class StyleControllerWeb extends StyleController implements StyleBackend {
     interop.ProjectionSpecification(type: projection.name),
   );
 }
+
+/// A transparent PNG of one pixel, the image of an image source until its
+/// image is ready.
+const _emptyImageUrl =
+    'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=';
 
 /// A source specification of the [properties] that are set. MapLibre GL JS
 /// rejects a property that is present but null.

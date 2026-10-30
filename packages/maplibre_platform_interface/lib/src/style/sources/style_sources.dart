@@ -10,10 +10,12 @@ part of 'source.dart';
 /// {@category Style}
 /// {@subCategory Style Sources}
 final class StyleSources extends Iterable<Source> {
-  /// Creates an empty collection. Platforms create it, on their [StyleBackend].
-  StyleSources(this._backend);
+  /// Creates an empty collection. Platforms create it, on their [StyleBackend]
+  /// and the `layers` of their style, which [remove] checks.
+  StyleSources(this._backend, {this._layers});
 
   final StyleBackend _backend;
+  final Iterable<StyleLayer> Function()? _layers;
 
   /// The sources by id, in the order of the style.
   final _sources = <String, Source>{};
@@ -60,9 +62,22 @@ final class StyleSources extends Iterable<Source> {
   }
 
   /// Removes the source [id]. Removing a source the style doesn't have does
-  /// nothing. The layers that use the source must be removed before.
+  /// nothing.
+  ///
+  /// Fails with a [StateError] if layers still use the source: the map would
+  /// keep it. Remove them first.
   Future<void> remove(String id) async {
-    if (_sources.remove(id) == null) return;
+    if (!_sources.containsKey(id)) return;
+    final users = [
+      for (final layer in _layers?.call() ?? const <StyleLayer>[])
+        if (_sourceIdOf(layer) == id) layer.id,
+    ];
+    if (users.isNotEmpty) {
+      throw StateError(
+        'The source "$id" is in use by the layers ${users.join(', ')}.',
+      );
+    }
+    _sources.remove(id);
     _specifications.remove(id);
     await _backend.removeSource(id);
   }
@@ -195,6 +210,12 @@ final class StyleSources extends Iterable<Source> {
       source == null ? 'The style has no such source' : 'Not a $T',
     );
   }
+
+  static String? _sourceIdOf(StyleLayer layer) => switch (layer) {
+    StyleLayerWithSource(:final sourceId) => sourceId,
+    UnknownStyleLayer(:final sourceId) => sourceId,
+    _ => null,
+  };
 
   static bool _isTileSource(Source source) =>
       source is RasterSource ||

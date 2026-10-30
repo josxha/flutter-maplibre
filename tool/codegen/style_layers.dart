@@ -138,6 +138,17 @@ $_enumCode
 ''';
   }
 
+  /// The layer types whose features a filter can select. The others don't
+  /// take a filter in their constructor.
+  static const _filterTypes = {
+    'circle',
+    'fill',
+    'fill-extrusion',
+    'heatmap',
+    'line',
+    'symbol',
+  };
+
   void _generateClass(String type, StringBuffer out) {
     final layout = _group('layout_$type');
     final paint = _group('paint_$type');
@@ -170,7 +181,10 @@ $_enumCode
         ..writeln('required super.sourceId,')
         ..writeln('super.sourceLayerId,');
     }
-    out.writeln('super.minZoom, super.maxZoom, super.filter, super.visible,');
+    out.writeln(
+      'super.minZoom, super.maxZoom, '
+      '${_filterTypes.contains(type) ? 'super.filter, ' : ''}super.visible,',
+    );
 
     final types = <String, _DartType>{};
     for (final MapEntry(:key, :value) in properties.entries) {

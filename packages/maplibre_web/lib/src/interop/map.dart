@@ -16,6 +16,11 @@ extension type JsMap._(Camera _) implements Camera {
   /// https://github.com/maplibre/maplibre-gl-js/blob/02103f820a524ed359d94a81015e2d8e966f2c2a/src/ui/map.ts#L1593
   external void once(String type, JSExportedDartFunction listener);
 
+  /// Remove a callback that [on] registered.
+  ///
+  /// https://maplibre.org/maplibre-gl-js/docs/API/classes/Map/#off
+  external void off(String type, JSExportedDartFunction listener);
+
   /// https://github.com/maplibre/maplibre-gl-js/blob/76410880f81de2582be073bc2d730b3f4b8f254d/src/ui/map.ts#L1685
   external void setStyle(JSAny style, [StyleSwapOptions? options]);
 
@@ -204,6 +209,17 @@ extension type SourceSpecification._(JSObject _) implements JSObject {
 
   /// Used to update the TileJSON URL of a raster or vector source.
   external void setUrl(String url);
+
+  /// Used to load a new image into an image source.
+  external void updateImage(UpdateImageOptions options);
+}
+
+/// The options of [SourceSpecification.updateImage].
+@anonymous
+@JS()
+extension type UpdateImageOptions._(JSObject _) implements JSObject {
+  /// Options that load the image from [url] and keep the coordinates.
+  external factory UpdateImageOptions({required String url});
 }
 
 /// The specifications of map layers.

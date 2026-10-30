@@ -552,6 +552,9 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
 
   /// Loads [style], see [MapOptions.style].
   void _setStyle(MapStyle style) {
+    // Only the next LayerManager sees MapLibreMap.layers: the layers of the
+    // old one go with the old style.
+    _layerManager = null;
     _map.once(
       interop.MapEventType.styleLoad,
       (JSAny _) {
@@ -562,6 +565,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   }
 
   void _onStyleLoaded() {
+    _layerManager = null;
     style?.dispose();
     final styleCtrl = StyleControllerWeb(_map)..load();
     style = styleCtrl;

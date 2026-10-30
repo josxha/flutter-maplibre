@@ -51,7 +51,7 @@ void main() {
 
   setUp(() {
     backend = RecordingStyleBackend();
-    sources = StyleSources(backend);
+    sources = StyleSources(backend, layers: () => layers);
     layers = StyleLayers(backend, sources: sources);
   });
 
@@ -300,6 +300,33 @@ void main() {
       await sources.remove('a');
       expect(sources, isEmpty);
       expect(backend.calls, ['addSource a', 'removeSource a']);
+    });
+
+    test('refuses to remove a source that layers use', () async {
+      sources.load({
+        'src': {'type': 'geojson', 'data': 'https://example.com/a.json'},
+      });
+      await layers.add(CircleStyleLayer(id: 'circles', sourceId: 'src'));
+      layers.load([
+        {'id': 'unknown', 'type': 'future', 'source': 'src'},
+      ]);
+      backend.calls.clear();
+      await expectLater(
+        sources.remove('src'),
+        throwsA(
+          isA<StateError>().having(
+            (e) => e.message,
+            'message',
+            contains('circles, unknown'),
+          ),
+        ),
+      );
+      expect(sources['src'], isNotNull);
+      await layers.remove('circles');
+      await layers.remove('unknown');
+      await sources.remove('src');
+      expect(sources['src'], isNull);
+      expect(backend.calls.last, 'removeSource src');
     });
 
     test('takes a source the map rejects out again', () async {

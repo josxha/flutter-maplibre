@@ -247,6 +247,57 @@ void runTests() {
       );
     });
 
+    testWidgets('uses image sources right after adding them', (tester) async {
+      final map = await pumpMap(tester);
+      final bytes = (await rootBundle.load(_markerAsset)).buffer.asUint8List();
+      final sources = [
+        ImageSource.bytes(id: 'bytes', bytes: bytes, coordinates: _quad),
+        const ImageSource.provider(
+          id: 'provider',
+          image: AssetImage(_markerAsset),
+          coordinates: _quad,
+        ),
+      ];
+      for (final source in sources) {
+        // The image is still being decoded when the layer is added.
+        final added = map.style.sources.add(source);
+        await map.style.layers.add(
+          RasterStyleLayer(id: source.id, sourceId: source.id),
+        );
+        await added;
+        await map.style.layers.remove(source.id);
+        await map.style.sources.remove(source.id);
+
+        // Removed before its image is decoded, it leaves the map too: the id
+        // can be added again.
+        final addedAgain = map.style.sources.add(source);
+        await map.style.sources.remove(source.id);
+        await addedAgain;
+        expect(map.style.sources[source.id], isNull);
+        await map.style.sources.add(source);
+      }
+    });
+
+    testWidgets('rejects a layer that fails validation', (tester) async {
+      final map = await pumpMap(tester);
+      await map.style.sources.add(
+        GeoJsonSource.data(id: 'geo', data: _pointData()),
+      );
+      await expectLater(
+        map.style.layers.add(
+          CircleStyleLayer(
+            id: 'c',
+            sourceId: 'geo',
+            radius: const Expression<num>.raw(['no-such-operator']),
+          ),
+        ),
+        throwsA(anything),
+      );
+      expect(map.style.layers['c'], isNull);
+      // The id is free.
+      await map.style.layers.add(CircleStyleLayer(id: 'c', sourceId: 'geo'));
+    });
+
     testWidgets('updates the data of a GeoJSON source', (tester) async {
       final map = await pumpMap(tester, options: offlineOptions(zoom: 8));
       await map.style.sources.add(

@@ -82,6 +82,8 @@ void main() {
       expect(Expression.get('a').cast<num>(), isA<Expression<num>>());
       expectJson(Expression.get('a').cast<num>(), ['get', 'a']);
       expect(const Literal<Object?>(1).cast<num>(), isA<Literal<num>>());
+      expect(const Literal<Object?>(1).cast<String>(), isA<RawValue<String>>());
+      expectJson(const Literal<Object?>(1).cast<String>(), 1);
     });
 
     test('works with dot shorthands', () {

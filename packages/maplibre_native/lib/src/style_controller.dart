@@ -20,7 +20,7 @@ class StyleControllerNative extends StyleController implements StyleBackend {
   final VoidCallback? onAttributionsChanged;
 
   @override
-  late final StyleSources sources = StyleSources(this);
+  late final StyleSources sources = StyleSources(this, layers: () => layers);
 
   @override
   late final StyleLayers layers = StyleLayers(this, sources: sources);
@@ -110,30 +110,62 @@ class StyleControllerNative extends StyleController implements StyleBackend {
   }
 
   /// Adds an image source with decoded pixels, since the style JSON of an
-  /// image source only takes a URL.
+  /// image source only takes a URL. Decoding takes a while, so the source
+  /// starts with an empty image: calls after this one must find it on the
+  /// map.
   Future<void> _addImageSourceImage(ImageSource source) async {
-    final image = switch (source) {
-      ImageSourceBytes(:final bytes) => await _decodeImage(bytes),
-      ImageSourceProvider(:final image) => await resolveImageProvider(image),
-      ImageSourceUrl() => throw ArgumentError.value(source, 'source'),
+    final quad = source.coordinates;
+    final added = _map.addImageSourceImage(
+      source.id,
+      [
+        quad.topLeft,
+        quad.topRight,
+        quad.bottomRight,
+        quad.bottomLeft,
+      ].map((p) => mln.LatLng(latitude: p.lat, longitude: p.lon)).toList(),
+      _emptyImage,
+    );
+    // Whether the source is still on the map: it may have been removed or
+    // replaced meanwhile. Moving its corners keeps the image.
+    bool current() => switch ((source, sources[source.id])) {
+      (ImageSourceBytes(:final bytes), ImageSourceBytes(bytes: final now)) =>
+        identical(bytes, now),
+      (
+        ImageSourceProvider(:final image),
+        ImageSourceProvider(image: final now),
+      ) =>
+        identical(image, now),
+      _ => false,
     };
+    await added;
+    final mln.PremultipliedRgba8Image pixels;
     try {
-      final pixels = await _premultipliedImage(image, source.id);
-      final quad = source.coordinates;
-      await _map.addImageSourceImage(
-        source.id,
-        [
-          quad.topLeft,
-          quad.topRight,
-          quad.bottomRight,
-          quad.bottomLeft,
-        ].map((p) => mln.LatLng(latitude: p.lat, longitude: p.lon)).toList(),
-        pixels,
-      );
-    } finally {
-      image.dispose();
+      final image = switch (source) {
+        ImageSourceBytes(:final bytes) => await _decodeImage(bytes),
+        ImageSourceProvider(:final image) => await resolveImageProvider(image),
+        ImageSourceUrl() => throw ArgumentError.value(source, 'source'),
+      };
+      try {
+        pixels = await _premultipliedImage(image, source.id);
+      } finally {
+        image.dispose();
+      }
+    } catch (_) {
+      // The collection takes the source out again.
+      if (current()) _map.discarding.removeStyleSource(source.id);
+      rethrow;
     }
+    if (current()) await _map.setImageSourceImage(source.id, pixels);
   }
+
+  /// A transparent image of one pixel, the image of an image source until
+  /// its image is decoded.
+  static final _emptyImage = mln.PremultipliedRgba8Image(
+    width: 1,
+    height: 1,
+    stride: 4,
+    pixels: Uint8List(4),
+  );
 
   @override
   Future<void> addLayer(

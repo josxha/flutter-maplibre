@@ -30,6 +30,8 @@
   - `style.getLayerIds()` is `style.layers.map((layer) => layer.id)`.
 - `style.layers.add`, `style.layers.move` and `style.sources.add` throw an
   `ArgumentError` for an id that is taken or doesn't exist.
+- `style.sources.remove` throws a `StateError` while layers still use the
+  source. Remove those layers first.
 
 - Web: requires [maplibre-gl-js v6](https://github.com/maplibre/maplibre-gl-js/releases/tag/v6.0.0),
   which now loads on its own. Remove the maplibre-gl-js and PMTiles `<script>`
