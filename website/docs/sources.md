@@ -79,7 +79,10 @@ A [PMTiles](https://docs.protomaps.com/pmtiles/) archive holds all tiles of a
 tileset in one file. Pass its URL with `pmtiles://` in front to the `.url`
 constructor of a `VectorSource`, `RasterSource` or `RasterDemSource`, or use
 it as the `url` of a source in a style JSON. The archive replaces the
-TileJSON, so don't use the `.tiles` constructor for it.
+TileJSON, so don't use the `.tiles` constructor for it. For a
+`RasterDemSource`, set the `encoding` that the archive's terrain tiles use,
+for example `RasterDemTerrariumEncoding()` for Terrarium tiles; the default
+is Mapbox Terrain RGB.
 
 ```dart
 await style.addSource(
@@ -91,12 +94,13 @@ await style.addSource(
 ```
 
 - **Android, iOS, macOS, Windows and Linux**: MapLibre Native reads PMTiles
-  itself, nothing to set up. Use `pmtiles://https://…` for a remote archive
-  and `pmtiles://file:///absolute/path/tiles.pmtiles` for a file on the
-  device.
+  itself, nothing to set up. Use `pmtiles://https://…` (or `http://`) for a
+  remote archive and `pmtiles://file:///absolute/path/tiles.pmtiles` for a
+  file on the device.
 - **Web**: the plugin loads PMTiles together with MapLibre GL JS, see
-  [Setup](getting-started/setup) to pin or self-host its version. Only
-  `pmtiles://https://…` works, since a browser can't read local files.
+  [Setup](getting-started/setup) to pin or self-host its version. Use
+  `pmtiles://https://…` or `pmtiles://http://…`; a browser can't read local
+  files, and blocks `http://` archives on a page served over `https://`.
 
 The server must answer HTTP range requests, since the map reads only the parts
 of the archive it needs. On web, it must also send CORS headers.

@@ -20,7 +20,8 @@ sealed class RasterDemSource extends Source {
   });
 
   /// A raster DEM source whose tiles are described by the TileJSON resource at
-  /// [url]. Supported protocols are `http:` and `https:`.
+  /// [url]. Supported protocols are `http:` and `https:`, and `pmtiles://`
+  /// in front of the URL of a PMTiles archive.
   const factory RasterDemSource.url({
     required String id,
     required String url,
@@ -104,7 +105,7 @@ final class RasterDemSourceUrl extends RasterDemSource {
   }) : super._();
 
   /// A URL to a TileJSON resource. Supported protocols are `http:` and
-  /// `https:`.
+  /// `https:`, and `pmtiles://` in front of the URL of a PMTiles archive.
   final String url;
 }
 
