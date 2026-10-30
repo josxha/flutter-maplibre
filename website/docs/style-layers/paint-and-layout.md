@@ -7,9 +7,9 @@ weight: 100
 
 # Paint & Layout Properties
 
-While the annotation [Layers](../category/layers) can use simple values for
-styling, [Style Layers](../category/style-layers) can use the powerful paint and layout
-properties. See
+[Style Layers](index.md) have every paint and layout property of the style
+spec, while the [annotation layers](../annotations/index.md) have a selection
+of them. See
 the [MapLibre Style Specification](https://maplibre.org/maplibre-style-spec/layers)
 for all available properties for the different layers.
 

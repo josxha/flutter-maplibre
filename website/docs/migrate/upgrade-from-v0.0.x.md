@@ -57,7 +57,7 @@ names.
 ### 3. Use the event system
 
 Callbacks have been replaced by Events that get emitted by the Map.
-Check out the [Map Events](./events) documentation to see how you can use them.
+Check out the [Map Events](../events.md) documentation to see how you can use them.
 
 | Old Callback Name | New Event Class        |
 |-------------------|------------------------|

@@ -5,10 +5,9 @@ hide: [ navigation ]
 
 # Supported Features
 
-This side provides a broad orientation about what functionality could and what
-functionality is already added. Android, iOS, macOS, Windows and Linux share
-one implementation on the MapLibre Native C API. Linux is implemented but not
-yet tested on a Linux machine.
+This page gives an overview of the functionality that is available on each
+platform. Android, iOS, macOS, Windows and Linux share one implementation on
+the MapLibre Native C API.
 
 ### General Functionality
 
@@ -16,9 +15,13 @@ yet tested on a Linux machine.
 |---------------|-----|---------|-----|---------|-------|-------|
 | Map           | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
 | MapController | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
-| Offline       | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
+| Offline       | ❌   | ✅       | ✅   | ✅       | ✅     | ✅     |
 | Events        | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
 | Annotations   | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
+| Widget Layer  | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
+| User Location | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
+| Paused Rendering | ➖ | ✅      | ✅   | ✅       | ✅     | ✅     |
+| Globe Projection | ✅ | ❌      | ❌   | ❌       | ❌     | ❌     |
 | MBTiles       | ❌   | ✅       | ✅   | ✅       | ✅     | ✅     |
 | PMTiles       | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
 
@@ -26,6 +29,7 @@ yet tested on a Linux machine.
 
 | Feature              | Web | Android | iOS | Windows | macOS | Linux |
 |----------------------|-----|---------|-----|---------|-------|-------|
+| Background Layer     | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
 | Circle Layer         | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
 | Fill Layer           | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
 | Fill Extrusion Layer | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
@@ -34,6 +38,7 @@ yet tested on a Linux machine.
 | Line Layer           | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
 | Raster Layer         | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
 | Symbol Layer         | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
+| Color Relief Layer   | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
 
 ### Sources
 
@@ -43,6 +48,7 @@ yet tested on a Linux machine.
 | Image Source   | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
 | Video Source   | ✅   | ❌       | ❌   | ❌       | ❌     | ❌     |
 | Raster Source  | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
+| Raster DEM Source | ✅ | ✅      | ✅   | ✅       | ✅     | ✅     |
 | Vector Source  | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
 
 ### User Gestures
@@ -53,6 +59,9 @@ yet tested on a Linux machine.
 | double click    | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
 | secondary click | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
 | long click      | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
+| pan, pinch zoom, twist, tilt | ✅ | ✅ | ✅ | ✅  | ✅     | ✅     |
+| scroll wheel zoom | ✅ | ✅      | ✅   | ✅       | ✅     | ✅     |
+| mouse rotate and tilt | ✅ | ✅   | ✅   | ✅       | ✅     | ✅     |
 
 ### Programmatic Control
 
@@ -62,9 +71,13 @@ yet tested on a Linux machine.
 | Animate Map Camera                     | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
 | Add or remove a Map Source             | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
 | Add or remove a Map Layer              | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
-| Show the User Location                 | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
-| Track the User Location                | ❌   | ❌       | ❌   | ❌       | ❌     | ❌     |
+| Show the User Location                 | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
+| Track the User Location                | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
 | Convert Coordinates to Screen Position | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
 | Convert Screen Position to Coordinates | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
 | Get Meters per Pixel                   | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
 | Get the currently visible Region       | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
+| Query rendered Features                | ✅   | ✅       | ✅   | ✅       | ✅     | ✅     |
+
+➖ On web, the browser already skips hidden maps, so `MapLibreMap.paused` has
+no effect there.

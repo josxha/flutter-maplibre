@@ -1,7 +1,12 @@
 name: Publish to pub.dev
 
-on:
-  push: { tags: [ 'v[0-9]+.[0-9]+.[0-9]+*' ] }
+# Automatic publishing is disabled until maplibre_native and
+# maplibre_geolocator have their first release on pub.dev, which has to be
+# published manually before pub.dev can trust this workflow for them.
+# Restore the tag trigger then:
+# on:
+#   push: { tags: [ 'v[0-9]+.[0-9]+.[0-9]+*' ] }
+on: workflow_dispatch
 
 jobs:
   maplibre-platform-interface:
@@ -15,11 +20,18 @@ jobs:
     permissions: { id-token: write }
     uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
     with: { working-directory: packages/maplibre_web }
+  maplibre-native:
+    name: "Publish `maplibre_native`"
+    needs: maplibre-platform-interface
+    permissions: { id-token: write }
+    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
+    with: { working-directory: packages/maplibre_native }
   maplibre:
     name: "Publish `maplibre`"
     needs:
       - maplibre-platform-interface
       - maplibre-web
+      - maplibre-native
     permissions: { id-token: write }
     uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
     with: { working-directory: packages/maplibre }

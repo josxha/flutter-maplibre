@@ -25,7 +25,7 @@ rules apply:
 ### 1. iOS Support
 
 Version `0.3.0` finally added iOS as a supported platform. Head over to
-[Setup iOS](getting-started/setup-ios) to read how to use.
+[Platform setup](../getting-started/platforms.md#ios) to read how to use.
 
 ### 2. Migration to the `geobase` package
 

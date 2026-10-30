@@ -19,22 +19,22 @@ Polylines are way to show paths or similar on the map.
 @override
 Widget build(BuildContext context) {
   return MapLibreMap(
-    options: MapOptions(zoom: 7, center: Geographic(lon: 9.17, lat: 47.68)),
+    options: MapOptions(initCamera: .position(center: Geographic(lon: 9.17, lat: 47.68), zoom: 7)),
     layers: [
       PolylineLayer(
-        polylines: <LineString>[
-          LineString(
-            coordinates: [
+        polylines: [
+          Feature(
+            geometry: LineString.from(const [
               Geographic(lon: 9.17, lat: 47.68),
               Geographic(lon: 9.5, lat: 48),
               Geographic(lon: 9, lat: 48),
-            ],
+            ]),
           ),
         ],
-        color: .literal(Colors.red),
-        width: .literal(4),
-        blur: .literal(3),
-        dashArray: .literal(const [5, 5]),
+        color: const .literal(Colors.red),
+        width: const .literal(4),
+        blur: const .literal(3),
+        dashArray: const .literal([5, 5]),
       ),
     ],
   );
@@ -50,7 +50,7 @@ To add, remove or alter annotation layers, just use `setState()` like you'd do
 with Flutter widgets.
 
 Check out
-the [example app](https://github.com/josxha/flutter-maplibre/blob/v0.3.4/examples/lib/layers_polyline_page.dart)
+the [example app](https://github.com/josxha/flutter-maplibre/blob/main/examples/lib/layers_polyline_page.dart)
 if you want to see how things come together.
 
 ## Style & Layout

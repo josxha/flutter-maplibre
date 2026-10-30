@@ -63,7 +63,10 @@ important map information in your `build()` method with:
 - `MapOptions.of(context)` / `MapOptions.maybeOf(context)`
 - `MapCamera.of(context)` / `MapCamera.maybeOf(context)`
 
-## PermissionManager
+## User Location
 
-`maplibre` has a built-in `PermissionManager` class to handle location
-permissions without the need of any third party package.
+`maplibre` shows the user location with a
+[UserLocationLayer](../user-location.md) in `MapLibreMap.children`. It takes a
+stream of locations, for example from `geolocator` through the
+`maplibre_geolocator` package. Ask for the location permission with
+`geolocator` or `permission_handler`.

@@ -15,29 +15,29 @@ Polygons are way to highlight an area on the map.
 
 ## Basic Usage
 
-```dart linenums="1" hl_lines="6-23"
+```dart linenums="1" hl_lines="6-25"
 @override
 Widget build(BuildContext context) {
   return MapLibreMap(
-    options: MapOptions(zoom: 7, center: Geographic(lon: 9.17, lat: 47.68)),
+    options: MapOptions(initCamera: .position(center: Geographic(lon: 9.17, lat: 47.68), zoom: 7)),
     layers: [
       PolygonLayer(
-        polygons: <Polygon>[
-          Polygon(
-            coordinates: [
+        polygons: [
+          Feature(
+            geometry: Polygon.from(const [
               [
-                Geographic(lon: 8.201306116882563, lat: 48.107357488669464),
-                Geographic(lon: 8.885254895692924, lat: 48.09428546381665),
-                Geographic(lon: 8.759684141159909, lat: 47.69326800157776),
-                Geographic(lon: 9.631980099303235, lat: 48.08929468133098),
-                Geographic(lon: 8.68543348810175, lat: 48.45383566718806),
-                Geographic(lon: 8.201306116882563, lat: 48.107357488669464),
+                Geographic(lon: 8.2013, lat: 48.1074),
+                Geographic(lon: 8.8853, lat: 48.0943),
+                Geographic(lon: 8.7597, lat: 47.6933),
+                Geographic(lon: 9.6320, lat: 48.0893),
+                Geographic(lon: 8.6854, lat: 48.4538),
+                Geographic(lon: 8.2013, lat: 48.1074),
               ],
-            ],
+            ]),
           ),
         ],
-        color: .literal(Colors.lightBlueAccent.withOpacity(0.6)),
-        outlineColor: .literal(Colors.blue),
+        color: .literal(Colors.lightBlueAccent.withValues(alpha: 0.6)),
+        outlineColor: const .literal(Colors.blue),
       ),
     ],
   );
@@ -53,7 +53,7 @@ To add, remove or alter annotation layers, just use `setState()` like you'd do
 with Flutter widgets.
 
 Check out
-the [example app](https://github.com/josxha/flutter-maplibre/blob/v0.3.4/examples/lib/layers_polygon_page.dart)
+the [example app](https://github.com/josxha/flutter-maplibre/blob/main/examples/lib/layers_polygon_page.dart)
 if you want to see how things come together.
 
 ## Style & Layout

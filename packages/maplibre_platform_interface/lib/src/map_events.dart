@@ -103,7 +103,7 @@ final class MapEventClick extends MapEventUserInput {
 
 /// Emitted when the user clicks twice in a short amount of time on the map.
 ///
-/// Supported platforms: iOS
+/// Supported platforms: all
 ///
 /// {@category Events}
 final class MapEventDoubleClick extends MapEventUserInput {
@@ -118,7 +118,7 @@ final class MapEventDoubleClick extends MapEventUserInput {
 /// Emitted when the user clicks with the secondary button on the map. This
 /// would be classically the right mouse button.
 ///
-/// Supported platforms: iOS >=13.4, web
+/// Supported platforms: all
 ///
 /// {@category Events}
 final class MapEventSecondaryClick extends MapEventUserInput {
@@ -136,7 +136,7 @@ final class MapEventSecondaryClick extends MapEventUserInput {
 /// Emitted when the user clicks on the map and holds button down at the same
 /// location for some time.
 ///
-/// Supported platforms: Android, iOS
+/// Supported platforms: all
 ///
 /// {@category Events}
 final class MapEventLongClick extends MapEventUserInput {

@@ -4,7 +4,7 @@ icon: lucide/send
 
 # Events
 
-The event system is the used if you want to listen to any user interactions or
+The event system is used if you want to listen to any user interactions or
 state changes on the map.
 
 ## Basic Usage
@@ -16,7 +16,7 @@ parameter.
 @override
 Widget build(BuildContext context) {
   return MapLibreMap(
-    options: MapOptions(center: Geographic(lon: 9.17, lat: 47.68)),
+    options: MapOptions(initCamera: .position(center: Geographic(lon: 9.17, lat: 47.68), zoom: 7)),
     onEvent: _onEvent,
   );
 }
@@ -25,7 +25,7 @@ void _onEvent(event) {
   print(event.runtimeType);
 
   // check for the event type
-  if (event is MapEventClicked) {
+  if (event is MapEventClick) {
     print('The map has been clicked at ${event.point.lng}, ${event.point.lat}');
   }
 
@@ -43,19 +43,23 @@ void _onEvent(event) {
 
 ## Available Events
 
-- [MapLibre GL JS MapEventType](https://maplibre.org/maplibre-gl-js/docs/API/type-aliases/MapEventType/)
-- [MapLibre Native Android Listeners](https://maplibre.org/maplibre-native/android/api/-map-libre%20-native%20-android/org.maplibre.android.maps/-map-view/index.html)
+Every platform emits the same events. Map gestures are recognized in Flutter,
+so the user input events behave the same everywhere.
 
-| Flutter                  | Web         | Android                           | iOS | Windows | MacOS | Linux |
-|--------------------------|-------------|-----------------------------------|-----|---------|-------|-------|
-| MapEventMapCreated       |             |                                   |     |         |       |       |
-| MapEventStyleLoaded      | load        | (OnDidFinishLoadingStyleListener) |     |         |       |       |
-| MapEventClicked          | click       | OnMapClickListener                |     |         |       |       |
-| MapEventDoubleClicked    | dblclick    |                                   |     |         |       |       |
-| MapEventSecondaryClicked | contextmenu |                                   |     |         |       |       |
-| MapEventLongClicked      |             | OnMapLongClickListener            |     |         |       |       |
-| MapEventIdle             | idle        | OnDidBecomeIdleListener           |     |         |       |       |
-|                          | mousedown   |                                   |     |         |       |       |
-| MapEventStartMoveCamera  |             | OnCameraMoveStartedListener       |     |         |       |       |
-| MapEventMoveCamera       | move        | OnCameraMoveListener              |     |         |       |       |
-| MapEventCameraIdle       | moveend     | OnCameraMoveCanceledListener      |     |         |       |       |
+| Event                       | Emitted when                                                                          |
+|-----------------------------|---------------------------------------------------------------------------------------|
+| `MapEventMapCreated`        | The map was created. Holds the `MapController`.                                       |
+| `MapEventStyleLoaded`       | A style finished loading, also after `MapOptions.style` changed. Holds the `StyleController`. |
+| `MapEventClick`             | The user tapped or clicked the map.                                                   |
+| `MapEventDoubleClick`       | The user double tapped or double clicked the map.                                     |
+| `MapEventSecondaryClick`    | The user clicked the map with the secondary (right) mouse button.                     |
+| `MapEventLongClick`         | The user pressed the map for a longer time.                                           |
+| `MapEventStartMoveCamera`   | The camera starts to move. `reason` says whether a gesture, the app or the map moved it. |
+| `MapEventMoveCamera`        | The camera moved. Holds the new `MapCamera`.                                          |
+| `MapEventCameraIdle`        | The camera stopped moving.                                                            |
+| `MapEventIdle`              | The map finished rendering and no animation runs.                                     |
+| `MapEventRenderingChanged`  | The map stopped or resumed rendering, see [paused rendering](map.md#paused-rendering). |
+
+`MapEventClick`, `MapEventDoubleClick`, `MapEventSecondaryClick` and
+`MapEventLongClick` extend `MapEventUserInput`, which holds the `point` on the
+map and the `screenPoint` in logical pixels.

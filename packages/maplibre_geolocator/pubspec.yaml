@@ -1,6 +1,6 @@
 name: maplibre_geolocator
 description: "Shows the positions of the geolocator package with the UserLocationLayer of the maplibre package."
-version: 0.1.0
+version: 0.1.0-pre.1
 repository: https://github.com/josxha/flutter-maplibre
 issue_tracker: https://github.com/josxha/flutter-maplibre/issues
 homepage: https://flutter-maplibre.pages.dev
@@ -17,7 +17,7 @@ resolution: workspace
 dependencies:
   flutter: { sdk: flutter }
   geolocator: ^14.0.2
-  maplibre: ^0.3.7
+  maplibre: ^0.4.0-pre.1
 
 dev_dependencies:
   flutter_test: { sdk: flutter }

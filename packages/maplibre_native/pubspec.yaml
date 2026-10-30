@@ -1,7 +1,6 @@
 name: maplibre_native
 description: "MapLibre Native implementation of the Flutter MapLibre plugin for all non-web platforms, rendering through the MapLibre Native C API."
-version: 0.4.0
-publish_to: none
+version: 0.4.0-pre.1
 repository: https://github.com/josxha/flutter-maplibre
 issue_tracker: https://github.com/josxha/flutter-maplibre/issues
 homepage: https://flutter-maplibre.pages.dev
@@ -21,7 +20,7 @@ dependencies:
   geobase: ^1.5.0
   jni: ^1.1.0
   maplibre_native_ffi: ^0.202610.3
-  maplibre_platform_interface: ^0.3.6
+  maplibre_platform_interface: ^0.4.0-pre.1
   path_provider: ^2.1.5
 
 dev_dependencies:

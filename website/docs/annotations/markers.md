@@ -15,47 +15,42 @@ Markers are a way to show data on the map with labels and/or icons.
 
 ## Basic Usage
 
-```dart linenums="1" hl_lines="13-16 28-41"
-late final MapController _controller;
+```dart linenums="1" hl_lines="13-20 28-36"
+bool _imageLoaded = false;
+final _points = <Feature<Point>>[
+  const Feature(geometry: Point(Geographic(lon: 9.17, lat: 47.68))),
+  const Feature(geometry: Point(Geographic(lon: 9, lat: 48))),
+];
 
 @override
 Widget build(BuildContext context) {
   return MapLibreMap(
-    options: MapOptions(center: Geographic(lon: 9.17, lat: 47.68)),
+    options: MapOptions(initCamera: .position(center: Geographic(lon: 9.17, lat: 47.68), zoom: 7)),
     onEvent: (event) async {
       switch (event) {
-        case MapEventMapCreated():
-          _controller = event.mapController;
         case MapEventStyleLoaded():
-          // add marker image to map
-          final response =
-          await http.get(Uri.parse(LayersSymbolPage.imageUrl));
-          final bytes = response.bodyBytes;
-          await _controller.addImage('marker', bytes);
+          // add a marker image to the map
+          await event.style.addImageFromIconData(
+            id: 'marker',
+            iconData: Icons.location_on,
+            color: Colors.red,
+          );
+          setState(() => _imageLoaded = true);
         case MapEventClick():
-        // add a new marker on click
-          setState(() {
-            _points.add(Point(event.point));
-          });
+          // add a new marker on click
+          setState(() => _points.add(Feature(geometry: Point(event.point))));
         default:
-        // ignore all other events
           break;
       }
     },
     layers: [
       MarkerLayer(
-        points: <Point>[
-          Point(Geographic(lon: 9.17, lat: 47.68)),
-          Point(Geographic(lon: 9.17, lat: 48)),
-          Point(Geographic(lon: 9, lat: 48)),
-          Point(Geographic(lon: 9.5, lat: 48)),
-        ],
-        textField: .literal('Marker'),
-        textAllowOverlap: .literal(true),
-        iconImage: .literal('marker'),
-        iconSize: .literal(0.08),
-        iconAnchor: .literal(IconAnchor.bottom),
-        textOffset: .literal(const Offset(0, 1)),
+        points: _points,
+        textField: const .literal('Marker'),
+        textAllowOverlap: const .literal(true),
+        iconImage: _imageLoaded ? const .literal('marker') : null,
+        iconAnchor: const .literal(IconAnchor.bottom),
+        textOffset: const .literal(Offset(0, 1)),
       ),
     ],
   );
@@ -71,7 +66,7 @@ To add, remove or alter annotation layers, just use `setState()` like you'd do
 with Flutter widgets.
 
 Check out
-the [example app](https://github.com/josxha/flutter-maplibre/blob/v0.3.4/examples/lib/layers_marker_page.dart)
+the [example app](https://github.com/josxha/flutter-maplibre/blob/main/examples/lib/layers_marker_page.dart)
 if you want to see how things come together.
 
 ## Style & Layout

@@ -68,6 +68,8 @@ your `build()` method with:
 
 ## User Location & Permissions
 
-`maplibre` has built-in user location functionality that can be accessed via
-the `MapController` and a `PermissionManager` to handle location
-permissions without the need of any third party package.
+Like `flutter_map_location_marker`, the
+[UserLocationLayer](../user-location.md) of `maplibre` is a widget in
+`MapLibreMap.children` that shows a stream of locations. The
+`maplibre_geolocator` package turns `geolocator` positions into that stream.
+Ask for the location permission with `geolocator` or `permission_handler`.

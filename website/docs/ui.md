@@ -25,7 +25,7 @@ Widget build(BuildContext context) {
 ```
 
 See the
-user [interface page in the example app](https://github.com/josxha/flutter-maplibre/blob/v0.3.4/examples/lib/user_interface_page.dart)
+[styled map page of the example app](https://github.com/josxha/flutter-maplibre/blob/main/examples/lib/styled_map_page.dart)
 for a full implementation.
 
 All widgets inside the `children` List are within the `MapLibreMap` context and
@@ -64,9 +64,8 @@ Zoom buttons are great for accessibility reasons and great for non-tech-savvy
 users to navigate the map. You can use the `MapControlButtons` widget to render
 the default zoom buttons on the map.
 
-You are able to toggle an optional `showTrackLocation` flag to display an
-additional button to let the user display and track its own position.
-The `showTrackLocation` flag is ignored for now, because neither web nor
-`maplibre_native` provides the user location yet.
+Set `onTrackingPressed` to show an additional location button, and `tracking`
+to the tracking of your [UserLocationLayer](user-location.md), which the button
+shows. See [User Location](user-location.md#tracking) for an example.
 
 ![Zoom Control Buttons](../assets/images/ui/zoom-buttons.jpg)

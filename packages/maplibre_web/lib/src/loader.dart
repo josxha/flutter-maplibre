@@ -23,7 +23,7 @@ const _cdn = 'https://cdn.jsdelivr.net/npm';
 const _supportedMajorVersion = 6;
 
 const _setupDocs =
-    'https://flutter-maplibre.pages.dev/docs/getting-started/setup#setup-web';
+    'https://flutter-maplibre.pages.dev/docs/getting-started/platforms#web';
 
 Future<void>? _loading;
 
