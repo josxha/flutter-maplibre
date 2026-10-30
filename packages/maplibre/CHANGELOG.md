@@ -2,48 +2,34 @@
 
 ### Breaking Changes
 
-- Style layers are typed and generated from the style spec: every paint and
-  layout property is a constructor parameter and a getter and setter of type
-  `Expression<T>`, without the prefix of the layer type (`line-width` is
-  `LineStyleLayer.width`, `icon-` and `text-` stay). A property with a
-  transition also has a typed one, such as `colorTransition`. The `paint` and
-  `layout` maps of the layer constructors are gone: `paint: {'line-width': 3}`
-  is `width: const .literal(3)`, and `Expression.raw` takes the JSON of one
-  property. `StyleLayer.fromJson` takes the JSON of a whole layer. Style layers
-  can no longer be `const`. On `BackgroundStyleLayer`, `color` and `opacity` are
-  expressions now: `color: const .literal(Colors.black)`.
-- Annotation layers (`CircleLayer`, `MarkerLayer`, `PolygonLayer`,
-  `PolylineLayer`) take expressions for their style fields, so that a field can
-  depend on the feature: `radius: 10` is `radius: const .literal(10)`, and
-  `radius: .get('size').asNumber()` sizes each circle by its feature.
-  `opacity` and `strokeOpacity` are parameters instead of getters that read the
-  alpha of the color; a translucent color still draws translucent. The offsets
-  and translations of `MarkerLayer` are `Expression<Offset>`, and its
-  `iconPadding` is an `Expression<List<num>>`. `getPaint` and `getLayout` are
-  gone.
+- Style layers take typed properties instead of `paint` and `layout` maps:
+  `paint: {'line-width': 3}` is `width: const .literal(3)`. Property names drop
+  the layer type prefix (`line-width` is `LineStyleLayer.width`; `icon-` and
+  `text-` stay). Use `Expression.raw` for a property in JSON. Style layers can
+  no longer be `const`. On `BackgroundStyleLayer`, `color` and `opacity` are
+  expressions: `color: const .literal(Colors.black)`.
 - `StyleLayer.filter` is an `Expression<bool>?`. Use `Expression.raw([...])` for
   a filter in JSON.
-- `StyleController.layers` and `StyleController.sources` replace `addLayer`,
-  `removeLayer`, `addSource`, `removeSource`, `updateGeoJsonSource`,
-  `getLineLayer` and `getLayerIds`:
-  - `style.addLayer(layer)` is `style.layers.add(layer)`, which only takes
-    `belowLayerId`. `aboveLayerId` and `atIndex` are gone; use
-    `StyleLayers.move`, or the order of `style.layers` to find the layer above.
+- Annotation layers (`CircleLayer`, `MarkerLayer`, `PolygonLayer`,
+  `PolylineLayer`) take expressions for their style fields: `radius: 10` is
+  `radius: const .literal(10)`. `opacity` and `strokeOpacity` are parameters
+  instead of being read from the alpha of the color. The offsets of
+  `MarkerLayer` are `Expression<Offset>` and its `iconPadding` is
+  `Expression<List<num>>`. `getPaint` and `getLayout` are removed.
+- `MarkerLayer.iconAnchor` uses the new `IconAnchor` of the style layers.
+- `StyleController.layers` and `StyleController.sources` replace these methods:
+  - `style.addLayer(layer)` is `style.layers.add(layer)`. It takes only
+    `belowLayerId`; `aboveLayerId` and `atIndex` are removed, use
+    `style.layers.move` instead.
   - `style.removeLayer(id)` is `style.layers.remove(id)`.
   - `style.addSource(source)` is `style.sources.add(source)`, and
     `style.removeSource(id)` is `style.sources.remove(id)`.
   - `style.updateGeoJsonSource(id: id, data: data)` is
     `style.sources.updateGeoJsonData(id, data)`, or `updateGeoJsonUrl` for a
     URL.
-  - `style.getLineLayer(id)` is `style.layers[id] as LineStyleLayer?`, and
-    `LineStyleLayerController.lineGradient` is `LineStyleLayer.gradient`. The
-    `LineStyleLayerController` class is gone.
   - `style.getLayerIds()` is `style.layers.map((layer) => layer.id)`.
-- `style.layers.add` and `style.sources.add` throw an `ArgumentError` for an id
-  that is taken, and `style.layers.add` also for a missing source or
-  `belowLayerId`, on every platform.
-- `MarkerLayer` uses the generated `IconAnchor`, whose spec string is `value`
-  instead of `name`.
+- `style.layers.add`, `style.layers.move` and `style.sources.add` throw an
+  `ArgumentError` for an id that is taken or doesn't exist.
 
 - Web: requires [maplibre-gl-js v6](https://github.com/maplibre/maplibre-gl-js/releases/tag/v6.0.0),
   which now loads on its own. Remove the maplibre-gl-js and PMTiles `<script>`
@@ -170,22 +156,21 @@
 - Maps cache resources in `maplibre_native.db` in the app support directory,
   which also holds the offline regions.
 - Typed style expressions: `Expression<T>` covers every expression of the style
-  spec, with static members such as `Expression.get` and `Expression.interpolate`,
-  operators on number and string expressions, and `Expression.raw` for JSON.
+  spec, such as `Expression.get` and `Expression.interpolate`.
 - New `ColorReliefStyleLayer`.
-- `StyleController.layers` reads the layers of the style synchronously, from
-  bottom to top, as typed objects: `style.layers['route']`. `StyleLayers.move`
-  and `StyleLayer.moveBelow` move a layer.
-- A style layer on the map is its own controller: its setters also update the
-  map, fire-and-forget and in order, so they can animate a layer every frame.
-  Also for `minZoom`, `maxZoom`, `filter` and `visible`.
-- `StyleController.sources` reads the sources of the style synchronously and
-  updates them: `updateGeoJsonData`, `updateGeoJsonUrl`,
-  `updateImageCoordinates`, `updateTiles` and `updateTileJsonUrl`.
-- `StyleController.batch` shows several changes in one frame on native maps.
+- `style.layers` lists the layers of the style from bottom to top, and
+  `style.layers['id']` returns one. Setting a property of a layer updates the
+  map, also every frame for animations. `style.layers.move` and
+  `StyleLayer.moveBelow` change the order.
+- `style.sources` lists the sources of the style and updates them with
+  `updateGeoJsonData`, `updateGeoJsonUrl`, `updateImageCoordinates`,
+  `updateTiles` and `updateTileJsonUrl`.
+- `StyleController.batch` shows several style changes in the same frame.
+- Annotation layers can style each feature differently, for example
+  `radius: .get('size').asNumber()`.
 - `GeoJsonSource.lineMetrics` enables `line-progress`.
-- `MapLibreMap.layers` sets only the properties of a layer that changed, instead
-  of adding the layer again on top of all others.
+- Changing a layer in `MapLibreMap.layers` no longer moves it above all other
+  layers.
 - `ImageSource.bytes` and `ImageSource.provider` show images from encoded
   bytes or any Flutter `ImageProvider`, such as an `AssetImage` or a
   `FileImage`, not only from a URL.
