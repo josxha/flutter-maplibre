@@ -49,7 +49,10 @@ class StyleControllerNative extends StyleController {
       ...switch (source) {
         GeoJsonSource() => {
           'type': 'geojson',
-          'data': _geoJsonData(source.data),
+          'data': switch (source) {
+            GeoJsonSourceUrl(:final url) => url,
+            GeoJsonSourceData(:final data) => jsonDecode(data),
+          },
           'maxzoom': source.maxZoom,
           'tolerance': source.tolerance,
           'lineMetrics': source.lineMetrics,
@@ -57,8 +60,7 @@ class StyleControllerNative extends StyleController {
         },
         RasterSource() => {
           'type': 'raster',
-          'url': ?source.url,
-          'tiles': ?source.tiles,
+          ...tilesetOf(source),
           'bounds': source.bounds,
           'minzoom': source.minZoom,
           'maxzoom': source.maxZoom,
@@ -69,8 +71,7 @@ class StyleControllerNative extends StyleController {
         },
         RasterDemSource() => {
           'type': 'raster-dem',
-          'url': ?source.url,
-          'tiles': ?source.tiles,
+          ...tilesetOf(source),
           'bounds': source.bounds,
           'minzoom': source.minZoom,
           'maxzoom': source.maxZoom,
@@ -91,8 +92,7 @@ class StyleControllerNative extends StyleController {
         },
         VectorSource() => {
           'type': 'vector',
-          'url': ?source.url,
-          'tiles': ?source.tiles,
+          ...tilesetOf(source),
           'bounds': source.bounds,
           'scheme': source.scheme.name,
           'minzoom': source.minZoom,
@@ -391,15 +391,6 @@ class StyleControllerNative extends StyleController {
     if (_disposed) return _cachedLayerIds;
     final layers = await _map.listStyleLayers();
     return _cachedLayerIds = [for (final layer in layers) layer.id];
-  }
-
-  /// A GeoJSON object stays an object; anything else is a URL.
-  static Object _geoJsonData(String data) {
-    final trimmed = data.trim();
-    if (trimmed.startsWith('{') || trimmed.startsWith('[')) {
-      return jsonDecode(trimmed) as Object;
-    }
-    return trimmed;
   }
 }
 

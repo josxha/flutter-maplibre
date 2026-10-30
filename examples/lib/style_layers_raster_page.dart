@@ -37,7 +37,7 @@ class _StyleLayersRasterPageState extends State<StyleLayersRasterPage> {
   }
 
   Future<void> _onStyleLoaded(StyleController style) async {
-    const openStreetMap = RasterSource(
+    const openStreetMap = RasterSource.tiles(
       id: _sourceId,
       tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
       maxZoom: 20,

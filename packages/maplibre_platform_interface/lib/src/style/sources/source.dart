@@ -23,6 +23,18 @@ interface class Source {
   final String id;
 }
 
+/// The TileJSON `url` or the `tiles` of a raster, raster DEM or vector
+/// [source], as a source specification takes them.
+Map<String, Object> tilesetOf(Source source) => switch (source) {
+  RasterSourceUrl(:final url) ||
+  RasterDemSourceUrl(:final url) ||
+  VectorSourceUrl(:final url) => {'url': url},
+  RasterSourceTiles(:final tiles) ||
+  RasterDemSourceTiles(:final tiles) ||
+  VectorSourceTiles(:final tiles) => {'tiles': tiles},
+  _ => throw ArgumentError.value(source, 'source', 'Not a tile source'),
+};
+
 /// Influences the y direction of the tile coordinates.
 ///
 /// {@category Style}

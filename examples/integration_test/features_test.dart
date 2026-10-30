@@ -17,7 +17,7 @@ const _center = Geographic(lon: 0.1, lat: 0.1);
 /// it and the square itself, each in its own source and layer.
 Future<void> _addFixture(TestMap map) async {
   await map.style.addSource(
-    GeoJsonSource(
+    GeoJsonSource.data(
       id: 'point_source',
       data: featureCollection(const [
         Feature(geometry: Point(_center), id: 1, properties: {'kind': 'point'}),
@@ -25,7 +25,7 @@ Future<void> _addFixture(TestMap map) async {
     ),
   );
   await map.style.addSource(
-    GeoJsonSource(
+    GeoJsonSource.data(
       id: 'line_source',
       data: featureCollection([
         Feature(
@@ -40,7 +40,7 @@ Future<void> _addFixture(TestMap map) async {
     ),
   );
   await map.style.addSource(
-    GeoJsonSource(
+    GeoJsonSource.data(
       id: 'polygon_source',
       data: featureCollection([
         Feature(

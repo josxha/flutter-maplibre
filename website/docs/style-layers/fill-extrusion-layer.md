@@ -24,9 +24,9 @@ Widget build(BuildContext context) {
       onStyleLoaded: (style) async {
         // add the tile source
         await style.addSource(
-          const GeoJsonSource(
+          const GeoJsonSource.url(
             id: _sourceId,
-            data:
+            url:
             'https://maplibre.org/maplibre-gl-js/docs/assets/indoor-3d-map.geojson',
           ),
         );

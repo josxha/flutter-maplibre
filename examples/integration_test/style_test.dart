@@ -52,7 +52,9 @@ void runTests() {
 
     testWidgets('adds layers at the requested position', (tester) async {
       final map = await pumpMap(tester);
-      await map.style.addSource(GeoJsonSource(id: 'src', data: _pointData()));
+      await map.style.addSource(
+        GeoJsonSource.data(id: 'src', data: _pointData()),
+      );
       await map.style.addLayer(
         const CircleStyleLayer(id: 'top', sourceId: 'src'),
       );
@@ -82,16 +84,18 @@ void runTests() {
 
     testWidgets('adds and removes every kind of layer', (tester) async {
       final map = await pumpMap(tester);
-      await map.style.addSource(GeoJsonSource(id: 'src', data: _pointData()));
       await map.style.addSource(
-        const RasterDemSource(
+        GeoJsonSource.data(id: 'src', data: _pointData()),
+      );
+      await map.style.addSource(
+        const RasterDemSource.tiles(
           id: 'dem',
           tiles: ['https://example.invalid/{z}/{x}/{y}.png'],
           tileSize: 256,
         ),
       );
       await map.style.addSource(
-        const RasterSource(
+        const RasterSource.tiles(
           id: 'raster',
           tiles: ['https://example.invalid/{z}/{x}/{y}.png'],
           tileSize: 256,
@@ -129,7 +133,11 @@ void runTests() {
       final markerBytes = (await rootBundle.load(_markerAsset)).buffer
           .asUint8List();
       final sources = <Source>[
-        GeoJsonSource(id: 'geojson', data: _pointData()),
+        GeoJsonSource.data(id: 'geojson', data: _pointData()),
+        const GeoJsonSource.url(
+          id: 'geojson-url',
+          url: 'https://example.invalid/data.geojson',
+        ),
         const ImageSource.url(
           id: 'image',
           url: 'https://example.invalid/image.png',
@@ -150,18 +158,48 @@ void runTests() {
           image: AssetImage(_markerAsset),
           coordinates: _quad,
         ),
-        const RasterSource(
+        const RasterSource.tiles(
           id: 'raster',
           tiles: ['https://example.invalid/{z}/{x}/{y}.png'],
         ),
-        const RasterDemSource(
+        const RasterDemSource.tiles(
           id: 'raster-dem',
           tiles: ['https://example.invalid/{z}/{x}/{y}.png'],
         ),
-        const VectorSource(
+        const VectorSource.tiles(
           id: 'vector',
           tiles: ['https://example.invalid/{z}/{x}/{y}.pbf'],
         ),
+        const RasterSource.url(
+          id: 'raster-url',
+          url: 'https://example.invalid/tiles.json',
+        ),
+        const RasterDemSource.url(
+          id: 'raster-dem-url',
+          url: 'https://example.invalid/tiles.json',
+        ),
+        const VectorSource.url(
+          id: 'vector-url',
+          url: 'https://example.invalid/tiles.json',
+        ),
+        // MapLibre Native has no video sources.
+        if (kIsWeb) ...[
+          const VideoSource.urls(
+            id: 'video',
+            urls: ['https://example.invalid/video.mp4'],
+            coordinates: _quad,
+          ),
+          VideoSource.bytes(
+            id: 'video-bytes',
+            bytes: markerBytes,
+            coordinates: _quad,
+          ),
+          const VideoSource.asset(
+            id: 'video-asset',
+            asset: _markerAsset,
+            coordinates: _quad,
+          ),
+        ],
       ];
       for (final source in sources) {
         await map.style.addSource(source);
@@ -187,7 +225,7 @@ void runTests() {
       }
       // Every ID is free again.
       await map.style.addSource(
-        GeoJsonSource(id: 'geojson', data: _pointData()),
+        GeoJsonSource.data(id: 'geojson', data: _pointData()),
       );
     });
 
@@ -209,7 +247,9 @@ void runTests() {
 
     testWidgets('updates the data of a GeoJSON source', (tester) async {
       final map = await pumpMap(tester, options: offlineOptions(zoom: 8));
-      await map.style.addSource(GeoJsonSource(id: 'src', data: _pointData()));
+      await map.style.addSource(
+        GeoJsonSource.data(id: 'src', data: _pointData()),
+      );
       await map.style.addLayer(
         const CircleStyleLayer(
           id: 'circles',
@@ -248,7 +288,7 @@ void runTests() {
         'rgba(0, 0, 0, 0)',
       ];
       await map.style.addSource(
-        GeoJsonSource(id: 'src', data: line(0), lineMetrics: true),
+        GeoJsonSource.data(id: 'src', data: line(0), lineMetrics: true),
       );
       await map.style.addLayer(
         LineStyleLayer(
@@ -308,7 +348,9 @@ void runTests() {
           child: ColoredBox(color: Colors.red),
         ),
       );
-      await map.style.addSource(GeoJsonSource(id: 'src', data: _pointData()));
+      await map.style.addSource(
+        GeoJsonSource.data(id: 'src', data: _pointData()),
+      );
       for (final image in ['marker', 'marker-2', 'icon', 'widget']) {
         await map.style.addLayer(
           SymbolStyleLayer(
@@ -334,7 +376,7 @@ void runTests() {
       final map = await pumpMap(tester);
       expect(map.style.attributions, isEmpty);
       await map.style.addSource(
-        const RasterSource(
+        const RasterSource.tiles(
           id: 'src',
           tiles: ['https://example.invalid/{z}/{x}/{y}.png'],
           attribution: '© Test Data',
@@ -377,7 +419,7 @@ void runTests() {
       // The camera stays put, so only the attribution change rebuilds the
       // widget.
       await map.style.addSource(
-        const RasterSource(
+        const RasterSource.tiles(
           id: 'src',
           tiles: ['https://example.invalid/{z}/{x}/{y}.png'],
           attribution: '© Widget Data',
@@ -431,7 +473,7 @@ void runTests() {
       );
 
       await map.style.addSource(
-        const GeoJsonSource(
+        const GeoJsonSource.data(
           id: 'points',
           data: '{"type":"FeatureCollection","features":[]}',
           attribution: '© Points',

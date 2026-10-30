@@ -18,8 +18,9 @@
   API are exported. See the maplibre changelog.
 - `StyleController.getAttributions()` and `getAttributionsSync()` are
   replaced by the synchronous getter `StyleController.attributions`.
-- `ImageSource` is sealed, with `ImageSource.url`, `ImageSource.bytes` and
-  `ImageSource.provider`. See the maplibre changelog.
+- Sources are sealed classes with named constructors, such as
+  `ImageSource.provider`, `GeoJsonSource.data` and `RasterSource.tiles`. See
+  the maplibre changelog.
 
 ## 0.3.7+1
 

@@ -6,12 +6,9 @@ part of 'source.dart';
 ///
 /// {@category Style}
 /// {@subCategory Style Sources}
-final class RasterSource extends Source {
-  /// The default constructor for a [RasterSource] object.
-  const RasterSource({
+sealed class RasterSource extends Source {
+  const RasterSource._({
     required super.id,
-    this.url,
-    this.tiles,
     this.bounds = const [-180, -85.051129, 180, 85.051129],
     this.minZoom = 0,
     this.maxZoom = 22,
@@ -21,12 +18,33 @@ final class RasterSource extends Source {
     this.volatile = false,
   });
 
-  /// A URL to a TileJSON resource. Supported protocols are `http:` and
-  /// `https:`.
-  final String? url;
+  /// A raster source whose tiles are described by the TileJSON resource at
+  /// [url]. Supported protocols are `http:` and `https:`.
+  const factory RasterSource.url({
+    required String id,
+    required String url,
+    List<double> bounds,
+    double minZoom,
+    double maxZoom,
+    int tileSize,
+    TileScheme scheme,
+    String? attribution,
+    bool volatile,
+  }) = RasterSourceUrl;
 
-  /// An array of one or more tile source URLs, as in the TileJSON spec.
-  final List<String>? tiles;
+  /// A raster source that loads its tiles from one or more [tiles] URLs, as
+  /// in the TileJSON spec.
+  const factory RasterSource.tiles({
+    required String id,
+    required List<String> tiles,
+    List<double> bounds,
+    double minZoom,
+    double maxZoom,
+    int tileSize,
+    TileScheme scheme,
+    String? attribution,
+    bool volatile,
+  }) = RasterSourceTiles;
 
   /// An array containing the longitude and latitude of the southwest and
   /// northeast corners of the source's bounding box in the following order:
@@ -67,4 +85,49 @@ final class RasterSource extends Source {
   ///
   /// Defaults to false. Not available on web.
   final bool volatile;
+}
+
+/// A [RasterSource] whose tiles are described by a TileJSON resource.
+///
+/// {@category Style}
+/// {@subCategory Style Sources}
+final class RasterSourceUrl extends RasterSource {
+  /// Creates a [RasterSource] from the TileJSON resource at [url].
+  const RasterSourceUrl({
+    required super.id,
+    required this.url,
+    super.bounds,
+    super.minZoom,
+    super.maxZoom,
+    super.tileSize,
+    super.scheme,
+    super.attribution,
+    super.volatile,
+  }) : super._();
+
+  /// A URL to a TileJSON resource. Supported protocols are `http:` and
+  /// `https:`.
+  final String url;
+}
+
+/// A [RasterSource] that loads its tiles from tile URLs.
+///
+/// {@category Style}
+/// {@subCategory Style Sources}
+final class RasterSourceTiles extends RasterSource {
+  /// Creates a [RasterSource] from the tile URLs [tiles].
+  const RasterSourceTiles({
+    required super.id,
+    required this.tiles,
+    super.bounds,
+    super.minZoom,
+    super.maxZoom,
+    super.tileSize,
+    super.scheme,
+    super.attribution,
+    super.volatile,
+  }) : super._();
+
+  /// An array of one or more tile source URLs, as in the TileJSON spec.
+  final List<String> tiles;
 }

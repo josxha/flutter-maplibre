@@ -7,9 +7,10 @@ class StyleControllerWeb extends StyleController {
 
   final interop.JsMap _map;
 
-  /// The blob URLs of image sources from bytes or an [ImageProvider], by
-  /// source id. They are revoked when their source is removed.
-  final _imageSourceUrls = <String, String>{};
+  /// The blob URLs of image and video sources from bytes or an
+  /// [ImageProvider], by source id. They are revoked when their source is
+  /// removed.
+  final _blobUrls = <String, String>{};
 
   @override
   Future<void> addImage(
@@ -63,7 +64,7 @@ class StyleControllerWeb extends StyleController {
   Future<void> removeSource(String id) async {
     // Removing a source the style lacks is not an error on other platforms.
     if (_map.getSource(id) != null) _map.removeSource(id);
-    if (_imageSourceUrls.remove(id) case final String url) {
+    if (_blobUrls.remove(id) case final String url) {
       URL.revokeObjectURL(url);
     }
   }
@@ -251,14 +252,24 @@ class StyleControllerWeb extends StyleController {
         'A Source with the id "${source.id}" already exists in the map style.',
       );
     }
+    try {
+      await _addSource(source);
+    } catch (_) {
+      // The map never uses the blob URL of a source it rejected.
+      if (_blobUrls.remove(source.id) case final String url) {
+        URL.revokeObjectURL(url);
+      }
+      rethrow;
+    }
+  }
+
+  Future<void> _addSource(Source source) async {
     switch (source) {
       case GeoJsonSource():
-        JSAny data;
-        if (source.data[0] == '{') {
-          data = parse(source.data);
-        } else {
-          data = source.data.jsify()!;
-        }
+        final data = switch (source) {
+          GeoJsonSourceUrl(:final url) => url.toJS,
+          GeoJsonSourceData(:final data) => parse(data),
+        };
         _map.addSource(
           source.id,
           _sourceSpecification({
@@ -274,8 +285,7 @@ class StyleControllerWeb extends StyleController {
           source.id,
           _sourceSpecification({
             'type': 'raster-dem',
-            'url': source.url,
-            'tiles': source.tiles,
+            ...tilesetOf(source),
             'bounds': source.bounds,
             'minzoom': source.minZoom,
             'maxzoom': source.maxZoom,
@@ -288,8 +298,7 @@ class StyleControllerWeb extends StyleController {
           source.id,
           _sourceSpecification({
             'type': 'raster',
-            'url': source.url,
-            'tiles': source.tiles,
+            ...tilesetOf(source),
             'bounds': source.bounds,
             'minzoom': source.minZoom,
             'maxzoom': source.maxZoom,
@@ -303,8 +312,7 @@ class StyleControllerWeb extends StyleController {
           source.id,
           _sourceSpecification({
             'type': 'vector',
-            'url': source.url,
-            'tiles': source.tiles,
+            ...tilesetOf(source),
             'bounds': source.bounds,
             'minzoom': source.minZoom,
             'maxzoom': source.maxZoom,
@@ -321,7 +329,7 @@ class StyleControllerWeb extends StyleController {
           ),
           ImageSourceProvider(:final image) => await _blobUrlOfProvider(image),
         };
-        if (source is! ImageSourceUrl) _imageSourceUrls[source.id] = url;
+        if (source is! ImageSourceUrl) _blobUrls[source.id] = url;
         _map.addSource(
           source.id,
           interop.SourceSpecification.image(
@@ -348,11 +356,18 @@ class StyleControllerWeb extends StyleController {
           ),
         );
       case VideoSource():
+        final urls = switch (source) {
+          VideoSourceUrls(:final urls) => urls,
+          VideoSourceBytes(:final bytes) => [
+            _blobUrls[source.id] = URL.createObjectURL(Blob([bytes.toJS].toJS)),
+          ],
+          VideoSourceAsset(:final asset) => [AssetManager().getAssetUrl(asset)],
+        };
         _map.addSource(
           source.id,
           interop.SourceSpecification.video(
             type: 'video',
-            urls: source.urls.jsify()!,
+            urls: urls.jsify()!,
             coordinates: [
               source.coordinates.topLeft,
               source.coordinates.topRight,
@@ -368,10 +383,10 @@ class StyleControllerWeb extends StyleController {
   void dispose() {
     // Interop members can't be torn off for forEach.
     // ignore: prefer_foreach
-    for (final url in _imageSourceUrls.values) {
+    for (final url in _blobUrls.values) {
       URL.revokeObjectURL(url);
     }
-    _imageSourceUrls.clear();
+    _blobUrls.clear();
   }
 
   /// A blob URL of a PNG of the image of [provider].

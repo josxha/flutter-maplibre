@@ -23,7 +23,7 @@ Widget build(BuildContext context) {
       options: MapOptions(center: Geographic(lon: 9.17, lat: 47.68)),
       onMapCreated: (controller) => _controller = controller,
       onStyleLoaded: (style) async {
-        const hillshade = RasterDemSource(
+        const hillshade = RasterDemSource.url(
           id: _sourceId,
           url: 'https://demotiles.maplibre.org/terrain-tiles/tiles.json',
           tileSize: 256,

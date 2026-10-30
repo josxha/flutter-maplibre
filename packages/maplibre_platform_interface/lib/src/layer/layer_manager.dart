@@ -13,7 +13,7 @@ class LayerManager {
   /// the layers with [_oldLayers] in for the initial creation.
   LayerManager(this.style, List<Layer> layers) {
     for (final (index, layer) in layers.indexed) {
-      final source = GeoJsonSource(
+      final source = GeoJsonSource.data(
         id: layer.getSourceId(index),
         data: FeatureCollection(layer.list).toText(),
       );
@@ -69,7 +69,7 @@ class LayerManager {
           );
         }
       } else {
-        final source = GeoJsonSource(
+        final source = GeoJsonSource.data(
           id: layer.getSourceId(index),
           data: FeatureCollection(layer.list).toText(),
         );

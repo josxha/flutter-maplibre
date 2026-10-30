@@ -45,7 +45,7 @@ void runTests() {
       final map = await pumpMap(tester);
       await expectLater(
         map.style.addSource(
-          const VideoSource(
+          const VideoSource.urls(
             id: 'video',
             urls: ['https://example.com/video.mp4'],
             coordinates: LngLatQuad(

@@ -13,7 +13,8 @@ You can use the same source for multiple style layers.
 
 You can use
 the [GeoJsonSource](https://pub.dev/documentation/maplibre/latest/maplibre/GeoJsonSource-class.html)
-to attach data like points, lines or polygons. The data can then be used in a
+to attach data like points, lines or polygons, from a GeoJSON file with
+`GeoJsonSource.url` or a GeoJSON string with `GeoJsonSource.data`. The data can then be used in a
 [StyleCircleLayer](style-layers/circle-layer),
 [FillStyleLayer](style-layers/fill-layer),
 [HeatmapStyleLayer](style-layers/heatmap-layer),
@@ -28,7 +29,7 @@ An example use cases is to display and visualize any kind of data on the map.
 
 Use
 the [ImageSource](https://pub.dev/documentation/maplibre/latest/maplibre/ImageSource-class.html)
-If you want to render an image on the map. `ImageSource.url` loads the image
+if you want to render an image on the map. `ImageSource.url` loads the image
 from a URL, `ImageSource.bytes` takes an encoded image such as a PNG, and
 `ImageSource.provider` takes any Flutter `ImageProvider`, for example an
 `AssetImage` or a `FileImage`.
@@ -54,7 +55,9 @@ An example use case is to position a weather radar image on the map.
 
 Likewise,
 the [VideoSource](https://pub.dev/documentation/maplibre/latest/maplibre/VideoSource-class.html)
-can be used to render a video on the map.
+can be used to render a video on the map, from URLs with `VideoSource.urls`,
+encoded video bytes with `VideoSource.bytes` or a Flutter asset with
+`VideoSource.asset`.
 
 The video source is only supported on web.
 
@@ -62,9 +65,11 @@ The video source is only supported on web.
 
 The most common way to use a tile source is by an URL. This can either be
 
-- the direct URL of a tile server, e.g. `https://example.com/{z}/{x}/{y}.mvt`
+- the direct URL of a tile server, e.g. `https://example.com/{z}/{x}/{y}.mvt`,
+  with the `.tiles` constructor of a tile source
 - the URL of a [TileJSON](https://github.com/mapbox/tilejson-spec) that provides
-  a tile server with additional metadata, e.g. `https://example.com/tiles.json`
+  a tile server with additional metadata, e.g. `https://example.com/tiles.json`,
+  with the `.url` constructor
 - a PMTiles file by adding `pmtiles://` in front of your url, e.g.
   `pmtiles://https://example.com/tiles.pmtiles` or
   `pmtiles://files://path/tiles.pmtiles`

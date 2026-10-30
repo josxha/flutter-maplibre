@@ -38,9 +38,9 @@ class _StyleLayersFillExtrusionPageState
 
   Future<void> _onStyleLoaded(StyleController style) async {
     await style.addSource(
-      const GeoJsonSource(
+      const GeoJsonSource.url(
         id: _sourceId,
-        data: 'https://maplibre.org/maplibre-gl-js/docs/assets/indoor-3d-map.geojson',
+        url: 'https://maplibre.org/maplibre-gl-js/docs/assets/indoor-3d-map.geojson',
       ),
     );
     await style.addLayer(_fillExtrusionStyleLayer);
