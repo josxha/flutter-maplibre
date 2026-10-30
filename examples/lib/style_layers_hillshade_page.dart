@@ -33,7 +33,7 @@ class _StyleLayersHillshadePageState extends State<StyleLayersHillshadePage> {
   }
 
   Future<void> _onStyleLoaded(StyleController style) async {
-    const hillshade = RasterDemSource(
+    const hillshade = RasterDemSource.url(
       id: _sourceId,
       url: 'https://demotiles.maplibre.org/terrain-tiles/tiles.json',
       tileSize: 256,

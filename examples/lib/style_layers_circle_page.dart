@@ -32,9 +32,9 @@ class _StyleLayersCirclePageState extends State<StyleLayersCirclePage> {
   }
 
   Future<void> _onStyleLoaded(StyleController style) async {
-    const earthquakes = GeoJsonSource(
+    const earthquakes = GeoJsonSource.url(
       id: _sourceId,
-      data:
+      url:
           'https://maplibre.org/maplibre-gl-js/docs/assets/earthquakes.geojson',
     );
     await style.addSource(earthquakes);

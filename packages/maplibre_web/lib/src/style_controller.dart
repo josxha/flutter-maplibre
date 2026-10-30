@@ -3,9 +3,14 @@ part of 'map_state.dart';
 /// Web specific implementation of the [StyleController].
 class StyleControllerWeb extends StyleController {
   /// Create a new [StyleControllerWeb] instance.
-  const StyleControllerWeb(this._map);
+  StyleControllerWeb(this._map);
 
   final interop.JsMap _map;
+
+  /// The blob URLs of image and video sources from bytes or an
+  /// [ImageProvider], by source id. They are revoked when their source is
+  /// removed.
+  final _blobUrls = <String, String>{};
 
   @override
   Future<void> addImage(
@@ -59,6 +64,9 @@ class StyleControllerWeb extends StyleController {
   Future<void> removeSource(String id) async {
     // Removing a source the style lacks is not an error on other platforms.
     if (_map.getSource(id) != null) _map.removeSource(id);
+    if (_blobUrls.remove(id) case final String url) {
+      URL.revokeObjectURL(url);
+    }
   }
 
   @override
@@ -246,12 +254,10 @@ class StyleControllerWeb extends StyleController {
     }
     switch (source) {
       case GeoJsonSource():
-        JSAny data;
-        if (source.data[0] == '{') {
-          data = parse(source.data);
-        } else {
-          data = source.data.jsify()!;
-        }
+        final data = switch (source) {
+          GeoJsonSourceUrl(:final url) => url.toJS,
+          GeoJsonSourceData(:final data) => parse(data),
+        };
         _map.addSource(
           source.id,
           _sourceSpecification({
@@ -267,8 +273,7 @@ class StyleControllerWeb extends StyleController {
           source.id,
           _sourceSpecification({
             'type': 'raster-dem',
-            'url': source.url,
-            'tiles': source.tiles,
+            ...tilesetOf(source),
             'bounds': source.bounds,
             'minzoom': source.minZoom,
             'maxzoom': source.maxZoom,
@@ -281,8 +286,7 @@ class StyleControllerWeb extends StyleController {
           source.id,
           _sourceSpecification({
             'type': 'raster',
-            'url': source.url,
-            'tiles': source.tiles,
+            ...tilesetOf(source),
             'bounds': source.bounds,
             'minzoom': source.minZoom,
             'maxzoom': source.maxZoom,
@@ -296,8 +300,7 @@ class StyleControllerWeb extends StyleController {
           source.id,
           _sourceSpecification({
             'type': 'vector',
-            'url': source.url,
-            'tiles': source.tiles,
+            ...tilesetOf(source),
             'bounds': source.bounds,
             'minzoom': source.minZoom,
             'maxzoom': source.maxZoom,
@@ -306,11 +309,20 @@ class StyleControllerWeb extends StyleController {
           }),
         );
       case ImageSource():
-        _map.addSource(
+        // MapLibre GL JS loads image sources only from a URL.
+        final url = switch (source) {
+          ImageSourceUrl(:final url) => url,
+          ImageSourceBytes(:final bytes) => URL.createObjectURL(
+            Blob([bytes.toJS].toJS),
+          ),
+          ImageSourceProvider(:final image) => await _blobUrlOfProvider(image),
+        };
+        _addBlobSource(
           source.id,
+          source is ImageSourceUrl ? null : url,
           interop.SourceSpecification.image(
             type: 'image',
-            url: source.url,
+            url: url,
             // The coordinates start at the top left corner of the image and
             // proceed in clockwise order.
             // https://github.com/maplibre/maplibre-gl-js/blob/87486a5ef2085e600e8fa4e31252629dd8488dcd/src/source/image_source.ts#L24
@@ -332,11 +344,23 @@ class StyleControllerWeb extends StyleController {
           ),
         );
       case VideoSource():
-        _map.addSource(
+        final blobUrl = switch (source) {
+          VideoSourceBytes(:final bytes) => URL.createObjectURL(
+            Blob([bytes.toJS].toJS),
+          ),
+          _ => null,
+        };
+        final urls = switch (source) {
+          VideoSourceUrls(:final urls) => urls,
+          VideoSourceBytes() => [blobUrl!],
+          VideoSourceAsset(:final asset) => [AssetManager().getAssetUrl(asset)],
+        };
+        _addBlobSource(
           source.id,
+          blobUrl,
           interop.SourceSpecification.video(
             type: 'video',
-            urls: source.urls.jsify()!,
+            urls: urls.jsify()!,
             coordinates: [
               source.coordinates.topLeft,
               source.coordinates.topRight,
@@ -348,8 +372,59 @@ class StyleControllerWeb extends StyleController {
     }
   }
 
+  /// Adds the source [specification], whose content comes from [blobUrl]
+  /// if it isn't null. The blob URL is kept for [removeSource] once the map
+  /// accepts the source, and revoked if it rejects it.
+  void _addBlobSource(
+    String id,
+    String? blobUrl,
+    interop.SourceSpecification specification,
+  ) {
+    try {
+      _map.addSource(id, specification);
+    } catch (_) {
+      if (blobUrl != null) URL.revokeObjectURL(blobUrl);
+      rethrow;
+    }
+    if (blobUrl != null) _blobUrls[id] = blobUrl;
+  }
+
   @override
-  void dispose() {}
+  void dispose() {
+    // Interop members can't be torn off for forEach.
+    // ignore: prefer_foreach
+    for (final url in _blobUrls.values) {
+      URL.revokeObjectURL(url);
+    }
+    _blobUrls.clear();
+  }
+
+  /// A blob URL of a PNG of the image of [provider].
+  static Future<String> _blobUrlOfProvider(ImageProvider provider) async {
+    final image = await resolveImageProvider(provider);
+    try {
+      // Raw pixels, as Flutter's skwasm renderer encodes some images to PNG at
+      // the size of the view.
+      final data = await image.toByteData(
+        format: ImageByteFormat.rawStraightRgba,
+      );
+      if (data == null) {
+        throw StateError('Failed to read the pixels of the image source.');
+      }
+      final canvas = OffscreenCanvas(image.width, image.height);
+      final context =
+          canvas.getContext('2d')! as OffscreenCanvasRenderingContext2D;
+      context.putImageData(
+        ImageData(data.buffer.asUint8ClampedList().toJS, image.width),
+        0,
+        0,
+      );
+      final blob = await canvas.convertToBlob().toDart;
+      return URL.createObjectURL(blob);
+    } finally {
+      image.dispose();
+    }
+  }
 
   @override
   void setProjection(MapProjection projection) => _map.setProjection(

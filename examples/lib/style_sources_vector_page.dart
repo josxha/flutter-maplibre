@@ -37,7 +37,7 @@ class _StyleSourcesVectorPageState extends State<StyleSourcesVectorPage> {
             // add the image to the map
             await style.addImage('marker', bytes);
 
-            const vectorSource = VectorSource(
+            const vectorSource = VectorSource.url(
               id: sourceId,
               url: 'https://demotiles.maplibre.org/tiles/tiles.json',
             );

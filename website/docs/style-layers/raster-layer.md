@@ -22,7 +22,7 @@ Widget build(BuildContext context) {
       options: MapOptions(center: Geographic(lon: 9.17, lat: 47.68)),
       onMapCreated: (controller) => _controller = controller,
       onStyleLoaded: (style) async {
-        const openStreetMap = RasterSource(
+        const openStreetMap = RasterSource.tiles(
           id: _sourceId,
           tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
           maxZoom: 20,

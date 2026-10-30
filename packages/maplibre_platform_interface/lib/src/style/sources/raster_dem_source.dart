@@ -7,12 +7,9 @@ part of 'source.dart';
 ///
 /// {@category Style}
 /// {@subCategory Style Sources}
-final class RasterDemSource extends Source {
-  /// The default constructor for a [RasterDemSource] object.
-  const RasterDemSource({
+sealed class RasterDemSource extends Source {
+  const RasterDemSource._({
     required super.id,
-    this.url,
-    this.tiles,
     this.bounds = const [-180, -85.051129, 180, 85.051129],
     this.minZoom = 0,
     this.maxZoom = 22,
@@ -22,12 +19,34 @@ final class RasterDemSource extends Source {
     this.volatile = false,
   });
 
-  /// A URL to a TileJSON resource. Supported protocols are `http:` and
-  /// `https:`.
-  final String? url;
+  /// A raster DEM source whose tiles are described by the TileJSON resource at
+  /// [url]. Supported protocols are `http:` and `https:`, and `pmtiles://`
+  /// in front of the URL of a PMTiles archive.
+  const factory RasterDemSource.url({
+    required String id,
+    required String url,
+    List<double> bounds,
+    double minZoom,
+    double maxZoom,
+    int tileSize,
+    String? attribution,
+    RasterDemEncoding encoding,
+    bool volatile,
+  }) = RasterDemSourceUrl;
 
-  /// An array of one or more tile source URLs, as in the TileJSON spec.
-  final List<String>? tiles;
+  /// A raster DEM source that loads its tiles from one or more [tiles] URLs, as
+  /// in the TileJSON spec.
+  const factory RasterDemSource.tiles({
+    required String id,
+    required List<String> tiles,
+    List<double> bounds,
+    double minZoom,
+    double maxZoom,
+    int tileSize,
+    String? attribution,
+    RasterDemEncoding encoding,
+    bool volatile,
+  }) = RasterDemSourceTiles;
 
   /// An array containing the longitude and latitude of the southwest and
   /// northeast corners of the source's bounding box in the following order:
@@ -65,6 +84,51 @@ final class RasterDemSource extends Source {
   ///
   /// Defaults to false. Not available on web.
   final bool volatile;
+}
+
+/// A [RasterDemSource] whose tiles are described by a TileJSON resource.
+///
+/// {@category Style}
+/// {@subCategory Style Sources}
+final class RasterDemSourceUrl extends RasterDemSource {
+  /// Creates a [RasterDemSource] from the TileJSON resource at [url].
+  const RasterDemSourceUrl({
+    required super.id,
+    required this.url,
+    super.bounds,
+    super.minZoom,
+    super.maxZoom,
+    super.tileSize,
+    super.attribution,
+    super.encoding,
+    super.volatile,
+  }) : super._();
+
+  /// A URL to a TileJSON resource. Supported protocols are `http:` and
+  /// `https:`, and `pmtiles://` in front of the URL of a PMTiles archive.
+  final String url;
+}
+
+/// A [RasterDemSource] that loads its tiles from tile URLs.
+///
+/// {@category Style}
+/// {@subCategory Style Sources}
+final class RasterDemSourceTiles extends RasterDemSource {
+  /// Creates a [RasterDemSource] from the tile URLs [tiles].
+  const RasterDemSourceTiles({
+    required super.id,
+    required this.tiles,
+    super.bounds,
+    super.minZoom,
+    super.maxZoom,
+    super.tileSize,
+    super.attribution,
+    super.encoding,
+    super.volatile,
+  }) : super._();
+
+  /// An array of one or more tile source URLs, as in the TileJSON spec.
+  final List<String> tiles;
 }
 
 /// The encoding used by this source. Mapbox Terrain RGB is used by default.

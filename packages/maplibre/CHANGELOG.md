@@ -77,6 +77,15 @@
   `VectorSource.sourceLayer`, which had no effect.
 - `VideoSource.coordinates` is a `LngLatQuad`, like `ImageSource.coordinates`,
   instead of a list of four `Geographic`s.
+- Sources are sealed classes with named constructors instead of a default
+  constructor, so their input is no longer guessed or left optional:
+  - `ImageSource.url` replaces `ImageSource(url:)`.
+  - `GeoJsonSource.url` and `GeoJsonSource.data` replace
+    `GeoJsonSource(data:)`, which took either a URL or a GeoJSON string.
+  - `RasterSource`, `RasterDemSource` and `VectorSource` have `.url` for a
+    TileJSON URL and `.tiles` for tile URLs, instead of optional `url` and
+    `tiles`.
+  - `VideoSource.urls` replaces `VideoSource(urls:)`.
 - `MapOptions.initStyle` (a `String`) is replaced by `MapOptions.style`, a
   `MapStyle`: `MapStyle.url`, `MapStyle.json`, `MapStyle.asset` or
   `MapStyle.file` (not on web), so the style is no longer guessed from the
@@ -121,6 +130,11 @@
   getters and setters read and update the layer's paint, starting with
   `lineGradient`. Setters don't wait for the map, so they can animate a
   layer every frame. `GeoJsonSource.lineMetrics` enables `line-progress`.
+- `ImageSource.bytes` and `ImageSource.provider` show images from encoded
+  bytes or any Flutter `ImageProvider`, such as an `AssetImage` or a
+  `FileImage`, not only from a URL.
+- Web: `VideoSource.bytes` and `VideoSource.asset` show videos from encoded
+  bytes or a Flutter asset.
 - `StyleController.addImageFromUiImage` adds a `dart:ui` `Image` to the
   map from its pixels, without encoding it.
 - Windows, macOS and Linux are supported out of the box, rendered by MapLibre

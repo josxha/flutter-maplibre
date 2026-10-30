@@ -32,7 +32,7 @@ Widget build(BuildContext context) {
 
         // add some points as GeoJSON source to the map
         await style.addSource(
-          const GeoJsonSource(
+          const GeoJsonSource.data(
             id: 'points',
             data: _geoJsonString,
           ),

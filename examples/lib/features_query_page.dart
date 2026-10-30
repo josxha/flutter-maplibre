@@ -81,7 +81,7 @@ class _FeaturesQueryPageState extends State<FeaturesQueryPage> {
     final geojson = {'type': 'FeatureCollection', 'features': features};
 
     await style.addSource(
-      GeoJsonSource(id: 'points', data: jsonEncode(geojson)),
+      GeoJsonSource.data(id: 'points', data: jsonEncode(geojson)),
     );
 
     // Add random polygons
@@ -114,7 +114,7 @@ class _FeaturesQueryPageState extends State<FeaturesQueryPage> {
     final geojson2 = {'type': 'FeatureCollection', 'features': features};
 
     await style.addSource(
-      GeoJsonSource(id: 'polygons', data: jsonEncode(geojson2)),
+      GeoJsonSource.data(id: 'polygons', data: jsonEncode(geojson2)),
     );
 
     await style.addLayer(

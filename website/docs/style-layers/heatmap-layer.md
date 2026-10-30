@@ -22,9 +22,9 @@ Widget build(BuildContext context) {
       options: MapOptions(center: Geographic(lon: 9.17, lat: 47.68)),
       onMapCreated: (controller) => _controller = controller,
       onStyleLoaded: (style) async {
-        const earthquakes = GeoJsonSource(
+        const earthquakes = GeoJsonSource.url(
           id: _sourceId,
-          data:
+          url:
           'https://maplibre.org/maplibre-gl-js/docs/assets/earthquakes.geojson',
         );
         await style.addSource(earthquakes);

@@ -1,26 +1,41 @@
 part of 'source.dart';
 
-/// A GeoJSON source. Data must be provided via a "data" property, whose value
-/// can be a URL or inline GeoJSON. When using in a browser, the GeoJSON data
-/// must be on the same domain as the map or served with CORS headers.
+/// A GeoJSON source, from a URL ([GeoJsonSource.url]) or a GeoJSON string
+/// ([GeoJsonSource.data]). When using in a browser, GeoJSON from a URL must be
+/// on the same domain as the map or served with CORS headers.
 ///
 /// https://maplibre.org/maplibre-style-spec/sources/#geojson
 ///
 /// {@category Style}
 /// {@subCategory Style Sources}
-final class GeoJsonSource extends Source {
-  /// The default constructor for a [GeoJsonSource] object.
-  const GeoJsonSource({
+sealed class GeoJsonSource extends Source {
+  const GeoJsonSource._({
     required super.id,
-    required this.data,
     this.maxZoom = 18,
     this.attribution,
     this.tolerance = 0.375,
     this.lineMetrics = false,
   });
 
-  /// A URL to a GeoJSON file, or GeoJSON string.
-  final String data;
+  /// A GeoJSON source that loads its data from the GeoJSON file at [url].
+  const factory GeoJsonSource.url({
+    required String id,
+    required String url,
+    double maxZoom,
+    String? attribution,
+    double tolerance,
+    bool lineMetrics,
+  }) = GeoJsonSourceUrl;
+
+  /// A GeoJSON source of the GeoJSON string [data].
+  const factory GeoJsonSource.data({
+    required String id,
+    required String data,
+    double maxZoom,
+    String? attribution,
+    double tolerance,
+    bool lineMetrics,
+  }) = GeoJsonSourceData;
 
   /// Maximum zoom level at which to create vector tiles (higher means greater
   /// detail at high zoom levels).
@@ -45,4 +60,42 @@ final class GeoJsonSource extends Source {
   final bool lineMetrics;
 
   // TODO add more fields https://maplibre.org/maplibre-style-spec/sources/#buffer
+}
+
+/// A [GeoJsonSource] that loads its data from a URL.
+///
+/// {@category Style}
+/// {@subCategory Style Sources}
+final class GeoJsonSourceUrl extends GeoJsonSource {
+  /// Creates a [GeoJsonSource] from the GeoJSON file at [url].
+  const GeoJsonSourceUrl({
+    required super.id,
+    required this.url,
+    super.maxZoom,
+    super.attribution,
+    super.tolerance,
+    super.lineMetrics,
+  }) : super._();
+
+  /// A URL to a GeoJSON file.
+  final String url;
+}
+
+/// A [GeoJsonSource] of a GeoJSON string.
+///
+/// {@category Style}
+/// {@subCategory Style Sources}
+final class GeoJsonSourceData extends GeoJsonSource {
+  /// Creates a [GeoJsonSource] of the GeoJSON string [data].
+  const GeoJsonSourceData({
+    required super.id,
+    required this.data,
+    super.maxZoom,
+    super.attribution,
+    super.tolerance,
+    super.lineMetrics,
+  }) : super._();
+
+  /// The GeoJSON, such as a `FeatureCollection`, as a string.
+  final String data;
 }
