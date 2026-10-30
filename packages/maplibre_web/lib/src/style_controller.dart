@@ -3,9 +3,13 @@ part of 'map_state.dart';
 /// Web specific implementation of the [StyleController].
 class StyleControllerWeb extends StyleController {
   /// Create a new [StyleControllerWeb] instance.
-  const StyleControllerWeb(this._map);
+  StyleControllerWeb(this._map);
 
   final interop.JsMap _map;
+
+  /// The blob URLs of image sources from bytes or an [ImageProvider], by
+  /// source id. They are revoked when their source is removed.
+  final _imageSourceUrls = <String, String>{};
 
   @override
   Future<void> addImage(
@@ -59,6 +63,9 @@ class StyleControllerWeb extends StyleController {
   Future<void> removeSource(String id) async {
     // Removing a source the style lacks is not an error on other platforms.
     if (_map.getSource(id) != null) _map.removeSource(id);
+    if (_imageSourceUrls.remove(id) case final String url) {
+      URL.revokeObjectURL(url);
+    }
   }
 
   @override
@@ -306,11 +313,20 @@ class StyleControllerWeb extends StyleController {
           }),
         );
       case ImageSource():
+        // MapLibre GL JS loads image sources only from a URL.
+        final url = switch (source) {
+          ImageSourceUrl(:final url) => url,
+          ImageSourceBytes(:final bytes) => URL.createObjectURL(
+            Blob([bytes.toJS].toJS),
+          ),
+          ImageSourceProvider(:final image) => await _blobUrlOfProvider(image),
+        };
+        if (source is! ImageSourceUrl) _imageSourceUrls[source.id] = url;
         _map.addSource(
           source.id,
           interop.SourceSpecification.image(
             type: 'image',
-            url: source.url,
+            url: url,
             // The coordinates start at the top left corner of the image and
             // proceed in clockwise order.
             // https://github.com/maplibre/maplibre-gl-js/blob/87486a5ef2085e600e8fa4e31252629dd8488dcd/src/source/image_source.ts#L24
@@ -349,7 +365,41 @@ class StyleControllerWeb extends StyleController {
   }
 
   @override
-  void dispose() {}
+  void dispose() {
+    // Interop members can't be torn off for forEach.
+    // ignore: prefer_foreach
+    for (final url in _imageSourceUrls.values) {
+      URL.revokeObjectURL(url);
+    }
+    _imageSourceUrls.clear();
+  }
+
+  /// A blob URL of a PNG of the image of [provider].
+  static Future<String> _blobUrlOfProvider(ImageProvider provider) async {
+    final image = await resolveImageProvider(provider);
+    try {
+      // Raw pixels, as Flutter's skwasm renderer encodes some images to PNG at
+      // the size of the view.
+      final data = await image.toByteData(
+        format: ImageByteFormat.rawStraightRgba,
+      );
+      if (data == null) {
+        throw StateError('Failed to read the pixels of the image source.');
+      }
+      final canvas = OffscreenCanvas(image.width, image.height);
+      final context =
+          canvas.getContext('2d')! as OffscreenCanvasRenderingContext2D;
+      context.putImageData(
+        ImageData(data.buffer.asUint8ClampedList().toJS, image.width),
+        0,
+        0,
+      );
+      final blob = await canvas.convertToBlob().toDart;
+      return URL.createObjectURL(blob);
+    } finally {
+      image.dispose();
+    }
+  }
 
   @override
   void setProjection(MapProjection projection) => _map.setProjection(

@@ -126,9 +126,11 @@ void runTests() {
 
     testWidgets('adds and removes every kind of source', (tester) async {
       final map = await pumpMap(tester);
+      final markerBytes = (await rootBundle.load(_markerAsset)).buffer
+          .asUint8List();
       final sources = <Source>[
         GeoJsonSource(id: 'geojson', data: _pointData()),
-        const ImageSource(
+        const ImageSource.url(
           id: 'image',
           url: 'https://example.invalid/image.png',
           coordinates: LngLatQuad(
@@ -137,6 +139,16 @@ void runTests() {
             topLeft: Geographic(lon: 0, lat: 1),
             topRight: Geographic(lon: 1, lat: 1),
           ),
+        ),
+        ImageSource.bytes(
+          id: 'image-bytes',
+          bytes: markerBytes,
+          coordinates: _quad,
+        ),
+        const ImageSource.provider(
+          id: 'image-provider',
+          image: AssetImage(_markerAsset),
+          coordinates: _quad,
         ),
         const RasterSource(
           id: 'raster',
@@ -176,6 +188,22 @@ void runTests() {
       // Every ID is free again.
       await map.style.addSource(
         GeoJsonSource(id: 'geojson', data: _pointData()),
+      );
+    });
+
+    testWidgets('fails to add an image source of a missing asset', (
+      tester,
+    ) async {
+      final map = await pumpMap(tester);
+      await expectLater(
+        map.style.addSource(
+          const ImageSource.provider(
+            id: 'image',
+            image: AssetImage('assets/images/missing.png'),
+            coordinates: _quad,
+          ),
+        ),
+        throwsA(anything),
       );
     });
 
@@ -435,3 +463,12 @@ void runTests() {
     }, skip: kIsWeb);
   });
 }
+
+const _markerAsset = 'assets/images/marker.png';
+
+const _quad = LngLatQuad(
+  bottomLeft: Geographic(lon: 0, lat: 0),
+  bottomRight: Geographic(lon: 1, lat: 0),
+  topLeft: Geographic(lon: 0, lat: 1),
+  topRight: Geographic(lon: 1, lat: 1),
+);

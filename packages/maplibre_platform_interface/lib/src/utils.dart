@@ -1,4 +1,8 @@
+import 'dart:async';
 import 'dart:math';
+import 'dart:ui' as ui;
+
+import 'package:flutter/painting.dart';
 
 /// pre compiled factor to convert a coordinate in radian to degrees.
 const double degree2Radian = pi / 180;
@@ -23,3 +27,30 @@ const htmlColorNames = <String, String>{
   'teal': '#008080',
   'aqua': '#00FFFF',
 };
+
+/// Loads the image of [provider], resolved for the device pixel ratio of the
+/// first view. The caller owns the returned image and must dispose it.
+Future<ui.Image> resolveImageProvider(ImageProvider provider) {
+  final view = ui.PlatformDispatcher.instance.implicitView;
+  final stream = provider.resolve(
+    ImageConfiguration(devicePixelRatio: view?.devicePixelRatio ?? 1),
+  );
+  final completer = Completer<ui.Image>();
+  late final ImageStreamListener listener;
+  listener = ImageStreamListener(
+    (info, _) {
+      stream.removeListener(listener);
+      if (completer.isCompleted) {
+        info.dispose();
+      } else {
+        completer.complete(info.image);
+      }
+    },
+    onError: (error, stackTrace) {
+      stream.removeListener(listener);
+      if (!completer.isCompleted) completer.completeError(error, stackTrace);
+    },
+  );
+  stream.addListener(listener);
+  return completer.future;
+}

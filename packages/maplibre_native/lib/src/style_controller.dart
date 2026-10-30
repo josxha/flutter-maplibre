@@ -42,6 +42,9 @@ class StyleControllerNative extends StyleController {
 
   @override
   Future<void> addSource(Source source) async {
+    if (source is ImageSourceBytes || source is ImageSourceProvider) {
+      return _addImageSourceImage(source as ImageSource);
+    }
     final json = <String, Object?>{
       ...switch (source) {
         GeoJsonSource() => {
@@ -97,7 +100,7 @@ class StyleControllerNative extends StyleController {
           'attribution': ?source.attribution,
           'volatile': source.volatile,
         },
-        ImageSource() => {
+        ImageSourceUrl() => {
           'type': 'image',
           'url': source.url,
           'coordinates': [
@@ -132,6 +135,33 @@ class StyleControllerNative extends StyleController {
     // Sources with inline tiles know their attribution now; a TileJSON source
     // reports it with a source change once its TileJSON loads.
     await refreshAttributions();
+  }
+
+  /// Adds an image source with decoded pixels, since the style JSON of an
+  /// image source only takes a URL.
+  Future<void> _addImageSourceImage(ImageSource source) async {
+    final image = switch (source) {
+      ImageSourceBytes(:final bytes) => await _decodeImage(bytes),
+      ImageSourceProvider(:final image) => await resolveImageProvider(image),
+      ImageSourceUrl() => throw ArgumentError.value(source, 'source'),
+    };
+    try {
+      final pixels = await _premultipliedImage(image, source.id);
+      final quad = source.coordinates;
+      await _map.addImageSourceImage(
+        source.id,
+        [
+          quad.topLeft,
+          quad.topRight,
+          quad.bottomRight,
+          quad.bottomLeft,
+        ].map((p) => mln.LatLng(latitude: p.lat, longitude: p.lon)).toList(),
+        pixels,
+      );
+    } finally {
+      image.dispose();
+    }
+    _sourceAttributions.remove(source.id);
   }
 
   @override
@@ -248,18 +278,40 @@ class StyleControllerNative extends StyleController {
     Uint8List bytes, {
     double pixelRatio = 1,
   }) async {
-    final codec = await ui.instantiateImageCodec(bytes);
-    final frame = await codec.getNextFrame();
-    codec.dispose();
+    final image = await _decodeImage(bytes);
     try {
-      await addImageFromUiImage(
-        id: id,
-        image: frame.image,
-        pixelRatio: pixelRatio,
-      );
+      await addImageFromUiImage(id: id, image: image, pixelRatio: pixelRatio);
     } finally {
-      frame.image.dispose();
+      image.dispose();
     }
+  }
+
+  /// Decodes the first frame of the encoded image [bytes].
+  static Future<ui.Image> _decodeImage(Uint8List bytes) async {
+    final codec = await ui.instantiateImageCodec(bytes);
+    try {
+      return (await codec.getNextFrame()).image;
+    } finally {
+      codec.dispose();
+    }
+  }
+
+  /// The pixels of [image] in the form the C API takes.
+  static Future<mln.PremultipliedRgba8Image> _premultipliedImage(
+    ui.Image image,
+    String id,
+  ) async {
+    // rawRgba is premultiplied RGBA8.
+    final data = await image.toByteData();
+    if (data == null) {
+      throw StateError('Failed to read the pixels of the image "$id".');
+    }
+    return mln.PremultipliedRgba8Image(
+      width: image.width,
+      height: image.height,
+      stride: image.width * 4,
+      pixels: data.buffer.asUint8List(),
+    );
   }
 
   @override
@@ -268,19 +320,9 @@ class StyleControllerNative extends StyleController {
     required ui.Image image,
     double pixelRatio = 1,
   }) async {
-    // rawRgba is premultiplied RGBA8, the form the C API takes.
-    final data = await image.toByteData();
-    if (data == null) {
-      throw StateError('Failed to read the pixels of the image "$id".');
-    }
     await _map.setStyleImage(
       id,
-      mln.PremultipliedRgba8Image(
-        width: image.width,
-        height: image.height,
-        stride: image.width * 4,
-        pixels: data.buffer.asUint8List(),
-      ),
+      await _premultipliedImage(image, id),
       options: mln.StyleImageOptions(pixelRatio: pixelRatio),
     );
   }

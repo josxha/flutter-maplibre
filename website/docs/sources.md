@@ -28,7 +28,25 @@ An example use cases is to display and visualize any kind of data on the map.
 
 Use
 the [ImageSource](https://pub.dev/documentation/maplibre/latest/maplibre/ImageSource-class.html)
-If you want to render an image on the map.
+If you want to render an image on the map. `ImageSource.url` loads the image
+from a URL, `ImageSource.bytes` takes an encoded image such as a PNG, and
+`ImageSource.provider` takes any Flutter `ImageProvider`, for example an
+`AssetImage` or a `FileImage`.
+
+```dart
+await style.addSource(
+  const ImageSource.provider(
+    id: 'radar',
+    image: AssetImage('assets/radar.png'),
+    coordinates: LngLatQuad(
+      topLeft: Geographic(lon: -80.425, lat: 46.437),
+      topRight: Geographic(lon: -71.516, lat: 46.437),
+      bottomRight: Geographic(lon: -71.516, lat: 37.936),
+      bottomLeft: Geographic(lon: -80.425, lat: 37.936),
+    ),
+  ),
+);
+```
 
 An example use case is to position a weather radar image on the map.
 

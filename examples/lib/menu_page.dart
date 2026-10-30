@@ -23,6 +23,7 @@ import 'package:maplibre_example/style_layers_hillshade_page.dart';
 import 'package:maplibre_example/style_layers_line_page.dart';
 import 'package:maplibre_example/style_layers_raster_page.dart';
 import 'package:maplibre_example/style_layers_symbol_page.dart';
+import 'package:maplibre_example/style_sources_image_page.dart';
 import 'package:maplibre_example/style_sources_vector_page.dart';
 import 'package:maplibre_example/styled_map_page.dart';
 import 'package:maplibre_example/translucent_map_page.dart';
@@ -175,6 +176,11 @@ class MenuPage extends StatelessWidget {
                       maxCrossAxisExtent: 150,
                       childAspectRatio: 1.5,
                       children: const [
+                        ItemCard(
+                          label: 'Image',
+                          iconData: Icons.image,
+                          location: StyleSourcesImagePage.location,
+                        ),
                         ItemCard(
                           label: 'Vector',
                           iconData: Icons.category,
