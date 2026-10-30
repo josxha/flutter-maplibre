@@ -102,7 +102,7 @@ flowchart TB
 The C library and its Dart binding come from
 [maplibre_native_ffi](https://pub.dev/packages/maplibre_native_ffi). Its build
 hook downloads the prebuilt library for each target. Dart calls the platform
-plugins through bindings generated with ffigen (C, Objective-C) and jnigen
+plugins through bindings generated with ffigen (C) and jnigen
 (Kotlin), never through method channels.
 
 All maps and the `OfflineManager` share one database for the cache and the

@@ -19,6 +19,10 @@ class PackageInfo {
   File get changelogFile => File('${directory.path}/CHANGELOG.md');
 }
 
+/// Packages that build on `maplibre` and have versions of their own, so the
+/// release checks skip them.
+const _pluginPackages = {'maplibre_geolocator'};
+
 void main(List<String> arguments) {
   final parser = ArgParser()
     ..addOption(
@@ -42,7 +46,9 @@ void main(List<String> arguments) {
   final version = _parseVersion(versionString);
   final expectedConstraint = '^$versionString';
 
-  final packages = _collectPackages(Directory('packages'));
+  final packages = _collectPackages(
+    Directory('packages'),
+  ).where((package) => !_pluginPackages.contains(package.name)).toList();
   final packageNames = packages.map((package) => package.name).toSet();
 
   for (final package in packages) {

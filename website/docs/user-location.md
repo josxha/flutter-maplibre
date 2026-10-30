@@ -33,7 +33,7 @@ descriptions in `Info.plist`.
 Ask for the location permission, then put a `UserLocationLayer` in the
 `children` of the map:
 
-```dart linenums="1" hl_lines="11-14 25-26"
+```dart linenums="1" hl_lines="11-15 26-27"
 class _MapScreenState extends State<MapScreen> {
   Stream<UserLocation>? _locations;
 
@@ -47,6 +47,7 @@ class _MapScreenState extends State<MapScreen> {
     final permission = await Geolocator.requestPermission();
     if (permission == LocationPermission.denied ||
         permission == LocationPermission.deniedForever) return;
+    if (!mounted) return;
     setState(() => _locations = geolocatorUserLocations());
   }
 

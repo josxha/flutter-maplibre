@@ -15,7 +15,8 @@ Markers are a way to show data on the map with labels and/or icons.
 
 ## Basic Usage
 
-```dart linenums="1" hl_lines="10-15 21-32"
+```dart linenums="1" hl_lines="13-20 28-36"
+bool _imageLoaded = false;
 final _points = <Feature<Point>>[
   const Feature(geometry: Point(Geographic(lon: 9.17, lat: 47.68))),
   const Feature(geometry: Point(Geographic(lon: 9, lat: 48))),
@@ -34,6 +35,7 @@ Widget build(BuildContext context) {
             iconData: Icons.location_on,
             color: Colors.red,
           );
+          setState(() => _imageLoaded = true);
         case MapEventClick():
           // add a new marker on click
           setState(() => _points.add(Feature(geometry: Point(event.point))));
@@ -46,7 +48,7 @@ Widget build(BuildContext context) {
         points: _points,
         textField: const .literal('Marker'),
         textAllowOverlap: const .literal(true),
-        iconImage: const .literal('marker'),
+        iconImage: _imageLoaded ? const .literal('marker') : null,
         iconAnchor: const .literal(IconAnchor.bottom),
         textOffset: const .literal(Offset(0, 1)),
       ),

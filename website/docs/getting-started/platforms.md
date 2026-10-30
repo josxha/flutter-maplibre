@@ -40,7 +40,7 @@ your `web/index.html` file. Every option is optional:
 | Option              | Default    | Description                                                                                  |
 |---------------------|------------|----------------------------------------------------------------------------------------------|
 | `maplibreGlVersion` | `^6.0.0`   | The [npm version range](https://docs.npmjs.com/cli/v10/configuring-npm/package-json#dependencies) of maplibre-gl-js, for example `6.16.0`, `~6.16.0` or `>=6.10.0 <6.15.0`. |
-| `maplibreGlBaseUrl` | jsDelivr   | The URL of a folder with `maplibre-gl.mjs` and `maplibre-gl.css`, for example the `dist` folder of the npm package on your own server. Takes precedence over `maplibreGlVersion`. |
+| `maplibreGlBaseUrl` | jsDelivr   | The URL of a folder with `maplibre-gl.mjs`, `maplibre-gl-worker.mjs` and `maplibre-gl.css` of the same version, for example the `dist` folder of the npm package on your own server. Takes precedence over `maplibreGlVersion`. |
 | `pmtilesVersion`    | `^4.0.0`   | The npm version range of PMTiles.                                                            |
 | `pmtilesBaseUrl`    | jsDelivr   | The URL of a folder with `pmtiles.js`. Takes precedence over `pmtilesVersion`.               |
 
@@ -102,9 +102,11 @@ ProGuard setup is needed.
 The plugin is a Swift Package Manager package only and has no CocoaPods
 podspec. Flutter uses Swift Package Manager by default since 3.44, and the
 plugin requires Flutter 3.47 or newer, so no setup is needed. Apps that still
-have a `Podfile` from older Flutter versions can remove CocoaPods with
-`pod deintegrate` and delete the `Podfile`, `Podfile.lock` and the
-`#include? "Pods/..."` lines of their xcconfigs.
+have a `Podfile` from older Flutter versions keep it as long as other plugins
+need CocoaPods; Flutter uses both side by side. Once every plugin supports
+Swift Package Manager, see
+[Flutter's migration guide](https://docs.flutter.dev/packages-and-plugins/swift-package-manager/for-app-developers)
+to remove CocoaPods.
 
 ### iOS
 
