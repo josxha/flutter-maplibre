@@ -18,7 +18,7 @@ import 'package:maplibre_web/src/extensions.dart';
 import 'package:maplibre_web/src/frame_sync.dart';
 import 'package:maplibre_web/src/interop/interop.dart' as interop;
 import 'package:maplibre_web/src/interop/json.dart';
-import 'package:maplibre_web/src/interop/pmtiles.dart' as pmtiles;
+import 'package:maplibre_web/src/loader.dart';
 import 'package:web/web.dart' hide PointerEvent;
 
 part 'style_controller.dart';
@@ -27,6 +27,12 @@ part 'style_controller.dart';
 final class MapLibreMapStateWeb extends MapLibreMapState {
   late HTMLDivElement _htmlElement;
   late interop.JsMap _map;
+
+  /// maplibre-gl-js is loaded, so the platform view can create [_map].
+  var _jsLoaded = false;
+
+  /// The platform view created [_map].
+  var _mapCreated = false;
   Completer<interop.MapLibreEvent>? _movementCompleter;
   final _cameraPaddingReset = CameraPaddingReset();
   bool _nextGestureCausedByController = false;
@@ -85,14 +91,6 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         // widgets over the map keep theirs.
         ..style.pointerEvents = 'none';
 
-      // add pmtiles support
-      try {
-        final pmtilesProtocol = pmtiles.Protocol();
-        interop.addProtocol('pmtiles', pmtilesProtocol.tile);
-      } catch (e) {
-        debugPrint('[MapLibre] PMTiles support could not be loaded. $e');
-      }
-
       _map = interop.JsMap(
         interop.MapOptions(
           container: _htmlElement,
@@ -102,6 +100,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
           interactive: false,
         ),
       );
+      _mapCreated = true;
 
       document.body?.appendChild(_htmlElement);
       // Invoke the onMapCreated callback async to avoid getting it called
@@ -209,6 +208,22 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     });
     document.addEventListener('contextmenu', _onContextMenu);
     super.initState();
+    _jsLoaded = isMapLibreGlJsLoaded;
+    if (_jsLoaded) return;
+    loadMapLibreGlJs().then(
+      (_) {
+        if (mounted) setState(() => _jsLoaded = true);
+      },
+      onError: (Object error, StackTrace stackTrace) =>
+          FlutterError.reportError(
+            FlutterErrorDetails(
+              exception: error,
+              stack: stackTrace,
+              library: 'maplibre_web',
+              context: ErrorDescription('while loading maplibre-gl-js'),
+            ),
+          ),
+    );
   }
 
   @override
@@ -220,10 +235,13 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     // An opaque platform view joins the gesture arena first and wins every
     // pointer the arena sweeps, as a single tap is, so taps would never reach
     // the map's gesture detector.
-    child: HtmlElementView(
-      viewType: viewName,
-      hitTestBehavior: PlatformViewHitTestBehavior.transparent,
-    ),
+    // The platform view creates the map, which needs maplibre-gl-js.
+    child: _jsLoaded
+        ? HtmlElementView(
+            viewType: viewName,
+            hitTestBehavior: PlatformViewHitTestBehavior.transparent,
+          )
+        : const SizedBox.expand(),
   );
 
   /// The browser opens its context menu for a right click, or Ctrl + click
@@ -259,8 +277,10 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     document.removeEventListener('contextmenu', _onContextMenu);
     _contextMenuTimer?.cancel();
     style?.dispose();
-    _map.remove();
-    _htmlElement.remove();
+    if (_mapCreated) {
+      _map.remove();
+      _htmlElement.remove();
+    }
     super.dispose();
   }
 
@@ -271,6 +291,8 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
 
   @override
   void didUpdateWidget(covariant MapLibreMap oldWidget) {
+    // The map takes the options of the widget once it is created.
+    if (!_mapCreated) return super.didUpdateWidget(oldWidget);
     if (options.minZoom != oldWidget.options.minZoom) {
       _map.setMinZoom(options.minZoom);
     }
@@ -572,6 +594,7 @@ class _WebGestureCamera implements GestureCameraSink {
 
   @override
   void gestureStart() {
+    if (!_state._mapCreated) return;
     // Catches a fling, whose end then reports the end of its move.
     _map.stop();
     _state
@@ -581,6 +604,7 @@ class _WebGestureCamera implements GestureCameraSink {
 
   @override
   void gestureUpdate(GestureCameraUpdate update) {
+    if (!_state._mapCreated) return;
     if (update.pans) {
       // Puts the location under the pointer where the pointer is now, which
       // keeps it under the pointer in every projection.
@@ -702,6 +726,7 @@ class _WebGestureCamera implements GestureCameraSink {
     Offset around, {
     Duration duration = Duration.zero,
   }) {
+    if (!_state._mapCreated) return;
     // Ends a running animation before working out the target, so that its
     // end is reported.
     _map.stop();

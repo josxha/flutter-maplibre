@@ -118,6 +118,17 @@
   map from its pixels, without encoding it.
 - Windows, macOS and Linux are supported out of the box, rendered by MapLibre
   Native instead of the opt-in `maplibre_webview`.
+- Web: maplibre-gl-js and PMTiles load on their own, so `web/index.html` no
+  longer needs their script tags. The latest maplibre-gl-js v6 is loaded by
+  default, never a new major version. `window.flutterMapLibre` sets another
+  version range or your own URL, and a maplibre-gl-js that `web/index.html`
+  loads itself, such as v5, is still used. See the
+  [setup instructions](https://flutter-maplibre.pages.dev/docs/getting-started/setup#setup-web).
+  With v6, WebGL2 is required, nested objects in GeoJSON feature properties
+  are returned as maps instead of JSON strings, and `zoomLevelsToOverscale`
+  defaults to 4, which can change label rendering and `featuresAtPoint()`
+  results. See the
+  [maplibre-gl-js migration guide](https://github.com/maplibre/maplibre-gl-js/blob/main/docs/guides/v5-to-v6-migration-guide.md).
 
 ### Bug Fixes
 

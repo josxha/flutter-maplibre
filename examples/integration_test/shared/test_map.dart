@@ -220,12 +220,16 @@ Future<TestMap> pumpMap(
     children: children,
   );
   await tester.pumpWidget(app(options ?? offlineOptions()));
-  final map = TestMap._(
-    tester,
-    await controller.future.timeout(defaultTimeout),
-    events,
-    app,
-  );
+  // On web, the first map waits for maplibre-gl-js to load, and is created
+  // in a later frame.
+  final deadline = DateTime.now().add(defaultTimeout);
+  while (!controller.isCompleted) {
+    if (DateTime.now().isAfter(deadline)) {
+      fail('Timed out: waiting for the map to be created');
+    }
+    await tester.pump(const Duration(milliseconds: 50));
+  }
+  final map = TestMap._(tester, await controller.future, events, app);
   await style.future.timeout(defaultTimeout);
   // Let the first frame reach Flutter, so projections follow the camera.
   await map.pumpUntil(

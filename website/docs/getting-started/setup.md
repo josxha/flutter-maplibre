@@ -113,29 +113,64 @@ The packages need Flutter 3.47 or newer.
 
 ## Setup Web
 
-Include the following JavaScript and CSS files in the `<head>` tag of
-your `web/index.html` file:
+No setup is needed. The first map loads the latest
+[maplibre-gl-js](https://github.com/maplibre/maplibre-gl-js) v6 and
+[PMTiles](https://github.com/protomaps/PMTiles) v4 from the
+[jsDelivr](https://www.jsdelivr.com/) CDN. A new major version, which may
+break your app, is never loaded unless you ask for it.
 
-```html title="web/index.html" hl_lines="5-7 9"
+To choose what is loaded, set `window.flutterMapLibre` in the `<head>` tag of
+your `web/index.html` file. Every option is optional:
+
+```html title="web/index.html" hl_lines="5-12"
 <!DOCTYPE html>
 <html>
 <head>
     <!-- other html -->
-    <script src='https://unpkg.com/maplibre-gl@^5.0/dist/maplibre-gl.js'></script>
-    <link href='https://unpkg.com/maplibre-gl@^5.0/dist/maplibre-gl.css'
-          rel='stylesheet'/>
-    <!-- Next line only required if you want to use PMTiles as source. -->
-    <script src='https://unpkg.com/pmtiles@^4.0/dist/pmtiles.js'></script>
+    <script>
+      window.flutterMapLibre = {
+        // An npm version or version range of maplibre-gl-js.
+        maplibreGlVersion: '~6.16.0',
+        // An npm version or version range of PMTiles.
+        pmtilesVersion: '4.5.0',
+      };
+    </script>
 </head>
 </html>
 ```
 
-`^5.0` ensures that your app will always use the latest version of
-[maplibre-gl-js](https://github.com/maplibre/maplibre-gl-js) version 5 but not
-suddenly use an incompatible version.
+| Option              | Default    | Description                                                                                  |
+|---------------------|------------|----------------------------------------------------------------------------------------------|
+| `maplibreGlVersion` | `^6.0.0`   | The [npm version range](https://docs.npmjs.com/cli/v10/configuring-npm/package-json#dependencies) of maplibre-gl-js, for example `6.16.0`, `~6.16.0` or `>=6.10.0 <6.15.0`. |
+| `maplibreGlBaseUrl` | jsDelivr   | The URL of a folder with `maplibre-gl.mjs` and `maplibre-gl.css`, for example the `dist` folder of the npm package on your own server. Takes precedence over `maplibreGlVersion`. |
+| `pmtilesVersion`    | `^4.0.0`   | The npm version range of PMTiles.                                                            |
+| `pmtilesBaseUrl`    | jsDelivr   | The URL of a folder with `pmtiles.js`. Takes precedence over `pmtilesVersion`.               |
 
-If you want to always use the latest version use `latest` or use the full
-version number like `5.0.0` if you want to use a specific version.
+If your `web/index.html` already loads maplibre-gl-js, which sets
+`window.maplibregl`, or PMTiles, which sets `window.pmtiles`, that version is
+used and nothing is loaded. This way you can keep using maplibre-gl-js v5:
+
+```html title="web/index.html"
+<script src='https://unpkg.com/maplibre-gl@^5.0/dist/maplibre-gl.js'></script>
+<link href='https://unpkg.com/maplibre-gl@^5.0/dist/maplibre-gl.css'
+      rel='stylesheet'/>
+```
+
+maplibre-gl-js v6 is published only as an ES module. To load it in your
+`web/index.html` yourself, import it in a module script, and load
+`flutter_bootstrap.js` with `defer` instead of `async`, so that the app starts
+after it:
+
+```html title="web/index.html"
+<script type="module">
+  import * as maplibregl from 'https://cdn.jsdelivr.net/npm/maplibre-gl@^6.0.0/dist/maplibre-gl.mjs';
+  window.maplibregl = maplibregl;
+</script>
+<link href='https://cdn.jsdelivr.net/npm/maplibre-gl@^6.0.0/dist/maplibre-gl.css'
+      rel='stylesheet'/>
+<!-- in the body -->
+<script src="flutter_bootstrap.js" defer></script>
+```
 
 You can read about changes in maplibre-gl-js in
 the [changelog file](https://github.com/maplibre/maplibre-gl-js/blob/main/CHANGELOG.md).
