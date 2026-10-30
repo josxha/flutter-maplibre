@@ -581,10 +581,16 @@ class MapLibreMapStateNative extends MapLibreMapState {
     right: padding.right,
   );
 
+  /// Counts [_setStyle] calls, so a style that loads after a newer one was
+  /// set is dropped.
+  var _styleRequest = 0;
+
   /// Loads [style], see [MapOptions.style].
   Future<void> _setStyle(MapStyle style) async {
     final map = _map;
     if (map == null) return;
+    final request = ++_styleRequest;
+    bool stale() => _map != map || request != _styleRequest;
     // The style JSON where it is at hand, for the attributions that MapLibre
     // Native drops.
     _styleJson = null;
@@ -594,15 +600,19 @@ class MapLibreMapStateNative extends MapLibreMapState {
         await map.setStyleJson(jsonDecode(json));
       case MapStyleUrl(:final url):
         if (url.startsWith('file://')) {
-          _styleJson = await _readStyleFile(Uri.parse(url).toFilePath());
+          final json = await _readStyleFile(Uri.parse(url).toFilePath());
+          if (stale()) return;
+          _styleJson = json;
         }
         await map.setStyleUrl(url);
       case MapStyleFile(:final path):
-        _styleJson = await _readStyleFile(path);
+        final json = await _readStyleFile(path);
+        if (stale()) return;
+        _styleJson = json;
         await map.setStyleUrl(Uri.file(path).toString());
       case MapStyleAsset(:final asset):
         final json = await DefaultAssetBundle.of(context).loadString(asset);
-        if (_map != map) return;
+        if (stale()) return;
         _styleJson = json;
         await map.setStyleJson(jsonDecode(json));
     }

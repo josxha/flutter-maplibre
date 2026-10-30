@@ -64,7 +64,7 @@ initial values. Parameters that don't begin with `init*` can be updated in a
 declarative way just like any other Flutter Widget. The most simple way is to
 use the `MapLibreMap` widget in a `StatefulWidget` and calling `setState()`.
 
-```dart linenums="1" hl_lines="11 27-29 34-36"
+```dart linenums="1" hl_lines="11 26-28 33-35"
 @immutable
 class MyMapWidget extends StatefulWidget {
   const MyMapWidget({super.key});
