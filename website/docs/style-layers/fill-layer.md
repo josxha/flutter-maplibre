@@ -19,7 +19,7 @@ late final MapController _controller;
 @override
 Widget build(BuildContext context) {
   return MapLibreMap(
-      options: MapOptions(center: Geographic(lon: 9.17, lat: 47.68)),
+      options: MapOptions(initCamera: .position(center: Geographic(lon: 9.17, lat: 47.68), zoom: 7)),
       onMapCreated: (controller) => _controller = controller,
       onStyleLoaded: (style) async {
         final geojsonPolygon =
@@ -40,7 +40,7 @@ Widget build(BuildContext context) {
 ```
 
 Check out
-the [example app](https://github.com/josxha/flutter-maplibre/blob/v0.3.4/examples/lib/layers_fill_page.dart)
+the [example app](https://github.com/josxha/flutter-maplibre/blob/main/examples/lib/style_layers_fill_page.dart)
 to learn more.
 
 ## Style & Layout

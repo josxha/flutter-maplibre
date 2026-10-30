@@ -25,7 +25,7 @@ This page gives a brief comparison between `maplibre` and similar solutions.
 | Vector Tiles              | ✅        | ✅           | ✅ [^1] [^2] | ✅                   | ✅                   |
 | Hillshade Tiles           | ✅        | ✅           | ❌           | ✅                   | ❌                   |
 | Animations                | ✅        | ✅           | ✅ [^1]      | ✅                   |                     |
-| User Location             | ✅ [^3]   | ✅ [^1] [^3] | ✅ [^1]      |                     |                     |
+| User Location             | ✅        | ✅ [^1] [^3] | ✅ [^1]      |                     |                     |
 | Caching                   | ✅ [^3]   | ✅ [^3]      | ✅ [^1]      |                     |                     |
 | Offline                   | ✅ [^3]   | ✅ [^3]      | ✅ [^1]      |                     |                     |
 | Gestures                  | ✅        | ✅           | ✅           | ✅                   | ✅                   |

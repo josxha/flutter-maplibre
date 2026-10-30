@@ -19,19 +19,19 @@ Circles are a simple way to show data on the map.
 @override
 Widget build(BuildContext context) {
   return MapLibreMap(
-    options: MapOptions(center: Geographic(lon: 9.17, lat: 47.68)),
+    options: MapOptions(initCamera: .position(center: Geographic(lon: 9.17, lat: 47.68), zoom: 7)),
     layers: [
       CircleLayer(
-        points: <Point>[
-          Point(Geographic(lon: 9.17, lat: 47.68)),
-          Point(Geographic(lon: 9.17, lat: 48)),
-          Point(Geographic(lon: 9, lat: 48)),
-          Point(Geographic(lon: 9.5, lat: 48)),
+        points: const [
+          Feature(geometry: Point(Geographic(lon: 9.17, lat: 47.68))),
+          Feature(geometry: Point(Geographic(lon: 9.17, lat: 48))),
+          Feature(geometry: Point(Geographic(lon: 9, lat: 48))),
+          Feature(geometry: Point(Geographic(lon: 9.5, lat: 48))),
         ],
-        color: .literal(Colors.orange.withOpacity(0.5)),
-        radius: .literal(20),
-        strokeColor: .literal(Colors.red),
-        strokeWidth: .literal(2),
+        color: .literal(Colors.orange.withValues(alpha: 0.5)),
+        radius: const .literal(20),
+        strokeColor: const .literal(Colors.red),
+        strokeWidth: const .literal(2),
       ),
     ],
   );
@@ -60,7 +60,7 @@ To add, remove or alter annotation layers, just use `setState()` like you'd do
 with Flutter widgets.
 
 Check out
-the [example app](https://github.com/josxha/flutter-maplibre/blob/v0.3.4/examples/lib/layers_circle_page.dart)
+the [example app](https://github.com/josxha/flutter-maplibre/blob/main/examples/lib/layers_circle_page.dart)
 if you want to see how things come together.
 
 ## Style & Layout

@@ -1,5 +1,17 @@
 ## unreleased
 
+This pre-release replaces the MapLibre Android and iOS SDKs and the WebView
+desktop integration with one implementation on the
+[MapLibre Native C API](https://github.com/maplibre/maplibre-native-ffi). Read
+the [migration guide](https://flutter-maplibre.pages.dev/docs/migrate/upgrade-from-v0.3.x/)
+to upgrade from 0.3.x, and please report the bugs you find.
+
+Known issue: `maplibre_native_ffi` has a bug that stops maps after about 30
+frames in profile and release builds. `maplibre_native` works around it, but
+the workaround is only tested on Windows so far. If a map stops rendering in
+a profile or release build, please comment on
+[#597](https://github.com/josxha/flutter-maplibre/issues/597).
+
 ### Breaking Changes
 
 - Style layers take typed properties and expressions instead of `paint` and
@@ -150,7 +162,7 @@
 - Web: maplibre-gl-js and PMTiles load on their own. The latest
   maplibre-gl-js v6 is loaded by default, never a new major version.
   `window.flutterMapLibre` sets another version range or your own URL. See the
-  [setup instructions](https://flutter-maplibre.pages.dev/docs/getting-started/setup#setup-web).
+  [setup instructions](https://flutter-maplibre.pages.dev/docs/getting-started/platforms#web).
 
 ### Bug Fixes
 

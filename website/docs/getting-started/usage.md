@@ -1,9 +1,9 @@
 ---
-title: 'How to use'
+title: 'First map'
 icon: lucide/gamepad-2
 ---
 
-# Basic Usage
+# First map
 
 ## Display your first Map
 
@@ -193,3 +193,12 @@ void doSomething() {
   _mapController?.style?.sources.add(...);
 }
 ```
+
+## Next steps
+
+- [Map & Camera](../map.md) covers the map options, moving the camera and
+  gestures.
+- [Annotations](../annotations/index.md) add circles, markers, polygons and
+  polylines to the map.
+- [Sources](../sources.md) and [Style Layers](../style-layers/index.md) show
+  your own data with the full MapLibre style spec.

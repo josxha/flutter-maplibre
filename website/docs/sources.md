@@ -15,7 +15,7 @@ You can use
 the [GeoJsonSource](https://pub.dev/documentation/maplibre/latest/maplibre/GeoJsonSource-class.html)
 to attach data like points, lines or polygons, from a GeoJSON file with
 `GeoJsonSource.url` or a GeoJSON string with `GeoJsonSource.data`. The data can then be used in a
-[StyleCircleLayer](style-layers/circle-layer),
+[CircleStyleLayer](style-layers/circle-layer),
 [FillStyleLayer](style-layers/fill-layer),
 [HeatmapStyleLayer](style-layers/heatmap-layer),
 [LineStyleLayer](style-layers/line-layer) or
@@ -104,6 +104,14 @@ await style.sources.add(
 
 The server must answer HTTP range requests, since the map reads only the parts
 of the archive it needs. On web, it must also send CORS headers.
+
+### MBTiles
+
+On Android, iOS, macOS, Windows and Linux, MapLibre Native also reads
+[MBTiles](https://github.com/mapbox/mbtiles-spec) files on the device. Pass
+`mbtiles://` followed by the absolute path of the file to the `.url`
+constructor, for example `mbtiles:///data/tiles.mbtiles`. MBTiles are not
+supported on web.
 
 ### Raster Tiles
 

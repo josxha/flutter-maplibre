@@ -10,42 +10,50 @@ docs_dir: website
 nav:
   - Home: index.md
   - Docs:
-      - Index: docs/index.md
+      - Overview: docs/index.md
       - Getting Started:
-          - How to setup: docs/getting-started/setup.md
-          - How to use: docs/getting-started/usage.md
-          - Local development: docs/getting-started/development.md
-      - Styles: docs/styles.md
-      - User Interface: docs/ui.md
-      - Events: docs/events.md
-      - Offline & Cache: docs/offline.md
+          - Installation: docs/getting-started/setup.md
+          - Platform setup: docs/getting-started/platforms.md
+          - First map: docs/getting-started/usage.md
+      - Guides:
+          - Map & Camera: docs/map.md
+          - Styles: docs/styles.md
+          - Events: docs/events.md
+          - User Interface: docs/ui.md
+          - User Location: docs/user-location.md
+          - Offline & Cache: docs/offline.md
       - Annotations:
-          - Index: docs/annotations/index.md
+          - docs/annotations/index.md
           - Circles: docs/annotations/circles.md
           - Markers: docs/annotations/markers.md
           - Polygons: docs/annotations/polygons.md
           - Polylines: docs/annotations/polylines.md
           - Widgets: docs/annotations/widgets.md
-      - Sources:
+      - Sources & Layers:
           - Sources: docs/sources.md
-      - Style Layers:
-          - Index: docs/style-layers/index.md
-          - Circle Layer: docs/style-layers/circle-layer.md
-          - Fill Layer: docs/style-layers/fill-layer.md
-          - Heatmap Layer: docs/style-layers/heatmap-layer.md
-          - Hillshade Layer: docs/style-layers/hillshade-layer.md
-          - Line Layer: docs/style-layers/line-layer.md
-          - Raster Layer: docs/style-layers/raster-layer.md
-          - Symbol Layer: docs/style-layers/symbol-layer.md
+          - Style Layers:
+              - docs/style-layers/index.md
+              - Circle Layer: docs/style-layers/circle-layer.md
+              - Fill Layer: docs/style-layers/fill-layer.md
+              - Fill Extrusion Layer: docs/style-layers/fill-extrusion-layer.md
+              - Heatmap Layer: docs/style-layers/heatmap-layer.md
+              - Hillshade Layer: docs/style-layers/hillshade-layer.md
+              - Line Layer: docs/style-layers/line-layer.md
+              - Raster Layer: docs/style-layers/raster-layer.md
+              - Symbol Layer: docs/style-layers/symbol-layer.md
           - Paint & Layout: docs/style-layers/paint-and-layout.md
-      - Architecture:
-          - Architecture: docs/architecture.md
+          - Expressions: docs/style-layers/expressions.md
       - Migrate:
-          - maplibre_gl: docs/migrate/maplibre_gl.md
-          - flutter_map: docs/migrate/flutter_map.md
-          - Upgrade from 0.0.x: docs/migrate/upgrade-from-v0.0.x.md
-          - Upgrade from 0.1.x: docs/migrate/upgrade-from-v0.1.x.md
-          - Upgrade from 0.2.x: docs/migrate/upgrade-from-v0.2.x.md
+          - Upgrade to 0.4: docs/migrate/upgrade-from-v0.3.x.md
+          - From maplibre_gl: docs/migrate/maplibre_gl.md
+          - From flutter_map: docs/migrate/flutter_map.md
+          - Older versions:
+              - Upgrade from 0.2.x: docs/migrate/upgrade-from-v0.2.x.md
+              - Upgrade from 0.1.x: docs/migrate/upgrade-from-v0.1.x.md
+              - Upgrade from 0.0.x: docs/migrate/upgrade-from-v0.0.x.md
+      - Contributing:
+          - Architecture: docs/contributing/architecture.md
+          - Local development: docs/contributing/development.md
   - Features: features/index.md
   - Compare:
       - Features: compare/features.md
