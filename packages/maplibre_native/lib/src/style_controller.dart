@@ -299,7 +299,7 @@ class StyleControllerNative extends StyleController {
   Future<List<String>> refreshAttributions() async {
     if (_disposed) return _cachedAttributions;
     final sources = await _map.listStyleSources();
-    return _cachedAttributions = [
+    return _cachedAttributions = List.unmodifiable([
       for (final source in sources)
         if (switch (source.attribution) {
               final String attribution when attribution.isNotEmpty =>
@@ -308,7 +308,7 @@ class StyleControllerNative extends StyleController {
             }
             case final String attribution when attribution.isNotEmpty)
           attribution,
-    ];
+    ]);
   }
 
   @override
