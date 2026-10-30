@@ -94,9 +94,9 @@ await style.addSource(
   itself, nothing to set up. Use `pmtiles://https://…` for a remote archive
   and `pmtiles://file:///absolute/path/tiles.pmtiles` for a file on the
   device.
-- **Web**: MapLibre GL JS needs the `pmtiles` script in `web/index.html`, see
-  [Setup](getting-started/setup). Only `pmtiles://https://…` works, since
-  a browser can't read local files.
+- **Web**: the plugin loads PMTiles together with MapLibre GL JS, see
+  [Setup](getting-started/setup) to pin or self-host its version. Only
+  `pmtiles://https://…` works, since a browser can't read local files.
 
 The server must answer HTTP range requests, since the map reads only the parts
 of the archive it needs. On web, it must also send CORS headers.
