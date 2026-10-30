@@ -87,6 +87,8 @@
   `Position`, `PositionSeries`, `GeoBox`, the geometries, `Feature`,
   `FeatureCollection` and `earthCircumferenceWgs84`) instead of all of
   geobase. Import `package:geobase/geobase.dart` for the others.
+- `StyleController.getAttributions()` and `getAttributionsSync()` are
+  replaced by the synchronous getter `StyleController.attributions`.
 
 ### Features
 
@@ -119,6 +121,9 @@
 
 ### Bug Fixes
 
+- `SourceAttribution` updates when sources are added or removed, or a
+  source loads its attribution, not only when the camera moves.
+- Web: `StyleController.attributions` includes the attribution of a source's TileJSON.
 - Layers show features added to their list in place.
 - `MarkerLayer` applies `textOpacity` (it used `iconOpacity`) and
   `iconTranslate`, and `PolylineLayer` applies `blur`.

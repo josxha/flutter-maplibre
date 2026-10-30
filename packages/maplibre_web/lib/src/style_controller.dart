@@ -88,17 +88,17 @@ class StyleControllerWeb extends StyleController {
   }
 
   @override
-  Future<List<String>> getAttributions() async => getAttributionsSync();
-
-  @override
-  List<String> getAttributionsSync() {
-    final jsStyle = _map.getStyle();
-    final sources = jsStyle?.sources.dartify() as Map<Object?, Object?>?;
+  List<String> get attributions {
+    final sources =
+        _map.getStyle()?.sources.dartify() as Map<Object?, Object?>?;
     if (sources == null) return const [];
     final attributions = <String>[];
-    for (final value in sources.values) {
-      final source = value! as Map<Object?, Object?>;
-      final attribution = source['attribution'];
+    for (final MapEntry(:key, :value) in sources.entries) {
+      // The source object has the attribution of a loaded TileJSON, the
+      // style only the one of the source options.
+      final attribution =
+          _map.getSource(key! as String)?['attribution'].dartify() ??
+          (value! as Map<Object?, Object?>)['attribution'];
       if (attribution == null) continue;
       if (attribution is String && attribution.isEmpty) continue;
       attributions.add(attribution.toString());

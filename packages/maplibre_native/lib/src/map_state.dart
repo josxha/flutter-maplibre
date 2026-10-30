@@ -270,7 +270,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
         widget.onEvent?.call(const MapEventIdle());
       case mln.RuntimeEventType.mapSourceChanged:
         // A source learns its attribution once its tile set loads.
-        unawaited(style?.getAttributions());
+        unawaited(style?.refreshAttributions());
       default:
         break;
     }
@@ -344,7 +344,16 @@ class MapLibreMapStateNative extends MapLibreMapState {
       await _applyOptions();
     }
     style?.dispose();
-    final styleController = StyleControllerNative(map, styleJson: _styleJson);
+    late final StyleControllerNative styleController;
+    styleController = StyleControllerNative(
+      map,
+      styleJson: _styleJson,
+      // Rebuilds the widgets in MapLibreMap.children, such as
+      // SourceAttribution.
+      onAttributionsChanged: () {
+        if (mounted && style == styleController) setState(() {});
+      },
+    );
     style = styleController;
     await styleController.refresh();
     if (_disposed || style != styleController) return;

@@ -304,7 +304,7 @@ void runTests() {
 
     testWidgets('reports the attributions of its sources', (tester) async {
       final map = await pumpMap(tester);
-      expect(await map.style.getAttributions(), isEmpty);
+      expect(map.style.attributions, isEmpty);
       await map.style.addSource(
         const RasterSource(
           id: 'src',
@@ -316,16 +316,58 @@ void runTests() {
         const RasterStyleLayer(id: 'r', sourceId: 'src'),
       );
       await map.pumpUntil(
-        () => map.style.getAttributionsSync().contains('© Test Data'),
-        reason: () => 'attributions: ${map.style.getAttributionsSync()}',
+        () => map.style.attributions.contains('© Test Data'),
+        reason: () => 'attributions: ${map.style.attributions}',
       );
-      expect(await map.style.getAttributions(), ['© Test Data']);
+      expect(map.style.attributions, ['© Test Data']);
 
       await map.style.removeLayer('r');
       await map.style.removeSource('src');
       await map.pumpUntil(
-        () => map.style.getAttributionsSync().isEmpty,
-        reason: () => 'attributions: ${map.style.getAttributionsSync()}',
+        () => map.style.attributions.isEmpty,
+        reason: () => 'attributions: ${map.style.attributions}',
+      );
+    });
+
+    testWidgets('updates SourceAttribution when attributions change', (
+      tester,
+    ) async {
+      final map = await pumpMap(
+        tester,
+        children: const [
+          SourceAttribution(showMapLibre: false, keepExpanded: true),
+        ],
+      );
+      bool shown(String text) => find
+          .byWidgetPredicate(
+            (widget) =>
+                widget is RichText && widget.text.toPlainText().contains(text),
+          )
+          .evaluate()
+          .isNotEmpty;
+
+      // The camera stays put, so only the attribution change rebuilds the
+      // widget.
+      await map.style.addSource(
+        const RasterSource(
+          id: 'src',
+          tiles: ['https://example.invalid/{z}/{x}/{y}.png'],
+          attribution: '© Widget Data',
+        ),
+      );
+      await map.style.addLayer(
+        const RasterStyleLayer(id: 'r', sourceId: 'src'),
+      );
+      await map.pumpUntil(
+        () => shown('© Widget Data'),
+        reason: () => 'attributions: ${map.style.attributions}',
+      );
+
+      await map.style.removeLayer('r');
+      await map.style.removeSource('src');
+      await map.pumpUntil(
+        () => !shown('© Widget Data'),
+        reason: () => 'attributions: ${map.style.attributions}',
       );
     });
 
@@ -356,8 +398,8 @@ void runTests() {
         ),
       );
       await map.pumpUntil(
-        () => map.style.getAttributionsSync().contains('© Style Points'),
-        reason: () => 'attributions: ${map.style.getAttributionsSync()}',
+        () => map.style.attributions.contains('© Style Points'),
+        reason: () => 'attributions: ${map.style.attributions}',
       );
 
       await map.style.addSource(
@@ -368,18 +410,18 @@ void runTests() {
         ),
       );
       await map.pumpUntil(
-        () => map.style.getAttributionsSync().contains('© Points'),
-        reason: () => 'attributions: ${map.style.getAttributionsSync()}',
+        () => map.style.attributions.contains('© Points'),
+        reason: () => 'attributions: ${map.style.attributions}',
       );
       expect(
-        await map.style.getAttributions(),
+        map.style.attributions,
         unorderedEquals(['© Style Points', '© Points']),
       );
 
       await map.style.removeSource('points');
       await map.pumpUntil(
-        () => !map.style.getAttributionsSync().contains('© Points'),
-        reason: () => 'attributions: ${map.style.getAttributionsSync()}',
+        () => !map.style.attributions.contains('© Points'),
+        reason: () => 'attributions: ${map.style.attributions}',
       );
     });
 

@@ -12,10 +12,16 @@ import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 /// them in.
 class StyleControllerNative extends StyleController {
   /// Creates a style controller for a map.
-  StyleControllerNative(this._map, {String? styleJson})
-    : _sourceAttributions = sourceAttributionsOf(styleJson);
+  StyleControllerNative(
+    this._map, {
+    String? styleJson,
+    this.onAttributionsChanged,
+  }) : _sourceAttributions = sourceAttributionsOf(styleJson);
 
   final mln.MapHandle _map;
+
+  /// Called when [refreshAttributions] finds that the attributions changed.
+  final VoidCallback? onAttributionsChanged;
 
   /// The attributions that the style and [addSource] gave sources, by id.
   /// MapLibre Native drops those of GeoJSON sources, so they come from here.
@@ -31,7 +37,7 @@ class StyleControllerNative extends StyleController {
 
   /// Refreshes the cached layer ids and attributions from the map.
   Future<void> refresh() async {
-    await Future.wait([_fetchLayerIds(), getAttributions()]);
+    await Future.wait([_fetchLayerIds(), refreshAttributions()]);
   }
 
   @override
@@ -125,7 +131,7 @@ class StyleControllerNative extends StyleController {
     }
     // Sources with inline tiles know their attribution now; a TileJSON source
     // reports it with a source change once its TileJSON loads.
-    await getAttributions();
+    await refreshAttributions();
   }
 
   @override
@@ -215,7 +221,7 @@ class StyleControllerNative extends StyleController {
     await _checkUnlessMissing(_map.removeStyleSource(id));
     _sourceAttributions.remove(id);
     _geoJsonOptions.remove(id);
-    await getAttributions();
+    await refreshAttributions();
   }
 
   @override
@@ -295,11 +301,11 @@ class StyleControllerNative extends StyleController {
     }
   }
 
-  @override
-  Future<List<String>> getAttributions() async {
+  /// Refreshes the cached attributions from the sources of the map.
+  Future<List<String>> refreshAttributions() async {
     if (_disposed) return _cachedAttributions;
     final sources = await _map.listStyleSources();
-    return _cachedAttributions = [
+    final attributions = List<String>.unmodifiable([
       for (final source in sources)
         if (switch (source.attribution) {
               final String attribution when attribution.isNotEmpty =>
@@ -308,11 +314,17 @@ class StyleControllerNative extends StyleController {
             }
             case final String attribution when attribution.isNotEmpty)
           attribution,
-    ];
+    ]);
+    if (_disposed || listEquals(attributions, _cachedAttributions)) {
+      return _cachedAttributions;
+    }
+    _cachedAttributions = attributions;
+    onAttributionsChanged?.call();
+    return attributions;
   }
 
   @override
-  List<String> getAttributionsSync() => _cachedAttributions;
+  List<String> get attributions => _cachedAttributions;
 
   @override
   List<String> getLayerIds() => _cachedLayerIds;
