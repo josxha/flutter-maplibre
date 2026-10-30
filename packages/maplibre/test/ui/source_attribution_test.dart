@@ -21,7 +21,7 @@ void main() {
       controller = MockMapController();
       final style = MockStyleController();
       when(() => controller.style).thenReturn(style);
-      when(style.getAttributionsSync).thenReturn([
+      when(style.getAttributions).thenReturn([
         'Plain Source',
         '<a href="https://maplibre.org">Linked Source</a>',
       ]);

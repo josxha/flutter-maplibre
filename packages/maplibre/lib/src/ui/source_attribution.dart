@@ -63,7 +63,7 @@ class _SourceAttributionState extends State<SourceAttribution> {
     final attributions = [
       if (widget.showMapLibre)
         '<a href="https://pub.dev/packages/maplibre">MapLibre</a>',
-      ...style.getAttributionsSync(),
+      ...style.getAttributions(),
     ];
 
     // Use a SafeArea to ensure the widget is completely visible on devices

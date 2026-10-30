@@ -60,10 +60,10 @@ abstract class StyleController {
   Future<void> removeSource(String id);
 
   /// Get a list of all attributions from the map style.
-  Future<List<String>> getAttributions();
-
-  /// Get a list of all attributions from the map style.
-  List<String> getAttributionsSync();
+  ///
+  /// The list follows the sources of the style. A source that loads its
+  /// attribution from a TileJSON adds it once the TileJSON has loaded.
+  List<String> getAttributions();
 
   @visibleForTesting
   /// For testing purposes only. Will be replaced with a public API.

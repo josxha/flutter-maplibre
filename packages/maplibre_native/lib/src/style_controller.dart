@@ -31,7 +31,7 @@ class StyleControllerNative extends StyleController {
 
   /// Refreshes the cached layer ids and attributions from the map.
   Future<void> refresh() async {
-    await Future.wait([_fetchLayerIds(), getAttributions()]);
+    await Future.wait([_fetchLayerIds(), refreshAttributions()]);
   }
 
   @override
@@ -125,7 +125,7 @@ class StyleControllerNative extends StyleController {
     }
     // Sources with inline tiles know their attribution now; a TileJSON source
     // reports it with a source change once its TileJSON loads.
-    await getAttributions();
+    await refreshAttributions();
   }
 
   @override
@@ -215,7 +215,7 @@ class StyleControllerNative extends StyleController {
     await _checkUnlessMissing(_map.removeStyleSource(id));
     _sourceAttributions.remove(id);
     _geoJsonOptions.remove(id);
-    await getAttributions();
+    await refreshAttributions();
   }
 
   @override
@@ -295,8 +295,8 @@ class StyleControllerNative extends StyleController {
     }
   }
 
-  @override
-  Future<List<String>> getAttributions() async {
+  /// Refreshes the cached attributions from the sources of the map.
+  Future<List<String>> refreshAttributions() async {
     if (_disposed) return _cachedAttributions;
     final sources = await _map.listStyleSources();
     return _cachedAttributions = [
@@ -312,7 +312,7 @@ class StyleControllerNative extends StyleController {
   }
 
   @override
-  List<String> getAttributionsSync() => _cachedAttributions;
+  List<String> getAttributions() => _cachedAttributions;
 
   @override
   List<String> getLayerIds() => _cachedLayerIds;

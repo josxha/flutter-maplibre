@@ -270,7 +270,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
         widget.onEvent?.call(const MapEventIdle());
       case mln.RuntimeEventType.mapSourceChanged:
         // A source learns its attribution once its tile set loads.
-        unawaited(style?.getAttributions());
+        unawaited(style?.refreshAttributions());
       default:
         break;
     }

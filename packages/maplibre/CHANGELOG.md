@@ -87,6 +87,8 @@
   `Position`, `PositionSeries`, `GeoBox`, the geometries, `Feature`,
   `FeatureCollection` and `earthCircumferenceWgs84`) instead of all of
   geobase. Import `package:geobase/geobase.dart` for the others.
+- `StyleController.getAttributions` returns the attributions synchronously,
+  and `getAttributionsSync` was removed.
 
 ### Features
 

@@ -88,10 +88,7 @@ class StyleControllerWeb extends StyleController {
   }
 
   @override
-  Future<List<String>> getAttributions() async => getAttributionsSync();
-
-  @override
-  List<String> getAttributionsSync() {
+  List<String> getAttributions() {
     final jsStyle = _map.getStyle();
     final sources = jsStyle?.sources.dartify() as Map<Object?, Object?>?;
     if (sources == null) return const [];
