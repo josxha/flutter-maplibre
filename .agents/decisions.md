@@ -221,7 +221,8 @@ Each entry: the decision, then why.
   as a whole, as both MapLibre Native and gl-js ignore the style camera once
   the camera changed. Bounds are fitted before the first frame (native:
   `cameraForLatLngBounds` in `setUp`; web: `fitBounds` with `animate: false`
-  right after the map is created).
+  right after the map is created, and again in the first post-frame callback,
+  when the element has the size of its platform view).
 - **Bounds are geobase's `GeoBox`, and only the geobase types of the API are
   re-exported** (`show` lists in `maplibre` and
   `maplibre_platform_interface`). Backends import other geobase types from

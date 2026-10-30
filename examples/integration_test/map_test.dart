@@ -200,6 +200,43 @@ void runTests() {
       expect(min(corner.dx, corner.dy), closeTo(20, 1));
     });
 
+    testWidgets('fits its initial bounds into a small map', (tester) async {
+      const bounds = GeoBox(west: -10, south: -5, east: 10, north: 5);
+      final controller = Completer<MapController>();
+      final style = Completer<void>();
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Center(
+            child: SizedBox(
+              width: 300,
+              height: 200,
+              child: MapLibreMap(
+                options: MapOptions(
+                  style: MapStyle.json(offlineStyle),
+                  initCamera: const InitialCamera.bounds(bounds),
+                ),
+                onMapCreated: controller.complete,
+                onStyleLoaded: (_) => style.complete(),
+              ),
+            ),
+          ),
+        ),
+      );
+      final map = await controller.future.timeout(defaultTimeout);
+      await style.future.timeout(defaultTimeout);
+      final deadline = DateTime.now().add(defaultTimeout);
+      while (map.camera == null && DateTime.now().isBefore(deadline)) {
+        await tester.pump(const Duration(milliseconds: 50));
+      }
+      await tester.pump();
+      final corner = map.toScreenLocation(
+        Geographic(lon: bounds.west, lat: bounds.north),
+      );
+      // 20 by 10 degrees in a 300 by 200 map: the width fits exactly.
+      expect(corner.dx, closeTo(0, 1));
+      expect(corner.dy, greaterThan(0));
+    });
+
     testWidgets('can be removed and shown again', (tester) async {
       await pumpMap(tester);
       await tester.pumpWidget(const SizedBox.shrink());

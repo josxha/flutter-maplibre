@@ -103,6 +103,12 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       // Invoke the onMapCreated callback async to avoid getting it called
       // during the widget build.
       WidgetsBinding.instance.addPostFrameCallback((_) {
+        // The map has the size of its platform view only now, so bounds are
+        // fitted again for it.
+        if (options.initCamera case final InitialCameraBounds initCamera) {
+          _resizeMap();
+          _applyInitialCamera(initCamera);
+        }
         widget.onEvent?.call(MapEventMapCreated(mapController: this));
         widget.onMapCreated?.call(this);
         setState(() => isInitialized = true);

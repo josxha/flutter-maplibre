@@ -2,18 +2,30 @@ import 'package:flutter/painting.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 
+// Equal values from separate calls, which const would canonicalize into one
+// instance.
+MapStyle _url(String url) => MapStyle.url(url);
+MapStyle _json(String json) => MapStyle.json(json);
+InitialCamera _position(double zoom) => InitialCamera.position(zoom: zoom);
+InitialCamera _bounds(double north) => InitialCamera.bounds(
+  GeoBox(west: -10, south: -5, east: 10, north: north),
+  padding: const EdgeInsets.all(8),
+);
+MapOptions _options(String asset) => MapOptions(
+  style: MapStyle.asset(asset),
+  initCamera: _position(3),
+  maxBounds: const GeoBox(west: 0, south: 0, east: 1, north: 1),
+);
+
 void main() {
   group('MapStyle', () {
     test('compares by type and value', () {
-      expect(const MapStyle.url('a'), const MapStyle.url('a'));
-      expect(
-        const MapStyle.url('a').hashCode,
-        const MapStyle.url('a').hashCode,
-      );
+      expect(_url('a'), _url('a'));
+      expect(_url('a').hashCode, _url('a').hashCode);
+      expect(_json('{}'), _json('{}'));
       expect(const MapStyle.url('a'), isNot(const MapStyle.url('b')));
       expect(const MapStyle.url('a'), isNot(const MapStyle.asset('a')));
       expect(const MapStyle.asset('a'), isNot(const MapStyle.file('a')));
-      expect(const MapStyle.json('{}'), const MapStyle.json('{}'));
     });
 
     test('demo is the MapLibre demo style', () {
@@ -34,6 +46,8 @@ void main() {
 
     test('position defaults to zoom 0 at 0, 0', () {
       expect(const InitialCamera.position(), const InitialCameraPosition());
+      expect(_position(3), _position(3));
+      expect(_position(3).hashCode, _position(3).hashCode);
       expect(
         const InitialCamera.position(zoom: 3),
         isNot(const InitialCamera.position(zoom: 4)),
@@ -41,10 +55,8 @@ void main() {
     });
 
     test('bounds compares by value', () {
-      expect(
-        const InitialCamera.bounds(bounds, padding: EdgeInsets.all(8)),
-        const InitialCamera.bounds(bounds, padding: EdgeInsets.all(8)),
-      );
+      expect(_bounds(5), _bounds(5));
+      expect(_bounds(5).hashCode, _bounds(5).hashCode);
       expect(
         const InitialCamera.bounds(bounds),
         isNot(const InitialCamera.bounds(bounds, pitch: 30)),
@@ -66,18 +78,9 @@ void main() {
 
   group('MapOptions', () {
     test('compares by value', () {
-      expect(
-        const MapOptions(
-          style: MapStyle.asset('style.json'),
-          initCamera: InitialCamera.position(zoom: 3),
-          maxBounds: GeoBox(west: 0, south: 0, east: 1, north: 1),
-        ),
-        const MapOptions(
-          style: MapStyle.asset('style.json'),
-          initCamera: InitialCamera.position(zoom: 3),
-          maxBounds: GeoBox(west: 0, south: 0, east: 1, north: 1),
-        ),
-      );
+      expect(_options('style.json'), _options('style.json'));
+      expect(_options('style.json').hashCode, _options('style.json').hashCode);
+      expect(_options('style.json'), isNot(_options('other.json')));
       expect(
         const MapOptions(),
         isNot(const MapOptions(style: MapStyle.asset('style.json'))),
