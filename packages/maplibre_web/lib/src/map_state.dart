@@ -545,7 +545,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     widget.onEvent?.call(MapEventStyleLoaded(styleCtrl));
     widget.onStyleLoaded?.call(styleCtrl);
     _layerManager = LayerManager(styleCtrl, widget.layers);
-    _attributions = styleCtrl.getAttributions();
+    _attributions = styleCtrl.attributions;
     // setState is needed to refresh the flutter widgets used in MapLibreMap.children.
     setState(() {});
   }
@@ -555,7 +555,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   void _onAttributionsMaybeChanged() {
     final style = this.style;
     if (style == null || !mounted) return;
-    final attributions = style.getAttributions();
+    final attributions = style.attributions;
     if (listEquals(attributions, _attributions)) return;
     setState(() => _attributions = attributions);
   }

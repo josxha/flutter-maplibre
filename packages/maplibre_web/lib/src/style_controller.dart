@@ -88,7 +88,7 @@ class StyleControllerWeb extends StyleController {
   }
 
   @override
-  List<String> getAttributions() {
+  List<String> get attributions {
     final sources =
         _map.getStyle()?.sources.dartify() as Map<Object?, Object?>?;
     if (sources == null) return const [];

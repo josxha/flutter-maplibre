@@ -16,8 +16,8 @@
   replaces `initCenter`, `initZoom`, `initBearing` and `initPitch`, and
   geobase's `GeoBox` replaces `LngLatBounds`. Only the geobase types of the
   API are exported. See the maplibre changelog.
-- `StyleController.getAttributions` is synchronous, and `getAttributionsSync`
-  was removed.
+- `StyleController.getAttributions()` and `getAttributionsSync()` are
+  replaced by the synchronous getter `StyleController.attributions`.
 
 ## 0.3.7+1
 

@@ -324,7 +324,7 @@ class StyleControllerNative extends StyleController {
   }
 
   @override
-  List<String> getAttributions() => _cachedAttributions;
+  List<String> get attributions => _cachedAttributions;
 
   @override
   List<String> getLayerIds() => _cachedLayerIds;

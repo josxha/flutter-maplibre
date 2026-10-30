@@ -304,7 +304,7 @@ void runTests() {
 
     testWidgets('reports the attributions of its sources', (tester) async {
       final map = await pumpMap(tester);
-      expect(map.style.getAttributions(), isEmpty);
+      expect(map.style.attributions, isEmpty);
       await map.style.addSource(
         const RasterSource(
           id: 'src',
@@ -316,16 +316,16 @@ void runTests() {
         const RasterStyleLayer(id: 'r', sourceId: 'src'),
       );
       await map.pumpUntil(
-        () => map.style.getAttributions().contains('© Test Data'),
-        reason: () => 'attributions: ${map.style.getAttributions()}',
+        () => map.style.attributions.contains('© Test Data'),
+        reason: () => 'attributions: ${map.style.attributions}',
       );
-      expect(map.style.getAttributions(), ['© Test Data']);
+      expect(map.style.attributions, ['© Test Data']);
 
       await map.style.removeLayer('r');
       await map.style.removeSource('src');
       await map.pumpUntil(
-        () => map.style.getAttributions().isEmpty,
-        reason: () => 'attributions: ${map.style.getAttributions()}',
+        () => map.style.attributions.isEmpty,
+        reason: () => 'attributions: ${map.style.attributions}',
       );
     });
 
@@ -360,14 +360,14 @@ void runTests() {
       );
       await map.pumpUntil(
         () => shown('© Widget Data'),
-        reason: () => 'attributions: ${map.style.getAttributions()}',
+        reason: () => 'attributions: ${map.style.attributions}',
       );
 
       await map.style.removeLayer('r');
       await map.style.removeSource('src');
       await map.pumpUntil(
         () => !shown('© Widget Data'),
-        reason: () => 'attributions: ${map.style.getAttributions()}',
+        reason: () => 'attributions: ${map.style.attributions}',
       );
     });
 
@@ -398,8 +398,8 @@ void runTests() {
         ),
       );
       await map.pumpUntil(
-        () => map.style.getAttributions().contains('© Style Points'),
-        reason: () => 'attributions: ${map.style.getAttributions()}',
+        () => map.style.attributions.contains('© Style Points'),
+        reason: () => 'attributions: ${map.style.attributions}',
       );
 
       await map.style.addSource(
@@ -410,18 +410,18 @@ void runTests() {
         ),
       );
       await map.pumpUntil(
-        () => map.style.getAttributions().contains('© Points'),
-        reason: () => 'attributions: ${map.style.getAttributions()}',
+        () => map.style.attributions.contains('© Points'),
+        reason: () => 'attributions: ${map.style.attributions}',
       );
       expect(
-        map.style.getAttributions(),
+        map.style.attributions,
         unorderedEquals(['© Style Points', '© Points']),
       );
 
       await map.style.removeSource('points');
       await map.pumpUntil(
-        () => !map.style.getAttributions().contains('© Points'),
-        reason: () => 'attributions: ${map.style.getAttributions()}',
+        () => !map.style.attributions.contains('© Points'),
+        reason: () => 'attributions: ${map.style.attributions}',
       );
     });
 
