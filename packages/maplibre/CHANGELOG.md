@@ -180,6 +180,9 @@ a profile or release build, please comment on
 - Web: wheel, pinch and double-tap zoom on the globe zoom toward the pointer.
 - Web: `animateCamera` no longer hangs when the animation ends at once, and
   removing a source that does not exist is not an error.
+- Android: the JNI library aligns its LOAD segments to 16 KB, so an app that
+  bundles it passes the page size requirement of Android 15 and of Google
+  Play. It was linked at 4 KB.
 
 Full Changelog: [v0.3.7+1...v0.4.0-pre.1](https://github.com/josxha/flutter-maplibre/compare/v0.3.7+1...v0.4.0-pre.1)
 
