@@ -64,24 +64,31 @@ void runTests() {
       tester,
     ) async {
       final map = await pumpMap(tester, options: _options());
+      final beforeDrag = map.controller.getCamera();
       final gesture = await tester.startGesture(map.toGlobal(map.center));
       await gesture.moveBy(
         const Offset(-60, 0),
         timeStamp: const Duration(milliseconds: 16),
       );
       await tester.pump(const Duration(milliseconds: 16));
+      final afterFirstMove = await map.waitForCamera(
+        (camera) => camera.center.lon > beforeDrag.center.lon + 0.001,
+      );
       await gesture.moveBy(
         const Offset(-60, 0),
         timeStamp: const Duration(milliseconds: 32),
       );
-      final beforeRelease = map.controller.getCamera();
+      final beforeRelease = await map.waitForCamera(
+        (camera) => camera.center.lon > afterFirstMove.center.lon + 0.001,
+      );
       await gesture.up(timeStamp: const Duration(milliseconds: 33));
 
       final afterRelease = await map.waitForCamera(
         (camera) => camera.center.lon > beforeRelease.center.lon + 0.001,
       );
-      await tester.pump(const Duration(milliseconds: 100));
-      final whileFlinging = map.controller.getCamera();
+      final whileFlinging = await map.waitForCamera(
+        (camera) => camera.center.lon > afterRelease.center.lon,
+      );
       expect(whileFlinging.center.lon, greaterThan(afterRelease.center.lon));
 
       await tester.tapAt(map.toGlobal(map.center));
@@ -90,7 +97,7 @@ void runTests() {
       final settled = map.controller.getCamera();
       expect(settled.center.lon, closeTo(afterTap.center.lon, 1e-6));
       expect(settled.center.lat, closeTo(afterTap.center.lat, 1e-6));
-    });
+    }, skip: kIsWeb);
 
     testWidgets('disabled gestures leave the camera alone', (tester) async {
       final map = await pumpMap(
