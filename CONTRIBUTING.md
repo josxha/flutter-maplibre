@@ -1,91 +1,99 @@
 # Contributing
 
-We welcome contributions to this repository. Please follow these steps if
-you're interested in making contributions:
+Thanks for your interest in Flutter MapLibre! Bug reports, ideas,
+documentation and code are all welcome.
 
-## Preceding steps
+## Before you start
 
-1. Ensure that
-   existing [pull requests](https://github.com/josxha/flutter-maplibre/pulls)
-   and [issues](https://github.com/josxha/flutter-maplibre/issues) don’t
-   already cover your contribution or question.
-2. If your pull request will add a major or breaking change, please open a
-   [feature request](https://github.com/josxha/flutter-maplibre/issues/new/choose)
-   first to start a discussion.
-3. The example app under [/example](/example) is used as a reference point.
-   If you have a bug and can't tell if it's related to the package, please try
-   to reproduce it with the example app or create some other way to reproduce
-   your issue.
-4. Ensure that what you have planned is possible by verifying this functionality
-   is supported
-   by [maplibre-native](https://github.com/maplibre/maplibre-native)
-   and [maplibre-gl-js](https://github.com/maplibre/maplibre-gl-js).
+- Search the [issues](https://github.com/josxha/flutter-maplibre/issues) and
+  [pull requests](https://github.com/josxha/flutter-maplibre/pulls) to check
+  that your bug or idea isn't covered yet. Planned work is tracked in issues.
+- For a larger feature or a breaking change, open an issue first so we can
+  agree on the design before you spend time on it.
+- Make sure the feature can be built on both
+  [MapLibre Native](https://github.com/maplibre/maplibre-native) (through
+  [maplibre-native-ffi](https://github.com/maplibre/maplibre-native-ffi)) and
+  [MapLibre GL JS](https://github.com/maplibre/maplibre-gl-js).
+- If you're unsure whether a bug comes from this package, try to reproduce it
+  with the [example app](examples).
 
-## Start contributing
+## Repository layout
+
+The repository is a [pub workspace](https://dart.dev/tools/pub/workspaces):
+
+| Path                                   | Content                                                     |
+|----------------------------------------|-------------------------------------------------------------|
+| `packages/maplibre`                    | The app-facing package                                      |
+| `packages/maplibre_platform_interface` | Shared API, style classes and gesture recognizer            |
+| `packages/maplibre_native`             | Every platform except web, on the MapLibre Native C API     |
+| `packages/maplibre_web`                | Web, on MapLibre GL JS                                      |
+| `packages/maplibre_geolocator`         | Adapter from `geolocator` to `UserLocationLayer`            |
+| `examples`                             | Example app and integration tests (`examples/integration_test`) |
+| `website`                              | Documentation website                                       |
+
+[Architecture](https://flutter-maplibre.pages.dev/docs/contributing/architecture/)
+explains how the packages fit together, and [AGENTS.md](AGENTS.md) lists the
+code generation commands and the rules of the code base.
+
+## Development
+
+You need Flutter 3.47 or newer. One `flutter pub get` in the repository root
+resolves every package:
+
+```bash
+flutter pub get
+cd examples
+flutter run -d windows   # or macos, linux, chrome, an iOS simulator or an Android device
+```
+
+Before you open a pull request:
+
+```bash
+dart format .
+dart analyze --fatal-warnings --fatal-infos
+flutter test                                                # inside the package you changed
+cd examples && flutter test integration_test/all_test.dart -d <device>
+```
+
+Optionally, install [pre-commit](https://pre-commit.com/) and run
+`pre-commit install` to run the formatting and analysis checks on every commit.
+
+## Pull requests
 
 1. [Fork the repository](https://github.com/josxha/flutter-maplibre/fork) and
-   push your changes to a new branch to avoid conflicts in your forked
-   repository.
-1. (Optional) Install [pre-commit](https://pre-commit.com/) and run `pre-commit install` in the repo directory to add pre-commit hooks for some formatting CI checks.
-1. Along with your contribution please also adapt the example app to showcase
-   any new features or APIs you have developed. This allows quick testing and
-   gives evaluating users a better idea about the functionality of the package.
-1. Consider updating
-   the [documentation](https://github.com/josxha/flutter-maplibre/tree/main/docs/docs)
-   to explain users how to implement.
-1. If there are any changes that developers should be aware of, please update
-   the [CHANGELOG.md](https://github.com/josxha/flutter-maplibre/blob/main/CHANGELOG.md)
-   file together with your pull request.
-1. If you change the [./pigeons/pigeon.dart](./pigeons/pigeon.dart) file, you'll
-   have to run the [pigeon](https://pub.dev/packages/pigeon) code generation.
-   You can use [./pigeons/run_code_gen.sh](./pigeons/run_code_gen.sh)
-   or [./pigeons/run_code_gen.ps1](./pigeons/run_code_gen.ps1).
-1. If you have a pull request that isn't complete yet and want to get
-   feedback, consider
-   to [open a draft pull request](https://github.com/josxha/flutter-maplibre/pulls).
-   This helps others to get
-   involved into the changes more early and allows to link the pull request to
-   open issues. Give a quick summary about your changes listing any related
-   issues that exist. Screenshots and videos are or course welcome, too.
-   Use a [conventional](https://www.conventionalcommits.org/) title if you like.
-1. When your contribution is ready to review, disable the draft state of your
-   pull request and update the summary by editing your initial pull request
-   message. This summary will go into the commit details of the squashed commit.
+   work on a new branch.
+2. Add tests. Prefer unit tests (shared logic belongs in
+   `packages/maplibre_platform_interface/test`); add an integration test in
+   `examples/integration_test` when the behavior depends on a platform.
+3. Showcase new features in the example app and document them on the
+   [website](website/docs).
+4. Add user-facing changes to
+   [packages/maplibre/CHANGELOG.md](packages/maplibre/CHANGELOG.md), with one
+   short bullet per feature or breaking change.
+5. Give your pull request a [conventional](https://www.conventionalcommits.org/)
+   title and list the important changes and any linked issues. Open it as a
+   draft if you'd like early feedback. Pull requests are squash merged, so the
+   title and description become the commit message.
 
-Thanks for every contribution you make to the project.
+## Use of AI
 
-# Building
+If you use AI tools to write code, tests, documentation, issues or pull
+request descriptions, disclose it in your contribution. You are responsible
+for every change you submit and must understand it. Follow the
+[MapLibre AI policy](https://github.com/maplibre/maplibre/blob/main/AI_POLICY.md).
 
-## MapLibre Native C library
+## Building the MapLibre Native C library locally
 
 `maplibre_native` uses the MapLibre Native C API through
 [maplibre_native_ffi](https://pub.dev/packages/maplibre_native_ffi), whose
-build hook downloads the prebuilt library of its release for each target.
+build hook downloads a prebuilt library for each target. You only need a local
+build to work on the C library itself.
 
-To use a local build instead, clone
-[maplibre-native-ffi](https://github.com/maplibre/maplibre-native-ffi) at the
-release tag the pubspec resolves to (e.g. next to this repository) and build
-the presets you need, as its development docs describe. On Windows, install
-Visual Studio 2022 with C++, standalone LLVM (`clang-cl`), CMake, Ninja, Rust,
-and `cargo install cargo-about --version 0.9.2 --locked --features cli`. Then,
-in Git Bash from the clone:
-
-```bash
-bash .mise/bin/sync-submodules
-source .mise/bin/windows-msvc-env.sh
-cmake --preset windows-x64-vulkan -DBUILD_TESTING=OFF
-cmake --build --preset windows-x64-vulkan
-```
-
-The MSVC standard library requires a matching Clang version; an older LLVM
-works with an older MSVC toolset (load its `vcvars64.bat` instead of sourcing
-`windows-msvc-env.sh`). On an arm64 Mac, install Xcode, CMake, and Ninja
-(`brew install cmake ninja`) and build `macos-arm64-metal`,
-`ios-simulator-arm64-metal`, or `ios-arm64-metal` the same way; the Apple
-presets need no Rust.
-
-Then name the clone's build root in the root `pubspec.yaml`. The hook takes
-`<preset>/install` under it for each target:
+Clone [maplibre-native-ffi](https://github.com/maplibre/maplibre-native-ffi)
+at the release tag the pubspec resolves to, build the presets you need as its
+development docs describe, and name the build root in the root
+`pubspec.yaml`. The hook then takes `<preset>/install` under it for each
+target:
 
 ```yaml
 hooks:
@@ -95,3 +103,9 @@ hooks:
 ```
 
 Remove the setting to go back to the prebuilt library.
+
+## Community
+
+Chat with us in the `#flutter-maplibre` channel of the
+[OSM-US Slack](https://slack.openstreetmap.us). Everyone taking part is
+expected to follow the [code of conduct](CODE_OF_CONDUCT.md).
