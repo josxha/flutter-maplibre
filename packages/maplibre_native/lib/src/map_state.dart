@@ -731,7 +731,7 @@ class _NativeGestureCamera implements GestureCameraSink {
     );
   }
 
-  /// Continues a flick with constant deceleration in logical pixels.
+  /// Continues a flick with the same pan inertia as web, in logical pixels.
   @override
   void gestureEnd({Velocity velocity = Velocity.zero}) {
     if (!_state._gestureActive) return;
@@ -739,25 +739,24 @@ class _NativeGestureCamera implements GestureCameraSink {
       .._gestureActive = false
       .._applyDelta(const mln.CameraDelta(gesturePhase: mln.GesturePhase.end));
     const minFlingSpeed = 100.0;
-    const maxFlingSpeed = 4000.0;
+    const linearity = 0.3;
+    const maxFlingSpeed = 1400.0;
     const deceleration = 2500.0;
     final speed = velocity.pixelsPerSecond.distance;
     if (!speed.isFinite || speed < minFlingSpeed) {
       _state._onCameraIdle();
       return;
     }
-    final pixelsPerSecond = velocity
-        .clampMagnitude(0, maxFlingSpeed)
-        .pixelsPerSecond;
-    final seconds = pixelsPerSecond.distance / deceleration;
+    final flingSpeed = min(speed * linearity, maxFlingSpeed);
+    final seconds = flingSpeed / (deceleration * linearity);
+    final offset =
+        velocity.pixelsPerSecond / speed * (flingSpeed * seconds / 2);
     _state._applyDelta(
       mln.CameraDelta(
-        offset: MapLibreMapStateNative._screenPoint(
-          pixelsPerSecond * (seconds / 2),
-        ),
+        offset: MapLibreMapStateNative._screenPoint(offset),
         animation: mln.AnimationOptions(
           durationMs: seconds * 1000,
-          easing: const mln.UnitBezier(x1: 1 / 3, y1: 2 / 3, x2: 2 / 3, y2: 1),
+          easing: const mln.UnitBezier(x2: 0.3, y2: 1),
         ),
       ),
     );
