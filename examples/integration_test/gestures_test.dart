@@ -78,13 +78,20 @@ void runTests() {
         const Offset(-60, 0),
         timeStamp: const Duration(milliseconds: 32),
       );
-      final beforeRelease = await map.waitForCamera(
+      final afterSecondMove = await map.waitForCamera(
         (camera) => camera.center.lon > afterFirstMove.center.lon + 0.001,
       );
-      await gesture.up(timeStamp: const Duration(milliseconds: 33));
+      final finalMoveLon =
+          afterSecondMove.center.lon +
+          (afterSecondMove.center.lon - afterFirstMove.center.lon);
+      await gesture.moveBy(
+        const Offset(-60, 0),
+        timeStamp: const Duration(milliseconds: 48),
+      );
+      await gesture.up(timeStamp: const Duration(milliseconds: 49));
 
       final afterRelease = await map.waitForCamera(
-        (camera) => camera.center.lon > beforeRelease.center.lon + 0.001,
+        (camera) => camera.center.lon > finalMoveLon + 0.001,
       );
       final whileFlinging = await map.waitForCamera(
         (camera) => camera.center.lon > afterRelease.center.lon,
