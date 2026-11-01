@@ -10,5 +10,11 @@ target_link_libraries(maplibre_native_jni PRIVATE android log dl EGL vulkan)
 # Android 15 and later run on devices with 16 KB memory pages, and Google
 # Play requires every shared library of an app that targets them to align
 # its LOAD segments to that size. The NDK's CMake toolchain still links at
-# 4 KB, so ask the linker for 16 KB.
-target_link_options(maplibre_native_jni PRIVATE "-Wl,-z,max-page-size=16384")
+# 4 KB, so ask the linker for 16 KB. The common page size sizes the padding
+# of the relocations that turn read only after loading, which otherwise
+# ends on a 4 KB boundary and leaves its last page writable on such a
+# device.
+target_link_options(
+  maplibre_native_jni
+  PRIVATE "-Wl,-z,max-page-size=16384" "-Wl,-z,common-page-size=16384"
+)
