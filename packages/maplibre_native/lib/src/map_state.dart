@@ -94,7 +94,11 @@ class MapLibreMapStateNative extends MapLibreMapState {
           renderer.resize(extent);
           _invalidateProjection();
         }
-        return Texture(textureId: renderer.textureId);
+        return Listener(
+          behavior: HitTestBehavior.opaque,
+          onPointerDown: (_) => _map?.discarding.cancelTransitions(),
+          child: Texture(textureId: renderer.textureId),
+        );
       },
     );
   }
@@ -727,14 +731,35 @@ class _NativeGestureCamera implements GestureCameraSink {
     );
   }
 
-  /// Ends the gesture. Native maps don't fling yet, so [velocity] is unused.
+  /// Continues a flick with the same pan inertia as web, in logical pixels.
   @override
   void gestureEnd({Velocity velocity = Velocity.zero}) {
     if (!_state._gestureActive) return;
     _state
       .._gestureActive = false
-      .._applyDelta(const mln.CameraDelta(gesturePhase: mln.GesturePhase.end))
-      .._onCameraIdle();
+      .._applyDelta(const mln.CameraDelta(gesturePhase: mln.GesturePhase.end));
+    const minFlingSpeed = 100.0;
+    const linearity = 0.3;
+    const maxFlingSpeed = 1400.0;
+    const deceleration = 2500.0;
+    final speed = velocity.pixelsPerSecond.distance;
+    if (!speed.isFinite || speed < minFlingSpeed) {
+      _state._onCameraIdle();
+      return;
+    }
+    final flingSpeed = min(speed * linearity, maxFlingSpeed);
+    final seconds = flingSpeed / (deceleration * linearity);
+    final offset =
+        velocity.pixelsPerSecond / speed * (flingSpeed * seconds / 2);
+    _state._applyDelta(
+      mln.CameraDelta(
+        offset: MapLibreMapStateNative._screenPoint(offset),
+        animation: mln.AnimationOptions(
+          durationMs: seconds * 1000,
+          easing: const mln.UnitBezier(x2: 0.3, y2: 1),
+        ),
+      ),
+    );
   }
 
   @override
