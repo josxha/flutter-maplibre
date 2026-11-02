@@ -11,9 +11,8 @@
 
 This package is a modern rewrite
 of [maplibre_gl](https://pub.dev/packages/maplibre_gl). It provides Flutter
-bindings for the MapLibre SDKs through native interoperability (FFI/JNI) with
-the goal to deliver a consistent, cross-platform experience with excellent
-performance.
+bindings for [MapLibre](https://maplibre.org) through native interoperability (FFI/JNI) to deliver a consistent 
+cross-platform experience with excellent performance.
 
 - For web, it uses [maplibre-gl-js](https://github.com/maplibre/maplibre-gl-js),
   a fork of [mapbox-gl-js](https://github.com/mapbox/mapbox-gl-js).
@@ -86,6 +85,7 @@ development:
 - 💡 If you need a specific
   feature, [open a feature request](https://github.com/josxha/flutter-maplibre/issues/new?assignees=&labels=feature&projects=&template=2-feature.yml&title=%5BFEATURE%5D+%3Ctitle%3E).
   or [post your idea as discussion](https://github.com/josxha/flutter-maplibre/discussions/categories/ideas).
+- 💬 Use the [invite link](https://slack.openstreetmap.us) to chat with us on Slack in the `#flutter-maplibre` channel.
 - 📖 Enhance the package documentation.
 - 💝 Sponsor this
   project: [GitHub-Sponsors](https://github.com/sponsors/josxha), [PayPal](https://www.paypal.com/paypalme/joschaeckert).
