@@ -25,7 +25,12 @@ gboolean mln_gl_texture_populate(FlTextureGL* texture, uint32_t* target,
                                  uint32_t* height, GError** error) {
   maplibre_native::GlFrames& frames = **MLN_GL_TEXTURE(texture)->frames;
   std::lock_guard<std::mutex> lock(frames.mutex);
-  if (frames.front < 0) return FALSE;
+  if (frames.front < 0) {
+    // Flutter reads the error whenever this returns FALSE.
+    g_set_error_literal(error, g_quark_from_static_string("maplibre-native"),
+                        0, "No map frame rendered yet.");
+    return FALSE;
+  }
   frames.fetched = frames.front;
   *target = GL_TEXTURE_2D;
   *name = frames.textures[frames.front];
