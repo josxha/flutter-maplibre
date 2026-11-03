@@ -345,7 +345,9 @@ jobs:
         run: |
           $dir = "$env:RUNNER_TEMP\vulkan"
           New-Item -ItemType Directory -Force $dir | Out-Null
-          Invoke-WebRequest https://sdk.lunarg.com/sdk/download/latest/windows/vulkan-runtime-components.zip -OutFile "$dir\runtime.zip"
+          # Pinned: LunarG publishes the runtime components for some SDK
+          # releases only, and "latest" broke when 1.4.363.1 had none.
+          Invoke-WebRequest https://sdk.lunarg.com/sdk/download/1.4.357.0/windows/vulkan-runtime-components.zip -OutFile "$dir\runtime.zip"
           Expand-Archive "$dir\runtime.zip" "$dir\runtime"
           $loader = Get-ChildItem "$dir\runtime" -Recurse -Filter vulkan-1.dll | Where-Object { $_.DirectoryName -match 'x64' } | Select-Object -First 1
           $release = Invoke-RestMethod https://api.github.com/repos/pal1000/mesa-dist-win/releases/latest -Headers @{ Authorization = "Bearer ${{ github.token }}" }

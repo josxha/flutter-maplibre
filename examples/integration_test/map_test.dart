@@ -66,7 +66,10 @@ void runTests() {
       // Flutter paints the texture of the map into the image, as on screen.
       final view = tester.binding.renderViews.first;
       final layer = view.debugLayer! as OffsetLayer;
-      final center = tester.getCenter(map.finder);
+      // The root layer scales by the device pixel ratio, so the image is in
+      // physical pixels.
+      final center =
+          tester.getCenter(map.finder) * tester.view.devicePixelRatio;
       Future<List<int>> pixelAtCenter() async {
         final bytes = await tester.runAsync(() async {
           final image = await layer.toImage(center & const Size(1, 1));
