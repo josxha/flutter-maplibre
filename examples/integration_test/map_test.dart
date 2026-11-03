@@ -4,6 +4,7 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:maplibre/maplibre.dart';
@@ -41,6 +42,53 @@ void runTests() {
         ),
         kIsWeb ? findsNothing : findsOneWidget,
       );
+    }, skip: kIsWeb);
+
+    testWidgets('shows its frames on screen', (tester) async {
+      final map = await pumpMap(
+        tester,
+        options: MapOptions(
+          style: MapStyle.json(
+            jsonEncode({
+              'version': 8,
+              'sources': <String, Object>{},
+              'layers': [
+                {
+                  'id': 'background',
+                  'type': 'background',
+                  'paint': {'background-color': '#ff0000'},
+                },
+              ],
+            }),
+          ),
+        ),
+      );
+      // Flutter paints the texture of the map into the image, as on screen.
+      final view = tester.binding.renderViews.first;
+      final layer = view.debugLayer! as OffsetLayer;
+      // The root layer scales by the device pixel ratio, so the image is in
+      // physical pixels.
+      final center =
+          tester.getCenter(map.finder) * tester.view.devicePixelRatio;
+      Future<List<int>> pixelAtCenter() async {
+        final bytes = await tester.runAsync(() async {
+          final image = await layer.toImage(center & const Size(1, 1));
+          final data = await image.toByteData();
+          image.dispose();
+          return data!;
+        });
+        return bytes!.buffer.asUint8List().toList();
+      }
+
+      var pixel = await pixelAtCenter();
+      final deadline = DateTime.now().add(defaultTimeout);
+      while (pixel[0] < 200 || pixel[1] > 50 || pixel[2] > 50) {
+        if (DateTime.now().isAfter(deadline)) {
+          fail('The map never showed its red background, last: $pixel');
+        }
+        await tester.pump(const Duration(milliseconds: 100));
+        pixel = await pixelAtCenter();
+      }
     }, skip: kIsWeb);
 
     testWidgets('starts at the camera of its options', (tester) async {

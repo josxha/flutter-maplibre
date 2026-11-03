@@ -70,12 +70,17 @@ Each entry: the decision, then why.
   checks the driver UUIDs. Otherwise frames are read back into an
   `FlPixelBufferTexture`, as on Windows.
 - **The plugin copies in its own GDK OpenGL context, created from Flutter's
-  window, so it shares textures with Flutter's contexts.** GDK contexts may
-  only be used on the GTK main thread, so zero-copy textures need Dart's UI
-  thread to be the main thread (merged threads); the plugin checks
-  `g_main_context_is_owner` and falls back to the pixel buffer otherwise. It
-  restores the context that was current after each use. OpenGL goes through
-  libepoxy, which GTK already loads.
+  window.** GDK contexts may only be used on the GTK main thread, so
+  zero-copy textures need Dart's UI thread to be the main thread (merged
+  threads); the plugin checks `g_main_context_is_owner` and falls back
+  to the pixel buffer otherwise. It restores the context that was current
+  after each use. OpenGL goes through libepoxy, which GTK already loads.
+- **Linux always reads frames back to the CPU for now.** Flutter 3.47 renders
+  in EGL contexts of its own (`FlOpenGLManager`), which share no textures
+  with any GDK context, so Flutter sampled nothing from the zero-copy textures.
+  `kZeroCopyWorks` in `maplibre_native_plugin.cc` keeps `GlTexture` unused
+  until its OpenGL work moves into `populate`, the only place with Flutter's
+  context current.
 - **The plugin lives as long as the process.** Linux plugins get no
   shutdown call, and sessions on core workers can outlive the engine.
 
@@ -510,16 +515,11 @@ Each entry: the decision, then why.
   macOS 27.0.1, iPhone 17 simulator on iOS 27.0) against the 0.202610.2
   release library, but have not run on an iOS device. 0.202610.3 adds a
   macOS x64 library, so Intel Macs build; none has run the tests.
-- Linux has not been built through Flutter or run on a Linux machine: the
-  plugin compiles with `-Wall -Werror` and `gl_texture_test` passes in WSL,
-  which had no network for a Flutter build. The zero-copy path assumes that
-  Flutter's OpenGL contexts share textures with GDK contexts of its window,
-  that Flutter on Linux renders with OpenGL (an `FlTextureGL` does nothing
-  for a Vulkan renderer), and that Dart's UI thread is the GTK main thread.
-  To check it: run
-  `flutter test integration_test/all_test.dart -d linux` in `examples` with and
-  without `MAPLIBRE_NATIVE_DISABLE_ZERO_COPY=1`, and look for the
-  "falling back to CPU readback" log line.
+- Linux passes the integration tests in WSL2 (WSLg, Mesa llvmpipe and
+  lavapipe, Flutter 3.47.9) and in CI under Xvfb, on CPU readback. Not checked
+  on a desktop with a GPU. Painting a map before its first frame crashed the
+  raster thread until the texture callbacks set a `GError` with
+  their `FALSE`, which Flutter's engine dereferences.
 - x86_64 iOS simulators have no published C library (0.202610.3 publishes a
   macOS x64 one).
 - The C library targets macOS 14.3, above Flutter 3.47's minimum of 12.0,

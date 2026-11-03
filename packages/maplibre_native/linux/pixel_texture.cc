@@ -25,7 +25,12 @@ gboolean mln_pixel_texture_copy_pixels(FlPixelBufferTexture* texture,
   maplibre_native::PixelFrames& frames =
       **MLN_PIXEL_TEXTURE(texture)->frames;
   std::lock_guard<std::mutex> lock(frames.mutex);
-  if (frames.front < 0) return FALSE;
+  if (frames.front < 0) {
+    // Flutter reads the error whenever this returns FALSE.
+    g_set_error_literal(error, g_quark_from_static_string("maplibre-native"),
+                        0, "No map frame rendered yet.");
+    return FALSE;
+  }
   frames.fetched = frames.front;
   *buffer = frames.buffers[frames.front].data();
   *width = frames.widths[frames.front];
