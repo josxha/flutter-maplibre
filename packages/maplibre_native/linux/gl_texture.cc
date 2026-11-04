@@ -22,11 +22,11 @@ namespace maplibre_native {
 
 namespace {
 
-// How long populate waits for a fence that Flutter's previous frame
-// signals, so that at most one slot waits for its fence at a time and
-// MapLibre always has a slot to render into. Such a fence is a frame old and
-// has practically always signalled.
-constexpr GLuint64 kFenceWaitNs = 50'000'000;
+// Populate waits for a fence that Flutter's previous frame signals, so that
+// at most one slot waits for its fence at a time and MapLibre always has a
+// slot to render into. Such a fence is a frame old and has practically always
+// signalled, and nothing but a later populate could poll it again.
+constexpr GLuint64 kFenceWaitNs = GL_TIMEOUT_IGNORED;
 
 std::string GlError(const char* what, GLenum error) {
   char buffer[64];

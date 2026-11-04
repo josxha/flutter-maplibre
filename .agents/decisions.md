@@ -78,8 +78,8 @@ Each entry: the decision, then why.
   says Flutter's draws that sampled it are done.** Flutter takes no fence for
   an external texture and samples the texture of the last `populate` until
   it populates again. So when `populate` moves Flutter to a new slot, it
-  inserts a `glFenceSync` for the slot Flutter leaves, polls it, and waits up
-  to 50 ms for older fences, which are a frame old, so that at most one slot
+  inserts a `glFenceSync` for the slot Flutter leaves, polls it, and waits
+  for older fences, which are a frame old, so that at most one slot
   waits for its fence and a ring of three always has one to render into.
   `maplibre_native_gpu_texture_slot_in_use` reports this to Dart.
 - **OpenGL objects are deleted in a later `populate`.** A resize moves the old
