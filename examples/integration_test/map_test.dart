@@ -80,10 +80,10 @@ void runTests() {
       Future<void> waitForColor(String name, int channel) async {
         var pixel = await pixelAtCenter();
         final deadline = DateTime.now().add(defaultTimeout);
-        bool shown(List<int> pixel) => [
-          for (var i = 0; i < 3; i++)
-            i == channel ? pixel[i] >= 200 : pixel[i] <= 50,
-        ].every((ok) => ok);
+        bool shown(List<int> pixel) => Iterable.generate(
+          3,
+          (i) => i == channel ? pixel[i] >= 200 : pixel[i] <= 50,
+        ).every((ok) => ok);
         while (!shown(pixel)) {
           if (DateTime.now().isAfter(deadline)) {
             fail('The map never showed its $name background, last: $pixel');
