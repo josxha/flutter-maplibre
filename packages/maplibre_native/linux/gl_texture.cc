@@ -69,15 +69,22 @@ gboolean mln_gl_texture_populate(FlTextureGL* texture, uint32_t* target,
     // device UUIDs. The Vulkan device UUID was stored in frames during Create().
     // If they don't match, the import will fail, so we check here and return an
     // error that will cause Flutter to fall back to CPU readback.
-    GpuId flutter_gl_device_uuid;
-    glGetUnsignedBytei_vEXT(GL_DEVICE_UUID_EXT, 0, flutter_gl_device_uuid.bytes);
-    flutter_gl_device_uuid.size = VK_UUID_SIZE;
-    
-    if (std::memcmp(flutter_gl_device_uuid.bytes, frames.vulkan_device_uuid.bytes,
-                   VK_UUID_SIZE) != 0) {
-      g_set_error_literal(error, g_quark_from_static_string("maplibre-native"),
-                          0, "Vulkan and Flutter's OpenGL are on different GPUs.");
-      return FALSE;
+    // Only check if the GL_EXT_device_query extension is available.
+    if (epoxy_has_gl_extension("GL_EXT_device_query")) {
+      GpuId flutter_gl_device_uuid;
+      glGetUnsignedBytei_vEXT(GL_DEVICE_UUID_EXT, 0, flutter_gl_device_uuid.bytes);
+      flutter_gl_device_uuid.size = VK_UUID_SIZE;
+      
+      if (std::memcmp(flutter_gl_device_uuid.bytes, frames.vulkan_device_uuid.bytes,
+                     VK_UUID_SIZE) != 0) {
+        g_set_error_literal(error, g_quark_from_static_string("maplibre-native"),
+                            0, "Vulkan and Flutter's OpenGL are on different GPUs.");
+        return FALSE;
+      }
+    } else {
+      // Without GL_EXT_device_query, we can't verify GPU compatibility.
+      // Proceed with the import and hope for the best.
+      // If it fails, the glImportMemoryFdEXT call will fail below.
     }
     
     if (fd < 0) {
