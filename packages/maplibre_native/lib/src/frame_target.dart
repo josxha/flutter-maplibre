@@ -202,10 +202,11 @@ abstract base class BorrowedRingTarget<Slot> extends FrameTarget {
       ..addAll(keep);
   }
 
-  /// Checks for released slots while frames that are no longer on screen
-  /// are held, as MapLibre waits for a free slot to render the next frame.
+  /// Checks for released slots while every slot is held, as MapLibre then
+  /// waits for a free slot to render the next frame. With a slot free, the
+  /// next present releases what it can, and an idle map polls nothing.
   void _scheduleRecycle() {
-    if (_recycler != null || _held.length < 2) return;
+    if (_recycler != null || _held.length < slots.length) return;
     _recycler = Timer.periodic(_recycleInterval, (timer) {
       if (host?.disposed ?? true) {
         timer.cancel();
@@ -213,7 +214,7 @@ abstract base class BorrowedRingTarget<Slot> extends FrameTarget {
         return;
       }
       host!.onGpuQueue(() async => _releaseHeld()).ignore();
-      if (_held.length < 2) {
+      if (_held.length < slots.length) {
         timer.cancel();
         _recycler = null;
       }

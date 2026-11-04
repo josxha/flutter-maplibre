@@ -281,12 +281,12 @@ int main(int argc, char** argv) {
   CHECK(!texture->SlotInUse(1), "a slot two frames back is free");
   CHECK(texture->SlotInUse(0), "the shown slot is in use");
 
-  // A slot that Flutter never populated is free once it is no longer the
-  // front.
+  // A slot that Flutter populated before is free once it is neither the
+  // front nor the shown slot.
   CHECK(ClearImage(vulkan, texture->slots()[1].image, red), "clear red again");
   CHECK(texture->Present(1, &error), "present red again: %s", error.c_str());
   CHECK(texture->Present(2, &error), "present green again: %s", error.c_str());
-  CHECK(!texture->SlotInUse(1), "a slot never shown is free");
+  CHECK(!texture->SlotInUse(1), "a slot no longer front or shown is free");
   CHECK(ReadShown(&width, &height, pixel), "read green again");
   CHECK(IsColor(pixel, 0, 255, 0), "green again: %d %d %d", pixel[0], pixel[1],
         pixel[2]);
