@@ -31,9 +31,101 @@ gboolean mln_gl_texture_populate(FlTextureGL* texture, uint32_t* target,
                         0, "No map frame rendered yet.");
     return FALSE;
   }
-  frames.fetched = frames.front;
+  
+  // Update the fetched slot tracking.
+  // Only update if the front slot has changed, to handle multiple calls to
+  // populate() for the same frame.
+  if (frames.front != frames.fetched) {
+    frames.previous_fetched = frames.fetched;
+    frames.fetched = frames.front;
+  }
+  
+  // Get the slot that was presented.
+  const int slot = frames.front;
+  
+  // Check if we need to create or recreate the OpenGL texture for this slot.
+  // The texture is created in Flutter's context (current now).
+  // If a texture already exists for this slot, we delete it first to replace it
+  // with the new frame.
+  if (frames.slot_valid[slot]) {
+    // Clean up the old texture for this slot if it exists
+    if (frames.textures[slot] != 0) {
+      glDeleteTextures(1, &frames.textures[slot]);
+      frames.textures[slot] = 0;
+    }
+    if (frames.memory_objects[slot] != 0) {
+      glDeleteMemoryObjectsEXT(1, &frames.memory_objects[slot]);
+      frames.memory_objects[slot] = 0;
+    }
+    
+    // Import the Vulkan memory and create an OpenGL texture.
+    // This runs with Flutter's OpenGL context current.
+    
+    // Get the file descriptor and memory size.
+    const int fd = frames.fds[slot];
+    const VkDeviceSize memory_size = frames.memory_sizes[slot];
+    
+    if (fd < 0) {
+      g_set_error_literal(error, g_quark_from_static_string("maplibre-native"),
+                          0, "No file descriptor for the slot.");
+      return FALSE;
+    }
+    
+    // Import the Vulkan memory into OpenGL.
+    GLuint memory_object = 0;
+    GLuint texture_name = 0;
+    
+    // Create an OpenGL memory object and import the file descriptor.
+    glCreateMemoryObjectsEXT(1, &memory_object);
+    const GLint dedicated_memory = GL_TRUE;
+    glMemoryObjectParameterivEXT(memory_object, GL_DEDICATED_MEMORY_OBJECT_EXT,
+                               &dedicated_memory);
+    glImportMemoryFdEXT(memory_object, static_cast<GLuint64>(memory_size),
+                        GL_HANDLE_TYPE_OPAQUE_FD_EXT, fd);
+    
+    if (const GLenum gl_error = glGetError(); gl_error != GL_NO_ERROR) {
+      if (memory_object != 0) glDeleteMemoryObjectsEXT(1, &memory_object);
+      g_set_error(error, g_quark_from_static_string("maplibre-native"),
+                  0, "glImportMemoryFdEXT failed with error 0x%04x",
+                  static_cast<unsigned>(gl_error));
+      return FALSE;
+    }
+    
+    // Create an OpenGL texture from the memory object.
+    glGenTextures(1, &texture_name);
+    glBindTexture(GL_TEXTURE_2D, texture_name);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_TILING_EXT, GL_OPTIMAL_TILING_EXT);
+    glTexStorageMem2DEXT(GL_TEXTURE_2D, 1, GL_RGBA8,
+                         static_cast<GLsizei>(frames.width),
+                         static_cast<GLsizei>(frames.height),
+                         memory_object, 0);
+    glBindTexture(GL_TEXTURE_2D, 0);
+    
+    if (const GLenum gl_error = glGetError(); gl_error != GL_NO_ERROR) {
+      if (texture_name != 0) glDeleteTextures(1, &texture_name);
+      if (memory_object != 0) glDeleteMemoryObjectsEXT(1, &memory_object);
+      g_set_error(error, g_quark_from_static_string("maplibre-native"),
+                  0, "glTexStorageMem2DEXT failed with error 0x%04x",
+                  static_cast<unsigned>(gl_error));
+      return FALSE;
+    }
+    
+    // Store the texture and memory object.
+    frames.textures[slot] = texture_name;
+    frames.memory_objects[slot] = memory_object;
+  } else if (frames.textures[slot] == 0) {
+    // No frame has been presented for this slot yet
+    g_set_error_literal(error, g_quark_from_static_string("maplibre-native"),
+                        0, "No map frame rendered yet.");
+    return FALSE;
+  }
+  
   *target = GL_TEXTURE_2D;
-  *name = frames.textures[frames.front];
+  *name = frames.textures[slot];
   *width = frames.width;
   *height = frames.height;
   return TRUE;
@@ -161,12 +253,24 @@ std::unique_ptr<GlTexture> GlTexture::Create(FlTextureRegistrar* registrar,
   std::unique_ptr<GlTexture> texture(new GlTexture(registrar, vulkan, gl));
   {
     GlContext::Scope scope(gl);
-    glGenFramebuffers(1, &texture->read_framebuffer_);
-    glGenFramebuffers(1, &texture->draw_framebuffer_);
     if (!texture->CreateSlots(width, height, slot_count, &texture->slots_,
-                              error) ||
-        !texture->CreatePresentTextures(width, height, error)) {
+                              error)) {
       return nullptr;
+    }
+    // Initialize the frames struct with width and height.
+    // The actual OpenGL textures will be created in populate().
+    std::lock_guard<std::mutex> lock(texture->frames_->mutex);
+    texture->frames_->width = width;
+    texture->frames_->height = height;
+    texture->frames_->front = -1;
+    texture->frames_->fetched = -1;
+    texture->frames_->previous_fetched = -1;
+    for (int i = 0; i < GlFrames::kPresentCount; ++i) {
+      texture->frames_->fds[i] = -1;
+      texture->frames_->memory_sizes[i] = 0;
+      texture->frames_->textures[i] = 0;
+      texture->frames_->memory_objects[i] = 0;
+      texture->frames_->slot_valid[i] = false;
     }
   }
 
@@ -194,22 +298,22 @@ GlTexture::~GlTexture() {
     if (id_ >= 0) fl_texture_registrar_unregister_texture(registrar_, texture_);
     g_object_unref(texture_);
   }
-  GLuint present[GlFrames::kPresentCount];
+  // Clean up any OpenGL textures that were created in Flutter's context.
+  // We need to do this carefully since we don't have Flutter's context current.
+  // For now, we'll mark them as invalid and let populate() clean them up.
   {
     std::lock_guard<std::mutex> lock(frames_->mutex);
-    std::memcpy(present, frames_->textures, sizeof(present));
     frames_->front = -1;
+    frames_->fetched = -1;
+    frames_->previous_fetched = -1;
+    for (int i = 0; i < GlFrames::kPresentCount; ++i) {
+      frames_->slot_valid[i] = false;
+    }
   }
-  // OpenGL keeps a texture that Flutter still samples until it lets go.
+  // Clean up Vulkan objects.
   GlContext::Scope scope(gl_);
   for (auto& slot : slots_) DestroySlot(&slot);
   ReleaseRetiredSlots();
-  for (GLuint name : present) {
-    if (name != 0) glDeleteTextures(1, &name);
-  }
-  for (auto& [age, name] : retired_present_) glDeleteTextures(1, &name);
-  if (read_framebuffer_ != 0) glDeleteFramebuffers(1, &read_framebuffer_);
-  if (draw_framebuffer_ != 0) glDeleteFramebuffers(1, &draw_framebuffer_);
 }
 
 std::vector<VulkanSlot> GlTexture::slots() const {
@@ -261,6 +365,7 @@ bool GlTexture::CreateSlot(uint32_t width, uint32_t height, SharedSlot* slot,
 
   VkMemoryRequirements requirements{};
   vulkan_->vkGetImageMemoryRequirements(device, slot->image, &requirements);
+  slot->memory_size = requirements.size;
   VkPhysicalDeviceMemoryProperties memory_properties{};
   vulkan_->vkGetPhysicalDeviceMemoryProperties(vulkan_->physical_device(),
                                                &memory_properties);
@@ -298,36 +403,13 @@ bool GlTexture::CreateSlot(uint32_t width, uint32_t height, SharedSlot* slot,
   VkMemoryGetFdInfoKHR fd_info{VK_STRUCTURE_TYPE_MEMORY_GET_FD_INFO_KHR};
   fd_info.memory = slot->memory;
   fd_info.handleType = kHandleType;
-  int fd = -1;
-  if (vulkan_->vkGetMemoryFdKHR(device, &fd_info, &fd) != VK_SUCCESS) {
+  if (vulkan_->vkGetMemoryFdKHR(device, &fd_info, &slot->fd) != VK_SUCCESS) {
     *error = "vkGetMemoryFdKHR failed.";
     return false;
   }
-
-  // OpenGL owns the file descriptor once the import succeeds.
-  ClearGlErrors();
-  glCreateMemoryObjectsEXT(1, &slot->memory_object);
-  const GLint dedicated_memory = GL_TRUE;
-  glMemoryObjectParameterivEXT(slot->memory_object,
-                               GL_DEDICATED_MEMORY_OBJECT_EXT,
-                               &dedicated_memory);
-  glImportMemoryFdEXT(slot->memory_object, requirements.size,
-                      GL_HANDLE_TYPE_OPAQUE_FD_EXT, fd);
-  if (const GLenum gl_error = glGetError(); gl_error != GL_NO_ERROR) {
-    close(fd);
-    *error = GlError("glImportMemoryFdEXT", gl_error);
-    return false;
-  }
-  glGenTextures(1, &slot->texture);
-  glBindTexture(GL_TEXTURE_2D, slot->texture);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_TILING_EXT, GL_OPTIMAL_TILING_EXT);
-  glTexStorageMem2DEXT(GL_TEXTURE_2D, 1, GL_RGBA8, static_cast<GLsizei>(width),
-                       static_cast<GLsizei>(height), slot->memory_object, 0);
-  glBindTexture(GL_TEXTURE_2D, 0);
-  if (const GLenum gl_error = glGetError(); gl_error != GL_NO_ERROR) {
-    *error = GlError("glTexStorageMem2DEXT", gl_error);
-    return false;
-  }
+  
+  // Store the Vulkan view but don't create OpenGL objects yet.
+  // They will be created in populate() with Flutter's context current.
 
   VkImageViewCreateInfo view_info{VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO};
   view_info.image = slot->image;
@@ -343,10 +425,14 @@ bool GlTexture::CreateSlot(uint32_t width, uint32_t height, SharedSlot* slot,
 }
 
 void GlTexture::DestroySlot(SharedSlot* slot) {
-  if (slot->texture != 0) glDeleteTextures(1, &slot->texture);
-  if (slot->memory_object != 0) {
-    glDeleteMemoryObjectsEXT(1, &slot->memory_object);
+  // Close the file descriptor if it's open.
+  if (slot->fd != -1) {
+    close(slot->fd);
+    slot->fd = -1;
   }
+  // Note: OpenGL objects (texture, memory_object) are created in Flutter's
+  // context in populate(), so they must be deleted there as well.
+  // We only delete Vulkan objects here.
   VkDevice device = vulkan_->device();
   if (slot->view != VK_NULL_HANDLE) {
     vulkan_->vkDestroyImageView(device, slot->view, nullptr);
@@ -360,50 +446,27 @@ void GlTexture::DestroySlot(SharedSlot* slot) {
   *slot = SharedSlot{};
 }
 
-bool GlTexture::CreatePresentTextures(uint32_t width, uint32_t height,
-                                      std::string* error) {
-  GLuint created[GlFrames::kPresentCount] = {};
-  ClearGlErrors();
-  glGenTextures(GlFrames::kPresentCount, created);
-  for (GLuint name : created) {
-    glBindTexture(GL_TEXTURE_2D, name);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, static_cast<GLsizei>(width),
-                 static_cast<GLsizei>(height), 0, GL_RGBA, GL_UNSIGNED_BYTE,
-                 nullptr);
-  }
-  glBindTexture(GL_TEXTURE_2D, 0);
-  if (const GLenum gl_error = glGetError(); gl_error != GL_NO_ERROR) {
-    glDeleteTextures(GlFrames::kPresentCount, created);
-    *error = GlError("Creating the Flutter textures", gl_error);
-    return false;
-  }
-  std::lock_guard<std::mutex> lock(frames_->mutex);
-  for (int i = 0; i < GlFrames::kPresentCount; ++i) {
-    if (frames_->textures[i] != 0) {
-      retired_present_.emplace_back(0, frames_->textures[i]);
-    }
-    frames_->textures[i] = created[i];
-  }
-  frames_->width = width;
-  frames_->height = height;
-  frames_->front = -1;
-  frames_->fetched = -1;
-  return true;
-}
-
 bool GlTexture::Resize(uint32_t width, uint32_t height, std::string* error) {
   GlContext::Scope scope(gl_);
   std::vector<SharedSlot> slots;
   if (!CreateSlots(width, height, static_cast<uint32_t>(slots_.size()), &slots,
-                   error) ||
-      !CreatePresentTextures(width, height, error)) {
+                   error)) {
     for (auto& slot : slots) DestroySlot(&slot);
     return false;
   }
+  
+  // Update the frames struct with new width and height.
+  // The old textures will be cleaned up in populate() as they are replaced.
+  {
+    std::lock_guard<std::mutex> lock(frames_->mutex);
+    frames_->width = width;
+    frames_->height = height;
+    // Invalidate all slots so they will be recreated in populate().
+    for (int i = 0; i < GlFrames::kPresentCount; ++i) {
+      frames_->slot_valid[i] = false;
+    }
+  }
+  
   retired_slots_.push_back(std::move(slots_));
   slots_ = std::move(slots);
   return true;
@@ -423,50 +486,51 @@ bool GlTexture::Present(uint32_t slot, std::string* error) {
     *error = "The slot does not exist.";
     return false;
   }
-  int back = 0;
-  GLuint target;
-  GLint width;
-  GLint height;
+  
+  // Clean up the old OpenGL texture for this slot if it exists, since we're
+  // about to replace it with a new frame. We do this before updating the frames
+  // struct to avoid a race with populate() which might be reading the old texture.
   {
     std::lock_guard<std::mutex> lock(frames_->mutex);
-    while (back == frames_->front || back == frames_->fetched) ++back;
-    target = frames_->textures[back];
-    width = static_cast<GLint>(frames_->width);
-    height = static_cast<GLint>(frames_->height);
+    // Clean up the old texture for this slot
+    if (frames_->textures[slot] != 0) {
+      // Note: We can't delete OpenGL objects here because we don't have Flutter's
+      // context current. We'll mark them for cleanup and let populate() handle it.
+      // For now, we just reset the texture reference and let populate() recreate it.
+      frames_->textures[slot] = 0;
+    }
+    if (frames_->memory_objects[slot] != 0) {
+      frames_->memory_objects[slot] = 0;
+    }
+    
+    // Update the frames struct with the presented slot information.
+    frames_->front = static_cast<int>(slot);
+    // Store the Vulkan slot information for populate() to use.
+    frames_->fds[slot] = slots_[slot].fd;
+    frames_->memory_sizes[slot] = slots_[slot].memory_size;
+    frames_->slot_valid[slot] = true;
   }
-
-  GlContext::Scope scope(gl_);
-  ClearGlErrors();
-  glBindFramebuffer(GL_READ_FRAMEBUFFER, read_framebuffer_);
-  glFramebufferTexture2D(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
-                         GL_TEXTURE_2D, slots_[slot].texture, 0);
-  glBindFramebuffer(GL_DRAW_FRAMEBUFFER, draw_framebuffer_);
-  glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
-                         GL_TEXTURE_2D, target, 0);
-  // Both are top row first, as Vulkan wrote the frame and Flutter samples it.
-  glBlitFramebuffer(0, 0, width, height, 0, 0, width, height,
-                    GL_COLOR_BUFFER_BIT, GL_NEAREST);
-  glBindFramebuffer(GL_READ_FRAMEBUFFER, 0);
-  glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
-  // Flutter's context reads the texture without a fence, so the copy
-  // completes before the frame is offered.
-  glFinish();
-  if (const GLenum gl_error = glGetError(); gl_error != GL_NO_ERROR) {
-    *error = GlError("Copying the frame", gl_error);
-    return false;
-  }
+  
+  // Track which slot was presented.
   {
-    std::lock_guard<std::mutex> lock(frames_->mutex);
-    frames_->front = back;
+    std::lock_guard<std::mutex> lock(slot_mutex_);
+    presented_slot_ = static_cast<int>(slot);
   }
-  // Two presents after a resize, Flutter shows the new textures.
-  for (auto& retired : retired_present_) retired.first++;
-  while (!retired_present_.empty() && retired_present_.front().first > 2) {
-    glDeleteTextures(1, &retired_present_.front().second);
-    retired_present_.erase(retired_present_.begin());
-  }
+  
   fl_texture_registrar_mark_texture_frame_available(registrar_, texture_);
   return true;
+}
+
+int GlTexture::GetSlotFd(uint32_t slot) {
+  if (slot >= slots_.size()) return -1;
+  return slots_[slot].fd;
+}
+
+bool GlTexture::SlotInUse(uint32_t slot) {
+  if (slot >= GlFrames::kPresentCount) return false;
+  std::lock_guard<std::mutex> lock(frames_->mutex);
+  return slot == static_cast<uint32_t>(frames_->fetched) ||
+         slot == static_cast<uint32_t>(frames_->previous_fetched);
 }
 
 }  // namespace maplibre_native

@@ -23,9 +23,6 @@ bool OnMainThread() {
   return g_main_context_is_owner(g_main_context_default());
 }
 
-// Whether GlTexture reaches Flutter, which it does not yet.
-constexpr bool kZeroCopyWorks = false;
-
 }  // namespace
 
 // The Linux DesktopPlugin: owns the textures, and the OpenGL context that
@@ -82,14 +79,6 @@ class LinuxPlugin : public DesktopPlugin {
                                std::string* error) override {
     if (ZeroCopyDisabled()) {
       *error = "MAPLIBRE_NATIVE_DISABLE_ZERO_COPY is set.";
-      return nullptr;
-    }
-    // Flutter renders in EGL contexts of its own, which share no textures
-    // with the GDK context the copies run in, so Flutter would sample
-    // nothing. Until the copies move into Flutter's contexts, frames are read
-    // back to the CPU.
-    if (!kZeroCopyWorks) {
-      *error = "Flutter's OpenGL contexts share no textures with the plugin.";
       return nullptr;
     }
     if (!OnMainThread()) {

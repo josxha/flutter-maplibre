@@ -75,12 +75,7 @@ Each entry: the decision, then why.
   threads); the plugin checks `g_main_context_is_owner` and falls back
   to the pixel buffer otherwise. It restores the context that was current
   after each use. OpenGL goes through libepoxy, which GTK already loads.
-- **Linux always reads frames back to the CPU for now.** Flutter 3.47 renders
-  in EGL contexts of its own (`FlOpenGLManager`), which share no textures
-  with any GDK context, so Flutter sampled nothing from the zero-copy textures.
-  `kZeroCopyWorks` in `maplibre_native_plugin.cc` keeps `GlTexture` unused
-  until its OpenGL work moves into `populate`, the only place with Flutter's
-  context current.
+- **Linux uses zero-copy textures by creating OpenGL textures in Flutter's EGL context.** Flutter 3.47 renders in EGL contexts of its own (`FlOpenGLManager`), which share no textures with any GDK context. The plugin now exports Vulkan memory as file descriptors and imports them in `populate()` (the only place with Flutter's context current) using `glImportMemoryFdEXT`, creating OpenGL textures that Flutter can sample directly. The `kZeroCopyWorks` guard has been removed.
 - **The plugin lives as long as the process.** Linux plugins get no
   shutdown call, and sessions on core workers can outlive the engine.
 

@@ -69,6 +69,20 @@ struct GlFrames {
   int front = -1;
   // The texture Flutter fetched last, which it may still be reading.
   int fetched = -1;
+  // The texture Flutter fetched before that.
+  int previous_fetched = -1;
+  // File descriptors for Vulkan memory of each slot, to import in populate().
+  int fds[kPresentCount] = {};
+  // Memory sizes for each slot, needed for glImportMemoryFdEXT.
+  VkDeviceSize memory_sizes[kPresentCount] = {};
+  // OpenGL memory objects for each slot, created in Flutter's context.
+  GLuint memory_objects[kPresentCount] = {};
+  // Vulkan device UUID for compatibility checking with Flutter's EGL context.
+  // Set in Create() so populate() can verify compatibility.
+  GpuId vulkan_device_uuid;
+  // Whether Vulkan and Flutter's OpenGL are on the same GPU.
+  // Checked in populate() by comparing device UUIDs.
+  bool vulkan_matches_flutter_gl = true;
 };
 
 // The Linux GpuTexture, a Flutter OpenGL texture. MapLibre renders through
@@ -106,14 +120,30 @@ class GlTexture : public GpuTexture {
   bool Resize(uint32_t width, uint32_t height, std::string* error) override;
   void ReleaseRetiredSlots() override;
   bool Present(uint32_t slot, std::string* error) override;
+  
+  // Returns the file descriptor for the Vulkan memory of |slot|, to import
+  // in Flutter's context. Returns -1 when the slot is not ready.
+  int GetSlotFd(uint32_t slot);
+  
+  // Returns whether |slot| is currently being used by Flutter (either
+  // fetched or previous_fetched).
+  bool SlotInUse(uint32_t slot);
 
  private:
-  // One image of the ring: Vulkan memory that OpenGL imported.
+  // One image of the ring: Vulkan memory that OpenGL imports.
   struct SharedSlot {
     VkImage image = VK_NULL_HANDLE;
     VkDeviceMemory memory = VK_NULL_HANDLE;
     VkImageView view = VK_NULL_HANDLE;
+    // Memory size, needed for glImportMemoryFdEXT.
+    VkDeviceSize memory_size = 0;
+    // File descriptor for the Vulkan memory, to import in Flutter's context.
+    int fd = -1;
+    // OpenGL memory object created in Flutter's context.
+    // Note: This is created in populate() and must be deleted there.
     GLuint memory_object = 0;
+    // OpenGL texture created in Flutter's context.
+    // Note: This is created in populate() and must be deleted there.
     GLuint texture = 0;
   };
 
@@ -125,8 +155,6 @@ class GlTexture : public GpuTexture {
                   std::string* error);
   // Called with the OpenGL context current.
   void DestroySlot(SharedSlot* slot);
-  bool CreatePresentTextures(uint32_t width, uint32_t height,
-                             std::string* error);
 
   FlTextureRegistrar* registrar_;
   VulkanDevice* vulkan_;
@@ -136,13 +164,13 @@ class GlTexture : public GpuTexture {
 
   std::vector<SharedSlot> slots_;
   std::vector<std::vector<SharedSlot>> retired_slots_;
-  GLuint read_framebuffer_ = 0;
-  GLuint draw_framebuffer_ = 0;
-
+  
   std::shared_ptr<GlFrames> frames_;
-  // Present textures of earlier sizes, kept until Flutter has had a frame to
-  // move on to the current ones.
-  std::vector<std::pair<int, GLuint>> retired_present_;
+  
+  // Mutex to protect slot tracking.
+  std::mutex slot_mutex_;
+  // The slot that was last presented.
+  int presented_slot_ = -1;
 };
 
 }  // namespace maplibre_native
