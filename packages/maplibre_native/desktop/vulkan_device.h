@@ -59,6 +59,9 @@ class VulkanDevice {
   // exported to OpenGL needs the same driver on both sides.
   const uint8_t* driver_uuid() const { return driver_uuid_; }
 
+  // The VkPhysicalDeviceIDProperties::deviceUUID of the device.
+  const uint8_t* device_uuid() const { return device_uuid_; }
+
   // Device functions for images whose memory is shared.
   PFN_vkCreateImage vkCreateImage = nullptr;
   PFN_vkDestroyImage vkDestroyImage = nullptr;
@@ -93,6 +96,7 @@ class VulkanDevice {
   uint32_t queue_family_index_ = 0;
   bool shares_memory_ = false;
   bool matches_gpu_ = false;
+  uint8_t device_uuid_[VK_UUID_SIZE] = {};
   uint8_t driver_uuid_[VK_UUID_SIZE] = {};
 };
 

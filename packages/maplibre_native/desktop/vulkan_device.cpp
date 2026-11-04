@@ -216,6 +216,7 @@ bool VulkanDevice::Create(const GpuId* gpu, std::string* error) {
       properties.pNext = &id;
       vkGetPhysicalDeviceProperties2(physical_device, &properties);
       matches_gpu_ = MatchesGpu(id, gpu);
+      std::memcpy(device_uuid_, id.deviceUUID, VK_UUID_SIZE);
       std::memcpy(driver_uuid_, id.driverUUID, VK_UUID_SIZE);
       break;
     }

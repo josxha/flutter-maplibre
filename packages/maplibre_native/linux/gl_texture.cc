@@ -281,7 +281,8 @@ std::unique_ptr<GlTexture> GlTexture::Create(FlTextureRegistrar* registrar,
     texture->frames_->fetched = -1;
     texture->frames_->previous_fetched = -1;
     // Store Vulkan device UUID for compatibility checking in populate()
-    texture->frames_->vulkan_device_uuid = vulkan->device_uuid();
+    std::memcpy(texture->frames_->vulkan_device_uuid.bytes, vulkan->device_uuid(), VK_UUID_SIZE);
+    texture->frames_->vulkan_device_uuid.size = VK_UUID_SIZE;
     for (int i = 0; i < GlFrames::kPresentCount; ++i) {
       texture->frames_->fds[i] = -1;
       texture->frames_->memory_sizes[i] = 0;
