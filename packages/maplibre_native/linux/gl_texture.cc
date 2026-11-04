@@ -65,6 +65,21 @@ gboolean mln_gl_texture_populate(FlTextureGL* texture, uint32_t* target,
     const int fd = frames.fds[slot];
     const VkDeviceSize memory_size = frames.memory_sizes[slot];
     
+    // Verify that Vulkan and Flutter's OpenGL are on the same GPU by comparing
+    // device UUIDs. The Vulkan device UUID was stored in frames during Create().
+    // If they don't match, the import will fail, so we check here and return an
+    // error that will cause Flutter to fall back to CPU readback.
+    GpuId flutter_gl_device_uuid;
+    glGetUnsignedBytei_vEXT(GL_DEVICE_UUID_EXT, 0, flutter_gl_device_uuid.bytes);
+    flutter_gl_device_uuid.size = VK_UUID_SIZE;
+    
+    if (std::memcmp(flutter_gl_device_uuid.bytes, frames.vulkan_device_uuid.bytes,
+                   VK_UUID_SIZE) != 0) {
+      g_set_error_literal(error, g_quark_from_static_string("maplibre-native"),
+                          0, "Vulkan and Flutter's OpenGL are on different GPUs.");
+      return FALSE;
+    }
+    
     if (fd < 0) {
       g_set_error_literal(error, g_quark_from_static_string("maplibre-native"),
                           0, "No file descriptor for the slot.");
@@ -265,6 +280,8 @@ std::unique_ptr<GlTexture> GlTexture::Create(FlTextureRegistrar* registrar,
     texture->frames_->front = -1;
     texture->frames_->fetched = -1;
     texture->frames_->previous_fetched = -1;
+    // Store Vulkan device UUID for compatibility checking in populate()
+    texture->frames_->vulkan_device_uuid = vulkan->device_uuid();
     for (int i = 0; i < GlFrames::kPresentCount; ++i) {
       texture->frames_->fds[i] = -1;
       texture->frames_->memory_sizes[i] = 0;
