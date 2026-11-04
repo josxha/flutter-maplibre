@@ -1,9 +1,13 @@
-// Checks GlTexture of the Linux plugin outside Flutter: a GDK OpenGL context
-// from a real GTK window, the plugin's Vulkan device on the OpenGL device, a
-// ring of exported Vulkan images imported into OpenGL, and the present copy.
-// Vulkan clears a slot to a color, Present copies it, and the texture that
-// populate hands to Flutter is read back. Run it with run_gl_texture_test.sh.
+// Checks GlTexture of the Linux plugin outside Flutter: the GPU IDs from a
+// GDK OpenGL context of a real GTK window, the plugin's Vulkan device on that
+// GPU, and a ring of exported Vulkan images that populate imports. As in
+// Flutter, populate runs in an EGL context of its own that shares nothing
+// with GDK's. Vulkan clears a slot to a color, Present hands it over, and the
+// texture that populate returns is read back in that context. Run it with
+// run_gl_texture_test.sh.
+#include <epoxy/egl.h>
 #include <epoxy/gl.h>
+#include <gdk/gdkx.h>
 #include <flutter_linux/flutter_linux.h>
 #include <gtk/gtk.h>
 
@@ -44,7 +48,7 @@ gboolean fl_texture_registrar_unregister_texture(FlTextureRegistrar*,
 }
 int64_t fl_texture_get_id(FlTexture*) { return 1; }
 
-using maplibre_native::GlContext;
+using maplibre_native::GlDevice;
 using maplibre_native::GlTexture;
 using maplibre_native::VulkanDevice;
 
@@ -123,28 +127,82 @@ static bool ClearImage(VulkanDevice* vulkan, VkImage image,
   return ok;
 }
 
-// What Flutter would sample: populate's texture, read back in |gl|.
-static bool ReadShown(GlContext* gl, uint32_t* width, uint32_t* height,
-                      uint8_t out[4]) {
-  if (g_registered == nullptr) return false;
-  uint32_t target = 0, name = 0;
-  *width = *height = 0;
-  if (!FL_TEXTURE_GL_GET_CLASS(g_registered)
-           ->populate(FL_TEXTURE_GL(g_registered), &target, &name, width,
-                      height, nullptr)) {
+// Flutter's render context as FlOpenGLManager creates it: an EGL context on
+// the window's display that requests OpenGL ES 2 and shares nothing.
+struct FlutterContext {
+  EGLDisplay display = EGL_NO_DISPLAY;
+  EGLContext context = EGL_NO_CONTEXT;
+
+  bool Create() {
+    display = eglGetPlatformDisplayEXT(
+        EGL_PLATFORM_X11_EXT,
+        gdk_x11_display_get_xdisplay(gdk_display_get_default()), nullptr);
+    if (display == EGL_NO_DISPLAY || !eglInitialize(display, nullptr, nullptr)) {
+      return false;
+    }
+    const EGLint config_attributes[] = {
+        EGL_RED_SIZE,   8, EGL_GREEN_SIZE,   8, EGL_BLUE_SIZE, 8,
+        EGL_ALPHA_SIZE, 8, EGL_DEPTH_SIZE,   8, EGL_STENCIL_SIZE, 8,
+        EGL_NONE};
+    EGLConfig config = nullptr;
+    EGLint count = 0;
+    eglChooseConfig(display, config_attributes, &config, 1, &count);
+    const EGLint context_attributes[] = {EGL_CONTEXT_CLIENT_VERSION, 2,
+                                         EGL_NONE};
+    context = eglCreateContext(display, config, EGL_NO_CONTEXT,
+                               context_attributes);
+    return context != EGL_NO_CONTEXT;
+  }
+
+  bool MakeCurrent() {
+    return eglMakeCurrent(display, EGL_NO_SURFACE, EGL_NO_SURFACE, context) ==
+           EGL_TRUE;
+  }
+};
+
+static FlutterContext g_flutter;
+
+// Calls populate of |texture| as Flutter's raster thread does.
+static bool Populate(FlTexture* texture, uint32_t* name, uint32_t* width,
+                     uint32_t* height) {
+  uint32_t target = 0;
+  GError* error = nullptr;
+  const gboolean ok =
+      FL_TEXTURE_GL_GET_CLASS(texture)->populate(FL_TEXTURE_GL(texture),
+                                                 &target, name, width, height,
+                                                 &error);
+  // Flutter's engine reads the error whenever populate fails.
+  const bool error_set = error != nullptr;
+  g_clear_error(&error);
+  if (!ok) {
+    CHECK(error_set, "populate failed without an error");
     return false;
   }
-  GlContext::Scope scope(gl);
+  CHECK(target == GL_TEXTURE_2D, "target");
+  return true;
+}
+
+// What Flutter would sample: populate's texture, read back in Flutter's
+// context.
+static bool ReadShown(uint32_t* width, uint32_t* height, uint8_t out[4]) {
+  if (g_registered == nullptr) return false;
+  uint32_t name = 0;
+  *width = *height = 0;
+  if (!Populate(g_registered, &name, width, height)) return false;
   GLuint framebuffer;
   glGenFramebuffers(1, &framebuffer);
   glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
-  glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, target, name,
-                         0);
+  glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D,
+                         name, 0);
   glReadPixels(static_cast<GLint>(*width / 2), static_cast<GLint>(*height / 2),
                1, 1, GL_RGBA, GL_UNSIGNED_BYTE, out);
   glBindFramebuffer(GL_FRAMEBUFFER, 0);
   glDeleteFramebuffers(1, &framebuffer);
   return glGetError() == GL_NO_ERROR;
+}
+
+static bool IsColor(const uint8_t pixel[4], uint8_t r, uint8_t g, uint8_t b) {
+  return pixel[0] == r && pixel[1] == g && pixel[2] == b && pixel[3] == 255;
 }
 
 int main(int argc, char** argv) {
@@ -155,15 +213,10 @@ int main(int argc, char** argv) {
   while (gtk_events_pending()) gtk_main_iteration();
 
   std::string error;
-  auto gl = GlContext::Create(reinterpret_cast<FlView*>(window), &error);
+  auto gl = GlDevice::Create(reinterpret_cast<FlView*>(window), &error);
   if (!gl) {
-    std::printf("FAIL: GlContext::Create: %s\n", error.c_str());
+    std::printf("FAIL: GlDevice::Create: %s\n", error.c_str());
     return 1;
-  }
-  {
-    GlContext::Scope scope(gl.get());
-    std::printf("GL: %s | %s\n", glGetString(GL_RENDERER),
-                glGetString(GL_VERSION));
   }
   VulkanDevice* vulkan = VulkanDevice::Get(&gl->device_uuid(), &error);
   if (vulkan == nullptr) {
@@ -174,6 +227,12 @@ int main(int argc, char** argv) {
               vulkan->shares_memory(), vulkan->matches_gpu(),
               std::memcmp(vulkan->driver_uuid(), gl->driver_uuid(),
                           VK_UUID_SIZE) == 0);
+  if (!g_flutter.Create() || !g_flutter.MakeCurrent()) {
+    std::printf("FAIL: creating the stand-in for Flutter's EGL context\n");
+    return 1;
+  }
+  std::printf("Flutter's context: %s | %s\n", glGetString(GL_RENDERER),
+              glGetString(GL_VERSION));
 
   auto texture = GlTexture::Create(nullptr, vulkan, gl.get(), 64, 32, 3,
                                    &error);
@@ -184,42 +243,85 @@ int main(int argc, char** argv) {
   CHECK(texture->id() == 1, "texture id");
   CHECK(texture->slots().size() == 3, "slot count");
   CHECK(texture->format() == VK_FORMAT_R8G8B8A8_UNORM, "format");
+  for (uint32_t slot = 0; slot < 3; ++slot) {
+    CHECK(!texture->SlotInUse(slot), "slot %u in use before a frame", slot);
+  }
 
   uint32_t width, height;
   uint8_t pixel[4];
-  CHECK(!ReadShown(gl.get(), &width, &height, pixel),
-        "populate before the first frame");
+  CHECK(!ReadShown(&width, &height, pixel), "populate before the first frame");
 
   const float red[4] = {1, 0, 0, 1};
+  const float green[4] = {0, 1, 0, 1};
+  const float blue[4] = {0, 0, 1, 1};
   CHECK(ClearImage(vulkan, texture->slots()[1].image, red), "clear red");
   CHECK(texture->Present(1, &error), "present: %s", error.c_str());
-  CHECK(ReadShown(gl.get(), &width, &height, pixel), "read after present");
+  CHECK(texture->SlotInUse(1), "the front slot is in use");
+  CHECK(ReadShown(&width, &height, pixel), "read after present");
   std::printf("shown %ux%u: %d %d %d %d\n", width, height, pixel[0], pixel[1],
               pixel[2], pixel[3]);
   CHECK(width == 64 && height == 32, "size");
-  CHECK(pixel[0] == 255 && pixel[1] == 0 && pixel[2] == 0 && pixel[3] == 255,
-        "red frame");
+  CHECK(IsColor(pixel, 255, 0, 0), "red frame");
 
-  // Resizing replaces the ring; the old one stays until it is released.
+  // The shown slot stays in use after the next present, until Flutter has
+  // moved on and its draws are done.
+  CHECK(ClearImage(vulkan, texture->slots()[2].image, green), "clear green");
+  CHECK(texture->Present(2, &error), "present green: %s", error.c_str());
+  CHECK(texture->SlotInUse(1), "the shown slot is in use");
+  CHECK(!texture->SlotInUse(0), "the free slot is not in use");
+  CHECK(ReadShown(&width, &height, pixel), "read green");
+  CHECK(IsColor(pixel, 0, 255, 0), "green frame: %d %d %d", pixel[0],
+        pixel[1], pixel[2]);
+  CHECK(ClearImage(vulkan, texture->slots()[0].image, blue), "clear blue");
+  CHECK(texture->Present(0, &error), "present blue: %s", error.c_str());
+  CHECK(ReadShown(&width, &height, pixel), "read blue");
+  CHECK(IsColor(pixel, 0, 0, 255), "blue frame: %d %d %d", pixel[0], pixel[1],
+        pixel[2]);
+  // Populate waited for the fence of the slot before last.
+  CHECK(!texture->SlotInUse(1), "a slot two frames back is free");
+  CHECK(texture->SlotInUse(0), "the shown slot is in use");
+
+  // A slot that Flutter never populated is free once it is no longer the
+  // front.
+  CHECK(ClearImage(vulkan, texture->slots()[1].image, red), "clear red again");
+  CHECK(texture->Present(1, &error), "present red again: %s", error.c_str());
+  CHECK(texture->Present(2, &error), "present green again: %s", error.c_str());
+  CHECK(!texture->SlotInUse(1), "a slot never shown is free");
+  CHECK(ReadShown(&width, &height, pixel), "read green again");
+  CHECK(IsColor(pixel, 0, 255, 0), "green again: %d %d %d", pixel[0], pixel[1],
+        pixel[2]);
+
+  // Resizing replaces the ring; Flutter's next populate deletes the old one.
   CHECK(texture->Resize(128, 48, &error), "resize: %s", error.c_str());
   texture->ReleaseRetiredSlots();
-  const float blue[4] = {0, 0, 1, 1};
+  CHECK(!texture->SlotInUse(2), "a new slot is free");
   CHECK(ClearImage(vulkan, texture->slots()[2].image, blue), "clear blue");
-  for (int i = 0; i < 4; ++i) {
-    CHECK(texture->Present(2, &error), "present %d: %s", i, error.c_str());
-  }
-  CHECK(ReadShown(gl.get(), &width, &height, pixel), "read after resize");
+  CHECK(texture->Present(2, &error), "present after resize: %s",
+        error.c_str());
+  CHECK(ReadShown(&width, &height, pixel), "read after resize");
   std::printf("shown %ux%u: %d %d %d %d\n", width, height, pixel[0], pixel[1],
               pixel[2], pixel[3]);
   CHECK(width == 128 && height == 48, "resized size");
-  CHECK(pixel[0] == 0 && pixel[1] == 0 && pixel[2] == 255 && pixel[3] == 255,
-        "blue frame");
-  CHECK(g_frames_available == 5, "frames marked available: %d",
+  CHECK(IsColor(pixel, 0, 0, 255), "blue frame after resize");
+  CHECK(g_frames_available == 6, "frames marked available: %d",
         g_frames_available);
   CHECK(!texture->Present(3, &error), "present of a missing slot");
+  CHECK(!texture->SlotInUse(3), "a missing slot is not in use");
 
+  // A disposed texture's objects go with the populate of another texture.
   texture.reset();
   CHECK(g_registered == nullptr, "unregistered");
+  auto other = GlTexture::Create(nullptr, vulkan, gl.get(), 16, 16, 3, &error);
+  CHECK(other != nullptr, "second texture: %s", error.c_str());
+  if (other) {
+    CHECK(ClearImage(vulkan, other->slots()[0].image, red), "clear other");
+    CHECK(other->Present(0, &error), "present other: %s", error.c_str());
+    CHECK(ReadShown(&width, &height, pixel), "read other");
+    CHECK(IsColor(pixel, 255, 0, 0), "other texture red");
+    other.reset();
+  }
+  CHECK(glGetError() == GL_NO_ERROR, "OpenGL errors in Flutter's context");
+
   std::printf(g_failures == 0 ? "PASS\n" : "%d FAILURES\n", g_failures);
   return g_failures == 0 ? 0 : 1;
 }

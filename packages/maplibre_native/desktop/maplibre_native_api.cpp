@@ -218,6 +218,15 @@ bool maplibre_native_present_gpu_texture(int64_t texture_id, uint32_t slot,
   return true;
 }
 
+bool maplibre_native_gpu_texture_slot_in_use(int64_t texture_id,
+                                             uint32_t slot) {
+  auto lock = DesktopPlugin::Lock();
+  DesktopPlugin* plugin = DesktopPlugin::Instance();
+  GpuTexture* texture =
+      plugin != nullptr ? plugin->FindGpuTexture(texture_id) : nullptr;
+  return texture != nullptr && texture->SlotInUse(slot);
+}
+
 void maplibre_native_dispose_texture(int64_t texture_id) {
   auto lock = DesktopPlugin::Lock();
   if (DesktopPlugin* plugin = DesktopPlugin::Instance()) {

@@ -80,9 +80,17 @@ MAPLIBRE_NATIVE_EXPORT bool maplibre_native_resize_gpu_texture(
 MAPLIBRE_NATIVE_EXPORT void maplibre_native_release_retired_slots(
     int64_t texture_id);
 
-// Copies the finished frame in |slot| into the texture Flutter shows next.
+// Hands the finished frame in |slot| to Flutter. Windows copies it into the
+// texture Flutter shows before this returns; Linux has Flutter sample the
+// slot, which stays in use until maplibre_native_gpu_texture_slot_in_use
+// reports it free.
 MAPLIBRE_NATIVE_EXPORT bool maplibre_native_present_gpu_texture(
     int64_t texture_id, uint32_t slot, char* error, size_t error_size);
+
+// Whether Flutter may still sample |slot| of a GPU texture. Always false on
+// Windows, and for a texture that does not exist.
+MAPLIBRE_NATIVE_EXPORT bool maplibre_native_gpu_texture_slot_in_use(
+    int64_t texture_id, uint32_t slot);
 
 // Unregisters a texture of either kind.
 MAPLIBRE_NATIVE_EXPORT void maplibre_native_dispose_texture(int64_t texture_id);

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:maplibre_native/src/desktop/desktop_plugin.dart';
 import 'package:maplibre_native/src/frame_target.dart';
@@ -39,8 +41,10 @@ FrameTarget createDesktopTarget(LogicalExtent extent) {
   return _PixelBufferTarget(context, DesktopPlugin.createPixelTexture());
 }
 
-/// A ring of Vulkan images whose memory Flutter's graphics API shares. Each
-/// frame is copied on the GPU into the texture Flutter shows.
+/// A ring of Vulkan images whose memory Flutter's graphics API shares. On
+/// Windows each frame is copied on the GPU into the texture Flutter shows; on
+/// Linux Flutter samples the slot itself, so frames are held until their
+/// slots are free.
 final class _VulkanTextureTarget
     extends BorrowedRingTarget<VulkanBorrowedTexture> {
   _VulkanTextureTarget(this._context, GpuTexture texture)
@@ -49,6 +53,9 @@ final class _VulkanTextureTarget
 
   final VulkanContextDescriptor _context;
   final int _format;
+
+  @override
+  bool get holdsFrames => Platform.isLinux;
 
   VulkanBorrowedTextureDescriptor _descriptor(LogicalExtent extent) {
     final (width, height) = physicalSize(extent);
@@ -88,6 +95,9 @@ final class _VulkanTextureTarget
   @override
   void presentSlot(int slot) =>
       DesktopPlugin.presentGpuTexture(textureId, slot);
+
+  @override
+  bool slotInUse(int slot) => DesktopPlugin.slotInUse(textureId, slot);
 
   @override
   void disposeTexture() => DesktopPlugin.disposeTexture(textureId);

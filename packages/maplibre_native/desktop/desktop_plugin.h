@@ -19,8 +19,8 @@ struct VulkanSlot {
 
 // A Flutter texture that shows MapLibre frames without a CPU copy. MapLibre
 // renders into a ring of Vulkan images whose memory Flutter's graphics API
-// shares, and each presented frame is copied on the GPU into a texture that
-// Flutter samples.
+// shares. On Windows each presented frame is copied on the GPU into a texture
+// that Flutter samples; on Linux Flutter samples the presented slot itself.
 class GpuTexture {
  public:
   virtual ~GpuTexture() = default;
@@ -40,9 +40,13 @@ class GpuTexture {
   // Releases the rings that Resize replaced.
   virtual void ReleaseRetiredSlots() = 0;
 
-  // Copies the frame in |slot| into the texture Flutter shows and marks it
-  // available. The frame's GPU writes must be complete.
+  // Hands the frame in |slot| to Flutter and marks it available. The frame's
+  // GPU writes must be complete.
   virtual bool Present(uint32_t slot, std::string* error) = 0;
+
+  // Whether Flutter may still sample |slot|, so that MapLibre must not render
+  // into it yet. False where Present copies the frame before it returns.
+  virtual bool SlotInUse(uint32_t slot) const { return false; }
 };
 
 // The Windows or Linux plugin behind the C API in

@@ -23,13 +23,10 @@ bool OnMainThread() {
   return g_main_context_is_owner(g_main_context_default());
 }
 
-// Whether GlTexture reaches Flutter, which it does not yet.
-constexpr bool kZeroCopyWorks = false;
-
 }  // namespace
 
-// The Linux DesktopPlugin: owns the textures, and the OpenGL context that
-// shares them with Flutter's.
+// The Linux DesktopPlugin: owns the textures, and the IDs of the GPU that
+// OpenGL renders Flutter's window on.
 class LinuxPlugin : public DesktopPlugin {
  public:
   explicit LinuxPlugin(FlPluginRegistrar* registrar)
@@ -84,19 +81,9 @@ class LinuxPlugin : public DesktopPlugin {
       *error = "MAPLIBRE_NATIVE_DISABLE_ZERO_COPY is set.";
       return nullptr;
     }
-    // Flutter renders in EGL contexts of its own, which share no textures
-    // with the GDK context the copies run in, so Flutter would sample
-    // nothing. Until the copies move into Flutter's contexts, frames are read
-    // back to the CPU.
-    if (!kZeroCopyWorks) {
-      *error = "Flutter's OpenGL contexts share no textures with the plugin.";
-      return nullptr;
-    }
-    if (!OnMainThread()) {
-      *error = "Dart does not run on the GTK main thread, which OpenGL "
-               "copies need.";
-      return nullptr;
-    }
+    // The GPU IDs are read on the main thread once; the textures need no
+    // OpenGL context of their own, as populate imports their memory into
+    // Flutter's.
     VulkanDevice* vulkan = GetVulkan(error);
     if (vulkan == nullptr) return nullptr;
     if (!gl_) {
@@ -121,21 +108,22 @@ class LinuxPlugin : public DesktopPlugin {
   }
 
  private:
-  // Creates the OpenGL context once, on the main thread.
+  // Reads the GPU IDs once, on the main thread.
   void EnsureGl() {
     if (gl_tried_ || !OnMainThread()) return;
     gl_tried_ = true;
-    gl_ = GlContext::Create(view_, &gl_error_);
+    gl_ = GlDevice::Create(view_, &gl_error_);
   }
 
   FlTextureRegistrar* textures_;
   // Cleared when Flutter destroys the view.
   FlView* view_;
-  std::unique_ptr<GlContext> gl_;
+  std::unique_ptr<GlDevice> gl_;
   bool gl_tried_ = false;
-  std::string gl_error_ = "OpenGL is only used on the GTK main thread.";
+  std::string gl_error_ =
+      "The GPU is only queried on the GTK main thread, and Dart did not call "
+      "the plugin there first.";
   std::map<int64_t, std::unique_ptr<PixelTexture>> pixel_textures_;
-  // Declared after gl_, so its textures go first.
   std::map<int64_t, std::unique_ptr<GlTexture>> gpu_textures_;
 };
 

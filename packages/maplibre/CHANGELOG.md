@@ -4,8 +4,9 @@
 
 - Linux: fix a crash when Flutter paints a map before its first frame
   ([#632](https://github.com/josxha/flutter-maplibre/issues/632)).
-- Linux: maps show their frames. Until zero-copy textures work with Flutter's
-  OpenGL contexts, frames are read back to the CPU.
+- Linux: maps show their frames, without a CPU copy where OpenGL can import
+  Vulkan memory
+  ([#633](https://github.com/josxha/flutter-maplibre/issues/633)).
 
 ## 0.4.0-pre.1
 

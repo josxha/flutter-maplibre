@@ -29,9 +29,9 @@ Flutter MapLibre: a federated plugin in a Dart pub workspace.
     and the C API `desktop/include/maplibre_native/maplibre_native_api.h`,
     bound in `lib/src/desktop/bindings.g.dart`.
   - `windows/`: C++ plugin (D3D11 shared textures).
-  - `linux/`: C++ GTK plugin (frames read back into an
-    `FlPixelBufferTexture`; its zero-copy `FlTextureGL` waits for its OpenGL
-    work to move into Flutter's contexts).
+  - `linux/`: C++ GTK plugin (an `FlTextureGL` whose `populate` imports the
+    Vulkan ring into Flutter's OpenGL context and samples it directly, with
+    fences for the slots Flutter left).
   - `android/`: Kotlin plugin and JNI shim (SurfaceProducer surfaces as EGL
     surfaces on one shared render thread, or as Vulkan surfaces of its own
     device). Its API is `MaplibreNativeApi.kt`, bound in

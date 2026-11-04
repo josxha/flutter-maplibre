@@ -146,7 +146,9 @@ final class DesktopPlugin {
   static void releaseRetiredSlots(int textureId) =>
       _bindings.maplibre_native_release_retired_slots(textureId);
 
-  /// Copies the finished frame in [slot] into the texture Flutter shows next.
+  /// Hands the finished frame in [slot] to Flutter: Windows copies it into
+  /// the texture Flutter shows, and Linux has Flutter sample the slot until
+  /// [slotInUse] reports it free.
   static void presentGpuTexture(int textureId, int slot) => using((arena) {
     final error = arena<Char>(pluginErrorSize);
     if (!_bindings.maplibre_native_present_gpu_texture(
@@ -158,6 +160,11 @@ final class DesktopPlugin {
       throw StateError(_message(error));
     }
   });
+
+  /// Whether Flutter may still sample [slot] of a GPU texture. Always false
+  /// on Windows.
+  static bool slotInUse(int textureId, int slot) =>
+      _bindings.maplibre_native_gpu_texture_slot_in_use(textureId, slot);
 
   /// Unregisters a texture of either kind.
   static void disposeTexture(int textureId) =>

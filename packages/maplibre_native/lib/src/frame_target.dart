@@ -1,8 +1,14 @@
+import 'dart:async';
+
 import 'package:maplibre_native_ffi/maplibre_native_ffi.dart';
 
 /// Ring depth of a zero-copy texture: one slot Flutter shows, one MapLibre
 /// renders into, and one spare.
 const gpuSlotCount = 3;
+
+/// How often a target that holds frames checks whether Flutter let go of the
+/// frames that it replaced, while there are any.
+const _recycleInterval = Duration(milliseconds: 4);
 
 /// The device pixel size of [extent].
 (int, int) physicalSize(LogicalExtent extent) => (
@@ -72,9 +78,13 @@ abstract base class FrameTarget {
 /// A target whose texture the plugin backs with a ring of [gpuSlotCount]
 /// images that the session borrows, as on Windows, Linux, iOS, and macOS.
 ///
-/// Each finished frame is copied on the GPU into the texture Flutter shows,
-/// so the ring is free again once the copy returns. A caller-owned ring is
-/// resized by replacing it rather than through a session resize.
+/// Where the plugin copies each finished frame on the GPU before
+/// [presentSlot] returns (Windows), the frame is released right after. Where
+/// Flutter samples the slot itself (Linux, iOS, macOS; [holdsFrames]), the
+/// frame on screen stays acquired, so MapLibre renders into the other slots,
+/// and each frame it replaced is released once [slotInUse] reports its slot
+/// free. A caller-owned ring is resized by replacing it rather than through a
+/// session resize.
 abstract base class BorrowedRingTarget<Slot> extends FrameTarget {
   /// Creates a target for the plugin texture [textureId] and its first ring.
   BorrowedRingTarget(this.textureId, this.slots);
@@ -84,6 +94,15 @@ abstract base class BorrowedRingTarget<Slot> extends FrameTarget {
 
   /// The ring the session renders into.
   List<Slot> slots;
+
+  /// Whether Flutter samples the presented slot itself, so that a frame
+  /// stays acquired while its slot is in use.
+  bool get holdsFrames;
+
+  /// The acquired frames by slot, oldest first. The last one is on screen.
+  final _held = <(int, AcquiredFrameHandle)>[];
+
+  Timer? _recycler;
 
   /// Attaches the session to the ring [slots] at [extent].
   NewRenderSession attachRing(
@@ -104,8 +123,11 @@ abstract base class BorrowedRingTarget<Slot> extends FrameTarget {
   /// The ring slot that [frame] rendered into.
   int slotOf(AcquiredFrameHandle frame);
 
-  /// Has the plugin copy the frame in [slot] into the texture Flutter shows.
+  /// Hands the frame in [slot] to Flutter.
   void presentSlot(int slot);
+
+  /// Whether Flutter may still sample [slot]. Only asked when [holdsFrames].
+  bool slotInUse(int slot) => false;
 
   /// Has the plugin unregister the texture and release its rings.
   void disposeTexture();
@@ -124,27 +146,86 @@ abstract base class BorrowedRingTarget<Slot> extends FrameTarget {
     ),
   );
 
+  /// The session cannot move to the new ring while it has a frame acquired,
+  /// so the held frames of the old ring go first. Flutter keeps sampling the
+  /// old ring's slot until a frame of the new one arrives, and the session
+  /// renders into the new ring from then on.
   @override
   Future<void> resize(RenderSessionHandle session, LogicalExtent extent) async {
     final (width, height) = physicalSize(extent);
     slots = resizeRing(width, height);
+    _releaseHeld(all: true);
     await setRing(session, extent);
     releaseRetiredRings();
   }
 
-  /// The frame's GPU writes completed before it became acquirable, and the
-  /// plugin copies it on the GPU before [presentSlot] returns, so the frame is
-  /// released right after.
+  /// The frame's GPU writes completed before it became acquirable, so the
+  /// plugin can copy or sample it once [presentSlot] returns.
   @override
   Future<bool> present(RenderSessionHandle session) async {
+    _releaseHeld();
     final frame = session.acquireFrame();
     if (frame == null) return false;
+    final int slot;
     try {
-      presentSlot(slotOf(frame));
-      return true;
-    } finally {
+      slot = slotOf(frame);
+      presentSlot(slot);
+    } on Object {
       frame.release();
+      rethrow;
     }
+    if (!holdsFrames) {
+      frame.release();
+      return true;
+    }
+    _held.add((slot, frame));
+    _scheduleRecycle();
+    return true;
+  }
+
+  /// Releases the replaced frames whose slots Flutter no longer samples, or
+  /// every held frame when [all] is set.
+  void _releaseHeld({bool all = false}) {
+    if (_held.isEmpty) return;
+    final keep = <(int, AcquiredFrameHandle)>[];
+    for (final (index, held) in _held.indexed) {
+      final (slot, frame) = held;
+      final onScreen = index == _held.length - 1;
+      if (all || (!onScreen && !slotInUse(slot))) {
+        frame.release();
+      } else {
+        keep.add(held);
+      }
+    }
+    _held
+      ..clear()
+      ..addAll(keep);
+  }
+
+  /// Checks for released slots while frames that are no longer on screen
+  /// are held, as MapLibre waits for a free slot to render the next frame.
+  void _scheduleRecycle() {
+    if (_recycler != null || _held.length < 2) return;
+    _recycler = Timer.periodic(_recycleInterval, (timer) {
+      if (host?.disposed ?? true) {
+        timer.cancel();
+        _recycler = null;
+        return;
+      }
+      host!.onGpuQueue(() async => _releaseHeld()).ignore();
+      if (_held.length < 2) {
+        timer.cancel();
+        _recycler = null;
+      }
+    });
+  }
+
+  @override
+  Future<void> endSession(RenderSessionHandle session) {
+    _recycler?.cancel();
+    _recycler = null;
+    _releaseHeld(all: true);
+    return super.endSession(session);
   }
 
   /// The session no longer touches the ring, which is the plugin's.
