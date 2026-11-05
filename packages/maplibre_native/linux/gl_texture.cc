@@ -1,9 +1,18 @@
 #include "gl_texture.h"
 
+#include <epoxy/egl.h>
+#ifdef GDK_WINDOWING_X11
+#include <gdk/gdkx.h>
+#endif
+#ifdef GDK_WINDOWING_WAYLAND
+#include <gdk/gdkwayland.h>
+#endif
+
 #include <unistd.h>
 
 #include <cstdio>
 #include <cstring>
+#include <thread>
 #include <utility>
 
 // The GObject that Flutter calls. It holds the frames as long as Flutter holds
@@ -285,48 +294,80 @@ std::unique_ptr<GlDevice> GlDevice::Create(FlView* view, std::string* error) {
     *error = "Flutter runs without a view.";
     return nullptr;
   }
-  GdkWindow* window = gtk_widget_get_window(GTK_WIDGET(view));
-  if (window == nullptr) {
-    *error = "The Flutter view has no window yet.";
+  // Flutter's EGL display, which FlOpenGLManager gets the same way.
+  GdkDisplay* gdk_display = gtk_widget_get_display(GTK_WIDGET(view));
+  EGLDisplay display = EGL_NO_DISPLAY;
+#ifdef GDK_WINDOWING_X11
+  if (GDK_IS_X11_DISPLAY(gdk_display)) {
+    display = eglGetPlatformDisplayEXT(
+        EGL_PLATFORM_X11_EXT, gdk_x11_display_get_xdisplay(gdk_display),
+        nullptr);
+  }
+#endif
+#ifdef GDK_WINDOWING_WAYLAND
+  if (GDK_IS_WAYLAND_DISPLAY(gdk_display)) {
+    display = eglGetPlatformDisplayEXT(
+        EGL_PLATFORM_WAYLAND_EXT,
+        gdk_wayland_display_get_wl_display(gdk_display), nullptr);
+  }
+#endif
+  if (display == EGL_NO_DISPLAY ||
+      !eglInitialize(display, nullptr, nullptr)) {
+    *error = "The window's display has no EGL.";
     return nullptr;
   }
-  GError* gl_error = nullptr;
-  GdkGLContext* context = gdk_window_create_gl_context(window, &gl_error);
-  if (context != nullptr && !gdk_gl_context_realize(context, &gl_error)) {
-    g_clear_object(&context);
+  // A context like Flutter's: OpenGL ES 2 requested, sharing nothing.
+  const EGLint config_attributes[] = {
+      EGL_RED_SIZE,   8, EGL_GREEN_SIZE, 8, EGL_BLUE_SIZE,    8,
+      EGL_ALPHA_SIZE, 8, EGL_DEPTH_SIZE, 8, EGL_STENCIL_SIZE, 8,
+      EGL_NONE};
+  EGLConfig config = nullptr;
+  EGLint config_count = 0;
+  const EGLint context_attributes[] = {EGL_CONTEXT_CLIENT_VERSION, 2,
+                                       EGL_NONE};
+  EGLContext context = EGL_NO_CONTEXT;
+  if (eglBindAPI(EGL_OPENGL_ES_API) &&
+      eglChooseConfig(display, config_attributes, &config, 1,
+                      &config_count) &&
+      config_count > 0) {
+    context = eglCreateContext(display, config, EGL_NO_CONTEXT,
+                               context_attributes);
   }
-  if (context == nullptr) {
-    *error = std::string("Creating an OpenGL context failed: ") +
-             (gl_error != nullptr ? gl_error->message : "unknown error");
-    g_clear_error(&gl_error);
+  if (context == EGL_NO_CONTEXT) {
+    *error = "Creating an OpenGL ES context like Flutter's failed.";
     return nullptr;
   }
 
-  GdkGLContext* previous = gdk_gl_context_get_current();
-  if (previous != nullptr) g_object_ref(previous);
-  gdk_gl_context_make_current(context);
-  std::unique_ptr<GlDevice> device(new GlDevice());
-  GLint device_count = 0;
-  if (!epoxy_has_gl_extension("GL_EXT_memory_object") ||
-      !epoxy_has_gl_extension("GL_EXT_memory_object_fd")) {
-    *error = "OpenGL lacks GL_EXT_memory_object_fd.";
-    device.reset();
-  } else if (glGetIntegerv(GL_NUM_DEVICE_UUIDS_EXT, &device_count),
-             device_count < 1) {
-    *error = "OpenGL reports no device UUID.";
-    device.reset();
-  } else {
-    glGetUnsignedBytei_vEXT(GL_DEVICE_UUID_EXT, 0, device->device_uuid_.bytes);
-    device->device_uuid_.size = VK_UUID_SIZE;
-    glGetUnsignedBytevEXT(GL_DRIVER_UUID_EXT, device->driver_uuid_);
-  }
-  if (previous != nullptr) {
-    gdk_gl_context_make_current(previous);
-    g_object_unref(previous);
-  } else {
-    gdk_gl_context_clear_current();
-  }
-  g_object_unref(context);
+  // On a thread of its own, so that no context of GDK's or Flutter's is
+  // current while it is.
+  std::unique_ptr<GlDevice> device;
+  std::thread([&] {
+    GLint device_count = 0;
+    if (!eglMakeCurrent(display, EGL_NO_SURFACE, EGL_NO_SURFACE, context)) {
+      char message[96];
+      std::snprintf(message, sizeof(message),
+                    "Making an OpenGL ES context current failed: 0x%x.",
+                    eglGetError());
+      *error = message;
+    } else if (epoxy_gl_version() < 30) {
+      *error = "OpenGL ES is older than 3.0.";
+    } else if (!epoxy_has_gl_extension("GL_EXT_memory_object") ||
+               !epoxy_has_gl_extension("GL_EXT_memory_object_fd")) {
+      *error = "OpenGL ES lacks GL_EXT_memory_object_fd.";
+    } else if (glGetIntegerv(GL_NUM_DEVICE_UUIDS_EXT, &device_count),
+               device_count < 1) {
+      *error = "OpenGL ES reports no device UUID.";
+    } else {
+      device.reset(new GlDevice());
+      glGetUnsignedBytei_vEXT(GL_DEVICE_UUID_EXT, 0,
+                              device->device_uuid_.bytes);
+      device->device_uuid_.size = VK_UUID_SIZE;
+      glGetUnsignedBytevEXT(GL_DRIVER_UUID_EXT, device->driver_uuid_);
+    }
+    eglMakeCurrent(display, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
+    eglReleaseThread();
+  }).join();
+  eglDestroyContext(display, context);
   return device;
 }
 

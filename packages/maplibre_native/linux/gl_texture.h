@@ -16,14 +16,15 @@
 
 namespace maplibre_native {
 
-// The GPU and driver that OpenGL renders Flutter's window on, read once from a
-// GDK OpenGL context of that window. The Vulkan device is created on that GPU,
-// so that OpenGL can import its memory. GDK contexts are only used on the GTK
-// main thread, and this one only while the IDs are read.
+// The GPU and driver that OpenGL renders Flutter's window on, read once from an
+// EGL context that the plugin creates like Flutter's own: OpenGL ES on the
+// window's display. The Vulkan device is created on that GPU, so that OpenGL
+// can import its memory. A context that cannot import it fails here, so the
+// map falls back to CPU readback before it is shown.
 class GlDevice {
  public:
   // Reads the IDs for |view|. Returns null and sets |error| when the window
-  // has no OpenGL or OpenGL lacks the extensions that import Vulkan memory.
+  // has no OpenGL ES 3 or it lacks the extensions that import Vulkan memory.
   static std::unique_ptr<GlDevice> Create(FlView* view, std::string* error);
 
   // The device and driver UUIDs that OpenGL reports, which a Vulkan device

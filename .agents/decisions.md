@@ -88,8 +88,15 @@ Each entry: the decision, then why.
   any texture's `populate` deletes. The objects of the last map stay until the
   process ends. Vulkan frees its side right away; the OpenGL memory objects
   keep the allocations alive.
-- **The GPU IDs are read from a GDK OpenGL context of Flutter's window, once,
-  on the GTK main thread.** That context is released right after; the
+- **The GPU IDs are read from an EGL context like Flutter's, once, when
+  Dart first calls the plugin on the GTK main thread.** The plugin creates
+  an OpenGL ES 2 context on the window's display (X11 or Wayland, as
+  `FlOpenGLManager` does) and makes it current surfaceless on a short-lived
+  thread of its own, since Mesa refuses it on the main thread where Flutter's
+  contexts live. It checks OpenGL ES 3.0, `GL_EXT_memory_object_fd` and the
+  UUIDs there, so a GPU whose OpenGL ES cannot import Vulkan memory falls
+  back to CPU readback before a map is shown; the check in the first
+  `populate` stays as a guard. The context is destroyed right after; the
   textures need no context of the plugin's own, so creating and presenting
   them works on any thread. If Dart's first call to the plugin is not on the
   main thread (unmerged threads), frames are read back to the CPU.
@@ -450,7 +457,7 @@ Each entry: the decision, then why.
   checks each platform's camera end to end.
 - **`linux/test/gl_texture_test.cc` checks the Linux zero-copy path without
   Flutter**, against stand-ins for the few Flutter functions the plugin
-  calls: the GPU IDs from a GDK context of a real window, the device on its
+  calls: the GPU IDs from the EGL probe of a real window, the device on its
   UUID, and exported images that `populate` imports and returns in an EGL
   context that shares nothing with GDK's, as Flutter's, also across a resize
   and the disposal of a texture. It checks which slots are in use. It passes on Mesa's lavapipe and

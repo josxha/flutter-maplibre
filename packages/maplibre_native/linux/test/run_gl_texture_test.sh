@@ -1,8 +1,9 @@
 #!/bin/bash
 # Builds and runs gl_texture_test.cc, which checks the zero-copy path of the
-# Linux plugin without Flutter: the GPU IDs from a GDK OpenGL context of a real
-# GTK window, the plugin's Vulkan device on that GPU, and exported Vulkan
-# images that populate imports in an EGL context of its own, as Flutter's.
+# Linux plugin without Flutter: the GPU IDs from an EGL context like Flutter's
+# on a real GTK window's display, the plugin's Vulkan device on that GPU, and
+# exported Vulkan images that populate imports in an EGL context of its own,
+# as Flutter's.
 #
 # Needs an X display (XWayland in a Wayland session, or xvfb-run),
 # libgtk-3-dev, libepoxy-dev, a Vulkan driver, and Flutter's Linux engine
