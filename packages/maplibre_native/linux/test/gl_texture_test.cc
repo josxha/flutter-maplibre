@@ -252,7 +252,9 @@ int main(int argc, char** argv) {
 
   uint32_t width, height;
   uint8_t pixel[4];
-  CHECK(!ReadShown(&width, &height, pixel), "populate before the first frame");
+  CHECK(ReadShown(&width, &height, pixel), "populate before the first frame");
+  CHECK(width == 1 && height == 1 && pixel[3] == 0,
+        "transparent placeholder before the first frame");
 
   const float red[4] = {1, 0, 0, 1};
   const float green[4] = {0, 1, 0, 1};

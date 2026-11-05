@@ -26,10 +26,13 @@ gboolean mln_pixel_texture_copy_pixels(FlPixelBufferTexture* texture,
       **MLN_PIXEL_TEXTURE(texture)->frames;
   std::lock_guard<std::mutex> lock(frames.mutex);
   if (frames.front < 0) {
-    // Flutter reads the error whenever this returns FALSE.
-    g_set_error_literal(error, g_quark_from_static_string("maplibre-native"),
-                        0, "No map frame rendered yet.");
-    return FALSE;
+    // A transparent pixel until the first frame, since Flutter logs every
+    // failed copy.
+    static const uint8_t kTransparent[4] = {0, 0, 0, 0};
+    *buffer = kTransparent;
+    *width = 1;
+    *height = 1;
+    return TRUE;
   }
   frames.fetched = frames.front;
   *buffer = frames.buffers[frames.front].data();

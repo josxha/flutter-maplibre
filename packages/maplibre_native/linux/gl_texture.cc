@@ -207,7 +207,28 @@ gboolean mln_gl_texture_populate(FlTextureGL* texture, uint32_t* target,
                         0, message.c_str());
     return FALSE;
   };
-  if (frames.front < 0) return fail("No map frame rendered yet.");
+  if (frames.front < 0) {
+    // Disposed textures have no slots and get no new OpenGL objects.
+    if (frames.slots.empty()) return fail("The map texture was disposed.");
+    if (frames.placeholder == 0) {
+      const uint8_t transparent[4] = {0, 0, 0, 0};
+      glGenTextures(1, &frames.placeholder);
+      glBindTexture(GL_TEXTURE_2D, frames.placeholder);
+      glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 1, 1, 0, GL_RGBA,
+                   GL_UNSIGNED_BYTE, transparent);
+      glBindTexture(GL_TEXTURE_2D, 0);
+    }
+    *target = GL_TEXTURE_2D;
+    *name = frames.placeholder;
+    *width = 1;
+    *height = 1;
+    return TRUE;
+  }
+  if (frames.placeholder != 0) {
+    // OpenGL keeps the texture until Flutter's draws that sampled it are done.
+    glDeleteTextures(1, &frames.placeholder);
+    frames.placeholder = 0;
+  }
   if (!frames.checked) {
     frames.checked = true;
     frames.failure = CheckFlutterContext(frames);
@@ -364,6 +385,10 @@ GlTexture::~GlTexture() {
     std::lock_guard<std::mutex> lock(frames_->mutex);
     Discard(&frames_->slots, &garbage);
     garbage.Append(std::move(frames_->garbage));
+    if (frames_->placeholder != 0) {
+      garbage.textures.push_back(frames_->placeholder);
+      frames_->placeholder = 0;
+    }
     frames_->front = -1;
     frames_->shown = -1;
   }

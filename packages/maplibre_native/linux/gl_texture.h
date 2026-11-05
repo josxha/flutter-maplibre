@@ -82,6 +82,9 @@ struct GlFrames {
   bool checked = false;
   // Why Flutter's context cannot sample the ring, once that is known.
   std::string failure;
+  // A 1x1 transparent texture that Flutter samples until the first frame is
+  // presented, since Flutter logs every failed populate.
+  GLuint placeholder = 0;
   // The OpenGL objects of replaced rings.
   GlGarbage garbage;
 };
