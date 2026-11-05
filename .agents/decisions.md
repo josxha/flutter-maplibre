@@ -39,8 +39,11 @@ Each entry: the decision, then why.
   demands the next; targets attach the session, resize, present, end the
   session, and dispose the texture. Windows, Linux, iOS, and macOS share
   `BorrowedRingTarget` (a plugin-owned ring of three images, replaced on
-  resize). Windows and Linux copy each frame on the GPU before releasing it;
-  iOS and macOS keep it acquired while Flutter samples its slot.
+  resize). Windows copies each frame on the GPU before releasing it; Linux,
+  iOS and macOS keep it acquired while Flutter samples its slot
+  (`holdsFrames`), and release it once the plugin reports the slot free. A
+  resize releases the held frames first, as the session refuses a new target
+  while it has a frame acquired.
 - **Windows and Linux share the Vulkan device code and the C API
   implementation in `desktop/`; only the texture interop differs.** The
   device matches Flutter's GPU by adapter LUID on Windows and by the OpenGL
@@ -58,29 +61,45 @@ Each entry: the decision, then why.
 
 ## Linux
 
-- **Frames reach Flutter as an `FlTextureGL`. MapLibre renders through
-  Vulkan into a ring of RGBA8 images with exportable memory, which OpenGL
-  imports as opaque file descriptors (`GL_EXT_memory_object_fd`); each frame
-  is blitted into one of three plain GL textures that Flutter samples.** This
-  mirrors the D3D11 copy on Windows: the ring is free once the copy returns,
-  and the copy never targets the texture Flutter shows or fetched last, since
-  Flutter takes no fence for external textures. The plugin waits for the
-  copy with `glFinish`. Opaque memory needs one GPU and driver on both sides,
-  so the plugin creates its Vulkan device on the OpenGL device UUID and
-  checks the driver UUIDs. Otherwise frames are read back into an
-  `FlPixelBufferTexture`, as on Windows.
-- **The plugin copies in its own GDK OpenGL context, created from Flutter's
-  window.** GDK contexts may only be used on the GTK main thread, so
-  zero-copy textures need Dart's UI thread to be the main thread (merged
-  threads); the plugin checks `g_main_context_is_owner` and falls back
-  to the pixel buffer otherwise. It restores the context that was current
-  after each use. OpenGL goes through libepoxy, which GTK already loads.
-- **Linux always reads frames back to the CPU for now.** Flutter 3.47 renders
-  in EGL contexts of its own (`FlOpenGLManager`), which share no textures
-  with any GDK context, so Flutter sampled nothing from the zero-copy textures.
-  `kZeroCopyWorks` in `maplibre_native_plugin.cc` keeps `GlTexture` unused
-  until its OpenGL work moves into `populate`, the only place with Flutter's
-  context current.
+- **Frames reach Flutter as an `FlTextureGL` that samples the ring slots
+  directly. MapLibre renders through Vulkan into a ring of RGBA8 images with
+  exportable memory; `populate` imports each slot's opaque file descriptor
+  once (`GL_EXT_memory_object_fd`) and returns the latest presented slot's
+  texture.** Flutter 3.47 renders in EGL contexts of its own
+  (`FlOpenGLManager`) that share nothing with any context a plugin can
+  create, and `populate` is the only code that runs with one current, so
+  every OpenGL call of the texture runs there. Opaque memory needs one GPU
+  and driver on both sides: the plugin creates its Vulkan device on the
+  OpenGL device UUID, checks the driver UUIDs, and checks the extensions,
+  OpenGL ES 3.0 and the UUIDs again in Flutter's context on the first
+  `populate`. If that fails, it logs a warning and the map shows nothing;
+  otherwise failures fall back to an `FlPixelBufferTexture`, as on Windows.
+- **A slot is in use while it is the front or shown slot, or until a fence
+  says Flutter's draws that sampled it are done.** Flutter takes no fence for
+  an external texture and samples the texture of the last `populate` until
+  it populates again. So when `populate` moves Flutter to a new slot, it
+  inserts a `glFenceSync` for the slot Flutter leaves, polls it, and waits
+  for older fences, which are a frame old, so that at most one slot
+  waits for its fence and a ring of three always has one to render into.
+  `maplibre_native_gpu_texture_slot_in_use` reports this to Dart.
+- **OpenGL objects are deleted in a later `populate`.** A resize moves the old
+  ring's textures, memory objects and fences to a list that the texture's next
+  `populate` deletes; a disposed texture hands them to a plugin-wide list that
+  any texture's `populate` deletes. The objects of the last map stay until the
+  process ends. Vulkan frees its side right away; the OpenGL memory objects
+  keep the allocations alive.
+- **The GPU IDs are read from an EGL context like Flutter's, once, when
+  Dart first calls the plugin on the GTK main thread.** The plugin creates
+  an OpenGL ES 2 context on the window's display (X11 or Wayland, as
+  `FlOpenGLManager` does) and makes it current surfaceless on a short-lived
+  thread of its own, since Mesa refuses it on the main thread where Flutter's
+  contexts live. It checks OpenGL ES 3.0, `GL_EXT_memory_object_fd` and the
+  UUIDs there, so a GPU whose OpenGL ES cannot import Vulkan memory falls
+  back to CPU readback before a map is shown; the check in the first
+  `populate` stays as a guard. The context is destroyed right after; the
+  textures need no context of the plugin's own, so creating and presenting
+  them works on any thread. If Dart's first call to the plugin is not on the
+  main thread (unmerged threads), frames are read back to the CPU.
 - **The plugin lives as long as the process.** Linux plugins get no
   shutdown call, and sessions on core workers can outlive the engine.
 
@@ -438,9 +457,10 @@ Each entry: the decision, then why.
   checks each platform's camera end to end.
 - **`linux/test/gl_texture_test.cc` checks the Linux zero-copy path without
   Flutter**, against stand-ins for the few Flutter functions the plugin
-  calls: a GDK context of a real window, the device on its UUID, exported
-  images that OpenGL imports, and the present copy, read back through
-  `populate`, also across a resize. It passes on Mesa's lavapipe and
+  calls: the GPU IDs from the EGL probe of a real window, the device on its
+  UUID, and exported images that `populate` imports and returns in an EGL
+  context that shares nothing with GDK's, as Flutter's, also across a resize
+  and the disposal of a texture. It checks which slots are in use. It passes on Mesa's lavapipe and
   llvmpipe, which share memory, so it runs without a GPU.
 - **Projection integration tests run at zoom 4.** At the minimum zoom of a
   wide desktop window the world is narrower than the window, and screen
@@ -516,8 +536,10 @@ Each entry: the decision, then why.
   release library, but have not run on an iOS device. 0.202610.3 adds a
   macOS x64 library, so Intel Macs build; none has run the tests.
 - Linux passes the integration tests in WSL2 (WSLg, Mesa llvmpipe and
-  lavapipe, Flutter 3.47.9) and in CI under Xvfb, on CPU readback. Not checked
-  on a desktop with a GPU. Painting a map before its first frame crashed the
+  lavapipe, Flutter 3.47.9) and under Xvfb, on zero-copy and on CPU readback.
+  Not checked on a desktop with a GPU, where Flutter's OpenGL ES context may
+  lack `GL_EXT_memory_object_fd`; Wayland compositors share frames as
+  dma-buf EGLImages instead, which would be the alternative. Painting a map before its first frame crashed the
   raster thread until the texture callbacks set a `GError` with
   their `FALSE`, which Flutter's engine dereferences.
 - x86_64 iOS simulators have no published C library (0.202610.3 publishes a
