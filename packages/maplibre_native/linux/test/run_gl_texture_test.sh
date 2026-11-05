@@ -4,8 +4,8 @@
 # GTK window, the plugin's Vulkan device on that GPU, and exported Vulkan
 # images that populate imports in an EGL context of its own, as Flutter's.
 #
-# Needs a display (or xvfb-run), libgtk-3-dev, libepoxy-dev, a Vulkan driver,
-# and Flutter's Linux engine headers, which `flutter precache --linux` puts in
+# Needs an X display (XWayland in a Wayland session, or xvfb-run),
+# libgtk-3-dev, libepoxy-dev, a Vulkan driver, and Flutter's Linux engine headers, which `flutter precache --linux` puts in
 # the Flutter SDK. On a machine without a GPU, Mesa's lavapipe and llvmpipe
 # share memory with each other:
 #

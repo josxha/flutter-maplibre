@@ -206,6 +206,9 @@ static bool IsColor(const uint8_t pixel[4], uint8_t r, uint8_t g, uint8_t b) {
 }
 
 int main(int argc, char** argv) {
+  // The stand-in for Flutter's context is an X11 EGL context, so GDK must use
+  // X11 too, also in a Wayland session (XWayland).
+  gdk_set_allowed_backends("x11");
   gtk_init(&argc, &argv);
   GtkWidget* window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
   gtk_window_set_default_size(GTK_WINDOW(window), 200, 100);
