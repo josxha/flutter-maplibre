@@ -75,10 +75,13 @@ void runTests() {
             },
         ],
       });
+      final beforeAdd = map.events.length;
       await map.style.sources.add(
         GeoJsonSource.data(id: 'changing', data: collection([])),
       );
-      await tester.pump(const Duration(milliseconds: 500));
+      // Native maps don't report the added source, web maps do. Once the map
+      // is idle, the event of the added source has arrived where there is one.
+      await map.waitForEvent<MapEventIdle>(since: beforeAdd);
       final since = map.events.length;
       await map.style.sources.updateGeoJsonData(
         'changing',
