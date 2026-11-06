@@ -53,6 +53,7 @@ class MarkerLayer extends Layer<Feature<Point>> {
     this.iconAnchor = const .literal(IconAnchor.center),
     super.minZoom = 0,
     super.maxZoom = 24,
+    super.draggable,
     super.onDragStart,
     super.onDrag,
     super.onDragEnd,

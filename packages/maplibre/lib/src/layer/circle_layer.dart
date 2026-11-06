@@ -20,6 +20,7 @@ class CircleLayer extends Layer<Feature<Point>> {
     this.strokeOpacity = const .literal(1),
     super.minZoom = 0,
     super.maxZoom = 24,
+    super.draggable,
     super.onDragStart,
     super.onDrag,
     super.onDragEnd,

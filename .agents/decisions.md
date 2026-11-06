@@ -461,18 +461,31 @@ Each entry: the decision, then why.
   async `onDragStart` holds the pan until it completes; a pan that was not
   prevented then catches up, so the map stays under the finger. A second
   finger ends the drag; a prevented drag's pinch doesn't move the camera
-  until every pointer is up. On top of that, `MapLibreMapState` lets
-  `Layer.onDragStart`/`onDrag`/`onDragEnd` drag features, as #151 planned:
-  on a drag start it queries the draggable layers in a 24 px square,
-  prefers the nearest point, prevents the pan and reports
-  `LayerDragEvent(index, point, screenPoint)`. A draggable layer's source
-  gets a `maplibre:index` property per feature to tell which one was hit,
-  so app ids stay untouched. The layer stays stateless: the app moves the
-  feature with `setState`, as with every other layer change. The callbacks
-  take a non-generic event because `Layer<Feature<Point>>` sits in a
-  `List<Layer>`, where reading a callback field typed by `G` would fail its
-  covariance check. Layer callbacks are left out of `Layer.==`, so a
-  rebuild with new closures doesn't update the style layer.
+  until every pointer is up.
+- **Annotation layers drag their features themselves with `draggable: true`
+  (#151), and the app saves the drop in `onDragEnd`.** The user chose this
+  over #151's first plan, where the app moved the feature with `setState` on
+  every `onDrag`: that rebuilt the page and re-sent the whole layer's
+  source per step, 36 ms with 1,000 and 140 ms with 10,000 points on Linux
+  against about 30 ms with one, and it beat a map-level list of draggable
+  layers, which loses the feature's index in its layer's list. On a drag
+  start `MapLibreMapState` queries the draggable layers in a 24 px square,
+  prefers the nearest point and prevents the pan. `LayerManager.startDrag`
+  then copies the feature into a one-feature overlay source and layer
+  (`maplibre-drag-*`, the layer's own style) above its layer and hides it
+  there with a filter on its `maplibre:index` property, which every feature
+  of a draggable layer's source gets; app ids stay untouched. Each step
+  writes only the overlay, coalesced to the latest geometry while a write
+  is in flight, so a step costs about 20 ms at any layer size (the frame).
+  Geometries move by the pointer's screen delta per vertex (Point,
+  LineString, Polygon). The layer stays controlled: after the drop, the
+  overlay stays until the app's list has the new place and its source has
+  re-tiled (250 ms after the write, so the old place doesn't flash), or goes
+  away after the next frame if the app didn't save it, and the feature snaps
+  back. `LayerDragEvent` is not generic, because `Layer<Feature<Point>>`
+  sits in a `List<Layer>`, where reading a callback field typed by `G` fails
+  its covariance check. Callbacks are left out of `Layer.==`; the
+  constructor asserts that they come with `draggable`.
 - **One gesture recognizer in Dart serves every platform:
   `MapGestureDetector` in `maplibre_platform_interface`.** It sits there, not
   in `maplibre`, because the platform packages need it and `maplibre` depends

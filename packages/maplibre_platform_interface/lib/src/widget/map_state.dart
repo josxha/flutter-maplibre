@@ -132,16 +132,20 @@ abstract class MapLibreMapState extends State<MapLibreMap>
       final featureIndex =
           feature.properties[LayerManager.featureIndexProperty];
       if (layerIndex == null || featureIndex is! num) continue;
-      final drag = _LayerDrag(layerIndex, featureIndex.toInt());
-      final layer = _layerOf(drag);
-      if (layer == null) continue;
-      // A point is grabbed where the pointer went down relative to it, so it
-      // doesn't jump under the pointer. Of several, the nearest wins.
+      final index = featureIndex.toInt();
+      final layer = widget.layers.elementAtOrNull(layerIndex);
+      if (layer == null || !layer.draggable || index >= layer.list.length) {
+        continue;
+      }
+      final geometry = layer.list[index].geometry;
+      if (geometry == null) continue;
+      final drag = _LayerDrag(layerIndex, index, geometry, event.screenPoint);
+      // Of several points, the nearest wins.
       var distance = 0.0;
-      if (layer.list[drag.featureIndex].geometry case Point(:final position)) {
-        drag.grabOffset =
-            toScreenLocation(Geographic.from(position)) - event.screenPoint;
-        distance = drag.grabOffset.distance;
+      if (drag.geometry case Point(:final position)) {
+        distance =
+            (toScreenLocation(Geographic.from(position)) - event.screenPoint)
+                .distance;
       }
       if (distance < nearestDistance) {
         nearest = drag;
@@ -151,50 +155,75 @@ abstract class MapLibreMapState extends State<MapLibreMap>
     if (nearest == null) return;
     event.preventDefault();
     _layerDrag = nearest;
+    layerManager?.startDrag(nearest.layerIndex, nearest.featureIndex);
     _emitLayerDrag(event.screenPoint, (layer) => layer.onDragStart);
   }
 
   void _onDrag(MapEventDrag event) {
-    _emitLayerDrag(event.screenPoint, (layer) => layer.onDrag);
+    final moved = _emitLayerDrag(event.screenPoint, (layer) => layer.onDrag);
+    if (moved != null) layerManager?.moveDrag(moved);
     widget.onDrag?.call(event);
   }
 
   void _onDragEnd(MapEventDragEnd event) {
-    _emitLayerDrag(event.screenPoint, (layer) => layer.onDragEnd);
+    final moved = _emitLayerDrag(event.screenPoint, (layer) => layer.onDragEnd);
+    if (moved != null) layerManager?.moveDrag(moved);
     _layerDrag = null;
+    layerManager?.endDrag();
     widget.onDragEnd?.call(event);
   }
 
-  /// The layer of [drag] as the widget has it now, or null if it no longer
-  /// has the dragged feature.
-  Layer? _layerOf(_LayerDrag drag) {
+  /// Reports the pointer at [screenPoint] to the callback that [callback]
+  /// picks of the layer of the current drag, with the dragged geometry,
+  /// which it returns.
+  Geometry? _emitLayerDrag(
+    Offset screenPoint,
+    LayerDragCallback? Function(Layer layer) callback,
+  ) {
+    final drag = _layerDrag;
+    if (drag == null || !isInitialized) return null;
     final layer = widget.layers.elementAtOrNull(drag.layerIndex);
     if (layer == null ||
         !layer.draggable ||
         drag.featureIndex >= layer.list.length) {
       return null;
     }
-    return layer;
-  }
-
-  /// Reports the pointer at [screenPoint] to the callback that [callback]
-  /// picks of the layer of the current drag.
-  void _emitLayerDrag(
-    Offset screenPoint,
-    LayerDragCallback? Function(Layer layer) callback,
-  ) {
-    final drag = _layerDrag;
-    if (drag == null || !isInitialized) return;
-    final layer = _layerOf(drag);
-    if (layer == null) return;
-    final target = screenPoint + drag.grabOffset;
+    final delta = screenPoint - drag.start;
+    final geometry = _moved(drag.geometry, delta);
+    final (point, target) = switch (geometry) {
+      Point(:final position) => (
+        Geographic.from(position),
+        toScreenLocation(Geographic.from(position)),
+      ),
+      _ => (toLngLat(screenPoint), screenPoint),
+    };
     callback(layer)?.call(
       LayerDragEvent(
         index: drag.featureIndex,
-        point: toLngLat(target),
+        geometry: geometry,
+        point: point,
         screenPoint: target,
       ),
     );
+    return geometry;
+  }
+
+  /// [geometry] moved by [delta] on screen. Only the geometries of the
+  /// annotation layers move.
+  Geometry _moved(Geometry geometry, Offset delta) {
+    Geographic move(Position position) =>
+        toLngLat(toScreenLocation(Geographic.from(position)) + delta);
+    List<Geographic> moveAll(PositionSeries series) => [
+      for (final position in series.positions) move(position),
+    ];
+    return switch (geometry) {
+      Point(:final position) => Point(move(position)),
+      LineString(:final chain) => LineString.from(moveAll(chain)),
+      Polygon(:final rings) => Polygon.from([
+        for (final ring in rings) moveAll(ring),
+      ]),
+      _ => geometry,
+    };
   }
 
   /// The size of the map's last layout, to report changes with
@@ -273,11 +302,14 @@ const _grabSize = 24.0;
 
 /// A feature of [MapLibreMap.layers] that a drag moves.
 class _LayerDrag {
-  _LayerDrag(this.layerIndex, this.featureIndex);
+  _LayerDrag(this.layerIndex, this.featureIndex, this.geometry, this.start);
 
   final int layerIndex;
   final int featureIndex;
 
-  /// From the pointer to where the feature is, in logical pixels.
-  Offset grabOffset = Offset.zero;
+  /// The geometry of the feature where the drag started.
+  final Geometry geometry;
+
+  /// Where the drag started, in logical pixels of the map.
+  final Offset start;
 }

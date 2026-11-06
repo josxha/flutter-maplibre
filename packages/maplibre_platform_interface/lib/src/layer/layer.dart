@@ -5,9 +5,8 @@ import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 
 /// This class is the base for all annotation layer classes.
 ///
-/// Set [onDrag] to let the user drag the features of the layer. The layer
-/// doesn't move them itself: update [list] with the new position, for
-/// example with `setState()`.
+/// Set [draggable] to let the user drag the features of the layer, and save
+/// where they were dropped with [onDragEnd].
 ///
 /// {@category Layers}
 @immutable
@@ -18,10 +17,15 @@ abstract class Layer<G extends Feature<Geometry>> {
     required this.list,
     this.minZoom = 0,
     this.maxZoom = 24,
+    this.draggable = false,
     this.onDragStart,
     this.onDrag,
     this.onDragEnd,
-  });
+  }) : assert(
+         draggable ||
+             (onDragStart == null && onDrag == null && onDragEnd == null),
+         'Set draggable to drag the features of the layer.',
+       );
 
   /// The [List] of geometry features.
   final List<G> list;
@@ -32,30 +36,36 @@ abstract class Layer<G extends Feature<Geometry>> {
   /// The maximum zoom level that the [Layer] is displayed.
   final double maxZoom;
 
-  /// Called when the user starts to drag a feature of the layer. The map
-  /// doesn't pan during that drag.
-  final LayerDragCallback? onDragStart;
-
-  /// Called whenever the user drags a feature of the layer further, with
-  /// where it moves to. Move the feature there in [list] to follow the drag.
+  /// Whether the user can drag the features of the layer. Defaults to false.
+  ///
+  /// A drag that starts on a feature moves the feature instead of the map.
+  /// The layer shows the feature where it is dragged without a rebuild, and
+  /// puts it back once the drag ends, unless [list] has it at its new place
+  /// by then. Save it there in [onDragEnd]:
   ///
   /// ```dart
   /// CircleLayer(
   ///   points: points,
-  ///   onDrag: (event) => setState(
+  ///   draggable: true,
+  ///   onDragEnd: (event) => setState(
   ///     () => points[event.index] = Feature(geometry: Point(event.point)),
   ///   ),
   /// )
   /// ```
+  final bool draggable;
+
+  /// Called when the user starts to drag a feature of the layer. The map
+  /// doesn't pan during that drag. Needs [draggable].
+  final LayerDragCallback? onDragStart;
+
+  /// Called whenever the user drags a feature of the layer further, with
+  /// where it moves to. Needs [draggable].
   final LayerDragCallback? onDrag;
 
-  /// Called when the user stops dragging a feature of the layer.
+  /// Called when the user drops a feature of the layer, with where it was
+  /// dropped. Save the feature there in [list] to keep it there. Needs
+  /// [draggable].
   final LayerDragCallback? onDragEnd;
-
-  /// Whether the user can drag the features of the layer, which they can
-  /// while [onDragStart], [onDrag] or [onDragEnd] is set.
-  bool get draggable =>
-      onDragStart != null || onDrag != null || onDragEnd != null;
 
   /// Get a unique source id.
   String getSourceId(int index) => 'maplibre-source-$index';
@@ -73,10 +83,11 @@ abstract class Layer<G extends Feature<Geometry>> {
           runtimeType == other.runtimeType &&
           list == other.list &&
           minZoom == other.minZoom &&
-          maxZoom == other.maxZoom;
+          maxZoom == other.maxZoom &&
+          draggable == other.draggable;
 
   @override
-  int get hashCode => Object.hash(minZoom, maxZoom, list);
+  int get hashCode => Object.hash(minZoom, maxZoom, list, draggable);
 }
 
 /// Called with a [LayerDragEvent] while the user drags a feature of a
@@ -93,6 +104,7 @@ class LayerDragEvent {
   /// Creates a [LayerDragEvent].
   const LayerDragEvent({
     required this.index,
+    required this.geometry,
     required this.point,
     required this.screenPoint,
   });
@@ -100,9 +112,14 @@ class LayerDragEvent {
   /// The index of the dragged feature in [Layer.list].
   final int index;
 
-  /// Where the dragged feature moves to: the pointer location, offset by
-  /// where the pointer grabbed a [Point] feature, so that a [Point] feature
-  /// keeps its place under the pointer.
+  /// The geometry of the dragged feature, moved to where it is dragged.
+  ///
+  /// It is moved by the distance on screen that the pointer moved, so the
+  /// feature keeps its place under the pointer.
+  final Geometry geometry;
+
+  /// For a [Point] feature, where it moves to. For other features, where
+  /// the pointer is.
   final Geographic point;
 
   /// [point] in logical pixels of the map.
@@ -113,11 +130,12 @@ class LayerDragEvent {
       identical(this, other) ||
       other is LayerDragEvent &&
           index == other.index &&
+          geometry == other.geometry &&
           point == other.point &&
           screenPoint == other.screenPoint;
 
   @override
-  int get hashCode => Object.hash(index, point, screenPoint);
+  int get hashCode => Object.hash(index, geometry, point, screenPoint);
 
   @override
   String toString() =>

@@ -27,6 +27,10 @@ class _Backend extends Mock implements StyleBackend {
 
   @override
   Future<void> removeLayer(String id) async => calls.add('removeLayer');
+
+  @override
+  void setFilter(String layerId, Object? filter) =>
+      calls.add('setFilter $layerId $filter');
 }
 
 void main() {
@@ -85,15 +89,101 @@ void main() {
       backend.calls.clear();
 
       // Turning dragging on rewrites the unchanged features with an index.
-      manager.updateLayers([CircleLayer(points: points, onDrag: (_) {})]);
+      manager.updateLayers([CircleLayer(points: points, draggable: true)]);
       expect(backend.calls.single, contains('"maplibre:index":1'));
       backend.calls.clear();
 
-      manager.updateLayers([CircleLayer(points: points, onDrag: (_) {})]);
+      manager.updateLayers([CircleLayer(points: points, draggable: true)]);
       expect(backend.calls, isEmpty);
 
       manager.updateLayers([CircleLayer(points: points)]);
       expect(backend.calls.single, isNot(contains('maplibre:index')));
+    });
+
+    group('a dragged feature', () {
+      final points = [
+        const Feature(geometry: Point(Geographic(lon: 0, lat: 0))),
+        const Feature(geometry: Point(Geographic(lon: 1, lat: 1))),
+      ];
+      const moved = Point(Geographic(lon: 5, lat: 5));
+
+      Future<LayerManager> drag(WidgetTester tester) async {
+        final manager = LayerManager(style, [
+          CircleLayer(points: points, draggable: true),
+        ]);
+        manager.startDrag(0, 1);
+        manager.moveDrag(moved);
+        await tester.pump();
+        return manager;
+      }
+
+      testWidgets('moves in an overlay, not in its layer', (tester) async {
+        await drag(tester);
+        expect(backend.calls.skip(2), [
+          'addSource',
+          'addLayer circle',
+          'setFilter maplibre-layer-0 [!=, [get, maplibre:index], 1]',
+          // Only the dragged feature moves.
+          allOf(contains('[5,5]'), isNot(contains('[0,0]'))),
+        ]);
+      });
+
+      testWidgets('goes back if the app does not save it', (tester) async {
+        final manager = await drag(tester);
+        backend.calls.clear();
+        manager.endDrag();
+        await tester.pump();
+        expect(backend.calls, [
+          'removeLayer',
+          'removeSource',
+          'setFilter maplibre-layer-0 null',
+        ]);
+      });
+
+      testWidgets('stays in the overlay until the app saved it', (
+        tester,
+      ) async {
+        final manager = await drag(tester);
+        backend.calls.clear();
+        manager
+          ..endDrag()
+          ..updateLayers([
+            CircleLayer(
+              points: [
+                points[0],
+                const Feature(geometry: moved),
+              ],
+              draggable: true,
+            ),
+          ]);
+        await tester.pump();
+        expect(backend.calls.first, startsWith('setGeoJsonData'));
+        // The layer keeps hiding the feature while the source tiles again.
+        expect(
+          backend.calls.last,
+          'setFilter maplibre-layer-0 [!=, [get, maplibre:index], 1]',
+        );
+        backend.calls.clear();
+        await tester.pump(const Duration(milliseconds: 300));
+        expect(backend.calls, [
+          'removeLayer',
+          'removeSource',
+          'setFilter maplibre-layer-0 null',
+        ]);
+      });
+
+      testWidgets('ends with its layer', (tester) async {
+        final manager = await drag(tester);
+        backend.calls.clear();
+        manager.updateLayers([]);
+        expect(backend.calls, [
+          'removeLayer',
+          'removeSource',
+          'setFilter maplibre-layer-0 null',
+          'removeLayer',
+          'removeSource',
+        ]);
+      });
     });
 
     testWidgets('updates a source whose list grew in place', (tester) async {

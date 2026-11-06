@@ -39,7 +39,6 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   var _animationIds = 0;
   final _cameraPaddingReset = CameraPaddingReset();
   bool _nextGestureCausedByController = false;
-  LayerManager? _layerManager;
 
   /// The attributions that the widgets in [MapLibreMap.children] last saw.
   List<String> _attributions = const [];
@@ -411,7 +410,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       _map.setMaxBounds(options.maxBounds?.toJs());
     }
     if (options.style != oldWidget.options.style) _setStyle(options.style);
-    _layerManager?.updateLayers(widget.layers);
+    layerManager?.updateLayers(widget.layers);
     _updateRenderListener();
     super.didUpdateWidget(oldWidget);
   }
@@ -739,7 +738,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   void _setStyle(MapStyle style) {
     // Only the next LayerManager sees MapLibreMap.layers: the layers of the
     // old one go with the old style.
-    _layerManager = null;
+    layerManager = null;
     _map.once(
       interop.MapEventType.styleLoad,
       (JSAny _) {
@@ -788,12 +787,12 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   }
 
   void _onStyleLoaded() {
-    _layerManager = null;
+    layerManager = null;
     style?.dispose();
     final styleCtrl = StyleControllerWeb(_map)..load();
     style = styleCtrl;
     widget.onStyleLoaded?.call(styleCtrl);
-    _layerManager = LayerManager(styleCtrl, widget.layers);
+    layerManager = LayerManager(styleCtrl, widget.layers);
     _attributions = styleCtrl.attributions;
     // setState is needed to refresh the flutter widgets used in MapLibreMap.children.
     setState(() {});

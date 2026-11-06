@@ -106,6 +106,7 @@ class _Platform extends MapLibrePlatform with MockPlatformInterfaceMixin {
 class _PointLayer extends Layer<Feature<Point>> {
   const _PointLayer({
     required super.list,
+    super.draggable,
     super.onDragStart,
     super.onDrag,
     super.onDragEnd,
@@ -151,6 +152,7 @@ void main() {
 
   _PointLayer draggable(List<Feature<Point>> list) => _PointLayer(
     list: list,
+    draggable: true,
     onDragStart: (event) => drags.add(('start', event)),
     onDrag: (event) => drags.add(('drag', event)),
     onDragEnd: (event) => drags.add(('end', event)),
@@ -186,6 +188,9 @@ void main() {
     expect(end.screenPoint, const Offset(500, 400));
     expect(end.point.lon, closeTo(36, 1e-9));
     expect(end.point.lat, closeTo(-36, 1e-9));
+    final moved = end.geometry as Point;
+    expect(moved.position.x, closeTo(36, 1e-9));
+    expect(moved.position.y, closeTo(-36, 1e-9));
     // The map callbacks see the drag too, already prevented.
     final start = mapEvents.first as MapEventDragStart;
     expect(start.defaultPrevented, isTrue);
@@ -218,6 +223,7 @@ void main() {
     await pumpMap(tester, [
       _PointLayer(
         list: [_point(0, 0)],
+        draggable: true,
         onDrag: (event) => below.add(('drag', event)),
       ),
       draggable([_point(0, 0)]),
@@ -227,9 +233,7 @@ void main() {
     expect(drags, isNotEmpty);
   });
 
-  testWidgets('a layer without drag callbacks is not draggable', (
-    tester,
-  ) async {
+  testWidgets('a layer is not draggable without the flag', (tester) async {
     await pumpMap(tester, [
       _PointLayer(list: [_point(0, 0)]),
     ]);
@@ -278,5 +282,12 @@ void main() {
     await gesture.up();
     await tester.pumpAndSettle();
     expect(drags, isEmpty);
+  });
+
+  test('callbacks need the draggable flag', () {
+    expect(
+      () => _PointLayer(list: const [], onDragEnd: (_) {}),
+      throwsAssertionError,
+    );
   });
 }

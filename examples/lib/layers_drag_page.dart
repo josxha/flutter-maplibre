@@ -63,9 +63,9 @@ class _LayersDragPageState extends State<LayersDragPage> {
                   radius: const .literal(16),
                   strokeColor: const .literal(Colors.red),
                   strokeWidth: const .literal(2),
+                  draggable: true,
                   onDragStart: (event) => _startDrag(_circles, event),
-                  onDrag: (event) => _move(_circles, event),
-                  onDragEnd: (event) => _endDrag(_circles, event),
+                  onDragEnd: (event) => _drop(_circles, event),
                 ),
                 MarkerLayer(
                   points: _markers,
@@ -75,9 +75,9 @@ class _LayersDragPageState extends State<LayersDragPage> {
                   iconImage: _imageLoaded ? const .literal('marker') : null,
                   iconAnchor: const .literal(IconAnchor.bottom),
                   textOffset: const .literal(Offset(0, 1)),
+                  draggable: true,
                   onDragStart: (event) => _startDrag(_markers, event),
-                  onDrag: (event) => _move(_markers, event),
-                  onDragEnd: (event) => _endDrag(_markers, event),
+                  onDragEnd: (event) => _drop(_markers, event),
                 ),
               ],
               children: const [SourceAttribution(), MapControlButtons()],
@@ -96,23 +96,17 @@ class _LayersDragPageState extends State<LayersDragPage> {
       ? 'circle ${index + 1}'
       : features[index].properties['name'] as String;
 
-  /// Moves the feature to where it is dragged. The layer doesn't move it
-  /// itself.
-  void _move(List<Feature<Point>> features, LayerDragEvent event) {
+  /// Saves the feature where it was dropped. The layer moves it while it is
+  /// dragged, and puts it back unless the list has it at its new place.
+  void _drop(List<Feature<Point>> features, LayerDragEvent event) {
     final feature = features[event.index];
+    final point = event.point;
     setState(() {
       features[event.index] = Feature(
         id: feature.id,
-        geometry: Point(event.point),
+        geometry: Point(point),
         properties: feature.properties,
       );
-    });
-  }
-
-  void _endDrag(List<Feature<Point>> features, LayerDragEvent event) {
-    _move(features, event);
-    final point = event.point;
-    setState(() {
       _status =
           'Moved ${_nameOf(features, event.index)} to '
           '${point.lat.toStringAsFixed(3)}, '
