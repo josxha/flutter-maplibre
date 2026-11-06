@@ -15,7 +15,7 @@ Markers are a way to show data on the map with labels and/or icons.
 
 ## Basic Usage
 
-```dart linenums="1" hl_lines="13-20 28-36"
+```dart linenums="1" hl_lines="11-22 24-31"
 bool _imageLoaded = false;
 final _points = <Feature<Point>>[
   const Feature(geometry: Point(Geographic(lon: 9.17, lat: 47.68))),
