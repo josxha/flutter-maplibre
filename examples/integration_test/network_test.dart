@@ -89,6 +89,12 @@ void runTests() {
         server = await _StyleServer.start();
         addTearDown(server.close);
         target = '${server.origin}/style.json';
+        // Headers match the URL after the transform.
+        MapLibreNetwork.requestHeaders = [
+          const RequestHeaders({
+            'X-Maplibre-Test': 'transformed',
+          }, url: 'http://127.0.0.1:*/**'),
+        ];
       }
       const requested = 'https://maplibre.invalid/style.json';
       final transformed = <(String, MapResourceKind)>[];
@@ -109,7 +115,7 @@ void runTests() {
       );
       expect(transformed, contains((requested, MapResourceKind.style)));
       if (server != null) {
-        expect(server.requests.map((r) => r.$1), contains('/style.json'));
+        expect(server.requests, contains(('/style.json', 'transformed')));
       }
     });
 
