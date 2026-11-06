@@ -74,14 +74,15 @@ void runTests() {
     tearDown(MapLibreNetwork.reset);
 
     testWidgets('rewrites the URLs that maps request', (tester) async {
-      // The web serves the app's assets itself, the other platforms from a
+      // The web loads the style from a data URL, the other platforms from a
       // local server.
       _StyleServer? server;
       String target;
       if (kIsWeb) {
-        target = Uri.base
-            .resolve('assets/assets/styles/test_style.json')
-            .toString();
+        target = Uri.dataFromString(
+          offlineStyle,
+          mimeType: 'application/json',
+        ).toString();
       } else {
         server = await _StyleServer.start();
         addTearDown(server.close);

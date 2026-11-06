@@ -351,6 +351,9 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     final transformed = MapLibreNetwork.transformUrl(url, kind);
     final headers = MapLibreNetwork.headersFor(transformed, kind);
     if (transformed == url && headers == null) return null;
+    // A `headers: null` makes fetch throw, so it is left out without
+    // headers.
+    if (headers == null) return interop.RequestParameters(url: transformed);
     return interop.RequestParameters(
       url: transformed,
       headers: headers.jsify(),
