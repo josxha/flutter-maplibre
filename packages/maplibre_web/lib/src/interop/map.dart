@@ -168,6 +168,16 @@ extension type JsMap._(Camera _) implements Camera {
     JSArray<Point> rect,
     JSAny? options,
   );
+
+  /// Returns the features of the source [sourceId] that satisfy [options].
+  external JSArray<MapGeoJSONFeature> querySourceFeatures(
+    String sourceId,
+    JSAny? options,
+  );
+
+  /// Returns the features anywhere in the map that satisfy [options].
+  @JS('queryRenderedFeatures')
+  external JSArray<MapGeoJSONFeature> queryRenderedFeaturesAll(JSAny? options);
 }
 
 /// Anonymous MapOptions for the MapLibre JavaScript [JsMap].
@@ -293,14 +303,4 @@ extension type StyleSwapOptions._(JSObject _) implements JSObject {
     /// and building the given one instead of attempting a diff-based update.
     bool? diff,
   });
-}
-
-/// QueryRenderedFeaturesOptions
-///
-/// https://maplibre.org/maplibre-gl-js/docs/API/type-aliases/QueryRenderedFeaturesOptions/
-@anonymous
-@JS()
-extension type QueryRenderedFeaturesOptions._(JSObject _) implements JSObject {
-  /// Create a new JS [MapOptions] object.
-  external factory QueryRenderedFeaturesOptions({JSArray<JSString>? layers});
 }

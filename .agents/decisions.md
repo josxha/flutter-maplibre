@@ -284,6 +284,18 @@ Each entry: the decision, then why.
   style layer, `RenderedFeature.layerId`; on web it comes from the gl-js
   feature's `layer.id`. The webview's `*Async` overloads went with the
   webview package.
+- **One `queryRenderedFeatures(QueryGeometry, {layerIds, filter})`, like
+  gl-js and the C API.** `QueryGeometry` is sealed: `.point`, `.rect` and
+  `.viewport`. The C API also queries along a screen line string, but gl-js
+  only takes a point or a box, so there is no `.line`. The C API has no
+  viewport geometry, so native queries a box of the map's extent; gl-js
+  queries without a geometry. `filter` is a typed `Expression<bool>`, the
+  type of layer filters. `RenderedFeature.geometry` is a geobase `Geometry`,
+  parsed from the GeoJSON that both platforms report, like sources and
+  offline regions. `querySourceFeatures(sourceId, {sourceLayer, filter})`
+  takes one source layer like gl-js; native passes it as the C API's list.
+  Web returns no features for a missing source instead of letting gl-js
+  throw, as native does.
 - **Every native map and the `OfflineManager` use one database,
   `maplibre_native.db` in the app support directory (`path_provider`).**
   Each map and the offline manager have a runtime of their own, and runtimes

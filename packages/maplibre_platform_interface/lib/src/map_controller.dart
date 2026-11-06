@@ -98,43 +98,37 @@ abstract interface class MapController {
   /// rectangle, and the box is larger than it.
   GeoBox getVisibleBounds();
 
-  /// Returns an array of rendered map features that intersect with a given
-  /// screen location measured in logical pixels.
+  /// The features that the map draws in [geometry], topmost first.
   ///
-  /// If [layerIds] is non-null, only features from those layers will be
-  /// returned.
+  /// If [layerIds] is non-null, only features from those layers are
+  /// returned; an empty list returns none. If [filter] is non-null, only
+  /// features for which it is true are returned.
   ///
-  /// NOTE: features may appear multiple times in query results, for example if
-  /// they cross tile boundaries.
+  /// A feature can appear more than once, for example if it crosses tile
+  /// boundaries or more than one layer draws it.
   ///
-  /// Returns an empty list if either the map or underlying render surface has
-  /// been destroyed.
-  // TODO(mhernz): add filter parameter
-  //
-  // [filter] is an array of filter expressions. If provided, only features
-  // that match all of the filters will be returned.
-  Future<List<RenderedFeature>> featuresAtPoint(
-    Offset point, {
+  /// Returns an empty list if the map has been disposed.
+  Future<List<RenderedFeature>> queryRenderedFeatures(
+    QueryGeometry geometry, {
     List<String>? layerIds,
+    Expression<bool>? filter,
   });
 
-  /// Returns an array of rendered map features that intersect with a given
-  /// on-screen rectangle measured in logical pixels.
+  /// The features of the source [sourceId] in the tiles that it loaded,
+  /// including features that are hidden or outside the visible part of the
+  /// map, but only while a visible layer uses the source.
   ///
-  /// If [layerIds] is non-null, only features from those layers will be
-  /// returned.
+  /// For a vector tile source, [sourceLayer] names the source layer to
+  /// query, and is required. If [filter] is non-null, only features for which
+  /// it is true are returned.
   ///
-  /// NOTE: features may appear multiple times in query results, for example if
-  /// they cross tile boundaries.
+  /// A feature can appear more than once, for example if it crosses tile
+  /// boundaries.
   ///
-  /// Returns an empty list if either the map or underlying render surface has
-  /// been destroyed.
-  // TODO(mhernz): add filter parameter
-  //
-  // [filter] is an array of filter expressions. If provided, only features
-  // that match all of the filters will be returned.
-  Future<List<RenderedFeature>> featuresInRect(
-    Rect rect, {
-    List<String>? layerIds,
+  /// Returns an empty list if the map has been disposed.
+  Future<List<SourceFeature>> querySourceFeatures(
+    String sourceId, {
+    String? sourceLayer,
+    Expression<bool>? filter,
   });
 }

@@ -594,6 +594,39 @@ class MapLibreMapStateNative extends MapLibreMapState {
   void _applyDelta(mln.CameraDelta delta) =>
       _map?.discarding.applyCameraDelta(delta);
 
+  @override
+  Future<List<SourceFeature>> querySourceFeatures(
+    String sourceId, {
+    String? sourceLayer,
+    Expression<bool>? filter,
+  }) async {
+    final renderer = _renderer;
+    if (renderer == null || _disposed) return const [];
+    final features = await renderer.querySourceFeatures(
+      sourceId,
+      sourceLayerIds: sourceLayer == null ? null : [sourceLayer],
+      filter: filter?.toJson(),
+    );
+    return [
+      for (final queried in features)
+        if (queried.feature case final Map<String, Object?> feature)
+          SourceFeature(
+            id: feature['id'],
+            properties: _properties(feature),
+            geometry: RenderedFeature.geometryFromJson(feature['geometry']),
+            sourceLayer: _nonEmpty(queried.sourceLayerId),
+          ),
+    ];
+  }
+
+  static mln.RenderedQueryGeometry _box(Rect rect) =>
+      mln.RenderedQueryGeometry.box(
+        mln.ScreenBox(
+          min: _screenPoint(rect.topLeft),
+          max: _screenPoint(rect.bottomRight),
+        ),
+      );
+
   static mln.ScreenPoint _screenPoint(Offset offset) =>
       mln.ScreenPoint(x: offset.dx, y: offset.dy);
 
@@ -859,54 +892,42 @@ class MapLibreMapStateNative extends MapLibreMapState {
   }
 
   @override
-  Future<List<RenderedFeature>> featuresAtPoint(
-    Offset point, {
+  Future<List<RenderedFeature>> queryRenderedFeatures(
+    QueryGeometry geometry, {
     List<String>? layerIds,
-  }) => _queryRenderedFeatures(
-    mln.RenderedQueryGeometry.point(_screenPoint(point)),
-    layerIds,
-  );
-
-  @override
-  Future<List<RenderedFeature>> featuresInRect(
-    Rect rect, {
-    List<String>? layerIds,
-  }) => _queryRenderedFeatures(
-    mln.RenderedQueryGeometry.box(
-      mln.ScreenBox(
-        min: _screenPoint(rect.topLeft),
-        max: _screenPoint(rect.bottomRight),
-      ),
-    ),
-    layerIds,
-  );
-
-  Future<List<RenderedFeature>> _queryRenderedFeatures(
-    mln.RenderedQueryGeometry geometry,
-    List<String>? layerIds,
-  ) async {
+    Expression<bool>? filter,
+  }) async {
     final renderer = _renderer;
     // No layers to query matches nothing, as on web.
-    if (renderer == null || (layerIds != null && layerIds.isEmpty)) {
+    if (renderer == null ||
+        _disposed ||
+        (layerIds != null && layerIds.isEmpty)) {
       return const [];
     }
     final features = await renderer.queryRenderedFeatures(
-      geometry,
+      switch (geometry) {
+        QueryGeometryPoint(:final point) => mln.RenderedQueryGeometry.point(
+          _screenPoint(point),
+        ),
+        QueryGeometryRect(:final rect) => _box(rect),
+        QueryGeometryViewport() => _box(
+          Offset.zero &
+              Size(
+                renderer.extent.width.toDouble(),
+                renderer.extent.height.toDouble(),
+              ),
+        ),
+      },
       layerIds: layerIds,
+      filter: filter?.toJson(),
     );
     return [
       for (final queried in features)
         if (queried.feature case final Map<String, Object?> feature)
           RenderedFeature(
             id: feature['id'],
-            properties: switch (feature['properties']) {
-              final Map<String, Object?> properties => properties,
-              _ => const {},
-            },
-            geometry: switch (feature['geometry']) {
-              final Map<String, Object?> geometry => geometry,
-              _ => null,
-            },
+            properties: _properties(feature),
+            geometry: RenderedFeature.geometryFromJson(feature['geometry']),
             sourceId: _nonEmpty(queried.sourceId),
             sourceLayer: _nonEmpty(queried.sourceLayerId),
             layerId: _nonEmpty(queried.layerId),
@@ -914,6 +935,13 @@ class MapLibreMapStateNative extends MapLibreMapState {
     ];
   }
 }
+
+/// The properties of a GeoJSON [feature], or none.
+Map<String, Object?> _properties(Map<String, Object?> feature) =>
+    switch (feature['properties']) {
+      final Map<String, Object?> properties => properties,
+      _ => const {},
+    };
 
 /// [value], or null for the empty string that the C API reports as absent.
 String? _nonEmpty(String value) => value.isEmpty ? null : value;

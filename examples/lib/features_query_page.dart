@@ -34,12 +34,14 @@ class _FeaturesQueryPageState extends State<FeaturesQueryPage> {
         onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: _onStyleLoaded,
         onClick: (event) async {
-          final features = await _controller.featuresAtPoint(event.screenPoint);
+          final features = await _controller.queryRenderedFeatures(
+            .point(event.screenPoint),
+          );
           if (context.mounted) _showFeatures(features);
         },
         onLongClick: (event) async {
-          final features = await _controller.featuresInRect(
-            Rect.fromCircle(center: event.screenPoint, radius: 20),
+          final features = await _controller.queryRenderedFeatures(
+            .rect(Rect.fromCircle(center: event.screenPoint, radius: 20)),
           );
           if (context.mounted) _showFeatures(features);
         },

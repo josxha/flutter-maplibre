@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
+import 'package:geobase/geobase.dart' show GeometryBuilder;
+import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 
 /// Data class representing a vector feature that was rendered on the map.
 ///
@@ -33,13 +37,9 @@ class RenderedFeature {
   /// The properties of the feature as provided by its source.
   final Map<String, Object?> properties;
 
-  /// The GeoJSON geometry of the feature as provided by its source.
-  ///
-  /// The map usually contains `type` and `coordinates` keys.
-  ///
-  /// This field may be null if the platform does not expose geometry in query
-  /// results.
-  final Map<String, Object?>? geometry;
+  /// The geometry of the feature, in the precision of the tile that drew it,
+  /// or null if it has none.
+  final Geometry? geometry;
 
   /// The ID of the source that provided the feature.
   final String? sourceId;
@@ -50,9 +50,21 @@ class RenderedFeature {
   /// The ID of the style layer that rendered the feature.
   final String? layerId;
 
+  /// Parses the GeoJSON geometry object that the platforms report, or
+  /// returns null if [json] is not one.
+  static Geometry? geometryFromJson(Object? json) {
+    if (json is! Map || json['type'] is! String) return null;
+    try {
+      return GeometryBuilder.parse(jsonEncode(json));
+    } on FormatException {
+      return null;
+    }
+  }
+
   @override
   String toString() =>
-      'RenderedFeature(id: $id, properties: $properties, geometry: $geometry, '
+      'RenderedFeature(id: $id, properties: $properties, '
+      'geometry: ${geometry?.toText()}, '
       'sourceId: $sourceId, sourceLayer: $sourceLayer, layerId: $layerId)';
 
   @override

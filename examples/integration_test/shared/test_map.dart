@@ -219,8 +219,8 @@ class TestMap {
   }) async {
     final deadline = DateTime.now().add(timeout);
     while (true) {
-      final features = await controller.featuresAtPoint(
-        point,
+      final features = await controller.queryRenderedFeatures(
+        .point(point),
         layerIds: layerIds,
       );
       if (matches(features)) return features;

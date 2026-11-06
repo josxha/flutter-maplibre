@@ -130,14 +130,16 @@ map does.
 
 ## Query features
 
-`featuresAtPoint` and `featuresInRect` return the rendered features at a
-screen position or in a rectangle, optionally only from some layers:
+`queryRenderedFeatures` returns the features drawn at a screen position
+(`QueryGeometry.point`), in a rectangle (`.rect`) or anywhere in the map
+(`.viewport`), optionally only from some layers or matching a filter:
 
 ```dart
 onClick: (event) async {
-  final features = await controller.featuresAtPoint(
-    event.screenPoint,
+  final features = await controller.queryRenderedFeatures(
+    .point(event.screenPoint),
     layerIds: ['points'],
+    filter: .equal(.get('kind'), .literal('cafe')),
   );
   for (final feature in features) {
     print('${feature.layerId}: ${feature.properties}');
@@ -145,8 +147,21 @@ onClick: (event) async {
 },
 ```
 
-Each `RenderedFeature` holds its `id`, `properties` and `geometry`, and the
+Each `RenderedFeature` holds its `id`, `properties` and geobase `geometry`, and the
 `sourceId`, `sourceLayer` and `layerId` it comes from.
+
+`querySourceFeatures` returns the features of a source in the tiles it loaded,
+also those that a filter hides or that lie outside the visible part of the
+map. A source loads tiles only while a visible layer uses it. For a vector
+tile source, name the `sourceLayer`:
+
+```dart
+final countries = await controller.querySourceFeatures(
+  'openmaptiles',
+  sourceLayer: 'boundary',
+  filter: .equal(.get('admin_level'), const .literal(2)),
+);
+```
 
 ## Paused rendering
 
