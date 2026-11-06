@@ -83,7 +83,7 @@ class MapOptions {
   ///
   /// Read once, when the map is created: changing it later has no effect.
   ///
-  /// Not on web: the web always decodes FastPFOR and ignores it.
+  /// Not needed on web, where FastPFOR decoding is always enabled.
   final bool fastPforEnabled;
 
   @override

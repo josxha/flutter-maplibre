@@ -199,10 +199,10 @@ A vector source can also serve [MapLibre Tiles](https://maplibre.org/maplibre-ti
 instead of MVT. Set `"encoding": "mlt"` on the source in the style JSON.
 
 Encoders such as [Martin](https://maplibre.org/martin/) compress integers with
-FastPFOR. Not on web, the map only decodes it when it is created with
-`fastPforEnabled`. Without it, such tiles are dropped with the warning
-`MLT parse failed: FastPFOR decoding is not enabled`. The web always decodes
-them.
+FastPFOR. Create the map with `fastPforEnabled` to decode them; without it,
+such tiles are dropped with the warning
+`MLT parse failed: FastPFOR decoding is not enabled`. It is not needed on web,
+where FastPFOR decoding is always enabled.
 
 ```dart
 MapLibreMap(
