@@ -169,6 +169,12 @@ extension type JsMap._(Camera _) implements Camera {
     JSAny? options,
   );
 
+  /// Returns the features of the source [sourceId] that satisfy [options].
+  external JSArray<MapGeoJSONFeature> querySourceFeatures(
+    String sourceId,
+    JSAny? options,
+  );
+
   /// Returns the features anywhere in the map that satisfy [options].
   @JS('queryRenderedFeatures')
   external JSArray<MapGeoJSONFeature> queryRenderedFeaturesAll(JSAny? options);

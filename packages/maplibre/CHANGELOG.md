@@ -25,6 +25,8 @@
 
 - `queryRenderedFeatures` takes a `filter` expression and can query the whole
   map with `QueryGeometry.viewport()`.
+- `MapController.querySourceFeatures` returns the loaded features of a source,
+  also hidden ones.
 - `MapController.cameraFor` and `stopCamera`, and `roll` and `padding` on
   `CameraPosition`.
 - New map events: `onError`, `onStyleImageMissing`, `onLoadingStarted`,

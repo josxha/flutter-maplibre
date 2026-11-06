@@ -113,4 +113,22 @@ abstract interface class MapController {
     List<String>? layerIds,
     Expression<bool>? filter,
   });
+
+  /// The features of the source [sourceId] in the tiles that it loaded,
+  /// including features that are hidden or outside the visible part of the
+  /// map, but only while a visible layer uses the source.
+  ///
+  /// For a vector tile source, [sourceLayer] names the source layer to
+  /// query, and is required. If [filter] is non-null, only features for which
+  /// it is true are returned.
+  ///
+  /// A feature can appear more than once, for example if it crosses tile
+  /// boundaries.
+  ///
+  /// Returns an empty list if the map has been disposed.
+  Future<List<SourceFeature>> querySourceFeatures(
+    String sourceId, {
+    String? sourceLayer,
+    Expression<bool>? filter,
+  });
 }

@@ -153,6 +153,7 @@ export 'package:maplibre_platform_interface/maplibre_platform_interface.dart'
         RawValue,
         RenderedFeature,
         Source,
+        SourceFeature,
         StringExpression,
         StyleController,
         StyleEnum,

@@ -98,6 +98,21 @@ final class MapRenderer implements FrameTargetHost {
         : RenderedFeatureQueryOptions(layerIds: layerIds, filter: filter),
   );
 
+  /// Queries the features that the source [sourceId] loaded for rendering.
+  Future<List<SourceFeature>> querySourceFeatures(
+    String sourceId, {
+    List<String>? sourceLayerIds,
+    Object? filter,
+  }) => _session.querySourceFeatures(
+    sourceId,
+    options: sourceLayerIds == null && filter == null
+        ? null
+        : SourceFeatureQueryOptions(
+            sourceLayerIds: sourceLayerIds,
+            filter: filter,
+          ),
+  );
+
   @override
   bool get disposed => _disposed;
 

@@ -254,6 +254,57 @@ void runTests() {
       );
     });
 
+    testWidgets('querySourceFeatures finds the features of a source', (
+      tester,
+    ) async {
+      final map = await pumpMap(
+        tester,
+        options: offlineOptions(center: _center, zoom: 10),
+      );
+      await _addFixture(map);
+      await map.style.sources.add(
+        GeoJsonSource.data(
+          id: 'points',
+          data: featureCollection(const [
+            Feature(geometry: Point(_center), id: 4, properties: {'kind': 'a'}),
+            Feature(
+              geometry: Point(Geographic(lon: 0.105, lat: 0.1)),
+              id: 5,
+              properties: {'kind': 'b'},
+            ),
+          ]),
+        ),
+      );
+      // A source loads tiles only while a visible layer uses it.
+      await map.style.layers.add(
+        CircleStyleLayer(id: 'points_layer', sourceId: 'points'),
+      );
+      await map.waitForFeatures(
+        map.center,
+        (features) => features.any((f) => f.sourceId == 'points'),
+      );
+
+      final polygons = await map.controller.querySourceFeatures(
+        'polygon_source',
+      );
+      expect(polygons, isNotEmpty);
+      expect(polygons.first.properties['kind'], 'polygon');
+      expect(polygons.first.geometry, isA<Polygon>());
+      expect(polygons.first.sourceLayer, isNull);
+
+      final points = await map.controller.querySourceFeatures('points');
+      expect(points.map((f) => f.properties['kind']).toSet(), {'a', 'b'});
+      final filtered = await map.controller.querySourceFeatures(
+        'points',
+        filter: .equal(.get('kind'), const .literal('b')),
+      );
+      expect(filtered, isNotEmpty);
+      expect(filtered.map((f) => f.properties['kind']).toSet(), {'b'});
+      expect(filtered.first.geometry, isA<Point>());
+
+      expect(await map.controller.querySourceFeatures('missing'), isEmpty);
+    });
+
     testWidgets('reports the source layer of vector tiles (network)', (
       tester,
     ) async {
@@ -276,6 +327,12 @@ void runTests() {
         features.map((f) => (f.sourceId, f.sourceLayer)),
         everyElement(('maplibre', 'countries')),
       );
+      final countries = await map.controller.querySourceFeatures(
+        'maplibre',
+        sourceLayer: 'countries',
+      );
+      expect(countries, isNotEmpty);
+      expect(countries.map((f) => f.sourceLayer), everyElement('countries'));
     });
   });
 }

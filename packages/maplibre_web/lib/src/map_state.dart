@@ -629,6 +629,31 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     });
   }
 
+  @override
+  Future<List<SourceFeature>> querySourceFeatures(
+    String sourceId, {
+    String? sourceLayer,
+    Expression<bool>? filter,
+  }) async {
+    // gl-js throws for a source that the style doesn't have.
+    if (_map.getSource(sourceId) == null) return const [];
+    final options = JSObject();
+    if (sourceLayer != null) options['sourceLayer'] = sourceLayer.toJS;
+    if (filter != null) options['filter'] = filter.toJson().jsify();
+    return _map
+        .querySourceFeatures(sourceId, options)
+        .toDart
+        .map(
+          (f) => SourceFeature(
+            id: f.id.dartify(),
+            properties: f.properties.asStringMap() ?? {},
+            geometry: RenderedFeature.geometryFromJson(f.geometry.dartify()),
+            sourceLayer: f.sourceLayer,
+          ),
+        )
+        .toList(growable: false);
+  }
+
   static List<RenderedFeature> _renderedFeatures(
     JSArray<interop.MapGeoJSONFeature> features,
   ) => features.toDart

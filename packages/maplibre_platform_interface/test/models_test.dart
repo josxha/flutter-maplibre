@@ -540,4 +540,23 @@ void main() {
       );
     });
   });
+
+  group('SourceFeature', () {
+    test('compares id, source layer and properties', () {
+      const feature = SourceFeature(id: 1, properties: {'a': 1});
+      expect(feature, const SourceFeature(id: 1, properties: {'a': 1}));
+      expect(
+        feature.hashCode,
+        const SourceFeature(id: 1, properties: {'a': 1}).hashCode,
+      );
+      expect(feature, isNot(const SourceFeature(id: 2, properties: {'a': 1})));
+      expect(feature, isNot(const SourceFeature(id: 1, properties: {'a': 2})));
+      expect(
+        feature,
+        isNot(
+          const SourceFeature(id: 1, properties: {'a': 1}, sourceLayer: 'l'),
+        ),
+      );
+    });
+  });
 }

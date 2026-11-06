@@ -292,7 +292,10 @@ Each entry: the decision, then why.
   queries without a geometry. `filter` is a typed `Expression<bool>`, the
   type of layer filters. `RenderedFeature.geometry` is a geobase `Geometry`,
   parsed from the GeoJSON that both platforms report, like sources and
-  offline regions.
+  offline regions. `querySourceFeatures(sourceId, {sourceLayer, filter})`
+  takes one source layer like gl-js; native passes it as the C API's list.
+  Web returns no features for a missing source instead of letting gl-js
+  throw, as native does.
 - **Every native map and the `OfflineManager` use one database,
   `maplibre_native.db` in the app support directory (`path_provider`).**
   Each map and the offline manager have a runtime of their own, and runtimes
