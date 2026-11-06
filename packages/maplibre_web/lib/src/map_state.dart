@@ -648,7 +648,9 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
             id: f.id.dartify(),
             properties: f.properties.asStringMap() ?? {},
             geometry: RenderedFeature.geometryFromJson(f.geometry.dartify()),
-            sourceLayer: f.sourceLayer,
+            // gl-js leaves the source layer of source features unset, and
+            // all of them come from the queried one.
+            sourceLayer: f.sourceLayer ?? sourceLayer,
           ),
         )
         .toList(growable: false);
