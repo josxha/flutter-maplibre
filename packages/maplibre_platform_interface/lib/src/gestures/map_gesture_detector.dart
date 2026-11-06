@@ -50,6 +50,9 @@ class MapGestureDetector extends StatefulWidget {
     this.onDoubleClick,
     this.onSecondaryClick,
     this.onLongClick,
+    this.onDragStart,
+    this.onDrag,
+    this.onDragEnd,
     super.key,
   });
 
@@ -83,6 +86,20 @@ class MapGestureDetector extends StatefulWidget {
   /// Called on a long press.
   final MapEventCallback<MapEventLongClick>? onLongClick;
 
+  /// Called when a drag with one finger or the primary mouse button starts,
+  /// where it went down.
+  ///
+  /// The drag pans the camera unless the callback calls
+  /// [MapEventDragStart.preventDefault], before the [Future] it returns
+  /// completes if it returns one. The pan waits for that [Future].
+  final FutureOr<void> Function(MapEventDragStart event)? onDragStart;
+
+  /// Called whenever the pointer of a drag moves.
+  final MapEventCallback<MapEventDrag>? onDrag;
+
+  /// Called when a drag ends, or when a second finger makes it a pinch.
+  final MapEventCallback<MapEventDragEnd>? onDragEnd;
+
   /// The map.
   final Widget child;
 
@@ -113,6 +130,25 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
 
   /// Whether the current scale gesture panned, which it may fling after.
   var _scalePanned = false;
+
+  /// Where the primary pointer went down while it was the only one, where a
+  /// drag starts.
+  Offset? _dragDownPosition;
+
+  // The current drag: its start event, the [Future] that its callback
+  // returned until it completes, where its pointer was last, and where the
+  // pan it held back while it waited started.
+  MapEventDragStart? _drag;
+  Future<void>? _dragPending;
+  Offset? _dragPosition;
+  Offset? _heldPanFrom;
+
+  /// Whether a drag that didn't pan became a pinch, which then doesn't move
+  /// the camera either until every pointer is up.
+  var _scaleHeld = false;
+
+  /// The pointers that are down.
+  final _pointers = <int>{};
 
   // The mouse pointer that rotates and tilts: a right-button or Ctrl and
   // left-button drag.
@@ -159,6 +195,11 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
 
   bool get _zoomsOnDoubleTap => _movements.zoom && _gestures.doubleTap;
 
+  bool get _reportsDrags =>
+      widget.onDragStart != null ||
+      widget.onDrag != null ||
+      widget.onDragEnd != null;
+
   @override
   void dispose() {
     _endGesture();
@@ -171,7 +212,8 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
     final movements = _movements;
     final scales =
         (movements.pan && (gestures.drag || gestures.pinch)) ||
-        ((movements.zoom || movements.rotate) && gestures.pinch);
+        ((movements.zoom || movements.rotate) && gestures.pinch) ||
+        _reportsDrags;
     final doubleTaps = _zoomsOnDoubleTap || widget.onDoubleClick != null;
     // The whole map takes part in gestures, whatever its child hit-tests.
     return Listener(
@@ -316,6 +358,18 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
   }
 
   void _onPointerDown(PointerDownEvent event) {
+    _pointers.add(event.pointer);
+    _dragDownPosition = switch (event.kind) {
+      PointerDeviceKind.touch =>
+        _touchPointers.isEmpty ? event.localPosition : null,
+      PointerDeviceKind.mouse
+          when event.buttons == kPrimaryMouseButton &&
+              !HardwareKeyboard.instance.isControlPressed =>
+        event.localPosition,
+      PointerDeviceKind.stylus ||
+      PointerDeviceKind.invertedStylus => event.localPosition,
+      _ => null,
+    };
     // Rotate and tilt with the right button or Ctrl and the left button, as in
     // MapLibre GL JS.
     if (event.kind == PointerDeviceKind.mouse &&
@@ -381,6 +435,8 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
   }
 
   void _onPointerEnd(PointerEvent event) {
+    _pointers.remove(event.pointer);
+    if (_pointers.isEmpty) _scaleHeld = false;
     _shovePosition.remove(event.pointer);
     if (_shoveStart.containsKey(event.pointer)) _stopShove();
     if (_touchPointers.remove(event.pointer)) _onTouchEnd(event);
@@ -503,8 +559,70 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
     _lastScale = 1;
     _lastRotation = 0;
     _scalePanned = false;
+    _endDrag();
     // The gesture begins with its first camera change, so that a drag while
     // only a pinch moves the camera doesn't stop a running animation.
+    final down = _dragDownPosition;
+    if (details.pointerCount == 1 &&
+        down != null &&
+        _reportsDrags &&
+        _quickZoomPointer == null &&
+        _secondaryPointer == null) {
+      _startDrag(down, details.localFocalPoint);
+    }
+  }
+
+  /// Reports the start of a drag that went down at [down] and is at
+  /// [position] now.
+  void _startDrag(Offset down, Offset position) {
+    _emitUserInput(down, (point, screenPoint) {
+      final event = MapEventDragStart(point: point, screenPoint: screenPoint);
+      _drag = event;
+      _dragPosition = position;
+      final result = widget.onDragStart?.call(event);
+      if (result is! Future<void>) return;
+      late final Future<void> pending;
+      pending = result
+          .catchError((Object error, StackTrace stack) {
+            FlutterError.reportError(
+              FlutterErrorDetails(
+                exception: error,
+                stack: stack,
+                library: 'maplibre',
+                context: ErrorDescription('while handling a drag start'),
+              ),
+            );
+          })
+          .whenComplete(() {
+            if (identical(_dragPending, pending)) _dragPending = null;
+          });
+      _dragPending = pending;
+    });
+  }
+
+  /// Reports the end of the current drag, if there is one. If it didn't pan
+  /// and pointers stay down, they don't move the camera either.
+  void _endDrag() {
+    final position = _dragPosition;
+    final drag = _drag;
+    final started = drag != null;
+    if (started &&
+        _pointers.isNotEmpty &&
+        (drag.defaultPrevented || _dragPending != null)) {
+      _scaleHeld = true;
+    }
+    _drag = null;
+    _dragPending = null;
+    _dragPosition = null;
+    _heldPanFrom = null;
+    if (!started || position == null) return;
+    final onDragEnd = widget.onDragEnd;
+    if (onDragEnd == null) return;
+    _emitUserInput(
+      position,
+      (point, screenPoint) =>
+          onDragEnd(MapEventDragEnd(point: point, screenPoint: screenPoint)),
+    );
   }
 
   void _onScaleUpdate(ScaleUpdateDetails details) {
@@ -519,7 +637,38 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
     final movements = _movements;
 
     final focal = details.localFocalPoint;
-    final pan = details.focalPointDelta;
+    var pan = details.focalPointDelta;
+    if (_scaleHeld) return;
+    final drag = _drag;
+    if (drag != null) {
+      // A second finger makes the drag a pinch, which a prevented drag keeps
+      // from moving the camera too.
+      if (details.pointerCount > 1) {
+        _endDrag();
+        if (_scaleHeld) return;
+      } else {
+        _dragPosition = focal;
+        final onDrag = widget.onDrag;
+        if (onDrag != null && pan != Offset.zero) {
+          _emitUserInput(
+            focal,
+            (point, screenPoint) =>
+                onDrag(MapEventDrag(point: point, screenPoint: screenPoint)),
+          );
+        }
+        if (drag.defaultPrevented) return;
+        if (_dragPending != null) {
+          // Hold the pan until the callback decides, then catch up.
+          _heldPanFrom ??= focal - pan;
+          return;
+        }
+        final heldFrom = _heldPanFrom;
+        if (heldFrom != null) {
+          _heldPanFrom = null;
+          pan = focal - heldFrom;
+        }
+      }
+    }
     // A trackpad counts as two pointers.
     final pinches = gestures.pinch && details.pointerCount >= 2;
     final pans =
@@ -546,6 +695,7 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
   }
 
   void _onScaleEnd(ScaleEndDetails details) {
+    _endDrag();
     // Only a plain drag or pinch flings; the others drove the camera
     // themselves.
     final flings =

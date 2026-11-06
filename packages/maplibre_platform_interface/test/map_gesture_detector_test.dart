@@ -67,6 +67,8 @@ void main() {
     MapMovements movements = const MapMovements(),
     bool listenToDoubleClicks = true,
     FutureOr<void> Function(MapEventDoubleClick event)? onDoubleClick,
+    bool reportDrags = false,
+    FutureOr<void> Function(MapEventDragStart event)? onDragStart,
   }) async {
     tester.view
       ..physicalSize = _size
@@ -87,6 +89,9 @@ void main() {
             onDoubleClick ?? (listenToDoubleClicks ? events.add : null),
         onSecondaryClick: events.add,
         onLongClick: events.add,
+        onDragStart: onDragStart ?? (reportDrags ? events.add : null),
+        onDrag: reportDrags ? events.add : null,
+        onDragEnd: reportDrags ? events.add : null,
         child: const SizedBox.expand(),
       ),
     );
@@ -670,6 +675,167 @@ void main() {
       await tester.pumpAndSettle();
       expect(camera.zoomed, 0);
       expect(camera.zooms, isEmpty);
+    });
+
+    testWidgets('a drag reports where it starts, moves and ends', (
+      tester,
+    ) async {
+      await pumpMap(tester, reportDrags: true);
+      await tester.dragFrom(_center, const Offset(-200, 0));
+      await tester.pumpAndSettle();
+      final start = events.first as MapEventDragStart;
+      expect(start.screenPoint, _center);
+      expect(start.point, const Geographic(lon: 0, lat: 0));
+      expect(events.whereType<MapEventDrag>(), isNotEmpty);
+      final end = events.last as MapEventDragEnd;
+      expect(end.screenPoint, _center - const Offset(200, 0));
+      expect(end.point.lon, closeTo(-72, 1e-9));
+      // It still pans.
+      expect(camera.panned.dx, lessThan(-150));
+    });
+
+    testWidgets('a prevented drag does not pan or fling', (tester) async {
+      await pumpMap(
+        tester,
+        reportDrags: true,
+        onDragStart: (event) => event.preventDefault(),
+      );
+      await tester.flingFrom(_center, const Offset(-300, 0), 1000);
+      await tester.pumpAndSettle();
+      expect(events.whereType<MapEventDrag>(), isNotEmpty);
+      expect(events.last, isA<MapEventDragEnd>());
+      expect(camera.calls, isEmpty);
+    });
+
+    testWidgets('an async drag start callback can prevent the pan', (
+      tester,
+    ) async {
+      final decided = Completer<void>();
+      await pumpMap(
+        tester,
+        reportDrags: true,
+        onDragStart: (event) => decided.future.then((_) {
+          event.preventDefault();
+        }),
+      );
+      final gesture = await tester.startGesture(_center);
+      for (var i = 0; i < 5; i++) {
+        await gesture.moveBy(const Offset(-20, 0));
+        await tester.pump(const Duration(milliseconds: 16));
+      }
+      expect(camera.calls, isEmpty);
+      decided.complete();
+      await tester.pump();
+      for (var i = 0; i < 5; i++) {
+        await gesture.moveBy(const Offset(-20, 0));
+        await tester.pump(const Duration(milliseconds: 16));
+      }
+      await gesture.up();
+      await tester.pumpAndSettle();
+      expect(camera.calls, isEmpty);
+      expect(events.last, isA<MapEventDragEnd>());
+    });
+
+    testWidgets('a pan held for an async drag start catches up', (
+      tester,
+    ) async {
+      final decided = Completer<void>();
+      await pumpMap(
+        tester,
+        gestures: const MapGestures(fling: false),
+        onDragStart: (event) => decided.future,
+      );
+      final gesture = await tester.startGesture(_center);
+      for (var i = 0; i < 5; i++) {
+        await gesture.moveBy(const Offset(-20, 0));
+        await tester.pump(const Duration(milliseconds: 16));
+      }
+      expect(camera.calls, isEmpty);
+      decided.complete();
+      await tester.pump();
+      for (var i = 0; i < 5; i++) {
+        await gesture.moveBy(const Offset(-20, 0));
+        await tester.pump(const Duration(milliseconds: 16));
+      }
+      await gesture.up();
+      await tester.pumpAndSettle();
+      // Everything past the slop of the recognizer, as without the callback.
+      expect(camera.panned.dx, lessThan(-150));
+      expect(camera.panned.dx, greaterThanOrEqualTo(-200));
+    });
+
+    testWidgets('drags are reported while panning is off', (tester) async {
+      await pumpMap(
+        tester,
+        reportDrags: true,
+        movements: const MapMovements(pan: false),
+      );
+      await tester.dragFrom(_center, const Offset(-200, 0));
+      await tester.pumpAndSettle();
+      expect(events.first, isA<MapEventDragStart>());
+      expect(events.last, isA<MapEventDragEnd>());
+      expect(camera.calls, isEmpty);
+    });
+
+    testWidgets('a second finger ends a drag and pinches', (tester) async {
+      await pumpMap(tester, reportDrags: true);
+      final a = await tester.startGesture(_center);
+      await a.moveBy(const Offset(-40, 0));
+      await tester.pump();
+      expect(events.first, isA<MapEventDragStart>());
+      final b = await tester.startGesture(_center + const Offset(100, 0));
+      await tester.pump();
+      for (var i = 0; i < 5; i++) {
+        await b.moveBy(const Offset(20, 0));
+        await tester.pump(const Duration(milliseconds: 16));
+      }
+      await a.up();
+      await b.up();
+      await tester.pumpAndSettle();
+      expect(events.whereType<MapEventDragEnd>(), hasLength(1));
+      expect(camera.zoomed, greaterThan(0));
+    });
+
+    testWidgets('a prevented drag that becomes a pinch does not zoom', (
+      tester,
+    ) async {
+      await pumpMap(
+        tester,
+        reportDrags: true,
+        onDragStart: (event) => event.preventDefault(),
+      );
+      final a = await tester.startGesture(_center);
+      await a.moveBy(const Offset(-40, 0));
+      await tester.pump();
+      final b = await tester.startGesture(_center + const Offset(100, 0));
+      await tester.pump();
+      for (var i = 0; i < 5; i++) {
+        await b.moveBy(const Offset(20, 0));
+        await tester.pump(const Duration(milliseconds: 16));
+      }
+      await a.up();
+      await b.up();
+      await tester.pumpAndSettle();
+      expect(camera.calls, isEmpty);
+    });
+
+    testWidgets('a right mouse drag is not a drag', (tester) async {
+      await pumpMap(tester, reportDrags: true);
+      await mouseDrag(tester, _center, const Offset(10, 0));
+      expect(events.whereType<MapEventDragStart>(), isEmpty);
+      expect(camera.rotated, isNot(0));
+    });
+
+    testWidgets('a left mouse drag is a drag', (tester) async {
+      await pumpMap(tester, reportDrags: true);
+      await mouseDrag(
+        tester,
+        _center,
+        const Offset(-20, 0),
+        buttons: kPrimaryMouseButton,
+      );
+      expect(events.first, isA<MapEventDragStart>());
+      expect(events.last, isA<MapEventDragEnd>());
     });
 
     testWidgets('a widget over the map keeps its pointers', (tester) async {

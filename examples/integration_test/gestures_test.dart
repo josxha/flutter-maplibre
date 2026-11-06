@@ -106,6 +106,20 @@ void runTests() {
       expect(settled.center.lat, closeTo(afterTap.center.lat, 1e-6));
     }, skip: kIsWeb);
 
+    testWidgets('a drag is reported where it starts and ends', (tester) async {
+      final map = await pumpMap(tester, options: _options());
+      final since = map.events.length;
+      await tester.dragFrom(map.toGlobal(map.center), const Offset(-200, 0));
+      final end = await map.waitForEvent<MapEventDragEnd>(since: since);
+      final start = map.events
+          .skip(since)
+          .whereType<MapEventDragStart>()
+          .single;
+      expect(start.screenPoint, map.center);
+      expect(end.screenPoint.dx, closeTo(map.center.dx - 200, 1));
+      expect(map.events.skip(since).whereType<MapEventDrag>(), isNotEmpty);
+    });
+
     testWidgets('disabled gestures leave the camera alone', (tester) async {
       final map = await pumpMap(
         tester,

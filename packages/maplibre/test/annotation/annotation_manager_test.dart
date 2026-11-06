@@ -74,6 +74,28 @@ void main() {
       expect(backend.calls, ['removeLayer', 'removeSource']);
     });
 
+    testWidgets('a draggable layer numbers its features in its source', (
+      tester,
+    ) async {
+      final points = [
+        const Feature(geometry: Point(Geographic(lon: 0, lat: 0))),
+        const Feature(geometry: Point(Geographic(lon: 1, lat: 1))),
+      ];
+      final manager = LayerManager(style, [CircleLayer(points: points)]);
+      backend.calls.clear();
+
+      // Turning dragging on rewrites the unchanged features with an index.
+      manager.updateLayers([CircleLayer(points: points, onDrag: (_) {})]);
+      expect(backend.calls.single, contains('"maplibre:index":1'));
+      backend.calls.clear();
+
+      manager.updateLayers([CircleLayer(points: points, onDrag: (_) {})]);
+      expect(backend.calls, isEmpty);
+
+      manager.updateLayers([CircleLayer(points: points)]);
+      expect(backend.calls.single, isNot(contains('maplibre:index')));
+    });
+
     testWidgets('updates a source whose list grew in place', (tester) async {
       final points = [
         const Feature(geometry: Point(Geographic(lon: 0, lat: 0))),

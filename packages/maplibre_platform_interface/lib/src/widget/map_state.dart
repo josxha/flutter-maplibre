@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/widgets.dart';
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 import 'package:maplibre_platform_interface/src/widget/inherited_model.dart';
@@ -79,6 +81,122 @@ abstract class MapLibreMapState extends State<MapLibreMap>
   /// the platform handles gestures itself.
   GestureCameraSink? get gestureCamera => null;
 
+  /// The feature of [MapLibreMap.layers] that the current drag moves.
+  _LayerDrag? _layerDrag;
+
+  /// Whether a layer of [MapLibreMap.layers] has draggable features.
+  bool get _layersDraggable => widget.layers.any((layer) => layer.draggable);
+
+  FutureOr<void> _onDragStart(MapEventDragStart event) {
+    _layerDrag = null;
+    final onDragStart = widget.onDragStart;
+    if (!_layersDraggable) return onDragStart?.call(event);
+    return _grabFeature(event).then((_) => onDragStart?.call(event));
+  }
+
+  /// Finds the feature of a draggable layer that [event] went down on, and
+  /// keeps the drag from panning the map if it found one.
+  Future<void> _grabFeature(MapEventDragStart event) async {
+    final layerIndexes = <String, int>{
+      for (final (index, layer) in widget.layers.indexed)
+        if (layer.draggable) layer.getLayerId(index): index,
+    };
+    final List<RenderedFeature> features;
+    try {
+      features = await queryRenderedFeatures(
+        .rect(
+          Rect.fromCenter(
+            center: event.screenPoint,
+            width: _grabSize,
+            height: _grabSize,
+          ),
+        ),
+        layerIds: layerIndexes.keys.toList(),
+      );
+    } on Object catch (error, stack) {
+      FlutterError.reportError(
+        FlutterErrorDetails(
+          exception: error,
+          stack: stack,
+          library: 'maplibre',
+          context: ErrorDescription('while finding the feature to drag'),
+        ),
+      );
+      return;
+    }
+    if (!mounted) return;
+    _LayerDrag? nearest;
+    var nearestDistance = double.infinity;
+    for (final feature in features) {
+      final layerIndex = layerIndexes[feature.layerId];
+      final featureIndex =
+          feature.properties[LayerManager.featureIndexProperty];
+      if (layerIndex == null || featureIndex is! num) continue;
+      final drag = _LayerDrag(layerIndex, featureIndex.toInt());
+      final layer = _layerOf(drag);
+      if (layer == null) continue;
+      // A point is grabbed where the pointer went down relative to it, so it
+      // doesn't jump under the pointer. Of several, the nearest wins.
+      var distance = 0.0;
+      if (layer.list[drag.featureIndex].geometry case Point(:final position)) {
+        drag.grabOffset =
+            toScreenLocation(Geographic.from(position)) - event.screenPoint;
+        distance = drag.grabOffset.distance;
+      }
+      if (distance < nearestDistance) {
+        nearest = drag;
+        nearestDistance = distance;
+      }
+    }
+    if (nearest == null) return;
+    event.preventDefault();
+    _layerDrag = nearest;
+    _emitLayerDrag(event.screenPoint, (layer) => layer.onDragStart);
+  }
+
+  void _onDrag(MapEventDrag event) {
+    _emitLayerDrag(event.screenPoint, (layer) => layer.onDrag);
+    widget.onDrag?.call(event);
+  }
+
+  void _onDragEnd(MapEventDragEnd event) {
+    _emitLayerDrag(event.screenPoint, (layer) => layer.onDragEnd);
+    _layerDrag = null;
+    widget.onDragEnd?.call(event);
+  }
+
+  /// The layer of [drag] as the widget has it now, or null if it no longer
+  /// has the dragged feature.
+  Layer? _layerOf(_LayerDrag drag) {
+    final layer = widget.layers.elementAtOrNull(drag.layerIndex);
+    if (layer == null ||
+        !layer.draggable ||
+        drag.featureIndex >= layer.list.length) {
+      return null;
+    }
+    return layer;
+  }
+
+  /// Reports the pointer at [screenPoint] to the callback that [callback]
+  /// picks of the layer of the current drag.
+  void _emitLayerDrag(
+    Offset screenPoint,
+    LayerDragCallback? Function(Layer layer) callback,
+  ) {
+    final drag = _layerDrag;
+    if (drag == null || !isInitialized) return;
+    final layer = _layerOf(drag);
+    if (layer == null) return;
+    final target = screenPoint + drag.grabOffset;
+    callback(layer)?.call(
+      LayerDragEvent(
+        index: drag.featureIndex,
+        point: toLngLat(target),
+        screenPoint: target,
+      ),
+    );
+  }
+
   /// The size of the map's last layout, to report changes with
   /// [MapLibreMap.onResize].
   Size? _size;
@@ -102,6 +220,7 @@ abstract class MapLibreMapState extends State<MapLibreMap>
     final gestureCamera = this.gestureCamera;
     final platformWidget = buildPlatformWidget(context);
     final widget = this.widget;
+    final layersDraggable = _layersDraggable;
     return LayoutBuilder(
       builder: (context, constraints) {
         _onLayout(constraints);
@@ -119,6 +238,15 @@ abstract class MapLibreMapState extends State<MapLibreMap>
                 onDoubleClick: widget.onDoubleClick,
                 onSecondaryClick: widget.onSecondaryClick,
                 onLongClick: widget.onLongClick,
+                onDragStart: layersDraggable || widget.onDragStart != null
+                    ? _onDragStart
+                    : null,
+                onDrag: layersDraggable || widget.onDrag != null
+                    ? _onDrag
+                    : null,
+                onDragEnd: layersDraggable || widget.onDragEnd != null
+                    ? _onDragEnd
+                    : null,
                 child: platformWidget,
               ),
             MapLibreInheritedModel(
@@ -136,4 +264,20 @@ abstract class MapLibreMapState extends State<MapLibreMap>
 
   /// Build the platform specific widget.
   Widget buildPlatformWidget(BuildContext context);
+}
+
+/// Logical pixels of the square around a drag's start that it grabs a
+/// feature of a draggable layer in, so that small features can be grabbed by
+/// touch.
+const _grabSize = 24.0;
+
+/// A feature of [MapLibreMap.layers] that a drag moves.
+class _LayerDrag {
+  _LayerDrag(this.layerIndex, this.featureIndex);
+
+  final int layerIndex;
+  final int featureIndex;
+
+  /// From the pointer to where the feature is, in logical pixels.
+  Offset grabOffset = Offset.zero;
 }

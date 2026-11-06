@@ -85,18 +85,18 @@ final class MapEventCameraMoveEnd extends MapEvent {
 
 // User input
 
-/// The user tapped or clicked the map. Use this class if you don't care
-/// about the kind of input.
+/// The user tapped, clicked or dragged the map. Use this class if you don't
+/// care about the kind of input.
 ///
 /// {@category Events}
 sealed class MapEventUserInput extends MapEvent {
   /// Creates a [MapEventUserInput].
   const MapEventUserInput({required this.point, required this.screenPoint});
 
-  /// The location that the user tapped or clicked.
+  /// The location that the user tapped, clicked or dragged.
   final Geographic point;
 
-  /// Where the user tapped or clicked, in logical pixels of the map.
+  /// Where the user tapped, clicked or dragged, in logical pixels of the map.
   final Offset screenPoint;
 
   String get _name;
@@ -165,6 +165,57 @@ final class MapEventLongClick extends MapEventUserInput {
 
   @override
   String get _name => 'MapEventLongClick';
+}
+
+/// The user started to drag the map with one finger or the primary mouse
+/// button, see [MapLibreMap.onDragStart].
+///
+/// [point] and [screenPoint] are where the drag went down.
+///
+/// {@category Events}
+final class MapEventDragStart extends MapEventUserInput {
+  /// Creates a [MapEventDragStart].
+  MapEventDragStart({required super.point, required super.screenPoint});
+
+  var _defaultPrevented = false;
+
+  /// Whether [preventDefault] was called.
+  bool get defaultPrevented => _defaultPrevented;
+
+  /// Keeps this drag from panning the map, for example to move a feature
+  /// instead. [MapLibreMap.onDrag] and [MapLibreMap.onDragEnd] still follow.
+  ///
+  /// Call it in [MapLibreMap.onDragStart], or before the [Future] that the
+  /// callback returns completes. A layer with [Layer.onDrag] calls it when
+  /// the drag starts on one of its features.
+  void preventDefault() => _defaultPrevented = true;
+
+  @override
+  String get _name => 'MapEventDragStart';
+}
+
+/// The pointer of a drag moved, see [MapLibreMap.onDrag].
+///
+/// {@category Events}
+final class MapEventDrag extends MapEventUserInput {
+  /// Creates a [MapEventDrag].
+  const MapEventDrag({required super.point, required super.screenPoint});
+
+  @override
+  String get _name => 'MapEventDrag';
+}
+
+/// A drag ended, see [MapLibreMap.onDragEnd].
+///
+/// [point] and [screenPoint] are where the pointer was last.
+///
+/// {@category Events}
+final class MapEventDragEnd extends MapEventUserInput {
+  /// Creates a [MapEventDragEnd].
+  const MapEventDragEnd({required super.point, required super.screenPoint});
+
+  @override
+  String get _name => 'MapEventDragEnd';
 }
 
 // Loading and errors

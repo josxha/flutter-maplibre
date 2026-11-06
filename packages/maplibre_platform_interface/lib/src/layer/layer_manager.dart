@@ -46,10 +46,28 @@ class LayerManager {
     return true;
   }
 
-  static GeoJsonSource _sourceOf(Layer layer, int index) => GeoJsonSource.data(
-    id: layer.getSourceId(index),
-    data: .featureCollection(FeatureCollection(List.of(layer.list))),
-  );
+  /// The property that holds the index of each feature in [Layer.list] while
+  /// the layer is [Layer.draggable], to tell which one a drag grabbed.
+  static const featureIndexProperty = 'maplibre:index';
+
+  static GeoJsonSource _sourceOf(Layer layer, int index) =>
+      GeoJsonSource.data(id: layer.getSourceId(index), data: _dataOf(layer));
+
+  static GeoJsonData _dataOf(Layer layer) {
+    if (!layer.draggable) {
+      return .featureCollection(FeatureCollection(List.of(layer.list)));
+    }
+    return .featureCollection(
+      FeatureCollection([
+        for (final (index, feature) in layer.list.indexed)
+          Feature(
+            id: feature.id,
+            geometry: feature.geometry,
+            properties: {...feature.properties, featureIndexProperty: index},
+          ),
+      ]),
+    );
+  }
 
   StyleLayer _addStyleLayer(Layer layer, int index, {String? belowLayerId}) {
     final styleLayer = layer.createStyleLayer(index);
@@ -76,11 +94,12 @@ class LayerManager {
         // `Layer.==` compares `list` by identity and misses features added to
         // the same list in place, so the features are compared with the copy
         // taken last time.
-        if (!_sameFeatures(_oldFeatures[index], layer.list)) {
+        if (layer.draggable != oldLayer.draggable ||
+            !_sameFeatures(_oldFeatures[index], layer.list)) {
           unawaited(
             style.sources.updateGeoJsonData(
               layer.getSourceId(index),
-              .featureCollection(FeatureCollection(List.of(layer.list))),
+              _dataOf(layer),
             ),
           );
         }

@@ -40,6 +40,9 @@ same on every platform.
 | `onDoubleClick`       | The user double tapped or double clicked the map.                                                 |
 | `onSecondaryClick`    | The user clicked the map with the secondary (right) mouse button.                                 |
 | `onLongClick`         | The user pressed the map for a longer time.                                                       |
+| `onDragStart`         | The user starts to drag the map with one finger or the primary mouse button, see [drags](#drags). |
+| `onDrag`              | The pointer of a drag moved.                                                                      |
+| `onDragEnd`           | A drag ended.                                                                                     |
 | `onCameraMoveStart`   | The camera starts to move. `reason` says whether a gesture, the app or the map moved it.          |
 | `onCameraMove`        | The camera moved. Holds the new `CameraPosition` and the `reason`.                                     |
 | `onCameraMoveEnd`     | The camera stopped moving. Holds the `CameraPosition` it ended at and the `reason`.                    |
@@ -64,9 +67,8 @@ Some events are not on every platform:
 | `onContextLost`, `onContextRestored`  | web      | The browser took the map's WebGL context away or gave it back.     |
 | `onProjectionChanged`                 | web      | The map switched its projection.                                   |
 
-`MapEventClick`, `MapEventDoubleClick`, `MapEventSecondaryClick` and
-`MapEventLongClick` extend `MapEventUserInput`, which holds the `point` on the
-map and the `screenPoint` in logical pixels.
+The click and drag events extend `MapEventUserInput`, which holds the
+`point` on the map and the `screenPoint` in logical pixels.
 
 ## Double taps
 
@@ -92,3 +94,30 @@ onDoubleClick: (event) async {
 A tap only waits for a possible second tap while double taps mean something:
 while `onDoubleClick` is set or the zoom gesture is on. Turn both off and
 `onClick` fires right away.
+
+## Drags
+
+A drag with one finger or the primary mouse button reports `onDragStart` where
+it went down, `onDrag` while it moves and `onDragEnd` where it stopped. They
+are reported whether the drag pans the map or not, also while panning is off.
+A second finger ends the drag and starts a pinch.
+
+To move something else instead of the map, call `preventDefault()` on the
+start event. `onDragStart` can be async to check for features first, and
+the map holds the pan until it is done:
+
+```dart
+onDragStart: (event) async {
+  final features = await _controller.queryRenderedFeatures(
+    .point(event.screenPoint),
+    layerIds: ['points'],
+  );
+  if (features.isNotEmpty) event.preventDefault();
+},
+onDrag: (event) {
+  // move the feature to event.point
+},
+```
+
+Annotation layers can do this for their own features, see
+[Drag annotations](annotations/drag.md).

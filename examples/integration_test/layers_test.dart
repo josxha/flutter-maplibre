@@ -75,6 +75,63 @@ void runTests() {
       ]);
     });
 
+    testWidgets('drags a feature of a draggable layer, not the map', (
+      tester,
+    ) async {
+      final options = offlineOptions(zoom: 10);
+      final drags = <LayerDragEvent>[];
+      final ends = <LayerDragEvent>[];
+      CircleLayer layer(Geographic point) => CircleLayer(
+        points: [Feature(geometry: Point(point))],
+        radius: const .literal(20),
+        onDrag: drags.add,
+        onDragEnd: ends.add,
+      );
+      final map = await pumpMap(
+        tester,
+        options: options,
+        layers: [layer(_point)],
+      );
+      await map.waitForFeatures(map.center, (features) => features.isNotEmpty);
+      final before = map.controller.getCamera();
+
+      final gesture = await tester.startGesture(map.toGlobal(map.center));
+      await gesture.moveBy(const Offset(0, 20));
+      // The map looks for the feature before the drag moves it.
+      await map.pumpUntil(
+        () => map.events.whereType<MapEventDragStart>().isNotEmpty,
+        reason: () => 'the drag never started',
+      );
+      for (var i = 0; i < 8; i++) {
+        await gesture.moveBy(const Offset(0, 10));
+        await tester.pump(const Duration(milliseconds: 16));
+      }
+      await gesture.up();
+      await map.pumpUntil(
+        () => ends.isNotEmpty,
+        reason: () => 'the drag never ended, moves: $drags',
+      );
+      await tester.pump(const Duration(milliseconds: 200));
+
+      final end = ends.single;
+      expect(end.index, 0);
+      expect(end.screenPoint.dx, closeTo(map.center.dx, 1));
+      expect(end.screenPoint.dy, closeTo(map.center.dy + 100, 1));
+      expect(end.point.lat, lessThan(_point.lat));
+      final after = map.controller.getCamera();
+      expect(after.center.lon, closeTo(before.center.lon, 1e-6));
+      expect(after.center.lat, closeTo(before.center.lat, 1e-6));
+
+      // The app moves the feature.
+      await tester.pumpWidget(
+        MapApp(options: options, layers: [layer(end.point)]),
+      );
+      await map.waitForFeatures(
+        end.screenPoint,
+        (features) => features.isNotEmpty,
+      );
+    });
+
     testWidgets('updates a changed layer in place and keeps the order', (
       tester,
     ) async {

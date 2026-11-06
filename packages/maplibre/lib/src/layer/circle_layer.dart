@@ -20,6 +20,9 @@ class CircleLayer extends Layer<Feature<Point>> {
     this.strokeOpacity = const .literal(1),
     super.minZoom = 0,
     super.maxZoom = 24,
+    super.onDragStart,
+    super.onDrag,
+    super.onDragEnd,
   }) : super(list: points);
 
   /// Circle radius in pixels. Defaults to 5px.

@@ -453,6 +453,26 @@ Each entry: the decision, then why.
   scrolling list, is a new optional field, not a breaking change. A switch
   exists only for a gesture `MapGestureDetector` recognizes: there are no
   keyboard or box zoom switches until those are implemented.
+- **Drags are map events, and annotation layers build feature dragging on
+  them (#544, #151).** `MapGestureDetector` reports `onDragStart` (where the
+  pointer went down), `onDrag` and `onDragEnd` for one-finger and
+  primary-mouse drags, also while panning is off. As with double taps,
+  `MapEventDragStart.preventDefault()` keeps the drag from panning, and an
+  async `onDragStart` holds the pan until it completes; a pan that was not
+  prevented then catches up, so the map stays under the finger. A second
+  finger ends the drag; a prevented drag's pinch doesn't move the camera
+  until every pointer is up. On top of that, `MapLibreMapState` lets
+  `Layer.onDragStart`/`onDrag`/`onDragEnd` drag features, as #151 planned:
+  on a drag start it queries the draggable layers in a 24 px square,
+  prefers the nearest point, prevents the pan and reports
+  `LayerDragEvent(index, point, screenPoint)`. A draggable layer's source
+  gets a `maplibre:index` property per feature to tell which one was hit,
+  so app ids stay untouched. The layer stays stateless: the app moves the
+  feature with `setState`, as with every other layer change. The callbacks
+  take a non-generic event because `Layer<Feature<Point>>` sits in a
+  `List<Layer>`, where reading a callback field typed by `G` would fail its
+  covariance check. Layer callbacks are left out of `Layer.==`, so a
+  rebuild with new closures doesn't update the style layer.
 - **One gesture recognizer in Dart serves every platform:
   `MapGestureDetector` in `maplibre_platform_interface`.** It sits there, not
   in `maplibre`, because the platform packages need it and `maplibre` depends
