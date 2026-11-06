@@ -37,6 +37,9 @@
   gesture is set.
 - `MapEventDoubleClick.preventDefault()` keeps a double tap from zooming,
   also from an async `onDoubleClick`.
+- `MapOptions.fastPforEnabled` decodes MapLibre Tile (MLT) vector tiles that
+  use FastPFOR on native platforms
+  ([#635](https://github.com/josxha/flutter-maplibre/issues/635)).
 
 ### Bug Fixes
 
