@@ -122,7 +122,19 @@ final class MapEventClick extends MapEventUserInput {
 /// {@category Events}
 final class MapEventDoubleClick extends MapEventUserInput {
   /// Creates a [MapEventDoubleClick].
-  const MapEventDoubleClick({required super.point, required super.screenPoint});
+  MapEventDoubleClick({required super.point, required super.screenPoint});
+
+  var _defaultPrevented = false;
+
+  /// Whether [preventDefault] was called.
+  bool get defaultPrevented => _defaultPrevented;
+
+  /// Keeps the map from zooming in on this double tap, or from zooming with
+  /// the drag that follows it, as in MapLibre GL JS.
+  ///
+  /// Call it in [MapLibreMap.onDoubleClick], or before the [Future] that the
+  /// callback returns completes.
+  void preventDefault() => _defaultPrevented = true;
 
   @override
   String get _name => 'MapEventDoubleClick';

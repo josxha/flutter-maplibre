@@ -17,6 +17,8 @@
   `onContextLost`, `onContextRestored` and `onProjectionChanged` on web.
 - Taps are reported right away while neither `onDoubleClick` nor the zoom
   gesture is set.
+- `MapEventDoubleClick.preventDefault()` keeps a double tap from zooming,
+  also from an async `onDoubleClick`.
 
 ### Bug Fixes
 

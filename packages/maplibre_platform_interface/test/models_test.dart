@@ -360,7 +360,7 @@ void main() {
     test('user input events carry their location', () {
       final events = <MapEventUserInput>[
         const MapEventClick(point: point, screenPoint: screenPoint),
-        const MapEventDoubleClick(point: point, screenPoint: screenPoint),
+        MapEventDoubleClick(point: point, screenPoint: screenPoint),
         const MapEventSecondaryClick(point: point, screenPoint: screenPoint),
         const MapEventLongClick(point: point, screenPoint: screenPoint),
       ];

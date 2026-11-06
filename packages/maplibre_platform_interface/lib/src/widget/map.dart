@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
@@ -90,9 +92,22 @@ class MapLibreMap extends StatefulWidget {
 
   /// Called when the user taps or clicks the map twice in quick succession.
   ///
-  /// While neither this nor the zoom gesture of [MapOptions.gestures] is set,
-  /// the map doesn't recognize double taps, so [onClick] fires right away.
-  final MapEventCallback<MapEventDoubleClick>? onDoubleClick;
+  /// A double tap zooms in while the zoom gesture of [MapOptions.gestures] is
+  /// on. Call [MapEventDoubleClick.preventDefault] to handle the double tap
+  /// yourself instead. The callback can be async, for example to query the
+  /// features at [MapEventUserInput.screenPoint] first: the map waits for
+  /// the returned [Future] before it zooms.
+  ///
+  /// ```dart
+  /// onDoubleClick: (event) async {
+  ///   final features = await controller.featuresAtPoint(event.screenPoint);
+  ///   if (features.isNotEmpty) event.preventDefault();
+  /// },
+  /// ```
+  ///
+  /// While neither this nor the zoom gesture is set, the map doesn't
+  /// recognize double taps, so [onClick] fires right away.
+  final FutureOr<void> Function(MapEventDoubleClick event)? onDoubleClick;
 
   /// Called when the user clicks the map with the secondary mouse button,
   /// usually the right one.

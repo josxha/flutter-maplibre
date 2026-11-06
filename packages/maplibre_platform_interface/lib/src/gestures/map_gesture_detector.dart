@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/foundation.dart';
@@ -66,7 +67,11 @@ class MapGestureDetector extends StatefulWidget {
   /// Called on a double tap or click. Double taps are only recognized while
   /// this is set or [MapGestures.zoom] is on, because recognizing them
   /// delays every single tap until a second one can no longer follow.
-  final MapEventCallback<MapEventDoubleClick>? onDoubleClick;
+  ///
+  /// The double tap zooms unless the callback calls
+  /// [MapEventDoubleClick.preventDefault], before the [Future] it returns
+  /// completes if it returns one.
+  final FutureOr<void> Function(MapEventDoubleClick event)? onDoubleClick;
 
   /// Called on a click with the secondary mouse button.
   final MapEventCallback<MapEventSecondaryClick>? onSecondaryClick;
@@ -124,6 +129,12 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
 
   /// Where the second tap of a double tap went down.
   Offset? _doubleTapPosition;
+
+  /// The event of the current double tap, and the [Future] that its callback
+  /// returned until it completes. The double tap and the quick zoom that
+  /// follows it only zoom once it is done and wasn't prevented.
+  MapEventDoubleClick? _doubleClick;
+  Future<void>? _doubleClickPending;
 
   // Two-finger tilt ("shove"): where each of the two fingers was when the
   // second went down, where it is now, and whether the gesture tilts, or was
@@ -206,23 +217,62 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
 
   void _onDoubleTapDown(TapDownDetails details) {
     _doubleTapPosition = details.localPosition;
+    _clearDoubleClick();
     final onDoubleClick = widget.onDoubleClick;
     if (onDoubleClick == null) return;
-    _emitUserInput(
-      details.localPosition,
-      (point, screenPoint) => onDoubleClick(
-        MapEventDoubleClick(point: point, screenPoint: screenPoint),
-      ),
-    );
+    _emitUserInput(details.localPosition, (point, screenPoint) {
+      final event = MapEventDoubleClick(point: point, screenPoint: screenPoint);
+      _doubleClick = event;
+      final result = onDoubleClick(event);
+      if (result is! Future<void>) return;
+      late final Future<void> pending;
+      pending = result
+          .catchError((Object error, StackTrace stack) {
+            FlutterError.reportError(
+              FlutterErrorDetails(
+                exception: error,
+                stack: stack,
+                library: 'maplibre',
+                context: ErrorDescription('while handling a double click'),
+              ),
+            );
+          })
+          .whenComplete(() {
+            if (identical(_doubleClickPending, pending)) {
+              _doubleClickPending = null;
+            }
+          });
+      _doubleClickPending = pending;
+    });
   }
 
-  /// Zooms in on the second release of a double tap. A second tap that drags
-  /// instead is a quick zoom, which the double tap recognizer rejects.
+  void _clearDoubleClick() {
+    _doubleClick = null;
+    _doubleClickPending = null;
+  }
+
+  /// Zooms in on the second release of a double tap, once its callback is
+  /// done, unless that prevented it. A second tap that drags instead is a
+  /// quick zoom, which the double tap recognizer rejects.
   void _onDoubleTap() {
     final position = _doubleTapPosition;
+    final event = _doubleClick;
+    final pending = _doubleClickPending;
     _doubleTapPosition = null;
+    _clearDoubleClick();
     if (position == null || !_gestures.zoom) return;
-    _camera.zoomBy(1, position, duration: _doubleTapZoomDuration);
+    void zoomIn() {
+      if (!mounted || !_gestures.zoom || (event?.defaultPrevented ?? false)) {
+        return;
+      }
+      _camera.zoomBy(1, position, duration: _doubleTapZoomDuration);
+    }
+
+    if (pending == null) {
+      zoomIn();
+    } else {
+      unawaited(pending.then((_) => zoomIn()));
+    }
   }
 
   void _onPointerSignal(PointerSignalEvent event) {
@@ -330,6 +380,8 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
     // tap does not, so a third tap starts afresh.
     _lastTapUpTime = tapped ? event.timeStamp : null;
     _lastTapUpPosition = tapped ? event.localPosition : null;
+    // A first tap starts a new double tap, which the old event has no say in.
+    if (tapped) _clearDoubleClick();
     _touchDownPosition = null;
     if (event.pointer == _quickZoomPointer) _stopQuickZoom();
   }
@@ -340,6 +392,9 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
     final anchor = _quickZoomAnchor!;
     if (!_quickZooming) {
       if ((event.localPosition - anchor).distance <= kTouchSlop) return;
+      // The double click callback decides first whether the drag zooms.
+      if (_doubleClickPending != null) return;
+      if (_doubleClick?.defaultPrevented ?? false) return;
       _quickZooming = true;
       _doubleTapPosition = null;
       _beginGesture();
@@ -355,6 +410,8 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
 
   void _stopQuickZoom() {
     final zoomed = _quickZooming;
+    // A drag rejects the double tap, which then doesn't clear its event.
+    if (zoomed) _clearDoubleClick();
     _quickZoomPointer = null;
     _quickZoomAnchor = null;
     _quickZooming = false;

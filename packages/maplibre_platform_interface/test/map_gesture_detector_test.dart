@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -63,6 +65,7 @@ void main() {
     WidgetTester tester, {
     MapGestures gestures = const MapGestures.all(),
     bool listenToDoubleClicks = true,
+    FutureOr<void> Function(MapEventDoubleClick event)? onDoubleClick,
   }) async {
     tester.view
       ..physicalSize = _size
@@ -78,7 +81,8 @@ void main() {
           lat: (_center.dy - point.dy) * 360 / 1000,
         ),
         onClick: events.add,
-        onDoubleClick: listenToDoubleClicks ? events.add : null,
+        onDoubleClick:
+            onDoubleClick ?? (listenToDoubleClicks ? events.add : null),
         onSecondaryClick: events.add,
         onLongClick: events.add,
         child: const SizedBox.expand(),
@@ -330,6 +334,67 @@ void main() {
       await tester.pumpAndSettle();
       expect(camera.zooms, hasLength(1));
       expect(events, isEmpty);
+    });
+
+    testWidgets('a prevented double tap does not zoom', (tester) async {
+      await pumpMap(tester, onDoubleClick: (event) => event.preventDefault());
+      await tester.tapAt(_center);
+      await tester.pump(const Duration(milliseconds: 50));
+      await tester.tapAt(_center);
+      await tester.pumpAndSettle();
+      expect(camera.calls, isEmpty);
+    });
+
+    testWidgets('a double tap zooms once an async callback is done', (
+      tester,
+    ) async {
+      final done = Completer<void>();
+      await pumpMap(tester, onDoubleClick: (event) => done.future);
+      await tester.tapAt(_center);
+      await tester.pump(const Duration(milliseconds: 50));
+      await tester.tapAt(_center);
+      await tester.pump();
+      expect(camera.zooms, isEmpty);
+      done.complete();
+      await tester.pumpAndSettle();
+      expect(camera.zooms, hasLength(1));
+    });
+
+    testWidgets('an async callback can prevent the double tap zoom', (
+      tester,
+    ) async {
+      final done = Completer<void>();
+      await pumpMap(
+        tester,
+        onDoubleClick: (event) async {
+          await done.future;
+          event.preventDefault();
+        },
+      );
+      await tester.tapAt(_center);
+      await tester.pump(const Duration(milliseconds: 50));
+      await tester.tapAt(_center);
+      await tester.pump();
+      done.complete();
+      await tester.pumpAndSettle();
+      expect(camera.calls, isEmpty);
+    });
+
+    testWidgets('a prevented double tap does not zoom by dragging', (
+      tester,
+    ) async {
+      await pumpMap(tester, onDoubleClick: (event) => event.preventDefault());
+      await tester.tapAt(_center);
+      await tester.pump(const Duration(milliseconds: 50));
+      final gesture = await tester.startGesture(_center);
+      for (var i = 0; i < 10; i++) {
+        await gesture.moveBy(const Offset(0, 17));
+        await tester.pump(const Duration(milliseconds: 16));
+      }
+      await gesture.up();
+      await tester.pumpAndSettle();
+      expect(camera.zoomed, 0);
+      expect(camera.zooms, isEmpty);
     });
 
     testWidgets('disabled gestures leave the camera', (tester) async {

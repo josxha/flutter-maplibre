@@ -70,6 +70,23 @@ map and the `screenPoint` in logical pixels.
 
 ## Double taps
 
+A double tap zooms in while the zoom gesture of `MapOptions.gestures` is on.
+To handle it yourself, call `preventDefault()` on the event. `onDoubleClick`
+can be async, for example to check for features under the tap first. The map
+waits for it before it zooms:
+
+```dart
+onDoubleClick: (event) async {
+  final features = await _controller.featuresAtPoint(event.screenPoint);
+  if (features.isNotEmpty) {
+    event.preventDefault();
+    // handle the double tap on the feature
+  }
+},
+```
+
+`preventDefault()` also keeps the double tap and drag gesture from zooming.
+
 A tap only waits for a possible second tap while double taps mean something:
-while `onDoubleClick` is set or the zoom gesture of `MapOptions.gestures` is
-on, as a double tap zooms then. Turn both off and `onClick` fires right away.
+while `onDoubleClick` is set or the zoom gesture is on. Turn both off and
+`onClick` fires right away.

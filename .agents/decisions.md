@@ -425,6 +425,13 @@ Each entry: the decision, then why.
 - **Double taps are only recognized while `onDoubleClick` is set or the
   zoom gesture is on.** A double tap recognizer holds every single tap
   until the double tap timeout, so `onClick` fires at once without one.
+- **`MapEventDoubleClick.preventDefault()` stops the double tap zoom**, as
+  in gl-js, rather than a `bool` return: a `bool?` callback rejects
+  `(e) => setState(...)` and warns on block bodies without a return.
+  `onDoubleClick` returns `FutureOr<void>` so it can query features first.
+  It fires on the second press and the zoom runs on release, so the detector
+  waits for the Future then; the double tap and drag zoom waits too and is
+  prevented as well.
 - **The gestures follow the platform conventions.** A two-finger twist turns
   the map with the fingers (negated bearing). Double tap and drag zooms
   (down zooms in, 150 px per level). Two fingers side by side dragged
