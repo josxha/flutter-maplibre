@@ -1,3 +1,8 @@
+/// Conversions between the types of this plugin and those of gl-js:
+/// `toJs()` converts to gl-js, `to<Type>()` converts back. Not exported
+/// publicly.
+library;
+
 import 'dart:js_interop';
 
 import 'package:flutter/widgets.dart';
@@ -5,39 +10,37 @@ import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 import 'package:maplibre_web/src/interop/interop.dart' as interop;
 import 'package:maplibre_web/src/interop/json.dart';
 
-/// Extension methods for the [Geographic] class. Not exported publicly.
-extension PositionExt on Geographic {
-  /// Convert a [Geographic] to an internal [interop.LngLat].
-  interop.LngLat toLngLat() => interop.LngLat.fromGeographic(this);
+/// Extension methods for the [Geographic] class.
+extension GeographicExt on Geographic {
+  /// This position in gl-js.
+  interop.LngLat toJs() => interop.LngLat(lng: lon, lat: lat);
 }
 
-/// Extension methods for the [GeoBox] class. Not exported publicly.
+/// Extension methods for the [GeoBox] class.
 extension GeoBoxExt on GeoBox {
-  /// Convert a [GeoBox] to an internal [interop.LngLatBounds].
-  interop.LngLatBounds toJsLngLatBounds() => interop.LngLatBounds(
+  /// These bounds in gl-js.
+  interop.LngLatBounds toJs() => interop.LngLatBounds(
     interop.LngLat(lng: west, lat: south),
     interop.LngLat(lng: east, lat: north),
   );
 }
 
-/// Extension methods for the [Offset] class. Not exported publicly.
+/// Extension methods for the [Offset] class.
 extension OffsetExt on Offset {
-  /// Convert a [Offset] to an internal [interop.Point].
-  interop.Point toJsPoint() => interop.Point(dx, dy);
+  /// This screen location in gl-js.
+  interop.Point toJs() => interop.Point(dx, dy);
 }
 
-/// Extension methods for the [interop.Point] class. Not exported publicly.
+/// Extension methods for the [interop.Point] class.
 extension JsPointExt on interop.Point {
-  /// Convert a [interop.Point] to an internal [Offset].
+  /// This screen location as an [Offset].
   Offset toOffset() => Offset(x.toDouble(), y.toDouble());
 }
 
-/// Extension methods for the [EdgeInsets] class. Not exported publicly.
+/// Extension methods for the [EdgeInsets] class.
 extension EdgeInsetsExt on EdgeInsets {
-  /// Convert a [EdgeInsets] to an internal [interop.PaddingOptions].
-  ///
-  /// Web does not require pixel ratio conversion.
-  interop.PaddingOptions toPaddingOptions() => interop.PaddingOptions(
+  /// This padding in gl-js, which takes logical pixels too.
+  interop.PaddingOptions toJs() => interop.PaddingOptions(
     right: right,
     left: left,
     bottom: bottom,
@@ -45,8 +48,8 @@ extension EdgeInsetsExt on EdgeInsets {
   );
 }
 
-/// Internal extension to convert JSAny to Map\<String, dynamic\>
-extension StringMap on JSAny? {
+/// Extension methods for the [JSAny] class.
+extension JsAnyExt on JSAny? {
   /// Like [JSAny?.dartify], but for the special case of a JSON map.
   Map<String, Object?>? asStringMap() =>
       (dartify() as Map<Object?, Object?>?)?.map(
@@ -55,7 +58,7 @@ extension StringMap on JSAny? {
       {};
 }
 
-/// Extension methods for the [GeoJsonData] class. Not exported publicly.
+/// Extension methods for the [GeoJsonData] class.
 extension GeoJsonDataExt on GeoJsonData {
   /// This data as a JS object. The browser parses text faster than Dart.
   JSAny toJs() => switch (this) {
@@ -64,12 +67,11 @@ extension GeoJsonDataExt on GeoJsonData {
   };
 }
 
-/// Extension methods for the [StyleImageOptions] class. Not exported
-/// publicly.
+/// Extension methods for the [StyleImageOptions] class.
 extension StyleImageOptionsExt on StyleImageOptions {
   /// These options as the metadata of `addImage` for an image of
   /// [pixelRatio].
-  interop.StyleImageMetadata toJsMetadata(double pixelRatio) =>
+  interop.StyleImageMetadata toJs(double pixelRatio) =>
       {
             'pixelRatio': pixelRatio,
             'sdf': sdf,
@@ -92,4 +94,46 @@ extension StyleImageOptionsExt on StyleImageOptions {
             'textFitHeight': ?textFitHeight?.name,
           }.jsify()!
           as interop.StyleImageMetadata;
+}
+
+/// Extension methods for the [interop.PaddingOptions] class.
+extension JsPaddingOptionsExt on interop.PaddingOptions {
+  /// This padding as [EdgeInsets].
+  EdgeInsets toEdgeInsets() => EdgeInsets.fromLTRB(
+    left.toDouble(),
+    top.toDouble(),
+    right.toDouble(),
+    bottom.toDouble(),
+  );
+}
+
+/// Extension methods for the [interop.GeoJSONFeature] class.
+extension JsGeoJSONFeatureExt on interop.GeoJSONFeature {
+  /// This feature as a [SourceFeature] of [sourceLayer].
+  SourceFeature toSourceFeature({String? sourceLayer}) => SourceFeature(
+    id: id.dartify(),
+    properties: properties.asStringMap() ?? {},
+    geometry: RenderedFeature.geometryFromJson(geometry.dartify()),
+    sourceLayer: sourceLayer,
+  );
+}
+
+/// Extension methods for the [interop.MapGeoJSONFeature] class.
+extension JsMapGeoJSONFeatureExt on interop.MapGeoJSONFeature {
+  /// This feature as a [RenderedFeature].
+  RenderedFeature toRenderedFeature() => RenderedFeature(
+    id: id.dartify(),
+    properties: properties.asStringMap() ?? {},
+    geometry: RenderedFeature.geometryFromJson(geometry.dartify()),
+    sourceId: source,
+    sourceLayer: sourceLayer,
+    layerId: layer.id,
+  );
+}
+
+/// Extension methods for the [interop.LngLat] class.
+extension JsLngLatExt on interop.LngLat {
+  /// This position as a [Geographic].
+  Geographic toGeographic() =>
+      Geographic(lon: lng.toDouble(), lat: lat.toDouble());
 }

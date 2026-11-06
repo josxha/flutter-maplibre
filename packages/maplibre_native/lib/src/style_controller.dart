@@ -97,7 +97,7 @@ class StyleControllerNative extends StyleController implements StyleBackend {
         quad.topRight,
         quad.bottomRight,
         quad.bottomLeft,
-      ].map((p) => mln.LatLng(latitude: p.lat, longitude: p.lon)).toList(),
+      ].map((p) => p.toMln()).toList(),
       _emptyImage,
     );
     // Whether the source is still on the map: it may have been removed or
@@ -214,7 +214,7 @@ class StyleControllerNative extends StyleController implements StyleBackend {
         coordinates.bottomRight,
         coordinates.bottomLeft,
       ])
-        mln.LatLng(latitude: corner.lat, longitude: corner.lon),
+        corner.toMln(),
     ]);
   }
 

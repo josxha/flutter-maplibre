@@ -126,7 +126,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       _map.setMaxZoom(options.maxZoom);
       _map.setMinPitch(options.minPitch);
       _map.setMaxPitch(options.maxPitch);
-      _map.setMaxBounds(options.maxBounds?.toJsLngLatBounds());
+      _map.setMaxBounds(options.maxBounds?.toJs());
       // Without an initial camera, the map takes the style's camera once it
       // loads.
       if (options.initCamera case final initCamera?) {
@@ -387,7 +387,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       _map.setMaxPitch(options.maxPitch);
     }
     if (options.maxBounds != oldWidget.options.maxBounds) {
-      _map.setMaxBounds(options.maxBounds?.toJsLngLatBounds());
+      _map.setMaxBounds(options.maxBounds?.toJs());
     }
     if (options.style != oldWidget.options.style) _setStyle(options.style);
     _layerManager?.updateLayers(widget.layers);
@@ -397,20 +397,20 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
 
   @override
   Geographic toLngLat(Offset screenLocation) =>
-      _map.unproject(screenLocation.toJsPoint()).toGeographic();
+      _map.unproject(screenLocation.toJs()).toGeographic();
 
   @override
   List<Geographic> toLngLats(List<Offset> screenLocations) => screenLocations
-      .map((offset) => _map.unproject(offset.toJsPoint()).toGeographic())
+      .map((offset) => _map.unproject(offset.toJs()).toGeographic())
       .toList(growable: false);
 
   @override
   Offset toScreenLocation(Geographic lngLat) =>
-      _map.project(lngLat.toLngLat()).toOffset();
+      _map.project(lngLat.toJs()).toOffset();
 
   @override
   List<Offset> toScreenLocations(List<Geographic> lngLats) => lngLats
-      .map((lngLat) => _map.project(lngLat.toLngLat()).toOffset())
+      .map((lngLat) => _map.project(lngLat.toJs()).toOffset())
       .toList(growable: false);
 
   @override
@@ -478,7 +478,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       bearing: field<JSNumber>('bearing')?.toDartDouble ?? current.bearing,
       pitch: field<JSNumber>('pitch')?.toDartDouble ?? current.pitch,
       roll: field<JSNumber>('roll')?.toDartDouble ?? current.roll,
-      padding: padding == null ? current.padding : _edgeInsets(padding),
+      padding: padding?.toEdgeInsets() ?? current.padding,
     );
   }
 
@@ -517,19 +517,19 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     final options = JSObject();
     switch (update) {
       case CameraUpdatePosition(:final center, :final padding, :final anchor):
-        if (center != null) options['center'] = center.toLngLat();
+        if (center != null) options['center'] = center.toJs();
         if (update.zoom case final zoom?) options['zoom'] = zoom.toJS;
         if (update.bearing case final bearing?) {
           options['bearing'] = bearing.toJS;
         }
         if (update.pitch case final pitch?) options['pitch'] = pitch.toJS;
         if (update.roll case final roll?) options['roll'] = roll.toJS;
-        if (padding != null) options['padding'] = padding.toPaddingOptions();
+        if (padding != null) options['padding'] = padding.toJs();
         if (anchor != null) {
-          options['around'] = _map.unproject(anchor.toJsPoint());
+          options['around'] = _map.unproject(anchor.toJs());
         }
       case CameraUpdateFit():
-        final padding = update.padding.toPaddingOptions();
+        final padding = update.padding.toJs();
         if (resetPadding) {
           // MapLibre GL JS fits bounds into the padding of earlier camera
           // moves as well, so that padding is reset first.
@@ -546,7 +546,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         }
         final pitch = update.pitch ?? _map.getPitch();
         final camera = _map.cameraForBounds(
-          update.bounds.toJsLngLatBounds(),
+          update.bounds.toJs(),
           interop.FitBoundsOptions(
             padding: padding,
             bearing: update.bearing ?? _map.getBearing(),
@@ -571,14 +571,6 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     animation?.end(result);
   }
 
-  static EdgeInsets _edgeInsets(interop.PaddingOptions padding) =>
-      EdgeInsets.fromLTRB(
-        padding.left.toDouble(),
-        padding.top.toDouble(),
-        padding.right.toDouble(),
-        padding.bottom.toDouble(),
-      );
-
   @override
   CameraPosition getCamera() => CameraPosition(
     center: _map.getCenter().toGeographic(),
@@ -586,7 +578,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     pitch: _map.getPitch().toDouble(),
     bearing: _map.getBearing().toDouble(),
     roll: _map.getRoll().toDouble(),
-    padding: _edgeInsets(_map.getPadding()),
+    padding: _map.getPadding().toEdgeInsets(),
   );
 
   /// https://wiki.openstreetmap.org/wiki/Zoom_levels
@@ -621,17 +613,18 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       options['layers'] = layerIds.map((l) => l.toJS).toList().toJS;
     }
     if (filter != null) options['filter'] = filter.toJson().jsify();
-    return _renderedFeatures(switch (geometry) {
+    final features = switch (geometry) {
       QueryGeometryPoint(:final point) => _map.queryRenderedFeatures(
-        point.toJsPoint(),
+        point.toJs(),
         options,
       ),
       QueryGeometryRect(:final rect) => _map.queryRenderedFeaturesRect(
-        [rect.bottomLeft.toJsPoint(), rect.topRight.toJsPoint()].toJS,
+        [rect.bottomLeft.toJs(), rect.topRight.toJs()].toJS,
         options,
       ),
       QueryGeometryViewport() => _map.queryRenderedFeaturesAll(options),
-    });
+    };
+    return [for (final f in features.toDart) f.toRenderedFeature()];
   }
 
   @override
@@ -648,15 +641,10 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     return _map
         .querySourceFeatures(sourceId, options)
         .toDart
+        // gl-js leaves the source layer of source features unset, and all of
+        // them come from the queried one.
         .map(
-          (f) => SourceFeature(
-            id: f.id.dartify(),
-            properties: f.properties.asStringMap() ?? {},
-            geometry: RenderedFeature.geometryFromJson(f.geometry.dartify()),
-            // gl-js leaves the source layer of source features unset, and
-            // all of them come from the queried one.
-            sourceLayer: f.sourceLayer ?? sourceLayer,
-          ),
+          (f) => f.toSourceFeature(sourceLayer: f.sourceLayer ?? sourceLayer),
         )
         .toList(growable: false);
   }
@@ -678,7 +666,11 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   ) async {
     final source = _clusterSource(sourceId);
     if (source == null) return const [];
-    return _sourceFeatures(await source.getClusterChildren(clusterId).toDart);
+    return [
+      for (final f
+          in (await source.getClusterChildren(clusterId).toDart).toDart)
+        f.toSourceFeature(),
+    ];
   }
 
   @override
@@ -690,9 +682,10 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   }) async {
     final source = _clusterSource(sourceId);
     if (source == null) return const [];
-    return _sourceFeatures(
-      await source.getClusterLeaves(clusterId, limit, offset).toDart,
-    );
+    final leaves = await source
+        .getClusterLeaves(clusterId, limit, offset)
+        .toDart;
+    return [for (final f in leaves.toDart) f.toSourceFeature()];
   }
 
   /// The GeoJSON source [sourceId], or null if the map is gone or has none.
@@ -702,32 +695,6 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     if (source == null || source.type != 'geojson') return null;
     return source;
   }
-
-  static List<SourceFeature> _sourceFeatures(
-    JSArray<interop.GeoJSONFeature> features,
-  ) => [
-    for (final f in features.toDart)
-      SourceFeature(
-        id: f.id.dartify(),
-        properties: f.properties.asStringMap() ?? {},
-        geometry: RenderedFeature.geometryFromJson(f.geometry.dartify()),
-      ),
-  ];
-
-  static List<RenderedFeature> _renderedFeatures(
-    JSArray<interop.MapGeoJSONFeature> features,
-  ) => features.toDart
-      .map(
-        (f) => RenderedFeature(
-          id: f.id.dartify(),
-          properties: f.properties.asStringMap() ?? {},
-          geometry: RenderedFeature.geometryFromJson(f.geometry.dartify()),
-          sourceId: f.source,
-          sourceLayer: f.sourceLayer,
-          layerId: f.layer.id,
-        ),
-      )
-      .toList(growable: false);
 
   /// Moves the camera of the new map to [initCamera] before its first frame.
   void _applyInitialCamera(CameraUpdate initCamera) {
@@ -850,8 +817,8 @@ class _WebGestureCamera implements GestureCameraSink {
       // keeps it under the pointer in every projection.
       _map.easeTo(
         interop.EaseToOptions(
-          center: _map.unproject(update.panFrom!.toJsPoint()),
-          offset: (update.panTo! - _mapCenter).toJsPoint(),
+          center: _map.unproject(update.panFrom!.toJs()),
+          offset: (update.panTo! - _mapCenter).toJs(),
           duration: 0,
         ),
       );
@@ -893,7 +860,7 @@ class _WebGestureCamera implements GestureCameraSink {
     double rotateBy = 0,
     double pitchBy = 0,
   }) {
-    final location = _map.unproject(around.toJsPoint());
+    final location = _map.unproject(around.toJs());
     final before = _camera();
     _state._silentCamera = true;
     try {
@@ -908,7 +875,7 @@ class _WebGestureCamera implements GestureCameraSink {
         ..easeTo(
           interop.EaseToOptions(
             center: location,
-            offset: (around - _mapCenter).toJsPoint(),
+            offset: (around - _mapCenter).toJs(),
             duration: 0,
           ),
         );
@@ -950,7 +917,7 @@ class _WebGestureCamera implements GestureCameraSink {
     _map.easeTo(
       interop.EaseToOptions(
         center: _map.getCenter(),
-        offset: (velocity / velocity.distance * distance).toJsPoint(),
+        offset: (velocity / velocity.distance * distance).toJs(),
         duration: seconds * 1000,
         easing: _flingCurve.transform.toJS,
         essential: true,

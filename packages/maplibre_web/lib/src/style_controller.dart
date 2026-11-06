@@ -66,7 +66,7 @@ class StyleControllerWeb extends StyleController implements StyleBackend {
     // images the size of the view.
     final blob = Blob([bytes.toJS].toJS);
     final bitmap = await window.createImageBitmap(blob).toDart;
-    _map.addImage(id, bitmap, options.toJsMetadata(pixelRatio));
+    _map.addImage(id, bitmap, options.toJs(pixelRatio));
   }
 
   @override
@@ -91,7 +91,7 @@ class StyleControllerWeb extends StyleController implements StyleBackend {
         height: image.height,
         data: data.buffer.asUint8List().toJS,
       ),
-      options.toJsMetadata(pixelRatio),
+      options.toJs(pixelRatio),
     );
   }
 
