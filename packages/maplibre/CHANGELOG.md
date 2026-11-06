@@ -23,13 +23,13 @@
 - GeoJSON data is a `GeoJsonData` of geobase objects, decoded JSON or text,
   instead of a string.
 - `setProjection` takes an `Expression<MapProjection>`.
-- `MapGestures.all()` is now `MapGestures()`, and `MapGestures.allEnabled`
-  was removed.
+- `MapMovements` (`MapOptions.movements`) takes the `pan`, `zoom`, `rotate`
+  and `pitch` switches of `MapGestures`, and `MapGestures` now has one switch
+  per gesture.
 
 ### Features
 
-- `MapGestures` switches single inputs on and off, such as `scrollWheel`,
-  `pinch` or `fling`, and every switch defaults to on.
+- Single gestures can be turned off, such as `MapGestures(scrollWheel: false)`.
 - `MapLibreNetwork` adds HTTP headers to and rewrites the URLs of the
   requests of every map and the `OfflineManager`.
 - `queryRenderedFeatures` takes a `filter` expression and can query the whole

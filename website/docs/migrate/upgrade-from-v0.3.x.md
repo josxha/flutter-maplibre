@@ -78,11 +78,19 @@ MapOptions(
   `androidForegroundLoadColor`, `webviewDebugMode` and the deprecated
   `pitch` were removed.
 
-`MapGestures()` turns every gesture on and replaces `MapGestures.all()`.
-`allEnabled` was removed. `rotate`, `pan`, `zoom` and `pitch` work as before, and
-`MapGestures.none(zoom: true)` still only zooms. New switches turn single
-inputs off, for example `MapGestures(scrollWheel: false)`. See
-[Gestures](../map.md#gestures).
+What the user may change moved from `MapGestures` to `MapMovements` in
+`MapOptions.movements`, and `MapGestures` now turns single gestures on and
+off:
+
+| 0.3                                         | 0.4                                          |
+|---------------------------------------------|----------------------------------------------|
+| `gestures: MapGestures.all()`               | nothing, the default                         |
+| `gestures: MapGestures.all(pitch: false)`   | `movements: MapMovements(pitch: false)`      |
+| `gestures: MapGestures.none(zoom: true)`    | `movements: MapMovements.none(zoom: true)`   |
+| `gestures: MapGestures.none()`              | `movements: MapMovements.none()`             |
+| `gestures.allEnabled`                       | `movements == const MapMovements()`          |
+
+See [Gestures](../map.md#gestures).
 
 ## 4. Style layers and expressions
 

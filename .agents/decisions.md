@@ -433,15 +433,15 @@ Each entry: the decision, then why.
 
 ## Gestures
 
-- **`MapGestures` is flat: camera movements (`pan`, `zoom`, `rotate`,
-  `pitch`) and inputs (`drag`, `pinch`, `scrollWheel`, ...), all on by
-  default.** An input moves the camera only along the movements that are on.
-  Grouping inputs by movement didn't fit, because a two-finger pinch pans,
-  zooms and rotates, and a right-button drag rotates and tilts. Min/max
-  options can't replace the movement switches: there is no bearing limit,
-  and limits also clamp the camera that the app sets. `MapGestures.none()`
-  turns the movements off and keeps the inputs on, so
-  `MapGestures.none(zoom: true)` zooms with every zoom input, as in 0.3. The
+- **Two options decide what gestures do: `MapOptions.movements`
+  (`MapMovements`: `pan`, `zoom`, `rotate`, `pitch`) and
+  `MapOptions.gestures` (`MapGestures`: `drag`, `pinch`, `scrollWheel`,
+  ...), all on by default.** A gesture moves the camera only along the
+  movements that are on. Grouping gestures by movement didn't fit, because a
+  two-finger pinch pans, zooms and rotates, and a right-button drag rotates
+  and tilts; the user wanted the two kinds of switch in separate options.
+  Min/max options can't replace the movement switches: there is no bearing
+  limit, and limits also clamp the camera that the app sets. The
   model is the one of maplibre-compose, whose `MapInteractions` allows the
   `pan`, `zoom`, `rotate` and `pitch` movements and whose
   `InteractionBindings` bind inputs that can't enable a disallowed

@@ -28,11 +28,13 @@ MapOptions offlineOptions({
   double minZoom = 0,
   double maxZoom = 22,
   MapGestures gestures = const MapGestures(),
+  MapMovements movements = const MapMovements(),
 }) => MapOptions(
   style: MapStyle.json(offlineStyle),
   minZoom: minZoom,
   maxZoom: maxZoom,
   gestures: gestures,
+  movements: movements,
   initCamera: CameraUpdate.position(
     center: center,
     zoom: zoom,

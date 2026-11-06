@@ -3,6 +3,7 @@ import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 import 'package:maplibre_platform_interface/src/widget/inherited_model.dart';
 
 part 'map_gestures.dart';
+part 'map_movements.dart';
 
 /// The [MapOptions] class is used to set default values for the [MapLibreMap]
 /// widget.
@@ -19,6 +20,7 @@ class MapOptions {
     this.minPitch = 0,
     this.maxPitch = 60,
     this.maxBounds,
+    this.movements = const MapMovements(),
     this.gestures = const MapGestures(),
     this.fastPforEnabled = false,
   });
@@ -71,7 +73,10 @@ class MapOptions {
   /// if set to `null`.
   final GeoBox? maxBounds;
 
-  /// Enable and disable some or all map gestures.
+  /// How the user may move the camera, whatever the gesture.
+  final MapMovements movements;
+
+  /// The gestures that move the camera.
   final MapGestures gestures;
 
   /// Whether the map decodes MapLibre Tile (MLT) vector tiles that use
@@ -97,6 +102,7 @@ class MapOptions {
           minPitch == other.minPitch &&
           maxPitch == other.maxPitch &&
           maxBounds == other.maxBounds &&
+          movements == other.movements &&
           gestures == other.gestures &&
           fastPforEnabled == other.fastPforEnabled;
 
@@ -109,6 +115,7 @@ class MapOptions {
     minPitch,
     maxPitch,
     maxBounds,
+    movements,
     gestures,
     fastPforEnabled,
   );

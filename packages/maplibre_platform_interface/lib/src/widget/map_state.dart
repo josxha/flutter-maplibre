@@ -111,6 +111,7 @@ abstract class MapLibreMapState extends State<MapLibreMap>
               platformWidget
             else
               MapGestureDetector(
+                movements: options.movements,
                 gestures: options.gestures,
                 camera: gestureCamera,
                 toLngLat: (point) => isInitialized ? toLngLat(point) : null,

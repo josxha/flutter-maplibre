@@ -122,6 +122,7 @@ export 'package:maplibre_platform_interface/maplibre_platform_interface.dart'
         MapLibreMap,
         MapLibreMapState,
         MapLibreNetwork,
+        MapMovements,
         MapOptions,
         MapProjection,
         MapRenderingStats,
