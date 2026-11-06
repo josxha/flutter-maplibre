@@ -118,7 +118,7 @@ void runTests() {
       final map = await pumpMap(tester);
       final result = await map.pumpFuture(
         map.controller.animateCamera(
-          const CameraUpdate.position(zoom: 4, bearing: 30, roll: 10),
+          const CameraUpdate.position(zoom: 6, bearing: 30, roll: 10),
           animation: const CameraAnimation.ease(
             duration: Duration(milliseconds: 200),
             curve: Curves.easeOut,
@@ -128,7 +128,7 @@ void runTests() {
       );
       expect(result, CameraAnimationResult.completed);
       final camera = map.controller.getCamera();
-      expect(camera.zoom, closeTo(4, 1e-4));
+      expect(camera.zoom, closeTo(6, 1e-4));
       expect(camera.bearing, closeTo(30, 1e-4));
       expect(camera.roll, closeTo(10, 1e-4));
     });
@@ -276,9 +276,15 @@ void runTests() {
       await tester.pump(const Duration(milliseconds: 300));
       await map.controller.stopCamera();
       final result = await map.pumpFuture(animation, reason: 'animation');
-      if (kIsWeb) return;
-      expect(result, CameraAnimationResult.cancelled);
-      expect(map.controller.getCamera().zoom, lessThan(7));
+      final zoom = map.controller.getCamera().zoom;
+      // On web, the animation already jumped to its end if the browser
+      // prefers reduced motion, as headless Chrome does.
+      if (kIsWeb && result == CameraAnimationResult.completed) {
+        expect(zoom, closeTo(8, 1e-6));
+      } else {
+        expect(result, CameraAnimationResult.cancelled);
+        expect(zoom, lessThan(7));
+      }
     });
 
     testWidgets('a new camera move cancels a running animation', (
@@ -302,7 +308,12 @@ void runTests() {
       final result = await map.pumpFuture(animation, reason: 'animation');
       // On web, the animation already jumped to its end if the browser
       // prefers reduced motion, as headless Chrome does.
-      if (!kIsWeb) expect(result, CameraAnimationResult.cancelled);
+      expect(
+        result,
+        kIsWeb
+            ? isIn(CameraAnimationResult.values)
+            : CameraAnimationResult.cancelled,
+      );
       final camera = map.controller.getCamera();
       expect(camera.zoom, closeTo(3, 1e-6));
       expect(camera.center.lon, closeTo(-20, 1e-6));

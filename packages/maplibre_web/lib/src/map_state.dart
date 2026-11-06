@@ -411,8 +411,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
 
   @override
   Future<void> moveCamera(CameraUpdate update) async {
-    _endAnimation(CameraAnimationResult.cancelled);
-    final target = _target(update);
+    final target = _targetReplacing(update, CameraAnimationResult.cancelled);
     if (target == null) return;
     _nextGestureCausedByController = true;
     _map.jumpTo(target as interop.JumpToOptions);
@@ -424,8 +423,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     CameraAnimation animation = const CameraAnimation.ease(),
   }) async {
     // A later animation takes over, which completes the running one.
-    _endAnimation(CameraAnimationResult.completed);
-    final target = _target(update);
+    final target = _targetReplacing(update, CameraAnimationResult.completed);
     if (target == null) return CameraAnimationResult.cancelled;
     target['easing'] = animation.curve.transform.toJS;
     switch (animation) {
@@ -479,6 +477,30 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     );
   }
 
+  /// The [_target] of [update], which ends the running animation with
+  /// [result]. If there is no target, the animation keeps running, unless
+  /// working out the target stopped it.
+  JSObject? _targetReplacing(
+    CameraUpdate update,
+    CameraAnimationResult result,
+  ) {
+    final previous = _animation;
+    // Moves that stop the running animation don't complete it as reaching
+    // its target.
+    _animation = null;
+    _targetStoppedCamera = false;
+    final target = _target(update);
+    if (target == null && !_targetStoppedCamera) {
+      _animation = previous;
+    } else {
+      previous?.end(result);
+    }
+    return target;
+  }
+
+  /// Whether the last [_target] reset the padding, which stops the camera.
+  var _targetStoppedCamera = false;
+
   /// The gl-js camera options that move the map to [update], with only the
   /// fields that change, or null if a fit target doesn't fit the map.
   ///
@@ -513,6 +535,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
           )) {
             return null;
           }
+          _targetStoppedCamera = true;
         }
         final pitch = update.pitch ?? _map.getPitch();
         final camera = _map.cameraForBounds(

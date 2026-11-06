@@ -69,6 +69,9 @@ abstract interface class MapController {
   Future<void> stopCamera();
 
   /// The camera that [update] would move the map to, without moving it.
+  ///
+  /// [CameraUpdatePosition.anchor] is not taken into account: the camera
+  /// keeps the center of [update], or the current one.
   Future<MapCamera> cameraFor(CameraUpdate update);
 
   /// Get the current camera position on the map.
