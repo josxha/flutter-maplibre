@@ -148,8 +148,8 @@ await style.sources.add(
 );
 ```
 
-- **Android, iOS, macOS, Windows and Linux**: MapLibre Native reads PMTiles
-  itself. Use `pmtiles://https://…` (or `http://`) for a
+- **Android, iOS, macOS, Windows and Linux**: the map reads PMTiles itself.
+  Use `pmtiles://https://…` (or `http://`) for a
   remote archive and `pmtiles://file:///absolute/path/tiles.pmtiles` for a
   file on the device.
 - **Web**: the plugin loads PMTiles together with MapLibre GL JS, see
@@ -162,8 +162,8 @@ of the archive it needs. On web, it must also send CORS headers.
 
 ### MBTiles
 
-On Android, iOS, macOS, Windows and Linux, MapLibre Native also reads
-[MBTiles](https://github.com/mapbox/mbtiles-spec) files on the device. Pass
+The map also reads [MBTiles](https://github.com/mapbox/mbtiles-spec) files on
+the device, but not on web. Pass
 `mbtiles://` followed by the absolute path of the file to the `.url`
 constructor, for example `mbtiles:///data/tiles.mbtiles`. MBTiles are not
 supported on web.
@@ -210,6 +210,6 @@ await style.sources.updateTileJsonUrl('roads', 'https://example.com/tiles.json')
 await style.sources.remove('points');
 ```
 
-On native maps, `updateTiles` and `updateTileJsonUrl` remove the layers that use
-the source and add them back at their positions in one frame, as MapLibre Native
-can't change them in place.
+Not on web, `updateTiles` and `updateTileJsonUrl` remove the layers that use
+the source and add them back at their positions in one frame, as the map can't
+change them in place there.

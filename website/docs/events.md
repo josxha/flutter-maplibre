@@ -49,18 +49,18 @@ same on every platform.
 | `onLoadingStarted`    | The map starts to load a style.                                                                   |
 | `onLoadingFinished`   | The map loaded its style and what the view needs.                                                 |
 | `onSourceChanged`     | A source of the style changed, such as when its TileJSON arrives.                                 |
-| `onRenderFrame`       | The map rendered a frame. Native maps report the frame's statistics.                              |
+| `onRenderFrame`       | The map rendered a frame. Not on web, it holds the frame's statistics.                              |
 | `onRenderingChanged`  | The map stopped or resumed rendering, see [paused rendering](map.md#paused-rendering).            |
 | `onResize`            | The map changed its size.                                                                         |
 
-Some events exist on one platform only:
+Some events are not on every platform:
 
 | Callback                              | Platform | Called when                                                        |
 |---------------------------------------|----------|--------------------------------------------------------------------|
-| `onTile`                              | native   | A tile moved to another step of loading.                           |
-| `onRenderMap`                         | native   | The map finished rendering a view, partially or fully.             |
-| `onGlyphs`                            | native   | The map requested or loaded glyphs of a font.                      |
-| `onSprite`                            | native   | The map requested or loaded a sprite.                              |
+| `onTile`                              | not web  | A tile moved to another step of loading.                           |
+| `onRenderMap`                         | not web  | The map finished rendering a view, partially or fully.             |
+| `onGlyphs`                            | not web  | The map requested or loaded glyphs of a font.                      |
+| `onSprite`                            | not web  | The map requested or loaded a sprite.                              |
 | `onContextLost`, `onContextRestored`  | web      | The browser took the map's WebGL context away or gave it back.     |
 | `onProjectionChanged`                 | web      | The map switched its projection.                                   |
 

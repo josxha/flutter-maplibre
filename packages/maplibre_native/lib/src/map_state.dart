@@ -3,61 +3,17 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/widgets.dart';
+import 'package:maplibre_native/src/extensions.dart';
 import 'package:maplibre_native/src/map_renderer.dart';
 import 'package:maplibre_native/src/style_controller.dart';
 import 'package:maplibre_native_ffi/maplibre_native_ffi.dart' as mln;
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 
-/// The map events that the state always handles. Others, such as the render
-/// events of every frame, are only queued while [MapLibreMap] has a callback
-/// for them, see [_eventMaskOf].
-final mln.RuntimeEventFlag _baseEventMask =
-    mln.RuntimeEventFlag.mapCameraWillChange |
-    mln.RuntimeEventFlag.mapCameraIsChanging |
-    mln.RuntimeEventFlag.mapCameraDidChange |
-    mln.RuntimeEventFlag.mapStyleLoaded |
-    mln.RuntimeEventFlag.mapIdle |
-    mln.RuntimeEventFlag.mapSourceChanged |
-    mln.RuntimeEventFlag.mapLoadingFailed |
-    mln.RuntimeEventFlag.mapRenderError |
-    mln.RuntimeEventFlag.mapGlyphsError |
-    mln.RuntimeEventFlag.mapSpriteError;
-
-/// The events that the callbacks of [map] need.
-mln.RuntimeEventFlag _eventMaskOf(MapLibreMap map) =>
-    _baseEventMask |
-    (map.onLoadingStarted != null
-        ? mln.RuntimeEventFlag.mapLoadingStarted
-        : mln.RuntimeEventFlag.none) |
-    (map.onLoadingFinished != null
-        ? mln.RuntimeEventFlag.mapLoadingFinished
-        : mln.RuntimeEventFlag.none) |
-    (map.onStyleImageMissing != null
-        ? mln.RuntimeEventFlag.mapStyleImageMissing
-        : mln.RuntimeEventFlag.none) |
-    (map.onTile != null
-        ? mln.RuntimeEventFlag.mapTileAction
-        : mln.RuntimeEventFlag.none) |
-    (map.onRenderFrame != null
-        ? mln.RuntimeEventFlag.mapRenderFrameFinished
-        : mln.RuntimeEventFlag.none) |
-    (map.onRenderMap != null
-        ? mln.RuntimeEventFlag.mapRenderMapFinished
-        : mln.RuntimeEventFlag.none) |
-    (map.onGlyphs != null
-        ? mln.RuntimeEventFlag.mapGlyphsRequested |
-              mln.RuntimeEventFlag.mapGlyphsLoaded
-        : mln.RuntimeEventFlag.none) |
-    (map.onSprite != null
-        ? mln.RuntimeEventFlag.mapSpriteRequested |
-              mln.RuntimeEventFlag.mapSpriteLoaded
-        : mln.RuntimeEventFlag.none);
-
 /// MapLibre Native, rendered through its C API into a Flutter texture.
 class MapLibreMapStateNative extends MapLibreMapState {
   MapRenderer? _renderer;
 
-  /// The events that the map queues, see [_eventMaskOf].
+  /// The events that the map queues, see `MapLibreMapExt.eventMask`.
   mln.RuntimeEventFlag? _eventMask;
 
   /// The map, from its creation on, before [_renderer] exists.
@@ -146,7 +102,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
       // renders, so its first frame shows them.
       final renderer = await MapRenderer.create(
         extent: extent,
-        eventMask: _eventMask = _eventMaskOf(widget),
+        eventMask: _eventMask = widget.eventMask,
         setUp: _setUp,
         onEvent: _onRuntimeEvent,
         onFrameShown: _onFrameShown,
@@ -180,7 +136,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
   Future<void> _setUp(mln.MapHandle map) async {
     _map = map;
     // The callbacks may have changed while the map was being created.
-    final eventMask = _eventMaskOf(widget);
+    final eventMask = widget.eventMask;
     if (eventMask != _eventMask) {
       _eventMask = eventMask;
       map.discarding.setEventMask(eventMask);
@@ -248,7 +204,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
       unawaited(_setStyle(options.style));
     }
     _layerManager?.updateLayers(widget.layers);
-    final eventMask = _eventMaskOf(widget);
+    final eventMask = widget.eventMask;
     final map = _map;
     if (eventMask != _eventMask && map != null) {
       _eventMask = eventMask;

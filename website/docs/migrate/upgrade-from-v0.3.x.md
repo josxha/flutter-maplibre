@@ -263,8 +263,8 @@ style.setProjection(MapProjection.globe);
 style.setProjection(const .literal(.globe));
 ```
 
-MapLibre Native has only the Mercator projection, so other projections keep
-Mercator on Android, iOS and desktop.
+Projections other than Mercator are only supported on web. On every other
+platform, the map keeps Mercator.
 
 ## 13. Events
 
@@ -351,5 +351,5 @@ await controller.animateCamera(
 | A `PlatformException` when an animation is cancelled (web) | `CameraAnimationResult.cancelled` |
 
 `animateCamera` now eases for 300 ms by default, where 0.3 flew for 2 seconds
-on native platforms. Pass `animation: const CameraAnimation.fly()` to fly.
+on every platform but web. Pass `animation: const CameraAnimation.fly()` to fly.
 

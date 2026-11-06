@@ -62,11 +62,10 @@ setup steps, see [Platform setup](platforms.md).
 | Windows  | `maplibre_native` | MapLibre Native | Vulkan, shared with Flutter via D3D11  | Vulkan 1.1 driver       |
 | Linux    | `maplibre_native` | MapLibre Native | Vulkan, shared with Flutter via OpenGL | Vulkan 1.1 driver       |
 
-!!! warning "Not available on native platforms"
+!!! warning "Only on web"
 
-    MapLibre Native has only the Mercator projection, so `setProjection`
-    keeps Mercator there. `VideoSource`
-    is only supported on web.
+    Projections other than Mercator and `VideoSource` are only supported on
+    web. On every other platform, `setProjection` keeps Mercator.
 
 ## Development version
 

@@ -3,6 +3,7 @@ import 'dart:js_interop';
 import 'package:flutter/widgets.dart';
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 import 'package:maplibre_web/src/interop/interop.dart' as interop;
+import 'package:maplibre_web/src/interop/json.dart';
 
 /// Extension methods for the [Geographic] class. Not exported publicly.
 extension PositionExt on Geographic {
@@ -52,4 +53,43 @@ extension StringMap on JSAny? {
         (k, v) => MapEntry(k.toString(), v),
       ) ??
       {};
+}
+
+/// Extension methods for the [GeoJsonData] class. Not exported publicly.
+extension GeoJsonDataExt on GeoJsonData {
+  /// This data as a JS object. The browser parses text faster than Dart.
+  JSAny toJs() => switch (this) {
+    GeoJsonDataJson(:final json) => json.jsify()!,
+    _ => parse(toText()),
+  };
+}
+
+/// Extension methods for the [StyleImageOptions] class. Not exported
+/// publicly.
+extension StyleImageOptionsExt on StyleImageOptions {
+  /// These options as the metadata of `addImage` for an image of
+  /// [pixelRatio].
+  interop.StyleImageMetadata toJsMetadata(double pixelRatio) =>
+      {
+            'pixelRatio': pixelRatio,
+            'sdf': sdf,
+            if (stretchX.isNotEmpty)
+              'stretchX': [
+                for (final (from, to) in stretchX) [from, to],
+              ],
+            if (stretchY.isNotEmpty)
+              'stretchY': [
+                for (final (from, to) in stretchY) [from, to],
+              ],
+            if (content case final content?)
+              'content': [
+                content.left,
+                content.top,
+                content.right,
+                content.bottom,
+              ],
+            'textFitWidth': ?textFitWidth?.name,
+            'textFitHeight': ?textFitHeight?.name,
+          }.jsify()!
+          as interop.StyleImageMetadata;
 }

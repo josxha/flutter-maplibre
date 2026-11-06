@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:ui' as ui;
 
 import 'package:flutter/foundation.dart';
+import 'package:maplibre_native/src/extensions.dart';
 import 'package:maplibre_native_ffi/maplibre_native_ffi.dart' as mln;
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 
@@ -38,12 +39,8 @@ class StyleControllerNative extends StyleController implements StyleBackend {
     if (_disposed) return;
     if (style case {'sources': final Map<String, Object?> styleSources}) {
       sources.load(styleSources);
-      for (final MapEntry(:key, :value) in styleSources.entries) {
-        if (value case {'type': 'geojson'}) {
-          _geoJsonOptions[key] = _geoJsonOptionsOf(
-            value as Map<String, Object?>,
-          );
-        }
+      for (final source in sources.whereType<GeoJsonSource>()) {
+        _geoJsonOptions[source.id] = source.toMlnOptions();
       }
     }
     if (style case {'layers': final List<Object?> styleLayers}) {
@@ -51,21 +48,6 @@ class StyleControllerNative extends StyleController implements StyleBackend {
     }
     await refreshAttributions();
   }
-
-  static mln.GeoJsonSourceOptions _geoJsonOptionsOf(
-    Map<String, Object?> json,
-  ) => mln.GeoJsonSourceOptions(
-    minZoom: (json['minzoom'] as num?)?.toDouble(),
-    maxZoom: (json['maxzoom'] as num?)?.toDouble(),
-    tolerance: (json['tolerance'] as num?)?.toDouble(),
-    buffer: (json['buffer'] as num?)?.toInt(),
-    lineMetrics: json['lineMetrics'] as bool?,
-    cluster: json['cluster'] as bool?,
-    clusterRadius: (json['clusterRadius'] as num?)?.toInt(),
-    clusterMaxZoom: (json['clusterMaxZoom'] as num?)?.toDouble(),
-    clusterMinPoints: (json['clusterMinPoints'] as num?)?.toInt(),
-    clusterProperties: json['clusterProperties'],
-  );
 
   @override
   void batch(void Function() updates) {
@@ -84,10 +66,7 @@ class StyleControllerNative extends StyleController implements StyleBackend {
       return _addImageSourceImage(source as ImageSource);
     }
     if (source is VideoSource) {
-      throw UnsupportedError(
-        'MapLibre Native has no video sources; they are only supported on '
-        'web.',
-      );
+      throw UnsupportedError('Video sources are only supported on web.');
     }
     final json = source.toJson();
     if (json == null) {
@@ -97,7 +76,7 @@ class StyleControllerNative extends StyleController implements StyleBackend {
     }
     final added = _map.addStyleSourceJson(source.id, json);
     if (source is GeoJsonSource) {
-      _geoJsonOptions[source.id] = _geoJsonOptionsOf(json);
+      _geoJsonOptions[source.id] = source.toMlnOptions();
     }
     await added;
     // Sources with inline tiles know their attribution now; a TileJSON source
@@ -342,43 +321,9 @@ class StyleControllerNative extends StyleController implements StyleBackend {
     await _map.setStyleImage(
       id,
       await _premultipliedImage(image, id),
-      options: _imageOptionsOf(options, pixelRatio),
+      options: options.toMln(pixelRatio),
     );
   }
-
-  static mln.StyleImageOptions _imageOptionsOf(
-    StyleImageOptions options,
-    double pixelRatio,
-  ) => mln.StyleImageOptions(
-    pixelRatio: pixelRatio,
-    sdf: options.sdf,
-    stretchX: [
-      for (final (from, to) in options.stretchX)
-        mln.ImageStretch(from: from, to: to),
-    ],
-    stretchY: [
-      for (final (from, to) in options.stretchY)
-        mln.ImageStretch(from: from, to: to),
-    ],
-    content: switch (options.content) {
-      null => null,
-      final content => mln.ImageContent(
-        left: content.left,
-        top: content.top,
-        right: content.right,
-        bottom: content.bottom,
-      ),
-    },
-    textFitWidth: _textFitOf(options.textFitWidth),
-    textFitHeight: _textFitOf(options.textFitHeight),
-  );
-
-  static mln.StyleImageTextFit? _textFitOf(ImageTextFit? fit) => switch (fit) {
-    null => null,
-    ImageTextFit.stretchOrShrink => mln.StyleImageTextFit.stretchOrShrink,
-    ImageTextFit.stretchOnly => mln.StyleImageTextFit.stretchOnly,
-    ImageTextFit.proportional => mln.StyleImageTextFit.proportional,
-  };
 
   @override
   Future<void> removeImage(String id) async {
@@ -453,8 +398,8 @@ class StyleControllerNative extends StyleController implements StyleBackend {
     if (_warnedProjection) return;
     _warnedProjection = true;
     debugPrint(
-      'maplibre_native: MapLibre Native only supports the Mercator '
-      'projection; the map stays on it.',
+      'maplibre: projections other than Mercator are only supported on web; '
+      'the map stays on Mercator.',
     );
   }
 

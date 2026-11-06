@@ -66,7 +66,7 @@ class StyleControllerWeb extends StyleController implements StyleBackend {
     // images the size of the view.
     final blob = Blob([bytes.toJS].toJS);
     final bitmap = await window.createImageBitmap(blob).toDart;
-    _map.addImage(id, bitmap, _imageMetadata(options, pixelRatio));
+    _map.addImage(id, bitmap, options.toJsMetadata(pixelRatio));
   }
 
   @override
@@ -91,36 +91,9 @@ class StyleControllerWeb extends StyleController implements StyleBackend {
         height: image.height,
         data: data.buffer.asUint8List().toJS,
       ),
-      _imageMetadata(options, pixelRatio),
+      options.toJsMetadata(pixelRatio),
     );
   }
-
-  static interop.StyleImageMetadata _imageMetadata(
-    StyleImageOptions options,
-    double pixelRatio,
-  ) =>
-      {
-            'pixelRatio': pixelRatio,
-            'sdf': options.sdf,
-            if (options.stretchX.isNotEmpty)
-              'stretchX': [
-                for (final (from, to) in options.stretchX) [from, to],
-              ],
-            if (options.stretchY.isNotEmpty)
-              'stretchY': [
-                for (final (from, to) in options.stretchY) [from, to],
-              ],
-            if (options.content case final content?)
-              'content': [
-                content.left,
-                content.top,
-                content.right,
-                content.bottom,
-              ],
-            'textFitWidth': ?options.textFitWidth?.name,
-            'textFitHeight': ?options.textFitHeight?.name,
-          }.jsify()!
-          as interop.StyleImageMetadata;
 
   @override
   Future<void> removeImage(String id) async => _map.removeImage(id);
@@ -168,13 +141,7 @@ class StyleControllerWeb extends StyleController implements StyleBackend {
 
   @override
   Future<void> setGeoJsonData(String id, GeoJsonData data) async =>
-      _map.getSource(id)!.setData(_geoJsonOf(data));
-
-  /// [data] as a JS object. The browser parses text faster than Dart.
-  static JSAny _geoJsonOf(GeoJsonData data) => switch (data) {
-    GeoJsonDataJson(:final json) => json.jsify()!,
-    _ => parse(data.toText()),
-  };
+      _map.getSource(id)!.setData(data.toJs());
 
   @override
   Future<void> setGeoJsonUrl(String id, String url) async =>
@@ -224,7 +191,7 @@ class StyleControllerWeb extends StyleController implements StyleBackend {
         // The browser parses the data, which is faster than Dart.
         final data = switch (source) {
           GeoJsonSourceUrl(:final url) => url.toJS,
-          GeoJsonSourceData(:final data) => _geoJsonOf(data),
+          GeoJsonSourceData(:final data) => data.toJs(),
         };
         _addSource(
           source.id,

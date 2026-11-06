@@ -257,9 +257,8 @@ abstract class StyleController {
   /// }));
   /// ```
   ///
-  /// Only web supports other projections than [MapProjection.mercator].
-  /// MapLibre Native has neither globe nor vertical perspective, so native
-  /// maps ignore them and stay on Mercator.
+  /// Projections other than [MapProjection.mercator] are only supported on
+  /// web. On every other platform, the map stays on Mercator.
   ///
   /// https://maplibre.org/maplibre-style-spec/projection/
   void setProjection(Expression<MapProjection> projection);

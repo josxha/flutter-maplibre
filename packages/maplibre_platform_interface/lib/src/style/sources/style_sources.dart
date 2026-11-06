@@ -119,7 +119,7 @@ final class StyleSources extends Iterable<Source> {
 
   /// Replaces the tile URLs of the raster, raster DEM or vector source [id].
   ///
-  /// A source that had a TileJSON URL uses [tiles] from now on. On native maps
+  /// A source that had a TileJSON URL uses [tiles] from now on. Not on web,
   /// the layers of the source are removed and added again, which [StyleLayer]
   /// objects don't notice.
   Future<void> updateTiles(String id, List<String> tiles) async {
@@ -132,7 +132,7 @@ final class StyleSources extends Iterable<Source> {
   /// Replaces the TileJSON URL of the raster, raster DEM or vector source
   /// [id].
   ///
-  /// A source that had tile URLs uses [url] from now on. On native maps the
+  /// A source that had tile URLs uses [url] from now on. Not on web, the
   /// layers of the source are removed and added again, which [StyleLayer]
   /// objects don't notice.
   Future<void> updateTileJsonUrl(String id, String url) async {
