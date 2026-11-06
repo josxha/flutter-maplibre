@@ -89,6 +89,14 @@ build root of a maplibre-native-ffi clone in
 - Never use method channels. Dart calls native code through ffigen (C/C++)
   or jnigen (Kotlin/Java) bindings.
 - Note API gaps of `maplibre_native_ffi` in `.agents/decisions.md`.
+- Convert between this plugin's types and a platform's types (`mln.*`,
+  gl-js interop) with extension methods in the platform package's
+  `lib/src/extensions.dart`, not with static or top-level helpers or members
+  of interop types. Name an extension `<Type>Ext`, or `Mln<Type>Ext` and
+  `Js<Type>Ext` on platform types; convert with `toMln()` or `toJs()` and back
+  with `to<Type>()`.
+- In docs and messages, name platforms ("only on web", "not on web", or a
+  list), never the engine behind them, such as MapLibre Native.
 - Never edit `*.g.dart` by hand. Change the generator in `tool/codegen/`.
 - Use conventional commits (`feat(native): …`, `fix: …`, `ci: …`).
 - Read `.agents/decisions.md` before changing rendering, threading, or the

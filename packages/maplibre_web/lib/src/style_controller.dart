@@ -60,16 +60,13 @@ class StyleControllerWeb extends StyleController implements StyleBackend {
     String id,
     Uint8List bytes, {
     double pixelRatio = 1,
+    StyleImageOptions options = const StyleImageOptions(),
   }) async {
     // The browser decodes the image: Flutter's skwasm renderer gives decoded
     // images the size of the view.
     final blob = Blob([bytes.toJS].toJS);
     final bitmap = await window.createImageBitmap(blob).toDart;
-    _map.addImage(
-      id,
-      bitmap,
-      interop.StyleImageMetadata(pixelRatio: pixelRatio),
-    );
+    _map.addImage(id, bitmap, options.toJs(pixelRatio));
   }
 
   @override
@@ -77,6 +74,7 @@ class StyleControllerWeb extends StyleController implements StyleBackend {
     required String id,
     required ui.Image image,
     double pixelRatio = 1,
+    StyleImageOptions options = const StyleImageOptions(),
   }) async {
     // Raw pixels, as Flutter's skwasm renderer encodes some images to PNG at
     // the size of the view.
@@ -93,7 +91,7 @@ class StyleControllerWeb extends StyleController implements StyleBackend {
         height: image.height,
         data: data.buffer.asUint8List().toJS,
       ),
-      interop.StyleImageMetadata(pixelRatio: pixelRatio),
+      options.toJs(pixelRatio),
     );
   }
 
@@ -142,8 +140,8 @@ class StyleControllerWeb extends StyleController implements StyleBackend {
   }
 
   @override
-  Future<void> setGeoJsonData(String id, String data) async =>
-      _map.getSource(id)!.setData(parse(data));
+  Future<void> setGeoJsonData(String id, GeoJsonData data) async =>
+      _map.getSource(id)!.setData(data.toJs());
 
   @override
   Future<void> setGeoJsonUrl(String id, String url) async =>
@@ -193,16 +191,13 @@ class StyleControllerWeb extends StyleController implements StyleBackend {
         // The browser parses the data, which is faster than Dart.
         final data = switch (source) {
           GeoJsonSourceUrl(:final url) => url.toJS,
-          GeoJsonSourceData(:final data) => parse(data),
+          GeoJsonSourceData(:final data) => data.toJs(),
         };
         _addSource(
           source.id,
           _sourceSpecification({
             'type': 'geojson',
-            'maxzoom': source.maxZoom,
-            'tolerance': source.tolerance,
-            'lineMetrics': source.lineMetrics,
-            'attribution': source.attribution,
+            ...geoJsonOptionsOf(source),
           }, data: data),
         );
       case RasterDemSource() || RasterSource() || VectorSource():
@@ -371,9 +366,10 @@ class StyleControllerWeb extends StyleController implements StyleBackend {
   }
 
   @override
-  void setProjection(MapProjection projection) => _map.setProjection(
-    interop.ProjectionSpecification(type: projection.name),
-  );
+  void setProjection(Expression<MapProjection> projection) =>
+      _map.setProjection(
+        interop.ProjectionSpecification(type: projection.toJson().jsify()!),
+      );
 }
 
 /// A transparent PNG of one pixel, the image of an image source until its

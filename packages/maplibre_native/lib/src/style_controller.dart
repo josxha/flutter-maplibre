@@ -1,8 +1,8 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:ui' as ui;
 
 import 'package:flutter/foundation.dart';
+import 'package:maplibre_native/src/extensions.dart';
 import 'package:maplibre_native_ffi/maplibre_native_ffi.dart' as mln;
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 
@@ -39,12 +39,8 @@ class StyleControllerNative extends StyleController implements StyleBackend {
     if (_disposed) return;
     if (style case {'sources': final Map<String, Object?> styleSources}) {
       sources.load(styleSources);
-      for (final MapEntry(:key, :value) in styleSources.entries) {
-        if (value case {'type': 'geojson'}) {
-          _geoJsonOptions[key] = _geoJsonOptionsOf(
-            value as Map<String, Object?>,
-          );
-        }
+      for (final source in sources.whereType<GeoJsonSource>()) {
+        _geoJsonOptions[source.id] = source.toMlnOptions();
       }
     }
     if (style case {'layers': final List<Object?> styleLayers}) {
@@ -52,20 +48,6 @@ class StyleControllerNative extends StyleController implements StyleBackend {
     }
     await refreshAttributions();
   }
-
-  static mln.GeoJsonSourceOptions _geoJsonOptionsOf(
-    Map<String, Object?> json,
-  ) => mln.GeoJsonSourceOptions(
-    minZoom: (json['minzoom'] as num?)?.toDouble(),
-    maxZoom: (json['maxzoom'] as num?)?.toDouble(),
-    tolerance: (json['tolerance'] as num?)?.toDouble(),
-    buffer: (json['buffer'] as num?)?.toInt(),
-    lineMetrics: json['lineMetrics'] as bool?,
-    cluster: json['cluster'] as bool?,
-    clusterRadius: (json['clusterRadius'] as num?)?.toInt(),
-    clusterMaxZoom: (json['clusterMaxZoom'] as num?)?.toDouble(),
-    clusterMinPoints: (json['clusterMinPoints'] as num?)?.toInt(),
-  );
 
   @override
   void batch(void Function() updates) {
@@ -84,10 +66,7 @@ class StyleControllerNative extends StyleController implements StyleBackend {
       return _addImageSourceImage(source as ImageSource);
     }
     if (source is VideoSource) {
-      throw UnsupportedError(
-        'MapLibre Native has no video sources; they are only supported on '
-        'web.',
-      );
+      throw UnsupportedError('Video sources are only supported on web.');
     }
     final json = source.toJson();
     if (json == null) {
@@ -97,11 +76,7 @@ class StyleControllerNative extends StyleController implements StyleBackend {
     }
     final added = _map.addStyleSourceJson(source.id, json);
     if (source is GeoJsonSource) {
-      _geoJsonOptions[source.id] = mln.GeoJsonSourceOptions(
-        maxZoom: source.maxZoom,
-        tolerance: source.tolerance,
-        lineMetrics: source.lineMetrics,
-      );
+      _geoJsonOptions[source.id] = source.toMlnOptions();
     }
     await added;
     // Sources with inline tiles know their attribution now; a TileJSON source
@@ -122,7 +97,7 @@ class StyleControllerNative extends StyleController implements StyleBackend {
         quad.topRight,
         quad.bottomRight,
         quad.bottomLeft,
-      ].map((p) => mln.LatLng(latitude: p.lat, longitude: p.lon)).toList(),
+      ].map((p) => p.toMln()).toList(),
       _emptyImage,
     );
     // Whether the source is still on the map: it may have been removed or
@@ -213,9 +188,9 @@ class StyleControllerNative extends StyleController implements StyleBackend {
   }
 
   @override
-  Future<void> setGeoJsonData(String id, String data) async {
+  Future<void> setGeoJsonData(String id, GeoJsonData data) async {
     final handle = mln.GeoJsonSourceDataHandle.create(
-      jsonDecode(data),
+      data.toJson(),
       options: _geoJsonOptions[id],
     );
     try {
@@ -239,7 +214,7 @@ class StyleControllerNative extends StyleController implements StyleBackend {
         coordinates.bottomRight,
         coordinates.bottomLeft,
       ])
-        mln.LatLng(latitude: corner.lat, longitude: corner.lon),
+        corner.toMln(),
     ]);
   }
 
@@ -293,10 +268,16 @@ class StyleControllerNative extends StyleController implements StyleBackend {
     String id,
     Uint8List bytes, {
     double pixelRatio = 1,
+    StyleImageOptions options = const StyleImageOptions(),
   }) async {
     final image = await _decodeImage(bytes);
     try {
-      await addImageFromUiImage(id: id, image: image, pixelRatio: pixelRatio);
+      await addImageFromUiImage(
+        id: id,
+        image: image,
+        pixelRatio: pixelRatio,
+        options: options,
+      );
     } finally {
       image.dispose();
     }
@@ -335,11 +316,12 @@ class StyleControllerNative extends StyleController implements StyleBackend {
     required String id,
     required ui.Image image,
     double pixelRatio = 1,
+    StyleImageOptions options = const StyleImageOptions(),
   }) async {
     await _map.setStyleImage(
       id,
       await _premultipliedImage(image, id),
-      options: mln.StyleImageOptions(pixelRatio: pixelRatio),
+      options: options.toMln(pixelRatio),
     );
   }
 
@@ -409,18 +391,19 @@ class StyleControllerNative extends StyleController implements StyleBackend {
   @override
   List<String> get attributions => _cachedAttributions;
 
-  /// MapLibre Native has no globe projection, so the map stays on Mercator.
+  /// MapLibre Native has only Mercator, so the map stays on it.
   @override
-  void setProjection(MapProjection projection) {
-    if (projection == MapProjection.mercator || _warnedGlobe) return;
-    _warnedGlobe = true;
+  void setProjection(Expression<MapProjection> projection) {
+    if (projection case Literal(value: MapProjection.mercator)) return;
+    if (_warnedProjection) return;
+    _warnedProjection = true;
     debugPrint(
-      'maplibre_native: the globe projection is not supported by MapLibre '
-      'Native; the map stays on Mercator.',
+      'maplibre: projections other than Mercator are only supported on web; '
+      'the map stays on Mercator.',
     );
   }
 
-  static var _warnedGlobe = false;
+  static var _warnedProjection = false;
 
   @override
   void dispose() {

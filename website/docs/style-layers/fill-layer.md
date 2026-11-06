@@ -25,7 +25,7 @@ Widget build(BuildContext context) {
         final geojsonPolygon =
         await rootBundle.loadString('assets/geojson/lake-constance.json');
         await style.sources.add(
-          GeoJsonSource.data(id: 'LakeConstance', data: geojsonPolygon),
+          GeoJsonSource.data(id: 'LakeConstance', data: .text(geojsonPolygon)),
         );
         await style.layers.add(
           FillStyleLayer(

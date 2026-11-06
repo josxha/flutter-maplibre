@@ -23,6 +23,9 @@
 - `MapGestures` has one switch per gesture, grouped in `PanGestures`,
   `ZoomGestures`, `RotateGestures` and `PitchGestures`; `MapGestures.all()` is
   now `MapGestures()`.
+- GeoJSON data is a `GeoJsonData` of geobase objects, decoded JSON or text,
+  instead of a string.
+- `setProjection` takes an `Expression<MapProjection>`.
 
 ### Features
 
@@ -32,6 +35,11 @@
   map with `QueryGeometry.viewport()`.
 - `MapController.querySourceFeatures` returns the loaded features of a source,
   also hidden ones.
+- Clustered GeoJSON sources with `GeoJsonCluster`, and `getClusterLeaves`,
+  `getClusterChildren` and `getClusterExpansionZoom`.
+- `GeoJsonSource.buffer`.
+- The vertical perspective projection and interpolated projections on web.
+- `StyleImageOptions` for SDF images and images that fit symbol text.
 - `MapController.cameraFor` and `stopCamera`, and `roll` and `padding` on
   `CameraPosition`.
 - New map events: `onError`, `onStyleImageMissing`, `onLoadingStarted`,
@@ -43,7 +51,7 @@
 - `MapEventDoubleClick.preventDefault()` keeps a double tap from zooming,
   also from an async `onDoubleClick`.
 - `MapOptions.fastPforEnabled` decodes MapLibre Tile (MLT) vector tiles that
-  use FastPFOR on native platforms
+  use FastPFOR (always enabled on web)
   ([#635](https://github.com/josxha/flutter-maplibre/issues/635)).
 
 ### Bug Fixes

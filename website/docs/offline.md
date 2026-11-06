@@ -99,7 +99,7 @@ final route = OfflineGeometryRegionDefinition(
 
 Resources that fail to load arrive as `OfflineResourceException` errors on
 the stream, with the `reason` they failed, and the download retries them. A
-region with more tiles than MapLibre Native allows stops with an
+region with more tiles than the offline database allows stops with an
 `OfflineTileCountLimitException`. Cancelling the subscription pauses the
 download; `manager.resumeDownload(regionId: id)` continues it.
 
@@ -126,7 +126,7 @@ there is no region with that id.
 ### Merging Regions
 
 Use `manager.mergeOfflineRegions(path: 'path/to/database')` to merge offline
-regions from a secondary MapLibre Native database into the main offline database.
+regions from a secondary offline database into the main offline database.
 This is typically used when you have multiple MapLibre offline databases that you
 want to consolidate.
 

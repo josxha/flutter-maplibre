@@ -223,8 +223,24 @@ extension type SourceSpecification._(JSObject _) implements JSObject {
     required JSAny coordinates,
   });
 
+  /// The type of the source, such as `geojson`.
+  external String get type;
+
   /// Used to update the data of a GeoJSON source.
   external void setData(JSAny data);
+
+  /// The zoom level at which a cluster of a GeoJSON source expands.
+  external JSPromise<JSNumber> getClusterExpansionZoom(int clusterId);
+
+  /// The children of a cluster of a GeoJSON source.
+  external JSPromise<JSArray<GeoJSONFeature>> getClusterChildren(int clusterId);
+
+  /// The points of a cluster of a GeoJSON source.
+  external JSPromise<JSArray<GeoJSONFeature>> getClusterLeaves(
+    int clusterId,
+    int limit,
+    int offset,
+  );
 
   /// Used to update the corners of an image source.
   external void setCoordinates(JSAny coordinates);
@@ -296,7 +312,7 @@ extension type ProjectionSpecification._(JSObject _) implements JSObject {
   external ProjectionSpecification({
     /// The projection definition type. Can be specified as a string, a
     /// transition state, or an expression.
-    required String type,
+    required JSAny type,
   });
 }
 

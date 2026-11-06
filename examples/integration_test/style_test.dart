@@ -16,7 +16,7 @@ void main() {
 
 const _point = Geographic(lon: 0, lat: 0);
 
-String _pointData([Geographic point = _point]) => featureCollection([
+GeoJsonData _pointData([Geographic point = _point]) => featureCollection([
   Feature(geometry: Point(point), id: 1, properties: const {'name': 'p'}),
 ]);
 
@@ -323,7 +323,7 @@ void runTests() {
 
     testWidgets('moves the end of a line gradient', (tester) async {
       final map = await pumpMap(tester, options: offlineOptions(zoom: 8));
-      String line(double lon) => featureCollection([
+      GeoJsonData line(double lon) => featureCollection([
         Feature(
           geometry: LineString.from(
             const [
@@ -373,7 +373,7 @@ void runTests() {
               'sources': {
                 'points': {
                   'type': 'geojson',
-                  'data': jsonDecode(_pointData()),
+                  'data': _pointData().toJson(),
                   'attribution': 'A',
                   'lineMetrics': true,
                 },
@@ -448,7 +448,7 @@ void runTests() {
       final points = map.style.sources['points']! as GeoJsonSourceData;
       expect(points.attribution, 'A');
       expect(points.lineMetrics, isTrue);
-      expect(jsonDecode(points.data), jsonDecode(_pointData()));
+      expect(points.data.toJson(), _pointData().toJson());
       final tiles = map.style.sources['tiles']! as VectorSourceTiles;
       expect(tiles.tiles, ['https://example.invalid/{z}/{x}/{y}.pbf']);
       expect(tiles.maxZoom, 10);
@@ -550,6 +550,65 @@ void runTests() {
       a.moveBelow(null);
       expect(map.style.layers.last, a);
       await _waitForIconOf(map, 'a');
+    });
+
+    testWidgets('an SDF image takes the color of its icon', (tester) async {
+      final map = await pumpMap(tester, options: offlineOptions());
+      await map.style.sources.add(
+        GeoJsonSource.data(id: 'src', data: _pointData()),
+      );
+      // Opaque white, which an SDF image reads as inside the shape.
+      await map.style.addImageFromCanvas(
+        id: 'square',
+        width: 32,
+        height: 32,
+        painter: (canvas) => canvas.drawRect(
+          const Rect.fromLTWH(0, 0, 32, 32),
+          Paint()..color = const Color(0xFFFFFFFF),
+        ),
+        options: const StyleImageOptions(sdf: true),
+      );
+      await map.style.layers.add(
+        SymbolStyleLayer(
+          id: 'sdf',
+          sourceId: 'src',
+          iconImage: const .literal('square'),
+          iconColor: const .literal(Color(0xFF00FF00)),
+        ),
+      );
+      await map.waitForColorAtCenter('green', 1);
+    }, skip: kIsWeb);
+
+    // The offline style has no glyphs, so no text fits the image here: the
+    // map only has to take the options.
+    testWidgets('images take their options', (tester) async {
+      final map = await pumpMap(tester, options: offlineOptions());
+      await map.style.sources.add(
+        GeoJsonSource.data(id: 'src', data: _pointData()),
+      );
+      final bytes = (await rootBundle.load(_markerAsset)).buffer.asUint8List();
+      await map.style.addImage(
+        'stretchable',
+        bytes,
+        options: const StyleImageOptions(
+          stretchX: [(4, 8)],
+          stretchY: [(4, 8)],
+          content: Rect.fromLTRB(2, 2, 10, 10),
+          textFitWidth: .stretchOnly,
+          textFitHeight: .proportional,
+        ),
+      );
+      await map.style.layers.add(
+        SymbolStyleLayer(
+          id: 'fitted',
+          sourceId: 'src',
+          iconImage: const .literal('stretchable'),
+        ),
+      );
+      await map.waitForFeatures(
+        map.center,
+        (features) => features.any((f) => f.layerId == 'fitted'),
+      );
     });
 
     testWidgets('a batch applies its changes', (tester) async {
@@ -872,7 +931,7 @@ void runTests() {
       await map.style.sources.add(
         const GeoJsonSource.data(
           id: 'points',
-          data: '{"type":"FeatureCollection","features":[]}',
+          data: .text('{"type":"FeatureCollection","features":[]}'),
           attribution: '© Points',
         ),
       );

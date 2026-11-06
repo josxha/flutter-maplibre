@@ -3,61 +3,17 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/widgets.dart';
+import 'package:maplibre_native/src/extensions.dart';
 import 'package:maplibre_native/src/map_renderer.dart';
 import 'package:maplibre_native/src/style_controller.dart';
 import 'package:maplibre_native_ffi/maplibre_native_ffi.dart' as mln;
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 
-/// The map events that the state always handles. Others, such as the render
-/// events of every frame, are only queued while [MapLibreMap] has a callback
-/// for them, see [_eventMaskOf].
-final mln.RuntimeEventFlag _baseEventMask =
-    mln.RuntimeEventFlag.mapCameraWillChange |
-    mln.RuntimeEventFlag.mapCameraIsChanging |
-    mln.RuntimeEventFlag.mapCameraDidChange |
-    mln.RuntimeEventFlag.mapStyleLoaded |
-    mln.RuntimeEventFlag.mapIdle |
-    mln.RuntimeEventFlag.mapSourceChanged |
-    mln.RuntimeEventFlag.mapLoadingFailed |
-    mln.RuntimeEventFlag.mapRenderError |
-    mln.RuntimeEventFlag.mapGlyphsError |
-    mln.RuntimeEventFlag.mapSpriteError;
-
-/// The events that the callbacks of [map] need.
-mln.RuntimeEventFlag _eventMaskOf(MapLibreMap map) =>
-    _baseEventMask |
-    (map.onLoadingStarted != null
-        ? mln.RuntimeEventFlag.mapLoadingStarted
-        : mln.RuntimeEventFlag.none) |
-    (map.onLoadingFinished != null
-        ? mln.RuntimeEventFlag.mapLoadingFinished
-        : mln.RuntimeEventFlag.none) |
-    (map.onStyleImageMissing != null
-        ? mln.RuntimeEventFlag.mapStyleImageMissing
-        : mln.RuntimeEventFlag.none) |
-    (map.onTile != null
-        ? mln.RuntimeEventFlag.mapTileAction
-        : mln.RuntimeEventFlag.none) |
-    (map.onRenderFrame != null
-        ? mln.RuntimeEventFlag.mapRenderFrameFinished
-        : mln.RuntimeEventFlag.none) |
-    (map.onRenderMap != null
-        ? mln.RuntimeEventFlag.mapRenderMapFinished
-        : mln.RuntimeEventFlag.none) |
-    (map.onGlyphs != null
-        ? mln.RuntimeEventFlag.mapGlyphsRequested |
-              mln.RuntimeEventFlag.mapGlyphsLoaded
-        : mln.RuntimeEventFlag.none) |
-    (map.onSprite != null
-        ? mln.RuntimeEventFlag.mapSpriteRequested |
-              mln.RuntimeEventFlag.mapSpriteLoaded
-        : mln.RuntimeEventFlag.none);
-
 /// MapLibre Native, rendered through its C API into a Flutter texture.
 class MapLibreMapStateNative extends MapLibreMapState {
   MapRenderer? _renderer;
 
-  /// The events that the map queues, see [_eventMaskOf].
+  /// The events that the map queues, see `MapLibreMapExt.eventMask`.
   mln.RuntimeEventFlag? _eventMask;
 
   /// The map, from its creation on, before [_renderer] exists.
@@ -146,7 +102,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
       // renders, so its first frame shows them.
       final renderer = await MapRenderer.create(
         extent: extent,
-        eventMask: _eventMask = _eventMaskOf(widget),
+        eventMask: _eventMask = widget.eventMask,
         fastPforEnabled: options.fastPforEnabled,
         setUp: _setUp,
         onEvent: _onRuntimeEvent,
@@ -181,7 +137,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
   Future<void> _setUp(mln.MapHandle map) async {
     _map = map;
     // The callbacks may have changed while the map was being created.
-    final eventMask = _eventMaskOf(widget);
+    final eventMask = widget.eventMask;
     if (eventMask != _eventMask) {
       _eventMask = eventMask;
       map.discarding.setEventMask(eventMask);
@@ -217,7 +173,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
     await map.setBounds(
       mln.BoundOptions(
         bounds: switch (options.maxBounds) {
-          final bounds? => _latLngBounds(bounds),
+          final bounds? => bounds.toMln(),
           null => null,
         },
         unbounded: options.maxBounds == null,
@@ -249,7 +205,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
       unawaited(_setStyle(options.style));
     }
     _layerManager?.updateLayers(widget.layers);
-    final eventMask = _eventMaskOf(widget);
+    final eventMask = widget.eventMask;
     final map = _map;
     if (eventMask != _eventMask && map != null) {
       _eventMask = eventMask;
@@ -334,7 +290,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
           mln.RuntimeEventPayloadTileAction(:final value) => value,
           _ => null,
         };
-        final operation = _tileOperations[action?.operation];
+        final operation = action?.operation.toMapTileOperation();
         if (onTile == null || action == null || operation == null) return;
         final tile = action.tileId;
         onTile(
@@ -431,18 +387,6 @@ class MapLibreMapStateNative extends MapLibreMapState {
     microseconds: (seconds * Duration.microsecondsPerSecond).round(),
   );
 
-  static final Map<mln.TileOperation, MapTileOperation> _tileOperations = {
-    mln.TileOperation.requestedFromCache: MapTileOperation.requestedFromCache,
-    mln.TileOperation.requestedFromNetwork:
-        MapTileOperation.requestedFromNetwork,
-    mln.TileOperation.loadFromNetwork: MapTileOperation.loadFromNetwork,
-    mln.TileOperation.loadFromCache: MapTileOperation.loadFromCache,
-    mln.TileOperation.startParse: MapTileOperation.startParse,
-    mln.TileOperation.endParse: MapTileOperation.endParse,
-    mln.TileOperation.error: MapTileOperation.error,
-    mln.TileOperation.cancelled: MapTileOperation.cancelled,
-  };
-
   /// Reports the map's latest camera. [camera] instead follows the frame on
   /// screen, see [_onFrameShown].
   void _onCameraChanged() {
@@ -467,7 +411,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
     }
     _shownProjection?.close();
     _shownProjection = projection;
-    final shown = _toCameraPosition(frame.view.camera);
+    final shown = frame.view.camera.toCameraPosition();
     final resized = frame.generation != _shownExtentGeneration;
     _shownExtentGeneration = frame.generation;
     if (shown == camera && !resized) return;
@@ -566,27 +510,8 @@ class MapLibreMapStateNative extends MapLibreMapState {
   CameraPosition? _readCamera() {
     final map = _map;
     if (map == null || _disposed) return null;
-    return _toCameraPosition(map.getSnapshot().view.camera);
+    return map.getSnapshot().view.camera.toCameraPosition();
   }
-
-  /// The native center is unwrapped to the visible world copy; the public
-  /// camera wraps its longitude into [-180, 180).
-  static CameraPosition _toCameraPosition(mln.Camera native) => CameraPosition(
-    center: Geographic(
-      lon: (native.center.longitude + 180) % 360 - 180,
-      lat: native.center.latitude,
-    ),
-    zoom: native.zoom,
-    bearing: native.bearing,
-    pitch: native.pitch,
-    roll: native.roll,
-    padding: EdgeInsets.fromLTRB(
-      native.padding.left,
-      native.padding.top,
-      native.padding.right,
-      native.padding.bottom,
-    ),
-  );
 
   // Gestures
 
@@ -619,16 +544,72 @@ class MapLibreMapStateNative extends MapLibreMapState {
     ];
   }
 
-  static mln.RenderedQueryGeometry _box(Rect rect) =>
-      mln.RenderedQueryGeometry.box(
-        mln.ScreenBox(
-          min: _screenPoint(rect.topLeft),
-          max: _screenPoint(rect.bottomRight),
-        ),
-      );
+  @override
+  Future<double> getClusterExpansionZoom(String sourceId, int clusterId) async {
+    final result = await _cluster(sourceId, clusterId, 'expansion-zoom');
+    if (result case final num zoom) return zoom.toDouble();
+    throw StateError('No cluster $clusterId in the source "$sourceId".');
+  }
 
-  static mln.ScreenPoint _screenPoint(Offset offset) =>
-      mln.ScreenPoint(x: offset.dx, y: offset.dy);
+  @override
+  Future<List<SourceFeature>> getClusterChildren(
+    String sourceId,
+    int clusterId,
+  ) async => _clusterFeatures(await _cluster(sourceId, clusterId, 'children'));
+
+  @override
+  Future<List<SourceFeature>> getClusterLeaves(
+    String sourceId,
+    int clusterId, {
+    int limit = 10,
+    int offset = 0,
+  }) async => _clusterFeatures(
+    await _cluster(sourceId, clusterId, 'leaves', {
+      'limit': limit,
+      'offset': offset,
+    }),
+  );
+
+  /// Asks the supercluster extension of the GeoJSON source [sourceId] for the
+  /// [field] of the cluster [clusterId], or null if the map is disposed.
+  Future<Object?> _cluster(
+    String sourceId,
+    int clusterId,
+    String field, [
+    Map<String, Object?> arguments = const {},
+  ]) async {
+    final renderer = _renderer;
+    if (renderer == null || _disposed) return null;
+    return renderer.queryFeatureExtensions(
+      sourceId,
+      // The extension only reads the cluster id of the feature.
+      {
+        'type': 'Feature',
+        'properties': {'cluster': true, 'cluster_id': clusterId},
+        'geometry': {
+          'type': 'Point',
+          'coordinates': [0, 0],
+        },
+      },
+      'supercluster',
+      field,
+      arguments,
+    );
+  }
+
+  static List<SourceFeature> _clusterFeatures(Object? result) => [
+    for (final feature in switch (result) {
+      {'features': final List<Object?> features} => features,
+      final List<Object?> features => features,
+      _ => const <Object?>[],
+    })
+      if (feature case final Map<String, Object?> feature)
+        SourceFeature(
+          id: feature['id'],
+          properties: _properties(feature),
+          geometry: RenderedFeature.geometryFromJson(feature['geometry']),
+        ),
+  ];
 
   // MapController
 
@@ -671,11 +652,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
     final projection = _currentProjection();
     return [
       for (final lngLat in lngLats)
-        _offset(
-          projection.pixelForLatLng(
-            mln.LatLng(latitude: lngLat.lat, longitude: lngLat.lon),
-          ),
-        ),
+        projection.pixelForLatLng(lngLat.toMln()).toOffset(),
     ];
   }
 
@@ -684,14 +661,9 @@ class MapLibreMapStateNative extends MapLibreMapState {
     final projection = _currentProjection();
     return [
       for (final screenLocation in screenLocations)
-        _geographic(projection.latLngForPixel(_screenPoint(screenLocation))),
+        projection.latLngForPixel(screenLocation.toMln()).toGeographic(),
     ];
   }
-
-  static Offset _offset(mln.ScreenPoint point) => Offset(point.x, point.y);
-
-  static Geographic _geographic(mln.LatLng latLng) =>
-      Geographic(lon: latLng.longitude, lat: latLng.latitude);
 
   @override
   double getMetersPerPixelAtLatitude(double latitude) =>
@@ -743,7 +715,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
           CameraAnimationFly() => mln.CameraUpdateMode.fly,
         },
         camera: camera,
-        animation: _animationOptions(animation),
+        animation: animation.toMln(),
       ),
     );
   }
@@ -762,19 +734,12 @@ class MapLibreMapStateNative extends MapLibreMapState {
     final center = camera.center;
     final padding = camera.padding;
     return CameraPosition(
-      center: center == null ? current.center : _geographic(center),
+      center: center?.toGeographic() ?? current.center,
       zoom: camera.zoom ?? current.zoom,
       bearing: camera.bearing ?? current.bearing,
       pitch: camera.pitch ?? current.pitch,
       roll: camera.roll ?? current.roll,
-      padding: padding == null
-          ? current.padding
-          : EdgeInsets.fromLTRB(
-              padding.left,
-              padding.top,
-              padding.right,
-              padding.bottom,
-            ),
+      padding: padding?.toEdgeInsets() ?? current.padding,
     );
   }
 
@@ -786,23 +751,23 @@ class MapLibreMapStateNative extends MapLibreMapState {
     switch (update) {
       case CameraUpdatePosition(:final center, :final padding, :final anchor):
         return mln.CameraOptions(
-          center: center == null ? null : _latLng(center),
+          center: center?.toMln(),
           zoom: update.zoom,
           bearing: update.bearing,
           pitch: update.pitch,
           roll: update.roll,
-          padding: padding == null ? null : _edgeInsets(padding),
-          anchor: anchor == null ? null : _screenPoint(anchor),
+          padding: padding?.toMln(),
+          anchor: anchor?.toMln(),
         );
       case CameraUpdateFit():
         final fitOptions = mln.CameraFitOptions(
-          padding: _edgeInsets(update.padding),
+          padding: update.padding.toMln(),
           bearing: update.bearing,
           pitch: update.pitch,
         );
         final camera = await switch (update) {
           CameraUpdateBounds(:final bounds) => map.cameraForLatLngBounds(
-            _latLngBounds(bounds),
+            bounds.toMln(),
             fitOptions: fitOptions,
           ),
           CameraUpdatePoints(:final points) =>
@@ -813,7 +778,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
                     'must not be empty',
                   )
                 : map.cameraForLatLngs([
-                    for (final point in points) _latLng(point),
+                    for (final point in points) point.toMln(),
                   ], fitOptions: fitOptions),
           CameraUpdateGeometry(:final geometry) => map.cameraForGeometry(
             jsonDecode(geometry.toText()),
@@ -828,43 +793,6 @@ class MapLibreMapStateNative extends MapLibreMapState {
         return camera;
     }
   }
-
-  static mln.AnimationOptions _animationOptions(CameraAnimation animation) {
-    final curve = animation.curve;
-    final easing = mln.UnitBezier(
-      x1: curve.a,
-      y1: curve.b,
-      x2: curve.c,
-      y2: curve.d,
-    );
-    return switch (animation) {
-      CameraAnimationEase(:final duration) => mln.AnimationOptions(
-        durationMs: duration.inMicroseconds / 1000,
-        easing: easing,
-      ),
-      CameraAnimationFly(:final duration) => mln.AnimationOptions(
-        durationMs: duration == null ? null : duration.inMicroseconds / 1000,
-        velocity: duration == null ? animation.speed : null,
-        minZoom: animation.peakZoom,
-        easing: easing,
-      ),
-    };
-  }
-
-  static mln.LatLng _latLng(Geographic position) =>
-      mln.LatLng(latitude: position.lat, longitude: position.lon);
-
-  static mln.LatLngBounds _latLngBounds(GeoBox bounds) => mln.LatLngBounds(
-    southwest: mln.LatLng(latitude: bounds.south, longitude: bounds.west),
-    northeast: mln.LatLng(latitude: bounds.north, longitude: bounds.east),
-  );
-
-  static mln.EdgeInsets _edgeInsets(EdgeInsets padding) => mln.EdgeInsets(
-    top: padding.top,
-    left: padding.left,
-    bottom: padding.bottom,
-    right: padding.right,
-  );
 
   /// Counts [_setStyle] calls, so a style that loads after a newer one was
   /// set is dropped.
@@ -907,15 +835,18 @@ class MapLibreMapStateNative extends MapLibreMapState {
     final features = await renderer.queryRenderedFeatures(
       switch (geometry) {
         QueryGeometryPoint(:final point) => mln.RenderedQueryGeometry.point(
-          _screenPoint(point),
+          point.toMln(),
         ),
-        QueryGeometryRect(:final rect) => _box(rect),
-        QueryGeometryViewport() => _box(
-          Offset.zero &
-              Size(
-                renderer.extent.width.toDouble(),
-                renderer.extent.height.toDouble(),
-              ),
+        QueryGeometryRect(:final rect) => mln.RenderedQueryGeometry.box(
+          rect.toMln(),
+        ),
+        QueryGeometryViewport() => mln.RenderedQueryGeometry.box(
+          (Offset.zero &
+                  Size(
+                    renderer.extent.width.toDouble(),
+                    renderer.extent.height.toDouble(),
+                  ))
+              .toMln(),
         ),
       },
       layerIds: layerIds,
@@ -972,17 +903,13 @@ class _NativeGestureCamera implements GestureCameraSink {
     final around = update.around;
     _state._applyDelta(
       mln.CameraDelta(
-        offset: update.pans
-            ? MapLibreMapStateNative._screenPoint(
-                update.panTo! - update.panFrom!,
-              )
-            : null,
+        offset: update.pans ? (update.panTo! - update.panFrom!).toMln() : null,
         scale: scales ? pow(2, update.zoomBy).toDouble() : null,
         bearing: rotates ? update.rotateBy : null,
         pitch: tilts ? update.pitchBy : null,
         // The C API rejects an anchor without a scale, bearing or pitch.
         anchor: around != null && (scales || rotates || tilts)
-            ? MapLibreMapStateNative._screenPoint(around)
+            ? around.toMln()
             : null,
         gesturePhase: mln.GesturePhase.update,
       ),
@@ -1011,7 +938,7 @@ class _NativeGestureCamera implements GestureCameraSink {
         velocity.pixelsPerSecond / speed * (flingSpeed * seconds / 2);
     _state._applyDelta(
       mln.CameraDelta(
-        offset: MapLibreMapStateNative._screenPoint(offset),
+        offset: offset.toMln(),
         animation: mln.AnimationOptions(
           durationMs: seconds * 1000,
           easing: const mln.UnitBezier(x2: 0.3, y2: 1),
@@ -1032,7 +959,7 @@ class _NativeGestureCamera implements GestureCameraSink {
     _state._applyDelta(
       mln.CameraDelta(
         scale: pow(2, levels).toDouble(),
-        anchor: MapLibreMapStateNative._screenPoint(around),
+        anchor: around.toMln(),
         animation: duration == Duration.zero
             ? const mln.AnimationOptions()
             : mln.AnimationOptions(

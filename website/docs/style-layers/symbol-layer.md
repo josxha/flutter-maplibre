@@ -34,7 +34,7 @@ Widget build(BuildContext context) {
         await style.sources.add(
           const GeoJsonSource.data(
             id: 'points',
-            data: _geoJsonString,
+            data: .text(_geoJsonString),
           ),
         );
 

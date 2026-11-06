@@ -5,6 +5,7 @@ import 'package:flutter/painting.dart';
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 import 'package:maplibre_platform_interface/src/style/expressions/expression_json.dart';
 
+part 'geo_json_data.dart';
 part 'geo_json_source.dart';
 part 'raster_dem_source.dart';
 part 'raster_source.dart';

@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/foundation.dart';
@@ -76,7 +75,7 @@ class _FeaturesQueryPageState extends State<FeaturesQueryPage> {
     final geojson = {'type': 'FeatureCollection', 'features': features};
 
     await style.sources.add(
-      GeoJsonSource.data(id: 'points', data: jsonEncode(geojson)),
+      GeoJsonSource.data(id: 'points', data: .json(geojson)),
     );
 
     // Add random polygons
@@ -109,7 +108,7 @@ class _FeaturesQueryPageState extends State<FeaturesQueryPage> {
     final geojson2 = {'type': 'FeatureCollection', 'features': features};
 
     await style.sources.add(
-      GeoJsonSource.data(id: 'polygons', data: jsonEncode(geojson2)),
+      GeoJsonSource.data(id: 'polygons', data: .json(geojson2)),
     );
 
     await style.layers.add(
