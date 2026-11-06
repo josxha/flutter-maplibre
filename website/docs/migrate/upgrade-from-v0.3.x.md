@@ -42,7 +42,7 @@ See [Platform setup](../getting-started/platforms.md) for the details.
 maplibre-gl-js v6 requires WebGL 2, returns nested objects in GeoJSON
 feature properties as maps instead of JSON strings, and sets
 `zoomLevelsToOverscale` to 4 by default, which can change label rendering and
-`featuresAtPoint()` results. See the
+`queryRenderedFeatures()` results. See the
 [maplibre-gl-js migration guide](https://github.com/maplibre/maplibre-gl-js/blob/main/docs/guides/v5-to-v6-migration-guide.md).
 
 ## 3. Map options
@@ -160,9 +160,26 @@ pixels.
 
 ## 8. Feature queries
 
-- `featuresAtPoint` and `featuresInRect` return a `Future`, so `await` them.
-- `queryLayers` and `QueriedLayer` were removed. Use `featuresAtPoint` with
-  `layerIds`, and `RenderedFeature.layerId`, `sourceId` and `sourceLayer`.
+`featuresAtPoint` and `featuresInRect` are now one `queryRenderedFeatures`,
+which returns a `Future`, so `await` it:
+
+```dart
+// 0.3
+final features = controller.featuresAtPoint(point);
+final inRect = controller.featuresInRect(rect);
+
+// 0.4
+final features = await controller.queryRenderedFeatures(.point(point));
+final inRect = await controller.queryRenderedFeatures(.rect(rect));
+```
+
+- `QueryGeometry.viewport()` queries the whole map, and `filter` takes an
+  `Expression<bool>`, like a layer filter.
+- `RenderedFeature.geometry` is a geobase `Geometry` instead of a GeoJSON
+  map, for example a `Point` or a `Polygon`.
+- `queryLayers` and `QueriedLayer` were removed. Use `queryRenderedFeatures`
+  with `layerIds`, and `RenderedFeature.layerId`, `sourceId` and
+  `sourceLayer`.
 
 ## 9. User location and permissions
 

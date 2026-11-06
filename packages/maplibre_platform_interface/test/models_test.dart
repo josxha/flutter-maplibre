@@ -243,6 +243,28 @@ void main() {
   });
 
   group('RenderedFeature', () {
+    test('geometryFromJson parses GeoJSON geometries', () {
+      final point = RenderedFeature.geometryFromJson({
+        'type': 'Point',
+        'coordinates': [1.5, 2.5],
+      });
+      expect(point, isA<Point>());
+      expect((point! as Point).position, const Geographic(lon: 1.5, lat: 2.5));
+      expect(
+        RenderedFeature.geometryFromJson({
+          'type': 'LineString',
+          'coordinates': [
+            [0, 0],
+            [1, 1],
+          ],
+        }),
+        isA<LineString>(),
+      );
+      expect(RenderedFeature.geometryFromJson(null), isNull);
+      expect(RenderedFeature.geometryFromJson({'type': 'Unknown'}), isNull);
+      expect(RenderedFeature.geometryFromJson('Point'), isNull);
+    });
+
     test('compares by ID, source, and layer, not by properties', () {
       const feature = RenderedFeature(
         id: 1,
@@ -491,6 +513,49 @@ void main() {
       expect(
         const MapEventCameraMoveStart(reason: CameraChangeReason.map).reason,
         CameraChangeReason.map,
+      );
+    });
+  });
+
+  group('QueryGeometry', () {
+    test('compares by value', () {
+      expect(
+        const QueryGeometry.point(Offset(1, 2)),
+        const QueryGeometry.point(Offset(1, 2)),
+      );
+      expect(
+        const QueryGeometry.point(Offset(1, 2)),
+        isNot(const QueryGeometry.point(Offset(2, 1))),
+      );
+      const rect = Rect.fromLTWH(0, 0, 10, 10);
+      expect(const QueryGeometry.rect(rect), const QueryGeometry.rect(rect));
+      expect(
+        const QueryGeometry.rect(rect).hashCode,
+        const QueryGeometry.rect(rect).hashCode,
+      );
+      expect(const QueryGeometry.viewport(), const QueryGeometry.viewport());
+      expect(
+        const QueryGeometry.viewport(),
+        isNot(const QueryGeometry.rect(rect)),
+      );
+    });
+  });
+
+  group('SourceFeature', () {
+    test('compares id, source layer and properties', () {
+      const feature = SourceFeature(id: 1, properties: {'a': 1});
+      expect(feature, const SourceFeature(id: 1, properties: {'a': 1}));
+      expect(
+        feature.hashCode,
+        const SourceFeature(id: 1, properties: {'a': 1}).hashCode,
+      );
+      expect(feature, isNot(const SourceFeature(id: 2, properties: {'a': 1})));
+      expect(feature, isNot(const SourceFeature(id: 1, properties: {'a': 2})));
+      expect(
+        feature,
+        isNot(
+          const SourceFeature(id: 1, properties: {'a': 1}, sourceLayer: 'l'),
+        ),
       );
     });
   });

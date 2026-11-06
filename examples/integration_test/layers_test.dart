@@ -47,7 +47,7 @@ void runTests() {
         map.center,
         (features) => features.length == 1,
       );
-      expect(circles.single.geometry?['type'], 'Point');
+      expect(circles.single.geometry, isA<Point>());
 
       await tester.pumpWidget(
         MapApp(
@@ -63,10 +63,9 @@ void runTests() {
       );
       await map.waitForFeatures(
         map.center,
-        (features) => features
-            .map((f) => f.geometry?['type'])
-            .toSet()
-            .containsAll(['Polygon', 'LineString']),
+        (features) =>
+            features.any((f) => f.geometry is Polygon) &&
+            features.any((f) => f.geometry is LineString),
       );
 
       await tester.pumpWidget(MapApp(options: options));
@@ -125,7 +124,7 @@ void runTests() {
       );
       await map.waitForFeatures(
         map.center,
-        (features) => features.any((f) => f.geometry?['type'] == 'LineString'),
+        (features) => features.any((f) => f.geometry is LineString),
       );
       expect(map.style.layers.map((layer) => layer.id), [
         'background',
@@ -178,7 +177,10 @@ void runTests() {
         map.controller.toScreenLocation(first),
         (features) => features.length == 1,
       );
-      expect(await map.controller.featuresAtPoint(map.center), isEmpty);
+      expect(
+        await map.controller.queryRenderedFeatures(.point(map.center)),
+        isEmpty,
+      );
 
       points.add(const Feature(geometry: Point(_point)));
       await tester.pumpWidget(

@@ -31,8 +31,8 @@ class _StyleLayersFillPageState extends State<StyleLayersFillPage> {
         onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: _onStyleLoaded,
         onClick: (event) async {
-          final features = await _controller.featuresAtPoint(
-            event.screenPoint,
+          final features = await _controller.queryRenderedFeatures(
+            .point(event.screenPoint),
             layerIds: [_layerId],
           );
           if (context.mounted) {
