@@ -7,8 +7,9 @@ icon: lucide/locate
 
 ## Map options
 
-`MapOptions` configures a `MapLibreMap`. Every option except `initCamera` can
-change at any time, for example with `setState()`, and the map follows:
+`MapOptions` configures a `MapLibreMap`. Every option except `initCamera` and
+`fastPforEnabled` can change at any time, for example with `setState()`, and
+the map follows:
 
 ```dart
 MapLibreMap(
@@ -35,6 +36,7 @@ MapLibreMap(
 | `minPitch`, `maxPitch`  | The pitch range the camera stays in.                                            |
 | `maxBounds`             | The area the camera stays in.                                                   |
 | `gestures`              | Which gestures move the map, see [Gestures](#gestures).                         |
+| `fastPforEnabled`       | Not on web: decode MLT tiles that use FastPFOR, see [Sources](sources.md#maplibre-tiles-mlt). Only read once. |
 
 ## Initial camera
 
