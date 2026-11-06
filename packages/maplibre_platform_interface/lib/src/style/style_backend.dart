@@ -39,8 +39,8 @@ abstract interface class StyleBackend {
   /// Removes the source [id].
   Future<void> removeSource(String id);
 
-  /// Sets the GeoJSON string [data] of the GeoJSON source [id].
-  Future<void> setGeoJsonData(String id, String data);
+  /// Sets the [data] of the GeoJSON source [id].
+  Future<void> setGeoJsonData(String id, GeoJsonData data);
 
   /// Makes the GeoJSON source [id] load its data from [url].
   Future<void> setGeoJsonUrl(String id, String url);

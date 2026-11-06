@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:ui' as ui;
 
 import 'package:flutter/foundation.dart';
@@ -65,6 +64,7 @@ class StyleControllerNative extends StyleController implements StyleBackend {
     clusterRadius: (json['clusterRadius'] as num?)?.toInt(),
     clusterMaxZoom: (json['clusterMaxZoom'] as num?)?.toDouble(),
     clusterMinPoints: (json['clusterMinPoints'] as num?)?.toInt(),
+    clusterProperties: json['clusterProperties'],
   );
 
   @override
@@ -97,11 +97,7 @@ class StyleControllerNative extends StyleController implements StyleBackend {
     }
     final added = _map.addStyleSourceJson(source.id, json);
     if (source is GeoJsonSource) {
-      _geoJsonOptions[source.id] = mln.GeoJsonSourceOptions(
-        maxZoom: source.maxZoom,
-        tolerance: source.tolerance,
-        lineMetrics: source.lineMetrics,
-      );
+      _geoJsonOptions[source.id] = _geoJsonOptionsOf(json);
     }
     await added;
     // Sources with inline tiles know their attribution now; a TileJSON source
@@ -213,9 +209,9 @@ class StyleControllerNative extends StyleController implements StyleBackend {
   }
 
   @override
-  Future<void> setGeoJsonData(String id, String data) async {
+  Future<void> setGeoJsonData(String id, GeoJsonData data) async {
     final handle = mln.GeoJsonSourceDataHandle.create(
-      jsonDecode(data),
+      data.toJson(),
       options: _geoJsonOptions[id],
     );
     try {
@@ -293,10 +289,16 @@ class StyleControllerNative extends StyleController implements StyleBackend {
     String id,
     Uint8List bytes, {
     double pixelRatio = 1,
+    StyleImageOptions options = const StyleImageOptions(),
   }) async {
     final image = await _decodeImage(bytes);
     try {
-      await addImageFromUiImage(id: id, image: image, pixelRatio: pixelRatio);
+      await addImageFromUiImage(
+        id: id,
+        image: image,
+        pixelRatio: pixelRatio,
+        options: options,
+      );
     } finally {
       image.dispose();
     }
@@ -335,13 +337,48 @@ class StyleControllerNative extends StyleController implements StyleBackend {
     required String id,
     required ui.Image image,
     double pixelRatio = 1,
+    StyleImageOptions options = const StyleImageOptions(),
   }) async {
     await _map.setStyleImage(
       id,
       await _premultipliedImage(image, id),
-      options: mln.StyleImageOptions(pixelRatio: pixelRatio),
+      options: _imageOptionsOf(options, pixelRatio),
     );
   }
+
+  static mln.StyleImageOptions _imageOptionsOf(
+    StyleImageOptions options,
+    double pixelRatio,
+  ) => mln.StyleImageOptions(
+    pixelRatio: pixelRatio,
+    sdf: options.sdf,
+    stretchX: [
+      for (final (from, to) in options.stretchX)
+        mln.ImageStretch(from: from, to: to),
+    ],
+    stretchY: [
+      for (final (from, to) in options.stretchY)
+        mln.ImageStretch(from: from, to: to),
+    ],
+    content: switch (options.content) {
+      null => null,
+      final content => mln.ImageContent(
+        left: content.left,
+        top: content.top,
+        right: content.right,
+        bottom: content.bottom,
+      ),
+    },
+    textFitWidth: _textFitOf(options.textFitWidth),
+    textFitHeight: _textFitOf(options.textFitHeight),
+  );
+
+  static mln.StyleImageTextFit? _textFitOf(ImageTextFit? fit) => switch (fit) {
+    null => null,
+    ImageTextFit.stretchOrShrink => mln.StyleImageTextFit.stretchOrShrink,
+    ImageTextFit.stretchOnly => mln.StyleImageTextFit.stretchOnly,
+    ImageTextFit.proportional => mln.StyleImageTextFit.proportional,
+  };
 
   @override
   Future<void> removeImage(String id) async {
@@ -409,18 +446,19 @@ class StyleControllerNative extends StyleController implements StyleBackend {
   @override
   List<String> get attributions => _cachedAttributions;
 
-  /// MapLibre Native has no globe projection, so the map stays on Mercator.
+  /// MapLibre Native has only Mercator, so the map stays on it.
   @override
-  void setProjection(MapProjection projection) {
-    if (projection == MapProjection.mercator || _warnedGlobe) return;
-    _warnedGlobe = true;
+  void setProjection(Expression<MapProjection> projection) {
+    if (projection case Literal(value: MapProjection.mercator)) return;
+    if (_warnedProjection) return;
+    _warnedProjection = true;
     debugPrint(
-      'maplibre_native: the globe projection is not supported by MapLibre '
-      'Native; the map stays on Mercator.',
+      'maplibre_native: MapLibre Native only supports the Mercator '
+      'projection; the map stays on it.',
     );
   }
 
-  static var _warnedGlobe = false;
+  static var _warnedProjection = false;
 
   @override
   void dispose() {

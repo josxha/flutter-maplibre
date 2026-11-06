@@ -20,6 +20,9 @@
   geobase `Geometry`.
 - `getVisibleRegion` is renamed to `getVisibleBounds`, and
   `MapCompass.animation` replaces its duration and speed.
+- GeoJSON data is a `GeoJsonData` of geobase objects, decoded JSON or text,
+  instead of a string.
+- `setProjection` takes an `Expression<MapProjection>`.
 
 ### Features
 
@@ -27,6 +30,11 @@
   map with `QueryGeometry.viewport()`.
 - `MapController.querySourceFeatures` returns the loaded features of a source,
   also hidden ones.
+- Clustered GeoJSON sources with `GeoJsonCluster`, and `getClusterLeaves`,
+  `getClusterChildren` and `getClusterExpansionZoom`.
+- `buffer`, `filter`, `generateId` and `promoteId` on `GeoJsonSource`.
+- The vertical perspective projection and interpolated projections on web.
+- `StyleImageOptions` for SDF images and images that fit symbol text.
 - `MapController.cameraFor` and `stopCamera`, and `roll` and `padding` on
   `CameraPosition`.
 - New map events: `onError`, `onStyleImageMissing`, `onLoadingStarted`,

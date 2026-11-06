@@ -296,6 +296,30 @@ Each entry: the decision, then why.
   takes one source layer like gl-js; native passes it as the C API's list.
   Web returns no features for a missing source instead of letting gl-js
   throw, as native does.
+- **GeoJSON data is a sealed `GeoJsonData`: geobase objects
+  (`.featureCollection`, `.feature`, `.geometry`), decoded JSON (`.json`) or
+  text (`.text`).** The raw forms skip building geobase objects for large
+  data. Native passes decoded JSON to the C API (text is decoded in Dart
+  first); web hands text to `JSON.parse` and only `jsify`s decoded JSON.
+  gl-js `updateData` diffs and `getData` are not exposed, as the C API has
+  neither.
+- **Clustering is an optional `GeoJsonCluster` on `GeoJsonSource`, not a
+  separate source type.** Sources are immutable data, so the cluster queries
+  live on `MapController` next to the other queries: native asks the
+  `supercluster` feature extension of the C API with a stub feature that only
+  carries `cluster_id` (and needs an arguments object, `{}` if empty); web
+  calls the methods of the gl-js `GeoJSONSource`.
+- **`setProjection` takes an `Expression<MapProjection>`**, the projection
+  definition of the style spec, so web can interpolate projections by zoom.
+  `MapProjection` is a `StyleEnum`. gl-js reports `globe-mercator` for a
+  globe that shows Mercator at the current zoom; the event maps it to
+  `mercator`. The C API's `ProjectionMode` (axonometric, skew) is a render
+  transform, not a projection, and is not exposed.
+- **Image options are a shared `StyleImageOptions` next to `pixelRatio`**,
+  which stays its own parameter because `addImageFromCanvas`,
+  `addImageFromIconData` and `addImageFromWidget` derive it. Their option
+  positions are logical pixels and are scaled to image pixels, like their
+  sizes; the other methods take image pixels.
 - **Every native map and the `OfflineManager` use one database,
   `maplibre_native.db` in the app support directory (`path_provider`).**
   Each map and the offline manager have a runtime of their own, and runtimes
@@ -571,12 +595,12 @@ Each entry: the decision, then why.
   database packing, so `setOfflineTileCountLimit` and
   `runPackDatabaseAutomatically` were removed from the `OfflineManager`.
 
-- Missing on native: the globe projection and video sources. MapLibre Native
-  implements neither, and the C API has no setting for them
-  (`mln_map_set_projection_mode` only sets axonometric and skew;
-  `MLN_STYLE_SOURCE_TYPE_VIDEO` only names the type). `setProjection(globe)`
-  logs once and keeps Mercator, so pages that ask for a globe still show a
-  map; adding a `VideoSource` throws an `UnsupportedError`, as a layer on it
+- Missing on native: the globe and vertical perspective projections and
+  video sources. MapLibre Native implements none of them, and the C API has
+  no setting for them (`mln_map_set_projection_mode` only sets axonometric
+  and skew; `MLN_STYLE_SOURCE_TYPE_VIDEO` only names the type).
+  `setProjection` with anything but Mercator logs once and keeps Mercator,
+  so pages that ask for a globe still show a map; adding a `VideoSource` throws an `UnsupportedError`, as a layer on it
   could not render.
 - iOS and macOS pass the integration tests on an arm64 Mac (Xcode 27.1,
   macOS 27.0.1, iPhone 17 simulator on iOS 27.0) against the 0.202610.2

@@ -618,6 +618,73 @@ class MapLibreMapStateNative extends MapLibreMapState {
     ];
   }
 
+  @override
+  Future<double> getClusterExpansionZoom(String sourceId, int clusterId) async {
+    final result = await _cluster(sourceId, clusterId, 'expansion-zoom');
+    if (result case final num zoom) return zoom.toDouble();
+    throw StateError('No cluster $clusterId in the source "$sourceId".');
+  }
+
+  @override
+  Future<List<SourceFeature>> getClusterChildren(
+    String sourceId,
+    int clusterId,
+  ) async => _clusterFeatures(await _cluster(sourceId, clusterId, 'children'));
+
+  @override
+  Future<List<SourceFeature>> getClusterLeaves(
+    String sourceId,
+    int clusterId, {
+    int limit = 10,
+    int offset = 0,
+  }) async => _clusterFeatures(
+    await _cluster(sourceId, clusterId, 'leaves', {
+      'limit': limit,
+      'offset': offset,
+    }),
+  );
+
+  /// Asks the supercluster extension of the GeoJSON source [sourceId] for the
+  /// [field] of the cluster [clusterId], or null if the map is disposed.
+  Future<Object?> _cluster(
+    String sourceId,
+    int clusterId,
+    String field, [
+    Map<String, Object?> arguments = const {},
+  ]) async {
+    final renderer = _renderer;
+    if (renderer == null || _disposed) return null;
+    return renderer.queryFeatureExtensions(
+      sourceId,
+      // The extension only reads the cluster id of the feature.
+      {
+        'type': 'Feature',
+        'properties': {'cluster': true, 'cluster_id': clusterId},
+        'geometry': {
+          'type': 'Point',
+          'coordinates': [0, 0],
+        },
+      },
+      'supercluster',
+      field,
+      arguments,
+    );
+  }
+
+  static List<SourceFeature> _clusterFeatures(Object? result) => [
+    for (final feature in switch (result) {
+      {'features': final List<Object?> features} => features,
+      final List<Object?> features => features,
+      _ => const <Object?>[],
+    })
+      if (feature case final Map<String, Object?> feature)
+        SourceFeature(
+          id: feature['id'],
+          properties: _properties(feature),
+          geometry: RenderedFeature.geometryFromJson(feature['geometry']),
+        ),
+  ];
+
   static mln.RenderedQueryGeometry _box(Rect rect) =>
       mln.RenderedQueryGeometry.box(
         mln.ScreenBox(

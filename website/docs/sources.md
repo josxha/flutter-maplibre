@@ -14,12 +14,67 @@ You can use the same source for multiple style layers.
 You can use
 the [GeoJsonSource](https://pub.dev/documentation/maplibre/latest/maplibre/GeoJsonSource-class.html)
 to attach data like points, lines or polygons, from a GeoJSON file with
-`GeoJsonSource.url` or a GeoJSON string with `GeoJsonSource.data`. The data can then be used in a
+`GeoJsonSource.url` or from `GeoJsonData` with `GeoJsonSource.data`. The data can then be used in a
 [CircleStyleLayer](style-layers/circle-layer),
 [FillStyleLayer](style-layers/fill-layer),
 [HeatmapStyleLayer](style-layers/heatmap-layer),
 [LineStyleLayer](style-layers/line-layer) or
 [SymbolStyleLayer](style-layers/symbol-layer).
+
+`GeoJsonData` takes geobase objects, or GeoJSON that you already have as text
+or as decoded JSON. Text skips building objects in Dart, which matters for large
+data: on web the browser parses it.
+
+```dart
+// geobase objects
+await style.sources.add(
+  GeoJsonSource.data(
+    id: 'points',
+    data: .featureCollection(
+      FeatureCollection([
+        Feature(geometry: Point(Geographic(lon: 9.17, lat: 47.68))),
+      ]),
+    ),
+  ),
+);
+
+// GeoJSON text, such as a file or a response body
+await style.sources.add(
+  GeoJsonSource.data(id: 'routes', data: .text(response.body)),
+);
+```
+
+#### Clusters
+
+A `GeoJsonCluster` groups nearby points into clusters. Cluster features have
+the properties `cluster`, `cluster_id` and `point_count`, plus the cluster
+properties you define:
+
+```dart
+await style.sources.add(
+  GeoJsonSource.url(
+    id: 'earthquakes',
+    url: 'https://example.com/earthquakes.geojson',
+    cluster: GeoJsonCluster(
+      radius: 50,
+      properties: {
+        'sum': ClusterProperty(
+          reduce: .sum([
+            Expression.accumulated().asNumber(),
+            Expression.get('sum').asNumber(),
+          ]),
+          map: .get('mag'),
+        ),
+      },
+    ),
+  ),
+);
+
+final clusterId = feature.properties['cluster_id']! as int;
+final zoom = await controller.getClusterExpansionZoom('earthquakes', clusterId);
+final points = await controller.getClusterLeaves('earthquakes', clusterId, limit: 100);
+final children = await controller.getClusterChildren('earthquakes', clusterId);
+```
 
 An example use cases is to display and visualize any kind of data on the map.
 
@@ -147,7 +202,7 @@ the object:
 ```dart
 final source = style.sources['points'];
 
-await style.sources.updateGeoJsonData('points', geoJsonString);
+await style.sources.updateGeoJsonData('points', .text(geoJsonString));
 await style.sources.updateGeoJsonUrl('points', 'https://example.com/data.geojson');
 await style.sources.updateImageCoordinates('radar', coordinates);
 await style.sources.updateTiles('roads', ['https://example.com/{z}/{x}/{y}.pbf']);

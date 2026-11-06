@@ -82,32 +82,15 @@ final class StyleSources extends Iterable<Source> {
     await _backend.removeSource(id);
   }
 
-  /// Replaces the data of the GeoJSON source [id] with the GeoJSON string
-  /// [data].
-  Future<void> updateGeoJsonData(String id, String data) async {
-    final source = _sourceOfType<GeoJsonSource>(id);
-    _sources[id] = GeoJsonSourceData(
-      id: id,
-      data: data,
-      maxZoom: source.maxZoom,
-      attribution: source.attribution,
-      tolerance: source.tolerance,
-      lineMetrics: source.lineMetrics,
-    );
+  /// Replaces the data of the GeoJSON source [id] with [data].
+  Future<void> updateGeoJsonData(String id, GeoJsonData data) async {
+    _sources[id] = _sourceOfType<GeoJsonSource>(id)._withData(data);
     await _backend.setGeoJsonData(id, data);
   }
 
   /// Makes the GeoJSON source [id] load its data from [url].
   Future<void> updateGeoJsonUrl(String id, String url) async {
-    final source = _sourceOfType<GeoJsonSource>(id);
-    _sources[id] = GeoJsonSourceUrl(
-      id: id,
-      url: url,
-      maxZoom: source.maxZoom,
-      attribution: source.attribution,
-      tolerance: source.tolerance,
-      lineMetrics: source.lineMetrics,
-    );
+    _sources[id] = _sourceOfType<GeoJsonSource>(id)._withUrl(url);
     await _backend.setGeoJsonUrl(id, url);
   }
 

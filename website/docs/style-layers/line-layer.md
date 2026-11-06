@@ -24,7 +24,7 @@ Widget build(BuildContext context) {
       onStyleLoaded: (style) async {
         final geojsonLine = await rootBundle.loadString('assets/geojson/path.json');
         await style.sources.add(
-          GeoJsonSource.data(id: 'Path', data: geojsonLine),
+          GeoJsonSource.data(id: 'Path', data: .text(geojsonLine)),
         );
         await style.layers.add(
           LineStyleLayer(

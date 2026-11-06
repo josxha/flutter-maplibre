@@ -42,7 +42,7 @@ class _TranslucentMapPageState extends State<TranslucentMapPage> {
             ),
             children: const [MapScalebar(), SourceAttribution(), MapCompass()],
             onStyleLoaded: (style) {
-              style.setProjection(MapProjection.globe);
+              style.setProjection(const .literal(.globe));
             },
           ),
         ],

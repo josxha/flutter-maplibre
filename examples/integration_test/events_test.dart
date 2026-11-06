@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
@@ -50,9 +49,9 @@ void runTests() {
       final map = await pumpMap(tester);
       final since = map.events.length;
       await map.style.sources.add(
-        GeoJsonSource.data(
+        const GeoJsonSource.data(
           id: 'points',
-          data: jsonEncode({
+          data: .json({
             'type': 'Feature',
             'geometry': {
               'type': 'Point',
@@ -74,9 +73,19 @@ void runTests() {
       expect(missing.id, 'missing-icon');
     });
 
+    testWidgets('report a change of the projection', (tester) async {
+      final map = await pumpMap(tester, options: offlineOptions(zoom: 1));
+      final since = map.events.length;
+      map.style.setProjection(const .literal(.verticalPerspective));
+      final changed = await map.waitForEvent<MapEventProjectionChanged>(
+        since: since,
+      );
+      expect(changed.projection, MapProjection.verticalPerspective);
+    }, skip: !kIsWeb);
+
     testWidgets('report a source whose data changed', (tester) async {
       final map = await pumpMap(tester);
-      String collection(List<Object> coordinates) => jsonEncode({
+      GeoJsonData collection(List<Object> coordinates) => .json({
         'type': 'FeatureCollection',
         'features': [
           for (final point in coordinates)

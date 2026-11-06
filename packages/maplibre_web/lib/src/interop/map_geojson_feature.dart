@@ -4,12 +4,12 @@ part of 'interop.dart';
 extension type GeoJSONFeature._(JSObject _) implements JSObject {
   external JSAny? id;
   external JSObject properties;
+  external JSObject geometry;
 }
 
 /// https://maplibre.org/maplibre-gl-js/docs/API/type-aliases/MapGeoJSONFeature/
 extension type MapGeoJSONFeature._(JSObject _)
     implements JSObject, GeoJSONFeature {
-  external JSObject geometry;
   external LayerSpecification layer;
   external String source;
   external String? sourceLayer;

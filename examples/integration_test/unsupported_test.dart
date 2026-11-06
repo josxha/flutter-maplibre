@@ -31,7 +31,7 @@ void runTests() {
       final before = map.controller.toScreenLocation(
         const Geographic(lon: 30, lat: 40),
       );
-      map.style.setProjection(MapProjection.globe);
+      map.style.setProjection(const .literal(.globe));
       await map.controller.moveCamera(const CameraUpdate.position(zoom: 4));
       await map.waitForLatestFrame();
       final after = map.controller.toScreenLocation(
@@ -39,6 +39,19 @@ void runTests() {
       );
       expect(after.dx, closeTo(before.dx, 0.5));
       expect(after.dy, closeTo(before.dy, 0.5));
+
+      map.style.setProjection(
+        .interpolate(const .linear(), .zoom(), {
+          2: const .literal(.verticalPerspective),
+          6: const .literal(.mercator),
+        }),
+      );
+      await map.waitForLatestFrame();
+      final interpolated = map.controller.toScreenLocation(
+        const Geographic(lon: 30, lat: 40),
+      );
+      expect(interpolated.dx, closeTo(before.dx, 0.5));
+      expect(interpolated.dy, closeTo(before.dy, 0.5));
     }, skip: kIsWeb);
 
     testWidgets('video sources on native', (tester) async {

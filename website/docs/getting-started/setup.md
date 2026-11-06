@@ -64,8 +64,8 @@ setup steps, see [Platform setup](platforms.md).
 
 !!! warning "Not available on native platforms"
 
-    MapLibre Native has no globe projection, so
-    `setProjection(MapProjection.globe)` keeps Mercator there. `VideoSource`
+    MapLibre Native has only the Mercator projection, so `setProjection`
+    keeps Mercator there. `VideoSource`
     is only supported on web.
 
 ## Development version

@@ -39,7 +39,10 @@ class _StyleLayersSymbolPageState extends State<StyleLayersSymbolPage> {
 
             // add some points as GeoJSON source to the map
             await style.sources.add(
-              const GeoJsonSource.data(id: 'points', data: _geoJsonString),
+              const GeoJsonSource.data(
+                id: 'points',
+                data: .text(_geoJsonString),
+              ),
             );
 
             // display the image on the map

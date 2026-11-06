@@ -219,9 +219,13 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
           final projection = event.newProjection.dartify();
           widget.onProjectionChanged?.call(
             MapEventProjectionChanged(
-              projection: projection == null || projection == 'mercator'
-                  ? MapProjection.mercator
-                  : MapProjection.globe,
+              // gl-js reports a globe that shows Mercator at the current
+              // zoom level as `globe-mercator`.
+              projection: switch (projection) {
+                'globe' => MapProjection.globe,
+                'vertical-perspective' => MapProjection.verticalPerspective,
+                _ => MapProjection.mercator,
+              },
             ),
           );
         }.toJS,
@@ -656,6 +660,59 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         )
         .toList(growable: false);
   }
+
+  @override
+  Future<double> getClusterExpansionZoom(String sourceId, int clusterId) async {
+    final source = _clusterSource(sourceId);
+    if (source == null) {
+      throw StateError('The map has no GeoJSON source "$sourceId".');
+    }
+    return (await source.getClusterExpansionZoom(clusterId).toDart)
+        .toDartDouble;
+  }
+
+  @override
+  Future<List<SourceFeature>> getClusterChildren(
+    String sourceId,
+    int clusterId,
+  ) async {
+    final source = _clusterSource(sourceId);
+    if (source == null) return const [];
+    return _sourceFeatures(await source.getClusterChildren(clusterId).toDart);
+  }
+
+  @override
+  Future<List<SourceFeature>> getClusterLeaves(
+    String sourceId,
+    int clusterId, {
+    int limit = 10,
+    int offset = 0,
+  }) async {
+    final source = _clusterSource(sourceId);
+    if (source == null) return const [];
+    return _sourceFeatures(
+      await source.getClusterLeaves(clusterId, limit, offset).toDart,
+    );
+  }
+
+  /// The GeoJSON source [sourceId], or null if the map is gone or has none.
+  interop.SourceSpecification? _clusterSource(String sourceId) {
+    if (!mounted) return null;
+    final source = _map.getSource(sourceId);
+    if (source == null || source.type != 'geojson') return null;
+    return source;
+  }
+
+  static List<SourceFeature> _sourceFeatures(
+    JSArray<interop.GeoJSONFeature> features,
+  ) => [
+    for (final f in features.toDart)
+      SourceFeature(
+        id: f.id.dartify(),
+        properties: f.properties.asStringMap() ?? {},
+        geometry: RenderedFeature.geometryFromJson(f.geometry.dartify()),
+      ),
+  ];
 
   static List<RenderedFeature> _renderedFeatures(
     JSArray<interop.MapGeoJSONFeature> features,

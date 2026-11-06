@@ -53,7 +53,11 @@ class _AnimationPageState extends State<AnimationPage>
     );
     await style.sources.add(
       // line-progress needs the line metrics of the source.
-      GeoJsonSource.data(id: _sourceId, data: response.body, lineMetrics: true),
+      GeoJsonSource.data(
+        id: _sourceId,
+        data: .text(response.body),
+        lineMetrics: true,
+      ),
     );
     final line = LineStyleLayer(
       id: _layerId,

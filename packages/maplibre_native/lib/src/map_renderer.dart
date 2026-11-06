@@ -113,6 +113,22 @@ final class MapRenderer implements FrameTargetHost {
           ),
   );
 
+  /// Queries the feature extension [extension] of the source [sourceId],
+  /// such as `supercluster`, about [feature].
+  Future<Object?> queryFeatureExtensions(
+    String sourceId,
+    Object? feature,
+    String extension,
+    String field, [
+    Object? arguments,
+  ]) => _session.queryFeatureExtensions(
+    sourceId,
+    feature,
+    extension,
+    field,
+    arguments,
+  );
+
   @override
   bool get disposed => _disposed;
 
