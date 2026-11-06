@@ -40,6 +40,15 @@ MapOptions offlineOptions({
   ),
 );
 
+/// A lifecycle callback of [MapLibreMap] that a [TestMap] recorded.
+enum MapLifecycle {
+  /// [MapLibreMap.onMapCreated].
+  created,
+
+  /// [MapLibreMap.onStyleLoaded].
+  styleLoaded,
+}
+
 /// The default timeout of the `waitFor…` helpers.
 const Duration defaultTimeout = Duration(seconds: 15);
 
@@ -60,9 +69,9 @@ class TestMap {
   /// The events of the callbacks that [MapApp] sets.
   final List<MapEvent> events;
 
-  /// `created` for each [MapLibreMap.onMapCreated] and `style` for each
-  /// [MapLibreMap.onStyleLoaded], in order.
-  final List<String> lifecycle;
+  /// The [MapLibreMap.onMapCreated] and [MapLibreMap.onStyleLoaded] calls, in
+  /// order.
+  final List<MapLifecycle> lifecycle;
   final MapApp Function(MapOptions options) _app;
 
   /// Shows the map with new [options], keeping its callbacks and layers.
@@ -147,7 +156,8 @@ class TestMap {
   }
 
   /// The number of styles that loaded.
-  int get styleLoads => lifecycle.where((entry) => entry == 'style').length;
+  int get styleLoads =>
+      lifecycle.where((entry) => entry == MapLifecycle.styleLoaded).length;
 
   /// Waits until a style loads after [since] style loads.
   Future<void> waitForStyleLoad({
@@ -231,18 +241,18 @@ Future<TestMap> pumpMap(
   bool paused = false,
 }) async {
   final events = <MapEvent>[];
-  final lifecycle = <String>[];
+  final lifecycle = <MapLifecycle>[];
   final controller = Completer<MapController>();
   final style = Completer<StyleController>();
   MapApp app(MapOptions options) => MapApp(
     options: options,
     layers: layers,
     onMapCreated: (controller_) {
-      lifecycle.add('created');
+      lifecycle.add(MapLifecycle.created);
       controller.complete(controller_);
     },
     onStyleLoaded: (style_) {
-      lifecycle.add('style');
+      lifecycle.add(MapLifecycle.styleLoaded);
       if (!style.isCompleted) style.complete(style_);
     },
     onEvent: events.add,

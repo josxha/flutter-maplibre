@@ -22,9 +22,9 @@ void runTests() {
       tester,
     ) async {
       final map = await pumpMap(tester);
-      expect(map.lifecycle, ['created', 'style']);
+      expect(map.lifecycle, [MapLifecycle.created, MapLifecycle.styleLoaded]);
       await tester.pump(const Duration(seconds: 1));
-      expect(map.lifecycle, ['created', 'style']);
+      expect(map.lifecycle, [MapLifecycle.created, MapLifecycle.styleLoaded]);
       expect(map.style.layers.map((layer) => layer.id).toList(), [
         'background',
       ]);
