@@ -299,6 +299,13 @@ void runTests() {
         animation: const CameraAnimation.fly(duration: Duration(seconds: 10)),
       );
       await tester.pump(const Duration(milliseconds: 300));
+      // On web, the animation already jumped to its end if the browser
+      // prefers reduced motion, as headless Chrome does.
+      final before = map.controller.getCamera();
+      final finished =
+          kIsWeb &&
+          (before.zoom - 6).abs() < 1e-6 &&
+          (before.center.lon - 80).abs() < 1e-6;
       await map.controller.moveCamera(
         const CameraUpdate.position(
           center: Geographic(lon: -20, lat: -10),
@@ -306,12 +313,10 @@ void runTests() {
         ),
       );
       final result = await map.pumpFuture(animation, reason: 'animation');
-      // On web, the animation already jumped to its end if the browser
-      // prefers reduced motion, as headless Chrome does.
       expect(
         result,
-        kIsWeb
-            ? isIn(CameraAnimationResult.values)
+        finished
+            ? CameraAnimationResult.completed
             : CameraAnimationResult.cancelled,
       );
       final camera = map.controller.getCamera();
