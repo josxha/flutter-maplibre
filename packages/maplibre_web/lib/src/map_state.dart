@@ -494,7 +494,9 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     if (target == null && !_targetStoppedCamera) {
       _animation = previous;
     } else {
-      previous?.end(result);
+      // Nothing takes over when the padding reset stopped the camera but
+      // there is no target, so the running animation was cancelled.
+      previous?.end(target == null ? CameraAnimationResult.cancelled : result);
     }
     return target;
   }
