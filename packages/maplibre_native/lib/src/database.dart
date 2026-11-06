@@ -40,22 +40,27 @@ Future<RuntimeHandle> createRuntime() async {
   // Android needs the C library initialized before its first use.
   if (Platform.isAndroid) AndroidPlugin.initialize();
   final runtime = RuntimeHandle.create(RuntimeOptions(cachePath: path));
-  try {
-    await _applyNetwork(runtime, changed: false);
-  } on Object {
-    await runtime.close();
-    rethrow;
-  }
-  _runtimes.add(runtime);
+  // Known before the first settings are applied, so a change meanwhile
+  // reaches it too. Its commands run in order, so the latest settings win.
+  _runtimes
+    ..removeWhere((runtime) => runtime.isClosed)
+    ..add(runtime);
   if (!_listensToNetwork) {
     MapLibreNetwork.changes.addListener(_onNetworkChanged);
     _listensToNetwork = true;
+  }
+  try {
+    await _applyNetwork(runtime, changed: false);
+  } on Object {
+    _runtimes.remove(runtime);
+    await runtime.close();
+    rethrow;
   }
   return runtime;
 }
 
 /// The runtimes that [createRuntime] created, to apply [MapLibreNetwork]
-/// changes to. Closed ones are dropped at the next change.
+/// changes to. Closed ones are dropped at the next change or creation.
 final _runtimes = <RuntimeHandle>{};
 var _listensToNetwork = false;
 

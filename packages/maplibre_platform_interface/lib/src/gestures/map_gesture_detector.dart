@@ -483,7 +483,8 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
   void _onScaleStart(ScaleStartDetails details) {
     _lastScale = 1;
     _lastRotation = 0;
-    _beginGesture();
+    // The gesture begins with its first camera change, so that a drag while
+    // only pinch and twist are on doesn't stop a running animation.
   }
 
   void _onScaleUpdate(ScaleUpdateDetails details) {
@@ -502,6 +503,8 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
     final zooms =
         gestures.zoom.pinch && scale != 1 && scale.isFinite && scale > 0;
     final rotates = gestures.rotate.twist && rotation != 0;
+    if (!pans && !zooms && !rotates) return;
+    _beginGesture();
     _camera.gestureUpdate(
       GestureCameraUpdate(
         panFrom: pans ? focal - pan : null,

@@ -38,8 +38,8 @@
   `onLoadingFinished`, `onSourceChanged`, `onRenderFrame` and `onResize`;
   `onTile`, `onRenderMap`, `onGlyphs` and `onSprite` on native;
   `onContextLost`, `onContextRestored` and `onProjectionChanged` on web.
-- Taps are reported right away while neither `onDoubleClick` nor the zoom
-  gesture is set.
+- Taps are reported right away while neither `onDoubleClick` nor
+  `ZoomGestures.doubleTap` is set.
 - `MapEventDoubleClick.preventDefault()` keeps a double tap from zooming,
   also from an async `onDoubleClick`.
 - `MapOptions.fastPforEnabled` decodes MapLibre Tile (MLT) vector tiles that

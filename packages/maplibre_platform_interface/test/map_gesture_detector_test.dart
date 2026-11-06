@@ -556,6 +556,89 @@ void main() {
       expect(camera.panned.dy, lessThan(-50));
     });
 
+    Future<void> pinchOut(WidgetTester tester) async {
+      final a = await tester.startGesture(_center - const Offset(50, 0));
+      final b = await tester.startGesture(_center + const Offset(50, 0));
+      for (var i = 0; i < 10; i++) {
+        await a.moveBy(const Offset(-5, 0));
+        await b.moveBy(const Offset(5, 0));
+        await tester.pump(const Duration(milliseconds: 16));
+      }
+      await a.up();
+      await b.up();
+      await tester.pumpAndSettle();
+    }
+
+    testWidgets('a drag neither pans nor starts a gesture while it is off', (
+      tester,
+    ) async {
+      await pumpMap(
+        tester,
+        gestures: const MapGestures(pan: PanGestures.none()),
+      );
+      await tester.dragFrom(_center, const Offset(-200, 0));
+      await tester.pumpAndSettle();
+      // A drag that moves nothing doesn't stop a running animation.
+      expect(camera.calls, isEmpty);
+      await pinchOut(tester);
+      expect(camera.zoomed, greaterThan(0.5));
+      expect(camera.panned, Offset.zero);
+    });
+
+    testWidgets('a pinch does not zoom while it is off', (tester) async {
+      await pumpMap(
+        tester,
+        gestures: const MapGestures(zoom: ZoomGestures(pinch: false)),
+      );
+      await pinchOut(tester);
+      expect(camera.zoomed, 0);
+      final pointer = TestPointer(1, PointerDeviceKind.trackpad);
+      await tester.sendEventToBinding(pointer.hover(_center));
+      await tester.sendEventToBinding(pointer.scale(2));
+      expect(camera.zooms, isEmpty);
+      // The scroll wheel still zooms.
+      final mouse = TestPointer(2, PointerDeviceKind.mouse);
+      await tester.sendEventToBinding(mouse.hover(_center));
+      await tester.sendEventToBinding(mouse.scroll(const Offset(0, -450)));
+      expect(camera.zooms.single.$1, closeTo(1, 1e-9));
+    });
+
+    testWidgets('a trackpad pinch signal zooms', (tester) async {
+      await pumpMap(tester);
+      final pointer = TestPointer(1, PointerDeviceKind.trackpad);
+      await tester.sendEventToBinding(pointer.hover(_center));
+      await tester.sendEventToBinding(pointer.scale(2));
+      expect(camera.zooms.single.$1, closeTo(1, 1e-9));
+    });
+
+    Future<void> twist(WidgetTester tester) async {
+      final a = await tester.startGesture(_center - const Offset(50, 0));
+      final b = await tester.startGesture(_center + const Offset(50, 0));
+      for (var i = 0; i < 10; i++) {
+        await a.moveBy(const Offset(0, -8));
+        await b.moveBy(const Offset(0, 8));
+        await tester.pump(const Duration(milliseconds: 16));
+      }
+      await a.up();
+      await b.up();
+      await tester.pumpAndSettle();
+    }
+
+    testWidgets('two fingers twisted rotate', (tester) async {
+      await pumpMap(tester);
+      await twist(tester);
+      expect(camera.rotated, isNot(0));
+    });
+
+    testWidgets('a twist does not rotate while it is off', (tester) async {
+      await pumpMap(
+        tester,
+        gestures: const MapGestures(rotate: RotateGestures(twist: false)),
+      );
+      await twist(tester);
+      expect(camera.rotated, 0);
+    });
+
     testWidgets('a widget over the map keeps its pointers', (tester) async {
       tester.view
         ..physicalSize = _size
