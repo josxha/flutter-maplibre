@@ -37,7 +37,7 @@ const _shoveSlop = 10.0;
 /// twists, a scroll wheel and a double tap zoom, a double tap and drag zooms,
 /// two fingers side by side dragged vertically tilt, and a right-button or
 /// Ctrl + left-button mouse drag rotates and tilts. [gestures] turns them
-/// off by kind.
+/// off one by one or by category.
 class MapGestureDetector extends StatefulWidget {
   /// Creates a gesture layer over a map.
   const MapGestureDetector({
@@ -65,7 +65,7 @@ class MapGestureDetector extends StatefulWidget {
   final MapEventCallback<MapEventClick>? onClick;
 
   /// Called on a double tap or click. Double taps are only recognized while
-  /// this is set or [MapGestures.zoom] is on, because recognizing them
+  /// this is set or [ZoomGestures.doubleTap] is on, because recognizing them
   /// delays every single tap until a second one can no longer follow.
   ///
   /// The double tap zooms unless the callback calls
@@ -157,8 +157,9 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
   @override
   Widget build(BuildContext context) {
     final gestures = _gestures;
-    final scales = gestures.pan || gestures.zoom || gestures.rotate;
-    final doubleTaps = gestures.zoom || widget.onDoubleClick != null;
+    final scales =
+        gestures.pan.drag || gestures.zoom.pinch || gestures.rotate.twist;
+    final doubleTaps = gestures.zoom.doubleTap || widget.onDoubleClick != null;
     // The whole map takes part in gestures, whatever its child hit-tests.
     return Listener(
       behavior: HitTestBehavior.opaque,
@@ -260,9 +261,11 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
     final pending = _doubleClickPending;
     _doubleTapPosition = null;
     _clearDoubleClick();
-    if (position == null || !_gestures.zoom) return;
+    if (position == null || !_gestures.zoom.doubleTap) return;
     void zoomIn() {
-      if (!mounted || !_gestures.zoom || (event?.defaultPrevented ?? false)) {
+      if (!mounted ||
+          !_gestures.zoom.doubleTap ||
+          (event?.defaultPrevented ?? false)) {
         return;
       }
       _camera.zoomBy(1, position, duration: _doubleTapZoomDuration);
@@ -276,10 +279,10 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
   }
 
   void _onPointerSignal(PointerSignalEvent event) {
-    if (!_gestures.zoom) return;
+    final zoom = _gestures.zoom;
     final double levels;
     switch (event) {
-      case PointerScrollEvent(:final scrollDelta):
+      case PointerScrollEvent(:final scrollDelta) when zoom.scrollWheel:
         final scale = MapGestureDetector.wheelPixelScale(
           isWeb: kIsWeb,
           platform: defaultTargetPlatform,
@@ -288,7 +291,7 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
         levels = -scrollDelta.dy * scale * _wheelZoomRate;
       // A trackpad pinch where the platform reports it as a signal, as on
       // the web.
-      case PointerScaleEvent(:final scale) when scale > 0:
+      case PointerScaleEvent(:final scale) when zoom.pinch && scale > 0:
         levels = log(scale) / ln2;
       default:
         return;
@@ -304,7 +307,7 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
         (event.buttons & kSecondaryMouseButton != 0 ||
             (event.buttons & kPrimaryMouseButton != 0 &&
                 HardwareKeyboard.instance.isControlPressed)) &&
-        (_gestures.rotate || _gestures.pitch)) {
+        (_gestures.rotate.mouseDrag || _gestures.pitch.mouseDrag)) {
       _secondaryPointer = event.pointer;
       _beginGesture();
     }
@@ -322,7 +325,7 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
     _touchDownPosition = event.localPosition;
     final lastTime = _lastTapUpTime;
     final lastPosition = _lastTapUpPosition;
-    if (_gestures.zoom &&
+    if (_gestures.zoom.doubleTapDrag &&
         lastTime != null &&
         lastPosition != null &&
         event.timeStamp - lastTime <= kDoubleTapTimeout &&
@@ -352,9 +355,11 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
     }
     _camera.gestureUpdate(
       GestureCameraUpdate(
-        rotateBy: gestures.rotate ? bearing : 0,
+        rotateBy: gestures.rotate.mouseDrag ? bearing : 0,
         // Dragging up tilts further.
-        pitchBy: gestures.pitch ? -event.delta.dy * _pitchDegreesPerPixel : 0,
+        pitchBy: gestures.pitch.mouseDrag
+            ? -event.delta.dy * _pitchDegreesPerPixel
+            : 0,
         around: center,
       ),
     );
@@ -422,7 +427,7 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
   /// are down.
   void _startShove() {
     _stopShove();
-    if (_touchPointers.length != 2 || !_gestures.pitch) return;
+    if (_touchPointers.length != 2 || !_gestures.pitch.twoFingerDrag) return;
     for (final pointer in _touchPointers) {
       _shoveStart[pointer] = _shovePosition[pointer]!;
     }
@@ -493,9 +498,10 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
 
     final focal = details.localFocalPoint;
     final pan = details.focalPointDelta;
-    final pans = gestures.pan && pan != Offset.zero;
-    final zooms = gestures.zoom && scale != 1 && scale.isFinite && scale > 0;
-    final rotates = gestures.rotate && rotation != 0;
+    final pans = gestures.pan.drag && pan != Offset.zero;
+    final zooms =
+        gestures.zoom.pinch && scale != 1 && scale.isFinite && scale > 0;
+    final rotates = gestures.rotate.twist && rotation != 0;
     _camera.gestureUpdate(
       GestureCameraUpdate(
         panFrom: pans ? focal - pan : null,
@@ -513,7 +519,8 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
     // Only a plain drag or pinch flings; the others drove the camera
     // themselves.
     final flings =
-        _gestures.pan &&
+        _gestures.pan.drag &&
+        _gestures.pan.fling &&
         !_quickZooming &&
         !_shoving &&
         _secondaryPointer == null;

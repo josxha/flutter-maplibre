@@ -23,7 +23,7 @@ MapLibreMap(
     maxZoom: 18,
     maxPitch: 60,
     maxBounds: GeoBox(west: 5, south: 45, east: 17, north: 55),
-    gestures: MapGestures.all(pitch: false),
+    gestures: MapGestures(pitch: PitchGestures.none()),
   ),
 )
 ```
@@ -113,18 +113,37 @@ area with `getVisibleBounds()` and the scale with
 
 ## Gestures
 
-Gestures are recognized in Flutter and are the same on every platform:
+Gestures are recognized in Flutter and are the same on every platform. Each
+one has its own switch in `MapGestures`, grouped by category:
 
-| Gesture                                                | Action               |
-|--------------------------------------------------------|----------------------|
-| Drag with one finger or the left mouse button          | Pan                  |
-| Pinch, scroll wheel, double tap, double tap and drag   | Zoom                 |
-| Twist with two fingers                                 | Rotate               |
-| Drag up or down with two fingers                       | Tilt                 |
-| Drag with the right mouse button or Ctrl + left button | Rotate and tilt      |
+| Gesture                                                           | Switch                |
+|-------------------------------------------------------------------|-----------------------|
+| Drag with one finger or the left mouse button                     | `pan.drag`            |
+| Keep moving after a fast drag                                     | `pan.fling`           |
+| Pinch two fingers or on a trackpad                                | `zoom.pinch`          |
+| Scroll wheel                                                      | `zoom.scrollWheel`    |
+| Double tap or double click                                        | `zoom.doubleTap`      |
+| Double tap and drag up or down                                    | `zoom.doubleTapDrag`  |
+| Twist two fingers                                                 | `rotate.twist`        |
+| Drag sideways with the right mouse button or Ctrl + left button   | `rotate.mouseDrag`    |
+| Drag two fingers side by side up or down                          | `pitch.twoFingerDrag` |
+| Drag up or down with the right mouse button or Ctrl + left button | `pitch.mouseDrag`     |
 
-`MapGestures` turns the `pan`, `zoom`, `rotate` and `pitch` gestures on or
-off, for example `MapGestures.all(rotate: false)` or `MapGestures.none()`.
+Every gesture is on by default. Turn off a whole category with its `none()`
+constructor, single gestures with their parameters, or start from
+`MapGestures.none()` and turn on only what you need:
+
+```dart
+// No tilting, and no scroll wheel zoom.
+const MapGestures(
+  pitch: PitchGestures.none(),
+  zoom: ZoomGestures(scrollWheel: false),
+)
+
+// Only pan, by dragging.
+const MapGestures.none(pan: PanGestures(fling: false))
+```
+
 Widgets in `MapLibreMap.children` receive their own taps and drags before the
 map does.
 

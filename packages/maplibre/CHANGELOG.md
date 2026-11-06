@@ -20,9 +20,14 @@
   geobase `Geometry`.
 - `getVisibleRegion` is renamed to `getVisibleBounds`, and
   `MapCompass.animation` replaces its duration and speed.
+- `MapGestures` has one switch per gesture, grouped in `PanGestures`,
+  `ZoomGestures`, `RotateGestures` and `PitchGestures`; `MapGestures.all()` is
+  now `MapGestures()`.
 
 ### Features
 
+- `MapLibreNetwork` adds HTTP headers to and rewrites the URLs of the
+  requests of every map and the `OfflineManager`.
 - `queryRenderedFeatures` takes a `filter` expression and can query the whole
   map with `QueryGeometry.viewport()`.
 - `MapController.querySourceFeatures` returns the loaded features of a source,

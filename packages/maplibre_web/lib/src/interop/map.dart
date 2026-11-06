@@ -190,7 +190,16 @@ extension type MapOptions._(JSObject _) implements JSObject {
     required JSObject container,
     required bool attributionControl,
     bool? interactive,
+    JSFunction? transformRequest,
   });
+}
+
+/// The request that a `transformRequest` callback returns.
+@anonymous
+@JS()
+extension type RequestParameters._(JSObject _) implements JSObject {
+  /// Create a new JS [RequestParameters] object.
+  external factory RequestParameters({required String url, JSAny? headers});
 }
 
 /// The specifications of map sources.

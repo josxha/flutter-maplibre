@@ -78,6 +78,20 @@ MapOptions(
   `androidForegroundLoadColor`, `webviewDebugMode` and the deprecated
   `pitch` were removed.
 
+`MapGestures` has a switch for each gesture, grouped by category, and every
+gesture is on by default:
+
+| 0.3                               | 0.4                                         |
+|-----------------------------------|---------------------------------------------|
+| `MapGestures.all()`               | `MapGestures()`                             |
+| `MapGestures.all(pitch: false)`   | `MapGestures(pitch: PitchGestures.none())`  |
+| `MapGestures.none(zoom: true)`    | `MapGestures.none(zoom: ZoomGestures())`    |
+| `gestures.zoom`                   | `gestures.zoom.anyEnabled`                  |
+
+Single gestures can be turned off too, for example
+`MapGestures(zoom: ZoomGestures(scrollWheel: false))`. See
+[Gestures](../map.md#gestures).
+
 ## 4. Style layers and expressions
 
 Style layers take typed properties and

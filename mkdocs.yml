@@ -22,6 +22,7 @@ nav:
           - User Interface: docs/ui.md
           - User Location: docs/user-location.md
           - Offline & Cache: docs/offline.md
+          - Network: docs/network.md
       - Annotations:
           - docs/annotations/index.md
           - Circles: docs/annotations/circles.md

@@ -101,6 +101,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
           attributionControl: false,
           // MapGestureDetector handles the input.
           interactive: false,
+          transformRequest: _transformRequest.toJS,
         ),
       );
       _mapCreated = true;
@@ -336,6 +337,23 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     _contextMenuTimer = Timer(
       const Duration(milliseconds: 500),
       () => _suppressContextMenu = false,
+    );
+  }
+
+  /// Applies [MapLibreNetwork] to a request, read anew for each one, so
+  /// that changes reach the maps that exist. Returns undefined to leave the
+  /// request as it is.
+  static interop.RequestParameters? _transformRequest(
+    String url,
+    String? resourceType,
+  ) {
+    final kind = resourceType.toMapResourceKind();
+    final transformed = MapLibreNetwork.transformUrl(url, kind);
+    final headers = MapLibreNetwork.headersFor(transformed, kind);
+    if (transformed == url && headers == null) return null;
+    return interop.RequestParameters(
+      url: transformed,
+      headers: headers.jsify(),
     );
   }
 

@@ -44,10 +44,18 @@ class _GesturesPageState extends State<GesturesPage> {
             child: MapLibreMap(
               options: MapOptions(
                 gestures: MapGestures(
-                  rotate: _selections[Gestures.rotate]!,
-                  pan: _selections[Gestures.pan]!,
-                  zoom: _selections[Gestures.zoom]!,
-                  pitch: _selections[Gestures.tilt]!,
+                  rotate: _selections[Gestures.rotate]!
+                      ? const RotateGestures()
+                      : const RotateGestures.none(),
+                  pan: _selections[Gestures.pan]!
+                      ? const PanGestures()
+                      : const PanGestures.none(),
+                  zoom: _selections[Gestures.zoom]!
+                      ? const ZoomGestures()
+                      : const ZoomGestures.none(),
+                  pitch: _selections[Gestures.tilt]!
+                      ? const PitchGestures()
+                      : const PitchGestures.none(),
                 ),
                 initCamera: const CameraUpdate.position(
                   center: Geographic(lon: 9.17, lat: 47.68),

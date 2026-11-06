@@ -63,7 +63,7 @@ void main() {
 
   Future<void> pumpMap(
     WidgetTester tester, {
-    MapGestures gestures = const MapGestures.all(),
+    MapGestures gestures = const MapGestures(),
     bool listenToDoubleClicks = true,
     FutureOr<void> Function(MapEventDoubleClick event)? onDoubleClick,
   }) async {
@@ -305,7 +305,7 @@ void main() {
     ) async {
       await pumpMap(
         tester,
-        gestures: const MapGestures.all(zoom: false),
+        gestures: const MapGestures(zoom: ZoomGestures.none()),
         listenToDoubleClicks: false,
       );
       await tester.tapAt(_center);
@@ -412,6 +412,150 @@ void main() {
       expect(camera.zooms, isEmpty);
     });
 
+    testWidgets('a drag without fling stops on release', (tester) async {
+      await pumpMap(
+        tester,
+        gestures: const MapGestures(pan: PanGestures(fling: false)),
+      );
+      await tester.flingFrom(_center, const Offset(-300, 0), 1000);
+      await tester.pumpAndSettle();
+      expect(camera.panned.dx, lessThan(-200));
+      expect(camera.endVelocity, Velocity.zero);
+    });
+
+    testWidgets('the scroll wheel can be off while pinching zooms', (
+      tester,
+    ) async {
+      await pumpMap(
+        tester,
+        gestures: const MapGestures(zoom: ZoomGestures(scrollWheel: false)),
+      );
+      final pointer = TestPointer(1, PointerDeviceKind.mouse);
+      await tester.sendEventToBinding(pointer.hover(_center));
+      await tester.sendEventToBinding(pointer.scroll(const Offset(0, -450)));
+      expect(camera.zooms, isEmpty);
+      final a = await tester.startGesture(_center - const Offset(50, 0));
+      final b = await tester.startGesture(_center + const Offset(50, 0));
+      for (var i = 0; i < 10; i++) {
+        await a.moveBy(const Offset(-5, 0));
+        await b.moveBy(const Offset(5, 0));
+        await tester.pump(const Duration(milliseconds: 16));
+      }
+      await a.up();
+      await b.up();
+      await tester.pumpAndSettle();
+      expect(camera.zoomed, greaterThan(0.5));
+    });
+
+    testWidgets('a double tap drag zooms while double taps are off', (
+      tester,
+    ) async {
+      await pumpMap(
+        tester,
+        gestures: const MapGestures(zoom: ZoomGestures(doubleTap: false)),
+        listenToDoubleClicks: false,
+      );
+      await tester.tapAt(_center);
+      await tester.pump(const Duration(milliseconds: 50));
+      await tester.tapAt(_center);
+      await tester.pumpAndSettle();
+      expect(camera.zooms, isEmpty);
+      // The taps above were plain clicks, so a new double tap starts here.
+      await tester.pump(const Duration(milliseconds: 400));
+      await tester.tapAt(_center);
+      await tester.pump(const Duration(milliseconds: 50));
+      final gesture = await tester.startGesture(_center);
+      for (var i = 0; i < 10; i++) {
+        await gesture.moveBy(const Offset(0, 17));
+        await tester.pump(const Duration(milliseconds: 16));
+      }
+      await gesture.up();
+      await tester.pumpAndSettle();
+      expect(camera.zoomed, closeTo(9 * 17 / 150, 1e-9));
+      expect(camera.zooms, isEmpty);
+    });
+
+    testWidgets('a double tap zooms while double tap drags are off', (
+      tester,
+    ) async {
+      await pumpMap(
+        tester,
+        gestures: const MapGestures(zoom: ZoomGestures(doubleTapDrag: false)),
+      );
+      await tester.tapAt(_center);
+      await tester.pump(const Duration(milliseconds: 50));
+      final gesture = await tester.startGesture(_center);
+      for (var i = 0; i < 10; i++) {
+        await gesture.moveBy(const Offset(0, 17));
+        await tester.pump(const Duration(milliseconds: 16));
+      }
+      await gesture.up();
+      await tester.pumpAndSettle();
+      // The second touch pans instead.
+      expect(camera.zoomed, 0);
+      expect(camera.panned.dy, greaterThan(100));
+      camera.updates.clear();
+      await tester.pump(const Duration(milliseconds: 400));
+      await tester.tapAt(_center);
+      await tester.pump(const Duration(milliseconds: 50));
+      await tester.tapAt(_center);
+      await tester.pumpAndSettle();
+      expect(camera.zooms.single.$1, 1);
+    });
+
+    testWidgets('a mouse drag only tilts while its rotation is off', (
+      tester,
+    ) async {
+      await pumpMap(
+        tester,
+        gestures: const MapGestures(rotate: RotateGestures(mouseDrag: false)),
+      );
+      await mouseDrag(
+        tester,
+        _center + const Offset(0, 100),
+        const Offset(5, -5),
+      );
+      expect(camera.rotated, 0);
+      expect(camera.pitched, closeTo(25, 1e-9));
+    });
+
+    testWidgets('a mouse drag only rotates while its tilt is off', (
+      tester,
+    ) async {
+      await pumpMap(
+        tester,
+        gestures: const MapGestures(pitch: PitchGestures(mouseDrag: false)),
+      );
+      await mouseDrag(
+        tester,
+        _center + const Offset(0, 100),
+        const Offset(5, -5),
+      );
+      expect(camera.rotated, closeTo(40, 1e-9));
+      expect(camera.pitched, 0);
+    });
+
+    testWidgets('two fingers dragged up pan while their tilt is off', (
+      tester,
+    ) async {
+      await pumpMap(
+        tester,
+        gestures: const MapGestures(pitch: PitchGestures(twoFingerDrag: false)),
+      );
+      final a = await tester.startGesture(_center - const Offset(50, 0));
+      final b = await tester.startGesture(_center + const Offset(50, 0));
+      for (var i = 0; i < 10; i++) {
+        await a.moveBy(const Offset(0, -10));
+        await b.moveBy(const Offset(0, -10));
+        await tester.pump(const Duration(milliseconds: 16));
+      }
+      await a.up();
+      await b.up();
+      await tester.pumpAndSettle();
+      expect(camera.pitched, 0);
+      expect(camera.panned.dy, lessThan(-50));
+    });
+
     testWidgets('a widget over the map keeps its pointers', (tester) async {
       tester.view
         ..physicalSize = _size
@@ -423,7 +567,7 @@ void main() {
           textDirection: TextDirection.ltr,
           children: [
             MapGestureDetector(
-              gestures: const MapGestures.all(),
+              gestures: const MapGestures(),
               camera: camera,
               toLngLat: (_) => const Geographic(lon: 0, lat: 0),
               onClick: events.add,

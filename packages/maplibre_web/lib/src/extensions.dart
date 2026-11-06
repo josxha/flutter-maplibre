@@ -53,3 +53,18 @@ extension StringMap on JSAny? {
       ) ??
       {};
 }
+
+/// Converts a MapLibre GL JS `ResourceType`.
+extension JsResourceTypeExt on String? {
+  /// The [MapResourceKind] of this resource type.
+  MapResourceKind toMapResourceKind() => switch (this) {
+    'Style' => MapResourceKind.style,
+    'Source' => MapResourceKind.source,
+    'Tile' => MapResourceKind.tile,
+    'Glyphs' => MapResourceKind.glyphs,
+    'SpriteImage' => MapResourceKind.spriteImage,
+    'SpriteJSON' => MapResourceKind.spriteJson,
+    'Image' => MapResourceKind.image,
+    _ => MapResourceKind.unknown,
+  };
+}

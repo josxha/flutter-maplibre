@@ -19,7 +19,7 @@ class MapOptions {
     this.minPitch = 0,
     this.maxPitch = 60,
     this.maxBounds,
-    this.gestures = const MapGestures.all(),
+    this.gestures = const MapGestures(),
     this.fastPforEnabled = false,
   });
 

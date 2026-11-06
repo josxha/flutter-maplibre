@@ -12,7 +12,7 @@ void main() {
   runTests();
 }
 
-MapOptions _options({MapGestures gestures = const MapGestures.all()}) =>
+MapOptions _options({MapGestures gestures = const MapGestures()}) =>
     offlineOptions(
       center: const Geographic(lon: 10, lat: 50),
       gestures: gestures,

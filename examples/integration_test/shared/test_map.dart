@@ -26,7 +26,7 @@ MapOptions offlineOptions({
   double pitch = 0,
   double minZoom = 0,
   double maxZoom = 22,
-  MapGestures gestures = const MapGestures.all(),
+  MapGestures gestures = const MapGestures(),
 }) => MapOptions(
   style: MapStyle.json(offlineStyle),
   minZoom: minZoom,

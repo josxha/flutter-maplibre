@@ -28,6 +28,7 @@ export 'src/layer/layer_manager.dart';
 export 'src/map_controller.dart';
 export 'src/map_events.dart';
 export 'src/map_style.dart';
+export 'src/network.dart';
 export 'src/offline/download_progress.dart';
 export 'src/offline/offline_manager.dart';
 export 'src/offline/offline_region.dart';
