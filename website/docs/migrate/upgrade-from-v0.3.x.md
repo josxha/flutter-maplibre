@@ -215,3 +215,46 @@ available. Widgets over the map no longer need a `PointerInterceptor`.
 MapLibre Native has no globe projection, so
 `setProjection(MapProjection.globe)` keeps Mercator on Android, iOS and
 desktop.
+
+## 13. Events
+
+`onEvent` is replaced by one callback per event, and each callback gets its
+own event type:
+
+```dart
+// 0.3
+MapLibreMap(
+  onEvent: (event) {
+    switch (event) {
+      case MapEventClick():
+        print(event.point);
+      case MapEventCameraIdle():
+        print('camera idle');
+      default:
+        break;
+    }
+  },
+)
+
+// 0.4
+MapLibreMap(
+  onClick: (event) => print(event.point),
+  onCameraMoveEnd: (event) => print('camera idle at ${event.camera}'),
+)
+```
+
+| 0.3                                | 0.4                                  |
+|------------------------------------|--------------------------------------|
+| `MapEventMapCreated`               | `onMapCreated`                       |
+| `MapEventStyleLoaded`              | `onStyleLoaded`                      |
+| `MapEventClick`, `MapEventDoubleClick`, `MapEventSecondaryClick`, `MapEventLongClick` | `onClick`, `onDoubleClick`, `onSecondaryClick`, `onLongClick` |
+| `MapEventStartMoveCamera`          | `onCameraMoveStart`                  |
+| `MapEventMoveCamera`               | `onCameraMove`, which also carries the `reason` |
+| `MapEventCameraIdle`               | `onCameraMoveEnd`, with the camera and the `reason` |
+| `MapEventIdle`                     | `onIdle`                             |
+| `MapEventRenderingChanged`         | `onRenderingChanged`                 |
+
+`CameraChangeReason.apiGesture`, `developerAnimation` and `apiAnimation` are
+now `gesture`, `programmatic` and `map`. See [Events](../events.md) for the
+new events.
+

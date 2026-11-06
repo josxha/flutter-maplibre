@@ -30,26 +30,24 @@ class _StyleLayersFillPageState extends State<StyleLayersFillPage> {
         ),
         onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: _onStyleLoaded,
-        onEvent: (event) async {
-          if (event case MapEventClick()) {
-            final screenPoint = _controller.toScreenLocation(event.point);
-            final features = await _controller.featuresAtPoint(
-              screenPoint,
-              layerIds: [_layerId],
-            );
-            if (context.mounted) {
-              ScaffoldMessenger.of(context)
-                ..hideCurrentSnackBar()
-                ..showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      features.isEmpty
-                          ? 'Clicked outside of Lake Constance'
-                          : 'Clicked on Lake Constance',
-                    ),
+        onClick: (event) async {
+          final screenPoint = _controller.toScreenLocation(event.point);
+          final features = await _controller.featuresAtPoint(
+            screenPoint,
+            layerIds: [_layerId],
+          );
+          if (context.mounted) {
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(
+                SnackBar(
+                  content: Text(
+                    features.isEmpty
+                        ? 'Clicked outside of Lake Constance'
+                        : 'Clicked on Lake Constance',
                   ),
-                );
-            }
+                ),
+              );
           }
         },
       ),

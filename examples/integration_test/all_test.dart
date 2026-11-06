@@ -1,6 +1,7 @@
 import 'package:integration_test/integration_test.dart';
 
 import 'camera_test.dart' as camera;
+import 'events_test.dart' as events;
 import 'features_test.dart' as features;
 import 'gestures_test.dart' as gestures;
 import 'layers_test.dart' as layers;
@@ -18,6 +19,7 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   map.runTests();
   camera.runTests();
+  events.runTests();
   projection.runTests();
   style.runTests();
   features.runTests();

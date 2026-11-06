@@ -26,23 +26,18 @@ final _points = <Feature<Point>>[
 Widget build(BuildContext context) {
   return MapLibreMap(
     options: MapOptions(initCamera: .position(center: Geographic(lon: 9.17, lat: 47.68), zoom: 7)),
-    onEvent: (event) async {
-      switch (event) {
-        case MapEventStyleLoaded():
-          // add a marker image to the map
-          await event.style.addImageFromIconData(
-            id: 'marker',
-            iconData: Icons.location_on,
-            color: Colors.red,
-          );
-          setState(() => _imageLoaded = true);
-        case MapEventClick():
-          // add a new marker on click
-          setState(() => _points.add(Feature(geometry: Point(event.point))));
-        default:
-          break;
-      }
+    onStyleLoaded: (style) async {
+      // add a marker image to the map
+      await style.addImageFromIconData(
+        id: 'marker',
+        iconData: Icons.location_on,
+        color: Colors.red,
+      );
+      setState(() => _imageLoaded = true);
     },
+    // add a new marker on click
+    onClick: (event) =>
+        setState(() => _points.add(Feature(geometry: Point(event.point)))),
     layers: [
       MarkerLayer(
         points: _points,

@@ -299,16 +299,9 @@ final class MapRenderer implements FrameTargetHost {
   }
 
   void _onEvents(List<RuntimeEvent> events) {
-    if (_disposed) return;
-    for (final event in events) {
-      if (event.type == RuntimeEventType.mapLoadingFailed ||
-          event.type == RuntimeEventType.mapRenderError ||
-          event.type == RuntimeEventType.mapGlyphsError ||
-          event.type == RuntimeEventType.mapSpriteError) {
-        debugPrint('maplibre_native: ${event.message}');
-      }
-      onEvent?.call(event);
-    }
+    final onEvent = this.onEvent;
+    if (_disposed || onEvent == null) return;
+    events.forEach(onEvent);
   }
 
   /// Releases the session, map, runtime, and texture.

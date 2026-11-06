@@ -67,7 +67,9 @@ abstract class MapLibreMapState extends State<MapLibreMap>
     // This runs while the tree builds, where listeners must not rebuild.
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted && _renderingPaused == paused) {
-        widget.onEvent?.call(MapEventRenderingChanged(paused: paused));
+        widget.onRenderingChanged?.call(
+          MapEventRenderingChanged(paused: paused),
+        );
       }
     });
   }
@@ -77,30 +79,57 @@ abstract class MapLibreMapState extends State<MapLibreMap>
   /// the platform handles gestures itself.
   GestureCameraSink? get gestureCamera => null;
 
+  /// The size of the map's last layout, to report changes with
+  /// [MapLibreMap.onResize].
+  Size? _size;
+
+  void _onLayout(BoxConstraints constraints) {
+    final size = constraints.biggest;
+    if (!size.isFinite || size == _size) return;
+    final resized = _size != null;
+    _size = size;
+    if (!resized) return;
+    // Layout runs while the tree builds, where listeners must not rebuild.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted && _size == size) {
+        widget.onResize?.call(MapEventResize(size: size));
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final gestureCamera = this.gestureCamera;
     final platformWidget = buildPlatformWidget(context);
-    return Stack(
-      children: [
-        if (gestureCamera == null)
-          platformWidget
-        else
-          MapGestureDetector(
-            gestures: options.gestures,
-            camera: gestureCamera,
-            toLngLat: (point) => isInitialized ? toLngLat(point) : null,
-            onEvent: widget.onEvent,
-            child: platformWidget,
-          ),
-        MapLibreInheritedModel(
-          mapController: this,
-          mapCamera: camera,
-          child: isInitialized
-              ? Stack(children: widget.children)
-              : const SizedBox.shrink(),
-        ),
-      ],
+    final widget = this.widget;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        _onLayout(constraints);
+        return Stack(
+          children: [
+            if (gestureCamera == null)
+              platformWidget
+            else
+              MapGestureDetector(
+                gestures: options.gestures,
+                camera: gestureCamera,
+                toLngLat: (point) => isInitialized ? toLngLat(point) : null,
+                onClick: widget.onClick,
+                onDoubleClick: widget.onDoubleClick,
+                onSecondaryClick: widget.onSecondaryClick,
+                onLongClick: widget.onLongClick,
+                child: platformWidget,
+              ),
+            MapLibreInheritedModel(
+              mapController: this,
+              mapCamera: camera,
+              child: isInitialized
+                  ? Stack(children: widget.children)
+                  : const SizedBox.shrink(),
+            ),
+          ],
+        );
+      },
     );
   }
 

@@ -33,22 +33,15 @@ class _FeaturesQueryPageState extends State<FeaturesQueryPage> {
         ),
         onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: _onStyleLoaded,
-        onEvent: (event) async {
-          if (event is MapEventClick) {
-            final screenPoint = _controller.toScreenLocation(event.point);
-            final features = await _controller.featuresAtPoint(screenPoint);
-            if (context.mounted) {
-              _showFeatures(features);
-            }
-          } else if (event is MapEventLongClick) {
-            final screenPoint = _controller.toScreenLocation(event.point);
-            final features = await _controller.featuresInRect(
-              Rect.fromCircle(center: screenPoint, radius: 20),
-            );
-            if (context.mounted) {
-              _showFeatures(features);
-            }
-          }
+        onClick: (event) async {
+          final features = await _controller.featuresAtPoint(event.screenPoint);
+          if (context.mounted) _showFeatures(features);
+        },
+        onLongClick: (event) async {
+          final features = await _controller.featuresInRect(
+            Rect.fromCircle(center: event.screenPoint, radius: 20),
+          );
+          if (context.mounted) _showFeatures(features);
         },
       ),
     );

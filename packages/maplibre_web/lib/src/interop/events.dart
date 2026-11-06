@@ -67,6 +67,53 @@ abstract class MapEventType {
   /// Fired when an error occurs, such as a style change that fails
   /// validation.
   static const error = 'error';
+
+  /// Fired after every frame the map renders.
+  static const render = 'render';
+
+  /// Fired when a layer uses an image that the style doesn't have.
+  static const styleImageMissing = 'styleimagemissing';
+
+  /// Fired when the WebGL context is lost.
+  static const webglContextLost = 'webglcontextlost';
+
+  /// Fired when the WebGL context is restored.
+  static const webglContextRestored = 'webglcontextrestored';
+
+  /// Fired when the map switches its projection.
+  static const projectionTransition = 'projectiontransition';
+}
+
+/// An error event of the map, see [MapEventType.error].
+@JS()
+extension type MapErrorEvent._(MapLibreEvent _) implements MapLibreEvent {
+  /// The error, usually a JS `Error`.
+  external JSObject? error;
+
+  /// The source that failed, if a source or tile failed.
+  external String? sourceId;
+}
+
+/// A JS `Error`.
+@JS()
+extension type JsError._(JSObject _) implements JSObject {
+  /// The error text.
+  external String? message;
+}
+
+/// A missing image event, see [MapEventType.styleImageMissing].
+@JS()
+extension type MapStyleImageMissingEvent._(MapLibreEvent _)
+    implements MapLibreEvent {
+  /// The id of the missing image.
+  external String id;
+}
+
+/// A projection change, see [MapEventType.projectionTransition].
+@JS()
+extension type MapProjectionEvent._(MapLibreEvent _) implements MapLibreEvent {
+  /// The projection that the map switched to, such as `mercator` or `globe`.
+  external JSAny? newProjection;
 }
 
 /// A data event of the map, see [MapEventType.data].
@@ -78,4 +125,7 @@ extension type MapDataEvent._(MapLibreEvent _) implements MapLibreEvent {
   /// What changed of a source: `metadata`, `content`, `visibility` or
   /// `idle`.
   external String? sourceDataType;
+
+  /// The source that changed, for a source data event.
+  external String? sourceId;
 }

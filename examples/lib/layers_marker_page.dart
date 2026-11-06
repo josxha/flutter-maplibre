@@ -44,27 +44,22 @@ class _LayersMarkerPageState extends State<LayersMarkerPage> {
             center: Geographic(lon: 9.17, lat: 47.68),
           ),
         ),
-        onEvent: (event) async {
-          switch (event) {
-            case MapEventStyleLoaded():
-              // add a marker image of 48 logical pixels to the map
-              await event.style.addImageFromIconData(
-                id: 'marker',
-                iconData: Icons.location_on,
-                color: Colors.red,
-              );
-              setState(() {
-                _imageLoaded = true;
-              });
-            case MapEventClick():
-              // add a new marker on click
-              setState(() {
-                _points.add(Feature(geometry: Point(event.point)));
-              });
-            default:
-              // ignore all other events
-              break;
-          }
+        onStyleLoaded: (style) async {
+          // add a marker image of 48 logical pixels to the map
+          await style.addImageFromIconData(
+            id: 'marker',
+            iconData: Icons.location_on,
+            color: Colors.red,
+          );
+          setState(() {
+            _imageLoaded = true;
+          });
+        },
+        onClick: (event) {
+          // add a new marker on click
+          setState(() {
+            _points.add(Feature(geometry: Point(event.point)));
+          });
         },
         layers: [
           MarkerLayer(

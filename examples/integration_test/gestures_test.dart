@@ -54,10 +54,10 @@ void runTests() {
         (camera) => camera.center.lon > before.center.lon + 1,
       );
       expect(after.zoom, closeTo(before.zoom, 0.01));
-      final start = await map.waitForEvent<MapEventStartMoveCamera>(
+      final start = await map.waitForEvent<MapEventCameraMoveStart>(
         since: since,
       );
-      expect(start.reason, CameraChangeReason.apiGesture);
+      expect(start.reason, CameraChangeReason.gesture);
     });
 
     testWidgets('pan momentum continues after release and tap stops it', (

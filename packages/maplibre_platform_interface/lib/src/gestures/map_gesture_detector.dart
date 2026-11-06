@@ -44,7 +44,10 @@ class MapGestureDetector extends StatefulWidget {
     required this.camera,
     required this.toLngLat,
     required this.child,
-    this.onEvent,
+    this.onClick,
+    this.onDoubleClick,
+    this.onSecondaryClick,
+    this.onLongClick,
     super.key,
   });
 
@@ -57,8 +60,19 @@ class MapGestureDetector extends StatefulWidget {
   /// The location at a screen point, or null while the map can't tell.
   final Geographic? Function(Offset screenPoint) toLngLat;
 
-  /// Receives clicks, double clicks, secondary and long clicks.
-  final MapEventCallback? onEvent;
+  /// Called on a tap or click.
+  final MapEventCallback<MapEventClick>? onClick;
+
+  /// Called on a double tap or click. Double taps are only recognized while
+  /// this is set or [MapGestures.zoom] is on, because recognizing them
+  /// delays every single tap until a second one can no longer follow.
+  final MapEventCallback<MapEventDoubleClick>? onDoubleClick;
+
+  /// Called on a click with the secondary mouse button.
+  final MapEventCallback<MapEventSecondaryClick>? onSecondaryClick;
+
+  /// Called on a long press.
+  final MapEventCallback<MapEventLongClick>? onLongClick;
 
   /// The map.
   final Widget child;
@@ -133,6 +147,7 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
   Widget build(BuildContext context) {
     final gestures = _gestures;
     final scales = gestures.pan || gestures.zoom || gestures.rotate;
+    final doubleTaps = gestures.zoom || widget.onDoubleClick != null;
     // The whole map takes part in gestures, whatever its child hit-tests.
     return Listener(
       behavior: HitTestBehavior.opaque,
@@ -143,13 +158,34 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
       onPointerCancel: _onPointerEnd,
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
-        onTapUp: (details) => _emitUserInput(details.localPosition, _click),
-        onSecondaryTapUp: (details) =>
-            _emitUserInput(details.localPosition, _secondaryClick),
-        onLongPressStart: (details) =>
-            _emitUserInput(details.localPosition, _longClick),
-        onDoubleTapDown: _onDoubleTapDown,
-        onDoubleTap: _onDoubleTap,
+        onTapUp: switch (widget.onClick) {
+          final onClick? => (details) => _emitUserInput(
+            details.localPosition,
+            (point, screenPoint) =>
+                onClick(MapEventClick(point: point, screenPoint: screenPoint)),
+          ),
+          null => null,
+        },
+        onSecondaryTapUp: switch (widget.onSecondaryClick) {
+          final onSecondaryClick? => (details) => _emitUserInput(
+            details.localPosition,
+            (point, screenPoint) => onSecondaryClick(
+              MapEventSecondaryClick(point: point, screenPoint: screenPoint),
+            ),
+          ),
+          null => null,
+        },
+        onLongPressStart: switch (widget.onLongClick) {
+          final onLongClick? => (details) => _emitUserInput(
+            details.localPosition,
+            (point, screenPoint) => onLongClick(
+              MapEventLongClick(point: point, screenPoint: screenPoint),
+            ),
+          ),
+          null => null,
+        },
+        onDoubleTapDown: doubleTaps ? _onDoubleTapDown : null,
+        onDoubleTap: doubleTaps ? _onDoubleTap : null,
         onScaleStart: scales ? _onScaleStart : null,
         onScaleUpdate: scales ? _onScaleUpdate : null,
         onScaleEnd: scales ? _onScaleEnd : null,
@@ -158,34 +194,25 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
     );
   }
 
-  static MapEventUserInput _click(Geographic point, Offset screenPoint) =>
-      MapEventClick(point: point, screenPoint: screenPoint);
-
-  static MapEventUserInput _secondaryClick(
-    Geographic point,
-    Offset screenPoint,
-  ) => MapEventSecondaryClick(point: point, screenPoint: screenPoint);
-
-  static MapEventUserInput _longClick(Geographic point, Offset screenPoint) =>
-      MapEventLongClick(point: point, screenPoint: screenPoint);
-
+  /// Calls [emit] with the location at [position], if the map can tell it.
   void _emitUserInput(
     Offset position,
-    MapEventUserInput Function(Geographic point, Offset screenPoint) create,
+    void Function(Geographic point, Offset screenPoint) emit,
   ) {
-    final onEvent = widget.onEvent;
-    if (onEvent == null) return;
     final point = widget.toLngLat(position);
     if (point == null) return;
-    onEvent(create(point, position));
+    emit(point, position);
   }
 
   void _onDoubleTapDown(TapDownDetails details) {
     _doubleTapPosition = details.localPosition;
+    final onDoubleClick = widget.onDoubleClick;
+    if (onDoubleClick == null) return;
     _emitUserInput(
       details.localPosition,
-      (point, screenPoint) =>
-          MapEventDoubleClick(point: point, screenPoint: screenPoint),
+      (point, screenPoint) => onDoubleClick(
+        MapEventDoubleClick(point: point, screenPoint: screenPoint),
+      ),
     );
   }
 

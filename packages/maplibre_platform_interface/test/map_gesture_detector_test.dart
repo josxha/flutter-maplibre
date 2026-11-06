@@ -62,6 +62,7 @@ void main() {
   Future<void> pumpMap(
     WidgetTester tester, {
     MapGestures gestures = const MapGestures.all(),
+    bool listenToDoubleClicks = true,
   }) async {
     tester.view
       ..physicalSize = _size
@@ -76,7 +77,10 @@ void main() {
           lon: (point.dx - _center.dx) * 360 / 1000,
           lat: (_center.dy - point.dy) * 360 / 1000,
         ),
-        onEvent: events.add,
+        onClick: events.add,
+        onDoubleClick: listenToDoubleClicks ? events.add : null,
+        onSecondaryClick: events.add,
+        onLongClick: events.add,
         child: const SizedBox.expand(),
       ),
     );
@@ -292,6 +296,42 @@ void main() {
       expect(camera.calls, isEmpty);
     });
 
+    testWidgets('a click is immediate without double taps to recognize', (
+      tester,
+    ) async {
+      await pumpMap(
+        tester,
+        gestures: const MapGestures.all(zoom: false),
+        listenToDoubleClicks: false,
+      );
+      await tester.tapAt(_center);
+      await tester.pump();
+      expect(events.whereType<MapEventClick>(), hasLength(1));
+    });
+
+    testWidgets('a click waits for a second tap while double taps zoom', (
+      tester,
+    ) async {
+      await pumpMap(tester, listenToDoubleClicks: false);
+      await tester.tapAt(_center);
+      await tester.pump();
+      expect(events, isEmpty);
+      await tester.pump(const Duration(milliseconds: 400));
+      expect(events.whereType<MapEventClick>(), hasLength(1));
+    });
+
+    testWidgets('a double tap zooms without a double click callback', (
+      tester,
+    ) async {
+      await pumpMap(tester, listenToDoubleClicks: false);
+      await tester.tapAt(_center);
+      await tester.pump(const Duration(milliseconds: 50));
+      await tester.tapAt(_center);
+      await tester.pumpAndSettle();
+      expect(camera.zooms, hasLength(1));
+      expect(events, isEmpty);
+    });
+
     testWidgets('disabled gestures leave the camera', (tester) async {
       await pumpMap(tester, gestures: const MapGestures.none());
       await tester.dragFrom(_center, const Offset(-200, 0));
@@ -321,7 +361,7 @@ void main() {
               gestures: const MapGestures.all(),
               camera: camera,
               toLngLat: (_) => const Geographic(lon: 0, lat: 0),
-              onEvent: events.add,
+              onClick: events.add,
               child: const SizedBox.expand(),
             ),
             Positioned(

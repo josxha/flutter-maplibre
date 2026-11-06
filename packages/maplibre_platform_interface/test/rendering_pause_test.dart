@@ -41,7 +41,7 @@ class _FakePlatform extends MapLibrePlatform with MockPlatformInterfaceMixin {
 
 void main() {
   late _FakePlatform platform;
-  late List<MapEvent> events;
+  late List<MapEventRenderingChanged> events;
 
   setUp(() {
     platform = _FakePlatform();
@@ -51,13 +51,10 @@ void main() {
 
   Widget map({bool paused = false}) => Directionality(
     textDirection: TextDirection.ltr,
-    child: MapLibreMap(paused: paused, onEvent: events.add),
+    child: MapLibreMap(paused: paused, onRenderingChanged: events.add),
   );
 
-  List<bool> renderingEvents() => [
-    for (final event in events)
-      if (event is MapEventRenderingChanged) event.paused,
-  ];
+  List<bool> renderingEvents() => [for (final event in events) event.paused];
 
   testWidgets('a shown map renders', (tester) async {
     await tester.pumpWidget(map());
@@ -122,5 +119,28 @@ void main() {
     expect(platform.calls, isEmpty);
     expect(platform.states.single.isRenderingPaused, isFalse);
     expect(renderingEvents(), isEmpty);
+  });
+
+  testWidgets('reports size changes after the first layout', (tester) async {
+    final resizes = <Size>[];
+    Widget sized(double width) => Directionality(
+      textDirection: TextDirection.ltr,
+      child: Center(
+        child: SizedBox(
+          width: width,
+          height: 100,
+          child: MapLibreMap(onResize: (event) => resizes.add(event.size)),
+        ),
+      ),
+    );
+    await tester.pumpWidget(sized(100));
+    await tester.pump();
+    expect(resizes, isEmpty);
+    await tester.pumpWidget(sized(200));
+    await tester.pump();
+    expect(resizes, [const Size(200, 100)]);
+    await tester.pumpWidget(sized(200));
+    await tester.pump();
+    expect(resizes, [const Size(200, 100)]);
   });
 }

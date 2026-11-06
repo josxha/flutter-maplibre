@@ -230,13 +230,24 @@ Each entry: the decision, then why.
   Android); since 0.202610.3 a demand without `force` renders only a newer
   map update, so idle maps don't render. The frame wake is a `Wake.native`
   over two `NativeCallable.listener`s that the package owns (see Known
-  gaps). A map's `MapOptions.eventMask` limits its events to the ones the
-  state handles, so per-frame render events are never queued. Runtime events arrive through
+  gaps). A map's event mask holds the events the state always handles plus
+  the ones whose `MapLibreMap` callback is set, and follows the widget
+  (`setEventMask`), so per-frame render events are only queued while
+  `onRenderFrame` listens. Runtime events arrive through
   `RuntimeHandle.setEventHandler`, which the binding calls on the isolate.
   Events that arrive before the first frame demand are kept until then.
 
 ## Public API
 
+- **Events are one `on…` callback per event on `MapLibreMap`, not one
+  `onEvent` with a type switch.** A null callback is unsubscribed: native
+  maps leave it out of the event mask, web maps don't listen to `render`,
+  and the gesture detector registers no recognizer for it. A new event is a
+  new optional parameter, while a new subclass of a sealed event passed to
+  one callback broke every exhaustive switch. The events follow the ffi and
+  gl-js events; per-axis camera events (gl-js `zoomstart`, `rotate` …), raw
+  pointer events, box zoom, `styledata` and `dataabort` are left out on
+  purpose, and offline events stay on `OfflineManager`.
 - **`MapOptions.style` is a sealed `MapStyle` and declarative; there is no
   `setStyle`.** Backends switch on the type instead of guessing from the
   string, and a changed `style` loads the new style.
@@ -411,6 +422,9 @@ Each entry: the decision, then why.
   98 px off. gl-js's own globe drag drifts as much or more (3–86 px over the
   same drags), so the fallback of forwarding pointer events to its handlers
   would not be better.
+- **Double taps are only recognized while `onDoubleClick` is set or the
+  zoom gesture is on.** A double tap recognizer holds every single tap
+  until the double tap timeout, so `onClick` fires at once without one.
 - **The gestures follow the platform conventions.** A two-finger twist turns
   the map with the fingers (negated bearing). Double tap and drag zooms
   (down zooms in, 150 px per level). Two fingers side by side dragged
