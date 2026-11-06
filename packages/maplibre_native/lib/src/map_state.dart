@@ -179,6 +179,12 @@ class MapLibreMapStateNative extends MapLibreMapState {
   /// Submits the options, initial camera, and style of a new [map].
   Future<void> _setUp(mln.MapHandle map) async {
     _map = map;
+    // The callbacks may have changed while the map was being created.
+    final eventMask = _eventMaskOf(widget);
+    if (eventMask != _eventMask) {
+      _eventMask = eventMask;
+      map.discarding.setEventMask(eventMask);
+    }
     final options = this.options;
     final initCamera = options.initCamera;
     // Without an initial camera, MapLibre Native moves to the camera of the
