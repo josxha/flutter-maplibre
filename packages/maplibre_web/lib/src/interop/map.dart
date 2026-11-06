@@ -70,6 +70,12 @@ extension type JsMap._(Camera _) implements Camera {
   /// Returns the map's current pitch / tilt.
   external num getPitch();
 
+  /// Returns the map's current roll in degrees.
+  external num getRoll();
+
+  /// Returns the map's current padding.
+  external PaddingOptions getPadding();
+
   /// Returns the map's geographical bounds. When the bearing or pitch is
   /// non-zero, the visible region is not an axis-aligned rectangle, and the
   /// result is the smallest bounds that encompasses the visible region.

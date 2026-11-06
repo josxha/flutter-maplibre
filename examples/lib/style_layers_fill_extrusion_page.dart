@@ -24,7 +24,7 @@ class _StyleLayersFillExtrusionPageState
       body: MapLibreMap(
         options: MapOptions(
           style: MapStyles.protomapsLight.style,
-          initCamera: const InitialCamera.position(
+          initCamera: const CameraUpdate.position(
             center: Geographic(lon: -87.61694, lat: 41.86625),
             zoom: 15.99,
             pitch: 40,

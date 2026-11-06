@@ -40,7 +40,7 @@ class _PmTilesPageState extends State<PmTilesPage> {
                 north: 43.789306,
               ),
               style: MapStyles.protomapsLightPmTiles.style,
-              initCamera: const InitialCamera.position(
+              initCamera: const CameraUpdate.position(
                 center: Geographic(lon: 11.254343, lat: 43.767213),
                 zoom: 10,
               ),

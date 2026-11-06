@@ -32,7 +32,7 @@ class SourceAttribution extends StatefulWidget {
   /// Defaults to true.
   final bool showMapLibre;
 
-  /// Keeps the attribution expanded when the MapCamera changes.
+  /// Keeps the attribution expanded when the CameraPosition changes.
   ///
   /// Defaults to false.
   final bool keepExpanded;
@@ -43,17 +43,17 @@ class SourceAttribution extends StatefulWidget {
 
 class _SourceAttributionState extends State<SourceAttribution> {
   bool _expanded = true;
-  MapCamera? _initMapCamera;
+  CameraPosition? _initCameraPosition;
 
   @override
   Widget build(BuildContext context) {
     final style = MapController.maybeOf(context)?.style;
-    final camera = MapCamera.maybeOf(context);
+    final camera = CameraPosition.maybeOf(context);
     if (style == null || camera == null) return const SizedBox.shrink();
 
-    _initMapCamera ??= camera;
-    if (_expanded && !widget.keepExpanded && _initMapCamera != camera) {
-      _initMapCamera = null;
+    _initCameraPosition ??= camera;
+    if (_expanded && !widget.keepExpanded && _initCameraPosition != camera) {
+      _initCameraPosition = null;
       _expanded = false;
     }
 
@@ -99,7 +99,7 @@ class _SourceAttributionState extends State<SourceAttribution> {
                 dimension: 30,
                 child: IconButton(
                   onPressed: () => setState(() {
-                    _initMapCamera = null;
+                    _initCameraPosition = null;
                     _expanded = !_expanded;
                   }),
                   icon: const Icon(Icons.info, size: 18),

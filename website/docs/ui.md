@@ -33,8 +33,8 @@ have access to the following helpful functions.
 
 - `MapController.maybeOf()`
 - `MapController.of()`
-- `MapCamera.maybeOf()`
-- `MapCamera.of()`
+- `CameraPosition.maybeOf()`
+- `CameraPosition.of()`
 
 ## Source Attribution
 

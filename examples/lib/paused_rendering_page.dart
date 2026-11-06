@@ -137,7 +137,9 @@ class _RotatingMapState extends State<_RotatingMap> {
     // bearing once it renders again.
     _timer = Timer.periodic(const Duration(milliseconds: 50), (_) {
       _bearing = (_bearing + 1) % 360;
-      unawaited(_controller?.moveCamera(bearing: _bearing));
+      unawaited(
+        _controller?.moveCamera(CameraUpdate.position(bearing: _bearing)),
+      );
     });
   }
 
@@ -147,7 +149,7 @@ class _RotatingMapState extends State<_RotatingMap> {
       children: [
         MapLibreMap(
           options: MapOptions(
-            initCamera: InitialCamera.position(center: widget.center, zoom: 5),
+            initCamera: CameraUpdate.position(center: widget.center, zoom: 5),
           ),
           paused: widget.paused,
           onMapCreated: _onMapCreated,

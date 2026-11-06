@@ -38,7 +38,7 @@ class _KioskPageState extends State<KioskPage> {
       body: MapLibreMap(
         options: const MapOptions(
           style: MapStyle.url(_styleUrl),
-          initCamera: InitialCamera.position(),
+          initCamera: CameraUpdate.position(),
         ),
         onMapCreated: (controller) => _controller = controller,
         onStyleLoaded: (_) {
@@ -51,10 +51,13 @@ class _KioskPageState extends State<KioskPage> {
   void _onTimer(Timer timer) {
     final location = _locations[index];
     _controller.animateCamera(
-      center: location.center,
-      zoom: location.zoom,
-      bearing: location.bearing,
-      pitch: location.pitch,
+      CameraUpdate.position(
+        center: location.center,
+        zoom: location.zoom,
+        bearing: location.bearing,
+        pitch: location.pitch,
+      ),
+      animation: const CameraAnimation.fly(),
     );
     index++;
     if (index >= _locations.length) index = 0;

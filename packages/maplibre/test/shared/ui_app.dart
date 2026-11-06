@@ -12,7 +12,7 @@ class App extends StatelessWidget {
 
   final List<Widget> children;
   final MapController controller;
-  final MapCamera? camera;
+  final CameraPosition? camera;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class App extends StatelessWidget {
       title: 'MapLibre Demo',
       home: Scaffold(
         body: MapLibreInheritedModel(
-          mapCamera: camera,
+          cameraPosition: camera,
           mapController: controller,
           child: Stack(children: children),
         ),

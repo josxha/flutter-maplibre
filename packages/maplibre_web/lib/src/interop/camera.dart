@@ -23,6 +23,29 @@ extension type Camera._(JSObject _) implements JSObject {
 
   /// Animate the viewport of the map to fit [LngLatBounds].
   external void fitBounds(LngLatBounds bounds, [FitBoundsOptions? options]);
+
+  /// The camera that fits [bounds], or undefined if they don't fit.
+  external CameraForBoundsResult? cameraForBounds(
+    LngLatBounds bounds, [
+    FitBoundsOptions? options,
+  ]);
+}
+
+/// The result of [Camera.cameraForBounds].
+@anonymous
+@JS()
+extension type CameraForBoundsResult._(JSObject _) implements JSObject {
+  /// The center that fits the bounds.
+  external LngLat get center;
+
+  /// The zoom that fits the bounds.
+  external num get zoom;
+
+  /// The bearing of the camera.
+  external num get bearing;
+
+  /// The pitch of the camera, if the options set one.
+  external num? get pitch;
 }
 
 /// Options used for [Camera.jumpTo].
@@ -33,6 +56,7 @@ extension type JumpToOptions._(CameraOptions _) implements CameraOptions {
   external factory JumpToOptions({
     PaddingOptions? padding,
     num? pitch,
+    num? roll,
     LngLat? around,
     LngLat? center,
     num? zoom,
@@ -53,6 +77,8 @@ extension type EaseToOptions._(CameraOptions _) implements CameraOptions {
     num? zoom,
     num? bearing,
     num? pitch,
+    num? roll,
+    PaddingOptions? padding,
     LngLat? around,
     Point? offset,
     num? duration,
@@ -72,8 +98,12 @@ extension type FlyToOptions._(CameraOptions _) implements CameraOptions {
     num? speed,
     num? screenSpeed,
     num? maxDuration,
+    num? duration,
+    JSFunction? easing,
+    bool? essential,
     PaddingOptions? padding,
     num? pitch,
+    num? roll,
     LngLat? around,
     LngLat? center,
     num? zoom,

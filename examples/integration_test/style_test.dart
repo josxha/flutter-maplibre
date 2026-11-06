@@ -34,7 +34,7 @@ void runTests() {
         tester,
         options: const MapOptions(
           style: MapStyle.asset('assets/styles/test_style.json'),
-          initCamera: InitialCamera.position(zoom: 4),
+          initCamera: CameraUpdate.position(zoom: 4),
         ),
       );
       expect(map.style.layers.map((layer) => layer.id).toList(), [
@@ -50,7 +50,7 @@ void runTests() {
     testWidgets('loads a style from a URL (network)', (tester) async {
       final map = await pumpMap(
         tester,
-        options: const MapOptions(initCamera: InitialCamera.position()),
+        options: const MapOptions(initCamera: CameraUpdate.position()),
       );
       expect(
         map.style.layers.map((layer) => layer.id).toList(),
@@ -416,7 +416,7 @@ void runTests() {
               ],
             }),
           ),
-          initCamera: const InitialCamera.position(),
+          initCamera: const CameraUpdate.position(),
         ),
       );
       expect(map.style.layers.map((layer) => layer.id), [
@@ -861,7 +861,7 @@ void runTests() {
               ],
             }),
           ),
-          initCamera: const InitialCamera.position(),
+          initCamera: const CameraUpdate.position(),
         ),
       );
       await map.pumpUntil(

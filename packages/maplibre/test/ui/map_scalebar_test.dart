@@ -12,7 +12,7 @@ void main() {
       registerFallbackValue(Offset.zero);
     });
     testWidgets('render', (tester) async {
-      const camera = MapCamera(
+      const camera = CameraPosition(
         center: Geographic(lon: 0, lat: 0),
         zoom: 5,
         bearing: 12,
@@ -57,7 +57,7 @@ void main() {
       expect(size.height, equals(22));
     });
     testWidgets('render imperial', (tester) async {
-      const camera = MapCamera(
+      const camera = CameraPosition(
         center: Geographic(lon: 0, lat: 0),
         zoom: 5,
         bearing: 12,
@@ -108,7 +108,7 @@ void main() {
       expect(size.height, equals(22));
     });
     testWidgets('render 2', (tester) async {
-      const camera = MapCamera(
+      const camera = CameraPosition(
         center: Geographic(lon: 0, lat: 0),
         zoom: 5,
         bearing: 12,
@@ -149,7 +149,7 @@ void main() {
       expect(size.height, equals(22));
     });
     testWidgets('render 2 imperial', (tester) async {
-      const camera = MapCamera(
+      const camera = CameraPosition(
         center: Geographic(lon: 0, lat: 0),
         zoom: 5,
         bearing: 12,
@@ -228,7 +228,7 @@ void main() {
         testWidgets('is correct for $metersPerPixel metersPerPixel', (
           tester,
         ) async {
-          const camera = MapCamera(
+          const camera = CameraPosition(
             center: Geographic(lon: 0, lat: 0),
             zoom: 5,
             bearing: 12,

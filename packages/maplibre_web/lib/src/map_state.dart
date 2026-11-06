@@ -33,7 +33,10 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
 
   /// The platform view created [_map].
   var _mapCreated = false;
-  Completer<interop.MapLibreEvent>? _movementCompleter;
+
+  /// The running [animateCamera], whose moves carry its id.
+  _WebCameraAnimation? _animation;
+  var _animationIds = 0;
   final _cameraPaddingReset = CameraPaddingReset();
   bool _nextGestureCausedByController = false;
   LayerManager? _layerManager;
@@ -108,7 +111,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         // The map has the size of its platform view only now, so bounds are
         // fitted again for it.
-        if (options.initCamera case final InitialCameraBounds initCamera) {
+        if (options.initCamera case final CameraUpdateFit initCamera) {
           _resizeMap();
           _applyInitialCamera(initCamera);
         }
@@ -255,12 +258,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         (interop.MapLibreEvent event) {
           if (!_cameraPaddingReset.shouldForward(event)) return;
           if (_silentCamera) return;
-          final mapCamera = MapCamera(
-            center: _map.getCenter().toGeographic(),
-            zoom: _map.getZoom().toDouble(),
-            pitch: _map.getPitch().toDouble(),
-            bearing: _map.getBearing().toDouble(),
-          );
+          final mapCamera = getCamera();
           setState(() => camera = mapCamera);
           widget.onCameraMove?.call(
             MapEventCameraMove(camera: mapCamera, reason: _moveReason),
@@ -271,11 +269,14 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         interop.MapEventType.moveEnd,
         (interop.MapLibreEvent event) {
           if (!_cameraPaddingReset.shouldForward(event)) return;
+          final animation = _animation;
+          if (animation != null &&
+              _CameraAnimationEventData._(event).flutterMapLibreAnimation ==
+                  animation.id) {
+            _endAnimation(CameraAnimationResult.completed);
+          }
           if (_silentCamera || _gestureMoving) return;
           _onCameraMoveEnd();
-          if (!(_movementCompleter?.isCompleted ?? true)) {
-            _movementCompleter?.complete(event);
-          }
         }.toJS,
       );
 
@@ -349,6 +350,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
 
   @override
   void dispose() {
+    _endAnimation(CameraAnimationResult.cancelled);
     document.removeEventListener('contextmenu', _onContextMenu);
     _contextMenuTimer?.cancel();
     style?.dispose();
@@ -408,126 +410,179 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       .toList(growable: false);
 
   @override
-  Future<void> moveCamera({
-    Geographic? center,
-    double? zoom,
-    double? bearing,
-    double? pitch,
-    EdgeInsets padding = EdgeInsets.zero,
-  }) async {
+  Future<void> moveCamera(CameraUpdate update) async {
+    final target = _targetReplacing(update, CameraAnimationResult.cancelled);
+    // A move stops a running animation, even if there is nowhere to move.
+    if (target == null) return stopCamera();
     _nextGestureCausedByController = true;
-    final camera = getCamera();
-    _map.jumpTo(
-      interop.JumpToOptions(
-        center: center?.toLngLat() ?? camera.center.toLngLat(),
-        zoom: zoom ?? camera.zoom,
-        bearing: bearing ?? camera.bearing,
-        pitch: pitch ?? camera.pitch,
-        padding: padding.toPaddingOptions(),
-      ),
-    );
+    _map.jumpTo(target as interop.JumpToOptions);
   }
 
   @override
-  Future<void> animateCamera({
-    Geographic? center,
-    double? zoom,
-    double? bearing,
-    double? pitch,
-    Duration nativeDuration = const Duration(seconds: 2),
-    double webSpeed = 1.2,
-    Duration? webMaxDuration,
-    EdgeInsets padding = EdgeInsets.zero,
+  Future<CameraAnimationResult> animateCamera(
+    CameraUpdate update, {
+    CameraAnimation animation = const CameraAnimation.ease(),
   }) async {
-    final destination = center?.toLngLat();
-    _nextGestureCausedByController = true;
-    final camera = getCamera();
-    // flyTo ends synchronously when it jumps, for example if the browser
-    // prefers reduced motion, so wait for the end before starting it.
-    final completer = _movementCompleter = Completer<interop.MapLibreEvent>();
-    _map.flyTo(
-      interop.FlyToOptions(
-        center: destination,
-        zoom: zoom ?? camera.zoom,
-        bearing: bearing ?? camera.bearing,
-        pitch: pitch ?? camera.pitch,
-        speed: webSpeed,
-        maxDuration: webMaxDuration?.inMilliseconds,
-        padding: padding.toPaddingOptions(),
-      ),
+    // A later animation takes over, which completes the running one.
+    final target = _targetReplacing(update, CameraAnimationResult.completed);
+    if (target == null) return CameraAnimationResult.cancelled;
+    target['easing'] = animation.curve.transform.toJS;
+    switch (animation) {
+      case CameraAnimationEase(:final duration):
+        target['duration'] = (duration.inMicroseconds / 1000).toJS;
+      case CameraAnimationFly(:final duration, :final speed, :final peakZoom):
+        if (duration != null) {
+          target['duration'] = (duration.inMicroseconds / 1000).toJS;
+        }
+        target['speed'] = speed.toJS;
+        if (peakZoom != null) target['minZoom'] = peakZoom.toJS;
+    }
+    final run = _animation = _WebCameraAnimation(++_animationIds);
+    final eventData = _CameraAnimationEventData(
+      flutterMapLibreAnimation: run.id,
     );
-    final _ = await completer.future;
-    _movementCompleter = null;
+    _nextGestureCausedByController = true;
+    // The animation ends synchronously when it jumps, for example if the
+    // browser prefers reduced motion, so [run] is set before it starts.
+    switch (animation) {
+      case CameraAnimationEase():
+        _map.easeTo(target as interop.EaseToOptions, eventData);
+      case CameraAnimationFly():
+        _map.flyTo(target as interop.FlyToOptions, eventData);
+    }
+    return run.result;
+  }
 
-    // check if the targeted values were reached or if the flight was cancelled
-    final newCenter = _map.getCenter();
-    bool reachedCenter;
-    if (destination == null) {
-      reachedCenter = true;
+  @override
+  Future<void> stopCamera() async {
+    if (_animation == null) return;
+    _endAnimation(CameraAnimationResult.cancelled);
+    _map.stop();
+  }
+
+  @override
+  Future<CameraPosition> cameraFor(CameraUpdate update) async {
+    final current = getCamera();
+    final target = _target(update, resetPadding: false);
+    if (target == null) return current;
+    T? field<T extends JSAny>(String name) =>
+        target.has(name) ? target[name] as T? : null;
+    final padding = field<interop.PaddingOptions>('padding');
+    return CameraPosition(
+      center: field<interop.LngLat>('center')?.toGeographic() ?? current.center,
+      zoom: field<JSNumber>('zoom')?.toDartDouble ?? current.zoom,
+      bearing: field<JSNumber>('bearing')?.toDartDouble ?? current.bearing,
+      pitch: field<JSNumber>('pitch')?.toDartDouble ?? current.pitch,
+      roll: field<JSNumber>('roll')?.toDartDouble ?? current.roll,
+      padding: padding == null ? current.padding : _edgeInsets(padding),
+    );
+  }
+
+  /// The [_target] of [update], which ends the running animation with
+  /// [result]. If there is no target, the animation keeps running, unless
+  /// working out the target stopped it.
+  JSObject? _targetReplacing(
+    CameraUpdate update,
+    CameraAnimationResult result,
+  ) {
+    final previous = _animation;
+    // Moves that stop the running animation don't complete it as reaching
+    // its target.
+    _animation = null;
+    _targetStoppedCamera = false;
+    final target = _target(update);
+    if (target == null && !_targetStoppedCamera) {
+      _animation = previous;
     } else {
-      final reachedLng = (destination.lng - newCenter.lng).abs() < 0.0000001;
-      final reachedLat = (destination.lat - newCenter.lat).abs() < 0.0000001;
-      reachedCenter = reachedLat && reachedLng;
+      // Nothing takes over when the padding reset stopped the camera but
+      // there is no target, so the running animation was cancelled.
+      previous?.end(target == null ? CameraAnimationResult.cancelled : result);
     }
-    final reachedZoom = zoom == null || zoom == _map.getZoom();
-    final reachedBearing = bearing == null || bearing == _map.getBearing();
-    final reachedPitch = pitch == null || pitch == _map.getPitch();
-
-    if (reachedCenter && reachedZoom && reachedBearing && reachedPitch) return;
-
-    throw PlatformException(
-      code: 'CancellationException',
-      message: 'Animation cancelled.',
-    );
+    return target;
   }
 
-  @override
-  Future<void> fitBounds({
-    required GeoBox bounds,
-    double? bearing,
-    double? pitch,
-    Duration nativeDuration = const Duration(seconds: 2),
-    double webSpeed = 1.2,
-    Duration? webMaxDuration,
-    Offset offset = Offset.zero,
-    double webMaxZoom = double.maxFinite,
-    bool webLinear = false,
-    EdgeInsets padding = EdgeInsets.zero,
-  }) async {
-    // MapLibre GL JS calculates bounds using the transform's current padding
-    // and then discards the padding option before moving the camera. Reset the
-    // transform first so padding from an earlier camera move is not reused.
-    final container = _map.getContainer();
-    if (!_cameraPaddingReset.runBeforeFitBounds(
-      camera: _map,
-      viewportWidth: container.clientWidth,
-      viewportHeight: container.clientHeight,
-      fitPadding: padding.toPaddingOptions(),
-    )) {
-      return;
+  /// Whether the last [_target] reset the padding, which stops the camera.
+  var _targetStoppedCamera = false;
+
+  /// The gl-js camera options that move the map to [update], with only the
+  /// fields that change, or null if a fit target doesn't fit the map.
+  ///
+  /// With [resetPadding], the padding of earlier camera moves is reset
+  /// before a target is fitted, which stops a running animation.
+  JSObject? _target(CameraUpdate update, {bool resetPadding = true}) {
+    final options = JSObject();
+    switch (update) {
+      case CameraUpdatePosition(:final center, :final padding, :final anchor):
+        if (center != null) options['center'] = center.toLngLat();
+        if (update.zoom case final zoom?) options['zoom'] = zoom.toJS;
+        if (update.bearing case final bearing?) {
+          options['bearing'] = bearing.toJS;
+        }
+        if (update.pitch case final pitch?) options['pitch'] = pitch.toJS;
+        if (update.roll case final roll?) options['roll'] = roll.toJS;
+        if (padding != null) options['padding'] = padding.toPaddingOptions();
+        if (anchor != null) {
+          options['around'] = _map.unproject(anchor.toJsPoint());
+        }
+      case CameraUpdateFit():
+        final padding = update.padding.toPaddingOptions();
+        if (resetPadding) {
+          // MapLibre GL JS fits bounds into the padding of earlier camera
+          // moves as well, so that padding is reset first.
+          final container = _map.getContainer();
+          if (!_cameraPaddingReset.runBeforeFitBounds(
+            camera: _map,
+            viewportWidth: container.clientWidth,
+            viewportHeight: container.clientHeight,
+            fitPadding: padding,
+          )) {
+            return null;
+          }
+          _targetStoppedCamera = true;
+        }
+        final pitch = update.pitch ?? _map.getPitch();
+        final camera = _map.cameraForBounds(
+          update.bounds.toJsLngLatBounds(),
+          interop.FitBoundsOptions(
+            padding: padding,
+            bearing: update.bearing ?? _map.getBearing(),
+            pitch: pitch,
+            // An explicit null would reach gl-js as a max zoom of 0.
+            maxZoom: update.maxZoom ?? double.maxFinite,
+          ),
+        );
+        if (camera == null) return null;
+        options['center'] = camera.center;
+        options['zoom'] = camera.zoom.toJS;
+        options['bearing'] = camera.bearing.toJS;
+        options['pitch'] = (camera.pitch ?? pitch).toJS;
     }
-    final camera = getCamera();
-    _map.fitBounds(
-      bounds.toJsLngLatBounds(),
-      interop.FitBoundsOptions(
-        offset: offset.toJsPoint(),
-        maxZoom: webMaxZoom,
-        linear: webLinear,
-        maxDuration: webMaxDuration?.inMilliseconds,
-        padding: padding.toPaddingOptions(),
-        speed: webSpeed,
-        pitch: pitch ?? camera.pitch,
-        bearing: bearing ?? camera.bearing,
-      ),
-    );
+    return options;
   }
 
+  /// Ends the running [animateCamera] with [result].
+  void _endAnimation(CameraAnimationResult result) {
+    final animation = _animation;
+    _animation = null;
+    animation?.end(result);
+  }
+
+  static EdgeInsets _edgeInsets(interop.PaddingOptions padding) =>
+      EdgeInsets.fromLTRB(
+        padding.left.toDouble(),
+        padding.top.toDouble(),
+        padding.right.toDouble(),
+        padding.bottom.toDouble(),
+      );
+
   @override
-  MapCamera getCamera() => MapCamera(
+  CameraPosition getCamera() => CameraPosition(
     center: _map.getCenter().toGeographic(),
     zoom: _map.getZoom().toDouble(),
     pitch: _map.getPitch().toDouble(),
     bearing: _map.getBearing().toDouble(),
+    roll: _map.getRoll().toDouble(),
+    padding: _edgeInsets(_map.getPadding()),
   );
 
   /// https://wiki.openstreetmap.org/wiki/Zoom_levels
@@ -538,7 +593,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       pow(2, _map.getZoom() + 9);
 
   @override
-  GeoBox getVisibleRegion() {
+  GeoBox getVisibleBounds() {
     final bounds = _map.getBounds();
     return GeoBox(
       west: bounds.getWest().toDouble(),
@@ -589,28 +644,9 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       .toList(growable: false);
 
   /// Moves the camera of the new map to [initCamera] before its first frame.
-  void _applyInitialCamera(InitialCamera initCamera) {
-    switch (initCamera) {
-      case InitialCameraPosition():
-        _map.jumpTo(
-          interop.JumpToOptions(
-            center: initCamera.center.toLngLat(),
-            zoom: initCamera.zoom,
-            bearing: initCamera.bearing,
-            pitch: initCamera.pitch,
-          ),
-        );
-      case InitialCameraBounds():
-        _map.fitBounds(
-          initCamera.bounds.toJsLngLatBounds(),
-          interop.FitBoundsOptions(
-            animate: false,
-            padding: initCamera.padding.toPaddingOptions(),
-            bearing: initCamera.bearing,
-            pitch: initCamera.pitch,
-          ),
-        );
-    }
+  void _applyInitialCamera(CameraUpdate initCamera) {
+    final target = _target(initCamera, resetPadding: false);
+    if (target != null) _map.jumpTo(target as interop.JumpToOptions);
   }
 
   JSAny _jsStyle(MapStyle style) => switch (style) {
@@ -712,6 +748,7 @@ class _WebGestureCamera implements GestureCameraSink {
   @override
   void gestureStart() {
     if (!_state._mapCreated) return;
+    _state._endAnimation(CameraAnimationResult.cancelled);
     // Catches a fling, whose end then reports the end of its move.
     _map.stop();
     _state
@@ -846,6 +883,7 @@ class _WebGestureCamera implements GestureCameraSink {
     if (!_state._mapCreated) return;
     // Ends a running animation before working out the target, so that its
     // end is reported.
+    _state._endAnimation(CameraAnimationResult.cancelled);
     _map.stop();
     final target = _cameraAround(around, zoomBy: levels);
     _state._nextMoveByUser = true;
@@ -886,3 +924,29 @@ const _flingLinearity = 0.3;
 const _flingMaxSpeed = 1400.0;
 const _flingDeceleration = 2500.0;
 const _flingCurve = Cubic(0, 0, 0.3, 1);
+
+/// A running [MapLibreMapStateWeb.animateCamera], whose moves carry [id] in
+/// their event data.
+class _WebCameraAnimation {
+  _WebCameraAnimation(this.id);
+
+  final int id;
+  final _result = Completer<CameraAnimationResult>();
+
+  Future<CameraAnimationResult> get result => _result.future;
+
+  void end(CameraAnimationResult result) {
+    if (!_result.isCompleted) _result.complete(result);
+  }
+}
+
+/// The event data that tags the moves of an animation.
+@anonymous
+@JS()
+extension type _CameraAnimationEventData._(JSObject _) implements JSObject {
+  external factory _CameraAnimationEventData({
+    required int flutterMapLibreAnimation,
+  });
+
+  external int? get flutterMapLibreAnimation;
+}

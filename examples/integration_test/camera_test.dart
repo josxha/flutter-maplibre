@@ -1,6 +1,6 @@
+import 'package:flutter/animation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/painting.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:maplibre/maplibre.dart';
@@ -17,10 +17,12 @@ void runTests() {
     testWidgets('moveCamera jumps to the new camera', (tester) async {
       final map = await pumpMap(tester);
       await map.controller.moveCamera(
-        center: const Geographic(lon: 1, lat: 2),
-        zoom: 5,
-        bearing: 10,
-        pitch: 20,
+        const CameraUpdate.position(
+          center: Geographic(lon: 1, lat: 2),
+          zoom: 5,
+          bearing: 10,
+          pitch: 20,
+        ),
       );
       final camera = map.controller.getCamera();
       expect(camera.center.lon, closeTo(1, 1e-6));
@@ -39,7 +41,7 @@ void runTests() {
           bearing: 15,
         ),
       );
-      await map.controller.moveCamera(zoom: 7);
+      await map.controller.moveCamera(const CameraUpdate.position(zoom: 7));
       final camera = map.controller.getCamera();
       expect(camera.zoom, closeTo(7, 1e-6));
       expect(camera.center.lon, closeTo(5, 1e-6));
@@ -50,7 +52,7 @@ void runTests() {
     testWidgets('moveCamera reports the camera events', (tester) async {
       final map = await pumpMap(tester);
       final since = map.events.length;
-      await map.controller.moveCamera(zoom: 6);
+      await map.controller.moveCamera(const CameraUpdate.position(zoom: 6));
       final moved = await map.waitForEvent<MapEventCameraMove>(since: since);
       expect(moved.camera.zoom, closeTo(6, 1e-6));
       expect(moved.reason, CameraChangeReason.programmatic);
@@ -69,7 +71,7 @@ void runTests() {
     ) async {
       final map = await pumpMap(tester);
       await map.controller.moveCamera(
-        center: const Geographic(lon: 20, lat: 10),
+        const CameraUpdate.position(center: Geographic(lon: 20, lat: 10)),
       );
       final camera = await map.waitForCamera(
         (_) => (map.controller.camera?.center.lon ?? 0) > 19.99,
@@ -81,18 +83,20 @@ void runTests() {
     testWidgets('animateCamera completes at the new camera', (tester) async {
       final map = await pumpMap(tester);
       final since = map.events.length;
-      await map.pumpFuture(
+      final result = await map.pumpFuture(
         map.controller.animateCamera(
-          center: const Geographic(lon: 30, lat: 20),
-          zoom: 6,
-          bearing: 45,
-          pitch: 30,
+          const CameraUpdate.position(
+            center: Geographic(lon: 30, lat: 20),
+            zoom: 6,
+            bearing: 45,
+            pitch: 30,
+          ),
           // Long enough that a slow CI runner reads the camera mid-way.
-          nativeDuration: const Duration(seconds: 1),
-          webMaxDuration: const Duration(milliseconds: 300),
+          animation: const CameraAnimation.fly(duration: Duration(seconds: 1)),
         ),
         reason: 'animateCamera',
       );
+      expect(result, CameraAnimationResult.completed);
       final camera = map.controller.getCamera();
       expect(camera.center.lon, closeTo(30, 1e-4));
       expect(camera.center.lat, closeTo(20, 1e-4));
@@ -110,19 +114,39 @@ void runTests() {
       expect(zooms, isNotEmpty);
     });
 
-    testWidgets('fitBounds shows the bounds', (tester) async {
+    testWidgets('animateCamera eases to the new camera', (tester) async {
+      final map = await pumpMap(tester);
+      final result = await map.pumpFuture(
+        map.controller.animateCamera(
+          const CameraUpdate.position(zoom: 6, bearing: 30, roll: 10),
+          animation: const CameraAnimation.ease(
+            duration: Duration(milliseconds: 200),
+            curve: Curves.easeOut,
+          ),
+        ),
+        reason: 'animateCamera',
+      );
+      expect(result, CameraAnimationResult.completed);
+      final camera = map.controller.getCamera();
+      expect(camera.zoom, closeTo(6, 1e-4));
+      expect(camera.bearing, closeTo(30, 1e-4));
+      expect(camera.roll, closeTo(10, 1e-4));
+    });
+
+    testWidgets('fitting bounds shows the bounds', (tester) async {
       final map = await pumpMap(tester, options: offlineOptions(zoom: 1));
       const bounds = GeoBox(west: 10, east: 20, south: 40, north: 50);
       await map.pumpFuture(
-        map.controller.fitBounds(
-          bounds: bounds,
-          nativeDuration: const Duration(milliseconds: 100),
-          webMaxDuration: const Duration(milliseconds: 100),
+        map.controller.animateCamera(
+          const CameraUpdate.bounds(bounds),
+          animation: const CameraAnimation.ease(
+            duration: Duration(milliseconds: 100),
+          ),
         ),
-        reason: 'fitBounds',
+        reason: 'fit bounds',
       );
       await map.waitForLatestFrame();
-      final region = map.controller.getVisibleRegion();
+      final region = map.controller.getVisibleBounds();
       expect(region.west, lessThanOrEqualTo(10 + 1e-3));
       expect(region.east, greaterThanOrEqualTo(20 - 1e-3));
       expect(region.south, lessThanOrEqualTo(40 + 1e-3));
@@ -144,10 +168,12 @@ void runTests() {
     testWidgets('padding moves the center of the camera', (tester) async {
       final map = await pumpMap(tester);
       await map.controller.moveCamera(
-        center: const Geographic(lon: 0, lat: 0),
-        padding: const EdgeInsets.only(top: 200),
+        const CameraUpdate.position(
+          center: Geographic(lon: 0, lat: 0),
+          padding: EdgeInsets.only(top: 200),
+        ),
       );
-      // Padding is not part of MapCamera, so waitForLatestFrame can't tell a
+      // Padding is not part of CameraPosition, so waitForLatestFrame can't tell a
       // frame with it from the earlier frame at the same center.
       Offset center() =>
           map.controller.toScreenLocation(const Geographic(lon: 0, lat: 0));
@@ -158,21 +184,80 @@ void runTests() {
       expect(center().dx, closeTo(map.center.dx, 1));
     });
 
-    testWidgets('fitBounds replaces padding from a previous camera move', (
+    testWidgets('fitting points shows every point', (tester) async {
+      final map = await pumpMap(tester, options: offlineOptions(zoom: 1));
+      await map.controller.moveCamera(
+        const CameraUpdate.points([
+          Geographic(lon: -30, lat: 10),
+          Geographic(lon: 0, lat: -20),
+          Geographic(lon: 30, lat: 25),
+        ]),
+      );
+      await map.waitForLatestFrame();
+      final bounds = map.controller.getVisibleBounds();
+      expect(bounds.west, lessThanOrEqualTo(-30 + 1e-3));
+      expect(bounds.east, greaterThanOrEqualTo(30 - 1e-3));
+      expect(bounds.south, lessThanOrEqualTo(-20 + 1e-3));
+      expect(bounds.north, greaterThanOrEqualTo(25 - 1e-3));
+    });
+
+    testWidgets('fitting a geometry respects maxZoom', (tester) async {
+      final map = await pumpMap(tester, options: offlineOptions(zoom: 1));
+      await map.controller.moveCamera(
+        CameraUpdate.geometry(
+          LineString.from(const [
+            Geographic(lon: 8, lat: 47),
+            Geographic(lon: 8.001, lat: 47.001),
+          ]),
+          maxZoom: 10,
+        ),
+      );
+      final camera = map.controller.getCamera();
+      expect(camera.zoom, closeTo(10, 1e-6));
+      expect(camera.center.lon, closeTo(8.0005, 1e-3));
+      expect(camera.center.lat, closeTo(47.0005, 1e-3));
+    });
+
+    testWidgets('cameraFor computes a camera without moving the map', (
+      tester,
+    ) async {
+      final map = await pumpMap(tester, options: offlineOptions(zoom: 1));
+      final before = map.controller.getCamera();
+      final camera = await map.controller.cameraFor(
+        const CameraUpdate.bounds(
+          GeoBox(west: 10, east: 20, south: 40, north: 50),
+        ),
+      );
+      expect(camera.zoom, greaterThan(before.zoom + 1));
+      expect(camera.center.lon, closeTo(15, 0.5));
+      expect(map.controller.getCamera(), before);
+      await map.controller.moveCamera(camera.toCameraUpdate());
+      final moved = map.controller.getCamera();
+      expect(moved.zoom, closeTo(camera.zoom, 1e-6));
+      expect(moved.center.lon, closeTo(camera.center.lon, 1e-6));
+      expect(moved.center.lat, closeTo(camera.center.lat, 1e-6));
+    });
+
+    testWidgets('fitting bounds replaces padding from a previous camera move', (
       tester,
     ) async {
       final map = await pumpMap(tester);
       await map.controller.moveCamera(
-        zoom: 4,
-        padding: const EdgeInsets.only(bottom: 200),
+        const CameraUpdate.position(
+          zoom: 4,
+          padding: EdgeInsets.only(bottom: 200),
+        ),
       );
       await map.pumpFuture(
-        map.controller.fitBounds(
-          bounds: const GeoBox(west: -10, east: 10, south: -10, north: 10),
-          nativeDuration: const Duration(milliseconds: 100),
-          webMaxDuration: const Duration(milliseconds: 100),
+        map.controller.animateCamera(
+          const CameraUpdate.bounds(
+            GeoBox(west: -10, east: 10, south: -10, north: 10),
+          ),
+          animation: const CameraAnimation.ease(
+            duration: Duration(milliseconds: 100),
+          ),
         ),
-        reason: 'fitBounds',
+        reason: 'fit bounds',
       );
       await map.waitForLatestFrame();
       final center = map.controller.toScreenLocation(
@@ -182,41 +267,61 @@ void runTests() {
       expect(center.dy, closeTo(map.center.dy, 1));
     });
 
+    testWidgets('stopCamera cancels a running animation', (tester) async {
+      final map = await pumpMap(tester);
+      final animation = map.controller.animateCamera(
+        const CameraUpdate.position(zoom: 8),
+        animation: const CameraAnimation.ease(duration: Duration(seconds: 10)),
+      );
+      await tester.pump(const Duration(milliseconds: 300));
+      await map.controller.stopCamera();
+      final result = await map.pumpFuture(animation, reason: 'animation');
+      final zoom = map.controller.getCamera().zoom;
+      // On web, the animation already jumped to its end if the browser
+      // prefers reduced motion, as headless Chrome does.
+      if (kIsWeb && result == CameraAnimationResult.completed) {
+        expect(zoom, closeTo(8, 1e-6));
+      } else {
+        expect(result, CameraAnimationResult.cancelled);
+        expect(zoom, lessThan(7));
+      }
+    });
+
     testWidgets('a new camera move cancels a running animation', (
       tester,
     ) async {
       final map = await pumpMap(tester);
-      final animation = map.controller
-          .animateCamera(
-            center: const Geographic(lon: 80, lat: 30),
-            zoom: 6,
-            nativeDuration: const Duration(seconds: 10),
-            webSpeed: 0.1,
-            webMaxDuration: const Duration(seconds: 10),
-          )
-          .then<Object?>((_) => null, onError: (Object error) => error);
+      final animation = map.controller.animateCamera(
+        const CameraUpdate.position(
+          center: Geographic(lon: 80, lat: 30),
+          zoom: 6,
+        ),
+        animation: const CameraAnimation.fly(duration: Duration(seconds: 10)),
+      );
       await tester.pump(const Duration(milliseconds: 300));
+      // On web, the animation already jumped to its end if the browser
+      // prefers reduced motion, as headless Chrome does.
+      final before = map.controller.getCamera();
+      final finished =
+          kIsWeb &&
+          (before.zoom - 6).abs() < 1e-6 &&
+          (before.center.lon - 80).abs() < 1e-6;
       await map.controller.moveCamera(
-        center: const Geographic(lon: -20, lat: -10),
-        zoom: 3,
+        const CameraUpdate.position(
+          center: Geographic(lon: -20, lat: -10),
+          zoom: 3,
+        ),
       );
       final result = await map.pumpFuture(animation, reason: 'animation');
-      // Web reports the cancellation, unless the animation already jumped to
-      // its end because the browser prefers reduced motion.
-      if (kIsWeb && result != null) {
-        expect(
-          result,
-          isA<PlatformException>().having(
-            (error) => error.code,
-            'code',
-            'CancellationException',
-          ),
-        );
-      }
-      await tester.pump(const Duration(milliseconds: 500));
+      expect(
+        result,
+        finished
+            ? CameraAnimationResult.completed
+            : CameraAnimationResult.cancelled,
+      );
       final camera = map.controller.getCamera();
-      expect(camera.center.lon, closeTo(-20, 1e-4));
-      expect(camera.zoom, closeTo(3, 1e-4));
+      expect(camera.zoom, closeTo(3, 1e-6));
+      expect(camera.center.lon, closeTo(-20, 1e-6));
     });
   });
 }

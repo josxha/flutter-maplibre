@@ -40,8 +40,10 @@ void runTests() {
 
       await expectOnPoint();
       await map.controller.moveCamera(
-        center: const Geographic(lon: 3, lat: 2),
-        zoom: 6,
+        const CameraUpdate.position(
+          center: Geographic(lon: 3, lat: 2),
+          zoom: 6,
+        ),
       );
       await map.waitForCamera((camera) => camera.zoom > 5.9);
       await map.pumpUntil(
@@ -61,7 +63,7 @@ void runTests() {
 
       final widths = <double>{};
       for (final zoom in [4.0, 8.0, 12.0, 16.0]) {
-        await map.controller.moveCamera(zoom: zoom);
+        await map.controller.moveCamera(CameraUpdate.position(zoom: zoom));
         await map.pumpUntil(
           () => (map.controller.camera?.zoom ?? 0) == zoom,
           reason: () => 'zoom $zoom never showed',

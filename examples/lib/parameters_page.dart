@@ -94,7 +94,7 @@ class _ParametersPageState extends State<ParametersPage> {
                 minPitch: _minPitch,
                 maxPitch: _maxPitch,
                 maxBounds: _lngLatBounds,
-                initCamera: const InitialCamera.position(zoom: 3),
+                initCamera: const CameraUpdate.position(zoom: 3),
               ),
             ),
           ),

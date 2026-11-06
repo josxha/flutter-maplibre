@@ -8,9 +8,20 @@
 - The camera events are `MapEventCameraMoveStart`, `MapEventCameraMove` and
   `MapEventCameraMoveEnd`, which replaces `MapEventCameraIdle`. All three carry
   the reason, now `gesture`, `programmatic` or `map`.
+- `moveCamera`, `animateCamera` and `MapOptions.initCamera` take a sealed
+  `CameraUpdate` (`position`, `bounds`, `points`, `geometry`), which replaces
+  `InitialCamera` and `fitBounds`.
+- `animateCamera` takes a `CameraAnimation.ease` or `.fly` instead of the
+  `native*` and `web*` parameters, eases for 300 ms by default and returns a
+  `CameraAnimationResult`.
+- `MapCamera` is renamed to `CameraPosition`.
+- `getVisibleRegion` is renamed to `getVisibleBounds`, and
+  `MapCompass.animation` replaces its duration and speed.
 
 ### Features
 
+- `MapController.cameraFor` and `stopCamera`, and `roll` and `padding` on
+  `CameraPosition`.
 - New map events: `onError`, `onStyleImageMissing`, `onLoadingStarted`,
   `onLoadingFinished`, `onSourceChanged`, `onRenderFrame` and `onResize`;
   `onTile`, `onRenderMap`, `onGlyphs` and `onSprite` on native;

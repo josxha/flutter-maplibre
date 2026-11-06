@@ -26,7 +26,7 @@ class _FeaturesQueryPageState extends State<FeaturesQueryPage> {
       body: MapLibreMap(
         options: MapOptions(
           style: MapStyles.openMapTilesLiberty.style,
-          initCamera: const InitialCamera.position(
+          initCamera: const CameraUpdate.position(
             zoom: 7,
             center: Geographic(lon: 0.1, lat: 0.1),
           ),

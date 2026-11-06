@@ -39,7 +39,7 @@ class _LayersWidgetMarkerPageState extends State<LayersWidgetMarkerPage> {
       appBar: AppBar(title: const Text('Marker Layers')),
       body: MapLibreMap(
         options: const MapOptions(
-          initCamera: InitialCamera.position(
+          initCamera: CameraUpdate.position(
             zoom: 7,
             center: Geographic(lon: 9.17, lat: 47.68),
           ),

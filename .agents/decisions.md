@@ -220,7 +220,7 @@ Each entry: the decision, then why.
   `setUp`, which map creation runs once the map is ready), so the first frame
   already shows them. Events that arrive meanwhile wait for
   `MapRenderer.start()`, after `onMapCreated`. The native camera center is unwrapped to the visible
-  world copy; projections keep it, while `MapCamera` wraps the longitude
+  world copy; projections keep it, while `CameraPosition` wraps the longitude
   into [-180, 180).
 - **Dart calls the plugins on its UI thread.** Flutter's Windows and Linux
   texture registrar functions may be called from any thread. On Android the UI
@@ -251,13 +251,27 @@ Each entry: the decision, then why.
 - **`MapOptions.style` is a sealed `MapStyle` and declarative; there is no
   `setStyle`.** Backends switch on the type instead of guessing from the
   string, and a changed `style` loads the new style.
-- **`MapOptions.initCamera` is a sealed `InitialCamera` (position or bounds),
-  null by default.** Null keeps the style's camera; a set camera replaces it
-  as a whole, as both MapLibre Native and gl-js ignore the style camera once
-  the camera changed. Bounds are fitted before the first frame (native:
-  `cameraForLatLngBounds` in `setUp`; web: `fitBounds` with `animate: false`
+- **One sealed `CameraUpdate` (position, bounds, points, geometry) for
+  `MapOptions.initCamera`, `moveCamera`, `animateCamera` and `cameraFor`;
+  one sealed `CameraAnimation` (ease, fly) for how.** Both platforms have
+  jump, ease and fly modes, so there are no platform-prefixed parameters.
+  `initCamera` is null by default: null keeps the style's camera; a set camera
+  replaces it as a whole, as both MapLibre Native and gl-js ignore the style
+  camera once the camera changed. Fit targets are fitted before the first
+  frame (native: `cameraFor*` in `setUp`; web: `cameraForBounds` + `jumpTo`
   right after the map is created, and again in the first post-frame callback,
-  when the element has the size of its platform view).
+  when the element has the size of its platform view). Native fits points
+  with `cameraForLatLngs` and geometries with `cameraForGeometry`; web fits
+  their bounding box. The ffi `CameraFitOptions` has no max zoom, so native
+  clamps the fitted zoom.
+- **`animateCamera` returns `completed` or `cancelled`.** Native reads the
+  outcome from the ffi `endHandler`, but marks a gesture, `moveCamera` or
+  `stopCamera` as cancelled itself, since the ffi counts a later camera write
+  as completed. Web tags each animation's moves with event data and completes
+  it on its `moveend`; a gesture, `moveCamera` or `stopCamera` cancels it
+  first. Projection names stay `toScreenLocation`/`toLngLat` (as in
+  maplibre-compose and the Android SDK); `project` would clash with
+  `MapProjection`.
 - **Bounds are geobase's `GeoBox`, and only the geobase types of the API are
   re-exported** (`show` lists in `maplibre` and
   `maplibre_platform_interface`). Backends import other geobase types from

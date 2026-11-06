@@ -118,13 +118,14 @@ class _UserLocationLayerState extends State<UserLocationLayer> {
     _tracked = true;
     unawaited(
       controller.animateCamera(
-        center: location.position,
-        zoom: zoom,
-        bearing: _tracking == UserLocationTracking.positionAndHeading
-            ? location.heading
-            : null,
-        nativeDuration: widget.trackingDuration,
-        webMaxDuration: widget.trackingDuration,
+        CameraUpdate.position(
+          center: location.position,
+          zoom: zoom,
+          bearing: _tracking == UserLocationTracking.positionAndHeading
+              ? location.heading
+              : null,
+        ),
+        animation: CameraAnimation.fly(duration: widget.trackingDuration),
       ),
     );
   }
@@ -156,7 +157,7 @@ class _UserLocationLayerState extends State<UserLocationLayer> {
   @override
   Widget build(BuildContext context) {
     final controller = MapController.maybeOf(context);
-    final camera = MapCamera.maybeOf(context);
+    final camera = CameraPosition.maybeOf(context);
     final location = _location;
     _UserLocationPainter? painter;
     if (controller != null && camera != null && location != null) {

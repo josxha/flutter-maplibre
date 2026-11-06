@@ -20,7 +20,7 @@ abstract class MapLibreMapState extends State<MapLibreMap>
   MapOptions get options => widget.options;
 
   @override
-  MapCamera? camera;
+  CameraPosition? camera;
 
   /// Set to true once the map is initialized and a [MapController.camera]
   /// is set.
@@ -122,7 +122,7 @@ abstract class MapLibreMapState extends State<MapLibreMap>
               ),
             MapLibreInheritedModel(
               mapController: this,
-              mapCamera: camera,
+              cameraPosition: camera,
               child: isInitialized
                   ? Stack(children: widget.children)
                   : const SizedBox.shrink(),

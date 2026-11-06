@@ -39,7 +39,7 @@ void runTests() {
     ) async {
       final map = await pumpMap(tester, options: _options());
       final size = map.size;
-      final region = map.controller.getVisibleRegion();
+      final region = map.controller.getVisibleBounds();
       final corners = {
         Offset.zero: Geographic(lon: region.west, lat: region.north),
         Offset(size.width, 0): Geographic(lon: region.east, lat: region.north),
@@ -93,7 +93,7 @@ void runTests() {
         expect(back[i].dy, closeTo(points[i].dy, 0.5));
       }
       // Without tilt, east is turned 40 degrees counterclockwise on screen.
-      await map.controller.moveCamera(pitch: 0);
+      await map.controller.moveCamera(const CameraUpdate.position(pitch: 0));
       await map.waitForLatestFrame();
       final east = map.controller.toScreenLocation(
         const Geographic(lon: 9, lat: 47),
@@ -126,7 +126,7 @@ void runTests() {
           cos(left.lat * pi / 180);
       expect(metersPerPixel * 100, closeTo(meters, meters * 0.01));
       // The scale halves with every zoom level.
-      await map.controller.moveCamera(zoom: 15);
+      await map.controller.moveCamera(const CameraUpdate.position(zoom: 15));
       await map.waitForLatestFrame();
       expect(
         map.controller.getMetersPerPixelAtLatitude(left.lat),
@@ -134,18 +134,18 @@ void runTests() {
       );
     });
 
-    testWidgets('getVisibleRegion surrounds the center', (tester) async {
+    testWidgets('getVisibleBounds surrounds the center', (tester) async {
       final map = await pumpMap(tester, options: offlineOptions(zoom: 10));
-      final region = map.controller.getVisibleRegion();
+      final region = map.controller.getVisibleBounds();
       expect(region.west, inExclusiveRange(-10, 0));
       expect(region.east, inExclusiveRange(0, 10));
       expect(region.south, inExclusiveRange(-10, 0));
       expect(region.north, inExclusiveRange(0, 10));
       // A zoom level out doubles the visible longitudes.
       final width = region.east - region.west;
-      await map.controller.moveCamera(zoom: 9);
+      await map.controller.moveCamera(const CameraUpdate.position(zoom: 9));
       await map.waitForLatestFrame();
-      final wider = map.controller.getVisibleRegion();
+      final wider = map.controller.getVisibleBounds();
       expect(wider.east - wider.west, closeTo(width * 2, width * 0.01));
     });
   });

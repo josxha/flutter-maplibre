@@ -66,7 +66,7 @@ class _UserLocationPageState extends State<UserLocationPage> {
       body: MapLibreMap(
         options: MapOptions(
           style: MapStyles.protomapsLight.style,
-          initCamera: const InitialCamera.position(zoom: 1),
+          initCamera: const CameraUpdate.position(zoom: 1),
         ),
         children: [
           if (locations != null)

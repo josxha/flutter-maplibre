@@ -32,8 +32,10 @@ class _StyleLayersLinePageState extends State<StyleLayersLinePage> {
                 OutlinedButton(
                   onPressed: () {
                     _controller?.moveCamera(
-                      center: const Geographic(lon: 9.17, lat: 47.68),
-                      zoom: 7,
+                      const CameraUpdate.position(
+                        center: Geographic(lon: 9.17, lat: 47.68),
+                        zoom: 7,
+                      ),
                     );
                   },
                   child: const Text('Line'),
@@ -41,8 +43,10 @@ class _StyleLayersLinePageState extends State<StyleLayersLinePage> {
                 OutlinedButton(
                   onPressed: () {
                     _controller?.moveCamera(
-                      center: const Geographic(lon: 19.6, lat: 49.5),
-                      zoom: 7,
+                      const CameraUpdate.position(
+                        center: Geographic(lon: 19.6, lat: 49.5),
+                        zoom: 7,
+                      ),
                     );
                   },
                   child: const Text('MultiLine'),
@@ -53,7 +57,7 @@ class _StyleLayersLinePageState extends State<StyleLayersLinePage> {
           Expanded(
             child: MapLibreMap(
               options: const MapOptions(
-                initCamera: InitialCamera.position(
+                initCamera: CameraUpdate.position(
                   zoom: 7,
                   center: Geographic(lon: 9.17, lat: 47.68),
                 ),

@@ -34,13 +34,13 @@ void runTests() {
 
       // A frame demanded before the pause still renders the next update.
       await map.pumpFuture(
-        map.controller.moveCamera(zoom: 5),
+        map.controller.moveCamera(const CameraUpdate.position(zoom: 5)),
         reason: 'moving the camera of a paused map',
       );
       await tester.pump(const Duration(milliseconds: 500));
 
       await map.pumpFuture(
-        map.controller.moveCamera(zoom: 7),
+        map.controller.moveCamera(const CameraUpdate.position(zoom: 7)),
         reason: 'moving the camera of a paused map',
       );
       expect(map.controller.getCamera().zoom, closeTo(7, 1e-6));
@@ -63,9 +63,8 @@ void runTests() {
     ) async {
       final map = await pumpMap(tester);
       final animation = map.controller.animateCamera(
-        zoom: 2,
-        bearing: 40,
-        nativeDuration: const Duration(seconds: 30),
+        const CameraUpdate.position(zoom: 2, bearing: 40),
+        animation: const CameraAnimation.fly(duration: Duration(seconds: 30)),
       );
       await tester.pump(const Duration(milliseconds: 200));
       await setPaused(map, paused: true);

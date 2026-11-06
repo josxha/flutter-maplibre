@@ -32,7 +32,7 @@ MapOptions offlineOptions({
   minZoom: minZoom,
   maxZoom: maxZoom,
   gestures: gestures,
-  initCamera: InitialCamera.position(
+  initCamera: CameraUpdate.position(
     center: center,
     zoom: zoom,
     bearing: bearing,
@@ -170,8 +170,8 @@ class TestMap {
   );
 
   /// Waits until the camera matches [matches], and returns it.
-  Future<MapCamera> waitForCamera(
-    bool Function(MapCamera camera) matches, {
+  Future<CameraPosition> waitForCamera(
+    bool Function(CameraPosition camera) matches, {
     Duration timeout = defaultTimeout,
   }) async {
     await pumpUntil(
@@ -185,7 +185,7 @@ class TestMap {
   /// Waits until the frame on screen shows a camera that [matches]. Screen
   /// locations and [MapController.camera] follow that frame.
   Future<void> waitForFrame(
-    bool Function(MapCamera camera) matches, {
+    bool Function(CameraPosition camera) matches, {
     Duration timeout = defaultTimeout,
   }) async {
     await pumpUntil(

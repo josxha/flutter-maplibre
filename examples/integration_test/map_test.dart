@@ -132,7 +132,7 @@ void runTests() {
       await tester.pump();
 
       expect(map.controller.options, updated);
-      await map.controller.moveCamera(zoom: 10);
+      await map.controller.moveCamera(const CameraUpdate.position(zoom: 10));
       final camera = await map.waitForCamera((camera) => camera.zoom > 4);
       expect(camera.zoom, closeTo(5, 1e-6));
     });
@@ -147,15 +147,17 @@ void runTests() {
           minZoom: 2,
           maxZoom: 6,
           maxPitch: 30,
-          initCamera: const InitialCamera.position(zoom: 3),
+          initCamera: const CameraUpdate.position(zoom: 3),
         ),
       );
-      await map.controller.moveCamera(zoom: 10, pitch: 60);
+      await map.controller.moveCamera(
+        const CameraUpdate.position(zoom: 10, pitch: 60),
+      );
       var camera = await map.waitForCamera((camera) => camera.zoom > 3);
       expect(camera.zoom, closeTo(6, 1e-6));
       expect(camera.pitch, closeTo(30, 1e-6));
 
-      await map.controller.moveCamera(zoom: 0);
+      await map.controller.moveCamera(const CameraUpdate.position(zoom: 0));
       camera = await map.waitForCamera((camera) => camera.zoom < 6);
       expect(camera.zoom, closeTo(2, 1e-6));
     });
@@ -217,7 +219,7 @@ void runTests() {
         tester,
         options: MapOptions(
           style: MapStyle.json(_styleWithCamera),
-          initCamera: const InitialCamera.position(
+          initCamera: const CameraUpdate.position(
             center: Geographic(lon: -3, lat: 4),
             zoom: 2,
           ),
@@ -237,7 +239,7 @@ void runTests() {
         tester,
         options: MapOptions(
           style: MapStyle.json(_styleWithCamera),
-          initCamera: const InitialCamera.bounds(
+          initCamera: const CameraUpdate.bounds(
             bounds,
             padding: EdgeInsets.all(20),
           ),
@@ -247,7 +249,7 @@ void runTests() {
       final shown = map.controller.camera!;
       expect(shown.center.lon, closeTo(0, 1e-6));
       expect(shown.center.lat, closeTo(0, 1e-6));
-      final visible = map.controller.getVisibleRegion();
+      final visible = map.controller.getVisibleBounds();
       expect(visible.west, lessThanOrEqualTo(bounds.west));
       expect(visible.east, greaterThanOrEqualTo(bounds.east));
       expect(visible.south, lessThanOrEqualTo(bounds.south));
@@ -272,7 +274,7 @@ void runTests() {
               child: MapLibreMap(
                 options: MapOptions(
                   style: MapStyle.json(offlineStyle),
-                  initCamera: const InitialCamera.bounds(bounds),
+                  initCamera: const CameraUpdate.bounds(bounds),
                 ),
                 onMapCreated: controller.complete,
                 onStyleLoaded: (_) => style.complete(),
@@ -337,7 +339,7 @@ void runTests() {
 
       expect(left.getCamera().center.lon, closeTo(-40, 1e-6));
       expect(right.getCamera().center.lon, closeTo(40, 1e-6));
-      await left.moveCamera(zoom: 6);
+      await left.moveCamera(const CameraUpdate.position(zoom: 6));
       await tester.pump(const Duration(milliseconds: 200));
       expect(left.getCamera().zoom, closeTo(6, 1e-6));
       expect(right.getCamera().zoom, closeTo(4, 1e-6));

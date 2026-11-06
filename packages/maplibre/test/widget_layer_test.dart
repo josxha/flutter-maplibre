@@ -9,7 +9,7 @@ import 'shared/ui_app.dart';
 void main() {
   group('WidgetLayer', () {
     testWidgets('one marker', (tester) async {
-      const camera = MapCamera(
+      const camera = CameraPosition(
         center: Geographic(lon: 0, lat: 0),
         zoom: 0,
         bearing: 180,
@@ -51,7 +51,7 @@ void main() {
     });
 
     testWidgets('multiple markers', (tester) async {
-      const camera = MapCamera(
+      const camera = CameraPosition(
         center: Geographic(lon: 0, lat: 0),
         zoom: 0,
         bearing: 180,

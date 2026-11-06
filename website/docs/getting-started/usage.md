@@ -84,7 +84,7 @@ class _MyMapWidget extends State<MyMapWidget> {
           options: MapOptions(
             // initCamera can't be updated, move the camera with the
             // MapController instead
-            initCamera: InitialCamera.position(
+            initCamera: CameraUpdate.position(
               center: Geographic(lon: 9.17, lat: 47.68),
               zoom: 3,
             ),
@@ -125,7 +125,7 @@ class _MyMapWidget extends State<MyMapWidget> {
     return Scaffold(
       body: MapLibreMap(
           options: MapOptions(
-            initCamera: InitialCamera.position(
+            initCamera: CameraUpdate.position(
               center: Geographic(lon: 9.17, lat: 47.68),
               zoom: 3,
             ),
@@ -153,7 +153,7 @@ class _MyMapWidget extends State<MyMapWidget> {
     return Scaffold(
       body: MapLibreMap(
           options: MapOptions(
-            initCamera: InitialCamera.position(
+            initCamera: CameraUpdate.position(
               center: Geographic(lon: 9.17, lat: 47.68),
               zoom: 3,
             ),

@@ -56,7 +56,7 @@ class _MapScreenState extends State<MapScreen> {
     final locations = _locations;
     return MapLibreMap(
       options: MapOptions(
-        initCamera: InitialCamera.position(zoom: 1),
+        initCamera: CameraUpdate.position(zoom: 1),
       ),
       children: [
         if (locations != null)

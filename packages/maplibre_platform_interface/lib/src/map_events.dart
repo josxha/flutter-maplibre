@@ -56,7 +56,7 @@ final class MapEventCameraMove extends MapEvent {
   const MapEventCameraMove({required this.camera, required this.reason});
 
   /// The new camera.
-  final MapCamera camera;
+  final CameraPosition camera;
 
   /// Why the camera moves.
   final CameraChangeReason reason;
@@ -73,7 +73,7 @@ final class MapEventCameraMoveEnd extends MapEvent {
   const MapEventCameraMoveEnd({required this.camera, required this.reason});
 
   /// The camera that the move ended at.
-  final MapCamera camera;
+  final CameraPosition camera;
 
   /// Why the camera moved.
   final CameraChangeReason reason;

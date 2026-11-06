@@ -304,7 +304,7 @@ class _OfflineMapPage extends StatelessWidget {
         options: MapOptions(
           style: MapStyle.url(definition.styleUrl),
           maxZoom: 20,
-          initCamera: InitialCamera.position(
+          initCamera: CameraUpdate.position(
             center: Geographic(
               lon: (bounds.east + bounds.west) / 2,
               lat: (bounds.north + bounds.south) / 2,
@@ -337,9 +337,8 @@ class _OfflineMapPage extends StatelessWidget {
         ],
         onMapCreated: (controller) {
           Future.delayed(const Duration(seconds: 1), () {
-            controller.fitBounds(
-              bounds: bounds,
-              padding: const EdgeInsets.all(50),
+            controller.animateCamera(
+              CameraUpdate.bounds(bounds, padding: const EdgeInsets.all(50)),
             );
           });
         },

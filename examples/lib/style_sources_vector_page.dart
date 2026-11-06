@@ -20,7 +20,7 @@ class _StyleSourcesVectorPageState extends State<StyleSourcesVectorPage> {
       appBar: AppBar(title: const Text('Vector Source')),
       body: MapLibreMap(
         options: const MapOptions(
-          initCamera: InitialCamera.position(
+          initCamera: CameraUpdate.position(
             zoom: 2,
             center: Geographic(lon: 9.17, lat: 47.68),
           ),

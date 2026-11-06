@@ -21,7 +21,7 @@ class _StyleLayersSymbolPageState extends State<StyleLayersSymbolPage> {
       appBar: AppBar(title: const Text('Symbol Style Layer')),
       body: MapLibreMap(
         options: const MapOptions(
-          initCamera: InitialCamera.position(
+          initCamera: CameraUpdate.position(
             zoom: 3,
             center: Geographic(lon: 9.17, lat: 47.68),
           ),
