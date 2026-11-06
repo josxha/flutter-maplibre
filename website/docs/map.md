@@ -120,16 +120,16 @@ The camera movements say what the user may change, with any gesture:
 `pan`, `zoom`, `rotate` and `pitch`. The inputs say which gestures work, and
 each one moves the camera only along the movements that are on:
 
-| Input           | Gesture                                                         | Moves                |
-|-----------------|-----------------------------------------------------------------|----------------------|
-| `drag`          | Drag with one finger or the left mouse button                   | pan                  |
-| `fling`         | Keep moving after a fast drag or pinch                          | pan                  |
-| `pinch`         | Move, spread or twist two fingers on the screen or a trackpad   | pan, zoom, rotate    |
-| `scrollWheel`   | Scroll wheel                                                    | zoom                 |
-| `doubleTap`     | Double tap or double click                                      | zoom                 |
-| `doubleTapDrag` | Double tap and drag up or down                                  | zoom                 |
-| `mouseDrag`     | Drag with the right mouse button or Ctrl + left button          | rotate, pitch        |
-| `twoFingerDrag` | Drag two fingers side by side up or down                        | pitch                |
+| Input           | Gesture                                                       | Moves             |
+|-----------------|---------------------------------------------------------------|-------------------|
+| `drag`          | Drag with one finger or the left mouse button                 | pan               |
+| `fling`         | Keep moving after a fast drag or pinch                        | pan               |
+| `pinch`         | Move, spread or twist two fingers on the screen or a trackpad | pan, zoom, rotate |
+| `scrollWheel`   | Scroll wheel                                                  | zoom              |
+| `doubleTap`     | Double tap or double click                                    | zoom              |
+| `doubleTapDrag` | Double tap and drag up or down                                | zoom              |
+| `secondaryDrag` | Drag with the right mouse button or Ctrl + left button        | rotate, pitch     |
+| `twoFingerDrag` | Drag two fingers side by side up or down                      | pitch             |
 
 ```dart
 // No tilting, and no scroll wheel zoom.

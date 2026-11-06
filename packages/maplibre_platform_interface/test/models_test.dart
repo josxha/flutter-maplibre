@@ -340,7 +340,7 @@ void main() {
         all.scrollWheel,
         all.doubleTap,
         all.doubleTapDrag,
-        all.mouseDrag,
+        all.secondaryDrag,
         all.twoFingerDrag,
       ], everyElement(isTrue));
     });

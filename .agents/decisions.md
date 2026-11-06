@@ -441,7 +441,14 @@ Each entry: the decision, then why.
   options can't replace the movement switches: there is no bearing limit,
   and limits also clamp the camera that the app sets. `MapGestures.none()`
   turns the movements off and keeps the inputs on, so
-  `MapGestures.none(zoom: true)` zooms with every zoom input, as in 0.3. A
+  `MapGestures.none(zoom: true)` zooms with every zoom input, as in 0.3. The
+  model is the one of maplibre-compose, whose `MapInteractions` allows the
+  `pan`, `zoom`, `rotate` and `pitch` movements and whose
+  `InteractionBindings` bind inputs that can't enable a disallowed
+  movement. The input names are Flutter's (`pinch`, `scrollWheel`,
+  `doubleTapDrag`, `fling`) rather than Compose's (`transform`, `scroll`,
+  `tapDrag`, momentum), and `secondaryDrag` matches `onSecondaryClick`. The
+  C API has no gesture switches, only `mln_map_apply_camera_delta`. A
   new gesture, or an option such as cooperative gestures for maps in a
   scrolling list, is a new optional field, not a breaking change. A switch
   exists only for a gesture `MapGestureDetector` recognizes: there are no

@@ -314,7 +314,7 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
         (event.buttons & kSecondaryMouseButton != 0 ||
             (event.buttons & kPrimaryMouseButton != 0 &&
                 HardwareKeyboard.instance.isControlPressed)) &&
-        _gestures.mouseDrag &&
+        _gestures.secondaryDrag &&
         (_gestures.rotate || _gestures.pitch)) {
       _secondaryPointer = event.pointer;
       _beginGesture();

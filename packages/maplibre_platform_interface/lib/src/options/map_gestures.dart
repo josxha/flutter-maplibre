@@ -39,7 +39,7 @@ class MapGestures {
     this.scrollWheel = true,
     this.doubleTap = true,
     this.doubleTapDrag = true,
-    this.mouseDrag = true,
+    this.secondaryDrag = true,
     this.twoFingerDrag = true,
   });
 
@@ -59,7 +59,7 @@ class MapGestures {
     this.scrollWheel = true,
     this.doubleTap = true,
     this.doubleTapDrag = true,
-    this.mouseDrag = true,
+    this.secondaryDrag = true,
     this.twoFingerDrag = true,
   });
 
@@ -98,7 +98,7 @@ class MapGestures {
 
   /// Drag with the right mouse button, or with the left button while Ctrl is
   /// held: sideways to [rotate], up or down to [pitch].
-  final bool mouseDrag;
+  final bool secondaryDrag;
 
   /// Drag two fingers side by side up or down to [pitch].
   final bool twoFingerDrag;
@@ -115,7 +115,7 @@ class MapGestures {
     bool? scrollWheel,
     bool? doubleTap,
     bool? doubleTapDrag,
-    bool? mouseDrag,
+    bool? secondaryDrag,
     bool? twoFingerDrag,
   }) => MapGestures(
     pan: pan ?? this.pan,
@@ -128,7 +128,7 @@ class MapGestures {
     scrollWheel: scrollWheel ?? this.scrollWheel,
     doubleTap: doubleTap ?? this.doubleTap,
     doubleTapDrag: doubleTapDrag ?? this.doubleTapDrag,
-    mouseDrag: mouseDrag ?? this.mouseDrag,
+    secondaryDrag: secondaryDrag ?? this.secondaryDrag,
     twoFingerDrag: twoFingerDrag ?? this.twoFingerDrag,
   );
 
@@ -146,7 +146,7 @@ class MapGestures {
           scrollWheel == other.scrollWheel &&
           doubleTap == other.doubleTap &&
           doubleTapDrag == other.doubleTapDrag &&
-          mouseDrag == other.mouseDrag &&
+          secondaryDrag == other.secondaryDrag &&
           twoFingerDrag == other.twoFingerDrag;
 
   @override
@@ -161,7 +161,7 @@ class MapGestures {
     scrollWheel,
     doubleTap,
     doubleTapDrag,
-    mouseDrag,
+    secondaryDrag,
     twoFingerDrag,
   );
 
@@ -170,5 +170,5 @@ class MapGestures {
       'MapGestures(pan: $pan, zoom: $zoom, rotate: $rotate, pitch: $pitch, '
       'drag: $drag, fling: $fling, pinch: $pinch, scrollWheel: $scrollWheel, '
       'doubleTap: $doubleTap, doubleTapDrag: $doubleTapDrag, '
-      'mouseDrag: $mouseDrag, twoFingerDrag: $twoFingerDrag)';
+      'secondaryDrag: $secondaryDrag, twoFingerDrag: $twoFingerDrag)';
 }
