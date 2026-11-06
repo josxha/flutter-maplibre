@@ -521,7 +521,8 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
             padding: padding,
             bearing: update.bearing ?? _map.getBearing(),
             pitch: pitch,
-            maxZoom: update.maxZoom,
+            // An explicit null would reach gl-js as a max zoom of 0.
+            maxZoom: update.maxZoom ?? double.maxFinite,
           ),
         );
         if (camera == null) return null;
