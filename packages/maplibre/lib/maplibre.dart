@@ -145,8 +145,6 @@ export 'package:maplibre_platform_interface/maplibre_platform_interface.dart'
         OfflineResourceException,
         OfflineTileCountLimitException,
         OfflineTilePyramidRegionDefinition,
-        PanGestures,
-        PitchGestures,
         QueryGeometry,
         QueryGeometryPoint,
         QueryGeometryRect,
@@ -166,7 +164,6 @@ export 'package:maplibre_platform_interface/maplibre_platform_interface.dart'
         RawValue,
         RenderedFeature,
         RequestHeaders,
-        RotateGestures,
         Source,
         SourceFeature,
         StringExpression,
@@ -203,7 +200,6 @@ export 'package:maplibre_platform_interface/maplibre_platform_interface.dart'
         VideoSourceAsset,
         VideoSourceBytes,
         VideoSourceUrls,
-        ZoomGestures,
         degree2Radian,
         htmlColorNames;
 

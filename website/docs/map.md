@@ -23,7 +23,7 @@ MapLibreMap(
     maxZoom: 18,
     maxPitch: 60,
     maxBounds: GeoBox(west: 5, south: 45, east: 17, north: 55),
-    gestures: MapGestures(pitch: PitchGestures.none()),
+    gestures: MapGestures(pitch: false),
   ),
 )
 ```
@@ -113,36 +113,37 @@ area with `getVisibleBounds()` and the scale with
 
 ## Gestures
 
-Gestures are recognized in Flutter and are the same on every platform. Each
-one has its own switch in `MapGestures`, grouped by category:
+Gestures are recognized in Flutter and are the same on every platform.
+`MapGestures` has two kinds of switch, and every one is on by default.
 
-| Gesture                                                           | Switch                |
-|-------------------------------------------------------------------|-----------------------|
-| Drag with one finger or the left mouse button                     | `pan.drag`            |
-| Keep moving after a fast drag                                     | `pan.fling`           |
-| Pinch two fingers or on a trackpad                                | `zoom.pinch`          |
-| Scroll wheel                                                      | `zoom.scrollWheel`    |
-| Double tap or double click                                        | `zoom.doubleTap`      |
-| Double tap and drag up or down                                    | `zoom.doubleTapDrag`  |
-| Twist two fingers                                                 | `rotate.twist`        |
-| Drag sideways with the right mouse button or Ctrl + left button   | `rotate.mouseDrag`    |
-| Drag two fingers side by side up or down                          | `pitch.twoFingerDrag` |
-| Drag up or down with the right mouse button or Ctrl + left button | `pitch.mouseDrag`     |
+The camera movements say what the user may change, with any gesture:
+`pan`, `zoom`, `rotate` and `pitch`. The inputs say which gestures work, and
+each one moves the camera only along the movements that are on:
 
-Every gesture is on by default. Turn off a whole category with its `none()`
-constructor, single gestures with their parameters, or start from
-`MapGestures.none()` and turn on only what you need:
+| Input           | Gesture                                                         | Moves                |
+|-----------------|-----------------------------------------------------------------|----------------------|
+| `drag`          | Drag with one finger or the left mouse button                   | pan                  |
+| `fling`         | Keep moving after a fast drag or pinch                          | pan                  |
+| `pinch`         | Move, spread or twist two fingers on the screen or a trackpad   | pan, zoom, rotate    |
+| `scrollWheel`   | Scroll wheel                                                    | zoom                 |
+| `doubleTap`     | Double tap or double click                                      | zoom                 |
+| `doubleTapDrag` | Double tap and drag up or down                                  | zoom                 |
+| `mouseDrag`     | Drag with the right mouse button or Ctrl + left button          | rotate, pitch        |
+| `twoFingerDrag` | Drag two fingers side by side up or down                        | pitch                |
 
 ```dart
 // No tilting, and no scroll wheel zoom.
-const MapGestures(
-  pitch: PitchGestures.none(),
-  zoom: ZoomGestures(scrollWheel: false),
-)
+const MapGestures(pitch: false, scrollWheel: false)
+
+// Pinch zooms and pans, but doesn't rotate the map.
+const MapGestures(rotate: false)
 
 // Only pan, by dragging.
-const MapGestures.none(pan: PanGestures(fling: false))
+const MapGestures.none(pan: true, fling: false)
 ```
+
+The switches only stop the user. To keep the camera within limits for the app
+too, use `minZoom`, `maxZoom`, `minPitch`, `maxPitch` and `maxBounds`.
 
 Widgets in `MapLibreMap.children` receive their own taps and drags before the
 map does.

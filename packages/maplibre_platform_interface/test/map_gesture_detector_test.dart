@@ -305,7 +305,7 @@ void main() {
     ) async {
       await pumpMap(
         tester,
-        gestures: const MapGestures(zoom: ZoomGestures.none()),
+        gestures: const MapGestures(zoom: false),
         listenToDoubleClicks: false,
       );
       await tester.tapAt(_center);
@@ -413,10 +413,7 @@ void main() {
     });
 
     testWidgets('a drag without fling stops on release', (tester) async {
-      await pumpMap(
-        tester,
-        gestures: const MapGestures(pan: PanGestures(fling: false)),
-      );
+      await pumpMap(tester, gestures: const MapGestures(fling: false));
       await tester.flingFrom(_center, const Offset(-300, 0), 1000);
       await tester.pumpAndSettle();
       expect(camera.panned.dx, lessThan(-200));
@@ -426,10 +423,7 @@ void main() {
     testWidgets('the scroll wheel can be off while pinching zooms', (
       tester,
     ) async {
-      await pumpMap(
-        tester,
-        gestures: const MapGestures(zoom: ZoomGestures(scrollWheel: false)),
-      );
+      await pumpMap(tester, gestures: const MapGestures(scrollWheel: false));
       final pointer = TestPointer(1, PointerDeviceKind.mouse);
       await tester.sendEventToBinding(pointer.hover(_center));
       await tester.sendEventToBinding(pointer.scroll(const Offset(0, -450)));
@@ -452,7 +446,7 @@ void main() {
     ) async {
       await pumpMap(
         tester,
-        gestures: const MapGestures(zoom: ZoomGestures(doubleTap: false)),
+        gestures: const MapGestures(doubleTap: false),
         listenToDoubleClicks: false,
       );
       await tester.tapAt(_center);
@@ -478,10 +472,7 @@ void main() {
     testWidgets('a double tap zooms while double tap drags are off', (
       tester,
     ) async {
-      await pumpMap(
-        tester,
-        gestures: const MapGestures(zoom: ZoomGestures(doubleTapDrag: false)),
-      );
+      await pumpMap(tester, gestures: const MapGestures(doubleTapDrag: false));
       await tester.tapAt(_center);
       await tester.pump(const Duration(milliseconds: 50));
       final gesture = await tester.startGesture(_center);
@@ -503,13 +494,10 @@ void main() {
       expect(camera.zooms.single.$1, 1);
     });
 
-    testWidgets('a mouse drag only tilts while its rotation is off', (
+    testWidgets('a mouse drag only tilts while rotation is off', (
       tester,
     ) async {
-      await pumpMap(
-        tester,
-        gestures: const MapGestures(rotate: RotateGestures(mouseDrag: false)),
-      );
+      await pumpMap(tester, gestures: const MapGestures(rotate: false));
       await mouseDrag(
         tester,
         _center + const Offset(0, 100),
@@ -519,13 +507,10 @@ void main() {
       expect(camera.pitched, closeTo(25, 1e-9));
     });
 
-    testWidgets('a mouse drag only rotates while its tilt is off', (
+    testWidgets('a mouse drag only rotates while tilting is off', (
       tester,
     ) async {
-      await pumpMap(
-        tester,
-        gestures: const MapGestures(pitch: PitchGestures(mouseDrag: false)),
-      );
+      await pumpMap(tester, gestures: const MapGestures(pitch: false));
       await mouseDrag(
         tester,
         _center + const Offset(0, 100),
@@ -538,10 +523,7 @@ void main() {
     testWidgets('two fingers dragged up pan while their tilt is off', (
       tester,
     ) async {
-      await pumpMap(
-        tester,
-        gestures: const MapGestures(pitch: PitchGestures(twoFingerDrag: false)),
-      );
+      await pumpMap(tester, gestures: const MapGestures(twoFingerDrag: false));
       final a = await tester.startGesture(_center - const Offset(50, 0));
       final b = await tester.startGesture(_center + const Offset(50, 0));
       for (var i = 0; i < 10; i++) {
@@ -572,24 +554,18 @@ void main() {
     testWidgets('a drag neither pans nor starts a gesture while it is off', (
       tester,
     ) async {
-      await pumpMap(
-        tester,
-        gestures: const MapGestures(pan: PanGestures.none()),
-      );
+      await pumpMap(tester, gestures: const MapGestures(drag: false));
       await tester.dragFrom(_center, const Offset(-200, 0));
       await tester.pumpAndSettle();
       // A drag that moves nothing doesn't stop a running animation.
       expect(camera.calls, isEmpty);
+      // Two fingers still move the map.
       await pinchOut(tester);
       expect(camera.zoomed, greaterThan(0.5));
-      expect(camera.panned, Offset.zero);
     });
 
     testWidgets('a pinch does not zoom while it is off', (tester) async {
-      await pumpMap(
-        tester,
-        gestures: const MapGestures(zoom: ZoomGestures(pinch: false)),
-      );
+      await pumpMap(tester, gestures: const MapGestures(pinch: false));
       await pinchOut(tester);
       expect(camera.zoomed, 0);
       final pointer = TestPointer(1, PointerDeviceKind.trackpad);
@@ -630,13 +606,53 @@ void main() {
       expect(camera.rotated, isNot(0));
     });
 
-    testWidgets('a twist does not rotate while it is off', (tester) async {
-      await pumpMap(
-        tester,
-        gestures: const MapGestures(rotate: RotateGestures(twist: false)),
-      );
+    testWidgets('a pinch zooms but does not rotate while rotation is off', (
+      tester,
+    ) async {
+      await pumpMap(tester, gestures: const MapGestures(rotate: false));
       await twist(tester);
       expect(camera.rotated, 0);
+      await pinchOut(tester);
+      expect(camera.zoomed, greaterThan(0.5));
+    });
+
+    testWidgets('no gesture pans while panning is off', (tester) async {
+      await pumpMap(tester, gestures: const MapGestures(pan: false));
+      await tester.dragFrom(_center, const Offset(-200, 0));
+      await tester.pumpAndSettle();
+      expect(camera.calls, isEmpty);
+      final a = await tester.startGesture(_center - const Offset(50, 0));
+      final b = await tester.startGesture(_center + const Offset(50, 0));
+      for (var i = 0; i < 10; i++) {
+        await a.moveBy(const Offset(-15, 0));
+        await b.moveBy(const Offset(-5, 0));
+        await tester.pump(const Duration(milliseconds: 16));
+      }
+      await a.up();
+      await b.up();
+      await tester.pumpAndSettle();
+      // The pinch zooms around its center but doesn't move the map.
+      expect(camera.zoomed, greaterThan(0));
+      expect(camera.panned, Offset.zero);
+      expect(camera.endVelocity, Velocity.zero);
+    });
+
+    testWidgets('no gesture zooms while zooming is off', (tester) async {
+      await pumpMap(
+        tester,
+        gestures: const MapGestures(zoom: false),
+        listenToDoubleClicks: false,
+      );
+      final mouse = TestPointer(1, PointerDeviceKind.mouse);
+      await tester.sendEventToBinding(mouse.hover(_center));
+      await tester.sendEventToBinding(mouse.scroll(const Offset(0, -450)));
+      await pinchOut(tester);
+      await tester.tapAt(_center);
+      await tester.pump(const Duration(milliseconds: 50));
+      await tester.tapAt(_center);
+      await tester.pumpAndSettle();
+      expect(camera.zoomed, 0);
+      expect(camera.zooms, isEmpty);
     });
 
     testWidgets('a widget over the map keeps its pointers', (tester) async {

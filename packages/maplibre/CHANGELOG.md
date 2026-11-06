@@ -20,15 +20,16 @@
   geobase `Geometry`.
 - `getVisibleRegion` is renamed to `getVisibleBounds`, and
   `MapCompass.animation` replaces its duration and speed.
-- `MapGestures` has one switch per gesture, grouped in `PanGestures`,
-  `ZoomGestures`, `RotateGestures` and `PitchGestures`; `MapGestures.all()` is
-  now `MapGestures()`.
 - GeoJSON data is a `GeoJsonData` of geobase objects, decoded JSON or text,
   instead of a string.
 - `setProjection` takes an `Expression<MapProjection>`.
+- `MapGestures.all()` is now `MapGestures()`, and `MapGestures.allEnabled`
+  was removed.
 
 ### Features
 
+- `MapGestures` switches single inputs on and off, such as `scrollWheel`,
+  `pinch` or `fling`, and every switch defaults to on.
 - `MapLibreNetwork` adds HTTP headers to and rewrites the URLs of the
   requests of every map and the `OfflineManager`.
 - `queryRenderedFeatures` takes a `filter` expression and can query the whole
@@ -47,7 +48,7 @@
   `onTile`, `onRenderMap`, `onGlyphs` and `onSprite` on native;
   `onContextLost`, `onContextRestored` and `onProjectionChanged` on web.
 - Taps are reported right away while neither `onDoubleClick` nor
-  `ZoomGestures.doubleTap` is set.
+  `MapGestures.doubleTap` is on.
 - `MapEventDoubleClick.preventDefault()` keeps a double tap from zooming,
   also from an async `onDoubleClick`.
 - `MapOptions.fastPforEnabled` decodes MapLibre Tile (MLT) vector tiles that

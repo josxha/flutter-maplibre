@@ -155,7 +155,7 @@ class _WidgetLayerPageState extends State<WidgetLayerInteractivePage> {
 
     setState(() {
       // Disable camera panning while a marker gets moved.
-      _mapGestures = const MapGestures(pan: PanGestures.none());
+      _mapGestures = const MapGestures(pan: false);
     });
   }
 

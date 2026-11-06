@@ -433,14 +433,19 @@ Each entry: the decision, then why.
 
 ## Gestures
 
-- **`MapGestures` groups the gestures by what they do, and each category
-  class (`PanGestures`, `ZoomGestures`, `RotateGestures`, `PitchGestures`)
-  has one switch per recognized gesture.** All default to on; `none()` turns
-  a category off. A new gesture, or an option such as cooperative gestures
-  for maps in a scrolling list, is a new optional field, not a breaking
-  change. A switch exists only for a gesture `MapGestureDetector`
-  recognizes: there are no keyboard or box zoom switches until those are
-  implemented.
+- **`MapGestures` is flat: camera movements (`pan`, `zoom`, `rotate`,
+  `pitch`) and inputs (`drag`, `pinch`, `scrollWheel`, ...), all on by
+  default.** An input moves the camera only along the movements that are on.
+  Grouping inputs by movement didn't fit, because a two-finger pinch pans,
+  zooms and rotates, and a right-button drag rotates and tilts. Min/max
+  options can't replace the movement switches: there is no bearing limit,
+  and limits also clamp the camera that the app sets. `MapGestures.none()`
+  turns the movements off and keeps the inputs on, so
+  `MapGestures.none(zoom: true)` zooms with every zoom input, as in 0.3. A
+  new gesture, or an option such as cooperative gestures for maps in a
+  scrolling list, is a new optional field, not a breaking change. A switch
+  exists only for a gesture `MapGestureDetector` recognizes: there are no
+  keyboard or box zoom switches until those are implemented.
 - **One gesture recognizer in Dart serves every platform:
   `MapGestureDetector` in `maplibre_platform_interface`.** It sits there, not
   in `maplibre`, because the platform packages need it and `maplibre` depends
