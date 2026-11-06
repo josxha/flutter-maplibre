@@ -64,7 +64,7 @@ your `build()` method with:
 
 - `MapController.of(context)` / `MapController.maybeOf(context)`
 - `MapOptions.of(context)` / `MapOptions.maybeOf(context)`
-- `MapCamera.of(context)` / `MapCamera.maybeOf(context)`
+- `CameraPosition.of(context)` / `CameraPosition.maybeOf(context)`
 
 ## User Location & Permissions
 

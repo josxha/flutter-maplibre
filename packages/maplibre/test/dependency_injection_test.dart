@@ -8,7 +8,7 @@ import 'shared/ui_app.dart';
 
 void main() {
   group('the map in the widget tree', () {
-    const camera = MapCamera(
+    const camera = CameraPosition(
       center: Geographic(lon: 1, lat: 2),
       zoom: 3,
       bearing: 0,
@@ -46,8 +46,8 @@ void main() {
       final context = await pumpChild(tester, controller);
       expect(MapController.maybeOf(context), same(controller));
       expect(MapController.of(context), same(controller));
-      expect(MapCamera.maybeOf(context), camera);
-      expect(MapCamera.of(context), camera);
+      expect(CameraPosition.maybeOf(context), camera);
+      expect(CameraPosition.of(context), camera);
       expect(MapOptions.maybeOf(context), same(options));
       expect(MapOptions.of(context), same(options));
     });
@@ -63,10 +63,10 @@ void main() {
         ),
       );
       expect(MapController.maybeOf(context), isNull);
-      expect(MapCamera.maybeOf(context), isNull);
+      expect(CameraPosition.maybeOf(context), isNull);
       expect(MapOptions.maybeOf(context), isNull);
       expect(() => MapController.of(context), throwsStateError);
-      expect(() => MapCamera.of(context), throwsStateError);
+      expect(() => CameraPosition.of(context), throwsStateError);
     });
   });
 }

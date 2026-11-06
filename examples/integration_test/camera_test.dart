@@ -173,7 +173,7 @@ void runTests() {
           padding: EdgeInsets.only(top: 200),
         ),
       );
-      // Padding is not part of MapCamera, so waitForLatestFrame can't tell a
+      // Padding is not part of CameraPosition, so waitForLatestFrame can't tell a
       // frame with it from the earlier frame at the same center.
       Offset center() =>
           map.controller.toScreenLocation(const Geographic(lon: 0, lat: 0));

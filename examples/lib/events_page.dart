@@ -94,7 +94,7 @@ class _EventsPageState extends State<EventsPage> {
       '${_formatGeographic(event.point)}, '
       'screen: ${_formatOffset(event.screenPoint)}';
 
-  String _camera(MapCamera camera) =>
+  String _camera(CameraPosition camera) =>
       'center ${_formatGeographic(camera.center)}, '
       'zoom ${camera.zoom.toStringAsFixed(2)}, '
       'pitch ${camera.pitch.toStringAsFixed(2)}, '

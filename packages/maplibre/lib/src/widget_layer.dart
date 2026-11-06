@@ -24,7 +24,7 @@ class WidgetLayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = MapController.maybeOf(context);
-    final camera = MapCamera.maybeOf(context);
+    final camera = CameraPosition.maybeOf(context);
     if (controller == null || camera == null) return const SizedBox.shrink();
 
     Widget buildChild(List<Offset> offsets) => Stack(

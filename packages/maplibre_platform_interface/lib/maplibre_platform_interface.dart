@@ -18,13 +18,13 @@ export 'package:geobase/geobase.dart'
         earthCircumferenceWgs84;
 
 export 'src/camera_animation.dart';
+export 'src/camera_position.dart';
 export 'src/camera_update.dart';
 export 'src/extensions.dart';
 export 'src/gestures/gesture_camera_sink.dart';
 export 'src/gestures/map_gesture_detector.dart';
 export 'src/layer/layer.dart';
 export 'src/layer/layer_manager.dart';
-export 'src/map_camera.dart';
 export 'src/map_controller.dart';
 export 'src/map_events.dart';
 export 'src/map_style.dart';

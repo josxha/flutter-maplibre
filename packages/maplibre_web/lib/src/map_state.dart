@@ -461,14 +461,14 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   }
 
   @override
-  Future<MapCamera> cameraFor(CameraUpdate update) async {
+  Future<CameraPosition> cameraFor(CameraUpdate update) async {
     final current = getCamera();
     final target = _target(update, resetPadding: false);
     if (target == null) return current;
     T? field<T extends JSAny>(String name) =>
         target.has(name) ? target[name] as T? : null;
     final padding = field<interop.PaddingOptions>('padding');
-    return MapCamera(
+    return CameraPosition(
       center: field<interop.LngLat>('center')?.toGeographic() ?? current.center,
       zoom: field<JSNumber>('zoom')?.toDartDouble ?? current.zoom,
       bearing: field<JSNumber>('bearing')?.toDartDouble ?? current.bearing,
@@ -576,7 +576,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       );
 
   @override
-  MapCamera getCamera() => MapCamera(
+  CameraPosition getCamera() => CameraPosition(
     center: _map.getCenter().toGeographic(),
     zoom: _map.getZoom().toDouble(),
     pitch: _map.getPitch().toDouble(),

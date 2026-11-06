@@ -112,7 +112,7 @@ pitch: ${camera.pitch}'''),
                     }
                   },
                   child: const Text(
-                    'Current\nMapCamera',
+                    'Current\nCameraPosition',
                     textAlign: TextAlign.center,
                   ),
                 ),

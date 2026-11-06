@@ -102,7 +102,7 @@ if a gesture, `moveCamera` or `stopCamera()` stopped it. A later
 `MapController.getCamera()` returns the current camera, and the
 `MapController.camera` getter returns it too, or null before the map is
 ready. `MapLibreMap.onCameraMove` reports every change. Widgets in `MapLibreMap.children` can read the camera with
-`MapCamera.of(context)` and rebuild when it changes.
+`CameraPosition.of(context)` and rebuild when it changes.
 
 The controller also converts between coordinates and screen positions with
 `toScreenLocation`, `toLngLat` and their list variants, returns the visible

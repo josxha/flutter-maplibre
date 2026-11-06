@@ -6,9 +6,9 @@ import 'package:maplibre_platform_interface/src/widget/inherited_model.dart';
 ///
 /// {@category Basic}
 @immutable
-class MapCamera {
-  /// Default constructor for a [MapCamera].
-  const MapCamera({
+class CameraPosition {
+  /// Default constructor for a [CameraPosition].
+  const CameraPosition({
     required this.center,
     required this.zoom,
     required this.bearing,
@@ -47,20 +47,20 @@ class MapCamera {
     padding: padding,
   );
 
-  /// Find the [MapCamera] of the closest [MapLibreMap] in the widget tree.
+  /// Find the [CameraPosition] of the closest [MapLibreMap] in the widget tree.
   /// Returns null if called outside of the [MapLibreMap.children].
-  static MapCamera? maybeOf(BuildContext context) =>
-      MapLibreInheritedModel.maybeMapCameraOf(context);
+  static CameraPosition? maybeOf(BuildContext context) =>
+      MapLibreInheritedModel.maybeCameraPositionOf(context);
 
-  /// Find the [MapCamera] of the closest [MapLibreMap] in the widget tree.
+  /// Find the [CameraPosition] of the closest [MapLibreMap] in the widget tree.
   /// Throws an [StateError] if called outside of the [MapLibreMap.children].
-  static MapCamera of(BuildContext context) =>
+  static CameraPosition of(BuildContext context) =>
       maybeOf(context) ??
-      (throw StateError('Unable to find an instance of MapCamera'));
+      (throw StateError('Unable to find an instance of CameraPosition'));
 
   @override
   String toString() =>
-      'MapCamera('
+      'CameraPosition('
       'center: Geographic(lon: ${center.lon}, lat: ${center.lat}), '
       'zoom: $zoom, bearing: $bearing, pitch: $pitch, roll: $roll, '
       'padding: $padding)';
@@ -68,7 +68,7 @@ class MapCamera {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is MapCamera &&
+      other is CameraPosition &&
           runtimeType == other.runtimeType &&
           center == other.center &&
           zoom == other.zoom &&

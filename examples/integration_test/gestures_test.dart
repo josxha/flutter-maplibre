@@ -38,7 +38,7 @@ Future<void> _mouseDrag(
 }
 
 /// The signed bearing change from [before] to [after], in (-180, 180].
-double _turned(MapCamera before, MapCamera after) {
+double _turned(CameraPosition before, CameraPosition after) {
   final delta = (after.bearing - before.bearing) % 360;
   return delta > 180 ? delta - 360 : delta;
 }

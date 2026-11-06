@@ -13,7 +13,7 @@ void main() {
   });
 
   group('MapControlButtons', () {
-    const camera = MapCamera(
+    const camera = CameraPosition(
       center: Geographic(lon: 0, lat: 0),
       zoom: 5,
       bearing: 12,

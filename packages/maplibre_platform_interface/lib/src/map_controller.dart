@@ -72,13 +72,13 @@ abstract interface class MapController {
   ///
   /// [CameraUpdatePosition.anchor] is not taken into account: the camera
   /// keeps the center of [update], or the current one.
-  Future<MapCamera> cameraFor(CameraUpdate update);
+  Future<CameraPosition> cameraFor(CameraUpdate update);
 
   /// Get the current camera position on the map.
-  MapCamera getCamera();
+  CameraPosition getCamera();
 
   /// Get the current camera position on the map.
-  MapCamera? get camera;
+  CameraPosition? get camera;
 
   /// Whether the map stopped rendering, because [MapLibreMap.paused] is set
   /// or the map is hidden. See [MapLibreMap.paused].

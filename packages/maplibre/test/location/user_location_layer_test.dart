@@ -9,7 +9,7 @@ import 'package:mocktail/mocktail.dart';
 import '../shared/mocks.dart';
 import '../shared/ui_app.dart';
 
-const _camera = MapCamera(
+const _camera = CameraPosition(
   center: Geographic(lon: 0, lat: 0),
   zoom: 10,
   bearing: 30,

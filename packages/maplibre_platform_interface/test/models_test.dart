@@ -121,7 +121,7 @@ void main() {
     });
 
     test('a camera turns into the update that restores it', () {
-      const camera = MapCamera(
+      const camera = CameraPosition(
         center: Geographic(lon: 1, lat: 2),
         zoom: 3,
         bearing: 4,
@@ -185,8 +185,8 @@ void main() {
     });
   });
 
-  group('MapCamera', () {
-    const camera = MapCamera(
+  group('CameraPosition', () {
+    const camera = CameraPosition(
       center: Geographic(lon: 12, lat: 2),
       zoom: 2,
       bearing: 213,
@@ -196,7 +196,7 @@ void main() {
     test('compares by value', () {
       expect(
         camera,
-        const MapCamera(
+        const CameraPosition(
           center: Geographic(lon: 12, lat: 2),
           zoom: 2,
           bearing: 213,
@@ -204,25 +204,25 @@ void main() {
         ),
       );
       for (final other in const [
-        MapCamera(
+        CameraPosition(
           center: Geographic(lon: 13, lat: 2),
           zoom: 2,
           bearing: 213,
           pitch: 12,
         ),
-        MapCamera(
+        CameraPosition(
           center: Geographic(lon: 12, lat: 2),
           zoom: 3,
           bearing: 213,
           pitch: 12,
         ),
-        MapCamera(
+        CameraPosition(
           center: Geographic(lon: 12, lat: 2),
           zoom: 2,
           bearing: 0,
           pitch: 12,
         ),
-        MapCamera(
+        CameraPosition(
           center: Geographic(lon: 12, lat: 2),
           zoom: 2,
           bearing: 213,
@@ -236,7 +236,7 @@ void main() {
     test('toString names every value', () {
       expect(
         camera.toString(),
-        'MapCamera(center: Geographic(lon: 12.0, lat: 2.0), zoom: 2.0, '
+        'CameraPosition(center: Geographic(lon: 12.0, lat: 2.0), zoom: 2.0, '
         'bearing: 213.0, pitch: 12.0, roll: 0.0, padding: EdgeInsets.zero)',
       );
     });
@@ -470,7 +470,12 @@ void main() {
     });
 
     test('camera events carry the camera and the reason', () {
-      const camera = MapCamera(center: point, zoom: 1, bearing: 0, pitch: 0);
+      const camera = CameraPosition(
+        center: point,
+        zoom: 1,
+        bearing: 0,
+        pitch: 0,
+      );
       const move = MapEventCameraMove(
         camera: camera,
         reason: CameraChangeReason.gesture,

@@ -41,8 +41,8 @@ same on every platform.
 | `onSecondaryClick`    | The user clicked the map with the secondary (right) mouse button.                                 |
 | `onLongClick`         | The user pressed the map for a longer time.                                                       |
 | `onCameraMoveStart`   | The camera starts to move. `reason` says whether a gesture, the app or the map moved it.          |
-| `onCameraMove`        | The camera moved. Holds the new `MapCamera` and the `reason`.                                     |
-| `onCameraMoveEnd`     | The camera stopped moving. Holds the `MapCamera` it ended at and the `reason`.                    |
+| `onCameraMove`        | The camera moved. Holds the new `CameraPosition` and the `reason`.                                     |
+| `onCameraMoveEnd`     | The camera stopped moving. Holds the `CameraPosition` it ended at and the `reason`.                    |
 | `onIdle`              | The map finished rendering and no animation runs.                                                 |
 | `onError`             | The style, a source, glyphs or a sprite failed to load, or rendering failed.                      |
 | `onStyleImageMissing` | A layer uses an image that the style doesn't have. Add it with `StyleController.addImage`.        |

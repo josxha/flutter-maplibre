@@ -88,7 +88,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
   int? _shownExtentGeneration;
 
   /// The camera of the last camera event, to report each change once.
-  MapCamera? _eventCamera;
+  CameraPosition? _eventCamera;
 
   var _gestureActive = false;
   var _cameraMoving = false;
@@ -466,7 +466,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
     }
     _shownProjection?.close();
     _shownProjection = projection;
-    final shown = _toMapCamera(frame.view.camera);
+    final shown = _toCameraPosition(frame.view.camera);
     final resized = frame.generation != _shownExtentGeneration;
     _shownExtentGeneration = frame.generation;
     if (shown == camera && !resized) return;
@@ -562,15 +562,15 @@ class MapLibreMapStateNative extends MapLibreMapState {
     setState(() {});
   }
 
-  MapCamera? _readCamera() {
+  CameraPosition? _readCamera() {
     final map = _map;
     if (map == null || _disposed) return null;
-    return _toMapCamera(map.getSnapshot().view.camera);
+    return _toCameraPosition(map.getSnapshot().view.camera);
   }
 
   /// The native center is unwrapped to the visible world copy; the public
   /// camera wraps its longitude into [-180, 180).
-  static MapCamera _toMapCamera(mln.Camera native) => MapCamera(
+  static CameraPosition _toCameraPosition(mln.Camera native) => CameraPosition(
     center: Geographic(
       lon: (native.center.longitude + 180) % 360 - 180,
       lat: native.center.latitude,
@@ -619,7 +619,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
   // The map's latest camera, so it reflects a completed moveCamera. [camera]
   // instead follows the frame on screen, for widgets over the map.
   @override
-  MapCamera getCamera() =>
+  CameraPosition getCamera() =>
       _readCamera() ??
       camera ??
       (throw StateError('The map has not been created yet.'));
@@ -718,7 +718,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
   Future<void> stopCamera() async => _cancelAnimation();
 
   @override
-  Future<MapCamera> cameraFor(CameraUpdate update) async {
+  Future<CameraPosition> cameraFor(CameraUpdate update) async {
     final map = _map;
     if (map == null) {
       throw StateError('The map has not been created yet.');
@@ -727,7 +727,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
     final camera = await _cameraOptions(map, update);
     final center = camera.center;
     final padding = camera.padding;
-    return MapCamera(
+    return CameraPosition(
       center: center == null ? current.center : _geographic(center),
       zoom: camera.zoom ?? current.zoom,
       bearing: camera.bearing ?? current.bearing,

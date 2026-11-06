@@ -8,12 +8,13 @@ import 'package:mocktail/mocktail.dart';
 import '../shared/mocks.dart';
 import '../shared/ui_app.dart';
 
-MapCamera _camera({double bearing = 0, double pitch = 0}) => MapCamera(
-  center: const Geographic(lon: 0, lat: 0),
-  zoom: 3,
-  bearing: bearing,
-  pitch: pitch,
-);
+CameraPosition _camera({double bearing = 0, double pitch = 0}) =>
+    CameraPosition(
+      center: const Geographic(lon: 0, lat: 0),
+      zoom: 3,
+      bearing: bearing,
+      pitch: pitch,
+    );
 
 void main() {
   setUpAll(() {
@@ -34,7 +35,7 @@ void main() {
 
     Future<void> pump(
       WidgetTester tester,
-      MapCamera camera,
+      CameraPosition camera,
       MapCompass compass,
     ) async {
       when(controller.getCamera).thenReturn(camera);

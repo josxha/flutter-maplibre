@@ -6,7 +6,7 @@ import 'package:mocktail/mocktail.dart';
 import '../shared/mocks.dart';
 import '../shared/ui_app.dart';
 
-MapCamera _camera(double zoom) => MapCamera(
+CameraPosition _camera(double zoom) => CameraPosition(
   center: const Geographic(lon: 0, lat: 0),
   zoom: zoom,
   bearing: 0,

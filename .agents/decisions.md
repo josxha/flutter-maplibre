@@ -220,7 +220,7 @@ Each entry: the decision, then why.
   `setUp`, which map creation runs once the map is ready), so the first frame
   already shows them. Events that arrive meanwhile wait for
   `MapRenderer.start()`, after `onMapCreated`. The native camera center is unwrapped to the visible
-  world copy; projections keep it, while `MapCamera` wraps the longitude
+  world copy; projections keep it, while `CameraPosition` wraps the longitude
   into [-180, 180).
 - **Dart calls the plugins on its UI thread.** Flutter's Windows and Linux
   texture registrar functions may be called from any thread. On Android the UI

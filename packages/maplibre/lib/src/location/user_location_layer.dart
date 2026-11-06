@@ -157,7 +157,7 @@ class _UserLocationLayerState extends State<UserLocationLayer> {
   @override
   Widget build(BuildContext context) {
     final controller = MapController.maybeOf(context);
-    final camera = MapCamera.maybeOf(context);
+    final camera = CameraPosition.maybeOf(context);
     final location = _location;
     _UserLocationPainter? painter;
     if (controller != null && camera != null && location != null) {

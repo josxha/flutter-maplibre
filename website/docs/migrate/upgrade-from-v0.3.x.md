@@ -297,6 +297,7 @@ await controller.animateCamera(
 | `webMaxZoom`                         | `maxZoom` of `CameraUpdate.bounds`                   |
 | `fitBounds(offset:)`                 | Removed; uneven `padding` of `CameraUpdate.bounds` moves the fitted area instead |
 | `getVisibleRegion()`                 | `getVisibleBounds()`                                 |
+| `MapCamera`, `MapCamera.of(context)` | `CameraPosition`, `CameraPosition.of(context)`       |
 | `MapCompass.nativeRotationDuration`, `webRotationSpeed` | `MapCompass.animation`            |
 | A `PlatformException` when an animation is cancelled (web) | `CameraAnimationResult.cancelled` |
 

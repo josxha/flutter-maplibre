@@ -14,13 +14,14 @@
 - `animateCamera` takes a `CameraAnimation.ease` or `.fly` instead of the
   `native*` and `web*` parameters, eases for 300 ms by default and returns a
   `CameraAnimationResult`.
+- `MapCamera` is renamed to `CameraPosition`.
 - `getVisibleRegion` is renamed to `getVisibleBounds`, and
   `MapCompass.animation` replaces its duration and speed.
 
 ### Features
 
 - `MapController.cameraFor` and `stopCamera`, and `roll` and `padding` on
-  `MapCamera`.
+  `CameraPosition`.
 - New map events: `onError`, `onStyleImageMissing`, `onLoadingStarted`,
   `onLoadingFinished`, `onSourceChanged`, `onRenderFrame` and `onResize`;
   `onTile`, `onRenderMap`, `onGlyphs` and `onSprite` on native;
