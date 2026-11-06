@@ -412,7 +412,8 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   @override
   Future<void> moveCamera(CameraUpdate update) async {
     final target = _targetReplacing(update, CameraAnimationResult.cancelled);
-    if (target == null) return;
+    // A move stops a running animation, even if there is nowhere to move.
+    if (target == null) return stopCamera();
     _nextGestureCausedByController = true;
     _map.jumpTo(target as interop.JumpToOptions);
   }
