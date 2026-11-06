@@ -604,29 +604,30 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   }
 
   @override
-  Future<List<RenderedFeature>> featuresAtPoint(
-    Offset point, {
+  Future<List<RenderedFeature>> queryRenderedFeatures(
+    QueryGeometry geometry, {
     List<String>? layerIds,
-  }) async => _renderedFeatures(
-    _map.queryRenderedFeatures(point.toJsPoint(), _queryOptions(layerIds)),
-  );
-
-  @override
-  Future<List<RenderedFeature>> featuresInRect(
-    Rect rect, {
-    List<String>? layerIds,
-  }) async => _renderedFeatures(
-    _map.queryRenderedFeaturesRect(
-      [rect.bottomLeft.toJsPoint(), rect.topRight.toJsPoint()].toJS,
-      _queryOptions(layerIds),
-    ),
-  );
-
-  static interop.QueryRenderedFeaturesOptions _queryOptions(
-    List<String>? layerIds,
-  ) => interop.QueryRenderedFeaturesOptions(
-    layers: layerIds?.map((l) => l.toJS).toList(growable: false).toJS,
-  );
+    Expression<bool>? filter,
+  }) async {
+    // Only set fields go into the options, since gl-js reads an explicit
+    // null as a value.
+    final options = JSObject();
+    if (layerIds != null) {
+      options['layers'] = layerIds.map((l) => l.toJS).toList().toJS;
+    }
+    if (filter != null) options['filter'] = filter.toJson().jsify();
+    return _renderedFeatures(switch (geometry) {
+      QueryGeometryPoint(:final point) => _map.queryRenderedFeatures(
+        point.toJsPoint(),
+        options,
+      ),
+      QueryGeometryRect(:final rect) => _map.queryRenderedFeaturesRect(
+        [rect.bottomLeft.toJsPoint(), rect.topRight.toJsPoint()].toJS,
+        options,
+      ),
+      QueryGeometryViewport() => _map.queryRenderedFeaturesAll(options),
+    });
+  }
 
   static List<RenderedFeature> _renderedFeatures(
     JSArray<interop.MapGeoJSONFeature> features,
@@ -635,7 +636,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         (f) => RenderedFeature(
           id: f.id.dartify(),
           properties: f.properties.asStringMap() ?? {},
-          geometry: f.geometry.asStringMap(),
+          geometry: RenderedFeature.geometryFromJson(f.geometry.dartify()),
           sourceId: f.source,
           sourceLayer: f.sourceLayer,
           layerId: f.layer.id,

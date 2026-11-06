@@ -15,11 +15,16 @@
   `native*` and `web*` parameters, eases for 300 ms by default and returns a
   `CameraAnimationResult`.
 - `MapCamera` is renamed to `CameraPosition`.
+- `featuresAtPoint` and `featuresInRect` are replaced by
+  `queryRenderedFeatures(QueryGeometry)`, and `RenderedFeature.geometry` is a
+  geobase `Geometry`.
 - `getVisibleRegion` is renamed to `getVisibleBounds`, and
   `MapCompass.animation` replaces its duration and speed.
 
 ### Features
 
+- `queryRenderedFeatures` takes a `filter` expression and can query the whole
+  map with `QueryGeometry.viewport()`.
 - `MapController.cameraFor` and `stopCamera`, and `roll` and `padding` on
   `CameraPosition`.
 - New map events: `onError`, `onStyleImageMissing`, `onLoadingStarted`,

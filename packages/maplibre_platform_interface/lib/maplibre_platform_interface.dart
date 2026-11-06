@@ -33,6 +33,7 @@ export 'src/offline/offline_manager.dart';
 export 'src/offline/offline_region.dart';
 export 'src/options/map_options.dart';
 export 'src/platform_interface.dart';
+export 'src/query_geometry.dart';
 export 'src/rendered_feature.dart';
 export 'src/style/style.dart';
 export 'src/style_controller.dart';

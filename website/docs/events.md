@@ -77,7 +77,9 @@ waits for it before it zooms:
 
 ```dart
 onDoubleClick: (event) async {
-  final features = await _controller.featuresAtPoint(event.screenPoint);
+  final features = await _controller.queryRenderedFeatures(
+    .point(event.screenPoint),
+  );
   if (features.isNotEmpty) {
     event.preventDefault();
     // handle the double tap on the feature

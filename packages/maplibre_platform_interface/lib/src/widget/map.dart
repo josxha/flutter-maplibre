@@ -100,7 +100,9 @@ class MapLibreMap extends StatefulWidget {
   ///
   /// ```dart
   /// onDoubleClick: (event) async {
-  ///   final features = await controller.featuresAtPoint(event.screenPoint);
+  ///   final features = await controller.queryRenderedFeatures(
+  ///     .point(event.screenPoint),
+  ///   );
   ///   if (features.isNotEmpty) event.preventDefault();
   /// },
   /// ```

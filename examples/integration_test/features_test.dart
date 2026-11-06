@@ -90,37 +90,44 @@ Set<String?> _kinds(List<RenderedFeature> features) =>
 
 void runTests() {
   group('feature queries', () {
-    testWidgets('featuresAtPoint finds what is drawn at a point', (
-      tester,
-    ) async {
+    testWidgets('a point query finds what is drawn at a point', (tester) async {
       final map = await pumpMap(
         tester,
         options: offlineOptions(center: _center, zoom: 10),
       );
       await _addFixture(map);
 
-      expect(await map.controller.featuresAtPoint(Offset.zero), isEmpty);
+      expect(
+        await map.controller.queryRenderedFeatures(const .point(Offset.zero)),
+        isEmpty,
+      );
 
-      final features = await map.controller.featuresAtPoint(map.center);
+      final features = await map.controller.queryRenderedFeatures(
+        .point(map.center),
+      );
       expect(_kinds(features), {'point', 'polygon'});
       final point = features.singleWhere((f) => f.sourceId == 'point_source');
       expect(idOf(point), '1');
       expect(point.sourceLayer, isNull);
       expect(point.properties['kind'], 'point');
+      expect(point.geometry, isA<Point>());
+      final geometry = point.geometry! as Point;
+      expect(geometry.position.x, closeTo(_center.lon, 1e-4));
+      expect(geometry.position.y, closeTo(_center.lat, 1e-4));
       final polygon = features.singleWhere(
         (f) => f.sourceId == 'polygon_source',
       );
       expect(idOf(polygon), '3');
     });
 
-    testWidgets('featuresAtPoint filters by layer', (tester) async {
+    testWidgets('a point query filters by layer', (tester) async {
       final map = await pumpMap(
         tester,
         options: offlineOptions(center: _center, zoom: 10),
       );
       await _addFixture(map);
-      var features = await map.controller.featuresAtPoint(
-        map.center,
+      var features = await map.controller.queryRenderedFeatures(
+        .point(map.center),
         layerIds: ['polygon_layer'],
       );
       expect(_kinds(features), {'polygon'});
@@ -137,20 +144,23 @@ void runTests() {
         map.center,
         (features) => features.length == 3,
       );
-      features = await map.controller.featuresAtPoint(
-        map.center,
+      features = await map.controller.queryRenderedFeatures(
+        .point(map.center),
         layerIds: ['point_layer', 'point_layer_2'],
       );
       expect(features, hasLength(2));
       expect(_kinds(features), {'point'});
 
       expect(
-        await map.controller.featuresAtPoint(map.center, layerIds: []),
+        await map.controller.queryRenderedFeatures(
+          .point(map.center),
+          layerIds: [],
+        ),
         isEmpty,
       );
     });
 
-    testWidgets('featuresInRect finds what is drawn in a rectangle', (
+    testWidgets('a rect query finds what is drawn in a rectangle', (
       tester,
     ) async {
       final map = await pumpMap(
@@ -160,33 +170,86 @@ void runTests() {
       await _addFixture(map);
 
       expect(
-        await map.controller.featuresInRect(const Rect.fromLTWH(0, 0, 10, 10)),
+        await map.controller.queryRenderedFeatures(
+          const .rect(Rect.fromLTWH(0, 0, 10, 10)),
+        ),
         isEmpty,
       );
-      var features = await map.controller.featuresInRect(
-        Rect.fromCenter(center: map.center, width: 2, height: 2),
+      var features = await map.controller.queryRenderedFeatures(
+        .rect(Rect.fromCenter(center: map.center, width: 2, height: 2)),
       );
       expect(_kinds(features), {'point', 'polygon'});
 
       final lineStart = map.controller.toScreenLocation(
         const Geographic(lon: 0.095, lat: 0.11),
       );
-      features = await map.controller.featuresInRect(
-        Rect.fromCenter(center: lineStart, width: 4, height: 4),
+      features = await map.controller.queryRenderedFeatures(
+        .rect(Rect.fromCenter(center: lineStart, width: 4, height: 4)),
         layerIds: ['line_layer'],
       );
       expect(_kinds(features), {'line'});
 
       final everything = Offset.zero & map.size;
-      features = await map.controller.featuresInRect(everything);
+      features = await map.controller.queryRenderedFeatures(.rect(everything));
       expect(_kinds(features), {'point', 'line', 'polygon'});
-      features = await map.controller.featuresInRect(
-        everything,
+      features = await map.controller.queryRenderedFeatures(
+        .rect(everything),
         layerIds: ['point_layer', 'line_layer'],
       );
       expect(_kinds(features), {'point', 'line'});
       expect(
-        await map.controller.featuresInRect(everything, layerIds: []),
+        await map.controller.queryRenderedFeatures(
+          .rect(everything),
+          layerIds: [],
+        ),
+        isEmpty,
+      );
+    });
+
+    testWidgets('a viewport query finds everything in the map', (tester) async {
+      final map = await pumpMap(
+        tester,
+        options: offlineOptions(center: _center, zoom: 10),
+      );
+      await _addFixture(map);
+      final features = await map.controller.queryRenderedFeatures(
+        const .viewport(),
+      );
+      expect(_kinds(features), {'point', 'line', 'polygon'});
+      expect(
+        features.singleWhere((f) => f.sourceId == 'line_source').geometry,
+        isA<LineString>(),
+      );
+      expect(
+        features.singleWhere((f) => f.sourceId == 'polygon_source').geometry,
+        isA<Polygon>(),
+      );
+    });
+
+    testWidgets('a query filters with an expression', (tester) async {
+      final map = await pumpMap(
+        tester,
+        options: offlineOptions(center: _center, zoom: 10),
+      );
+      await _addFixture(map);
+      var features = await map.controller.queryRenderedFeatures(
+        const .viewport(),
+        filter: .equal(.get('kind'), const .literal('line')),
+      );
+      expect(_kinds(features), {'line'});
+
+      features = await map.controller.queryRenderedFeatures(
+        .point(map.center),
+        filter: .notEqual(.get('kind'), const .literal('point')),
+      );
+      expect(_kinds(features), {'polygon'});
+
+      expect(
+        await map.controller.queryRenderedFeatures(
+          const .viewport(),
+          layerIds: ['point_layer'],
+          filter: .equal(.get('kind'), const .literal('line')),
+        ),
         isEmpty,
       );
     });
