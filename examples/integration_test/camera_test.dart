@@ -87,7 +87,8 @@ void runTests() {
           zoom: 6,
           bearing: 45,
           pitch: 30,
-          nativeDuration: const Duration(milliseconds: 300),
+          // Long enough that a slow CI runner reads the camera mid-way.
+          nativeDuration: const Duration(seconds: 1),
           webMaxDuration: const Duration(milliseconds: 300),
         ),
         reason: 'animateCamera',
