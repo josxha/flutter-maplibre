@@ -111,6 +111,11 @@ void runTests() {
     ) async {
       final server = await _StyleServer.start();
       addTearDown(server.close);
+      // Entries that match no kind leave no rules, which must not keep a map
+      // from starting.
+      MapLibreNetwork.requestHeaders = [
+        const RequestHeaders({'X-Maplibre-Test': 'none'}, kinds: {}),
+      ];
       // The headers reach a map that already exists.
       final map = await pumpMap(tester);
       MapLibreNetwork.requestHeaders = [

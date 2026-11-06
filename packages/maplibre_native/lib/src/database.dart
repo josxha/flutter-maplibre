@@ -93,16 +93,13 @@ Future<void> _applyNetwork(
   RuntimeHandle runtime, {
   required bool changed,
 }) async {
-  final headers = MapLibreNetwork.requestHeaders;
-  if (headers.isNotEmpty) {
-    await runtime.setHttpHeaderTransform(
-      HttpHeaderTransform(
-        rules: [
-          for (final entry in headers)
-            if (entry.kinds?.isEmpty != true) entry.toMln(),
-        ],
-      ),
-    );
+  // Entries without kinds match nothing, and an empty rule table is invalid.
+  final rules = [
+    for (final entry in MapLibreNetwork.requestHeaders)
+      if (entry.kinds?.isEmpty != true) entry.toMln(),
+  ];
+  if (rules.isNotEmpty) {
+    await runtime.setHttpHeaderTransform(HttpHeaderTransform(rules: rules));
   } else if (changed) {
     await runtime.clearHttpHeaderTransform();
   }
@@ -119,6 +116,24 @@ void _transformResource(
   ResourceKind kind,
   String url,
   ResourceTransformRequestHandle request,
-) => request.complete(
-  MapLibreNetwork.transformUrl(url, kind.toMapResourceKind()),
-);
+) {
+  final transformed = MapLibreNetwork.transformUrl(
+    url,
+    kind.toMapResourceKind(),
+  );
+  try {
+    request.complete(transformed);
+  } on Object catch (error, stack) {
+    // Native rejects some URLs, such as an empty one. Releasing the request
+    // keeps its URL.
+    request.close();
+    FlutterError.reportError(
+      FlutterErrorDetails(
+        exception: error,
+        stack: stack,
+        library: 'maplibre',
+        context: ErrorDescription('while transforming the URL $url'),
+      ),
+    );
+  }
+}
