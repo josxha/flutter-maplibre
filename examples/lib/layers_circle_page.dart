@@ -25,7 +25,7 @@ class _LayersCirclePageState extends State<LayersCirclePage> {
       appBar: AppBar(title: const Text('Circle Layers')),
       body: MapLibreMap(
         options: const MapOptions(
-          initCamera: InitialCamera.position(
+          initCamera: CameraUpdate.position(
             zoom: 7,
             center: Geographic(lon: 9.17, lat: 47.68),
           ),

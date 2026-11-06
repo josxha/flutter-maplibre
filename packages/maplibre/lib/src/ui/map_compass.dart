@@ -14,8 +14,9 @@ class MapCompass extends StatelessWidget {
     this.child,
     super.key,
     this.rotationOffset = 0,
-    this.nativeRotationDuration = const Duration(milliseconds: 200),
-    this.webRotationSpeed = 1.2,
+    this.animation = const CameraAnimation.ease(
+      duration: Duration(milliseconds: 200),
+    ),
     this.removePinchOnPressed = false,
     this.rotateNorthOnPressed = true,
     this.onPressed,
@@ -61,13 +62,8 @@ class MapCompass extends StatelessWidget {
   /// Defaults to 10px on all sides.
   final EdgeInsets padding;
 
-  /// The duration of the rotation animation.
-  ///
-  /// Default to 200 ms. Only supported on android and iOS.
-  final Duration nativeRotationDuration;
-
-  /// The speed of the rotation animation on web.
-  final double webRotationSpeed;
+  /// The animation that rotates the map north. Defaults to a 200 ms ease.
+  final CameraAnimation animation;
 
   /// The compass radius.
   final double radius;
@@ -103,10 +99,11 @@ class MapCompass extends StatelessWidget {
   void _onTap(MapController controller) {
     if (rotateNorthOnPressed || removePinchOnPressed) {
       controller.animateCamera(
-        bearing: rotateNorthOnPressed ? 0 : null,
-        pitch: removePinchOnPressed ? 0 : null,
-        nativeDuration: nativeRotationDuration,
-        webSpeed: webRotationSpeed,
+        CameraUpdate.position(
+          bearing: rotateNorthOnPressed ? 0 : null,
+          pitch: removePinchOnPressed ? 0 : null,
+        ),
+        animation: animation,
       );
     }
     onPressed?.call();

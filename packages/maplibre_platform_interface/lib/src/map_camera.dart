@@ -13,6 +13,8 @@ class MapCamera {
     required this.zoom,
     required this.bearing,
     required this.pitch,
+    this.roll = 0,
+    this.padding = EdgeInsets.zero,
   });
 
   /// The position of the map center.
@@ -26,6 +28,24 @@ class MapCamera {
 
   /// The camera pitch of the map.
   final double pitch;
+
+  /// The camera roll of the map in degrees.
+  final double roll;
+
+  /// The insets in logical pixels that move the center of the camera away
+  /// from the center of the map.
+  final EdgeInsets padding;
+
+  /// A [CameraUpdate] that moves a map to this camera, for example to
+  /// restore a saved camera.
+  CameraUpdatePosition toCameraUpdate() => CameraUpdatePosition(
+    center: center,
+    zoom: zoom,
+    bearing: bearing,
+    pitch: pitch,
+    roll: roll,
+    padding: padding,
+  );
 
   /// Find the [MapCamera] of the closest [MapLibreMap] in the widget tree.
   /// Returns null if called outside of the [MapLibreMap.children].
@@ -42,7 +62,8 @@ class MapCamera {
   String toString() =>
       'MapCamera('
       'center: Geographic(lon: ${center.lon}, lat: ${center.lat}), '
-      'zoom: $zoom, bearing: $bearing, pitch: $pitch)';
+      'zoom: $zoom, bearing: $bearing, pitch: $pitch, roll: $roll, '
+      'padding: $padding)';
 
   @override
   bool operator ==(Object other) =>
@@ -52,8 +73,10 @@ class MapCamera {
           center == other.center &&
           zoom == other.zoom &&
           bearing == other.bearing &&
-          pitch == other.pitch;
+          pitch == other.pitch &&
+          roll == other.roll &&
+          padding == other.padding;
 
   @override
-  int get hashCode => Object.hash(center, zoom, bearing, pitch);
+  int get hashCode => Object.hash(center, zoom, bearing, pitch, roll, padding);
 }

@@ -14,7 +14,7 @@ change at any time, for example with `setState()`, and the map follows:
 MapLibreMap(
   options: MapOptions(
     style: MapStyle.url('https://demotiles.maplibre.org/style.json'),
-    initCamera: InitialCamera.position(
+    initCamera: CameraUpdate.position(
       center: Geographic(lon: 9.17, lat: 47.68),
       zoom: 7,
     ),
@@ -38,17 +38,19 @@ MapLibreMap(
 
 ## Initial camera
 
-`initCamera` sets where the map starts:
+`initCamera` sets where the map starts. It takes a `CameraUpdate`, like the
+camera methods of the controller:
 
-- `InitialCamera.position` starts at a `center`, `zoom`, `bearing` and
-  `pitch`.
-- `InitialCamera.bounds` fits a `GeoBox` into the map from its first frame,
-  inset by `padding`, with an optional `bearing` and `pitch`.
+- `CameraUpdate.position` starts at a `center`, `zoom`, `bearing`, `pitch`
+  and `roll`.
+- `CameraUpdate.bounds`, `CameraUpdate.points` and `CameraUpdate.geometry`
+  fit a target into the map from its first frame, inset by `padding`, with an
+  optional `bearing`, `pitch` and `maxZoom`.
 - Without `initCamera`, the map starts at the camera stored in the style.
 
 ```dart
 MapOptions(
-  initCamera: InitialCamera.bounds(
+  initCamera: CameraUpdate.bounds(
     GeoBox(west: 9.5, south: 47.4, east: 9.8, north: 47.6),
     padding: EdgeInsets.all(32),
   ),
@@ -57,31 +59,43 @@ MapOptions(
 
 ## Move the camera
 
-Use the `MapController` to move the camera after the map was created:
+Use the `MapController` to move the camera after the map was created. Every
+method takes a `CameraUpdate`, and fields of `CameraUpdate.position` that you
+leave out keep their value:
 
 ```dart
 // jump to a position
-await controller.moveCamera(center: Geographic(lon: 9.17, lat: 47.68), zoom: 10);
+await controller.moveCamera(
+  const CameraUpdate.position(center: Geographic(lon: 9.17, lat: 47.68), zoom: 10),
+);
 
-// animate to a position
+// ease to a position, 300 ms by default
 await controller.animateCamera(
-  center: Geographic(lon: 9.17, lat: 47.68),
-  zoom: 12,
-  bearing: 45,
-  pitch: 30,
-  nativeDuration: const Duration(seconds: 1),
+  const CameraUpdate.position(zoom: 12, bearing: 45, pitch: 30),
 );
 
-// fit bounds into the map
-await controller.fitBounds(
-  bounds: GeoBox(west: 9.5, south: 47.4, east: 9.8, north: 47.6),
-  padding: const EdgeInsets.all(32),
+// fly to bounds
+final result = await controller.animateCamera(
+  CameraUpdate.bounds(
+    GeoBox(west: 9.5, south: 47.4, east: 9.8, north: 47.6),
+    padding: const EdgeInsets.all(32),
+  ),
+  animation: const CameraAnimation.fly(duration: Duration(seconds: 2)),
 );
+
+// the camera that shows some points, without moving the map
+final camera = await controller.cameraFor(CameraUpdate.points(stops));
 ```
 
-The returned `Future`s complete when the camera arrived. `nativeDuration`
-sets the length of an animation on native platforms; on web, MapLibre GL JS
-picks it from `webSpeed` and `webMaxDuration`.
+`CameraAnimation.ease` interpolates the camera over a `duration` along a
+`curve`. `CameraAnimation.fly` zooms out and in again like a flight, which
+suits far targets; without a `duration`, it takes as long as its `speed`
+needs.
+
+`animateCamera` completes when the animation ends, with
+`CameraAnimationResult.completed`, or with `CameraAnimationResult.cancelled`
+if a gesture, `moveCamera` or `stopCamera()` stopped it. A later
+`animateCamera` takes over and completes the earlier one.
 
 ## Read the camera
 
@@ -92,7 +106,7 @@ ready. `MapLibreMap.onCameraMove` reports every change. Widgets in `MapLibreMap.
 
 The controller also converts between coordinates and screen positions with
 `toScreenLocation`, `toLngLat` and their list variants, returns the visible
-area with `getVisibleRegion()` and the scale with
+area with `getVisibleBounds()` and the scale with
 `getMetersPerPixelAtLatitude()`.
 
 ## Gestures

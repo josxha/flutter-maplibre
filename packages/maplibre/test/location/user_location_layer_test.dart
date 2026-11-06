@@ -22,7 +22,8 @@ Offset _toScreen(Geographic point) =>
 
 void main() {
   setUpAll(() {
-    registerFallbackValue(MockDuration());
+    registerFallbackValue(const CameraUpdate.position());
+    registerFallbackValue(const CameraAnimation.ease());
     registerFallbackValue(const Geographic(lon: 0, lat: 0));
   });
 
@@ -42,14 +43,9 @@ void main() {
                 .toList(),
       );
       when(
-        () => controller.animateCamera(
-          center: any(named: 'center'),
-          zoom: any(named: 'zoom'),
-          bearing: any(named: 'bearing'),
-          nativeDuration: any(named: 'nativeDuration'),
-          webMaxDuration: any(named: 'webMaxDuration'),
-        ),
-      ).thenAnswer((_) async {});
+        () =>
+            controller.animateCamera(any(), animation: any(named: 'animation')),
+      ).thenAnswer((_) async => CameraAnimationResult.completed);
     });
 
     tearDown(() => locations.close());
@@ -149,13 +145,8 @@ void main() {
         const UserLocation(position: Geographic(lon: 1, lat: 2)),
       );
       verifyNever(
-        () => controller.animateCamera(
-          center: any(named: 'center'),
-          zoom: any(named: 'zoom'),
-          bearing: any(named: 'bearing'),
-          nativeDuration: any(named: 'nativeDuration'),
-          webMaxDuration: any(named: 'webMaxDuration'),
-        ),
+        () =>
+            controller.animateCamera(any(), animation: any(named: 'animation')),
       );
     });
 
@@ -176,15 +167,15 @@ void main() {
       const duration = Duration(milliseconds: 500);
       verifyInOrder([
         () => controller.animateCamera(
-          center: const Geographic(lon: 1, lat: 2),
-          zoom: 15,
-          nativeDuration: duration,
-          webMaxDuration: duration,
+          const CameraUpdate.position(
+            center: Geographic(lon: 1, lat: 2),
+            zoom: 15,
+          ),
+          animation: const CameraAnimation.fly(duration: duration),
         ),
         () => controller.animateCamera(
-          center: const Geographic(lon: 3, lat: 4),
-          nativeDuration: duration,
-          webMaxDuration: duration,
+          const CameraUpdate.position(center: Geographic(lon: 3, lat: 4)),
+          animation: const CameraAnimation.fly(duration: duration),
         ),
       ]);
     });
@@ -197,10 +188,11 @@ void main() {
       );
       verify(
         () => controller.animateCamera(
-          center: const Geographic(lon: 1, lat: 2),
-          bearing: 90,
-          nativeDuration: any(named: 'nativeDuration'),
-          webMaxDuration: any(named: 'webMaxDuration'),
+          const CameraUpdate.position(
+            center: Geographic(lon: 1, lat: 2),
+            bearing: 90,
+          ),
+          animation: any(named: 'animation'),
         ),
       ).called(1);
     });
@@ -216,9 +208,8 @@ void main() {
       await pump(tester, tracking: UserLocationTracking.position);
       verify(
         () => controller.animateCamera(
-          center: const Geographic(lon: 1, lat: 2),
-          nativeDuration: any(named: 'nativeDuration'),
-          webMaxDuration: any(named: 'webMaxDuration'),
+          const CameraUpdate.position(center: Geographic(lon: 1, lat: 2)),
+          animation: any(named: 'animation'),
         ),
       ).called(1);
     });
@@ -235,11 +226,8 @@ void main() {
         const UserLocation(position: Geographic(lon: 1, lat: 2)),
       );
       verifyNever(
-        () => controller.animateCamera(
-          center: any(named: 'center'),
-          nativeDuration: any(named: 'nativeDuration'),
-          webMaxDuration: any(named: 'webMaxDuration'),
-        ),
+        () =>
+            controller.animateCamera(any(), animation: any(named: 'animation')),
       );
     });
 

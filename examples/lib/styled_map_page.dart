@@ -32,7 +32,7 @@ class _StyledMapPageState extends State<StyledMapPage> {
       body: MapLibreMap(
         options: MapOptions(
           style: _style.style,
-          initCamera: const InitialCamera.position(
+          initCamera: const CameraUpdate.position(
             center: Geographic(lon: 9.17, lat: 47.68),
             zoom: 2,
           ),

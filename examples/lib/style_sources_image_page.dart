@@ -18,7 +18,7 @@ class _StyleSourcesImagePageState extends State<StyleSourcesImagePage> {
       appBar: AppBar(title: const Text('Image Source')),
       body: MapLibreMap(
         options: const MapOptions(
-          initCamera: InitialCamera.position(
+          initCamera: CameraUpdate.position(
             zoom: 4,
             center: Geographic(lon: -76, lat: 41),
           ),

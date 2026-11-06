@@ -25,7 +25,7 @@ class _TwoMapsPageState extends State<TwoMapsPage> {
           Expanded(
             child: MapLibreMap(
               options: const MapOptions(
-                initCamera: InitialCamera.position(
+                initCamera: CameraUpdate.position(
                   center: Geographic(lon: 9.17, lat: 47.68),
                 ),
               ),
@@ -40,7 +40,7 @@ class _TwoMapsPageState extends State<TwoMapsPage> {
           Expanded(
             child: MapLibreMap(
               options: const MapOptions(
-                initCamera: InitialCamera.position(
+                initCamera: CameraUpdate.position(
                   center: Geographic(lon: 9.17, lat: 47.68),
                 ),
               ),
@@ -73,10 +73,12 @@ class _ButtonsWidget extends StatelessWidget {
           OutlinedButton(
             onPressed: () {
               controller?.moveCamera(
-                center: const Geographic(lon: 172.4714, lat: -42.4862),
-                zoom: 4,
-                bearing: 0,
-                pitch: 0,
+                const CameraUpdate.position(
+                  center: Geographic(lon: 172.4714, lat: -42.4862),
+                  zoom: 4,
+                  bearing: 0,
+                  pitch: 0,
+                ),
               );
             },
             child: const Text('Move to New Zealand'),
@@ -84,10 +86,13 @@ class _ButtonsWidget extends StatelessWidget {
           OutlinedButton(
             onPressed: () {
               controller?.animateCamera(
-                center: const Geographic(lon: -18.6874, lat: 64.9445),
-                zoom: 5,
-                bearing: -50,
-                pitch: 60,
+                const CameraUpdate.position(
+                  center: Geographic(lon: -18.6874, lat: 64.9445),
+                  zoom: 5,
+                  bearing: -50,
+                  pitch: 60,
+                ),
+                animation: const CameraAnimation.fly(),
               );
             },
             child: const Text('Animate to Iceland'),

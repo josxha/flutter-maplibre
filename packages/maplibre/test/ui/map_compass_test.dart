@@ -17,7 +17,8 @@ MapCamera _camera({double bearing = 0, double pitch = 0}) => MapCamera(
 
 void main() {
   setUpAll(() {
-    registerFallbackValue(MockDuration());
+    registerFallbackValue(const CameraUpdate.position());
+    registerFallbackValue(const CameraAnimation.ease());
   });
 
   group('MapCompass', () {
@@ -26,13 +27,9 @@ void main() {
     setUp(() {
       controller = MockMapController();
       when(
-        () => controller.animateCamera(
-          bearing: any(named: 'bearing'),
-          pitch: any(named: 'pitch'),
-          nativeDuration: any(named: 'nativeDuration'),
-          webSpeed: any(named: 'webSpeed'),
-        ),
-      ).thenAnswer((_) async {});
+        () =>
+            controller.animateCamera(any(), animation: any(named: 'animation')),
+      ).thenAnswer((_) async => CameraAnimationResult.completed);
     });
 
     Future<void> pump(
@@ -81,8 +78,10 @@ void main() {
       await tester.tap(find.byType(InkWell));
       verify(
         () => controller.animateCamera(
-          bearing: 0,
-          nativeDuration: const Duration(milliseconds: 200),
+          const CameraUpdate.position(bearing: 0),
+          animation: const CameraAnimation.ease(
+            duration: Duration(milliseconds: 200),
+          ),
         ),
       ).called(1);
       expect(pressed, 1);
@@ -100,9 +99,8 @@ void main() {
       await tester.tap(find.byType(InkWell));
       verify(
         () => controller.animateCamera(
-          pitch: 0,
-          nativeDuration: any(named: 'nativeDuration'),
-          webSpeed: any(named: 'webSpeed'),
+          const CameraUpdate.position(pitch: 0),
+          animation: any(named: 'animation'),
         ),
       ).called(1);
     });
@@ -116,12 +114,8 @@ void main() {
       );
       await tester.tap(find.byType(InkWell));
       verifyNever(
-        () => controller.animateCamera(
-          bearing: any(named: 'bearing'),
-          pitch: any(named: 'pitch'),
-          nativeDuration: any(named: 'nativeDuration'),
-          webSpeed: any(named: 'webSpeed'),
-        ),
+        () =>
+            controller.animateCamera(any(), animation: any(named: 'animation')),
       );
       expect(pressed, 1);
     });

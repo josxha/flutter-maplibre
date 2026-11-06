@@ -8,7 +8,8 @@ import '../shared/ui_app.dart';
 
 void main() {
   setUpAll(() {
-    registerFallbackValue(MockDuration());
+    registerFallbackValue(const CameraUpdate.position());
+    registerFallbackValue(const CameraAnimation.ease());
   });
 
   group('MapControlButtons', () {
@@ -24,11 +25,9 @@ void main() {
       controller = MockMapController();
       when(controller.getCamera).thenReturn(camera);
       when(
-        () => controller.animateCamera(
-          zoom: any(named: 'zoom'),
-          nativeDuration: any(named: 'nativeDuration'),
-        ),
-      ).thenAnswer((_) async {});
+        () =>
+            controller.animateCamera(any(), animation: any(named: 'animation')),
+      ).thenAnswer((_) async => CameraAnimationResult.completed);
     });
 
     Future<void> pump(WidgetTester tester) => tester.pumpWidget(
@@ -61,8 +60,10 @@ void main() {
       await tester.tap(find.byIcon(Icons.add));
       verify(
         () => controller.animateCamera(
-          zoom: 6,
-          nativeDuration: const Duration(milliseconds: 200),
+          const CameraUpdate.position(zoom: 6),
+          animation: const CameraAnimation.ease(
+            duration: Duration(milliseconds: 200),
+          ),
         ),
       ).called(1);
     });
@@ -72,8 +73,10 @@ void main() {
       await tester.tap(find.byIcon(Icons.remove));
       verify(
         () => controller.animateCamera(
-          zoom: 4,
-          nativeDuration: const Duration(milliseconds: 200),
+          const CameraUpdate.position(zoom: 4),
+          animation: const CameraAnimation.ease(
+            duration: Duration(milliseconds: 200),
+          ),
         ),
       ).called(1);
     });

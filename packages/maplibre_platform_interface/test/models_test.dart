@@ -1,3 +1,4 @@
+import 'package:flutter/animation.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
@@ -6,8 +7,8 @@ import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 // instance.
 MapStyle _url(String url) => MapStyle.url(url);
 MapStyle _json(String json) => MapStyle.json(json);
-InitialCamera _position(double zoom) => InitialCamera.position(zoom: zoom);
-InitialCamera _bounds(double north) => InitialCamera.bounds(
+CameraUpdate _position(double zoom) => CameraUpdate.position(zoom: zoom);
+CameraUpdate _bounds(double north) => CameraUpdate.bounds(
   GeoBox(west: -10, south: -5, east: 10, north: north),
   padding: const EdgeInsets.all(8),
 );
@@ -41,16 +42,20 @@ void main() {
     });
   });
 
-  group('InitialCamera', () {
+  group('CameraUpdate', () {
     const bounds = GeoBox(west: -10, south: -5, east: 10, north: 5);
 
-    test('position defaults to zoom 0 at 0, 0', () {
-      expect(const InitialCamera.position(), const InitialCameraPosition());
+    test('position compares by value', () {
+      expect(const CameraUpdate.position(), const CameraUpdatePosition());
       expect(_position(3), _position(3));
       expect(_position(3).hashCode, _position(3).hashCode);
       expect(
-        const InitialCamera.position(zoom: 3),
-        isNot(const InitialCamera.position(zoom: 4)),
+        const CameraUpdate.position(zoom: 3),
+        isNot(const CameraUpdate.position(zoom: 4)),
+      );
+      expect(
+        const CameraUpdate.position(anchor: Offset(1, 2)),
+        isNot(const CameraUpdate.position(anchor: Offset(2, 1))),
       );
     });
 
@@ -58,21 +63,113 @@ void main() {
       expect(_bounds(5), _bounds(5));
       expect(_bounds(5).hashCode, _bounds(5).hashCode);
       expect(
-        const InitialCamera.bounds(bounds),
-        isNot(const InitialCamera.bounds(bounds, pitch: 30)),
+        const CameraUpdate.bounds(bounds),
+        isNot(const CameraUpdate.bounds(bounds, pitch: 30)),
       );
       expect(
-        const InitialCamera.bounds(bounds),
+        const CameraUpdate.bounds(bounds),
+        isNot(const CameraUpdate.bounds(bounds, maxZoom: 10)),
+      );
+      expect(
+        const CameraUpdate.bounds(bounds),
         isNot(
-          const InitialCamera.bounds(
+          const CameraUpdate.bounds(
             GeoBox(west: -10, south: -5, east: 10, north: 6),
           ),
         ),
       );
     });
 
+    test('points compare by their list and fit into their bounds', () {
+      const points = CameraUpdate.points([
+        Geographic(lon: 4, lat: -2),
+        Geographic(lon: -3, lat: 7),
+        Geographic(lon: 1, lat: 1),
+      ]);
+      expect(
+        points,
+        CameraUpdatePoints(
+          List.of(const [
+            Geographic(lon: 4, lat: -2),
+            Geographic(lon: -3, lat: 7),
+            Geographic(lon: 1, lat: 1),
+          ]),
+        ),
+      );
+      expect(
+        points,
+        isNot(const CameraUpdate.points([Geographic(lon: 4, lat: -2)])),
+      );
+      expect(
+        (points as CameraUpdateFit).bounds,
+        const GeoBox(west: -3, south: -2, east: 4, north: 7),
+      );
+      expect(() => const CameraUpdatePoints([]).bounds, throwsArgumentError);
+    });
+
+    test('geometry fits into its bounds', () {
+      final update = CameraUpdate.geometry(
+        LineString.from(const [
+          Geographic(lon: 2, lat: 3),
+          Geographic(lon: -1, lat: 8),
+        ]),
+      );
+      expect(
+        (update as CameraUpdateFit).bounds,
+        const GeoBox(west: -1, south: 3, east: 2, north: 8),
+      );
+    });
+
+    test('a camera turns into the update that restores it', () {
+      const camera = MapCamera(
+        center: Geographic(lon: 1, lat: 2),
+        zoom: 3,
+        bearing: 4,
+        pitch: 5,
+        roll: 6,
+        padding: EdgeInsets.only(top: 7),
+      );
+      expect(
+        camera.toCameraUpdate(),
+        const CameraUpdate.position(
+          center: Geographic(lon: 1, lat: 2),
+          zoom: 3,
+          bearing: 4,
+          pitch: 5,
+          roll: 6,
+          padding: EdgeInsets.only(top: 7),
+        ),
+      );
+    });
+
     test('is not set by default, so the style camera applies', () {
       expect(const MapOptions().initCamera, isNull);
+    });
+  });
+
+  group('CameraAnimation', () {
+    test('defaults to a 300 ms ease', () {
+      expect(const CameraAnimation.ease(), const CameraAnimationEase());
+      expect(
+        (const CameraAnimation.ease() as CameraAnimationEase).duration,
+        const Duration(milliseconds: 300),
+      );
+      expect(const CameraAnimation.ease().curve, Curves.ease);
+    });
+
+    test('compares by value', () {
+      expect(
+        const CameraAnimation.fly(speed: 2),
+        isNot(const CameraAnimation.fly()),
+      );
+      expect(
+        const CameraAnimation.fly(peakZoom: 3),
+        const CameraAnimationFly(peakZoom: 3),
+      );
+      expect(
+        const CameraAnimation.ease(),
+        isNot(const CameraAnimation.ease(curve: Curves.easeIn)),
+      );
     });
   });
 
@@ -140,7 +237,7 @@ void main() {
       expect(
         camera.toString(),
         'MapCamera(center: Geographic(lon: 12.0, lat: 2.0), zoom: 2.0, '
-        'bearing: 213.0, pitch: 12.0)',
+        'bearing: 213.0, pitch: 12.0, roll: 0.0, padding: EdgeInsets.zero)',
       );
     });
   });

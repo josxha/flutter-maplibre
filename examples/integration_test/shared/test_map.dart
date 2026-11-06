@@ -32,7 +32,7 @@ MapOptions offlineOptions({
   minZoom: minZoom,
   maxZoom: maxZoom,
   gestures: gestures,
-  initCamera: InitialCamera.position(
+  initCamera: CameraUpdate.position(
     center: center,
     zoom: zoom,
     bearing: bearing,

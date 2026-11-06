@@ -41,40 +41,35 @@ abstract interface class MapController {
   /// pixels.
   List<Geographic> toLngLats(List<Offset> screenLocations);
 
-  /// Instantly move the map camera to a new location.
-  Future<void> moveCamera({
-    Geographic? center,
-    double? zoom,
-    double? bearing,
-    double? pitch,
-    EdgeInsets padding = EdgeInsets.zero,
+  /// Moves the camera to [update] without an animation.
+  ///
+  /// It stops a running [animateCamera].
+  Future<void> moveCamera(CameraUpdate update);
+
+  /// Animates the camera to [update], see [CameraAnimation] for the kinds of
+  /// animation.
+  ///
+  /// The returned future completes when the animation ends, with
+  /// [CameraAnimationResult.cancelled] if a gesture, [stopCamera] or
+  /// [moveCamera] stopped it.
+  ///
+  /// ```dart
+  /// final result = await controller.animateCamera(
+  ///   const CameraUpdate.position(center: munich, zoom: 12),
+  ///   animation: const CameraAnimation.fly(),
+  /// );
+  /// ```
+  Future<CameraAnimationResult> animateCamera(
+    CameraUpdate update, {
+    CameraAnimation animation = const CameraAnimation.ease(),
   });
 
-  /// Animate the map camera to a new location.
-  Future<void> animateCamera({
-    Geographic? center,
-    double? zoom,
-    double? bearing,
-    double? pitch,
-    Duration nativeDuration = const Duration(seconds: 2),
-    double webSpeed = 1.2,
-    Duration? webMaxDuration,
-    EdgeInsets padding = EdgeInsets.zero,
-  });
+  /// Stops a running [animateCamera], whose future then completes with
+  /// [CameraAnimationResult.cancelled].
+  Future<void> stopCamera();
 
-  /// Animate the map camera to a new location.
-  Future<void> fitBounds({
-    required GeoBox bounds,
-    double? bearing,
-    double? pitch,
-    Duration nativeDuration = const Duration(seconds: 2),
-    double webSpeed = 1.2,
-    Duration? webMaxDuration,
-    Offset offset = Offset.zero,
-    double webMaxZoom = double.maxFinite,
-    bool webLinear = false,
-    EdgeInsets padding = EdgeInsets.zero,
-  });
+  /// The camera that [update] would move the map to, without moving it.
+  Future<MapCamera> cameraFor(CameraUpdate update);
 
   /// Get the current camera position on the map.
   MapCamera getCamera();
@@ -94,8 +89,11 @@ abstract interface class MapController {
   /// coordinates at different latitudes.
   double getMetersPerPixelAtLatitude(double latitude);
 
-  /// The smallest bounding box that includes the visible region.
-  GeoBox getVisibleRegion();
+  /// The smallest bounding box that includes the visible part of the map.
+  ///
+  /// With a bearing or pitch, the visible part is not an axis-aligned
+  /// rectangle, and the box is larger than it.
+  GeoBox getVisibleBounds();
 
   /// Returns an array of rendered map features that intersect with a given
   /// screen location measured in logical pixels.

@@ -118,13 +118,14 @@ class _UserLocationLayerState extends State<UserLocationLayer> {
     _tracked = true;
     unawaited(
       controller.animateCamera(
-        center: location.position,
-        zoom: zoom,
-        bearing: _tracking == UserLocationTracking.positionAndHeading
-            ? location.heading
-            : null,
-        nativeDuration: widget.trackingDuration,
-        webMaxDuration: widget.trackingDuration,
+        CameraUpdate.position(
+          center: location.position,
+          zoom: zoom,
+          bearing: _tracking == UserLocationTracking.positionAndHeading
+              ? location.heading
+              : null,
+        ),
+        animation: CameraAnimation.fly(duration: widget.trackingDuration),
       ),
     );
   }

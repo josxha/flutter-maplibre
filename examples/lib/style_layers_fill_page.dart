@@ -23,7 +23,7 @@ class _StyleLayersFillPageState extends State<StyleLayersFillPage> {
       appBar: AppBar(title: const Text('Fill Style Layer')),
       body: MapLibreMap(
         options: const MapOptions(
-          initCamera: InitialCamera.position(
+          initCamera: CameraUpdate.position(
             zoom: 7,
             center: Geographic(lon: 9.17, lat: 47.68),
           ),

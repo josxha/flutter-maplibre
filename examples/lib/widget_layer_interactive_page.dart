@@ -43,7 +43,7 @@ class _WidgetLayerPageState extends State<WidgetLayerInteractivePage> {
               key: _mapKey,
               options: MapOptions(
                 gestures: _mapGestures,
-                initCamera: const InitialCamera.position(zoom: 3),
+                initCamera: const CameraUpdate.position(zoom: 3),
               ),
               onMapCreated: (controller) => _controller = controller,
               onLongClick: (event) =>

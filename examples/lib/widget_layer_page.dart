@@ -18,7 +18,7 @@ class _WidgetLayerPageState extends State<WidgetLayerPage> {
       appBar: AppBar(title: const Text('Widget Layer')),
       body: const MapLibreMap(
         options: MapOptions(
-          initCamera: InitialCamera.position(
+          initCamera: CameraUpdate.position(
             zoom: 3,
             center: Geographic(lon: 0, lat: -10),
           ),

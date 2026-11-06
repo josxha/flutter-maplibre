@@ -42,12 +42,13 @@ class MapOptions {
   final MapStyle style;
 
   /// The camera that the map starts with, at a position
-  /// ([InitialCamera.position]) or fitted to bounds ([InitialCamera.bounds]).
+  /// ([CameraUpdate.position]) or fitted to a target, such as bounds
+  /// ([CameraUpdate.bounds]).
   ///
   /// If null, the map starts at the camera of its style (the style's
   /// `center`, `zoom`, `bearing` and `pitch`). Changes after the map was
   /// created have no effect; move the camera with [MapController] instead.
-  final InitialCamera? initCamera;
+  final CameraUpdate? initCamera;
 
   /// The minimum zoom level. Allowed values are 0-24. Defaults to 0.
   final double minZoom;

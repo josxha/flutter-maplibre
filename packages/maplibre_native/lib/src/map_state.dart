@@ -93,9 +93,9 @@ class MapLibreMapStateNative extends MapLibreMapState {
   var _gestureActive = false;
   var _cameraMoving = false;
 
-  /// The camera that the running camera animation ends at, to jump there
-  /// when the map pauses.
-  mln.CameraOptions? _animationTarget;
+  /// The running camera animation, to jump to its target when the map
+  /// pauses and to report whether it was cancelled.
+  _CameraAnimationRun? _animation;
 
   /// Why the camera moves, from the start of the move on.
   CameraChangeReason _moveReason = CameraChangeReason.map;
@@ -202,24 +202,9 @@ class MapLibreMapStateNative extends MapLibreMapState {
 
   Future<void> _applyInitialCamera(
     mln.MapHandle map,
-    InitialCamera initCamera,
+    CameraUpdate initCamera,
   ) async {
-    final camera = switch (initCamera) {
-      InitialCameraPosition() => mln.CameraOptions(
-        center: _latLng(initCamera.center),
-        zoom: initCamera.zoom,
-        bearing: initCamera.bearing,
-        pitch: initCamera.pitch,
-      ),
-      InitialCameraBounds() => await map.cameraForLatLngBounds(
-        _latLngBounds(initCamera.bounds),
-        fitOptions: mln.CameraFitOptions(
-          padding: _edgeInsets(initCamera.padding),
-          bearing: initCamera.bearing,
-          pitch: initCamera.pitch,
-        ),
-      ),
-    };
+    final camera = await _cameraOptions(map, initCamera);
     await map.updateCamera(mln.CameraUpdate(camera: camera));
   }
 
@@ -248,11 +233,11 @@ class MapLibreMapStateNative extends MapLibreMapState {
     _renderer?.paused = paused;
     // Camera animations advance only while the map renders. One that runs
     // now ends at its target, so its caller does not wait for the resume.
-    final target = _animationTarget;
+    final animation = _animation;
     final map = _map;
-    if (!paused || target == null || map == null) return;
-    _animationTarget = null;
-    unawaited(map.updateCamera(mln.CameraUpdate(camera: target)));
+    if (!paused || animation == null || map == null) return;
+    _animation = null;
+    unawaited(map.updateCamera(mln.CameraUpdate(camera: animation.target)));
   }
 
   @override
@@ -275,6 +260,8 @@ class MapLibreMapStateNative extends MapLibreMapState {
   @override
   void dispose() {
     _disposed = true;
+    _animation?.end(CameraAnimationResult.cancelled);
+    _animation = null;
     style?.dispose();
     _loadingStyle?.dispose();
     _invalidateProjection();
@@ -496,28 +483,43 @@ class MapLibreMapStateNative extends MapLibreMapState {
   }
 
   /// Submits [update] and waits until its transitions end: they complete,
-  /// another change cancels them, or the map closes.
-  Future<void> _submitCamera(mln.MapHandle map, mln.CameraUpdate update) async {
+  /// another change replaces or cancels them, or the map closes.
+  Future<CameraAnimationResult> _submitCamera(
+    mln.MapHandle map,
+    mln.CameraUpdate update,
+  ) async {
     _nextChangeReason = CameraChangeReason.programmatic;
-    final target = update.camera;
     final animates =
         update.mode != mln.CameraUpdateMode.jump && !isRenderingPaused;
     // A later camera write replaces the animation, whether or not it animates.
-    _animationTarget = animates ? target : null;
-    final ended = Completer<void>();
+    final run = _CameraAnimationRun(update.camera);
+    _animation = animates ? run : null;
     await map.updateCamera(
       update.copyWith(
         // A paused map does not advance animations, so it jumps.
         mode: isRenderingPaused ? mln.CameraUpdateMode.jump : null,
         animation: update.animation.copyWith(
-          endHandler: (_) {
-            if (identical(_animationTarget, target)) _animationTarget = null;
-            if (!ended.isCompleted) ended.complete();
+          endHandler: (end) {
+            if (identical(_animation, run)) _animation = null;
+            run.end(
+              end.outcome == mln.CameraTransitionOutcome.completed
+                  ? CameraAnimationResult.completed
+                  : CameraAnimationResult.cancelled,
+            );
           },
         ),
       ),
     );
-    await ended.future;
+    return run.result;
+  }
+
+  /// Cancels the running camera animation, for a gesture or [stopCamera].
+  void _cancelAnimation() {
+    final animation = _animation;
+    if (animation == null) return;
+    _animation = null;
+    animation.cancelled = true;
+    _map?.discarding.cancelTransitions();
   }
 
   /// The style controller that [_onStyleLoaded] is filling, until it becomes
@@ -576,6 +578,13 @@ class MapLibreMapStateNative extends MapLibreMapState {
     zoom: native.zoom,
     bearing: native.bearing,
     pitch: native.pitch,
+    roll: native.roll,
+    padding: EdgeInsets.fromLTRB(
+      native.padding.left,
+      native.padding.top,
+      native.padding.right,
+      native.padding.bottom,
+    ),
   );
 
   // Gestures
@@ -655,7 +664,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
       _currentProjection().metersPerPixelAtLatitude(latitude);
 
   @override
-  GeoBox getVisibleRegion() {
+  GeoBox getVisibleBounds() {
     final size = context.size ?? Size.zero;
     final corners = toLngLats([
       Offset.zero,
@@ -672,103 +681,140 @@ class MapLibreMapStateNative extends MapLibreMapState {
   }
 
   @override
-  Future<void> moveCamera({
-    Geographic? center,
-    double? zoom,
-    double? bearing,
-    double? pitch,
-    EdgeInsets padding = EdgeInsets.zero,
-  }) => _updateCamera(
-    mln.CameraUpdateMode.jump,
-    center: center,
-    zoom: zoom,
-    bearing: bearing,
-    pitch: pitch,
-    padding: padding,
-  );
-
-  @override
-  Future<void> animateCamera({
-    Geographic? center,
-    double? zoom,
-    double? bearing,
-    double? pitch,
-    Duration nativeDuration = const Duration(seconds: 2),
-    double webSpeed = 1.2,
-    Duration? webMaxDuration,
-    EdgeInsets padding = EdgeInsets.zero,
-  }) => _updateCamera(
-    mln.CameraUpdateMode.fly,
-    center: center,
-    zoom: zoom,
-    bearing: bearing,
-    pitch: pitch,
-    padding: padding,
-    duration: nativeDuration,
-  );
-
-  @override
-  Future<void> fitBounds({
-    required GeoBox bounds,
-    double? bearing,
-    double? pitch,
-    Duration nativeDuration = const Duration(seconds: 2),
-    double webSpeed = 1.2,
-    Duration? webMaxDuration,
-    Offset offset = Offset.zero,
-    double webMaxZoom = double.maxFinite,
-    bool webLinear = false,
-    EdgeInsets padding = EdgeInsets.zero,
-  }) async {
+  Future<void> moveCamera(CameraUpdate update) async {
     final map = _map;
     if (map == null) return;
-    final target = await map.cameraForLatLngBounds(
-      _latLngBounds(bounds),
-      fitOptions: mln.CameraFitOptions(
-        padding: _edgeInsets(padding),
-        bearing: bearing,
-        pitch: pitch,
-      ),
-    );
-    await _submitCamera(
+    final camera = await _cameraOptions(map, update);
+    if (_map != map) return;
+    // A jump would replace a running animation, which then counts as
+    // completed, so it is cancelled first.
+    _cancelAnimation();
+    await _submitCamera(map, mln.CameraUpdate(camera: camera));
+  }
+
+  @override
+  Future<CameraAnimationResult> animateCamera(
+    CameraUpdate update, {
+    CameraAnimation animation = const CameraAnimation.ease(),
+  }) async {
+    final map = _map;
+    if (map == null) return CameraAnimationResult.cancelled;
+    final camera = await _cameraOptions(map, update);
+    if (_map != map) return CameraAnimationResult.cancelled;
+    return _submitCamera(
       map,
       mln.CameraUpdate(
-        mode: mln.CameraUpdateMode.fly,
-        camera: target,
-        animation: mln.AnimationOptions(
-          durationMs: nativeDuration.inMilliseconds.toDouble(),
-        ),
+        mode: switch (animation) {
+          CameraAnimationEase() => mln.CameraUpdateMode.ease,
+          CameraAnimationFly() => mln.CameraUpdateMode.fly,
+        },
+        camera: camera,
+        animation: _animationOptions(animation),
       ),
     );
   }
 
-  Future<void> _updateCamera(
-    mln.CameraUpdateMode mode, {
-    required Geographic? center,
-    required double? zoom,
-    required double? bearing,
-    required double? pitch,
-    required EdgeInsets padding,
-    Duration? duration,
-  }) async {
+  @override
+  Future<void> stopCamera() async => _cancelAnimation();
+
+  @override
+  Future<MapCamera> cameraFor(CameraUpdate update) async {
     final map = _map;
-    if (map == null) return;
-    await _submitCamera(
-      map,
-      mln.CameraUpdate(
-        mode: mode,
-        camera: mln.CameraOptions(
-          center: center == null ? null : _latLng(center),
-          zoom: zoom,
-          bearing: bearing,
-          pitch: pitch,
-          padding: padding == EdgeInsets.zero ? null : _edgeInsets(padding),
-        ),
-        animation: mln.AnimationOptions(
-          durationMs: duration?.inMilliseconds.toDouble(),
-        ),
-      ),
+    if (map == null) {
+      throw StateError('The map has not been created yet.');
+    }
+    final current = getCamera();
+    final camera = await _cameraOptions(map, update);
+    final center = camera.center;
+    final padding = camera.padding;
+    return MapCamera(
+      center: center == null ? current.center : _geographic(center),
+      zoom: camera.zoom ?? current.zoom,
+      bearing: camera.bearing ?? current.bearing,
+      pitch: camera.pitch ?? current.pitch,
+      roll: camera.roll ?? current.roll,
+      padding: padding == null
+          ? current.padding
+          : EdgeInsets.fromLTRB(
+              padding.left,
+              padding.top,
+              padding.right,
+              padding.bottom,
+            ),
     );
+  }
+
+  /// The native camera that [update] moves [map] to.
+  static Future<mln.CameraOptions> _cameraOptions(
+    mln.MapHandle map,
+    CameraUpdate update,
+  ) async {
+    switch (update) {
+      case CameraUpdatePosition(:final center, :final padding, :final anchor):
+        return mln.CameraOptions(
+          center: center == null ? null : _latLng(center),
+          zoom: update.zoom,
+          bearing: update.bearing,
+          pitch: update.pitch,
+          roll: update.roll,
+          padding: padding == null ? null : _edgeInsets(padding),
+          anchor: anchor == null ? null : _screenPoint(anchor),
+        );
+      case CameraUpdateFit():
+        final fitOptions = mln.CameraFitOptions(
+          padding: _edgeInsets(update.padding),
+          bearing: update.bearing,
+          pitch: update.pitch,
+        );
+        final camera = await switch (update) {
+          CameraUpdateBounds(:final bounds) => map.cameraForLatLngBounds(
+            _latLngBounds(bounds),
+            fitOptions: fitOptions,
+          ),
+          CameraUpdatePoints(:final points) =>
+            points.isEmpty
+                ? throw ArgumentError.value(
+                    points,
+                    'points',
+                    'must not be empty',
+                  )
+                : map.cameraForLatLngs([
+                    for (final point in points) _latLng(point),
+                  ], fitOptions: fitOptions),
+          CameraUpdateGeometry(:final geometry) => map.cameraForGeometry(
+            jsonDecode(geometry.toText()),
+            fitOptions: fitOptions,
+          ),
+        };
+        final maxZoom = update.maxZoom;
+        final zoom = camera.zoom;
+        if (maxZoom != null && zoom != null && zoom > maxZoom) {
+          return camera.copyWith(zoom: maxZoom);
+        }
+        return camera;
+    }
+  }
+
+  static mln.AnimationOptions _animationOptions(CameraAnimation animation) {
+    final curve = animation.curve;
+    final easing = mln.UnitBezier(
+      x1: curve.a,
+      y1: curve.b,
+      x2: curve.c,
+      y2: curve.d,
+    );
+    return switch (animation) {
+      CameraAnimationEase(:final duration) => mln.AnimationOptions(
+        durationMs: duration.inMicroseconds / 1000,
+        easing: easing,
+      ),
+      CameraAnimationFly(:final duration) => mln.AnimationOptions(
+        durationMs: duration == null ? null : duration.inMicroseconds / 1000,
+        velocity: duration == null ? animation.speed : null,
+        minZoom: animation.peakZoom,
+        easing: easing,
+      ),
+    };
   }
 
   static mln.LatLng _latLng(Geographic position) =>
@@ -881,6 +927,7 @@ class _NativeGestureCamera implements GestureCameraSink {
   @override
   void gestureStart() {
     _state
+      .._cancelAnimation()
       .._gestureActive = true
       .._nextChangeReason = CameraChangeReason.gesture;
     _state._applyDelta(
@@ -950,7 +997,9 @@ class _NativeGestureCamera implements GestureCameraSink {
     Offset around, {
     Duration duration = Duration.zero,
   }) {
-    _state._nextChangeReason = CameraChangeReason.gesture;
+    _state
+      .._cancelAnimation()
+      .._nextChangeReason = CameraChangeReason.gesture;
     _state._applyDelta(
       mln.CameraDelta(
         scale: pow(2, levels).toDouble(),
@@ -962,5 +1011,26 @@ class _NativeGestureCamera implements GestureCameraSink {
               ),
       ),
     );
+  }
+}
+
+/// A camera animation of [MapLibreMapStateNative.animateCamera].
+class _CameraAnimationRun {
+  _CameraAnimationRun(this.target);
+
+  /// The camera that the animation ends at.
+  final mln.CameraOptions target;
+
+  /// Whether a gesture or [MapController.stopCamera] cancelled it, which the
+  /// map may report as completed.
+  bool cancelled = false;
+
+  final _result = Completer<CameraAnimationResult>();
+
+  Future<CameraAnimationResult> get result => _result.future;
+
+  void end(CameraAnimationResult result) {
+    if (_result.isCompleted) return;
+    _result.complete(cancelled ? CameraAnimationResult.cancelled : result);
   }
 }

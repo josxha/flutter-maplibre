@@ -81,7 +81,7 @@ class _LayersMixedPageState extends State<LayersMixedPage> {
           Expanded(
             child: MapLibreMap(
               options: const MapOptions(
-                initCamera: InitialCamera.position(
+                initCamera: CameraUpdate.position(
                   zoom: 7,
                   center: Geographic(lon: 9.17, lat: 47.68),
                 ),

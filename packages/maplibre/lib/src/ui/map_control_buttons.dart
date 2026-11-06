@@ -36,6 +36,10 @@ class MapControlButtons extends StatelessWidget {
   /// when this is set.
   final VoidCallback? onTrackingPressed;
 
+  static const _zoomAnimation = CameraAnimation.ease(
+    duration: Duration(milliseconds: 200),
+  );
+
   @override
   Widget build(BuildContext context) {
     final controller = MapController.maybeOf(context);
@@ -52,16 +56,16 @@ class MapControlButtons extends StatelessWidget {
             FloatingActionButton(
               heroTag: 'MapLibreZoomInButton',
               onPressed: () => controller.animateCamera(
-                zoom: controller.getCamera().zoom + 1,
-                nativeDuration: const Duration(milliseconds: 200),
+                CameraUpdate.position(zoom: controller.getCamera().zoom + 1),
+                animation: _zoomAnimation,
               ),
               child: const Icon(Icons.add),
             ),
             FloatingActionButton(
               heroTag: 'MapLibreZoomOutButton',
               onPressed: () => controller.animateCamera(
-                zoom: controller.getCamera().zoom - 1,
-                nativeDuration: const Duration(milliseconds: 200),
+                CameraUpdate.position(zoom: controller.getCamera().zoom - 1),
+                animation: _zoomAnimation,
               ),
               child: const Icon(Icons.remove),
             ),

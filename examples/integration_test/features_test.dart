@@ -197,7 +197,7 @@ void runTests() {
       final map = await pumpMap(
         tester,
         options: const MapOptions(
-          initCamera: InitialCamera.position(
+          initCamera: CameraUpdate.position(
             center: Geographic(lon: 10, lat: 50),
             zoom: 4,
           ),

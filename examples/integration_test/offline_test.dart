@@ -296,7 +296,7 @@ void runTests() {
         tester,
         options: MapOptions(
           style: MapStyle.url(styleUrl),
-          initCamera: const InitialCamera.position(zoom: 1),
+          initCamera: const CameraUpdate.position(zoom: 1),
         ),
       );
       expect(map.style.layers.map((layer) => layer.id).toList(), [

@@ -28,7 +28,7 @@ Widget build(BuildContext context) {
     appBar: AppBar(title: const Text('Widget Layer')),
     body: MapLibreMap(
       options: MapOptions(
-        initCamera: InitialCamera.position(
+        initCamera: CameraUpdate.position(
           center: Geographic(lon: 0, lat: 0),
           zoom: 3,
         ),

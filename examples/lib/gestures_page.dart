@@ -49,7 +49,7 @@ class _GesturesPageState extends State<GesturesPage> {
                   zoom: _selections[Gestures.zoom]!,
                   pitch: _selections[Gestures.tilt]!,
                 ),
-                initCamera: const InitialCamera.position(
+                initCamera: const CameraUpdate.position(
                   center: Geographic(lon: 9.17, lat: 47.68),
                   zoom: 3,
                 ),

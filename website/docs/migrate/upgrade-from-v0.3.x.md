@@ -60,7 +60,7 @@ MapOptions(
 // 0.4
 MapOptions(
   style: MapStyle.url('https://demotiles.maplibre.org/style.json'),
-  initCamera: InitialCamera.position(
+  initCamera: CameraUpdate.position(
     center: Geographic(lon: 9.17, lat: 47.68),
     zoom: 7,
   ),
@@ -71,7 +71,8 @@ MapOptions(
   `MapStyle.asset` or `MapStyle.file`. The map loads a new style when `style`
   changes, so `MapController.setStyle` was removed.
 - `initCenter`, `initZoom`, `initBearing` and `initPitch` are now
-  `initCamera`, an `InitialCamera.position` or `InitialCamera.bounds`. Without
+  `initCamera`, a `CameraUpdate` such as `CameraUpdate.position` or
+  `CameraUpdate.bounds`, see [Camera](#14-camera). Without
   `initCamera`, the map starts at the camera of the style instead of zoom 0.
 - `androidMode`, `androidTextureMode`, `androidTranslucentTextureSurface`,
   `androidForegroundLoadColor`, `webviewDebugMode` and the deprecated
@@ -257,4 +258,48 @@ MapLibreMap(
 `CameraChangeReason.apiGesture`, `developerAnimation` and `apiAnimation` are
 now `gesture`, `programmatic` and `map`. See [Events](../events.md) for the
 new events.
+
+## 14. Camera
+
+`moveCamera` and `animateCamera` take a `CameraUpdate`, the same type as
+`MapOptions.initCamera`. `fitBounds` is now `CameraUpdate.bounds`, and the
+platform-prefixed animation parameters are a `CameraAnimation`:
+
+```dart
+// 0.3
+await controller.moveCamera(zoom: 10);
+await controller.animateCamera(
+  center: Geographic(lon: 9.17, lat: 47.68),
+  zoom: 12,
+  nativeDuration: const Duration(seconds: 1),
+  webSpeed: 1.5,
+);
+await controller.fitBounds(bounds: bounds, padding: const EdgeInsets.all(32));
+
+// 0.4
+await controller.moveCamera(const CameraUpdate.position(zoom: 10));
+await controller.animateCamera(
+  const CameraUpdate.position(center: Geographic(lon: 9.17, lat: 47.68), zoom: 12),
+  animation: const CameraAnimation.fly(duration: Duration(seconds: 1)),
+);
+await controller.animateCamera(
+  CameraUpdate.bounds(bounds, padding: const EdgeInsets.all(32)),
+);
+```
+
+| 0.3                                  | 0.4                                                  |
+|--------------------------------------|------------------------------------------------------|
+| `InitialCamera.position`, `.bounds`  | `CameraUpdate.position`, `.bounds`                   |
+| `fitBounds(bounds: ...)`             | `animateCamera(CameraUpdate.bounds(...))`            |
+| `nativeDuration`, `webMaxDuration`   | `CameraAnimation.ease(duration:)` or `.fly(duration:)` |
+| `webSpeed`                           | `CameraAnimation.fly(speed:)`                        |
+| `webLinear: true`                    | `CameraAnimation.ease()`                             |
+| `webMaxZoom`                         | `maxZoom` of `CameraUpdate.bounds`                   |
+| `fitBounds(offset:)`                 | `padding` of `CameraUpdate.bounds`                   |
+| `getVisibleRegion()`                 | `getVisibleBounds()`                                 |
+| `MapCompass.nativeRotationDuration`, `webRotationSpeed` | `MapCompass.animation`            |
+| A `PlatformException` when an animation is cancelled (web) | `CameraAnimationResult.cancelled` |
+
+`animateCamera` now eases for 300 ms by default, where 0.3 flew for 2 seconds
+on native platforms. Pass `animation: const CameraAnimation.fly()` to fly.
 

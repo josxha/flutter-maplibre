@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:maplibre/maplibre.dart';
 
 @immutable
@@ -32,10 +31,12 @@ class _ControllerPageState extends State<ControllerPage> {
                   onPressed: () async {
                     debugPrint('moveCamera start');
                     await _controller.moveCamera(
-                      center: const Geographic(lon: 172.4714, lat: -42.4862),
-                      zoom: 4,
-                      pitch: 0,
-                      bearing: 0,
+                      const CameraUpdate.position(
+                        center: Geographic(lon: 172.4714, lat: -42.4862),
+                        zoom: 4,
+                        pitch: 0,
+                        bearing: 0,
+                      ),
                     );
                     debugPrint('moveCamera end');
                   },
@@ -46,21 +47,17 @@ class _ControllerPageState extends State<ControllerPage> {
                 ),
                 OutlinedButton(
                   onPressed: () async {
-                    debugPrint('animateTo start');
-                    try {
-                      await _controller.animateCamera(
-                        center: const Geographic(lon: -18.6874, lat: 64.9445),
+                    debugPrint('animateCamera start');
+                    final result = await _controller.animateCamera(
+                      const CameraUpdate.position(
+                        center: Geographic(lon: -18.6874, lat: 64.9445),
                         zoom: 5,
                         bearing: -50,
                         pitch: 60,
-                      );
-                      debugPrint('flyTo end');
-                    } on PlatformException catch (error) {
-                      debugPrint(
-                        'flyTo cancelled: code: '
-                        '"${error.code}", message: "${error.message}"',
-                      );
-                    }
+                      ),
+                      animation: const CameraAnimation.fly(),
+                    );
+                    debugPrint('animateCamera end: ${result.name}');
                   },
                   child: const Text(
                     'Animate to\nIceland',
@@ -69,24 +66,20 @@ class _ControllerPageState extends State<ControllerPage> {
                 ),
                 OutlinedButton(
                   onPressed: () async {
-                    debugPrint('fitBounds start');
-                    try {
-                      await _controller.fitBounds(
-                        bounds: const GeoBox(
+                    debugPrint('fit bounds start');
+                    final result = await _controller.animateCamera(
+                      const CameraUpdate.bounds(
+                        GeoBox(
                           west: 5.894357,
                           east: 10.560848,
                           south: 45.806154,
                           north: 47.902069,
                         ),
-                        padding: const EdgeInsets.all(50),
-                      );
-                      debugPrint('fitBounds end');
-                    } on PlatformException catch (error) {
-                      debugPrint(
-                        'fitBounds cancelled: code: '
-                        '"${error.code}", message: "${error.message}"',
-                      );
-                    }
+                        padding: EdgeInsets.all(50),
+                      ),
+                      animation: const CameraAnimation.fly(),
+                    );
+                    debugPrint('fit bounds end: ${result.name}');
                   },
                   child: const Text(
                     'Fit bounds to\nSwitzerland',
@@ -146,7 +139,7 @@ pitch: ${camera.pitch}'''),
                 ),
                 OutlinedButton(
                   onPressed: () async {
-                    final region = _controller.getVisibleRegion();
+                    final region = _controller.getVisibleBounds();
                     if (context.mounted) {
                       ScaffoldMessenger.of(context)
                         ..hideCurrentSnackBar()
@@ -206,7 +199,7 @@ pitch: ${camera.pitch}'''),
           Expanded(
             child: MapLibreMap(
               options: const MapOptions(
-                initCamera: InitialCamera.position(
+                initCamera: CameraUpdate.position(
                   center: Geographic(lon: 9.17, lat: 47.68),
                   zoom: 3,
                 ),

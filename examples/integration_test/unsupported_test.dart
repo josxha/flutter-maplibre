@@ -32,7 +32,7 @@ void runTests() {
         const Geographic(lon: 30, lat: 40),
       );
       map.style.setProjection(MapProjection.globe);
-      await map.controller.moveCamera(zoom: 4);
+      await map.controller.moveCamera(const CameraUpdate.position(zoom: 4));
       await map.waitForLatestFrame();
       final after = map.controller.toScreenLocation(
         const Geographic(lon: 30, lat: 40),
