@@ -38,17 +38,13 @@ class _LayersPolygonPageState extends State<LayersPolygonPage> {
             center: Geographic(lon: 9.17, lat: 47.68),
           ),
         ),
-        onEvent: (event) {
-          if (event case MapEventClick()) {
-            final points = _polygons.first.geometry!.rings.first.inserted(0, [
-              event.point,
-            ]);
-            setState(() {
-              _polygons[0] = Feature(
-                geometry: Polygon.from([points.positions]),
-              );
-            });
-          }
+        onClick: (event) {
+          final points = _polygons.first.geometry!.rings.first.inserted(0, [
+            event.point,
+          ]);
+          setState(() {
+            _polygons[0] = Feature(geometry: Polygon.from([points.positions]));
+          });
         },
         layers: [
           PolygonLayer(

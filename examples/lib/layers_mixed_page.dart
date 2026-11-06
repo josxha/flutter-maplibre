@@ -86,12 +86,10 @@ class _LayersMixedPageState extends State<LayersMixedPage> {
                   center: Geographic(lon: 9.17, lat: 47.68),
                 ),
               ),
-              onEvent: (event) {
-                if (event case MapEventClick()) {
-                  setState(() {
-                    _circlePoints.add(Feature(geometry: Point(event.point)));
-                  });
-                }
+              onClick: (event) {
+                setState(() {
+                  _circlePoints.add(Feature(geometry: Point(event.point)));
+                });
               },
               layers: [
                 CircleLayer(

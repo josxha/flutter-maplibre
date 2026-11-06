@@ -64,7 +64,7 @@ initial values. Parameters that don't begin with `init*` can be updated in a
 declarative way just like any other Flutter Widget. The most simple way is to
 use the `MapLibreMap` widget in a `StatefulWidget` and calling `setState()`.
 
-```dart linenums="1" hl_lines="11 26-28 33-35"
+```dart linenums="1" hl_lines="11 26-28 32-34"
 @immutable
 class MyMapWidget extends StatefulWidget {
   const MyMapWidget({super.key});
@@ -94,14 +94,12 @@ class _MyMapWidget extends State<MyMapWidget> {
                 ? MapGestures.all()
                 : MapGestures.none(),
           ),
-          onEvent: (event) {
-            if (event case MapEventClick()) {
-              // update the map widget using Flutters' state management
-              setState(() {
-                _gesturesEnabled = !_gesturesEnabled;
-              });
-            }
-          }
+          onClick: (event) {
+            // update the map widget using Flutters' state management
+            setState(() {
+              _gesturesEnabled = !_gesturesEnabled;
+            });
+          },
       ),
     );
   }
@@ -114,12 +112,11 @@ the [StyleController](#the-stylecontroller).
 
 ### The `MapController`
 
-The `MapController` can be used by either using the `onMapCreated` callback or
-by listening in the `onEvent` callback for the `MapEventMapCreated` event type.
+The `onMapCreated` callback hands you the `MapController`.
 
 You can store the `MapController` in a field variable for later use.
 
-```dart linenums="1" hl_lines="2 18"
+```dart linenums="1" hl_lines="2 15"
 class _MyMapWidget extends State<MyMapWidget> {
   MapController? _mapController;
 
@@ -133,13 +130,8 @@ class _MyMapWidget extends State<MyMapWidget> {
               zoom: 3,
             ),
           ),
-          onEvent: (event) {
-            // check if the MapEvent type is a MapEventMapCreated
-            if (event case MapEventMapCreated()) {
-              // store the MapController for later use
-              _mapController = event.mapController;
-            }
-          }
+          // store the MapController for later use
+          onMapCreated: (controller) => _mapController = controller,
       ),
     );
   }
@@ -149,13 +141,12 @@ class _MyMapWidget extends State<MyMapWidget> {
 ### The `StyleController`
 
 The `StyleController` is a construct to make style related operations on the
-map. It can be used either by listening to the `MapEventStyleLoaded` event or
-the `onStyleLoaded` callback.
+map. The `onStyleLoaded` callback hands it to you.
 
 After it has loaded you can access the `StyleController` at any time
 from the `style` getter of `MapController`.
 
-```dart linenums="1" hl_lines="16-17"
+```dart linenums="1" hl_lines="13-15"
 class _MyMapWidget extends State<MyMapWidget> {
   @override
   Widget build(BuildContext context) {
@@ -167,14 +158,11 @@ class _MyMapWidget extends State<MyMapWidget> {
               zoom: 3,
             ),
           ),
-          onEvent: (event) {
-            // check if the MapEvent type is a MapEventStyleLoaded
-            if (event case MapEventStyleLoaded()) {
-              // This event gets emitted every time a style finishes loading.
-              event.style.sources.add(...);
-              event.style.layers.add(...);
-            }
-          }
+          // called every time a style finishes loading
+          onStyleLoaded: (style) {
+            style.sources.add(...);
+            style.layers.add(...);
+          },
       ),
     );
   }

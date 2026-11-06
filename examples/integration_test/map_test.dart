@@ -22,12 +22,9 @@ void runTests() {
       tester,
     ) async {
       final map = await pumpMap(tester);
-      final created = map.events.indexWhere((e) => e is MapEventMapCreated);
-      final loaded = map.events.indexWhere((e) => e is MapEventStyleLoaded);
-      expect(created, isNonNegative);
-      expect(loaded, greaterThan(created));
+      expect(map.lifecycle, [MapLifecycle.created, MapLifecycle.styleLoaded]);
       await tester.pump(const Duration(seconds: 1));
-      expect(map.events.whereType<MapEventStyleLoaded>(), hasLength(1));
+      expect(map.lifecycle, [MapLifecycle.created, MapLifecycle.styleLoaded]);
       expect(map.style.layers.map((layer) => layer.id).toList(), [
         'background',
       ]);
@@ -165,7 +162,7 @@ void runTests() {
 
     testWidgets('loads a style set at runtime', (tester) async {
       final map = await pumpMap(tester);
-      final since = map.events.length;
+      final since = map.styleLoads;
       await map.setOptions(
         const MapOptions(
           style: MapStyle.json(
@@ -174,7 +171,7 @@ void runTests() {
           ),
         ),
       );
-      await map.waitForEvent<MapEventStyleLoaded>(since: since);
+      await map.waitForStyleLoad(since: since);
       expect(map.controller.style?.layers.map((layer) => layer.id).toList(), [
         'other',
       ]);
@@ -182,10 +179,10 @@ void runTests() {
 
     testWidgets('keeps its style when other options change', (tester) async {
       final map = await pumpMap(tester);
-      final since = map.events.length;
+      final since = map.styleLoads;
       await map.setOptions(offlineOptions(maxZoom: 10));
       await tester.pump(const Duration(milliseconds: 500));
-      expect(map.events.skip(since).whereType<MapEventStyleLoaded>(), isEmpty);
+      expect(map.styleLoads, since);
     });
 
     testWidgets('starts at the camera of its style', (tester) async {

@@ -1,5 +1,25 @@
 ## Unreleased
 
+### Breaking Changes
+
+- `MapLibreMap.onEvent` is replaced by one callback per event, such as
+  `onClick`, `onCameraMove` and `onIdle`. `MapEventMapCreated` and
+  `MapEventStyleLoaded` are removed; use `onMapCreated` and `onStyleLoaded`.
+- The camera events are `MapEventCameraMoveStart`, `MapEventCameraMove` and
+  `MapEventCameraMoveEnd`, which replaces `MapEventCameraIdle`. All three carry
+  the reason, now `gesture`, `programmatic` or `map`.
+
+### Features
+
+- New map events: `onError`, `onStyleImageMissing`, `onLoadingStarted`,
+  `onLoadingFinished`, `onSourceChanged`, `onRenderFrame` and `onResize`;
+  `onTile`, `onRenderMap`, `onGlyphs` and `onSprite` on native;
+  `onContextLost`, `onContextRestored` and `onProjectionChanged` on web.
+- Taps are reported right away while neither `onDoubleClick` nor the zoom
+  gesture is set.
+- `MapEventDoubleClick.preventDefault()` keeps a double tap from zooming,
+  also from an async `onDoubleClick`.
+
 ### Bug Fixes
 
 - Linux: fix a crash when Flutter paints a map before its first frame

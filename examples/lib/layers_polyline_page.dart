@@ -33,18 +33,16 @@ class _LayersPolylinePageState extends State<LayersPolylinePage> {
             center: Geographic(lon: 9.17, lat: 47.68),
           ),
         ),
-        onEvent: (event) {
-          if (event case MapEventClick()) {
-            // add the clicked point to the line
-            final newChain = _polylines.first.geometry!.chain.inserted(0, [
-              event.point,
-            ]);
-            setState(() {
-              _polylines[0] = Feature(
-                geometry: LineString.from(newChain.positions),
-              );
-            });
-          }
+        onClick: (event) {
+          // add the clicked point to the line
+          final newChain = _polylines.first.geometry!.chain.inserted(0, [
+            event.point,
+          ]);
+          setState(() {
+            _polylines[0] = Feature(
+              geometry: LineString.from(newChain.positions),
+            );
+          });
         },
         layers: [
           PolylineLayer(

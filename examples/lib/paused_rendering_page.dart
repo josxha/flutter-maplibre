@@ -151,11 +151,8 @@ class _RotatingMapState extends State<_RotatingMap> {
           ),
           paused: widget.paused,
           onMapCreated: _onMapCreated,
-          onEvent: (event) {
-            if (event is MapEventRenderingChanged) {
-              widget.onRenderingChanged(event.paused);
-            }
-          },
+          onRenderingChanged: (event) =>
+              widget.onRenderingChanged(event.paused),
         ),
         if (!widget.rendering)
           Positioned.fill(

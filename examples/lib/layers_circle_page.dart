@@ -30,12 +30,10 @@ class _LayersCirclePageState extends State<LayersCirclePage> {
             center: Geographic(lon: 9.17, lat: 47.68),
           ),
         ),
-        onEvent: (event) {
-          if (event case MapEventClick()) {
-            setState(() {
-              _points.add(Feature(geometry: Point(event.point)));
-            });
-          }
+        onClick: (event) {
+          setState(() {
+            _points.add(Feature(geometry: Point(event.point)));
+          });
         },
         layers: [
           CircleLayer(

@@ -360,7 +360,7 @@ void main() {
     test('user input events carry their location', () {
       final events = <MapEventUserInput>[
         const MapEventClick(point: point, screenPoint: screenPoint),
-        const MapEventDoubleClick(point: point, screenPoint: screenPoint),
+        MapEventDoubleClick(point: point, screenPoint: screenPoint),
         const MapEventSecondaryClick(point: point, screenPoint: screenPoint),
         const MapEventLongClick(point: point, screenPoint: screenPoint),
       ];
@@ -374,11 +374,21 @@ void main() {
 
     test('camera events carry the camera and the reason', () {
       const camera = MapCamera(center: point, zoom: 1, bearing: 0, pitch: 0);
-      expect(const MapEventMoveCamera(camera: camera).camera, camera);
+      const move = MapEventCameraMove(
+        camera: camera,
+        reason: CameraChangeReason.gesture,
+      );
+      expect(move.camera, camera);
+      expect(move.reason, CameraChangeReason.gesture);
+      const end = MapEventCameraMoveEnd(
+        camera: camera,
+        reason: CameraChangeReason.programmatic,
+      );
+      expect(end.camera, camera);
+      expect(end.reason, CameraChangeReason.programmatic);
       expect(
-        const MapEventStartMoveCamera(reason: CameraChangeReason.apiGesture)
-            .reason,
-        CameraChangeReason.apiGesture,
+        const MapEventCameraMoveStart(reason: CameraChangeReason.map).reason,
+        CameraChangeReason.map,
       );
     });
   });

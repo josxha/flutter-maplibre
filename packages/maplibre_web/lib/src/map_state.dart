@@ -112,8 +112,8 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
           _resizeMap();
           _applyInitialCamera(initCamera);
         }
-        widget.onEvent?.call(MapEventMapCreated(mapController: this));
         widget.onMapCreated?.call(this);
+        _onLoadingStarted();
         setState(() => isInitialized = true);
       });
       _resizeMap();
@@ -140,6 +140,14 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       _map.on(
         interop.MapEventType.data,
         (interop.MapDataEvent event) {
+          if (event.dataType == 'source' &&
+              event.sourceDataType == 'metadata') {
+            if (event.sourceId case final sourceId?) {
+              widget.onSourceChanged?.call(
+                MapEventSourceChanged(sourceId: sourceId),
+              );
+            }
+          }
           // The events on which the gl-js attribution control updates.
           if (event.dataType == 'style' ||
               event.sourceDataType == 'metadata' ||
@@ -152,9 +160,70 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       _map.on(
         interop.MapEventType.idle,
         (interop.MapMouseEvent event) {
-          widget.onEvent?.call(const MapEventIdle());
+          widget.onIdle?.call(const MapEventIdle());
+          if (_loading) {
+            _loading = false;
+            widget.onLoadingFinished?.call(const MapEventLoadingFinished());
+          }
         }.toJS,
       );
+      _map.on(
+        interop.MapEventType.error,
+        (interop.MapErrorEvent event) {
+          final error = event.error;
+          final message = switch (error) {
+            final error? => (error as interop.JsError).message ?? '$error',
+            null => 'Unknown error',
+          };
+          final sourceId = event.sourceId;
+          final onError = widget.onError;
+          if (onError == null) {
+            debugPrint('maplibre_web: $message');
+            return;
+          }
+          onError(
+            MapEventError(
+              kind: sourceId == null ? MapErrorKind.other : MapErrorKind.source,
+              message: message,
+              sourceId: sourceId,
+            ),
+          );
+        }.toJS,
+      );
+      _map.on(
+        interop.MapEventType.styleImageMissing,
+        (interop.MapStyleImageMissingEvent event) {
+          widget.onStyleImageMissing?.call(
+            MapEventStyleImageMissing(id: event.id),
+          );
+        }.toJS,
+      );
+      _map.on(
+        interop.MapEventType.webglContextLost,
+        (interop.MapLibreEvent event) {
+          widget.onContextLost?.call(const MapEventContextLost());
+        }.toJS,
+      );
+      _map.on(
+        interop.MapEventType.webglContextRestored,
+        (interop.MapLibreEvent event) {
+          widget.onContextRestored?.call(const MapEventContextRestored());
+        }.toJS,
+      );
+      _map.on(
+        interop.MapEventType.projectionTransition,
+        (interop.MapProjectionEvent event) {
+          final projection = event.newProjection.dartify();
+          widget.onProjectionChanged?.call(
+            MapEventProjectionChanged(
+              projection: projection == null || projection == 'mercator'
+                  ? MapProjection.mercator
+                  : MapProjection.globe,
+            ),
+          );
+        }.toJS,
+      );
+      _updateRenderListener();
       _map.on(
         interop.MapEventType.moveStart,
         (interop.MapLibreEvent event) {
@@ -168,14 +237,17 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
           final CameraChangeReason reason;
           if (_gestureMoving || _nextMoveByUser) {
             _nextMoveByUser = false;
-            reason = CameraChangeReason.apiGesture;
+            reason = CameraChangeReason.gesture;
           } else if (_nextGestureCausedByController) {
             _nextGestureCausedByController = false;
-            reason = CameraChangeReason.developerAnimation;
+            reason = CameraChangeReason.programmatic;
           } else {
-            reason = CameraChangeReason.apiAnimation;
+            reason = CameraChangeReason.map;
           }
-          widget.onEvent?.call(MapEventStartMoveCamera(reason: reason));
+          _moveReason = reason;
+          widget.onCameraMoveStart?.call(
+            MapEventCameraMoveStart(reason: reason),
+          );
         }.toJS,
       );
       _map.on(
@@ -190,7 +262,9 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
             bearing: _map.getBearing().toDouble(),
           );
           setState(() => camera = mapCamera);
-          widget.onEvent?.call(MapEventMoveCamera(camera: mapCamera));
+          widget.onCameraMove?.call(
+            MapEventCameraMove(camera: mapCamera, reason: _moveReason),
+          );
         }.toJS,
       );
       _map.on(
@@ -198,7 +272,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
         (interop.MapLibreEvent event) {
           if (!_cameraPaddingReset.shouldForward(event)) return;
           if (_silentCamera || _gestureMoving) return;
-          widget.onEvent?.call(const MapEventCameraIdle());
+          _onCameraMoveEnd();
           if (!(_movementCompleter?.isCompleted ?? true)) {
             _movementCompleter?.complete(event);
           }
@@ -311,6 +385,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     }
     if (options.style != oldWidget.options.style) _setStyle(options.style);
     _layerManager?.updateLayers(widget.layers);
+    _updateRenderListener();
     super.didUpdateWidget(oldWidget);
   }
 
@@ -562,6 +637,44 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       }.toJS,
     );
     _map.setStyle(_jsStyle(style));
+    _onLoadingStarted();
+  }
+
+  /// Whether a style loads, until the next idle event, see
+  /// [MapLibreMap.onLoadingFinished].
+  var _loading = false;
+
+  void _onLoadingStarted() {
+    _loading = true;
+    widget.onLoadingStarted?.call(const MapEventLoadingStarted());
+  }
+
+  /// Why the camera moves, from the start of the move on.
+  CameraChangeReason _moveReason = CameraChangeReason.map;
+
+  void _onCameraMoveEnd() {
+    widget.onCameraMoveEnd?.call(
+      MapEventCameraMoveEnd(camera: getCamera(), reason: _moveReason),
+    );
+  }
+
+  /// The listener of the render event, which fires for every frame, so it
+  /// is only registered while [MapLibreMap.onRenderFrame] is set.
+  JSExportedDartFunction? _renderListener;
+
+  void _updateRenderListener() {
+    final listens = widget.onRenderFrame != null;
+    if (listens == (_renderListener != null)) return;
+    if (listens) {
+      final listener = (interop.MapLibreEvent event) {
+        widget.onRenderFrame?.call(const MapEventRenderFrame());
+      }.toJS;
+      _renderListener = listener;
+      _map.on(interop.MapEventType.render, listener);
+    } else {
+      _map.off(interop.MapEventType.render, _renderListener!);
+      _renderListener = null;
+    }
   }
 
   void _onStyleLoaded() {
@@ -569,7 +682,6 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     style?.dispose();
     final styleCtrl = StyleControllerWeb(_map)..load();
     style = styleCtrl;
-    widget.onEvent?.call(MapEventStyleLoaded(styleCtrl));
     widget.onStyleLoaded?.call(styleCtrl);
     _layerManager = LayerManager(styleCtrl, widget.layers);
     _attributions = styleCtrl.attributions;
@@ -697,7 +809,7 @@ class _WebGestureCamera implements GestureCameraSink {
     _state._gestureMoving = false;
     if (!_state._gestureMoveStarted) return;
     if (!_fling(velocity.pixelsPerSecond)) {
-      _state.widget.onEvent?.call(const MapEventCameraIdle());
+      _state._onCameraMoveEnd();
     }
   }
 

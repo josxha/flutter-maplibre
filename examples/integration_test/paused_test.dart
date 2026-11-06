@@ -80,12 +80,15 @@ void runTests() {
     });
 
     testWidgets('pauses while an IndexedStack hides the map', (tester) async {
-      final events = <MapEvent>[];
+      final events = <MapEventRenderingChanged>[];
       Widget app(int index) => MaterialApp(
         home: IndexedStack(
           index: index,
           children: [
-            MapLibreMap(options: offlineOptions(), onEvent: events.add),
+            MapLibreMap(
+              options: offlineOptions(),
+              onRenderingChanged: events.add,
+            ),
             const SizedBox(),
           ],
         ),
@@ -93,16 +96,10 @@ void runTests() {
       await tester.pumpWidget(app(0));
       await tester.pumpWidget(app(1));
       await tester.pump();
-      expect(
-        events.whereType<MapEventRenderingChanged>().map((e) => e.paused),
-        [true],
-      );
+      expect(events.map((e) => e.paused), [true]);
       await tester.pumpWidget(app(0));
       await tester.pump();
-      expect(
-        events.whereType<MapEventRenderingChanged>().map((e) => e.paused),
-        [true, false],
-      );
+      expect(events.map((e) => e.paused), [true, false]);
     });
   }, skip: kIsWeb);
 }

@@ -44,36 +44,31 @@ class _LayersWidgetMarkerPageState extends State<LayersWidgetMarkerPage> {
             center: Geographic(lon: 9.17, lat: 47.68),
           ),
         ),
-        onEvent: (event) async {
-          switch (event) {
-            case MapEventStyleLoaded():
-              // The image has the card's logical size at icon size 1.
-              await event.style.addImageFromWidget(
-                id: 'marker',
-                widget: Card(
-                  color: Colors.white,
-                  child: Padding(
-                    padding: const EdgeInsets.all(4),
-                    child: Icon(
-                      Icons.location_on,
-                      color: Colors.red.shade700,
-                      size: 48,
-                    ),
-                  ),
+        onStyleLoaded: (style) async {
+          // The image has the card's logical size at icon size 1.
+          await style.addImageFromWidget(
+            id: 'marker',
+            widget: Card(
+              color: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.all(4),
+                child: Icon(
+                  Icons.location_on,
+                  color: Colors.red.shade700,
+                  size: 48,
                 ),
-              );
-              setState(() {
-                _imageLoaded = true;
-              });
-            case MapEventClick():
-              // add a new marker on click
-              setState(() {
-                _points.add(Feature(geometry: Point(event.point)));
-              });
-            default:
-              // ignore all other events
-              break;
-          }
+              ),
+            ),
+          );
+          setState(() {
+            _imageLoaded = true;
+          });
+        },
+        onClick: (event) {
+          // add a new marker on click
+          setState(() {
+            _points.add(Feature(geometry: Point(event.point)));
+          });
         },
         layers: [
           MarkerLayer(

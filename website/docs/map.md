@@ -87,7 +87,7 @@ picks it from `webSpeed` and `webMaxDuration`.
 
 `MapController.getCamera()` returns the current camera, and the
 `MapController.camera` getter returns it too, or null before the map is
-ready. The `MapEventMoveCamera` event reports every change. Widgets in `MapLibreMap.children` can read the camera with
+ready. `MapLibreMap.onCameraMove` reports every change. Widgets in `MapLibreMap.children` can read the camera with
 `MapCamera.of(context)` and rebuild when it changes.
 
 The controller also converts between coordinates and screen positions with
@@ -118,15 +118,13 @@ map does.
 screen position or in a rectangle, optionally only from some layers:
 
 ```dart
-onEvent: (event) async {
-  if (event case MapEventClick(:final screenPoint)) {
-    final features = await controller.featuresAtPoint(
-      screenPoint,
-      layerIds: ['points'],
-    );
-    for (final feature in features) {
-      print('${feature.layerId}: ${feature.properties}');
-    }
+onClick: (event) async {
+  final features = await controller.featuresAtPoint(
+    event.screenPoint,
+    layerIds: ['points'],
+  );
+  for (final feature in features) {
+    print('${feature.layerId}: ${feature.properties}');
   }
 },
 ```
@@ -153,6 +151,6 @@ MapLibreMap(
 )
 ```
 
-`MapController.isRenderingPaused` and the `MapEventRenderingChanged` event tell
+`MapController.isRenderingPaused` and the `onRenderingChanged` callback tell
 whether the map renders. On web, the browser already skips hidden maps, so
 `paused` has no effect there.

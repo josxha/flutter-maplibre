@@ -46,14 +46,8 @@ class _WidgetLayerPageState extends State<WidgetLayerInteractivePage> {
                 initCamera: const InitialCamera.position(zoom: 3),
               ),
               onMapCreated: (controller) => _controller = controller,
-              onEvent: (event) async {
-                if (event is MapEventLongClick) {
-                  final position = event.point;
-                  _markerPositions.add(position);
-
-                  setState(() {});
-                }
-              },
+              onLongClick: (event) =>
+                  setState(() => _markerPositions.add(event.point)),
               children: [
                 WidgetLayer(
                   allowInteraction: true,

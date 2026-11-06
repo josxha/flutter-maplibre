@@ -40,17 +40,38 @@ MapOptions offlineOptions({
   ),
 );
 
+/// A lifecycle callback of [MapLibreMap] that a [TestMap] recorded.
+enum MapLifecycle {
+  /// [MapLibreMap.onMapCreated].
+  created,
+
+  /// [MapLibreMap.onStyleLoaded].
+  styleLoaded,
+}
+
 /// The default timeout of the `waitFor…` helpers.
 const Duration defaultTimeout = Duration(seconds: 15);
 
 /// A map shown by [pumpMap], with its controller, style and every event it
 /// reported.
 class TestMap {
-  TestMap._(this.tester, this.controller, this.events, this._app);
+  TestMap._(
+    this.tester,
+    this.controller,
+    this.events,
+    this.lifecycle,
+    this._app,
+  );
 
   final WidgetTester tester;
   final MapController controller;
+
+  /// The events of the callbacks that [MapApp] sets.
   final List<MapEvent> events;
+
+  /// The [MapLibreMap.onMapCreated] and [MapLibreMap.onStyleLoaded] calls, in
+  /// order.
+  final List<MapLifecycle> lifecycle;
   final MapApp Function(MapOptions options) _app;
 
   /// Shows the map with new [options], keeping its callbacks and layers.
@@ -134,6 +155,20 @@ class TestMap {
     return match()!;
   }
 
+  /// The number of styles that loaded.
+  int get styleLoads =>
+      lifecycle.where((entry) => entry == MapLifecycle.styleLoaded).length;
+
+  /// Waits until a style loads after [since] style loads.
+  Future<void> waitForStyleLoad({
+    required int since,
+    Duration timeout = defaultTimeout,
+  }) => pumpUntil(
+    () => styleLoads > since,
+    reason: () => 'waiting for a style load, got $lifecycle',
+    timeout: timeout,
+  );
+
   /// Waits until the camera matches [matches], and returns it.
   Future<MapCamera> waitForCamera(
     bool Function(MapCamera camera) matches, {
@@ -206,13 +241,18 @@ Future<TestMap> pumpMap(
   bool paused = false,
 }) async {
   final events = <MapEvent>[];
+  final lifecycle = <MapLifecycle>[];
   final controller = Completer<MapController>();
   final style = Completer<StyleController>();
   MapApp app(MapOptions options) => MapApp(
     options: options,
     layers: layers,
-    onMapCreated: controller.complete,
+    onMapCreated: (controller_) {
+      lifecycle.add(MapLifecycle.created);
+      controller.complete(controller_);
+    },
     onStyleLoaded: (style_) {
+      lifecycle.add(MapLifecycle.styleLoaded);
       if (!style.isCompleted) style.complete(style_);
     },
     onEvent: events.add,
@@ -229,7 +269,13 @@ Future<TestMap> pumpMap(
     }
     await tester.pump(const Duration(milliseconds: 50));
   }
-  final map = TestMap._(tester, await controller.future, events, app);
+  final map = TestMap._(
+    tester,
+    await controller.future,
+    events,
+    lifecycle,
+    app,
+  );
   await style.future.timeout(defaultTimeout);
   // Let the first frame reach Flutter, so projections follow the camera.
   await map.pumpUntil(
@@ -242,6 +288,9 @@ Future<TestMap> pumpMap(
 }
 
 /// The app that [pumpMap] shows: a full-screen map.
+///
+/// [onEvent] receives the events of every callback except the ones of each
+/// frame, tile, glyph and sprite.
 class MapApp extends StatelessWidget {
   const MapApp({
     required this.options,
@@ -249,6 +298,7 @@ class MapApp extends StatelessWidget {
     this.onMapCreated,
     this.onStyleLoaded,
     this.onEvent,
+    this.onRenderFrame,
     this.children = const [],
     this.paused = false,
     super.key,
@@ -258,7 +308,8 @@ class MapApp extends StatelessWidget {
   final List<Layer> layers;
   final MapCreatedCallback? onMapCreated;
   final StyleLoadedCallback? onStyleLoaded;
-  final MapEventCallback? onEvent;
+  final void Function(MapEvent event)? onEvent;
+  final MapEventCallback<MapEventRenderFrame>? onRenderFrame;
   final List<Widget> children;
   final bool paused;
 
@@ -271,7 +322,25 @@ class MapApp extends StatelessWidget {
         layers: layers,
         onMapCreated: onMapCreated,
         onStyleLoaded: onStyleLoaded,
-        onEvent: onEvent,
+        onClick: onEvent,
+        onDoubleClick: onEvent,
+        onSecondaryClick: onEvent,
+        onLongClick: onEvent,
+        onCameraMoveStart: onEvent,
+        onCameraMove: onEvent,
+        onCameraMoveEnd: onEvent,
+        onIdle: onEvent,
+        onError: onEvent,
+        onStyleImageMissing: onEvent,
+        onLoadingStarted: onEvent,
+        onLoadingFinished: onEvent,
+        onSourceChanged: onEvent,
+        onRenderingChanged: onEvent,
+        onResize: onEvent,
+        onContextLost: onEvent,
+        onContextRestored: onEvent,
+        onProjectionChanged: onEvent,
+        onRenderFrame: onRenderFrame,
         paused: paused,
         children: children,
       ),

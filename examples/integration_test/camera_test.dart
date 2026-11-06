@@ -51,14 +51,17 @@ void runTests() {
       final map = await pumpMap(tester);
       final since = map.events.length;
       await map.controller.moveCamera(zoom: 6);
-      final moved = await map.waitForEvent<MapEventMoveCamera>(since: since);
+      final moved = await map.waitForEvent<MapEventCameraMove>(since: since);
       expect(moved.camera.zoom, closeTo(6, 1e-6));
-      await map.waitForEvent<MapEventCameraIdle>(since: since);
+      expect(moved.reason, CameraChangeReason.programmatic);
+      final end = await map.waitForEvent<MapEventCameraMoveEnd>(since: since);
+      expect(end.camera.zoom, closeTo(6, 1e-6));
+      expect(end.reason, CameraChangeReason.programmatic);
       final start = map.events
           .skip(since)
-          .whereType<MapEventStartMoveCamera>()
+          .whereType<MapEventCameraMoveStart>()
           .first;
-      expect(start.reason, CameraChangeReason.developerAnimation);
+      expect(start.reason, CameraChangeReason.programmatic);
     });
 
     testWidgets('the camera widgets see follows the frame on screen', (
@@ -84,7 +87,8 @@ void runTests() {
           zoom: 6,
           bearing: 45,
           pitch: 30,
-          nativeDuration: const Duration(milliseconds: 300),
+          // Long enough that a slow CI runner reads the camera mid-way.
+          nativeDuration: const Duration(seconds: 1),
           webMaxDuration: const Duration(milliseconds: 300),
         ),
         reason: 'animateCamera',
@@ -100,7 +104,7 @@ void runTests() {
       if (kIsWeb) return;
       final zooms = map.events
           .skip(since)
-          .whereType<MapEventMoveCamera>()
+          .whereType<MapEventCameraMove>()
           .map((event) => event.camera.zoom)
           .where((zoom) => zoom > 4.01 && zoom < 5.99);
       expect(zooms, isNotEmpty);
