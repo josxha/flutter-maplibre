@@ -105,13 +105,12 @@ void runTests() {
       tester,
     ) async {
       final map = await pumpMltMap(tester, fastPfor: true);
-      final everything = Offset.zero & map.size;
       final deadline = DateTime.now().add(defaultTimeout);
       var features = <RenderedFeature>[];
       while (features.isEmpty && DateTime.now().isBefore(deadline)) {
         await tester.pump(const Duration(milliseconds: 100));
-        features = await map.controller.featuresInRect(
-          everything,
+        features = await map.controller.queryRenderedFeatures(
+          const .viewport(),
           layerIds: ['points'],
         );
       }
@@ -130,8 +129,8 @@ void runTests() {
       );
       await map.waitForEvent<MapEventIdle>(since: map.events.length);
       expect(
-        await map.controller.featuresInRect(
-          Offset.zero & map.size,
+        await map.controller.queryRenderedFeatures(
+          const .viewport(),
           layerIds: ['points'],
         ),
         isEmpty,
