@@ -20,6 +20,7 @@ class MapOptions {
     this.maxPitch = 60,
     this.maxBounds,
     this.gestures = const MapGestures.all(),
+    this.fastPforEnabled = false,
   });
 
   /// Find the [MapOptions] of the closest [MapLibreMap] in the widget tree.
@@ -73,6 +74,19 @@ class MapOptions {
   /// Enable and disable some or all map gestures.
   final MapGestures gestures;
 
+  /// Whether the map decodes MapLibre Tile (MLT) vector tiles that use
+  /// FastPFOR integer encodings. Defaults to false, as in MapLibre Native.
+  ///
+  /// Without it, MapLibre Native drops each such tile with the warning
+  /// `MLT parse failed: FastPFOR decoding is not enabled`. Servers such as
+  /// Martin use FastPFOR when they encode MLT, so enable it for their tiles.
+  ///
+  /// Read once, when the map is created: changing it later has no effect.
+  ///
+  /// Supported platforms: native only. MapLibre GL JS always decodes
+  /// FastPFOR, so the web ignores it.
+  final bool fastPforEnabled;
+
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -84,7 +98,8 @@ class MapOptions {
           minPitch == other.minPitch &&
           maxPitch == other.maxPitch &&
           maxBounds == other.maxBounds &&
-          gestures == other.gestures;
+          gestures == other.gestures &&
+          fastPforEnabled == other.fastPforEnabled;
 
   @override
   int get hashCode => Object.hash(
@@ -96,5 +111,6 @@ class MapOptions {
     maxPitch,
     maxBounds,
     gestures,
+    fastPforEnabled,
   );
 }

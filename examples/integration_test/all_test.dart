@@ -6,6 +6,7 @@ import 'features_test.dart' as features;
 import 'gestures_test.dart' as gestures;
 import 'layers_test.dart' as layers;
 import 'map_test.dart' as map;
+import 'mlt_test.dart' as mlt;
 import 'offline_test.dart' as offline;
 import 'paused_test.dart' as paused;
 import 'projection_test.dart' as projection;
@@ -23,6 +24,7 @@ void main() {
   projection.runTests();
   style.runTests();
   features.runTests();
+  mlt.runTests();
   layers.runTests();
   gestures.runTests();
   ui.runTests();

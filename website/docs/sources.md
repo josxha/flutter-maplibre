@@ -138,6 +138,26 @@ the [VectorSource](https://pub.dev/documentation/maplibre/latest/maplibre/Vector
 to supply the map with a source of Mapbox Vector Tiles (MVT). The data is then
 shown in a combination of circle, fill, line and symbol layers on the map.
 
+### MapLibre Tiles (MLT)
+
+A vector source can also serve [MapLibre Tiles](https://maplibre.org/maplibre-tile-spec/)
+instead of MVT. Set `"encoding": "mlt"` on the source in the style JSON.
+
+Encoders such as [Martin](https://maplibre.org/martin/) compress integers with
+FastPFOR, which MapLibre Native only decodes when the map is created with
+`fastPforEnabled`. Without it, such tiles are dropped with the warning
+`MLT parse failed: FastPFOR decoding is not enabled`. The web always decodes
+them.
+
+```dart
+MapLibreMap(
+  options: MapOptions(
+    style: MapStyle.url('https://example.com/style-with-mlt.json'),
+    fastPforEnabled: true,
+  ),
+)
+```
+
 ## Read and update sources
 
 `style.sources` holds the sources of the style. It reads synchronously, and is

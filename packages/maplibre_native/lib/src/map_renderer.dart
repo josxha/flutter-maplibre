@@ -120,12 +120,14 @@ final class MapRenderer implements FrameTargetHost {
   onFrameShown;
 
   /// Creates a renderer of [extent] whose map queues the events of
-  /// [eventMask]. [setUp] submits the map's first commands, such as its
+  /// [eventMask] and decodes FastPFOR in MLT tiles if [fastPforEnabled].
+  /// [setUp] submits the map's first commands, such as its
   /// camera and style, which the map runs once it is created and before the
   /// session renders its first frame.
   static Future<MapRenderer> create({
     required LogicalExtent extent,
     RuntimeEventFlag? eventMask,
+    bool fastPforEnabled = false,
     Future<void> Function(MapHandle map)? setUp,
     void Function(RuntimeEvent event)? onEvent,
     void Function(MapProjectionHandle projection, RenderFrameResult frame)?
@@ -151,7 +153,11 @@ final class MapRenderer implements FrameTargetHost {
             : early.addAll(events),
       );
       final created = runtime.createMap(
-        MapOptions(initialExtent: extent, eventMask: eventMask),
+        MapOptions(
+          initialExtent: extent,
+          eventMask: eventMask,
+          fastPforEnabled: fastPforEnabled,
+        ),
       );
       map = created.map;
       // Commands run once the map is created, so they need not wait for it.

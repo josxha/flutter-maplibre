@@ -182,6 +182,14 @@ void main() {
         const MapOptions(),
         isNot(const MapOptions(style: MapStyle.asset('style.json'))),
       );
+      expect(
+        const MapOptions(),
+        isNot(const MapOptions(fastPforEnabled: true)),
+      );
+    });
+
+    test('leaves FastPFOR decoding off by default, as MapLibre Native', () {
+      expect(const MapOptions().fastPforEnabled, isFalse);
     });
   });
 

@@ -147,6 +147,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
       final renderer = await MapRenderer.create(
         extent: extent,
         eventMask: _eventMask = _eventMaskOf(widget),
+        fastPforEnabled: options.fastPforEnabled,
         setUp: _setUp,
         onEvent: _onRuntimeEvent,
         onFrameShown: _onFrameShown,
