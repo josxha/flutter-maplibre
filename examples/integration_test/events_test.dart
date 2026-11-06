@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -27,10 +29,19 @@ void runTests() {
     testWidgets('report a style that fails to load', (tester) async {
       final map = await pumpMap(tester);
       final since = map.events.length;
-      // Nothing listens on the discard port, so the request fails at once.
-      await map.setOptions(
-        const MapOptions(style: MapStyle.url('http://127.0.0.1:9/style.json')),
-      );
+      // A browser fails at once on the discard port, where nothing listens.
+      // MapLibre Native retries a refused connection, but not a 404.
+      var url = 'http://127.0.0.1:9/style.json';
+      if (!kIsWeb) {
+        final server = await HttpServer.bind(InternetAddress.loopbackIPv4, 0);
+        addTearDown(() => server.close(force: true));
+        server.listen((request) {
+          request.response.statusCode = HttpStatus.notFound;
+          unawaited(request.response.close());
+        });
+        url = 'http://127.0.0.1:${server.port}/style.json';
+      }
+      await map.setOptions(MapOptions(style: MapStyle.url(url)));
       final error = await map.waitForEvent<MapEventError>(since: since);
       expect(error.message, isNotEmpty);
     });
