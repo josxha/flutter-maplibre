@@ -75,12 +75,18 @@ void runTests() {
 
     testWidgets('report a change of the projection', (tester) async {
       final map = await pumpMap(tester, options: offlineOptions(zoom: 1));
-      final since = map.events.length;
-      map.style.setProjection(const .literal(.verticalPerspective));
-      final changed = await map.waitForEvent<MapEventProjectionChanged>(
-        since: since,
-      );
-      expect(changed.projection, MapProjection.verticalPerspective);
+      for (final projection in [
+        MapProjection.verticalPerspective,
+        MapProjection.globe,
+        MapProjection.mercator,
+      ]) {
+        final since = map.events.length;
+        map.style.setProjection(.literal(projection));
+        final changed = await map.waitForEvent<MapEventProjectionChanged>(
+          since: since,
+        );
+        expect(changed.projection, projection);
+      }
     }, skip: !kIsWeb);
 
     testWidgets('report a source whose data changed', (tester) async {
