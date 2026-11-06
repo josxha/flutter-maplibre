@@ -607,7 +607,6 @@ void main() {
         buffer: 64,
         tolerance: 1,
         lineMetrics: true,
-        filter: .equal(.get('kind'), const .literal('a')),
         cluster: GeoJsonCluster(
           radius: 40,
           maxZoom: 12,
@@ -622,8 +621,6 @@ void main() {
             ),
           },
         ),
-        generateId: true,
-        promoteId: 'name',
       );
       final json = source.toJson();
       expect(json['clusterProperties'], {
@@ -645,7 +642,6 @@ void main() {
       final read = Source.fromJson('g', json) as GeoJsonSourceData;
       expect(read.toJson(), json);
       expect(read.cluster, source.cluster);
-      expect(read.filter, source.filter);
       expect(read.data, source.data);
     });
 

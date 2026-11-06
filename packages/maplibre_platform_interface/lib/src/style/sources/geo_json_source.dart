@@ -16,10 +16,7 @@ sealed class GeoJsonSource extends Source {
     this.buffer = 128,
     this.tolerance = 0.375,
     this.lineMetrics = false,
-    this.filter,
     this.cluster,
-    this.generateId = false,
-    this.promoteId,
   });
 
   factory GeoJsonSource._fromJson(String id, Map<String, Object?> json) {
@@ -28,15 +25,9 @@ sealed class GeoJsonSource extends Source {
     final buffer = (json['buffer'] as num?)?.toInt() ?? 128;
     final tolerance = _doubleOf(json['tolerance']) ?? 0.375;
     final lineMetrics = json['lineMetrics'] as bool? ?? false;
-    final filter = switch (json['filter']) {
-      null => null,
-      final filter => decodeExpression(filter, decodeBool),
-    };
     final cluster = json['cluster'] == true
         ? GeoJsonCluster._fromJson(json)
         : null;
-    final generateId = json['generateId'] as bool? ?? false;
-    final promoteId = json['promoteId'] as String?;
     return switch (json['data']) {
       final String url => GeoJsonSourceUrl(
         id: id,
@@ -46,10 +37,7 @@ sealed class GeoJsonSource extends Source {
         buffer: buffer,
         tolerance: tolerance,
         lineMetrics: lineMetrics,
-        filter: filter,
         cluster: cluster,
-        generateId: generateId,
-        promoteId: promoteId,
       ),
       final data => GeoJsonSourceData(
         id: id,
@@ -61,10 +49,7 @@ sealed class GeoJsonSource extends Source {
         buffer: buffer,
         tolerance: tolerance,
         lineMetrics: lineMetrics,
-        filter: filter,
         cluster: cluster,
-        generateId: generateId,
-        promoteId: promoteId,
       ),
     };
   }
@@ -78,10 +63,7 @@ sealed class GeoJsonSource extends Source {
     int buffer,
     double tolerance,
     bool lineMetrics,
-    Expression<bool>? filter,
     GeoJsonCluster? cluster,
-    bool generateId,
-    String? promoteId,
   }) = GeoJsonSourceUrl;
 
   /// A GeoJSON source of [data].
@@ -93,10 +75,7 @@ sealed class GeoJsonSource extends Source {
     int buffer,
     double tolerance,
     bool lineMetrics,
-    Expression<bool>? filter,
     GeoJsonCluster? cluster,
-    bool generateId,
-    String? promoteId,
   }) = GeoJsonSourceData;
 
   /// Maximum zoom level at which to create vector tiles (higher means greater
@@ -128,20 +107,8 @@ sealed class GeoJsonSource extends Source {
   /// Defaults to false.
   final bool lineMetrics;
 
-  /// Only the features that match this filter are part of the source.
-  final Expression<bool>? filter;
-
   /// Groups points into clusters, or null to keep every point on its own.
   final GeoJsonCluster? cluster;
-
-  /// Whether to give every feature an id from its index, which replaces the
-  /// ids of the data.
-  ///
-  /// Defaults to false.
-  final bool generateId;
-
-  /// The name of a feature property to use as the feature id.
-  final String? promoteId;
 
   @override
   Map<String, Object?> toJson() => {
@@ -159,10 +126,7 @@ sealed class GeoJsonSource extends Source {
     'buffer': buffer,
     'tolerance': tolerance,
     'lineMetrics': lineMetrics,
-    'generateId': generateId,
     'attribution': ?attribution,
-    'filter': ?filter?.toJson(),
-    'promoteId': ?promoteId,
     ...?cluster?._toJson(),
   };
 
@@ -175,10 +139,7 @@ sealed class GeoJsonSource extends Source {
     buffer: buffer,
     tolerance: tolerance,
     lineMetrics: lineMetrics,
-    filter: filter,
     cluster: cluster,
-    generateId: generateId,
-    promoteId: promoteId,
   );
 
   /// This source loading its data from [url].
@@ -190,10 +151,7 @@ sealed class GeoJsonSource extends Source {
     buffer: buffer,
     tolerance: tolerance,
     lineMetrics: lineMetrics,
-    filter: filter,
     cluster: cluster,
-    generateId: generateId,
-    promoteId: promoteId,
   );
 }
 
@@ -216,10 +174,7 @@ final class GeoJsonSourceUrl extends GeoJsonSource {
     super.buffer,
     super.tolerance,
     super.lineMetrics,
-    super.filter,
     super.cluster,
-    super.generateId,
-    super.promoteId,
   }) : super._();
 
   /// A URL to a GeoJSON file.
@@ -240,10 +195,7 @@ final class GeoJsonSourceData extends GeoJsonSource {
     super.buffer,
     super.tolerance,
     super.lineMetrics,
-    super.filter,
     super.cluster,
-    super.generateId,
-    super.promoteId,
   }) : super._();
 
   /// The GeoJSON of the source.

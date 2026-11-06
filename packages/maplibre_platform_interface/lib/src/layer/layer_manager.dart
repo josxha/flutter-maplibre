@@ -48,7 +48,7 @@ class LayerManager {
 
   static GeoJsonSource _sourceOf(Layer layer, int index) => GeoJsonSource.data(
     id: layer.getSourceId(index),
-    data: .featureCollection(FeatureCollection(layer.list)),
+    data: .featureCollection(FeatureCollection(List.of(layer.list))),
   );
 
   StyleLayer _addStyleLayer(Layer layer, int index, {String? belowLayerId}) {
@@ -80,7 +80,7 @@ class LayerManager {
           unawaited(
             style.sources.updateGeoJsonData(
               layer.getSourceId(index),
-              .featureCollection(FeatureCollection(layer.list)),
+              .featureCollection(FeatureCollection(List.of(layer.list))),
             ),
           );
         }

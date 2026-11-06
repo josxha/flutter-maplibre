@@ -32,7 +32,7 @@
   also hidden ones.
 - Clustered GeoJSON sources with `GeoJsonCluster`, and `getClusterLeaves`,
   `getClusterChildren` and `getClusterExpansionZoom`.
-- `buffer`, `filter`, `generateId` and `promoteId` on `GeoJsonSource`.
+- `GeoJsonSource.buffer`.
 - The vertical perspective projection and interpolated projections on web.
 - `StyleImageOptions` for SDF images and images that fit symbol text.
 - `MapController.cameraFor` and `stopCamera`, and `roll` and `padding` on

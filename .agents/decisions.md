@@ -302,7 +302,9 @@ Each entry: the decision, then why.
   data. Native passes decoded JSON to the C API (text is decoded in Dart
   first); web hands text to `JSON.parse` and only `jsify`s decoded JSON.
   gl-js `updateData` diffs and `getData` are not exposed, as the C API has
-  neither.
+  neither. Nor are the GeoJSON source's `filter`, `generateId` and
+  `promoteId`: MapLibre Native ignores them (checked on Linux, both in the
+  source JSON and on data updates).
 - **Clustering is an optional `GeoJsonCluster` on `GeoJsonSource`, not a
   separate source type.** Sources are immutable data, so the cluster queries
   live on `MapController` next to the other queries: native asks the

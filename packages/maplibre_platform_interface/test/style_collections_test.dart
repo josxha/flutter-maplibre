@@ -346,7 +346,6 @@ void main() {
           lineMetrics: true,
           attribution: 'A',
           cluster: GeoJsonCluster(radius: 10),
-          promoteId: 'name',
         ),
       );
       await sources.updateGeoJsonData('a', const .text('{}'));
@@ -354,7 +353,6 @@ void main() {
       expect(data.data, const GeoJsonData.text('{}'));
       expect(data.lineMetrics, isTrue);
       expect(data.cluster, const GeoJsonCluster(radius: 10));
-      expect(data.promoteId, 'name');
       expect(data.attribution, 'A');
       await sources.updateGeoJsonUrl('a', 'https://b');
       final url = sources['a']! as GeoJsonSourceUrl;
