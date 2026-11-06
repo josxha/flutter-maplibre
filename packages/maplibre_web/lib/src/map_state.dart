@@ -609,6 +609,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     List<String>? layerIds,
     Expression<bool>? filter,
   }) async {
+    if (!mounted) return const [];
     // Only set fields go into the options, since gl-js reads an explicit
     // null as a value.
     final options = JSObject();
@@ -636,7 +637,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
     Expression<bool>? filter,
   }) async {
     // gl-js throws for a source that the style doesn't have.
-    if (_map.getSource(sourceId) == null) return const [];
+    if (!mounted || _map.getSource(sourceId) == null) return const [];
     final options = JSObject();
     if (sourceLayer != null) options['sourceLayer'] = sourceLayer.toJS;
     if (filter != null) options['filter'] = filter.toJson().jsify();

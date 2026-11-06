@@ -600,7 +600,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
     Expression<bool>? filter,
   }) async {
     final renderer = _renderer;
-    if (renderer == null) return const [];
+    if (renderer == null || _disposed) return const [];
     final features = await renderer.querySourceFeatures(
       sourceId,
       sourceLayerIds: sourceLayer == null ? null : [sourceLayer],
@@ -898,7 +898,9 @@ class MapLibreMapStateNative extends MapLibreMapState {
   }) async {
     final renderer = _renderer;
     // No layers to query matches nothing, as on web.
-    if (renderer == null || (layerIds != null && layerIds.isEmpty)) {
+    if (renderer == null ||
+        _disposed ||
+        (layerIds != null && layerIds.isEmpty)) {
       return const [];
     }
     final features = await renderer.queryRenderedFeatures(
