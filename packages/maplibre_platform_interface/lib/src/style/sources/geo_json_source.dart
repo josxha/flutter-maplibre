@@ -232,8 +232,8 @@ final class GeoJsonCluster {
               .entries)
         if (value case [final reduce, final map])
           key: ClusterProperty(
-            reduce: decodeExpression(reduce, _decodeAny),
-            map: decodeExpression(map, _decodeAny),
+            reduce: _clusterExpressionOf(reduce),
+            map: _clusterExpressionOf(map),
           ),
     },
   );
@@ -303,3 +303,9 @@ final class ClusterProperty {
 }
 
 Object? _decodeAny(Object? json) => json;
+
+/// Reads an expression of a cluster property. Its arrays are expressions,
+/// also constant ones such as `["rgb", 255, 0, 0]`, which [decodeExpression]
+/// would read as colors and write back as a `literal`.
+Expression<Object?> _clusterExpressionOf(Object? json) =>
+    json is List<Object?> ? Call(json) : decodeExpression(json, _decodeAny);

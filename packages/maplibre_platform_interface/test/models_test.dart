@@ -653,6 +653,22 @@ void main() {
       expect(read.data, source.data);
     });
 
+    test('reads back constant cluster expressions as they were', () {
+      final json = {
+        'type': 'geojson',
+        'data': 'https://g',
+        'cluster': true,
+        'clusterProperties': {
+          'color': [
+            ['accumulated'],
+            ['rgb', 255, 0, 0],
+          ],
+        },
+      };
+      final read = Source.fromJson('g', json) as GeoJsonSource;
+      expect(read.toJson()['clusterProperties'], json['clusterProperties']);
+    });
+
     test('has no cluster options without clustering', () {
       const source = GeoJsonSource.url(id: 'g', url: 'https://g');
       expect(source.toJson().keys, isNot(contains('cluster')));
