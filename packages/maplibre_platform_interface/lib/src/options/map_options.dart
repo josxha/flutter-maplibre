@@ -75,16 +75,15 @@ class MapOptions {
   final MapGestures gestures;
 
   /// Whether the map decodes MapLibre Tile (MLT) vector tiles that use
-  /// FastPFOR integer encodings. Defaults to false, as in MapLibre Native.
+  /// FastPFOR integer encodings. Defaults to false.
   ///
-  /// Without it, MapLibre Native drops each such tile with the warning
+  /// Without it, the map drops each such tile with the warning
   /// `MLT parse failed: FastPFOR decoding is not enabled`. Servers such as
   /// Martin use FastPFOR when they encode MLT, so enable it for their tiles.
   ///
   /// Read once, when the map is created: changing it later has no effect.
   ///
-  /// Supported platforms: native only. MapLibre GL JS always decodes
-  /// FastPFOR, so the web ignores it.
+  /// Not needed on web, where FastPFOR decoding is always enabled.
   final bool fastPforEnabled;
 
   @override

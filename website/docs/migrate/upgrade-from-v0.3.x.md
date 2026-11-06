@@ -126,7 +126,7 @@ Sources are sealed classes with named constructors:
 | 0.3                                 | 0.4                                                  |
 |-------------------------------------|------------------------------------------------------|
 | `GeoJsonSource(data: url)`          | `GeoJsonSource.url(url: url)`                        |
-| `GeoJsonSource(data: geoJson)`      | `GeoJsonSource.data(data: geoJson)`                  |
+| `GeoJsonSource(data: geoJson)`      | `GeoJsonSource.data(data: .text(geoJson))`           |
 | `ImageSource(url: url)`             | `ImageSource.url(url: url)`, or `.bytes` / `.provider` |
 | `VectorSource(url: tileJsonUrl)`    | `VectorSource.url(url: tileJsonUrl)`                 |
 | `VectorSource(tiles: [...])`        | `VectorSource.tiles(tiles: [...])`                   |
@@ -135,6 +135,23 @@ Sources are sealed classes with named constructors:
 
 `VideoSource.coordinates` is a `LngLatQuad`, like `ImageSource.coordinates`.
 `VideoSource` is only supported on web.
+
+GeoJSON data is a `GeoJsonData` instead of a string, in `GeoJsonSource.data`
+and `updateGeoJsonData`. Wrap GeoJSON text in `.text(...)`, decoded JSON in
+`.json(...)`, or pass geobase objects without encoding them yourself:
+
+```dart
+// 0.3
+GeoJsonSource(id: 'points', data: jsonEncode(geoJson));
+await style.updateGeoJsonSource(id: 'points', data: collection.toText());
+
+// 0.4
+GeoJsonSource.data(id: 'points', data: .json(geoJson));
+await style.sources.updateGeoJsonData('points', .featureCollection(collection));
+```
+
+`GeoJsonSourceData.data` returns that `GeoJsonData`, whose `toText()` and
+`toJson()` give the GeoJSON.
 
 ## 6. Images
 
@@ -149,6 +166,10 @@ await style.addImage('marker', bytes, pixelRatio: 2);
 
 `addImageFromCanvas` and `addImageFromIconData` take their sizes in logical
 pixels.
+
+Every image method takes `StyleImageOptions` for SDF images (`sdf`) and images
+that fit the text of a symbol (`stretchX`, `stretchY`, `content`,
+`textFitWidth`, `textFitHeight`).
 
 ## 7. Geometry types
 
@@ -230,9 +251,20 @@ available. Widgets over the map no longer need a `PointerInterceptor`.
 
 ## 12. Native platforms
 
-MapLibre Native has no globe projection, so
-`setProjection(MapProjection.globe)` keeps Mercator on Android, iOS and
-desktop.
+`setProjection` takes an `Expression<MapProjection>`, as the style spec does,
+so a projection can change with the zoom level. `MapProjection` adds
+`verticalPerspective`:
+
+```dart
+// 0.3
+style.setProjection(MapProjection.globe);
+
+// 0.4
+style.setProjection(const .literal(.globe));
+```
+
+Projections other than Mercator are only supported on web. On every other
+platform, the map keeps Mercator.
 
 ## 13. Events
 
@@ -319,5 +351,5 @@ await controller.animateCamera(
 | A `PlatformException` when an animation is cancelled (web) | `CameraAnimationResult.cancelled` |
 
 `animateCamera` now eases for 300 ms by default, where 0.3 flew for 2 seconds
-on native platforms. Pass `animation: const CameraAnimation.fly()` to fly.
+on every platform but web. Pass `animation: const CameraAnimation.fly()` to fly.
 

@@ -48,7 +48,7 @@ class LayerManager {
 
   static GeoJsonSource _sourceOf(Layer layer, int index) => GeoJsonSource.data(
     id: layer.getSourceId(index),
-    data: FeatureCollection(layer.list).toText(),
+    data: .featureCollection(FeatureCollection(List.of(layer.list))),
   );
 
   StyleLayer _addStyleLayer(Layer layer, int index, {String? belowLayerId}) {
@@ -71,7 +71,7 @@ class LayerManager {
           continue;
         }
         // Only re-serialise a source whose features actually changed. Building
-        // the FeatureCollection text is the expensive half of this call.
+        // the GeoJSON is the expensive half of this call.
         //
         // `Layer.==` compares `list` by identity and misses features added to
         // the same list in place, so the features are compared with the copy
@@ -80,7 +80,7 @@ class LayerManager {
           unawaited(
             style.sources.updateGeoJsonData(
               layer.getSourceId(index),
-              FeatureCollection(layer.list).toText(),
+              .featureCollection(FeatureCollection(List.of(layer.list))),
             ),
           );
         }

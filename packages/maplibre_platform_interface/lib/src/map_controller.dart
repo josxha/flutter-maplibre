@@ -131,4 +131,31 @@ abstract interface class MapController {
     String? sourceLayer,
     Expression<bool>? filter,
   });
+
+  /// The zoom level at which the cluster [clusterId] of the GeoJSON source
+  /// [sourceId] breaks up into its children.
+  ///
+  /// [clusterId] is the `cluster_id` property of a cluster feature, see
+  /// [GeoJsonCluster].
+  Future<double> getClusterExpansionZoom(String sourceId, int clusterId);
+
+  /// The clusters and points one zoom level below the cluster [clusterId] of
+  /// the GeoJSON source [sourceId].
+  ///
+  /// Returns an empty list if the map has been disposed.
+  Future<List<SourceFeature>> getClusterChildren(
+    String sourceId,
+    int clusterId,
+  );
+
+  /// The points of the cluster [clusterId] of the GeoJSON source [sourceId],
+  /// [limit] of them after skipping [offset].
+  ///
+  /// Returns an empty list if the map has been disposed.
+  Future<List<SourceFeature>> getClusterLeaves(
+    String sourceId,
+    int clusterId, {
+    int limit = 10,
+    int offset = 0,
+  });
 }

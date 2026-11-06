@@ -4,7 +4,6 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:maplibre/maplibre.dart';
@@ -57,45 +56,12 @@ void runTests() {
         tester,
         options: MapOptions(style: MapStyle.json(style('#ff0000'))),
       );
-      // Flutter paints the texture of the map into the image, as on screen.
-      Future<List<int>> pixelAtCenter() async {
-        final view = tester.binding.renderViews.first;
-        final layer = view.debugLayer! as OffsetLayer;
-        // The root layer scales by the device pixel ratio, so the image is in
-        // physical pixels.
-        final center =
-            tester.getCenter(map.finder) * tester.view.devicePixelRatio;
-        final bytes = await tester.runAsync(() async {
-          final image = await layer.toImage(center & const Size(1, 1));
-          final data = await image.toByteData();
-          image.dispose();
-          return data!;
-        });
-        return bytes!.buffer.asUint8List().toList();
-      }
-
-      Future<void> waitForColor(String name, int channel) async {
-        var pixel = await pixelAtCenter();
-        final deadline = DateTime.now().add(defaultTimeout);
-        bool shown(List<int> pixel) => Iterable.generate(
-          3,
-          (i) => i == channel ? pixel[i] >= 200 : pixel[i] <= 50,
-        ).every((ok) => ok);
-        while (!shown(pixel)) {
-          if (DateTime.now().isAfter(deadline)) {
-            fail('The map never showed its $name background, last: $pixel');
-          }
-          await tester.pump(const Duration(milliseconds: 100));
-          pixel = await pixelAtCenter();
-        }
-      }
-
-      await waitForColor('red', 0);
+      await map.waitForColorAtCenter('red', 0);
       // A resize replaces the textures that the frames render into.
       addTearDown(tester.view.resetPhysicalSize);
       tester.view.physicalSize = tester.view.physicalSize * 0.75;
       await map.setOptions(MapOptions(style: MapStyle.json(style('#0000ff'))));
-      await waitForColor('blue', 2);
+      await map.waitForColorAtCenter('blue', 2);
     }, skip: kIsWeb);
 
     testWidgets('starts at the camera of its options', (tester) async {

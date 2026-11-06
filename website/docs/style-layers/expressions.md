@@ -90,7 +90,7 @@ a new style detaches the object; its setters then only change the object.
 A property with a transition has a typed one next to it, such as
 `line.colorTransition = const StyleTransition(duration: Duration(seconds: 1))`.
 
-To show several changes in one frame on native maps, use a batch. The callback
+To show several changes in one frame on every platform but web, use a batch. The callback
 must be synchronous:
 
 ```dart

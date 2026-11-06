@@ -61,8 +61,8 @@ class RecordingStyleBackend implements StyleBackend {
   }
 
   @override
-  Future<void> setGeoJsonData(String id, String data) {
-    calls.add('setGeoJsonData $id $data');
+  Future<void> setGeoJsonData(String id, GeoJsonData data) {
+    calls.add('setGeoJsonData $id ${data.toText()}');
     return _done();
   }
 

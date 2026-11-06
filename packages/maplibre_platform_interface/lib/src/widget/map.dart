@@ -134,7 +134,7 @@ class MapLibreMap extends StatefulWidget {
   /// Called when the style, a source, glyphs or a sprite fail to load, or
   /// the map fails to render.
   ///
-  /// Native maps print errors to the log while this is not set.
+  /// Not on web, errors are printed to the log while this is not set.
   final MapEventCallback<MapEventError>? onError;
 
   /// Called when a layer uses an image that the style doesn't have. Add it
@@ -156,29 +156,29 @@ class MapLibreMap extends StatefulWidget {
 
   /// Called when a tile moves to another step of loading.
   ///
-  /// Supported platforms: native only.
+  /// Not on web.
   final MapEventCallback<MapEventTile>? onTile;
 
-  /// Called whenever the map rendered a frame. Native maps report the
+  /// Called whenever the map rendered a frame. Not on web, it holds the
   /// frame's statistics.
   final MapEventCallback<MapEventRenderFrame>? onRenderFrame;
 
   /// Called when the map finished rendering a view, partially while tiles
   /// still load, or fully.
   ///
-  /// Supported platforms: native only.
+  /// Not on web.
   final MapEventCallback<MapEventRenderMap>? onRenderMap;
 
   /// Called when the map requests or loads glyphs of a font. Failures go to
   /// [onError].
   ///
-  /// Supported platforms: native only.
+  /// Not on web.
   final MapEventCallback<MapEventGlyphs>? onGlyphs;
 
   /// Called when the map requests or loads a sprite. Failures go to
   /// [onError].
   ///
-  /// Supported platforms: native only.
+  /// Not on web.
   final MapEventCallback<MapEventSprite>? onSprite;
 
   /// Called when the map stops or resumes rendering, see [paused].
@@ -190,18 +190,18 @@ class MapLibreMap extends StatefulWidget {
   /// Called when the browser takes the map's WebGL context away, for
   /// example after a GPU reset. The map is blank until [onContextRestored].
   ///
-  /// Supported platforms: web only.
+  /// Only on web.
   final MapEventCallback<MapEventContextLost>? onContextLost;
 
   /// Called when the browser gives the map's WebGL context back.
   ///
-  /// Supported platforms: web only.
+  /// Only on web.
   final MapEventCallback<MapEventContextRestored>? onContextRestored;
 
   /// Called when the map switched its projection, see
   /// [StyleController.setProjection].
   ///
-  /// Supported platforms: web only, native maps always use mercator.
+  /// Only on web. On every other platform, the map always uses Mercator.
   final MapEventCallback<MapEventProjectionChanged>? onProjectionChanged;
 
   /// Declarative layers that get displayed.

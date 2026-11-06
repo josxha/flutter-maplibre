@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart' show OffsetLayer;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:maplibre/maplibre.dart';
 
@@ -208,6 +209,45 @@ class TestMap {
             (shown.pitch - latest.pitch).abs() < 1e-9;
       }, timeout: timeout);
 
+  /// The RGBA color of the pixel at the center of the map, as Flutter paints
+  /// it on screen. Not on web, where the map is not in the layer tree.
+  Future<List<int>> pixelAtCenter() async {
+    final view = tester.binding.renderViews.first;
+    final layer = view.debugLayer! as OffsetLayer;
+    // The root layer scales by the device pixel ratio, so the image is in
+    // physical pixels.
+    final center = tester.getCenter(finder) * tester.view.devicePixelRatio;
+    final bytes = await tester.runAsync(() async {
+      final image = await layer.toImage(center & const Size(1, 1));
+      final data = await image.toByteData();
+      image.dispose();
+      return data!;
+    });
+    return bytes!.buffer.asUint8List().toList();
+  }
+
+  /// Waits until the center of the map shows the color [name], whose RGB
+  /// [channel] is bright and whose other channels are dark.
+  Future<void> waitForColorAtCenter(
+    String name,
+    int channel, {
+    Duration timeout = defaultTimeout,
+  }) async {
+    bool shown(List<int> pixel) => Iterable.generate(
+      3,
+      (i) => i == channel ? pixel[i] >= 200 : pixel[i] <= 50,
+    ).every((ok) => ok);
+    final deadline = DateTime.now().add(timeout);
+    var pixel = await pixelAtCenter();
+    while (!shown(pixel)) {
+      if (DateTime.now().isAfter(deadline)) {
+        fail('The map never showed $name at its center, last: $pixel');
+      }
+      await tester.pump(const Duration(milliseconds: 100));
+      pixel = await pixelAtCenter();
+    }
+  }
+
   /// Waits until a feature query at [point] finds what [matches] accepts.
   /// Rendering is asynchronous, so a feature appears a few frames after its
   /// source or layer was added.
@@ -348,9 +388,9 @@ class MapApp extends StatelessWidget {
   );
 }
 
-/// A GeoJSON feature collection of [features].
-String featureCollection(List<Feature> features) =>
-    FeatureCollection(features).toText();
+/// GeoJSON data of a feature collection of [features].
+GeoJsonData featureCollection(List<Feature> features) =>
+    .featureCollection(FeatureCollection(features));
 
 /// The ID of [feature] as text. Web and native report numeric IDs as numbers
 /// or as text.

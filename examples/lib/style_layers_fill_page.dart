@@ -58,7 +58,10 @@ class _StyleLayersFillPageState extends State<StyleLayersFillPage> {
       'assets/geojson/lake-constance.json',
     );
     await style.sources.add(
-      GeoJsonSource.data(id: 'LakeConstance-Source', data: geojsonPolygon),
+      GeoJsonSource.data(
+        id: 'LakeConstance-Source',
+        data: .text(geojsonPolygon),
+      ),
     );
     await style.layers.add(
       FillStyleLayer(

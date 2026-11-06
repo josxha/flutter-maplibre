@@ -41,19 +41,30 @@ abstract class StyleController {
   /// that is N pixels wide shows N / [pixelRatio] logical pixels wide at an
   /// icon size of 1, on every platform and screen. Pass 2 for an image made
   /// for screens with a device pixel ratio of 2.
-  Future<void> addImage(String id, Uint8List bytes, {double pixelRatio = 1});
+  ///
+  /// [options] make it an SDF image or one that fits the text of a symbol.
+  Future<void> addImage(
+    String id,
+    Uint8List bytes, {
+    double pixelRatio = 1,
+    StyleImageOptions options = const StyleImageOptions(),
+  });
 
   /// Add multiple images to the map where the key is the image ID and the
-  /// value is the image bytes. See [addImage] for [pixelRatio].
+  /// value is the image bytes. See [addImage] for [pixelRatio] and
+  /// [options].
   Future<void> addImages(
     Map<String, Uint8List> images, {
     double pixelRatio = 1,
+    StyleImageOptions options = const StyleImageOptions(),
   }) => Future.wait(
-    images.entries.map((e) => addImage(e.key, e.value, pixelRatio: pixelRatio)),
+    images.entries.map(
+      (e) => addImage(e.key, e.value, pixelRatio: pixelRatio, options: options),
+    ),
   );
 
   /// Add a [dart:ui Image](Image) to the map. See [addImage] for
-  /// [pixelRatio].
+  /// [pixelRatio] and [options].
   ///
   /// The pixels of [image] go to the map as they are, without an encoding to
   /// PNG. The caller keeps [image] and disposes it.
@@ -61,18 +72,20 @@ abstract class StyleController {
     required String id,
     required Image image,
     double pixelRatio = 1,
+    StyleImageOptions options = const StyleImageOptions(),
   });
 
   /// Load an image from the Flutter assets to the map by its [asset] path.
-  /// See [addImage] for [pixelRatio].
+  /// See [addImage] for [pixelRatio] and [options].
   Future<void> addImageFromAssets({
     required String id,
     required String asset,
     double pixelRatio = 1,
+    StyleImageOptions options = const StyleImageOptions(),
   }) async {
     final byteData = await rootBundle.load(asset);
     final bytes = byteData.buffer.asUint8List();
-    await addImage(id, bytes, pixelRatio: pixelRatio);
+    await addImage(id, bytes, pixelRatio: pixelRatio, options: options);
   }
 
   /// Create an image from a [Canvas] and add it to the map with the given [id].
@@ -83,11 +96,14 @@ abstract class StyleController {
   /// The [width] and [height] define the size of the image in logical
   /// pixels, which it has on the map at an icon size of 1. The image is
   /// rendered at the device pixel ratio, so that it stays sharp.
+  ///
+  /// The positions of [options] are logical pixels too.
   Future<void> addImageFromCanvas({
     required String id,
     required void Function(Canvas canvas) painter,
     required double width,
     required double height,
+    StyleImageOptions options = const StyleImageOptions(),
   }) async {
     final pixelRatio = PlatformDispatcher.instance.views.first.devicePixelRatio;
     final pictureRecorder = PictureRecorder();
@@ -100,7 +116,12 @@ abstract class StyleController {
     );
     picture.dispose();
     try {
-      await addImageFromUiImage(id: id, image: image, pixelRatio: pixelRatio);
+      await addImageFromUiImage(
+        id: id,
+        image: image,
+        pixelRatio: pixelRatio,
+        options: options.scaled(pixelRatio),
+      );
     } finally {
       image.dispose();
     }
@@ -112,17 +133,22 @@ abstract class StyleController {
   /// logical pixels, which it has on the map at an icon size of 1.
   ///
   /// The [color] parameter defines the color of the icon. By default, it is
-  /// black.
+  /// black. Draw an icon in one color and pass `StyleImageOptions(sdf: true)`
+  /// as [options] to color it with `icon-color` instead.
+  ///
+  /// The positions of [options] are logical pixels.
   Future<void> addImageFromIconData({
     required String id,
     required IconData iconData,
     double size = 48,
     Color color = const Color(0xFF000000),
+    StyleImageOptions options = const StyleImageOptions(),
   }) async {
     await addImageFromCanvas(
       id: id,
       width: size,
       height: size,
+      options: options,
       painter: (canvas) {
         TextPainter(textDirection: TextDirection.ltr)
           ..text = TextSpan(
@@ -147,6 +173,8 @@ abstract class StyleController {
   /// at an icon size of 1. It is rendered at [imageSize] / [logicalSize],
   /// the device pixel ratio by default, so that it stays sharp.
   ///
+  /// The positions of [options] are logical pixels.
+  ///
   /// This method is inspired by the
   /// [widget_to_marker](https://pub.dev/packages/widget_to_marker) package.
   Future<void> addImageFromWidget({
@@ -155,6 +183,7 @@ abstract class StyleController {
     Size? logicalSize,
     Size? imageSize,
     TextDirection textDirection = TextDirection.ltr,
+    StyleImageOptions options = const StyleImageOptions(),
   }) async {
     final rb = RepaintBoundary(
       child: MediaQuery(
@@ -202,7 +231,12 @@ abstract class StyleController {
     final image = await repaintBoundary.toImage(pixelRatio: pixelRatio);
     buildOwner.finalizeTree();
     try {
-      await addImageFromUiImage(id: id, image: image, pixelRatio: pixelRatio);
+      await addImageFromUiImage(
+        id: id,
+        image: image,
+        pixelRatio: pixelRatio,
+        options: options.scaled(pixelRatio),
+      );
     } finally {
       image.dispose();
     }
@@ -211,23 +245,145 @@ abstract class StyleController {
   /// Removes an image from the map
   Future<void> removeImage(String id);
 
-  /// Set the map projection.
+  /// Sets the projection of the map, a [MapProjection] or an expression that
+  /// changes it with the zoom level.
   ///
-  /// [MapProjection.globe] is only supported on web. MapLibre Native has no
-  /// globe projection, so native maps ignore it and stay on Mercator.
-  void setProjection(MapProjection projection);
+  /// ```dart
+  /// style.setProjection(const .literal(.globe));
+  /// // Vertical perspective when zoomed out, Mercator from zoom level 12.
+  /// style.setProjection(.interpolate(.linear(), .zoom(), {
+  ///   10: const .literal(.verticalPerspective),
+  ///   12: const .literal(.mercator),
+  /// }));
+  /// ```
+  ///
+  /// Projections other than [MapProjection.mercator] are only supported on
+  /// web. On every other platform, the map stays on Mercator.
+  ///
+  /// https://maplibre.org/maplibre-style-spec/projection/
+  void setProjection(Expression<MapProjection> projection);
 
   /// Clean up resources.
   void dispose();
 }
 
-/// The map projections.
+/// The map projections of the style spec.
 ///
-/// https://maplibre.org/maplibre-style-spec/projection/
-enum MapProjection {
-  /// The default web mercator projection.
-  mercator,
+/// https://maplibre.org/maplibre-style-spec/types/#projectiondefinition
+///
+/// {@category Basic}
+enum MapProjection implements StyleEnum {
+  /// The Web Mercator projection.
+  mercator('mercator'),
 
-  /// Globe projection. Only supported on web.
-  globe,
+  /// The world as seen from a point in space above the center of the map.
+  /// Only supported on web.
+  verticalPerspective('vertical-perspective'),
+
+  /// The globe, which is [verticalPerspective] at low zoom levels and
+  /// [mercator] from zoom level 12. Only supported on web.
+  globe('globe');
+
+  const MapProjection(this.value);
+
+  @override
+  final String value;
+}
+
+/// How an image that [StyleImageOptions.textFitWidth] or
+/// [StyleImageOptions.textFitHeight] stretches fits the text of a symbol.
+///
+/// {@category Basic}
+enum ImageTextFit {
+  /// Stretches or shrinks the image to the text.
+  stretchOrShrink,
+
+  /// Only stretches the image to the text, never shrinks it.
+  stretchOnly,
+
+  /// Stretches the image to the text and the other side by as much, keeping
+  /// its aspect ratio.
+  proportional,
+}
+
+/// How the map draws an image of the style, for `icon-text-fit` and SDF
+/// icons. Positions are in pixels of the image, except for the images that
+/// [StyleController.addImageFromCanvas], [StyleController.addImageFromIconData]
+/// and [StyleController.addImageFromWidget] draw, where they are logical
+/// pixels like their size.
+///
+/// https://maplibre.org/maplibre-gl-js/docs/API/type-aliases/StyleImageMetadata/
+///
+/// {@category Basic}
+@immutable
+final class StyleImageOptions {
+  /// Creates the options of an image.
+  const StyleImageOptions({
+    this.sdf = false,
+    this.stretchX = const [],
+    this.stretchY = const [],
+    this.content,
+    this.textFitWidth,
+    this.textFitHeight,
+  });
+
+  /// Whether the image is a signed distance field, whose color
+  /// `icon-color` and `icon-halo-color` set.
+  final bool sdf;
+
+  /// The ranges of x positions, from left to right, that stretch when the
+  /// icon fits the text of a symbol.
+  final List<(double, double)> stretchX;
+
+  /// The ranges of y positions, from top to bottom, that stretch when the
+  /// icon fits the text of a symbol.
+  final List<(double, double)> stretchY;
+
+  /// The part of the image that the text of a symbol fits into.
+  final Rect? content;
+
+  /// How the image fits the width of the text.
+  final ImageTextFit? textFitWidth;
+
+  /// How the image fits the height of the text.
+  final ImageTextFit? textFitHeight;
+
+  /// These options with every position multiplied by [factor].
+  StyleImageOptions scaled(double factor) => factor == 1
+      ? this
+      : StyleImageOptions(
+          sdf: sdf,
+          stretchX: [for (final (a, b) in stretchX) (a * factor, b * factor)],
+          stretchY: [for (final (a, b) in stretchY) (a * factor, b * factor)],
+          content: content == null
+              ? null
+              : Rect.fromLTRB(
+                  content!.left * factor,
+                  content!.top * factor,
+                  content!.right * factor,
+                  content!.bottom * factor,
+                ),
+          textFitWidth: textFitWidth,
+          textFitHeight: textFitHeight,
+        );
+
+  @override
+  bool operator ==(Object other) =>
+      other is StyleImageOptions &&
+      sdf == other.sdf &&
+      listEquals(stretchX, other.stretchX) &&
+      listEquals(stretchY, other.stretchY) &&
+      content == other.content &&
+      textFitWidth == other.textFitWidth &&
+      textFitHeight == other.textFitHeight;
+
+  @override
+  int get hashCode => Object.hash(
+    sdf,
+    Object.hashAll(stretchX),
+    Object.hashAll(stretchY),
+    content,
+    textFitWidth,
+    textFitHeight,
+  );
 }

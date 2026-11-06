@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/animation.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -565,6 +567,175 @@ void main() {
           const SourceFeature(id: 1, properties: {'a': 1}, sourceLayer: 'l'),
         ),
       );
+    });
+  });
+
+  group('GeoJsonData', () {
+    const point = Point(Geographic(lon: 1, lat: 2));
+    const json = {
+      'type': 'Point',
+      'coordinates': [1.0, 2.0],
+    };
+
+    test('gives every kind as text and as JSON', () {
+      for (final data in [
+        const GeoJsonData.geometry(point),
+        const GeoJsonData.json(json),
+        GeoJsonData.text(point.toText()),
+      ]) {
+        expect(data.toJson(), json, reason: '$data');
+        expect(jsonDecode(data.toText()), json, reason: '$data');
+      }
+      const feature = GeoJsonData.feature(Feature(geometry: point, id: 1));
+      expect(feature.toJson()['type'], 'Feature');
+      final collection = GeoJsonData.featureCollection(
+        FeatureCollection(const [Feature(geometry: point)]),
+      );
+      expect(collection.toJson()['features'], hasLength(1));
+    });
+
+    test('compares by kind and value', () {
+      expect(GeoJsonData.json(Map.of(json)), GeoJsonData.json(Map.of(json)));
+      expect(
+        GeoJsonData.json(Map.of(json)).hashCode,
+        GeoJsonData.json(Map.of(json)).hashCode,
+      );
+      expect(GeoJsonData.text('{}' * 1), GeoJsonData.text('{}' * 1));
+      expect(const GeoJsonData.text('{}'), isNot(const GeoJsonData.json({})));
+    });
+  });
+
+  group('GeoJsonSource', () {
+    test('reads back its JSON, with clustering', () {
+      final source = GeoJsonSourceData(
+        id: 'g',
+        data: const .json({'type': 'FeatureCollection', 'features': []}),
+        maxZoom: 14,
+        attribution: 'A',
+        buffer: 64,
+        tolerance: 1,
+        lineMetrics: true,
+        cluster: GeoJsonCluster(
+          radius: 40,
+          maxZoom: 12,
+          minPoints: 3,
+          properties: {
+            'sum': ClusterProperty(
+              reduce: .sum([
+                Expression.accumulated().asNumber(),
+                Expression.get('sum').asNumber(),
+              ]),
+              map: .get('mag'),
+            ),
+          },
+        ),
+      );
+      final json = source.toJson();
+      expect(json['clusterProperties'], {
+        'sum': [
+          [
+            '+',
+            [
+              'number',
+              ['accumulated'],
+            ],
+            [
+              'number',
+              ['get', 'sum'],
+            ],
+          ],
+          ['get', 'mag'],
+        ],
+      });
+      final read = Source.fromJson('g', json) as GeoJsonSourceData;
+      expect(read.toJson(), json);
+      expect(read.cluster, source.cluster);
+      expect(read.data, source.data);
+    });
+
+    test('reads back constant cluster expressions as they were', () {
+      final json = {
+        'type': 'geojson',
+        'data': 'https://g',
+        'cluster': true,
+        'clusterProperties': {
+          'color': [
+            ['accumulated'],
+            ['rgb', 255, 0, 0],
+          ],
+        },
+      };
+      final read = Source.fromJson('g', json) as GeoJsonSource;
+      expect(read.toJson()['clusterProperties'], json['clusterProperties']);
+    });
+
+    test('has no cluster options without clustering', () {
+      const source = GeoJsonSource.url(id: 'g', url: 'https://g');
+      expect(source.toJson().keys, isNot(contains('cluster')));
+      expect(
+        (Source.fromJson('g', {
+          'type': 'geojson',
+          'data': 'https://g',
+          'clusterRadius': 10,
+        }) as GeoJsonSource).cluster,
+        isNull,
+      );
+    });
+  });
+
+  group('MapProjection', () {
+    test('serializes to the projection definitions of the spec', () {
+      expect(
+        const Expression<MapProjection>.literal(.verticalPerspective).toJson(),
+        'vertical-perspective',
+      );
+      expect(
+        Expression.interpolate<MapProjection>(const .linear(), .zoom(), {
+          10: const .literal(.globe),
+          12: const .literal(.mercator),
+        }).toJson(),
+        [
+          'interpolate',
+          ['linear'],
+          ['zoom'],
+          10,
+          'globe',
+          12,
+          'mercator',
+        ],
+      );
+    });
+  });
+
+  group('StyleImageOptions', () {
+    const options = StyleImageOptions(
+      sdf: true,
+      stretchX: [(1, 2)],
+      stretchY: [(3, 4)],
+      content: Rect.fromLTRB(1, 2, 3, 4),
+      textFitWidth: .stretchOnly,
+      textFitHeight: .proportional,
+    );
+
+    test('scales its positions', () {
+      expect(options.scaled(1), same(options));
+      expect(
+        options.scaled(2),
+        const StyleImageOptions(
+          sdf: true,
+          stretchX: [(2, 4)],
+          stretchY: [(6, 8)],
+          content: Rect.fromLTRB(2, 4, 6, 8),
+          textFitWidth: .stretchOnly,
+          textFitHeight: .proportional,
+        ),
+      );
+    });
+
+    test('compares by value', () {
+      expect(options.scaled(2), options.scaled(2));
+      expect(options.scaled(2).hashCode, options.scaled(2).hashCode);
+      expect(options, isNot(const StyleImageOptions()));
     });
   });
 }

@@ -267,7 +267,7 @@ void main() {
       expect((sources['geo-url']! as GeoJsonSourceUrl).lineMetrics, isTrue);
       expect(
         (sources['geo-data']! as GeoJsonSourceData).data,
-        '{"type":"FeatureCollection","features":[]}',
+        const GeoJsonData.json({'type': 'FeatureCollection', 'features': []}),
       );
       expect((sources['geo-data']! as GeoJsonSourceData).attribution, 'A');
       expect((sources['raster-url']! as RasterSourceUrl).tileSize, 256);
@@ -345,12 +345,14 @@ void main() {
           url: 'https://a',
           lineMetrics: true,
           attribution: 'A',
+          cluster: GeoJsonCluster(radius: 10),
         ),
       );
-      await sources.updateGeoJsonData('a', '{}');
+      await sources.updateGeoJsonData('a', const .text('{}'));
       final data = sources['a']! as GeoJsonSourceData;
-      expect(data.data, '{}');
+      expect(data.data, const GeoJsonData.text('{}'));
       expect(data.lineMetrics, isTrue);
+      expect(data.cluster, const GeoJsonCluster(radius: 10));
       expect(data.attribution, 'A');
       await sources.updateGeoJsonUrl('a', 'https://b');
       final url = sources['a']! as GeoJsonSourceUrl;
@@ -360,7 +362,10 @@ void main() {
         'setGeoJsonData a {}',
         'setGeoJsonUrl a https://b',
       ]);
-      expect(sources.updateGeoJsonData('none', '{}'), throwsArgumentError);
+      expect(
+        sources.updateGeoJsonData('none', const .text('{}')),
+        throwsArgumentError,
+      );
     });
 
     test('updates image coordinates', () async {

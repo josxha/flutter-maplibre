@@ -305,6 +305,76 @@ void runTests() {
       expect(await map.controller.querySourceFeatures('missing'), isEmpty);
     });
 
+    testWidgets('a clustered source reports its clusters', (tester) async {
+      final map = await pumpMap(
+        tester,
+        options: offlineOptions(center: _center, zoom: 10),
+      );
+      await map.style.sources.add(
+        GeoJsonSource.data(
+          id: 'clustered',
+          data: featureCollection([
+            for (var i = 0; i < 3; i++)
+              Feature(
+                geometry: Point(Geographic(lon: 0.1 + i * 0.001, lat: 0.1)),
+                id: 10 + i,
+                properties: {'mag': i + 1},
+              ),
+          ]),
+          cluster: GeoJsonCluster(
+            properties: {
+              'sum': ClusterProperty(
+                reduce: .sum([
+                  Expression.accumulated().asNumber(),
+                  Expression.get('sum').asNumber(),
+                ]),
+                map: .get('mag'),
+              ),
+            },
+          ),
+        ),
+      );
+      await map.style.layers.add(
+        CircleStyleLayer(id: 'clusters', sourceId: 'clustered'),
+      );
+      final features = await map.waitForFeatures(
+        map.center,
+        (features) => features.any((f) => f.properties['cluster'] == true),
+        layerIds: ['clusters'],
+      );
+      final cluster = features.firstWhere(
+        (f) => f.properties['cluster'] == true,
+      );
+      expect(cluster.properties['point_count'], 3);
+      expect(cluster.properties['sum'], 6);
+      final clusterId = (cluster.properties['cluster_id']! as num).toInt();
+
+      final leaves = await map.controller.getClusterLeaves(
+        'clustered',
+        clusterId,
+      );
+      expect(leaves.map((f) => f.properties['mag']).toSet(), {1, 2, 3});
+      expect(leaves.first.geometry, isA<Point>());
+      final page = await map.controller.getClusterLeaves(
+        'clustered',
+        clusterId,
+        limit: 2,
+        offset: 2,
+      );
+      expect(page, hasLength(1));
+
+      final children = await map.controller.getClusterChildren(
+        'clustered',
+        clusterId,
+      );
+      expect(children, isNotEmpty);
+      final zoom = await map.controller.getClusterExpansionZoom(
+        'clustered',
+        clusterId,
+      );
+      expect(zoom, greaterThan(10));
+    });
+
     testWidgets('reports the source layer of vector tiles (network)', (
       tester,
     ) async {

@@ -16,8 +16,8 @@ class _Backend extends Mock implements StyleBackend {
   Future<void> removeSource(String id) async => calls.add('removeSource');
 
   @override
-  Future<void> setGeoJsonData(String id, String data) async =>
-      calls.add('setGeoJsonData $data');
+  Future<void> setGeoJsonData(String id, GeoJsonData data) async =>
+      calls.add('setGeoJsonData ${data.toText()}');
 
   @override
   Future<void> addLayer(

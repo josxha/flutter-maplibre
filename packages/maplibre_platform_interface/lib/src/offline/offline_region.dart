@@ -68,7 +68,7 @@ sealed class OfflineRegionDefinition {
   /// The maximum zoom level.
   ///
   /// Tile sources download up to their own maximum zoom level if it is lower.
-  /// Use a finite value: MapLibre Native downloads no tiles at all for
+  /// Use a finite value: no tiles are downloaded at all for
   /// [double.infinity].
   final double maxZoom;
 

@@ -39,7 +39,7 @@ class _StyledMapPageState extends State<StyledMapPage> {
         ),
         children: const [MapScalebar(), SourceAttribution(), MapCompass()],
         onStyleLoaded: (style) {
-          style.setProjection(MapProjection.globe);
+          style.setProjection(const .literal(.globe));
         },
       ),
     );

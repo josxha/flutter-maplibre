@@ -79,10 +79,10 @@ class _StyleLayersLinePageState extends State<StyleLayersLinePage> {
       'assets/geojson/multiline-path.json',
     );
     await style.sources.add(
-      GeoJsonSource.data(id: 'Path1', data: geojsonLine1),
+      GeoJsonSource.data(id: 'Path1', data: .text(geojsonLine1)),
     );
     await style.sources.add(
-      GeoJsonSource.data(id: 'Path2', data: geojsonLine2, tolerance: 0),
+      GeoJsonSource.data(id: 'Path2', data: .text(geojsonLine2), tolerance: 0),
     );
 
     await style.layers.add(
