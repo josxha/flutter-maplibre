@@ -91,7 +91,7 @@ class _MyMapWidget extends State<MyMapWidget> {
             // other parameters can be updated, a new style loads
             style: MapStyle.url('https://demotiles.maplibre.org/style.json'),
             gestures: _gesturesEnabled
-                ? MapGestures.all()
+                ? MapGestures()
                 : MapGestures.none(),
           ),
           onClick: (event) {

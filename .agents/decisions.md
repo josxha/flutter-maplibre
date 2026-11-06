@@ -239,6 +239,17 @@ Each entry: the decision, then why.
 
 ## Public API
 
+- **Network settings are static, on `MapLibreNetwork`, not in
+  `MapOptions`.** On native the header rules and the URL transform belong to
+  a runtime, and the `OfflineManager` has a runtime of its own, so a per-map
+  option couldn't reach its downloads. `createRuntime()` applies them to
+  every runtime and again on each change. On web, `transformRequest` reads
+  them per request. Headers are native header rules (glob URL, first match
+  wins) because the C API runs header callbacks synchronously on a library
+  thread, which Dart can't answer; web matches the same globs in Dart. The
+  URL transform is a Dart callback, set on native only while there is one,
+  as each request then waits for Dart. Resource providers and the network
+  status are not exposed yet.
 - **Events are one `on…` callback per event on `MapLibreMap`, not one
   `onEvent` with a type switch.** A null callback is unsubscribed: native
   maps leave it out of the event mask, web maps don't listen to `render`,
@@ -422,6 +433,26 @@ Each entry: the decision, then why.
 
 ## Gestures
 
+- **Two options decide what gestures do: `MapOptions.movements`
+  (`MapMovements`: `pan`, `zoom`, `rotate`, `pitch`) and
+  `MapOptions.gestures` (`MapGestures`: `drag`, `pinch`, `scrollWheel`,
+  ...), all on by default.** A gesture moves the camera only along the
+  movements that are on. Grouping gestures by movement didn't fit, because a
+  two-finger pinch pans, zooms and rotates, and a right-button drag rotates
+  and tilts; the user wanted the two kinds of switch in separate options.
+  Min/max options can't replace the movement switches: there is no bearing
+  limit, and limits also clamp the camera that the app sets. The
+  model is the one of maplibre-compose, whose `MapInteractions` allows the
+  `pan`, `zoom`, `rotate` and `pitch` movements and whose
+  `InteractionBindings` bind inputs that can't enable a disallowed
+  movement. The input names are Flutter's (`pinch`, `scrollWheel`,
+  `doubleTapDrag`, `fling`) rather than Compose's (`transform`, `scroll`,
+  `tapDrag`, momentum), and `secondaryDrag` matches `onSecondaryClick`. The
+  C API has no gesture switches, only `mln_map_apply_camera_delta`. A
+  new gesture, or an option such as cooperative gestures for maps in a
+  scrolling list, is a new optional field, not a breaking change. A switch
+  exists only for a gesture `MapGestureDetector` recognizes: there are no
+  keyboard or box zoom switches until those are implemented.
 - **One gesture recognizer in Dart serves every platform:
   `MapGestureDetector` in `maplibre_platform_interface`.** It sits there, not
   in `maplibre`, because the platform packages need it and `maplibre` depends

@@ -327,11 +327,49 @@ void main() {
   });
 
   group('MapGestures', () {
-    test('all and none', () {
-      const all = MapGestures.all();
+    test('turns every gesture on by default and off with none', () {
+      const all = MapGestures();
       const none = MapGestures.none();
-      expect(all.allEnabled, isTrue);
-      expect(none.allEnabled, isFalse);
+      List<bool> values(MapGestures g) => [
+        g.drag,
+        g.fling,
+        g.pinch,
+        g.scrollWheel,
+        g.doubleTap,
+        g.doubleTapDrag,
+        g.secondaryDrag,
+        g.twoFingerDrag,
+      ];
+      expect(values(all), everyElement(isTrue));
+      expect(values(none), everyElement(isFalse));
+      expect(
+        const MapGestures.none(drag: true),
+        const MapGestures(
+          fling: false,
+          pinch: false,
+          scrollWheel: false,
+          doubleTap: false,
+          doubleTapDrag: false,
+          secondaryDrag: false,
+          twoFingerDrag: false,
+        ),
+      );
+    });
+
+    test('compares by value', () {
+      const a = MapGestures(scrollWheel: false);
+      final b = const MapGestures().copyWith(scrollWheel: false);
+      expect(a, b);
+      expect(a.hashCode, b.hashCode);
+      expect(a, isNot(const MapGestures()));
+      expect(a.toString(), contains('scrollWheel: false'));
+    });
+  });
+
+  group('MapMovements', () {
+    test('allows every movement by default and none with none', () {
+      const all = MapMovements();
+      const none = MapMovements.none();
       expect([all.pan, all.zoom, all.rotate, all.pitch], everyElement(isTrue));
       expect([
         none.pan,
@@ -339,15 +377,19 @@ void main() {
         none.rotate,
         none.pitch,
       ], everyElement(isFalse));
+      expect(
+        const MapMovements.none(zoom: true),
+        const MapMovements(pan: false, rotate: false, pitch: false),
+      );
     });
 
     test('compares by value', () {
-      const all = MapGestures(rotate: true, pan: true, zoom: true, pitch: true);
-      expect(all, const MapGestures.all());
-      expect(all.hashCode, const MapGestures.all().hashCode);
-      const noPitch = MapGestures.all(pitch: false);
-      expect(noPitch.allEnabled, isFalse);
-      expect(noPitch, isNot(all));
+      const a = MapMovements(pitch: false);
+      final b = const MapMovements().copyWith(pitch: false);
+      expect(a, b);
+      expect(a.hashCode, b.hashCode);
+      expect(a, isNot(const MapMovements()));
+      expect(a.toString(), contains('pitch: false'));
     });
   });
 

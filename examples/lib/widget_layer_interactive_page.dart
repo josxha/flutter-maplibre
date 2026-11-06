@@ -22,7 +22,7 @@ class _WidgetLayerPageState extends State<WidgetLayerInteractivePage> {
   ];
 
   Geographic? _originalPosition;
-  MapGestures _mapGestures = const MapGestures.all();
+  MapMovements _movements = const MapMovements();
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class _WidgetLayerPageState extends State<WidgetLayerInteractivePage> {
             child: MapLibreMap(
               key: _mapKey,
               options: MapOptions(
-                gestures: _mapGestures,
+                movements: _movements,
                 initCamera: const CameraUpdate.position(zoom: 3),
               ),
               onMapCreated: (controller) => _controller = controller,
@@ -145,7 +145,7 @@ class _WidgetLayerPageState extends State<WidgetLayerInteractivePage> {
     _originalPosition = null;
 
     setState(() {
-      _mapGestures = const MapGestures.all();
+      _movements = const MapMovements();
     });
   }
 
@@ -155,7 +155,7 @@ class _WidgetLayerPageState extends State<WidgetLayerInteractivePage> {
 
     setState(() {
       // Disable camera panning while a marker gets moved.
-      _mapGestures = const MapGestures.all(pan: false);
+      _movements = const MapMovements(pan: false);
     });
   }
 

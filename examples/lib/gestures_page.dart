@@ -43,7 +43,7 @@ class _GesturesPageState extends State<GesturesPage> {
           Expanded(
             child: MapLibreMap(
               options: MapOptions(
-                gestures: MapGestures(
+                movements: MapMovements(
                   rotate: _selections[Gestures.rotate]!,
                   pan: _selections[Gestures.pan]!,
                   zoom: _selections[Gestures.zoom]!,

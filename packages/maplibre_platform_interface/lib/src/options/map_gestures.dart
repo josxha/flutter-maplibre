@@ -1,61 +1,122 @@
 part of 'map_options.dart';
 
-/// Configure gestures that are enabled on the map.
+/// The gestures that move the map camera, all on by default.
+///
+/// A gesture moves the camera only along the [MapMovements] that are on.
+///
+/// ```dart
+/// MapOptions(
+///   // No zooming with the scroll wheel.
+///   gestures: MapGestures(scrollWheel: false),
+/// )
+/// ```
 ///
 /// {@category Basic}
 @immutable
 class MapGestures {
-  /// Create a new [MapGestures] object by setting all gestures.
+  /// Turns every gesture on by default.
   const MapGestures({
-    required this.rotate,
-    required this.pan,
-    required this.zoom,
-    required this.pitch,
+    this.drag = true,
+    this.fling = true,
+    this.pinch = true,
+    this.scrollWheel = true,
+    this.doubleTap = true,
+    this.doubleTapDrag = true,
+    this.secondaryDrag = true,
+    this.twoFingerDrag = true,
   });
 
-  /// Create a new [MapGestures] object by enabling all gestures or disabling
-  /// just some gestures.
-  const MapGestures.all({
-    this.rotate = true,
-    this.pan = true,
-    this.zoom = true,
-    this.pitch = true,
-  });
-
-  /// Create a new [MapGestures] object by disable all gestures or enabling just
-  /// some gestures.
+  /// Turns every gesture off by default.
+  ///
+  /// For example, `MapGestures.none(drag: true)` only drags.
   const MapGestures.none({
-    this.rotate = false,
-    this.pan = false,
-    this.zoom = false,
-    this.pitch = false,
+    this.drag = false,
+    this.fling = false,
+    this.pinch = false,
+    this.scrollWheel = false,
+    this.doubleTap = false,
+    this.doubleTapDrag = false,
+    this.secondaryDrag = false,
+    this.twoFingerDrag = false,
   });
 
-  /// Rotate the map bearing.
-  final bool rotate;
+  /// Drag one finger or the mouse to pan.
+  final bool drag;
 
-  /// Move the center of the map around.
-  final bool pan;
+  /// Keep the map moving after a fast [drag] or [pinch] is released.
+  final bool fling;
 
-  /// Zoom the map in and out.
-  final bool zoom;
+  /// Move two fingers on the screen or the trackpad: moving them together
+  /// pans, spreading or pinching them zooms, and twisting them rotates.
+  final bool pinch;
 
-  /// Tilt (pitch) the map camera.
-  final bool pitch;
+  /// Scroll with a mouse wheel to zoom.
+  final bool scrollWheel;
 
-  /// Returns true if all gestures are active
-  bool get allEnabled => rotate && pan && zoom && pitch;
+  /// Double tap or double click to zoom in.
+  final bool doubleTap;
+
+  /// Double tap, keep the finger down and drag it to zoom: down zooms in, up
+  /// zooms out.
+  final bool doubleTapDrag;
+
+  /// Drag with the right mouse button, or with the left button while Ctrl is
+  /// held: sideways to rotate, up or down to tilt.
+  final bool secondaryDrag;
+
+  /// Drag two fingers side by side up or down to tilt.
+  final bool twoFingerDrag;
+
+  /// A copy with the given gestures replaced.
+  MapGestures copyWith({
+    bool? drag,
+    bool? fling,
+    bool? pinch,
+    bool? scrollWheel,
+    bool? doubleTap,
+    bool? doubleTapDrag,
+    bool? secondaryDrag,
+    bool? twoFingerDrag,
+  }) => MapGestures(
+    drag: drag ?? this.drag,
+    fling: fling ?? this.fling,
+    pinch: pinch ?? this.pinch,
+    scrollWheel: scrollWheel ?? this.scrollWheel,
+    doubleTap: doubleTap ?? this.doubleTap,
+    doubleTapDrag: doubleTapDrag ?? this.doubleTapDrag,
+    secondaryDrag: secondaryDrag ?? this.secondaryDrag,
+    twoFingerDrag: twoFingerDrag ?? this.twoFingerDrag,
+  );
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is MapGestures &&
-          runtimeType == other.runtimeType &&
-          rotate == other.rotate &&
-          pan == other.pan &&
-          zoom == other.zoom &&
-          pitch == other.pitch;
+          drag == other.drag &&
+          fling == other.fling &&
+          pinch == other.pinch &&
+          scrollWheel == other.scrollWheel &&
+          doubleTap == other.doubleTap &&
+          doubleTapDrag == other.doubleTapDrag &&
+          secondaryDrag == other.secondaryDrag &&
+          twoFingerDrag == other.twoFingerDrag;
 
   @override
-  int get hashCode => Object.hash(rotate, pan, zoom, pitch);
+  int get hashCode => Object.hash(
+    drag,
+    fling,
+    pinch,
+    scrollWheel,
+    doubleTap,
+    doubleTapDrag,
+    secondaryDrag,
+    twoFingerDrag,
+  );
+
+  @override
+  String toString() =>
+      'MapGestures(drag: $drag, fling: $fling, pinch: $pinch, '
+      'scrollWheel: $scrollWheel, doubleTap: $doubleTap, '
+      'doubleTapDrag: $doubleTapDrag, secondaryDrag: $secondaryDrag, '
+      'twoFingerDrag: $twoFingerDrag)';
 }

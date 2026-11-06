@@ -23,9 +23,15 @@
 - GeoJSON data is a `GeoJsonData` of geobase objects, decoded JSON or text,
   instead of a string.
 - `setProjection` takes an `Expression<MapProjection>`.
+- `MapMovements` (`MapOptions.movements`) takes the `pan`, `zoom`, `rotate`
+  and `pitch` switches of `MapGestures`, and `MapGestures` now has one switch
+  per gesture.
 
 ### Features
 
+- Single gestures can be turned off, such as `MapGestures(scrollWheel: false)`.
+- `MapLibreNetwork` adds HTTP headers to and rewrites the URLs of the
+  requests of every map and the `OfflineManager`.
 - `queryRenderedFeatures` takes a `filter` expression and can query the whole
   map with `QueryGeometry.viewport()`.
 - `MapController.querySourceFeatures` returns the loaded features of a source,
@@ -41,8 +47,8 @@
   `onLoadingFinished`, `onSourceChanged`, `onRenderFrame` and `onResize`;
   `onTile`, `onRenderMap`, `onGlyphs` and `onSprite` on native;
   `onContextLost`, `onContextRestored` and `onProjectionChanged` on web.
-- Taps are reported right away while neither `onDoubleClick` nor the zoom
-  gesture is set.
+- Taps are reported right away while neither `onDoubleClick` nor
+  `MapGestures.doubleTap` is on.
 - `MapEventDoubleClick.preventDefault()` keeps a double tap from zooming,
   also from an async `onDoubleClick`.
 - `MapOptions.fastPforEnabled` decodes MapLibre Tile (MLT) vector tiles that
