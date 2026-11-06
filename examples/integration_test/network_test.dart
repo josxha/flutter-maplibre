@@ -8,6 +8,27 @@ import 'package:maplibre/maplibre.dart';
 
 import 'shared/test_map.dart';
 
+/// A style that draws a circle at 0, 0 from the GeoJSON [data], a URL or
+/// an inline object.
+String _pointStyle(Object data) => jsonEncode({
+  'version': 8,
+  'sources': {
+    'points': {'type': 'geojson', 'data': data},
+  },
+  'layers': [
+    {'id': 'points', 'type': 'circle', 'source': 'points'},
+  ],
+});
+
+const Map<String, Object> _point = {
+  'type': 'Feature',
+  'geometry': {
+    'type': 'Point',
+    'coordinates': [0, 0],
+  },
+  'properties': <String, Object?>{},
+};
+
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   runTests();
@@ -38,28 +59,9 @@ class _StyleServer {
       ..headers.set(HttpHeaders.cacheControlHeader, 'no-store');
     switch (path) {
       case '/style.json':
-        response.write(
-          jsonEncode({
-            'version': 8,
-            'sources': {
-              'points': {'type': 'geojson', 'data': '$origin/points.geojson'},
-            },
-            'layers': [
-              {'id': 'points', 'type': 'circle', 'source': 'points'},
-            ],
-          }),
-        );
+        response.write(_pointStyle('$origin/points.geojson'));
       case '/points.geojson':
-        response.write(
-          jsonEncode({
-            'type': 'Feature',
-            'geometry': {
-              'type': 'Point',
-              'coordinates': [0, 0],
-            },
-            'properties': <String, Object?>{},
-          }),
-        );
+        response.write(jsonEncode(_point));
       default:
         response.statusCode = HttpStatus.notFound;
     }
@@ -74,13 +76,13 @@ void runTests() {
     tearDown(MapLibreNetwork.reset);
 
     testWidgets('rewrites the URLs that maps request', (tester) async {
-      // The web loads the style from a data URL, the other platforms from a
-      // local server.
+      // The web loads the style from a data URL with the point inline, the
+      // other platforms from a local server.
       _StyleServer? server;
       String target;
       if (kIsWeb) {
         target = Uri.dataFromString(
-          offlineStyle,
+          _pointStyle(_point),
           mimeType: 'application/json',
         ).toString();
       } else {
@@ -99,7 +101,12 @@ void runTests() {
         tester,
         options: const MapOptions(style: MapStyle.url(requested)),
       );
-      await map.waitForStyleLoad(since: 0);
+      // The map shows the point of the style that it got instead.
+      await map.waitForFeatures(
+        map.center,
+        (features) => features.isNotEmpty,
+        layerIds: ['points'],
+      );
       expect(transformed, contains((requested, MapResourceKind.style)));
       if (server != null) {
         expect(server.requests.map((r) => r.$1), contains('/style.json'));
@@ -133,8 +140,27 @@ void runTests() {
         () => server.requests.any((r) => r.$1 == '/points.geojson'),
         reason: () => 'waiting for the GeoJSON request',
       );
+      await map.waitForFeatures(
+        map.center,
+        (features) => features.isNotEmpty,
+        layerIds: ['points'],
+      );
       expect(server.requests, contains(('/style.json', 'style')));
       expect(server.requests, contains(('/points.geojson', 'geojson')));
+
+      // Without the headers, the next requests send none.
+      MapLibreNetwork.reset();
+      server.requests.clear();
+      final sinceReset = map.styleLoads;
+      await map.setOptions(
+        MapOptions(style: MapStyle.url('${server.origin}/style.json?reset')),
+      );
+      await map.waitForStyleLoad(since: sinceReset);
+      await map.pumpUntil(
+        () => server.requests.any((r) => r.$1 == '/points.geojson'),
+        reason: () => 'waiting for the GeoJSON request after the reset',
+      );
+      expect(server.requests.map((r) => r.$2), everyElement(isNull));
     }, skip: kIsWeb);
   });
 }
