@@ -24,7 +24,7 @@ show how to move from
 | Rendering           | MapLibre, GPU            | MapLibre, GPU          | Flutter canvas, Dart     | Mapbox, GPU             | Google Maps SDKs          |
 | Map in Flutter as   | `Texture`, HTML element on web | Platform view, HTML element on web | Widgets                  | Platform view           | Platform view             |
 | Android, iOS        | ✅                        | ✅                      | ✅                        | ✅                       | ✅                         |
-| Web                 | ✅                        | ✅                      | ✅                        | ❌                       | ✅                         |
+| Web                 | ✅                        | ✅                      | ✅                        | ✅                       | ✅                         |
 | macOS, Windows, Linux | ✅                      | ❌                      | ✅                        | ❌                       | ❌                         |
 | Vector tiles        | ✅                        | ✅                      | With `vector_map_tiles`  | ✅                       | ❌ (Google's own maps)     |
 | Style spec          | MapLibre, typed          | MapLibre, untyped      | ❌                        | Mapbox                  | Cloud styling or JSON     |
