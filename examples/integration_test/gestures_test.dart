@@ -116,7 +116,7 @@ void runTests() {
       final since = map.events.length;
       // Away from the center, where the previous test tapped, so that the
       // first finger isn't a double tap.
-      final center = map.toGlobal(map.center - const Offset(200, 0));
+      final center = map.toGlobal(map.center - const Offset(0, 150));
       var time = Duration.zero;
       var radius = 40.0;
       var angle = 0.0;
