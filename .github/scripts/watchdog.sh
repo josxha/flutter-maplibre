@@ -4,9 +4,9 @@
 # that started, the stacks of the app process and the tail of the app's log.
 #
 # flutter test sometimes never attaches to the app on the simulator: the app
-# logs its VM service and then waits, while no test starts. Once that has
-# lasted two minutes, the watchdog stops the run and exits with 75, so the
-# caller can start it again.
+# logs its VM service and then waits, while no test starts. A test that
+# attaches starts within seconds, so once that has lasted one minute, the
+# watchdog stops the run and exits with 75, so the caller can start it again.
 #
 # Usage: watchdog.sh <stall seconds> <app process> <app log> -- <command...>
 set -uo pipefail
@@ -41,7 +41,7 @@ while kill -0 "$pid" 2>/dev/null; do
   if ! grep -vE ': loading ' "$out" | grep -qE '^[0-9]+:[0-9]+ \+[0-9]+'; then
     if grep -q 'Dart VM service is listening' "$app_log"; then
       attach_wait=$(( attach_wait + 10 ))
-      if (( attach_wait >= 120 )); then
+      if (( attach_wait >= 60 )); then
         echo "::warning title=flutter test did not attach::The app's VM service has listened for ${attach_wait}s without a test starting."
         stop
         exit 75
