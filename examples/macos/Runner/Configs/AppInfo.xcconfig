@@ -8,7 +8,7 @@
 PRODUCT_NAME = maplibre_example
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.github.josxha.maplibreExample
+PRODUCT_BUNDLE_IDENTIFIER = org.maplibre.maplibreExample
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2026 com.github.josxha. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2026 MapLibre contributors. All rights reserved.

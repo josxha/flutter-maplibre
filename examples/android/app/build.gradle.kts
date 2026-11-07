@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.github.josxha.maplibre_example"
+    namespace = "org.maplibre.maplibre_example"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = "28.2.13676358" // flutter.ndkVersion
 
@@ -15,7 +15,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.github.josxha.maplibre_example"
+        applicationId = "org.maplibre.maplibre_example"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode

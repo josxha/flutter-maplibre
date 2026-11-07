@@ -32,7 +32,7 @@ flutter:
     implements: maplibre
     platforms:
       android:
-        package: com.github.josxha.maplibre_native
+        package: org.maplibre.maplibre_native
         pluginClass: MaplibreNativePlugin
         dartPluginClass: MapLibrePluginNative
         dartFileName: 'src/maplibre_plugin.dart'

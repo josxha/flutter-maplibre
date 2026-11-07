@@ -1,4 +1,4 @@
-package com.github.josxha.maplibre_native
+package org.maplibre.maplibre_native
 
 import android.content.Context
 import android.view.Surface

@@ -38,21 +38,21 @@ import 'package:jni/jni.dart' as jni$_;
 
 const _$jniVersionCheck = jni$_.JniVersionCheck(1, 1);
 
-/// from: `com.github.josxha.maplibre_native.MaplibreNativeApi`
+/// from: `org.maplibre.maplibre_native.MaplibreNativeApi`
 extension type MaplibreNativeApi._(jni$_.JObject _$this)
     implements jni$_.JObject {
   static final _class = jni$_.JClass.forName(
-    r'com/github/josxha/maplibre_native/MaplibreNativeApi',
+    r'org/maplibre/maplibre_native/MaplibreNativeApi',
   );
 
   /// The type which includes information such as the signature of this class.
   static const jni$_.JType<MaplibreNativeApi> type = $MaplibreNativeApi$Type$();
   static final _id_INSTANCE = _class.staticFieldId(
     r'INSTANCE',
-    r'Lcom/github/josxha/maplibre_native/MaplibreNativeApi;',
+    r'Lorg/maplibre/maplibre_native/MaplibreNativeApi;',
   );
 
-  /// from: `static public final com.github.josxha.maplibre_native.MaplibreNativeApi INSTANCE`
+  /// from: `static public final org.maplibre.maplibre_native.MaplibreNativeApi INSTANCE`
   /// The returned object must be released after use, by calling the [release] method.
   static MaplibreNativeApi get INSTANCE =>
       _id_INSTANCE.get(_class, MaplibreNativeApi.type) as MaplibreNativeApi;
@@ -90,7 +90,7 @@ extension type MaplibreNativeApi._(jni$_.JObject _$this)
 
   static final _id_createSurfaceTexture = _class.staticMethodId(
     r'createSurfaceTexture',
-    r'(IILcom/github/josxha/maplibre_native/SurfaceListener;)J',
+    r'(IILorg/maplibre/maplibre_native/SurfaceListener;)J',
   );
 
   static final _createSurfaceTexture =
@@ -115,7 +115,7 @@ extension type MaplibreNativeApi._(jni$_.JObject _$this)
             )
           >();
 
-  /// from: `public fun createSurfaceTexture(width: kotlin.Int, height: kotlin.Int, listener: com.github.josxha.maplibre_native.SurfaceListener): kotlin.Long`
+  /// from: `public fun createSurfaceTexture(width: kotlin.Int, height: kotlin.Int, listener: org.maplibre.maplibre_native.SurfaceListener): kotlin.Long`
   static core$_.int createSurfaceTexture(
     core$_.int i,
     core$_.int i1,
@@ -243,15 +243,14 @@ final class $MaplibreNativeApi$Type$ extends jni$_.JType<MaplibreNativeApi> {
 
   @jni$_.internal
   @core$_.override
-  String get signature =>
-      r'Lcom/github/josxha/maplibre_native/MaplibreNativeApi;';
+  String get signature => r'Lorg/maplibre/maplibre_native/MaplibreNativeApi;';
 }
 
-/// from: `com.github.josxha.maplibre_native.SurfaceListener`
+/// from: `org.maplibre.maplibre_native.SurfaceListener`
 extension type SurfaceListener._(jni$_.JObject _$this)
     implements jni$_.JObject {
   static final _class = jni$_.JClass.forName(
-    r'com/github/josxha/maplibre_native/SurfaceListener',
+    r'org/maplibre/maplibre_native/SurfaceListener',
   );
 
   /// The type which includes information such as the signature of this class.
@@ -315,7 +314,7 @@ extension type SurfaceListener._(jni$_.JObject _$this)
       jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
     implementer.add(
-      r'com.github.josxha.maplibre_native.SurfaceListener',
+      r'org.maplibre.maplibre_native.SurfaceListener',
       $p,
       _$invokePointer,
       [
@@ -436,8 +435,7 @@ final class $SurfaceListener$Type$ extends jni$_.JType<SurfaceListener> {
 
   @jni$_.internal
   @core$_.override
-  String get signature =>
-      r'Lcom/github/josxha/maplibre_native/SurfaceListener;';
+  String get signature => r'Lorg/maplibre/maplibre_native/SurfaceListener;';
 }
 
 /// from: `android.content.Context`

@@ -1,4 +1,4 @@
-package com.github.josxha.maplibre_native
+package org.maplibre.maplibre_native
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 

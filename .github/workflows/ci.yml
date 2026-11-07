@@ -290,7 +290,7 @@ jobs:
               || status=$?
             kill "$log_pid" 2>/dev/null
             [[ $status -ne 75 ]] && exit "$status"
-            xcrun simctl terminate ${{ steps.simulator.outputs.udid }} com.github.josxha.maplibre-example || true
+            xcrun simctl terminate ${{ steps.simulator.outputs.udid }} org.maplibre.maplibre-example || true
             echo "flutter test did not attach to the app, attempt $attempt"
           done
           exit 1
