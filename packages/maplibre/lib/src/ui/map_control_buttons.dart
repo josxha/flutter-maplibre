@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
+import 'package:maplibre/src/ui/map_button.dart';
 
 /// Display a zoom-in and zoom-out button to the [MapLibreMap] by using it in
 /// [MapLibreMap.children].
@@ -53,31 +54,33 @@ class MapControlButtons extends StatelessWidget {
           spacing: 8,
           mainAxisSize: MainAxisSize.min,
           children: [
-            FloatingActionButton(
-              heroTag: 'MapLibreZoomInButton',
+            MapButton(
+              icon: MapButtonIcon.zoomIn,
+              label: 'Zoom in',
               onPressed: () => controller.animateCamera(
                 CameraUpdate.position(zoom: controller.getCamera().zoom + 1),
                 animation: _zoomAnimation,
               ),
-              child: const Icon(Icons.add),
             ),
-            FloatingActionButton(
-              heroTag: 'MapLibreZoomOutButton',
+            MapButton(
+              icon: MapButtonIcon.zoomOut,
+              label: 'Zoom out',
               onPressed: () => controller.animateCamera(
                 CameraUpdate.position(zoom: controller.getCamera().zoom - 1),
                 animation: _zoomAnimation,
               ),
-              child: const Icon(Icons.remove),
             ),
             if (onTrackingPressed case final VoidCallback onPressed)
-              FloatingActionButton(
-                heroTag: 'MapLibreTrackLocationButton',
+              MapButton(
+                icon: switch (tracking) {
+                  UserLocationTracking.position => MapButtonIcon.location,
+                  UserLocationTracking.positionAndHeading =>
+                    MapButtonIcon.locationAndHeading,
+                  UserLocationTracking.none ||
+                  null => MapButtonIcon.locationOff,
+                },
+                label: 'Track location',
                 onPressed: onPressed,
-                child: Icon(switch (tracking) {
-                  UserLocationTracking.position => Icons.gps_fixed,
-                  UserLocationTracking.positionAndHeading => Icons.explore,
-                  UserLocationTracking.none || null => Icons.gps_not_fixed,
-                }),
               ),
           ],
         ),

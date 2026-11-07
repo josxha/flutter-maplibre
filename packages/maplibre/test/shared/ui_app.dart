@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre_platform_interface/src/widget/inherited_model.dart';
+import 'package:material_ui/material_ui.dart';
 
 class App extends StatelessWidget {
   const App({

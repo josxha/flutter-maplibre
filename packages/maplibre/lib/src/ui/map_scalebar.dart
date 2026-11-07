@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
 
 /// Display a scalebar to the [MapLibreMap] by using it in
@@ -47,10 +47,9 @@ class MapScalebar extends StatelessWidget {
         screenSize - Offset(totalPadding.right, totalPadding.bottom) as Size;
     final scalebarCenter = alignment.alongSize(paddedSize) + paddingOffset;
     final scalebarLat = controller.toLngLat(scalebarCenter).lat;
-    final theme = Theme.of(context);
 
     final metersPerPixel = controller.getMetersPerPixelAtLatitude(scalebarLat);
-    final painter = ScaleBarPainter(metersPerPixel, theme, units: units);
+    final painter = ScaleBarPainter(metersPerPixel, units: units);
     // Use a SafeArea to ensure the widget is completely visible on devices
     // with rounded edges like iOS.
     return SafeArea(
@@ -67,7 +66,7 @@ class MapScalebar extends StatelessWidget {
 /// Visible for testing only.
 class ScaleBarPainter extends CustomPainter {
   /// Visible for testing only.
-  ScaleBarPainter(this.metersPerPixel, this.theme, {required this.units}) {
+  ScaleBarPainter(this.metersPerPixel, {required this.units}) {
     const milesToMeters = 1609.344;
     const feetToMeters = 0.3048;
 
@@ -149,9 +148,6 @@ class ScaleBarPainter extends CustomPainter {
   /// The meters per pixel of the map.
   final double metersPerPixel;
 
-  /// The [ThemeData] of the scalebar.
-  final ThemeData theme;
-
   /// Visible for testing only.
   final ScaleBarUnit units;
 
@@ -162,10 +158,10 @@ class ScaleBarPainter extends CustomPainter {
   late final double width = meters / metersPerPixel;
 
   late final _linePaint = Paint()
-    ..color = Colors.black
+    ..color = const Color(0xFF000000)
     ..strokeWidth = 1.5;
 
-  late final _backgroundPaint = Paint()..color = Colors.white60;
+  late final _backgroundPaint = Paint()..color = const Color(0x99FFFFFF);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -214,7 +210,7 @@ class ScaleBarPainter extends CustomPainter {
 
     final textPainter = TextPainter(
       text: TextSpan(
-        style: theme.textTheme.bodySmall?.copyWith(color: Colors.black),
+        style: const TextStyle(color: Color(0xFF000000), fontSize: 12),
         text: '${(meters / unit.meters).round()} ${unit.abbreviation}',
       ),
       textAlign: TextAlign.left,

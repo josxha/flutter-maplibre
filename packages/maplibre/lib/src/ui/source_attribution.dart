@@ -1,8 +1,9 @@
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:html/dom.dart' as dom;
 import 'package:html/parser.dart' as html_parser;
 import 'package:maplibre/maplibre.dart';
+import 'package:maplibre/src/ui/map_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// Display a zoom-in and zoom-out button to the [MapLibreMap] by using it in
@@ -57,7 +58,6 @@ class _SourceAttributionState extends State<SourceAttribution> {
       _expanded = false;
     }
 
-    final theme = Theme.of(context);
     final size = MediaQuery.sizeOf(context);
 
     final attributions = [
@@ -74,7 +74,7 @@ class _SourceAttributionState extends State<SourceAttribution> {
         padding: widget.padding,
         child: Container(
           decoration: BoxDecoration(
-            color: theme.scaffoldBackgroundColor,
+            color: MapButton.backgroundColor,
             borderRadius: BorderRadius.circular(20),
           ),
           child: Row(
@@ -97,14 +97,29 @@ class _SourceAttributionState extends State<SourceAttribution> {
                 ),
               SizedBox.square(
                 dimension: 30,
-                child: IconButton(
-                  onPressed: () => setState(() {
-                    _initCameraPosition = null;
-                    _expanded = !_expanded;
-                  }),
-                  icon: const Icon(Icons.info, size: 18),
-                  padding: const EdgeInsets.all(4),
-                  constraints: const BoxConstraints(),
+                child: Semantics(
+                  button: true,
+                  label: 'Attribution',
+                  excludeSemantics: true,
+                  child: MouseRegion(
+                    cursor: SystemMouseCursors.click,
+                    child: GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+                      onTap: () => setState(() {
+                        _initCameraPosition = null;
+                        _expanded = !_expanded;
+                      }),
+                      child: const Center(
+                        child: CustomPaint(
+                          size: Size.square(18),
+                          painter: MapButtonIconPainter(
+                            MapButtonIcon.info,
+                            color: MapButton.iconColor,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ],
@@ -129,9 +144,9 @@ class _HtmlWidgetState extends State<_HtmlWidget> {
 
   @override
   Widget build(BuildContext context) {
-    var textStyle = Theme.of(context).textTheme.bodySmall;
+    var textStyle = const TextStyle(fontSize: 12, color: Color(0xFF333333));
     if (_hovering) {
-      textStyle = textStyle?.copyWith(decoration: TextDecoration.underline);
+      textStyle = textStyle.copyWith(decoration: TextDecoration.underline);
     }
     final textSpans = <TextSpan>[];
     final document = html_parser.parse(widget.html);

@@ -1,10 +1,18 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:maplibre/maplibre.dart';
+import 'package:maplibre/src/ui/map_button.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../shared/mocks.dart';
 import '../shared/ui_app.dart';
+
+Finder icon(MapButtonIcon icon) => find.byWidgetPredicate(
+  (widget) =>
+      widget is CustomPaint &&
+      widget.painter is MapButtonIconPainter &&
+      (widget.painter! as MapButtonIconPainter).icon == icon,
+);
 
 void main() {
   setUpAll(() {
@@ -45,19 +53,19 @@ void main() {
 
     testWidgets('shows zoom buttons without a location button', (tester) async {
       await pump(tester);
-      expect(find.byIcon(Icons.add), findsOneWidget);
-      expect(find.byIcon(Icons.remove), findsOneWidget);
+      expect(find.bySemanticsLabel('Zoom in'), findsOneWidget);
+      expect(find.bySemanticsLabel('Zoom out'), findsOneWidget);
       // The location button shows only with onTrackingPressed.
-      expect(find.byIcon(Icons.gps_not_fixed), findsNothing);
+      expect(find.bySemanticsLabel('Track location'), findsNothing);
       expect(
-        tester.getTopLeft(find.byType(FloatingActionButton).first),
+        tester.getTopLeft(find.bySemanticsLabel('Zoom in')),
         const Offset(2, 2),
       );
     });
 
     testWidgets('zooms in by one level', (tester) async {
       await pump(tester);
-      await tester.tap(find.byIcon(Icons.add));
+      await tester.tap(find.bySemanticsLabel('Zoom in'));
       verify(
         () => controller.animateCamera(
           const CameraUpdate.position(zoom: 6),
@@ -70,7 +78,7 @@ void main() {
 
     testWidgets('zooms out by one level', (tester) async {
       await pump(tester);
-      await tester.tap(find.byIcon(Icons.remove));
+      await tester.tap(find.bySemanticsLabel('Zoom out'));
       verify(
         () => controller.animateCamera(
           const CameraUpdate.position(zoom: 4),
@@ -97,12 +105,12 @@ void main() {
             ),
           );
       await pumpTracking(UserLocationTracking.none);
-      await tester.tap(find.byIcon(Icons.gps_not_fixed));
+      await tester.tap(find.bySemanticsLabel('Track location'));
       expect(presses, 1);
       await pumpTracking(UserLocationTracking.position);
-      expect(find.byIcon(Icons.gps_fixed), findsOneWidget);
+      expect(icon(MapButtonIcon.location), findsOneWidget);
       await pumpTracking(UserLocationTracking.positionAndHeading);
-      expect(find.byIcon(Icons.explore), findsOneWidget);
+      expect(icon(MapButtonIcon.locationAndHeading), findsOneWidget);
     });
   });
 }

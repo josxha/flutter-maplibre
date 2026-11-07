@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
 
 /// A compass for flutter_map that shows the map rotation and allows to reset
@@ -83,7 +83,7 @@ class MapCompass extends StatelessWidget {
       padding: padding,
       child: Transform.rotate(
         angle: (-camera.bearing + rotationOffset) * degree2Radian,
-        child: InkWell(
+        child: GestureDetector(
           onTap: () => _onTap(controller),
           child:
               child ??
@@ -126,14 +126,14 @@ class _CompassPainter extends CustomPainter {
     canvas.drawCircle(
       Offset(radius, radius),
       radius,
-      Paint()..color = Colors.white60,
+      Paint()..color = const Color(0x99FFFFFF),
     );
     // circle outline
     canvas.drawCircle(
       Offset(radius, radius),
       radius - (borderWidth / 2),
       Paint()
-        ..color = Colors.black
+        ..color = const Color(0xFF000000)
         ..strokeWidth = borderWidth
         ..style = PaintingStyle.stroke,
     );
@@ -145,7 +145,7 @@ class _CompassPainter extends CustomPainter {
         ..lineTo(radius + needleWidth, radius),
       Paint()
         ..style = PaintingStyle.stroke
-        ..color = Colors.red
+        ..color = const Color(0xFFF44336)
         ..strokeCap = StrokeCap.butt
         ..strokeJoin = StrokeJoin.bevel
         ..strokeWidth = needsStrokeWidth,
@@ -158,7 +158,7 @@ class _CompassPainter extends CustomPainter {
         Offset(radius + needleWidth + halfStrokeWidth, radius),
       ]),
       BlendMode.color,
-      Paint()..color = Colors.red,
+      Paint()..color = const Color(0xFFF44336),
     );
   }
 
