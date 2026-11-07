@@ -94,7 +94,7 @@ binding. `maplibre_web` uses
 
 There are two Flutter packages for MapLibre. They take different approaches:
 
-|                 | `maplibre` (this package)                                   | [`maplibre_gl`](https://pub.dev/packages/maplibre_gl)           |
+|                 | `maplibre` (this package)                                   | `maplibre_gl`                                                   |
 |-----------------|-------------------------------------------------------------|-----------------------------------------------------------------|
 | Principle       | What can be done in Dart is done in Dart                    | What the MapLibre SDKs can do is done by the SDKs               |
 | Platforms       | Android, iOS, macOS, Windows, Linux, web                    | Android, iOS, web                                               |

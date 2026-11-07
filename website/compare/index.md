@@ -49,8 +49,7 @@ onboarded to the MapLibre organization as a
 
 ## maplibre_gl
 
-[maplibre_gl](https://pub.dev/packages/maplibre_gl)
-([GitHub](https://github.com/maplibre/flutter-maplibre-gl)) is the other
+`maplibre_gl` is the other
 MapLibre package for Flutter and a
 [hosted project](https://github.com/maplibre/maplibre/blob/main/PROJECT_TIERS.md#hosted-project)
 of the MapLibre organization. It
@@ -67,7 +66,7 @@ iOS SDKs and maplibre-gl-js. Both packages use the same map styles and tiles.
 
 ## flutter_map
 
-[flutter_map](https://pub.dev/packages/flutter_map) draws maps with Flutter
+`flutter_map` draws maps with Flutter
 itself, written in Dart. It runs on every Flutter platform, layers are
 widgets, and a large plugin ecosystem adds vector tiles
 (`vector_map_tiles`), offline caching (`flutter_map_tile_caching`, GPL-3.0
@@ -81,7 +80,7 @@ offline regions and the user location built in.
 
 ## mapbox_maps_flutter
 
-[mapbox_maps_flutter](https://pub.dev/packages/mapbox_maps_flutter) is the
+`mapbox_maps_flutter` is the
 official Mapbox package, built on the Mapbox Maps SDKs and Mapbox GL JS. It
 has Mapbox features such as the Mapbox Standard style, 3D terrain and
 globe, and Mapbox services. It needs a Mapbox access token, and usage beyond
@@ -93,7 +92,7 @@ your own server, has no usage fees, and also runs on desktop platforms.
 
 ## google_maps_flutter
 
-[google_maps_flutter](https://pub.dev/packages/google_maps_flutter) is the
+`google_maps_flutter` is the
 Flutter team's plugin for Google Maps on Android, iOS and web. It shows
 Google's map data, with Google's place and traffic layers, and needs a Google
 Maps Platform API key with billing enabled. Map styles are limited to Google's
