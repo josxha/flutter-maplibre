@@ -280,32 +280,35 @@ abstract class MapLibreMapState extends State<MapLibreMap>
 
   /// Reports a tap to [Layer.onClick] of the topmost feature under it, or,
   /// if none is right under it, next to it, and to [StyleLayer.onClick] of
-  /// every style layer with a feature there.
+  /// every style layer with a feature right under it.
   Future<void> _clickFeature(MapEventClick event) async {
     bool clickable(Layer layer) => layer.onClick != null;
     const context = 'while finding the clicked feature';
-    var hits = await _queryLayers(
+    final hits = await _queryLayers(
       .point(event.screenPoint),
       clickable,
       context,
       includeStyle: _styleClickable,
     );
-    if (hits != null && hits.isEmpty) {
-      hits = await _queryLayers(
-        .rect(
-          Rect.fromCenter(
-            center: event.screenPoint,
-            width: _grabSize,
-            height: _grabSize,
-          ),
-        ),
-        clickable,
-        context,
-        includeStyle: _styleClickable,
-      );
-    }
     if (hits == null) return;
-    if (_topmost(hits.layers, event.screenPoint) case final hit?) {
+    var layerHits = hits.layers;
+    // Only annotation layers take taps next to their features, like drags.
+    if (layerHits.isEmpty && _layersClickable) {
+      layerHits =
+          (await _queryLayers(
+            .rect(
+              Rect.fromCenter(
+                center: event.screenPoint,
+                width: _grabSize,
+                height: _grabSize,
+              ),
+            ),
+            clickable,
+            context,
+          ))?.layers ??
+          const [];
+    }
+    if (_topmost(layerHits, event.screenPoint) case final hit?) {
       _emitLayerEvent(
         hit,
         event,
@@ -733,8 +736,6 @@ class _Hits {
 
   /// The features of style layers, topmost first.
   final List<RenderedFeature> styleLayers;
-
-  bool get isEmpty => layers.isEmpty && styleLayers.isEmpty;
 }
 
 /// A feature of [MapLibreMap.layers] that a query found.

@@ -598,6 +598,27 @@ void main() {
       expect(events, ['click a 1']);
     });
 
+    testWidgets('only annotation layers take taps next to their features', (
+      tester,
+    ) async {
+      await pumpMap(tester, [
+        _PointLayer(
+          list: [_point(36, 0)],
+          onClick: (event) => events.add('click annotation ${event.index}'),
+        ),
+      ]);
+      await loadLayers(tester, ['a']);
+      platform.state.styleFeatures['a'] = [
+        (const Offset(510, 300), 1),
+        (const Offset(500, 300), 2),
+      ];
+      // 10 px beside the annotation point, right on the style feature 1.
+      await tester.tapAt(const Offset(510, 300));
+      await tester.pump(const Duration(milliseconds: 500));
+      await tester.pumpAndSettle();
+      expect(events, ['click annotation 0', 'click a 1']);
+    });
+
     testWidgets('the mouse enters and leaves features by id, and layers of '
         'features without one as a whole', (tester) async {
       await pumpMap(tester, []);
