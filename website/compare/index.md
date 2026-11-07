@@ -64,10 +64,6 @@ iOS SDKs and maplibre-gl-js. Both packages use the same map styles and tiles.
 | Interop         | FFI and JS interop                                        | Platform channels                                              |
 | API             | Declarative annotations, synchronous where possible       | Imperative controller, asynchronous                            |
 
-Choose `maplibre_gl` if you prefer the MapLibre SDKs to handle as much as
-possible, and `maplibre` for desktop platforms, a declarative and typed API,
-or widgets that compose with the map.
-
 ## flutter_map
 
 [flutter_map](https://pub.dev/packages/flutter_map) draws maps with Flutter
