@@ -28,8 +28,6 @@ class MapLibreMapStateNative extends MapLibreMapState {
   /// style, see [_setUp].
   var _constraintsAfterStyle = false;
 
-  LayerManager? _layerManager;
-
   /// A projection of the latest published camera. Closed whenever the camera
   /// or extent changes, because a projection never sees later map changes.
   mln.MapProjectionHandle? _projection;
@@ -204,7 +202,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
     if (oldWidget.options.style != options.style) {
       unawaited(_setStyle(options.style));
     }
-    _layerManager?.updateLayers(widget.layers);
+    layerManager?.updateLayers(widget.layers);
     final eventMask = widget.eventMask;
     final map = _map;
     if (eventMask != _eventMask && map != null) {
@@ -480,7 +478,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
     }
     // Only the next LayerManager sees MapLibreMap.layers: the layers of the
     // old one are gone.
-    _layerManager = null;
+    layerManager = null;
     style?.dispose();
     style = null;
     late final StyleControllerNative styleController;
@@ -502,7 +500,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
     _loadingStyle = null;
     style = styleController;
     widget.onStyleLoaded?.call(styleController);
-    _layerManager = LayerManager(styleController, widget.layers);
+    layerManager = LayerManager(styleController, widget.layers);
     // Refresh the widgets in MapLibreMap.children.
     setState(() {});
   }
@@ -804,7 +802,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
     if (map == null) return;
     final request = ++_styleRequest;
     bool stale() => _map != map || request != _styleRequest;
-    _layerManager = null;
+    layerManager = null;
     switch (style) {
       case MapStyleJson(:final json):
         await map.setStyleJson(jsonDecode(json));

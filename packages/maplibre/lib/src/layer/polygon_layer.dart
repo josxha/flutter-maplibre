@@ -16,6 +16,10 @@ class PolygonLayer extends Layer<Feature<Polygon>> {
     this.outlineColor = const .literal(Color(0xFF000000)),
     super.minZoom = 0,
     super.maxZoom = 24,
+    super.draggable,
+    super.onDragStart,
+    super.onDrag,
+    super.onDragEnd,
   }) : super(list: polygons);
 
   /// The color of the polygon. Defaults to black.

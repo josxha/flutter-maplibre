@@ -51,6 +51,12 @@
   `MapGestures.doubleTap` is on.
 - `MapEventDoubleClick.preventDefault()` keeps a double tap from zooming,
   also from an async `onDoubleClick`.
+- `onDragStart`, `onDrag` and `onDragEnd` report drags on the map, and
+  `MapEventDragStart.preventDefault()` keeps a drag from panning
+  ([#544](https://github.com/josxha/flutter-maplibre/issues/544)).
+- Annotation layers with `draggable: true` let the user drag their features,
+  and report the drop to `onDragEnd`
+  ([#151](https://github.com/josxha/flutter-maplibre/issues/151)).
 - `MapOptions.fastPforEnabled` decodes MapLibre Tile (MLT) vector tiles that
   use FastPFOR (always enabled on web)
   ([#635](https://github.com/josxha/flutter-maplibre/issues/635)).

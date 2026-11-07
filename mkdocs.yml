@@ -30,6 +30,7 @@ nav:
           - Polygons: docs/annotations/polygons.md
           - Polylines: docs/annotations/polylines.md
           - Widgets: docs/annotations/widgets.md
+          - Drag: docs/annotations/drag.md
       - Sources & Layers:
           - Sources: docs/sources.md
           - Style Layers:

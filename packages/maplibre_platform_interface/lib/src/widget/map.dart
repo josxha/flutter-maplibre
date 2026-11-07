@@ -21,6 +21,9 @@ class MapLibreMap extends StatefulWidget {
     this.onDoubleClick,
     this.onSecondaryClick,
     this.onLongClick,
+    this.onDragStart,
+    this.onDrag,
+    this.onDragEnd,
     this.onCameraMoveStart,
     this.onCameraMove,
     this.onCameraMoveEnd,
@@ -117,6 +120,36 @@ class MapLibreMap extends StatefulWidget {
 
   /// Called when the user presses the map at one location for a while.
   final MapEventCallback<MapEventLongClick>? onLongClick;
+
+  /// Called when the user starts to drag the map with one finger or the
+  /// primary mouse button.
+  ///
+  /// The drag pans the map while the pan movement and the drag gesture are
+  /// on. Call [MapEventDragStart.preventDefault] to keep it from panning, for
+  /// example to move a feature with [onDrag] instead. The callback can be
+  /// async to query the features at [MapEventUserInput.screenPoint] first:
+  /// the map holds the pan until the returned [Future] completes.
+  ///
+  /// ```dart
+  /// onDragStart: (event) async {
+  ///   final features = await controller.queryRenderedFeatures(
+  ///     .point(event.screenPoint),
+  ///     layerIds: ['points'],
+  ///   );
+  ///   if (features.isNotEmpty) event.preventDefault();
+  /// },
+  /// ```
+  ///
+  /// The draggable [layers] handle their features themselves, see
+  /// [Layer.onDrag].
+  final FutureOr<void> Function(MapEventDragStart event)? onDragStart;
+
+  /// Called whenever the pointer of a drag moves, whether it pans the map
+  /// or not. A second finger ends the drag and starts a pinch.
+  final MapEventCallback<MapEventDrag>? onDrag;
+
+  /// Called when a drag ends.
+  final MapEventCallback<MapEventDragEnd>? onDragEnd;
 
   /// Called when the camera starts to move, with the reason.
   final MapEventCallback<MapEventCameraMoveStart>? onCameraMoveStart;
