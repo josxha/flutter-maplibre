@@ -20,52 +20,19 @@ class MaplibreNativeDarwinBindings {
   ) : _lookup = lookup;
 
   int maplibre_native_create_gpu_texture(
-    int width,
-    int height,
-    int slot_count,
-    ffi.Pointer<ffi.Uint64> out_slots,
-    int slot_capacity,
     ffi.Pointer<ffi.Char> error,
     int error_size,
   ) {
-    return _maplibre_native_create_gpu_texture(
-      width,
-      height,
-      slot_count,
-      out_slots,
-      slot_capacity,
-      error,
-      error_size,
-    );
+    return _maplibre_native_create_gpu_texture(error, error_size);
   }
 
   late final _maplibre_native_create_gpu_texturePtr =
       _lookup<
-        ffi.NativeFunction<
-          ffi.Int64 Function(
-            ffi.Uint32,
-            ffi.Uint32,
-            ffi.Uint32,
-            ffi.Pointer<ffi.Uint64>,
-            ffi.Uint32,
-            ffi.Pointer<ffi.Char>,
-            ffi.Size,
-          )
-        >
+        ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Char>, ffi.Size)>
       >('maplibre_native_create_gpu_texture');
   late final _maplibre_native_create_gpu_texture =
       _maplibre_native_create_gpu_texturePtr
-          .asFunction<
-            int Function(
-              int,
-              int,
-              int,
-              ffi.Pointer<ffi.Uint64>,
-              int,
-              ffi.Pointer<ffi.Char>,
-              int,
-            )
-          >();
+          .asFunction<int Function(ffi.Pointer<ffi.Char>, int)>();
 
   void maplibre_native_dispose_texture(int texture_id) {
     return _maplibre_native_dispose_texture(texture_id);
@@ -92,13 +59,17 @@ class MaplibreNativeDarwinBindings {
 
   bool maplibre_native_present_gpu_texture(
     int texture_id,
+    int ring,
     int slot,
+    ffi.Pointer<ffi.Void> surface,
     ffi.Pointer<ffi.Char> error,
     int error_size,
   ) {
     return _maplibre_native_present_gpu_texture(
       texture_id,
+      ring,
       slot,
+      surface,
       error,
       error_size,
     );
@@ -110,6 +81,8 @@ class MaplibreNativeDarwinBindings {
           ffi.Bool Function(
             ffi.Int64,
             ffi.Uint32,
+            ffi.Uint32,
+            ffi.Pointer<ffi.Void>,
             ffi.Pointer<ffi.Char>,
             ffi.Size,
           )
@@ -117,63 +90,12 @@ class MaplibreNativeDarwinBindings {
       >('maplibre_native_present_gpu_texture');
   late final _maplibre_native_present_gpu_texture =
       _maplibre_native_present_gpu_texturePtr
-          .asFunction<bool Function(int, int, ffi.Pointer<ffi.Char>, int)>();
-
-  void maplibre_native_release_retired_slots(int texture_id) {
-    return _maplibre_native_release_retired_slots(texture_id);
-  }
-
-  late final _maplibre_native_release_retired_slotsPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64)>>(
-        'maplibre_native_release_retired_slots',
-      );
-  late final _maplibre_native_release_retired_slots =
-      _maplibre_native_release_retired_slotsPtr
-          .asFunction<void Function(int)>();
-
-  bool maplibre_native_resize_gpu_texture(
-    int texture_id,
-    int width,
-    int height,
-    ffi.Pointer<ffi.Uint64> out_slots,
-    int slot_capacity,
-    ffi.Pointer<ffi.Char> error,
-    int error_size,
-  ) {
-    return _maplibre_native_resize_gpu_texture(
-      texture_id,
-      width,
-      height,
-      out_slots,
-      slot_capacity,
-      error,
-      error_size,
-    );
-  }
-
-  late final _maplibre_native_resize_gpu_texturePtr =
-      _lookup<
-        ffi.NativeFunction<
-          ffi.Bool Function(
-            ffi.Int64,
-            ffi.Uint32,
-            ffi.Uint32,
-            ffi.Pointer<ffi.Uint64>,
-            ffi.Uint32,
-            ffi.Pointer<ffi.Char>,
-            ffi.Size,
-          )
-        >
-      >('maplibre_native_resize_gpu_texture');
-  late final _maplibre_native_resize_gpu_texture =
-      _maplibre_native_resize_gpu_texturePtr
           .asFunction<
             bool Function(
               int,
               int,
               int,
-              ffi.Pointer<ffi.Uint64>,
-              int,
+              ffi.Pointer<ffi.Void>,
               ffi.Pointer<ffi.Char>,
               int,
             )

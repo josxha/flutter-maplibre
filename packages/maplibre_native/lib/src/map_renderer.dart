@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ffi';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
@@ -113,21 +112,9 @@ final class MapRenderer implements FrameTargetHost {
           ),
   );
 
-  /// Queries the feature extension [extension] of the source [sourceId],
-  /// such as `supercluster`, about [feature].
-  Future<Object?> queryFeatureExtensions(
-    String sourceId,
-    Object? feature,
-    String extension,
-    String field, [
-    Object? arguments,
-  ]) => _session.queryFeatureExtensions(
-    sourceId,
-    feature,
-    extension,
-    field,
-    arguments,
-  );
+  /// The session, for queries of its latest frame, such as clusters of a
+  /// GeoJSON source.
+  RenderSessionHandle get session => _session;
 
   @override
   bool get disposed => _disposed;
@@ -180,35 +167,35 @@ final class MapRenderer implements FrameTargetHost {
     try {
       runtime = await createRuntime();
       await runtime.setEventHandler(
-        (events) => renderer?._started ?? false
-            ? renderer!._onEvents(events)
-            : early.addAll(events),
+        RuntimeEventHandler(
+          callback: (events) => renderer?._started ?? false
+              ? renderer!._onEvents(events)
+              : early.addAll(events),
+        ),
       );
-      final created = runtime.createMap(
+      map = runtime.createMap(
         MapOptions(
           initialExtent: extent,
           eventMask: eventMask,
           fastPforEnabled: fastPforEnabled,
         ),
       );
-      map = created.map;
       // Commands run once the map is created, so they need not wait for it.
-      await Future.wait([created.ready, ?setUp?.call(map)]);
-      final attachment = target.attach(
+      await Future.wait([map.ready, ?setUp?.call(map)]);
+      session = target.attach(
         map,
         extent,
-        _FrameWake(() => renderer?._drainFrames()).wake,
+        Wake(callback: () => renderer?._drainFrames()),
       );
-      session = attachment.session;
       try {
-        await attachment.ready;
+        await session.ready;
       } on Object {
         await target.endSession(session);
         rethrow;
       }
     } on Object {
-      await map?.close();
-      await runtime?.close();
+      await map?.release();
+      await runtime?.release();
       target.dispose();
       rethrow;
     }
@@ -292,9 +279,7 @@ final class MapRenderer implements FrameTargetHost {
     }
     final token = _nextToken++;
     _pendingToken = token;
-    _session.requestFrame(
-      FrameDemand(flags: _target.demandFlags, token: token),
-    );
+    _session.demandFrame(FrameDemand(flags: _target.demandFlags, token: token));
   }
 
   void _drainFrames() {
@@ -349,41 +334,8 @@ final class MapRenderer implements FrameTargetHost {
     // A frame in presentation is released before the session goes.
     await _gpuQueue;
     await _target.endSession(_session);
-    await _map.close();
-    await _runtime.close();
+    await _map.release();
+    await _runtime.release();
     _target.dispose();
-  }
-}
-
-/// The frame wake of a session, which runs [_onWake] on the isolate.
-///
-/// The binding roots a session's queued wake only through a field that it
-/// never reads, which AOT builds drop, so in profile and release builds the
-/// wake is collected and the map stops after a few frames. This wake is held
-/// by its own callables instead, which native code calls from any thread and
-/// which close once the C library releases the wake.
-final class _FrameWake {
-  _FrameWake(this._onWake) {
-    _callback = NativeCallable<Void Function(Pointer<Void>)>.listener(
-      (Pointer<Void> _) => _onWake(),
-    )..keepIsolateAlive = false;
-    _release = NativeCallable<Void Function(Pointer<Void>)>.listener(
-      (Pointer<Void> _) => _close(),
-    )..keepIsolateAlive = false;
-  }
-
-  final void Function() _onWake;
-  late final NativeCallable<Void Function(Pointer<Void>)> _callback;
-  late final NativeCallable<Void Function(Pointer<Void>)> _release;
-
-  /// The wake to attach the session with, which consumes it.
-  Wake get wake => Wake.native(
-    callback: NativePointer(_callback.nativeFunction.address),
-    releaseUserData: NativePointer(_release.nativeFunction.address),
-  );
-
-  void _close() {
-    _callback.close();
-    _release.close();
   }
 }

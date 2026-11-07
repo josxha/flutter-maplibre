@@ -19,8 +19,8 @@ typedef GpuTexture = ({
 });
 
 /// The maplibre_native Windows or Linux plugin, called through the C API in
-/// `desktop/include/maplibre_native/maplibre_native_api.h`, which both
-/// plugin libraries export.
+/// `desktop/include/maplibre_native/maplibre_native_api.h`. Each plugin
+/// library exports the shared functions and its own.
 final class DesktopPlugin {
   DesktopPlugin._();
 
@@ -33,27 +33,21 @@ final class DesktopPlugin {
     ),
   );
 
-  /// The Vulkan device on Flutter's GPU, created on first use.
-  static VulkanContextDescriptor vulkanContext() => using((arena) {
-    final context = arena<MaplibreNativeVulkanContext>();
+  /// The ID of the GPU that Flutter renders on (the adapter LUID on
+  /// Windows, the OpenGL device UUID on Linux), or the reason frames can't
+  /// reach Flutter without a CPU copy.
+  static (Uint8List?, String?) gpuId() => using((arena) {
+    const capacity = 16;
+    final id = arena<Uint8>(capacity);
     final error = arena<Char>(pluginErrorSize);
-    if (!_bindings.maplibre_native_vulkan_context(
-      context,
+    final size = _bindings.maplibre_native_gpu_id(
+      id,
+      capacity,
       error,
       pluginErrorSize,
-    )) {
-      throw StateError(_message(error));
-    }
-    final value = context.ref;
-    return VulkanContextDescriptor(
-      instance: NativePointer(value.instance),
-      physicalDevice: NativePointer(value.physical_device),
-      device: NativePointer(value.device),
-      graphicsQueue: NativePointer(value.queue),
-      graphicsQueueFamilyIndex: value.queue_family_index,
-      getInstanceProcAddr: NativePointer(value.get_instance_proc_addr),
-      getDeviceProcAddr: NativePointer(value.get_device_proc_addr),
     );
+    if (size < 0) return (null, _message(error));
+    return (Uint8List.fromList(id.asTypedList(size)), null);
   });
 
   /// Registers a pixel buffer texture and returns its Flutter texture id.
@@ -90,18 +84,60 @@ final class DesktopPlugin {
     }
   });
 
-  /// Registers a zero-copy texture of [width] x [height] device pixels, or
-  /// returns the reason it is unavailable on this GPU. Its images are shared
-  /// with D3D11 on Windows and with OpenGL on Linux.
+  /// Windows: registers a texture that shows a ring of DXGI shared
+  /// textures, or returns the reason it is unavailable.
+  static (int?, String?) createSharedTexture() => using((arena) {
+    final error = arena<Char>(pluginErrorSize);
+    final id = _bindings.maplibre_native_create_shared_texture(
+      error,
+      pluginErrorSize,
+    );
+    return id < 0 ? (null, _message(error)) : (id, null);
+  });
+
+  /// Windows: copies the finished frame in the DXGI shared texture [handle],
+  /// at [slot] of the ring [ring], into the texture that Flutter shows.
+  static void presentSharedTexture(
+    int textureId, {
+    required int ring,
+    required int slot,
+    required int handle,
+  }) => using((arena) {
+    final error = arena<Char>(pluginErrorSize);
+    if (!_bindings.maplibre_native_present_shared_texture(
+      textureId,
+      ring,
+      slot,
+      handle,
+      error,
+      pluginErrorSize,
+    )) {
+      throw StateError(_message(error));
+    }
+  });
+
+  /// Linux: registers a zero-copy texture of [width] x [height] device
+  /// pixels with a ring of images on the Vulkan device [context], whose
+  /// memory Flutter's OpenGL context samples, or returns the reason it is
+  /// unavailable on this GPU.
   static (GpuTexture?, String?) createGpuTexture(
+    VulkanContextDescriptor context,
     int width,
     int height,
     int slotCount,
   ) => using((arena) {
+    final vulkan = arena<MaplibreNativeVulkanContext>();
+    vulkan.ref
+      ..instance = context.instance.address
+      ..physical_device = context.physicalDevice.address
+      ..device = context.device.address
+      ..get_instance_proc_addr = context.getInstanceProcAddr.address
+      ..get_device_proc_addr = context.getDeviceProcAddr.address;
     final format = arena<Uint32>();
     final slots = arena<MaplibreNativeGpuSlot>(_maxSlots);
     final error = arena<Char>(pluginErrorSize);
     final id = _bindings.maplibre_native_create_gpu_texture(
+      vulkan,
       width,
       height,
       slotCount,
@@ -118,7 +154,7 @@ final class DesktopPlugin {
     );
   });
 
-  /// Replaces a GPU texture's ring with one of the new size. The old ring
+  /// Linux: replaces a GPU texture's ring with one of the new size. The old ring
   /// stays valid until [releaseRetiredSlots].
   static List<VulkanBorrowedTexture> resizeGpuTexture(
     int textureId,
@@ -142,12 +178,11 @@ final class DesktopPlugin {
     return _slots(slots, slotCount);
   });
 
-  /// Releases the rings that resizes replaced.
+  /// Linux: releases the rings that resizes replaced.
   static void releaseRetiredSlots(int textureId) =>
       _bindings.maplibre_native_release_retired_slots(textureId);
 
-  /// Hands the finished frame in [slot] to Flutter: Windows copies it into
-  /// the texture Flutter shows, and Linux has Flutter sample the slot until
+  /// Linux: has Flutter sample the finished frame in [slot] until
   /// [slotInUse] reports it free.
   static void presentGpuTexture(int textureId, int slot) => using((arena) {
     final error = arena<Char>(pluginErrorSize);
@@ -161,12 +196,11 @@ final class DesktopPlugin {
     }
   });
 
-  /// Whether Flutter may still sample [slot] of a GPU texture. Always false
-  /// on Windows.
+  /// Linux: whether Flutter may still sample [slot] of a GPU texture.
   static bool slotInUse(int textureId, int slot) =>
       _bindings.maplibre_native_gpu_texture_slot_in_use(textureId, slot);
 
-  /// Unregisters a texture of either kind.
+  /// Unregisters a texture of any kind.
   static void disposeTexture(int textureId) =>
       _bindings.maplibre_native_dispose_texture(textureId);
 
