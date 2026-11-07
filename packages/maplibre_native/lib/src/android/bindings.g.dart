@@ -57,36 +57,12 @@ extension type MaplibreNativeApi._(jni$_.JObject _$this)
   static MaplibreNativeApi get INSTANCE =>
       _id_INSTANCE.get(_class, MaplibreNativeApi.type) as MaplibreNativeApi;
 
-  static final _id_initialize = _class.staticMethodId(r'initialize', r'()V');
-
-  static final _initialize =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallStaticVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public fun initialize(): kotlin.Unit`
-  static void initialize() {
-    final _$$classRef = _class.reference;
-    _initialize(_$$classRef.pointer, _id_initialize.pointer).check();
-  }
-
-  static final _id_vulkanContext = _class.staticMethodId(
-    r'vulkanContext',
-    r'()[J',
+  static final _id_applicationContext = _class.staticMethodId(
+    r'applicationContext',
+    r'()Landroid/content/Context;',
   );
 
-  static final _vulkanContext =
+  static final _applicationContext =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
@@ -102,47 +78,19 @@ extension type MaplibreNativeApi._(jni$_.JObject _$this)
             )
           >();
 
-  /// from: `public fun vulkanContext(): kotlin.LongArray`
+  /// from: `public fun applicationContext(): android.content.Context`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni$_.JLongArray vulkanContext() {
+  static Context applicationContext() {
     final _$$classRef = _class.reference;
-    return _vulkanContext(
+    return _applicationContext(
       _$$classRef.pointer,
-      _id_vulkanContext.pointer,
-    ).object<jni$_.JLongArray>();
-  }
-
-  static final _id_eglContext = _class.staticMethodId(r'eglContext', r'()[J');
-
-  static final _eglContext =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallStaticObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public fun eglContext(): kotlin.LongArray`
-  /// The returned object must be released after use, by calling the [release] method.
-  static jni$_.JLongArray eglContext() {
-    final _$$classRef = _class.reference;
-    return _eglContext(
-      _$$classRef.pointer,
-      _id_eglContext.pointer,
-    ).object<jni$_.JLongArray>();
+      _id_applicationContext.pointer,
+    ).object<Context>();
   }
 
   static final _id_createSurfaceTexture = _class.staticMethodId(
     r'createSurfaceTexture',
-    r'(IIZLcom/github/josxha/maplibre_native/SurfaceListener;)[J',
+    r'(IILcom/github/josxha/maplibre_native/SurfaceListener;)J',
   );
 
   static final _createSurfaceTexture =
@@ -152,33 +100,25 @@ extension type MaplibreNativeApi._(jni$_.JObject _$this)
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<
-                  (
-                    jni$_.Int32,
-                    jni$_.Int32,
-                    jni$_.Int32,
-                    jni$_.Pointer<jni$_.Void>,
-                  )
+                  (jni$_.Int32, jni$_.Int32, jni$_.Pointer<jni$_.Void>)
                 >,
               )
             >
-          >('globalEnv_CallStaticObjectMethod')
+          >('globalEnv_CallStaticLongMethod')
           .asFunction<
             jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               core$_.int,
               core$_.int,
-              core$_.int,
               jni$_.Pointer<jni$_.Void>,
             )
           >();
 
-  /// from: `public fun createSurfaceTexture(width: kotlin.Int, height: kotlin.Int, opengl: kotlin.Boolean, listener: com.github.josxha.maplibre_native.SurfaceListener): kotlin.LongArray`
-  /// The returned object must be released after use, by calling the [release] method.
-  static jni$_.JLongArray createSurfaceTexture(
+  /// from: `public fun createSurfaceTexture(width: kotlin.Int, height: kotlin.Int, listener: com.github.josxha.maplibre_native.SurfaceListener): kotlin.Long`
+  static core$_.int createSurfaceTexture(
     core$_.int i,
     core$_.int i1,
-    core$_.bool z,
     SurfaceListener surfaceListener,
   ) {
     final _$$classRef = _class.reference;
@@ -188,14 +128,47 @@ extension type MaplibreNativeApi._(jni$_.JObject _$this)
       _id_createSurfaceTexture.pointer,
       i,
       i1,
-      z ? 1 : 0,
       _$surfaceListener.pointer,
-    ).object<jni$_.JLongArray>();
+    ).long;
+  }
+
+  static final _id_surface = _class.staticMethodId(
+    r'surface',
+    r'(J)Landroid/view/Surface;',
+  );
+
+  static final _surface =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int64,)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              core$_.int,
+            )
+          >();
+
+  /// from: `public fun surface(textureId: kotlin.Long): android.view.Surface`
+  /// The returned object must be released after use, by calling the [release] method.
+  static Surface surface(core$_.int j) {
+    final _$$classRef = _class.reference;
+    return _surface(
+      _$$classRef.pointer,
+      _id_surface.pointer,
+      j,
+    ).object<Surface>();
   }
 
   static final _id_resizeSurfaceTexture = _class.staticMethodId(
     r'resizeSurfaceTexture',
-    r'(JII)[J',
+    r'(JII)Z',
   );
 
   static final _resizeSurfaceTexture =
@@ -207,7 +180,7 @@ extension type MaplibreNativeApi._(jni$_.JObject _$this)
                 jni$_.VarArgs<(jni$_.Int64, jni$_.Int32, jni$_.Int32)>,
               )
             >
-          >('globalEnv_CallStaticObjectMethod')
+          >('globalEnv_CallStaticBooleanMethod')
           .asFunction<
             jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
@@ -218,9 +191,8 @@ extension type MaplibreNativeApi._(jni$_.JObject _$this)
             )
           >();
 
-  /// from: `public fun resizeSurfaceTexture(textureId: kotlin.Long, width: kotlin.Int, height: kotlin.Int): kotlin.LongArray`
-  /// The returned object must be released after use, by calling the [release] method.
-  static jni$_.JLongArray resizeSurfaceTexture(
+  /// from: `public fun resizeSurfaceTexture(textureId: kotlin.Long, width: kotlin.Int, height: kotlin.Int): kotlin.Boolean`
+  static core$_.bool resizeSurfaceTexture(
     core$_.int j,
     core$_.int i,
     core$_.int i1,
@@ -232,181 +204,15 @@ extension type MaplibreNativeApi._(jni$_.JObject _$this)
       j,
       i,
       i1,
-    ).object<jni$_.JLongArray>();
-  }
-
-  static final _id_releaseSurface = _class.staticMethodId(
-    r'releaseSurface',
-    r'(JZ)V',
-  );
-
-  static final _releaseSurface =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Int64, jni$_.Int32)>,
-              )
-            >
-          >('globalEnv_CallStaticVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              core$_.int,
-              core$_.int,
-            )
-          >();
-
-  /// from: `public fun releaseSurface(surface: kotlin.Long, opengl: kotlin.Boolean): kotlin.Unit`
-  static void releaseSurface(core$_.int j, core$_.bool z) {
-    final _$$classRef = _class.reference;
-    _releaseSurface(
-      _$$classRef.pointer,
-      _id_releaseSurface.pointer,
-      j,
-      z ? 1 : 0,
-    ).check();
+    ).boolean;
   }
 
   static final _id_disposeTexture = _class.staticMethodId(
     r'disposeTexture',
-    r'(JZ)V',
-  );
-
-  static final _disposeTexture =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Int64, jni$_.Int32)>,
-              )
-            >
-          >('globalEnv_CallStaticVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              core$_.int,
-              core$_.int,
-            )
-          >();
-
-  /// from: `public fun disposeTexture(textureId: kotlin.Long, keepSurface: kotlin.Boolean): kotlin.Unit`
-  static void disposeTexture(core$_.int j, core$_.bool z) {
-    final _$$classRef = _class.reference;
-    _disposeTexture(
-      _$$classRef.pointer,
-      _id_disposeTexture.pointer,
-      j,
-      z ? 1 : 0,
-    ).check();
-  }
-
-  static final _id_addRenderClient = _class.staticMethodId(
-    r'addRenderClient',
-    r'()J',
-  );
-
-  static final _addRenderClient =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallStaticLongMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public fun addRenderClient(): kotlin.Long`
-  static core$_.int addRenderClient() {
-    final _$$classRef = _class.reference;
-    return _addRenderClient(
-      _$$classRef.pointer,
-      _id_addRenderClient.pointer,
-    ).long;
-  }
-
-  static final _id_renderClientWake = _class.staticMethodId(
-    r'renderClientWake',
-    r'()[J',
-  );
-
-  static final _renderClientWake =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallStaticObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public fun renderClientWake(): kotlin.LongArray`
-  /// The returned object must be released after use, by calling the [release] method.
-  static jni$_.JLongArray renderClientWake() {
-    final _$$classRef = _class.reference;
-    return _renderClientWake(
-      _$$classRef.pointer,
-      _id_renderClientWake.pointer,
-    ).object<jni$_.JLongArray>();
-  }
-
-  static final _id_setRenderClientSession = _class.staticMethodId(
-    r'setRenderClientSession',
-    r'(JJ)V',
-  );
-
-  static final _setRenderClientSession =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Int64, jni$_.Int64)>,
-              )
-            >
-          >('globalEnv_CallStaticVoidMethod')
-          .asFunction<
-            jni$_.JThrowablePtr Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              core$_.int,
-              core$_.int,
-            )
-          >();
-
-  /// from: `public fun setRenderClientSession(client: kotlin.Long, session: kotlin.Long): kotlin.Unit`
-  static void setRenderClientSession(core$_.int j, core$_.int j1) {
-    final _$$classRef = _class.reference;
-    _setRenderClientSession(
-      _$$classRef.pointer,
-      _id_setRenderClientSession.pointer,
-      j,
-      j1,
-    ).check();
-  }
-
-  static final _id_removeRenderClient = _class.staticMethodId(
-    r'removeRenderClient',
     r'(J)V',
   );
 
-  static final _removeRenderClient =
+  static final _disposeTexture =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
@@ -424,14 +230,10 @@ extension type MaplibreNativeApi._(jni$_.JObject _$this)
             )
           >();
 
-  /// from: `public fun removeRenderClient(client: kotlin.Long): kotlin.Unit`
-  static void removeRenderClient(core$_.int j) {
+  /// from: `public fun disposeTexture(textureId: kotlin.Long): kotlin.Unit`
+  static void disposeTexture(core$_.int j) {
     final _$$classRef = _class.reference;
-    _removeRenderClient(
-      _$$classRef.pointer,
-      _id_removeRenderClient.pointer,
-      j,
-    ).check();
+    _disposeTexture(_$$classRef.pointer, _id_disposeTexture.pointer, j).check();
   }
 }
 
@@ -482,11 +284,8 @@ extension type SurfaceListener._(jni$_.JObject _$this)
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
-      if ($d == r'onSurfaceChanged(JJ)V') {
-        _$impls[$p]!.onSurfaceChanged(
-          ($a![0] as jni$_.JLong).toDartInt(releaseOriginal: true),
-          ($a![1] as jni$_.JLong).toDartInt(releaseOriginal: true),
-        );
+      if ($d == r'onSurfaceAvailable()V') {
+        _$impls[$p]!.onSurfaceAvailable();
         return jni$_.nullptr;
       }
       if ($d == r'onSurfaceCleanup()V') {
@@ -520,7 +319,7 @@ extension type SurfaceListener._(jni$_.JObject _$this)
       $p,
       _$invokePointer,
       [
-        if ($impl.onSurfaceChanged$async) r'onSurfaceChanged(JJ)V',
+        if ($impl.onSurfaceAvailable$async) r'onSurfaceAvailable()V',
         if ($impl.onSurfaceCleanup$async) r'onSurfaceCleanup()V',
       ],
     );
@@ -536,18 +335,17 @@ extension type SurfaceListener._(jni$_.JObject _$this)
 }
 
 extension SurfaceListener$$Methods on SurfaceListener {
-  static final _id_onSurfaceChanged = SurfaceListener._class.instanceMethodId(
-    r'onSurfaceChanged',
-    r'(JJ)V',
+  static final _id_onSurfaceAvailable = SurfaceListener._class.instanceMethodId(
+    r'onSurfaceAvailable',
+    r'()V',
   );
 
-  static final _onSurfaceChanged =
+  static final _onSurfaceAvailable =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Int64, jni$_.Int64)>,
               )
             >
           >('globalEnv_CallVoidMethod')
@@ -555,19 +353,15 @@ extension SurfaceListener$$Methods on SurfaceListener {
             jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
-              core$_.int,
-              core$_.int,
             )
           >();
 
-  /// from: `public fun onSurfaceChanged(surface: kotlin.Long, oldSurface: kotlin.Long): kotlin.Unit`
-  void onSurfaceChanged(core$_.int j, core$_.int j1) {
+  /// from: `public fun onSurfaceAvailable(): kotlin.Unit`
+  void onSurfaceAvailable() {
     final _$$selfRef = reference;
-    _onSurfaceChanged(
+    _onSurfaceAvailable(
       _$$selfRef.pointer,
-      _id_onSurfaceChanged.pointer,
-      j,
-      j1,
+      _id_onSurfaceAvailable.pointer,
     ).check();
   }
 
@@ -601,34 +395,34 @@ extension SurfaceListener$$Methods on SurfaceListener {
 
 abstract base mixin class $SurfaceListener {
   factory $SurfaceListener({
-    required void Function(core$_.int j, core$_.int j1) onSurfaceChanged,
-    core$_.bool onSurfaceChanged$async,
+    required void Function() onSurfaceAvailable,
+    core$_.bool onSurfaceAvailable$async,
     required void Function() onSurfaceCleanup,
     core$_.bool onSurfaceCleanup$async,
   }) = _$SurfaceListener;
 
-  void onSurfaceChanged(core$_.int j, core$_.int j1);
-  core$_.bool get onSurfaceChanged$async => false;
+  void onSurfaceAvailable();
+  core$_.bool get onSurfaceAvailable$async => false;
   void onSurfaceCleanup();
   core$_.bool get onSurfaceCleanup$async => false;
 }
 
 final class _$SurfaceListener with $SurfaceListener {
   _$SurfaceListener({
-    required void Function(core$_.int j, core$_.int j1) onSurfaceChanged,
-    this.onSurfaceChanged$async = false,
+    required void Function() onSurfaceAvailable,
+    this.onSurfaceAvailable$async = false,
     required void Function() onSurfaceCleanup,
     this.onSurfaceCleanup$async = false,
-  }) : _onSurfaceChanged = onSurfaceChanged,
+  }) : _onSurfaceAvailable = onSurfaceAvailable,
        _onSurfaceCleanup = onSurfaceCleanup;
 
-  final void Function(core$_.int j, core$_.int j1) _onSurfaceChanged;
-  final core$_.bool onSurfaceChanged$async;
+  final void Function() _onSurfaceAvailable;
+  final core$_.bool onSurfaceAvailable$async;
   final void Function() _onSurfaceCleanup;
   final core$_.bool onSurfaceCleanup$async;
 
-  void onSurfaceChanged(core$_.int j, core$_.int j1) {
-    return _onSurfaceChanged(j, j1);
+  void onSurfaceAvailable() {
+    return _onSurfaceAvailable();
   }
 
   void onSurfaceCleanup() {
@@ -644,4 +438,40 @@ final class $SurfaceListener$Type$ extends jni$_.JType<SurfaceListener> {
   @core$_.override
   String get signature =>
       r'Lcom/github/josxha/maplibre_native/SurfaceListener;';
+}
+
+/// from: `android.content.Context`
+///
+/// WARNING: Context is a stub. To generate bindings for this class, include
+/// android.content.Context in your config's classes list.
+///
+extension type Context._(jni$_.JObject _$this) implements jni$_.JObject {
+  static const jni$_.JType<Context> type = $Context$Type$();
+}
+
+final class $Context$Type$ extends jni$_.JType<Context> {
+  @jni$_.internal
+  const $Context$Type$();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroid/content/Context;';
+}
+
+/// from: `android.view.Surface`
+///
+/// WARNING: Surface is a stub. To generate bindings for this class, include
+/// android.view.Surface in your config's classes list.
+///
+extension type Surface._(jni$_.JObject _$this) implements jni$_.JObject {
+  static const jni$_.JType<Surface> type = $Surface$Type$();
+}
+
+final class $Surface$Type$ extends jni$_.JType<Surface> {
+  @jni$_.internal
+  const $Surface$Type$();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroid/view/Surface;';
 }

@@ -27,19 +27,22 @@ Flutter MapLibre: a federated plugin in a Dart pub workspace.
     plugin calls.
   - `lib/src/database.dart`: the database that every map and the
     `OfflineManager` (`lib/src/offline_manager.dart`) share.
-  - `desktop/`: C++ shared by the Windows and Linux plugins: the Vulkan device
-    and the C API `desktop/include/maplibre_native/maplibre_native_api.h`,
-    bound in `lib/src/desktop/bindings.g.dart`.
-  - `windows/`: C++ plugin (D3D11 shared textures).
-  - `linux/`: C++ GTK plugin (an `FlTextureGL` whose `populate` imports the
-    Vulkan ring into Flutter's OpenGL context and samples it directly, with
-    fences for the slots Flutter left).
-  - `android/`: Kotlin plugin and JNI shim (SurfaceProducer surfaces as EGL
-    surfaces on one shared render thread, or as Vulkan surfaces of its own
-    device). Its API is `MaplibreNativeApi.kt`, bound in
-    `lib/src/android/bindings.g.dart`.
+  - `desktop/`: C++ shared by the Windows and Linux plugins: the C API
+    `desktop/include/maplibre_native/maplibre_native_api.h`, bound in
+    `lib/src/desktop/bindings.g.dart`. Maps render on a Vulkan device that
+    the C library creates on Flutter's GPU.
+  - `windows/`: C++ plugin (copies frames of the library's DXGI shared
+    texture ring into the textures Flutter shows).
+  - `linux/`: C++ GTK plugin (a ring of Vulkan images on the library's
+    device, and an `FlTextureGL` whose `populate` imports them into
+    Flutter's OpenGL context and samples them directly, with fences for the
+    slots Flutter left).
+  - `android/`: Kotlin plugin, no native code (SurfaceProducer Surfaces, which
+    the C library presents to with a graphics context of its own). Its API is
+    `MaplibreNativeApi.kt`, bound in `lib/src/android/bindings.g.dart`.
   - `darwin/`: Objective-C plugin for iOS and macOS, a SwiftPM package only
-    (a ring of IOSurface-backed Metal textures that Flutter samples). Its C
+    (wraps the library's IOSurface ring in pixel buffers that Flutter
+    samples). Its C
     API is `darwin/maplibre_native/Sources/maplibre_native/include/maplibre_native/maplibre_native_api.h`,
     bound in `lib/src/darwin/bindings.g.dart`.
 - `examples/`: the reference app, which also runs the integration tests on

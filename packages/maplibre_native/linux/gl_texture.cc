@@ -378,11 +378,8 @@ std::unique_ptr<GlTexture> GlTexture::Create(FlTextureRegistrar* registrar,
                                              uint32_t width, uint32_t height,
                                              uint32_t slot_count,
                                              std::string* error) {
-  if (!vulkan->shares_memory()) {
-    *error = "The Vulkan device cannot export memory to OpenGL.";
-    return nullptr;
-  }
-  if (!vulkan->matches_gpu() ||
+  if (std::memcmp(vulkan->device_uuid(), gl->device_uuid().bytes,
+                  VK_UUID_SIZE) != 0 ||
       std::memcmp(vulkan->driver_uuid(), gl->driver_uuid(), VK_UUID_SIZE) !=
           0) {
     *error = "Vulkan and OpenGL run on different GPUs or drivers.";

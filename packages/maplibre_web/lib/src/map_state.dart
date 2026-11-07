@@ -914,30 +914,42 @@ class _WebGestureCamera implements GestureCameraSink {
   );
 
   @override
-  void gestureEnd({Velocity velocity = Velocity.zero}) {
+  void gestureEnd({GestureVelocity velocity = GestureVelocity.zero}) {
     if (!_state._gestureMoving) return;
     _state._gestureMoving = false;
     if (!_state._gestureMoveStarted) return;
-    if (!_fling(velocity.pixelsPerSecond)) {
+    if (!_fling(velocity)) {
       _state._onCameraMoveEnd();
     }
   }
 
-  /// Pans on after a release at [velocity] as GL JS does, slowing down. The
-  /// fling's end reports the end of the move.
-  bool _fling(Offset velocity) {
-    final speed = min(velocity.distance * _flingLinearity, _flingMaxSpeed);
-    if (speed == 0) return false;
-    final seconds = speed / (_flingDeceleration * _flingLinearity);
-    final distance = speed * seconds / 2;
+  /// Pans, zooms and rotates on after a release at [velocity] as GL JS does,
+  /// slowing down. The fling's end reports the end of the move.
+  bool _fling(GestureVelocity velocity) {
+    final pan = _panInertia.glide(velocity.pan.distance);
+    final zoom = _zoomInertia.glide(velocity.zoom.abs());
+    final rotate = _bearingInertia.glide(velocity.rotate.abs());
+    final seconds = max(pan.seconds, max(zoom.seconds, rotate.seconds));
+    if (seconds == 0) return false;
+    final target = zoom.amount == 0 && rotate.amount == 0
+        ? _camera()
+        : _cameraAround(
+            velocity.around ?? _mapCenter,
+            zoomBy: zoom.amount * velocity.zoom.sign,
+            rotateBy: (rotate.amount * velocity.rotate.sign).clamp(-179, 179),
+          );
     // The move already started with the gesture.
     _state
       .._gestureMoving = true
       .._gestureMoveStarted = true;
     _map.easeTo(
       interop.EaseToOptions(
-        center: _map.getCenter(),
-        offset: (velocity / velocity.distance * distance).toJs(),
+        center: target.center,
+        zoom: target.zoom,
+        bearing: target.bearing,
+        offset: pan.amount == 0
+            ? null
+            : (velocity.pan / velocity.pan.distance * pan.amount).toJs(),
         duration: seconds * 1000,
         easing: _flingCurve.transform.toJS,
         essential: true,
@@ -992,10 +1004,26 @@ extension on _WebCamera {
   );
 }
 
-// The pan inertia of MapLibre GL JS.
+/// How one part of a fling slows down, as in GL JS: the release speed counts
+/// `_flingLinearity` times, up to `maxSpeed`, and slows by `deceleration` per
+/// second.
+typedef _Inertia = ({double maxSpeed, double deceleration});
+
+extension on _Inertia {
+  /// How far a part released at [speed] moves on, and for how long.
+  ({double amount, double seconds}) glide(double speed) {
+    if (!speed.isFinite || speed <= 0) return (amount: 0, seconds: 0);
+    final start = min(speed * _flingLinearity, maxSpeed);
+    final seconds = start / (deceleration * _flingLinearity);
+    return (amount: start * seconds / 2, seconds: seconds);
+  }
+}
+
+// The inertia of MapLibre GL JS, in logical pixels, zoom levels and degrees.
 const _flingLinearity = 0.3;
-const _flingMaxSpeed = 1400.0;
-const _flingDeceleration = 2500.0;
+const _Inertia _panInertia = (maxSpeed: 1400, deceleration: 2500);
+const _Inertia _zoomInertia = (maxSpeed: 40, deceleration: 20);
+const _Inertia _bearingInertia = (maxSpeed: 360, deceleration: 1000);
 const _flingCurve = Cubic(0, 0, 0.3, 1);
 
 /// A running [MapLibreMapStateWeb.animateCamera], whose moves carry [id] in

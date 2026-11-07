@@ -20,6 +20,7 @@ class MaplibreNativeDesktopBindings {
   ) : _lookup = lookup;
 
   int maplibre_native_create_gpu_texture(
+    ffi.Pointer<MaplibreNativeVulkanContext> context,
     int width,
     int height,
     int slot_count,
@@ -30,6 +31,7 @@ class MaplibreNativeDesktopBindings {
     int error_size,
   ) {
     return _maplibre_native_create_gpu_texture(
+      context,
       width,
       height,
       slot_count,
@@ -45,6 +47,7 @@ class MaplibreNativeDesktopBindings {
       _lookup<
         ffi.NativeFunction<
           ffi.Int64 Function(
+            ffi.Pointer<MaplibreNativeVulkanContext>,
             ffi.Uint32,
             ffi.Uint32,
             ffi.Uint32,
@@ -60,6 +63,7 @@ class MaplibreNativeDesktopBindings {
       _maplibre_native_create_gpu_texturePtr
           .asFunction<
             int Function(
+              ffi.Pointer<MaplibreNativeVulkanContext>,
               int,
               int,
               int,
@@ -82,6 +86,21 @@ class MaplibreNativeDesktopBindings {
   late final _maplibre_native_create_pixel_texture =
       _maplibre_native_create_pixel_texturePtr.asFunction<int Function()>();
 
+  int maplibre_native_create_shared_texture(
+    ffi.Pointer<ffi.Char> error,
+    int error_size,
+  ) {
+    return _maplibre_native_create_shared_texture(error, error_size);
+  }
+
+  late final _maplibre_native_create_shared_texturePtr =
+      _lookup<
+        ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Char>, ffi.Size)>
+      >('maplibre_native_create_shared_texture');
+  late final _maplibre_native_create_shared_texture =
+      _maplibre_native_create_shared_texturePtr
+          .asFunction<int Function(ffi.Pointer<ffi.Char>, int)>();
+
   void maplibre_native_dispose_texture(int texture_id) {
     return _maplibre_native_dispose_texture(texture_id);
   }
@@ -92,6 +111,31 @@ class MaplibreNativeDesktopBindings {
       );
   late final _maplibre_native_dispose_texture =
       _maplibre_native_dispose_texturePtr.asFunction<void Function(int)>();
+
+  int maplibre_native_gpu_id(
+    ffi.Pointer<ffi.Uint8> out_id,
+    int capacity,
+    ffi.Pointer<ffi.Char> error,
+    int error_size,
+  ) {
+    return _maplibre_native_gpu_id(out_id, capacity, error, error_size);
+  }
+
+  late final _maplibre_native_gpu_idPtr =
+      _lookup<
+        ffi.NativeFunction<
+          ffi.Int32 Function(
+            ffi.Pointer<ffi.Uint8>,
+            ffi.Size,
+            ffi.Pointer<ffi.Char>,
+            ffi.Size,
+          )
+        >
+      >('maplibre_native_gpu_id');
+  late final _maplibre_native_gpu_id = _maplibre_native_gpu_idPtr
+      .asFunction<
+        int Function(ffi.Pointer<ffi.Uint8>, int, ffi.Pointer<ffi.Char>, int)
+      >();
 
   bool maplibre_native_gpu_texture_slot_in_use(int texture_id, int slot) {
     return _maplibre_native_gpu_texture_slot_in_use(texture_id, slot);
@@ -133,6 +177,43 @@ class MaplibreNativeDesktopBindings {
   late final _maplibre_native_present_gpu_texture =
       _maplibre_native_present_gpu_texturePtr
           .asFunction<bool Function(int, int, ffi.Pointer<ffi.Char>, int)>();
+
+  bool maplibre_native_present_shared_texture(
+    int texture_id,
+    int ring,
+    int slot,
+    int handle,
+    ffi.Pointer<ffi.Char> error,
+    int error_size,
+  ) {
+    return _maplibre_native_present_shared_texture(
+      texture_id,
+      ring,
+      slot,
+      handle,
+      error,
+      error_size,
+    );
+  }
+
+  late final _maplibre_native_present_shared_texturePtr =
+      _lookup<
+        ffi.NativeFunction<
+          ffi.Bool Function(
+            ffi.Int64,
+            ffi.Uint32,
+            ffi.Uint32,
+            ffi.Uint64,
+            ffi.Pointer<ffi.Char>,
+            ffi.Size,
+          )
+        >
+      >('maplibre_native_present_shared_texture');
+  late final _maplibre_native_present_shared_texture =
+      _maplibre_native_present_shared_texturePtr
+          .asFunction<
+            bool Function(int, int, int, int, ffi.Pointer<ffi.Char>, int)
+          >();
 
   void maplibre_native_release_retired_slots(int texture_id) {
     return _maplibre_native_release_retired_slots(texture_id);
@@ -245,34 +326,6 @@ class MaplibreNativeDesktopBindings {
               int,
             )
           >();
-
-  bool maplibre_native_vulkan_context(
-    ffi.Pointer<MaplibreNativeVulkanContext> out_context,
-    ffi.Pointer<ffi.Char> error,
-    int error_size,
-  ) {
-    return _maplibre_native_vulkan_context(out_context, error, error_size);
-  }
-
-  late final _maplibre_native_vulkan_contextPtr =
-      _lookup<
-        ffi.NativeFunction<
-          ffi.Bool Function(
-            ffi.Pointer<MaplibreNativeVulkanContext>,
-            ffi.Pointer<ffi.Char>,
-            ffi.Size,
-          )
-        >
-      >('maplibre_native_vulkan_context');
-  late final _maplibre_native_vulkan_context =
-      _maplibre_native_vulkan_contextPtr
-          .asFunction<
-            bool Function(
-              ffi.Pointer<MaplibreNativeVulkanContext>,
-              ffi.Pointer<ffi.Char>,
-              int,
-            )
-          >();
 }
 
 final class MaplibreNativeGpuSlot extends ffi.Struct {
@@ -302,12 +355,6 @@ final class MaplibreNativeVulkanContext extends ffi.Struct {
   external int device;
 
   @ffi.Uint64()
-  external int queue;
-
-  @ffi.Uint32()
-  external int queue_family_index;
-
-  @ffi.Uint64()
   external int get_instance_proc_addr;
 
   @ffi.Uint64()
@@ -318,16 +365,12 @@ final class MaplibreNativeVulkanContext extends ffi.Struct {
     required int instance,
     required int physical_device,
     required int device,
-    required int queue,
-    required int queue_family_index,
     required int get_instance_proc_addr,
     required int get_device_proc_addr,
   }) => $allocator<MaplibreNativeVulkanContext>()
     ..ref.instance = instance
     ..ref.physical_device = physical_device
     ..ref.device = device
-    ..ref.queue = queue
-    ..ref.queue_family_index = queue_family_index
     ..ref.get_instance_proc_addr = get_instance_proc_addr
     ..ref.get_device_proc_addr = get_device_proc_addr;
 }

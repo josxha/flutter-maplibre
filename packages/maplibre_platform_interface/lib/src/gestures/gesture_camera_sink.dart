@@ -15,10 +15,10 @@ abstract interface class GestureCameraSink {
   /// Moves the camera by one step of the running gesture.
   void gestureUpdate(GestureCameraUpdate update);
 
-  /// The running gesture ends. [velocity] is how fast a pan was moving when
-  /// the pointers were released, in logical pixels per second, or
-  /// [Velocity.zero] if it should not fling.
-  void gestureEnd({Velocity velocity = Velocity.zero});
+  /// The running gesture ends. [velocity] is how fast it was moving when the
+  /// pointers were released, which the platform continues as a fling, or
+  /// [GestureVelocity.zero] if it should not fling.
+  void gestureEnd({GestureVelocity velocity = GestureVelocity.zero});
 
   /// Zooms in by [levels] (out if negative) around [around] outside of a
   /// continuous gesture, as for a scroll wheel or a double tap, animated over
@@ -86,4 +86,54 @@ class GestureCameraUpdate {
   String toString() =>
       'GestureCameraUpdate(pan: $panFrom -> $panTo, zoomBy: $zoomBy, '
       'rotateBy: $rotateBy, pitchBy: $pitchBy, around: $around)';
+}
+
+/// How fast a continuous gesture moved the camera when its pointers were
+/// released.
+@immutable
+class GestureVelocity {
+  /// Creates a release velocity.
+  const GestureVelocity({
+    this.pan = Offset.zero,
+    this.zoom = 0,
+    this.rotate = 0,
+    this.around,
+  });
+
+  /// A release that doesn't fling.
+  static const zero = GestureVelocity();
+
+  /// How fast the map content moved on the screen, in logical pixels per
+  /// second.
+  final Offset pan;
+
+  /// How fast the zoom changed, in zoom levels per second.
+  final double zoom;
+
+  /// How fast the bearing changed, in degrees per second, with the sign of
+  /// [GestureCameraUpdate.rotateBy].
+  final double rotate;
+
+  /// The screen point that a zoom or rotation fling keeps in place, or null
+  /// for the platform's default.
+  final Offset? around;
+
+  /// Whether the release doesn't fling.
+  bool get isZero => pan == Offset.zero && zoom == 0 && rotate == 0;
+
+  @override
+  bool operator ==(Object other) =>
+      other is GestureVelocity &&
+      other.pan == pan &&
+      other.zoom == zoom &&
+      other.rotate == rotate &&
+      other.around == around;
+
+  @override
+  int get hashCode => Object.hash(pan, zoom, rotate, around);
+
+  @override
+  String toString() =>
+      'GestureVelocity(pan: $pan, zoom: $zoom, rotate: $rotate, '
+      'around: $around)';
 }

@@ -11,10 +11,10 @@ build hook downloads the prebuilt C library, and shows each map as a Flutter
 
 | Platform | Rendering                                                                   |
 |----------|-----------------------------------------------------------------------------|
-| Windows  | Vulkan into D3D11 textures shared with Flutter, or CPU readback             |
+| Windows  | Vulkan into DXGI shared textures, copied for Flutter, or CPU readback       |
 | Android  | OpenGL ES (default) or Vulkan on the Surface of a Flutter `SurfaceProducer` |
-| iOS      | Metal into a texture ring, copied on the GPU into IOSurface pixel buffers   |
-| macOS    | Metal into a texture ring, copied on the GPU into IOSurface pixel buffers   |
+| iOS      | Metal into IOSurfaces that Flutter samples                                  |
+| macOS    | Metal into IOSurfaces that Flutter samples                                  |
 | Linux    | Vulkan into memory imported by OpenGL for Flutter, or CPU readback          |
 
 ## Android

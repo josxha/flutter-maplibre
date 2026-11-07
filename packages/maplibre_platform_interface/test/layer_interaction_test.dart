@@ -34,7 +34,7 @@ class _Camera implements GestureCameraSink {
   }
 
   @override
-  void gestureEnd({Velocity velocity = Velocity.zero}) {}
+  void gestureEnd({GestureVelocity velocity = GestureVelocity.zero}) {}
 
   @override
   void zoomBy(

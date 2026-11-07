@@ -194,6 +194,29 @@ void runTests() {
       expect(status.progress, 1);
     });
 
+    test(
+      'downloads up to the source maximum with an infinite max zoom',
+      () async {
+        final updates = await _download(
+          manager,
+          server,
+          definition: OfflineTilePyramidRegionDefinition(
+            styleUrl: server.styleUrl,
+            bounds: _world,
+            minZoom: 0,
+            maxZoom: double.infinity,
+            pixelRatio: 1,
+          ),
+        );
+        final last = updates.last;
+        expect(last.downloadCompleted, isTrue);
+        // The raster source ends at zoom 1, which has four tiles.
+        expect(last.status.requiredTileCount, 4);
+        expect(last.status.completedTileCount, 4);
+        expect(server.requests['tiles'], 4);
+      },
+    );
+
     test('downloads only the tiles a geometry touches', () async {
       // A triangle within the north-east tile of zoom 1.
       final definition = OfflineGeometryRegionDefinition(

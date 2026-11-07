@@ -46,7 +46,7 @@ final class FrameAlignedGestureCamera implements GestureCameraSink {
       _queue(() => _sink.gestureUpdate(update));
 
   @override
-  void gestureEnd({Velocity velocity = Velocity.zero}) =>
+  void gestureEnd({GestureVelocity velocity = GestureVelocity.zero}) =>
       _queue(() => _sink.gestureEnd(velocity: velocity));
 
   @override
