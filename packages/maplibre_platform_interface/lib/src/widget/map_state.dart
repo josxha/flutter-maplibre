@@ -91,11 +91,17 @@ abstract class MapLibreMapState extends State<MapLibreMap>
   /// followed by another one is dropped.
   var _dragGeneration = 0;
 
-  /// The search of the current drag for a feature to move, until it ends.
+  /// The search of the current drag for a feature to move, until it and the
+  /// start callbacks complete.
   Future<void>? _dragStarting;
+
+  /// The last move of the current drag while it starts, which is reported
+  /// once it started.
+  MapEventDrag? _heldDrag;
 
   FutureOr<void> _onDragStart(MapEventDragStart event) {
     _layerDrag = null;
+    _heldDrag = null;
     final generation = ++_dragGeneration;
     final onDragStart = widget.onDragStart;
     if (!_layersDraggable) return onDragStart?.call(event);
@@ -105,11 +111,44 @@ abstract class MapLibreMapState extends State<MapLibreMap>
     ).then((_) => onDragStart?.call(event));
     _dragStarting = starting;
     unawaited(
-      starting.whenComplete(() {
-        if (identical(_dragStarting, starting)) _dragStarting = null;
+      _afterStart(starting, () {
+        if (!identical(_dragStarting, starting)) return;
+        _dragStarting = null;
+        final held = _heldDrag;
+        _heldDrag = null;
+        if (held != null && mounted) _onDrag(held);
       }),
     );
+    // The gesture detector reports the errors of the start.
     return starting;
+  }
+
+  /// Runs [callback] once [starting] completes. Reports the errors of
+  /// [callback], but not those of [starting], which the gesture detector
+  /// reports.
+  Future<void> _afterStart(
+    Future<void> starting,
+    void Function() callback,
+  ) async {
+    try {
+      await starting;
+    } on Object catch (_) {}
+    try {
+      callback();
+    } on Object catch (error, stack) {
+      _reportDragError(error, stack, 'while handling a drag');
+    }
+  }
+
+  void _reportDragError(Object error, StackTrace stack, String context) {
+    FlutterError.reportError(
+      FlutterErrorDetails(
+        exception: error,
+        stack: stack,
+        library: 'maplibre',
+        context: ErrorDescription(context),
+      ),
+    );
   }
 
   /// Finds the feature of a draggable layer that [event] went down on, and
@@ -132,14 +171,7 @@ abstract class MapLibreMapState extends State<MapLibreMap>
         layerIds: layerIndexes.keys.toList(),
       );
     } on Object catch (error, stack) {
-      FlutterError.reportError(
-        FlutterErrorDetails(
-          exception: error,
-          stack: stack,
-          library: 'maplibre',
-          context: ErrorDescription('while finding the feature to drag'),
-        ),
-      );
+      _reportDragError(error, stack, 'while finding the feature to drag');
       return;
     }
     if (!mounted || generation != _dragGeneration) return;
@@ -180,6 +212,11 @@ abstract class MapLibreMapState extends State<MapLibreMap>
   }
 
   void _onDrag(MapEventDrag event) {
+    // Moves come after the start callbacks.
+    if (_dragStarting != null) {
+      _heldDrag = event;
+      return;
+    }
     final moved = _emitLayerDrag(event.screenPoint, (layer) => layer.onDrag);
     if (moved != null) layerManager?.moveDrag(moved);
     widget.onDrag?.call(event);
@@ -192,7 +229,7 @@ abstract class MapLibreMapState extends State<MapLibreMap>
     if (starting == null) return _endLayerDrag(event);
     final generation = _dragGeneration;
     unawaited(
-      starting.whenComplete(() {
+      _afterStart(starting, () {
         if (!mounted) return;
         if (generation == _dragGeneration) return _endLayerDrag(event);
         widget.onDragEnd?.call(event);

@@ -144,6 +144,7 @@ void main() {
         child: MapLibreMap(
           layers: layers,
           onDragStart: mapEvents.add,
+          onDrag: mapEvents.add,
           onDragEnd: mapEvents.add,
         ),
       ),
@@ -300,10 +301,12 @@ void main() {
     expect(mapEvents, isEmpty);
     gate.complete();
     await tester.pumpAndSettle();
-    expect(drags.map((d) => d.$1), ['start', 'end']);
-    expect(mapEvents.first, isA<MapEventDragStart>());
-    expect(mapEvents.last, isA<MapEventDragEnd>());
-    expect(mapEvents, hasLength(2));
+    expect(drags.map((d) => d.$1), ['start', 'drag', 'end']);
+    expect(mapEvents.map((e) => e.runtimeType), [
+      MapEventDragStart,
+      MapEventDrag,
+      MapEventDragEnd,
+    ]);
     expect(platform.camera.panned, Offset.zero);
 
     // The next drag doesn't move the feature of the last one.
@@ -311,6 +314,66 @@ void main() {
     platform.state.queryGate = null;
     await drag(tester, const Offset(200, 300), const Offset(-100, 0));
     expect(drags, isEmpty);
+  });
+
+  testWidgets('moves while it looks for a feature come after the start', (
+    tester,
+  ) async {
+    await pumpMap(tester, [
+      draggable([_point(0, 0)]),
+    ]);
+    final gate = platform.state.queryGate = Completer<void>();
+    final gesture = await tester.startGesture(_center);
+    for (var i = 0; i < 5; i++) {
+      await gesture.moveBy(const Offset(0, 10));
+      await tester.pump(const Duration(milliseconds: 16));
+    }
+    expect(mapEvents, isEmpty);
+    gate.complete();
+    await tester.pump();
+    // The last move is reported right after the start.
+    expect(mapEvents.map((e) => e.runtimeType), [
+      MapEventDragStart,
+      MapEventDrag,
+    ]);
+    expect(drags.map((d) => d.$1), ['start', 'drag']);
+    expect(drags.last.$2.screenPoint, const Offset(400, 350));
+    await gesture.up();
+    await tester.pumpAndSettle();
+    expect(drags.last.$1, 'end');
+  });
+
+  testWidgets('a drag that starts while the last one looks for a feature', (
+    tester,
+  ) async {
+    await pumpMap(tester, [
+      draggable([_point(0, 0)]),
+    ]);
+    final gate = platform.state.queryGate = Completer<void>();
+    var gesture = await tester.startGesture(_center);
+    for (var i = 0; i < 3; i++) {
+      await gesture.moveBy(const Offset(0, 10));
+      await tester.pump(const Duration(milliseconds: 16));
+    }
+    await gesture.up();
+    await tester.pump(const Duration(milliseconds: 500));
+    // The second drag goes beside the feature, so it pans.
+    gesture = await tester.startGesture(const Offset(200, 300));
+    for (var i = 0; i < 3; i++) {
+      await gesture.moveBy(const Offset(-10, 0));
+      await tester.pump(const Duration(milliseconds: 16));
+    }
+    gate.complete();
+    await tester.pump();
+    for (var i = 0; i < 5; i++) {
+      await gesture.moveBy(const Offset(-10, 0));
+      await tester.pump(const Duration(milliseconds: 16));
+    }
+    await gesture.up();
+    await tester.pumpAndSettle();
+    // The first query found the feature, but its drag was over.
+    expect(drags, isEmpty);
+    expect(platform.camera.panned.dx, lessThan(-30));
   });
 
   testWidgets('a feature removed during the drag stops it', (tester) async {
