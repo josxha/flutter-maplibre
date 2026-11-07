@@ -112,5 +112,26 @@ void main() {
       await pumpTracking(UserLocationTracking.positionAndHeading);
       expect(icon(MapButtonIcon.locationAndHeading), findsOneWidget);
     });
+
+    testWidgets('takes custom colors', (tester) async {
+      await tester.pumpWidget(
+        App(
+          camera: camera,
+          controller: controller,
+          children: const [
+            MapControlButtons(
+              backgroundColor: Color(0xFF000000),
+              iconColor: Color(0xFFFFFFFF),
+            ),
+          ],
+        ),
+      );
+      final buttons = tester.widgetList<MapButton>(find.byType(MapButton));
+      expect(buttons, hasLength(2));
+      for (final button in buttons) {
+        expect(button.backgroundColor, const Color(0xFF000000));
+        expect(button.iconColor, const Color(0xFFFFFFFF));
+      }
+    });
   });
 }

@@ -3,7 +3,8 @@
 ### Breaking Changes
 
 - `MapCompass`, `MapControlButtons`, `MapScalebar` and `SourceAttribution` no
-  longer depend on Material, so they no longer follow the app's `Theme`
+  longer depend on Material and no longer follow the app's `Theme`; set their
+  new color and text style parameters instead
   ([#671](https://github.com/josxha/flutter-maplibre/issues/671)).
 
 Full Changelog: [v0.4.0-pre.2...main](https://github.com/josxha/flutter-maplibre/compare/v0.4.0-pre.2...main)

@@ -25,6 +25,9 @@ class MapCompass extends StatelessWidget {
     this.alignment = Alignment.topRight,
     this.padding = const EdgeInsets.all(10),
     this.radius = 22,
+    this.backgroundColor = const Color(0x99FFFFFF),
+    this.borderColor = const Color(0xFF000000),
+    this.needleColor = const Color(0xFFF44336),
   });
 
   /// Override the compass widget.
@@ -69,6 +72,16 @@ class MapCompass extends StatelessWidget {
   /// The compass radius.
   final double radius;
 
+  /// The background color of the default compass. Defaults to translucent
+  /// white.
+  final Color backgroundColor;
+
+  /// The outline color of the default compass. Defaults to black.
+  final Color borderColor;
+
+  /// The needle color of the default compass. Defaults to red.
+  final Color needleColor;
+
   @override
   Widget build(BuildContext context) {
     final controller = MapController.maybeOf(context);
@@ -90,7 +103,12 @@ class MapCompass extends StatelessWidget {
           child:
               child ??
               CustomPaint(
-                painter: _CompassPainter(radius: radius),
+                painter: _CompassPainter(
+                  radius: radius,
+                  backgroundColor: backgroundColor,
+                  borderColor: borderColor,
+                  needleColor: needleColor,
+                ),
                 child: SizedBox.square(dimension: radius * 2),
               ),
         ),
@@ -113,9 +131,17 @@ class MapCompass extends StatelessWidget {
 }
 
 class _CompassPainter extends CustomPainter {
-  _CompassPainter({required this.radius});
+  _CompassPainter({
+    required this.radius,
+    required this.backgroundColor,
+    required this.borderColor,
+    required this.needleColor,
+  });
 
   final double radius;
+  final Color backgroundColor;
+  final Color borderColor;
+  final Color needleColor;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -128,14 +154,14 @@ class _CompassPainter extends CustomPainter {
     canvas.drawCircle(
       Offset(radius, radius),
       radius,
-      Paint()..color = const Color(0x99FFFFFF),
+      Paint()..color = backgroundColor,
     );
     // circle outline
     canvas.drawCircle(
       Offset(radius, radius),
       radius - (borderWidth / 2),
       Paint()
-        ..color = const Color(0xFF000000)
+        ..color = borderColor
         ..strokeWidth = borderWidth
         ..style = PaintingStyle.stroke,
     );
@@ -147,7 +173,7 @@ class _CompassPainter extends CustomPainter {
         ..lineTo(radius + needleWidth, radius),
       Paint()
         ..style = PaintingStyle.stroke
-        ..color = const Color(0xFFF44336)
+        ..color = needleColor
         ..strokeCap = StrokeCap.butt
         ..strokeJoin = StrokeJoin.bevel
         ..strokeWidth = needsStrokeWidth,
@@ -160,11 +186,14 @@ class _CompassPainter extends CustomPainter {
         Offset(radius + needleWidth + halfStrokeWidth, radius),
       ]),
       BlendMode.color,
-      Paint()..color = const Color(0xFFF44336),
+      Paint()..color = needleColor,
     );
   }
 
   @override
   bool shouldRepaint(covariant _CompassPainter oldDelegate) =>
-      radius != oldDelegate.radius;
+      radius != oldDelegate.radius ||
+      backgroundColor != oldDelegate.backgroundColor ||
+      borderColor != oldDelegate.borderColor ||
+      needleColor != oldDelegate.needleColor;
 }

@@ -13,6 +13,8 @@ class MapButton extends StatelessWidget {
     required this.onPressed,
     this.size = 48,
     this.iconSize = 24,
+    this.backgroundColor = defaultBackgroundColor,
+    this.iconColor = defaultIconColor,
     super.key,
   });
 
@@ -31,11 +33,17 @@ class MapButton extends StatelessWidget {
   /// The size of the icon.
   final double iconSize;
 
-  /// The background color of a button.
-  static const backgroundColor = Color(0xFFFFFFFF);
+  /// The background color of the button.
+  final Color backgroundColor;
 
-  /// The color of an icon.
-  static const iconColor = Color(0xFF333333);
+  /// The color of the icon.
+  final Color iconColor;
+
+  /// The default background color of the map controls.
+  static const defaultBackgroundColor = Color(0xFFFFFFFF);
+
+  /// The default icon color of the map controls.
+  static const defaultIconColor = Color(0xFF333333);
 
   @override
   Widget build(BuildContext context) {
@@ -46,10 +54,10 @@ class MapButton extends StatelessWidget {
         width: size,
         height: size,
         alignment: Alignment.center,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: backgroundColor,
           shape: BoxShape.circle,
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               color: Color(0x40000000),
               blurRadius: 4,
@@ -59,7 +67,11 @@ class MapButton extends StatelessWidget {
         ),
         child: CustomPaint(
           size: Size.square(iconSize),
-          painter: MapButtonIconPainter(icon, color: iconColor),
+          painter: MapButtonIconPainter(
+            icon,
+            color: iconColor,
+            backgroundColor: backgroundColor,
+          ),
         ),
       ),
     );
@@ -137,13 +149,20 @@ enum MapButtonIcon {
 /// Paints a [MapButtonIcon] in a square of the canvas size.
 class MapButtonIconPainter extends CustomPainter {
   /// Paints [icon] in [color].
-  const MapButtonIconPainter(this.icon, {required this.color});
+  const MapButtonIconPainter(
+    this.icon, {
+    required this.color,
+    required this.backgroundColor,
+  });
 
   /// The icon to paint.
   final MapButtonIcon icon;
 
   /// The color of the icon.
   final Color color;
+
+  /// The color behind the icon, for the parts cut out of it.
+  final Color backgroundColor;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -200,13 +219,13 @@ class MapButtonIconPainter extends CustomPainter {
           ..drawCircle(
             c.translate(0, -s * .2),
             s * .065,
-            Paint()..color = MapButton.backgroundColor,
+            Paint()..color = backgroundColor,
           )
           ..drawLine(
             c.translate(0, -s * .04),
             c.translate(0, s * .24),
             Paint()
-              ..color = MapButton.backgroundColor
+              ..color = backgroundColor
               ..strokeWidth = s * .12
               ..strokeCap = StrokeCap.round,
           );
@@ -215,5 +234,7 @@ class MapButtonIconPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant MapButtonIconPainter oldDelegate) =>
-      icon != oldDelegate.icon || color != oldDelegate.color;
+      icon != oldDelegate.icon ||
+      color != oldDelegate.color ||
+      backgroundColor != oldDelegate.backgroundColor;
 }

@@ -20,6 +20,9 @@ class SourceAttribution extends StatefulWidget {
     this.alignment = Alignment.bottomRight,
     this.showMapLibre = true,
     this.keepExpanded = false,
+    this.backgroundColor = MapButton.defaultBackgroundColor,
+    this.iconColor = MapButton.defaultIconColor,
+    this.textStyle = defaultTextStyle,
   });
 
   /// The padding.
@@ -37,6 +40,21 @@ class SourceAttribution extends StatefulWidget {
   ///
   /// Defaults to false.
   final bool keepExpanded;
+
+  /// The background color. Defaults to white.
+  final Color backgroundColor;
+
+  /// The color of the info icon. Defaults to dark grey.
+  final Color iconColor;
+
+  /// The style of the attribution text. Links are underlined on hover.
+  final TextStyle textStyle;
+
+  /// The default [textStyle]: 12 px dark grey.
+  static const defaultTextStyle = TextStyle(
+    fontSize: 12,
+    color: Color(0xFF333333),
+  );
 
   @override
   State<SourceAttribution> createState() => _SourceAttributionState();
@@ -74,7 +92,7 @@ class _SourceAttributionState extends State<SourceAttribution> {
         padding: widget.padding,
         child: Container(
           decoration: BoxDecoration(
-            color: MapButton.backgroundColor,
+            color: widget.backgroundColor,
             borderRadius: BorderRadius.circular(20),
           ),
           child: Row(
@@ -90,7 +108,7 @@ class _SourceAttributionState extends State<SourceAttribution> {
                       spacing: 2,
                       runSpacing: 2,
                       children: attributions
-                          .map(_HtmlWidget.new)
+                          .map((html) => _HtmlWidget(html, widget.textStyle))
                           .toList(growable: false),
                     ),
                   ),
@@ -103,12 +121,13 @@ class _SourceAttributionState extends State<SourceAttribution> {
                     _initCameraPosition = null;
                     _expanded = !_expanded;
                   }),
-                  child: const Center(
+                  child: Center(
                     child: CustomPaint(
-                      size: Size.square(18),
+                      size: const Size.square(18),
                       painter: MapButtonIconPainter(
                         MapButtonIcon.info,
-                        color: MapButton.iconColor,
+                        color: widget.iconColor,
+                        backgroundColor: widget.backgroundColor,
                       ),
                     ),
                   ),
@@ -123,9 +142,10 @@ class _SourceAttributionState extends State<SourceAttribution> {
 }
 
 class _HtmlWidget extends StatefulWidget {
-  const _HtmlWidget(this.html);
+  const _HtmlWidget(this.html, this.textStyle);
 
   final String html;
+  final TextStyle textStyle;
 
   @override
   State<StatefulWidget> createState() => _HtmlWidgetState();
@@ -136,7 +156,7 @@ class _HtmlWidgetState extends State<_HtmlWidget> {
 
   @override
   Widget build(BuildContext context) {
-    var textStyle = const TextStyle(fontSize: 12, color: Color(0xFF333333));
+    var textStyle = widget.textStyle;
     if (_hovering) {
       textStyle = textStyle.copyWith(decoration: TextDecoration.underline);
     }

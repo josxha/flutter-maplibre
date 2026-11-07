@@ -20,6 +20,8 @@ class MapControlButtons extends StatelessWidget {
     this.alignment = Alignment.bottomRight,
     this.tracking,
     this.onTrackingPressed,
+    this.backgroundColor = MapButton.defaultBackgroundColor,
+    this.iconColor = MapButton.defaultIconColor,
   });
 
   /// The padding.
@@ -36,6 +38,12 @@ class MapControlButtons extends StatelessWidget {
   /// the user location with a [UserLocationLayer]. The button shows only
   /// when this is set.
   final VoidCallback? onTrackingPressed;
+
+  /// The background color of the buttons. Defaults to white.
+  final Color backgroundColor;
+
+  /// The color of the icons. Defaults to dark grey.
+  final Color iconColor;
 
   static const _zoomAnimation = CameraAnimation.ease(
     duration: Duration(milliseconds: 200),
@@ -55,6 +63,8 @@ class MapControlButtons extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             MapButton(
+              backgroundColor: backgroundColor,
+              iconColor: iconColor,
               icon: MapButtonIcon.zoomIn,
               label: 'Zoom in',
               onPressed: () => controller.animateCamera(
@@ -63,6 +73,8 @@ class MapControlButtons extends StatelessWidget {
               ),
             ),
             MapButton(
+              backgroundColor: backgroundColor,
+              iconColor: iconColor,
               icon: MapButtonIcon.zoomOut,
               label: 'Zoom out',
               onPressed: () => controller.animateCamera(
@@ -72,6 +84,8 @@ class MapControlButtons extends StatelessWidget {
             ),
             if (onTrackingPressed case final VoidCallback onPressed)
               MapButton(
+                backgroundColor: backgroundColor,
+                iconColor: iconColor,
                 icon: switch (tracking) {
                   UserLocationTracking.position => MapButtonIcon.location,
                   UserLocationTracking.positionAndHeading =>
