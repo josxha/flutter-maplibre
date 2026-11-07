@@ -58,6 +58,35 @@ void main() {
   List<String> ids() => layers.map((layer) => layer.id).toList();
 
   group('StyleLayers', () {
+    test('notifies when a layer gets or loses its event callbacks', () async {
+      var notified = 0;
+      layers.callbacksChanged.addListener(() => notified++);
+      await sources.add(const GeoJsonSource.url(id: 's', url: 'https://s'));
+      void noop(StyleLayerFeatureEvent _) {}
+      await layers.add(CircleStyleLayer(id: 'plain', sourceId: 's'));
+      expect(notified, 0);
+      await layers.add(
+        CircleStyleLayer(id: 'clickable', sourceId: 's', onClick: noop),
+      );
+      expect(notified, 1);
+      final plain = layers['plain']!..onEnter = noop;
+      expect(notified, 2);
+      // Another callback in place of one changes nothing for the map.
+      plain.onEnter = (_) {};
+      expect(notified, 2);
+      plain.onEnter = null;
+      expect(notified, 3);
+      await layers.remove('clickable');
+      expect(notified, 4);
+      // A detached layer no longer notifies.
+      final detached = CircleStyleLayer(id: 'x', sourceId: 's')..onClick = noop;
+      expect(notified, 4);
+      expect(detached.onClick, noop);
+      layers['plain']!.onLeave = noop;
+      layers.dispose();
+      expect(notified, 6);
+    });
+
     setUp(() {
       sources.load({
         'src': {'type': 'geojson', 'data': 'https://example.com/a.json'},

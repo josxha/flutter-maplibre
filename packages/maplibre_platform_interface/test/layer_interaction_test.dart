@@ -56,6 +56,9 @@ class _State extends MapLibreMapState {
   @override
   StyleController? style;
 
+  /// Hands out [style] and rebuilds, like the platforms once a style loaded.
+  void loadStyle(StyleController style) => setState(() => this.style = style);
+
   /// The features of style layers, by layer id, with where they are on the
   /// screen.
   final styleFeatures = <String, List<(Offset, Object?)>>{};
@@ -552,7 +555,9 @@ void main() {
     });
 
     /// Loads style layers [ids] that report their events, bottom to top.
-    void loadLayers(WidgetTester tester, List<String> ids) {
+    Future<void> loadLayers(WidgetTester tester, List<String> ids) async {
+      platform.state.loadStyle(style);
+      await tester.pump();
       style.layers.load([
         for (final id in ids) {'id': id, 'type': 'circle', 'source': 's'},
       ]);
@@ -564,16 +569,16 @@ void main() {
           ..onEnter = ((event) => events.add('enter ${name(event)}'))
           ..onLeave = ((event) => events.add('leave ${name(event)}'));
       }
-      platform.state
-        ..style = style
-        ..styleFeatures.clear();
+      platform.state.styleFeatures.clear();
+      // Setting the callbacks rebuilds the map.
+      await tester.pump();
     }
 
     testWidgets('a tap reports the topmost feature of every layer under it', (
       tester,
     ) async {
       await pumpMap(tester, []);
-      loadLayers(tester, ['a', 'b', 'c']);
+      await loadLayers(tester, ['a', 'b', 'c']);
       platform.state.styleFeatures.addAll({
         'a': [(_center, 1), (_center, 2)],
         'b': [(_center, 3)],
@@ -596,7 +601,7 @@ void main() {
     testWidgets('the mouse enters and leaves features by id, and layers of '
         'features without one as a whole', (tester) async {
       await pumpMap(tester, []);
-      loadLayers(tester, ['a', 'b']);
+      await loadLayers(tester, ['a', 'b']);
       platform.state.styleFeatures.addAll({
         'a': [(const Offset(300, 300), 1), (const Offset(500, 300), 2)],
         'b': [(const Offset(300, 400), null), (const Offset(500, 400), null)],

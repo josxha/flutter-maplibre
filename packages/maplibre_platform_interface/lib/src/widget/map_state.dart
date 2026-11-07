@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 import 'package:maplibre_platform_interface/src/widget/inherited_model.dart';
@@ -617,12 +618,56 @@ abstract class MapLibreMapState extends State<MapLibreMap>
     });
   }
 
+  /// The style layers whose callbacks [build] follows.
+  StyleLayers? _styleLayers;
+
+  void _listenToStyleLayers() {
+    final layers = style?.layers;
+    if (identical(layers, _styleLayers)) return;
+    _styleLayers?.callbacksChanged.removeListener(_onStyleCallbacksChanged);
+    _styleLayers = layers;
+    layers?.callbacksChanged.addListener(_onStyleCallbacksChanged);
+  }
+
+  /// Rebuilds, so that the map listens for taps and the mouse while a style
+  /// layer reports them.
+  void _onStyleCallbacksChanged() {
+    if (!mounted) return;
+    if (SchedulerBinding.instance.schedulerPhase ==
+        SchedulerPhase.persistentCallbacks) {
+      // The callbacks changed while the tree builds.
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        if (mounted) setState(() {});
+      });
+    } else {
+      setState(() {});
+    }
+  }
+
+  @override
+  void dispose() {
+    _styleLayers?.callbacksChanged.removeListener(_onStyleCallbacksChanged);
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final gestureCamera = this.gestureCamera;
     final platformWidget = buildPlatformWidget(context);
     final widget = this.widget;
     final layersDraggable = _layersDraggable;
+    // Only the gesture detector reports taps and the mouse to style layers.
+    if (gestureCamera != null) _listenToStyleLayers();
+    final clicks =
+        gestureCamera != null &&
+        (_layersClickable || _styleLayersClickable || widget.onClick != null);
+    // Hovered features are left once the last hoverable layer is gone.
+    final hovers =
+        gestureCamera != null &&
+        (_layersHoverable ||
+            _styleLayersHoverable ||
+            _hovered.isNotEmpty ||
+            _hoveredStyle.isNotEmpty);
     return LayoutBuilder(
       builder: (context, constraints) {
         _onLayout(constraints);
@@ -636,9 +681,7 @@ abstract class MapLibreMapState extends State<MapLibreMap>
                 gestures: options.gestures,
                 camera: gestureCamera,
                 toLngLat: (point) => isInitialized ? toLngLat(point) : null,
-                // Style layers can report taps and the mouse at any time,
-                // without a rebuild.
-                onClick: _onClick,
+                onClick: clicks ? _onClick : null,
                 onDoubleClick: widget.onDoubleClick,
                 onSecondaryClick: widget.onSecondaryClick,
                 onLongClick: widget.onLongClick,
@@ -651,8 +694,12 @@ abstract class MapLibreMapState extends State<MapLibreMap>
                 onDragEnd: layersDraggable || widget.onDragEnd != null
                     ? _onDragEnd
                     : null,
-                onPointerMove: _onPointerMove,
-                onPointerLeave: _onPointerLeave,
+                onPointerMove: hovers || widget.onPointerMove != null
+                    ? _onPointerMove
+                    : null,
+                onPointerLeave: hovers || widget.onPointerLeave != null
+                    ? _onPointerLeave
+                    : null,
                 child: platformWidget,
               ),
             MapLibreInheritedModel(

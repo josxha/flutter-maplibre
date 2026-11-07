@@ -28,9 +28,9 @@ abstract class StyleLayer {
     this._maxZoom = 24,
     Expression<bool>? filter,
     bool visible = true,
-    this.onClick,
-    this.onEnter,
-    this.onLeave,
+    this._onClick,
+    this._onEnter,
+    this._onLeave,
   }) : _filter = filter?.toJson(),
        _layout = {},
        _paint = {},
@@ -84,7 +84,14 @@ abstract class StyleLayer {
   /// [FillStyleLayer], [FillExtrusionStyleLayer], [HeatmapStyleLayer],
   /// [LineStyleLayer] and [SymbolStyleLayer]. Removing the layer or loading
   /// a new style ends the calls.
-  StyleLayerFeatureCallback? onClick;
+  StyleLayerFeatureCallback? get onClick => _onClick;
+  StyleLayerFeatureCallback? _onClick;
+
+  set onClick(StyleLayerFeatureCallback? value) {
+    final changed = (_onClick == null) != (value == null);
+    _onClick = value;
+    if (changed) _owner?._callbacksChanged();
+  }
 
   /// Called when a mouse or stylus moves onto a feature of this layer.
   ///
@@ -94,11 +101,29 @@ abstract class StyleLayer {
   /// Touches don't hover, so only mice and styluses report it.
   ///
   /// The same layers as for [onClick] report it.
-  StyleLayerFeatureCallback? onEnter;
+  StyleLayerFeatureCallback? get onEnter => _onEnter;
+  StyleLayerFeatureCallback? _onEnter;
+
+  set onEnter(StyleLayerFeatureCallback? value) {
+    final changed = (_onEnter == null) != (value == null);
+    _onEnter = value;
+    if (changed) _owner?._callbacksChanged();
+  }
 
   /// Called when the mouse or stylus leaves the feature that [onEnter]
   /// reported, including when it leaves the map.
-  StyleLayerFeatureCallback? onLeave;
+  StyleLayerFeatureCallback? get onLeave => _onLeave;
+  StyleLayerFeatureCallback? _onLeave;
+
+  set onLeave(StyleLayerFeatureCallback? value) {
+    final changed = (_onLeave == null) != (value == null);
+    _onLeave = value;
+    if (changed) _owner?._callbacksChanged();
+  }
+
+  /// Whether the layer has [onClick], [onEnter] or [onLeave].
+  bool get _hasCallbacks =>
+      _onClick != null || _onEnter != null || _onLeave != null;
 
   final Map<String, Object?> _layout;
   final Map<String, Object?> _paint;

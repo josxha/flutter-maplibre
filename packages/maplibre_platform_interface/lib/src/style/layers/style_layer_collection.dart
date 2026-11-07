@@ -16,6 +16,15 @@ final class StyleLayers extends Iterable<StyleLayer> {
   final StyleBackend _backend;
   final StyleSources _sources;
   final _layers = <StyleLayer>[];
+  final ValueNotifier<int> _callbacks = ValueNotifier(0);
+
+  /// Notifies its listeners when a layer of the collection gets its first
+  /// [StyleLayer.onClick], [StyleLayer.onEnter] or [StyleLayer.onLeave] or
+  /// loses its last one, so that the map listens for taps and the mouse
+  /// only while a layer needs them.
+  Listenable get callbacksChanged => _callbacks;
+
+  void _callbacksChanged() => _callbacks.value++;
 
   @override
   Iterator<StyleLayer> get iterator => _layers.iterator;
@@ -66,12 +75,14 @@ final class StyleLayers extends Iterable<StyleLayer> {
     }
     _layers.insert(index, layer);
     _attach(layer);
+    if (layer._hasCallbacks) _callbacksChanged();
     try {
       await _backend.addLayer(layer.toJson(), belowLayerId: belowLayerId);
     } catch (_) {
       if (identical(layer._owner, this)) {
         _layers.remove(layer);
         _detach(layer);
+        if (layer._hasCallbacks) _callbacksChanged();
       }
       rethrow;
     }
@@ -82,7 +93,9 @@ final class StyleLayers extends Iterable<StyleLayer> {
   Future<void> remove(String id) async {
     final index = _indexOf(id);
     if (index == -1) return;
-    _detach(_layers.removeAt(index));
+    final layer = _layers.removeAt(index);
+    _detach(layer);
+    if (layer._hasCallbacks) _callbacksChanged();
     await _backend.removeLayer(id);
   }
 
@@ -122,8 +135,10 @@ final class StyleLayers extends Iterable<StyleLayer> {
 
   /// Detaches every layer object, when the style goes away. Platforms call it.
   void dispose() {
+    final hadCallbacks = _layers.any((layer) => layer._hasCallbacks);
     _layers.forEach(_detach);
     _layers.clear();
+    if (hadCallbacks) _callbacksChanged();
   }
 
   int _indexOf(String id) => _layers.indexWhere((layer) => layer.id == id);

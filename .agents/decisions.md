@@ -510,9 +510,14 @@ Each entry: the decision, then why.
   `RenderedFeature`. Unlike annotation layers, every style layer under a tap
   reports it, as with gl-js `map.on('click', layerId)`. Enter/leave is per
   feature id, or per layer for features without one. The same query serves
-  annotation and style layers. The detector always gets `onClick`,
-  `onPointerMove` and `onPointerLeave`, because a callback set on a style
-  layer doesn't rebuild the map.
+  annotation and style layers. A callback set on a style layer doesn't
+  rebuild the map, so `StyleLayers.callbacksChanged` notifies when a layer
+  gets its first callback or loses its last one (setter, add, remove,
+  dispose), and the map rebuilds to wire the detector's `onClick`,
+  `onPointerMove` and `onPointerLeave` only while something needs them. One
+  frame late is fine: no tap or move can come in between. The repaint
+  triggers of the platforms don't help, they render a map frame and don't
+  rebuild widgets.
 - **One gesture recognizer in Dart serves every platform:
   `MapGestureDetector` in `maplibre_platform_interface`.** It sits there, not
   in `maplibre`, because the platform packages need it and `maplibre` depends
