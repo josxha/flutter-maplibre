@@ -233,6 +233,22 @@ void main() {
     expect(drags, isNotEmpty);
   });
 
+  testWidgets('the top layer wins over a nearer feature below', (tester) async {
+    final below = <(String, LayerDragEvent)>[];
+    await pumpMap(tester, [
+      _PointLayer(
+        list: [_point(0, 0)],
+        draggable: true,
+        onDragStart: (event) => below.add(('start', event)),
+      ),
+      // 8 px right of the pointer.
+      draggable([_point(2.88, 0)]),
+    ]);
+    await drag(tester, _center, const Offset(0, 50));
+    expect(below, isEmpty);
+    expect(drags.first.$1, 'start');
+  });
+
   testWidgets('a layer is not draggable without the flag', (tester) async {
     await pumpMap(tester, [
       _PointLayer(list: [_point(0, 0)]),
@@ -264,6 +280,37 @@ void main() {
     await tester.pumpAndSettle();
     expect(platform.camera.panned, Offset.zero);
     expect(drags.last.$2.screenPoint, const Offset(400, 400));
+  });
+
+  testWidgets('a drag that ends while it looks for a feature ends after it', (
+    tester,
+  ) async {
+    await pumpMap(tester, [
+      draggable([_point(0, 0)]),
+    ]);
+    final gate = platform.state.queryGate = Completer<void>();
+    final gesture = await tester.startGesture(_center);
+    for (var i = 0; i < 5; i++) {
+      await gesture.moveBy(const Offset(0, 10));
+      await tester.pump(const Duration(milliseconds: 16));
+    }
+    await gesture.up();
+    await tester.pump();
+    expect(drags, isEmpty);
+    expect(mapEvents, isEmpty);
+    gate.complete();
+    await tester.pumpAndSettle();
+    expect(drags.map((d) => d.$1), ['start', 'end']);
+    expect(mapEvents.first, isA<MapEventDragStart>());
+    expect(mapEvents.last, isA<MapEventDragEnd>());
+    expect(mapEvents, hasLength(2));
+    expect(platform.camera.panned, Offset.zero);
+
+    // The next drag doesn't move the feature of the last one.
+    drags.clear();
+    platform.state.queryGate = null;
+    await drag(tester, const Offset(200, 300), const Offset(-100, 0));
+    expect(drags, isEmpty);
   });
 
   testWidgets('a feature removed during the drag stops it', (tester) async {

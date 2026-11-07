@@ -87,16 +87,34 @@ abstract class MapLibreMapState extends State<MapLibreMap>
   /// Whether a layer of [MapLibreMap.layers] has draggable features.
   bool get _layersDraggable => widget.layers.any((layer) => layer.draggable);
 
+  /// Counts the drags, so that a feature query of a drag that ended or was
+  /// followed by another one is dropped.
+  var _dragGeneration = 0;
+
+  /// The search of the current drag for a feature to move, until it ends.
+  Future<void>? _dragStarting;
+
   FutureOr<void> _onDragStart(MapEventDragStart event) {
     _layerDrag = null;
+    final generation = ++_dragGeneration;
     final onDragStart = widget.onDragStart;
     if (!_layersDraggable) return onDragStart?.call(event);
-    return _grabFeature(event).then((_) => onDragStart?.call(event));
+    final starting = _grabFeature(
+      event,
+      generation,
+    ).then((_) => onDragStart?.call(event));
+    _dragStarting = starting;
+    unawaited(
+      starting.whenComplete(() {
+        if (identical(_dragStarting, starting)) _dragStarting = null;
+      }),
+    );
+    return starting;
   }
 
   /// Finds the feature of a draggable layer that [event] went down on, and
   /// keeps the drag from panning the map if it found one.
-  Future<void> _grabFeature(MapEventDragStart event) async {
+  Future<void> _grabFeature(MapEventDragStart event, int generation) async {
     final layerIndexes = <String, int>{
       for (final (index, layer) in widget.layers.indexed)
         if (layer.draggable) layer.getLayerId(index): index,
@@ -124,7 +142,7 @@ abstract class MapLibreMapState extends State<MapLibreMap>
       );
       return;
     }
-    if (!mounted) return;
+    if (!mounted || generation != _dragGeneration) return;
     _LayerDrag? nearest;
     var nearestDistance = double.infinity;
     for (final feature in features) {
@@ -140,14 +158,16 @@ abstract class MapLibreMapState extends State<MapLibreMap>
       final geometry = layer.list[index].geometry;
       if (geometry == null) continue;
       final drag = _LayerDrag(layerIndex, index, geometry, event.screenPoint);
-      // Of several points, the nearest wins.
       var distance = 0.0;
       if (drag.geometry case Point(:final position)) {
         distance =
             (toScreenLocation(Geographic.from(position)) - event.screenPoint)
                 .distance;
       }
-      if (distance < nearestDistance) {
+      // The top layer wins, and of its features the nearest.
+      if (nearest == null ||
+          layerIndex > nearest.layerIndex ||
+          (layerIndex == nearest.layerIndex && distance < nearestDistance)) {
         nearest = drag;
         nearestDistance = distance;
       }
@@ -166,10 +186,25 @@ abstract class MapLibreMapState extends State<MapLibreMap>
   }
 
   void _onDragEnd(MapEventDragEnd event) {
+    // A drag that ends while it looks for its feature ends once it found it,
+    // so that the callbacks come in order.
+    final starting = _dragStarting;
+    if (starting == null) return _endLayerDrag(event);
+    final generation = _dragGeneration;
+    unawaited(
+      starting.whenComplete(() {
+        if (!mounted) return;
+        if (generation == _dragGeneration) return _endLayerDrag(event);
+        widget.onDragEnd?.call(event);
+      }),
+    );
+  }
+
+  void _endLayerDrag(MapEventDragEnd event) {
     final moved = _emitLayerDrag(event.screenPoint, (layer) => layer.onDragEnd);
     if (moved != null) layerManager?.moveDrag(moved);
-    _layerDrag = null;
     layerManager?.endDrag();
+    _layerDrag = null;
     widget.onDragEnd?.call(event);
   }
 
