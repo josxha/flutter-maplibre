@@ -17,10 +17,10 @@ choose.
 
 <p align="center">
   <a href="https://josxha.github.io/flutter-maplibre/demo">
-    <img src="https://josxha.github.io/flutter-maplibre/assets/images/showcase-map.jpg" alt="A styled map" width="49%" />
+    <img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/07cb9504aa76482b3707d0e18f4d86d37f7e2ad6/website/assets/images/showcase-map.jpg" alt="A styled map" width="49%" />
   </a>
   <a href="https://josxha.github.io/flutter-maplibre/demo">
-    <img src="https://josxha.github.io/flutter-maplibre/assets/images/showcase-tilt.jpg" alt="A tilted and rotated map" width="49%" />
+    <img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/07cb9504aa76482b3707d0e18f4d86d37f7e2ad6/website/assets/images/showcase-tilt.jpg" alt="A tilted and rotated map" width="49%" />
   </a>
 </p>
 
