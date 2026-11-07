@@ -122,14 +122,16 @@ void runTests() {
       var angle = 0.0;
       Offset finger(double sign) =>
           center + Offset(cos(angle), sin(angle)) * radius * sign;
-      final a = await tester.createGesture(pointer: 1);
-      final b = await tester.createGesture(pointer: 2);
+      final a = await tester.createGesture();
+      final b = await tester.createGesture();
       await a.down(finger(-1), timeStamp: time);
       await b.down(finger(1), timeStamp: time);
-      for (var i = 0; i < 8; i++) {
+      // Enough steps that the fling speed is measured after the recognizer
+      // has accepted the gesture, which takes a few moves.
+      for (var i = 0; i < 20; i++) {
         time += const Duration(milliseconds: 16);
-        radius *= 1.1;
-        angle += 0.04;
+        radius *= 1.04;
+        angle += 0.02;
         await a.moveTo(finger(-1), timeStamp: time);
         await b.moveTo(finger(1), timeStamp: time);
         await tester.pump(const Duration(milliseconds: 16));
