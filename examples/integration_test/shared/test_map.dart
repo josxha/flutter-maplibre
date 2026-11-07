@@ -371,6 +371,8 @@ class MapApp extends StatelessWidget {
         onDragStart: onEvent,
         onDrag: onEvent,
         onDragEnd: onEvent,
+        onPointerMove: onEvent,
+        onPointerLeave: onEvent,
         onCameraMoveStart: onEvent,
         onCameraMove: onEvent,
         onCameraMoveEnd: onEvent,

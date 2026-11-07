@@ -482,10 +482,42 @@ Each entry: the decision, then why.
   overlay stays until the app's list has the new place and its source has
   re-tiled (250 ms after the write, so the old place doesn't flash), or goes
   away after the next frame if the app didn't save it, and the feature snaps
-  back. `LayerDragEvent` is not generic, because `Layer<Feature<Point>>`
+  back. `LayerFeatureEvent` is not generic, because `Layer<Feature<Point>>`
   sits in a `List<Layer>`, where reading a callback field typed by `G` fails
   its covariance check. Callbacks are left out of `Layer.==`; the
   constructor asserts that they come with `draggable`.
+- **Annotation layers report taps and hovers on their features with
+  `onClick`, `onEnter` and `onLeave` (#647), on the same
+  `LayerFeatureEvent` as drags.** #645 named it `LayerDragEvent`; it was
+  renamed before a release, so that one event serves every layer callback.
+  A layer with any of these callbacks or `draggable` is `interactive`, which
+  is part of `Layer.==` and gives its source the `maplibre:index` property.
+  A tap queries the clickable layers at the point, and in the 24 px grab
+  square if that finds nothing; the topmost layer and its nearest point win.
+  Hover comes from new map events, `onPointerMove` (Flutter hover events:
+  mice and styluses without a pressed button) and `onPointerLeave` (a
+  `MouseRegion` that always wraps the detector, so that the child keeps its
+  state). Each move queries the hovered layers at the point, coalesced to
+  the latest move while a query runs, and enter/leave are tracked per layer
+  like gl-js `mouseenter`/`mouseleave`, but per feature.
+- **Style layers report taps and hovers with `onClick`, `onEnter` and
+  `onLeave` on the `StyleLayer` object (#647), not with a declarative list
+  on `MapLibreMap`.** Annotations are the declarative API and style layers
+  the imperative one, so the callbacks are fields like the property setters,
+  and constructor parameters of the types with vector features (from the
+  generator). They end with the object: the map only calls a layer that is
+  still `style.layers[id]`. The event is `StyleLayerFeatureEvent` with the
+  `RenderedFeature`. Unlike annotation layers, every style layer under a tap
+  reports it, as with gl-js `map.on('click', layerId)`. Enter/leave is per
+  feature id, or per layer for features without one. The same query serves
+  annotation and style layers. A callback set on a style layer doesn't
+  rebuild the map, so `StyleLayers.callbacksChanged` notifies when a layer
+  gets its first callback or loses its last one (setter, add, remove,
+  dispose), and the map rebuilds to wire the detector's `onClick`,
+  `onPointerMove` and `onPointerLeave` only while something needs them. One
+  frame late is fine: no tap or move can come in between. The repaint
+  triggers of the platforms don't help, they render a map frame and don't
+  rebuild widgets.
 - **One gesture recognizer in Dart serves every platform:
   `MapGestureDetector` in `maplibre_platform_interface`.** It sits there, not
   in `maplibre`, because the platform packages need it and `maplibre` depends

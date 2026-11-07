@@ -53,6 +53,8 @@ class MapGestureDetector extends StatefulWidget {
     this.onDragStart,
     this.onDrag,
     this.onDragEnd,
+    this.onPointerMove,
+    this.onPointerLeave,
     super.key,
   });
 
@@ -99,6 +101,13 @@ class MapGestureDetector extends StatefulWidget {
 
   /// Called when a drag ends, or when a second finger makes it a pinch.
   final MapEventCallback<MapEventDragEnd>? onDragEnd;
+
+  /// Called when a mouse or stylus moves over the map without a pressed
+  /// button.
+  final MapEventCallback<MapEventPointerMove>? onPointerMove;
+
+  /// Called when a mouse or stylus leaves the map.
+  final MapEventCallback<MapEventPointerLeave>? onPointerLeave;
 
   /// The map.
   final Widget child;
@@ -216,8 +225,19 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
         _reportsDrags;
     final doubleTaps = _zoomsOnDoubleTap || widget.onDoubleClick != null;
     // The whole map takes part in gestures, whatever its child hit-tests.
-    return Listener(
+    final onPointerMove = widget.onPointerMove;
+    final onPointerLeave = widget.onPointerLeave;
+    final listener = Listener(
       behavior: HitTestBehavior.opaque,
+      onPointerHover: switch (onPointerMove) {
+        final onPointerMove? => (event) => _emitUserInput(
+          event.localPosition,
+          (point, screenPoint) => onPointerMove(
+            MapEventPointerMove(point: point, screenPoint: screenPoint),
+          ),
+        ),
+        null => null,
+      },
       onPointerSignal: _onPointerSignal,
       onPointerDown: _onPointerDown,
       onPointerMove: _onPointerMove,
@@ -258,6 +278,18 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
         onScaleEnd: scales ? _onScaleEnd : null,
         child: widget.child,
       ),
+    );
+    // Always there, so that the child keeps its state when the callback
+    // comes or goes.
+    return MouseRegion(
+      opaque: false,
+      onExit: switch (onPointerLeave) {
+        final onPointerLeave? => (_) => onPointerLeave(
+          const MapEventPointerLeave(),
+        ),
+        null => null,
+      },
+      child: listener,
     );
   }
 

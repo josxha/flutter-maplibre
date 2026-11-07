@@ -41,7 +41,7 @@ Widget build(BuildContext context) {
 ```
 
 `onDragStart` and `onDrag` report the start and every step of the drag, for
-example to show where the feature is. Each `LayerDragEvent` holds:
+example to show where the feature is. Each `LayerFeatureEvent` holds:
 
 - `index`: the dragged feature in the layer's list.
 - `geometry`: the feature's geometry, moved as far on screen as the pointer.

@@ -23,6 +23,9 @@ class PolylineLayer extends Layer<Feature<LineString>> {
     super.onDragStart,
     super.onDrag,
     super.onDragEnd,
+    super.onClick,
+    super.onEnter,
+    super.onLeave,
   }) : super(list: polylines);
 
   /// The color of the polyline. Defaults to black

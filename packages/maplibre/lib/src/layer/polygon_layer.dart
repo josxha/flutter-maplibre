@@ -20,6 +20,9 @@ class PolygonLayer extends Layer<Feature<Polygon>> {
     super.onDragStart,
     super.onDrag,
     super.onDragEnd,
+    super.onClick,
+    super.onEnter,
+    super.onLeave,
   }) : super(list: polygons);
 
   /// The color of the polygon. Defaults to black.

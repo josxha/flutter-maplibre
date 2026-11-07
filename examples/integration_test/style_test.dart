@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -56,6 +57,63 @@ void runTests() {
         map.style.layers.map((layer) => layer.id).toList(),
         contains('countries-fill'),
       );
+    });
+
+    testWidgets('reports clicks and hovers on the features of a style layer', (
+      tester,
+    ) async {
+      final options = offlineOptions(zoom: 10);
+      final events = <String>[];
+      final map = await pumpMap(tester, options: options);
+      await map.style.sources.add(
+        GeoJsonSource.data(
+          id: 'points',
+          data: featureCollection([
+            const Feature(geometry: Point(_point), id: 7),
+          ]),
+        ),
+      );
+      await map.style.layers.add(
+        CircleStyleLayer(
+          id: 'points',
+          sourceId: 'points',
+          radius: const .literal(20),
+          onClick: (event) => events.add('click ${event.feature.id}'),
+          onEnter: (event) => events.add('enter ${event.feature.id}'),
+          onLeave: (event) => events.add('leave ${event.feature.id}'),
+        ),
+      );
+      await map.waitForFeatures(
+        map.center,
+        (features) => features.isNotEmpty,
+        layerIds: ['points'],
+      );
+
+      await tester.tapAt(map.toGlobal(map.center + const Offset(5, 0)));
+      await map.pumpUntil(
+        () => events.isNotEmpty,
+        reason: () => 'the style layer click was never reported',
+      );
+      expect(events, ['click 7']);
+      events.clear();
+
+      final mouse = await tester.createGesture(kind: PointerDeviceKind.mouse);
+      addTearDown(mouse.removePointer);
+      await mouse.addPointer(
+        location: map.toGlobal(map.center + const Offset(100, 0)),
+      );
+      await tester.pump();
+      await mouse.moveTo(map.toGlobal(map.center));
+      await map.pumpUntil(
+        () => events.isNotEmpty,
+        reason: () => 'entering the feature was never reported',
+      );
+      await mouse.moveTo(map.toGlobal(map.center + const Offset(100, 0)));
+      await map.pumpUntil(
+        () => events.length > 1,
+        reason: () => 'leaving the feature was never reported',
+      );
+      expect(events, ['enter 7', 'leave 7']);
     });
 
     testWidgets('adds layers at the requested position', (tester) async {

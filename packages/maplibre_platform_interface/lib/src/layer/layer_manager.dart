@@ -60,14 +60,15 @@ class LayerManager {
   }
 
   /// The property that holds the index of each feature in [Layer.list] while
-  /// the layer is [Layer.draggable], to tell which one a drag grabbed.
+  /// the layer is [Layer.interactive], to tell which feature the user tapped,
+  /// hovered or dragged.
   static const featureIndexProperty = 'maplibre:index';
 
   static GeoJsonSource _sourceOf(Layer layer, int index) =>
       GeoJsonSource.data(id: layer.getSourceId(index), data: _dataOf(layer));
 
   static GeoJsonData _dataOf(Layer layer) {
-    if (!layer.draggable) {
+    if (!layer.interactive) {
       return .featureCollection(FeatureCollection(List.of(layer.list)));
     }
     return .featureCollection(
@@ -116,7 +117,7 @@ class LayerManager {
         // `Layer.==` compares `list` by identity and misses features added to
         // the same list in place, so the features are compared with the copy
         // taken last time.
-        if (layer.draggable != oldLayer.draggable ||
+        if (layer.interactive != oldLayer.interactive ||
             !_sameFeatures(_oldFeatures[index], layer.list)) {
           final written = style.sources.updateGeoJsonData(
             layer.getSourceId(index),
