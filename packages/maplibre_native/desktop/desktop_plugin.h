@@ -5,54 +5,21 @@
 #include <cstdint>
 #include <mutex>
 #include <string>
-#include <vector>
-
-#include "vulkan_device.h"
 
 namespace maplibre_native {
 
-// One Vulkan image of a GPU texture's ring, and its view.
-struct VulkanSlot {
-  VkImage image = VK_NULL_HANDLE;
-  VkImageView view = VK_NULL_HANDLE;
-};
-
-// A Flutter texture that shows MapLibre frames without a CPU copy. MapLibre
-// renders into a ring of Vulkan images whose memory Flutter's graphics API
-// shares. On Windows each presented frame is copied on the GPU into a texture
-// that Flutter samples; on Linux Flutter samples the presented slot itself.
-class GpuTexture {
- public:
-  virtual ~GpuTexture() = default;
-
-  virtual int64_t id() const = 0;
-
-  // The VkFormat of every ring image.
-  virtual VkFormat format() const = 0;
-
-  virtual std::vector<VulkanSlot> slots() const = 0;
-
-  // Replaces the ring with one of the new size. The previous ring stays
-  // valid until ReleaseRetiredSlots, because the session renders into it
-  // until its target replacement completes.
-  virtual bool Resize(uint32_t width, uint32_t height, std::string* error) = 0;
-
-  // Releases the rings that Resize replaced.
-  virtual void ReleaseRetiredSlots() = 0;
-
-  // Hands the frame in |slot| to Flutter and marks it available. The frame's
-  // GPU writes must be complete.
-  virtual bool Present(uint32_t slot, std::string* error) = 0;
-
-  // Whether Flutter may still sample |slot|, so that MapLibre must not render
-  // into it yet. False where Present copies the frame before it returns.
-  virtual bool SlotInUse(uint32_t slot) const { return false; }
+// Identifies the GPU that Flutter composites on: the adapter LUID on Windows,
+// the device UUID that OpenGL reports on Linux.
+struct GpuId {
+  uint8_t bytes[16] = {};
+  size_t size = 0;
 };
 
 // The Windows or Linux plugin behind the C API in
-// include/maplibre_native/maplibre_native_api.h, which this directory
-// implements once for both. Dart reaches the one registered instance through
-// that API, never through a channel.
+// include/maplibre_native/maplibre_native_api.h. This directory implements
+// the functions that both share; each platform implements its own. Dart
+// reaches the one registered instance through that API, never through a
+// channel.
 class DesktopPlugin {
  public:
   // The registered plugin, or null before registration and after shutdown.
@@ -60,11 +27,16 @@ class DesktopPlugin {
   static DesktopPlugin* Instance();
   static std::unique_lock<std::mutex> Lock();
 
+  // Whether MAPLIBRE_NATIVE_DISABLE_ZERO_COPY is set, which lets the CPU
+  // readback path be tested on hardware that shares textures.
+  static bool ZeroCopyDisabled();
+
   DesktopPlugin(const DesktopPlugin&) = delete;
   DesktopPlugin& operator=(const DesktopPlugin&) = delete;
 
-  // The Vulkan device on Flutter's GPU, or null with |error| set.
-  virtual VulkanDevice* GetVulkan(std::string* error) = 0;
+  // The GPU that Flutter renders on, or false with |error| set when frames
+  // can't reach Flutter without a CPU copy.
+  virtual bool GetGpuId(GpuId* id, std::string* error) = 0;
 
   virtual int64_t CreatePixelTexture() = 0;
 
@@ -74,14 +46,7 @@ class DesktopPlugin {
   virtual bool UpdatePixelTexture(int64_t id, size_t width, size_t height,
                                   size_t stride, const uint8_t* pixels) = 0;
 
-  // Returns null with |error| set when Vulkan cannot share textures with
-  // Flutter, and Dart falls back to a pixel buffer texture.
-  virtual GpuTexture* CreateGpuTexture(uint32_t width, uint32_t height,
-                                       uint32_t slot_count,
-                                       std::string* error) = 0;
-  virtual GpuTexture* FindGpuTexture(int64_t id) = 0;
-
-  // Unregisters a texture of either kind.
+  // Unregisters a texture of any kind.
   virtual void DisposeTexture(int64_t id) = 0;
 
  protected:
@@ -92,11 +57,10 @@ class DesktopPlugin {
   // Unregisters this plugin; the caller holds the lock. Subclass destructors
   // call it first, so the C API never reaches a plugin in destruction.
   void Unregister();
-
-  // Whether MAPLIBRE_NATIVE_DISABLE_ZERO_COPY is set, which lets the CPU
-  // readback path be tested on hardware that shares textures.
-  static bool ZeroCopyDisabled();
 };
+
+// Writes |message| to the C API's |error| buffer, when there is one.
+void WriteError(const std::string& message, char* error, size_t error_size);
 
 }  // namespace maplibre_native
 

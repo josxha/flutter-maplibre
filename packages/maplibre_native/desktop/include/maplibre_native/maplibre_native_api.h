@@ -2,8 +2,12 @@
 // through the ffigen bindings in lib/src/desktop/bindings.g.dart. Regenerate
 // them with `cd tool/codegen && dart run ffigen.dart` after changing this file.
 //
-// Both plugins render MapLibre through Vulkan. Zero-copy textures share their
-// images with D3D11 on Windows and with OpenGL on Linux.
+// MapLibre renders through Vulkan on a device that the C library creates on
+// Flutter's GPU, which maplibre_native_gpu_id names. On Windows the library
+// allocates a ring of DXGI shared textures, and the plugin copies each frame
+// into a texture that Flutter shows. On Linux the plugin allocates a ring of
+// Vulkan images whose memory Flutter's OpenGL context samples. Each platform
+// defines only its own functions, which Dart calls only there.
 //
 // Functions that can fail return false or -1 and write a null-terminated
 // message to |error|, of |error_size| bytes, when it is not null. Dart calls
@@ -30,13 +34,12 @@
 extern "C" {
 #endif
 
-// The process-wide Vulkan device that MapLibre render sessions borrow.
+// The Vulkan device of the C library that render sessions use, as
+// VulkanDeviceHandle.getContext() reports it.
 typedef struct MaplibreNativeVulkanContext {
   uint64_t instance;
   uint64_t physical_device;
   uint64_t device;
-  uint64_t queue;
-  uint32_t queue_family_index;
   uint64_t get_instance_proc_addr;
   uint64_t get_device_proc_addr;
 } MaplibreNativeVulkanContext;
@@ -47,9 +50,15 @@ typedef struct MaplibreNativeGpuSlot {
   uint64_t view;
 } MaplibreNativeGpuSlot;
 
-// Creates the Vulkan device on Flutter's GPU on first use.
-MAPLIBRE_NATIVE_EXPORT bool maplibre_native_vulkan_context(
-    MaplibreNativeVulkanContext* out_context, char* error, size_t error_size);
+// Writes the ID of the GPU that Flutter renders on to |out_id|, of
+// |capacity| bytes, and returns its size: the 8-byte adapter LUID on Windows,
+// the 16-byte device UUID that OpenGL reports on Linux. Returns -1 when
+// frames can't reach Flutter without a CPU copy, or when
+// MAPLIBRE_NATIVE_DISABLE_ZERO_COPY is set.
+MAPLIBRE_NATIVE_EXPORT int32_t maplibre_native_gpu_id(uint8_t* out_id,
+                                                      size_t capacity,
+                                                      char* error,
+                                                      size_t error_size);
 
 // Registers a CPU pixel buffer texture and returns its Flutter texture id.
 MAPLIBRE_NATIVE_EXPORT int64_t maplibre_native_create_pixel_texture(void);
@@ -60,40 +69,53 @@ MAPLIBRE_NATIVE_EXPORT bool maplibre_native_update_pixel_texture(
     int64_t texture_id, uint32_t width, uint32_t height, uint32_t stride,
     const uint8_t* pixels, size_t length, char* error, size_t error_size);
 
-// Registers a zero-copy texture of |width| x |height| device pixels with a
-// ring of |slot_count| images that Vulkan shares with Flutter's graphics API.
-// Writes the VkFormat and up to |slot_capacity| slots. Returns its Flutter
-// texture id, or -1 when the GPU cannot share textures.
+// Unregisters a texture of any kind.
+MAPLIBRE_NATIVE_EXPORT void maplibre_native_dispose_texture(int64_t texture_id);
+
+// Windows: registers a texture that shows the frames of a ring of DXGI
+// shared textures, and returns its Flutter texture id.
+MAPLIBRE_NATIVE_EXPORT int64_t maplibre_native_create_shared_texture(
+    char* error, size_t error_size);
+
+// Windows: copies the finished frame in the DXGI shared texture |handle|, an
+// NT handle, into the texture that Flutter shows, before it returns. |ring|
+// changes when the ring's textures do, and |slot| is the texture's index in
+// the ring; the plugin opens each texture of a ring once.
+MAPLIBRE_NATIVE_EXPORT bool maplibre_native_present_shared_texture(
+    int64_t texture_id, uint32_t ring, uint32_t slot, uint64_t handle,
+    char* error, size_t error_size);
+
+// Linux: registers a zero-copy texture of |width| x |height| device pixels
+// with a ring of |slot_count| images on the Vulkan device |context|, whose
+// memory Flutter's OpenGL context samples. Writes the VkFormat and up to
+// |slot_capacity| slots. Returns its Flutter texture id, or -1 when the GPU
+// cannot share the images.
 MAPLIBRE_NATIVE_EXPORT int64_t maplibre_native_create_gpu_texture(
-    uint32_t width, uint32_t height, uint32_t slot_count, uint32_t* out_format,
+    const MaplibreNativeVulkanContext* context, uint32_t width,
+    uint32_t height, uint32_t slot_count, uint32_t* out_format,
     MaplibreNativeGpuSlot* out_slots, uint32_t slot_capacity, char* error,
     size_t error_size);
 
-// Replaces the ring with one of the new size and writes its slots. The old
-// ring stays valid until maplibre_native_release_retired_slots.
+// Linux: replaces the ring with one of the new size and writes its slots. The
+// old ring stays valid until maplibre_native_release_retired_slots.
 MAPLIBRE_NATIVE_EXPORT bool maplibre_native_resize_gpu_texture(
     int64_t texture_id, uint32_t width, uint32_t height,
     MaplibreNativeGpuSlot* out_slots, uint32_t slot_capacity, char* error,
     size_t error_size);
 
-// Releases the rings that resizes replaced.
+// Linux: releases the rings that resizes replaced.
 MAPLIBRE_NATIVE_EXPORT void maplibre_native_release_retired_slots(
     int64_t texture_id);
 
-// Hands the finished frame in |slot| to Flutter. Windows copies it into the
-// texture Flutter shows before this returns; Linux has Flutter sample the
-// slot, which stays in use until maplibre_native_gpu_texture_slot_in_use
-// reports it free.
+// Linux: has Flutter sample the finished frame in |slot|, which stays in use
+// until maplibre_native_gpu_texture_slot_in_use reports it free.
 MAPLIBRE_NATIVE_EXPORT bool maplibre_native_present_gpu_texture(
     int64_t texture_id, uint32_t slot, char* error, size_t error_size);
 
-// Whether Flutter may still sample |slot| of a GPU texture. Always false on
-// Windows, and for a texture that does not exist.
+// Linux: whether Flutter may still sample |slot| of a GPU texture. False for
+// a texture that does not exist.
 MAPLIBRE_NATIVE_EXPORT bool maplibre_native_gpu_texture_slot_in_use(
     int64_t texture_id, uint32_t slot);
-
-// Unregisters a texture of either kind.
-MAPLIBRE_NATIVE_EXPORT void maplibre_native_dispose_texture(int64_t texture_id);
 
 #if defined(__cplusplus)
 }  // extern "C"

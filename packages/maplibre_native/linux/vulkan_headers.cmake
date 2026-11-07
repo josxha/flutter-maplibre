@@ -1,6 +1,6 @@
-# Vulkan headers, for the device that render sessions borrow and for the
-# memory that zero-copy textures share. The loader is opened at runtime, so no
-# Vulkan SDK is needed. The headers come from a pinned release. Sets
+# Vulkan headers, for the images whose memory zero-copy textures share. The
+# plugin calls Vulkan only through the C library's device, so it needs no
+# Vulkan SDK or loader. The headers come from a pinned release. Sets
 # MLN_VULKAN_HEADERS_DIR.
 include(FetchContent)
 FetchContent_Declare(

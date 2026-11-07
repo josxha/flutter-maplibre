@@ -89,27 +89,23 @@ abstract base class FrameTarget {
   void dispose();
 }
 
-/// A target whose texture the plugin backs with a ring of [gpuSlotCount]
-/// images that the session borrows, as on Windows, Linux, iOS, and macOS.
+/// A target whose texture shows a ring of [gpuSlotCount] images that the
+/// session renders into, as on Windows, Linux, iOS, and macOS.
 ///
 /// Where the plugin copies each finished frame on the GPU before
-/// [presentSlot] returns (Windows), the frame is released right after. Where
-/// Flutter samples the slot itself (Linux, iOS, macOS; [holdsFrames]), the
-/// frame on screen stays acquired, so MapLibre renders into the other slots,
-/// and each frame it replaced is released once [slotInUse] reports its slot
-/// free. A caller-owned ring is resized by replacing it rather than through a
-/// session resize.
-abstract base class BorrowedRingTarget<Slot> extends FrameTarget {
-  /// Creates a target for the plugin texture [textureId] and its first ring.
-  BorrowedRingTarget(this.textureId, this.slots);
+/// [presentFrame] returns (Windows), the frame is released right after. Where
+/// Flutter samples the frame's image itself (Linux, iOS, macOS;
+/// [holdsFrames]), the frame on screen stays acquired, so MapLibre renders
+/// into the other images, and each frame it replaced is released once
+/// [slotInUse] reports its slot free.
+abstract base class RingTarget extends FrameTarget {
+  /// Creates a target for the plugin texture [textureId].
+  RingTarget(this.textureId);
 
   @override
   final int textureId;
 
-  /// The ring the session renders into.
-  List<Slot> slots;
-
-  /// Whether Flutter samples the presented slot itself, so that a frame
+  /// Whether Flutter samples the presented image itself, so that a frame
   /// stays acquired while its slot is in use.
   bool get holdsFrames;
 
@@ -118,66 +114,39 @@ abstract base class BorrowedRingTarget<Slot> extends FrameTarget {
 
   Timer? _recycler;
 
-  /// Attaches the session to the ring [slots] at [extent].
-  RenderSessionHandle attachRing(
-    MapHandle map,
-    LogicalExtent extent,
-    RenderSessionAttachOptions options,
-  );
-
-  /// Has the plugin replace the ring with one of [width] x [height] pixels.
-  List<Slot> resizeRing(int width, int height);
-
-  /// Moves [session] to the ring [slots] at [extent].
-  Future<void> setRing(RenderSessionHandle session, LogicalExtent extent);
-
-  /// Has the plugin release the rings that resizes replaced.
-  void releaseRetiredRings();
-
-  /// The ring slot that [frame] rendered into.
-  int slotOf(AcquiredFrameHandle frame);
-
-  /// Hands the frame in [slot] to Flutter.
-  void presentSlot(int slot);
+  /// Hands [frame] to Flutter and returns its slot in the ring.
+  int presentFrame(AcquiredFrameHandle frame);
 
   /// Whether Flutter may still sample [slot]. Only asked when [holdsFrames].
   bool slotInUse(int slot) => false;
 
-  /// Has the plugin unregister the texture and release its rings.
+  /// Gives the session a ring of images at [extent]. Every frame was
+  /// released before.
+  Future<void> resizeRing(RenderSessionHandle session, LogicalExtent extent);
+
+  /// Has the plugin unregister the texture.
   void disposeTexture();
 
   /// Frames are complete on the GPU once acquired, so the plugin can copy or
   /// sample them without waiting.
-  @override
-  RenderSessionHandle attach(
-    MapHandle map,
-    LogicalExtent extent,
-    Wake frameWake,
-  ) => attachRing(
-    map,
-    extent,
-    RenderSessionAttachOptions(
-      driver: RenderDriverKind.coreWorker,
-      producerSyncKinds: GpuSyncKindFlag.cpuComplete,
-      frameWake: frameWake,
-    ),
-  );
+  RenderSessionAttachOptions attachOptions(Wake frameWake) =>
+      RenderSessionAttachOptions(
+        driver: RenderDriverKind.coreWorker,
+        producerSyncKinds: GpuSyncKindFlag.cpuComplete,
+        frameWake: frameWake,
+      );
 
-  /// The session cannot move to the new ring while it has a frame acquired,
-  /// so the held frames of the old ring go first. Flutter keeps sampling the
-  /// old ring's slot until a frame of the new one arrives, and the session
-  /// renders into the new ring from then on.
+  /// The session resizes only while it has no frame acquired, so the held
+  /// frames go first. Flutter keeps showing the old ring's image until a
+  /// frame of the new one arrives.
   @override
-  Future<void> resize(RenderSessionHandle session, LogicalExtent extent) async {
-    final (width, height) = physicalSize(extent);
-    slots = resizeRing(width, height);
+  Future<void> resize(RenderSessionHandle session, LogicalExtent extent) {
     _releaseHeld(all: true);
-    await setRing(session, extent);
-    releaseRetiredRings();
+    return resizeRing(session, extent);
   }
 
   /// The frame's GPU writes completed before it became acquirable, so the
-  /// plugin can copy or sample it once [presentSlot] returns.
+  /// plugin can copy or sample it once [presentFrame] returns.
   @override
   Future<bool> present(RenderSessionHandle session) async {
     _releaseHeld();
@@ -185,8 +154,7 @@ abstract base class BorrowedRingTarget<Slot> extends FrameTarget {
     if (frame == null) return false;
     final int slot;
     try {
-      slot = slotOf(frame);
-      presentSlot(slot);
+      slot = presentFrame(frame);
     } on Object {
       frame.release(_cpuComplete);
       rethrow;
@@ -223,7 +191,7 @@ abstract base class BorrowedRingTarget<Slot> extends FrameTarget {
   /// waits for a free slot to render the next frame. With a slot free, the
   /// next present releases what it can, and an idle map polls nothing.
   void _scheduleRecycle() {
-    if (_recycler != null || _held.length < slots.length) return;
+    if (_recycler != null || _held.length < gpuSlotCount) return;
     _recycler = Timer.periodic(_recycleInterval, (timer) {
       if (host?.disposed ?? true) {
         timer.cancel();
@@ -231,7 +199,7 @@ abstract base class BorrowedRingTarget<Slot> extends FrameTarget {
         return;
       }
       host!.onGpuQueue(() async => _releaseHeld()).ignore();
-      if (_held.length < slots.length) {
+      if (_held.length < gpuSlotCount) {
         timer.cancel();
         _recycler = null;
       }
@@ -246,7 +214,61 @@ abstract base class BorrowedRingTarget<Slot> extends FrameTarget {
     return super.endSession(session);
   }
 
-  /// The session no longer touches the ring, which is the plugin's.
+  /// The session no longer touches the ring.
   @override
   void dispose() => disposeTexture();
+}
+
+/// A [RingTarget] whose ring the C library allocates, as DXGI shared
+/// textures on Windows and IOSurfaces on iOS and macOS. A resize has the
+/// session allocate a new ring, which [ring] counts, so the plugin knows
+/// when the images of a slot change.
+abstract base class LibraryRingTarget extends RingTarget {
+  /// Creates a target for the plugin texture [textureId].
+  LibraryRingTarget(super.textureId);
+
+  /// The number of the session's current ring.
+  int ring = 0;
+
+  @override
+  Future<void> resizeRing(
+    RenderSessionHandle session,
+    LogicalExtent extent,
+  ) async {
+    await session.resize(logicalSize(extent));
+    ring++;
+  }
+}
+
+/// A [RingTarget] whose ring the plugin allocates and the session borrows,
+/// as on Linux. A caller-owned ring is resized by replacing it rather than
+/// through a session resize.
+abstract base class BorrowedRingTarget<Slot> extends RingTarget {
+  /// Creates a target for the plugin texture [textureId] and its first ring.
+  BorrowedRingTarget(super.textureId, this.slots);
+
+  /// The ring the session renders into.
+  List<Slot> slots;
+
+  /// Has the plugin replace the ring with one of [width] x [height] pixels.
+  List<Slot> replaceRing(int width, int height);
+
+  /// Moves [session] to the ring [slots] at [extent].
+  Future<void> setRing(RenderSessionHandle session, LogicalExtent extent);
+
+  /// Has the plugin release the rings that resizes replaced.
+  void releaseRetiredRings();
+
+  /// The session renders into the new ring once it moved there, and the
+  /// plugin releases the old one then.
+  @override
+  Future<void> resizeRing(
+    RenderSessionHandle session,
+    LogicalExtent extent,
+  ) async {
+    final (width, height) = physicalSize(extent);
+    slots = replaceRing(width, height);
+    await setRing(session, extent);
+    releaseRetiredRings();
+  }
 }

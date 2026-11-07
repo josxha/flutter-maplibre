@@ -18,8 +18,8 @@ namespace maplibre_native {
 
 // The GPU and driver that OpenGL renders Flutter's window on, read once from an
 // EGL context that the plugin creates like Flutter's own: OpenGL ES on the
-// window's display. The Vulkan device is created on that GPU, so that OpenGL
-// can import its memory. A context that cannot import it fails here, so the
+// window's display. The C library creates its Vulkan device on that GPU, so
+// that OpenGL can import its memory. A context that cannot import it fails here, so the
 // map falls back to CPU readback before it is shown.
 class GlDevice {
  public:
@@ -37,6 +37,12 @@ class GlDevice {
 
   GpuId device_uuid_;
   uint8_t driver_uuid_[VK_UUID_SIZE] = {};
+};
+
+// One Vulkan image of a GPU texture's ring, and its view.
+struct VulkanSlot {
+  VkImage image = VK_NULL_HANDLE;
+  VkImageView view = VK_NULL_HANDLE;
 };
 
 // OpenGL objects that can only be deleted with a context of Flutter's share
@@ -90,7 +96,7 @@ struct GlFrames {
   GlGarbage garbage;
 };
 
-// The Linux GpuTexture, a Flutter OpenGL texture. MapLibre renders through
+// A Flutter OpenGL texture that shows MapLibre frames without a CPU copy. MapLibre renders through
 // Vulkan into a ring of images with exportable memory. Flutter renders in EGL
 // contexts of its own, which share nothing with any context the plugin could
 // create, so populate, which runs with one of them current, imports each
@@ -101,14 +107,14 @@ struct GlFrames {
 // while Flutter may sample it: while it is the front or the shown slot, and
 // until a fence that populate inserts after Flutter moved on has signalled.
 // Dart keeps a frame acquired until SlotInUse reports its slot free.
-class GlTexture : public GpuTexture {
+class GlTexture {
  public:
   // RGBA8, which OpenGL imports as GL_RGBA8.
   static constexpr VkFormat kVulkanFormat = VK_FORMAT_R8G8B8A8_UNORM;
 
   // Creates a texture of |width| x |height| device pixels with |slot_count|
-  // ring images. Returns null and sets |error| when Vulkan cannot share
-  // memory with |gl|.
+  // ring images on |vulkan|, which must outlive it. Returns null and sets
+  // |error| when Vulkan cannot share memory with |gl|.
   static std::unique_ptr<GlTexture> Create(FlTextureRegistrar* registrar,
                                            VulkanDevice* vulkan,
                                            const GlDevice* gl, uint32_t width,
@@ -118,18 +124,30 @@ class GlTexture : public GpuTexture {
   // Unregisters the texture and destroys its images. The session that
   // rendered into them released them before. Their OpenGL objects are
   // deleted by a later populate of any texture.
-  ~GlTexture() override;
+  ~GlTexture();
 
   GlTexture(const GlTexture&) = delete;
   GlTexture& operator=(const GlTexture&) = delete;
 
-  int64_t id() const override { return id_; }
-  VkFormat format() const override { return kVulkanFormat; }
-  std::vector<VulkanSlot> slots() const override;
-  bool Resize(uint32_t width, uint32_t height, std::string* error) override;
-  void ReleaseRetiredSlots() override;
-  bool Present(uint32_t slot, std::string* error) override;
-  bool SlotInUse(uint32_t slot) const override;
+  int64_t id() const { return id_; }
+  VkFormat format() const { return kVulkanFormat; }
+  std::vector<VulkanSlot> slots() const;
+
+  // Replaces the ring with one of the new size. The previous ring stays
+  // valid until ReleaseRetiredSlots, because the session renders into it
+  // until its target replacement completes.
+  bool Resize(uint32_t width, uint32_t height, std::string* error);
+
+  // Releases the rings that Resize replaced.
+  void ReleaseRetiredSlots();
+
+  // Has Flutter sample the frame in |slot| and marks it available. The
+  // frame's GPU writes must be complete.
+  bool Present(uint32_t slot, std::string* error);
+
+  // Whether Flutter may still sample |slot|, so that MapLibre must not render
+  // into it yet.
+  bool SlotInUse(uint32_t slot) const;
 
  private:
   // One image of the ring, which Vulkan owns.

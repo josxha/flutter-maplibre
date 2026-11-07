@@ -1,6 +1,7 @@
-// Checks GlTexture of the Linux plugin outside Flutter: the GPU IDs from a
-// GDK OpenGL context of a real GTK window, the plugin's Vulkan device on that
-// GPU, and a ring of exported Vulkan images that populate imports. As in
+// Checks GlTexture of the Linux plugin outside Flutter: the GPU IDs from an
+// EGL context like Flutter's on a real GTK window's display, a Vulkan device
+// on that GPU as the C library creates it, and a ring of exported Vulkan
+// images that populate imports. As in
 // Flutter, populate runs in an EGL context of its own that shares nothing
 // with GDK's. Vulkan clears a slot to a color, Present hands it over, and the
 // texture that populate returns is read back in that context. Run it with
@@ -11,9 +12,12 @@
 #include <flutter_linux/flutter_linux.h>
 #include <gtk/gtk.h>
 
+#include <dlfcn.h>
+
 #include <cstdio>
 #include <cstring>
 #include <string>
+#include <vector>
 
 #include "gl_texture.h"
 
@@ -62,13 +66,107 @@ static int g_failures = 0;
     }                                        \
   } while (0)
 
+// A Vulkan device on the GPU with |device_uuid| and its graphics queue, with
+// VK_KHR_external_memory_fd, as the C library creates it.
+struct TestDevice {
+  PFN_vkGetInstanceProcAddr get_instance_proc_addr = nullptr;
+  PFN_vkGetDeviceProcAddr get_device_proc_addr = nullptr;
+  VkInstance instance = VK_NULL_HANDLE;
+  VkPhysicalDevice physical_device = VK_NULL_HANDLE;
+  VkDevice device = VK_NULL_HANDLE;
+  VkQueue queue = VK_NULL_HANDLE;
+  uint32_t queue_family_index = 0;
+
+  bool Create(const uint8_t device_uuid[VK_UUID_SIZE]) {
+    void* loader = dlopen("libvulkan.so.1", RTLD_NOW | RTLD_LOCAL);
+    if (loader == nullptr) return false;
+    get_instance_proc_addr = reinterpret_cast<PFN_vkGetInstanceProcAddr>(
+        dlsym(loader, "vkGetInstanceProcAddr"));
+    auto create_instance = reinterpret_cast<PFN_vkCreateInstance>(
+        get_instance_proc_addr(VK_NULL_HANDLE, "vkCreateInstance"));
+    VkApplicationInfo application{VK_STRUCTURE_TYPE_APPLICATION_INFO};
+    application.apiVersion = VK_API_VERSION_1_1;
+    VkInstanceCreateInfo instance_info{VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO};
+    instance_info.pApplicationInfo = &application;
+    if (create_instance(&instance_info, nullptr, &instance) != VK_SUCCESS) {
+      return false;
+    }
+#define LOAD_INSTANCE(name) \
+  auto name =               \
+      reinterpret_cast<PFN_##name>(get_instance_proc_addr(instance, #name))
+    LOAD_INSTANCE(vkEnumeratePhysicalDevices);
+    LOAD_INSTANCE(vkGetPhysicalDeviceProperties2);
+    LOAD_INSTANCE(vkGetPhysicalDeviceQueueFamilyProperties);
+    LOAD_INSTANCE(vkCreateDevice);
+    LOAD_INSTANCE(vkGetDeviceQueue);
+#undef LOAD_INSTANCE
+    get_device_proc_addr = reinterpret_cast<PFN_vkGetDeviceProcAddr>(
+        get_instance_proc_addr(instance, "vkGetDeviceProcAddr"));
+    uint32_t count = 0;
+    vkEnumeratePhysicalDevices(instance, &count, nullptr);
+    std::vector<VkPhysicalDevice> devices(count);
+    vkEnumeratePhysicalDevices(instance, &count, devices.data());
+    for (VkPhysicalDevice candidate : devices) {
+      VkPhysicalDeviceIDProperties id{
+          VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES};
+      VkPhysicalDeviceProperties2 properties{
+          VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2};
+      properties.pNext = &id;
+      vkGetPhysicalDeviceProperties2(candidate, &properties);
+      if (std::memcmp(id.deviceUUID, device_uuid, VK_UUID_SIZE) == 0) {
+        physical_device = candidate;
+      }
+    }
+    if (physical_device == VK_NULL_HANDLE) return false;
+    uint32_t family_count = 0;
+    vkGetPhysicalDeviceQueueFamilyProperties(physical_device, &family_count,
+                                             nullptr);
+    std::vector<VkQueueFamilyProperties> families(family_count);
+    vkGetPhysicalDeviceQueueFamilyProperties(physical_device, &family_count,
+                                             families.data());
+    while (queue_family_index < family_count &&
+           (families[queue_family_index].queueFlags & VK_QUEUE_GRAPHICS_BIT) ==
+               0) {
+      ++queue_family_index;
+    }
+    const float priority = 1.0f;
+    VkDeviceQueueCreateInfo queue_info{
+        VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO};
+    queue_info.queueFamilyIndex = queue_family_index;
+    queue_info.queueCount = 1;
+    queue_info.pQueuePriorities = &priority;
+    const char* extensions[] = {VK_KHR_EXTERNAL_MEMORY_FD_EXTENSION_NAME};
+    VkDeviceCreateInfo device_info{VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO};
+    device_info.queueCreateInfoCount = 1;
+    device_info.pQueueCreateInfos = &queue_info;
+    device_info.enabledExtensionCount = 1;
+    device_info.ppEnabledExtensionNames = extensions;
+    if (vkCreateDevice(physical_device, &device_info, nullptr, &device) !=
+        VK_SUCCESS) {
+      return false;
+    }
+    vkGetDeviceQueue(device, queue_family_index, 0, &queue);
+    return true;
+  }
+
+  // The device as the plugin gets it from Dart.
+  MaplibreNativeVulkanContext Context() const {
+    return {reinterpret_cast<uint64_t>(instance),
+            reinterpret_cast<uint64_t>(physical_device),
+            reinterpret_cast<uint64_t>(device),
+            reinterpret_cast<uint64_t>(get_instance_proc_addr),
+            reinterpret_cast<uint64_t>(get_device_proc_addr)};
+  }
+};
+
+static TestDevice g_device;
+
 // Clears |image| to |rgba| and leaves it in the general layout, as a session
 // would leave a frame.
-static bool ClearImage(VulkanDevice* vulkan, VkImage image,
-                       const float rgba[4]) {
-  VkDevice device = vulkan->device();
+static bool ClearImage(VkImage image, const float rgba[4]) {
+  VkDevice device = g_device.device;
 #define LOAD(name) \
-  auto name = reinterpret_cast<PFN_##name>(vulkan->get_device_proc_addr()(device, #name))
+  auto name = reinterpret_cast<PFN_##name>(g_device.get_device_proc_addr(device, #name))
   LOAD(vkCreateCommandPool);
   LOAD(vkDestroyCommandPool);
   LOAD(vkAllocateCommandBuffers);
@@ -80,7 +178,7 @@ static bool ClearImage(VulkanDevice* vulkan, VkImage image,
   LOAD(vkQueueWaitIdle);
 #undef LOAD
   VkCommandPoolCreateInfo pool_info{VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO};
-  pool_info.queueFamilyIndex = vulkan->queue_family_index();
+  pool_info.queueFamilyIndex = g_device.queue_family_index;
   VkCommandPool pool;
   if (vkCreateCommandPool(device, &pool_info, nullptr, &pool) != VK_SUCCESS) {
     return false;
@@ -120,9 +218,9 @@ static bool ClearImage(VulkanDevice* vulkan, VkImage image,
   submit.commandBufferCount = 1;
   submit.pCommandBuffers = &commands;
   const bool ok =
-      vkQueueSubmit(vulkan->queue(), 1, &submit, VK_NULL_HANDLE) ==
+      vkQueueSubmit(g_device.queue, 1, &submit, VK_NULL_HANDLE) ==
           VK_SUCCESS &&
-      vkQueueWaitIdle(vulkan->queue()) == VK_SUCCESS;
+      vkQueueWaitIdle(g_device.queue) == VK_SUCCESS;
   vkDestroyCommandPool(device, pool, nullptr);
   return ok;
 }
@@ -221,13 +319,17 @@ int main(int argc, char** argv) {
     std::printf("FAIL: GlDevice::Create: %s\n", error.c_str());
     return 1;
   }
-  VulkanDevice* vulkan = VulkanDevice::Get(&gl->device_uuid(), &error);
-  if (vulkan == nullptr) {
-    std::printf("FAIL: VulkanDevice::Get: %s\n", error.c_str());
+  if (!g_device.Create(gl->device_uuid().bytes)) {
+    std::printf("FAIL: no Vulkan device on OpenGL's GPU\n");
     return 1;
   }
-  std::printf("Vulkan: shares_memory=%d matches_gpu=%d driver_match=%d\n",
-              vulkan->shares_memory(), vulkan->matches_gpu(),
+  auto adopted = VulkanDevice::Adopt(g_device.Context(), &error);
+  if (!adopted) {
+    std::printf("FAIL: VulkanDevice::Adopt: %s\n", error.c_str());
+    return 1;
+  }
+  VulkanDevice* vulkan = adopted.get();
+  std::printf("Vulkan: driver_match=%d\n",
               std::memcmp(vulkan->driver_uuid(), gl->driver_uuid(),
                           VK_UUID_SIZE) == 0);
   if (!g_flutter.Create() || !g_flutter.MakeCurrent()) {
@@ -259,7 +361,7 @@ int main(int argc, char** argv) {
   const float red[4] = {1, 0, 0, 1};
   const float green[4] = {0, 1, 0, 1};
   const float blue[4] = {0, 0, 1, 1};
-  CHECK(ClearImage(vulkan, texture->slots()[1].image, red), "clear red");
+  CHECK(ClearImage(texture->slots()[1].image, red), "clear red");
   CHECK(texture->Present(1, &error), "present: %s", error.c_str());
   CHECK(texture->SlotInUse(1), "the front slot is in use");
   CHECK(ReadShown(&width, &height, pixel), "read after present");
@@ -270,14 +372,14 @@ int main(int argc, char** argv) {
 
   // The shown slot stays in use after the next present, until Flutter has
   // moved on and its draws are done.
-  CHECK(ClearImage(vulkan, texture->slots()[2].image, green), "clear green");
+  CHECK(ClearImage(texture->slots()[2].image, green), "clear green");
   CHECK(texture->Present(2, &error), "present green: %s", error.c_str());
   CHECK(texture->SlotInUse(1), "the shown slot is in use");
   CHECK(!texture->SlotInUse(0), "the free slot is not in use");
   CHECK(ReadShown(&width, &height, pixel), "read green");
   CHECK(IsColor(pixel, 0, 255, 0), "green frame: %d %d %d", pixel[0],
         pixel[1], pixel[2]);
-  CHECK(ClearImage(vulkan, texture->slots()[0].image, blue), "clear blue");
+  CHECK(ClearImage(texture->slots()[0].image, blue), "clear blue");
   CHECK(texture->Present(0, &error), "present blue: %s", error.c_str());
   CHECK(ReadShown(&width, &height, pixel), "read blue");
   CHECK(IsColor(pixel, 0, 0, 255), "blue frame: %d %d %d", pixel[0], pixel[1],
@@ -288,7 +390,7 @@ int main(int argc, char** argv) {
 
   // A slot that Flutter populated before is free once it is neither the
   // front nor the shown slot.
-  CHECK(ClearImage(vulkan, texture->slots()[1].image, red), "clear red again");
+  CHECK(ClearImage(texture->slots()[1].image, red), "clear red again");
   CHECK(texture->Present(1, &error), "present red again: %s", error.c_str());
   CHECK(texture->Present(2, &error), "present green again: %s", error.c_str());
   CHECK(!texture->SlotInUse(1), "a slot no longer front or shown is free");
@@ -300,7 +402,7 @@ int main(int argc, char** argv) {
   CHECK(texture->Resize(128, 48, &error), "resize: %s", error.c_str());
   texture->ReleaseRetiredSlots();
   CHECK(!texture->SlotInUse(2), "a new slot is free");
-  CHECK(ClearImage(vulkan, texture->slots()[2].image, blue), "clear blue");
+  CHECK(ClearImage(texture->slots()[2].image, blue), "clear blue");
   CHECK(texture->Present(2, &error), "present after resize: %s",
         error.c_str());
   CHECK(ReadShown(&width, &height, pixel), "read after resize");
@@ -319,7 +421,7 @@ int main(int argc, char** argv) {
   auto other = GlTexture::Create(nullptr, vulkan, gl.get(), 16, 16, 3, &error);
   CHECK(other != nullptr, "second texture: %s", error.c_str());
   if (other) {
-    CHECK(ClearImage(vulkan, other->slots()[0].image, red), "clear other");
+    CHECK(ClearImage(other->slots()[0].image, red), "clear other");
     CHECK(other->Present(0, &error), "present other: %s", error.c_str());
     CHECK(ReadShown(&width, &height, pixel), "read other");
     CHECK(IsColor(pixel, 255, 0, 0), "other texture red");

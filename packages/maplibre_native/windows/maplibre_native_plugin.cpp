@@ -1,6 +1,7 @@
 #include "maplibre_native_plugin.h"
 
 #include <flutter/plugin_registrar_windows.h>
+#include <maplibre_native/maplibre_native_api.h>
 
 #include <cstring>
 #include <memory>
@@ -74,9 +75,9 @@ MaplibreNativePlugin::MaplibreNativePlugin(
   if (registrar->GetGraphicsAdapter(&adapter_) && adapter_) {
     DXGI_ADAPTER_DESC desc{};
     if (SUCCEEDED(adapter_->GetDesc(&desc))) {
-      static_assert(sizeof(desc.AdapterLuid) == VK_LUID_SIZE);
-      std::memcpy(adapter_luid_.bytes, &desc.AdapterLuid, VK_LUID_SIZE);
-      adapter_luid_.size = VK_LUID_SIZE;
+      static_assert(sizeof(desc.AdapterLuid) == 8);
+      std::memcpy(adapter_luid_.bytes, &desc.AdapterLuid, 8);
+      adapter_luid_.size = 8;
     }
   }
 }
@@ -87,29 +88,43 @@ MaplibreNativePlugin::~MaplibreNativePlugin() {
   for (auto& [id, texture] : pixel_textures_) {
     PixelTexture::Dispose(std::move(texture));
   }
-  for (auto& [id, texture] : gpu_textures_) {
-    D3D11Texture::Dispose(std::move(texture));
+  for (auto& [id, texture] : shared_textures_) {
+    SharedTexture::Dispose(std::move(texture));
   }
 }
 
-VulkanDevice* MaplibreNativePlugin::GetVulkan(std::string* error) {
-  return VulkanDevice::Get(&adapter_luid_, error);
+bool MaplibreNativePlugin::GetGpuId(GpuId* id, std::string* error) {
+  // The library opens a D3D11 device on the adapter too, to allocate its
+  // shared textures there.
+  if (GetD3D11(error) == nullptr) return false;
+  *id = adapter_luid_;
+  return true;
 }
 
-ID3D11Device* MaplibreNativePlugin::GetD3D11(std::string* error) {
+ID3D11Device1* MaplibreNativePlugin::GetD3D11(std::string* error) {
   if (d3d_) return d3d_.Get();
   if (!adapter_) {
     *error = "Flutter does not render through a DXGI adapter.";
     return nullptr;
   }
+  if (adapter_luid_.size == 0) {
+    *error = "Flutter's DXGI adapter has no LUID.";
+    return nullptr;
+  }
   const D3D_FEATURE_LEVEL levels[] = {D3D_FEATURE_LEVEL_11_1,
                                       D3D_FEATURE_LEVEL_11_0};
+  ComPtr<ID3D11Device> device;
   HRESULT result = D3D11CreateDevice(
       adapter_.Get(), D3D_DRIVER_TYPE_UNKNOWN, nullptr, 0, levels,
-      static_cast<UINT>(std::size(levels)), D3D11_SDK_VERSION, &d3d_, nullptr,
-      nullptr);
+      static_cast<UINT>(std::size(levels)), D3D11_SDK_VERSION, &device,
+      nullptr, nullptr);
   if (FAILED(result)) {
     *error = "D3D11CreateDevice failed.";
+    return nullptr;
+  }
+  // OpenSharedResource1 opens the NT handles of the library's textures.
+  if (FAILED(device.As(&d3d_))) {
+    *error = "D3D11 lacks ID3D11Device1, which opens NT shared handles.";
     return nullptr;
   }
   return d3d_.Get();
@@ -131,34 +146,25 @@ bool MaplibreNativePlugin::UpdatePixelTexture(int64_t id, size_t width,
   return true;
 }
 
-GpuTexture* MaplibreNativePlugin::CreateGpuTexture(uint32_t width,
-                                                   uint32_t height,
-                                                   uint32_t slot_count,
-                                                   std::string* error) {
-  if (ZeroCopyDisabled()) {
-    *error = "MAPLIBRE_NATIVE_DISABLE_ZERO_COPY is set.";
-    return nullptr;
-  }
-  VulkanDevice* vulkan = GetVulkan(error);
-  ID3D11Device* d3d = vulkan == nullptr ? nullptr : GetD3D11(error);
-  if (d3d == nullptr) return nullptr;
-  auto texture = D3D11Texture::Create(textures_, vulkan, d3d, width, height,
-                                      slot_count, error);
-  if (!texture) return nullptr;
-  D3D11Texture* raw = texture.get();
-  gpu_textures_.emplace(raw->id(), std::move(texture));
-  return raw;
+int64_t MaplibreNativePlugin::CreateSharedTexture(std::string* error) {
+  ID3D11Device1* d3d = GetD3D11(error);
+  if (d3d == nullptr) return -1;
+  auto texture = std::make_unique<SharedTexture>(textures_, d3d);
+  const int64_t id = texture->id();
+  shared_textures_.emplace(id, std::move(texture));
+  return id;
 }
 
-GpuTexture* MaplibreNativePlugin::FindGpuTexture(int64_t id) {
-  const auto texture = gpu_textures_.find(id);
-  return texture == gpu_textures_.end() ? nullptr : texture->second.get();
+SharedTexture* MaplibreNativePlugin::FindSharedTexture(int64_t id) {
+  const auto texture = shared_textures_.find(id);
+  return texture == shared_textures_.end() ? nullptr : texture->second.get();
 }
 
 void MaplibreNativePlugin::DisposeTexture(int64_t id) {
-  if (const auto gpu = gpu_textures_.find(id); gpu != gpu_textures_.end()) {
-    D3D11Texture::Dispose(std::move(gpu->second));
-    gpu_textures_.erase(gpu);
+  if (const auto shared = shared_textures_.find(id);
+      shared != shared_textures_.end()) {
+    SharedTexture::Dispose(std::move(shared->second));
+    shared_textures_.erase(shared);
   } else if (const auto pixel = pixel_textures_.find(id);
              pixel != pixel_textures_.end()) {
     PixelTexture::Dispose(std::move(pixel->second));
@@ -167,3 +173,45 @@ void MaplibreNativePlugin::DisposeTexture(int64_t id) {
 }
 
 }  // namespace maplibre_native
+
+// The functions of the C API that only Windows has.
+
+using maplibre_native::DesktopPlugin;
+using maplibre_native::MaplibreNativePlugin;
+using maplibre_native::SharedTexture;
+using maplibre_native::WriteError;
+
+int64_t maplibre_native_create_shared_texture(char* error, size_t error_size) {
+  auto lock = DesktopPlugin::Lock();
+  auto* plugin = static_cast<MaplibreNativePlugin*>(DesktopPlugin::Instance());
+  if (plugin == nullptr) {
+    WriteError("The maplibre_native plugin is not registered.", error,
+               error_size);
+    return -1;
+  }
+  std::string message;
+  const int64_t id = plugin->CreateSharedTexture(&message);
+  if (id < 0) WriteError(message, error, error_size);
+  return id;
+}
+
+bool maplibre_native_present_shared_texture(int64_t texture_id, uint32_t ring,
+                                            uint32_t slot, uint64_t handle,
+                                            char* error, size_t error_size) {
+  auto lock = DesktopPlugin::Lock();
+  auto* plugin = static_cast<MaplibreNativePlugin*>(DesktopPlugin::Instance());
+  SharedTexture* texture =
+      plugin == nullptr ? nullptr : plugin->FindSharedTexture(texture_id);
+  if (texture == nullptr) {
+    WriteError("No shared texture with this id.", error, error_size);
+    return false;
+  }
+  std::string message;
+  if (!texture->Present(ring, slot,
+                        reinterpret_cast<HANDLE>(static_cast<uintptr_t>(handle)),
+                        &message)) {
+    WriteError(message, error, error_size);
+    return false;
+  }
+  return true;
+}

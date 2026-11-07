@@ -21,7 +21,7 @@ let package = Package(
             ],
             linkerSettings: [
                 .linkedFramework("CoreVideo"),
-                .linkedFramework("Metal"),
+                .linkedFramework("IOSurface"),
             ]
         ),
     ]

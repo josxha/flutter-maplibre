@@ -1,154 +1,121 @@
+import 'dart:ffi';
+
+import 'package:jni/jni.dart';
 import 'package:maplibre_native/src/android/bindings.g.dart';
 import 'package:maplibre_native_ffi/maplibre_native_ffi.dart';
 
-/// A SurfaceProducer texture: its Flutter texture id, the EGL or Vulkan
-/// surface of its current Surface, and the listener that the plugin calls on
-/// Surface changes, which [AndroidPlugin.disposeTexture] releases.
-typedef SurfaceTexture = ({
-  int textureId,
-  int surface,
-  SurfaceListener listener,
-});
+/// A SurfaceProducer texture: its Flutter texture id, and the listener that
+/// the plugin calls on Surface changes, which [AndroidPlugin.disposeTexture]
+/// releases.
+typedef SurfaceTexture = ({int textureId, SurfaceListener listener});
 
 /// The maplibre_native Android plugin, called through the jnigen bindings to
 /// its Kotlin `MaplibreNativeApi`.
 final class AndroidPlugin {
   AndroidPlugin._();
 
-  /// Initializes the C library for Android once, for runtimes that render
-  /// no map.
-  static void initialize() => MaplibreNativeApi.initialize();
+  static var _initialized = false;
 
-  /// Initializes the C library for Android once, and returns the Vulkan
-  /// device that render sessions borrow.
-  static VulkanContextDescriptor vulkanContext() {
-    final values = MaplibreNativeApi.vulkanContext();
+  /// Hands the C library the Java VM and the app context once, before its
+  /// first use.
+  static void initialize() {
+    if (_initialized) return;
+    final context = MaplibreNativeApi.applicationContext();
     try {
-      return VulkanContextDescriptor(
-        instance: NativePointer(values[0]),
-        physicalDevice: NativePointer(values[1]),
-        device: NativePointer(values[2]),
-        graphicsQueue: NativePointer(values[3]),
-        graphicsQueueFamilyIndex: values[4],
-        getInstanceProcAddr: NativePointer(values[5]),
-        getDeviceProcAddr: NativePointer(values[6]),
-      );
+      initAndroid(jniEnv, _pointer(context));
     } finally {
-      values.release();
+      context.release();
     }
+    _initialized = true;
   }
 
-  /// Initializes the C library for Android once, and returns the EGL display
-  /// and config that OpenGL ES sessions create their dedicated contexts from.
-  static OpenGlContextDescriptor eglContext() {
-    final values = MaplibreNativeApi.eglContext();
-    try {
-      return OpenGlContextDescriptor(
-        ownership: OpenGlContextOwnership.dedicated,
-        data: OpenGlContextDescriptorDataEgl(
-          EglContextDescriptor(
-            display: NativePointer(values[0]),
-            config: NativePointer(values[1]),
-            clientApi: OpenGlClientApi.gles,
-          ),
-        ),
-      );
-    } finally {
-      values.release();
-    }
-  }
+  /// The `jobject` of [object], for the C library, which takes its own
+  /// reference where it keeps one. `package:jni` has no public accessor for
+  /// it.
+  static NativePointer _pointer(JObject object) =>
+      // ignore: invalid_use_of_internal_member
+      NativePointer(object.reference.pointer.address);
 
-  /// Creates a SurfaceProducer texture of [width] x [height] pixels, whose
-  /// Surface is wrapped as an EGLSurface when [opengl] is set, else as a
-  /// VkSurfaceKHR.
+  /// The `JNIEnv*` of the calling thread, which `package:jni` attached to
+  /// the Java VM before its first call. JNI's invocation interface puts
+  /// `GetEnv` at index 6 of the VM's function table. `package:jni` has no
+  /// public accessor for it.
+  static NativePointer get jniEnv => using((arena) {
+    final vm = arena<Pointer<Void>>();
+    // ignore: invalid_use_of_internal_member
+    if (Jni.env.GetJavaVM(vm.cast()) != 0) {
+      throw StateError('JNI has no Java VM.');
+    }
+    final getEnv = vm.value
+        .cast<
+          Pointer<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer<Void>, Pointer<Pointer<Void>>, Int32)
+              >
+            >
+          >
+        >()
+        .value[6]
+        .asFunction<int Function(Pointer<Void>, Pointer<Pointer<Void>>, int)>();
+    final env = arena<Pointer<Void>>();
+    const jniVersion1_6 = 0x00010006;
+    if (getEnv(vm.value, env, jniVersion1_6) != 0) {
+      throw StateError('This thread is not attached to the Java VM.');
+    }
+    return NativePointer(env.value.address);
+  });
+
+  /// Creates a SurfaceProducer texture of [width] x [height] pixels.
   ///
-  /// [onSurfaceChanged] receives the new and the old surface when Flutter
-  /// recreates the Surface, and [onSurfaceCleanup] runs when the Surface
-  /// becomes invalid. Both run asynchronously on the isolate.
+  /// [onSurfaceAvailable] runs when the Surface is back after
+  /// [onSurfaceCleanup] took it away, maybe as a new one. Both run
+  /// asynchronously on the isolate.
   static SurfaceTexture createSurfaceTexture(
     int width,
     int height, {
-    required bool opengl,
-    required void Function(int surface, int oldSurface) onSurfaceChanged,
+    required void Function() onSurfaceAvailable,
     required void Function() onSurfaceCleanup,
   }) {
     final listener = SurfaceListener.implement(
       $SurfaceListener(
-        onSurfaceChanged: onSurfaceChanged,
-        onSurfaceChanged$async: true,
+        onSurfaceAvailable: onSurfaceAvailable,
+        onSurfaceAvailable$async: true,
         onSurfaceCleanup: onSurfaceCleanup,
         onSurfaceCleanup$async: true,
       ),
     );
-    final values = MaplibreNativeApi.createSurfaceTexture(
+    final textureId = MaplibreNativeApi.createSurfaceTexture(
       width,
       height,
-      opengl,
       listener,
     );
-    try {
-      return (textureId: values[0], surface: values[1], listener: listener);
-    } finally {
-      values.release();
-    }
+    return (textureId: textureId, listener: listener);
   }
 
-  /// Sizes a texture's buffers. Returns its surface, and the old one when
-  /// Flutter handed out a new Surface for the new size.
-  static (int surface, int? oldSurface) resizeSurfaceTexture(
+  /// Runs [use] with the current Surface of a texture, as the descriptor
+  /// fields of the C library name it, and releases the Surface's reference
+  /// after. The library takes its own reference to the window.
+  static T withSurface<T>(
     int textureId,
-    int width,
-    int height,
+    T Function(NativePointer jniEnv, NativePointer surface) use,
   ) {
-    final values = MaplibreNativeApi.resizeSurfaceTexture(
-      textureId,
-      width,
-      height,
-    );
+    final surface = MaplibreNativeApi.surface(textureId);
     try {
-      return (values[0], values[1] == 0 ? null : values[1]);
+      return use(jniEnv, _pointer(surface));
     } finally {
-      values.release();
+      surface.release();
     }
   }
 
-  /// Destroys an EGL ([opengl]) or Vulkan surface that no session presents to
-  /// anymore.
-  static void releaseSurface(int surface, {required bool opengl}) =>
-      MaplibreNativeApi.releaseSurface(surface, opengl);
+  /// Sizes a texture's buffers. Returns whether Flutter handed out a new
+  /// Surface for them.
+  static bool resizeSurfaceTexture(int textureId, int width, int height) =>
+      MaplibreNativeApi.resizeSurfaceTexture(textureId, width, height);
 
-  /// Releases a texture, its surface, and its listener.
+  /// Releases a texture and its listener.
   static void disposeTexture(SurfaceTexture texture) {
-    MaplibreNativeApi.disposeTexture(texture.textureId, false);
+    MaplibreNativeApi.disposeTexture(texture.textureId);
     texture.listener.release();
   }
-
-  /// Registers a client of the native thread that services the
-  /// caller-graphics-thread sessions of all OpenGL ES maps. Returns its
-  /// handle and the driver work wake for its session, which wakes the thread
-  /// natively and owns the client until the C library releases it.
-  static (int client, Wake wake) addRenderClient() {
-    final client = MaplibreNativeApi.addRenderClient();
-    final callbacks = MaplibreNativeApi.renderClientWake();
-    try {
-      return (
-        client,
-        Wake.native(
-          callback: NativePointer(callbacks[0]),
-          userData: NativePointer(client),
-          releaseUserData: NativePointer(callbacks[1]),
-        ),
-      );
-    } finally {
-      callbacks.release();
-    }
-  }
-
-  /// Hands a render client its [session], which the thread then services.
-  static void setRenderClientSession(int client, RenderSessionHandle session) =>
-      MaplibreNativeApi.setRenderClientSession(client, session.id);
-
-  /// Stops servicing a render client after its work in flight.
-  static void removeRenderClient(int client) =>
-      MaplibreNativeApi.removeRenderClient(client);
 }

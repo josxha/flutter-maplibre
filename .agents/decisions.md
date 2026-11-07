@@ -28,8 +28,10 @@ Each entry: the decision, then why.
 - **Dart reaches the platform plugins through ffigen (Windows, Linux, iOS,
   macOS) and jnigen (Android), never method channels.** Calls are synchronous
   and typed, with no message encoding. The Windows and Linux plugin libraries
-  export one C API, implemented once in `desktop/`, and keep their one
-  registered instance behind a mutex. On Android a Kotlin
+  export one C API, whose shared functions `desktop/` implements once, and
+  keep their one registered instance behind a mutex. Each platform defines
+  only its own functions of that header; the bindings look a symbol up on
+  first call, so Dart calls only those of its platform. On Android a Kotlin
   `MaplibreNativeApi` object holds the engine's texture registry, and
   SurfaceProducer callbacks reach Dart through a `SurfaceListener` that Dart
   implements as async listeners.
@@ -38,23 +40,41 @@ Each entry: the decision, then why.
   frame, hands each rendered one to the target on one serial GPU queue, and
   demands the next; targets attach the session, resize, present, end the
   session, and dispose the texture. Windows, Linux, iOS, and macOS share
-  `BorrowedRingTarget` (a plugin-owned ring of three images, replaced on
-  resize). Windows copies each frame on the GPU before releasing it; Linux,
-  iOS and macOS keep it acquired while Flutter samples its slot
-  (`holdsFrames`), and release it once the plugin reports the slot free. A
-  resize releases the held frames first, as the session refuses a new target
-  while it has a frame acquired.
-- **Windows and Linux share the Vulkan device code and the C API
-  implementation in `desktop/`; only the texture interop differs.** The
-  device matches Flutter's GPU by adapter LUID on Windows and by the OpenGL
-  device UUID on Linux, and enables `VK_KHR_external_memory_win32` or
-  `_fd`.
+  `RingTarget` (a ring of three images). Windows copies each frame on the
+  GPU before releasing it; Linux, iOS and macOS keep it acquired while
+  Flutter samples its slot (`holdsFrames`), and release it once the plugin
+  reports the slot free. A resize releases the held frames first, as the
+  session refuses to resize while it has a frame acquired.
+- **The C library allocates the ring where it can (`LibraryRingTarget`:
+  DXGI shared textures on Windows, IOSurfaces on iOS and macOS), and on
+  Android presents to the Surface with a graphics context of its own.**
+  Plugins then only hand frames to Flutter, with no Vulkan, Metal, EGL or JNI
+  code. A resize is a session resize, after which the library hands out new
+  images for the same slots, so Dart counts rings and the plugins open or
+  wrap each image once per ring. Linux keeps a plugin-owned ring that the
+  session borrows (`BorrowedRingTarget`): the library's dma-buf ring needs a
+  DRM device that CI, WSL2 and software rendering lack, while opaque Vulkan
+  memory works there.
+- **Windows and Linux render on a Vulkan device that the C library creates
+  (`VulkanDeviceHandle.create`) on Flutter's GPU**, which the plugin names
+  through `maplibre_native_gpu_id`: the adapter LUID on Windows, the OpenGL
+  device UUID on Linux. The device lives as long as the process and enables
+  the external memory extensions the GPU has. On Linux the plugin allocates
+  its ring images on it through the functions of its context.
 
 ## Windows
 
-- **Frames reach Flutter as a triple-buffered ring of D3D11 textures shared
-  with Vulkan, shown as a DXGI GPU surface texture.** If sharing fails, frames
-  are read back to the CPU into a pixel buffer texture.
+- **The session renders into the library's ring of three DXGI shared
+  textures (`attachDxgiSharedTextureRing`), and the plugin copies each frame
+  into one of three textures that Flutter shows as a DXGI GPU surface
+  texture.** The plugin opens each ring texture once with
+  `OpenSharedResource1` on its D3D11 device on Flutter's adapter. Flutter
+  can't take the ring's textures directly: ANGLE opens only legacy shared
+  handles, the library shares NT handles, and Flutter reopens a texture
+  whenever the handle changes. The copy finishes before the frame is
+  released, so the library never renders into a texture being copied. If
+  sharing fails (no Vulkan device on the adapter's LUID, as with lavapipe in
+  CI), frames are read back to the CPU into a pixel buffer texture.
 - **No keyed mutex on the shared textures.** Flutter/ANGLE never acquire it.
   Tearing is unlikely but possible.
 - **The C library is built with MSVC 14.37.** 14.44 needs LLVM 19 or newer.
@@ -63,14 +83,14 @@ Each entry: the decision, then why.
 
 - **Frames reach Flutter as an `FlTextureGL` that samples the ring slots
   directly. MapLibre renders through Vulkan into a ring of RGBA8 images with
-  exportable memory; `populate` imports each slot's opaque file descriptor
+  exportable memory, which the plugin allocates on the library's device; `populate` imports each slot's opaque file descriptor
   once (`GL_EXT_memory_object_fd`) and returns the latest presented slot's
   texture.** Flutter 3.47 renders in EGL contexts of its own
   (`FlOpenGLManager`) that share nothing with any context a plugin can
   create, and `populate` is the only code that runs with one current, so
   every OpenGL call of the texture runs there. Opaque memory needs one GPU
-  and driver on both sides: the plugin creates its Vulkan device on the
-  OpenGL device UUID, checks the driver UUIDs, and checks the extensions,
+  and driver on both sides: the library creates its Vulkan device on the
+  OpenGL device UUID, the plugin checks the device and driver UUIDs, and checks the extensions,
   OpenGL ES 3.0 and the UUIDs again in Flutter's context on the first
   `populate`. If that fails, it logs a warning and the map shows nothing;
   otherwise failures fall back to an `FlPixelBufferTexture`, as on Windows.
@@ -105,41 +125,24 @@ Each entry: the decision, then why.
 
 ## Android
 
-- **MapLibre presents to the Surface of a Flutter `SurfaceProducer`, through
-  an EGL window surface (OpenGL ES) or a Vulkan swapchain.** This is
-  zero-copy, works with Impeller and the ImageReader backend, and needs no
-  Android-specific code in the C API.
-- **OpenGL ES sessions own a dedicated EGL context
-  (`MLN_OPENGL_CONTEXT_OWNERSHIP_DEDICATED`, GLES client API, no share
-  context).** Nothing samples their output in GL, so they need no share
-  group with Flutter. The plugin initializes `EGL_DEFAULT_DISPLAY` once and
-  never terminates it, as Flutter shares the display and the C API needs it
-  through teardown. It picks an RGBA8888 ES 3 window config with depth and
-  stencil, with pbuffer support where offered for the session's teardown
-  fallback.
-- **One plugin-owned native render thread services the caller-graphics-thread
-  sessions of all OpenGL ES maps, each with its dedicated context.** EGL
-  surface targets require `MLN_RENDER_DRIVER_CALLER_GRAPHICS_THREAD`, so
-  rendering runs where `mln_render_session_service_driver_work` is called,
-  and the Dart isolate runs on the Android main thread. Each map registers a
-  render client whose `Wake.native` (callback and release from the JNI shim,
-  the client as user data) wakes the thread directly, without a hop through
-  the isolate; the release frees the client once the C library drops the
-  wake. `RenderSessionHandle.id` is the raw `mln_render_session`, so the
-  shim calls the C function it resolves with `dlsym`. The C API binds a
-  session to the first thread that services it, and lets dedicated sessions
-  share it; the thread services pending sessions in turn. Teardown detaches
-  the session there (disposing an attached caller-thread session abandons
-  it, which keeps the GL objects until process exit), then removes the
-  client and closes the session. The thread lives as long as the process.
-- **The plugin creates its own Vulkan 1.1 device (graphics queue +
-  `VK_KHR_swapchain`) for the Vulkan build.** Flutter doesn't share its
-  device with plugins.
-- **`onSurfaceCleanup` pauses frame demands, and `onSurfaceAvailable` moves the
-  session to the new Surface.** The old `VkSurfaceKHR` is destroyed only after
-  the session has left it. An old `EGLSurface` is destroyed once
-  `set_opengl_surface_target` completes; it can still be current on the render
-  thread until the next frame, and EGL defers destroying it until then.
+- **MapLibre presents to the Surface of a Flutter `SurfaceProducer` through
+  `attachAndroidSurface`, with a graphics context that the C library
+  creates: an EGL context on the default display (OpenGL ES build) or a
+  Vulkan device and swapchain (Vulkan build), on the session's core
+  worker.** This is zero-copy, works with Impeller and the ImageReader
+  backend, and leaves the plugin without native code: Dart passes the
+  Surface as a `jobject` with its thread's `JNIEnv*` (read through the
+  JavaVM's `GetEnv`, as `package:jni` exposes neither publicly), and
+  `initAndroid` gets the application context once. This replaced a JNI shim
+  with its own EGL setup, Vulkan device and a render thread for
+  caller-graphics-thread EGL sessions.
+- **`onSurfaceCleanup` releases the session's target and pauses frame
+  demands, and `onSurfaceAvailable` gives the session the current Surface
+  again and resumes.** The session keeps its own reference to the window, so
+  a frame in flight while Flutter destroys it finishes with
+  `targetNotReady`. A resize that makes Flutter hand out a new Surface moves
+  the session there with `setAndroidSurfaceTarget`; otherwise it is a
+  session resize.
 - **Sessions end with `RenderSessionHandle.release()`, not `abandon()`.**
   Release detaches a core-worker session off the UI thread and completes once
   no library thread touches the target, after which the plugin frees its
@@ -163,9 +166,10 @@ Each entry: the decision, then why.
   Swift Package Manager by default since 3.44, so there is no podspec, and
   the example's iOS and macOS projects have no Podfile. The Flutter minimum
   of 3.47 means apps need no `flutter config` step.
-- **Sessions render into a borrowed ring of three IOSurface-backed BGRA8
-  pixel buffers, whose Metal textures come from a `CVMetalTextureCache`, and
-  the `FlutterTexture` returns the presented slot's buffer from
+- **Sessions render into the library's ring of three BGRA8 IOSurfaces
+  (`attachIoSurfaceRing`), which the plugin wraps in pixel buffers
+  (`CVPixelBufferCreateWithIOSurface`, once per ring), and the
+  `FlutterTexture` returns the presented slot's buffer from
   `copyPixelBuffer`, without a copy or a wait.** BGRA8 is what Flutter's
   pixel buffer textures read. The frame's GPU writes completed before it
   became acquirable, so Flutter can sample it at once. Dart keeps the frame on
@@ -178,8 +182,9 @@ Each entry: the decision, then why.
   own buffer and texture keep every surface in use (use count 2), Flutter's
   texture raises nothing, and Flutter has dropped the buffer by the time it
   takes the next. It checks on each present and every
-  4 ms while a replaced frame is held. A resize releases every held frame once
-  the session moved to the new ring; Flutter keeps the old buffer it shows.
+  4 ms while a replaced frame is held. A resize releases every held frame
+  before the session resizes; Flutter keeps the old buffer it shows, which
+  retains its surface.
   This replaced a blit into a `CVPixelBufferPool` buffer that the Dart UI
   thread waited for on every frame.
 - **Dart finds the C API through `+[MaplibreNativePlugin symbols]`, called
@@ -202,11 +207,10 @@ Each entry: the decision, then why.
 
 ## Threading and GPU
 
-- **One process-wide VkDevice and VkQueue are shared by every map, without
-  `mln_queue_lock`.** The C library serializes every session's submits and
-  presents per queue (`vulkan_queue_access.cpp`). A lock is only needed if
-  host code uses the queue, and none does. The binding takes one as
-  `QueueLock.native` from host native code.
+- **One process-wide VkDevice and VkQueue are shared by every map on
+  Windows and Linux, without a queue lock.** The C library serializes every
+  session's submits and presents per queue (`vulkan_queue_access.cpp`). A
+  lock is only needed if host code uses the queue, and none does.
 - **Widgets over the map follow the frame on screen, not the latest camera.**
   Each rendered frame result carries the view it drew; when Flutter can show
   that frame, the renderer creates its projection (`mapProjectionCreate`) and
@@ -224,9 +228,10 @@ Each entry: the decision, then why.
   into [-180, 180).
 - **Dart calls the plugins on its UI thread.** Flutter's Windows and Linux
   texture registrar functions may be called from any thread. On Android the UI
-  thread is the main thread, which SurfaceProducer needs.
-- **Vulkan sessions use the core-worker driver, OpenGL ES sessions the render
-  thread of the plugin, with frame wakes drained on the Dart isolate.** Frame
+  thread is the main thread, which SurfaceProducer needs, and its `JNIEnv*`
+  is the one the C library gets with each Surface.
+- **Every session uses the core-worker driver, with frame wakes drained on
+  the Dart isolate.** Frame
   demands use `waitForUpdate`, so a demand renders only a newer map update and
   idle maps don't render, and every rendered frame is presented. The frame
   wake is a `Wake` with a Dart callback. A map's event mask holds the events the state always handles plus
@@ -627,8 +632,9 @@ Each entry: the decision, then why.
   checks each platform's camera end to end.
 - **`linux/test/gl_texture_test.cc` checks the Linux zero-copy path without
   Flutter**, against stand-ins for the few Flutter functions the plugin
-  calls: the GPU IDs from the EGL probe of a real window, the device on its
-  UUID, and exported images that `populate` imports and returns in an EGL
+  calls: the GPU IDs from the EGL probe of a real window, a Vulkan device on
+  its UUID that the plugin adopts as it adopts the library's, and exported
+  images that `populate` imports and returns in an EGL
   context that shares nothing with GDK's, as Flutter's, also across a resize
   and the disposal of a texture. It checks which slots are in use. It passes on Mesa's lavapipe and
   llvmpipe, which share memory, so it runs without a GPU.
@@ -646,6 +652,9 @@ Each entry: the decision, then why.
   package outside the workspace.** The generator pins the npm version of the
   style spec and downloads its `v8.json`; the spec isn't committed. Outside the workspace, the binding's build hook doesn't run
   during code generation. jnigen uses the example app's Gradle classpath.
+  The Kotlin API takes and returns only Android types (`Context`,
+  `Surface`), which jnigen binds as stubs, so classes compiled against any
+  `android.jar` give the same bindings.
 - **`package:jni` is also an FFI plugin on Windows and Linux.** It builds
   there but stays unused.
 - **CI builds and tests against the published C library.** No job builds it
@@ -712,10 +721,13 @@ Each entry: the decision, then why.
 - The macOS presets also offer Vulkan and OpenGL. Selecting either with
   `backend.macos` makes a macOS map throw `UnsupportedError`, since the
   plugin only integrates Metal.
-- The zero-copy Metal path passes on macOS and the iOS simulator, with
-  MapLibre rendering into the one free slot. Not checked: shared-storage
-  render targets on iOS devices, and whether a GPU read of Flutter outlasts
-  the two slots the ring holds for it (tearing; none seen).
+- The zero-copy Metal path passed on macOS and the iOS simulator with the
+  plugin's own ring, with MapLibre rendering into the one free slot; the
+  library's IOSurface ring has only run in CI. Not checked: iOS devices, and
+  whether a GPU read of Flutter outlasts the two slots the ring holds for it
+  (tearing; none seen).
+- The DXGI shared texture ring has not run with a GPU: CI's lavapipe has no
+  adapter LUID, so Windows CI reads frames back.
 - Touch tilt and double-tap-drag are not tested on Windows touchscreens.
 - Web lost gl-js's keyboard navigation and shift-drag box zoom, which the
   shared recognizer doesn't offer, and its grab cursor. Zoom and rotation

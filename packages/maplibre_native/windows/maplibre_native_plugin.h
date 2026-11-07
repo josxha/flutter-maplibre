@@ -1,7 +1,7 @@
 #ifndef FLUTTER_PLUGIN_MAPLIBRE_NATIVE_PLUGIN_H_
 #define FLUTTER_PLUGIN_MAPLIBRE_NATIVE_PLUGIN_H_
 
-#include <d3d11.h>
+#include <d3d11_1.h>
 #include <dxgi.h>
 #include <flutter/plugin_registrar_windows.h>
 #include <flutter/texture_registrar.h>
@@ -14,9 +14,8 @@
 #include <string>
 #include <vector>
 
-#include "d3d11_texture.h"
 #include "desktop_plugin.h"
-#include "vulkan_device.h"
+#include "shared_texture.h"
 
 namespace maplibre_native {
 
@@ -52,8 +51,8 @@ class PixelTexture {
   FlutterDesktopPixelBuffer buffer_{};
 };
 
-// The Windows DesktopPlugin: owns the textures, and the D3D11 device that
-// shares them with Flutter's adapter.
+// The Windows DesktopPlugin: owns the textures, and the D3D11 device on
+// Flutter's adapter that opens the library's shared textures.
 class MaplibreNativePlugin : public flutter::Plugin, public DesktopPlugin {
  public:
   static void RegisterWithRegistrar(flutter::PluginRegistrarWindows* registrar);
@@ -62,27 +61,27 @@ class MaplibreNativePlugin : public flutter::Plugin, public DesktopPlugin {
 
   ~MaplibreNativePlugin() override;
 
-  VulkanDevice* GetVulkan(std::string* error) override;
+  bool GetGpuId(GpuId* id, std::string* error) override;
   int64_t CreatePixelTexture() override;
   bool UpdatePixelTexture(int64_t id, size_t width, size_t height,
                           size_t stride, const uint8_t* pixels) override;
-  GpuTexture* CreateGpuTexture(uint32_t width, uint32_t height,
-                               uint32_t slot_count,
-                               std::string* error) override;
-  GpuTexture* FindGpuTexture(int64_t id) override;
   void DisposeTexture(int64_t id) override;
+
+  // Returns -1 with |error| set when D3D11 can't open shared textures.
+  int64_t CreateSharedTexture(std::string* error);
+  SharedTexture* FindSharedTexture(int64_t id);
 
  private:
   // A D3D11 device on Flutter's GPU, or null with |error| set.
-  ID3D11Device* GetD3D11(std::string* error);
+  ID3D11Device1* GetD3D11(std::string* error);
 
   flutter::TextureRegistrar* textures_;
   // Flutter's adapter, taken on the platform thread at registration.
   Microsoft::WRL::ComPtr<IDXGIAdapter> adapter_;
-  Microsoft::WRL::ComPtr<ID3D11Device> d3d_;
+  Microsoft::WRL::ComPtr<ID3D11Device1> d3d_;
   GpuId adapter_luid_;
   std::map<int64_t, std::unique_ptr<PixelTexture>> pixel_textures_;
-  std::map<int64_t, std::unique_ptr<D3D11Texture>> gpu_textures_;
+  std::map<int64_t, std::unique_ptr<SharedTexture>> shared_textures_;
 };
 
 }  // namespace maplibre_native
