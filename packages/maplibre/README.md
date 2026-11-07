@@ -100,7 +100,7 @@ There are two Flutter packages for MapLibre. They take different approaches:
 | Platforms       | Android, iOS, macOS, Windows, Linux, web                    | Android, iOS, web                                               |
 | Interop         | FFI, JS interop on web                                      | Platform channels, JS interop on web                            |
 | Map in Flutter  | `Texture`, HTML element on web                              | Platform view, HTML element on web                              |
-| API             | Declarative annotations and an imperative controller        | Imperative controller, asynchronous                             |
+| API             | Declarative annotations and an imperative controller, synchronous where possible | Imperative controller, asynchronous                             |
 
 The
 [comparison](https://josxha.github.io/flutter-maplibre/compare/) covers other map
