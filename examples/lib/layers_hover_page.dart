@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:maplibre/maplibre.dart';
 
 @immutable
@@ -12,32 +13,36 @@ class LayersHoverPage extends StatefulWidget {
 }
 
 class _LayersHoverPageState extends State<LayersHoverPage> {
-  /// A grid of areas around Lake Constance.
-  static final _areas = <Feature<Polygon>>[
-    for (var row = 0; row < 4; row++)
-      for (var column = 0; column < 5; column++)
-        Feature(
-          geometry: _square(8.4 + column * 0.4, 47.9 - row * 0.3),
-          properties: {'name': 'Area ${row * 5 + column + 1}'},
-        ),
-  ];
+  static const _url =
+      'https://maplibre.org/maplibre-gl-js/docs/assets/us_states.geojson';
+  static const _color = Color(0xFF627BC1);
 
-  static Polygon _square(double lon, double lat) => Polygon.from([
-    [
-      Geographic(lon: lon, lat: lat),
-      Geographic(lon: lon + 0.38, lat: lat),
-      Geographic(lon: lon + 0.38, lat: lat - 0.28),
-      Geographic(lon: lon, lat: lat - 0.28),
-      Geographic(lon: lon, lat: lat),
-    ],
-  ]);
+  /// The polygons of the US states, one per part of a state.
+  late final Future<List<Feature<Polygon>>> _states = _loadStates();
 
-  int? _hovered;
-  int? _selected;
+  String? _hovered;
+  String? _selected;
+
+  static Future<List<Feature<Polygon>>> _loadStates() async {
+    final response = await get(Uri.parse(_url));
+    return [
+      for (final state in FeatureCollection.parse(response.body).features)
+        // A layer of polygons takes a feature per polygon, so states of
+        // several parts, such as Hawaii, become several features.
+        for (final polygon in switch (state.geometry) {
+          final Polygon polygon => [polygon],
+          final MultiPolygon multi => multi.polygons,
+          _ => const <Polygon>[],
+        })
+          Feature(
+            geometry: polygon,
+            properties: {'name': state.properties['STATE_NAME']},
+          ),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
-    final hovered = _hovered;
     final selected = _selected;
     return Scaffold(
       appBar: AppBar(title: const Text('Hover Features')),
@@ -47,43 +52,55 @@ class _LayersHoverPageState extends State<LayersHoverPage> {
             padding: const EdgeInsets.all(8),
             child: Text(
               selected == null
-                  ? 'Hover over an area with the mouse, or tap one.'
-                  : 'Selected ${_nameOf(selected)}.',
+                  ? 'Hover over a state with the mouse, or tap one.'
+                  : 'Selected $selected.',
             ),
           ),
           Expanded(
-            child: MapLibreMap(
-              options: const MapOptions(
-                initCamera: CameraUpdate.position(
-                  zoom: 7,
-                  center: Geographic(lon: 9.38, lat: 47.47),
-                ),
-              ),
-              layers: [
-                PolygonLayer(
-                  polygons: _areas,
-                  color: const .literal(Colors.blue),
-                  opacity: const .literal(0.3),
-                  outlineColor: const .literal(Colors.blue),
-                  onEnter: (event) => setState(() => _hovered = event.index),
-                  onLeave: (event) => setState(() {
-                    if (_hovered == event.index) _hovered = null;
-                  }),
-                  onClick: (event) => setState(() => _selected = event.index),
-                ),
-                // The hovered and the selected area, drawn more opaque.
-                PolygonLayer(
-                  polygons: [
-                    if (hovered != null) _areas[hovered],
-                    if (selected != null && selected != hovered)
-                      _areas[selected],
+            child: FutureBuilder(
+              future: _states,
+              builder: (context, snapshot) {
+                final states = snapshot.data ?? const <Feature<Polygon>>[];
+                return MapLibreMap(
+                  options: const MapOptions(
+                    initCamera: CameraUpdate.position(
+                      zoom: 2,
+                      center: Geographic(lon: -100.486052, lat: 37.830348),
+                    ),
+                  ),
+                  layers: [
+                    PolygonLayer(
+                      polygons: states,
+                      color: const .literal(_color),
+                      opacity: const .literal(0.5),
+                      outlineColor: const .literal(_color),
+                      onEnter: (event) =>
+                          setState(() => _hovered = _name(states[event.index])),
+                      onLeave: (event) => setState(() {
+                        if (_hovered == _name(states[event.index])) {
+                          _hovered = null;
+                        }
+                      }),
+                      onClick: (event) => setState(
+                        () => _selected = _name(states[event.index]),
+                      ),
+                    ),
+                    // Every part of the hovered and the selected state,
+                    // drawn opaque.
+                    PolygonLayer(
+                      polygons: [
+                        for (final state in states)
+                          if (_name(state) case final name
+                              when name == _hovered || name == _selected)
+                            state,
+                      ],
+                      color: const .literal(_color),
+                      outlineColor: const .literal(Color(0xFF3A4E8C)),
+                    ),
                   ],
-                  color: const .literal(Colors.blue),
-                  opacity: const .literal(0.6),
-                  outlineColor: const .literal(Colors.indigo),
-                ),
-              ],
-              children: const [SourceAttribution(), MapControlButtons()],
+                  children: const [SourceAttribution(), MapControlButtons()],
+                );
+              },
             ),
           ),
         ],
@@ -91,5 +108,6 @@ class _LayersHoverPageState extends State<LayersHoverPage> {
     );
   }
 
-  String _nameOf(int index) => _areas[index].properties['name'] as String;
+  static String? _name(Feature<Polygon> state) =>
+      state.properties['name'] as String?;
 }
