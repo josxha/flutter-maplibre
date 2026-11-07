@@ -22,7 +22,7 @@ show how to move from
 | Map data            | Any tile provider        | Any tile provider      | Any tile provider        | Mapbox                  | Google                    |
 | API key and billing | Only if your provider needs one | Only if your provider needs one | Only if your provider needs one | Mapbox access token, billed by usage | Google API key, billed by usage |
 | Rendering           | MapLibre, GPU            | MapLibre, GPU          | Flutter canvas, Dart     | Mapbox, GPU             | Google Maps SDKs          |
-| Map in Flutter as   | `Texture`, HTML element on web | Platform view          | Widgets                  | Platform view           | Platform view             |
+| Map in Flutter as   | `Texture`, HTML element on web | Platform view, HTML element on web | Widgets                  | Platform view           | Platform view             |
 | Android, iOS        | ✅                        | ✅                      | ✅                        | ✅                       | ✅                         |
 | Web                 | ✅                        | ✅                      | ✅                        | ✅                       | ✅                         |
 | macOS, Windows, Linux | ✅                      | ❌                      | ✅                        | ❌                       | ❌                         |
@@ -61,8 +61,9 @@ iOS SDKs and maplibre-gl-js. Both packages use the same map styles and tiles.
 |-----------------|-----------------------------------------------------------|----------------------------------------------------------------|
 | Principle       | What can be done in Dart is done in Dart                  | What the MapLibre SDKs can do is done by the SDKs              |
 | Platforms       | Android, iOS, macOS, Windows, Linux, web                  | Android, iOS, web                                              |
-| Interop         | FFI and JS interop                                        | Platform channels                                              |
-| API             | Declarative annotations, synchronous where possible       | Imperative controller, asynchronous                            |
+| Interop         | FFI, JS interop on web                                    | Platform channels, JS interop on web                           |
+| Map in Flutter  | `Texture`, HTML element on web                            | Platform view, HTML element on web                             |
+| API             | Declarative annotations and an imperative controller      | Imperative controller, asynchronous                            |
 
 ## flutter_map
 

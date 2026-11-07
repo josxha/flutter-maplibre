@@ -98,8 +98,9 @@ There are two Flutter packages for MapLibre. They take different approaches:
 |-----------------|-------------------------------------------------------------|-----------------------------------------------------------------|
 | Principle       | What can be done in Dart is done in Dart                    | What the MapLibre SDKs can do is done by the SDKs               |
 | Platforms       | Android, iOS, macOS, Windows, Linux, web                    | Android, iOS, web                                               |
-| Interop         | FFI and JS interop, maps render into a Flutter `Texture`    | Platform channels, maps are platform views                      |
-| API             | Declarative annotations, synchronous where possible         | Imperative controller, asynchronous                             |
+| Interop         | FFI, JS interop on web                                      | Platform channels, JS interop on web                            |
+| Map in Flutter  | `Texture`, HTML element on web                              | Platform view, HTML element on web                              |
+| API             | Declarative annotations and an imperative controller        | Imperative controller, asynchronous                             |
 
 The
 [comparison](https://josxha.github.io/flutter-maplibre/compare/) covers other map
