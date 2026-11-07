@@ -39,35 +39,74 @@ class MapButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return MapTapTarget(
+      label: label,
+      onPressed: onPressed,
+      child: Container(
+        width: size,
+        height: size,
+        alignment: Alignment.center,
+        decoration: const BoxDecoration(
+          color: backgroundColor,
+          shape: BoxShape.circle,
+          boxShadow: [
+            BoxShadow(
+              color: Color(0x40000000),
+              blurRadius: 4,
+              offset: Offset(0, 1),
+            ),
+          ],
+        ),
+        child: CustomPaint(
+          size: Size.square(iconSize),
+          painter: MapButtonIconPainter(icon, color: iconColor),
+        ),
+      ),
+    );
+  }
+}
+
+/// Makes [child] a button for pointers, keyboards and screen readers.
+@immutable
+class MapTapTarget extends StatelessWidget {
+  /// Creates a button around [child].
+  const MapTapTarget({
+    required this.label,
+    required this.onPressed,
+    required this.child,
+    super.key,
+  });
+
+  /// The semantic label of the button.
+  final String label;
+
+  /// Called on a tap, or when the focused button is activated by a key.
+  final VoidCallback onPressed;
+
+  /// The content of the button.
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
     return Semantics(
       button: true,
       label: label,
+      onTap: onPressed,
       excludeSemantics: true,
-      child: MouseRegion(
-        cursor: SystemMouseCursors.click,
+      child: FocusableActionDetector(
+        mouseCursor: SystemMouseCursors.click,
+        actions: {
+          ActivateIntent: CallbackAction<ActivateIntent>(
+            onInvoke: (_) {
+              onPressed();
+              return null;
+            },
+          ),
+        },
         child: GestureDetector(
           onTap: onPressed,
           behavior: HitTestBehavior.opaque,
-          child: Container(
-            width: size,
-            height: size,
-            alignment: Alignment.center,
-            decoration: const BoxDecoration(
-              color: backgroundColor,
-              shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                  color: Color(0x40000000),
-                  blurRadius: 4,
-                  offset: Offset(0, 1),
-                ),
-              ],
-            ),
-            child: CustomPaint(
-              size: Size.square(iconSize),
-              painter: MapButtonIconPainter(icon, color: iconColor),
-            ),
-          ),
+          child: child,
         ),
       ),
     );

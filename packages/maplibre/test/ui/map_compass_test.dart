@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:material_ui/material_ui.dart';
@@ -67,6 +68,26 @@ void main() {
         const MapCompass(rotationOffset: 45),
       );
       expect(angleOf(tester), closeTo(15, 1e-6));
+    });
+
+    testWidgets('can be activated with the keyboard', (tester) async {
+      var pressed = 0;
+      await pump(
+        tester,
+        _camera(bearing: 100, pitch: 30),
+        MapCompass(onPressed: () => pressed++),
+      );
+      Focus.of(
+        tester.element(
+          find.descendant(
+            of: find.byType(MapCompass),
+            matching: find.byType(GestureDetector),
+          ),
+        ),
+      ).requestFocus();
+      await tester.pump();
+      await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+      expect(pressed, 1);
     });
 
     testWidgets('turns the map north when tapped', (tester) async {

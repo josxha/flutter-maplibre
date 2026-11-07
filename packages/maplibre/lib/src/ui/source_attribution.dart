@@ -97,26 +97,18 @@ class _SourceAttributionState extends State<SourceAttribution> {
                 ),
               SizedBox.square(
                 dimension: 30,
-                child: Semantics(
-                  button: true,
+                child: MapTapTarget(
                   label: 'Attribution',
-                  excludeSemantics: true,
-                  child: MouseRegion(
-                    cursor: SystemMouseCursors.click,
-                    child: GestureDetector(
-                      behavior: HitTestBehavior.opaque,
-                      onTap: () => setState(() {
-                        _initCameraPosition = null;
-                        _expanded = !_expanded;
-                      }),
-                      child: const Center(
-                        child: CustomPaint(
-                          size: Size.square(18),
-                          painter: MapButtonIconPainter(
-                            MapButtonIcon.info,
-                            color: MapButton.iconColor,
-                          ),
-                        ),
+                  onPressed: () => setState(() {
+                    _initCameraPosition = null;
+                    _expanded = !_expanded;
+                  }),
+                  child: const Center(
+                    child: CustomPaint(
+                      size: Size.square(18),
+                      painter: MapButtonIconPainter(
+                        MapButtonIcon.info,
+                        color: MapButton.iconColor,
                       ),
                     ),
                   ),
