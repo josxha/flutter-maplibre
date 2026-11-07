@@ -1,8 +1,9 @@
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:html/dom.dart' as dom;
 import 'package:html/parser.dart' as html_parser;
 import 'package:maplibre/maplibre.dart';
+import 'package:maplibre/src/ui/map_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// Display a zoom-in and zoom-out button to the [MapLibreMap] by using it in
@@ -19,6 +20,9 @@ class SourceAttribution extends StatefulWidget {
     this.alignment = Alignment.bottomRight,
     this.showMapLibre = true,
     this.keepExpanded = false,
+    this.backgroundColor = MapButton.defaultBackgroundColor,
+    this.iconColor = MapButton.defaultIconColor,
+    this.textStyle = defaultTextStyle,
   });
 
   /// The padding.
@@ -36,6 +40,21 @@ class SourceAttribution extends StatefulWidget {
   ///
   /// Defaults to false.
   final bool keepExpanded;
+
+  /// The background color. Defaults to white.
+  final Color backgroundColor;
+
+  /// The color of the info icon. Defaults to dark grey.
+  final Color iconColor;
+
+  /// The style of the attribution text. Links are underlined on hover.
+  final TextStyle textStyle;
+
+  /// The default [textStyle]: 12 px dark grey.
+  static const defaultTextStyle = TextStyle(
+    fontSize: 12,
+    color: Color(0xFF333333),
+  );
 
   @override
   State<SourceAttribution> createState() => _SourceAttributionState();
@@ -57,7 +76,6 @@ class _SourceAttributionState extends State<SourceAttribution> {
       _expanded = false;
     }
 
-    final theme = Theme.of(context);
     final size = MediaQuery.sizeOf(context);
 
     final attributions = [
@@ -74,7 +92,7 @@ class _SourceAttributionState extends State<SourceAttribution> {
         padding: widget.padding,
         child: Container(
           decoration: BoxDecoration(
-            color: theme.scaffoldBackgroundColor,
+            color: widget.backgroundColor,
             borderRadius: BorderRadius.circular(20),
           ),
           child: Row(
@@ -90,21 +108,29 @@ class _SourceAttributionState extends State<SourceAttribution> {
                       spacing: 2,
                       runSpacing: 2,
                       children: attributions
-                          .map(_HtmlWidget.new)
+                          .map((html) => _HtmlWidget(html, widget.textStyle))
                           .toList(growable: false),
                     ),
                   ),
                 ),
               SizedBox.square(
                 dimension: 30,
-                child: IconButton(
+                child: MapTapTarget(
+                  label: 'Attribution',
                   onPressed: () => setState(() {
                     _initCameraPosition = null;
                     _expanded = !_expanded;
                   }),
-                  icon: const Icon(Icons.info, size: 18),
-                  padding: const EdgeInsets.all(4),
-                  constraints: const BoxConstraints(),
+                  child: Center(
+                    child: CustomPaint(
+                      size: const Size.square(18),
+                      painter: MapButtonIconPainter(
+                        MapButtonIcon.info,
+                        color: widget.iconColor,
+                        backgroundColor: widget.backgroundColor,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ],
@@ -116,9 +142,10 @@ class _SourceAttributionState extends State<SourceAttribution> {
 }
 
 class _HtmlWidget extends StatefulWidget {
-  const _HtmlWidget(this.html);
+  const _HtmlWidget(this.html, this.textStyle);
 
   final String html;
+  final TextStyle textStyle;
 
   @override
   State<StatefulWidget> createState() => _HtmlWidgetState();
@@ -129,9 +156,9 @@ class _HtmlWidgetState extends State<_HtmlWidget> {
 
   @override
   Widget build(BuildContext context) {
-    var textStyle = Theme.of(context).textTheme.bodySmall;
+    var textStyle = widget.textStyle;
     if (_hovering) {
-      textStyle = textStyle?.copyWith(decoration: TextDecoration.underline);
+      textStyle = textStyle.copyWith(decoration: TextDecoration.underline);
     }
     final textSpans = <TextSpan>[];
     final document = html_parser.parse(widget.html);

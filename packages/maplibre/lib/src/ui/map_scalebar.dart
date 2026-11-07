@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
 
 /// Display a scalebar to the [MapLibreMap] by using it in
@@ -16,6 +16,9 @@ class MapScalebar extends StatelessWidget {
     this.alignment = Alignment.bottomLeft,
     this.padding = const EdgeInsets.all(12),
     this.units = ScaleBarUnit.metric,
+    this.backgroundColor = defaultBackgroundColor,
+    this.lineColor = defaultLineColor,
+    this.textStyle = defaultTextStyle,
     super.key,
   });
 
@@ -28,6 +31,27 @@ class MapScalebar extends StatelessWidget {
 
   /// Wether the scalebar uses the metric or imperial measurement system.
   final ScaleBarUnit units;
+
+  /// The background color of the bar. Defaults to translucent white.
+  final Color backgroundColor;
+
+  /// The color of the bar outline. Defaults to black.
+  final Color lineColor;
+
+  /// The style of the distance label. Defaults to 12 px black.
+  final TextStyle textStyle;
+
+  /// The default [backgroundColor].
+  static const defaultBackgroundColor = Color(0x99FFFFFF);
+
+  /// The default [lineColor].
+  static const defaultLineColor = Color(0xFF000000);
+
+  /// The default [textStyle].
+  static const defaultTextStyle = TextStyle(
+    color: Color(0xFF000000),
+    fontSize: 12,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -47,10 +71,15 @@ class MapScalebar extends StatelessWidget {
         screenSize - Offset(totalPadding.right, totalPadding.bottom) as Size;
     final scalebarCenter = alignment.alongSize(paddedSize) + paddingOffset;
     final scalebarLat = controller.toLngLat(scalebarCenter).lat;
-    final theme = Theme.of(context);
 
     final metersPerPixel = controller.getMetersPerPixelAtLatitude(scalebarLat);
-    final painter = ScaleBarPainter(metersPerPixel, theme, units: units);
+    final painter = ScaleBarPainter(
+      metersPerPixel,
+      units: units,
+      backgroundColor: backgroundColor,
+      lineColor: lineColor,
+      textStyle: textStyle,
+    );
     // Use a SafeArea to ensure the widget is completely visible on devices
     // with rounded edges like iOS.
     return SafeArea(
@@ -67,7 +96,13 @@ class MapScalebar extends StatelessWidget {
 /// Visible for testing only.
 class ScaleBarPainter extends CustomPainter {
   /// Visible for testing only.
-  ScaleBarPainter(this.metersPerPixel, this.theme, {required this.units}) {
+  ScaleBarPainter(
+    this.metersPerPixel, {
+    required this.units,
+    this.backgroundColor = MapScalebar.defaultBackgroundColor,
+    this.lineColor = MapScalebar.defaultLineColor,
+    this.textStyle = MapScalebar.defaultTextStyle,
+  }) {
     const milesToMeters = 1609.344;
     const feetToMeters = 0.3048;
 
@@ -149,11 +184,17 @@ class ScaleBarPainter extends CustomPainter {
   /// The meters per pixel of the map.
   final double metersPerPixel;
 
-  /// The [ThemeData] of the scalebar.
-  final ThemeData theme;
-
   /// Visible for testing only.
   final ScaleBarUnit units;
+
+  /// Visible for testing only.
+  final Color backgroundColor;
+
+  /// Visible for testing only.
+  final Color lineColor;
+
+  /// Visible for testing only.
+  final TextStyle textStyle;
 
   /// Visible for testing only.
   late final double meters;
@@ -162,10 +203,10 @@ class ScaleBarPainter extends CustomPainter {
   late final double width = meters / metersPerPixel;
 
   late final _linePaint = Paint()
-    ..color = Colors.black
+    ..color = lineColor
     ..strokeWidth = 1.5;
 
-  late final _backgroundPaint = Paint()..color = Colors.white60;
+  late final _backgroundPaint = Paint()..color = backgroundColor;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -214,7 +255,7 @@ class ScaleBarPainter extends CustomPainter {
 
     final textPainter = TextPainter(
       text: TextSpan(
-        style: theme.textTheme.bodySmall?.copyWith(color: Colors.black),
+        style: textStyle,
         text: '${(meters / unit.meters).round()} ${unit.abbreviation}',
       ),
       textAlign: TextAlign.left,
@@ -227,7 +268,10 @@ class ScaleBarPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant ScaleBarPainter oldDelegate) =>
       metersPerPixel != oldDelegate.metersPerPixel ||
-      units != oldDelegate.units;
+      units != oldDelegate.units ||
+      backgroundColor != oldDelegate.backgroundColor ||
+      lineColor != oldDelegate.lineColor ||
+      textStyle != oldDelegate.textStyle;
 }
 
 enum _Unit {

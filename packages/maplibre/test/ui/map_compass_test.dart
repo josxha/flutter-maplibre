@@ -1,8 +1,9 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:maplibre/maplibre.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../shared/mocks.dart';
@@ -69,6 +70,26 @@ void main() {
       expect(angleOf(tester), closeTo(15, 1e-6));
     });
 
+    testWidgets('can be activated with the keyboard', (tester) async {
+      var pressed = 0;
+      await pump(
+        tester,
+        _camera(bearing: 100, pitch: 30),
+        MapCompass(onPressed: () => pressed++),
+      );
+      Focus.of(
+        tester.element(
+          find.descendant(
+            of: find.byType(MapCompass),
+            matching: find.byType(GestureDetector),
+          ),
+        ),
+      ).requestFocus();
+      await tester.pump();
+      await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+      expect(pressed, 1);
+    });
+
     testWidgets('turns the map north when tapped', (tester) async {
       var pressed = 0;
       await pump(
@@ -76,7 +97,12 @@ void main() {
         _camera(bearing: 100, pitch: 30),
         MapCompass(onPressed: () => pressed++),
       );
-      await tester.tap(find.byType(InkWell));
+      await tester.tap(
+        find.descendant(
+          of: find.byType(MapCompass),
+          matching: find.byType(GestureDetector),
+        ),
+      );
       verify(
         () => controller.animateCamera(
           const CameraUpdate.position(bearing: 0),
@@ -97,7 +123,12 @@ void main() {
           removePinchOnPressed: true,
         ),
       );
-      await tester.tap(find.byType(InkWell));
+      await tester.tap(
+        find.descendant(
+          of: find.byType(MapCompass),
+          matching: find.byType(GestureDetector),
+        ),
+      );
       verify(
         () => controller.animateCamera(
           const CameraUpdate.position(pitch: 0),
@@ -113,7 +144,12 @@ void main() {
         _camera(bearing: 100),
         MapCompass(rotateNorthOnPressed: false, onPressed: () => pressed++),
       );
-      await tester.tap(find.byType(InkWell));
+      await tester.tap(
+        find.descendant(
+          of: find.byType(MapCompass),
+          matching: find.byType(GestureDetector),
+        ),
+      );
       verifyNever(
         () =>
             controller.animateCamera(any(), animation: any(named: 'animation')),
@@ -124,9 +160,21 @@ void main() {
     testWidgets('can hide while the map points north', (tester) async {
       const compass = MapCompass(hideIfRotatedNorth: true);
       await pump(tester, _camera(), compass);
-      expect(find.byType(InkWell), findsNothing);
+      expect(
+        find.descendant(
+          of: find.byType(MapCompass),
+          matching: find.byType(GestureDetector),
+        ),
+        findsNothing,
+      );
       await pump(tester, _camera(bearing: 1), compass);
-      expect(find.byType(InkWell), findsOneWidget);
+      expect(
+        find.descendant(
+          of: find.byType(MapCompass),
+          matching: find.byType(GestureDetector),
+        ),
+        findsOneWidget,
+      );
     });
 
     testWidgets('shows a custom child', (tester) async {
@@ -140,7 +188,13 @@ void main() {
 
     testWidgets('shows nothing outside of a map', (tester) async {
       await tester.pumpWidget(const MaterialApp(home: MapCompass()));
-      expect(find.byType(InkWell), findsNothing);
+      expect(
+        find.descendant(
+          of: find.byType(MapCompass),
+          matching: find.byType(GestureDetector),
+        ),
+        findsNothing,
+      );
     });
   });
 }

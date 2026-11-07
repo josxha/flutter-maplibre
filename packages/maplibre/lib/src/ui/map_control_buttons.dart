@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:maplibre/maplibre.dart';
+import 'package:maplibre/src/ui/map_button.dart';
 
 /// Display a zoom-in and zoom-out button to the [MapLibreMap] by using it in
 /// [MapLibreMap.children].
@@ -19,6 +20,8 @@ class MapControlButtons extends StatelessWidget {
     this.alignment = Alignment.bottomRight,
     this.tracking,
     this.onTrackingPressed,
+    this.backgroundColor = MapButton.defaultBackgroundColor,
+    this.iconColor = MapButton.defaultIconColor,
   });
 
   /// The padding.
@@ -35,6 +38,12 @@ class MapControlButtons extends StatelessWidget {
   /// the user location with a [UserLocationLayer]. The button shows only
   /// when this is set.
   final VoidCallback? onTrackingPressed;
+
+  /// The background color of the buttons. Defaults to white.
+  final Color backgroundColor;
+
+  /// The color of the icons. Defaults to dark grey.
+  final Color iconColor;
 
   static const _zoomAnimation = CameraAnimation.ease(
     duration: Duration(milliseconds: 200),
@@ -53,31 +62,39 @@ class MapControlButtons extends StatelessWidget {
           spacing: 8,
           mainAxisSize: MainAxisSize.min,
           children: [
-            FloatingActionButton(
-              heroTag: 'MapLibreZoomInButton',
+            MapButton(
+              backgroundColor: backgroundColor,
+              iconColor: iconColor,
+              icon: MapButtonIcon.zoomIn,
+              label: 'Zoom in',
               onPressed: () => controller.animateCamera(
                 CameraUpdate.position(zoom: controller.getCamera().zoom + 1),
                 animation: _zoomAnimation,
               ),
-              child: const Icon(Icons.add),
             ),
-            FloatingActionButton(
-              heroTag: 'MapLibreZoomOutButton',
+            MapButton(
+              backgroundColor: backgroundColor,
+              iconColor: iconColor,
+              icon: MapButtonIcon.zoomOut,
+              label: 'Zoom out',
               onPressed: () => controller.animateCamera(
                 CameraUpdate.position(zoom: controller.getCamera().zoom - 1),
                 animation: _zoomAnimation,
               ),
-              child: const Icon(Icons.remove),
             ),
             if (onTrackingPressed case final VoidCallback onPressed)
-              FloatingActionButton(
-                heroTag: 'MapLibreTrackLocationButton',
+              MapButton(
+                backgroundColor: backgroundColor,
+                iconColor: iconColor,
+                icon: switch (tracking) {
+                  UserLocationTracking.position => MapButtonIcon.location,
+                  UserLocationTracking.positionAndHeading =>
+                    MapButtonIcon.locationAndHeading,
+                  UserLocationTracking.none ||
+                  null => MapButtonIcon.locationOff,
+                },
+                label: 'Track location',
                 onPressed: onPressed,
-                child: Icon(switch (tracking) {
-                  UserLocationTracking.position => Icons.gps_fixed,
-                  UserLocationTracking.positionAndHeading => Icons.explore,
-                  UserLocationTracking.none || null => Icons.gps_not_fixed,
-                }),
               ),
           ],
         ),

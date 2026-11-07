@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:maplibre/maplibre.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../shared/mocks.dart';
@@ -65,7 +65,7 @@ void main() {
       expect(text('Plain Source'), findsOneWidget);
       await pump(tester, zoom: 6);
       expect(text('Plain Source'), findsNothing);
-      await tester.tap(find.byIcon(Icons.info));
+      await tester.tap(find.bySemanticsLabel('Attribution'));
       await tester.pump();
       expect(text('Plain Source'), findsOneWidget);
     });
@@ -79,10 +79,10 @@ void main() {
 
     testWidgets('the info button toggles the attributions', (tester) async {
       await pump(tester);
-      await tester.tap(find.byIcon(Icons.info));
+      await tester.tap(find.bySemanticsLabel('Attribution'));
       await tester.pump();
       expect(text('Plain Source'), findsNothing);
-      await tester.tap(find.byIcon(Icons.info));
+      await tester.tap(find.bySemanticsLabel('Attribution'));
       await tester.pump();
       expect(text('Plain Source'), findsOneWidget);
     });
