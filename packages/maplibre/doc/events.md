@@ -1,3 +1,3 @@
 Visit
-the [Events chapter in the documentation](https://flutter-maplibre.pages.dev/docs/events)
+the [Events chapter in the documentation](https://josxha.github.io/flutter-maplibre/docs/events)
 to learn more.

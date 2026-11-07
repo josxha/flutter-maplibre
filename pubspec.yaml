@@ -3,8 +3,8 @@ description: "Pub workspace package for Flutter MapLibre."
 version: 1.0.0
 repository: https://github.com/josxha/flutter-maplibre
 issue_tracker: https://github.com/josxha/flutter-maplibre/issues
-homepage: https://flutter-maplibre.pages.dev
-documentation: https://flutter-maplibre.pages.dev/docs/
+homepage: https://josxha.github.io/flutter-maplibre
+documentation: https://josxha.github.io/flutter-maplibre/docs/
 
 publish_to: none
 environment:

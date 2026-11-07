@@ -188,5 +188,5 @@ void doSomething() {
   gestures.
 - [Annotations](../annotations/index.md) add circles, markers, polygons and
   polylines to the map.
-- [Sources](../sources.md) and [Style Layers](../style-layers/index.md) show
+- [Sources](../sources/index.md) and [Style Layers](../style-layers/index.md) show
   your own data with the full MapLibre style spec.

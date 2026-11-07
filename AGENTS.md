@@ -49,6 +49,11 @@ Flutter MapLibre: a federated plugin in a Dart pub workspace.
   every platform. `integration_test/all_test.dart` runs them all in one
   launch; `integration_test/shared/test_map.dart` pumps a map and waits for
   its events, frames and features.
+- `.github/workflows/docs.yml`: builds the website (`website/`, `mkdocs.yml`)
+  on every pull request; on main it also builds the example app for web as
+  the demo and deploys both to GitHub Pages. Links from the website to the
+  demo are relative (`demo/`, `../../demo/`), because the site lives under a
+  subpath there.
 - `.github/scripts/watchdog.sh`: stops a CI test run once its output stalls
   and reports the last test, the app's stacks and its log as annotations;
   exits with 75 when flutter test never attached to the app, so CI retries.

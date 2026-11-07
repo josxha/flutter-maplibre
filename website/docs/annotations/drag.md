@@ -10,7 +10,7 @@ Every annotation layer can let the user drag its features. Set
 `draggable: true`, and a drag that starts on a feature of the layer moves
 that feature instead of the map.
 
-<a href="/demo/#/layers/drag">Try it in the demo.</a>
+<a href="../../../demo/#/layers/drag">Try it in the demo.</a>
 
 ## Basic Usage
 

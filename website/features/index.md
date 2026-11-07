@@ -6,8 +6,7 @@ hide: [ navigation ]
 # Supported Features
 
 This page gives an overview of the functionality that is available on each
-platform. Android, iOS, macOS, Windows and Linux share one implementation on
-the MapLibre Native C API.
+platform. Android, iOS, macOS, Windows and Linux share one implementation.
 
 ### General Functionality
 

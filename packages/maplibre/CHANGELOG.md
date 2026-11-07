@@ -1,271 +1,133 @@
-## Unreleased
+## 0.4.0-pre.2
+
+The second pre-release of 0.4 reworks the event, camera, query and gesture
+APIs, adds drag, click and hover events to layers, and fixes Linux. The
+[migration guide](https://josxha.github.io/flutter-maplibre/docs/migrate/upgrade-from-v0.3.x/)
+covers every change from 0.3.x and from 0.4.0-pre.1.
 
 ### Breaking Changes
 
-- `MapLibreMap.onEvent` is replaced by one callback per event, such as
-  `onClick`, `onCameraMove` and `onIdle`. `MapEventMapCreated` and
-  `MapEventStyleLoaded` are removed; use `onMapCreated` and `onStyleLoaded`.
-- The camera events are `MapEventCameraMoveStart`, `MapEventCameraMove` and
-  `MapEventCameraMoveEnd`, which replaces `MapEventCameraIdle`. All three carry
-  the reason, now `gesture`, `programmatic` or `map`.
-- `moveCamera`, `animateCamera` and `MapOptions.initCamera` take a sealed
-  `CameraUpdate` (`position`, `bounds`, `points`, `geometry`), which replaces
-  `InitialCamera` and `fitBounds`.
-- `animateCamera` takes a `CameraAnimation.ease` or `.fly` instead of the
-  `native*` and `web*` parameters, eases for 300 ms by default and returns a
-  `CameraAnimationResult`.
-- `MapCamera` is renamed to `CameraPosition`.
-- `featuresAtPoint` and `featuresInRect` are replaced by
-  `queryRenderedFeatures(QueryGeometry)`, and `RenderedFeature.geometry` is a
-  geobase `Geometry`.
+- Map events: one callback per event, such as `onClick`, `onCameraMove` and
+  `onIdle`, replaces `onEvent`.
+- Camera: `moveCamera`, `animateCamera` and `MapOptions.initCamera` take a
+  `CameraUpdate`, `animateCamera` takes a `CameraAnimation`, and `MapCamera`
+  is renamed to `CameraPosition`.
+- Feature queries: `queryRenderedFeatures` replaces `featuresAtPoint` and
+  `featuresInRect`, and returns geobase geometries.
+- Gestures: `MapOptions.movements` limits how the camera may move, and
+  `MapOptions.gestures` has one switch per gesture.
+- GeoJSON data is a `GeoJsonData` instead of a string, and `setProjection`
+  takes an expression.
 - `getVisibleRegion` is renamed to `getVisibleBounds`, and
   `MapCompass.animation` replaces its duration and speed.
-- GeoJSON data is a `GeoJsonData` of geobase objects, decoded JSON or text,
-  instead of a string.
-- `setProjection` takes an `Expression<MapProjection>`.
-- `MapMovements` (`MapOptions.movements`) takes the `pan`, `zoom`, `rotate`
-  and `pitch` switches of `MapGestures`, and `MapGestures` now has one switch
-  per gesture.
 
 ### Features
 
-- Single gestures can be turned off, such as `MapGestures(scrollWheel: false)`.
-- `MapLibreNetwork` adds HTTP headers to and rewrites the URLs of the
-  requests of every map and the `OfflineManager`.
-- `queryRenderedFeatures` takes a `filter` expression and can query the whole
-  map with `QueryGeometry.viewport()`.
-- `MapController.querySourceFeatures` returns the loaded features of a source,
-  also hidden ones.
-- Clustered GeoJSON sources with `GeoJsonCluster`, and `getClusterLeaves`,
-  `getClusterChildren` and `getClusterExpansionZoom`.
-- `GeoJsonSource.buffer`.
-- The vertical perspective projection and interpolated projections on web.
-- `StyleImageOptions` for SDF images and images that fit symbol text.
-- `MapController.cameraFor` and `stopCamera`, and `roll` and `padding` on
-  `CameraPosition`.
-- New map events: `onError`, `onStyleImageMissing`, `onLoadingStarted`,
-  `onLoadingFinished`, `onSourceChanged`, `onRenderFrame` and `onResize`;
-  `onTile`, `onRenderMap`, `onGlyphs` and `onSprite` on native;
-  `onContextLost`, `onContextRestored` and `onProjectionChanged` on web.
-- Taps are reported right away while neither `onDoubleClick` nor
-  `MapGestures.doubleTap` is on.
-- `MapEventDoubleClick.preventDefault()` keeps a double tap from zooming,
-  also from an async `onDoubleClick`.
-- `onDragStart`, `onDrag` and `onDragEnd` report drags on the map, and
-  `MapEventDragStart.preventDefault()` keeps a drag from panning
-  ([#544](https://github.com/josxha/flutter-maplibre/issues/544)).
-- `onClick`, `onEnter` and `onLeave` on annotation layers and style layers
-  report taps and the mouse on their features, and `onPointerMove` and
-  `onPointerLeave` report the mouse over the map
+- Drag events on the map, and annotation layers with `draggable: true`
+  ([#544](https://github.com/josxha/flutter-maplibre/issues/544),
+  [#151](https://github.com/josxha/flutter-maplibre/issues/151)).
+- Click and hover events on annotation layers and style layers
   ([#647](https://github.com/josxha/flutter-maplibre/issues/647)).
-- Annotation layers with `draggable: true` let the user drag their features,
-  and report the drop to `onDragEnd`
-  ([#151](https://github.com/josxha/flutter-maplibre/issues/151)).
-- `MapOptions.fastPforEnabled` decodes MapLibre Tile (MLT) vector tiles that
-  use FastPFOR (always enabled on web)
+- Clustered GeoJSON sources and cluster queries.
+- `MapLibreNetwork` sets HTTP headers and rewrites request URLs for every map
+  and the `OfflineManager`.
+- `querySourceFeatures`, and filter expressions for feature queries.
+- More map events, such as errors, missing images and loading state.
+- `cameraFor`, `stopCamera`, and camera `roll` and `padding`.
+- Pinch zoom and rotation fling after release, pans fling on every platform,
+  and a touch stops the camera
+  ([#601](https://github.com/josxha/flutter-maplibre/issues/601)).
+- MapLibre Tiles (MLT) encoded with FastPFOR, with `MapOptions.fastPforEnabled`
   ([#635](https://github.com/josxha/flutter-maplibre/issues/635)).
-- Pinch zoom and rotation fling after release, and pans fling on every
-  platform ([#601](https://github.com/josxha/flutter-maplibre/issues/601)).
-- Large GeoJSON updates no longer block the UI thread, as the map prepares
-  the data in the background (not on web)
+- SDF and stretchable style images with `StyleImageOptions`.
+- Web: the vertical perspective projection.
+- Large GeoJSON updates no longer block the UI thread (not on web)
   ([#607](https://github.com/josxha/flutter-maplibre/issues/607)).
 
 ### Bug Fixes
 
-- Offline regions with a `maxZoom` of `double.infinity` download every zoom
-  level of their sources, instead of no tiles on x86-64.
+- Maps no longer need a workaround to keep rendering in profile and release
+  builds ([#597](https://github.com/josxha/flutter-maplibre/issues/597)).
+- Offline regions with a `maxZoom` of `double.infinity` download tiles.
+- Linux: fix a crash before the first frame, and show maps without a CPU copy
+  where the GPU allows it
+  ([#632](https://github.com/josxha/flutter-maplibre/issues/632),
+  [#633](https://github.com/josxha/flutter-maplibre/issues/633)).
+- Android: the native library supports 16 KB memory pages.
 
-- Linux: fix a crash when Flutter paints a map before its first frame
-  ([#632](https://github.com/josxha/flutter-maplibre/issues/632)).
-- Linux: maps show their frames, without a CPU copy where OpenGL can import
-  Vulkan memory
-  ([#633](https://github.com/josxha/flutter-maplibre/issues/633)).
+Full Changelog: [v0.4.0-pre.1...v0.4.0-pre.2](https://github.com/josxha/flutter-maplibre/compare/v0.4.0-pre.1...v0.4.0-pre.2)
 
 ## 0.4.0-pre.1
 
-This pre-release replaces the MapLibre Android and iOS SDKs and the WebView
-desktop integration with one implementation on the
-[MapLibre Native C API](https://github.com/maplibre/maplibre-native-ffi). Read
-the [migration guide](https://flutter-maplibre.pages.dev/docs/migrate/upgrade-from-v0.3.x/)
+This pre-release renders maps on Android, iOS, macOS, Windows and Linux with
+one implementation on the
+[MapLibre Native C API](https://github.com/maplibre/maplibre-native-ffi), and
+on web with maplibre-gl-js v6. Read the
+[migration guide](https://josxha.github.io/flutter-maplibre/docs/migrate/upgrade-from-v0.3.x/)
 to upgrade from 0.3.x, and please report the bugs you find.
 
-Known issue: `maplibre_native_ffi` has a bug that stops maps after about 30
-frames in profile and release builds. `maplibre_native` works around it, but
-the workaround is only tested on Windows so far. If a map stops rendering in
-a profile or release build, please comment on
-[#597](https://github.com/josxha/flutter-maplibre/issues/597).
+Known issue: maps can stop after about 30 frames in profile and release
+builds. A workaround is in place, tested only on Windows so far
+([#597](https://github.com/josxha/flutter-maplibre/issues/597)).
 
 ### Breaking Changes
 
-- Style layers take typed properties and expressions instead of `paint` and
-  `layout` maps, for example `width: const .literal(3)` instead of
-  `paint: {'line-width': 3}`. Annotation layers take expressions too.
-- `style.layers` and `style.sources` replace the layer and source methods of
-  `StyleController`: `style.addLayer(layer)` is `style.layers.add(layer)`,
-  `style.updateGeoJsonSource(...)` is `style.sources.updateGeoJsonData(...)`.
-- Web: requires [maplibre-gl-js v6](https://github.com/maplibre/maplibre-gl-js/releases/tag/v6.0.0),
-  which now loads on its own. Remove the maplibre-gl-js and PMTiles `<script>`
-  and `<link>` tags from your `web/index.html`. With v6, WebGL2 is required,
-  nested objects in GeoJSON feature properties are returned as maps instead of
-  JSON strings, and `zoomLevelsToOverscale` defaults to 4, which can change
-  label rendering and `featuresAtPoint()` results. See the
-  [maplibre-gl-js migration guide](https://github.com/maplibre/maplibre-gl-js/blob/main/docs/guides/v5-to-v6-migration-guide.md).
-- Removed `maplibre_android`, `maplibre_ios` and `maplibre_webview`. `maplibre`
-  now uses `maplibre_web` in the browser and `maplibre_native`, built on the
-  MapLibre Native C API, on every other platform. `maplibre_native` renders on
-  Android, iOS, macOS, Windows and Linux.
+- Removed `maplibre_android`, `maplibre_ios` and `maplibre_webview`.
+  `maplibre` uses `maplibre_web` on web and `maplibre_native` on every other
+  platform.
 - Requires Android 7.0 (API level 24) with OpenGL ES 3.0, iOS 15 and macOS
-  14.3. On iOS and macOS the plugin supports only Swift Package Manager, not
-  CocoaPods.
-- Removed the `MapOptions` properties of the removed packages:
-  `androidMode`, `androidTextureMode`, `androidTranslucentTextureSurface`,
-  `androidForegroundLoadColor` and `webviewDebugMode`, and the
-  `AndroidPlatformViewMode` enum.
-- `MapController.featuresAtPoint` and `MapController.featuresInRect` return a
-  `Future`, because MapLibre Native answers feature queries asynchronously.
-- Removed `MapController.queryLayers` and `QueriedLayer`. Use
-  `featuresAtPoint` with `layerIds` to test layers, and the new
-  `RenderedFeature.sourceId`, `RenderedFeature.sourceLayer` and
-  `RenderedFeature.layerId` for the source and the style layer.
-- `RenderedFeature` equality and `hashCode` compare `id`, `sourceId`,
-  `sourceLayer` and `layerId`.
-- Web: map gestures are recognized in Flutter, as on every other platform,
-  instead of by MapLibre GL JS. Its keyboard navigation and shift-drag box
-  zoom are gone.
-- Removed the `pointer_interceptor` dependency. Widgets over the map no longer
-  need a `PointerInterceptor` on web; `WidgetLayer.allowInteraction` works the
-  same on every platform.
-- `OfflineManager.downloadRegion` takes an `OfflineRegionDefinition`, either
-  an `OfflineTilePyramidRegionDefinition` of bounds or the new
-  `OfflineGeometryRegionDefinition` of a geometry, instead of `mapStyleUrl`,
-  `bounds`, `minZoom`, `maxZoom`, `pixelDensity` and `includeIdeographs`.
-  `OfflineRegion` holds that `definition` instead of its own `bounds`,
-  `minZoom`, `maxZoom`, `pixelRatio` and `styleUrl`.
-- `DownloadProgress` holds an `OfflineRegionStatus` as `status` instead of
-  `loadedBytes`, `loadedTiles`, `totalTiles` and `totalTilesEstimated`, and its
-  `progress` counts every resource, not only tiles.
-- `OfflineDownloadException` is sealed: download streams report an
-  `OfflineResourceException` with its `reason`, or an
-  `OfflineTileCountLimitException`, both with the `regionId`.
-- `OfflineManager.getOfflineRegion` returns null for an unknown region.
-  `setOfflineTileCountLimit` and `runPackDatabaseAutomatically` were removed,
-  as MapLibre Native offers neither.
-- Removed `PermissionManager`, `MapController.enableLocation`,
-  `MapController.trackLocation`, `MapController.userLocationIsSupported`,
-  `BearingRenderMode` and `BearingTrackMode`. Show the user location with a
-  `UserLocationLayer`, and ask for permissions with `geolocator` or
-  `permission_handler`. `MapControlButtons` takes `tracking` and
-  `onTrackingPressed` instead of `showTrackLocation`.
-- `StyleController.addImage`, `addImages` and `addImageFromAssets` take a
-  `pixelRatio` of image pixels per logical pixel, 1 by default, instead of
-  using the device pixel ratio. An image of N pixels shows N logical pixels
-  wide at an icon size of 1 on every platform and screen, so images grow by
-  the device pixel ratio on high-DPI screens; pass the ratio the image was
-  made for to keep their size.
-- `addImageFromCanvas` and `addImageFromIconData` take their sizes in
-  logical pixels and render at the device pixel ratio. `addImageFromCanvas`
-  requires `width` and `height` as doubles, the `painter` draws in logical
-  pixels, and `addImageFromIconData` makes a 48 pixel icon by default.
-- Android, iOS and desktop: MapLibre Native has no globe projection, so
-  `setProjection(MapProjection.globe)` keeps Mercator, and adding a
-  `VideoSource` throws an `UnsupportedError`.
-- Android: plain `http://` URLs need a `network-security-config` that permits
-  cleartext traffic for their hosts.
-- Web: `OfflineManager.createInstance` throws an `UnsupportedError` instead of
-  an `Exception`.
-- Removed the deprecated `MapOptions.pitch` (use `initCamera`),
-  `circumferenceOfEarth` (use `earthCircumferenceWgs84`) and
-  `VectorSource.sourceLayer`, which had no effect.
-- `VideoSource.coordinates` is a `LngLatQuad`, like `ImageSource.coordinates`,
-  instead of a list of four `Geographic`s.
-- Sources are sealed classes with named constructors instead of a default
-  constructor, so their input is no longer guessed or left optional:
-  - `ImageSource.url` replaces `ImageSource(url:)`.
-  - `GeoJsonSource.url` and `GeoJsonSource.data` replace
-    `GeoJsonSource(data:)`, which took either a URL or a GeoJSON string.
-  - `RasterSource`, `RasterDemSource` and `VectorSource` have `.url` for a
-    TileJSON URL and `.tiles` for tile URLs, instead of optional `url` and
-    `tiles`.
-  - `VideoSource.urls` replaces `VideoSource(urls:)`.
-- `MapOptions.initStyle` (a `String`) is replaced by `MapOptions.style`, a
-  `MapStyle`: `MapStyle.url`, `MapStyle.json`, `MapStyle.asset` or
-  `MapStyle.file` (not on web), so the style is no longer guessed from the
-  string. The map loads a new style when `style` changes, and
-  `MapController.setStyle` was removed.
-- `MapOptions.initCenter`, `initZoom`, `initBearing` and `initPitch` are
-  replaced by `MapOptions.initCamera`, an `InitialCamera.position` or
-  `InitialCamera.bounds`. Without `initCamera` the map starts at the camera
-  stored in its style instead of at zoom 0.
-- `LngLatBounds` is replaced by geobase's `GeoBox` (`west`, `south`, `east`,
-  `north`; `GeoBox.from` replaces `LngLatBounds.fromPoints`) in
-  `MapController.fitBounds`, `MapController.getVisibleRegion`,
-  `MapOptions.maxBounds` and the offline region definitions.
-- `maplibre` exports only the geobase types of its API (`Geographic`,
-  `Position`, `PositionSeries`, `GeoBox`, the geometries, `Feature`,
-  `FeatureCollection` and `earthCircumferenceWgs84`) instead of all of
-  geobase. Import `package:geobase/geobase.dart` for the others.
-- `StyleController.getAttributions()` and `getAttributionsSync()` are
-  replaced by the synchronous getter `StyleController.attributions`.
+  14.3. iOS and macOS support only Swift Package Manager.
+- Web: requires maplibre-gl-js v6, which loads on its own. Remove its
+  `<script>` and `<link>` tags from `web/index.html`.
+- Web: gestures are recognized in Flutter, as on every other platform.
+  Keyboard navigation and box zoom are gone.
+- Style layers take typed properties and expressions instead of `paint` and
+  `layout` maps. `style.layers` and `style.sources` replace the layer and
+  source methods of `StyleController`.
+- Sources have named constructors, such as `GeoJsonSource.url` and
+  `GeoJsonSource.data`.
+- `MapOptions.style` takes a `MapStyle` and `MapOptions.initCamera` replaces
+  the `init*` camera options. `MapController.setStyle` is removed.
+- geobase's `GeoBox` replaces `LngLatBounds`, and `maplibre` exports only the
+  geobase types of its API.
+- Feature queries return a `Future`, and `queryLayers` is removed.
+- Offline regions take an `OfflineRegionDefinition`, and download progress
+  and errors have new types.
+- `UserLocationLayer` replaces the location methods of `MapController`, and
+  `PermissionManager` is removed.
+- Style images take a `pixelRatio` of 1 by default instead of the device pixel
+  ratio.
+- `StyleController.attributions` replaces `getAttributions()`.
+- Removed the deprecated APIs and the `MapOptions` of the removed packages.
+- Not on web: no globe projection and no `VideoSource`.
 
 ### Features
 
-- `InitialCamera.bounds` starts a map fitted to bounds, with padding,
-  bearing and pitch, from its first frame.
-
-- `MapLibreMap.paused` stops a map from rendering while it stays mounted, and
-  maps hidden by an `IndexedStack`, a `Visibility` or a disabled `TickerMode`
-  pause on their own. `MapController.isRenderingPaused` and
-  `MapEventRenderingChanged` report the state.
-- `UserLocationLayer` shows a stream of `UserLocation`s on every platform
-  and can track them; the new `maplibre_geolocator` package adapts
-  `geolocator` positions.
-- Gestures are the same on every platform: drag, pinch and twist, scroll
-  wheel, double tap, double tap and drag, two-finger tilt, and right-button or
-  Ctrl + left-button rotate and tilt.
-- `OfflineGeometryRegionDefinition` downloads only the tiles that a geometry
-  such as a route touches. New `OfflineManager.getRegionStatus`,
-  `updateRegionMetadata`, `invalidateRegion` and `resumeDownload`.
-- Maps cache resources in `maplibre_native.db` in the app support directory,
-  which also holds the offline regions.
-- Typed style expressions, typed style layers and `ColorReliefStyleLayer`.
-- `style.layers` and `style.sources` list, add, update, move and remove the
-  layers and sources of the style. Setting a property of a layer updates the
-  map, also every frame for animations.
-- Changing a layer in `MapLibreMap.layers` no longer moves it above all other
-  layers.
-- `ImageSource.bytes` and `ImageSource.provider` show images from encoded
-  bytes or any Flutter `ImageProvider`, such as an `AssetImage` or a
-  `FileImage`, not only from a URL.
-- Web: `VideoSource.bytes` and `VideoSource.asset` show videos from encoded
-  bytes or a Flutter asset.
-- `StyleController.addImageFromUiImage` adds a `dart:ui` `Image` to the
-  map from its pixels, without encoding it.
-- Windows, macOS and Linux are supported out of the box, rendered by MapLibre
-  Native instead of the opt-in `maplibre_webview`.
-- Web: maplibre-gl-js and PMTiles load on their own. The latest
-  maplibre-gl-js v6 is loaded by default, never a new major version.
-  `window.flutterMapLibre` sets another version range or your own URL. See the
-  [setup instructions](https://flutter-maplibre.pages.dev/docs/getting-started/platforms#web).
+- Windows, macOS and Linux work out of the box.
+- Every map renders into a Flutter `Texture`, without platform views.
+- The same gestures on every platform.
+- `UserLocationLayer` shows and follows the user location on every platform;
+  the new `maplibre_geolocator` package connects it to `geolocator`.
+- Typed style expressions and style layers, including `ColorReliefStyleLayer`.
+  Layers can be read, updated, moved and removed at runtime.
+- `MapLibreMap.paused` stops rendering, and hidden maps pause on their own.
+- Offline regions of a geometry, such as a route, and more offline region
+  methods.
+- Image sources from bytes or any `ImageProvider`, and video sources from
+  bytes or assets on web.
+- `addImageFromUiImage` adds a `dart:ui` `Image` to the style.
+- `InitialCamera.bounds` starts a map fitted to bounds.
 
 ### Bug Fixes
 
-- `SourceAttribution` updates when sources are added or removed, or a
-  source loads its attribution, not only when the camera moves.
-- Web: `StyleController.attributions` includes the attribution of a source's TileJSON.
-- Layers show features added to their list in place.
-- `MarkerLayer` applies `textOpacity` (it used `iconOpacity`) and
-  `iconTranslate`, and `PolylineLayer` applies `blur`.
-- Web: widgets over the map no longer let taps and drags through to the map.
-- Web: widgets over the map keep up with map gestures in wasm builds on
-  cross-origin isolated pages.
-- Web: images added with `addImage`, `addImageFromIconData` and
-  `addImageFromWidget` keep their size with the skwasm renderer (`--wasm`).
-- Web: wheel, pinch and double-tap zoom on the globe zoom toward the pointer.
-- Web: `animateCamera` no longer hangs when the animation ends at once, and
-  removing a source that does not exist is not an error.
-- Android: the JNI library links its LOAD segments and the padding of its
-  read only relocations at 16 KB, the memory page size that Android 15
-  devices run on. It was linked at 4 KB.
+- `SourceAttribution` updates when sources change.
+- Changing a layer in `MapLibreMap.layers` no longer moves it to the top.
+- `MarkerLayer` applies `textOpacity` and `iconTranslate`, and
+  `PolylineLayer` applies `blur`.
+- Web: widgets over the map no longer pass taps through to the map.
+- Web: style images keep their size with `--wasm`.
+- Web: zoom on the globe zooms toward the pointer, and `animateCamera` no
+  longer hangs when the animation ends at once.
 
 Full Changelog: [v0.3.7+1...v0.4.0-pre.1](https://github.com/josxha/flutter-maplibre/compare/v0.3.7+1...v0.4.0-pre.1)
 
@@ -491,12 +353,12 @@ Full Changelog: [v0.3.0...v0.3.1](https://github.com/josxha/flutter-maplibre/com
 ## 0.3.0
 
 In this release, I'm blazed to finally announce support for iOS. Similar to our other platforms, iOS uses FFI to natively interop between Dart and Swift/ObjC. Checkout
-the [iOS documentation](https://flutter-maplibre.pages.dev/docs/getting-started/setup)
+the [iOS documentation](https://josxha.github.io/flutter-maplibre/docs/getting-started/setup)
 to get started.
 A big thanks to @mhernz, @gabbopalma and @jt274 that helped with their awesome
 contributions in this release!
 
-This release introduces breaking changes. Head over to the [migration guide](https://flutter-maplibre.pages.dev/docs/migrate/upgrade-from-v0.2.x/) to learn more on how to update your implementation.
+This release introduces breaking changes. Head over to the [migration guide](https://josxha.github.io/flutter-maplibre/docs/migrate/upgrade-from-v0.2.x/) to learn more on how to update your implementation.
 
 ### New Features
 
@@ -575,7 +437,7 @@ Full Changelog: [v0.2.0...v0.2.1](https://github.com/josxha/flutter-maplibre/com
 ## 0.2.0
 
 This release is a collection of user affecting changes along a couple of new features and bug fixes.
-Head over to the [migration guide](https://flutter-maplibre.pages.dev/docs/migrate/upgrade-from-v0.2.x/) to learn more on how to update your implementation.
+Head over to the [migration guide](https://josxha.github.io/flutter-maplibre/docs/migrate/upgrade-from-v0.2.x/) to learn more on how to update your implementation.
 
 A big thanks to @gabbopalma for his contributions in this release.
 
@@ -671,7 +533,7 @@ Full Changelog: [v0.1.0...v0.1.1](https://github.com/josxha/flutter-maplibre/com
 - Bump minimum Flutter version to [3.24.0](https://medium.com/flutter/whats-new-in-flutter-3-24-6c040f87d1e4) (Minimum Dart version of [3.5.0](https://medium.com/dartlang/dart-3-5-6ca36259fa2f)).
 - Can't await the end of `animateCamera()` in this version.
 
-Read the [Upgrade Guide](https://flutter-maplibre.pages.dev/docs/migrate/upgrade-from-v0.2.x/) for
+Read the [Upgrade Guide](https://josxha.github.io/flutter-maplibre/docs/migrate/upgrade-from-v0.2.x/) for
 instructions on how to upgrade.
 
 ### New Features

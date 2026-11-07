@@ -1,4 +1,4 @@
-# MapLibre for Flutter
+# MapLibre Flutter
 
 [![Pub Version](https://img.shields.io/pub/v/maplibre)](https://pub.dev/packages/maplibre)
 [![stars](https://img.shields.io/github/stars/josxha/flutter-maplibre?style=flat&logo=github)](https://github.com/josxha/flutter-maplibre)
@@ -9,64 +9,102 @@
 [![codecov](https://codecov.io/gh/josxha/flutter-maplibre/graph/badge.svg?token=3LK7EQMSUM)](https://codecov.io/gh/josxha/flutter-maplibre)
 [![style: very good analysis](https://img.shields.io/badge/style-very_good_analysis-B22C89.svg)](https://pub.dev/packages/very_good_analysis)
 
-This package is a modern rewrite
-of [maplibre_gl](https://pub.dev/packages/maplibre_gl). It provides Flutter
-bindings for [MapLibre](https://maplibre.org) through native interoperability (FFI/JNI) to deliver a consistent 
-cross-platform experience with excellent performance.
+Interactive vector maps for Flutter on Android, iOS, macOS, Windows, Linux and
+web, built on [MapLibre](https://maplibre.org). Show any MapLibre or Mapbox
+compatible style, from any tile provider or your own server. `maplibre` needs
+no API key of its own; keys and fees depend only on the tile provider you
+choose.
 
-- For web, it uses [maplibre-gl-js](https://github.com/maplibre/maplibre-gl-js),
-  a fork of [mapbox-gl-js](https://github.com/mapbox/mapbox-gl-js).
-- Every other platform uses
-  [maplibre-native](https://github.com/maplibre/maplibre-native) through its
-  [C API](https://github.com/maplibre/maplibre-native-ffi) and
-  the [maplibre_native_ffi](https://pub.dev/packages/maplibre_native_ffi)
-  binding, rendering into a Flutter `Texture`. No platform views are used.
+<p align="center">
+  <a href="https://josxha.github.io/flutter-maplibre/demo">
+    <img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/07cb9504aa76482b3707d0e18f4d86d37f7e2ad6/website/assets/images/showcase-map.jpg" alt="A styled map" width="49%" />
+  </a>
+  <a href="https://josxha.github.io/flutter-maplibre/demo">
+    <img src="https://raw.githubusercontent.com/josxha/flutter-maplibre/07cb9504aa76482b3707d0e18f4d86d37f7e2ad6/website/assets/images/showcase-tilt.jpg" alt="A tilted and rotated map" width="49%" />
+  </a>
+</p>
 
-| Platform | Implementation    | Rendering backend                      |
+<p align="center">
+  <a href="https://josxha.github.io/flutter-maplibre/docs/getting-started/setup/"><b>Get started</b></a> ·
+  <a href="https://josxha.github.io/flutter-maplibre/demo"><b>Live demo</b></a> ·
+  <a href="https://josxha.github.io/flutter-maplibre/docs/"><b>Documentation</b></a> ·
+  <a href="https://pub.dev/documentation/maplibre/latest/maplibre/"><b>API reference</b></a>
+</p>
+
+## Features
+
+- **Six platforms, one API**: Android, iOS, macOS, Windows, Linux and web,
+  with the same gestures and behavior everywhere.
+- **Flutter first**: maps render into a Flutter `Texture` (an HTML element on
+  web), so widgets over and around the map compose like any other widget. Annotations are declarative
+  layers that you update with `setState()`.
+- **Fast interop**: calls MapLibre through FFI (and maplibre-gl-js through JS
+  interop on web) instead of platform channels, and many values, such as the
+  camera and the style layers, can be read synchronously.
+- **The full style spec**: typed style layers, sources and expressions, vector
+  and raster tiles, PMTiles, MBTiles, MapLibre Tiles (MLT), hillshading,
+  heatmaps and 3D extrusions.
+- **Offline maps**: download regions or the tiles along a route.
+- **Batteries included**: user location, compass, scale bar, attribution, zoom
+  buttons, clustering, feature queries and events for taps, drags and hover.
+
+## Quick start
+
+```dart
+import 'package:maplibre/maplibre.dart';
+
+MapLibreMap(
+  options: MapOptions(
+    style: MapStyle.url('https://demotiles.maplibre.org/style.json'),
+    initCamera: .position(center: Geographic(lon: 9.17, lat: 47.68), zoom: 7),
+  ),
+  layers: [
+    CircleLayer(
+      points: [Feature(geometry: Point(Geographic(lon: 9.17, lat: 47.68)))],
+      color: const .literal(Colors.blue),
+      radius: const .literal(12),
+    ),
+  ],
+)
+```
+
+See [Installation](https://josxha.github.io/flutter-maplibre/docs/getting-started/setup/)
+and [Platform setup](https://josxha.github.io/flutter-maplibre/docs/getting-started/platforms/)
+for the steps each platform needs.
+
+## Platforms
+
+| Platform | Package           | Rendering                              |
 |----------|-------------------|----------------------------------------|
-| Web      | `maplibre_web`    | WebGL (MapLibre GL JS)                 |
 | Android  | `maplibre_native` | OpenGL ES 3.0 (default) or Vulkan      |
 | iOS      | `maplibre_native` | Metal                                  |
 | macOS    | `maplibre_native` | Metal                                  |
 | Windows  | `maplibre_native` | Vulkan, shared with Flutter via D3D11  |
 | Linux    | `maplibre_native` | Vulkan, shared with Flutter via OpenGL |
+| Web      | `maplibre_web`    | WebGL 2 (maplibre-gl-js)               |
 
-MapLibre is a permissive, open-source implementation of the Mapbox Vector Tile
-(MVT) standard. By leveraging native SDKs, this package enables high-performance
-rendering while supporting advanced mapping features.
+`maplibre_native` uses the
+[C API of MapLibre Native](https://github.com/maplibre/maplibre-native-ffi)
+through the [maplibre_native_ffi](https://pub.dev/packages/maplibre_native_ffi)
+binding. `maplibre_web` uses
+[maplibre-gl-js](https://github.com/maplibre/maplibre-gl-js). You only add
+`maplibre` to your app.
 
-## Resources
+## maplibre or maplibre_gl?
 
-### 📱 Demo Application
+There are two Flutter packages for MapLibre. They take different approaches:
 
-Many features of the package are showcased in the example app.
+|                 | `maplibre` (this package)                                   | `maplibre_gl`                                                   |
+|-----------------|-------------------------------------------------------------|-----------------------------------------------------------------|
+| Principle       | What can be done in Dart is done in Dart                    | What the MapLibre SDKs can do is done by the SDKs               |
+| Platforms       | Android, iOS, macOS, Windows, Linux, web                    | Android, iOS, web                                               |
+| Interop         | FFI, JS interop on web                                      | Platform channels, JS interop on web                            |
+| Map in Flutter  | `Texture`, HTML element on web                              | Platform view, HTML element on web                              |
+| API             | Declarative annotations and an imperative controller, synchronous where possible | Imperative controller, asynchronous                             |
 
-<table>
-<tr>
-<td>
-💻 <a href="https://flutter-maplibre.pages.dev/demo">Hosted Example App</a>
-</td>
-<td>
-🗒️ <a href="https://github.com/josxha/flutter-maplibre/tree/main/examples/lib">Code of the Example App</a>
-</td>
-</tr>
-</table>
-
-### 🤓 Get Started & Documentation
-
-<table>
-<tr>
-<td>
-Visit the docs to learn how to get started with maplibre in your
-project: <a href="https://flutter-maplibre.pages.dev/docs/getting-started/setup/">Get Started</a>.
-</td>
-<td>
-If you want to know more about the classes and properties of the package, have
-a look at
-the <a href="https://pub.dev/documentation/maplibre/latest/maplibre/maplibre-library.html">API Docs</a>.
-</td>
-</tr>
-</table>
+The
+[comparison](https://josxha.github.io/flutter-maplibre/compare/) covers other map
+packages as well.
 
 ## ❤️ Development & Contributing
 

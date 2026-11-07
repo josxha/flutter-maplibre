@@ -13,7 +13,7 @@ Every annotation layer reports taps and the mouse on its features:
   the layer onto another.
 - `onLeave`: the mouse or stylus left the feature that `onEnter` reported.
 
-<a href="/demo/#/layers/hover">Try it in the demo.</a>
+<a href="../../../demo/#/layers/hover">Try it in the demo.</a>
 
 ## Hover effect
 

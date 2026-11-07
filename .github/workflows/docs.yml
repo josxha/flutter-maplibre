@@ -1,4 +1,4 @@
-name: Validate docs
+name: Docs
 
 on:
   push:
@@ -6,10 +6,8 @@ on:
   pull_request:
   workflow_dispatch:
 
-#permissions:
-#  contents: read
-#  pages: write
-#  id-token: write
+permissions:
+  contents: read
 
 # Ensure that new pushes/updates cancel running jobs
 concurrency:
@@ -17,21 +15,49 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  deploy:
-#    environment:
-#      name: github-pages
-#      url: ${{ steps.deployment.outputs.page_url }}
+  build:
+    name: Build website and demo
     runs-on: ubuntu-latest
+    env:
+      # Pull requests only validate the website; main also builds the demo
+      # and deploys both to GitHub Pages.
+      DEPLOY: ${{ github.ref == 'refs/heads/main' && github.event_name != 'pull_request' }}
     steps:
-#      - uses: actions/configure-pages@v5
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v7
         with:
           python-version: 3.x
       - run: pip install zensical
       - run: zensical build --clean
+      - uses: actions/configure-pages@v5
+        if: env.DEPLOY == 'true'
+        id: pages
+      - uses: subosito/flutter-action@v2
+        if: env.DEPLOY == 'true'
+        with: { cache: true }
+      - name: Build demo
+        if: env.DEPLOY == 'true'
+        working-directory: examples
+        run: |
+          dart pub get
+          flutter build web --wasm \
+            --base-href "${{ steps.pages.outputs.base_path }}/demo/" \
+            -o ../site/demo
       - uses: actions/upload-pages-artifact@v5
+        if: env.DEPLOY == 'true'
         with:
           path: site
-#      - uses: actions/deploy-pages@v4
-#        id: deployment
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v4
+        id: deployment
