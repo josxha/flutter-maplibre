@@ -166,7 +166,7 @@ abstract class MapLibreMapState extends State<MapLibreMap>
       'while finding the feature to drag',
     );
     if (hits == null || generation != _dragGeneration) return;
-    final hit = _topmost(hits, event.screenPoint);
+    final hit = _topmost(hits.layers, event.screenPoint);
     if (hit == null) return;
     event.preventDefault();
     _layerDrag = _LayerDrag(
@@ -179,42 +179,64 @@ abstract class MapLibreMapState extends State<MapLibreMap>
     _emitLayerDrag(event.screenPoint, (layer) => layer.onDragStart);
   }
 
-  /// The features of the layers of [MapLibreMap.layers] that [include]
-  /// picks in [geometry], or null if the query failed or the map is gone.
-  Future<List<_LayerHit>?> _queryLayers(
+  /// The features in [geometry] of the layers of [MapLibreMap.layers] that
+  /// [include] picks and of the style layers that [includeStyle] picks, or
+  /// null if the query failed or the map is gone.
+  Future<_Hits?> _queryLayers(
     QueryGeometry geometry,
     bool Function(Layer layer) include,
-    String context,
-  ) async {
+    String context, {
+    bool Function(StyleLayer layer)? includeStyle,
+  }) async {
     final layerIndexes = <String, int>{
       for (final (index, layer) in widget.layers.indexed)
         if (include(layer)) layer.getLayerId(index): index,
     };
-    if (layerIndexes.isEmpty) return const [];
+    final styleLayerIds = {
+      if (includeStyle != null)
+        for (final layer in style?.layers ?? const <StyleLayer>[])
+          if (includeStyle(layer) && !layerIndexes.containsKey(layer.id))
+            layer.id,
+    };
+    if (layerIndexes.isEmpty && styleLayerIds.isEmpty) return const _Hits();
     final List<RenderedFeature> features;
     try {
       features = await queryRenderedFeatures(
         geometry,
-        layerIds: layerIndexes.keys.toList(),
+        layerIds: [...layerIndexes.keys, ...styleLayerIds],
       );
     } on Object catch (error, stack) {
       _reportError(error, stack, context);
       return null;
     }
     if (!mounted) return null;
-    return [
-      for (final feature in features)
-        if ((
-              layerIndexes[feature.layerId],
-              feature.properties[LayerManager.featureIndexProperty],
-            )
-            case (final int layerIndex, final num featureIndex))
-          if (widget.layers.elementAtOrNull(layerIndex) case final layer?
-              when include(layer) && featureIndex < layer.list.length)
-            if (layer.list[featureIndex.toInt()].geometry case final geometry?)
-              _LayerHit(layerIndex, featureIndex.toInt(), geometry),
-    ];
+    return _Hits(
+      layers: _layerHits(features, layerIndexes, include),
+      styleLayers: [
+        for (final feature in features)
+          if (styleLayerIds.contains(feature.layerId)) feature,
+      ],
+    );
   }
+
+  /// The features of [features] of the layers of [MapLibreMap.layers] by
+  /// their [layerIndexes].
+  List<_LayerHit> _layerHits(
+    List<RenderedFeature> features,
+    Map<String, int> layerIndexes,
+    bool Function(Layer layer) include,
+  ) => [
+    for (final feature in features)
+      if ((
+            layerIndexes[feature.layerId],
+            feature.properties[LayerManager.featureIndexProperty],
+          )
+          case (final int layerIndex, final num featureIndex))
+        if (widget.layers.elementAtOrNull(layerIndex) case final layer?
+            when include(layer) && featureIndex < layer.list.length)
+          if (layer.list[featureIndex.toInt()].geometry case final geometry?)
+            _LayerHit(layerIndex, featureIndex.toInt(), geometry),
+  ];
 
   /// Of [hits], the one of the topmost layer, and of its points the nearest
   /// to [center].
@@ -242,13 +264,22 @@ abstract class MapLibreMapState extends State<MapLibreMap>
   bool get _layersClickable =>
       widget.layers.any((layer) => layer.onClick != null);
 
+  /// Whether a layer of [StyleController.layers] reports taps on its
+  /// features.
+  bool get _styleLayersClickable => style?.layers.any(_styleClickable) ?? false;
+
+  static bool _styleClickable(StyleLayer layer) => layer.onClick != null;
+
   void _onClick(MapEventClick event) {
     widget.onClick?.call(event);
-    if (_layersClickable) unawaited(_clickFeature(event));
+    if (_layersClickable || _styleLayersClickable) {
+      unawaited(_clickFeature(event));
+    }
   }
 
   /// Reports a tap to [Layer.onClick] of the topmost feature under it, or,
-  /// if none is right under it, next to it.
+  /// if none is right under it, next to it, and to [StyleLayer.onClick] of
+  /// every style layer with a feature there.
   Future<void> _clickFeature(MapEventClick event) async {
     bool clickable(Layer layer) => layer.onClick != null;
     const context = 'while finding the clicked feature';
@@ -256,6 +287,7 @@ abstract class MapLibreMapState extends State<MapLibreMap>
       .point(event.screenPoint),
       clickable,
       context,
+      includeStyle: _styleClickable,
     );
     if (hits != null && hits.isEmpty) {
       hits = await _queryLayers(
@@ -268,16 +300,62 @@ abstract class MapLibreMapState extends State<MapLibreMap>
         ),
         clickable,
         context,
+        includeStyle: _styleClickable,
       );
     }
     if (hits == null) return;
-    final hit = _topmost(hits, event.screenPoint);
-    if (hit == null) return;
-    _emitLayerEvent(
-      hit,
-      event,
-      widget.layers.elementAtOrNull(hit.layerIndex)?.onClick,
-    );
+    if (_topmost(hits.layers, event.screenPoint) case final hit?) {
+      _emitLayerEvent(
+        hit,
+        event,
+        widget.layers.elementAtOrNull(hit.layerIndex)?.onClick,
+      );
+    }
+    for (final (layer, feature) in _topmostPerStyleLayer(
+      hits.styleLayers,
+      _styleClickable,
+    )) {
+      _emitStyleLayerEvent(layer, layer.onClick, feature, event);
+    }
+  }
+
+  /// The topmost feature of [features] of each style layer that [include]
+  /// picks.
+  List<(StyleLayer, RenderedFeature)> _topmostPerStyleLayer(
+    List<RenderedFeature> features,
+    bool Function(StyleLayer layer) include,
+  ) {
+    final topmost = <String, (StyleLayer, RenderedFeature)>{};
+    for (final feature in features) {
+      final layerId = feature.layerId;
+      if (layerId == null || topmost.containsKey(layerId)) continue;
+      if (style?.layers[layerId] case final layer? when include(layer)) {
+        // Rendered features come topmost first.
+        topmost[layerId] = (layer, feature);
+      }
+    }
+    return topmost.values.toList();
+  }
+
+  void _emitStyleLayerEvent(
+    StyleLayer layer,
+    StyleLayerFeatureCallback? callback,
+    RenderedFeature feature,
+    MapEventUserInput input,
+  ) {
+    // Removing the layer or loading another style ends its calls.
+    if (callback == null || !identical(style?.layers[layer.id], layer)) return;
+    try {
+      callback(
+        StyleLayerFeatureEvent(
+          feature: feature,
+          point: input.point,
+          screenPoint: input.screenPoint,
+        ),
+      );
+    } on Object catch (error, stack) {
+      _reportError(error, stack, 'while handling a style layer event');
+    }
   }
 
   void _emitLayerEvent(
@@ -307,8 +385,18 @@ abstract class MapLibreMapState extends State<MapLibreMap>
   static bool _hoverable(Layer layer) =>
       layer.onEnter != null || layer.onLeave != null;
 
+  /// Whether a layer of [StyleController.layers] reports the mouse over its
+  /// features.
+  bool get _styleLayersHoverable => style?.layers.any(_styleHoverable) ?? false;
+
+  static bool _styleHoverable(StyleLayer layer) =>
+      layer.onEnter != null || layer.onLeave != null;
+
   /// The feature under the mouse, by layer index.
   final _hovered = <int, _LayerHit>{};
+
+  /// The feature under the mouse, by style layer id.
+  final _hoveredStyle = <String, (StyleLayer, RenderedFeature)>{};
 
   /// The last mouse position over the map.
   MapEventPointerMove? _hoverInput;
@@ -322,7 +410,12 @@ abstract class MapLibreMapState extends State<MapLibreMap>
 
   void _onPointerMove(MapEventPointerMove event) {
     widget.onPointerMove?.call(event);
-    if (!_layersHoverable && _hovered.isEmpty) return;
+    if (!_layersHoverable &&
+        !_styleLayersHoverable &&
+        _hovered.isEmpty &&
+        _hoveredStyle.isEmpty) {
+      return;
+    }
     _hoverInput = event;
     unawaited(_hover());
   }
@@ -332,7 +425,7 @@ abstract class MapLibreMapState extends State<MapLibreMap>
     _hoverGeneration++;
     final input = _hoverInput;
     _hoverInput = null;
-    if (input != null) _updateHovered(const [], input);
+    if (input != null) _updateHovered(const _Hits(), input);
   }
 
   /// Queries the features under the mouse, coalescing moves while a query
@@ -349,6 +442,7 @@ abstract class MapLibreMapState extends State<MapLibreMap>
           .point(input.screenPoint),
           _hoverable,
           'while finding the hovered feature',
+          includeStyle: _styleHoverable,
         );
         if (hits == null || generation != _hoverGeneration) continue;
         _updateHovered(hits, input);
@@ -360,9 +454,10 @@ abstract class MapLibreMapState extends State<MapLibreMap>
 
   /// Reports the features of [hits] that the mouse entered and the ones it
   /// left. Per layer, the topmost feature counts.
-  void _updateHovered(List<_LayerHit> hits, MapEventUserInput input) {
+  void _updateHovered(_Hits hits, MapEventUserInput input) {
+    _updateHoveredStyle(hits.styleLayers, input);
     final now = <int, _LayerHit>{};
-    for (final hit in hits) {
+    for (final hit in hits.layers) {
       // Rendered features come topmost first.
       now.putIfAbsent(hit.layerIndex, () => hit);
     }
@@ -383,6 +478,36 @@ abstract class MapLibreMapState extends State<MapLibreMap>
       );
     }
     _hovered
+      ..clear()
+      ..addAll(now);
+  }
+
+  /// Reports the features of style layers in [features] that the mouse
+  /// entered and the ones it left. Features without an id stand for their
+  /// whole layer.
+  void _updateHoveredStyle(
+    List<RenderedFeature> features,
+    MapEventUserInput input,
+  ) {
+    final now = {
+      for (final entry in _topmostPerStyleLayer(features, _styleHoverable))
+        entry.$1.id: entry,
+    };
+    bool same(
+      (StyleLayer, RenderedFeature)? a,
+      (StyleLayer, RenderedFeature) b,
+    ) => a != null && identical(a.$1, b.$1) && a.$2.id == b.$2.id;
+    for (final entry in _hoveredStyle.entries) {
+      if (same(now[entry.key], entry.value)) continue;
+      final (layer, feature) = entry.value;
+      _emitStyleLayerEvent(layer, layer.onLeave, feature, input);
+    }
+    for (final entry in now.entries) {
+      if (same(_hoveredStyle[entry.key], entry.value)) continue;
+      final (layer, feature) = entry.value;
+      _emitStyleLayerEvent(layer, layer.onEnter, feature, input);
+    }
+    _hoveredStyle
       ..clear()
       ..addAll(now);
   }
@@ -498,8 +623,6 @@ abstract class MapLibreMapState extends State<MapLibreMap>
     final platformWidget = buildPlatformWidget(context);
     final widget = this.widget;
     final layersDraggable = _layersDraggable;
-    final layersClickable = _layersClickable;
-    final layersHoverable = _layersHoverable;
     return LayoutBuilder(
       builder: (context, constraints) {
         _onLayout(constraints);
@@ -513,9 +636,9 @@ abstract class MapLibreMapState extends State<MapLibreMap>
                 gestures: options.gestures,
                 camera: gestureCamera,
                 toLngLat: (point) => isInitialized ? toLngLat(point) : null,
-                onClick: layersClickable || widget.onClick != null
-                    ? _onClick
-                    : null,
+                // Style layers can report taps and the mouse at any time,
+                // without a rebuild.
+                onClick: _onClick,
                 onDoubleClick: widget.onDoubleClick,
                 onSecondaryClick: widget.onSecondaryClick,
                 onLongClick: widget.onLongClick,
@@ -528,12 +651,8 @@ abstract class MapLibreMapState extends State<MapLibreMap>
                 onDragEnd: layersDraggable || widget.onDragEnd != null
                     ? _onDragEnd
                     : null,
-                onPointerMove: layersHoverable || widget.onPointerMove != null
-                    ? _onPointerMove
-                    : null,
-                onPointerLeave: layersHoverable || widget.onPointerLeave != null
-                    ? _onPointerLeave
-                    : null,
+                onPointerMove: _onPointerMove,
+                onPointerLeave: _onPointerLeave,
                 child: platformWidget,
               ),
             MapLibreInheritedModel(
@@ -557,6 +676,19 @@ abstract class MapLibreMapState extends State<MapLibreMap>
 /// feature of a draggable layer in, so that small features can be grabbed by
 /// touch.
 const _grabSize = 24.0;
+
+/// What a query found.
+class _Hits {
+  const _Hits({this.layers = const [], this.styleLayers = const []});
+
+  /// The features of [MapLibreMap.layers].
+  final List<_LayerHit> layers;
+
+  /// The features of style layers, topmost first.
+  final List<RenderedFeature> styleLayers;
+
+  bool get isEmpty => layers.isEmpty && styleLayers.isEmpty;
+}
 
 /// A feature of [MapLibreMap.layers] that a query found.
 class _LayerHit {

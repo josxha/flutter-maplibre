@@ -54,9 +54,9 @@
 - `onDragStart`, `onDrag` and `onDragEnd` report drags on the map, and
   `MapEventDragStart.preventDefault()` keeps a drag from panning
   ([#544](https://github.com/josxha/flutter-maplibre/issues/544)).
-- `onClick`, `onEnter` and `onLeave` on annotation layers report taps and
-  the mouse on their features, and `onPointerMove` and `onPointerLeave` report
-  the mouse over the map
+- `onClick`, `onEnter` and `onLeave` on annotation layers and style layers
+  report taps and the mouse on their features, and `onPointerMove` and
+  `onPointerLeave` report the mouse over the map
   ([#647](https://github.com/josxha/flutter-maplibre/issues/647)).
 - Annotation layers with `draggable: true` let the user drag their features,
   and report the drop to `onDragEnd`

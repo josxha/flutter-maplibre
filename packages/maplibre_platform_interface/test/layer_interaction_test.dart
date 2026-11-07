@@ -6,6 +6,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
+import 'shared/recording_style_backend.dart';
+
 const _size = Size(800, 600);
 const _center = Offset(400, 300);
 
@@ -52,6 +54,13 @@ class _State extends MapLibreMapState {
   Completer<void>? queryGate;
 
   @override
+  StyleController? style;
+
+  /// The features of style layers, by layer id, with where they are on the
+  /// screen.
+  final styleFeatures = <String, List<(Offset, Object?)>>{};
+
+  @override
   void initState() {
     super.initState();
     isInitialized = true;
@@ -93,6 +102,12 @@ class _State extends MapLibreMapState {
                 properties: {LayerManager.featureIndexProperty: index},
                 layerId: layer.getLayerId(layerIndex),
               ),
+      for (final layer in style?.layers.toList().reversed ?? <StyleLayer>[])
+        if (layerIds!.contains(layer.id))
+          for (final (position, id)
+              in styleFeatures[layer.id] ?? const <(Offset, Object?)>[])
+            if (rect.contains(position))
+              RenderedFeature(id: id, properties: const {}, layerId: layer.id),
     ];
   }
 
@@ -100,6 +115,21 @@ class _State extends MapLibreMapState {
   Widget buildPlatformWidget(BuildContext context) => const SizedBox.expand();
 
   // The other controller calls are not under test.
+  @override
+  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+}
+
+class _Style implements StyleController {
+  _Style() {
+    final sources = StyleSources(_backend, layers: () => layers);
+    layers = StyleLayers(_backend, sources: sources);
+  }
+
+  final _backend = RecordingStyleBackend();
+
+  @override
+  late final StyleLayers layers;
+
   @override
   dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }
@@ -509,6 +539,95 @@ void main() {
       expect(layer.interactive, isFalse);
       expect(interactive([_point(0, 0)]).interactive, isTrue);
       expect(layer == interactive(layer.list), isFalse);
+    });
+  });
+
+  group('style layer events', () {
+    late List<String> events;
+    late _Style style;
+
+    setUp(() {
+      events = [];
+      style = _Style();
+    });
+
+    /// Loads style layers [ids] that report their events, bottom to top.
+    void loadLayers(WidgetTester tester, List<String> ids) {
+      style.layers.load([
+        for (final id in ids) {'id': id, 'type': 'circle', 'source': 's'},
+      ]);
+      for (final layer in style.layers) {
+        String name(StyleLayerFeatureEvent event) =>
+            '${layer.id} ${event.feature.id}';
+        layer
+          ..onClick = ((event) => events.add('click ${name(event)}'))
+          ..onEnter = ((event) => events.add('enter ${name(event)}'))
+          ..onLeave = ((event) => events.add('leave ${name(event)}'));
+      }
+      platform.state
+        ..style = style
+        ..styleFeatures.clear();
+    }
+
+    testWidgets('a tap reports the topmost feature of every layer under it', (
+      tester,
+    ) async {
+      await pumpMap(tester, []);
+      loadLayers(tester, ['a', 'b', 'c']);
+      platform.state.styleFeatures.addAll({
+        'a': [(_center, 1), (_center, 2)],
+        'b': [(_center, 3)],
+        'c': [(const Offset(100, 100), 4)],
+      });
+      await tester.tapAt(_center);
+      await tester.pump(const Duration(milliseconds: 500));
+      await tester.pumpAndSettle();
+      expect(events, ['click b 3', 'click a 1']);
+
+      // A removed layer reports no more taps.
+      events.clear();
+      await style.layers.remove('b');
+      await tester.tapAt(_center);
+      await tester.pump(const Duration(milliseconds: 500));
+      await tester.pumpAndSettle();
+      expect(events, ['click a 1']);
+    });
+
+    testWidgets('the mouse enters and leaves features by id, and layers of '
+        'features without one as a whole', (tester) async {
+      await pumpMap(tester, []);
+      loadLayers(tester, ['a', 'b']);
+      platform.state.styleFeatures.addAll({
+        'a': [(const Offset(300, 300), 1), (const Offset(500, 300), 2)],
+        'b': [(const Offset(300, 400), null), (const Offset(500, 400), null)],
+      });
+      final mouse = await tester.createGesture(kind: PointerDeviceKind.mouse);
+      addTearDown(mouse.removePointer);
+      await mouse.addPointer(location: const Offset(200, 200));
+      await tester.pump();
+      for (final position in const [
+        Offset(300, 300),
+        Offset(500, 300),
+        Offset(600, 300),
+        Offset(300, 400),
+        Offset(500, 400),
+        Offset(500, 400.5),
+      ]) {
+        await mouse.moveTo(position);
+        await tester.pump();
+      }
+      expect(events, [
+        'enter a 1',
+        'leave a 1',
+        'enter a 2',
+        'leave a 2',
+        'enter b null',
+      ]);
+
+      events.clear();
+      await mouse.moveTo(const Offset(900, 400));
+      await tester.pump();
+      expect(events, ['leave b null']);
     });
   });
 

@@ -499,8 +499,20 @@ Each entry: the decision, then why.
   `MouseRegion` that always wraps the detector, so that the child keeps its
   state). Each move queries the hovered layers at the point, coalesced to
   the latest move while a query runs, and enter/leave are tracked per layer
-  like gl-js `mouseenter`/`mouseleave`, but per feature. Layer events of
-  style layers by id are left for later.
+  like gl-js `mouseenter`/`mouseleave`, but per feature.
+- **Style layers report taps and hovers with `onClick`, `onEnter` and
+  `onLeave` on the `StyleLayer` object (#647), not with a declarative list
+  on `MapLibreMap`.** Annotations are the declarative API and style layers
+  the imperative one, so the callbacks are fields like the property setters,
+  and constructor parameters of the types with vector features (from the
+  generator). They end with the object: the map only calls a layer that is
+  still `style.layers[id]`. The event is `StyleLayerFeatureEvent` with the
+  `RenderedFeature`. Unlike annotation layers, every style layer under a tap
+  reports it, as with gl-js `map.on('click', layerId)`. Enter/leave is per
+  feature id, or per layer for features without one. The same query serves
+  annotation and style layers. The detector always gets `onClick`,
+  `onPointerMove` and `onPointerLeave`, because a callback set on a style
+  layer doesn't rebuild the map.
 - **One gesture recognizer in Dart serves every platform:
   `MapGestureDetector` in `maplibre_platform_interface`.** It sits there, not
   in `maplibre`, because the platform packages need it and `maplibre` depends

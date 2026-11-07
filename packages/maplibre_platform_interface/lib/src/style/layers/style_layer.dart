@@ -15,6 +15,9 @@ part 'style_layers.g.dart';
 /// Removing the layer or loading a new style detaches the object, after which
 /// its setters only change the object.
 ///
+/// Layers with vector features report taps and the mouse on their features
+/// to [onClick], [onEnter] and [onLeave] while they are on a map.
+///
 /// {@category Style}
 /// {@subCategory Style Layers}
 abstract class StyleLayer {
@@ -25,6 +28,9 @@ abstract class StyleLayer {
     this._maxZoom = 24,
     Expression<bool>? filter,
     bool visible = true,
+    this.onClick,
+    this.onEnter,
+    this.onLeave,
   }) : _filter = filter?.toJson(),
        _layout = {},
        _paint = {},
@@ -67,6 +73,32 @@ abstract class StyleLayer {
 
   /// The type of the layer in the style spec, such as `line`.
   String get type;
+
+  /// Called when the user taps or clicks a feature of this layer, with the
+  /// topmost feature under the pointer.
+  ///
+  /// Every layer under the pointer reports the tap, not only the topmost one.
+  /// [MapLibreMap.onClick] is called as well.
+  ///
+  /// Only layers with vector features report it: [CircleStyleLayer],
+  /// [FillStyleLayer], [FillExtrusionStyleLayer], [HeatmapStyleLayer],
+  /// [LineStyleLayer] and [SymbolStyleLayer]. Removing the layer or loading
+  /// a new style ends the calls.
+  StyleLayerFeatureCallback? onClick;
+
+  /// Called when a mouse or stylus moves onto a feature of this layer.
+  ///
+  /// Features with an [RenderedFeature.id] are told apart, so moving from one
+  /// onto another reports [onLeave] for the first and [onEnter] for the
+  /// second. Without ids, the layer reports entering its features as a whole.
+  /// Touches don't hover, so only mice and styluses report it.
+  ///
+  /// The same layers as for [onClick] report it.
+  StyleLayerFeatureCallback? onEnter;
+
+  /// Called when the mouse or stylus leaves the feature that [onEnter]
+  /// reported, including when it leaves the map.
+  StyleLayerFeatureCallback? onLeave;
 
   final Map<String, Object?> _layout;
   final Map<String, Object?> _paint;
@@ -254,6 +286,36 @@ abstract class StyleLayer {
   }
 }
 
+/// A tap or the mouse on a feature of a [StyleLayer], see
+/// [StyleLayer.onClick], [StyleLayer.onEnter] and [StyleLayer.onLeave].
+///
+/// {@category Style}
+/// {@subCategory Style Layers}
+@immutable
+final class StyleLayerFeatureEvent {
+  /// Creates an event for [feature] with the pointer at [point].
+  const StyleLayerFeatureEvent({
+    required this.feature,
+    required this.point,
+    required this.screenPoint,
+  });
+
+  /// The feature, as the map rendered it.
+  final RenderedFeature feature;
+
+  /// Where the pointer is, in coordinates.
+  final Geographic point;
+
+  /// Where the pointer is, in logical pixels of the map.
+  final Offset screenPoint;
+}
+
+/// Receives a [StyleLayerFeatureEvent].
+///
+/// {@category Style}
+/// {@subCategory Style Layers}
+typedef StyleLayerFeatureCallback = void Function(StyleLayerFeatureEvent event);
+
 /// How a paint property changes to a new value.
 ///
 /// https://maplibre.org/maplibre-style-spec/transition/
@@ -317,6 +379,9 @@ abstract class StyleLayerWithSource extends StyleLayer {
     super.maxZoom,
     super.filter,
     super.visible,
+    super.onClick,
+    super.onEnter,
+    super.onLeave,
   });
 
   StyleLayerWithSource._fromJson(super.json)

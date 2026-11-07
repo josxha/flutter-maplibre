@@ -138,8 +138,9 @@ $_enumCode
 ''';
   }
 
-  /// The layer types whose features a filter can select. The others don't
-  /// take a filter in their constructor.
+  /// The layer types whose features a filter can select and that report taps
+  /// and the mouse on them. The others don't take a filter or the callbacks
+  /// in their constructor.
   static const _filterTypes = {
     'circle',
     'fill',
@@ -183,7 +184,9 @@ $_enumCode
     }
     out.writeln(
       'super.minZoom, super.maxZoom, '
-      '${_filterTypes.contains(type) ? 'super.filter, ' : ''}super.visible,',
+      '${_filterTypes.contains(type) ? 'super.filter, ' : ''}super.visible,'
+      '${_filterTypes.contains(type) ? 'super.onClick, super.onEnter, '
+                'super.onLeave,' : ''}',
     );
 
     final types = <String, _DartType>{};

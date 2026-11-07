@@ -126,6 +126,7 @@ Annotation layers can do this for their own features, see
 
 ## Layer events
 
-Annotation layers report taps and the mouse on their own features with
-`onClick`, `onEnter` and `onLeave`, see
-[Click and hover](annotations/click-and-hover.md).
+Annotation layers and style layers report taps and the mouse on their own
+features with `onClick`, `onEnter` and `onLeave`, see click and hover for
+[annotations](annotations/click-and-hover.md) and for
+[style layers](style-layers/click-and-hover.md).

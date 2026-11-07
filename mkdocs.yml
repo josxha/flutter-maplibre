@@ -45,6 +45,7 @@ nav:
               - Raster Layer: docs/style-layers/raster-layer.md
               - Symbol Layer: docs/style-layers/symbol-layer.md
           - Paint & Layout: docs/style-layers/paint-and-layout.md
+          - Click and Hover: docs/style-layers/click-and-hover.md
           - Expressions: docs/style-layers/expressions.md
       - Migrate:
           - Upgrade to 0.4: docs/migrate/upgrade-from-v0.3.x.md
