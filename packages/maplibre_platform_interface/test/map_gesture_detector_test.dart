@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
@@ -14,7 +15,7 @@ class _RecordingCamera implements GestureCameraSink {
   final calls = <String>[];
   final updates = <GestureCameraUpdate>[];
   final zooms = <(double, Offset, Duration)>[];
-  Velocity? endVelocity;
+  GestureVelocity? endVelocity;
 
   @override
   void gestureStart() => calls.add('start');
@@ -26,7 +27,7 @@ class _RecordingCamera implements GestureCameraSink {
   }
 
   @override
-  void gestureEnd({Velocity velocity = Velocity.zero}) {
+  void gestureEnd({GestureVelocity velocity = GestureVelocity.zero}) {
     calls.add('end');
     endVelocity = velocity;
   }
@@ -137,7 +138,7 @@ void main() {
       await pumpMap(tester);
       await tester.flingFrom(_center, const Offset(-300, 0), 1000);
       await tester.pumpAndSettle();
-      expect(camera.endVelocity!.pixelsPerSecond.dx, lessThan(-500));
+      expect(camera.endVelocity!.pan.dx, lessThan(-500));
     });
 
     testWidgets('pinch zooms around the fingers', (tester) async {
@@ -162,6 +163,51 @@ void main() {
             .every((u) => (u.around! - _center).distance <= 2.5),
         isTrue,
       );
+    });
+
+    /// Spreads two fingers apart and turns them, 16 ms per step, and lifts
+    /// them while they still move.
+    Future<void> pinchAndTwist(WidgetTester tester) async {
+      var time = Duration.zero;
+      var angle = 0.0;
+      var radius = 50.0;
+      Offset finger(double sign) =>
+          _center + Offset(cos(angle), sin(angle)) * radius * sign;
+      final a = await tester.createGesture(pointer: 1);
+      final b = await tester.createGesture(pointer: 2);
+      await a.down(finger(-1), timeStamp: time);
+      await b.down(finger(1), timeStamp: time);
+      for (var i = 0; i < 10; i++) {
+        time += const Duration(milliseconds: 16);
+        radius += 5;
+        angle += 0.05;
+        await a.moveTo(finger(-1), timeStamp: time);
+        await b.moveTo(finger(1), timeStamp: time);
+        await tester.pump(const Duration(milliseconds: 16));
+      }
+      await a.up(timeStamp: time);
+      await b.up(timeStamp: time);
+      await tester.pumpAndSettle();
+    }
+
+    testWidgets('pinch flings its zoom and rotation', (tester) async {
+      await pumpMap(tester);
+      await pinchAndTwist(tester);
+      final velocity = camera.endVelocity!;
+      // The spread grows by a tenth of 50 px per step at first, and the twist
+      // turns the map clockwise, which lowers the bearing.
+      expect(velocity.zoom, greaterThan(1));
+      expect(velocity.rotate, lessThan(-50));
+      expect((velocity.around! - _center).distance, lessThanOrEqualTo(2.5));
+      // The fingers move apart around a fixed point, which doesn't pan.
+      expect(velocity.pan.distance, lessThan(50));
+    });
+
+    testWidgets('pinch without fling stops on release', (tester) async {
+      await pumpMap(tester, gestures: const MapGestures(fling: false));
+      await pinchAndTwist(tester);
+      expect(camera.zoomed, greaterThan(0));
+      expect(camera.endVelocity, GestureVelocity.zero);
     });
 
     testWidgets('scroll wheel zooms the map', (tester) async {
@@ -255,7 +301,7 @@ void main() {
       expect(camera.panned, Offset.zero);
       expect(camera.calls.where((c) => c == 'start'), hasLength(1));
       expect(camera.calls.last, 'end');
-      expect(camera.endVelocity, Velocity.zero);
+      expect(camera.endVelocity, GestureVelocity.zero);
     });
 
     testWidgets('two fingers side by side dragged up tilt', (tester) async {
@@ -439,7 +485,7 @@ void main() {
       await tester.flingFrom(_center, const Offset(-300, 0), 1000);
       await tester.pumpAndSettle();
       expect(camera.panned.dx, lessThan(-200));
-      expect(camera.endVelocity, Velocity.zero);
+      expect(camera.endVelocity, GestureVelocity.zero);
     });
 
     testWidgets('the scroll wheel can be off while pinching zooms', (
@@ -656,7 +702,7 @@ void main() {
       // The pinch zooms around its center but doesn't move the map.
       expect(camera.zoomed, greaterThan(0));
       expect(camera.panned, Offset.zero);
-      expect(camera.endVelocity, Velocity.zero);
+      expect(camera.endVelocity, GestureVelocity.zero);
     });
 
     testWidgets('no gesture zooms while zooming is off', (tester) async {

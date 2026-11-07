@@ -904,37 +904,43 @@ class _NativeGestureCamera implements GestureCameraSink {
     );
   }
 
-  /// Continues a flick with the same pan inertia as web, in logical pixels,
-  /// as the map's own gesture momentum, which the next gesture stops.
+  /// Continues a flick as the map's own gesture momentum, which slows each
+  /// of its pan, zoom and rotation on its own, and which the next gesture
+  /// stops. The map ignores a release too slow to fling.
   @override
-  void gestureEnd({Velocity velocity = Velocity.zero}) {
+  void gestureEnd({GestureVelocity velocity = GestureVelocity.zero}) {
     if (!_state._gestureActive) return;
     _state._gestureActive = false;
-    const minFlingSpeed = 100.0;
-    const linearity = 0.3;
-    const maxFlingSpeed = 1400.0;
-    const deceleration = 2500.0;
-    final speed = velocity.pixelsPerSecond.distance;
-    if (!speed.isFinite || speed < minFlingSpeed) {
+    if (velocity.isZero) {
       _state
         .._applyDelta(const mln.CameraDelta(gesturePhase: mln.GesturePhase.end))
         .._onCameraIdle();
       return;
     }
-    final flingSpeed = min(speed * linearity, maxFlingSpeed);
-    final seconds = flingSpeed / (deceleration * linearity);
+    final anchor = velocity.around?.toMln();
     _state._applyDelta(
       mln.CameraDelta(
         gesturePhase: mln.GesturePhase.end,
         momentum: mln.GestureMomentum(
           pan: mln.PanMomentum(
-            velocity: velocity.pixelsPerSecond.toMln(),
-            decay: mln.MomentumDecay(
-              model: mln.MomentumDecayModel.ease,
-              distance: flingSpeed * seconds / 2,
-              durationMs: seconds * 1000,
-              easing: const mln.UnitBezier(x2: 0.3, y2: 1),
-            ),
+            velocity: velocity.pan == Offset.zero ? null : velocity.pan.toMln(),
+          ),
+          zoom: mln.AnchoredMomentum(
+            velocity: velocity.zoom == 0 ? null : velocity.zoom,
+            anchor: anchor,
+          ),
+          bearing: mln.AnchoredMomentum(
+            velocity: velocity.rotate == 0 ? null : velocity.rotate,
+            anchor: anchor,
+          ),
+        ),
+        // Ends the move once the momentum stops, at once when it doesn't
+        // move, unless another gesture took over.
+        animation: mln.AnimationOptions(
+          endHandler: mln.CameraTransitionHandler(
+            callback: (_) {
+              if (!_state._gestureActive) _state._onCameraIdle();
+            },
           ),
         ),
       ),

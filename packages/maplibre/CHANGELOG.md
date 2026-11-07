@@ -64,6 +64,8 @@
 - `MapOptions.fastPforEnabled` decodes MapLibre Tile (MLT) vector tiles that
   use FastPFOR (always enabled on web)
   ([#635](https://github.com/josxha/flutter-maplibre/issues/635)).
+- Pinch zoom and rotation fling after release, and pans fling on every
+  platform ([#601](https://github.com/josxha/flutter-maplibre/issues/601)).
 - Large GeoJSON updates no longer block the UI thread, as the map prepares
   the data in the background (not on web)
   ([#607](https://github.com/josxha/flutter-maplibre/issues/607)).

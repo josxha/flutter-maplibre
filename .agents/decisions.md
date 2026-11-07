@@ -532,14 +532,19 @@ Each entry: the decision, then why.
   pans the content under one screen point to another, then zooms, rotates
   and tilts around a screen point. Each platform applies it with its own
   projection-aware camera engine, so a new projection (globe) needs no Dart
-  change. `gestureEnd` carries the pan's release velocity; fling inertia
-  runs in the platform. Discrete zooms (wheel, double tap) use `zoomBy`.
+  change. `gestureEnd` carries a `GestureVelocity`: the pan's release
+  velocity (of the focal point for more than one pointer, as Flutter reports
+  only the last pointer's), and a pinch's zoom and rotation velocities from
+  a `VelocityTracker` over the steps it applied; fling inertia runs in the
+  platform. Discrete zooms (wheel, double tap) use `zoomBy`.
 - **Native applies steps with `mln_map_apply_camera_delta`**, the C API's
   equivalent of mbgl's moveBy/scaleBy/rotateBy/pitchBy, one atomic delta per
-  step with the gesture phase. A released pan flings as the map's gesture
-  momentum (an eased glide with web's pan inertia constants, carried by the
-  end delta), which the next gesture's begin stops. Zoom and rotation don't
-  fling, as on web.
+  step with the gesture phase. A released gesture flings as the map's
+  gesture momentum (`mln_gesture_momentum` on the end delta, with the core's
+  default friction decay for pan, zoom and bearing), which the next
+  gesture's begin stops. Native and web feel different on purpose: native
+  uses the core's fling. The move ends from the end delta's transition end
+  handler, which also runs at once for a release too slow to fling.
 - **On web, Flutter is the only hit-tester.** The gl-js map is created with
   `interactive: false` and its container has `pointer-events: none`, so the
   browser hands every pointer to Flutter, and widgets over the map no longer
@@ -567,8 +572,11 @@ Each entry: the decision, then why.
   location under the cursor within 0.01 px on the globe and on Mercator.
   One gesture reports one camera move, although gl-js fires
   movestart/moveend per step.
-  A released pan flings with gl-js's own pan inertia constants (linearity
-  0.3, max speed 1400 px/s, deceleration 2500 px/s², ease-out bezier).
+  A release flings with gl-js's own inertia constants (linearity 0.3,
+  ease-out bezier; max speed and deceleration 1400 px/s and 2500 px/s² for
+  pan, 40 and 20 levels for zoom, 360° and 1000° for bearing) in one
+  `easeTo`, whose zoom and bearing target comes from the same exact-around
+  step.
 - **Globe on web needs no forwarding to gl-js handlers.** Measured with
   gl-js 5.24 at 1024×768: the grabbed point stays within 0.1 px at zoom 2 and
   above, also at 80° N and pitched 45°. At zoom 1 a drag from the center to
@@ -730,5 +738,4 @@ Each entry: the decision, then why.
   adapter LUID, so Windows CI reads frames back.
 - Touch tilt and double-tap-drag are not tested on Windows touchscreens.
 - Web lost gl-js's keyboard navigation and shift-drag box zoom, which the
-  shared recognizer doesn't offer, and its grab cursor. Zoom and rotation
-  don't fling, only pans.
+  shared recognizer doesn't offer, and its grab cursor.
