@@ -5,8 +5,8 @@ documentation and code are all welcome.
 
 ## Before you start
 
-- Search the [issues](https://github.com/josxha/flutter-maplibre/issues) and
-  [pull requests](https://github.com/josxha/flutter-maplibre/pulls) to check
+- Search the [issues](https://github.com/maplibre/flutter-maplibre/issues) and
+  [pull requests](https://github.com/maplibre/flutter-maplibre/pulls) to check
   that your bug or idea isn't covered yet. Planned work is tracked in issues.
 - For a larger feature or a breaking change, open an issue first so we can
   agree on the design before you spend time on it.
@@ -31,7 +31,7 @@ The repository is a [pub workspace](https://dart.dev/tools/pub/workspaces):
 | `examples`                             | Example app and integration tests (`examples/integration_test`) |
 | `website`                              | Documentation website                                       |
 
-[Architecture](https://josxha.github.io/flutter-maplibre/docs/contributing/architecture/)
+[Architecture](https://maplibre.org/flutter-maplibre/docs/contributing/architecture/)
 explains how the packages fit together, and [AGENTS.md](AGENTS.md) lists the
 code generation commands and the rules of the code base.
 
@@ -60,7 +60,7 @@ Optionally, install [pre-commit](https://pre-commit.com/) and run
 
 ## Pull requests
 
-1. [Fork the repository](https://github.com/josxha/flutter-maplibre/fork) and
+1. [Fork the repository](https://github.com/maplibre/flutter-maplibre/fork) and
    work on a new branch.
 2. Add tests. Prefer unit tests (shared logic belongs in
    `packages/maplibre_platform_interface/test`); add an integration test in

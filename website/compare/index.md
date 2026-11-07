@@ -43,9 +43,9 @@ and the style layers, synchronously.
 
 It keeps its tech stack up to date and follows semantic versioning. Every
 breaking release comes with a
-[migration guide](../docs/migrate/upgrade-from-v0.3.x.md). `maplibre` is being
-onboarded to the MapLibre organization as a
-[hosted project](https://github.com/maplibre/maplibre/blob/main/PROJECT_TIERS.md#hosted-project).
+[migration guide](../docs/migrate/upgrade-from-v0.3.x.md). `maplibre` is a
+[hosted project](https://github.com/maplibre/maplibre/blob/main/PROJECT_TIERS.md#hosted-project)
+of the MapLibre organization.
 
 ## maplibre_gl
 

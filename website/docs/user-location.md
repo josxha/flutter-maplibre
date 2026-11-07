@@ -115,5 +115,5 @@ Widget build(BuildContext context) {
 `radius` change the look of the dot.
 
 Check out the
-[example app](https://github.com/josxha/flutter-maplibre/blob/main/examples/lib/user_location_page.dart)
+[example app](https://github.com/maplibre/flutter-maplibre/blob/main/examples/lib/user_location_page.dart)
 for a full implementation.

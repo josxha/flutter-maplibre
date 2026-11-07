@@ -68,7 +68,7 @@ await style.layers.add(
 ```
 
 See the
-[example app](https://github.com/josxha/flutter-maplibre/blob/main/examples/lib/style_layers_circle_page.dart).
+[example app](https://github.com/maplibre/flutter-maplibre/blob/main/examples/lib/style_layers_circle_page.dart).
 
 ## Fill
 
@@ -91,7 +91,7 @@ await style.layers.add(
 ```
 
 See the
-[example app](https://github.com/josxha/flutter-maplibre/blob/main/examples/lib/style_layers_fill_page.dart).
+[example app](https://github.com/maplibre/flutter-maplibre/blob/main/examples/lib/style_layers_fill_page.dart).
 
 ## Fill Extrusion
 
@@ -120,7 +120,7 @@ await style.layers.add(
 ```
 
 See the
-[example app](https://github.com/josxha/flutter-maplibre/blob/main/examples/lib/style_layers_fill_extrusion_page.dart).
+[example app](https://github.com/maplibre/flutter-maplibre/blob/main/examples/lib/style_layers_fill_extrusion_page.dart).
 
 ## Heatmap
 
@@ -135,7 +135,7 @@ await style.layers.add(
 ```
 
 See the
-[example app](https://github.com/josxha/flutter-maplibre/blob/main/examples/lib/style_layers_heatmap_page.dart).
+[example app](https://github.com/maplibre/flutter-maplibre/blob/main/examples/lib/style_layers_heatmap_page.dart).
 
 ## Hillshade
 
@@ -164,7 +164,7 @@ await style.layers.add(
 `ColorReliefStyleLayer` colors the same tiles by elevation.
 
 See the
-[example app](https://github.com/josxha/flutter-maplibre/blob/main/examples/lib/style_layers_hillshade_page.dart).
+[example app](https://github.com/maplibre/flutter-maplibre/blob/main/examples/lib/style_layers_hillshade_page.dart).
 
 ## Line
 
@@ -189,7 +189,7 @@ await style.layers.add(
 ```
 
 See the
-[example app](https://github.com/josxha/flutter-maplibre/blob/main/examples/lib/style_layers_line_page.dart).
+[example app](https://github.com/maplibre/flutter-maplibre/blob/main/examples/lib/style_layers_line_page.dart).
 
 ## Raster
 
@@ -213,7 +213,7 @@ await style.layers.add(RasterStyleLayer(id: 'osm', sourceId: 'osm'));
 ```
 
 See the
-[example app](https://github.com/josxha/flutter-maplibre/blob/main/examples/lib/style_layers_raster_page.dart).
+[example app](https://github.com/maplibre/flutter-maplibre/blob/main/examples/lib/style_layers_raster_page.dart).
 
 ## Symbol
 
@@ -238,7 +238,7 @@ await style.layers.add(
 ```
 
 See the
-[example app](https://github.com/josxha/flutter-maplibre/blob/main/examples/lib/style_layers_symbol_page.dart).
+[example app](https://github.com/maplibre/flutter-maplibre/blob/main/examples/lib/style_layers_symbol_page.dart).
 
 ## Background
 
