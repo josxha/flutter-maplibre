@@ -3,14 +3,6 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:maplibre_native/src/darwin/bindings.g.dart';
 import 'package:maplibre_native/src/plugin_error.dart';
-import 'package:maplibre_native_ffi/maplibre_native_ffi.dart';
-
-/// The most ring slots a GPU texture has, the C API's deepest ring.
-const _maxSlots = 3;
-
-/// A zero-copy texture: its Flutter texture id and its ring of Metal
-/// textures.
-typedef MetalGpuTexture = ({int textureId, List<MetalBorrowedTexture> slots});
 
 /// The maplibre_native iOS and macOS plugin, called through its C API in
 /// `darwin/maplibre_native/Sources/maplibre_native/include/maplibre_native/maplibre_native_api.h`.
@@ -70,63 +62,33 @@ final class DarwinPlugin {
     };
   }
 
-  /// Registers a zero-copy texture of [width] x [height] device pixels with a
-  /// ring of [slotCount] BGRA8 Metal textures.
-  static MetalGpuTexture createGpuTexture(
-    int width,
-    int height,
-    int slotCount,
-  ) => using((arena) {
-    final slots = arena<Uint64>(_maxSlots);
+  /// Registers a zero-copy texture that shows a ring of IOSurfaces, which
+  /// the C library allocates, and returns its Flutter texture id.
+  static int createGpuTexture() => using((arena) {
     final error = arena<Char>(pluginErrorSize);
     final id = _bindings.maplibre_native_create_gpu_texture(
-      width,
-      height,
-      slotCount,
-      slots,
-      _maxSlots,
       error,
       pluginErrorSize,
     );
     if (id < 0) throw StateError(_message(error));
-    return (textureId: id, slots: _slots(slots, slotCount));
+    return id;
   });
 
-  /// Replaces a GPU texture's ring with one of the new size. The old ring
-  /// stays valid until [releaseRetiredSlots].
-  static List<MetalBorrowedTexture> resizeGpuTexture(
-    int textureId,
-    int width,
-    int height,
-    int slotCount,
-  ) => using((arena) {
-    final slots = arena<Uint64>(_maxSlots);
-    final error = arena<Char>(pluginErrorSize);
-    if (!_bindings.maplibre_native_resize_gpu_texture(
-      textureId,
-      width,
-      height,
-      slots,
-      _maxSlots,
-      error,
-      pluginErrorSize,
-    )) {
-      throw StateError(_message(error));
-    }
-    return _slots(slots, slotCount);
-  });
-
-  /// Releases the rings that resizes replaced.
-  static void releaseRetiredSlots(int textureId) =>
-      _bindings.maplibre_native_release_retired_slots(textureId);
-
-  /// Makes the finished frame in [slot] the one Flutter shows next, without a
-  /// copy. The frame stays acquired until [slotInUse] reports its slot free.
-  static void presentGpuTexture(int textureId, int slot) => using((arena) {
+  /// Makes the finished frame in the IOSurfaceRef [surface], at [slot] of the
+  /// ring [ring], the one Flutter shows next, without a copy. The frame stays
+  /// acquired until [slotInUse] reports its slot free.
+  static void presentGpuTexture(
+    int textureId, {
+    required int ring,
+    required int slot,
+    required int surface,
+  }) => using((arena) {
     final error = arena<Char>(pluginErrorSize);
     if (!_bindings.maplibre_native_present_gpu_texture(
       textureId,
+      ring,
       slot,
+      Pointer.fromAddress(surface),
       error,
       pluginErrorSize,
     )) {
@@ -141,12 +103,6 @@ final class DarwinPlugin {
   /// Unregisters a texture.
   static void disposeTexture(int textureId) =>
       _bindings.maplibre_native_dispose_texture(textureId);
-
-  static List<MetalBorrowedTexture> _slots(Pointer<Uint64> slots, int count) =>
-      [
-        for (var i = 0; i < count; i++)
-          MetalBorrowedTexture(texture: NativePointer(slots[i])),
-      ];
 
   static String _message(Pointer<Char> error) => pluginErrorMessage(error);
 }

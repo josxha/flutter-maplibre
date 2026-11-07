@@ -28,10 +28,6 @@ class StyleControllerNative extends StyleController implements StyleBackend {
   List<String> _cachedAttributions = const [];
   var _disposed = false;
 
-  /// The options of GeoJSON sources, by id. Data for a source must be prepared
-  /// with the options of the source.
-  final _geoJsonOptions = <String, mln.GeoJsonSourceOptions>{};
-
   /// Fills [layers] and [sources] from the style that the map loaded, and
   /// reads its attributions.
   Future<void> load() async {
@@ -39,9 +35,6 @@ class StyleControllerNative extends StyleController implements StyleBackend {
     if (_disposed) return;
     if (style case {'sources': final Map<String, Object?> styleSources}) {
       sources.load(styleSources);
-      for (final source in sources.whereType<GeoJsonSource>()) {
-        _geoJsonOptions[source.id] = source.toMlnOptions();
-      }
     }
     if (style case {'layers': final List<Object?> styleLayers}) {
       layers.load(styleLayers.whereType<Map<String, Object?>>());
@@ -74,11 +67,7 @@ class StyleControllerNative extends StyleController implements StyleBackend {
         'The source is not supported: ${source.runtimeType}',
       );
     }
-    final added = _map.addStyleSourceJson(source.id, json);
-    if (source is GeoJsonSource) {
-      _geoJsonOptions[source.id] = source.toMlnOptions();
-    }
-    await added;
+    await _map.addStyleSourceJson(source.id, json);
     // Sources with inline tiles know their attribution now; a TileJSON source
     // reports it with a source change once its TileJSON loads.
     await refreshAttributions();
@@ -147,8 +136,7 @@ class StyleControllerNative extends StyleController implements StyleBackend {
     Map<String, Object?> json, {
     String? belowLayerId,
   }) async {
-    // An empty id appends the layer.
-    await _map.addStyleLayerJson(json, belowLayerId ?? '');
+    await _map.addStyleLayerJson(json, beforeLayerId: belowLayerId);
   }
 
   @override
@@ -157,7 +145,7 @@ class StyleControllerNative extends StyleController implements StyleBackend {
 
   @override
   void moveLayer(String id, {String? belowLayerId}) =>
-      _map.discarding.moveStyleLayer(id, belowLayerId ?? '');
+      _map.discarding.moveStyleLayer(id, beforeLayerId: belowLayerId);
 
   // The command runs in order with later ones, so an animation doesn't wait
   // for each frame's update.
@@ -183,20 +171,17 @@ class StyleControllerNative extends StyleController implements StyleBackend {
   @override
   Future<void> removeSource(String id) async {
     await _checkUnlessMissing(_map.removeStyleSource(id));
-    _geoJsonOptions.remove(id);
     await refreshAttributions();
   }
 
   @override
   Future<void> setGeoJsonData(String id, GeoJsonData data) async {
-    final handle = mln.GeoJsonSourceDataHandle.create(
-      data.toJson(),
-      options: _geoJsonOptions[id],
-    );
     try {
-      await _map.setGeoJsonSourceData(id, handle);
-    } finally {
-      handle.close();
+      // The map prepares the data in the background.
+      await _map.setGeoJsonSourceData(id, data.toJson());
+    } on mln.MaplibreException catch (error) {
+      // Newer data for the source replaced this data before it was ready.
+      if (error.status != mln.Status.cancelled) rethrow;
     }
   }
 
@@ -255,7 +240,7 @@ class StyleControllerNative extends StyleController implements StyleBackend {
         if (!usesSource(all[index])) continue;
         discarding.addStyleLayerJson(
           all[index].toJson(),
-          index + 1 < all.length ? all[index + 1].id : '',
+          beforeLayerId: index + 1 < all.length ? all[index + 1].id : null,
         );
       }
     });
@@ -368,17 +353,7 @@ class StyleControllerNative extends StyleController implements StyleBackend {
     }
     final attributions = List<String>.unmodifiable([
       for (final info in infos)
-        if (switch (info.attribution) {
-              final String attribution when attribution.isNotEmpty =>
-                attribution,
-              // MapLibre Native drops the attribution of GeoJSON sources.
-              _ => switch (sources[info.id]) {
-                final GeoJsonSource source => source.attribution,
-                _ => null,
-              },
-            }
-            case final String attribution when attribution.isNotEmpty)
-          attribution,
+        if (info.attribution.isNotEmpty) info.attribution,
     ]);
     if (listEquals(attributions, _cachedAttributions)) {
       return _cachedAttributions;

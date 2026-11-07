@@ -39,7 +39,9 @@ Future<RuntimeHandle> createRuntime() async {
   final path = await databasePath();
   // Android needs the C library initialized before its first use.
   if (Platform.isAndroid) AndroidPlugin.initialize();
-  final runtime = RuntimeHandle.create(RuntimeOptions(cachePath: path));
+  final runtime = RuntimeHandle.create(
+    options: RuntimeOptions(cachePath: path),
+  );
   // Known before the first settings are applied, so a change meanwhile
   // reaches it too. Its commands run in order, so the latest settings win.
   _runtimes
@@ -53,7 +55,7 @@ Future<RuntimeHandle> createRuntime() async {
     await _applyNetwork(runtime, changed: false);
   } on Object {
     _runtimes.remove(runtime);
-    await runtime.close();
+    await runtime.release();
     rethrow;
   }
   return runtime;
@@ -106,7 +108,9 @@ Future<void> _applyNetwork(
   // The transform waits for Dart on every request, so it is only set while
   // there is one.
   if (MapLibreNetwork.urlTransform != null) {
-    await runtime.setResourceTransform(_transformResource);
+    await runtime.setResourceTransform(
+      ResourceTransform(callback: _transformResource),
+    );
   } else if (changed) {
     await runtime.clearResourceTransform();
   }
@@ -122,11 +126,10 @@ void _transformResource(
     kind.toMapResourceKind(),
   );
   try {
-    request.complete(transformed);
+    // An empty URL would fail the request, so it keeps its own instead.
+    request.complete(transformed.isEmpty ? url : transformed);
   } on Object catch (error, stack) {
-    // Native rejects some URLs, such as an empty one. Releasing the request
-    // keeps its URL.
-    request.close();
+    // Native rejected the URL, which fails the request.
     FlutterError.reportError(
       FlutterErrorDetails(
         exception: error,

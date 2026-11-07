@@ -87,7 +87,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
         }
         return Listener(
           behavior: HitTestBehavior.opaque,
-          onPointerDown: (_) => _map?.discarding.cancelTransitions(),
+          onPointerDown: (_) => _map?.discarding.cancelCameraTransitions(),
           child: Texture(textureId: renderer.textureId),
         );
       },
@@ -220,7 +220,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
     style?.dispose();
     _loadingStyle?.dispose();
     _invalidateProjection();
-    _shownProjection?.close();
+    _shownProjection?.release();
     _shownProjection = null;
     _map = null;
     unawaited(_renderer?.dispose());
@@ -263,9 +263,13 @@ class MapLibreMapStateNative extends MapLibreMapState {
       case mln.RuntimeEventType.mapSourceChanged:
         // A source learns its attribution once its tile set loads.
         unawaited(style?.refreshAttributions());
-        widget.onSourceChanged?.call(
-          MapEventSourceChanged(sourceId: event.message),
-        );
+        final onSourceChanged = widget.onSourceChanged;
+        if (onSourceChanged == null) return;
+        if (event.payload case mln.RuntimeEventPayloadSourceChanged(
+          :final value,
+        )) {
+          onSourceChanged(MapEventSourceChanged(sourceId: value.sourceId));
+        }
       case mln.RuntimeEventType.mapLoadingFailed:
         _onError(MapErrorKind.style, event.message);
       case mln.RuntimeEventType.mapRenderError:
@@ -279,9 +283,13 @@ class MapLibreMapStateNative extends MapLibreMapState {
       case mln.RuntimeEventType.mapLoadingFinished:
         widget.onLoadingFinished?.call(const MapEventLoadingFinished());
       case mln.RuntimeEventType.mapStyleImageMissing:
-        widget.onStyleImageMissing?.call(
-          MapEventStyleImageMissing(id: event.message),
-        );
+        final onStyleImageMissing = widget.onStyleImageMissing;
+        if (onStyleImageMissing == null) return;
+        if (event.payload case mln.RuntimeEventPayloadStyleImage(
+          :final value,
+        )) {
+          onStyleImageMissing(MapEventStyleImageMissing(id: value.imageId));
+        }
       case mln.RuntimeEventType.mapTileAction:
         final onTile = widget.onTile;
         final action = switch (event.payload) {
@@ -294,7 +302,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
         onTile(
           MapEventTile(
             operation: operation,
-            sourceId: event.message,
+            sourceId: action.sourceId,
             z: tile.canonicalZ,
             x: tile.canonicalX,
             y: tile.canonicalY,
@@ -314,22 +322,15 @@ class MapLibreMapStateNative extends MapLibreMapState {
           MapEventRenderFrame(
             fullyRendered: frame.mode == mln.RenderMode.full,
             stats: MapRenderingStats(
-              encodingTime: _seconds(stats.encodingTime),
-              renderingTime: _seconds(stats.renderingTime),
+              encodingTime: _milliseconds(stats.encodingTimeMs),
+              renderingTime: _milliseconds(stats.renderingTimeMs),
               drawCalls: stats.drawCallCount,
             ),
           ),
         );
       case mln.RuntimeEventType.mapRenderMapFinished:
-        final onRenderMap = widget.onRenderMap;
-        final map = switch (event.payload) {
-          mln.RuntimeEventPayloadRenderMap(:final value) => value,
-          _ => null,
-        };
-        if (onRenderMap == null || map == null) return;
-        onRenderMap(
-          MapEventRenderMap(fullyRendered: map.mode == mln.RenderMode.full),
-        );
+        // The C API reports only fully rendered maps here.
+        widget.onRenderMap?.call(const MapEventRenderMap(fullyRendered: true));
       case mln.RuntimeEventType.mapGlyphsRequested ||
           mln.RuntimeEventType.mapGlyphsLoaded:
         final onGlyphs = widget.onGlyphs;
@@ -381,8 +382,8 @@ class MapLibreMapStateNative extends MapLibreMapState {
     onError(MapEventError(kind: kind, message: message));
   }
 
-  static Duration _seconds(double seconds) => Duration(
-    microseconds: (seconds * Duration.microsecondsPerSecond).round(),
+  static Duration _milliseconds(double milliseconds) => Duration(
+    microseconds: (milliseconds * Duration.microsecondsPerMillisecond).round(),
   );
 
   /// Reports the map's latest camera. [camera] instead follows the frame on
@@ -404,10 +405,10 @@ class MapLibreMapStateNative extends MapLibreMapState {
     mln.RenderFrameResult frame,
   ) {
     if (_disposed) {
-      projection.close();
+      projection.release();
       return;
     }
-    _shownProjection?.close();
+    _shownProjection?.release();
     _shownProjection = projection;
     final shown = frame.view.camera.toCameraPosition();
     final resized = frame.generation != _shownExtentGeneration;
@@ -442,14 +443,16 @@ class MapLibreMapStateNative extends MapLibreMapState {
         // A paused map does not advance animations, so it jumps.
         mode: isRenderingPaused ? mln.CameraUpdateMode.jump : null,
         animation: update.animation.copyWith(
-          endHandler: (end) {
-            if (identical(_animation, run)) _animation = null;
-            run.end(
-              end.outcome == mln.CameraTransitionOutcome.completed
-                  ? CameraAnimationResult.completed
-                  : CameraAnimationResult.cancelled,
-            );
-          },
+          endHandler: mln.CameraTransitionHandler(
+            callback: (end) {
+              if (identical(_animation, run)) _animation = null;
+              run.end(
+                end.outcome == mln.CameraTransitionOutcome.completed
+                    ? CameraAnimationResult.completed
+                    : CameraAnimationResult.cancelled,
+              );
+            },
+          ),
         ),
       ),
     );
@@ -462,7 +465,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
     if (animation == null) return;
     _animation = null;
     animation.cancelled = true;
-    _map?.discarding.cancelTransitions();
+    _map?.discarding.cancelCameraTransitions();
   }
 
   /// The style controller that [_onStyleLoaded] is filling, until it becomes
@@ -544,16 +547,22 @@ class MapLibreMapStateNative extends MapLibreMapState {
 
   @override
   Future<double> getClusterExpansionZoom(String sourceId, int clusterId) async {
-    final result = await _cluster(sourceId, clusterId, 'expansion-zoom');
-    if (result case final num zoom) return zoom.toDouble();
-    throw StateError('No cluster $clusterId in the source "$sourceId".');
+    final session = _session;
+    if (session == null) {
+      throw StateError('No cluster $clusterId in the source "$sourceId".');
+    }
+    return (await session.getClusterExpansionZoom(
+      sourceId,
+      clusterId,
+    )).toDouble();
   }
 
   @override
   Future<List<SourceFeature>> getClusterChildren(
     String sourceId,
     int clusterId,
-  ) async => _clusterFeatures(await _cluster(sourceId, clusterId, 'children'));
+  ) async =>
+      _clusterFeatures(await _session?.getClusterChildren(sourceId, clusterId));
 
   @override
   Future<List<SourceFeature>> getClusterLeaves(
@@ -562,38 +571,13 @@ class MapLibreMapStateNative extends MapLibreMapState {
     int limit = 10,
     int offset = 0,
   }) async => _clusterFeatures(
-    await _cluster(sourceId, clusterId, 'leaves', {
-      'limit': limit,
-      'offset': offset,
-    }),
+    await _session?.getClusterLeaves(sourceId, clusterId, limit, offset),
   );
 
-  /// Asks the supercluster extension of the GeoJSON source [sourceId] for the
-  /// [field] of the cluster [clusterId], or null if the map is disposed.
-  Future<Object?> _cluster(
-    String sourceId,
-    int clusterId,
-    String field, [
-    Map<String, Object?> arguments = const {},
-  ]) async {
-    final renderer = _renderer;
-    if (renderer == null || _disposed) return null;
-    return renderer.queryFeatureExtensions(
-      sourceId,
-      // The extension only reads the cluster id of the feature.
-      {
-        'type': 'Feature',
-        'properties': {'cluster': true, 'cluster_id': clusterId},
-        'geometry': {
-          'type': 'Point',
-          'coordinates': [0, 0],
-        },
-      },
-      'supercluster',
-      field,
-      arguments,
-    );
-  }
+  /// The render session that answers cluster queries, or null once the map
+  /// is disposed.
+  mln.RenderSessionHandle? get _session =>
+      _disposed ? null : _renderer?.session;
 
   static List<SourceFeature> _clusterFeatures(Object? result) => [
     for (final feature in switch (result) {
@@ -625,7 +609,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
   }
 
   void _invalidateProjection() {
-    _projection?.close();
+    _projection?.release();
     _projection = null;
   }
 
@@ -796,25 +780,31 @@ class MapLibreMapStateNative extends MapLibreMapState {
   /// set is dropped.
   var _styleRequest = 0;
 
-  /// Loads [style], see [MapOptions.style].
+  /// Starts to load [style], see [MapOptions.style]. Completes once the map
+  /// has the style load, without waiting for the style document, as later
+  /// commands run after it anyway.
   Future<void> _setStyle(MapStyle style) async {
     final map = _map;
     if (map == null) return;
     final request = ++_styleRequest;
     bool stale() => _map != map || request != _styleRequest;
     layerManager = null;
+    final Future<mln.CommandCompletion> load;
     switch (style) {
       case MapStyleJson(:final json):
-        await map.setStyleJson(jsonDecode(json));
+        load = map.setStyleJson(jsonDecode(json));
       case MapStyleUrl(:final url):
-        await map.setStyleUrl(url);
+        load = map.setStyleUrl(url);
       case MapStyleFile(:final path):
-        await map.setStyleUrl(Uri.file(path).toString());
+        load = map.setStyleUrl(Uri.file(path).toString());
       case MapStyleAsset(:final asset):
         final json = await DefaultAssetBundle.of(context).loadString(asset);
         if (stale()) return;
-        await map.setStyleJson(jsonDecode(json));
+        load = map.setStyleJson(jsonDecode(json));
     }
+    // A style that fails to load is reported by the map's loading failed
+    // event, and a newer style cancels this one.
+    load.ignore();
   }
 
   @override
@@ -914,32 +904,44 @@ class _NativeGestureCamera implements GestureCameraSink {
     );
   }
 
-  /// Continues a flick with the same pan inertia as web, in logical pixels.
+  /// Continues a flick as the map's own gesture momentum, which slows each
+  /// of its pan, zoom and rotation on its own, and which the next gesture
+  /// stops. The map ignores a release too slow to fling.
   @override
-  void gestureEnd({Velocity velocity = Velocity.zero}) {
+  void gestureEnd({GestureVelocity velocity = GestureVelocity.zero}) {
     if (!_state._gestureActive) return;
-    _state
-      .._gestureActive = false
-      .._applyDelta(const mln.CameraDelta(gesturePhase: mln.GesturePhase.end));
-    const minFlingSpeed = 100.0;
-    const linearity = 0.3;
-    const maxFlingSpeed = 1400.0;
-    const deceleration = 2500.0;
-    final speed = velocity.pixelsPerSecond.distance;
-    if (!speed.isFinite || speed < minFlingSpeed) {
-      _state._onCameraIdle();
+    _state._gestureActive = false;
+    if (velocity.isZero) {
+      _state
+        .._applyDelta(const mln.CameraDelta(gesturePhase: mln.GesturePhase.end))
+        .._onCameraIdle();
       return;
     }
-    final flingSpeed = min(speed * linearity, maxFlingSpeed);
-    final seconds = flingSpeed / (deceleration * linearity);
-    final offset =
-        velocity.pixelsPerSecond / speed * (flingSpeed * seconds / 2);
+    final anchor = velocity.around?.toMln();
     _state._applyDelta(
       mln.CameraDelta(
-        offset: offset.toMln(),
+        gesturePhase: mln.GesturePhase.end,
+        momentum: mln.GestureMomentum(
+          pan: mln.PanMomentum(
+            velocity: velocity.pan == Offset.zero ? null : velocity.pan.toMln(),
+          ),
+          zoom: mln.AnchoredMomentum(
+            velocity: velocity.zoom == 0 ? null : velocity.zoom,
+            anchor: anchor,
+          ),
+          bearing: mln.AnchoredMomentum(
+            velocity: velocity.rotate == 0 ? null : velocity.rotate,
+            anchor: anchor,
+          ),
+        ),
+        // Ends the move once the momentum stops, at once when it doesn't
+        // move, unless another gesture took over.
         animation: mln.AnimationOptions(
-          durationMs: seconds * 1000,
-          easing: const mln.UnitBezier(x2: 0.3, y2: 1),
+          endHandler: mln.CameraTransitionHandler(
+            callback: (_) {
+              if (!_state._gestureActive) _state._onCameraIdle();
+            },
+          ),
         ),
       ),
     );

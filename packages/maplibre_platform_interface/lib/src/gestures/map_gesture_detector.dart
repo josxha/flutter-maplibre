@@ -140,6 +140,23 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
   /// Whether the current scale gesture panned, which it may fling after.
   var _scalePanned = false;
 
+  // Whether the current scale gesture zoomed and rotated, which it may fling
+  // after, how far it did, and where its fingers were last.
+  var _scaleZoomed = false;
+  var _scaleRotated = false;
+  var _pinchZoom = 0.0;
+  var _pinchRotation = 0.0;
+  Offset? _pinchFocal;
+
+  /// Tracks [_pinchZoom] and [_pinchRotation] as x and y, for the release
+  /// velocity of a pinch.
+  var _pinchTracker = VelocityTracker.withKind(PointerDeviceKind.touch);
+
+  /// Tracks the focal point of a gesture with more than one pointer, whose
+  /// pan velocity is not that of its last pointer.
+  var _focalTracker = VelocityTracker.withKind(PointerDeviceKind.touch);
+  var _scaleMultiTouch = false;
+
   /// Where the primary pointer went down while it was the only one, where a
   /// drag starts.
   Offset? _dragDownPosition;
@@ -591,6 +608,14 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
     _lastScale = 1;
     _lastRotation = 0;
     _scalePanned = false;
+    _scaleZoomed = false;
+    _scaleRotated = false;
+    _pinchZoom = 0;
+    _pinchRotation = 0;
+    _pinchFocal = null;
+    _pinchTracker = VelocityTracker.withKind(PointerDeviceKind.touch);
+    _focalTracker = VelocityTracker.withKind(PointerDeviceKind.touch);
+    _scaleMultiTouch = false;
     _endDrag();
     // The gesture begins with its first camera change, so that a drag while
     // only a pinch moves the camera doesn't stop a running animation.
@@ -711,16 +736,28 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
         movements.zoom && pinches && scale != 1 && scale.isFinite && scale > 0;
     final rotates = movements.rotate && pinches && rotation != 0;
     if (!pans && !zooms && !rotates) return;
+    final zoomBy = zooms ? log(scale) / ln2 : 0.0;
+    // A clockwise twist is a positive rotation in Flutter and turns the map
+    // clockwise, which lowers the bearing.
+    final rotateBy = rotates ? -rotation * 180 / pi : 0.0;
     if (pans) _scalePanned = true;
+    if (zooms) _scaleZoomed = true;
+    if (rotates) _scaleRotated = true;
+    _pinchZoom += zoomBy;
+    _pinchRotation += rotateBy;
+    if (zooms || rotates) _pinchFocal = focal;
+    if (details.pointerCount > 1) _scaleMultiTouch = true;
+    if (details.sourceTimeStamp case final time?) {
+      _pinchTracker.addPosition(time, Offset(_pinchZoom, _pinchRotation));
+      _focalTracker.addPosition(time, focal);
+    }
     _beginGesture();
     _camera.gestureUpdate(
       GestureCameraUpdate(
         panFrom: pans ? focal - pan : null,
         panTo: pans ? focal : null,
-        zoomBy: zooms ? log(scale) / ln2 : 0,
-        // A clockwise twist is a positive rotation in Flutter and turns the
-        // map clockwise, which lowers the bearing.
-        rotateBy: rotates ? -rotation * 180 / pi : 0,
+        zoomBy: zoomBy,
+        rotateBy: rotateBy,
         around: zooms || rotates ? focal : null,
       ),
     );
@@ -731,12 +768,28 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
     // Only a plain drag or pinch flings; the others drove the camera
     // themselves.
     final flings =
-        _scalePanned &&
         _gestures.fling &&
         !_quickZooming &&
         !_shoving &&
         _secondaryPointer == null;
-    _endGesture(velocity: flings ? details.velocity : Velocity.zero);
+    if (!flings) return _endGesture();
+    final pinch = _scaleZoomed || _scaleRotated
+        ? _pinchTracker.getVelocity().pixelsPerSecond
+        : Offset.zero;
+    final zoom = _scaleZoomed ? pinch.dx : 0.0;
+    final rotate = _scaleRotated ? pinch.dy : 0.0;
+    _endGesture(
+      velocity: GestureVelocity(
+        pan: !_scalePanned
+            ? Offset.zero
+            : _scaleMultiTouch
+            ? _focalTracker.getVelocity().pixelsPerSecond
+            : details.velocity.pixelsPerSecond,
+        zoom: zoom,
+        rotate: rotate,
+        around: zoom != 0 || rotate != 0 ? _pinchFocal : null,
+      ),
+    );
   }
 
   void _beginGesture() {
@@ -745,7 +798,7 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
     _camera.gestureStart();
   }
 
-  void _endGesture({Velocity velocity = Velocity.zero}) {
+  void _endGesture({GestureVelocity velocity = GestureVelocity.zero}) {
     if (!_gestureActive) return;
     _gestureActive = false;
     _camera.gestureEnd(velocity: velocity);

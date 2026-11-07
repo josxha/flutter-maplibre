@@ -32,7 +32,9 @@ covers every change from 0.3.x and from 0.4.0-pre.1.
 - `querySourceFeatures`, and filter expressions for feature queries.
 - More map events, such as errors, missing images and loading state.
 - `cameraFor`, `stopCamera`, and camera `roll` and `padding`.
-- Fling after a pan, and a touch stops the camera.
+- Pinch zoom and rotation fling after release, pans fling on every platform,
+  and a touch stops the camera
+  ([#601](https://github.com/josxha/flutter-maplibre/issues/601)).
 - MapLibre Tiles (MLT) encoded with FastPFOR, with `MapOptions.fastPforEnabled`
   ([#635](https://github.com/josxha/flutter-maplibre/issues/635)).
 - SDF and stretchable style images with `StyleImageOptions`.

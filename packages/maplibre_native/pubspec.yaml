@@ -19,7 +19,7 @@ dependencies:
   flutter: { sdk: flutter }
   geobase: ^1.5.0
   jni: ^1.1.0
-  maplibre_native_ffi: ^0.202610.3
+  maplibre_native_ffi: ^0.202611.0
   maplibre_platform_interface: ^0.4.0-pre.2
   path_provider: ^2.1.5
 

@@ -245,19 +245,29 @@ jobs:
     timeout-minutes: 60
     defaults: { run: { working-directory: examples } }
     steps:
+      # simctl boot returns once the device is booted, while its first boot
+      # data migration still takes one to two minutes. That runs in the
+      # background during the Flutter setup and the app build, and the wait
+      # for it comes right before the tests.
+      - name: "Boot an iOS simulator"
+        id: simulator
+        working-directory: .
+        run: |
+          udid=$(xcrun simctl list devices available -j \
+            | jq -r '[.devices | to_entries[] | select(.key | contains("iOS")) | .value[] | select(.name | startswith("iPhone"))][0].udid')
+          xcrun simctl boot "$udid"
+          echo "udid=$udid" >> "$GITHUB_OUTPUT"
       - uses: actions/checkout@v7
       - uses: subosito/flutter-action@v2
         with: { cache: true }
       - name: "Get Flutter dependencies"
         run: flutter pub get
-      - name: "Start an iOS simulator"
-        id: simulator
-        run: |
-          udid=$(xcrun simctl list devices available -j \
-            | jq -r '[.devices | to_entries[] | select(.key | contains("iOS")) | .value[] | select(.name | startswith("iPhone"))][0].udid')
-          xcrun simctl boot "$udid"
-          xcrun simctl bootstatus "$udid" -b
-          echo "udid=$udid" >> "$GITHUB_OUTPUT"
+      # Builds the test app while the simulator boots, so flutter test only
+      # needs an incremental Xcode build.
+      - name: "Build the test app"
+        run: flutter build ios --simulator --debug --target integration_test/all_test.dart
+      - name: "Wait for the iOS simulator"
+        run: xcrun simctl bootstatus ${{ steps.simulator.outputs.udid }} -b
       # The expanded reporter prints each test as it starts, so a stalled
       # test shows by name; the app's own log goes to a file for the summary.
       # After 10 minutes without output (the Xcode build is the longest

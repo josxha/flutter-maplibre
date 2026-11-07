@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
@@ -104,6 +106,54 @@ void runTests() {
       final settled = map.controller.getCamera();
       expect(settled.center.lon, closeTo(afterTap.center.lon, 1e-6));
       expect(settled.center.lat, closeTo(afterTap.center.lat, 1e-6));
+    }, skip: kIsWeb);
+
+    testWidgets('pinch zoom and rotation continue after release', (
+      tester,
+    ) async {
+      final map = await pumpMap(tester, options: _options());
+      final before = map.controller.getCamera();
+      final since = map.events.length;
+      // Away from the center, where the previous test tapped, so that the
+      // first finger isn't a double tap.
+      final center = map.toGlobal(map.center - const Offset(0, 150));
+      var time = Duration.zero;
+      var radius = 40.0;
+      var angle = 0.0;
+      Offset finger(double sign) =>
+          center + Offset(cos(angle), sin(angle)) * radius * sign;
+      final a = await tester.createGesture();
+      final b = await tester.createGesture();
+      await a.down(finger(-1), timeStamp: time);
+      await b.down(finger(1), timeStamp: time);
+      // Enough steps that the fling speed is measured after the recognizer
+      // has accepted the gesture, which takes a few moves. The fingers lift
+      // right after their last move: a velocity tracker reads a pause of more
+      // than 40 ms of real time as a stop.
+      const steps = 20;
+      const grow = 1.04;
+      const turn = 0.03;
+      for (var i = 0; i < steps; i++) {
+        await tester.pump(const Duration(milliseconds: 16));
+        time += const Duration(milliseconds: 16);
+        radius *= grow;
+        angle += turn;
+        await a.moveTo(finger(-1), timeStamp: time);
+        await b.moveTo(finger(1), timeStamp: time);
+      }
+      await a.up(timeStamp: time);
+      await b.up(timeStamp: time);
+
+      // Past what the fingers did themselves.
+      final pinched = steps * log(grow) / ln2;
+      const twisted = steps * turn * 180 / pi;
+      final flung = await map.waitForCamera(
+        (camera) =>
+            camera.zoom > before.zoom + pinched + 0.2 &&
+            _turned(before, camera) < -twisted - 5,
+      );
+      final end = await map.waitForEvent<MapEventCameraMoveEnd>(since: since);
+      expect(end.camera.zoom, greaterThanOrEqualTo(flung.zoom));
     }, skip: kIsWeb);
 
     testWidgets('a drag is reported where it starts and ends', (tester) async {

@@ -29,31 +29,18 @@ typedef struct MaplibreNativeSymbol {
   void* address;
 } MaplibreNativeSymbol;
 
-// Registers a zero-copy texture of |width| x |height| device pixels with a
-// ring of |slot_count| IOSurface-backed BGRA8 Metal textures that MapLibre
-// renders into and Flutter samples, and
-// writes up to |slot_capacity| `id<MTLTexture>` pointers, which stay owned by
-// the plugin. Returns its Flutter texture id, or -1 on failure.
-int64_t maplibre_native_create_gpu_texture(uint32_t width, uint32_t height,
-                                           uint32_t slot_count,
-                                           uint64_t* out_slots,
-                                           uint32_t slot_capacity, char* error,
-                                           size_t error_size);
+// Registers a zero-copy texture that shows the frames of a ring of IOSurfaces,
+// which the C library allocates and renders into, and returns its Flutter
+// texture id, or -1 on failure.
+int64_t maplibre_native_create_gpu_texture(char* error, size_t error_size);
 
-// Replaces the ring with one of the new size and writes its textures. The old
-// ring stays valid until maplibre_native_release_retired_slots.
-bool maplibre_native_resize_gpu_texture(int64_t texture_id, uint32_t width,
-                                        uint32_t height, uint64_t* out_slots,
-                                        uint32_t slot_capacity, char* error,
-                                        size_t error_size);
-
-// Releases the rings that resizes replaced.
-void maplibre_native_release_retired_slots(int64_t texture_id);
-
-// Makes the finished frame in |slot| the one Flutter shows next, without a
-// copy. Its frame stays acquired until
+// Makes the finished frame in the IOSurfaceRef |surface|, at |slot| of the
+// ring |ring|, the one Flutter shows next, without a copy. |ring| changes
+// when the ring's surfaces do; the plugin wraps each surface of a ring in a
+// pixel buffer once. The frame stays acquired until
 // maplibre_native_gpu_texture_slot_in_use reports the slot free.
-bool maplibre_native_present_gpu_texture(int64_t texture_id, uint32_t slot,
+bool maplibre_native_present_gpu_texture(int64_t texture_id, uint32_t ring,
+                                         uint32_t slot, void* surface,
                                          char* error, size_t error_size);
 
 // Whether Flutter may still sample |slot|, so its frame must stay acquired:
