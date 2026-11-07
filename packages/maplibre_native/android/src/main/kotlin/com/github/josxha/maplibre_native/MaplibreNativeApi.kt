@@ -36,9 +36,7 @@ object MaplibreNativeApi {
 
     /** The application context, which the C library needs on Android. */
     @JvmStatic
-    fun applicationContext(): Context {
-        return checkNotNull(context) { "maplibre_native is not attached to an engine." }
-    }
+    fun applicationContext(): Context = checkNotNull(context) { "maplibre_native is not attached to an engine." }
 
     /**
      * Creates a SurfaceProducer texture of [width] x [height] pixels and
