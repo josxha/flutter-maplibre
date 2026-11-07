@@ -7,7 +7,7 @@ hide: [ navigation, toc ]
 <div class="ml-hero" markdown>
 <div markdown>
 
-# MapLibre for Flutter
+# MapLibre Flutter
 
 <p class="ml-hero__tagline">
 Interactive vector maps for Android, iOS, macOS, Windows, Linux and web.

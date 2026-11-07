@@ -5,7 +5,7 @@ title: 'Docs'
 # Overview
 
 This is the documentation of [maplibre](https://pub.dev/packages/maplibre),
-MapLibre for Flutter. It renders maps with
+MapLibre Flutter. It renders maps with
 [MapLibre Native](https://github.com/maplibre/maplibre-native) on Android,
 iOS, macOS, Windows and Linux, and with
 [MapLibre GL JS](https://github.com/maplibre/maplibre-gl-js) on web.

@@ -1,4 +1,4 @@
-# MapLibre for Flutter
+# MapLibre Flutter
 
 [![Pub Version](https://img.shields.io/pub/v/maplibre)](https://pub.dev/packages/maplibre)
 [![stars](https://img.shields.io/github/stars/josxha/flutter-maplibre?style=flat&logo=github)](https://github.com/josxha/flutter-maplibre)
