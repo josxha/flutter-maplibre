@@ -25,6 +25,9 @@ class _LayersHoverPageState extends State<LayersHoverPage> {
 
   static Future<List<Feature<Polygon>>> _loadStates() async {
     final response = await get(Uri.parse(_url));
+    if (response.statusCode != 200) {
+      throw Exception('Loading the states failed: ${response.statusCode}');
+    }
     return [
       for (final state in FeatureCollection.parse(response.body).features)
         // A layer of polygons takes a feature per polygon, so states of
@@ -60,6 +63,9 @@ class _LayersHoverPageState extends State<LayersHoverPage> {
             child: FutureBuilder(
               future: _states,
               builder: (context, snapshot) {
+                if (snapshot.error case final error?) {
+                  return Center(child: Text('$error'));
+                }
                 final states = snapshot.data ?? const <Feature<Polygon>>[];
                 return MapLibreMap(
                   options: const MapOptions(
