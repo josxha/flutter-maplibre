@@ -89,6 +89,10 @@ Coordinates are geobase `Geographic(lon: …, lat: …)` instead of
 | `onCameraMoveStarted`, `onCameraMove`, `onCameraIdle` | `onCameraMoveStart`, `onCameraMove`, `onCameraMoveEnd`  |
 | `padding`                                    | `padding` of `CameraUpdate.position` and `CameraUpdate.bounds` for the camera; widgets in `children` take their own padding |
 
+Google Maps applies its map padding to every later camera move. `maplibre`
+has no map-wide padding: pass `padding` with each camera update that should
+keep clear of an overlay, including every bounds fit.
+
 Options of `MapOptions` can change at any time with `setState()`, except
 `initCamera` and `fastPforEnabled`, which are read once.
 
