@@ -67,9 +67,8 @@ sealed class OfflineRegionDefinition {
 
   /// The maximum zoom level.
   ///
-  /// Tile sources download up to their own maximum zoom level if it is lower.
-  /// Use a finite value: no tiles are downloaded at all for
-  /// [double.infinity].
+  /// Tile sources download up to their own maximum zoom level if it is lower,
+  /// so [double.infinity] downloads every zoom level that the sources have.
   final double maxZoom;
 
   /// The pixel ratio of the screen the region is shown on, which selects the

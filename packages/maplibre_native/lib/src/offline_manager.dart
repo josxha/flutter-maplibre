@@ -7,6 +7,7 @@ import 'package:maplibre_native/src/extensions.dart';
 import 'package:maplibre_native_ffi/maplibre_native_ffi.dart' as mln;
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 
+/// The events that a download observes its region for.
 final mln.RuntimeEventFlag _offlineEvents =
     mln.RuntimeEventFlag.offlineRegionStatusChanged |
     mln.RuntimeEventFlag.offlineRegionResponseError |
@@ -25,11 +26,11 @@ final class OfflineManagerNative implements OfflineManager {
     final runtime = await createRuntime();
     final manager = OfflineManagerNative._(runtime);
     try {
-      await runtime.setEventHandler(manager._onEvents);
-      // The runtime renders no map, so it queues only offline events.
-      runtime.setEventMask(_offlineEvents);
+      await runtime.setEventHandler(
+        mln.RuntimeEventHandler(callback: manager._onEvents),
+      );
     } on Object {
-      await runtime.close();
+      await runtime.release();
       rethrow;
     }
     return manager;
@@ -50,7 +51,7 @@ final class OfflineManagerNative implements OfflineManager {
       unawaited(download.controller.close());
     }
     _downloads.clear();
-    unawaited(_runtime.close());
+    unawaited(_runtime.release());
   }
 
   @override
@@ -98,24 +99,22 @@ final class OfflineManagerNative implements OfflineManager {
 
   @override
   Future<void> clearAmbientCache() =>
-      _runtime.runAmbientCacheOperation(mln.AmbientCacheOperation.clear);
+      _runtime.runCacheDatabaseOperation(mln.CacheDatabaseOperation.clear);
 
   @override
   Future<void> invalidateAmbientCache() =>
-      _runtime.runAmbientCacheOperation(mln.AmbientCacheOperation.invalidate);
+      _runtime.runCacheDatabaseOperation(mln.CacheDatabaseOperation.invalidate);
 
   @override
   Future<void> packDatabase() =>
-      _runtime.runAmbientCacheOperation(mln.AmbientCacheOperation.packDatabase);
+      _runtime.runCacheDatabaseOperation(mln.CacheDatabaseOperation.pack);
 
   @override
   Future<void> resetDatabase() async {
     for (final regionId in _downloads.keys.toList()) {
       await _stopDownload(regionId);
     }
-    await _runtime.runAmbientCacheOperation(
-      mln.AmbientCacheOperation.resetDatabase,
-    );
+    await _runtime.runCacheDatabaseOperation(mln.CacheDatabaseOperation.reset);
   }
 
   @override
@@ -159,7 +158,7 @@ final class OfflineManagerNative implements OfflineManager {
           final id = started.id;
           await _stopDownload(id);
           download = _downloads[id] = _Download(started, controller);
-          await _runtime.setOfflineRegionObserved(id, true);
+          await _runtime.setOfflineRegionObserved(id, _offlineEvents);
           await _runtime.setOfflineRegionDownloadState(
             id,
             mln.OfflineRegionDownloadState.active,
@@ -190,7 +189,10 @@ final class OfflineManagerNative implements OfflineManager {
         regionId,
         mln.OfflineRegionDownloadState.inactive,
       );
-      await _runtime.setOfflineRegionObserved(regionId, false);
+      await _runtime.setOfflineRegionObserved(
+        regionId,
+        mln.RuntimeEventFlag.none,
+      );
     } on mln.MaplibreException {
       // The region was deleted meanwhile, which stopped its download.
     }

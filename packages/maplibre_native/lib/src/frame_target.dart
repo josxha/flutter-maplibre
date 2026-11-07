@@ -6,9 +6,19 @@ import 'package:maplibre_native_ffi/maplibre_native_ffi.dart';
 /// renders into, and one spare.
 const gpuSlotCount = 3;
 
+/// Releases a frame once Flutter and the plugin are done reading it
+/// (`GpuSyncKind.cpuComplete`, the default): the plugin copies a frame before
+/// it returns, and Flutter left the slots that the plugin reports free.
+const _cpuComplete = GpuSync();
+
 /// How often a target that holds frames checks whether Flutter let go of the
 /// frames that it replaced, while there are any.
 const _recycleInterval = Duration(milliseconds: 4);
+
+/// The logical size of [extent], without its scale factor, which belongs to
+/// the map.
+LogicalSize logicalSize(LogicalExtent extent) =>
+    LogicalSize(width: extent.width, height: extent.height);
 
 /// The device pixel size of [extent].
 (int, int) physicalSize(LogicalExtent extent) => (
@@ -57,7 +67,11 @@ abstract base class FrameTarget {
 
   /// Attaches a render session of [map] to this target. Frames wake through
   /// [frameWake]. When this throws, the renderer disposes the target.
-  NewRenderSession attach(MapHandle map, LogicalExtent extent, Wake frameWake);
+  RenderSessionHandle attach(
+    MapHandle map,
+    LogicalExtent extent,
+    Wake frameWake,
+  );
 
   /// Sizes the target and the session to [extent].
   Future<void> resize(RenderSessionHandle session, LogicalExtent extent);
@@ -66,10 +80,10 @@ abstract base class FrameTarget {
   /// there was none to hand over.
   Future<bool> present(RenderSessionHandle session);
 
-  /// Closes the session. A core-worker session detaches from its target
+  /// Releases the session. A core-worker session detaches from its target
   /// there, off the UI thread, and the returned future completes once no
   /// library thread touches the target's graphics objects anymore.
-  Future<void> endSession(RenderSessionHandle session) => session.close();
+  Future<void> endSession(RenderSessionHandle session) => session.release();
 
   /// Releases the texture once the session, map, and runtime are closed.
   void dispose();
@@ -105,7 +119,7 @@ abstract base class BorrowedRingTarget<Slot> extends FrameTarget {
   Timer? _recycler;
 
   /// Attaches the session to the ring [slots] at [extent].
-  NewRenderSession attachRing(
+  RenderSessionHandle attachRing(
     MapHandle map,
     LogicalExtent extent,
     RenderSessionAttachOptions options,
@@ -132,8 +146,10 @@ abstract base class BorrowedRingTarget<Slot> extends FrameTarget {
   /// Has the plugin unregister the texture and release its rings.
   void disposeTexture();
 
+  /// Frames are complete on the GPU once acquired, so the plugin can copy or
+  /// sample them without waiting.
   @override
-  NewRenderSession attach(
+  RenderSessionHandle attach(
     MapHandle map,
     LogicalExtent extent,
     Wake frameWake,
@@ -142,6 +158,7 @@ abstract base class BorrowedRingTarget<Slot> extends FrameTarget {
     extent,
     RenderSessionAttachOptions(
       driver: RenderDriverKind.coreWorker,
+      producerSyncKinds: GpuSyncKindFlag.cpuComplete,
       frameWake: frameWake,
     ),
   );
@@ -171,11 +188,11 @@ abstract base class BorrowedRingTarget<Slot> extends FrameTarget {
       slot = slotOf(frame);
       presentSlot(slot);
     } on Object {
-      frame.release();
+      frame.release(_cpuComplete);
       rethrow;
     }
     if (!holdsFrames) {
-      frame.release();
+      frame.release(_cpuComplete);
       return true;
     }
     _held.add((slot, frame));
@@ -192,7 +209,7 @@ abstract base class BorrowedRingTarget<Slot> extends FrameTarget {
       final (slot, frame) = held;
       final onScreen = index == _held.length - 1;
       if (all || (!onScreen && !slotInUse(slot))) {
-        frame.release();
+        frame.release(_cpuComplete);
       } else {
         keep.add(held);
       }

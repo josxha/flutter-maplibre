@@ -20,30 +20,40 @@ final class _MetalTextureTarget
   @override
   bool get holdsFrames => true;
 
-  MetalBorrowedTextureDescriptor _descriptor(LogicalExtent extent) {
-    final (width, height) = physicalSize(extent);
-    return MetalBorrowedTextureDescriptor(
-      extent: extent,
-      physicalWidth: width,
-      physicalHeight: height,
-      textures: slots,
-    );
-  }
-
   @override
-  NewRenderSession attachRing(
+  RenderSessionHandle attachRing(
     MapHandle map,
     LogicalExtent extent,
     RenderSessionAttachOptions options,
-  ) => map.attachMetalBorrowedTexture(_descriptor(extent), options);
+  ) {
+    final (width, height) = physicalSize(extent);
+    return map.attachMetalBorrowedTexture(
+      MetalBorrowedTextureDescriptor(
+        logicalSize: logicalSize(extent),
+        physicalWidth: width,
+        physicalHeight: height,
+        textures: slots,
+      ),
+      options,
+    );
+  }
 
   @override
   List<MetalBorrowedTexture> resizeRing(int width, int height) =>
       DarwinPlugin.resizeGpuTexture(textureId, width, height, gpuSlotCount);
 
   @override
-  Future<void> setRing(RenderSessionHandle session, LogicalExtent extent) =>
-      session.setMetalBorrowedTextureTarget(_descriptor(extent));
+  Future<void> setRing(RenderSessionHandle session, LogicalExtent extent) {
+    final (width, height) = physicalSize(extent);
+    return session.setMetalBorrowedTextureTarget(
+      MetalBorrowedTextureReplacement(
+        logicalSize: logicalSize(extent),
+        physicalWidth: width,
+        physicalHeight: height,
+        textures: slots,
+      ),
+    );
+  }
 
   @override
   void releaseRetiredRings() => DarwinPlugin.releaseRetiredSlots(textureId);

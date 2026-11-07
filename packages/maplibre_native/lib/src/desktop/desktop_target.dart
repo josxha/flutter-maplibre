@@ -13,6 +13,10 @@ const _vkImageLayoutGeneral = 1;
 
 VulkanContextDescriptor? _vulkanContext;
 
+/// The device of every map that reads its frames back, which lives as long
+/// as the process.
+OffscreenDeviceHandle? _offscreenDevice;
+
 /// The Vulkan device that the Windows or Linux plugin created on Flutter's
 /// GPU, which every map borrows.
 VulkanContextDescriptor _context() =>
@@ -38,7 +42,7 @@ FrameTarget createDesktopTarget(LogicalExtent extent) {
     'maplibre_native: zero-copy textures are unavailable '
     '($unavailable), falling back to CPU readback.',
   );
-  return _PixelBufferTarget(context, DesktopPlugin.createPixelTexture());
+  return _PixelBufferTarget(DesktopPlugin.createPixelTexture());
 }
 
 /// A ring of Vulkan images whose memory Flutter's graphics API shares. On
@@ -57,33 +61,43 @@ final class _VulkanTextureTarget
   @override
   bool get holdsFrames => Platform.isLinux;
 
-  VulkanBorrowedTextureDescriptor _descriptor(LogicalExtent extent) {
-    final (width, height) = physicalSize(extent);
-    return VulkanBorrowedTextureDescriptor(
-      extent: extent,
-      physicalWidth: width,
-      physicalHeight: height,
-      context: _context,
-      textures: slots,
-      format: _format,
-      finalLayout: _vkImageLayoutGeneral,
-    );
-  }
-
   @override
-  NewRenderSession attachRing(
+  RenderSessionHandle attachRing(
     MapHandle map,
     LogicalExtent extent,
     RenderSessionAttachOptions options,
-  ) => map.attachVulkanBorrowedTexture(_descriptor(extent), options);
+  ) {
+    final (width, height) = physicalSize(extent);
+    return map.attachVulkanBorrowedTexture(
+      VulkanBorrowedTextureDescriptor(
+        logicalSize: logicalSize(extent),
+        physicalWidth: width,
+        physicalHeight: height,
+        context: _context,
+        textures: slots,
+        format: _format,
+        finalLayout: _vkImageLayoutGeneral,
+      ),
+      options,
+    );
+  }
 
   @override
   List<VulkanBorrowedTexture> resizeRing(int width, int height) =>
       DesktopPlugin.resizeGpuTexture(textureId, width, height, gpuSlotCount);
 
   @override
-  Future<void> setRing(RenderSessionHandle session, LogicalExtent extent) =>
-      session.setVulkanBorrowedTextureTarget(_descriptor(extent));
+  Future<void> setRing(RenderSessionHandle session, LogicalExtent extent) {
+    final (width, height) = physicalSize(extent);
+    return session.setVulkanBorrowedTextureTarget(
+      VulkanBorrowedTextureReplacement(
+        logicalSize: logicalSize(extent),
+        physicalWidth: width,
+        physicalHeight: height,
+        textures: slots,
+      ),
+    );
+  }
 
   @override
   void releaseRetiredRings() => DesktopPlugin.releaseRetiredSlots(textureId);
@@ -103,12 +117,10 @@ final class _VulkanTextureTarget
   void disposeTexture() => DesktopPlugin.disposeTexture(textureId);
 }
 
-/// A session-owned Vulkan texture read back to the CPU into a pixel buffer
-/// texture, where the GPU can't share memory with Flutter.
+/// An offscreen session whose frames are read back to the CPU into a pixel
+/// buffer texture, where the GPU can't share memory with Flutter.
 final class _PixelBufferTarget extends FrameTarget {
-  _PixelBufferTarget(this._context, this.textureId);
-
-  final VulkanContextDescriptor _context;
+  _PixelBufferTarget(this.textureId);
 
   @override
   final int textureId;
@@ -117,21 +129,22 @@ final class _PixelBufferTarget extends FrameTarget {
   bool get isZeroCopy => false;
 
   @override
-  NewRenderSession attach(
+  RenderSessionHandle attach(
     MapHandle map,
     LogicalExtent extent,
     Wake frameWake,
-  ) => map.attachVulkanOwnedTexture(
-    VulkanOwnedTextureDescriptor(extent: extent, context: _context),
+  ) => map.attachOffscreen(
+    OffscreenDescriptor(logicalSize: logicalSize(extent)),
     RenderSessionAttachOptions(
       driver: RenderDriverKind.coreWorker,
       frameWake: frameWake,
     ),
+    device: _offscreenDevice ??= OffscreenDeviceHandle.create(),
   );
 
   @override
   Future<void> resize(RenderSessionHandle session, LogicalExtent extent) =>
-      session.resize(extent);
+      session.resize(logicalSize(extent));
 
   @override
   Future<bool> present(RenderSessionHandle session) async {

@@ -61,25 +61,6 @@ extension MapLibreMapExt on MapLibreMap {
           : mln.RuntimeEventFlag.none);
 }
 
-/// Extension methods for the [GeoJsonSource] class.
-extension GeoJsonSourceExt on GeoJsonSource {
-  /// The options that data for this source must be prepared with.
-  mln.GeoJsonSourceOptions toMlnOptions() {
-    final json = geoJsonOptionsOf(this);
-    return mln.GeoJsonSourceOptions(
-      maxZoom: (json['maxzoom'] as num?)?.toDouble(),
-      tolerance: (json['tolerance'] as num?)?.toDouble(),
-      buffer: (json['buffer'] as num?)?.toInt(),
-      lineMetrics: json['lineMetrics'] as bool?,
-      cluster: json['cluster'] as bool?,
-      clusterRadius: (json['clusterRadius'] as num?)?.toInt(),
-      clusterMaxZoom: (json['clusterMaxZoom'] as num?)?.toDouble(),
-      clusterMinPoints: (json['clusterMinPoints'] as num?)?.toInt(),
-      clusterProperties: json['clusterProperties'],
-    );
-  }
-}
-
 /// Extension methods for the [StyleImageOptions] class.
 extension StyleImageOptionsExt on StyleImageOptions {
   /// These options for an image of [pixelRatio].

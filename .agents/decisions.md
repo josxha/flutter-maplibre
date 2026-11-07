@@ -8,7 +8,7 @@ Each entry: the decision, then why.
   for everything else.** One C API serves every native platform, so the
   per-platform packages (android, ios, webview) were removed.
 - **The C API comes from the `maplibre_native_ffi` package on pub.dev
-  (0.202610.3), whose build hook downloads the prebuilt C library of its
+  (0.202611.0), whose build hook downloads the prebuilt C library of its
   release, checked against digests pinned in the package.** No submodule and
   no local C build are needed; `local_build` (see Build and CI) points the
   hook at one when the C library changes.
@@ -140,12 +140,12 @@ Each entry: the decision, then why.
   the session has left it. An old `EGLSurface` is destroyed once
   `set_opengl_surface_target` completes; it can still be current on the render
   thread until the next frame, and EGL defers destroying it until then.
-- **Sessions end with `RenderSessionHandle.close()`, not `abandon()`.** Close
-  detaches a core-worker session off the UI thread and completes once no
-  library thread touches the target, after which the plugin frees its
+- **Sessions end with `RenderSessionHandle.release()`, not `abandon()`.**
+  Release detaches a core-worker session off the UI thread and completes once
+  no library thread touches the target, after which the plugin frees its
   texture or surface. Abandon blocked the UI thread on the map's tile work
-  and GPU queue. Close reports nothing about kept objects; a Vulkan swapchain
-  is kept only when the process exits or its queue fails to drain.
+  and GPU queue. Release reports nothing about kept objects; a Vulkan
+  swapchain is kept only when the process exits or its queue fails to drain.
 - **HTTP follows the app's network security config (0.202610.3), so
   cleartext needs the app's permission.** The example permits it for
   127.0.0.1 and localhost in its debug source set only, for the local test
@@ -226,11 +226,10 @@ Each entry: the decision, then why.
   texture registrar functions may be called from any thread. On Android the UI
   thread is the main thread, which SurfaceProducer needs.
 - **Vulkan sessions use the core-worker driver, OpenGL ES sessions the render
-  thread of the plugin, with frame wakes drained on the Dart isolate.** Frame demands use `waitForUpdate` (plus `present` on
-  Android); since 0.202610.3 a demand without `force` renders only a newer
-  map update, so idle maps don't render. The frame wake is a `Wake.native`
-  over two `NativeCallable.listener`s that the package owns (see Known
-  gaps). A map's event mask holds the events the state always handles plus
+  thread of the plugin, with frame wakes drained on the Dart isolate.** Frame
+  demands use `waitForUpdate`, so a demand renders only a newer map update and
+  idle maps don't render, and every rendered frame is presented. The frame
+  wake is a `Wake` with a Dart callback. A map's event mask holds the events the state always handles plus
   the ones whose `MapLibreMap` callback is set, and follows the widget
   (`setEventMask`), so per-frame render events are only queued while
   `onRenderFrame` listens. Runtime events arrive through
@@ -318,10 +317,9 @@ Each entry: the decision, then why.
   source JSON and on data updates).
 - **Clustering is an optional `GeoJsonCluster` on `GeoJsonSource`, not a
   separate source type.** Sources are immutable data, so the cluster queries
-  live on `MapController` next to the other queries: native asks the
-  `supercluster` feature extension of the C API with a stub feature that only
-  carries `cluster_id` (and needs an arguments object, `{}` if empty); web
-  calls the methods of the gl-js `GeoJSONSource`.
+  live on `MapController` next to the other queries: native calls the typed
+  cluster queries of the render session; web calls the methods of the gl-js
+  `GeoJSONSource`.
 - **`setProjection` takes an `Expression<MapProjection>`**, the projection
   definition of the style spec, so web can interpolate projections by zoom.
   `MapProjection` is a `StyleEnum`. gl-js reports `globe-mercator` for a
@@ -533,7 +531,10 @@ Each entry: the decision, then why.
   runs in the platform. Discrete zooms (wheel, double tap) use `zoomBy`.
 - **Native applies steps with `mln_map_apply_camera_delta`**, the C API's
   equivalent of mbgl's moveBy/scaleBy/rotateBy/pitchBy, one atomic delta per
-  step with the gesture phase. Native maps don't fling yet.
+  step with the gesture phase. A released pan flings as the map's gesture
+  momentum (an eased glide with web's pan inertia constants, carried by the
+  end delta), which the next gesture's begin stops. Zoom and rotation don't
+  fling, as on web.
 - **On web, Flutter is the only hit-tester.** The gl-js map is created with
   `interactive: false` and its container has `pointer-events: none`, so the
   browser hands every pointer to Flutter, and widgets over the map no longer
@@ -660,35 +661,26 @@ Each entry: the decision, then why.
   bounds, even `unbounded`). The C API has no getter for the style's camera.
   So a map without `MapOptions.initCamera` sets its camera constraints after
   the first style loaded, and frames before that are unconstrained.
-- MapLibre Native drops the attribution of GeoJSON sources, so
-  `StyleControllerNative` takes it from `StyleSources`, which has it from the
-  loaded style JSON and from `sources.add`.
 - `maplibre_native_ffi` has no call to change the tiles or the TileJSON URL of
   raster, raster DEM and vector sources. `StyleControllerNative` removes the
   layers that use the source, swaps the source and adds the layers back at
   their positions, in one command group. `getStyleSource` is lossy (no
-  `url` for inline tiles, no GeoJSON attribution or data), so sources are read
-  from `getLoadedStyleJson` instead.
+  inline tiles or GeoJSON data), so sources are read from
+  `getLoadedStyleJson` instead.
 - `getLoadedStyleJson` returns the style document as it was parsed, so it only
   fills the cache on load.
 - Feature queries on native don't return layers in their order, and layers with
   the same layout share one symbol placement. So the tests check the order of
   layers through symbol placement, with icons of slightly different sizes.
-- In profile and release builds (AOT) of `maplibre_native_ffi` 0.202610.2
-  and 0.202610.3, a native map stopped showing frames after about 30. The
-  write-only `NativeHandleState._callbackRoots`
-  (`lib/src/internal/lifecycle/lifecycle.dart`) is tree-shaken, and a
-  render session's queued registrations are rooted only there, so its frame
-  wake was collected and wakes were dropped. `@pragma('vm:entry-point')` on
-  the field fixes it (checked on Windows through a local override). Until
-  upstream fixes it, `MapRenderer` attaches with its own `_FrameWake`:
-  listener callables that it owns, closed by the wake's release. Map and
-  runtime registrations (event handler, camera transition ends) are rooted
-  through fields the binding reads, so they are not affected.
-- `GeoJsonSourceDataHandle.create` parses and indexes GeoJSON on the calling
-  thread, so large GeoJSON updates block the UI thread. An async variant
-  would move it off. `synchronous_tiling` only decides whether tiles are cut
-  inline on update or on a worker afterwards.
+- `MapHandle.setStyleUrl` and `setStyleJson` complete once the style
+  document parsed, and fail when it doesn't load. The map state only submits
+  the style and doesn't wait: later commands run after it anyway, a failure
+  reaches `onError` through the loading failed event, and a newer style
+  cancels an older one.
+- `setGeoJsonSourceData` prepares the data in the background, but the binding
+  still `jsonEncode`s it, so `GeoJsonData.text` is decoded in Dart and
+  encoded again. Newer data cancels data that isn't ready yet, which
+  `setGeoJsonData` treats as done.
 - The C API has no setter for the offline tile count limit and no automatic
   database packing, so `setOfflineTileCountLimit` and
   `runPackDatabaseAutomatically` were removed from the `OfflineManager`.
@@ -728,6 +720,3 @@ Each entry: the decision, then why.
 - Web lost gl-js's keyboard navigation and shift-drag box zoom, which the
   shared recognizer doesn't offer, and its grab cursor. Zoom and rotation
   don't fling, only pans.
-- Native maps ignore the fling velocity of `gestureEnd`: a released pan
-  stops dead. The C API has no inertia, so it would run in Dart over
-  animated camera deltas.

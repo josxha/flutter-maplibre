@@ -88,21 +88,21 @@ final class _SurfaceTarget extends FrameTarget {
   int get textureId => _texture.textureId;
 
   @override
-  FrameDemandFlag get demandFlags =>
-      super.demandFlags | FrameDemandFlag.present;
-
-  @override
   bool get acceptsFrames => _surfaceAvailable;
 
   @override
-  NewRenderSession attach(MapHandle map, LogicalExtent extent, Wake frameWake) {
-    final NewRenderSession attachment;
+  RenderSessionHandle attach(
+    MapHandle map,
+    LogicalExtent extent,
+    Wake frameWake,
+  ) {
+    final RenderSessionHandle session;
     if (opengl) {
       // Attachment and every frame are driver work, which the client wakes
       // the render thread for from the start.
       final client = _renderClient = _RenderClient();
       try {
-        attachment = map.attachOpenGlSurface(
+        session = map.attachOpenGlSurface(
           _openglDescriptor(_texture.surface, extent),
           RenderSessionAttachOptions(
             driver: RenderDriverKind.callerGraphicsThread,
@@ -115,9 +115,9 @@ final class _SurfaceTarget extends FrameTarget {
         _renderClient = null;
         rethrow;
       }
-      client.start(attachment.session);
+      client.start(session);
     } else {
-      attachment = map.attachVulkanSurface(
+      session = map.attachVulkanSurface(
         _vulkanDescriptor(_texture.surface, extent),
         RenderSessionAttachOptions(
           driver: RenderDriverKind.coreWorker,
@@ -125,15 +125,14 @@ final class _SurfaceTarget extends FrameTarget {
         ),
       );
     }
-    _session = attachment.session;
-    return attachment;
+    return _session = session;
   }
 
   OpenGlSurfaceDescriptor _openglDescriptor(
     int surface,
     LogicalExtent extent,
   ) => OpenGlSurfaceDescriptor(
-    extent: extent,
+    logicalSize: logicalSize(extent),
     context: _eglContext!,
     surface: NativePointer(surface),
   );
@@ -142,7 +141,7 @@ final class _SurfaceTarget extends FrameTarget {
     int surface,
     LogicalExtent extent,
   ) => VulkanSurfaceDescriptor(
-    extent: extent,
+    logicalSize: logicalSize(extent),
     context: _vulkanContext!,
     surface: surface,
   );
@@ -160,7 +159,7 @@ final class _SurfaceTarget extends FrameTarget {
     if (oldSurface != null) {
       await _replaceSurface(surface, oldSurface, extent);
     } else {
-      await session.resize(extent);
+      await session.resize(logicalSize(extent));
     }
   }
 
@@ -203,11 +202,17 @@ final class _SurfaceTarget extends FrameTarget {
         // The old EGLSurface stays current on the render thread until the
         // next frame, but EGL defers destroying it until then.
         await session.setOpenGlSurfaceTarget(
-          _openglDescriptor(surface, extent),
+          OpenGlSurfaceReplacement(
+            logicalSize: logicalSize(extent),
+            surface: NativePointer(surface),
+          ),
         );
       } else {
         await session.setVulkanSurfaceTarget(
-          _vulkanDescriptor(surface, extent),
+          VulkanSurfaceReplacement(
+            logicalSize: logicalSize(extent),
+            surface: surface,
+          ),
         );
       }
     }
@@ -228,7 +233,7 @@ final class _SurfaceTarget extends FrameTarget {
       }
       client.stop();
     }
-    await session.close();
+    await session.release();
   }
 
   /// The session closed, so nothing presents to the surface anymore.
