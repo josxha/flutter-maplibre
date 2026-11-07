@@ -37,7 +37,7 @@ MapLibreMap(
 | `maxBounds`             | The area the camera stays in.                                                   |
 | `movements`             | What the user may change, see [Gestures](#gestures).                            |
 | `gestures`              | Which gestures move the map, see [Gestures](#gestures).                         |
-| `fastPforEnabled`       | Decode MLT tiles that use FastPFOR, see [Sources](sources.md#maplibre-tiles-mlt). Only read once. Always on for web. |
+| `fastPforEnabled`       | Decode MLT tiles that use FastPFOR, see [Sources](sources/tiles.md#maplibre-tiles-mlt). Only read once. Always on for web. |
 
 ## Initial camera
 
