@@ -127,26 +127,31 @@ void runTests() {
       await a.down(finger(-1), timeStamp: time);
       await b.down(finger(1), timeStamp: time);
       // Enough steps that the fling speed is measured after the recognizer
-      // has accepted the gesture, which takes a few moves.
-      for (var i = 0; i < 20; i++) {
+      // has accepted the gesture, which takes a few moves. The fingers lift
+      // right after their last move: a velocity tracker reads a pause of more
+      // than 40 ms of real time as a stop.
+      const steps = 20;
+      const grow = 1.04;
+      const turn = 0.03;
+      for (var i = 0; i < steps; i++) {
+        await tester.pump(const Duration(milliseconds: 16));
         time += const Duration(milliseconds: 16);
-        radius *= 1.04;
-        angle += 0.02;
+        radius *= grow;
+        angle += turn;
         await a.moveTo(finger(-1), timeStamp: time);
         await b.moveTo(finger(1), timeStamp: time);
-        await tester.pump(const Duration(milliseconds: 16));
       }
-      final released = await map.waitForCamera(
-        (camera) => camera.zoom > before.zoom + 0.5,
-      );
       await a.up(timeStamp: time);
       await b.up(timeStamp: time);
 
+      // Past what the fingers did themselves.
+      final pinched = steps * log(grow) / ln2;
+      const twisted = steps * turn * 180 / pi;
       final flung = await map.waitForCamera(
         (camera) =>
-            camera.zoom > released.zoom + 0.1 && _turned(released, camera) < -1,
+            camera.zoom > before.zoom + pinched + 0.2 &&
+            _turned(before, camera) < -twisted - 5,
       );
-      expect(flung.zoom, greaterThan(released.zoom));
       final end = await map.waitForEvent<MapEventCameraMoveEnd>(since: since);
       expect(end.camera.zoom, greaterThanOrEqualTo(flung.zoom));
     }, skip: kIsWeb);
