@@ -13,7 +13,7 @@ iOS, macOS, Windows and Linux, and with
 !!! info "Version 0.4"
 
     These docs describe the 0.4 series, available as the pre-release
-    `0.4.0-pre.1`. If you upgrade from 0.3.x, read the
+    `0.4.0-pre.2`. If you upgrade from 0.3.x, read the
     [migration guide](migrate/upgrade-from-v0.3.x.md).
 
 ## Getting started
@@ -39,12 +39,16 @@ iOS, macOS, Windows and Linux, and with
 
 - [Annotations](annotations/index.md): circles, markers, polygons, polylines
   and widgets, updated with `setState()`.
-- [Sources](sources.md) and [Style Layers](style-layers/index.md): the full
-  MapLibre style spec, with typed [expressions](style-layers/expressions.md).
+- [Sources](sources/index.md): GeoJSON, vector and raster tiles, images and
+  video.
+- [Style Layers](style-layers/index.md): every layer type of the MapLibre
+  style spec, with typed [expressions](style-layers/expressions.md).
 
 ## More
 
 - [Migration guides](migrate/upgrade-from-v0.3.x.md) from earlier versions
-  and from other map packages.
+  and from maplibre_gl, flutter_map, google_maps_flutter and
+  mapbox_maps_flutter.
+- [Compare](../compare/index.md) `maplibre` with other map packages.
 - [Architecture](contributing/architecture.md) and
   [Local development](contributing/development.md) for contributors.
