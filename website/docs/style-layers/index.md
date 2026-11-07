@@ -51,7 +51,7 @@ See [Paint & Layout](paint-and-layout.md) for the properties,
 
 ## Circle
 
-[![Circle Style Layer](../../assets/images/layers/circle_layer.jpg)](/demo/#/style-layers/circle)
+[![Circle Style Layer](../../assets/images/layers/circle_layer.jpg)](../../demo/#/style-layers/circle)
 
 A `CircleStyleLayer` draws a circle for each point. Use it for point data such
 as measurements or events.
@@ -72,7 +72,7 @@ See the
 
 ## Fill
 
-[![Fill Style Layer](../../assets/images/layers/fill_layer.jpg)](/demo/#/style-layers/fill)
+[![Fill Style Layer](../../assets/images/layers/fill_layer.jpg)](../../demo/#/style-layers/fill)
 
 A `FillStyleLayer` fills polygons, optionally with an outline.
 
@@ -95,7 +95,7 @@ See the
 
 ## Fill Extrusion
 
-[![Fill Extrusion Style Layer](../../assets/images/layers/fill_extrusion_layer.jpg)](/demo/#/style-layers/fill-extrusion)
+[![Fill Extrusion Style Layer](../../assets/images/layers/fill_extrusion_layer.jpg)](../../demo/#/style-layers/fill-extrusion)
 
 A `FillExtrusionStyleLayer` extrudes polygons to 3D shapes, such as buildings.
 Tilt the map to see their height.
@@ -124,7 +124,7 @@ See the
 
 ## Heatmap
 
-[![Heatmap Style Layer](../../assets/images/layers/heatmap_layer.jpg)](/demo/#/style-layers/heatmap)
+[![Heatmap Style Layer](../../assets/images/layers/heatmap_layer.jpg)](../../demo/#/style-layers/heatmap)
 
 A `HeatmapStyleLayer` shows the density of points as a color gradient.
 
@@ -139,7 +139,7 @@ See the
 
 ## Hillshade
 
-[![Hillshade Style Layer](../../assets/images/layers/hillshade_layer.jpg)](/demo/#/style-layers/hillshade)
+[![Hillshade Style Layer](../../assets/images/layers/hillshade_layer.jpg)](../../demo/#/style-layers/hillshade)
 
 A `HillshadeStyleLayer` shades terrain from the elevation tiles of a
 [`RasterDemSource`](../sources/tiles.md#raster-dem-tiles).
@@ -168,7 +168,7 @@ See the
 
 ## Line
 
-[![Line Style Layer](../../assets/images/layers/line_layer.jpg)](/demo/#/style-layers/line)
+[![Line Style Layer](../../assets/images/layers/line_layer.jpg)](../../demo/#/style-layers/line)
 
 A `LineStyleLayer` draws lines and the outlines of polygons, such as routes,
 roads or borders.
@@ -193,7 +193,7 @@ See the
 
 ## Raster
 
-[![Raster Style Layer](../../assets/images/layers/raster_layer.jpg)](/demo/#/style-layers/raster)
+[![Raster Style Layer](../../assets/images/layers/raster_layer.jpg)](../../demo/#/style-layers/raster)
 
 A `RasterStyleLayer` shows the image tiles of a
 [`RasterSource`](../sources/tiles.md#raster-tiles), such as satellite imagery,
@@ -217,7 +217,7 @@ See the
 
 ## Symbol
 
-[![Symbol Style Layer](../../assets/images/layers/symbol_layer.jpg)](/demo/#/style-layers/symbol)
+[![Symbol Style Layer](../../assets/images/layers/symbol_layer.jpg)](../../demo/#/style-layers/symbol)
 
 A `SymbolStyleLayer` draws icons and text labels. Add the icon image to the
 style first:

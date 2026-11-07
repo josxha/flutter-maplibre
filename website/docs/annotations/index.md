@@ -24,7 +24,7 @@ frequently changing data, add a [source](../sources/index.md) and a
 
 ## Circles
 
-<a href="/demo/#/layers/circle">
+<a href="../../demo/#/layers/circle">
 <img src="../../assets/images/annotations/annotations-circles.jpg" alt="Circles" />
 </a>
 
@@ -56,7 +56,7 @@ See the
 
 ## Markers
 
-<a href="/demo/#/layers/marker">
+<a href="../../demo/#/layers/marker">
 <img src="../../assets/images/annotations/annotations-markers.jpg" alt="Markers" />
 </a>
 
@@ -103,7 +103,7 @@ See the
 
 ## Polygons
 
-<a href="/demo/#/layers/polygon">
+<a href="../../demo/#/layers/polygon">
 <img src="../../assets/images/annotations/annotations-polygon.jpg" alt="Polygons" />
 </a>
 
@@ -141,7 +141,7 @@ See the
 
 ## Polylines
 
-<a href="/demo/#/layers/polyline">
+<a href="../../demo/#/layers/polyline">
 <img src="../../assets/images/annotations/annotations-polyline.jpg" alt="Polylines" />
 </a>
 

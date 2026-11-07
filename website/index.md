@@ -17,7 +17,7 @@ server. `maplibre` needs no API key of its own and has no vendor lock-in.
 
 <div class="ml-hero__buttons" markdown>
 [Get started](docs/getting-started/setup.md){ .md-button .md-button--primary }
-[Live demo](/demo/){ .md-button }
+[Live demo](demo/){ .md-button }
 [GitHub](https://github.com/josxha/flutter-maplibre){ .md-button }
 </div>
 
@@ -30,7 +30,7 @@ server. `maplibre` needs no API key of its own and has no vendor lock-in.
 
 </div>
 <div class="ml-hero__image" markdown>
-[![A styled map](assets/images/showcase-map.jpg)](/demo/)
+[![A styled map](assets/images/showcase-map.jpg)](demo/)
 </div>
 </div>
 
@@ -133,19 +133,19 @@ MapLibreMap(
 ## What you can build { .ml-section-title }
 
 <p class="ml-section-lead">
-Every example runs in the <a href="/demo/">live demo</a>, and its code is in the
+Every example runs in the <a href="demo/">live demo</a>, and its code is in the
 <a href="https://github.com/josxha/flutter-maplibre/tree/main/examples/lib">example app</a>.
 </p>
 
 <div class="ml-gallery">
-  <a href="/demo/#/style-layers/fill-extrusion"><img src="assets/images/layers/fill_extrusion_layer.jpg" alt="" loading="lazy"><span>3D buildings</span></a>
-  <a href="/demo/#/style-layers/heatmap"><img src="assets/images/layers/heatmap_layer.jpg" alt="" loading="lazy"><span>Heatmaps</span></a>
-  <a href="/demo/#/style-layers/hillshade"><img src="assets/images/layers/hillshade_layer.jpg" alt="" loading="lazy"><span>Hillshading</span></a>
-  <a href="/demo/#/style-layers/raster"><img src="assets/images/layers/raster_layer.jpg" alt="" loading="lazy"><span>Raster tiles</span></a>
-  <a href="/demo/#/layers/marker"><img src="assets/images/annotations/annotations-markers.jpg" alt="" loading="lazy"><span>Markers</span></a>
-  <a href="/demo/#/layers/polygon"><img src="assets/images/annotations/annotations-polygon.jpg" alt="" loading="lazy"><span>Polygons</span></a>
-  <a href="/demo/#/layers/polyline"><img src="assets/images/annotations/annotations-polyline.jpg" alt="" loading="lazy"><span>Polylines</span></a>
-  <a href="/demo/#/style-layers/circle"><img src="assets/images/layers/circle_layer.jpg" alt="" loading="lazy"><span>Circles</span></a>
+  <a href="demo/#/style-layers/fill-extrusion"><img src="assets/images/layers/fill_extrusion_layer.jpg" alt="" loading="lazy"><span>3D buildings</span></a>
+  <a href="demo/#/style-layers/heatmap"><img src="assets/images/layers/heatmap_layer.jpg" alt="" loading="lazy"><span>Heatmaps</span></a>
+  <a href="demo/#/style-layers/hillshade"><img src="assets/images/layers/hillshade_layer.jpg" alt="" loading="lazy"><span>Hillshading</span></a>
+  <a href="demo/#/style-layers/raster"><img src="assets/images/layers/raster_layer.jpg" alt="" loading="lazy"><span>Raster tiles</span></a>
+  <a href="demo/#/layers/marker"><img src="assets/images/annotations/annotations-markers.jpg" alt="" loading="lazy"><span>Markers</span></a>
+  <a href="demo/#/layers/polygon"><img src="assets/images/annotations/annotations-polygon.jpg" alt="" loading="lazy"><span>Polygons</span></a>
+  <a href="demo/#/layers/polyline"><img src="assets/images/annotations/annotations-polyline.jpg" alt="" loading="lazy"><span>Polylines</span></a>
+  <a href="demo/#/style-layers/circle"><img src="assets/images/layers/circle_layer.jpg" alt="" loading="lazy"><span>Circles</span></a>
 </div>
 
 ## Platforms { .ml-section-title }

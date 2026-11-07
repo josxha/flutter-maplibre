@@ -54,7 +54,7 @@ nav:
   - Features: features/index.md
   - Compare: compare/index.md
   - API: https://pub.dev/documentation/maplibre/latest/maplibre/
-  - Demo: /demo/
+  - Demo: demo/
   - pub.dev: https://pub.dev/packages/maplibre
 
 theme:
