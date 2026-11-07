@@ -28,7 +28,7 @@ sources, sprites and glyphs with your own URLs.
 
 ```bash
 flutter pub remove mapbox_maps_flutter
-flutter pub add maplibre
+flutter pub add maplibre:^0.4.0-pre.2
 ```
 
 Remove `MapboxOptions.setAccessToken`, the access token from your build
@@ -238,6 +238,7 @@ manager of Mapbox, but not on web. See [Offline & Cache](../offline.md).
 ## What `maplibre` adds
 
 - macOS, Windows and Linux.
-- Any tile provider or your own tiles, without access tokens or usage fees.
+- Any tile provider or your own tiles. Tokens and fees depend only on the
+  provider you choose.
 - Declarative annotation layers and [Flutter widgets on the map](../annotations/widgets.md).
 - Typed style layers and [expressions](../style-layers/expressions.md).

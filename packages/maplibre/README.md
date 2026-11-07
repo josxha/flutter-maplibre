@@ -11,8 +11,9 @@
 
 Interactive vector maps for Flutter on Android, iOS, macOS, Windows, Linux and
 web, built on [MapLibre](https://maplibre.org). Show any MapLibre or Mapbox
-compatible style, from any tile provider or your own server, without an API key
-or vendor lock-in.
+compatible style, from any tile provider or your own server. `maplibre` needs
+no API key of its own; keys and fees depend only on the tile provider you
+choose.
 
 <p align="center">
   <a href="https://flutter-maplibre.pages.dev/demo">
@@ -34,8 +35,8 @@ or vendor lock-in.
 
 - **Six platforms, one API**: Android, iOS, macOS, Windows, Linux and web,
   with the same gestures and behavior everywhere.
-- **Flutter first**: maps render into a Flutter `Texture`, so widgets over and
-  around the map compose like any other widget. Annotations are declarative
+- **Flutter first**: maps render into a Flutter `Texture` (an HTML element on
+  web), so widgets over and around the map compose like any other widget. Annotations are declarative
   layers that you update with `setState()`.
 - **Fast interop**: calls MapLibre through FFI (and maplibre-gl-js through JS
   interop on web) instead of platform channels, and many values, such as the
@@ -91,8 +92,9 @@ binding. `maplibre_web` uses
 
 ## maplibre or maplibre_gl?
 
-There are two Flutter packages for MapLibre. They take different approaches,
-and both are maintained:
+There are two Flutter packages for MapLibre. They take different approaches.
+`maplibre_gl` is a hosted project of the MapLibre organization, and `maplibre`
+is being onboarded as one:
 
 |                 | `maplibre` (this package)                                   | [`maplibre_gl`](https://pub.dev/packages/maplibre_gl)           |
 |-----------------|-------------------------------------------------------------|-----------------------------------------------------------------|
@@ -100,11 +102,12 @@ and both are maintained:
 | Platforms       | Android, iOS, macOS, Windows, Linux, web                    | Android, iOS, web                                               |
 | Interop         | FFI and JS interop, maps render into a Flutter `Texture`    | Platform channels, maps are platform views                      |
 | API             | Declarative annotations, synchronous where possible         | Imperative controller, asynchronous                             |
-| Releases        | Iterates fast, with breaking changes when they help         | Keeps its API stable, with gradual deprecations                 |
 
 Choose `maplibre` for desktop platforms, a declarative and typed API, or
-widgets that compose with the map. Choose `maplibre_gl` if you need an API
-that rarely changes. The
+widgets that compose with the map. Choose `maplibre_gl` if you prefer the
+MapLibre SDKs to handle as much as possible. `maplibre` keeps its tech stack
+up to date, follows semantic versioning, and has a migration guide for every
+breaking release. The
 [comparison](https://flutter-maplibre.pages.dev/compare/) covers other map
 packages as well.
 

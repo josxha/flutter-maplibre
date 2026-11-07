@@ -10,7 +10,8 @@ icon: lucide/box
 update with `setState()`, so the structure of your map code stays the same.
 The difference is the renderer: `flutter_map` draws tiles and layers with
 Flutter in Dart, while `maplibre` renders vector and raster tiles with
-MapLibre on the GPU and shows the result in a Flutter `Texture`. Vector tiles,
+MapLibre on the GPU and shows the result in a Flutter `Texture` (an HTML
+element on web). Vector tiles,
 labels, large data, 3D extrusions, offline regions and the user location
 are built in instead of plugins.
 
@@ -22,7 +23,7 @@ each file instead of using both.
 
 ```bash
 flutter pub remove flutter_map latlong2
-flutter pub add maplibre
+flutter pub add maplibre:^0.4.0-pre.2
 ```
 
 Also remove the plugins that `maplibre` covers, such as `vector_map_tiles`,
@@ -70,7 +71,7 @@ style of one raster source:
                 "type": "raster",
                 "tiles": ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
                 "tileSize": 256,
-                "attribution": "© OpenStreetMap contributors"
+                "attribution": "© <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap contributors</a>"
               }
             },
             "layers": [{"id": "osm", "type": "raster", "source": "osm"}]
@@ -81,7 +82,8 @@ style of one raster source:
           zoom: 7,
         ),
       ),
-      children: const [SourceAttribution()],
+      // OpenStreetMap requires an attribution that stays visible.
+      children: const [SourceAttribution(keepExpanded: true)],
     )
     ```
 

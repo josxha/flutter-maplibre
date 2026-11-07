@@ -10,7 +10,8 @@ icon: lucide/box
 so your styles, tile URLs and expressions keep working. What changes is the
 Flutter API: `maplibre` takes map options and annotations as widget
 parameters that you update with `setState()`, has typed style layers and
-expressions, and renders into a Flutter `Texture` instead of a platform view.
+expressions, and renders into a Flutter `Texture` instead of a platform view
+(an HTML element on web).
 It also runs on macOS, Windows and Linux.
 
 Both packages define `MapLibreMap`, `CameraPosition`, `CameraUpdate` and more,
@@ -20,7 +21,7 @@ so replace the import in each file instead of using both.
 
 ```bash
 flutter pub remove maplibre_gl
-flutter pub add maplibre
+flutter pub add maplibre:^0.4.0-pre.2
 ```
 
 Remove the maplibre-gl-js `<script>` and `<link>` tags from
@@ -85,8 +86,8 @@ instead of `LatLngBounds`.
 | `onCameraIdle`, `trackCameraPosition`       | `onCameraMoveEnd`, `onCameraMove`; the `camera` getter is always up to date |
 | `onMapIdle`                                 | `onIdle`                                                       |
 
-Every option of `MapOptions` except `initCamera` can change with
-`setState()`. A new `style` loads the style, and `onStyleLoaded` is called
+Every option of `MapOptions` except `initCamera` and `fastPforEnabled` can
+change with `setState()`; those two are read once when the map is created. A new `style` loads the style, and `onStyleLoaded` is called
 again.
 
 ## 3. Camera
@@ -117,8 +118,9 @@ again.
     final position = controller.camera;
     ```
 
-`CameraUpdate.position` changes only the fields you pass, so it replaces
-`zoomIn`, `zoomTo`, `bearingTo` and `tiltTo`. `CameraAnimation.fly` zooms out
+`CameraUpdate.position` sets only the fields you pass, to absolute values, so
+it replaces `zoomTo`, `bearingTo` and `tiltTo`. For `zoomIn`, pass
+`zoom: controller.getCamera().zoom + 1`. `CameraAnimation.fly` zooms out
 and in for far targets. `animateCamera` returns whether the animation
 completed or was cancelled. See [Map & Camera](../map.md).
 
@@ -247,5 +249,5 @@ geometry such as a route touches. See [Offline & Cache](../offline.md). The
   platform.
 - Many values, such as `controller.camera`, `style.layers` and
   `style.sources`, are read synchronously.
-- `maplibre` releases breaking changes in minor versions while it moves
-  toward 1.0. The [upgrade guides](upgrade-from-v0.3.x.md) cover each one.
+- `maplibre` follows semantic versioning and has a migration guide for every
+  breaking release, such as [Upgrade to 0.4](upgrade-from-v0.3.x.md).

@@ -12,7 +12,7 @@ hide: [ navigation, toc ]
 <p class="ml-hero__tagline">
 Interactive vector maps for Android, iOS, macOS, Windows, Linux and web.
 Use any MapLibre or Mapbox compatible style from any tile provider or your own
-server, with no API key and no vendor lock-in.
+server. `maplibre` needs no API key of its own and has no vendor lock-in.
 </p>
 
 <div class="ml-hero__buttons" markdown>
@@ -49,7 +49,8 @@ server, with no API key and no vendor lock-in.
 
     ---
 
-    Maps render into a Flutter `Texture`. Annotations are declarative layers
+    Maps render into a Flutter `Texture` (an HTML element on web). Annotations
+    are declarative layers
     that you update with `setState()`, and widgets compose with the map.
 
     [:lucide-arrow-right: Annotations](docs/annotations/index.md)

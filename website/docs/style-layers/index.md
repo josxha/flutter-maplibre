@@ -206,7 +206,7 @@ await style.sources.add(
     tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
     maxZoom: 20,
     tileSize: 256,
-    attribution: '<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>',
   ),
 );
 await style.layers.add(RasterStyleLayer(id: 'osm', sourceId: 'osm'));

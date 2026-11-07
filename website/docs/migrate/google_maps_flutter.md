@@ -25,7 +25,7 @@ file. Without a style, the map shows the MapLibre demo tiles.
 
 ```bash
 flutter pub remove google_maps_flutter
-flutter pub add maplibre
+flutter pub add maplibre:^0.4.0-pre.2
 ```
 
 Remove the Google API key from `AndroidManifest.xml`, `AppDelegate` and
@@ -83,13 +83,14 @@ Coordinates are geobase `Geographic(lon: …, lat: …)` instead of
 | `cameraTargetBounds`                         | `MapOptions.maxBounds`                                          |
 | `rotateGesturesEnabled`, `tiltGesturesEnabled`, `zoomGesturesEnabled`, `scrollGesturesEnabled` | `MapOptions.movements` (`rotate`, `pitch`, `zoom`, `pan`) |
 | `zoomControlsEnabled`, `compassEnabled`      | `MapControlButtons`, `MapCompass` in `children`                 |
-| `myLocationEnabled`, `myLocationButtonEnabled` | `UserLocationLayer` in `children`                             |
+| `myLocationEnabled`                          | `UserLocationLayer` in `children`                               |
+| `myLocationButtonEnabled`                    | `MapControlButtons` with `tracking` and `onTrackingPressed`     |
 | `onTap`, `onLongPress`                       | `onClick`, `onLongClick`                                        |
 | `onCameraMoveStarted`, `onCameraMove`, `onCameraIdle` | `onCameraMoveStart`, `onCameraMove`, `onCameraMoveEnd`  |
-| `padding`                                    | `padding` of `CameraUpdate.position` and `CameraUpdate.bounds`  |
+| `padding`                                    | `padding` of `CameraUpdate.position` and `CameraUpdate.bounds` for the camera; widgets in `children` take their own padding |
 
 Options of `MapOptions` can change at any time with `setState()`, except
-`initCamera`.
+`initCamera` and `fastPforEnabled`, which are read once.
 
 ## 4. Camera
 

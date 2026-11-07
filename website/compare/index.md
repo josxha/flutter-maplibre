@@ -22,7 +22,7 @@ show how to move from
 | Map data            | Any tile provider        | Any tile provider      | Any tile provider        | Mapbox                  | Google                    |
 | API key and billing | Only if your provider needs one | Only if your provider needs one | Only if your provider needs one | Mapbox access token, billed by usage | Google API key, billed by usage |
 | Rendering           | MapLibre, GPU            | MapLibre, GPU          | Flutter canvas, Dart     | Mapbox, GPU             | Google Maps SDKs          |
-| Map in Flutter as   | `Texture`                | Platform view          | Widgets                  | Platform view           | Platform view             |
+| Map in Flutter as   | `Texture`, HTML element on web | Platform view          | Widgets                  | Platform view           | Platform view             |
 | Android, iOS        | ✅                        | ✅                      | ✅                        | ✅                       | ✅                         |
 | Web                 | ✅                        | ✅                      | ✅                        | ✅                       | ✅                         |
 | macOS, Windows, Linux | ✅                      | ❌                      | ✅                        | ❌                       | ❌                         |
@@ -30,25 +30,30 @@ show how to move from
 | Style spec          | MapLibre, typed          | MapLibre, untyped      | ❌                        | Mapbox                  | Cloud styling or JSON     |
 | Annotations         | Declarative layers       | Imperative controller  | Declarative widgets      | Imperative managers     | Declarative sets          |
 | Offline regions     | ✅ (not on web)           | Android and iOS        | With plugins             | Android and iOS         | ❌                         |
-| Widgets on the map  | ✅                        | ❌                      | ✅                        | ❌                       | ❌                         |
+| Widgets at map coordinates | ✅                        | ❌                      | ✅                        | ❌                       | ❌                         |
 | License             | BSD-3-Clause             | BSD-3-Clause           | BSD-3-Clause             | Plugin BSD/MIT, SDK under Mapbox terms | BSD-3-Clause, service under Google terms |
 
 ## maplibre
 
 This package. It runs on all six Flutter platforms with one API, renders
-with MapLibre into a Flutter `Texture` and calls it through FFI, or JS
-interop on web. Annotations are declarative layers, and style layers,
+with MapLibre into a Flutter `Texture` through FFI, and on web into an HTML
+element through JS interop. Annotations are declarative layers, and style layers,
 sources and expressions are typed. It reads many values, such as the camera
 and the style layers, synchronously.
 
-It moves fast and has breaking changes between minor versions, which the
-[migration guides](../docs/migrate/upgrade-from-v0.3.x.md) cover.
+It keeps its tech stack up to date and follows semantic versioning. Every
+breaking release comes with a
+[migration guide](../docs/migrate/upgrade-from-v0.3.x.md). `maplibre` is being
+onboarded to the MapLibre organization as a
+[hosted project](https://github.com/maplibre/maplibre/blob/main/PROJECT_TIERS.md#hosted-project).
 
 ## maplibre_gl
 
 [maplibre_gl](https://pub.dev/packages/maplibre_gl)
 ([GitHub](https://github.com/maplibre/flutter-maplibre-gl)) is the other
-MapLibre package for Flutter and a project of the MapLibre organization. It
+MapLibre package for Flutter and a
+[hosted project](https://github.com/maplibre/maplibre/blob/main/PROJECT_TIERS.md#hosted-project)
+of the MapLibre organization. It
 started as a fork of `flutter-mapbox-gl` and wraps the MapLibre Android and
 iOS SDKs and maplibre-gl-js. Both packages use the same map styles and tiles.
 
@@ -58,11 +63,10 @@ iOS SDKs and maplibre-gl-js. Both packages use the same map styles and tiles.
 | Platforms       | Android, iOS, macOS, Windows, Linux, web                  | Android, iOS, web                                              |
 | Interop         | FFI and JS interop                                        | Platform channels                                              |
 | API             | Declarative annotations, synchronous where possible       | Imperative controller, asynchronous                            |
-| Releases        | Iterates fast, with breaking changes when they help       | Keeps its API stable, with gradual deprecations                |
 
-Choose `maplibre_gl` if you need an API that rarely changes, and `maplibre`
-for desktop platforms, a declarative and typed API, or widgets that compose
-with the map.
+Choose `maplibre_gl` if you prefer the MapLibre SDKs to handle as much as
+possible, and `maplibre` for desktop platforms, a declarative and typed API,
+or widgets that compose with the map.
 
 ## flutter_map
 
