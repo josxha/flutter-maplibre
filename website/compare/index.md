@@ -19,12 +19,12 @@ show how to move from
 
 |                     | maplibre                 | maplibre_gl            | flutter_map              | mapbox_maps_flutter     | google_maps_flutter       |
 |---------------------|--------------------------|------------------------|--------------------------|-------------------------|---------------------------|
-| Map data            | Any tile provider        | Any tile provider      | Any tile provider        | Mapbox                  | Google                    |
+| Map data            | Any tile provider        | Any tile provider      | Any tile provider        | Mapbox or other providers | Google                  |
 | API key and billing | Only if your provider needs one | Only if your provider needs one | Only if your provider needs one | Mapbox access token, billed by usage | Google API key, billed by usage |
 | Rendering           | MapLibre, GPU            | MapLibre, GPU          | Flutter canvas, Dart     | Mapbox, GPU             | Google Maps SDKs          |
 | Map in Flutter as   | `Texture`, HTML element on web | Platform view, HTML element on web | Widgets                  | Platform view           | Platform view             |
 | Android, iOS        | ✅                        | ✅                      | ✅                        | ✅                       | ✅                         |
-| Web                 | ✅                        | ✅                      | ✅                        | ✅                       | ✅                         |
+| Web                 | ✅                        | ✅                      | ✅                        | ❌                       | ✅                         |
 | macOS, Windows, Linux | ✅                      | ❌                      | ✅                        | ❌                       | ❌                         |
 | Vector tiles        | ✅                        | ✅                      | With `vector_map_tiles`  | ✅                       | ❌ (Google's own maps)     |
 | Style spec          | MapLibre, typed          | MapLibre, untyped      | ❌                        | Mapbox                  | Cloud styling or JSON     |

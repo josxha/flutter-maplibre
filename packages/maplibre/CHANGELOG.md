@@ -18,6 +18,8 @@ covers every change from 0.3.x and from 0.4.0-pre.1.
   `MapOptions.gestures` has one switch per gesture.
 - GeoJSON data is a `GeoJsonData` instead of a string, and `setProjection`
   takes an expression.
+- `getVisibleRegion` is renamed to `getVisibleBounds`, and
+  `MapCompass.animation` replaces its duration and speed.
 
 ### Features
 

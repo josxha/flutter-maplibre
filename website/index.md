@@ -99,6 +99,7 @@ server. `maplibre` needs no API key of its own and has no vendor lock-in.
 <div markdown>
 
 ```dart
+import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
 
 MapLibreMap(
