@@ -31,7 +31,7 @@ The repository is a [pub workspace](https://dart.dev/tools/pub/workspaces):
 | `examples`                             | Example app and integration tests (`examples/integration_test`) |
 | `website`                              | Documentation website                                       |
 
-[Architecture](https://flutter-maplibre.pages.dev/docs/contributing/architecture/)
+[Architecture](https://josxha.github.io/flutter-maplibre/docs/contributing/architecture/)
 explains how the packages fit together, and [AGENTS.md](AGENTS.md) lists the
 code generation commands and the rules of the code base.
 

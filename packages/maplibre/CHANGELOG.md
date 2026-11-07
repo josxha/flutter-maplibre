@@ -2,7 +2,7 @@
 
 The second pre-release of 0.4 reworks the event, camera, query and gesture
 APIs, adds drag, click and hover events to layers, and fixes Linux. The
-[migration guide](https://flutter-maplibre.pages.dev/docs/migrate/upgrade-from-v0.3.x/)
+[migration guide](https://josxha.github.io/flutter-maplibre/docs/migrate/upgrade-from-v0.3.x/)
 covers every change from 0.3.x and from 0.4.0-pre.1.
 
 ### Breaking Changes
@@ -59,7 +59,7 @@ This pre-release renders maps on Android, iOS, macOS, Windows and Linux with
 one implementation on the
 [MapLibre Native C API](https://github.com/maplibre/maplibre-native-ffi), and
 on web with maplibre-gl-js v6. Read the
-[migration guide](https://flutter-maplibre.pages.dev/docs/migrate/upgrade-from-v0.3.x/)
+[migration guide](https://josxha.github.io/flutter-maplibre/docs/migrate/upgrade-from-v0.3.x/)
 to upgrade from 0.3.x, and please report the bugs you find.
 
 Known issue: maps can stop after about 30 frames in profile and release
@@ -349,12 +349,12 @@ Full Changelog: [v0.3.0...v0.3.1](https://github.com/josxha/flutter-maplibre/com
 ## 0.3.0
 
 In this release, I'm blazed to finally announce support for iOS. Similar to our other platforms, iOS uses FFI to natively interop between Dart and Swift/ObjC. Checkout
-the [iOS documentation](https://flutter-maplibre.pages.dev/docs/getting-started/setup)
+the [iOS documentation](https://josxha.github.io/flutter-maplibre/docs/getting-started/setup)
 to get started.
 A big thanks to @mhernz, @gabbopalma and @jt274 that helped with their awesome
 contributions in this release!
 
-This release introduces breaking changes. Head over to the [migration guide](https://flutter-maplibre.pages.dev/docs/migrate/upgrade-from-v0.2.x/) to learn more on how to update your implementation.
+This release introduces breaking changes. Head over to the [migration guide](https://josxha.github.io/flutter-maplibre/docs/migrate/upgrade-from-v0.2.x/) to learn more on how to update your implementation.
 
 ### New Features
 
@@ -433,7 +433,7 @@ Full Changelog: [v0.2.0...v0.2.1](https://github.com/josxha/flutter-maplibre/com
 ## 0.2.0
 
 This release is a collection of user affecting changes along a couple of new features and bug fixes.
-Head over to the [migration guide](https://flutter-maplibre.pages.dev/docs/migrate/upgrade-from-v0.2.x/) to learn more on how to update your implementation.
+Head over to the [migration guide](https://josxha.github.io/flutter-maplibre/docs/migrate/upgrade-from-v0.2.x/) to learn more on how to update your implementation.
 
 A big thanks to @gabbopalma for his contributions in this release.
 
@@ -529,7 +529,7 @@ Full Changelog: [v0.1.0...v0.1.1](https://github.com/josxha/flutter-maplibre/com
 - Bump minimum Flutter version to [3.24.0](https://medium.com/flutter/whats-new-in-flutter-3-24-6c040f87d1e4) (Minimum Dart version of [3.5.0](https://medium.com/dartlang/dart-3-5-6ca36259fa2f)).
 - Can't await the end of `animateCamera()` in this version.
 
-Read the [Upgrade Guide](https://flutter-maplibre.pages.dev/docs/migrate/upgrade-from-v0.2.x/) for
+Read the [Upgrade Guide](https://josxha.github.io/flutter-maplibre/docs/migrate/upgrade-from-v0.2.x/) for
 instructions on how to upgrade.
 
 ### New Features

@@ -1,3 +1,3 @@
 Visit
-the [Offline chapter in the documentation](https://flutter-maplibre.pages.dev/docs/offline)
+the [Offline chapter in the documentation](https://josxha.github.io/flutter-maplibre/docs/offline)
 to learn more.

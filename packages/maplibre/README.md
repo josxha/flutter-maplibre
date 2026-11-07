@@ -16,18 +16,18 @@ no API key of its own; keys and fees depend only on the tile provider you
 choose.
 
 <p align="center">
-  <a href="https://flutter-maplibre.pages.dev/demo">
-    <img src="https://flutter-maplibre.pages.dev/assets/images/showcase-map.jpg" alt="A styled map" width="49%" />
+  <a href="https://josxha.github.io/flutter-maplibre/demo">
+    <img src="https://josxha.github.io/flutter-maplibre/assets/images/showcase-map.jpg" alt="A styled map" width="49%" />
   </a>
-  <a href="https://flutter-maplibre.pages.dev/demo">
-    <img src="https://flutter-maplibre.pages.dev/assets/images/showcase-tilt.jpg" alt="A tilted and rotated map" width="49%" />
+  <a href="https://josxha.github.io/flutter-maplibre/demo">
+    <img src="https://josxha.github.io/flutter-maplibre/assets/images/showcase-tilt.jpg" alt="A tilted and rotated map" width="49%" />
   </a>
 </p>
 
 <p align="center">
-  <a href="https://flutter-maplibre.pages.dev/docs/getting-started/setup/"><b>Get started</b></a> ·
-  <a href="https://flutter-maplibre.pages.dev/demo"><b>Live demo</b></a> ·
-  <a href="https://flutter-maplibre.pages.dev/docs/"><b>Documentation</b></a> ·
+  <a href="https://josxha.github.io/flutter-maplibre/docs/getting-started/setup/"><b>Get started</b></a> ·
+  <a href="https://josxha.github.io/flutter-maplibre/demo"><b>Live demo</b></a> ·
+  <a href="https://josxha.github.io/flutter-maplibre/docs/"><b>Documentation</b></a> ·
   <a href="https://pub.dev/documentation/maplibre/latest/maplibre/"><b>API reference</b></a>
 </p>
 
@@ -68,8 +68,8 @@ MapLibreMap(
 )
 ```
 
-See [Installation](https://flutter-maplibre.pages.dev/docs/getting-started/setup/)
-and [Platform setup](https://flutter-maplibre.pages.dev/docs/getting-started/platforms/)
+See [Installation](https://josxha.github.io/flutter-maplibre/docs/getting-started/setup/)
+and [Platform setup](https://josxha.github.io/flutter-maplibre/docs/getting-started/platforms/)
 for the steps each platform needs.
 
 ## Platforms
@@ -102,7 +102,7 @@ There are two Flutter packages for MapLibre. They take different approaches:
 | API             | Declarative annotations, synchronous where possible         | Imperative controller, asynchronous                             |
 
 The
-[comparison](https://flutter-maplibre.pages.dev/compare/) covers other map
+[comparison](https://josxha.github.io/flutter-maplibre/compare/) covers other map
 packages as well.
 
 ## ❤️ Development & Contributing

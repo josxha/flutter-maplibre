@@ -1,2 +1,2 @@
-- Checkout our docs for a minimal example: [Getting Started - First map](https://flutter-maplibre.pages.dev/docs/getting-started/usage/)
+- Checkout our docs for a minimal example: [Getting Started - First map](https://josxha.github.io/flutter-maplibre/docs/getting-started/usage/)
 - Check the example app for implementations of different use cases: [Example App](../../../examples/)

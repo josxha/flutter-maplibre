@@ -1,7 +1,7 @@
 site_name: "MapLibre Flutter"
 site_description: "Permissive and performant mapping library that supports Mapbox Vector Tiles (MVT) powered by MapLibre SDKs."
 site_author: "josxha"
-site_url: "https://flutter-maplibre.pages.dev/"
+site_url: "https://josxha.github.io/flutter-maplibre/"
 use_directory_urls: true
 repo_url: https://github.com/josxha/flutter-maplibre
 edit_uri: edit/main/website/

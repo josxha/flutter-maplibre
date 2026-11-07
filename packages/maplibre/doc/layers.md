@@ -1,3 +1,3 @@
 Visit
-the [Layers chapter in the documentation](https://flutter-maplibre.pages.dev/docs/annotations)
+the [Layers chapter in the documentation](https://josxha.github.io/flutter-maplibre/docs/annotations)
 to learn more.

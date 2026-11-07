@@ -3,8 +3,8 @@ description: "MapLibre Native implementation of the Flutter MapLibre plugin for 
 version: 0.4.0-pre.2
 repository: https://github.com/josxha/flutter-maplibre
 issue_tracker: https://github.com/josxha/flutter-maplibre/issues
-homepage: https://flutter-maplibre.pages.dev
-documentation: https://flutter-maplibre.pages.dev/docs/
+homepage: https://josxha.github.io/flutter-maplibre
+documentation: https://josxha.github.io/flutter-maplibre/docs/
 
 platforms: { android: , ios: , linux: , macos: , windows: }
 

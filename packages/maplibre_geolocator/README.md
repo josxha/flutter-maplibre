@@ -16,5 +16,5 @@ Ask for the location permission before the layer listens, for example with
 `Geolocator.requestPermission()`, and set up each platform as the
 `geolocator` documentation describes. On Windows, positions arrive only
 after the app asked, and `permission_handler` does not ask there. See the
-[User Location chapter](https://flutter-maplibre.pages.dev/docs/user-location)
+[User Location chapter](https://josxha.github.io/flutter-maplibre/docs/user-location)
 for more.
