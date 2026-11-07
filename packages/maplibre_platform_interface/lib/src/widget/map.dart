@@ -24,6 +24,8 @@ class MapLibreMap extends StatefulWidget {
     this.onDragStart,
     this.onDrag,
     this.onDragEnd,
+    this.onPointerMove,
+    this.onPointerLeave,
     this.onCameraMoveStart,
     this.onCameraMove,
     this.onCameraMoveEnd,
@@ -150,6 +152,16 @@ class MapLibreMap extends StatefulWidget {
 
   /// Called when a drag ends.
   final MapEventCallback<MapEventDragEnd>? onDragEnd;
+
+  /// Called whenever a mouse or stylus moves over the map without a pressed
+  /// button. Touches don't hover, and drags are reported to [onDrag].
+  ///
+  /// The [layers] report the features under the pointer themselves, see
+  /// [Layer.onEnter].
+  final MapEventCallback<MapEventPointerMove>? onPointerMove;
+
+  /// Called when a mouse or stylus leaves the map.
+  final MapEventCallback<MapEventPointerLeave>? onPointerLeave;
 
   /// Called when the camera starts to move, with the reason.
   final MapEventCallback<MapEventCameraMoveStart>? onCameraMoveStart;

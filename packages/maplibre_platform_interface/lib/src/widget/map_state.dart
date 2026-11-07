@@ -136,11 +136,11 @@ abstract class MapLibreMapState extends State<MapLibreMap>
     try {
       callback();
     } on Object catch (error, stack) {
-      _reportDragError(error, stack, 'while handling a drag');
+      _reportError(error, stack, 'while handling a drag');
     }
   }
 
-  void _reportDragError(Object error, StackTrace stack, String context) {
+  void _reportError(Object error, StackTrace stack, String context) {
     FlutterError.reportError(
       FlutterErrorDetails(
         exception: error,
@@ -154,13 +154,111 @@ abstract class MapLibreMapState extends State<MapLibreMap>
   /// Finds the feature of a draggable layer that [event] went down on, and
   /// keeps the drag from panning the map if it found one.
   Future<void> _grabFeature(MapEventDragStart event, int generation) async {
+    final hits = await _queryLayers(
+      .rect(
+        Rect.fromCenter(
+          center: event.screenPoint,
+          width: _grabSize,
+          height: _grabSize,
+        ),
+      ),
+      (layer) => layer.draggable,
+      'while finding the feature to drag',
+    );
+    if (hits == null || generation != _dragGeneration) return;
+    final hit = _topmost(hits, event.screenPoint);
+    if (hit == null) return;
+    event.preventDefault();
+    _layerDrag = _LayerDrag(
+      hit.layerIndex,
+      hit.featureIndex,
+      hit.geometry,
+      event.screenPoint,
+    );
+    layerManager?.startDrag(hit.layerIndex, hit.featureIndex);
+    _emitLayerDrag(event.screenPoint, (layer) => layer.onDragStart);
+  }
+
+  /// The features of the layers of [MapLibreMap.layers] that [include]
+  /// picks in [geometry], or null if the query failed or the map is gone.
+  Future<List<_LayerHit>?> _queryLayers(
+    QueryGeometry geometry,
+    bool Function(Layer layer) include,
+    String context,
+  ) async {
     final layerIndexes = <String, int>{
       for (final (index, layer) in widget.layers.indexed)
-        if (layer.draggable) layer.getLayerId(index): index,
+        if (include(layer)) layer.getLayerId(index): index,
     };
+    if (layerIndexes.isEmpty) return const [];
     final List<RenderedFeature> features;
     try {
       features = await queryRenderedFeatures(
+        geometry,
+        layerIds: layerIndexes.keys.toList(),
+      );
+    } on Object catch (error, stack) {
+      _reportError(error, stack, context);
+      return null;
+    }
+    if (!mounted) return null;
+    return [
+      for (final feature in features)
+        if ((
+              layerIndexes[feature.layerId],
+              feature.properties[LayerManager.featureIndexProperty],
+            )
+            case (final int layerIndex, final num featureIndex))
+          if (widget.layers.elementAtOrNull(layerIndex) case final layer?
+              when include(layer) && featureIndex < layer.list.length)
+            if (layer.list[featureIndex.toInt()].geometry case final geometry?)
+              _LayerHit(layerIndex, featureIndex.toInt(), geometry),
+    ];
+  }
+
+  /// Of [hits], the one of the topmost layer, and of its points the nearest
+  /// to [center].
+  _LayerHit? _topmost(List<_LayerHit> hits, Offset center) {
+    _LayerHit? nearest;
+    var nearestDistance = double.infinity;
+    for (final hit in hits) {
+      var distance = 0.0;
+      if (hit.geometry case Point(:final position)) {
+        distance =
+            (toScreenLocation(Geographic.from(position)) - center).distance;
+      }
+      if (nearest == null ||
+          hit.layerIndex > nearest.layerIndex ||
+          (hit.layerIndex == nearest.layerIndex &&
+              distance < nearestDistance)) {
+        nearest = hit;
+        nearestDistance = distance;
+      }
+    }
+    return nearest;
+  }
+
+  /// Whether a layer of [MapLibreMap.layers] reports taps on its features.
+  bool get _layersClickable =>
+      widget.layers.any((layer) => layer.onClick != null);
+
+  void _onClick(MapEventClick event) {
+    widget.onClick?.call(event);
+    if (_layersClickable) unawaited(_clickFeature(event));
+  }
+
+  /// Reports a tap to [Layer.onClick] of the topmost feature under it, or,
+  /// if none is right under it, next to it.
+  Future<void> _clickFeature(MapEventClick event) async {
+    bool clickable(Layer layer) => layer.onClick != null;
+    const context = 'while finding the clicked feature';
+    var hits = await _queryLayers(
+      .point(event.screenPoint),
+      clickable,
+      context,
+    );
+    if (hits != null && hits.isEmpty) {
+      hits = await _queryLayers(
         .rect(
           Rect.fromCenter(
             center: event.screenPoint,
@@ -168,47 +266,125 @@ abstract class MapLibreMapState extends State<MapLibreMap>
             height: _grabSize,
           ),
         ),
-        layerIds: layerIndexes.keys.toList(),
+        clickable,
+        context,
+      );
+    }
+    if (hits == null) return;
+    final hit = _topmost(hits, event.screenPoint);
+    if (hit == null) return;
+    _emitLayerEvent(
+      hit,
+      event,
+      widget.layers.elementAtOrNull(hit.layerIndex)?.onClick,
+    );
+  }
+
+  void _emitLayerEvent(
+    _LayerHit hit,
+    MapEventUserInput input,
+    LayerFeatureCallback? callback,
+  ) {
+    if (callback == null) return;
+    try {
+      callback(
+        LayerFeatureEvent(
+          index: hit.featureIndex,
+          geometry: hit.geometry,
+          point: input.point,
+          screenPoint: input.screenPoint,
+        ),
       );
     } on Object catch (error, stack) {
-      _reportDragError(error, stack, 'while finding the feature to drag');
-      return;
+      _reportError(error, stack, 'while handling a layer event');
     }
-    if (!mounted || generation != _dragGeneration) return;
-    _LayerDrag? nearest;
-    var nearestDistance = double.infinity;
-    for (final feature in features) {
-      final layerIndex = layerIndexes[feature.layerId];
-      final featureIndex =
-          feature.properties[LayerManager.featureIndexProperty];
-      if (layerIndex == null || featureIndex is! num) continue;
-      final index = featureIndex.toInt();
-      final layer = widget.layers.elementAtOrNull(layerIndex);
-      if (layer == null || !layer.draggable || index >= layer.list.length) {
-        continue;
+  }
+
+  /// Whether a layer of [MapLibreMap.layers] reports the mouse over its
+  /// features.
+  bool get _layersHoverable => widget.layers.any(_hoverable);
+
+  static bool _hoverable(Layer layer) =>
+      layer.onEnter != null || layer.onLeave != null;
+
+  /// The feature under the mouse, by layer index.
+  final _hovered = <int, _LayerHit>{};
+
+  /// The last mouse position over the map.
+  MapEventPointerMove? _hoverInput;
+
+  /// Whether a query for the features under the mouse runs.
+  var _hoverQuerying = false;
+
+  /// Counts the times the mouse left the map, so that a query that started
+  /// before is dropped.
+  var _hoverGeneration = 0;
+
+  void _onPointerMove(MapEventPointerMove event) {
+    widget.onPointerMove?.call(event);
+    if (!_layersHoverable && _hovered.isEmpty) return;
+    _hoverInput = event;
+    unawaited(_hover());
+  }
+
+  void _onPointerLeave(MapEventPointerLeave event) {
+    widget.onPointerLeave?.call(event);
+    _hoverGeneration++;
+    final input = _hoverInput;
+    _hoverInput = null;
+    if (input != null) _updateHovered(const [], input);
+  }
+
+  /// Queries the features under the mouse, coalescing moves while a query
+  /// runs.
+  Future<void> _hover() async {
+    if (_hoverQuerying) return;
+    _hoverQuerying = true;
+    try {
+      MapEventPointerMove? queried;
+      while (_hoverInput != null && !identical(_hoverInput, queried)) {
+        final input = queried = _hoverInput!;
+        final generation = _hoverGeneration;
+        final hits = await _queryLayers(
+          .point(input.screenPoint),
+          _hoverable,
+          'while finding the hovered feature',
+        );
+        if (hits == null || generation != _hoverGeneration) continue;
+        _updateHovered(hits, input);
       }
-      final geometry = layer.list[index].geometry;
-      if (geometry == null) continue;
-      final drag = _LayerDrag(layerIndex, index, geometry, event.screenPoint);
-      var distance = 0.0;
-      if (drag.geometry case Point(:final position)) {
-        distance =
-            (toScreenLocation(Geographic.from(position)) - event.screenPoint)
-                .distance;
-      }
-      // The top layer wins, and of its features the nearest.
-      if (nearest == null ||
-          layerIndex > nearest.layerIndex ||
-          (layerIndex == nearest.layerIndex && distance < nearestDistance)) {
-        nearest = drag;
-        nearestDistance = distance;
-      }
+    } finally {
+      _hoverQuerying = false;
     }
-    if (nearest == null) return;
-    event.preventDefault();
-    _layerDrag = nearest;
-    layerManager?.startDrag(nearest.layerIndex, nearest.featureIndex);
-    _emitLayerDrag(event.screenPoint, (layer) => layer.onDragStart);
+  }
+
+  /// Reports the features of [hits] that the mouse entered and the ones it
+  /// left. Per layer, the topmost feature counts.
+  void _updateHovered(List<_LayerHit> hits, MapEventUserInput input) {
+    final now = <int, _LayerHit>{};
+    for (final hit in hits) {
+      // Rendered features come topmost first.
+      now.putIfAbsent(hit.layerIndex, () => hit);
+    }
+    for (final MapEntry(key: layerIndex, value: hit) in _hovered.entries) {
+      if (now[layerIndex]?.featureIndex == hit.featureIndex) continue;
+      _emitLayerEvent(
+        hit,
+        input,
+        widget.layers.elementAtOrNull(layerIndex)?.onLeave,
+      );
+    }
+    for (final MapEntry(key: layerIndex, value: hit) in now.entries) {
+      if (_hovered[layerIndex]?.featureIndex == hit.featureIndex) continue;
+      _emitLayerEvent(
+        hit,
+        input,
+        widget.layers.elementAtOrNull(layerIndex)?.onEnter,
+      );
+    }
+    _hovered
+      ..clear()
+      ..addAll(now);
   }
 
   void _onDrag(MapEventDrag event) {
@@ -250,7 +426,7 @@ abstract class MapLibreMapState extends State<MapLibreMap>
   /// which it returns.
   Geometry? _emitLayerDrag(
     Offset screenPoint,
-    LayerDragCallback? Function(Layer layer) callback,
+    LayerFeatureCallback? Function(Layer layer) callback,
   ) {
     final drag = _layerDrag;
     if (drag == null || !isInitialized) return null;
@@ -270,7 +446,7 @@ abstract class MapLibreMapState extends State<MapLibreMap>
       _ => (toLngLat(screenPoint), screenPoint),
     };
     callback(layer)?.call(
-      LayerDragEvent(
+      LayerFeatureEvent(
         index: drag.featureIndex,
         geometry: geometry,
         point: point,
@@ -322,6 +498,8 @@ abstract class MapLibreMapState extends State<MapLibreMap>
     final platformWidget = buildPlatformWidget(context);
     final widget = this.widget;
     final layersDraggable = _layersDraggable;
+    final layersClickable = _layersClickable;
+    final layersHoverable = _layersHoverable;
     return LayoutBuilder(
       builder: (context, constraints) {
         _onLayout(constraints);
@@ -335,7 +513,9 @@ abstract class MapLibreMapState extends State<MapLibreMap>
                 gestures: options.gestures,
                 camera: gestureCamera,
                 toLngLat: (point) => isInitialized ? toLngLat(point) : null,
-                onClick: widget.onClick,
+                onClick: layersClickable || widget.onClick != null
+                    ? _onClick
+                    : null,
                 onDoubleClick: widget.onDoubleClick,
                 onSecondaryClick: widget.onSecondaryClick,
                 onLongClick: widget.onLongClick,
@@ -347,6 +527,12 @@ abstract class MapLibreMapState extends State<MapLibreMap>
                     : null,
                 onDragEnd: layersDraggable || widget.onDragEnd != null
                     ? _onDragEnd
+                    : null,
+                onPointerMove: layersHoverable || widget.onPointerMove != null
+                    ? _onPointerMove
+                    : null,
+                onPointerLeave: layersHoverable || widget.onPointerLeave != null
+                    ? _onPointerLeave
                     : null,
                 child: platformWidget,
               ),
@@ -371,6 +557,15 @@ abstract class MapLibreMapState extends State<MapLibreMap>
 /// feature of a draggable layer in, so that small features can be grabbed by
 /// touch.
 const _grabSize = 24.0;
+
+/// A feature of [MapLibreMap.layers] that a query found.
+class _LayerHit {
+  const _LayerHit(this.layerIndex, this.featureIndex, this.geometry);
+
+  final int layerIndex;
+  final int featureIndex;
+  final Geometry geometry;
+}
 
 /// A feature of [MapLibreMap.layers] that a drag moves.
 class _LayerDrag {

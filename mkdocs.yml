@@ -31,6 +31,7 @@ nav:
           - Polylines: docs/annotations/polylines.md
           - Widgets: docs/annotations/widgets.md
           - Drag: docs/annotations/drag.md
+          - Click and Hover: docs/annotations/click-and-hover.md
       - Sources & Layers:
           - Sources: docs/sources.md
           - Style Layers:

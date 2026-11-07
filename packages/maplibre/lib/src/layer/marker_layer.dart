@@ -57,6 +57,9 @@ class MarkerLayer extends Layer<Feature<Point>> {
     super.onDragStart,
     super.onDrag,
     super.onDragEnd,
+    super.onClick,
+    super.onEnter,
+    super.onLeave,
   }) : super(list: points);
 
   /// If true, the icon will be visible even if it collides with other

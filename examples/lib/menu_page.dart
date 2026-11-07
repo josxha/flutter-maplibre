@@ -7,6 +7,7 @@ import 'package:maplibre_example/features_query_page.dart';
 import 'package:maplibre_example/gestures_page.dart';
 import 'package:maplibre_example/layers_circle_page.dart';
 import 'package:maplibre_example/layers_drag_page.dart';
+import 'package:maplibre_example/layers_hover_page.dart';
 import 'package:maplibre_example/layers_marker_page.dart';
 import 'package:maplibre_example/layers_mixed_page.dart';
 import 'package:maplibre_example/layers_polygon_page.dart';
@@ -157,6 +158,11 @@ class MenuPage extends StatelessWidget {
                           label: 'Drag Features',
                           iconData: Icons.open_with,
                           location: LayersDragPage.location,
+                        ),
+                        ItemCard(
+                          label: 'Hover Features',
+                          iconData: Icons.ads_click,
+                          location: LayersHoverPage.location,
                         ),
                         ItemCard(
                           label: 'Widget Markers',

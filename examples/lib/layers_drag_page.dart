@@ -88,7 +88,7 @@ class _LayersDragPageState extends State<LayersDragPage> {
     );
   }
 
-  void _startDrag(List<Feature<Point>> features, LayerDragEvent event) =>
+  void _startDrag(List<Feature<Point>> features, LayerFeatureEvent event) =>
       setState(() => _status = 'Dragging ${_nameOf(features, event.index)}.');
 
   String _nameOf(List<Feature<Point>> features, int index) =>
@@ -98,7 +98,7 @@ class _LayersDragPageState extends State<LayersDragPage> {
 
   /// Saves the feature where it was dropped. The layer moves it while it is
   /// dragged, and puts it back unless the list has it at its new place.
-  void _drop(List<Feature<Point>> features, LayerDragEvent event) {
+  void _drop(List<Feature<Point>> features, LayerFeatureEvent event) {
     final feature = features[event.index];
     final point = event.point;
     setState(() {

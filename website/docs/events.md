@@ -43,6 +43,8 @@ same on every platform.
 | `onDragStart`         | The user starts to drag the map with one finger or the primary mouse button, see [drags](#drags). |
 | `onDrag`              | The pointer of a drag moved.                                                                      |
 | `onDragEnd`           | A drag ended.                                                                                     |
+| `onPointerMove`       | A mouse or stylus moved over the map without a pressed button. Touches don't hover.               |
+| `onPointerLeave`      | A mouse or stylus left the map.                                                                   |
 | `onCameraMoveStart`   | The camera starts to move. `reason` says whether a gesture, the app or the map moved it.          |
 | `onCameraMove`        | The camera moved. Holds the new `CameraPosition` and the `reason`.                                     |
 | `onCameraMoveEnd`     | The camera stopped moving. Holds the `CameraPosition` it ended at and the `reason`.                    |
@@ -121,3 +123,9 @@ onDrag: (event) {
 
 Annotation layers can do this for their own features, see
 [Drag annotations](annotations/drag.md).
+
+## Layer events
+
+Annotation layers report taps and the mouse on their own features with
+`onClick`, `onEnter` and `onLeave`, see
+[Click and hover](annotations/click-and-hover.md).

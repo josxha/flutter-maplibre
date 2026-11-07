@@ -7,6 +7,7 @@ import 'package:maplibre_example/gestures_page.dart';
 import 'package:maplibre_example/kiosk_page.dart';
 import 'package:maplibre_example/layers_circle_page.dart';
 import 'package:maplibre_example/layers_drag_page.dart';
+import 'package:maplibre_example/layers_hover_page.dart';
 import 'package:maplibre_example/layers_marker_page.dart';
 import 'package:maplibre_example/layers_mixed_page.dart';
 import 'package:maplibre_example/layers_polygon_page.dart';
@@ -90,6 +91,7 @@ class MyApp extends StatelessWidget {
         LayersCirclePage.location: (context) => const LayersCirclePage(),
         LayersMarkerPage.location: (context) => const LayersMarkerPage(),
         LayersDragPage.location: (context) => const LayersDragPage(),
+        LayersHoverPage.location: (context) => const LayersHoverPage(),
         LayersWidgetMarkerPage.location: (context) =>
             const LayersWidgetMarkerPage(),
         LayersPolylinePage.location: (context) => const LayersPolylinePage(),

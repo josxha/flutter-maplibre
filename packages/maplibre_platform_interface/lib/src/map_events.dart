@@ -85,7 +85,7 @@ final class MapEventCameraMoveEnd extends MapEvent {
 
 // User input
 
-/// The user tapped, clicked or dragged the map. Use this class if you don't
+/// The user tapped, clicked, dragged or hovered the map. Use this class if you don't
 /// care about the kind of input.
 ///
 /// {@category Events}
@@ -165,6 +165,30 @@ final class MapEventLongClick extends MapEventUserInput {
 
   @override
   String get _name => 'MapEventLongClick';
+}
+
+/// The mouse or a stylus moved over the map without a pressed button, see
+/// [MapLibreMap.onPointerMove]. Touches don't hover, so this is reported
+/// for mice and styluses only.
+///
+/// {@category Events}
+final class MapEventPointerMove extends MapEventUserInput {
+  /// Creates a [MapEventPointerMove].
+  const MapEventPointerMove({required super.point, required super.screenPoint});
+
+  @override
+  String get _name => 'MapEventPointerMove';
+}
+
+/// The mouse or a stylus left the map, see [MapLibreMap.onPointerLeave].
+///
+/// {@category Events}
+final class MapEventPointerLeave extends MapEvent {
+  /// Creates a [MapEventPointerLeave].
+  const MapEventPointerLeave();
+
+  @override
+  String toString() => 'MapEventPointerLeave()';
 }
 
 /// The user started to drag the map with one finger or the primary mouse

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
@@ -72,7 +73,15 @@ class _State extends MapLibreMapState {
     Expression<bool>? filter,
   }) async {
     await queryGate?.future;
-    final rect = (geometry as QueryGeometryRect).rect;
+    final rect = switch (geometry) {
+      QueryGeometryRect(:final rect) => rect,
+      QueryGeometryPoint(:final point) => Rect.fromCenter(
+        center: point,
+        width: 2,
+        height: 2,
+      ),
+      _ => throw UnimplementedError(),
+    };
     return [
       for (final (layerIndex, layer) in widget.layers.indexed.toList().reversed)
         if (layerIds!.contains(layer.getLayerId(layerIndex)))
@@ -110,6 +119,9 @@ class _PointLayer extends Layer<Feature<Point>> {
     super.onDragStart,
     super.onDrag,
     super.onDragEnd,
+    super.onClick,
+    super.onEnter,
+    super.onLeave,
   });
 
   @override
@@ -123,7 +135,7 @@ Feature<Point> _point(double lon, double lat) => Feature(
 
 void main() {
   late _Platform platform;
-  late List<(String, LayerDragEvent)> drags;
+  late List<(String, LayerFeatureEvent)> drags;
   late List<MapEvent> mapEvents;
 
   setUp(() {
@@ -220,7 +232,7 @@ void main() {
   });
 
   testWidgets('the top layer wins', (tester) async {
-    final below = <(String, LayerDragEvent)>[];
+    final below = <(String, LayerFeatureEvent)>[];
     await pumpMap(tester, [
       _PointLayer(
         list: [_point(0, 0)],
@@ -235,7 +247,7 @@ void main() {
   });
 
   testWidgets('the top layer wins over a nearer feature below', (tester) async {
-    final below = <(String, LayerDragEvent)>[];
+    final below = <(String, LayerFeatureEvent)>[];
     await pumpMap(tester, [
       _PointLayer(
         list: [_point(0, 0)],
@@ -392,6 +404,112 @@ void main() {
     await gesture.up();
     await tester.pumpAndSettle();
     expect(drags, isEmpty);
+  });
+
+  group('layer events', () {
+    _PointLayer interactive(List<Feature<Point>> list) => _PointLayer(
+      list: list,
+      onClick: (event) => drags.add(('click', event)),
+      onEnter: (event) => drags.add(('enter', event)),
+      onLeave: (event) => drags.add(('leave', event)),
+    );
+
+    testWidgets('a tap next to a point reports it to onClick', (tester) async {
+      final clicks = <MapEventClick>[];
+      tester.view
+        ..physicalSize = _size
+        ..devicePixelRatio = 1;
+      addTearDown(tester.view.reset);
+      await tester.pumpWidget(
+        Directionality(
+          textDirection: TextDirection.ltr,
+          child: MapLibreMap(
+            layers: [
+              interactive([_point(0, 0), _point(36, 0)]),
+            ],
+            onClick: clicks.add,
+          ),
+        ),
+      );
+      await tester.tapAt(const Offset(505, 303));
+      // Past the double tap timeout.
+      await tester.pump(const Duration(milliseconds: 500));
+      await tester.pumpAndSettle();
+      expect(clicks, hasLength(1));
+      expect(drags.map((d) => d.$1), ['click']);
+      final click = drags.single.$2;
+      expect(click.index, 1);
+      expect(click.screenPoint, const Offset(505, 303));
+      expect(click.geometry, _point(36, 0).geometry);
+    });
+
+    testWidgets('a tap beside the features reports no layer click', (
+      tester,
+    ) async {
+      await pumpMap(tester, [
+        interactive([_point(0, 0)]),
+      ]);
+      await tester.tapAt(const Offset(200, 300));
+      await tester.pump(const Duration(milliseconds: 500));
+      await tester.pumpAndSettle();
+      expect(drags, isEmpty);
+    });
+
+    testWidgets('the mouse enters and leaves features', (tester) async {
+      final moves = <MapEvent>[];
+      tester.view
+        ..physicalSize = _size
+        ..devicePixelRatio = 1;
+      addTearDown(tester.view.reset);
+      await tester.pumpWidget(
+        Directionality(
+          textDirection: TextDirection.ltr,
+          child: MapLibreMap(
+            layers: [
+              interactive([_point(0, 0), _point(36, 0)]),
+            ],
+            onPointerMove: moves.add,
+            onPointerLeave: moves.add,
+          ),
+        ),
+      );
+      final mouse = await tester.createGesture(kind: PointerDeviceKind.mouse);
+      addTearDown(mouse.removePointer);
+      await mouse.addPointer(location: const Offset(200, 200));
+      await tester.pump();
+      for (final position in const [
+        Offset(300, 300),
+        _center,
+        Offset(400.5, 300),
+        Offset(500, 300),
+        Offset(600, 300),
+      ]) {
+        await mouse.moveTo(position);
+        await tester.pump();
+      }
+      expect(
+        [for (final (kind, event) in drags) '$kind ${event.index}'],
+        ['enter 0', 'leave 0', 'enter 1', 'leave 1'],
+      );
+      expect(drags[1].$2.screenPoint, const Offset(500, 300));
+      expect(moves.whereType<MapEventPointerMove>(), hasLength(5));
+
+      drags.clear();
+      await mouse.moveTo(const Offset(500, 300));
+      await tester.pump();
+      await mouse.moveTo(const Offset(900, 300));
+      await tester.pump();
+      expect(drags.map((d) => d.$1), ['enter', 'leave']);
+      expect(moves.last, isA<MapEventPointerLeave>());
+    });
+
+    testWidgets('a layer gets the feature index property once it has a '
+        'callback', (tester) async {
+      final layer = _PointLayer(list: [_point(0, 0)]);
+      expect(layer.interactive, isFalse);
+      expect(interactive([_point(0, 0)]).interactive, isTrue);
+      expect(layer == interactive(layer.list), isFalse);
+    });
   });
 
   test('callbacks need the draggable flag', () {
