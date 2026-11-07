@@ -51,12 +51,15 @@ class SharedTexture {
     Microsoft::WRL::ComPtr<ID3D11Texture2D> texture;
     HANDLE handle = nullptr;
   };
+  static constexpr int kPresentCount = 3;
 
   // The library's texture at |slot|, opened once per ring.
   ID3D11Texture2D* Open(uint32_t ring, uint32_t slot, HANDLE handle,
                         std::string* error);
+  // Creates the present textures of a new size into |created|, which
+  // Present installs once a frame was copied into the first of them.
   bool CreatePresentTextures(uint32_t width, uint32_t height,
-                             std::string* error);
+                             PresentTexture* created, std::string* error);
   const FlutterDesktopGpuSurfaceDescriptor* Descriptor(size_t width,
                                                        size_t height);
 
@@ -75,7 +78,6 @@ class SharedTexture {
   uint32_t height_ = 0;
   // Guards what the raster thread reads in Descriptor.
   std::mutex mutex_;
-  static constexpr int kPresentCount = 3;
   PresentTexture present_[kPresentCount];
   // The texture of the latest presented frame.
   int front_ = -1;

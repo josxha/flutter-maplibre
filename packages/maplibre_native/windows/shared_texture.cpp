@@ -64,9 +64,10 @@ ID3D11Texture2D* SharedTexture::Open(uint32_t ring, uint32_t slot,
 }
 
 bool SharedTexture::CreatePresentTextures(uint32_t width, uint32_t height,
+                                          PresentTexture* created,
                                           std::string* error) {
-  PresentTexture created[kPresentCount];
-  for (auto& present : created) {
+  for (int i = 0; i < kPresentCount; ++i) {
+    PresentTexture& present = created[i];
     D3D11_TEXTURE2D_DESC desc{};
     desc.Width = width;
     desc.Height = height;
@@ -88,17 +89,6 @@ bool SharedTexture::CreatePresentTextures(uint32_t width, uint32_t height,
       return false;
     }
   }
-  std::lock_guard<std::mutex> lock(mutex_);
-  for (int i = 0; i < kPresentCount; ++i) {
-    if (present_[i].texture) {
-      retired_present_.emplace_back(0, std::move(present_[i]));
-    }
-    present_[i] = std::move(created[i]);
-  }
-  front_ = -1;
-  fetched_ = -1;
-  width_ = width;
-  height_ = height;
   return true;
 }
 
@@ -112,17 +102,24 @@ bool SharedTexture::Present(uint32_t ring, uint32_t slot, HANDLE handle,
   if (source == nullptr) return false;
   D3D11_TEXTURE2D_DESC desc{};
   source->GetDesc(&desc);
-  if ((desc.Width != width_ || desc.Height != height_) &&
-      !CreatePresentTextures(desc.Width, desc.Height, error)) {
+  // On a new size, Flutter keeps showing the old textures until a frame was
+  // copied into the new ones.
+  const bool resized = desc.Width != width_ || desc.Height != height_;
+  PresentTexture created[kPresentCount];
+  if (resized &&
+      !CreatePresentTextures(desc.Width, desc.Height, created, error)) {
     return false;
   }
-  int back;
-  {
+  int back = 0;
+  ID3D11Texture2D* target;
+  if (resized) {
+    target = created[back].texture.Get();
+  } else {
     std::lock_guard<std::mutex> lock(mutex_);
-    back = 0;
     while (back == front_ || back == fetched_) ++back;
+    target = present_[back].texture.Get();
   }
-  context_->CopyResource(present_[back].texture.Get(), source);
+  context_->CopyResource(target, source);
   context_->End(query_.Get());
   context_->Flush();
   // Flutter's device reads the texture without a keyed mutex, so the copy
@@ -134,12 +131,23 @@ bool SharedTexture::Present(uint32_t ring, uint32_t slot, HANDLE handle,
   }
   {
     std::lock_guard<std::mutex> lock(mutex_);
-    front_ = back;
     // Two presents after a resize, Flutter shows the new textures.
     for (auto& retired : retired_present_) retired.first++;
     while (!retired_present_.empty() && retired_present_.front().first > 2) {
       retired_present_.pop_front();
     }
+    if (resized) {
+      for (int i = 0; i < kPresentCount; ++i) {
+        if (present_[i].texture) {
+          retired_present_.emplace_back(0, std::move(present_[i]));
+        }
+        present_[i] = std::move(created[i]);
+      }
+      fetched_ = -1;
+      width_ = desc.Width;
+      height_ = desc.Height;
+    }
+    front_ = back;
   }
   registrar_->MarkTextureFrameAvailable(id_);
   return true;
