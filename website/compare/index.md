@@ -105,5 +105,4 @@ the main ways to show data.
 
 `maplibre` shows any vector or raster tiles with full control over the style,
 has style layers for large data, heatmaps and 3D, and runs on desktop
-platforms. Choose `google_maps_flutter` if you need Google's map data and
-places.
+platforms.

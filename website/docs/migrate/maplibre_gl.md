@@ -24,9 +24,8 @@ flutter pub remove maplibre_gl
 flutter pub add maplibre:^0.4.0-pre.2
 ```
 
-Remove the maplibre-gl-js `<script>` and `<link>` tags from
-`web/index.html`, as `maplibre` loads it on its own, and follow
-[Platform setup](../getting-started/platforms.md).
+Follow [Platform setup](../getting-started/platforms.md) for each platform
+your app targets.
 
 ## 2. The map widget
 

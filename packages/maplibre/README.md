@@ -101,11 +101,7 @@ There are two Flutter packages for MapLibre. They take different approaches:
 | Interop         | FFI and JS interop, maps render into a Flutter `Texture`    | Platform channels, maps are platform views                      |
 | API             | Declarative annotations, synchronous where possible         | Imperative controller, asynchronous                             |
 
-Choose `maplibre` for desktop platforms, a declarative and typed API, or
-widgets that compose with the map. Choose `maplibre_gl` if you prefer the
-MapLibre SDKs to handle as much as possible. `maplibre` keeps its tech stack
-up to date, follows semantic versioning, and has a migration guide for every
-breaking release. The
+The
 [comparison](https://flutter-maplibre.pages.dev/compare/) covers other map
 packages as well.
 
