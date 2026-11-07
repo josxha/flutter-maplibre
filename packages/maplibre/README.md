@@ -92,9 +92,7 @@ binding. `maplibre_web` uses
 
 ## maplibre or maplibre_gl?
 
-There are two Flutter packages for MapLibre. They take different approaches.
-`maplibre_gl` is a hosted project of the MapLibre organization, and `maplibre`
-is being onboarded as one:
+There are two Flutter packages for MapLibre. They take different approaches:
 
 |                 | `maplibre` (this package)                                   | [`maplibre_gl`](https://pub.dev/packages/maplibre_gl)           |
 |-----------------|-------------------------------------------------------------|-----------------------------------------------------------------|
