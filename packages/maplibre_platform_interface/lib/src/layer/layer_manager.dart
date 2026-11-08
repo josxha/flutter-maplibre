@@ -15,10 +15,15 @@ class LayerManager {
   /// the layers with [_oldLayers] in for the initial creation.
   LayerManager(this.style, List<Layer> layers) {
     style.batch(() {
-      for (final (index, layer) in layers.indexed) {
+      // Add top to bottom, anchoring each layer below the next declarative layer.
+      for (final (index, layer) in layers.indexed.toList().reversed) {
         unawaited(style.sources.add(_sourceOf(layer, index)));
-        _styleLayers.add(_addStyleLayer(layer, index));
+        final belowLayerId = index + 1 < layers.length
+            ? layers[index + 1].getLayerId(index + 1)
+            : null;
+        _styleLayers.add(_addStyleLayer(layer, index, belowLayerId: belowLayerId));
       }
+      _styleLayers.reverse();
     });
     _oldLayers = layers;
     _oldFeatures = [for (final layer in layers) List.of(layer.list)];
@@ -108,7 +113,6 @@ class LayerManager {
         final oldLayer = index < _oldLayers.length ? _oldLayers[index] : null;
         if (oldLayer == null) {
           unawaited(style.sources.add(_sourceOf(layer, index)));
-          _styleLayers.add(_addStyleLayer(layer, index));
           continue;
         }
         // Only re-serialise a source whose features actually changed. Building
@@ -148,6 +152,14 @@ class LayerManager {
             _hideDragged(layer, drag);
           }
         }
+      }
+      // Add appended layers top to bottom to preserve the declarative stack order.
+      for (var index = layers.length - 1; index >= _oldLayers.length; index--) {
+        final layer = layers[index];
+        final belowLayerId = index + 1 < layers.length
+            ? layers[index + 1].getLayerId(index + 1)
+            : null;
+        _styleLayers.insert(index, _addStyleLayer(layer, index, belowLayerId: belowLayerId));
       }
       // remove any left-over sources and layers from the map
       if (_drag case final drag? when drag.layerIndex >= layers.length) {
@@ -311,7 +323,7 @@ class LayerManager {
   void _updateStyleLayer(Layer layer, int index) {
     final current = _styleLayers[index];
     final next = layer.createStyleLayer(index);
-    if (current.type == next.type &&
+    if (current.id == next.id && current.type == next.type &&
         _sourceOfLayer(current) == _sourceOfLayer(next)) {
       current.updateFrom(next);
       return;

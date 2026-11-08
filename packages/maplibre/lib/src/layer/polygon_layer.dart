@@ -11,6 +11,7 @@ class PolygonLayer extends Layer<Feature<Polygon>> {
   /// Create a new [PolygonLayer] instance.
   const PolygonLayer({
     required List<Feature<Polygon>> polygons,
+    super.id,
     this.color = const .literal(Color(0xFF000000)),
     this.opacity = const .literal(1),
     this.outlineColor = const .literal(Color(0xFF000000)),

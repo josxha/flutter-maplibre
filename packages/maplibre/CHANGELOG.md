@@ -7,6 +7,11 @@
   new color and text style parameters instead
   ([#671](https://github.com/josxha/flutter-maplibre/issues/671)).
 
+### Features
+
+- Annotation layers accept an optional `id` for their style-layer id.
+- Annotation layers follow the order of `MapLibreMap.layers`.
+
 Full Changelog: [v0.4.0-pre.2...main](https://github.com/josxha/flutter-maplibre/compare/v0.4.0-pre.2...main)
 
 ## 0.4.0-pre.2

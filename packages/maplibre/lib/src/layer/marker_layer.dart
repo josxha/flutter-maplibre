@@ -11,6 +11,7 @@ class MarkerLayer extends Layer<Feature<Point>> {
   /// Create a new [MarkerLayer] instance.
   const MarkerLayer({
     required List<Feature<Point>> points,
+    super.id,
     this.iconAllowOverlap = const .literal(false),
     this.iconIgnorePlacement = const .literal(false),
     this.iconOptional = const .literal(false),

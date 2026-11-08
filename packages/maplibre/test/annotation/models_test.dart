@@ -13,6 +13,7 @@ void main() {
       const layer = CircleLayer(points: points);
       expect(layer.getSourceId(3), 'maplibre-source-3');
       expect(layer.getLayerId(3), 'maplibre-layer-3');
+      expect(CircleLayer(id: 'my-id', points: points).getLayerId(3), 'my-id');
       expect(layer.getSourceId(3), isNot(layer.getSourceId(4)));
     });
 

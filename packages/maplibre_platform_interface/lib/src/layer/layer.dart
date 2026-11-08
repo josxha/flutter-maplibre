@@ -17,6 +17,7 @@ abstract class Layer<G extends Feature<Geometry>> {
   /// zoom levels.
   const Layer({
     required this.list,
+    this.id,
     this.minZoom = 0,
     this.maxZoom = 24,
     this.draggable = false,
@@ -34,6 +35,9 @@ abstract class Layer<G extends Feature<Geometry>> {
 
   /// The [List] of geometry features.
   final List<G> list;
+
+  /// The id of the style layer. Defaults to an internally generated id.
+  final String? id;
 
   /// The minimum zoom level that the [Layer] is displayed.
   final double minZoom;
@@ -98,8 +102,8 @@ abstract class Layer<G extends Feature<Geometry>> {
   /// Get a unique source id.
   String getSourceId(int index) => 'maplibre-source-$index';
 
-  /// Get a unique layer id.
-  String getLayerId(int index) => 'maplibre-layer-$index';
+  /// Get the style layer id, using [id] when it is set.
+  String getLayerId(int index) => id ?? 'maplibre-layer-$index';
 
   /// Add the annotation layer to the map.
   StyleLayer createStyleLayer(int index);
@@ -110,6 +114,7 @@ abstract class Layer<G extends Feature<Geometry>> {
       other is Layer &&
           runtimeType == other.runtimeType &&
           list == other.list &&
+          id == other.id &&
           minZoom == other.minZoom &&
           maxZoom == other.maxZoom &&
           draggable == other.draggable &&
@@ -117,7 +122,7 @@ abstract class Layer<G extends Feature<Geometry>> {
 
   @override
   int get hashCode =>
-      Object.hash(minZoom, maxZoom, list, draggable, interactive);
+      Object.hash(id, minZoom, maxZoom, list, draggable, interactive);
 }
 
 /// Called with a [LayerFeatureEvent] when the user interacts with a feature

@@ -11,6 +11,7 @@ class _MockStyleController extends Mock implements StyleController {}
 class _TestLayer extends Layer<Feature<Point>> {
   const _TestLayer({
     required super.list,
+    super.id,
     this.radius = 1,
     this.type = 'circle',
     this.sourceLayerId,
@@ -501,6 +502,44 @@ void main() {
       expect(sources.map((source) => source.id), [
         'maplibre-source-0',
         'maplibre-source-1',
+      ]);
+    });
+
+    test('adds initial style layers in declarative stack order', () {
+      LayerManager(style, const [
+        _TestLayer(id: 'bottom', list: list),
+        _TestLayer(id: 'middle', list: list),
+        _TestLayer(id: 'top', list: list),
+      ]);
+      expect(ids(), ['bottom', 'middle', 'top']);
+      expect(backend.calls.where((c) => c.startsWith('addLayer')).toList(), [
+        'addLayer top below null',
+        'addLayer middle below top',
+        'addLayer bottom below middle',
+      ]);
+    });
+
+    test('custom ids are used and changing an id recreates the layer', () {
+      final manager = LayerManager(style, const [_TestLayer(id: 'old', list: list)]);
+      expect(ids(), ['old']);
+      backend.calls.clear();
+      manager.updateLayers(const [_TestLayer(id: 'new', list: list)]);
+      expect(ids(), ['new']);
+      expect(backend.calls, ['removeLayer old', 'addLayer new below null']);
+    });
+
+    test('appends layers in declarative stack order', () {
+      final manager = LayerManager(style, const [_TestLayer(id: 'bottom', list: list)]);
+      backend.calls.clear();
+      manager.updateLayers(const [
+        _TestLayer(id: 'bottom', list: list),
+        _TestLayer(id: 'middle', list: list),
+        _TestLayer(id: 'top', list: list),
+      ]);
+      expect(ids(), ['bottom', 'middle', 'top']);
+      expect(backend.calls.where((c) => c.startsWith('addLayer')).toList(), [
+        'addLayer top below null',
+        'addLayer middle below top',
       ]);
     });
 

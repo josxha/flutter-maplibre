@@ -11,6 +11,7 @@ class CircleLayer extends Layer<Feature<Point>> {
   /// Create a new [CircleLayer] instance.
   const CircleLayer({
     required List<Feature<Point>> points,
+    super.id,
     this.radius = const .literal(5),
     this.color = const .literal(Color(0xFF000000)),
     this.blur = const .literal(0),

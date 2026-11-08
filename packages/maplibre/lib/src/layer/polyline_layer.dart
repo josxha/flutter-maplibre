@@ -11,6 +11,7 @@ class PolylineLayer extends Layer<Feature<LineString>> {
   /// Create a new [PolylineLayer] instance.
   const PolylineLayer({
     required List<Feature<LineString>> polylines,
+    super.id,
     this.color = const .literal(Color(0xFF000000)),
     this.opacity = const .literal(1),
     this.width = const .literal(1),
