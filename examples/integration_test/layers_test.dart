@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -266,16 +267,16 @@ void runTests() {
                 : const LayerAnchor.top(),
           ),
       ];
-      // The color at the center shows the layer on top. Native maps report
-      // rendered features in the order their layers were added, not drawn.
+      // On web, rendered features come topmost first. Other platforms report
+      // them in the order their layers were added, not drawn, so the color
+      // at the center shows the layer on top there.
       Future<void> topIs(TestMap map, String id) async {
-        await map.waitForFeatures(
-          map.center,
-          (features) =>
-              {for (final f in features) f.layerId}
-                  .containsAll(['red', 'blue']),
-        );
-        await map.waitForColorAtCenter(id, id == 'red' ? 0 : 2);
+        await map.waitForFeatures(map.center, (features) {
+          final ids = [for (final f in features) f.layerId];
+          if (!ids.contains('red') || !ids.contains('blue')) return false;
+          return !kIsWeb || ids.first == id;
+        });
+        if (!kIsWeb) await map.waitForColorAtCenter(id, id == 'red' ? 0 : 2);
       }
 
       final map = await pumpMap(
