@@ -316,25 +316,30 @@ class LayerManager {
         .where((record) => !nextRecords.contains(record))
         .toList();
 
-    // A drag is tied to the layer stack. End it if that stack changes or its
-    // layer is removed/recreated; ordinary property and data updates can keep it.
-    if (_drag case final drag?) {
-      if (!_sameOrder(oldRecords, nextRecords) ||
-          !nextRecords.contains(drag.record) ||
-          replacements.contains(drag.record)) {
-        _finishDrag();
-      }
-    }
-
     style.batch(() {
-      // Detach every removed/replaced style layer before adding any new one.
+      // A drag is tied to the layer stack. End it if that stack changes or its
+      // layer is removed/recreated or stops being draggable.
+      if (_drag case final drag?) {
+        final nextLayer = nextLayers[drag.record];
+        if (!_sameOrder(oldRecords, nextRecords) ||
+            nextLayer == null ||
+            !nextLayer.draggable ||
+            drag.featureIndex >= nextLayer.list.length ||
+            nextLayer.runtimeType != drag.record.layer.runtimeType ||
+            replacements.contains(drag.record)) {
+          _finishDrag();
+        }
+      }
+
+      // Detach each removed layer before its source, then remove every
+      // replacement before adding any new style layer.
       for (final record in oldRecords.reversed) {
         if (removedRecords.contains(record) || replacements.contains(record)) {
           unawaited(style.layers.remove(record.layerId));
         }
-      }
-      for (final record in removedRecords.reversed) {
-        unawaited(style.sources.remove(record.sourceId));
+        if (removedRecords.contains(record)) {
+          unawaited(style.sources.remove(record.sourceId));
+        }
       }
 
       for (final record in newRecords) {
