@@ -65,13 +65,16 @@ const FlutterDesktopPixelBuffer* PixelTexture::CopyPixelBuffer(size_t width,
 
 // static
 void MaplibreNativePlugin::RegisterWithRegistrar(
+    FlutterDesktopPluginRegistrarRef engine_registrar,
     flutter::PluginRegistrarWindows* registrar) {
-  registrar->AddPlugin(std::make_unique<MaplibreNativePlugin>(registrar));
+  registrar->AddPlugin(
+      std::make_unique<MaplibreNativePlugin>(engine_registrar, registrar));
 }
 
 MaplibreNativePlugin::MaplibreNativePlugin(
+    FlutterDesktopPluginRegistrarRef engine_registrar,
     flutter::PluginRegistrarWindows* registrar)
-    : registrar_(registrar->registrar()),
+    : registrar_(engine_registrar),
       textures_(registrar->texture_registrar()) {
   if (registrar->GetGraphicsAdapter(&adapter_) && adapter_) {
     DXGI_ADAPTER_DESC desc{};

@@ -54,9 +54,14 @@ class PixelTexture {
 // Flutter's adapter that opens the library's shared textures.
 class MaplibreNativePlugin : public flutter::Plugin, public DesktopPlugin {
  public:
-  static void RegisterWithRegistrar(flutter::PluginRegistrarWindows* registrar);
+  // |engine_registrar| is the engine's registrar that |registrar| wraps,
+  // which identifies the engine.
+  static void RegisterWithRegistrar(
+      FlutterDesktopPluginRegistrarRef engine_registrar,
+      flutter::PluginRegistrarWindows* registrar);
 
-  explicit MaplibreNativePlugin(flutter::PluginRegistrarWindows* registrar);
+  MaplibreNativePlugin(FlutterDesktopPluginRegistrarRef engine_registrar,
+                       flutter::PluginRegistrarWindows* registrar);
 
   ~MaplibreNativePlugin() override;
 
