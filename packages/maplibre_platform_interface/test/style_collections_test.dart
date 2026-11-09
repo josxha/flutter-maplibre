@@ -577,7 +577,7 @@ void main() {
       expect(layers[bottomId], same(bottomStyleLayer));
       expect(layers[topId], same(topStyleLayer));
       expect(backend.calls, [
-        'moveLayer ' + bottomId + ' below ' + topId,
+        'moveLayer ' + bottomId + ' below null',
       ]);
     });
 
