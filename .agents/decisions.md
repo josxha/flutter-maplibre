@@ -718,6 +718,12 @@ Each entry: the decision, then why.
 
 ## Known gaps
 
+- **Native `queryRenderedFeatures` returns features in the order their
+  layers were added, not their draw order after a `moveStyleLayer`** (seen on
+  Windows with 0.202611.0, not checked elsewhere). The pixels follow
+  the move. Hit testing of annotation layers therefore ranks hits by the
+  index in `style.layers`, and the integration test checks the order by
+  color.
 - MapLibre Native moves to the style's camera on load only while no camera
   change happened, and `mln_map_set_bounds` counts as one (it always passes
   bounds, even `unbounded`). The C API has no getter for the style's camera.
