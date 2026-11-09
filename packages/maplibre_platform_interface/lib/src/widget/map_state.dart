@@ -170,8 +170,11 @@ abstract class MapLibreMapState extends State<MapLibreMap>
     final hit = _topmost(hits.layers, event.screenPoint);
     if (hit == null) return;
     event.preventDefault();
+    final layer = widget.layers[hit.layerIndex];
+    final layerId =
+        layerManager?.getLayerId(hit.layerIndex) ?? layer.getLayerId(hit.layerIndex);
     _layerDrag = _LayerDrag(
-      hit.layerIndex,
+      layerId,
       hit.featureIndex,
       hit.geometry,
       event.screenPoint,
@@ -560,7 +563,14 @@ abstract class MapLibreMapState extends State<MapLibreMap>
   ) {
     final drag = _layerDrag;
     if (drag == null || !isInitialized) return null;
-    final layer = widget.layers.elementAtOrNull(drag.layerIndex);
+    Layer? layer;
+    for (final (index, candidate) in widget.layers.indexed) {
+      final id = layerManager?.getLayerId(index) ?? candidate.getLayerId(index);
+      if (id == drag.layerId) {
+        layer = candidate;
+        break;
+      }
+    }
     if (layer == null ||
         !layer.draggable ||
         drag.featureIndex >= layer.list.length) {
@@ -750,9 +760,9 @@ class _LayerHit {
 
 /// A feature of [MapLibreMap.layers] that a drag moves.
 class _LayerDrag {
-  _LayerDrag(this.layerIndex, this.featureIndex, this.geometry, this.start);
+  _LayerDrag(this.layerId, this.featureIndex, this.geometry, this.start);
 
-  final int layerIndex;
+  final String layerId;
   final int featureIndex;
 
   /// The geometry of the feature where the drag started.

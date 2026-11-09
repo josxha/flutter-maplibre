@@ -273,17 +273,6 @@ class LayerManager {
       ? (layer.sourceId, layer.sourceLayerId)
       : (null, null);
 
-  static bool _sameOrder(
-    List<_ManagedLayer> first,
-    List<_ManagedLayer> second,
-  ) {
-    if (first.length != second.length) return false;
-    for (var index = 0; index < first.length; index++) {
-      if (!identical(first[index], second[index])) return false;
-    }
-    return true;
-  }
-
   /// Updates the map to match [layers], retaining records for unchanged or
   /// identifiable layers and moving their existing style layers into place.
   void updateLayers(List<Layer> layers) {
@@ -347,8 +336,7 @@ class LayerManager {
       // layer is removed/recreated or stops being draggable.
       if (_drag case final drag?) {
         final nextLayer = nextLayers[drag.record];
-        if (!_sameOrder(oldRecords, nextRecords) ||
-            nextLayer == null ||
+        if (!nextLayer == null ||
             !nextLayer.draggable ||
             drag.featureIndex >= nextLayer.list.length ||
             nextLayer.runtimeType != drag.record.layer.runtimeType ||

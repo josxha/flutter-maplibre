@@ -12,6 +12,7 @@ class _TestLayer extends Layer<Feature<Point>> {
   const _TestLayer({
     required super.list,
     super.id,
+    super.draggable,
     this.radius = 1,
     this.type = 'circle',
     this.sourceLayerId,
@@ -697,6 +698,28 @@ void main() {
       expect(sources.map((source) => source.id), [
         'maplibre-source-0',
         'maplibre-source-1',
+      ]);
+    });
+
+    test('keeps the drag overlay with its layer when the stack moves', () {
+      final manager = LayerManager(style, const [
+        _TestLayer(id: 'a', list: list, draggable: true),
+        _TestLayer(id: 'b', list: list),
+        _TestLayer(id: 'c', list: list),
+      ]);
+      manager.startDrag(0, 0);
+      backend.calls.clear();
+
+      manager.updateLayers(const [
+        _TestLayer(id: 'b', list: list),
+        _TestLayer(id: 'a', list: list, draggable: true),
+        _TestLayer(id: 'c', list: list),
+      ]);
+
+      expect(ids(), ['b', 'a', 'maplibre-drag-layer', 'c']);
+      expect(backend.calls, [
+        'moveLayer maplibre-drag-layer below c',
+        'moveLayer a below maplibre-drag-layer',
       ]);
     });
 
