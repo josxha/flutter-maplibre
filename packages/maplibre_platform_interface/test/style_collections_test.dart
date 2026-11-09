@@ -600,7 +600,8 @@ void main() {
       expect(layers['top'], same(topStyleLayer));
       expect(
         backend.calls.where(
-          (call) => call.startsWith('removeLayer') || call.startsWith('addLayer'),
+          (call) =>
+              call.startsWith('removeLayer') || call.startsWith('addLayer'),
         ),
         isEmpty,
       );
