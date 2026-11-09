@@ -191,7 +191,7 @@ abstract class MapLibreMapState extends State<MapLibreMap>
   }) async {
     final layerIndexes = <String, int>{
       for (final (index, layer) in widget.layers.indexed)
-        if (include(layer)) layer.getLayerId(index): index,
+        if (include(layer)) (layerManager?.getLayerId(index) ?? layer.getLayerId(index)): index,
     };
     final styleLayerIds = {
       if (includeStyle != null)

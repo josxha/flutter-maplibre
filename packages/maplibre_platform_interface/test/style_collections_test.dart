@@ -543,6 +543,57 @@ void main() {
       ]);
     });
 
+    test('generated ids are allocated, not derived from the current index', () {
+      final manager = LayerManager(style, const [_TestLayer(list: list)]);
+      final firstId = manager.getLayerId(0);
+      manager.updateLayers(const []);
+      manager.updateLayers(const [_TestLayer(list: list)]);
+      expect(manager.getLayerId(0), isNot(firstId));
+    });
+
+    test('reorders explicitly named layers without duplicate ids', () {
+      final manager = LayerManager(style, const [
+        _TestLayer(id: 'a', list: list),
+        _TestLayer(id: 'b', list: list),
+        _TestLayer(id: 'c', list: list),
+      ]);
+      backend.calls.clear();
+
+      manager.updateLayers(const [
+        _TestLayer(id: 'c', list: list),
+        _TestLayer(id: 'a', list: list),
+        _TestLayer(id: 'b', list: list),
+      ]);
+
+      expect(ids(), ['c', 'a', 'b']);
+      expect(
+        backend.calls.where((call) => call.startsWith('removeLayer')).toList(),
+        ['removeLayer a', 'removeLayer b', 'removeLayer c'],
+      );
+      expect(
+        backend.calls.where((call) => call.startsWith('addLayer')).toList(),
+        [
+          'addLayer b below null',
+          'addLayer a below b',
+          'addLayer c below a',
+        ],
+      );
+    });
+
+    test('copies the incoming list before tracking changes', () {
+      final definitions = <Layer>[_TestLayer(list: list)];
+      final manager = LayerManager(style, definitions);
+      definitions.add(_TestLayer(list: list));
+
+      manager.updateLayers(definitions);
+
+      expect(ids(), hasLength(2));
+      expect(sources.map((source) => source.id), [
+        'maplibre-source-0',
+        'maplibre-source-1',
+      ]);
+    });
+
     test('does nothing when nothing changed', () {
       final manager = LayerManager(style, const [_TestLayer(list: list)]);
       backend.calls.clear();

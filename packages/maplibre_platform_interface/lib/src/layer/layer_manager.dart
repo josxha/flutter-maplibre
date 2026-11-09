@@ -14,13 +14,14 @@ class LayerManager {
   /// It creates all sources and layers on the map. It's not needed to compare
   /// the layers with [_oldLayers] in for the initial creation.
   LayerManager(this.style, List<Layer> layers) {
+    _ensureIds(layers);
     style.batch(() {
       // Add top to bottom, anchoring each layer below the next declarative
       // layer.
       for (final (index, layer) in layers.indexed.toList().reversed) {
         unawaited(style.sources.add(_sourceOf(layer, index)));
         final belowLayerId = index + 1 < layers.length
-            ? layers[index + 1].getLayerId(index + 1)
+            ? _layerId(layers[index + 1], index + 1)
             : null;
         _styleLayers.add(
           _addStyleLayer(layer, index, belowLayerId: belowLayerId),
@@ -28,7 +29,7 @@ class LayerManager {
       }
       _styleLayers.setAll(0, _styleLayers.reversed);
     });
-    _oldLayers = layers;
+    _oldLayers = List.of(layers);
     _oldFeatures = [for (final layer in layers) List.of(layer.list)];
   }
 
@@ -47,6 +48,14 @@ class LayerManager {
 
   /// The style layers on the map, one per entry of [_oldLayers].
   final _styleLayers = <StyleLayer>[];
+
+  /// Generated ids belong to layer slots, but aren't derived from their index.
+  /// Keeping the counters avoids reusing an id when a slot is removed and later
+  /// filled again.
+  final _generatedLayerIds = <String>[];
+  final _generatedSourceIds = <String>[];
+  var _nextLayerId = 0;
+  var _nextSourceId = 0;
 
   /// The feature that the user drags, see [startDrag].
   _FeatureDrag? _drag;
@@ -72,8 +81,48 @@ class LayerManager {
   /// hovered or dragged.
   static const featureIndexProperty = 'maplibre:index';
 
-  static GeoJsonSource _sourceOf(Layer layer, int index) =>
-      GeoJsonSource.data(id: layer.getSourceId(index), data: _dataOf(layer));
+  /// The style-layer id used for [index] in the current declarative list.
+  /// Explicit ids follow their layer; generated ids stay with the slot.
+  String getLayerId(int index) => _layerId(_oldLayers[index], index);
+
+  String _layerId(Layer layer, int index) =>
+      layer.id ?? _generatedLayerIds[index];
+
+  String _sourceId(int index) => _generatedSourceIds[index];
+
+  void _ensureIds(List<Layer> layers) {
+    final customIds = <String>{};
+    for (final layer in layers) {
+      final id = layer.id;
+      if (id != null && !customIds.add(id)) {
+        throw ArgumentError.value(id, 'layers', 'Layer ids must be unique.');
+      }
+    }
+    while (_generatedLayerIds.length < layers.length) {
+      _generatedLayerIds.add('maplibre-layer-${_nextLayerId++}');
+    }
+    while (_generatedSourceIds.length < layers.length) {
+      _generatedSourceIds.add('maplibre-source-${_nextSourceId++}');
+    }
+    for (final (index, layer) in layers.indexed) {
+      if (layer.id == null && customIds.contains(_generatedLayerIds[index])) {
+        _generatedLayerIds[index] = 'maplibre-layer-${_nextLayerId++}';
+      }
+    }
+    final resolvedIds = <String>{};
+    for (final (index, layer) in layers.indexed) {
+      if (!resolvedIds.add(_layerId(layer, index))) {
+        throw ArgumentError.value(
+          layer.id,
+          'layers',
+          'Layer ids must be unique.',
+        );
+      }
+    }
+  }
+
+  GeoJsonSource _sourceOf(Layer layer, int index) =>
+      GeoJsonSource.data(id: _sourceId(index), data: _dataOf(layer));
 
   static GeoJsonData _dataOf(Layer layer) {
     if (!layer.interactive) {
@@ -91,8 +140,17 @@ class LayerManager {
     );
   }
 
-  StyleLayer _addStyleLayer(Layer layer, int index, {String? belowLayerId}) {
+  StyleLayer _styleLayerOf(Layer layer, int index) {
     final styleLayer = layer.createStyleLayer(index);
+    return StyleLayer.fromJson({
+      ...styleLayer.toJson(),
+      'id': _layerId(layer, index),
+      if (styleLayer is StyleLayerWithSource) 'source': _sourceId(index),
+    });
+  }
+
+  StyleLayer _addStyleLayer(Layer layer, int index, {String? belowLayerId}) {
+    final styleLayer = _styleLayerOf(layer, index);
     unawaited(style.layers.add(styleLayer, belowLayerId: belowLayerId));
     return styleLayer;
   }
@@ -101,33 +159,57 @@ class LayerManager {
   /// translates the declarative layer definition of [MapLibreMap.layers] to
   /// imperative calls to the maps' [MapController].
   void updateLayers(List<Layer> layers) {
+    _ensureIds(layers);
+    final oldLayers = _oldLayers;
+    final oldFeatures = _oldFeatures;
+    final oldStyleLayers = List<StyleLayer>.of(_styleLayers);
+    final nextStyleLayers = [
+      for (final (index, layer) in layers.indexed) _styleLayerOf(layer, index),
+    ];
+    final replacements = [
+      for (final (index, next) in nextStyleLayers)
+        index >= oldStyleLayers.length ||
+            oldStyleLayers[index].id != next.id ||
+            oldStyleLayers[index].type != next.type ||
+            _sourceOfLayer(oldStyleLayers[index]) != _sourceOfLayer(next),
+    ];
+
     style.batch(() {
       if (_drag case final drag?) {
         final index = drag.layerIndex;
         if (index >= layers.length ||
+            index >= oldLayers.length ||
             !layers[index].draggable ||
             drag.featureIndex >= layers[index].list.length ||
-            layers[index].runtimeType != _oldLayers[index].runtimeType) {
+            layers[index].runtimeType != oldLayers[index].runtimeType ||
+            _layerId(layers[index], index) != oldStyleLayers[index].id) {
           _finishDrag();
         }
       }
+
+      // Remove every layer that needs replacing before adding any of them.
+      // This permits explicitly named layers to swap order without briefly
+      // registering the same style-layer id twice.
+      for (var index = 0; index < oldStyleLayers.length; index++) {
+        if (index >= layers.length || replacements[index]) {
+          unawaited(style.layers.remove(oldStyleLayers[index].id));
+        }
+      }
+
+      // Remove sources that belonged to layers at the end of the old list.
+      for (var index = oldLayers.length - 1; index >= layers.length; index--) {
+        unawaited(style.sources.remove(_sourceId(index)));
+      }
+
       for (var index = 0; index < layers.length; index++) {
         final layer = layers[index];
-        final oldLayer = index < _oldLayers.length ? _oldLayers[index] : null;
+        final oldLayer = index < oldLayers.length ? oldLayers[index] : null;
         if (oldLayer == null) {
           unawaited(style.sources.add(_sourceOf(layer, index)));
-          continue;
-        }
-        // Only re-serialise a source whose features actually changed. Building
-        // the GeoJSON is the expensive half of this call.
-        //
-        // `Layer.==` compares `list` by identity and misses features added to
-        // the same list in place, so the features are compared with the copy
-        // taken last time.
-        if (layer.interactive != oldLayer.interactive ||
-            !_sameFeatures(_oldFeatures[index], layer.list)) {
+        } else if (layer.interactive != oldLayer.interactive ||
+            !_sameFeatures(oldFeatures[index], layer.list)) {
           final written = style.sources.updateGeoJsonData(
-            layer.getSourceId(index),
+            _sourceId(index),
             _dataOf(layer),
           );
           final drag = _drag;
@@ -148,39 +230,44 @@ class LayerManager {
             unawaited(written);
           }
         }
-        if (layer != oldLayer) {
-          _updateStyleLayer(layer, index);
-          if (_drag case final drag? when drag.layerIndex == index) {
-            drag.overlay.updateFrom(_overlayOf(layer, index));
-            _hideDragged(layer, drag);
-          }
+      }
+
+      final nextStyleOrder = <StyleLayer>[];
+      for (var index = 0; index < layers.length; index++) {
+        if (index < oldStyleLayers.length && !replacements[index]) {
+          final current = oldStyleLayers[index];
+          current.updateFrom(nextStyleLayers[index]);
+          nextStyleOrder.add(current);
+        } else {
+          nextStyleOrder.add(nextStyleLayers[index]);
         }
       }
-      // Add appended layers top to bottom to preserve the declarative stack
-      // order.
-      for (var index = layers.length - 1; index >= _oldLayers.length; index--) {
-        final layer = layers[index];
+      _styleLayers
+        ..clear()
+        ..addAll(nextStyleOrder);
+
+      // Add new and replaced layers from top to bottom, each below the next
+      // entry in MapLibreMap.layers.
+      for (var index = layers.length - 1; index >= 0; index--) {
+        if (index < oldStyleLayers.length && !replacements[index]) continue;
         final belowLayerId = index + 1 < layers.length
-            ? layers[index + 1].getLayerId(index + 1)
+            ? nextStyleOrder[index + 1].id
             : null;
-        _styleLayers.insert(
-          index,
-          _addStyleLayer(layer, index, belowLayerId: belowLayerId),
+        unawaited(
+          style.layers.add(
+            nextStyleOrder[index],
+            belowLayerId: belowLayerId,
+          ),
         );
       }
-      // remove any left-over sources and layers from the map
-      if (_drag case final drag? when drag.layerIndex >= layers.length) {
-        _finishDrag();
-      }
-      for (var index = _oldLayers.length - 1; index >= layers.length; index--) {
-        final oldLayer = _oldLayers[index];
-        unawaited(style.layers.remove(oldLayer.getLayerId(index)));
-        unawaited(style.sources.remove(oldLayer.getSourceId(index)));
-        _styleLayers.removeAt(index);
-      }
     });
-    _oldLayers = layers;
+
+    _oldLayers = List.of(layers);
     _oldFeatures = [for (final layer in layers) List.of(layer.list)];
+    if (_generatedLayerIds.length > layers.length) {
+      _generatedLayerIds.removeRange(layers.length, _generatedLayerIds.length);
+      _generatedSourceIds.removeRange(layers.length, _generatedSourceIds.length);
+    }
   }
 
   /// Lets the user drag the feature [featureIndex] of the layer [layerIndex].
@@ -286,15 +373,13 @@ class LayerManager {
     unawaited(style.sources.remove(_dragSourceId));
     final index = drag.layerIndex;
     if (index < _styleLayers.length && index < _oldLayers.length) {
-      _styleLayers[index].filter = _oldLayers[index]
-          .createStyleLayer(index)
-          .filter;
+      _styleLayers[index].filter = _styleLayerOf(_oldLayers[index], index).filter;
     }
   }
 
   /// Hides the dragged feature in its layer.
   void _hideDragged(Layer layer, _FeatureDrag drag) {
-    final own = layer.createStyleLayer(drag.layerIndex).filter;
+    final own = _styleLayerOf(layer, drag.layerIndex).filter;
     final hide = Expression.notEqual(
       Expression.get(featureIndexProperty),
       Expression.literal(drag.featureIndex),
@@ -304,8 +389,8 @@ class LayerManager {
         : Expression.all([own, hide]);
   }
 
-  static StyleLayer _overlayOf(Layer layer, int index) => StyleLayer.fromJson({
-    ...layer.createStyleLayer(index).toJson(),
+  StyleLayer _overlayOf(Layer layer, int index) => StyleLayer.fromJson({
+    ..._styleLayerOf(layer, index).toJson(),
     'id': _dragLayerId,
     'source': _dragSourceId,
   });
@@ -323,31 +408,6 @@ class LayerManager {
           ),
         ]),
       );
-
-  /// Brings the style layer at [index] to the definition of [layer]: only its
-  /// changed properties, or a new style layer at the same position if its type
-  /// or source changed.
-  void _updateStyleLayer(Layer layer, int index) {
-    final current = _styleLayers[index];
-    final next = layer.createStyleLayer(index);
-    if (current.id == next.id &&
-        current.type == next.type &&
-        _sourceOfLayer(current) == _sourceOfLayer(next)) {
-      current.updateFrom(next);
-      return;
-    }
-    unawaited(style.layers.remove(current.id));
-    _styleLayers[index] = next;
-    final nextIndex = index + 1;
-    unawaited(
-      style.layers.add(
-        next,
-        belowLayerId: nextIndex < _styleLayers.length
-            ? _styleLayers[nextIndex].id
-            : null,
-      ),
-    );
-  }
 
   static (String?, String?) _sourceOfLayer(StyleLayer layer) =>
       layer is StyleLayerWithSource
