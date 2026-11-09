@@ -98,15 +98,45 @@ class LayerManager {
         throw ArgumentError.value(id, 'layers', 'Layer ids must be unique.');
       }
     }
+
+    final ownedLayerIds = _styleLayers.map((layer) => layer.id).toSet();
+    final ownedSourceIds = _generatedSourceIds.take(_styleLayers.length).toSet();
+    final existingLayerIds = style.layers.map((layer) => layer.id).toSet();
+    final existingSourceIds = style.sources.map((source) => source.id).toSet();
+
+    for (final id in customIds) {
+      if (existingLayerIds.contains(id) && !ownedLayerIds.contains(id)) {
+        throw ArgumentError.value(
+          id,
+          'layers',
+          'The id is already used by a style layer.',
+        );
+      }
+    }
+
     while (_generatedLayerIds.length < layers.length) {
-      _generatedLayerIds.add('maplibre-layer-${_nextLayerId++}');
+      var id = 'maplibre-layer-${_nextLayerId++}';
+      while (customIds.contains(id) ||
+          (existingLayerIds.contains(id) && !ownedLayerIds.contains(id))) {
+        id = 'maplibre-layer-${_nextLayerId++}';
+      }
+      _generatedLayerIds.add(id);
     }
     while (_generatedSourceIds.length < layers.length) {
-      _generatedSourceIds.add('maplibre-source-${_nextSourceId++}');
+      var id = 'maplibre-source-${_nextSourceId++}';
+      while (existingSourceIds.contains(id) && !ownedSourceIds.contains(id)) {
+        id = 'maplibre-source-${_nextSourceId++}';
+      }
+      _generatedSourceIds.add(id);
     }
     for (final (index, layer) in layers.indexed) {
       if (layer.id == null && customIds.contains(_generatedLayerIds[index])) {
-        _generatedLayerIds[index] = 'maplibre-layer-${_nextLayerId++}';
+        var id = 'maplibre-layer-${_nextLayerId++}';
+        while (customIds.contains(id) ||
+            (existingLayerIds.contains(id) && !ownedLayerIds.contains(id))) {
+          id = 'maplibre-layer-${_nextLayerId++}';
+        }
+        _generatedLayerIds[index] = id;
       }
     }
     final resolvedIds = <String>{};

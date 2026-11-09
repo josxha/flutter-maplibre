@@ -586,6 +586,30 @@ void main() {
       );
     });
 
+    test('generated ids avoid existing style layers', () {
+      layers.load([
+        {'id': 'maplibre-layer-0', 'type': 'background'},
+      ]);
+
+      final manager = LayerManager(style, const [_TestLayer(list: list)]);
+
+      expect(manager.getLayerId(0), 'maplibre-layer-1');
+      expect(ids(), ['maplibre-layer-0', 'maplibre-layer-1']);
+    });
+
+    test('rejects explicit ids already used by style layers', () {
+      layers.load([
+        {'id': 'taken', 'type': 'background'},
+      ]);
+
+      expect(
+        () => LayerManager(style, const [_TestLayer(id: 'taken', list: list)]),
+        throwsArgumentError,
+      );
+      expect(sources, isEmpty);
+      expect(backend.calls, isEmpty);
+    });
+
     test('rejects duplicate explicit ids before changing the style', () {
       expect(
         () => LayerManager(style, const [

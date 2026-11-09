@@ -37,7 +37,7 @@ abstract class Layer<G extends Feature<Geometry>> {
   /// The [List] of geometry features.
   final List<G> list;
 
-  /// Optional style-layer id, unique among this map's annotation layers.
+  /// Optional style-layer id. It must be unique in the map's style.
   /// When omitted, the layer manager generates an id.
   final String? id;
 
