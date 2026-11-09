@@ -661,6 +661,45 @@ void main() {
       expect(ids(), ['maplibre-layer-0', 'maplibre-layer-1']);
     });
 
+    test('drag overlay ids avoid existing style ids', () {
+      sources.load({
+        'maplibre-drag-source': {'type': 'geojson', 'data': 'https://example.com/a.json'},
+      });
+      layers.load([
+        {'id': 'maplibre-drag-layer', 'type': 'background'},
+      ]);
+
+      final manager = LayerManager(style, const [
+        _TestLayer(id: 'custom', list: list, draggable: true),
+      ]);
+      manager.startDrag(0, 0);
+
+      expect(
+        backend.calls.where((call) => call.startsWith('addSource')).toList(),
+        ['addSource maplibre-source-0', 'addSource maplibre-drag-source-0'],
+      );
+      expect(
+        backend.calls.where((call) => call.startsWith('addLayer')).toList(),
+        [
+          'addLayer custom below null',
+          'addLayer maplibre-drag-layer-0 below null',
+        ],
+      );
+    });
+
+    test('rejects an id reserved for the drag overlay', () {
+      final manager = LayerManager(style, const []);
+      expect(
+        () => manager.updateLayers(const [
+          _TestLayer(id: 'maplibre-drag-layer', list: list),
+        ]),
+        throwsArgumentError,
+      );
+      expect(layers, isEmpty);
+      expect(sources, isEmpty);
+      expect(backend.calls, isEmpty);
+    });
+
     test('rejects explicit ids already used by style layers', () {
       layers.load([
         {'id': 'taken', 'type': 'background'},

@@ -11,6 +11,12 @@ import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 class LayerManager {
   /// Creates the sources and style layers for [layers].
   LayerManager(this.style, List<Layer> layers) {
+    final reservedLayerIds = {
+      for (final layer in layers)
+        if (layer.id != null) layer.id!,
+    };
+    _dragLayerId = _reserveLayerId('maplibre-drag-layer', reservedLayerIds);
+    _dragSourceId = _reserveSourceId('maplibre-drag-source');
     _validateIds(layers);
     final reservedIds = {
       for (final layer in layers)
@@ -43,8 +49,8 @@ class LayerManager {
   /// The feature currently being dragged, if any.
   _FeatureDrag? _drag;
 
-  static const _dragSourceId = 'maplibre-drag-source';
-  static const _dragLayerId = 'maplibre-drag-layer';
+  late final String _dragSourceId;
+  late final String _dragLayerId;
 
   /// How long a dropped feature stays in its overlay while the source retiles.
   static const _retileDelay = Duration(milliseconds: 250);
@@ -86,11 +92,31 @@ class LayerManager {
     }
   }
 
+  String _reserveLayerId(String base, Set<String> reservedIds) {
+    var suffix = 0;
+    var id = base;
+    while (reservedIds.contains(id) || style.layers[id] != null) {
+      id = '$base-${suffix++}';
+    }
+    reservedIds.add(id);
+    return id;
+  }
+
+  String _reserveSourceId(String base) {
+    var suffix = 0;
+    var id = base;
+    while (style.sources[id] != null) {
+      id = '$base-${suffix++}';
+    }
+    return id;
+  }
+
   String _newLayerId(Set<String> reservedIds) {
     while (true) {
       final id = 'maplibre-layer-' + _nextLayerId.toString();
       _nextLayerId++;
-      if (reservedIds.contains(id) ||
+      if (id == _dragLayerId ||
+          reservedIds.contains(id) ||
           style.layers[id] != null ||
           _records.any((record) => record.layerId == id)) {
         continue;
@@ -104,7 +130,8 @@ class LayerManager {
     while (true) {
       final id = 'maplibre-source-' + _nextSourceId.toString();
       _nextSourceId++;
-      if (style.sources[id] != null ||
+      if (id == _dragSourceId ||
+          style.sources[id] != null ||
           _records.any((record) => record.sourceId == id)) {
         continue;
       }

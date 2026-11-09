@@ -172,7 +172,8 @@ abstract class MapLibreMapState extends State<MapLibreMap>
     event.preventDefault();
     final layer = widget.layers[hit.layerIndex];
     final layerId =
-        layerManager?.getLayerId(hit.layerIndex) ?? layer.getLayerId(hit.layerIndex);
+        layerManager?.getLayerId(hit.layerIndex) ??
+        layer.getLayerId(hit.layerIndex);
     _layerDrag = _LayerDrag(
       layerId,
       hit.featureIndex,

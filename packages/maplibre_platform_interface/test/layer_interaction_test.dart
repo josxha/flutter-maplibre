@@ -323,7 +323,9 @@ void main() {
     expect(events, ['start', 'drag', 'drag', 'end']);
     expect(platform.state.layerManager!.getLayerId(1), 'dragged');
     expect(
-      style._backend.calls.where((call) => call.startsWith('moveLayer')).toList(),
+      style._backend.calls
+          .where((call) => call.startsWith('moveLayer'))
+          .toList(),
       [
         'moveLayer maplibre-drag-layer below null',
         'moveLayer dragged below maplibre-drag-layer',
