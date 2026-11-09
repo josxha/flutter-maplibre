@@ -41,6 +41,7 @@ class LinuxPlugin : public DesktopPlugin {
       g_object_add_weak_pointer(G_OBJECT(view_),
                                 reinterpret_cast<gpointer*>(&view_));
     }
+    Register();
   }
 
   ~LinuxPlugin() override {

@@ -84,6 +84,7 @@ MaplibreNativePlugin::MaplibreNativePlugin(
       adapter_luid_.size = 8;
     }
   }
+  Register();
 }
 
 MaplibreNativePlugin::~MaplibreNativePlugin() {

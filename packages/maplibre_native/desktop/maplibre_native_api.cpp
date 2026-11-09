@@ -34,7 +34,9 @@ std::unique_lock<std::mutex> DesktopPlugin::Lock() {
   return std::unique_lock<std::mutex>(g_mutex);
 }
 
-DesktopPlugin::DesktopPlugin() {
+DesktopPlugin::DesktopPlugin() = default;
+
+void DesktopPlugin::Register() {
   std::lock_guard<std::mutex> lock(g_mutex);
   g_plugins.push_back(this);
 }

@@ -57,9 +57,12 @@ class DesktopPlugin {
   virtual void DisposeTexture(int64_t id) = 0;
 
  protected:
-  // Adds this plugin to the registered ones.
   DesktopPlugin();
   virtual ~DesktopPlugin();
+
+  // Adds this plugin to the registered ones. Subclass constructors call it
+  // last, so the C API never reaches a plugin in construction.
+  void Register();
 
   // Removes this plugin from the registered ones; the caller holds the lock.
   // Subclass destructors call it first, so the C API never reaches a plugin
