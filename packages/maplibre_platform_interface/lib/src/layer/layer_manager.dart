@@ -61,6 +61,13 @@ class LayerManager {
 
     for (final layer in layers) {
       final id = layer.id;
+      if (id == _dragLayerId) {
+        throw ArgumentError.value(
+          id,
+          'layers',
+          'The id is reserved for the drag overlay.',
+        );
+      }
       if (id == null) continue;
       if (id.isEmpty || !ids.add(id)) {
         throw ArgumentError.value(

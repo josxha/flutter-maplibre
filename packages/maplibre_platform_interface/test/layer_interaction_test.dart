@@ -56,8 +56,19 @@ class _State extends MapLibreMapState {
   @override
   StyleController? style;
 
-  /// Hands out [style] and rebuilds, like the platforms once a style loaded.
-  void loadStyle(StyleController style) => setState(() => this.style = style);
+  /// Hands out [style] and its annotation manager, like a platform after load.
+  void loadStyle(StyleController style) {
+    setState(() {
+      this.style = style;
+      layerManager = LayerManager(style, widget.layers);
+    });
+  }
+
+  @override
+  void didUpdateWidget(covariant MapLibreMap oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (style != null) layerManager?.updateLayers(widget.layers);
+  }
 
   /// The features of style layers, by layer id, with where they are on the
   /// screen.
@@ -94,24 +105,37 @@ class _State extends MapLibreMapState {
       ),
       _ => throw UnimplementedError(),
     };
-    return [
-      for (final (layerIndex, layer) in widget.layers.indexed.toList().reversed)
-        if (layerIds!.contains(layer.getLayerId(layerIndex)))
-          for (final (index, feature) in layer.list.indexed)
-            if (feature.geometry case Point(:final position)
-                when rect.contains(_toScreen(Geographic.from(position))))
-              RenderedFeature(
-                id: null,
-                properties: {LayerManager.featureIndexProperty: index},
-                layerId: layer.getLayerId(layerIndex),
-              ),
-      for (final layer in style?.layers.toList().reversed ?? <StyleLayer>[])
-        if (layerIds!.contains(layer.id))
-          for (final (position, id)
-              in styleFeatures[layer.id] ?? const <(Offset, Object?)>[])
-            if (rect.contains(position))
-              RenderedFeature(id: id, properties: const {}, layerId: layer.id),
-    ];
+    final features = <RenderedFeature>[];
+    for (final (layerIndex, layer)
+        in widget.layers.indexed.toList().reversed) {
+      final layerId =
+          layerManager?.getLayerId(layerIndex) ?? layer.getLayerId(layerIndex);
+      if (!layerIds!.contains(layerId)) continue;
+      for (final (index, feature) in layer.list.indexed) {
+        if (feature.geometry case Point(:final position)
+            when rect.contains(_toScreen(Geographic.from(position)))) {
+          features.add(
+            RenderedFeature(
+              id: null,
+              properties: {LayerManager.featureIndexProperty: index},
+              layerId: layerId,
+            ),
+          );
+        }
+      }
+    }
+    for (final layer in style?.layers.toList().reversed ?? <StyleLayer>[]) {
+      if (!layerIds!.contains(layer.id)) continue;
+      for (final (position, id)
+          in styleFeatures[layer.id] ?? const <(Offset, Object?)>[]) {
+        if (rect.contains(position)) {
+          features.add(
+            RenderedFeature(id: id, properties: const {}, layerId: layer.id),
+          );
+        }
+      }
+    }
+    return features;
   }
 
   @override
@@ -124,14 +148,23 @@ class _State extends MapLibreMapState {
 
 class _Style implements StyleController {
   _Style() {
-    final sources = StyleSources(_backend, layers: () => layers);
+    sources = StyleSources(_backend, layers: () => layers);
     layers = StyleLayers(_backend, sources: sources);
   }
 
   final _backend = RecordingStyleBackend();
 
   @override
+  late final StyleSources sources;
+
+  @override
   late final StyleLayers layers;
+
+  @override
+  void batch(void Function() updates) => updates();
+
+  @override
+  List<String> get attributions => const [];
 
   @override
   dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
@@ -148,6 +181,7 @@ class _Platform extends MapLibrePlatform with MockPlatformInterfaceMixin {
 class _PointLayer extends Layer<Feature<Point>> {
   const _PointLayer({
     required super.list,
+    super.id,
     super.draggable,
     super.onDragStart,
     super.onDrag,
@@ -241,6 +275,60 @@ void main() {
     final start = mapEvents.first as MapEventDragStart;
     expect(start.defaultPrevented, isTrue);
     expect(mapEvents.last, isA<MapEventDragEnd>());
+  });
+
+  testWidgets('a drag stays attached to its layer when the stack moves', (
+    tester,
+  ) async {
+    final events = <String>[];
+    final dragged = _PointLayer(
+      id: 'dragged',
+      list: [_point(0, 0)],
+      draggable: true,
+      onDragStart: (_) => events.add('start'),
+      onDrag: (_) => events.add('drag'),
+      onDragEnd: (_) => events.add('end'),
+    );
+    final other = _PointLayer(id: 'other', list: [_point(36, 0)]);
+    await pumpMap(tester, [dragged, other]);
+    final style = _Style();
+    platform.state.loadStyle(style);
+    await tester.pump();
+
+    final gesture = await tester.startGesture(_center);
+    await tester.pump(const Duration(milliseconds: 16));
+    expect(events, ['start']);
+
+    await gesture.moveBy(const Offset(0, 10));
+    await tester.pump(const Duration(milliseconds: 16));
+
+    await tester.pumpWidget(
+      Directionality(
+        textDirection: TextDirection.ltr,
+        child: MapLibreMap(
+          layers: [other, dragged],
+          onDragStart: mapEvents.add,
+          onDrag: mapEvents.add,
+          onDragEnd: mapEvents.add,
+        ),
+      ),
+    );
+    await tester.pump();
+
+    await gesture.moveBy(const Offset(0, 10));
+    await tester.pump(const Duration(milliseconds: 16));
+    await gesture.up();
+    await tester.pumpAndSettle();
+
+    expect(events, ['start', 'drag', 'drag', 'end']);
+    expect(platform.state.layerManager!.getLayerId(1), 'dragged');
+    expect(
+      style._backend.calls.where((call) => call.startsWith('moveLayer')).toList(),
+      [
+        'moveLayer maplibre-drag-layer below null',
+        'moveLayer dragged below maplibre-drag-layer',
+      ],
+    );
   });
 
   testWidgets('a drag beside the features pans the map', (tester) async {
