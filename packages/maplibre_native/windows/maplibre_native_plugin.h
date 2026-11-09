@@ -39,8 +39,7 @@ class PixelTexture {
               size_t stride);
 
  private:
-  const FlutterDesktopPixelBuffer* CopyPixelBuffer(size_t width,
-                                                   size_t height);
+  const FlutterDesktopPixelBuffer* CopyPixelBuffer(size_t width, size_t height);
 
   flutter::TextureRegistrar* registrar_;
   std::unique_ptr<flutter::TextureVariant> texture_;
@@ -61,6 +60,7 @@ class MaplibreNativePlugin : public flutter::Plugin, public DesktopPlugin {
 
   ~MaplibreNativePlugin() override;
 
+  bool ServesEngine(int64_t engine_id) const override;
   bool GetGpuId(GpuId* id, std::string* error) override;
   int64_t CreatePixelTexture() override;
   bool UpdatePixelTexture(int64_t id, size_t width, size_t height,
@@ -75,6 +75,8 @@ class MaplibreNativePlugin : public flutter::Plugin, public DesktopPlugin {
   // A D3D11 device on Flutter's GPU, or null with |error| set.
   ID3D11Device1* GetD3D11(std::string* error);
 
+  // The registrar of this plugin's engine, which identifies the engine.
+  FlutterDesktopPluginRegistrarRef registrar_;
   flutter::TextureRegistrar* textures_;
   // Flutter's adapter, taken on the platform thread at registration.
   Microsoft::WRL::ComPtr<IDXGIAdapter> adapter_;

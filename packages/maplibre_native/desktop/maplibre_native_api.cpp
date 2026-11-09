@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <cstdlib>
 #include <cstring>
+#include <vector>
 
 #if defined(_WIN32)
 #include <windows.h>
@@ -15,12 +16,18 @@ namespace maplibre_native {
 namespace {
 
 std::mutex g_mutex;
-DesktopPlugin* g_plugin = nullptr;
+// One plugin per engine, in registration order.
+std::vector<DesktopPlugin*> g_plugins;
 
 }  // namespace
 
 // static
-DesktopPlugin* DesktopPlugin::Instance() { return g_plugin; }
+DesktopPlugin* DesktopPlugin::ForEngine(int64_t engine_id) {
+  for (DesktopPlugin* plugin : g_plugins) {
+    if (plugin->ServesEngine(engine_id)) return plugin;
+  }
+  return nullptr;
+}
 
 // static
 std::unique_lock<std::mutex> DesktopPlugin::Lock() {
@@ -29,7 +36,7 @@ std::unique_lock<std::mutex> DesktopPlugin::Lock() {
 
 DesktopPlugin::DesktopPlugin() {
   std::lock_guard<std::mutex> lock(g_mutex);
-  g_plugin = this;
+  g_plugins.push_back(this);
 }
 
 DesktopPlugin::~DesktopPlugin() {
@@ -38,7 +45,8 @@ DesktopPlugin::~DesktopPlugin() {
 }
 
 void DesktopPlugin::Unregister() {
-  if (g_plugin == this) g_plugin = nullptr;
+  g_plugins.erase(std::remove(g_plugins.begin(), g_plugins.end(), this),
+                  g_plugins.end());
 }
 
 // static
@@ -67,10 +75,11 @@ void WriteError(const std::string& message, char* error, size_t error_size) {
 using maplibre_native::DesktopPlugin;
 using maplibre_native::WriteError;
 
-int32_t maplibre_native_gpu_id(uint8_t* out_id, size_t capacity, char* error,
+int32_t maplibre_native_gpu_id(int64_t engine_id, uint8_t* out_id,
+                               size_t capacity, char* error,
                                size_t error_size) {
   auto lock = DesktopPlugin::Lock();
-  DesktopPlugin* plugin = DesktopPlugin::Instance();
+  DesktopPlugin* plugin = DesktopPlugin::ForEngine(engine_id);
   if (plugin == nullptr) {
     WriteError("The maplibre_native plugin is not registered.", error,
                error_size);
@@ -94,14 +103,15 @@ int32_t maplibre_native_gpu_id(uint8_t* out_id, size_t capacity, char* error,
   return static_cast<int32_t>(id.size);
 }
 
-int64_t maplibre_native_create_pixel_texture(void) {
+int64_t maplibre_native_create_pixel_texture(int64_t engine_id) {
   auto lock = DesktopPlugin::Lock();
-  DesktopPlugin* plugin = DesktopPlugin::Instance();
+  DesktopPlugin* plugin = DesktopPlugin::ForEngine(engine_id);
   return plugin == nullptr ? -1 : plugin->CreatePixelTexture();
 }
 
-bool maplibre_native_update_pixel_texture(int64_t texture_id, uint32_t width,
-                                          uint32_t height, uint32_t stride,
+bool maplibre_native_update_pixel_texture(int64_t engine_id, int64_t texture_id,
+                                          uint32_t width, uint32_t height,
+                                          uint32_t stride,
                                           const uint8_t* pixels, size_t length,
                                           char* error, size_t error_size) {
   if (pixels == nullptr || width == 0 || height == 0 ||
@@ -111,7 +121,7 @@ bool maplibre_native_update_pixel_texture(int64_t texture_id, uint32_t width,
     return false;
   }
   auto lock = DesktopPlugin::Lock();
-  DesktopPlugin* plugin = DesktopPlugin::Instance();
+  DesktopPlugin* plugin = DesktopPlugin::ForEngine(engine_id);
   if (plugin == nullptr ||
       !plugin->UpdatePixelTexture(texture_id, width, height, stride, pixels)) {
     WriteError("No pixel buffer texture with this id.", error, error_size);
@@ -120,9 +130,9 @@ bool maplibre_native_update_pixel_texture(int64_t texture_id, uint32_t width,
   return true;
 }
 
-void maplibre_native_dispose_texture(int64_t texture_id) {
+void maplibre_native_dispose_texture(int64_t engine_id, int64_t texture_id) {
   auto lock = DesktopPlugin::Lock();
-  if (DesktopPlugin* plugin = DesktopPlugin::Instance()) {
+  if (DesktopPlugin* plugin = DesktopPlugin::ForEngine(engine_id)) {
     plugin->DisposeTexture(texture_id);
   }
 }

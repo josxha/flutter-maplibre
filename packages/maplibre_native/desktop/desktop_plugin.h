@@ -17,14 +17,17 @@ struct GpuId {
 
 // The Windows or Linux plugin behind the C API in
 // include/maplibre_native/maplibre_native_api.h. This directory implements
-// the functions that both share; each platform implements its own. Dart
-// reaches the one registered instance through that API, never through a
-// channel.
+// the functions that both share; each platform implements its own. Every
+// Flutter engine registers an instance of its own, with its own texture
+// registrar and textures, and Dart reaches the one of its engine through that
+// API, never through a channel.
 class DesktopPlugin {
  public:
-  // The registered plugin, or null before registration and after shutdown.
-  // Callers hold the lock from Lock() while they use it.
-  static DesktopPlugin* Instance();
+  // The plugin registered by the engine |engine_id|, which is
+  // `PlatformDispatcher.instance.engineId` of the calling isolate, or null
+  // before registration and after shutdown. Callers hold the lock from Lock()
+  // while they use it.
+  static DesktopPlugin* ForEngine(int64_t engine_id);
   static std::unique_lock<std::mutex> Lock();
 
   // Whether MAPLIBRE_NATIVE_DISABLE_ZERO_COPY is set, which lets the CPU
@@ -33,6 +36,10 @@ class DesktopPlugin {
 
   DesktopPlugin(const DesktopPlugin&) = delete;
   DesktopPlugin& operator=(const DesktopPlugin&) = delete;
+
+  // Whether this plugin was registered by the engine |engine_id|, which is
+  // the engine's pointer on Windows and Linux.
+  virtual bool ServesEngine(int64_t engine_id) const = 0;
 
   // The GPU that Flutter renders on, or false with |error| set when frames
   // can't reach Flutter without a CPU copy.
@@ -50,12 +57,13 @@ class DesktopPlugin {
   virtual void DisposeTexture(int64_t id) = 0;
 
  protected:
-  // Registers this plugin as the instance.
+  // Adds this plugin to the registered ones.
   DesktopPlugin();
   virtual ~DesktopPlugin();
 
-  // Unregisters this plugin; the caller holds the lock. Subclass destructors
-  // call it first, so the C API never reaches a plugin in destruction.
+  // Removes this plugin from the registered ones; the caller holds the lock.
+  // Subclass destructors call it first, so the C API never reaches a plugin
+  // in destruction.
   void Unregister();
 };
 

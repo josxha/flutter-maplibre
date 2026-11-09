@@ -56,6 +56,14 @@ class LinuxPlugin : public DesktopPlugin {
     g_object_unref(textures_);
   }
 
+  bool ServesEngine(int64_t engine_id) const override {
+    // The engine id is the FlEngine of the calling isolate, which is alive
+    // while that isolate runs. A plugin of an engine that is gone keeps its
+    // registrar referenced, so no other engine has that registrar.
+    return fl_engine_get_texture_registrar(reinterpret_cast<FlEngine*>(
+               static_cast<intptr_t>(engine_id))) == textures_;
+  }
+
   bool GetGpuId(GpuId* id, std::string* error) override {
     // OpenGL names the GPU that Flutter renders on, which the C library
     // creates its Vulkan device on.
@@ -144,10 +152,10 @@ class LinuxPlugin : public DesktopPlugin {
 
 constexpr const char* kNoTexture = "No GPU texture with this id.";
 
-// The registered plugin, or null with |error| written; the caller holds the
-// lock.
-LinuxPlugin* Plugin(char* error, size_t error_size) {
-  auto* plugin = static_cast<LinuxPlugin*>(DesktopPlugin::Instance());
+// The plugin of the engine |engine_id|, or null with |error| written; the
+// caller holds the lock.
+LinuxPlugin* Plugin(int64_t engine_id, char* error, size_t error_size) {
+  auto* plugin = static_cast<LinuxPlugin*>(DesktopPlugin::ForEngine(engine_id));
   if (plugin == nullptr) {
     WriteError("The maplibre_native plugin is not registered.", error,
                error_size);
@@ -155,9 +163,10 @@ LinuxPlugin* Plugin(char* error, size_t error_size) {
   return plugin;
 }
 
-// Finds a GPU texture of the registered plugin; the caller holds the lock.
-GlTexture* FindGpuTexture(int64_t texture_id, char* error, size_t error_size) {
-  LinuxPlugin* plugin = Plugin(error, error_size);
+// Finds a GPU texture of the engine |engine_id|; the caller holds the lock.
+GlTexture* FindGpuTexture(int64_t engine_id, int64_t texture_id, char* error,
+                          size_t error_size) {
+  LinuxPlugin* plugin = Plugin(engine_id, error, error_size);
   GlTexture* texture =
       plugin == nullptr ? nullptr : plugin->FindGpuTexture(texture_id);
   if (plugin != nullptr && texture == nullptr) {
@@ -191,16 +200,16 @@ using maplibre_native::GlTexture;
 using maplibre_native::WriteError;
 
 int64_t maplibre_native_create_gpu_texture(
-    const MaplibreNativeVulkanContext* context, uint32_t width,
-    uint32_t height, uint32_t slot_count, uint32_t* out_format,
+    int64_t engine_id, const MaplibreNativeVulkanContext* context,
+    uint32_t width, uint32_t height, uint32_t slot_count, uint32_t* out_format,
     MaplibreNativeGpuSlot* out_slots, uint32_t slot_capacity, char* error,
     size_t error_size) {
   auto lock = DesktopPlugin::Lock();
-  auto* plugin = maplibre_native::Plugin(error, error_size);
+  auto* plugin = maplibre_native::Plugin(engine_id, error, error_size);
   if (plugin == nullptr) return -1;
   std::string message;
-  GlTexture* texture = plugin->CreateGpuTexture(*context, width, height,
-                                                slot_count, &message);
+  GlTexture* texture =
+      plugin->CreateGpuTexture(*context, width, height, slot_count, &message);
   if (texture == nullptr) {
     WriteError(message, error, error_size);
     return -1;
@@ -210,14 +219,14 @@ int64_t maplibre_native_create_gpu_texture(
   return texture->id();
 }
 
-bool maplibre_native_resize_gpu_texture(int64_t texture_id, uint32_t width,
-                                        uint32_t height,
+bool maplibre_native_resize_gpu_texture(int64_t engine_id, int64_t texture_id,
+                                        uint32_t width, uint32_t height,
                                         MaplibreNativeGpuSlot* out_slots,
                                         uint32_t slot_capacity, char* error,
                                         size_t error_size) {
   auto lock = DesktopPlugin::Lock();
   GlTexture* texture =
-      maplibre_native::FindGpuTexture(texture_id, error, error_size);
+      maplibre_native::FindGpuTexture(engine_id, texture_id, error, error_size);
   if (texture == nullptr) return false;
   std::string message;
   if (!texture->Resize(width, height, &message)) {
@@ -228,18 +237,21 @@ bool maplibre_native_resize_gpu_texture(int64_t texture_id, uint32_t width,
   return true;
 }
 
-void maplibre_native_release_retired_slots(int64_t texture_id) {
+void maplibre_native_release_retired_slots(int64_t engine_id,
+                                           int64_t texture_id) {
   auto lock = DesktopPlugin::Lock();
-  if (GlTexture* texture = maplibre_native::FindGpuTexture(texture_id, nullptr, 0)) {
+  if (GlTexture* texture =
+          maplibre_native::FindGpuTexture(engine_id, texture_id, nullptr, 0)) {
     texture->ReleaseRetiredSlots();
   }
 }
 
-bool maplibre_native_present_gpu_texture(int64_t texture_id, uint32_t slot,
-                                         char* error, size_t error_size) {
+bool maplibre_native_present_gpu_texture(int64_t engine_id, int64_t texture_id,
+                                         uint32_t slot, char* error,
+                                         size_t error_size) {
   auto lock = DesktopPlugin::Lock();
   GlTexture* texture =
-      maplibre_native::FindGpuTexture(texture_id, error, error_size);
+      maplibre_native::FindGpuTexture(engine_id, texture_id, error, error_size);
   if (texture == nullptr) return false;
   std::string message;
   if (!texture->Present(slot, &message)) {
@@ -249,16 +261,19 @@ bool maplibre_native_present_gpu_texture(int64_t texture_id, uint32_t slot,
   return true;
 }
 
-bool maplibre_native_gpu_texture_slot_in_use(int64_t texture_id,
+bool maplibre_native_gpu_texture_slot_in_use(int64_t engine_id,
+                                             int64_t texture_id,
                                              uint32_t slot) {
   auto lock = DesktopPlugin::Lock();
-  GlTexture* texture = maplibre_native::FindGpuTexture(texture_id, nullptr, 0);
+  GlTexture* texture =
+      maplibre_native::FindGpuTexture(engine_id, texture_id, nullptr, 0);
   return texture != nullptr && texture->SlotInUse(slot);
 }
 
 void maplibre_native_plugin_register_with_registrar(
     FlPluginRegistrar* registrar) {
-  // The plugin lives as long as the process: render sessions on core workers
-  // may outlive the engine, and Linux plugins get no shutdown call.
+  // Every engine registers a plugin of its own, which lives as long as the
+  // process: render sessions on core workers may outlive the engine, and
+  // Linux plugins get no shutdown call.
   new maplibre_native::LinuxPlugin(registrar);
 }
