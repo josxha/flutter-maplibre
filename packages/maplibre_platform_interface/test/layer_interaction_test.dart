@@ -657,6 +657,64 @@ void main() {
     });
   });
 
+  group('hit testing', () {
+    Future<void> pumpWrapped(
+      WidgetTester tester,
+      Widget Function(Widget map) wrap,
+    ) async {
+      tester.view
+        ..physicalSize = _size
+        ..devicePixelRatio = 1;
+      addTearDown(tester.view.reset);
+      await tester.pumpWidget(
+        Directionality(
+          textDirection: TextDirection.ltr,
+          child: wrap(
+            MapLibreMap(
+              layers: [
+                _PointLayer(list: [_point(0, 0)], onEnter: (_) {}),
+              ],
+              onPointerLeave: (_) {},
+            ),
+          ),
+        ),
+      );
+    }
+
+    testWidgets('a listener around the map gets the pointer', (tester) async {
+      final downs = <PointerDownEvent>[];
+      await pumpWrapped(
+        tester,
+        (map) => Listener(onPointerDown: downs.add, child: map),
+      );
+      await tester.tapAt(_center);
+      await tester.pumpAndSettle();
+      expect(downs, hasLength(1));
+    });
+
+    testWidgets('a widget behind the map gets no taps', (tester) async {
+      var behind = 0;
+      await pumpWrapped(
+        tester,
+        (map) => Stack(
+          children: [
+            Positioned.fill(
+              child: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: () => behind++,
+              ),
+            ),
+            map,
+          ],
+        ),
+      );
+      await tester.tapAt(_center);
+      await tester.pump(const Duration(milliseconds: 500));
+      await tester.pumpAndSettle();
+      expect(behind, 0);
+    });
+  });
+
   test('callbacks need the draggable flag', () {
     expect(
       () => _PointLayer(list: const [], onDragEnd: (_) {}),
