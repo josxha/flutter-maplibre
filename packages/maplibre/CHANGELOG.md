@@ -7,6 +7,12 @@
   new color and text style parameters instead
   ([#671](https://github.com/josxha/flutter-maplibre/issues/671)).
 
+### Bug Fixes
+
+- Widgets around `MapLibreMap`, such as a `Listener`, get the map's pointer
+  events again, and widgets behind the map no longer get its taps
+  ([#675](https://github.com/josxha/flutter-maplibre/issues/675)).
+
 Full Changelog: [v0.4.0-pre.2...main](https://github.com/josxha/flutter-maplibre/compare/v0.4.0-pre.2...main)
 
 ## 0.4.0-pre.2
