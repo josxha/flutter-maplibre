@@ -513,9 +513,9 @@ void main() {
       ]);
       expect(ids(), ['bottom', 'middle', 'top']);
       expect(backend.calls.where((c) => c.startsWith('addLayer')).toList(), [
+        'addLayer bottom below null',
+        'addLayer middle below null',
         'addLayer top below null',
-        'addLayer middle below top',
-        'addLayer bottom below middle',
       ]);
     });
 
@@ -528,7 +528,12 @@ void main() {
       backend.calls.clear();
       manager.updateLayers(const [_TestLayer(id: 'new', list: list)]);
       expect(ids(), ['new']);
-      expect(backend.calls, ['removeLayer old', 'addLayer new below null']);
+      expect(backend.calls, [
+        'removeLayer old',
+        'removeSource maplibre-source-0',
+        'addSource maplibre-source-1',
+        'addLayer new below null',
+      ]);
     });
 
     test('appends layers in declarative stack order', () {
@@ -546,6 +551,33 @@ void main() {
       expect(backend.calls.where((c) => c.startsWith('addLayer')).toList(), [
         'addLayer top below null',
         'addLayer middle below top',
+      ]);
+    });
+
+    test('moves unkeyed layers without recreating their style layers', () {
+      final bottomPoints = [point];
+      final topPoints = [other];
+      final manager = LayerManager(style, [
+        _TestLayer(list: bottomPoints),
+        _TestLayer(list: topPoints),
+      ]);
+      final bottomId = manager.getLayerId(0);
+      final topId = manager.getLayerId(1);
+      final bottomStyleLayer = layers[bottomId];
+      final topStyleLayer = layers[topId];
+      backend.calls.clear();
+
+      manager.updateLayers([
+        _TestLayer(list: topPoints),
+        _TestLayer(list: bottomPoints),
+      ]);
+
+      expect(manager.getLayerId(0), topId);
+      expect(manager.getLayerId(1), bottomId);
+      expect(layers[bottomId], same(bottomStyleLayer));
+      expect(layers[topId], same(topStyleLayer));
+      expect(backend.calls, [
+        'moveLayer ' + bottomId + ' below ' + topId,
       ]);
     });
 
@@ -573,17 +605,17 @@ void main() {
 
       expect(ids(), ['c', 'a', 'b']);
       expect(
-        backend.calls.where((call) => call.startsWith('removeLayer')).toList(),
-        ['removeLayer a', 'removeLayer b', 'removeLayer c'],
+        backend.calls.where((call) => call.startsWith('removeLayer')),
+        isEmpty,
       );
       expect(
-        backend.calls.where((call) => call.startsWith('addLayer')).toList(),
-        [
-          'addLayer b below null',
-          'addLayer a below b',
-          'addLayer c below a',
-        ],
+        backend.calls.where((call) => call.startsWith('addLayer')),
+        isEmpty,
       );
+      expect(backend.calls, [
+        'moveLayer b below null',
+        'moveLayer a below b',
+      ]);
     });
 
     test('generated ids avoid existing style layers', () {
