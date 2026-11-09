@@ -100,7 +100,9 @@ class LayerManager {
     }
 
     final ownedLayerIds = _styleLayers.map((layer) => layer.id).toSet();
-    final ownedSourceIds = _generatedSourceIds.take(_styleLayers.length).toSet();
+    final ownedSourceIds = _generatedSourceIds
+        .take(_styleLayers.length)
+        .toSet();
     final existingLayerIds = style.layers.map((layer) => layer.id).toSet();
     final existingSourceIds = style.sources.map((source) => source.id).toSet();
 
