@@ -18,6 +18,8 @@ class CircleLayer extends Layer<Feature<Point>> {
     this.strokeWidth = const .literal(0),
     this.strokeColor = const .literal(Color(0xFF000000)),
     this.strokeOpacity = const .literal(1),
+    super.id,
+    super.anchor,
     super.minZoom = 0,
     super.maxZoom = 24,
     super.draggable,
@@ -54,19 +56,20 @@ class CircleLayer extends Layer<Feature<Point>> {
   final Expression<num> strokeOpacity;
 
   @override
-  StyleLayer createStyleLayer(int index) => CircleStyleLayer(
-    id: getLayerId(index),
-    sourceId: getSourceId(index),
-    minZoom: minZoom,
-    maxZoom: maxZoom,
-    radius: radius,
-    color: color,
-    blur: blur,
-    opacity: opacity,
-    strokeWidth: strokeWidth,
-    strokeColor: strokeColor,
-    strokeOpacity: strokeOpacity,
-  );
+  StyleLayer createStyleLayer({required String id, required String sourceId}) =>
+      CircleStyleLayer(
+        id: id,
+        sourceId: sourceId,
+        minZoom: minZoom,
+        maxZoom: maxZoom,
+        radius: radius,
+        color: color,
+        blur: blur,
+        opacity: opacity,
+        strokeWidth: strokeWidth,
+        strokeColor: strokeColor,
+        strokeOpacity: strokeOpacity,
+      );
 
   @override
   bool operator ==(Object other) =>

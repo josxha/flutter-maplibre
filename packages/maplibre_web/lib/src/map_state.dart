@@ -410,7 +410,6 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
       _map.setMaxBounds(options.maxBounds?.toJs());
     }
     if (options.style != oldWidget.options.style) _setStyle(options.style);
-    layerManager?.updateLayers(widget.layers);
     _updateRenderListener();
     super.didUpdateWidget(oldWidget);
   }
@@ -736,9 +735,8 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
 
   /// Loads [style], see [MapOptions.style].
   void _setStyle(MapStyle style) {
-    // Only the next LayerManager sees MapLibreMap.layers: the layers of the
-    // old one go with the old style.
-    layerManager = null;
+    // The layers of MapLibreMap.layers go with the old style.
+    detachAnnotations();
     _map.once(
       interop.MapEventType.styleLoad,
       (JSAny _) {
@@ -787,12 +785,12 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   }
 
   void _onStyleLoaded() {
-    layerManager = null;
+    detachAnnotations();
     style?.dispose();
     final styleCtrl = StyleControllerWeb(_map)..load();
     style = styleCtrl;
     widget.onStyleLoaded?.call(styleCtrl);
-    layerManager = LayerManager(styleCtrl, widget.layers);
+    attachAnnotations(styleCtrl);
     _attributions = styleCtrl.attributions;
     // setState is needed to refresh the flutter widgets used in MapLibreMap.children.
     setState(() {});

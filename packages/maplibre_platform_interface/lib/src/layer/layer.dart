@@ -5,6 +5,12 @@ import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 
 /// This class is the base for all annotation layer classes.
 ///
+/// The layers of [MapLibreMap.layers] draw in the order of the list, the
+/// first at the bottom, like the children of a `Stack`. [anchor] places them
+/// among the layers of the style. A rebuild keeps the layers it finds again,
+/// by [id], or else by type in the order of the list, and only applies what
+/// changed.
+///
 /// [onClick] reports taps and clicks on the features of the layer, and
 /// [onEnter] and [onLeave] report the mouse moving over them. Set
 /// [draggable] to let the user drag the features of the layer, and save
@@ -17,6 +23,8 @@ abstract class Layer<G extends Feature<Geometry>> {
   /// zoom levels.
   const Layer({
     required this.list,
+    this.id,
+    this.anchor = const LayerAnchor.top(),
     this.minZoom = 0,
     this.maxZoom = 24,
     this.draggable = false,
@@ -34,6 +42,28 @@ abstract class Layer<G extends Feature<Geometry>> {
 
   /// The [List] of geometry features.
   final List<G> list;
+
+  /// The id of the style layer and of the source of this layer, or null to
+  /// let the map name them.
+  ///
+  /// The id must not be in use by another layer or source of the style, or
+  /// by another layer of [MapLibreMap.layers]. It also tells a rebuild which
+  /// layer this is, so that a layer that moves in the list keeps its style
+  /// layer, like a [Key].
+  ///
+  /// Without an id, the map names the layer when it first shows it, for
+  /// example `maplibre-circle-1`, and keeps that name while the layer stays
+  /// in the list.
+  final String? id;
+
+  /// Where the layer goes among the layers of the style, on top of them by
+  /// default. Layers with the same anchor draw in the order of
+  /// [MapLibreMap.layers].
+  ///
+  /// The layer that [LayerAnchor.below] and [LayerAnchor.above] name must be
+  /// a layer of the style, not one of [MapLibreMap.layers]. Without it, the
+  /// layer goes on top, and debug builds warn.
+  final LayerAnchor anchor;
 
   /// The minimum zoom level that the [Layer] is displayed.
   final double minZoom;
@@ -95,14 +125,13 @@ abstract class Layer<G extends Feature<Geometry>> {
   bool get interactive =>
       draggable || onClick != null || onEnter != null || onLeave != null;
 
-  /// Get a unique source id.
-  String getSourceId(int index) => 'maplibre-source-$index';
+  /// The image that the style layer of this layer shows, which the map adds
+  /// to the style for it. Null by default.
+  MarkerIcon? get icon => null;
 
-  /// Get a unique layer id.
-  String getLayerId(int index) => 'maplibre-layer-$index';
-
-  /// Add the annotation layer to the map.
-  StyleLayer createStyleLayer(int index);
+  /// Creates the style layer of this layer, with the id [id], on the GeoJSON
+  /// source [sourceId] that holds [list].
+  StyleLayer createStyleLayer({required String id, required String sourceId});
 
   @override
   bool operator ==(Object other) =>
@@ -110,14 +139,25 @@ abstract class Layer<G extends Feature<Geometry>> {
       other is Layer &&
           runtimeType == other.runtimeType &&
           list == other.list &&
+          id == other.id &&
+          anchor == other.anchor &&
+          icon == other.icon &&
           minZoom == other.minZoom &&
           maxZoom == other.maxZoom &&
           draggable == other.draggable &&
           interactive == other.interactive;
 
   @override
-  int get hashCode =>
-      Object.hash(minZoom, maxZoom, list, draggable, interactive);
+  int get hashCode => Object.hash(
+    id,
+    anchor,
+    icon,
+    minZoom,
+    maxZoom,
+    list,
+    draggable,
+    interactive,
+  );
 }
 
 /// Called with a [LayerFeatureEvent] when the user interacts with a feature
@@ -135,6 +175,7 @@ class LayerFeatureEvent {
   /// Creates a [LayerFeatureEvent].
   const LayerFeatureEvent({
     required this.index,
+    required this.feature,
     required this.geometry,
     required this.point,
     required this.screenPoint,
@@ -142,6 +183,10 @@ class LayerFeatureEvent {
 
   /// The index of the feature in [Layer.list].
   final int index;
+
+  /// The feature of [Layer.list] at [index], as it was before a drag moved
+  /// it.
+  final Feature feature;
 
   /// The geometry of the feature. While it is dragged, the geometry moved to
   /// where it is dragged.
@@ -162,12 +207,13 @@ class LayerFeatureEvent {
       identical(this, other) ||
       other is LayerFeatureEvent &&
           index == other.index &&
+          feature == other.feature &&
           geometry == other.geometry &&
           point == other.point &&
           screenPoint == other.screenPoint;
 
   @override
-  int get hashCode => Object.hash(index, geometry, point, screenPoint);
+  int get hashCode => Object.hash(index, feature, geometry, point, screenPoint);
 
   @override
   String toString() =>

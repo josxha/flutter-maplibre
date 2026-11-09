@@ -139,6 +139,7 @@ abstract class StyleLayer {
   StyleLayers? _owner;
   var _wasAttached = false;
   var _warnedDetached = false;
+  var _warnedAnnotation = false;
 
   /// The names of the properties that belong to the layout of this layer.
   Set<String> get _layoutProperties;
@@ -297,7 +298,22 @@ abstract class StyleLayer {
   /// The collection this layer is on. A write to a layer that left its map
   /// only changes the object, which is likely a mistake, so debug builds warn
   /// once.
+  ///
+  /// The layers of [MapLibreMap.layers] get their properties from that list,
+  /// which overrides other changes, so debug builds warn once about those as
+  /// well.
   StyleLayers? _ownerOrWarn() {
+    if (_owner case final owner?
+        when !_warnedAnnotation && owner._isForeignWrite(id)) {
+      _warnedAnnotation = true;
+      if (kDebugMode) {
+        debugPrint(
+          'maplibre: the style layer "$id" belongs to MapLibreMap.layers, '
+          'which overrides changes made to it here. Change '
+          'MapLibreMap.layers instead.',
+        );
+      }
+    }
     if (_owner == null && _wasAttached && !_warnedDetached) {
       _warnedDetached = true;
       if (kDebugMode) {

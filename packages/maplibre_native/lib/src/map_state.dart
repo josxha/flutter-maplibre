@@ -202,7 +202,6 @@ class MapLibreMapStateNative extends MapLibreMapState {
     if (oldWidget.options.style != options.style) {
       unawaited(_setStyle(options.style));
     }
-    layerManager?.updateLayers(widget.layers);
     final eventMask = widget.eventMask;
     final map = _map;
     if (eventMask != _eventMask && map != null) {
@@ -479,9 +478,8 @@ class MapLibreMapStateNative extends MapLibreMapState {
       _constraintsAfterStyle = false;
       await _applyOptions();
     }
-    // Only the next LayerManager sees MapLibreMap.layers: the layers of the
-    // old one are gone.
-    layerManager = null;
+    // The layers of MapLibreMap.layers go with the old style.
+    detachAnnotations();
     style?.dispose();
     style = null;
     late final StyleControllerNative styleController;
@@ -503,7 +501,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
     _loadingStyle = null;
     style = styleController;
     widget.onStyleLoaded?.call(styleController);
-    layerManager = LayerManager(styleController, widget.layers);
+    attachAnnotations(styleController);
     // Refresh the widgets in MapLibreMap.children.
     setState(() {});
   }
@@ -788,7 +786,7 @@ class MapLibreMapStateNative extends MapLibreMapState {
     if (map == null) return;
     final request = ++_styleRequest;
     bool stale() => _map != map || request != _styleRequest;
-    layerManager = null;
+    detachAnnotations();
     final Future<mln.CommandCompletion> load;
     switch (style) {
       case MapStyleJson(:final json):

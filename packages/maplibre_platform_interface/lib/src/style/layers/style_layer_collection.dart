@@ -18,6 +18,27 @@ final class StyleLayers extends Iterable<StyleLayer> {
   final _layers = <StyleLayer>[];
   final ValueNotifier<int> _callbacks = ValueNotifier(0);
 
+  /// The ids of the layers that [MapLibreMap.layers] owns, see
+  /// [setAnnotationLayer].
+  final _annotationIds = <String>{};
+
+  /// Whether the annotations of [MapLibreMap.layers] change their own
+  /// layers, see [writeAsAnnotations].
+  var _annotationWrites = 0;
+
+  /// Whether the layer [id] belongs to [MapLibreMap.layers] and the change
+  /// doesn't come from there.
+  bool _isForeignWrite(String id) =>
+      _annotationWrites == 0 && _annotationIds.contains(id);
+
+  void _checkNotAnnotation(String id, String change) {
+    if (!_isForeignWrite(id)) return;
+    throw StateError(
+      'The style layer "$id" belongs to MapLibreMap.layers and cannot be '
+      '$change here. Change MapLibreMap.layers instead.',
+    );
+  }
+
   /// Notifies its listeners when a layer of the collection gets its first
   /// [StyleLayer.onClick], [StyleLayer.onEnter] or [StyleLayer.onLeave] or
   /// loses its last one, so that the map listens for taps and the mouse
@@ -90,9 +111,14 @@ final class StyleLayers extends Iterable<StyleLayer> {
 
   /// Removes the layer [id] and detaches its object. Removing a layer the
   /// style doesn't have does nothing.
+  ///
+  /// Fails with a [StateError] for a layer of [MapLibreMap.layers]: change
+  /// that list instead.
   Future<void> remove(String id) async {
     final index = _indexOf(id);
     if (index == -1) return;
+    _checkNotAnnotation(id, 'removed');
+    _annotationIds.remove(id);
     final layer = _layers.removeAt(index);
     _detach(layer);
     if (layer._hasCallbacks) _callbacksChanged();
@@ -102,11 +128,15 @@ final class StyleLayers extends Iterable<StyleLayer> {
   /// Moves the layer [id] below the layer [belowLayerId], or to the top if it
   /// is null. Fails with an [ArgumentError] if either isn't a layer of this
   /// style.
+  ///
+  /// Fails with a [StateError] for a layer of [MapLibreMap.layers]: change
+  /// the order of that list or the [Layer.anchor] of the layer instead.
   void move(String id, {String? belowLayerId}) {
     final index = _indexOf(id);
     if (index == -1) {
       throw ArgumentError.value(id, 'id', 'The style has no such layer');
     }
+    _checkNotAnnotation(id, 'moved');
     if (id == belowLayerId) return;
     if (belowLayerId != null && _indexOf(belowLayerId) == -1) {
       throw ArgumentError.value(
@@ -138,6 +168,7 @@ final class StyleLayers extends Iterable<StyleLayer> {
     final hadCallbacks = _layers.any((layer) => layer._hasCallbacks);
     _layers.forEach(_detach);
     _layers.clear();
+    _annotationIds.clear();
     if (hadCallbacks) _callbacksChanged();
   }
 
@@ -150,4 +181,30 @@ final class StyleLayers extends Iterable<StyleLayer> {
   }
 
   void _detach(StyleLayer layer) => layer._owner = null;
+}
+
+/// Marks the layer [id] of [layers] as one that [MapLibreMap.layers] owns, or
+/// no longer, if [owned] is false. Changes to it that don't come from
+/// [writeAsAnnotations] then fail or warn.
+///
+/// Not part of the public API: `style.dart` hides it.
+void setAnnotationLayer(StyleLayers layers, String id, {required bool owned}) {
+  if (owned) {
+    layers._annotationIds.add(id);
+  } else {
+    layers._annotationIds.remove(id);
+  }
+}
+
+/// Runs [changes] as changes of [MapLibreMap.layers], which may change the
+/// layers that [setAnnotationLayer] marked.
+///
+/// Not part of the public API: `style.dart` hides it.
+void writeAsAnnotations(StyleLayers layers, void Function() changes) {
+  layers._annotationWrites++;
+  try {
+    changes();
+  } finally {
+    layers._annotationWrites--;
+  }
 }
