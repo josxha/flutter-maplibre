@@ -7,6 +7,8 @@ Flutter MapLibre: a federated plugin in a Dart pub workspace.
 - `packages/maplibre`: the app-facing package.
 - `packages/maplibre_platform_interface`: shared API that the platform packages
   implement, and the shared gesture recognizer (`lib/src/gestures/`).
+  - `lib/src/layer/`: the annotation layers of `MapLibreMap.layers`, and
+    `annotation_manager.dart`, which keeps them on every style of a map.
   - `lib/src/style/expressions/`: typed style expressions.
   - `lib/src/style/layers/`: `StyleLayer`, the `StyleLayers` collection, and
     `style_layers.g.dart`, generated from the style spec.

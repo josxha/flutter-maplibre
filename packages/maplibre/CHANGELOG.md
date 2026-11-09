@@ -6,8 +6,33 @@
   longer depend on Material and no longer follow the app's `Theme`; set their
   new color and text style parameters instead
   ([#671](https://github.com/josxha/flutter-maplibre/issues/671)).
+- Annotation layers name their style layer and source by `Layer.id`, or else
+  by type, such as `maplibre-circle-1`, instead of by list index, and
+  `Layer.createStyleLayer` takes that id and source id
+  ([#674](https://github.com/josxha/flutter-maplibre/issues/674)).
+- The style layers of `MapLibreMap.layers` can no longer be removed or moved
+  through `StyleController.layers`
+  ([#674](https://github.com/josxha/flutter-maplibre/issues/674)).
+
+### Features
+
+- Annotation layers stay on the map when the style changes, and a reordered
+  list moves their style layers instead of adding them again
+  ([#674](https://github.com/josxha/flutter-maplibre/issues/674)).
+- `Layer.anchor` places an annotation layer at the top or bottom of the style,
+  or below or above one of its layers
+  ([#674](https://github.com/josxha/flutter-maplibre/issues/674)).
+- `MarkerLayer.icon` adds the image of the markers to every style, from an
+  icon, an asset, bytes or an `ImageProvider`
+  ([#674](https://github.com/josxha/flutter-maplibre/issues/674)).
+- `LayerFeatureEvent.feature` is the feature that a tap, hover or drag hit
+  ([#674](https://github.com/josxha/flutter-maplibre/issues/674)).
 
 ### Bug Fixes
+
+- Taps, hovers and drags on annotation layers follow the layer when the list
+  is reordered, and go to the layer drawn on top
+  ([#674](https://github.com/josxha/flutter-maplibre/issues/674)).
 
 - Widgets around `MapLibreMap`, such as a `Listener`, get the map's pointer
   events again, and widgets behind the map no longer get its taps

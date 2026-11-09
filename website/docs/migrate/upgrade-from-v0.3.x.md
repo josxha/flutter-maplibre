@@ -167,7 +167,38 @@ await style.sources.updateGeoJsonData('points', .featureCollection(collection));
 `GeoJsonSourceData.data` returns that `GeoJsonData`, whose `toText()` and
 `toJson()` give the GeoJSON.
 
-## 6. Images
+## 6. Annotation layers
+
+The layers of `MapLibreMap.layers` stay on the map when the style changes, and
+a reordered list moves their style layers instead of adding them again.
+
+- The style layers and sources are named by `Layer.id`, or else by type, such
+  as `maplibre-circle-1`, instead of `maplibre-layer-<index>` and
+  `maplibre-source-<index>`. Set `id` to query a layer by a fixed name.
+- Custom layers implement `createStyleLayer({required String id, required
+  String sourceId})` instead of `createStyleLayer(int index)`.
+  `getLayerId()` and `getSourceId()` are gone.
+- `MarkerLayer.icon` adds the image of the markers. Replace an image added in
+  `onStyleLoaded` with it:
+
+  ```dart
+  // 0.3
+  onStyleLoaded: (style) async {
+    await style.addImageFromIconData(id: 'marker', iconData: Icons.place);
+    setState(() => _imageLoaded = true);
+  },
+  layers: [MarkerLayer(points: points, iconImage: _imageLoaded ? 'marker' : null)],
+
+  // 0.4
+  layers: [MarkerLayer(points: points, icon: const .iconData(Icons.place))],
+  ```
+
+- `style.layers.remove()` and `.move()` fail for the style layers of the
+  annotation layers. Change `MapLibreMap.layers` or `Layer.anchor` instead.
+- `Layer.anchor` places a layer among the layers of the style, see
+  [Order and anchors](../annotations/index.md#order-and-anchors).
+
+## 7. Images
 
 `addImage`, `addImages` and `addImageFromAssets` take a `pixelRatio` of image
 pixels per logical pixel, 1 by default, instead of the device pixel ratio.
@@ -185,7 +216,7 @@ Every image method takes `StyleImageOptions` for SDF images (`sdf`) and images
 that fit the text of a symbol (`stretchX`, `stretchY`, `content`,
 `textFitWidth`, `textFitHeight`).
 
-## 7. Geometry types
+## 8. Geometry types
 
 - `LngLatBounds` is replaced by geobase's `GeoBox` in `fitBounds`,
   `getVisibleRegion`, `MapOptions.maxBounds` and offline regions.
@@ -193,7 +224,7 @@ that fit the text of a symbol (`stretchX`, `stretchY`, `content`,
 - `maplibre` exports only the geobase types its API uses. Import
   `package:geobase/geobase.dart` for the others.
 
-## 8. Feature queries
+## 9. Feature queries
 
 `featuresAtPoint` and `featuresInRect` are now one `queryRenderedFeatures`,
 which returns a `Future`, so `await` it:
@@ -216,7 +247,7 @@ final inRect = await controller.queryRenderedFeatures(.rect(rect));
   with `layerIds`, and `RenderedFeature.layerId`, `sourceId` and
   `sourceLayer`.
 
-## 9. User location and permissions
+## 10. User location and permissions
 
 `PermissionManager`, `MapController.enableLocation`, `trackLocation`,
 `userLocationIsSupported`, `BearingRenderMode` and `BearingTrackMode` were
@@ -225,7 +256,7 @@ and ask for permissions with `geolocator` or `permission_handler`.
 `MapControlButtons` takes `tracking` and `onTrackingPressed` instead of
 `showTrackLocation`.
 
-## 10. Offline regions
+## 11. Offline regions
 
 `OfflineManager.downloadRegion` takes an `OfflineRegionDefinition`:
 
@@ -257,13 +288,13 @@ or an `OfflineTileCountLimitException`. `setOfflineTileCountLimit` and
 `runPackDatabaseAutomatically` were removed. See
 [Offline & Cache](../offline.md).
 
-## 11. Web gestures
+## 12. Web gestures
 
 Map gestures are recognized in Flutter on every platform, also on web.
 MapLibre GL JS's keyboard navigation and Shift + drag box zoom are no longer
 available. Widgets over the map no longer need a `PointerInterceptor`.
 
-## 12. Native platforms
+## 13. Native platforms
 
 `setProjection` takes an `Expression<MapProjection>`, as the style spec does,
 so a projection can change with the zoom level. `MapProjection` adds
@@ -280,7 +311,7 @@ style.setProjection(const .literal(.globe));
 Projections other than Mercator are only supported on web. On every other
 platform, the map keeps Mercator.
 
-## 13. Events
+## 14. Events
 
 `onEvent` is replaced by one callback per event, and each callback gets its
 own event type:
@@ -322,7 +353,7 @@ MapLibreMap(
 now `gesture`, `programmatic` and `map`. See [Events](../events.md) for the
 new events.
 
-## 14. Camera
+## 15. Camera
 
 `moveCamera` and `animateCamera` take a `CameraUpdate`, the same type as
 `MapOptions.initCamera`. `fitBounds` is now `CameraUpdate.bounds`, and the
