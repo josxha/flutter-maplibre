@@ -581,6 +581,36 @@ void main() {
       ]);
     });
 
+    test('keeps explicit layer identity when moving and updating its data', () {
+      final manager = LayerManager(style, const [
+        _TestLayer(id: 'bottom', list: list),
+        _TestLayer(id: 'top', list: [other]),
+      ]);
+      final bottomStyleLayer = layers['bottom'];
+      final topStyleLayer = layers['top'];
+      backend.calls.clear();
+
+      manager.updateLayers(const [
+        _TestLayer(id: 'top', list: [point, other]),
+        _TestLayer(id: 'bottom', list: [other, point]),
+      ]);
+
+      expect(ids(), ['top', 'bottom']);
+      expect(layers['bottom'], same(bottomStyleLayer));
+      expect(layers['top'], same(topStyleLayer));
+      expect(
+        backend.calls.where(
+          (call) => call.startsWith('removeLayer') || call.startsWith('addLayer'),
+        ),
+        isEmpty,
+      );
+      expect(backend.calls.last, 'moveLayer bottom below null');
+      expect(
+        backend.calls.where((call) => call.startsWith('setGeoJsonData')),
+        hasLength(2),
+      );
+    });
+
     test('generated ids are allocated, not derived from the current index', () {
       final manager = LayerManager(style, const [_TestLayer(list: list)]);
       final firstId = manager.getLayerId(0);
