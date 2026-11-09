@@ -580,6 +580,19 @@ void main() {
       );
     });
 
+    test('rejects duplicate explicit ids before changing the style', () {
+      expect(
+        () => LayerManager(style, const [
+          _TestLayer(id: 'duplicate', list: list),
+          _TestLayer(id: 'duplicate', list: list),
+        ]),
+        throwsArgumentError,
+      );
+      expect(layers, isEmpty);
+      expect(sources, isEmpty);
+      expect(backend.calls, isEmpty);
+    });
+
     test('copies the incoming list before tracking changes', () {
       final definitions = <Layer>[_TestLayer(list: list)];
       final manager = LayerManager(style, definitions);

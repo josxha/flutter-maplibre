@@ -31,12 +31,14 @@ abstract class Layer<G extends Feature<Geometry>> {
          draggable ||
              (onDragStart == null && onDrag == null && onDragEnd == null),
          'Set draggable to drag the features of the layer.',
-       );
+       ),
+       assert(id == null || id.isNotEmpty, 'The layer id must not be empty.');
 
   /// The [List] of geometry features.
   final List<G> list;
 
-  /// The id of the style layer. Defaults to an internally generated id.
+  /// Optional style-layer id, unique among this map's annotation layers.
+  /// When omitted, the layer manager generates an id.
   final String? id;
 
   /// The minimum zoom level that the [Layer] is displayed.

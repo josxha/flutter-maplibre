@@ -266,7 +266,10 @@ class LayerManager {
     _oldFeatures = [for (final layer in layers) List.of(layer.list)];
     if (_generatedLayerIds.length > layers.length) {
       _generatedLayerIds.removeRange(layers.length, _generatedLayerIds.length);
-      _generatedSourceIds.removeRange(layers.length, _generatedSourceIds.length);
+      _generatedSourceIds.removeRange(
+        layers.length,
+        _generatedSourceIds.length,
+      );
     }
   }
 
@@ -373,7 +376,10 @@ class LayerManager {
     unawaited(style.sources.remove(_dragSourceId));
     final index = drag.layerIndex;
     if (index < _styleLayers.length && index < _oldLayers.length) {
-      _styleLayers[index].filter = _styleLayerOf(_oldLayers[index], index).filter;
+      _styleLayers[index].filter = _styleLayerOf(
+        _oldLayers[index],
+        index,
+      ).filter;
     }
   }
 
