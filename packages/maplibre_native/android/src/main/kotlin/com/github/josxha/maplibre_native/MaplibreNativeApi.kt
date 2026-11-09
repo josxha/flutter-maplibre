@@ -46,14 +46,12 @@ object MaplibreNativeApi {
         engine.producers.clear()
     }
 
-    private fun engine(engineId: Long): Engine =
-        checkNotNull(engines[engineId]) { "maplibre_native is not attached to engine $engineId." }
+    private fun engine(engineId: Long): Engine = checkNotNull(engines[engineId]) { "maplibre_native is not attached to engine $engineId." }
 
     private fun producer(
         engineId: Long,
         textureId: Long,
-    ): TextureRegistry.SurfaceProducer =
-        checkNotNull(engine(engineId).producers[textureId]) { "No texture $textureId." }
+    ): TextureRegistry.SurfaceProducer = checkNotNull(engine(engineId).producers[textureId]) { "No texture $textureId." }
 
     /** The application context, which the C library needs on Android. */
     @JvmStatic
