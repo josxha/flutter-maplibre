@@ -370,7 +370,7 @@ class LayerManager {
       // layer is removed/recreated or stops being draggable.
       if (_drag case final drag?) {
         final nextLayer = nextLayers[drag.record];
-        if (!nextLayer == null ||
+        if (nextLayer == null ||
             !nextLayer.draggable ||
             drag.featureIndex >= nextLayer.list.length ||
             nextLayer.runtimeType != drag.record.layer.runtimeType ||

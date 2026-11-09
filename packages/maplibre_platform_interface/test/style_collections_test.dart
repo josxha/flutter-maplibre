@@ -663,7 +663,10 @@ void main() {
 
     test('drag overlay ids avoid existing style ids', () {
       sources.load({
-        'maplibre-drag-source': {'type': 'geojson', 'data': 'https://example.com/a.json'},
+        'maplibre-drag-source': {
+          'type': 'geojson',
+          'data': 'https://example.com/a.json',
+        },
       });
       layers.load([
         {'id': 'maplibre-drag-layer', 'type': 'background'},
