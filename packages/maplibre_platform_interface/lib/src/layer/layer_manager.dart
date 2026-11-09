@@ -174,6 +174,32 @@ class LayerManager {
       }
     }
 
+    // A new list instance with the same features can still identify a moved
+    // layer, provided the match is unique on both sides.
+    for (final (index, layer) in layers.indexed) {
+      if (layer.id != null || matches[index] != null) continue;
+      final candidates = unmatched
+          .where(
+            (record) =>
+                record.layer.runtimeType == layer.runtimeType &&
+                _sameFeatures(record.features, layer.list),
+          )
+          .toList();
+      if (candidates.length != 1) continue;
+      final candidate = candidates.single;
+      final incoming = layers
+          .where(
+            (other) =>
+                other.id == null &&
+                other.runtimeType == layer.runtimeType &&
+                _sameFeatures(candidate.features, other.list),
+          )
+          .length;
+      if (incoming == 1) {
+        matches[index] = unmatched.remove(candidate);
+      }
+    }
+
     // If a layer stays in its slot but receives a new feature-list instance,
     // keep the record when its concrete layer type is unchanged.
     for (final (index, layer) in layers.indexed) {
@@ -456,7 +482,9 @@ class LayerManager {
       _finishDrag();
       if (layerIndex < 0 || layerIndex >= _records.length) return;
       final record = _records[layerIndex];
-      if (!record.layer.draggable || featureIndex >= record.features.length) {
+      if (!record.layer.draggable ||
+          featureIndex < 0 ||
+          featureIndex >= record.features.length) {
         return;
       }
       final feature = record.features[featureIndex];
@@ -560,7 +588,8 @@ class LayerManager {
         : Expression.all([own, hide]);
   }
 
-  StyleLayer _overlayOf(_ManagedLayer record, int index) => StyleLayer.fromJson({
+  StyleLayer _overlayOf(_ManagedLayer record, int index) =>
+      StyleLayer.fromJson({
     ..._createStyleLayer(record.layer, index, record).toJson(),
     'id': _dragLayerId,
     'source': _dragSourceId,

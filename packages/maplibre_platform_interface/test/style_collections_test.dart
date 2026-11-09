@@ -568,8 +568,8 @@ void main() {
       backend.calls.clear();
 
       manager.updateLayers([
-        _TestLayer(list: topPoints),
-        _TestLayer(list: bottomPoints),
+        _TestLayer(list: [other]),
+        _TestLayer(list: [point]),
       ]);
 
       expect(manager.getLayerId(0), topId);
