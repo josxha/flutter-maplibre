@@ -163,16 +163,33 @@ class LayerManager {
     final oldLayers = _oldLayers;
     final oldFeatures = _oldFeatures;
     final oldStyleLayers = List<StyleLayer>.of(_styleLayers);
-    final nextStyleLayers = [
-      for (final (index, layer) in layers.indexed) _styleLayerOf(layer, index),
-    ];
-    final replacements = [
-      for (final (index, next) in nextStyleLayers)
-        index >= oldStyleLayers.length ||
-            oldStyleLayers[index].id != next.id ||
-            oldStyleLayers[index].type != next.type ||
-            _sourceOfLayer(oldStyleLayers[index]) != _sourceOfLayer(next),
-    ];
+    final nextStyleOrder = <StyleLayer>[];
+    final styleUpdates = <StyleLayer?>[];
+    final replacements = <bool>[];
+    for (final (index, layer) in layers.indexed) {
+      final current = index < oldStyleLayers.length
+          ? oldStyleLayers[index]
+          : null;
+      if (current != null &&
+          layer == oldLayers[index] &&
+          _layerId(layer, index) == current.id) {
+        // Preserve the current style layer when its declarative definition
+        // hasn't changed. This also keeps a drag's temporary filter intact.
+        nextStyleOrder.add(current);
+        styleUpdates.add(null);
+        replacements.add(false);
+        continue;
+      }
+
+      final next = _styleLayerOf(layer, index);
+      final replace = current == null ||
+          current.id != next.id ||
+          current.type != next.type ||
+          _sourceOfLayer(current) != _sourceOfLayer(next);
+      nextStyleOrder.add(replace ? next : current!);
+      styleUpdates.add(replace ? null : next);
+      replacements.add(replace);
+    }
 
     style.batch(() {
       if (_drag case final drag?) {
@@ -232,19 +249,24 @@ class LayerManager {
         }
       }
 
-      final nextStyleOrder = <StyleLayer>[];
-      for (var index = 0; index < layers.length; index++) {
-        if (index < oldStyleLayers.length && !replacements[index]) {
-          final current = oldStyleLayers[index];
-          current.updateFrom(nextStyleLayers[index]);
-          nextStyleOrder.add(current);
-        } else {
-          nextStyleOrder.add(nextStyleLayers[index]);
+      for (var index = 0; index < styleUpdates.length; index++) {
+        if (styleUpdates[index] case final next?) {
+          oldStyleLayers[index].updateFrom(next);
         }
       }
       _styleLayers
         ..clear()
         ..addAll(nextStyleOrder);
+
+      if (_drag case final drag?) {
+        final index = drag.layerIndex;
+        if (index < layers.length &&
+            index < oldLayers.length &&
+            layers[index] != oldLayers[index]) {
+          drag.overlay.updateFrom(_overlayOf(layers[index], index));
+          _hideDragged(layers[index], drag);
+        }
+      }
 
       // Add new and replaced layers from top to bottom, each below the next
       // entry in MapLibreMap.layers.

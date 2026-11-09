@@ -520,7 +520,10 @@ void main() {
     });
 
     test('custom ids are used and changing an id recreates the layer', () {
-      final manager = LayerManager(style, const [_TestLayer(id: 'old', list: list)]);
+      final manager = LayerManager(
+        style,
+        const [_TestLayer(id: 'old', list: list)],
+      );
       expect(ids(), ['old']);
       backend.calls.clear();
       manager.updateLayers(const [_TestLayer(id: 'new', list: list)]);
@@ -529,7 +532,10 @@ void main() {
     });
 
     test('appends layers in declarative stack order', () {
-      final manager = LayerManager(style, const [_TestLayer(id: 'bottom', list: list)]);
+      final manager = LayerManager(
+        style,
+        const [_TestLayer(id: 'bottom', list: list)],
+      );
       backend.calls.clear();
       manager.updateLayers(const [
         _TestLayer(id: 'bottom', list: list),
