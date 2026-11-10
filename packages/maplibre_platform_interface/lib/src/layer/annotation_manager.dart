@@ -632,21 +632,24 @@ class AnnotationManager {
     for (var i = group.length - 1; i >= 0; i--) {
       final entry = group[i];
       final index = ids.indexOf(entry.id);
+      // The map can reject a style layer, which takes it out of the style
+      // again. Such a layer is added again.
+      final missing = index == -1;
       final above = i + 1 < group.length ? group[i + 1].id : null;
       if (entry._styleLayer != null &&
-          index != -1 &&
+          !missing &&
           inRegion(index) &&
           (above == null || index < ids.indexOf(above))) {
         continue;
       }
       final belowLayerId = above ?? groupBelow();
-      if (entry._styleLayer == null) {
+      if (entry._styleLayer == null || missing) {
         final styleLayer = entry._styleLayer = _createStyleLayer(entry);
         setAnnotationLayer(style.layers, entry.id, owned: true);
         if (_drag case final drag? when identical(drag.entry, entry)) {
           _hideDragged(drag);
         }
-        unawaited(style.layers.add(styleLayer, belowLayerId: belowLayerId));
+        unawaited(_addStyleLayer(style, entry, styleLayer, belowLayerId));
       } else {
         style.layers.move(entry.id, belowLayerId: belowLayerId);
         ids.removeAt(index);
@@ -655,6 +658,24 @@ class AnnotationManager {
         belowLayerId == null ? ids.length : ids.indexOf(belowLayerId),
         entry.id,
       );
+    }
+  }
+
+  /// Adds [styleLayer] of [entry] to [style]. If the map rejects it, the
+  /// error is reported and the next placement adds the layer again.
+  Future<void> _addStyleLayer(
+    StyleController style,
+    AnnotationEntry entry,
+    StyleLayer styleLayer,
+    String? belowLayerId,
+  ) async {
+    try {
+      await style.layers.add(styleLayer, belowLayerId: belowLayerId);
+    } on Object catch (error, stack) {
+      if (identical(entry._styleLayer, styleLayer)) entry._styleLayer = null;
+      if (identical(_style, style)) {
+        _report(error, stack, 'while adding MapLibreMap.layers');
+      }
     }
   }
 

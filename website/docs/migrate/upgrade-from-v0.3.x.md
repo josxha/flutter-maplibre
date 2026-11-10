@@ -72,7 +72,7 @@ MapOptions(
   changes, so `MapController.setStyle` was removed.
 - `initCenter`, `initZoom`, `initBearing` and `initPitch` are now
   `initCamera`, a `CameraUpdate` such as `CameraUpdate.position` or
-  `CameraUpdate.bounds`, see [Camera](#14-camera). Without
+  `CameraUpdate.bounds`, see [Camera](#15-camera). Without
   `initCamera`, the map starts at the camera of the style instead of zoom 0.
 - `androidMode`, `androidTextureMode`, `androidTranslucentTextureSurface`,
   `androidForegroundLoadColor`, `webviewDebugMode` and the deprecated

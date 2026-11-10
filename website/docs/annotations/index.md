@@ -101,9 +101,11 @@ A `MarkerIcon` is one of:
 | `.named('pin')`                          | An image the style already has, from its sprite or `addImage` |
 | `.expression(Expression.get('icon').asString())` | Per feature, an image the style already has |
 
-The map adds each image once, shares it between the layers with an equal
-icon, removes it once no layer shows it, and adds it again when another style
-loads.
+For `.iconData()`, `.asset()`, `.bytes()` and `.provider()`, the map adds
+each image once, shares it between the layers with an equal icon, removes it
+once no layer shows it, and adds it again when another style loads. Images
+that `.named()` and `.expression()` refer to come from the style, so add an
+image of your own again with `addImage` after another style loads.
 
 See the
 [example app](https://github.com/josxha/flutter-maplibre/blob/main/examples/lib/layers_marker_page.dart).
@@ -204,9 +206,11 @@ change.
 
 ## Order and anchors
 
-The layers draw in the order of the list, the first at the bottom, like the
-children of a `Stack`. A reordered list moves the style layers. By default the
-annotation layers go on top of the style. `anchor` places a layer elsewhere:
+Layers with the same anchor draw in the order of the list, the first at the
+bottom, like the children of a `Stack`. A reordered list moves the style
+layers. By default the annotation layers go on top of the style. `anchor`
+places a layer elsewhere, and layers with different anchors draw where their
+anchors put them:
 
 ```dart
 PolylineLayer(
