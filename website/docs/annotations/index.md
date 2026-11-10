@@ -99,11 +99,11 @@ A `MarkerIcon` is one of:
 | `.bytes(pngBytes, pixelRatio:)`          | Encoded image bytes, such as a PNG                      |
 | `.provider(NetworkImage(url))`           | Any `ImageProvider`, at the scale of the image it loads |
 | `.named('pin')`                          | An image the style already has, from its sprite or `addImage` |
+| `.expression(Expression.get('icon').asString())` | Per feature, an image the style already has |
 
 The map adds each image once, shares it between the layers with an equal
 icon, removes it once no layer shows it, and adds it again when another style
-loads. To pick the image per feature with an expression, set `iconImage` to
-the id of an image of the style instead.
+loads.
 
 See the
 [example app](https://github.com/josxha/flutter-maplibre/blob/main/examples/lib/layers_marker_page.dart).
@@ -195,10 +195,6 @@ layer of the list. It also tells a rebuild which layer is which, like a `Key`
 of a widget: a layer with an id keeps its style layer and source wherever it
 moves in the list. Layers without an id match the next layer of the same type
 without an id, in the order of the list.
-
-Without an id, the map names the layer when it first shows it, by the type of
-its style layer: `maplibre-circle-1`, `maplibre-symbol-1`, `maplibre-fill-1`,
-`maplibre-line-1`. The name stays while the layer is in the list.
 
 Read and query the style layers by these ids, for example with
 `queryRenderedFeatures(layerIds: ['stops'])`. Change them only through

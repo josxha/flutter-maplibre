@@ -785,7 +785,6 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   }
 
   void _onStyleLoaded() {
-    detachAnnotations();
     style?.dispose();
     final styleCtrl = StyleControllerWeb(_map)..load();
     style = styleCtrl;

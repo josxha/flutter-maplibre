@@ -169,34 +169,27 @@ await style.sources.updateGeoJsonData('points', .featureCollection(collection));
 
 ## 6. Annotation layers
 
-The layers of `MapLibreMap.layers` stay on the map when the style changes, and
-a reordered list moves their style layers instead of adding them again.
+`MarkerLayer.icon` replaces `iconImage`. It can add the image of the markers
+itself, so an image added in `onStyleLoaded` isn't needed anymore:
 
-- The style layers and sources are named by `Layer.id`, or else by type, such
-  as `maplibre-circle-1`, instead of `maplibre-layer-<index>` and
-  `maplibre-source-<index>`. Set `id` to query a layer by a fixed name.
-- Custom layers implement `createStyleLayer({required String id, required
-  String sourceId})` instead of `createStyleLayer(int index)`.
-  `getLayerId()` and `getSourceId()` are gone.
-- `MarkerLayer.icon` adds the image of the markers. Replace an image added in
-  `onStyleLoaded` with it:
+```dart
+// 0.3
+onStyleLoaded: (style) async {
+  await style.addImageFromIconData(id: 'marker', iconData: Icons.place);
+  setState(() => _imageLoaded = true);
+},
+layers: [MarkerLayer(points: points, iconImage: _imageLoaded ? 'marker' : null)],
 
-  ```dart
-  // 0.3
-  onStyleLoaded: (style) async {
-    await style.addImageFromIconData(id: 'marker', iconData: Icons.place);
-    setState(() => _imageLoaded = true);
-  },
-  layers: [MarkerLayer(points: points, iconImage: _imageLoaded ? 'marker' : null)],
+// 0.4
+layers: [MarkerLayer(points: points, icon: const .iconData(Icons.place))],
+```
 
-  // 0.4
-  layers: [MarkerLayer(points: points, icon: const .iconData(Icons.place))],
-  ```
+For an image of the style, such as one of its sprite, use `.named('marker')`,
+and for an expression, `.expression(...)`.
 
-- `style.layers.remove()` and `.move()` fail for the style layers of the
-  annotation layers. Change `MapLibreMap.layers` or `Layer.anchor` instead.
-- `Layer.anchor` places a layer among the layers of the style, see
-  [Order and anchors](../annotations/index.md#order-and-anchors).
+`style.layers.remove()` and `.move()` fail for the style layers of
+`MapLibreMap.layers`. Change the list or `Layer.anchor` instead, see
+[Order and anchors](../annotations/index.md#order-and-anchors).
 
 ## 7. Images
 

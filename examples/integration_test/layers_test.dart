@@ -453,7 +453,7 @@ void runTests() {
           layers: const [
             MarkerLayer(
               points: [Feature(geometry: Point(_point))],
-              iconImage: .literal('marker'),
+              icon: .named('marker'),
               iconAllowOverlap: .literal(true),
             ),
           ],

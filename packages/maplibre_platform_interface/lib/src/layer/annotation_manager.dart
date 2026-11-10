@@ -481,7 +481,11 @@ class AnnotationManager {
       final icon?,
       final SymbolStyleLayer symbol,
     )) {
-      symbol.iconImage = Expression.literal(_imageIdOf(icon));
+      symbol.iconImage = switch (icon) {
+        MarkerIconNamed(:final imageId) => Expression.literal(imageId),
+        MarkerIconExpression(:final imageId) => imageId,
+        _ => Expression.literal(_images[icon]!.id),
+      };
     }
     return styleLayer;
   }
@@ -673,16 +677,15 @@ class AnnotationManager {
   // ---------------------------------------------------------------------------
   // Images
 
-  /// The id of the image of [icon] in the style.
-  String _imageIdOf(MarkerIcon icon) => switch (icon) {
-    MarkerIconNamed(:final imageId) => imageId,
-    _ => _images[icon]!.id,
-  };
+  /// Whether the map adds the image of [icon] to the style, instead of
+  /// [icon] naming images that the style has.
+  static bool _addsImage(MarkerIcon icon) =>
+      icon is! MarkerIconNamed && icon is! MarkerIconExpression;
 
   /// Adds a user of the image of [icon], which adds the image to the style
   /// for the first one.
   void _acquireImage(MarkerIcon icon) {
-    if (icon is MarkerIconNamed) return;
+    if (!_addsImage(icon)) return;
     final image = _images.putIfAbsent(
       icon,
       () => _StyleImage('maplibre-icon-${++_imageCounter}'),
@@ -694,7 +697,7 @@ class AnnotationManager {
   /// Takes a user of the image of [icon] away, which removes the image from
   /// the style after the last one.
   void _releaseImage(MarkerIcon icon) {
-    if (icon is MarkerIconNamed) return;
+    if (!_addsImage(icon)) return;
     final image = _images[icon];
     if (image == null || --image.users > 0) return;
     _images.remove(icon);
@@ -763,7 +766,7 @@ class AnnotationManager {
         } finally {
           info.dispose();
         }
-      case MarkerIconNamed():
+      case MarkerIconNamed() || MarkerIconExpression():
         break;
     }
   }

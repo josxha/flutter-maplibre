@@ -16,7 +16,6 @@ class MarkerLayer extends Layer<Feature<Point>> {
     this.iconOptional = const .literal(false),
     this.iconSize = const .literal(1),
     this.icon,
-    this.iconImage,
     this.iconRotate = const .literal(0),
     this.iconPadding = const .literal([2]),
     this.iconKeepUpright = const .literal(false),
@@ -63,11 +62,7 @@ class MarkerLayer extends Layer<Feature<Point>> {
     super.onClick,
     super.onEnter,
     super.onLeave,
-  }) : assert(
-         icon == null || iconImage == null,
-         'Set either icon or iconImage.',
-       ),
-       super(list: points);
+  }) : super(list: points);
 
   /// The image of the markers, which the map adds to the style, shares with
   /// other layers that show it and adds again when another style loads.
@@ -80,8 +75,8 @@ class MarkerLayer extends Layer<Feature<Point>> {
   /// )
   /// ```
   ///
-  /// Use [iconImage] instead for images of the sprite of the style, or to
-  /// pick the image per feature with an expression.
+  /// `.named()` shows an image that the style already has, such as one of
+  /// its sprite, and `.expression()` picks one per feature.
   @override
   final MarkerIcon? icon;
 
@@ -100,11 +95,6 @@ class MarkerLayer extends Layer<Feature<Point>> {
   /// pixel size of the image will be the original pixel size multiplied by
   /// icon-size. 1 is the original size; 3 triples the size of the image.
   final Expression<num> iconSize;
-
-  /// The id of the image of the style to show, such as one of its sprite or
-  /// one added with [StyleController.addImage]. An expression can pick it per
-  /// feature. Leave it null if [icon] is set.
-  final Expression<String>? iconImage;
 
   /// Rotates the icon clockwise.
   final Expression<num> iconRotate;
@@ -237,7 +227,6 @@ class MarkerLayer extends Layer<Feature<Point>> {
         iconIgnorePlacement: iconIgnorePlacement,
         iconOptional: iconOptional,
         iconSize: iconSize,
-        iconImage: iconImage,
         iconRotate: iconRotate,
         iconPadding: iconPadding,
         iconKeepUpright: iconKeepUpright,
@@ -282,7 +271,6 @@ class MarkerLayer extends Layer<Feature<Point>> {
           iconIgnorePlacement == other.iconIgnorePlacement &&
           iconOptional == other.iconOptional &&
           iconSize == other.iconSize &&
-          iconImage == other.iconImage &&
           iconRotate == other.iconRotate &&
           iconPadding == other.iconPadding &&
           iconKeepUpright == other.iconKeepUpright &&
@@ -323,7 +311,6 @@ class MarkerLayer extends Layer<Feature<Point>> {
     iconIgnorePlacement,
     iconOptional,
     iconSize,
-    iconImage,
     iconRotate,
     iconPadding,
     iconKeepUpright,

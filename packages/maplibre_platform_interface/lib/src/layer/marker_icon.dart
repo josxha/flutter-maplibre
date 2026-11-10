@@ -40,6 +40,12 @@ sealed class MarkerIcon {
   /// The image [imageId] that the style already has, from its sprite or from
   /// [StyleController.addImage]. The map doesn't add or remove it.
   const factory MarkerIcon.named(String imageId) = MarkerIconNamed;
+
+  /// The image of the style that [imageId] picks for each feature, such as
+  /// `Expression.get('icon').asString()` for the image named in a property of the
+  /// feature. The map doesn't add or remove images for it.
+  const factory MarkerIcon.expression(Expression<String> imageId) =
+      MarkerIconExpression;
 }
 
 /// See [MarkerIcon.iconData].
@@ -158,6 +164,24 @@ final class MarkerIconNamed extends MarkerIcon {
   @override
   bool operator ==(Object other) =>
       other is MarkerIconNamed && imageId == other.imageId;
+
+  @override
+  int get hashCode => imageId.hashCode;
+}
+
+/// See [MarkerIcon.expression].
+///
+/// {@category Layers}
+final class MarkerIconExpression extends MarkerIcon {
+  /// See [MarkerIcon.expression].
+  const MarkerIconExpression(this.imageId) : super._();
+
+  /// The expression that picks the id of the image of the style.
+  final Expression<String> imageId;
+
+  @override
+  bool operator ==(Object other) =>
+      other is MarkerIconExpression && imageId == other.imageId;
 
   @override
   int get hashCode => imageId.hashCode;

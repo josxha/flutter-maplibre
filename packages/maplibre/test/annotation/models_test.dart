@@ -105,17 +105,6 @@ void main() {
   });
 
   group('MarkerLayer', () {
-    test('takes an icon or an image id, not both', () {
-      expect(
-        () => MarkerLayer(
-          points: points,
-          icon: const .iconData(Icons.place),
-          iconImage: const .literal('marker'),
-        ),
-        throwsAssertionError,
-      );
-    });
-
     test('compares its icon', () {
       const pin = MarkerLayer(
         points: points,
@@ -155,7 +144,7 @@ void main() {
 
     const layer = MarkerLayer(
       points: points,
-      iconImage: .literal('marker'),
+      icon: .named('marker'),
       iconSize: .literal(2),
       iconOpacity: .literal(0.5),
       iconTranslate: .literal(Offset(1, 2)),
@@ -179,7 +168,6 @@ void main() {
                   .createStyleLayer(id: 'layer', sourceId: 'source')
                   .toJson()['layout']!
               as Map;
-      expect(layout['icon-image'], 'marker');
       expect(layout['icon-size'], 2);
       expect(layout['icon-anchor'], 'bottom-left');
       expect(layout['text-field'], 'label');

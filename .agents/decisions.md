@@ -445,13 +445,14 @@ Each entry: the decision, then why.
   would undo it otherwise. `setAnnotationLayer` and `writeAsAnnotations`
   are top-level functions of the style layer library that `style.dart`
   hides from the public API.
-- **`MarkerLayer.icon` takes a sealed `MarkerIcon` (icon data, asset, bytes,
-  `ImageProvider`, or the id of an image the style has), and the manager
-  adds each image once per style, keyed by the icon's `==`, as
-  `maplibre-icon-<n>`.** It counts the layers that show it, removes it after
-  the last, and re-adds it after a style load; the manager writes the id
-  into the symbol layer's `icon-image`. `iconImage` stays for sprites and
-  per-feature expressions; the constructor asserts that only one is set.
+- **`MarkerLayer.icon` is the only image parameter of a marker layer: a
+  sealed `MarkerIcon` (icon data, asset, bytes, `ImageProvider`, the id of
+  an image the style has, or an expression that picks one per feature).**
+  The manager adds each image it draws once per style, keyed by the icon's
+  `==`, as `maplibre-icon-<n>`, counts the layers that show it, removes it
+  after the last, and re-adds it after a style load. It writes the
+  symbol layer's `icon-image` for every kind of icon (user decision on #680:
+  one sealed parameter instead of `icon` plus `iconImage`).
 - **Annotation layers take `Expression<T>` for their style fields, with const
   `.literal` defaults, and pass them on to their style layer.** That allows
   per feature styling and keeps the layers `const`. `==` works as expressions

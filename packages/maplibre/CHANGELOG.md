@@ -6,9 +6,8 @@
   longer depend on Material and no longer follow the app's `Theme`; set their
   new color and text style parameters instead
   ([#671](https://github.com/josxha/flutter-maplibre/issues/671)).
-- Annotation layers name their style layer and source by `Layer.id`, or else
-  by type, such as `maplibre-circle-1`, instead of by list index, and
-  `Layer.createStyleLayer` takes that id and source id
+- `MarkerLayer.icon` replaces `MarkerLayer.iconImage`; use `.named()` or
+  `.expression()` for images of the style
   ([#674](https://github.com/josxha/flutter-maplibre/issues/674)).
 - The style layers of `MapLibreMap.layers` can no longer be removed or moved
   through `StyleController.layers`
@@ -16,9 +15,8 @@
 
 ### Features
 
-- Annotation layers stay on the map when the style changes, and a reordered
-  list moves their style layers instead of adding them again
-  ([#674](https://github.com/josxha/flutter-maplibre/issues/674)).
+- Annotation layers take an optional `id`, which names their style layer and
+  source ([#674](https://github.com/josxha/flutter-maplibre/issues/674)).
 - `Layer.anchor` places an annotation layer at the top or bottom of the style,
   or below or above one of its layers
   ([#674](https://github.com/josxha/flutter-maplibre/issues/674)).
