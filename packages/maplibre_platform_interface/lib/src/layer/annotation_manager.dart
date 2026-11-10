@@ -99,7 +99,13 @@ class AnnotationManager {
 
   /// Whether the style layer [id] is one of the layers, or the overlay of a
   /// drag.
-  bool owns(String id) => id == _dragLayerId || this[id] != null;
+  bool owns(String id) => id == _dragLayerId || (this[id]?._onStyle ?? false);
+
+  /// The error of a [Layer.id] that the overlay of a drag uses, or null.
+  static ArgumentError? _reserved(String id) =>
+      id == _dragLayerId || id == _dragSourceId
+      ? ArgumentError.value(id, 'Layer.id', 'The map uses this id for drags')
+      : null;
 
   // ---------------------------------------------------------------------------
   // Styles
@@ -242,6 +248,7 @@ class AnnotationManager {
             'Another layer of MapLibreMap.layers has this id',
           );
         }
+        if (_reserved(id) case final error?) throw error;
         if (style != null && !_isOwn(id, removed)) {
           if (_clashes(id, style) case final error?) throw error;
         }
@@ -291,6 +298,7 @@ class AnnotationManager {
           'Another layer of MapLibreMap.layers has this id',
         );
       }
+      if (_reserved(layerId) case final error?) throw error;
       if (_style case final style?) {
         if (_clashes(layerId, style) case final error?) throw error;
       }
@@ -672,7 +680,11 @@ class AnnotationManager {
     try {
       await style.layers.add(styleLayer, belowLayerId: belowLayerId);
     } on Object catch (error, stack) {
-      if (identical(entry._styleLayer, styleLayer)) entry._styleLayer = null;
+      // The style took the layer out again.
+      if (identical(entry._styleLayer, styleLayer)) {
+        entry._styleLayer = null;
+        setAnnotationLayer(style.layers, entry.id, owned: false);
+      }
       if (identical(_style, style)) {
         _report(error, stack, 'while adding MapLibreMap.layers');
       }

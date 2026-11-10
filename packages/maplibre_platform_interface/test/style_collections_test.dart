@@ -812,6 +812,15 @@ void main() {
       );
     });
 
+    test('rejects the ids of the drag overlay', () {
+      for (final id in ['maplibre-drag-layer', 'maplibre-drag-source']) {
+        expect(
+          () => AnnotationManager([_TestLayer(list: list, id: id)]),
+          throwsArgumentError,
+        );
+      }
+    });
+
     test('leaves out a layer whose id a new style uses, and reports it', () {
       final errors = <FlutterErrorDetails>[];
       final onError = FlutterError.onError;
