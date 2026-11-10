@@ -16,9 +16,15 @@ class RecordingStyleBackend implements StyleBackend {
     throw StateError('The map rejected it.');
   }
 
+  /// Makes the map reject the layers of this id.
+  String? rejectLayerId;
+
   @override
   Future<void> addLayer(Map<String, Object?> json, {String? belowLayerId}) {
     calls.add('addLayer ${json['id']} below $belowLayerId');
+    if (json['id'] == rejectLayerId) {
+      return Future.error(StateError('The map rejected it.'));
+    }
     return _done();
   }
 

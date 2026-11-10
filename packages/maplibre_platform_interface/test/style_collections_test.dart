@@ -802,6 +802,43 @@ void main() {
       expect(ids(), ['water', 'maplibre-circle-1']);
     });
 
+    test('rejects the ids of the dragged feature', () {
+      final manager = attached(const []);
+      for (final id in ['maplibre-drag-layer', 'maplibre-drag-source']) {
+        expect(
+          () => manager.update([_TestLayer(list: list, id: id)]),
+          throwsA(isA<ArgumentError>()),
+        );
+        expect(
+          () => manager.add(_TestLayer(list: list, id: id)),
+          throwsA(isA<ArgumentError>()),
+        );
+      }
+      expect(layers, isEmpty);
+    });
+
+    test('adds a layer the map rejected again, and gives up its id', () async {
+      final errors = <FlutterErrorDetails>[];
+      final onError = FlutterError.onError;
+      FlutterError.onError = errors.add;
+      addTearDown(() => FlutterError.onError = onError);
+      backend.rejectLayerId = 'a';
+      final manager = attached(const [_TestLayer(list: list, id: 'a')]);
+      await pumpEventQueue();
+      expect(errors.single.exception, isA<StateError>());
+      expect(layers['a'], isNull);
+      // The id no longer counts as the annotation's style layer.
+      backend.rejectLayerId = null;
+      await layers.add(CircleStyleLayer(id: 'a', sourceId: 'a'));
+      await layers.remove('a');
+
+      manager.update(const [
+        _TestLayer(list: [other], id: 'a'),
+      ]);
+      expect(ids(), ['a']);
+      expect(() => layers.remove('a'), throwsStateError);
+    });
+
     test('rejects duplicate ids', () {
       expect(
         () => AnnotationManager(const [
@@ -810,15 +847,6 @@ void main() {
         ]),
         throwsA(isA<FlutterError>()),
       );
-    });
-
-    test('rejects the ids of the drag overlay', () {
-      for (final id in ['maplibre-drag-layer', 'maplibre-drag-source']) {
-        expect(
-          () => AnnotationManager([_TestLayer(list: list, id: id)]),
-          throwsArgumentError,
-        );
-      }
     });
 
     test('leaves out a layer whose id a new style uses, and reports it', () {
@@ -836,6 +864,9 @@ void main() {
       expect(errors.single.exception, isA<ArgumentError>());
       expect(ids(), ['pins', 'maplibre-circle-1']);
       expect(layers['pins'], isA<BackgroundStyleLayer>());
+      // Taps and the mouse go to the style's layer of that id.
+      expect(manager.owns('pins'), isFalse);
+      expect(manager.owns('maplibre-circle-1'), isTrue);
       // Its changes stay off the map.
       backend.calls.clear();
       manager.update(const [
