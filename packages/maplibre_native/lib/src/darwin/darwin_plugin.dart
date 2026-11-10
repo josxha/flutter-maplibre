@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 import 'package:maplibre_native/src/darwin/bindings.g.dart';
+import 'package:maplibre_native/src/engine.dart';
 import 'package:maplibre_native/src/plugin_error.dart';
 
 /// The maplibre_native iOS and macOS plugin, called through its C API in
@@ -67,6 +68,7 @@ final class DarwinPlugin {
   static int createGpuTexture() => using((arena) {
     final error = arena<Char>(pluginErrorSize);
     final id = _bindings.maplibre_native_create_gpu_texture(
+      engineId,
       error,
       pluginErrorSize,
     );
@@ -85,6 +87,7 @@ final class DarwinPlugin {
   }) => using((arena) {
     final error = arena<Char>(pluginErrorSize);
     if (!_bindings.maplibre_native_present_gpu_texture(
+      engineId,
       textureId,
       ring,
       slot,
@@ -97,12 +100,12 @@ final class DarwinPlugin {
   });
 
   /// Whether Flutter may still sample [slot] of a texture.
-  static bool slotInUse(int textureId, int slot) =>
-      _bindings.maplibre_native_gpu_texture_slot_in_use(textureId, slot);
+  static bool slotInUse(int textureId, int slot) => _bindings
+      .maplibre_native_gpu_texture_slot_in_use(engineId, textureId, slot);
 
   /// Unregisters a texture.
   static void disposeTexture(int textureId) =>
-      _bindings.maplibre_native_dispose_texture(textureId);
+      _bindings.maplibre_native_dispose_texture(engineId, textureId);
 
   static String _message(Pointer<Char> error) => pluginErrorMessage(error);
 }

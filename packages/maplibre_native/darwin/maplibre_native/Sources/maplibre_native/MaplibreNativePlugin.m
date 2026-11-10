@@ -153,27 +153,113 @@ static void RunOnMain(dispatch_block_t block) {
 
 @end
 
-// State shared by the C API, guarded by gLock. Dart calls the API on its UI
-// thread, and the plugin registers on the main thread.
-static NSLock *gLock;
-static __weak NSObject<FlutterTextureRegistry> *gRegistry;
-static NSMutableDictionary<NSNumber *, MLNGpuTexture *> *gTextures;
+/// The key under which every engine publishes its plugin instance, the
+/// plugin's name in the generated registrant.
+static NSString *const kPluginKey = @"MaplibreNativePlugin";
 
-static MLNGpuTexture *_Nullable FindTexture(int64_t texture_id, char *error, size_t error_size) {
-  MLNGpuTexture *texture = gTextures[@(texture_id)];
+static const MaplibreNativeSymbol kSymbols[] = {
+    {"maplibre_native_create_gpu_texture", (void *)&maplibre_native_create_gpu_texture},
+    {"maplibre_native_present_gpu_texture", (void *)&maplibre_native_present_gpu_texture},
+    {"maplibre_native_gpu_texture_slot_in_use",
+     (void *)&maplibre_native_gpu_texture_slot_in_use},
+    {"maplibre_native_dispose_texture", (void *)&maplibre_native_dispose_texture},
+    {NULL, NULL},
+};
+
+@interface MaplibreNativePlugin ()
+
+- (instancetype)initWithRegistry:(NSObject<FlutterTextureRegistry> *)registry;
+
+/// The texture registry of the plugin's engine, and the textures registered
+/// there by id. Guarded by gLock.
+@property(nonatomic, weak, readonly, nullable) NSObject<FlutterTextureRegistry> *registry;
+@property(nonatomic, readonly) NSMutableDictionary<NSNumber *, MLNGpuTexture *> *textures;
+
+@end
+
+// State shared by the C API, guarded by gLock. Dart calls the API on its UI
+// thread, and the plugins register on the main thread.
+static NSLock *gLock;
+/// The plugins that the C API found so far, by engine id. A plugin lives as
+/// long as its engine publishes it, so an engine id that a later engine
+/// reuses finds no stale plugin.
+static NSMapTable<NSNumber *, MaplibreNativePlugin *> *gPlugins;
+
+/// The plugin that the engine |engine_id|, `PlatformDispatcher.instance.engineId`
+/// of the calling isolate, published at registration. The id is the
+/// engine's pointer, which is alive while that isolate calls. Called without
+/// gLock, which the main thread may wait for.
+static MaplibreNativePlugin *_Nullable FindPlugin(int64_t engine_id, char *error,
+                                                  size_t error_size) {
+  NSNumber *key = @(engine_id);
+  [gLock lock];
+  MaplibreNativePlugin *plugin = [gPlugins objectForKey:key];
+  [gLock unlock];
+  if (plugin != nil) return plugin;
+  __block NSObject *published = nil;
+  RunOnMain(^{
+    FlutterEngine *engine = (__bridge FlutterEngine *)(void *)(intptr_t)engine_id;
+    published = [engine valuePublishedByPlugin:kPluginKey];
+  });
+  // An engine that shuts down publishes NSNull.
+  if (![published isKindOfClass:[MaplibreNativePlugin class]]) {
+    WriteError(@"The maplibre_native plugin is not registered.", error, error_size);
+    return nil;
+  }
+  plugin = (MaplibreNativePlugin *)published;
+  [gLock lock];
+  [gPlugins setObject:plugin forKey:key];
+  [gLock unlock];
+  return plugin;
+}
+
+@implementation MaplibreNativePlugin
+
++ (void)initialize {
+  if (self == [MaplibreNativePlugin class]) {
+    gLock = [[NSLock alloc] init];
+    gPlugins = [NSMapTable strongToWeakObjectsMapTable];
+  }
+}
+
++ (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar> *)registrar {
+  // The engine keeps the instance it publishes, and Dart finds it there.
+  [registrar publish:[[MaplibreNativePlugin alloc] initWithRegistry:[registrar textures]]];
+}
+
++ (const MaplibreNativeSymbol *)symbols {
+  return kSymbols;
+}
+
+- (instancetype)initWithRegistry:(NSObject<FlutterTextureRegistry> *)registry {
+  if ((self = [super init])) {
+    _registry = registry;
+    _textures = [NSMutableDictionary dictionary];
+  }
+  return self;
+}
+
+- (MLNGpuTexture *_Nullable)findTexture:(int64_t)textureId
+                                  error:(char *)error
+                              errorSize:(size_t)errorSize {
+  MLNGpuTexture *texture = _textures[@(textureId)];
   if (texture == nil) {
-    WriteError([NSString stringWithFormat:@"No texture %lld", (long long)texture_id], error,
-               error_size);
+    WriteError([NSString stringWithFormat:@"No texture %lld", (long long)textureId], error,
+               errorSize);
   }
   return texture;
 }
 
-int64_t maplibre_native_create_gpu_texture(char *error, size_t error_size) {
+@end
+
+int64_t maplibre_native_create_gpu_texture(int64_t engine_id, char *error, size_t error_size) {
+  MaplibreNativePlugin *plugin = FindPlugin(engine_id, error, error_size);
+  if (plugin == nil) return -1;
   [gLock lock];
-  NSObject<FlutterTextureRegistry> *registry = gRegistry;
+  NSObject<FlutterTextureRegistry> *registry = plugin.registry;
   [gLock unlock];
   if (registry == nil) {
-    WriteError(@"The maplibre_native plugin is not registered.", error, error_size);
+    WriteError(@"The engine of the maplibre_native plugin is gone.", error, error_size);
     return -1;
   }
   MLNGpuTexture *texture = [[MLNGpuTexture alloc] init];
@@ -183,21 +269,24 @@ int64_t maplibre_native_create_gpu_texture(char *error, size_t error_size) {
     texture_id = [registry registerTexture:texture];
   });
   [gLock lock];
-  gTextures[@(texture_id)] = texture;
+  plugin.textures[@(texture_id)] = texture;
   [gLock unlock];
   return texture_id;
 }
 
-bool maplibre_native_present_gpu_texture(int64_t texture_id, uint32_t ring, uint32_t slot,
-                                         void *surface, char *error, size_t error_size) {
+bool maplibre_native_present_gpu_texture(int64_t engine_id, int64_t texture_id, uint32_t ring,
+                                         uint32_t slot, void *surface, char *error,
+                                         size_t error_size) {
+  MaplibreNativePlugin *plugin = FindPlugin(engine_id, error, error_size);
+  if (plugin == nil) return false;
   [gLock lock];
-  MLNGpuTexture *texture = FindTexture(texture_id, error, error_size);
+  MLNGpuTexture *texture = [plugin findTexture:texture_id error:error errorSize:error_size];
   NSString *message = nil;
   const BOOL presented = texture != nil && [texture presentRing:ring
                                                            slot:slot
                                                         surface:(IOSurfaceRef)surface
                                                           error:&message];
-  NSObject<FlutterTextureRegistry> *registry = gRegistry;
+  NSObject<FlutterTextureRegistry> *registry = plugin.registry;
   [gLock unlock];
   if (!presented) {
     if (message != nil) WriteError(message, error, error_size);
@@ -209,19 +298,24 @@ bool maplibre_native_present_gpu_texture(int64_t texture_id, uint32_t ring, uint
   return true;
 }
 
-bool maplibre_native_gpu_texture_slot_in_use(int64_t texture_id, uint32_t slot) {
+bool maplibre_native_gpu_texture_slot_in_use(int64_t engine_id, int64_t texture_id,
+                                             uint32_t slot) {
+  MaplibreNativePlugin *plugin = FindPlugin(engine_id, NULL, 0);
+  if (plugin == nil) return false;
   [gLock lock];
-  MLNGpuTexture *texture = gTextures[@(texture_id)];
+  MLNGpuTexture *texture = plugin.textures[@(texture_id)];
   const BOOL inUse = texture != nil && [texture isSlotInUse:slot];
   [gLock unlock];
   return inUse;
 }
 
-void maplibre_native_dispose_texture(int64_t texture_id) {
+void maplibre_native_dispose_texture(int64_t engine_id, int64_t texture_id) {
+  MaplibreNativePlugin *plugin = FindPlugin(engine_id, NULL, 0);
+  if (plugin == nil) return;
   [gLock lock];
-  MLNGpuTexture *texture = gTextures[@(texture_id)];
-  [gTextures removeObjectForKey:@(texture_id)];
-  NSObject<FlutterTextureRegistry> *registry = gRegistry;
+  MLNGpuTexture *texture = plugin.textures[@(texture_id)];
+  [plugin.textures removeObjectForKey:@(texture_id)];
+  NSObject<FlutterTextureRegistry> *registry = plugin.registry;
   [gLock unlock];
   if (texture == nil) return;
   // The registry keeps the texture alive while Flutter may still copy it.
@@ -229,33 +323,3 @@ void maplibre_native_dispose_texture(int64_t texture_id) {
     [registry unregisterTexture:texture_id];
   });
 }
-
-static const MaplibreNativeSymbol kSymbols[] = {
-    {"maplibre_native_create_gpu_texture", (void *)&maplibre_native_create_gpu_texture},
-    {"maplibre_native_present_gpu_texture", (void *)&maplibre_native_present_gpu_texture},
-    {"maplibre_native_gpu_texture_slot_in_use",
-     (void *)&maplibre_native_gpu_texture_slot_in_use},
-    {"maplibre_native_dispose_texture", (void *)&maplibre_native_dispose_texture},
-    {NULL, NULL},
-};
-
-@implementation MaplibreNativePlugin
-
-+ (void)initialize {
-  if (self == [MaplibreNativePlugin class]) {
-    gLock = [[NSLock alloc] init];
-    gTextures = [NSMutableDictionary dictionary];
-  }
-}
-
-+ (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar> *)registrar {
-  [gLock lock];
-  gRegistry = [registrar textures];
-  [gLock unlock];
-}
-
-+ (const MaplibreNativeSymbol *)symbols {
-  return kSymbols;
-}
-
-@end
