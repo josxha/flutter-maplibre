@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:maplibre_example/utils/map_styles.dart';
+import 'package:material_ui/material_ui.dart';
 
 class StyleDropdown extends StatefulWidget {
   const StyleDropdown({required this.onChanged, super.key});
