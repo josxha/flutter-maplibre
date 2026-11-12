@@ -1157,6 +1157,27 @@ void main() {
         expect(images, ['add maplibre-icon-2', 'remove maplibre-icon-1']);
       });
 
+      test('keep the old image if the new one fails', () async {
+        final errors = <FlutterErrorDetails>[];
+        final onError = FlutterError.onError;
+        FlutterError.onError = errors.add;
+        addTearDown(() => FlutterError.onError = onError);
+        final manager = attached(const [
+          _TestLayer(list: list, id: 'a', type: 'symbol', testIcon: pin),
+        ]);
+        await pumpEventQueue();
+        images.clear();
+        final gate = style.imageGate = Completer();
+        manager.update(const [
+          _TestLayer(list: list, id: 'a', type: 'symbol', testIcon: flag),
+        ]);
+        gate.completeError(StateError('no image'));
+        await pumpEventQueue();
+        expect(errors.single.exception, isA<StateError>());
+        expect(imageOf('a'), 'maplibre-icon-1');
+        expect(images, isEmpty);
+      });
+
       test('are added again to a new style', () async {
         final manager = attached(const [
           _TestLayer(list: list, id: 'a', type: 'symbol', testIcon: pin),

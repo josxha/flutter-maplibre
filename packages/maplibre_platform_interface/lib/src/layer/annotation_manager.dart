@@ -375,6 +375,9 @@ class AnnotationManager {
     if (entry == null) {
       throw ArgumentError.value(id, 'id', 'There is no such layer');
     }
+    if (layer.id case final layerId? when layerId != id) {
+      throw ArgumentError.value(layerId, 'layer.id', 'Must be null or "$id"');
+    }
     _apply(() {
       if (identical(_drag?.entry, entry)) _checkDrag(layer);
       _update(entry, layer);
@@ -537,8 +540,10 @@ class AnnotationManager {
       return;
     }
     unawaited(
-      adding.then((_) {
-        if (!entry.mounted ||
+      adding.then((added) {
+        // A failed image keeps the old icon on the map.
+        if (!added ||
+            !entry.mounted ||
             !identical(_style, style) ||
             entry.layer.icon != icon ||
             entry._shownIcon == icon) {
@@ -875,24 +880,27 @@ class AnnotationManager {
     image.ready = false;
     final adding = image.adding = _addImageTo(style, icon, image.id);
     unawaited(
-      adding.whenComplete(() {
-        if (identical(image.adding, adding)) image.ready = true;
+      adding.then((added) {
+        if (identical(image.adding, adding)) image.ready = added;
       }),
     );
   }
 
-  Future<void> _addImageTo(
+  /// Adds the image of [icon] to [style] and returns whether it worked.
+  Future<bool> _addImageTo(
     StyleController style,
     MarkerIcon icon,
     String id,
   ) async {
     try {
       await _loadImage(icon, id, style);
+      return true;
     } on Object catch (error, stack) {
       // An image of a style that is gone needs no report.
       if (identical(_style, style)) {
         _report(error, stack, 'while adding the image of a marker icon');
       }
+      return false;
     }
   }
 
@@ -1099,10 +1107,11 @@ class _StyleImage {
   /// The number of layers that show it.
   int users = 0;
 
-  /// Adds the image to the current style, null while no style has it.
-  Future<void>? adding;
+  /// Adds the image to the current style and completes with whether that
+  /// worked, null while no style has it.
+  Future<bool>? adding;
 
-  /// Whether [adding] is done.
+  /// Whether [adding] added the image.
   bool ready = false;
 }
 
