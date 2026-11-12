@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:jni/jni.dart';
 import 'package:maplibre_native/src/android/bindings.g.dart';
+import 'package:maplibre_native/src/engine.dart';
 import 'package:maplibre_native_ffi/maplibre_native_ffi.dart';
 
 /// A SurfaceProducer texture: its Flutter texture id, and the listener that
@@ -86,6 +87,7 @@ final class AndroidPlugin {
       ),
     );
     final textureId = MaplibreNativeApi.createSurfaceTexture(
+      engineId,
       width,
       height,
       listener,
@@ -100,7 +102,7 @@ final class AndroidPlugin {
     int textureId,
     T Function(NativePointer jniEnv, NativePointer surface) use,
   ) {
-    final surface = MaplibreNativeApi.surface(textureId);
+    final surface = MaplibreNativeApi.surface(engineId, textureId);
     try {
       return use(jniEnv, _pointer(surface));
     } finally {
@@ -111,11 +113,16 @@ final class AndroidPlugin {
   /// Sizes a texture's buffers. Returns whether Flutter handed out a new
   /// Surface for them.
   static bool resizeSurfaceTexture(int textureId, int width, int height) =>
-      MaplibreNativeApi.resizeSurfaceTexture(textureId, width, height);
+      MaplibreNativeApi.resizeSurfaceTexture(
+        engineId,
+        textureId,
+        width,
+        height,
+      );
 
   /// Releases a texture and its listener.
   static void disposeTexture(SurfaceTexture texture) {
-    MaplibreNativeApi.disposeTexture(texture.textureId);
+    MaplibreNativeApi.disposeTexture(engineId, texture.textureId);
     texture.listener.release();
   }
 }

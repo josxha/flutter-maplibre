@@ -4,6 +4,7 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 import 'package:maplibre_native/src/desktop/bindings.g.dart';
+import 'package:maplibre_native/src/engine.dart';
 import 'package:maplibre_native/src/plugin_error.dart';
 import 'package:maplibre_native_ffi/maplibre_native_ffi.dart';
 
@@ -41,6 +42,7 @@ final class DesktopPlugin {
     final id = arena<Uint8>(capacity);
     final error = arena<Char>(pluginErrorSize);
     final size = _bindings.maplibre_native_gpu_id(
+      engineId,
       id,
       capacity,
       error,
@@ -52,7 +54,7 @@ final class DesktopPlugin {
 
   /// Registers a pixel buffer texture and returns its Flutter texture id.
   static int createPixelTexture() {
-    final id = _bindings.maplibre_native_create_pixel_texture();
+    final id = _bindings.maplibre_native_create_pixel_texture(engineId);
     if (id < 0) {
       throw StateError('The maplibre_native plugin is not registered.');
     }
@@ -71,6 +73,7 @@ final class DesktopPlugin {
       ..asTypedList(pixels.length).setAll(0, pixels);
     final error = arena<Char>(pluginErrorSize);
     if (!_bindings.maplibre_native_update_pixel_texture(
+      engineId,
       textureId,
       width,
       height,
@@ -89,6 +92,7 @@ final class DesktopPlugin {
   static (int?, String?) createSharedTexture() => using((arena) {
     final error = arena<Char>(pluginErrorSize);
     final id = _bindings.maplibre_native_create_shared_texture(
+      engineId,
       error,
       pluginErrorSize,
     );
@@ -105,6 +109,7 @@ final class DesktopPlugin {
   }) => using((arena) {
     final error = arena<Char>(pluginErrorSize);
     if (!_bindings.maplibre_native_present_shared_texture(
+      engineId,
       textureId,
       ring,
       slot,
@@ -137,6 +142,7 @@ final class DesktopPlugin {
     final slots = arena<MaplibreNativeGpuSlot>(_maxSlots);
     final error = arena<Char>(pluginErrorSize);
     final id = _bindings.maplibre_native_create_gpu_texture(
+      engineId,
       vulkan,
       width,
       height,
@@ -165,6 +171,7 @@ final class DesktopPlugin {
     final slots = arena<MaplibreNativeGpuSlot>(_maxSlots);
     final error = arena<Char>(pluginErrorSize);
     if (!_bindings.maplibre_native_resize_gpu_texture(
+      engineId,
       textureId,
       width,
       height,
@@ -180,13 +187,14 @@ final class DesktopPlugin {
 
   /// Linux: releases the rings that resizes replaced.
   static void releaseRetiredSlots(int textureId) =>
-      _bindings.maplibre_native_release_retired_slots(textureId);
+      _bindings.maplibre_native_release_retired_slots(engineId, textureId);
 
   /// Linux: has Flutter sample the finished frame in [slot] until
   /// [slotInUse] reports it free.
   static void presentGpuTexture(int textureId, int slot) => using((arena) {
     final error = arena<Char>(pluginErrorSize);
     if (!_bindings.maplibre_native_present_gpu_texture(
+      engineId,
       textureId,
       slot,
       error,
@@ -197,12 +205,12 @@ final class DesktopPlugin {
   });
 
   /// Linux: whether Flutter may still sample [slot] of a GPU texture.
-  static bool slotInUse(int textureId, int slot) =>
-      _bindings.maplibre_native_gpu_texture_slot_in_use(textureId, slot);
+  static bool slotInUse(int textureId, int slot) => _bindings
+      .maplibre_native_gpu_texture_slot_in_use(engineId, textureId, slot);
 
   /// Unregisters a texture of any kind.
   static void disposeTexture(int textureId) =>
-      _bindings.maplibre_native_dispose_texture(textureId);
+      _bindings.maplibre_native_dispose_texture(engineId, textureId);
 
   static List<VulkanBorrowedTexture> _slots(
     Pointer<MaplibreNativeGpuSlot> slots,

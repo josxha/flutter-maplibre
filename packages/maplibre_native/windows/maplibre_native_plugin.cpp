@@ -65,13 +65,17 @@ const FlutterDesktopPixelBuffer* PixelTexture::CopyPixelBuffer(size_t width,
 
 // static
 void MaplibreNativePlugin::RegisterWithRegistrar(
+    FlutterDesktopPluginRegistrarRef engine_registrar,
     flutter::PluginRegistrarWindows* registrar) {
-  registrar->AddPlugin(std::make_unique<MaplibreNativePlugin>(registrar));
+  registrar->AddPlugin(
+      std::make_unique<MaplibreNativePlugin>(engine_registrar, registrar));
 }
 
 MaplibreNativePlugin::MaplibreNativePlugin(
+    FlutterDesktopPluginRegistrarRef engine_registrar,
     flutter::PluginRegistrarWindows* registrar)
-    : textures_(registrar->texture_registrar()) {
+    : registrar_(engine_registrar),
+      textures_(registrar->texture_registrar()) {
   if (registrar->GetGraphicsAdapter(&adapter_) && adapter_) {
     DXGI_ADAPTER_DESC desc{};
     if (SUCCEEDED(adapter_->GetDesc(&desc))) {
@@ -80,6 +84,7 @@ MaplibreNativePlugin::MaplibreNativePlugin(
       adapter_luid_.size = 8;
     }
   }
+  Register();
 }
 
 MaplibreNativePlugin::~MaplibreNativePlugin() {
@@ -91,6 +96,15 @@ MaplibreNativePlugin::~MaplibreNativePlugin() {
   for (auto& [id, texture] : shared_textures_) {
     SharedTexture::Dispose(std::move(texture));
   }
+}
+
+bool MaplibreNativePlugin::ServesEngine(int64_t engine_id) const {
+  // The engine id is the engine of the calling isolate, which is alive while
+  // that isolate runs. Each engine has one registrar for all plugins.
+  return FlutterDesktopEngineGetPluginRegistrar(
+             reinterpret_cast<FlutterDesktopEngineRef>(
+                 static_cast<intptr_t>(engine_id)),
+             "MaplibreNativePluginCApi") == registrar_;
 }
 
 bool MaplibreNativePlugin::GetGpuId(GpuId* id, std::string* error) {
@@ -181,9 +195,11 @@ using maplibre_native::MaplibreNativePlugin;
 using maplibre_native::SharedTexture;
 using maplibre_native::WriteError;
 
-int64_t maplibre_native_create_shared_texture(char* error, size_t error_size) {
+int64_t maplibre_native_create_shared_texture(int64_t engine_id, char* error,
+                                              size_t error_size) {
   auto lock = DesktopPlugin::Lock();
-  auto* plugin = static_cast<MaplibreNativePlugin*>(DesktopPlugin::Instance());
+  auto* plugin =
+      static_cast<MaplibreNativePlugin*>(DesktopPlugin::ForEngine(engine_id));
   if (plugin == nullptr) {
     WriteError("The maplibre_native plugin is not registered.", error,
                error_size);
@@ -195,11 +211,13 @@ int64_t maplibre_native_create_shared_texture(char* error, size_t error_size) {
   return id;
 }
 
-bool maplibre_native_present_shared_texture(int64_t texture_id, uint32_t ring,
+bool maplibre_native_present_shared_texture(int64_t engine_id,
+                                            int64_t texture_id, uint32_t ring,
                                             uint32_t slot, uint64_t handle,
                                             char* error, size_t error_size) {
   auto lock = DesktopPlugin::Lock();
-  auto* plugin = static_cast<MaplibreNativePlugin*>(DesktopPlugin::Instance());
+  auto* plugin =
+      static_cast<MaplibreNativePlugin*>(DesktopPlugin::ForEngine(engine_id));
   SharedTexture* texture =
       plugin == nullptr ? nullptr : plugin->FindSharedTexture(texture_id);
   if (texture == nullptr) {

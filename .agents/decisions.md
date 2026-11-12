@@ -29,12 +29,22 @@ Each entry: the decision, then why.
   macOS) and jnigen (Android), never method channels.** Calls are synchronous
   and typed, with no message encoding. The Windows and Linux plugin libraries
   export one C API, whose shared functions `desktop/` implements once, and
-  keep their one registered instance behind a mutex. Each platform defines
+  keep their registered instances behind a mutex. Each platform defines
   only its own functions of that header; the bindings look a symbol up on
   first call, so Dart calls only those of its platform. On Android a Kotlin
-  `MaplibreNativeApi` object holds the engine's texture registry, and
+  `MaplibreNativeApi` object holds each engine's texture registry, and
   SurfaceProducer callbacks reach Dart through a `SurfaceListener` that Dart
   implements as async listeners.
+- **Plugin state is per engine, and every plugin call passes
+  `PlatformDispatcher.instance.engineId`.** An app can run more than one
+  engine in a process, such as one of a background service, and every engine
+  registers its own plugin instance with its own texture registry, whose
+  texture ids may repeat across engines. A texture is created and found in the
+  plugin of the caller's engine, and an engine that goes away releases only
+  its own textures (#677). The id maps to the plugin through public embedder
+  APIs: `FlutterEngine.getEngineId()` at attach on Android, the plugin that the
+  engine published (`valuePublishedByPlugin:`) on iOS and macOS, the engine's
+  plugin registrar on Windows, and its texture registrar on Linux.
 - **`MapRenderer` drives every platform the same way, and a `FrameTarget`
   per platform owns the texture and plugin calls.** The renderer demands a
   frame, hands each rendered one to the target on one serial GPU queue, and
