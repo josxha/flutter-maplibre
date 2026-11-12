@@ -115,11 +115,6 @@ class AnnotationManager implements StyleOwner {
     return null;
   }
 
-  /// Whether the style layer [id] is one of the layers, or the overlay of a
-  /// drag.
-  bool owns(String id) =>
-      id == _FeatureDrag.layerId || (this[id]?._onStyle ?? false);
-
   // ---------------------------------------------------------------------------
   // StyleOwner
 
@@ -129,6 +124,9 @@ class AnnotationManager implements StyleOwner {
   @override
   bool get isWriting => _writing > 0;
 
+  /// Whether the style layer [id] is the style layer of one of the layers,
+  /// or the overlay of a drag. Taps and the mouse on the other layers of the
+  /// style go to their [StyleLayer] callbacks.
   @override
   bool ownsLayer(String id) =>
       (id == _FeatureDrag.layerId && _drag != null) ||

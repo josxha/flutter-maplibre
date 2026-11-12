@@ -218,7 +218,8 @@ abstract class MapLibreMapState extends State<MapLibreMap>
     final styleLayerIds = {
       if (includeStyle != null)
         for (final layer in style?.layers ?? const <StyleLayer>[])
-          if (includeStyle(layer) && !_annotations.owns(layer.id)) layer.id,
+          if (includeStyle(layer) && !_annotations.ownsLayer(layer.id))
+            layer.id,
     };
     if (entries.isEmpty && styleLayerIds.isEmpty) return const _Hits();
     final List<RenderedFeature> features;

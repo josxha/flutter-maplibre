@@ -416,9 +416,11 @@ void main() {
       await pumpEventQueue();
       expect(errors.single.exception, isA<StateError>());
       expect(layers['a'], isNull);
-      // The id no longer counts as the annotation's style layer.
+      // The id no longer counts as the annotation's style layer, so taps
+      // and the mouse go to the app's layer of that id.
       backend.rejectLayerId = null;
       await layers.add(CircleStyleLayer(id: 'a', sourceId: 'a'));
+      expect(manager.ownsLayer('a'), isFalse);
       await layers.remove('a');
 
       manager.update(const [
@@ -480,8 +482,8 @@ void main() {
       expect(ids(), ['pins', 'maplibre-circle-1']);
       expect(layers['pins'], isA<BackgroundStyleLayer>());
       // Taps and the mouse go to the style's layer of that id.
-      expect(manager.owns('pins'), isFalse);
-      expect(manager.owns('maplibre-circle-1'), isTrue);
+      expect(manager.ownsLayer('pins'), isFalse);
+      expect(manager.ownsLayer('maplibre-circle-1'), isTrue);
       // Its changes stay off the map.
       backend.calls.clear();
       manager.update(const [
