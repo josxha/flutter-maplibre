@@ -12,16 +12,18 @@ import 'package:maplibre_platform_interface/src/style/sources/source.dart'
 /// A layer of [MapLibreMap.layers], from when it first shows up in the list
 /// until it leaves it. Its style layer and its source have the id [id].
 class AnnotationEntry {
-  AnnotationEntry._(this.id, this.layer)
-    : _features = List.of(layer.list),
-      _shownIcon = layer.icon;
+  AnnotationEntry._(this._id, this._layer)
+    : _features = List.of(_layer.list),
+      _shownIcon = _layer.icon;
 
   /// The id of the style layer and of the source. A generated id changes
   /// when a style that loads already uses it.
-  String id;
+  String get id => _id;
+  String _id;
 
   /// The current definition of the layer.
-  Layer layer;
+  Layer get layer => _layer;
+  Layer _layer;
 
   /// Whether the layer is still in the list.
   bool get mounted => _mounted;
@@ -150,7 +152,7 @@ class AnnotationManager {
         if (_clashes(entry.id, style) != null && entry.layer.id == null) {
           // A generated id that the style uses gets another number.
           final taken = {for (final other in _entries) other.id};
-          entry.id = _generateId(entry.layer, taken, const []);
+          entry._id = _generateId(entry.layer, taken, const []);
         }
         // The style keeps a layer or source of the same id, until another
         // style loads.
@@ -433,6 +435,8 @@ class AnnotationManager {
     Set<String> taken,
     List<AnnotationEntry> removed,
   ) {
+    // The type of the style layer, as `runtimeType` is minified in release
+    // builds on web.
     final type = layer.createStyleLayer(id: '', sourceId: '').type;
     final style = _style;
     while (true) {
@@ -476,7 +480,7 @@ class AnnotationManager {
   /// Brings [entry] to [layer], its new definition.
   void _update(AnnotationEntry entry, Layer layer) {
     final old = entry.layer;
-    entry.layer = layer;
+    entry._layer = layer;
     if (old.icon != layer.icon) _changeIcon(entry, old.icon);
     final sameFeatures = _sameFeatures(entry._features, layer.list);
     final style = _style;
