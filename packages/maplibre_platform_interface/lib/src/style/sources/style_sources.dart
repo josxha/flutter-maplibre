@@ -24,6 +24,29 @@ final class StyleSources extends Iterable<Source> {
   /// TileJSON resource added: an update must not carry that over.
   final _specifications = <String, Map<String, Object?>>{};
 
+  /// Whether a write to the source of an id comes from outside
+  /// [MapLibreMap.layers] and goes to one of their sources, see
+  /// [setAnnotationSourceGuard].
+  bool Function(String id)? _isForeignWrite;
+
+  /// The sources of [MapLibreMap.layers] that debug builds warned about.
+  final _warnedAnnotation = <String>{};
+
+  /// The layers of [MapLibreMap.layers] write their features to their
+  /// sources, which overrides other changes, so debug builds warn once.
+  void _warnIfAnnotation(String id) {
+    if (!(_isForeignWrite?.call(id) ?? false) || !_warnedAnnotation.add(id)) {
+      return;
+    }
+    if (kDebugMode) {
+      debugPrint(
+        'maplibre: the source "$id" belongs to MapLibreMap.layers, which '
+        'overrides changes made to it here. Change MapLibreMap.layers '
+        'instead.',
+      );
+    }
+  }
+
   @override
   Iterator<Source> get iterator => _sources.values.iterator;
 
@@ -83,13 +106,21 @@ final class StyleSources extends Iterable<Source> {
   }
 
   /// Replaces the data of the GeoJSON source [id] with [data].
+  ///
+  /// The source of a layer of [MapLibreMap.layers] gets its data from that
+  /// list: change the list instead.
   Future<void> updateGeoJsonData(String id, GeoJsonData data) async {
+    _warnIfAnnotation(id);
     _sources[id] = _sourceOfType<GeoJsonSource>(id)._withData(data);
     await _backend.setGeoJsonData(id, data);
   }
 
   /// Makes the GeoJSON source [id] load its data from [url].
+  ///
+  /// The source of a layer of [MapLibreMap.layers] gets its data from that
+  /// list: change the list instead.
   Future<void> updateGeoJsonUrl(String id, String url) async {
+    _warnIfAnnotation(id);
     _sources[id] = _sourceOfType<GeoJsonSource>(id)._withUrl(url);
     await _backend.setGeoJsonUrl(id, url);
   }
@@ -221,4 +252,15 @@ final class StyleSources extends Iterable<Source> {
     _sources[id] = Source.fromJson(id, specification);
     _specifications[id] = specification;
   }
+}
+
+/// Makes [sources] warn in debug builds about writes to the sources of
+/// [MapLibreMap.layers] for which [isForeignWrite] is true. Null stops it.
+///
+/// Not part of the public API: `style.dart` hides it.
+void setAnnotationSourceGuard(
+  StyleSources sources,
+  bool Function(String id)? isForeignWrite,
+) {
+  sources._isForeignWrite = isForeignWrite;
 }

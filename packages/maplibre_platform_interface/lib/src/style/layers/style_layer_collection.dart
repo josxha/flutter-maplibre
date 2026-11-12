@@ -26,6 +26,14 @@ final class StyleLayers extends Iterable<StyleLayer> {
   /// layers, see [writeAsAnnotations].
   var _annotationWrites = 0;
 
+  /// Called after a layer was added, moved or removed other than by
+  /// [MapLibreMap.layers], see [setAnnotationLayoutListener].
+  VoidCallback? _onLayoutChanged;
+
+  void _layoutChanged() {
+    if (_annotationWrites == 0) _onLayoutChanged?.call();
+  }
+
   /// Whether the layer [id] belongs to [MapLibreMap.layers] and the change
   /// doesn't come from there.
   bool _isForeignWrite(String id) =>
@@ -97,6 +105,7 @@ final class StyleLayers extends Iterable<StyleLayer> {
     _layers.insert(index, layer);
     _attach(layer);
     if (layer._hasCallbacks) _callbacksChanged();
+    _layoutChanged();
     try {
       await _backend.addLayer(layer.toJson(), belowLayerId: belowLayerId);
     } catch (_) {
@@ -122,6 +131,7 @@ final class StyleLayers extends Iterable<StyleLayer> {
     final layer = _layers.removeAt(index);
     _detach(layer);
     if (layer._hasCallbacks) _callbacksChanged();
+    _layoutChanged();
     await _backend.removeLayer(id);
   }
 
@@ -151,6 +161,7 @@ final class StyleLayers extends Iterable<StyleLayer> {
       layer,
     );
     _backend.moveLayer(id, belowLayerId: belowLayerId);
+    _layoutChanged();
   }
 
   /// Fills the collection with the layers of a loaded style, by the `layers`
@@ -194,6 +205,15 @@ void setAnnotationLayer(StyleLayers layers, String id, {required bool owned}) {
   } else {
     layers._annotationIds.remove(id);
   }
+}
+
+/// Calls [listener] after a layer of [layers] was added, moved or removed
+/// other than in [writeAsAnnotations], so that [MapLibreMap.layers] can keep
+/// their place. Null stops calling it.
+///
+/// Not part of the public API: `style.dart` hides it.
+void setAnnotationLayoutListener(StyleLayers layers, VoidCallback? listener) {
+  layers._onLayoutChanged = listener;
 }
 
 /// Runs [changes] as changes of [MapLibreMap.layers], which may change the

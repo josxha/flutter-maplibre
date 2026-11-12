@@ -5,15 +5,20 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 import 'package:maplibre_platform_interface/src/style/layers/style_layer.dart'
-    show setAnnotationLayer, writeAsAnnotations;
+    show setAnnotationLayer, setAnnotationLayoutListener, writeAsAnnotations;
+import 'package:maplibre_platform_interface/src/style/sources/source.dart'
+    show setAnnotationSourceGuard;
 
 /// A layer of [MapLibreMap.layers], from when it first shows up in the list
 /// until it leaves it. Its style layer and its source have the id [id].
 class AnnotationEntry {
-  AnnotationEntry._(this.id, this.layer) : _features = List.of(layer.list);
+  AnnotationEntry._(this.id, this.layer)
+    : _features = List.of(layer.list),
+      _shownIcon = layer.icon;
 
-  /// The id of the style layer and of the source.
-  final String id;
+  /// The id of the style layer and of the source. A generated id changes
+  /// when a style that loads already uses it.
+  String id;
 
   /// The current definition of the layer.
   Layer layer;
@@ -27,6 +32,11 @@ class AnnotationEntry {
   /// its list in place hands back the same instance, so only a copy shows
   /// what changed.
   List<Feature> _features;
+
+  /// The icon that the style layer shows. After [Layer.icon] changed, it
+  /// stays the old icon until the image of the new one is on the style, so
+  /// that the markers don't disappear meanwhile.
+  MarkerIcon? _shownIcon;
 
   /// Whether the source is on the current style. A layer whose id the style
   /// already used when it loaded is not.
@@ -101,11 +111,23 @@ class AnnotationManager {
   /// drag.
   bool owns(String id) => id == _dragLayerId || (this[id]?._onStyle ?? false);
 
-  /// The error of a [Layer.id] that the overlay of a drag uses, or null.
-  static ArgumentError? _reserved(String id) =>
-      id == _dragLayerId || id == _dragSourceId
-      ? ArgumentError.value(id, 'Layer.id', 'The map uses this id for drags')
-      : null;
+  /// The error of a [Layer.id] with the prefix of the ids that the map
+  /// generates, or null.
+  static ArgumentError? _reserved(String id) {
+    if (!id.startsWith('maplibre-')) return null;
+    return ArgumentError.value(
+      id,
+      'Layer.id',
+      'Ids that start with "maplibre-" are reserved for the map',
+    );
+  }
+
+  /// The depth of [_apply] calls, while the layers change their own style.
+  var _writing = 0;
+
+  /// Whether [_place] is scheduled after a change of the app to the order
+  /// of the style's layers.
+  var _placeScheduled = false;
 
   // ---------------------------------------------------------------------------
   // Styles
@@ -118,8 +140,18 @@ class AnnotationManager {
   void attach(StyleController style) {
     detach();
     _style = style;
+    setAnnotationLayoutListener(style.layers, () => _schedulePlace(style));
+    setAnnotationSourceGuard(
+      style.sources,
+      (id) => _writing == 0 && (this[id]?._onStyle ?? false),
+    );
     _apply(() {
       for (final entry in _entries) {
+        if (_clashes(entry.id, style) != null && entry.layer.id == null) {
+          // A generated id that the style uses gets another number.
+          final taken = {for (final other in _entries) other.id};
+          entry.id = _generateId(entry.layer, taken, const []);
+        }
         // The style keeps a layer or source of the same id, until another
         // style loads.
         if (_clashes(entry.id, style) case final error?) {
@@ -139,15 +171,23 @@ class AnnotationManager {
   /// Forgets the style, which is about to be replaced or gone, with the
   /// layers on it.
   void detach() {
+    if (_style case final style?) {
+      setAnnotationLayoutListener(style.layers, null);
+      setAnnotationSourceGuard(style.sources, null);
+    }
     _style = null;
     _drag = null;
     for (final entry in _entries) {
       entry
         .._onStyle = false
         .._styleLayer = null;
+      // Without a style, nothing shows the old icon any more.
+      _showIcon(entry, entry.layer.icon);
     }
     for (final image in _images.values) {
-      image.adding = null;
+      image
+        ..adding = null
+        ..ready = false;
     }
   }
 
@@ -175,7 +215,23 @@ class AnnotationManager {
   void _apply(void Function() changes) {
     final style = _style;
     if (style == null) return changes();
-    style.batch(() => writeAsAnnotations(style.layers, changes));
+    _writing++;
+    try {
+      style.batch(() => writeAsAnnotations(style.layers, changes));
+    } finally {
+      _writing--;
+    }
+  }
+
+  /// Places the layers again after the app added, moved or removed a layer
+  /// of [style], once its changes of this task are done.
+  void _schedulePlace(StyleController style) {
+    if (_placeScheduled) return;
+    _placeScheduled = true;
+    scheduleMicrotask(() {
+      _placeScheduled = false;
+      if (identical(_style, style)) _apply(_place);
+    });
   }
 
   // ---------------------------------------------------------------------------
@@ -401,6 +457,7 @@ class AnnotationManager {
   void _remove(AnnotationEntry entry) {
     entry._mounted = false;
     if (identical(_drag?.entry, entry)) _finishDrag();
+    _showIcon(entry, entry.layer.icon);
     if (entry.layer.icon case final icon?) _releaseImage(icon);
     final style = _style;
     if (style == null || !entry._onStyle) return;
@@ -417,20 +474,16 @@ class AnnotationManager {
   void _update(AnnotationEntry entry, Layer layer) {
     final old = entry.layer;
     entry.layer = layer;
-    if (old.icon != layer.icon) {
-      // The new image first, which keeps an image both show.
-      if (layer.icon case final icon?) _acquireImage(icon);
-      if (old.icon case final icon?) _releaseImage(icon);
-    }
+    if (old.icon != layer.icon) _changeIcon(entry, old.icon);
+    final sameFeatures = _sameFeatures(entry._features, layer.list);
     final style = _style;
     if (style == null || !entry._onStyle) {
-      entry._features = List.of(layer.list);
+      if (!sameFeatures) entry._features = List.of(layer.list);
       return;
     }
     // Only re-serialise a source whose features actually changed. Building
     // the GeoJSON is the expensive half of this call.
-    if (layer.interactive != old.interactive ||
-        !_sameFeatures(entry._features, layer.list)) {
+    if (layer.interactive != old.interactive || !sameFeatures) {
       final written = style.sources.updateGeoJsonData(entry.id, _dataOf(layer));
       final drag = _drag;
       if (drag != null &&
@@ -450,14 +503,63 @@ class AnnotationManager {
         unawaited(written);
       }
     }
-    entry._features = List.of(layer.list);
-    if (layer != old && entry._styleLayer != null) {
-      _updateStyleLayer(entry);
-      if (_drag case final drag? when identical(drag.entry, entry)) {
-        drag.overlay.updateFrom(_overlayOf(entry));
-        _hideDragged(drag);
-      }
+    if (!sameFeatures) entry._features = List.of(layer.list);
+    if (layer != old) _refreshStyleLayer(entry);
+  }
+
+  /// Brings the style layer of [entry], if it has one, and the overlay of
+  /// its drag to its definition.
+  void _refreshStyleLayer(AnnotationEntry entry) {
+    if (entry._styleLayer == null) return;
+    _updateStyleLayer(entry);
+    if (_drag case final drag? when identical(drag.entry, entry)) {
+      drag.overlay.updateFrom(_overlayOf(entry));
+      _hideDragged(drag);
     }
+  }
+
+  /// Switches [entry] from the icon [old] to its new [Layer.icon]. The style
+  /// layer shows the icon it shows until the new image is on the style.
+  void _changeIcon(AnnotationEntry entry, MarkerIcon? old) {
+    final icon = entry.layer.icon;
+    // The new image first, which keeps an image both show. The layer holds
+    // the image of its icon and of the icon it shows, once each.
+    if (icon != null && icon != entry._shownIcon) _acquireImage(icon);
+    // An icon that the layer had but never showed goes at once.
+    if (old != null && old != entry._shownIcon) _releaseImage(old);
+    final style = _style;
+    final adding = icon == null ? null : _images[icon]?.adding;
+    if (style == null ||
+        entry._styleLayer == null ||
+        adding == null ||
+        _images[icon]!.ready) {
+      _showIcon(entry, icon);
+      return;
+    }
+    unawaited(
+      adding.then((_) {
+        if (!entry.mounted ||
+            !identical(_style, style) ||
+            entry.layer.icon != icon ||
+            entry._shownIcon == icon) {
+          return;
+        }
+        _apply(() {
+          _showIcon(entry, icon);
+          _refreshStyleLayer(entry);
+        });
+      }),
+    );
+  }
+
+  /// Makes the style layer of [entry] show [icon] from now on, and releases
+  /// the image of the icon it showed before, unless that is still its
+  /// [Layer.icon].
+  void _showIcon(AnnotationEntry entry, MarkerIcon? icon) {
+    final shown = entry._shownIcon;
+    if (shown == icon) return;
+    entry._shownIcon = icon;
+    if (shown != null && shown != entry.layer.icon) _releaseImage(shown);
   }
 
   /// Brings the style layer of [entry] to its definition: only its changed
@@ -485,7 +587,7 @@ class AnnotationManager {
   StyleLayer _createStyleLayer(AnnotationEntry entry) {
     final layer = entry.layer;
     final styleLayer = layer.createStyleLayer(id: entry.id, sourceId: entry.id);
-    if ((layer.icon, styleLayer) case (
+    if ((entry._shownIcon, styleLayer) case (
       final icon?,
       final SymbolStyleLayer symbol,
     )) {
@@ -610,9 +712,21 @@ class AnnotationManager {
           }
           return true;
         case LayerAnchorBelow(:final layerId):
-          return index < ids.indexOf(layerId);
+          // Right below the layer, with only the group in between.
+          final anchorIndex = ids.indexOf(layerId);
+          if (index > anchorIndex) return false;
+          for (var i = index + 1; i < anchorIndex; i++) {
+            if (other(ids[i])) return false;
+          }
+          return true;
         case LayerAnchorAbove(:final layerId):
-          return index > ids.indexOf(layerId);
+          // Right above the layer, with only the group in between.
+          final anchorIndex = ids.indexOf(layerId);
+          if (index < anchorIndex) return false;
+          for (var i = anchorIndex + 1; i < index; i++) {
+            if (other(ids[i])) return false;
+          }
+          return true;
       }
     }
 
@@ -640,6 +754,8 @@ class AnnotationManager {
     for (var i = group.length - 1; i >= 0; i--) {
       final entry = group[i];
       final index = ids.indexOf(entry.id);
+      // A layer of the app took the id after the map rejected this one.
+      if (entry._styleLayer == null && index != -1) continue;
       // The map can reject a style layer, which takes it out of the style
       // again. Such a layer is added again.
       final missing = index == -1;
@@ -756,15 +872,28 @@ class AnnotationManager {
   }
 
   void _addImage(MarkerIcon icon, _StyleImage image, StyleController style) {
-    image.adding = _loadImage(icon, image.id, style).catchError((
-      Object error,
-      StackTrace stack,
-    ) {
+    image.ready = false;
+    final adding = image.adding = _addImageTo(style, icon, image.id);
+    unawaited(
+      adding.whenComplete(() {
+        if (identical(image.adding, adding)) image.ready = true;
+      }),
+    );
+  }
+
+  Future<void> _addImageTo(
+    StyleController style,
+    MarkerIcon icon,
+    String id,
+  ) async {
+    try {
+      await _loadImage(icon, id, style);
+    } on Object catch (error, stack) {
       // An image of a style that is gone needs no report.
       if (identical(_style, style)) {
         _report(error, stack, 'while adding the image of a marker icon');
       }
-    });
+    }
   }
 
   static Future<void> _loadImage(
@@ -972,6 +1101,9 @@ class _StyleImage {
 
   /// Adds the image to the current style, null while no style has it.
   Future<void>? adding;
+
+  /// Whether [adding] is done.
+  bool ready = false;
 }
 
 /// A feature that the user drags, shown in an overlay.

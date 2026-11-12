@@ -426,6 +426,9 @@ Each entry: the decision, then why.
   `maplibre-<style layer type>-<n>` per map, never from the list index, so
   that inserting a layer doesn't rename the others. The type comes from the
   style layer, not `runtimeType`, which dart2js minifies in release builds.
+  `Layer.id` must not start with `maplibre-`, and a generated id that a
+  newly loaded style already uses gets the next number instead of leaving
+  the layer off that style.
   The manager also has id-keyed `add`, `updateLayer`, `move` and `remove`,
   unused by the widget, for a later imperative API.
 - **The list is the draw order, and `Layer.anchor` (top, bottom, below or
@@ -435,22 +438,30 @@ Each entry: the decision, then why.
   out of its anchor's region, so a rebuild usually makes no calls. Top and
   bottom mean above or below every layer that is not in the group. An anchor
   that names a layer the style lacks, or a layer of the list, falls back to
-  the top with a debug warning, and is retried on every rebuild. Taps,
+  the top with a debug warning, and is retried on every rebuild. The
+  manager also places the layers again in a microtask after the app adds,
+  moves or removes a style layer (`setAnnotationLayoutListener`), so a
+  divider layer added after an await in `onStyleLoaded` needs no rebuild.
+  A `.below(x)` or `.above(x)` group must sit right next to `x`. Taps,
   hovers and drags pick the layer drawn on top by its index in
   `style.layers`, not in the list.
 - **The style layers of the annotations are protected in
   `StyleController.layers`.** `remove` and `move` of them throw a
   `StateError`, and their setters warn once in debug builds, unless the
   manager makes the change inside `writeAsAnnotations`; the next rebuild
-  would undo it otherwise. `setAnnotationLayer` and `writeAsAnnotations`
-  are top-level functions of the style layer library that `style.dart`
-  hides from the public API.
+  would undo it otherwise. Writes to their GeoJSON sources warn once in
+  debug builds (`setAnnotationSourceGuard`). `setAnnotationLayer`,
+  `setAnnotationLayoutListener`, `writeAsAnnotations` and
+  `setAnnotationSourceGuard` are top-level functions of the style layer and
+  source libraries that `style.dart` hides from the public API.
 - **`MarkerLayer.icon` is the only image parameter of a marker layer: a
   sealed `MarkerIcon` (icon data, asset, bytes, `ImageProvider`, the id of
   an image the style has, or an expression that picks one per feature).**
   The manager adds each image it draws once per style, keyed by the icon's
   `==`, as `maplibre-icon-<n>`, counts the layers that show it, removes it
-  after the last, and re-adds it after a style load. It writes the
+  after the last, and re-adds it after a style load. When `icon` changes,
+  the style layer keeps the old image until the new one is on the style, so
+  the markers don't disappear while it loads. It writes the
   symbol layer's `icon-image` for every kind of icon (user decision on #680:
   one sealed parameter instead of `icon` plus `iconImage`).
 - **Annotation layers take `Expression<T>` for their style fields, with const

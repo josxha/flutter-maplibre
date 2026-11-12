@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -21,6 +23,9 @@ class _FakeStyle implements StyleController {
   final images = <String>[];
   int batches = 0;
 
+  /// Holds back the images of icons until it completes, if set.
+  Completer<void>? imageGate;
+
   @override
   StyleLayers get layers => _layers();
 
@@ -40,7 +45,10 @@ class _FakeStyle implements StyleController {
     double size = 48,
     Color color = const Color(0xFF000000),
     StyleImageOptions options = const StyleImageOptions(),
-  }) async => images.add('add $id');
+  }) async {
+    if (imageGate case final gate?) await gate.future;
+    images.add('add $id');
+  }
 
   @override
   Future<void> addImage(
@@ -839,6 +847,33 @@ void main() {
       expect(() => layers.remove('a'), throwsStateError);
     });
 
+    test('reserves the ids that start with maplibre-', () {
+      const layer = _TestLayer(list: list, id: 'maplibre-a');
+      final manager = attached(const []);
+      expect(() => manager.update(const [layer]), throwsArgumentError);
+      expect(() => manager.add(layer), throwsArgumentError);
+    });
+
+    test('gives a generated id that a new style uses another number', () {
+      final errors = <FlutterErrorDetails>[];
+      final onError = FlutterError.onError;
+      FlutterError.onError = errors.add;
+      addTearDown(() => FlutterError.onError = onError);
+      final manager = attached(const [_TestLayer(list: list)]);
+      expect(ids(), ['maplibre-circle-1']);
+      manager.detach();
+      layers.dispose();
+      sources.dispose();
+      layers.load([
+        {'id': 'maplibre-circle-1', 'type': 'background'},
+      ]);
+      manager.attach(style);
+      expect(errors, isEmpty);
+      expect(manager.entries.single.id, 'maplibre-circle-2');
+      expect(ids(), ['maplibre-circle-1', 'maplibre-circle-2']);
+      expect(sourceIds(), ['maplibre-circle-2']);
+    });
+
     test('rejects duplicate ids', () {
       expect(
         () => AnnotationManager(const [
@@ -924,6 +959,36 @@ void main() {
         expect(ids(), ['background', 'a', 'water', 'labels', 'b']);
       });
 
+      test('move a layer to an anchor next to where it is', () {
+        final manager = attached(const [_TestLayer(list: list, id: 'a')]);
+        manager.update(const [
+          _TestLayer(list: list, id: 'a', anchor: .above('water')),
+        ]);
+        expect(ids(), ['background', 'water', 'a', 'labels']);
+        manager.update(const [
+          _TestLayer(list: list, id: 'a', anchor: .bottom()),
+        ]);
+        expect(ids(), ['a', 'background', 'water', 'labels']);
+        manager.update(const [
+          _TestLayer(list: list, id: 'a', anchor: .below('labels')),
+        ]);
+        expect(ids(), ['background', 'water', 'a', 'labels']);
+      });
+
+      test('keep when the app adds layers later, without a rebuild', () async {
+        final print = debugPrint;
+        debugPrint = (message, {wrapWidth}) {};
+        addTearDown(() => debugPrint = print);
+        attached(const [
+          _TestLayer(list: list, id: 'a'),
+          _TestLayer(list: list, id: 'b', anchor: .below('divider')),
+        ]);
+        expect(ids(), ['background', 'water', 'labels', 'a', 'b']);
+        await layers.add(CircleStyleLayer(id: 'divider', sourceId: 'src'));
+        await pumpEventQueue();
+        expect(ids(), ['background', 'water', 'labels', 'b', 'divider', 'a']);
+      });
+
       test('a missing anchor puts the layer on top, with a warning', () {
         final printed = <String?>[];
         final print = debugPrint;
@@ -1005,6 +1070,24 @@ void main() {
         expect(printed, hasLength(1));
       });
 
+      test('warn about writes to their sources', () async {
+        final printed = <String?>[];
+        final print = debugPrint;
+        debugPrint = (message, {wrapWidth}) => printed.add(message);
+        addTearDown(() => debugPrint = print);
+        await sources.updateGeoJsonData(
+          'a',
+          GeoJsonData.featureCollection(FeatureCollection(const [])),
+        );
+        expect(printed.single, contains('MapLibreMap.layers'));
+        // The manager writes them without a warning.
+        manager.update(const [
+          _TestLayer(list: [other], id: 'a'),
+          _TestLayer(list: list, id: 'b'),
+        ]);
+        expect(printed, hasLength(1));
+      });
+
       test('can be removed once they left the list', () async {
         manager.update(const [_TestLayer(list: list, id: 'b')]);
         await sources.add(const GeoJsonSource.url(id: 's', url: 'https://s'));
@@ -1052,6 +1135,25 @@ void main() {
           _TestLayer(list: list, id: 'a', type: 'symbol', testIcon: flag),
         ]);
         await pumpEventQueue();
+        expect(images, ['add maplibre-icon-2', 'remove maplibre-icon-1']);
+      });
+
+      test('keep the old image until the new one is on the style', () async {
+        final manager = attached(const [
+          _TestLayer(list: list, id: 'a', type: 'symbol', testIcon: pin),
+        ]);
+        await pumpEventQueue();
+        images.clear();
+        final gate = style.imageGate = Completer();
+        manager.update(const [
+          _TestLayer(list: list, id: 'a', type: 'symbol', testIcon: flag),
+        ]);
+        await pumpEventQueue();
+        expect(imageOf('a'), 'maplibre-icon-1');
+        expect(images, isEmpty);
+        gate.complete();
+        await pumpEventQueue();
+        expect(imageOf('a'), 'maplibre-icon-2');
         expect(images, ['add maplibre-icon-2', 'remove maplibre-icon-1']);
       });
 

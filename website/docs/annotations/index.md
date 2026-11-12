@@ -193,7 +193,7 @@ CircleLayer(id: 'stops', points: stops)
 ```
 
 The id must not be in use by a layer or source of the style, or by another
-layer of the list. It also tells a rebuild which layer is which, like a `Key`
+layer of the list, and must not start with `maplibre-`, which the map uses. It also tells a rebuild which layer is which, like a `Key`
 of a widget: a layer with an id keeps its style layer and source wherever it
 moves in the list. Layers without an id match the next layer of the same type
 without an id, in the order of the list.
@@ -202,7 +202,8 @@ Read and query the style layers by these ids, for example with
 `queryRenderedFeatures(layerIds: ['stops'])`. Change them only through
 `MapLibreMap.layers`: `style.layers.remove()` and `.move()` fail for them, and
 their setters warn in debug builds, as the next rebuild would undo the
-change.
+change. The same goes for their sources: `style.sources.updateGeoJsonData()`
+warns for them.
 
 ## Order and anchors
 
@@ -230,7 +231,9 @@ PolylineLayer(
 Layers with the same anchor keep the order of the list among themselves.
 `.below()` and `.above()` name a layer of the style, not one of the list. If
 the current style has no such layer, the layer goes on top and debug builds
-print a warning.
+print a warning. The layers keep their place when the app adds, moves or
+removes style layers later, for example once a layer named by an anchor is
+added.
 
 The layers, their sources and their icons stay on the map when another style
 loads.

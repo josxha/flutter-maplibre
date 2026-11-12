@@ -31,7 +31,6 @@
 - Taps, hovers and drags on annotation layers follow the layer when the list
   is reordered, and go to the layer drawn on top
   ([#674](https://github.com/josxha/flutter-maplibre/issues/674)).
-
 - Widgets around `MapLibreMap`, such as a `Listener`, get the map's pointer
   events again, and widgets behind the map no longer get its taps
   ([#675](https://github.com/josxha/flutter-maplibre/issues/675)).
