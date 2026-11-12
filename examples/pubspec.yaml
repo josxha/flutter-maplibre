@@ -17,6 +17,7 @@ dependencies:
   http: ^1.2.2
   maplibre: ^0.4.0-pre.2
   maplibre_geolocator: ^0.1.0-pre.1
+  material_ui: ^1.10.0
 
 dev_dependencies:
   flutter_launcher_icons: ^0.14.3

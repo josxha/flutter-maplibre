@@ -14,6 +14,8 @@ class PolygonLayer extends Layer<Feature<Polygon>> {
     this.color = const .literal(Color(0xFF000000)),
     this.opacity = const .literal(1),
     this.outlineColor = const .literal(Color(0xFF000000)),
+    super.id,
+    super.anchor,
     super.minZoom = 0,
     super.maxZoom = 24,
     super.draggable,
@@ -36,15 +38,16 @@ class PolygonLayer extends Layer<Feature<Polygon>> {
   final Expression<Color> outlineColor;
 
   @override
-  StyleLayer createStyleLayer(int index) => FillStyleLayer(
-    id: getLayerId(index),
-    sourceId: getSourceId(index),
-    minZoom: minZoom,
-    maxZoom: maxZoom,
-    color: color,
-    opacity: opacity,
-    outlineColor: outlineColor,
-  );
+  StyleLayer createStyleLayer({required String id, required String sourceId}) =>
+      FillStyleLayer(
+        id: id,
+        sourceId: sourceId,
+        minZoom: minZoom,
+        maxZoom: maxZoom,
+        color: color,
+        opacity: opacity,
+        outlineColor: outlineColor,
+      );
 
   @override
   bool operator ==(Object other) =>

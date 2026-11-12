@@ -30,12 +30,18 @@ const htmlColorNames = <String, String>{
 
 /// Loads the image of [provider], resolved for the device pixel ratio of the
 /// first view. The caller owns the returned image and must dispose it.
-Future<ui.Image> resolveImageProvider(ImageProvider provider) {
+Future<ui.Image> resolveImageProvider(ImageProvider provider) async =>
+    (await resolveImageInfo(provider)).image;
+
+/// Loads the image of [provider] with its scale, resolved for the device
+/// pixel ratio of the first view. The caller owns the returned image and must
+/// dispose it.
+Future<ImageInfo> resolveImageInfo(ImageProvider provider) {
   final view = ui.PlatformDispatcher.instance.implicitView;
   final stream = provider.resolve(
     ImageConfiguration(devicePixelRatio: view?.devicePixelRatio ?? 1),
   );
-  final completer = Completer<ui.Image>();
+  final completer = Completer<ImageInfo>();
   late final ImageStreamListener listener;
   listener = ImageStreamListener(
     (info, _) {
@@ -43,7 +49,7 @@ Future<ui.Image> resolveImageProvider(ImageProvider provider) {
       if (completer.isCompleted) {
         info.dispose();
       } else {
-        completer.complete(info.image);
+        completer.complete(info);
       }
     },
     onError: (error, stackTrace) {

@@ -5,7 +5,42 @@
 - `MapCompass`, `MapControlButtons`, `MapScalebar` and `SourceAttribution` no
   longer depend on Material and no longer follow the app's `Theme`; set their
   new color and text style parameters instead
+<<<<<<< HEAD
   ([#671](https://github.com/maplibre/flutter-maplibre/issues/671)).
+=======
+  ([#671](https://github.com/maplibre/flutter-maplibre/issues/671)).
+- `MarkerLayer.icon` replaces `MarkerLayer.iconImage`; use `.named()` or
+  `.expression()` for images of the style
+  ([#674](https://github.com/maplibre/flutter-maplibre/issues/674)).
+- The style layers of `MapLibreMap.layers` can no longer be removed or moved
+  through `StyleController.layers`
+  ([#674](https://github.com/maplibre/flutter-maplibre/issues/674)).
+
+### Features
+
+- Annotation layers take an optional `id`, which names their style layer and
+  source ([#674](https://github.com/maplibre/flutter-maplibre/issues/674)).
+- `Layer.anchor` places an annotation layer at the top or bottom of the style,
+  or below or above one of its layers
+  ([#674](https://github.com/maplibre/flutter-maplibre/issues/674)).
+- `MarkerLayer.icon` adds the image of the markers to every style, from an
+  icon, an asset, bytes or an `ImageProvider`
+  ([#674](https://github.com/maplibre/flutter-maplibre/issues/674)).
+- `LayerFeatureEvent.feature` is the feature that a tap, hover or drag hit
+  ([#674](https://github.com/maplibre/flutter-maplibre/issues/674)).
+
+### Bug Fixes
+
+- Taps, hovers and drags on annotation layers follow the layer when the list
+  is reordered, and go to the layer drawn on top
+  ([#674](https://github.com/maplibre/flutter-maplibre/issues/674)).
+- Widgets around `MapLibreMap`, such as a `Listener`, get the map's pointer
+  events again, and widgets behind the map no longer get its taps
+  ([#675](https://github.com/maplibre/flutter-maplibre/issues/675)).
+- Maps no longer turn black when the app runs a second Flutter engine, such
+  as one of a background service, and that engine stops; not on web
+  ([#677](https://github.com/maplibre/flutter-maplibre/issues/677)).
+>>>>>>> bc8a6c35aba88bb0fc49464882dac5f59cbcd5f7
 
 ### Misc
 

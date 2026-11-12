@@ -44,6 +44,7 @@ Widget build(BuildContext context) {
 example to show where the feature is. Each `LayerFeatureEvent` holds:
 
 - `index`: the dragged feature in the layer's list.
+- `feature`: the dragged feature as it is in the list.
 - `geometry`: the feature's geometry, moved as far on screen as the pointer.
   A polygon or a line moves as a whole.
 - `point` and `screenPoint`: where a point feature moves to, or where the

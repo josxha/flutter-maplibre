@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
+import 'package:material_ui/material_ui.dart';
 
 @immutable
 class LayersMarkerPage extends StatefulWidget {
@@ -31,8 +31,6 @@ class _LayersMarkerPageState extends State<LayersMarkerPage> {
     ),
   ];
 
-  bool _imageLoaded = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,17 +42,6 @@ class _LayersMarkerPageState extends State<LayersMarkerPage> {
             center: Geographic(lon: 9.17, lat: 47.68),
           ),
         ),
-        onStyleLoaded: (style) async {
-          // add a marker image of 48 logical pixels to the map
-          await style.addImageFromIconData(
-            id: 'marker',
-            iconData: Icons.location_on,
-            color: Colors.red,
-          );
-          setState(() {
-            _imageLoaded = true;
-          });
-        },
         onClick: (event) {
           // add a new marker on click
           setState(() {
@@ -67,7 +54,9 @@ class _LayersMarkerPageState extends State<LayersMarkerPage> {
             textField: const .literal('{name}'),
             textAllowOverlap: const .literal(true),
             iconAllowOverlap: const .literal(true),
-            iconImage: _imageLoaded ? const .literal('marker') : null,
+            // The map adds the image, 48 logical pixels large, to every
+            // style that loads.
+            icon: const .iconData(Icons.location_on, color: Colors.red),
             iconAnchor: const .literal(IconAnchor.bottom),
             textOffset: const .literal(Offset(0, 1)),
           ),

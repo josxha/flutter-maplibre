@@ -45,11 +45,15 @@ Widget build(BuildContext context) {
 ## Details
 
 - Each `LayerFeatureEvent` holds the feature's `index` in the layer's list,
-  its `geometry`, and where the pointer is as `point` and `screenPoint`.
-- Of features of several layers, a tap goes to the topmost layer, and of its
+  the `feature` itself, its `geometry`, and where the pointer is as `point`
+  and `screenPoint`.
+- Of features of several layers, a tap goes to the layer drawn on top, which
+  [anchors](index.md#order-and-anchors) can make differ from the last in the
+  list, and of its
   points to the nearest. A tap next to a small feature still hits it.
   `MapLibreMap.onClick` is called as well.
-- `onEnter` and `onLeave` are tracked per layer: moving from a feature of one
+- `onEnter` and `onLeave` are tracked per layer, also while the list is
+  reordered: moving from a feature of one
   layer onto an overlapping feature of a layer above enters the second
   without leaving the first.
 - Touches don't hover, so `onEnter` and `onLeave` are only called for mice

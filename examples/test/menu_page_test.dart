@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:maplibre_example/menu_page.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   // A window can be laid out at width 0, e.g. while Windows minimizes it.

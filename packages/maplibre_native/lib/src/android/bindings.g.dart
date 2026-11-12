@@ -90,7 +90,7 @@ extension type MaplibreNativeApi._(jni$_.JObject _$this)
 
   static final _id_createSurfaceTexture = _class.staticMethodId(
     r'createSurfaceTexture',
-    r'(IILorg/maplibre/maplibre_native/SurfaceListener;)J',
+    r'(JIILorg/maplibre/maplibre_native/SurfaceListener;)J',
   );
 
   static final _createSurfaceTexture =
@@ -100,7 +100,12 @@ extension type MaplibreNativeApi._(jni$_.JObject _$this)
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
                 jni$_.VarArgs<
-                  (jni$_.Int32, jni$_.Int32, jni$_.Pointer<jni$_.Void>)
+                  (
+                    jni$_.Int64,
+                    jni$_.Int32,
+                    jni$_.Int32,
+                    jni$_.Pointer<jni$_.Void>,
+                  )
                 >,
               )
             >
@@ -111,12 +116,14 @@ extension type MaplibreNativeApi._(jni$_.JObject _$this)
               jni$_.JMethodIDPtr,
               core$_.int,
               core$_.int,
+              core$_.int,
               jni$_.Pointer<jni$_.Void>,
             )
           >();
 
-  /// from: `public fun createSurfaceTexture(width: kotlin.Int, height: kotlin.Int, listener: org.maplibre.maplibre_native.SurfaceListener): kotlin.Long`
+  /// from: `public fun createSurfaceTexture(engineId: kotlin.Long, width: kotlin.Int, height: kotlin.Int, listener: org.maplibre.maplibre_native.SurfaceListener): kotlin.Long`
   static core$_.int createSurfaceTexture(
+    core$_.int j,
     core$_.int i,
     core$_.int i1,
     SurfaceListener surfaceListener,
@@ -126,6 +133,7 @@ extension type MaplibreNativeApi._(jni$_.JObject _$this)
     return _createSurfaceTexture(
       _$$classRef.pointer,
       _id_createSurfaceTexture.pointer,
+      j,
       i,
       i1,
       _$surfaceListener.pointer,
@@ -134,7 +142,7 @@ extension type MaplibreNativeApi._(jni$_.JObject _$this)
 
   static final _id_surface = _class.staticMethodId(
     r'surface',
-    r'(J)Landroid/view/Surface;',
+    r'(JJ)Landroid/view/Surface;',
   );
 
   static final _surface =
@@ -143,7 +151,7 @@ extension type MaplibreNativeApi._(jni$_.JObject _$this)
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Int64,)>,
+                jni$_.VarArgs<(jni$_.Int64, jni$_.Int64)>,
               )
             >
           >('globalEnv_CallStaticObjectMethod')
@@ -152,23 +160,25 @@ extension type MaplibreNativeApi._(jni$_.JObject _$this)
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               core$_.int,
+              core$_.int,
             )
           >();
 
-  /// from: `public fun surface(textureId: kotlin.Long): android.view.Surface`
+  /// from: `public fun surface(engineId: kotlin.Long, textureId: kotlin.Long): android.view.Surface`
   /// The returned object must be released after use, by calling the [release] method.
-  static Surface surface(core$_.int j) {
+  static Surface surface(core$_.int j, core$_.int j1) {
     final _$$classRef = _class.reference;
     return _surface(
       _$$classRef.pointer,
       _id_surface.pointer,
       j,
+      j1,
     ).object<Surface>();
   }
 
   static final _id_resizeSurfaceTexture = _class.staticMethodId(
     r'resizeSurfaceTexture',
-    r'(JII)Z',
+    r'(JJII)Z',
   );
 
   static final _resizeSurfaceTexture =
@@ -177,7 +187,9 @@ extension type MaplibreNativeApi._(jni$_.JObject _$this)
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Int64, jni$_.Int32, jni$_.Int32)>,
+                jni$_.VarArgs<
+                  (jni$_.Int64, jni$_.Int64, jni$_.Int32, jni$_.Int32)
+                >,
               )
             >
           >('globalEnv_CallStaticBooleanMethod')
@@ -188,12 +200,14 @@ extension type MaplibreNativeApi._(jni$_.JObject _$this)
               core$_.int,
               core$_.int,
               core$_.int,
+              core$_.int,
             )
           >();
 
-  /// from: `public fun resizeSurfaceTexture(textureId: kotlin.Long, width: kotlin.Int, height: kotlin.Int): kotlin.Boolean`
+  /// from: `public fun resizeSurfaceTexture(engineId: kotlin.Long, textureId: kotlin.Long, width: kotlin.Int, height: kotlin.Int): kotlin.Boolean`
   static core$_.bool resizeSurfaceTexture(
     core$_.int j,
+    core$_.int j1,
     core$_.int i,
     core$_.int i1,
   ) {
@@ -202,6 +216,7 @@ extension type MaplibreNativeApi._(jni$_.JObject _$this)
       _$$classRef.pointer,
       _id_resizeSurfaceTexture.pointer,
       j,
+      j1,
       i,
       i1,
     ).boolean;
@@ -209,7 +224,7 @@ extension type MaplibreNativeApi._(jni$_.JObject _$this)
 
   static final _id_disposeTexture = _class.staticMethodId(
     r'disposeTexture',
-    r'(J)V',
+    r'(JJ)V',
   );
 
   static final _disposeTexture =
@@ -218,7 +233,7 @@ extension type MaplibreNativeApi._(jni$_.JObject _$this)
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Int64,)>,
+                jni$_.VarArgs<(jni$_.Int64, jni$_.Int64)>,
               )
             >
           >('globalEnv_CallStaticVoidMethod')
@@ -227,13 +242,19 @@ extension type MaplibreNativeApi._(jni$_.JObject _$this)
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
               core$_.int,
+              core$_.int,
             )
           >();
 
-  /// from: `public fun disposeTexture(textureId: kotlin.Long): kotlin.Unit`
-  static void disposeTexture(core$_.int j) {
+  /// from: `public fun disposeTexture(engineId: kotlin.Long, textureId: kotlin.Long): kotlin.Unit`
+  static void disposeTexture(core$_.int j, core$_.int j1) {
     final _$$classRef = _class.reference;
-    _disposeTexture(_$$classRef.pointer, _id_disposeTexture.pointer, j).check();
+    _disposeTexture(
+      _$$classRef.pointer,
+      _id_disposeTexture.pointer,
+      j,
+      j1,
+    ).check();
   }
 }
 

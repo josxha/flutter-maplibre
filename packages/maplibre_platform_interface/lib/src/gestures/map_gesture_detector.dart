@@ -241,10 +241,14 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
         ((movements.zoom || movements.rotate) && gestures.pinch) ||
         _reportsDrags;
     final doubleTaps = _zoomsOnDoubleTap || widget.onDoubleClick != null;
-    // The whole map takes part in gestures, whatever its child hit-tests.
     final onPointerMove = widget.onPointerMove;
     final onPointerLeave = widget.onPointerLeave;
-    final listener = Listener(
+    // The whole map takes part in gestures, whatever its child hit-tests. The
+    // opaque listener is the outermost widget, so that the map reports the
+    // hit to its ancestors: a MouseRegion that isn't opaque reports a miss,
+    // which would hide the pointer from the app's widgets around the map and
+    // pass it on to the widgets behind it.
+    return Listener(
       behavior: HitTestBehavior.opaque,
       onPointerHover: switch (onPointerMove) {
         final onPointerMove? => (event) => _emitUserInput(
@@ -260,53 +264,53 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
       onPointerMove: _onPointerMove,
       onPointerUp: _onPointerEnd,
       onPointerCancel: _onPointerEnd,
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTapUp: switch (widget.onClick) {
-          final onClick? => (details) => _emitUserInput(
-            details.localPosition,
-            (point, screenPoint) =>
-                onClick(MapEventClick(point: point, screenPoint: screenPoint)),
+      // Always there, so that the child keeps its state when the callback
+      // comes or goes.
+      child: MouseRegion(
+        opaque: false,
+        onExit: switch (onPointerLeave) {
+          final onPointerLeave? => (_) => onPointerLeave(
+            const MapEventPointerLeave(),
           ),
           null => null,
         },
-        onSecondaryTapUp: switch (widget.onSecondaryClick) {
-          final onSecondaryClick? => (details) => _emitUserInput(
-            details.localPosition,
-            (point, screenPoint) => onSecondaryClick(
-              MapEventSecondaryClick(point: point, screenPoint: screenPoint),
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTapUp: switch (widget.onClick) {
+            final onClick? => (details) => _emitUserInput(
+              details.localPosition,
+              (point, screenPoint) => onClick(
+                MapEventClick(point: point, screenPoint: screenPoint),
+              ),
             ),
-          ),
-          null => null,
-        },
-        onLongPressStart: switch (widget.onLongClick) {
-          final onLongClick? => (details) => _emitUserInput(
-            details.localPosition,
-            (point, screenPoint) => onLongClick(
-              MapEventLongClick(point: point, screenPoint: screenPoint),
+            null => null,
+          },
+          onSecondaryTapUp: switch (widget.onSecondaryClick) {
+            final onSecondaryClick? => (details) => _emitUserInput(
+              details.localPosition,
+              (point, screenPoint) => onSecondaryClick(
+                MapEventSecondaryClick(point: point, screenPoint: screenPoint),
+              ),
             ),
-          ),
-          null => null,
-        },
-        onDoubleTapDown: doubleTaps ? _onDoubleTapDown : null,
-        onDoubleTap: doubleTaps ? _onDoubleTap : null,
-        onScaleStart: scales ? _onScaleStart : null,
-        onScaleUpdate: scales ? _onScaleUpdate : null,
-        onScaleEnd: scales ? _onScaleEnd : null,
-        child: widget.child,
-      ),
-    );
-    // Always there, so that the child keeps its state when the callback
-    // comes or goes.
-    return MouseRegion(
-      opaque: false,
-      onExit: switch (onPointerLeave) {
-        final onPointerLeave? => (_) => onPointerLeave(
-          const MapEventPointerLeave(),
+            null => null,
+          },
+          onLongPressStart: switch (widget.onLongClick) {
+            final onLongClick? => (details) => _emitUserInput(
+              details.localPosition,
+              (point, screenPoint) => onLongClick(
+                MapEventLongClick(point: point, screenPoint: screenPoint),
+              ),
+            ),
+            null => null,
+          },
+          onDoubleTapDown: doubleTaps ? _onDoubleTapDown : null,
+          onDoubleTap: doubleTaps ? _onDoubleTap : null,
+          onScaleStart: scales ? _onScaleStart : null,
+          onScaleUpdate: scales ? _onScaleUpdate : null,
+          onScaleEnd: scales ? _onScaleEnd : null,
+          child: widget.child,
         ),
-        null => null,
-      },
-      child: listener,
+      ),
     );
   }
 

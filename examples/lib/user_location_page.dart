@@ -1,10 +1,10 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre_example/utils/map_styles.dart';
 import 'package:maplibre_geolocator/maplibre_geolocator.dart';
+import 'package:material_ui/material_ui.dart';
 
 @immutable
 class UserLocationPage extends StatefulWidget {

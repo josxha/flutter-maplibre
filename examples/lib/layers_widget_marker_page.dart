@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
+import 'package:material_ui/material_ui.dart';
 
 @immutable
 class LayersWidgetMarkerPage extends StatefulWidget {
@@ -31,8 +31,6 @@ class _LayersWidgetMarkerPageState extends State<LayersWidgetMarkerPage> {
     ),
   ];
 
-  bool _imageLoaded = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +43,8 @@ class _LayersWidgetMarkerPageState extends State<LayersWidgetMarkerPage> {
           ),
         ),
         onStyleLoaded: (style) async {
-          // The image has the card's logical size at icon size 1.
+          // The image has the card's logical size at icon size 1. Every style
+          // that loads needs it again.
           await style.addImageFromWidget(
             id: 'marker',
             widget: Card(
@@ -60,9 +59,6 @@ class _LayersWidgetMarkerPageState extends State<LayersWidgetMarkerPage> {
               ),
             ),
           );
-          setState(() {
-            _imageLoaded = true;
-          });
         },
         onClick: (event) {
           // add a new marker on click
@@ -76,7 +72,9 @@ class _LayersWidgetMarkerPageState extends State<LayersWidgetMarkerPage> {
             textField: const .literal('{name}'),
             textAllowOverlap: const .literal(true),
             iconAllowOverlap: const .literal(true),
-            iconImage: _imageLoaded ? const .literal('marker') : null,
+            // The image that onStyleLoaded adds. The markers show it once it
+            // is there.
+            icon: const .named('marker'),
             iconAnchor: const .literal(IconAnchor.bottom),
             textOffset: const .literal(Offset(0, 1)),
           ),

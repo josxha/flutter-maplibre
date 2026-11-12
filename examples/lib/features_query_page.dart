@@ -1,9 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:maplibre/maplibre.dart';
 import 'package:maplibre_example/utils/map_styles.dart';
+import 'package:material_ui/material_ui.dart';
 
 @immutable
 class FeaturesQueryPage extends StatefulWidget {

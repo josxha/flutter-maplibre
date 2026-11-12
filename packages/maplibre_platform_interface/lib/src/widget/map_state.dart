@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
+import 'package:maplibre_platform_interface/src/layer/annotation_manager.dart';
 import 'package:maplibre_platform_interface/src/widget/inherited_model.dart';
 
 /// The [State] of the [MapLibreMap] widget.
@@ -14,9 +15,28 @@ abstract class MapLibreMapState extends State<MapLibreMap>
   /// A unique name for the platform view.
   final viewName = 'plugins.flutter.io/maplibre${_counter++}';
 
-  /// The [LayerManager] handles the high level markers, polygons,
-  /// circles and polylines.
-  LayerManager? layerManager;
+  /// Keeps the layers of [MapLibreMap.layers] on every style of the map.
+  late final AnnotationManager _annotations;
+
+  /// Adds the layers of [MapLibreMap.layers] to [style], which just loaded.
+  /// Platforms call it after [MapLibreMap.onStyleLoaded].
+  @protected
+  void attachAnnotations(StyleController style) => _annotations.attach(style);
+
+  /// Forgets the style of the layers of [MapLibreMap.layers], which is about
+  /// to be replaced. Platforms call it.
+  @protected
+  void detachAnnotations() => _annotations.detach();
+
+  /// The id of the style layer and source of [layer] of [MapLibreMap.layers],
+  /// or null if it is not in the list.
+  @visibleForTesting
+  String? annotationLayerId(Layer layer) {
+    for (final entry in _annotations.entries) {
+      if (identical(entry.layer, layer)) return entry.id;
+    }
+    return null;
+  }
 
   /// Get the [MapOptions] from [MapLibreMap.options].
   @override
@@ -45,6 +65,12 @@ abstract class MapLibreMapState extends State<MapLibreMap>
   bool get canPauseRendering => true;
 
   @override
+  void initState() {
+    super.initState();
+    _annotations = AnnotationManager(widget.layers);
+  }
+
+  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     _updateRenderingPaused();
@@ -53,6 +79,7 @@ abstract class MapLibreMapState extends State<MapLibreMap>
   @override
   void didUpdateWidget(covariant MapLibreMap oldWidget) {
     super.didUpdateWidget(oldWidget);
+    _annotations.update(widget.layers);
     if (oldWidget.paused != widget.paused) _updateRenderingPaused();
   }
 
@@ -170,13 +197,8 @@ abstract class MapLibreMapState extends State<MapLibreMap>
     final hit = _topmost(hits.layers, event.screenPoint);
     if (hit == null) return;
     event.preventDefault();
-    _layerDrag = _LayerDrag(
-      hit.layerIndex,
-      hit.featureIndex,
-      hit.geometry,
-      event.screenPoint,
-    );
-    layerManager?.startDrag(hit.layerIndex, hit.featureIndex);
+    _layerDrag = _LayerDrag(hit, event.screenPoint);
+    _annotations.startDrag(hit.entry, hit.featureIndex);
     _emitLayerDrag(event.screenPoint, (layer) => layer.onDragStart);
   }
 
@@ -189,22 +211,22 @@ abstract class MapLibreMapState extends State<MapLibreMap>
     String context, {
     bool Function(StyleLayer layer)? includeStyle,
   }) async {
-    final layerIndexes = <String, int>{
-      for (final (index, layer) in widget.layers.indexed)
-        if (include(layer)) layer.getLayerId(index): index,
+    final entries = <String, AnnotationEntry>{
+      for (final entry in _annotations.entries)
+        if (include(entry.layer)) entry.id: entry,
     };
     final styleLayerIds = {
       if (includeStyle != null)
         for (final layer in style?.layers ?? const <StyleLayer>[])
-          if (includeStyle(layer) && !layerIndexes.containsKey(layer.id))
+          if (includeStyle(layer) && !_annotations.ownsLayer(layer.id))
             layer.id,
     };
-    if (layerIndexes.isEmpty && styleLayerIds.isEmpty) return const _Hits();
+    if (entries.isEmpty && styleLayerIds.isEmpty) return const _Hits();
     final List<RenderedFeature> features;
     try {
       features = await queryRenderedFeatures(
         geometry,
-        layerIds: [...layerIndexes.keys, ...styleLayerIds],
+        layerIds: [...entries.keys, ...styleLayerIds],
       );
     } on Object catch (error, stack) {
       _reportError(error, stack, context);
@@ -212,7 +234,7 @@ abstract class MapLibreMapState extends State<MapLibreMap>
     }
     if (!mounted) return null;
     return _Hits(
-      layers: _layerHits(features, layerIndexes, include),
+      layers: _layerHits(features, entries, include),
       styleLayers: [
         for (final feature in features)
           if (styleLayerIds.contains(feature.layerId)) feature,
@@ -221,23 +243,42 @@ abstract class MapLibreMapState extends State<MapLibreMap>
   }
 
   /// The features of [features] of the layers of [MapLibreMap.layers] by
-  /// their [layerIndexes].
+  /// the ids of their style layers in [entries].
   List<_LayerHit> _layerHits(
     List<RenderedFeature> features,
-    Map<String, int> layerIndexes,
+    Map<String, AnnotationEntry> entries,
     bool Function(Layer layer) include,
-  ) => [
-    for (final feature in features)
-      if ((
-            layerIndexes[feature.layerId],
-            feature.properties[LayerManager.featureIndexProperty],
-          )
-          case (final int layerIndex, final num featureIndex))
-        if (widget.layers.elementAtOrNull(layerIndex) case final layer?
-            when include(layer) && featureIndex < layer.list.length)
-          if (layer.list[featureIndex.toInt()].geometry case final geometry?)
-            _LayerHit(layerIndex, featureIndex.toInt(), geometry),
-  ];
+  ) {
+    // The draw order of the style layers, which anchors make differ from
+    // the order of the list.
+    final order = <String, int>{
+      for (final (index, layer)
+          in (style?.layers ?? const <StyleLayer>[]).indexed)
+        layer.id: index,
+    };
+    final hits = <_LayerHit>[];
+    for (final feature in features) {
+      final entry = entries[feature.layerId];
+      final featureIndex =
+          feature.properties[AnnotationManager.featureIndexProperty];
+      if (entry == null || !entry.mounted || featureIndex is! num) continue;
+      final layer = entry.layer;
+      if (!include(layer) || featureIndex >= layer.list.length) continue;
+      final listFeature = layer.list[featureIndex.toInt()];
+      final geometry = listFeature.geometry;
+      if (geometry == null) continue;
+      hits.add(
+        _LayerHit(
+          entry,
+          order[entry.id] ?? _annotations.entries.indexOf(entry),
+          featureIndex.toInt(),
+          listFeature,
+          geometry,
+        ),
+      );
+    }
+    return hits;
+  }
 
   /// Of [hits], the one of the topmost layer, and of its points the nearest
   /// to [center].
@@ -251,9 +292,8 @@ abstract class MapLibreMapState extends State<MapLibreMap>
             (toScreenLocation(Geographic.from(position)) - center).distance;
       }
       if (nearest == null ||
-          hit.layerIndex > nearest.layerIndex ||
-          (hit.layerIndex == nearest.layerIndex &&
-              distance < nearestDistance)) {
+          hit.drawIndex > nearest.drawIndex ||
+          (hit.drawIndex == nearest.drawIndex && distance < nearestDistance)) {
         nearest = hit;
         nearestDistance = distance;
       }
@@ -309,11 +349,7 @@ abstract class MapLibreMapState extends State<MapLibreMap>
           const [];
     }
     if (_topmost(layerHits, event.screenPoint) case final hit?) {
-      _emitLayerEvent(
-        hit,
-        event,
-        widget.layers.elementAtOrNull(hit.layerIndex)?.onClick,
-      );
+      _emitLayerEvent(hit, event, _layerOf(hit.entry)?.onClick);
     }
     for (final (layer, feature) in _topmostPerStyleLayer(
       hits.styleLayers,
@@ -372,6 +408,7 @@ abstract class MapLibreMapState extends State<MapLibreMap>
       callback(
         LayerFeatureEvent(
           index: hit.featureIndex,
+          feature: hit.feature,
           geometry: hit.geometry,
           point: input.point,
           screenPoint: input.screenPoint,
@@ -396,8 +433,12 @@ abstract class MapLibreMapState extends State<MapLibreMap>
   static bool _styleHoverable(StyleLayer layer) =>
       layer.onEnter != null || layer.onLeave != null;
 
-  /// The feature under the mouse, by layer index.
-  final _hovered = <int, _LayerHit>{};
+  /// The layer of [entry] while it is in [MapLibreMap.layers].
+  static Layer? _layerOf(AnnotationEntry entry) =>
+      entry.mounted ? entry.layer : null;
+
+  /// The feature under the mouse, by layer.
+  final _hovered = <AnnotationEntry, _LayerHit>{};
 
   /// The feature under the mouse, by style layer id.
   final _hoveredStyle = <String, (StyleLayer, RenderedFeature)>{};
@@ -460,26 +501,18 @@ abstract class MapLibreMapState extends State<MapLibreMap>
   /// left. Per layer, the topmost feature counts.
   void _updateHovered(_Hits hits, MapEventUserInput input) {
     _updateHoveredStyle(hits.styleLayers, input);
-    final now = <int, _LayerHit>{};
+    final now = <AnnotationEntry, _LayerHit>{};
     for (final hit in hits.layers) {
       // Rendered features come topmost first.
-      now.putIfAbsent(hit.layerIndex, () => hit);
+      now.putIfAbsent(hit.entry, () => hit);
     }
-    for (final MapEntry(key: layerIndex, value: hit) in _hovered.entries) {
-      if (now[layerIndex]?.featureIndex == hit.featureIndex) continue;
-      _emitLayerEvent(
-        hit,
-        input,
-        widget.layers.elementAtOrNull(layerIndex)?.onLeave,
-      );
+    for (final MapEntry(key: entry, value: hit) in _hovered.entries) {
+      if (now[entry]?.featureIndex == hit.featureIndex) continue;
+      _emitLayerEvent(hit, input, _layerOf(entry)?.onLeave);
     }
-    for (final MapEntry(key: layerIndex, value: hit) in now.entries) {
-      if (_hovered[layerIndex]?.featureIndex == hit.featureIndex) continue;
-      _emitLayerEvent(
-        hit,
-        input,
-        widget.layers.elementAtOrNull(layerIndex)?.onEnter,
-      );
+    for (final MapEntry(key: entry, value: hit) in now.entries) {
+      if (_hovered[entry]?.featureIndex == hit.featureIndex) continue;
+      _emitLayerEvent(hit, input, _layerOf(entry)?.onEnter);
     }
     _hovered
       ..clear()
@@ -523,7 +556,7 @@ abstract class MapLibreMapState extends State<MapLibreMap>
       return;
     }
     final moved = _emitLayerDrag(event.screenPoint, (layer) => layer.onDrag);
-    if (moved != null) layerManager?.moveDrag(moved);
+    if (moved != null) _annotations.moveDrag(moved);
     widget.onDrag?.call(event);
   }
 
@@ -544,8 +577,8 @@ abstract class MapLibreMapState extends State<MapLibreMap>
 
   void _endLayerDrag(MapEventDragEnd event) {
     final moved = _emitLayerDrag(event.screenPoint, (layer) => layer.onDragEnd);
-    if (moved != null) layerManager?.moveDrag(moved);
-    layerManager?.endDrag();
+    if (moved != null) _annotations.moveDrag(moved);
+    _annotations.endDrag();
     _layerDrag = null;
     widget.onDragEnd?.call(event);
   }
@@ -559,14 +592,15 @@ abstract class MapLibreMapState extends State<MapLibreMap>
   ) {
     final drag = _layerDrag;
     if (drag == null || !isInitialized) return null;
-    final layer = widget.layers.elementAtOrNull(drag.layerIndex);
+    final hit = drag.hit;
+    final layer = _layerOf(hit.entry);
     if (layer == null ||
         !layer.draggable ||
-        drag.featureIndex >= layer.list.length) {
+        hit.featureIndex >= layer.list.length) {
       return null;
     }
     final delta = screenPoint - drag.start;
-    final geometry = _moved(drag.geometry, delta);
+    final geometry = _moved(hit.geometry, delta);
     final (point, target) = switch (geometry) {
       Point(:final position) => (
         Geographic.from(position),
@@ -576,7 +610,8 @@ abstract class MapLibreMapState extends State<MapLibreMap>
     };
     callback(layer)?.call(
       LayerFeatureEvent(
-        index: drag.featureIndex,
+        index: hit.featureIndex,
+        feature: hit.feature,
         geometry: geometry,
         point: point,
         screenPoint: target,
@@ -740,22 +775,33 @@ class _Hits {
 
 /// A feature of [MapLibreMap.layers] that a query found.
 class _LayerHit {
-  const _LayerHit(this.layerIndex, this.featureIndex, this.geometry);
+  const _LayerHit(
+    this.entry,
+    this.drawIndex,
+    this.featureIndex,
+    this.feature,
+    this.geometry,
+  );
 
-  final int layerIndex;
+  /// The layer, which keeps its identity while the list changes.
+  final AnnotationEntry entry;
+
+  /// The position of the layer's style layer, from the bottom.
+  final int drawIndex;
+
   final int featureIndex;
+  final Feature feature;
+
+  /// The geometry of the feature, where a drag starts.
   final Geometry geometry;
 }
 
 /// A feature of [MapLibreMap.layers] that a drag moves.
 class _LayerDrag {
-  _LayerDrag(this.layerIndex, this.featureIndex, this.geometry, this.start);
+  _LayerDrag(this.hit, this.start);
 
-  final int layerIndex;
-  final int featureIndex;
-
-  /// The geometry of the feature where the drag started.
-  final Geometry geometry;
+  /// The dragged feature, with its geometry where the drag started.
+  final _LayerHit hit;
 
   /// Where the drag started, in logical pixels of the map.
   final Offset start;

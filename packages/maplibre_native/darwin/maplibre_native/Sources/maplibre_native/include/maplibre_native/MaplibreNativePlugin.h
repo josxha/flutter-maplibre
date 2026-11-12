@@ -10,9 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// The maplibre_native plugin on iOS and macOS. It holds the texture registry
-/// of the engine that registered it last, and serves the C API in
-/// maplibre_native_api.h.
+/// The maplibre_native plugin on iOS and macOS, which serves the C API in
+/// maplibre_native_api.h. Every engine registers an instance of its own, which
+/// holds that engine's texture registry and textures.
 @interface MaplibreNativePlugin : NSObject <FlutterPlugin>
 
 /// The functions of the C API, ending with an entry whose name is NULL. Dart

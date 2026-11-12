@@ -7,6 +7,7 @@
 void MaplibreNativePluginCApiRegisterWithRegistrar(
     FlutterDesktopPluginRegistrarRef registrar) {
   maplibre_native::MaplibreNativePlugin::RegisterWithRegistrar(
+      registrar,
       flutter::PluginRegistrarManager::GetInstance()
           ->GetRegistrar<flutter::PluginRegistrarWindows>(registrar));
 }
