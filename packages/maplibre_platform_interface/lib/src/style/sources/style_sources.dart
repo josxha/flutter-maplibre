@@ -24,25 +24,24 @@ final class StyleSources extends Iterable<Source> {
   /// TileJSON resource added: an update must not carry that over.
   final _specifications = <String, Map<String, Object?>>{};
 
-  /// Whether a write to the source of an id comes from outside
-  /// [MapLibreMap.layers] and goes to one of their sources, see
-  /// [setAnnotationSourceGuard].
-  bool Function(String id)? _isForeignWrite;
+  /// The part of the map that owns some of the sources, see
+  /// [setStyleSourcesOwner].
+  StyleOwner? _styleOwner;
 
-  /// The sources of [MapLibreMap.layers] that debug builds warned about.
-  final _warnedAnnotation = <String>{};
+  /// The owned sources that debug builds warned about.
+  final _warnedOwned = <String>{};
 
-  /// The layers of [MapLibreMap.layers] write their features to their
-  /// sources, which overrides other changes, so debug builds warn once.
-  void _warnIfAnnotation(String id) {
-    if (!(_isForeignWrite?.call(id) ?? false) || !_warnedAnnotation.add(id)) {
-      return;
-    }
+  /// A source that another part of the map owns, such as the source of a
+  /// layer of [MapLibreMap.layers], gets its data from there, which
+  /// overrides other changes, so debug builds warn once.
+  void _warnIfOwned(String id) {
+    final owner = _styleOwner;
+    if (owner == null || owner.isWriting || !owner.ownsSource(id)) return;
+    if (!_warnedOwned.add(id)) return;
     if (kDebugMode) {
       debugPrint(
-        'maplibre: the source "$id" belongs to MapLibreMap.layers, which '
-        'overrides changes made to it here. Change MapLibreMap.layers '
-        'instead.',
+        'maplibre: the source "$id" belongs to ${owner.name}, which '
+        'overrides changes made to it here. Change ${owner.name} instead.',
       );
     }
   }
@@ -110,7 +109,7 @@ final class StyleSources extends Iterable<Source> {
   /// The source of a layer of [MapLibreMap.layers] gets its data from that
   /// list: change the list instead.
   Future<void> updateGeoJsonData(String id, GeoJsonData data) async {
-    _warnIfAnnotation(id);
+    _warnIfOwned(id);
     _sources[id] = _sourceOfType<GeoJsonSource>(id)._withData(data);
     await _backend.setGeoJsonData(id, data);
   }
@@ -120,7 +119,7 @@ final class StyleSources extends Iterable<Source> {
   /// The source of a layer of [MapLibreMap.layers] gets its data from that
   /// list: change the list instead.
   Future<void> updateGeoJsonUrl(String id, String url) async {
-    _warnIfAnnotation(id);
+    _warnIfOwned(id);
     _sources[id] = _sourceOfType<GeoJsonSource>(id)._withUrl(url);
     await _backend.setGeoJsonUrl(id, url);
   }
@@ -254,13 +253,10 @@ final class StyleSources extends Iterable<Source> {
   }
 }
 
-/// Makes [sources] warn in debug builds about writes to the sources of
-/// [MapLibreMap.layers] for which [isForeignWrite] is true. Null stops it.
+/// Makes [owner] the owner of some sources of [sources], or no one if it is
+/// null, see [setStyleOwner].
 ///
 /// Not part of the public API: `style.dart` hides it.
-void setAnnotationSourceGuard(
-  StyleSources sources,
-  bool Function(String id)? isForeignWrite,
-) {
-  sources._isForeignWrite = isForeignWrite;
+void setStyleSourcesOwner(StyleSources sources, StyleOwner? owner) {
+  sources._styleOwner = owner;
 }

@@ -4,10 +4,11 @@ import 'dart:collection';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
-import 'package:maplibre_platform_interface/src/style/layers/style_layer.dart'
-    show setAnnotationLayer, setAnnotationLayoutListener, writeAsAnnotations;
-import 'package:maplibre_platform_interface/src/style/sources/source.dart'
-    show setAnnotationSourceGuard;
+import 'package:maplibre_platform_interface/src/layer/annotation_placement.dart';
+import 'package:maplibre_platform_interface/src/style/style_owner.dart';
+
+part 'annotation_drag.dart';
+part 'annotation_images.dart';
 
 /// A layer of [MapLibreMap.layers], from when it first shows up in the list
 /// until it leaves it. Its style layer and its source have the id [id].
@@ -54,15 +55,19 @@ class AnnotationEntry {
   String toString() => 'AnnotationEntry($id, ${layer.runtimeType})';
 }
 
+
 /// Keeps the layers of [MapLibreMap.layers] on the map, one manager per map.
 ///
 /// It holds the definitions and features of the layers, whether or not a
 /// style is loaded, adds their sources, style layers and images to every
 /// style that loads ([attach]), and applies only what changed when the list
-/// changes ([update]).
+/// changes ([update]). It owns their style layers and sources on the style
+/// (see [StyleOwner]), places the style layers by [placeLayers], keeps the
+/// images of the icons in [_AnnotationImages], and shows the feature that
+/// the user drags in a [_FeatureDrag].
 ///
 /// This is an internal class that is not exported publicly.
-class AnnotationManager {
+class AnnotationManager implements StyleOwner {
   /// Creates the manager with the initial [layers]. It adds them to the map
   /// once a style is [attach]ed.
   AnnotationManager(List<Layer> layers) {
@@ -73,9 +78,6 @@ class AnnotationManager {
   /// the layer is [Layer.interactive], to tell which feature the user tapped,
   /// hovered or dragged.
   static const featureIndexProperty = 'maplibre:index';
-
-  static const _dragSourceId = 'maplibre-drag-source';
-  static const _dragLayerId = 'maplibre-drag-layer';
 
   /// How long a dropped feature stays in the overlay after its layer's
   /// source has it at its new place, while the map tiles that source again.
@@ -94,12 +96,17 @@ class AnnotationManager {
   /// The number of ids generated so far, by the type of the style layer.
   final _idCounters = <String, int>{};
 
-  /// The images that the icons of the layers show, by icon.
-  final _images = <MarkerIcon, _StyleImage>{};
-  var _imageCounter = 0;
+  final _images = _AnnotationImages();
 
   /// The feature that the user drags, see [startDrag].
   _FeatureDrag? _drag;
+
+  /// The depth of [_apply] calls, while the layers change their own style.
+  var _writing = 0;
+
+  /// Whether [_place] is scheduled after a change of the app to the order
+  /// of the style's layers.
+  var _placeScheduled = false;
 
   /// The layer with the id [id], or null.
   AnnotationEntry? operator [](String id) {
@@ -111,25 +118,38 @@ class AnnotationManager {
 
   /// Whether the style layer [id] is one of the layers, or the overlay of a
   /// drag.
-  bool owns(String id) => id == _dragLayerId || (this[id]?._onStyle ?? false);
+  bool owns(String id) =>
+      id == _FeatureDrag.layerId || (this[id]?._onStyle ?? false);
 
-  /// The error of a [Layer.id] with the prefix of the ids that the map
-  /// generates, or null.
-  static ArgumentError? _reserved(String id) {
-    if (!id.startsWith('maplibre-')) return null;
-    return ArgumentError.value(
-      id,
-      'Layer.id',
-      'Ids that start with "maplibre-" are reserved for the map',
-    );
+  // ---------------------------------------------------------------------------
+  // StyleOwner
+
+  @override
+  String get name => 'MapLibreMap.layers';
+
+  @override
+  bool get isWriting => _writing > 0;
+
+  @override
+  bool ownsLayer(String id) =>
+      (id == _FeatureDrag.layerId && _drag != null) ||
+      this[id]?._styleLayer != null;
+
+  @override
+  bool ownsSource(String id) => this[id]?._onStyle ?? false;
+
+  /// Places the layers again after the app added, moved or removed a layer
+  /// of the style, once its changes of this task are done.
+  @override
+  void layoutChanged() {
+    final style = _style;
+    if (style == null || _placeScheduled) return;
+    _placeScheduled = true;
+    scheduleMicrotask(() {
+      _placeScheduled = false;
+      if (identical(_style, style)) _apply(_place);
+    });
   }
-
-  /// The depth of [_apply] calls, while the layers change their own style.
-  var _writing = 0;
-
-  /// Whether [_place] is scheduled after a change of the app to the order
-  /// of the style's layers.
-  var _placeScheduled = false;
 
   // ---------------------------------------------------------------------------
   // Styles
@@ -142,11 +162,7 @@ class AnnotationManager {
   void attach(StyleController style) {
     detach();
     _style = style;
-    setAnnotationLayoutListener(style.layers, () => _schedulePlace(style));
-    setAnnotationSourceGuard(
-      style.sources,
-      (id) => _writing == 0 && (this[id]?._onStyle ?? false),
-    );
+    setStyleOwner(style, this);
     _apply(() {
       for (final entry in _entries) {
         if (_clashes(entry.id, style) != null && entry.layer.id == null) {
@@ -163,9 +179,7 @@ class AnnotationManager {
         entry._onStyle = true;
         unawaited(style.sources.add(_sourceOf(entry)));
       }
-      for (final MapEntry(key: icon, value: image) in _images.entries) {
-        _addImage(icon, image, style);
-      }
+      _images.attach(style);
       _place();
     });
   }
@@ -173,11 +187,9 @@ class AnnotationManager {
   /// Forgets the style, which is about to be replaced or gone, with the
   /// layers on it.
   void detach() {
-    if (_style case final style?) {
-      setAnnotationLayoutListener(style.layers, null);
-      setAnnotationSourceGuard(style.sources, null);
-    }
+    if (_style case final style?) setStyleOwner(style, null);
     _style = null;
+    _drag?.end(null);
     _drag = null;
     for (final entry in _entries) {
       entry
@@ -186,15 +198,11 @@ class AnnotationManager {
       // Without a style, nothing shows the old icon any more.
       _showIcon(entry, entry.layer.icon);
     }
-    for (final image in _images.values) {
-      image
-        ..adding = null
-        ..ready = false;
-    }
+    _images.detach();
   }
 
   /// The error of a [Layer.id] that [style] already uses, or null.
-  ArgumentError? _clashes(String id, StyleController style) {
+  static ArgumentError? _clashes(String id, StyleController style) {
     if (style.layers[id] != null) {
       return ArgumentError.value(
         id,
@@ -212,28 +220,17 @@ class AnnotationManager {
     return null;
   }
 
-  /// Runs [changes] in one batch of the style, as changes of the annotations,
-  /// which may change their own style layers.
+  /// Runs [changes] in one batch of the style, as changes of the owner of
+  /// the layers' style layers and sources.
   void _apply(void Function() changes) {
     final style = _style;
     if (style == null) return changes();
     _writing++;
     try {
-      style.batch(() => writeAsAnnotations(style.layers, changes));
+      style.batch(changes);
     } finally {
       _writing--;
     }
-  }
-
-  /// Places the layers again after the app added, moved or removed a layer
-  /// of [style], once its changes of this task are done.
-  void _schedulePlace(StyleController style) {
-    if (_placeScheduled) return;
-    _placeScheduled = true;
-    scheduleMicrotask(() {
-      _placeScheduled = false;
-      if (identical(_style, style)) _apply(_place);
-    });
   }
 
   // ---------------------------------------------------------------------------
@@ -248,8 +245,8 @@ class AnnotationManager {
   /// get what changed, the others are added and removed. Moves move the
   /// style layers.
   ///
-  /// Throws an [ArgumentError] if a new [Layer.id] is in use by a layer or
-  /// source of the style, or by another layer.
+  /// Throws an [ArgumentError] if a new [Layer.id] is reserved or in use by
+  /// a layer or source of the style, or by another layer.
   void update(List<Layer> layers) {
     assert(() {
       final ids = <String>{};
@@ -286,37 +283,22 @@ class AnnotationManager {
       ...keyed.values,
       for (final queue in unkeyed.values) ...queue,
     ];
-    final kept = {
-      for (final entry in matches)
-        if (entry != null) entry.id,
-    };
 
     // Names the new layers before anything changes, so that a clash leaves
     // the map as it was.
-    final style = _style;
-    final taken = {...kept};
+    final taken = {
+      for (final entry in matches)
+        if (entry != null) entry.id,
+    };
     final ids = <String>[];
     for (final (index, layer) in layers.indexed) {
       if (matches[index] != null) continue;
-      if (layer.id case final id?) {
-        if (taken.contains(id)) {
-          throw ArgumentError.value(
-            id,
-            'Layer.id',
-            'Another layer of MapLibreMap.layers has this id',
-          );
-        }
-        if (_reserved(id) case final error?) throw error;
-        if (style != null && !_isOwn(id, removed)) {
-          if (_clashes(id, style) case final error?) throw error;
-        }
-        taken.add(id);
-        ids.add(id);
-      } else {
-        final id = _generateId(layer, taken, removed);
-        taken.add(id);
-        ids.add(id);
-      }
+      final id = switch (layer.id) {
+        final id? => _checkId(id, taken, removed),
+        null => _generateId(layer, taken, removed),
+      };
+      taken.add(id);
+      ids.add(id);
     }
 
     _apply(() {
@@ -342,74 +324,28 @@ class AnnotationManager {
     });
   }
 
-  /// Adds [layer] at [index] of the list, or on top, and returns its id.
-  ///
-  /// Throws an [ArgumentError] if its [Layer.id] is in use.
-  String add(Layer layer, {int? index}) {
-    final taken = {for (final entry in _entries) entry.id};
-    final String id;
-    if (layer.id case final layerId?) {
-      if (taken.contains(layerId)) {
-        throw ArgumentError.value(
-          layerId,
-          'Layer.id',
-          'Another layer of MapLibreMap.layers has this id',
-        );
-      }
-      if (_reserved(layerId) case final error?) throw error;
-      if (_style case final style?) {
-        if (_clashes(layerId, style) case final error?) throw error;
-      }
-      id = layerId;
-    } else {
-      id = _generateId(layer, taken, const []);
+  /// Returns [id], the [Layer.id] of a new layer, or throws an
+  /// [ArgumentError] if it is reserved, [taken] by another layer, or used by
+  /// the style other than by a [removed] layer.
+  String _checkId(String id, Set<String> taken, List<AnnotationEntry> removed) {
+    if (taken.contains(id)) {
+      throw ArgumentError.value(
+        id,
+        'Layer.id',
+        'Another layer of MapLibreMap.layers has this id',
+      );
     }
-    _apply(() {
-      _entries.insert(index ?? _entries.length, _add(layer, id));
-      _place();
-    });
+    if (id.startsWith('maplibre-')) {
+      throw ArgumentError.value(
+        id,
+        'Layer.id',
+        'Ids that start with "maplibre-" are reserved for the map',
+      );
+    }
+    if (_style case final style? when !_isOwn(id, removed)) {
+      if (_clashes(id, style) case final error?) throw error;
+    }
     return id;
-  }
-
-  /// Changes the layer [id] to [layer], applying only what changed.
-  void updateLayer(String id, Layer layer) {
-    final entry = this[id];
-    if (entry == null) {
-      throw ArgumentError.value(id, 'id', 'There is no such layer');
-    }
-    if (layer.id case final layerId? when layerId != id) {
-      throw ArgumentError.value(layerId, 'layer.id', 'Must be null or "$id"');
-    }
-    _apply(() {
-      if (identical(_drag?.entry, entry)) _checkDrag(layer);
-      _update(entry, layer);
-      _place();
-    });
-  }
-
-  /// Moves the layer [id] to [index] of the list, which moves its style
-  /// layer.
-  void move(String id, int index) {
-    final entry = this[id];
-    if (entry == null) {
-      throw ArgumentError.value(id, 'id', 'There is no such layer');
-    }
-    _apply(() {
-      _entries
-        ..remove(entry)
-        ..insert(index, entry);
-      _place();
-    });
-  }
-
-  /// Removes the layer [id] with its style layer and source.
-  void remove(String id) {
-    final entry = this[id];
-    if (entry == null) return;
-    _apply(() {
-      _remove(entry);
-      _entries.remove(entry);
-    });
   }
 
   /// Ends the drag if [next], the new definition of the dragged layer, or
@@ -452,7 +388,7 @@ class AnnotationManager {
   /// [_place].
   AnnotationEntry _add(Layer layer, String id) {
     final entry = AnnotationEntry._(id, layer);
-    if (layer.icon case final icon?) _acquireImage(icon);
+    if (layer.icon case final icon?) _images.acquire(icon);
     if (_style case final style?) {
       entry._onStyle = true;
       unawaited(style.sources.add(_sourceOf(entry)));
@@ -465,13 +401,12 @@ class AnnotationManager {
     entry._mounted = false;
     if (identical(_drag?.entry, entry)) _finishDrag();
     _showIcon(entry, entry.layer.icon);
-    if (entry.layer.icon case final icon?) _releaseImage(icon);
+    if (entry.layer.icon case final icon?) _images.release(icon);
     final style = _style;
     if (style == null || !entry._onStyle) return;
     entry._onStyle = false;
     if (entry._styleLayer != null) {
       unawaited(style.layers.remove(entry.id));
-      setAnnotationLayer(style.layers, entry.id, owned: false);
       entry._styleLayer = null;
     }
     unawaited(style.sources.remove(entry.id));
@@ -495,11 +430,10 @@ class AnnotationManager {
       final drag = _drag;
       if (drag != null &&
           identical(drag.entry, entry) &&
-          drag.ending &&
-          !drag.committed) {
+          drag.state == _DropState.dropped) {
         // The app saved the dropped feature: show the layer's feature again
         // once the source has it.
-        drag.committed = true;
+        drag.state = _DropState.saved;
         unawaited(
           written.whenComplete(() async {
             await Future<void>.delayed(_retileDelay);
@@ -531,20 +465,17 @@ class AnnotationManager {
     final icon = entry.layer.icon;
     // The new image first, which keeps an image both show. The layer holds
     // the image of its icon and of the icon it shows, once each.
-    if (icon != null && icon != entry._shownIcon) _acquireImage(icon);
+    if (icon != null && icon != entry._shownIcon) _images.acquire(icon);
     // An icon that the layer had but never showed goes at once.
-    if (old != null && old != entry._shownIcon) _releaseImage(old);
+    if (old != null && old != entry._shownIcon) _images.release(old);
     final style = _style;
-    final adding = icon == null ? null : _images[icon]?.adding;
-    if (style == null ||
-        entry._styleLayer == null ||
-        adding == null ||
-        _images[icon]!.ready) {
+    final added = icon == null ? null : _images.whenAdded(icon);
+    if (style == null || entry._styleLayer == null || added == null) {
       _showIcon(entry, icon);
       return;
     }
     unawaited(
-      adding.then((added) {
+      added.then((added) {
         // A failed image keeps the old icon on the map.
         if (!added ||
             !entry.mounted ||
@@ -568,7 +499,7 @@ class AnnotationManager {
     final shown = entry._shownIcon;
     if (shown == icon) return;
     entry._shownIcon = icon;
-    if (shown != null && shown != entry.layer.icon) _releaseImage(shown);
+    if (shown != null && shown != entry.layer.icon) _images.release(shown);
   }
 
   /// Brings the style layer of [entry] to its definition: only its changed
@@ -603,7 +534,7 @@ class AnnotationManager {
       symbol.iconImage = switch (icon) {
         MarkerIconNamed(:final imageId) => Expression.literal(imageId),
         MarkerIconExpression(:final imageId) => imageId,
-        _ => Expression.literal(_images[icon]!.id),
+        _ => Expression.literal(_images.idOf(icon)),
       };
     }
     return styleLayer;
@@ -640,30 +571,44 @@ class AnnotationManager {
   // Order
 
   /// Adds the missing style layers and moves the others into the order of
-  /// the list, by their anchors, with as few moves as it takes.
+  /// the list, by their anchors, see [placeLayers].
   void _place() {
     final style = _style;
     if (style == null) return;
     final own = {for (final entry in _entries) entry.id};
-    final groups = <LayerAnchor, List<AnnotationEntry>>{};
-    for (final entry in _entries) {
-      if (!entry._onStyle) continue;
-      groups.putIfAbsent(_anchorOf(entry, style, own), () => []).add(entry);
+    final onStyle = {
+      for (final entry in _entries)
+        if (entry._onStyle) entry.id: entry,
+    };
+    final drag = _drag;
+    final steps = placeLayers(
+      [for (final layer in style.layers) layer.id],
+      [
+        for (final entry in onStyle.values)
+          (
+            id: entry.id,
+            anchor: _anchorOf(entry, style, own),
+            added: entry._styleLayer != null,
+          ),
+      ],
+      overlay: drag == null
+          ? null
+          : (id: _FeatureDrag.layerId, aboveId: drag.entry.id),
+    );
+    for (final step in steps) {
+      switch (step.kind) {
+        case PlacementKind.move:
+          style.layers.move(step.id, belowLayerId: step.belowLayerId);
+        case PlacementKind.add:
+          final entry = onStyle[step.id]!;
+          final styleLayer = entry._styleLayer = _createStyleLayer(entry);
+          if (drag != null && identical(drag.entry, entry)) _hideDragged(drag);
+          unawaited(
+            _addStyleLayer(style, entry, styleLayer, step.belowLayerId),
+          );
+      }
     }
-    final ids = [for (final layer in style.layers) layer.id];
-    final anchors = groups.keys.toList()
-      ..sort((a, b) => _anchorRank(a).compareTo(_anchorRank(b)));
-    for (final anchor in anchors) {
-      _placeGroup(style, ids, anchor, groups[anchor]!);
-    }
-    _placeOverlay(style, ids);
   }
-
-  static int _anchorRank(LayerAnchor anchor) => switch (anchor) {
-    LayerAnchorTop() => 0,
-    LayerAnchorBottom() => 1,
-    LayerAnchorBelow() || LayerAnchorAbove() => 2,
-  };
 
   /// The anchor of [entry], or [LayerAnchor.top] if the layer it names is not
   /// a layer of the style.
@@ -681,7 +626,7 @@ class AnnotationManager {
     if (layerId == null) return anchor;
     if (style.layers[layerId] != null &&
         !own.contains(layerId) &&
-        layerId != _dragLayerId) {
+        layerId != _FeatureDrag.layerId) {
       entry._warnedAnchor = null;
       return anchor;
     }
@@ -696,104 +641,6 @@ class AnnotationManager {
     return const LayerAnchor.top();
   }
 
-  /// Places the layers of [group], which share [anchor], from the top down.
-  /// [ids] are the ids of the style's layers, which this keeps up to date.
-  void _placeGroup(
-    StyleController style,
-    List<String> ids,
-    LayerAnchor anchor,
-    List<AnnotationEntry> group,
-  ) {
-    final members = {for (final entry in group) entry.id};
-    bool other(String id) => !members.contains(id) && id != _dragLayerId;
-
-    // Whether [index] is where the group goes, among the other layers.
-    bool inRegion(int index) {
-      switch (anchor) {
-        case LayerAnchorTop():
-          for (var i = index + 1; i < ids.length; i++) {
-            if (other(ids[i])) return false;
-          }
-          return true;
-        case LayerAnchorBottom():
-          for (var i = 0; i < index; i++) {
-            if (other(ids[i])) return false;
-          }
-          return true;
-        case LayerAnchorBelow(:final layerId):
-          // Right below the layer, with only the group in between.
-          final anchorIndex = ids.indexOf(layerId);
-          if (index > anchorIndex) return false;
-          for (var i = index + 1; i < anchorIndex; i++) {
-            if (other(ids[i])) return false;
-          }
-          return true;
-        case LayerAnchorAbove(:final layerId):
-          // Right above the layer, with only the group in between.
-          final anchorIndex = ids.indexOf(layerId);
-          if (index < anchorIndex) return false;
-          for (var i = anchorIndex + 1; i < index; i++) {
-            if (other(ids[i])) return false;
-          }
-          return true;
-      }
-    }
-
-    // The layer that the top of the group goes below, or null for the top.
-    String? groupBelow() {
-      switch (anchor) {
-        case LayerAnchorTop():
-          return null;
-        case LayerAnchorBottom():
-          for (final id in ids) {
-            if (other(id)) return id;
-          }
-          return null;
-        case LayerAnchorBelow(:final layerId):
-          return layerId;
-        case LayerAnchorAbove(:final layerId):
-          final index = ids.indexOf(layerId);
-          for (var i = index + 1; i < ids.length; i++) {
-            if (other(ids[i])) return ids[i];
-          }
-          return null;
-      }
-    }
-
-    for (var i = group.length - 1; i >= 0; i--) {
-      final entry = group[i];
-      final index = ids.indexOf(entry.id);
-      // A layer of the app took the id after the map rejected this one.
-      if (entry._styleLayer == null && index != -1) continue;
-      // The map can reject a style layer, which takes it out of the style
-      // again. Such a layer is added again.
-      final missing = index == -1;
-      final above = i + 1 < group.length ? group[i + 1].id : null;
-      if (entry._styleLayer != null &&
-          !missing &&
-          inRegion(index) &&
-          (above == null || index < ids.indexOf(above))) {
-        continue;
-      }
-      final belowLayerId = above ?? groupBelow();
-      if (entry._styleLayer == null || missing) {
-        final styleLayer = entry._styleLayer = _createStyleLayer(entry);
-        setAnnotationLayer(style.layers, entry.id, owned: true);
-        if (_drag case final drag? when identical(drag.entry, entry)) {
-          _hideDragged(drag);
-        }
-        unawaited(_addStyleLayer(style, entry, styleLayer, belowLayerId));
-      } else {
-        style.layers.move(entry.id, belowLayerId: belowLayerId);
-        ids.removeAt(index);
-      }
-      ids.insert(
-        belowLayerId == null ? ids.length : ids.indexOf(belowLayerId),
-        entry.id,
-      );
-    }
-  }
-
   /// Adds [styleLayer] of [entry] to [style]. If the map rejects it, the
   /// error is reported and the next placement adds the layer again.
   Future<void> _addStyleLayer(
@@ -806,154 +653,11 @@ class AnnotationManager {
       await style.layers.add(styleLayer, belowLayerId: belowLayerId);
     } on Object catch (error, stack) {
       // The style took the layer out again.
-      if (identical(entry._styleLayer, styleLayer)) {
-        entry._styleLayer = null;
-        setAnnotationLayer(style.layers, entry.id, owned: false);
-      }
+      if (identical(entry._styleLayer, styleLayer)) entry._styleLayer = null;
       if (identical(_style, style)) {
         _report(error, stack, 'while adding MapLibreMap.layers');
       }
     }
-  }
-
-  /// Keeps the overlay of the drag right above the layer of the dragged
-  /// feature.
-  void _placeOverlay(StyleController style, List<String> ids) {
-    final drag = _drag;
-    if (drag == null) return;
-    final layerIndex = ids.indexOf(drag.entry.id);
-    final index = ids.indexOf(_dragLayerId);
-    if (layerIndex == -1 || index == -1 || index == layerIndex + 1) return;
-    ids.removeAt(index);
-    final above = ids.indexOf(drag.entry.id) + 1;
-    style.layers.move(
-      _dragLayerId,
-      belowLayerId: above < ids.length ? ids[above] : null,
-    );
-  }
-
-  // ---------------------------------------------------------------------------
-  // Images
-
-  /// Whether the map adds the image of [icon] to the style, instead of
-  /// [icon] naming images that the style has.
-  static bool _addsImage(MarkerIcon icon) =>
-      icon is! MarkerIconNamed && icon is! MarkerIconExpression;
-
-  /// Adds a user of the image of [icon], which adds the image to the style
-  /// for the first one.
-  void _acquireImage(MarkerIcon icon) {
-    if (!_addsImage(icon)) return;
-    final image = _images.putIfAbsent(
-      icon,
-      () => _StyleImage('maplibre-icon-${++_imageCounter}'),
-    );
-    image.users++;
-    if (image.users == 1 && _style != null) _addImage(icon, image, _style!);
-  }
-
-  /// Takes a user of the image of [icon] away, which removes the image from
-  /// the style after the last one.
-  void _releaseImage(MarkerIcon icon) {
-    if (!_addsImage(icon)) return;
-    final image = _images[icon];
-    if (image == null || --image.users > 0) return;
-    _images.remove(icon);
-    final style = _style;
-    final adding = image.adding;
-    if (style == null || adding == null) return;
-    image.adding = null;
-    unawaited(
-      adding
-          .then((_) async {
-            if (identical(_style, style)) await style.removeImage(image.id);
-          })
-          .catchError((Object error, StackTrace stack) {
-            if (identical(_style, style)) {
-              _report(
-                error,
-                stack,
-                'while removing the image of a marker icon',
-              );
-            }
-          }),
-    );
-  }
-
-  void _addImage(MarkerIcon icon, _StyleImage image, StyleController style) {
-    image.ready = false;
-    final adding = image.adding = _addImageTo(style, icon, image.id);
-    unawaited(
-      adding.then((added) {
-        if (identical(image.adding, adding)) image.ready = added;
-      }),
-    );
-  }
-
-  /// Adds the image of [icon] to [style] and returns whether it worked.
-  Future<bool> _addImageTo(
-    StyleController style,
-    MarkerIcon icon,
-    String id,
-  ) async {
-    try {
-      await _loadImage(icon, id, style);
-      return true;
-    } on Object catch (error, stack) {
-      // An image of a style that is gone needs no report.
-      if (identical(_style, style)) {
-        _report(error, stack, 'while adding the image of a marker icon');
-      }
-      return false;
-    }
-  }
-
-  static Future<void> _loadImage(
-    MarkerIcon icon,
-    String id,
-    StyleController style,
-  ) async {
-    switch (icon) {
-      case MarkerIconData(:final icon, :final color, :final size):
-        await style.addImageFromIconData(
-          id: id,
-          iconData: icon,
-          color: color,
-          size: size,
-        );
-      case MarkerIconAsset(:final path, :final pixelRatio):
-        await style.addImageFromAssets(
-          id: id,
-          asset: path,
-          pixelRatio: pixelRatio,
-        );
-      case MarkerIconBytes(:final bytes, :final pixelRatio):
-        await style.addImage(id, bytes, pixelRatio: pixelRatio);
-      case MarkerIconProvider(:final provider):
-        final info = await resolveImageInfo(provider);
-        try {
-          await style.addImageFromUiImage(
-            id: id,
-            image: info.image,
-            pixelRatio: info.scale,
-          );
-        } finally {
-          info.dispose();
-        }
-      case MarkerIconNamed() || MarkerIconExpression():
-        break;
-    }
-  }
-
-  static void _report(Object error, StackTrace stack, String context) {
-    FlutterError.reportError(
-      FlutterErrorDetails(
-        exception: error,
-        stack: stack,
-        library: 'maplibre',
-        context: ErrorDescription(context),
-      ),
-    );
   }
 
   // ---------------------------------------------------------------------------
@@ -961,9 +665,9 @@ class AnnotationManager {
 
   /// Lets the user drag the feature [featureIndex] of the layer of [entry].
   ///
-  /// The feature moves to a one-feature overlay above its layer, and its
-  /// layer hides it, so that [moveDrag] moves it without writing the
-  /// layer's whole source.
+  /// The feature moves to the overlay of a [_FeatureDrag], and its layer
+  /// hides it, so that [moveDrag] moves it without writing the layer's
+  /// whole source.
   void startDrag(AnnotationEntry entry, int featureIndex) {
     final style = _style;
     if (style == null) return;
@@ -986,54 +690,19 @@ class AnnotationManager {
         feature,
         _overlayOf(entry),
       );
-      unawaited(
-        style.sources.add(
-          GeoJsonSource.data(
-            id: _dragSourceId,
-            data: _overlayData(drag, geometry),
-          ),
-        ),
-      );
       final ids = [for (final layer in style.layers) layer.id];
       final above = ids.indexOf(entry.id) + 1;
-      setAnnotationLayer(style.layers, _dragLayerId, owned: true);
-      unawaited(
-        style.layers.add(
-          drag.overlay,
-          belowLayerId: above < ids.length ? ids[above] : null,
-        ),
-      );
+      drag.show(style, geometry, above < ids.length ? ids[above] : null);
       _hideDragged(drag);
     });
   }
 
-  /// Shows the dragged feature with [geometry]. Only the latest geometry is
-  /// sent while the map still takes the one before.
+  /// Shows the dragged feature with [geometry].
   void moveDrag(Geometry geometry) {
     final drag = _drag;
-    if (drag == null || drag.ending) return;
-    drag.next = geometry;
-    if (!drag.sending) unawaited(_sendDrag(drag));
-  }
-
-  Future<void> _sendDrag(_FeatureDrag drag) async {
-    drag.sending = true;
-    try {
-      while (identical(_drag, drag)) {
-        final geometry = drag.next;
-        final style = _style;
-        if (geometry == null || style == null) break;
-        drag.next = null;
-        await style.sources.updateGeoJsonData(
-          _dragSourceId,
-          _overlayData(drag, geometry),
-        );
-      }
-    } on Object catch (error, stack) {
-      _report(error, stack, 'while moving a dragged feature');
-    } finally {
-      drag.sending = false;
-    }
+    final style = _style;
+    if (drag == null || style == null) return;
+    if (drag.state == _DropState.dragging) drag.move(style, geometry);
   }
 
   /// Ends the drag. The feature stays in the overlay until the app saves it
@@ -1041,11 +710,13 @@ class AnnotationManager {
   /// the app doesn't.
   void endDrag() {
     final drag = _drag;
-    if (drag == null || drag.ending) return;
-    drag.ending = true;
+    if (drag == null || drag.state != _DropState.dragging) return;
+    drag.state = _DropState.dropped;
     SchedulerBinding.instance
       ..addPostFrameCallback((_) {
-        if (identical(_drag, drag) && !drag.committed) _apply(_finishDrag);
+        if (identical(_drag, drag) && drag.state == _DropState.dropped) {
+          _apply(_finishDrag);
+        }
       })
       ..scheduleFrame();
   }
@@ -1057,10 +728,8 @@ class AnnotationManager {
     if (drag == null) return;
     _drag = null;
     final style = _style;
+    drag.end(style);
     if (style == null) return;
-    unawaited(style.layers.remove(_dragLayerId));
-    setAnnotationLayer(style.layers, _dragLayerId, owned: false);
-    unawaited(style.sources.remove(_dragSourceId));
     final entry = drag.entry;
     if (entry._styleLayer case final styleLayer? when entry.mounted) {
       styleLayer.filter = _createStyleLayer(entry).filter;
@@ -1069,73 +738,26 @@ class AnnotationManager {
 
   /// Hides the dragged feature in its layer.
   void _hideDragged(_FeatureDrag drag) {
-    final entry = drag.entry;
-    final styleLayer = entry._styleLayer;
+    final styleLayer = drag.entry._styleLayer;
     if (styleLayer == null) return;
-    final own = _createStyleLayer(entry).filter;
-    final hide = Expression.notEqual(
-      Expression.get(featureIndexProperty),
-      Expression.literal(drag.featureIndex),
-    );
-    styleLayer.filter = own == null ? hide : Expression.all([own, hide]);
+    final own = _createStyleLayer(drag.entry).filter;
+    styleLayer.filter = drag.hidingFilter(own);
   }
 
   StyleLayer _overlayOf(AnnotationEntry entry) => StyleLayer.fromJson({
     ..._createStyleLayer(entry).toJson(),
-    'id': _dragLayerId,
-    'source': _dragSourceId,
+    'id': _FeatureDrag.layerId,
+    'source': _FeatureDrag.sourceId,
   });
-
-  static GeoJsonData _overlayData(_FeatureDrag drag, Geometry geometry) =>
-      .featureCollection(
-        FeatureCollection([
-          Feature(
-            id: drag.feature.id,
-            geometry: geometry,
-            properties: {
-              ...drag.feature.properties,
-              featureIndexProperty: drag.featureIndex,
-            },
-          ),
-        ]),
-      );
 }
 
-/// An image that the icons of layers show.
-class _StyleImage {
-  _StyleImage(this.id);
-
-  /// The id of the image in the style.
-  final String id;
-
-  /// The number of layers that show it.
-  int users = 0;
-
-  /// Adds the image to the current style and completes with whether that
-  /// worked, null while no style has it.
-  Future<bool>? adding;
-
-  /// Whether [adding] added the image.
-  bool ready = false;
-}
-
-/// A feature that the user drags, shown in an overlay.
-class _FeatureDrag {
-  _FeatureDrag(this.entry, this.featureIndex, this.feature, this.overlay);
-
-  final AnnotationEntry entry;
-  final int featureIndex;
-  final Feature feature;
-
-  /// The style layer that shows the feature while it is dragged.
-  final StyleLayer overlay;
-
-  /// The geometry to show next, while the map still takes the one before.
-  Geometry? next;
-  bool sending = false;
-
-  /// Whether the user dropped the feature, and whether the app then saved
-  /// it in the layer.
-  bool ending = false;
-  bool committed = false;
+void _report(Object error, StackTrace stack, String context) {
+  FlutterError.reportError(
+    FlutterErrorDetails(
+      exception: error,
+      stack: stack,
+      library: 'maplibre',
+      context: ErrorDescription(context),
+    ),
+  );
 }

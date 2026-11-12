@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/painting.dart';
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 import 'package:maplibre_platform_interface/src/style/expressions/expression_json.dart';
+import 'package:maplibre_platform_interface/src/style/style_owner.dart';
 
 part 'geo_json_data.dart';
 part 'geo_json_source.dart';

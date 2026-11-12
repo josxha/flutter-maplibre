@@ -428,19 +428,25 @@ Each entry: the decision, then why.
   style layer, not `runtimeType`, which dart2js minifies in release builds.
   `Layer.id` must not start with `maplibre-`, and a generated id that a
   newly loaded style already uses gets the next number instead of leaving
-  the layer off that style.
-  The manager also has id-keyed `add`, `updateLayer`, `move` and `remove`,
-  unused by the widget, for a later imperative API.
+  the layer off that style. `update` is the only way in: an imperative
+  API (id-keyed add, move, remove) waits for a public design.
+- **The manager is split by job (#680 review):** `annotation_manager.dart`
+  matches the list and coordinates; `annotation_placement.dart` is the pure
+  `placeLayers` (style ids and anchors in, add and move steps out, table
+  tested in `annotation_placement_test.dart`); the parts
+  `annotation_images.dart` (ref-counted images, `_ImageState` loading,
+  ready, failed) and `annotation_drag.dart` (the overlay, `_DropState`
+  dragging, dropped, saved) hold the other two.
 - **The list is the draw order, and `Layer.anchor` (top, bottom, below or
   above a style layer, after maplibre-compose's `Anchor`) groups layers.**
-  Each group keeps list order; `_place` walks a group from the top down and
+  Each group keeps list order; `placeLayers` walks a group from the top down and
   moves (`StyleLayers.move`) or adds a layer only when it is out of order or
   out of its anchor's region, so a rebuild usually makes no calls. Top and
   bottom mean above or below every layer that is not in the group. An anchor
   that names a layer the style lacks, or a layer of the list, falls back to
   the top with a debug warning, and is retried on every rebuild. The
   manager also places the layers again in a microtask after the app adds,
-  moves or removes a style layer (`setAnnotationLayoutListener`), so a
+  moves or removes a style layer (`StyleOwner.layoutChanged`), so a
   divider layer added after an await in `onStyleLoaded` needs no rebuild.
   A `.below(x)` or `.above(x)` group must sit right next to `x`. Taps,
   hovers and drags pick the layer drawn on top by its index in
@@ -448,12 +454,15 @@ Each entry: the decision, then why.
 - **The style layers of the annotations are protected in
   `StyleController.layers`.** `remove` and `move` of them throw a
   `StateError`, and their setters warn once in debug builds, unless the
-  manager makes the change inside `writeAsAnnotations`; the next rebuild
-  would undo it otherwise. Writes to their GeoJSON sources warn once in
-  debug builds (`setAnnotationSourceGuard`). `setAnnotationLayer`,
-  `setAnnotationLayoutListener`, `writeAsAnnotations` and
-  `setAnnotationSourceGuard` are top-level functions of the style layer and
-  source libraries that `style.dart` hides from the public API.
+  manager makes the change itself (`StyleOwner.isWriting`); the next
+  rebuild would undo it otherwise. Writes to their GeoJSON sources warn
+  once in debug builds. Both collections ask one internal interface,
+  `StyleOwner` (`lib/src/style/style_owner.dart`: `ownsLayer`,
+  `ownsSource`, `isWriting`, `layoutChanged`), which the manager implements
+  and sets with `setStyleOwner`; they keep no ids or counters of their own
+  and don't name `MapLibreMap.layers` except through `StyleOwner.name`.
+  The setter of each collection is a top-level function that `style.dart`
+  hides from the public API.
 - **`MarkerLayer.icon` is the only image parameter of a marker layer: a
   sealed `MarkerIcon` (icon data, asset, bytes, `ImageProvider`, the id of
   an image the style has, or an expression that picks one per feature).**

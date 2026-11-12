@@ -47,7 +47,7 @@ class _Backend extends Mock implements StyleBackend {
 }
 
 void main() {
-  group('AnnotationManager', () {
+  group('AnnotationManager with the layers of maplibre', () {
     late StyleController style;
     late _Backend backend;
     setUp(() {

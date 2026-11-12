@@ -18,32 +18,30 @@ final class StyleLayers extends Iterable<StyleLayer> {
   final _layers = <StyleLayer>[];
   final ValueNotifier<int> _callbacks = ValueNotifier(0);
 
-  /// The ids of the layers that [MapLibreMap.layers] owns, see
-  /// [setAnnotationLayer].
-  final _annotationIds = <String>{};
+  /// The part of the map that owns some of the layers, see
+  /// [setStyleLayersOwner].
+  StyleOwner? _styleOwner;
 
-  /// Whether the annotations of [MapLibreMap.layers] change their own
-  /// layers, see [writeAsAnnotations].
-  var _annotationWrites = 0;
-
-  /// Called after a layer was added, moved or removed other than by
-  /// [MapLibreMap.layers], see [setAnnotationLayoutListener].
-  VoidCallback? _onLayoutChanged;
-
+  /// Tells the owner that the app added, moved or removed a layer.
   void _layoutChanged() {
-    if (_annotationWrites == 0) _onLayoutChanged?.call();
+    final owner = _styleOwner;
+    if (owner != null && !owner.isWriting) owner.layoutChanged();
   }
 
-  /// Whether the layer [id] belongs to [MapLibreMap.layers] and the change
-  /// doesn't come from there.
-  bool _isForeignWrite(String id) =>
-      _annotationWrites == 0 && _annotationIds.contains(id);
+  /// The owner of the layer [id], if the layer has one and the change doesn't
+  /// come from it.
+  StyleOwner? _foreignOwnerOf(String id) {
+    final owner = _styleOwner;
+    if (owner == null || owner.isWriting || !owner.ownsLayer(id)) return null;
+    return owner;
+  }
 
-  void _checkNotAnnotation(String id, String change) {
-    if (!_isForeignWrite(id)) return;
+  void _checkNotOwned(String id, String change) {
+    final owner = _foreignOwnerOf(id);
+    if (owner == null) return;
     throw StateError(
-      'The style layer "$id" belongs to MapLibreMap.layers and cannot be '
-      '$change here. Change MapLibreMap.layers instead.',
+      'The style layer "$id" belongs to ${owner.name} and cannot be '
+      '$change here. Change ${owner.name} instead.',
     );
   }
 
@@ -126,8 +124,7 @@ final class StyleLayers extends Iterable<StyleLayer> {
   Future<void> remove(String id) async {
     final index = _indexOf(id);
     if (index == -1) return;
-    _checkNotAnnotation(id, 'removed');
-    _annotationIds.remove(id);
+    _checkNotOwned(id, 'removed');
     final layer = _layers.removeAt(index);
     _detach(layer);
     if (layer._hasCallbacks) _callbacksChanged();
@@ -146,7 +143,7 @@ final class StyleLayers extends Iterable<StyleLayer> {
     if (index == -1) {
       throw ArgumentError.value(id, 'id', 'The style has no such layer');
     }
-    _checkNotAnnotation(id, 'moved');
+    _checkNotOwned(id, 'moved');
     if (id == belowLayerId) return;
     if (belowLayerId != null && _indexOf(belowLayerId) == -1) {
       throw ArgumentError.value(
@@ -179,7 +176,6 @@ final class StyleLayers extends Iterable<StyleLayer> {
     final hadCallbacks = _layers.any((layer) => layer._hasCallbacks);
     _layers.forEach(_detach);
     _layers.clear();
-    _annotationIds.clear();
     if (hadCallbacks) _callbacksChanged();
   }
 
@@ -194,37 +190,10 @@ final class StyleLayers extends Iterable<StyleLayer> {
   void _detach(StyleLayer layer) => layer._owner = null;
 }
 
-/// Marks the layer [id] of [layers] as one that [MapLibreMap.layers] owns, or
-/// no longer, if [owned] is false. Changes to it that don't come from
-/// [writeAsAnnotations] then fail or warn.
+/// Makes [owner] the owner of some layers of [layers], or no one if it is
+/// null, see [setStyleOwner].
 ///
 /// Not part of the public API: `style.dart` hides it.
-void setAnnotationLayer(StyleLayers layers, String id, {required bool owned}) {
-  if (owned) {
-    layers._annotationIds.add(id);
-  } else {
-    layers._annotationIds.remove(id);
-  }
-}
-
-/// Calls [listener] after a layer of [layers] was added, moved or removed
-/// other than in [writeAsAnnotations], so that [MapLibreMap.layers] can keep
-/// their place. Null stops calling it.
-///
-/// Not part of the public API: `style.dart` hides it.
-void setAnnotationLayoutListener(StyleLayers layers, VoidCallback? listener) {
-  layers._onLayoutChanged = listener;
-}
-
-/// Runs [changes] as changes of [MapLibreMap.layers], which may change the
-/// layers that [setAnnotationLayer] marked.
-///
-/// Not part of the public API: `style.dart` hides it.
-void writeAsAnnotations(StyleLayers layers, void Function() changes) {
-  layers._annotationWrites++;
-  try {
-    changes();
-  } finally {
-    layers._annotationWrites--;
-  }
+void setStyleLayersOwner(StyleLayers layers, StyleOwner? owner) {
+  layers._styleOwner = owner;
 }
