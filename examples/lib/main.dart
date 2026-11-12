@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:maplibre_example/animation_page.dart';
 import 'package:maplibre_example/controller_page.dart';
 import 'package:maplibre_example/events_page.dart';
@@ -34,6 +33,7 @@ import 'package:maplibre_example/two_maps_page.dart';
 import 'package:maplibre_example/user_location_page.dart';
 import 'package:maplibre_example/widget_layer_interactive_page.dart';
 import 'package:maplibre_example/widget_layer_page.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   // required if using maplibre is embedded in a WebView (windows, macOS)
