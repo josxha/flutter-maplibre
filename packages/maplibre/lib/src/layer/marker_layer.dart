@@ -15,7 +15,7 @@ class MarkerLayer extends Layer<Feature<Point>> {
     this.iconIgnorePlacement = const .literal(false),
     this.iconOptional = const .literal(false),
     this.iconSize = const .literal(1),
-    this.iconImage,
+    this.icon,
     this.iconRotate = const .literal(0),
     this.iconPadding = const .literal([2]),
     this.iconKeepUpright = const .literal(false),
@@ -51,6 +51,8 @@ class MarkerLayer extends Layer<Feature<Point>> {
     this.textHaloBlur = const .literal(0),
     this.textTranslate = const .literal(Offset.zero),
     this.iconAnchor = const .literal(IconAnchor.center),
+    super.id,
+    super.anchor,
     super.minZoom = 0,
     super.maxZoom = 24,
     super.draggable,
@@ -61,6 +63,22 @@ class MarkerLayer extends Layer<Feature<Point>> {
     super.onEnter,
     super.onLeave,
   }) : super(list: points);
+
+  /// The image of the markers, which the map adds to the style, shares with
+  /// other layers that show it and adds again when another style loads.
+  ///
+  /// ```dart
+  /// MarkerLayer(
+  ///   points: points,
+  ///   icon: const .iconData(Icons.location_on, color: Color(0xFFFF0000)),
+  ///   iconAnchor: const .literal(.bottom),
+  /// )
+  /// ```
+  ///
+  /// `.named()` shows an image that the style already has, such as one of
+  /// its sprite, and `.expression()` picks one per feature.
+  @override
+  final MarkerIcon? icon;
 
   /// If true, the icon will be visible even if it collides with other
   /// previously drawn symbols.
@@ -77,9 +95,6 @@ class MarkerLayer extends Layer<Feature<Point>> {
   /// pixel size of the image will be the original pixel size multiplied by
   /// icon-size. 1 is the original size; 3 triples the size of the image.
   final Expression<num> iconSize;
-
-  /// Name of image in sprite to use for drawing an image background.
-  final Expression<String>? iconImage;
 
   /// Rotates the icon clockwise.
   final Expression<num> iconRotate;
@@ -202,49 +217,49 @@ class MarkerLayer extends Layer<Feature<Point>> {
   final Expression<IconAnchor> iconAnchor;
 
   @override
-  StyleLayer createStyleLayer(int index) => SymbolStyleLayer(
-    id: getLayerId(index),
-    sourceId: getSourceId(index),
-    minZoom: minZoom,
-    maxZoom: maxZoom,
-    iconAllowOverlap: iconAllowOverlap,
-    iconIgnorePlacement: iconIgnorePlacement,
-    iconOptional: iconOptional,
-    iconSize: iconSize,
-    iconImage: iconImage,
-    iconRotate: iconRotate,
-    iconPadding: iconPadding,
-    iconKeepUpright: iconKeepUpright,
-    iconOffset: iconOffset,
-    iconAnchor: iconAnchor,
-    textField: textField,
-    textFont: textFont,
-    textSize: textSize,
-    textMaxWidth: textMaxWidth,
-    textLineHeight: textLineHeight,
-    textLetterSpacing: textLetterSpacing,
-    textRadialOffset: textRadialOffset,
-    textMaxAngle: textMaxAngle,
-    textRotate: textRotate,
-    textPadding: textPadding,
-    textKeepUpright: textKeepUpright,
-    textOffset: textOffset,
-    textAllowOverlap: textAllowOverlap,
-    textIgnorePlacement: textIgnorePlacement,
-    textOptional: textOptional,
-    iconOpacity: iconOpacity,
-    iconColor: iconColor,
-    iconHaloColor: iconHaloColor,
-    iconHaloWidth: iconHaloWidth,
-    iconHaloBlur: iconHaloBlur,
-    iconTranslate: iconTranslate,
-    textOpacity: textOpacity,
-    textColor: textColor,
-    textHaloColor: textHaloColor,
-    textHaloWidth: textHaloWidth,
-    textHaloBlur: textHaloBlur,
-    textTranslate: textTranslate,
-  );
+  StyleLayer createStyleLayer({required String id, required String sourceId}) =>
+      SymbolStyleLayer(
+        id: id,
+        sourceId: sourceId,
+        minZoom: minZoom,
+        maxZoom: maxZoom,
+        iconAllowOverlap: iconAllowOverlap,
+        iconIgnorePlacement: iconIgnorePlacement,
+        iconOptional: iconOptional,
+        iconSize: iconSize,
+        iconRotate: iconRotate,
+        iconPadding: iconPadding,
+        iconKeepUpright: iconKeepUpright,
+        iconOffset: iconOffset,
+        iconAnchor: iconAnchor,
+        textField: textField,
+        textFont: textFont,
+        textSize: textSize,
+        textMaxWidth: textMaxWidth,
+        textLineHeight: textLineHeight,
+        textLetterSpacing: textLetterSpacing,
+        textRadialOffset: textRadialOffset,
+        textMaxAngle: textMaxAngle,
+        textRotate: textRotate,
+        textPadding: textPadding,
+        textKeepUpright: textKeepUpright,
+        textOffset: textOffset,
+        textAllowOverlap: textAllowOverlap,
+        textIgnorePlacement: textIgnorePlacement,
+        textOptional: textOptional,
+        iconOpacity: iconOpacity,
+        iconColor: iconColor,
+        iconHaloColor: iconHaloColor,
+        iconHaloWidth: iconHaloWidth,
+        iconHaloBlur: iconHaloBlur,
+        iconTranslate: iconTranslate,
+        textOpacity: textOpacity,
+        textColor: textColor,
+        textHaloColor: textHaloColor,
+        textHaloWidth: textHaloWidth,
+        textHaloBlur: textHaloBlur,
+        textTranslate: textTranslate,
+      );
 
   @override
   bool operator ==(Object other) =>
@@ -256,7 +271,6 @@ class MarkerLayer extends Layer<Feature<Point>> {
           iconIgnorePlacement == other.iconIgnorePlacement &&
           iconOptional == other.iconOptional &&
           iconSize == other.iconSize &&
-          iconImage == other.iconImage &&
           iconRotate == other.iconRotate &&
           iconPadding == other.iconPadding &&
           iconKeepUpright == other.iconKeepUpright &&
@@ -297,7 +311,6 @@ class MarkerLayer extends Layer<Feature<Point>> {
     iconIgnorePlacement,
     iconOptional,
     iconSize,
-    iconImage,
     iconRotate,
     iconPadding,
     iconKeepUpright,

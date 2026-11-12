@@ -24,6 +24,28 @@ final class StyleSources extends Iterable<Source> {
   /// TileJSON resource added: an update must not carry that over.
   final _specifications = <String, Map<String, Object?>>{};
 
+  /// The part of the map that owns some of the sources, see
+  /// [setStyleSourcesOwner].
+  StyleOwner? _styleOwner;
+
+  /// The owned sources that debug builds warned about.
+  final _warnedOwned = <String>{};
+
+  /// A source that another part of the map owns, such as the source of a
+  /// layer of [MapLibreMap.layers], gets its data from there, which
+  /// overrides other changes, so debug builds warn once.
+  void _warnIfOwned(String id) {
+    final owner = _styleOwner;
+    if (owner == null || owner.isWriting || !owner.ownsSource(id)) return;
+    if (!_warnedOwned.add(id)) return;
+    if (kDebugMode) {
+      debugPrint(
+        'maplibre: the source "$id" belongs to ${owner.name}, which '
+        'overrides changes made to it here. Change ${owner.name} instead.',
+      );
+    }
+  }
+
   @override
   Iterator<Source> get iterator => _sources.values.iterator;
 
@@ -83,13 +105,21 @@ final class StyleSources extends Iterable<Source> {
   }
 
   /// Replaces the data of the GeoJSON source [id] with [data].
+  ///
+  /// The source of a layer of [MapLibreMap.layers] gets its data from that
+  /// list: change the list instead.
   Future<void> updateGeoJsonData(String id, GeoJsonData data) async {
+    _warnIfOwned(id);
     _sources[id] = _sourceOfType<GeoJsonSource>(id)._withData(data);
     await _backend.setGeoJsonData(id, data);
   }
 
   /// Makes the GeoJSON source [id] load its data from [url].
+  ///
+  /// The source of a layer of [MapLibreMap.layers] gets its data from that
+  /// list: change the list instead.
   Future<void> updateGeoJsonUrl(String id, String url) async {
+    _warnIfOwned(id);
     _sources[id] = _sourceOfType<GeoJsonSource>(id)._withUrl(url);
     await _backend.setGeoJsonUrl(id, url);
   }
@@ -221,4 +251,12 @@ final class StyleSources extends Iterable<Source> {
     _sources[id] = Source.fromJson(id, specification);
     _specifications[id] = specification;
   }
+}
+
+/// Makes [owner] the owner of some sources of [sources], or no one if it is
+/// null, see [setStyleOwner].
+///
+/// Not part of the public API: `style.dart` hides it.
+void setStyleSourcesOwner(StyleSources sources, StyleOwner? owner) {
+  sources._styleOwner = owner;
 }

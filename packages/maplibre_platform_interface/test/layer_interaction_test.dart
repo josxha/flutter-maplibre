@@ -4,6 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
+import 'package:maplibre_platform_interface/src/layer/annotation_manager.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'shared/recording_style_backend.dart';
@@ -57,7 +58,11 @@ class _State extends MapLibreMapState {
   StyleController? style;
 
   /// Hands out [style] and rebuilds, like the platforms once a style loaded.
-  void loadStyle(StyleController style) => setState(() => this.style = style);
+  void loadStyle(StyleController style) {
+    detachAnnotations();
+    setState(() => this.style = style);
+    attachAnnotations(style);
+  }
 
   /// The features of style layers, by layer id, with where they are on the
   /// screen.
@@ -94,24 +99,44 @@ class _State extends MapLibreMapState {
       ),
       _ => throw UnimplementedError(),
     };
-    return [
-      for (final (layerIndex, layer) in widget.layers.indexed.toList().reversed)
-        if (layerIds!.contains(layer.getLayerId(layerIndex)))
-          for (final (index, feature) in layer.list.indexed)
-            if (feature.geometry case Point(:final position)
-                when rect.contains(_toScreen(Geographic.from(position))))
+    // Without a style, the layers of the list are drawn in its order.
+    final drawOrder = [
+      for (final layer in style?.layers ?? const <StyleLayer>[]) layer.id,
+      if (style == null)
+        for (final layer in widget.layers) annotationLayerId(layer)!,
+    ];
+    final annotations = {
+      for (final layer in widget.layers) annotationLayerId(layer)!: layer,
+    };
+    final features = <RenderedFeature>[];
+    // Topmost first.
+    for (final layerId in drawOrder.reversed) {
+      if (!layerIds!.contains(layerId)) continue;
+      if (annotations[layerId] case final layer?) {
+        for (final (index, feature) in layer.list.indexed) {
+          if (feature.geometry case Point(:final position)
+              when rect.contains(_toScreen(Geographic.from(position)))) {
+            features.add(
               RenderedFeature(
                 id: null,
-                properties: {LayerManager.featureIndexProperty: index},
-                layerId: layer.getLayerId(layerIndex),
+                properties: {AnnotationManager.featureIndexProperty: index},
+                layerId: layerId,
               ),
-      for (final layer in style?.layers.toList().reversed ?? <StyleLayer>[])
-        if (layerIds!.contains(layer.id))
-          for (final (position, id)
-              in styleFeatures[layer.id] ?? const <(Offset, Object?)>[])
-            if (rect.contains(position))
-              RenderedFeature(id: id, properties: const {}, layerId: layer.id),
-    ];
+            );
+          }
+        }
+      } else {
+        for (final (position, id)
+            in styleFeatures[layerId] ?? const <(Offset, Object?)>[]) {
+          if (rect.contains(position)) {
+            features.add(
+              RenderedFeature(id: id, properties: const {}, layerId: layerId),
+            );
+          }
+        }
+      }
+    }
+    return features;
   }
 
   @override
@@ -124,7 +149,7 @@ class _State extends MapLibreMapState {
 
 class _Style implements StyleController {
   _Style() {
-    final sources = StyleSources(_backend, layers: () => layers);
+    sources = StyleSources(_backend, layers: () => layers);
     layers = StyleLayers(_backend, sources: sources);
   }
 
@@ -132,6 +157,12 @@ class _Style implements StyleController {
 
   @override
   late final StyleLayers layers;
+
+  @override
+  late final StyleSources sources;
+
+  @override
+  void batch(void Function() updates) => updates();
 
   @override
   dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
@@ -148,6 +179,8 @@ class _Platform extends MapLibrePlatform with MockPlatformInterfaceMixin {
 class _PointLayer extends Layer<Feature<Point>> {
   const _PointLayer({
     required super.list,
+    super.id,
+    super.anchor,
     super.draggable,
     super.onDragStart,
     super.onDrag,
@@ -158,8 +191,8 @@ class _PointLayer extends Layer<Feature<Point>> {
   });
 
   @override
-  StyleLayer createStyleLayer(int index) =>
-      CircleStyleLayer(id: getLayerId(index), sourceId: getSourceId(index));
+  StyleLayer createStyleLayer({required String id, required String sourceId}) =>
+      CircleStyleLayer(id: id, sourceId: sourceId);
 }
 
 Feature<Point> _point(double lon, double lat) => Feature(
@@ -654,6 +687,133 @@ void main() {
       await mouse.moveTo(const Offset(900, 400));
       await tester.pump();
       expect(events, ['leave b null']);
+    });
+  });
+
+  group('layer identity', () {
+    Future<void> pumpLayers(WidgetTester tester, List<Layer> layers) async {
+      await tester.pumpWidget(
+        Directionality(
+          textDirection: TextDirection.ltr,
+          child: MapLibreMap(layers: layers),
+        ),
+      );
+    }
+
+    testWidgets('the layer drawn on top wins, whatever its place in the '
+        'list', (tester) async {
+      await pumpMap(tester, const []);
+      final style = _Style();
+      style.layers.load([
+        {'id': 'labels', 'type': 'background'},
+      ]);
+      platform.state.loadStyle(style);
+      await tester.pump();
+      final below = <String>[];
+      await pumpLayers(tester, [
+        draggable([_point(0, 0)]),
+        // Later in the list, but drawn below the first layer.
+        _PointLayer(
+          list: [_point(0, 0)],
+          anchor: const .below('labels'),
+          draggable: true,
+          onDragStart: (event) => below.add('start'),
+        ),
+      ]);
+      expect(
+        [for (final layer in style.layers) layer.id],
+        ['maplibre-circle-2', 'labels', 'maplibre-circle-1'],
+      );
+      await drag(tester, _center, const Offset(0, 50));
+      expect(below, isEmpty);
+      expect(drags.first.$1, 'start');
+    });
+
+    testWidgets('a drag stays on its layer while the list is reordered', (
+      tester,
+    ) async {
+      final other = <(String, LayerFeatureEvent)>[];
+      final b = _PointLayer(
+        id: 'b',
+        list: [_point(36, 0)],
+        draggable: true,
+        onDragEnd: (event) => other.add(('end', event)),
+      );
+      _PointLayer a() => _PointLayer(
+        id: 'a',
+        list: [_point(0, 0), _point(10, 10)],
+        draggable: true,
+        onDragStart: (event) => drags.add(('start', event)),
+        onDragEnd: (event) => drags.add(('end', event)),
+      );
+      await pumpMap(tester, [a(), b]);
+      final gesture = await tester.startGesture(_center);
+      for (var i = 0; i < 5; i++) {
+        await gesture.moveBy(const Offset(0, 10));
+        await tester.pump(const Duration(milliseconds: 16));
+      }
+      // The dragged layer moves to the top of the list.
+      await pumpLayers(tester, [b, a()]);
+      await gesture.moveBy(const Offset(0, 10));
+      await tester.pump(const Duration(milliseconds: 16));
+      await gesture.up();
+      await tester.pumpAndSettle();
+      expect(other, isEmpty);
+      expect([for (final (kind, _) in drags) kind], ['start', 'end']);
+      expect(drags.last.$2.index, 0);
+      expect(drags.last.$2.feature, _point(0, 0));
+    });
+
+    testWidgets('the mouse stays on its feature while the list is '
+        'reordered', (tester) async {
+      _PointLayer hoverable(String id, List<Feature<Point>> list) =>
+          _PointLayer(
+            id: id,
+            list: list,
+            onEnter: (event) => drags.add(('enter $id', event)),
+            onLeave: (event) => drags.add(('leave $id', event)),
+          );
+      await pumpMap(tester, [
+        hoverable('a', [_point(0, 0)]),
+        hoverable('b', [_point(36, 0)]),
+      ]);
+      final mouse = await tester.createGesture(kind: PointerDeviceKind.mouse);
+      addTearDown(mouse.removePointer);
+      await mouse.addPointer(location: const Offset(200, 200));
+      await tester.pump();
+      await mouse.moveTo(_center);
+      await tester.pump();
+      await pumpLayers(tester, [
+        hoverable('b', [_point(36, 0)]),
+        hoverable('a', [_point(0, 0)]),
+      ]);
+      await mouse.moveTo(const Offset(400.5, 300));
+      await tester.pump();
+      await mouse.moveTo(const Offset(500, 300));
+      await tester.pump();
+      expect(
+        [for (final (kind, _) in drags) kind],
+        ['enter a', 'leave a', 'enter b'],
+      );
+    });
+
+    testWidgets('events carry the feature of the list', (tester) async {
+      const feature = Feature<Point>(
+        id: 7,
+        geometry: Point(Geographic(lon: 36, lat: 0)),
+        properties: {'name': 'pin'},
+      );
+      await pumpMap(tester, [
+        _PointLayer(
+          list: [_point(0, 0), feature],
+          onClick: (event) => drags.add(('click', event)),
+        ),
+      ]);
+      await tester.tapAt(const Offset(500, 300));
+      await tester.pump(const Duration(milliseconds: 500));
+      await tester.pumpAndSettle();
+      expect(drags.single.$2.index, 1);
+      expect(drags.single.$2.feature, same(feature));
     });
   });
 

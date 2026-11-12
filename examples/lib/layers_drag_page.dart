@@ -29,8 +29,6 @@ class _LayersDragPageState extends State<LayersDragPage> {
     ),
   ];
 
-  bool _imageLoaded = false;
-
   String _status = 'Drag a circle or a marker.';
 
   @override
@@ -48,14 +46,6 @@ class _LayersDragPageState extends State<LayersDragPage> {
                   center: Geographic(lon: 9.17, lat: 47.68),
                 ),
               ),
-              onStyleLoaded: (style) async {
-                await style.addImageFromIconData(
-                  id: 'marker',
-                  iconData: Icons.location_on,
-                  color: Colors.red,
-                );
-                setState(() => _imageLoaded = true);
-              },
               layers: [
                 CircleLayer(
                   points: _circles,
@@ -72,7 +62,7 @@ class _LayersDragPageState extends State<LayersDragPage> {
                   textField: const .literal('{name}'),
                   textAllowOverlap: const .literal(true),
                   iconAllowOverlap: const .literal(true),
-                  iconImage: _imageLoaded ? const .literal('marker') : null,
+                  icon: const .iconData(Icons.location_on, color: Colors.red),
                   iconAnchor: const .literal(IconAnchor.bottom),
                   textOffset: const .literal(Offset(0, 1)),
                   draggable: true,

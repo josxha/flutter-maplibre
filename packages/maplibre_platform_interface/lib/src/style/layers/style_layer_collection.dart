@@ -18,6 +18,33 @@ final class StyleLayers extends Iterable<StyleLayer> {
   final _layers = <StyleLayer>[];
   final ValueNotifier<int> _callbacks = ValueNotifier(0);
 
+  /// The part of the map that owns some of the layers, see
+  /// [setStyleLayersOwner].
+  StyleOwner? _styleOwner;
+
+  /// Tells the owner that the app added, moved or removed a layer.
+  void _layoutChanged() {
+    final owner = _styleOwner;
+    if (owner != null && !owner.isWriting) owner.layoutChanged();
+  }
+
+  /// The owner of the layer [id], if the layer has one and the change doesn't
+  /// come from it.
+  StyleOwner? _foreignOwnerOf(String id) {
+    final owner = _styleOwner;
+    if (owner == null || owner.isWriting || !owner.ownsLayer(id)) return null;
+    return owner;
+  }
+
+  void _checkNotOwned(String id, String change) {
+    final owner = _foreignOwnerOf(id);
+    if (owner == null) return;
+    throw StateError(
+      'The style layer "$id" belongs to ${owner.name} and cannot be '
+      '$change here. Change ${owner.name} instead.',
+    );
+  }
+
   /// Notifies its listeners when a layer of the collection gets its first
   /// [StyleLayer.onClick], [StyleLayer.onEnter] or [StyleLayer.onLeave] or
   /// loses its last one, so that the map listens for taps and the mouse
@@ -76,6 +103,7 @@ final class StyleLayers extends Iterable<StyleLayer> {
     _layers.insert(index, layer);
     _attach(layer);
     if (layer._hasCallbacks) _callbacksChanged();
+    _layoutChanged();
     try {
       await _backend.addLayer(layer.toJson(), belowLayerId: belowLayerId);
     } catch (_) {
@@ -90,23 +118,32 @@ final class StyleLayers extends Iterable<StyleLayer> {
 
   /// Removes the layer [id] and detaches its object. Removing a layer the
   /// style doesn't have does nothing.
+  ///
+  /// Fails with a [StateError] for a layer of [MapLibreMap.layers]: change
+  /// that list instead.
   Future<void> remove(String id) async {
     final index = _indexOf(id);
     if (index == -1) return;
+    _checkNotOwned(id, 'removed');
     final layer = _layers.removeAt(index);
     _detach(layer);
     if (layer._hasCallbacks) _callbacksChanged();
+    _layoutChanged();
     await _backend.removeLayer(id);
   }
 
   /// Moves the layer [id] below the layer [belowLayerId], or to the top if it
   /// is null. Fails with an [ArgumentError] if either isn't a layer of this
   /// style.
+  ///
+  /// Fails with a [StateError] for a layer of [MapLibreMap.layers]: change
+  /// the order of that list or the [Layer.anchor] of the layer instead.
   void move(String id, {String? belowLayerId}) {
     final index = _indexOf(id);
     if (index == -1) {
       throw ArgumentError.value(id, 'id', 'The style has no such layer');
     }
+    _checkNotOwned(id, 'moved');
     if (id == belowLayerId) return;
     if (belowLayerId != null && _indexOf(belowLayerId) == -1) {
       throw ArgumentError.value(
@@ -121,6 +158,7 @@ final class StyleLayers extends Iterable<StyleLayer> {
       layer,
     );
     _backend.moveLayer(id, belowLayerId: belowLayerId);
+    _layoutChanged();
   }
 
   /// Fills the collection with the layers of a loaded style, by the `layers`
@@ -150,4 +188,12 @@ final class StyleLayers extends Iterable<StyleLayer> {
   }
 
   void _detach(StyleLayer layer) => layer._owner = null;
+}
+
+/// Makes [owner] the owner of some layers of [layers], or no one if it is
+/// null, see [setStyleOwner].
+///
+/// Not part of the public API: `style.dart` hides it.
+void setStyleLayersOwner(StyleLayers layers, StyleOwner? owner) {
+  layers._styleOwner = owner;
 }

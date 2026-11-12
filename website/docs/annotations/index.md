@@ -60,10 +60,10 @@ See the
 <img src="../../assets/images/annotations/annotations-markers.jpg" alt="Markers" />
 </a>
 
-Markers show an icon, a label or both. Add the icon image to the style first:
+Markers show an icon, a label or both. The `icon` of the layer is its image,
+which the map adds to the style for it:
 
-```dart linenums="1" hl_lines="11-17 22-29"
-bool _imageLoaded = false;
+```dart linenums="1" hl_lines="13-20"
 final _points = <Feature<Point>>[
   const Feature(geometry: Point(Geographic(lon: 9.17, lat: 47.68))),
   const Feature(geometry: Point(Geographic(lon: 9, lat: 48))),
@@ -73,23 +73,15 @@ final _points = <Feature<Point>>[
 Widget build(BuildContext context) {
   return MapLibreMap(
     options: MapOptions(initCamera: .position(center: Geographic(lon: 9.17, lat: 47.68), zoom: 7)),
-    onStyleLoaded: (style) async {
-      await style.addImageFromIconData(
-        id: 'marker',
-        iconData: Icons.location_on,
-        color: Colors.red,
-      );
-      setState(() => _imageLoaded = true);
-    },
     // add a marker where the user taps
     onClick: (event) =>
         setState(() => _points.add(Feature(geometry: Point(event.point)))),
     layers: [
       MarkerLayer(
         points: _points,
+        icon: const .iconData(Icons.location_on, color: Colors.red),
         textField: const .literal('Marker'),
         textAllowOverlap: const .literal(true),
-        iconImage: _imageLoaded ? const .literal('marker') : null,
         iconAnchor: const .literal(IconAnchor.bottom),
         textOffset: const .literal(Offset(0, 1)),
       ),
@@ -97,6 +89,23 @@ Widget build(BuildContext context) {
   );
 }
 ```
+
+A `MarkerIcon` is one of:
+
+| Icon                                     | Image                                                   |
+|------------------------------------------|---------------------------------------------------------|
+| `.iconData(Icons.place, color:, size:)`  | An icon font glyph, `size` logical pixels large (48)    |
+| `.asset('assets/pin.png', pixelRatio:)`  | A Flutter asset                                         |
+| `.bytes(pngBytes, pixelRatio:)`          | Encoded image bytes, such as a PNG                      |
+| `.provider(NetworkImage(url))`           | Any `ImageProvider`, at the scale of the image it loads |
+| `.named('pin')`                          | An image the style already has, from its sprite or `addImage` |
+| `.expression(Expression.get('icon').asString())` | Per feature, an image the style already has |
+
+For `.iconData()`, `.asset()`, `.bytes()` and `.provider()`, the map adds
+each image once, shares it between the layers with an equal icon, removes it
+once no layer shows it, and adds it again when another style loads. Images
+that `.named()` and `.expression()` refer to come from the style, so add an
+image of your own again with `addImage` after another style loads.
 
 See the
 [example app](https://github.com/josxha/flutter-maplibre/blob/main/examples/lib/layers_marker_page.dart).
@@ -173,6 +182,61 @@ Widget build(BuildContext context) {
 
 See the
 [example app](https://github.com/josxha/flutter-maplibre/blob/main/examples/lib/layers_polyline_page.dart).
+
+## Ids
+
+Every annotation layer is a style layer with a GeoJSON source of the same id.
+Set `id` to name them:
+
+```dart
+CircleLayer(id: 'stops', points: stops)
+```
+
+The id must not be in use by a layer or source of the style, or by another
+layer of the list, and must not start with `maplibre-`, which the map uses. It also tells a rebuild which layer is which, like a `Key`
+of a widget: a layer with an id keeps its style layer and source wherever it
+moves in the list. Layers without an id match the next layer of the same type
+without an id, in the order of the list.
+
+Read and query the style layers by these ids, for example with
+`queryRenderedFeatures(layerIds: ['stops'])`. Change them only through
+`MapLibreMap.layers`: `style.layers.remove()` and `.move()` fail for them, and
+their setters warn in debug builds, as the next rebuild would undo the
+change. The same goes for their sources: `style.sources.updateGeoJsonData()`
+warns for them.
+
+## Order and anchors
+
+Layers with the same anchor draw in the order of the list, the first at the
+bottom, like the children of a `Stack`. A reordered list moves the style
+layers. By default the annotation layers go on top of the style. `anchor`
+places a layer elsewhere, and layers with different anchors draw where their
+anchors put them:
+
+```dart
+PolylineLayer(
+  polylines: routes,
+  // below the labels of the style
+  anchor: const .below('road-label'),
+)
+```
+
+| Anchor              | Place                                     |
+|---------------------|-------------------------------------------|
+| `.top()`            | Above every layer of the style (default)  |
+| `.bottom()`         | Below every layer of the style            |
+| `.below('layerId')` | Right below the style layer `layerId`     |
+| `.above('layerId')` | Right above the style layer `layerId`     |
+
+Layers with the same anchor keep the order of the list among themselves.
+`.below()` and `.above()` name a layer of the style, not one of the list. If
+the current style has no such layer, the layer goes on top and debug builds
+print a warning. The layers keep their place when the app adds, moves or
+removes style layers later, for example once a layer named by an anchor is
+added.
+
+The layers, their sources and their icons stay on the map when another style
+loads.
 
 ## Style each feature
 

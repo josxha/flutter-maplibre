@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/painting.dart';
 import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 import 'package:maplibre_platform_interface/src/style/expressions/expression_json.dart';
+import 'package:maplibre_platform_interface/src/style/style_owner.dart';
 
 part 'style_layer_collection.dart';
 part 'style_layers.g.dart';
@@ -139,6 +140,7 @@ abstract class StyleLayer {
   StyleLayers? _owner;
   var _wasAttached = false;
   var _warnedDetached = false;
+  var _warnedOwned = false;
 
   /// The names of the properties that belong to the layout of this layer.
   Set<String> get _layoutProperties;
@@ -297,7 +299,23 @@ abstract class StyleLayer {
   /// The collection this layer is on. A write to a layer that left its map
   /// only changes the object, which is likely a mistake, so debug builds warn
   /// once.
+  ///
+  /// A layer that another part of the map owns, such as a layer of
+  /// [MapLibreMap.layers], gets its properties from there, which overrides
+  /// other changes, so debug builds warn once about those as well.
   StyleLayers? _ownerOrWarn() {
+    if (!_warnedOwned) {
+      if (_owner?._foreignOwnerOf(id) case final styleOwner?) {
+        _warnedOwned = true;
+        if (kDebugMode) {
+          debugPrint(
+            'maplibre: the style layer "$id" belongs to ${styleOwner.name}, '
+            'which overrides changes made to it here. Change '
+            '${styleOwner.name} instead.',
+          );
+        }
+      }
+    }
     if (_owner == null && _wasAttached && !_warnedDetached) {
       _warnedDetached = true;
       if (kDebugMode) {

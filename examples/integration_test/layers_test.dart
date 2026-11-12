@@ -1,5 +1,9 @@
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:maplibre/maplibre.dart';
@@ -200,7 +204,7 @@ void runTests() {
       );
       final beside = map.center + const Offset(25, 0);
       await map.waitForFeatures(beside, (features) => features.length == 1);
-      final bottom = map.style.layers['maplibre-layer-0'];
+      final bottom = map.style.layers['maplibre-circle-1'];
 
       await tester.pumpWidget(
         MapApp(
@@ -212,14 +216,14 @@ void runTests() {
         ),
       );
       await map.waitForFeatures(beside, (features) => features.isEmpty);
-      expect(map.style.layers['maplibre-layer-0'], same(bottom));
+      expect(map.style.layers['maplibre-circle-1'], same(bottom));
       expect(map.style.layers.map((layer) => layer.id), [
         'background',
-        'maplibre-layer-0',
-        'maplibre-layer-1',
+        'maplibre-circle-1',
+        'maplibre-circle-2',
       ]);
 
-      // Another kind of layer takes the place of the old one.
+      // A layer of another type goes below the circle that stays.
       await tester.pumpWidget(
         MapApp(
           options: options,
@@ -238,8 +242,143 @@ void runTests() {
       );
       expect(map.style.layers.map((layer) => layer.id), [
         'background',
-        'maplibre-layer-0',
-        'maplibre-layer-1',
+        'maplibre-line-1',
+        'maplibre-circle-1',
+      ]);
+      expect(map.style.layers['maplibre-circle-1'], same(bottom));
+    });
+
+    testWidgets('draws the layers in the order of the list and by anchor', (
+      tester,
+    ) async {
+      final options = offlineOptions(zoom: 10);
+      const points = [Feature(geometry: Point(_point))];
+      List<Layer> layers(List<String> ids, {LayerAnchor? redAnchor}) => [
+        for (final id in ids)
+          CircleLayer(
+            id: id,
+            points: points,
+            radius: const .literal(40),
+            color: .literal(
+              id == 'red' ? const Color(0xFFFF0000) : const Color(0xFF0000FF),
+            ),
+            anchor: id == 'red'
+                ? redAnchor ?? const .top()
+                : const LayerAnchor.top(),
+          ),
+      ];
+      // On web, rendered features come topmost first. Other platforms report
+      // them in the order their layers were added, not drawn, so the color
+      // at the center shows the layer on top there.
+      Future<void> topIs(TestMap map, String id) async {
+        await map.waitForFeatures(map.center, (features) {
+          final ids = [for (final f in features) f.layerId];
+          if (!ids.contains('red') || !ids.contains('blue')) return false;
+          return !kIsWeb || ids.first == id;
+        });
+        if (!kIsWeb) await map.waitForColorAtCenter(id, id == 'red' ? 0 : 2);
+      }
+
+      final map = await pumpMap(
+        tester,
+        options: options,
+        layers: layers(['red', 'blue']),
+      );
+      await topIs(map, 'blue');
+      final red = map.style.layers['red'];
+
+      // Reordered layers move, they are not added again.
+      await tester.pumpWidget(
+        MapApp(options: options, layers: layers(['blue', 'red'])),
+      );
+      await topIs(map, 'red');
+      expect(map.style.layers['red'], same(red));
+      expect(map.style.layers.map((layer) => layer.id), [
+        'background',
+        'blue',
+        'red',
+      ]);
+
+      // An anchor puts the red layer below the background of the style.
+      await tester.pumpWidget(
+        MapApp(
+          options: options,
+          layers: layers(['blue', 'red'], redAnchor: const .bottom()),
+        ),
+      );
+      await topIs(map, 'blue');
+      expect(map.style.layers.map((layer) => layer.id), [
+        'red',
+        'background',
+        'blue',
+      ]);
+      // The style can't move the layers of the widget.
+      expect(() => map.style.layers.move('red'), throwsStateError);
+    });
+
+    testWidgets('keeps the layers and their icons when the style changes', (
+      tester,
+    ) async {
+      final options = offlineOptions(zoom: 10);
+      const left = Geographic(lon: -0.2, lat: 0);
+      final map = await pumpMap(
+        tester,
+        options: options,
+        layers: const [
+          CircleLayer(
+            id: 'circles',
+            points: [Feature(geometry: Point(left))],
+            radius: .literal(10),
+          ),
+          // A symbol without text only shows once its image is there.
+          MarkerLayer(
+            points: [Feature(geometry: Point(_point))],
+            icon: .iconData(IconData(0xe55f), color: Color(0xFFFF0000)),
+            iconAllowOverlap: .literal(true),
+          ),
+        ],
+      );
+      final circle = map.controller.toScreenLocation(left);
+      Future<void> bothShown() async {
+        await map.waitForFeatures(
+          map.center,
+          (features) => features.length == 1,
+        );
+        await map.waitForFeatures(circle, (features) => features.length == 1);
+      }
+
+      await bothShown();
+      expect(map.style.layers.map((layer) => layer.id), [
+        'background',
+        'circles',
+        'maplibre-symbol-1',
+      ]);
+
+      final loads = map.styleLoads;
+      await map.setOptions(
+        MapOptions(
+          style: MapStyle.json(
+            jsonEncode({
+              'version': 8,
+              'sources': <String, Object>{},
+              'layers': [
+                {
+                  'id': 'land',
+                  'type': 'background',
+                  'paint': {'background-color': '#88cc88'},
+                },
+              ],
+            }),
+          ),
+          initCamera: options.initCamera,
+        ),
+      );
+      await map.waitForStyleLoad(since: loads);
+      await bothShown();
+      expect(map.style.layers.map((layer) => layer.id), [
+        'land',
+        'circles',
+        'maplibre-symbol-1',
       ]);
     });
 
@@ -314,7 +453,7 @@ void runTests() {
           layers: const [
             MarkerLayer(
               points: [Feature(geometry: Point(_point))],
-              iconImage: .literal('marker'),
+              icon: .named('marker'),
               iconAllowOverlap: .literal(true),
             ),
           ],

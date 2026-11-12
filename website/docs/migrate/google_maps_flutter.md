@@ -182,7 +182,7 @@ properties of the feature with an [expression](../style-layers/expressions.md).
               properties: {'name': 'office'},
             ),
           ],
-          iconImage: const .literal('pin'),
+          icon: const .named('pin'),
           iconAnchor: const .literal(IconAnchor.bottom),
           onClick: (event) => print(event.index),
         ),

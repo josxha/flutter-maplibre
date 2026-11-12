@@ -17,6 +17,8 @@ class PolylineLayer extends Layer<Feature<LineString>> {
     this.gapWidth = const .literal(0),
     this.blur = const .literal(0),
     this.dashArray,
+    super.id,
+    super.anchor,
     super.minZoom = 0,
     super.maxZoom = 24,
     super.draggable,
@@ -49,18 +51,19 @@ class PolylineLayer extends Layer<Feature<LineString>> {
   final Expression<List<num>>? dashArray;
 
   @override
-  StyleLayer createStyleLayer(int index) => LineStyleLayer(
-    id: getLayerId(index),
-    sourceId: getSourceId(index),
-    minZoom: minZoom,
-    maxZoom: maxZoom,
-    color: color,
-    opacity: opacity,
-    width: width,
-    gapWidth: gapWidth,
-    blur: blur,
-    dasharray: dashArray,
-  );
+  StyleLayer createStyleLayer({required String id, required String sourceId}) =>
+      LineStyleLayer(
+        id: id,
+        sourceId: sourceId,
+        minZoom: minZoom,
+        maxZoom: maxZoom,
+        color: color,
+        opacity: opacity,
+        width: width,
+        gapWidth: gapWidth,
+        blur: blur,
+        dasharray: dashArray,
+      );
 
   @override
   bool operator ==(Object other) =>
