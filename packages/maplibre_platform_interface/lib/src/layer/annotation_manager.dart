@@ -55,7 +55,6 @@ class AnnotationEntry {
   String toString() => 'AnnotationEntry($id, ${layer.runtimeType})';
 }
 
-
 /// Keeps the layers of [MapLibreMap.layers] on the map, one manager per map.
 ///
 /// It holds the definitions and features of the layers, whether or not a

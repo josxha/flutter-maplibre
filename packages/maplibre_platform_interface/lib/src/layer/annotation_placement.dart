@@ -2,8 +2,8 @@ import 'package:maplibre_platform_interface/maplibre_platform_interface.dart';
 
 /// A layer of [MapLibreMap.layers] for [placeLayers].
 ///
-/// [anchor] must name a layer of the style that is not one of the layers;
-/// the map passes [LayerAnchor.top] for the others. [added] is whether the
+/// `anchor` must name a layer of the style that is not one of the layers;
+/// the map passes [LayerAnchor.top] for the others. `added` is whether the
 /// layer's style layer was added to the style before.
 typedef PlacedLayer = ({String id, LayerAnchor anchor, bool added});
 
@@ -16,12 +16,12 @@ enum PlacementKind {
   move,
 }
 
-/// A step of [placeLayers]: adds or moves the style layer [id] below the
-/// layer [belowLayerId], or on top if it is null.
+/// A step of [placeLayers]: adds or moves the style layer `id` below the
+/// layer `belowLayerId`, or on top if it is null.
 typedef PlacementStep = ({PlacementKind kind, String id, String? belowLayerId});
 
 /// The overlay of a drag for [placeLayers], which goes right above the layer
-/// [aboveId].
+/// `aboveId`.
 typedef PlacedOverlay = ({String id, String aboveId});
 
 /// The steps that bring [layers], in the order of [MapLibreMap.layers], to
@@ -30,7 +30,7 @@ typedef PlacedOverlay = ({String id, String aboveId});
 ///
 /// Layers with the same anchor are in the order of the list, right next to
 /// each other at the place of their anchor, with only the layers of that
-/// anchor in between. A layer that was not [PlacedLayer.added] is added, and
+/// anchor in between. A layer that was not `added` is added, and
 /// so is one that is no longer among [styleIds], which the map rejected. A
 /// layer that was not added but whose id [styleIds] has is left alone: a
 /// layer of the app took the id. [overlay] goes right above its layer.
