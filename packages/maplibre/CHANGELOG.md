@@ -5,9 +5,6 @@
 - `MapCompass`, `MapControlButtons`, `MapScalebar` and `SourceAttribution` no
   longer depend on Material and no longer follow the app's `Theme`; set their
   new color and text style parameters instead
-<<<<<<< HEAD
-  ([#671](https://github.com/maplibre/flutter-maplibre/issues/671)).
-=======
   ([#671](https://github.com/maplibre/flutter-maplibre/issues/671)).
 - `MarkerLayer.icon` replaces `MarkerLayer.iconImage`; use `.named()` or
   `.expression()` for images of the style
@@ -40,7 +37,6 @@
 - Maps no longer turn black when the app runs a second Flutter engine, such
   as one of a background service, and that engine stops; not on web
   ([#677](https://github.com/maplibre/flutter-maplibre/issues/677)).
->>>>>>> bc8a6c35aba88bb0fc49464882dac5f59cbcd5f7
 
 ### Misc
 
