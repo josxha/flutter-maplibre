@@ -21,6 +21,8 @@ class StyleControllerNative extends StyleController implements StyleBackend {
   @override
   Future<void> setPlacementTransitions({required bool enabled}) async {
     final options = await _map.getStyleTransitionOptions();
+    // A style that loaded meanwhile has its own options, with them on.
+    if (_disposed) return;
     await _map.setStyleTransitionOptions(
       options.copyWith(enablePlacementTransitions: enabled),
     );
