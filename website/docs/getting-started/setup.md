@@ -10,7 +10,7 @@ icon: lucide/sparkles
 !!! info "Pre-release"
 
     Version 0.4.0 is available as a pre-release,
-    `0.4.0-pre.2`, while it is being tested. Please
+    `0.4.0-pre.3`, while it is being tested. Please
     [report bugs](https://github.com/josxha/flutter-maplibre/issues/new?labels=bug&template=1-bug.yml)
     you find. If you upgrade from 0.3.x, read the
     [migration guide](../migrate/upgrade-from-v0.3.x.md).
@@ -20,7 +20,7 @@ icon: lucide/sparkles
     Add `maplibre` to your project by running this command:
 
     ```bash
-    flutter pub add maplibre:^0.4.0-pre.2
+    flutter pub add maplibre:^0.4.0-pre.3
     ```
 
 === "Edit `pubspec.yaml`"
@@ -29,7 +29,7 @@ icon: lucide/sparkles
 
     ```yaml title="pubspec.yaml" hl_lines="2"
     dependencies:
-      maplibre: ^0.4.0-pre.2
+      maplibre: ^0.4.0-pre.3
     ```
 
     and then run `flutter pub get` to install the package.
@@ -38,7 +38,7 @@ icon: lucide/sparkles
     flutter pub get
     ```
 
-The version constraint `^0.4.0-pre.2` also accepts the later 0.4 pre-releases
+The version constraint `^0.4.0-pre.3` also accepts the later 0.4 pre-releases
 and 0.4.0 itself once it is out.
 
 The packages need Dart 3.13 and Flutter 3.47 or newer. Some platforms need

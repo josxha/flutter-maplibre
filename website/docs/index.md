@@ -13,7 +13,7 @@ iOS, macOS, Windows and Linux, and with
 !!! info "Version 0.4"
 
     These docs describe the 0.4 series, available as the pre-release
-    `0.4.0-pre.2`. If you upgrade from 0.3.x, read the
+    `0.4.0-pre.3`. If you upgrade from 0.3.x, read the
     [migration guide](migrate/upgrade-from-v0.3.x.md).
 
 ## Getting started

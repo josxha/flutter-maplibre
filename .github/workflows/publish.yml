@@ -1,12 +1,10 @@
 name: Publish to pub.dev
 
-# Automatic publishing is disabled until maplibre_native and
-# maplibre_geolocator have their first release on pub.dev, which has to be
-# published manually before pub.dev can trust this workflow for them.
-# Restore the tag trigger then:
-# on:
-#   push: { tags: [ 'v[0-9]+.[0-9]+.[0-9]+*' ] }
-on: workflow_dispatch
+# Runs when a GitHub release (drafted by draft-release.yml) is published with
+# its new tag. pub.dev only trusts tag pushes that match the tag pattern set in
+# each package's admin settings (`v{{version}}`).
+on:
+  push: { tags: [ 'v[0-9]+.[0-9]+.[0-9]+*' ] }
 
 jobs:
   maplibre-platform-interface:
@@ -22,7 +20,9 @@ jobs:
     with: { working-directory: packages/maplibre_web }
   maplibre-native:
     name: "Publish `maplibre_native`"
-    needs: maplibre-platform-interface
+    # After maplibre_web: the reusable workflow names every archive artifact
+    # `package-archive`, so two parallel calls could publish each other's.
+    needs: [ maplibre-platform-interface, maplibre-web ]
     permissions: { id-token: write }
     uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
     with: { working-directory: packages/maplibre_native }

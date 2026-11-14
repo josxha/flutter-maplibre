@@ -31,4 +31,6 @@ jobs:
           body_path: build/release_notes.txt
           tag_name: v${{ inputs.version }}
           name: v${{ inputs.version }}
+          target_commitish: ${{ github.sha }}
           draft: true
+          prerelease: ${{ contains(inputs.version, '-') }}
