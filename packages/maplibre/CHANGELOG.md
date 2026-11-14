@@ -37,6 +37,10 @@
 - Maps no longer turn black when the app runs a second Flutter engine, such
   as one of a background service, and that engine stops; not on web
   ([#677](https://github.com/josxha/flutter-maplibre/issues/677)).
+- Two fingers resting on the map before a pinch, twist or tilt are no longer a
+  long click, which kept the pinch from moving the camera; a long click is a
+  hold of one finger
+  ([#681](https://github.com/josxha/flutter-maplibre/issues/681)).
 
 Full Changelog: [v0.4.0-pre.2...main](https://github.com/josxha/flutter-maplibre/compare/v0.4.0-pre.2...main)
 
