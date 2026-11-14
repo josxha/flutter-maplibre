@@ -32,3 +32,4 @@ jobs:
           tag_name: v${{ inputs.version }}
           name: v${{ inputs.version }}
           draft: true
+          prerelease: ${{ contains(inputs.version, '-') }}
