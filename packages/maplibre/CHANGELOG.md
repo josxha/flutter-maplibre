@@ -1,8 +1,7 @@
 ## 0.4.0-pre.3
 
-The third pre-release of 0.4 reworks the annotation layers, drops the Material
-dependency of the UI widgets, and fixes gestures and apps with a second Flutter
-engine. The
+This is the last planned prerelease for 0.4.0 that reworks the annotation layers, drops the Material
+dependency of the UI widgets. The
 [migration guide](https://josxha.github.io/flutter-maplibre/docs/migrate/upgrade-from-v0.3.x/)
 covers every change from 0.3.x and from the earlier pre-releases.
 
@@ -15,7 +14,7 @@ covers every change from 0.3.x and from the earlier pre-releases.
 - `MarkerLayer.icon` replaces `MarkerLayer.iconImage`; use `.named()` or
   `.expression()` for images of the style
   ([#674](https://github.com/josxha/flutter-maplibre/issues/674)).
-- The style layers of `MapLibreMap.layers` can no longer be removed or moved
+- Layers added though `MapLibreMap.layers` are guarded from `remove` or `move` 
   through `StyleController.layers`
   ([#674](https://github.com/josxha/flutter-maplibre/issues/674)).
 
