@@ -20,7 +20,9 @@ jobs:
     with: { working-directory: packages/maplibre_web }
   maplibre-native:
     name: "Publish `maplibre_native`"
-    needs: maplibre-platform-interface
+    # After maplibre_web: the reusable workflow names every archive artifact
+    # `package-archive`, so two parallel calls could publish each other's.
+    needs: [ maplibre-platform-interface, maplibre-web ]
     permissions: { id-token: write }
     uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
     with: { working-directory: packages/maplibre_native }
