@@ -1,50 +1,37 @@
 ## 0.4.0-pre.3
 
-This is the last planned prerelease for 0.4.0 that reworks the annotation layers, drops the Material
-dependency of the UI widgets. The
+The last planned pre-release of 0.4.0 reworks the annotation layers and drops
+the Material dependency of the UI widgets. The
 [migration guide](https://josxha.github.io/flutter-maplibre/docs/migrate/upgrade-from-v0.3.x/)
 covers every change from 0.3.x and from the earlier pre-releases.
 
 ### Breaking Changes
 
-- `MapCompass`, `MapControlButtons`, `MapScalebar` and `SourceAttribution` no
-  longer depend on Material and no longer follow the app's `Theme`; set their
-  new color and text style parameters instead
+- UI widgets such as `MapCompass` and `MapScalebar` no longer follow the app's
+  `Theme`; style them with their color and text style parameters
   ([#671](https://github.com/josxha/flutter-maplibre/issues/671)).
-- `MarkerLayer.icon` replaces `MarkerLayer.iconImage`; use `.named()` or
-  `.expression()` for images of the style
-  ([#674](https://github.com/josxha/flutter-maplibre/issues/674)).
-- Layers added though `MapLibreMap.layers` are guarded from `remove` or `move` 
-  through `StyleController.layers`
+- Annotation layers: `MarkerLayer.icon` replaces `iconImage`, and their style
+  layers can't be removed or moved through `StyleController.layers`
   ([#674](https://github.com/josxha/flutter-maplibre/issues/674)).
 
 ### Features
 
-- Annotation layers take an optional `id`, which names their style layer and
-  source ([#674](https://github.com/josxha/flutter-maplibre/issues/674)).
-- `Layer.anchor` places an annotation layer at the top or bottom of the style,
-  or below or above one of its layers
-  ([#674](https://github.com/josxha/flutter-maplibre/issues/674)).
-- `MarkerLayer.icon` adds the image of the markers to every style, from an
-  icon, an asset, bytes or an `ImageProvider`
-  ([#674](https://github.com/josxha/flutter-maplibre/issues/674)).
-- `LayerFeatureEvent.feature` is the feature that a tap, hover or drag hit
-  ([#674](https://github.com/josxha/flutter-maplibre/issues/674)).
+- Annotation layers keep their place across style changes and take an `id`,
+  an `anchor` in the style, and marker icons from icons, assets, bytes or
+  images ([#674](https://github.com/josxha/flutter-maplibre/issues/674)).
 
 ### Bug Fixes
 
-- Taps, hovers and drags on annotation layers follow the layer when the list
-  is reordered, and go to the layer drawn on top
-  ([#674](https://github.com/josxha/flutter-maplibre/issues/674)).
-- Widgets around `MapLibreMap`, such as a `Listener`, get the map's pointer
-  events again, and widgets behind the map no longer get its taps
+- Layer taps, hovers and drags follow reordered layers and hit the one drawn
+  on top ([#674](https://github.com/josxha/flutter-maplibre/issues/674)).
+- Widgets around the map get its pointer events again, and widgets behind it
+  no longer get its taps
   ([#675](https://github.com/josxha/flutter-maplibre/issues/675)).
-- Maps no longer turn black when the app runs a second Flutter engine, such
-  as one of a background service, and that engine stops; not on web
+- Maps keep rendering when the app runs a second Flutter engine, such as a
+  background service; not on web
   ([#677](https://github.com/josxha/flutter-maplibre/issues/677)).
-- Two fingers resting on the map before a pinch, twist or tilt are no longer a
-  long click, which kept the pinch from moving the camera; a long click is a
-  hold of one finger
+- Two fingers resting on the map no longer count as a long click, so pinches
+  start right away
   ([#681](https://github.com/josxha/flutter-maplibre/issues/681)).
 
 Full Changelog: [v0.4.0-pre.2...v0.4.0-pre.3](https://github.com/josxha/flutter-maplibre/compare/v0.4.0-pre.2...v0.4.0-pre.3)
