@@ -29,6 +29,44 @@ const _shoveDegreesPerPixel = 0.25;
 /// tilts the map.
 const _shoveSlop = 10.0;
 
+/// A long press that only one finger can make.
+///
+/// The long press recognizer times the first finger alone, and when its
+/// deadline passes it wins the gesture arena over every other recognizer,
+/// whatever else has landed meanwhile. So two fingers resting on the map for
+/// half a second before a pinch, twist or tilt were a long press, and the
+/// pinch never moved the camera. A second finger landing while the hold is
+/// still pending ends it instead; once the hold has been accepted it is left
+/// as it is.
+class _OneFingerLongPressRecognizer extends LongPressGestureRecognizer {
+  _OneFingerLongPressRecognizer();
+
+  // Whether the arena has gone to the hold, which a second finger cannot
+  // take back.
+  var _held = false;
+
+  @override
+  void addAllowedPointer(PointerDownEvent event) {
+    if (state == GestureRecognizerState.possible && !_held) {
+      resolve(GestureDisposition.rejected);
+      return;
+    }
+    super.addAllowedPointer(event);
+  }
+
+  @override
+  void acceptGesture(int pointer) {
+    _held = true;
+    super.acceptGesture(pointer);
+  }
+
+  @override
+  void didStopTrackingLastPointer(int pointer) {
+    _held = false;
+    super.didStopTrackingLastPointer(pointer);
+  }
+}
+
 /// Recognizes map gestures on [child] and hands their camera changes to
 /// [camera].
 ///
@@ -36,8 +74,10 @@ const _shoveSlop = 10.0;
 /// gestures follow the platform conventions: a drag pans, a pinch zooms and
 /// twists, a scroll wheel and a double tap zoom, a double tap and drag zooms,
 /// two fingers side by side dragged vertically tilt, and a right-button or
-/// Ctrl + left-button mouse drag rotates and tilts. [gestures] turns them
-/// off one by one, and [movements] limits what they may change.
+/// Ctrl + left-button mouse drag rotates and tilts. A long click is a hold of
+/// one finger: a second finger landing during the hold ends it, and leaves
+/// the fingers to the pinch, twist or tilt. [gestures] turns them off one by
+/// one, and [movements] limits what they may change.
 class MapGestureDetector extends StatefulWidget {
   /// Creates a gesture layer over a map.
   const MapGestureDetector({
@@ -274,41 +314,59 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
           ),
           null => null,
         },
-        child: GestureDetector(
+        // Always there too, for the same reason.
+        child: RawGestureDetector(
           behavior: HitTestBehavior.opaque,
-          onTapUp: switch (widget.onClick) {
-            final onClick? => (details) => _emitUserInput(
-              details.localPosition,
-              (point, screenPoint) => onClick(
-                MapEventClick(point: point, screenPoint: screenPoint),
-              ),
-            ),
-            null => null,
+          gestures: {
+            if (widget.onLongClick case final onLongClick?)
+              _OneFingerLongPressRecognizer:
+                  GestureRecognizerFactoryWithHandlers<
+                    _OneFingerLongPressRecognizer
+                  >(
+                    _OneFingerLongPressRecognizer.new,
+                    (recognizer) =>
+                        recognizer.onLongPressStart = (details) =>
+                            _emitUserInput(
+                              details.localPosition,
+                              (point, screenPoint) => onLongClick(
+                                MapEventLongClick(
+                                  point: point,
+                                  screenPoint: screenPoint,
+                                ),
+                              ),
+                            ),
+                  ),
           },
-          onSecondaryTapUp: switch (widget.onSecondaryClick) {
-            final onSecondaryClick? => (details) => _emitUserInput(
-              details.localPosition,
-              (point, screenPoint) => onSecondaryClick(
-                MapEventSecondaryClick(point: point, screenPoint: screenPoint),
+          child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTapUp: switch (widget.onClick) {
+              final onClick? => (details) => _emitUserInput(
+                details.localPosition,
+                (point, screenPoint) => onClick(
+                  MapEventClick(point: point, screenPoint: screenPoint),
+                ),
               ),
-            ),
-            null => null,
-          },
-          onLongPressStart: switch (widget.onLongClick) {
-            final onLongClick? => (details) => _emitUserInput(
-              details.localPosition,
-              (point, screenPoint) => onLongClick(
-                MapEventLongClick(point: point, screenPoint: screenPoint),
+              null => null,
+            },
+            onSecondaryTapUp: switch (widget.onSecondaryClick) {
+              final onSecondaryClick? => (details) => _emitUserInput(
+                details.localPosition,
+                (point, screenPoint) => onSecondaryClick(
+                  MapEventSecondaryClick(
+                    point: point,
+                    screenPoint: screenPoint,
+                  ),
+                ),
               ),
-            ),
-            null => null,
-          },
-          onDoubleTapDown: doubleTaps ? _onDoubleTapDown : null,
-          onDoubleTap: doubleTaps ? _onDoubleTap : null,
-          onScaleStart: scales ? _onScaleStart : null,
-          onScaleUpdate: scales ? _onScaleUpdate : null,
-          onScaleEnd: scales ? _onScaleEnd : null,
-          child: widget.child,
+              null => null,
+            },
+            onDoubleTapDown: doubleTaps ? _onDoubleTapDown : null,
+            onDoubleTap: doubleTaps ? _onDoubleTap : null,
+            onScaleStart: scales ? _onScaleStart : null,
+            onScaleUpdate: scales ? _onScaleUpdate : null,
+            onScaleEnd: scales ? _onScaleEnd : null,
+            child: widget.child,
+          ),
         ),
       ),
     );

@@ -681,6 +681,12 @@ Each entry: the decision, then why.
   wheel delta by the device pixel ratio except on macOS, so the recognizer
   multiplies it back); a trackpad pinch that arrives as a scale signal
   zooms by its scale.
+- **A long click is a hold of one finger.** Flutter's long press recognizer
+  times the first pointer alone and wins the arena when its deadline passes,
+  whatever else landed, so two fingers resting on the map before a pinch were
+  a long click and the pinch never moved the camera. The map's recognizer
+  rejects itself when a second finger lands while the hold is pending; an
+  accepted hold stays.
 
 ## Tests
 
