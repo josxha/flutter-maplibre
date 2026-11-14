@@ -29,6 +29,68 @@ const _shoveDegreesPerPixel = 0.25;
 /// tilts the map.
 const _shoveSlop = 10.0;
 
+/// A long press that only one finger can make.
+///
+/// The long press recognizer times the first finger alone, and when its
+/// deadline passes it wins the gesture arena over every other recognizer,
+/// whatever else has landed meanwhile. So two fingers resting on the map for
+/// half a second before a pinch, twist or tilt were a long press, and the
+/// pinch never moved the camera. A second finger landing before the deadline
+/// ends the hold instead, and the recognizer then stays out until every
+/// finger has lifted; once the deadline has passed, the hold is left as it
+/// is.
+class _OneFingerLongPressRecognizer extends LongPressGestureRecognizer {
+  _OneFingerLongPressRecognizer({super.debugOwner});
+
+  // Whether the deadline has passed, which a second finger cannot take back.
+  // Winning the arena is not enough: the arena can go to the long press
+  // early, when it is the only recognizer there or in a sweep.
+  var _held = false;
+
+  @override
+  void addAllowedPointer(PointerDownEvent event) {
+    if (state == GestureRecognizerState.ready || _held) {
+      super.addAllowedPointer(event);
+      return;
+    }
+    // Track the finger too, so the recognizer only gets ready again once it
+    // has lifted, and end the hold. Its arena may already have resolved, so
+    // stop the timer directly as well.
+    startTrackingPointer(event.pointer, event.transform);
+    resolve(GestureDisposition.rejected);
+    if (primaryPointer case final pointer?) rejectGesture(pointer);
+  }
+
+  @override
+  void didExceedDeadline() {
+    _held = true;
+    super.didExceedDeadline();
+  }
+
+  @override
+  void didStopTrackingLastPointer(int pointer) {
+    _held = false;
+    super.didStopTrackingLastPointer(pointer);
+  }
+}
+
+/// The long press action of the map's semantics, a long click at the center
+/// of the map.
+class _LongClickSemantics extends SemanticsGestureDelegate {
+  const _LongClickSemantics(this.onLongClick);
+
+  /// Reports a long click at a position in the map, or null without one.
+  final void Function(Offset localPosition)? onLongClick;
+
+  @override
+  void assignSemantics(RenderSemanticsGestureHandler renderObject) {
+    renderObject.onLongPress = switch (onLongClick) {
+      final onLongClick? => () => onLongClick(renderObject.paintBounds.center),
+      null => null,
+    };
+  }
+}
+
 /// Recognizes map gestures on [child] and hands their camera changes to
 /// [camera].
 ///
@@ -36,8 +98,10 @@ const _shoveSlop = 10.0;
 /// gestures follow the platform conventions: a drag pans, a pinch zooms and
 /// twists, a scroll wheel and a double tap zoom, a double tap and drag zooms,
 /// two fingers side by side dragged vertically tilt, and a right-button or
-/// Ctrl + left-button mouse drag rotates and tilts. [gestures] turns them
-/// off one by one, and [movements] limits what they may change.
+/// Ctrl + left-button mouse drag rotates and tilts. A long click is a hold of
+/// one finger: a second finger landing during the hold ends it, and leaves
+/// the fingers to the pinch, twist or tilt. [gestures] turns them off one by
+/// one, and [movements] limits what they may change.
 class MapGestureDetector extends StatefulWidget {
   /// Creates a gesture layer over a map.
   const MapGestureDetector({
@@ -274,41 +338,63 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
           ),
           null => null,
         },
-        child: GestureDetector(
+        // Always there too, for the same reason.
+        child: RawGestureDetector(
           behavior: HitTestBehavior.opaque,
-          onTapUp: switch (widget.onClick) {
-            final onClick? => (details) => _emitUserInput(
-              details.localPosition,
-              (point, screenPoint) => onClick(
-                MapEventClick(point: point, screenPoint: screenPoint),
-              ),
+          gestures: {
+            if (widget.onLongClick case final onLongClick?)
+              _OneFingerLongPressRecognizer:
+                  GestureRecognizerFactoryWithHandlers<
+                    _OneFingerLongPressRecognizer
+                  >(
+                    () => _OneFingerLongPressRecognizer(debugOwner: this),
+                    (recognizer) => recognizer
+                      ..gestureSettings = MediaQuery.maybeGestureSettingsOf(
+                        context,
+                      )
+                      ..onLongPressStart = (details) =>
+                          _emitLongClick(onLongClick, details.localPosition),
+                  ),
+          },
+          // The default semantics only find Flutter's own long press
+          // recognizer, so the long press action is given here.
+          semantics: _LongClickSemantics(switch (widget.onLongClick) {
+            final onLongClick? => (localPosition) => _emitLongClick(
+              onLongClick,
+              localPosition,
             ),
             null => null,
-          },
-          onSecondaryTapUp: switch (widget.onSecondaryClick) {
-            final onSecondaryClick? => (details) => _emitUserInput(
-              details.localPosition,
-              (point, screenPoint) => onSecondaryClick(
-                MapEventSecondaryClick(point: point, screenPoint: screenPoint),
+          }),
+          child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTapUp: switch (widget.onClick) {
+              final onClick? => (details) => _emitUserInput(
+                details.localPosition,
+                (point, screenPoint) => onClick(
+                  MapEventClick(point: point, screenPoint: screenPoint),
+                ),
               ),
-            ),
-            null => null,
-          },
-          onLongPressStart: switch (widget.onLongClick) {
-            final onLongClick? => (details) => _emitUserInput(
-              details.localPosition,
-              (point, screenPoint) => onLongClick(
-                MapEventLongClick(point: point, screenPoint: screenPoint),
+              null => null,
+            },
+            onSecondaryTapUp: switch (widget.onSecondaryClick) {
+              final onSecondaryClick? => (details) => _emitUserInput(
+                details.localPosition,
+                (point, screenPoint) => onSecondaryClick(
+                  MapEventSecondaryClick(
+                    point: point,
+                    screenPoint: screenPoint,
+                  ),
+                ),
               ),
-            ),
-            null => null,
-          },
-          onDoubleTapDown: doubleTaps ? _onDoubleTapDown : null,
-          onDoubleTap: doubleTaps ? _onDoubleTap : null,
-          onScaleStart: scales ? _onScaleStart : null,
-          onScaleUpdate: scales ? _onScaleUpdate : null,
-          onScaleEnd: scales ? _onScaleEnd : null,
-          child: widget.child,
+              null => null,
+            },
+            onDoubleTapDown: doubleTaps ? _onDoubleTapDown : null,
+            onDoubleTap: doubleTaps ? _onDoubleTap : null,
+            onScaleStart: scales ? _onScaleStart : null,
+            onScaleUpdate: scales ? _onScaleUpdate : null,
+            onScaleEnd: scales ? _onScaleEnd : null,
+            child: widget.child,
+          ),
         ),
       ),
     );
@@ -607,6 +693,15 @@ class _MapGestureDetectorState extends State<MapGestureDetector> {
     _shoveRejected = false;
     if (tilted) _endGesture();
   }
+
+  void _emitLongClick(
+    MapEventCallback<MapEventLongClick> onLongClick,
+    Offset localPosition,
+  ) => _emitUserInput(
+    localPosition,
+    (point, screenPoint) =>
+        onLongClick(MapEventLongClick(point: point, screenPoint: screenPoint)),
+  );
 
   void _onScaleStart(ScaleStartDetails details) {
     _lastScale = 1;
