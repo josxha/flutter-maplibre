@@ -16,6 +16,16 @@ class StyleControllerNative extends StyleController implements StyleBackend {
 
   final mln.MapHandle _map;
 
+  /// Keeps the style's transition duration and delay, as the platform SDKs'
+  /// switches did.
+  @override
+  Future<void> setPlacementTransitions({required bool enabled}) async {
+    final options = await _map.getStyleTransitionOptions();
+    await _map.setStyleTransitionOptions(
+      options.copyWith(enablePlacementTransitions: enabled),
+    );
+  }
+
   /// Called when [refreshAttributions] finds that the attributions changed.
   final VoidCallback? onAttributionsChanged;
 

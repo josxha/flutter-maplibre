@@ -28,6 +28,10 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
   late HTMLDivElement _htmlElement;
   late interop.JsMap _map;
 
+  /// The milliseconds that label placement changes fade over while their
+  /// transitions are on: the map's own value, read once [_map] exists.
+  late num _placementFadeDuration;
+
   /// maplibre-gl-js is loaded, so the platform view can create [_map].
   var _jsLoaded = false;
 
@@ -103,6 +107,8 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
           transformRequest: _transformRequest.toJS,
         ),
       );
+      // gl-js's default if its private field is gone.
+      _placementFadeDuration = _map.fadeDuration ?? 300;
       _mapCreated = true;
 
       document.body?.appendChild(_htmlElement);
@@ -786,7 +792,7 @@ final class MapLibreMapStateWeb extends MapLibreMapState {
 
   void _onStyleLoaded() {
     style?.dispose();
-    final styleCtrl = StyleControllerWeb(_map)..load();
+    final styleCtrl = StyleControllerWeb(_map, _placementFadeDuration)..load();
     style = styleCtrl;
     widget.onStyleLoaded?.call(styleCtrl);
     attachAnnotations(styleCtrl);

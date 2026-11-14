@@ -29,6 +29,20 @@ abstract class StyleController {
   /// not part of the batch.
   void batch(void Function() updates);
 
+  /// Switch label placement transitions on or off.
+  ///
+  /// On, a symbol fades in or out as its collisions with other symbols
+  /// change: over the style's transition duration on native, 300 ms unless
+  /// the style sets one, and over 300 ms on web. Off, a symbol shows or hides
+  /// at once: one added over others displaces them on the frame it first
+  /// appears, and they return on the frame it is gone. They are on by
+  /// default, and on again in every newly loaded style.
+  ///
+  /// On web, off also ends the crossfade of `*-pattern` and `line-dasharray`
+  /// values between zoom levels, which maplibre-gl-js times with the same
+  /// fade duration.
+  Future<void> setPlacementTransitions({required bool enabled});
+
   /// The attributions of the sources in the map style.
   ///
   /// The list follows the sources of the style. A source that loads its

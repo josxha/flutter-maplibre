@@ -2,10 +2,22 @@ part of 'map_state.dart';
 
 /// Web specific implementation of the [StyleController].
 class StyleControllerWeb extends StyleController implements StyleBackend {
-  /// Create a new [StyleControllerWeb] instance.
-  StyleControllerWeb(this._map);
+  /// Create a new [StyleControllerWeb] instance for the style that [_map]
+  /// loaded, whose label placement transitions are on and fade over
+  /// [_placementFadeDuration] milliseconds.
+  StyleControllerWeb(this._map, this._placementFadeDuration) {
+    _map.fadeDuration = _placementFadeDuration;
+  }
 
   final interop.JsMap _map;
+  final num _placementFadeDuration;
+
+  /// Sets gl-js's fade duration, which the map reads on every frame: 0 shows
+  /// and hides symbols at once and places them on every frame.
+  @override
+  Future<void> setPlacementTransitions({required bool enabled}) async {
+    _map.fadeDuration = enabled ? _placementFadeDuration : 0;
+  }
 
   @override
   late final StyleSources sources = StyleSources(this, layers: () => layers);

@@ -111,6 +111,15 @@ extension type JsMap._(Camera _) implements Camera {
   /// Update the max camera pitch / tilt.
   external void setMaxPitch(double? maxPitch);
 
+  /// The milliseconds that symbol placement changes fade over, 300 by
+  /// default. gl-js only takes it as the `fadeDuration` option and keeps it
+  /// in a private field, which it reads on every frame it renders. Null if a
+  /// gl-js version has no such field.
+  @JS('_fadeDuration')
+  external num? get fadeDuration;
+  @JS('_fadeDuration')
+  external set fadeDuration(num value);
+
   /// Update the maximum bounding box of the map camera.
   external void setMaxBounds(LngLatBounds? maxBounds);
 
