@@ -564,6 +564,21 @@ void main() {
       expect(camera.calls, isEmpty);
     });
 
+    testWidgets('a right click reports its location', (tester) async {
+      await pumpMap(tester);
+      await tester.tapAt(
+        _center + const Offset(100, 0),
+        kind: PointerDeviceKind.mouse,
+        buttons: kSecondaryMouseButton,
+      );
+      await tester.pumpAndSettle();
+      final click = events.whereType<MapEventSecondaryClick>().single;
+      expect(click.point.lon, closeTo(36, 1e-9));
+      expect(click.point.lat, closeTo(0, 1e-9));
+      expect(click.screenPoint, _center + const Offset(100, 0));
+      expect(events.whereType<MapEventClick>(), isEmpty);
+    });
+
     testWidgets('a click is immediate without double taps to recognize', (
       tester,
     ) async {
